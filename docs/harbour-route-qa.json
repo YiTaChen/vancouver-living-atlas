@@ -1,0 +1,41 @@
+{
+  "bounds": [
+    -123.23,
+    49.258,
+    -123.087,
+    49.337
+  ],
+  "routes": [
+    {
+      "id": "canada-place-first-narrows-cruise",
+      "vertices": 432,
+      "allPointsInDomain": true,
+      "lengthM": 8604.94,
+      "checkedVesselLengthM": 260,
+      "checkedVesselWidthM": 42,
+      "sampledPoses": 1722,
+      "centrelineOnLandLengthM": 0.0,
+      "sweptLandAreaM2": 0.0,
+      "sweptPierAreaM2": 0.0,
+      "sweptCanadaPlaceModelDeckAreaM2": 0.0,
+      "buildingHits": []
+    },
+    {
+      "id": "coal-harbour-seaplane-departure",
+      "vertices": 426,
+      "allPointsInDomain": true,
+      "lengthM": 8480.44,
+      "waterPhaseOnLandLengthM": 0.0,
+      "waterPhasePierIntersectionLengthM": 0.0,
+      "waterPhaseHalfWingClearanceM": 21.101,
+      "waterPhaseHalfWidth12mLandAreaM2": 0.0,
+      "waterPhaseHalfWidth12mPierAreaM2": 0.0
+    },
+    {
+      "id": "waterfront-helicopter-departure",
+      "vertices": 442,
+      "allPointsInDomain": true,
+      "lengthM": 8805.1
+    }
+  ]
+}
