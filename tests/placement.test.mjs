@@ -479,3 +479,165 @@ test('keyboard activation of a street control does not steer or brake the vehicl
   }
   nav.destroy();
 });
+
+function withInputTargets(run) {
+  const previous = {
+    Element: globalThis.Element,
+    HTMLInputElement: globalThis.HTMLInputElement,
+    HTMLTextAreaElement: globalThis.HTMLTextAreaElement,
+  };
+  globalThis.Element = class {
+    constructor(selector = 'canvas') {
+      this.selector = selector;
+    }
+    closest(selectors) {
+      return selectors.split(',').some((s) => s.trim() === this.selector)
+        ? this
+        : null;
+    }
+  };
+  globalThis.HTMLInputElement = class extends globalThis.Element {};
+  globalThis.HTMLTextAreaElement = class extends globalThis.Element {};
+  try {
+    run();
+  } finally {
+    for (const [key, value] of Object.entries(previous)) {
+      if (value === undefined) delete globalThis[key];
+      else globalThis[key] = value;
+    }
+  }
+}
+
+test('walking and driving still respond to WASD after clicking a HUD button', () =>
+  withInputTargets(() => {
+    for (const mode of ['walk', 'drive']) {
+      const { nav } = navigationFixture();
+      nav.startAt(mode, {
+        x: 0,
+        y: 2.45,
+        z: 0,
+        yaw: 0,
+        surface: 'ground',
+        name: '',
+        snappedDistance: 0,
+      });
+      const before = nav.position.clone();
+      nav.keyDown({
+        key: 'w',
+        code: 'KeyW',
+        target: new globalThis.Element('button'),
+        preventDefault() {},
+      });
+      for (let i = 0; i < 30; i++) nav.update(1 / 30);
+      assert(
+        nav.position.distanceTo(before) > 3,
+        `${mode} must advance after a HUD click`,
+      );
+      nav.keyUp({ key: 'w', code: 'KeyW' });
+      assert.equal(nav.keys.size, 0);
+      nav.destroy();
+    }
+  }));
+
+test('WASD physical keys work with an active input method and key-up releases them', () =>
+  withInputTargets(() => {
+    const { nav } = navigationFixture();
+    nav.startAt('walk', {
+      x: 0,
+      y: 2.45,
+      z: 0,
+      yaw: 0,
+      surface: 'ground',
+      name: '',
+      snappedDistance: 0,
+    });
+    nav.keyDown({
+      key: 'Process',
+      code: 'KeyW',
+      target: new globalThis.Element(),
+      preventDefault() {},
+    });
+    nav.update(0.05);
+    assert(nav.position.z > 0);
+    nav.keyUp({ key: 'Process', code: 'KeyW' });
+    const stopped = nav.position.clone();
+    nav.update(0.05);
+    assert.equal(nav.position.distanceTo(stopped), 0);
+    nav.destroy();
+  }));
+
+test('text fields, dialogs and selector arrows retain their keyboard input', () =>
+  withInputTargets(() => {
+    const { nav } = navigationFixture();
+    nav.mode = 'drive';
+    const targets = [
+      new globalThis.HTMLInputElement(),
+      new globalThis.HTMLTextAreaElement(),
+      ...[
+        'select',
+        '[contenteditable="true"]',
+        '[role="textbox"]',
+        '[role="combobox"]',
+        '[role="listbox"]',
+        '[role="dialog"]',
+      ].map((s) => new globalThis.Element(s)),
+    ];
+    for (const target of targets) {
+      nav.keyDown({
+        key: 'w',
+        code: 'KeyW',
+        target,
+        preventDefault() {
+          throw new Error('Editing input was captured');
+        },
+      });
+      assert.equal(nav.keys.size, 0);
+    }
+    for (const role of ['[role="radio"]', '[role="slider"]']) {
+      nav.keyDown({
+        key: 'ArrowUp',
+        code: 'ArrowUp',
+        target: new globalThis.Element(role),
+        preventDefault() {
+          throw new Error('Selector input was captured');
+        },
+      });
+      assert.equal(nav.keys.size, 0);
+    }
+    nav.destroy();
+  }));
+
+test('on-screen movement restores canvas focus and can be followed by keyboard movement', () =>
+  withInputTargets(() => {
+    for (const mode of ['walk', 'drive']) {
+      const { nav, e } = navigationFixture();
+      let focused = 0;
+      e.renderer.domElement.focus = () => focused++;
+      nav.startAt(mode, {
+        x: 0,
+        y: 2.45,
+        z: 0,
+        yaw: 0,
+        surface: 'ground',
+        name: '',
+        snappedDistance: 0,
+      });
+      const before = nav.position.clone();
+      const initialFocus = focused;
+      nav.step('forward');
+      assert(Math.abs(nav.position.distanceTo(before) - 8) < 1e-8);
+      assert(focused > initialFocus);
+      nav.keyDown({
+        key: 'w',
+        code: 'KeyW',
+        target: new globalThis.Element(),
+        preventDefault() {},
+      });
+      for (let i = 0; i < 30; i++) nav.update(1 / 30);
+      assert(nav.position.distanceTo(before) > 11);
+      const oldYaw = nav.yaw;
+      nav.step('left');
+      assert(nav.yaw > oldYaw);
+      nav.destroy();
+    }
+  }));

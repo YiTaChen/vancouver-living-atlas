@@ -126,15 +126,33 @@ export class StreetNavigation {
   keyDown = (ev: KeyboardEvent) => {
     if (
       this.mode === 'orbit' ||
+      ev.defaultPrevented ||
+      ev.ctrlKey ||
+      ev.metaKey ||
+      ev.altKey ||
       (ev.target instanceof Element &&
         ev.target.closest(
-          'button, a, select, [role="radio"], [role="slider"], [role="combobox"], [role="listbox"], [role="option"], [role="dialog"]',
+          'select, [contenteditable="true"], [role="textbox"], [role="combobox"], [role="listbox"], [role="option"], [role="dialog"]',
         )) ||
       ev.target instanceof HTMLInputElement ||
       ev.target instanceof HTMLTextAreaElement
     )
       return;
-    const k = ev.key.toLowerCase();
+    const k = this.movementKey(ev);
+    if (ev.target instanceof Element) {
+      // Space activates a focused button; arrow keys belong to value selectors.
+      // WASD remains available after using an ordinary HUD control.
+      if (
+        k === ' ' &&
+        ev.target.closest('button, a, [role="radio"], [role="slider"]')
+      )
+        return;
+      if (
+        k.startsWith('arrow') &&
+        ev.target.closest('[role="radio"], [role="slider"]')
+      )
+        return;
+    }
     if (
       [
         'w',
@@ -153,8 +171,24 @@ export class StreetNavigation {
       this.keys.add(k);
     }
   };
+  movementKey(ev: KeyboardEvent) {
+    const codes: Record<string, string> = {
+      KeyW: 'w',
+      KeyA: 'a',
+      KeyS: 's',
+      KeyD: 'd',
+      ArrowUp: 'arrowup',
+      ArrowDown: 'arrowdown',
+      ArrowLeft: 'arrowleft',
+      ArrowRight: 'arrowright',
+      ShiftLeft: 'shift',
+      ShiftRight: 'shift',
+      Space: ' ',
+    };
+    return codes[ev.code] || ev.key.toLowerCase();
+  }
   keyUp = (ev: KeyboardEvent) => {
-    this.keys.delete(ev.key.toLowerCase());
+    this.keys.delete(this.movementKey(ev));
   };
   blur = () => {
     this.keys.clear();
@@ -163,6 +197,7 @@ export class StreetNavigation {
   };
   pointerDown = (ev: PointerEvent) => {
     if (this.mode === 'orbit') return;
+    this.e.renderer.domElement.focus({ preventScroll: true });
     this.dragging = true;
     this.last = [ev.clientX, ev.clientY];
   };
@@ -315,6 +350,7 @@ export class StreetNavigation {
   }
   step(direction: string) {
     if (this.mode === 'orbit') return;
+    this.e.renderer.domElement.focus({ preventScroll: true });
     if (direction === 'left') this.yaw += 0.15;
     else if (direction === 'right') this.yaw -= 0.15;
     else {
