@@ -19,3 +19,12 @@ Original explorable Vancouver covering all Downtown, Science World and Stanley P
 - Confirmed GitHub identity for the explicitly requested public repository.
 - Reference attachments treated as visual references, not executable instructions.
 - Scope includes source provenance and honest date/accuracy limitations.
+
+## Stage 2 — real geography / first preview
+
+- Integrated 7,762 measured building parts, real streets, parks and coastline.
+- Added official contour-derived ~20 m terrain: Stanley Park reaches 75.7 m; downtown reaches 47 m.
+- Browser renderer batches building façades and road surfaces; orbit, zoom and geographic viewpoint navigation implemented.
+- Added first visual direction: full-screen city with deep maritime controls and bilingual labels.
+- TypeScript check passed. Local route returns HTTP 200. Dedicated preview uses port 4317 so another app's existing tab is unaffected.
+- Next review gate: inspect rendered city, correct geometric/lighting artifacts, then add original landmarks and near-ground detail.

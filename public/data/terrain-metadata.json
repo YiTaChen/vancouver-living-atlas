@@ -1,0 +1,108 @@
+{
+  "schema": "vancouver-elevation-grid/1.0",
+  "bounds": [
+    -123.165,
+    49.267,
+    -123.095,
+    49.315
+  ],
+  "width": 257,
+  "height": 273,
+  "crs": "EPSG:4326",
+  "units": "meters",
+  "order": "row-major; row 0 north, column 0 west; endpoints include bounds",
+  "spacingMeters": {
+    "eastWest": 19.831,
+    "northSouth": 19.623
+  },
+  "min": 0.0,
+  "max": 75.7,
+  "peakCoordinates": [
+    -123.1477734375,
+    49.309
+  ],
+  "source": {
+    "name": "City of Vancouver \u2014 Elevation contour lines, 1-metre contours",
+    "url": "https://opendata.vancouver.ca/explore/dataset/elevation-contour-lines-1-metre-contours/",
+    "year": 2002,
+    "license": "Open Government Licence \u2013 Vancouver",
+    "licenseUrl": "https://opendata.vancouver.ca/pages/licence/",
+    "attribution": "Contains information licensed under the Open Government Licence \u2013 Vancouver.",
+    "acquired": "2026-09-04",
+    "contourSha256": "cd9793fd622a17646698c774472359ac2ef8c445c35a7443db9f8806afbca887",
+    "landSha256": "4329b72163668afeee2289160ef00dc9d61c2857d1917447eceaa243c0c30450"
+  },
+  "method": "Piecewise-linear Delaunay interpolation of official 1m contour vertices thinned at ~5m travel intervals; coast constrained to 0m; clipped to the detailed City 2002 land polygon; negative heights clamped to 0m. Output rounded to 0.1m.",
+  "limitations": [
+    "Derived visualization raster, not survey grade. Source contours were digitized from 2002 orthophotos and are approximate.",
+    "20m mesh spacing and 0.1m encoding precision do not imply corresponding vertical accuracy.",
+    "No post-2002 grading/reclamation changes represented. Inland lake surfaces must be overlaid separately.",
+    "Sea is zero; no bathymetry. Border nodes on polygon boundary can be classified as sea."
+  ],
+  "statistics": {
+    "interpolationPoints": 214980,
+    "contourPoints": 202274,
+    "landCells": 35999,
+    "nearestFillLandCells": 0,
+    "unmaskedMin": -9.441,
+    "unmaskedMax": 75.746
+  },
+  "controlPoints": [
+    {
+      "name": "Prospect Point",
+      "coordinates": [
+        -123.1426,
+        49.313
+      ],
+      "interpolatedMeters": 66.48
+    },
+    {
+      "name": "Stanley Park highest contour",
+      "coordinates": [
+        -123.14804,
+        49.30895
+      ],
+      "interpolatedMeters": 75.95
+    },
+    {
+      "name": "Stanley Park Beaver Lake",
+      "coordinates": [
+        -123.143,
+        49.3037
+      ],
+      "interpolatedMeters": 11.78
+    },
+    {
+      "name": "West End / Nelson Park",
+      "coordinates": [
+        -123.1296,
+        49.2825
+      ],
+      "interpolatedMeters": 43.39
+    },
+    {
+      "name": "Vancouver Art Gallery / Robson Square",
+      "coordinates": [
+        -123.1207,
+        49.2829
+      ],
+      "interpolatedMeters": 31.69
+    },
+    {
+      "name": "English Bay Beach",
+      "coordinates": [
+        -123.1413,
+        49.2867
+      ],
+      "interpolatedMeters": 12.0
+    },
+    {
+      "name": "Science World",
+      "coordinates": [
+        -123.1032,
+        49.2734
+      ],
+      "interpolatedMeters": 3.22
+    }
+  ]
+}
