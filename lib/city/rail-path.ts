@@ -58,7 +58,7 @@ export function makeRailPath(
   const groundPath = new RailPath(source);
   const count = Math.ceil(groundPath.length / 3);
   // Waterfront has a narrow mapped corridor beside buildings: retain its
-  // exact segments. Densely surveyed SkyTrain nodes allow gentle interpolation.
+  // exact segments. Densely mapped SkyTrain nodes allow gentle interpolation.
   const points =
     route.kind === 'steam'
       ? Array.from({ length: count + 1 }, (_, i) =>

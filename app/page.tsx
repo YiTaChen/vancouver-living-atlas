@@ -648,7 +648,9 @@ export default function Home() {
           {tour ? <Pause size={16} /> : <Play size={16} />}
           <span>{tour ? tr('pauseTour') : tr('startTour')}</span>
           <span className="tour-time">
-            {tour ? `${tourIndex.current + 1} / 8` : tr('viewpointCount')}
+            {tour
+              ? `${tourIndex.current + 1} / ${VIEWS.length}`
+              : tr('viewpointCount', { count: VIEWS.length })}
           </span>
         </button>
         <div className="panel-foot">
