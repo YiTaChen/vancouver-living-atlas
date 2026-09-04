@@ -1,0 +1,7 @@
+[out:json][timeout:90];
+(
+way[railway~"^(rail|light_rail|subway|tram)$"](49.265,-123.132,49.293,-123.087);
+node[railway~"^(station|halt|stop)$"](49.265,-123.132,49.293,-123.087);
+relation[route~"^(train|subway|light_rail)$"](49.265,-123.132,49.293,-123.087);
+);
+out body geom;

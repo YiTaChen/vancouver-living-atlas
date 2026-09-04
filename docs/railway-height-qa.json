@@ -1,0 +1,15 @@
+{
+  "method": "Current rendered points plus exact engine makeBuildings shared-foundation logic; every 0.5m centreline, width3m, y rail to rail+4.2m. Conservative approximate body envelope, not triangle contact.",
+  "routes": [
+    {
+      "id": "expo-stadium-science-world-eastbound",
+      "lengthM": 855.219,
+      "potentialBodyCollisions": []
+    },
+    {
+      "id": "expo-science-world-stadium-westbound",
+      "lengthM": 893.632,
+      "potentialBodyCollisions": []
+    }
+  ]
+}

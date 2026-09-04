@@ -1,0 +1,143 @@
+{
+  "source": "Actual current makeRailPath from lib/city/rail-path.ts, flat elevation for XY audit",
+  "routes": [
+    {
+      "id": "waterfront-gastown-steam-demo",
+      "sampledPoints": 375,
+      "originalLengthM": 1119.04,
+      "smoothedLengthM": 1119.024,
+      "hausdorffDistanceM": 0.0757,
+      "maxSmoothedVertexDistanceToSourceM": 0.0,
+      "minimumPlanBuildingDistanceM": 2.8003,
+      "nearestBuildingId": "osm-structure-286-0",
+      "centrelineOutsideLandM": 0.0,
+      "corridors": [
+        {
+          "halfWidthM": 1.65,
+          "intersections": []
+        },
+        {
+          "halfWidthM": 2.5,
+          "intersections": []
+        },
+        {
+          "halfWidthM": 4,
+          "intersections": [
+            {
+              "id": 168910,
+              "areaM2": 12.668,
+              "height": 8.94,
+              "minHeight": 0,
+              "base": 3.94,
+              "name": null
+            },
+            {
+              "id": "osm-structure-38-0",
+              "areaM2": 19.241,
+              "height": 14.0,
+              "minHeight": 0.0,
+              "base": 3.54,
+              "name": null
+            },
+            {
+              "id": "osm-structure-286-0",
+              "areaM2": 46.17,
+              "height": 14.0,
+              "minHeight": 0.0,
+              "base": 3.54,
+              "name": null
+            },
+            {
+              "id": "osm-structure-36-0",
+              "areaM2": 14.042,
+              "height": 19.0,
+              "minHeight": 0.0,
+              "base": 3.58,
+              "name": "One Ninety Five Alexander"
+            }
+          ]
+        }
+      ],
+      "conservativeSweptBody": {
+        "widthM": 3.3,
+        "lengthM": 20.8,
+        "sampleSpacingM": 1,
+        "poses": 1098,
+        "intersections": []
+      }
+    },
+    {
+      "id": "expo-stadium-science-world-eastbound",
+      "sampledPoints": 287,
+      "originalLengthM": 855.2,
+      "smoothedLengthM": 855.219,
+      "hausdorffDistanceM": 0.0856,
+      "maxSmoothedVertexDistanceToSourceM": 0.0856,
+      "minimumPlanBuildingDistanceM": 3.7529,
+      "nearestBuildingId": 136602,
+      "centrelineOutsideLandM": 0.0,
+      "corridors": [
+        {
+          "halfWidthM": 1.65,
+          "intersections": []
+        },
+        {
+          "halfWidthM": 2.5,
+          "intersections": []
+        },
+        {
+          "halfWidthM": 4,
+          "intersections": [
+            {
+              "id": 136602,
+              "areaM2": 0.118,
+              "height": 6.65,
+              "minHeight": 0,
+              "base": 3.73,
+              "name": null
+            }
+          ]
+        }
+      ],
+      "conservativeSweptBody": {
+        "widthM": 3.3,
+        "lengthM": 20.8,
+        "sampleSpacingM": 1,
+        "poses": 834,
+        "intersections": []
+      }
+    },
+    {
+      "id": "expo-science-world-stadium-westbound",
+      "sampledPoints": 299,
+      "originalLengthM": 893.61,
+      "smoothedLengthM": 893.632,
+      "hausdorffDistanceM": 0.0878,
+      "maxSmoothedVertexDistanceToSourceM": 0.0878,
+      "minimumPlanBuildingDistanceM": 5.197,
+      "nearestBuildingId": 163940,
+      "centrelineOutsideLandM": 0.0,
+      "corridors": [
+        {
+          "halfWidthM": 1.65,
+          "intersections": []
+        },
+        {
+          "halfWidthM": 2.5,
+          "intersections": []
+        },
+        {
+          "halfWidthM": 4,
+          "intersections": []
+        }
+      ],
+      "conservativeSweptBody": {
+        "widthM": 3.3,
+        "lengthM": 20.8,
+        "sampleSpacingM": 1,
+        "poses": 872,
+        "intersections": []
+      }
+    }
+  ]
+}
