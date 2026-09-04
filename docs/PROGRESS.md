@@ -49,3 +49,13 @@ Original explorable Vancouver covering all Downtown, Science World and Stanley P
 - Browser review: corrected over-bright sky environment, road/sidewalk overlap, tree trunk scale, park z-fighting, bridge geometry and street camera framing. Local browser console had no errors in the reviewed states.
 - TypeScript validation and production build pass. Geographic and bridge continuity regression tests added.
 - Remaining release gate: final representative views, metadata/source documentation, packaged source-linked deployment and final GitHub push.
+
+## Stage 5 — production stability and release preparation
+
+- Final source/data review confirmed the public tree contains no supplied private reference media or credentials. Provenance now distinguishes published files, preparation intermediates, source base elevations and displayed terrain placement.
+- Eight portable preparation CLIs, explicit raw-input requirements and snapshot hashes are included. Independent reconstruction checks reproduced the released buildings, terrain, bridge routes, regional coast and seven original texture maps byte-for-byte.
+- Updated compatible React/RSC, Vite and Vinext patch versions to address the server/framework advisories found during release review; kept development tooling separate from application dependencies.
+- A production browser stress pass exposed WebGL context loss. Investigation found 167,614 individually constructed storefront boxes: approximately 146 MiB of final box geometry and an estimated 700 MiB initialization peak before the rest of the city.
+- Replaced those boxes with roughly 10.23 MiB of instance matrices and shared unit geometry (about 93% less retained geometry storage), partitioned into 180m cells, with distant trim hidden beyond 900m. Near-street positions and silhouettes are preserved.
+- Bounded the drawing buffer to 1.8 million pixels, replaced multisampling/preserved buffers with FXAA and synchronous capture, deferred SSAO until needed, skipped distant shadow passes, and tightened tree LOD. Completed disposal of environment targets, postprocessing, instance buffers and generated textures; context loss now stops animation.
+- Final production browser validation and deployment results follow in the release entry below.

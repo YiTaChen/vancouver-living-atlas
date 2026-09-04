@@ -2,10 +2,11 @@
 """Original MIT code: download 9 public Terrarium DEM tiles, build 100m context.
 
 Requires NumPy and Pillow. Underlying elevation data retain source licences.
-Run from any directory: python build_context.py
+Run from any directory: python build_context.py --out-dir PATH [--cache-dir PATH] [--offline]
 """
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
+import argparse
 import hashlib
 import json
 import math
@@ -15,8 +16,9 @@ import urllib.request
 import numpy as np
 from PIL import Image, ImageDraw
 
-ROOT = Path(__file__).resolve().parent
-TILES = ROOT / 'tiles'
+ROOT = None
+TILES = None
+OFFLINE = False
 WEST, SOUTH, EAST, NORTH = BOUNDS = [-123.26,49.22,-122.97,49.44]
 ZOOM = 11
 SIZE = 256 * 2**ZOOM
@@ -39,6 +41,8 @@ def fetch_tile(xy):
     filename=TILES/f'{ZOOM}-{x}-{y}.png'
     metadata_file=filename.with_suffix('.json')
     if not filename.exists() or not metadata_file.exists():
+        if OFFLINE:
+            raise FileNotFoundError(f'Missing cached tile or metadata: {filename}; rerun without --offline to download.')
         req=urllib.request.Request(url,headers={'User-Agent':'VancouverAtlasTerrainBuild/1.0'})
         with urllib.request.urlopen(req,timeout=45) as response:
             data=response.read()
@@ -55,6 +59,14 @@ def fetch_tile(xy):
 
 
 def main():
+    global ROOT,TILES,OFFLINE
+    ap=argparse.ArgumentParser(description='Build regional ~100m Terrarium elevation context.')
+    ap.add_argument('--out-dir',type=Path,required=True)
+    ap.add_argument('--cache-dir',type=Path,help='Tile PNG/JSON cache; defaults to OUT/tiles')
+    ap.add_argument('--offline',action='store_true',help='Use cached tiles only')
+    args=ap.parse_args()
+    ROOT=args.out_dir.resolve();ROOT.mkdir(parents=True,exist_ok=True)
+    TILES=args.cache_dir.resolve() if args.cache_dir else ROOT/'tiles';OFFLINE=args.offline
     TILES.mkdir(parents=True,exist_ok=True)
     nw=mercator_pixels(WEST,NORTH)
     se=mercator_pixels(EAST,SOUTH)

@@ -2,7 +2,7 @@
 """Build a reproducible ~20m Vancouver terrain grid from official 1m contours.
 
 Dependencies: numpy, scipy, Pillow. Source input GeoJSON is read only.
-Run: python build_elevation.py --contours ../geodata/raw-elevation-contour-lines-1-metre-contours.geojson --land ../geodata/land.geojson
+Run with explicit --contours, --land and --out-dir paths (see README.md).
 Data: City of Vancouver Open Government Licence. Code: MIT.
 """
 import argparse
@@ -58,9 +58,12 @@ def mask_polygon(lons, lats, rings):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--contours', type=Path, default=ROOT.parent/'geodata/raw-elevation-contour-lines-1-metre-contours.geojson')
-    ap.add_argument('--land', type=Path, default=ROOT.parent/'geodata/land.geojson')
+    ap.add_argument('--contours', type=Path, required=True, help='Original City 1m contour GeoJSON')
+    ap.add_argument('--land', type=Path, required=True, help='Prepared core land Polygon GeoJSON')
+    ap.add_argument('--out-dir', type=Path, required=True, help='Generated data and QA destination')
+    ap.add_argument('--source-date',default='unknown',help='Acquisition date of supplied City snapshot (YYYY-MM-DD)')
     args = ap.parse_args()
+    out_dir=args.out_dir.resolve(); out_dir.mkdir(parents=True,exist_ok=True)
     contours = json.loads(args.contours.read_text())['features']
     land = json.loads(args.land.read_text())['features'][0]['geometry']
     assert land['type'] == 'Polygon'
@@ -147,7 +150,7 @@ def main():
             'license':'Open Government Licence – Vancouver',
             'licenseUrl':'https://opendata.vancouver.ca/pages/licence/',
             'attribution':'Contains information licensed under the Open Government Licence – Vancouver.',
-            'acquired':'2026-09-04',
+            'acquired':args.source_date,
             'contourSha256':hashlib.sha256(args.contours.read_bytes()).hexdigest(),
             'landSha256':hashlib.sha256(args.land.read_bytes()).hexdigest(),
         },
@@ -157,8 +160,8 @@ def main():
         'controlPoints':checks,
     }
     result={**metadata,'heights':grid.ravel().tolist()}
-    (ROOT/'terrain-grid.json').write_text(json.dumps(result,separators=(',',':'))+'\n')
-    (ROOT/'terrain-metadata.json').write_text(json.dumps(metadata,indent=2)+'\n')
+    (out_dir/'terrain.json').write_text(json.dumps(result,separators=(',',':'))+'\n')
+    (out_dir/'terrain-metadata.json').write_text(json.dumps(metadata,indent=2)+'\n')
 
     # Plain scientific elevation preview: turquoise sea, green lowland to ochre highland.
     t=np.clip(grid/76,0,1)
@@ -169,7 +172,7 @@ def main():
     d.rectangle((10,10,490,65),fill=(250,250,245))
     d.text((20,20),'Vancouver terrain / City of Vancouver 2002 contours',fill=(25,40,45))
     d.text((20,38),f'Approx. 20 m grid | 0 - {grid.max():.1f} m | North up',fill=(25,40,45))
-    preview.save(ROOT/'elevation-preview.png')
+    preview.save(out_dir/'elevation-preview.png')
     print(json.dumps(metadata,indent=2))
 
 

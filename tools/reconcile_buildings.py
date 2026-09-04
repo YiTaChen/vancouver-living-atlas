@@ -2,6 +2,7 @@
 Uses explicit outline/part topology, vertical interval unions and geometric
 subtraction. No arbitrary tallest-building selection or random footprints.
 """
+import argparse
 import json, math, collections, hashlib
 from pathlib import Path
 from shapely.geometry import shape,mapping,Polygon,MultiPolygon
@@ -11,11 +12,17 @@ from shapely.strtree import STRtree
 from shapely import make_valid,set_precision
 import numpy as np
 from scipy.spatial import cKDTree
-P=Path(__file__).parent
+ap=argparse.ArgumentParser(description='Reconcile City2009 parts and current explicit OSM vertical parts.')
+ap.add_argument('--city',type=Path,required=True,help='Prepared ORIGINAL City2009 buildings.geojson, not the combined release file')
+ap.add_argument('--osm',type=Path,required=True,help='Prepared buildings-osm-all.geojson')
+ap.add_argument('--out-dir',type=Path,required=True)
+args=ap.parse_args()
+P=args.out_dir.resolve();P.mkdir(parents=True,exist_ok=True)
+INPUTS={'buildings.geojson':args.city,'buildings-osm-all.geojson':args.osm}
 FX,FY=72600.,111320.
 def metric(g):return affine_transform(g,[FX,0,0,FY,123.128*FX,-49.286*FY])
 def geographic(g):return affine_transform(g,[1/FX,0,0,1/FY,-123.128,49.286])
-def read(n):return json.loads((P/n).read_text())['features']
+def read(n):return json.loads(INPUTS.get(n,P/n).read_text())['features']
 def clean(g):
  if not g.is_valid:g=make_valid(g)
  if g.is_empty:return Polygon()
@@ -33,7 +40,10 @@ def rr(v):
 def feature(g,p):return {'type':'Feature','geometry':rr(mapping(geographic(g))),'properties':p}
 def write(n,fs):
  (P/n).write_text(json.dumps({'type':'FeatureCollection','bbox':[-123.165,49.267,-123.095,49.315],'features':fs},separators=(',',':')))
-city=read('buildings.geojson');cgs=[clean(metric(shape(f['geometry']))) for f in city]
+city=read('buildings.geojson')
+if not city or any(f['properties'].get('source')!='cov-2009' for f in city):
+ raise ValueError('--city must be the prepared ORIGINAL City2009 inventory, not public/data/buildings.geojson which is already reconciled.')
+cgs=[clean(metric(shape(f['geometry']))) for f in city]
 allf=read('buildings-osm-all.geojson');og={f['properties']['id']:clean(metric(shape(f['geometry']))) for f in allf};byid={f['properties']['id']:f for f in allf}
 # Independently authored landmarks replace these source footprint envelopes.
 exdefs={'Science World':['osm-37084312'],'BC Place':['osm-24705904'],'Canada Place':['osm-223635729'],'Harbour Centre':['osm-1371268997','osm-143682595'],'Vancouver House':['osm-742009401','osm-1092241825']}

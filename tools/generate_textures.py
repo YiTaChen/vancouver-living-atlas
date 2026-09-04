@@ -2,12 +2,17 @@
 No reference photographs, downloaded raster images, or third-party artwork.
 Run with Python, numpy and Pillow. Generated normals use OpenGL +Y convention.
 """
+import argparse
 from pathlib import Path
 import json
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
-OUT=Path(__file__).parent
+ap=argparse.ArgumentParser(description='Generate original deterministic PBR material maps.')
+ap.add_argument('--out-dir',type=Path,required=True)
+ap.add_argument('--font',type=Path,help='Optional font file used only in diagnostic contact sheet')
+args=ap.parse_args()
+OUT=args.out_dir.resolve();OUT.mkdir(parents=True,exist_ok=True)
 N=1024
 Y,X=np.mgrid[0:N,0:N].astype(np.float32)
 
@@ -160,7 +165,7 @@ metadata={'license':'MIT; all textures created originally from deterministic Pyt
 # Diagnostic 2×2 repetitions expose seams; this is an analysis preview, not a map.
 W=1420;H=1780
 sheet=Image.new('RGB',(W,H),'#171e22');draw=ImageDraw.Draw(sheet)
-try: font=ImageFont.truetype('/System/Library/Fonts/Helvetica.ttc',22)
+try: font=ImageFont.truetype(str(args.font),22) if args.font else ImageFont.load_default()
 except:font=ImageFont.load_default()
 for i,rec in enumerate(records):
  x=36+(i%2)*700;y=36+(i//2)*580

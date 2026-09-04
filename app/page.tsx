@@ -1,47 +1,712 @@
 'use client';
-import {useCallback,useEffect,useRef,useState} from 'react';
-import {ArrowUpRight,Compass,Plus,Minus,RotateCcw,MapPin,Mountain,MoveUpRight,Play,Pause,Layers,Sun,Camera,Info,X,Footprints,Car,Orbit,ChevronsUp,ChevronLeft,ChevronRight,ChevronDown,Maximize,Minimize,VolumeX} from 'lucide-react';
-import {Slider} from '@/components/ui/slider';
-import {Switch} from '@/components/ui/switch';
-import {Dialog,DialogContent,DialogHeader,DialogTitle,DialogDescription} from '@/components/ui/dialog';
-import {RadioGroup,RadioGroupItem} from '@/components/ui/radio-group';
-import {DEFAULT_SETTINGS,VIEWS,type SceneStats,type Settings} from '@/lib/city/types';
-import type {CityEngine} from '@/lib/city/engine';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import {
+  ArrowUpRight,
+  Compass,
+  Plus,
+  Minus,
+  RotateCcw,
+  MapPin,
+  Mountain,
+  MoveUpRight,
+  Play,
+  Pause,
+  Layers,
+  Sun,
+  Camera,
+  Info,
+  X,
+  Footprints,
+  Car,
+  Orbit,
+  ChevronsUp,
+  ChevronLeft,
+  ChevronRight,
+  ChevronDown,
+  Maximize,
+  Minimize,
+  VolumeX,
+} from 'lucide-react';
+import { Slider } from '@/components/ui/slider';
+import { Switch } from '@/components/ui/switch';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/ui/dialog';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import {
+  DEFAULT_SETTINGS,
+  VIEWS,
+  type SceneStats,
+  type Settings,
+} from '@/lib/city/types';
+import type { CityEngine } from '@/lib/city/engine';
 
-export default function Home(){
- const host=useRef<HTMLDivElement>(null),labelHost=useRef<HTMLDivElement>(null),minimap=useRef<HTMLCanvasElement>(null),engine=useRef<CityEngine|null>(null);
- const[ready,setReady]=useState(false),[error,setError]=useState(''),[view,setView]=useState('overview'),[settings,setSettings]=useState<Settings>(DEFAULT_SETTINGS),[panel,setPanel]=useState(false),[about,setAbout]=useState(false),[tour,setTour]=useState(false),[clean,setClean]=useState(false),[notice,setNotice]=useState('');
- const[stats,setStats]=useState<SceneStats>({buildings:0,roads:0,trees:0,fps:0,distance:0,elevation:0});const tourIndex=useRef(0),settingsRef=useRef(settings);settingsRef.current=settings;
- const go=useCallback((id:string)=>{setView(id);setSettings(s=>({...s,mode:'orbit'}));engine.current?.flyTo(id);},[]);
- useEffect(()=>{let stopped=false;import('@/lib/city/engine').then(({CityEngine})=>{if(stopped||!host.current)return;try{engine.current=new CityEngine(host.current,setStats,()=>{setReady(true);if(labelHost.current)engine.current?.attachLabels(labelHost.current,go);if(minimap.current)engine.current?.drawMinimap(minimap.current);},setError);}catch(e){setError(String(e));}});return()=>{stopped=true;engine.current?.destroy();};},[go]);
- useEffect(()=>{engine.current?.applySettings(settings);},[settings]);
- useEffect(()=>{if(!tour)return;tourIndex.current=0;go(VIEWS[0].id);setSettings(s=>({...s,autoRotate:true}));const timer=setInterval(()=>{tourIndex.current=(tourIndex.current+1)%VIEWS.length;go(VIEWS[tourIndex.current].id);},9500);return()=>{clearInterval(timer);setSettings(s=>({...s,autoRotate:false}));};},[tour,go]);
- useEffect(()=>{if(!notice)return;const timer=setTimeout(()=>setNotice(''),3500);return()=>clearTimeout(timer);},[notice]);
- useEffect(()=>{const key=(ev:KeyboardEvent)=>{if(ev.key==='Escape'){setClean(false);setPanel(false);setTour(false);if(settingsRef.current.mode!=='orbit')setSettings(s=>({...s,mode:'orbit'}));}};window.addEventListener('keydown',key);return()=>window.removeEventListener('keydown',key);},[]);
- // Feature-detected WebMCP navigation follows the same visible UI actions.
- useEffect(()=>{if(!ready)return;const context=(document as Document&{modelContext?:any}).modelContext;if(!context?.registerTool)return;const life=new AbortController();const register=(tool:any)=>{try{Promise.resolve(context.registerTool(tool,{signal:life.signal})).catch(()=>{});}catch{}};
- register({name:'read_atlas',description:'Read available Vancouver viewpoints and the current visible exploration settings.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true},execute:()=>({viewpoints:VIEWS.map(v=>({id:v.id,name:v.name})),settings:settingsRef.current})});
- register({name:'explore_vancouver',description:'Move the 3D Vancouver camera to a geographic viewpoint and optionally change simulated time of day.',inputSchema:{type:'object',properties:{viewpoint:{type:'string',enum:VIEWS.map(v=>v.id)},hour:{type:'number',minimum:0,maximum:24}},required:['viewpoint'],additionalProperties:false},annotations:{readOnlyHint:false},execute:async(input:unknown)=>{const a=input as{viewpoint?:string;hour?:number};if(!a||!VIEWS.some(v=>v.id===a.viewpoint)||a.hour!==undefined&&(!Number.isFinite(a.hour)||a.hour<0||a.hour>24))throw new Error('請提供有效景點與 0–24 小時。');setTour(false);go(a.viewpoint!);if(a.hour!==undefined)setSettings(s=>({...s,hour:a.hour!}));await new Promise(r=>setTimeout(r,1900));return{viewpoint:a.viewpoint,hour:a.hour??settingsRef.current.hour};}});
- return()=>life.abort();},[ready,go]);
- const change=(patch:Partial<Settings>)=>setSettings(s=>({...s,...patch}));
- const selectView=(id:string)=>{setTour(false);go(id);};const current=VIEWS.find(v=>v.id===view)!;
- const capture=()=>{const url=engine.current?.screenshot();if(!url)return;const a=document.createElement('a');a.href=url;a.download=`Vancouver-${view}-${String(settings.hour).replace('.','-')}.png`;a.click();setNotice('風景已儲存為 PNG。');};
- const switchMode=(mode:string)=>{setTour(false);change({mode:mode as Settings['mode'],autoRotate:false});if(mode==='orbit')go(view);if(mode!=='orbit')setNotice('W/S 前後移動 · A/D 轉向 · 拖曳環視 · Esc 返回鳥瞰');};
- return <main className={`atlas ${clean?'clean':''} ${settings.mode!=='orbit'?'street-mode':''}`}>
-  <div className="scene" ref={host}/><div className={`map-labels ${!settings.labels||clean?'hide-labels':''}`} ref={labelHost}/>
-  <header className="masthead ui-chrome"><a className="brand" href="/" aria-label="Vancouver Living Atlas"><span className="brand-mark"><Mountain size={22}/></span><span>VANCOUVER<span className="brand-sub">LIVING ATLAS / 溫哥華立體地圖</span></span></a><div className="header-meta"><span className="status-dot"/>BRITISH COLUMBIA, CANADA<span className="coord">49°17′ N · 123°08′ W</span></div><button className="text-button about-button" onClick={()=>setAbout(true)}><Info size={15}/><span>關於地圖</span></button><a className="github-link" href="https://github.com/YiTaChen/vancouver-living-atlas" target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={15}/></a></header>
-  <div className="mode-switch glass ui-chrome"><RadioGroup value={settings.mode} onValueChange={switchMode} className="mode-radio" aria-label="探索方式">{[{id:'orbit',name:'鳥瞰',icon:Orbit},{id:'walk',name:'步行',icon:Footprints},{id:'drive',name:'駕車',icon:Car}].map(m=><label className={`mode-pill ${settings.mode===m.id?'active':''}`} key={m.id}><RadioGroupItem value={m.id} className="mode-radio-dot"/><m.icon size={15}/>{m.name}</label>)}</RadioGroup></div>
-  <section className="explore-panel glass ui-chrome"><div className="explore-heading"><div className="eyebrow">EXPLORE THE COAST</div><h1>探索溫哥華</h1><p className="panel-intro">城市、森林，以及山海之間。</p></div><div className="view-list">{VIEWS.map((v,i)=><button key={v.id} aria-pressed={view===v.id} className={`view-button ${view===v.id?'selected':''}`} onClick={()=>selectView(v.id)}><span className="view-number">0{i+1}</span><span><b>{v.name}</b><small>{v.zh}</small></span><MoveUpRight size={15}/></button>)}</div><button className={`tour-button ${tour?'active':''}`} onClick={()=>setTour(t=>!t)}>{tour?<Pause size={16}/>:<Play size={16}/>}<span>{tour?'暫停導覽':'開始環城導覽'}</span><span className="tour-time">{tour?`${tourIndex.current+1} / 8`:'8 個視角'}</span></button><div className="panel-foot"><span className="status-dot"/> DATA-GROUNDED · ORIGINALLY BUILT</div></section>
-  <div className="nav-tools glass ui-chrome"><button title="放大" aria-label="放大" onClick={()=>engine.current?.zoom(.75)} disabled={settings.mode!=='orbit'}><Plus size={20}/></button><button title="縮小" aria-label="縮小" onClick={()=>engine.current?.zoom(1.33)} disabled={settings.mode!=='orbit'}><Minus size={20}/></button><span/><button title="回到全景" aria-label="回到全景" onClick={()=>selectView('overview')}><RotateCcw size={18}/></button><button title="北向全景" aria-label="北向全景" onClick={()=>{selectView('overview');engine.current?.fly({...VIEWS[0],azimuth:0});}}><Compass size={20} style={{transform:`rotate(${-(stats.heading||0)*180/Math.PI}deg)`}}/></button><span/><button title="光線與圖層" aria-label="光線與圖層" aria-expanded={panel} className={panel?'active':''} onClick={()=>setPanel(p=>!p)}><Layers size={19}/></button><button title="下載風景圖片" aria-label="下載風景圖片" onClick={capture}><Camera size={19}/></button><button title="沉浸檢視" aria-label="沉浸檢視" onClick={()=>setClean(true)}><Maximize size={18}/></button></div>
-  {panel&&<section className="settings-panel glass ui-chrome" aria-label="光線與圖層設定"><div className="settings-title"><h2>光線與圖層</h2><button className="icon-button" aria-label="關閉設定" onClick={()=>setPanel(false)}><X size={17}/></button></div><div className="sun-readout"><Sun size={20}/><span>{settings.hour>=6&&settings.hour<18?'日間':settings.hour>=18&&settings.hour<21?'暮色':'夜景'}</span><strong>{String(Math.floor(settings.hour)).padStart(2,'0')}:{settings.hour%1?'30':'00'}</strong></div><Slider aria-label="模擬時間" min={0} max={23.5} step={.5} value={[settings.hour]} onValueChange={v=>change({hour:Array.isArray(v)?v[0]:v})}/><div className="time-presets">{[{label:'晨光',hour:8},{label:'午後',hour:15},{label:'夕照',hour:18},{label:'入夜',hour:22}].map(t=><button key={t.hour} onClick={()=>change({hour:t.hour})}>{t.label}</button>)}</div><div className="settings-divider"/>{[{key:'buildings',label:'建築與地標'},{key:'trees',label:'森林與街樹'},{key:'traffic',label:'行車與船隻'},{key:'labels',label:'地點標籤'},{key:'autoRotate',label:'緩慢環繞'}].map(s=><label className="layer-row" key={s.key}><span>{s.label}</span><Switch aria-label={s.label} checked={Boolean(settings[s.key as keyof Settings])} onCheckedChange={v=>change({[s.key]:v})}/></label>)}<div className="settings-divider"/><label className="quality-label">畫面品質</label><RadioGroup aria-label="畫面品質" value={settings.quality} onValueChange={q=>change({quality:q as Settings['quality']})} className="quality-options"><label><RadioGroupItem value="high"/>精細陰影</label><label><RadioGroupItem value="balanced"/>流暢優先</label></RadioGroup><p className="settings-note">光線為模擬效果，非即時天氣。</p></section>}
-  <section className="map-inset glass ui-chrome"><div className="mini-title"><span>THE PENINSULA</span><span>N ↑</span></div><canvas ref={minimap} width={340} height={268} aria-label="溫哥華探索範圍小地圖" onClick={ev=>{if(settings.mode!=='orbit')return;engine.current?.navigateMinimap(ev.nativeEvent);}}/><div className="mini-caption"><span>Stanley Park ↔ Science World</span><span>5 km</span></div></section>
-  {settings.mode!=='orbit'&&<div className="street-controls glass ui-chrome"><div className="street-title"><span>{settings.mode==='drive'?'駕車探索':'街道漫步'}</span>{settings.mode==='drive'&&<b>{Math.abs(stats.speed||0)} <small>km/h</small></b>}</div><div className="street-shortcuts"><button onClick={()=>engine.current?.navigation?.setMode(settings.mode,'WATER ST')}>Gastown</button><button onClick={()=>engine.current?.navigation?.setMode(settings.mode,'ROBSON ST')}>Robson</button><button onClick={()=>engine.current?.navigation?.setMode(settings.mode,'BEACH AV')}>Beach Ave</button></div><p>W / S 前後 · A / D 轉向<br/>{settings.mode==='drive'?'空白鍵煞車':'Shift 加速'} · 拖曳環視</p><div className="dpad"><button aria-label="向左轉" onClick={()=>engine.current?.navigation?.step('left')}><ChevronLeft/></button><button aria-label="前進" onClick={()=>engine.current?.navigation?.step('forward')}><ChevronsUp/></button><button aria-label="後退" onClick={()=>engine.current?.navigation?.step('backward')}><ChevronDown/></button><button aria-label="向右轉" onClick={()=>engine.current?.navigation?.step('right')}><ChevronRight/></button></div></div>}
-  <div className="view-caption ui-chrome"><span>{current.tag} / {String(VIEWS.indexOf(current)+1).padStart(2,'0')}</span><h2>{current.name}</h2><p>{current.description}</p></div>
-  <footer className="bottom-bar glass ui-chrome"><div><MapPin size={15}/><b>{settings.mode==='orbit'?current.name:settings.mode==='walk'?'Street walk':'City drive'}</b><span className="muted">{settings.mode==='orbit'?`${stats.distance.toLocaleString()} m 視距`:`地面 ${stats.elevation} m`}</span></div><div className="scene-count"><span>{stats.buildings.toLocaleString()} 建築部分</span><span>{stats.trees.toLocaleString()} 樹木</span><span>{stats.fps} FPS</span></div><p>{settings.mode==='orbit'?'拖曳旋轉 · 滾輪縮放 · 右鍵平移':'Esc 返回鳥瞰'}</p></footer>
-  <div className="attribution ui-chrome"><a href="https://opendata.vancouver.ca/pages/licence/" target="_blank" rel="noreferrer">City of Vancouver · OGL</a><span> / </span><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">© OpenStreetMap · ODbL</a></div>
-  {clean&&<button className="exit-clean glass" onClick={()=>setClean(false)}><Minimize size={16}/>返回控制 · Esc</button>}
-  {notice&&<div className="toast glass" role="status">{notice}</div>}
-  <Dialog open={about} onOpenChange={setAbout}><DialogContent className="about-dialog"><DialogHeader><DialogTitle>Vancouver · Living Atlas</DialogTitle><DialogDescription>一座以地理資料為基礎、自行建模的瀏覽器城市。</DialogDescription></DialogHeader><p>涵蓋 Downtown、Stanley Park 與 Science World，包含實際海岸線、街廓與公園坡度。你可以鳥瞰全景、沿街步行或駕車，調整光線並下載風景。</p><dl><div><dt>地形</dt><dd>市政府 2002 年等高線插值，約 20 m 網格；Stanley Park 高地約 76 m。</dd></div><div><dt>建築</dt><dd>2009 年實測部分與現有 OpenStreetMap 高度資料整合；代表性地標為原創參數模型。</dd></div><div><dt>細節</dt><dd>街樹位置採公開資料；森林配置、立面、車輛、光線與招牌為視覺近似，並非逐棟攝影實景。</dd></div><div><dt>授權</dt><dd>原創程式與建模 MIT；地理資料保留 OGL Vancouver／ODbL 授權。</dd></div></dl><div className="about-links"><a href="https://github.com/YiTaChen/vancouver-living-atlas" target="_blank" rel="noreferrer">原始碼與階段紀錄 <ArrowUpRight size={14}/></a><a href="https://github.com/YiTaChen/vancouver-living-atlas/blob/main/DATA_SOURCES.md" target="_blank" rel="noreferrer">資料與精度說明 <ArrowUpRight size={14}/></a></div></DialogContent></Dialog>
-  {!ready&&<div className="loading-overlay"><div className="loading-brand"><Mountain size={40}/><h2>VANCOUVER</h2><p>{error?'地圖載入未完成':'正在鋪展城市與海岸…'}</p>{error?<><p>{error}</p><button onClick={()=>location.reload()}>重新載入</button></>:<><div className="loading-line"/><p>真實地勢 · 城市天際線 · 太平洋海岸</p></>}</div></div>}
- </main>;
+export default function Home() {
+  const host = useRef<HTMLDivElement>(null),
+    labelHost = useRef<HTMLDivElement>(null),
+    minimap = useRef<HTMLCanvasElement>(null),
+    engine = useRef<CityEngine | null>(null);
+  const [ready, setReady] = useState(false),
+    [error, setError] = useState(''),
+    [view, setView] = useState('overview'),
+    [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS),
+    [panel, setPanel] = useState(false),
+    [about, setAbout] = useState(false),
+    [tour, setTour] = useState(false),
+    [clean, setClean] = useState(false),
+    [notice, setNotice] = useState('');
+  const [stats, setStats] = useState<SceneStats>({
+    buildings: 0,
+    roads: 0,
+    trees: 0,
+    fps: 0,
+    distance: 0,
+    elevation: 0,
+  });
+  const tourIndex = useRef(0),
+    settingsRef = useRef(settings);
+  settingsRef.current = settings;
+  const go = useCallback((id: string) => {
+    setView(id);
+    setSettings((s) => ({ ...s, mode: 'orbit' }));
+    engine.current?.flyTo(id);
+  }, []);
+  useEffect(() => {
+    let stopped = false;
+    import('@/lib/city/engine').then(({ CityEngine }) => {
+      if (stopped || !host.current) return;
+      try {
+        engine.current = new CityEngine(
+          host.current,
+          setStats,
+          () => {
+            setReady(true);
+            if (labelHost.current)
+              engine.current?.attachLabels(labelHost.current, go);
+            if (minimap.current) engine.current?.drawMinimap(minimap.current);
+          },
+          (message) => {
+            setError(message);
+            setReady(false);
+          },
+        );
+      } catch (e) {
+        setError(String(e));
+      }
+    });
+    return () => {
+      stopped = true;
+      engine.current?.destroy();
+    };
+  }, [go]);
+  useEffect(() => {
+    engine.current?.applySettings(settings);
+  }, [settings]);
+  useEffect(() => {
+    if (!tour) return;
+    tourIndex.current = 0;
+    go(VIEWS[0].id);
+    setSettings((s) => ({ ...s, autoRotate: true }));
+    const timer = setInterval(() => {
+      tourIndex.current = (tourIndex.current + 1) % VIEWS.length;
+      go(VIEWS[tourIndex.current].id);
+    }, 9500);
+    return () => {
+      clearInterval(timer);
+      setSettings((s) => ({ ...s, autoRotate: false }));
+    };
+  }, [tour, go]);
+  useEffect(() => {
+    if (!notice) return;
+    const timer = setTimeout(() => setNotice(''), 3500);
+    return () => clearTimeout(timer);
+  }, [notice]);
+  useEffect(() => {
+    const key = (ev: KeyboardEvent) => {
+      if (ev.key === 'Escape') {
+        setClean(false);
+        setPanel(false);
+        setTour(false);
+        if (settingsRef.current.mode !== 'orbit')
+          setSettings((s) => ({ ...s, mode: 'orbit' }));
+      }
+    };
+    window.addEventListener('keydown', key);
+    return () => window.removeEventListener('keydown', key);
+  }, []);
+  // Feature-detected WebMCP navigation follows the same visible UI actions.
+  useEffect(() => {
+    if (!ready) return;
+    const context = (document as Document & { modelContext?: any })
+      .modelContext;
+    if (!context?.registerTool) return;
+    const life = new AbortController();
+    const register = (tool: any) => {
+      try {
+        Promise.resolve(
+          context.registerTool(tool, { signal: life.signal }),
+        ).catch(() => {});
+      } catch {}
+    };
+    register({
+      name: 'read_atlas',
+      description:
+        'Read available Vancouver viewpoints and the current visible exploration settings.',
+      inputSchema: {
+        type: 'object',
+        properties: {},
+        additionalProperties: false,
+      },
+      annotations: { readOnlyHint: true },
+      execute: () => ({
+        viewpoints: VIEWS.map((v) => ({ id: v.id, name: v.name })),
+        settings: settingsRef.current,
+      }),
+    });
+    register({
+      name: 'explore_vancouver',
+      description:
+        'Move the 3D Vancouver camera to a geographic viewpoint and optionally change simulated time of day.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          viewpoint: { type: 'string', enum: VIEWS.map((v) => v.id) },
+          hour: { type: 'number', minimum: 0, maximum: 24 },
+        },
+        required: ['viewpoint'],
+        additionalProperties: false,
+      },
+      annotations: { readOnlyHint: false },
+      execute: async (input: unknown) => {
+        const a = input as { viewpoint?: string; hour?: number };
+        if (
+          !a ||
+          !VIEWS.some((v) => v.id === a.viewpoint) ||
+          (a.hour !== undefined &&
+            (!Number.isFinite(a.hour) || a.hour < 0 || a.hour > 24))
+        )
+          throw new Error('請提供有效景點與 0–24 小時。');
+        setTour(false);
+        go(a.viewpoint!);
+        if (a.hour !== undefined) setSettings((s) => ({ ...s, hour: a.hour! }));
+        await new Promise((r) => setTimeout(r, 1900));
+        return {
+          viewpoint: a.viewpoint,
+          hour: a.hour ?? settingsRef.current.hour,
+        };
+      },
+    });
+    return () => life.abort();
+  }, [ready, go]);
+  const change = (patch: Partial<Settings>) =>
+    setSettings((s) => ({ ...s, ...patch }));
+  const selectView = (id: string) => {
+    setTour(false);
+    go(id);
+  };
+  const current = VIEWS.find((v) => v.id === view)!;
+  const capture = () => {
+    const url = engine.current?.screenshot();
+    if (!url) return;
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `Vancouver-${view}-${String(settings.hour).replace('.', '-')}.png`;
+    a.click();
+    setNotice('風景已儲存為 PNG。');
+  };
+  const switchMode = (mode: string) => {
+    setTour(false);
+    change({ mode: mode as Settings['mode'], autoRotate: false });
+    if (mode === 'orbit') go(view);
+    if (mode !== 'orbit')
+      setNotice('W/S 前後移動 · A/D 轉向 · 拖曳環視 · Esc 返回鳥瞰');
+  };
+  return (
+    <main
+      className={`atlas ${clean ? 'clean' : ''} ${settings.mode !== 'orbit' ? 'street-mode' : ''}`}
+    >
+      <div className="scene" ref={host} />
+      <div
+        className={`map-labels ${!settings.labels || clean ? 'hide-labels' : ''}`}
+        ref={labelHost}
+      />
+      <header className="masthead ui-chrome">
+        <a className="brand" href="/" aria-label="Vancouver Living Atlas">
+          <span className="brand-mark">
+            <Mountain size={22} />
+          </span>
+          <span>
+            VANCOUVER
+            <span className="brand-sub">LIVING ATLAS / 溫哥華立體地圖</span>
+          </span>
+        </a>
+        <div className="header-meta">
+          <span className="status-dot" />
+          BRITISH COLUMBIA, CANADA
+          <span className="coord">49°17′ N · 123°08′ W</span>
+        </div>
+        <button
+          className="text-button about-button"
+          onClick={() => setAbout(true)}
+        >
+          <Info size={15} />
+          <span>關於地圖</span>
+        </button>
+        <a
+          className="github-link"
+          href="https://github.com/YiTaChen/vancouver-living-atlas"
+          target="_blank"
+          rel="noreferrer"
+        >
+          GitHub <ArrowUpRight size={15} />
+        </a>
+      </header>
+      <div className="mode-switch glass ui-chrome">
+        <RadioGroup
+          value={settings.mode}
+          onValueChange={switchMode}
+          className="mode-radio"
+          aria-label="探索方式"
+        >
+          {[
+            { id: 'orbit', name: '鳥瞰', icon: Orbit },
+            { id: 'walk', name: '步行', icon: Footprints },
+            { id: 'drive', name: '駕車', icon: Car },
+          ].map((m) => (
+            <label
+              className={`mode-pill ${settings.mode === m.id ? 'active' : ''}`}
+              key={m.id}
+            >
+              <RadioGroupItem value={m.id} className="mode-radio-dot" />
+              <m.icon size={15} />
+              {m.name}
+            </label>
+          ))}
+        </RadioGroup>
+      </div>
+      <section className="explore-panel glass ui-chrome">
+        <div className="explore-heading">
+          <div className="eyebrow">EXPLORE THE COAST</div>
+          <h1>探索溫哥華</h1>
+          <p className="panel-intro">城市、森林，以及山海之間。</p>
+        </div>
+        <div className="view-list">
+          {VIEWS.map((v, i) => (
+            <button
+              key={v.id}
+              aria-pressed={view === v.id}
+              className={`view-button ${view === v.id ? 'selected' : ''}`}
+              onClick={() => selectView(v.id)}
+            >
+              <span className="view-number">0{i + 1}</span>
+              <span>
+                <b>{v.name}</b>
+                <small>{v.zh}</small>
+              </span>
+              <MoveUpRight size={15} />
+            </button>
+          ))}
+        </div>
+        <button
+          className={`tour-button ${tour ? 'active' : ''}`}
+          onClick={() => setTour((t) => !t)}
+        >
+          {tour ? <Pause size={16} /> : <Play size={16} />}
+          <span>{tour ? '暫停導覽' : '開始環城導覽'}</span>
+          <span className="tour-time">
+            {tour ? `${tourIndex.current + 1} / 8` : '8 個視角'}
+          </span>
+        </button>
+        <div className="panel-foot">
+          <span className="status-dot" /> DATA-GROUNDED · ORIGINALLY BUILT
+        </div>
+      </section>
+      <div className="nav-tools glass ui-chrome">
+        <button
+          title="放大"
+          aria-label="放大"
+          onClick={() => engine.current?.zoom(0.75)}
+          disabled={settings.mode !== 'orbit'}
+        >
+          <Plus size={20} />
+        </button>
+        <button
+          title="縮小"
+          aria-label="縮小"
+          onClick={() => engine.current?.zoom(1.33)}
+          disabled={settings.mode !== 'orbit'}
+        >
+          <Minus size={20} />
+        </button>
+        <span />
+        <button
+          title="回到全景"
+          aria-label="回到全景"
+          onClick={() => selectView('overview')}
+        >
+          <RotateCcw size={18} />
+        </button>
+        <button
+          title="北向全景"
+          aria-label="北向全景"
+          onClick={() => {
+            selectView('overview');
+            engine.current?.fly({ ...VIEWS[0], azimuth: 0 });
+          }}
+        >
+          <Compass
+            size={20}
+            style={{
+              transform: `rotate(${(-(stats.heading || 0) * 180) / Math.PI}deg)`,
+            }}
+          />
+        </button>
+        <span />
+        <button
+          title="光線與圖層"
+          aria-label="光線與圖層"
+          aria-expanded={panel}
+          className={panel ? 'active' : ''}
+          onClick={() => setPanel((p) => !p)}
+        >
+          <Layers size={19} />
+        </button>
+        <button
+          title="下載風景圖片"
+          aria-label="下載風景圖片"
+          onClick={capture}
+        >
+          <Camera size={19} />
+        </button>
+        <button
+          title="沉浸檢視"
+          aria-label="沉浸檢視"
+          onClick={() => setClean(true)}
+        >
+          <Maximize size={18} />
+        </button>
+      </div>
+      {panel && (
+        <section
+          className="settings-panel glass ui-chrome"
+          aria-label="光線與圖層設定"
+        >
+          <div className="settings-title">
+            <h2>光線與圖層</h2>
+            <button
+              className="icon-button"
+              aria-label="關閉設定"
+              onClick={() => setPanel(false)}
+            >
+              <X size={17} />
+            </button>
+          </div>
+          <div className="sun-readout">
+            <Sun size={20} />
+            <span>
+              {settings.hour >= 6 && settings.hour < 18
+                ? '日間'
+                : settings.hour >= 18 && settings.hour < 21
+                  ? '暮色'
+                  : '夜景'}
+            </span>
+            <strong>
+              {String(Math.floor(settings.hour)).padStart(2, '0')}:
+              {settings.hour % 1 ? '30' : '00'}
+            </strong>
+          </div>
+          <Slider
+            aria-label="模擬時間"
+            min={0}
+            max={23.5}
+            step={0.5}
+            value={[settings.hour]}
+            onValueChange={(v) => change({ hour: Array.isArray(v) ? v[0] : v })}
+          />
+          <div className="time-presets">
+            {[
+              { label: '晨光', hour: 8 },
+              { label: '午後', hour: 15 },
+              { label: '夕照', hour: 18 },
+              { label: '入夜', hour: 22 },
+            ].map((t) => (
+              <button key={t.hour} onClick={() => change({ hour: t.hour })}>
+                {t.label}
+              </button>
+            ))}
+          </div>
+          <div className="settings-divider" />
+          {[
+            { key: 'buildings', label: '建築與地標' },
+            { key: 'trees', label: '森林與街樹' },
+            { key: 'traffic', label: '行車與船隻' },
+            { key: 'labels', label: '地點標籤' },
+            { key: 'autoRotate', label: '緩慢環繞' },
+          ].map((s) => (
+            <label className="layer-row" key={s.key}>
+              <span>{s.label}</span>
+              <Switch
+                aria-label={s.label}
+                checked={Boolean(settings[s.key as keyof Settings])}
+                onCheckedChange={(v) => change({ [s.key]: v })}
+              />
+            </label>
+          ))}
+          <div className="settings-divider" />
+          <label className="quality-label">畫面品質</label>
+          <RadioGroup
+            aria-label="畫面品質"
+            value={settings.quality}
+            onValueChange={(q) => change({ quality: q as Settings['quality'] })}
+            className="quality-options"
+          >
+            <label>
+              <RadioGroupItem value="high" />
+              精細陰影
+            </label>
+            <label>
+              <RadioGroupItem value="balanced" />
+              流暢優先
+            </label>
+          </RadioGroup>
+          <p className="settings-note">光線為模擬效果，非即時天氣。</p>
+        </section>
+      )}
+      <section className="map-inset glass ui-chrome">
+        <div className="mini-title">
+          <span>THE PENINSULA</span>
+          <span>N ↑</span>
+        </div>
+        <canvas
+          ref={minimap}
+          width={340}
+          height={268}
+          aria-label="溫哥華探索範圍小地圖"
+          onClick={(ev) => {
+            if (settings.mode !== 'orbit') return;
+            engine.current?.navigateMinimap(ev.nativeEvent);
+          }}
+        />
+        <div className="mini-caption">
+          <span>Stanley Park ↔ Science World</span>
+          <span>5 km</span>
+        </div>
+      </section>
+      {settings.mode !== 'orbit' && (
+        <div className="street-controls glass ui-chrome">
+          <div className="street-title">
+            <span>{settings.mode === 'drive' ? '駕車探索' : '街道漫步'}</span>
+            {settings.mode === 'drive' && (
+              <b>
+                {Math.abs(stats.speed || 0)} <small>km/h</small>
+              </b>
+            )}
+          </div>
+          <div className="street-shortcuts">
+            <button
+              onClick={() =>
+                engine.current?.navigation?.setMode(settings.mode, 'WATER ST')
+              }
+            >
+              Gastown
+            </button>
+            <button
+              onClick={() =>
+                engine.current?.navigation?.setMode(settings.mode, 'ROBSON ST')
+              }
+            >
+              Robson
+            </button>
+            <button
+              onClick={() =>
+                engine.current?.navigation?.setMode(settings.mode, 'BEACH AV')
+              }
+            >
+              Beach Ave
+            </button>
+            <button
+              onClick={() => engine.current?.navigation?.startBridge('burrard')}
+            >
+              Burrard
+            </button>
+          </div>
+          <p>
+            W / S 前後 · A / D 轉向
+            <br />
+            {settings.mode === 'drive' ? '空白鍵煞車' : 'Shift 加速'} · 拖曳環視
+          </p>
+          <div className="dpad">
+            <button
+              aria-label="向左轉"
+              onClick={() => engine.current?.navigation?.step('left')}
+            >
+              <ChevronLeft />
+            </button>
+            <button
+              aria-label="前進"
+              onClick={() => engine.current?.navigation?.step('forward')}
+            >
+              <ChevronsUp />
+            </button>
+            <button
+              aria-label="後退"
+              onClick={() => engine.current?.navigation?.step('backward')}
+            >
+              <ChevronDown />
+            </button>
+            <button
+              aria-label="向右轉"
+              onClick={() => engine.current?.navigation?.step('right')}
+            >
+              <ChevronRight />
+            </button>
+          </div>
+        </div>
+      )}
+      <div className="view-caption ui-chrome">
+        <span>
+          {current.tag} / {String(VIEWS.indexOf(current) + 1).padStart(2, '0')}
+        </span>
+        <h2>{current.name}</h2>
+        <p>{current.description}</p>
+      </div>
+      <footer className="bottom-bar glass ui-chrome">
+        <div>
+          <MapPin size={15} />
+          <b>
+            {settings.mode === 'orbit'
+              ? current.name
+              : settings.mode === 'walk'
+                ? 'Street walk'
+                : 'City drive'}
+          </b>
+          <span className="muted">
+            {settings.mode === 'orbit'
+              ? `${stats.distance.toLocaleString()} m 視距`
+              : `地面 ${stats.elevation} m`}
+          </span>
+        </div>
+        <div className="scene-count">
+          <span>{stats.buildings.toLocaleString()} 建築部分</span>
+          <span>{stats.trees.toLocaleString()} 樹木</span>
+          <span>{stats.fps} FPS</span>
+        </div>
+        <p>
+          {settings.mode === 'orbit'
+            ? '拖曳旋轉 · 滾輪縮放 · 右鍵平移'
+            : 'Esc 返回鳥瞰'}
+        </p>
+      </footer>
+      <div className="attribution ui-chrome">
+        <a
+          href="https://opendata.vancouver.ca/pages/licence/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          City of Vancouver · OGL
+        </a>
+        <span> / </span>
+        <a
+          href="https://www.openstreetmap.org/copyright"
+          target="_blank"
+          rel="noreferrer"
+        >
+          © OpenStreetMap · ODbL
+        </a>
+      </div>
+      {clean && (
+        <button className="exit-clean glass" onClick={() => setClean(false)}>
+          <Minimize size={16} />
+          返回控制 · Esc
+        </button>
+      )}
+      {notice && (
+        <div className="toast glass" role="status">
+          {notice}
+        </div>
+      )}
+      <Dialog open={about} onOpenChange={setAbout}>
+        <DialogContent className="about-dialog">
+          <DialogHeader>
+            <DialogTitle>Vancouver · Living Atlas</DialogTitle>
+            <DialogDescription>
+              一座以地理資料為基礎、自行建模的瀏覽器城市。
+            </DialogDescription>
+          </DialogHeader>
+          <p>
+            涵蓋 Downtown、Stanley Park 與 Science
+            World，包含實際海岸線、街廓與公園坡度。你可以鳥瞰全景、沿街步行或駕車，調整光線並下載風景。
+          </p>
+          <dl>
+            <div>
+              <dt>地形</dt>
+              <dd>
+                市政府 2002 年等高線插值，約 20 m 網格；Stanley Park 高地約 76
+                m。
+              </dd>
+            </div>
+            <div>
+              <dt>建築</dt>
+              <dd>
+                2009 年實測部分與現有 OpenStreetMap
+                高度資料整合；代表性地標為原創參數模型。
+              </dd>
+            </div>
+            <div>
+              <dt>細節</dt>
+              <dd>
+                街樹位置採公開資料；森林配置、立面、車輛、光線與招牌為視覺近似，並非逐棟攝影實景。
+              </dd>
+            </div>
+            <div>
+              <dt>授權</dt>
+              <dd>
+                原創程式與建模 MIT；地理資料保留 OGL Vancouver／ODbL 授權。
+              </dd>
+            </div>
+          </dl>
+          <div className="about-links">
+            <a
+              href="https://github.com/YiTaChen/vancouver-living-atlas"
+              target="_blank"
+              rel="noreferrer"
+            >
+              原始碼與階段紀錄 <ArrowUpRight size={14} />
+            </a>
+            <a
+              href="https://github.com/YiTaChen/vancouver-living-atlas/blob/main/DATA_SOURCES.md"
+              target="_blank"
+              rel="noreferrer"
+            >
+              資料與精度說明 <ArrowUpRight size={14} />
+            </a>
+          </div>
+        </DialogContent>
+      </Dialog>
+      {!ready && (
+        <div className="loading-overlay">
+          <div className="loading-brand">
+            <Mountain size={40} />
+            <h2>VANCOUVER</h2>
+            <p>{error ? '地圖載入未完成' : '正在鋪展城市與海岸…'}</p>
+            {error ? (
+              <>
+                <p>{error}</p>
+                <button onClick={() => location.reload()}>重新載入</button>
+              </>
+            ) : (
+              <>
+                <div className="loading-line" />
+                <p>真實地勢 · 城市天際線 · 太平洋海岸</p>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+    </main>
+  );
 }

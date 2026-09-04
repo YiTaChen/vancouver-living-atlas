@@ -1,12 +1,17 @@
 """Extract observed bridge road coordinates; no invented street alignment.
 Original processing code, MIT. CoV and OSM source geometries retain own licenses.
 """
+import argparse
 import json,math,hashlib
 from pathlib import Path
 from collections import defaultdict
-OUT=Path(__file__).parent
-CITY=Path('work/geodata/roads.geojson')
-OSM=Path('work/geodata/osm-stanley-paths.json')
+ap=argparse.ArgumentParser(description='Extract source bridge and causeway routes.')
+ap.add_argument('--roads',type=Path,required=True,help='Prepared City roads.geojson')
+ap.add_argument('--osm-paths',type=Path,required=True,help='Raw Overpass Stanley Park highway JSON')
+ap.add_argument('--out-dir',type=Path,required=True)
+args=ap.parse_args()
+OUT=args.out_dir.resolve();OUT.mkdir(parents=True,exist_ok=True)
+CITY=args.roads;OSM=args.osm_paths
 MX=111320*math.cos(math.radians(49.286));MZ=111320
 
 def dist(a,b):return math.hypot((b[0]-a[0])*MX,(b[1]-a[1])*MZ)
@@ -61,8 +66,12 @@ for fi,f in enumerate(data['features']):
   if kind=='burrard':
    # Original CoV vertex split at the straight bridge / curved approaches.
    # It preserves every original coordinate and shares identical end nodes.
-   a=next(i for i,v in enumerate(ps) if v==[-123.1331326,49.2767102])
-   b=next(i for i,v in enumerate(ps) if v==[-123.1440817,49.2731632])
+   def anchor(target):
+    k=min(range(len(ps)),key=lambda k:dist(ps[k],target))
+    if dist(ps[k],target)>5:raise ValueError(f'Burrard source changed: no original vertex within5m of {target}. Inspect the new source before adapting bridge splits.')
+    return k
+   a=anchor([-123.1331326,49.2767102]);b=anchor([-123.1440817,49.2731632])
+   if a>b:ps.reverse();a,b=len(ps)-1-a,len(ps)-1-b
    add(kind,'approach',ps[:a+1],'cov',sid,18)
    add(kind,'main',ps[a:b+1],'cov',sid,18)
    add(kind,'approach',ps[b:],'cov',sid,18)
@@ -126,8 +135,8 @@ out={'type':'FeatureCollection','name':'Vancouver measured bridge and causeway r
  'Only vehicle carriageways included. Parallel CoV bikeway lines intentionally omitted to avoid duplicate bridge ribbons. Add sidewalks/cycle lanes consistently beside the generated deck.',
  'The Lions north endpoint is outside the downtown terrain extraction in some builds; clip only at the actual study boundary if needed, never rotate or shift its centreline.'
  ],'mainSpines':spines,'structuralReferences':{'lions':{'mainSuspendedSpanM':472,'sideSpanM':187,'northViaductM':659,'source':'lionsStructure'}},'nodes':nodes,'features':features}
-(OUT/'bridge-routes.json').write_text(json.dumps(out,separators=(',',':')))
+(OUT/'bridges.json').write_text(json.dumps(out,separators=(',',':')))
 assert {s['kind'] for s in spines}=={'burrard','granville','cambie','lions'}
 assert sum(f['properties']['role']=='causeway' for f in features)>=15
 assert all(len(f['geometry']['coordinates'])>=2 for f in features)
-print(json.dumps({'features':len(features),'nodes':len(nodes),'spines':spines,'bytes':(OUT/'bridge-routes.json').stat().st_size},indent=2))
+print(json.dumps({'features':len(features),'nodes':len(nodes),'spines':spines,'bytes':(OUT/'bridges.json').stat().st_size},indent=2))
