@@ -1529,6 +1529,10 @@ a {
   line-height: 1;
   font-variant-numeric: tabular-nums;
 }
+.nav-tools .clock-tool.time-hidden {
+  display: grid;
+  height: 40px;
+}
 .clock-tool.running::after {
   content: '';
   position: absolute;
@@ -1615,6 +1619,9 @@ a {
 @media (max-width: 760px) {
   .nav-tools .clock-tool {
     height: 45px;
+  }
+  .nav-tools .clock-tool.time-hidden {
+    height: 35px;
   }
   .clock-tool.running::after {
     right: 3px;

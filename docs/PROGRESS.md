@@ -105,3 +105,9 @@ Original explorable Vancouver covering all Downtown, Science World and Stanley P
 - Time and language selector popups restore canvas focus in street mode, using the installed Base UI finalFocus API. Text entry and open selectors keep normal keyboard behavior.
 - TypeScript and all 40 automated checks pass, including default flow, all rates, midnight, fix/resume, manual seek, hidden tabs, stale/out-of-order timestamps, scene-mode independence, shadow anchoring and throttling, and the existing movement/placement regressions. Independent code review covered clock state, lighting and focus integration. No browser interaction or screenshot review was performed for this update.
 - Deployed to the existing Firebase URL as Hosting version `1c2bf3877cd50892`. All 49 published static files matched the final verified build by SHA-256. The feature and deployment record were committed and pushed separately.
+
+## Optional toolbar time display
+
+- Added a “Hide time” switch to the Time panel in all five languages. It starts off, so the toolbar time remains visible by default. Enabling it hides the numeric time and time-bearing tooltip while keeping the clock button available to reopen the panel and restore the display.
+- Visibility is UI-only state: changing it leaves time flow, fixed time, speed, navigation and the panel’s editable time readout unchanged. The icon-only button uses the existing toolbar size on desktop and mobile.
+- TypeScript and all 40 existing automated checks pass; no new tests were added for this small presentation preference. No browser interaction or screenshot review was performed.

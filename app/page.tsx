@@ -108,6 +108,7 @@ export default function Home() {
     [view, setView] = useState('overview'),
     [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS),
     [panel, setPanel] = useState<'layers' | 'time' | null>(null),
+    [hideTime, setHideTime] = useState(false),
     [about, setAbout] = useState(false),
     [tour, setTour] = useState(false),
     [clean, setClean] = useState(false),
@@ -687,19 +688,27 @@ export default function Home() {
         </button>
         <span />
         <button
-          title={`${tr('timeControls')} · ${clockLabel}`}
-          aria-label={tr('timeClockLabel', {
-            time: clockLabel,
-            state: tr(clock.running ? 'timeRunning' : 'timeFixed'),
-          })}
+          title={
+            hideTime
+              ? tr('timeControls')
+              : `${tr('timeControls')} · ${clockLabel}`
+          }
+          aria-label={
+            hideTime
+              ? tr('timeControls')
+              : tr('timeClockLabel', {
+                  time: clockLabel,
+                  state: tr(clock.running ? 'timeRunning' : 'timeFixed'),
+                })
+          }
           aria-expanded={panel === 'time'}
           aria-controls="time-panel"
-          className={`clock-tool ${panel === 'time' ? 'active' : ''} ${clock.running ? 'running' : 'fixed'}`}
+          className={`clock-tool ${hideTime ? 'time-hidden' : ''} ${panel === 'time' ? 'active' : ''} ${clock.running ? 'running' : 'fixed'}`}
           disabled={!ready}
           onClick={() => setPanel((p) => (p === 'time' ? null : 'time'))}
         >
           <Clock3 size={17} />
-          <span className="clock-tool-time">{clockLabel}</span>
+          {!hideTime && <span className="clock-tool-time">{clockLabel}</span>}
         </button>
         <button
           title={tr('lightingLayers')}
@@ -756,6 +765,18 @@ export default function Home() {
             </span>
             <strong>{clockLabel}</strong>
           </div>
+          <label className="layer-row time-flow-switch">
+            <span>{tr('timeHide')}</span>
+            <Switch
+              aria-label={tr('timeHide')}
+              aria-describedby="time-hide-hint"
+              checked={hideTime}
+              onCheckedChange={setHideTime}
+            />
+          </label>
+          <p className="clock-background-note" id="time-hide-hint">
+            {tr('timeHideHint')}
+          </p>
           <label className="layer-row time-flow-switch">
             <span>{tr('timeFlow')}</span>
             <Switch
