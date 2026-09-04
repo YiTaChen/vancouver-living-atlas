@@ -120,6 +120,10 @@ export class StreetNavigation {
   keyDown = (ev: KeyboardEvent) => {
     if (
       this.mode === 'orbit' ||
+      (ev.target instanceof Element &&
+        ev.target.closest(
+          '[role="combobox"], [role="listbox"], [role="option"], [role="dialog"]',
+        )) ||
       ev.target instanceof HTMLInputElement ||
       ev.target instanceof HTMLTextAreaElement
     )

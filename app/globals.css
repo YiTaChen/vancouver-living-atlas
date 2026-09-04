@@ -1187,3 +1187,127 @@ a {
 .street-shortcuts {
   flex-wrap: wrap;
 }
+
+/* Language choices keep their native names in every locale. */
+.language-control {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.language-trigger {
+  border-radius: 24px;
+  color: #e5eeee;
+  gap: 8px;
+  min-height: 36px;
+  padding: 7px 11px;
+}
+.language-short {
+  display: none;
+}
+.language-menu {
+  min-width: 184px;
+}
+.language-menu [data-slot='select-item'] {
+  font-size: 14px;
+  padding-block: 10px;
+}
+.language-control + .about-button {
+  margin-left: 0;
+}
+.about-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+.about-dialog {
+  overflow-y: auto;
+  max-height: calc(100dvh - 32px);
+}
+.time-presets {
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.panel-foot {
+  letter-spacing: 0.65px;
+}
+.mode-switch {
+  width: max-content;
+  max-width: calc(100% - 84px);
+}
+@media (max-width: 1100px) {
+  .header-meta {
+    display: none;
+  }
+  .masthead {
+    gap: 16px;
+  }
+  .bottom-bar > p {
+    display: none;
+  }
+}
+@media (max-width: 640px) {
+  .masthead {
+    gap: 7px;
+    padding-inline: 12px;
+  }
+  .brand {
+    gap: 7px;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+  }
+  .brand-sub {
+    font-size: 8px;
+    letter-spacing: 0.7px;
+  }
+  .brand-mark {
+    width: 30px;
+    height: 30px;
+  }
+  .language-full {
+    display: none;
+  }
+  .language-short {
+    display: inline;
+  }
+  .language-trigger {
+    gap: 4px;
+    min-height: 32px;
+    padding: 5px 8px;
+  }
+  .language-trigger svg {
+    width: 14px;
+    height: 14px;
+  }
+  .github-link {
+    padding: 8px;
+  }
+  .mode-pill {
+    padding-inline: 9px;
+    gap: 4px;
+  }
+  .mode-pill svg {
+    width: 13px;
+    height: 13px;
+  }
+  .time-presets button {
+    font-size: 12px;
+    flex: 1 0 40%;
+  }
+  .street-controls {
+    max-width: calc(100% - 88px);
+  }
+  .bottom-bar b {
+    max-width: 210px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+@media (max-width: 370px) {
+  .masthead .brand-mark {
+    display: none;
+  }
+  .mode-pill {
+    padding-inline: 7px;
+    font-size: 11px;
+  }
+}

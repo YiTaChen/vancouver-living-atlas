@@ -70,3 +70,11 @@ Original explorable Vancouver covering all Downtown, Science World and Stanley P
 - TypeScript and production build passed. All seven geographic/bridge continuity tests passed. Public release source includes the original renderer, data snapshots, documented preparation tools, license terms and this manager review history.
 - PNG export was downloaded and visually inspected; the unedited in-app render is included in the README. Returning from street mode now preserves the overview camera transition, including Escape.
 - Production deployment is recorded in GitHub releases once the packaged source-linked version is live.
+
+## Language release / Firebase preparation
+
+- Added English (default), Canadian French, Spanish, Traditional Chinese and Simplified Chinese. Each locale contains the same 110 messages and placeholders.
+- Localized controls, viewpoint names/descriptions, in-scene labels, notifications, loading/errors, About content, accessible names, document language/title/description and numeric readouts. The language selector preserves camera and exploration state; an explicit selection is remembered locally.
+- Reused the existing Select component and adapted long translated labels to compact layouts. Original street names, branding and source-license names remain proper nouns.
+- Added a Firebase static-export build that ships only browser assets. No Functions, database, server credentials or billing-dependent runtime is required by this app.
+- TypeScript and eleven geography/localization tests pass. Firebase project creation was rejected by automatic approval review pending explicit target-project authorization; deployment will use the user-selected project.

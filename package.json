@@ -8,10 +8,12 @@
   "scripts": {
     "dev": "vinext dev",
     "build": "vinext build",
+    "build:firebase": "VANCOUVER_STATIC_EXPORT=1 vinext build && node tools/verify-firebase-build.mjs",
+    "deploy:firebase": "npm run build:firebase && firebase deploy --only hosting",
     "start": "wrangler dev --config dist/server/wrangler.json",
     "lint": "oxlint",
     "format": "oxfmt",
-    "test": "node --test tests/geography.test.mjs",
+    "test": "node --test tests/*.test.mjs",
     "check": "tsc --noEmit --incremental false"
   },
   "dependencies": {

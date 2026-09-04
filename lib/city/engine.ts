@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { DEFAULT_LOCALE, translate, viewText, type Locale } from '../i18n';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { Sky } from 'three/addons/objects/Sky.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
@@ -31,6 +32,7 @@ import {
 } from './types';
 
 export class CityEngine {
+  locale: Locale = DEFAULT_LOCALE;
   scene = new THREE.Scene();
   environmentTarget: THREE.WebGLRenderTarget | null = null;
   extraTextures = new Set<THREE.Texture>();
@@ -129,7 +131,7 @@ export class CityEngine {
     this.renderer.shadowMap.type = THREE.PCFShadowMap;
     this.renderer.domElement.setAttribute(
       'aria-label',
-      '可互動的溫哥華 3D 地圖。拖曳旋轉、滾輪縮放、右鍵平移。',
+      translate(this.locale, 'canvasLabel'),
     );
     this.renderer.domElement.tabIndex = 0;
     container.appendChild(this.renderer.domElement);
@@ -138,9 +140,7 @@ export class CityEngine {
       event.preventDefault();
       this.contextLost = true;
       cancelAnimationFrame(this.raf);
-      this.onError(
-        '圖形處理暫時中斷。請重新載入地圖，或關閉其他 3D 分頁後再試。',
-      );
+      this.onError('graphics-context-lost');
     });
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = true;
@@ -223,7 +223,8 @@ export class CityEngine {
     await Promise.all(
       names.map(async (n) => {
         const res = await fetch(`/data/${n}.geojson`);
-        if (!res.ok) throw new Error(`無法載入 ${n} 地理資料 (${res.status})`);
+        if (!res.ok)
+          throw new Error(`Could not load ${n} data (${res.status})`);
         this.data[n] = await res.json();
       }),
     );
@@ -1053,6 +1054,21 @@ export class CityEngine {
     }
   };
 
+  setLocale(locale: Locale) {
+    this.locale = locale;
+    this.renderer.domElement.setAttribute(
+      'aria-label',
+      translate(locale, 'canvasLabel'),
+    );
+    for (const label of this.labelElements) {
+      const name = viewText(locale, label.id, 'name');
+      label.element.textContent = name;
+      label.element.setAttribute(
+        'aria-label',
+        translate(locale, 'goToPlace', { name }),
+      );
+    }
+  }
   attachLabels(host: HTMLElement, onSelect: (id: string) => void) {
     const heights: Record<string, number> = {
       overview: 0,
@@ -1070,8 +1086,12 @@ export class CityEngine {
       const [x, z] = project(v.coord),
         el = document.createElement('button');
       el.className = 'map-label';
-      el.textContent = v.name;
-      el.setAttribute('aria-label', `前往 ${v.name}`);
+      const name = viewText(this.locale, v.id, 'name');
+      el.textContent = name;
+      el.setAttribute(
+        'aria-label',
+        translate(this.locale, 'goToPlace', { name }),
+      );
       el.addEventListener('click', () => onSelect(v.id));
       host.appendChild(el);
       this.labelElements.push({

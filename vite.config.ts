@@ -35,6 +35,7 @@ const localBindingConfig = {
 };
 
 export default defineConfig(async () => {
+  const staticExport = process.env.VANCOUVER_STATIC_EXPORT === '1';
   // Keep Wrangler and Miniflare state project-local. These are non-secret tool
   // settings; application environment belongs in ignored `.env*` files.
   process.env.WRANGLER_WRITE_LOGS ??= 'false';
@@ -58,10 +59,14 @@ export default defineConfig(async () => {
     plugins: [
       vinext(),
       sites(),
-      cloudflare({
-        viteEnvironment: { name: 'rsc', childEnvironments: ['ssr'] },
-        config: localBindingConfig,
-      }),
+      ...(!staticExport
+        ? [
+            cloudflare({
+              viteEnvironment: { name: 'rsc', childEnvironments: ['ssr'] },
+              config: localBindingConfig,
+            }),
+          ]
+        : []),
     ],
   };
 });

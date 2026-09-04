@@ -8,6 +8,10 @@ The hosted Sites preview is available to the owner's account. This repository is
 
 ![Original Vancouver downtown render](docs/images/downtown.png)
 
+## Languages
+
+English is the default for a first visit. The header language menu also offers Français, Español, 中文（繁體） and 中文（简体）. A selection updates the interface and map labels without resetting the scene, and is remembered on that browser.
+
 ## Explore / 操作
 
 - **鳥瞰 / Orbit:** drag to rotate, wheel or +/− to zoom, right-drag to pan. Eight landmark viewpoints, north-up reset, clickable minimap and an automatic city tour are included.
@@ -62,3 +66,17 @@ Implementation → independent geographic/architecture review → browser inspec
 Original application code, original procedural geometry and generated surface artwork: **MIT**, see [LICENSE](LICENSE).
 
 Geographic data retain their source terms: **Open Government Licence – Vancouver**, **Open Database License 1.0**, and the applicable Canadian/USGS terrain terms. The combined geographic database includes OSM-derived records and is distributed under ODbL with City attribution. These data are not relicensed as MIT. See [DATA_SOURCES.md](DATA_SOURCES.md).
+
+## Firebase Hosting
+
+The Firebase build exports a static site, including the geographic data, textures and locally bundled fonts. It does not require Cloud Functions or a server runtime.
+
+```sh
+npm ci
+npm run check
+npm test
+npm run build:firebase
+firebase deploy --only hosting --project YOUR_FIREBASE_PROJECT_ID
+```
+
+`firebase.json` publishes only `dist/client`. The build verifier checks English initial HTML, all five locale bundles and the main geographic assets. Choose the intended Firebase project explicitly before deploying; no default Firebase project is assumed. The existing `npm run build` still builds the Sites-compatible version.

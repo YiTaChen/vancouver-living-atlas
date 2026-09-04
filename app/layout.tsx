@@ -7,9 +7,9 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 export const metadata: Metadata = {
-  title: 'Vancouver · Living Atlas | 溫哥華立體地圖',
+  title: 'Vancouver · Living Atlas',
   description:
-    '探索溫哥華 Downtown、Stanley Park 和 Science World。以真實地理資料重建的互動 3D 城市，包含地形、建築、海岸與公園。',
+    'Explore Downtown Vancouver, Stanley Park and Science World in an original interactive 3D city built from geographic data, with terrain, buildings, beaches and parks.',
 };
 export default function RootLayout({
   children,
@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="zh-Hant">
+    <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
       </body>

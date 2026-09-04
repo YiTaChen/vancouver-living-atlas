@@ -25,7 +25,7 @@ import {
   ChevronDown,
   Maximize,
   Minimize,
-  VolumeX,
+  Languages,
 } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
@@ -35,6 +35,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
+  DialogClose,
 } from '@/components/ui/dialog';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import {
@@ -43,6 +44,22 @@ import {
   type SceneStats,
   type Settings,
 } from '@/lib/city/types';
+import {
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+} from '@/components/ui/select';
+import {
+  DEFAULT_LOCALE,
+  LANGUAGES,
+  LOCALE_STORAGE_KEY,
+  resolveLocale,
+  translate,
+  viewText,
+  type Locale,
+  type MessageKey,
+} from '@/lib/i18n';
 import type { CityEngine } from '@/lib/city/engine';
 
 export default function Home() {
@@ -50,6 +67,32 @@ export default function Home() {
     labelHost = useRef<HTMLDivElement>(null),
     minimap = useRef<HTMLCanvasElement>(null),
     engine = useRef<CityEngine | null>(null);
+  const [locale, setLocale] = useState<Locale>(DEFAULT_LOCALE);
+  const localeRef = useRef(locale);
+  localeRef.current = locale;
+  const tr = useCallback(
+    (key: MessageKey, values?: Record<string, string | number>) =>
+      translate(locale, key, values),
+    [locale],
+  );
+  const number = (value: number) => value.toLocaleString(locale);
+  const language = LANGUAGES.find((item) => item.id === locale)!;
+  const chooseLocale = (value: unknown) => {
+    const next = resolveLocale(value);
+    setLocale(next);
+    try {
+      localStorage.setItem(LOCALE_STORAGE_KEY, next);
+    } catch {
+      /* Storage can be disabled. */
+    }
+  };
+  useEffect(() => {
+    try {
+      setLocale(resolveLocale(localStorage.getItem(LOCALE_STORAGE_KEY)));
+    } catch {
+      /* English remains the default. */
+    }
+  }, []);
   const [ready, setReady] = useState(false),
     [error, setError] = useState(''),
     [view, setView] = useState('overview'),
@@ -85,6 +128,7 @@ export default function Home() {
           setStats,
           () => {
             setReady(true);
+            engine.current?.setLocale(localeRef.current);
             if (labelHost.current)
               engine.current?.attachLabels(labelHost.current, go);
             if (minimap.current) engine.current?.drawMinimap(minimap.current);
@@ -103,6 +147,14 @@ export default function Home() {
       engine.current?.destroy();
     };
   }, [go]);
+  useEffect(() => {
+    document.documentElement.lang = locale;
+    document.title = tr('pageTitle');
+    document
+      .querySelector('meta[name="description"]')
+      ?.setAttribute('content', tr('pageDescription'));
+    engine.current?.setLocale(locale);
+  }, [locale, ready, tr]);
   useEffect(() => {
     engine.current?.applySettings(settings);
   }, [settings]);
@@ -162,8 +214,12 @@ export default function Home() {
       },
       annotations: { readOnlyHint: true },
       execute: () => ({
-        viewpoints: VIEWS.map((v) => ({ id: v.id, name: v.name })),
+        viewpoints: VIEWS.map((v) => ({
+          id: v.id,
+          name: viewText(localeRef.current, v.id, 'name'),
+        })),
         settings: settingsRef.current,
+        language: localeRef.current,
       }),
     });
     register({
@@ -188,7 +244,7 @@ export default function Home() {
           (a.hour !== undefined &&
             (!Number.isFinite(a.hour) || a.hour < 0 || a.hour > 24))
         )
-          throw new Error('請提供有效景點與 0–24 小時。');
+          throw new Error(translate(localeRef.current, 'invalidView'));
         setTour(false);
         go(a.viewpoint!);
         if (a.hour !== undefined) setSettings((s) => ({ ...s, hour: a.hour! }));
@@ -215,14 +271,13 @@ export default function Home() {
     a.href = url;
     a.download = `Vancouver-${view}-${String(settings.hour).replace('.', '-')}.png`;
     a.click();
-    setNotice('風景已儲存為 PNG。');
+    setNotice('savedImage');
   };
   const switchMode = (mode: string) => {
     setTour(false);
     change({ mode: mode as Settings['mode'], autoRotate: false });
     if (mode === 'orbit') go(view);
-    if (mode !== 'orbit')
-      setNotice('W/S 前後移動 · A/D 轉向 · 拖曳環視 · Esc 返回鳥瞰');
+    if (mode !== 'orbit') setNotice('streetNotice');
   };
   return (
     <main
@@ -240,21 +295,45 @@ export default function Home() {
           </span>
           <span>
             VANCOUVER
-            <span className="brand-sub">LIVING ATLAS / 溫哥華立體地圖</span>
+            <span className="brand-sub">{tr('brandSubtitle')}</span>
           </span>
         </a>
         <div className="header-meta">
           <span className="status-dot" />
-          BRITISH COLUMBIA, CANADA
+          {tr('region')}
           <span className="coord">49°17′ N · 123°08′ W</span>
+        </div>
+        <div className="language-control">
+          <Select value={locale} onValueChange={chooseLocale}>
+            <SelectTrigger
+              className="language-trigger"
+              aria-label={tr('language')}
+              title={tr('language')}
+            >
+              <Languages size={16} />
+              <span className="language-full">{language.label}</span>
+              <span className="language-short">{language.short}</span>
+            </SelectTrigger>
+            <SelectContent
+              align="end"
+              alignItemWithTrigger={false}
+              className="language-menu"
+            >
+              {LANGUAGES.map((item) => (
+                <SelectItem key={item.id} value={item.id} lang={item.id}>
+                  {item.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
         <button
           className="text-button about-button"
-          aria-label="關於地圖"
+          aria-label={tr('about')}
           onClick={() => setAbout(true)}
         >
           <Info size={15} />
-          <span>關於地圖</span>
+          <span>{tr('about')}</span>
         </button>
         <a
           className="github-link"
@@ -270,12 +349,12 @@ export default function Home() {
           value={settings.mode}
           onValueChange={switchMode}
           className="mode-radio"
-          aria-label="探索方式"
+          aria-label={tr('explorationMode')}
         >
           {[
-            { id: 'orbit', name: '鳥瞰', icon: Orbit },
-            { id: 'walk', name: '步行', icon: Footprints },
-            { id: 'drive', name: '駕車', icon: Car },
+            { id: 'orbit', name: tr('orbit'), icon: Orbit },
+            { id: 'walk', name: tr('walk'), icon: Footprints },
+            { id: 'drive', name: tr('drive'), icon: Car },
           ].map((m) => (
             <label
               className={`mode-pill ${settings.mode === m.id ? 'active' : ''}`}
@@ -290,9 +369,9 @@ export default function Home() {
       </div>
       <section className="explore-panel glass ui-chrome">
         <div className="explore-heading">
-          <div className="eyebrow">EXPLORE THE COAST</div>
-          <h1>探索溫哥華</h1>
-          <p className="panel-intro">城市、森林，以及山海之間。</p>
+          <div className="eyebrow">{tr('exploreCoast')}</div>
+          <h1>{tr('exploreTitle')}</h1>
+          <p className="panel-intro">{tr('exploreIntro')}</p>
         </div>
         <div className="view-list">
           {VIEWS.map((v, i) => (
@@ -304,8 +383,8 @@ export default function Home() {
             >
               <span className="view-number">0{i + 1}</span>
               <span>
-                <b>{v.name}</b>
-                <small>{v.zh}</small>
+                <b>{viewText(locale, v.id, 'name')}</b>
+                <small>{viewText(locale, v.id, 'tag')}</small>
               </span>
               <MoveUpRight size={15} />
             </button>
@@ -316,27 +395,27 @@ export default function Home() {
           onClick={() => setTour((t) => !t)}
         >
           {tour ? <Pause size={16} /> : <Play size={16} />}
-          <span>{tour ? '暫停導覽' : '開始環城導覽'}</span>
+          <span>{tour ? tr('pauseTour') : tr('startTour')}</span>
           <span className="tour-time">
-            {tour ? `${tourIndex.current + 1} / 8` : '8 個視角'}
+            {tour ? `${tourIndex.current + 1} / 8` : tr('viewpointCount')}
           </span>
         </button>
         <div className="panel-foot">
-          <span className="status-dot" /> DATA-GROUNDED · ORIGINALLY BUILT
+          <span className="status-dot" /> {tr('originalBuild')}
         </div>
       </section>
       <div className="nav-tools glass ui-chrome">
         <button
-          title="放大"
-          aria-label="放大"
+          title={tr('zoomIn')}
+          aria-label={tr('zoomIn')}
           onClick={() => engine.current?.zoom(0.75)}
           disabled={settings.mode !== 'orbit'}
         >
           <Plus size={20} />
         </button>
         <button
-          title="縮小"
-          aria-label="縮小"
+          title={tr('zoomOut')}
+          aria-label={tr('zoomOut')}
           onClick={() => engine.current?.zoom(1.33)}
           disabled={settings.mode !== 'orbit'}
         >
@@ -344,15 +423,15 @@ export default function Home() {
         </button>
         <span />
         <button
-          title="回到全景"
-          aria-label="回到全景"
+          title={tr('resetView')}
+          aria-label={tr('resetView')}
           onClick={() => selectView('overview')}
         >
           <RotateCcw size={18} />
         </button>
         <button
-          title="北向全景"
-          aria-label="北向全景"
+          title={tr('northView')}
+          aria-label={tr('northView')}
           onClick={() => {
             selectView('overview');
             engine.current?.fly({ ...VIEWS[0], azimuth: 0 });
@@ -367,8 +446,8 @@ export default function Home() {
         </button>
         <span />
         <button
-          title="光線與圖層"
-          aria-label="光線與圖層"
+          title={tr('lightingLayers')}
+          aria-label={tr('lightingLayers')}
           aria-expanded={panel}
           className={panel ? 'active' : ''}
           onClick={() => setPanel((p) => !p)}
@@ -376,15 +455,15 @@ export default function Home() {
           <Layers size={19} />
         </button>
         <button
-          title="下載風景圖片"
-          aria-label="下載風景圖片"
+          title={tr('downloadImage')}
+          aria-label={tr('downloadImage')}
           onClick={capture}
         >
           <Camera size={19} />
         </button>
         <button
-          title="沉浸檢視"
-          aria-label="沉浸檢視"
+          title={tr('immersiveView')}
+          aria-label={tr('immersiveView')}
           onClick={() => setClean(true)}
         >
           <Maximize size={18} />
@@ -393,13 +472,13 @@ export default function Home() {
       {panel && (
         <section
           className="settings-panel glass ui-chrome"
-          aria-label="光線與圖層設定"
+          aria-label={tr('lightingSettings')}
         >
           <div className="settings-title">
-            <h2>光線與圖層</h2>
+            <h2>{tr('lightingLayers')}</h2>
             <button
               className="icon-button"
-              aria-label="關閉設定"
+              aria-label={tr('closeSettings')}
               onClick={() => setPanel(false)}
             >
               <X size={17} />
@@ -409,10 +488,10 @@ export default function Home() {
             <Sun size={20} />
             <span>
               {settings.hour >= 6 && settings.hour < 18
-                ? '日間'
+                ? tr('day')
                 : settings.hour >= 18 && settings.hour < 21
-                  ? '暮色'
-                  : '夜景'}
+                  ? tr('dusk')
+                  : tr('night')}
             </span>
             <strong>
               {String(Math.floor(settings.hour)).padStart(2, '0')}:
@@ -420,7 +499,7 @@ export default function Home() {
             </strong>
           </div>
           <Slider
-            aria-label="模擬時間"
+            aria-label={tr('simulatedTime')}
             min={0}
             max={23.5}
             step={0.5}
@@ -429,10 +508,10 @@ export default function Home() {
           />
           <div className="time-presets">
             {[
-              { label: '晨光', hour: 8 },
-              { label: '午後', hour: 15 },
-              { label: '夕照', hour: 18 },
-              { label: '入夜', hour: 22 },
+              { label: tr('morning'), hour: 8 },
+              { label: tr('afternoon'), hour: 15 },
+              { label: tr('sunset'), hour: 18 },
+              { label: tr('afterDark'), hour: 22 },
             ].map((t) => (
               <button key={t.hour} onClick={() => change({ hour: t.hour })}>
                 {t.label}
@@ -441,11 +520,11 @@ export default function Home() {
           </div>
           <div className="settings-divider" />
           {[
-            { key: 'buildings', label: '建築與地標' },
-            { key: 'trees', label: '森林與街樹' },
-            { key: 'traffic', label: '行車與船隻' },
-            { key: 'labels', label: '地點標籤' },
-            { key: 'autoRotate', label: '緩慢環繞' },
+            { key: 'buildings', label: tr('buildingsLayer') },
+            { key: 'trees', label: tr('treesLayer') },
+            { key: 'traffic', label: tr('trafficLayer') },
+            { key: 'labels', label: tr('labelsLayer') },
+            { key: 'autoRotate', label: tr('autoRotate') },
           ].map((s) => (
             <label className="layer-row" key={s.key}>
               <span>{s.label}</span>
@@ -457,35 +536,35 @@ export default function Home() {
             </label>
           ))}
           <div className="settings-divider" />
-          <label className="quality-label">畫面品質</label>
+          <label className="quality-label">{tr('quality')}</label>
           <RadioGroup
-            aria-label="畫面品質"
+            aria-label={tr('quality')}
             value={settings.quality}
             onValueChange={(q) => change({ quality: q as Settings['quality'] })}
             className="quality-options"
           >
             <label>
               <RadioGroupItem value="high" />
-              精細陰影
+              {tr('highQuality')}
             </label>
             <label>
               <RadioGroupItem value="balanced" />
-              流暢優先
+              {tr('balancedQuality')}
             </label>
           </RadioGroup>
-          <p className="settings-note">光線為模擬效果，非即時天氣。</p>
+          <p className="settings-note">{tr('simulatedNote')}</p>
         </section>
       )}
       <section className="map-inset glass ui-chrome">
         <div className="mini-title">
-          <span>THE PENINSULA</span>
+          <span>{tr('peninsula')}</span>
           <span>N ↑</span>
         </div>
         <canvas
           ref={minimap}
           width={340}
           height={268}
-          aria-label="溫哥華探索範圍小地圖"
+          aria-label={tr('minimap')}
           onClick={(ev) => {
             if (settings.mode !== 'orbit') return;
             engine.current?.navigateMinimap(ev.nativeEvent);
@@ -499,7 +578,9 @@ export default function Home() {
       {settings.mode !== 'orbit' && (
         <div className="street-controls glass ui-chrome">
           <div className="street-title">
-            <span>{settings.mode === 'drive' ? '駕車探索' : '街道漫步'}</span>
+            <span>
+              {settings.mode === 'drive' ? tr('streetDrive') : tr('streetWalk')}
+            </span>
             {settings.mode === 'drive' && (
               <b>
                 {Math.abs(stats.speed || 0)} <small>km/h</small>
@@ -535,31 +616,32 @@ export default function Home() {
             </button>
           </div>
           <p>
-            W / S 前後 · A / D 轉向
+            {tr('movementHelp')}
             <br />
-            {settings.mode === 'drive' ? '空白鍵煞車' : 'Shift 加速'} · 拖曳環視
+            {settings.mode === 'drive' ? tr('brakeHelp') : tr('speedHelp')} ·{' '}
+            {tr('lookHelp')}
           </p>
           <div className="dpad">
             <button
-              aria-label="向左轉"
+              aria-label={tr('turnLeft')}
               onClick={() => engine.current?.navigation?.step('left')}
             >
               <ChevronLeft />
             </button>
             <button
-              aria-label="前進"
+              aria-label={tr('moveForward')}
               onClick={() => engine.current?.navigation?.step('forward')}
             >
               <ChevronsUp />
             </button>
             <button
-              aria-label="後退"
+              aria-label={tr('moveBackward')}
               onClick={() => engine.current?.navigation?.step('backward')}
             >
               <ChevronDown />
             </button>
             <button
-              aria-label="向右轉"
+              aria-label={tr('turnRight')}
               onClick={() => engine.current?.navigation?.step('right')}
             >
               <ChevronRight />
@@ -569,37 +651,34 @@ export default function Home() {
       )}
       <div className="view-caption ui-chrome">
         <span>
-          {current.tag} / {String(VIEWS.indexOf(current) + 1).padStart(2, '0')}
+          {viewText(locale, current.id, 'tag')} /{' '}
+          {String(VIEWS.indexOf(current) + 1).padStart(2, '0')}
         </span>
-        <h2>{current.name}</h2>
-        <p>{current.description}</p>
+        <h2>{viewText(locale, current.id, 'name')}</h2>
+        <p>{viewText(locale, current.id, 'description')}</p>
       </div>
       <footer className="bottom-bar glass ui-chrome">
         <div>
           <MapPin size={15} />
           <b>
             {settings.mode === 'orbit'
-              ? current.name
+              ? viewText(locale, current.id, 'name')
               : settings.mode === 'walk'
-                ? 'Street walk'
-                : 'City drive'}
+                ? tr('streetWalk')
+                : tr('streetDrive')}
           </b>
           <span className="muted">
             {settings.mode === 'orbit'
-              ? `${stats.distance.toLocaleString()} m 視距`
-              : `海拔約 ${stats.elevation} m`}
+              ? tr('viewDistance', { distance: number(stats.distance) })
+              : tr('elevation', { height: number(stats.elevation) })}
           </span>
         </div>
         <div className="scene-count">
-          <span>{stats.buildings.toLocaleString()} 建築部分</span>
-          <span>{stats.trees.toLocaleString()} 樹木</span>
+          <span>{tr('buildingCount', { count: number(stats.buildings) })}</span>
+          <span>{tr('treeCount', { count: number(stats.trees) })}</span>
           <span>{stats.fps} FPS</span>
         </div>
-        <p>
-          {settings.mode === 'orbit'
-            ? '拖曳旋轉 · 滾輪縮放 · 右鍵平移'
-            : 'Esc 返回鳥瞰'}
-        </p>
+        <p>{settings.mode === 'orbit' ? tr('orbitHelp') : tr('escapeHelp')}</p>
       </footer>
       <div className="attribution ui-chrome">
         <a
@@ -621,53 +700,36 @@ export default function Home() {
       {clean && (
         <button className="exit-clean glass" onClick={() => setClean(false)}>
           <Minimize size={16} />
-          返回控制 · Esc
+          {tr('restoreControls')}
         </button>
       )}
       {notice && (
         <div className="toast glass" role="status">
-          {notice}
+          {tr(notice as MessageKey)}
         </div>
       )}
       <Dialog open={about} onOpenChange={setAbout}>
-        <DialogContent className="about-dialog">
+        <DialogContent className="about-dialog" showCloseButton={false}>
+          <DialogClose
+            className="about-close icon-button"
+            aria-label={tr('close')}
+          >
+            <X size={18} />
+          </DialogClose>
           <DialogHeader>
-            <DialogTitle>Vancouver · Living Atlas</DialogTitle>
-            <DialogDescription>
-              一座以地理資料為基礎、自行建模的瀏覽器城市。
-            </DialogDescription>
+            <DialogTitle>{tr('pageTitle')}</DialogTitle>
+            <DialogDescription>{tr('aboutIntro')}</DialogDescription>
           </DialogHeader>
-          <p>
-            涵蓋 Downtown、Stanley Park 與 Science
-            World，包含實際海岸線、街廓與公園坡度。你可以鳥瞰全景、沿街步行或駕車，調整光線並下載風景。
-          </p>
+          <p>{tr('aboutBody')}</p>
           <dl>
-            <div>
-              <dt>地形</dt>
-              <dd>
-                市政府 2002 年等高線插值，約 20 m 網格；Stanley Park 高地約 76
-                m。
-              </dd>
-            </div>
-            <div>
-              <dt>建築</dt>
-              <dd>
-                2009 年實測部分與現有 OpenStreetMap
-                高度資料整合；代表性地標為原創參數模型。
-              </dd>
-            </div>
-            <div>
-              <dt>細節</dt>
-              <dd>
-                街樹位置採公開資料；森林配置、立面、車輛、光線與招牌為視覺近似，並非逐棟攝影實景。
-              </dd>
-            </div>
-            <div>
-              <dt>授權</dt>
-              <dd>
-                原創程式與建模 MIT；地理資料保留 OGL Vancouver／ODbL 授權。
-              </dd>
-            </div>
+            {(['terrain', 'buildings', 'detail', 'license'] as const).map(
+              (section) => (
+                <div key={section}>
+                  <dt>{tr(`${section}Heading`)}</dt>
+                  <dd>{tr(`${section}Body`)}</dd>
+                </div>
+              ),
+            )}
           </dl>
           <div className="about-links">
             <a
@@ -675,14 +737,14 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
             >
-              原始碼與階段紀錄 <ArrowUpRight size={14} />
+              {tr('sourceHistory')} <ArrowUpRight size={14} />
             </a>
             <a
               href="https://github.com/YiTaChen/vancouver-living-atlas/blob/main/DATA_SOURCES.md"
               target="_blank"
               rel="noreferrer"
             >
-              資料與精度說明 <ArrowUpRight size={14} />
+              {tr('dataAccuracy')} <ArrowUpRight size={14} />
             </a>
           </div>
         </DialogContent>
@@ -692,16 +754,24 @@ export default function Home() {
           <div className="loading-brand">
             <Mountain size={40} />
             <h2>VANCOUVER</h2>
-            <p>{error ? '地圖載入未完成' : '正在鋪展城市與海岸…'}</p>
+            <p>{error ? tr('loadFailed') : tr('loading')}</p>
             {error ? (
               <>
-                <p>{error}</p>
-                <button onClick={() => location.reload()}>重新載入</button>
+                <p>
+                  {tr(
+                    error === 'graphics-context-lost'
+                      ? 'graphicsError'
+                      : 'loadErrorDetail',
+                  )}
+                </p>
+                <button onClick={() => location.reload()}>
+                  {tr('reload')}
+                </button>
               </>
             ) : (
               <>
                 <div className="loading-line" />
-                <p>真實地勢 · 城市天際線 · 太平洋海岸</p>
+                <p>{tr('loadingDetails')}</p>
               </>
             )}
           </div>
