@@ -128,7 +128,7 @@ export class StreetNavigation {
       this.mode === 'orbit' ||
       (ev.target instanceof Element &&
         ev.target.closest(
-          '[role="combobox"], [role="listbox"], [role="option"], [role="dialog"]',
+          'button, a, select, [role="radio"], [role="slider"], [role="combobox"], [role="listbox"], [role="option"], [role="dialog"]',
         )) ||
       ev.target instanceof HTMLInputElement ||
       ev.target instanceof HTMLTextAreaElement

@@ -447,3 +447,35 @@ test('quick-start road selection works after leaving a high bridge', () => {
   assert.equal(nav.position.y, 2.45);
   nav.destroy();
 });
+
+test('keyboard activation of a street control does not steer or brake the vehicle', () => {
+  const { nav } = navigationFixture();
+  nav.mode = 'drive';
+  const previous = {
+    Element: globalThis.Element,
+    HTMLInputElement: globalThis.HTMLInputElement,
+    HTMLTextAreaElement: globalThis.HTMLTextAreaElement,
+  };
+  globalThis.Element = class {
+    closest(selector) {
+      return selector.includes('button') ? this : null;
+    }
+  };
+  globalThis.HTMLInputElement = class {};
+  globalThis.HTMLTextAreaElement = class {};
+  let prevented = false;
+  nav.keyDown({
+    key: ' ',
+    target: new globalThis.Element(),
+    preventDefault: () => {
+      prevented = true;
+    },
+  });
+  assert.equal(prevented, false);
+  assert.equal(nav.keys.size, 0);
+  for (const [name, value] of Object.entries(previous)) {
+    if (value === undefined) delete globalThis[name];
+    else globalThis[name] = value;
+  }
+  nav.destroy();
+});
