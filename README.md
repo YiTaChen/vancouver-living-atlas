@@ -6,6 +6,8 @@ An original, explorable browser reconstruction of Vancouver: the entire Downtown
 
 The hosted Sites preview is available to the owner's account. This repository is public, and the application can also run locally.
 
+![Original Vancouver downtown render](docs/images/downtown.png)
+
 ## Explore / 操作
 
 - **鳥瞰 / Orbit:** drag to rotate, wheel or +/− to zoom, right-drag to pan. Eight landmark viewpoints, north-up reset, clickable minimap and an automatic city tour are included.
@@ -29,7 +31,7 @@ No Unreal Engine, finished third-party city model, Google imagery or copied refe
 
 This is a geographic visualization, not a photographic reconstruction or a certified digital twin. Source dates differ: core contours and shoreline date to 2002, measured building parts to 2009, supplemented by OSM records retrieved in September 2026. Terrain interpolation, procedural façades, representative signs, tree canopy, bridge heights and road widths are visual approximations. Buildings are seated on the displayed terrain; stored source base elevations remain available in the data. Outer North Shore and south-shore terrain provides coarse regional context.
 
-Street navigation is an exploration feature: simplified collision and vehicle motion are included, rather than a full traffic or driving simulation. Frame rates depend on GPU, viewport and settings. Representative local Chrome reviews measured approximately 27–39 FPS. See [source provenance and qualifications](DATA_SOURCES.md).
+Street navigation is an exploration feature: simplified collision and vehicle motion are included, rather than a full traffic or driving simulation. Frame rates depend on GPU, viewport and settings. Final local Chrome reviews measured approximately 31–53 FPS across detailed street, bridge and peninsula views. See [source provenance and qualifications](DATA_SOURCES.md).
 
 ## Run locally
 

@@ -36,6 +36,7 @@ export class CityEngine {
   extraTextures = new Set<THREE.Texture>();
   contextLost = false;
   shadowKey = '';
+  lastShadowCamera = new THREE.Vector3(Infinity, Infinity, Infinity);
   sky = new Sky();
   composer: EffectComposer | null = null;
   renderPass: RenderPass | null = null;
@@ -104,7 +105,12 @@ export class CityEngine {
     this.onStats = onStats;
     this.onReady = onReady;
     this.onError = onError;
-    this.camera = new THREE.PerspectiveCamera(42, 1, 2, 45000);
+    this.camera = new THREE.PerspectiveCamera(
+      42,
+      container.clientWidth / container.clientHeight,
+      2,
+      45000,
+    );
     this.renderer = new THREE.WebGLRenderer({
       antialias: false,
       alpha: false,
@@ -140,7 +146,7 @@ export class CityEngine {
     this.controls.enableDamping = true;
     this.controls.dampingFactor = 0.07;
     this.controls.minDistance = 28;
-    this.controls.maxDistance = 12500;
+    this.controls.maxDistance = 18000;
     this.controls.maxPolarAngle = Math.PI * 0.485;
     this.controls.screenSpacePanning = false;
     this.controls.zoomSpeed = 0.75;
@@ -306,6 +312,31 @@ export class CityEngine {
         8,
       );
       this.ssao.maxDistance = 0.005;
+      // Match the two-sided road/deck surfaces used in the beauty pass.
+      this.ssao.normalMaterial.side = THREE.DoubleSide;
+      const decorative: THREE.Mesh[] = [];
+      this.scene.traverse((object) => {
+        if (!(object instanceof THREE.Mesh)) return;
+        const materials = Array.isArray(object.material)
+          ? object.material
+          : [object.material];
+        if (materials.every((m) => m.transparent && !m.depthWrite))
+          decorative.push(object);
+      });
+      const renderAO = this.ssao.render.bind(this.ssao);
+      this.ssao.render = (...args) => {
+        const visible = decorative.filter((object) => object.visible);
+        visible.forEach((object) => {
+          object.visible = false;
+        });
+        try {
+          renderAO(...args);
+        } finally {
+          visible.forEach((object) => {
+            object.visible = true;
+          });
+        }
+      };
       this.composer.insertPass(this.ssao, 1);
     }
     if (this.ssao) {
@@ -321,7 +352,8 @@ export class CityEngine {
         this.camera.projectionMatrixInverse,
       );
     }
-    if (this.renderPass) this.renderPass.enabled = !ao;
+    // SSAOPass multiplies AO into the current beauty buffer; redraw it every frame.
+    if (this.renderPass) this.renderPass.enabled = true;
     if (this.composer) this.composer.render();
     else this.renderer.render(this.scene, this.camera);
   }
@@ -829,12 +861,17 @@ export class CityEngine {
     this.fly(v, animate);
   }
   fly(v: Viewpoint, animate = true) {
-    const [x, z] = project(v.coord),
+    const distance =
+        v.distance *
+        (v.distance >= 7800
+          ? Math.max(1, Math.min(1.8, 0.85 / this.camera.aspect))
+          : 1),
+      [x, z] = project(v.coord),
       target = new THREE.Vector3(x, this.elevation(x, z), z),
       pos = new THREE.Vector3(
-        x + Math.sin(v.azimuth) * Math.cos(v.elevation) * v.distance,
-        this.elevation(x, z) + Math.sin(v.elevation) * v.distance,
-        z + Math.cos(v.azimuth) * Math.cos(v.elevation) * v.distance,
+        x + Math.sin(v.azimuth) * Math.cos(v.elevation) * distance,
+        this.elevation(x, z) + Math.sin(v.elevation) * distance,
+        z + Math.cos(v.azimuth) * Math.cos(v.elevation) * distance,
       );
     if (animate)
       this.transition = {
@@ -947,7 +984,10 @@ export class CityEngine {
         this.transition.toTarget,
         u,
       );
-      if (t === 1) this.transition = null;
+      if (t === 1) {
+        this.transition = null;
+        this.renderer.shadowMap.needsUpdate = true;
+      }
     }
     if (this.traffic && this.settings.traffic)
       updateTraffic(this, this.traffic, time / 1000);
@@ -970,6 +1010,11 @@ export class CityEngine {
       this.renderer.shadowMap.needsUpdate = true;
     }
     this.updateLabels();
+    // LOD changes alter shadow casters even when the sun does not move.
+    if (this.camera.position.distanceTo(this.lastShadowCamera) > 120) {
+      this.renderer.shadowMap.needsUpdate = true;
+      this.lastShadowCamera.copy(this.camera.position);
+    }
     this.lastTime = time;
     this.renderScene();
     this.frames++;
@@ -998,7 +1043,9 @@ export class CityEngine {
         this.camera.position.distanceTo(this.controls.target),
       );
       this.stats.elevation = Math.round(
-        this.elevation(this.controls.target.x, this.controls.target.z),
+        this.settings.mode === 'orbit'
+          ? this.elevation(this.controls.target.x, this.controls.target.z)
+          : this.navigation?.position.y || 0,
       );
       this.onStats({ ...this.stats });
       this.fpsAt = time;

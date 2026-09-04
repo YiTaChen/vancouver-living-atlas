@@ -59,3 +59,14 @@ Original explorable Vancouver covering all Downtown, Science World and Stanley P
 - Replaced those boxes with roughly 10.23 MiB of instance matrices and shared unit geometry (about 93% less retained geometry storage), partitioned into 180m cells, with distant trim hidden beyond 900m. Near-street positions and silhouettes are preserved.
 - Bounded the drawing buffer to 1.8 million pixels, replaced multisampling/preserved buffers with FXAA and synchronous capture, deferred SSAO until needed, skipped distant shadow passes, and tightened tree LOD. Completed disposal of environment targets, postprocessing, instance buffers and generated textures; context loss now stops animation.
 - Final production browser validation and deployment results follow in the release entry below.
+
+## Release acceptance — 4 September 2026
+
+- Final review found an SSAO regression: the AO pass was multiplying onto a stale beauty buffer. Restored a fresh beauty pass every frame, matched two-sided road/deck normals, and excluded transparent non-depth-writing decorations from AO. Camera/LOD changes now refresh cached shadows.
+- Verified desktop Chrome production rendering after the geometry-memory fix: approximately 52 FPS at the complete peninsula view, 49–53 FPS on Burrard Bridge, and 31–42 FPS at detailed Gastown street level on this machine. Narrow in-app preview reached 60 FPS in overview/Science World views. These are observations, not cross-device guarantees.
+- Completed an actual approximately 880 m Burrard drive using UI controls, from the north bridge deck across the water to the south approach. Separately exercised Gastown walking, viewpoint changes, time controls and quality settings.
+- Corrected portrait mode-button wrapping and overview framing; added the missing accessible name for the About control. Street shortcuts now position the camera immediately rather than passing through intervening terrain. Height readout follows the occupied bridge/road level.
+- WebMCP valid viewpoint/time calls succeeded; an out-of-range hour was rejected before mutation.
+- TypeScript and production build passed. All seven geographic/bridge continuity tests passed. Public release source includes the original renderer, data snapshots, documented preparation tools, license terms and this manager review history.
+- PNG export was downloaded and visually inspected; the unedited in-app render is included in the README. Returning from street mode now preserves the overview camera transition, including Escape.
+- Production deployment is recorded in GitHub releases once the packaged source-linked version is live.

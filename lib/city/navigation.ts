@@ -10,6 +10,7 @@ export class StreetNavigation {
   yaw = 0;
   pitch = 0.04;
   speed = 0;
+  snapCamera = false;
   dragging = false;
   last = [0, 0];
   car = new THREE.Group();
@@ -185,12 +186,12 @@ export class StreetNavigation {
     this.mode = mode;
     this.car.visible = mode === 'drive';
     this.e.controls.enabled = mode === 'orbit';
-    this.e.transition = null;
     if (mode === 'orbit') {
       this.e.camera.near = 2;
       this.e.camera.updateProjectionMatrix();
       return;
     }
+    this.e.transition = null;
     const anchors: Record<string, number[]> = {
       'WATER ST': [-123.1084, 49.28428],
       'ROBSON ST': [-123.1258, 49.2831],
@@ -245,6 +246,7 @@ export class StreetNavigation {
     this.position.y = this.e.elevation(this.position.x, this.position.z) + 1.25;
     this.yaw = Math.atan2(b[0] - a[0], b[1] - a[1]);
     this.pitch = 0.04;
+    this.snapCamera = true;
     this.update(0.016);
     this.e.renderer.domElement.focus();
   }
@@ -262,6 +264,7 @@ export class StreetNavigation {
     );
     this.yaw = Math.atan2(b[0] - a[0], b[1] - a[1]);
     this.pitch = 0;
+    this.snapCamera = true;
     this.update(0.016);
     this.e.renderer.domElement.focus();
   }
@@ -344,7 +347,8 @@ export class StreetNavigation {
         .addScaledVector(dir, -14)
         .add(new THREE.Vector3(0, 6.3, 0));
       pos.y = Math.max(pos.y, this.e.elevation(pos.x, pos.z) + 2);
-      this.e.camera.position.lerp(pos, 0.16);
+      if (this.snapCamera) this.e.camera.position.copy(pos);
+      else this.e.camera.position.lerp(pos, 0.16);
       this.e.camera.lookAt(
         this.position
           .clone()
@@ -353,6 +357,7 @@ export class StreetNavigation {
       );
     }
     this.e.controls.target.copy(this.position).addScaledVector(dir, 25);
+    this.snapCamera = false;
     this.e.camera.near = 0.25;
     this.e.camera.updateProjectionMatrix();
   }

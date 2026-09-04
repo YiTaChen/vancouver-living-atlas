@@ -131,13 +131,12 @@ export default function Home() {
         setClean(false);
         setPanel(false);
         setTour(false);
-        if (settingsRef.current.mode !== 'orbit')
-          setSettings((s) => ({ ...s, mode: 'orbit' }));
+        if (settingsRef.current.mode !== 'orbit') go('overview');
       }
     };
     window.addEventListener('keydown', key);
     return () => window.removeEventListener('keydown', key);
-  }, []);
+  }, [go]);
   // Feature-detected WebMCP navigation follows the same visible UI actions.
   useEffect(() => {
     if (!ready) return;
@@ -251,6 +250,7 @@ export default function Home() {
         </div>
         <button
           className="text-button about-button"
+          aria-label="關於地圖"
           onClick={() => setAbout(true)}
         >
           <Info size={15} />
@@ -587,7 +587,7 @@ export default function Home() {
           <span className="muted">
             {settings.mode === 'orbit'
               ? `${stats.distance.toLocaleString()} m 視距`
-              : `地面 ${stats.elevation} m`}
+              : `海拔約 ${stats.elevation} m`}
           </span>
         </div>
         <div className="scene-count">

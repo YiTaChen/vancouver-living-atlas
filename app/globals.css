@@ -584,6 +584,8 @@ a {
 }
 .mode-pill {
   display: flex;
+  white-space: nowrap;
+  flex-shrink: 0;
   gap: 7px;
   align-items: center;
   padding: 8px 14px;
