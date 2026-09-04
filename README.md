@@ -2,9 +2,9 @@
 
 An original, explorable browser reconstruction of Vancouver: the entire Downtown peninsula, Stanley Park, English Bay and False Creek through Science World. The city follows public coastlines, street geometry and actual terrain relief, with original procedural architecture and landscape detail.
 
-**[Open the atlas](https://vancouver-living-atlas.f8162426.chatgpt.site)** · [Data and accuracy](DATA_SOURCES.md) · [Manager-loop development record](docs/PROGRESS.md)
+**[Open the atlas](https://vancouver-living-atlas-yita.web.app)** · [Data and accuracy](DATA_SOURCES.md) · [Manager-loop development record](docs/PROGRESS.md)
 
-The hosted Sites preview is available to the owner's account. This repository is public, and the application can also run locally.
+The five-language application is publicly hosted on Firebase Hosting. This repository is public, and the application can also run locally.
 
 ![Original Vancouver downtown render](docs/images/downtown.png)
 
@@ -76,7 +76,7 @@ npm ci
 npm run check
 npm test
 npm run build:firebase
-firebase deploy --only hosting --project YOUR_FIREBASE_PROJECT_ID
+firebase deploy --only hosting --project vancouver-living-atlas-yita
 ```
 
-`firebase.json` publishes only `dist/client`. The build verifier checks English initial HTML, all five locale bundles and the main geographic assets. Choose the intended Firebase project explicitly before deploying; no default Firebase project is assumed. The existing `npm run build` still builds the Sites-compatible version.
+`firebase.json` publishes only `dist/client`. The build verifier checks English initial HTML, all five locale bundles and the main geographic assets. `.firebaserc` selects the owner's dedicated `vancouver-living-atlas-yita` project. To publish your own copy, pass your own project ID explicitly. The existing `npm run build` still builds the Sites-compatible version.
