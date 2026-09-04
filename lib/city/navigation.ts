@@ -3,6 +3,8 @@ import { bridgeSurface } from './bridges';
 import type { CityEngine } from './engine';
 import { project, rings, lines, inPolygon } from './geo';
 import type { Feature } from './types';
+import landmarkFootprints from './landmark-footprints.json';
+import type { PlacementPoint, StreetMode } from './placement-geometry';
 export class StreetNavigation {
   mode: 'orbit' | 'walk' | 'drive' = 'orbit';
   keys = new Set<string>();
@@ -10,13 +12,17 @@ export class StreetNavigation {
   yaw = 0;
   pitch = 0.04;
   speed = 0;
+  surface: 'ground' | 'bridge' = 'ground';
   snapCamera = false;
   dragging = false;
   last = [0, 0];
   car = new THREE.Group();
   collisions = new Map<string, number[][][][]>();
   constructor(public e: CityEngine) {
-    for (const f of e.data.buildings.features) {
+    for (const f of [
+      ...e.data.buildings.features,
+      ...landmarkFootprints.features,
+    ]) {
       if ((f.properties.minHeight || 0) > 4) continue;
       for (const r of rings(f)) {
         const p = r.map((q) => q.map(project)),
@@ -174,14 +180,47 @@ export class StreetNavigation {
     this.dragging = false;
   };
   blocked(x: number, z: number) {
-    if (bridgeSurface(this.e, x, z, this.position.y || undefined) !== undefined)
+    if (this.reachableDeck(x, z) !== undefined) return false;
+    if (
+      this.surface === 'bridge' &&
+      Math.abs(this.e.elevation(x, z) + 1.25 - this.position.y) > 4
+    )
+      return true;
+    return !this.clearGround(x, z);
+  }
+  reachableDeck(x: number, z: number) {
+    const deck = bridgeSurface(this.e, x, z, this.position.y);
+    if (deck === undefined) return undefined;
+    if (
+      this.surface === 'bridge' ||
+      Math.abs(deck - this.e.elevation(x, z) - 1.25) < 0.8
+    )
+      return deck;
+    return undefined;
+  }
+  clearGround(x: number, z: number) {
+    if (!this.e.onLand(x, z)) return false;
+    if (this.e.data.waterPolys?.some((p: number[][][]) => inPolygon([x, z], p)))
       return false;
-    if (!this.e.onLand(x, z)) return true;
-    return (
+    return !(
       this.collisions
         .get(Math.floor(x / 80) + ',' + Math.floor(z / 80))
         ?.some((p) => inPolygon([x, z], p)) || false
     );
+  }
+  startAt(mode: StreetMode, point: PlacementPoint) {
+    this.blur();
+    this.mode = mode;
+    this.car.visible = mode === 'drive';
+    this.e.controls.enabled = false;
+    this.e.transition = null;
+    this.position.set(point.x, point.y, point.z);
+    this.surface = point.surface;
+    this.yaw = point.yaw;
+    this.pitch = 0.04;
+    this.snapCamera = true;
+    this.update(0);
+    this.e.renderer.domElement.focus({ preventScroll: true });
   }
   setMode(mode: 'orbit' | 'walk' | 'drive', streetName?: string) {
     if (mode === this.mode && !streetName) return;
@@ -232,7 +271,7 @@ export class StreetNavigation {
           const x = (a[0] + b[0]) / 2,
             z = (a[1] + b[1]) / 2,
             dist = Math.hypot(x - target.x, z - target.z);
-          if (dist < best && !this.blocked(x, z)) {
+          if (dist < best && this.clearGround(x, z)) {
             best = dist;
             chosen = [a, b];
           }
@@ -247,6 +286,7 @@ export class StreetNavigation {
     }
     const [a, b] = chosen;
     this.position.set((a[0] + b[0]) / 2, 0, (a[1] + b[1]) / 2);
+    this.surface = 'ground';
     this.position.y = this.e.elevation(this.position.x, this.position.z) + 1.25;
     this.yaw = Math.atan2(b[0] - a[0], b[1] - a[1]);
     this.pitch = 0.04;
@@ -266,6 +306,7 @@ export class StreetNavigation {
       s.estimatedDeckM + 1.95,
       a[1] + (b[1] - a[1]) * 0.04,
     );
+    this.surface = 'bridge';
     this.yaw = Math.atan2(b[0] - a[0], b[1] - a[1]);
     this.pitch = 0;
     this.snapCamera = true;
@@ -283,16 +324,17 @@ export class StreetNavigation {
     this.update(0.016);
   }
   move(dx: number, dz: number) {
+    if (Math.hypot(dx, dz) < 1e-9) return;
     const steps = Math.max(1, Math.ceil(Math.hypot(dx, dz) / 1.5));
     for (let i = 0; i < steps; i++) {
       const x = this.position.x + dx / steps,
         z = this.position.z + dz / steps;
       if (!this.blocked(x, z)) {
+        const deck = this.reachableDeck(x, z);
         this.position.x = x;
         this.position.z = z;
-        this.position.y =
-          bridgeSurface(this.e, x, z, this.position.y) ??
-          this.e.elevation(x, z) + 1.25;
+        this.position.y = deck ?? this.e.elevation(x, z) + 1.25;
+        this.surface = deck === undefined ? 'ground' : 'bridge';
       } else {
         this.speed = 0;
         break;
@@ -324,14 +366,6 @@ export class StreetNavigation {
         Math.cos(this.yaw) * forward * speed * dt,
       );
     }
-    const ground =
-      bridgeSurface(
-        this.e,
-        this.position.x,
-        this.position.z,
-        this.position.y,
-      ) ?? this.e.elevation(this.position.x, this.position.z) + 1.25;
-    this.position.y = ground;
     const dir = new THREE.Vector3(Math.sin(this.yaw), 0, Math.cos(this.yaw));
     if (this.mode === 'walk') {
       this.e.camera.position

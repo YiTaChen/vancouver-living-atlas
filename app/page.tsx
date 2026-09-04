@@ -26,6 +26,7 @@ import {
   Maximize,
   Minimize,
   Languages,
+  PersonStanding,
 } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
@@ -61,6 +62,8 @@ import {
   type MessageKey,
 } from '@/lib/i18n';
 import type { CityEngine } from '@/lib/city/engine';
+import type { PlacementPreview } from '@/lib/city/placement';
+import type { StreetMode } from '@/lib/city/placement-geometry';
 
 export default function Home() {
   const host = useRef<HTMLDivElement>(null),
@@ -102,6 +105,9 @@ export default function Home() {
     [tour, setTour] = useState(false),
     [clean, setClean] = useState(false),
     [notice, setNotice] = useState('');
+  const [placing, setPlacing] = useState<StreetMode | null>(null);
+  const [placementPreview, setPlacementPreview] =
+    useState<PlacementPreview | null>(null);
   const [stats, setStats] = useState<SceneStats>({
     buildings: 0,
     roads: 0,
@@ -148,6 +154,22 @@ export default function Home() {
     };
   }, [go]);
   useEffect(() => {
+    const placement = engine.current?.placement;
+    if (!ready || !placement) return;
+    placement.onPreview = setPlacementPreview;
+    placement.onCancel = () => setPlacing(null);
+    placement.onCommit = (mode) => {
+      setPlacing(null);
+      setSettings((s) => ({ ...s, mode, autoRotate: false }));
+      setNotice('placementStarted');
+    };
+    return () => {
+      placement.onPreview = () => {};
+      placement.onCancel = () => {};
+      placement.onCommit = () => {};
+    };
+  }, [ready]);
+  useEffect(() => {
     document.documentElement.lang = locale;
     document.title = tr('pageTitle');
     document
@@ -180,6 +202,18 @@ export default function Home() {
   useEffect(() => {
     const key = (ev: KeyboardEvent) => {
       if (ev.key === 'Escape') {
+        if (
+          ev.target instanceof Element &&
+          ev.target.closest(
+            '[role="dialog"], [role="listbox"], [role="option"]',
+          )
+        )
+          return;
+        if (engine.current?.placement?.mode) {
+          ev.preventDefault();
+          engine.current.placement.cancel();
+          return;
+        }
         setClean(false);
         setPanel(false);
         setTour(false);
@@ -273,15 +307,51 @@ export default function Home() {
     a.click();
     setNotice('savedImage');
   };
-  const switchMode = (mode: string) => {
+  const beginPlacement = (mode: StreetMode) => {
+    if (!ready || !engine.current?.placement) {
+      setNotice('placementUnavailable');
+      return;
+    }
     setTour(false);
-    change({ mode: mode as Settings['mode'], autoRotate: false });
-    if (mode === 'orbit') go(view);
-    if (mode !== 'orbit') setNotice('streetNotice');
+    setPanel(false);
+    setClean(false);
+    setNotice('');
+    setPlacing(mode);
+    change({ mode: 'orbit', autoRotate: false });
+    engine.current.placement.begin(mode);
+  };
+  const switchMode = (mode: string) => {
+    if (mode === 'orbit') {
+      setTour(false);
+      engine.current?.placement?.cancel();
+      change({ mode: 'orbit', autoRotate: false });
+      go(view);
+    } else beginPlacement(mode as StreetMode);
+  };
+  const dragFigure = (
+    event: React.PointerEvent<HTMLElement>,
+    mode: StreetMode,
+  ) => {
+    if (event.button !== 0 || !ready) return;
+    event.preventDefault();
+    event.stopPropagation();
+    beginPlacement(mode);
+    event.currentTarget.setPointerCapture(event.pointerId);
+    engine.current?.placement?.startDrag(event.nativeEvent);
+  };
+  const quickStart = (street: string) => {
+    if (!placing || !engine.current?.navigation) return;
+    const mode = placing;
+    engine.current.placement?.cancel();
+    engine.current.navigation.setMode(mode, street);
+    const actual = engine.current.navigation.mode;
+    engine.current.settings.mode = actual;
+    change({ mode: actual, autoRotate: false });
+    setNotice('streetNotice');
   };
   return (
     <main
-      className={`atlas ${clean ? 'clean' : ''} ${settings.mode !== 'orbit' ? 'street-mode' : ''}`}
+      className={`atlas ${clean ? 'clean' : ''} ${settings.mode !== 'orbit' ? 'street-mode' : ''} ${placing ? 'placement-mode' : ''}`}
     >
       <div className="scene" ref={host} />
       <div
@@ -346,27 +416,179 @@ export default function Home() {
       </header>
       <div className="mode-switch glass ui-chrome">
         <RadioGroup
-          value={settings.mode}
+          value={placing || settings.mode}
           onValueChange={switchMode}
           className="mode-radio"
           aria-label={tr('explorationMode')}
         >
           {[
             { id: 'orbit', name: tr('orbit'), icon: Orbit },
-            { id: 'walk', name: tr('walk'), icon: Footprints },
+            { id: 'walk', name: tr('walk'), icon: PersonStanding },
             { id: 'drive', name: tr('drive'), icon: Car },
           ].map((m) => (
             <label
-              className={`mode-pill ${settings.mode === m.id ? 'active' : ''}`}
+              className={`mode-pill ${(placing || settings.mode) === m.id ? 'active' : ''} ${m.id !== 'orbit' ? 'figure-handle' : ''}`}
               key={m.id}
+              title={
+                m.id === 'orbit'
+                  ? tr('orbit')
+                  : tr(
+                      m.id === 'walk'
+                        ? 'placementDragWalk'
+                        : 'placementDragDrive',
+                    )
+              }
+              onPointerDownCapture={
+                m.id === 'orbit'
+                  ? undefined
+                  : (event) => dragFigure(event, m.id as StreetMode)
+              }
+              onClickCapture={
+                m.id === 'orbit'
+                  ? undefined
+                  : (event) => {
+                      if (event.detail > 0) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                      }
+                    }
+              }
             >
-              <RadioGroupItem value={m.id} className="mode-radio-dot" />
+              <RadioGroupItem
+                value={m.id}
+                disabled={!ready}
+                className="mode-radio-dot"
+              />
               <m.icon size={15} />
               {m.name}
             </label>
           ))}
         </RadioGroup>
       </div>
+      {placing && (
+        <>
+          <section
+            className="placement-panel glass ui-chrome"
+            aria-label={tr(placing === 'walk' ? 'placeWalk' : 'placeDrive')}
+          >
+            <div className="placement-heading">
+              <button
+                className="placement-figure figure-handle"
+                aria-label={tr(
+                  placing === 'walk'
+                    ? 'placementDragWalk'
+                    : 'placementDragDrive',
+                )}
+                onPointerDown={(event) => dragFigure(event, placing)}
+                onClick={(event) => {
+                  if (event.detail === 0) {
+                    engine.current?.placement?.aimCentre();
+                    engine.current?.renderer.domElement.focus();
+                  }
+                }}
+              >
+                {placing === 'walk' ? (
+                  <PersonStanding size={29} />
+                ) : (
+                  <Car size={29} />
+                )}
+              </button>
+              <h2>{tr(placing === 'walk' ? 'placeWalk' : 'placeDrive')}</h2>
+              <button
+                className="icon-button placement-cancel"
+                aria-label={tr('cancelPlacement')}
+                title={tr('cancelPlacement')}
+                onClick={() => engine.current?.placement?.cancel()}
+              >
+                <X size={18} />
+              </button>
+            </div>
+            <p>{tr('placementHint')}</p>
+            <p className="placement-detail">
+              {tr(
+                placing === 'walk' ? 'placementWalkHint' : 'placementDriveHint',
+              )}
+            </p>
+            <div
+              className={`placement-readout ${placementPreview?.result.valid ? 'valid' : 'invalid'}`}
+            >
+              <b role="status" aria-live="polite">
+                {placementPreview
+                  ? placementPreview.result.valid
+                    ? tr('placementReady')
+                    : tr(placementPreview.result.reason)
+                  : tr('placementMoveHint')}
+              </b>
+              {placementPreview && (
+                <span>
+                  {tr('placementLocation', {
+                    lat: placementPreview.coordinate[1].toFixed(5),
+                    lon: placementPreview.coordinate[0].toFixed(5),
+                    height: Math.round(placementPreview.height),
+                  })}
+                </span>
+              )}
+              {placementPreview?.result.valid && placing === 'drive' && (
+                <span>
+                  {tr('placementRoad', {
+                    name:
+                      placementPreview.result.point.name ||
+                      tr('placementUnnamedRoad'),
+                  })}{' '}
+                  ·{' '}
+                  {tr('placementRoadSnap', {
+                    distance: Math.round(
+                      placementPreview.result.point.snappedDistance,
+                    ),
+                  })}
+                </span>
+              )}
+            </div>
+            <div className="placement-actions">
+              <button
+                className="placement-start"
+                disabled={!placementPreview?.result.valid}
+                onClick={() => engine.current?.placement?.commit()}
+              >
+                {tr('placementStart')} <ArrowUpRight size={15} />
+              </button>
+              <button onClick={() => engine.current?.placement?.cancel()}>
+                {tr('cancelPlacement')}
+              </button>
+            </div>
+            <div className="placement-quick">
+              <span>{tr('placementQuick')}</span>
+              {[
+                ['Gastown', 'WATER ST'],
+                ['Robson', 'ROBSON ST'],
+                ['Beach Ave', 'BEACH AV'],
+              ].map(([label, street]) => (
+                <button key={street} onClick={() => quickStart(street)}>
+                  {label}
+                </button>
+              ))}
+            </div>
+            <p className="sr-only">{tr('placementAim')}</p>
+          </section>
+          {placementPreview && (
+            <div
+              className={`placement-marker ${placementPreview.result.valid ? 'valid' : 'invalid'}`}
+              style={{
+                left: placementPreview.screen[0],
+                top: placementPreview.screen[1],
+              }}
+              aria-hidden="true"
+            >
+              {placing === 'walk' ? (
+                <PersonStanding size={30} />
+              ) : (
+                <Car size={30} />
+              )}
+              <span>{placementPreview.result.valid ? '✓' : '×'}</span>
+            </div>
+          )}
+        </>
+      )}
       <section className="explore-panel glass ui-chrome">
         <div className="explore-heading">
           <div className="eyebrow">{tr('exploreCoast')}</div>
@@ -587,6 +809,13 @@ export default function Home() {
               </b>
             )}
           </div>
+          <button
+            className="choose-start"
+            onClick={() => beginPlacement(settings.mode as StreetMode)}
+          >
+            <MapPin size={16} />
+            {tr('placementChange')}
+          </button>
           <div className="street-shortcuts">
             <button
               onClick={() =>

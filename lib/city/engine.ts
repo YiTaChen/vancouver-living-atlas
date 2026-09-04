@@ -13,6 +13,7 @@ import { createStreetfronts, createRoofDetails } from './streetfronts';
 import { createBridgeApproaches } from './bridges';
 import { makeContext } from './context';
 import { StreetNavigation } from './navigation';
+import { MapPlacement } from './placement';
 import { createLandmarks } from './landmarks';
 import {
   createNature,
@@ -57,6 +58,7 @@ export class CityEngine {
   trafficGroup = new THREE.Group();
   traffic: Traffic | null = null;
   navigation: StreetNavigation | null = null;
+  placement: MapPlacement | null = null;
   settings = { ...DEFAULT_SETTINGS };
   stats: SceneStats = {
     buildings: 0,
@@ -258,6 +260,7 @@ export class CityEngine {
     createRoofDetails(this);
     this.traffic = createStreetDetails(this);
     this.navigation = new StreetNavigation(this);
+    this.placement = new MapPlacement(this);
     this.composer = new EffectComposer(this.renderer);
     this.renderPass = new RenderPass(this.scene, this.camera);
     this.composer.addPass(this.renderPass);
@@ -858,6 +861,7 @@ export class CityEngine {
     this.stats.roads = count;
   }
   flyTo(id: string, animate = true) {
+    this.placement?.cancel();
     const v = VIEWS.find((p) => p.id === id) || VIEWS[0];
     this.fly(v, animate);
   }
@@ -1214,6 +1218,7 @@ export class CityEngine {
     this.resizeObserver.disconnect();
     this.labelElements.forEach((l) => l.element.remove());
     this.navigation?.destroy();
+    this.placement?.destroy();
     this.controls.dispose();
     this.scene.traverse((o) => {
       const m = o as THREE.Mesh;

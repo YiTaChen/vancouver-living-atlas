@@ -44,6 +44,13 @@ export function createBridgeApproaches(e: CityEngine) {
   for (const s of d.mainSpines) {
     const width = s.kind === 'lions' ? 17 : s.kind === 'granville' ? 24 : 22;
     e.data.bridgeSurfaces.push({
+      name:
+        {
+          lions: 'Lions Gate Bridge',
+          granville: 'Granville Bridge',
+          burrard: 'Burrard Bridge',
+          cambie: 'Cambie Bridge',
+        }[s.kind as string] || '',
       a: project(s.start),
       b: project(s.end),
       h0: s.estimatedDeckM + 1.95,
@@ -87,6 +94,17 @@ export function createBridgeApproaches(e: CityEngine) {
               ? e.elevation(xx, zz) + 1.05
               : THREE.MathUtils.lerp(h0, h1, (done + u * len) / total);
         e.data.bridgeSurfaces.push({
+          name:
+            p.name ||
+            (
+              {
+                lions: 'Lions Gate Bridge',
+                granville: 'Granville Bridge',
+                burrard: 'Burrard Bridge',
+                cambie: 'Cambie Bridge',
+              } as Record<string, string>
+            )[p.kind] ||
+            '',
           a: [x, z],
           b: [xx, zz],
           h0: y + 0.06,

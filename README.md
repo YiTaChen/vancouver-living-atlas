@@ -15,8 +15,9 @@ English is the default for a first visit. The header language menu also offers F
 ## Explore / 操作
 
 - **鳥瞰 / Orbit:** drag to rotate, wheel or +/− to zoom, right-drag to pan. Eight landmark viewpoints, north-up reset, clickable minimap and an automatic city tour are included.
-- **步行 / Walk:** W/S forward and backward, A/D turn, drag to look, Shift to move faster. Gastown, Robson and Beach Avenue shortcuts provide nearby starting points.
-- **駕車 / Drive:** W/S throttle and reverse, A/D steer, Space brake. Use the on-screen arrows for short moves. Bridge decks and approach grades support crossing water; ground-level underpasses remain separate.
+- **步行 / Walk:** drag the person in the mode bar onto the main map, or select Walk and click an open ground location. Zoom in before dropping for greater precision. W/S move, A/D turn, drag to look, Shift moves faster.
+- **駕車 / Drive:** drag the car onto the map, or select Drive and click near a road. The preview shows the actual snapped road position before starting; distant roads, water and building interiors are rejected. W/S throttle/reverse, A/D steer, Space brakes. Bridge decks and ground-level underpasses remain separate.
+- **重新放置 / Choose a new start:** use the button in street controls to return to a nearby aerial view and place again. Esc cancels placement. Mouse/touch map drags adjust the view without dropping; a tap places. Keyboard users can select a mode, focus the map and press Enter to start at its centre, or activate Start here for the previewed point. Gastown, Robson and Beach Avenue remain explicit quick starts.
 - **光線與圖層 / Layers:** adjust simulated time, trees, buildings, moving traffic and labels. Choose detailed shadows or a lighter rendering mode.
 - **風景 / Capture:** export the current rendered view as PNG, or hide the interface for an immersive view. Esc restores controls and returns street modes to orbit.
 
