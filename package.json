@@ -1,5 +1,5 @@
 {
-  "name": "sites-project",
+  "name": "vancouver-living-atlas",
   "version": "0.1.0",
   "private": true,
   "engines": {
@@ -10,7 +10,9 @@
     "build": "vinext build",
     "start": "wrangler dev --config dist/server/wrangler.json",
     "lint": "oxlint",
-    "format": "oxfmt"
+    "format": "oxfmt",
+    "test": "node --test tests/geography.test.mjs",
+    "check": "tsc --noEmit"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",
@@ -55,5 +57,6 @@
     "vite": "8.0.13",
     "wrangler": "4.92.0"
   },
-  "type": "module"
+  "type": "module",
+  "license": "MIT"
 }

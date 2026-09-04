@@ -27,7 +27,7 @@ export function createLandmarks(engine:CityEngine){const b=new Builder(engine),w
  b.box(57,1,26,0xb2aa91,57,.8,-13);b.box(13,5,42,glass,37,4,-23);
  // BC Place: elliptical bowl, 36 roof masts and radial tension cables.
  b.at(-123.1120067,49.2766985,.677,5);
- const bowl=new THREE.CylinderGeometry(1,1,31,72,1,true);bowl.scale(113,1,92);b.add(bowl,0xa4aaa4,0,17,0);const ring=new THREE.RingGeometry(.49,1,96,1);ring.rotateX(-Math.PI/2);ring.scale(116,1,96);b.add(ring,white,0,43,0);
+ const bowl=new THREE.CylinderGeometry(1,1,31,72,1,true);bowl.scale(113,1,92);b.add(bowl,0xa4aaa4,0,17,0);const clerestory=new THREE.CylinderGeometry(1,1,10.5,72,1,true);clerestory.scale(113,1,92);b.add(clerestory,0x819a99,0,37.75,0);const ring=new THREE.RingGeometry(.49,1,96,1);ring.rotateX(-Math.PI/2);ring.scale(116,1,96);b.add(ring,white,0,43,0);
  const field=new THREE.PlaneGeometry(100,67);field.rotateX(-Math.PI/2);b.add(field,0x407454,0,4,0);
  for(let i=0;i<36;i++){const a=i/36*Math.PI*2,x=Math.cos(a)*114,z=Math.sin(a)*94;b.beam(new THREE.Vector3(x*.96,19,z*.96),new THREE.Vector3(x*1.04,64,z*1.04),.72,white);b.beam(new THREE.Vector3(x*1.04,64,z*1.04),new THREE.Vector3(Math.cos(a)*56,43,Math.sin(a)*44),.23,steel);b.beam(new THREE.Vector3(x,38,z),new THREE.Vector3(Math.cos(a)*56,43,Math.sin(a)*44),.27,white);}
  for(let i=0;i<72;i++){const a=i/72*Math.PI*2;b.box(2,24,2,0xd0d2ca,Math.cos(a)*112,19,Math.sin(a)*92);}
@@ -49,11 +49,7 @@ export function createLandmarks(engine:CityEngine){const b=new Builder(engine),w
  b.at(-123.131029,49.2749256,-.78);b.box(49,25,49,glass,0,12.5,0);
  for(let i=0;i<49;i++){const t=i/48,width=15+29*Math.pow(t,.55),shift=(1-t)*11,y=i*3.2; b.box(width,2.65,34,glass,shift,y+1.35,0);b.box(width+1.8,.5,36.5,white,shift,y+3,0);for(let x=-width/2;x<width/2;x+=5.5){b.box(.38,3.2,.5,white,x+shift,y+1.6,-18);b.box(.38,3.2,.5,white,x+shift,y+1.6,18);}}
  // Burrard, Granville, and Cambie: bridge decks follow actual endpoints.
- bridge(b,engine,[-123.13392,49.27759],[-123.1374,49.27147],24,'burrard');
- bridge(b,engine,[-123.1301,49.27599],[-123.13539,49.26824],29,'granville');
- bridge(b,engine,[-123.1147,49.2753],[-123.11517,49.2669],19,'cambie');
- // Lions Gate suspension span extends to the northern edge of the study.
- bridge(b,engine,[-123.1408,49.3105],[-123.1330,49.3181],63,'lions');
+ for(const s of engine.data.bridges.mainSpines)bridge(b,engine,s.start,s.end,s.estimatedDeckM,s.kind);
  // Siwash Rock, the outcrop off Stanley Park's western cliffs.
  b.at(-123.15987,49.30552,0,0);b.cylinder(4.2,9.5,17,0x756d5b,0,8.5,0,7);b.cylinder(4,4.8,1.4,0x56713b,0,17.5,0,7);b.cylinder(0,3.6,9,0x2d523f,0,22,0,6);
  b.finish();
@@ -62,10 +58,12 @@ function bridge(b:Builder,e:CityEngine,a:number[],c:number[],deck:number,kind:st
  b.box(width,3.2,length,color,0,deck,0);b.box(width-3,.3,length,0x566668,0,deck+1.8,0);b.box(.45,1.3,length,0xe0daca,-width/2,deck+2.3,0);b.box(.45,1.3,length,0xe0daca,width/2,deck+2.3,0);
  for(let z=-length/2+14;z<length/2;z+=18)b.box(.35,.08,8,0xe4d6a1,0,deck+2,z);
  if(kind==='lions'){
-  for(const z of[-236,236])for(const x of[-10.8,10.8]){b.box(3.4,111,4,color,x,74,z);for(let y=48;y<127;y+=18){b.box(23,2,2,color,0,y,z);b.beam(new THREE.Vector3(-10,y,z),new THREE.Vector3(10,y+18,z),.6,color);}}
-  for(const x of[-10.5,10.5]){for(let section=0;section<3;section++){const start=section===0?-length/2:section===1?-236:236,end=section===0?-236:section===1?236:length/2;const points:THREE.Vector3[]=[];for(let i=0;i<=40;i++){const z=start+(end-start)*i/40,t=(z+236)/472;let y=section===1?deck+10+52*Math.pow((t-.5)*2,2):section===0?65+61*(i/40):126-61*(i/40);points.push(new THREE.Vector3(x,y,z));if(i%2===0)b.beam(new THREE.Vector3(x,deck+2,z),new THREE.Vector3(x,y,z),.21,0x4f7568);}for(let i=0;i<points.length-1;i++)b.beam(points[i],points[i+1],.52,color);}}
+  const south=-length/2+187,north=south+472;for(const z of[south,north])for(const x of[-10.8,10.8]){b.box(3.4,111,4,color,x,74,z);for(let y=48;y<127;y+=18){b.box(23,2,2,color,0,y,z);b.beam(new THREE.Vector3(-10,y,z),new THREE.Vector3(10,y+18,z),.6,color);}}
+  for(const x of[-10.5,10.5]){for(let section=0;section<3;section++){const start=section===0?-length/2:section===1?south:north,end=section===0?south:section===1?north:north+187;const points:THREE.Vector3[]=[];for(let i=0;i<=40;i++){const z=start+(end-start)*i/40,t=(z-south)/472;let y=section===1?deck+10+52*Math.pow((t-.5)*2,2):section===0?65+61*(i/40):126-61*(i/40);points.push(new THREE.Vector3(x,y,z));if(i%2===0)b.beam(new THREE.Vector3(x,deck+2,z),new THREE.Vector3(x,y,z),.21,0x4f7568);}for(let i=0;i<points.length-1;i++)b.beam(points[i],points[i+1],.52,color);}}
+ for(let z=north+200;z<length/2;z+=90){for(const x of[-7,7])b.box(3.5,deck-3,5,color,x,(deck-3)/2,z);b.box(width,3,8,color,0,deck-4,z);}
  }else{
   for(let z=-length/2+80;z<length/2;z+=kind==='burrard'?140:95){for(const x of[-width*.3,width*.3])b.box(4.5,deck-3,6,color,x,(deck-3)/2,z);b.box(width,3,11,color,0,deck-4,z);}
+  if(kind==='burrard'){for(let z=-length*.34;z<length*.34;z+=22)for(const x of[-width*.37,width*.37]){b.beam(new THREE.Vector3(x,deck-2,z),new THREE.Vector3(x,deck-11,z+22),.65,0x3b5556);b.beam(new THREE.Vector3(x,deck-11,z),new THREE.Vector3(x,deck-2,z+22),.65,0x3b5556);b.beam(new THREE.Vector3(x,deck-11,z),new THREE.Vector3(x,deck-11,z+22),.8,0x3b5556);}}
   if(kind==='burrard')for(const z of[-length*.2,length*.2]){for(const x of[-width/2,width/2]){b.box(5,30,7,0xc0b69c,x,deck+11,z);b.box(7,3,9,0xd7ccaa,x,deck+26,z);}b.box(width,5,6,0xbfb497,0,deck+22,z);}
  }
 }

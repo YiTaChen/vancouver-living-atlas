@@ -1,0 +1,101 @@
+{
+  "bbox": [
+    -123.26,
+    49.22,
+    -122.97,
+    49.44
+  ],
+  "inputWays": 129,
+  "clippedLines": 129,
+  "polygonizedCells": 10,
+  "landCells": 7,
+  "coastlineLengthMetres": 112315.97775056607,
+  "landAreaKm2": 424.51710336338687,
+  "geometries": 7,
+  "pointChecks": {
+    "Downtown": true,
+    "Science World shore": true,
+    "Stanley Park": true,
+    "Kitsilano": true,
+    "Point Grey": true,
+    "North Vancouver": true,
+    "West Vancouver inland": true,
+    "North Shore mountains": true,
+    "English Bay water": false,
+    "Burrard Inlet water": false,
+    "False Creek water": false,
+    "Coal Harbour water": false
+  },
+  "classification": [
+    {
+      "cell": 0,
+      "areaM2": 75175849.7,
+      "leftVoteM": 20.5,
+      "rightVoteM": 93279.4,
+      "land": false
+    },
+    {
+      "cell": 1,
+      "areaM2": 146061175.6,
+      "leftVoteM": 61277.7,
+      "rightVoteM": 0.0,
+      "land": true
+    },
+    {
+      "cell": 2,
+      "areaM2": 278358946.6,
+      "leftVoteM": 48467.2,
+      "rightVoteM": 0.0,
+      "land": true
+    },
+    {
+      "cell": 3,
+      "areaM2": 7436039.7,
+      "leftVoteM": 0.0,
+      "rightVoteM": 7243.2,
+      "land": false
+    },
+    {
+      "cell": 4,
+      "areaM2": 2504.0,
+      "leftVoteM": 224.2,
+      "rightVoteM": 0.0,
+      "land": true
+    },
+    {
+      "cell": 5,
+      "areaM2": 107.9,
+      "leftVoteM": 41.0,
+      "rightVoteM": 0.0,
+      "land": true
+    },
+    {
+      "cell": 6,
+      "areaM2": 25.1,
+      "leftVoteM": 20.5,
+      "rightVoteM": 0.0,
+      "land": true
+    },
+    {
+      "cell": 7,
+      "areaM2": 8538630.2,
+      "leftVoteM": 0.0,
+      "rightVoteM": 11793.4,
+      "land": false
+    },
+    {
+      "cell": 8,
+      "areaM2": 27565.9,
+      "leftVoteM": 1499.2,
+      "rightVoteM": 0.0,
+      "land": true
+    },
+    {
+      "cell": 9,
+      "areaM2": 20036.8,
+      "leftVoteM": 765.7,
+      "rightVoteM": 0.0,
+      "land": true
+    }
+  ]
+}

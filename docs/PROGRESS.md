@@ -37,3 +37,15 @@ Original explorable Vancouver covering all Downtown, Science World and Stanley P
 - Added original code-generated tileable brick, asphalt, concrete and glass textures with MIT source.
 - Manager browser review caught excessive water pattern contrast and park z-fighting. Reduced waves; moved park color into terrain vertices; corrected lighting.
 - Independent architecture review found bridge alignment and BC Place orientation discrepancies. BC Place correction applied; measured bridge approach assets are being integrated in the next stage.
+
+## Stage 4 — street exploration, exact geometry and performance review
+
+- Original Gastown shopfronts, masonry, projecting window surrounds, awnings, clock and rooftop plant now complement measured building massing.
+- Added terrain-aware walk/drive modes, collision checks, on-screen controls, time/layer/quality controls, guided tour and image export.
+- Independent review found and fixed bridge endpoint alignment, oversized duplicate bikeways, the Lions Gate north viaduct, and stale SSAO camera parameters after switching exploration modes.
+- Bridge travel now samples the same main-deck/approach surfaces as the renderer. Height continuity keeps pedestrians on Granville Island underpasses from teleporting onto elevated roads.
+- Exact polygon edge indexing agrees with an independent ray-crossing implementation. A separate 122,905-sample audit had zero mismatches; core land/nature CPU work fell from roughly 11.6s to 1.8s in the asset benchmark.
+- Forests are spatially chunked, with distant broadleaf canopy LOD. Representative Chrome views measured roughly 27–34 FPS on this development machine; this is not a promise for other devices.
+- Browser review: corrected over-bright sky environment, road/sidewalk overlap, tree trunk scale, park z-fighting, bridge geometry and street camera framing. Local browser console had no errors in the reviewed states.
+- TypeScript validation and production build pass. Geographic and bridge continuity regression tests added.
+- Remaining release gate: final representative views, metadata/source documentation, packaged source-linked deployment and final GitHub push.

@@ -1,0 +1,221 @@
+{
+  "schema": "vancouver-context-elevation-grid/1.0",
+  "bounds": [
+    -123.26,
+    49.22,
+    -122.97,
+    49.44
+  ],
+  "width": 211,
+  "height": 246,
+  "crs": "EPSG:4326",
+  "units": "meters",
+  "order": "row-major; row 0 north, column 0 west; endpoints include bounds",
+  "spacingMeters": {
+    "eastWest": 100.072,
+    "northSouth": 99.849
+  },
+  "min": 0.0,
+  "max": 1472.2,
+  "source": {
+    "name": "Mapzen Terrain Tiles / AWS Open Data, Terrarium z11",
+    "url": "https://registry.opendata.aws/terrain-tiles/",
+    "encodingDocumentation": "https://www.mapzen.com/blog/terrain-tile-service/",
+    "sourceDocumentation": "https://github.com/tilezen/joerd/blob/master/docs/data-sources.md",
+    "attributionDocumentation": "https://github.com/tilezen/joerd/blob/master/docs/attribution.md",
+    "acquired": "2026-09-04",
+    "imagerySourcesFromTileHeaders": [
+      "ned13/imgn50w123_13.tif, ned13/imgn50w124_13.tif, nrcan_cdem/cdem_dem_092G.tif",
+      "ned13/imgn50w124_13.tif",
+      "ned13/imgn50w124_13.tif, nrcan_cdem/cdem_dem_092G.tif"
+    ],
+    "attribution": "Terrain tiles by Mapzen / AWS Open Data. 3DEP (formerly NED) terrain data courtesy of the U.S. Geological Survey. Contains information licensed under the Open Government Licence \u2013 Canada.",
+    "license": "USGS NED/3DEP data: public domain. Canadian CDEM data: Open Government Licence \u2013 Canada. See attributionDocumentation.",
+    "canadaLicenseUrl": "https://open.canada.ca/en/open-government-licence-canada"
+  },
+  "method": "Nine Terrarium RGB height tiles at zoom 11; exact published decoding; bilinear resampling into a regular geographic ~100m grid. Values <= 1m are treated as sea and set to zero; remaining values rounded to 0.1m.",
+  "contextOnly": true,
+  "limitations": [
+    "Coarse surrounding context. The detailed downtown core uses a separate City of Vancouver contour-derived grid.",
+    "Sea mask is inferred from elevation <= 1m, not a vector shoreline. Low reclaimed land, lakes, streams, piers, bridges, and narrow inlets may be simplified or misclassified.",
+    "No bathymetry. Inland lakes may retain local terrain elevation and require separate flat water overlays.",
+    "Source tiles were last modified in 2017 and are not a current terrain survey. 100m sampling and 0.1m encoding precision do not imply corresponding elevation accuracy.",
+    "The rectangular context boundary should be visually concealed by view limits or distance fog."
+  ],
+  "statistics": {
+    "min": 0.0,
+    "max": 1472.2,
+    "rawMin": -3.539,
+    "rawMax": 1472.153,
+    "landCells": 42926,
+    "totalCells": 51906,
+    "peakCoordinates": [
+      -123.09428571428572,
+      49.411265306122445
+    ]
+  },
+  "tiles": [
+    {
+      "url": "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/11/322/699.png",
+      "headers": {
+        "x-amz-id-2": "GVpR4LOe61kRGUb7b1K4OiuaeWxCdok6M4OeBJaJGdFTXMfEm1HcFm8qPb6o+mXnHgPWPYOL8v4=",
+        "x-amz-request-id": "7DMG3SKRYZ6MN2BW",
+        "Date": "Fri, 04 Sep 2026 20:16:01 GMT",
+        "Last-Modified": "Sat, 11 Nov 2017 11:06:09 GMT",
+        "ETag": "\"d4457c8cbab4fa664cf5905c67c31d5c\"",
+        "x-amz-meta-x-imagery-sources": "ned13/imgn50w124_13.tif, nrcan_cdem/cdem_dem_092G.tif",
+        "x-amz-version-id": "T9AhFC1gTnNPz_twimKBuf4GZF5y16UN",
+        "Accept-Ranges": "bytes",
+        "Content-Type": "image/png",
+        "Content-Length": "64321",
+        "Server": "AmazonS3",
+        "Connection": "close"
+      },
+      "sha256": "dc7d1c67e02c479a719d80165048026184a5eeaf186c8019b050b3a1b98592be"
+    },
+    {
+      "url": "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/11/323/699.png",
+      "headers": {
+        "x-amz-id-2": "cxHP5nv6+hVz77g1PSYMgjbOe2cnhZ0F3aSRsS8y6nqy42nxES0aXti7VUk9hsNCEZ2uGapO9Jc=",
+        "x-amz-request-id": "7DMRHTJAY0NCS6QD",
+        "Date": "Fri, 04 Sep 2026 20:16:01 GMT",
+        "Last-Modified": "Sat, 11 Nov 2017 11:06:03 GMT",
+        "ETag": "\"47550e9597e47a37b7cd24bff367b2da\"",
+        "x-amz-meta-x-imagery-sources": "ned13/imgn50w124_13.tif",
+        "x-amz-version-id": "Lko7IQXC.Jm7DzIHSWDnFiO_Gf7zpORB",
+        "Accept-Ranges": "bytes",
+        "Content-Type": "image/png",
+        "Content-Length": "146591",
+        "Server": "AmazonS3",
+        "Connection": "close"
+      },
+      "sha256": "ffaadab8a0e137377c5e5c44dfc7af03375c7d0fb1fca290e565b897e4efc5df"
+    },
+    {
+      "url": "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/11/324/699.png",
+      "headers": {
+        "x-amz-id-2": "NIeDFVxOPhtDkXUAWza2t6Jg8uxC9FPqd4UNFBvDGsZk2a2YI9TGJNpIYhhufIq7q3hNgdYa6GM=",
+        "x-amz-request-id": "7DMW7RT6XDMWQM2J",
+        "Date": "Fri, 04 Sep 2026 20:16:01 GMT",
+        "Last-Modified": "Sat, 11 Nov 2017 11:08:01 GMT",
+        "ETag": "\"985c8da50743f06a2e1a21a799363596\"",
+        "x-amz-meta-x-imagery-sources": "ned13/imgn50w123_13.tif, ned13/imgn50w124_13.tif, nrcan_cdem/cdem_dem_092G.tif",
+        "x-amz-version-id": "azHY1tfOI.Hw2D2KDg.d_GKuodKoReOq",
+        "Accept-Ranges": "bytes",
+        "Content-Type": "image/png",
+        "Content-Length": "142058",
+        "Server": "AmazonS3",
+        "Connection": "close"
+      },
+      "sha256": "a73c10e88c467a4917958b49885f6fbd8c76b96b86c9efc387d036c9976fe12c"
+    },
+    {
+      "url": "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/11/322/700.png",
+      "headers": {
+        "x-amz-id-2": "gFAALQExHtyUFurA5dMfN63Q4QJoooaAOuj3ZrDtqhET5z5NAFJfEMinTsyWbrUtevrdzryaEN4=",
+        "x-amz-request-id": "JZD160710DWC96PW",
+        "Date": "Fri, 04 Sep 2026 20:16:02 GMT",
+        "Last-Modified": "Sat, 11 Nov 2017 11:09:50 GMT",
+        "ETag": "\"b009aed36003c5a3196e16ac3fe39712\"",
+        "x-amz-meta-x-imagery-sources": "ned13/imgn50w124_13.tif, nrcan_cdem/cdem_dem_092G.tif",
+        "x-amz-version-id": "buRoJ_hccW5EkiMVTMTssf_XuLPSbp6S",
+        "Accept-Ranges": "bytes",
+        "Content-Type": "image/png",
+        "Content-Length": "43939",
+        "Server": "AmazonS3",
+        "Connection": "close"
+      },
+      "sha256": "c4999657d2babb0efba9684124b8940ff580d470f21a95008b1633c8127c252b"
+    },
+    {
+      "url": "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/11/323/700.png",
+      "headers": {
+        "x-amz-id-2": "xXszQS7Q13bIfTKY/tTuQ77w1JaGAJS3M4MCxqBH/JID55xEF9Dvnh0bjD3tmJQUsA9bx6bEbns=",
+        "x-amz-request-id": "JZDD20HMQF4JMAM1",
+        "Date": "Fri, 04 Sep 2026 20:16:02 GMT",
+        "Last-Modified": "Sat, 11 Nov 2017 11:09:55 GMT",
+        "ETag": "\"6320be2024a795d9929857105207cc71\"",
+        "x-amz-meta-x-imagery-sources": "ned13/imgn50w124_13.tif, nrcan_cdem/cdem_dem_092G.tif",
+        "x-amz-version-id": "oFGlpiTiUiQeZD7iMPiZqmzPe.2.eVxY",
+        "Accept-Ranges": "bytes",
+        "Content-Type": "image/png",
+        "Content-Length": "93296",
+        "Server": "AmazonS3",
+        "Connection": "close"
+      },
+      "sha256": "69736e4d337e9d557c8948b361a7b052083984c31d8da0ed2976dcadd22baa91"
+    },
+    {
+      "url": "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/11/324/700.png",
+      "headers": {
+        "x-amz-id-2": "McExV3Q1q7MOlZMrJ3QzcEx0++T8+ETUZPbjXXDziebfWZoLnsfDXFd8HSGsZFcrDmqlTRbqdUU=",
+        "x-amz-request-id": "JZD9NSJP4BA3MZM8",
+        "Date": "Fri, 04 Sep 2026 20:16:02 GMT",
+        "Last-Modified": "Sat, 11 Nov 2017 11:08:07 GMT",
+        "ETag": "\"dfe69648530347c99ad3d047f9571c90\"",
+        "x-amz-meta-x-imagery-sources": "ned13/imgn50w123_13.tif, ned13/imgn50w124_13.tif, nrcan_cdem/cdem_dem_092G.tif",
+        "x-amz-version-id": "u8eE5fDkOghY7TrrCt2XP66FzWWnCBRU",
+        "Accept-Ranges": "bytes",
+        "Content-Type": "image/png",
+        "Content-Length": "115518",
+        "Server": "AmazonS3",
+        "Connection": "close"
+      },
+      "sha256": "58749d07454fd2c16921c0066eb516a2f3269ceb5f6a3116a60d324962f6e18c"
+    },
+    {
+      "url": "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/11/322/701.png",
+      "headers": {
+        "x-amz-id-2": "Nv8m/q/6t3Z5WNkwMPeE1+ZjTfS4nagZ+o5/CvCB40AqNQr04CnF0TPmE0JnsLc9XqDMmWyf8IU=",
+        "x-amz-request-id": "JZD1M71Z9HA0P1WY",
+        "Date": "Fri, 04 Sep 2026 20:16:02 GMT",
+        "Last-Modified": "Sat, 11 Nov 2017 11:10:05 GMT",
+        "ETag": "\"0b7a4d1289075926e6d133bb12e83c73\"",
+        "x-amz-meta-x-imagery-sources": "ned13/imgn50w124_13.tif, nrcan_cdem/cdem_dem_092G.tif",
+        "x-amz-version-id": "5SmKCKXTJcOFIiV_AqjjMbv9howGDTkS",
+        "Accept-Ranges": "bytes",
+        "Content-Type": "image/png",
+        "Content-Length": "7495",
+        "Server": "AmazonS3",
+        "Connection": "close"
+      },
+      "sha256": "8ec2d78d0a07ceac512c7e204e570bc6ab8482a42484a70fc0ae861c3418c4fa"
+    },
+    {
+      "url": "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/11/323/701.png",
+      "headers": {
+        "x-amz-id-2": "mPWP8PFZUA64EGU1Mh89+kHY82RLltCpuQzID5ggUFhLlQVe6nk8CbzxEx03BDZefn+aWdK4hDY=",
+        "x-amz-request-id": "JZDE5D0TGG3Y8VD5",
+        "Date": "Fri, 04 Sep 2026 20:16:02 GMT",
+        "Last-Modified": "Sat, 11 Nov 2017 11:10:00 GMT",
+        "ETag": "\"179693a79ee1715f7eeffaffa950383c\"",
+        "x-amz-meta-x-imagery-sources": "ned13/imgn50w124_13.tif, nrcan_cdem/cdem_dem_092G.tif",
+        "x-amz-version-id": "GTi9T52Ed0J49ongOCyFZ5a7Tmz3Lq56",
+        "Accept-Ranges": "bytes",
+        "Content-Type": "image/png",
+        "Content-Length": "101438",
+        "Server": "AmazonS3",
+        "Connection": "close"
+      },
+      "sha256": "65f3f8369bc063265d72baaa7876f5871ae12b9a2fdcc54c1721c24239de64ba"
+    },
+    {
+      "url": "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/11/324/701.png",
+      "headers": {
+        "x-amz-id-2": "pU9dts8/UlUmlYY14T3AIaNxE4jDamuj+P2C6sUNlEQaoXk7KgH/7epfBQ/+YGoBJduqfjQSyHo=",
+        "x-amz-request-id": "JZD7P556ZMA3HC0D",
+        "Date": "Fri, 04 Sep 2026 20:16:02 GMT",
+        "Last-Modified": "Sat, 11 Nov 2017 11:08:23 GMT",
+        "ETag": "\"a9813d68cc5c75a43477ada933f1c61e\"",
+        "x-amz-meta-x-imagery-sources": "ned13/imgn50w123_13.tif, ned13/imgn50w124_13.tif, nrcan_cdem/cdem_dem_092G.tif",
+        "x-amz-version-id": "Gls54c_fcfbzhDHdrjGSdkWCG9mvZ_.b",
+        "Accept-Ranges": "bytes",
+        "Content-Type": "image/png",
+        "Content-Length": "113527",
+        "Server": "AmazonS3",
+        "Connection": "close"
+      },
+      "sha256": "b323870aaa51f669d1b254018b95444bde9df25685d16dbb57f4ac82f07e8c0e"
+    }
+  ]
+}

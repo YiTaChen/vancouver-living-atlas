@@ -68,3 +68,41 @@ All GeoJSON files are standard FeatureCollections.
 `geography-qa.png` is a generated overhead plot used to visually inspect alignment. Coastline, real road grid, footprints, lakes, forest polygons and trails agree spatially. Downtown and Stanley Park lie in the land mask. Science World's overwater pavilion lies seaward of the coast and needs its real supported platform. Reference imagery confirms its circular dome is not the centroid of the entire pavilion.
 
 Source years differ. This is an original interpretive reconstruction from geographic records, not a certified digital twin. Surfaces, facade appearance, vegetation canopy form, bridge deck elevations and road widths require separately authored visual interpretation. Source licenses and age qualifiers should be present in the published application's data/about panel and repository.
+
+## Reconciled building inventory
+
+`buildings-combined.geojson` is the recommended rendering inventory: 7,630 valid solids, comprising6,505 retained/clipped City solids and1,125 reconciled OSM slabs across538 structures. `buildings-modern-reconciled.geojson` contains only the OSM slabs; `buildings-structure-envelopes.geojson` contains structure grouping envelopes for inspection, not extrusion.
+
+Reconciliation uses declared source topology, not a rule selecting whichever building is tallest. Full OSM envelopes with at least70% footprint coverage by their own declared building parts are omitted (29 envelopes). Numeric intervals with `height<=minHeight` are rejected (5 records). Overlapping explicit parts are unioned within each declared vertical interval, preserving stepped podiums, tower crowns and rotated Paradox tower sections. Contiguous intervals with the same footprint are merged. Shared ground values are weighted median nearby City measured base elevations and are marked `baseSource`; they remain an approximation for source dates which differ.
+
+Grounded OSM structures replace City roof parts whose centroid is covered or whose overlap is at least50%. Remaining overlapping edges are geometrically clipped. Elevated-only OSM parts use three-dimensional interval subtraction, retaining their supporting City mass below. Of7,762 input City parts,1,266 are removed,247 have footprint edges clipped, and8 require vertical interval cuts.
+
+All output features preserve `id`, `name`, `height`, `minHeight`, `base`, `roof`, `source`. Additional `sourceIds`, `structureId`, `baseSource` and `reconciliation` fields document derived OSM solids. Render each solid from `base+minHeight` to `base+height`; extrusion depth is `height-minHeight`.
+
+`landmarks-excluded.geojson` reserves exact OSM source outlines with2m seam clearance for original custom models of Science World, BC Place, Canada Place, Harbour Centre and the true Vancouver House site. All combined geometry is cleared from these footprints. This excludes the Canada Place complex, including its entire mapped building outline, and Harbour Centre's base/podium area; the custom models must supply those elements. The unrelated7m commercial building also named Vancouver House near Georgia Street is not mistaken for the157m residential tower.
+
+Source-geometry verification confirms Living Shangri-La201m (7 vertical slabs), Paradox Vancouver188m (14 vertical slabs with rotated sections), and One Wall Centre150m. These heights are source OSM tags rather than newly measured survey claims. All five reserved custom-landmark central points are absent from generic massing.
+
+`reconciliation-report.json` records counts, discarded parents, invalid input intervals, tall-structure details and QA. Tests against the serialized final GeoJSON report zero invalid polygons/height intervals, zero positive-volume overlap pairs with horizontal area above0.1m², and zero generic-massing overlap above0.1m² with reserved landmark envelopes. Touching faces/adjacent vertical intervals are intentional.
+
+The combined geographic database includes OSM-derived data and is distributed under ODbL1.0 with City of Vancouver attribution retained. This does not change the application's MIT code license. `reconcile_buildings.py` reproduces the transformation from the prepared source vectors.
+
+## Regional context land mask
+
+`context-land.geojson` is a22KB valid EPSG:4326 MultiPolygon covering `[-123.26,49.22,-122.97,49.44]`. It contains7 land polygons and846 perimeter vertices, with15m topology-preserving simplification. Source:129 `natural=coastline` ways retrieved2026-09-04 directly from the OpenStreetMap Overpass API. License ODbL1.0; credit OpenStreetMap contributors as above.
+
+`prepare_context_land.py` clips source coastlines to the study box, nodes shared endpoints with its boundary, polygonizes closed cells, and classifies land using OpenStreetMap's directed coastline convention (land on the left). Each candidate cell receives coastline-length weighted left/right votes. All7 selected land cells have zero water-side votes. This retains North/West Vancouver and the mountain mainland, south Vancouver/Point Grey, the downtown peninsula/Stanley Park and small islands while leaving the inlet open. It is independent of the DEM sea-level estimate, so coarse zero-height terrain cells cannot generate artificial broad foreshores.
+
+`context-land-report.json` records geometry and twelve named sample checks. Eight land samples are covered; four water samples (English Bay, Burrard Inlet, False Creek and Coal Harbour) are excluded. `context-land-qa.png` is the visual inspection plot; the pale rectangle marks the detailed core study area. This layer describes marine coastline only; use the separate water polygons for inland lakes. For the detailed core, prefer the higher-resolution core coast layer already provided.
+
+## Distant regional terrain
+
+`public/data/context-terrain.json` is a ~100 m grid surrounding the detailed study. It is derived from public Mapzen/AWS Terrarium elevation tiles. Tile metadata identifies USGS NED (public domain) and Natural Resources Canada CDEM (Open Government Licence–Canada). Contains information licensed under the Open Government Licence – Canada. See https://registry.opendata.aws/terrain-tiles/ and https://open.canada.ca/en/open-government-licence-canada . It provides contextual North Shore landforms, not the core city surface. Water boundaries use OpenStreetMap regional coastline. Resolution, time periods and shore-edge interpolation limit accuracy.
+
+## Original architectural and surface work
+
+Science World, Canada Place, BC Place, Harbour Centre and Vancouver House meshes are generated by this project's original TypeScript. The 40 m Science World dome diameter is supported by https://www.scienceworld.ca/wp-content/uploads/2026/05/Science-World_FNL_05-May-2026-A-1.pdf . Five Canada Place sails are documented by the architect at https://www.da-architects.ca/projects/canada-place-pan-pacific-hotel/ . BC Place's 36 roof masts and central opening are documented by the roof designer at https://www.tonyhoggdesign.co.uk/site/projects_58.asp?catID=94 . Shapes simplify architecture and do not reproduce every façade.
+
+Road and bridge centreline positions are geographic data. Road widths, bridge deck heights and connecting profiles are explicit visual estimates; bridge route metadata carries this distinction. They are not navigation, engineering or surveying data.
+
+Forest canopy placement, moving vehicles, ferries, sailboats, street furniture, window arrangements and original procedural surface textures are illustrative. Street-tree positions come from City inventory. No Google map tiles, copyrighted aerial imagery, photogrammetry city assets or third-party finished 3D city are distributed.
