@@ -1,3 +1,4 @@
+import type { ClockState } from './clock';
 export type Coord = [number, number];
 export interface Feature {
   type?: string;
@@ -11,6 +12,7 @@ export interface TerrainData {
   [key: string]: any;
 }
 export interface SceneStats {
+  clock?: ClockState;
   buildings: number;
   trees: number;
   roads: number;
@@ -23,7 +25,6 @@ export interface SceneStats {
   lat?: number;
 }
 export interface Settings {
-  hour: number;
   trees: boolean;
   buildings: boolean;
   labels: boolean;
@@ -137,7 +138,6 @@ export const VIEWS: Viewpoint[] = [
   },
 ];
 export const DEFAULT_SETTINGS: Settings = {
-  hour: 16,
   trees: true,
   buildings: true,
   labels: true,

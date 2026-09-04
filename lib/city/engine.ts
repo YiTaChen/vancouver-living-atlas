@@ -14,6 +14,7 @@ import { createBridgeApproaches } from './bridges';
 import { makeContext } from './context';
 import { StreetNavigation } from './navigation';
 import { MapPlacement } from './placement';
+import { CityClock, sunAngle, type ClockState } from './clock';
 import { createLandmarks } from './landmarks';
 import {
   createNature,
@@ -33,12 +34,18 @@ import {
 } from './types';
 
 export class CityEngine {
+  clock = new CityClock();
+  lastLightUpdate = 0;
+  lastLightHour = -1;
+  lastShadowHour = -1;
+  lastSolarShadowUpdate = 0;
+  visibilityChange = () =>
+    this.clock.setVisible(!document.hidden, performance.now());
   locale: Locale = DEFAULT_LOCALE;
   scene = new THREE.Scene();
   environmentTarget: THREE.WebGLRenderTarget | null = null;
   extraTextures = new Set<THREE.Texture>();
   contextLost = false;
-  shadowKey = '';
   lastShadowCamera = new THREE.Vector3(Infinity, Infinity, Infinity);
   sky = new Sky();
   composer: EffectComposer | null = null;
@@ -109,6 +116,7 @@ export class CityEngine {
     this.onStats = onStats;
     this.onReady = onReady;
     this.onError = onError;
+    document.addEventListener('visibilitychange', this.visibilityChange);
     this.camera = new THREE.PerspectiveCamera(
       42,
       container.clientWidth / container.clientHeight,
@@ -274,6 +282,8 @@ export class CityEngine {
     window.addEventListener('pagehide', this.pageHide, { once: true });
     this.onReady();
     this.fpsAt = performance.now();
+    this.clock.setVisible(!document.hidden, this.fpsAt);
+    this.clock.resetTimebase(this.fpsAt);
     this.animate(this.fpsAt);
   }
   pixelRatio() {
@@ -912,7 +922,40 @@ export class CityEngine {
       settings.quality === 'high' &&
       this.camera.position.distanceTo(this.controls.target) < 4500;
     this.controls.autoRotateSpeed = 0.5;
-    const a = ((settings.hour - 6) / 14.5) * Math.PI,
+    const extent = settings.mode === 'orbit' ? 2700 : 170;
+    Object.assign(this.sun.shadow.camera, {
+      left: -extent,
+      right: extent,
+      top: extent,
+      bottom: -extent,
+    });
+    this.sun.shadow.camera.updateProjectionMatrix();
+    if (settings.mode !== 'orbit')
+      this.sun.target.position.copy(this.controls.target);
+    else this.sun.target.position.set(0, 0, 0);
+    this.trafficGroup.visible = settings.traffic;
+    this.landmarks.visible = settings.buildings;
+    this.updateLighting(true);
+  }
+  setClock(patch: Partial<ClockState>) {
+    this.clock.configure(patch, performance.now());
+    this.updateLighting(true);
+    this.stats.clock = this.clock.snapshot();
+    this.onStats({ ...this.stats });
+  }
+  tickClock(time: number) {
+    this.clock.tick(time);
+    if (
+      this.clock.hour !== this.lastLightHour &&
+      time - this.lastLightUpdate >= 100
+    )
+      this.updateLighting(false, time);
+  }
+  updateLighting(force = false, time = performance.now()) {
+    const hour = this.clock.hour;
+    this.lastLightHour = hour;
+    this.lastLightUpdate = time;
+    const a = sunAngle(hour),
       day = Math.max(0, Math.sin(a)),
       night = 1 - THREE.MathUtils.smoothstep(day, 0, 0.38);
     this.uniforms.night.value = night;
@@ -930,18 +973,7 @@ export class CityEngine {
     );
     this.sky.material.uniforms.sunPosition.value.copy(this.sun.position);
     this.sky.visible = day > 0.05;
-    const extent = settings.mode === 'orbit' ? 2700 : 170;
-    Object.assign(this.sun.shadow.camera, {
-      left: -extent,
-      right: extent,
-      top: extent,
-      bottom: -extent,
-    });
-    this.sun.shadow.camera.updateProjectionMatrix();
-    if (settings.mode !== 'orbit') {
-      this.sun.target.position.copy(this.controls.target);
-      this.sun.position.add(this.controls.target);
-    } else this.sun.target.position.set(0, 0, 0);
+    this.sun.position.add(this.sun.target.position);
     this.sun.intensity = day * 2.3 + 0.04;
     this.sun.color.set(night > 0.2 ? 0xffad73 : 0xffeed6);
     this.ambient.intensity = 0.4 + day * 1.3;
@@ -953,24 +985,19 @@ export class CityEngine {
     this.scene.background = bg;
     if (this.scene.fog) this.scene.fog.color.copy(bg);
     this.renderer.toneMappingExposure = 1.06 + night * 0.1;
-    this.trafficGroup.visible = settings.traffic;
-    this.landmarks.visible = settings.buildings;
-    const key = [
-      settings.hour,
-      settings.mode,
-      settings.buildings,
-      settings.trees,
-      settings.quality,
-    ].join(':');
-    if (key !== this.shadowKey) {
+    const hourDelta = Math.abs(hour - this.lastShadowHour);
+    const movedSun = Math.min(hourDelta, 24 - hourDelta) >= 1 / 30;
+    if (force || (movedSun && time - this.lastSolarShadowUpdate >= 750)) {
       this.renderer.shadowMap.needsUpdate = true;
-      this.shadowKey = key;
+      this.lastShadowHour = hour;
+      this.lastSolarShadowUpdate = time;
     }
   }
   animate = (time: number) => {
     if (this.disposed || this.contextLost) return;
     this.raf = requestAnimationFrame(this.animate);
     this.uniforms.time.value = time / 1000;
+    this.tickClock(time);
     if (this.transition) {
       const t = THREE.MathUtils.clamp(
           (performance.now() - this.transition.start) /
@@ -1035,6 +1062,7 @@ export class CityEngine {
       );
       this.stats.fps = Math.round((this.frames * 1000) / (time - this.fpsAt));
       this.stats.speed = Math.round((this.navigation?.speed || 0) * 3.6);
+      this.stats.clock = this.clock.snapshot();
       this.stats.heading = this.controls.getAzimuthalAngle();
       this.stats.lon = unproject(
         this.controls.target.x,
@@ -1211,6 +1239,7 @@ export class CityEngine {
     return this.renderer.domElement.toDataURL('image/png');
   }
   destroy() {
+    document.removeEventListener('visibilitychange', this.visibilityChange);
     if (this.disposed) return;
     window.removeEventListener('pagehide', this.pageHide);
     this.disposed = true;

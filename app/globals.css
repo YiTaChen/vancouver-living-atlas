@@ -1515,3 +1515,113 @@ a {
     pointer-events: none;
   }
 }
+
+/* Independent clock controls use the existing map toolbar and panel language. */
+.nav-tools .clock-tool {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  position: relative;
+  height: 49px;
+}
+.clock-tool-time {
+  font-size: 12px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.clock-tool.running::after {
+  content: '';
+  position: absolute;
+  right: 7px;
+  top: 6px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #dce7a2;
+}
+.clock-tool.fixed {
+  color: #d9bca1;
+}
+.time-panel {
+  width: 300px;
+  max-height: calc(100dvh - 145px);
+  overflow-y: auto;
+}
+.time-panel .settings-title h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.time-flow-switch {
+  margin-bottom: 6px;
+}
+.clock-state {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #dce7a2;
+  margin: 0;
+}
+.clock-state.fixed {
+  color: #d9bca1;
+}
+.clock-field-label {
+  display: block;
+  font-size: 14px;
+  color: #dce5dc;
+  margin: 0 0 12px;
+}
+.clock-rate-trigger {
+  width: 100%;
+  min-height: 39px;
+  border: 1px solid #bad0c838;
+  border-radius: 9px;
+  background: #ffffff07;
+  color: #e4ecdf;
+  font-size: 14px;
+}
+.clock-explanation {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #a8c0ba;
+  margin: 10px 0 0;
+}
+.clock-range {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #98b7b3;
+  margin-top: 10px;
+  font-variant-numeric: tabular-nums;
+}
+.time-panel .time-presets {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px 8px;
+}
+.time-panel .time-presets button {
+  font-size: 14px;
+  padding: 7px;
+  border: 1px solid #ffffff16;
+  border-radius: 8px;
+}
+.clock-background-note {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #94afa9;
+  margin: 10px 0 0;
+}
+@media (max-width: 760px) {
+  .nav-tools .clock-tool {
+    height: 45px;
+  }
+  .clock-tool.running::after {
+    right: 3px;
+    top: 4px;
+  }
+  .time-panel {
+    width: min(300px, calc(100vw - 70px));
+    max-height: calc(100dvh - 180px);
+  }
+}

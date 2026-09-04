@@ -27,6 +27,7 @@ import {
   Minimize,
   Languages,
   PersonStanding,
+  Clock3,
 } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
@@ -64,6 +65,12 @@ import {
 import type { CityEngine } from '@/lib/city/engine';
 import type { PlacementPreview } from '@/lib/city/placement';
 import type { StreetMode } from '@/lib/city/placement-geometry';
+import {
+  DEFAULT_CLOCK,
+  CLOCK_RATES,
+  formatClock,
+  type ClockState,
+} from '@/lib/city/clock';
 
 export default function Home() {
   const host = useRef<HTMLDivElement>(null),
@@ -100,7 +107,7 @@ export default function Home() {
     [error, setError] = useState(''),
     [view, setView] = useState('overview'),
     [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS),
-    [panel, setPanel] = useState(false),
+    [panel, setPanel] = useState<'layers' | 'time' | null>(null),
     [about, setAbout] = useState(false),
     [tour, setTour] = useState(false),
     [clean, setClean] = useState(false),
@@ -116,6 +123,16 @@ export default function Home() {
     distance: 0,
     elevation: 0,
   });
+  const clock = stats.clock || DEFAULT_CLOCK;
+  const clockLabel = formatClock(clock.hour);
+  const changeClock = (patch: Partial<ClockState>) =>
+    engine.current?.setClock(patch);
+  const restoreStreetFocus = () => {
+    const city = engine.current;
+    return city?.navigation && city.navigation.mode !== 'orbit'
+      ? city.renderer.domElement
+      : true;
+  };
   const tourIndex = useRef(0),
     settingsRef = useRef(settings);
   settingsRef.current = settings;
@@ -215,7 +232,7 @@ export default function Home() {
           return;
         }
         setClean(false);
-        setPanel(false);
+        setPanel(null);
         setTour(false);
         if (settingsRef.current.mode !== 'orbit') go('overview');
       }
@@ -253,6 +270,7 @@ export default function Home() {
           name: viewText(localeRef.current, v.id, 'name'),
         })),
         settings: settingsRef.current,
+        clock: engine.current?.clock.snapshot(),
         language: localeRef.current,
       }),
     });
@@ -281,11 +299,11 @@ export default function Home() {
           throw new Error(translate(localeRef.current, 'invalidView'));
         setTour(false);
         go(a.viewpoint!);
-        if (a.hour !== undefined) setSettings((s) => ({ ...s, hour: a.hour! }));
+        if (a.hour !== undefined) engine.current?.setClock({ hour: a.hour });
         await new Promise((r) => setTimeout(r, 1900));
         return {
           viewpoint: a.viewpoint,
-          hour: a.hour ?? settingsRef.current.hour,
+          hour: engine.current?.clock.hour ?? DEFAULT_CLOCK.hour,
         };
       },
     });
@@ -303,7 +321,7 @@ export default function Home() {
     if (!url) return;
     const a = document.createElement('a');
     a.href = url;
-    a.download = `Vancouver-${view}-${String(settings.hour).replace('.', '-')}.png`;
+    a.download = `Vancouver-${view}-${formatClock(engine.current?.clock.hour ?? DEFAULT_CLOCK.hour).replace(':', '-')}.png`;
     a.click();
     setNotice('savedImage');
   };
@@ -313,7 +331,7 @@ export default function Home() {
       return;
     }
     setTour(false);
-    setPanel(false);
+    setPanel(null);
     setClean(false);
     setNotice('');
     setPlacing(mode);
@@ -385,6 +403,7 @@ export default function Home() {
               <span className="language-short">{language.short}</span>
             </SelectTrigger>
             <SelectContent
+              finalFocus={restoreStreetFocus}
               align="end"
               alignItemWithTrigger={false}
               className="language-menu"
@@ -668,11 +687,27 @@ export default function Home() {
         </button>
         <span />
         <button
+          title={`${tr('timeControls')} · ${clockLabel}`}
+          aria-label={tr('timeClockLabel', {
+            time: clockLabel,
+            state: tr(clock.running ? 'timeRunning' : 'timeFixed'),
+          })}
+          aria-expanded={panel === 'time'}
+          aria-controls="time-panel"
+          className={`clock-tool ${panel === 'time' ? 'active' : ''} ${clock.running ? 'running' : 'fixed'}`}
+          disabled={!ready}
+          onClick={() => setPanel((p) => (p === 'time' ? null : 'time'))}
+        >
+          <Clock3 size={17} />
+          <span className="clock-tool-time">{clockLabel}</span>
+        </button>
+        <button
           title={tr('lightingLayers')}
           aria-label={tr('lightingLayers')}
-          aria-expanded={panel}
-          className={panel ? 'active' : ''}
-          onClick={() => setPanel((p) => !p)}
+          aria-expanded={panel === 'layers'}
+          aria-controls="layers-panel"
+          className={panel === 'layers' ? 'active' : ''}
+          onClick={() => setPanel((p) => (p === 'layers' ? null : 'layers'))}
         >
           <Layers size={19} />
         </button>
@@ -691,8 +726,138 @@ export default function Home() {
           <Maximize size={18} />
         </button>
       </div>
-      {panel && (
+      {panel === 'time' && (
         <section
+          id="time-panel"
+          className="settings-panel time-panel glass ui-chrome"
+          aria-label={tr('timeControls')}
+        >
+          <div className="settings-title">
+            <h2>
+              <Clock3 size={18} />
+              {tr('timeControls')}
+            </h2>
+            <button
+              className="icon-button"
+              aria-label={tr('closeTime')}
+              onClick={() => setPanel(null)}
+            >
+              <X size={17} />
+            </button>
+          </div>
+          <div className="sun-readout">
+            <Sun size={20} />
+            <span>
+              {clock.hour >= 6 && clock.hour < 18
+                ? tr('day')
+                : clock.hour >= 18 && clock.hour < 21
+                  ? tr('dusk')
+                  : tr('night')}
+            </span>
+            <strong>{clockLabel}</strong>
+          </div>
+          <label className="layer-row time-flow-switch">
+            <span>{tr('timeFlow')}</span>
+            <Switch
+              aria-label={tr('timeFlow')}
+              checked={clock.running}
+              onCheckedChange={(running) => changeClock({ running })}
+            />
+          </label>
+          <p className={`clock-state ${clock.running ? 'running' : 'fixed'}`}>
+            {clock.running ? <Play size={12} /> : <Pause size={12} />}
+            {tr(clock.running ? 'timeRunning' : 'timeFixed')}
+          </p>
+          <div className="settings-divider" />
+          <label className="clock-field-label" id="time-speed-label">
+            {tr('timeSpeed')}
+          </label>
+          <Select
+            value={String(clock.rate)}
+            onValueChange={(value) => {
+              if (value !== null) changeClock({ rate: Number(value) });
+            }}
+          >
+            <SelectTrigger
+              className="clock-rate-trigger"
+              aria-labelledby="time-speed-label"
+            >
+              <span>
+                {tr('timeRate', { rate: clock.rate })}
+                {clock.rate === 1
+                  ? ` · ${tr('realTime')}`
+                  : clock.rate === DEFAULT_CLOCK.rate
+                    ? ` · ${tr('timeDefault')}`
+                    : ''}
+              </span>
+            </SelectTrigger>
+            <SelectContent
+              finalFocus={restoreStreetFocus}
+              alignItemWithTrigger={false}
+              className="language-menu"
+            >
+              {CLOCK_RATES.map((rate) => (
+                <SelectItem key={rate} value={String(rate)}>
+                  {tr('timeRate', { rate })}
+                  {rate === 1
+                    ? ` · ${tr('realTime')}`
+                    : rate === DEFAULT_CLOCK.rate
+                      ? ` · ${tr('timeDefault')}`
+                      : ''}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <p className="clock-explanation">
+            {tr('timeRateHint', { minutes: number(clock.rate) })}
+            <br />
+            {tr('timeDayLength', { minutes: number(1440 / clock.rate) })}
+          </p>
+          <div className="settings-divider" />
+          <label className="clock-field-label">{tr('timeSeek')}</label>
+          <Slider
+            aria-label={tr('timeSeek')}
+            min={0}
+            max={1439}
+            step={1}
+            value={[Math.floor(clock.hour * 60)]}
+            onValueChange={(value) =>
+              changeClock({
+                hour: (Array.isArray(value) ? value[0] : value) / 60,
+              })
+            }
+          />
+          <div className="clock-range">
+            <span>00:00</span>
+            <span>12:00</span>
+            <span>23:59</span>
+          </div>
+          <div className="time-presets">
+            {[
+              { label: tr('morning'), hour: 8 },
+              { label: tr('afternoon'), hour: 15 },
+              { label: tr('sunset'), hour: 18 },
+              { label: tr('afterDark'), hour: 22 },
+            ].map((preset) => (
+              <button
+                key={preset.hour}
+                onClick={() => changeClock({ hour: preset.hour })}
+              >
+                {preset.label}
+              </button>
+            ))}
+          </div>
+          <p className="settings-note">
+            {tr(clock.running ? 'timeFlowHint' : 'timeFixedHint')}
+          </p>
+          <p className="clock-background-note">
+            {tr('timeBackgroundHint')} {tr('simulatedNote')}
+          </p>
+        </section>
+      )}
+      {panel === 'layers' && (
+        <section
+          id="layers-panel"
           className="settings-panel glass ui-chrome"
           aria-label={tr('lightingSettings')}
         >
@@ -701,46 +866,11 @@ export default function Home() {
             <button
               className="icon-button"
               aria-label={tr('closeSettings')}
-              onClick={() => setPanel(false)}
+              onClick={() => setPanel(null)}
             >
               <X size={17} />
             </button>
           </div>
-          <div className="sun-readout">
-            <Sun size={20} />
-            <span>
-              {settings.hour >= 6 && settings.hour < 18
-                ? tr('day')
-                : settings.hour >= 18 && settings.hour < 21
-                  ? tr('dusk')
-                  : tr('night')}
-            </span>
-            <strong>
-              {String(Math.floor(settings.hour)).padStart(2, '0')}:
-              {settings.hour % 1 ? '30' : '00'}
-            </strong>
-          </div>
-          <Slider
-            aria-label={tr('simulatedTime')}
-            min={0}
-            max={23.5}
-            step={0.5}
-            value={[settings.hour]}
-            onValueChange={(v) => change({ hour: Array.isArray(v) ? v[0] : v })}
-          />
-          <div className="time-presets">
-            {[
-              { label: tr('morning'), hour: 8 },
-              { label: tr('afternoon'), hour: 15 },
-              { label: tr('sunset'), hour: 18 },
-              { label: tr('afterDark'), hour: 22 },
-            ].map((t) => (
-              <button key={t.hour} onClick={() => change({ hour: t.hour })}>
-                {t.label}
-              </button>
-            ))}
-          </div>
-          <div className="settings-divider" />
           {[
             { key: 'buildings', label: tr('buildingsLayer') },
             { key: 'trees', label: tr('treesLayer') },
@@ -774,7 +904,6 @@ export default function Home() {
               {tr('balancedQuality')}
             </label>
           </RadioGroup>
-          <p className="settings-note">{tr('simulatedNote')}</p>
         </section>
       )}
       <section className="map-inset glass ui-chrome">
