@@ -14,12 +14,13 @@ English is the default for a first visit. The header language menu also offers F
 
 ## Explore / 操作
 
-- **鳥瞰 / Orbit:** drag to rotate, wheel or +/− to zoom, right-drag to pan. Eight landmark viewpoints, north-up reset, clickable minimap and an automatic city tour are included.
+- **鳥瞰 / Orbit:** drag to rotate, wheel or +/− to zoom, right-drag to pan. Ten landmark and railway viewpoints, north-up reset, clickable minimap and an automatic city tour are included.
 - **步行 / Walk:** drag the person in the mode bar onto the main map, or select Walk and click an open ground location. Zoom in before dropping for greater precision. W/S move, A/D turn, drag to look, Shift moves faster.
 - **駕車 / Drive:** drag the car onto the map, or select Drive and click near a road. The preview shows the actual snapped road position before starting; distant roads, water and building interiors are rejected. W/S throttle/reverse, A/D steer, Space brakes. Bridge decks and ground-level underpasses remain separate.
 - **重新放置 / Choose a new start:** use the button in street controls to return to a nearby aerial view and place again. Esc cancels placement. Mouse/touch map drags adjust the view without dropping; a tap places. Keyboard users can select a mode, focus the map and press Enter to start at its centre, or activate Start here for the previewed point. Gastown, Robson and Beach Avenue remain explicit quick starts.
 - **時間 / Time:** the separate clock button shows the current scene time. Time flows by default at 30× (one real minute is 30 city minutes; a full day takes 48 minutes). Choose 1×, 10×, 30×, 60×, 120× or 300×, set any minute of the day, or turn off “Let time flow” to fix the light at that moment. Walking, driving, traffic and water animation retain their normal speed. Scene time pauses while the tab is hidden. “Hide time” hides the toolbar’s numeric time while keeping the clock button and panel available; time is shown by default.
-- **圖層 / Layers:** control trees, buildings, moving traffic and labels. Choose detailed shadows or a lighter rendering mode.
+- **圖層 / Layers:** control trees, buildings, moving traffic, trains and labels. Choose detailed shadows or a lighter rendering mode.
+- **列車 / Trains:** a locomotive, coal tender and four coaches travel the Waterfront–Gastown railway with rising white chimney steam. Two four-car electric SkyTrains travel in opposite directions on the Expo elevated tracks near Science World. Open Layers and choose “Find steam train” or “Find SkyTrain” for a close view; trains are visible by default. Their speed is independent of the day/night clock.
 - **風景 / Capture:** export the current rendered view as PNG, or hide the interface for an immersive view. Esc restores controls and returns street modes to orbit.
 
 ## What is built
@@ -29,7 +30,7 @@ English is the default for a first visit. The header language menu also offers F
 - Actual coastlines, park boundaries, lakes, beaches and street lines; 810 park trail features and regional North Shore landforms.
 - **36,201 rendered trees** from public street-tree positions plus original forest infill; spatially chunked canopy detail changes with viewing distance.
 - Original Science World, Canada Place, BC Place, Harbour Centre and Vancouver House models; Burrard, Granville, Cambie and Lions Gate bridge structures.
-- Original façade patterns, Gastown shopfronts and steam clock, rooftop equipment, cars, ferries, sailboats and simulated night lighting.
+- Original façade patterns, Gastown shopfronts and steam clock, rooftop equipment, cars, ferries, sailboats, original moving train models and simulated night lighting.
 
 No Unreal Engine, finished third-party city model, Google imagery or copied reference-project code is used.
 
@@ -37,7 +38,9 @@ No Unreal Engine, finished third-party city model, Google imagery or copied refe
 
 This is a geographic visualization, not a photographic reconstruction or a certified digital twin. Source dates differ: core contours and shoreline date to 2002, measured building parts to 2009, supplemented by OSM records retrieved in September 2026. Terrain interpolation, procedural façades, representative signs, tree canopy, bridge heights and road widths are visual approximations. Buildings are seated on the displayed terrain; stored source base elevations remain available in the data. Outer North Shore and south-shore terrain provides coarse regional context.
 
-Street navigation is an exploration feature: simplified collision and vehicle motion are included, rather than a full traffic or driving simulation. Frame rates depend on GPU, viewport and settings. Final local Chrome reviews measured approximately 31–53 FPS across detailed street, bridge and peninsula views. See [source provenance and qualifications](DATA_SOURCES.md).
+Rail plan geometry comes from OpenStreetMap: approximately 1.12 km of waterfront railway and 855/894 m of each elevated Expo direction. Station canopies, building passages and tunnels are excluded. Heights, trains and repeated passes are illustrative; the steam service is fictional. Entire trains fade out at the cropped ends before a new pass starts.
+
+Street navigation is an exploration feature: simplified collision and vehicle motion are included, rather than a full traffic or driving simulation. Frame rates depend on GPU, viewport and settings. Original release Chrome reviews, before the train addition, measured approximately 31–53 FPS across detailed street, bridge and peninsula views. See [source provenance and qualifications](DATA_SOURCES.md).
 
 ## Run locally
 

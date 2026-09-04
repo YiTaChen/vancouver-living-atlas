@@ -28,6 +28,7 @@ import {
   Languages,
   PersonStanding,
   Clock3,
+  TrainFront,
 } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
@@ -315,6 +316,14 @@ export default function Home() {
   const selectView = (id: string) => {
     setTour(false);
     go(id);
+  };
+  const findTrain = (kind: 'steam' | 'skytrain') => {
+    if (!ready) return;
+    setTour(false);
+    setPanel(null);
+    setView(kind === 'steam' ? 'railway' : 'skytrain');
+    change({ mode: 'orbit', autoRotate: false, trains: true });
+    engine.current?.focusTrain(kind);
   };
   const current = VIEWS.find((v) => v.id === view)!;
   const capture = () => {
@@ -896,6 +905,7 @@ export default function Home() {
             { key: 'buildings', label: tr('buildingsLayer') },
             { key: 'trees', label: tr('treesLayer') },
             { key: 'traffic', label: tr('trafficLayer') },
+            { key: 'trains', label: tr('trainsLayer') },
             { key: 'labels', label: tr('labelsLayer') },
             { key: 'autoRotate', label: tr('autoRotate') },
           ].map((s) => (
@@ -908,6 +918,15 @@ export default function Home() {
               />
             </label>
           ))}
+          <div className="rail-actions">
+            <button disabled={!ready} onClick={() => findTrain('steam')}>
+              <TrainFront size={16} /> {tr('findSteamTrain')}
+            </button>
+            <button disabled={!ready} onClick={() => findTrain('skytrain')}>
+              <TrainFront size={16} /> {tr('findSkyTrain')}
+            </button>
+          </div>
+          <p className="clock-background-note">{tr('railNote')}</p>
           <div className="settings-divider" />
           <label className="quality-label">{tr('quality')}</label>
           <RadioGroup

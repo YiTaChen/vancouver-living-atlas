@@ -15,6 +15,7 @@ for (const name of [
   'terrain.json',
   'bridges.json',
   'trees.json',
+  'railways.json',
 ])
   JSON.parse(await readFile(path.join(root, 'data', name), 'utf8'));
 const files = await readdir(root, { recursive: true });

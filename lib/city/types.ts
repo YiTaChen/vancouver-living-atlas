@@ -29,6 +29,7 @@ export interface Settings {
   buildings: boolean;
   labels: boolean;
   traffic: boolean;
+  trains: boolean;
   terrain: boolean;
   autoRotate: boolean;
   quality: 'high' | 'balanced';
@@ -114,6 +115,28 @@ export const VIEWS: Viewpoint[] = [
     description: '沙灘、海堤與西端住宅區，構成溫哥華面向夕陽的海岸。',
   },
   {
+    id: 'railway',
+    name: 'Waterfront railway',
+    zh: '海濱鐵路',
+    coord: [-123.1044, 49.2849],
+    distance: 500,
+    azimuth: 0.05,
+    elevation: 0.68,
+    tag: '鐵路',
+    description: '沿著煤氣鎮海濱的軌道，觀看蒸汽列車與白煙。',
+  },
+  {
+    id: 'skytrain',
+    name: 'SkyTrain',
+    zh: 'SkyTrain 天車',
+    coord: [-123.103, 49.2758],
+    distance: 480,
+    azimuth: 1.0,
+    elevation: 0.7,
+    tag: '大眾運輸',
+    description: '科學世界附近的高架電動列車。',
+  },
+  {
     id: 'falsecreek',
     name: 'False Creek',
     zh: '福溪',
@@ -142,6 +165,7 @@ export const DEFAULT_SETTINGS: Settings = {
   buildings: true,
   labels: true,
   traffic: true,
+  trains: true,
   terrain: true,
   autoRotate: false,
   quality: 'high',

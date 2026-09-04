@@ -625,6 +625,30 @@ a {
   border-radius: 14px;
   padding: 17px 21px;
   z-index: 5;
+  max-height: calc(100dvh - 145px);
+  overflow-y: auto;
+}
+.rail-actions {
+  display: grid;
+  gap: 7px;
+}
+.rail-actions button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #ffffff22;
+  border-radius: 8px;
+  padding: 9px 10px;
+  color: #dce7ca;
+  background: #ffffff06;
+  font-size: 14px;
+  text-align: left;
+}
+.rail-actions button:hover {
+  background: #ffffff12;
+}
+.rail-actions button:disabled {
+  opacity: 0.45;
 }
 .settings-title {
   display: flex;

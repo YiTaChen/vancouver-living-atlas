@@ -16,6 +16,8 @@ import { StreetNavigation } from './navigation';
 import { MapPlacement } from './placement';
 import { CityClock, sunAngle, type ClockState } from './clock';
 import { createLandmarks } from './landmarks';
+import { createRailway, updateRailway, type Railway } from './railway';
+import type { TrainKind } from './rail-path';
 import {
   createNature,
   createStreetDetails,
@@ -64,6 +66,7 @@ export class CityEngine {
   landmarks = new THREE.Group();
   trafficGroup = new THREE.Group();
   traffic: Traffic | null = null;
+  railway: Railway | null = null;
   navigation: StreetNavigation | null = null;
   placement: MapPlacement | null = null;
   settings = { ...DEFAULT_SETTINGS };
@@ -246,6 +249,10 @@ export class CityEngine {
     if (tr.ok) this.data.trees = await tr.json();
     const ctx = await fetch('/data/context-terrain.json');
     if (ctx.ok) this.data.contextTerrain = await ctx.json();
+    const rail = await fetch('/data/railways.json');
+    if (!rail.ok)
+      throw new Error(`Could not load railway data (${rail.status})`);
+    this.data.railways = await rail.json();
     if (this.disposed) return;
     this.landPolys = this.data.land.features.flatMap((f: Feature) =>
       rings(f).map((p) => p.map((r) => r.map(project))),
@@ -267,6 +274,7 @@ export class CityEngine {
     createStreetfronts(this);
     createRoofDetails(this);
     this.traffic = createStreetDetails(this);
+    this.railway = createRailway(this);
     this.navigation = new StreetNavigation(this);
     this.placement = new MapPlacement(this);
     this.composer = new EffectComposer(this.renderer);
@@ -334,12 +342,23 @@ export class CityEngine {
         const materials = Array.isArray(object.material)
           ? object.material
           : [object.material];
-        if (materials.every((m) => m.transparent && !m.depthWrite))
+        if (
+          object.userData.railVehicle ||
+          materials.every((m) => m.transparent && !m.depthWrite)
+        )
           decorative.push(object);
       });
       const renderAO = this.ssao.render.bind(this.ssao);
       this.ssao.render = (...args) => {
-        const visible = decorative.filter((object) => object.visible);
+        const visible = decorative.filter((object) => {
+          const materials = Array.isArray(object.material)
+            ? object.material
+            : [object.material];
+          return (
+            object.visible &&
+            materials.every((m) => m.transparent && !m.depthWrite)
+          );
+        });
         visible.forEach((object) => {
           object.visible = false;
         });
@@ -910,6 +929,45 @@ export class CityEngine {
       .add(this.controls.target);
     this.controls.update();
   }
+  focusTrain(kind: TrainKind) {
+    const train = this.railway?.trains.find((t) => t.kind === kind);
+    if (!train) return;
+    this.placement?.cancel();
+    this.navigation?.setMode('orbit');
+    this.settings.mode = 'orbit';
+    this.settings.trains = true;
+    this.railway!.group.visible = true;
+    if (!train.cars.some((c) => c.group.visible)) {
+      // A cropped open route has an off-scene interval between passes. Bring
+      // its next service into view only when no existing car would teleport.
+      const span = train.path.length + train.length + 100;
+      train.phase =
+        (train.path.length * 0.4 + 40 - this.railway!.elapsed * train.speed) /
+        span;
+      updateRailway(this, this.railway!, 0);
+    }
+    const car = train.cars.find((c) => c.group.visible) || train.cars[0];
+    const target = car.group.visible
+      ? car.group.position.clone()
+      : train.path.sample(train.path.length * 0.5);
+    const direction = new THREE.Vector3(0, 0, 1).applyQuaternion(
+      car.group.quaternion,
+    );
+    const side = new THREE.Vector3(direction.z, 0, -direction.x);
+    const position = target
+      .clone()
+      .addScaledVector(side, 110)
+      .addScaledVector(direction, -65);
+    position.y += 75;
+    this.transition = {
+      start: performance.now(),
+      duration: 1400,
+      from: this.camera.position.clone(),
+      to: position,
+      fromTarget: this.controls.target.clone(),
+      toTarget: target.addScaledVector(direction, 18),
+    };
+  }
   applySettings(settings: Settings) {
     if (settings.mode !== this.settings.mode)
       this.navigation?.setMode(settings.mode);
@@ -934,6 +992,7 @@ export class CityEngine {
       this.sun.target.position.copy(this.controls.target);
     else this.sun.target.position.set(0, 0, 0);
     this.trafficGroup.visible = settings.traffic;
+    if (this.railway) this.railway.group.visible = settings.trains;
     this.landmarks.visible = settings.buildings;
     this.updateLighting(true);
   }
@@ -1023,6 +1082,12 @@ export class CityEngine {
     }
     if (this.traffic && this.settings.traffic)
       updateTraffic(this, this.traffic, time / 1000);
+    if (this.railway && this.settings.trains)
+      updateRailway(
+        this,
+        this.railway,
+        this.lastTime ? (time - this.lastTime) / 1000 : 0,
+      );
     if (this.settings.mode === 'orbit') this.controls.update();
     else this.navigation?.update((time - this.lastTime) / 1000);
     if (
@@ -1108,6 +1173,8 @@ export class CityEngine {
       stanley: 105,
       science: 65,
       canada: 70,
+      railway: 12,
+      skytrain: 18,
       english: 7,
       falsecreek: 12,
       lions: 130,
