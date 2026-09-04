@@ -1,0 +1,843 @@
+{
+  "inputCityParts": 7762,
+  "inputOsmExplicitParts": 1400,
+  "discardedRedundantOsmParents": 29,
+  "invalidOsmIntervals": [
+    {
+      "id": "osm-361655450",
+      "height": 25.0,
+      "minHeight": 25.0
+    },
+    {
+      "id": "osm-363433253",
+      "height": 26.0,
+      "minHeight": 26.0
+    },
+    {
+      "id": "osm-363433263",
+      "height": 160.0,
+      "minHeight": 161.0
+    },
+    {
+      "id": "osm-363437361",
+      "height": 26.0,
+      "minHeight": 28.0
+    },
+    {
+      "id": "osm-363646489",
+      "height": 40.0,
+      "minHeight": 44.5
+    }
+  ],
+  "osmPartsExcludedForLandmarks": 29,
+  "validOsmSolidsBeforeUnion": 1337,
+  "osmStructures": 538,
+  "reconciledOsmSlabs": 1125,
+  "cityPartsRemoved": 1266,
+  "cityPartsFootprintClipped": 247,
+  "cityPartsWithVerticalCuts": 8,
+  "outputCitySolids": 6505,
+  "outputCombined": 7630,
+  "invalidOutputCount": 0,
+  "volumetricOverlapPairsAbovePoint1M2": 0,
+  "volumetricOverlapAreaM2": 0,
+  "volumetricOverlapM3": 0,
+  "landmarkOverlapPairsAbovePoint1M2": 0,
+  "largestVolumetricOverlaps": [],
+  "landmarkOverlaps": [],
+  "removedParents": [
+    {
+      "id": "osm-49670432",
+      "name": "1967 Barclay",
+      "height": 36.46,
+      "partsCoverage": 1.0,
+      "partIds": [
+        "osm-1374790771",
+        "osm-1374790775",
+        "osm-1374790776",
+        "osm-1374790772"
+      ]
+    },
+    {
+      "id": "osm-51185671",
+      "name": null,
+      "height": 33.14,
+      "partsCoverage": 1.0,
+      "partIds": [
+        "osm-387423509",
+        "osm-387422105",
+        "osm-387422103",
+        "osm-387422102"
+      ]
+    },
+    {
+      "id": "osm-69701736",
+      "name": "Former Vancouver Law Courts National Historic Site of Canada",
+      "height": 13.0,
+      "partsCoverage": 0.77169,
+      "partIds": [
+        "osm-361964123",
+        "osm-380105927",
+        "osm-380105931",
+        "osm-361964117",
+        "osm-361964114",
+        "osm-361964116",
+        "osm-361964115",
+        "osm-361964126",
+        "osm-361964127",
+        "osm-361964119",
+        "osm-361964125",
+        "osm-361964121"
+      ]
+    },
+    {
+      "id": "osm-91998089",
+      "name": "One Wall Centre",
+      "height": 150.0,
+      "partsCoverage": 1.0,
+      "partIds": [
+        "osm-1363418928",
+        "osm-1363418929",
+        "osm-91998091"
+      ]
+    },
+    {
+      "id": "osm-91998136",
+      "name": "Hyatt Vancouver Downtown Alberni",
+      "height": 201.0,
+      "partsCoverage": 1.0,
+      "partIds": [
+        "osm-360939771",
+        "osm-360939768",
+        "osm-360939770",
+        "osm-360939769",
+        "osm-360939774",
+        "osm-360939775",
+        "osm-360939772"
+      ]
+    },
+    {
+      "id": "osm-104911667",
+      "name": "Helmcken House",
+      "height": 17.0,
+      "partsCoverage": 1.0,
+      "partIds": [
+        "osm-1375664251",
+        "osm-1375664252"
+      ]
+    },
+    {
+      "id": "osm-114505107",
+      "name": "TD Tower",
+      "height": 126.0,
+      "partsCoverage": 0.99988,
+      "partIds": [
+        "osm-1012160355",
+        "osm-1373537715",
+        "osm-359247705"
+      ]
+    },
+    {
+      "id": "osm-136251328",
+      "name": "Europe Hotel Annex",
+      "height": 14.0,
+      "partsCoverage": 1.0,
+      "partIds": [
+        "osm-363651943",
+        "osm-363651942"
+      ]
+    },
+    {
+      "id": "osm-138256216",
+      "name": "PwC Place",
+      "height": 10.0,
+      "partsCoverage": 0.90304,
+      "partIds": [
+        "osm-361497588",
+        "osm-361497587",
+        "osm-361617590",
+        "osm-361497586"
+      ]
+    },
+    {
+      "id": "osm-143682591",
+      "name": "Guinness Tower",
+      "height": 100.0,
+      "partsCoverage": 1.0,
+      "partIds": [
+        "osm-1363668230",
+        "osm-360607256",
+        "osm-1363668229"
+      ]
+    },
+    {
+      "id": "osm-143683934",
+      "name": "Royal Bank Tower",
+      "height": 138.0,
+      "partsCoverage": 1.0,
+      "partIds": [
+        "osm-362301811",
+        "osm-360780245"
+      ]
+    },
+    {
+      "id": "osm-143683953",
+      "name": null,
+      "height": 4.4,
+      "partsCoverage": 0.72372,
+      "partIds": [
+        "osm-1105669955",
+        "osm-1105671466",
+        "osm-744530909",
+        "osm-1105669954",
+        "osm-1105671465",
+        "osm-1105671467"
+      ]
+    },
+    {
+      "id": "osm-143683956",
+      "name": null,
+      "height": 14.0,
+      "partsCoverage": 1.0,
+      "partIds": [
+        "osm-360780244",
+        "osm-362301812"
+      ]
+    },
+    {
+      "id": "osm-143683980",
+      "name": "Waterfront Centre",
+      "height": 91.75,
+      "partsCoverage": 1.0,
+      "partIds": [
+        "osm-363651937",
+        "osm-361497598",
+        "osm-361497597",
+        "osm-361497596",
+        "osm-361497594",
+        "osm-361497593",
+        "osm-361497595",
+        "osm-361497602",
+        "osm-361497599",
+        "osm-361497600",
+        "osm-361497601"
+      ]
+    },
+    {
+      "id": "osm-175917283",
+      "name": "The Electra",
+      "height": 5.61,
+      "partsCoverage": 0.96186,
+      "partIds": [
+        "osm-959603370",
+        "osm-328666292",
+        "osm-958533234",
+        "osm-958533235",
+        "osm-961164632"
+      ]
+    },
+    {
+      "id": "osm-197598620",
+      "name": null,
+      "height": 15.0,
+      "partsCoverage": 1.0,
+      "partIds": [
+        "osm-363822100",
+        "osm-363822101",
+        "osm-363822102"
+      ]
+    },
+    {
+      "id": "osm-238793090",
+      "name": "London Place",
+      "height": 46.33,
+      "partsCoverage": 0.87025,
+      "partIds": [
+        "osm-387422113",
+        "osm-387422112",
+        "osm-387422110",
+        "osm-387422106",
+        "osm-387422109"
+      ]
+    },
+    {
+      "id": "osm-241416716",
+      "name": "Vancouver House",
+      "height": 7.0,
+      "partsCoverage": 0.70548,
+      "partIds": [
+        "osm-361644756",
+        "osm-361644757"
+      ]
+    },
+    {
+      "id": "osm-241745565",
+      "name": null,
+      "height": 24.0,
+      "partsCoverage": 1.0,
+      "partIds": [
+        "osm-360670341",
+        "osm-363410806",
+        "osm-363410807",
+        "osm-363410808",
+        "osm-360670340"
+      ]
+    },
+    {
+      "id": "osm-250247117",
+      "name": "Pivotal Building",
+      "height": 36.9,
+      "partsCoverage": 1.0,
+      "partIds": [
+        "osm-436799578",
+        "osm-1369236079",
+        "osm-1214443891"
+      ]
+    },
+    {
+      "id": "osm-284146036",
+      "name": "The Wellspring",
+      "height": 39.8,
+      "partsCoverage": 1.0,
+      "partIds": [
+        "osm-1372757652",
+        "osm-1372757650",
+        "osm-1372757648",
+        "osm-1372757651",
+        "osm-1372757647",
+        "osm-1372757649"
+      ]
+    },
+    {
+      "id": "osm-299783476",
+      "name": "Flack Block",
+      "height": 16.57,
+      "partsCoverage": 1.0,
+      "partIds": [
+        "osm-363425821",
+        "osm-363425820",
+        "osm-363425819",
+        "osm-1131226272"
+      ]
+    },
+    {
+      "id": "osm-301874669",
+      "name": "The Centre",
+      "height": 20.15,
+      "partsCoverage": 0.72686,
+      "partIds": [
+        "osm-1046215835",
+        "osm-1042799648"
+      ]
+    },
+    {
+      "id": "osm-311573634",
+      "name": "The Qube",
+      "height": 57.0,
+      "partsCoverage": 1.0,
+      "partIds": [
+        "osm-361617589",
+        "osm-1372161223"
+      ]
+    },
+    {
+      "id": "osm-360437746",
+      "name": "Jameson House",
+      "height": 10.0,
+      "partsCoverage": 1.0,
+      "partIds": [
+        "osm-361501711",
+        "osm-361501709",
+        "osm-361501710",
+        "osm-363646483"
+      ]
+    },
+    {
+      "id": "osm-361463297",
+      "name": "MNP Tower",
+      "height": 144.0,
+      "partsCoverage": 1.0,
+      "partIds": [
+        "osm-361463298",
+        "osm-1363668228"
+      ]
+    },
+    {
+      "id": "osm-362187535",
+      "name": "Paradox Vancouver",
+      "height": 10.0,
+      "partsCoverage": 1.0,
+      "partIds": [
+        "osm-362187537",
+        "osm-362300477",
+        "osm-362187538",
+        "osm-362300478",
+        "osm-305776179",
+        "osm-362300479",
+        "osm-362187539",
+        "osm-362300480",
+        "osm-362187540",
+        "osm-362300481",
+        "osm-362187536",
+        "osm-362300482",
+        "osm-362307867",
+        "osm-362347387"
+      ]
+    },
+    {
+      "id": "osm-363413667",
+      "name": null,
+      "height": 24.0,
+      "partsCoverage": 1.0,
+      "partIds": [
+        "osm-363413672",
+        "osm-1364375306",
+        "osm-363413669",
+        "osm-363413671",
+        "osm-1364375295",
+        "osm-363413670"
+      ]
+    },
+    {
+      "id": "osm-964467734",
+      "name": "The Private Residences at Hotel Georgia",
+      "height": 48.0,
+      "partsCoverage": 0.72731,
+      "partIds": [
+        "osm-360781840"
+      ]
+    }
+  ],
+  "excludedLandmarks": [
+    {
+      "name": "Science World",
+      "sourceIds": [
+        "osm-37084312"
+      ],
+      "bufferM": 2,
+      "areaM2": 6683.24,
+      "purpose": "Reserved for original procedural landmark model",
+      "source": "OpenStreetMap"
+    },
+    {
+      "name": "BC Place",
+      "sourceIds": [
+        "osm-24705904"
+      ],
+      "bufferM": 2,
+      "areaM2": 40007.55,
+      "purpose": "Reserved for original procedural landmark model",
+      "source": "OpenStreetMap"
+    },
+    {
+      "name": "Canada Place",
+      "sourceIds": [
+        "osm-223635729"
+      ],
+      "bufferM": 2,
+      "areaM2": 37275.38,
+      "purpose": "Reserved for original procedural landmark model",
+      "source": "OpenStreetMap"
+    },
+    {
+      "name": "Harbour Centre",
+      "sourceIds": [
+        "osm-1371268997",
+        "osm-143682595"
+      ],
+      "bufferM": 2,
+      "areaM2": 6956.64,
+      "purpose": "Reserved for original procedural landmark model",
+      "source": "OpenStreetMap"
+    },
+    {
+      "name": "Vancouver House",
+      "sourceIds": [
+        "osm-742009401",
+        "osm-1092241825"
+      ],
+      "bufferM": 2,
+      "areaM2": 4148.71,
+      "purpose": "Reserved for original procedural landmark model",
+      "source": "OpenStreetMap"
+    }
+  ],
+  "skylineStructures": [
+    {
+      "id": "osm-structure-10",
+      "name": "Vancouver Centre / Scotia Tower",
+      "sourceIds": [
+        "osm-51185380",
+        "osm-197598624",
+        "osm-359024657",
+        "osm-359898177"
+      ],
+      "parentIds": [
+        "osm-359024657",
+        "osm-51185380"
+      ],
+      "base": 32.5,
+      "minHeight": 0.0,
+      "height": 147.0,
+      "slabs": 4,
+      "centroid": [
+        -123.11800490013738,
+        49.28190108691596
+      ]
+    },
+    {
+      "id": "osm-structure-15",
+      "name": "One Wall Centre",
+      "sourceIds": [
+        "osm-91998091"
+      ],
+      "parentIds": [
+        "osm-91998089"
+      ],
+      "base": 32.59,
+      "minHeight": 0.0,
+      "height": 150.0,
+      "slabs": 1,
+      "centroid": [
+        -123.12554069343278,
+        49.28052237339211
+      ]
+    },
+    {
+      "id": "osm-structure-16",
+      "name": "Rogers Tower",
+      "sourceIds": [
+        "osm-91998107",
+        "osm-361502266"
+      ],
+      "parentIds": [
+        "osm-361502265"
+      ],
+      "base": 14.0,
+      "minHeight": 0.0,
+      "height": 149.0,
+      "slabs": 2,
+      "centroid": [
+        -123.1178277287548,
+        49.288411964546185
+      ]
+    },
+    {
+      "id": "osm-structure-21",
+      "name": "Granville Square",
+      "sourceIds": [
+        "osm-128409616",
+        "osm-128409618"
+      ],
+      "parentIds": [
+        "osm-128409618"
+      ],
+      "base": 3.81,
+      "minHeight": 0.0,
+      "height": 142.0,
+      "slabs": 2,
+      "centroid": [
+        -123.11237158599911,
+        49.28672945919051
+      ]
+    },
+    {
+      "id": "osm-structure-54",
+      "name": "Bentall 4 - Deloitte Building",
+      "sourceIds": [
+        "osm-143683955"
+      ],
+      "parentIds": [
+        "osm-143683955"
+      ],
+      "base": 22.0,
+      "minHeight": 0.0,
+      "height": 138.0,
+      "slabs": 1,
+      "centroid": [
+        -123.12129748818008,
+        49.286485746478974
+      ]
+    },
+    {
+      "id": "osm-structure-77",
+      "name": "Three Harbour Green",
+      "sourceIds": [
+        "osm-224544078",
+        "osm-361790280",
+        "osm-361790281",
+        "osm-361790283",
+        "osm-361790285",
+        "osm-361790286",
+        "osm-361792026"
+      ],
+      "parentIds": [
+        "osm-224544078"
+      ],
+      "base": 10.71,
+      "minHeight": 0.0,
+      "height": 135.0,
+      "slabs": 7,
+      "centroid": [
+        -123.11911473810709,
+        49.28888826405369
+      ]
+    },
+    {
+      "id": "osm-structure-142",
+      "name": "Paradox Vancouver",
+      "sourceIds": [
+        "osm-305776179",
+        "osm-362187536",
+        "osm-362187537",
+        "osm-362187538",
+        "osm-362187539",
+        "osm-362187540",
+        "osm-362300477",
+        "osm-362300478",
+        "osm-362300479",
+        "osm-362300480",
+        "osm-362300481",
+        "osm-362300482",
+        "osm-362307867",
+        "osm-362347387"
+      ],
+      "parentIds": [
+        "osm-362187535"
+      ],
+      "base": 27.5,
+      "minHeight": 0.0,
+      "height": 188.0,
+      "slabs": 14,
+      "centroid": [
+        -123.12418835636117,
+        49.28683759082088
+      ]
+    },
+    {
+      "id": "osm-structure-188",
+      "name": "TD Tower",
+      "sourceIds": [
+        "osm-359247705",
+        "osm-1373537715"
+      ],
+      "parentIds": [
+        "osm-114505107"
+      ],
+      "base": 30.03,
+      "minHeight": 0.0,
+      "height": 130.0,
+      "slabs": 2,
+      "centroid": [
+        -123.11910658478834,
+        49.282718810271945
+      ]
+    },
+    {
+      "id": "osm-structure-192",
+      "name": null,
+      "sourceIds": [
+        "osm-360438242",
+        "osm-360607252",
+        "osm-360607253",
+        "osm-360607254",
+        "osm-360607257",
+        "osm-360607258",
+        "osm-360607259"
+      ],
+      "parentIds": [
+        "osm-143683979"
+      ],
+      "base": 13.46,
+      "minHeight": 0.0,
+      "height": 140.0,
+      "slabs": 6,
+      "centroid": [
+        -123.11662974293934,
+        49.288121207857785
+      ]
+    },
+    {
+      "id": "osm-structure-200",
+      "name": "Royal Bank Tower",
+      "sourceIds": [
+        "osm-360780245",
+        "osm-362301811"
+      ],
+      "parentIds": [
+        "osm-143683934"
+      ],
+      "base": 25.51,
+      "minHeight": 0.0,
+      "height": 141.0,
+      "slabs": 2,
+      "centroid": [
+        -123.12158246527412,
+        49.28530141381942
+      ]
+    },
+    {
+      "id": "osm-structure-201",
+      "name": "The Private Residences at Hotel Georgia",
+      "sourceIds": [
+        "osm-360781840"
+      ],
+      "parentIds": [
+        "osm-964467734"
+      ],
+      "base": 25.0,
+      "minHeight": 48.0,
+      "height": 154.0,
+      "slabs": 1,
+      "centroid": [
+        -123.1186842876929,
+        49.28380521658114
+      ]
+    },
+    {
+      "id": "osm-structure-202",
+      "name": "Living Shangri-La",
+      "sourceIds": [
+        "osm-360939768",
+        "osm-360939769",
+        "osm-360939770",
+        "osm-360939771",
+        "osm-360939772",
+        "osm-360939773",
+        "osm-360939774",
+        "osm-360939775"
+      ],
+      "parentIds": [
+        "osm-360939773",
+        "osm-91998136"
+      ],
+      "base": 30.86,
+      "minHeight": 0.0,
+      "height": 201.0,
+      "slabs": 7,
+      "centroid": [
+        -123.12376774061826,
+        49.285716543184066
+      ]
+    },
+    {
+      "id": "osm-structure-204",
+      "name": "Quadra Club / MNP Tower",
+      "sourceIds": [
+        "osm-361463298",
+        "osm-1104112436"
+      ],
+      "parentIds": [
+        "osm-1104112436",
+        "osm-361463297"
+      ],
+      "base": 14.51,
+      "minHeight": 0.0,
+      "height": 144.0,
+      "slabs": 2,
+      "centroid": [
+        -123.11763034425657,
+        49.2875861653328
+      ]
+    },
+    {
+      "id": "osm-structure-205",
+      "name": "Park Place",
+      "sourceIds": [
+        "osm-361468076",
+        "osm-361468080",
+        "osm-361468082",
+        "osm-361468084",
+        "osm-361468087"
+      ],
+      "parentIds": [
+        "osm-260069760"
+      ],
+      "base": 22.2,
+      "minHeight": 0.0,
+      "height": 142.0,
+      "slabs": 5,
+      "centroid": [
+        -123.11906738969608,
+        49.28495403260325
+      ]
+    },
+    {
+      "id": "osm-structure-209",
+      "name": "Patina",
+      "sourceIds": [
+        "osm-361500874",
+        "osm-361500875",
+        "osm-361500876",
+        "osm-361500877",
+        "osm-361500878",
+        "osm-363822103"
+      ],
+      "parentIds": [
+        "osm-197598617"
+      ],
+      "base": 34.5,
+      "minHeight": 0.0,
+      "height": 135.0,
+      "slabs": 6,
+      "centroid": [
+        -123.12596124749945,
+        49.282166706384906
+      ]
+    },
+    {
+      "id": "osm-structure-513",
+      "name": "Telus Garden Residences",
+      "sourceIds": [
+        "osm-1097852702"
+      ],
+      "parentIds": [
+        "osm-241416719"
+      ],
+      "base": 26.59,
+      "minHeight": 0.0,
+      "height": 136.0,
+      "slabs": 1,
+      "centroid": [
+        -123.11772413169524,
+        49.28054186902863
+      ]
+    },
+    {
+      "id": "osm-structure-520",
+      "name": null,
+      "sourceIds": [
+        "osm-1248977468"
+      ],
+      "parentIds": [
+        "osm-1071649623"
+      ],
+      "base": 30.56,
+      "minHeight": 0.0,
+      "height": 167.64,
+      "slabs": 1,
+      "centroid": [
+        -123.12972734918213,
+        49.277725467049265
+      ]
+    },
+    {
+      "id": "osm-structure-537",
+      "name": "The Butterfly",
+      "sourceIds": [
+        "osm-1524215058"
+      ],
+      "parentIds": [
+        "osm-653660958"
+      ],
+      "base": 41.51,
+      "minHeight": 0.0,
+      "height": 178.6,
+      "slabs": 1,
+      "centroid": [
+        -123.12655157927543,
+        49.28185222803486
+      ]
+    }
+  ]
+}

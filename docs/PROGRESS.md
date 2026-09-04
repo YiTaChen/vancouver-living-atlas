@@ -28,3 +28,12 @@ Original explorable Vancouver covering all Downtown, Science World and Stanley P
 - Added first visual direction: full-screen city with deep maritime controls and bilingual labels.
 - TypeScript check passed. Local route returns HTTP 200. Dedicated preview uses port 4317 so another app's existing tab is unaffected.
 - Next review gate: inspect rendered city, correct geometric/lighting artifacts, then add original landmarks and near-ground detail.
+
+## Stage 3 — landscape, original landmarks and detailed skyline
+
+- Added five original landmark complexes, bridge architecture, shore edges, lake surfaces and geographic park trails.
+- Added actual public street trees plus procedural forest canopy, moving road traffic, sailboats and False Creek ferries.
+- Reconciled City/OSM building data: 7,630 solids, including 201m Shangri-La, 188m Paradox and 150m One Wall Centre. Dataset checks found zero invalid solids or volumetric overlap >0.1m²; five custom landmarks have dedicated exclusion zones.
+- Added original code-generated tileable brick, asphalt, concrete and glass textures with MIT source.
+- Manager browser review caught excessive water pattern contrast and park z-fighting. Reduced waves; moved park color into terrain vertices; corrected lighting.
+- Independent architecture review found bridge alignment and BC Place orientation discrepancies. BC Place correction applied; measured bridge approach assets are being integrated in the next stage.
