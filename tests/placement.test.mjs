@@ -381,6 +381,7 @@ const { StreetNavigation } = await import(
     three: import.meta.resolve('three'),
     './geo': geoUrl,
     './bridges': bridgeUrl,
+    './placement-geometry': geometryUrl,
     './boat-controller': cityModule('boat-controller'),
     './landmark-footprints.json': landmarkUrl,
   })
@@ -738,4 +739,184 @@ test('boat helm uses continuous thrust on screen, physical keys and free look wi
   nav.setMode('orbit');
   assert(!nav.boat.model.visible && !nav.boat.wake.visible);
   nav.destroy();
+});
+
+test('Walk and Drive switch in place on ground and bridges without selecting another road', () => {
+  for (const surface of ['ground', 'bridge']) {
+    const { e, nav } = navigationFixture();
+    const point = {
+      x: 7.13,
+      z: 6.91,
+      y: surface === 'bridge' ? 60 : 2.45,
+      yaw: 0.63,
+      surface,
+      name: '',
+      snappedDistance: 0,
+    };
+    nav.startAt('walk', point);
+    nav.pitch = 0.27;
+    e.data.roads.features = []; // No road lookup or road snap is needed.
+    for (const mode of ['drive', 'walk', 'drive']) {
+      nav.keys.add('w');
+      nav.speed = 12;
+      nav.setMode(mode);
+      assert.equal(nav.mode, mode);
+      assert.deepEqual(nav.position.toArray(), [point.x, point.y, point.z]);
+      assert.equal(nav.yaw, point.yaw);
+      assert.equal(nav.pitch, 0.27);
+      assert.equal(nav.surface, surface);
+      assert.equal(nav.speed, 0);
+      assert.equal(nav.keys.size, 0);
+      assert.equal(nav.car.visible, mode === 'drive');
+      assert.equal(e.controls.enabled, false);
+      assert.equal(e.transition, null);
+      assert(
+        e.camera.position.distanceTo(nav.position) < 25,
+        'camera stays at street distance',
+      );
+    }
+    nav.destroy();
+  }
+});
+test('direct street switching never takes over Boat, orbit, or a requested water mode', () => {
+  const { e, nav } = navigationFixture();
+  e.waterWorld = {
+    canOccupy: () => true,
+    at: () => ({ id: 'sea', kind: 'sea', level: 0.1 }),
+  };
+  assert.equal(nav.switchStreetMode('walk'), false);
+  nav.startAt('boat', {
+    x: 20,
+    y: 0.1,
+    z: 30,
+    yaw: 0.4,
+    surface: 'water',
+    waterId: 'sea',
+  });
+  const before = nav.position.toArray();
+  for (const mode of ['walk', 'drive'])
+    assert.equal(nav.switchStreetMode(mode), false);
+  assert.equal(nav.mode, 'boat');
+  assert.deepEqual(nav.position.toArray(), before);
+  assert(nav.boat.model.visible);
+  nav.startAt('walk', { x: 0, y: 2.45, z: 0, yaw: 0, surface: 'ground' });
+  assert.equal(nav.switchStreetMode('boat'), false);
+  assert.equal(nav.switchStreetMode('orbit'), false);
+  assert.equal(nav.mode, 'walk');
+  nav.destroy();
+});
+
+test('pointer and keyboard mode selection share in-place switching while Boat and active placement still select a location', () => {
+  const source = readFileSync(
+    new URL('../app/page.tsx', import.meta.url),
+    'utf8',
+  );
+  const ast = ts.createSourceFile(
+    'page.tsx',
+    source,
+    ts.ScriptTarget.Latest,
+    true,
+    ts.ScriptKind.TSX,
+  );
+  const home = ast.statements.find(
+    (n) => ts.isFunctionDeclaration(n) && n.name?.text === 'Home',
+  );
+  const names = ['switchInScene', 'switchMode', 'dragFigure'];
+  const actions = home.body.statements
+    .filter(
+      (n) =>
+        ts.isVariableStatement(n) &&
+        n.declarationList.declarations.some((d) =>
+          names.includes(d.name.getText(ast)),
+        ),
+    )
+    .map((n) => n.getText(ast))
+    .join('\n');
+  const code = ts.transpileModule(actions, {
+    compilerOptions: {
+      target: ts.ScriptTarget.ES2022,
+      module: ts.ModuleKind.ESNext,
+    },
+  }).outputText;
+  for (const entry of ['pointer', 'keyboard'])
+    for (const [from, to, placing, expected] of [
+      ['walk', 'drive', null, 'switch'],
+      ['drive', 'walk', null, 'switch'],
+      ['drive', 'drive', null, 'switch'],
+      ['boat', 'walk', null, 'place'],
+      ['boat', 'drive', null, 'place'],
+      ['orbit', 'walk', null, 'place'],
+      ['walk', 'boat', null, 'place'],
+      ['walk', 'drive', 'walk', 'place'],
+    ]) {
+      const calls = [],
+        nav = {
+          mode: from,
+          switchStreetMode(mode) {
+            if (
+              !['walk', 'drive'].includes(this.mode) ||
+              !['walk', 'drive'].includes(mode)
+            )
+              return false;
+            this.mode = mode;
+            calls.push('switch');
+            return true;
+          },
+        };
+      const bindings = {
+        ready: true,
+        engine: {
+          current: {
+            navigation: nav,
+            renderer: { domElement: { focus: () => calls.push('focus') } },
+            placement: {
+              mode: placing,
+              startDrag: () => calls.push('drag'),
+              cancel() {},
+            },
+          },
+        },
+        setTour() {},
+        setPanel() {},
+        setNotice() {},
+        change: (patch) => calls.push(patch.mode),
+        go() {},
+        view: 'canada',
+        beginPlacement: () => calls.push('place'),
+      };
+      const handlers = new Function(
+        ...Object.keys(bindings),
+        code + '\nreturn {switchMode,dragFigure};',
+      )(...Object.values(bindings));
+      if (entry === 'keyboard') handlers.switchMode(to);
+      else
+        handlers.dragFigure(
+          {
+            button: 0,
+            preventDefault() {},
+            stopPropagation() {},
+            currentTarget: { setPointerCapture: () => calls.push('capture') },
+            pointerId: 1,
+            nativeEvent: {},
+          },
+          to,
+        );
+      assert.equal(
+        calls[0],
+        expected,
+        `${entry} ${from} to ${to} with placement ${placing}`,
+      );
+      if (expected === 'switch') {
+        assert.equal(nav.mode, to);
+        assert(!calls.includes('capture'));
+        assert(!calls.includes('drag'));
+        assert(!calls.includes('place'));
+        assert.equal(
+          calls.includes('focus'),
+          entry === 'pointer',
+          'keyboard selection retains radio focus',
+        );
+      } else if (entry === 'pointer')
+        assert.deepEqual(calls, ['place', 'capture', 'drag']);
+    }
 });

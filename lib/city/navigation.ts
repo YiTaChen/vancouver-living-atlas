@@ -4,7 +4,11 @@ import type { CityEngine } from './engine';
 import { project, rings, lines, inPolygon } from './geo';
 import type { Feature } from './types';
 import landmarkFootprints from './landmark-footprints.json';
-import type { PlacementPoint, TravelMode } from './placement-geometry';
+import {
+  canSwitchStreetMode,
+  type PlacementPoint,
+  type TravelMode,
+} from './placement-geometry';
 import { BoatController } from './boat-controller';
 export class StreetNavigation {
   mode: 'orbit' | TravelMode = 'orbit';
@@ -269,8 +273,23 @@ export class StreetNavigation {
     this.e.renderer.domElement.focus({ preventScroll: true });
     return true;
   }
+  switchStreetMode(mode: 'orbit' | TravelMode) {
+    if (!canSwitchStreetMode(this.mode, mode)) return false;
+    if (mode !== this.mode) {
+      this.blur();
+      this.mode = mode;
+      this.car.visible = mode === 'drive';
+      this.e.controls.enabled = false;
+      this.e.transition = null;
+      // Retain exact position, ground/bridge layer and look direction.
+      this.snapCamera = true;
+      this.update(0);
+    }
+    return true;
+  }
   setMode(mode: 'orbit' | TravelMode, streetName?: string) {
     if (mode === this.mode && !streetName) return;
+    if (!streetName && this.switchStreetMode(mode)) return;
     if (mode === 'boat') {
       this.startWater(streetName || 'coal-harbour');
       return;

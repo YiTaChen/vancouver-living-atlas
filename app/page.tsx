@@ -68,7 +68,10 @@ import {
 } from '@/lib/i18n';
 import type { CityEngine } from '@/lib/city/engine';
 import type { PlacementPreview } from '@/lib/city/placement';
-import type { TravelMode } from '@/lib/city/placement-geometry';
+import {
+  canSwitchStreetMode,
+  type TravelMode,
+} from '@/lib/city/placement-geometry';
 import {
   DEFAULT_CLOCK,
   CLOCK_RATES,
@@ -359,13 +362,28 @@ export default function Home() {
     change({ mode: 'orbit', autoRotate: false });
     engine.current.placement.begin(mode);
   };
+  const switchInScene = (mode: TravelMode) => {
+    const city = engine.current;
+    if (
+      !ready ||
+      city?.placement?.mode ||
+      !city?.navigation?.switchStreetMode(mode)
+    )
+      return false;
+    setTour(false);
+    setPanel(null);
+    setNotice('');
+    change({ mode, autoRotate: false });
+    return true;
+  };
   const switchMode = (mode: string) => {
     if (mode === 'orbit') {
       setTour(false);
       engine.current?.placement?.cancel();
       change({ mode: 'orbit', autoRotate: false });
       go(view);
-    } else beginPlacement(mode as TravelMode);
+    } else if (!switchInScene(mode as TravelMode))
+      beginPlacement(mode as TravelMode);
   };
   const dragFigure = (
     event: React.PointerEvent<HTMLElement>,
@@ -374,6 +392,10 @@ export default function Home() {
     if (event.button !== 0 || !ready) return;
     event.preventDefault();
     event.stopPropagation();
+    if (switchInScene(mode)) {
+      engine.current?.renderer.domElement.focus({ preventScroll: true });
+      return;
+    }
     beginPlacement(mode);
     event.currentTarget.setPointerCapture(event.pointerId);
     engine.current?.placement?.startDrag(event.nativeEvent);
@@ -491,11 +513,12 @@ export default function Home() {
             { id: 'boat', name: tr('boat'), icon: Ship },
           ].map((m) => (
             <label
-              className={`mode-pill ${(placing || settings.mode) === m.id ? 'active' : ''} ${m.id !== 'orbit' ? 'figure-handle' : ''}`}
+              className={`mode-pill ${(placing || settings.mode) === m.id ? 'active' : ''} ${m.id !== 'orbit' && (placing || !canSwitchStreetMode(settings.mode, m.id)) ? 'figure-handle' : ''}`}
               key={m.id}
               title={
-                m.id === 'orbit'
-                  ? tr('orbit')
+                m.id === 'orbit' ||
+                (!placing && canSwitchStreetMode(settings.mode, m.id))
+                  ? m.name
                   : tr(
                       m.id === 'walk'
                         ? 'placementDragWalk'

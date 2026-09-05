@@ -1,5 +1,12 @@
 export type StreetMode = 'walk' | 'drive';
 export type TravelMode = StreetMode | 'boat';
+/** Land travel modes share the existing scene position; water needs a new drop. */
+export function canSwitchStreetMode(from: string, to: string) {
+  return (
+    (from === 'walk' || from === 'drive') && (to === 'walk' || to === 'drive')
+  );
+}
+
 export interface RoadSegment {
   a: number[];
   b: number[];
