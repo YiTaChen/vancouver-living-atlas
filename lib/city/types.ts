@@ -30,10 +30,11 @@ export interface Settings {
   labels: boolean;
   traffic: boolean;
   trains: boolean;
+  harbour: boolean;
   terrain: boolean;
   autoRotate: boolean;
   quality: 'high' | 'balanced';
-  mode: 'orbit' | 'walk' | 'drive';
+  mode: 'orbit' | 'walk' | 'drive' | 'boat';
 }
 export interface Viewpoint {
   id: string;
@@ -104,6 +105,17 @@ export const VIEWS: Viewpoint[] = [
       '五座白色帆頂面向 Burrard Inlet，港灣、遊輪碼頭與市中心在這裡相遇。',
   },
   {
+    id: 'harbour',
+    name: 'Harbour departures',
+    zh: '港灣出航',
+    coord: [-123.117, 49.292],
+    distance: 1100,
+    azimuth: -0.45,
+    elevation: 0.65,
+    tag: '海港',
+    description: '水上飛機、直升機與郵輪的港灣航線。',
+  },
+  {
     id: 'english',
     name: 'English Bay',
     zh: '英吉利灣',
@@ -166,6 +178,7 @@ export const DEFAULT_SETTINGS: Settings = {
   labels: true,
   traffic: true,
   trains: true,
+  harbour: true,
   terrain: true,
   autoRotate: false,
   quality: 'high',

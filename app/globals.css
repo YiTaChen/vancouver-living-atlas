@@ -1656,3 +1656,30 @@ a {
     max-height: calc(100dvh - 180px);
   }
 }
+
+.boat-neutral {
+  border: 1px solid #77978d66;
+  border-radius: 7px;
+  background: #213b39;
+  color: #e7efdf;
+  padding: 6px 12px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  touch-action: none;
+}
+.dpad button {
+  touch-action: none;
+}
+@media (max-width: 640px) {
+  .mode-pill {
+    padding: 8px 9px;
+    font-size: 11px;
+    gap: 5px;
+  }
+  .mode-switch {
+    max-width: calc(100vw - 24px);
+  }
+  .mode-radio {
+    gap: 2px;
+  }
+}

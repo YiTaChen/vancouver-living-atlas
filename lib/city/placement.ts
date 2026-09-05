@@ -5,7 +5,7 @@ import {
   resolvePlacement,
   type PlacementResult,
   type PlacementWorld,
-  type StreetMode,
+  type TravelMode,
 } from './placement-geometry';
 
 export interface PlacementPreview {
@@ -18,10 +18,10 @@ export interface PlacementPreview {
 
 /** Pointer placement uses the rendered terrain plus explicit bridge deck surfaces. */
 export class MapPlacement {
-  mode: StreetMode | null = null;
+  mode: TravelMode | null = null;
   preview: PlacementPreview | null = null;
   onPreview: (value: PlacementPreview | null) => void = () => {};
-  onCommit: (mode: StreetMode) => void = () => {};
+  onCommit: (mode: TravelMode) => void = () => {};
   onCancel: () => void = () => {};
   raycaster = new THREE.Raycaster();
   bridgeMesh: THREE.Mesh;
@@ -114,7 +114,7 @@ export class MapPlacement {
     e.renderer.domElement.addEventListener('keydown', this.keyDown);
     e.controls.addEventListener('change', this.queue);
   }
-  begin(mode: StreetMode) {
+  begin(mode: TravelMode) {
     const wasStreet = this.e.navigation!.mode !== 'orbit';
     const start = this.e.navigation!.position.clone();
     if (!this.mode) this.savedDamping = this.e.controls.enableDamping;
@@ -246,7 +246,13 @@ export class MapPlacement {
       this.e.camera,
     );
     const hits = this.raycaster.intersectObjects(
-      [this.e.terrain.children[0], this.bridgeMesh, this.e.water],
+      [
+        this.e.terrain.children[0],
+        this.bridgeMesh,
+        this.e.water,
+        ...(this.e.data.waterMeshes || []),
+        ...(this.e.data.harbourDockMesh ? [this.e.data.harbourDockMesh] : []),
+      ],
       false,
     );
     const hit = hits[0];
@@ -270,7 +276,31 @@ export class MapPlacement {
       ),
     );
     let result: PlacementResult;
-    if (hit.object === this.e.water)
+    if (this.mode === 'boat') {
+      const direction = this.e.camera.getWorldDirection(new THREE.Vector3());
+      const yaw = Math.atan2(direction.x, direction.z),
+        surface = this.e.waterWorld.at(point.x, point.z);
+      const isWater =
+        hit.object === this.e.water || Boolean(hit.object.userData.waterId);
+      result =
+        isWater &&
+        surface &&
+        this.e.waterWorld.canOccupy(point.x, point.z, yaw, surface.id)
+          ? {
+              valid: true,
+              point: {
+                x: point.x,
+                y: surface.level,
+                z: point.z,
+                yaw,
+                surface: 'water',
+                waterId: surface.id,
+                name: surface.name,
+                snappedDistance: 0,
+              },
+            }
+          : { valid: false, reason: 'placementWaterRequired' };
+    } else if (hit.object === this.e.water || hit.object.userData.waterId)
       result = { valid: false, reason: 'placementInvalid' };
     else {
       const direction = this.e.camera.getWorldDirection(new THREE.Vector3());
@@ -286,18 +316,19 @@ export class MapPlacement {
         radius,
         Math.atan2(direction.x, direction.z),
       );
-      // Do not place through a visible tower or a landmark roof.
-      if (result.valid) {
-        this.raycaster.far = hit.distance - 2;
-        const obstacles = [
-          ...(this.e.buildings.visible ? this.e.buildings.children : []),
-          ...this.e.landmarks.children,
-        ];
-        const front = this.raycaster.intersectObjects(obstacles, true)[0];
-        if (front && front.point.y > point.y + 3)
-          result = { valid: false, reason: 'placementInvalid' };
-      }
     }
+    // Do not place through a visible tower or a landmark roof.
+    if (result.valid) {
+      this.raycaster.far = hit.distance - 2;
+      const obstacles = [
+        ...(this.e.buildings.visible ? this.e.buildings.children : []),
+        ...this.e.landmarks.children,
+      ];
+      const front = this.raycaster.intersectObjects(obstacles, true)[0];
+      if (front && front.point.y > point.y + 3)
+        result = { valid: false, reason: 'placementInvalid' };
+    }
+
     const position = result.valid
       ? new THREE.Vector3(result.point.x, result.point.y, result.point.z)
       : point;
@@ -324,8 +355,8 @@ export class MapPlacement {
     if (!this.mode || !this.preview?.result.valid) return false;
     const mode = this.mode,
       point = this.preview.result.point;
+    if (this.e.navigation!.startAt(mode, point) === false) return false;
     this.finish();
-    this.e.navigation!.startAt(mode, point);
     this.e.settings.mode = mode;
     this.onCommit(mode);
     return true;

@@ -4,21 +4,24 @@ import type { CityEngine } from './engine';
 import { project, rings, lines, inPolygon } from './geo';
 import type { Feature } from './types';
 import landmarkFootprints from './landmark-footprints.json';
-import type { PlacementPoint, StreetMode } from './placement-geometry';
+import type { PlacementPoint, TravelMode } from './placement-geometry';
+import { BoatController } from './boat-controller';
 export class StreetNavigation {
-  mode: 'orbit' | 'walk' | 'drive' = 'orbit';
+  mode: 'orbit' | TravelMode = 'orbit';
   keys = new Set<string>();
   position = new THREE.Vector3();
   yaw = 0;
   pitch = 0.04;
   speed = 0;
-  surface: 'ground' | 'bridge' = 'ground';
+  surface: 'ground' | 'bridge' | 'water' = 'ground';
   snapCamera = false;
   dragging = false;
   last = [0, 0];
   car = new THREE.Group();
+  boat: BoatController;
   collisions = new Map<string, number[][][][]>();
   constructor(public e: CityEngine) {
+    this.boat = new BoatController(e);
     for (const f of [
       ...e.data.buildings.features,
       ...landmarkFootprints.features,
@@ -194,6 +197,10 @@ export class StreetNavigation {
     this.keys.clear();
     this.dragging = false;
     this.speed = 0;
+    if (this.boat) {
+      this.boat.pulse = null;
+      this.boat.state.throttle = 0;
+    }
   };
   pointerDown = (ev: PointerEvent) => {
     if (this.mode === 'orbit') return;
@@ -203,7 +210,9 @@ export class StreetNavigation {
   };
   pointerMove = (ev: PointerEvent) => {
     if (!this.dragging || this.mode === 'orbit') return;
-    this.yaw -= (ev.clientX - this.last[0]) * 0.004;
+    if (this.mode === 'boat')
+      this.boat.lookYaw -= (ev.clientX - this.last[0]) * 0.004;
+    else this.yaw -= (ev.clientX - this.last[0]) * 0.004;
     this.pitch = THREE.MathUtils.clamp(
       this.pitch + (ev.clientY - this.last[1]) * 0.003,
       -0.7,
@@ -243,7 +252,9 @@ export class StreetNavigation {
         ?.some((p) => inPolygon([x, z], p)) || false
     );
   }
-  startAt(mode: StreetMode, point: PlacementPoint) {
+  startAt(mode: TravelMode, point: PlacementPoint) {
+    if (mode === 'boat' && !this.boat.start(point)) return false;
+    if (mode !== 'boat') this.boat.stop();
     this.blur();
     this.mode = mode;
     this.car.visible = mode === 'drive';
@@ -256,9 +267,15 @@ export class StreetNavigation {
     this.snapCamera = true;
     this.update(0);
     this.e.renderer.domElement.focus({ preventScroll: true });
+    return true;
   }
-  setMode(mode: 'orbit' | 'walk' | 'drive', streetName?: string) {
+  setMode(mode: 'orbit' | TravelMode, streetName?: string) {
     if (mode === this.mode && !streetName) return;
+    if (mode === 'boat') {
+      this.startWater(streetName || 'coal-harbour');
+      return;
+    }
+    this.boat.stop();
     this.keys.clear();
     this.speed = 0;
     this.mode = mode;
@@ -329,9 +346,37 @@ export class StreetNavigation {
     this.update(0.016);
     this.e.renderer.domElement.focus();
   }
+  startWater(id: string) {
+    const start = this.e.waterWorld.start(id);
+    if (!start) return false;
+    return this.startAt('boat', {
+      x: start.x,
+      z: start.z,
+      y: start.surface.level,
+      yaw: 0,
+      surface: 'water',
+      waterId: start.surface.id,
+      name: start.surface.name,
+      snappedDistance: 0,
+    });
+  }
+  hold(direction: string, active: boolean) {
+    const key: Record<string, string> = {
+      forward: 'w',
+      backward: 's',
+      left: 'a',
+      right: 'd',
+      neutral: ' ',
+    };
+    if (!key[direction]) return;
+    if (active) {
+      this.keys.add(key[direction]);
+      this.boat.pulse = null;
+    } else this.keys.delete(key[direction]);
+  }
   startBridge(kind: string) {
     const s = this.e.data.bridges?.mainSpines.find((s: any) => s.kind === kind);
-    if (!s || this.mode === 'orbit') return;
+    if (!s || this.mode === 'orbit' || this.mode === 'boat') return;
     const a = project(s.start),
       b = project(s.end);
     this.keys.clear();
@@ -351,6 +396,10 @@ export class StreetNavigation {
   step(direction: string) {
     if (this.mode === 'orbit') return;
     this.e.renderer.domElement.focus({ preventScroll: true });
+    if (this.mode === 'boat') {
+      this.boat.pulse = { key: direction, remaining: 0.7 };
+      return;
+    }
     if (direction === 'left') this.yaw += 0.15;
     else if (direction === 'right') this.yaw -= 0.15;
     else {
@@ -360,6 +409,7 @@ export class StreetNavigation {
     this.update(0.016);
   }
   move(dx: number, dz: number) {
+    if (this.mode === 'boat') return;
     if (Math.hypot(dx, dz) < 1e-9) return;
     const steps = Math.max(1, Math.ceil(Math.hypot(dx, dz) / 1.5));
     for (let i = 0; i < steps; i++) {
@@ -385,6 +435,19 @@ export class StreetNavigation {
         Number(pressed('w', 'arrowup')) - Number(pressed('s', 'arrowdown')),
       turn =
         Number(pressed('a', 'arrowleft')) - Number(pressed('d', 'arrowright'));
+    if (this.mode === 'boat') {
+      this.boat.update(
+        dt,
+        { thrust: forward, turn, neutral: pressed(' ') },
+        this.pitch,
+        this.snapCamera,
+      );
+      this.position.copy(this.boat.model.position);
+      this.yaw = this.boat.state.yaw;
+      this.speed = this.boat.state.speed;
+      this.snapCamera = false;
+      return;
+    }
     if (this.mode === 'drive') {
       this.speed = THREE.MathUtils.clamp(this.speed + forward * dt * 8, -5, 21);
       if (!forward) this.speed *= Math.pow(0.78, dt);

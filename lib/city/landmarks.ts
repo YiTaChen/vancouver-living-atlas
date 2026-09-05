@@ -52,6 +52,24 @@ class Builder {
   }
   box(w: number, h: number, d: number, color: number, x = 0, y = 0, z = 0) {
     this.add(new THREE.BoxGeometry(w, h, d), color, x, y, z);
+    // Share grounded decks and bridge columns with water navigation.
+    if (this.origin.y + y - h / 2 < 2 && this.origin.y + y + h / 2 > 0) {
+      const ring = [
+        [-1, -1],
+        [-1, 1],
+        [1, 1],
+        [1, -1],
+        [-1, -1],
+      ].map(([a, b]) => {
+        const px = x + (a * w) / 2,
+          pz = z + (b * d) / 2;
+        return [
+          this.origin.x + Math.cos(this.yaw) * px + Math.sin(this.yaw) * pz,
+          this.origin.z - Math.sin(this.yaw) * px + Math.cos(this.yaw) * pz,
+        ];
+      });
+      (this.engine.data.solidWaterFootprints ||= []).push([ring]);
+    }
   }
   cylinder(
     rt: number,

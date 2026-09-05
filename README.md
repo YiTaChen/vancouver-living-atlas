@@ -85,3 +85,9 @@ firebase deploy --only hosting --project vancouver-living-atlas-yita
 ```
 
 `firebase.json` publishes only `dist/client`. The build verifier checks English initial HTML, all five locale bundles and the main geographic assets. `.firebaserc` selects the owner's dedicated `vancouver-living-atlas-yita` project. To publish your own copy, pass your own project ID explicitly. The existing `npm run build` still builds the Sites-compatible version.
+
+### Explore the harbour
+
+Choose **Boat** to the right of Drive, then drag the boat icon onto open water (zoom in for a precise launch). Use **W/S** for throttle/reverse, **A/D** for the rudder, and **Space** for neutral. Release the throttle to coast; drag to look around. Touch controls use press-and-hold. Coal Harbour, False Creek and Lost Lagoon are available as quick starts. Sea waves and boat inertia differ from calm lake motion; the whole hull stops at shores and docks.
+
+The Layers panel contains a **Harbour** switch and **Find floatplane / helicopter / cruise ship** controls. Aircraft and cruises follow original local demonstration paths based on verified service destinations; this is not live traffic or a navigation chart. Private boats remain moored. [Harbour sources and precision](docs/HARBOUR_SOURCES.md).

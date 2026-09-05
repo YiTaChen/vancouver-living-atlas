@@ -3,6 +3,7 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import type { CityEngine } from './engine';
 import { project, rings, lines, inPolygon, hash } from './geo';
 import type { Feature } from './types';
+import { lakeSurfaces } from './water-world';
 export interface Traffic {
   mesh: THREE.InstancedMesh;
   cabins: THREE.InstancedMesh;
@@ -20,20 +21,19 @@ export function createNature(e: CityEngine) {
   const woodPolys = e.data.context.features
     .filter((f: Feature) => f.properties.class === 'wood')
     .flatMap((f: Feature) => rings(f).map((p) => p.map((r) => r.map(project))));
-  const waters = e.data.context.features
-    .filter((f: Feature) => f.properties.class === 'water')
-    .flatMap((f: Feature) => rings(f).map((p) => p.map((r) => r.map(project))));
+  const surfaces = lakeSurfaces(e.data.context, (x, z) => e.elevation(x, z));
+  const waters = surfaces.map((s) => s.polygon!);
+  e.data.waterSurfaces = surfaces;
+  e.data.waterMeshes = [];
   const beaches = e.data.context.features
     .filter((f: Feature) => f.properties.class === 'beach')
     .flatMap((f: Feature) => rings(f).map((p) => p.map((r) => r.map(project))));
   e.data.waterPolys = waters;
   e.data.beachPolys = beaches;
   // Inland water lies at the local lake shore elevation, never at sea level.
-  for (const poly of waters) {
-    const heights = poly[0]
-        .map((p: number[]) => e.elevation(...(p as [number, number])))
-        .sort((a: number, b: number) => a - b),
-      level = heights[Math.floor(heights.length * 0.22)] + 1.2,
+  for (const surface of surfaces) {
+    const poly = surface.polygon!,
+      level = surface.level,
       pts = poly.map((r: number[][]) =>
         r
           .slice(0, -1)
@@ -55,6 +55,8 @@ export function createNature(e: CityEngine) {
         side: THREE.DoubleSide,
       }),
     );
+    mesh.userData.waterId = surface.id;
+    e.data.waterMeshes.push(mesh);
     e.terrain.add(mesh);
   }
   for (const poly of beaches) e.polygonMesh(poly, 0xc9b98d, 1.6);
@@ -439,61 +441,6 @@ export function createStreetDetails(e: CityEngine): Traffic {
   body.frustumCulled = cabins.frustumCulled = false;
   e.trafficGroup.add(body, cabins);
   const boats: THREE.Group[] = [];
-  for (let i = 0; i < 20; i++) {
-    const boat = new THREE.Group(),
-      hull = new THREE.Mesh(
-        new THREE.CylinderGeometry(1, 1, 1, 6),
-        new THREE.MeshStandardMaterial({ color: 0xf2eddc, roughness: 0.7 }),
-      );
-    hull.scale.set(2.6, 1.1, 6);
-    hull.position.y = 1;
-    boat.add(hull);
-    const top = new THREE.Mesh(
-      new THREE.BoxGeometry(3.6, 2.4, 5.8),
-      new THREE.MeshStandardMaterial({ color: i < 5 ? 0xbb6942 : 0xe2ded0 }),
-    );
-    top.position.y = 2.3;
-    boat.add(top);
-    if (i >= 5) {
-      const mast = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.09, 0.09, 16, 5),
-        new THREE.MeshStandardMaterial({ color: 0xd6d6bd }),
-      );
-      mast.position.y = 9;
-      boat.add(mast);
-      const sail = new THREE.BufferGeometry().setFromPoints([
-        new THREE.Vector3(0, 4, -0.2),
-        new THREE.Vector3(0, 16, -0.2),
-        new THREE.Vector3(0, 4, 5),
-      ]);
-      sail.computeVertexNormals();
-      boat.add(
-        new THREE.Mesh(
-          sail,
-          new THREE.MeshStandardMaterial({
-            color: 0xeae5d4,
-            side: THREE.DoubleSide,
-          }),
-        ),
-      );
-    }
-    const wake = new THREE.Mesh(
-      new THREE.ConeGeometry(4, 20, 3),
-      new THREE.MeshBasicMaterial({
-        color: 0xc6e7df,
-        transparent: true,
-        opacity: 0.14,
-        depthWrite: false,
-      }),
-    );
-    wake.rotation.x = -Math.PI / 2;
-    wake.scale.z = 0.03;
-    wake.position.set(0, 0.25, 12);
-    boat.add(wake);
-    boat.userData.index = i;
-    e.trafficGroup.add(boat);
-    boats.push(boat);
-  }
   return { mesh: body, cabins, lamps: lightCaps, routes, boats };
 }
 const dummy = new THREE.Object3D();
@@ -512,38 +459,4 @@ export function updateTraffic(e: CityEngine, traffic: Traffic, time: number) {
   });
   traffic.mesh.instanceMatrix.needsUpdate = true;
   traffic.cabins.instanceMatrix.needsUpdate = true;
-  const ferryPath = [
-    [-123.1394, 49.2744],
-    [-123.1304, 49.2713],
-    [-123.1198, 49.2711],
-    [-123.1135, 49.2716],
-    [-123.1064, 49.2729],
-  ].map(project);
-  traffic.boats.forEach((boat, i) => {
-    if (i < 5) {
-      const t = (time * 0.011 + i * 0.8) % 8,
-        p = t > 4 ? 8 - t : t,
-        j = Math.min(3, Math.floor(p)),
-        u = p - j,
-        a = ferryPath[j],
-        b = ferryPath[j + 1];
-      boat.position.set(
-        THREE.MathUtils.lerp(a[0], b[0], u),
-        0,
-        THREE.MathUtils.lerp(a[1], b[1], u),
-      );
-      boat.rotation.y =
-        Math.atan2(b[0] - a[0], b[1] - a[1]) + (t > 4 ? Math.PI : 0);
-    } else {
-      const lon = -123.16 + hash(i) * 0.018,
-        lat = 49.283 + hash(i + 40) * 0.011,
-        p = project([lon, lat]);
-      boat.position.set(
-        p[0] + Math.sin(time * 0.01 + i) * 45,
-        Math.sin(time + i) * 0.15,
-        p[1] + Math.cos(time * 0.009 + i) * 25,
-      );
-      boat.rotation.y = i * 0.8;
-    }
-  });
 }

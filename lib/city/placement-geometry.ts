@@ -1,4 +1,5 @@
 export type StreetMode = 'walk' | 'drive';
+export type TravelMode = StreetMode | 'boat';
 export interface RoadSegment {
   a: number[];
   b: number[];
@@ -12,7 +13,8 @@ export interface PlacementPoint {
   y: number;
   z: number;
   yaw: number;
-  surface: 'ground' | 'bridge';
+  surface: 'ground' | 'bridge' | 'water';
+  waterId?: string;
   name: string;
   snappedDistance: number;
 }
@@ -20,7 +22,11 @@ export type PlacementResult =
   | { valid: true; point: PlacementPoint }
   | {
       valid: false;
-      reason: 'placementInvalid' | 'placementRoadRequired' | 'placementOutside';
+      reason:
+        | 'placementInvalid'
+        | 'placementRoadRequired'
+        | 'placementOutside'
+        | 'placementWaterRequired';
     };
 
 /** Nearest position on the whole segment, including short segments and endpoints. */

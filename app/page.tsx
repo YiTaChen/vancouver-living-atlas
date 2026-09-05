@@ -29,6 +29,9 @@ import {
   PersonStanding,
   Clock3,
   TrainFront,
+  Ship,
+  Plane,
+  Helicopter,
 } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
@@ -65,7 +68,7 @@ import {
 } from '@/lib/i18n';
 import type { CityEngine } from '@/lib/city/engine';
 import type { PlacementPreview } from '@/lib/city/placement';
-import type { StreetMode } from '@/lib/city/placement-geometry';
+import type { TravelMode } from '@/lib/city/placement-geometry';
 import {
   DEFAULT_CLOCK,
   CLOCK_RATES,
@@ -114,7 +117,7 @@ export default function Home() {
     [tour, setTour] = useState(false),
     [clean, setClean] = useState(false),
     [notice, setNotice] = useState('');
-  const [placing, setPlacing] = useState<StreetMode | null>(null);
+  const [placing, setPlacing] = useState<TravelMode | null>(null);
   const [placementPreview, setPlacementPreview] =
     useState<PlacementPreview | null>(null);
   const [stats, setStats] = useState<SceneStats>({
@@ -325,6 +328,14 @@ export default function Home() {
     change({ mode: 'orbit', autoRotate: false, trains: true });
     engine.current?.focusTrain(kind);
   };
+  const findHarbour = (kind: 'cruise' | 'seaplane' | 'helicopter') => {
+    if (!ready) return;
+    setTour(false);
+    setPanel(null);
+    setView('harbour');
+    change({ mode: 'orbit', autoRotate: false, harbour: true });
+    engine.current?.focusHarbour(kind);
+  };
   const current = VIEWS.find((v) => v.id === view)!;
   const capture = () => {
     const url = engine.current?.screenshot();
@@ -335,7 +346,7 @@ export default function Home() {
     a.click();
     setNotice('savedImage');
   };
-  const beginPlacement = (mode: StreetMode) => {
+  const beginPlacement = (mode: TravelMode) => {
     if (!ready || !engine.current?.placement) {
       setNotice('placementUnavailable');
       return;
@@ -354,11 +365,11 @@ export default function Home() {
       engine.current?.placement?.cancel();
       change({ mode: 'orbit', autoRotate: false });
       go(view);
-    } else beginPlacement(mode as StreetMode);
+    } else beginPlacement(mode as TravelMode);
   };
   const dragFigure = (
     event: React.PointerEvent<HTMLElement>,
-    mode: StreetMode,
+    mode: TravelMode,
   ) => {
     if (event.button !== 0 || !ready) return;
     event.preventDefault();
@@ -377,6 +388,29 @@ export default function Home() {
     change({ mode: actual, autoRotate: false });
     setNotice('streetNotice');
   };
+  const helmControl = (direction: string) => ({
+    onPointerDown: (event: React.PointerEvent<HTMLButtonElement>) => {
+      if (settings.mode !== 'boat') return;
+      event.preventDefault();
+      event.currentTarget.setPointerCapture(event.pointerId);
+      engine.current?.navigation?.hold(direction, true);
+    },
+    onPointerUp: () => {
+      if (settings.mode === 'boat')
+        engine.current?.navigation?.hold(direction, false);
+    },
+    onPointerCancel: () => engine.current?.navigation?.hold(direction, false),
+    onLostPointerCapture: () =>
+      engine.current?.navigation?.hold(direction, false),
+    onClick: (event: React.MouseEvent<HTMLButtonElement>) => {
+      if (settings.mode !== 'boat' || event.detail === 0) {
+        if (direction === 'neutral') {
+          if (engine.current?.navigation)
+            engine.current.navigation.boat.state.throttle = 0;
+        } else engine.current?.navigation?.step(direction);
+      }
+    },
+  });
   return (
     <main
       className={`atlas ${clean ? 'clean' : ''} ${settings.mode !== 'orbit' ? 'street-mode' : ''} ${placing ? 'placement-mode' : ''}`}
@@ -454,6 +488,7 @@ export default function Home() {
             { id: 'orbit', name: tr('orbit'), icon: Orbit },
             { id: 'walk', name: tr('walk'), icon: PersonStanding },
             { id: 'drive', name: tr('drive'), icon: Car },
+            { id: 'boat', name: tr('boat'), icon: Ship },
           ].map((m) => (
             <label
               className={`mode-pill ${(placing || settings.mode) === m.id ? 'active' : ''} ${m.id !== 'orbit' ? 'figure-handle' : ''}`}
@@ -464,13 +499,15 @@ export default function Home() {
                   : tr(
                       m.id === 'walk'
                         ? 'placementDragWalk'
-                        : 'placementDragDrive',
+                        : m.id === 'boat'
+                          ? 'placementDragBoat'
+                          : 'placementDragDrive',
                     )
               }
               onPointerDownCapture={
                 m.id === 'orbit'
                   ? undefined
-                  : (event) => dragFigure(event, m.id as StreetMode)
+                  : (event) => dragFigure(event, m.id as TravelMode)
               }
               onClickCapture={
                 m.id === 'orbit'
@@ -498,7 +535,13 @@ export default function Home() {
         <>
           <section
             className="placement-panel glass ui-chrome"
-            aria-label={tr(placing === 'walk' ? 'placeWalk' : 'placeDrive')}
+            aria-label={tr(
+              placing === 'walk'
+                ? 'placeWalk'
+                : placing === 'boat'
+                  ? 'placeBoat'
+                  : 'placeDrive',
+            )}
           >
             <div className="placement-heading">
               <button
@@ -506,7 +549,9 @@ export default function Home() {
                 aria-label={tr(
                   placing === 'walk'
                     ? 'placementDragWalk'
-                    : 'placementDragDrive',
+                    : placing === 'boat'
+                      ? 'placementDragBoat'
+                      : 'placementDragDrive',
                 )}
                 onPointerDown={(event) => dragFigure(event, placing)}
                 onClick={(event) => {
@@ -518,11 +563,21 @@ export default function Home() {
               >
                 {placing === 'walk' ? (
                   <PersonStanding size={29} />
+                ) : placing === 'boat' ? (
+                  <Ship size={29} />
                 ) : (
                   <Car size={29} />
                 )}
               </button>
-              <h2>{tr(placing === 'walk' ? 'placeWalk' : 'placeDrive')}</h2>
+              <h2>
+                {tr(
+                  placing === 'walk'
+                    ? 'placeWalk'
+                    : placing === 'boat'
+                      ? 'placeBoat'
+                      : 'placeDrive',
+                )}
+              </h2>
               <button
                 className="icon-button placement-cancel"
                 aria-label={tr('cancelPlacement')}
@@ -535,7 +590,11 @@ export default function Home() {
             <p>{tr('placementHint')}</p>
             <p className="placement-detail">
               {tr(
-                placing === 'walk' ? 'placementWalkHint' : 'placementDriveHint',
+                placing === 'walk'
+                  ? 'placementWalkHint'
+                  : placing === 'boat'
+                    ? 'placementBoatHint'
+                    : 'placementDriveHint',
               )}
             </p>
             <div
@@ -587,11 +646,18 @@ export default function Home() {
             </div>
             <div className="placement-quick">
               <span>{tr('placementQuick')}</span>
-              {[
-                ['Gastown', 'WATER ST'],
-                ['Robson', 'ROBSON ST'],
-                ['Beach Ave', 'BEACH AV'],
-              ].map(([label, street]) => (
+              {(placing === 'boat'
+                ? [
+                    [tr('coalHarbour'), 'coal-harbour'],
+                    [tr('falseCreek'), 'false-creek'],
+                    [tr('lostLagoon'), 'lost-lagoon'],
+                  ]
+                : [
+                    ['Gastown', 'WATER ST'],
+                    ['Robson', 'ROBSON ST'],
+                    ['Beach Ave', 'BEACH AV'],
+                  ]
+              ).map(([label, street]) => (
                 <button key={street} onClick={() => quickStart(street)}>
                   {label}
                 </button>
@@ -610,6 +676,8 @@ export default function Home() {
             >
               {placing === 'walk' ? (
                 <PersonStanding size={30} />
+              ) : placing === 'boat' ? (
+                <Ship size={30} />
               ) : (
                 <Car size={30} />
               )}
@@ -632,7 +700,9 @@ export default function Home() {
               className={`view-button ${view === v.id ? 'selected' : ''}`}
               onClick={() => selectView(v.id)}
             >
-              <span className="view-number">0{i + 1}</span>
+              <span className="view-number">
+                {String(i + 1).padStart(2, '0')}
+              </span>
               <span>
                 <b>{viewText(locale, v.id, 'name')}</b>
                 <small>{viewText(locale, v.id, 'tag')}</small>
@@ -908,6 +978,7 @@ export default function Home() {
             { key: 'trees', label: tr('treesLayer') },
             { key: 'traffic', label: tr('trafficLayer') },
             { key: 'trains', label: tr('trainsLayer') },
+            { key: 'harbour', label: tr('harbourLayer') },
             { key: 'labels', label: tr('labelsLayer') },
             { key: 'autoRotate', label: tr('autoRotate') },
           ].map((s) => (
@@ -929,6 +1000,37 @@ export default function Home() {
             </button>
           </div>
           <p className="clock-background-note">{tr('railNote')}</p>
+          <div className="rail-actions">
+            <button
+              onClick={() => {
+                setPanel(null);
+                change({ harbour: true });
+                selectView('harbour');
+              }}
+            >
+              <Ship size={16} />
+              {tr('findHarbour')}
+            </button>
+          </div>
+          <div className="rail-actions">
+            {(
+              [
+                { id: 'seaplane', icon: Plane, label: 'findSeaplane' },
+                { id: 'helicopter', icon: Helicopter, label: 'findHelicopter' },
+                { id: 'cruise', icon: Ship, label: 'findCruise' },
+              ] as const
+            ).map((a) => (
+              <button
+                key={a.id}
+                disabled={!ready}
+                onClick={() => findHarbour(a.id)}
+              >
+                <a.icon size={16} />
+                {tr(a.label)}
+              </button>
+            ))}
+          </div>
+          <p className="clock-background-note">{tr('harbourNote')}</p>
           <div className="settings-divider" />
           <label className="quality-label">{tr('quality')}</label>
           <RadioGroup
@@ -972,78 +1074,89 @@ export default function Home() {
         <div className="street-controls glass ui-chrome">
           <div className="street-title">
             <span>
-              {settings.mode === 'drive' ? tr('streetDrive') : tr('streetWalk')}
+              {settings.mode === 'drive'
+                ? tr('streetDrive')
+                : settings.mode === 'boat'
+                  ? tr('streetBoat')
+                  : tr('streetWalk')}
             </span>
-            {settings.mode === 'drive' && (
+            {(settings.mode === 'drive' || settings.mode === 'boat') && (
               <b>
-                {Math.abs(stats.speed || 0)} <small>km/h</small>
+                {settings.mode === 'boat'
+                  ? (Math.abs(stats.speed || 0) / 1.852).toFixed(1)
+                  : Math.abs(stats.speed || 0)}{' '}
+                <small>{settings.mode === 'boat' ? 'kn' : 'km/h'}</small>
               </b>
             )}
           </div>
           <button
             className="choose-start"
-            onClick={() => beginPlacement(settings.mode as StreetMode)}
+            onClick={() => beginPlacement(settings.mode as TravelMode)}
           >
             <MapPin size={16} />
             {tr('placementChange')}
           </button>
           <div className="street-shortcuts">
-            <button
-              onClick={() =>
-                engine.current?.navigation?.setMode(settings.mode, 'WATER ST')
-              }
-            >
-              Gastown
-            </button>
-            <button
-              onClick={() =>
-                engine.current?.navigation?.setMode(settings.mode, 'ROBSON ST')
-              }
-            >
-              Robson
-            </button>
-            <button
-              onClick={() =>
-                engine.current?.navigation?.setMode(settings.mode, 'BEACH AV')
-              }
-            >
-              Beach Ave
-            </button>
-            <button
-              onClick={() => engine.current?.navigation?.startBridge('burrard')}
-            >
-              Burrard
-            </button>
+            {(settings.mode === 'boat'
+              ? [
+                  [tr('coalHarbour'), 'coal-harbour'],
+                  [tr('falseCreek'), 'false-creek'],
+                  [tr('lostLagoon'), 'lost-lagoon'],
+                ]
+              : [
+                  ['Gastown', 'WATER ST'],
+                  ['Robson', 'ROBSON ST'],
+                  ['Beach Ave', 'BEACH AV'],
+                ]
+            ).map(([label, id]) => (
+              <button
+                key={id}
+                onClick={() =>
+                  engine.current?.navigation?.setMode(settings.mode, id)
+                }
+              >
+                {label}
+              </button>
+            ))}
+            {settings.mode !== 'boat' && (
+              <button
+                onClick={() =>
+                  engine.current?.navigation?.startBridge('burrard')
+                }
+              >
+                Burrard
+              </button>
+            )}
           </div>
           <p>
-            {tr('movementHelp')}
+            {tr(settings.mode === 'boat' ? 'boatMovementHelp' : 'movementHelp')}
             <br />
-            {settings.mode === 'drive' ? tr('brakeHelp') : tr('speedHelp')} ·{' '}
-            {tr('lookHelp')}
+            {settings.mode === 'boat'
+              ? tr('boatNeutralHelp')
+              : settings.mode === 'drive'
+                ? tr('brakeHelp')
+                : tr('speedHelp')}{' '}
+            · {tr('lookHelp')}
           </p>
+          {settings.mode === 'boat' && (
+            <button className="boat-neutral" {...helmControl('neutral')}>
+              {tr('boatNeutral')}
+            </button>
+          )}
           <div className="dpad">
-            <button
-              aria-label={tr('turnLeft')}
-              onClick={() => engine.current?.navigation?.step('left')}
-            >
+            <button aria-label={tr('turnLeft')} {...helmControl('left')}>
               <ChevronLeft />
             </button>
-            <button
-              aria-label={tr('moveForward')}
-              onClick={() => engine.current?.navigation?.step('forward')}
-            >
+            <button aria-label={tr('moveForward')} {...helmControl('forward')}>
               <ChevronsUp />
             </button>
             <button
               aria-label={tr('moveBackward')}
-              onClick={() => engine.current?.navigation?.step('backward')}
+              {...helmControl('backward')}
             >
               <ChevronDown />
             </button>
-            <button
-              aria-label={tr('turnRight')}
-              onClick={() => engine.current?.navigation?.step('right')}
-            >
+            <button aria-label={tr('turnRight')} {...helmControl('right')}>
               <ChevronRight />
             </button>
           </div>
@@ -1065,7 +1178,9 @@ export default function Home() {
               ? viewText(locale, current.id, 'name')
               : settings.mode === 'walk'
                 ? tr('streetWalk')
-                : tr('streetDrive')}
+                : settings.mode === 'boat'
+                  ? tr('streetBoat')
+                  : tr('streetDrive')}
           </b>
           <span className="muted">
             {settings.mode === 'orbit'

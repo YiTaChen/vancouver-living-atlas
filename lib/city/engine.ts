@@ -18,6 +18,11 @@ import { CityClock, sunAngle, type ClockState } from './clock';
 import { createLandmarks } from './landmarks';
 import { createRailway, updateRailway, type Railway } from './railway';
 import type { TrainKind } from './rail-path';
+import { WaterWorld } from './water-world';
+import { createHarbour, updateHarbour, type Harbour } from './harbour';
+import { addSailingWaves } from './water-waves';
+import type { HarbourKind } from './harbour-path';
+import landmarkFootprints from './landmark-footprints.json';
 import {
   createNature,
   createStreetDetails,
@@ -67,6 +72,8 @@ export class CityEngine {
   trafficGroup = new THREE.Group();
   traffic: Traffic | null = null;
   railway: Railway | null = null;
+  harbour: Harbour | null = null;
+  sailingWaves: ReturnType<typeof addSailingWaves> | null = null;
   navigation: StreetNavigation | null = null;
   placement: MapPlacement | null = null;
   settings = { ...DEFAULT_SETTINGS };
@@ -84,6 +91,7 @@ export class CityEngine {
   sun = new THREE.DirectionalLight(0xffecd0, 3);
   ambient = new THREE.HemisphereLight(0xc9e7ff, 0x66746b, 2.2);
   water!: THREE.Mesh;
+  waterWorld!: WaterWorld;
   uniforms = { night: { value: 0 }, time: { value: 0 } };
   disposed = false;
   frame = 0;
@@ -253,6 +261,12 @@ export class CityEngine {
     if (!rail.ok)
       throw new Error(`Could not load railway data (${rail.status})`);
     this.data.railways = await rail.json();
+    for (const name of ['harbour-sites', 'harbour-routes', 'harbour-piers']) {
+      const response = await fetch(`/data/${name}.json`);
+      if (!response.ok)
+        throw new Error(`Could not load ${name} (${response.status})`);
+      this.data[name] = await response.json();
+    }
     if (this.disposed) return;
     this.landPolys = this.data.land.features.flatMap((f: Feature) =>
       rings(f).map((p) => p.map((r) => r.map(project))),
@@ -271,11 +285,22 @@ export class CityEngine {
     createLandmarks(this);
     createBridgeApproaches(this);
     createNature(this);
+    this.waterWorld = new WaterWorld(
+      this.landPolys,
+      this.data['context-land'],
+      this.data.waterSurfaces,
+      this.data.buildings,
+      landmarkFootprints,
+    );
+    for (const p of this.data.solidWaterFootprints || [])
+      this.waterWorld.addObstacle(p);
     createStreetfronts(this);
     createRoofDetails(this);
     this.traffic = createStreetDetails(this);
     this.railway = createRailway(this);
+    this.harbour = createHarbour(this);
     this.navigation = new StreetNavigation(this);
+    this.sailingWaves = addSailingWaves(this);
     this.placement = new MapPlacement(this);
     this.composer = new EffectComposer(this.renderer);
     this.renderPass = new RenderPass(this.scene, this.camera);
@@ -344,6 +369,7 @@ export class CityEngine {
           : [object.material];
         if (
           object.userData.railVehicle ||
+          object.userData.harbourVehicle ||
           materials.every((m) => m.transparent && !m.depthWrite)
         )
           decorative.push(object);
@@ -968,6 +994,29 @@ export class CityEngine {
       toTarget: target.addScaledVector(direction, 18),
     };
   }
+  focusHarbour(kind: HarbourKind) {
+    const actor = this.harbour?.actors.find((a) => a.kind === kind);
+    if (!actor) return;
+    if (actor.offRoute) {
+      actor.phase = -this.harbour!.elapsed;
+      updateHarbour(this, this.harbour!, 0);
+    }
+    this.placement?.cancel();
+    this.navigation?.setMode('orbit');
+    this.settings.mode = 'orbit';
+    const target = actor.model.position.clone(),
+      distance = kind === 'cruise' ? 520 : 140;
+    this.transition = {
+      start: performance.now(),
+      duration: 1400,
+      from: this.camera.position.clone(),
+      to: target
+        .clone()
+        .add(new THREE.Vector3(distance * 0.5, distance * 0.6, distance * 0.7)),
+      fromTarget: this.controls.target.clone(),
+      toTarget: target,
+    };
+  }
   applySettings(settings: Settings) {
     if (settings.mode !== this.settings.mode)
       this.navigation?.setMode(settings.mode);
@@ -993,6 +1042,7 @@ export class CityEngine {
     else this.sun.target.position.set(0, 0, 0);
     this.trafficGroup.visible = settings.traffic;
     if (this.railway) this.railway.group.visible = settings.trains;
+    if (this.harbour) this.harbour.group.visible = settings.harbour;
     this.landmarks.visible = settings.buildings;
     this.updateLighting(true);
   }
@@ -1088,8 +1138,15 @@ export class CityEngine {
         this.railway,
         this.lastTime ? (time - this.lastTime) / 1000 : 0,
       );
+    if (this.harbour)
+      updateHarbour(
+        this,
+        this.harbour,
+        this.lastTime ? (time - this.lastTime) / 1000 : 0,
+      );
     if (this.settings.mode === 'orbit') this.controls.update();
     else this.navigation?.update((time - this.lastTime) / 1000);
+    this.sailingWaves?.update();
     if (
       this.settings.mode === 'orbit' &&
       this.onLand(this.camera.position.x, this.camera.position.z)

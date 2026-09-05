@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import ts from 'typescript';
+import { cityModule } from './helpers/city-modules.mjs';
 import * as THREE from 'three';
 const compile = (name, imports = {}) => {
   let code = ts.transpileModule(
@@ -380,6 +381,7 @@ const { StreetNavigation } = await import(
     three: import.meta.resolve('three'),
     './geo': geoUrl,
     './bridges': bridgeUrl,
+    './boat-controller': cityModule('boat-controller'),
     './landmark-footprints.json': landmarkUrl,
   })
 );
@@ -641,3 +643,99 @@ test('on-screen movement restores canvas focus and can be followed by keyboard m
       nav.destroy();
     }
   }));
+
+test('boat placement picks the elevated lake surface and retains the precise drop coordinates', () => {
+  const f = fixture(),
+    { e, placement } = f;
+  const lake = new THREE.Mesh(
+    new THREE.PlaneGeometry(80, 80),
+    new THREE.MeshBasicMaterial({ side: THREE.DoubleSide }),
+  );
+  lake.rotation.x = -Math.PI / 2;
+  lake.position.y = 4;
+  lake.userData.waterId = 'lake-test';
+  lake.updateMatrixWorld(true);
+  e.data.waterMeshes = [lake];
+  e.waterWorld = {
+    at: () => ({ id: 'lake-test', kind: 'lake', level: 4, name: 'Lake' }),
+    canOccupy: () => true,
+  };
+  placement.begin('boat');
+  placement.pointer = f.screen(7.123, 4, 9.234);
+  placement.pick(true);
+  assert.equal(placement.preview.result.valid, true);
+  assert.equal(placement.preview.result.point.surface, 'water');
+  assert.equal(placement.preview.result.point.waterId, 'lake-test');
+  assert(Math.abs(placement.preview.result.point.x - 7.123) < 1e-6);
+  assert.equal(placement.preview.result.point.y, 4);
+  assert(placement.commit());
+  assert.equal(f.started().mode, 'boat');
+  placement.destroy();
+});
+test('boat placement rejects land, docks and water hidden behind a foreground building', () => {
+  const f = fixture(),
+    { e, placement } = f;
+  e.waterWorld = {
+    at: () => ({ id: 'sea', kind: 'sea', level: -2, name: 'Sea' }),
+    canOccupy: () => true,
+  };
+  placement.begin('boat');
+  placement.pointer = f.screen(0, 0, 0);
+  placement.pick(true);
+  assert.equal(placement.preview.result.valid, false);
+  e.terrain.children[0].position.y = -10;
+  e.terrain.children[0].updateMatrixWorld(true);
+  const obstacle = new THREE.Mesh(
+    new THREE.BoxGeometry(100, 30, 100),
+    new THREE.MeshBasicMaterial(),
+  );
+  obstacle.position.set(0, 13, 0);
+  e.buildings.add(obstacle);
+  e.buildings.updateMatrixWorld(true);
+  placement.pointer = f.screen(0, -2, 0);
+  placement.pick(true);
+  assert.equal(placement.preview.result.valid, false);
+  assert.equal(placement.commit(), false);
+  placement.destroy();
+});
+test('boat helm uses continuous thrust on screen, physical keys and free look without car steps or bridge snapping', () => {
+  const { e, nav } = navigationFixture();
+  e.waterWorld = {
+    canOccupy: () => true,
+    at: () => ({ id: 'sea', kind: 'sea', level: 0.1 }),
+  };
+  nav.startAt('boat', {
+    x: 0,
+    y: 0.1,
+    z: 0,
+    yaw: 0,
+    surface: 'water',
+    waterId: 'sea',
+  });
+  nav.hold('forward', true);
+  for (let i = 0; i < 180; i++) nav.update(1 / 60);
+  nav.hold('forward', false);
+  const z = nav.position.z,
+    speed = nav.speed;
+  assert(z > 1 && speed > 1);
+  nav.update(1 / 60);
+  assert(nav.position.z > z, 'boat coasts after button release');
+  const before = nav.position.clone();
+  nav.step('forward');
+  assert.deepEqual(
+    nav.position.toArray(),
+    before.toArray(),
+    'button does not teleport eight metres',
+  );
+  nav.dragging = true;
+  nav.last = [0, 0];
+  const yaw = nav.yaw;
+  nav.pointerMove({ clientX: 60, clientY: 0 });
+  assert.equal(nav.yaw, yaw);
+  assert.notEqual(nav.boat.lookYaw, 0);
+  nav.startBridge('burrard');
+  assert.equal(nav.surface, 'water');
+  nav.setMode('orbit');
+  assert(!nav.boat.model.visible && !nav.boat.wake.visible);
+  nav.destroy();
+});
