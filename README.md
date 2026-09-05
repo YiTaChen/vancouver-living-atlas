@@ -29,7 +29,7 @@ English is the default for a first visit. The header language menu also offers F
 - A **257 × 273 terrain grid** (roughly 20 m), interpolated from official 2002 contours. Stanley Park reaches about **76 m**, with real Downtown relief rather than a flat base.
 - Actual coastlines, park boundaries, lakes, beaches and street lines; 810 park trail features and regional North Shore landforms.
 - **36,201 rendered trees** from public street-tree positions plus original forest infill; spatially chunked canopy detail changes with viewing distance.
-- Original Science World, Canada Place, BC Place, Harbour Centre and Vancouver House models; Burrard, Granville, Cambie and Lions Gate bridge structures.
+- Original Science World, Canada Place, BC Place, Harbour Centre, Marine Building, Vancouver Convention Centre West and Vancouver House models; Burrard, Granville, Cambie and Lions Gate bridge structures.
 - Original façade patterns, Gastown shopfronts and steam clock, rooftop equipment, cars, ferries, sailboats, original moving train models and simulated night lighting.
 
 No Unreal Engine, finished third-party city model, Google imagery or copied reference-project code is used.
@@ -41,6 +41,10 @@ This is a geographic visualization, not a photographic reconstruction or a certi
 Rail plan geometry comes from OpenStreetMap: approximately 1.12 km of waterfront railway and 855/894 m of each elevated Expo direction. Station canopies, building passages and tunnels are excluded. Heights, trains and repeated passes are illustrative; the steam service is fictional. Entire trains fade out at the cropped ends before a new pass starts.
 
 Street navigation is an exploration feature: simplified collision and vehicle motion are included, rather than a full traffic or driving simulation. Frame rates depend on GPU, viewport and settings. Original release Chrome reviews, before the train addition, measured approximately 31–53 FPS across detailed street, bridge and peninsula views. See [source provenance and qualifications](DATA_SOURCES.md).
+
+## Graphics quality
+
+Open **Layers → Visual quality** to choose **Balanced**, **High detail** (default), or **Ultra detail**. Ultra adds close landmark structure, textured branching trees, facade geometry and a higher physical rendering resolution. New viewpoints make the stadium, lookout and Marine Building easy to inspect. High and Balanced remain available for lower GPU load. See [graphics budgets, original asset provenance and validation](docs/visual-quality/README.md).
 
 ## Run locally
 

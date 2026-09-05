@@ -1063,6 +1063,11 @@ export default function Home() {
             className="quality-options"
           >
             <label>
+              <RadioGroupItem value="ultra" />
+              {tr('ultraQuality')}
+              <span className="quality-badge">ULTRA</span>
+            </label>
+            <label>
               <RadioGroupItem value="high" />
               {tr('highQuality')}
             </label>
@@ -1071,6 +1076,22 @@ export default function Home() {
               {tr('balancedQuality')}
             </label>
           </RadioGroup>
+          <p className="quality-description">
+            {tr(
+              settings.quality === 'ultra'
+                ? 'ultraQualityDescription'
+                : settings.quality === 'high'
+                  ? 'highQualityDescription'
+                  : 'balancedQualityDescription',
+            )}
+          </p>
+          <div className="quality-performance">
+            <span>{tr('renderResolution')}</span>
+            <span>
+              {stats.renderWidth || '—'} × {stats.renderHeight || '—'} ·{' '}
+              {stats.fps} FPS
+            </span>
+          </div>
         </section>
       )}
       <section className="map-inset glass ui-chrome">

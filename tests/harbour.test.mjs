@@ -67,23 +67,12 @@ const e = Object.assign(new Methods(), {
   renderer: { domElement: { clientHeight: 900 } },
   controls: { target: new THREE.Vector3(), enabled: true },
   settings: { harbour: true, mode: 'orbit' },
-  uniforms: { time: { value: 0 } },
+  uniforms: { time: { value: 0 }, night: { value: 0 } },
+  landmarkDetails: [],
 });
 e.camera.position.set(600, 650, 1500);
 e.landmarks = new THREE.Group();
-// Geometry-only fixture for the existing Science World point-light texture.
-globalThis.document = {
-  createElement: () => ({
-    width: 0,
-    height: 0,
-    getContext: () => ({
-      createRadialGradient: () => ({ addColorStop() {} }),
-      fillRect() {},
-    }),
-  }),
-};
 createLandmarks(e);
-delete globalThis.document;
 e.waterWorld = new WaterWorld(
   land,
   data['context-land'],

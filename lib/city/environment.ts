@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { DetailedTrees, registerTree, type ForestTree } from './detailed-trees';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import type { CityEngine } from './engine';
 import { project, rings, lines, inPolygon, hash } from './geo';
@@ -135,13 +136,7 @@ export function createNature(e: CityEngine) {
     e.roads.add(m);
     pathGeos.forEach((g) => g.dispose());
   }
-  const trees: {
-    x: number;
-    z: number;
-    h: number;
-    conifer: boolean;
-    seed: number;
-  }[] = [];
+  const trees: ForestTree[] = [];
   for (let i = 0; i < e.data.trees.trees.length; i++) {
     const t = e.data.trees.trees[i],
       p = project(t),
@@ -240,6 +235,7 @@ export function createNature(e: CityEngine) {
         dummy.rotation.set(0, hash(t.seed) * Math.PI, 0);
         dummy.updateMatrix();
         mesh.setMatrixAt(i, dummy.matrix);
+        registerTree(t, mesh, i, dummy.matrix);
         const c = t.conifer
           ? new THREE.Color(0x315e48).lerp(
               new THREE.Color(0x6d8651),
@@ -278,6 +274,7 @@ export function createNature(e: CityEngine) {
       dummy.scale.set(t.h * 0.065, t.h, t.h * 0.065);
       dummy.updateMatrix();
       trunks.setMatrixAt(i, dummy.matrix);
+      registerTree(t, trunks, i, dummy.matrix);
     }
     trunks.computeBoundingSphere();
     const trunkLod = new THREE.LOD();
@@ -288,6 +285,7 @@ export function createNature(e: CityEngine) {
     e.vegetation.add(trunkLod);
   }
   e.stats.trees = trees.length;
+  e.detailedTrees = new DetailedTrees(e, trees);
 }
 export function createStreetDetails(e: CityEngine): Traffic {
   const roads = e.data.roads.features.filter(

@@ -1683,3 +1683,31 @@ a {
     gap: 2px;
   }
 }
+
+.quality-options {
+  flex-direction: column;
+  gap: 12px;
+}
+.quality-badge {
+  margin-left: auto;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  padding: 3px 5px;
+  border-radius: 4px;
+  background: #dceba71a;
+  color: #dceba7;
+}
+.quality-description {
+  font-size: 11px;
+  line-height: 1.6;
+  color: #a5bbb9;
+  margin: 14px 0 10px;
+}
+.quality-performance {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 10px;
+  color: #a5bbb9;
+  font-variant-numeric: tabular-nums;
+}

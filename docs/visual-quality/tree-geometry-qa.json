@@ -1,0 +1,544 @@
+{
+  "three": "185",
+  "source": "./tree-geometry.ts",
+  "checks": [
+    "deterministic",
+    "finite all attributes",
+    "unit normals",
+    "no degenerate triangles",
+    "bounds y0..1",
+    "target crown width",
+    "triangle budgets",
+    "aSolid per triangle"
+  ],
+  "trees": [
+    {
+      "conifer": false,
+      "variant": 0,
+      "detail": "medium",
+      "triangles": 500,
+      "bytes": 72000,
+      "parts": {
+        "trunk": {
+          "triangles": 162,
+          "solidTriangles": 0,
+          "cardTriangles": 0,
+          "invalid": 0,
+          "zeroArea": 0,
+          "badNormal": 0,
+          "fingerprint": "00b0439d9eb9aab03fd6d77c5e96dfad9a3dcf09bc602c69233b84a61588ba56"
+        },
+        "foliage": {
+          "triangles": 338,
+          "solidTriangles": 130,
+          "cardTriangles": 208,
+          "invalid": 0,
+          "zeroArea": 0,
+          "badNormal": 0,
+          "fingerprint": "9e66ddcf0c14961ab4b61bb10e6349733d65a7aaf8cc517d2c511a13f078022e"
+        }
+      },
+      "bounds": {
+        "min": [
+          -0.2255607396364212,
+          0,
+          -0.24351581931114197
+        ],
+        "max": [
+          0.21264922618865967,
+          1,
+          0.2164841890335083
+        ],
+        "size": [
+          0.43820996582508087,
+          1,
+          0.46000000834465027
+        ]
+      }
+    },
+    {
+      "conifer": false,
+      "variant": 0,
+      "detail": "ultra",
+      "triangles": 2838,
+      "bytes": 408672,
+      "parts": {
+        "trunk": {
+          "triangles": 730,
+          "solidTriangles": 0,
+          "cardTriangles": 0,
+          "invalid": 0,
+          "zeroArea": 0,
+          "badNormal": 0,
+          "fingerprint": "df56a6703d5fab116105945ca8c993a5f583640513d96f95f1a0140c57f6e3c9"
+        },
+        "foliage": {
+          "triangles": 2108,
+          "solidTriangles": 620,
+          "cardTriangles": 1488,
+          "invalid": 0,
+          "zeroArea": 0,
+          "badNormal": 0,
+          "fingerprint": "6780382042f182955d7f3d39cf36c206b37769b5324cdae3521dc17c922674d7"
+        }
+      },
+      "bounds": {
+        "min": [
+          -0.22688518464565277,
+          0,
+          -0.2180735021829605
+        ],
+        "max": [
+          0.2331148087978363,
+          1,
+          0.20874306559562683
+        ],
+        "size": [
+          0.4599999934434891,
+          1,
+          0.42681656777858734
+        ]
+      }
+    },
+    {
+      "conifer": false,
+      "variant": 1,
+      "detail": "medium",
+      "triangles": 500,
+      "bytes": 72000,
+      "parts": {
+        "trunk": {
+          "triangles": 162,
+          "solidTriangles": 0,
+          "cardTriangles": 0,
+          "invalid": 0,
+          "zeroArea": 0,
+          "badNormal": 0,
+          "fingerprint": "71b3bc6632530d78029c24dba649b8bf33b681ce975877f34a0578522650254e"
+        },
+        "foliage": {
+          "triangles": 338,
+          "solidTriangles": 130,
+          "cardTriangles": 208,
+          "invalid": 0,
+          "zeroArea": 0,
+          "badNormal": 0,
+          "fingerprint": "a8d5789a575458a5ea452f76b0add15c3bf144d907d9fddffcc3638a81ae4607"
+        }
+      },
+      "bounds": {
+        "min": [
+          -0.23018278181552887,
+          0,
+          -0.24869810044765472
+        ],
+        "max": [
+          0.24481721222400665,
+          1,
+          0.2180096060037613
+        ],
+        "size": [
+          0.4749999940395355,
+          1,
+          0.466707706451416
+        ]
+      }
+    },
+    {
+      "conifer": false,
+      "variant": 1,
+      "detail": "ultra",
+      "triangles": 2838,
+      "bytes": 408672,
+      "parts": {
+        "trunk": {
+          "triangles": 730,
+          "solidTriangles": 0,
+          "cardTriangles": 0,
+          "invalid": 0,
+          "zeroArea": 0,
+          "badNormal": 0,
+          "fingerprint": "e626adee314d57c6720256d1c632ccc4a35ce5b8be0f0977275a792dd04af112"
+        },
+        "foliage": {
+          "triangles": 2108,
+          "solidTriangles": 620,
+          "cardTriangles": 1488,
+          "invalid": 0,
+          "zeroArea": 0,
+          "badNormal": 0,
+          "fingerprint": "2cbd18dc4d16a20b2c1a4fb16b6538d6051e9fb159d4f6e0d6378b980cd0f77c"
+        }
+      },
+      "bounds": {
+        "min": [
+          -0.239663764834404,
+          0,
+          -0.2217630296945572
+        ],
+        "max": [
+          0.23533622920513153,
+          1,
+          0.25069460272789
+        ],
+        "size": [
+          0.4749999940395355,
+          1,
+          0.4724576324224472
+        ]
+      }
+    },
+    {
+      "conifer": false,
+      "variant": 2,
+      "detail": "medium",
+      "triangles": 500,
+      "bytes": 72000,
+      "parts": {
+        "trunk": {
+          "triangles": 162,
+          "solidTriangles": 0,
+          "cardTriangles": 0,
+          "invalid": 0,
+          "zeroArea": 0,
+          "badNormal": 0,
+          "fingerprint": "2b2d561e4f1ca3ef3c237eec13d961e05b22268ddee4a3ec30dac8650030fbc3"
+        },
+        "foliage": {
+          "triangles": 338,
+          "solidTriangles": 130,
+          "cardTriangles": 208,
+          "invalid": 0,
+          "zeroArea": 0,
+          "badNormal": 0,
+          "fingerprint": "bff6e5b81fcdeee84dded9d7bc8462d4ad16d5a6c44454de03f70fdf38d773b1"
+        }
+      },
+      "bounds": {
+        "min": [
+          -0.2675480842590332,
+          0,
+          -0.2523554861545563
+        ],
+        "max": [
+          0.22245192527770996,
+          1,
+          0.2209266573190689
+        ],
+        "size": [
+          0.49000000953674316,
+          1,
+          0.4732821434736252
+        ]
+      }
+    },
+    {
+      "conifer": false,
+      "variant": 2,
+      "detail": "ultra",
+      "triangles": 2838,
+      "bytes": 408672,
+      "parts": {
+        "trunk": {
+          "triangles": 730,
+          "solidTriangles": 0,
+          "cardTriangles": 0,
+          "invalid": 0,
+          "zeroArea": 0,
+          "badNormal": 0,
+          "fingerprint": "314967e5763272e1954e80fc634a6caf02978df7933547405e03a3c45ddf9abd"
+        },
+        "foliage": {
+          "triangles": 2108,
+          "solidTriangles": 620,
+          "cardTriangles": 1488,
+          "invalid": 0,
+          "zeroArea": 0,
+          "badNormal": 0,
+          "fingerprint": "7c5ffe49b792aec053eac08e5d092fd19ed878c5a3359585dc618e1c947004b5"
+        }
+      },
+      "bounds": {
+        "min": [
+          -0.2447076290845871,
+          0,
+          -0.2601250112056732
+        ],
+        "max": [
+          0.2256855070590973,
+          1,
+          0.22987498342990875
+        ],
+        "size": [
+          0.4703931361436844,
+          1,
+          0.48999999463558197
+        ]
+      }
+    },
+    {
+      "conifer": true,
+      "variant": 0,
+      "detail": "medium",
+      "triangles": 558,
+      "bytes": 80352,
+      "parts": {
+        "trunk": {
+          "triangles": 162,
+          "solidTriangles": 0,
+          "cardTriangles": 0,
+          "invalid": 0,
+          "zeroArea": 0,
+          "badNormal": 0,
+          "fingerprint": "eb878fb35d0bb5d06561fa2bbfe9b607a813660073c0d36cb6bc9301d2412c09"
+        },
+        "foliage": {
+          "triangles": 396,
+          "solidTriangles": 220,
+          "cardTriangles": 176,
+          "invalid": 0,
+          "zeroArea": 0,
+          "badNormal": 0,
+          "fingerprint": "47bf729cc3463a8ad5ada7f5caa761a979a43d150865fd377b4d7d8b15787feb"
+        }
+      },
+      "bounds": {
+        "min": [
+          -0.21988070011138916,
+          0,
+          -0.19041763246059418
+        ],
+        "max": [
+          0.2401193082332611,
+          1,
+          0.2143566906452179
+        ],
+        "size": [
+          0.46000000834465027,
+          1,
+          0.4047743231058121
+        ]
+      }
+    },
+    {
+      "conifer": true,
+      "variant": 0,
+      "detail": "ultra",
+      "triangles": 3486,
+      "bytes": 501984,
+      "parts": {
+        "trunk": {
+          "triangles": 966,
+          "solidTriangles": 0,
+          "cardTriangles": 0,
+          "invalid": 0,
+          "zeroArea": 0,
+          "badNormal": 0,
+          "fingerprint": "5820bc347e4f4c9275fec9ebb2e80363b064d15565693c0b6b4d7d23d70c3006"
+        },
+        "foliage": {
+          "triangles": 2520,
+          "solidTriangles": 1260,
+          "cardTriangles": 1260,
+          "invalid": 0,
+          "zeroArea": 0,
+          "badNormal": 0,
+          "fingerprint": "c53a9d74e0031ca0d4dacfee77a7a673658cfccc706bae573cb5169efbe7f3ee"
+        }
+      },
+      "bounds": {
+        "min": [
+          -0.23956717550754547,
+          0,
+          -0.21873609721660614
+        ],
+        "max": [
+          0.2204328179359436,
+          1,
+          0.21726571023464203
+        ],
+        "size": [
+          0.4599999934434891,
+          1,
+          0.43600180745124817
+        ]
+      }
+    },
+    {
+      "conifer": true,
+      "variant": 1,
+      "detail": "medium",
+      "triangles": 558,
+      "bytes": 80352,
+      "parts": {
+        "trunk": {
+          "triangles": 162,
+          "solidTriangles": 0,
+          "cardTriangles": 0,
+          "invalid": 0,
+          "zeroArea": 0,
+          "badNormal": 0,
+          "fingerprint": "9c94a363d0416af6f75645c5a7ec274b7357d834ea8326dbbc7aa9ad1c85527d"
+        },
+        "foliage": {
+          "triangles": 396,
+          "solidTriangles": 220,
+          "cardTriangles": 176,
+          "invalid": 0,
+          "zeroArea": 0,
+          "badNormal": 0,
+          "fingerprint": "f87c510a43e80d8240ad14b9f70740d35ce40f0177f1c0847a29eceaa2cba7de"
+        }
+      },
+      "bounds": {
+        "min": [
+          -0.2394753098487854,
+          0,
+          -0.19944524765014648
+        ],
+        "max": [
+          0.23552468419075012,
+          1,
+          0.21429738402366638
+        ],
+        "size": [
+          0.4749999940395355,
+          1,
+          0.41374263167381287
+        ]
+      }
+    },
+    {
+      "conifer": true,
+      "variant": 1,
+      "detail": "ultra",
+      "triangles": 3486,
+      "bytes": 501984,
+      "parts": {
+        "trunk": {
+          "triangles": 966,
+          "solidTriangles": 0,
+          "cardTriangles": 0,
+          "invalid": 0,
+          "zeroArea": 0,
+          "badNormal": 0,
+          "fingerprint": "d51d502f99a690c16dbb4f9b9a9041625222cc13f7fd13bad5756fa81d4300df"
+        },
+        "foliage": {
+          "triangles": 2520,
+          "solidTriangles": 1260,
+          "cardTriangles": 1260,
+          "invalid": 0,
+          "zeroArea": 0,
+          "badNormal": 0,
+          "fingerprint": "bc42abd0fe0b5fcc13a5b1adf92fcd706dc5a20d3d4fc048f6a63a1a52173370"
+        }
+      },
+      "bounds": {
+        "min": [
+          -0.22475218772888184,
+          0,
+          -0.24661622941493988
+        ],
+        "max": [
+          0.23874503374099731,
+          1,
+          0.22838377952575684
+        ],
+        "size": [
+          0.46349722146987915,
+          1,
+          0.4750000089406967
+        ]
+      }
+    },
+    {
+      "conifer": true,
+      "variant": 2,
+      "detail": "medium",
+      "triangles": 558,
+      "bytes": 80352,
+      "parts": {
+        "trunk": {
+          "triangles": 162,
+          "solidTriangles": 0,
+          "cardTriangles": 0,
+          "invalid": 0,
+          "zeroArea": 0,
+          "badNormal": 0,
+          "fingerprint": "799273518162fec3b678e58a79ab0669106a4b4dbdbae210582870612895b0bb"
+        },
+        "foliage": {
+          "triangles": 396,
+          "solidTriangles": 220,
+          "cardTriangles": 176,
+          "invalid": 0,
+          "zeroArea": 0,
+          "badNormal": 0,
+          "fingerprint": "6053db73212f902e61fa71bedbbcb244249260cc587d5a7198b9755436a59c3c"
+        }
+      },
+      "bounds": {
+        "min": [
+          -0.23048578202724457,
+          0,
+          -0.1937469094991684
+        ],
+        "max": [
+          0.2595142126083374,
+          1,
+          0.23147642612457275
+        ],
+        "size": [
+          0.48999999463558197,
+          1,
+          0.42522333562374115
+        ]
+      }
+    },
+    {
+      "conifer": true,
+      "variant": 2,
+      "detail": "ultra",
+      "triangles": 3486,
+      "bytes": 501984,
+      "parts": {
+        "trunk": {
+          "triangles": 966,
+          "solidTriangles": 0,
+          "cardTriangles": 0,
+          "invalid": 0,
+          "zeroArea": 0,
+          "badNormal": 0,
+          "fingerprint": "30024242c63fc1e5c27da72cc0bc7c358419fee16c403bb67a255d81a9e878a8"
+        },
+        "foliage": {
+          "triangles": 2520,
+          "solidTriangles": 1260,
+          "cardTriangles": 1260,
+          "invalid": 0,
+          "zeroArea": 0,
+          "badNormal": 0,
+          "fingerprint": "564dccf2e64ebd906b1acc84771f5b0e4f9b70496a1f97f5df860dd5e67d282a"
+        }
+      },
+      "bounds": {
+        "min": [
+          -0.23660273849964142,
+          0,
+          -0.24483080208301544
+        ],
+        "max": [
+          0.25339725613594055,
+          1,
+          0.2407841831445694
+        ],
+        "size": [
+          0.48999999463558197,
+          1,
+          0.48561498522758484
+        ]
+      }
+    }
+  ]
+}

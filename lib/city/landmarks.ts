@@ -1,4 +1,15 @@
 import * as THREE from 'three';
+import { createConventionCentre } from './assets/convention-centre';
+import {
+  createBCPlace,
+  createHarbourCentre,
+  createMarineBuilding,
+} from './assets/secondary-landmarks';
+import { LandmarkDetail } from './landmark-detail';
+import {
+  createScienceWorld,
+  createCanadaPlace,
+} from './assets/primary-landmarks';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { project, hash } from './geo';
 import type { CityEngine } from './engine';
@@ -110,171 +121,15 @@ class Builder {
 export function createLandmarks(engine: CityEngine) {
   const b = new Builder(engine),
     white = 0xe8e4d7,
-    glass = 0x456d79,
-    steel = 0x7a9390;
-  // Science World: 40 m geodesic sphere above a low, tiered waterfront pavilion.
-  b.at(-123.1039114, 49.2733499, 0, 3.4);
-  b.cylinder(45, 46, 2.2, 0x9a9b90, 10, 1, 0, 48);
-  b.cylinder(34, 36, 7, 0xa09e94, 8, 5.2, 0, 48);
-  b.cylinder(31, 31, 2, 0x507779, 8, 8.5, 0, 48);
-  b.cylinder(31.8, 31.8, 0.75, white, 8, 10.1, 0, 48);
-  b.cylinder(14.5, 16, 6, 0x833e36, 0, 12, 0);
-  const sphere = new THREE.IcosahedronGeometry(20, 3);
-  b.add(sphere.clone(), 0xa3bcc2, 0, 30, 0, undefined, 0.32);
-  const sphereMaterial = b.groups.get(0xa3bcc2 + ':0.32')!.material;
-  sphereMaterial.emissive.set(0x5c7b95);
-  engine.data.nightMaterials = [{ material: sphereMaterial, intensity: 0.35 }];
-  const lightTexture = document.createElement('canvas');
-  lightTexture.width = 32;
-  lightTexture.height = 32;
-  const lightContext = lightTexture.getContext('2d')!,
-    gradient = lightContext.createRadialGradient(16, 16, 1, 16, 16, 16);
-  gradient.addColorStop(0, 'rgba(255,255,255,1)');
-  gradient.addColorStop(0.3, 'rgba(255,255,255,.9)');
-  gradient.addColorStop(1, 'rgba(255,255,255,0)');
-  lightContext.fillStyle = gradient;
-  lightContext.fillRect(0, 0, 32, 32);
-  const lights = new THREE.Points(
-    sphere.clone(),
-    new THREE.PointsMaterial({
-      color: 0xbbe1ff,
-      size: 0.85,
-      map: new THREE.CanvasTexture(lightTexture),
-      transparent: true,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-      toneMapped: false,
-    }),
+    glass = 0x456d79;
+  engine.landmarkDetails.push(new LandmarkDetail(engine, createScienceWorld));
+  engine.landmarkDetails.push(new LandmarkDetail(engine, createCanadaPlace));
+  engine.landmarkDetails.push(new LandmarkDetail(engine, createBCPlace));
+  engine.landmarkDetails.push(new LandmarkDetail(engine, createHarbourCentre));
+  engine.landmarkDetails.push(new LandmarkDetail(engine, createMarineBuilding));
+  engine.landmarkDetails.push(
+    new LandmarkDetail(engine, createConventionCentre),
   );
-  lights.position.copy(b.origin).add(new THREE.Vector3(0, 30, 0));
-  engine.landmarks.add(lights);
-  engine.data.nightObjects = [lights];
-  const edges = new THREE.EdgesGeometry(sphere, 1),
-    ep = edges.attributes.position;
-  for (let i = 0; i < ep.count; i += 2)
-    b.beam(
-      new THREE.Vector3(ep.getX(i), ep.getY(i) + 30, ep.getZ(i)),
-      new THREE.Vector3(ep.getX(i + 1), ep.getY(i + 1) + 30, ep.getZ(i + 1)),
-      0.16,
-      0xd6d8cb,
-    );
-  for (let a = 0; a < Math.PI * 2; a += Math.PI / 14)
-    b.box(1.2, 8, 1.2, white, Math.cos(a) * 32, 5, Math.sin(a) * 32);
-  b.box(57, 1, 26, 0xb2aa91, 57, 0.8, -13);
-  b.box(13, 5, 42, glass, 37, 4, -23);
-  // BC Place: elliptical bowl, 36 roof masts and radial tension cables.
-  b.at(-123.1120067, 49.2766985, 0.677, 5);
-  const bowl = new THREE.CylinderGeometry(1, 1, 31, 72, 1, true);
-  bowl.scale(113, 1, 92);
-  b.add(bowl, 0xa4aaa4, 0, 17, 0);
-  const clerestory = new THREE.CylinderGeometry(1, 1, 10.5, 72, 1, true);
-  clerestory.scale(113, 1, 92);
-  b.add(clerestory, 0x819a99, 0, 37.75, 0);
-  const ring = new THREE.RingGeometry(0.49, 1, 96, 1);
-  ring.rotateX(-Math.PI / 2);
-  ring.scale(116, 1, 96);
-  b.add(ring, white, 0, 43, 0);
-  const field = new THREE.PlaneGeometry(100, 67);
-  field.rotateX(-Math.PI / 2);
-  b.add(field, 0x407454, 0, 4, 0);
-  for (let i = 0; i < 36; i++) {
-    const a = (i / 36) * Math.PI * 2,
-      x = Math.cos(a) * 114,
-      z = Math.sin(a) * 94;
-    b.beam(
-      new THREE.Vector3(x * 0.96, 19, z * 0.96),
-      new THREE.Vector3(x * 1.04, 64, z * 1.04),
-      0.72,
-      white,
-    );
-    b.beam(
-      new THREE.Vector3(x * 1.04, 64, z * 1.04),
-      new THREE.Vector3(Math.cos(a) * 56, 43, Math.sin(a) * 44),
-      0.23,
-      steel,
-    );
-    b.beam(
-      new THREE.Vector3(x, 38, z),
-      new THREE.Vector3(Math.cos(a) * 56, 43, Math.sin(a) * 44),
-      0.27,
-      white,
-    );
-  }
-  for (let i = 0; i < 72; i++) {
-    const a = (i / 72) * Math.PI * 2;
-    b.box(2, 24, 2, 0xd0d2ca, Math.cos(a) * 112, 19, Math.sin(a) * 92);
-  }
-  // Canada Place: five tensile sail roofs aligned along the actual pier.
-  b.at(-123.111352, 49.2886214, -1.073, 3.5);
-  b.box(96, 5, 502, 0xaaa99c, 0, 0, 0);
-  b.box(67, 17, 270, 0xafb6b0, 0, 12, -37);
-  b.box(68, 5, 280, 0xeee8d5, 0, 21, -37);
-  for (let i = 0; i < 5; i++) {
-    const z = -148 + i * 50,
-      vertices: number[] = [];
-    const N = 16;
-    const pt = (u: number, v: number) => {
-      const peak =
-        20 * Math.pow(1 - Math.abs(u), 0.65) * (1 - Math.abs(v) * 0.55) +
-        8 * Math.abs(v);
-      return new THREE.Vector3(u * 33, 26 + peak, z + v * 24);
-    };
-    for (let u = 0; u < N; u++)
-      for (let v = 0; v < N; v++) {
-        const a = pt((u / N) * 2 - 1, (v / N) * 2 - 1),
-          c = pt(((u + 1) / N) * 2 - 1, (v / N) * 2 - 1),
-          d = pt(((u + 1) / N) * 2 - 1, ((v + 1) / N) * 2 - 1),
-          e = pt((u / N) * 2 - 1, ((v + 1) / N) * 2 - 1);
-        for (const p of [a, d, c, a, e, d]) vertices.push(...p.toArray());
-      }
-    const g = new THREE.BufferGeometry().setAttribute(
-      'position',
-      new THREE.Float32BufferAttribute(vertices, 3),
-    );
-    g.computeVertexNormals();
-    b.add(g, 0xf3f0df);
-    b.beam(
-      new THREE.Vector3(0, 24, z),
-      new THREE.Vector3(0, 55, z),
-      0.48,
-      white,
-    );
-    for (const s of [-1, 1]) {
-      b.beam(
-        new THREE.Vector3(0, 55, z),
-        new THREE.Vector3(s * 34, 25, z + 24),
-        0.16,
-        steel,
-      );
-      b.beam(
-        new THREE.Vector3(0, 55, z),
-        new THREE.Vector3(s * 34, 25, z - 24),
-        0.16,
-        steel,
-      );
-    }
-  }
-  b.box(76, 75, 83, glass, 0, 42, 175);
-  for (let j = 0; j < 24; j++)
-    b.box(78, 0.65, 85, 0xc0c7be, 0, 8 + j * 3.1, 175);
-  // Vancouver Convention Centre living roof, incl the roof's westward slope.
-  b.at(-123.1159678, 49.2890752, -0.403, 4);
-  b.box(200, 22, 138, 0x3c666e, 0, 12, 0);
-  b.box(204, 3, 143, 0x647d4b, 0, 24, 0);
-  for (let x = -95; x <= 95; x += 12) b.box(0.5, 21, 140, 0xb2beb6, x, 12, 0);
-  // Harbour Centre: rectilinear office shaft and layered revolving lookout.
-  b.at(-123.1120903, 49.2847656, -0.8);
-  b.box(62, 21, 71, 0xa8a390, 0, 10.5, 0);
-  b.box(35, 116, 37, 0x8b9290, 0, 58, 0);
-  for (let y = 4; y < 116; y += 3.3) b.box(36, 0.7, 38, 0xc9c8b8, 0, y, 0);
-  for (let x = -14; x < 17; x += 7) b.box(0.7, 111, 38, white, x, 58, 0);
-  b.at(-123.112215, 49.284683);
-  b.cylinder(6.7, 6.7, 12, 0x8f9b96, 0, 122, 0);
-  b.cylinder(15, 7, 8, 0xc9cebf, 0, 132, 0);
-  b.cylinder(17.2, 15, 8, glass, 0, 140, 0);
-  b.cylinder(19.3, 19.3, 3.5, white, 0, 146, 0);
-  b.cylinder(9.2, 17, 8, 0xbec4b8, 0, 152, 0);
-  b.cylinder(0.45, 0.7, 21, white, 0, 166.5, 0);
   // Vancouver House: widening upper floors and a white balcony lattice.
   b.at(-123.131029, 49.2749256, -0.78);
   b.box(49, 25, 49, glass, 0, 12.5, 0);

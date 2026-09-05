@@ -139,3 +139,12 @@ Original explorable Vancouver covering all Downtown, Science World and Stanley P
 - Regression coverage checks exact ground/bridge poses, Boat exclusions and both UI event paths, in addition to the previous 65 checks. No browser interaction or screenshot review was performed.
 - TypeScript and all 68 automated checks pass, including pointer/keyboard routing and keyboard-focus preservation.
 - Published as Firebase Hosting version `b30e3278ab5b98e4`; all 54 public files matched the verified build by SHA-256. Implementation and deployment records were committed and pushed.
+
+## Landmark, tree and Ultra graphics upgrade — local, 2026-09-05
+
+- Reconstructed Science World, Canada Place, BC Place, Harbour Centre, Marine Building and Convention Centre West using original, reference-informed geometry. All modes receive improved silhouettes; nearby Ultra adds structure, facade frames, roof details and night illumination. Duplicate generic building parts and rooftop equipment are excluded together.
+- Added original generated foliage/bark images to branching 3D trees. Bounded instance pools replace nearby trees after texture readiness and restore the original distant instances when hidden, out of range, over capacity or on texture failure. Generic buildings gain better glazing and lazy, bounded nearby facade geometry using their original foundations.
+- Added a five-language Ultra detail option under Layers → Visual quality, with actual render dimensions and FPS. High remains the default. Pixel budgets, shadow resolution and distance-based geometry provide explicit performance choices.
+- TypeScript, all 75 automated tests and the local Firebase static build pass. Independent reviews prompted fixes for eager facade allocation, inconsistent foundations, shadow invalidation and tree coverage. Targeted lint passes; legacy full-repository lint findings remain outside this change.
+- Real WebGL captures cover landmarks, trees and night lighting. The visible production browser passed five-language selection, Ultra switching, street movement and Walk/Drive switching in place. Four fixed 1080p viewport views measured High at 44–54 FPS and Ultra at 27–35 FPS on the local Radeon Pro 560X, with Ultra physically rendering at 2560 × 1440. Details and measurement limits are in `docs/visual-quality/QA.md`.
+- Kept this upgrade on local branch `feature/ultra-landmarks`. No push, remote-main change or deployment was performed. Prior project-intro video artifacts were preserved.

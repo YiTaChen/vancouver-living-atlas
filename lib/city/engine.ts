@@ -1,4 +1,9 @@
 import * as THREE from 'three';
+import { replacedBuilding } from './replaced-buildings';
+import type { LandmarkDetail } from './landmark-detail';
+import { FacadeDetails } from './facade-details';
+import type { DetailedTrees } from './detailed-trees';
+import { QUALITY, qualityPixelRatio } from './quality';
 import { DEFAULT_LOCALE, translate, viewText, type Locale } from '../i18n';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { Sky } from 'three/addons/objects/Sky.js';
@@ -66,9 +71,12 @@ export class CityEngine {
   controls: OrbitControls;
   buildings = new THREE.Group();
   vegetation = new THREE.Group();
+  detailedTrees: DetailedTrees | null = null;
+  facadeDetails: FacadeDetails | null = null;
   roads = new THREE.Group();
   terrain = new THREE.Group();
   landmarks = new THREE.Group();
+  landmarkDetails: LandmarkDetail[] = [];
   trafficGroup = new THREE.Group();
   traffic: Traffic | null = null;
   railway: Railway | null = null;
@@ -313,6 +321,11 @@ export class CityEngine {
     await this.renderer.compileAsync(this.scene, this.camera);
     if (this.disposed || this.contextLost) return;
     window.addEventListener('pagehide', this.pageHide, { once: true });
+    if (
+      process.env.NODE_ENV === 'development' &&
+      new URLSearchParams(location.search).has('inspect')
+    )
+      (window as Window & { __atlas?: CityEngine }).__atlas = this;
     this.onReady();
     this.fpsAt = performance.now();
     this.clock.setVisible(!document.hidden, this.fpsAt);
@@ -322,32 +335,70 @@ export class CityEngine {
   pixelRatio() {
     const w = Math.max(1, this.container.clientWidth),
       h = Math.max(1, this.container.clientHeight);
-    return Math.min(
+    return qualityPixelRatio(
+      this.settings.quality,
+      w,
+      h,
       window.devicePixelRatio,
-      this.settings.quality === 'high' ? 1.25 : 1,
-      Math.sqrt(1800000 / (w * h)),
     );
   }
   resizeQuality() {
     const ratio = this.pixelRatio();
     this.renderer.setPixelRatio(ratio);
+    const shadowSize = QUALITY[this.settings.quality].shadowSize;
+    if (this.sun.shadow.mapSize.x !== shadowSize) {
+      this.sun.shadow.mapSize.set(shadowSize, shadowSize);
+      this.sun.shadow.map?.dispose();
+      this.sun.shadow.map = null;
+      this.renderer.shadowMap.needsUpdate = true;
+    }
     this.composer?.setPixelRatio(ratio);
     this.fxaa?.uniforms.resolution.value.set(
       1 / (this.container.clientWidth * ratio),
       1 / (this.container.clientHeight * ratio),
     );
   }
+  updateShadowFrustum() {
+    if (this.settings.mode !== 'orbit') return;
+    const distance = this.camera.position.distanceTo(this.controls.target);
+    const close = this.settings.quality === 'ultra' && distance < 1800;
+    const extent = close
+      ? Math.ceil(Math.max(140, distance * 0.95) / 32) * 32
+      : 2700;
+    const anchor = close
+      ? this.controls.target.clone().divideScalar(32).round().multiplyScalar(32)
+      : new THREE.Vector3();
+    if (
+      this.sun.shadow.camera.right === extent &&
+      this.sun.target.position.equals(anchor)
+    )
+      return;
+    this.sun.position.sub(this.sun.target.position).add(anchor);
+    this.sun.target.position.copy(anchor);
+    Object.assign(this.sun.shadow.camera, {
+      left: -extent,
+      right: extent,
+      top: extent,
+      bottom: -extent,
+    });
+    this.sun.shadow.camera.updateProjectionMatrix();
+    this.renderer.shadowMap.needsUpdate = true;
+  }
   renderScene() {
+    this.detailedTrees?.update();
+    this.facadeDetails?.update();
+    this.landmarkDetails.forEach((l) => l.update());
+    this.updateShadowFrustum();
     this.renderer.info.reset();
     const shadows =
-      this.settings.quality === 'high' &&
+      this.settings.quality !== 'balanced' &&
       this.camera.position.distanceTo(this.controls.target) < 4500;
     if (shadows !== this.renderer.shadowMap.enabled) {
       this.renderer.shadowMap.enabled = shadows;
       this.renderer.shadowMap.needsUpdate = shadows;
     }
     const ao =
-      this.settings.quality === 'high' &&
+      this.settings.quality !== 'balanced' &&
       this.camera.position.distanceTo(this.controls.target) < 3500;
     if (ao && !this.ssao && this.composer) {
       const ratio = this.pixelRatio();
@@ -358,6 +409,11 @@ export class CityEngine {
         this.container.clientHeight * ratio,
         8,
       );
+      // Ambient contact shading is low-frequency: render it at half resolution
+      // while keeping the city colour pass at the selected physical resolution.
+      const sizeAO = this.ssao.setSize.bind(this.ssao);
+      this.ssao.setSize = (w, h) =>
+        sizeAO(Math.max(1, Math.round(w / 2)), Math.max(1, Math.round(h / 2)));
       this.ssao.maxDistance = 0.005;
       // Match the two-sided road/deck surfaces used in the beauty pass.
       this.ssao.normalMaterial.side = THREE.DoubleSide;
@@ -368,6 +424,7 @@ export class CityEngine {
           ? object.material
           : [object.material];
         if (
+          object.userData.alphaFoliage ||
           object.userData.railVehicle ||
           object.userData.harbourVehicle ||
           materials.every((m) => m.transparent && !m.depthWrite)
@@ -376,13 +433,19 @@ export class CityEngine {
       });
       const renderAO = this.ssao.render.bind(this.ssao);
       this.ssao.render = (...args) => {
-        const visible = decorative.filter((object) => {
+        const visible = [
+          ...new Set([
+            ...decorative,
+            ...(this.detailedTrees?.pools.map((p) => p.foliage) || []),
+          ]),
+        ].filter((object) => {
           const materials = Array.isArray(object.material)
             ? object.material
             : [object.material];
           return (
             object.visible &&
-            materials.every((m) => m.transparent && !m.depthWrite)
+            (object.userData.alphaFoliage ||
+              materials.every((m) => m.transparent && !m.depthWrite))
           );
         });
         visible.forEach((object) => {
@@ -640,7 +703,7 @@ export class CityEngine {
     for (const f of this.data.buildings.features) {
       const prop = f.properties,
         h = Math.max(2, Number(prop.height ?? prop.hgt_agl ?? 8));
-      if (h > 350) continue;
+      if (h > 350 || replacedBuilding(prop)) continue;
       for (const polygon of rings(f)) {
         const poly = polygon.map((r) => r.slice(0, -1).map(project));
         if (poly[0].length < 3) continue;
@@ -747,11 +810,28 @@ export class CityEngine {
       s.fragmentShader = s.fragmentShader.replace(
         '#include <color_fragment>',
         `#include <color_fragment>
-  if(vFacade.x>=0.0){if(vStyle>.5)diffuseColor.rgb=texture2D(uBrick,vFacade/1.728).rgb*diffuseColor.rgb*2.0;diffuseColor.rgb*=mix(.72,1.0,smoothstep(0.0,18.0,vFacade.y));vec2 cell=vec2(vFacade.x/3.1,vFacade.y/3.25);vec2 grid=fract(cell);float pane=smoothstep(.1,.17,grid.x)*(1.0-smoothstep(.79,.9,grid.x))*smoothstep(.18,.24,grid.y)*(1.0-smoothstep(.82,.9,grid.y));
-   float rand=fract(sin(dot(floor(cell),vec2(127.1,311.7)))*43758.5453);float lit=step(.52,rand)*uNight;
-   diffuseColor.rgb=mix(diffuseColor.rgb*1.12,diffuseColor.rgb*vec3(.50,.69,.77),pane);
-   diffuseColor.rgb=mix(diffuseColor.rgb,vec3(1.0,.69,.3),pane*lit*.85);
+  if(vFacade.x>=0.0){
+    vec2 cell=vec2(vFacade.x/3.1,vFacade.y/3.25),grid=fract(cell);
+    vec2 aa=max(fwidth(cell)*.8,vec2(.008));
+    float brick=step(.5,vStyle);
+    float pane=(smoothstep(.105-aa.x,.105+aa.x,grid.x)-smoothstep(.865-aa.x,.865+aa.x,grid.x))*(smoothstep(.19-aa.y,.19+aa.y,grid.y)-smoothstep(.865-aa.y,.865+aa.y,grid.y));
+    float rand=fract(sin(dot(floor(cell),vec2(127.1,311.7)))*43758.5453);
+    if(brick>.5) diffuseColor.rgb*=texture2D(uBrick,vFacade/1.728).rgb*1.7;
+    vec3 wall=diffuseColor.rgb;
+    float blind=step(.75,rand)*smoothstep(.32,.7,grid.y);
+    vec3 glazing=wall*mix(vec3(.36,.58,.67),vec3(.65,.84,.87),smoothstep(.2,.9,grid.y));
+    glazing=mix(glazing,vec3(.38,.40,.35),blind*.55);
+    float sill=(smoothstep(.155-aa.y,.155+aa.y,grid.y)-smoothstep(.195-aa.y,.195+aa.y,grid.y));
+    diffuseColor.rgb=mix(wall,glazing,pane);
+    diffuseColor.rgb*=1.-sill*.32;
+    diffuseColor.rgb*=mix(.77,1.,smoothstep(0.,14.,vFacade.y));
+    diffuseColor.rgb=mix(diffuseColor.rgb,vec3(1.,.64,.26),pane*step(.52,rand)*uNight*.75);
   }`,
+      );
+      s.fragmentShader = s.fragmentShader.replace(
+        '#include <roughnessmap_fragment>',
+        `#include <roughnessmap_fragment>
+  if(vFacade.x>=0.0){ vec2 g=fract(vec2(vFacade.x/3.1,vFacade.y/3.25));float pane=step(.12,g.x)*step(g.x,.86)*step(.2,g.y)*step(g.y,.86);roughnessFactor=mix(.83,.26,pane); }`,
       );
       s.fragmentShader = s.fragmentShader.replace(
         '#include <emissivemap_fragment>',
@@ -766,6 +846,7 @@ export class CityEngine {
     mesh.receiveShadow = true;
     this.buildings.add(mesh);
     this.stats.buildings = count;
+    this.facadeDetails = new FacadeDetails(this, foundations);
   }
   ribbon(
     points: number[][],
@@ -927,10 +1008,16 @@ export class CityEngine {
           ? Math.max(1, Math.min(1.8, 0.85 / this.camera.aspect))
           : 1),
       [x, z] = project(v.coord),
-      target = new THREE.Vector3(x, this.elevation(x, z), z),
+      target = new THREE.Vector3(
+        x,
+        this.elevation(x, z) + (v.targetHeight || 0),
+        z,
+      ),
       pos = new THREE.Vector3(
         x + Math.sin(v.azimuth) * Math.cos(v.elevation) * distance,
-        this.elevation(x, z) + Math.sin(v.elevation) * distance,
+        this.elevation(x, z) +
+          (v.targetHeight || 0) +
+          Math.sin(v.elevation) * distance,
         z + Math.cos(v.azimuth) * Math.cos(v.elevation) * distance,
       );
     if (animate)
@@ -1026,7 +1113,7 @@ export class CityEngine {
     this.controls.autoRotate = settings.autoRotate;
     this.resizeQuality();
     this.renderer.shadowMap.enabled =
-      settings.quality === 'high' &&
+      settings.quality !== 'balanced' &&
       this.camera.position.distanceTo(this.controls.target) < 4500;
     this.controls.autoRotateSpeed = 0.5;
     const extent = settings.mode === 'orbit' ? 2700 : 170;
@@ -1044,6 +1131,7 @@ export class CityEngine {
     if (this.railway) this.railway.group.visible = settings.trains;
     if (this.harbour) this.harbour.group.visible = settings.harbour;
     this.landmarks.visible = settings.buildings;
+    this.detailedTrees?.update(true);
     this.updateLighting(true);
   }
   setClock(patch: Partial<ClockState>) {
@@ -1182,6 +1270,8 @@ export class CityEngine {
       this.renderer.domElement.dataset.geometries = String(
         this.renderer.info.memory.geometries,
       );
+      this.stats.renderWidth = this.renderer.domElement.width;
+      this.stats.renderHeight = this.renderer.domElement.height;
       this.stats.fps = Math.round((this.frames * 1000) / (time - this.fpsAt));
       this.stats.speed = Math.round((this.navigation?.speed || 0) * 3.6);
       this.stats.clock = this.clock.snapshot();
@@ -1229,6 +1319,11 @@ export class CityEngine {
       downtown: 100,
       stanley: 105,
       science: 65,
+      bcplace: 70,
+      lookout: 180,
+      marine: 106,
+      convention: 38,
+      harbour: 30,
       canada: 70,
       railway: 12,
       skytrain: 18,
@@ -1367,6 +1462,10 @@ export class CityEngine {
     if (this.disposed) return;
     window.removeEventListener('pagehide', this.pageHide);
     this.disposed = true;
+    if (process.env.NODE_ENV === 'development') {
+      const inspectWindow = window as Window & { __atlas?: CityEngine };
+      if (inspectWindow.__atlas === this) delete inspectWindow.__atlas;
+    }
     cancelAnimationFrame(this.raf);
     this.resizeObserver.disconnect();
     this.labelElements.forEach((l) => l.element.remove());
@@ -1376,6 +1475,8 @@ export class CityEngine {
     this.scene.traverse((o) => {
       const m = o as THREE.Mesh;
       m.geometry?.dispose();
+      m.customDepthMaterial?.dispose();
+      m.customDistanceMaterial?.dispose();
       if (m instanceof THREE.InstancedMesh) m.dispose();
       if (m.material) {
         for (const a of Array.isArray(m.material) ? m.material : [m.material]) {
@@ -1385,6 +1486,7 @@ export class CityEngine {
         }
       }
     });
+    this.facadeDetails?.dispose();
     this.environmentTarget?.dispose();
     this.extraTextures.forEach((t) => t.dispose());
     this.sun.shadow.dispose();

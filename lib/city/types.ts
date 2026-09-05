@@ -1,3 +1,4 @@
+import type { VisualQuality } from './quality';
 import type { ClockState } from './clock';
 export type Coord = [number, number];
 export interface Feature {
@@ -13,6 +14,8 @@ export interface TerrainData {
 }
 export interface SceneStats {
   clock?: ClockState;
+  renderWidth?: number;
+  renderHeight?: number;
   buildings: number;
   trees: number;
   roads: number;
@@ -33,7 +36,7 @@ export interface Settings {
   harbour: boolean;
   terrain: boolean;
   autoRotate: boolean;
-  quality: 'high' | 'balanced';
+  quality: VisualQuality;
   mode: 'orbit' | 'walk' | 'drive' | 'boat';
 }
 export interface Viewpoint {
@@ -42,6 +45,7 @@ export interface Viewpoint {
   zh: string;
   coord: Coord;
   distance: number;
+  targetHeight?: number;
   azimuth: number;
   elevation: number;
   description: string;
@@ -86,9 +90,9 @@ export const VIEWS: Viewpoint[] = [
     name: 'Science World',
     zh: '科學世界',
     coord: [-123.1032, 49.2734],
-    distance: 610,
+    distance: 450,
     azimuth: 0.8,
-    elevation: 0.62,
+    elevation: 0.6,
     tag: '地標',
     description: '福溪東端的銀色測地穹頂，是 1986 年世界博覽會留給城市的地標。',
   },
@@ -97,12 +101,47 @@ export const VIEWS: Viewpoint[] = [
     name: 'Canada Place',
     zh: '加拿大廣場',
     coord: [-123.1114, 49.2888],
-    distance: 850,
-    azimuth: -0.5,
-    elevation: 0.67,
+    distance: 750,
+    azimuth: 2.4,
+    elevation: 0.64,
     tag: '海港',
     description:
       '五座白色帆頂面向 Burrard Inlet，港灣、遊輪碼頭與市中心在這裡相遇。',
+  },
+  {
+    id: 'bcplace',
+    name: 'BC Place',
+    zh: '卑詩體育館',
+    coord: [-123.1120067, 49.2766985],
+    distance: 680,
+    azimuth: 0.8,
+    elevation: 0.78,
+    tag: '地標',
+    description: '張索、鋼桅與可開合屋頂圍繞球場。',
+  },
+  {
+    id: 'lookout',
+    name: 'Harbour Centre',
+    zh: '海港中心',
+    coord: [-123.1120903, 49.2847656],
+    distance: 390,
+    targetHeight: 75,
+    azimuth: 2.5,
+    elevation: 0.56,
+    tag: '地標',
+    description: '層疊展望台俯瞰港灣與城市。',
+  },
+  {
+    id: 'marine',
+    name: 'Marine Building',
+    zh: '海洋大廈',
+    coord: [-123.117146, 49.287449],
+    distance: 186,
+    targetHeight: 48,
+    azimuth: 0.2,
+    elevation: 0.476,
+    tag: '地標',
+    description: '裝飾藝術風格的退台、垂直線條與雕飾塔冠。',
   },
   {
     id: 'harbour',

@@ -597,6 +597,6 @@ export function updateRailway(
     dt,
     smoking ? chimney : null,
     smokeForward,
-    e.settings.quality === 'high',
+    e.settings.quality !== 'balanced',
   );
 }

@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { replacedBuilding } from './replaced-buildings';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import type { CityEngine } from './engine';
 import { project, rings, hash, inPolygon } from './geo';
@@ -283,6 +284,7 @@ export function createRoofDetails(e: CityEngine) {
     }[] = [],
     highest = new Map<string, any>();
   for (const f of e.data.buildings.features) {
+    if (replacedBuilding(f.properties)) continue;
     const key = String(
       f.properties.structureId ?? f.properties.buildingId ?? f.properties.id,
     );
