@@ -127,6 +127,7 @@ export default function Home() {
     [tour, setTour] = useState(false),
     [clean, setClean] = useState(false),
     [notice, setNotice] = useState('');
+  const [returnMode, setReturnMode] = useState<TravelMode | null>(null);
   const [localOrbit, setLocalOrbit] = useState(false);
   const [travelView, setTravelView] = useState<TravelView>({
     mode: 'orbit',
@@ -196,6 +197,13 @@ export default function Home() {
   useEffect(() => {
     const city = engine.current;
     if (!ready || !city) return;
+    city.onTravelReturnChange = setReturnMode;
+    city.onTravelResume = (mode) => {
+      setLocalOrbit(false);
+      setTour(false);
+      setPlacing(null);
+      setSettings((s) => ({ ...s, mode, autoRotate: false }));
+    };
     city.onTravelView = setTravelView;
     if (city.navigation) setTravelView(city.navigation.cameraView);
     city.onLocalOrbit = () => {
@@ -205,6 +213,8 @@ export default function Home() {
       setSettings((s) => ({ ...s, mode: 'orbit', autoRotate: false }));
     };
     return () => {
+      city.onTravelReturnChange = () => {};
+      city.onTravelResume = () => {};
       city.onTravelView = () => {};
       city.onLocalOrbit = () => {};
     };
@@ -539,6 +549,26 @@ export default function Home() {
               )}
             </p>
           )}
+        </aside>
+      )}
+      {ready && settings.mode === 'orbit' && returnMode && (
+        <aside
+          className="travel-camera-card glass ui-chrome"
+          aria-label={tr('returnToTravel')}
+        >
+          <div>
+            <Camera size={15} />
+            <strong>
+              {tr(
+                returnMode === 'walk'
+                  ? 'returnToWalk'
+                  : returnMode === 'drive'
+                    ? 'returnToDrive'
+                    : 'returnToBoat',
+              )}
+            </strong>
+          </div>
+          <p>{tr('returnToTravelHint')}</p>
         </aside>
       )}
       <div

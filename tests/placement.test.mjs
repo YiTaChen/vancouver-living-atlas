@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 import ts from 'typescript';
 import { cityModule } from './helpers/city-modules.mjs';
 import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 const compile = (name, imports = {}) => {
   let code = ts.transpileModule(
     readFileSync(new URL(`../lib/city/${name}.ts`, import.meta.url), 'utf8'),
@@ -386,6 +387,7 @@ const { StreetNavigation } = await import(
     './travel-camera': cityModule('travel-camera'),
     './assets/walker': cityModule('assets/walker'),
     './ground-surface': cityModule('ground-surface'),
+    './driver-camera': cityModule('driver-camera'),
     './assets/cockpits': cityModule('assets/cockpits'),
     './landmark-footprints.json': landmarkUrl,
   })
@@ -1097,4 +1099,390 @@ test('two-finger zoom never turns or moves the player and consumes the remaining
   assert.equal(nav.touches.size, 0);
   assert.equal(nav.dragging, false);
   nav.destroy();
+});
+
+const { TravelReturn } = await import(cityModule('travel-return'));
+function returnFixture(mode = 'drive', surface = 'ground') {
+  const { nav, e } = navigationFixture();
+  e.waterWorld = {
+    canOccupy: () => true,
+    at: () => ({ id: 'lake', kind: 'lake', level: 45 }),
+  };
+  e.renderer.shadowMap = { needsUpdate: false };
+  e.camera.up.set(0, 1, 0);
+  e.controls = new OrbitControls(e.camera, null);
+  e.controls.minDistance = 28;
+  e.controls.maxDistance = 18000;
+  e.controls.maxPolarAngle = Math.PI * 0.485;
+  e.controls.rotateSpeed = 0.65;
+  e.controls.enableDamping = true;
+  e.controls.enablePan = true;
+  e.renderer.domElement.clientHeight = 800;
+  e.travelReturn = new TravelReturn(e);
+  e.travelReturn.attach();
+  e.completeLocalMapTransition = () => finishLocalMapTransition(e);
+  e.leaveTravelAtLocation = (remember) => enterLocalMap(e, remember);
+  e.zoom = (factor) => {
+    if (nav.mode !== 'orbit') {
+      nav.zoom(factor);
+      return;
+    }
+    finishLocalMapTransition(e);
+    e.camera.position
+      .sub(e.controls.target)
+      .multiplyScalar(factor)
+      .add(e.controls.target);
+    e.controls.update();
+    e.travelReturn.update();
+  };
+  nav.cameraDistances[mode] = 0;
+  nav.startAt(mode, cameraPoint(surface));
+  nav.pitch = 0.18;
+  nav.driveLookYaw = 0.32;
+  nav.boat.lookYaw = -0.24;
+  if (mode !== 'walk') nav.setInterior('clear');
+  nav.update(0);
+  e.settings.mode = mode;
+  const saved = nav.snapshotTravel();
+  nav.zoom(100);
+  return {
+    nav,
+    e,
+    saved,
+    close() {
+      e.travelReturn.destroy();
+      nav.destroy();
+    },
+  };
+}
+
+test('zoom return restores exact travel mode, location, deck/water layer, view and heading at rest', () => {
+  for (const [mode, surface] of [
+    ['walk', 'ground'],
+    ['drive', 'bridge'],
+    ['boat', 'water'],
+  ]) {
+    const { nav, e, saved, close } = returnFixture(mode, surface);
+    try {
+      assert.equal(nav.mode, 'orbit');
+      assert(e.travelReturn.bookmark);
+      e.travelReturn.update();
+      assert.equal(
+        nav.mode,
+        'orbit',
+        'Exit animation cannot instantly restore a close-up camera',
+      );
+      finishLocalMapTransition(e);
+      e.travelReturn.update();
+      assert.equal(nav.mode, 'orbit');
+      // Orbit about the same center, including vertical camera changes.
+      e.camera.position
+        .sub(e.controls.target)
+        .applyAxisAngle(new THREE.Vector3(0, 1, 0), 1.2)
+        .add(e.controls.target);
+      e.controls.dispatchEvent({ type: 'change' });
+      e.travelReturn.update();
+      assert(e.travelReturn.bookmark, 'Rotation retains return');
+      let resumed = null;
+      e.onTravelResume = (m) => {
+        resumed = m;
+      };
+      e.zoom(0.5);
+      assert.equal(nav.mode, mode);
+      assert.equal(resumed, mode);
+      assert.equal(e.settings.mode, mode);
+      assert.equal(e.travelReturn.bookmark, null);
+      assert(nav.position.distanceTo(saved.position) < 1e-8);
+      assert.equal(nav.yaw, saved.yaw);
+      assert.equal(nav.pitch, saved.pitch);
+      assert.equal(nav.surface, surface);
+      assert.equal(nav.cameraDistance, saved.distance);
+      assert.equal(nav.speed, 0);
+      assert.equal(nav.keys.size, 0);
+      assert.equal(e.controls.enabled, false);
+      if (mode === 'drive') assert.equal(nav.driveLookYaw, saved.lookYaw);
+      if (mode === 'boat') {
+        assert.equal(nav.boat.lookYaw, saved.lookYaw);
+        assert.equal(nav.boat.state.throttle, 0);
+        assert.equal(nav.boat.state.vx, 0);
+        assert.equal(nav.boat.state.vz, 0);
+        assert.equal(nav.boat.state.yawRate, 0);
+        assert.equal(nav.boat.state.surfaceId, 'lake');
+      }
+      assert(nav.returnBlend, 'Resume eases from the current local camera');
+      const cameraStart = e.camera.position.clone();
+      nav.update(0.016);
+      assert(e.camera.position.distanceTo(cameraStart) < 2);
+      settleCamera(nav);
+      assert.equal(nav.returnBlend, null);
+      assert(
+        Math.hypot(
+          nav.position.x - saved.position.x,
+          nav.position.z - saved.position.z,
+        ) < 1e-8,
+      );
+      if (mode !== 'boat') assert.equal(nav.position.y, saved.position.y);
+      assert.equal(nav.cameraView.interior, saved.interior);
+      assert(e.camera.position.toArray().every(Number.isFinite));
+    } finally {
+      close();
+    }
+  }
+});
+
+test('panning away then back permanently cancels return; explicit placement also cancels before movement', () => {
+  for (const action of ['pan', 'placement']) {
+    const { nav, e, saved, close } = returnFixture();
+    try {
+      finishLocalMapTransition(e);
+      if (action === 'pan') {
+        e.controls.target.x += 0.01;
+        e.controls.dispatchEvent({ type: 'change' });
+        e.controls.target.copy(saved.position);
+        e.controls.dispatchEvent({ type: 'change' });
+      } else {
+        const placement = new MapPlacement(e);
+        placement.begin('walk');
+        placement.cancel();
+        placement.destroy();
+      }
+      assert.equal(e.travelReturn.bookmark, null);
+      e.zoom(0.4);
+      assert.equal(nav.mode, 'orbit');
+    } finally {
+      close();
+    }
+  }
+});
+
+test('two-finger pinch returns without center drift; two-finger translation permanently invalidates return', () => {
+  for (const kind of ['pinch', 'pan']) {
+    const { nav, e, saved, close } = returnFixture();
+    const touch = (id, x) => ({
+      pointerId: id,
+      pointerType: 'touch',
+      clientX: x,
+      clientY: 100,
+      preventDefault() {},
+      stopImmediatePropagation() {},
+    });
+    try {
+      finishLocalMapTransition(e);
+      e.travelReturn.down(touch(1, 100));
+      e.travelReturn.down(touch(2, 200));
+      // Sequential OS finger events are processed together at the frame boundary.
+      e.travelReturn.move(touch(1, kind === 'pinch' ? 40 : 140));
+      e.travelReturn.move(touch(2, kind === 'pinch' ? 260 : 240));
+      e.travelReturn.flushGesture();
+      if (kind === 'pinch') {
+        assert.equal(nav.mode, 'drive');
+        assert(nav.position.distanceTo(saved.position) < 1e-8);
+      } else {
+        assert.equal(nav.mode, 'orbit');
+        assert.equal(e.travelReturn.bookmark, null);
+        assert(e.controls.target.distanceTo(saved.position) > 1);
+      }
+      e.travelReturn.up(touch(1, 40));
+      e.travelReturn.up(touch(2, 260));
+      assert.equal(e.controls.enablePan, true);
+      assert.equal(e.travelReturn.touches.size, 0);
+    } finally {
+      close();
+    }
+  }
+});
+
+test('car and boat wheel rotate toward the actual left/right steering input, including screen-button pulses', () => {
+  for (const mode of ['drive', 'boat'])
+    for (const direction of ['left', 'right']) {
+      const { nav, e } = navigationFixture();
+      e.waterWorld = {
+        canOccupy: () => true,
+        at: () => ({ id: 'lake', kind: 'lake', level: 45 }),
+      };
+      nav.cameraDistances[mode] = 0;
+      nav.startAt(mode, cameraPoint(mode === 'boat' ? 'water' : 'ground'));
+      nav.hold('forward', true);
+      for (let i = 0; i < 60; i++) nav.update(1 / 60);
+      nav.hold(direction, true);
+      const beforeYaw = nav.yaw;
+      for (let i = 0; i < 12; i++) nav.update(1 / 60);
+      const sign = direction === 'left' ? 1 : -1;
+      assert((nav.yaw - beforeYaw) * sign > 0);
+      const wheel = nav.cockpits[mode].userData.steeringWheel;
+      assert(wheel.rotation.z * sign > 0);
+      // Wheel-local positive Y spoke moves screen-left under positive rotation Z.
+      assert(-Math.sin(wheel.rotation.z) * sign < 0);
+      nav.blur();
+      nav.steering = 0;
+      nav.step(direction);
+      nav.update(1 / 60);
+      assert(
+        wheel.rotation.z * sign > 0,
+        `${mode} screen-button pulse animates its wheel`,
+      );
+      nav.destroy();
+    }
+});
+
+test('driver eye is on vehicle left for every heading; looking around moves the cabin relative to the head without steering', () => {
+  const { nav, e } = navigationFixture();
+  nav.cameraDistances.drive = 0;
+  nav.startAt('drive', cameraPoint());
+  for (const yaw of [0, Math.PI / 2, Math.PI, -Math.PI / 2]) {
+    nav.yaw = yaw;
+    nav.pitch = 0;
+    nav.driveLookYaw = 0;
+    nav.update(0);
+    const local = e.camera.position
+      .clone()
+      .sub(nav.position)
+      .applyAxisAngle(new THREE.Vector3(0, 1, 0), -yaw);
+    assert(Math.abs(local.x - 0.45) < 1e-8);
+    assert(Math.abs(local.z) < 1e-8);
+    assert(Math.abs(local.y - 1.45) < 1e-8);
+    const wheel = nav.cockpits.drive.userData.steeringWheel;
+    e.scene.updateMatrixWorld(true);
+    const wheelBefore = wheel.getWorldPosition(new THREE.Vector3());
+    const oldYaw = nav.yaw;
+    nav.pointerDown({ clientX: 100, clientY: 100 });
+    nav.pointerMove({ clientX: 160, clientY: 100 });
+    nav.update(0);
+    assert.equal(nav.yaw, oldYaw);
+    assert.notEqual(nav.driveLookYaw, 0);
+    e.scene.updateMatrixWorld(true);
+    assert(
+      wheel.getWorldPosition(new THREE.Vector3()).distanceTo(wheelBefore) <
+        1e-8,
+      'The cabin stays attached to the car',
+    );
+  }
+  nav.destroy();
+});
+
+test('an explicit new destination consumes the pending pinch instead of zooming the new trip', () => {
+  const { nav, e, close } = returnFixture();
+  const touch = (id, x) => ({
+    pointerId: id,
+    pointerType: 'touch',
+    clientX: x,
+    clientY: 100,
+    preventDefault() {},
+    stopImmediatePropagation() {},
+  });
+  try {
+    finishLocalMapTransition(e);
+    e.travelReturn.down(touch(1, 100));
+    e.travelReturn.down(touch(2, 200));
+    e.travelReturn.move(touch(2, 240));
+    nav.startAt('walk', cameraPoint());
+    const distance = nav.cameraDistance;
+    e.travelReturn.flushGesture();
+    assert.equal(nav.cameraDistance, distance);
+    assert.equal(nav.mode, 'walk');
+    assert.equal(e.travelReturn.bookmark, null);
+    e.travelReturn.up(touch(1, 100));
+    e.travelReturn.up(touch(2, 240));
+    assert.equal(e.controls.enablePan, true);
+  } finally {
+    close();
+  }
+});
+const { DriverCameraMotion } = await import(cityModule('driver-camera'));
+test('head response is bounded, settles at rest and uses vehicle axes when looking sideways', () => {
+  const m = new DriverCameraMotion();
+  for (let i = 0; i < 60; i++) m.update(1 / 60, 20, 19, 0.05);
+  assert(m.surge < 0 && m.surge >= -0.03);
+  assert(m.sway < 0 && m.sway >= -0.03);
+  assert(m.pitch > 0 && m.pitch <= 0.006);
+  assert(m.roll < 0 && m.roll >= -0.009);
+  const world = m.worldRotation(0.7);
+  for (const look of [0, 0.7, -1.2]) {
+    const camera = new THREE.Quaternion().setFromAxisAngle(
+      new THREE.Vector3(0, 1, 0),
+      0.7 + Math.PI + look,
+    );
+    const moved = camera.clone().premultiply(world);
+    assert(
+      moved.clone().multiply(camera.clone().invert()).angleTo(world) < 1e-7,
+    );
+  }
+  for (let i = 0; i < 180; i++) m.update(1 / 60, 0, 0, 0);
+  assert(Math.abs(m.sway) < 1e-7 && Math.abs(m.surge) < 1e-7);
+  m.reset();
+  assert.equal(m.pitch, 0);
+  assert.equal(m.roll, 0);
+});
+
+test('a pinch can continue as one-finger map rotation without panning or returning', () => {
+  const { nav, e, saved, close } = returnFixture();
+  const touch = (id, x) => ({
+    pointerId: id,
+    pointerType: 'touch',
+    clientX: x,
+    clientY: 100,
+    preventDefault() {},
+    stopImmediatePropagation() {},
+  });
+  try {
+    finishLocalMapTransition(e);
+    e.travelReturn.down(touch(1, 100));
+    e.travelReturn.down(touch(2, 200));
+    e.travelReturn.move(touch(1, 90));
+    e.travelReturn.move(touch(2, 210));
+    e.travelReturn.flushGesture();
+    const radius = e.camera.position.distanceTo(e.controls.target);
+    e.travelReturn.up(touch(2, 210));
+    const before = e.camera.position.clone();
+    e.travelReturn.move(touch(1, 160));
+    e.travelReturn.flushGesture();
+    e.travelReturn.update();
+    assert(e.camera.position.distanceTo(before) > 1);
+    assert(
+      Math.abs(e.camera.position.distanceTo(e.controls.target) - radius) < 1e-7,
+    );
+    assert(e.controls.target.distanceTo(saved.position) < 1e-8);
+    assert(e.travelReturn.bookmark);
+    assert.equal(nav.mode, 'orbit');
+    e.travelReturn.up(touch(1, 160));
+    assert.equal(e.controls.enablePan, true);
+  } finally {
+    close();
+  }
+});
+
+test('rejoining a second finger after a pan keeps gesture ownership without restoring return eligibility', () => {
+  const { nav, e, close } = returnFixture();
+  const touch = (id, x) => ({
+    pointerId: id,
+    pointerType: 'touch',
+    clientX: x,
+    clientY: 100,
+    preventDefault() {},
+    stopImmediatePropagation() {},
+  });
+  try {
+    finishLocalMapTransition(e);
+    e.travelReturn.down(touch(1, 100));
+    e.travelReturn.down(touch(2, 200));
+    e.travelReturn.move(touch(1, 140));
+    e.travelReturn.move(touch(2, 240));
+    e.travelReturn.flushGesture();
+    assert.equal(e.travelReturn.bookmark, null);
+    e.travelReturn.up(touch(2, 240));
+    e.travelReturn.down(touch(3, 240));
+    assert.equal(e.travelReturn.touches.size, 2);
+    const target = e.controls.target.clone();
+    e.travelReturn.move(touch(1, 50));
+    e.travelReturn.move(touch(3, 330));
+    e.travelReturn.flushGesture();
+    assert.equal(nav.mode, 'orbit');
+    assert(e.controls.target.distanceTo(target) < 1e-8);
+    assert.equal(e.travelReturn.bookmark, null);
+    e.travelReturn.up(touch(1, 50));
+    e.travelReturn.up(touch(3, 330));
+    assert.equal(e.controls.enablePan, true);
+  } finally {
+    close();
+  }
 });

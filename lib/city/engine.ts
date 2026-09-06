@@ -1,4 +1,6 @@
 import { enterLocalMap, finishLocalMapTransition } from './local-map-camera';
+import { TravelReturn } from './travel-return';
+import type { TravelMode } from './placement-geometry';
 import type { TravelView } from './travel-camera';
 import * as THREE from 'three';
 import { LocalMinimap, minimapPose, minimapWorldPoint } from './minimap';
@@ -87,6 +89,7 @@ export class CityEngine {
   sailingWaves: ReturnType<typeof addSailingWaves> | null = null;
   navigation: StreetNavigation | null = null;
   placement: MapPlacement | null = null;
+  travelReturn: TravelReturn;
   settings = { ...DEFAULT_SETTINGS };
   stats: SceneStats = {
     buildings: 0,
@@ -121,6 +124,8 @@ export class CityEngine {
     fromTarget: THREE.Vector3;
     toTarget: THREE.Vector3;
   } = null;
+  onTravelReturnChange: (mode: TravelMode | null) => void = () => {};
+  onTravelResume: (mode: TravelMode) => void = () => {};
   onLocalOrbit: () => void = () => {};
   onTravelView: (view: TravelView) => void = () => {};
   onStats: (s: SceneStats) => void;
@@ -179,6 +184,8 @@ export class CityEngine {
       this.onError('graphics-context-lost');
     });
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    this.travelReturn = new TravelReturn(this);
+    this.travelReturn.attach();
     this.controls.enableDamping = true;
     this.controls.dampingFactor = 0.07;
     this.controls.minDistance = 28;
@@ -1014,6 +1021,7 @@ export class CityEngine {
     this.fly(v, animate);
   }
   fly(v: Viewpoint, animate = true) {
+    this.travelReturn?.invalidate(true);
     this.completeLocalMapTransition();
     const distance =
         v.distance *
@@ -1051,8 +1059,8 @@ export class CityEngine {
   completeLocalMapTransition() {
     finishLocalMapTransition(this);
   }
-  leaveTravelAtLocation() {
-    if (!enterLocalMap(this)) return;
+  leaveTravelAtLocation(remember = false) {
+    if (!enterLocalMap(this, remember)) return;
     this.onLocalOrbit();
   }
   zoom(f: number) {
@@ -1068,8 +1076,10 @@ export class CityEngine {
       .multiplyScalar(f)
       .add(this.controls.target);
     this.controls.update();
+    this.travelReturn?.update();
   }
   focusTrain(kind: TrainKind) {
+    this.travelReturn?.invalidate(true);
     this.completeLocalMapTransition();
     const train = this.railway?.trains.find((t) => t.kind === kind);
     if (!train) return;
@@ -1110,6 +1120,7 @@ export class CityEngine {
     };
   }
   focusHarbour(kind: HarbourKind) {
+    this.travelReturn?.invalidate(true);
     this.completeLocalMapTransition();
     const actor = this.harbour?.actors.find((a) => a.kind === kind);
     if (!actor) return;
@@ -1272,6 +1283,7 @@ export class CityEngine {
     if (this.settings.mode === 'orbit') {
       if (!this.transition) this.controls.update();
     } else this.navigation?.update((time - this.lastTime) / 1000);
+    this.travelReturn?.update();
     this.sailingWaves?.update();
     this.minimap?.draw(time);
     if (
@@ -1455,6 +1467,7 @@ export class CityEngine {
     this.resizeObserver.disconnect();
     this.labelElements.forEach((l) => l.element.remove());
     this.minimap = null;
+    this.travelReturn?.destroy();
     this.navigation?.destroy();
     this.placement?.destroy();
     this.controls.dispose();

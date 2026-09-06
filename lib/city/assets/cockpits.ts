@@ -290,7 +290,7 @@ function gauge(
 function carWheel(palette: Palette) {
   const group = new THREE.Group();
   group.name = 'drive-steering-wheel';
-  group.position.set(0, -0.405, -0.66);
+  group.position.set(0, -0.345, -0.9);
   group.rotation.x = -0.2;
   const p = new Parts(group, palette),
     radius = 0.166;
@@ -401,124 +401,235 @@ function boatWheel(palette: Palette) {
   return group;
 }
 
+// Driver-eye view of an original left-hand-drive interior. The steering wheel
+// stays on the eye axis; the CABIN is asymmetric around that axis, not the wheel.
 function drive(group: THREE.Group, p: Parts, palette: Palette) {
-  // The hood and binnacle rise only into the bottom quarter of a 45-degree view.
+  // Approximate vehicle centreline is camera-local +X=0.45m. Thus the nearby
+  // driver door is at -0.5m and the far passenger edge is around +1.3m.
   p.panel(
     'dash',
     [
-      [-0.88, -0.62],
-      [0.9, -0.62],
-      [0.9, -0.355],
-      [0.43, -0.356],
-      [0.23, -0.368],
-      [-0.23, -0.368],
-      [-0.46, -0.356],
-      [-0.88, -0.355],
+      [-0.5, -0.7],
+      [1.34, -0.7],
+      [1.34, -0.365],
+      [1.12, -0.34],
+      [0.73, -0.352],
+      [0.28, -0.402],
+      [-0.24, -0.402],
+      [-0.48, -0.364],
     ],
-    0.34,
-    -0.78,
-    0.02,
+    0.28,
+    -1.045,
+    0.018,
   );
   p.tube(
     'trim',
     [
-      [-0.83, -0.37, -0.752],
-      [-0.44, -0.371, -0.752],
-      [0, -0.382, -0.752],
-      [0.45, -0.372, -0.752],
-      [0.86, -0.37, -0.752],
+      [-0.49, -0.39, -1.019],
+      [-0.25, -0.42, -1.019],
+      [0.2, -0.418, -1.019],
+      [0.54, -0.394, -1.019],
+      [0.93, -0.379, -1.019],
+      [1.28, -0.383, -1.019],
     ],
-    0.004,
-    24,
+    0.0045,
+    30,
   );
+  // The cluster is centred behind the wheel, with its full dials above the
+  // bottom 10% HUD band at FOV58 and root transform identity.
   p.panel(
     'dark',
     [
-      [-0.225, -0.347],
-      [0.225, -0.347],
-      [0.207, -0.233],
-      [0.145, -0.202],
-      [-0.145, -0.202],
-      [-0.207, -0.233],
+      [-0.223, -0.377],
+      [0.223, -0.377],
+      [0.208, -0.276],
+      [0.145, -0.239],
+      [-0.145, -0.239],
+      [-0.208, -0.276],
     ],
-    0.085,
-    -0.828,
-    0.014,
+    0.082,
+    -1.033,
+    0.012,
   );
   const speed = gauge(
     p,
     palette,
     group,
-    [-0.092, -0.28, -0.805],
-    0.066,
+    [-0.09, -0.31, -1.008],
+    0.065,
     120,
     true,
   );
-  gauge(p, palette, group, [0.079, -0.28, -0.805], 0.054, 8, false);
-  // Small central fuel/status elements have no fabricated navigation display.
-  p.box('dark', [0.045, 0.026, 0.004], [0.002, -0.273, -0.799]);
+  gauge(p, palette, group, [0.082, -0.31, -1.008], 0.053, 8, false);
+  p.box('dark', [0.044, 0.026, 0.003], [0.005, -0.302, -1.0]);
   for (let i = 0; i < 5; i++)
     p.box(
       'ink',
       [0.004, 0.008 + i * 0.002, 0.001],
-      [-0.012 + i * 0.006, -0.27, -0.795],
+      [-0.009 + i * 0.006, -0.302, -0.997],
     );
-  // Vents and passenger fascia remain low and off the central sight line.
-  for (const x of [-0.55, 0.36, 0.6]) {
-    p.box('dark', [0.132, 0.042, 0.02], [x, -0.385, -0.744]);
+
+  // One driver vent to the LEFT of the binnacle; centre and passenger vents are
+  // farther to the RIGHT. Their unequal placement is a strong LHD depth cue.
+  for (const [x, width, y] of [
+    [-0.365, 0.107, -0.407],
+    [0.477, 0.242, -0.419],
+    [1.103, 0.124, -0.399],
+  ]) {
+    p.box('dark', [width, 0.039, 0.018], [x, y, -1.018]);
     for (let i = 0; i < 4; i++)
-      p.box('trim', [0.112, 0.0023, 0.016], [x, -0.397 + i * 0.008, -0.731]);
+      p.box(
+        'trim',
+        [width - 0.016, 0.0022, 0.009],
+        [x, y - 0.012 + i * 0.008, -1.007],
+      );
   }
-  p.box('dark', [0.17, 0.13, 0.025], [0.35, -0.494, -0.739]);
-  for (const x of [0.3, 0.4]) {
-    p.ring('silver', 0.018, 0.003, [x, -0.473, -0.719]);
-    p.disk('dark', 0.015, [x, -0.473, -0.715]);
-  }
-  p.box('red', [0.014, 0.01, 0.003], [0.35, -0.514, -0.721]);
-  // Side pillars and a high header frame an empty windshield aperture.
-  for (const side of [-1, 1]) {
-    p.beam(
-      'dash',
-      [side * 0.69, -0.39, -0.81],
-      [side * 0.78, 0.54, -1.06],
-      0.022,
-      6,
-    );
-    p.beam(
-      'trim',
-      [side * 0.718, -0.39, -0.827],
-      [side * 0.8, 0.535, -1.066],
-      0.006,
-      4,
-    );
-  }
-  p.beam('dash', [-0.78, 0.55, -1.055], [0.78, 0.55, -1.055], 0.03, 6);
-  // Rear-view mirror has a neutral dark reflective face, not a fake live scene.
-  p.beam('dark', [0.25, 0.5, -1.0], [0.25, 0.325, -0.94], 0.007, 6);
+  // Low right-hand centre screen/controls: neutral display, no invented live map.
   p.panel(
     'dark',
     [
-      [0.125, 0.293],
-      [0.373, 0.293],
-      [0.383, 0.357],
-      [0.118, 0.357],
+      [0.337, -0.383],
+      [0.625, -0.383],
+      [0.622, -0.229],
+      [0.345, -0.229],
     ],
     0.026,
-    -0.882,
+    -0.997,
+    0.008,
+  );
+  p.panel(
+    'mirror',
+    [
+      [0.351, -0.365],
+      [0.609, -0.365],
+      [0.607, -0.242],
+      [0.354, -0.242],
+    ],
+    0.001,
+    -0.986,
+    0.002,
+  );
+  // Small controls under the screen and a tapered tunnel console run toward
+  // the passenger side of the camera; there is no matching fake console left.
+  p.panel(
+    'dark',
+    [
+      [0.335, -0.608],
+      [0.657, -0.608],
+      [0.62, -0.449],
+      [0.358, -0.449],
+    ],
+    0.09,
+    -0.901,
+    0.01,
+  );
+  for (const x of [0.395, 0.57]) {
+    p.ring('silver', 0.018, 0.003, [x, -0.482, -0.882]);
+    p.disk('dark', 0.014, [x, -0.482, -0.878]);
+  }
+  p.box('red', [0.014, 0.01, 0.003], [0.482, -0.484, -0.877]);
+  p.beam('trim', [0.647, -0.605, -0.85], [0.674, -0.714, -0.59], 0.01, 6);
+  p.beam('dark', [0.486, -0.631, -0.832], [0.483, -0.568, -0.812], 0.013, 6);
+  p.box('trim', [0.055, 0.024, 0.028], [0.483, -0.567, -0.812]);
+  // Passenger glovebox: the long, quiet surface extends beyond the right edge
+  // of a driver-eye FOV, instead of ending symmetrically beside the steering.
+  p.box('dark', [0.552, 0.005, 0.002], [0.986, -0.479, -1.023]);
+  p.box('trim', [0.061, 0.008, 0.01], [0.92, -0.487, -1.014]);
+
+  // Nearby left door sill/window surround. A-pillar has a flat trim surface,
+  // not a roll-cage tube, and its dark rubber edge is slightly farther out.
+  p.beam('dash', [-0.531, -0.43, -0.624], [-0.493, 0.515, -0.955], 0.027, 4);
+  p.beam('dark', [-0.555, -0.429, -0.628], [-0.517, 0.514, -0.962], 0.008, 4);
+  p.tube(
+    'dash',
+    [
+      [-0.553, -0.289, -0.458],
+      [-0.543, -0.319, -0.719],
+      [-0.512, -0.35, -0.96],
+    ],
+    0.024,
+    20,
+  );
+  p.tube(
+    'trim',
+    [
+      [-0.532, -0.313, -0.473],
+      [-0.522, -0.339, -0.713],
+      [-0.493, -0.369, -0.948],
+    ],
+    0.005,
+    20,
+  );
+  p.beam('dash', [-0.576, 0.386, -0.56], [-0.493, 0.515, -0.955], 0.024, 4);
+  // A small neutral LEFT door mirror sits beyond the pillar. No copied or
+  // fabricated rear-facing camera image is applied to either mirror.
+  p.panel(
+    'dark',
+    [
+      [-0.765, -0.234],
+      [-0.595, -0.247],
+      [-0.584, -0.154],
+      [-0.746, -0.15],
+    ],
+    0.025,
+    -0.789,
+    0.008,
+  );
+  p.panel(
+    'mirror',
+    [
+      [-0.75, -0.226],
+      [-0.608, -0.236],
+      [-0.6, -0.165],
+      [-0.739, -0.16],
+    ],
+    0.001,
+    -0.777,
+    0.002,
+  );
+  p.beam('dark', [-0.589, -0.236, -0.827], [-0.534, -0.295, -0.84], 0.016, 5);
+
+  // Far passenger pillar is genuinely farther right, and the header/mirror
+  // follow the vehicle centreline (+0.45m), not the driver's eye centreline.
+  p.beam('dash', [1.287, -0.386, -1.049], [1.133, 0.527, -1.145], 0.024, 4);
+  p.beam('dark', [1.311, -0.386, -1.055], [1.155, 0.527, -1.15], 0.006, 4);
+  p.tube(
+    'dash',
+    [
+      [-0.493, 0.535, -0.955],
+      [0.18, 0.553, -1.046],
+      [0.62, 0.552, -1.095],
+      [1.133, 0.548, -1.145],
+    ],
+    0.027,
+    30,
+  );
+  p.beam('dark', [0.448, 0.543, -1.076], [0.448, 0.363, -0.996], 0.008, 6);
+  p.panel(
+    'dark',
+    [
+      [0.31, 0.304],
+      [0.585, 0.307],
+      [0.59, 0.374],
+      [0.307, 0.373],
+    ],
+    0.027,
+    -0.967,
     0.006,
   );
   p.panel(
     'mirror',
     [
-      [0.131, 0.301],
-      [0.366, 0.301],
-      [0.372, 0.349],
-      [0.129, 0.349],
+      [0.321, 0.313],
+      [0.574, 0.316],
+      [0.578, 0.365],
+      [0.319, 0.364],
     ],
     0.001,
-    -0.873,
+    -0.957,
     0.002,
   );
+
   const wheel = carWheel(palette);
   group.add(wheel);
   return {
@@ -700,6 +811,16 @@ export function makeCockpit(kind: 'drive' | 'boat'): THREE.Group {
     excludeFromSSAO: true,
     excludeFromPicking: true,
     kind,
+    ...(kind === 'drive'
+      ? {
+          layout: 'left-hand-drive',
+          recommendedRootPosition: [0, 0, 0],
+          recommendedVerticalFov: 58,
+          referenceEyeVehicleLocalX: 0.45,
+          vehicleForward: '+Z',
+          cabinCentreCameraLocalX: 0.45,
+        }
+      : {}),
     units: 'metres',
     axes: 'Camera local: +X right, +Y up, -Z forward',
     steeringWheel: controls.wheel,

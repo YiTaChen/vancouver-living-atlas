@@ -2,13 +2,20 @@ import * as THREE from 'three';
 import type { CityEngine } from './engine';
 import { localMapOffset } from './travel-camera';
 
-export function enterLocalMap(e: CityEngine) {
+export function enterLocalMap(e: CityEngine, remember = false) {
   const nav = e.navigation;
   if (!nav || nav.mode === 'orbit') return false;
+  const bookmark = remember ? nav.snapshotTravel() : null;
   const from = e.camera.position.clone();
   const fromQuaternion = e.camera.quaternion.clone();
   const target = nav.position.clone();
-  const yaw = nav.yaw + (nav.mode === 'boat' ? nav.boat.lookYaw : 0);
+  const yaw =
+    nav.yaw +
+    (nav.mode === 'boat'
+      ? nav.boat.lookYaw
+      : nav.mode === 'drive'
+        ? (nav.driveLookYaw ?? 0)
+        : 0);
   const offset = localMapOffset(yaw);
   const position = target
     .clone()
@@ -39,6 +46,7 @@ export function enterLocalMap(e: CityEngine) {
     fromTarget: target.clone(),
     toTarget: target,
   };
+  if (bookmark) e.travelReturn?.remember(bookmark);
   e.renderer.shadowMap.needsUpdate = true;
   return true;
 }

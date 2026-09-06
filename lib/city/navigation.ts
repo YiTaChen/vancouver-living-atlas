@@ -12,6 +12,8 @@ import {
 import { BoatController } from './boat-controller';
 import { makeWalker } from './assets/walker';
 import { GroundSurfaceIndex } from './ground-surface';
+import { DriverCameraMotion, DRIVER_LEFT_OFFSET } from './driver-camera';
+import type { TravelBookmark } from './travel-return';
 import { makeCockpit } from './assets/cockpits';
 import {
   firstPerson,
@@ -25,6 +27,15 @@ export class StreetNavigation {
   keys = new Set<string>();
   position = new THREE.Vector3();
   yaw = 0;
+  driveLookYaw = 0;
+  driverMotion = new DriverCameraMotion();
+  steeringPulse: { turn: number; remaining: number } | null = null;
+  returnBlend: {
+    position: THREE.Vector3;
+    quaternion: THREE.Quaternion;
+    fov: number;
+    elapsed: number;
+  } | null = null;
   pitch = 0.04;
   speed = 0;
   surface: 'ground' | 'bridge' | 'water' = 'ground';
@@ -82,8 +93,7 @@ export class StreetNavigation {
     if (!e.camera.parent) e.scene.add(e.camera);
     e.camera.add(this.cockpits.drive, this.cockpits.boat);
     // Keep instruments and the steering wheel above the bottom HUD.
-    for (const cockpit of Object.values(this.cockpits))
-      cockpit.position.set(0, 0.2, -0.22);
+    this.cockpits.boat.position.set(0, 0.2, -0.22);
     for (const f of [
       ...e.data.buildings.features,
       ...landmarkFootprints.features,
@@ -266,6 +276,7 @@ export class StreetNavigation {
     this.touches.clear();
     this.pinchDistance = 0;
     this.speed = 0;
+    this.steeringPulse = null;
     if (this.boat) {
       this.boat.pulse = null;
       this.boat.state.throttle = 0;
@@ -315,7 +326,7 @@ export class StreetNavigation {
     if (next.exit) {
       this.wheelQuietUntil = performance.now() + 450;
       this.touches.forEach((_, id) => this.blockedPointers.add(id));
-      this.e.leaveTravelAtLocation();
+      this.e.leaveTravelAtLocation(true);
       return;
     }
     this.cameraDistances[this.mode] = next.distance;
@@ -376,6 +387,12 @@ export class StreetNavigation {
     if (!this.dragging) return;
     if (this.mode === 'boat')
       this.boat.lookYaw -= (ev.clientX - this.last[0]) * 0.004;
+    else if (this.mode === 'drive')
+      this.driveLookYaw = THREE.MathUtils.clamp(
+        this.driveLookYaw - (ev.clientX - this.last[0]) * 0.004,
+        -1.2,
+        1.2,
+      );
     else this.yaw -= (ev.clientX - this.last[0]) * 0.004;
     this.pitch = THREE.MathUtils.clamp(
       this.pitch + (ev.clientY - this.last[1]) * 0.003,
@@ -423,6 +440,12 @@ export class StreetNavigation {
     );
   }
   startAt(mode: TravelMode, point: PlacementPoint) {
+    this.e.travelReturn?.invalidate(true);
+    this.returnBlend = null;
+    this.driverMotion.reset();
+    this.steering = 0;
+    this.steeringPulse = null;
+    this.driveLookYaw = 0;
     if (mode === 'boat' && !this.boat.start(point)) return false;
     if (mode !== 'boat') this.boat.stop();
     this.blur();
@@ -444,6 +467,10 @@ export class StreetNavigation {
     if (mode !== this.mode) {
       this.blur();
       this.mode = mode;
+      this.driveLookYaw = 0;
+      this.driverMotion.reset();
+      this.steering = 0;
+      this.steeringPulse = null;
       this.car.visible = mode === 'drive';
       this.e.controls.enabled = false;
       this.e.transition = null;
@@ -455,6 +482,12 @@ export class StreetNavigation {
   }
   setMode(mode: 'orbit' | TravelMode, streetName?: string) {
     if (mode === this.mode && !streetName) return;
+    this.e.travelReturn?.invalidate(true);
+    this.returnBlend = null;
+    this.driverMotion.reset();
+    this.steering = 0;
+    this.steeringPulse = null;
+    this.driveLookYaw = 0;
     if (!streetName && this.switchStreetMode(mode)) return;
     if (mode === 'boat') {
       this.startWater(streetName || 'coal-harbour');
@@ -591,9 +624,11 @@ export class StreetNavigation {
       this.boat.pulse = { key: direction, remaining: 0.7 };
       return;
     }
-    if (direction === 'left') this.yaw += 0.15;
-    else if (direction === 'right') this.yaw -= 0.15;
-    else {
+    if (direction === 'left' || direction === 'right') {
+      const turn = direction === 'left' ? 1 : -1;
+      this.yaw += turn * 0.15;
+      this.steeringPulse = { turn, remaining: 0.22 };
+    } else {
       const s = direction === 'backward' ? -8 : 8;
       this.move(Math.sin(this.yaw) * s, Math.cos(this.yaw) * s);
     }
@@ -629,6 +664,8 @@ export class StreetNavigation {
           1 - Math.exp(-dt * 12),
         );
     const before = this.position.clone();
+    const previousSpeed = this.speed,
+      previousYaw = this.yaw;
     this.walker.group.visible =
       this.mode === 'walk' && this.renderedDistance >= 2;
     this.car.visible = this.mode === 'drive' && this.renderedDistance > 3.5;
@@ -639,17 +676,19 @@ export class StreetNavigation {
       turn =
         Number(pressed('a', 'arrowleft')) - Number(pressed('d', 'arrowright'));
     if (this.mode === 'boat') {
+      const input = { thrust: forward, turn, neutral: pressed(' ') };
       this.boat.update(
         dt,
-        { thrust: forward, turn, neutral: pressed(' ') },
+        input,
         this.pitch,
-        this.snapCamera,
+        this.snapCamera || !!this.returnBlend,
         this.renderedDistance,
       );
       this.position.copy(this.boat.model.position);
       this.yaw = this.boat.state.yaw;
       this.speed = this.boat.state.speed;
-      this.updateCockpit(dt, turn);
+      this.finishReturnBlend(dt);
+      this.updateCockpit(dt, input.turn);
       this.notifyCamera();
       this.snapCamera = false;
       return;
@@ -671,8 +710,16 @@ export class StreetNavigation {
         Math.cos(this.yaw) * forward * speed * dt,
       );
     }
+    if (this.mode === 'drive')
+      this.driverMotion.update(
+        dt,
+        this.speed,
+        previousSpeed,
+        this.yaw - previousYaw,
+      );
     const distance = this.renderedDistance;
-    const dir = new THREE.Vector3(Math.sin(this.yaw), 0, Math.cos(this.yaw));
+    const viewYaw = this.yaw + (this.mode === 'drive' ? this.driveLookYaw : 0);
+    const dir = new THREE.Vector3(Math.sin(viewYaw), 0, Math.cos(viewYaw));
     const walked = this.position.distanceTo(before);
     this.walkingDistance += walked;
     this.walker.group.position.copy(this.position);
@@ -694,6 +741,23 @@ export class StreetNavigation {
       0,
       this.mode === 'walk' ? 2 : 5,
     );
+    if (this.mode === 'drive') {
+      const left = new THREE.Vector3(
+        Math.cos(this.yaw),
+        0,
+        -Math.sin(this.yaw),
+      );
+      const forward = new THREE.Vector3(
+        Math.sin(this.yaw),
+        0,
+        Math.cos(this.yaw),
+      );
+      eye.addScaledVector(
+        left,
+        (DRIVER_LEFT_OFFSET + this.driverMotion.sway) * (1 - blend),
+      );
+      eye.addScaledVector(forward, this.driverMotion.surge * (1 - blend));
+    }
     const pos = eye.clone().addScaledVector(dir, -distance * blend);
     pos.y += distance * (this.mode === 'walk' ? 0.28 : 0.35) * blend;
     // Clip the chase segment at walls/banks; collision checks never move the player.
@@ -734,10 +798,16 @@ export class StreetNavigation {
           ),
         ),
     );
+    if (this.mode === 'drive') {
+      this.e.camera.quaternion.premultiply(
+        this.driverMotion.worldRotation(this.yaw, 1 - blend),
+      );
+    }
     this.e.controls.target.copy(this.position).addScaledVector(dir, 25);
     this.e.camera.near = 0.08;
     this.e.camera.fov = THREE.MathUtils.lerp(58, 48, blend);
     this.e.camera.updateProjectionMatrix();
+    this.finishReturnBlend(dt);
     this.updateCockpit(dt, turn);
     this.notifyCamera();
     this.snapCamera = false;
@@ -760,7 +830,79 @@ export class StreetNavigation {
       ) ?? this.e.elevation(this.position.x, this.position.z)) + 0.02
     );
   }
+  snapshotTravel(): TravelBookmark | null {
+    if (this.mode === 'orbit') return null;
+    return {
+      mode: this.mode,
+      position: this.position.clone(),
+      yaw: this.yaw,
+      pitch: this.pitch,
+      lookYaw: this.mode === 'boat' ? this.boat.lookYaw : this.driveLookYaw,
+      surface: this.surface,
+      waterId: this.mode === 'boat' ? this.boat.state.surfaceId : undefined,
+      distance: this.cameraDistance,
+      interior: this.cameraView.interior,
+    };
+  }
+  restoreFromMap(saved: TravelBookmark) {
+    const from = {
+      position: this.e.camera.position.clone(),
+      quaternion: this.e.camera.quaternion.clone(),
+      fov: this.e.camera.fov,
+      elapsed: 0,
+    };
+    this.cameraDistances[saved.mode] = saved.distance;
+    if (saved.mode !== 'walk') this.interiors[saved.mode] = saved.interior;
+    if (
+      !this.startAt(saved.mode, {
+        x: saved.position.x,
+        y: saved.position.y,
+        z: saved.position.z,
+        yaw: saved.yaw,
+        surface: saved.surface,
+        waterId: saved.waterId,
+        name: '',
+        snappedDistance: 0,
+      })
+    )
+      return false;
+    this.pitch = saved.pitch;
+    if (saved.mode === 'boat') this.boat.lookYaw = saved.lookYaw;
+    else if (saved.mode === 'drive') this.driveLookYaw = saved.lookYaw;
+    this.snapCamera = true;
+    this.update(0);
+    this.returnBlend = from;
+    this.e.camera.position.copy(from.position);
+    this.e.camera.quaternion.copy(from.quaternion);
+    this.e.camera.fov = from.fov;
+    this.e.camera.updateProjectionMatrix();
+    return true;
+  }
+  finishReturnBlend(dt: number) {
+    const blend = this.returnBlend;
+    if (!blend) return;
+    blend.elapsed += dt;
+    const t = THREE.MathUtils.smoothstep(blend.elapsed, 0, 0.45);
+    this.e.camera.position.lerpVectors(
+      blend.position,
+      this.e.camera.position,
+      t,
+    );
+    this.e.camera.quaternion.slerpQuaternions(
+      blend.quaternion,
+      this.e.camera.quaternion,
+      t,
+    );
+    this.e.camera.fov = THREE.MathUtils.lerp(blend.fov, this.e.camera.fov, t);
+    this.e.camera.updateProjectionMatrix();
+    if (t === 1) this.returnBlend = null;
+  }
   updateCockpit(dt: number, turn: number) {
+    if (this.steeringPulse) {
+      if (!turn) turn = this.steeringPulse.turn;
+      this.steeringPulse.remaining -= dt;
+      if (this.steeringPulse.remaining <= 0) this.steeringPulse = null;
+    }
     this.steering = THREE.MathUtils.lerp(
       this.steering,
       turn,
@@ -770,6 +912,7 @@ export class StreetNavigation {
       const cockpit = this.cockpits[mode];
       cockpit.visible =
         this.mode === mode &&
+        !this.returnBlend &&
         firstPerson(mode, this.renderedDistance) &&
         this.interiors[mode] === 'interior';
       if (!cockpit.visible) continue;
@@ -785,7 +928,32 @@ export class StreetNavigation {
         spec.endAngle,
         Math.min(1, value / spec.maxSpeed),
       );
-      steeringWheel.rotation.z = -this.steering * steeringMaxRadians;
+      steeringWheel.rotation.z = this.steering * steeringMaxRadians;
+      if (mode === 'drive') {
+        // Interior remains attached to the car while the driver's head looks/moves.
+        const base = this.position
+          .clone()
+          .add(
+            new THREE.Vector3(
+              Math.cos(this.yaw) * DRIVER_LEFT_OFFSET,
+              1.45,
+              -Math.sin(this.yaw) * DRIVER_LEFT_OFFSET,
+            ),
+          );
+        const inverse = this.e.camera.quaternion.clone().invert();
+        cockpit.position
+          .copy(base)
+          .sub(this.e.camera.position)
+          .applyQuaternion(inverse);
+        cockpit.quaternion
+          .copy(inverse)
+          .multiply(
+            new THREE.Quaternion().setFromAxisAngle(
+              new THREE.Vector3(0, 1, 0),
+              this.yaw + Math.PI,
+            ),
+          );
+      }
     }
   }
 
