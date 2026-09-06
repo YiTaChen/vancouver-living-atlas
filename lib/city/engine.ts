@@ -1,3 +1,4 @@
+import { createBeachAmenities } from './beach-amenities';
 import { installSSAOBlur4 } from './ssao-blur4';
 import { trackSSAOResources } from './ssao-resources';
 import { LandmarkGpuWarmup } from './gpu-landmark-warmup';
@@ -407,6 +408,7 @@ export class CityEngine {
       this.startupQA?.phase('geometry.ground-harmonization');
     }
     harmonizeGround(this);
+    createBeachAmenities(this);
     // Resolve landmark feet and entries from the final rendered ground.
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('geometry.landmarks-medium-and-ground-plan');

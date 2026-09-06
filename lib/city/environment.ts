@@ -76,12 +76,14 @@ export function createNature(e: CityEngine) {
   // Second/Third sand is already part of the first terrain mesh. Other beach
   // overlays are clipped to the same reconciled coast during data preparation.
   for (const f of e.data.beachCoast.beachOverlays.features)
-    for (const p of rings(f))
-      e.polygonMesh(
+    for (const p of rings(f)) {
+      const sand = e.polygonMesh(
         p.map((r) => r.map(project)),
         0xc9b98d,
         1.6,
       );
+      if (sand) sand.userData.beachSand = true;
+    }
   // A narrow seawall follows the measured shoreline, except natural beach sections.
   const shorePos: number[] = [],
     rockPos: number[] = [];

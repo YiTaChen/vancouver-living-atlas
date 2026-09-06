@@ -169,3 +169,7 @@ Published the accepted application (`8527b39`) to the existing `vancouver-living
 ## Stanley Park floating trail correction — 2026-09-06
 
 Replaced the generic 1.5 m elevation offset for 577 eligible park trail parts with faces clipped against the actual terrain triangulation, using a 45 mm display clearance. Known bridges/coastal paths and source-owned Causeway connectors are preserved with conservative approach blending; raised portions can remain near those interfaces. There are no additional draws or per-frame ground queries. Actual walking-height captures, supported-floor statistics and the remaining limits are in `docs/visual-quality/park-paths/README.md`. TypeScript, all 346 tests and all 58 canonical Causeway movement checks passed.
+
+## English Bay and Kitsilano beach amenities — 2026-09-06
+
+Added original reference-informed models: English Bay's two volleyball nets, six representative mapped Kitsilano nets, both mapped Kitsilano basketball courts with blue/orange renewal-inspired paint and four hoops, and 21 sparse weathered seating logs across the beaches. Props sample the rendered ground/sand after harmonization. Two merged opaque batches (41,944 triangles total) cull at 1,400 m; no per-frame terrain queries or new downloaded textures. References, placement approximations, actual captures and stationary High metrics are recorded in `docs/visual-quality/beach-amenities/README.md`. All 347 tests passed; final flat-paint refinement passed the focused geometry test and TypeScript again.

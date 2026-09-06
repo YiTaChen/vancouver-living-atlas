@@ -6,6 +6,28 @@ import { auditCausewayTravel } from './causeway-qa';
 import { installReleaseQAControls } from './release-qa-controls';
 
 const cases = [
+  {
+    id: 'english-beach-detail',
+    coord: [-123.14323, 49.28716],
+    offset: [-48, 32, 38],
+  },
+  {
+    id: 'kits-beach-detail',
+    coord: [-123.1526, 49.27598],
+    offset: [-68, 62, 58],
+  },
+  {
+    id: 'english-beach-eye',
+    coord: [-123.1433, 49.287],
+    offset: [-8, 3, 8],
+    targetY: 3,
+  },
+  {
+    id: 'kits-beach-eye',
+    coord: [-123.15235, 49.27595],
+    offset: [-20, 4, 22],
+    targetY: 4,
+  },
   { id: 'downtown', view: 'downtown' },
   { id: 'water-street', street: 'WATER ST' },
   { id: 'robson-drive', street: 'ROBSON ST', drive: true },
@@ -392,6 +414,7 @@ export function installVisualQA(e: CityEngine) {
           geometries: info.memory.geometries,
           textures: info.memory.textures,
           nearTrees: e.data.detailedTreeCount || 0,
+          beachAmenities: e.data.beachAmenities,
         };
         results.push(row);
         panel.style.visibility = 'hidden';
