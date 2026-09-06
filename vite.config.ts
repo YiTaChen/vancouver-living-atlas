@@ -46,6 +46,11 @@ export default defineConfig(async () => {
   const { cloudflare } = await import('@cloudflare/vite-plugin');
 
   return {
+    define: {
+      'process.env.VANCOUVER_VISUAL_QA': JSON.stringify(
+        process.env.VANCOUVER_VISUAL_QA || '0',
+      ),
+    },
     css: { postcss: { plugins: [tailwindcss()] } },
     server: isCodexSeatbeltSandbox
       ? {

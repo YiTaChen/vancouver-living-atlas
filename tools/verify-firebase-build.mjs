@@ -29,6 +29,10 @@ const scripts = (
       .map((name) => readFile(path.join(root, name), 'utf8')),
   )
 ).join('\n');
+assert(
+  !scripts.includes('LOCAL VISUAL QA'),
+  'Instrumented QA builds must never be deployed',
+);
 for (const language of ['Français', 'Español', 'zh-Hant', 'zh-Hans'])
   assert(
     scripts.includes(language),

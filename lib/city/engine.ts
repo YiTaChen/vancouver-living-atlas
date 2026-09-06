@@ -345,6 +345,8 @@ export class CityEngine {
     this.clock.setVisible(!document.hidden, this.fpsAt);
     this.clock.resetTimebase(this.fpsAt);
     this.animate(this.fpsAt);
+    if (process.env.VANCOUVER_VISUAL_QA === '1')
+      void import('./visual-qa').then(({ installVisualQA }) => installVisualQA(this));
   }
   pixelRatio() {
     const w = Math.max(1, this.container.clientWidth),
