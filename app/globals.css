@@ -2428,3 +2428,6 @@ a {
 @media (max-height: 540px) {
   .mobile-hud-toggle { top: 2px; width: 40px; height: 40px; }
 }
+
+/* Keep the desktop local map clear of the tools needed to reach interiors. */
+.atlas:not(.touch-ui) .map-inset { right: 94px; }

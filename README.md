@@ -24,6 +24,8 @@ English is the default for a first visit. The header language menu also offers F
 
 ## Explore / 操作
 
+**Enter landmark interiors:** open Layers and choose the Science World, Canada Place or Waterfront Station entrance. Walk through the open doors to explore their representative public spaces. Close Orbit views automatically reveal the interiors; the Layers cutaway toggle restores the complete roofs. [Scope and references](docs/interiors.md).
+
 **Default driving car:** an original red, open-top roadster with sculpted bodywork and a matching left-hand cockpit. Classic remains available in the car selector. [Model and references](docs/vehicles/red-roadster.md).
 
 **Phone / tablet:** the left thumbstick moves continuously (walk: forward/back and strafe; drive/boat: throttle/reverse and steering). Drag the scene to look and pinch to zoom. Map, travel settings and tools open from compact buttons; the local map can stay open while moving. Placement shows only a Cancel button—tap a valid ground/road/water location to start. Vehicle selection and cockpit options live in Travel options.

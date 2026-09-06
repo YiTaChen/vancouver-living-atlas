@@ -1,3 +1,4 @@
+import { carveApertures, PUBLIC_APERTURES } from '../interior-apertures';
 import * as THREE from 'three';
 import {
   createScienceEntrance,
@@ -663,6 +664,7 @@ export function createScienceWorld(
     },
   );
   result.add(entrance);
+  carveApertures(result, PUBLIC_APERTURES.science);
   result.userData.nightMaterials.push(...entrance.userData.nightMaterials);
   result.userData.entrance = {
     thresholdY: entrance.userData.thresholdY,
@@ -1042,6 +1044,7 @@ export function createCanadaPlace(detail: boolean): THREE.Group {
     },
   );
   result.add(galleryDetail);
+  carveApertures(result, PUBLIC_APERTURES.canada);
   result.userData.nightMaterials.push(...galleryDetail.userData.nightMaterials);
   const bounds = new THREE.Box3().setFromObject(result);
   result.userData.bounds = {

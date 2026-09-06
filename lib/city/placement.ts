@@ -65,9 +65,9 @@ export class MapPlacement {
         ...s,
         name: s.name || '',
       })),
-      elevation: (x, z) => e.elevation(x, z),
-      contains: (x, z) => e.onLand(x, z),
-      clear: (x, z) => e.navigation!.clearGround(x, z),
+      elevation: (x, z) => e.interiors?.height(x,z) ?? e.elevation(x, z),
+      contains: (x, z) => (this.mode==='walk' && e.interiors?.height(x,z)!==undefined) || e.onLand(x, z),
+      clear: (x, z) => e.navigation!.clearGround(x, z, this.mode ?? 'walk'),
     };
     const positions: number[] = [];
     for (const s of this.world.bridges) {

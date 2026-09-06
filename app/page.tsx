@@ -104,6 +104,7 @@ export default function Home() {
     engine = useRef<CityEngine | null>(null);
   const [touchUI, setTouchUI] = useState(false);
   const [mobileHudHidden, setMobileHudHidden] = useState(false);
+  const [interiorCutaway, setInteriorCutaway] = useState(true);
   const [mobilePanel, setMobilePanel] = useState<
     'map' | 'travel' | 'tools' | null
   >(null);
@@ -1401,6 +1402,20 @@ export default function Home() {
               />
             </label>
           ))}
+          <label className="layer-row">
+            <span>{tr('interiorCutaway')}</span>
+            <Switch aria-label={tr('interiorCutaway')} checked={interiorCutaway} onCheckedChange={v=>{setInteriorCutaway(v);if(engine.current?.interiors)engine.current.interiors.cutawayEnabled=v;}} />
+          </label>
+          <p className="panel-note">{tr('interiorHint')}</p>
+          <div className="rail-actions">
+            {(['science','canada','waterfront'] as const).map(id=><button key={id} onClick={()=>{
+              const e=engine.current;if(!e?.interiors)return;
+              e.placement?.cancel();
+              e.applySettings({...e.settings,mode:'walk',autoRotate:false,buildings:true});
+              e.navigation?.startAt('walk',e.interiors.entry(id));
+              setSettings({...e.settings,mode:'walk'});setPanel(null);setMobilePanel(null);
+            }}>{tr(id==='science'?'enterScience':id==='canada'?'enterCanada':'enterWaterfront')}</button>)}
+          </div>
           <div className="rail-actions">
             <button disabled={!ready} onClick={() => findTrain('steam')}>
               <TrainFront size={16} /> {tr('findSteamTrain')}

@@ -538,7 +538,9 @@ export class StreetNavigation {
     });
     return result.ok ? result.hit : undefined;
   }
-  clearGround(x: number, z: number) {
+  clearGround(x: number, z: number, mode: string = this.mode) {
+    const interior = this.e.interiors?.clear(x,z,mode);
+    if(interior !== undefined) return interior;
     if (!this.e.onLand(x, z)) return false;
     if (this.e.data.waterPolys?.some((p: number[][][]) => inPolygon([x, z], p)))
       return false;
@@ -619,6 +621,7 @@ export class StreetNavigation {
     return true;
   }
   switchStreetMode(mode: 'orbit' | TravelMode) {
+    if(mode === 'drive' && this.e.interiors?.clear(this.position.x,this.position.z,'drive') === false) return false;
     if (!canSwitchStreetMode(this.mode, mode)) return false;
     if (mode !== this.mode) {
       if (
@@ -808,7 +811,7 @@ export class StreetNavigation {
   move(dx: number, dz: number) {
     if (this.mode === 'boat') return;
     if (Math.hypot(dx, dz) < 1e-9) return;
-    const steps = Math.max(1, Math.ceil(Math.hypot(dx, dz) / 1.5));
+    const steps = Math.max(1, Math.ceil(Math.hypot(dx, dz) / ((this.e.interiors?.height(this.position.x,this.position.z) !== undefined || this.e.interiors?.height(this.position.x+dx,this.position.z+dz) !== undefined) ? 0.3 : 1.5)));
     for (let i = 0; i < steps; i++) {
       const x = this.position.x + dx / steps,
         z = this.position.z + dz / steps;
@@ -846,6 +849,8 @@ export class StreetNavigation {
     }
   }
   roadHeight(x: number, z: number) {
+    const interior=this.e.interiors?.height(x,z);
+    if(interior!==undefined)return interior+1.25;
     const fallback = this.e.elevation(x, z) + 1.05;
     return (this.e.data?.roadSurface?.sample(x, z, fallback) ?? fallback) + 0.2;
   }
@@ -1035,6 +1040,8 @@ export class StreetNavigation {
     return this.groundHeight(this.position.x, this.position.z) + 0.02;
   }
   groundHeight(x: number, z: number) {
+    const interior = this.e.interiors?.height(x,z);
+    if(interior !== undefined) return interior;
     if (!this.groundSurface) {
       this.groundSurface = new GroundSurfaceIndex(
         walkableGroundMeshes(this.e.scene),

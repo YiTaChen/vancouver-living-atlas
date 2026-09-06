@@ -1,3 +1,4 @@
+import { PublicInteriors } from './interiors';
 import { isMobileGraphics, supportsHDRTarget } from './graphics-profile';
 import { SkyEffects } from './sky-effects';
 import { createBeachAmenities } from './beach-amenities';
@@ -99,6 +100,7 @@ export class CityEngine {
   terrain = new THREE.Group();
   landmarks = new THREE.Group();
   landmarkDetails: LandmarkDetail[] = [];
+  interiors: PublicInteriors | null = null;
   landmarkWorker: LandmarkWorkerClient<THREE.Group> | null = null;
   landmarkWarmup: LandmarkGpuWarmup | null = null;
   prepareLandmark?: (
@@ -430,6 +432,7 @@ export class CityEngine {
       this.startupQA?.phase('geometry.landmarks-medium-and-ground-plan');
     }
     createLandmarks(this);
+    this.interiors = new PublicInteriors(this);
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('collision.waterworld-and-footprints');
     }
@@ -693,6 +696,7 @@ export class CityEngine {
     this.facadeDetails?.update();
     this.landmarkWorker?.beginFrame();
     this.landmarkDetails.forEach((l) => l.update());
+    this.interiors?.update();
     this.updateShadowFrustum();
     this.renderer.info.reset();
     const shadows =

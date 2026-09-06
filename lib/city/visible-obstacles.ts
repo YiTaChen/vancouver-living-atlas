@@ -1,4 +1,4 @@
-import type * as THREE from 'three';
+import * as THREE from 'three';
 
 /** Only for visible building/landmark obstruction picking. Ground/bridge proxy
  * picking and physical footprint collision intentionally have other contracts. */
@@ -20,7 +20,15 @@ export function firstVisibleObstacleHit(
   raycaster: THREE.Raycaster,
   roots: THREE.Object3D[],
 ): THREE.Intersection | undefined {
-  return raycaster
-    .intersectObjects(roots, true)
-    .find((hit) => visibleThroughParents(hit.object));
+  return raycaster.intersectObjects(roots, true).find((hit) => {
+    if (!visibleThroughParents(hit.object)) return false;
+    if (!(hit.object instanceof THREE.Mesh)) return true;
+    const materials = Array.isArray(hit.object.material)
+      ? hit.object.material
+      : [hit.object.material];
+    const material = materials[hit.face?.materialIndex ?? 0];
+    return !material?.clippingPlanes?.some(
+      (p: THREE.Plane) => p.distanceToPoint(hit.point) < 0,
+    );
+  });
 }
