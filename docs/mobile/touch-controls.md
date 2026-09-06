@@ -9,3 +9,5 @@ The thumbstick applies an analog vector to the existing navigation update, with 
 Reference for the left movement/right view convention: [Minecraft controls](https://www.minecraft.net/en-us/article/minecraft-controls). No external joystick package or assets were copied.
 
 Validation: TypeScript check, full existing suite plus navigation regression tests for continuous walking, release/reset, strafe direction, vehicle movement, circular dead zone and independent pointer ownership. Browser checks used 390×844, 844×390 and 768×1024 viewports, direct map placement, joystick drag/release, minimap and travel panels. These are browser viewport checks, not a physical iPhone multi-touch certification.
+
+The mobile header now replaces its GitHub shortcut with an eye toggle. Hiding the HUD leaves only the exploration mode selector and restore button, closes drawers and clears navigation input. The repository link is the first line of the Information dialog. Labels are available in all five languages. Verified hide/restore visibility and the Information dialog at 390×844; TypeScript, locale tests and the Firebase production build pass.

@@ -2397,3 +2397,34 @@ a {
 }
 
 .atlas.touch-ui.clean .ui-chrome { display: none !important; }
+
+/* Mobile HUD visibility keeps the mode selector and a recoverable toggle. */
+.atlas.touch-ui .masthead { padding-right: 64px; }
+.atlas.touch-ui .masthead .github-link { display: none; }
+.mobile-hud-toggle {
+  position: absolute;
+  top: 6px;
+  right: max(10px, env(safe-area-inset-right));
+  z-index: 45;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+}
+.atlas.touch-ui.mobile-hud-hidden .ui-chrome:not(.mode-switch) {
+  display: none !important;
+}
+.about-repo-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 30px;
+  color: #dce7a2;
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+@media (max-height: 540px) {
+  .mobile-hud-toggle { top: 2px; width: 40px; height: 40px; }
+}

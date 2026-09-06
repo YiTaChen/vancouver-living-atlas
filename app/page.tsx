@@ -15,6 +15,8 @@ import {
   Sun,
   Camera,
   Info,
+  Eye,
+  EyeOff,
   X,
   Footprints,
   Car,
@@ -101,6 +103,7 @@ export default function Home() {
     minimap = useRef<HTMLCanvasElement>(null),
     engine = useRef<CityEngine | null>(null);
   const [touchUI, setTouchUI] = useState(false);
+  const [mobileHudHidden, setMobileHudHidden] = useState(false);
   const [mobilePanel, setMobilePanel] = useState<
     'map' | 'travel' | 'tools' | null
   >(null);
@@ -541,9 +544,25 @@ export default function Home() {
   });
   return (
     <main
-      className={`atlas ${clean ? 'clean' : ''} ${settings.mode !== 'orbit' ? 'street-mode' : ''} ${placing ? 'placement-mode' : ''} ${touchUI ? 'touch-ui' : ''} ${mobilePanel ? `mobile-${mobilePanel}-open` : ''}`}
+      className={`atlas ${clean ? 'clean' : ''} ${settings.mode !== 'orbit' ? 'street-mode' : ''} ${placing ? 'placement-mode' : ''} ${touchUI ? 'touch-ui' : ''} ${touchUI && mobileHudHidden ? 'mobile-hud-hidden' : ''} ${mobilePanel ? `mobile-${mobilePanel}-open` : ''}`}
     >
       <div className="scene" ref={host} />
+      {touchUI && ready && (
+        <button
+          className="mobile-hud-toggle glass"
+          aria-label={tr(mobileHudHidden ? 'showMobileUI' : 'hideMobileUI')}
+          aria-pressed={mobileHudHidden}
+          onClick={() => {
+            setMobileHudHidden(!mobileHudHidden);
+            setMobilePanel(null);
+            setPanel(null);
+            setAbout(false);
+            engine.current?.navigation?.blur();
+          }}
+        >
+          {mobileHudHidden ? <Eye size={20} /> : <EyeOff size={20} />}
+        </button>
+      )}
       {touchUI && ready && (
         <>
           <nav
@@ -626,6 +645,7 @@ export default function Home() {
             </button>
           </div>
           {settings.mode !== 'orbit' &&
+            !mobileHudHidden &&
             !placing &&
             !about &&
             !panel &&
@@ -800,7 +820,7 @@ export default function Home() {
         </aside>
       )}
       <div
-        className={`map-labels ${!settings.labels || clean ? 'hide-labels' : ''}`}
+        className={`map-labels ${!settings.labels || clean || (touchUI && mobileHudHidden) ? 'hide-labels' : ''}`}
         ref={labelHost}
       />
       <header className="masthead ui-chrome">
@@ -1735,6 +1755,9 @@ export default function Home() {
           >
             <X size={18} />
           </DialogClose>
+          <a className="about-repo-link" href="https://github.com/YiTaChen/vancouver-living-atlas" target="_blank" rel="noreferrer">
+            GitHub · Vancouver Living Atlas <ArrowUpRight size={16} />
+          </a>
           <DialogHeader>
             <DialogTitle>{tr('pageTitle')}</DialogTitle>
             <DialogDescription>{tr('aboutIntro')}</DialogDescription>
