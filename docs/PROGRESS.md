@@ -186,3 +186,8 @@ Added time-driven solar/lunar discs, eight moon phases plus manual eclipse previ
 - Added automatic iPhone/iPad/Android direct rendering; Balanced default, capped physical pixels, no HDR post-processing/PMREM/SSAO/shadow allocation.
 - Added an actual HDR framebuffer probe for desktop fallback and bounded RGBA8 landmark upload support.
 - Tested compatible city, driving and night output, including a narrow viewport. Physical-phone confirmation still pending; see `docs/visual-quality/mobile-compatible/README.md`.
+
+### Selectable open roadster (2026-09-06)
+- Preserved the classic car and added an original two-seat convertible, including seats/driver, curved body, windshield, roll hoops, wheel animation and lights.
+- Added five-language Classic/Roadster buttons to the driving camera card, with position/speed/zoom preserved on selection and a lower left-hand driving eye for the roadster.
+- Bounded exterior to 20 draws and under 20k triangles; reused assets on switching. 357 tests passed; actual browser exterior/interior/switching checked.

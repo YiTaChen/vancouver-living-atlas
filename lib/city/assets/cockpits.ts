@@ -403,7 +403,12 @@ function boatWheel(palette: Palette) {
 
 // Driver-eye view of an original left-hand-drive interior. The steering wheel
 // stays on the eye axis; the CABIN is asymmetric around that axis, not the wheel.
-function drive(group: THREE.Group, p: Parts, palette: Palette) {
+function drive(
+  group: THREE.Group,
+  p: Parts,
+  palette: Palette,
+  roadster = false,
+) {
   // Approximate vehicle centreline is camera-local +X=0.45m. Thus the nearby
   // driver door is at -0.5m and the far passenger edge is around +1.3m.
   p.panel(
@@ -560,7 +565,8 @@ function drive(group: THREE.Group, p: Parts, palette: Palette) {
     0.005,
     20,
   );
-  p.beam('dash', [-0.576, 0.386, -0.56], [-0.493, 0.515, -0.955], 0.024, 4);
+  if (!roadster)
+    p.beam('dash', [-0.576, 0.386, -0.56], [-0.493, 0.515, -0.955], 0.024, 4);
   // A small neutral LEFT door mirror sits beyond the pillar. No copied or
   // fabricated rear-facing camera image is applied to either mirror.
   p.panel(
@@ -630,6 +636,16 @@ function drive(group: THREE.Group, p: Parts, palette: Palette) {
     0.002,
   );
 
+  if (roadster) {
+    // Open cabin and passenger seat remain visible when looking sideways/back.
+    p.box('wood', [0.53, 0.15, 0.64], [0.9, -0.66, 0.15]);
+    p.box('wood', [0.53, 0.58, 0.15], [0.9, -0.32, 0.54], [-0.14, 0, 0]);
+    p.box('wood', [0.3, 0.2, 0.16], [0.9, 0.04, 0.58]);
+    p.beam('silver', [0.69, -0.28, 0.77], [0.69, 0.08, 0.77], 0.025);
+    p.beam('silver', [1.11, -0.28, 0.77], [1.11, 0.08, 0.77], 0.025);
+    p.beam('silver', [0.69, 0.08, 0.77], [1.11, 0.08, 0.77], 0.025);
+    p.box('navy', [0.1, 0.28, 1.8], [1.29, -0.5, 0.2]);
+  }
   const wheel = carWheel(palette);
   group.add(wheel);
   return {
@@ -774,7 +790,10 @@ function boat(group: THREE.Group, p: Parts, palette: Palette) {
   };
 }
 
-export function makeCockpit(kind: 'drive' | 'boat'): THREE.Group {
+export function makeCockpit(
+  kind: 'drive' | 'boat',
+  variant: 'classic' | 'roadster' = 'classic',
+): THREE.Group {
   const group = new THREE.Group();
   group.name = `${kind}-cockpit`;
   const palette: Palette = {
@@ -787,12 +806,14 @@ export function makeCockpit(kind: 'drive' | 'boat'): THREE.Group {
     stitch: material('stitch', 0x817e70),
     mirror: material('mirror', 0x65747a),
     hull: material('hull', 0xc4c4b2),
-    wood: material('wood', 0x8c6240),
-    navy: material('navy', 0x263d47),
+    wood: material('wood', variant === 'roadster' ? 0xba794e : 0x8c6240),
+    navy: material('navy', variant === 'roadster' ? 0x167b83 : 0x263d47),
   };
   const p = new Parts(group, palette);
   const controls =
-    kind === 'drive' ? drive(group, p, palette) : boat(group, p, palette);
+    kind === 'drive'
+      ? drive(group, p, palette, variant === 'roadster')
+      : boat(group, p, palette);
   p.finish();
   group.updateMatrixWorld(true);
   const used = new Set<THREE.Material>();
@@ -811,6 +832,7 @@ export function makeCockpit(kind: 'drive' | 'boat'): THREE.Group {
     excludeFromSSAO: true,
     excludeFromPicking: true,
     kind,
+    variant,
     ...(kind === 'drive'
       ? {
           layout: 'left-hand-drive',

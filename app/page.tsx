@@ -134,6 +134,7 @@ export default function Home() {
     [tour, setTour] = useState(false),
     [clean, setClean] = useState(false),
     [notice, setNotice] = useState('');
+  const [carModel, setCarModel] = useState<'classic' | 'roadster'>('classic');
   const [returnMode, setReturnMode] = useState<TravelMode | null>(null);
   const [localOrbit, setLocalOrbit] = useState(false);
   const [travelView, setTravelView] = useState<TravelView>({
@@ -533,6 +534,26 @@ export default function Home() {
               )}
             </strong>
           </div>
+          {settings.mode === 'drive' && (
+            <div
+              className="car-options"
+              role="group"
+              aria-label={tr('carModel')}
+            >
+              {(['classic', 'roadster'] as const).map((model) => (
+                <button
+                  key={model}
+                  aria-pressed={carModel === model}
+                  onClick={() => {
+                    engine.current?.navigation?.setCarModel(model);
+                    setCarModel(model);
+                  }}
+                >
+                  {tr(model === 'classic' ? 'classicCar' : 'roadsterCar')}
+                </button>
+              ))}
+            </div>
+          )}
           {(settings.mode === 'drive' || settings.mode === 'boat') &&
           travelView.perspective === 'first' ? (
             <div

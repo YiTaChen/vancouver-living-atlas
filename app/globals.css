@@ -1983,10 +1983,88 @@ a {
   }
 }
 
-.sky-controls { border-top:1px solid #ffffff22; margin-top:16px; padding-top:14px; }
-.sky-controls summary { cursor:pointer; color:var(--cream, #eceebe); font-size:15px; font-weight:600; padding:6px 0; }
-.sky-controls select { width:100%; background:#15343b; color:#edf1e6; border:1px solid #ffffff35; border-radius:7px; padding:9px; margin:6px 0 12px; }
-.sky-controls .layer-row { padding:9px 0; }
-.sky-slider { padding:10px 0; }
-.sky-slider .clock-field-label { display:flex; justify-content:space-between; margin-bottom:10px; }
-.sky-reset { border:1px solid #ffffff35; border-radius:7px; padding:8px 12px; color:#e4e9bb; margin:8px 0; }
+.sky-controls {
+  border-top: 1px solid #ffffff22;
+  margin-top: 16px;
+  padding-top: 14px;
+}
+.sky-controls summary {
+  cursor: pointer;
+  color: var(--cream, #eceebe);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 6px 0;
+}
+.sky-controls select {
+  width: 100%;
+  background: #15343b;
+  color: #edf1e6;
+  border: 1px solid #ffffff35;
+  border-radius: 7px;
+  padding: 9px;
+  margin: 6px 0 12px;
+}
+.sky-controls .layer-row {
+  padding: 9px 0;
+}
+.sky-slider {
+  padding: 10px 0;
+}
+.sky-slider .clock-field-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.sky-reset {
+  border: 1px solid #ffffff35;
+  border-radius: 7px;
+  padding: 8px 12px;
+  color: #e4e9bb;
+  margin: 8px 0;
+}
+
+.car-options {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+}
+.car-options button {
+  flex: 1;
+  min-height: 36px;
+  padding: 8px 5px;
+  border: 1px solid #ffffff25;
+  border-radius: 6px;
+  font-size: 12px;
+}
+.car-options button[aria-pressed='true'] {
+  background: #dce7a2;
+  border-color: #dce7a2;
+  color: #142d36;
+}
+@media (max-width: 640px) {
+  .travel-camera-card:has(.car-options) > div:first-child,
+  .travel-camera-card:has(.car-options) > p {
+    display: none;
+  }
+  .travel-camera-card .car-options {
+    margin-top: 0;
+  }
+  .travel-camera-card:has(.car-options) .interior-options {
+    margin-top: 5px;
+  }
+  .street-mode:has(.car-options):not(.placement-mode):not(.clean) .map-inset {
+    top: 208px;
+  }
+  .street-mode:has(.car-options):has(.interior-options):not(
+      .placement-mode
+    ):not(.clean)
+    .map-inset {
+    top: 248px;
+  }
+}
+
+@media (max-width: 640px) {
+  .car-options button {
+    min-height: 44px;
+  }
+}

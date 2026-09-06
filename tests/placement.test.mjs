@@ -391,6 +391,7 @@ const { StreetNavigation } = await import(
     './boat-controller': cityModule('boat-controller'),
     './travel-camera': cityModule('travel-camera'),
     './assets/walker': cityModule('assets/walker'),
+    './assets/roadster': cityModule('assets/roadster'),
     './ground-surface': cityModule('ground-surface'),
     './visible-obstacles': cityModule('visible-obstacles'),
     './driver-camera': cityModule('driver-camera'),

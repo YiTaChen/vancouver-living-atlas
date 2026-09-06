@@ -23,6 +23,7 @@ import { makeWalker } from './assets/walker';
 import { GroundSurfaceIndex, walkableGroundMeshes } from './ground-surface';
 import { DriverCameraMotion, DRIVER_LEFT_OFFSET } from './driver-camera';
 import type { TravelBookmark } from './travel-return';
+import { makeRoadster } from './assets/roadster';
 import { makeCockpit } from './assets/cockpits';
 import {
   firstPerson,
@@ -54,6 +55,15 @@ export class StreetNavigation {
   dragging = false;
   last = [0, 0];
   car = new THREE.Group();
+  carModel: 'classic' | 'roadster' = 'classic';
+  classicCar = new THREE.Group();
+  roadster = makeRoadster();
+  wheelDistance = 0;
+  roadsterCockpit = makeCockpit('drive', 'roadster');
+  classicCockpit!: THREE.Group;
+  get driverEyeHeight() {
+    return this.carModel === 'roadster' ? 1.2 : 1.45;
+  }
   boat: BoatController;
   cameraDistances = { ...TRAVEL_DEFAULT_DISTANCE };
   renderedDistance = 0;
@@ -102,7 +112,9 @@ export class StreetNavigation {
     this.cockpits.drive.visible = this.cockpits.boat.visible = false;
     e.scene.add(this.walker.group);
     if (!e.camera.parent) e.scene.add(e.camera);
-    e.camera.add(this.cockpits.drive, this.cockpits.boat);
+    this.classicCockpit = this.cockpits.drive;
+    this.roadsterCockpit.visible = false;
+    e.camera.add(this.cockpits.drive, this.cockpits.boat, this.roadsterCockpit);
     // Keep instruments and the steering wheel above the bottom HUD.
     this.cockpits.boat.position.set(0, 0.2, -0.22);
     for (const f of [
@@ -199,6 +211,12 @@ export class StreetNavigation {
     shadow.rotation.x = -Math.PI / 2;
     shadow.position.y = 0.05;
     this.car.add(shadow);
+    // Both variants share one navigation transform and contact shadow.
+    this.classicCar.add(
+      ...this.car.children.filter((child) => child !== shadow),
+    );
+    this.roadster.group.visible = false;
+    this.car.add(this.classicCar, this.roadster.group);
     this.car.visible = false;
     e.scene.add(this.car);
     window.addEventListener('keydown', this.keyDown);
@@ -213,6 +231,17 @@ export class StreetNavigation {
     canvas.addEventListener('pointermove', this.pointerMove, true);
     window.addEventListener('pointerup', this.pointerUp, true);
     window.addEventListener('pointercancel', this.pointerUp, true);
+  }
+  setCarModel(model: 'classic' | 'roadster') {
+    if (model !== 'classic' && model !== 'roadster') return;
+    this.carModel = model;
+    this.classicCar.visible = model === 'classic';
+    this.roadster.group.visible = model === 'roadster';
+    this.classicCockpit.visible = this.roadsterCockpit.visible = false;
+    this.cockpits.drive =
+      model === 'classic' ? this.classicCockpit : this.roadsterCockpit;
+    this.updateCockpit(0, 0);
+    this.notifyCamera();
   }
   keyDown = (ev: KeyboardEvent) => {
     if (
@@ -878,7 +907,11 @@ export class StreetNavigation {
       this.walker.update(this.walkingDistance, walked > 0.0001);
     this.car.position.copy(this.position);
     this.car.rotation.y = this.yaw;
-    const eyeHeight = this.mode === 'walk' ? 1.68 : 1.45;
+    if (this.mode === 'drive') {
+      this.wheelDistance += walked * Math.sign(this.speed);
+      this.roadster.update(this.wheelDistance, this.steering);
+    }
+    const eyeHeight = this.mode === 'walk' ? 1.68 : this.driverEyeHeight;
     const eye = (
       this.mode === 'walk' ? this.walker.group.position : this.position
     )
@@ -1085,7 +1118,7 @@ export class StreetNavigation {
           .add(
             new THREE.Vector3(
               Math.cos(this.yaw) * DRIVER_LEFT_OFFSET,
-              1.45,
+              this.driverEyeHeight,
               -Math.sin(this.yaw) * DRIVER_LEFT_OFFSET,
             ),
           );
