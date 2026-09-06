@@ -1,0 +1,298 @@
+{
+  "url": "https://vancouver-living-atlas-yita.web.app/",
+  "verifiedAt": "2026-09-06T18:35:22.958Z",
+  "revision": "8527b397c6442bc19e0812963aa70254a6313f59",
+  "matchedFiles": 58,
+  "files": [
+    {
+      "file": ".vite/manifest.json",
+      "bytes": 2014,
+      "sha256": "28e4a5ce38afaac74d5d3f7c41b5ee403f6a466834e2841522459f0003342dc0"
+    },
+    {
+      "file": "404.html",
+      "bytes": 13386,
+      "sha256": "636584733818d67b898e0ca801981c11163585c5f6f78723f6642113eea98139"
+    },
+    {
+      "file": "_next/static/832b2ce3-f9ce-4b60-94e7-c8c4413dd003/_buildManifest.js",
+      "bytes": 159,
+      "sha256": "47f02b34be6dc481257b6efce4c19e19111f37ef5c437f8ffed44f0da97fa9bb"
+    },
+    {
+      "file": "_next/static/832b2ce3-f9ce-4b60-94e7-c8c4413dd003/_ssgManifest.js",
+      "bytes": 76,
+      "sha256": "653f3e53e89b4f8548ff86c19e92bb3c6b84b6be7485a320b1e00893ed877479"
+    },
+    {
+      "file": "_next/static/_vinext_fonts/geist-8ac0455e797f/geist-001175b1.woff2",
+      "bytes": 16540,
+      "sha256": "58a6b173d5ca1dec92166ea3c6cb1a84a4144556d10928ac14e8e6b40e4787bd"
+    },
+    {
+      "file": "_next/static/_vinext_fonts/geist-8ac0455e797f/geist-52306abf.woff2",
+      "bytes": 7968,
+      "sha256": "f689f638f29fff460a2d5749edb5d5c38d7bef0389f32032d871f23fc6ebb008"
+    },
+    {
+      "file": "_next/static/_vinext_fonts/geist-8ac0455e797f/geist-875ccdd4.woff2",
+      "bytes": 14900,
+      "sha256": "6129fc8571c3e0cb0a4c41f5160c974a843b055009dc4ad8858bd808e18a2d86"
+    },
+    {
+      "file": "_next/static/_vinext_fonts/geist-8ac0455e797f/geist-98bbbccb.woff2",
+      "bytes": 29288,
+      "sha256": "9b6f5ff45b278c744b5f379a2c4ecbaf858a842b8eaf82ac8d21b699ca16c608"
+    },
+    {
+      "file": "_next/static/_vinext_fonts/geist-8ac0455e797f/geist-ff2310f5.woff2",
+      "bytes": 7252,
+      "sha256": "b7a545bbb08256bd809f11cfe66d88da3e22d169ea4407737b1ef0ec1ed3d791"
+    },
+    {
+      "file": "_next/static/_vinext_fonts/geist-mono-00e989178794/geist-mono-013b2f2f.woff2",
+      "bytes": 23108,
+      "sha256": "5f3d6ad60f29d6cb708414ec6887163d63bf197377ef5417d2483ff31ace6c3b"
+    },
+    {
+      "file": "_next/static/_vinext_fonts/geist-mono-00e989178794/geist-mono-0638449e.woff2",
+      "bytes": 5892,
+      "sha256": "d67e4a94ba498635f764ddca7d1ec4271f5642f032eb24b426764480f66f8497"
+    },
+    {
+      "file": "_next/static/_vinext_fonts/geist-mono-00e989178794/geist-mono-44745446.woff2",
+      "bytes": 14712,
+      "sha256": "745994b5cd950ec201b66526375f057d540847cccfc70f4f24f5f571d26d3923"
+    },
+    {
+      "file": "_next/static/_vinext_fonts/geist-mono-00e989178794/geist-mono-44e03052.woff2",
+      "bytes": 12872,
+      "sha256": "75b3bedbebc35f347c0ae3b416aa871941555357e7b0f83767eb5987875589ed"
+    },
+    {
+      "file": "_next/static/_vinext_fonts/geist-mono-00e989178794/geist-mono-971fb274.woff2",
+      "bytes": 7728,
+      "sha256": "16e1d48b6dd29eb240aec5db36184eb182933c082cd43de7f35af686d58087d2"
+    },
+    {
+      "file": "_next/static/_vinext_fonts/geist-mono-00e989178794/geist-mono-f6b33328.woff2",
+      "bytes": 6204,
+      "sha256": "e27f657e38d52887baa3b6b2f812bef93dfdd356f0810e40edd4ee284cc7e9f6"
+    },
+    {
+      "file": "_next/static/chunks/engine-Bh-KK-YW.js",
+      "bytes": 1314145,
+      "sha256": "58c71ea92b4b14d7a7bea96b027f0cb905b706554ea127e335280685b5acc4bb"
+    },
+    {
+      "file": "_next/static/chunks/framework-DTZGTDtF.js",
+      "bytes": 190109,
+      "sha256": "2a1edf81f32a49b1eacafc3546b371bca024c82a9191836e274d90890212e9df"
+    },
+    {
+      "file": "_next/static/chunks/index-C_Y7fcbR.js",
+      "bytes": 109268,
+      "sha256": "6475691d8b08ee2e0892731eb71495ed1f225c41eb2942f4a7d8df4e4d317ae2"
+    },
+    {
+      "file": "_next/static/chunks/layout-segment-context-CvtEnqGk.js",
+      "bytes": 496,
+      "sha256": "fc4caaed335e4738c37f167830e167cd9ac338792ee6622bca8bbecbf506a1c3"
+    },
+    {
+      "file": "_next/static/chunks/page-yTx67WES.js",
+      "bytes": 299338,
+      "sha256": "e0da5605eb411b578bc529ccfdb6cd668e324afd213771b00747f4f6b30905c5"
+    },
+    {
+      "file": "_next/static/chunks/rolldown-runtime-hePW80VL.js",
+      "bytes": 716,
+      "sha256": "580ad8c58061a4dde99bde0a56905e382f0568516ee2f5b84dbfb52085709021"
+    },
+    {
+      "file": "_next/static/chunks/vinext-Cs711p8V.js",
+      "bytes": 110299,
+      "sha256": "c85caf5a2bac782e9c707df949d57d2f3f07789c39cd9980690870f7b0dbd610"
+    },
+    {
+      "file": "_next/static/css/index.8fPN2Iam.css",
+      "bytes": 205090,
+      "sha256": "291d6c9dda408da220487acec5a8245ea2647f0039d5c8707e893c928a235c01"
+    },
+    {
+      "file": "_next/static/workers/landmark.worker-CEMwRkvv.js",
+      "bytes": 832606,
+      "sha256": "e004c2b85837794122d28ded4d3015718d86f6ff912d3270e2b9fd1385dcf306"
+    },
+    {
+      "file": "data/beach-coast.json",
+      "bytes": 4966687,
+      "sha256": "47b787f94717fd489ddcdf0c91fc30a81eee65cce7d4fa6e2eea9763b6023459"
+    },
+    {
+      "file": "data/bridges.json",
+      "bytes": 62350,
+      "sha256": "52fcf8c310ecedff1782db2c1274af3f032905cdaf461b4a5c85ab0aa6d4faef"
+    },
+    {
+      "file": "data/buildings.geojson",
+      "bytes": 3840048,
+      "sha256": "57cf77f2f7afbceeb3ea4b7dcb87c33d7f56a6df57c33306792503f1dba538ec"
+    },
+    {
+      "file": "data/context-land-report.json",
+      "bytes": 1934,
+      "sha256": "ee570a22a5a53d2895a0f21fb62ceb89d24f0a3336fdd4679642f2d51557fd38"
+    },
+    {
+      "file": "data/context-land.geojson",
+      "bytes": 22196,
+      "sha256": "0de1ecbd260375e6587b9247a75814eccd2aaa594d857e384a974f5223d57c1e"
+    },
+    {
+      "file": "data/context-metadata.json",
+      "bytes": 10422,
+      "sha256": "acf4c07e33cfc5d6d89b197ecd2acb92c5f9df50729a47f5e91700e40e94383e"
+    },
+    {
+      "file": "data/context-terrain.json",
+      "bytes": 285737,
+      "sha256": "a19f981664538b4eb365128dde378af83adb884054a9aaafd0d264471a90799d"
+    },
+    {
+      "file": "data/context.geojson",
+      "bytes": 220187,
+      "sha256": "8490953cc264cd3090811fd5cba11cf23fb9d88434f58c99d0f100014fa86ec1"
+    },
+    {
+      "file": "data/harbour-piers.json",
+      "bytes": 93503,
+      "sha256": "d5cdbe856c3a2d603bb8eb1ed9d1122d3dc0baf7587b06427520f43b5651fc36"
+    },
+    {
+      "file": "data/harbour-routes.json",
+      "bytes": 47331,
+      "sha256": "f3f99b8e05171843b0ba9a21af5e9a6c3e629dbfaed9d5fac3c7e1f12fb2f483"
+    },
+    {
+      "file": "data/harbour-sites.json",
+      "bytes": 21921,
+      "sha256": "6071e1ee0ef33b34a391ad78b1d0d536e503397e7a495244b17470accbd0a15a"
+    },
+    {
+      "file": "data/land.geojson",
+      "bytes": 299940,
+      "sha256": "4329b72163668afeee2289160ef00dc9d61c2857d1917447eceaa243c0c30450"
+    },
+    {
+      "file": "data/parks.geojson",
+      "bytes": 87044,
+      "sha256": "3601c392311b2377a98cb072dd6143746561e25f4c1a5c6b9c6a0659d4bc75b3"
+    },
+    {
+      "file": "data/paths.geojson",
+      "bytes": 320138,
+      "sha256": "daf512c6eaee772df831462f3f0418f848d3737317b7219db51754ce0fae36b9"
+    },
+    {
+      "file": "data/railways.json",
+      "bytes": 13614,
+      "sha256": "afbc7b5a83c60c49c183dae9e0b83d9e955929a952e02f29d01e301d354fc46a"
+    },
+    {
+      "file": "data/reconciliation-report.json",
+      "bytes": 17808,
+      "sha256": "545069a84d6d4b26f7be2a99d8b7ecf8cf8ce8c84ef1b7f0ff505ae507701e78"
+    },
+    {
+      "file": "data/roads.geojson",
+      "bytes": 773687,
+      "sha256": "77543c74f4e567a65db14c8d33f9d6250d0f40bdd5f99031c1267aa8dc3373fb"
+    },
+    {
+      "file": "data/shoreline.geojson",
+      "bytes": 146828,
+      "sha256": "027881c37bcbbc50c0b11be707d96c61d40dba0efdd4900b1eca9573ad43c1bb"
+    },
+    {
+      "file": "data/terrain-metadata.json",
+      "bytes": 3090,
+      "sha256": "70633de5757f18fd54e7aaceaf5035655982fa806b19d26f8656b761c4c48eb3"
+    },
+    {
+      "file": "data/terrain.json",
+      "bytes": 303256,
+      "sha256": "c52c4ae53c3f76ae5cdfdb32765b53d7c61fec4f7d9db03b02c7f7d722853908"
+    },
+    {
+      "file": "data/trees.json",
+      "bytes": 1070134,
+      "sha256": "2ba858b2afa255bef8ad7f6c7aade750151d0990ad492c68e2c2915a92e3267d"
+    },
+    {
+      "file": "favicon.svg",
+      "bytes": 289,
+      "sha256": "4f72fcf4e7132d5d40fd9170e6da934be319e6042c04dc5fc8ae1691a857c1ff"
+    },
+    {
+      "file": "index.html",
+      "bytes": 37780,
+      "sha256": "6a81b2b9c81c8c949343fdc534e9bb5939ce3d0ed6982d0bc4d4c94df6ffad59"
+    },
+    {
+      "file": "index.txt",
+      "bytes": 3527,
+      "sha256": "0e0ed1d8abbbd637c9ba7498709f8361b18a90122c1a3eac0b2090031f2619d3"
+    },
+    {
+      "file": "textures/asphalt-fine-albedo.png",
+      "bytes": 665614,
+      "sha256": "062aaccee9ad350c04d7baca69391e0c87c797bc1da3aeeea27a85fccabd144c"
+    },
+    {
+      "file": "textures/asphalt-fine-normal.png",
+      "bytes": 1060303,
+      "sha256": "34d046cbd6c713e0a3927f2f31fac5adf709cdfd0a7614874f3772a41e416b79"
+    },
+    {
+      "file": "textures/brick-charcoal-albedo.png",
+      "bytes": 1040107,
+      "sha256": "3a14ffc3ceff2227e382a853426482b044c98ad025d9c59ddde89ee46bf586bf"
+    },
+    {
+      "file": "textures/brick-terracotta-albedo.png",
+      "bytes": 1085898,
+      "sha256": "970099490c98003786b5adf2b21c8d73a142db12cb4338f38097ac453682fe47"
+    },
+    {
+      "file": "textures/brick-terracotta-normal.png",
+      "bytes": 1170813,
+      "sha256": "a340ac7999153ac61ad049e50fdd19423b5d0bf05759bfd38d13def11ce12553"
+    },
+    {
+      "file": "textures/facade-glass-albedo.png",
+      "bytes": 49119,
+      "sha256": "f89a5c16726dc2253d32b72584ebb415f8827ce4b7cf92efbeb3530a804bd48a"
+    },
+    {
+      "file": "textures/sidewalk-concrete-albedo.png",
+      "bytes": 481451,
+      "sha256": "84f1a39999bb5768e6a91262882606977f9c5b4ef660cb1adcae05906b2cadd2"
+    },
+    {
+      "file": "textures/trees/bark-albedo.png",
+      "bytes": 3441359,
+      "sha256": "3f871844df12650c68ce441e9f2b13ca0ed4dd9d40130f1c56b06d084f0918bc"
+    },
+    {
+      "file": "textures/trees/leaf-atlas.png",
+      "bytes": 1944997,
+      "sha256": "8a03fce4f2847ffccec74a0f2e4877ea5af130bedd3ca4bb9734003988a69447"
+    },
+    {
+      "file": "vinext-client-entry-manifest.json",
+      "bytes": 65,
+      "sha256": "6d21020e0054316faf1be5631f0386041a51e518eea2461a932b63a9459a085e"
+    }
+  ]
+}
