@@ -1,6 +1,6 @@
 # Portable Vancouver asset tools
 
-These are path-portable versions of the release's original generators. Application/build code is MIT. City vector data remain OGL-Vancouver, OSM-derived data remain ODbL1.0, and Terrarium elevation sources retain the licenses recorded in their metadata.
+These are path-portable versions of the release's original generators. Application/build code is LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid). City vector data remain OGL-Vancouver, OSM-derived data remain ODbL1.0, and Terrarium elevation sources retain the licenses recorded in their metadata.
 
 Python3.13 was used for the checked release. Install dependencies in an isolated environment:
 

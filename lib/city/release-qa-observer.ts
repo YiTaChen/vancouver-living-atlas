@@ -41,7 +41,7 @@ export function snapshotFacadeQueue(
   };
 }
 
-/** MIT. Optional LOCAL visual-QA instrumentation proposal; no public UI.
+/** LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid). Optional LOCAL visual-QA instrumentation proposal; no public UI.
  * Place beside engine.ts only when integrating. No movement or camera rewriting.
  * Observe actual render submission; screenshot review still verifies appearance.
  */

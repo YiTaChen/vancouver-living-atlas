@@ -1,4 +1,4 @@
-/** Original MIT geometry. Local terrain visibility reconciliation, in metres.
+/** Original LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid) geometry. Local terrain visibility reconciliation, in metres.
  * All inputs are final, non-indexed, world-space triangles. No DEM resampling,
  * source line movement, pavement height change, upper-floor or terrain fill.
  */

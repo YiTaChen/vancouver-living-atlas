@@ -191,3 +191,8 @@ Added time-driven solar/lunar discs, eight moon phases plus manual eclipse previ
 - Preserved the classic car and added an original two-seat convertible, including seats/driver, curved body, windshield, roll hoops, wheel animation and lights.
 - Added five-language Classic/Roadster buttons to the driving camera card, with position/speed/zoom preserved on selection and a lower left-hand driving eye for the roadster.
 - Bounded exterior to 20 draws and under 20k triangles; reused assets on switching. 357 tests passed; actual browser exterior/interior/switching checked.
+
+### Noncommercial research and attribution licensing (2026-09-06)
+- Replaced the root MIT offer with a custom noncommercial research/personal-learning license requiring prominent repo attribution and prohibiting commercial use without written permission, plagiarism and unauthorized redistribution.
+- Preserved prior MIT grants and their historical notice; third-party software and geographic licenses are unchanged.
+- Updated README, root package metadata, original source labels and five-language About text. See `docs/licensing/README.md` for scope and limitations.

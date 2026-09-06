@@ -1,5 +1,5 @@
 """Extract observed bridge road coordinates; no invented street alignment.
-Original processing code, MIT. CoV and OSM source geometries retain own licenses.
+Original processing code, LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid). CoV and OSM source geometries retain own licenses.
 """
 import argparse
 import json,math,hashlib
@@ -125,7 +125,7 @@ for f in features:
 
 out={'type':'FeatureCollection','name':'Vancouver measured bridge and causeway routes','schemaVersion':1,
  'sources':SOURCES,'notes':[
- 'Coordinates are existing observed CoV/OSM map geometry, not copied finished 3D assets. Original processing code is MIT; source geometries retain listed open-data licenses.',
+ 'Coordinates are existing observed CoV/OSM map geometry, not copied finished 3D assets. Original processing code is LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid); source geometries retain listed open-data licenses.',
  'Shared topology nodes cluster endpoints within 0.25 m (one CoV Granville join differs by 2.3 cm). Feature geometry vertices remain unaltered. One disconnected Granville lower approach fragment is clipped at the southern study edge, so no missing connection is invented.',
  'All estimatedDeckM fields are model estimates above a common water-zero. They are not authoritative engineering deck survey values. Lions 64 m derives approximately from cited 61 m clearance plus structure depth.',
  'Main marks the measured principal bridge spine, not necessarily the suspended centre span. Lions main includes the north viaduct. Do not place its two suspension towers symmetrically about the full spine midpoint.',

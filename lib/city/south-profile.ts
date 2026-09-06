@@ -1,4 +1,4 @@
-/** MIT. Original pure evaluator for the jointly solved southern Causeway.
+/** LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid). Original pure evaluator for the jointly solved southern Causeway.
  * JSON is a versioned data asset. This module does not mutate terrain or source XY.
  * Use the baked segments for BOTH renderer and registry; curve queries are design
  * values, never a second independently sampled navigation surface.

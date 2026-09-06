@@ -8,7 +8,7 @@ import {
   type HarbourPodiumOptions,
 } from './harbour-podium';
 /**
- * Original parametric Vancouver architecture. MIT, 2026.
+ * Original parametric Vancouver architecture. LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid), 2026.
  * Local coordinates are metres, +Y up. Factories do not apply map placement.
  * No downloaded 3D assets, photographic textures, logos, or traced artwork.
  * The metadata below is part of the integration contract; see SOURCE-NOTES.md.

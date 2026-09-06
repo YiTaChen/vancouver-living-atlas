@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Original MIT code: download 9 public Terrarium DEM tiles, build 100m context.
+"""Original LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid) code: download 9 public Terrarium DEM tiles, build 100m context.
 
 Requires NumPy and Pillow. Underlying elevation data retain source licences.
 Run from any directory: python build_context.py --out-dir PATH [--cache-dir PATH] [--offline]

@@ -1,21 +1,129 @@
-MIT License
+Vancouver Living Atlas Noncommercial Research and Attribution License 1.0
+SPDX-License-Identifier: LicenseRef-Vancouver-Living-Atlas-NC-1.0
 
-Copyright (c) 2026 YiTaChen
+Copyright (c) 2026 YiTaChen. All rights reserved except as expressly granted.
+Canonical source: https://github.com/YiTaChen/vancouver-living-atlas
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+1. Scope and effective version
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+This license applies to the original application code, original procedural
+models, original artwork, documentation and other original project material
+that YiTaChen has authority to license (the "Material"), in revisions distributed
+with this license starting with the license-change commit dated 2026-09-06.
+It applies only to rights controlled by the licensor, not to third-party rights,
+unprotectable facts or ideas, or rights available under applicable law.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Third-party software, fonts and geographic data are excluded and remain under
+their own licenses. In particular, OpenStreetMap-derived data retain ODbL 1.0;
+City of Vancouver and other geographic sources retain their applicable terms.
+See DATA_SOURCES.md, dependency notices and any file-specific source notices.
+This license imposes no additional restriction on those independently licensed
+materials. Preserve all applicable third-party notices and obligations.
+
+2. Limited permission
+
+Subject to every condition below, you may access, run, copy, study, modify and
+share the Material and adaptations solely for:
+(a) noncommercial academic research, teaching and reproducible scholarship; or
+(b) noncommercial personal learning, experimentation and attributed hobby demos.
+Noncommercial research papers, presentations and accompanying reproducibility
+materials are permitted. Private study does not require publishing your work,
+but notices must be retained and any sharing or presentation must be credited.
+
+"Noncommercial" means the use is not directed toward commercial advantage,
+commercial product development, business operations or monetary compensation
+from the Material or a service incorporating it. Salaries, ordinary university
+tuition and research grants alone do not make academic activity commercial;
+research commissioned to develop a commercial product or service does.
+
+3. Commercial use requires separate written permission
+
+Without prior written permission from YiTaChen, you may not sell, rent, license
+for a fee, monetize, or use the Material or adaptations in commercial products,
+paid services, client work, business operations, advertising, sponsored product
+promotion or commercial product research and development. This includes paid
+or advertising-supported hosting and reselling or commercially bundling assets,
+code, screenshots or videos containing protected Material. Giving the Material
+away for free does not make an otherwise commercial use noncommercial.
+Attribution alone does not authorize commercial use.
+
+4. Mandatory prominent attribution
+
+Every permitted shared copy, adaptation, demonstration, publication, screenshot
+or video containing a substantial part of the Material must clearly identify
+its origin, using the following credit or an accurate translation:
+
+  Based on Vancouver Living Atlas by YiTaChen
+  Source: https://github.com/YiTaChen/vancouver-living-atlas
+  License: Vancouver Living Atlas Noncommercial Research and Attribution 1.0
+
+Include a link to the source and to its LICENSE where the medium supports links.
+For modified versions, clearly state that the version is modified and identify
+your changes; do not suggest it is an official release or endorsed by YiTaChen.
+
+For source repositories and downloadable packages, place the credit prominently
+near the beginning of the README or accompanying documentation, and include
+this full LICENSE and all copyright notices. For websites or interactive demos,
+show the project credit and source link in a legible, visible part of the main
+interface, such as a footer; a hidden comment or a buried settings page is not
+sufficient. For videos, include a readable credit in the video and in its
+accompanying description; for images, use a visible credit or immediately
+adjacent caption. For academic papers and presentations, include a proper
+citation with the repository URL and, when available, the version/commit used.
+These requirements apply to personal and privately shared presentations too.
+
+5. No plagiarism, notice removal or unauthorized redistribution
+
+You may not claim the Material, its models or artwork as entirely your own
+original creation; remove, hide or obscure required source, author or license
+notices; distribute uncredited clones or repackaged copies; or redistribute
+outside the purposes and conditions permitted by this license. A change of
+name, styling, hosting location or file format does not remove these conditions.
+
+Any shared adaptation containing the Material must preserve this license for
+the Material and retain its noncommercial and attribution restrictions. Do not
+purport to sublicense the Material under MIT, another permissive license, or
+any terms granting rights that this license does not grant. You retain rights
+in your own original additions, but their terms must not prevent recipients
+from complying with this license for the included Material. No permission to
+use names, logos or trademarks to imply endorsement is granted.
+
+6. Earlier releases and independent rights
+
+This change does not revoke, narrow or replace rights already granted under
+MIT for previously released material. Revisions through commit e380869 were
+published under MIT for the original project material; the former license is
+preserved at docs/licensing/MIT-before-2026-09-06.txt and in Git history.
+Material available under those earlier grants remains usable under those grants,
+including their commercial permissions. New restrictions cannot retroactively
+prevent copying, modification or redistribution authorized by those grants.
+This license is not an additional restriction on a copy used under an earlier
+MIT grant, and is not a new MIT grant for later additions.
+
+Nothing here restricts statutory exceptions or limitations, including applicable
+fair use or fair dealing, or GitHub viewing/forking rights under its platform
+terms. A public repository or a fork does not itself authorize other uses.
+
+7. Termination and reserved rights
+
+If you breach these conditions, permissions granted by this license terminate
+automatically. Stop uses that depend on this license until YiTaChen reinstates
+permission in writing. Termination does not affect independent rights described
+in section 6 or compliant recipients' independently granted permissions.
+Rights not expressly granted are reserved. Requests for commercial use or other
+exceptions must be directed to YiTaChen through the canonical repository; silence
+or an unanswered request is not permission.
+
+8. No warranty; limitation of liability
+
+To the fullest extent permitted by applicable law, the Material is provided
+"AS IS", without warranties of any kind, express or implied, including fitness
+for a particular purpose, merchantability, accuracy and noninfringement.
+To that same extent, the authors and copyright holders are not liable for any
+claim, damage or other liability arising from use of the Material, whether in
+contract, tort or otherwise. Nothing excludes liability that cannot lawfully
+be excluded.
+
+This is a custom source-available, noncommercial license, not the MIT License
+and not an OSI-approved open-source license. The English text is authoritative;
+README summaries and translations are explanatory only.

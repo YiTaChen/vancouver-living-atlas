@@ -1,5 +1,5 @@
 import { orderedBounds } from './ordered-bounds';
-/** Original MIT. Pure position arrays; no Three, DOM, renderer or terrain mutation.
+/** Original LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid). Pure position arrays; no Three, DOM, renderer or terrain mutation.
  * Source centerline XY and baked final asphalt Y remain the anchors.
  */
 import type { SurfaceSegment, XZ } from './causeway-profile';

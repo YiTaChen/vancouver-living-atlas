@@ -1,4 +1,4 @@
-/** Original MIT pure 2D pavement prototype. Coordinates use the RoadGraph's local metres. */
+/** Original LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid) pure 2D pavement prototype. Coordinates use the RoadGraph's local metres. */
 import type { Point, RoadEdge, RoadGraph } from './road-graph';
 
 export interface Polygon2D {

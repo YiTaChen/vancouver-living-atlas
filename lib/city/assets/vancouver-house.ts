@@ -1,4 +1,4 @@
-/** Original Vancouver House balcony-depth study. MIT, 2026.
+/** Original Vancouver House balcony-depth study. LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid), 2026.
  * Preserves the current app's placement, height, per-floor projected envelope,
  * and 49m square podium allowance. This is a bounded appearance replacement,
  * not a survey-correct reconstruction of the actual triangular base.

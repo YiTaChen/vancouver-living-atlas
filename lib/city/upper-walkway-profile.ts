@@ -1,4 +1,4 @@
-/** Original MIT. Bounded Causeway pedestrian connectors; no Three.js or scene state.
+/** Original LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid). Bounded Causeway pedestrian connectors; no Three.js or scene state.
  * Source XY is immutable. Input Y values are FINAL asphalt top. A path top is
  * baked once and must feed geometry, support, rails and navigation together.
  */

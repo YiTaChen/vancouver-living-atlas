@@ -1,4 +1,4 @@
-/** Original MIT. Immutable AABB broad phase preserving source iteration order.
+/** Original LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid). Immutable AABB broad phase preserving source iteration order.
  * No polygon/triangle arithmetic changes. XZ metre bounds [minX,minZ,maxX,maxZ].
  */
 export function orderedBounds<T>(

@@ -1,4 +1,4 @@
-/** Original MIT. Exact deterministic descriptor sequence of the current
+/** Original LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid). Exact deterministic descriptor sequence of the current
  * FacadeDetails.build. Checkpoints bound scans even when an edge emits no boxes. */
 import { fitBays, windowRows, type Profile } from './facade-profile';
 export interface FacadeInput {

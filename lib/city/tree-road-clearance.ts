@@ -1,4 +1,4 @@
-/** Original display-width constraint from measured tree positions. MIT code.
+/** Original display-width constraint from measured tree positions. LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid) code.
  * This is NOT a street/curb survey, a lane count, or a traffic design tool.
  * Tree coordinates and the original road centreline are never moved.
  */

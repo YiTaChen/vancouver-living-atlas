@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Prepare original City2009 and OSM records for building reconciliation.
-Code MIT. City records OGL-Vancouver; OSM-derived records ODbL1.0.
+Code LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid). City records OGL-Vancouver; OSM-derived records ODbL1.0.
 """
 import argparse,json
 from pathlib import Path

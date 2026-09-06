@@ -1,4 +1,4 @@
-/** Original MIT Canada Place gallery/atrium and PTFE-style material study.
+/** Original LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid) Canada Place gallery/atrium and PTFE-style material study.
  * Metres in existing building-local axes. No renderer, DOM, texture downloads,
  * engine or per-frame loop. Keep the original five sail/rigging geometry.
  */

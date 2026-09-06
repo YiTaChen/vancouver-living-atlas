@@ -1,4 +1,4 @@
-/** Original MIT pure surface-identity / explicit-connection prototype.
+/** Original LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid) pure surface-identity / explicit-connection prototype.
  * Geometry lookup is injected: it must return only surfaces whose real XZ
  * triangles/footprints contain the query. No renderer, raycast or city scan.
  */

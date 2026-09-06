@@ -3,7 +3,7 @@
 
 Dependencies: numpy, scipy, Pillow. Source input GeoJSON is read only.
 Run with explicit --contours, --land and --out-dir paths (see README.md).
-Data: City of Vancouver Open Government Licence. Code: MIT.
+Data: City of Vancouver Open Government Licence. Code: LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid).
 """
 import argparse
 import hashlib

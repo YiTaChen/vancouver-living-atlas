@@ -4,6 +4,8 @@ An original, explorable browser reconstruction of Vancouver: the entire Downtown
 
 **Live demo (Firebase): [vancouver-living-atlas-yita.web.app](https://vancouver-living-atlas-yita.web.app/)**
 
+**License: noncommercial research/personal learning only · prominent repo attribution required · commercial use requires written permission.** [Full terms](LICENSE)
+
 [Data and accuracy](DATA_SOURCES.md) · [Manager-loop development record](docs/PROGRESS.md)
 
 The five-language application is publicly hosted on Firebase Hosting. This repository is public, and the application can also run locally.
@@ -97,9 +99,20 @@ Implementation → independent geographic/architecture review → browser inspec
 
 ## License
 
-Original application code, original procedural geometry and generated surface artwork: **MIT**, see [LICENSE](LICENSE).
+Original material is now offered under the custom **Vancouver Living Atlas Noncommercial Research and Attribution License 1.0**, see [LICENSE](LICENSE). This is source-available, not OSI-approved open source.
 
-Geographic data retain their source terms: **Open Government Licence – Vancouver**, **Open Database License 1.0**, and the applicable Canadian/USGS terrain terms. The combined geographic database includes OSM-derived records and is distributed under ODbL with City attribution. These data are not relicensed as MIT. See [DATA_SOURCES.md](DATA_SOURCES.md).
+- **Allowed:** noncommercial academic research, teaching, personal learning and attributed hobby demonstrations.
+- **Not allowed without written permission:** commercial products/services, client work, monetization, sales or commercial repackaging. Crediting this repo does not make commercial use permissible.
+- **Attribution required:** personal as well as academic reuse must clearly credit **Vancouver Living Atlas by YiTaChen** and link to **https://github.com/YiTaChen/vancouver-living-atlas**. Put credit near the beginning of a fork's README, visibly in a demo's main interface, and in videos/images or their captions as specified in LICENSE. Include the license; identify modifications.
+- **No plagiarism or unauthorized copies:** do not claim the original project as your own, remove/hide credits, or share clones outside the license conditions.
+
+**中文摘要：** 允許非商用學術研究、教學與個人學習；未經書面許可禁止商用。個人引用、改作、展示、影片或轉載也必須明顯註明「出自 Vancouver Living Atlas／YiTaChen」並附本 repo 連結。不得冒稱原創、移除出處或違規重製散布。完整英文 LICENSE 為準。
+
+**Earlier MIT releases:** this change starts with the 2026-09-06 license-change commit. It cannot revoke rights already granted for material released through [`e380869`](https://github.com/YiTaChen/vancouver-living-atlas/tree/e380869), including MIT commercial permissions. The [historical MIT notice](docs/licensing/MIT-before-2026-09-06.txt) is retained for those releases, not offered as an alternative for future additions.
+
+Geographic data and third-party dependencies keep their own terms, including **Open Government Licence – Vancouver**, **Open Database License 1.0**, Canadian/USGS terrain terms and individual software/font licenses. The combined geographic database remains ODbL with City attribution; the new restrictions do not relicense those sources. See [DATA_SOURCES.md](DATA_SOURCES.md).
+
+For commercial permission or other exceptions, contact **YiTaChen through this repository**. A request alone is not authorization.
 
 ## Firebase Hosting
 

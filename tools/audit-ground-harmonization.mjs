@@ -1,4 +1,4 @@
-// Original MIT. Portable canonical Stage 6 CPU audit; no browser or GPU.
+// Original LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid). Portable canonical Stage 6 CPU audit; no browser or GPU.
 import{writeFileSync}from'node:fs';
 import path from'node:path';
 import{createHash}from'node:crypto';

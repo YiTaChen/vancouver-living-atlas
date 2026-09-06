@@ -1,4 +1,4 @@
-/** MIT. Portable canonical CPU fixture. Install beside tools/audit-causeway.mjs.
+/** LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid). Portable canonical CPU fixture. Install beside tools/audit-causeway.mjs.
  * Node24 + the project's installed three/typescript/delaunator. No work snapshot,
  * browser, WebGL, remote API, shell, image loading or extra package is required.
  */

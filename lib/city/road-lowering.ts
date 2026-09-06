@@ -1,4 +1,4 @@
-/** Original MIT. A local, downward-only repair of existing ground asphalt.
+/** Original LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid). A local, downward-only repair of existing ground asphalt.
  * Upper decks and source paths remain untouched. The correction is zero with
  * zero derivative at its six-metre perimeter. Path footprint boundaries are
  * explicit triangle cuts, so a fine grid cannot miss a narrow source path.

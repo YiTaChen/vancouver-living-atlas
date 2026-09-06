@@ -1,6 +1,6 @@
 # Vancouver geographic source data
 
-Prepared 2026-09-04 for the Vancouver browser reconstruction. No third-party city model, finished visualization, Google map tile or imagery is embedded. Assets derive from open vector records. Project code can be MIT licensed; source geographic records retain the licenses below.
+Prepared 2026-09-04 for the Vancouver browser reconstruction. No third-party city model, finished visualization, Google map tile or imagery is embedded. Assets derive from open vector records. Original project code is now offered under the noncommercial research and attribution terms in [LICENSE](LICENSE); prior MIT grants remain valid. Source geographic records retain the licenses below.
 
 ## Coordinate system and extent
 
@@ -39,7 +39,7 @@ City API retrieval pattern (the query returns intersecting features; preparation
 
 ## OpenStreetMap contributors — ODbL 1.0
 
-Display credit `© OpenStreetMap contributors` linked to https://www.openstreetmap.org/copyright . Distributed OSM-derived vector data in `context.geojson`, `paths.geojson`, `buildings.geojson`, `context-land.geojson`, and OSM-derived bridge routes remains available under the Open Database License: https://opendatacommons.org/licenses/odbl/1-0/ . These data files are not relicensed as MIT.
+Display credit `© OpenStreetMap contributors` linked to https://www.openstreetmap.org/copyright . Distributed OSM-derived vector data in `context.geojson`, `paths.geojson`, `buildings.geojson`, `context-land.geojson`, and OSM-derived bridge routes remains available under the Open Database License: https://opendatacommons.org/licenses/odbl/1-0/ . These data files are not relicensed under the application license.
 
 Retrieved from https://overpass-api.de/api/interpreter on 2026-09-04 with direct Overpass queries for `natural=water|beach|wood`, `building`, `building:part` and Stanley Park `highway` features. These are source map records, not a third-party city model. OSM is community maintained; tagged heights are not guaranteed measured or complete.
 
@@ -89,7 +89,7 @@ Source-geometry verification confirms Living Shangri-La201m (7 vertical slabs), 
 
 `reconciliation-report.json` records counts, discarded parents, invalid input intervals, tall-structure details and QA. Tests against the serialized final GeoJSON report zero invalid polygons/height intervals, zero positive-volume overlap pairs with horizontal area above0.1m², and zero generic-massing overlap above0.1m² with reserved landmark envelopes. Touching faces/adjacent vertical intervals are intentional.
 
-The combined geographic database includes OSM-derived data and is distributed under ODbL1.0 with City of Vancouver attribution retained. This does not change the application's MIT code license. `reconcile_buildings.py` reproduces the transformation from the prepared source vectors.
+The combined geographic database includes OSM-derived data and is distributed under ODbL1.0 with City of Vancouver attribution retained. This does not change the application's separate code license. `reconcile_buildings.py` reproduces the transformation from the prepared source vectors.
 
 ## Regional context land mask
 
@@ -138,7 +138,7 @@ The placement feature also includes [five landmark collision masks](lib/city/lan
 
 ## Rail alignments and original rolling stock
 
-`public/data/railways.json` adds three OSM-derived open-air alignments: 1,119.04 m of Waterfront–Gastown ground railway and 855.20/893.61 m of the two Expo SkyTrain directions near Science World. Source snapshot: 2026-09-04 23:22:30 UTC, retrieved with [the recorded Overpass query](tools/railways-query.overpass). Source way/relation IDs and original bridge/tunnel/stacking tags are retained. These geographic records remain under ODbL 1.0 with © OpenStreetMap contributors attribution; they are not relicensed as MIT.
+`public/data/railways.json` adds three OSM-derived open-air alignments: 1,119.04 m of Waterfront–Gastown ground railway and 855.20/893.61 m of the two Expo SkyTrain directions near Science World. Source snapshot: 2026-09-04 23:22:30 UTC, retrieved with [the recorded Overpass query](tools/railways-query.overpass). Source way/relation IDs and original bridge/tunnel/stacking tags are retained. These geographic records remain under ODbL 1.0 with © OpenStreetMap contributors attribution; they are not relicensed under the application license.
 
 The steam locomotive, tender, coaches, electric trains, tracks, guideway and smoke are original scene code. Steam service is fictional, SkyTrain is electric, and neither operating patterns nor rail heights claim surveyed or live accuracy. Routes omit underground sections and stop short of station canopy/building passages. [Railway scope, direct sources and clearance checks](docs/RAILWAYS.md) explain the source geometry and display estimates.
 
@@ -146,7 +146,7 @@ The steam locomotive, tender, coaches, electric trains, tracks, guideway and smo
 
 See [verified operators, geometry and precision notes](docs/HARBOUR_SOURCES.md). `public/data/harbour-sites.json`, `harbour-piers.json` and `harbour-routes.json` combine OSM facility geometry (© OpenStreetMap contributors, ODbL 1.0) with explicitly marked original illustrative berth occupancy and local animation paths. Helijet and Harbour Air list Victoria/Nanaimo services; the cruise demonstration uses the First Narrows exit toward Alaska/Inside Passage. Timings and flight tracks are illustrative, not live departures. No operator imagery or existing 3D assets were reused.
 
-The original helicopter, floatplane, cruise ship, motorboat and yacht models in `lib/city/harbour-models.ts` are MIT. Curved hulls, windows, cabins, rotors, balconies, lifeboats and decks are generated from original geometry. Data licenses remain separate from the application MIT license.
+The original helicopter, floatplane, cruise ship, motorboat and yacht models in `lib/city/harbour-models.ts` are now offered under [LICENSE](LICENSE), subject to prior MIT grants. Curved hulls, windows, cabins, rotors, balconies, lifeboats and decks are generated from original geometry. Data licenses remain separate from the application license.
 
 ## Vancouver-style city buses (September 2026)
 

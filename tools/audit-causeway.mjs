@@ -1,4 +1,4 @@
-/** Original MIT. Portable integration regression audit, run with Node24. */
+/** Original LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid). Portable integration regression audit, run with Node24. */
 import fs from 'node:fs';
 import {
   ROOT,

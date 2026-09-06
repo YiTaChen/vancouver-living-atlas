@@ -1,4 +1,4 @@
-/** Original MIT. Pure arrays only. All source centreline XY is retained.
+/** Original LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid). Pure arrays only. All source centreline XY is retained.
  * main.start/end are geographic coordinates and must use the app projection.
  * The returned rounded asphalt triangles are also the authoritative drive floor.
  * The existing bridge body/towers/cables are retained by the caller. */

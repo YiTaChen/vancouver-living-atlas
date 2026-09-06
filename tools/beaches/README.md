@@ -1,6 +1,6 @@
 # Reproduce the coastal geometry
 
-The checked-in output is `public/data/beach-coast.json`. Original preparation code is MIT; source geometry in `inputs/` retains © OpenStreetMap contributors / ODbL and City of Vancouver OGL attribution. These are geographic source derivatives, not downloaded 3D models.
+The checked-in output is `public/data/beach-coast.json`. Original preparation code is LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid); source geometry in `inputs/` retains © OpenStreetMap contributors / ODbL and City of Vancouver OGL attribution. These are geographic source derivatives, not downloaded 3D models.
 
 Requirements: the project's Node dependencies, Python 3 with numpy and Shapely 2.1+. From the repository root, using the Python executable with those packages:
 

@@ -1,4 +1,4 @@
-/** Original BC Place envelope / representative entrance refinement. MIT, 2026.
+/** Original BC Place envelope / representative entrance refinement. LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid), 2026.
  * Source dimensions, roof geometry, placements and collision polygons stay with
  * the existing factory. ETFE is a thin saddle-shaped single layer, not cushions.
  * See prototype-bc-place-notes.md for measured/source/interpretation distinctions.

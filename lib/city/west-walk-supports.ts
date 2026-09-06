@@ -1,4 +1,4 @@
-/** Original MIT. Sparse illustrative concrete support layout, no scene or I/O.
+/** Original LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid). Sparse illustrative concrete support layout, no scene or I/O.
  * Columns support ONLY the solved western entry. No earth fill is emitted.
  * Collision is conservative in plan: complete1m circular footprint+.25m buffer
  * must clear every supplied lower-path/City-road/extra no-fill envelope.

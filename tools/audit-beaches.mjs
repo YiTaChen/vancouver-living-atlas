@@ -1,4 +1,4 @@
-/** Original MIT. Real ground movement and boat physics against final coastal data. */
+/** Original LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid). Real ground movement and boat physics against final coastal data. */
 import { writeFileSync } from 'node:fs';
 import {
   createFixture,

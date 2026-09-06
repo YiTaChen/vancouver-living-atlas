@@ -1,4 +1,4 @@
-/** Original Spencer podium depth refinement, not a surveyed heritage replica. MIT.
+/** Original Spencer podium depth refinement, not a surveyed heritage replica. LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid).
  * Source footprint / 21m model roof retained. No interior navigation is added. */
 import * as THREE from 'three';
 import {

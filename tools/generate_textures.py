@@ -155,7 +155,7 @@ emissive=np.array([174,135,80])[None,None,:]*(occupied*window_clear*blind)[...,N
 export('facade-glass',color,rough,height,[12,12],
   '12×12 m tile, 4 horizontal bays × 4 storeys, each 3 m. Two panes per bay, 80 mm principal mullions, narrow secondary mullions, upper spandrel band. Use material metalness 0.0–0.15, envMapIntensity 0.8–1.5; normalScale 0.25–0.5. Pane pattern is an original plausible façade and not a surveyed real building. Optional emissive map only at night, emissive white/intensity 0.15–0.45.',emissive=emissive)
 
-metadata={'license':'MIT; all textures created originally from deterministic Python functions by this task. No third-party artwork.',
+metadata={'license':'LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid); all textures created originally from deterministic Python functions by this task. No third-party artwork.',
  'colorSpaces':{'albedo':'sRGB','roughness':'NoColorSpace / linear data','normal':'NoColorSpace / linear data','nightEmissive':'sRGB'},
  'normalConvention':'OpenGL tangent-space +Y (green positive up); no baked directional lighting.',
  'filtering':'RepeatWrapping on S and T, LinearMipmapLinearFilter, anisotropy min(renderer maximum,8). Preserve physical UV scale.',

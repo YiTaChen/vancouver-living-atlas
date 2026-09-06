@@ -1,4 +1,4 @@
-/** Original MIT Science World entrance study, 2026.
+/** Original LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid) Science World entrance study, 2026.
  * Replaces only the old entry glass box and low canopy; preserves the main
  * pavilion, sphere, annex envelope, location and deck datum. No renderer/DOM.
  */

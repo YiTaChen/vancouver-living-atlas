@@ -1,5 +1,5 @@
 /**
- * Original Marine Building ground-floor entrance study. MIT, 2026.
+ * Original Marine Building ground-floor entrance study. LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid), 2026.
  * Replaces BOTH original ground prisms and the bottom of MARINE_PARTS[1].
  * The aperture is absent from the wall geometry; this is not a portal pasted
  * in front of a solid extrusion. Existing upper masses/placement stay intact.

@@ -1,4 +1,4 @@
-/** Original MIT pure prototype. Call only with a verified, contiguous attachment
+/** Original LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid) pure prototype. Call only with a verified, contiguous attachment
  * profile. Physical walk/drive permission stays on each path, NOT this sampler.
  * It never changes source XY, invents a connector or falls back to terrain. */
 export interface AttachmentSegment {

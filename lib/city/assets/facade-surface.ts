@@ -1,4 +1,4 @@
-/** Original indexed facade primitives. Metre UVs, no external assets. MIT. */
+/** Original indexed facade primitives. Metre UVs, no external assets. LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid). */
 import * as THREE from 'three';
 export type Point3 = readonly [number, number, number];
 export type Point2 = readonly [number, number];

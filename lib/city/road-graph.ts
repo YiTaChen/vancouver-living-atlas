@@ -1,5 +1,5 @@
 /**
- * Original pure planar road geometry prototype. MIT.
+ * Original pure planar road geometry prototype. LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid).
  * Coordinates are local metres, [east, south]; no Engine/Three/DOM dependencies.
  * Crossings are conservative illustrative proposals, never surveyed traffic data.
  */

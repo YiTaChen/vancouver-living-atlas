@@ -1,4 +1,4 @@
-/** MIT. Exact planar triangle intersection checks, no external geometry package. */
+/** LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid). Exact planar triangle intersection checks, no external geometry package. */
 const cross = (a, b, c) =>
   (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0]);
 const bounds = (p) => [

@@ -1,4 +1,4 @@
-/** Original MIT prototype. Pure math; no Three.js, DOM, engine or global state.
+/** Original LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid) prototype. Pure math; no Three.js, DOM, engine or global state.
  * All height values are FINAL ROAD TOP metres. Do not add the old +0.06 again.
  * Source XY is never smoothed, translated or replaced with an endpoint chord.
  */

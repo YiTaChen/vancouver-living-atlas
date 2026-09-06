@@ -1,4 +1,4 @@
-/** Original MIT. Asphalt-only display reconciliation against unchanged OSM
+/** Original LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid). Asphalt-only display reconciliation against unchanged OSM
  * walkway XY. Station s/offset are an orthonormal frame on raw way 4755915.
  * Clear strips have round joins. The .25m inboard and .45m outboard aprons
  * make a nominal 2.7m main sidewalk around its 2m clear strip. Not a survey.

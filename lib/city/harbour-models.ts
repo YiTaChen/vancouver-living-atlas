@@ -1,5 +1,5 @@
 /**
- * Original procedural harbour models. Copyright (c) 2026. MIT licence.
+ * Original procedural harbour models. Copyright (c) 2026. LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid) licence.
  * No downloaded models, textures, logos, fonts, or other artwork.
  * Coordinates: metres; +Z is forward/bow, +Y is up.
  * Boats and the floatplane sit at waterline Y=0; helicopter skids sit at Y=0.
