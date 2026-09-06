@@ -1,5 +1,20 @@
 import * as THREE from 'three';
 
+/** Same explicit floor set for walking and map placement. Elevated routes are
+ * picked through their source-owned proxies, never through this ground list. */
+export function walkableGroundMeshes(root: THREE.Object3D) {
+  const meshes: THREE.Mesh[] = [];
+  root.traverse((object) => {
+    if (
+      object instanceof THREE.Mesh &&
+      object.userData.walkSurface &&
+      !object.userData.protectedSurface
+    )
+      meshes.push(object);
+  });
+  return meshes;
+}
+
 /** Static, explicitly selected walkable meshes; world metres, Y up.
  * Build after their transforms are final. Bridge decks should use their own
  * surface logic. Vertex positions are shared; cells contain triangle IDs only.

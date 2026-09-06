@@ -32,9 +32,12 @@ const methods = cls.members
   .filter(
     (n) =>
       ts.isMethodDeclaration(n) &&
-      ['elevation', 'rawElevation', 'focusHarbour', 'completeLocalMapTransition'].includes(
-        n.name.getText(ast),
-      ),
+      [
+        'elevation',
+        'rawElevation',
+        'focusHarbour',
+        'completeLocalMapTransition',
+      ].includes(n.name.getText(ast)),
   )
   .map((n) => n.getText(ast));
 const methodCode = ts.transpileModule(

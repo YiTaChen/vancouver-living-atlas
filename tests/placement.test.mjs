@@ -30,6 +30,7 @@ const { MapPlacement } = await import(
     three: import.meta.resolve('three'),
     './geo': geoUrl,
     './placement-geometry': geometryUrl,
+    './ground-surface': cityModule('ground-surface'),
   })
 );
 const world = (extra = {}) => ({
@@ -188,6 +189,7 @@ function fixture({ bridge = false } = {}) {
     new THREE.MeshBasicMaterial({ side: THREE.DoubleSide }),
   );
   ground.rotation.x = -Math.PI / 2;
+  ground.userData.walkSurface = true;
   ground.updateMatrixWorld(true);
   const water = new THREE.Mesh(
     new THREE.PlaneGeometry(80000, 80000),
@@ -261,6 +263,7 @@ function fixture({ bridge = false } = {}) {
       },
     },
   };
+  e.scene.add(terrain);
   const placement = new MapPlacement(e);
   const screen = (x, y, z) => {
     const p = new THREE.Vector3(x, y, z).project(camera);
@@ -952,11 +955,10 @@ test('walking zoom reveals an animated person without changing position, and eac
   nav.zoom(4);
   settleCamera(nav);
   assert(nav.walker.group.visible);
-  assert.deepEqual(nav.walker.group.position.toArray(), [
-    pose[0],
-    e.elevation(pose[0], pose[2]) + 0.02,
-    pose[2],
-  ]);
+  assert.equal(nav.walker.group.position.x, pose[0]);
+  assert.equal(nav.walker.group.position.z, pose[2]);
+  // The fixture includes its actual y=0 terrain in the scene, as production does.
+  assert(Math.abs(nav.walker.group.position.y - 0.02) < 1e-10);
   assert.deepEqual(nav.position.toArray(), pose);
   assert.equal(nav.yaw, yaw);
   nav.hold('forward', true);

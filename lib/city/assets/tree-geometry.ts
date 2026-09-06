@@ -19,7 +19,9 @@ export const TREE_ATLAS_CELLS = {
 export const TREE_SOLID_UV: ReadonlyArray<readonly [number, number]> = [
   [0.413476874, 0.6877990431],
   [0.7531897927, 0.7962519936],
-  [0.2803030303, 0.1096491228],
+  // Midtone fir needle at image pixel (208,739); the former (351,1116)
+  // was a deep shadow RGB(22,46,5), making the opaque crown almost black.
+  [0.16626794258373206, 0.4102870813397129],
   [0.6973684211, 0.2388357257],
 ];
 

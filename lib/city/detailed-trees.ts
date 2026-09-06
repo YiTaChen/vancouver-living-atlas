@@ -91,8 +91,9 @@ export class DetailedTrees {
       vertexColors: true,
       roughness: 0.92,
     });
-    // Image generator returned RGB with a neutral checker background. Decode its
-    // chroma into coverage rather than displaying the checker or claiming RGBA.
+    // The source is RGB on a neutral checker, not RGBA. Remove the neutral matte
+    // from filtered edge samples as well as rejecting the background. A binary
+    // bright-pixel mask left white contamination around minified needles.
     const mask = (
       shader: Parameters<THREE.MeshStandardMaterial['onBeforeCompile']>[0],
     ) => {
@@ -108,13 +109,16 @@ export class DetailedTrees {
         `#include <map_fragment>
 #ifdef USE_MAP
  vec3 leafRGB = sampledDiffuseColor.rgb;
- float coverage = 1.0-smoothstep(.56,.72,min(leafRGB.r,min(leafRGB.g,leafRGB.b)));
+ float matte = min(leafRGB.r,min(leafRGB.g,leafRGB.b));
+ float coverage = 1.0-matte;
+ vec3 unmatte = max(vec3(0.),leafRGB-vec3(matte))/max(coverage,.001);
+ diffuseColor.rgb *= mix(unmatte/max(leafRGB,vec3(.001)),vec3(1.),vSolid);
  diffuseColor.a *= mix(coverage,1.,vSolid);
 #endif`,
       );
     };
     leafMat.onBeforeCompile = mask;
-    leafMat.customProgramCacheKey = () => 'atlas-chroma-leaf-v1';
+    leafMat.customProgramCacheKey = () => 'atlas-neutral-matte-leaf-v2';
     const depth = new THREE.MeshDepthMaterial({
       map: atlas,
       alphaTest: 0.4,
@@ -122,7 +126,7 @@ export class DetailedTrees {
       depthPacking: THREE.RGBADepthPacking,
     });
     depth.onBeforeCompile = mask;
-    depth.customProgramCacheKey = () => 'atlas-chroma-depth-v1';
+    depth.customProgramCacheKey = () => 'atlas-neutral-matte-depth-v2';
     for (let detail = 0; detail < 2; detail++)
       for (let species = 0; species < 2; species++)
         for (let variant = 0; variant < 3; variant++) {

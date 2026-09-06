@@ -124,12 +124,27 @@ export function createNature(e: CityEngine) {
     );
     mesh.receiveShadow = true;
     mesh.userData.walkSurface = true;
+    mesh.userData.groundShoreSource = 'measured-shoreline-strip';
+    mesh.userData.groundShoreKind = color === 0xb3b1a0 ? 'seawall' : 'rock';
     e.terrain.add(mesh);
   }
   // Trails are geographic source lines. Merge their geometry to keep draw calls low.
   const pathGeos: THREE.BufferGeometry[] = [
     e.geometry(e.data.beachCoast.pathPositions),
   ];
+  // Keep the exact rendered path triangles for the local ground reconciliation;
+  // rebuilding them from DEM samples would change their already-validated floor.
+  e.data.groundPathSources = [
+    {
+      id: 'coastal-paths',
+      kind: 'path',
+      level: 'ground',
+      positions: Array.from(pathGeos[0].getAttribute('position').array),
+    },
+  ];
+  const groundSourceIds = new Set([
+    44032491, 74267973, 115939816, 363686270, 648864806, 381179591, 863811845,
+  ]);
   const coastalPathIds = new Set<number>(e.data.beachCoast.replacementPathIds);
   for (const f of e.data.paths.features) {
     if (coastalPathIds.has(Number(f.properties.sourceId ?? f.properties.id)))
@@ -148,6 +163,14 @@ export function createNature(e: CityEngine) {
         1.5,
       );
       pathGeos.push(mesh.geometry);
+      const sourceId = Number(f.properties.sourceId ?? f.properties.id);
+      if (groundSourceIds.has(sourceId))
+        e.data.groundPathSources.push({
+          id: `OSM:${sourceId}`,
+          kind: 'path',
+          level: 'ground',
+          positions: Array.from(mesh.geometry.getAttribute('position').array),
+        });
       e.roads.remove(mesh);
       (mesh.material as THREE.Material).dispose();
     }
@@ -163,6 +186,8 @@ export function createNature(e: CityEngine) {
         }),
       );
     m.userData.walkSurface = true;
+    m.userData.groundPath = true;
+    m.name = 'Geographic ground paths';
     e.roads.add(m);
     pathGeos.forEach((g) => g.dispose());
   }

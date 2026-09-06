@@ -1,6 +1,7 @@
 import { BeachGround, type BeachCoastData } from './beach-ground';
 import { enterLocalMap, finishLocalMapTransition } from './local-map-camera';
 import { createRoadSurfaces } from './road-surfaces';
+import { harmonizeGround } from './harmonize-ground';
 import { TravelReturn } from './travel-return';
 import type { TravelMode } from './placement-geometry';
 import type { TravelView } from './travel-camera';
@@ -327,6 +328,7 @@ export class CityEngine {
     createLandmarks(this);
     createBridgeApproaches(this);
     createNature(this);
+    harmonizeGround(this);
     this.waterWorld = new WaterWorld(
       this.landPolys,
       this.data['context-land'],

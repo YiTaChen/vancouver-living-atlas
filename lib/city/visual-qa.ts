@@ -8,6 +8,8 @@ const cases = [
   { id: 'downtown', view: 'downtown' },
   { id: 'water-street', street: 'WATER ST' },
   { id: 'robson-drive', street: 'ROBSON ST', drive: true },
+  { id: 'robson-walk', street: 'ROBSON ST', forward: true },
+  { id: 'coal-harbour-boat', boatAt: [-123.125, 49.295], forward: true },
   { id: 'causeway', coord: [-123.1419028, 49.3118075], offset: [110, 85, 170] },
   { id: 'causeway-south', coord: [-123.13665, 49.29624], offset: [90, 62, 90] },
   {
@@ -149,24 +151,41 @@ export function installVisualQA(e: CityEngine) {
     e.renderer.shadowMap.needsUpdate = true;
     status.textContent = `${id} / ${quality}`;
   };
-  async function collect(ms: number) {
+  async function collect(ms: number, traceTravel = false) {
     const gaps: number[] = [];
+    const trace: {
+      elapsedMs: number;
+      position: number[];
+      mode: string;
+      speed: number;
+    }[] = [];
     let hidden = false,
       previous = performance.now();
+    let nextTrace = 0;
     const start = previous;
     await new Promise<void>((resolve) => {
       function frame(now: number) {
         hidden ||= document.hidden;
         gaps.push(now - previous);
         previous = now;
+        if (traceTravel && now - start >= nextTrace) {
+          const nav = e.navigation!;
+          trace.push({
+            elapsedMs: now - start,
+            position: nav.position.toArray(),
+            mode: nav.mode,
+            speed: nav.speed,
+          });
+          nextTrace += 1000;
+        }
         if (e.disposed || now - start >= ms) resolve();
         else requestAnimationFrame(frame);
       }
       requestAnimationFrame(frame);
     });
-    return { gaps, hidden, elapsed: previous - start };
+    return { gaps, hidden, elapsed: previous - start, trace };
   }
-  async function run(quality: VisualQuality, only?: string) {
+  async function run(quality: VisualQuality, only?: string, durationMs = 8000) {
     if (running) return;
     running = true;
     const results = [];
@@ -176,13 +195,16 @@ export function installVisualQA(e: CityEngine) {
         await collect(2500);
         const start = e.navigation!.position.toArray();
         if ('drive' in test || 'forward' in test) e.navigation!.keys.add('w');
-        const sample = await collect(8000);
+        status.textContent = `Measuring ${test.id} / ${quality} / ${durationMs / 1000}s`;
+        const sample = await collect(durationMs, durationMs > 8000);
         e.navigation!.keys.clear();
         const info = e.renderer.info;
         const row = {
-          id: test.id,
+          id: `${test.id}${durationMs > 8000 ? '-long' : ''}`,
           quality,
           hour: 14,
+          sampleMs: sample.elapsed,
+          ...(sample.trace.length ? { travelTrace: sample.trace } : {}),
           valid: !sample.hidden && !e.disposed,
           viewport: [innerWidth, innerHeight],
           dpr: devicePixelRatio,
@@ -213,7 +235,7 @@ export function installVisualQA(e: CityEngine) {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            name: `${quality}-${test.id}`,
+            name: `${quality}-${test.id}${durationMs > 8000 ? '-long' : ''}`,
             row,
             screenshot,
           }),
@@ -256,6 +278,47 @@ export function installVisualQA(e: CityEngine) {
   button('Run Ultra baseline', () => void run('ultra'));
   button('Measure selected High', () => void run('high', selectedCase));
   button('Measure selected Ultra', () => void run('ultra', selectedCase));
+  button(
+    'Measure selected 60s',
+    () => void run(e.settings.quality, selectedCase, 60000),
+  );
+  button('Save current view', () => {
+    if (running) return;
+    running = true;
+    const id = `${selectedCase}-${e.clock.hour.toFixed(2).replace('.', 'p')}h`;
+    const row = {
+      kind: 'visual-check',
+      id,
+      quality: e.settings.quality,
+      hour: e.clock.hour,
+      valid: !document.hidden && !e.disposed,
+      viewport: [innerWidth, innerHeight],
+      render: [e.renderer.domElement.width, e.renderer.domElement.height],
+      camera: e.camera.position.toArray(),
+      target: e.controls.target.toArray(),
+      mode: e.navigation!.mode,
+      position: e.navigation!.position.toArray(),
+    };
+    void fetch('/__visual-qa', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: `${row.quality}-${id}`,
+        row,
+        screenshot: e.screenshot(),
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error(`QA save failed: ${response.status}`);
+        status.textContent = `Saved ${id}`;
+      })
+      .catch((error) => {
+        status.textContent = String(error);
+      })
+      .finally(() => {
+        running = false;
+      });
+  });
   for (const test of cases)
     button(test.id, () => {
       if (!running) apply(test.id, e.settings.quality);

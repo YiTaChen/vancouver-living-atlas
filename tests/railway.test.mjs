@@ -49,9 +49,12 @@ const methods = engineClass.members
   .filter(
     (n) =>
       ts.isMethodDeclaration(n) &&
-      ['elevation', 'rawElevation', 'focusTrain', 'completeLocalMapTransition'].includes(
-        n.name.getText(ast),
-      ),
+      [
+        'elevation',
+        'rawElevation',
+        'focusTrain',
+        'completeLocalMapTransition',
+      ].includes(n.name.getText(ast)),
   )
   .map((n) => n.getText(ast));
 const { EngineMethods } = await import(

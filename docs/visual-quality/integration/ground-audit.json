@@ -1,0 +1,1621 @@
+{
+  "version": 4,
+  "scopes": [
+    {
+      "id": "causeway-lower",
+      "pathSourceIds": [
+        "OSM:44032491",
+        "OSM:74267973",
+        "OSM:115939816",
+        "OSM:363686270",
+        "OSM:648864806"
+      ],
+      "bounds": [
+        -706.459716796875,
+        -1326.8353271484375,
+        -558.3389282226562,
+        -920.0067138671875
+      ],
+      "focusBounds": [
+        -706.459716796875,
+        -1326.8353271484375,
+        -558.3389282226562,
+        -920.0067138671875
+      ]
+    },
+    {
+      "id": "north-coast",
+      "pathSourceIds": [
+        "OSM:381179591",
+        "OSM:863811845"
+      ],
+      "bounds": [
+        -1551.6130786563442,
+        -3176.8833200002023,
+        -1231.6130786563442,
+        -2856.8833200002023
+      ],
+      "focusBounds": [
+        -1511.6130786563442,
+        -3136.8833200002023,
+        -1271.6130786563442,
+        -2896.8833200002023
+      ]
+    },
+    {
+      "id": "northwest-coast",
+      "pathSourceIds": [
+        "coastal-paths"
+      ],
+      "bounds": [
+        -2195.175130111483,
+        -2476.457879999984,
+        -1875.1751301114832,
+        -2156.457879999984
+      ],
+      "focusBounds": [
+        -2155.175130111483,
+        -2436.457879999984,
+        -1915.1751301114832,
+        -2196.457879999984
+      ]
+    }
+  ],
+  "plans": [
+    {
+      "scope": "causeway-lower",
+      "constraints": 15,
+      "areas": {
+        "OSM:648864806": 0.9170267900290036
+      },
+      "blendM": 6,
+      "gridM": 0.75,
+      "elapsedMs": 1626.9589049999995
+    },
+    {
+      "scope": "north-coast",
+      "constraints": 74,
+      "areas": {
+        "OSM:381179591": 75.25173148910699,
+        "OSM:863811845": 29.427922836652638
+      },
+      "blendM": 6,
+      "gridM": 0.75,
+      "elapsedMs": 1786.4073610000014
+    },
+    {
+      "scope": "northwest-coast",
+      "constraints": 61,
+      "areas": {
+        "coastal-paths": 95.08005432579678
+      },
+      "blendM": 6,
+      "gridM": 0.75,
+      "elapsedMs": 1369.0054689999997
+    }
+  ],
+  "changes": [
+    {
+      "scope": "causeway-lower",
+      "mesh": "Connected road pavement -2,-3",
+      "statistics": {
+        "inputTriangles": 3157,
+        "outputTriangles": 3511,
+        "changedTriangles": 45,
+        "maximumLoweringM": 0.4834911944252376,
+        "maximumUpwardChangeM": 0,
+        "inputPlanAreaM2": 7379.315569866449,
+        "outputPlanAreaM2": 7379.315569866449,
+        "maximumSharedVertexYDifferenceM": 3.2862601528904634e-14,
+        "conformingEdgeInsertions": 7
+      },
+      "beforeVsPath": [
+        {
+          "id": 44032491,
+          "areaM2": 0,
+          "minimumDeltaM": null,
+          "maximumDeltaM": null
+        },
+        {
+          "id": 74267973,
+          "areaM2": 0,
+          "minimumDeltaM": null,
+          "maximumDeltaM": null
+        },
+        {
+          "id": 115939816,
+          "areaM2": 0,
+          "minimumDeltaM": null,
+          "maximumDeltaM": null
+        },
+        {
+          "id": 363686270,
+          "areaM2": 41.53746008950235,
+          "minimumDeltaM": -0.63041723504021,
+          "maximumDeltaM": -0.1134988283055458,
+          "minimumPoint": [
+            -650.4447405527101,
+            -1250.4447301492562
+          ],
+          "maximumPoint": [
+            -618.894775390625,
+            -1270.1329345703125
+          ]
+        },
+        {
+          "id": 648864806,
+          "areaM2": 14.235961458066173,
+          "minimumDeltaM": -0.393051326612464,
+          "maximumDeltaM": 0.463491194425238,
+          "minimumPoint": [
+            -614.5232164569534,
+            -1260.615868154501
+          ],
+          "maximumPoint": [
+            -627.7083740234375,
+            -1251.7083740234375
+          ]
+        }
+      ],
+      "afterVsPath": [
+        {
+          "id": 44032491,
+          "areaM2": 0,
+          "minimumDeltaM": null,
+          "maximumDeltaM": null
+        },
+        {
+          "id": 74267973,
+          "areaM2": 0,
+          "minimumDeltaM": null,
+          "maximumDeltaM": null
+        },
+        {
+          "id": 115939816,
+          "areaM2": 0,
+          "minimumDeltaM": null,
+          "maximumDeltaM": null
+        },
+        {
+          "id": 363686270,
+          "areaM2": 41.53746008950235,
+          "minimumDeltaM": -0.63041723504021,
+          "maximumDeltaM": -0.1134988283055458,
+          "minimumPoint": [
+            -650.4447405527101,
+            -1250.4447301492562
+          ],
+          "maximumPoint": [
+            -618.894775390625,
+            -1270.1329345703125
+          ]
+        },
+        {
+          "id": 648864806,
+          "areaM2": 14.235977794626695,
+          "minimumDeltaM": -0.393051326612464,
+          "maximumDeltaM": -0.019994688175452247,
+          "minimumPoint": [
+            -614.5232164569534,
+            -1260.615868154501
+          ],
+          "maximumPoint": [
+            -627,
+            -1252.02001953125
+          ]
+        }
+      ]
+    },
+    {
+      "scope": "north-coast",
+      "mesh": "Connected road pavement -3,-5",
+      "statistics": {
+        "inputTriangles": 1655,
+        "outputTriangles": 4122,
+        "changedTriangles": 25,
+        "maximumLoweringM": 0.5785019343039144,
+        "maximumUpwardChangeM": 0,
+        "inputPlanAreaM2": 5906.4666149914265,
+        "outputPlanAreaM2": 5906.466614998474,
+        "maximumSharedVertexYDifferenceM": 3.7774796624034934e-9,
+        "conformingEdgeInsertions": 323
+      },
+      "beforeVsPath": [
+        {
+          "id": 381179591,
+          "areaM2": 76.63200795234091,
+          "minimumDeltaM": -0.24954450416082263,
+          "maximumDeltaM": 0.41117475988941354,
+          "minimumPoint": [
+            -1454.3796788119128,
+            -2989.5043270292476
+          ],
+          "maximumPoint": [
+            -1434.6107177734375,
+            -2996.771240234375
+          ]
+        },
+        {
+          "id": 863811845,
+          "areaM2": 40.73414383524266,
+          "minimumDeltaM": -0.4365505974371686,
+          "maximumDeltaM": 0.2389762285653223,
+          "minimumPoint": [
+            -1440,
+            -2993.759765625
+          ],
+          "maximumPoint": [
+            -1449.5489501953125,
+            -2990.8369140625
+          ]
+        }
+      ],
+      "afterVsPath": [
+        {
+          "id": 381179591,
+          "areaM2": 76.63212989461253,
+          "minimumDeltaM": -0.626288569077917,
+          "maximumDeltaM": -0.019966176688555493,
+          "minimumPoint": [
+            -1449.75,
+            -2991.9978914062362
+          ],
+          "maximumPoint": [
+            -1441.65283203125,
+            -2994.05029296875
+          ]
+        },
+        {
+          "id": 863811845,
+          "areaM2": 40.73469252086476,
+          "minimumDeltaM": -0.630746379422348,
+          "maximumDeltaM": -0.01994852842983086,
+          "minimumPoint": [
+            -1434.75,
+            -2995.97802734375
+          ],
+          "maximumPoint": [
+            -1445.9997617424435,
+            -2992.492924950601
+          ]
+        }
+      ]
+    },
+    {
+      "scope": "north-coast",
+      "mesh": "Connected road pavement -3,-6",
+      "statistics": {
+        "inputTriangles": 105,
+        "outputTriangles": 2051,
+        "changedTriangles": 20,
+        "maximumLoweringM": 0.6283904456281943,
+        "maximumUpwardChangeM": 0,
+        "inputPlanAreaM2": 500.54965540766716,
+        "outputPlanAreaM2": 500.549655436867,
+        "maximumSharedVertexYDifferenceM": 1.4934720127257606e-9,
+        "conformingEdgeInsertions": 336
+      },
+      "beforeVsPath": [
+        {
+          "id": 381179591,
+          "areaM2": 161.89812352853355,
+          "minimumDeltaM": -0.906255015331864,
+          "maximumDeltaM": 0.25957729819621633,
+          "minimumPoint": [
+            -1401.125168948908,
+            -3012
+          ],
+          "maximumPoint": [
+            -1421.790301610505,
+            -3005.7903016105047
+          ]
+        },
+        {
+          "id": 863811845,
+          "areaM2": 49.45615506845778,
+          "minimumDeltaM": -0.6845729452218619,
+          "maximumDeltaM": 0.506217972823972,
+          "minimumPoint": [
+            -1396.7989501953125,
+            -3012
+          ],
+          "maximumPoint": [
+            -1419.0755311574223,
+            -3003.075531157422
+          ]
+        }
+      ],
+      "afterVsPath": [
+        {
+          "id": 381179591,
+          "areaM2": 161.8981047769954,
+          "minimumDeltaM": -0.906255015331864,
+          "maximumDeltaM": -0.019963815080064506,
+          "minimumPoint": [
+            -1401.125168948908,
+            -3012
+          ],
+          "maximumPoint": [
+            -1428.8575405428833,
+            -3000.8065746166644
+          ]
+        },
+        {
+          "id": 863811845,
+          "areaM2": 49.456337256441195,
+          "minimumDeltaM": -0.6845729452218619,
+          "maximumDeltaM": -0.019958457095437865,
+          "minimumPoint": [
+            -1396.7989501953125,
+            -3012
+          ],
+          "maximumPoint": [
+            -1419.546142578125,
+            -3002.739990234375
+          ]
+        }
+      ]
+    },
+    {
+      "scope": "northwest-coast",
+      "mesh": "Connected road pavement -4,-4",
+      "statistics": {
+        "inputTriangles": 1165,
+        "outputTriangles": 5269,
+        "changedTriangles": 53,
+        "maximumLoweringM": 0.46388296916084304,
+        "maximumUpwardChangeM": 0,
+        "inputPlanAreaM2": 4454.8537675738335,
+        "outputPlanAreaM2": 4454.853767604891,
+        "maximumSharedVertexYDifferenceM": 8.43947134399059e-12,
+        "conformingEdgeInsertions": 276
+      },
+      "beforeVsPath": [
+        {
+          "id": "stage5-coastal-paths",
+          "areaM2": 208.05699293236805,
+          "minimumDeltaM": -0.44624865007154213,
+          "maximumDeltaM": 0.37548344821884516,
+          "minimumPoint": [
+            -2040,
+            -2268
+          ],
+          "maximumPoint": [
+            -2031.1553762776261,
+            -2340
+          ]
+        }
+      ],
+      "afterVsPath": [
+        {
+          "id": "stage5-coastal-paths",
+          "areaM2": 208.0572164200419,
+          "minimumDeltaM": -0.44624865007154213,
+          "maximumDeltaM": -0.019978674260476836,
+          "minimumPoint": [
+            -2040,
+            -2268
+          ],
+          "maximumPoint": [
+            -2032.0112889883833,
+            -2330.4555164205685
+          ]
+        }
+      ]
+    }
+  ],
+  "shoreChanges": [
+    {
+      "kind": "shore",
+      "scope": "north-coast",
+      "constraints": 17,
+      "sourceAreasM2": {
+        "OSM:381179591": 22.16598462767467
+      },
+      "blendM": 6,
+      "changes": [
+        {
+          "mesh": "",
+          "inputTriangles": 8606,
+          "outputTriangles": 13350,
+          "changedTriangles": 18,
+          "maximumLoweringM": 0.5688869971931312,
+          "maximumUpwardChangeM": 0,
+          "inputPlanAreaM2": 180100.71883378713,
+          "outputPlanAreaM2": 180100.71883378742,
+          "maximumSharedVertexYDifferenceM": 1.9895196601282805e-13,
+          "conformingEdgeInsertions": 101
+        }
+      ]
+    },
+    {
+      "kind": "shore",
+      "scope": "northwest-coast",
+      "constraints": 36,
+      "sourceAreasM2": {
+        "coastal-paths": 98.02295295355131
+      },
+      "blendM": 6,
+      "changes": [
+        {
+          "mesh": "",
+          "inputTriangles": 304,
+          "outputTriangles": 7715,
+          "changedTriangles": 17,
+          "maximumLoweringM": 0.7553220914566223,
+          "maximumUpwardChangeM": 0,
+          "inputPlanAreaM2": 9673.905657336116,
+          "outputPlanAreaM2": 9673.905657336094,
+          "maximumSharedVertexYDifferenceM": 6.492584248007915e-13,
+          "conformingEdgeInsertions": 222
+        }
+      ]
+    }
+  ],
+  "terrainClipping": {
+    "inputTriangles": 63511,
+    "outputTriangles": 65403,
+    "indexedGroundTriangles": 25921,
+    "protectedCoversSkipped": 45,
+    "candidateTerrainTriangles": 525,
+    "changedTerrainTriangles": 107,
+    "removedPlanAreaM2": 1927.466705352203,
+    "maxOriginalTriangleAreaErrorM2": 2.173912605485384e-9,
+    "maximumRemovedTerrainExcessM": 2.0284812196368125,
+    "sources": {
+      "Connected road pavement -2,-3": {
+        "removedPlanAreaM2": 9.972536554482577,
+        "interactions": 18
+      },
+      "Connected road pavement -3,-5": {
+        "removedPlanAreaM2": 111.1549679806342,
+        "interactions": 2158
+      },
+      "shore:rock": {
+        "removedPlanAreaM2": 223.90714905315193,
+        "interactions": 1445
+      },
+      "": {
+        "removedPlanAreaM2": 324.5481730326136,
+        "interactions": 63
+      },
+      "Connected road pavement -4,-4": {
+        "removedPlanAreaM2": 288.25600281884783,
+        "interactions": 3269
+      },
+      "OSM:381179591": {
+        "removedPlanAreaM2": 380.3055473915832,
+        "interactions": 114
+      },
+      "OSM:863811845": {
+        "removedPlanAreaM2": 376.9525421995259,
+        "interactions": 115
+      },
+      "shore:seawall": {
+        "removedPlanAreaM2": 160.948635735928,
+        "interactions": 770
+      },
+      "OSM:731792364": {
+        "removedPlanAreaM2": 0.5094300556645235,
+        "interactions": 5
+      },
+      "Connected road pavement -3,-6": {
+        "removedPlanAreaM2": 50.91172052977195,
+        "interactions": 860
+      }
+    }
+  },
+  "quantizedResidualOcclusionAreaM2": 0.016427290313021106,
+  "gatesUnchanged": [
+    {
+      "id": "georgia-city-causeway",
+      "before": 6.132605564876495,
+      "after": 6.132605564876495,
+      "difference": 0
+    },
+    {
+      "id": "park-access-city",
+      "before": 6.003928277519511,
+      "after": 6.003928277519511,
+      "difference": 0
+    },
+    {
+      "id": "chilco-path-ground",
+      "before": 5.582510707147949,
+      "after": 5.582510707147949,
+      "difference": 0
+    },
+    {
+      "id": "lions:south:walk-entry:ground",
+      "before": 6.650591705031263,
+      "after": 6.650591705031263,
+      "difference": 0
+    },
+    {
+      "id": "lions:west:walk-entry:ground",
+      "before": 66.8368218490644,
+      "after": 66.8368218490644,
+      "difference": 0
+    }
+  ],
+  "movement": [
+    {
+      "label": "lower:44032491:forward",
+      "mode": "walk",
+      "valid": true,
+      "steps": 52,
+      "travelled": 38.866609617927864,
+      "maxPositionError": 0,
+      "maxYError": 0,
+      "changes": [],
+      "expectedFinalIdentity": "ground",
+      "finalSurfaceId": "ground",
+      "finalPosition": [
+        -625.1766389051767,
+        5.053098230088521,
+        -1001.401323999981
+      ]
+    },
+    {
+      "label": "lower:44032491:reverse",
+      "mode": "walk",
+      "valid": true,
+      "steps": 52,
+      "travelled": 38.866609617927864,
+      "maxPositionError": 0,
+      "maxYError": 0,
+      "changes": [],
+      "expectedFinalIdentity": "ground",
+      "finalSurfaceId": "ground",
+      "finalPosition": [
+        -653.0524678068201,
+        4.19498599680458,
+        -974.3171679998634
+      ]
+    },
+    {
+      "label": "lower:74267973:forward",
+      "mode": "walk",
+      "valid": true,
+      "steps": 48,
+      "travelled": 35.521345675891766,
+      "maxPositionError": 0,
+      "maxYError": 0,
+      "changes": [],
+      "expectedFinalIdentity": "ground",
+      "finalSurfaceId": "ground",
+      "finalPosition": [
+        -625.285557225694,
+        4.562096051910818,
+        -995.9466439995151
+      ]
+    },
+    {
+      "label": "lower:74267973:reverse",
+      "mode": "walk",
+      "valid": true,
+      "steps": 48,
+      "travelled": 35.521345675891766,
+      "maxPositionError": 0,
+      "maxYError": 0,
+      "changes": [],
+      "expectedFinalIdentity": "ground",
+      "finalSurfaceId": "ground",
+      "finalPosition": [
+        -650.6490035272611,
+        4.421279306600821,
+        -971.0777559999741
+      ]
+    },
+    {
+      "label": "lower:115939816:forward",
+      "mode": "walk",
+      "valid": true,
+      "steps": 55,
+      "travelled": 40.90046743996549,
+      "maxPositionError": 0,
+      "maxYError": 0,
+      "changes": [],
+      "expectedFinalIdentity": "ground",
+      "finalSurfaceId": "ground",
+      "finalPosition": [
+        -655.0928710159243,
+        4.489445775684041,
+        -978.914683999804
+      ]
+    },
+    {
+      "label": "lower:115939816:reverse",
+      "mode": "walk",
+      "valid": true,
+      "steps": 55,
+      "travelled": 40.90046743996549,
+      "maxPositionError": 0,
+      "maxYError": 0,
+      "changes": [],
+      "expectedFinalIdentity": "ground",
+      "finalSurfaceId": "ground",
+      "finalPosition": [
+        -625.2347286759128,
+        5.551702662896299,
+        -1006.8671359997859
+      ]
+    },
+    {
+      "label": "lower:363686270:forward",
+      "mode": "walk",
+      "valid": true,
+      "steps": 65,
+      "travelled": 48.08095087587758,
+      "maxPositionError": 0,
+      "maxYError": 0,
+      "changes": [],
+      "expectedFinalIdentity": "ground",
+      "finalSurfaceId": "ground",
+      "finalPosition": [
+        -613.6676030082887,
+        5.197226865386601,
+        -1275.6047480001043
+      ]
+    },
+    {
+      "label": "lower:363686270:reverse",
+      "mode": "walk",
+      "valid": true,
+      "steps": 65,
+      "travelled": 48.080950875877576,
+      "maxPositionError": 0,
+      "maxYError": 0,
+      "changes": [],
+      "expectedFinalIdentity": "ground",
+      "finalSurfaceId": "ground",
+      "finalPosition": [
+        -652.7547577301203,
+        4.698970880444048,
+        -1247.8081439995708
+      ]
+    },
+    {
+      "label": "lower:648864806:forward",
+      "mode": "walk",
+      "valid": true,
+      "steps": 55,
+      "travelled": 40.23882410689801,
+      "maxPositionError": 0,
+      "maxYError": 0,
+      "changes": [],
+      "expectedFinalIdentity": "ground",
+      "finalSurfaceId": "ground",
+      "finalPosition": [
+        -608.5121358237217,
+        5.378867530453749,
+        -1262.0793680002407
+      ]
+    },
+    {
+      "label": "lower:648864806:reverse",
+      "mode": "walk",
+      "valid": true,
+      "steps": 55,
+      "travelled": 40.238824106897994,
+      "maxPositionError": 0,
+      "maxYError": 0,
+      "changes": [],
+      "expectedFinalIdentity": "ground",
+      "finalSurfaceId": "ground",
+      "finalPosition": [
+        -640.9407505345455,
+        4.671980862162276,
+        -1239.2587680001159
+      ]
+    },
+    {
+      "label": "gate:georgia-city-causeway:enter",
+      "mode": "drive",
+      "valid": true,
+      "steps": 6,
+      "travelled": 3.9999999999999227,
+      "maxPositionError": 0,
+      "maxYError": 0,
+      "changes": [
+        {
+          "at": 3,
+          "from": "ground",
+          "to": "lions:road"
+        }
+      ],
+      "expectedFinalIdentity": "lions:road",
+      "finalSurfaceId": "lions:road",
+      "finalPosition": [
+        -561.4399166389504,
+        6.119886124862853,
+        -878.634617774308
+      ]
+    },
+    {
+      "label": "gate:georgia-city-causeway:exit",
+      "mode": "drive",
+      "valid": true,
+      "steps": 6,
+      "travelled": 3.9999999999999227,
+      "maxPositionError": 0,
+      "maxYError": 0,
+      "changes": [
+        {
+          "at": 3,
+          "from": "lions:road",
+          "to": "ground"
+        }
+      ],
+      "expectedFinalIdentity": "ground",
+      "finalSurfaceId": "ground",
+      "finalPosition": [
+        -560.6075792780049,
+        6.361415546937078,
+        -874.7221742261436
+      ]
+    },
+    {
+      "label": "gate:park-access-city:enter",
+      "mode": "drive",
+      "valid": true,
+      "steps": 6,
+      "travelled": 4.000000000000166,
+      "maxPositionError": 0,
+      "maxYError": 0,
+      "changes": [
+        {
+          "at": 3,
+          "from": "ground",
+          "to": "lions:road"
+        }
+      ],
+      "expectedFinalIdentity": "lions:road",
+      "finalSurfaceId": "lions:road",
+      "finalPosition": [
+        -585.6952293541782,
+        5.977957740362512,
+        -1140.259067316211
+      ]
+    },
+    {
+      "label": "gate:park-access-city:exit",
+      "mode": "drive",
+      "valid": true,
+      "steps": 6,
+      "travelled": 4.000000000000166,
+      "maxPositionError": 0,
+      "maxYError": 0,
+      "changes": [
+        {
+          "at": 3,
+          "from": "lions:road",
+          "to": "ground"
+        }
+      ],
+      "expectedFinalIdentity": "ground",
+      "finalSurfaceId": "ground",
+      "finalPosition": [
+        -585.2765642351109,
+        6.228172173060471,
+        -1144.2370969186748
+      ]
+    },
+    {
+      "label": "gate:chilco-path-ground:enter",
+      "mode": "walk",
+      "valid": true,
+      "steps": 6,
+      "travelled": 4.000000000000061,
+      "maxPositionError": 0,
+      "maxYError": 0,
+      "changes": [
+        {
+          "at": 3,
+          "from": "ground",
+          "to": "lions:chilco-path"
+        }
+      ],
+      "expectedFinalIdentity": "lions:chilco-path",
+      "finalSurfaceId": "lions:chilco-path",
+      "finalPosition": [
+        -636.8254182546154,
+        5.557793739667307,
+        -932.5057822401209
+      ]
+    },
+    {
+      "label": "gate:chilco-path-ground:exit",
+      "mode": "walk",
+      "valid": true,
+      "steps": 6,
+      "travelled": 4.000000000000061,
+      "maxPositionError": 0,
+      "maxYError": 0,
+      "changes": [
+        {
+          "at": 3,
+          "from": "lions:chilco-path",
+          "to": "ground"
+        }
+      ],
+      "expectedFinalIdentity": "ground",
+      "finalSurfaceId": "ground",
+      "finalPosition": [
+        -638.9566568489963,
+        5.358461106886017,
+        -929.1208417600205
+      ]
+    },
+    {
+      "label": "gate:lions:south:walk-entry:ground:enter",
+      "mode": "walk",
+      "valid": true,
+      "steps": 6,
+      "travelled": 3.9999999999998277,
+      "maxPositionError": 0,
+      "maxYError": 0,
+      "changes": [
+        {
+          "at": 3,
+          "from": "ground",
+          "to": "lions:east-walk"
+        }
+      ],
+      "expectedFinalIdentity": "lions:east-walk",
+      "finalSurfaceId": "lions:east-walk",
+      "finalPosition": [
+        -588.2623652245017,
+        6.66825627690918,
+        -1161.0974248510543
+      ]
+    },
+    {
+      "label": "gate:lions:south:walk-entry:ground:exit",
+      "mode": "walk",
+      "valid": true,
+      "steps": 6,
+      "travelled": 3.9999999999998277,
+      "maxPositionError": 0,
+      "maxYError": 0,
+      "changes": [
+        {
+          "at": 3,
+          "from": "lions:east-walk",
+          "to": "ground"
+        }
+      ],
+      "expectedFinalIdentity": "ground",
+      "finalSurfaceId": "ground",
+      "finalPosition": [
+        -586.4289857412329,
+        6.380008746873366,
+        -1157.5423271491159
+      ]
+    },
+    {
+      "label": "gate:lions:west:walk-entry:ground:enter",
+      "mode": "walk",
+      "valid": true,
+      "steps": 6,
+      "travelled": 3.999999999999699,
+      "maxPositionError": 0,
+      "maxYError": 0,
+      "changes": [
+        {
+          "at": 3,
+          "from": "ground",
+          "to": "lions:west:walk-entry"
+        }
+      ],
+      "expectedFinalIdentity": "lions:west:walk-entry",
+      "finalSurfaceId": "lions:west:walk-entry",
+      "finalPosition": [
+        -1065.916221413467,
+        66.83646573479429,
+        -3028.5989063776665
+      ]
+    },
+    {
+      "label": "gate:lions:west:walk-entry:ground:exit",
+      "mode": "walk",
+      "valid": true,
+      "steps": 6,
+      "travelled": 3.999999999999699,
+      "maxPositionError": 0,
+      "maxYError": 0,
+      "changes": [
+        {
+          "at": 3,
+          "from": "lions:west:walk-entry",
+          "to": "ground"
+        }
+      ],
+      "expectedFinalIdentity": "ground",
+      "finalSurfaceId": "ground",
+      "finalPosition": [
+        -1069.5654209252796,
+        66.51683724794837,
+        -3030.2369976214572
+      ]
+    }
+  ],
+  "visibleFloor": [
+    {
+      "id": 44032491,
+      "maximumFloorBelowPath": 8.881784197001252e-16
+    },
+    {
+      "id": 74267973,
+      "maximumFloorBelowPath": 0
+    },
+    {
+      "id": 115939816,
+      "maximumFloorBelowPath": 2.6645352591003757e-15
+    },
+    {
+      "id": 363686270,
+      "maximumFloorBelowPath": 6.217248937900877e-15
+    },
+    {
+      "id": 648864806,
+      "maximumFloorBelowPath": 9.769962616701378e-15
+    }
+  ],
+  "northSurvey": [
+    {
+      "id": "north-coast-trail",
+      "coord": [
+        -123.147165,
+        49.313101
+      ],
+      "bounds": [
+        -1511.6130786563442,
+        -3136.8833200002023,
+        -1271.6130786563442,
+        -2896.8833200002023
+      ],
+      "cityAsphaltVsPaths": [
+        {
+          "sourceId": 88285299,
+          "areaM2": 1.5760291888932016,
+          "minimumDeltaM": -0.6073520923202196,
+          "maximumDeltaM": -0.4890145255894751,
+          "minimumPoint": [
+            -1273.4786740063748,
+            -2905.543009396839
+          ],
+          "maximumPoint": [
+            -1271.6130786563442,
+            -2905.307625354308
+          ]
+        },
+        {
+          "sourceId": 381179591,
+          "areaM2": 238.53023467160816,
+          "minimumDeltaM": -0.906255015331864,
+          "maximumDeltaM": -0.019963815080064506,
+          "minimumPoint": [
+            -1401.125168948908,
+            -3012
+          ],
+          "maximumPoint": [
+            -1428.8575405428833,
+            -3000.8065746166644
+          ]
+        },
+        {
+          "sourceId": 863811845,
+          "areaM2": 90.19102977730587,
+          "minimumDeltaM": -0.6845729452218619,
+          "maximumDeltaM": -0.01994852842983086,
+          "minimumPoint": [
+            -1396.7989501953125,
+            -3012
+          ],
+          "maximumPoint": [
+            -1445.9997617424435,
+            -2992.492924950601
+          ]
+        }
+      ],
+      "terrainVsAsphalt": {
+        "areaM2": 323.7881888293334,
+        "minimumDeltaM": -2.0879149157264294,
+        "maximumDeltaM": 0.28014612197875977,
+        "minimumPoint": [
+          -1288.65185546875,
+          -2898.4170203904428
+        ],
+        "maximumPoint": [
+          -1440,
+          -2993.759765625
+        ]
+      },
+      "originalTerrainVsOriginalAsphalt": {
+        "areaM2": 503.1783997155533,
+        "minimumDeltaM": -2.0879149157264294,
+        "maximumDeltaM": 0.9967415441928491,
+        "minimumPoint": [
+          -1288.65185546875,
+          -2898.4170203904428
+        ],
+        "maximumPoint": [
+          -1448.65185546875,
+          -2995.5810546875
+        ]
+      },
+      "shoreVsPaths": [
+        {
+          "id": 381179591,
+          "areaM2": 573.5162167321103,
+          "minimumDeltaM": -1.0804605288223383,
+          "maximumDeltaM": -0.019957028354840034,
+          "minimumPoint": [
+            -1448.4874267578125,
+            -2992.39208984375
+          ],
+          "maximumPoint": [
+            -1469.25,
+            -2989.0792364701924
+          ]
+        },
+        {
+          "id": 863811845,
+          "areaM2": 36.08590254186153,
+          "minimumDeltaM": -0.5346720081024081,
+          "maximumDeltaM": -0.2350121879479179,
+          "minimumPoint": [
+            -1280.84521484375,
+            -3046.97705078125
+          ],
+          "maximumPoint": [
+            -1347.2108921428808,
+            -3019.8318169813533
+          ]
+        }
+      ],
+      "originalShoreVsPaths": [
+        {
+          "id": 381179591,
+          "areaM2": 573.5158067891629,
+          "minimumDeltaM": -1.0804605288223383,
+          "maximumDeltaM": 0.44267498133564587,
+          "minimumPoint": [
+            -1448.4874267578125,
+            -2992.39208984375
+          ],
+          "maximumPoint": [
+            -1407.3913574218748,
+            -3012.339599609375
+          ]
+        },
+        {
+          "id": 863811845,
+          "areaM2": 36.085626366869576,
+          "minimumDeltaM": -0.5346720081024081,
+          "maximumDeltaM": -0.2350121879479179,
+          "minimumPoint": [
+            -1280.84521484375,
+            -3046.97705078125
+          ],
+          "maximumPoint": [
+            -1347.2108921428808,
+            -3019.8318169813533
+          ]
+        }
+      ]
+    },
+    {
+      "id": "northwest-coast-trail",
+      "coord": [
+        -123.156028,
+        49.306809
+      ],
+      "bounds": [
+        -2155.175130111483,
+        -2436.457879999984,
+        -1915.1751301114832,
+        -2196.457879999984
+      ],
+      "cityAsphaltVsPaths": [
+        {
+          "sourceId": "Stage5 merged coastal paths",
+          "areaM2": 208.0572164200419,
+          "minimumDeltaM": -0.44624865007154213,
+          "maximumDeltaM": -0.019978674260476836,
+          "minimumPoint": [
+            -2040,
+            -2268
+          ],
+          "maximumPoint": [
+            -2032.0112889883833,
+            -2330.4555164205685
+          ]
+        }
+      ],
+      "terrainVsAsphalt": {
+        "areaM2": 0.0002054521356533388,
+        "minimumDeltaM": 0.032368587615825284,
+        "maximumDeltaM": 0.47255418484907086,
+        "minimumPoint": [
+          -2041.3740567127459,
+          -2262.2919589122544
+        ],
+        "maximumPoint": [
+          -2039.3280029296875,
+          -2276.1455078125
+        ]
+      },
+      "originalTerrainVsOriginalAsphalt": {
+        "areaM2": 340.85572084930544,
+        "minimumDeltaM": 0.006337895619491718,
+        "maximumDeltaM": 0.595220664713977,
+        "minimumPoint": [
+          -2034.9883531014088,
+          -2268.67772882867
+        ],
+        "maximumPoint": [
+          -2040,
+          -2279.9999999999995
+        ]
+      },
+      "shoreVsPaths": [
+        {
+          "id": "coastal-paths",
+          "areaM2": 672.3186184202838,
+          "minimumDeltaM": -0.6282340481046989,
+          "maximumDeltaM": -0.019956451112213003,
+          "minimumPoint": [
+            -2032.4999849049289,
+            -2428.1803937306026
+          ],
+          "maximumPoint": [
+            -2029.9216710938895,
+            -2426.6116148058195
+          ]
+        }
+      ],
+      "originalShoreVsPaths": [
+        {
+          "id": "coastal-paths",
+          "areaM2": 672.3188849650957,
+          "minimumDeltaM": -0.5683976163162692,
+          "maximumDeltaM": 0.49498468114347194,
+          "minimumPoint": [
+            -2027.850341796875,
+            -2343.26708984375
+          ],
+          "maximumPoint": [
+            -2029.721310052104,
+            -2421.728922994727
+          ]
+        }
+      ]
+    }
+  ],
+  "slabCity": {
+    "road": {
+      "areaM2": 2.333556918422363,
+      "minimumDeltaM": 1.6092453654904464,
+      "maximumDeltaM": 5.070949652499851,
+      "minimumPoint": [
+        -620.4693744746056,
+        -1235.7074999132733
+      ],
+      "maximumPoint": [
+        -644.5514099572365,
+        -1248
+      ],
+      "minimumLonLat": [
+        -123.13654497255321,
+        49.297100498561925
+      ]
+    },
+    "path": {
+      "areaM2": 27.2003011655134,
+      "minimumDeltaM": 1.8178147408011442,
+      "maximumDeltaM": 4.649270334389229,
+      "minimumPoint": [
+        -618.9985604864717,
+        -1236.2934524230918
+      ],
+      "maximumPoint": [
+        -626.9845713114473,
+        -1260
+      ],
+      "minimumLonLat": [
+        -123.13652471681509,
+        49.2971057622388
+      ]
+    }
+  },
+  "protectedBeachProfileUnchanged": true,
+  "paintPotentialOverlap": 0,
+  "trafficSourcePotentialOverlap": [],
+  "upperMeshesUnchanged": true,
+  "pathsUnchanged": true,
+  "profilesUnchanged": true,
+  "geometry": {
+    "valid": true,
+    "roadSlab": {
+      "checks": 1334,
+      "minimum": {
+        "slabTriangleOffset": 1089,
+        "lowerPathId": 115939816,
+        "point": [
+          -630.4769750961694,
+          -1004.6990924895917
+        ],
+        "soffitY": 8.380236070088957,
+        "lowerY": 5.343939227460433,
+        "headroomM": 3.0362968426285235
+      },
+      "valid": true
+    },
+    "pathSlab": {
+      "checks": 59,
+      "minimum": {
+        "slabTriangleOffset": 56124,
+        "lowerPathId": 363686270,
+        "point": [
+          -633.7443148581405,
+          -1262.667810312499
+        ],
+        "soffitY": 10.249409431433898,
+        "lowerY": 6.920884024461992,
+        "headroomM": 3.328525406971907
+      },
+      "valid": true
+    },
+    "pylons": [
+      {
+        "station": 187,
+        "side": "west",
+        "topOverlaps": 0,
+        "railOverlaps": 0,
+        "valid": true
+      },
+      {
+        "station": 187,
+        "side": "east",
+        "topOverlaps": 0,
+        "railOverlaps": 0,
+        "valid": true
+      },
+      {
+        "station": 659,
+        "side": "west",
+        "topOverlaps": 0,
+        "railOverlaps": 0,
+        "valid": true
+      },
+      {
+        "station": 659,
+        "side": "east",
+        "topOverlaps": 0,
+        "railOverlaps": 0,
+        "valid": true
+      }
+    ]
+  },
+  "sourceHashes": [
+    {
+      "file": "lib/city/assets/cockpits.ts",
+      "bytes": 21098,
+      "sha256": "9721b4d220817b559f6c7a89d92f03f1190e7e200fced4cf4eb9808b1946cf08"
+    },
+    {
+      "file": "lib/city/assets/walker.ts",
+      "bytes": 17246,
+      "sha256": "b99690de4da8f38fb925685d4af2fce64fb6388d7402381d1dfee4efcc6d48e9"
+    },
+    {
+      "file": "lib/city/beach-ground.ts",
+      "bytes": 6009,
+      "sha256": "bc7184a1b222ce138e3b9bad11263676bd9166dd06773b5bc91ecc9b5e5c48d7"
+    },
+    {
+      "file": "lib/city/beach-surface.ts",
+      "bytes": 9450,
+      "sha256": "bd0f4c31733e1bef970a520f971532e6a53dc655629df54f5b92ffa3eb8d65c7"
+    },
+    {
+      "file": "lib/city/boat-controller.ts",
+      "bytes": 5330,
+      "sha256": "e64b57cee7ca233ede9fcdfc277d46aff3a98269d88b68052365e2ba0aff4d33"
+    },
+    {
+      "file": "lib/city/boat-physics.ts",
+      "bytes": 2488,
+      "sha256": "f753fc3b9e30b7974e3731ae28d2af04b4e05a63b95bad17968402ba081ad422"
+    },
+    {
+      "file": "lib/city/bridges.ts",
+      "bytes": 6746,
+      "sha256": "6d78e7f5257551886e5bf467d3f36bee864f3a9171c89967883740d862860d66"
+    },
+    {
+      "file": "lib/city/causeway-city-cuts.json",
+      "bytes": 7119,
+      "sha256": "3c8dc38a1e80a3c8266421b951104d1f3b45300e9757ac1b3ff5f4e9e6f89cc3"
+    },
+    {
+      "file": "lib/city/causeway-geometry.ts",
+      "bytes": 30151,
+      "sha256": "8f811bb428408dd6d7bafbc1b075877040781095e0be59567ddda00f093afc03"
+    },
+    {
+      "file": "lib/city/causeway-meshes.ts",
+      "bytes": 10971,
+      "sha256": "39bc20cad7ca5d98ef188ab1045dbe3fd75df17d64e3be373d9bc0ea16530634"
+    },
+    {
+      "file": "lib/city/causeway-no-fill.json",
+      "bytes": 4730,
+      "sha256": "176ee3db09189bc3d820d2e4fbe90bcb0fde7fc091cc9841dc075d5eb9d8b6c1"
+    },
+    {
+      "file": "lib/city/causeway-profile.ts",
+      "bytes": 15915,
+      "sha256": "aa96298e3afb71cc76910c11bb78885bcd2526c36efc855ad64d98108722214b"
+    },
+    {
+      "file": "lib/city/causeway-walkways.ts",
+      "bytes": 2728,
+      "sha256": "7cdb7b5e65f8acb358c12f762491a16b3050fa7a5ec594559bb0821ba62faa81"
+    },
+    {
+      "file": "lib/city/causeway.ts",
+      "bytes": 4598,
+      "sha256": "0fcae13d72f763fa30a3692431a9303ab25642d1a320e04f1355da840cb2c3a4"
+    },
+    {
+      "file": "lib/city/driver-camera.ts",
+      "bytes": 1318,
+      "sha256": "911765020382258030d2dc8f386cfc7dc1f720aab5d88bbf4c04ef93beb903d0"
+    },
+    {
+      "file": "lib/city/engine.ts",
+      "bytes": 45873,
+      "sha256": "2925b241093e28cbad5af71dda6ed0caa8eae941c2bd7bb7b4187e4c4406ae07"
+    },
+    {
+      "file": "lib/city/environment.ts",
+      "bytes": 16947,
+      "sha256": "57b763d4ae2c4dcae54ace76b8cb477d89a5ee23f3c64ce518a8101af10a099a"
+    },
+    {
+      "file": "lib/city/geo.ts",
+      "bytes": 2769,
+      "sha256": "60c01edb97732574f980770a2f0499f2eb9021a0d8075eb272ea18785570494e"
+    },
+    {
+      "file": "lib/city/ground-harmonization-scopes.ts",
+      "bytes": 1286,
+      "sha256": "982a4d35aa8dbd0701a40e940de27d37de00572422d8455452bb43905986f4fa"
+    },
+    {
+      "file": "lib/city/ground-surface.ts",
+      "bytes": 6812,
+      "sha256": "d8e05f4511335c984d053029969cb4d1a0d6c0c9a8a856d7530c40b33fb4e0a8"
+    },
+    {
+      "file": "lib/city/ground-visibility-mesh.ts",
+      "bytes": 7178,
+      "sha256": "b2e466b79e356e94846290b9cf075dfb1441caabe28bbe4100bc348aae8c0f50"
+    },
+    {
+      "file": "lib/city/ground-visibility.ts",
+      "bytes": 16565,
+      "sha256": "f29ae9015e88d0791600628fb628e0e1c1baa6680b592c56257559e1c709cd84"
+    },
+    {
+      "file": "lib/city/harbour-models.ts",
+      "bytes": 36094,
+      "sha256": "1e27cd1cf5e91c0da107d4064dfe635ae2b2f346661f14305c923b9f8cd91b5c"
+    },
+    {
+      "file": "lib/city/landmark-footprints.json",
+      "bytes": 5725,
+      "sha256": "cf44d69c0411de2488bc86fa5b21ed48eddadbad4a16fcd3a7a4b06ead01b74b"
+    },
+    {
+      "file": "lib/city/main-cross-section-data.json",
+      "bytes": 6809,
+      "sha256": "23be5e7cd2c839f02d804f3a10b9c288d9a4590b2124b88b707628bf1a4c1bd0"
+    },
+    {
+      "file": "lib/city/main-cross-section.ts",
+      "bytes": 4522,
+      "sha256": "e5093d4f2e6bc0a1350a45789660346b2dbbb6e512d7f8aded21155f842b58d0"
+    },
+    {
+      "file": "lib/city/main-road-geometry.ts",
+      "bytes": 12962,
+      "sha256": "37d37b6270cac3e6411e5c44508aac8a6c6843e887d322c12f7e559c676d0c06"
+    },
+    {
+      "file": "lib/city/navigation.ts",
+      "bytes": 37224,
+      "sha256": "f9f16d14c61e57cabed2240d345f5a9f691eaa637a520b8996259f1c650af518"
+    },
+    {
+      "file": "lib/city/north-walkways-source.json",
+      "bytes": 31469,
+      "sha256": "7cbfbe023ec94f43611d3b2fc8ca6587e92aae7dd69eb5eb3e3107ad08d22f18"
+    },
+    {
+      "file": "lib/city/numbered-blocks.ts",
+      "bytes": 6195,
+      "sha256": "354b46c50c9d794d4058caa9397273884cb6ef647482fe9d4aa37e8a95596b9c"
+    },
+    {
+      "file": "lib/city/pavement.ts",
+      "bytes": 17252,
+      "sha256": "e49eb0978cc563d722f122a9829ef04fbdd76be313702a7c39b2b0ec898350cc"
+    },
+    {
+      "file": "lib/city/placement-geometry.ts",
+      "bytes": 4670,
+      "sha256": "54a9cf85a9dc1a1cce8d7bd0ba46da5419550893d345b70fd273d1e6daaa682d"
+    },
+    {
+      "file": "lib/city/road-graph.ts",
+      "bytes": 21921,
+      "sha256": "a9c68f00800146591811529e3241b1140dccce92b765f7b99bc77d3999822d51"
+    },
+    {
+      "file": "lib/city/road-lowering.ts",
+      "bytes": 15085,
+      "sha256": "ae6942f5f403539aa679d6e83deca50d4e34506aec75bf0502275aad7f2a2806"
+    },
+    {
+      "file": "lib/city/road-surfaces.ts",
+      "bytes": 4161,
+      "sha256": "0c5a024630a1ac2d886aea6237bd0704285b62921a922d51daf0baac1d7525bd"
+    },
+    {
+      "file": "lib/city/road-trim.ts",
+      "bytes": 1546,
+      "sha256": "5023111cf6fbcc3798f5e78fcdf7467becd6e7e32a986a8ce625272325cb6671"
+    },
+    {
+      "file": "lib/city/shore-lowering.ts",
+      "bytes": 3604,
+      "sha256": "69ffc92652fc382a0fd5ced83afffd47eeda3ac1a64f26ab50ac8e6ba93a5853"
+    },
+    {
+      "file": "lib/city/south-profile-data.json",
+      "bytes": 81464,
+      "sha256": "4632e430ad681c62cc0dc0661570d1153bec8b769e10653c0266d41842f43053"
+    },
+    {
+      "file": "lib/city/south-profile.ts",
+      "bytes": 8532,
+      "sha256": "071c8da7f37ce9ebce587ab5682175a76a52c3595706dff1788c8977cea14bbe"
+    },
+    {
+      "file": "lib/city/street-curb-extensions.json",
+      "bytes": 1317,
+      "sha256": "4e721370f8e9fa79c1d71be7996634566afa295ab69640164246d1cd776ffe90"
+    },
+    {
+      "file": "lib/city/street-layout.ts",
+      "bytes": 5074,
+      "sha256": "d99059f249075f4657c7a235a89e3cf83214d702c53ab40d7c8bddd7b86e9af5"
+    },
+    {
+      "file": "lib/city/street-meshes.ts",
+      "bytes": 1626,
+      "sha256": "b1ae1fc049d38b3dac6d6bec13032b4650b1c1fcef79a79b78b82664eb178524"
+    },
+    {
+      "file": "lib/city/surface-meshing.ts",
+      "bytes": 4386,
+      "sha256": "0ab0e7a06f84eb7411d5063de55286172b4bddbb9283089e541b994c71ec69a7"
+    },
+    {
+      "file": "lib/city/surface-reachability.ts",
+      "bytes": 8639,
+      "sha256": "e012ac7394d0849298cc3fd4c8bf0222471e869e4ac729fba34976977c8aa99e"
+    },
+    {
+      "file": "lib/city/travel-camera.ts",
+      "bytes": 1360,
+      "sha256": "b37cab09e04a356de2dce1fc81e043fe6d4da43a651927ea48eaacada7e9a5d8"
+    },
+    {
+      "file": "lib/city/travel-surfaces.ts",
+      "bytes": 4511,
+      "sha256": "103d03484c129540db1a4f6101795fe5b8bd42cd3dc764f57ce4f7333a839a39"
+    },
+    {
+      "file": "lib/city/tree-road-clearance.ts",
+      "bytes": 8707,
+      "sha256": "5d33fcd2f9f803f5e020251d0c24bda51aab2d6731be81463999789e2131d977"
+    },
+    {
+      "file": "lib/city/upper-walkway-profile.ts",
+      "bytes": 17463,
+      "sha256": "b5fd0f4612c1fce0ef469d6b23f423a2424982775a1fafb28bb4c8a0dcb08ad4"
+    },
+    {
+      "file": "lib/city/wake.ts",
+      "bytes": 1612,
+      "sha256": "5690d75d6779abb5af036383833daac3b3a0079e760cf2f3d7ec5a965df95f02"
+    },
+    {
+      "file": "lib/city/walkway-attachments.ts",
+      "bytes": 3595,
+      "sha256": "2b8f912829525bd06f8b8973577294858b2715ab48e5b09e88874593467d3131"
+    },
+    {
+      "file": "lib/city/walkway-ground-connectors.json",
+      "bytes": 12536,
+      "sha256": "f3ca7279ddfe16cd3227f6bdd383cbb2153b0b89fda211cf7fff0e65abc767bd"
+    },
+    {
+      "file": "lib/city/water-world.ts",
+      "bytes": 11777,
+      "sha256": "d816c253b44be7825eb5f1f2c6e714214da9cc228e5da30f70350fbde6023cc5"
+    },
+    {
+      "file": "lib/city/west-walk-supports.ts",
+      "bytes": 11042,
+      "sha256": "0bd9d59eaa0a2cbc003bdcc21eec57fb98d45cfc92db2fcad669789205624220"
+    },
+    {
+      "file": "public/data/beach-coast.json",
+      "bytes": 4966687,
+      "sha256": "47b787f94717fd489ddcdf0c91fc30a81eee65cce7d4fa6e2eea9763b6023459"
+    },
+    {
+      "file": "public/data/bridges.json",
+      "bytes": 62350,
+      "sha256": "52fcf8c310ecedff1782db2c1274af3f032905cdaf461b4a5c85ab0aa6d4faef"
+    },
+    {
+      "file": "public/data/buildings.geojson",
+      "bytes": 3840048,
+      "sha256": "57cf77f2f7afbceeb3ea4b7dcb87c33d7f56a6df57c33306792503f1dba538ec"
+    },
+    {
+      "file": "public/data/context.geojson",
+      "bytes": 220187,
+      "sha256": "8490953cc264cd3090811fd5cba11cf23fb9d88434f58c99d0f100014fa86ec1"
+    },
+    {
+      "file": "public/data/land.geojson",
+      "bytes": 299940,
+      "sha256": "4329b72163668afeee2289160ef00dc9d61c2857d1917447eceaa243c0c30450"
+    },
+    {
+      "file": "public/data/parks.geojson",
+      "bytes": 87044,
+      "sha256": "3601c392311b2377a98cb072dd6143746561e25f4c1a5c6b9c6a0659d4bc75b3"
+    },
+    {
+      "file": "public/data/paths.geojson",
+      "bytes": 320138,
+      "sha256": "daf512c6eaee772df831462f3f0418f848d3737317b7219db51754ce0fae36b9"
+    },
+    {
+      "file": "public/data/roads.geojson",
+      "bytes": 773687,
+      "sha256": "77543c74f4e567a65db14c8d33f9d6250d0f40bdd5f99031c1267aa8dc3373fb"
+    },
+    {
+      "file": "public/data/terrain.json",
+      "bytes": 303256,
+      "sha256": "c52c4ae53c3f76ae5cdfdb32765b53d7c61fec4f7d9db03b02c7f7d722853908"
+    },
+    {
+      "file": "public/data/trees.json",
+      "bytes": 1070134,
+      "sha256": "2ba858b2afa255bef8ad7f6c7aade750151d0990ad492c68e2c2915a92e3267d"
+    }
+  ],
+  "elapsedMs": 25275.726923,
+  "valid": true
+}

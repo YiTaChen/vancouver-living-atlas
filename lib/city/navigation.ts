@@ -20,7 +20,7 @@ import {
 } from './placement-geometry';
 import { BoatController } from './boat-controller';
 import { makeWalker } from './assets/walker';
-import { GroundSurfaceIndex } from './ground-surface';
+import { GroundSurfaceIndex, walkableGroundMeshes } from './ground-surface';
 import { DriverCameraMotion, DRIVER_LEFT_OFFSET } from './driver-camera';
 import type { TravelBookmark } from './travel-return';
 import { makeCockpit } from './assets/cockpits';
@@ -966,16 +966,9 @@ export class StreetNavigation {
   }
   groundHeight(x: number, z: number) {
     if (!this.groundSurface) {
-      const meshes: THREE.Mesh[] = [];
-      this.e.scene.traverse((object) => {
-        if (
-          object instanceof THREE.Mesh &&
-          object.userData.walkSurface &&
-          !object.userData.protectedSurface
-        )
-          meshes.push(object);
-      });
-      this.groundSurface = new GroundSurfaceIndex(meshes);
+      this.groundSurface = new GroundSurfaceIndex(
+        walkableGroundMeshes(this.e.scene),
+      );
     }
     return (
       this.groundSurface.sample(x, z, this.e.elevation(x, z) + 1.25) ??

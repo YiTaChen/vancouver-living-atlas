@@ -104,7 +104,31 @@ function actualEngineMethods() {
   );
   return module.exports.methods;
 }
-export function createFixture() {
+/** Execute only Nature's current source shoreline-strip construction. Trees,
+ * textures and unrelated overlays are not needed for this CPU ground fixture. */
+function createActualShoreStrips(e) {
+  const file = path.join(ROOT, 'lib/city/environment.ts');
+  sourceFiles.add(file);
+  const source = fs.readFileSync(file, 'utf8');
+  const start = source.indexOf('  const shorePos:'),
+    end = source.indexOf('  // Trails', start);
+  if (start < 0 || end < 0)
+    throw new Error('Canonical shoreline source extraction failed');
+  const code = ts.transpileModule(source.slice(start, end), {
+    compilerOptions: {
+      target: ts.ScriptTarget.ES2022,
+      module: ts.ModuleKind.CommonJS,
+    },
+  }).outputText;
+  new Function('e', 'THREE', 'lines', 'project', code)(
+    e,
+    THREE,
+    geo.lines,
+    geo.project,
+  );
+}
+
+export function createFixture({ harmonize = true } = {}) {
   const geometry = load('lib/city/causeway-geometry.ts'),
     captures = [],
     build = geometry.buildCausewayGeometry;
@@ -177,7 +201,21 @@ export function createFixture() {
     new THREE.MeshBasicMaterial(),
   );
   coastalMesh.userData.walkSurface = true;
+  coastalMesh.userData.groundPath = true;
   e.roads.add(coastalMesh);
+  e.data.groundPathSources = [
+    {
+      id: 'coastal-paths',
+      kind: 'path',
+      level: 'ground',
+      positions: Array.from(
+        coastalMesh.geometry.getAttribute('position').array,
+      ),
+    },
+  ];
+  const groundSourceIds = new Set([
+    44032491, 74267973, 115939816, 363686270, 648864806, 381179591, 863811845,
+  ]);
   const groundPathMeshes = [];
   const coastalPaths = new Set(e.data.beachCoast.replacementPathIds);
   for (const f of e.data.paths.features) {
@@ -197,12 +235,22 @@ export function createFixture() {
         1.5,
       );
       mesh.userData.walkSurface = true;
+      mesh.userData.groundPath = true;
       mesh.userData.auditPathId = Number(
         f.properties.sourceId ?? f.properties.id,
       );
       groundPathMeshes.push(mesh);
+      if (groundSourceIds.has(mesh.userData.auditPathId))
+        e.data.groundPathSources.push({
+          id: `OSM:${mesh.userData.auditPathId}`,
+          kind: 'path',
+          level: 'ground',
+          positions: Array.from(mesh.geometry.getAttribute('position').array),
+        });
     }
   }
+  createActualShoreStrips(e);
+  if (harmonize) load('lib/city/harmonize-ground.ts').harmonizeGround(e);
   e.data.waterPolys = load('lib/city/water-world.ts')
     .lakeSurfaces(e.data.context, (x, z) => e.elevation(x, z))
     .map((s) => s.polygon);

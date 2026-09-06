@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import type { CityEngine } from './engine';
 import { lines, project, unproject } from './geo';
+import { walkableGroundMeshes } from './ground-surface';
 import {
   resolvePlacement,
   type PlacementResult,
@@ -27,6 +28,7 @@ export class MapPlacement {
   raycaster = new THREE.Raycaster();
   bridgeMesh: THREE.Mesh;
   bridgeOwners: RoadSegment[] = [];
+  groundMeshes: THREE.Mesh[];
   ring: THREE.Mesh;
   world: PlacementWorld;
   pointer: [number, number] | null = null;
@@ -43,6 +45,7 @@ export class MapPlacement {
   lastPick = 0;
   savedDamping = true;
   constructor(public e: CityEngine) {
+    this.groundMeshes = walkableGroundMeshes(e.scene);
     const roads = e.data.roadGraph.edges
       .filter(
         (edge: any) =>
@@ -254,7 +257,7 @@ export class MapPlacement {
     );
     const hits = this.raycaster.intersectObjects(
       [
-        this.e.terrain.children[0],
+        ...this.groundMeshes,
         this.bridgeMesh,
         this.e.water,
         ...(this.e.data.waterMeshes || []),

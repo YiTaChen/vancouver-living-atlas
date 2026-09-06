@@ -33,7 +33,45 @@ test('local map offset stays 200m from the player for all headings', () => {
 });
 
 const THREE = await import('three');
-const { GroundSurfaceIndex } = await import(cityModule('ground-surface'));
+const { GroundSurfaceIndex, walkableGroundMeshes } = await import(
+  cityModule('ground-surface')
+);
+
+test('placement can pick pavement over a clipped terrain opening without claiming an upper floor', () => {
+  const scene = new THREE.Scene();
+  const face = (y, protectedSurface = false) => {
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute(
+      'position',
+      new THREE.Float32BufferAttribute([-3, y, -3, 0, y, 3, 3, y, -3], 3),
+    );
+    const mesh = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial());
+    mesh.userData.walkSurface = true;
+    mesh.userData.protectedSurface = protectedSurface;
+    return mesh;
+  };
+  // The original terrain has no face at the picked point after clipping.
+  const pavement = face(1.25),
+    upper = face(5, true),
+    decoration = face(9);
+  delete decoration.userData.walkSurface;
+  const group = new THREE.Group();
+  group.add(pavement, upper, decoration);
+  scene.add(group);
+  scene.updateMatrixWorld(true);
+  const ground = walkableGroundMeshes(scene);
+  const ray = new THREE.Raycaster(
+    new THREE.Vector3(0, 12, 0),
+    new THREE.Vector3(0, -1, 0),
+  );
+  const picked = ray.intersectObjects(ground, false)[0];
+  assert.equal(picked.object, pavement);
+  assert.equal(picked.point.y, 1.25);
+  assert.equal(
+    new GroundSurfaceIndex(ground).sample(0, 0, 1.25),
+    picked.point.y,
+  );
+});
 test('Float32 path caps remain queryable within 0.5mm, including adjacent spatial cells', () => {
   const g = new THREE.BufferGeometry();
   g.setAttribute(
