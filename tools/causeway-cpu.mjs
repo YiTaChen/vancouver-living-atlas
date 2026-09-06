@@ -216,6 +216,9 @@ export function createFixture({ harmonize = true } = {}) {
   const groundSourceIds = new Set([
     44032491, 74267973, 115939816, 363686270, 648864806, 381179591, 863811845,
   ]);
+  const { isParkTrail, draper } = load(
+    'lib/city/park-paths.ts',
+  ).prepareParkPaths(e);
   const groundPathMeshes = [];
   const coastalPaths = new Set(e.data.beachCoast.replacementPathIds);
   for (const f of e.data.paths.features) {
@@ -234,6 +237,11 @@ export function createFixture({ harmonize = true } = {}) {
         0,
         1.5,
       );
+      if (isParkTrail(f)) {
+        const original = mesh.geometry;
+        mesh.geometry = draper.drape(original);
+        original.dispose();
+      }
       mesh.userData.walkSurface = true;
       mesh.userData.groundPath = true;
       mesh.userData.auditPathId = Number(

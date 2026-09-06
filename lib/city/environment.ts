@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { prepareParkPaths } from './park-paths';
 import { createBuses, updateBuses, type BusRoute } from './city-buses';
 import { DetailedTrees, registerTree, type ForestTree } from './detailed-trees';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
@@ -149,6 +150,8 @@ export function createNature(e: CityEngine) {
     44032491, 74267973, 115939816, 363686270, 648864806, 381179591, 863811845,
   ]);
   const coastalPathIds = new Set<number>(e.data.beachCoast.replacementPathIds);
+  const { isParkTrail, draper } = prepareParkPaths(e);
+  let drapedPaths = 0;
   for (const f of e.data.paths.features) {
     if (coastalPathIds.has(Number(f.properties.sourceId ?? f.properties.id)))
       continue;
@@ -165,6 +168,12 @@ export function createNature(e: CityEngine) {
         0xb2a587,
         1.5,
       );
+      if (isParkTrail(f)) {
+        const original = mesh.geometry;
+        mesh.geometry = draper.drape(original);
+        original.dispose();
+        drapedPaths++;
+      }
       pathGeos.push(mesh.geometry);
       const sourceId = Number(f.properties.sourceId ?? f.properties.id);
       if (groundSourceIds.has(sourceId))
@@ -178,6 +187,7 @@ export function createNature(e: CityEngine) {
       (mesh.material as THREE.Material).dispose();
     }
   }
+  e.data.drapedParkPathCount = drapedPaths;
   if (pathGeos.length) {
     const merged = mergeGeometries(pathGeos),
       m = new THREE.Mesh(

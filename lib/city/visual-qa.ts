@@ -58,6 +58,9 @@ const cases = [
     coord: [-123.156028, 49.306809],
     offset: [-80, 50, 20],
   },
+  { id: 'rawlings-trail', walkAt: [-123.1512853, 49.3087402] },
+  { id: 'lovers-walk', walkAt: [-123.1523818, 49.300091] },
+  { id: 'lees-trail', walkAt: [-123.150018, 49.298341] },
   { id: 'second-sand', walkAt: [-123.1500073169, 49.2944261588] },
   { id: 'third-sand', walkAt: [-123.1564938289, 49.3043524973] },
   {
