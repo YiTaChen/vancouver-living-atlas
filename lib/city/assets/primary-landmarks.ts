@@ -1,4 +1,13 @@
 import * as THREE from 'three';
+import {
+  createScienceEntrance,
+  applyScienceRedPanelMaterial,
+  type ScienceEntryOptions,
+} from './science-entry';
+import {
+  createCanadaGalleryDetail,
+  applyCanadaMembraneMaterial,
+} from './canada-detail';
 
 /**
  * Original, metre-scale parametric architecture. No downloaded model, texture,
@@ -462,10 +471,14 @@ function scienceStair(m: Model, angle: number) {
 }
 
 /** Main pavilion deck datum: place at (-123.1039114,49.2733499), Y=3.4, yaw=0. */
-export function createScienceWorld(detail: boolean): THREE.Group {
+export function createScienceWorld(
+  detail: boolean,
+  entryOptions: ScienceEntryOptions = {},
+): THREE.Group {
   const m = new Model('Science World', detail);
   m.material('concrete', 0xb4b2a5, 0.93);
   m.material('red', 0xb52d2b, 0.57);
+  applyScienceRedPanelMaterial(m.batches.get('red')!.material);
   m.material('cladding', 0xb9bdbd, 0.48, 0.28);
   m.material('frame', 0xe2e3dc, 0.4, 0.42);
   m.material('panel-trim', 0xa7b3b8, 0.3, 0.72);
@@ -614,8 +627,9 @@ export function createScienceWorld(detail: boolean): THREE.Group {
       );
     }
   }
-  m.box('glass', [10, 10.8, 11], [39, 6.45, -43], -0.35);
-  m.box('frame', [12.8, 0.28, 15], [40, 2.9, -52], -0.35);
+  // Replaces both the solid glass entry and the undersized-clearance canopy.
+  // Existing annex mass remains behind the shallow recess; XY/deck datum stay.
+  const entrance = createScienceEntrance(detail, entryOptions);
   for (let j = 0; j < (detail ? 7 : 4); j++) {
     const z = -31 + j * (detail ? 6.3 : 12.6);
     m.box('frame', [23, 0.22, 0.32], [47, 11.85, z], -0.08);
@@ -630,7 +644,7 @@ export function createScienceWorld(detail: boolean): THREE.Group {
       }
     }
   const dome = scienceDome(m);
-  return m.finish(
+  const result = m.finish(
     { lon: -123.1039114, lat: 49.2733499, yaw: 0, baseY: 3.4 },
     {
       domeDiameterM: 40,
@@ -648,6 +662,31 @@ export function createScienceWorld(detail: boolean): THREE.Group {
       sourceGeometry: 'OSM 37084312; independent architectural reconstruction',
     },
   );
+  result.add(entrance);
+  result.userData.nightMaterials.push(...entrance.userData.nightMaterials);
+  result.userData.entrance = {
+    thresholdY: entrance.userData.thresholdY,
+    canopySoffitY: entrance.userData.canopySoffitY,
+    footings: entrance.userData.footings,
+  };
+  const bounds = new THREE.Box3().setFromObject(result);
+  result.userData.bounds = {
+    min: bounds.min.toArray(),
+    max: bounds.max.toArray(),
+  };
+  let triangles = 0,
+    meshes = 0;
+  result.traverse((object) => {
+    if (object instanceof THREE.Mesh) {
+      triangles +=
+        (object.geometry.index?.count ??
+          object.geometry.getAttribute('position').count) / 3;
+      meshes++;
+    }
+  });
+  result.userData.triangleCount = triangles;
+  result.userData.meshCount = meshes;
+  return result;
 }
 
 function sailPoint(bay: number, u: number, t: number): P {
@@ -702,6 +741,7 @@ export function createCanadaPlace(detail: boolean): THREE.Group {
   m.material('glass', 0x527b86, 0.22, 0.43, [0x9bbcc0, 0.25]);
   m.material('glass-dark', 0x354e59, 0.25, 0.34, [0x879da7, 0.12]);
   m.material('fabric', 0xf0f0e8, 0.76, 0.01, [0xa7c3dc, 0.3], THREE.DoubleSide);
+  applyCanadaMembraneMaterial(m.batches.get('fabric')!.material);
   m.material('roof', 0x919c99, 0.88);
   m.material('wood', 0x947e61, 0.92);
   m.material('green', 0x5d7050, 0.95);
@@ -747,12 +787,12 @@ export function createCanadaPlace(detail: boolean): THREE.Group {
     13.3,
     0.45,
   );
-  m.box('white', [65, 24.4, 181], [0.5, 13.5, -0.5]);
+  // Includes the same hall envelope with an actual north-atrial aperture,
+  // recessed side glazing and existing-gallery underside detail.
+  const galleryDetail = createCanadaGalleryDetail(detail);
   for (const side of [-1, 1]) {
     const x = side < 0 ? -33.2 : 34.2;
-    // Dark recessed window fields sit behind articulated concrete floors.
-    for (const y of [5.1, 11.3, 20.5])
-      m.box('glass', [0.24, y === 20.5 ? 6.3 : 3.9, 180], [x, y, -0.5]);
+    // The replacement provides glazing behind this retained outer frame grid.
     for (const y of [2.7, 8.0, 14.8, 17.0, 24.0])
       m.box('white', [2.3, 0.55, 184], [x, y, -0.5]);
     m.box('white', [9.8, 0.8, 190], [side * 37.9 + 0.5, 17.1, -0.5]);
@@ -857,9 +897,8 @@ export function createCanadaPlace(detail: boolean): THREE.Group {
       m.beam('cable', tip, [tip[0], 25.8, tip[2] - 5.4], 0.04, 4);
   }
   // Recessed end atrium and public entry stairs, beneath the saddle roof.
-  m.box('glass-dark', [54, 17, 0.3], [0.7, 14, -91.1]);
-  for (let x = -25; x <= 27; x += detail ? 2.8 : 5.6)
-    m.box('frame', [0.14, 16.8, 0.4], [x, 14, -91.4]);
+  // North atrium and its frame are included in galleryDetail; the former solid
+  // box and front glass plane must not remain behind the new recess.
   for (let step = 0; step < (detail ? 28 : 14); step++) {
     const t = step / (detail ? 28 : 14);
     m.box(
@@ -990,7 +1029,7 @@ export function createCanadaPlace(detail: boolean): THREE.Group {
       }
     }
   }
-  return m.finish(
+  const result = m.finish(
     { lon: -123.111352, lat: 49.2886214, yaw: -1.073, baseY: 3.5 },
     {
       sailCount: 5,
@@ -1002,4 +1041,24 @@ export function createCanadaPlace(detail: boolean): THREE.Group {
         'OSM 223635729, 1216968939–1216968944; original anticlastic membrane surfaces',
     },
   );
+  result.add(galleryDetail);
+  result.userData.nightMaterials.push(...galleryDetail.userData.nightMaterials);
+  const bounds = new THREE.Box3().setFromObject(result);
+  result.userData.bounds = {
+    min: bounds.min.toArray(),
+    max: bounds.max.toArray(),
+  };
+  let triangles = 0,
+    meshes = 0;
+  result.traverse((object) => {
+    if (object instanceof THREE.Mesh) {
+      triangles +=
+        (object.geometry.index?.count ??
+          object.geometry.getAttribute('position').count) / 3;
+      meshes++;
+    }
+  });
+  result.userData.triangleCount = triangles;
+  result.userData.meshCount = meshes;
+  return result;
 }

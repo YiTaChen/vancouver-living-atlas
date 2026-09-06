@@ -1,0 +1,421 @@
+{
+  "date": "2026-09-06T09:26:50.312Z",
+  "status": "outside-checkout integration proposal, no browser/GPU test",
+  "validation": "8 CPU tests including strict types; exact ground audit via current source methods; Stage 6 local Causeway clipping excluded because outside all three sites",
+  "results": [
+    {
+      "kind": "marine",
+      "detail": false,
+      "before": {
+        "triangles": 5674,
+        "meshes": 5,
+        "walkSurfaces": 0,
+        "attributeBytes": 612792,
+        "nightMaterials": 1,
+        "bounds": {
+          "min": [
+            -24.1064510345459,
+            -9.111050604834574e-16,
+            -29.02714729309082
+          ],
+          "max": [
+            40.73029327392578,
+            98,
+            14.999472618103027
+          ]
+        },
+        "placement": {
+          "lon": -123.117146,
+          "lat": 49.287449,
+          "yaw": 0.77,
+          "base": 14.22,
+          "baseY": 14.22,
+          "pivot": "Crown centre, at the reconciled building base datum.",
+          "sourceIds": [
+            "osm-125579375",
+            "osm-360437838",
+            "osm-360437839",
+            "osm-360437840",
+            "osm-360437841",
+            "osm-360575454",
+            "osm-360575455",
+            "osm-360575458",
+            "osm-360575460"
+          ],
+          "excludeBuildingIds": [
+            "osm-structure-19-0",
+            "osm-structure-19-1",
+            "osm-structure-19-2"
+          ],
+          "excludeStructureIds": [
+            "osm-structure-19"
+          ]
+        }
+      },
+      "after": {
+        "triangles": 9692,
+        "meshes": 12,
+        "walkSurfaces": 0,
+        "attributeBytes": 1046736,
+        "nightMaterials": 2,
+        "bounds": {
+          "min": [
+            -24.1064510345459,
+            -9.111050604834574e-16,
+            -29.02714729309082
+          ],
+          "max": [
+            40.73029327392578,
+            98,
+            15.025239944458008
+          ]
+        },
+        "placement": {
+          "lon": -123.117146,
+          "lat": 49.287449,
+          "yaw": 0.77,
+          "base": 14.22,
+          "baseY": 14.22,
+          "pivot": "Crown centre, at the reconciled building base datum.",
+          "sourceIds": [
+            "osm-125579375",
+            "osm-360437838",
+            "osm-360437839",
+            "osm-360437840",
+            "osm-360437841",
+            "osm-360575454",
+            "osm-360575455",
+            "osm-360575458",
+            "osm-360575460"
+          ],
+          "excludeBuildingIds": [
+            "osm-structure-19-0",
+            "osm-structure-19-1",
+            "osm-structure-19-2"
+          ],
+          "excludeStructureIds": [
+            "osm-structure-19"
+          ]
+        }
+      },
+      "preservedFootprints": true
+    },
+    {
+      "kind": "marine",
+      "detail": true,
+      "before": {
+        "triangles": 38166,
+        "meshes": 6,
+        "walkSurfaces": 0,
+        "attributeBytes": 4121928,
+        "nightMaterials": 1,
+        "bounds": {
+          "min": [
+            -24.1064510345459,
+            -9.111050604834574e-16,
+            -29.02714729309082
+          ],
+          "max": [
+            40.73029327392578,
+            98,
+            15.052610397338867
+          ]
+        },
+        "placement": {
+          "lon": -123.117146,
+          "lat": 49.287449,
+          "yaw": 0.77,
+          "base": 14.22,
+          "baseY": 14.22,
+          "pivot": "Crown centre, at the reconciled building base datum.",
+          "sourceIds": [
+            "osm-125579375",
+            "osm-360437838",
+            "osm-360437839",
+            "osm-360437840",
+            "osm-360437841",
+            "osm-360575454",
+            "osm-360575455",
+            "osm-360575458",
+            "osm-360575460"
+          ],
+          "excludeBuildingIds": [
+            "osm-structure-19-0",
+            "osm-structure-19-1",
+            "osm-structure-19-2"
+          ],
+          "excludeStructureIds": [
+            "osm-structure-19"
+          ]
+        }
+      },
+      "after": {
+        "triangles": 45480,
+        "meshes": 13,
+        "walkSurfaces": 0,
+        "attributeBytes": 4911840,
+        "nightMaterials": 2,
+        "bounds": {
+          "min": [
+            -24.1064510345459,
+            -9.111050604834574e-16,
+            -29.02714729309082
+          ],
+          "max": [
+            40.73029327392578,
+            98,
+            15.052610397338867
+          ]
+        },
+        "placement": {
+          "lon": -123.117146,
+          "lat": 49.287449,
+          "yaw": 0.77,
+          "base": 14.22,
+          "baseY": 14.22,
+          "pivot": "Crown centre, at the reconciled building base datum.",
+          "sourceIds": [
+            "osm-125579375",
+            "osm-360437838",
+            "osm-360437839",
+            "osm-360437840",
+            "osm-360437841",
+            "osm-360575454",
+            "osm-360575455",
+            "osm-360575458",
+            "osm-360575460"
+          ],
+          "excludeBuildingIds": [
+            "osm-structure-19-0",
+            "osm-structure-19-1",
+            "osm-structure-19-2"
+          ],
+          "excludeStructureIds": [
+            "osm-structure-19"
+          ]
+        }
+      },
+      "preservedFootprints": true
+    },
+    {
+      "kind": "science",
+      "detail": false,
+      "before": {
+        "triangles": 19510,
+        "meshes": 12,
+        "walkSurfaces": 0,
+        "attributeBytes": 1872960,
+        "nightMaterials": 2,
+        "bounds": {
+          "min": [
+            -37.400001525878906,
+            -5.300000190734863,
+            -61.23984146118164
+          ],
+          "max": [
+            69,
+            48.21291732788086,
+            37.400001525878906
+          ]
+        },
+        "placement": {
+          "lon": -123.1039114,
+          "lat": 49.2733499,
+          "yaw": 0,
+          "baseY": 3.4
+        }
+      },
+      "after": {
+        "triangles": 20930,
+        "meshes": 17,
+        "walkSurfaces": 1,
+        "attributeBytes": 2026608,
+        "nightMaterials": 4,
+        "bounds": {
+          "min": [
+            -37.400001525878906,
+            -5.300000190734863,
+            -61.214195251464844
+          ],
+          "max": [
+            69,
+            48.21291732788086,
+            37.400001525878906
+          ]
+        },
+        "placement": {
+          "lon": -123.1039114,
+          "lat": 49.2733499,
+          "yaw": 0,
+          "baseY": 3.4
+        }
+      },
+      "preservedFootprints": true
+    },
+    {
+      "kind": "science",
+      "detail": true,
+      "before": {
+        "triangles": 79190,
+        "meshes": 15,
+        "walkSurfaces": 0,
+        "attributeBytes": 7602240,
+        "nightMaterials": 2,
+        "bounds": {
+          "min": [
+            -37.400001525878906,
+            -5.300000190734863,
+            -61.23984146118164
+          ],
+          "max": [
+            69,
+            48.421958923339844,
+            37.400001525878906
+          ]
+        },
+        "placement": {
+          "lon": -123.1039114,
+          "lat": 49.2733499,
+          "yaw": 0,
+          "baseY": 3.4
+        }
+      },
+      "after": {
+        "triangles": 82122,
+        "meshes": 20,
+        "walkSurfaces": 1,
+        "attributeBytes": 7919184,
+        "nightMaterials": 4,
+        "bounds": {
+          "min": [
+            -37.400001525878906,
+            -5.300000190734863,
+            -61.214195251464844
+          ],
+          "max": [
+            69,
+            48.421958923339844,
+            37.400001525878906
+          ]
+        },
+        "placement": {
+          "lon": -123.1039114,
+          "lat": 49.2733499,
+          "yaw": 0,
+          "baseY": 3.4
+        }
+      },
+      "preservedFootprints": true
+    },
+    {
+      "kind": "canada",
+      "detail": false,
+      "before": {
+        "triangles": 14052,
+        "meshes": 9,
+        "walkSurfaces": 0,
+        "attributeBytes": 1348992,
+        "nightMaterials": 3,
+        "bounds": {
+          "min": [
+            -46.363731384277344,
+            -5.099999904632568,
+            -282.4200134277344
+          ],
+          "max": [
+            61.363731384277344,
+            81.44200134277344,
+            230.4199981689453
+          ]
+        },
+        "placement": {
+          "lon": -123.111352,
+          "lat": 49.2886214,
+          "yaw": -1.073,
+          "baseY": 3.5
+        }
+      },
+      "after": {
+        "triangles": 18396,
+        "meshes": 13,
+        "walkSurfaces": 0,
+        "attributeBytes": 1820736,
+        "nightMaterials": 5,
+        "bounds": {
+          "min": [
+            -46.363731384277344,
+            -5.099999904632568,
+            -282.4200134277344
+          ],
+          "max": [
+            61.363731384277344,
+            81.44200134277344,
+            230.4199981689453
+          ]
+        },
+        "placement": {
+          "lon": -123.111352,
+          "lat": 49.2886214,
+          "yaw": -1.073,
+          "baseY": 3.5
+        }
+      },
+      "preservedFootprints": true
+    },
+    {
+      "kind": "canada",
+      "detail": true,
+      "before": {
+        "triangles": 51316,
+        "meshes": 11,
+        "walkSurfaces": 0,
+        "attributeBytes": 4926336,
+        "nightMaterials": 4,
+        "bounds": {
+          "min": [
+            -46.41999816894531,
+            -5.099999904632568,
+            -282.4200134277344
+          ],
+          "max": [
+            61.41999816894531,
+            81.44200134277344,
+            230.4199981689453
+          ]
+        },
+        "placement": {
+          "lon": -123.111352,
+          "lat": 49.2886214,
+          "yaw": -1.073,
+          "baseY": 3.5
+        }
+      },
+      "after": {
+        "triangles": 68782,
+        "meshes": 15,
+        "walkSurfaces": 0,
+        "attributeBytes": 6816552,
+        "nightMaterials": 6,
+        "bounds": {
+          "min": [
+            -46.41999816894531,
+            -5.099999904632568,
+            -282.4200134277344
+          ],
+          "max": [
+            61.41999816894531,
+            81.44200134277344,
+            230.4199981689453
+          ]
+        },
+        "placement": {
+          "lon": -123.111352,
+          "lat": 49.2886214,
+          "yaw": -1.073,
+          "baseY": 3.5
+        }
+      },
+      "preservedFootprints": true
+    }
+  ]
+}

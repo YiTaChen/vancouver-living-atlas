@@ -3,13 +3,13 @@ import { createConventionCentre } from './assets/convention-centre';
 import {
   createBCPlace,
   createHarbourCentre,
-  createMarineBuilding,
 } from './assets/secondary-landmarks';
 import { LandmarkDetail } from './landmark-detail';
-import {
-  createScienceWorld,
-  createCanadaPlace,
-} from './assets/primary-landmarks';
+import { createLandmarkGroundSampler } from './landmark-ground';
+import { resolveLandmarkGroundPlan } from './resolve-landmark-plan';
+import { createResolvedLandmark } from './landmark-resolved-factory';
+import { MARINE_ENTRY_CONTRACT } from './assets/marine-entry';
+import { SCIENCE_ENTRY_CONTRACT } from './assets/science-entry';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { project, hash } from './geo';
 import type { CityEngine } from './engine';
@@ -122,11 +122,52 @@ export function createLandmarks(engine: CityEngine) {
   const b = new Builder(engine),
     white = 0xe8e4d7,
     glass = 0x456d79;
-  engine.landmarkDetails.push(new LandmarkDetail(engine, createScienceWorld));
-  engine.landmarkDetails.push(new LandmarkDetail(engine, createCanadaPlace));
+  const marinePlacement = MARINE_ENTRY_CONTRACT.placementMustRemain;
+  const sciencePlacement = SCIENCE_ENTRY_CONTRACT.placement;
+  const marineOrigin = project([marinePlacement.lon, marinePlacement.lat]);
+  const scienceOrigin = project([sciencePlacement.lon, sciencePlacement.lat]);
+  // Must run after final land, roads, Nature and any Stage 6 ground clipping.
+  // Only these two local sites are indexed; landmark roofs/piers never enter.
+  const ground = createLandmarkGroundSampler(
+    [engine.terrain, engine.roads],
+    [
+      { x: marineOrigin[0], z: marineOrigin[1], radius: 45 },
+      { x: scienceOrigin[0] + 40, z: scienceOrigin[1] - 52, radius: 40 },
+    ],
+    (x, z) => engine.elevation(x, z),
+  );
+  const plans = (['marine', 'science', 'canada'] as const).map((kind) => {
+    const result = resolveLandmarkGroundPlan(
+      kind,
+      (x, z) => ground.sample(x, z),
+      'stage7-ground-v1',
+    );
+    if (result.status !== 'ready') throw new Error(result.reason);
+    return result.plan;
+  });
+  engine.data.landmarkGroundPlans = plans;
+  // Identical captured DTO for initial medium and later Ultra. A worker can
+  // consume this same plan without sampling or importing engine state.
+  const sciencePlan = plans.find((p) => p.kind === 'science')!;
+  const canadaPlan = plans.find((p) => p.kind === 'canada')!;
+  const marinePlan = plans.find((p) => p.kind === 'marine')!;
+  engine.landmarkDetails.push(
+    new LandmarkDetail(engine, (detail) =>
+      createResolvedLandmark(detail, sciencePlan),
+    ),
+  );
+  engine.landmarkDetails.push(
+    new LandmarkDetail(engine, (detail) =>
+      createResolvedLandmark(detail, canadaPlan),
+    ),
+  );
   engine.landmarkDetails.push(new LandmarkDetail(engine, createBCPlace));
   engine.landmarkDetails.push(new LandmarkDetail(engine, createHarbourCentre));
-  engine.landmarkDetails.push(new LandmarkDetail(engine, createMarineBuilding));
+  engine.landmarkDetails.push(
+    new LandmarkDetail(engine, (detail) =>
+      createResolvedLandmark(detail, marinePlan),
+    ),
+  );
   engine.landmarkDetails.push(
     new LandmarkDetail(engine, createConventionCentre),
   );

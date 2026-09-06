@@ -10,8 +10,8 @@ Approved scope (2026-09-05): finish each stage in order, validate it, then commi
 | 4 | Complete | [Connected Causeway, complete separated paths, source-floor navigation and actual QA](causeway/README.md) |
 | 5 | Complete | [Shared Second/Third Beach terrain, walking/boat boundaries and actual QA](beaches/README.md) |
 | 6 | Complete | [Bounded ground reconciliation, foliage cleanup, public controls and 60-second samples](integration/README.md) |
-| 7 | In progress | Marine Building, Canada Place and Science World detail |
-| 8 | Pending | Convention Centre, BC Place, Harbour Centre and Vancouver House detail |
+| 7 | Complete | [Marine Building, Canada Place and Science World detail](landmarks-primary/README.md) |
+| 8 | In progress | Convention Centre, BC Place, Harbour Centre and Vancouver House detail |
 | 9 | Pending | Measured loading, geometry, texture and rendering improvements |
 | 10 | Pending | Day/dusk/night and long-travel acceptance; final release evidence |
 

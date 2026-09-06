@@ -10,6 +10,7 @@ const cases = [
   { id: 'robson-drive', street: 'ROBSON ST', drive: true },
   { id: 'robson-walk', street: 'ROBSON ST', forward: true },
   { id: 'coal-harbour-boat', boatAt: [-123.125, 49.295], forward: true },
+  { id: 'open-harbour-boat', boatAt: [-123.12, 49.296], forward: true },
   { id: 'causeway', coord: [-123.1419028, 49.3118075], offset: [110, 85, 170] },
   { id: 'causeway-south', coord: [-123.13665, 49.29624], offset: [90, 62, 90] },
   {
@@ -56,6 +57,57 @@ const cases = [
     id: 'second-boat',
     boatAt: [-123.1512467778, 49.2944261588],
     forward: true,
+  },
+  { id: 'science', view: 'science' },
+  {
+    id: 'marine-entry',
+    landmarkPose: {
+      coord: [-123.117146, 49.287449],
+      yaw: 0.77,
+      baseY: 14.22,
+      camera: [8, 6, 34],
+      target: [0.87, 4.6, 15],
+    },
+  },
+  {
+    id: 'science-entry',
+    landmarkPose: {
+      coord: [-123.1039114, 49.2733499],
+      yaw: 0,
+      baseY: 3.4,
+      camera: [57, 6, -76],
+      target: [40, 3.3, -52],
+    },
+  },
+  {
+    id: 'canada-gallery',
+    landmarkPose: {
+      coord: [-123.111352, 49.2886214],
+      yaw: -1.073,
+      baseY: 3.5,
+      camera: [59, 10, -32],
+      target: [34, 12, -8],
+    },
+  },
+  {
+    id: 'canada-sails',
+    landmarkPose: {
+      coord: [-123.111352, 49.2886214],
+      yaw: -1.073,
+      baseY: 3.5,
+      camera: [90, 36, 75],
+      target: [0, 43, 8],
+    },
+  },
+  {
+    id: 'canada-pier',
+    landmarkPose: {
+      coord: [-123.111352, 49.2886214],
+      yaw: -1.073,
+      baseY: 3.5,
+      camera: [85, -1.6, -55],
+      target: [34, 9, -20],
+    },
   },
   { id: 'marine', view: 'marine' },
   { id: 'canada', view: 'canada' },
@@ -117,6 +169,18 @@ export function installVisualQA(e: CityEngine) {
         z + test.offset[2],
       );
       e.controls.target.set(x, y, z);
+      e.controls.update();
+    }
+    if ('landmarkPose' in test) {
+      const p = test.landmarkPose,
+        origin = project(p.coord);
+      const world = (v: readonly number[]): [number, number, number] => [
+        origin[0] + Math.cos(p.yaw) * v[0] + Math.sin(p.yaw) * v[2],
+        p.baseY + v[1],
+        origin[1] - Math.sin(p.yaw) * v[0] + Math.cos(p.yaw) * v[2],
+      ];
+      e.camera.position.set(...world(p.camera));
+      e.controls.target.set(...world(p.target));
       e.controls.update();
     }
     if ('street' in test) {

@@ -1,27 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
-import ts from 'typescript';
 import * as THREE from 'three';
-const threeURL = import.meta.resolve('three');
-async function moduleAt(path, replacements = {}) {
-  let src = readFileSync(new URL('../' + path, import.meta.url), 'utf8');
-  src = src
-    .replaceAll("from 'three'", `from '${threeURL}'`)
-    .replaceAll(
-      "from 'three/addons/utils/BufferGeometryUtils.js'",
-      `from '${import.meta.resolve('three/addons/utils/BufferGeometryUtils.js')}'`,
-    );
-  for (const [name, url] of Object.entries(replacements))
-    src = src.replaceAll(`from '${name}'`, `from '${url}'`);
-  const js = ts.transpileModule(src, {
-    compilerOptions: {
-      target: ts.ScriptTarget.ES2022,
-      module: ts.ModuleKind.ESNext,
-    },
-  }).outputText;
-  const url =
-    'data:text/javascript;base64,' + Buffer.from(js).toString('base64');
+import { cityModule } from './helpers/city-modules.mjs';
+async function moduleAt(path) {
+  const url = cityModule(path.replace(/^lib\/city\//, '').replace(/\.ts$/, ''));
   return { url, exports: await import(url) };
 }
 const quality = await moduleAt('lib/city/quality.ts');

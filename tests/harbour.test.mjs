@@ -81,6 +81,45 @@ const e = Object.assign(new Methods(), {
 });
 e.camera.position.set(600, 650, 1500);
 e.landmarks = new THREE.Group();
+// These small, explicit ground fixtures support only the Stage7 entry resolver.
+// They are NOT real terrain and never enter WaterWorld's land/obstacle inputs;
+// this test retains its original harbour collision-data purpose.
+e.terrain = new THREE.Group();
+e.roads = new THREE.Group();
+for (const [lon, lat, height] of [
+  [-123.117146, 49.287449, 16],
+  [-123.1039114, 49.2733499, 4.2],
+]) {
+  const [x, z] = project([lon, lat]),
+    r = 75;
+  const positions = [
+    x - r,
+    height,
+    z - r,
+    x - r,
+    height,
+    z + r,
+    x + r,
+    height,
+    z + r,
+    x - r,
+    height,
+    z - r,
+    x + r,
+    height,
+    z + r,
+    x + r,
+    height,
+    z - r,
+  ];
+  const geometry = new THREE.BufferGeometry().setAttribute(
+    'position',
+    new THREE.Float32BufferAttribute(positions, 3),
+  );
+  const surface = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial());
+  surface.userData.walkSurface = true;
+  e.terrain.add(surface);
+}
 createLandmarks(e);
 e.waterWorld = new WaterWorld(
   land,

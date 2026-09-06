@@ -325,10 +325,11 @@ export class CityEngine {
     prepareCauseway(this);
     this.makeRoads();
     this.makeBuildings();
-    createLandmarks(this);
     createBridgeApproaches(this);
     createNature(this);
     harmonizeGround(this);
+    // Resolve landmark feet and entries from the final rendered ground.
+    createLandmarks(this);
     this.waterWorld = new WaterWorld(
       this.landPolys,
       this.data['context-land'],

@@ -1,0 +1,470 @@
+{
+  "createdAt": "2026-09-06T09:21:30.069Z",
+  "source": "Current canonical exact surface-producing methods, CPU only",
+  "limitation": "Exact current terrain/road/Nature surface-generation methods; textures stubbed, trees omitted; Causeway preparation and Stage 6 clip omitted (outside both landmark sites).",
+  "cpuMs": 5829.313946,
+  "groundIndex": {
+    "sourceMeshes": 7,
+    "triangles": 694
+  },
+  "marineSamples": [
+    {
+      "name": "u-2/d0",
+      "localXZ": [
+        -1.128929236282453,
+        14.783432830458745
+      ],
+      "worldXZ": [
+        797.6137674498982,
+        -149.9036084143467
+      ],
+      "demY": 16.4314671276175,
+      "roadReliefPlus1_18": 17.593600018221732,
+      "terrainTriangleY": 15.999202823216685,
+      "sidewalkTriangleY": null,
+      "natureTriangleY": null,
+      "actualGroundY": 15.999202823216685,
+      "actualLocalY": 1.7792028232166839,
+      "demDifference": -0.43226430440081387
+    },
+    {
+      "name": "u0/d0",
+      "localXZ": [
+        0.8710162499999994,
+        14.768666249999999
+      ],
+      "worldXZ": [
+        799.0392701161293,
+        -151.30644202834665
+      ],
+      "demY": 16.34377427848736,
+      "roadReliefPlus1_18": 17.5111513099635,
+      "terrainTriangleY": 15.857312874629677,
+      "sidewalkTriangleY": null,
+      "natureTriangleY": null,
+      "actualGroundY": 15.857312874629677,
+      "actualLocalY": 1.6373128746296768,
+      "demDifference": -0.4864614038576818
+    },
+    {
+      "name": "u2/d0",
+      "localXZ": [
+        2.8709617362824518,
+        14.753899669541253
+      ],
+      "worldXZ": [
+        800.4647727823603,
+        -152.70927564234657
+      ],
+      "demY": 16.258132218006967,
+      "roadReliefPlus1_18": 17.431687402973512,
+      "terrainTriangleY": 15.71542292604267,
+      "sidewalkTriangleY": null,
+      "natureTriangleY": null,
+      "actualGroundY": 15.71542292604267,
+      "actualLocalY": 1.4954229260426697,
+      "demDifference": -0.5427092919642966
+    },
+    {
+      "name": "u-2/d0.25",
+      "localXZ": [
+        -1.1270834137251098,
+        15.033426016244052
+      ],
+      "worldXZ": [
+        797.7891216516482,
+        -149.7254205810678
+      ],
+      "demY": 16.44558298339988,
+      "roadReliefPlus1_18": 17.607688110267432,
+      "terrainTriangleY": 16.00866111186287,
+      "sidewalkTriangleY": null,
+      "natureTriangleY": null,
+      "actualGroundY": 16.00866111186287,
+      "actualLocalY": 1.7886611118628704,
+      "demDifference": -0.43692187153700957
+    },
+    {
+      "name": "u0/d0.25",
+      "localXZ": [
+        0.8728620725573426,
+        15.018659435785306
+      ],
+      "worldXZ": [
+        799.2146243178793,
+        -151.12825419506774
+      ],
+      "demY": 16.35788602474947,
+      "roadReliefPlus1_18": 17.525221877342794,
+      "terrainTriangleY": 15.866771163275862,
+      "sidewalkTriangleY": null,
+      "natureTriangleY": null,
+      "actualGroundY": 15.866771163275862,
+      "actualLocalY": 1.6467711632758615,
+      "demDifference": -0.4911148614736067
+    },
+    {
+      "name": "u2/d0.25",
+      "localXZ": [
+        2.872807558839795,
+        15.00389285532656
+      ],
+      "worldXZ": [
+        800.6401269841103,
+        -152.53108780906769
+      ],
+      "demY": 16.272239854748882,
+      "roadReliefPlus1_18": 17.445757970352805,
+      "terrainTriangleY": 15.724881214688857,
+      "sidewalkTriangleY": null,
+      "natureTriangleY": null,
+      "actualGroundY": 15.724881214688857,
+      "actualLocalY": 1.5048812146888562,
+      "demDifference": -0.5473586400600254
+    },
+    {
+      "name": "u-2/d1",
+      "localXZ": [
+        -1.12154594605308,
+        15.783405573599971
+      ],
+      "worldXZ": [
+        798.3151842568982,
+        -149.19085708123114
+      ],
+      "demY": 16.487738289367627,
+      "roadReliefPlus1_18": 17.649952386404536,
+      "terrainTriangleY": 16.037035977801427,
+      "sidewalkTriangleY": null,
+      "natureTriangleY": null,
+      "actualGroundY": 16.037035977801427,
+      "actualLocalY": 1.8170359778014262,
+      "demDifference": -0.4507023115662001
+    },
+    {
+      "name": "u0/d1",
+      "localXZ": [
+        0.8783995402293724,
+        15.768638993141225
+      ],
+      "worldXZ": [
+        799.7406869231293,
+        -150.5936906952311
+      ],
+      "demY": 16.400029002211724,
+      "roadReliefPlus1_18": 17.567433579480664,
+      "terrainTriangleY": 15.89514602921442,
+      "sidewalkTriangleY": null,
+      "natureTriangleY": null,
+      "actualGroundY": 15.89514602921442,
+      "actualLocalY": 1.6751460292144191,
+      "demDifference": -0.5048829729973043
+    },
+    {
+      "name": "u2/d1",
+      "localXZ": [
+        2.8783450265118247,
+        15.75387241268248
+      ],
+      "worldXZ": [
+        801.1661895893602,
+        -151.99652430923103
+      ],
+      "demY": 16.314370503658797,
+      "roadReliefPlus1_18": 17.48796967249067,
+      "terrainTriangleY": 15.753256080627416,
+      "sidewalkTriangleY": null,
+      "natureTriangleY": null,
+      "actualGroundY": 15.753256080627416,
+      "actualLocalY": 1.5332560806274156,
+      "demDifference": -0.5611144230313805
+    },
+    {
+      "name": "u-2/d2",
+      "localXZ": [
+        -1.114162655823707,
+        16.783378316741196
+      ],
+      "worldXZ": [
+        799.0166010638982,
+        -148.4781057481156
+      ],
+      "demY": 16.543496754019507,
+      "roadReliefPlus1_18": 17.706304754587343,
+      "terrainTriangleY": 16.074869132386173,
+      "sidewalkTriangleY": null,
+      "natureTriangleY": null,
+      "actualGroundY": 16.074869132386173,
+      "actualLocalY": 1.8548691323861721,
+      "demDifference": -0.4686276216333347
+    },
+    {
+      "name": "u0/d2",
+      "localXZ": [
+        0.8857828304587454,
+        16.768611736282452
+      ],
+      "worldXZ": [
+        800.4421037301292,
+        -149.88093936211556
+      ],
+      "demY": 16.455771028726826,
+      "roadReliefPlus1_18": 17.623715848997822,
+      "terrainTriangleY": 15.932979183799166,
+      "sidewalkTriangleY": null,
+      "natureTriangleY": null,
+      "actualGroundY": 15.932979183799166,
+      "actualLocalY": 1.712979183799165,
+      "demDifference": -0.5227918449276601
+    },
+    {
+      "name": "u2/d2",
+      "localXZ": [
+        2.885728316741198,
+        16.753845155823704
+      ],
+      "worldXZ": [
+        801.8676063963602,
+        -151.2837729761155
+      ],
+      "demY": 16.370096092083855,
+      "roadReliefPlus1_18": 17.54425194200783,
+      "terrainTriangleY": 15.79108923521216,
+      "sidewalkTriangleY": null,
+      "natureTriangleY": null,
+      "actualGroundY": 15.79108923521216,
+      "actualLocalY": 1.5710892352121597,
+      "demDifference": -0.5790068568716951
+    },
+    {
+      "name": "u-2/d3",
+      "localXZ": [
+        -1.1067793655943339,
+        17.783351059882424
+      ],
+      "worldXZ": [
+        799.7180178708982,
+        -147.7653544150001
+      ],
+      "demY": 16.59874252150841,
+      "roadReliefPlus1_18": 17.762657122770147,
+      "terrainTriangleY": 16.112702286970915,
+      "sidewalkTriangleY": null,
+      "natureTriangleY": null,
+      "actualGroundY": 16.112702286970915,
+      "actualLocalY": 1.8927022869709145,
+      "demDifference": -0.48604023453749434
+    },
+    {
+      "name": "u0/d3",
+      "localXZ": [
+        0.8931661206881184,
+        17.768584479423676
+      ],
+      "worldXZ": [
+        801.1435205371291,
+        -149.16818802900002
+      ],
+      "demY": 16.511000358134538,
+      "roadReliefPlus1_18": 17.67999811851498,
+      "terrainTriangleY": 15.970812338383912,
+      "sidewalkTriangleY": null,
+      "natureTriangleY": null,
+      "actualGroundY": 15.970812338383912,
+      "actualLocalY": 1.750812338383911,
+      "demDifference": -0.5401880197506266
+    },
+    {
+      "name": "u2/d3",
+      "localXZ": [
+        2.893111606970571,
+        17.753817898964932
+      ],
+      "worldXZ": [
+        802.5690232033602,
+        -150.57102164299997
+      ],
+      "demY": 16.425308983410375,
+      "roadReliefPlus1_18": 17.60053421152499,
+      "terrainTriangleY": 15.828922389796901,
+      "sidewalkTriangleY": null,
+      "natureTriangleY": null,
+      "actualGroundY": 15.828922389796901,
+      "actualLocalY": 1.6089223897969003,
+      "demDifference": -0.5963865936134738
+    },
+    {
+      "name": "u-2/d5",
+      "localXZ": [
+        -1.0920127851355879,
+        19.783296546164877
+      ],
+      "worldXZ": [
+        801.1208514848981,
+        -146.33985174876904
+      ],
+      "demY": 16.707695964935827,
+      "roadReliefPlus1_18": 17.87536185913575,
+      "terrainTriangleY": 16.1883685961404,
+      "sidewalkTriangleY": null,
+      "natureTriangleY": null,
+      "actualGroundY": 16.1883685961404,
+      "actualLocalY": 1.9683685961403992,
+      "demDifference": -0.5193273687954267
+    },
+    {
+      "name": "u0/d5",
+      "localXZ": [
+        0.9079327011468645,
+        19.76852996570613
+      ],
+      "worldXZ": [
+        802.5463541511291,
+        -147.74268536276898
+      ],
+      "demY": 16.619920925399377,
+      "roadReliefPlus1_18": 17.792562657549297,
+      "terrainTriangleY": 16.046478647553396,
+      "sidewalkTriangleY": null,
+      "natureTriangleY": null,
+      "actualGroundY": 16.046478647553396,
+      "actualLocalY": 1.8264786475533956,
+      "demDifference": -0.5734422778459809
+    },
+    {
+      "name": "u2/d5",
+      "localXZ": [
+        2.9078781874293167,
+        19.753763385247385
+      ],
+      "worldXZ": [
+        803.9718568173602,
+        -149.14551897676893
+      ],
+      "demY": 16.534196674512703,
+      "roadReliefPlus1_18": 17.71309875055931,
+      "terrainTriangleY": 15.904588698966384,
+      "sidewalkTriangleY": null,
+      "natureTriangleY": null,
+      "actualGroundY": 15.904588698966384,
+      "actualLocalY": 1.6845886989663832,
+      "demDifference": -0.6296079755463193
+    }
+  ],
+  "scienceSamples": [
+    {
+      "name": "foot -5.2/-5.85",
+      "localXZ": [
+        37.12121406680802,
+        -59.278398968925515
+      ],
+      "worldXZ": [
+        1786.247788891643,
+        1348.9307330312843
+      ],
+      "demY": 2.3031703176707117,
+      "roadReliefPlus1_18": 3.5822860046300358,
+      "terrainTriangleY": 2.58367278922544,
+      "sidewalkTriangleY": null,
+      "natureTriangleY": null,
+      "actualGroundY": 2.58367278922544,
+      "actualLocalY": -0.8163272107745598,
+      "demDifference": 0.2805024715547284
+    },
+    {
+      "name": "foot -5.2/3.95",
+      "localXZ": [
+        33.7608155537446,
+        -50.0725463830212
+      ],
+      "worldXZ": [
+        1782.8873903785795,
+        1358.1365856171885
+      ],
+      "demY": 1.7533083059955432,
+      "roadReliefPlus1_18": 3.1088808823655443,
+      "terrainTriangleY": 1.9447333551313803,
+      "sidewalkTriangleY": null,
+      "natureTriangleY": null,
+      "actualGroundY": 1.9447333551313803,
+      "actualLocalY": -1.4552666448686196,
+      "demDifference": 0.19142504913583713
+    },
+    {
+      "name": "foot 5.2/-5.85",
+      "localXZ": [
+        46.890690280420756,
+        -55.712261771388825
+      ],
+      "worldXZ": [
+        1796.0172651052558,
+        1352.496870228821
+      ],
+      "demY": 3.177652201294732,
+      "roadReliefPlus1_18": 4.455955767002265,
+      "terrainTriangleY": 3.295649875682764,
+      "sidewalkTriangleY": null,
+      "natureTriangleY": null,
+      "actualGroundY": 3.295649875682764,
+      "actualLocalY": -0.10435012431723578,
+      "demDifference": 0.11799767438803199
+    },
+    {
+      "name": "foot 5.2/3.95",
+      "localXZ": [
+        43.53029176735733,
+        -46.50640918548451
+      ],
+      "worldXZ": [
+        1792.6568665921923,
+        1361.7027228147253
+      ],
+      "demY": 2.7678906554473324,
+      "roadReliefPlus1_18": 4.000520412170427,
+      "terrainTriangleY": 2.616727261687609,
+      "sidewalkTriangleY": null,
+      "natureTriangleY": null,
+      "actualGroundY": 2.616727261687609,
+      "actualLocalY": -0.783272738312391,
+      "demDifference": -0.15116339375972343
+    },
+    {
+      "name": "pipe -6.12",
+      "localXZ": [
+        32.91373754829778,
+        -50.43498100152259
+      ],
+      "worldXZ": [
+        1782.0403123731328,
+        1357.7741509986872
+      ],
+      "demY": 1.6727264872331047,
+      "roadReliefPlus1_18": 3.0535121604887703,
+      "terrainTriangleY": 1.9183863705595174,
+      "sidewalkTriangleY": null,
+      "natureTriangleY": null,
+      "actualGroundY": 1.9183863705595174,
+      "actualLocalY": -1.4816136294404825,
+      "demDifference": 0.24565988332641275
+    },
+    {
+      "name": "pipe 6.12",
+      "localXZ": [
+        44.411659553549704,
+        -46.23791183826786
+      ],
+      "worldXZ": [
+        1793.5382343783847,
+        1361.971220161942
+      ],
+      "demY": 2.865971812268656,
+      "roadReliefPlus1_18": 4.105893703378251,
+      "terrainTriangleY": 2.670641276669829,
+      "sidewalkTriangleY": null,
+      "natureTriangleY": null,
+      "actualGroundY": 2.670641276669829,
+      "actualLocalY": -0.7293587233301708,
+      "demDifference": -0.19533053559882685
+    }
+  ]
+}

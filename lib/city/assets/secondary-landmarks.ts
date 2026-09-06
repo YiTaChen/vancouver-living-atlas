@@ -6,6 +6,11 @@
  */
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+import {
+  createMarineGroundEntrance,
+  marineGroundBayOverlapsEntry,
+  marineGroundTrimRanges,
+} from './marine-entry';
 
 type V3 = readonly [number, number, number];
 type V2 = readonly [number, number];
@@ -960,7 +965,10 @@ function insetMarine(ring: Ring): V2[] {
   return ring.map(([x, z]) => [x * 0.975, z * 0.975]);
 }
 
-export function createMarineBuilding(detail: boolean): THREE.Group {
+export function createMarineBuilding(
+  detail: boolean,
+  entryOptions: { thresholdY?: number } = {},
+): THREE.Group {
   const brick = new Batch('Marine Building / variegated brick masses', {
     roughness: 0.9,
     metalness: 0,
@@ -996,8 +1004,9 @@ export function createMarineBuilding(detail: boolean): THREE.Group {
     metalness: 0.57,
   });
   const outline = insetMarine(MARINE_OUTLINE);
-  stone.prism(outline, 0, 1.35, 0x747b75);
-  brick.prism(outline, 1.35, 8, 0x997454);
+  // Replaces the base shell plus the lower front tower wall. The entry threshold
+  // uses the existing street elevation; the building placement/base is unchanged.
+  const entrance = createMarineGroundEntrance(detail, entryOptions);
 
   const facade = (
     ring: Ring,
@@ -1013,29 +1022,31 @@ export function createMarineBuilding(detail: boolean): THREE.Group {
         (bottom + top) / 2,
         a[1] + (t[1] * length) / 2,
       ];
-      // All ornament projects less than the inset margin; no neighbouring overhangs.
-      stone.box(
-        [length, 0.48, 0.18],
-        [middle[0], top - 0.2, middle[2]],
-        0xd3bb90,
-        yaw,
-      );
-      stone.box(
-        [length, 0.2, 0.24],
-        [middle[0], top - 1.3, middle[2]],
-        0xb59b74,
-        yaw,
-      );
+      // Ground cornices stop at the raised entrance surround.
+      const trimRanges =
+        level === 0 ? marineGroundTrimRanges(a, _b) : [[0, length]];
+      for (const [from, to] of trimRanges) {
+        const tx = a[0] + (t[0] * (from + to)) / 2;
+        const tz = a[1] + (t[1] * (from + to)) / 2;
+        stone.box([to - from, 0.48, 0.18], [tx, top - 0.2, tz], 0xd3bb90, yaw);
+        stone.box([to - from, 0.2, 0.24], [tx, top - 1.3, tz], 0xb59b74, yaw);
+      }
       for (let bay = 0; bay < bays; bay++) {
         const px = a[0] + t[0] * (bay + 0.5) * pitch + normal[0] * 0.065;
         const pz = a[1] + t[1] * (bay + 0.5) * pitch + normal[1] * 0.065;
+        const entryBay = marineGroundBayOverlapsEntry(px, pz, pitch / 2);
+        if (level === 0 && entryBay) continue;
         // Tall, creamy ribs are the main reading at city scale.
         if (length > 2.5) {
           const ribX = px - t[0] * pitch * 0.45,
             ribZ = pz - t[1] * pitch * 0.45;
+          const ribBottom =
+            level === 2 && entryBay
+              ? Math.max(bottom, entrance.userData.upperCutY)
+              : bottom;
           stone.box(
-            [Math.min(0.38, pitch * 0.13), top - bottom - 0.5, 0.18],
-            [ribX, middle[1], ribZ],
+            [Math.min(0.38, pitch * 0.13), top - ribBottom - 0.5, 0.18],
+            [ribX, (ribBottom + top) / 2, ribZ],
             bay % 3 === 0 ? 0xd1ba91 : 0xb89b72,
             yaw,
           );
@@ -1046,6 +1057,14 @@ export function createMarineBuilding(detail: boolean): THREE.Group {
         const windowHeight = Math.min(2.25, floorPitch - 0.35);
         for (let floor = 0; floor < floors; floor++) {
           const y = bottom + 0.5 + (floor + 0.5) * floorPitch;
+          // Part index1 is facade level2. Its low row and vertical ribs would
+          // otherwise cross the raised arch despite the wall aperture.
+          if (
+            level === 2 &&
+            entryBay &&
+            y - windowHeight / 2 < entrance.userData.upperCutY
+          )
+            continue;
           const batch =
             (floor * 11 + bay * 7 + edge * 3 + level) % 17 < 4 ? lit : glass;
           const width = Math.max(0.45, Math.min(pitch - 0.7, 2.35));
@@ -1091,7 +1110,7 @@ export function createMarineBuilding(detail: boolean): THREE.Group {
     const ring = insetMarine(part.ring);
     brick.prism(
       ring,
-      part.bottom,
+      i === 1 ? entrance.userData.upperCutY : part.bottom,
       part.top,
       [0x987355, 0x936d50, 0x997454, 0x98714e, 0xa78058, 0xac885e][i],
     );
@@ -1136,11 +1155,35 @@ export function createMarineBuilding(detail: boolean): THREE.Group {
       copper.beam([p[0], 92.08, p[1]], [cx, 96.62, cz], 0.045, 0x6b9480, 4);
     copper.cylinder(0.22, 0.22, 0.22, [cx, 97.8, cz], 0xc5ae71, 12);
   }
-  return complete(
+  const result = complete(
     'Marine Building — original Art Deco interpretation',
     detail,
     [brick, stone, ornaments, glass, lit, copper],
     SECONDARY_LANDMARK_PLACEMENTS.marineBuilding,
     [outline],
   );
+  result.add(entrance);
+  // LandmarkDetail.registerNight reads only the top-level list.
+  result.userData.nightMaterials.push(...entrance.userData.nightMaterials);
+  result.userData.entryLiftY = entrance.userData.entryLiftY;
+  result.userData.thresholdY = entrance.userData.thresholdY;
+  result.userData.upperCutY = entrance.userData.upperCutY;
+  const bounds = new THREE.Box3().setFromObject(result);
+  result.userData.bounds = {
+    min: bounds.min.toArray(),
+    max: bounds.max.toArray(),
+  };
+  let triangles = 0,
+    drawCalls = 0;
+  result.traverse((object) => {
+    if (object instanceof THREE.Mesh) {
+      drawCalls++;
+      triangles +=
+        (object.geometry.index?.count ??
+          object.geometry.getAttribute('position').count) / 3;
+    }
+  });
+  result.userData.triangles = triangles;
+  result.userData.drawCalls = drawCalls;
+  return result;
 }

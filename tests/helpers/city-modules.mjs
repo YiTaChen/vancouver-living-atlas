@@ -1,7 +1,12 @@
 import { readFileSync } from 'node:fs';
+import { posix } from 'node:path';
 import ts from 'typescript';
 const cache = new Map();
+// Cache canonical paths so imports within assets/ resolve beside their importer,
+// while ../geo and equivalent ./assets/../geo share one module instance.
+const normalize = (name) => posix.normalize(name).replace(/\.ts$/, '');
 export function cityModule(name) {
+  name = normalize(name);
   if (cache.has(name)) return cache.get(name);
   if (name.endsWith('.json')) {
     const data = JSON.parse(
@@ -27,8 +32,8 @@ export function cityModule(name) {
     const url =
       id === 'three' || id.startsWith('three/')
         ? import.meta.resolve(id)
-        : id.startsWith('./')
-          ? cityModule(id.slice(2))
+        : id.startsWith('./') || id.startsWith('../')
+          ? cityModule(posix.join(posix.dirname(name), id))
           : id;
     return `from '${url}'`;
   });
