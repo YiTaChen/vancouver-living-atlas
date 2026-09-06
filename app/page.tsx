@@ -1002,6 +1002,43 @@ export default function Home() {
             </span>
             <strong>{clockLabel}</strong>
           </div>
+          <label className="clock-field-label">{tr('timeSeek')}</label>
+          <Slider
+            aria-label={tr('timeSeek')}
+            min={0}
+            max={1439}
+            step={1}
+            value={[Math.floor(clock.hour * 60)]}
+            onValueChange={(value) =>
+              changeClock({
+                hour: (Array.isArray(value) ? value[0] : value) / 60,
+              })
+            }
+          />
+          <div className="clock-range">
+            <span>00:00</span>
+            <span>12:00</span>
+            <span>23:59</span>
+          </div>
+          <div className="time-presets">
+            {[
+              { label: tr('morning'), hour: 8 },
+              { label: tr('afternoon'), hour: 15 },
+              { label: tr('sunset'), hour: 18 },
+              { label: tr('afterDark'), hour: 22 },
+            ].map((preset) => (
+              <button
+                key={preset.hour}
+                onClick={() => changeClock({ hour: preset.hour })}
+              >
+                {preset.label}
+              </button>
+            ))}
+          </div>
+          <p className="settings-note">
+            {tr(clock.running ? 'timeFlowHint' : 'timeFixedHint')}
+          </p>
+          <div className="settings-divider" />
           <label className="layer-row time-flow-switch">
             <span>{tr('timeHide')}</span>
             <Switch
@@ -1070,43 +1107,6 @@ export default function Home() {
             {tr('timeRateHint', { minutes: number(clock.rate) })}
             <br />
             {tr('timeDayLength', { minutes: number(1440 / clock.rate) })}
-          </p>
-          <div className="settings-divider" />
-          <label className="clock-field-label">{tr('timeSeek')}</label>
-          <Slider
-            aria-label={tr('timeSeek')}
-            min={0}
-            max={1439}
-            step={1}
-            value={[Math.floor(clock.hour * 60)]}
-            onValueChange={(value) =>
-              changeClock({
-                hour: (Array.isArray(value) ? value[0] : value) / 60,
-              })
-            }
-          />
-          <div className="clock-range">
-            <span>00:00</span>
-            <span>12:00</span>
-            <span>23:59</span>
-          </div>
-          <div className="time-presets">
-            {[
-              { label: tr('morning'), hour: 8 },
-              { label: tr('afternoon'), hour: 15 },
-              { label: tr('sunset'), hour: 18 },
-              { label: tr('afterDark'), hour: 22 },
-            ].map((preset) => (
-              <button
-                key={preset.hour}
-                onClick={() => changeClock({ hour: preset.hour })}
-              >
-                {preset.label}
-              </button>
-            ))}
-          </div>
-          <p className="settings-note">
-            {tr(clock.running ? 'timeFlowHint' : 'timeFixedHint')}
           </p>
           <p className="clock-background-note">
             {tr('timeBackgroundHint')} {tr('simulatedNote')}
