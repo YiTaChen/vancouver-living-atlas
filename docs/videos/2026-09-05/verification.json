@@ -1,0 +1,68 @@
+{
+  "passed": true,
+  "video": "project-intro.mp4",
+  "expected": {
+    "width": 1920,
+    "height": 1080,
+    "codec": "h264",
+    "fps": 30,
+    "duration_seconds": 30,
+    "decoded_frames": 900
+  },
+  "actual": {
+    "codec": "h264",
+    "width": 1920,
+    "height": 1080,
+    "fps": 30.0,
+    "duration_seconds": 30.0,
+    "decoded_frames": 900
+  },
+  "checks": {
+    "full_decode": true,
+    "h264": true,
+    "1920x1080": true,
+    "30_fps": true,
+    "duration": true,
+    "decoded_frame_count": true,
+    "no_black_intervals": true,
+    "faststart": true
+  },
+  "black_intervals": [],
+  "top_level_boxes": [
+    {
+      "type": "ftyp",
+      "offset": 0,
+      "size": 32
+    },
+    {
+      "type": "moov",
+      "offset": 32,
+      "size": 12260
+    },
+    {
+      "type": "free",
+      "offset": 12292,
+      "size": 8
+    },
+    {
+      "type": "mdat",
+      "offset": 12300,
+      "size": 49151261
+    }
+  ],
+  "ffmpeg_exit_code": 0,
+  "sha256": "05c40ed1f6660274757dd169432b7ec4620a429f8fce87def59799d00c151a71",
+  "browser_playback": {
+    "duration": 30,
+    "time": 30,
+    "ended": true,
+    "paused": true,
+    "readyState": 4,
+    "videoWidth": 1920,
+    "videoHeight": 1080,
+    "error": null,
+    "test_duration": 2,
+    "test_played_to_end": true,
+    "capture_browser_warnings_or_errors": []
+  }
+}

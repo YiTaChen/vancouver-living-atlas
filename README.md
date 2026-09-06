@@ -8,6 +8,10 @@ The five-language application is publicly hosted on Firebase Hosting. This repos
 
 ![Original Vancouver downtown render](docs/images/downtown.png)
 
+## Project introduction video
+
+Watch or download the [new 30-second project introduction](docs/videos/2026-09-05/README.md), captured from the running application at 1080p / 30 fps. The finished H.264 MP4, reproducible production package and validation report are included.
+
 ## Languages
 
 English is the default for a first visit. The header language menu also offers Français, Español, 中文（繁體） and 中文（简体）. A selection updates the interface and map labels without resetting the scene, and is remembered on that browser.
