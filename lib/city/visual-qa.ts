@@ -510,6 +510,23 @@ export function installVisualQA(e: CityEngine) {
       e.navigation?.keys.clear();
     }
   }
+  button('Drive speeding test', () => {
+    if(!e.navigation)return;
+    e.applySettings({...e.settings,mode:'drive',autoRotate:false});
+    e.navigation.setMode('drive','W GEORGIA');
+    e.navigation.keys.add('w');
+    e.onTravelResume('drive');
+    e.setClock({hour:14,running:false});
+  });
+  button('Police scene test', () => {
+    if(!e.navigation)return;
+    e.applySettings({...e.settings,mode:'drive',autoRotate:false});
+    e.navigation.setMode('drive','ROBSON');
+    e.navigation.trafficStop.state.speeding=5;
+    e.navigation.speed=28;
+    e.onTravelResume('drive');
+    e.setClock({hour:14,running:false});
+  });
   button('Save startup timing', () => {
     if (running) return;
     const measurement = e.startupQA?.snapshot();

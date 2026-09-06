@@ -2431,3 +2431,6 @@ a {
 
 /* Keep the desktop local map clear of the tools needed to reach interiors. */
 .atlas:not(.touch-ui) .map-inset { right: 94px; }
+
+.traffic-stop-caption {position:absolute;z-index:45;top:170px;left:50%;transform:translateX(-50%);padding:14px 22px;border:1px solid #7896ac;border-radius:14px;color:#fff;text-align:center;pointer-events:none;max-width:calc(100% - 36px);font-size:18px;}
+@media(max-width:1024px){.traffic-stop-caption{top:124px;font-size:15px;padding:10px 16px;}}

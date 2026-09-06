@@ -462,7 +462,7 @@ function drive(
     group,
     [-0.09, -0.31, -1.008],
     0.065,
-    120,
+    roadster ? 260 : 120,
     true,
   );
   gauge(p, palette, group, [0.082, -0.31, -1.008], 0.053, 8, false);

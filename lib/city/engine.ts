@@ -1335,6 +1335,7 @@ export class CityEngine {
       this.stats.renderWidth = this.renderer.domElement.width;
       this.stats.renderHeight = this.renderer.domElement.height;
       this.stats.fps = Math.round((this.frames * 1000) / (time - this.fpsAt));
+      this.stats.trafficStop = this.navigation?.trafficStop?.caption || '';
       this.stats.speed = Math.round((this.navigation?.speed || 0) * 3.6);
       this.stats.clock = this.clock.snapshot();
       this.stats.heading = this.controls.getAzimuthalAngle();

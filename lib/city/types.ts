@@ -23,6 +23,7 @@ export interface SceneStats {
   elevation: number;
   distance: number;
   speed?: number;
+  trafficStop?: string;
   heading?: number;
   lon?: number;
   lat?: number;

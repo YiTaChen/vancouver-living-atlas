@@ -1,4 +1,6 @@
 import * as THREE from 'three';
+import { TrafficStop } from './traffic-stop';
+import { ROADSTER_ACCELERATION, ROADSTER_TOP_SPEED } from './traffic-stop-state';
 import { safeTouchAxis } from './touch-input';
 import { bridgeSurface } from './bridges';
 import { trimRoad } from './road-trim';
@@ -73,6 +75,7 @@ export class StreetNavigation {
     return this.carModel === 'roadster' ? 1.2 : 1.45;
   }
   boat: BoatController;
+  trafficStop: TrafficStop;
   cameraDistances = { ...TRAVEL_DEFAULT_DISTANCE };
   renderedDistance = 0;
   interiors: Record<'drive' | 'boat', InteriorView> = {
@@ -93,6 +96,7 @@ export class StreetNavigation {
   collisions = new Map<string, number[][][][]>();
   constructor(public e: CityEngine) {
     this.boat = new BoatController(e);
+    this.trafficStop = new TrafficStop(this);
     this.walker.group.visible = false;
     this.walker.group.traverse((object) => {
       if (object instanceof THREE.Mesh) object.castShadow = false;
@@ -367,12 +371,14 @@ export class StreetNavigation {
     this.e.onTravelView?.(view);
   }
   setInterior(view: InteriorView) {
+    this.trafficStop?.cancel();
     if (this.mode !== 'drive' && this.mode !== 'boat') return;
     this.interiors[this.mode] = view;
     this.updateCockpit(0, 0);
     this.notifyCamera();
   }
   zoom(factor: number) {
+    this.trafficStop?.cancel();
     if (this.mode === 'orbit') return;
     const next = zoomTravel(this.cameraDistance, factor);
     if (next.exit) {
@@ -437,6 +443,7 @@ export class StreetNavigation {
       }
     }
     if (!this.dragging) return;
+    this.trafficStop?.cancel();
     if (this.mode === 'boat')
       this.boat.lookYaw -= (ev.clientX - this.last[0]) * 0.004;
     else if (this.mode === 'drive')
@@ -551,6 +558,7 @@ export class StreetNavigation {
     );
   }
   startAt(mode: TravelMode, point: PlacementPoint) {
+    this.trafficStop?.cancel();
     this.e.travelReturn?.invalidate(true);
     this.returnBlend = null;
     this.driverMotion.reset();
@@ -621,6 +629,7 @@ export class StreetNavigation {
     return true;
   }
   switchStreetMode(mode: 'orbit' | TravelMode) {
+    if(mode!==this.mode) this.trafficStop?.cancel();
     if(mode === 'drive' && this.e.interiors?.clear(this.position.x,this.position.z,'drive') === false) return false;
     if (!canSwitchStreetMode(this.mode, mode)) return false;
     if (mode !== this.mode) {
@@ -645,6 +654,7 @@ export class StreetNavigation {
     return true;
   }
   setMode(mode: 'orbit' | TravelMode, streetName?: string) {
+    this.trafficStop?.cancel();
     if (mode === this.mode && !streetName) return;
     this.e.travelReturn?.invalidate(true);
     this.returnBlend = null;
@@ -792,6 +802,7 @@ export class StreetNavigation {
     this.e.renderer.domElement.focus();
   }
   step(direction: string) {
+    if(this.trafficStop?.active) return;
     if (this.mode === 'orbit') return;
     this.e.renderer.domElement.focus({ preventScroll: true });
     if (this.mode === 'boat') {
@@ -857,11 +868,13 @@ export class StreetNavigation {
   update(dt: number) {
     if (this.mode === 'orbit') return;
     dt = Math.max(0, Math.min(0.05, dt));
+    this.trafficStop?.update(dt);
+    const stopped = this.trafficStop?.active;
     this.renderedDistance = this.snapCamera
       ? this.cameraDistance
       : THREE.MathUtils.lerp(
           this.renderedDistance,
-          this.cameraDistance,
+          stopped ? 22 : this.cameraDistance,
           1 - Math.exp(-dt * 12),
         );
     const before = this.position.clone();
@@ -906,13 +919,13 @@ export class StreetNavigation {
     }
     if (this.mode === 'drive') {
       this.speed = THREE.MathUtils.clamp(
-        this.speed + (this.touchBrake ? 0 : forward) * dt * 8,
+        stopped ? Math.max(0,this.speed-12*dt) : this.speed + (this.touchBrake ? 0 : forward) * dt * (this.carModel === 'roadster' ? ROADSTER_ACCELERATION : 8),
         -5,
-        21,
+        this.carModel === 'roadster' ? ROADSTER_TOP_SPEED : 21,
       );
-      if (!forward) this.speed *= Math.pow(0.78, dt);
-      if (pressed(' ') || this.touchBrake) this.speed *= Math.pow(0.007, dt);
-      this.yaw += turn * dt * (0.55 + Math.abs(this.speed) * 0.026);
+      if (!stopped && !forward) this.speed *= Math.pow(0.78, dt);
+      if (!stopped && (pressed(' ') || this.touchBrake)) this.speed *= Math.pow(0.007, dt);
+      if (!stopped) this.yaw += turn * dt * (0.55 + Math.min(30,Math.abs(this.speed)) * 0.026);
       this.move(
         Math.sin(this.yaw) * this.speed * dt,
         Math.cos(this.yaw) * this.speed * dt,
@@ -1031,7 +1044,7 @@ export class StreetNavigation {
     this.e.camera.fov = THREE.MathUtils.lerp(58, 48, blend);
     this.e.camera.updateProjectionMatrix();
     this.finishReturnBlend(dt);
-    this.updateCockpit(dt, turn);
+    this.updateCockpit(dt, stopped ? 0 : turn);
     this.notifyCamera();
     this.snapCamera = false;
   }
@@ -1184,6 +1197,7 @@ export class StreetNavigation {
   }
 
   destroy() {
+    this.trafficStop?.destroy();
     window.removeEventListener('keydown', this.keyDown);
     window.removeEventListener('keyup', this.keyUp);
     window.removeEventListener('blur', this.blur);

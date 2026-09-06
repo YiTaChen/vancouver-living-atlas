@@ -382,6 +382,8 @@ const landmarkUrl =
   ).toString('base64');
 const { StreetNavigation } = await import(
   compile('navigation', {
+    './traffic-stop': cityModule('traffic-stop'),
+    './traffic-stop-state': cityModule('traffic-stop-state'),
     three: import.meta.resolve('three'),
     './geo': geoUrl,
     './bridges': bridgeUrl,

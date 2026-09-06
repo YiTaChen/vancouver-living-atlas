@@ -54,10 +54,12 @@ export function advanceBoat(
       rz = -Math.sin(state.yaw);
     const forward = state.vx * fx + state.vz * fz,
       side = state.vx * rx + state.vz * rz;
+    // Double the longitudinal response, retaining the same equilibrium cruise speed.
     const acceleration =
-      state.throttle * (state.throttle >= 0 ? 1.65 : 0.9) -
-      forward * 0.065 -
-      forward * Math.abs(forward) * 0.028;
+      2 *
+      (state.throttle * (state.throttle >= 0 ? 1.65 : 0.9) -
+        forward * 0.065 -
+        forward * Math.abs(forward) * 0.028);
     state.vx += (fx * acceleration - rx * side * 1.35) * h;
     state.vz += (fz * acceleration - rz * side * 1.35) * h;
     const authority = clamp(forward, -2.7, 7.8);
