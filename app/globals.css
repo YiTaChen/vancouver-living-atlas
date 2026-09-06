@@ -2068,3 +2068,332 @@ a {
     min-height: 44px;
   }
 }
+
+/* Touch-first HUD. Explicit overrides retire the earlier stacked mobile cards. */
+.mobile-actions,
+.mobile-zoom,
+.mobile-travel-sheet,
+.touch-drive-controls {
+  display: none;
+}
+.atlas.touch-ui .masthead {
+  height: 56px;
+  min-height: 0;
+  padding: 8px 12px;
+  gap: 8px;
+}
+.atlas.touch-ui .masthead .brand-mark {
+  width: 30px;
+  height: 30px;
+}
+.atlas.touch-ui .brand {
+  font-size: 14px;
+}
+.atlas.touch-ui .brand-sub {
+  font-size: 8px;
+}
+.atlas.touch-ui .header-meta {
+  display: none;
+}
+.atlas.touch-ui .mode-switch {
+  top: 66px;
+  left: 12px;
+  right: 12px;
+  width: fit-content;
+  max-width: calc(100% - 24px);
+  transform: none;
+  padding: 4px;
+}
+.atlas.touch-ui .mode-pill {
+  min-height: 40px;
+  padding: 8px 11px;
+  font-size: 12px;
+  gap: 5px;
+}
+.atlas.touch-ui .mode-pill svg {
+  width: 17px;
+  height: 17px;
+}
+.atlas.touch-ui .street-controls,
+.atlas.touch-ui .travel-camera-card,
+.atlas.touch-ui .bottom-bar,
+.atlas.touch-ui .view-caption {
+  display: none !important;
+}
+.atlas.touch-ui .map-inset {
+  display: none !important;
+}
+.atlas.touch-ui.mobile-map-open:not(.placement-mode) .map-inset {
+  display: block !important;
+  top: 116px !important;
+  right: 64px !important;
+  left: auto !important;
+  bottom: auto !important;
+  width: min(244px, calc(100vw - 88px));
+  max-height: calc(100dvh - 200px);
+  overflow: auto;
+  padding: 10px;
+  z-index: 18;
+}
+.atlas.touch-ui .map-inset .mini-title {
+  padding-right: 24px;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+.atlas.touch-ui .map-inset canvas {
+  aspect-ratio: 1.45;
+}
+.atlas.touch-ui .map-inset .mini-caption {
+  display: none;
+}
+.touch-map-close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 44px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+}
+.atlas.touch-ui .nav-tools {
+  display: none;
+}
+.atlas.touch-ui.mobile-tools-open .nav-tools {
+  display: flex;
+  top: 116px;
+  right: 66px;
+  z-index: 18;
+  max-height: calc(100dvh - 180px);
+  overflow-y: auto;
+}
+.atlas.touch-ui .nav-tools button {
+  min-height: 44px;
+  flex-shrink: 0;
+}
+.atlas.touch-ui .mobile-actions {
+  display: flex;
+  position: absolute;
+  z-index: 19;
+  top: 116px;
+  right: max(10px, env(safe-area-inset-right));
+  gap: 6px;
+  flex-direction: column;
+}
+.mobile-actions button {
+  width: 44px;
+  min-height: 44px;
+  border-radius: 13px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #dce7dd;
+}
+.mobile-actions button[aria-expanded='true'] {
+  color: #142e34;
+  background: #dce7a2;
+}
+.mobile-clock span {
+  font-size: 10px;
+  line-height: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.atlas.touch-ui .mobile-zoom {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: max(10px, env(safe-area-inset-right));
+  bottom: max(22px, env(safe-area-inset-bottom));
+  border-radius: 15px;
+  z-index: 15;
+  overflow: hidden;
+}
+.mobile-zoom button {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+}
+.mobile-zoom button + button {
+  border-top: 1px solid #ffffff22;
+}
+.atlas.touch-ui .mobile-travel-sheet {
+  display: block;
+  position: absolute;
+  z-index: 18;
+  top: 116px;
+  right: 64px;
+  width: min(278px, calc(100vw - 88px));
+  max-height: calc(100dvh - 156px);
+  overflow: auto;
+  border-radius: 15px;
+  padding: 12px;
+}
+.touch-sheet-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 14px;
+}
+.touch-sheet-title button {
+  min-width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+}
+.mobile-travel-sheet .choose-start {
+  margin-top: 12px;
+  padding: 10px;
+  font-size: 13px;
+  min-height: 44px;
+}
+.mobile-travel-sheet p {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #b7cdca;
+  margin: 10px 0 0;
+}
+.mobile-travel-sheet .car-options button,
+.mobile-travel-sheet .interior-options button {
+  min-height: 44px;
+}
+.atlas.touch-ui .touch-drive-controls {
+  display: block;
+  position: absolute;
+  z-index: 16;
+  left: max(18px, env(safe-area-inset-left));
+  bottom: max(25px, env(safe-area-inset-bottom));
+  touch-action: none;
+}
+.travel-joystick {
+  width: 122px;
+  height: 122px;
+  border-radius: 50%;
+  border: 1px solid #e4f3dc55;
+  background: #102d354d;
+  box-shadow: inset 0 0 0 15px #163b3f26;
+  position: relative;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  outline-offset: 3px;
+}
+.travel-joystick[data-active='true'] {
+  border-color: #deebb5;
+  background: #17363c80;
+}
+.stick-knob {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  left: 36px;
+  top: 36px;
+  border: 1px solid #e9f1d5a8;
+  background: #dce7a294;
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow: 0 3px 16px #0003;
+}
+.stick-cross::before,
+.stick-cross::after {
+  content: '';
+  position: absolute;
+  background: #d5e8df30;
+  left: 24px;
+  right: 24px;
+  top: 60px;
+  height: 1px;
+}
+.stick-cross::after {
+  transform: rotate(90deg);
+}
+.touch-brake {
+  position: absolute;
+  left: 136px;
+  bottom: 0;
+  min-width: 64px;
+  min-height: 46px;
+  padding: 8px;
+  border-radius: 14px;
+  font-size: 12px;
+  touch-action: none;
+}
+.atlas.touch-ui.placement-mode .explore-panel,
+.atlas.touch-ui.placement-mode .map-inset,
+.atlas.touch-ui.placement-mode .view-caption {
+  display: none !important;
+}
+.atlas.touch-ui.placement-mode .mobile-zoom {
+  bottom: auto;
+  top: 168px;
+}
+.atlas.touch-ui .placement-panel {
+  display: none !important;
+}
+.mobile-cancel-placement {
+  position: absolute;
+  z-index: 20;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: max(22px, env(safe-area-inset-bottom));
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 16px;
+  border-radius: 24px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.atlas.touch-ui .settings-panel {
+  top: 116px;
+  right: 64px;
+  width: min(300px, calc(100vw - 88px));
+  max-height: calc(100dvh - 140px);
+  padding: 14px;
+  z-index: 20;
+}
+.atlas.touch-ui .scene canvas {
+  touch-action: none;
+}
+@media (max-height: 540px) {
+  .atlas.touch-ui .masthead {
+    height: 46px;
+  }
+  .atlas.touch-ui .mode-switch {
+    top: 52px;
+  }
+  .atlas.touch-ui .mobile-actions {
+    top: 100px;
+    flex-direction: row;
+  }
+  .atlas.touch-ui .mobile-actions button {
+    width: 40px;
+    min-height: 40px;
+  }
+  .atlas.touch-ui .mobile-travel-sheet,
+  .atlas.touch-ui.mobile-map-open:not(.placement-mode) .map-inset,
+  .atlas.touch-ui .settings-panel {
+    top: 146px !important;
+    right: 12px !important;
+    max-height: calc(100dvh - 158px);
+  }
+  .atlas.touch-ui.mobile-tools-open .nav-tools {
+    top: 146px;
+    right: 12px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: min(320px, calc(100vw - 170px));
+    max-height: calc(100dvh - 158px);
+  }
+  .atlas.touch-ui .placement-panel {
+    max-width: min(440px, calc(100vw - 80px));
+    max-height: 42dvh;
+  }
+  .atlas.touch-ui .touch-drive-controls {
+    bottom: max(12px, env(safe-area-inset-bottom));
+  }
+}
+
+.atlas.touch-ui.clean .ui-chrome { display: none !important; }

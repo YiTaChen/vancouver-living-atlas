@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { safeTouchAxis } from './touch-input';
 import { bridgeSurface } from './bridges';
 import { trimRoad } from './road-trim';
 import {
@@ -35,6 +36,13 @@ import {
 export class StreetNavigation {
   mode: 'orbit' | TravelMode = 'orbit';
   keys = new Set<string>();
+  touchX = 0;
+  touchY = 0;
+  touchBrake = false;
+  setTouchAxes(x: number, y: number) {
+    this.touchX = safeTouchAxis(x);
+    this.touchY = safeTouchAxis(y);
+  }
   position = new THREE.Vector3();
   yaw = 0;
   driveLookYaw = 0;
@@ -312,6 +320,8 @@ export class StreetNavigation {
   };
   blur = () => {
     this.keys.clear();
+    this.setTouchAxes(0, 0);
+    this.touchBrake = false;
     this.dragging = false;
     this.touches.clear();
     this.pinchDistance = 0;
@@ -442,6 +452,13 @@ export class StreetNavigation {
     this.last = [ev.clientX, ev.clientY];
   };
   pointerUp = (ev: PointerEvent) => {
+    // UI-owned fingers (stick/brake) do not end an independent look or pinch.
+    if (
+      ev.pointerType === 'touch' &&
+      !this.touches.has(ev.pointerId) &&
+      !this.blockedPointers.has(ev.pointerId)
+    )
+      return;
     if (this.blockedPointers.delete(ev.pointerId))
       ev.stopImmediatePropagation();
     this.touches.delete(ev.pointerId);
@@ -848,12 +865,22 @@ export class StreetNavigation {
     this.car.visible = this.mode === 'drive' && this.renderedDistance > 3.5;
     this.e.camera.up.set(0, 1, 0);
     const pressed = (...s: string[]) => s.some((k) => this.keys.has(k)),
-      forward =
-        Number(pressed('w', 'arrowup')) - Number(pressed('s', 'arrowdown')),
-      turn =
-        Number(pressed('a', 'arrowleft')) - Number(pressed('d', 'arrowright'));
+      forward = safeTouchAxis(
+        Number(pressed('w', 'arrowup')) -
+          Number(pressed('s', 'arrowdown')) +
+          this.touchY,
+      ),
+      turn = safeTouchAxis(
+        Number(pressed('a', 'arrowleft')) -
+          Number(pressed('d', 'arrowright')) -
+          (this.mode === 'walk' ? 0 : this.touchX),
+      );
     if (this.mode === 'boat') {
-      const input = { thrust: forward, turn, neutral: pressed(' ') };
+      const input = {
+        thrust: forward,
+        turn,
+        neutral: pressed(' ') || this.touchBrake,
+      };
       this.boat.update(
         dt,
         input,
@@ -871,9 +898,13 @@ export class StreetNavigation {
       return;
     }
     if (this.mode === 'drive') {
-      this.speed = THREE.MathUtils.clamp(this.speed + forward * dt * 8, -5, 21);
+      this.speed = THREE.MathUtils.clamp(
+        this.speed + (this.touchBrake ? 0 : forward) * dt * 8,
+        -5,
+        21,
+      );
       if (!forward) this.speed *= Math.pow(0.78, dt);
-      if (pressed(' ')) this.speed *= Math.pow(0.007, dt);
+      if (pressed(' ') || this.touchBrake) this.speed *= Math.pow(0.007, dt);
       this.yaw += turn * dt * (0.55 + Math.abs(this.speed) * 0.026);
       this.move(
         Math.sin(this.yaw) * this.speed * dt,
@@ -883,8 +914,12 @@ export class StreetNavigation {
       this.yaw += turn * dt * 1.45;
       const speed = pressed('shift') ? 12 : 4;
       this.move(
-        Math.sin(this.yaw) * forward * speed * dt,
-        Math.cos(this.yaw) * forward * speed * dt,
+        (Math.sin(this.yaw) * forward - Math.cos(this.yaw) * this.touchX) *
+          speed *
+          dt,
+        (Math.cos(this.yaw) * forward + Math.sin(this.yaw) * this.touchX) *
+          speed *
+          dt,
       );
     }
     if (this.mode === 'drive')

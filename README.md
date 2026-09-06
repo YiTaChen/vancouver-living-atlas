@@ -24,6 +24,8 @@ English is the default for a first visit. The header language menu also offers F
 
 ## Explore / 操作
 
+**Phone / tablet:** the left thumbstick moves continuously (walk: forward/back and strafe; drive/boat: throttle/reverse and steering). Drag the scene to look and pinch to zoom. Map, travel settings and tools open from compact buttons; the local map can stay open while moving. Placement shows only a Cancel button—tap a valid ground/road/water location to start. Vehicle selection and cockpit options live in Travel options.
+
 - **鳥瞰 / Orbit:** drag to rotate, wheel or +/− to zoom, right-drag to pan. Fourteen city, park, landmark, harbour and railway viewpoints, north-up reset, a clickable minimap and an automatic city tour are included.
 - **步行 / Walk:** drag the person in the mode bar onto the main map, or select Walk and click an open ground location. Zoom in before dropping for greater precision. W/S move, A/D turn, drag to look, Shift moves faster.
 - **駕車 / Drive:** drag the car onto the map, or select Drive and click near a road. The preview shows the actual snapped road position before starting; distant roads, water and building interiors are rejected. W/S throttle/reverse, A/D steer, Space brakes. Bridge decks and ground-level underpasses remain separate. While driving, use **Classic / Roadster** in the upper-right camera card to switch between the original car and an open-top two-seat sports car without resetting your location, speed or zoom.

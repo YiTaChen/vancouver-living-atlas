@@ -392,6 +392,7 @@ const { StreetNavigation } = await import(
     './travel-camera': cityModule('travel-camera'),
     './assets/walker': cityModule('assets/walker'),
     './assets/roadster': cityModule('assets/roadster'),
+    './touch-input': cityModule('touch-input'),
     './ground-surface': cityModule('ground-surface'),
     './visible-obstacles': cityModule('visible-obstacles'),
     './driver-camera': cityModule('driver-camera'),
@@ -1561,4 +1562,63 @@ test('hidden explicit bridge proxy remains pickable because visibility filtering
   assert.equal(f.placement.preview.result.point.surface, 'bridge');
   assert.equal(f.placement.preview.result.point.y, 30);
   f.placement.destroy();
+});
+
+test('touch walking moves continuously, strafes without turning, and stops on release', () => {
+  const { nav } = navigationFixture();
+  nav.startAt('walk', {x:0,y:2.45,z:0,yaw:0,surface:'ground',name:'',snappedDistance:0});
+  nav.setTouchAxes(0, 1);
+  for(let i=0;i<30;i++) nav.update(1/60);
+  assert.ok(nav.position.z > 0.5);
+  nav.setTouchAxes(1, 0);
+  const x = nav.position.x, yaw = nav.yaw;
+  for(let i=0;i<30;i++) nav.update(1/60);
+  assert.ok(nav.position.x < x - 0.5);
+  assert.equal(nav.yaw, yaw);
+  nav.setTouchAxes(0, 0);
+  const stopped = nav.position.clone();
+  nav.update(1/30);
+  assert.ok(nav.position.distanceTo(stopped) < 0.001);
+  nav.setTouchAxes(1, 1);
+  nav.touchBrake = true;
+  nav.blur();
+  assert.equal(nav.touchX, 0);
+  assert.equal(nav.touchY, 0);
+  assert.equal(nav.touchBrake, false);
+  nav.destroy();
+});
+
+test('releasing a UI finger does not clear an independent canvas touch', () => {
+  const { nav } = navigationFixture();
+  nav.touches.set(7, {x:20,y:30});
+  nav.pointerUp({pointerType:'touch',pointerId:99});
+  assert.equal(nav.touches.size, 1);
+  assert.ok(nav.touches.has(7));
+  nav.destroy();
+});
+
+test('thumbstick has a dead zone, bounded diagonals and rejects invalid input', async () => {
+  const { stickAxes } = await import(cityModule('touch-input'));
+  assert.deepEqual(stickAxes(2,2), {x:0,y:0});
+  const d = stickAxes(100,-100);
+  assert.ok(Math.abs(Math.hypot(d.x,d.y)-1)<1e-10);
+  assert.ok(d.x>0 && d.y>0);
+  assert.deepEqual(stickAxes(NaN,2), {x:0,y:0});
+});
+
+test('touch throttle drives and sails through the existing vehicle physics', () => {
+  for (const mode of ['drive', 'boat']) {
+    const { nav, e } = navigationFixture();
+    e.waterWorld = {canOccupy:()=>true, at:()=>({id:'sea',kind:'ocean',level:0})};
+    nav.startAt(mode, {x:0,y:2.45,z:0,yaw:0,surface:mode==='boat'?'water':'ground',name:'',snappedDistance:0});
+    const before = nav.position.clone();
+    nav.setTouchAxes(0, 1);
+    for(let i=0;i<120;i++) nav.update(1/60);
+    assert.ok(nav.position.distanceTo(before)>1, mode+' advances');
+    nav.setTouchAxes(0,0);
+    nav.touchBrake=true;
+    nav.update(1/60);
+    assert.ok(Number.isFinite(nav.position.z));
+    nav.destroy();
+  }
 });

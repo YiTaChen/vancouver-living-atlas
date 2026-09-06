@@ -32,7 +32,10 @@ import {
   Ship,
   Plane,
   Helicopter,
+  Map as MapIcon,
+  SlidersHorizontal,
 } from 'lucide-react';
+import { TravelJoystick } from '@/components/travel-joystick';
 import { SkyControls } from '@/components/sky-controls';
 import {
   DEFAULT_SKY,
@@ -97,6 +100,25 @@ export default function Home() {
     labelHost = useRef<HTMLDivElement>(null),
     minimap = useRef<HTMLCanvasElement>(null),
     engine = useRef<CityEngine | null>(null);
+  const [touchUI, setTouchUI] = useState(false);
+  const [mobilePanel, setMobilePanel] = useState<
+    'map' | 'travel' | 'tools' | null
+  >(null);
+  const touchMove = useCallback(
+    (x: number, y: number) => engine.current?.navigation?.setTouchAxes(x, y),
+    [],
+  );
+  const touchBrake = useCallback((held: boolean) => {
+    if (engine.current?.navigation) engine.current.navigation.touchBrake = held;
+  }, []);
+  useEffect(() => {
+    const query = matchMedia('(any-pointer: coarse), (max-width: 900px)');
+    const update = () =>
+      setTouchUI(query.matches || navigator.maxTouchPoints > 1);
+    update();
+    query.addEventListener('change', update);
+    return () => query.removeEventListener('change', update);
+  }, []);
   const [locale, setLocale] = useState<Locale>(DEFAULT_LOCALE);
   const localeRef = useRef(locale);
   localeRef.current = locale;
@@ -134,6 +156,9 @@ export default function Home() {
     [tour, setTour] = useState(false),
     [clean, setClean] = useState(false),
     [notice, setNotice] = useState('');
+  useEffect(() => {
+    setMobilePanel(null);
+  }, [settings.mode, touchUI]);
   const [carModel, setCarModel] = useState<'classic' | 'roadster'>('classic');
   const [returnMode, setReturnMode] = useState<TravelMode | null>(null);
   const [localOrbit, setLocalOrbit] = useState(false);
@@ -439,6 +464,7 @@ export default function Home() {
     setClean(false);
     setNotice('');
     setPlacing(mode);
+    setMobilePanel(null);
     change({ mode: 'orbit', autoRotate: false });
     engine.current.placement.begin(mode);
   };
@@ -515,9 +541,180 @@ export default function Home() {
   });
   return (
     <main
-      className={`atlas ${clean ? 'clean' : ''} ${settings.mode !== 'orbit' ? 'street-mode' : ''} ${placing ? 'placement-mode' : ''}`}
+      className={`atlas ${clean ? 'clean' : ''} ${settings.mode !== 'orbit' ? 'street-mode' : ''} ${placing ? 'placement-mode' : ''} ${touchUI ? 'touch-ui' : ''} ${mobilePanel ? `mobile-${mobilePanel}-open` : ''}`}
     >
       <div className="scene" ref={host} />
+      {touchUI && ready && (
+        <>
+          <nav
+            className="mobile-actions ui-chrome"
+            aria-label={tr('touchTools')}
+          >
+            {!placing && (
+              <button
+                className="glass"
+                aria-label={tr('touchMap')}
+                aria-expanded={mobilePanel === 'map'}
+                onClick={() => {
+                  setPanel(null);
+                  setMobilePanel(mobilePanel === 'map' ? null : 'map');
+                }}
+              >
+                <MapIcon size={21} />
+              </button>
+            )}
+            {!placing && settings.mode !== 'orbit' && (
+              <button
+                className="glass"
+                aria-label={tr('touchTravelOptions')}
+                aria-expanded={mobilePanel === 'travel'}
+                onClick={() => {
+                  setPanel(null);
+                  setMobilePanel(mobilePanel === 'travel' ? null : 'travel');
+                }}
+              >
+                <SlidersHorizontal size={21} />
+              </button>
+            )}
+            <button
+              className="glass"
+              aria-label={tr('touchTools')}
+              aria-expanded={mobilePanel === 'tools'}
+              onClick={() => {
+                setPanel(null);
+                setMobilePanel(mobilePanel === 'tools' ? null : 'tools');
+              }}
+            >
+              <Layers size={21} />
+            </button>
+            {!placing && (
+              <button
+                className="glass mobile-clock"
+                aria-label={tr('timeControls')}
+                aria-expanded={panel === 'time'}
+                onClick={() => {
+                  setMobilePanel(null);
+                  setPanel(panel === 'time' ? null : 'time');
+                }}
+              >
+                <Clock3 size={19} />
+                {!hideTime && <span>{clockLabel}</span>}
+              </button>
+            )}
+          </nav>
+          {placing && (
+            <button
+              className="mobile-cancel-placement glass ui-chrome"
+              onClick={() => engine.current?.placement?.cancel()}
+            >
+              <X size={17} />
+              {tr('cancelPlacement')}
+            </button>
+          )}
+          <div className="mobile-zoom ui-chrome glass">
+            <button
+              aria-label={tr('zoomIn')}
+              onClick={() => engine.current?.zoom(0.75)}
+            >
+              <Plus size={22} />
+            </button>
+            <button
+              aria-label={tr('zoomOut')}
+              onClick={() => engine.current?.zoom(1.33)}
+            >
+              <Minus size={22} />
+            </button>
+          </div>
+          {settings.mode !== 'orbit' &&
+            !placing &&
+            !about &&
+            !panel &&
+            (mobilePanel === null || mobilePanel === 'map') && (
+              <TravelJoystick
+                mode={settings.mode as TravelMode}
+                label={tr('touchJoystick')}
+                brakeLabel={tr(
+                  settings.mode === 'boat' ? 'boatNeutral' : 'touchBrake',
+                )}
+                onMove={touchMove}
+                onBrake={touchBrake}
+              />
+            )}
+          {mobilePanel === 'travel' && !placing && (
+            <section
+              className="mobile-travel-sheet glass ui-chrome"
+              aria-label={tr('touchTravelOptions')}
+            >
+              <div className="touch-sheet-title">
+                <strong>{tr('touchTravelOptions')}</strong>
+                <button
+                  aria-label={tr('close')}
+                  onClick={() => setMobilePanel(null)}
+                >
+                  <X size={18} />
+                </button>
+              </div>
+              {settings.mode === 'drive' && (
+                <div
+                  className="car-options"
+                  role="group"
+                  aria-label={tr('carModel')}
+                >
+                  {(['classic', 'roadster'] as const).map((model) => (
+                    <button
+                      key={model}
+                      aria-pressed={carModel === model}
+                      onClick={() => {
+                        engine.current?.navigation?.setCarModel(model);
+                        setCarModel(model);
+                      }}
+                    >
+                      {tr(model === 'classic' ? 'classicCar' : 'roadsterCar')}
+                    </button>
+                  ))}
+                </div>
+              )}
+              {(settings.mode === 'drive' || settings.mode === 'boat') &&
+                travelView.perspective === 'first' && (
+                  <div
+                    className="interior-options"
+                    role="group"
+                    aria-label={tr('vehicleView')}
+                  >
+                    {(['interior', 'clear'] as const).map((style) => (
+                      <button
+                        key={style}
+                        aria-pressed={travelView.interior === style}
+                        onClick={() =>
+                          engine.current?.navigation?.setInterior(style)
+                        }
+                      >
+                        {tr(
+                          style === 'interior' ? 'interiorView' : 'clearView',
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              <button
+                className="choose-start"
+                onClick={() => beginPlacement(settings.mode as TravelMode)}
+              >
+                <MapPin size={16} />
+                {tr('placementChange')}
+              </button>
+              <p>
+                {tr(
+                  settings.mode === 'walk'
+                    ? 'touchWalkHint'
+                    : 'touchVehicleHint',
+                )}
+              </p>
+            </section>
+          )}
+        </>
+      )}
+
       {ready && settings.mode !== 'orbit' && (
         <aside
           className="travel-camera-card glass ui-chrome"
@@ -774,7 +971,7 @@ export default function Home() {
                 <X size={18} />
               </button>
             </div>
-            <p>{tr('placementHint')}</p>
+            <p className="desktop-placement-hint">{tr('placementHint')}</p>
             <p className="placement-detail">
               {tr(
                 placing === 'walk'
@@ -1275,6 +1472,15 @@ export default function Home() {
         className="map-inset glass ui-chrome"
         aria-label={tr(settings.mode === 'orbit' ? 'minimap' : 'localMinimap')}
       >
+        {touchUI && (
+          <button
+            className="touch-map-close"
+            aria-label={tr('close')}
+            onClick={() => setMobilePanel(null)}
+          >
+            <X size={17} />
+          </button>
+        )}
         <div className="mini-title">
           <span className="mini-location-title">
             {settings.mode !== 'orbit' &&
