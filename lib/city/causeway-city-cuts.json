@@ -1,0 +1,315 @@
+{
+  "sourceGuard": "77543c74f4e567a65db14c8d33f9d6250d0f40bdd5f99031c1267aa8dc3373fb",
+  "interface": {
+    "citySourceId": "819:0",
+    "citySourceIndex": 819,
+    "cityChainageM": 41.41841721508032,
+    "cityCoordinate": [
+      -123.13572278950826,
+      49.29387760870777
+    ],
+    "osmNodeId": 38891274,
+    "osmCoordinate": [
+      -123.1357263,
+      49.2938753
+    ],
+    "planGapM": 0.36197802781077937,
+    "cityRoadTopY": 6.133106393357923,
+    "osmRoadTopY": 6.132605640024084,
+    "straightConnectorGrade": 0.0013833804688840187,
+    "connectorClassification": "Optional dataset seam connector, not an OSM-mapped road. Both endpoints are actual data coordinates. The OSM endpoint already lies inside existing City pavement, so no new visible centreline/road is necessary.",
+    "proposedCityKeepIntervalM": [
+      0,
+      41.41841721508032
+    ],
+    "proposedCityReplaceIntervalM": [
+      41.41841721508032,
+      140.58081787875997
+    ],
+    "seamNote": "At the southern 0m edge, sample roadRelief(x,z)+1.05 across the whole seam cross-section. Blend transverse offset to zero over first30m using a C1 taper; centreline remains solved topY. A single flat cross-section would leave a small transverse step against the City triangulated relief field."
+  },
+  "parkAccessTieIn": {
+    "sourceCityIndex": 1721,
+    "sourceCityId": "1721:0",
+    "sourceCityChainageM": 139.83707398744204,
+    "cityCoordinate": [
+      -123.1360684,
+      49.2962613
+    ],
+    "osmCoordinate": [
+      -123.13606318752257,
+      49.296260942167784
+    ],
+    "planGapM": 0.3805798985955396,
+    "topY": 6.00392875649604,
+    "cityTopY": 6.003541485816594,
+    "connectorGrade": -0.0010175804893401755,
+    "flatDisplayConnector": false,
+    "preservedBusFork": {
+      "sourceNodeId": 1309734864,
+      "routeChainageM": 232.92996708705823,
+      "coordinate": [
+        -123.1362011,
+        49.2959089
+      ],
+      "topY": 5.1806610059250255
+    },
+    "classification": "Explicit dataset seam connector, not an OSM-mapped road. Retain both endpoint XY coordinates; registry connection belongs to park access."
+  },
+  "sources": [
+    {
+      "sourceId": "819:0",
+      "sourceCoordinates": [
+        [
+          -123.1353178,
+          49.2936156
+        ],
+        [
+          -123.1366924,
+          49.2945049
+        ]
+      ],
+      "centrelineInNewRoadFootprint": [
+        {
+          "startM": 41.18131965206044,
+          "endM": 140.58081787875997,
+          "lengthM": 99.39949822669954,
+          "start": [
+            -123.135720471167,
+            49.29387610885263
+          ],
+          "end": [
+            -123.1366924,
+            49.2945049
+          ]
+        }
+      ]
+    },
+    {
+      "sourceId": "1589:0",
+      "sourceCoordinates": [
+        [
+          -123.1366924,
+          49.2945049
+        ],
+        [
+          -123.1368173,
+          49.294693
+        ],
+        [
+          -123.1368614,
+          49.2948573
+        ],
+        [
+          -123.1368233,
+          49.2951146
+        ]
+      ],
+      "centrelineInNewRoadFootprint": [
+        {
+          "startM": 0.0,
+          "endM": 70.16298611558454,
+          "lengthM": 70.16298611558454,
+          "start": [
+            -123.1366924,
+            49.2945049
+          ],
+          "end": [
+            -123.1368233,
+            49.2951146
+          ]
+        }
+      ]
+    },
+    {
+      "sourceId": "1720:0",
+      "sourceCoordinates": [
+        [
+          -123.1368233,
+          49.2951146
+        ],
+        [
+          -123.1368188,
+          49.295224
+        ],
+        [
+          -123.1367902,
+          49.2953157
+        ],
+        [
+          -123.1364608,
+          49.2958885
+        ]
+      ],
+      "centrelineInNewRoadFootprint": [
+        {
+          "startM": 0.0,
+          "endM": 90.7024514967693,
+          "lengthM": 90.7024514967693,
+          "start": [
+            -123.1368233,
+            49.2951146
+          ],
+          "end": [
+            -123.1364608,
+            49.2958885
+          ]
+        }
+      ]
+    },
+    {
+      "sourceId": "1721:0",
+      "sourceCoordinates": [
+        [
+          -123.1368233,
+          49.2951146
+        ],
+        [
+          -123.1366594,
+          49.2952431
+        ],
+        [
+          -123.1365824,
+          49.2953538
+        ],
+        [
+          -123.1360684,
+          49.2962613
+        ]
+      ],
+      "centrelineInNewRoadFootprint": [
+        {
+          "startM": 0.0,
+          "endM": 8.664782001467518,
+          "lengthM": 8.664782001467518,
+          "start": [
+            -123.1368233,
+            49.2951146
+          ],
+          "end": [
+            -123.1367469804411,
+            49.29517443565173
+          ]
+        },
+        {
+          "startM": 8.796601079797204,
+          "endM": 139.83707398744204,
+          "lengthM": 131.04047290764484,
+          "start": [
+            -123.13674581937624,
+            49.29517534594358
+          ],
+          "end": [
+            -123.1360684,
+            49.2962613
+          ]
+        }
+      ]
+    },
+    {
+      "sourceId": "561:0",
+      "sourceCoordinates": [
+        [
+          -123.1366924,
+          49.2945049
+        ],
+        [
+          -123.1373209,
+          49.2940892
+        ]
+      ],
+      "centrelineInNewRoadFootprint": [
+        {
+          "startM": 0.0,
+          "endM": 9.723953238352832,
+          "lengthM": 9.723953238352832,
+          "start": [
+            -123.1366924,
+            49.2945049
+          ],
+          "end": [
+            -123.13678643251826,
+            49.294442705381314
+          ]
+        }
+      ]
+    },
+    {
+      "sourceId": "1785:0",
+      "sourceCoordinates": [
+        [
+          -123.136272,
+          49.2961865
+        ],
+        [
+          -123.1360684,
+          49.2962613
+        ]
+      ],
+      "centrelineInNewRoadFootprint": [
+        {
+          "startM": 0.0,
+          "endM": 9.696989031109677,
+          "lengthM": 9.696989031109677,
+          "start": [
+            -123.136272,
+            49.2961865
+          ],
+          "end": [
+            -123.13615564196805,
+            49.29622924843217
+          ]
+        },
+        {
+          "startM": 11.729946239175632,
+          "endM": 16.967517700716236,
+          "lengthM": 5.237571461540604,
+          "start": [
+            -123.13613124770515,
+            49.29623821056805
+          ],
+          "end": [
+            -123.1360684,
+            49.2962613
+          ]
+        }
+      ]
+    },
+    {
+      "sourceId": "1595:0",
+      "sourceCoordinates": [
+        [
+          -123.1360684,
+          49.2962613
+        ],
+        [
+          -123.1359624,
+          49.2964388
+        ],
+        [
+          -123.135848,
+          49.2966417
+        ]
+      ],
+      "centrelineInNewRoadFootprint": []
+    },
+    {
+      "sourceId": "1608:0",
+      "sourceCoordinates": [
+        [
+          -123.1361123,
+          49.2965544
+        ],
+        [
+          -123.1360829,
+          49.2964386
+        ],
+        [
+          -123.1360684,
+          49.2962613
+        ]
+      ],
+      "centrelineInNewRoadFootprint": []
+    }
+  ]
+}

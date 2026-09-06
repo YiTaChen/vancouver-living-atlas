@@ -6,6 +6,7 @@ import { project, rings, lines, inPolygon, hash } from './geo';
 import type { Feature } from './types';
 import { lakeSurfaces } from './water-world';
 import { roadDecorations } from './road-decorations';
+import { trimRoad } from './road-trim';
 export interface Traffic {
   mesh: THREE.InstancedMesh;
   cabins: THREE.InstancedMesh;
@@ -113,6 +114,12 @@ export function createNature(e: CityEngine) {
   // Trails are geographic source lines. Merge their geometry to keep draw calls low.
   const pathGeos: THREE.BufferGeometry[] = [];
   for (const f of e.data.paths.features) {
+    if (
+      e.data.causeway?.excludedPathIds.has(
+        Number(f.properties.sourceId ?? f.properties.id),
+      )
+    )
+      continue;
     for (const l of lines(f)) {
       const mesh = e.ribbon(
         l.map(project),
@@ -163,18 +170,22 @@ export function createNature(e: CityEngine) {
     for (let z = -3180; z < 0; z += 13) {
       const seed = x * 3.11 + z * 11.5,
         xx = x + (hash(seed) - 0.5) * 12,
-        zz = z + (hash(seed + 2) - 0.5) * 12;
+        zz = z + (hash(seed + 2) - 0.5) * 12,
+        height = 16 + hash(seed + 3) * 21;
       if (
         !forest.some((p: number[][][]) => inPolygon([xx, zz], p)) ||
         !e.onLand(xx, zz) ||
         waters.some((p: number[][][]) => inPolygon([xx, zz], p)) ||
-        beaches.some((p: number[][][]) => inPolygon([xx, zz], p))
+        beaches.some((p: number[][][]) => inPolygon([xx, zz], p)) ||
+        // Keep the full generated crown clear of the physical road/path mesh.
+        // Surveyed municipal tree XY remains unchanged.
+        e.data.travelSurfaces?.overlapsDisk(xx, zz, height * 0.3 + 1)
       )
         continue;
       trees.push({
         x: xx,
         z: zz,
-        h: 16 + hash(seed + 3) * 21,
+        h: height,
         conifer: hash(seed + 9) > 0.16,
         seed,
       });
@@ -302,35 +313,40 @@ export function createStreetDetails(e: CityEngine): Traffic {
   for (let k = 0; k < roads.length; k++) {
     const f = roads[k],
       w = e.data.roadWidths?.get(f) ?? f.properties.width ?? 10;
-    for (const line of lines(f)) {
-      const ps = line.map(project);
-      for (let i = 0; i < ps.length - 1; i++) {
-        const a = ps[i],
-          b = ps[i + 1],
-          len = Math.hypot(b[0] - a[0], b[1] - a[1]);
-        if (len < 25) continue;
-        const dx = (b[0] - a[0]) / len,
-          dz = (b[1] - a[1]) / len,
-          px = dz,
-          pz = -dx;
-        if (len > 55 && hash(k * 23 + i) > 0.6) {
-          const direction = hash(k + 7) > 0.5 ? 1 : -1;
-          const aa = [
-              a[0] + px * w * (w < 10 ? 0.21 : 0.23) * direction,
-              a[1] + pz * w * (w < 10 ? 0.21 : 0.23) * direction,
-            ],
-            bb = [
-              b[0] + px * w * (w < 10 ? 0.21 : 0.23) * direction,
-              b[1] + pz * w * (w < 10 ? 0.21 : 0.23) * direction,
-            ];
-          if (e.onLand((aa[0] + bb[0]) / 2, (aa[1] + bb[1]) / 2))
-            routes.push({
-              a: direction > 0 ? aa : bb,
-              b: direction > 0 ? bb : aa,
-              length: len,
-              speed: 6 + hash(k) * 5,
-              phase: hash(k + 4),
-            });
+    for (const [part, line] of lines(f).entries()) {
+      const sourceIndex = e.data.roads.features.indexOf(f);
+      for (const ps of trimRoad(
+        line.map(project),
+        e.data.causeway?.cuts.get(`${sourceIndex}:${part}`) || [],
+      )) {
+        for (let i = 0; i < ps.length - 1; i++) {
+          const a = ps[i],
+            b = ps[i + 1],
+            len = Math.hypot(b[0] - a[0], b[1] - a[1]);
+          if (len < 25) continue;
+          const dx = (b[0] - a[0]) / len,
+            dz = (b[1] - a[1]) / len,
+            px = dz,
+            pz = -dx;
+          if (len > 55 && hash(k * 23 + i) > 0.6) {
+            const direction = hash(k + 7) > 0.5 ? 1 : -1;
+            const aa = [
+                a[0] + px * w * (w < 10 ? 0.21 : 0.23) * direction,
+                a[1] + pz * w * (w < 10 ? 0.21 : 0.23) * direction,
+              ],
+              bb = [
+                b[0] + px * w * (w < 10 ? 0.21 : 0.23) * direction,
+                b[1] + pz * w * (w < 10 ? 0.21 : 0.23) * direction,
+              ];
+            if (e.onLand((aa[0] + bb[0]) / 2, (aa[1] + bb[1]) / 2))
+              routes.push({
+                a: direction > 0 ? aa : bb,
+                b: direction > 0 ? bb : aa,
+                length: len,
+                speed: 6 + hash(k) * 5,
+                phase: hash(k + 4),
+              });
+          }
         }
       }
     }

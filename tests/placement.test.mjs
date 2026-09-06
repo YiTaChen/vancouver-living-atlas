@@ -211,6 +211,10 @@ function fixture({ bridge = false } = {}) {
     settings: { mode: 'orbit' },
     transition: null,
     data: {
+      roadGraph: {
+        nodes: [{ point: [-100, 0] }, { point: [100, 0] }],
+        edges: [{ a: 0, b: 1, classes: ['local'], names: ['Test Road'] }],
+      },
       roads: {
         features: [
           {
@@ -362,12 +366,7 @@ test('a second finger during figure dragging cannot accidentally place either po
   }
 });
 
-const bridgeUrl = compile('bridges', {
-  three: import.meta.resolve('three'),
-  './geo': geoUrl,
-  'three/addons/utils/BufferGeometryUtils.js': import.meta
-    .resolve('three/addons/utils/BufferGeometryUtils.js'),
-});
+const bridgeUrl = cityModule('bridges');
 const landmarkUrl =
   'data:text/javascript;base64,' +
   Buffer.from(
@@ -382,6 +381,8 @@ const { StreetNavigation } = await import(
     three: import.meta.resolve('three'),
     './geo': geoUrl,
     './bridges': bridgeUrl,
+    './road-trim': cityModule('road-trim'),
+    './surface-reachability': cityModule('surface-reachability'),
     './placement-geometry': geometryUrl,
     './boat-controller': cityModule('boat-controller'),
     './travel-camera': cityModule('travel-camera'),

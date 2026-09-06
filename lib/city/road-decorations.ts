@@ -12,7 +12,12 @@ import type { Point } from './road-graph';
 export function roadDecorations(e: CityEngine, graph: RoadGraph) {
   const asphalt: THREE.Mesh[] = [];
   e.roads.traverse((m) => {
-    if (m instanceof THREE.Mesh && m.userData.asphaltSurface) asphalt.push(m);
+    if (
+      m instanceof THREE.Mesh &&
+      m.userData.asphaltSurface &&
+      !m.userData.protectedSurface
+    )
+      asphalt.push(m);
   });
   const surfaces = new GroundSurfaceIndex(asphalt);
   e.data.roadSurface = surfaces;

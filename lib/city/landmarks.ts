@@ -172,27 +172,34 @@ function bridge(
   const width = kind === 'lions' ? 20 : kind === 'granville' ? 27 : 25,
     color = kind === 'lions' ? 0x486e5e : 0xb3b2a2;
   b.box(width, 3.2, length, color, 0, deck, 0);
-  b.box(width - 3, 0.3, length, 0x566668, 0, deck + 1.8, 0);
-  b.box(0.45, 1.3, length, 0xe0daca, -width / 2, deck + 2.3, 0);
-  b.box(0.45, 1.3, length, 0xe0daca, width / 2, deck + 2.3, 0);
-  for (let z = -length / 2 + 14; z < length / 2; z += 18)
-    b.box(0.35, 0.08, 8, 0xe4d6a1, 0, deck + 2, z);
+  if (kind !== 'lions') {
+    b.box(width - 3, 0.3, length, 0x566668, 0, deck + 1.8, 0);
+    b.box(0.45, 1.3, length, 0xe0daca, -width / 2, deck + 2.3, 0);
+    b.box(0.45, 1.3, length, 0xe0daca, width / 2, deck + 2.3, 0);
+    for (let z = -length / 2 + 14; z < length / 2; z += 18)
+      b.box(0.35, 0.08, 8, 0xe4d6a1, 0, deck + 2, z);
+  }
   if (kind === 'lions') {
     const south = -length / 2 + 187,
       north = south + 472;
-    for (const z of [south, north])
+    for (const z of [south, north]) {
       for (const x of [-10.8, 10.8]) {
         b.box(3.4, 111, 4, color, x, 74, z);
-        for (let y = 48; y < 127; y += 18) {
-          b.box(23, 2, 2, color, 0, y, z);
-          b.beam(
-            new THREE.Vector3(-10, y, z),
-            new THREE.Vector3(10, y + 18, z),
-            0.6,
-            color,
-          );
-        }
       }
+      for (let y = 48; y < 127; y += 18) {
+        // Leave the actual roadway/footways open through the tower. The
+        // old y=66m crossbar lay directly across the 65.95m road surface.
+        if (y > deck - 2 && y < deck + 8) continue;
+        b.box(23, 2, 2, color, 0, y, z);
+        if (y + 18 > 127) continue;
+        b.beam(
+          new THREE.Vector3(-10, y, z),
+          new THREE.Vector3(10, y + 18, z),
+          0.6,
+          color,
+        );
+      }
+    }
     for (const x of [-10.5, 10.5]) {
       for (let section = 0; section < 3; section++) {
         const start =

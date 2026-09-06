@@ -1,0 +1,5654 @@
+{
+  "assumptions": {
+    "headroomM": 3.0,
+    "slabDepthM": 0.75,
+    "deckExtraWidthEachSideM": 1.5,
+    "clearanceReserveM": 0.04,
+    "maxGrade": 0.06,
+    "accuracy": "Display alignment fitted to existing model and OSM plan geometry. No surveyed bridge elevations or engineering claim."
+  },
+  "centrelineCrossings": [
+    {
+      "upperWayId": 42000575,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.1368418275547,
+        49.29726957112717
+      ],
+      "upperChainage": 14.682147905057686,
+      "currentUpperRenderedTopY": 6.10134979731268,
+      "linearEndpointDeckY": 6.955764320526658,
+      "lowerCurrentRenderedTopY": 6.044404560738927,
+      "linearDeckSoffitHeadroomM": 0.16135975978773054,
+      "uniformLiftForIllustrative3mHeadroom": 2.8386402402122695,
+      "route": "west",
+      "routeChainageM": 425.6569446617389,
+      "proposedTopY": 10.669976533287288,
+      "proposedSoffitHeadroomM": 3.875571972548361
+    },
+    {
+      "upperWayId": 42000575,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13675672880282,
+        49.29717133043848
+      ],
+      "upperChainage": 27.244727017347905,
+      "currentUpperRenderedTopY": 5.42500103825177,
+      "linearEndpointDeckY": 6.88306220278809,
+      "lowerCurrentRenderedTopY": 5.817100487017919,
+      "linearDeckSoffitHeadroomM": 0.31596171577017085,
+      "uniformLiftForIllustrative3mHeadroom": 2.684038284229829,
+      "route": "west",
+      "routeChainageM": 413.0943655494487,
+      "proposedTopY": 10.518422671366649,
+      "proposedSoffitHeadroomM": 3.9513221843487294
+    },
+    {
+      "upperWayId": 44032488,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13666180367518,
+        49.29722399416647
+      ],
+      "upperChainage": 16.048552640899693,
+      "currentUpperRenderedTopY": 6.478148217172144,
+      "linearEndpointDeckY": 8.060251075485779,
+      "lowerCurrentRenderedTopY": 6.6931317005384425,
+      "linearDeckSoffitHeadroomM": 0.617119374947336,
+      "uniformLiftForIllustrative3mHeadroom": 2.382880625052664,
+      "route": "east",
+      "routeChainageM": 412.42377130392373,
+      "proposedTopY": 10.768422671366649,
+      "proposedSoffitHeadroomM": 3.325290970828206
+    },
+    {
+      "upperWayId": 44032488,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13674334442504,
+        49.29731812722349
+      ],
+      "upperChainage": 28.086535345339858,
+      "currentUpperRenderedTopY": 6.6103509659139625,
+      "linearEndpointDeckY": 8.022934520788267,
+      "lowerCurrentRenderedTopY": 6.8345908202337595,
+      "linearDeckSoffitHeadroomM": 0.43834370055450744,
+      "uniformLiftForIllustrative3mHeadroom": 2.5616562994454934,
+      "route": "east",
+      "routeChainageM": 424.4617540083639,
+      "proposedTopY": 10.91997653328729,
+      "proposedSoffitHeadroomM": 3.3353857130535305
+    },
+    {
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13675398918133,
+        49.294855441016004
+      ],
+      "upperChainage": 22.196382561785015,
+      "currentUpperRenderedTopY": 3.9426455491622585,
+      "linearEndpointDeckY": 4.715535330729438,
+      "lowerCurrentRenderedTopY": 4.406250140806828,
+      "linearDeckSoffitHeadroomM": -0.4407148100773908,
+      "uniformLiftForIllustrative3mHeadroom": 3.4407148100773917,
+      "route": "east",
+      "routeChainageM": 137.21224844885722,
+      "proposedTopY": 8.427173783374093,
+      "proposedSoffitHeadroomM": 3.270923642567264
+    },
+    {
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13676088556683,
+        49.29489994819377
+      ],
+      "upperChainage": 27.177967153750842,
+      "currentUpperRenderedTopY": 4.0925024623032344,
+      "linearEndpointDeckY": 4.776481421530216,
+      "lowerCurrentRenderedTopY": 4.618488556252047,
+      "linearDeckSoffitHeadroomM": -0.5920071347218316,
+      "uniformLiftForIllustrative3mHeadroom": 3.5920071347218308,
+      "route": "east",
+      "routeChainageM": 142.19383304082305,
+      "proposedTopY": 8.714493011535488,
+      "proposedSoffitHeadroomM": 3.346004455283441
+    },
+    {
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.1367636,
+        49.2949513702821
+      ],
+      "upperChainage": 32.90751789388599,
+      "currentUpperRenderedTopY": 4.429577711294102,
+      "linearEndpointDeckY": 4.846578338125612,
+      "lowerCurrentRenderedTopY": 4.937772227092211,
+      "linearDeckSoffitHeadroomM": -0.8411938889665986,
+      "uniformLiftForIllustrative3mHeadroom": 3.8411938889665986,
+      "route": "east",
+      "routeChainageM": 147.9233837809582,
+      "proposedTopY": 8.98312077849212,
+      "proposedSoffitHeadroomM": 3.2953485513999095
+    },
+    {
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13690319680155,
+        49.2948661252508
+      ],
+      "upperChainage": 10.99946010268476,
+      "currentUpperRenderedTopY": 4.419022238458874,
+      "linearEndpointDeckY": 4.660534530914463,
+      "lowerCurrentRenderedTopY": 4.775812956073044,
+      "linearDeckSoffitHeadroomM": -0.8652784251585812,
+      "uniformLiftForIllustrative3mHeadroom": 3.8652784251585803,
+      "route": "west",
+      "routeChainageM": 144.8644413291455,
+      "proposedTopY": 8.785763577877024,
+      "proposedSoffitHeadroomM": 3.2599506218039798
+    },
+    {
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13689421764583,
+        49.294815447816546
+      ],
+      "upperChainage": 16.679440821034476,
+      "currentUpperRenderedTopY": 4.153161672672639,
+      "linearEndpointDeckY": 4.666933239415564,
+      "lowerCurrentRenderedTopY": 4.497459853396367,
+      "linearDeckSoffitHeadroomM": -0.580526613980803,
+      "uniformLiftForIllustrative3mHeadroom": 3.580526613980804,
+      "route": "west",
+      "routeChainageM": 139.18446061079578,
+      "proposedTopY": 8.53918005845969,
+      "proposedSoffitHeadroomM": 3.2917202050633234
+    },
+    {
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13688281809075,
+        49.29477304657465
+      ],
+      "upperChainage": 21.472183261766137,
+      "currentUpperRenderedTopY": 3.9199702425711322,
+      "linearEndpointDeckY": 4.672332441159335,
+      "lowerCurrentRenderedTopY": 4.284576789609,
+      "linearDeckSoffitHeadroomM": -0.36224434844966513,
+      "uniformLiftForIllustrative3mHeadroom": 3.362244348449665,
+      "route": "west",
+      "routeChainageM": 134.39171817006414,
+      "proposedTopY": 8.26327910946234,
+      "proposedSoffitHeadroomM": 3.2287023198533404
+    },
+    {
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13667436427478,
+        49.29495478182325
+      ],
+      "upperChainage": 29.1668927915832,
+      "lowerCurrentRenderedTopY": 4.76409943417552,
+      "addedParkAccess": true,
+      "route": "park-access",
+      "routeChainageM": 120.77115190520016,
+      "proposedTopY": 8.964493011535486,
+      "proposedSoffitHeadroomM": 3.450393577359966
+    },
+    {
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13667220742882,
+        49.29490774574979
+      ],
+      "upperChainage": 23.9265430205472,
+      "lowerCurrentRenderedTopY": 4.405446592347936,
+      "addedParkAccess": true,
+      "route": "park-access",
+      "routeChainageM": 115.53080213416416,
+      "proposedTopY": 8.664869769780411,
+      "proposedSoffitHeadroomM": 3.509423177432476
+    },
+    {
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13667118203502,
+        49.295007805474235
+      ],
+      "upperChainage": 35.07573323285671,
+      "lowerCurrentRenderedTopY": 5.18940402039641,
+      "addedParkAccess": true,
+      "route": "park-access",
+      "routeChainageM": 126.67999234647368,
+      "proposedTopY": 9.213819878747392,
+      "proposedSoffitHeadroomM": 3.2744158583509826
+    }
+  ],
+  "fullRibbonConstraints": [
+    {
+      "route": "east",
+      "s": 132.75672930817595,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13682115609186,
+        49.29480662481258
+      ],
+      "lowerTopY": 4.334278922953175,
+      "minTopY": 8.124278922953174,
+      "proposedTopY": 8.159900437554771,
+      "headroomM": 3.075621514601597
+    },
+    {
+      "route": "east",
+      "s": 131.51128382838462,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13681800557974,
+        49.2947956271916
+      ],
+      "lowerTopY": 4.294002524565393,
+      "minTopY": 8.084002524565392,
+      "proposedTopY": 8.085173708767291,
+      "headroomM": 3.0411711842018985
+    },
+    {
+      "route": "east",
+      "s": 132.75672930817595,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13679601967996,
+        49.294809688600154
+      ],
+      "lowerTopY": 4.320051281564581,
+      "minTopY": 8.11005128156458,
+      "proposedTopY": 8.159900437554771,
+      "headroomM": 3.0898491559901906
+    },
+    {
+      "route": "east",
+      "s": 137.21886137240224,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13682920848862,
+        49.29484963079052
+      ],
+      "lowerTopY": 4.4945024525614485,
+      "minTopY": 8.284502452561448,
+      "proposedTopY": 8.427569432729507,
+      "headroomM": 3.183066980168059
+    },
+    {
+      "route": "east",
+      "s": 135.40767811414105,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13682624541232,
+        49.29483347593616
+      ],
+      "lowerTopY": 4.407006759186245,
+      "minTopY": 8.197006759186245,
+      "proposedTopY": 8.318957365912675,
+      "headroomM": 3.16195060672643
+    },
+    {
+      "route": "east",
+      "s": 137.21886137240222,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13679675915634,
+        49.29485216311011
+      ],
+      "lowerTopY": 4.421362977392633,
+      "minTopY": 8.211362977392632,
+      "proposedTopY": 8.427569432729506,
+      "headroomM": 3.256206455336873
+    },
+    {
+      "route": "east",
+      "s": 134.24623103496745,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13682434529741,
+        49.29482311640554
+      ],
+      "lowerTopY": 4.3931740257064575,
+      "minTopY": 8.183174025706457,
+      "proposedTopY": 8.24927054116226,
+      "headroomM": 3.1060965154558033
+    },
+    {
+      "route": "east",
+      "s": 136.41677416007178,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13680041267202,
+        49.294844621369975
+      ],
+      "lowerTopY": 4.442492843701466,
+      "minTopY": 8.232492843701465,
+      "proposedTopY": 8.3795024799883,
+      "headroomM": 3.1870096362868345
+    },
+    {
+      "route": "east",
+      "s": 134.868206551653,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13682536284266,
+        49.29482866411798
+      ],
+      "lowerTopY": 4.422188711279283,
+      "minTopY": 8.212188711279282,
+      "proposedTopY": 8.286589072163395,
+      "headroomM": 3.1144003608841118
+    },
+    {
+      "route": "east",
+      "s": 132.75672930817595,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13682190848863,
+        49.29480983079053
+      ],
+      "lowerTopY": 4.345857706629655,
+      "minTopY": 8.135857706629654,
+      "proposedTopY": 8.159900437554771,
+      "headroomM": 3.0640427309251166
+    },
+    {
+      "route": "east",
+      "s": 132.75672930817595,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13679216850774,
+        49.29481215167453
+      ],
+      "lowerTopY": 4.3246141264214515,
+      "minTopY": 8.11461412642145,
+      "proposedTopY": 8.159900437554771,
+      "headroomM": 3.08528631113332
+    },
+    {
+      "route": "east",
+      "s": 134.04033596238116,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13677148732798,
+        49.29482537863002
+      ],
+      "lowerTopY": 4.349117059275482,
+      "minTopY": 8.139117059275481,
+      "proposedTopY": 8.236916836807083,
+      "headroomM": 3.137799777531601
+    },
+    {
+      "route": "east",
+      "s": 136.41677416007178,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13680041267202,
+        49.294844621369975
+      ],
+      "lowerTopY": 4.442492843701466,
+      "minTopY": 8.232492843701465,
+      "proposedTopY": 8.3795024799883,
+      "headroomM": 3.1870096362868345
+    },
+    {
+      "route": "east",
+      "s": 134.24623103496745,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13682434529741,
+        49.29482311640554
+      ],
+      "lowerTopY": 4.393174025706454,
+      "minTopY": 8.183174025706453,
+      "proposedTopY": 8.24927054116226,
+      "headroomM": 3.106096515455807
+    },
+    {
+      "route": "east",
+      "s": 137.21886137240227,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13678748962447,
+        49.294852886496855
+      ],
+      "lowerTopY": 4.446716254857069,
+      "minTopY": 8.236716254857068,
+      "proposedTopY": 8.42756943272951,
+      "headroomM": 3.23085317787244
+    },
+    {
+      "route": "east",
+      "s": 136.41677416007178,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13680041267202,
+        49.294844621369975
+      ],
+      "lowerTopY": 4.442492843701466,
+      "minTopY": 8.232492843701465,
+      "proposedTopY": 8.3795024799883,
+      "headroomM": 3.1870096362868345
+    },
+    {
+      "route": "east",
+      "s": 134.04033596238116,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13677148732798,
+        49.29482537863002
+      ],
+      "lowerTopY": 4.349117059275478,
+      "minTopY": 8.139117059275478,
+      "proposedTopY": 8.236916836807083,
+      "headroomM": 3.1377997775316047
+    },
+    {
+      "route": "east",
+      "s": 137.2188613724023,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13673644058917,
+        49.29485687032218
+      ],
+      "lowerTopY": 4.385301097260285,
+      "minTopY": 8.175301097260284,
+      "proposedTopY": 8.427569432729511,
+      "headroomM": 3.2922683354692257
+    },
+    {
+      "route": "east",
+      "s": 137.2188613724023,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13673644058917,
+        49.29485687032218
+      ],
+      "lowerTopY": 4.385301097260296,
+      "minTopY": 8.175301097260295,
+      "proposedTopY": 8.427569432729511,
+      "headroomM": 3.292268335469215
+    },
+    {
+      "route": "east",
+      "s": 134.04033596238116,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13677148732798,
+        49.29482537863002
+      ],
+      "lowerTopY": 4.3491170592754855,
+      "minTopY": 8.139117059275485,
+      "proposedTopY": 8.236916836807083,
+      "headroomM": 3.1377997775315976
+    },
+    {
+      "route": "east",
+      "s": 137.2188613724023,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13672027564633,
+        49.294858131821215
+      ],
+      "lowerTopY": 4.312483877122794,
+      "minTopY": 8.102483877122793,
+      "proposedTopY": 8.427569432729511,
+      "headroomM": 3.3650855556067167
+    },
+    {
+      "route": "east",
+      "s": 140.01162308135946,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13683368603226,
+        49.29487470296002
+      ],
+      "lowerTopY": 4.629975258387418,
+      "minTopY": 8.419975258387417,
+      "proposedTopY": 8.592191392847884,
+      "headroomM": 3.2122161344604656
+    },
+    {
+      "route": "east",
+      "s": 140.98450133063727,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13682373326007,
+        49.29488425770696
+      ],
+      "lowerTopY": 4.650835862214848,
+      "minTopY": 8.440835862214847,
+      "proposedTopY": 8.647640125462065,
+      "headroomM": 3.246804263247217
+    },
+    {
+      "route": "east",
+      "s": 140.98450133063724,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13682536488459,
+        49.294884133740226
+      ],
+      "lowerTopY": 4.654414885138131,
+      "minTopY": 8.44441488513813,
+      "proposedTopY": 8.647640125462061,
+      "headroomM": 3.2432252403239303
+    },
+    {
+      "route": "east",
+      "s": 140.43016248279255,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13683435291397,
+        49.29487843749759
+      ],
+      "lowerTopY": 4.649804646394273,
+      "minTopY": 8.439804646394272,
+      "proposedTopY": 8.616206077358731,
+      "headroomM": 3.216401430964458
+    },
+    {
+      "route": "east",
+      "s": 137.2188613724023,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13682923617236,
+        49.294849783744574
+      ],
+      "lowerTopY": 4.495329883087024,
+      "minTopY": 8.285329883087023,
+      "proposedTopY": 8.427569432729511,
+      "headroomM": 3.182239549642487
+    },
+    {
+      "route": "east",
+      "s": 137.21886137240233,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.1367966011077,
+        49.29485226327483
+      ],
+      "lowerTopY": 4.421439927849249,
+      "minTopY": 8.211439927849248,
+      "proposedTopY": 8.427569432729513,
+      "headroomM": 3.2561295048802634
+    },
+    {
+      "route": "east",
+      "s": 138.0850789424567,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13678255628835,
+        49.29486116430255
+      ],
+      "lowerTopY": 4.428278045624658,
+      "minTopY": 8.218278045624658,
+      "proposedTopY": 8.479234488371539,
+      "headroomM": 3.3009564427468803
+    },
+    {
+      "route": "east",
+      "s": 140.98450133063724,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13681764388956,
+        49.29488472036204
+      ],
+      "lowerTopY": 4.6370487495273665,
+      "minTopY": 8.427048749527366,
+      "proposedTopY": 8.647640125462061,
+      "headroomM": 3.2605913759346947
+    },
+    {
+      "route": "east",
+      "s": 140.98450133063727,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13682373326007,
+        49.29488425770696
+      ],
+      "lowerTopY": 4.650835862214848,
+      "minTopY": 8.440835862214847,
+      "proposedTopY": 8.647640125462065,
+      "headroomM": 3.246804263247217
+    },
+    {
+      "route": "east",
+      "s": 140.01162308135946,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13683368603226,
+        49.29487470296002
+      ],
+      "lowerTopY": 4.629975258387411,
+      "minTopY": 8.41997525838741,
+      "proposedTopY": 8.592191392847884,
+      "headroomM": 3.2122161344604727
+    },
+    {
+      "route": "east",
+      "s": 140.98450133063724,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13681764388956,
+        49.29488472036204
+      ],
+      "lowerTopY": 4.637048749527359,
+      "minTopY": 8.427048749527358,
+      "proposedTopY": 8.647640125462061,
+      "headroomM": 3.260591375934702
+    },
+    {
+      "route": "east",
+      "s": 138.0850789424567,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13678255628835,
+        49.29486116430255
+      ],
+      "lowerTopY": 4.428278045624651,
+      "minTopY": 8.21827804562465,
+      "proposedTopY": 8.479234488371539,
+      "headroomM": 3.3009564427468874
+    },
+    {
+      "route": "east",
+      "s": 140.98450133063727,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13675289451872,
+        49.29488963985662
+      ],
+      "lowerTopY": 4.541358905783852,
+      "minTopY": 8.331358905783851,
+      "proposedTopY": 8.647640125462065,
+      "headroomM": 3.3562812196782126
+    },
+    {
+      "route": "east",
+      "s": 140.98450133063727,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13675289451872,
+        49.29488963985662
+      ],
+      "lowerTopY": 4.541358905783859,
+      "minTopY": 8.331358905783858,
+      "proposedTopY": 8.647640125462065,
+      "headroomM": 3.3562812196782055
+    },
+    {
+      "route": "east",
+      "s": 138.0850789424567,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13678255628835,
+        49.29486116430255
+      ],
+      "lowerTopY": 4.428278045624651,
+      "minTopY": 8.21827804562465,
+      "proposedTopY": 8.479234488371539,
+      "headroomM": 3.3009564427468874
+    },
+    {
+      "route": "east",
+      "s": 140.98450133063724,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13673554516201,
+        49.29489095801717
+      ],
+      "lowerTopY": 4.492791100938817,
+      "minTopY": 8.282791100938816,
+      "proposedTopY": 8.647640125462061,
+      "headroomM": 3.4048490245232443
+    },
+    {
+      "route": "east",
+      "s": 137.21886137240236,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13673648459951,
+        49.29485683077613
+      ],
+      "lowerTopY": 4.385255658751657,
+      "minTopY": 8.175255658751656,
+      "proposedTopY": 8.427569432729515,
+      "headroomM": 3.292313773977858
+    },
+    {
+      "route": "east",
+      "s": 140.98450133063727,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13669508358164,
+        49.294894032186434
+      ],
+      "lowerTopY": 4.428000178053463,
+      "minTopY": 8.218000178053462,
+      "proposedTopY": 8.647640125462065,
+      "headroomM": 3.469639947408602
+    },
+    {
+      "route": "east",
+      "s": 140.98450133063722,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13672694016363,
+        49.29489161180334
+      ],
+      "lowerTopY": 4.466504564668746,
+      "minTopY": 8.256504564668745,
+      "proposedTopY": 8.647640125462061,
+      "headroomM": 3.431135560793315
+    },
+    {
+      "route": "east",
+      "s": 137.21886137240236,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.1367873671136,
+        49.294852964850506
+      ],
+      "lowerTopY": 4.446756292920579,
+      "minTopY": 8.236756292920578,
+      "proposedTopY": 8.427569432729515,
+      "headroomM": 3.2308131398089355
+    },
+    {
+      "route": "east",
+      "s": 137.21886137240233,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13672039901589,
+        49.294858052918386
+      ],
+      "lowerTopY": 4.312572126898246,
+      "minTopY": 8.102572126898245,
+      "proposedTopY": 8.427569432729513,
+      "headroomM": 3.3649973058312668
+    },
+    {
+      "route": "east",
+      "s": 139.57909511183794,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13668252451707,
+        49.294882276116304
+      ],
+      "lowerTopY": 4.285479413501427,
+      "minTopY": 8.075479413501427,
+      "proposedTopY": 8.567147633119387,
+      "headroomM": 3.531668219617959
+    },
+    {
+      "route": "east",
+      "s": 140.98450133063727,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13668476382763,
+        49.29489481625542
+      ],
+      "lowerTopY": 4.381369842068914,
+      "minTopY": 8.171369842068913,
+      "proposedTopY": 8.647640125462065,
+      "headroomM": 3.516270283393151
+    },
+    {
+      "route": "east",
+      "s": 140.98450133063727,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13669508358164,
+        49.294894032186434
+      ],
+      "lowerTopY": 4.42800017805348,
+      "minTopY": 8.21800017805348,
+      "proposedTopY": 8.647640125462065,
+      "headroomM": 3.4696399474085844
+    },
+    {
+      "route": "east",
+      "s": 137.21886137240236,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13673648459951,
+        49.29485683077613
+      ],
+      "lowerTopY": 4.385255658751667,
+      "minTopY": 8.175255658751666,
+      "proposedTopY": 8.427569432729515,
+      "headroomM": 3.292313773977847
+    },
+    {
+      "route": "east",
+      "s": 140.98450133063727,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13683523617236,
+        49.294883383744576
+      ],
+      "lowerTopY": 4.656092295857924,
+      "minTopY": 8.446092295857923,
+      "proposedTopY": 8.647640125462065,
+      "headroomM": 3.2415478296041407
+    },
+    {
+      "route": "east",
+      "s": 140.94723073319184,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13683517678707,
+        49.29488305118701
+      ],
+      "lowerTopY": 4.654082571314937,
+      "minTopY": 8.444082571314937,
+      "proposedTopY": 8.645540955531434,
+      "headroomM": 3.2414583842164966
+    },
+    {
+      "route": "east",
+      "s": 140.98450133063727,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13683454636677,
+        49.29488343615427
+      ],
+      "lowerTopY": 4.654204349536698,
+      "minTopY": 8.444204349536697,
+      "proposedTopY": 8.647640125462065,
+      "headroomM": 3.2434357759253665
+    },
+    {
+      "route": "east",
+      "s": 140.98450133063727,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13675321125125,
+        49.294889335790664
+      ],
+      "lowerTopY": 4.540151412510006,
+      "minTopY": 8.330151412510006,
+      "proposedTopY": 8.647640125462065,
+      "headroomM": 3.3574887129520583
+    },
+    {
+      "route": "east",
+      "s": 145.90066797758078,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.1367054146636,
+        49.29493522092605
+      ],
+      "lowerTopY": 4.722368431565705,
+      "minTopY": 8.512368431565704,
+      "proposedTopY": 8.89933800012801,
+      "headroomM": 3.4269695685623045
+    },
+    {
+      "route": "east",
+      "s": 145.90066797758078,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13674703608217,
+        49.29493377530738
+      ],
+      "lowerTopY": 4.794151496093704,
+      "minTopY": 8.584151496093703,
+      "proposedTopY": 8.89933800012801,
+      "headroomM": 3.3551865040343056
+    },
+    {
+      "route": "east",
+      "s": 140.9845013306373,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13682086429768,
+        49.294886986026754
+      ],
+      "lowerTopY": 4.656830352423604,
+      "minTopY": 8.446830352423603,
+      "proposedTopY": 8.647640125462067,
+      "headroomM": 3.240809773038462
+    },
+    {
+      "route": "east",
+      "s": 140.98450133063727,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.1367372289579,
+        49.29488989089673
+      ],
+      "lowerTopY": 4.490480439067483,
+      "minTopY": 8.280480439067482,
+      "proposedTopY": 8.647640125462065,
+      "headroomM": 3.407159686394582
+    },
+    {
+      "route": "east",
+      "s": 144.34117438440768,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13668682033683,
+        49.294921837803486
+      ],
+      "lowerTopY": 4.559655853722269,
+      "minTopY": 8.349655853722268,
+      "proposedTopY": 8.825864220519726,
+      "headroomM": 3.516208366797457
+    },
+    {
+      "route": "east",
+      "s": 145.90066797758078,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13668796231947,
+        49.29493582709075
+      ],
+      "lowerTopY": 4.668128723746392,
+      "minTopY": 8.458128723746391,
+      "proposedTopY": 8.89933800012801,
+      "headroomM": 3.481209276381618
+    },
+    {
+      "route": "east",
+      "s": 145.90066797758078,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.1367054146636,
+        49.29493522092605
+      ],
+      "lowerTopY": 4.722368431565712,
+      "minTopY": 8.512368431565712,
+      "proposedTopY": 8.89933800012801,
+      "headroomM": 3.4269695685622974
+    },
+    {
+      "route": "east",
+      "s": 140.98450133063727,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13675321125125,
+        49.294889335790664
+      ],
+      "lowerTopY": 4.5401514125100135,
+      "minTopY": 8.330151412510013,
+      "proposedTopY": 8.647640125462065,
+      "headroomM": 3.357488712952051
+    },
+    {
+      "route": "east",
+      "s": 140.98450133063727,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13669818311769,
+        49.294891247058956
+      ],
+      "lowerTopY": 4.424800059181457,
+      "minTopY": 8.214800059181457,
+      "proposedTopY": 8.647640125462065,
+      "headroomM": 3.4728400662806074
+    },
+    {
+      "route": "east",
+      "s": 142.2244602269494,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13668527031392,
+        49.29490285002275
+      ],
+      "lowerTopY": 4.438131895417609,
+      "minTopY": 8.228131895417608,
+      "proposedTopY": 8.716151774455291,
+      "headroomM": 3.528019879037682
+    },
+    {
+      "route": "east",
+      "s": 143.85734201465758,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.1366864660371,
+        49.29491749763175
+      ],
+      "lowerTopY": 4.479732007881502,
+      "minTopY": 8.269732007881501,
+      "proposedTopY": 8.801713652698416,
+      "headroomM": 3.5719816448169137
+    },
+    {
+      "route": "east",
+      "s": 140.98450133063727,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.1367291945909,
+        49.29489016995091
+      ],
+      "lowerTopY": 4.465767790059079,
+      "minTopY": 8.255767790059078,
+      "proposedTopY": 8.647640125462065,
+      "headroomM": 3.4318723354029856
+    },
+    {
+      "route": "east",
+      "s": 140.98450133063727,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13668436231947,
+        49.29489172709074
+      ],
+      "lowerTopY": 4.358503324654102,
+      "minTopY": 8.1485033246541,
+      "proposedTopY": 8.647640125462065,
+      "headroomM": 3.539136800807963
+    },
+    {
+      "route": "east",
+      "s": 142.2244602269494,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13668527031392,
+        49.29490285002275
+      ],
+      "lowerTopY": 4.438131895417619,
+      "minTopY": 8.228131895417619,
+      "proposedTopY": 8.716151774455291,
+      "headroomM": 3.5280198790376716
+    },
+    {
+      "route": "east",
+      "s": 140.98450133063727,
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13669818311769,
+        49.294891247058956
+      ],
+      "lowerTopY": 4.4248000591814645,
+      "minTopY": 8.214800059181464,
+      "proposedTopY": 8.647640125462065,
+      "headroomM": 3.4728400662806003
+    },
+    {
+      "route": "east",
+      "s": 145.90066797758078,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13676757970846,
+        49.294933061774515
+      ],
+      "lowerTopY": 4.808605664715017,
+      "minTopY": 8.598605664715016,
+      "proposedTopY": 8.89933800012801,
+      "headroomM": 3.3407323354129925
+    },
+    {
+      "route": "east",
+      "s": 143.02238483800843,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13679737599817,
+        49.294906134304945
+      ],
+      "lowerTopY": 4.661384545535839,
+      "minTopY": 8.451384545535838,
+      "proposedTopY": 8.758697189422485,
+      "headroomM": 3.347312643886646
+    },
+    {
+      "route": "east",
+      "s": 145.90066797758072,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13675241731534,
+        49.29493358840334
+      ],
+      "lowerTopY": 4.781827534033468,
+      "minTopY": 8.571827534033467,
+      "proposedTopY": 8.899338000128006,
+      "headroomM": 3.3675104660945383
+    },
+    {
+      "route": "east",
+      "s": 145.90066797758072,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13683277319585,
+        49.2949307974374
+      ],
+      "lowerTopY": 4.908159953315533,
+      "minTopY": 8.698159953315532,
+      "proposedTopY": 8.899338000128006,
+      "headroomM": 3.2411780468124736
+    },
+    {
+      "route": "east",
+      "s": 143.02238483800843,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13679737599817,
+        49.294906134304945
+      ],
+      "lowerTopY": 4.661384545535853,
+      "minTopY": 8.451384545535852,
+      "proposedTopY": 8.758697189422485,
+      "headroomM": 3.3473126438866316
+    },
+    {
+      "route": "east",
+      "s": 145.90066797758078,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13676757970846,
+        49.294933061774515
+      ],
+      "lowerTopY": 4.8086056647150315,
+      "minTopY": 8.59860566471503,
+      "proposedTopY": 8.89933800012801,
+      "headroomM": 3.3407323354129783
+    },
+    {
+      "route": "east",
+      "s": 140.98450133063727,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13683563768052,
+        49.294886472909255
+      ],
+      "lowerTopY": 4.674287454395376,
+      "minTopY": 8.464287454395375,
+      "proposedTopY": 8.647640125462065,
+      "headroomM": 3.2233526710666887
+    },
+    {
+      "route": "east",
+      "s": 140.98450133063727,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13682920766789,
+        49.29488669624009
+      ],
+      "lowerTopY": 4.655235625410775,
+      "minTopY": 8.445235625410774,
+      "proposedTopY": 8.647640125462065,
+      "headroomM": 3.2424045000512898
+    },
+    {
+      "route": "east",
+      "s": 143.02238483800843,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13679737599817,
+        49.294906134304945
+      ],
+      "lowerTopY": 4.661384545535832,
+      "minTopY": 8.45138454553583,
+      "proposedTopY": 8.758697189422485,
+      "headroomM": 3.347312643886653
+    },
+    {
+      "route": "east",
+      "s": 145.90066797758072,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13683277319585,
+        49.2949307974374
+      ],
+      "lowerTopY": 4.9081599533155185,
+      "minTopY": 8.698159953315518,
+      "proposedTopY": 8.899338000128006,
+      "headroomM": 3.241178046812488
+    },
+    {
+      "route": "east",
+      "s": 145.90066797758078,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.1368369186622,
+        49.29493065345471
+      ],
+      "lowerTopY": 4.920442777686979,
+      "minTopY": 8.710442777686978,
+      "proposedTopY": 8.89933800012801,
+      "headroomM": 3.2288952224410306
+    },
+    {
+      "route": "east",
+      "s": 145.69145305508954,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13683908447707,
+        49.29492869616692
+      ],
+      "lowerTopY": 4.916545996576076,
+      "minTopY": 8.706545996576075,
+      "proposedTopY": 8.889896180201719,
+      "headroomM": 3.2233501836256426
+    },
+    {
+      "route": "east",
+      "s": 145.69145305508954,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13683908447707,
+        49.29492869616692
+      ],
+      "lowerTopY": 4.916545996576097,
+      "minTopY": 8.706545996576097,
+      "proposedTopY": 8.889896180201719,
+      "headroomM": 3.2233501836256213
+    },
+    {
+      "route": "east",
+      "s": 145.90066797758078,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.1368369186622,
+        49.29493065345471
+      ],
+      "lowerTopY": 4.920442777687001,
+      "minTopY": 8.710442777687,
+      "proposedTopY": 8.89933800012801,
+      "headroomM": 3.2288952224410092
+    },
+    {
+      "route": "east",
+      "s": 145.90066797758078,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13683788279516,
+        49.2949306199679
+      ],
+      "lowerTopY": 4.9229679261023165,
+      "minTopY": 8.712967926102316,
+      "proposedTopY": 8.89933800012801,
+      "headroomM": 3.2263700740256933
+    },
+    {
+      "route": "east",
+      "s": 145.8178117390011,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13683917700673,
+        49.29492982965534
+      ],
+      "lowerTopY": 4.922567834333222,
+      "minTopY": 8.712567834333221,
+      "proposedTopY": 8.895614931739525,
+      "headroomM": 3.223047097406303
+    },
+    {
+      "route": "east",
+      "s": 145.90066797758078,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13670751977602,
+        49.2949332
+      ],
+      "lowerTopY": 4.714343019478164,
+      "minTopY": 8.504343019478164,
+      "proposedTopY": 8.89933800012801,
+      "headroomM": 3.4349949806498454
+    },
+    {
+      "route": "east",
+      "s": 148.00218850026494,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13668785516717,
+        49.2949520781937
+      ],
+      "lowerTopY": 4.789311266868118,
+      "minTopY": 8.579311266868118,
+      "proposedTopY": 8.986089203877048,
+      "headroomM": 3.44677793700893
+    },
+    {
+      "route": "east",
+      "s": 150.1399264434139,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13668785516717,
+        49.294971281732536
+      ],
+      "lowerTopY": 4.904228529331185,
+      "minTopY": 8.694228529331184,
+      "proposedTopY": 9.05707376646538,
+      "headroomM": 3.402845237134196
+    },
+    {
+      "route": "east",
+      "s": 145.90066797758078,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13674794385241,
+        49.2949332
+      ],
+      "lowerTopY": 4.792463035291277,
+      "minTopY": 8.582463035291276,
+      "proposedTopY": 8.89933800012801,
+      "headroomM": 3.3568749648367326
+    },
+    {
+      "route": "east",
+      "s": 145.90066797758078,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13668785516717,
+        49.2949332
+      ],
+      "lowerTopY": 4.64811963589797,
+      "minTopY": 8.43811963589797,
+      "proposedTopY": 8.89933800012801,
+      "headroomM": 3.5012183642300396
+    },
+    {
+      "route": "east",
+      "s": 148.00218850026494,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13668785516717,
+        49.2949520781937
+      ],
+      "lowerTopY": 4.7893112668681255,
+      "minTopY": 8.579311266868125,
+      "proposedTopY": 8.986089203877048,
+      "headroomM": 3.446777937008923
+    },
+    {
+      "route": "east",
+      "s": 145.90066797758078,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13670751977602,
+        49.2949332
+      ],
+      "lowerTopY": 4.7143430194781715,
+      "minTopY": 8.50434301947817,
+      "proposedTopY": 8.89933800012801,
+      "headroomM": 3.4349949806498383
+    },
+    {
+      "route": "east",
+      "s": 145.90066797758078,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13675305336253,
+        49.2949332
+      ],
+      "lowerTopY": 4.780123582303659,
+      "minTopY": 8.570123582303658,
+      "proposedTopY": 8.89933800012801,
+      "headroomM": 3.3692144178243506
+    },
+    {
+      "route": "east",
+      "s": 150.332694792366,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13668785516717,
+        49.29497301339216
+      ],
+      "lowerTopY": 4.954787629349099,
+      "minTopY": 8.744787629349098,
+      "proposedTopY": 9.062512130815715,
+      "headroomM": 3.357724501466617
+    },
+    {
+      "route": "east",
+      "s": 150.3868639770115,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13668785516717,
+        49.2949735
+      ],
+      "lowerTopY": 4.958543365797013,
+      "minTopY": 8.748543365797012,
+      "proposedTopY": 9.064009973417454,
+      "headroomM": 3.355466607620441
+    },
+    {
+      "route": "east",
+      "s": 150.3868639770115,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13672283324321,
+        49.2949735
+      ],
+      "lowerTopY": 5.029694423075753,
+      "minTopY": 8.819694423075752,
+      "proposedTopY": 9.064009973417454,
+      "headroomM": 3.2843155503417005
+    },
+    {
+      "route": "east",
+      "s": 145.90066797758078,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.1367674267566,
+        49.2949332
+      ],
+      "lowerTopY": 4.809361387824211,
+      "minTopY": 8.59936138782421,
+      "proposedTopY": 8.89933800012801,
+      "headroomM": 3.339976612303799
+    },
+    {
+      "route": "east",
+      "s": 145.90066797758078,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.1367674267566,
+        49.2949332
+      ],
+      "lowerTopY": 4.809361387824232,
+      "minTopY": 8.599361387824231,
+      "proposedTopY": 8.89933800012801,
+      "headroomM": 3.3399766123037775
+    },
+    {
+      "route": "east",
+      "s": 150.3868639770115,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13672283324321,
+        49.2949735
+      ],
+      "lowerTopY": 5.029694423075753,
+      "minTopY": 8.819694423075752,
+      "proposedTopY": 9.064009973417454,
+      "headroomM": 3.2843155503417005
+    },
+    {
+      "route": "east",
+      "s": 150.3868639770115,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13676766268685,
+        49.2949735
+      ],
+      "lowerTopY": 5.109740886029044,
+      "minTopY": 8.899740886029043,
+      "proposedTopY": 9.064009973417454,
+      "headroomM": 3.2042690873884094
+    },
+    {
+      "route": "east",
+      "s": 145.90066797758078,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13683365774857,
+        49.2949332
+      ],
+      "lowerTopY": 4.927621982100092,
+      "minTopY": 8.717621982100091,
+      "proposedTopY": 8.89933800012801,
+      "headroomM": 3.2217160180279176
+    },
+    {
+      "route": "east",
+      "s": 150.38686397701156,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13668798011622,
+        49.29497066328769
+      ],
+      "lowerTopY": 4.900769115086391,
+      "minTopY": 8.69076911508639,
+      "proposedTopY": 9.064009973417456,
+      "headroomM": 3.413240858331065
+    },
+    {
+      "route": "east",
+      "s": 150.45055195856196,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13668792975763,
+        49.29497123446018
+      ],
+      "lowerTopY": 4.904089790408101,
+      "minTopY": 8.6940897904081,
+      "proposedTopY": 9.065753852849683,
+      "headroomM": 3.4116640624415826
+    },
+    {
+      "route": "east",
+      "s": 150.38686397701156,
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13668878345321,
+        49.294970693423096
+      ],
+      "lowerTopY": 4.902501908952452,
+      "minTopY": 8.692501908952451,
+      "proposedTopY": 9.064009973417456,
+      "headroomM": 3.4115080644650035
+    },
+    {
+      "route": "east",
+      "s": 150.38686397701156,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13669148818245,
+        49.29497079488502
+      ],
+      "lowerTopY": 4.945054888311404,
+      "minTopY": 8.735054888311403,
+      "proposedTopY": 9.064009973417456,
+      "headroomM": 3.3689550851060517
+    },
+    {
+      "route": "east",
+      "s": 150.65482916396033,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13668776823401,
+        49.29497306647804
+      ],
+      "lowerTopY": 4.955020520721831,
+      "minTopY": 8.74502052072183,
+      "proposedTopY": 9.071221135592214,
+      "headroomM": 3.366200614870383
+    },
+    {
+      "route": "east",
+      "s": 154.54670465769027,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.136684690897,
+        49.29500796995843
+      ],
+      "lowerTopY": 5.218152749804361,
+      "minTopY": 9.00815274980436,
+      "proposedTopY": 9.135082941005523,
+      "headroomM": 3.1669301912011623
+    },
+    {
+      "route": "east",
+      "s": 150.38686397701156,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.1367244580021,
+        49.29497203167472
+      ],
+      "lowerTopY": 5.021666617462387,
+      "minTopY": 8.811666617462386,
+      "proposedTopY": 9.064009973417456,
+      "headroomM": 3.2923433559550688
+    },
+    {
+      "route": "east",
+      "s": 150.38686397701156,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.1367244580021,
+        49.29497203167472
+      ],
+      "lowerTopY": 5.0216666174623725,
+      "minTopY": 8.811666617462372,
+      "proposedTopY": 9.064009973417456,
+      "headroomM": 3.292343355955083
+    },
+    {
+      "route": "east",
+      "s": 154.54670465769027,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.136684690897,
+        49.29500796995843
+      ],
+      "lowerTopY": 5.218152749804368,
+      "minTopY": 9.008152749804367,
+      "proposedTopY": 9.135082941005523,
+      "headroomM": 3.166930191201155
+    },
+    {
+      "route": "east",
+      "s": 155.19268368108655,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13668418011622,
+        49.29501376328769
+      ],
+      "lowerTopY": 5.260361226336812,
+      "minTopY": 9.050361226336811,
+      "proposedTopY": 9.13752611356098,
+      "headroomM": 3.1271648872241684
+    },
+    {
+      "route": "east",
+      "s": 155.19268368108655,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13670071216892,
+        49.295014383451
+      ],
+      "lowerTopY": 5.294496451437702,
+      "minTopY": 9.084496451437701,
+      "proposedTopY": 9.13752611356098,
+      "headroomM": 3.0930296621232785
+    },
+    {
+      "route": "east",
+      "s": 150.38686397701153,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13676742755722,
+        49.294973643582324
+      ],
+      "lowerTopY": 5.110389745967325,
+      "minTopY": 8.900389745967324,
+      "proposedTopY": 9.064009973417456,
+      "headroomM": 3.2036202274501306
+    },
+    {
+      "route": "east",
+      "s": 155.19268368108655,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.1366842806459,
+        49.295012790593375
+      ],
+      "lowerTopY": 5.253300837595823,
+      "minTopY": 9.043300837595822,
+      "proposedTopY": 9.13752611356098,
+      "headroomM": 3.134225275965157
+    },
+    {
+      "route": "east",
+      "s": 156.59216072928345,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13668279462834,
+        49.29502532482853
+      ],
+      "lowerTopY": 5.343941406365914,
+      "minTopY": 9.133941406365913,
+      "proposedTopY": 9.133941406365913,
+      "headroomM": 3.039999999999999
+    },
+    {
+      "route": "east",
+      "s": 155.19268368108655,
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13670186783695,
+        49.29501367774029
+      ],
+      "lowerTopY": 5.291307288656064,
+      "minTopY": 9.081307288656063,
+      "proposedTopY": 9.13752611356098,
+      "headroomM": 3.0962188249049163
+    },
+    {
+      "route": "east",
+      "s": 411.72573436664,
+      "upperWayId": 44032488,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13672502017265,
+        49.29719606478529
+      ],
+      "lowerTopY": 6.188537428607859,
+      "minTopY": 9.978537428607858,
+      "proposedTopY": 10.740650073988684,
+      "headroomM": 3.8021126453808254
+    },
+    {
+      "route": "east",
+      "s": 413.6096805983966,
+      "upperWayId": 44032488,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.1366874338328,
+        49.29722746415151
+      ],
+      "lowerTopY": 6.622335466960699,
+      "minTopY": 10.412335466960698,
+      "proposedTopY": 10.81263631368157,
+      "headroomM": 3.4403008467208718
+    },
+    {
+      "route": "east",
+      "s": 412.64549426166474,
+      "upperWayId": 44032488,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13673074661448,
+        49.29720343455462
+      ],
+      "lowerTopY": 6.08452227037575,
+      "minTopY": 9.87452227037575,
+      "proposedTopY": 10.776978597695285,
+      "headroomM": 3.942456327319535
+    },
+    {
+      "route": "east",
+      "s": 409.5601852068323,
+      "upperWayId": 44032488,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.1367115374242,
+        49.29717871286783
+      ],
+      "lowerTopY": 6.328161503837823,
+      "minTopY": 10.118161503837822,
+      "proposedTopY": 10.646933353650637,
+      "headroomM": 3.568771849812814
+    },
+    {
+      "route": "east",
+      "s": 410.69263085068866,
+      "upperWayId": 44032488,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.1366606661672,
+        49.29720693584849
+      ],
+      "lowerTopY": 6.907311576494662,
+      "minTopY": 10.697311576494661,
+      "proposedTopY": 10.697311576494663,
+      "headroomM": 3.040000000000001
+    },
+    {
+      "route": "east",
+      "s": 413.6096805983966,
+      "upperWayId": 44032488,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.1366874338328,
+        49.29722746415151
+      ],
+      "lowerTopY": 6.622335466960704,
+      "minTopY": 10.412335466960704,
+      "proposedTopY": 10.81263631368157,
+      "headroomM": 3.4403008467208664
+    },
+    {
+      "route": "east",
+      "s": 411.72573436664,
+      "upperWayId": 44032488,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13672502017265,
+        49.29719606478529
+      ],
+      "lowerTopY": 6.18853742860785,
+      "minTopY": 9.978537428607849,
+      "proposedTopY": 10.740650073988684,
+      "headroomM": 3.8021126453808343
+    },
+    {
+      "route": "east",
+      "s": 413.77235792419447,
+      "upperWayId": 44032488,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13660263751187,
+        49.297257136213624
+      ],
+      "lowerTopY": 6.342805147456119,
+      "minTopY": 10.132805147456118,
+      "proposedTopY": 10.818397439649738,
+      "headroomM": 3.7255922921936193
+    },
+    {
+      "route": "east",
+      "s": 413.7723579241945,
+      "upperWayId": 44032488,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13668012610894,
+        49.29723151842029
+      ],
+      "lowerTopY": 6.57955495610679,
+      "minTopY": 10.36955495610679,
+      "proposedTopY": 10.81839743964974,
+      "headroomM": 3.4888424835429497
+    },
+    {
+      "route": "east",
+      "s": 413.6096805983966,
+      "upperWayId": 44032488,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.1366874338328,
+        49.29722746415151
+      ],
+      "lowerTopY": 6.622335466960692,
+      "minTopY": 10.412335466960691,
+      "proposedTopY": 10.81263631368157,
+      "headroomM": 3.440300846720879
+    },
+    {
+      "route": "east",
+      "s": 410.69263085068866,
+      "upperWayId": 44032488,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.1366606661672,
+        49.29720693584849
+      ],
+      "lowerTopY": 6.907311576494635,
+      "minTopY": 10.697311576494634,
+      "proposedTopY": 10.697311576494663,
+      "headroomM": 3.0400000000000276
+    },
+    {
+      "route": "east",
+      "s": 413.6419169943013,
+      "upperWayId": 44032488,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13660182538428,
+        49.297256091028274
+      ],
+      "lowerTopY": 6.356724128214182,
+      "minTopY": 10.146724128214181,
+      "proposedTopY": 10.813783912143176,
+      "headroomM": 3.707059783928994
+    },
+    {
+      "route": "east",
+      "s": 413.6419169943013,
+      "upperWayId": 44032488,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13660182538428,
+        49.297256091028274
+      ],
+      "lowerTopY": 6.356724128214154,
+      "minTopY": 10.146724128214153,
+      "proposedTopY": 10.813783912143176,
+      "headroomM": 3.7070597839290222
+    },
+    {
+      "route": "east",
+      "s": 410.69263085068866,
+      "upperWayId": 44032488,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.1366606661672,
+        49.29720693584849
+      ],
+      "lowerTopY": 6.907311576494607,
+      "minTopY": 10.697311576494606,
+      "proposedTopY": 10.697311576494663,
+      "headroomM": 3.040000000000056
+    },
+    {
+      "route": "east",
+      "s": 412.20204834618295,
+      "upperWayId": 44032488,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13659286073589,
+        49.297244553778334
+      ],
+      "lowerTopY": 6.54088868467133,
+      "minTopY": 10.33088868467133,
+      "proposedTopY": 10.759737361507295,
+      "headroomM": 3.4688486768359645
+    },
+    {
+      "route": "east",
+      "s": 422.5366672108536,
+      "upperWayId": 44032488,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13679560207446,
+        49.297278944422004
+      ],
+      "lowerTopY": 6.204665990236663,
+      "minTopY": 9.994665990236662,
+      "proposedTopY": 10.953331983542668,
+      "headroomM": 3.9986659933060054
+    },
+    {
+      "route": "east",
+      "s": 422.22553330742267,
+      "upperWayId": 44032488,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13679348981819,
+        49.29727651266479
+      ],
+      "lowerTopY": 6.166685591787086,
+      "minTopY": 9.956685591787085,
+      "proposedTopY": 10.95670032070785,
+      "headroomM": 4.040014728920763
+    },
+    {
+      "route": "east",
+      "s": 422.5366672108536,
+      "upperWayId": 44032488,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13676747172522,
+        49.29728934061849
+      ],
+      "lowerTopY": 6.374768156584992,
+      "minTopY": 10.16476815658499,
+      "proposedTopY": 10.953331983542668,
+      "headroomM": 3.8285638269576765
+    },
+    {
+      "route": "east",
+      "s": 413.7723579241945,
+      "upperWayId": 44032488,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13660429792554,
+        49.297259155578
+      ],
+      "lowerTopY": 6.315814884512122,
+      "minTopY": 10.105814884512121,
+      "proposedTopY": 10.81839743964974,
+      "headroomM": 3.752582555137618
+    },
+    {
+      "route": "east",
+      "s": 415.01838291442243,
+      "upperWayId": 44032488,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13661275706185,
+        49.29726889424753
+      ],
+      "lowerTopY": 6.185166456100632,
+      "minTopY": 9.97516645610063,
+      "proposedTopY": 10.85996884766208,
+      "headroomM": 3.924802391561448
+    },
+    {
+      "route": "east",
+      "s": 413.7723579241945,
+      "upperWayId": 44032488,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13668221462348,
+        49.29723035972856
+      ],
+      "lowerTopY": 6.591781433205682,
+      "minTopY": 10.381781433205681,
+      "proposedTopY": 10.81839743964974,
+      "headroomM": 3.4766160064440577
+    },
+    {
+      "route": "east",
+      "s": 424.29767269947615,
+      "upperWayId": 44032488,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13680712497253,
+        49.297291435926546
+      ],
+      "lowerTopY": 6.399624645922415,
+      "minTopY": 10.189624645922414,
+      "proposedTopY": 10.923622062239286,
+      "headroomM": 3.7739974163168704
+    },
+    {
+      "route": "east",
+      "s": 426.0568441927295,
+      "upperWayId": 44032488,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13674510640216,
+        49.297334149386025
+      ],
+      "lowerTopY": 7.087361136580682,
+      "minTopY": 10.877361136580681,
+      "proposedTopY": 10.87736113658071,
+      "headroomM": 3.0400000000000276
+    },
+    {
+      "route": "east",
+      "s": 425.38155683672034,
+      "upperWayId": 44032488,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13681480721101,
+        49.297299784117584
+      ],
+      "lowerTopY": 6.512791241739734,
+      "minTopY": 10.302791241739733,
+      "proposedTopY": 10.896948865887977,
+      "headroomM": 3.6341576241482425
+    },
+    {
+      "route": "east",
+      "s": 422.53666721085364,
+      "upperWayId": 44032488,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13679464350551,
+        49.29727787247477
+      ],
+      "lowerTopY": 6.187929494931865,
+      "minTopY": 9.977929494931864,
+      "proposedTopY": 10.953331983542668,
+      "headroomM": 4.015402488610803
+    },
+    {
+      "route": "east",
+      "s": 422.53666721085364,
+      "upperWayId": 44032488,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13677564354894,
+        49.29728531158468
+      ],
+      "lowerTopY": 6.309413096141668,
+      "minTopY": 10.099413096141667,
+      "proposedTopY": 10.953331983542668,
+      "headroomM": 3.893918887401
+    },
+    {
+      "route": "east",
+      "s": 423.0738869575462,
+      "upperWayId": 44032488,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13672019359784,
+        49.297312650613975
+      ],
+      "lowerTopY": 6.752880188702306,
+      "minTopY": 10.542880188702306,
+      "proposedTopY": 10.94615161163525,
+      "headroomM": 3.443271422932943
+    },
+    {
+      "route": "east",
+      "s": 426.0568441927295,
+      "upperWayId": 44032488,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13674510640216,
+        49.297334149386025
+      ],
+      "lowerTopY": 7.087361136580711,
+      "minTopY": 10.87736113658071,
+      "proposedTopY": 10.87736113658071,
+      "headroomM": 3.039999999999999
+    },
+    {
+      "route": "east",
+      "s": 424.29767269947615,
+      "upperWayId": 44032488,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13680712497253,
+        49.297291435926546
+      ],
+      "lowerTopY": 6.399624645922444,
+      "minTopY": 10.189624645922443,
+      "proposedTopY": 10.923622062239286,
+      "headroomM": 3.773997416316842
+    },
+    {
+      "route": "east",
+      "s": 426.5590913165963,
+      "upperWayId": 44032488,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13669326620338,
+        49.29735970866399
+      ],
+      "lowerTopY": 6.58890936670111,
+      "minTopY": 10.378909366701109,
+      "proposedTopY": 10.861397902163395,
+      "headroomM": 3.5224885354622852
+    },
+    {
+      "route": "east",
+      "s": 426.0568441927295,
+      "upperWayId": 44032488,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13674510640216,
+        49.297334149386025
+      ],
+      "lowerTopY": 7.0873611365806575,
+      "minTopY": 10.877361136580657,
+      "proposedTopY": 10.87736113658071,
+      "headroomM": 3.0400000000000524
+    },
+    {
+      "route": "east",
+      "s": 423.0738869575462,
+      "upperWayId": 44032488,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13672019359784,
+        49.297312650613975
+      ],
+      "lowerTopY": 6.752880188702253,
+      "minTopY": 10.542880188702252,
+      "proposedTopY": 10.94615161163525,
+      "headroomM": 3.4432714229329964
+    },
+    {
+      "route": "east",
+      "s": 424.29322747953034,
+      "upperWayId": 44032488,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13667720645516,
+        49.297342256739455
+      ],
+      "lowerTopY": 6.363192379184735,
+      "minTopY": 10.153192379184734,
+      "proposedTopY": 10.923718826929063,
+      "headroomM": 3.810526447744328
+    },
+    {
+      "route": "east",
+      "s": 424.29322747953034,
+      "upperWayId": 44032488,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13667720645516,
+        49.297342256739455
+      ],
+      "lowerTopY": 6.363192379184753,
+      "minTopY": 10.153192379184752,
+      "proposedTopY": 10.923718826929063,
+      "headroomM": 3.8105264477443104
+    },
+    {
+      "route": "east",
+      "s": 423.0738869575462,
+      "upperWayId": 44032488,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13672019359784,
+        49.297312650613975
+      ],
+      "lowerTopY": 6.752880188702264,
+      "minTopY": 10.542880188702263,
+      "proposedTopY": 10.94615161163525,
+      "headroomM": 3.4432714229329857
+    },
+    {
+      "route": "east",
+      "s": 423.54195118000746,
+      "upperWayId": 44032488,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13667188163907,
+        49.297336470329405
+      ],
+      "lowerTopY": 6.362853797599222,
+      "minTopY": 10.15285379759922,
+      "proposedTopY": 10.938525598430514,
+      "headroomM": 3.8256718008312927
+    },
+    {
+      "route": "west",
+      "s": 129.68999154145703,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13695232047554,
+        49.29471779200204
+      ],
+      "lowerTopY": 4.176004048714873,
+      "minTopY": 7.966004048714873,
+      "proposedTopY": 7.981182404318026,
+      "headroomM": 3.055178355603153
+    },
+    {
+      "route": "west",
+      "s": 129.13461785243115,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13694613732798,
+        49.294713678630025
+      ],
+      "lowerTopY": 4.142192827952485,
+      "minTopY": 7.932192827952485,
+      "proposedTopY": 7.947859982976474,
+      "headroomM": 3.055667155023989
+    },
+    {
+      "route": "west",
+      "s": 129.68999154145715,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13693908647919,
+        49.29472001425974
+      ],
+      "lowerTopY": 4.1567227644937645,
+      "minTopY": 7.946722764493765,
+      "proposedTopY": 7.981182404318034,
+      "headroomM": 3.074459639824269
+    },
+    {
+      "route": "west",
+      "s": 129.68999154145715,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13693908647919,
+        49.29472001425974
+      ],
+      "lowerTopY": 4.1567227644937645,
+      "minTopY": 7.946722764493765,
+      "proposedTopY": 7.981182404318034,
+      "headroomM": 3.074459639824269
+    },
+    {
+      "route": "west",
+      "s": 129.13461785243115,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13694613732798,
+        49.294713678630025
+      ],
+      "lowerTopY": 4.142192827952481,
+      "minTopY": 7.932192827952481,
+      "proposedTopY": 7.947859982976474,
+      "headroomM": 3.0556671550239924
+    },
+    {
+      "route": "west",
+      "s": 129.68999154145715,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13693521459085,
+        49.2947206644287
+      ],
+      "lowerTopY": 4.155134018827152,
+      "minTopY": 7.945134018827152,
+      "proposedTopY": 7.981182404318034,
+      "headroomM": 3.076048385490882
+    },
+    {
+      "route": "west",
+      "s": 134.05836987409123,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13697810546647,
+        49.294756113998396
+      ],
+      "lowerTopY": 4.424588521857615,
+      "minTopY": 8.214588521857614,
+      "proposedTopY": 8.243285008323147,
+      "headroomM": 3.068696486465532
+    },
+    {
+      "route": "west",
+      "s": 132.33639169858537,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13697294155612,
+        49.294741016458964
+      ],
+      "lowerTopY": 4.338101370627506,
+      "minTopY": 8.128101370627505,
+      "proposedTopY": 8.139966413745727,
+      "headroomM": 3.0518650431182213
+    },
+    {
+      "route": "west",
+      "s": 134.05836987409128,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13695348249964,
+        49.29475969732062
+      ],
+      "lowerTopY": 4.3788867578892905,
+      "minTopY": 8.16888675788929,
+      "proposedTopY": 8.24328500832315,
+      "headroomM": 3.11439825043386
+    },
+    {
+      "route": "west",
+      "s": 132.288539295489,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13697279805515,
+        49.29474059691036
+      ],
+      "lowerTopY": 4.335653457467664,
+      "minTopY": 8.125653457467664,
+      "proposedTopY": 8.137095269559943,
+      "headroomM": 3.0514418120922784
+    },
+    {
+      "route": "west",
+      "s": 134.0583698740912,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13693943381163,
+        49.29476174179301
+      ],
+      "lowerTopY": 4.351897783660483,
+      "minTopY": 8.141897783660482,
+      "proposedTopY": 8.243285008323143,
+      "headroomM": 3.14138722466266
+    },
+    {
+      "route": "west",
+      "s": 134.05836987409128,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13695348249964,
+        49.29475969732062
+      ],
+      "lowerTopY": 4.3788867578892905,
+      "minTopY": 8.16888675788929,
+      "proposedTopY": 8.24328500832315,
+      "headroomM": 3.11439825043386
+    },
+    {
+      "route": "west",
+      "s": 132.33639169858537,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13697294155612,
+        49.294741016458964
+      ],
+      "lowerTopY": 4.338101370627506,
+      "minTopY": 8.128101370627505,
+      "proposedTopY": 8.139966413745727,
+      "headroomM": 3.0518650431182213
+    },
+    {
+      "route": "west",
+      "s": 129.68999154145715,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13693699936829,
+        49.29472188965973
+      ],
+      "lowerTopY": 4.161023748642108,
+      "minTopY": 7.9510237486421085,
+      "proposedTopY": 7.981182404318034,
+      "headroomM": 3.0701586556759253
+    },
+    {
+      "route": "west",
+      "s": 134.05836987409128,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13688360688462,
+        49.29476986615388
+      ],
+      "lowerTopY": 4.271051551265238,
+      "minTopY": 8.061051551265237,
+      "proposedTopY": 8.24328500832315,
+      "headroomM": 3.2222334570579125
+    },
+    {
+      "route": "west",
+      "s": 134.05836987409123,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.1369272212567,
+        49.29476351905729
+      ],
+      "lowerTopY": 4.339297625836167,
+      "minTopY": 8.129297625836166,
+      "proposedTopY": 8.243285008323147,
+      "headroomM": 3.1539873824869797
+    },
+    {
+      "route": "west",
+      "s": 131.7057708683921,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13697105043492,
+        49.29473548745576
+      ],
+      "lowerTopY": 4.303629996499112,
+      "minTopY": 8.09362999649911,
+      "proposedTopY": 8.10212916393413,
+      "headroomM": 3.0484991674350184
+    },
+    {
+      "route": "west",
+      "s": 130.9327634605034,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13696873232136,
+        49.29472871007032
+      ],
+      "lowerTopY": 4.2657487194608095,
+      "minTopY": 8.055748719460809,
+      "proposedTopY": 8.055748719460807,
+      "headroomM": 3.0399999999999974
+    },
+    {
+      "route": "west",
+      "s": 129.68999154145715,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13695462443746,
+        49.29471932472504
+      ],
+      "lowerTopY": 4.188602771970999,
+      "minTopY": 7.978602771970999,
+      "proposedTopY": 7.981182404318034,
+      "headroomM": 3.042579632347035
+    },
+    {
+      "route": "west",
+      "s": 129.68999154145715,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13693220881422,
+        49.294722586817755
+      ],
+      "lowerTopY": 4.158695244234359,
+      "minTopY": 7.948695244234359,
+      "proposedTopY": 7.981182404318034,
+      "headroomM": 3.072487160083675
+    },
+    {
+      "route": "west",
+      "s": 134.05836987409128,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13685082544544,
+        49.294774636759314
+      ],
+      "lowerTopY": 4.255117752267477,
+      "minTopY": 8.045117752267476,
+      "proposedTopY": 8.24328500832315,
+      "headroomM": 3.2381672560556733
+    },
+    {
+      "route": "west",
+      "s": 134.05836987409128,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13688360688462,
+        49.29476986615388
+      ],
+      "lowerTopY": 4.271051551265227,
+      "minTopY": 8.061051551265226,
+      "proposedTopY": 8.24328500832315,
+      "headroomM": 3.222233457057923
+    },
+    {
+      "route": "west",
+      "s": 129.68999154145715,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13693699936829,
+        49.29472188965973
+      ],
+      "lowerTopY": 4.161023748642108,
+      "minTopY": 7.9510237486421085,
+      "proposedTopY": 7.981182404318034,
+      "headroomM": 3.0701586556759253
+    },
+    {
+      "route": "west",
+      "s": 134.05836987409128,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13697889218955,
+        49.29475865421022
+      ],
+      "lowerTopY": 4.438929863324866,
+      "minTopY": 8.228929863324865,
+      "proposedTopY": 8.24328500832315,
+      "headroomM": 3.0543551449982846
+    },
+    {
+      "route": "west",
+      "s": 134.05836987409128,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.1369511561404,
+        49.2947619306455
+      ],
+      "lowerTopY": 4.383762711778608,
+      "minTopY": 8.173762711778608,
+      "proposedTopY": 8.24328500832315,
+      "headroomM": 3.109522296544542
+    },
+    {
+      "route": "west",
+      "s": 138.66279272380913,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13690122635794,
+        49.29480986366625
+      ],
+      "lowerTopY": 4.488413495589995,
+      "minTopY": 8.278413495589994,
+      "proposedTopY": 8.511034552310234,
+      "headroomM": 3.2726210567202383
+    },
+    {
+      "route": "west",
+      "s": 138.6627927238092,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13695202288912,
+        49.294803863116364
+      ],
+      "lowerTopY": 4.589448070410697,
+      "minTopY": 8.379448070410696,
+      "proposedTopY": 8.511034552310237,
+      "headroomM": 3.1715864818995403
+    },
+    {
+      "route": "west",
+      "s": 136.76939773855338,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13698554549136,
+        49.294782617872485
+      ],
+      "lowerTopY": 4.572253289098363,
+      "minTopY": 8.362253289098362,
+      "proposedTopY": 8.404125609813468,
+      "headroomM": 3.081872320715105
+    },
+    {
+      "route": "west",
+      "s": 134.05836987409128,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.1369363820071,
+        49.29476367590097
+      ],
+      "lowerTopY": 4.353383641071069,
+      "minTopY": 8.143383641071068,
+      "proposedTopY": 8.24328500832315,
+      "headroomM": 3.1399013672520812
+    },
+    {
+      "route": "west",
+      "s": 138.6627927238092,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13685486059346,
+        49.29481534081354
+      ],
+      "lowerTopY": 4.393074648417041,
+      "minTopY": 8.18307464841704,
+      "proposedTopY": 8.511034552310237,
+      "headroomM": 3.3679599038931958
+    },
+    {
+      "route": "west",
+      "s": 138.66279272380913,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13690122635794,
+        49.29480986366625
+      ],
+      "lowerTopY": 4.488413495590002,
+      "minTopY": 8.278413495590002,
+      "proposedTopY": 8.511034552310234,
+      "headroomM": 3.272621056720231
+    },
+    {
+      "route": "west",
+      "s": 134.05836987409128,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.1369511561404,
+        49.2947619306455
+      ],
+      "lowerTopY": 4.383762711778608,
+      "minTopY": 8.173762711778608,
+      "proposedTopY": 8.24328500832315,
+      "headroomM": 3.109522296544542
+    },
+    {
+      "route": "west",
+      "s": 134.05836987409128,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13688355047208,
+        49.29476991684409
+      ],
+      "lowerTopY": 4.271167802624738,
+      "minTopY": 8.061167802624738,
+      "proposedTopY": 8.24328500832315,
+      "headroomM": 3.222117205698412
+    },
+    {
+      "route": "west",
+      "s": 138.6627927238092,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13682968956611,
+        49.294818314245035
+      ],
+      "lowerTopY": 4.382160899850774,
+      "minTopY": 8.172160899850773,
+      "proposedTopY": 8.511034552310237,
+      "headroomM": 3.378873652459463
+    },
+    {
+      "route": "west",
+      "s": 138.66279272380916,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13684423144058,
+        49.294816596426095
+      ],
+      "lowerTopY": 4.406833685614082,
+      "minTopY": 8.19683368561408,
+      "proposedTopY": 8.511034552310235,
+      "headroomM": 3.3542008666961536
+    },
+    {
+      "route": "west",
+      "s": 134.05836987409128,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13692484513423,
+        49.294765038741694
+      ],
+      "lowerTopY": 4.341231284166746,
+      "minTopY": 8.131231284166745,
+      "proposedTopY": 8.24328500832315,
+      "headroomM": 3.1520537241564046
+    },
+    {
+      "route": "west",
+      "s": 134.05836987409128,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13685246349279,
+        49.29477358912182
+      ],
+      "lowerTopY": 4.253177003979111,
+      "minTopY": 8.04317700397911,
+      "proposedTopY": 8.24328500832315,
+      "headroomM": 3.240108004344039
+    },
+    {
+      "route": "west",
+      "s": 137.43255744610934,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13679338861367,
+        49.294811371337666
+      ],
+      "lowerTopY": 4.323168552519213,
+      "minTopY": 8.113168552519213,
+      "proposedTopY": 8.442302201965004,
+      "headroomM": 3.369133649445791
+    },
+    {
+      "route": "west",
+      "s": 138.6627927238092,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13679640781045,
+        49.29482224578978
+      ],
+      "lowerTopY": 4.362899930193461,
+      "minTopY": 8.15289993019346,
+      "proposedTopY": 8.511034552310237,
+      "headroomM": 3.3981346221167765
+    },
+    {
+      "route": "west",
+      "s": 138.6627927238092,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13682968956611,
+        49.294818314245035
+      ],
+      "lowerTopY": 4.382160899850771,
+      "minTopY": 8.17216089985077,
+      "proposedTopY": 8.511034552310237,
+      "headroomM": 3.3788736524594665
+    },
+    {
+      "route": "west",
+      "s": 134.05836987409128,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13688355047208,
+        49.29476991684409
+      ],
+      "lowerTopY": 4.271167802624738,
+      "minTopY": 8.061167802624738,
+      "proposedTopY": 8.24328500832315,
+      "headroomM": 3.222117205698412
+    },
+    {
+      "route": "west",
+      "s": 137.60228907712826,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.1369875895417,
+        49.29478998007152
+      ],
+      "lowerTopY": 4.624641016333207,
+      "minTopY": 8.414641016333206,
+      "proposedTopY": 8.451958671265741,
+      "headroomM": 3.077317654932534
+    },
+    {
+      "route": "west",
+      "s": 138.66279272380916,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13696793239959,
+        49.29480198373978
+      ],
+      "lowerTopY": 4.628438184307129,
+      "minTopY": 8.418438184307128,
+      "proposedTopY": 8.511034552310235,
+      "headroomM": 3.1325963680031066
+    },
+    {
+      "route": "west",
+      "s": 138.6627927238092,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13698100554215,
+        49.29480043942086
+      ],
+      "lowerTopY": 4.6611985373441485,
+      "minTopY": 8.451198537344148,
+      "proposedTopY": 8.511034552310237,
+      "headroomM": 3.0998360149660886
+    },
+    {
+      "route": "west",
+      "s": 138.01010160799117,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13698859037976,
+        49.29479358485991
+      ],
+      "lowerTopY": 4.647551732967635,
+      "minTopY": 8.437551732967634,
+      "proposedTopY": 8.474945437461393,
+      "headroomM": 3.0773937044937583
+    },
+    {
+      "route": "west",
+      "s": 138.66279272380916,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13699019218954,
+        49.29479935421022
+      ],
+      "lowerTopY": 4.681363802274021,
+      "minTopY": 8.47136380227402,
+      "proposedTopY": 8.511034552310235,
+      "headroomM": 3.0796707500362146
+    },
+    {
+      "route": "west",
+      "s": 138.01010160799117,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13698859037976,
+        49.29479358485991
+      ],
+      "lowerTopY": 4.647551732967642,
+      "minTopY": 8.437551732967641,
+      "proposedTopY": 8.474945437461393,
+      "headroomM": 3.077393704493751
+    },
+    {
+      "route": "west",
+      "s": 138.6627927238092,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13698100554215,
+        49.29480043942086
+      ],
+      "lowerTopY": 4.661198537344163,
+      "minTopY": 8.451198537344162,
+      "proposedTopY": 8.511034552310237,
+      "headroomM": 3.0998360149660744
+    },
+    {
+      "route": "west",
+      "s": 138.6627927238092,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13690091758184,
+        49.29481016009396
+      ],
+      "lowerTopY": 4.489060677666586,
+      "minTopY": 8.279060677666585,
+      "proposedTopY": 8.511034552310237,
+      "headroomM": 3.271973874643651
+    },
+    {
+      "route": "west",
+      "s": 143.04012719908485,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13685565889082,
+        49.294853608826756
+      ],
+      "lowerTopY": 4.583921044704859,
+      "minTopY": 8.373921044704858,
+      "proposedTopY": 8.721029264621544,
+      "headroomM": 3.3871082199166853
+    },
+    {
+      "route": "west",
+      "s": 143.04012719908485,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13687626047054,
+        49.294851878215184
+      ],
+      "lowerTopY": 4.628308962218199,
+      "minTopY": 8.418308962218198,
+      "proposedTopY": 8.721029264621544,
+      "headroomM": 3.342720302403345
+    },
+    {
+      "route": "west",
+      "s": 138.6627927238092,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13694837774487,
+        49.29480617325857
+      ],
+      "lowerTopY": 4.591317777828422,
+      "minTopY": 8.381317777828421,
+      "proposedTopY": 8.511034552310237,
+      "headroomM": 3.169716774481815
+    },
+    {
+      "route": "west",
+      "s": 138.66279272380925,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13685724666784,
+        49.294813828617926
+      ],
+      "lowerTopY": 4.391912920576338,
+      "minTopY": 8.181912920576337,
+      "proposedTopY": 8.51103455231024,
+      "headroomM": 3.3691216317339023
+    },
+    {
+      "route": "west",
+      "s": 142.04151729655283,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13680158164881,
+        49.29484910681311
+      ],
+      "lowerTopY": 4.4190150104566115,
+      "minTopY": 8.20901501045661,
+      "proposedTopY": 8.679141172029611,
+      "headroomM": 3.510126161573
+    },
+    {
+      "route": "west",
+      "s": 143.04012719908485,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13680333826491,
+        49.29485800395963
+      ],
+      "lowerTopY": 4.467531645215054,
+      "minTopY": 8.257531645215053,
+      "proposedTopY": 8.721029264621544,
+      "headroomM": 3.50349761940649
+    },
+    {
+      "route": "west",
+      "s": 143.04012719908485,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13685565889082,
+        49.294853608826756
+      ],
+      "lowerTopY": 4.583921044704859,
+      "minTopY": 8.373921044704858,
+      "proposedTopY": 8.721029264621544,
+      "headroomM": 3.3871082199166853
+    },
+    {
+      "route": "west",
+      "s": 138.6627927238092,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13690091758184,
+        49.29481016009396
+      ],
+      "lowerTopY": 4.489060677666586,
+      "minTopY": 8.279060677666585,
+      "proposedTopY": 8.511034552310237,
+      "headroomM": 3.271973874643651
+    },
+    {
+      "route": "west",
+      "s": 138.66279272380922,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13683235447488,
+        49.29481591965743
+      ],
+      "lowerTopY": 4.376669226967827,
+      "minTopY": 8.166669226967826,
+      "proposedTopY": 8.511034552310237,
+      "headroomM": 3.3843653253424097
+    },
+    {
+      "route": "west",
+      "s": 141.51379962246813,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13680065336104,
+        49.294844405095795
+      ],
+      "lowerTopY": 4.441996847216721,
+      "minTopY": 8.23199684721672,
+      "proposedTopY": 8.65538139940501,
+      "headroomM": 3.4633845521882893
+    },
+    {
+      "route": "west",
+      "s": 141.52001194330515,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13680066428888,
+        49.294844460444665
+      ],
+      "lowerTopY": 4.442288081079411,
+      "minTopY": 8.23228808107941,
+      "proposedTopY": 8.655667231051712,
+      "headroomM": 3.463379149972301
+    },
+    {
+      "route": "west",
+      "s": 138.66279272380922,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.1368472454736,
+        49.29481466875653
+      ],
+      "lowerTopY": 4.404380903761016,
+      "minTopY": 8.194380903761015,
+      "proposedTopY": 8.511034552310237,
+      "headroomM": 3.356653648549221
+    },
+    {
+      "route": "west",
+      "s": 138.66279272380922,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13679563826491,
+        49.29481900395963
+      ],
+      "lowerTopY": 4.351183117170336,
+      "minTopY": 8.141183117170335,
+      "proposedTopY": 8.511034552310237,
+      "headroomM": 3.4098514351399007
+    },
+    {
+      "route": "west",
+      "s": 141.51379962246813,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13680065336104,
+        49.294844405095795
+      ],
+      "lowerTopY": 4.441996847216718,
+      "minTopY": 8.231996847216717,
+      "proposedTopY": 8.65538139940501,
+      "headroomM": 3.463384552188293
+    },
+    {
+      "route": "west",
+      "s": 138.66279272380922,
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13683235447488,
+        49.29481591965743
+      ],
+      "lowerTopY": 4.376669226967827,
+      "minTopY": 8.166669226967826,
+      "proposedTopY": 8.511034552310237,
+      "headroomM": 3.3843653253424097
+    },
+    {
+      "route": "west",
+      "s": 138.6627927238092,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13696309643075,
+        49.29480493683261
+      ],
+      "lowerTopY": 4.629372347871204,
+      "minTopY": 8.419372347871203,
+      "proposedTopY": 8.511034552310237,
+      "headroomM": 3.131662204439033
+    },
+    {
+      "route": "west",
+      "s": 143.0401271990848,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13688781496134,
+        49.29485090759373
+      ],
+      "lowerTopY": 4.643914461005622,
+      "minTopY": 8.433914461005621,
+      "proposedTopY": 8.721029264621542,
+      "headroomM": 3.3271148036159204
+    },
+    {
+      "route": "west",
+      "s": 143.04012719908485,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13692898770107,
+        49.294847448925964
+      ],
+      "lowerTopY": 4.75479016551872,
+      "minTopY": 8.54479016551872,
+      "proposedTopY": 8.721029264621544,
+      "headroomM": 3.2162390991028236
+    },
+    {
+      "route": "west",
+      "s": 138.6627927238092,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13697735430038,
+        49.29480373911698
+      ],
+      "lowerTopY": 4.667767930736886,
+      "minTopY": 8.457767930736885,
+      "proposedTopY": 8.511034552310237,
+      "headroomM": 3.093266621573351
+    },
+    {
+      "route": "west",
+      "s": 138.6627927238092,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13699096173508,
+        49.29480259604037
+      ],
+      "lowerTopY": 4.699998099286709,
+      "minTopY": 8.489998099286709,
+      "proposedTopY": 8.511034552310237,
+      "headroomM": 3.0610364530235277
+    },
+    {
+      "route": "west",
+      "s": 138.6627927238092,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13697735430038,
+        49.29480373911698
+      ],
+      "lowerTopY": 4.6677679307369,
+      "minTopY": 8.4577679307369,
+      "proposedTopY": 8.511034552310237,
+      "headroomM": 3.0932666215733366
+    },
+    {
+      "route": "west",
+      "s": 143.04012719908485,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13692898770107,
+        49.294847448925964
+      ],
+      "lowerTopY": 4.754790165518742,
+      "minTopY": 8.54479016551874,
+      "proposedTopY": 8.721029264621544,
+      "headroomM": 3.2162390991028023
+    },
+    {
+      "route": "west",
+      "s": 143.04012719908485,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.1369812762803,
+        49.29484305648513
+      ],
+      "lowerTopY": 4.878639352386145,
+      "minTopY": 8.668639352386144,
+      "proposedTopY": 8.721029264621544,
+      "headroomM": 3.092389912235399
+    },
+    {
+      "route": "west",
+      "s": 142.12303147741443,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13699704850741,
+        49.294833425147026
+      ],
+      "lowerTopY": 4.87376353580423,
+      "minTopY": 8.663763535804229,
+      "proposedTopY": 8.682714827345375,
+      "headroomM": 3.0589512915411454
+    },
+    {
+      "route": "west",
+      "s": 143.04012719908485,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13685700242087,
+        49.29485231902634
+      ],
+      "lowerTopY": 4.581105060610696,
+      "minTopY": 8.371105060610695,
+      "proposedTopY": 8.721029264621544,
+      "headroomM": 3.389924204010848
+    },
+    {
+      "route": "west",
+      "s": 146.64995632347598,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13682094371165,
+        49.29488693569745
+      ],
+      "lowerTopY": 4.656682641718518,
+      "minTopY": 8.446682641718517,
+      "proposedTopY": 8.831945523995067,
+      "headroomM": 3.4252628822765487
+    },
+    {
+      "route": "west",
+      "s": 143.04012719908485,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13687740839525,
+        49.294851150707814
+      ],
+      "lowerTopY": 4.627720156070296,
+      "minTopY": 8.417720156070295,
+      "proposedTopY": 8.721029264621544,
+      "headroomM": 3.3433091085512476
+    },
+    {
+      "route": "west",
+      "s": 143.04012719908485,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.1368029088556,
+        49.29485541608574
+      ],
+      "lowerTopY": 4.453634970327371,
+      "minTopY": 8.24363497032737,
+      "proposedTopY": 8.721029264621544,
+      "headroomM": 3.5173942942941725
+    },
+    {
+      "route": "west",
+      "s": 145.42480088034424,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13680578043062,
+        49.294876755829414
+      ],
+      "lowerTopY": 4.566461345717862,
+      "minTopY": 8.356461345717861,
+      "proposedTopY": 8.802220029684277,
+      "headroomM": 3.4857586839664148
+    },
+    {
+      "route": "west",
+      "s": 146.64995632347598,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13682094371165,
+        49.29488693569745
+      ],
+      "lowerTopY": 4.656682641718511,
+      "minTopY": 8.44668264171851,
+      "proposedTopY": 8.831945523995067,
+      "headroomM": 3.425262882276556
+    },
+    {
+      "route": "west",
+      "s": 143.04012719908485,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13685700242087,
+        49.29485231902634
+      ],
+      "lowerTopY": 4.581105060610696,
+      "minTopY": 8.371105060610695,
+      "proposedTopY": 8.721029264621544,
+      "headroomM": 3.389924204010848
+    },
+    {
+      "route": "west",
+      "s": 147.27537640779116,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13680800885561,
+        49.294893316085734
+      ],
+      "lowerTopY": 4.669867211525158,
+      "minTopY": 8.459867211525157,
+      "proposedTopY": 8.843583310531795,
+      "headroomM": 3.4237160990066364
+    },
+    {
+      "route": "west",
+      "s": 147.27537640779113,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13681116093635,
+        49.29489313561729
+      ],
+      "lowerTopY": 4.674878691599432,
+      "minTopY": 8.46487869159943,
+      "proposedTopY": 8.843583310531796,
+      "headroomM": 3.418704618932365
+    },
+    {
+      "route": "west",
+      "s": 146.64995632347598,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13682094371165,
+        49.29488693569745
+      ],
+      "lowerTopY": 4.656682641718504,
+      "minTopY": 8.446682641718503,
+      "proposedTopY": 8.831945523995067,
+      "headroomM": 3.425262882276563
+    },
+    {
+      "route": "west",
+      "s": 145.42480088034424,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13680578043062,
+        49.294876755829414
+      ],
+      "lowerTopY": 4.566461345717862,
+      "minTopY": 8.356461345717861,
+      "proposedTopY": 8.802220029684277,
+      "headroomM": 3.4857586839664148
+    },
+    {
+      "route": "west",
+      "s": 143.04012719908488,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.136888452298,
+        49.29485051840298
+      ],
+      "lowerTopY": 4.643791346753687,
+      "minTopY": 8.433791346753686,
+      "proposedTopY": 8.721029264621544,
+      "headroomM": 3.3272379178678566
+    },
+    {
+      "route": "west",
+      "s": 147.27537640779116,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13681943868761,
+        49.294892661685004
+      ],
+      "lowerTopY": 4.6571226982519605,
+      "minTopY": 8.44712269825196,
+      "proposedTopY": 8.843583310531795,
+      "headroomM": 3.4364606122798342
+    },
+    {
+      "route": "west",
+      "s": 147.27537640779119,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13688298383643,
+        49.294889023487016
+      ],
+      "lowerTopY": 4.837561316822097,
+      "minTopY": 8.627561316822096,
+      "proposedTopY": 8.843583310531796,
+      "headroomM": 3.2560219937097
+    },
+    {
+      "route": "west",
+      "s": 143.04012719908485,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13692810323082,
+        49.29484824823843
+      ],
+      "lowerTopY": 4.756381523591301,
+      "minTopY": 8.5463815235913,
+      "proposedTopY": 8.721029264621544,
+      "headroomM": 3.2146477410302428
+    },
+    {
+      "route": "west",
+      "s": 143.04012719908485,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13692810323082,
+        49.29484824823843
+      ],
+      "lowerTopY": 4.756381523591308,
+      "minTopY": 8.546381523591307,
+      "proposedTopY": 8.721029264621544,
+      "headroomM": 3.2146477410302357
+    },
+    {
+      "route": "west",
+      "s": 147.27537640779119,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13688298383643,
+        49.294889023487016
+      ],
+      "lowerTopY": 4.837561316822111,
+      "minTopY": 8.62756131682211,
+      "proposedTopY": 8.843583310531796,
+      "headroomM": 3.2560219937096857
+    },
+    {
+      "route": "west",
+      "s": 147.27537640779119,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13690838228565,
+        49.294887569330584
+      ],
+      "lowerTopY": 4.901173757010945,
+      "minTopY": 8.691173757010944,
+      "proposedTopY": 8.843583310531796,
+      "headroomM": 3.192409553520852
+    },
+    {
+      "route": "west",
+      "s": 143.0401271990849,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13697739589605,
+        49.29484542604856
+      ],
+      "lowerTopY": 4.879838931982057,
+      "minTopY": 8.669838931982056,
+      "proposedTopY": 8.721029264621546,
+      "headroomM": 3.0911903326394885
+    },
+    {
+      "route": "west",
+      "s": 147.2753764077912,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13680775480468,
+        49.294890910484696
+      ],
+      "lowerTopY": 4.654980726768919,
+      "minTopY": 8.444980726768918,
+      "proposedTopY": 8.843583310531796,
+      "headroomM": 3.4386025837628775
+    },
+    {
+      "route": "west",
+      "s": 147.74133398448453,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13680807556044,
+        49.29489509100141
+      ],
+      "lowerTopY": 4.680617518504768,
+      "minTopY": 8.470617518504767,
+      "proposedTopY": 8.850603916232606,
+      "headroomM": 3.419986397727838
+    },
+    {
+      "route": "west",
+      "s": 147.2753764077912,
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13681504759846,
+        49.294890672411015
+      ],
+      "lowerTopY": 4.667649465176233,
+      "minTopY": 8.457649465176232,
+      "proposedTopY": 8.843583310531796,
+      "headroomM": 3.425933845355564
+    },
+    {
+      "route": "west",
+      "s": 151.6334360708561,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13681075480467,
+        49.2949300104847
+      ],
+      "lowerTopY": 4.862987008097164,
+      "minTopY": 8.652987008097163,
+      "proposedTopY": 8.847324987434451,
+      "headroomM": 3.234337979337287
+    },
+    {
+      "route": "west",
+      "s": 151.6334360708561,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13683070883238,
+        49.294929359084286
+      ],
+      "lowerTopY": 4.893768019256157,
+      "minTopY": 8.683768019256156,
+      "proposedTopY": 8.847324987434451,
+      "headroomM": 3.203556968178294
+    },
+    {
+      "route": "west",
+      "s": 149.91958605588064,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13680957502504,
+        49.294914634023435
+      ],
+      "lowerTopY": 4.746431386210041,
+      "minTopY": 8.53643138621004,
+      "proposedTopY": 8.863201749058101,
+      "headroomM": 3.36677036284806
+    },
+    {
+      "route": "west",
+      "s": 147.27537640779124,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13682312830122,
+        49.29489040861599
+      ],
+      "lowerTopY": 4.65640997599894,
+      "minTopY": 8.44640997599894,
+      "proposedTopY": 8.843583310531798,
+      "headroomM": 3.437173334532858
+    },
+    {
+      "route": "west",
+      "s": 148.2214745765446,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.1368084060795,
+        49.29489939876647
+      ],
+      "lowerTopY": 4.659253865943384,
+      "minTopY": 8.449253865943383,
+      "proposedTopY": 8.856306219271197,
+      "headroomM": 3.4470523533278126
+    },
+    {
+      "route": "west",
+      "s": 149.91958605588064,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13680957502504,
+        49.294914634023435
+      ],
+      "lowerTopY": 4.746431386210027,
+      "minTopY": 8.536431386210026,
+      "proposedTopY": 8.863201749058101,
+      "headroomM": 3.366770362848074
+    },
+    {
+      "route": "west",
+      "s": 151.6334360708561,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13683070883238,
+        49.294929359084286
+      ],
+      "lowerTopY": 4.893768019256143,
+      "minTopY": 8.683768019256142,
+      "proposedTopY": 8.847324987434451,
+      "headroomM": 3.203556968178308
+    },
+    {
+      "route": "west",
+      "s": 151.63343607085608,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13683863733478,
+        49.29492910025786
+      ],
+      "lowerTopY": 4.917350504702263,
+      "minTopY": 8.707350504702262,
+      "proposedTopY": 8.847324987434451,
+      "headroomM": 3.179974482732188
+    },
+    {
+      "route": "west",
+      "s": 147.2753764077912,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13688363689073,
+        49.294888433309524
+      ],
+      "lowerTopY": 4.836386327369652,
+      "minTopY": 8.626386327369651,
+      "proposedTopY": 8.843583310531796,
+      "headroomM": 3.257196983162144
+    },
+    {
+      "route": "west",
+      "s": 147.2753764077912,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13688363689073,
+        49.294888433309524
+      ],
+      "lowerTopY": 4.836386327369667,
+      "minTopY": 8.626386327369666,
+      "proposedTopY": 8.843583310531796,
+      "headroomM": 3.25719698316213
+    },
+    {
+      "route": "west",
+      "s": 151.63343607085608,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13683863733478,
+        49.29492910025786
+      ],
+      "lowerTopY": 4.91735050470227,
+      "minTopY": 8.70735050470227,
+      "proposedTopY": 8.847324987434451,
+      "headroomM": 3.179974482732181
+    },
+    {
+      "route": "west",
+      "s": 151.63343607085608,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13684046940544,
+        49.2949290404498
+      ],
+      "lowerTopY": 4.922168302991288,
+      "minTopY": 8.712168302991287,
+      "proposedTopY": 8.847324987434451,
+      "headroomM": 3.175156684443163
+    },
+    {
+      "route": "west",
+      "s": 147.27537640779127,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13690828511713,
+        49.29488762866672
+      ],
+      "lowerTopY": 4.90120379563006,
+      "minTopY": 8.69120379563006,
+      "proposedTopY": 8.843583310531798,
+      "headroomM": 3.192379514901738
+    },
+    {
+      "route": "west",
+      "s": 151.63343607085616,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.1368106388249,
+        49.294926028293034
+      ],
+      "lowerTopY": 4.8331399383103815,
+      "minTopY": 8.62313993831038,
+      "proposedTopY": 8.84732498743445,
+      "headroomM": 3.264185049124068
+    },
+    {
+      "route": "west",
+      "s": 154.02362262797658,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13681024332926,
+        49.29494749805615
+      ],
+      "lowerTopY": 4.992236034573978,
+      "minTopY": 8.782236034573977,
+      "proposedTopY": 8.782236034573979,
+      "headroomM": 3.040000000000001
+    },
+    {
+      "route": "west",
+      "s": 152.31759044691486,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13683502400183,
+        49.294932365695054
+      ],
+      "lowerTopY": 4.923851691712315,
+      "minTopY": 8.713851691712314,
+      "proposedTopY": 8.834032475778091,
+      "headroomM": 3.1601807840657763
+    },
+    {
+      "route": "west",
+      "s": 151.63343607085622,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.136826102337,
+        49.29492614949106
+      ],
+      "lowerTopY": 4.8616533363928625,
+      "minTopY": 8.651653336392862,
+      "proposedTopY": 8.84732498743445,
+      "headroomM": 3.235671651041587
+    },
+    {
+      "route": "west",
+      "s": 151.63343607085622,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.136826102337,
+        49.29492614949106
+      ],
+      "lowerTopY": 4.861653336392855,
+      "minTopY": 8.651653336392854,
+      "proposedTopY": 8.84732498743445,
+      "headroomM": 3.235671651041594
+    },
+    {
+      "route": "west",
+      "s": 152.31759044691486,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13683502400183,
+        49.294932365695054
+      ],
+      "lowerTopY": 4.923851691712301,
+      "minTopY": 8.7138516917123,
+      "proposedTopY": 8.834032475778091,
+      "headroomM": 3.1601807840657905
+    },
+    {
+      "route": "west",
+      "s": 151.6334360708561,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13684176662115,
+        49.29492627226267
+      ],
+      "lowerTopY": 4.911720224753587,
+      "minTopY": 8.701720224753586,
+      "proposedTopY": 8.847324987434451,
+      "headroomM": 3.185604762680864
+    },
+    {
+      "route": "west",
+      "s": 151.6334360708561,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13684176662115,
+        49.29492627226267
+      ],
+      "lowerTopY": 4.9117202247536085,
+      "minTopY": 8.701720224753608,
+      "proposedTopY": 8.847324987434451,
+      "headroomM": 3.1856047626808426
+    },
+    {
+      "route": "west",
+      "s": 152.31759044691486,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13683502400183,
+        49.294932365695054
+      ],
+      "lowerTopY": 4.923851691712322,
+      "minTopY": 8.713851691712321,
+      "proposedTopY": 8.834032475778091,
+      "headroomM": 3.160180784065769
+    },
+    {
+      "route": "west",
+      "s": 151.63343607085613,
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13684496156677,
+        49.294926297303626
+      ],
+      "lowerTopY": 4.920779599005606,
+      "minTopY": 8.710779599005605,
+      "proposedTopY": 8.847324987434451,
+      "headroomM": 3.1765453884288455
+    },
+    {
+      "route": "west",
+      "s": 412.2011463755748,
+      "upperWayId": 42000575,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13681847327965,
+        49.297142106947625
+      ],
+      "lowerTopY": 5.034720153474389,
+      "minTopY": 8.824720153474388,
+      "proposedTopY": 10.482272360908027,
+      "headroomM": 4.697552207433638
+    },
+    {
+      "route": "west",
+      "s": 410.37358755048126,
+      "upperWayId": 42000575,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13680716779373,
+        49.297127439235425
+      ],
+      "lowerTopY": 5.240440938440081,
+      "minTopY": 9.03044093844008,
+      "proposedTopY": 10.401365094883975,
+      "headroomM": 4.410924156443894
+    },
+    {
+      "route": "west",
+      "s": 412.2011463755748,
+      "upperWayId": 42000575,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13677095670268,
+        49.2971576897284
+      ],
+      "lowerTopY": 5.658366715006082,
+      "minTopY": 9.448366715006081,
+      "proposedTopY": 10.482272360908027,
+      "headroomM": 4.073905645901945
+    },
+    {
+      "route": "west",
+      "s": 410.2181170929649,
+      "upperWayId": 42000575,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13680620603587,
+        49.297126191452925
+      ],
+      "lowerTopY": 5.250395068246603,
+      "minTopY": 9.040395068246603,
+      "proposedTopY": 10.394085093034372,
+      "headroomM": 4.393690024787769
+    },
+    {
+      "route": "west",
+      "s": 412.2011463755747,
+      "upperWayId": 42000575,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13671831260727,
+        49.29717495404857
+      ],
+      "lowerTopY": 6.251028600073778,
+      "minTopY": 10.041028600073776,
+      "proposedTopY": 10.482272360908024,
+      "headroomM": 3.4812437608342455
+    },
+    {
+      "route": "west",
+      "s": 412.2011463755748,
+      "upperWayId": 42000575,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13677095670268,
+        49.2971576897284
+      ],
+      "lowerTopY": 5.658366715006079,
+      "minTopY": 9.448366715006077,
+      "proposedTopY": 10.482272360908027,
+      "headroomM": 4.073905645901948
+    },
+    {
+      "route": "west",
+      "s": 410.37358755048126,
+      "upperWayId": 42000575,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13680716779373,
+        49.297127439235425
+      ],
+      "lowerTopY": 5.240440938440077,
+      "minTopY": 9.030440938440076,
+      "proposedTopY": 10.401365094883975,
+      "headroomM": 4.4109241564438975
+    },
+    {
+      "route": "west",
+      "s": 412.2011463755748,
+      "upperWayId": 42000575,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13681716675514,
+        49.29714048732747
+      ],
+      "lowerTopY": 5.0582589141723275,
+      "minTopY": 8.848258914172327,
+      "proposedTopY": 10.482272360908027,
+      "headroomM": 4.6740134467356995
+    },
+    {
+      "route": "west",
+      "s": 412.2011463755748,
+      "upperWayId": 42000575,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13677226189199,
+        49.297156599382355
+      ],
+      "lowerTopY": 5.643303035847133,
+      "minTopY": 9.433303035847132,
+      "proposedTopY": 10.482272360908027,
+      "headroomM": 4.088969325060894
+    },
+    {
+      "route": "west",
+      "s": 415.32119195079724,
+      "upperWayId": 42000575,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13670514275888,
+        49.297212670238146
+      ],
+      "lowerTopY": 6.417950112388233,
+      "minTopY": 10.207950112388232,
+      "proposedTopY": 10.5975579546821,
+      "headroomM": 3.4296078422938674
+    },
+    {
+      "route": "west",
+      "s": 415.75129480866235,
+      "upperWayId": 42000575,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13670799759576,
+        49.29721605553458
+      ],
+      "lowerTopY": 6.366995988318678,
+      "minTopY": 10.156995988318677,
+      "proposedTopY": 10.610883205586031,
+      "headroomM": 3.4938872172673534
+    },
+    {
+      "route": "west",
+      "s": 413.49964187519925,
+      "upperWayId": 42000575,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13682578560704,
+        49.297150707655234
+      ],
+      "lowerTopY": 4.9044266399111365,
+      "minTopY": 8.694426639911136,
+      "proposedTopY": 10.534028592318126,
+      "headroomM": 4.87960195240699
+    },
+    {
+      "route": "west",
+      "s": 412.2011463755748,
+      "upperWayId": 42000575,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13671319716585,
+        49.29717779205599
+      ],
+      "lowerTopY": 6.309265971312531,
+      "minTopY": 10.09926597131253,
+      "proposedTopY": 10.482272360908027,
+      "headroomM": 3.4230063895954963
+    },
+    {
+      "route": "west",
+      "s": 412.6890892236981,
+      "upperWayId": 42000575,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.1366876719986,
+        49.29719195322172
+      ],
+      "lowerTopY": 6.599860372483414,
+      "minTopY": 10.389860372483414,
+      "proposedTopY": 10.502313613040782,
+      "headroomM": 3.1524532405573673
+    },
+    {
+      "route": "west",
+      "s": 415.32119195079724,
+      "upperWayId": 42000575,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13670514275888,
+        49.297212670238146
+      ],
+      "lowerTopY": 6.417950112388224,
+      "minTopY": 10.207950112388223,
+      "proposedTopY": 10.5975579546821,
+      "headroomM": 3.4296078422938763
+    },
+    {
+      "route": "west",
+      "s": 412.2011463755748,
+      "upperWayId": 42000575,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13677226189199,
+        49.297156599382355
+      ],
+      "lowerTopY": 5.6433030358471195,
+      "minTopY": 9.433303035847118,
+      "proposedTopY": 10.482272360908027,
+      "headroomM": 4.088969325060908
+    },
+    {
+      "route": "west",
+      "s": 423.92478763083915,
+      "upperWayId": 42000575,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13689485673649,
+        49.29723101326407
+      ],
+      "lowerTopY": 5.426749342524346,
+      "minTopY": 9.216749342524345,
+      "proposedTopY": 10.700565517549744,
+      "headroomM": 4.523816175025399
+    },
+    {
+      "route": "west",
+      "s": 427.0650122742453,
+      "upperWayId": 42000575,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13678652478414,
+        49.29730562369816
+      ],
+      "lowerTopY": 6.628064308231217,
+      "minTopY": 10.418064308231216,
+      "proposedTopY": 10.633668765019554,
+      "headroomM": 3.255604456788337
+    },
+    {
+      "route": "west",
+      "s": 427.789359702794,
+      "upperWayId": 42000575,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13679160630824,
+        49.29731122308458
+      ],
+      "lowerTopY": 6.704044980238621,
+      "minTopY": 10.49404498023862,
+      "proposedTopY": 10.611342183687102,
+      "headroomM": 3.157297203448481
+    },
+    {
+      "route": "west",
+      "s": 426.54370378396186,
+      "upperWayId": 42000575,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13691322925361,
+        49.2972512581396
+      ],
+      "lowerTopY": 5.701461450834046,
+      "minTopY": 9.491461450834045,
+      "proposedTopY": 10.64823661651253,
+      "headroomM": 4.196775165678485
+    },
+    {
+      "route": "west",
+      "s": 423.52452962068367,
+      "upperWayId": 42000575,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13689204880119,
+        49.29722791916975
+      ],
+      "lowerTopY": 5.3784492675504225,
+      "minTopY": 9.168449267550422,
+      "proposedTopY": 10.705248956848603,
+      "headroomM": 4.576799689298181
+    },
+    {
+      "route": "west",
+      "s": 424.77018553951586,
+      "upperWayId": 42000575,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13677042585581,
+        49.29728788411472
+      ],
+      "lowerTopY": 6.351142171691009,
+      "minTopY": 10.141142171691008,
+      "proposedTopY": 10.687676495319554,
+      "headroomM": 3.5865343236285447
+    },
+    {
+      "route": "west",
+      "s": 427.0650122742453,
+      "upperWayId": 42000575,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13678652478414,
+        49.29730562369816
+      ],
+      "lowerTopY": 6.628064308231245,
+      "minTopY": 10.418064308231244,
+      "proposedTopY": 10.633668765019554,
+      "headroomM": 3.2556044567883085
+    },
+    {
+      "route": "west",
+      "s": 423.92478763083915,
+      "upperWayId": 42000575,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13689485673649,
+        49.29723101326407
+      ],
+      "lowerTopY": 5.426749342524346,
+      "minTopY": 9.216749342524345,
+      "proposedTopY": 10.700565517549744,
+      "headroomM": 4.523816175025399
+    },
+    {
+      "route": "park-access",
+      "s": 110.0646400603665,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.1367295865356,
+        49.29485241614538
+      ],
+      "lowerTopY": 4.32075868247275,
+      "minTopY": 8.11075868247275,
+      "proposedTopY": 8.336917540167022,
+      "headroomM": 3.266158857694272
+    },
+    {
+      "route": "park-access",
+      "s": 110.04123934499106,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13672953728373,
+        49.29485220840353
+      ],
+      "lowerTopY": 4.319108991528367,
+      "minTopY": 8.109108991528366,
+      "proposedTopY": 8.335513497244495,
+      "headroomM": 3.266404505716128
+    },
+    {
+      "route": "park-access",
+      "s": 110.06464006036649,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13672914242032,
+        49.294852460944284
+      ],
+      "lowerTopY": 4.318826534435679,
+      "minTopY": 8.108826534435678,
+      "proposedTopY": 8.33691754016702,
+      "headroomM": 3.268091005731341
+    },
+    {
+      "route": "park-access",
+      "s": 110.8124528860278,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13673100311445,
+        49.294861756234134
+      ],
+      "lowerTopY": 4.390915023082403,
+      "minTopY": 8.180915023082402,
+      "proposedTopY": 8.3817863097067,
+      "headroomM": 3.240871286624296
+    },
+    {
+      "route": "park-access",
+      "s": 113.7194400208577,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13669979069196,
+        49.29488980255268
+      ],
+      "lowerTopY": 4.423140317636175,
+      "minTopY": 8.213140317636174,
+      "proposedTopY": 8.556205537796492,
+      "headroomM": 3.383065220160317
+    },
+    {
+      "route": "park-access",
+      "s": 113.71944002085772,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13673279010085,
+        49.29488787038914
+      ],
+      "lowerTopY": 4.464592733105285,
+      "minTopY": 8.254592733105284,
+      "proposedTopY": 8.556205537796494,
+      "headroomM": 3.3416128046912092
+    },
+    {
+      "route": "park-access",
+      "s": 113.61246816034819,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13673445065437,
+        49.2948868083575
+      ],
+      "lowerTopY": 4.464050043758466,
+      "minTopY": 8.254050043758465,
+      "proposedTopY": 8.549787226165924,
+      "headroomM": 3.335737182407458
+    },
+    {
+      "route": "park-access",
+      "s": 110.06464006036654,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13673008236428,
+        49.294855065449504
+      ],
+      "lowerTopY": 4.341131467077133,
+      "minTopY": 8.131131467077132,
+      "proposedTopY": 8.336917540167024,
+      "headroomM": 3.2457860730898904
+    },
+    {
+      "route": "park-access",
+      "s": 110.06464006036657,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13672456500373,
+        49.294855388499016
+      ],
+      "lowerTopY": 4.315552177282164,
+      "minTopY": 8.105552177282163,
+      "proposedTopY": 8.336917540167025,
+      "headroomM": 3.271365362884861
+    },
+    {
+      "route": "park-access",
+      "s": 113.71944002085768,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13666783054214,
+        49.29489167386609
+      ],
+      "lowerTopY": 4.274968392520876,
+      "minTopY": 8.064968392520875,
+      "proposedTopY": 8.556205537796492,
+      "headroomM": 3.5312371452756164
+    },
+    {
+      "route": "park-access",
+      "s": 113.7194400208577,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13669979069196,
+        49.29488980255268
+      ],
+      "lowerTopY": 4.423140317636182,
+      "minTopY": 8.213140317636181,
+      "proposedTopY": 8.556205537796492,
+      "headroomM": 3.3830652201603097
+    },
+    {
+      "route": "park-access",
+      "s": 110.8124528860278,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13673100311445,
+        49.294861756234134
+      ],
+      "lowerTopY": 4.390915023082414,
+      "minTopY": 8.180915023082413,
+      "proposedTopY": 8.3817863097067,
+      "headroomM": 3.2408712866242855
+    },
+    {
+      "route": "park-access",
+      "s": 118.22394306548382,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13673823680831,
+        49.294929543265866
+      ],
+      "lowerTopY": 4.751821532548433,
+      "minTopY": 8.541821532548433,
+      "proposedTopY": 8.8237993370154,
+      "headroomM": 3.3219778044669663
+    },
+    {
+      "route": "park-access",
+      "s": 115.5649003957778,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.1367361707315,
+        49.294905694836245
+      ],
+      "lowerTopY": 4.60511573035901,
+      "minTopY": 8.39511573035901,
+      "proposedTopY": 8.666912613999216,
+      "headroomM": 3.3117968836402056
+    },
+    {
+      "route": "park-access",
+      "s": 118.22394306548378,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13671025443227,
+        49.294930574706484
+      ],
+      "lowerTopY": 4.703917570026036,
+      "minTopY": 8.493917570026035,
+      "proposedTopY": 8.823799337015396,
+      "headroomM": 3.3698817669893604
+    },
+    {
+      "route": "park-access",
+      "s": 113.96539658899471,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13673492791663,
+        49.29489134920185
+      ],
+      "lowerTopY": 4.493638142639725,
+      "minTopY": 8.283638142639724,
+      "proposedTopY": 8.570962931884713,
+      "headroomM": 3.3273247892449884
+    },
+    {
+      "route": "park-access",
+      "s": 118.2239430654838,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13667073603855,
+        49.29493203136892
+      ],
+      "lowerTopY": 4.581728229037964,
+      "minTopY": 8.371728229037963,
+      "proposedTopY": 8.823799337015398,
+      "headroomM": 3.4920711079774343
+    },
+    {
+      "route": "park-access",
+      "s": 118.22394306548378,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13671025443227,
+        49.294930574706484
+      ],
+      "lowerTopY": 4.703917570026043,
+      "minTopY": 8.493917570026042,
+      "proposedTopY": 8.823799337015396,
+      "headroomM": 3.3698817669893533
+    },
+    {
+      "route": "park-access",
+      "s": 115.5649003957778,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.1367361707315,
+        49.294905694836245
+      ],
+      "lowerTopY": 4.605115730359017,
+      "minTopY": 8.395115730359016,
+      "proposedTopY": 8.666912613999216,
+      "headroomM": 3.3117968836401985
+    },
+    {
+      "route": "park-access",
+      "s": 113.71944002085772,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13669906092741,
+        49.29489045829188
+      ],
+      "lowerTopY": 4.423893763716343,
+      "minTopY": 8.213893763716342,
+      "proposedTopY": 8.556205537796494,
+      "headroomM": 3.3823117740801507
+    },
+    {
+      "route": "park-access",
+      "s": 118.22394306548382,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13665202727114,
+        49.29493272098093
+      ],
+      "lowerTopY": 4.472453705760721,
+      "minTopY": 8.26245370576072,
+      "proposedTopY": 8.8237993370154,
+      "headroomM": 3.601345631254679
+    },
+    {
+      "route": "park-access",
+      "s": 118.22394306548384,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13666331385527,
+        49.29493230495331
+      ],
+      "lowerTopY": 4.487298426152986,
+      "minTopY": 8.277298426152985,
+      "proposedTopY": 8.823799337015402,
+      "headroomM": 3.5865009108624157
+    },
+    {
+      "route": "park-access",
+      "s": 113.71944002085772,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13673055910188,
+        49.294889297257654
+      ],
+      "lowerTopY": 4.46532185105681,
+      "minTopY": 8.25532185105681,
+      "proposedTopY": 8.556205537796494,
+      "headroomM": 3.3408836867396836
+    },
+    {
+      "route": "park-access",
+      "s": 113.71944002085772,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13666793741174,
+        49.29489160551605
+      ],
+      "lowerTopY": 4.275044839407528,
+      "minTopY": 8.065044839407527,
+      "proposedTopY": 8.556205537796494,
+      "headroomM": 3.531160698388966
+    },
+    {
+      "route": "park-access",
+      "s": 117.6081678631012,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13660988473418,
+        49.29492873396771
+      ],
+      "lowerTopY": 4.233518097024529,
+      "minTopY": 8.023518097024528,
+      "proposedTopY": 8.788085130425376,
+      "headroomM": 3.804567033400847
+    },
+    {
+      "route": "park-access",
+      "s": 118.22394306548384,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13661036319168,
+        49.29493425673414
+      ],
+      "lowerTopY": 4.273194294462641,
+      "minTopY": 8.06319429446264,
+      "proposedTopY": 8.823799337015402,
+      "headroomM": 3.8006050425527604
+    },
+    {
+      "route": "park-access",
+      "s": 118.22394306548382,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13665202727114,
+        49.29493272098093
+      ],
+      "lowerTopY": 4.472453705760721,
+      "minTopY": 8.26245370576072,
+      "proposedTopY": 8.8237993370154,
+      "headroomM": 3.601345631254679
+    },
+    {
+      "route": "park-access",
+      "s": 113.71944002085772,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13669906092741,
+        49.29489045829188
+      ],
+      "lowerTopY": 4.42389376371635,
+      "minTopY": 8.21389376371635,
+      "proposedTopY": 8.556205537796494,
+      "headroomM": 3.3823117740801436
+    },
+    {
+      "route": "park-access",
+      "s": 118.22394306548387,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13673833870571,
+        49.29493182346404
+      ],
+      "lowerTopY": 4.765663546526305,
+      "minTopY": 8.555663546526304,
+      "proposedTopY": 8.823799337015402,
+      "headroomM": 3.3081357904890965
+    },
+    {
+      "route": "park-access",
+      "s": 118.22394306548388,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13670891702662,
+        49.29493185862741
+      ],
+      "lowerTopY": 4.7090162199861325,
+      "minTopY": 8.499016219986132,
+      "proposedTopY": 8.823799337015403,
+      "headroomM": 3.364783117029271
+    },
+    {
+      "route": "park-access",
+      "s": 122.1869417173369,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.1366717876774,
+        49.29496750312212
+      ],
+      "lowerTopY": 4.850566059987727,
+      "minTopY": 8.640566059987727,
+      "proposedTopY": 9.035898081888899,
+      "headroomM": 3.4353320219011714
+    },
+    {
+      "route": "park-access",
+      "s": 122.18694171733685,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13669385901132,
+        49.29496747674353
+      ],
+      "lowerTopY": 4.893061325320389,
+      "minTopY": 8.683061325320388,
+      "proposedTopY": 9.035898081888899,
+      "headroomM": 3.39283675656851
+    },
+    {
+      "route": "park-access",
+      "s": 119.05334729578922,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.1367383596344,
+        49.29493927408242
+      ],
+      "lowerTopY": 4.810289766824134,
+      "minTopY": 8.600289766824133,
+      "proposedTopY": 8.871007817123715,
+      "headroomM": 3.310718050299581
+    },
+    {
+      "route": "park-access",
+      "s": 118.22394306548387,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13667093698189,
+        49.29493190401932
+      ],
+      "lowerTopY": 4.581452475837736,
+      "minTopY": 8.371452475837735,
+      "proposedTopY": 8.823799337015402,
+      "headroomM": 3.4923468611776656
+    },
+    {
+      "route": "park-access",
+      "s": 122.18694171733684,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13661465787054,
+        49.2949675714009
+      ],
+      "lowerTopY": 4.658683925170578,
+      "minTopY": 8.448683925170577,
+      "proposedTopY": 9.035898081888897,
+      "headroomM": 3.6272141567183187
+    },
+    {
+      "route": "park-access",
+      "s": 122.1869417173369,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.1366717876774,
+        49.29496750312212
+      ],
+      "lowerTopY": 4.850566059987742,
+      "minTopY": 8.64056605998774,
+      "proposedTopY": 9.035898081888899,
+      "headroomM": 3.435332021901157
+    },
+    {
+      "route": "park-access",
+      "s": 118.22394306548388,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13670891702662,
+        49.29493185862741
+      ],
+      "lowerTopY": 4.7090162199861325,
+      "minTopY": 8.499016219986132,
+      "proposedTopY": 8.823799337015403,
+      "headroomM": 3.364783117029271
+    },
+    {
+      "route": "park-access",
+      "s": 118.22394306548384,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.1366529124844,
+        49.29493192556132
+      ],
+      "lowerTopY": 4.471539766519587,
+      "minTopY": 8.261539766519586,
+      "proposedTopY": 8.823799337015402,
+      "headroomM": 3.6022595704958142
+    },
+    {
+      "route": "park-access",
+      "s": 120.93606780429275,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13662576267201,
+        49.29495632136997
+      ],
+      "lowerTopY": 4.499570615492967,
+      "minTopY": 8.289570615492966,
+      "proposedTopY": 8.973101548272874,
+      "headroomM": 3.723530932779907
+    },
+    {
+      "route": "park-access",
+      "s": 118.22394306548384,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13666392764256,
+        49.29493191239654
+      ],
+      "lowerTopY": 4.48709783290451,
+      "minTopY": 8.27709783290451,
+      "proposedTopY": 8.823799337015402,
+      "headroomM": 3.5867015041108914
+    },
+    {
+      "route": "park-access",
+      "s": 118.22394306548384,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13661026129428,
+        49.29493197653596
+      ],
+      "lowerTopY": 4.257294298152644,
+      "minTopY": 8.047294298152643,
+      "proposedTopY": 8.823799337015402,
+      "headroomM": 3.8165050388627577
+    },
+    {
+      "route": "park-access",
+      "s": 119.7889636247648,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13661030078511,
+        49.29494603526694
+      ],
+      "lowerTopY": 4.35236467140237,
+      "minTopY": 8.142364671402369,
+      "proposedTopY": 8.911832625937253,
+      "headroomM": 3.809467954534883
+    },
+    {
+      "route": "park-access",
+      "s": 120.93606780429275,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13662576267201,
+        49.29495632136997
+      ],
+      "lowerTopY": 4.499570615492978,
+      "minTopY": 8.289570615492977,
+      "proposedTopY": 8.973101548272874,
+      "headroomM": 3.723530932779896
+    },
+    {
+      "route": "park-access",
+      "s": 118.22394306548384,
+      "upperWayId": 363693709,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.1366529124844,
+        49.29493192556132
+      ],
+      "lowerTopY": 4.471539766519598,
+      "minTopY": 8.261539766519597,
+      "proposedTopY": 8.823799337015402,
+      "headroomM": 3.6022595704958036
+    },
+    {
+      "route": "park-access",
+      "s": 119.37547505172951,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.1367383677628,
+        49.29494216778719
+      ],
+      "lowerTopY": 4.819465871888269,
+      "minTopY": 8.609465871888268,
+      "proposedTopY": 8.889017319893464,
+      "headroomM": 3.3195514480051944
+    },
+    {
+      "route": "park-access",
+      "s": 122.1869417173369,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13669692795943,
+        49.29496747307567
+      ],
+      "lowerTopY": 4.930481885801299,
+      "minTopY": 8.720481885801298,
+      "proposedTopY": 9.035898081888899,
+      "headroomM": 3.3554161960875994
+    },
+    {
+      "route": "park-access",
+      "s": 122.1869417173369,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13672954540476,
+        49.29496743409288
+      ],
+      "lowerTopY": 4.996530161858857,
+      "minTopY": 8.786530161858856,
+      "proposedTopY": 9.035898081888899,
+      "headroomM": 3.289367920030042
+    },
+    {
+      "route": "park-access",
+      "s": 121.29570212834535,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13673841621669,
+        49.29495941737265
+      ],
+      "lowerTopY": 4.952700179208875,
+      "minTopY": 8.742700179208875,
+      "proposedTopY": 8.991620534180058,
+      "headroomM": 3.2889203549711823
+    },
+    {
+      "route": "park-access",
+      "s": 122.1869417173369,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13673843870572,
+        49.29496742346404
+      ],
+      "lowerTopY": 5.012330731445807,
+      "minTopY": 8.802330731445807,
+      "proposedTopY": 9.035898081888899,
+      "headroomM": 3.2735673504430913
+    },
+    {
+      "route": "park-access",
+      "s": 121.29570212834535,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13673841621669,
+        49.29495941737265
+      ],
+      "lowerTopY": 4.952700179208875,
+      "minTopY": 8.742700179208875,
+      "proposedTopY": 8.991620534180058,
+      "headroomM": 3.2889203549711823
+    },
+    {
+      "route": "park-access",
+      "s": 122.1869417173369,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13672954540476,
+        49.29496743409288
+      ],
+      "lowerTopY": 4.99653016185885,
+      "minTopY": 8.786530161858849,
+      "proposedTopY": 9.035898081888899,
+      "headroomM": 3.289367920030049
+    },
+    {
+      "route": "park-access",
+      "s": 122.18694171733691,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13667187650692,
+        49.29496741784502
+      ],
+      "lowerTopY": 4.850227411355981,
+      "minTopY": 8.64022741135598,
+      "proposedTopY": 9.0358980818889,
+      "headroomM": 3.43567067053292
+    },
+    {
+      "route": "park-access",
+      "s": 126.41122145174704,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13663359747665,
+        49.295004166043434
+      ],
+      "lowerTopY": 4.996160230647689,
+      "minTopY": 8.786160230647688,
+      "proposedTopY": 9.205730248448386,
+      "headroomM": 3.459570017800697
+    },
+    {
+      "route": "park-access",
+      "s": 126.41122145174704,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13663585163245,
+        49.29500423942985
+      ],
+      "lowerTopY": 5.00095557081665,
+      "minTopY": 8.79095557081665,
+      "proposedTopY": 9.205730248448386,
+      "headroomM": 3.454774677631736
+    },
+    {
+      "route": "park-access",
+      "s": 122.1869417173369,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13669287334353,
+        49.29496810141915
+      ],
+      "lowerTopY": 4.894894676243524,
+      "minTopY": 8.684894676243523,
+      "proposedTopY": 9.035898081888899,
+      "headroomM": 3.3910034056453746
+    },
+    {
+      "route": "park-access",
+      "s": 122.18694171733694,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.1366176840208,
+        49.294965653551564
+      ],
+      "lowerTopY": 4.654531159335761,
+      "minTopY": 8.44453115933576,
+      "proposedTopY": 9.035898081888902,
+      "headroomM": 3.6313669225531413
+    },
+    {
+      "route": "park-access",
+      "s": 122.75228571440229,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13661005268858,
+        49.294970489975455
+      ],
+      "lowerTopY": 4.665003585677717,
+      "minTopY": 8.455003585677716,
+      "proposedTopY": 9.062681152175236,
+      "headroomM": 3.647677566497519
+    },
+    {
+      "route": "park-access",
+      "s": 125.44285318679577,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13660820559366,
+        49.29499462959537
+      ],
+      "lowerTopY": 4.839325518489815,
+      "minTopY": 8.629325518489814,
+      "proposedTopY": 9.173602085898592,
+      "headroomM": 3.584276567408777
+    },
+    {
+      "route": "park-access",
+      "s": 126.41122145174702,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13662184033336,
+        49.29500378327725
+      ],
+      "lowerTopY": 4.953703627504169,
+      "minTopY": 8.743703627504168,
+      "proposedTopY": 9.205730248448385,
+      "headroomM": 3.502026620944216
+    },
+    {
+      "route": "park-access",
+      "s": 126.41122145174704,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13663359747665,
+        49.295004166043434
+      ],
+      "lowerTopY": 4.996160230647696,
+      "minTopY": 8.786160230647695,
+      "proposedTopY": 9.205730248448386,
+      "headroomM": 3.45957001780069
+    },
+    {
+      "route": "park-access",
+      "s": 122.18694171733691,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13667187650692,
+        49.29496741784502
+      ],
+      "lowerTopY": 4.850227411355988,
+      "minTopY": 8.640227411355987,
+      "proposedTopY": 9.0358980818889,
+      "headroomM": 3.4356706705329128
+    },
+    {
+      "route": "park-access",
+      "s": 122.18694171733695,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13669574584416,
+        49.29496819493644
+      ],
+      "lowerTopY": 4.9336487378456155,
+      "minTopY": 8.723648737845615,
+      "proposedTopY": 9.035898081888904,
+      "headroomM": 3.3522493440432886
+    },
+    {
+      "route": "park-access",
+      "s": 126.41122145174704,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13663667564583,
+        49.29500426625648
+      ],
+      "lowerTopY": 5.0918960611589625,
+      "minTopY": 8.881896061158962,
+      "proposedTopY": 9.205730248448386,
+      "headroomM": 3.3638341872894237
+    },
+    {
+      "route": "park-access",
+      "s": 126.41122145174704,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13668697710034,
+        49.2950059038733
+      ],
+      "lowerTopY": 5.206856799251199,
+      "minTopY": 8.996856799251198,
+      "proposedTopY": 9.205730248448386,
+      "headroomM": 3.2488734491971876
+    },
+    {
+      "route": "park-access",
+      "s": 122.18694171733694,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13672755750166,
+        49.29496923059845
+      ],
+      "lowerTopY": 5.006352234426231,
+      "minTopY": 8.79635223442623,
+      "proposedTopY": 9.035898081888902,
+      "headroomM": 3.2795458474626713
+    },
+    {
+      "route": "park-access",
+      "s": 122.18694171733691,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.1367383591985,
+        49.294969582259064
+      ],
+      "lowerTopY": 5.028256961817256,
+      "minTopY": 8.818256961817255,
+      "proposedTopY": 9.0358980818889,
+      "headroomM": 3.2576411200716446
+    },
+    {
+      "route": "park-access",
+      "s": 122.18694171733694,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13672755750166,
+        49.29496923059845
+      ],
+      "lowerTopY": 5.006352234426231,
+      "minTopY": 8.79635223442623,
+      "proposedTopY": 9.035898081888902,
+      "headroomM": 3.2795458474626713
+    },
+    {
+      "route": "park-access",
+      "s": 126.41122145174704,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13668697710034,
+        49.2950059038733
+      ],
+      "lowerTopY": 5.206856799251213,
+      "minTopY": 8.996856799251212,
+      "proposedTopY": 9.205730248448386,
+      "headroomM": 3.2488734491971734
+    },
+    {
+      "route": "park-access",
+      "s": 126.41122145174701,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13671320022958,
+        49.29500675759489
+      ],
+      "lowerTopY": 5.2600346014124,
+      "minTopY": 9.0500346014124,
+      "proposedTopY": 9.205730248448385,
+      "headroomM": 3.1956956470359845
+    },
+    {
+      "route": "park-access",
+      "s": 124.73723570666142,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13673660840237,
+        49.29499246335318
+      ],
+      "lowerTopY": 5.1954377867165675,
+      "minTopY": 8.985437786716567,
+      "proposedTopY": 9.147420565134722,
+      "headroomM": 3.201982778418154
+    },
+    {
+      "route": "park-access",
+      "s": 126.41122145174704,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13663448083457,
+        49.295003318012235
+      ],
+      "lowerTopY": 4.992792566663653,
+      "minTopY": 8.782792566663652,
+      "proposedTopY": 9.205730248448386,
+      "headroomM": 3.4629376817847337
+    },
+    {
+      "route": "park-access",
+      "s": 127.02967895676022,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13662899371165,
+        49.295008585697445
+      ],
+      "lowerTopY": 5.013711365067678,
+      "minTopY": 8.803711365067677,
+      "proposedTopY": 9.223781441731916,
+      "headroomM": 3.4600700766642376
+    },
+    {
+      "route": "park-access",
+      "s": 126.41122145174704,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13663707528944,
+        49.29500346392647
+      ],
+      "lowerTopY": 4.998679557812274,
+      "minTopY": 8.788679557812273,
+      "proposedTopY": 9.205730248448386,
+      "headroomM": 3.4570506906361125
+    },
+    {
+      "route": "park-access",
+      "s": 126.41122145174704,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13661992818976,
+        49.295002499559736
+      ],
+      "lowerTopY": 4.93766317685818,
+      "minTopY": 8.72766317685818,
+      "proposedTopY": 9.205730248448386,
+      "headroomM": 3.518067071590206
+    },
+    {
+      "route": "park-access",
+      "s": 127.02967895676022,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13662899371165,
+        49.295008585697445
+      ],
+      "lowerTopY": 5.013711365067678,
+      "minTopY": 8.803711365067677,
+      "proposedTopY": 9.223781441731916,
+      "headroomM": 3.4600700766642376
+    },
+    {
+      "route": "park-access",
+      "s": 126.41122145174704,
+      "upperWayId": 363693709,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13663448083457,
+        49.295003318012235
+      ],
+      "lowerTopY": 4.99279256666366,
+      "minTopY": 8.782792566663659,
+      "proposedTopY": 9.205730248448386,
+      "headroomM": 3.4629376817847266
+    },
+    {
+      "route": "park-access",
+      "s": 126.41122145174704,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13663791243619,
+        49.29500351100828
+      ],
+      "lowerTopY": 5.088582736190418,
+      "minTopY": 8.878582736190417,
+      "proposedTopY": 9.205730248448386,
+      "headroomM": 3.3671475122579686
+    },
+    {
+      "route": "park-access",
+      "s": 128.8603110427761,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13660480054904,
+        49.29502373084014
+      ],
+      "lowerTopY": 5.177288507602654,
+      "minTopY": 8.967288507602653,
+      "proposedTopY": 9.264810923088612,
+      "headroomM": 3.3375224154859584
+    },
+    {
+      "route": "park-access",
+      "s": 130.2995304601836,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13660309790419,
+        49.2950366117186
+      ],
+      "lowerTopY": 5.273242244339315,
+      "minTopY": 9.063242244339314,
+      "proposedTopY": 9.282702484136202,
+      "headroomM": 3.259460239796887
+    },
+    {
+      "route": "park-access",
+      "s": 130.29953046018363,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.1366500742184,
+        49.29503925370445
+      ],
+      "lowerTopY": 5.389191030615791,
+      "minTopY": 9.17919103061579,
+      "proposedTopY": 9.282702484136202,
+      "headroomM": 3.1435114535204107
+    },
+    {
+      "route": "park-access",
+      "s": 126.41122145174708,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13668659523917,
+        49.29500624896845
+      ],
+      "lowerTopY": 5.208743545167422,
+      "minTopY": 8.998743545167422,
+      "proposedTopY": 9.205730248448388,
+      "headroomM": 3.2469867032809656
+    },
+    {
+      "route": "park-access",
+      "s": 126.41122145174708,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13668659523917,
+        49.29500624896845
+      ],
+      "lowerTopY": 5.2087435451674295,
+      "minTopY": 8.998743545167429,
+      "proposedTopY": 9.205730248448388,
+      "headroomM": 3.2469867032809585
+    },
+    {
+      "route": "park-access",
+      "s": 130.29953046018363,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.1366500742184,
+        49.29503925370445
+      ],
+      "lowerTopY": 5.389191030615784,
+      "minTopY": 9.179191030615783,
+      "proposedTopY": 9.282702484136202,
+      "headroomM": 3.143511453520418
+    },
+    {
+      "route": "park-access",
+      "s": 130.2995304601836,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13665914899306,
+        49.29503976407711
+      ],
+      "lowerTopY": 5.409193518670101,
+      "minTopY": 9.1991935186701,
+      "proposedTopY": 9.282702484136202,
+      "headroomM": 3.123508965466101
+    },
+    {
+      "route": "park-access",
+      "s": 126.41122145174711,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13671171924183,
+        49.29500766196265
+      ],
+      "lowerTopY": 5.264121511213304,
+      "minTopY": 9.054121511213303,
+      "proposedTopY": 9.205730248448388,
+      "headroomM": 3.191608737235084
+    },
+    {
+      "route": "park-access",
+      "s": 130.29953046018363,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.1366034847362,
+        49.29503438501253
+      ],
+      "lowerTopY": 5.256842961178478,
+      "minTopY": 9.046842961178477,
+      "proposedTopY": 9.282702484136202,
+      "headroomM": 3.275859522957724
+    },
+    {
+      "route": "park-access",
+      "s": 130.83292588969,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13660246212949,
+        49.29503912990769
+      ],
+      "lowerTopY": 5.291384862029432,
+      "minTopY": 9.08138486202943,
+      "proposedTopY": 9.28582687243868,
+      "headroomM": 3.244442010409248
+    },
+    {
+      "route": "park-access",
+      "s": 132.6312582208486,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13662942400182,
+        49.295057915695054
+      ],
+      "lowerTopY": 5.491222123254957,
+      "minTopY": 9.281222123254956,
+      "proposedTopY": 9.281222123254953,
+      "headroomM": 3.0399999999999956
+    },
+    {
+      "route": "park-access",
+      "s": 130.29953046018363,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13665067354341,
+        49.29503871208312
+      ],
+      "lowerTopY": 5.3862298129250235,
+      "minTopY": 9.176229812925023,
+      "proposedTopY": 9.282702484136202,
+      "headroomM": 3.1464726712111784
+    },
+    {
+      "route": "park-access",
+      "s": 130.29953046018363,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13665067354341,
+        49.29503871208312
+      ],
+      "lowerTopY": 5.386229812925031,
+      "minTopY": 9.17622981292503,
+      "proposedTopY": 9.282702484136202,
+      "headroomM": 3.1464726712111712
+    },
+    {
+      "route": "park-access",
+      "s": 132.6312582208486,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13662942400182,
+        49.295057915695054
+      ],
+      "lowerTopY": 5.49122212325495,
+      "minTopY": 9.281222123254949,
+      "proposedTopY": 9.281222123254953,
+      "headroomM": 3.0400000000000027
+    },
+    {
+      "route": "park-access",
+      "s": 130.29953046018363,
+      "upperWayId": 363693709,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13665954028153,
+        49.295039525136126
+      ],
+      "lowerTopY": 5.408113725363108,
+      "minTopY": 9.198113725363108,
+      "proposedTopY": 9.282702484136202,
+      "headroomM": 3.1245887587730934
+    }
+  ],
+  "minFullRibbonAnalyticHeadroomM": 3.0399999999999956,
+  "boundViolationM": 3.552713678800501e-15,
+  "southStart": {
+    "coordinate": [
+      -123.1357263,
+      49.2938753
+    ],
+    "topY": 6.132605640024084,
+    "grade": -0.00863186206156108
+  },
+  "northReturn": {
+    "sourceId": 257712148,
+    "sourceChainageM": 99.55694323955987,
+    "coordinate": [
+      -123.13903400000001,
+      49.298477250000005
+    ],
+    "topY": 11.756414131487002,
+    "grade": 0.05070337774421131
+  },
+  "routeStats": [
+    {
+      "route": "east",
+      "lengthM": 485.263501008144,
+      "minY": 5.110881268214143,
+      "maxY": 10.964409407674005,
+      "maxSampledGrade": 0.06000000000000026,
+      "referenceOffsetM": 1.11,
+      "maxLiftOverOldCentre": 4.756462547464451
+    },
+    {
+      "route": "west",
+      "lengthM": 485.9095606358068,
+      "minY": 4.844639179272043,
+      "maxY": 10.714322934942473,
+      "maxSampledGrade": 0.06000000000000023,
+      "referenceOffsetM": 1.11,
+      "maxLiftOverOldCentre": 5.406388354135287
+    },
+    {
+      "route": "shared",
+      "lengthM": 152.8349796386032,
+      "minY": 7.4856140680112455,
+      "maxY": 11.756414131487002,
+      "maxSampledGrade": 0.05107989684810477,
+      "referenceOffsetM": 1.11,
+      "maxLiftOverOldCentre": 0.1915816735238487
+    },
+    {
+      "route": "bike-exit",
+      "lengthM": 16.00722416756244,
+      "minY": 5.551259207546764,
+      "maxY": 6.2789541603782535,
+      "maxSampledGrade": 0.06000000000000093,
+      "referenceOffsetM": 1.5,
+      "maxLiftOverOldCentre": 0.7681677539776315
+    },
+    {
+      "route": "park-access",
+      "lengthM": 273.53938758887836,
+      "minY": 5.088919973748452,
+      "maxY": 9.286947049310342,
+      "maxSampledGrade": 0.06000000000000008,
+      "referenceOffsetM": 1.11,
+      "maxLiftOverOldCentre": 4.912491066559677
+    }
+  ]
+}

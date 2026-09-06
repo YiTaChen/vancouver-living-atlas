@@ -1,0 +1,3404 @@
+{
+  "schemaVersion": 1,
+  "units": "metres, final asphalt top Y; source coordinates EPSG:4326",
+  "assumptions": {
+    "headroomM": 3.0,
+    "slabDepthM": 0.75,
+    "deckExtraWidthEachSideM": 1.5,
+    "clearanceReserveM": 0.04,
+    "maxGrade": 0.06,
+    "accuracy": "Display alignment fitted to existing model and OSM plan geometry. No surveyed bridge elevations or engineering claim."
+  },
+  "attribution": [
+    {
+      "component": "Source plan geometry",
+      "owner": "OpenStreetMap contributors",
+      "license": "ODbL",
+      "url": "https://www.openstreetmap.org/copyright"
+    },
+    {
+      "component": "Elevation and City road vectors",
+      "owner": "City of Vancouver",
+      "license": "Open Government Licence - Vancouver",
+      "url": "https://opendata.vancouver.ca/pages/licence/"
+    },
+    {
+      "component": "Profile algorithms",
+      "license": "MIT"
+    }
+  ],
+  "sourceHashes": {
+    "vancouver-twin/public/data/terrain.json": "c52c4ae53c3f76ae5cdfdb32765b53d7c61fec4f7d9db03b02c7f7d722853908",
+    "vancouver-twin/public/data/bridges.json": "52fcf8c310ecedff1782db2c1274af3f032905cdaf461b4a5c85ab0aa6d4faef",
+    "vancouver-twin/public/data/paths.geojson": "daf512c6eaee772df831462f3f0418f848d3737317b7219db51754ce0fae36b9",
+    "vancouver-twin/public/data/roads.geojson": "77543c74f4e567a65db14c8d33f9d6250d0f40bdd5f99031c1267aa8dc3373fb",
+    "work/geodata/osm-stanley-paths.json": "74747c4d76a9299d13857f70e8df48f15a3261dc093427f06223d23235cb443f"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "lions-causeway-6f1ff46d66",
+      "properties": {
+        "name": "Stanley Park Causeway",
+        "kind": "lions",
+        "role": "causeway",
+        "estimatedDeckM": null,
+        "deckHeightStatus": "terrain-following; no absolute bridge deck",
+        "roadWidthM": 8.0,
+        "widthStatus": "approximate carriageway width; sidewalks/cycle lanes separate",
+        "source": "osm",
+        "sourceId": 4755898,
+        "sourceUrl": "https://www.openstreetmap.org/way/4755898",
+        "coordinateStatus": "unaltered source centreline vertices; 7 decimal degree precision",
+        "lengthM": 75.41,
+        "bearingStartToEndDegrees": 163.4,
+        "startNode": "-123.1366734,49.2970617",
+        "endNode": "-123.1363777,49.2964147",
+        "sourceTags": {
+          "highway": "trunk",
+          "lanes": "2",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "startHeightRule": "terrain",
+        "endHeightRule": "terrain"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1366734,
+            49.2970617
+          ],
+          [
+            -123.1366461,
+            49.2970227
+          ],
+          [
+            -123.1366217,
+            49.2969849
+          ],
+          [
+            -123.1365989,
+            49.2969483
+          ],
+          [
+            -123.1365771,
+            49.2969118
+          ],
+          [
+            -123.1365566,
+            49.2968754
+          ],
+          [
+            -123.1365374,
+            49.2968392
+          ],
+          [
+            -123.1365175,
+            49.2968006
+          ],
+          [
+            -123.1365002,
+            49.2967655
+          ],
+          [
+            -123.1364824,
+            49.296727
+          ],
+          [
+            -123.1364644,
+            49.2966873
+          ],
+          [
+            -123.136449,
+            49.2966488
+          ],
+          [
+            -123.1364348,
+            49.2966093
+          ],
+          [
+            -123.1364218,
+            49.296571
+          ],
+          [
+            -123.1364095,
+            49.296533
+          ],
+          [
+            -123.1363977,
+            49.2964948
+          ],
+          [
+            -123.1363873,
+            49.2964552
+          ],
+          [
+            -123.1363777,
+            49.2964147
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "lions-causeway-58c15b97b5",
+      "properties": {
+        "name": "Stanley Park Causeway",
+        "kind": "lions",
+        "role": "causeway",
+        "estimatedDeckM": null,
+        "deckHeightStatus": "terrain-following; no absolute bridge deck",
+        "roadWidthM": 8.0,
+        "widthStatus": "approximate carriageway width; sidewalks/cycle lanes separate",
+        "source": "osm",
+        "sourceId": 42000575,
+        "sourceUrl": "https://www.openstreetmap.org/way/42000575",
+        "coordinateStatus": "unaltered source centreline vertices; 7 decimal degree precision",
+        "lengthM": 40.87,
+        "bearingStartToEndDegrees": 150.71,
+        "startNode": "-123.1369485,49.2973816",
+        "endNode": "-123.1366734,49.2970617",
+        "sourceTags": {
+          "bridge": "yes",
+          "highway": "trunk",
+          "lanes": "2",
+          "layer": "1",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "startHeightRule": "terrain",
+        "endHeightRule": "terrain"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1369485,
+            49.2973816
+          ],
+          [
+            -123.1368728,
+            49.2973037
+          ],
+          [
+            -123.13681,
+            49.2972345
+          ],
+          [
+            -123.1367508,
+            49.2971643
+          ],
+          [
+            -123.136697,
+            49.2970945
+          ],
+          [
+            -123.1366734,
+            49.2970617
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "lions-causeway-80ca43589f",
+      "properties": {
+        "name": "Stanley Park Causeway",
+        "kind": "lions",
+        "role": "causeway",
+        "estimatedDeckM": null,
+        "deckHeightStatus": "terrain-following; no absolute bridge deck",
+        "roadWidthM": 8.0,
+        "widthStatus": "approximate carriageway width; sidewalks/cycle lanes separate",
+        "source": "osm",
+        "sourceId": 42000576,
+        "sourceUrl": "https://www.openstreetmap.org/way/42000576",
+        "coordinateStatus": "unaltered source centreline vertices; 7 decimal degree precision",
+        "lengthM": 45.57,
+        "bearingStartToEndDegrees": 147.29,
+        "startNode": "-123.1372870,49.2977254",
+        "endNode": "-123.1369485,49.2973816",
+        "sourceTags": {
+          "highway": "trunk",
+          "lanes": "2",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "startHeightRule": "terrain",
+        "endHeightRule": "terrain"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.137287,
+            49.2977254
+          ],
+          [
+            -123.1372158,
+            49.2976353
+          ],
+          [
+            -123.1371874,
+            49.2976047
+          ],
+          [
+            -123.1371568,
+            49.2975744
+          ],
+          [
+            -123.137078,
+            49.2975057
+          ],
+          [
+            -123.1370041,
+            49.2974373
+          ],
+          [
+            -123.1369485,
+            49.2973816
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "lions-causeway-44a3f42981",
+      "properties": {
+        "name": "Stanley Park Causeway",
+        "kind": "lions",
+        "role": "causeway",
+        "estimatedDeckM": null,
+        "deckHeightStatus": "terrain-following; no absolute bridge deck",
+        "roadWidthM": 11.3,
+        "widthStatus": "approximate carriageway width; sidewalks/cycle lanes separate",
+        "source": "osm",
+        "sourceId": 44032485,
+        "sourceUrl": "https://www.openstreetmap.org/way/44032485",
+        "coordinateStatus": "unaltered source centreline vertices; 7 decimal degree precision",
+        "lengthM": 53.28,
+        "bearingStartToEndDegrees": 311.033,
+        "startNode": "-123.1372870,49.2977254",
+        "endNode": "-123.1378396,49.2980391",
+        "sourceTags": {
+          "highway": "trunk",
+          "lanes": "3",
+          "lanes:reversible": "1",
+          "surface": "asphalt"
+        },
+        "startHeightRule": "terrain",
+        "endHeightRule": "terrain"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.137287,
+            49.2977254
+          ],
+          [
+            -123.1373284,
+            49.297754
+          ],
+          [
+            -123.1373694,
+            49.2977806
+          ],
+          [
+            -123.1374138,
+            49.2978089
+          ],
+          [
+            -123.1374575,
+            49.2978356
+          ],
+          [
+            -123.1375053,
+            49.2978642
+          ],
+          [
+            -123.1375495,
+            49.2978902
+          ],
+          [
+            -123.1375941,
+            49.2979151
+          ],
+          [
+            -123.1376416,
+            49.2979404
+          ],
+          [
+            -123.1376982,
+            49.2979698
+          ],
+          [
+            -123.1377568,
+            49.2979995
+          ],
+          [
+            -123.1377969,
+            49.2980188
+          ],
+          [
+            -123.1378396,
+            49.2980391
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "sourceId": 44032486,
+        "roadWidthM": 11.3,
+        "name": "West Georgia Street",
+        "role": "extension",
+        "rawSourceTags": {
+          "bicycle": "designated",
+          "cycleway:left": "no",
+          "cycleway:right": "lane",
+          "foot": "no",
+          "hgv": "no",
+          "highway": "trunk",
+          "horse": "no",
+          "lanes": "3",
+          "lit": "yes",
+          "maxspeed": "50",
+          "name": "West Georgia Street",
+          "name:etymology:wikidata": "Q2258",
+          "old_ref": "1A",
+          "oneway": "yes",
+          "parking:both": "no",
+          "ref": "BC 99",
+          "sidewalk:left": "no",
+          "sidewalk:right": "separate",
+          "surface": "asphalt",
+          "trolley_wire": "yes",
+          "wikidata": "Q5547820"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1367221,
+            49.2944968
+          ],
+          [
+            -123.1366896,
+            49.2944628
+          ],
+          [
+            -123.136655,
+            49.2944303
+          ],
+          [
+            -123.1366186,
+            49.294399
+          ],
+          [
+            -123.1365763,
+            49.294366
+          ],
+          [
+            -123.1365366,
+            49.2943375
+          ],
+          [
+            -123.1364963,
+            49.2943107
+          ],
+          [
+            -123.1359039,
+            49.2939245
+          ],
+          [
+            -123.1357263,
+            49.2938753
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "sourceId": 44032487,
+        "roadWidthM": 8,
+        "name": "West Georgia Street",
+        "role": "extension",
+        "rawSourceTags": {
+          "bicycle": "no",
+          "cycleway:left": "no",
+          "destination": "Lions Gate Bridge",
+          "destination:ref": "99",
+          "foot": "no",
+          "hgv": "no",
+          "highway": "trunk",
+          "lanes": "2",
+          "maxspeed": "50",
+          "name": "West Georgia Street",
+          "name:etymology:wikidata": "Q2258",
+          "old_ref": "1A",
+          "oneway": "yes",
+          "parking:both": "no",
+          "ref": "BC 99",
+          "sidewalk": "no",
+          "surface": "asphalt",
+          "wikidata": "Q5547820"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1358521,
+            49.2940468
+          ],
+          [
+            -123.1359589,
+            49.2940724
+          ],
+          [
+            -123.1362176,
+            49.2942498
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "lions-causeway-64fc6977df",
+      "properties": {
+        "name": "Stanley Park Causeway",
+        "kind": "lions",
+        "role": "causeway",
+        "estimatedDeckM": null,
+        "deckHeightStatus": "terrain-following; no absolute bridge deck",
+        "roadWidthM": 8.0,
+        "widthStatus": "approximate carriageway width; sidewalks/cycle lanes separate",
+        "source": "osm",
+        "sourceId": 44032488,
+        "sourceUrl": "https://www.openstreetmap.org/way/44032488",
+        "coordinateStatus": "unaltered source centreline vertices; 7 decimal degree precision",
+        "lengthM": 42.2,
+        "bearingStartToEndDegrees": 330.656,
+        "startNode": "-123.1365625,49.2970952",
+        "endNode": "-123.1368470,49.2974253",
+        "sourceTags": {
+          "bridge": "yes",
+          "highway": "trunk",
+          "lanes": "2",
+          "layer": "1",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "startHeightRule": "terrain",
+        "endHeightRule": "terrain"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1365625,
+            49.2970952
+          ],
+          [
+            -123.1366134,
+            49.2971617
+          ],
+          [
+            -123.1366702,
+            49.2972348
+          ],
+          [
+            -123.1367297,
+            49.2973033
+          ],
+          [
+            -123.1367943,
+            49.2973735
+          ],
+          [
+            -123.136847,
+            49.2974253
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "lions-causeway-21e1e389e1",
+      "properties": {
+        "name": "Stanley Park Causeway",
+        "kind": "lions",
+        "role": "causeway",
+        "estimatedDeckM": null,
+        "deckHeightStatus": "terrain-following; no absolute bridge deck",
+        "roadWidthM": 8.0,
+        "widthStatus": "approximate carriageway width; sidewalks/cycle lanes separate",
+        "source": "osm",
+        "sourceId": 44032489,
+        "sourceUrl": "https://www.openstreetmap.org/way/44032489",
+        "coordinateStatus": "unaltered source centreline vertices; 7 decimal degree precision",
+        "lengthM": 46.69,
+        "bearingStartToEndDegrees": 316.278,
+        "startNode": "-123.1368470,49.2974253",
+        "endNode": "-123.1372870,49.2977254",
+        "sourceTags": {
+          "highway": "trunk",
+          "lanes": "2",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "startHeightRule": "terrain",
+        "endHeightRule": "terrain"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.136847,
+            49.2974253
+          ],
+          [
+            -123.1368665,
+            49.2974439
+          ],
+          [
+            -123.1369304,
+            49.2975024
+          ],
+          [
+            -123.1370068,
+            49.2975658
+          ],
+          [
+            -123.1370745,
+            49.2976189
+          ],
+          [
+            -123.137116,
+            49.2976462
+          ],
+          [
+            -123.1371549,
+            49.2976673
+          ],
+          [
+            -123.137287,
+            49.2977254
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "lions-causeway-714274f3c9",
+      "properties": {
+        "name": "Stanley Park Causeway",
+        "kind": "lions",
+        "role": "causeway",
+        "estimatedDeckM": null,
+        "deckHeightStatus": "terrain-following; no absolute bridge deck",
+        "roadWidthM": 8.0,
+        "widthStatus": "approximate carriageway width; sidewalks/cycle lanes separate",
+        "source": "osm",
+        "sourceId": 44032490,
+        "sourceUrl": "https://www.openstreetmap.org/way/44032490",
+        "coordinateStatus": "unaltered source centreline vertices; 7 decimal degree precision",
+        "lengthM": 21.96,
+        "bearingStartToEndDegrees": 332.046,
+        "startNode": "-123.1365453,49.2944876",
+        "endNode": "-123.1366867,49.2946614",
+        "sourceTags": {
+          "highway": "trunk",
+          "lanes": "2",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "startHeightRule": "terrain",
+        "endHeightRule": "terrain"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1365453,
+            49.2944876
+          ],
+          [
+            -123.1365768,
+            49.2945185
+          ],
+          [
+            -123.1366069,
+            49.2945511
+          ],
+          [
+            -123.1366363,
+            49.294587
+          ],
+          [
+            -123.1366637,
+            49.2946251
+          ],
+          [
+            -123.1366867,
+            49.2946614
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "sourceId": 74233348,
+        "roadWidthM": 8,
+        "name": "West Georgia Street",
+        "role": "extension",
+        "rawSourceTags": {
+          "bicycle": "no",
+          "cycleway:left": "no",
+          "foot": "no",
+          "hgv": "no",
+          "highway": "trunk",
+          "horse": "no",
+          "lanes": "2",
+          "maxspeed": "50",
+          "name": "West Georgia Street",
+          "name:etymology:wikidata": "Q2258",
+          "old_ref": "1A",
+          "oneway": "yes",
+          "parking:both": "no",
+          "ref": "BC 99",
+          "sidewalk": "no",
+          "surface": "asphalt",
+          "wikidata": "Q5547820"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1362176,
+            49.2942498
+          ],
+          [
+            -123.1362995,
+            49.2943063
+          ],
+          [
+            -123.13638,
+            49.2943623
+          ],
+          [
+            -123.1364232,
+            49.2943926
+          ],
+          [
+            -123.1364681,
+            49.2944248
+          ],
+          [
+            -123.1365085,
+            49.294456
+          ],
+          [
+            -123.1365453,
+            49.2944876
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "lions-causeway-2be46b6b1f",
+      "properties": {
+        "name": "Stanley Park Causeway",
+        "kind": "lions",
+        "role": "causeway",
+        "estimatedDeckM": null,
+        "deckHeightStatus": "terrain-following; no absolute bridge deck",
+        "roadWidthM": 11.3,
+        "widthStatus": "approximate carriageway width; sidewalks/cycle lanes separate",
+        "source": "osm",
+        "sourceId": 74233349,
+        "sourceUrl": "https://www.openstreetmap.org/way/74233349",
+        "coordinateStatus": "unaltered source centreline vertices; 7 decimal degree precision",
+        "lengthM": 106.49,
+        "bearingStartToEndDegrees": 197.29,
+        "startNode": "-123.1364750,49.2958730",
+        "endNode": "-123.1369084,49.2949648",
+        "sourceTags": {
+          "highway": "trunk",
+          "lanes": "3",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "startHeightRule": "terrain",
+        "endHeightRule": "terrain"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.136475,
+            49.295873
+          ],
+          [
+            -123.136802,
+            49.2953166
+          ],
+          [
+            -123.136823,
+            49.2952782
+          ],
+          [
+            -123.1368434,
+            49.2952397
+          ],
+          [
+            -123.1368609,
+            49.2952016
+          ],
+          [
+            -123.1368749,
+            49.2951633
+          ],
+          [
+            -123.1368854,
+            49.2951247
+          ],
+          [
+            -123.136895,
+            49.2950865
+          ],
+          [
+            -123.1369023,
+            49.295046
+          ],
+          [
+            -123.1369075,
+            49.2950057
+          ],
+          [
+            -123.1369084,
+            49.2949648
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "sourceId": 116061600,
+        "roadWidthM": 8,
+        "name": "Stanley Park access",
+        "role": "extension",
+        "rawSourceTags": {
+          "bicycle": "designated",
+          "change:lanes": "no|no",
+          "cycleway:left": "no",
+          "cycleway:right": "lane",
+          "destination": "Stanley Park",
+          "foot": "no",
+          "highway": "trunk_link",
+          "horse": "no",
+          "lanes": "2",
+          "maxspeed": "30",
+          "oneway": "yes",
+          "parking:both": "no",
+          "sidewalk:left": "no",
+          "sidewalk:right": "separate",
+          "surface": "asphalt",
+          "trolley_wire": "yes",
+          "turn:lanes": "none|merge_to_left"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1358521,
+            49.2940468
+          ],
+          [
+            -123.1359192,
+            49.2941378
+          ],
+          [
+            -123.1360376,
+            49.2942246
+          ],
+          [
+            -123.1361568,
+            49.2943093
+          ],
+          [
+            -123.1362859,
+            49.2943997
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "sourceId": 156891517,
+        "roadWidthM": 6.3,
+        "name": "Stanley Park access",
+        "role": "extension",
+        "rawSourceTags": {
+          "bicycle": "designated",
+          "cycleway:left": "no",
+          "cycleway:right": "lane",
+          "highway": "trunk_link",
+          "lanes": "1",
+          "maxspeed": "30",
+          "oneway": "yes",
+          "parking:both": "no",
+          "sidewalk": "no",
+          "surface": "asphalt",
+          "trolley_wire": "yes"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1362011,
+            49.2959089
+          ],
+          [
+            -123.1361507,
+            49.2959967
+          ],
+          [
+            -123.1361233,
+            49.2960532
+          ],
+          [
+            -123.1360983,
+            49.2961127
+          ],
+          [
+            -123.1360827,
+            49.2961649
+          ],
+          [
+            -123.1360701,
+            49.2962181
+          ],
+          [
+            -123.136061,
+            49.2962745
+          ],
+          [
+            -123.136055,
+            49.2963264
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "lions-causeway-11a474b926",
+      "properties": {
+        "name": "Stanley Park Causeway",
+        "kind": "lions",
+        "role": "causeway",
+        "estimatedDeckM": null,
+        "deckHeightStatus": "terrain-following; no absolute bridge deck",
+        "roadWidthM": 11.3,
+        "widthStatus": "approximate carriageway width; sidewalks/cycle lanes separate",
+        "source": "osm",
+        "sourceId": 257712148,
+        "sourceUrl": "https://www.openstreetmap.org/way/257712148",
+        "coordinateStatus": "unaltered source centreline vertices; 7 decimal degree precision",
+        "lengthM": 1496.72,
+        "bearingStartToEndDegrees": 340.479,
+        "startNode": "-123.1378396,49.2980391",
+        "endNode": "-123.1439760,49.3093291",
+        "sourceTags": {
+          "highway": "trunk",
+          "lanes": "3",
+          "lanes:reversible": "1",
+          "oneway": "no",
+          "surface": "asphalt"
+        },
+        "startHeightRule": "terrain",
+        "endHeightRule": "terrain"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1378396,
+            49.2980391
+          ],
+          [
+            -123.1378923,
+            49.2980622
+          ],
+          [
+            -123.1379481,
+            49.2980862
+          ],
+          [
+            -123.1380008,
+            49.2981078
+          ],
+          [
+            -123.1380536,
+            49.2981286
+          ],
+          [
+            -123.1381092,
+            49.2981506
+          ],
+          [
+            -123.138188,
+            49.2981812
+          ],
+          [
+            -123.1382661,
+            49.2982097
+          ],
+          [
+            -123.1383781,
+            49.2982492
+          ],
+          [
+            -123.1389233,
+            49.2984377
+          ],
+          [
+            -123.1391447,
+            49.2985168
+          ],
+          [
+            -123.1393567,
+            49.2985958
+          ],
+          [
+            -123.1395723,
+            49.2986795
+          ],
+          [
+            -123.1397818,
+            49.2987633
+          ],
+          [
+            -123.1399919,
+            49.2988522
+          ],
+          [
+            -123.1401928,
+            49.2989417
+          ],
+          [
+            -123.1403954,
+            49.2990337
+          ],
+          [
+            -123.1405969,
+            49.2991302
+          ],
+          [
+            -123.1407942,
+            49.2992275
+          ],
+          [
+            -123.1409889,
+            49.2993288
+          ],
+          [
+            -123.1411783,
+            49.2994322
+          ],
+          [
+            -123.1413622,
+            49.299535
+          ],
+          [
+            -123.1415532,
+            49.2996458
+          ],
+          [
+            -123.1417384,
+            49.2997552
+          ],
+          [
+            -123.1419108,
+            49.2998631
+          ],
+          [
+            -123.1420887,
+            49.2999822
+          ],
+          [
+            -123.1422588,
+            49.3001012
+          ],
+          [
+            -123.142451,
+            49.3002379
+          ],
+          [
+            -123.1426756,
+            49.3004055
+          ],
+          [
+            -123.14286,
+            49.3005536
+          ],
+          [
+            -123.1430663,
+            49.3007208
+          ],
+          [
+            -123.1432157,
+            49.3008515
+          ],
+          [
+            -123.143358,
+            49.300979
+          ],
+          [
+            -123.1434983,
+            49.3011102
+          ],
+          [
+            -123.1436376,
+            49.3012474
+          ],
+          [
+            -123.14379,
+            49.301404
+          ],
+          [
+            -123.1438959,
+            49.3015168
+          ],
+          [
+            -123.144027,
+            49.3016605
+          ],
+          [
+            -123.1441489,
+            49.3018008
+          ],
+          [
+            -123.1442653,
+            49.3019432
+          ],
+          [
+            -123.1443783,
+            49.3020877
+          ],
+          [
+            -123.1444831,
+            49.3022337
+          ],
+          [
+            -123.1445836,
+            49.3023827
+          ],
+          [
+            -123.1446768,
+            49.3025343
+          ],
+          [
+            -123.1447622,
+            49.3026859
+          ],
+          [
+            -123.144845,
+            49.3028381
+          ],
+          [
+            -123.14492,
+            49.3029928
+          ],
+          [
+            -123.1449897,
+            49.3031485
+          ],
+          [
+            -123.145051,
+            49.3033037
+          ],
+          [
+            -123.1451078,
+            49.3034625
+          ],
+          [
+            -123.145158,
+            49.3036231
+          ],
+          [
+            -123.1452005,
+            49.3037797
+          ],
+          [
+            -123.1452392,
+            49.3039412
+          ],
+          [
+            -123.1452717,
+            49.3041022
+          ],
+          [
+            -123.145296,
+            49.3042641
+          ],
+          [
+            -123.1453147,
+            49.3044252
+          ],
+          [
+            -123.1453264,
+            49.3045898
+          ],
+          [
+            -123.1453307,
+            49.3047492
+          ],
+          [
+            -123.1453344,
+            49.3049108
+          ],
+          [
+            -123.1453332,
+            49.3050714
+          ],
+          [
+            -123.1453284,
+            49.3052339
+          ],
+          [
+            -123.1453192,
+            49.3053942
+          ],
+          [
+            -123.1453063,
+            49.3055586
+          ],
+          [
+            -123.1452924,
+            49.3057214
+          ],
+          [
+            -123.1452723,
+            49.3058829
+          ],
+          [
+            -123.1452481,
+            49.3060453
+          ],
+          [
+            -123.1452245,
+            49.3061993
+          ],
+          [
+            -123.145196,
+            49.3063628
+          ],
+          [
+            -123.1451608,
+            49.3065227
+          ],
+          [
+            -123.1451243,
+            49.3066869
+          ],
+          [
+            -123.1450839,
+            49.3068465
+          ],
+          [
+            -123.1450415,
+            49.3070033
+          ],
+          [
+            -123.1449951,
+            49.307162
+          ],
+          [
+            -123.1449441,
+            49.3073217
+          ],
+          [
+            -123.1448897,
+            49.3074757
+          ],
+          [
+            -123.1448339,
+            49.3076324
+          ],
+          [
+            -123.1447736,
+            49.307792
+          ],
+          [
+            -123.1447084,
+            49.3079479
+          ],
+          [
+            -123.1446388,
+            49.3081065
+          ],
+          [
+            -123.1445683,
+            49.3082624
+          ],
+          [
+            -123.1444938,
+            49.3084167
+          ],
+          [
+            -123.1444161,
+            49.3085696
+          ],
+          [
+            -123.1443345,
+            49.3087242
+          ],
+          [
+            -123.1442485,
+            49.3088752
+          ],
+          [
+            -123.1441631,
+            49.309024
+          ],
+          [
+            -123.1440726,
+            49.3091756
+          ],
+          [
+            -123.143976,
+            49.3093291
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "sourceId": 363651505,
+        "roadWidthM": 14.6,
+        "name": "West Georgia Street",
+        "role": "extension",
+        "rawSourceTags": {
+          "bicycle": "designated",
+          "bus:lanes": "yes|yes|yes|designated",
+          "change:lanes": "not_left|not_right|no|no",
+          "cycleway:left": "no",
+          "cycleway:right": "lane",
+          "destination:lanes": "Lions Gate Bridge|Lions Gate Bridge|Stanley Park|Stanley Park",
+          "hgv": "no",
+          "highway": "trunk",
+          "lanes": "4",
+          "motor_vehicle:lanes": "yes|yes|yes|no",
+          "name": "West Georgia Street",
+          "name:etymology:wikidata": "Q2258",
+          "old_ref": "1A",
+          "oneway": "yes",
+          "parking:both": "no",
+          "ref": "BC 99",
+          "sidewalk:left": "no",
+          "sidewalk:right": "separate",
+          "surface": "asphalt",
+          "trolley_wire": "yes",
+          "wikidata": "Q5547820"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1357263,
+            49.2938753
+          ],
+          [
+            -123.1357611,
+            49.293982
+          ],
+          [
+            -123.1358521,
+            49.2940468
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "lions-causeway-8b7e35c86d",
+      "properties": {
+        "name": "Stanley Park Causeway",
+        "kind": "lions",
+        "role": "causeway",
+        "estimatedDeckM": null,
+        "deckHeightStatus": "terrain-following; no absolute bridge deck",
+        "roadWidthM": 8.0,
+        "widthStatus": "approximate carriageway width; sidewalks/cycle lanes separate",
+        "source": "osm",
+        "sourceId": 363687651,
+        "sourceUrl": "https://www.openstreetmap.org/way/363687651",
+        "coordinateStatus": "unaltered source centreline vertices; 7 decimal degree precision",
+        "lengthM": 61.71,
+        "bearingStartToEndDegrees": 186.682,
+        "startNode": "-123.1363777,49.2964147",
+        "endNode": "-123.1364750,49.2958730",
+        "sourceTags": {
+          "highway": "trunk",
+          "lanes": "2",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "startHeightRule": "terrain",
+        "endHeightRule": "terrain"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1363777,
+            49.2964147
+          ],
+          [
+            -123.1363687,
+            49.2963747
+          ],
+          [
+            -123.1363615,
+            49.2963347
+          ],
+          [
+            -123.1363563,
+            49.2962932
+          ],
+          [
+            -123.1363539,
+            49.2962529
+          ],
+          [
+            -123.1363537,
+            49.2962124
+          ],
+          [
+            -123.1363561,
+            49.2961733
+          ],
+          [
+            -123.1363604,
+            49.2961322
+          ],
+          [
+            -123.1363678,
+            49.2960919
+          ],
+          [
+            -123.1363791,
+            49.2960539
+          ],
+          [
+            -123.1363937,
+            49.2960188
+          ],
+          [
+            -123.1364106,
+            49.2959836
+          ],
+          [
+            -123.1364317,
+            49.2959453
+          ],
+          [
+            -123.136475,
+            49.295873
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "lions-causeway-c508d2bbfb",
+      "properties": {
+        "name": "Stanley Park Causeway",
+        "kind": "lions",
+        "role": "causeway",
+        "estimatedDeckM": null,
+        "deckHeightStatus": "terrain-following; no absolute bridge deck",
+        "roadWidthM": 8.0,
+        "widthStatus": "approximate carriageway width; sidewalks/cycle lanes separate",
+        "source": "osm",
+        "sourceId": 363693708,
+        "sourceUrl": "https://www.openstreetmap.org/way/363693708",
+        "coordinateStatus": "unaltered source centreline vertices; 7 decimal degree precision",
+        "lengthM": 42.34,
+        "bearingStartToEndDegrees": 352.972,
+        "startNode": "-123.1366867,49.2946614",
+        "endNode": "-123.1367575,49.2950360",
+        "sourceTags": {
+          "bridge": "yes",
+          "highway": "trunk",
+          "lanes": "2",
+          "layer": "1",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "startHeightRule": "terrain",
+        "endHeightRule": "terrain"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1366867,
+            49.2946614
+          ],
+          [
+            -123.1367071,
+            49.2947027
+          ],
+          [
+            -123.1367228,
+            49.2947404
+          ],
+          [
+            -123.1367359,
+            49.294778
+          ],
+          [
+            -123.1367467,
+            49.2948157
+          ],
+          [
+            -123.136754,
+            49.2948555
+          ],
+          [
+            -123.13676,
+            49.2948891
+          ],
+          [
+            -123.1367636,
+            49.2949332
+          ],
+          [
+            -123.1367636,
+            49.2949735
+          ],
+          [
+            -123.1367598,
+            49.2950166
+          ],
+          [
+            -123.1367575,
+            49.295036
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "sourceId": 363693709,
+        "roadWidthM": 6.3,
+        "name": "Stanley Park access",
+        "role": "extension",
+        "rawSourceTags": {
+          "bicycle": "designated",
+          "bridge": "yes",
+          "cycleway:left": "no",
+          "cycleway:right": "lane",
+          "destination": "stanley park",
+          "foot": "no",
+          "highway": "trunk_link",
+          "horse": "no",
+          "lanes": "1",
+          "layer": "1",
+          "maxspeed": "30",
+          "oneway": "yes",
+          "parking:both": "no",
+          "sidewalk": "no",
+          "surface": "asphalt",
+          "trolley_wire": "yes"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1366062,
+            49.294698
+          ],
+          [
+            -123.1366217,
+            49.2947276
+          ],
+          [
+            -123.1366356,
+            49.2947581
+          ],
+          [
+            -123.136648,
+            49.2947913
+          ],
+          [
+            -123.1366585,
+            49.2948259
+          ],
+          [
+            -123.1366663,
+            49.2948588
+          ],
+          [
+            -123.1366708,
+            49.2948915
+          ],
+          [
+            -123.1366743,
+            49.2949319
+          ],
+          [
+            -123.1366744,
+            49.2949675
+          ],
+          [
+            -123.1366715,
+            49.2950054
+          ],
+          [
+            -123.1366669,
+            49.2950402
+          ],
+          [
+            -123.1366594,
+            49.295075
+          ],
+          [
+            -123.1366494,
+            49.2951104
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "lions-causeway-cbf10c9848",
+      "properties": {
+        "name": "Stanley Park Causeway",
+        "kind": "lions",
+        "role": "causeway",
+        "estimatedDeckM": null,
+        "deckHeightStatus": "terrain-following; no absolute bridge deck",
+        "roadWidthM": 8.0,
+        "widthStatus": "approximate carriageway width; sidewalks/cycle lanes separate",
+        "source": "osm",
+        "sourceId": 363693711,
+        "sourceUrl": "https://www.openstreetmap.org/way/363693711",
+        "coordinateStatus": "unaltered source centreline vertices; 7 decimal degree precision",
+        "lengthM": 229.38,
+        "bearingStartToEndDegrees": 4.659,
+        "startNode": "-123.1367575,49.2950360",
+        "endNode": "-123.1365102,49.2970156",
+        "sourceTags": {
+          "highway": "trunk",
+          "lanes": "2",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "startHeightRule": "terrain",
+        "endHeightRule": "terrain"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1367575,
+            49.295036
+          ],
+          [
+            -123.1367517,
+            49.2950701
+          ],
+          [
+            -123.1367435,
+            49.2951038
+          ],
+          [
+            -123.1367336,
+            49.2951364
+          ],
+          [
+            -123.1367215,
+            49.2951706
+          ],
+          [
+            -123.1367043,
+            49.2952081
+          ],
+          [
+            -123.136684,
+            49.2952464
+          ],
+          [
+            -123.1366609,
+            49.2952875
+          ],
+          [
+            -123.1363787,
+            49.2957689
+          ],
+          [
+            -123.1363579,
+            49.2958055
+          ],
+          [
+            -123.1363355,
+            49.2958468
+          ],
+          [
+            -123.1363151,
+            49.2958847
+          ],
+          [
+            -123.136295,
+            49.2959249
+          ],
+          [
+            -123.1362781,
+            49.2959649
+          ],
+          [
+            -123.1362654,
+            49.2960045
+          ],
+          [
+            -123.1362554,
+            49.2960414
+          ],
+          [
+            -123.1362464,
+            49.2960815
+          ],
+          [
+            -123.1362396,
+            49.2961222
+          ],
+          [
+            -123.1362345,
+            49.2961633
+          ],
+          [
+            -123.1362316,
+            49.2962008
+          ],
+          [
+            -123.1362313,
+            49.296241
+          ],
+          [
+            -123.1362335,
+            49.2962799
+          ],
+          [
+            -123.1362377,
+            49.2963213
+          ],
+          [
+            -123.1362438,
+            49.2963615
+          ],
+          [
+            -123.136252,
+            49.296401
+          ],
+          [
+            -123.1362713,
+            49.2964795
+          ],
+          [
+            -123.1362925,
+            49.2965563
+          ],
+          [
+            -123.1363187,
+            49.2966343
+          ],
+          [
+            -123.1363509,
+            49.2967166
+          ],
+          [
+            -123.1363847,
+            49.2967917
+          ],
+          [
+            -123.1364234,
+            49.2968687
+          ],
+          [
+            -123.1364641,
+            49.2969402
+          ],
+          [
+            -123.1365102,
+            49.2970156
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "lions-causeway-d41738ffd8",
+      "properties": {
+        "name": "Stanley Park Causeway",
+        "kind": "lions",
+        "role": "causeway",
+        "estimatedDeckM": null,
+        "deckHeightStatus": "terrain-following; no absolute bridge deck",
+        "roadWidthM": 11.3,
+        "widthStatus": "approximate carriageway width; sidewalks/cycle lanes separate",
+        "source": "osm",
+        "sourceId": 363693713,
+        "sourceUrl": "https://www.openstreetmap.org/way/363693713",
+        "coordinateStatus": "unaltered source centreline vertices; 7 decimal degree precision",
+        "lengthM": 43.82,
+        "bearingStartToEndDegrees": 168.7,
+        "startNode": "-123.1369084,49.2949648",
+        "endNode": "-123.1367911,49.2945819",
+        "sourceTags": {
+          "bridge": "yes",
+          "highway": "trunk",
+          "lanes": "3",
+          "layer": "1",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "startHeightRule": "terrain",
+        "endHeightRule": "terrain"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1369084,
+            49.2949648
+          ],
+          [
+            -123.1369091,
+            49.2949268
+          ],
+          [
+            -123.1369061,
+            49.2948877
+          ],
+          [
+            -123.136901,
+            49.2948498
+          ],
+          [
+            -123.1368933,
+            49.2948108
+          ],
+          [
+            -123.136882,
+            49.2947701
+          ],
+          [
+            -123.1368689,
+            49.2947318
+          ],
+          [
+            -123.1368541,
+            49.2946943
+          ],
+          [
+            -123.1368367,
+            49.2946571
+          ],
+          [
+            -123.1368157,
+            49.2946185
+          ],
+          [
+            -123.1367911,
+            49.2945819
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "lions-causeway-f7f99a87d4",
+      "properties": {
+        "name": "Stanley Park Causeway",
+        "kind": "lions",
+        "role": "causeway",
+        "estimatedDeckM": null,
+        "deckHeightStatus": "terrain-following; no absolute bridge deck",
+        "roadWidthM": 11.3,
+        "widthStatus": "approximate carriageway width; sidewalks/cycle lanes separate",
+        "source": "osm",
+        "sourceId": 363693716,
+        "sourceUrl": "https://www.openstreetmap.org/way/363693716",
+        "coordinateStatus": "unaltered source centreline vertices; 7 decimal degree precision",
+        "lengthM": 10.72,
+        "bearingStartToEndDegrees": 152.127,
+        "startNode": "-123.1367911,49.2945819",
+        "endNode": "-123.1367221,49.2944968",
+        "sourceTags": {
+          "highway": "trunk",
+          "lanes": "3",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "startHeightRule": "terrain",
+        "endHeightRule": "terrain"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1367911,
+            49.2945819
+          ],
+          [
+            -123.1367797,
+            49.2945659
+          ],
+          [
+            -123.1367526,
+            49.2945315
+          ],
+          [
+            -123.1367221,
+            49.2944968
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "sourceId": 363693717,
+        "roadWidthM": 6.3,
+        "name": "Stanley Park access",
+        "role": "extension",
+        "rawSourceTags": {
+          "bicycle": "designated",
+          "cycleway:left": "no",
+          "cycleway:right": "lane",
+          "destination": "stanley park",
+          "foot": "no",
+          "highway": "trunk_link",
+          "horse": "no",
+          "lanes": "1",
+          "lit": "yes",
+          "maxspeed": "30",
+          "oneway": "yes",
+          "parking:both": "no",
+          "sidewalk": "no",
+          "surface": "asphalt",
+          "trolley_wire": "yes"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1366494,
+            49.2951104
+          ],
+          [
+            -123.1366258,
+            49.2951712
+          ],
+          [
+            -123.1365954,
+            49.295233
+          ],
+          [
+            -123.1365661,
+            49.2952833
+          ],
+          [
+            -123.1362011,
+            49.2959089
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "lions-causeway-f8a40cc5d8",
+      "properties": {
+        "name": "Stanley Park Causeway",
+        "kind": "lions",
+        "role": "causeway",
+        "estimatedDeckM": null,
+        "deckHeightStatus": "terrain-following; no absolute bridge deck",
+        "roadWidthM": 8.0,
+        "widthStatus": "approximate carriageway width; sidewalks/cycle lanes separate",
+        "source": "osm",
+        "sourceId": 690349457,
+        "sourceUrl": "https://www.openstreetmap.org/way/690349457",
+        "coordinateStatus": "unaltered source centreline vertices; 7 decimal degree precision",
+        "lengthM": 9.64,
+        "bearingStartToEndDegrees": 336.801,
+        "startNode": "-123.1365102,49.2970156",
+        "endNode": "-123.1365625,49.2970952",
+        "sourceTags": {
+          "highway": "trunk",
+          "lanes": "2",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "startHeightRule": "terrain",
+        "endHeightRule": "terrain"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1365102,
+            49.2970156
+          ],
+          [
+            -123.1365625,
+            49.2970952
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "sourceId": 1133022255,
+        "roadWidthM": 6.3,
+        "name": "Stanley Park access",
+        "role": "extension",
+        "rawSourceTags": {
+          "bicycle": "designated",
+          "cycleway:left": "no",
+          "cycleway:right": "lane",
+          "destination": "stanley park",
+          "foot": "no",
+          "highway": "trunk_link",
+          "horse": "no",
+          "lanes": "1",
+          "maxspeed": "30",
+          "oneway": "yes",
+          "parking:both": "no",
+          "sidewalk": "no",
+          "surface": "asphalt",
+          "trolley_wire": "yes"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1362859,
+            49.2943997
+          ],
+          [
+            -123.1363382,
+            49.2944363
+          ],
+          [
+            -123.1363929,
+            49.294475
+          ],
+          [
+            -123.1364362,
+            49.2945073
+          ],
+          [
+            -123.1364754,
+            49.29454
+          ],
+          [
+            -123.1365153,
+            49.2945776
+          ],
+          [
+            -123.1365518,
+            49.2946188
+          ],
+          [
+            -123.1365778,
+            49.2946544
+          ],
+          [
+            -123.1366062,
+            49.294698
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "sourceId": 1296092759,
+        "roadWidthM": 4,
+        "name": "Chilco Bike Route",
+        "role": "extension",
+        "rawSourceTags": {
+          "highway": "cycleway",
+          "name": "Chilco Bike Route",
+          "oneway": "yes",
+          "surface": "asphalt"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1367221,
+            49.2944968
+          ],
+          [
+            -123.1367418,
+            49.2944184
+          ],
+          [
+            -123.136746,
+            49.2944019
+          ],
+          [
+            -123.1367849,
+            49.2943616
+          ]
+        ]
+      }
+    }
+  ],
+  "routes": [
+    {
+      "id": "east",
+      "lengthM": 485.263501008144,
+      "ranges": [
+        {
+          "sourceId": 363651505,
+          "start": 0.0,
+          "end": 21.926139811830144,
+          "reversed": false,
+          "sourceLength": 21.926139811830144
+        },
+        {
+          "sourceId": 44032487,
+          "start": 21.926139811830144,
+          "end": 57.44359040102911,
+          "reversed": false,
+          "sourceLength": 35.51745058919897
+        },
+        {
+          "sourceId": 74233348,
+          "start": 57.44359040102911,
+          "end": 93.06062871522381,
+          "reversed": false,
+          "sourceLength": 35.6170383141947
+        },
+        {
+          "sourceId": 44032490,
+          "start": 93.06062871522381,
+          "end": 115.01586588707221,
+          "reversed": false,
+          "sourceLength": 21.955237171848395
+        },
+        {
+          "sourceId": 363693708,
+          "start": 115.01586588707221,
+          "end": 157.3587396404988,
+          "reversed": false,
+          "sourceLength": 42.3428737534266
+        },
+        {
+          "sourceId": 363693711,
+          "start": 157.3587396404988,
+          "end": 386.7346530457991,
+          "reversed": false,
+          "sourceLength": 229.3759134053003
+        },
+        {
+          "sourceId": 690349457,
+          "start": 386.7346530457991,
+          "end": 396.37521866302404,
+          "reversed": false,
+          "sourceLength": 9.640565617224922
+        },
+        {
+          "sourceId": 44032488,
+          "start": 396.37521866302404,
+          "end": 438.57163832680527,
+          "reversed": false,
+          "sourceLength": 42.19641966378123
+        },
+        {
+          "sourceId": 44032489,
+          "start": 438.57163832680527,
+          "end": 485.263501008144,
+          "reversed": false,
+          "sourceLength": 46.691862681338705
+        }
+      ],
+      "knots": [
+        {
+          "sM": 0.0,
+          "topY": 6.132605640024084,
+          "grade": -0.00863186206156108
+        },
+        {
+          "sM": 21.926139811830144,
+          "topY": 5.863235982604815,
+          "grade": -0.016977974859899415
+        },
+        {
+          "sM": 39.684865106429626,
+          "topY": 5.5639790394833755,
+          "grade": -0.017365038544853714
+        },
+        {
+          "sM": 57.44359040102911,
+          "topY": 5.279808100287191,
+          "grade": -0.01205912986851404
+        },
+        {
+          "sM": 75.25210955812646,
+          "topY": 5.243555747983215,
+          "grade": 0.013091880631651339
+        },
+        {
+          "sM": 93.06062871522381,
+          "topY": 5.823741262775051,
+          "grade": 0.053768202943046975
+        },
+        {
+          "sM": 115.01586588707221,
+          "topY": 7.0954486322885435,
+          "grade": 0.06000000000000001
+        },
+        {
+          "sM": 136.1873027637855,
+          "topY": 8.365734844891344,
+          "grade": 0.06000000000000002
+        },
+        {
+          "sM": 157.3587396404988,
+          "topY": 9.126577606867933,
+          "grade": -0.012188314887576464
+        },
+        {
+          "sM": 180.29633098102883,
+          "topY": 8.11588375790642,
+          "grade": -0.059999999999999984
+        },
+        {
+          "sM": 203.23392232155888,
+          "topY": 6.739628277474618,
+          "grade": -0.05999999999999996
+        },
+        {
+          "sM": 226.1715136620889,
+          "topY": 5.512074811139452,
+          "grade": -0.040551312661079204
+        },
+        {
+          "sM": 249.10910500261895,
+          "topY": 5.112443856726662,
+          "grade": 0.0021037001831959467
+        },
+        {
+          "sM": 272.04669634314894,
+          "topY": 5.3992864780601755,
+          "grade": 0.019376107302185728
+        },
+        {
+          "sM": 294.984287683679,
+          "topY": 5.83534962469524,
+          "grade": 0.01602687123276452
+        },
+        {
+          "sM": 317.92187902420903,
+          "topY": 6.165834566541095,
+          "grade": 0.015839571959373713
+        },
+        {
+          "sM": 340.8594703647391,
+          "topY": 6.768497447656485,
+          "grade": 0.03962772646561955
+        },
+        {
+          "sM": 363.7970617052691,
+          "topY": 7.963794006389516,
+          "grade": 0.06
+        },
+        {
+          "sM": 386.7346530457991,
+          "topY": 9.34004948682132,
+          "grade": 0.06
+        },
+        {
+          "sM": 396.37521866302404,
+          "topY": 9.918483423854815,
+          "grade": 0.06
+        },
+        {
+          "sM": 417.47342849491463,
+          "topY": 10.927686946434708,
+          "grade": 0.02350082740969594
+        },
+        {
+          "sM": 438.57163832680527,
+          "topY": 10.24903368246335,
+          "grade": -0.0600000000000002
+        },
+        {
+          "sM": 461.9175696674746,
+          "topY": 8.84827780202319,
+          "grade": -0.06
+        },
+        {
+          "sM": 485.263501008144,
+          "topY": 7.689153739544894,
+          "grade": -0.028949816423780268
+        }
+      ]
+    },
+    {
+      "id": "west",
+      "lengthM": 485.9095606358068,
+      "ranges": [
+        {
+          "sourceId": 44032486,
+          "start": 0.0,
+          "end": 101.31952080912751,
+          "reversed": true,
+          "sourceLength": 101.31952080912751
+        },
+        {
+          "sourceId": 363693716,
+          "start": 101.31952080912751,
+          "end": 112.04165426591771,
+          "reversed": true,
+          "sourceLength": 10.722133456790203
+        },
+        {
+          "sourceId": 363693713,
+          "start": 112.04165426591771,
+          "end": 155.86390143183027,
+          "reversed": true,
+          "sourceLength": 43.82224716591256
+        },
+        {
+          "sourceId": 74233349,
+          "start": 155.86390143183027,
+          "end": 262.34959989360044,
+          "reversed": true,
+          "sourceLength": 106.48569846177017
+        },
+        {
+          "sourceId": 363687651,
+          "start": 262.34959989360044,
+          "end": 324.06195616243696,
+          "reversed": true,
+          "sourceLength": 61.712356268836515
+        },
+        {
+          "sourceId": 4755898,
+          "start": 324.06195616243696,
+          "end": 399.47081834665426,
+          "reversed": true,
+          "sourceLength": 75.4088621842173
+        },
+        {
+          "sourceId": 42000575,
+          "start": 399.47081834665426,
+          "end": 440.3390925667966,
+          "reversed": true,
+          "sourceLength": 40.868274220142325
+        },
+        {
+          "sourceId": 42000576,
+          "start": 440.3390925667966,
+          "end": 485.9095606358068,
+          "reversed": true,
+          "sourceLength": 45.570468069010246
+        }
+      ],
+      "knots": [
+        {
+          "sM": 0.0,
+          "topY": 6.132605640024084,
+          "grade": -0.00863186206156108
+        },
+        {
+          "sM": 20.2639041618255,
+          "topY": 5.965619001202807,
+          "grade": -0.009721309555126713
+        },
+        {
+          "sM": 40.527808323651,
+          "topY": 5.685045066740757,
+          "grade": -0.016931371195971164
+        },
+        {
+          "sM": 60.7917124854765,
+          "topY": 5.362170285881461,
+          "grade": -0.011459320696005377
+        },
+        {
+          "sM": 81.055616647302,
+          "topY": 5.40846107519019,
+          "grade": 0.020987106454898576
+        },
+        {
+          "sM": 101.31952080912751,
+          "topY": 6.2789541603782535,
+          "grade": 0.05999999999999998
+        },
+        {
+          "sM": 112.04165426591771,
+          "topY": 6.922282167785667,
+          "grade": 0.06
+        },
+        {
+          "sM": 133.952777848874,
+          "topY": 8.236949582763044,
+          "grade": 0.06000000000000001
+        },
+        {
+          "sM": 155.86390143183027,
+          "topY": 8.694265655031131,
+          "grade": -0.05738576611053231
+        },
+        {
+          "sM": 177.1610411241843,
+          "topY": 7.434995841600713,
+          "grade": -0.06
+        },
+        {
+          "sM": 198.45818081653834,
+          "topY": 6.157167460059469,
+          "grade": -0.06
+        },
+        {
+          "sM": 219.75532050889237,
+          "topY": 5.0892519508623915,
+          "grade": -0.030430835965330277
+        },
+        {
+          "sM": 241.0524602012464,
+          "topY": 4.855891765681686,
+          "grade": 0.0054167495077661176
+        },
+        {
+          "sM": 262.34959989360044,
+          "topY": 5.08927734995121,
+          "grade": 0.013945708080103546
+        },
+        {
+          "sM": 282.92038531654595,
+          "topY": 5.407911026652228,
+          "grade": 0.016297465758331065
+        },
+        {
+          "sM": 303.49117073949145,
+          "topY": 5.7174025085473765,
+          "grade": 0.012907159109477994
+        },
+        {
+          "sM": 324.06195616243696,
+          "topY": 5.988800626245236,
+          "grade": 0.01631258284118515
+        },
+        {
+          "sM": 342.91417170849127,
+          "topY": 6.519339741033669,
+          "grade": 0.04157493623122469
+        },
+        {
+          "sM": 361.76638725454563,
+          "topY": 7.533501400780371,
+          "grade": 0.06000000000000001
+        },
+        {
+          "sM": 380.61860280059994,
+          "topY": 8.66463433354363,
+          "grade": 0.06
+        },
+        {
+          "sM": 399.47081834665426,
+          "topY": 9.795767266306889,
+          "grade": 0.06000000000000001
+        },
+        {
+          "sM": 419.9049554567254,
+          "topY": 10.702064746520426,
+          "grade": 0.013056386281198817
+        },
+        {
+          "sM": 440.3390925667966,
+          "topY": 9.973631257928268,
+          "grade": -0.06
+        },
+        {
+          "sM": 463.12432660130173,
+          "topY": 8.606517215857961,
+          "grade": -0.05999999999999987
+        },
+        {
+          "sM": 485.9095606358068,
+          "topY": 7.689153739544894,
+          "grade": -0.028949816423780268
+        }
+      ]
+    },
+    {
+      "id": "shared",
+      "lengthM": 152.8349796386032,
+      "ranges": [
+        {
+          "sourceId": 44032485,
+          "start": 0.0,
+          "end": 53.27803639904331,
+          "reversed": false,
+          "sourceLength": 53.27803639904331
+        },
+        {
+          "sourceId": 257712148,
+          "start": 53.27803639904331,
+          "end": 152.8349796386032,
+          "reversed": false,
+          "sourceLength": 1496.716111954173
+        }
+      ],
+      "knots": [
+        {
+          "sM": 0.0,
+          "topY": 7.689153739544894,
+          "grade": -0.028949816423780268
+        },
+        {
+          "sM": 17.75934546634777,
+          "topY": 7.49330055390415,
+          "grade": 0.005005541078057366
+        },
+        {
+          "sM": 35.51869093269554,
+          "topY": 7.6880547773643855,
+          "grade": 0.01609524535554712
+        },
+        {
+          "sM": 53.27803639904331,
+          "topY": 8.024892809821484,
+          "grade": 0.021889183086936635
+        },
+        {
+          "sM": 78.16727220893327,
+          "topY": 8.664999179712519,
+          "grade": 0.030851719989522686
+        },
+        {
+          "sM": 103.05650801882325,
+          "topY": 9.557475666075556,
+          "grade": 0.037867968899469265
+        },
+        {
+          "sM": 127.9457438287132,
+          "topY": 10.536935212381373,
+          "grade": 0.043517919651930956
+        },
+        {
+          "sM": 152.8349796386032,
+          "topY": 11.756414131487002,
+          "grade": 0.05070337774421131
+        }
+      ]
+    },
+    {
+      "id": "bike-exit",
+      "lengthM": 16.00722416756244,
+      "ranges": [
+        {
+          "sourceId": 1296092759,
+          "start": 0.0,
+          "end": 16.00722416756244,
+          "reversed": false,
+          "sourceLength": 16.00722416756244
+        }
+      ],
+      "knots": [
+        {
+          "sM": 0.0,
+          "topY": 6.2789541603782535,
+          "grade": -0.04510901773786251
+        },
+        {
+          "sM": 3.2014448335124883,
+          "topY": 6.113734122401121,
+          "grade": -0.06
+        },
+        {
+          "sM": 6.402889667024977,
+          "topY": 5.921647432390371,
+          "grade": -0.06000000000000001
+        },
+        {
+          "sM": 9.604334500537465,
+          "topY": 5.730819760341287,
+          "grade": -0.05882020335148186
+        },
+        {
+          "sM": 12.805779334049953,
+          "topY": 5.576022232742063,
+          "grade": -0.038695888354711494
+        },
+        {
+          "sM": 16.00722416756244,
+          "topY": 5.577344026815245,
+          "grade": 0.02364444085804864
+        }
+      ]
+    },
+    {
+      "id": "park-access",
+      "lengthM": 273.53938758887836,
+      "ranges": [
+        {
+          "sourceId": 116061600,
+          "start": 0.0,
+          "end": 50.72675785502204,
+          "reversed": false,
+          "sourceLength": 50.72675785502204
+        },
+        {
+          "sourceId": 1133022255,
+          "start": 50.72675785502204,
+          "end": 91.60425911361696,
+          "reversed": false,
+          "sourceLength": 40.87750125859492
+        },
+        {
+          "sourceId": 363693709,
+          "start": 91.60425911361696,
+          "end": 138.21862565827766,
+          "reversed": false,
+          "sourceLength": 46.6143665446607
+        },
+        {
+          "sourceId": 363693717,
+          "start": 138.21862565827766,
+          "end": 232.92996708705823,
+          "reversed": false,
+          "sourceLength": 94.71134142878057
+        },
+        {
+          "sourceId": 156891517,
+          "start": 232.92996708705823,
+          "end": 273.53938758887836,
+          "reversed": false,
+          "sourceLength": 47.920925367470716
+        }
+      ],
+      "knots": [
+        {
+          "sM": 0.0,
+          "topY": 5.863235982604815,
+          "grade": -0.016977974859899415
+        },
+        {
+          "sM": 16.908919285007347,
+          "topY": 5.537228968588981,
+          "grade": -0.020468423202418973
+        },
+        {
+          "sM": 33.81783857001469,
+          "topY": 5.238080084024071,
+          "grade": -0.011268148245598353
+        },
+        {
+          "sM": 50.72675785502204,
+          "topY": 5.232297587899704,
+          "grade": 0.014169329566739584
+        },
+        {
+          "sM": 71.1655084843195,
+          "topY": 6.002969645604202,
+          "grade": 0.06
+        },
+        {
+          "sM": 91.60425911361696,
+          "topY": 7.22929468336205,
+          "grade": 0.06
+        },
+        {
+          "sM": 114.91144238594731,
+          "topY": 8.62772567970187,
+          "grade": 0.059999999999999984
+        },
+        {
+          "sM": 138.21862565827766,
+          "topY": 9.093869345148475,
+          "grade": -0.06000000000000009
+        },
+        {
+          "sM": 161.8964610154728,
+          "topY": 7.673199223716771,
+          "grade": -0.06
+        },
+        {
+          "sM": 185.57429637266796,
+          "topY": 6.252529102285062,
+          "grade": -0.06000000000000001
+        },
+        {
+          "sM": 209.2521317298631,
+          "topY": 5.208625694259357,
+          "grade": -0.01980290560393804
+        },
+        {
+          "sM": 232.92996708705823,
+          "topY": 5.1806610059250255,
+          "grade": 0.01585112384420053
+        },
+        {
+          "sM": 253.2346773379683,
+          "topY": 5.630369625844975,
+          "grade": 0.023494985729111285
+        },
+        {
+          "sM": 273.53938758887836,
+          "topY": 6.00392875649604,
+          "grade": 0.012121606238855165
+        }
+      ]
+    }
+  ],
+  "sharedNodes": [
+    {
+      "route": "east",
+      "sourceId": 363651505,
+      "sourceEnd": "start",
+      "chainageM": 0.0,
+      "coordinate": [
+        -123.1357263,
+        49.2938753
+      ],
+      "topY": 6.132605640024084,
+      "grade": -0.00863186206156108,
+      "partialBoundary": false
+    },
+    {
+      "route": "east",
+      "sourceId": 363651505,
+      "sourceEnd": "end",
+      "chainageM": 21.926139811830144,
+      "coordinate": [
+        -123.1358521,
+        49.2940468
+      ],
+      "topY": 5.863235982604815,
+      "grade": -0.016977974859899415,
+      "partialBoundary": false
+    },
+    {
+      "route": "east",
+      "sourceId": 44032487,
+      "sourceEnd": "start",
+      "chainageM": 21.926139811830144,
+      "coordinate": [
+        -123.1358521,
+        49.2940468
+      ],
+      "topY": 5.863235982604815,
+      "grade": -0.016977974859899415,
+      "partialBoundary": false
+    },
+    {
+      "route": "east",
+      "sourceId": 44032487,
+      "sourceEnd": "end",
+      "chainageM": 57.44359040102911,
+      "coordinate": [
+        -123.1362176,
+        49.2942498
+      ],
+      "topY": 5.279808100287191,
+      "grade": -0.01205912986851404,
+      "partialBoundary": false
+    },
+    {
+      "route": "east",
+      "sourceId": 74233348,
+      "sourceEnd": "start",
+      "chainageM": 57.44359040102911,
+      "coordinate": [
+        -123.1362176,
+        49.2942498
+      ],
+      "topY": 5.279808100287191,
+      "grade": -0.01205912986851404,
+      "partialBoundary": false
+    },
+    {
+      "route": "east",
+      "sourceId": 74233348,
+      "sourceEnd": "end",
+      "chainageM": 93.06062871522381,
+      "coordinate": [
+        -123.1365453,
+        49.2944876
+      ],
+      "topY": 5.823741262775051,
+      "grade": 0.053768202943046975,
+      "partialBoundary": false
+    },
+    {
+      "route": "east",
+      "sourceId": 44032490,
+      "sourceEnd": "start",
+      "chainageM": 93.06062871522381,
+      "coordinate": [
+        -123.1365453,
+        49.2944876
+      ],
+      "topY": 5.823741262775051,
+      "grade": 0.053768202943046975,
+      "partialBoundary": false
+    },
+    {
+      "route": "east",
+      "sourceId": 44032490,
+      "sourceEnd": "end",
+      "chainageM": 115.01586588707221,
+      "coordinate": [
+        -123.1366867,
+        49.2946614
+      ],
+      "topY": 7.0954486322885435,
+      "grade": 0.06000000000000001,
+      "partialBoundary": false
+    },
+    {
+      "route": "east",
+      "sourceId": 363693708,
+      "sourceEnd": "start",
+      "chainageM": 115.01586588707221,
+      "coordinate": [
+        -123.1366867,
+        49.2946614
+      ],
+      "topY": 7.0954486322885435,
+      "grade": 0.06000000000000001,
+      "partialBoundary": false
+    },
+    {
+      "route": "east",
+      "sourceId": 363693708,
+      "sourceEnd": "end",
+      "chainageM": 157.3587396404988,
+      "coordinate": [
+        -123.1367575,
+        49.295036
+      ],
+      "topY": 9.126577606867933,
+      "grade": -0.012188314887576464,
+      "partialBoundary": false
+    },
+    {
+      "route": "east",
+      "sourceId": 363693711,
+      "sourceEnd": "start",
+      "chainageM": 157.3587396404988,
+      "coordinate": [
+        -123.1367575,
+        49.295036
+      ],
+      "topY": 9.126577606867933,
+      "grade": -0.012188314887576464,
+      "partialBoundary": false
+    },
+    {
+      "route": "east",
+      "sourceId": 363693711,
+      "sourceEnd": "end",
+      "chainageM": 386.7346530457991,
+      "coordinate": [
+        -123.1365102,
+        49.2970156
+      ],
+      "topY": 9.34004948682132,
+      "grade": 0.06,
+      "partialBoundary": false
+    },
+    {
+      "route": "east",
+      "sourceId": 690349457,
+      "sourceEnd": "start",
+      "chainageM": 386.7346530457991,
+      "coordinate": [
+        -123.1365102,
+        49.2970156
+      ],
+      "topY": 9.34004948682132,
+      "grade": 0.06,
+      "partialBoundary": false
+    },
+    {
+      "route": "east",
+      "sourceId": 690349457,
+      "sourceEnd": "end",
+      "chainageM": 396.37521866302404,
+      "coordinate": [
+        -123.1365625,
+        49.2970952
+      ],
+      "topY": 9.918483423854815,
+      "grade": 0.06,
+      "partialBoundary": false
+    },
+    {
+      "route": "east",
+      "sourceId": 44032488,
+      "sourceEnd": "start",
+      "chainageM": 396.37521866302404,
+      "coordinate": [
+        -123.1365625,
+        49.2970952
+      ],
+      "topY": 9.918483423854815,
+      "grade": 0.06,
+      "partialBoundary": false
+    },
+    {
+      "route": "east",
+      "sourceId": 44032488,
+      "sourceEnd": "end",
+      "chainageM": 438.57163832680527,
+      "coordinate": [
+        -123.136847,
+        49.2974253
+      ],
+      "topY": 10.24903368246335,
+      "grade": -0.0600000000000002,
+      "partialBoundary": false
+    },
+    {
+      "route": "east",
+      "sourceId": 44032489,
+      "sourceEnd": "start",
+      "chainageM": 438.57163832680527,
+      "coordinate": [
+        -123.136847,
+        49.2974253
+      ],
+      "topY": 10.24903368246335,
+      "grade": -0.0600000000000002,
+      "partialBoundary": false
+    },
+    {
+      "route": "east",
+      "sourceId": 44032489,
+      "sourceEnd": "end",
+      "chainageM": 485.263501008144,
+      "coordinate": [
+        -123.137287,
+        49.2977254
+      ],
+      "topY": 7.689153739544894,
+      "grade": -0.028949816423780268,
+      "partialBoundary": false
+    },
+    {
+      "route": "west",
+      "sourceId": 44032486,
+      "sourceEnd": "end",
+      "chainageM": 0.0,
+      "coordinate": [
+        -123.1357263,
+        49.2938753
+      ],
+      "topY": 6.132605640024084,
+      "grade": -0.00863186206156108,
+      "partialBoundary": false
+    },
+    {
+      "route": "west",
+      "sourceId": 44032486,
+      "sourceEnd": "start",
+      "chainageM": 101.31952080912751,
+      "coordinate": [
+        -123.1367221,
+        49.2944968
+      ],
+      "topY": 6.2789541603782535,
+      "grade": 0.05999999999999998,
+      "partialBoundary": false
+    },
+    {
+      "route": "west",
+      "sourceId": 363693716,
+      "sourceEnd": "end",
+      "chainageM": 101.31952080912751,
+      "coordinate": [
+        -123.1367221,
+        49.2944968
+      ],
+      "topY": 6.2789541603782535,
+      "grade": 0.05999999999999998,
+      "partialBoundary": false
+    },
+    {
+      "route": "west",
+      "sourceId": 363693716,
+      "sourceEnd": "start",
+      "chainageM": 112.04165426591771,
+      "coordinate": [
+        -123.1367911,
+        49.2945819
+      ],
+      "topY": 6.922282167785667,
+      "grade": 0.06,
+      "partialBoundary": false
+    },
+    {
+      "route": "west",
+      "sourceId": 363693713,
+      "sourceEnd": "end",
+      "chainageM": 112.04165426591771,
+      "coordinate": [
+        -123.1367911,
+        49.2945819
+      ],
+      "topY": 6.922282167785667,
+      "grade": 0.06,
+      "partialBoundary": false
+    },
+    {
+      "route": "west",
+      "sourceId": 363693713,
+      "sourceEnd": "start",
+      "chainageM": 155.86390143183027,
+      "coordinate": [
+        -123.1369084,
+        49.2949648
+      ],
+      "topY": 8.694265655031131,
+      "grade": -0.05738576611053231,
+      "partialBoundary": false
+    },
+    {
+      "route": "west",
+      "sourceId": 74233349,
+      "sourceEnd": "end",
+      "chainageM": 155.86390143183027,
+      "coordinate": [
+        -123.1369084,
+        49.2949648
+      ],
+      "topY": 8.694265655031131,
+      "grade": -0.05738576611053231,
+      "partialBoundary": false
+    },
+    {
+      "route": "west",
+      "sourceId": 74233349,
+      "sourceEnd": "start",
+      "chainageM": 262.34959989360044,
+      "coordinate": [
+        -123.136475,
+        49.295873
+      ],
+      "topY": 5.08927734995121,
+      "grade": 0.013945708080103548,
+      "partialBoundary": false
+    },
+    {
+      "route": "west",
+      "sourceId": 363687651,
+      "sourceEnd": "end",
+      "chainageM": 262.34959989360044,
+      "coordinate": [
+        -123.136475,
+        49.295873
+      ],
+      "topY": 5.08927734995121,
+      "grade": 0.013945708080103548,
+      "partialBoundary": false
+    },
+    {
+      "route": "west",
+      "sourceId": 363687651,
+      "sourceEnd": "start",
+      "chainageM": 324.06195616243696,
+      "coordinate": [
+        -123.1363777,
+        49.2964147
+      ],
+      "topY": 5.988800626245236,
+      "grade": 0.016312582841185152,
+      "partialBoundary": false
+    },
+    {
+      "route": "west",
+      "sourceId": 4755898,
+      "sourceEnd": "end",
+      "chainageM": 324.06195616243696,
+      "coordinate": [
+        -123.1363777,
+        49.2964147
+      ],
+      "topY": 5.988800626245236,
+      "grade": 0.016312582841185152,
+      "partialBoundary": false
+    },
+    {
+      "route": "west",
+      "sourceId": 4755898,
+      "sourceEnd": "start",
+      "chainageM": 399.47081834665426,
+      "coordinate": [
+        -123.1366734,
+        49.2970617
+      ],
+      "topY": 9.795767266306889,
+      "grade": 0.06000000000000001,
+      "partialBoundary": false
+    },
+    {
+      "route": "west",
+      "sourceId": 42000575,
+      "sourceEnd": "end",
+      "chainageM": 399.47081834665426,
+      "coordinate": [
+        -123.1366734,
+        49.2970617
+      ],
+      "topY": 9.795767266306889,
+      "grade": 0.06000000000000001,
+      "partialBoundary": false
+    },
+    {
+      "route": "west",
+      "sourceId": 42000575,
+      "sourceEnd": "start",
+      "chainageM": 440.3390925667966,
+      "coordinate": [
+        -123.1369485,
+        49.2973816
+      ],
+      "topY": 9.973631257928268,
+      "grade": -0.06,
+      "partialBoundary": false
+    },
+    {
+      "route": "west",
+      "sourceId": 42000576,
+      "sourceEnd": "end",
+      "chainageM": 440.3390925667966,
+      "coordinate": [
+        -123.1369485,
+        49.2973816
+      ],
+      "topY": 9.973631257928268,
+      "grade": -0.06,
+      "partialBoundary": false
+    },
+    {
+      "route": "west",
+      "sourceId": 42000576,
+      "sourceEnd": "start",
+      "chainageM": 485.9095606358068,
+      "coordinate": [
+        -123.137287,
+        49.2977254
+      ],
+      "topY": 7.689153739544894,
+      "grade": -0.028949816423780268,
+      "partialBoundary": false
+    },
+    {
+      "route": "shared",
+      "sourceId": 44032485,
+      "sourceEnd": "start",
+      "chainageM": 0.0,
+      "coordinate": [
+        -123.137287,
+        49.2977254
+      ],
+      "topY": 7.689153739544894,
+      "grade": -0.028949816423780268,
+      "partialBoundary": false
+    },
+    {
+      "route": "shared",
+      "sourceId": 44032485,
+      "sourceEnd": "end",
+      "chainageM": 53.27803639904331,
+      "coordinate": [
+        -123.1378396,
+        49.2980391
+      ],
+      "topY": 8.024892809821484,
+      "grade": 0.021889183086936635,
+      "partialBoundary": false
+    },
+    {
+      "route": "shared",
+      "sourceId": 257712148,
+      "sourceEnd": "start",
+      "chainageM": 53.27803639904331,
+      "coordinate": [
+        -123.1378396,
+        49.2980391
+      ],
+      "topY": 8.024892809821484,
+      "grade": 0.021889183086936635,
+      "partialBoundary": false
+    },
+    {
+      "route": "shared",
+      "sourceId": 257712148,
+      "sourceEnd": "end",
+      "chainageM": 152.8349796386032,
+      "coordinate": [
+        -123.13903400000001,
+        49.298477250000005
+      ],
+      "topY": 11.756414131487002,
+      "grade": 0.05070337774421131,
+      "partialBoundary": true
+    },
+    {
+      "route": "bike-exit",
+      "sourceId": 1296092759,
+      "sourceEnd": "start",
+      "chainageM": 0.0,
+      "coordinate": [
+        -123.1367221,
+        49.2944968
+      ],
+      "topY": 6.2789541603782535,
+      "grade": -0.045109017737862515,
+      "partialBoundary": false
+    },
+    {
+      "route": "bike-exit",
+      "sourceId": 1296092759,
+      "sourceEnd": "end",
+      "chainageM": 16.00722416756244,
+      "coordinate": [
+        -123.1367849,
+        49.2943616
+      ],
+      "topY": 5.577344026815245,
+      "grade": 0.02364444085804864,
+      "partialBoundary": false
+    },
+    {
+      "route": "park-access",
+      "sourceId": 116061600,
+      "sourceEnd": "start",
+      "chainageM": 0.0,
+      "coordinate": [
+        -123.1358521,
+        49.2940468
+      ],
+      "topY": 5.863235982604815,
+      "grade": -0.016977974859899415,
+      "partialBoundary": false
+    },
+    {
+      "route": "park-access",
+      "sourceId": 116061600,
+      "sourceEnd": "end",
+      "chainageM": 50.72675785502204,
+      "coordinate": [
+        -123.1362859,
+        49.2943997
+      ],
+      "topY": 5.232297587899704,
+      "grade": 0.014169329566739584,
+      "partialBoundary": false
+    },
+    {
+      "route": "park-access",
+      "sourceId": 1133022255,
+      "sourceEnd": "start",
+      "chainageM": 50.72675785502204,
+      "coordinate": [
+        -123.1362859,
+        49.2943997
+      ],
+      "topY": 5.232297587899704,
+      "grade": 0.014169329566739584,
+      "partialBoundary": false
+    },
+    {
+      "route": "park-access",
+      "sourceId": 1133022255,
+      "sourceEnd": "end",
+      "chainageM": 91.60425911361696,
+      "coordinate": [
+        -123.1366062,
+        49.294698
+      ],
+      "topY": 7.22929468336205,
+      "grade": 0.06,
+      "partialBoundary": false
+    },
+    {
+      "route": "park-access",
+      "sourceId": 363693709,
+      "sourceEnd": "start",
+      "chainageM": 91.60425911361696,
+      "coordinate": [
+        -123.1366062,
+        49.294698
+      ],
+      "topY": 7.22929468336205,
+      "grade": 0.06,
+      "partialBoundary": false
+    },
+    {
+      "route": "park-access",
+      "sourceId": 363693709,
+      "sourceEnd": "end",
+      "chainageM": 138.21862565827766,
+      "coordinate": [
+        -123.1366494,
+        49.2951104
+      ],
+      "topY": 9.093869345148475,
+      "grade": -0.06000000000000009,
+      "partialBoundary": false
+    },
+    {
+      "route": "park-access",
+      "sourceId": 363693717,
+      "sourceEnd": "start",
+      "chainageM": 138.21862565827766,
+      "coordinate": [
+        -123.1366494,
+        49.2951104
+      ],
+      "topY": 9.093869345148475,
+      "grade": -0.06000000000000009,
+      "partialBoundary": false
+    },
+    {
+      "route": "park-access",
+      "sourceId": 363693717,
+      "sourceEnd": "end",
+      "chainageM": 232.92996708705823,
+      "coordinate": [
+        -123.1362011,
+        49.2959089
+      ],
+      "topY": 5.1806610059250255,
+      "grade": 0.01585112384420053,
+      "partialBoundary": false
+    },
+    {
+      "route": "park-access",
+      "sourceId": 156891517,
+      "sourceEnd": "start",
+      "chainageM": 232.92996708705823,
+      "coordinate": [
+        -123.1362011,
+        49.2959089
+      ],
+      "topY": 5.1806610059250255,
+      "grade": 0.01585112384420053,
+      "partialBoundary": false
+    },
+    {
+      "route": "park-access",
+      "sourceId": 156891517,
+      "sourceEnd": "end",
+      "chainageM": 273.53938758887836,
+      "coordinate": [
+        -123.13606318752257,
+        49.296260942167784
+      ],
+      "topY": 6.00392875649604,
+      "grade": 0.012121606238855165,
+      "partialBoundary": true
+    }
+  ],
+  "bikeTieIn": {
+    "sourceId": 1296092759,
+    "coordinates": [
+      [
+        -123.1367221,
+        49.2944968
+      ],
+      [
+        -123.1367418,
+        49.2944184
+      ],
+      [
+        -123.136746,
+        49.2944019
+      ],
+      [
+        -123.1367849,
+        49.2943616
+      ]
+    ],
+    "lengthM": 16.00722416756244,
+    "startTopY": 6.2789541603782535,
+    "endTopY": 5.577344026815245,
+    "startGrade": -0.045109017737862515,
+    "endGrade": 0.02364444085804864,
+    "roadJoin": {
+      "route": "west",
+      "sM": 101.31952080912751
+    },
+    "note": "Use the bike-exit route cubic knots, not a single cubic or linear slope. Exact endpoint position shared with West Georgia/Causeway. Lower endpoint stays at original current path +1.5 datum; no vertical change to its other three paths."
+  },
+  "lowerPathIds": [
+    44032491,
+    74267973,
+    115939816,
+    363686270,
+    648864806
+  ],
+  "parkAccessTieIn": {
+    "sourceCityIndex": 1721,
+    "sourceCityId": "1721:0",
+    "sourceCityChainageM": 139.83707398744204,
+    "cityCoordinate": [
+      -123.1360684,
+      49.2962613
+    ],
+    "osmCoordinate": [
+      -123.13606318752257,
+      49.296260942167784
+    ],
+    "planGapM": 0.3805798985955396,
+    "topY": 6.00392875649604,
+    "cityTopY": 6.003541485816594,
+    "connectorGrade": -0.0010175804893401755,
+    "flatDisplayConnector": false,
+    "preservedBusFork": {
+      "sourceNodeId": 1309734864,
+      "routeChainageM": 232.92996708705823,
+      "coordinate": [
+        -123.1362011,
+        49.2959089
+      ],
+      "topY": 5.1806610059250255
+    },
+    "classification": "Explicit dataset seam connector, not an OSM-mapped road. Retain both endpoint XY coordinates; registry connection belongs to park access."
+  }
+}

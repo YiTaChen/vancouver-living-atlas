@@ -1,0 +1,145 @@
+{
+  "note": "Lower Y reconstructs current engine.ribbon triangles (<=25m, full width). Upper existing Y uses current <=15m road subdivision. Linear upper endpoint deck is a proposed baseline, not current rendering. 3m headroom and 0.75m slab are explicit visual test assumptions, not surveyed engineering clearance. Re-run if paths/rendering/terrain change.",
+  "crossings": [
+    {
+      "upperWayId": 42000575,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.1368418275547,
+        49.29726957112717
+      ],
+      "upperChainage": 14.682147905057686,
+      "currentUpperRenderedTopY": 6.10134979731268,
+      "linearEndpointDeckY": 6.955764320526658,
+      "lowerCurrentRenderedTopY": 6.044404560738927,
+      "linearDeckSoffitHeadroomM": 0.16135975978773054,
+      "uniformLiftForIllustrative3mHeadroom": 2.8386402402122695
+    },
+    {
+      "upperWayId": 42000575,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13675672880282,
+        49.29717133043848
+      ],
+      "upperChainage": 27.244727017347905,
+      "currentUpperRenderedTopY": 5.42500103825177,
+      "linearEndpointDeckY": 6.88306220278809,
+      "lowerCurrentRenderedTopY": 5.817100487017919,
+      "linearDeckSoffitHeadroomM": 0.31596171577017085,
+      "uniformLiftForIllustrative3mHeadroom": 2.684038284229829
+    },
+    {
+      "upperWayId": 44032488,
+      "lowerPathId": 648864806,
+      "coordinate": [
+        -123.13666180367518,
+        49.29722399416647
+      ],
+      "upperChainage": 16.048552640899693,
+      "currentUpperRenderedTopY": 6.478148217172144,
+      "linearEndpointDeckY": 8.060251075485779,
+      "lowerCurrentRenderedTopY": 6.6931317005384425,
+      "linearDeckSoffitHeadroomM": 0.617119374947336,
+      "uniformLiftForIllustrative3mHeadroom": 2.382880625052664
+    },
+    {
+      "upperWayId": 44032488,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.13674334442504,
+        49.29731812722349
+      ],
+      "upperChainage": 28.086535345339858,
+      "currentUpperRenderedTopY": 6.6103509659139625,
+      "linearEndpointDeckY": 8.022934520788267,
+      "lowerCurrentRenderedTopY": 6.8345908202337595,
+      "linearDeckSoffitHeadroomM": 0.43834370055450744,
+      "uniformLiftForIllustrative3mHeadroom": 2.5616562994454934
+    },
+    {
+      "upperWayId": 363693708,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13675398918133,
+        49.294855441016004
+      ],
+      "upperChainage": 22.196382561785015,
+      "currentUpperRenderedTopY": 3.9426455491622585,
+      "linearEndpointDeckY": 4.715535330729438,
+      "lowerCurrentRenderedTopY": 4.406250140806828,
+      "linearDeckSoffitHeadroomM": -0.4407148100773908,
+      "uniformLiftForIllustrative3mHeadroom": 3.4407148100773917
+    },
+    {
+      "upperWayId": 363693708,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13676088556683,
+        49.29489994819377
+      ],
+      "upperChainage": 27.177967153750842,
+      "currentUpperRenderedTopY": 4.0925024623032344,
+      "linearEndpointDeckY": 4.776481421530216,
+      "lowerCurrentRenderedTopY": 4.618488556252047,
+      "linearDeckSoffitHeadroomM": -0.5920071347218316,
+      "uniformLiftForIllustrative3mHeadroom": 3.5920071347218308
+    },
+    {
+      "upperWayId": 363693708,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.1367636,
+        49.2949513702821
+      ],
+      "upperChainage": 32.90751789388599,
+      "currentUpperRenderedTopY": 4.429577711294102,
+      "linearEndpointDeckY": 4.846578338125612,
+      "lowerCurrentRenderedTopY": 4.937772227092211,
+      "linearDeckSoffitHeadroomM": -0.8411938889665986,
+      "uniformLiftForIllustrative3mHeadroom": 3.8411938889665986
+    },
+    {
+      "upperWayId": 363693713,
+      "lowerPathId": 115939816,
+      "coordinate": [
+        -123.13690319680155,
+        49.2948661252508
+      ],
+      "upperChainage": 10.99946010268476,
+      "currentUpperRenderedTopY": 4.419022238458874,
+      "linearEndpointDeckY": 4.660534530914463,
+      "lowerCurrentRenderedTopY": 4.775812956073044,
+      "linearDeckSoffitHeadroomM": -0.8652784251585812,
+      "uniformLiftForIllustrative3mHeadroom": 3.8652784251585803
+    },
+    {
+      "upperWayId": 363693713,
+      "lowerPathId": 44032491,
+      "coordinate": [
+        -123.13689421764583,
+        49.294815447816546
+      ],
+      "upperChainage": 16.679440821034476,
+      "currentUpperRenderedTopY": 4.153161672672639,
+      "linearEndpointDeckY": 4.666933239415564,
+      "lowerCurrentRenderedTopY": 4.497459853396367,
+      "linearDeckSoffitHeadroomM": -0.580526613980803,
+      "uniformLiftForIllustrative3mHeadroom": 3.580526613980804
+    },
+    {
+      "upperWayId": 363693713,
+      "lowerPathId": 74267973,
+      "coordinate": [
+        -123.13688281809075,
+        49.29477304657465
+      ],
+      "upperChainage": 21.472183261766137,
+      "currentUpperRenderedTopY": 3.9199702425711322,
+      "linearEndpointDeckY": 4.672332441159335,
+      "lowerCurrentRenderedTopY": 4.284576789609,
+      "linearDeckSoffitHeadroomM": -0.36224434844966513,
+      "uniformLiftForIllustrative3mHeadroom": 3.362244348449665
+    }
+  ]
+}

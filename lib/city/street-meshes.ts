@@ -11,6 +11,8 @@ export function addStreetMeshes(
   uv?: number[],
   walkSurface = false,
   asphaltSurface = false,
+  protectedSurface = false,
+  castShadow = protectedSurface,
 ) {
   const cells = new Map<string, { positions: number[]; uv: number[] }>();
   for (let i = 0; i < positions.length; i += 9) {
@@ -39,6 +41,8 @@ export function addStreetMeshes(
     mesh.receiveShadow = true;
     mesh.userData.walkSurface = walkSurface;
     mesh.userData.asphaltSurface = asphaltSurface;
+    mesh.userData.protectedSurface = protectedSurface;
+    mesh.castShadow = castShadow;
     mesh.geometry.computeBoundingSphere();
     e.roads.add(mesh);
   }

@@ -1,0 +1,270 @@
+{
+  "provenance": {
+    "attribution": "© OpenStreetMap contributors",
+    "license": "ODbL 1.0",
+    "licenseUrl": "https://www.openstreetmap.org/copyright",
+    "rawSourceFile": "work/geodata/osm-stanley-paths.json",
+    "rawSha256": "74747c4d76a9299d13857f70e8df48f15a3261dc093427f06223d23235cb443f",
+    "osmBaseTimestamp": "2026-09-04T20:04:05Z"
+  },
+  "sourceRoadId": 4755915,
+  "sourceRoadCoordinates": [
+    [
+      -123.1419028,
+      49.3118075
+    ],
+    [
+      -123.1308831,
+      49.323792
+    ]
+  ],
+  "lengthM": 1555.6752019444014,
+  "frame": "s northwards along original source road, offset positive east. Metres; project uses latitude49.286 cosine.",
+  "widthStatus": "Illustrative source-aligned display, not survey: main2mclear plus .25m inner and .45m outer apron; east3.6/west2.1 Causeway taper at connector only. Max asphalt10.8m follows three3.6m lanes but unsurveyed local widths.",
+  "envelope": "Union of segment ribbons with rounded joins; evaluated by true perpendicular station-plane slice, including oblique source entrance and actual west foot entry.",
+  "lines": [
+    {
+      "side": "east",
+      "knots": [
+        {
+          "s": -4.93495376770881,
+          "offset": 18.522406569694873,
+          "clearWidth": 3.6,
+          "sourceId": 1349155155
+        },
+        {
+          "s": 11.447036121852273,
+          "offset": 16.79150697062566,
+          "clearWidth": 2.8870153072376707,
+          "sourceId": 1349155155
+        },
+        {
+          "s": 19.77235647308773,
+          "offset": 13.076745722387788,
+          "clearWidth": 2.4924394423067184,
+          "sourceId": 1349155155
+        },
+        {
+          "s": 22.39941213258446,
+          "offset": 10.552793820719332,
+          "clearWidth": 2.3347629403271357,
+          "sourceId": 1349155155
+        },
+        {
+          "s": 29.870824833911563,
+          "offset": 8.55251305984796,
+          "clearWidth": 2,
+          "sourceId": 1349155155
+        }
+      ]
+    },
+    {
+      "side": "east",
+      "knots": [
+        {
+          "s": 29.870824833911563,
+          "offset": 8.55251305984796,
+          "clearWidth": 2,
+          "sourceId": 70954668
+        },
+        {
+          "s": 43.68781123412386,
+          "offset": 7.089963905524293,
+          "clearWidth": 2,
+          "sourceId": 70954668
+        },
+        {
+          "s": 237.7433837134143,
+          "offset": 6.971257769453122,
+          "clearWidth": 2,
+          "sourceId": 70954668
+        },
+        {
+          "s": 248.12573615361242,
+          "offset": 6.967541375037851,
+          "clearWidth": 2,
+          "sourceId": 70954668
+        },
+        {
+          "s": 386.2004476674772,
+          "offset": 6.835551772230443,
+          "clearWidth": 2,
+          "sourceId": 70954668
+        },
+        {
+          "s": 534.3478856918555,
+          "offset": 6.7246756022645675,
+          "clearWidth": 2,
+          "sourceId": 70954668
+        },
+        {
+          "s": 1529.9049065677693,
+          "offset": 6.0324070868492194,
+          "clearWidth": 2,
+          "sourceId": 70954668
+        },
+        {
+          "s": 1555.5919989572628,
+          "offset": 6.527246280296771,
+          "clearWidth": 2,
+          "sourceId": 70954668
+        }
+      ]
+    },
+    {
+      "side": "west",
+      "knots": [
+        {
+          "s": -8.327309640108135,
+          "offset": -10.55113543339775,
+          "clearWidth": 2.1,
+          "sourceId": 1349155152
+        },
+        {
+          "s": 8.373979949272659,
+          "offset": -13.675872532115166,
+          "clearWidth": 2.1,
+          "sourceId": 1349155152
+        }
+      ]
+    },
+    {
+      "side": "west",
+      "knots": [
+        {
+          "s": 8.373979949272659,
+          "offset": -13.675872532115166,
+          "clearWidth": 2.1,
+          "sourceId": 1349155151
+        },
+        {
+          "s": 10.699408451124091,
+          "offset": -12.936886768060642,
+          "clearWidth": 2.1,
+          "sourceId": 1349155151
+        }
+      ]
+    },
+    {
+      "side": "west",
+      "knots": [
+        {
+          "s": 10.699408451124091,
+          "offset": -12.936886768060642,
+          "clearWidth": 2.1,
+          "sourceId": 1349155153
+        },
+        {
+          "s": 12.61810558736346,
+          "offset": -12.334975039385428,
+          "clearWidth": 2.1,
+          "sourceId": 1349155153
+        }
+      ]
+    },
+    {
+      "side": "west",
+      "knots": [
+        {
+          "s": 12.61810558736346,
+          "offset": -12.334975039385428,
+          "clearWidth": 2.1,
+          "sourceId": 1349155149
+        },
+        {
+          "s": 20.63709871891812,
+          "offset": -11.344570001789945,
+          "clearWidth": 2.1,
+          "sourceId": 1349155149
+        }
+      ]
+    },
+    {
+      "side": "west",
+      "knots": [
+        {
+          "s": 20.63709871891812,
+          "offset": -11.344570001789945,
+          "clearWidth": 2.1,
+          "sourceId": 1349155148
+        },
+        {
+          "s": 23.171203859559657,
+          "offset": -9.630017655690395,
+          "clearWidth": 2,
+          "sourceId": 1349155148
+        }
+      ]
+    },
+    {
+      "side": "west",
+      "knots": [
+        {
+          "s": 1555.7550891261396,
+          "offset": -6.576060245442195,
+          "clearWidth": 2,
+          "sourceId": 70954672
+        },
+        {
+          "s": 1527.569454737489,
+          "offset": -7.3843061464612765,
+          "clearWidth": 2,
+          "sourceId": 70954672
+        },
+        {
+          "s": 247.42817695769682,
+          "offset": -7.787153182352841,
+          "clearWidth": 2,
+          "sourceId": 70954672
+        },
+        {
+          "s": 236.9794175412524,
+          "offset": -7.785943308822955,
+          "clearWidth": 2,
+          "sourceId": 70954672
+        },
+        {
+          "s": 36.18021218816362,
+          "offset": -7.873085681131481,
+          "clearWidth": 2,
+          "sourceId": 70954672
+        },
+        {
+          "s": 27.035215436522808,
+          "offset": -9.009455264656417,
+          "clearWidth": 2,
+          "sourceId": 70954672
+        },
+        {
+          "s": 23.171203859559657,
+          "offset": -9.630017655690395,
+          "clearWidth": 2,
+          "sourceId": 70954672
+        }
+      ]
+    },
+    {
+      "side": "west",
+      "knots": [
+        {
+          "s": 23.171203859559657,
+          "offset": -9.630017655690395,
+          "clearWidth": 2,
+          "sourceId": 1349155147
+        },
+        {
+          "s": 10.530722444242294,
+          "offset": -11.032217965749128,
+          "clearWidth": 2,
+          "sourceId": 1349155147
+        },
+        {
+          "s": 10.699408451124091,
+          "offset": -12.936886768060642,
+          "clearWidth": 2,
+          "sourceId": 1349155147
+        }
+      ]
+    }
+  ]
+}

@@ -14,6 +14,12 @@ export interface RoadSegment {
   h0?: number;
   h1?: number;
   width?: number;
+  surfaceId?: string;
+  layer?: number;
+  allowedModes?: readonly StreetMode[];
+  protectedSurface?: boolean;
+  routeId?: string;
+  triangles?: readonly number[];
 }
 export interface PlacementPoint {
   x: number;
@@ -22,6 +28,8 @@ export interface PlacementPoint {
   yaw: number;
   surface: 'ground' | 'bridge' | 'water';
   waterId?: string;
+  surfaceId?: string;
+  layer?: number;
   name: string;
   snappedDistance: number;
 }
@@ -67,12 +75,25 @@ export interface PlacementWorld {
 
 export function resolvePlacement(
   mode: StreetMode,
-  hit: { x: number; y: number; z: number; surface: 'ground' | 'bridge' },
+  hit: {
+    x: number;
+    y: number;
+    z: number;
+    surface: 'ground' | 'bridge';
+    surfaceId?: string;
+    layer?: number;
+    allowedModes?: readonly StreetMode[];
+  },
   world: PlacementWorld,
   radius: number,
   heading: number,
 ): PlacementResult {
   const bridge = hit.surface === 'bridge';
+  if (hit.allowedModes && !hit.allowedModes.includes(mode))
+    return {
+      valid: false,
+      reason: mode === 'drive' ? 'placementRoadRequired' : 'placementInvalid',
+    };
   if (!bridge && !world.contains(hit.x, hit.z))
     return { valid: false, reason: 'placementOutside' };
   if (!bridge && !world.clear(hit.x, hit.z))
@@ -102,6 +123,12 @@ export function resolvePlacement(
   let chosen: PlacementPoint | null = null;
   let best = Math.max(4, Math.min(30, radius));
   for (const road of bridge ? world.bridges : world.roads) {
+    if (road.allowedModes && !road.allowedModes.includes(mode)) continue;
+    if (
+      hit.surfaceId &&
+      (road.surfaceId !== hit.surfaceId || road.layer !== hit.layer)
+    )
+      continue;
     const p = closestOnSegment(hit.x, hit.z, road);
     if (!p || p.distance > best) continue;
     const y = bridge
@@ -130,6 +157,8 @@ export function resolvePlacement(
       z: p.z,
       yaw,
       surface: hit.surface,
+      surfaceId: road.surfaceId,
+      layer: road.layer,
       name: road.name,
       snappedDistance: p.distance,
     };

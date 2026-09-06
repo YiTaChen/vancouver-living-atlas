@@ -1,6 +1,7 @@
 import { lines, project } from './geo';
 import { constrainCarriageway } from './tree-road-clearance';
 import { groupNumberedBlocks } from './numbered-blocks';
+import { trimRoad } from './road-trim';
 import type { FeatureCollection } from './types';
 import {
   buildRoadGraph,
@@ -17,6 +18,7 @@ import {
 export function cityRoadGraph(
   data: FeatureCollection,
   treeCoordinates: number[][] = [],
+  cuts: ReadonlyMap<string, readonly (readonly [number, number])[]> = new Map(),
 ): RoadGraph {
   const trees = treeCoordinates.map((point, id) => ({
     point: project(point),
@@ -36,17 +38,19 @@ export function cityRoadGraph(
         /^(WATER|ROBSON) ST$/i.test(name) && width >= 12
           ? constrainCarriageway(points, trees, width)
           : undefined;
-      inputs.push({
-        id: `${index}:${part}`,
-        name,
-        roadClass,
-        width: constraint?.asphaltWidth ?? width,
-        corridorWidth: width + 4,
-        points,
-        level: 'ground',
-        crossingEligible:
-          width >= 12 && !/lane|private|non.city/i.test(roadClass),
-      });
+      const fragments = trimRoad(points, cuts.get(`${index}:${part}`) || []);
+      for (const [fragment, kept] of fragments.entries())
+        inputs.push({
+          id: `${index}:${part}${fragment ? `:fragment-${fragment}` : ''}`,
+          name,
+          roadClass,
+          width: constraint?.asphaltWidth ?? width,
+          corridorWidth: width + 4,
+          points: kept,
+          level: 'ground',
+          crossingEligible:
+            width >= 12 && !/lane|private|non.city/i.test(roadClass),
+        });
     });
   });
   for (const block of groupNumberedBlocks(inputs).blocks) {

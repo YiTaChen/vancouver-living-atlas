@@ -12,8 +12,13 @@ import {
 } from './surface-meshing';
 
 export function createRoadSurfaces(e: CityEngine) {
-  const graph = cityRoadGraph(e.data.roads, e.data.trees.trees),
+  const graph = cityRoadGraph(
+      e.data.roads,
+      e.data.trees.trees,
+      e.data.causeway?.cuts,
+    ),
     pavement = buildPavement(graph, {
+      exclusions: e.data.causeway?.masks,
       sidewalkExtensions: graph.edges.some(
         (e) =>
           e.sourceIds.includes(extension.sourceRoadId) &&
@@ -42,7 +47,8 @@ export function createRoadSurfaces(e: CityEngine) {
       );
     }
   e.data.roadWidths = widths;
-  const relief = gridHeightField((x, z) => e.elevation(x, z));
+  const relief =
+    e.data.roadRelief || gridHeightField((x, z) => e.elevation(x, z));
   e.data.roadRelief = relief;
   const loader = new THREE.TextureLoader();
   const material = (kind: 'asphalt-fine' | 'sidewalk-concrete') => {

@@ -1,0 +1,613 @@
+[
+  {
+    "revision": "9866cc7a6b8ab6ab2a2c90e557147e2494c54b92",
+    "sourceFingerprint": "9a34c2406f9eda2c090244ced6c56bd8d87402e024ea2a1b55ee21f3503a3ba3",
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+    "createdAt": "2026-09-06T08:51:55.969Z"
+  },
+  {
+    "revision": "9866cc7a6b8ab6ab2a2c90e557147e2494c54b92",
+    "sourceFingerprint": "9a34c2406f9eda2c090244ced6c56bd8d87402e024ea2a1b55ee21f3503a3ba3",
+    "kind": "Actual navigation movement/collision replay; no camera demo or FPS claim",
+    "valid": true,
+    "results": [
+      {
+        "route": "causeway-south-east",
+        "reversed": false,
+        "valid": true,
+        "travelled": 485.2635010081443,
+        "maxPositionError": 2.5421149729252077e-13,
+        "maxYError": 1.5987211554602254e-14,
+        "finalSurfaceId": "lions:road",
+        "finalPosition": [
+          -674.349630132089,
+          7.6891524514291785,
+          -1305.271527999555
+        ]
+      },
+      {
+        "route": "causeway-south-east",
+        "reversed": true,
+        "valid": true,
+        "travelled": 485.26350100814375,
+        "maxPositionError": 2.5421149729252077e-13,
+        "maxYError": 0.19999997827711358,
+        "finalSurfaceId": "ground",
+        "finalPosition": [
+          -561.0237479584775,
+          6.332605564876496,
+          -876.6783960002258
+        ]
+      },
+      {
+        "route": "causeway-south-west",
+        "reversed": false,
+        "valid": true,
+        "travelled": 485.90956063580677,
+        "maxPositionError": 2.5421149729252077e-13,
+        "maxYError": 1.5987211554602254e-14,
+        "finalSurfaceId": "lions:road",
+        "finalPosition": [
+          -674.3496301320888,
+          7.689152451429192,
+          -1305.2715279995546
+        ]
+      },
+      {
+        "route": "causeway-south-west",
+        "reversed": true,
+        "valid": true,
+        "travelled": 485.9095606358071,
+        "maxPositionError": 2.5421149729252077e-13,
+        "maxYError": 0.19999997827711358,
+        "finalSurfaceId": "ground",
+        "finalPosition": [
+          -561.0237479584775,
+          6.332605564876496,
+          -876.6783960002258
+        ]
+      },
+      {
+        "route": "causeway-south-shared",
+        "reversed": false,
+        "valid": true,
+        "travelled": 152.83497963860341,
+        "maxPositionError": 2.5421149729252077e-13,
+        "maxYError": 8.881784197001252e-15,
+        "finalSurfaceId": "lions:road",
+        "finalPosition": [
+          -801.2031677483112,
+          11.756412168378956,
+          -1388.9674699999873
+        ]
+      },
+      {
+        "route": "causeway-south-shared",
+        "reversed": true,
+        "valid": true,
+        "travelled": 152.83497963860324,
+        "maxPositionError": 2.5421149729252077e-13,
+        "maxYError": 8.881784197001252e-15,
+        "finalSurfaceId": "lions:road",
+        "finalPosition": [
+          -674.349630132089,
+          7.689152451429187,
+          -1305.2715279995546
+        ]
+      },
+      {
+        "route": "causeway-south-park-access",
+        "reversed": false,
+        "valid": true,
+        "travelled": 273.5393875888781,
+        "maxPositionError": 2.5421149729252077e-13,
+        "maxYError": 0.19999915356958198,
+        "finalSurfaceId": "ground",
+        "finalPosition": [
+          -585.4858967946445,
+          6.203928277519507,
+          -1142.2480821174427
+        ]
+      },
+      {
+        "route": "causeway-south-park-access",
+        "reversed": true,
+        "valid": true,
+        "travelled": 273.5393875888784,
+        "maxPositionError": 2.5421149729252077e-13,
+        "maxYError": 1.5987211554602254e-14,
+        "finalSurfaceId": "lions:road",
+        "finalPosition": [
+          -570.1583644616908,
+          5.863236405112413,
+          -895.7697759994833
+        ]
+      },
+      {
+        "route": "causeway-central",
+        "reversed": false,
+        "valid": true,
+        "travelled": 1397.1591687146133,
+        "maxPositionError": 1.5252689837551246e-12,
+        "maxYError": 1.1368683772161603e-13,
+        "finalSurfaceId": "lions:road",
+        "finalPosition": [
+          -1160.052728651473,
+          54.66090568510592,
+          -2596.9954119997756
+        ]
+      },
+      {
+        "route": "causeway-central",
+        "reversed": true,
+        "valid": true,
+        "travelled": 1397.1591687146126,
+        "maxPositionError": 1.5252689837551246e-12,
+        "maxYError": 1.0658141036401503e-13,
+        "finalSurfaceId": "lions:road",
+        "finalPosition": [
+          -801.2031677483113,
+          11.756412168378972,
+          -1388.9674699999878
+        ]
+      },
+      {
+        "route": "causeway-north",
+        "reversed": false,
+        "valid": true,
+        "travelled": 314.6885775743968,
+        "maxPositionError": 1.016845989170083e-12,
+        "maxYError": 4.973799150320701e-14,
+        "finalSurfaceId": "lions:road",
+        "finalPosition": [
+          -1009.5130868738811,
+          65.94999696211013,
+          -2872.8908999998985
+        ]
+      },
+      {
+        "route": "causeway-north",
+        "reversed": true,
+        "valid": true,
+        "travelled": 314.6885775743964,
+        "maxPositionError": 1.016845989170083e-12,
+        "maxYError": 4.973799150320701e-14,
+        "finalSurfaceId": "lions:road",
+        "finalPosition": [
+          -1160.052728651473,
+          54.66090568510598,
+          -2596.9954119997774
+        ]
+      },
+      {
+        "route": "lions:main-road",
+        "reversed": false,
+        "valid": true,
+        "travelled": 1555.6752019443986,
+        "maxPositionError": 9.112693272687351e-13,
+        "maxYError": 0,
+        "finalSurfaceId": "lions:road",
+        "finalPosition": [
+          -209.34827378457362,
+          65.94999694824219,
+          -4207.005439999561
+        ]
+      },
+      {
+        "route": "lions:main-road",
+        "reversed": true,
+        "valid": true,
+        "travelled": 1555.675201944398,
+        "maxPositionError": 9.112693272687351e-13,
+        "maxYError": 0,
+        "finalSurfaceId": "lions:road",
+        "finalPosition": [
+          -1009.5130868738813,
+          65.94999696211015,
+          -2872.890899999899
+        ]
+      },
+      {
+        "lowerPath": 363686270,
+        "valid": true,
+        "floorJump": false,
+        "finalPosition": [
+          -613.6676030082889,
+          5.197226865386602,
+          -1275.604748000104
+        ]
+      },
+      {
+        "lowerPath": 648864806,
+        "valid": true,
+        "floorJump": false,
+        "finalPosition": [
+          -608.5121358237218,
+          5.378867530453742,
+          -1262.079368000241
+        ]
+      },
+      {
+        "lowerPath": 44032491,
+        "valid": true,
+        "floorJump": false,
+        "finalPosition": [
+          -625.1766389051767,
+          5.053098230088532,
+          -1001.4013239999811
+        ]
+      },
+      {
+        "lowerPath": 115939816,
+        "valid": true,
+        "floorJump": false,
+        "finalPosition": [
+          -655.0928710159238,
+          4.489445775684041,
+          -978.9146839998036
+        ]
+      },
+      {
+        "lowerPath": 74267973,
+        "valid": true,
+        "floorJump": false,
+        "finalPosition": [
+          -625.2855572256951,
+          4.562096051910896,
+          -995.9466439995157
+        ]
+      }
+    ]
+  },
+  {
+    "revision": "9866cc7a6b8ab6ab2a2c90e557147e2494c54b92",
+    "sourceFingerprint": "9a34c2406f9eda2c090244ced6c56bd8d87402e024ea2a1b55ee21f3503a3ba3",
+    "id": "causeway-south",
+    "quality": "high",
+    "hour": 14,
+    "valid": true,
+    "viewport": [
+      1920,
+      1080
+    ],
+    "dpr": 2,
+    "render": [
+      1788,
+      1006
+    ],
+    "fps": 43.239190202441364,
+    "p50Ms": 17.5,
+    "p95Ms": 33.80000000000291,
+    "p99Ms": 35,
+    "maxMs": 49,
+    "over50Ms": 0,
+    "over100Ms": 0,
+    "frames": 346,
+    "start": [
+      0,
+      0,
+      0
+    ],
+    "end": [
+      0,
+      0,
+      0
+    ],
+    "camera": [
+      -538.0956499024701,
+      65.6165866666648,
+      -1049.916799999558
+    ],
+    "target": [
+      -628.0956499024701,
+      3.6165866666648143,
+      -1139.916799999558
+    ],
+    "triangles": 3931155,
+    "calls": 389,
+    "geometries": 593,
+    "textures": 25,
+    "nearTrees": 174
+  },
+  {
+    "revision": "9866cc7a6b8ab6ab2a2c90e557147e2494c54b92",
+    "sourceFingerprint": "9a34c2406f9eda2c090244ced6c56bd8d87402e024ea2a1b55ee21f3503a3ba3",
+    "id": "causeway-underpass",
+    "quality": "high",
+    "hour": 14,
+    "valid": true,
+    "viewport": [
+      1920,
+      1080
+    ],
+    "dpr": 2,
+    "render": [
+      1788,
+      1006
+    ],
+    "fps": 46.740651869591275,
+    "p50Ms": 17,
+    "p95Ms": 33.90000000000873,
+    "p99Ms": 34.5,
+    "maxMs": 50,
+    "over50Ms": 0,
+    "over100Ms": 0,
+    "frames": 374,
+    "start": [
+      0,
+      0,
+      0
+    ],
+    "end": [
+      0,
+      0,
+      0
+    ],
+    "camera": [
+      -608.4487920203962,
+      10.449466561883368,
+      -1274.1675858729611
+    ],
+    "target": [
+      -633.7448801408743,
+      7.000000000000001,
+      -1262.6693640000167
+    ],
+    "triangles": 2914047,
+    "calls": 341,
+    "geometries": 597,
+    "textures": 25,
+    "nearTrees": 392
+  },
+  {
+    "revision": "9866cc7a6b8ab6ab2a2c90e557147e2494c54b92",
+    "sourceFingerprint": "9a34c2406f9eda2c090244ced6c56bd8d87402e024ea2a1b55ee21f3503a3ba3",
+    "id": "causeway",
+    "quality": "high",
+    "hour": 14,
+    "valid": true,
+    "viewport": [
+      1920,
+      1080
+    ],
+    "dpr": 2,
+    "render": [
+      1788,
+      1006
+    ],
+    "fps": 48.15669640068775,
+    "p50Ms": 17,
+    "p95Ms": 33.79999999998836,
+    "p99Ms": 34.70000000001164,
+    "maxMs": 35.30000000000291,
+    "over50Ms": 0,
+    "over100Ms": 0,
+    "frames": 386,
+    "start": [
+      0,
+      0,
+      0
+    ],
+    "end": [
+      0,
+      0,
+      0
+    ],
+    "camera": [
+      -899.5130868738814,
+      136.64002829331557,
+      -2702.8908999998994
+    ],
+    "target": [
+      -1009.5130868738814,
+      51.64002829331557,
+      -2872.8908999998994
+    ],
+    "triangles": 1677377,
+    "calls": 172,
+    "geometries": 593,
+    "textures": 25,
+    "nearTrees": 336
+  },
+  {
+    "revision": "9866cc7a6b8ab6ab2a2c90e557147e2494c54b92",
+    "sourceFingerprint": "9a34c2406f9eda2c090244ced6c56bd8d87402e024ea2a1b55ee21f3503a3ba3",
+    "id": "lions-walkway",
+    "quality": "high",
+    "hour": 14,
+    "valid": true,
+    "viewport": [
+      1920,
+      1080
+    ],
+    "dpr": 2,
+    "render": [
+      1788,
+      1006
+    ],
+    "fps": 60.05443603764467,
+    "p50Ms": 16.60000000000582,
+    "p95Ms": 18,
+    "p99Ms": 18.29999999998836,
+    "maxMs": 18.60000000000582,
+    "over50Ms": 0,
+    "over100Ms": 0,
+    "frames": 481,
+    "start": [
+      0,
+      0,
+      0
+    ],
+    "end": [
+      0,
+      0,
+      0
+    ],
+    "camera": [
+      -931.329496149255,
+      73.95,
+      -2988.258492000148
+    ],
+    "target": [
+      -913.329496149255,
+      65.95,
+      -3033.258492000148
+    ],
+    "triangles": 1037305,
+    "calls": 163,
+    "geometries": 597,
+    "textures": 25,
+    "nearTrees": 213
+  },
+  {
+    "revision": "9866cc7a6b8ab6ab2a2c90e557147e2494c54b92",
+    "sourceFingerprint": "9a34c2406f9eda2c090244ced6c56bd8d87402e024ea2a1b55ee21f3503a3ba3",
+    "id": "lions-west-entry",
+    "quality": "high",
+    "hour": 14,
+    "valid": true,
+    "viewport": [
+      1920,
+      1080
+    ],
+    "dpr": 2,
+    "render": [
+      1788,
+      1006
+    ],
+    "fps": 49.72141018911354,
+    "p50Ms": 16.89999999999418,
+    "p95Ms": 33.90000000002328,
+    "p99Ms": 34.5,
+    "maxMs": 34.69999999998254,
+    "over50Ms": 0,
+    "over100Ms": 0,
+    "frames": 398,
+    "start": [
+      0,
+      0,
+      0
+    ],
+    "end": [
+      0,
+      0,
+      0
+    ],
+    "camera": [
+      -1096.65384903204,
+      90.37283809522792,
+      -2929.979999999848
+    ],
+    "target": [
+      -1021.65384903204,
+      55.37283809522793,
+      -2949.979999999848
+    ],
+    "triangles": 1309897,
+    "calls": 170,
+    "geometries": 597,
+    "textures": 25,
+    "nearTrees": 323
+  },
+  {
+    "revision": "9866cc7a6b8ab6ab2a2c90e557147e2494c54b92",
+    "sourceFingerprint": "9a34c2406f9eda2c090244ced6c56bd8d87402e024ea2a1b55ee21f3503a3ba3",
+    "id": "robson-drive",
+    "quality": "high",
+    "hour": 14,
+    "valid": true,
+    "viewport": [
+      1920,
+      1080
+    ],
+    "dpr": 2,
+    "render": [
+      1788,
+      1006
+    ],
+    "fps": 34.146706213684546,
+    "p50Ms": 32.69999999998254,
+    "p95Ms": 34.60000000000582,
+    "p99Ms": 35.29999999998836,
+    "maxMs": 51.70000000001164,
+    "over50Ms": 1,
+    "over100Ms": 0,
+    "frames": 274,
+    "start": [
+      303.92205172832195,
+      34.06083199646445,
+      228.33401800037095
+    ],
+    "end": [
+      203.43765384001216,
+      35.838791510400696,
+      128.2715028689432
+    ],
+    "camera": [
+      210.52358110379683,
+      40.7887915104007,
+      135.32767993675782
+    ],
+    "target": [
+      185.72283568055045,
+      35.838791510400696,
+      110.63106019940665
+    ],
+    "triangles": 4866833,
+    "calls": 856,
+    "geometries": 684,
+    "textures": 25,
+    "nearTrees": 131
+  },
+  {
+    "revision": "9866cc7a6b8ab6ab2a2c90e557147e2494c54b92",
+    "sourceFingerprint": "9a34c2406f9eda2c090244ced6c56bd8d87402e024ea2a1b55ee21f3503a3ba3",
+    "id": "causeway",
+    "quality": "ultra",
+    "hour": 14,
+    "valid": true,
+    "viewport": [
+      1920,
+      1080
+    ],
+    "dpr": 2,
+    "render": [
+      2560,
+      1440
+    ],
+    "fps": 20.108661712347452,
+    "p50Ms": 50,
+    "p95Ms": 51.89999999999418,
+    "p99Ms": 65.19999999998254,
+    "maxMs": 65.5,
+    "over50Ms": 60,
+    "over100Ms": 0,
+    "frames": 161,
+    "start": [
+      143.8896960391218,
+      37.08734164442414,
+      68.97355658358825
+    ],
+    "end": [
+      143.8896960391218,
+      37.08734164442414,
+      68.97355658358825
+    ],
+    "camera": [
+      -899.5130868738814,
+      136.64002829331557,
+      -2702.8908999998994
+    ],
+    "target": [
+      -1009.5130868738814,
+      51.64002829331557,
+      -2872.8908999998994
+    ],
+    "triangles": 3938521,
+    "calls": 190,
+    "geometries": 686,
+    "textures": 25,
+    "nearTrees": 1080
+  }
+]

@@ -22,6 +22,7 @@ import { FXAAShader } from 'three/addons/shaders/FXAAShader.js';
 import Delaunator from 'delaunator';
 import { createStreetfronts, createRoofDetails } from './streetfronts';
 import { createBridgeApproaches } from './bridges';
+import { prepareCauseway } from './causeway';
 import { makeContext } from './context';
 import { StreetNavigation } from './navigation';
 import { MapPlacement } from './placement';
@@ -250,6 +251,7 @@ export class CityEngine {
     });
     this.resizeObserver.observe(container);
     this.load().catch((e) => {
+      console.error('Vancouver scene initialization failed', e);
       if (!this.disposed) this.onError(String(e.message || e));
     });
   }
@@ -303,6 +305,7 @@ export class CityEngine {
     this.makeWater();
     this.makeLand();
     makeContext(this);
+    prepareCauseway(this);
     this.makeRoads();
     this.makeBuildings();
     createLandmarks(this);

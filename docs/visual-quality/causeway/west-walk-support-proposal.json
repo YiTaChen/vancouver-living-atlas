@@ -1,0 +1,168 @@
+{
+  "columns": [
+    {
+      "station": 22,
+      "sourceId": 70954679,
+      "routeId": "lions:west:walk-entry",
+      "surfaceId": "lions:west:walk-entry",
+      "point": [
+        -1049.8628886811732,
+        -3017.503749935884
+      ],
+      "offsetM": 0,
+      "diameterM": 1,
+      "footprintRadiusM": 0.5,
+      "clearanceBufferM": 0.25,
+      "bottomY": 63.07152038700879,
+      "topY": 66.04789554903375,
+      "heightM": 2.976375162024965,
+      "center": [
+        -1049.8628886811732,
+        64.55970796802127,
+        -3017.503749935884
+      ],
+      "minPlanClearanceM": 12.134218857177206,
+      "nearestEnvelopeId": "path:1158086218",
+      "material": "unpainted-concrete"
+    },
+    {
+      "station": 44,
+      "sourceId": 70954679,
+      "routeId": "lions:west:walk-entry",
+      "surfaceId": "lions:west:walk-entry",
+      "point": [
+        -1039.800261656208,
+        -2998.443317445615
+      ],
+      "offsetM": 0,
+      "diameterM": 1,
+      "footprintRadiusM": 0.5,
+      "clearanceBufferM": 0.25,
+      "bottomY": 60.593403348883726,
+      "topY": 65.95006957813186,
+      "heightM": 5.356666229248134,
+      "center": [
+        -1039.800261656208,
+        63.27173646350779,
+        -2998.443317445615
+      ],
+      "minPlanClearanceM": 27.204509500663132,
+      "nearestEnvelopeId": "path:363404581",
+      "material": "unpainted-concrete"
+    },
+    {
+      "station": 66,
+      "sourceId": 70954679,
+      "routeId": "lions:west:walk-entry",
+      "surfaceId": "lions:west:walk-entry",
+      "point": [
+        -1032.3884623223241,
+        -2977.742877428904
+      ],
+      "offsetM": 0,
+      "diameterM": 1,
+      "footprintRadiusM": 0.5,
+      "clearanceBufferM": 0.25,
+      "bottomY": 58.40937482362831,
+      "topY": 65.81485090044426,
+      "heightM": 7.405476076815944,
+      "center": [
+        -1032.3884623223241,
+        62.112112862036284,
+        -2977.742877428904
+      ],
+      "minPlanClearanceM": 11.753466034031756,
+      "nearestEnvelopeId": "path:120254723",
+      "material": "unpainted-concrete"
+    },
+    {
+      "station": 88,
+      "sourceId": 70954679,
+      "routeId": "lions:west:walk-entry",
+      "surfaceId": "lions:west:walk-entry",
+      "point": [
+        -1024.188684494659,
+        -2957.3395177647226
+      ],
+      "offsetM": 0,
+      "diameterM": 1,
+      "footprintRadiusM": 0.5,
+      "clearanceBufferM": 0.25,
+      "bottomY": 55.630193490919766,
+      "topY": 65.66423010872995,
+      "heightM": 10.034036617810187,
+      "center": [
+        -1024.188684494659,
+        60.64721179982486,
+        -2957.3395177647226
+      ],
+      "minPlanClearanceM": 4.031430970782158,
+      "nearestEnvelopeId": "path:120254723",
+      "material": "unpainted-concrete"
+    },
+    {
+      "station": 110,
+      "sourceId": 70954679,
+      "routeId": "lions:west:walk-entry",
+      "surfaceId": "lions:west:walk-entry",
+      "point": [
+        -1013.8954021985246,
+        -2938.0354967674657
+      ],
+      "offsetM": 0,
+      "diameterM": 1,
+      "footprintRadiusM": 0.5,
+      "clearanceBufferM": 0.25,
+      "bottomY": 53.590147604612156,
+      "topY": 65.51985274179535,
+      "heightM": 11.929705137183191,
+      "center": [
+        -1013.8954021985246,
+        59.55500017320375,
+        -2938.0354967674657
+      ],
+      "minPlanClearanceM": 7.780175153721572,
+      "nearestEnvelopeId": "path:120254723",
+      "material": "unpainted-concrete"
+    },
+    {
+      "station": 132,
+      "sourceId": 70954679,
+      "routeId": "lions:west:walk-entry",
+      "surfaceId": "lions:west:walk-entry",
+      "point": [
+        -1006.1122298500926,
+        -2920.6746681224545
+      ],
+      "offsetM": 0,
+      "diameterM": 1,
+      "footprintRadiusM": 0.5,
+      "clearanceBufferM": 0.25,
+      "bottomY": 51.99429648389555,
+      "topY": 65.40383735631528,
+      "heightM": 13.409540872419726,
+      "center": [
+        -1006.1122298500926,
+        58.699066920105416,
+        -2920.6746681224545
+      ],
+      "minPlanClearanceM": 5.801001533132551,
+      "nearestEnvelopeId": "path:975314386",
+      "material": "unpainted-concrete"
+    }
+  ],
+  "rejected": [
+    {
+      "station": 154,
+      "reasons": [
+        "path:975314386"
+      ]
+    }
+  ],
+  "intervalM": 22,
+  "sourceId": 70954679,
+  "slabDepthM": 0.75,
+  "localCorridorSegments": 26,
+  "allCorridors": 3748,
+  "provenance": "Original illustrative sparse1m concrete columns; exact upper slab height; conservative lower path/City corridor exclusion. No fill or surveyed footing claim."
+}

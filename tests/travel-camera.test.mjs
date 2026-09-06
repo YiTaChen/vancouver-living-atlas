@@ -34,6 +34,20 @@ test('local map offset stays 200m from the player for all headings', () => {
 
 const THREE = await import('three');
 const { GroundSurfaceIndex } = await import(cityModule('ground-surface'));
+test('Float32 path caps remain queryable within 0.5mm, including adjacent spatial cells', () => {
+  const g = new THREE.BufferGeometry();
+  g.setAttribute(
+    'position',
+    new THREE.Float32BufferAttribute(
+      [60, 8, 0, 63.9998, 8, 0, 63.9998, 8, 10],
+      3,
+    ),
+  );
+  const index = new GroundSurfaceIndex([new THREE.Mesh(g)]);
+  assert.equal(index.sample(64, 2, 8), 8);
+  assert.equal(index.sample(64.001, 2, 8), undefined);
+  assert.equal(index.sample(64, 2, 13), undefined);
+});
 test('walking feet follow actual sloping road triangles and ignore an elevated deck outside the ground layer', () => {
   const triangle = (y) => {
     const g = new THREE.BufferGeometry();

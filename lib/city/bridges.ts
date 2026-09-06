@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import type { CityEngine } from './engine';
 import { project } from './geo';
+import { createCausewayMeshes } from './causeway-meshes';
 // Junction elevations are solved once over the measured approach graph. Every
 // joining route uses the same node elevation rather than dropping to the ground.
 export function createBridgeApproaches(e: CityEngine) {
@@ -42,6 +43,7 @@ export function createBridgeApproaches(e: CityEngine) {
         heights.set(id, v / w);
       }
   for (const s of d.mainSpines) {
+    if (s.kind === 'lions') continue;
     const width = s.kind === 'lions' ? 17 : s.kind === 'granville' ? 24 : 22;
     e.data.bridgeSurfaces.push({
       name:
@@ -63,6 +65,7 @@ export function createBridgeApproaches(e: CityEngine) {
     deck: number[] = [];
   for (const f of d.features) {
     const p = f.properties;
+    if (p.kind === 'lions') continue;
     if (p.role === 'main') continue;
     const ps = f.geometry.coordinates.map(project),
       h0 = heights.get(p.kind + ':' + p.startNode) || 0,
@@ -161,6 +164,7 @@ export function createBridgeApproaches(e: CityEngine) {
     e.roads.add(m);
   }
   e.data.bridgeNodeHeights = Object.fromEntries(heights);
+  createCausewayMeshes(e);
 }
 
 /** Resolve only locally reachable bridge surfaces so an underpass cannot teleport upward. */
@@ -169,10 +173,23 @@ export function bridgeSurface(
   x: number,
   z: number,
   previousY?: number,
+  options: {
+    excludeProtected?: boolean;
+    surfaceId?: string;
+    mode?: 'walk' | 'drive';
+  } = {},
 ): number | undefined {
   let best: number | undefined,
     distance = Infinity;
   for (const s of e.data.bridgeSurfaces || []) {
+    if (options.excludeProtected && s.protectedSurface) continue;
+    if (options.surfaceId && s.surfaceId !== options.surfaceId) continue;
+    if (
+      options.mode &&
+      s.allowedModes &&
+      !s.allowedModes.includes(options.mode)
+    )
+      continue;
     const dx = s.b[0] - s.a[0],
       dz = s.b[1] - s.a[1],
       length2 = dx * dx + dz * dz,

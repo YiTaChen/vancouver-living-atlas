@@ -1,11 +1,20 @@
 import * as THREE from 'three';
 import { bridgeSurface } from './bridges';
+import { trimRoad } from './road-trim';
+import {
+  resolveSurfaceStep,
+  sampleKnownSurface,
+  type SurfaceHit,
+} from './surface-reachability';
+import type { TravelSurfaceIndex } from './travel-surfaces';
 import type { CityEngine } from './engine';
 import { project, rings, lines, inPolygon } from './geo';
 import type { Feature } from './types';
 import landmarkFootprints from './landmark-footprints.json';
 import {
   canSwitchStreetMode,
+  closestOnSegment,
+  type RoadSegment,
   type PlacementPoint,
   type TravelMode,
 } from './placement-geometry';
@@ -39,6 +48,8 @@ export class StreetNavigation {
   pitch = 0.04;
   speed = 0;
   surface: 'ground' | 'bridge' | 'water' = 'ground';
+  surfaceId: string | undefined;
+  surfaceLayer: number | undefined;
   snapCamera = false;
   dragging = false;
   last = [0, 0];
@@ -411,6 +422,12 @@ export class StreetNavigation {
     if (this.dragging && remaining) this.last = [...remaining];
   };
   blocked(x: number, z: number) {
+    const index = this.e.data.travelSurfaces as TravelSurfaceIndex | undefined;
+    if (
+      index &&
+      (index.surfaceIds.has(this.surfaceId || '') || index.lookup(x, z).length)
+    )
+      return this.protectedStep(x, z) === undefined;
     if (this.reachableDeck(x, z) !== undefined) return false;
     if (
       this.surface === 'bridge' &&
@@ -420,7 +437,9 @@ export class StreetNavigation {
     return !this.clearGround(x, z);
   }
   reachableDeck(x: number, z: number) {
-    const deck = bridgeSurface(this.e, x, z, this.position.y);
+    const deck = bridgeSurface(this.e, x, z, this.position.y, {
+      excludeProtected: true,
+    });
     if (deck === undefined) return undefined;
     if (
       this.surface === 'bridge' ||
@@ -428,6 +447,48 @@ export class StreetNavigation {
     )
       return deck;
     return undefined;
+  }
+  /** Protected upper floors cannot fall back to the highest nearby mesh. */
+  protectedStep(x: number, z: number): SurfaceHit | undefined {
+    if (this.mode !== 'walk' && this.mode !== 'drive') return undefined;
+    const index = this.e.data.travelSurfaces as TravelSurfaceIndex;
+    const lookup = (xx: number, zz: number): SurfaceHit[] => {
+      const hits = index.lookup(xx, zz);
+      if (this.clearGround(xx, zz))
+        hits.push({
+          surfaceId: 'ground',
+          layer: 0,
+          y:
+            this.mode === 'walk'
+              ? this.groundHeight(xx, zz)
+              : this.roadHeight(xx, zz) - 0.2,
+          allowedModes: ['walk', 'drive'],
+          legacySurface: 'ground',
+        });
+      return hits;
+    };
+    const identity = index.surfaceIds.has(this.surfaceId || '')
+      ? { surfaceId: this.surfaceId!, layer: this.surfaceLayer ?? 1 }
+      : { surfaceId: 'ground', layer: 0 };
+    const currentY =
+      identity.surfaceId === 'ground'
+        ? this.mode === 'walk'
+          ? this.groundHeight(this.position.x, this.position.z)
+          : this.roadHeight(this.position.x, this.position.z) - 0.2
+        : this.position.y;
+    const result = resolveSurfaceStep({
+      current: {
+        ...identity,
+        x: this.position.x,
+        z: this.position.z,
+        y: currentY,
+      },
+      to: [x, z],
+      mode: this.mode,
+      lookup,
+      connections: this.e.data.causewayConnections || [],
+    });
+    return result.ok ? result.hit : undefined;
   }
   clearGround(x: number, z: number) {
     if (!this.e.onLand(x, z)) return false;
@@ -455,6 +516,8 @@ export class StreetNavigation {
     this.e.transition = null;
     this.position.set(point.x, point.y, point.z);
     this.surface = point.surface;
+    this.surfaceId = point.surfaceId;
+    this.surfaceLayer = point.layer;
     this.yaw = point.yaw;
     this.pitch = 0.04;
     this.snapCamera = true;
@@ -462,9 +525,59 @@ export class StreetNavigation {
     this.e.renderer.domElement.focus({ preventScroll: true });
     return true;
   }
+  rehomeStreetSurface(mode: 'walk' | 'drive') {
+    const index = this.e.data.travelSurfaces as TravelSurfaceIndex | undefined;
+    if (
+      index?.surfaceIds.has(this.surfaceId || '') &&
+      (mode === 'walk' || mode === 'drive') &&
+      !sampleKnownSurface(
+        index.lookup(this.position.x, this.position.z),
+        { surfaceId: this.surfaceId!, layer: this.surfaceLayer ?? 1 },
+        mode,
+      )
+    ) {
+      // Bridge footways and roadway are separate. A deliberate mode switch
+      // uses the adjacent same-height corridor, keeping the local camera.
+      let selected:
+        | {
+            s: RoadSegment;
+            p: NonNullable<ReturnType<typeof closestOnSegment>>;
+            hit: SurfaceHit;
+          }
+        | undefined;
+      for (const s of this.e.data.bridgeSurfaces as RoadSegment[]) {
+        if (!s.protectedSurface || !s.allowedModes?.includes(mode)) continue;
+        const p = closestOnSegment(this.position.x, this.position.z, s);
+        if (
+          !p ||
+          p.distance > 35 ||
+          (selected && p.distance >= selected.p.distance)
+        )
+          continue;
+        const hit = sampleKnownSurface(
+          index.lookup(p.x, p.z),
+          { surfaceId: s.surfaceId!, layer: s.layer! },
+          mode,
+        );
+        if (!hit || Math.abs(hit.y - this.position.y) > 0.35) continue;
+        selected = { s, p, hit };
+      }
+      if (selected) {
+        this.position.set(selected.p.x, selected.hit.y, selected.p.z);
+        this.surfaceId = selected.hit.surfaceId;
+        this.surfaceLayer = selected.hit.layer;
+      } else return false;
+    }
+    return true;
+  }
   switchStreetMode(mode: 'orbit' | TravelMode) {
     if (!canSwitchStreetMode(this.mode, mode)) return false;
     if (mode !== this.mode) {
+      if (
+        (mode === 'walk' || mode === 'drive') &&
+        !this.rehomeStreetSurface(mode)
+      )
+        return false;
       this.blur();
       this.mode = mode;
       this.driveLookYaw = 0;
@@ -537,19 +650,24 @@ export class StreetNavigation {
           .includes(streetName.toUpperCase())
       )
         continue;
-      for (const line of lines(f)) {
-        const p = line.map(project);
-        for (let i = 0; i < p.length - 1; i++) {
-          const a = p[i],
-            b = p[i + 1],
-            length = Math.hypot(a[0] - b[0], a[1] - b[1]);
-          if (length < 35) continue;
-          const x = (a[0] + b[0]) / 2,
-            z = (a[1] + b[1]) / 2,
-            dist = Math.hypot(x - target.x, z - target.z);
-          if (dist < best && this.clearGround(x, z)) {
-            best = dist;
-            chosen = [a, b];
+      for (const [part, line] of lines(f).entries()) {
+        const sourceIndex = this.e.data.roads.features.indexOf(f);
+        for (const p of trimRoad(
+          line.map(project),
+          this.e.data.causeway?.cuts.get(`${sourceIndex}:${part}`) || [],
+        )) {
+          for (let i = 0; i < p.length - 1; i++) {
+            const a = p[i],
+              b = p[i + 1],
+              length = Math.hypot(a[0] - b[0], a[1] - b[1]);
+            if (length < 35) continue;
+            const x = (a[0] + b[0]) / 2,
+              z = (a[1] + b[1]) / 2,
+              dist = Math.hypot(x - target.x, z - target.z);
+            if (dist < best && this.clearGround(x, z)) {
+              best = dist;
+              chosen = [[...a], [...b]];
+            }
           }
         }
       }
@@ -563,6 +681,8 @@ export class StreetNavigation {
     const [a, b] = chosen;
     this.position.set((a[0] + b[0]) / 2, 0, (a[1] + b[1]) / 2);
     this.surface = 'ground';
+    this.surfaceId = undefined;
+    this.surfaceLayer = undefined;
     this.position.y = this.roadHeight(this.position.x, this.position.z);
     this.yaw = Math.atan2(b[0] - a[0], b[1] - a[1]);
     this.pitch = 0.04;
@@ -611,6 +731,9 @@ export class StreetNavigation {
       a[1] + (b[1] - a[1]) * 0.04,
     );
     this.surface = 'bridge';
+    this.surfaceId = kind === 'lions' ? 'lions:road' : undefined;
+    this.surfaceLayer = kind === 'lions' ? 1 : undefined;
+    if (kind === 'lions') this.rehomeStreetSurface(this.mode);
     this.yaw = Math.atan2(b[0] - a[0], b[1] - a[1]);
     this.pitch = 0;
     this.snapCamera = true;
@@ -641,12 +764,33 @@ export class StreetNavigation {
     for (let i = 0; i < steps; i++) {
       const x = this.position.x + dx / steps,
         z = this.position.z + dz / steps;
+      const index = this.e.data.travelSurfaces as
+        | TravelSurfaceIndex
+        | undefined;
+      if (
+        index &&
+        (index.surfaceIds.has(this.surfaceId || '') ||
+          index.lookup(x, z).length)
+      ) {
+        const hit = this.protectedStep(x, z);
+        if (!hit) {
+          this.speed = 0;
+          break;
+        }
+        this.position.set(x, hit.y + (hit.surfaceId === 'ground' ? 0.2 : 0), z);
+        this.surface = hit.surfaceId === 'ground' ? 'ground' : 'bridge';
+        this.surfaceId = hit.surfaceId;
+        this.surfaceLayer = hit.layer;
+        continue;
+      }
       if (!this.blocked(x, z)) {
         const deck = this.reachableDeck(x, z);
         this.position.x = x;
         this.position.z = z;
         this.position.y = deck ?? this.roadHeight(x, z);
         this.surface = deck === undefined ? 'ground' : 'bridge';
+        this.surfaceId = undefined;
+        this.surfaceLayer = undefined;
       } else {
         this.speed = 0;
         break;
@@ -818,20 +962,24 @@ export class StreetNavigation {
   }
   walkingHeight() {
     if (this.surface === 'bridge') return this.position.y;
+    return this.groundHeight(this.position.x, this.position.z) + 0.02;
+  }
+  groundHeight(x: number, z: number) {
     if (!this.groundSurface) {
       const meshes: THREE.Mesh[] = [];
       this.e.scene.traverse((object) => {
-        if (object instanceof THREE.Mesh && object.userData.walkSurface)
+        if (
+          object instanceof THREE.Mesh &&
+          object.userData.walkSurface &&
+          !object.userData.protectedSurface
+        )
           meshes.push(object);
       });
       this.groundSurface = new GroundSurfaceIndex(meshes);
     }
     return (
-      (this.groundSurface.sample(
-        this.position.x,
-        this.position.z,
-        this.position.y,
-      ) ?? this.e.elevation(this.position.x, this.position.z)) + 0.02
+      this.groundSurface.sample(x, z, this.e.elevation(x, z) + 1.25) ??
+      this.e.elevation(x, z)
     );
   }
   snapshotTravel(): TravelBookmark | null {
@@ -843,6 +991,8 @@ export class StreetNavigation {
       pitch: this.pitch,
       lookYaw: this.mode === 'boat' ? this.boat.lookYaw : this.driveLookYaw,
       surface: this.surface,
+      surfaceId: this.surfaceId,
+      layer: this.surfaceLayer,
       waterId: this.mode === 'boat' ? this.boat.state.surfaceId : undefined,
       distance: this.cameraDistance,
       interior: this.cameraView.interior,
@@ -864,6 +1014,8 @@ export class StreetNavigation {
         z: saved.position.z,
         yaw: saved.yaw,
         surface: saved.surface,
+        surfaceId: saved.surfaceId,
+        layer: saved.layer,
         waterId: saved.waterId,
         name: '',
         snappedDistance: 0,

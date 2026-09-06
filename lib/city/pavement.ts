@@ -18,6 +18,8 @@ export interface CurbSegment {
   level: string;
 }
 export interface PavementOptions {
+  /** Reviewed replacement footprints; remove old asphalt, paint support and curbs together. Convex rings. */
+  exclusions?: { points: Point[]; level: string }[];
   /** Connected curb extensions; subtract their footprints from road surfaces. */
   sidewalkExtensions?: { points: Point[]; level: string }[];
   sidewalkWidth?: (edge: RoadEdge) => number;
@@ -361,9 +363,18 @@ export function buildPavement(
       kind: 'sidewalk' as const,
     }))
     .filter((p) => p.points.length >= 3);
+  const exclusions = new PolygonIndex(cell);
+  for (const p of options.exclusions || []) {
+    const points = clean(p.points);
+    if (points.length >= 3)
+      exclusions.add({ points, level: p.level, kind: 'road' });
+  }
   const addRoad = (road: Polygon2D) => {
     let pieces = [road.points];
-    for (const extension of extensions)
+    for (const extension of [
+      ...extensions,
+      ...exclusions.query(road.level, bounds(road.points)),
+    ])
       if (
         extension.level === road.level &&
         overlaps(bounds(road.points), bounds(extension.points))
@@ -467,10 +478,10 @@ export function buildPavement(
   }
   const sidewalk = new PolygonIndex(cell);
   for (const candidate of sidewalkCandidates) {
-    const withoutRoad = difference(
-      candidate,
-      masks.query(candidate.level, bounds(candidate.points)),
-    );
+    const withoutRoad = difference(candidate, [
+      ...masks.query(candidate.level, bounds(candidate.points)),
+      ...exclusions.query(candidate.level, bounds(candidate.points)),
+    ]);
     for (const fragment of withoutRoad)
       for (const p of difference(
         fragment,

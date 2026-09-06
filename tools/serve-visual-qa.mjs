@@ -3,6 +3,7 @@ import { createServer } from 'node:http';
 import { readFile, writeFile, mkdir, stat } from 'node:fs/promises';
 import { resolve, extname, sep } from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 const root = resolve('dist/client');
 const label = process.argv[2] || 'baseline';
 if (!/^[a-z0-9-]+$/.test(label)) throw new Error('Use a simple result label');
@@ -11,6 +12,18 @@ await mkdir(output, { recursive: true });
 const revision = execFileSync('git', ['rev-parse', 'HEAD'], {
   encoding: 'utf8',
 }).trim();
+// HEAD is the parent revision while validating an uncommitted stage. Hash the
+// actual visual source and data as well, so that distinction stays explicit.
+const visualFiles = [...new Set(execFileSync('git', [
+  'ls-files', '-co', '--exclude-standard', '--', 'lib', 'app',
+  'public/data', 'public/textures', 'package.json', 'package-lock.json', 'vite.config.ts',
+], {encoding:'utf8'}).trim().split('\n'))].sort();
+const digest = createHash('sha256');
+for (const file of visualFiles) {
+  digest.update(file + '\0');
+  digest.update(await readFile(file));
+}
+const sourceFingerprint = digest.digest('hex');
 const mime = {
   '.html': 'text/html',
   '.js': 'text/javascript',
@@ -44,7 +57,7 @@ createServer(async (req, res) => {
         throw new Error('Invalid report name');
       await writeFile(
         resolve(output, data.name + '.json'),
-        JSON.stringify({ revision, ...data.row }, null, 2),
+        JSON.stringify({ revision, sourceFingerprint, ...data.row }, null, 2),
       );
       if (
         typeof data.screenshot === 'string' &&

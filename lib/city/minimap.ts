@@ -1,6 +1,8 @@
 import type { CityEngine } from './engine';
 import { project, unproject, rings, lines } from './geo';
 import { VIEWS, type Feature, type Settings } from './types';
+import { trimRoad } from './road-trim';
+import type { SurfaceSegment } from './causeway-profile';
 
 export const MINIMAP_SPANS = [200, 400, 800, 1600, 3200, 6400] as const;
 export const DEFAULT_MINIMAP_SPAN = 800;
@@ -157,18 +159,52 @@ export class LocalMinimap {
     this.buildings = e.data.buildings.features.flatMap((f: Feature) =>
       rings(f).map((p) => mapPath(p.map((r) => r.map(project)))),
     );
-    this.roads = e.data.roads.features.flatMap((f: Feature) =>
-      lines(f).map((line) => {
-        const points = line.map(project);
-        return {
+    this.roads = e.data.roads.features.flatMap((f: Feature, index: number) =>
+      /causeway|lions gate/i.test(f.properties.name || '')
+        ? []
+        : lines(f).flatMap((line, part) =>
+            trimRoad(
+              line.map(project),
+              e.data.causeway?.cuts.get(`${index}:${part}`) || [],
+            ).map((kept) => {
+              const points = kept.map((p) => [...p]);
+              return {
+                ...mapPath([points], false),
+                points,
+                name: String(f.properties.name || ''),
+                major: /arterial/i.test(f.properties.class || ''),
+                trail: /bikeway|trail|path/i.test(f.properties.class || ''),
+              };
+            }),
+          ),
+    );
+    if (e.data.causeway) {
+      const groups = new Map<string, SurfaceSegment[]>();
+      for (const s of [
+        ...e.data.causeway.segments,
+        ...e.data.causeway.main.segments,
+        ...(e.data.causewayPathSegments || []),
+      ] as SurfaceSegment[]) {
+        const group = groups.get(s.routeId) || [];
+        group.push(s);
+        groups.set(s.routeId, group);
+      }
+      for (const [route, segments] of groups) {
+        const points = [segments[0].a, ...segments.map((s) => s.b)].map((p) => [
+          ...p,
+        ]);
+        this.roads.push({
           ...mapPath([points], false),
           points,
-          name: String(f.properties.name || ''),
-          major: /arterial/i.test(f.properties.class || ''),
-          trail: /bikeway|trail|path/i.test(f.properties.class || ''),
-        };
-      }),
-    );
+          name:
+            route === 'lions:main-road'
+              ? 'Lions Gate Bridge'
+              : 'Stanley Park Causeway',
+          major: segments[0].surfaceId === 'lions:road',
+          trail: segments[0].surfaceId !== 'lions:road',
+        });
+      }
+    }
   }
   draw(time: number, force = false) {
     if (time - this.lastDraw < 100 && !force) return;

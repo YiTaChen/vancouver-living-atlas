@@ -6,6 +6,7 @@ import {
   type PlacementResult,
   type PlacementWorld,
   type TravelMode,
+  type RoadSegment,
 } from './placement-geometry';
 
 export interface PlacementPreview {
@@ -25,6 +26,7 @@ export class MapPlacement {
   onCancel: () => void = () => {};
   raycaster = new THREE.Raycaster();
   bridgeMesh: THREE.Mesh;
+  bridgeOwners: RoadSegment[] = [];
   ring: THREE.Mesh;
   world: PlacementWorld;
   pointer: [number, number] | null = null;
@@ -41,23 +43,18 @@ export class MapPlacement {
   lastPick = 0;
   savedDamping = true;
   constructor(public e: CityEngine) {
-    const roads = e.data.roads.features
+    const roads = e.data.roadGraph.edges
       .filter(
-        (f: any) =>
+        (edge: any) =>
           !/bikeway|private|bridge|causeway|path|trail|stairs|pedestrian/i.test(
-            `${f.properties.class} ${f.properties.name}`,
+            `${edge.classes.join(' ')} ${edge.names.join(' ')}`,
           ),
       )
-      .flatMap((f: any) =>
-        lines(f).flatMap((line) => {
-          const p = line.map(project);
-          return p.slice(1).map((b, i) => ({
-            a: p[i],
-            b,
-            name: String(f.properties.name || ''),
-          }));
-        }),
-      );
+      .map((edge: any) => ({
+        a: e.data.roadGraph.nodes[edge.a].point,
+        b: e.data.roadGraph.nodes[edge.b].point,
+        name: edge.names.join(' / '),
+      }));
     this.world = {
       roads,
       bridges: e.data.bridgeSurfaces.map((s: any) => ({
@@ -70,6 +67,12 @@ export class MapPlacement {
     };
     const positions: number[] = [];
     for (const s of this.world.bridges) {
+      if (s.triangles) {
+        positions.push(...s.triangles);
+        for (let i = 0; i < s.triangles.length; i += 9)
+          this.bridgeOwners.push(s);
+        continue;
+      }
       const dx = s.b[0] - s.a[0],
         dz = s.b[1] - s.a[1],
         length = Math.hypot(dx, dz);
@@ -81,6 +84,8 @@ export class MapPlacement {
       const c = [s.b[0] + px, s.h1!, s.b[1] + pz],
         d = [s.b[0] - px, s.h1!, s.b[1] - pz];
       positions.push(...a, ...b, ...c, ...a, ...c, ...d);
+      // One owner per emitted triangle; skipped source segments do not shift it.
+      this.bridgeOwners.push(s, s);
     }
     this.bridgeMesh = new THREE.Mesh(
       e.geometry(positions),
@@ -265,6 +270,9 @@ export class MapPlacement {
       return;
     }
     const bridge = hit.object === this.bridgeMesh;
+    const pickedSurface = bridge
+      ? this.bridgeOwners[hit.faceIndex ?? -1]
+      : undefined;
     const point = hit.point;
     const radius = Math.max(
       4,
@@ -313,6 +321,9 @@ export class MapPlacement {
           y: point.y,
           z: point.z,
           surface: bridge ? 'bridge' : 'ground',
+          surfaceId: pickedSurface?.surfaceId,
+          layer: pickedSurface?.layer,
+          allowedModes: pickedSurface?.allowedModes,
         },
         this.world,
         radius,

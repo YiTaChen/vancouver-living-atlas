@@ -11,6 +11,8 @@ export interface TravelBookmark {
   lookYaw: number;
   surface: 'ground' | 'bridge' | 'water';
   waterId?: string;
+  surfaceId?: string;
+  layer?: number;
   distance: number;
   interior: InteriorView;
 }

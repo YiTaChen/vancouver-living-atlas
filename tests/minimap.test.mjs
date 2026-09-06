@@ -19,9 +19,11 @@ async function load(path, imports = {}) {
 }
 const geo = await load('lib/city/geo.ts');
 const types = await load('lib/city/types.ts');
+const trim = await load('lib/city/road-trim.ts');
 const { module: map } = await load('lib/city/minimap.ts', {
   './geo': geo.url,
   './types': types.url,
+  './road-trim': trim.url,
 });
 const navigation = (mode = 'walk') => ({
   mode,

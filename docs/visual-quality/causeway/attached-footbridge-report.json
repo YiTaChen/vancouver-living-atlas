@@ -1,0 +1,20 @@
+{
+  "sourceUpperPathId": 70954677,
+  "sourceWidthM": 4,
+  "topOffsetFromEastBakedSurfaceM": 0.13,
+  "checks": 28,
+  "minHeadroomAt075mSlab": 3.3455636987888777,
+  "minHeadroomAt030mSlab": 3.795563698788877,
+  "minimum": {
+    "lowerPathId": 363686270,
+    "coordinate": [
+      -123.13672556551616,
+      49.297343783819315
+    ],
+    "upperTopY": 10.99503610341982,
+    "lowerTopY": 6.8994724046309415,
+    "headroomAt075mSlab": 3.3455636987888777,
+    "headroomAt030mSlab": 3.795563698788877
+  },
+  "note": "Same baked surface sampler and unchanged path XY; 3m longitudinal tessellation. Only the bridge=yes path itself is tested; adjoining upper path approach ends must also attach to their own explicit road scope in the renderer."
+}

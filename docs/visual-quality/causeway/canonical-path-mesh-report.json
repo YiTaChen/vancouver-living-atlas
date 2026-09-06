@@ -1,0 +1,68 @@
+{
+  "source": "Actual canonical prepareCauseway + createCausewayMeshes executed on CPU; actual Engine.ribbon extracted by TypeScript AST. Same Three Float32 BufferGeometry and GroundSurfaceIndex as root. No WebGL/browser.",
+  "stats": {
+    "road": {
+      "inputSegments": 815,
+      "topTriangles": 7966,
+      "triangles": 56160,
+      "gapFills": 11,
+      "noFillWallSplits": 0
+    },
+    "paths": {
+      "inputSegments": 2474,
+      "topTriangles": 19794,
+      "triangles": 62200,
+      "gapFills": 0,
+      "noFillWallSplits": 0
+    }
+  },
+  "pathSlabClearance": {
+    "checks": 59,
+    "minimum": {
+      "slabOffset": 56124,
+      "lowerPathId": 363686270,
+      "coordinate": [
+        -123.1367277921681,
+        49.29734268599143
+      ],
+      "slabUndersideY": 10.2494096333566,
+      "lowerY": 6.920882017804306,
+      "headroomM": 3.328527615552293
+    },
+    "passes3m": true
+  },
+  "pylons": [
+    {
+      "station": 187,
+      "offset": -10.8,
+      "hits": [],
+      "minAsphaltGapM": 0.2914839575340766,
+      "minShoulderGapM": 0.04149754845900634,
+      "railTriangleOverlaps": 0
+    },
+    {
+      "station": 187,
+      "offset": 10.8,
+      "hits": [],
+      "minAsphaltGapM": 1.0964953812619915,
+      "minShoulderGapM": 0.8465118054317402,
+      "railTriangleOverlaps": 0
+    },
+    {
+      "station": 659,
+      "offset": -10.8,
+      "hits": [],
+      "minAsphaltGapM": 0.4417057455555112,
+      "minShoulderGapM": 0.19170133490497446,
+      "railTriangleOverlaps": 0
+    },
+    {
+      "station": 659,
+      "offset": 10.8,
+      "hits": [],
+      "minAsphaltGapM": 1.4605837252340892,
+      "minShoulderGapM": 1.2106001477965884,
+      "railTriangleOverlaps": 0
+    }
+  ]
+}

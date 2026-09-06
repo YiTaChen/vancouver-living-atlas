@@ -89,10 +89,18 @@ export class GroundSurfaceIndex {
           !Number.isFinite(1 / area)
         )
           continue;
-        const x0 = Math.floor(Math.min(ax, bx, cx) / GroundSurfaceIndex.CELL);
-        const x1 = Math.floor(Math.max(ax, bx, cx) / GroundSurfaceIndex.CELL);
-        const z0 = Math.floor(Math.min(az, bz, cz) / GroundSurfaceIndex.CELL);
-        const z1 = Math.floor(Math.max(az, bz, cz) / GroundSurfaceIndex.CELL);
+        const x0 = Math.floor(
+          (Math.min(ax, bx, cx) - 0.0005) / GroundSurfaceIndex.CELL,
+        );
+        const x1 = Math.floor(
+          (Math.max(ax, bx, cx) + 0.0005) / GroundSurfaceIndex.CELL,
+        );
+        const z0 = Math.floor(
+          (Math.min(az, bz, cz) - 0.0005) / GroundSurfaceIndex.CELL,
+        );
+        const z1 = Math.floor(
+          (Math.max(az, bz, cz) + 0.0005) / GroundSurfaceIndex.CELL,
+        );
         // Unsafe integer cell coordinates cannot be advanced reliably by x++.
         if (![x0, x1, z0, z1].every(Number.isSafeInteger)) continue;
         const id = inverseAreas.length;
@@ -123,8 +131,7 @@ export class GroundSurfaceIndex {
     );
     if (!cell) return undefined;
     let highest: number | undefined;
-    const vertices = this.vertices,
-      eps = 1e-9;
+    const vertices = this.vertices;
     for (const id of cell) {
       const t = id * 3,
         a = this.triangles[t] * 3,
@@ -144,7 +151,15 @@ export class GroundSurfaceIndex {
         inverse = this.inverseAreas[id];
       const u = (dx * (cz - az) - dz * (cx - ax)) * inverse;
       const v = ((bx - ax) * dz - (bz - az) * dx) * inverse;
-      if (u < -eps || v < -eps || u + v > 1 + eps) continue;
+      // Half a millimetre in world XZ resolves independently rounded Float32
+      // path caps at shared source nodes. It never widens the height window.
+      const eps = 0.0005 * Math.abs(inverse);
+      if (
+        u < -eps * Math.hypot(cx - ax, cz - az) ||
+        v < -eps * Math.hypot(bx - ax, bz - az) ||
+        u + v > 1 + eps * Math.hypot(cx - bx, cz - bz)
+      )
+        continue;
       const y = ay + u * (by - ay) + v * (cy - ay);
       if (
         Number.isFinite(y) &&

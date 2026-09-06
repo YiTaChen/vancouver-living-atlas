@@ -2,7 +2,7 @@ import type { Coord, Feature } from './types';
 export const ORIGIN: Coord = [-123.128, 49.286];
 export const MX = 111320 * Math.cos((ORIGIN[1] * Math.PI) / 180),
   MZ = 111320;
-export function project(c: number[]): [number, number] {
+export function project(c: readonly number[]): [number, number] {
   return [(c[0] - ORIGIN[0]) * MX, -(c[1] - ORIGIN[1]) * MZ];
 }
 export function unproject(x: number, z: number): Coord {

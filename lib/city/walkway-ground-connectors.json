@@ -1,0 +1,512 @@
+{
+  "type": "FeatureCollection",
+  "provenance": {
+    "attribution": "© OpenStreetMap contributors",
+    "license": "ODbL 1.0",
+    "licenseUrl": "https://www.openstreetmap.org/copyright",
+    "rawSourceFile": "work/geodata/osm-stanley-paths.json",
+    "rawSha256": "74747c4d76a9299d13857f70e8df48f15a3261dc093427f06223d23235cb443f",
+    "osmBaseTimestamp": "2026-09-04T20:04:05Z"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "sourceId": 363686510,
+        "source": "OpenStreetMap",
+        "sourceUrl": "https://www.openstreetmap.org/way/363686510",
+        "sourceNodeIds": [
+          12482619447,
+          1309734986,
+          3678410831,
+          1309735146,
+          1309735761,
+          1309734934,
+          1309735462,
+          845618424
+        ],
+        "sourceTags": {
+          "bicycle": "designated",
+          "foot": "designated",
+          "highway": "cycleway",
+          "name": "NB Stanley Park Causeway Bike Route",
+          "oneway": "yes",
+          "oneway:foot": "no",
+          "segregated": "no",
+          "surface": "concrete"
+        },
+        "allowedModes": [
+          "walk"
+        ],
+        "widthStatus": "Source XY unchanged; display widths to be selected by route scope, not survey.",
+        "heightStatus": "Requires explicit endpoint attachment. Do not globally sample nearest upper road."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1360888,
+            49.2964143
+          ],
+          [
+            -123.1361107,
+            49.296442
+          ],
+          [
+            -123.1361206,
+            49.2964549
+          ],
+          [
+            -123.1361856,
+            49.2966403
+          ],
+          [
+            -123.1362379,
+            49.2967675
+          ],
+          [
+            -123.1363679,
+            49.2969733
+          ],
+          [
+            -123.1364271,
+            49.2970433
+          ],
+          [
+            -123.1364968,
+            49.2971147
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "sourceId": 70954677,
+        "source": "OpenStreetMap",
+        "sourceUrl": "https://www.openstreetmap.org/way/70954677",
+        "sourceNodeIds": [
+          845618424,
+          10916883998,
+          10916883994,
+          6313337103,
+          10916902154,
+          845618474
+        ],
+        "sourceTags": {
+          "bicycle": "designated",
+          "bridge": "yes",
+          "foot": "designated",
+          "highway": "cycleway",
+          "layer": "1",
+          "name": "NB Stanley Park Causeway Bike Route",
+          "oneway": "yes",
+          "oneway:foot": "no",
+          "segregated": "no",
+          "surface": "concrete"
+        },
+        "allowedModes": [
+          "walk"
+        ],
+        "widthStatus": "Source XY unchanged; display widths to be selected by route scope, not survey.",
+        "heightStatus": "Requires explicit endpoint attachment. Do not globally sample nearest upper road."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1364968,
+            49.2971147
+          ],
+          [
+            -123.1365585,
+            49.2971817
+          ],
+          [
+            -123.1366164,
+            49.2972563
+          ],
+          [
+            -123.1366755,
+            49.2973248
+          ],
+          [
+            -123.1367397,
+            49.2973954
+          ],
+          [
+            -123.1367913,
+            49.2974484
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "sourceId": 1277976049,
+        "source": "OpenStreetMap",
+        "sourceUrl": "https://www.openstreetmap.org/way/1277976049",
+        "sourceNodeIds": [
+          845618474,
+          10916902142,
+          1352175043,
+          10916902120,
+          1352175057,
+          10916883996,
+          10916883999,
+          10916902123,
+          845618516,
+          845618465,
+          11863825732
+        ],
+        "sourceTags": {
+          "bicycle": "designated",
+          "cycleway:surface": "concrete",
+          "foot": "designated",
+          "footway:surface": "concrete",
+          "highway": "cycleway",
+          "motor_vehicle": "no",
+          "name": "NB Stanley Park Causeway Bike Route",
+          "oneway": "yes",
+          "oneway:foot": "no",
+          "segregated": "yes",
+          "smoothness": "excellent",
+          "surface": "paved"
+        },
+        "allowedModes": [
+          "walk"
+        ],
+        "widthStatus": "Source XY unchanged; display widths to be selected by route scope, not survey.",
+        "heightStatus": "Requires explicit endpoint attachment. Do not globally sample nearest upper road."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1367913,
+            49.2974484
+          ],
+          [
+            -123.1368151,
+            49.2974737
+          ],
+          [
+            -123.1368377,
+            49.2975003
+          ],
+          [
+            -123.13686,
+            49.2975277
+          ],
+          [
+            -123.1368942,
+            49.2975744
+          ],
+          [
+            -123.1369173,
+            49.2976026
+          ],
+          [
+            -123.1369461,
+            49.2976299
+          ],
+          [
+            -123.1369757,
+            49.2976541
+          ],
+          [
+            -123.1371263,
+            49.297764
+          ],
+          [
+            -123.1372398,
+            49.2978156
+          ],
+          [
+            -123.1374073,
+            49.2979069
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "sourceId": 116061622,
+        "source": "OpenStreetMap",
+        "sourceUrl": "https://www.openstreetmap.org/way/116061622",
+        "sourceNodeIds": [
+          1309735266,
+          3678410845,
+          12482619448,
+          3678410839,
+          12482619447
+        ],
+        "sourceTags": {
+          "highway": "cycleway",
+          "name": "NB Stanley Park Causeway Bike Route",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "allowedModes": [
+          "walk"
+        ],
+        "widthStatus": "Source XY unchanged; display widths to be selected by route scope, not survey.",
+        "heightStatus": "Requires explicit endpoint attachment. Do not globally sample nearest upper road."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.136055,
+            49.2963264
+          ],
+          [
+            -123.1360694,
+            49.2963396
+          ],
+          [
+            -123.1360826,
+            49.2963617
+          ],
+          [
+            -123.136082,
+            49.2964016
+          ],
+          [
+            -123.1360888,
+            49.2964143
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "sourceId": 1349155147,
+        "source": "OpenStreetMap",
+        "sourceUrl": "https://www.openstreetmap.org/way/1349155147",
+        "sourceNodeIds": [
+          4890367275,
+          12479914688,
+          12479914695
+        ],
+        "sourceTags": {
+          "foot": "designated",
+          "highway": "footway",
+          "motor_vehicle": "no",
+          "surface": "concrete"
+        },
+        "allowedModes": [
+          "walk"
+        ],
+        "widthStatus": "Source XY unchanged; display widths to be selected by route scope, not survey.",
+        "heightStatus": "Requires explicit endpoint attachment. Do not globally sample nearest upper road."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1418524,
+            49.3120305
+          ],
+          [
+            -123.1419585,
+            49.3119396
+          ],
+          [
+            -123.1419798,
+            49.3119497
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "sourceId": 1349155154,
+        "source": "OpenStreetMap",
+        "sourceUrl": "https://www.openstreetmap.org/way/1349155154",
+        "sourceNodeIds": [
+          12479914695,
+          12479914690
+        ],
+        "sourceTags": {
+          "bicycle": "designated",
+          "crossing": "uncontrolled",
+          "crossing:island": "no",
+          "crossing:markings": "zebra",
+          "cycleway": "crossing",
+          "foot": "designated",
+          "highway": "cycleway",
+          "oneway": "no",
+          "smoothness": "excellent",
+          "surface": "paved",
+          "tactile_paving": "no"
+        },
+        "allowedModes": [
+          "walk"
+        ],
+        "widthStatus": "Source XY unchanged; display widths to be selected by route scope, not survey.",
+        "heightStatus": "Requires explicit endpoint attachment. Do not globally sample nearest upper road."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1419798,
+            49.3119497
+          ],
+          [
+            -123.1420015,
+            49.3119649
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "sourceId": 70954679,
+        "source": "OpenStreetMap",
+        "sourceUrl": "https://www.openstreetmap.org/way/70954679",
+        "sourceNodeIds": [
+          12479914690,
+          1348815699,
+          845618451,
+          845618499,
+          1348815713,
+          1348815720,
+          7229016716,
+          1348815737,
+          1348815743,
+          1348815762,
+          1348815778,
+          1348815781,
+          10770071530,
+          1348815782,
+          1348815783
+        ],
+        "sourceTags": {
+          "bicycle": "designated",
+          "foot": "designated",
+          "highway": "cycleway",
+          "oneway": "no",
+          "segregated": "no",
+          "surface": "paved"
+        },
+        "allowedModes": [
+          "walk"
+        ],
+        "widthStatus": "Source XY unchanged; display widths to be selected by route scope, not survey.",
+        "heightStatus": "Requires explicit endpoint attachment. Do not globally sample nearest upper road."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1420015,
+            49.3119649
+          ],
+          [
+            -123.1419337,
+            49.3120561
+          ],
+          [
+            -123.1419225,
+            49.3120944
+          ],
+          [
+            -123.1418748,
+            49.3121879
+          ],
+          [
+            -123.1418271,
+            49.3123116
+          ],
+          [
+            -123.1419582,
+            49.3123876
+          ],
+          [
+            -123.1420713,
+            49.3125041
+          ],
+          [
+            -123.1421068,
+            49.3125696
+          ],
+          [
+            -123.142143,
+            49.3126359
+          ],
+          [
+            -123.1422452,
+            49.3127909
+          ],
+          [
+            -123.1423791,
+            49.3130498
+          ],
+          [
+            -123.1425483,
+            49.3131708
+          ],
+          [
+            -123.1425723,
+            49.313176
+          ],
+          [
+            -123.1426241,
+            49.31319
+          ],
+          [
+            -123.1427047,
+            49.3132136
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "sourceId": 120254725,
+        "source": "OpenStreetMap",
+        "sourceUrl": "https://www.openstreetmap.org/way/120254725",
+        "sourceNodeIds": [
+          10770071509,
+          1348815783,
+          2010273303
+        ],
+        "sourceTags": {
+          "bicycle": "dismount",
+          "highway": "footway",
+          "surface": "concrete"
+        },
+        "allowedModes": [
+          "walk"
+        ],
+        "widthStatus": "Source XY unchanged; display widths to be selected by route scope, not survey.",
+        "heightStatus": "Requires explicit endpoint attachment. Do not globally sample nearest upper road."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1425934,
+            49.313391
+          ],
+          [
+            -123.1427047,
+            49.3132136
+          ],
+          [
+            -123.1428314,
+            49.3130114
+          ]
+        ]
+      }
+    }
+  ]
+}
