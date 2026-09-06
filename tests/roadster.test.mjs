@@ -22,6 +22,7 @@ test('roadster fits the existing car footprint with finite open-cabin geometry a
   assert(size.x < 2.4 && size.z < 4.8 && size.y < 1.6);
   assert(meshes <= 20, `draws ${meshes}`);
   assert(triangles < 20000, `triangles ${triangles}`);
+  assert.equal(group.getObjectByName('roadster/paint').material.color.getHex(), 0xd7192d);
   const wheelGroups = group.children.filter((o) => 'front' in o.userData);
   assert.equal(wheelGroups.length, 4);
   update(4, 1);

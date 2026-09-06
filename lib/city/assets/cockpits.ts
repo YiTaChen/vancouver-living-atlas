@@ -806,8 +806,8 @@ export function makeCockpit(
     stitch: material('stitch', 0x817e70),
     mirror: material('mirror', 0x65747a),
     hull: material('hull', 0xc4c4b2),
-    wood: material('wood', variant === 'roadster' ? 0xba794e : 0x8c6240),
-    navy: material('navy', variant === 'roadster' ? 0x167b83 : 0x263d47),
+    wood: material('wood', variant === 'roadster' ? 0x272b30 : 0x8c6240),
+    navy: material('navy', variant === 'roadster' ? 0xd7192d : 0x263d47),
   };
   const p = new Parts(group, palette);
   const controls =

@@ -7,9 +7,9 @@ export function makeRoadster() {
   group.name = 'open-roadster';
   const palette = {
     paint: new THREE.MeshStandardMaterial({
-      color: 0x167b83,
-      roughness: 0.28,
-      metalness: 0.5,
+      color: 0xd7192d,
+      roughness: 0.25,
+      metalness: 0.38,
     }),
     dark: new THREE.MeshStandardMaterial({ color: 0x142127, roughness: 0.65 }),
     rubber: new THREE.MeshStandardMaterial({ color: 0x15191b, roughness: 0.9 }),
@@ -60,6 +60,11 @@ export function makeRoadster() {
   }
   const box = (key: Key, size: P, p: P, r: P = [0, 0, 0]) =>
     add(key, new THREE.BoxGeometry(...size), p, r);
+  const oval = (key: Key, size: P, p: P, r: P = [0, 0, 0]) => {
+    const g = new THREE.SphereGeometry(1, 16, 10);
+    g.scale(...size);
+    add(key, g, p, r);
+  };
   const beam = (key: Key, a: P, b: P, r = 0.025) => {
     const av = new THREE.Vector3(...a),
       bv = new THREE.Vector3(...b),
@@ -73,78 +78,164 @@ export function makeRoadster() {
     );
     add(key, g, av.lerp(bv, 0.5).toArray() as P);
   };
-  // Elliptical cross sections produce a continuous tapered nose and rear deck.
-  function loft(sections: [number, number, number, number][]) {
-    const positions: number[] = [];
-    const indices: number[] = [];
-    const sides = 20;
-    for (const [z, width, centre, height] of sections)
-      for (let i = 0; i < sides; i++) {
-        const a = (i / sides) * Math.PI * 2;
-        positions.push(Math.cos(a) * width, centre + Math.sin(a) * height, z);
+  // Continuous sculpted shell: broad shoulders, a pinched waist and true wheel
+  // openings. Cabin is an actual hole, not a dark rectangle on a solid slab.
+  const profile = new THREE.CatmullRomCurve3(
+    [
+      new THREE.Vector3(0.77, 0.62, -2.2),
+      new THREE.Vector3(0.94, 0.76, -1.85),
+      new THREE.Vector3(0.97, 0.79, -1.4),
+      new THREE.Vector3(0.87, 0.77, -0.85),
+      new THREE.Vector3(0.83, 0.73, 0),
+      new THREE.Vector3(0.87, 0.73, 0.65),
+      new THREE.Vector3(0.96, 0.7, 1.38),
+      new THREE.Vector3(0.91, 0.62, 1.85),
+      new THREE.Vector3(0.74, 0.49, 2.25),
+    ],
+    false,
+    'catmullrom',
+    0.3,
+  );
+  // Sample by z, so wheel openings and the open cabin have exact boundaries.
+  const samples = profile.getPoints(240);
+  const section = (z: number) => {
+    const found = samples.findIndex((p) => p.z >= z);
+    const i = found < 0 ? samples.length - 1 : Math.max(1, found);
+    const a = samples[i - 1],
+      b = samples[i];
+    return a
+      .clone()
+      .lerp(b, THREE.MathUtils.clamp((z - a.z) / (b.z - a.z), 0, 1));
+  };
+  const shoulder = (z: number) =>
+    0.16 * Math.exp(-(((z - 1.38) / 0.55) ** 2)) +
+    0.1 * Math.exp(-(((z + 1.4) / 0.55) ** 2));
+  const top = (z: number, u: number): P => {
+    const p = section(z),
+      x = Math.abs(u);
+    return [p.x * u, p.y + shoulder(z) * x * x - 0.025 * x ** 8, z];
+  };
+  function surface(
+    key: Key,
+    nz: number,
+    nx: number,
+    point: (v: number, u: number) => P,
+    reverse = false,
+  ) {
+    const positions: number[] = [],
+      indices: number[] = [];
+    for (let j = 0; j <= nz; j++)
+      for (let i = 0; i <= nx; i++) positions.push(...point(j / nz, i / nx));
+    for (let j = 0; j < nz; j++)
+      for (let i = 0; i < nx; i++) {
+        const a = j * (nx + 1) + i,
+          b = a + 1,
+          c = a + nx + 1,
+          d = c + 1;
+        indices.push(...(reverse ? [a, b, c, b, d, c] : [a, c, b, b, c, d]));
       }
-    for (let j = 0; j < sections.length - 1; j++)
-      for (let i = 0; i < sides; i++) {
-        const a = j * sides + i,
-          b = j * sides + ((i + 1) % sides),
-          c = a + sides,
-          d = b + sides;
-        indices.push(a, b, c, b, d, c);
-      }
-    for (const end of [0, sections.length - 1]) {
-      const centre = positions.length / 3;
-      positions.push(0, sections[end][2], sections[end][0]);
-      for (let i = 0; i < sides; i++) {
-        const a = end * sides + i,
-          b = end * sides + ((i + 1) % sides);
-        indices.push(...(end === 0 ? [centre, b, a] : [centre, a, b]));
-      }
-    }
     const g = new THREE.BufferGeometry();
     g.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
     g.setIndex(indices);
     g.computeVertexNormals();
-    add('paint', g);
+    add(key, g);
   }
-  loft([
-    [0.65, 0.85, 0.61, 0.2],
-    [1.1, 0.92, 0.6, 0.22],
-    [1.6, 0.91, 0.54, 0.2],
-    [2.12, 0.78, 0.48, 0.16],
-    [2.25, 0.67, 0.46, 0.12],
-  ]);
-  loft([
-    [-2.18, 0.73, 0.5, 0.2],
-    [-1.83, 0.94, 0.6, 0.23],
-    [-1.25, 0.94, 0.65, 0.22],
-    [-0.92, 0.87, 0.65, 0.2],
-  ]);
-  box('dark', [1.53, 0.13, 4.05], [0, 0.28, 0]);
-  box('dark', [1.43, 0.1, 1.62], [0, 0.43, -0.14]);
-  // Side sills remain below the open cabin; no solid box across the seats.
-  for (const x of [-0.86, 0.86]) {
-    box('paint', [0.16, 0.32, 1.93], [x, 0.6, -0.12]);
-    box('dark', [0.045, 0.09, 1.72], [x * 0.96, 0.8, -0.12]);
-    box('paint', [0.21, 0.11, 2.12], [x, 0.36, -0.08]);
-    box('metal', [0.14, 0.025, 0.027], [x * 1.105, 0.72, -0.4]);
-    beam('paint', [x, 0.8, 0.54], [x * 1.17, 0.86, 0.68], 0.035);
-    add('paint', new THREE.SphereGeometry(0.12, 12, 8), [x * 1.22, 0.88, 0.7]);
-    box('dark', [0.14, 0.07, 0.015], [x * 1.22, 0.88, 0.6]);
+  // Hood and rear deck, then narrow door shoulders alongside the cockpit.
+  surface('paint', 32, 24, (v, u) => top(0.67 + v * 1.58, u * 2 - 1));
+  surface('paint', 28, 24, (v, u) => top(-2.2 + v * 1.3, u * 2 - 1));
+  for (const sign of [-1, 1]) {
+    surface(
+      'paint',
+      24,
+      4,
+      (v, u) => top(-0.9 + v * 1.57, sign * (0.82 + u * 0.18)),
+      sign < 0,
+    );
+    surface(
+      'paint',
+      100,
+      6,
+      (v, u) => {
+        const z = -2.2 + v * 4.45,
+          p = section(z);
+        const arch = Math.min(Math.abs(z + 1.4), Math.abs(z - 1.38));
+        const bottom =
+          arch < 0.425 ? 0.36 + Math.sqrt(0.425 ** 2 - arch ** 2) : 0.29;
+        const upper = top(z, sign)[1];
+        return [
+          sign * (p.x - 0.065 * Math.sin(u * Math.PI)),
+          THREE.MathUtils.lerp(upper, Math.min(bottom, upper - 0.015), u),
+          z,
+        ];
+      },
+      sign < 0,
+    );
+    // Lower rocker, flush door handle and swept mirror housing.
+    box('dark', [0.11, 0.075, 1.75], [sign * 0.83, 0.29, -0.03]);
+    box('metal', [0.015, 0.021, 0.16], [sign * 0.852, 0.72, -0.35]);
+    beam('dark', [sign * 0.82, 0.79, 0.57], [sign * 1.01, 0.87, 0.64], 0.022);
+    const mirror = new THREE.SphereGeometry(1, 16, 10);
+    mirror.scale(0.135, 0.065, 0.17);
+    add('paint', mirror, [sign * 1.025, 0.89, 0.61]);
+    box('dark', [0.19, 0.065, 0.017], [sign * 1.025, 0.89, 0.47]);
+    // Side air blade just ahead of the rear wheel, inset into the shoulder.
+    surface(
+      'dark',
+      8,
+      3,
+      (v, u) => {
+        const z = -0.96 + v * 0.36,
+          p = section(z);
+        return [sign * (p.x + 0.005), 0.44 + u * (0.22 - 0.07 * v), z];
+      },
+      sign > 0,
+    );
   }
-  // Raised fender arcs, distinct from the wheel itself.
-  for (const x of [-0.91, 0.91])
-    for (const z of [-1.4, 1.38]) {
-      add(
-        'paint',
-        new THREE.TorusGeometry(0.415, 0.075, 8, 24, Math.PI),
-        [x, 0.37, z],
-        [0, Math.PI / 2, 0],
-      );
-    }
+  for (const z of [-2.2, 2.25])
+    surface(
+      'paint',
+      1,
+      24,
+      (v, u) => {
+        const p = top(z, u * 2 - 1);
+        return [p[0], THREE.MathUtils.lerp(0.29, p[1], v), z];
+      },
+      z > 0,
+    );
+  box('dark', [1.48, 0.1, 3.95], [0, 0.26, 0]);
+  box('dark', [1.4, 0.09, 1.55], [0, 0.43, -0.14]);
+  // Twin tapered rear fairings behind the rollover hoops.
   for (const x of [-0.44, 0.44]) {
-    box('leather', [0.55, 0.17, 0.64], [x, 0.53, -0.21]);
-    box('leather', [0.55, 0.59, 0.16], [x, 0.86, -0.57], [-0.14, 0, 0]);
-    box('leather', [0.3, 0.22, 0.16], [x, 1.17, -0.62]);
+    surface(
+      'paint',
+      18,
+      12,
+      (v, u) => {
+        const z = -1.8 + v * 0.93,
+          a = u * Math.PI;
+        const rise = 0.21 * Math.sin(v * Math.PI * 0.75);
+        return [
+          x + Math.cos(a) * 0.22 * Math.sin((v * Math.PI) / 2),
+          section(z).y + Math.sin(a) * rise,
+          z,
+        ];
+      },
+      true,
+    );
+  }
+  // Recessed wheel-well liners keep daylight from shining through the body.
+  for (const x of [-0.79, 0.79])
+    for (const z of [-1.4, 1.38])
+      add(
+        'dark',
+        new THREE.CylinderGeometry(0.418, 0.418, 0.04, 28),
+        [x, 0.36, z],
+        [0, 0, Math.PI / 2],
+      );
+  for (const x of [-0.44, 0.44]) {
+    oval('dark', [0.275, 0.085, 0.32], [x, 0.53, -0.21]);
+    oval('dark', [0.275, 0.33, 0.09], [x, 0.86, -0.57], [-0.14, 0, 0]);
+    oval('dark', [0.15, 0.11, 0.085], [x, 1.17, -0.62]);
     for (const side of [-1, 1])
       box(
         'dark',
@@ -179,9 +270,9 @@ export function makeRoadster() {
   windshield.setIndex([0, 1, 2, 0, 2, 3]);
   windshield.computeVertexNormals();
   add('glass', windshield);
-  beam('metal', [-0.79, 0.85, 0.86], [-0.72, 1.28, 0.5], 0.028);
-  beam('metal', [0.79, 0.85, 0.86], [0.72, 1.28, 0.5], 0.028);
-  beam('metal', [-0.72, 1.28, 0.5], [0.72, 1.28, 0.5], 0.026);
+  beam('dark', [-0.79, 0.85, 0.86], [-0.72, 1.28, 0.5], 0.028);
+  beam('dark', [0.79, 0.85, 0.86], [0.72, 1.28, 0.5], 0.028);
+  beam('dark', [-0.72, 1.28, 0.5], [0.72, 1.28, 0.5], 0.026);
   beam('dark', [-0.79, 0.85, 0.86], [0.79, 0.85, 0.86], 0.027);
   add(
     'dark',
@@ -191,34 +282,53 @@ export function makeRoadster() {
   );
   beam('metal', [0.3, 0.88, 0.4], [0.58, 0.88, 0.4], 0.013);
   beam('metal', [0.44, 0.88, 0.4], [0.44, 0.73, 0.44], 0.013);
-  box('dark', [1.14, 0.16, 0.035], [0, 0.43, 2.23]);
-  for (const x of [-0.46, -0.23, 0, 0.23, 0.46])
-    box('metal', [0.013, 0.12, 0.012], [x, 0.43, 2.254]);
-  box('dark', [1.65, 0.055, 0.24], [0, 0.29, 2.12]);
-  for (const x of [-0.64, 0.64]) {
-    box('dark', [0.35, 0.1, 0.06], [x, 0.61, 2.08], [0.1, 0, 0]);
-    box('lamp', [0.3, 0.035, 0.068], [x, 0.63, 2.1]);
-    box('tail', [0.39, 0.045, 0.055], [x, 0.64, -2.15]);
+  // Wide lower intakes, swept LED blades and a slim rear light bar.
+  box('dark', [1.1, 0.14, 0.045], [0, 0.365, 2.27]);
+  box('dark', [1.58, 0.035, 0.22], [0, 0.275, 2.17]);
+  for (const sign of [-1, 1]) {
+    box('dark', [0.29, 0.11, 0.06], [sign * 0.66, 0.36, 2.23]);
+    const lamp = new THREE.SphereGeometry(1, 16, 8);
+    lamp.scale(0.19, 0.025, 0.115);
+    add('dark', lamp, [sign * 0.65, 0.615, 2.01], [0, sign * 0.32, 0]);
+    box(
+      'lamp',
+      [0.3, 0.017, 0.034],
+      [sign * 0.65, 0.63, 2.06],
+      [0, sign * 0.32, 0],
+    );
+    box('tail', [0.42, 0.028, 0.032], [sign * 0.52, 0.585, -2.225]);
     add(
       'metal',
-      new THREE.CylinderGeometry(0.062, 0.062, 0.17, 12),
-      [x * 0.8, 0.32, -2.18],
+      new THREE.CylinderGeometry(0.064, 0.064, 0.17, 12),
+      [sign * 0.37, 0.33, -2.2],
       [Math.PI / 2, 0, 0],
     );
     add(
       'dark',
-      new THREE.CircleGeometry(0.047, 12),
-      [x * 0.8, 0.32, -2.271],
+      new THREE.CircleGeometry(0.05, 12),
+      [sign * 0.37, 0.33, -2.29],
       [0, Math.PI, 0],
     );
   }
-  box('dark', [1.39, 0.16, 0.06], [0, 0.36, -2.16]);
-  for (let i = 0; i < 7; i++)
-    box(
-      'dark',
-      [1.02, 0.017, 0.035],
-      [0, 0.864 - i * 0.007, -1.17 - i * 0.082],
-    );
+  box('tail', [0.63, 0.013, 0.022], [0, 0.585, -2.226]);
+  box('dark', [1.4, 0.13, 0.09], [0, 0.345, -2.225]);
+  for (const x of [-0.6, -0.2, 0.2, 0.6])
+    box('dark', [0.025, 0.115, 0.28], [x, 0.28, -2.12]);
+  // Subtle integrated ducktail follows the rear deck instead of a box wing.
+  surface(
+    'paint',
+    5,
+    24,
+    (v, u) => {
+      const x = (u * 2 - 1) * 0.77;
+      return [
+        x,
+        0.635 + v * 0.055 + 0.04 * (1 - (x / 0.77) ** 2),
+        -2.08 - v * 0.12,
+      ];
+    },
+    true,
+  );
   // Seated driver silhouette gives the open cockpit scale, without a downloaded asset.
   box('dark', [0.34, 0.44, 0.2], [0.44, 0.93, -0.39], [-0.1, 0, 0]);
   add('leather', new THREE.SphereGeometry(0.115, 12, 10), [0.44, 1.27, -0.34]);
@@ -248,13 +358,14 @@ export function makeRoadster() {
       tyre.rotation.z = Math.PI / 2;
       spin.add(tyre);
       const rim = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.25, 0.25, 0.25, 16),
+        new THREE.TorusGeometry(0.265, 0.022, 8, 24),
         palette.metal,
       );
-      rim.rotation.z = Math.PI / 2;
+      rim.rotation.y = Math.PI / 2;
+      rim.position.x = Math.sign(x) * 0.132;
       spin.add(rim);
       const hub = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.18, 0.18, 0.258, 12),
+        new THREE.CylinderGeometry(0.075, 0.075, 0.27, 12),
         palette.dark,
       );
       hub.rotation.z = Math.PI / 2;
@@ -262,10 +373,11 @@ export function makeRoadster() {
       for (let i = 0; i < 5; i++) {
         const a = (i * Math.PI * 2) / 5;
         const spoke = new THREE.Mesh(
-          new THREE.BoxGeometry(0.266, 0.042, 0.4),
+          new THREE.BoxGeometry(0.027, 0.029, 0.5),
           palette.metal,
         );
         spoke.rotation.x = a;
+        spoke.position.x = Math.sign(x) * 0.134;
         spin.add(spoke);
       }
       // Rim and spokes share one draw per wheel.

@@ -162,7 +162,7 @@ export default function Home() {
   useEffect(() => {
     setMobilePanel(null);
   }, [settings.mode, touchUI]);
-  const [carModel, setCarModel] = useState<'classic' | 'roadster'>('classic');
+  const [carModel, setCarModel] = useState<'classic' | 'roadster'>('roadster');
   const [returnMode, setReturnMode] = useState<TravelMode | null>(null);
   const [localOrbit, setLocalOrbit] = useState(false);
   const [travelView, setTravelView] = useState<TravelView>({

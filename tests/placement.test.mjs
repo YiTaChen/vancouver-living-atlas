@@ -1347,7 +1347,7 @@ test('driver eye is on vehicle left for every heading; looking around moves the 
       .applyAxisAngle(new THREE.Vector3(0, 1, 0), -yaw);
     assert(Math.abs(local.x - 0.45) < 1e-8);
     assert(Math.abs(local.z) < 1e-8);
-    assert(Math.abs(local.y - 1.45) < 1e-8);
+    assert(Math.abs(local.y - 1.2) < 1e-8);
     const wheel = nav.cockpits.drive.userData.steeringWheel;
     e.scene.updateMatrixWorld(true);
     const wheelBefore = wheel.getWorldPosition(new THREE.Vector3());
@@ -1621,4 +1621,13 @@ test('touch throttle drives and sails through the existing vehicle physics', () 
     assert.ok(Number.isFinite(nav.position.z));
     nav.destroy();
   }
+});
+
+ test('new navigation starts with the roadster exterior and matching left-hand cockpit', () => {
+  const {nav} = navigationFixture();
+  assert.equal(nav.carModel, 'roadster');
+  assert.equal(nav.cockpits.drive, nav.roadsterCockpit);
+  assert(nav.roadster.group.visible);
+  assert(!nav.classicCar.visible);
+  nav.destroy();
 });

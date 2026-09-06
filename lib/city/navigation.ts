@@ -63,7 +63,7 @@ export class StreetNavigation {
   dragging = false;
   last = [0, 0];
   car = new THREE.Group();
-  carModel: 'classic' | 'roadster' = 'classic';
+  carModel: 'classic' | 'roadster' = 'roadster';
   classicCar = new THREE.Group();
   roadster = makeRoadster();
   wheelDistance = 0;
@@ -223,7 +223,9 @@ export class StreetNavigation {
     this.classicCar.add(
       ...this.car.children.filter((child) => child !== shadow),
     );
-    this.roadster.group.visible = false;
+    this.classicCar.visible = false;
+    this.roadster.group.visible = true;
+    this.cockpits.drive = this.roadsterCockpit;
     this.car.add(this.classicCar, this.roadster.group);
     this.car.visible = false;
     e.scene.add(this.car);
