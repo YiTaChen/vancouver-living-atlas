@@ -32,7 +32,7 @@ const methods = cls.members
   .filter(
     (n) =>
       ts.isMethodDeclaration(n) &&
-      ['elevation', 'focusHarbour', 'completeLocalMapTransition'].includes(
+      ['elevation', 'rawElevation', 'focusHarbour', 'completeLocalMapTransition'].includes(
         n.name.getText(ast),
       ),
   )

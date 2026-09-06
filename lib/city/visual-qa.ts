@@ -33,6 +33,28 @@ const cases = [
     offset: [-150, 95, 100],
   },
   { id: 'third-beach', coord: [-123.15734, 49.30363], offset: [-170, 95, 90] },
+  {
+    id: 'north-coast-road',
+    coord: [-123.140683, 49.31332],
+    offset: [-80, 55, -35],
+  },
+  {
+    id: 'north-coast-trail',
+    coord: [-123.147165, 49.313101],
+    offset: [-40, 55, -70],
+  },
+  {
+    id: 'northwest-coast-trail',
+    coord: [-123.156028, 49.306809],
+    offset: [-80, 50, 20],
+  },
+  { id: 'second-sand', walkAt: [-123.1500073169, 49.2944261588] },
+  { id: 'third-sand', walkAt: [-123.1564938289, 49.3043524973] },
+  {
+    id: 'second-boat',
+    boatAt: [-123.1512467778, 49.2944261588],
+    forward: true,
+  },
   { id: 'marine', view: 'marine' },
   { id: 'canada', view: 'canada' },
 ] as const;
@@ -104,6 +126,26 @@ export function installVisualQA(e: CityEngine) {
       e.navigation!.snapCamera = true;
       e.navigation!.update(0);
     }
+    if ('walkAt' in test || 'boatAt' in test) {
+      const mode = 'walkAt' in test ? 'walk' : 'boat';
+      const coord = 'walkAt' in test ? test.walkAt : test.boatAt;
+      const [x, z] = project(coord);
+      e.applySettings({ ...e.settings, mode });
+      const valid = e.navigation!.startAt(mode, {
+        x,
+        z,
+        y: mode === 'boat' ? 0.1 : e.elevation(x, z),
+        yaw: mode === 'boat' ? Math.PI / 2 : -Math.PI / 2,
+        surface: mode === 'boat' ? 'water' : 'ground',
+        waterId: mode === 'boat' ? 'sea' : undefined,
+        name: test.id,
+        snappedDistance: 0,
+      });
+      if (valid === false) throw new Error('Coast QA start is no longer valid');
+      e.navigation!.cameraDistances[mode] = mode === 'boat' ? 18 : 0;
+      e.navigation!.snapCamera = true;
+      e.navigation!.update(0);
+    }
     e.renderer.shadowMap.needsUpdate = true;
     status.textContent = `${id} / ${quality}`;
   };
@@ -133,7 +175,7 @@ export function installVisualQA(e: CityEngine) {
         apply(test.id, quality);
         await collect(2500);
         const start = e.navigation!.position.toArray();
-        if ('drive' in test) e.navigation!.keys.add('w');
+        if ('drive' in test || 'forward' in test) e.navigation!.keys.add('w');
         const sample = await collect(8000);
         e.navigation!.keys.clear();
         const info = e.renderer.info;

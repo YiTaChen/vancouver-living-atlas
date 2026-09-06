@@ -49,7 +49,7 @@ const methods = engineClass.members
   .filter(
     (n) =>
       ts.isMethodDeclaration(n) &&
-      ['elevation', 'focusTrain', 'completeLocalMapTransition'].includes(
+      ['elevation', 'rawElevation', 'focusTrain', 'completeLocalMapTransition'].includes(
         n.name.getText(ast),
       ),
   )

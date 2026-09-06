@@ -1,3 +1,4 @@
+import { BeachGround, type BeachCoastData } from './beach-ground';
 import { enterLocalMap, finishLocalMapTransition } from './local-map-camera';
 import { createRoadSurfaces } from './road-surfaces';
 import { TravelReturn } from './travel-return';
@@ -103,6 +104,7 @@ export class CityEngine {
   };
   data: Record<string, any> = {};
   landPolys: number[][][][] = [];
+  beachGround!: BeachGround;
   parkPolys: { name: string; poly: number[][][] }[] = [];
   sun = new THREE.DirectionalLight(0xffecd0, 3);
   ambient = new THREE.HemisphereLight(0xc9e7ff, 0x66746b, 2.2);
@@ -293,7 +295,21 @@ export class CityEngine {
       this.data[name] = await response.json();
     }
     if (this.disposed) return;
-    this.landPolys = this.data.land.features.flatMap((f: Feature) =>
+    const coastResponse = await fetch('/data/beach-coast.json');
+    if (!coastResponse.ok)
+      throw new Error(
+        `Could not load coastal terrain (${coastResponse.status})`,
+      );
+    this.data.beachCoast = (await coastResponse.json()) as BeachCoastData;
+    if (this.disposed) return;
+    this.beachGround = new BeachGround(this.data.beachCoast);
+    // Preserve the exact original tessellation keys used by the local patch.
+    this.data.originalLandPolys = this.data.land.features.flatMap(
+      (f: Feature) => rings(f).map((p) => p.map((r) => r.map(project))),
+    );
+    this.landPolys = (
+      this.data.beachCoast as BeachCoastData
+    ).land.features.flatMap((f: Feature) =>
       rings(f).map((p) => p.map((r) => r.map(project))),
     );
     this.parkPolys = this.data.parks.features.flatMap((f: Feature) =>
@@ -317,7 +333,11 @@ export class CityEngine {
       this.data.waterSurfaces,
       this.data.buildings,
       landmarkFootprints,
+      this.beachGround,
     );
+    for (const p of (this.data.beachCoast as BeachCoastData)
+      .groundObstacleFootprints)
+      this.waterWorld.addObstacle(p);
     for (const p of this.data.solidWaterFootprints || [])
       this.waterWorld.addObstacle(p);
     createStreetfronts(this);
@@ -504,6 +524,9 @@ export class CityEngine {
     else this.renderer.render(this.scene, this.camera);
   }
   elevation(x: number, z: number): number {
+    return this.beachGround?.height(x, z) ?? this.rawElevation(x, z);
+  }
+  rawElevation(x: number, z: number): number {
     const d = this.data.elevation;
     if (!d) return 8;
     const c = unproject(x, z);
@@ -535,7 +558,11 @@ export class CityEngine {
     );
   }
   onLand(x: number, z: number) {
-    return this.landPolys.some((p) => inPolygon([x, z], p));
+    // On MHWS itself use the explicit beach water convention.
+    const sample = this.beachGround?.near(x, z)
+      ? this.beachGround.surface.sample(x, z, this.rawElevation(x, z))
+      : undefined;
+    return sample?.isLand ?? this.landPolys.some((p) => inPolygon([x, z], p));
   }
   geometry(
     pos: number[],
@@ -591,7 +618,9 @@ export class CityEngine {
   makeLand() {
     const positions: number[] = [],
       colors: number[] = [];
-    for (const poly of this.landPolys) {
+    for (const [polyIndex, poly] of (
+      this.data.originalLandPolys as number[][][][]
+    ).entries()) {
       const boundary = poly.flat(),
         xs = poly[0].map((p) => p[0]),
         zs = poly[0].map((p) => p[1]);
@@ -605,6 +634,7 @@ export class CityEngine {
           if (inPolygon([x, z], poly)) pts.push([x, z]);
       const tri = Delaunator.from(pts).triangles;
       for (let i = 0; i < tri.length; i += 3) {
+        if (this.beachGround.replacements.has(`${polyIndex}:${i}`)) continue;
         const p = [pts[tri[i]], pts[tri[i + 1]], pts[tri[i + 2]]];
         const cx = (p[0][0] + p[1][0] + p[2][0]) / 3,
           cz = (p[0][1] + p[1][1] + p[2][1]) / 3;
@@ -634,6 +664,38 @@ export class CityEngine {
         }
       }
     }
+    // One physical terrain mesh remains first in terrain.children, including
+    // all graded sand; MapPlacement therefore raycasts the same final surface.
+    const coast = this.data.beachCoast as BeachCoastData;
+    for (const source of [coast.outsidePositions, coast.profilePositions])
+      for (let i = 0; i < source.length; i += 3) {
+        const x = source[i],
+          y = source[i + 1],
+          z = source[i + 2];
+        positions.push(x, y, z);
+        const park = this.parkPolys.find((p) => inPolygon([x, z], p.poly));
+        const color = new THREE.Color(
+          park
+            ? park.name === 'Stanley Park'
+              ? 0x476d3f
+              : 0x658a4f
+            : 0x95998a,
+        );
+        const beach = this.beachGround.surface.sample(
+          x,
+          z,
+          this.rawElevation(x, z),
+        );
+        if (beach)
+          color.lerp(
+            new THREE.Color(0xc9b98d).lerp(
+              new THREE.Color(0x8d8267),
+              beach.wetness * 0.55,
+            ),
+            beach.sandWeight,
+          );
+        colors.push(color.r, color.g, color.b);
+      }
     const mesh = new THREE.Mesh(
       this.geometry(positions, undefined, colors),
       new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 1 }),

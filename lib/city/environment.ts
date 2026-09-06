@@ -32,7 +32,14 @@ export function createNature(e: CityEngine) {
     .filter((f: Feature) => f.properties.class === 'beach')
     .flatMap((f: Feature) => rings(f).map((p) => p.map((r) => r.map(project))));
   e.data.waterPolys = waters;
-  e.data.beachPolys = beaches;
+  e.data.beachPolys = [
+    ...e.data.beachCoast.fixtures.beaches.flatMap(
+      (b: any) => b.drySandPolygons || [],
+    ),
+    ...e.data.beachCoast.beachOverlays.features.flatMap((f: Feature) =>
+      rings(f).map((p) => p.map((r) => r.map(project))),
+    ),
+  ];
   // Inland water lies at the local lake shore elevation, never at sea level.
   for (const surface of surfaces) {
     const poly = surface.polygon!,
@@ -62,11 +69,19 @@ export function createNature(e: CityEngine) {
     e.data.waterMeshes.push(mesh);
     e.terrain.add(mesh);
   }
-  for (const poly of beaches) e.polygonMesh(poly, 0xc9b98d, 1.6);
+  // Second/Third sand is already part of the first terrain mesh. Other beach
+  // overlays are clipped to the same reconciled coast during data preparation.
+  for (const f of e.data.beachCoast.beachOverlays.features)
+    for (const p of rings(f))
+      e.polygonMesh(
+        p.map((r) => r.map(project)),
+        0xc9b98d,
+        1.6,
+      );
   // A narrow seawall follows the measured shoreline, except natural beach sections.
   const shorePos: number[] = [],
     rockPos: number[] = [];
-  for (const f of e.data.shoreline.features)
+  for (const f of e.data.beachCoast.shoreline.features)
     for (const l of lines(f)) {
       const ps = l.map(project);
       for (let i = 0; i < ps.length - 1; i++) {
@@ -112,8 +127,13 @@ export function createNature(e: CityEngine) {
     e.terrain.add(mesh);
   }
   // Trails are geographic source lines. Merge their geometry to keep draw calls low.
-  const pathGeos: THREE.BufferGeometry[] = [];
+  const pathGeos: THREE.BufferGeometry[] = [
+    e.geometry(e.data.beachCoast.pathPositions),
+  ];
+  const coastalPathIds = new Set<number>(e.data.beachCoast.replacementPathIds);
   for (const f of e.data.paths.features) {
+    if (coastalPathIds.has(Number(f.properties.sourceId ?? f.properties.id)))
+      continue;
     if (
       e.data.causeway?.excludedPathIds.has(
         Number(f.properties.sourceId ?? f.properties.id),

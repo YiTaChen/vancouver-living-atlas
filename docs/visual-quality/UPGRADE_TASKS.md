@@ -8,8 +8,8 @@ Approved scope (2026-09-05): finish each stage in order, validate it, then commi
 | 2 | Complete | [Connected pavement, markings, terrain-aligned curbs and tree-row clearance](roads/README.md) |
 | 3 | Complete | [Shared facade types, aligned windows, ground-level entries and materials](buildings/README.md) |
 | 4 | Complete | [Connected Causeway, complete separated paths, source-floor navigation and actual QA](causeway/README.md) |
-| 5 | Pending | Second/Third Beach terrain, dry/wet transitions and walking/boat boundaries |
-| 6 | Pending | Integrated first-pass visual, travel and performance acceptance |
+| 5 | Complete | [Shared Second/Third Beach terrain, walking/boat boundaries and actual QA](beaches/README.md) |
+| 6 | In progress | Integrated first-pass visual, travel and performance acceptance; ground-plane overlaps and foliage colour |
 | 7 | Pending | Marine Building, Canada Place and Science World detail |
 | 8 | Pending | Convention Centre, BC Place, Harbour Centre and Vancouver House detail |
 | 9 | Pending | Measured loading, geometry, texture and rendering improvements |

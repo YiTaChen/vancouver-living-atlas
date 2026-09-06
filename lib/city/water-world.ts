@@ -1,3 +1,4 @@
+import type { BeachGround } from './beach-ground';
 import { project, unproject, rings, inPolygon } from './geo';
 import type { FeatureCollection } from './types';
 export interface WaterSurface {
@@ -86,6 +87,7 @@ export class WaterWorld {
     surfaces: WaterSurface[],
     buildings: FeatureCollection,
     landmarks: FeatureCollection,
+    private beachGround?: Pick<BeachGround, 'allowsHull'>,
   ) {
     this.surfaces = surfaces;
     this.regional = regionalData.features.flatMap((f) =>
@@ -262,6 +264,12 @@ export class WaterWorld {
   ) {
     const surface = this.at(x, z);
     if (!surface || (id && surface.id !== id)) return false;
+    if (
+      surface.kind === 'sea' &&
+      this.beachGround &&
+      !this.beachGround.allowsHull(x, z, yaw, halfLength, radius)
+    )
+      return false;
     const inner = Math.max(0, halfLength - radius),
       dx = Math.sin(yaw) * inner,
       dz = Math.cos(yaw) * inner;

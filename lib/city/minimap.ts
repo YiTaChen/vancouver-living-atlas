@@ -130,6 +130,7 @@ export class LocalMinimap {
   );
   regional: MapPath[];
   land: MapPath[];
+  landClip: Path2D;
   parks: MapPath[];
   water: MapPath[];
   beaches: MapPath[];
@@ -143,6 +144,7 @@ export class LocalMinimap {
   ) {
     this.regional = e.waterWorld.regional.map((p) => mapPath(p));
     this.land = e.landPolys.map((p) => mapPath(p));
+    this.landClip = mapPath(e.landPolys.flat()).path;
     this.parks = e.parkPolys.map((p) => mapPath(p.poly));
     this.water = (e.data.waterSurfaces || []).map(
       (surface: { polygon: number[][][]; name: string }) => ({
@@ -266,8 +268,13 @@ export class LocalMinimap {
     ctx.fillRect(lo[0], lo[1], hi[0] - lo[0], hi[1] - lo[1]);
     fill(this.land, '#607a70');
     ctx.restore();
+    // Park/source sand outlines can extend beyond the corrected high-water
+    // coast. They must not paint navigable sea back into land on the minimap.
+    ctx.save();
+    ctx.clip(this.landClip, 'evenodd');
     fill(this.parks, '#365f4e');
     fill(this.beaches, '#adab7b');
+    ctx.restore();
     fill(this.water, '#215664');
     if (pose.following && this.span <= 1600) fill(this.buildings, '#82938a');
     fill(this.piers, '#a1aaa0');

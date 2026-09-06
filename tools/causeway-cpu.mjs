@@ -30,6 +30,10 @@ export function load(relative) {
   if (cache.has(file)) return cache.get(file).exports;
   const module = { exports: {} };
   cache.set(file, module);
+  if (file.endsWith('.json')) {
+    module.exports = JSON.parse(fs.readFileSync(file, 'utf8'));
+    return module.exports;
+  }
   const output = ts.transpileModule(fs.readFileSync(file, 'utf8'), {
     fileName: file,
     compilerOptions: {
@@ -63,7 +67,14 @@ function actualEngineMethods() {
       ts.ScriptTarget.Latest,
       true,
     ),
-    wanted = new Set(['elevation', 'onLand', 'geometry', 'ribbon', 'makeLand']);
+    wanted = new Set([
+      'elevation',
+      'rawElevation',
+      'onLand',
+      'geometry',
+      'ribbon',
+      'makeLand',
+    ]);
   sourceFiles.add(file);
   const methods = [];
   function visit(n) {
@@ -139,16 +150,21 @@ export function createFixture() {
     e.data[name] = readData(name + '.json');
   e.data.elevation = readData('terrain.json');
   e.data.bridgeSurfaces = [];
-  e.landPolys = e.data.land.features.flatMap((f) =>
+  e.data.originalLandPolys = e.data.land.features.flatMap((f) =>
+    geo.rings(f).map((p) => p.map((r) => r.map(geo.project))),
+  );
+  e.data.beachCoast = readData('beach-coast.json');
+  e.beachGround = new (load('lib/city/beach-ground.ts').BeachGround)(
+    e.data.beachCoast,
+  );
+  e.landPolys = e.data.beachCoast.land.features.flatMap((f) =>
     geo.rings(f).map((p) => p.map((r) => r.map(geo.project))),
   );
   e.parkPolys = e.data.parks.features.flatMap((f) =>
-    geo
-      .rings(f)
-      .map((p) => ({
-        name: f.properties.name ?? f.properties.park_name ?? '',
-        poly: p.map((r) => r.map(geo.project)),
-      })),
+    geo.rings(f).map((p) => ({
+      name: f.properties.name ?? f.properties.park_name ?? '',
+      poly: p.map((r) => r.map(geo.project)),
+    })),
   );
   // Same relevant initialization order as Engine.load: land, prepare, roads,
   // Causeway bridges, nature's ground paths, road index, then StreetNavigation.
@@ -156,8 +172,17 @@ export function createFixture() {
   load('lib/city/causeway.ts').prepareCauseway(e);
   load('lib/city/road-surfaces.ts').createRoadSurfaces(e);
   load('lib/city/causeway-meshes.ts').createCausewayMeshes(e);
+  const coastalMesh = new THREE.Mesh(
+    e.geometry(e.data.beachCoast.pathPositions),
+    new THREE.MeshBasicMaterial(),
+  );
+  coastalMesh.userData.walkSurface = true;
+  e.roads.add(coastalMesh);
   const groundPathMeshes = [];
+  const coastalPaths = new Set(e.data.beachCoast.replacementPathIds);
   for (const f of e.data.paths.features) {
+    if (coastalPaths.has(Number(f.properties.sourceId ?? f.properties.id)))
+      continue;
     if (
       e.data.causeway.excludedPathIds.has(
         Number(f.properties.sourceId ?? f.properties.id),
