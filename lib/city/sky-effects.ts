@@ -64,12 +64,14 @@ export class SkyEffects {
       float curtain=0.;
       if(aurora>.001 && d.y>0.){
         for(int i=0;i<6;i++){float k=float(i);if(k>density*5.)continue;
-          float base=.22+k*.065+.075*sin(lon*2.5+k+time*.07)+.027*sin(lon*8.-time*.11+k);
-          float v=lat-base;float sheet=exp(-max(v,0.)*(11.+k))*smoothstep(-.035,.012,v);
+          // Lower, tighter curtains above the northern skyline. The .15 rad floor
+          // is ~3.6 km above the camera on this 24 km dome; terrain peaks at 1.47 km.
+          float base=.205+k*.022+.025*sin(lon*2.5+k+time*.07)+.010*sin(lon*8.-time*.11+k);
+          float v=lat-base;float sheet=exp(-max(v,0.)*(22.+k))*smoothstep(-.020,.008,v);
           float strands=.45+.55*pow(.5+.5*sin(lon*(115.+k*19.)+sin(lon*17.+time*.12)*3.),3.);
           curtain+=sheet*strands*.21;
         }
-        curtain*=aurora*night*horizon*(1.-smoothstep(1.05,1.95,abs(lon)));
+        curtain*=smoothstep(.15,.17,lat)*aurora*night*horizon*(1.-smoothstep(1.05,1.95,abs(lon)));
         vec3 ac=mix(vec3(.10,.75,.40),vec3(.43,.22,.65),smoothstep(.35,.9,lat));
         color+=ac*curtain;alpha=max(alpha,min(.7,curtain));
       }

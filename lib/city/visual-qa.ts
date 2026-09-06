@@ -286,7 +286,7 @@ export function installVisualQA(e: CityEngine) {
       const a = sunAngle(test.skyHour) - (test.skyHour > 20 ? Math.PI : 0);
       const dir =
         'skyNorth' in test
-          ? [0, 0.35, -1]
+          ? [0, 0.12, -1]
           : [Math.cos(a) * 0.85, Math.sin(a), test.skyHour > 20 ? -0.12 : 0.28];
       e.camera.position.set(-1500, 140, -1500);
       e.controls.target.set(
