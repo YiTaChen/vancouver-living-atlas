@@ -1,4 +1,13 @@
 import * as THREE from 'three';
+import {
+  planConventionEntries,
+  conventionGlassPieces,
+  conventionMullionPieces,
+  drawConventionInterfaces,
+  type ConventionSurfaceOptions,
+  type ConventionEntry,
+  type ConventionEdge,
+} from './convention-entry';
 
 /**
  * Original, metre-scale Vancouver Convention Centre West reconstruction. No downloaded model, texture,
@@ -300,6 +309,29 @@ const OUTLINE: XZ[] = [
   [-61.06, 64.02],
   [-44.21, 70.38],
 ];
+/** Exact existing lower podium top, for main-thread ground planning only.
+ * Same ExtrudeGeometry/rotate/translate sequence as Model.slab; excludes every
+ * upper floor, support and habitat shelf. No complete landmark build needed. */
+export function conventionPodiumTopTriangles(): number[] {
+  const podium = OUTLINE.map(([x, z]): XZ => [x * 1.044, z * 1.044]);
+  const shape = new THREE.Shape(
+    podium.map(([x, z]) => new THREE.Vector2(x, -z)),
+  );
+  const geometry = new THREE.ExtrudeGeometry(shape, {
+    depth: 1.35,
+    steps: 1,
+    bevelEnabled: false,
+  });
+  geometry.rotateX(-Math.PI / 2);
+  geometry.translate(0, -0.55, 0);
+  const p = geometry.getAttribute('position'),
+    out: number[] = [];
+  for (let i = 0; i + 2 < p.count; i += 3)
+    if ([0, 1, 2].every((j) => Math.abs(p.getY(i + j) - 0.8) < 1e-5))
+      for (let j = i; j < i + 3; j++) out.push(p.getX(j), p.getY(j), p.getZ(j));
+  geometry.dispose();
+  return out;
+}
 const ROOFS: Roof[] = [
   {
     name: 'east-fold',
@@ -506,7 +538,69 @@ function meadow(m: Model, roof: Roof, index: number) {
   return tufts;
 }
 
-function facade(m: Model, roof: Roof, roofIndex: number) {
+/** The same lightweight external interfaces used by facade(), without geometry. */
+export function conventionEntryEdges(): ConventionEdge[] {
+  const result: ConventionEdge[] = [];
+  for (const [roofIndex, roof] of ROOFS.entries()) {
+    const poly = roof.polygon;
+    const area = poly.reduce((s, a, i) => {
+      const b = poly[(i + 1) % poly.length];
+      return s + a[0] * b[1] - b[0] * a[1];
+    }, 0);
+    for (let edgeIndex = 0; edgeIndex < poly.length; edgeIndex++) {
+      const a = poly[edgeIndex],
+        b = poly[(edgeIndex + 1) % poly.length],
+        dx = b[0] - a[0],
+        dz = b[1] - a[1],
+        length = Math.hypot(dx, dz);
+      if (length < 0.02) continue;
+      const same = (p: XZ, q: XZ) =>
+        Math.hypot(p[0] - q[0], p[1] - q[1]) < 0.025;
+      if (
+        ROOFS.some(
+          (other) =>
+            other !== roof &&
+            other.polygon.some((p, i) => {
+              const q = other.polygon[(i + 1) % other.polygon.length];
+              return (same(a, p) && same(b, q)) || (same(a, q) && same(b, p));
+            }),
+        )
+      )
+        continue;
+      const outwardX = (area < 0 ? -dz : dz) / length,
+        outwardZ = (area < 0 ? dx : -dx) / length,
+        y0 = roof.y(...a),
+        y1 = roof.y(...b);
+      const at = (t: number, y: number): P => {
+        const top = mix(y0, y1, t) - 0.95,
+          inset = 4.2 - Math.max(0, Math.min(1, (y - 0.9) / (top - 0.9))) * 1.7;
+        return [
+          mix(a[0], b[0], t) - outwardX * inset,
+          y,
+          mix(a[1], b[1], t) - outwardZ * inset,
+        ];
+      };
+      result.push({
+        roofIndex,
+        edgeIndex,
+        length,
+        outwardX,
+        outwardZ,
+        at,
+        roofY: (t) => mix(y0, y1, t),
+      });
+    }
+  }
+  return result;
+}
+
+function facade(
+  m: Model,
+  roof: Roof,
+  roofIndex: number,
+  options: ConventionSurfaceOptions,
+  entries: ConventionEntry[],
+) {
   const poly = roof.polygon;
   let area = 0;
   for (let i = 0; i < poly.length; i++)
@@ -559,6 +653,26 @@ function facade(m: Model, roof: Roof, roofIndex: number) {
         4.2 - Math.max(0, Math.min(1, (y - 0.9) / (top - 0.9))) * 1.7;
       return [x - outwardX * inset, y, z - outwardZ * inset];
     };
+    const interfaceEdge: ConventionEdge = {
+      roofIndex,
+      edgeIndex: edge,
+      length: len,
+      outwardX,
+      outwardZ,
+      at,
+      roofY: (t) => mix(y0, y1, t),
+    };
+    const plan = neighbour
+      ? { entries: [] }
+      : options.resolvedEntries
+        ? {
+            entries: options.resolvedEntries.filter(
+              (e) => e.roofIndex === roofIndex && e.edgeIndex === edge,
+            ),
+          }
+        : planConventionEntries(interfaceEdge, options);
+    if (!neighbour) drawConventionInterfaces(m, interfaceEdge, plan.entries);
+    entries.push(...plan.entries);
     const bays = Math.max(1, Math.ceil(len / (m.detail ? 1.85 : 5.2)));
     for (let bay = 0; bay < bays; bay++) {
       const t0 = bay / bays,
@@ -595,13 +709,32 @@ function facade(m: Model, roof: Roof, roofIndex: number) {
             : hash(seed + 7) < 0.4
               ? 'glass-grey'
               : 'glass';
-        drawQuad(
-          key,
-          at(left, low0),
-          at(left, high0),
-          at(right, high1),
-          at(right, low1),
-        );
+        if (!neighbour && level === 0 && plan.entries.length) {
+          // Ground strip remains below the same 5.5m datum; cut each physical
+          // doorway across any old LOD bay boundaries before inserting its recess.
+          for (const p of conventionGlassPieces(
+            left,
+            right,
+            low0,
+            high0,
+            plan.entries,
+          ))
+            drawQuad(
+              key,
+              at(p.left, p.low),
+              at(p.left, p.high),
+              at(p.right, p.high),
+              at(p.right, p.low),
+            );
+        } else {
+          drawQuad(
+            key,
+            at(left, low0),
+            at(left, high0),
+            at(right, high1),
+            at(right, low1),
+          );
+        }
         if (level && low > Math.max(bottomAt(left), bottomAt(right)))
           m.beam(
             'metal',
@@ -612,13 +745,13 @@ function facade(m: Model, roof: Roof, roofIndex: number) {
           );
       }
       if (top0 > bottomAt(t0))
-        m.beam(
-          'metal',
-          at(t0, bottomAt(t0)),
-          at(t0, top0),
-          m.detail ? 0.066 : 0.083,
-          4,
-        );
+        for (const [lo, hi] of conventionMullionPieces(
+          t0,
+          bottomAt(t0),
+          top0,
+          plan.entries,
+        ))
+          m.beam('metal', at(t0, lo), at(t0, hi), m.detail ? 0.066 : 0.083, 4);
     }
     if (y1 - 0.95 > bottomAt(1))
       m.beam(
@@ -665,7 +798,10 @@ function facade(m: Model, roof: Roof, roofIndex: number) {
 }
 
 /** Original exterior reconstruction, not a surveyed BIM or an interior model. */
-export function createConventionCentre(detail: boolean): THREE.Group {
+export function createConventionCentre(
+  detail: boolean,
+  options: ConventionSurfaceOptions = {},
+): THREE.Group {
   const m = new Model('Vancouver Convention Centre West', detail);
   m.material('concrete', 0xa2a399, 0.91, 0.02);
   m.material('metal', 0x5e6867, 0.34, 0.69);
@@ -692,11 +828,12 @@ export function createConventionCentre(detail: boolean): THREE.Group {
   m.slab('concrete', podium, -0.55, 1.35);
   m.slab('concrete', OUTLINE, 5.3, 0.48);
   let clumpCount = 0;
+  const facadeEntries: ConventionEntry[] = [];
   ROOFS.forEach((roof, index) => {
     if (roof.planted) clumpCount += meadow(m, roof, index);
     else plane(m, 'gravel', roof.polygon, roof.y);
     plane(m, 'wood-shadow', roof.polygon, (x, z) => roof.y(x, z) - 0.63, true);
-    facade(m, roof, index);
+    facade(m, roof, index, options, facadeEntries);
   });
 
   // Central roof service strip: low parapets, plant bed, rooflights, screened HVAC.
@@ -788,6 +925,11 @@ export function createConventionCentre(detail: boolean): THREE.Group {
     {
       solidFootprints: [solid],
       greenRoofFolds: 4,
+      facadeEntries,
+      facadeInterfaceStatus:
+        options.resolvedEntries || options.actualSurface
+          ? 'Selected rendered surface; uncertain entries omitted'
+          : 'Existing model podium 0.8m top; external terrain contact not yet audited',
       roofGrassClumps: clumpCount,
       replacementBuildingKeys: ['152366'],
       replacementFeatureIds: [160690, 162308, 162309],

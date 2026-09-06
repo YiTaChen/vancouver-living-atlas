@@ -1,0 +1,456 @@
+{
+  "date": "2026-09-06T09:44:52.132Z",
+  "status": "outside-checkout integration proposal, no browser/GPU test",
+  "validation": "CPU geometry, actual-ground fixtures, shared DTO, lifecycle/night, strict types; separate peer actual Worker-entry geometry byte comparison",
+  "results": [
+    {
+      "kind": "bc-place",
+      "detail": false,
+      "before": {
+        "triangles": 18892,
+        "meshes": 8,
+        "walkSurfaces": 0,
+        "attributeBytes": 2040336,
+        "invalidAttributes": 0,
+        "nightMaterials": 2,
+        "bounds": {
+          "min": [
+            -115.86573028564453,
+            0,
+            -95.08209228515625
+          ],
+          "max": [
+            115.86573028564453,
+            65.63809967041016,
+            95.1958999633789
+          ]
+        },
+        "placement": {
+          "lon": -123.1120067,
+          "lat": 49.2766985,
+          "yaw": 0.677,
+          "base": 5,
+          "baseY": 5,
+          "pivot": "Centre of the stadium at the existing 5 m site datum.",
+          "sourceIds": [
+            "osm-24705904"
+          ],
+          "excludeBuildingIds": [],
+          "excludeStructureIds": []
+        }
+      },
+      "after": {
+        "triangles": 21756,
+        "meshes": 10,
+        "walkSurfaces": 0,
+        "attributeBytes": 2300816,
+        "invalidAttributes": 0,
+        "nightMaterials": 3,
+        "bounds": {
+          "min": [
+            -115.86573028564453,
+            0,
+            -95.08209228515625
+          ],
+          "max": [
+            115.86573028564453,
+            65.63809967041016,
+            95.1958999633789
+          ]
+        },
+        "placement": {
+          "lon": -123.1120067,
+          "lat": 49.2766985,
+          "yaw": 0.677,
+          "baseY": 5
+        }
+      },
+      "preservedFootprints": true
+    },
+    {
+      "kind": "bc-place",
+      "detail": true,
+      "before": {
+        "triangles": 51652,
+        "meshes": 8,
+        "walkSurfaces": 0,
+        "attributeBytes": 5578416,
+        "invalidAttributes": 0,
+        "nightMaterials": 2,
+        "bounds": {
+          "min": [
+            -115.89484405517578,
+            0,
+            -95.1958999633789
+          ],
+          "max": [
+            115.89484405517578,
+            65.63687896728516,
+            95.1958999633789
+          ]
+        },
+        "placement": {
+          "lon": -123.1120067,
+          "lat": 49.2766985,
+          "yaw": 0.677,
+          "base": 5,
+          "baseY": 5,
+          "pivot": "Centre of the stadium at the existing 5 m site datum.",
+          "sourceIds": [
+            "osm-24705904"
+          ],
+          "excludeBuildingIds": [],
+          "excludeStructureIds": []
+        }
+      },
+      "after": {
+        "triangles": 60036,
+        "meshes": 10,
+        "walkSurfaces": 0,
+        "attributeBytes": 6355760,
+        "invalidAttributes": 0,
+        "nightMaterials": 3,
+        "bounds": {
+          "min": [
+            -115.89484405517578,
+            0,
+            -95.1958999633789
+          ],
+          "max": [
+            115.89484405517578,
+            65.63687896728516,
+            95.1958999633789
+          ]
+        },
+        "placement": {
+          "lon": -123.1120067,
+          "lat": 49.2766985,
+          "yaw": 0.677,
+          "baseY": 5
+        }
+      },
+      "preservedFootprints": true
+    },
+    {
+      "kind": "harbour",
+      "detail": false,
+      "before": {
+        "triangles": 9336,
+        "meshes": 6,
+        "walkSurfaces": 0,
+        "attributeBytes": 1008288,
+        "invalidAttributes": 0,
+        "nightMaterials": 2,
+        "bounds": {
+          "min": [
+            -24.600000381469727,
+            -2.3513219569635223e-15,
+            -43.0999870300293
+          ],
+          "max": [
+            55.099998474121094,
+            177,
+            38.49999237060547
+          ]
+        },
+        "placement": {
+          "lon": -123.1120903,
+          "lat": 49.2847656,
+          "yaw": -0.8,
+          "pivot": "Centre of the existing office shaft; sample terrain here once.",
+          "lookoutLocal": [
+            0.28761196383652887,
+            0,
+            12.90171557875517
+          ],
+          "sourceIds": [
+            "osm-1371268997",
+            "osm-143682595"
+          ],
+          "excludeBuildingIds": [],
+          "excludeStructureIds": []
+        }
+      },
+      "after": {
+        "triangles": 16974,
+        "meshes": 8,
+        "walkSurfaces": 0,
+        "attributeBytes": 2103132,
+        "invalidAttributes": 0,
+        "nightMaterials": 3,
+        "bounds": {
+          "min": [
+            -24.575000762939453,
+            0,
+            -43.07499313354492
+          ],
+          "max": [
+            55.07499694824219,
+            177,
+            38.47499465942383
+          ]
+        },
+        "placement": {
+          "lon": -123.1120903,
+          "lat": 49.2847656,
+          "yaw": -0.8,
+          "baseY": 17.96477617737215
+        }
+      },
+      "preservedFootprints": true
+    },
+    {
+      "kind": "harbour",
+      "detail": true,
+      "before": {
+        "triangles": 38800,
+        "meshes": 6,
+        "walkSurfaces": 0,
+        "attributeBytes": 4190400,
+        "invalidAttributes": 0,
+        "nightMaterials": 2,
+        "bounds": {
+          "min": [
+            -24.71500015258789,
+            -2.3513219569635223e-15,
+            -43.14781188964844
+          ],
+          "max": [
+            55.181427001953125,
+            177,
+            38.56375503540039
+          ]
+        },
+        "placement": {
+          "lon": -123.1120903,
+          "lat": 49.2847656,
+          "yaw": -0.8,
+          "pivot": "Centre of the existing office shaft; sample terrain here once.",
+          "lookoutLocal": [
+            0.28761196383652887,
+            0,
+            12.90171557875517
+          ],
+          "sourceIds": [
+            "osm-1371268997",
+            "osm-143682595"
+          ],
+          "excludeBuildingIds": [],
+          "excludeStructureIds": []
+        }
+      },
+      "after": {
+        "triangles": 46946,
+        "meshes": 8,
+        "walkSurfaces": 0,
+        "attributeBytes": 5379108,
+        "invalidAttributes": 0,
+        "nightMaterials": 3,
+        "bounds": {
+          "min": [
+            -24.575000762939453,
+            0,
+            -43.07499313354492
+          ],
+          "max": [
+            55.07499694824219,
+            177,
+            38.47499465942383
+          ]
+        },
+        "placement": {
+          "lon": -123.1120903,
+          "lat": 49.2847656,
+          "yaw": -0.8,
+          "baseY": 17.96477617737215
+        }
+      },
+      "preservedFootprints": true
+    },
+    {
+      "kind": "convention",
+      "detail": false,
+      "before": {
+        "triangles": 18074,
+        "meshes": 12,
+        "walkSurfaces": 0,
+        "attributeBytes": 1735104,
+        "invalidAttributes": 0,
+        "nightMaterials": 5,
+        "bounds": {
+          "min": [
+            -111.36093139648438,
+            -4.599999904632568,
+            -100.48174285888672
+          ],
+          "max": [
+            108.97489929199219,
+            30.393875122070312,
+            73.47672271728516
+          ]
+        },
+        "placement": {
+          "lon": -123.1159678,
+          "lat": 49.2890752,
+          "yaw": -0.403,
+          "baseY": 4
+        }
+      },
+      "after": {
+        "triangles": 18208,
+        "meshes": 12,
+        "walkSurfaces": 0,
+        "attributeBytes": 1747968,
+        "invalidAttributes": 0,
+        "nightMaterials": 5,
+        "bounds": {
+          "min": [
+            -111.36093139648438,
+            -4.599999904632568,
+            -100.48174285888672
+          ],
+          "max": [
+            108.97489929199219,
+            30.393875122070312,
+            73.47672271728516
+          ]
+        },
+        "placement": {
+          "lon": -123.1159678,
+          "lat": 49.2890752,
+          "yaw": -0.403,
+          "baseY": 4
+        }
+      },
+      "preservedFootprints": true
+    },
+    {
+      "kind": "convention",
+      "detail": true,
+      "before": {
+        "triangles": 51991,
+        "meshes": 12,
+        "walkSurfaces": 0,
+        "attributeBytes": 4991136,
+        "invalidAttributes": 0,
+        "nightMaterials": 5,
+        "bounds": {
+          "min": [
+            -111.36093139648438,
+            -4.599999904632568,
+            -100.48174285888672
+          ],
+          "max": [
+            108.97489929199219,
+            30.393875122070312,
+            73.47672271728516
+          ]
+        },
+        "placement": {
+          "lon": -123.1159678,
+          "lat": 49.2890752,
+          "yaw": -0.403,
+          "baseY": 4
+        }
+      },
+      "after": {
+        "triangles": 52231,
+        "meshes": 12,
+        "walkSurfaces": 0,
+        "attributeBytes": 5014176,
+        "invalidAttributes": 0,
+        "nightMaterials": 5,
+        "bounds": {
+          "min": [
+            -111.36093139648438,
+            -4.599999904632568,
+            -100.48174285888672
+          ],
+          "max": [
+            108.97489929199219,
+            30.393875122070312,
+            73.47672271728516
+          ]
+        },
+        "placement": {
+          "lon": -123.1159678,
+          "lat": 49.2890752,
+          "yaw": -0.403,
+          "baseY": 4
+        }
+      },
+      "preservedFootprints": true
+    },
+    {
+      "kind": "vancouver-house",
+      "detail": false,
+      "before": null,
+      "after": {
+        "triangles": 19872,
+        "meshes": 6,
+        "walkSurfaces": 0,
+        "attributeBytes": 1867968,
+        "invalidAttributes": 0,
+        "nightMaterials": 1,
+        "bounds": {
+          "min": [
+            -24.5,
+            0,
+            -24.5
+          ],
+          "max": [
+            24.5,
+            156.85000610351562,
+            24.5
+          ]
+        },
+        "placement": {
+          "lon": -123.131029,
+          "lat": 49.2749256,
+          "yaw": -0.78,
+          "baseY": 14.140882560018866
+        }
+      },
+      "preservedFootprints": true
+    },
+    {
+      "kind": "vancouver-house",
+      "detail": true,
+      "before": null,
+      "after": {
+        "triangles": 40810,
+        "meshes": 7,
+        "walkSurfaces": 0,
+        "attributeBytes": 3836140,
+        "invalidAttributes": 0,
+        "nightMaterials": 1,
+        "bounds": {
+          "min": [
+            -24.5,
+            0,
+            -24.5
+          ],
+          "max": [
+            24.5,
+            156.85000610351562,
+            24.5
+          ]
+        },
+        "placement": {
+          "lon": -123.131029,
+          "lat": 49.2749256,
+          "yaw": -0.78,
+          "baseY": 14.140882560018866
+        }
+      },
+      "preservedFootprints": true
+    }
+  ],
+  "tests": {
+    "passed": 11,
+    "failed": 0,
+    "strictTypes": true,
+    "patchDryRun": true,
+    "realWorkerEntryGeometryEquivalence": "All four saved actual plans, independently verified by reference_review"
+  }
+}

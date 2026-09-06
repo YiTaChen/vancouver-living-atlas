@@ -1,3 +1,12 @@
+import {
+  createBCPlaceEnvelope,
+  createBCPlaceOuterWall,
+  type BCPlaceEntryOptions,
+} from './bc-place-envelope';
+import {
+  createHarbourPodium,
+  type HarbourPodiumOptions,
+} from './harbour-podium';
 /**
  * Original parametric Vancouver architecture. MIT, 2026.
  * Local coordinates are metres, +Y up. Factories do not apply map placement.
@@ -309,7 +318,10 @@ export function setSecondaryLandmarkNight(
 }
 
 /** An open-roof stadium. 36 mast/panel positions remain present at both detail levels. */
-export function createBCPlace(detail: boolean): THREE.Group {
+export function createBCPlace(
+  detail: boolean,
+  options: BCPlaceEntryOptions = {},
+): THREE.Group {
   const structure = new Batch('BC Place / precast bowl and concourses');
   const white = new Batch('BC Place / painted structural steel', {
     roughness: 0.4,
@@ -324,11 +336,6 @@ export function createBCPlace(detail: boolean): THREE.Group {
     metalness: 0,
     side: THREE.DoubleSide,
   });
-  const glass = new Batch(
-    'BC Place / clerestory glazing',
-    { roughness: 0.22, metalness: 0.33, emissive: 0x638596 },
-    0.62,
-  );
   const seating = new Batch('BC Place / seating tiers and aisles', {
     roughness: 0.85,
   });
@@ -342,13 +349,14 @@ export function createBCPlace(detail: boolean): THREE.Group {
     0.75,
   );
   const n = detail ? 144 : 72;
+  const envelope = createBCPlaceEnvelope(detail, options);
 
-  // Hollow bowl, leaving the actual arena visible through the central aperture.
+  // Replace only the outer wall so the new entrance recesses are real holes.
+  structure.add(createBCPlaceOuterWall(n, envelope.userData.entries), 0x999e96);
+  // Retain original inner bowl, top cap and underside profile.
   structure.add(
     ellipseLoft(
       [
-        { x: 106, z: 86, y: 0 },
-        { x: 112, z: 91, y: 12 },
         { x: 112.6, z: 91.5, y: 30.5 },
         { x: 106, z: 85.5, y: 30.5 },
         { x: 64, z: 47, y: 4 },
@@ -372,16 +380,6 @@ export function createBCPlace(detail: boolean): THREE.Group {
       0xc8ccbf,
     );
   }
-  glass.add(
-    ellipseLoft(
-      [
-        { x: 112.1, z: 91.1, y: 32 },
-        { x: 111.5, z: 90.5, y: 41.6 },
-      ],
-      n,
-    ),
-    0x86a4a8,
-  );
   for (let i = 0; i < 72; i++) {
     const a = (i / 72) * TAU,
       c = Math.cos(a),
@@ -400,21 +398,6 @@ export function createBCPlace(detail: boolean): THREE.Group {
         0.14,
         WHITE,
         4,
-      );
-    }
-    if (i % 3 === 0) {
-      const tangent = -a;
-      glass.box(
-        [6.8, 3.4, 0.13],
-        [107 * c, 3, 87 * s],
-        0x294348,
-        tangent + Math.PI / 2,
-      );
-      screens.box(
-        [5, 0.23, 0.16],
-        [107.2 * c, 5.0, 87.2 * s],
-        0xc2d6ce,
-        tangent + Math.PI / 2,
       );
     }
   }
@@ -584,10 +567,10 @@ export function createBCPlace(detail: boolean): THREE.Group {
       );
     }
   }
-  return complete(
+  const group = complete(
     'BC Place — original detailed model',
     detail,
-    [structure, white, cables, membrane, glass, seating, field, screens],
+    [structure, white, cables, membrane, seating, field, screens],
     SECONDARY_LANDMARK_PLACEMENTS.bcPlace,
     [
       Array.from(
@@ -599,9 +582,34 @@ export function createBCPlace(detail: boolean): THREE.Group {
       ),
     ],
   );
+  group.add(envelope);
+  group.userData.nightMaterials.push(...envelope.userData.nightMaterials);
+  group.userData.envelopeRefinement = {
+    contract: envelope.userData.contract,
+    entries: envelope.userData.entries,
+    rejectedEntries: envelope.userData.rejectedEntries,
+    thresholdStatus: envelope.userData.thresholdStatus,
+  };
+  let triangles = 0,
+    drawCalls = 0;
+  group.traverse((o) => {
+    if (o instanceof THREE.Mesh) {
+      triangles +=
+        (o.geometry.index?.count ?? o.geometry.getAttribute('position').count) /
+        3;
+      drawCalls++;
+    }
+  });
+  const bounds = new THREE.Box3().setFromObject(group);
+  Object.assign(group.userData, {
+    triangles,
+    drawCalls,
+    bounds: { min: bounds.min.toArray(), max: bounds.max.toArray() },
+  });
+  return group;
 }
 
-const HARBOUR_PODIUM: Ring = [
+export const HARBOUR_PODIUM: Ring = [
   [-24.5, -41.8],
   [54.4, -43],
   [55, 35],
@@ -655,7 +663,10 @@ function eachEdge(
   });
 }
 
-export function createHarbourCentre(detail: boolean): THREE.Group {
+export function createHarbourCentre(
+  detail: boolean,
+  options: HarbourPodiumOptions = {},
+): THREE.Group {
   const stone = new Batch(
     'Harbour Centre / Spencer podium and concrete shaft',
     { roughness: 0.79 },
@@ -691,7 +702,7 @@ export function createHarbourCentre(detail: boolean): THREE.Group {
     { roughness: 0.15, metalness: 0.45, emissive: 0xc9ba91 },
     0.58,
   );
-  stone.prism(HARBOUR_PODIUM, 0, 21, 0xb8ad91);
+  const podium = createHarbourPodium(detail, HARBOUR_PODIUM, options);
   const tower: Ring = [
     [-17.5, -18.5],
     [17.5, -18.5],
@@ -699,45 +710,6 @@ export function createHarbourCentre(detail: boolean): THREE.Group {
     [-17.5, 18.5],
   ];
   stone.prism(tower, 20, 116, 0xc3bca6);
-
-  eachEdge(HARBOUR_PODIUM, (a, _b, length, t, normal, yaw, edge) => {
-    const bays = Math.max(1, Math.floor(length / 4.7));
-    for (const y of [1.6, 5.9, 10.1, 14.3, 18.5, 20.8]) {
-      trim.box(
-        [length, y > 20 ? 0.72 : 0.33, 0.2],
-        [a[0] + (t[0] * length) / 2, y, a[1] + (t[1] * length) / 2],
-        0xe2d5b7,
-        yaw,
-      );
-    }
-    for (let bay = 0; bay < bays; bay++) {
-      const x =
-        a[0] + ((t[0] * (bay + 0.5)) / bays) * length + normal[0] * 0.065;
-      const z =
-        a[1] + ((t[1] * (bay + 0.5)) / bays) * length + normal[1] * 0.065;
-      for (let row = 0; row < 4; row++) {
-        const batch = (bay + row + edge) % 5 === 0 ? lit : glass;
-        batch.window(
-          Math.min(length / bays - 1.1, 3.1),
-          row === 0 ? 3.5 : 2.85,
-          [x, row * 4.15 + 3.6, z],
-          yaw,
-          row === 0 ? 0x25414a : 0x445555,
-        );
-      }
-      if (detail)
-        trim.box(
-          [0.34, 17, 0.3],
-          [
-            x - ((t[0] * length) / bays) * 0.43,
-            10,
-            z - ((t[1] * length) / bays) * 0.43,
-          ],
-          0xd4c9ac,
-          yaw,
-        );
-    }
-  });
 
   // Regular concrete office grid: 28 rows, square dark window apertures.
   eachEdge(tower, (a, _b, length, tangent, normal, yaw, edge) => {
@@ -846,13 +818,37 @@ export function createHarbourCentre(detail: boolean): THREE.Group {
         4,
       );
     }
-  return complete(
+  const group = complete(
     'Harbour Centre — original detailed model',
     detail,
     [stone, trim, steel, glass, lit, lookout],
     SECONDARY_LANDMARK_PLACEMENTS.harbourCentre,
     [HARBOUR_PODIUM],
   );
+  group.add(podium);
+  group.userData.nightMaterials.push(...podium.userData.nightMaterials);
+  group.userData.podiumRefinement = {
+    contract: podium.userData.contract,
+    bays: podium.userData.bays,
+    entries: podium.userData.entries,
+  };
+  let triangles = 0,
+    drawCalls = 0;
+  group.traverse((o) => {
+    if (o instanceof THREE.Mesh) {
+      triangles +=
+        (o.geometry.index?.count ?? o.geometry.getAttribute('position').count) /
+        3;
+      drawCalls++;
+    }
+  });
+  const box = new THREE.Box3().setFromObject(group);
+  Object.assign(group.userData, {
+    triangles,
+    drawCalls,
+    bounds: { min: box.min.toArray(), max: box.max.toArray() },
+  });
+  return group;
 }
 
 // Plan coordinates are original OSM building-part coordinates transformed into metres.

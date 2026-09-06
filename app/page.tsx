@@ -212,6 +212,8 @@ export default function Home() {
       setLocalOrbit(true);
       setSettings((s) => ({ ...s, mode: 'orbit', autoRotate: false }));
     };
+    if (process.env.VANCOUVER_VISUAL_QA === '1')
+      city.startupQA?.reactCommitted(city);
     return () => {
       city.onTravelReturnChange = () => {};
       city.onTravelResume = () => {};

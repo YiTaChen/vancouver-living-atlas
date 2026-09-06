@@ -1,0 +1,2897 @@
+{
+  "createdAt": "2026-09-06T09:36:22.052Z",
+  "cpuMs": 6764.302826,
+  "limitation": "Exact current terrain/road/Nature surface-generation methods; textures stubbed, trees omitted; Causeway preparation and Stage 6 clip omitted (outside both landmark sites).",
+  "groundTriangles": 10134,
+  "groundMeshes": 17,
+  "platformTriangles": 12,
+  "summary": [
+    {
+      "kind": "bc-place",
+      "placement": {
+        "lon": -123.1120067,
+        "lat": 49.2766985,
+        "yaw": 0.677,
+        "baseY": 5
+      },
+      "accepted": 8,
+      "rejected": [
+        {
+          "index": 0,
+          "reason": "Threshold outside retained low-entry band; no invented stairs or structural-ring cuts"
+        },
+        {
+          "index": 1,
+          "reason": "Threshold outside retained low-entry band; no invented stairs or structural-ring cuts"
+        },
+        {
+          "index": 3,
+          "reason": "Cross-door surface relief exceeds 18cm"
+        },
+        {
+          "index": 4,
+          "reason": "Threshold outside retained low-entry band; no invented stairs or structural-ring cuts"
+        },
+        {
+          "index": 5,
+          "reason": "Threshold outside retained low-entry band; no invented stairs or structural-ring cuts"
+        },
+        {
+          "index": 6,
+          "reason": "Threshold outside retained low-entry band; no invented stairs or structural-ring cuts"
+        },
+        {
+          "index": 7,
+          "reason": "Threshold outside retained low-entry band; no invented stairs or structural-ring cuts"
+        },
+        {
+          "index": 8,
+          "reason": "Threshold outside retained low-entry band; no invented stairs or structural-ring cuts"
+        },
+        {
+          "index": 9,
+          "reason": "Cross-door surface relief exceeds 18cm"
+        },
+        {
+          "index": 10,
+          "reason": "Cross-door surface relief exceeds 18cm"
+        },
+        {
+          "index": 11,
+          "reason": "Cross-door surface relief exceeds 18cm"
+        },
+        {
+          "index": 19,
+          "reason": "Cross-door surface relief exceeds 18cm"
+        },
+        {
+          "index": 20,
+          "reason": "Threshold outside retained low-entry band; no invented stairs or structural-ring cuts"
+        },
+        {
+          "index": 21,
+          "reason": "Threshold outside retained low-entry band; no invented stairs or structural-ring cuts"
+        },
+        {
+          "index": 22,
+          "reason": "Threshold outside retained low-entry band; no invented stairs or structural-ring cuts"
+        },
+        {
+          "index": 23,
+          "reason": "Threshold outside retained low-entry band; no invented stairs or structural-ring cuts"
+        }
+      ]
+    },
+    {
+      "kind": "harbour",
+      "placement": {
+        "lon": -123.1120903,
+        "lat": 49.2847656,
+        "yaw": -0.8,
+        "baseY": 17.96477617737215
+      },
+      "accepted": 2,
+      "rejected": [
+        {
+          "edge": 10,
+          "index": 6,
+          "reason": "Threshold/recess relief exceeds 18cm"
+        }
+      ]
+    },
+    {
+      "kind": "convention",
+      "placement": {
+        "lon": -123.1159678,
+        "lat": 49.2890752,
+        "yaw": -0.403,
+        "baseY": 4
+      },
+      "accepted": 4
+    },
+    {
+      "kind": "vancouver-house",
+      "placement": {
+        "lon": -123.131029,
+        "lat": 49.2749256,
+        "yaw": -0.78,
+        "baseY": 14.140882560018866
+      }
+    }
+  ],
+  "records": [
+    {
+      "kind": "bc-place",
+      "placement": {
+        "lon": -123.1120067,
+        "lat": 49.2766985,
+        "yaw": 0.677,
+        "baseY": 5
+      },
+      "samples": [
+        {
+          "localXZ": [
+            106.67502401086539,
+            -2.7799541825733054
+          ],
+          "worldXZ": [
+            1242.7158412709096,
+            966.4487624570323
+          ],
+          "groundWorldY": 4.110016366290367,
+          "platformWorldY": null,
+          "selectedWorldY": 4.110016366290367
+        },
+        {
+          "localXZ": [
+            106.73,
+            0
+          ],
+          "worldXZ": [
+            1244.5002157044416,
+            968.5811731814345
+          ],
+          "groundWorldY": 4.082056641346864,
+          "platformWorldY": null,
+          "selectedWorldY": 4.082056641346864
+        },
+        {
+          "localXZ": [
+            106.67502401086539,
+            2.7799541825733054
+          ],
+          "worldXZ": [
+            1246.1988874532294,
+            970.7824641450417
+          ],
+          "groundWorldY": 4.054203865435877,
+          "platformWorldY": null,
+          "selectedWorldY": 4.054203865435877
+        },
+        {
+          "localXZ": [
+            103.91228592202386,
+            19.77285958416369
+          ],
+          "worldXZ": [
+            1254.6907884820955,
+            985.758417291699
+          ],
+          "groundWorldY": 4.759138341257209,
+          "platformWorldY": null,
+          "selectedWorldY": 4.759138341257209
+        },
+        {
+          "localXZ": [
+            103.09195495408824,
+            22.423715997560116
+          ],
+          "worldXZ": [
+            1255.712025746667,
+            988.3385446278687
+          ],
+          "groundWorldY": 4.809668117320618,
+          "platformWorldY": null,
+          "selectedWorldY": 4.809668117320618
+        },
+        {
+          "localXZ": [
+            102.16899723002669,
+            25.05222216263519
+          ],
+          "worldXZ": [
+            1256.639268531649,
+            990.9655422369162
+          ],
+          "groundWorldY": 4.855547142603942,
+          "platformWorldY": null,
+          "selectedWorldY": 4.855547142603942
+        },
+        {
+          "localXZ": [
+            93.99613898158763,
+            41.032549498678314
+          ],
+          "worldXZ": [
+            1260.2798840244855,
+            1008.5414459846467
+          ],
+          "groundWorldY": 5.01770157537823,
+          "platformWorldY": null,
+          "selectedWorldY": 5.01770157537823
+        },
+        {
+          "localXZ": [
+            92.42679376149236,
+            43.317212075816514
+          ],
+          "worldXZ": [
+            1260.4878930710092,
+            1011.3053670666922
+          ],
+          "groundWorldY": 5.023714591991211,
+          "platformWorldY": null,
+          "selectedWorldY": 5.023714591991211
+        },
+        {
+          "localXZ": [
+            90.77318828059377,
+            45.56234772252115
+          ],
+          "worldXZ": [
+            1260.6054630445128,
+            1014.0912641322516
+          ],
+          "groundWorldY": 5.025351350554576,
+          "platformWorldY": null,
+          "selectedWorldY": 5.025351350554576
+        },
+        {
+          "localXZ": [
+            93.45270134803725,
+            40.771275286976916
+          ],
+          "worldXZ": [
+            1259.692621335784,
+            1008.6782349086063
+          ],
+          "groundWorldY": 4.989293021024877,
+          "platformWorldY": null,
+          "selectedWorldY": 4.989293021024877
+        },
+        {
+          "localXZ": [
+            91.88351146431788,
+            43.055831853056866
+          ],
+          "worldXZ": [
+            1259.9006850486949,
+            1011.4419760481047
+          ],
+          "groundWorldY": 4.9953089228505245,
+          "platformWorldY": null,
+          "selectedWorldY": 4.9953089228505245
+        },
+        {
+          "localXZ": [
+            90.22955280120739,
+            45.30062892630525
+          ],
+          "worldXZ": [
+            1260.017767630473,
+            1014.2278304643273
+          ],
+          "groundWorldY": 4.99692232893568,
+          "platformWorldY": null,
+          "selectedWorldY": 4.99692232893568
+        },
+        {
+          "localXZ": [
+            93.4403875989855,
+            40.765355103587325
+          ],
+          "worldXZ": [
+            1259.6793145720126,
+            1008.6813344287323
+          ],
+          "groundWorldY": 4.9886493125955855,
+          "platformWorldY": null,
+          "selectedWorldY": 4.9886493125955855
+        },
+        {
+          "localXZ": [
+            91.8712012571567,
+            43.04990925221533
+          ],
+          "worldXZ": [
+            1259.887379531239,
+            1011.4450714650903
+          ],
+          "groundWorldY": 4.994665280200983,
+          "platformWorldY": null,
+          "selectedWorldY": 4.994665280200983
+        },
+        {
+          "localXZ": [
+            90.21723454234007,
+            45.2946986066913
+          ],
+          "worldXZ": [
+            1260.004451001587,
+            1014.2309249089242
+          ],
+          "groundWorldY": 4.9962781539025185,
+          "platformWorldY": null,
+          "selectedWorldY": 4.9962781539025185
+        },
+        {
+          "localXZ": [
+            77.59079625167884,
+            59.47989669792394
+          ],
+          "worldXZ": [
+            1259.0491264660313,
+            1033.1975836507045
+          ],
+          "groundWorldY": 4.837484746501034,
+          "platformWorldY": null,
+          "selectedWorldY": 4.837484746501034
+        },
+        {
+          "localXZ": [
+            75.46334650782325,
+            61.25632023628055
+          ],
+          "worldXZ": [
+            1258.503727671034,
+            1035.9149837233242
+          ],
+          "groundWorldY": 4.747001851087086,
+          "platformWorldY": null,
+          "selectedWorldY": 4.747001851087086
+        },
+        {
+          "localXZ": [
+            73.27419451519799,
+            62.982625342723054
+          ],
+          "worldXZ": [
+            1257.8788376464042,
+            1038.631972538992
+          ],
+          "groundWorldY": 4.655125448175278,
+          "platformWorldY": null,
+          "selectedWorldY": 4.655125448175278
+        },
+        {
+          "localXZ": [
+            55.855992073798234,
+            73.81278962634133
+          ],
+          "worldXZ": [
+            1251.086759705488,
+            1057.9853678985733
+          ],
+          "groundWorldY": 4.23169482936637,
+          "platformWorldY": null,
+          "selectedWorldY": 4.23169482936637
+        },
+        {
+          "localXZ": [
+            53.358939487593325,
+            75.01972566765355
+          ],
+          "worldXZ": [
+            1249.896512204581,
+            1060.490418219959
+          ],
+          "groundWorldY": 4.211953182279316,
+          "platformWorldY": null,
+          "selectedWorldY": 4.211953182279316
+        },
+        {
+          "localXZ": [
+            50.82233385003213,
+            76.17102731436647
+          ],
+          "worldXZ": [
+            1248.6405822738282,
+            1062.97688230602
+          ],
+          "groundWorldY": 4.1910402945131855,
+          "platformWorldY": null,
+          "selectedWorldY": 4.1910402945131855
+        },
+        {
+          "localXZ": [
+            30.326275329548672,
+            83.05147270430867
+          ],
+          "worldXZ": [
+            1236.975121244607,
+            1081.179793134093
+          ],
+          "groundWorldY": 4.055714292393056,
+          "platformWorldY": null,
+          "selectedWorldY": 4.055714292393056
+        },
+        {
+          "localXZ": [
+            27.620048322336597,
+            83.67100438584124
+          ],
+          "worldXZ": [
+            1235.2538477158748,
+            1083.3580267208033
+          ],
+          "groundWorldY": 4.061414506678887,
+          "platformWorldY": null,
+          "selectedWorldY": 4.061414506678887
+        },
+        {
+          "localXZ": [
+            24.894657572290228,
+            84.2324624136067
+          ],
+          "worldXZ": [
+            1233.4812562257703,
+            1085.5029997431486
+          ],
+          "groundWorldY": 4.067695389501434,
+          "platformWorldY": null,
+          "selectedWorldY": 4.067695389501434
+        },
+        {
+          "localXZ": [
+            2.7792372330036534,
+            86.59229462369424
+          ],
+          "worldXZ": [
+            1217.7216026252868,
+            1101.1967546550832
+          ],
+          "groundWorldY": 4.137659630456401,
+          "platformWorldY": null,
+          "selectedWorldY": 4.137659630456401
+        },
+        {
+          "localXZ": [
+            6.53440403910966e-15,
+            86.62166666666667
+          ],
+          "worldXZ": [
+            1215.5737109476531,
+            1102.9607228110808
+          ],
+          "groundWorldY": 4.148763257561384,
+          "platformWorldY": null,
+          "selectedWorldY": 4.148763257561384
+        },
+        {
+          "localXZ": [
+            -2.77923723300364,
+            86.59229462369424
+          ],
+          "worldXZ": [
+            1213.3890185979858,
+            1104.6789025605617
+          ],
+          "groundWorldY": 4.160375037577857,
+          "platformWorldY": null,
+          "selectedWorldY": 4.160375037577857
+        },
+        {
+          "localXZ": [
+            -24.894657572290235,
+            84.2324624136067
+          ],
+          "worldXZ": [
+            1194.672695919362,
+            1116.693888629332
+          ],
+          "groundWorldY": 4.2740886481107685,
+          "platformWorldY": null,
+          "selectedWorldY": 4.2740886481107685
+        },
+        {
+          "localXZ": [
+            -27.620048322336608,
+            83.67100438584124
+          ],
+          "worldXZ": [
+            1192.1966452670888,
+            1117.9635984484469
+          ],
+          "groundWorldY": 4.285528577808465,
+          "platformWorldY": null,
+          "selectedWorldY": 4.285528577808465
+        },
+        {
+          "localXZ": [
+            -30.326275329548675,
+            83.05147270430867
+          ],
+          "worldXZ": [
+            1189.6991512266247,
+            1119.176037163118
+          ],
+          "groundWorldY": 4.297994658247454,
+          "platformWorldY": null,
+          "selectedWorldY": 4.297994658247454
+        },
+        {
+          "localXZ": [
+            -50.8223338500321,
+            76.17102731436648
+          ],
+          "worldXZ": [
+            1169.4130772397054,
+            1126.6529446679824
+          ],
+          "groundWorldY": 4.455915528438259,
+          "platformWorldY": null,
+          "selectedWorldY": 4.455915528438259
+        },
+        {
+          "localXZ": [
+            -53.35893948759329,
+            75.01972566765355
+          ],
+          "worldXZ": [
+            1166.714664252786,
+            1127.3446317318014
+          ],
+          "groundWorldY": 4.488903128372344,
+          "platformWorldY": null,
+          "selectedWorldY": 4.488903128372344
+        },
+        {
+          "localXZ": [
+            -55.8559920737982,
+            73.81278962634134
+          ],
+          "worldXZ": [
+            1164.012228530451,
+            1127.9681759505538
+          ],
+          "groundWorldY": 4.522879297276257,
+          "platformWorldY": null,
+          "selectedWorldY": 4.522879297276257
+        },
+        {
+          "localXZ": [
+            -73.27419451519798,
+            62.98262534272306
+          ],
+          "worldXZ": [
+            1143.6508757437762,
+            1130.4383069989624
+          ],
+          "groundWorldY": 4.871067734830935,
+          "platformWorldY": null,
+          "selectedWorldY": 4.871067734830935
+        },
+        {
+          "localXZ": [
+            -75.46334650782323,
+            61.256320236280565
+          ],
+          "worldXZ": [
+            1140.8630722264688,
+            1130.4641394636703
+          ],
+          "groundWorldY": 5.173625152340491,
+          "platformWorldY": null,
+          "selectedWorldY": 5.173625152340491
+        },
+        {
+          "localXZ": [
+            -77.59079625167882,
+            59.479896697923955
+          ],
+          "worldXZ": [
+            1138.0919658056973,
+            1130.4122530009022
+          ],
+          "groundWorldY": 5.505684103398627,
+          "platformWorldY": null,
+          "selectedWorldY": 5.505684103398627
+        },
+        {
+          "localXZ": [
+            -90.77318828059377,
+            45.56234772252117
+          ],
+          "worldXZ": [
+            1119.0981239151124,
+            1127.822349658652
+          ],
+          "groundWorldY": 7.237111892248738,
+          "platformWorldY": null,
+          "selectedWorldY": 7.237111892248738
+        },
+        {
+          "localXZ": [
+            -92.42679376149236,
+            43.317212075816514
+          ],
+          "worldXZ": [
+            1116.402729850552,
+            1127.1082796373698
+          ],
+          "groundWorldY": 7.3602477212422315,
+          "platformWorldY": null,
+          "selectedWorldY": 7.3602477212422315
+        },
+        {
+          "localXZ": [
+            -93.99613898158763,
+            41.032549498678314
+          ],
+          "worldXZ": [
+            1113.748250976565,
+            1126.310614658342
+          ],
+          "groundWorldY": 7.477342518763271,
+          "platformWorldY": null,
+          "selectedWorldY": 7.477342518763271
+        },
+        {
+          "localXZ": [
+            -102.16899723002668,
+            25.052222162635207
+          ],
+          "worldXZ": [
+            1097.3668752909343,
+            1118.9746072726864
+          ],
+          "groundWorldY": 6.82671671594161,
+          "platformWorldY": null,
+          "selectedWorldY": 6.82671671594161
+        },
+        {
+          "localXZ": [
+            -103.09195495408822,
+            22.423715997560137
+          ],
+          "worldXZ": [
+            1095.0008233803198,
+            1117.503997203184
+          ],
+          "groundWorldY": 6.5098987566810465,
+          "platformWorldY": null,
+          "selectedWorldY": 6.5098987566810465
+        },
+        {
+          "localXZ": [
+            -103.91228592202384,
+            19.77285958416372
+          ],
+          "worldXZ": [
+            1092.7007629888228,
+            1115.9516748085557
+          ],
+          "groundWorldY": 6.1879341104401595,
+          "platformWorldY": null,
+          "selectedWorldY": 6.1879341104401595
+        },
+        {
+          "localXZ": [
+            -106.67502401086539,
+            2.7799541825733183
+          ],
+          "worldXZ": [
+            1079.9019986331455,
+            1104.4371975428357
+          ],
+          "groundWorldY": 5.015934382625907,
+          "platformWorldY": null,
+          "selectedWorldY": 5.015934382625907
+        },
+        {
+          "localXZ": [
+            -106.73,
+            1.0610371098173187e-14
+          ],
+          "worldXZ": [
+            1078.1176241996134,
+            1102.3047868184337
+          ],
+          "groundWorldY": 4.97364697009173,
+          "platformWorldY": null,
+          "selectedWorldY": 4.97364697009173
+        },
+        {
+          "localXZ": [
+            -106.67502401086539,
+            -2.779954182573297
+          ],
+          "worldXZ": [
+            1076.4189524508256,
+            1100.1034958548266
+          ],
+          "groundWorldY": 4.922581510762457,
+          "platformWorldY": null,
+          "selectedWorldY": 4.922581510762457
+        },
+        {
+          "localXZ": [
+            -106.04265083905985,
+            2.779830044288917
+          ],
+          "worldXZ": [
+            1080.3948276732615,
+            1104.0409458790564
+          ],
+          "groundWorldY": 5.0209319797602765,
+          "platformWorldY": null,
+          "selectedWorldY": 5.0209319797602765
+        },
+        {
+          "localXZ": [
+            -106.09796719131295,
+            1.0545871626129665e-14
+          ],
+          "worldXZ": [
+            1078.6102657091487,
+            1101.908845137956
+          ],
+          "groundWorldY": 4.98879439377098,
+          "platformWorldY": null,
+          "selectedWorldY": 4.98879439377098
+        },
+        {
+          "localXZ": [
+            -106.04265083905985,
+            -2.779830044288896
+          ],
+          "worldXZ": [
+            1076.911937025655,
+            1099.7074377116078
+          ],
+          "groundWorldY": 4.937739430804966,
+          "platformWorldY": null,
+          "selectedWorldY": 4.937739430804966
+        },
+        {
+          "localXZ": [
+            -103.91228592202387,
+            -19.772859584163662
+          ],
+          "worldXZ": [
+            1067.9270514219593,
+            1085.1275427081694
+          ],
+          "groundWorldY": 4.8837814416432614,
+          "platformWorldY": null,
+          "selectedWorldY": 4.8837814416432614
+        },
+        {
+          "localXZ": [
+            -103.09195495408825,
+            -22.42371599756008
+          ],
+          "worldXZ": [
+            1066.905814157388,
+            1082.5474153719997
+          ],
+          "groundWorldY": 4.95994988111002,
+          "platformWorldY": null,
+          "selectedWorldY": 4.95994988111002
+        },
+        {
+          "localXZ": [
+            -102.1689972300267,
+            -25.05222216263515
+          ],
+          "worldXZ": [
+            1065.9785713724061,
+            1079.9204177629522
+          ],
+          "groundWorldY": 5.022750565742988,
+          "platformWorldY": null,
+          "selectedWorldY": 5.022750565742988
+        },
+        {
+          "localXZ": [
+            -103.30485244328678,
+            -19.637371960952315
+          ],
+          "worldXZ": [
+            1068.4853960810897,
+            1084.8526180480267
+          ],
+          "groundWorldY": 4.8925142464642075,
+          "platformWorldY": null,
+          "selectedWorldY": 4.8925142464642075
+        },
+        {
+          "localXZ": [
+            -102.4847489105341,
+            -22.288136239705484
+          ],
+          "worldXZ": [
+            1067.4640392593287,
+            1082.2727050051917
+          ],
+          "groundWorldY": 4.968676170817751,
+          "platformWorldY": null,
+          "selectedWorldY": 4.968676170817751
+        },
+        {
+          "localXZ": [
+            -101.56139000478478,
+            -24.916416704920145
+          ],
+          "worldXZ": [
+            1066.5372505690243,
+            1079.645631995894
+          ],
+          "groundWorldY": 5.027648558810578,
+          "platformWorldY": null,
+          "selectedWorldY": 5.027648558810578
+        },
+        {
+          "localXZ": [
+            -93.99613898158762,
+            -41.03254949867833
+          ],
+          "worldXZ": [
+            1062.3379558795696,
+            1062.3445140152214
+          ],
+          "groundWorldY": 5.3318019837625945,
+          "platformWorldY": null,
+          "selectedWorldY": 5.3318019837625945
+        },
+        {
+          "localXZ": [
+            -92.42679376149236,
+            -43.31721207581653
+          ],
+          "worldXZ": [
+            1062.1299468330458,
+            1059.580592933176
+          ],
+          "groundWorldY": 5.401856808594265,
+          "platformWorldY": null,
+          "selectedWorldY": 5.401856808594265
+        },
+        {
+          "localXZ": [
+            -90.77318828059376,
+            -45.56234772252118
+          ],
+          "worldXZ": [
+            1062.0123768595422,
+            1056.7946958676166
+          ],
+          "groundWorldY": 5.471742659642627,
+          "platformWorldY": null,
+          "selectedWorldY": 5.471742659642627
+        },
+        {
+          "localXZ": [
+            -93.64605118893809,
+            -40.864233852638264
+          ],
+          "worldXZ": [
+            1062.7162763640415,
+            1062.2563934711181
+          ],
+          "groundWorldY": 5.331000872649343,
+          "platformWorldY": null,
+          "selectedWorldY": 5.331000872649343
+        },
+        {
+          "localXZ": [
+            -92.07680581970774,
+            -43.14882828788014
+          ],
+          "worldXZ": [
+            1062.5082321762027,
+            1059.492588054976
+          ],
+          "groundWorldY": 5.401053111438079,
+          "platformWorldY": null,
+          "selectedWorldY": 5.401053111438079
+        },
+        {
+          "localXZ": [
+            -90.42297329851752,
+            -45.393746286503266
+          ],
+          "worldXZ": [
+            1062.3909755177935,
+            1056.7067184053428
+          ],
+          "groundWorldY": 5.470935813958674,
+          "platformWorldY": null,
+          "selectedWorldY": 5.470935813958674
+        },
+        {
+          "localXZ": [
+            -77.59079625167885,
+            -59.479896697923934
+          ],
+          "worldXZ": [
+            1063.5687134380237,
+            1037.688376349164
+          ],
+          "groundWorldY": 5.811946032708081,
+          "platformWorldY": null,
+          "selectedWorldY": 5.811946032708081
+        },
+        {
+          "localXZ": [
+            -75.46334650782326,
+            -61.25632023628055
+          ],
+          "worldXZ": [
+            1064.114112233021,
+            1034.970976276544
+          ],
+          "groundWorldY": 5.845934842550697,
+          "platformWorldY": null,
+          "selectedWorldY": 5.845934842550697
+        },
+        {
+          "localXZ": [
+            -73.27419451519799,
+            -62.982625342723054
+          ],
+          "worldXZ": [
+            1064.7390022576508,
+            1032.2539874608763
+          ],
+          "groundWorldY": 5.879291217952132,
+          "platformWorldY": null,
+          "selectedWorldY": 5.879291217952132
+        },
+        {
+          "localXZ": [
+            -77.44907723958073,
+            -59.36187023422173
+          ],
+          "worldXZ": [
+            1063.7531156760517,
+            1037.6915918016048
+          ],
+          "groundWorldY": 5.810447059780841,
+          "platformWorldY": null,
+          "selectedWorldY": 5.810447059780841
+        },
+        {
+          "localXZ": [
+            -75.32167301682038,
+            -61.13826153078186
+          ],
+          "worldXZ": [
+            1064.2984991874912,
+            1034.9742453770643
+          ],
+          "groundWorldY": 5.8444352342024715,
+          "platformWorldY": null,
+          "selectedWorldY": 5.8444352342024715
+        },
+        {
+          "localXZ": [
+            -73.1324497874917,
+            -62.86444199939013
+          ],
+          "worldXZ": [
+            1064.9235228182715,
+            1032.2573090842884
+          ],
+          "groundWorldY": 5.877789816319703,
+          "platformWorldY": null,
+          "selectedWorldY": 5.877789816319703
+        },
+        {
+          "localXZ": [
+            -55.85599207379822,
+            -73.81278962634133
+          ],
+          "worldXZ": [
+            1071.531080198567,
+            1012.900592101295
+          ],
+          "groundWorldY": 6.03881632587627,
+          "platformWorldY": null,
+          "selectedWorldY": 6.03881632587627
+        },
+        {
+          "localXZ": [
+            -53.35893948759336,
+            -75.01972566765353
+          ],
+          "worldXZ": [
+            1072.721327699474,
+            1010.3955417799091
+          ],
+          "groundWorldY": 6.071460142917815,
+          "platformWorldY": null,
+          "selectedWorldY": 6.071460142917815
+        },
+        {
+          "localXZ": [
+            -50.82233385003221,
+            -76.17102731436644
+          ],
+          "worldXZ": [
+            1073.9772576302269,
+            1007.9090776938484
+          ],
+          "groundWorldY": 6.103813449302659,
+          "platformWorldY": null,
+          "selectedWorldY": 6.103813449302659
+        },
+        {
+          "localXZ": [
+            -55.81192297404393,
+            -73.74922072503496
+          ],
+          "worldXZ": [
+            1071.6052533186835,
+            1012.9225338199759
+          ],
+          "groundWorldY": 6.038475550775452,
+          "platformWorldY": null,
+          "selectedWorldY": 6.038475550775452
+        },
+        {
+          "localXZ": [
+            -53.31489222958835,
+            -74.95615011297586
+          ],
+          "worldXZ": [
+            1072.7954879629708,
+            1010.4175023675245
+          ],
+          "groundWorldY": 6.07111912445493,
+          "platformWorldY": null,
+          "selectedWorldY": 6.07111912445493
+        },
+        {
+          "localXZ": [
+            -50.7782759432708,
+            -76.10740060752396
+          ],
+          "worldXZ": [
+            1074.0514582386127,
+            1007.9310714813118
+          ],
+          "groundWorldY": 6.103471961821671,
+          "platformWorldY": null,
+          "selectedWorldY": 6.103471961821671
+        },
+        {
+          "localXZ": [
+            -30.326275329548636,
+            -83.05147270430867
+          ],
+          "worldXZ": [
+            1085.642718659448,
+            989.706166865775
+          ],
+          "groundWorldY": 6.261337025398567,
+          "platformWorldY": null,
+          "selectedWorldY": 6.261337025398567
+        },
+        {
+          "localXZ": [
+            -27.620048322336586,
+            -83.67100438584124
+          ],
+          "worldXZ": [
+            1087.3639921881802,
+            987.527933279065
+          ],
+          "groundWorldY": 6.268022482494892,
+          "platformWorldY": null,
+          "selectedWorldY": 6.268022482494892
+        },
+        {
+          "localXZ": [
+            -24.89465757229024,
+            -84.2324624136067
+          ],
+          "worldXZ": [
+            1089.1365836782848,
+            985.3829602567195
+          ],
+          "groundWorldY": 6.273597314184166,
+          "platformWorldY": null,
+          "selectedWorldY": 6.273597314184166
+        },
+        {
+          "localXZ": [
+            -2.7792372330036903,
+            -86.59229462369424
+          ],
+          "worldXZ": [
+            1104.896237278768,
+            969.689205344785
+          ],
+          "groundWorldY": 6.314010280515534,
+          "platformWorldY": null,
+          "selectedWorldY": 6.314010280515534
+        },
+        {
+          "localXZ": [
+            -1.9603212117328976e-14,
+            -86.62166666666667
+          ],
+          "worldXZ": [
+            1107.044128956402,
+            967.9252371887873
+          ],
+          "groundWorldY": 6.313763984653201,
+          "platformWorldY": null,
+          "selectedWorldY": 6.313763984653201
+        },
+        {
+          "localXZ": [
+            2.7792372330036508,
+            -86.59229462369424
+          ],
+          "worldXZ": [
+            1109.2288213060692,
+            966.2070574393065
+          ],
+          "groundWorldY": 6.312321192462418,
+          "platformWorldY": null,
+          "selectedWorldY": 6.312321192462418
+        },
+        {
+          "localXZ": [
+            -2.779240573422336,
+            -86.60647005845684
+          ],
+          "worldXZ": [
+            1104.8873543679238,
+            969.6781583154651
+          ],
+          "groundWorldY": 6.314299006010266,
+          "platformWorldY": null,
+          "selectedWorldY": 6.314299006010266
+        },
+        {
+          "localXZ": [
+            -1.960633596217442e-14,
+            -86.63583761688147
+          ],
+          "worldXZ": [
+            1107.0352514586439,
+            967.9141915623428
+          ],
+          "groundWorldY": 6.314052617791842,
+          "platformWorldY": null,
+          "selectedWorldY": 6.314052617791842
+        },
+        {
+          "localXZ": [
+            2.779240573422297,
+            -86.60647005845684
+          ],
+          "worldXZ": [
+            1109.2199436026408,
+            966.1960062247257
+          ],
+          "groundWorldY": 6.312609915927012,
+          "platformWorldY": null,
+          "selectedWorldY": 6.312609915927012
+        },
+        {
+          "localXZ": [
+            24.8946575722902,
+            -84.23246241360671
+          ],
+          "worldXZ": [
+            1127.945143984693,
+            954.1920713705363
+          ],
+          "groundWorldY": 5.680012132717165,
+          "platformWorldY": null,
+          "selectedWorldY": 5.680012132717165
+        },
+        {
+          "localXZ": [
+            27.62004832233655,
+            -83.67100438584126
+          ],
+          "worldXZ": [
+            1130.4211946369662,
+            952.9223615514215
+          ],
+          "groundWorldY": 5.581963961853141,
+          "platformWorldY": null,
+          "selectedWorldY": 5.581963961853141
+        },
+        {
+          "localXZ": [
+            30.3262753295486,
+            -83.05147270430868
+          ],
+          "worldXZ": [
+            1132.9186886774303,
+            951.7099228367504
+          ],
+          "groundWorldY": 5.488765855883546,
+          "platformWorldY": null,
+          "selectedWorldY": 5.488765855883546
+        },
+        {
+          "localXZ": [
+            50.82233385003217,
+            -76.17102731436644
+          ],
+          "worldXZ": [
+            1153.2047626643496,
+            944.2330153318856
+          ],
+          "groundWorldY": 4.897048957045034,
+          "platformWorldY": null,
+          "selectedWorldY": 4.897048957045034
+        },
+        {
+          "localXZ": [
+            53.358939487593325,
+            -75.01972566765355
+          ],
+          "worldXZ": [
+            1155.903175651269,
+            943.5413282680665
+          ],
+          "groundWorldY": 4.840426302541507,
+          "platformWorldY": null,
+          "selectedWorldY": 4.840426302541507
+        },
+        {
+          "localXZ": [
+            55.855992073798184,
+            -73.81278962634134
+          ],
+          "worldXZ": [
+            1158.605611373604,
+            942.9177840493145
+          ],
+          "groundWorldY": 4.78215154714059,
+          "platformWorldY": null,
+          "selectedWorldY": 4.78215154714059
+        },
+        {
+          "localXZ": [
+            73.27419451519796,
+            -62.98262534272307
+          ],
+          "worldXZ": [
+            1178.9669641602788,
+            940.4476530009058
+          ],
+          "groundWorldY": 4.3917760371032415,
+          "platformWorldY": null,
+          "selectedWorldY": 4.3917760371032415
+        },
+        {
+          "localXZ": [
+            75.46334650782322,
+            -61.25632023628057
+          ],
+          "worldXZ": [
+            1181.7547676775862,
+            940.4218205361977
+          ],
+          "groundWorldY": 4.394075688187994,
+          "platformWorldY": null,
+          "selectedWorldY": 4.394075688187994
+        },
+        {
+          "localXZ": [
+            77.59079625167881,
+            -59.479896697923955
+          ],
+          "worldXZ": [
+            1184.5258740983577,
+            940.4737069989658
+          ],
+          "groundWorldY": 4.3946037296066836,
+          "platformWorldY": null,
+          "selectedWorldY": 4.3946037296066836
+        },
+        {
+          "localXZ": [
+            90.77318828059373,
+            -45.5623477225212
+          ],
+          "worldXZ": [
+            1203.5197159889424,
+            943.0636103412164
+          ],
+          "groundWorldY": 4.433905528270356,
+          "platformWorldY": null,
+          "selectedWorldY": 4.433905528270356
+        },
+        {
+          "localXZ": [
+            92.42679376149233,
+            -43.317212075816556
+          ],
+          "worldXZ": [
+            1206.215110053503,
+            943.7776803624985
+          ],
+          "groundWorldY": 4.435506424156189,
+          "platformWorldY": null,
+          "selectedWorldY": 4.435506424156189
+        },
+        {
+          "localXZ": [
+            93.9961389815876,
+            -41.03254949867836
+          ],
+          "worldXZ": [
+            1208.86958892749,
+            944.5753453415263
+          ],
+          "groundWorldY": 4.430821688098933,
+          "platformWorldY": null,
+          "selectedWorldY": 4.430821688098933
+        },
+        {
+          "localXZ": [
+            102.16899723002668,
+            -25.052222162635218
+          ],
+          "worldXZ": [
+            1225.2509646131207,
+            951.911352727182
+          ],
+          "groundWorldY": 4.274265522210762,
+          "platformWorldY": null,
+          "selectedWorldY": 4.274265522210762
+        },
+        {
+          "localXZ": [
+            103.09195495408824,
+            -22.42371599756011
+          ],
+          "worldXZ": [
+            1227.6170165237352,
+            953.3819627966841
+          ],
+          "groundWorldY": 4.244159967574975,
+          "platformWorldY": null,
+          "selectedWorldY": 4.244159967574975
+        },
+        {
+          "localXZ": [
+            103.91228592202387,
+            -19.772859584163655
+          ],
+          "worldXZ": [
+            1229.9170769152324,
+            954.9342851913126
+          ],
+          "groundWorldY": 4.227476555229895,
+          "platformWorldY": null,
+          "selectedWorldY": 4.227476555229895
+        },
+        {
+          "localXZ": [
+            94.53640146540586,
+            40.72662342338668
+          ],
+          "worldXZ": [
+            1260.509344962632,
+            1007.9645387192827
+          ],
+          "groundWorldY": 5.029555329873945,
+          "platformWorldY": null,
+          "selectedWorldY": 5.029555329873945
+        },
+        {
+          "localXZ": [
+            93.64009948801183,
+            40.0889379481565
+          ],
+          "worldXZ": [
+            1259.4112345350045,
+            1008.0289862850717
+          ],
+          "groundWorldY": 4.9767102415934685,
+          "platformWorldY": null,
+          "selectedWorldY": 4.9767102415934685
+        },
+        {
+          "localXZ": [
+            92.80898310897372,
+            39.49762959839761
+          ],
+          "worldXZ": [
+            1258.392986683932,
+            1008.088746755167
+          ],
+          "groundWorldY": 4.92770843246067,
+          "platformWorldY": null,
+          "selectedWorldY": 4.92770843246067
+        },
+        {
+          "localXZ": [
+            92.62334503971533,
+            43.41552935556879
+          ],
+          "worldXZ": [
+            1260.7026876599991,
+            1011.2588700021646
+          ],
+          "groundWorldY": 5.034100089784151,
+          "platformWorldY": null,
+          "selectedWorldY": 5.034100089784151
+        },
+        {
+          "localXZ": [
+            91.7270430623213,
+            42.777843880338615
+          ],
+          "worldXZ": [
+            1259.6045772323719,
+            1011.3233175679537
+          ],
+          "groundWorldY": 4.981255001503685,
+          "platformWorldY": null,
+          "selectedWorldY": 4.981255001503685
+        },
+        {
+          "localXZ": [
+            90.8959266832832,
+            42.18653553057972
+          ],
+          "worldXZ": [
+            1258.586329381299,
+            1011.383078038049
+          ],
+          "groundWorldY": 4.932253192370877,
+          "platformWorldY": null,
+          "selectedWorldY": 4.932253192370877
+        },
+        {
+          "localXZ": [
+            90.7102886140248,
+            46.10443528775091
+          ],
+          "worldXZ": [
+            1260.8960303573663,
+            1014.5532012850466
+          ],
+          "groundWorldY": 5.038644849694358,
+          "platformWorldY": null,
+          "selectedWorldY": 5.038644849694358
+        },
+        {
+          "localXZ": [
+            89.81398663663077,
+            45.46674981252073
+          ],
+          "worldXZ": [
+            1259.797919929739,
+            1014.6176488508356
+          ],
+          "groundWorldY": 4.985799761413892,
+          "platformWorldY": null,
+          "selectedWorldY": 4.985799761413892
+        },
+        {
+          "localXZ": [
+            88.98287025759267,
+            44.87544146276184
+          ],
+          "worldXZ": [
+            1258.7796720786662,
+            1014.6774093209309
+          ],
+          "groundWorldY": 4.936797952281083,
+          "platformWorldY": null,
+          "selectedWorldY": 4.936797952281083
+        },
+        {
+          "localXZ": [
+            -106.97046598988013,
+            3.3000000000000105
+          ],
+          "worldXZ": [
+            1079.9975013214962,
+            1105.0276320029625
+          ],
+          "groundWorldY": 5.016685042275862,
+          "platformWorldY": null,
+          "selectedWorldY": 5.016685042275862
+        },
+        {
+          "localXZ": [
+            -105.87046598988013,
+            3.3000000000000105
+          ],
+          "worldXZ": [
+            1080.8549024770068,
+            1104.3385287751883
+          ],
+          "groundWorldY": 5.02537954003268,
+          "platformWorldY": null,
+          "selectedWorldY": 5.02537954003268
+        },
+        {
+          "localXZ": [
+            -104.85046598988013,
+            3.30000000000001
+          ],
+          "worldXZ": [
+            1081.649947184844,
+            1103.6995421457975
+          ],
+          "groundWorldY": 5.033441710679912,
+          "platformWorldY": null,
+          "selectedWorldY": 5.033441710679912
+        },
+        {
+          "localXZ": [
+            -106.97046598988013,
+            1.0635888070501894e-14
+          ],
+          "worldXZ": [
+            1077.9301916381733,
+            1102.4554285364304
+          ],
+          "groundWorldY": 4.9678839144732585,
+          "platformWorldY": null,
+          "selectedWorldY": 4.9678839144732585
+        },
+        {
+          "localXZ": [
+            -105.87046598988013,
+            1.0469885433571241e-14
+          ],
+          "worldXZ": [
+            1078.7875927936839,
+            1101.7663253086562
+          ],
+          "groundWorldY": 4.994246732697501,
+          "platformWorldY": null,
+          "selectedWorldY": 4.994246732697501
+        },
+        {
+          "localXZ": [
+            -104.85046598988013,
+            1.0315955715690091e-14
+          ],
+          "worldXZ": [
+            1079.582637501521,
+            1101.1273386792654
+          ],
+          "groundWorldY": 5.013860098108392,
+          "platformWorldY": null,
+          "selectedWorldY": 5.013860098108392
+        },
+        {
+          "localXZ": [
+            -106.97046598988013,
+            -3.299999999999989
+          ],
+          "worldXZ": [
+            1075.8628819548503,
+            1099.8832250698983
+          ],
+          "groundWorldY": 4.905701601219679,
+          "platformWorldY": null,
+          "selectedWorldY": 4.905701601219679
+        },
+        {
+          "localXZ": [
+            -105.87046598988013,
+            -3.299999999999989
+          ],
+          "worldXZ": [
+            1076.720283110361,
+            1099.194121842124
+          ],
+          "groundWorldY": 4.932064419443922,
+          "platformWorldY": null,
+          "selectedWorldY": 4.932064419443922
+        },
+        {
+          "localXZ": [
+            -104.85046598988013,
+            -3.2999999999999896
+          ],
+          "worldXZ": [
+            1077.515327818198,
+            1098.5551352127334
+          ],
+          "groundWorldY": 4.956509941797313,
+          "platformWorldY": null,
+          "selectedWorldY": 4.956509941797313
+        },
+        {
+          "localXZ": [
+            -104.36182620707811,
+            -19.34466292223681
+          ],
+          "worldXZ": [
+            1067.84490173287,
+            1085.7429208665033
+          ],
+          "groundWorldY": 4.865313658253015,
+          "platformWorldY": null,
+          "selectedWorldY": 4.865313658253015
+        },
+        {
+          "localXZ": [
+            -103.31729367880111,
+            -18.99976902932007
+          ],
+          "worldXZ": [
+            1068.875129816108,
+            1085.3573951261071
+          ],
+          "groundWorldY": 4.877788196703933,
+          "platformWorldY": null,
+          "selectedWorldY": 4.877788196703933
+        },
+        {
+          "localXZ": [
+            -102.34872715258062,
+            -18.67995832861546
+          ],
+          "worldXZ": [
+            1069.8304322205652,
+            1084.9999076213765
+          ],
+          "groundWorldY": 4.889355495994775,
+          "platformWorldY": null,
+          "selectedWorldY": 4.889355495994775
+        },
+        {
+          "localXZ": [
+            -103.32714452832789,
+            -22.478260507067805
+          ],
+          "worldXZ": [
+            1066.6883245116821,
+            1082.6522366167894
+          ],
+          "groundWorldY": 4.9566160421824135,
+          "platformWorldY": null,
+          "selectedWorldY": 4.9566160421824135
+        },
+        {
+          "localXZ": [
+            -102.28261200005089,
+            -22.133366614151065
+          ],
+          "worldXZ": [
+            1067.7185525949203,
+            1082.2667108763933
+          ],
+          "groundWorldY": 4.969090580633331,
+          "platformWorldY": null,
+          "selectedWorldY": 4.969090580633331
+        },
+        {
+          "localXZ": [
+            -101.3140454738304,
+            -21.813555913446454
+          ],
+          "worldXZ": [
+            1068.6738549993775,
+            1081.9092233716626
+          ],
+          "groundWorldY": 4.980657879924174,
+          "platformWorldY": null,
+          "selectedWorldY": 4.980657879924174
+        },
+        {
+          "localXZ": [
+            -102.29246284957767,
+            -25.6118580918988
+          ],
+          "worldXZ": [
+            1065.5317472904944,
+            1079.5615523670754
+          ],
+          "groundWorldY": 5.0280597917614145,
+          "platformWorldY": null,
+          "selectedWorldY": 5.0280597917614145
+        },
+        {
+          "localXZ": [
+            -101.24793032130067,
+            -25.26696419898206
+          ],
+          "worldXZ": [
+            1066.5619753737326,
+            1079.1760266266795
+          ],
+          "groundWorldY": 5.035159461216688,
+          "platformWorldY": null,
+          "selectedWorldY": 5.035159461216688
+        },
+        {
+          "localXZ": [
+            -100.27936379508019,
+            -24.947153498277448
+          ],
+          "worldXZ": [
+            1067.5172777781895,
+            1078.8185391219488
+          ],
+          "groundWorldY": 5.041742791075213,
+          "platformWorldY": null,
+          "selectedWorldY": 5.041742791075213
+        },
+        {
+          "localXZ": [
+            -94.74186015850218,
+            -40.82545425948121
+          ],
+          "worldXZ": [
+            1061.8864356968534,
+            1062.9730981674213
+          ],
+          "groundWorldY": 5.319802096075937,
+          "platformWorldY": null,
+          "selectedWorldY": 5.319802096075937
+        },
+        {
+          "localXZ": [
+            -93.84554022064108,
+            -40.18779402942708
+          ],
+          "worldXZ": [
+            1062.9845443088377,
+            1062.9086196726698
+          ],
+          "groundWorldY": 5.312741591214942,
+          "platformWorldY": null,
+          "selectedWorldY": 5.312741591214942
+        },
+        {
+          "localXZ": [
+            -93.01440718735171,
+            -39.59650908883144
+          ],
+          "worldXZ": [
+            1064.0027904763144,
+            1062.8488305229907
+          ],
+          "groundWorldY": 5.306194577616573,
+          "platformWorldY": null,
+          "selectedWorldY": 5.306194577616573
+        },
+        {
+          "localXZ": [
+            -92.8288794683398,
+            -43.5144140730645
+          ],
+          "worldXZ": [
+            1061.693000212598,
+            1059.6787723314678
+          ],
+          "groundWorldY": 5.402871091435098,
+          "platformWorldY": null,
+          "selectedWorldY": 5.402871091435098
+        },
+        {
+          "localXZ": [
+            -91.93255953047871,
+            -42.87675384301037
+          ],
+          "worldXZ": [
+            1062.7911088245826,
+            1059.6142938367161
+          ],
+          "groundWorldY": 5.395810586574107,
+          "platformWorldY": null,
+          "selectedWorldY": 5.395810586574107
+        },
+        {
+          "localXZ": [
+            -91.10142649718934,
+            -42.28546890241473
+          ],
+          "worldXZ": [
+            1063.8093549920593,
+            1059.554504687037
+          ],
+          "groundWorldY": 5.389263572975737,
+          "platformWorldY": null,
+          "selectedWorldY": 5.389263572975737
+        },
+        {
+          "localXZ": [
+            -90.91589877817744,
+            -46.20337388664779
+          ],
+          "worldXZ": [
+            1061.4995647283429,
+            1056.3844464955143
+          ],
+          "groundWorldY": 5.485940086794257,
+          "platformWorldY": null,
+          "selectedWorldY": 5.485940086794257
+        },
+        {
+          "localXZ": [
+            -90.01957884031634,
+            -45.56571365659366
+          ],
+          "worldXZ": [
+            1062.5976733403272,
+            1056.3199680007626
+          ],
+          "groundWorldY": 5.478879581933268,
+          "platformWorldY": null,
+          "selectedWorldY": 5.478879581933268
+        },
+        {
+          "localXZ": [
+            -89.18844580702697,
+            -44.974428715998016
+          ],
+          "worldXZ": [
+            1063.615919507804,
+            1056.2601788510838
+          ],
+          "groundWorldY": 5.472332568334894,
+          "platformWorldY": null,
+          "selectedWorldY": 5.472332568334894
+        },
+        {
+          "localXZ": [
+            -78.49711322484015,
+            -59.574663868729914
+          ],
+          "worldXZ": [
+            1062.8029119986265,
+            1038.1822785944714
+          ],
+          "groundWorldY": 5.811023846577129,
+          "platformWorldY": null,
+          "selectedWorldY": 5.811023846577129
+        },
+        {
+          "localXZ": [
+            -77.80393104067016,
+            -58.72055704897648
+          ],
+          "worldXZ": [
+            1063.8782783368474,
+            1038.413767770507
+          ],
+          "groundWorldY": 5.799284901884434,
+          "platformWorldY": null,
+          "selectedWorldY": 5.799284901884434
+        },
+        {
+          "localXZ": [
+            -77.16116210625799,
+            -57.928567088841476
+          ],
+          "worldXZ": [
+            1064.8754362141067,
+            1038.6284213701035
+          ],
+          "groundWorldY": 5.788399698623939,
+          "platformWorldY": null,
+          "selectedWorldY": 5.788399698623939
+        },
+        {
+          "localXZ": [
+            -75.93479276557984,
+            -61.654210421239874
+          ],
+          "worldXZ": [
+            1063.4973795267329,
+            1034.956179579809
+          ],
+          "groundWorldY": 5.851005113541937,
+          "platformWorldY": null,
+          "selectedWorldY": 5.851005113541937
+        },
+        {
+          "localXZ": [
+            -75.24161058140986,
+            -60.80010360148644
+          ],
+          "worldXZ": [
+            1064.5727458649537,
+            1035.1876687558445
+          ],
+          "groundWorldY": 5.839266168849245,
+          "platformWorldY": null,
+          "selectedWorldY": 5.839266168849245
+        },
+        {
+          "localXZ": [
+            -74.59884164699768,
+            -60.008113641351436
+          ],
+          "worldXZ": [
+            1065.569903742213,
+            1035.4023223554411
+          ],
+          "groundWorldY": 5.828380965588747,
+          "platformWorldY": null,
+          "selectedWorldY": 5.828380965588747
+        },
+        {
+          "localXZ": [
+            -73.37247230631954,
+            -63.733756973749834
+          ],
+          "worldXZ": [
+            1064.1918470548392,
+            1031.7300805651466
+          ],
+          "groundWorldY": 5.888004588544862,
+          "platformWorldY": null,
+          "selectedWorldY": 5.888004588544862
+        },
+        {
+          "localXZ": [
+            -72.67929012214955,
+            -62.8796501539964
+          ],
+          "worldXZ": [
+            1065.26721339306,
+            1031.961569741182
+          ],
+          "groundWorldY": 5.879247435814053,
+          "platformWorldY": null,
+          "selectedWorldY": 5.879247435814053
+        },
+        {
+          "localXZ": [
+            -72.03652118773738,
+            -62.087660193861396
+          ],
+          "worldXZ": [
+            1066.2643712703193,
+            1032.1762233407785
+          ],
+          "groundWorldY": 5.868362232553558,
+          "platformWorldY": null,
+          "selectedWorldY": 5.868362232553558
+        },
+        {
+          "localXZ": [
+            -56.73650490695144,
+            -74.18734574229612
+          ],
+          "worldXZ": [
+            1070.6101160630449,
+            1013.1602460911125
+          ],
+          "groundWorldY": 6.035949828995316,
+          "platformWorldY": null,
+          "selectedWorldY": 6.035949828995316
+        },
+        {
+          "localXZ": [
+            -56.269763785942786,
+            -73.19127710713106
+          ],
+          "worldXZ": [
+            1071.5979146885486,
+            1013.6442438963275
+          ],
+          "groundWorldY": 6.02885323660381,
+          "platformWorldY": null,
+          "selectedWorldY": 6.02885323660381
+        },
+        {
+          "localXZ": [
+            -55.83696747373477,
+            -72.26764982725072
+          ],
+          "worldXZ": [
+            1072.5138734140157,
+            1014.0930418611631
+          ],
+          "groundWorldY": 6.022272760022597,
+          "platformWorldY": null,
+          "selectedWorldY": 6.022272760022597
+        },
+        {
+          "localXZ": [
+            -53.74829900145625,
+            -75.58756910532206
+          ],
+          "worldXZ": [
+            1072.0621094786895,
+            1010.1968502146012
+          ],
+          "groundWorldY": 6.07453793363088,
+          "platformWorldY": null,
+          "selectedWorldY": 6.07453793363088
+        },
+        {
+          "localXZ": [
+            -53.2815578804476,
+            -74.591500470157
+          ],
+          "worldXZ": [
+            1073.0499081041933,
+            1010.6808480198163
+          ],
+          "groundWorldY": 6.067441341239373,
+          "platformWorldY": null,
+          "selectedWorldY": 6.067441341239373
+        },
+        {
+          "localXZ": [
+            -52.84876156823958,
+            -73.66787319027667
+          ],
+          "worldXZ": [
+            1073.9658668296604,
+            1011.1296459846518
+          ],
+          "groundWorldY": 6.060860864658162,
+          "platformWorldY": null,
+          "selectedWorldY": 6.060860864658162
+        },
+        {
+          "localXZ": [
+            -50.76009309596107,
+            -76.987792468348
+          ],
+          "worldXZ": [
+            1073.5141028943344,
+            1007.2334543380899
+          ],
+          "groundWorldY": 6.1131260382664445,
+          "platformWorldY": null,
+          "selectedWorldY": 6.1131260382664445
+        },
+        {
+          "localXZ": [
+            -50.293351974952415,
+            -75.99172383318295
+          ],
+          "worldXZ": [
+            1074.5019015198382,
+            1007.717452143305
+          ],
+          "groundWorldY": 6.106029445874937,
+          "platformWorldY": null,
+          "selectedWorldY": 6.106029445874937
+        },
+        {
+          "localXZ": [
+            -49.860555662744396,
+            -75.06809655330261
+          ],
+          "worldXZ": [
+            1075.4178602453053,
+            1008.1662501081405
+          ],
+          "groundWorldY": 6.099448969293725,
+          "platformWorldY": null,
+          "selectedWorldY": 6.099448969293725
+        },
+        {
+          "localXZ": [
+            -31.068095596327648,
+            -83.67089227268448
+          ],
+          "worldXZ": [
+            1084.676462679601,
+            989.6880756717701
+          ],
+          "groundWorldY": 6.274136303568299,
+          "platformWorldY": null,
+          "selectedWorldY": 6.274136303568299
+        },
+        {
+          "localXZ": [
+            -30.834337220017268,
+            -82.59601692107168
+          ],
+          "worldXZ": [
+            1085.532030657974,
+            990.3794535961955
+          ],
+          "groundWorldY": 6.253794442199756,
+          "platformWorldY": null,
+          "selectedWorldY": 6.253794442199756
+        },
+        {
+          "localXZ": [
+            -30.6175794528931,
+            -81.59931432230346
+          ],
+          "worldXZ": [
+            1086.3253755106468,
+            991.0205494897538
+          ],
+          "groundWorldY": 6.234931988930747,
+          "platformWorldY": null,
+          "selectedWorldY": 6.234931988930747
+        },
+        {
+          "localXZ": [
+            -27.843469541489256,
+            -84.37216740161561
+          ],
+          "worldXZ": [
+            1086.7505964528773,
+            987.1213717366514
+          ],
+          "groundWorldY": 6.281417712676006,
+          "platformWorldY": null,
+          "selectedWorldY": 6.281417712676006
+        },
+        {
+          "localXZ": [
+            -27.609711165178876,
+            -83.29729205000281
+          ],
+          "worldXZ": [
+            1087.6061644312501,
+            987.8127496610769
+          ],
+          "groundWorldY": 6.261075851307466,
+          "platformWorldY": null,
+          "selectedWorldY": 6.261075851307466
+        },
+        {
+          "localXZ": [
+            -27.392953398054708,
+            -82.30058945123459
+          ],
+          "worldXZ": [
+            1088.3995092839234,
+            988.4538455546351
+          ],
+          "groundWorldY": 6.242213398038451,
+          "platformWorldY": null,
+          "selectedWorldY": 6.242213398038451
+        },
+        {
+          "localXZ": [
+            -24.618843486650864,
+            -85.07344253054674
+          ],
+          "worldXZ": [
+            1088.8247302261536,
+            984.5546678015324
+          ],
+          "groundWorldY": 6.289710920562848,
+          "platformWorldY": null,
+          "selectedWorldY": 6.289710920562848
+        },
+        {
+          "localXZ": [
+            -24.385085110340484,
+            -83.99856717893394
+          ],
+          "worldXZ": [
+            1089.6802982045267,
+            985.2460457259581
+          ],
+          "groundWorldY": 6.26835726041517,
+          "platformWorldY": null,
+          "selectedWorldY": 6.26835726041517
+        },
+        {
+          "localXZ": [
+            -24.168327343216315,
+            -83.00186458016572
+          ],
+          "worldXZ": [
+            1090.4736430571998,
+            985.8871416195161
+          ],
+          "groundWorldY": 6.249494807146162,
+          "platformWorldY": null,
+          "selectedWorldY": 6.249494807146162
+        },
+        {
+          "localXZ": [
+            -3.3000000000000194,
+            -87.36429125250427
+          ],
+          "worldXZ": [
+            1104.0067027633922,
+            969.4137039830122
+          ],
+          "groundWorldY": 6.329892513019279,
+          "platformWorldY": null,
+          "selectedWorldY": 6.329892513019279
+        },
+        {
+          "localXZ": [
+            -3.3000000000000194,
+            -86.26429125250428
+          ],
+          "worldXZ": [
+            1104.6958059911665,
+            970.2711051385229
+          ],
+          "groundWorldY": 6.3074877732037,
+          "platformWorldY": null,
+          "selectedWorldY": 6.3074877732037
+        },
+        {
+          "localXZ": [
+            -3.300000000000019,
+            -85.24429125250428
+          ],
+          "worldXZ": [
+            1105.3347926205572,
+            971.0661498463601
+          ],
+          "groundWorldY": 6.286712469011072,
+          "platformWorldY": null,
+          "selectedWorldY": 6.286712469011072
+        },
+        {
+          "localXZ": [
+            -1.976548937521918e-14,
+            -87.36429125250427
+          ],
+          "worldXZ": [
+            1106.5789062299243,
+            967.3463942996892
+          ],
+          "groundWorldY": 6.328889721586242,
+          "platformWorldY": null,
+          "selectedWorldY": 6.328889721586242
+        },
+        {
+          "localXZ": [
+            -1.9601485685107613e-14,
+            -86.26429125250428
+          ],
+          "worldXZ": [
+            1107.2680094576986,
+            968.2037954552
+          ],
+          "groundWorldY": 6.306484981770664,
+          "platformWorldY": null,
+          "selectedWorldY": 6.306484981770664
+        },
+        {
+          "localXZ": [
+            -1.9449409536095067e-14,
+            -85.24429125250428
+          ],
+          "worldXZ": [
+            1107.9069960870893,
+            968.9988401630371
+          ],
+          "groundWorldY": 6.285709677578036,
+          "platformWorldY": null,
+          "selectedWorldY": 6.285709677578036
+        },
+        {
+          "localXZ": [
+            3.2999999999999803,
+            -87.36429125250427
+          ],
+          "worldXZ": [
+            1109.1511096964564,
+            965.2790846163663
+          ],
+          "groundWorldY": 6.3278869301532055,
+          "platformWorldY": null,
+          "selectedWorldY": 6.3278869301532055
+        },
+        {
+          "localXZ": [
+            3.2999999999999803,
+            -86.26429125250428
+          ],
+          "worldXZ": [
+            1109.8402129242306,
+            966.136485771877
+          ],
+          "groundWorldY": 6.305482190337626,
+          "platformWorldY": null,
+          "selectedWorldY": 6.305482190337626
+        },
+        {
+          "localXZ": [
+            3.2999999999999807,
+            -85.24429125250428
+          ],
+          "worldXZ": [
+            1110.4791995536214,
+            966.9315304797142
+          ],
+          "groundWorldY": 6.284706886144999,
+          "platformWorldY": null,
+          "selectedWorldY": 6.284706886144999
+        }
+      ]
+    },
+    {
+      "kind": "harbour",
+      "placement": {
+        "lon": -123.1120903,
+        "lat": 49.2847656,
+        "yaw": -0.8,
+        "baseY": 17.96477617737215
+      },
+      "samples": [
+        {
+          "localXZ": [
+            39.60034443365022,
+            35.72548421366114
+          ],
+          "worldXZ": [
+            1157.2004708308107,
+            190.7111408276768
+          ],
+          "groundWorldY": 18.45149576531487,
+          "platformWorldY": null,
+          "selectedWorldY": 18.45149576531487
+        },
+        {
+          "localXZ": [
+            39.556322737503656,
+            34.736463440235035
+          ],
+          "worldXZ": [
+            1157.8792806955917,
+            189.99050418728464
+          ],
+          "groundWorldY": 18.415918668830972,
+          "platformWorldY": null,
+          "selectedWorldY": 18.415918668830972
+        },
+        {
+          "localXZ": [
+            38.15177865438976,
+            35.78996043528994
+          ],
+          "worldXZ": [
+            1156.1449929231655,
+            189.71692435905786
+          ],
+          "groundWorldY": 18.471655020577533,
+          "platformWorldY": null,
+          "selectedWorldY": 18.471655020577533
+        },
+        {
+          "localXZ": [
+            38.10775695824319,
+            34.800939661863836
+          ],
+          "worldXZ": [
+            1156.8238027879465,
+            188.99628771866568
+          ],
+          "groundWorldY": 18.43607792409363,
+          "platformWorldY": null,
+          "selectedWorldY": 18.43607792409363
+        },
+        {
+          "localXZ": [
+            36.703212875129296,
+            35.85443665691874
+          ],
+          "worldXZ": [
+            1155.0895150155204,
+            188.72270789043887
+          ],
+          "groundWorldY": 18.491814275840188,
+          "platformWorldY": null,
+          "selectedWorldY": 18.491814275840188
+        },
+        {
+          "localXZ": [
+            36.65919117898273,
+            34.86541588349264
+          ],
+          "worldXZ": [
+            1155.7683248803019,
+            188.0020712500467
+          ],
+          "groundWorldY": 18.456237179356275,
+          "platformWorldY": null,
+          "selectedWorldY": 18.456237179356275
+        },
+        {
+          "localXZ": [
+            2.4503578896530223,
+            38.223706368790516
+          ],
+          "worldXZ": [
+            1129.5257110740486,
+            165.8018998404235
+          ],
+          "groundWorldY": 20.092859126856332,
+          "platformWorldY": null,
+          "selectedWorldY": 20.092859126856332
+        },
+        {
+          "localXZ": [
+            2.439234996239462,
+            37.23376885498366
+          ],
+          "worldXZ": [
+            1130.2280993847194,
+            165.10422465738114
+          ],
+          "groundWorldY": 20.06266092644535,
+          "platformWorldY": null,
+          "selectedWorldY": 20.06266092644535
+        },
+        {
+          "localXZ": [
+            1.0004494098348913,
+            38.23999747530533
+          ],
+          "worldXZ": [
+            1128.503863583734,
+            164.77314928439063
+          ],
+          "groundWorldY": 20.087404922666583,
+          "platformWorldY": null,
+          "selectedWorldY": 20.087404922666583
+        },
+        {
+          "localXZ": [
+            0.9893265164213311,
+            37.25005996149847
+          ],
+          "worldXZ": [
+            1129.2062518944047,
+            164.07547410134828
+          ],
+          "groundWorldY": 20.057206724102112,
+          "platformWorldY": null,
+          "selectedWorldY": 20.057206724102112
+        },
+        {
+          "localXZ": [
+            -0.4494590699832394,
+            38.25628858182014
+          ],
+          "worldXZ": [
+            1127.4820160934196,
+            163.7443987283578
+          ],
+          "groundWorldY": 20.084751067798713,
+          "platformWorldY": null,
+          "selectedWorldY": 20.084751067798713
+        },
+        {
+          "localXZ": [
+            -0.46058196339679963,
+            37.26635106801328
+          ],
+          "worldXZ": [
+            1128.1844044040902,
+            163.04672354531544
+          ],
+          "groundWorldY": 20.051752692942458,
+          "platformWorldY": null,
+          "selectedWorldY": 20.051752692942458
+        },
+        {
+          "localXZ": [
+            -24.54,
+            -8.2
+          ],
+          "worldXZ": [
+            1144.023676170429,
+            114.0964945128238
+          ],
+          "groundWorldY": 18.17815694804262,
+          "platformWorldY": null,
+          "selectedWorldY": 18.17815694804262
+        },
+        {
+          "localXZ": [
+            -23.55,
+            -8.2
+          ],
+          "worldXZ": [
+            1144.7134158126828,
+            114.80667704281431
+          ],
+          "groundWorldY": 18.335434695522594,
+          "platformWorldY": null,
+          "selectedWorldY": 18.335434695522594
+        },
+        {
+          "localXZ": [
+            -24.54,
+            -9.649999999999999
+          ],
+          "worldXZ": [
+            1145.0638425022335,
+            113.08626978427041
+          ],
+          "groundWorldY": 18.13830038311015,
+          "platformWorldY": null,
+          "selectedWorldY": 18.13830038311015
+        },
+        {
+          "localXZ": [
+            -23.55,
+            -9.649999999999999
+          ],
+          "worldXZ": [
+            1145.7535821444872,
+            113.79645231426093
+          ],
+          "groundWorldY": 18.295577864202983,
+          "platformWorldY": null,
+          "selectedWorldY": 18.295577864202983
+        },
+        {
+          "localXZ": [
+            -24.54,
+            -11.099999999999994
+          ],
+          "worldXZ": [
+            1146.1040088340376,
+            112.07604505571702
+          ],
+          "groundWorldY": 18.082304873908004,
+          "platformWorldY": null,
+          "selectedWorldY": 18.082304873908004
+        },
+        {
+          "localXZ": [
+            -23.55,
+            -11.099999999999994
+          ],
+          "worldXZ": [
+            1146.7937484762913,
+            112.78622758570754
+          ],
+          "groundWorldY": 18.23974452736991,
+          "platformWorldY": null,
+          "selectedWorldY": 18.23974452736991
+        }
+      ]
+    },
+    {
+      "kind": "convention",
+      "placement": {
+        "lon": -123.1159678,
+        "lat": 49.2890752,
+        "yaw": -0.403,
+        "baseY": 4
+      },
+      "samples": [
+        {
+          "localXZ": [
+            -67.30749856897161,
+            -30.164524611026366
+          ],
+          "worldXZ": [
+            823.5991955550891,
+            -396.47590541681274
+          ],
+          "groundWorldY": 2.3548251952952444,
+          "platformWorldY": 4.800000011920929,
+          "selectedWorldY": 4.800000011920929
+        },
+        {
+          "localXZ": [
+            -66.50194838766085,
+            -29.82289044208218
+          ],
+          "worldXZ": [
+            824.2062299709694,
+            -395.8457195569769
+          ],
+          "groundWorldY": 2.350946286614847,
+          "platformWorldY": 4.800000011920929,
+          "selectedWorldY": 4.800000011920929
+        },
+        {
+          "localXZ": [
+            -67.79945177225123,
+            -29.004532349938856
+          ],
+          "worldXZ": [
+            822.6917279169256,
+            -395.6017758579452
+          ],
+          "groundWorldY": 2.359766804336068,
+          "platformWorldY": 4.800000011920929,
+          "selectedWorldY": 4.800000011920929
+        },
+        {
+          "localXZ": [
+            -66.99390159094047,
+            -28.66289818099467
+          ],
+          "worldXZ": [
+            823.2987623328058,
+            -394.97158999810944
+          ],
+          "groundWorldY": 2.359210474562048,
+          "platformWorldY": 4.800000011920929,
+          "selectedWorldY": 4.800000011920929
+        },
+        {
+          "localXZ": [
+            -68.29140497553087,
+            -27.84454008885134
+          ],
+          "worldXZ": [
+            821.784260278762,
+            -394.7276462990777
+          ],
+          "groundWorldY": 2.364708413376891,
+          "platformWorldY": 4.800000011920929,
+          "selectedWorldY": 4.800000011920929
+        },
+        {
+          "localXZ": [
+            -67.4858547942201,
+            -27.502905919907153
+          ],
+          "worldXZ": [
+            822.3912946946422,
+            -394.0974604392419
+          ],
+          "groundWorldY": 2.3674746625092493,
+          "platformWorldY": 4.800000011920929,
+          "selectedWorldY": 4.800000011920929
+        },
+        {
+          "localXZ": [
+            -82.90134472281777,
+            6.604706158204409
+          ],
+          "worldXZ": [
+            794.8344458903271,
+            -368.767900328854
+          ],
+          "groundWorldY": 2.782663749825601,
+          "platformWorldY": 4.800000011920929,
+          "selectedWorldY": 4.800000011920929
+        },
+        {
+          "localXZ": [
+            -82.095794541507,
+            6.946340327148593
+          ],
+          "worldXZ": [
+            795.4414803062073,
+            -368.13771446901825
+          ],
+          "groundWorldY": 2.7362151459146773,
+          "platformWorldY": 4.800000011920929,
+          "selectedWorldY": 4.800000011920929
+        },
+        {
+          "localXZ": [
+            -83.39329792609739,
+            7.764698419291919
+          ],
+          "worldXZ": [
+            793.9269782521635,
+            -367.89377076998653
+          ],
+          "groundWorldY": 2.8785169195184266,
+          "platformWorldY": 4.800000011920929,
+          "selectedWorldY": 4.800000011920929
+        },
+        {
+          "localXZ": [
+            -82.58774774478663,
+            8.106332588236102
+          ],
+          "worldXZ": [
+            794.5340126680437,
+            -367.26358491015077
+          ],
+          "groundWorldY": 2.8320683156075024,
+          "platformWorldY": 4.800000011920929,
+          "selectedWorldY": 4.800000011920929
+        },
+        {
+          "localXZ": [
+            -83.88525112937701,
+            8.92469068037943
+          ],
+          "worldXZ": [
+            793.019510614,
+            -367.019641211119
+          ],
+          "groundWorldY": 2.974370089211253,
+          "platformWorldY": 4.800000011920929,
+          "selectedWorldY": 4.800000011920929
+        },
+        {
+          "localXZ": [
+            -83.07970094806625,
+            9.266324849323611
+          ],
+          "worldXZ": [
+            793.6265450298802,
+            -366.38945535128323
+          ],
+          "groundWorldY": 2.9279214853003284,
+          "platformWorldY": 4.800000011920929,
+          "selectedWorldY": 4.800000011920929
+        },
+        {
+          "localXZ": [
+            -91.36693782620512,
+            48.10514042229582
+          ],
+          "worldXZ": [
+            770.7714126231847,
+            -333.9121584677963
+          ],
+          "groundWorldY": 3.345769131681115,
+          "platformWorldY": 4.800000011920929,
+          "selectedWorldY": 4.800000011920929
+        },
+        {
+          "localXZ": [
+            -91.0576540766405,
+            47.28662434899288
+          ],
+          "worldXZ": [
+            771.3769246616821,
+            -334.5438072398483
+          ],
+          "groundWorldY": 3.3425113397701716,
+          "platformWorldY": 4.800000011920929,
+          "selectedWorldY": 4.800000011920929
+        },
+        {
+          "localXZ": [
+            -90.18827468064889,
+            48.550509021668844
+          ],
+          "worldXZ": [
+            771.6809868549395,
+            -333.0402211323601
+          ],
+          "groundWorldY": 3.3364311056445435,
+          "platformWorldY": 4.800000011920929,
+          "selectedWorldY": 4.800000011920929
+        },
+        {
+          "localXZ": [
+            -89.87899093108427,
+            47.73199294836591
+          ],
+          "worldXZ": [
+            772.2864988934368,
+            -333.67186990441206
+          ],
+          "groundWorldY": 3.3331733137336004,
+          "platformWorldY": 4.800000011920929,
+          "selectedWorldY": 4.800000011920929
+        },
+        {
+          "localXZ": [
+            -89.00961153509266,
+            48.99587762104188
+          ],
+          "worldXZ": [
+            772.5905610866943,
+            -332.16828379692384
+          ],
+          "groundWorldY": 3.327093079607972,
+          "platformWorldY": 4.800000011920929,
+          "selectedWorldY": 4.800000011920929
+        },
+        {
+          "localXZ": [
+            -88.70032778552805,
+            48.17736154773894
+          ],
+          "worldXZ": [
+            773.1960731251917,
+            -332.7999325689758
+          ],
+          "groundWorldY": 3.3238352876970283,
+          "platformWorldY": 4.800000011920929,
+          "selectedWorldY": 4.800000011920929
+        },
+        {
+          "localXZ": [
+            -73.87893782620512,
+            54.713140422295815
+          ],
+          "worldXZ": [
+            784.2669004772833,
+            -320.97509482955627
+          ],
+          "groundWorldY": 3.244216690569581,
+          "platformWorldY": 4.800000011920929,
+          "selectedWorldY": 4.800000011920929
+        },
+        {
+          "localXZ": [
+            -73.5696540766405,
+            53.89462434899288
+          ],
+          "worldXZ": [
+            784.8724125157808,
+            -321.6067436016082
+          ],
+          "groundWorldY": 3.2370891585096944,
+          "platformWorldY": 4.800000011920929,
+          "selectedWorldY": 4.800000011920929
+        },
+        {
+          "localXZ": [
+            -72.70027468064889,
+            55.15850902166884
+          ],
+          "worldXZ": [
+            785.1764747090382,
+            -320.10315749412007
+          ],
+          "groundWorldY": 3.240535824448286,
+          "platformWorldY": 4.800000011920929,
+          "selectedWorldY": 4.800000011920929
+        },
+        {
+          "localXZ": [
+            -72.39099093108427,
+            54.339992948365904
+          ],
+          "worldXZ": [
+            785.7819867475356,
+            -320.734806266172
+          ],
+          "groundWorldY": 3.233397145044469,
+          "platformWorldY": 4.800000011920929,
+          "selectedWorldY": 4.800000011920929
+        },
+        {
+          "localXZ": [
+            -71.52161153509266,
+            55.603877621041875
+          ],
+          "worldXZ": [
+            786.086048940793,
+            -319.23122015868375
+          ],
+          "groundWorldY": 3.2372994616493265,
+          "platformWorldY": 4.800000011920929,
+          "selectedWorldY": 4.800000011920929
+        },
+        {
+          "localXZ": [
+            -71.21232778552805,
+            54.78536154773894
+          ],
+          "worldXZ": [
+            786.6915609792904,
+            -319.8628689307357
+          ],
+          "groundWorldY": 3.230160782245509,
+          "platformWorldY": 4.800000011920929,
+          "selectedWorldY": 4.800000011920929
+        }
+      ]
+    },
+    {
+      "kind": "vancouver-house",
+      "placement": {
+        "lon": -123.131029,
+        "lat": 49.2749256,
+        "yaw": -0.78,
+        "baseY": 14.140882560018866
+      },
+      "samples": []
+    }
+  ]
+}

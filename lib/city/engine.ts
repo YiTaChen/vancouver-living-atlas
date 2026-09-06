@@ -1,3 +1,4 @@
+import { createStartupQA } from './startup-qa';
 import { BeachGround, type BeachCoastData } from './beach-ground';
 import { enterLocalMap, finishLocalMapTransition } from './local-map-camera';
 import { createRoadSurfaces } from './road-surfaces';
@@ -55,6 +56,8 @@ import {
 } from './types';
 
 export class CityEngine {
+  startupQA =
+    process.env.VANCOUVER_VISUAL_QA === '1' ? createStartupQA() : null;
   clock = new CityClock();
   lastLightUpdate = 0;
   lastLightHour = -1;
@@ -149,6 +152,11 @@ export class CityEngine {
     onReady: () => void,
     onError: (s: string) => void,
   ) {
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.mark('engine.constructor.body.begin');
+      this.startupQA?.begin('constructor.body');
+      this.startupQA?.begin('constructor.renderer-controls');
+    }
     this.onStats = onStats;
     this.onReady = onReady;
     this.onError = onError;
@@ -185,6 +193,10 @@ export class CityEngine {
       if (this.disposed) return;
       event.preventDefault();
       this.contextLost = true;
+      if (process.env.VANCOUVER_VISUAL_QA === '1') {
+        this.startupQA?.fail('graphics-context-lost');
+      }
+
       cancelAnimationFrame(this.raf);
       this.onError('graphics-context-lost');
     });
@@ -209,6 +221,10 @@ export class CityEngine {
     this.sky.material.uniforms.mieDirectionalG.value = 0.8;
     this.sky.material.uniforms.sunPosition.value.set(-4000, 5000, 1400);
     this.scene.add(this.sky);
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.end('constructor.renderer-controls');
+      this.startupQA?.begin('constructor.environment-pmrem');
+    }
     const pmrem = new THREE.PMREMGenerator(this.renderer),
       envScene = new THREE.Scene();
     envScene.add(this.sky.clone());
@@ -216,6 +232,11 @@ export class CityEngine {
     this.scene.environment = this.environmentTarget.texture;
     this.scene.environmentIntensity = 0.012;
     pmrem.dispose();
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.end('constructor.environment-pmrem');
+      this.startupQA?.begin('constructor.scene-and-events');
+    }
+
     this.scene.add(
       this.ambient,
       this.sun,
@@ -253,12 +274,27 @@ export class CityEngine {
       this.resizeQuality();
     });
     this.resizeObserver.observe(container);
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.end('constructor.scene-and-events');
+    }
+
     this.load().catch((e) => {
+      if (process.env.VANCOUVER_VISUAL_QA === '1') {
+        this.startupQA?.fail(e);
+      }
       console.error('Vancouver scene initialization failed', e);
       if (!this.disposed) this.onError(String(e.message || e));
     });
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.end('constructor.body');
+      this.startupQA?.mark('engine.constructor.body.end');
+    }
   }
   async load() {
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.phase('load.data.fetch-and-decode', 'async-wall');
+    }
+
     const names = [
       'buildings',
       'roads',
@@ -303,6 +339,9 @@ export class CityEngine {
       );
     this.data.beachCoast = (await coastResponse.json()) as BeachCoastData;
     if (this.disposed) return;
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.phase('load.geographic-masks');
+    }
     this.beachGround = new BeachGround(this.data.beachCoast);
     // Preserve the exact original tessellation keys used by the local patch.
     this.data.originalLandPolys = this.data.land.features.flatMap(
@@ -319,17 +358,50 @@ export class CityEngine {
         poly: p.map((r) => r.map(project)),
       })),
     );
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.phase('geometry.water');
+    }
     this.makeWater();
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.phase('geometry.land');
+    }
     this.makeLand();
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.phase('geometry.context');
+    }
     makeContext(this);
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.phase('geometry.causeway-prepare');
+    }
     prepareCauseway(this);
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.phase('geometry.roads');
+    }
     this.makeRoads();
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.phase('geometry.buildings');
+    }
     this.makeBuildings();
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.phase('geometry.bridge-approaches');
+    }
     createBridgeApproaches(this);
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.phase('geometry.nature');
+    }
     createNature(this);
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.phase('geometry.ground-harmonization');
+    }
     harmonizeGround(this);
     // Resolve landmark feet and entries from the final rendered ground.
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.phase('geometry.landmarks-medium-and-ground-plan');
+    }
     createLandmarks(this);
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.phase('collision.waterworld-and-footprints');
+    }
     this.waterWorld = new WaterWorld(
       this.landPolys,
       this.data['context-land'],
@@ -343,23 +415,58 @@ export class CityEngine {
       this.waterWorld.addObstacle(p);
     for (const p of this.data.solidWaterFootprints || [])
       this.waterWorld.addObstacle(p);
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.phase('geometry.streetfronts-and-roofs');
+    }
     createStreetfronts(this);
     createRoofDetails(this);
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.phase('geometry.traffic-and-road-details');
+    }
     this.traffic = createStreetDetails(this);
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.phase('geometry.railway');
+    }
     this.railway = createRailway(this);
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.phase('geometry.harbour-and-dock-collision');
+    }
     this.harbour = createHarbour(this);
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.phase('controller.navigation');
+    }
     this.navigation = new StreetNavigation(this);
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.phase('geometry.sailing-waves');
+    }
     this.sailingWaves = addSailingWaves(this);
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.phase('controller.placement-proxies');
+    }
     this.placement = new MapPlacement(this);
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.phase('render.composer-setup');
+    }
     this.composer = new EffectComposer(this.renderer);
     this.renderPass = new RenderPass(this.scene, this.camera);
     this.composer.addPass(this.renderPass);
     this.composer.addPass(new OutputPass());
     this.fxaa = new ShaderPass(FXAAShader);
     this.composer.addPass(this.fxaa);
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.phase('render.quality-and-initial-lighting');
+    }
     this.resizeQuality();
     this.applySettings(this.settings);
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.phase('render.scene-compileAsync', 'async-wall');
+    }
     await this.renderer.compileAsync(this.scene, this.camera);
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.endPhase();
+      this.startupQA?.mark('render.scene-compileAsync.resolved');
+    }
+
     if (this.disposed || this.contextLost) return;
     window.addEventListener('pagehide', this.pageHide, { once: true });
     if (
@@ -367,11 +474,28 @@ export class CityEngine {
       new URLSearchParams(location.search).has('inspect')
     )
       (window as Window & { __atlas?: CityEngine }).__atlas = this;
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.mark('engine.onReady.called');
+      this.startupQA?.begin('react.onReady-callback');
+    }
     this.onReady();
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.end('react.onReady-callback');
+      this.startupQA?.mark('engine.onReady.returned');
+    }
+
     this.fpsAt = performance.now();
     this.clock.setVisible(!document.hidden, this.fpsAt);
     this.clock.resetTimebase(this.fpsAt);
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.begin('render.first-city-frame');
+    }
     this.animate(this.fpsAt);
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.end('render.first-city-frame');
+      this.startupQA?.frameSubmitted(this);
+    }
+
     if (process.env.VANCOUVER_VISUAL_QA === '1')
       void import('./visual-qa').then(({ installVisualQA }) =>
         installVisualQA(this),
@@ -1255,6 +1379,9 @@ export class CityEngine {
   destroy() {
     document.removeEventListener('visibilitychange', this.visibilityChange);
     if (this.disposed) return;
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.dispose();
+    }
     window.removeEventListener('pagehide', this.pageHide);
     this.disposed = true;
     if (process.env.NODE_ENV === 'development') {

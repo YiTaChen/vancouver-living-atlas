@@ -1,13 +1,18 @@
 import * as THREE from 'three';
-import { createConventionCentre } from './assets/convention-centre';
-import {
-  createBCPlace,
-  createHarbourCentre,
-} from './assets/secondary-landmarks';
+import { SECONDARY_LANDMARK_PLACEMENTS } from './assets/secondary-landmarks';
+import { VANCOUVER_HOUSE_CONTRACT } from './assets/vancouver-house';
 import { LandmarkDetail } from './landmark-detail';
-import { createLandmarkGroundSampler } from './landmark-ground';
+import {
+  createLandmarkGroundSampler,
+  landmarkLocalXZ,
+} from './landmark-ground';
 import { resolveLandmarkGroundPlan } from './resolve-landmark-plan';
-import { createResolvedLandmark } from './landmark-resolved-factory';
+import {
+  createWorkerLandmark,
+  type ResolvedLandmarkPlan,
+} from './landmark-worker-factories';
+import { resolveExtraLandmarkPlan } from './resolve-extra-landmark-plan';
+import { createConventionPlatformSampler } from './convention-platform';
 import { MARINE_ENTRY_CONTRACT } from './assets/marine-entry';
 import { SCIENCE_ENTRY_CONTRACT } from './assets/science-entry';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
@@ -119,72 +124,114 @@ class Builder {
   }
 }
 export function createLandmarks(engine: CityEngine) {
-  const b = new Builder(engine),
-    white = 0xe8e4d7,
-    glass = 0x456d79;
+  const b = new Builder(engine);
   const marinePlacement = MARINE_ENTRY_CONTRACT.placementMustRemain;
   const sciencePlacement = SCIENCE_ENTRY_CONTRACT.placement;
   const marineOrigin = project([marinePlacement.lon, marinePlacement.lat]);
   const scienceOrigin = project([sciencePlacement.lon, sciencePlacement.lat]);
-  // Must run after final land, roads, Nature and any Stage 6 ground clipping.
-  // Only these two local sites are indexed; landmark roofs/piers never enter.
+  const descriptors = [
+    {
+      kind: 'bc-place' as const,
+      placement: SECONDARY_LANDMARK_PLACEMENTS.bcPlace,
+      radius: 140,
+    },
+    {
+      kind: 'harbour' as const,
+      placement: SECONDARY_LANDMARK_PLACEMENTS.harbourCentre,
+      radius: 90,
+    },
+    {
+      kind: 'convention' as const,
+      placement: { lon: -123.1159678, lat: 49.2890752, yaw: -0.403, baseY: 4 },
+      radius: 150,
+    },
+    {
+      kind: 'vancouver-house' as const,
+      placement: VANCOUVER_HOUSE_CONTRACT.placement,
+      radius: 35,
+    },
+  ];
+  const sites = descriptors.map((site) => {
+    const origin = project([site.placement.lon, site.placement.lat]);
+    // Preserve the existing model anchors. Entrance sampling never rebases a
+    // building: Harbour and House retain their original engine.elevation base.
+    const baseY =
+      'baseY' in site.placement
+        ? site.placement.baseY
+        : engine.elevation(origin[0], origin[1]);
+    return { ...site, origin, placement: { ...site.placement, baseY } };
+  });
+  // Run AFTER final land, roads, Nature and Stage 6 ground clipping. Index only
+  // these local sites; no protected decks, landmark roofs or hidden LOD copies.
   const ground = createLandmarkGroundSampler(
     [engine.terrain, engine.roads],
     [
       { x: marineOrigin[0], z: marineOrigin[1], radius: 45 },
       { x: scienceOrigin[0] + 40, z: scienceOrigin[1] - 52, radius: 40 },
+      ...sites.map((site) => ({
+        x: site.origin[0],
+        z: site.origin[1],
+        radius: site.radius,
+      })),
     ],
     (x, z) => engine.elevation(x, z),
   );
-  const plans = (['marine', 'science', 'canada'] as const).map((kind) => {
+  const sourceRevision = 'stage8-ground-v1';
+  const plans: ResolvedLandmarkPlan[] = (
+    ['marine', 'science', 'canada'] as const
+  ).map((kind) => {
     const result = resolveLandmarkGroundPlan(
       kind,
       (x, z) => ground.sample(x, z),
-      'stage7-ground-v1',
+      sourceRevision,
     );
     if (result.status !== 'ready') throw new Error(result.reason);
     return result.plan;
   });
+  // This small index contains only the EXACT existing lower podium top. The
+  // elevated 5.3m slab and underwater shelves are never threshold candidates.
+  const platform = createConventionPlatformSampler();
+  for (const site of sites)
+    plans.push(
+      resolveExtraLandmarkPlan(
+        site.kind,
+        site.placement,
+        sourceRevision,
+        (x, z) => {
+          const world = landmarkLocalXZ(site.origin, site.placement.yaw, x, z);
+          const groundY = ground.sample(world[0], world[1]);
+          const platformY =
+            site.kind === 'convention'
+              ? platform.sample(world[0], world[1])
+              : undefined;
+          const levels = [groundY, platformY].filter(
+            (y): y is number => y !== undefined,
+          );
+          return levels.length
+            ? Math.max(...levels) - site.placement.baseY
+            : null;
+        },
+      ),
+    );
   engine.data.landmarkGroundPlans = plans;
-  // Identical captured DTO for initial medium and later Ultra. A worker can
-  // consume this same plan without sampling or importing engine state.
-  const sciencePlan = plans.find((p) => p.kind === 'science')!;
-  const canadaPlan = plans.find((p) => p.kind === 'canada')!;
-  const marinePlan = plans.find((p) => p.kind === 'marine')!;
-  engine.landmarkDetails.push(
-    new LandmarkDetail(engine, (detail) =>
-      createResolvedLandmark(detail, sciencePlan),
-    ),
-  );
-  engine.landmarkDetails.push(
-    new LandmarkDetail(engine, (detail) =>
-      createResolvedLandmark(detail, canadaPlan),
-    ),
-  );
-  engine.landmarkDetails.push(new LandmarkDetail(engine, createBCPlace));
-  engine.landmarkDetails.push(new LandmarkDetail(engine, createHarbourCentre));
-  engine.landmarkDetails.push(
-    new LandmarkDetail(engine, (detail) =>
-      createResolvedLandmark(detail, marinePlan),
-    ),
-  );
-  engine.landmarkDetails.push(
-    new LandmarkDetail(engine, createConventionCentre),
-  );
-  // Vancouver House: widening upper floors and a white balcony lattice.
-  b.at(-123.131029, 49.2749256, -0.78);
-  b.box(49, 25, 49, glass, 0, 12.5, 0);
-  for (let i = 0; i < 49; i++) {
-    const t = i / 48,
-      width = 15 + 29 * Math.pow(t, 0.55),
-      shift = (1 - t) * 11,
-      y = i * 3.2;
-    b.box(width, 2.65, 34, glass, shift, y + 1.35, 0);
-    b.box(width + 1.8, 0.5, 36.5, white, shift, y + 3, 0);
-    for (let x = -width / 2; x < width / 2; x += 5.5) {
-      b.box(0.38, 3.2, 0.5, white, x + shift, y + 1.6, -18);
-      b.box(0.38, 3.2, 0.5, white, x + shift, y + 1.6, 18);
-    }
+  // One immutable sample snapshot for initial medium and later Ultra. The pure
+  // seven-factory registry can be used synchronously now or by Stage 9 Worker.
+  const order = [
+    'science',
+    'canada',
+    'bc-place',
+    'harbour',
+    'marine',
+    'convention',
+    'vancouver-house',
+  ] as const;
+  for (const kind of order) {
+    const plan = plans.find((plan) => plan.kind === kind)!;
+    engine.landmarkDetails.push(
+      new LandmarkDetail(engine, (detail) =>
+        createWorkerLandmark(detail, plan),
+      ),
+    );
   }
   // Burrard, Granville, and Cambie: bridge decks follow actual endpoints.
   for (const s of engine.data.bridges.mainSpines)

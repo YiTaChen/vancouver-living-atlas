@@ -3,12 +3,19 @@ import type { CityEngine } from './engine';
 import type { VisualQuality } from './quality';
 import { project } from './geo';
 import { auditCausewayTravel } from './causeway-qa';
+import { installReleaseQAControls } from './release-qa-controls';
 
 const cases = [
   { id: 'downtown', view: 'downtown' },
   { id: 'water-street', street: 'WATER ST' },
   { id: 'robson-drive', street: 'ROBSON ST', drive: true },
   { id: 'robson-walk', street: 'ROBSON ST', forward: true },
+  {
+    id: 'burrard-drive',
+    street: 'BURRARD ST',
+    streetTarget: [-123.118, 49.2865],
+    drive: true,
+  },
   { id: 'coal-harbour-boat', boatAt: [-123.125, 49.295], forward: true },
   { id: 'open-harbour-boat', boatAt: [-123.12, 49.296], forward: true },
   { id: 'causeway', coord: [-123.1419028, 49.3118075], offset: [110, 85, 170] },
@@ -109,6 +116,86 @@ const cases = [
       target: [34, 9, -20],
     },
   },
+  {
+    id: 'bc-entry',
+    landmarkPose: {
+      coord: [-123.1120067, 49.2766985],
+      yaw: 0.677,
+      baseY: 5,
+      camera: [-115, 7, -28],
+      target: [-106.87, 3, 0],
+    },
+  },
+  {
+    id: 'bc-envelope',
+    landmarkPose: {
+      coord: [-123.1120067, 49.2766985],
+      yaw: 0.677,
+      baseY: 5,
+      camera: [150, 65, 155],
+      target: [50, 30, 40],
+    },
+  },
+  {
+    id: 'harbour-entry',
+    landmarkPose: {
+      coord: [-123.1120903, 49.2847656],
+      yaw: -0.8,
+      baseY: 17.96477617737215,
+      camera: [10, 6, 44],
+      target: [38.15, 4, 35.75],
+    },
+  },
+  {
+    id: 'harbour-tower',
+    landmarkPose: {
+      coord: [-123.1120903, 49.2847656],
+      yaw: -0.8,
+      baseY: 17.96477617737215,
+      camera: [150, 170, 140],
+      target: [0, 100, 0],
+    },
+  },
+  {
+    id: 'convention-entry',
+    landmarkPose: {
+      coord: [-123.1159678, 49.2890752],
+      yaw: -0.403,
+      baseY: 4,
+      camera: [-105, 8, -44],
+      target: [-71.65, 4, -30.64],
+    },
+  },
+  {
+    id: 'convention-roof',
+    landmarkPose: {
+      coord: [-123.1159678, 49.2890752],
+      yaw: -0.403,
+      baseY: 4,
+      camera: [-190, 95, 125],
+      target: [-35, 12, -10],
+    },
+  },
+  {
+    id: 'house-balconies',
+    landmarkPose: {
+      coord: [-123.131029, 49.2749256],
+      yaw: -0.78,
+      baseY: 14.140882560018866,
+      camera: [57, 88, 67],
+      target: [5, 78, 0],
+    },
+  },
+  {
+    id: 'house-podium',
+    landmarkPose: {
+      coord: [-123.131029, 49.2749256],
+      yaw: -0.78,
+      baseY: 14.140882560018866,
+      camera: [62, 18, 74],
+      target: [5, 14, 10],
+    },
+  },
   { id: 'marine', view: 'marine' },
   { id: 'canada', view: 'canada' },
 ] as const;
@@ -185,6 +272,10 @@ export function installVisualQA(e: CityEngine) {
     }
     if ('street' in test) {
       const mode = 'drive' in test ? 'drive' : 'walk';
+      if ('streetTarget' in test) {
+        const [x, z] = project(test.streetTarget);
+        e.controls.target.set(x, 0, z);
+      }
       e.navigation!.setMode(mode, test.street);
       e.settings.mode = mode;
       e.applySettings({ ...e.settings, mode });
@@ -249,12 +340,20 @@ export function installVisualQA(e: CityEngine) {
     });
     return { gaps, hidden, elapsed: previous - start, trace };
   }
-  async function run(quality: VisualQuality, only?: string, durationMs = 8000) {
+  async function run(
+    quality: VisualQuality,
+    only?: string | readonly string[],
+    durationMs = 8000,
+  ) {
     if (running) return;
     running = true;
     const results = [];
     try {
-      for (const test of cases.filter((c) => !only || c.id === only)) {
+      for (const test of cases.filter(
+        (c) =>
+          !only ||
+          (typeof only === 'string' ? c.id === only : only.includes(c.id)),
+      )) {
         apply(test.id, quality);
         await collect(2500);
         const start = e.navigation!.position.toArray();
@@ -315,6 +414,64 @@ export function installVisualQA(e: CityEngine) {
       e.navigation?.keys.clear();
     }
   }
+  button('Save startup timing', () => {
+    if (running) return;
+    const measurement = e.startupQA?.snapshot();
+    if (!measurement) {
+      status.textContent = 'No startup recorder';
+      return;
+    }
+    const row = {
+      kind: 'startup-wall-v1',
+      id: 'startup',
+      valid: measurement.valid,
+      measurement,
+      viewport: [innerWidth, innerHeight],
+      render: [e.renderer.domElement.width, e.renderer.domElement.height],
+    };
+    output.value = JSON.stringify(row, null, 2);
+    void fetch('/__visual-qa', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: 'startup-timing', row }),
+    })
+      .then((r) => {
+        status.textContent = r.ok
+          ? 'Saved startup timing'
+          : `Save failed ${r.status}`;
+      })
+      .catch((error) => {
+        status.textContent = String(error);
+      });
+  });
+  installReleaseQAControls(e, {
+    button,
+    apply,
+    selectedCase: () => selectedCase,
+    isColdCase: (id) => {
+      const test = cases.find((c) => c.id === id);
+      return !!test && ('view' in test || 'landmarkPose' in test);
+    },
+    begin: () => {
+      if (running) return false;
+      running = true;
+      return true;
+    },
+    end: () => {
+      running = false;
+    },
+    panel,
+    status,
+    output,
+  });
+  const secondaryCases = [
+    'bc-entry',
+    'harbour-entry',
+    'convention-entry',
+    'house-balconies',
+  ];
+  button('Measure secondary High', () => void run('high', secondaryCases));
+  button('Measure secondary Ultra', () => void run('ultra', secondaryCases));
   button('Run High baseline', () => void run('high'));
   button('Audit Causeway travel', () => {
     if (running) return;
@@ -407,6 +564,7 @@ export function installVisualQA(e: CityEngine) {
           ? gl.getParameter(ext.UNMASKED_RENDERER_WEBGL)
           : gl.getParameter(gl.RENDERER),
         userAgent: navigator.userAgent,
+        landmarkGroundPlans: e.data.landmarkGroundPlans,
         createdAt: new Date().toISOString(),
       },
     }),
