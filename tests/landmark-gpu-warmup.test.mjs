@@ -438,3 +438,27 @@ test('state transaction preserves renderer monotonic frame and owned memory', ()
   assert.deepEqual(snapshot(renderer), before);
   assert.equal(renderer.info.render.frame, 126);
 });
+
+test('direct rendering warms canvas shaders and uploads into RGBA8, without an HDR composer', async () => {
+  const { renderer, scene, camera } = setup();
+  const warmer = new LandmarkGpuWarmup({
+    renderer,
+    scene,
+    camera,
+    colorTarget: () => null,
+    unavailable: () => false,
+  });
+  const a = candidate(1);
+  const promise = warmer.prepare(
+    a.group,
+    new AbortController().signal,
+    a.holder,
+  );
+  warmer.tick();
+  await promise;
+  assert.equal(
+    renderer.calls.find((c) => c.type === 'render')?.target?.texture.type,
+    THREE.UnsignedByteType,
+  );
+  warmer.dispose();
+});

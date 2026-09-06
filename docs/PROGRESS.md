@@ -181,3 +181,8 @@ Replaced generic sparse bridge footway rails with continuous green top/bottom me
 ## Sun, moon and night-sky effects — 2026-09-06
 
 Added time-driven solar/lunar discs, eight moon phases plus manual eclipse preview, faint adjustable stars, animated northern aurora and shooting-star trails. A session's first encountered night defaults to a half moon and guaranteed aurora; later simulated nights have a stable 1-in-3 aurora draw. Natural clock days now survive midnight and multi-day ticks; manual hour seeks do not advance the calendar. Time → Sky effects provides five-language visibility switches, moon selection, automatic/every-night aurora, and four density/intensity/frequency sliders. Eclipse and sky paths are illustrative rather than live astronomical predictions. Fixed geometry/two extra draws; bounded 3,200 stars. All 351 tests and TypeScript pass. Real captures, control checks and short High measurements (including one longer frame) are in `docs/visual-quality/sky-effects-final/README.md`.
+
+### Mobile graphics compatibility (2026-09-06)
+- Added automatic iPhone/iPad/Android direct rendering; Balanced default, capped physical pixels, no HDR post-processing/PMREM/SSAO/shadow allocation.
+- Added an actual HDR framebuffer probe for desktop fallback and bounded RGBA8 landmark upload support.
+- Tested compatible city, driving and night output, including a narrow viewport. Physical-phone confirmation still pending; see `docs/visual-quality/mobile-compatible/README.md`.

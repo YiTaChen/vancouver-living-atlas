@@ -1,3 +1,4 @@
+import { isMobileGraphics, supportsHDRTarget } from './graphics-profile';
 import { SkyEffects } from './sky-effects';
 import { createBeachAmenities } from './beach-amenities';
 import { installSSAOBlur4 } from './ssao-blur4';
@@ -77,6 +78,7 @@ export class CityEngine {
   environmentTarget: THREE.WebGLRenderTarget | null = null;
   extraTextures = new Set<THREE.Texture>();
   contextLost = false;
+  compatibleGraphics = false;
   lastShadowCamera = new THREE.Vector3(Infinity, Infinity, Infinity);
   sky = new Sky();
   skyEffects!: SkyEffects;
@@ -188,6 +190,14 @@ export class CityEngine {
       powerPreference: 'high-performance',
       preserveDrawingBuffer: false,
     });
+    this.compatibleGraphics =
+      isMobileGraphics(navigator.userAgent, navigator.maxTouchPoints) ||
+      new URLSearchParams(location.search).get('graphics') === 'compatible' ||
+      !supportsHDRTarget(this.renderer);
+    if (this.compatibleGraphics) this.settings.quality = 'balanced';
+    this.renderer.domElement.dataset.graphics = this.compatibleGraphics
+      ? 'compatible'
+      : 'hdr';
     this.renderer.setPixelRatio(this.pixelRatio());
     this.renderer.setSize(container.clientWidth, container.clientHeight);
     this.renderer.info.autoReset = false;
@@ -196,7 +206,7 @@ export class CityEngine {
     this.renderer.toneMappingExposure = 1.13;
     this.renderer.shadowMap.autoUpdate = false;
     this.renderer.shadowMap.needsUpdate = true;
-    this.renderer.shadowMap.enabled = true;
+    this.renderer.shadowMap.enabled = !this.compatibleGraphics;
     this.renderer.shadowMap.type = THREE.PCFShadowMap;
     this.renderer.domElement.setAttribute(
       'aria-label',
@@ -243,13 +253,15 @@ export class CityEngine {
       this.startupQA?.end('constructor.renderer-controls');
       this.startupQA?.begin('constructor.environment-pmrem');
     }
-    const pmrem = new THREE.PMREMGenerator(this.renderer),
-      envScene = new THREE.Scene();
-    envScene.add(this.sky.clone());
-    this.environmentTarget = pmrem.fromScene(envScene, 0.04);
-    this.scene.environment = this.environmentTarget.texture;
-    this.scene.environmentIntensity = 0.012;
-    pmrem.dispose();
+    if (!this.compatibleGraphics) {
+      const pmrem = new THREE.PMREMGenerator(this.renderer),
+        envScene = new THREE.Scene();
+      envScene.add(this.sky.clone());
+      this.environmentTarget = pmrem.fromScene(envScene, 0.04);
+      this.scene.environment = this.environmentTarget.texture;
+      this.scene.environmentIntensity = 0.012;
+      pmrem.dispose();
+    }
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.end('constructor.environment-pmrem');
       this.startupQA?.begin('constructor.scene-and-events');
@@ -466,12 +478,14 @@ export class CityEngine {
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('render.composer-setup');
     }
-    this.composer = new EffectComposer(this.renderer);
-    this.renderPass = new RenderPass(this.scene, this.camera);
-    this.composer.addPass(this.renderPass);
-    this.composer.addPass(new OutputPass());
-    this.fxaa = new ShaderPass(FXAAShader);
-    this.composer.addPass(this.fxaa);
+    if (!this.compatibleGraphics) {
+      this.composer = new EffectComposer(this.renderer);
+      this.renderPass = new RenderPass(this.scene, this.camera);
+      this.composer.addPass(this.renderPass);
+      this.composer.addPass(new OutputPass());
+      this.fxaa = new ShaderPass(FXAAShader);
+      this.composer.addPass(this.fxaa);
+    }
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('render.quality-and-initial-lighting');
     }
@@ -491,16 +505,18 @@ export class CityEngine {
       this.startupQA?.phase('render.composer-warmup');
     // Allocate and run the current postprocessing pipeline while loading is visible.
     // This adds real buffer upload after the existing initial shader compilation.
-    this.ensureSSAO();
-    this.updateShadowFrustum();
-    warmComposer(
-      this.renderer,
-      this.composer,
-      this.scene,
-      this.ssao,
-      this.fxaa,
-      this.settings.quality !== 'balanced',
-    );
+    if (this.composer) {
+      this.ensureSSAO();
+      this.updateShadowFrustum();
+      warmComposer(
+        this.renderer,
+        this.composer,
+        this.scene,
+        this.ssao,
+        this.fxaa,
+        this.settings.quality !== 'balanced',
+      );
+    }
     this.landmarkWarmup = new LandmarkGpuWarmup({
       renderer: this.renderer,
       scene: this.scene,
@@ -554,12 +570,15 @@ export class CityEngine {
   pixelRatio() {
     const w = Math.max(1, this.container.clientWidth),
       h = Math.max(1, this.container.clientHeight);
-    return qualityPixelRatio(
+    const ratio = qualityPixelRatio(
       this.settings.quality,
       w,
       h,
       window.devicePixelRatio,
     );
+    return this.compatibleGraphics
+      ? Math.min(ratio, 1, Math.sqrt(1_000_000 / (w * h)))
+      : ratio;
   }
   resizeQuality() {
     const ratio = this.pixelRatio();
@@ -604,7 +623,7 @@ export class CityEngine {
     this.renderer.shadowMap.needsUpdate = true;
   }
   ensureSSAO() {
-    if (this.ssao || !this.composer) return;
+    if (this.compatibleGraphics || this.ssao || !this.composer) return;
     const ratio = this.pixelRatio();
     this.ssao = new SSAOPass(
       this.scene,
@@ -677,6 +696,7 @@ export class CityEngine {
     this.updateShadowFrustum();
     this.renderer.info.reset();
     const shadows =
+      !this.compatibleGraphics &&
       this.settings.quality !== 'balanced' &&
       this.camera.position.distanceTo(this.controls.target) < 4500;
     if (shadows !== this.renderer.shadowMap.enabled) {
@@ -684,6 +704,7 @@ export class CityEngine {
       this.renderer.shadowMap.needsUpdate = shadows;
     }
     const ao =
+      !this.compatibleGraphics &&
       this.settings.quality !== 'balanced' &&
       this.camera.position.distanceTo(this.controls.target) < 3500;
     if (ao) this.ensureSSAO();
@@ -1131,6 +1152,7 @@ export class CityEngine {
     this.controls.autoRotate = settings.autoRotate;
     this.resizeQuality();
     this.renderer.shadowMap.enabled =
+      !this.compatibleGraphics &&
       settings.quality !== 'balanced' &&
       this.camera.position.distanceTo(this.controls.target) < 4500;
     this.controls.autoRotateSpeed = 0.5;

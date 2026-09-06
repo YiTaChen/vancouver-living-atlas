@@ -182,6 +182,7 @@ export default function Home() {
           setStats,
           () => {
             setReady(true);
+            if (engine.current) setSettings({ ...engine.current.settings });
             engine.current?.setLocale(localeRef.current);
             if (labelHost.current)
               engine.current?.attachLabels(labelHost.current, go);
@@ -1235,6 +1236,11 @@ export default function Home() {
                   : 'balancedQualityDescription',
             )}
           </p>
+          {engine.current?.compatibleGraphics && (
+            <p className="quality-description">
+              {tr('compatibleGraphicsNote')}
+            </p>
+          )}
           <div className="quality-performance">
             <span>{tr('renderResolution')}</span>
             <span>

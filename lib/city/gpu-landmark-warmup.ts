@@ -36,6 +36,7 @@ function abortError() {
 export class LandmarkGpuWarmup {
   private jobs: Job[] = [];
   private scratch: THREE.WebGLRenderTarget | null = null;
+  private directTarget = new THREE.WebGLRenderTarget(16, 16);
   private targetSignature = '';
   private stopped = false;
   constructor(private options: WarmupOptions) {}
@@ -107,8 +108,11 @@ export class LandmarkGpuWarmup {
       return;
     }
     try {
-      const target = this.options.colorTarget();
-      if (!target) throw new Error('Composer beauty target unavailable');
+      const colorTarget = this.options.colorTarget();
+      // Direct/mobile rendering still needs bounded geometry upload. An RGBA8
+      // scratch target is widely supported; compile the canvas variant separately.
+      const target = colorTarget ?? this.directTarget;
+
       const signature = pipelineSignature(renderer, scene, camera, target);
       // A quality/shadow/light definition change requires rewarming previous objects.
       if (job.signature !== signature) {
@@ -155,6 +159,12 @@ export class LandmarkGpuWarmup {
           renderer.autoClearDepth =
           renderer.autoClearStencil =
             true;
+        if (!colorTarget) {
+          renderer.setRenderTarget(null);
+          withShaderCheck(renderer, () =>
+            renderer.compile(proxy, warmCamera, scene),
+          );
+        }
         renderer.setRenderTarget(this.scratch);
         // Non-null RT is essential: canvas compile would warm different colour/tone defines.
         withShaderCheck(renderer, () => {
@@ -201,6 +211,7 @@ export class LandmarkGpuWarmup {
   dispose() {
     this.invalidate('Landmark preparation disposed');
     this.scratch?.dispose();
+    this.directTarget.dispose();
     this.scratch = null;
   }
 }
