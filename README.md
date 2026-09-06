@@ -6,11 +6,13 @@ An original, explorable browser reconstruction of Vancouver: the entire Downtown
 
 The five-language application is publicly hosted on Firebase Hosting. This repository is public, and the application can also run locally.
 
-![Original Vancouver downtown render](docs/images/downtown.png)
+## Explore Vancouver in 30 seconds
 
-## Project introduction video
+https://github.com/user-attachments/assets/e5bf31c6-9eef-4c7f-827b-ef1349b9461c
 
-Watch or download the [new 30-second project introduction](docs/videos/2026-09-05/README.md), captured from the running application at 1080p / 30 fps. The finished H.264 MP4, reproducible production package and validation report are included.
+A tour of the current project: detailed landmarks, walking, a left-hand-drive cockpit, sailing, local-map zoom and day-to-night lighting. All footage comes from the running 3D application.
+
+**Compact preview:** 960 × 540 · 30 fps · 3.6 MB (93% smaller). [Download preview](docs/videos/2026-09-05/project-intro-readme.mp4?raw=true) · [Full 1080p film](docs/videos/2026-09-05/project-intro.mp4?raw=true) · [Reproduce the film](docs/videos/2026-09-05/README.md)
 
 ## Languages
 
@@ -18,12 +20,13 @@ English is the default for a first visit. The header language menu also offers F
 
 ## Explore / 操作
 
-- **鳥瞰 / Orbit:** drag to rotate, wheel or +/− to zoom, right-drag to pan. Ten landmark and railway viewpoints, north-up reset, clickable minimap and an automatic city tour are included.
+- **鳥瞰 / Orbit:** drag to rotate, wheel or +/− to zoom, right-drag to pan. Fourteen city, park, landmark, harbour and railway viewpoints, north-up reset, a clickable minimap and an automatic city tour are included.
 - **步行 / Walk:** drag the person in the mode bar onto the main map, or select Walk and click an open ground location. Zoom in before dropping for greater precision. W/S move, A/D turn, drag to look, Shift moves faster.
 - **駕車 / Drive:** drag the car onto the map, or select Drive and click near a road. The preview shows the actual snapped road position before starting; distant roads, water and building interiors are rejected. W/S throttle/reverse, A/D steer, Space brakes. Bridge decks and ground-level underpasses remain separate.
+- **開船 / Boat:** drag the boat onto open water, or choose Coal Harbour, False Creek or Lost Lagoon. W/S control throttle and reverse, A/D steer the rudder, Space selects neutral. The boat coasts with momentum, responds to sea waves or calmer lake water, and stops at shores and docks.
 - **重新放置 / Choose a new start:** use the button in street controls to return to a nearby aerial view and place again. Esc cancels placement. Mouse/touch map drags adjust the view without dropping; a tap places. Keyboard users can select a mode, focus the map and press Enter to start at its centre, or activate Start here for the previewed point. Gastown, Robson and Beach Avenue remain explicit quick starts.
 - **時間 / Time:** the separate clock button shows the current scene time. Time flows by default at 30× (one real minute is 30 city minutes; a full day takes 48 minutes). Choose 1×, 10×, 30×, 60×, 120× or 300×, set any minute of the day, or turn off “Let time flow” to fix the light at that moment. Walking, driving, traffic and water animation retain their normal speed. Scene time pauses while the tab is hidden. “Hide time” hides the toolbar’s numeric time while keeping the clock button and panel available; time is shown by default.
-- **圖層 / Layers:** control trees, buildings, moving traffic, trains and labels. Choose detailed shadows or a lighter rendering mode.
+- **圖層 / Layers:** control trees, buildings, traffic, trains, harbour aircraft and boats, and labels. Choose Balanced, High detail or Ultra detail.
 - **列車 / Trains:** a locomotive, coal tender and four coaches travel the Waterfront–Gastown railway with rising white chimney steam. Two four-car electric SkyTrains travel in opposite directions on the Expo elevated tracks near Science World. Open Layers and choose “Find steam train” or “Find SkyTrain” for a close view; trains are visible by default. Their speed is independent of the day/night clock.
 - **風景 / Capture:** export the current rendered view as PNG, or hide the interface for an immersive view. Esc restores controls and returns street modes to orbit.
 
@@ -49,6 +52,16 @@ Street navigation is an exploration feature: simplified collision and vehicle mo
 ## Local minimap
 
 While walking, driving or boating, the minimap follows your actual position with a cyan heading arrow and north at the top. Use its **+ / −** buttons, scroll over the map, or focus the map and press **+ / −** to zoom independently of the 3D camera. Nearby roads, building footprints, shores, lakes and a distance scale provide context. The selected zoom is retained when switching travel modes; Orbit retains the clickable peninsula overview. The local minimap is also available on phones.
+
+## Travel cameras
+
+Scroll, pinch or use **+ / −** to change camera distance while walking, driving or sailing.
+
+- **Walk:** zoom from first person to a third-person view with an animated character.
+- **Drive and boat:** zoom into the vehicle interior, then use the upper-right controls to choose the cabin view or an unobstructed first-person view. The car has a left-hand-drive interior; drag to look around independently of steering.
+- **Look around and return:** zoom farther out to a local map at your current position. Rotate the map to inspect nearby scenery, then zoom back in to resume the same travel mode, position and heading. Panning to a different coordinate cancels this return; choose a new starting point to re-enter.
+
+Switching **Walk ↔ Drive** keeps you in the scene. Switching between a boat and a land mode opens placement for the appropriate surface. The local minimap follows your position and zooms independently of the 3D camera.
 
 ## Graphics quality
 

@@ -1,0 +1,58 @@
+{
+  "passed": true,
+  "video": "project-intro-readme.mp4",
+  "expected": {
+    "width": 960,
+    "height": 540,
+    "codec": "h264",
+    "fps": 30,
+    "duration_seconds": 30,
+    "decoded_frames": 900
+  },
+  "actual": {
+    "codec": "h264",
+    "width": 960,
+    "height": 540,
+    "fps": 30.0,
+    "duration_seconds": 30.0,
+    "decoded_frames": 900
+  },
+  "checks": {
+    "full_decode": true,
+    "h264": true,
+    "30_fps": true,
+    "duration": true,
+    "decoded_frame_count": true,
+    "no_black_intervals": true,
+    "faststart": true,
+    "960x540": true
+  },
+  "black_intervals": [],
+  "top_level_boxes": [
+    {
+      "type": "ftyp",
+      "offset": 0,
+      "size": 32
+    },
+    {
+      "type": "moov",
+      "offset": 32,
+      "size": 11736
+    },
+    {
+      "type": "free",
+      "offset": 11768,
+      "size": 8
+    },
+    {
+      "type": "mdat",
+      "offset": 11776,
+      "size": 3631195
+    }
+  ],
+  "ffmpeg_exit_code": 0,
+  "bytes": 3642971,
+  "source_bytes": 49163561,
+  "size_reduction_percent": 92.59,
+  "sha256": "2c5ef81ad53403de85fe48af97eb37a70346ad1ab08ae61d07ad50e1aa3bbd31"
+}
