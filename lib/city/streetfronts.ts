@@ -3,6 +3,15 @@ import { replacedBuilding } from './replaced-buildings';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import type { CityEngine } from './engine';
 import { project, rings, hash, inPolygon } from './geo';
+import { GroundSurfaceIndex } from './ground-surface';
+import {
+  fitBays,
+  fitEntrance,
+  windowBounds,
+  windowRows,
+  hashId,
+  type Profile,
+} from './facade-profile';
 // Original architectural embellishments for the close-view Gastown corridor.
 // These are representative street detail, not claims about current businesses.
 export function createStreetfronts(e: CityEngine) {
@@ -45,9 +54,22 @@ export function createStreetfronts(e: CityEngine) {
     return new THREE.MeshStandardMaterial({ map: t, roughness: 0.9 });
   });
   const signGeos: THREE.BufferGeometry[][] = names.map(() => []);
+  const sidewalkMeshes: THREE.Mesh[] = [];
+  e.roads.traverse((o) => {
+    if (
+      o instanceof THREE.Mesh &&
+      o.userData.walkSurface &&
+      !o.userData.asphaltSurface
+    )
+      sidewalkMeshes.push(o);
+  });
+  const sidewalks = new GroundSurfaceIndex(sidewalkMeshes),
+    profiles = e.data.buildingProfiles as Map<string, Profile>,
+    foundations = e.data.buildingFoundations as Map<string, number>;
   let n = 0;
   for (const f of e.data.buildings.features) {
     if (
+      replacedBuilding(f.properties) ||
       f.properties.minHeight > 0 ||
       f.properties.height < 7 ||
       f.properties.height > 34
@@ -71,7 +93,16 @@ export function createStreetfronts(e: CityEngine) {
         return s + a[0] * b[1] - b[0] * a[1];
       }, 0);
       if (area < 0) ring.reverse();
-      const ground = e.elevation(...(center as [number, number])) - 0.35;
+      const key = String(
+          f.properties.structureId ??
+            f.properties.buildingId ??
+            f.properties.id,
+        ),
+        ground = foundations.get(key),
+        profile = profiles.get(key);
+      if (ground === undefined || !profile || profile.kind !== 'heritage-brick')
+        continue;
+      const extent = { minHeightM: 0, heightM: Number(f.properties.height) };
       for (let i = 0; i < ring.length; i++) {
         const a = ring[i],
           b = ring[(i + 1) % ring.length],
@@ -82,23 +113,47 @@ export function createStreetfronts(e: CityEngine) {
           nx = dz,
           nz = -dx,
           yaw = Math.atan2(nx, nz);
-        // Cast-stone window surrounds and projecting cornices produce real silhouettes.
-        for (let u = 2.05; u < len - 1.8; u += 3.1)
-          for (let y = 4.6; y < f.properties.height - 1.3; y += 3.25) {
-            const x = a[0] + dx * u + nx * 0.11,
-              z = a[1] + dz * u + nz * 0.11;
-            box(2.4, 0.16, 0.27, x, ground + y + 1.07, z, yaw, 0xbcb6a4);
-            box(2.4, 0.23, 0.4, x, ground + y - 1.08, z, yaw, 0xc2b69e);
+        // Physical surrounds use the same pane boundaries as the body shader.
+        const grid = fitBays(profile, len);
+        for (let bay = 0; bay < grid.count; bay++)
+          for (const row of windowRows(profile, extent)) {
+            const pane = windowBounds(profile, grid, bay, row),
+              u = (pane.left + pane.right) / 2,
+              y = (pane.bottom + pane.top) / 2,
+              w = pane.right - pane.left,
+              h = pane.top - pane.bottom,
+              x = a[0] + dx * u + nx * 0.1,
+              z = a[1] + dz * u + nz * 0.1;
+            box(
+              w + 0.24,
+              0.15,
+              0.24,
+              x,
+              ground + pane.top + 0.055,
+              z,
+              yaw,
+              0xb5aa94,
+            );
+            box(
+              w + 0.34,
+              0.2,
+              0.32,
+              x,
+              ground + pane.bottom - 0.07,
+              z,
+              yaw,
+              0xbeb099,
+            );
             for (const sign of [-1, 1])
               box(
-                0.13,
-                2.18,
-                0.24,
-                x + dx * 1.12 * sign,
+                0.12,
+                h + 0.06,
+                0.2,
+                x + dx * (w / 2 + 0.035) * sign,
                 ground + y,
-                z + dz * 1.12 * sign,
+                z + dz * (w / 2 + 0.035) * sign,
                 yaw,
-                0xaaa491,
+                0xa89d88,
               );
           }
         box(
@@ -113,52 +168,72 @@ export function createStreetfronts(e: CityEngine) {
         );
         for (let u = 4; u < len - 3; u += 8) {
           const x = a[0] + dx * u,
-            z = a[1] + dz * u,
-            side = hash(n) > 0.5 ? 0x496153 : 0x764437;
+            z = a[1] + dz * u;
+          const jambs = [-2.45, 0, 2.45].map((t) => {
+            const px = x + dx * t + nx * 0.5,
+              pz = z + dz * t + nz * 0.5;
+            if (e.waterWorld.solidAt(px, pz)) return null;
+            return sidewalks.sample(px, pz, e.elevation(px, pz) + 1.18) ?? null;
+          }) as [number | null, number | null, number | null];
+          const entry = fitEntrance(profile, extent, ground, jambs);
+          if (!entry) continue;
+          const side = hash(profile.seed + u) > 0.5 ? 0x43564e : 0x624737,
+            middle = (entry.thresholdY + entry.headY) / 2;
           box(
             4.8,
-            2.7,
+            entry.heightM,
             0.18,
             x + nx * 0.15,
-            ground + 1.4,
+            middle,
             z + nz * 0.15,
             yaw,
-            0x29434a,
+            0x243b40,
           );
           for (const t of [-2.45, 0, 2.45])
             box(
-              0.12,
-              2.8,
-              0.25,
-              x + dx * t + nx * 0.3,
-              ground + 1.4,
-              z + dz * t + nz * 0.3,
+              0.1,
+              entry.heightM,
+              0.23,
+              x + dx * t + nx * 0.28,
+              middle,
+              z + dz * t + nz * 0.28,
               yaw,
-              0x273c3d,
+              0x31433f,
             );
           box(
-            5.5,
-            0.16,
-            1.7,
-            x + nx * 0.8,
-            ground + 3.2,
-            z + nz * 0.8,
+            4.95,
+            0.11,
+            0.32,
+            x + nx * 0.2,
+            entry.thresholdY + 0.02,
+            z + nz * 0.2,
+            yaw,
+            0x837d6d,
+          );
+          // A compact fascia fits below the first upper window, including slopes.
+          box(
+            5.25,
+            0.14,
+            1.3,
+            x + nx * 0.6,
+            entry.headY + 0.07,
+            z + nz * 0.6,
             yaw,
             side,
           );
           box(
-            5.5,
-            0.42,
+            5.25,
+            0.3,
             0.12,
-            x + nx * 1.63,
-            ground + 3,
-            z + nz * 1.63,
+            x + nx * 1.2,
+            entry.headY - 0.1,
+            z + nz * 1.2,
             yaw,
             side,
           );
-          const g = new THREE.PlaneGeometry(4.5, 0.7);
+          const g = new THREE.PlaneGeometry(3.9, 0.29);
           g.rotateY(yaw);
-          g.translate(x + nx * 0.4, ground + 4, z + nz * 0.4);
+          g.translate(x + nx * 1.27, entry.headY - 0.1, z + nz * 1.27);
           signGeos[n % names.length].push(g);
           n++;
         }
@@ -294,9 +369,11 @@ export function createRoofDetails(e: CityEngine) {
     )
       highest.set(key, f);
   }
-  let seed = 0;
-  for (const f of highest.values()) {
-    const height = f.properties.height;
+  for (const [key, f] of highest) {
+    const height = f.properties.height,
+      foundation = (e.data.buildingFoundations as Map<string, number>).get(key),
+      seed = hashId(key) % 4096;
+    if (foundation === undefined) continue;
     if (height < 8 || height > 180) continue;
     for (const p of rings(f)) {
       const poly = p.map((r) => r.map(project)),
@@ -314,12 +391,12 @@ export function createRoofDetails(e: CityEngine) {
         continue;
       boxes.push({
         x: cx,
-        y: e.elevation(cx, cz) - 0.35 + height,
+        y: foundation + height,
         z: cz,
         w: 2.3 + hash(seed) * 2,
         h: 1.2 + hash(seed + 5) * 1.5,
         d: 2.1 + hash(seed + 7) * 2,
-        seed: seed++,
+        seed,
       });
     }
   }

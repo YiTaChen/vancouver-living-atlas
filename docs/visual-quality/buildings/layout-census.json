@@ -1,0 +1,21 @@
+{
+  "sourceFeatures": 7630,
+  "polygonParts": 7800,
+  "structures": 3372,
+  "representativeStyleCounts": {
+    "lowrise-masonry": 2329,
+    "midrise-grid": 524,
+    "curtain-wall": 178,
+    "heritage-brick": 156,
+    "balcony-slab": 185
+  },
+  "wallFaces": 63257,
+  "wallVertices": 379542,
+  "elevatedFaces": 9535,
+  "noPaneFaces": 22153,
+  "allShaderWindowCells": 741004,
+  "profileAndLayoutCpuMs": 79.22,
+  "wallAttributeAddedMiB": 7.24,
+  "note": "CPU count only. All windows must remain shader cells; do not instantiate this entire city count. Attribute estimate excludes roof vertices and transient JS arrays.",
+  "skipped": []
+}

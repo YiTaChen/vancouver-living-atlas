@@ -185,9 +185,11 @@ for (const { path, names } of [
 }
 
 const replacements = await moduleAt('lib/city/replaced-buildings.ts');
+const facadeProfiles = await moduleAt('lib/city/facade-profile.ts');
 const facades = await moduleAt('lib/city/facade-details.ts', {
   './geo': geo.url,
   './replaced-buildings': replacements.url,
+  './facade-profile': facadeProfiles.url,
 });
 test('facade cells are lazy, use the shared foundation and evict geometry with a bounded cache', () => {
   const features = Array.from({ length: 42 }, (_, i) => ({
@@ -206,7 +208,20 @@ test('facade cells are lazy, use the shared foundation and evict geometry with a
     },
   }));
   const e = {
-    data: { buildings: { features } },
+    data: {
+      buildings: { features },
+      buildingProfiles: new Map(
+        features.map((f, i) => [
+          String(i),
+          facadeProfiles.exports.createProfile({
+            key: String(i),
+            heightM: 52,
+            footprintAreaM2: 144,
+            center: [i * 190 + 6, 6],
+          }),
+        ]),
+      ),
+    },
     camera: new THREE.PerspectiveCamera(),
     settings: { quality: 'balanced', buildings: true },
     buildings: new THREE.Group(),

@@ -1,0 +1,122 @@
+{
+  "profileSourceSha256": "cb14a9984e4504e072816b95ff0331fff8eeabaae13052d25f9cdd81bf520003",
+  "datasetSha256": "7fd37c68a0b10dc93f8319ee8c86c4578be6423806b7f7c189be1fe53504e1e9",
+  "sourceSha256": "2e8256ea3f442be7bafe953efe028e358cdda936fd9103719d616e6c1ac9d04d",
+  "cpuBuildMs": 834.7,
+  "structures": 3372,
+  "renderedParts": 7800,
+  "vertices": 524085,
+  "wallVertices": 379542,
+  "roofVertices": 144543,
+  "geometryBufferMiB": 39.98,
+  "nonFinite": 0,
+  "maxXYErrorM": 0.00012206229985167738,
+  "maxHeightErrorM": 0.000007502714368001762,
+  "maxUvErrorM": 0.00000732421875682121,
+  "maxLayoutErrorM": 0.00000732421875682121,
+  "maxFoundationErrorM": 1.7763568394002505e-14,
+  "uniformsAndChunkOrdering": "passed; no GPU shader compilation attempted",
+  "baselineGeometryCountsUnchanged": true,
+  "representativeStyleCounts": {
+    "lowrise-masonry": 2329,
+    "midrise-grid": 524,
+    "curtain-wall": 178,
+    "heritage-brick": 156,
+    "balcony-slab": 185
+  },
+  "groundGlazing": {
+    "activeFaces": 47996,
+    "disabledFaces": 15261,
+    "elevatedFaces": 9535,
+    "heritageFaces": 4139,
+    "byStyle": {
+      "heritage-brick": {
+        "faces": 4139,
+        "enabledFaces": 0,
+        "disabledFaces": 4139,
+        "enabledWithVisibleBays": 0
+      },
+      "lowrise-masonry": {
+        "faces": 24358,
+        "enabledFaces": 22576,
+        "disabledFaces": 1782,
+        "enabledWithVisibleBays": 19930
+      },
+      "midrise-grid": {
+        "faces": 17632,
+        "enabledFaces": 13813,
+        "disabledFaces": 3819,
+        "enabledWithVisibleBays": 11654
+      },
+      "balcony-slab": {
+        "faces": 7362,
+        "enabledFaces": 5758,
+        "disabledFaces": 1604,
+        "enabledWithVisibleBays": 4400
+      },
+      "curtain-wall": {
+        "faces": 9766,
+        "enabledFaces": 5849,
+        "disabledFaces": 3917,
+        "enabledWithVisibleBays": 4903
+      }
+    },
+    "minHeightM": 1.200251817703247,
+    "maxHeightM": 3.6500000953674316,
+    "minimumRoofClearanceM": 0.3999998283386228,
+    "minimumGroundStoreyClearanceM": 0.34999990463256836,
+    "minimumSampledSidewalkClearanceM": 0.2499998808440509,
+    "maxAttributeErrorM": 1.7166137755708633e-7,
+    "boundaryCasesPassed": [
+      "empty grades",
+      "invalid grade",
+      "invalid foundation",
+      "heritage",
+      "elevated part",
+      "insufficient headroom",
+      "short roof",
+      "grade max and clearance"
+    ]
+  },
+  "maxNormalUnitError": 4.191614422222045e-8,
+  "allAttributeCounts": {
+    "position": {
+      "count": 524085,
+      "itemSize": 3
+    },
+    "normal": {
+      "count": 524085,
+      "itemSize": 3
+    },
+    "color": {
+      "count": 524085,
+      "itemSize": 3
+    },
+    "uv": {
+      "count": 524085,
+      "itemSize": 2
+    },
+    "aStyle": {
+      "count": 524085,
+      "itemSize": 1
+    },
+    "aLayout": {
+      "count": 524085,
+      "itemSize": 4
+    },
+    "aTop": {
+      "count": 524085,
+      "itemSize": 1
+    },
+    "aSeed": {
+      "count": 524085,
+      "itemSize": 1
+    },
+    "aBaseWindow": {
+      "count": 524085,
+      "itemSize": 2
+    }
+  },
+  "baseWindowBufferMiB": 4,
+  "surface": "real building dataset; deterministic elevation(x,z)=17+0.012*x-0.006*z; roadRelief is the same fixture; sidewalk=roadRelief+1.18; not a surveyed pavement or GPU shader compilation test"
+}

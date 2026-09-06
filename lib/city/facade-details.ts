@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
-import { rings, project, hash } from './geo';
+import { rings, project } from './geo';
+import { fitBays, windowRows, type Profile } from './facade-profile';
 import { replacedBuilding } from './replaced-buildings';
 import type { CityEngine } from './engine';
 
@@ -11,6 +12,7 @@ type Facade = {
   ground: number;
   h: number;
   min: number;
+  profile: Profile;
 };
 type Cell = {
   items: Facade[];
@@ -42,7 +44,10 @@ export class FacadeDetails {
       const foundation = foundations.get(
         String(p.structureId ?? p.buildingId ?? p.id),
       );
-      if (foundation === undefined) continue;
+      const profile = (e.data.buildingProfiles as Map<string, Profile>).get(
+        String(p.structureId ?? p.buildingId ?? p.id),
+      );
+      if (foundation === undefined || !profile) continue;
       for (const polygon of rings(f)) {
         const r = polygon[0].slice(0, -1).map(project);
         if (r.length < 3 || r.length > 18) continue;
@@ -57,7 +62,7 @@ export class FacadeDetails {
             used: 0,
           });
         const cell = cells.get(key)!;
-        cell.items.push({ r, x, z, ground: foundation, h, min });
+        cell.items.push({ r, x, z, ground: foundation, h, min, profile });
         for (const p of r) {
           cell.bounds.expandByPoint(
             new THREE.Vector3(p[0], foundation + min, p[1]),
@@ -72,13 +77,12 @@ export class FacadeDetails {
   }
   build(cell: Cell) {
     const list: THREE.BufferGeometry[] = [];
-    for (const { r, x, z, ground, h, min } of cell.items) {
-      const seed = x * 0.31 + z * 0.77;
+    for (const { r, ground, h, min, profile } of cell.items) {
       const area = r.reduce((s, a, i) => {
         const b = r[(i + 1) % r.length];
         return s + a[0] * b[1] - b[0] * a[1];
       }, 0);
-      const residential = x < 500 || hash(seed) > 0.6;
+      const residential = profile.balconies;
       for (let edge = 0; edge < r.length; edge++) {
         const a = r[edge],
           b = r[(edge + 1) % r.length],
@@ -106,25 +110,38 @@ export class FacadeDetails {
           );
           list.push(g);
         };
-        const balcony = residential && edge % 2 === 0 && length < 55;
-        for (let y = Math.max(8, min + 3.25); y < h - 2; y += 3.25) {
+        const grid = fitBays(profile, length),
+          balcony = residential && edge % 2 === 0 && length < 55;
+        for (const row of windowRows(profile, {
+          minHeightM: min,
+          heightM: h,
+        })) {
+          const y = profile.groundStoreyM + row * profile.storeyM;
+          if (y < min + 0.2) continue;
           if (balcony) {
-            box(length * 0.76, 0.18, 1.35, 0.5, y, 0.55);
-            box(length * 0.76, 0.1, 0.1, 0.5, y + 1, 1.225);
-            const div = Math.max(2, Math.floor(length / 5));
-            for (let j = 0; j <= div; j++)
-              box(0.09, 1, 0.09, 0.12 + (j * 0.76) / div, y + 0.5, 1.15);
-          } else box(length, 0.13, 0.15, 0.5, y, 0.055);
+            const span = grid.endM - grid.originM;
+            box(span, 0.16, 1.15, 0.5, y, 0.48);
+            box(span, 0.075, 0.075, 0.5, y + 1.05, 1.035);
+            for (let j = 0; j <= grid.count; j++)
+              box(
+                0.065,
+                1.05,
+                0.065,
+                (grid.originM + j * grid.pitchM) / length,
+                y + 0.525,
+                1.035,
+              );
+          } else box(length, 0.11, 0.13, 0.5, y, 0.035);
         }
         if (!residential)
-          for (let j = 1; j < Math.floor(length / 5); j++)
+          for (let j = 1; j < grid.count; j++)
             box(
-              0.13,
+              profile.frameWidthM,
               h - min - 0.4,
-              0.19,
-              j / Math.floor(length / 5),
+              profile.frameDepthM,
+              (grid.originM + j * grid.pitchM) / length,
               (h + min) / 2,
-              0.1,
+              0.055,
             );
         box(length, 0.5, 0.35, 0.5, h - 0.1, 0.04);
       }

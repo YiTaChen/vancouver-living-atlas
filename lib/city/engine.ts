@@ -5,9 +5,9 @@ import type { TravelMode } from './placement-geometry';
 import type { TravelView } from './travel-camera';
 import * as THREE from 'three';
 import { LocalMinimap, minimapPose, minimapWorldPoint } from './minimap';
-import { replacedBuilding } from './replaced-buildings';
 import type { LandmarkDetail } from './landmark-detail';
 import { FacadeDetails } from './facade-details';
+import { createBuildingBodies } from './building-bodies';
 import type { DetailedTrees } from './detailed-trees';
 import { QUALITY, qualityPixelRatio } from './quality';
 import { DEFAULT_LOCALE, translate, viewText, type Locale } from '../i18n';
@@ -303,8 +303,8 @@ export class CityEngine {
     this.makeWater();
     this.makeLand();
     makeContext(this);
-    this.makeBuildings();
     this.makeRoads();
+    this.makeBuildings();
     createLandmarks(this);
     createBridgeApproaches(this);
     createNature(this);
@@ -694,182 +694,7 @@ export class CityEngine {
     );
   }
   makeBuildings() {
-    const pos: number[] = [],
-      norm: number[] = [],
-      colors: number[] = [],
-      uv: number[] = [],
-      styles: number[] = [];
-    let style = 0;
-    const palette = [
-      0x91aeb0, 0xa3b9bc, 0xaebbbc, 0x8fa5a9, 0xb4b6ab, 0xd5d0bb, 0x8dabae,
-      0xc4c2b5, 0x687f84,
-    ];
-    let count = 0;
-    const foundations = new Map<string, number>();
-    const vertex = (
-      x: number,
-      y: number,
-      z: number,
-      nx: number,
-      ny: number,
-      nz: number,
-      c: THREE.Color,
-      u: number,
-      v: number,
-    ) => {
-      pos.push(x, y, z);
-      norm.push(nx, ny, nz);
-      colors.push(c.r, c.g, c.b);
-      uv.push(u, v);
-      styles.push(style);
-    };
-    for (const f of this.data.buildings.features) {
-      const prop = f.properties,
-        h = Math.max(2, Number(prop.height ?? prop.hgt_agl ?? 8));
-      if (h > 350 || replacedBuilding(prop)) continue;
-      for (const polygon of rings(f)) {
-        const poly = polygon.map((r) => r.slice(0, -1).map(project));
-        if (poly[0].length < 3) continue;
-        const center = poly[0].reduce(
-          (a, p) => [
-            a[0] + p[0] / poly[0].length,
-            a[1] + p[1] / poly[0].length,
-          ],
-          [0, 0],
-        );
-        const key = String(prop.structureId ?? prop.buildingId ?? prop.id);
-        if (!foundations.has(key))
-          foundations.set(key, this.elevation(center[0], center[1]) - 0.4);
-        const ground = foundations.get(key)!,
-          base = ground + Math.max(0, Number(prop.minHeight) || 0),
-          top = ground + h;
-        const c = new THREE.Color(
-          palette[Math.floor(hash(count * 3.7) * palette.length)],
-        );
-        style =
-          (h < 48 &&
-            center[0] > 700 &&
-            center[0] < 1850 &&
-            center[1] > -70 &&
-            center[1] < 540) ||
-          (h < 28 && prop.source === 'cov-2009' && hash(count + 73) > 0.8)
-            ? 1
-            : 0;
-        if (style) c.set(hash(count) > 0.4 ? 0xb9876b : 0x8c8980);
-        if (h < 15) c.lerp(new THREE.Color(0xc7bcaa), 0.3);
-        for (const ring of poly) {
-          const area = ring.reduce((s, p, i) => {
-            const q = ring[(i + 1) % ring.length];
-            return s + p[0] * q[1] - q[0] * p[1];
-          }, 0);
-          if (area < 0) ring.reverse();
-          for (let i = 0; i < ring.length; i++) {
-            const a = ring[i],
-              b = ring[(i + 1) % ring.length],
-              dx = b[0] - a[0],
-              dz = b[1] - a[1],
-              len = Math.hypot(dx, dz);
-            if (len < 0.01) continue;
-            const nx = dz / len,
-              nz = -dx / len;
-            [
-              [a[0], base, a[1], 0, 0],
-              [b[0], top, b[1], len, h],
-              [b[0], base, b[1], len, 0],
-              [a[0], base, a[1], 0, 0],
-              [a[0], top, a[1], 0, h],
-              [b[0], top, b[1], len, h],
-            ].forEach((v) =>
-              vertex(v[0], v[1], v[2], nx, 0, nz, c, v[3], v[4]),
-            );
-          }
-        }
-        const p2 = poly.map((r) => r.map((p) => new THREE.Vector2(...p))),
-          flat = p2.flat();
-        for (const t of THREE.ShapeUtils.triangulateShape(p2[0], p2.slice(1)))
-          for (const idx of [t[0], t[2], t[1]]) {
-            const p = flat[idx];
-            vertex(
-              p.x,
-              top,
-              p.y,
-              0,
-              1,
-              0,
-              c.clone().multiplyScalar(0.88),
-              -1,
-              -1,
-            );
-          }
-        count++;
-      }
-    }
-    const brick = new THREE.TextureLoader().load(
-      '/textures/brick-terracotta-albedo.png',
-    );
-    this.extraTextures.add(brick);
-    brick.wrapS = brick.wrapT = THREE.RepeatWrapping;
-    brick.colorSpace = THREE.SRGBColorSpace;
-    brick.anisotropy = 8;
-    const mat = new THREE.MeshStandardMaterial({
-      vertexColors: true,
-      roughness: 0.68,
-      metalness: 0.12,
-      side: THREE.DoubleSide,
-    });
-    mat.onBeforeCompile = (s) => {
-      s.uniforms.uNight = this.uniforms.night;
-      s.uniforms.uBrick = { value: brick };
-      s.vertexShader =
-        'attribute float aStyle;varying float vStyle;varying vec2 vFacade;\n' +
-        s.vertexShader;
-      s.vertexShader = s.vertexShader.replace(
-        '#include <begin_vertex>',
-        '#include <begin_vertex>\nvFacade=uv;vStyle=aStyle;',
-      );
-      s.fragmentShader =
-        'uniform sampler2D uBrick;uniform float uNight;varying float vStyle;varying vec2 vFacade;\n' +
-        s.fragmentShader;
-      s.fragmentShader = s.fragmentShader.replace(
-        '#include <color_fragment>',
-        `#include <color_fragment>
-  if(vFacade.x>=0.0){
-    vec2 cell=vec2(vFacade.x/3.1,vFacade.y/3.25),grid=fract(cell);
-    vec2 aa=max(fwidth(cell)*.8,vec2(.008));
-    float brick=step(.5,vStyle);
-    float pane=(smoothstep(.105-aa.x,.105+aa.x,grid.x)-smoothstep(.865-aa.x,.865+aa.x,grid.x))*(smoothstep(.19-aa.y,.19+aa.y,grid.y)-smoothstep(.865-aa.y,.865+aa.y,grid.y));
-    float rand=fract(sin(dot(floor(cell),vec2(127.1,311.7)))*43758.5453);
-    if(brick>.5) diffuseColor.rgb*=texture2D(uBrick,vFacade/1.728).rgb*1.7;
-    vec3 wall=diffuseColor.rgb;
-    float blind=step(.75,rand)*smoothstep(.32,.7,grid.y);
-    vec3 glazing=wall*mix(vec3(.36,.58,.67),vec3(.65,.84,.87),smoothstep(.2,.9,grid.y));
-    glazing=mix(glazing,vec3(.38,.40,.35),blind*.55);
-    float sill=(smoothstep(.155-aa.y,.155+aa.y,grid.y)-smoothstep(.195-aa.y,.195+aa.y,grid.y));
-    diffuseColor.rgb=mix(wall,glazing,pane);
-    diffuseColor.rgb*=1.-sill*.32;
-    diffuseColor.rgb*=mix(.77,1.,smoothstep(0.,14.,vFacade.y));
-    diffuseColor.rgb=mix(diffuseColor.rgb,vec3(1.,.64,.26),pane*step(.52,rand)*uNight*.75);
-  }`,
-      );
-      s.fragmentShader = s.fragmentShader.replace(
-        '#include <roughnessmap_fragment>',
-        `#include <roughnessmap_fragment>
-  if(vFacade.x>=0.0){ vec2 g=fract(vec2(vFacade.x/3.1,vFacade.y/3.25));float pane=step(.12,g.x)*step(g.x,.86)*step(.2,g.y)*step(g.y,.86);roughnessFactor=mix(.83,.26,pane); }`,
-      );
-      s.fragmentShader = s.fragmentShader.replace(
-        '#include <emissivemap_fragment>',
-        `#include <emissivemap_fragment>
-   if(vFacade.x>=0.0){vec2 grid=fract(vec2(vFacade.x/3.1,vFacade.y/3.25));float r=fract(sin(dot(floor(vec2(vFacade.x/3.1,vFacade.y/3.25)),vec2(127.1,311.7)))*43758.5453);float pane=step(.14,grid.x)*step(grid.x,.84)*step(.2,grid.y)*step(grid.y,.85);totalEmissiveRadiance+=vec3(1.,.6,.21)*pane*step(.52,r)*uNight*.9;}`,
-      );
-    };
-    const geo = this.geometry(pos, norm, colors, uv);
-    geo.setAttribute('aStyle', new THREE.Float32BufferAttribute(styles, 1));
-    const mesh = new THREE.Mesh(geo, mat);
-    mesh.castShadow = true;
-    mesh.receiveShadow = true;
-    this.buildings.add(mesh);
-    this.stats.buildings = count;
-    this.facadeDetails = new FacadeDetails(this, foundations);
+    createBuildingBodies(this);
   }
   ribbon(
     points: number[][],

@@ -6,7 +6,7 @@ Approved scope (2026-09-05): finish each stage in order, validate it, then commi
 | --- | --- | --- |
 | 1 | Complete | [16 fixed-view/driving samples and actual captures](baseline/README.md) |
 | 2 | Complete | [Connected pavement, markings, terrain-aligned curbs and tree-row clearance](roads/README.md) |
-| 3 | Pending | Representative building classes, consistent facade dimensions and improved materials |
+| 3 | Complete | [Shared facade types, aligned windows, ground-level entries and materials](buildings/README.md) |
 | 4 | Pending | Stanley Park Causeway continuity, gradients, approach and roadside structure |
 | 5 | Pending | Second/Third Beach terrain, dry/wet transitions and walking/boat boundaries |
 | 6 | Pending | Integrated first-pass visual, travel and performance acceptance |
@@ -26,7 +26,7 @@ node tools/serve-visual-qa.mjs baseline
 
 Open the printed local URL, set the test viewport to 1920 × 1080, then use **Run High baseline** and **Run Ultra baseline**. Keep the browser visible. Each of eight fixed cases warms for 2.5 seconds, then measures eight seconds of actual requestAnimationFrame intervals. The Robson case uses the existing driving controller with forward input. Scene time is fixed at 14:00; city traffic remains enabled. Save reports and actual canvas images under ignored `work/visual-qa/baseline`.
 
-The report records the physical render size and actual browser/device renderer, average FPS, p50/p95/p99/max frame intervals, >50ms and >100ms counts, position and camera. Any sample with a hidden document is invalid. Timing includes browser scheduling; it is not an isolated GPU timing query. The `calls`/`triangles` fields reflect the last render pass and must not be treated as total scene work.
+The report records the physical render size and actual browser/device renderer, average FPS, p50/p95/p99/max frame intervals, >50ms and >100ms counts, position and camera. Any sample with a hidden document is invalid. Timing includes browser scheduling; it is not an isolated GPU timing query. The renderer disables info.autoReset and resets once before its composer: `calls`/`triangles` include that sampled frame's beauty, AO-normal and any shadow passes. They are not unique scene geometry counts or averages across the sample.
 
 The server binds only to loopback, accepts bounded reports with simple filenames, and serves only `dist/client`. It is not a production server. After QA, **rebuild normally** with `npm run build:firebase` before deployment.
 
