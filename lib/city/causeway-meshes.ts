@@ -1,3 +1,4 @@
+import { buildLionsRailings, LIONS_WALK_SOURCES } from './lions-railings';
 import * as THREE from 'three';
 import type { CityEngine } from './engine';
 import {
@@ -12,7 +13,6 @@ import { forwardGate, type SurfaceConnection } from './surface-reachability';
 import type { RoadSegment } from './placement-geometry';
 import type { CausewayData } from './causeway';
 import { northernCausewayWalkways } from './causeway-walkways';
-import { bridgeStation } from './walkway-attachments';
 import {
   createUpperWalkwayProfiles,
   type WalkSourceJSON,
@@ -114,13 +114,27 @@ export function createCausewayMeshes(e: CityEngine) {
       connectors.excludedGroundSourceIds.some((n) => n === id.sourceId)
         ? ['walk']
         : northern.allowedModes(id.sourceId),
-    railAllowed: (id, x, z) =>
-      id.sourceId !== 70954672 ||
-      ![187, 659].some(
-        (s) => Math.abs(bridgeStation([x, z], mainStart, mainEnd).s - s) < 3,
-      ),
+    railAllowed: (id) => !LIONS_WALK_SOURCES.has(id.sourceId),
   });
   addCausewayBuffers(e, paths.buffers, 'Separated Causeway paths', true);
+  const railing = buildLionsRailings(paths, allPaths, mainStart, mainEnd);
+  addStreetMeshes(
+    e,
+    railing.positions,
+    new THREE.MeshStandardMaterial({
+      color: 0x377568,
+      roughness: 0.72,
+      side: THREE.DoubleSide,
+    }),
+    'Lions Gate outer pedestrian railing',
+    undefined,
+    false,
+    false,
+    true,
+    true,
+  );
+  e.data.lionsRailingSpans = railing.spans;
+
   registerCausewayGeometry(e, paths);
   const pathLookup = createCausewayTriangleLookup(paths);
   const supports = proposeWestWalkSupports({
@@ -274,7 +288,10 @@ export function addCausewayBuffers(
       kind === 'asphalt'
         ? e.roadMaterials.get(path ? 'sidewalk-concrete' : 'asphalt-fine')!
         : new THREE.MeshStandardMaterial({
-            color: colors[kind] ?? 0xb2afa0,
+            color:
+              kind === 'rails' && name === 'Lions Gate Bridge'
+                ? 0xb6b3a4
+                : (colors[kind] ?? 0xb2afa0),
             roughness: kind === 'rails' ? 0.58 : 0.9,
             side: THREE.DoubleSide,
           });

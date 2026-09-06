@@ -1,0 +1,26 @@
+{
+  "valid": true,
+  "sides": [
+    {
+      "side": "east",
+      "sourceLength": 1525.803513151233,
+      "railLength": 1525.803513151233,
+      "gaps": [],
+      "maxJoinError": 0,
+      "spans": 512
+    },
+    {
+      "side": "west",
+      "sourceLength": 1532.7154008383673,
+      "railLength": 1520.7153010852721,
+      "gaps": [
+        5.9999250305504574,
+        6.000174722544671
+      ],
+      "maxJoinError": 0,
+      "spans": 512
+    }
+  ],
+  "triangles": 268284,
+  "batches": 5
+}

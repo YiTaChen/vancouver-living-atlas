@@ -251,24 +251,30 @@ export function buildMainRoadGeometry(
       nz = dx / l,
       h = height / 2,
       w = width / 2;
-    const corners = (p: XYZ): XYZ[] => [
-      [p[0] - nx * w, p[1] - h, p[2] - nz * w],
-      [p[0] + nx * w, p[1] - h, p[2] + nz * w],
-      [p[0] + nx * w, p[1] + h, p[2] + nz * w],
-      [p[0] - nx * w, p[1] + h, p[2] - nz * w],
+    // Narrow Jersey-style section: broad foot, sloping lower face and slim top.
+    // Its road-facing foot stays exactly outside the authoritative asphalt.
+    const profile = [
+      [-w, -h],
+      [w, -h],
+      [w * 0.55, -h * 0.15],
+      [w * 0.4, h],
+      [-w * 0.4, h],
+      [-w * 0.55, -h * 0.15],
     ];
+    const corners = (p: XYZ): XYZ[] =>
+      profile.map(([x, y]) => [p[0] + nx * x, p[1] + y, p[2] + nz * x]);
     const p = corners(a),
       q = corners(b);
-    const normals: XYZ[] = [
-      [0, -1, 0],
-      [nx, 0, nz],
-      [0, 1, 0],
-      [-nx, 0, -nz],
-    ];
-    for (let i = 0; i < 4; i++)
-      quad('rails', p[i], q[i], q[(i + 1) % 4], p[(i + 1) % 4], normals[i]);
-    quad('rails', p[0], p[1], p[2], p[3], [-dx / l, 0, -dz / l]);
-    quad('rails', q[0], q[1], q[2], q[3], [dx / l, 0, dz / l]);
+    for (let i = 0; i < profile.length; i++) {
+      const j = (i + 1) % profile.length,
+        ux = profile[j][0] - profile[i][0],
+        uy = profile[j][1] - profile[i][1];
+      quad('rails', p[i], q[i], q[j], p[j], [nx * uy, -ux, nz * uy]);
+    }
+    for (let i = 1; i < profile.length - 1; i++) {
+      tri('rails', p[0], p[i], p[i + 1], [-dx / l, 0, -dz / l]);
+      tri('rails', q[0], q[i], q[i + 1], [dx / l, 0, dz / l]);
+    }
   };
   const segments: SurfaceSegment[] = [],
     perSegment: MainRoadResult['perSegment'] = [];
@@ -400,7 +406,7 @@ export function buildMainRoadGeometry(
       for (const side of [-1, 1]) {
         const oa = side < 0 ? a.asphaltWest - 0.12 : a.asphaltEast + 0.12,
           ob = side < 0 ? b.asphaltWest - 0.12 : b.asphaltEast + 0.12;
-        beam(point(a, oa, top + 0.4), point(b, ob, top + 0.4), 0.12, 0.8);
+        beam(point(a, oa, top + 0.425), point(b, ob, top + 0.425), 0.24, 0.85);
       }
   }
   return {

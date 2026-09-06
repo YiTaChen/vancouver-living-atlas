@@ -28,6 +28,8 @@ const cases = [
     offset: [-20, 4, 22],
     targetY: 4,
   },
+  { id: 'lions-east-rail', bridgeWalk: 'east', bridgeStation: 330 },
+  { id: 'lions-west-rail', bridgeWalk: 'west', bridgeStation: 330 },
   { id: 'downtown', view: 'downtown' },
   { id: 'water-street', street: 'WATER ST' },
   { id: 'robson-drive', street: 'ROBSON ST', drive: true },
@@ -305,6 +307,34 @@ export function installVisualQA(e: CityEngine) {
       e.settings.mode = mode;
       e.applySettings({ ...e.settings, mode });
       e.navigation!.cameraDistances[mode] = mode === 'drive' ? 10 : 0;
+      e.navigation!.snapCamera = true;
+      e.navigation!.update(0);
+    }
+    if ('bridgeWalk' in test) {
+      const id = test.bridgeWalk === 'east' ? 70954668 : 70954672;
+      const segments = e.data.causewayPathSegments.filter(
+        (s: any) => s.sourceId === id,
+      );
+      const seg =
+        segments[
+          Math.min(segments.length - 1, Math.floor(segments.length * 0.35))
+        ];
+      const x = (seg.a[0] + seg.b[0]) / 2,
+        z = (seg.a[1] + seg.b[1]) / 2;
+      const valid = e.navigation!.startAt('walk', {
+        x,
+        z,
+        y: (seg.h0 + seg.h1) / 2,
+        yaw: Math.atan2(seg.b[0] - seg.a[0], seg.b[1] - seg.a[1]),
+        surface: 'bridge',
+        surfaceId: seg.surfaceId,
+        layer: seg.layer,
+        name: test.id,
+        snappedDistance: 0,
+      });
+      if (valid === false)
+        throw new Error('Bridge walking QA placement failed');
+      e.navigation!.cameraDistances.walk = 0;
       e.navigation!.snapCamera = true;
       e.navigation!.update(0);
     }
