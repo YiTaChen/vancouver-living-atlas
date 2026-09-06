@@ -83,6 +83,8 @@ function fixture({ mode = 'walk', ground = false, yaw = 0, lookYaw = 0 } = {}) {
     contextLost: false,
     uniforms: { time: { value: 0 } },
     tickClock() {},
+    clock: { hour: 16, calendarDay: 0 },
+    skyEffects: { update() {} },
     updateLabels() {},
     renderScene() {},
     traffic: null,

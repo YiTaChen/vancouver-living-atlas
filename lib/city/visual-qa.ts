@@ -1,3 +1,4 @@
+import { sunAngle } from './clock';
 /** Opt-in local QA build only. Stripped from normal Firebase builds. */
 import type { CityEngine } from './engine';
 import type { VisualQuality } from './quality';
@@ -30,6 +31,10 @@ const cases = [
   },
   { id: 'lions-east-rail', bridgeWalk: 'east', bridgeStation: 330 },
   { id: 'lions-west-rail', bridgeWalk: 'west', bridgeStation: 330 },
+  { id: 'sky-night', skyHour: 23 },
+  { id: 'sky-meteor', skyHour: 23, skyMeteor: true },
+  { id: 'sky-day', skyHour: 9 },
+  { id: 'sky-aurora', skyHour: 23, skyNorth: true },
   { id: 'downtown', view: 'downtown' },
   { id: 'water-street', street: 'WATER ST' },
   { id: 'robson-drive', street: 'ROBSON ST', drive: true },
@@ -264,6 +269,8 @@ export function installVisualQA(e: CityEngine) {
   const apply = (id: string, quality: VisualQuality) => {
     const test = cases.find((c) => c.id === id)!;
     selectedCase = id;
+    e.controls.maxPolarAngle = Math.PI * 0.485;
+    e.skyEffects.qaTime = null;
     e.navigation?.setMode('orbit');
     e.setClock({ hour: 14, running: false });
     e.applySettings({
@@ -273,6 +280,38 @@ export function installVisualQA(e: CityEngine) {
       labels: false,
       autoRotate: false,
     });
+    if ('skyHour' in test) {
+      e.setClock({ hour: test.skyHour, running: false });
+      e.controls.maxPolarAngle = Math.PI * 0.95;
+      const a = sunAngle(test.skyHour) - (test.skyHour > 20 ? Math.PI : 0);
+      const dir =
+        'skyNorth' in test
+          ? [0, 0.35, -1]
+          : [Math.cos(a) * 0.85, Math.sin(a), test.skyHour > 20 ? -0.12 : 0.28];
+      e.camera.position.set(-1500, 140, -1500);
+      e.controls.target.set(
+        -1500 + dir[0] * 6000,
+        140 + dir[1] * 6000,
+        -1500 + dir[2] * 6000,
+      );
+      e.controls.update();
+      if ('skyMeteor' in test) {
+        e.skyEffects.configure({ meteorFrequency: 1, meteors: true });
+        e.skyEffects.qaTime = 0.55;
+        const hash = (x: number) => {
+          const n = x % 997;
+          return ((n * n * 7 + n * 31 + 137) % 997) / 997;
+        };
+        const lon = (hash(0) - 0.5) * 5.8 + 0.28 * 0.55,
+          lat = 0.55 + hash(4) * 0.55 - 0.19 * 0.55;
+        e.controls.target.set(
+          -1500 + Math.sin(lon) * Math.cos(lat) * 6000,
+          140 + Math.sin(lat) * 6000,
+          -1500 - Math.cos(lon) * Math.cos(lat) * 6000,
+        );
+        e.controls.update();
+      }
+    }
     if ('view' in test) e.flyTo(test.view, false);
     if ('coord' in test) {
       const [x, z] = project([...test.coord]);
@@ -420,7 +459,8 @@ export function installVisualQA(e: CityEngine) {
         const row = {
           id: `${test.id}${durationMs > 8000 ? '-long' : ''}`,
           quality,
-          hour: 14,
+          hour: e.clock.hour,
+          skySettings: { ...e.skyEffects.settings },
           sampleMs: sample.elapsed,
           ...(sample.trace.length ? { travelTrace: sample.trace } : {}),
           valid: !sample.hidden && !e.disposed,
@@ -715,9 +755,11 @@ export function installVisualQA(e: CityEngine) {
   button('Save current view', () => {
     if (running) return;
     running = true;
-    const id = `${selectedCase}-${e.clock.hour.toFixed(2).replace('.', 'p')}h`;
+    const id = `${selectedCase}-${e.clock.hour.toFixed(2).replace('.', 'p')}h${selectedCase.startsWith('sky-') ? '-' + e.skyEffects.settings.moonPhase.toLowerCase() : ''}`;
     const row = {
       kind: 'visual-check',
+      skySettings: { ...e.skyEffects.settings },
+      skyPreviewTime: e.skyEffects.qaTime,
       id,
       quality: e.settings.quality,
       hour: e.clock.hour,

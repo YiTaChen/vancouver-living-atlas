@@ -33,6 +33,12 @@ import {
   Plane,
   Helicopter,
 } from 'lucide-react';
+import { SkyControls } from '@/components/sky-controls';
+import {
+  DEFAULT_SKY,
+  normalizeSky,
+  type SkySettings,
+} from '@/lib/city/sky-state';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
 import {
@@ -122,6 +128,7 @@ export default function Home() {
     [view, setView] = useState('overview'),
     [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS),
     [panel, setPanel] = useState<'layers' | 'time' | null>(null),
+    [skySettings, setSkySettings] = useState<SkySettings>({ ...DEFAULT_SKY }),
     [hideTime, setHideTime] = useState(false),
     [about, setAbout] = useState(false),
     [tour, setTour] = useState(false),
@@ -1110,6 +1117,14 @@ export default function Home() {
             <br />
             {tr('timeDayLength', { minutes: number(1440 / clock.rate) })}
           </p>
+          <SkyControls
+            value={skySettings}
+            tr={tr}
+            onChange={(patch) => {
+              setSkySettings((current) => normalizeSky(patch, current));
+              engine.current?.skyEffects.configure(patch);
+            }}
+          />
           <p className="clock-background-note">
             {tr('timeBackgroundHint')} {tr('simulatedNote')}
           </p>

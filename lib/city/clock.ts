@@ -31,6 +31,7 @@ export function sunAngle(hour: number) {
 export class CityClock {
   private state: ClockState = { ...DEFAULT_CLOCK };
   private previous: number | null = null;
+  calendarDay = 0;
   private visible = true;
   constructor(initial: Partial<ClockState> = {}) {
     this.configure(initial, 0);
@@ -52,9 +53,9 @@ export class CityClock {
       this.previous === null ? 0 : Math.max(0, now - this.previous);
     this.previous = now;
     if (!this.visible || !this.state.running || elapsed === 0) return false;
-    this.state.hour = wrapHour(
-      this.state.hour + (elapsed * this.state.rate) / 3_600_000,
-    );
+    const nextHour = this.state.hour + (elapsed * this.state.rate) / 3_600_000;
+    this.calendarDay += Math.floor(nextHour / 24);
+    this.state.hour = wrapHour(nextHour);
     return true;
   }
   configure(patch: Partial<ClockState>, now: number) {

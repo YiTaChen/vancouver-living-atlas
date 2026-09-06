@@ -1982,3 +1982,11 @@ a {
     width: 220px;
   }
 }
+
+.sky-controls { border-top:1px solid #ffffff22; margin-top:16px; padding-top:14px; }
+.sky-controls summary { cursor:pointer; color:var(--cream, #eceebe); font-size:15px; font-weight:600; padding:6px 0; }
+.sky-controls select { width:100%; background:#15343b; color:#edf1e6; border:1px solid #ffffff35; border-radius:7px; padding:9px; margin:6px 0 12px; }
+.sky-controls .layer-row { padding:9px 0; }
+.sky-slider { padding:10px 0; }
+.sky-slider .clock-field-label { display:flex; justify-content:space-between; margin-bottom:10px; }
+.sky-reset { border:1px solid #ffffff35; border-radius:7px; padding:8px 12px; color:#e4e9bb; margin:8px 0; }

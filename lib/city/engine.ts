@@ -1,3 +1,4 @@
+import { SkyEffects } from './sky-effects';
 import { createBeachAmenities } from './beach-amenities';
 import { installSSAOBlur4 } from './ssao-blur4';
 import { trackSSAOResources } from './ssao-resources';
@@ -78,6 +79,7 @@ export class CityEngine {
   contextLost = false;
   lastShadowCamera = new THREE.Vector3(Infinity, Infinity, Infinity);
   sky = new Sky();
+  skyEffects!: SkyEffects;
   composer: EffectComposer | null = null;
   renderPass: RenderPass | null = null;
   fxaa: ShaderPass | null = null;
@@ -234,7 +236,9 @@ export class CityEngine {
     this.sky.material.uniforms.mieCoefficient.value = 0.005;
     this.sky.material.uniforms.mieDirectionalG.value = 0.8;
     this.sky.material.uniforms.sunPosition.value.set(-4000, 5000, 1400);
+    this.sky.material.uniforms.showSunDisc.value = false;
     this.scene.add(this.sky);
+    this.skyEffects = new SkyEffects(this.scene);
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.end('constructor.renderer-controls');
       this.startupQA?.begin('constructor.environment-pmrem');
@@ -1284,6 +1288,12 @@ export class CityEngine {
       this.lastShadowCamera.copy(this.camera.position);
     }
     this.lastTime = time;
+    this.skyEffects.update(
+      this.clock.hour,
+      this.clock.calendarDay,
+      time,
+      this.camera,
+    );
     this.renderScene();
     this.frames++;
     if (time - this.fpsAt > 800) {
