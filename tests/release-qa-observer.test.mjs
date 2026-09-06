@@ -28,7 +28,7 @@ async function fixture(kind){
   };
   const detail={holder:group,medium,ultra:null,update:originalUpdate};
   const camera=new THREE.PerspectiveCamera();
-  const e={landmarkDetails:[detail],disposed:false,clock:{hour:23},uniforms:{night:{value:1}},
+  const e={data:{},landmarkDetails:[detail],disposed:false,clock:{hour:23},uniforms:{night:{value:1}},
     navigation:{position:new THREE.Vector3(),mode:'drive',yaw:0,speed:21,surface:'ground',cameraDistance:10,cameraView:{perspective:'third'},keys:new Set(['w']),update(){}},
     camera,controls:{target:new THREE.Vector3()},settings:{quality:'high'},
     renderer:{domElement:{width:100,height:100,addEventListener(){},removeEventListener(){}},

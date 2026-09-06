@@ -336,13 +336,13 @@ test('seven-model registry rejects moved, incomplete and non-plain extra DTOs', 
   nonplain.callback = () => 1;
   assert.throws(() => createWorkerLandmark(false, nonplain));
 });
-test('serialized Stage8 plans retain deterministic geometry, night registration and existing LOD lifetime', () => {
+test('serialized Stage8 plans retain deterministic geometry, night registration and existing LOD lifetime', async () => {
   for (const p of plans) {
     const a = createWorkerLandmark(false, p),
       b = createWorkerLandmark(false, JSON.parse(JSON.stringify(p)));
     assert.equal(geometryDigest(a), geometryDigest(b));
     disposeGroup(a);
     disposeGroup(b);
-    assertLOD(LandmarkDetail, createWorkerLandmark, p);
+    await assertLOD(LandmarkDetail, createWorkerLandmark, p);
   }
 });

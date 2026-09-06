@@ -228,8 +228,10 @@ export function createLandmarks(engine: CityEngine) {
   for (const kind of order) {
     const plan = plans.find((plan) => plan.kind === kind)!;
     engine.landmarkDetails.push(
-      new LandmarkDetail(engine, (detail) =>
-        createWorkerLandmark(detail, plan),
+      new LandmarkDetail(
+        engine,
+        (detail) => createWorkerLandmark(detail, plan),
+        plan,
       ),
     );
   }

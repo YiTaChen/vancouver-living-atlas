@@ -1,6 +1,7 @@
 import { readFile, readdir } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import path from 'node:path';
+import { verifyLandmarkWorker } from './verify-landmark-worker.mjs';
 
 const root = path.resolve('dist/client');
 const html = await readFile(path.join(root, 'index.html'), 'utf8');
@@ -47,3 +48,4 @@ assert(
 console.log(
   'Firebase static build verified: English HTML, five-language UI and geographic assets.',
 );
+await verifyLandmarkWorker(root);

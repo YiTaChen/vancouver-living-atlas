@@ -1,8 +1,52 @@
+import type { FacadeDetails } from './facade-details';
+
+type PreparationMetrics = {
+  requested: number;
+  succeeded: number;
+  cancelled: number;
+  failed: number;
+  pending: number;
+  totalAsyncWallMs: number;
+  lastAsyncWallMs: number;
+  maxAsyncWallMs: number;
+};
+
+/** Immutable, low-rate QA snapshot; wall times include FIFO wait and are not GPU times. */
+export function snapshotFacadeQueue(
+  facade:
+    | (FacadeDetails & { preparationMetrics?: PreparationMetrics })
+    | null
+    | undefined,
+) {
+  if (!facade?.queue) return null;
+  const queue = facade.queue;
+  let ready = 0,
+    visible = 0;
+  for (const record of queue.records.values()) {
+    if (!record.ready) continue;
+    ready++;
+    if (record.ready.group.visible) visible++;
+  }
+  return {
+    metrics: { ...queue.metrics },
+    cacheBytes: queue.cacheBytes,
+    pendingBytes: queue.pendingBytes,
+    pendingId: queue.pendingId ?? null,
+    pendingToken: queue.pendingToken ?? null,
+    lastError: queue.lastError,
+    records: { total: queue.records.size, ready, visible },
+    preparation: facade.preparationMetrics
+      ? { ...facade.preparationMetrics }
+      : null,
+  };
+}
+
 /** MIT. Optional LOCAL visual-QA instrumentation proposal; no public UI.
  * Place beside engine.ts only when integrating. No movement or camera rewriting.
  * Observe actual render submission; screenshot review still verifies appearance.
  */
 import type { CityEngine } from './engine';
+import type { LandmarkWorkerMetric } from './landmark-worker-client';
 import type * as THREE from 'three';
 
 type Options = {
@@ -31,16 +75,40 @@ export async function measureReleaseWindow(e: CityEngine, options: Options) {
   const initialPosition = e.navigation!.position.clone();
   const initialMode = e.navigation!.mode;
   const initialHour = e.clock.hour;
+  const initialFacade = snapshotFacadeQueue(e.facadeDetails);
   const landmarks = e.landmarkDetails.map((detail) => ({
     name: detail.holder.name,
     ultraPresentInitially: !!detail.ultra,
     firstAttachedMs: detail.ultra ? 0 : (null as number | null),
     firstSubmittedMs: null as number | null,
     constructionMs: [] as number[],
+    attachmentUpdateMs: [] as number[],
+    // Sampled at frame boundaries; brief async transitions may be unobserved.
+    loadStateTimeline: [] as { elapsedMs: number; state: string }[],
     visibleLevel: 'medium',
     nightIntensityRange: [] as number[],
   }));
   const restores: (() => void)[] = [];
+  const workerJobs: (LandmarkWorkerMetric & { receivedMs: number })[] = [];
+  const clients = new WeakSet<object>();
+  const watchWorker = () => {
+    const client = e.landmarkWorker;
+    if (!client || clients.has(client)) return;
+    clients.add(client);
+    const old = client.onMetrics;
+    const observe: typeof client.onMetrics = (metric) => {
+      try {
+        old?.(metric);
+      } finally {
+        workerJobs.push({ ...metric, receivedMs: performance.now() - start });
+      }
+    };
+    client.onMetrics = observe;
+    restores.push(() => {
+      if (client.onMetrics === observe) client.onMetrics = old;
+    });
+  };
+  watchWorker();
   let travelSimulationSeconds = 0;
   const originalUpdate = e.navigation!.update;
   e.navigation!.update = function (dt: number) {
@@ -71,14 +139,27 @@ export async function measureReleaseWindow(e: CityEngine, options: Options) {
     });
   };
   e.landmarkDetails.forEach((detail, i) => {
+    const sampleState = () => {
+      const state = detail.loadState?.status;
+      const timeline = landmarks[i].loadStateTimeline;
+      if (state && timeline.at(-1)?.state !== state)
+        timeline.push({ elapsedMs: performance.now() - start, state });
+    };
+    sampleState();
     const old = detail.update;
     if (detail.ultra) watchGroup(detail.ultra, landmarks[i]);
     detail.update = function () {
       const before = !!detail.ultra,
         t = performance.now();
+      sampleState();
       old.call(this);
+      watchWorker();
+      sampleState();
       if (!before && detail.ultra) {
-        landmarks[i].constructionMs.push(performance.now() - t);
+        const times = detail.loadState
+          ? landmarks[i].attachmentUpdateMs
+          : landmarks[i].constructionMs;
+        times.push(performance.now() - t);
         landmarks[i].firstAttachedMs = performance.now() - start;
         watchGroup(detail.ultra, landmarks[i]);
       }
@@ -121,6 +202,7 @@ export async function measureReleaseWindow(e: CityEngine, options: Options) {
     if (elapsed - lastTrace >= 1000) {
       trace.push({
         elapsedMs: elapsed,
+        facade: snapshotFacadeQueue(e.facadeDetails),
         windowMs: elapsed - lastTrace,
         windowMeters: intervalDistance,
         measuredSpeed: (intervalDistance / (elapsed - lastTrace)) * 1000,
@@ -252,9 +334,15 @@ export async function measureReleaseWindow(e: CityEngine, options: Options) {
       travelSimulationSeconds,
       collisionFrames,
       trace,
+      facade: {
+        initial: initialFacade,
+        final: snapshotFacadeQueue(e.facadeDetails),
+      },
       landmarks,
+      workerJobs,
+      landmarkErrors: { ...e.data.landmarkWorkerErrors },
       rawGaps: gaps,
-      note: 'RAF gaps measure responsiveness; CPU render time includes lazy geometry creation. First submitted marks a render callback, not pixel/occlusion verification. No GPU timer query.',
+      note: 'RAF gaps measure responsiveness. Async attachmentUpdateMs excludes worker creation; worker factory/decode timings exclude queue, packing, transfer and GPU time. Load states are frame samples. First submitted marks a render callback, not pixel/occlusion verification. No GPU timer query.',
     };
   } finally {
     cancelAnimationFrame(raf);

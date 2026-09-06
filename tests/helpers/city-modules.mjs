@@ -19,7 +19,10 @@ export function cityModule(name) {
     return result;
   }
   const source = readFileSync(
-    new URL(`../../lib/city/${name}.ts`, import.meta.url),
+    new URL(
+      `../../lib/city/${name.endsWith('.js') ? name : name + '.ts'}`,
+      import.meta.url,
+    ),
     'utf8',
   );
   let code = ts.transpileModule(source, {

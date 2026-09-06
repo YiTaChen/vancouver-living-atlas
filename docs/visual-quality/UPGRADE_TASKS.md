@@ -12,7 +12,7 @@ Approved scope (2026-09-05): finish each stage in order, validate it, then commi
 | 6 | Complete | [Bounded ground reconciliation, foliage cleanup, public controls and 60-second samples](integration/README.md) |
 | 7 | Complete | [Marine Building, Canada Place and Science World detail](landmarks-primary/README.md) |
 | 8 | Complete | [Convention Centre, BC Place, Harbour Centre and Vancouver House detail](landmarks-secondary/README.md) |
-| 9 | In progress | Measured loading, geometry, texture and rendering improvements |
+| 9 | Complete | [Worker landmarks, bounded facade uploads, tree selection and measured startup/stall reduction](performance/README.md) |
 | 10 | Pending | Day/dusk/night and long-travel acceptance; final release evidence |
 
 ## Baseline procedure

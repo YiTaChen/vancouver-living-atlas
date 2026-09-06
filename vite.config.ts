@@ -1,7 +1,7 @@
 import { sites } from '@openai/sites-vite-plugin';
 import tailwindcss from '@tailwindcss/postcss';
 import vinext from 'vinext';
-import { defineConfig } from 'vite';
+import { defineConfig, type ResolvedConfig } from 'vite';
 import hostingConfig from './.openai/hosting.json' with { type: 'json' };
 
 const SITE_CREATOR_PLACEHOLDER_DATABASE_ID =
@@ -50,6 +50,31 @@ export default defineConfig(async () => {
       'process.env.VANCOUVER_VISUAL_QA': JSON.stringify(
         process.env.VANCOUVER_VISUAL_QA || '0',
       ),
+    },
+    worker: {
+      plugins: () => [
+        {
+          name: 'vancouver:worker-global-scope',
+          configResolved(config: ResolvedConfig) {
+            // vinext's client defines otherwise fold Three's window guard to true
+            // inside the worker too. Clone this worker's environment: never alter
+            // the main browser or SSR environment shared by the build.
+            Object.assign(config, {
+              environments: {
+                ...config.environments,
+                client: {
+                  ...config.environments.client,
+                  define: {
+                    ...config.environments.client.define,
+                    'typeof window': '"undefined"',
+                    'process.browser': 'false',
+                  },
+                },
+              },
+            });
+          },
+        },
+      ],
     },
     css: { postcss: { plugins: [tailwindcss()] } },
     server: isCodexSeatbeltSandbox

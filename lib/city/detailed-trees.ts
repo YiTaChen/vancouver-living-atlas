@@ -1,3 +1,8 @@
+import {
+  TreeSelection,
+  TreeAssetBarrier,
+  type TreeCandidate,
+} from './tree-selection';
 import * as THREE from 'three';
 import { createTreeGeometry } from './assets/tree-geometry';
 import { hash } from './geo';
@@ -33,6 +38,19 @@ export class DetailedTrees {
   last = new THREE.Vector3(Infinity, Infinity, Infinity);
   quality: VisualQuality | null = null;
   trees: (ForestTree & { y: number; variant: number })[];
+  private selection: TreeCandidate<
+    ForestTree & { y: number; variant: number }
+  >[] = [];
+  private spatial: TreeSelection<ForestTree & { y: number; variant: number }>;
+  private assetBarrier = new TreeAssetBarrier();
+  private refresh = false;
+  private disposed = false;
+  private wantedPools = 0;
+  private materials: {
+    trunk: THREE.MeshStandardMaterial;
+    leaf: THREE.MeshStandardMaterial;
+    depth: THREE.MeshDepthMaterial;
+  } | null = null;
   ready = false;
   assetsReady = false;
   constructor(
@@ -41,37 +59,40 @@ export class DetailedTrees {
   ) {
     this.trees = trees.map((t) =>
       Object.assign(t, {
-        y: e.elevation(t.x, t.z),
+        y: t.slots?.[0]?.matrix.elements[13] ?? e.elevation(t.x, t.z),
         variant: Math.floor(hash(t.seed + 92) * 3),
       }),
     );
+    this.spatial = new TreeSelection(this.trees);
     this.group.name = 'Nearby textured trees';
     e.vegetation.add(this.group);
   }
   initialize() {
-    if (this.ready) return;
+    if (this.ready || this.disposed || this.e.disposed) return;
     this.ready = true;
     const loader = new THREE.TextureLoader();
+    const settled = (asset: 'leaf' | 'bark', success: boolean) => {
+      if (this.disposed || this.e.disposed) return;
+      this.assetsReady = this.assetBarrier.settle(asset, success);
+      this.refresh = true;
+    };
     const atlas = loader.load(
       '/textures/trees/leaf-atlas.png',
-      () => {
-        if (this.e.disposed) return;
-        this.assetsReady = true;
-        this.e.renderer.shadowMap.needsUpdate = true;
-        this.update(true);
-      },
+      () => settled('leaf', true),
       undefined,
-      () => {
-        this.assetsReady = false;
-        if (!this.e.disposed) this.update(true);
-      },
+      () => settled('leaf', false),
     );
     atlas.colorSpace = THREE.SRGBColorSpace;
     atlas.anisotropy = Math.min(
       8,
       this.e.renderer.capabilities.getMaxAnisotropy(),
     );
-    const bark = loader.load('/textures/trees/bark-albedo.png');
+    const bark = loader.load(
+      '/textures/trees/bark-albedo.png',
+      () => settled('bark', true),
+      undefined,
+      () => settled('bark', false),
+    );
     bark.colorSpace = THREE.SRGBColorSpace;
     bark.wrapS = bark.wrapT = THREE.RepeatWrapping;
     bark.anisotropy = atlas.anisotropy;
@@ -127,63 +148,101 @@ export class DetailedTrees {
     });
     depth.onBeforeCompile = mask;
     depth.customProgramCacheKey = () => 'atlas-neutral-matte-depth-v2';
-    for (let detail = 0; detail < 2; detail++)
-      for (let species = 0; species < 2; species++)
-        for (let variant = 0; variant < 3; variant++) {
-          const geometry = createTreeGeometry(
-            !!species,
-            variant,
-            detail ? 'ultra' : 'medium',
-          );
-          const trunk = new THREE.InstancedMesh(geometry.trunk, trunkMat, 240);
-          const foliage = new THREE.InstancedMesh(
-            geometry.foliage,
-            leafMat,
-            240,
-          );
-          for (const m of [trunk, foliage]) {
-            m.count = 0;
-            m.castShadow = true;
-            m.receiveShadow = true;
-            m.frustumCulled = false;
-            m.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
-            this.group.add(m);
-          }
-          foliage.customDepthMaterial = depth;
-          foliage.userData.alphaFoliage = true;
-          this.pools.push({ trunk, foliage, count: 0 });
-        }
+    this.materials = { trunk: trunkMat, leaf: leafMat, depth };
+  }
+  /** At most one unchanged geometry factory per render update; High never
+   * creates Ultra pools. Unbuilt pools leave their original tree slots visible. */
+  private buildNextPool() {
+    if (
+      this.disposed ||
+      this.e.disposed ||
+      !this.assetsReady ||
+      !this.materials ||
+      this.pools.length >= this.wantedPools
+    )
+      return false;
+    const index = this.pools.length,
+      detail = index >= 6,
+      local = index % 6;
+    const geometry = createTreeGeometry(
+      local >= 3,
+      local % 3,
+      detail ? 'ultra' : 'medium',
+    );
+    const trunk = new THREE.InstancedMesh(
+      geometry.trunk,
+      this.materials.trunk,
+      240,
+    );
+    const foliage = new THREE.InstancedMesh(
+      geometry.foliage,
+      this.materials.leaf,
+      240,
+    );
+    for (const m of [trunk, foliage]) {
+      m.count = 0;
+      m.castShadow = true;
+      m.receiveShadow = true;
+      m.frustumCulled = false;
+      m.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+      this.group.add(m);
+    }
+    foliage.customDepthMaterial = this.materials.depth;
+    foliage.userData.alphaFoliage = true;
+    // Dense append-only array: Engine's existing SSAO foliage enumeration stays valid.
+    this.pools.push({ trunk, foliage, count: 0 });
+    return true;
+  }
+  /** Terminal Engine teardown. Textures remain owned by Engine.extraTextures.
+   * Once a pool exists its three materials are owned by scene traversal; before
+   * that point no mesh can release them (e.g. failed/pending texture loads). */
+  dispose() {
+    if (this.disposed) return;
+    this.disposed = true;
+    this.assetsReady = false;
+    this.wantedPools = 0;
+    if (this.materials && this.pools.length === 0) {
+      this.materials.trunk.dispose();
+      this.materials.leaf.dispose();
+      this.materials.depth.dispose();
+    }
+    this.materials = null;
   }
   update(force = false) {
     const quality = this.e.settings.trees
       ? this.e.settings.quality
       : 'balanced';
     const camera = this.e.camera.position;
-    if (
-      !force &&
-      quality === this.quality &&
-      this.last.distanceToSquared(camera) < 18 * 18
-    )
-      return;
-    this.quality = quality;
-    this.last.copy(camera);
-    const distance = QUALITY[quality].treeDistance;
-    const selected =
-      quality === 'balanced'
-        ? []
-        : this.trees
-            .map((t) => ({
-              t,
-              d:
-                (t.x - camera.x) ** 2 +
-                (t.y + t.h * 0.55 - camera.y) ** 2 +
-                (t.z - camera.z) ** 2,
-            }))
-            .filter((p) => p.d < distance * distance)
-            .sort((a, b) => a.d - b.d)
-            .slice(0, quality === 'ultra' ? 1080 : 450);
-    if (selected.length) this.initialize();
-    if (!this.assetsReady) selected.length = 0;
+    if (this.disposed || this.e.disposed) return;
+    const changed =
+      force ||
+      quality !== this.quality ||
+      this.last.distanceToSquared(camera) >= 18 * 18;
+    if (changed) {
+      this.quality = quality;
+      this.last.copy(camera);
+      this.selection =
+        quality === 'balanced'
+          ? []
+          : this.spatial.nearest(
+              camera.x,
+              camera.y,
+              camera.z,
+              QUALITY[quality].treeDistance,
+              quality === 'ultra' ? 1080 : 450,
+            );
+      this.e.data.treeSelection = { ...this.spatial.stats };
+    }
+    this.wantedPools = this.selection.length
+      ? quality === 'ultra' && this.selection[0].d < 220 * 220
+        ? 12
+        : 6
+      : 0;
+    if (this.selection.length) this.initialize();
+    const built = this.buildNextPool();
+    if (!changed && !built && !this.refresh) return;
+    this.refresh = false;
+    const selected = this.assetsReady ? this.selection : [];
     for (const p of this.pools) p.count = 0;
     const next = new Set<ForestTree>(),
       dirty = new Set<THREE.InstancedMesh>();
@@ -193,7 +252,9 @@ export class DetailedTrees {
     for (let i = 0; i < selected.length; i++) {
       const { t, d } = selected[i];
       const detail = quality === 'ultra' && d < 220 * 220 && i < 480 ? 1 : 0;
-      const pool = this.pools[detail * 6 + (t.conifer ? 3 : 0) + t.variant];
+      const slot = (t.conifer ? 3 : 0) + t.variant;
+      const pool = this.pools[detail * 6 + slot] || this.pools[slot];
+      if (!pool) continue;
       if (pool.count >= 240) continue; // The original instance remains visible.
       next.add(t);
       dummy.position.set(t.x, t.y, t.z);

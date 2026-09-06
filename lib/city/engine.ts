@@ -1,3 +1,8 @@
+import { installSSAOBlur4 } from './ssao-blur4';
+import { trackSSAOResources } from './ssao-resources';
+import { LandmarkGpuWarmup } from './gpu-landmark-warmup';
+import { warmComposer } from './warm-composer';
+import type { LandmarkWorkerClient } from './landmark-worker-client';
 import { createStartupQA } from './startup-qa';
 import { BeachGround, type BeachCoastData } from './beach-ground';
 import { enterLocalMap, finishLocalMapTransition } from './local-map-camera';
@@ -89,6 +94,13 @@ export class CityEngine {
   terrain = new THREE.Group();
   landmarks = new THREE.Group();
   landmarkDetails: LandmarkDetail[] = [];
+  landmarkWorker: LandmarkWorkerClient<THREE.Group> | null = null;
+  landmarkWarmup: LandmarkGpuWarmup | null = null;
+  prepareLandmark?: (
+    group: THREE.Group,
+    signal: AbortSignal,
+    holder: THREE.Group,
+  ) => void | Promise<void>;
   trafficGroup = new THREE.Group();
   traffic: Traffic | null = null;
   railway: Railway | null = null;
@@ -193,6 +205,7 @@ export class CityEngine {
       if (this.disposed) return;
       event.preventDefault();
       this.contextLost = true;
+      this.landmarkWarmup?.invalidate('Graphics context lost');
       if (process.env.VANCOUVER_VISUAL_QA === '1') {
         this.startupQA?.fail('graphics-context-lost');
       }
@@ -468,6 +481,37 @@ export class CityEngine {
     }
 
     if (this.disposed || this.contextLost) return;
+    if (process.env.VANCOUVER_VISUAL_QA === '1')
+      this.startupQA?.phase('render.composer-warmup');
+    // Allocate and run the current postprocessing pipeline while loading is visible.
+    // This adds real buffer upload after the existing initial shader compilation.
+    this.ensureSSAO();
+    this.updateShadowFrustum();
+    warmComposer(
+      this.renderer,
+      this.composer,
+      this.scene,
+      this.ssao,
+      this.fxaa,
+      this.settings.quality !== 'balanced',
+    );
+    this.landmarkWarmup = new LandmarkGpuWarmup({
+      renderer: this.renderer,
+      scene: this.scene,
+      camera: this.camera,
+      colorTarget: () => this.composer?.readBuffer ?? null,
+      unavailable: () => this.disposed || this.contextLost,
+    });
+    this.prepareLandmark = (group, signal, holder) => {
+      if (!this.landmarkWarmup)
+        return Promise.reject(new Error('GPU preparation unavailable'));
+      return this.landmarkWarmup.prepare(group, signal, holder);
+    };
+    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+      this.startupQA?.endPhase();
+      this.startupQA?.mark('render.composer-warmup.finished');
+    }
+    if (this.disposed || this.contextLost) return;
     window.addEventListener('pagehide', this.pageHide, { once: true });
     if (
       process.env.NODE_ENV === 'development' &&
@@ -553,9 +597,76 @@ export class CityEngine {
     this.sun.shadow.camera.updateProjectionMatrix();
     this.renderer.shadowMap.needsUpdate = true;
   }
+  ensureSSAO() {
+    if (this.ssao || !this.composer) return;
+    const ratio = this.pixelRatio();
+    this.ssao = new SSAOPass(
+      this.scene,
+      this.camera,
+      this.container.clientWidth * ratio,
+      this.container.clientHeight * ratio,
+      8,
+    );
+    trackSSAOResources(this.ssao);
+    installSSAOBlur4(this.ssao);
+    // Ambient contact shading is low-frequency: render it at half resolution
+    // while keeping the city colour pass at the selected physical resolution.
+    const sizeAO = this.ssao.setSize.bind(this.ssao);
+    this.ssao.setSize = (w, h) =>
+      sizeAO(Math.max(1, Math.round(w / 2)), Math.max(1, Math.round(h / 2)));
+    this.ssao.maxDistance = 0.005;
+    // Match the two-sided road/deck surfaces used in the beauty pass.
+    this.ssao.normalMaterial.side = THREE.DoubleSide;
+    const decorative: THREE.Mesh[] = [];
+    this.scene.traverse((object) => {
+      if (!(object instanceof THREE.Mesh)) return;
+      const materials = Array.isArray(object.material)
+        ? object.material
+        : [object.material];
+      if (
+        object.userData.excludeFromSSAO ||
+        object.userData.alphaFoliage ||
+        object.userData.railVehicle ||
+        object.userData.harbourVehicle ||
+        materials.every((m) => m.transparent && !m.depthWrite)
+      )
+        decorative.push(object);
+    });
+    const renderAO = this.ssao.render.bind(this.ssao);
+    this.ssao.render = (...args) => {
+      const visible = [
+        ...new Set([
+          ...decorative,
+          ...(this.detailedTrees?.pools.map((p) => p.foliage) || []),
+        ]),
+      ].filter((object) => {
+        const materials = Array.isArray(object.material)
+          ? object.material
+          : [object.material];
+        return (
+          object.visible &&
+          (object.userData.excludeFromSSAO ||
+            object.userData.alphaFoliage ||
+            materials.every((m) => m.transparent && !m.depthWrite))
+        );
+      });
+      visible.forEach((object) => {
+        object.visible = false;
+      });
+      try {
+        renderAO(...args);
+      } finally {
+        visible.forEach((object) => {
+          object.visible = true;
+        });
+      }
+    };
+    this.composer.insertPass(this.ssao, 1);
+  }
   renderScene() {
     this.detailedTrees?.update();
     this.facadeDetails?.update();
+    this.landmarkWorker?.beginFrame();
     this.landmarkDetails.forEach((l) => l.update());
     this.updateShadowFrustum();
     this.renderer.info.reset();
@@ -569,69 +680,7 @@ export class CityEngine {
     const ao =
       this.settings.quality !== 'balanced' &&
       this.camera.position.distanceTo(this.controls.target) < 3500;
-    if (ao && !this.ssao && this.composer) {
-      const ratio = this.pixelRatio();
-      this.ssao = new SSAOPass(
-        this.scene,
-        this.camera,
-        this.container.clientWidth * ratio,
-        this.container.clientHeight * ratio,
-        8,
-      );
-      // Ambient contact shading is low-frequency: render it at half resolution
-      // while keeping the city colour pass at the selected physical resolution.
-      const sizeAO = this.ssao.setSize.bind(this.ssao);
-      this.ssao.setSize = (w, h) =>
-        sizeAO(Math.max(1, Math.round(w / 2)), Math.max(1, Math.round(h / 2)));
-      this.ssao.maxDistance = 0.005;
-      // Match the two-sided road/deck surfaces used in the beauty pass.
-      this.ssao.normalMaterial.side = THREE.DoubleSide;
-      const decorative: THREE.Mesh[] = [];
-      this.scene.traverse((object) => {
-        if (!(object instanceof THREE.Mesh)) return;
-        const materials = Array.isArray(object.material)
-          ? object.material
-          : [object.material];
-        if (
-          object.userData.excludeFromSSAO ||
-          object.userData.alphaFoliage ||
-          object.userData.railVehicle ||
-          object.userData.harbourVehicle ||
-          materials.every((m) => m.transparent && !m.depthWrite)
-        )
-          decorative.push(object);
-      });
-      const renderAO = this.ssao.render.bind(this.ssao);
-      this.ssao.render = (...args) => {
-        const visible = [
-          ...new Set([
-            ...decorative,
-            ...(this.detailedTrees?.pools.map((p) => p.foliage) || []),
-          ]),
-        ].filter((object) => {
-          const materials = Array.isArray(object.material)
-            ? object.material
-            : [object.material];
-          return (
-            object.visible &&
-            (object.userData.excludeFromSSAO ||
-              object.userData.alphaFoliage ||
-              materials.every((m) => m.transparent && !m.depthWrite))
-          );
-        });
-        visible.forEach((object) => {
-          object.visible = false;
-        });
-        try {
-          renderAO(...args);
-        } finally {
-          visible.forEach((object) => {
-            object.visible = true;
-          });
-        }
-      };
-      this.composer.insertPass(this.ssao, 1);
-    }
+    if (ao) this.ensureSSAO();
     if (this.ssao) {
       this.ssao.enabled = ao;
       this.ssao.kernelRadius = this.settings.mode === 'orbit' ? 7 : 2;
@@ -649,6 +698,7 @@ export class CityEngine {
     if (this.renderPass) this.renderPass.enabled = true;
     if (this.composer) this.composer.render();
     else this.renderer.render(this.scene, this.camera);
+    this.landmarkWarmup?.tick();
   }
   elevation(x: number, z: number): number {
     return this.beachGround?.height(x, z) ?? this.rawElevation(x, z);
@@ -1396,6 +1446,11 @@ export class CityEngine {
     this.navigation?.destroy();
     this.placement?.destroy();
     this.controls.dispose();
+    this.landmarkDetails.forEach((l) => l.disposePending());
+    this.landmarkWarmup?.dispose();
+    this.landmarkWorker?.dispose();
+    this.detailedTrees?.dispose();
+    this.facadeDetails?.dispose();
     this.scene.traverse((o) => {
       const m = o as THREE.Mesh;
       m.geometry?.dispose();
@@ -1410,7 +1465,6 @@ export class CityEngine {
         }
       }
     });
-    this.facadeDetails?.dispose();
     this.environmentTarget?.dispose();
     this.extraTextures.forEach((t) => t.dispose());
     this.sun.shadow.dispose();

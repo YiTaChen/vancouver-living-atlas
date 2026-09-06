@@ -1,3 +1,4 @@
+import { orderedBounds } from './ordered-bounds';
 /** Original MIT. Pure position arrays; no Three, DOM, renderer or terrain mutation.
  * Source centerline XY and baked final asphalt Y remain the anchors.
  */
@@ -515,6 +516,7 @@ export function buildCausewayGeometry(
         }
     });
   }
+  const planIndex = orderedBounds(plans, p => p.bounds, 24, eps);
   // Fill only uncovered endpoint sectors; subtract existing asphalt plans so
   // the fan does not overlay/slant over already-rendered approach triangles.
   if (options.junctionFills !== false) {
@@ -548,7 +550,7 @@ export function buildCausewayGeometry(
           b = rim[(j + 1) % rim.length];
         let candidates = [[center, a, b]];
         const bounds = box(candidates[0]);
-        for (const plan of plans)
+        for (const plan of planIndex.query(bounds))
           if (overlap(bounds, plan.bounds))
             candidates = candidates.flatMap((poly) =>
               subtractTriangle(poly, plan.p),
@@ -562,7 +564,7 @@ export function buildCausewayGeometry(
     }
   }
   const otherRoads = (s: SurfaceSegment, bounds: number[]) =>
-    plans.filter(
+    planIndex.query(bounds).filter(
       (p) =>
         p.identity.routeId !== s.routeId &&
         p.identity.layer === s.layer &&

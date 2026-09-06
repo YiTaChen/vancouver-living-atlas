@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import type { CityEngine } from './engine';
 import { lines, project, unproject } from './geo';
 import { walkableGroundMeshes } from './ground-surface';
+import { firstVisibleObstacleHit } from './visible-obstacles';
 import {
   resolvePlacement,
   type PlacementResult,
@@ -340,7 +341,7 @@ export class MapPlacement {
         ...(this.e.buildings.visible ? this.e.buildings.children : []),
         ...this.e.landmarks.children,
       ];
-      const front = this.raycaster.intersectObjects(obstacles, true)[0];
+      const front = firstVisibleObstacleHit(this.raycaster, obstacles);
       if (front && front.point.y > point.y + 3)
         result = { valid: false, reason: 'placementInvalid' };
     }

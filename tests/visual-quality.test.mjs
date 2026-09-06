@@ -173,7 +173,7 @@ const facades = await moduleAt('lib/city/facade-details.ts', {
   './replaced-buildings': replacements.url,
   './facade-profile': facadeProfiles.url,
 });
-test('facade cells are lazy, use the shared foundation and evict geometry with a bounded cache', () => {
+test('facade cells are lazy, use the shared foundation and evict geometry with a bounded cache', async () => {
   const features = Array.from({ length: 42 }, (_, i) => ({
     properties: { buildingId: i, height: 52 },
     geometry: {
@@ -189,6 +189,7 @@ test('facade cells are lazy, use the shared foundation and evict geometry with a
       ],
     },
   }));
+  const warmups = [];
   const e = {
     data: {
       buildings: { features },
@@ -208,32 +209,64 @@ test('facade cells are lazy, use the shared foundation and evict geometry with a
     settings: { quality: 'balanced', buildings: true },
     buildings: new THREE.Group(),
     renderer: { shadowMap: { needsUpdate: false } },
+    // Success-only preparation is explicitly acknowledged by simulated frames.
+    landmarkWarmup: {
+      prepare: () => new Promise((resolve) => warmups.push(resolve)),
+    },
   };
   const foundations = new Map(features.map((f, i) => [String(i), 42]));
   const detail = new facades.exports.FacadeDetails(e, foundations);
-  assert(detail.cells.every((c) => !c.mesh));
+  assert.equal(detail.queue.records.size, 0);
+  const ready = () => [...detail.queue.records.values()].filter((r) => r.ready);
+  const settle = async () => {
+    // Each stationary frame pumps, acknowledges one prepared page, then lets
+    // the adapter's Promise callback mark it ready before the next frame.
+    let guard = 0;
+    do {
+      detail.update();
+      warmups.splice(0).forEach((resolve) => resolve());
+      await Promise.resolve();
+    } while (detail.queue.pendingId && ++guard < 5000);
+    assert(guard < 5000, 'stationary facade jobs should complete');
+  };
   detail.update();
   assert.equal(e.buildings.children.length, 0);
   e.settings.quality = 'high';
   e.camera.position.set(0, 60, 25);
-  detail.update();
+  await settle();
   assert(e.buildings.children.length > 0);
-  for (const c of detail.cells.filter((c) => c.mesh)) {
-    c.mesh.geometry.computeBoundingBox();
-    assert(c.mesh.geometry.boundingBox.min.y > 42);
-    assert(c.mesh.geometry.boundingBox.max.y < 95);
-  }
+  for (const record of ready())
+    for (const geometry of record.ready.pages) {
+      assert(geometry.boundingBox.min.y > 42);
+      assert(geometry.boundingBox.max.y < 95);
+    }
+  const record = ready().find((r) => r.ready.group.visible);
+  const previous = record.ready.group;
+  detail.queue.select([{ ...record.request, version: 'fixture-refresh' }]);
+  let waiting = 0;
+  while (!warmups.length && waiting++ < 5000) detail.update();
+  assert(warmups.length, 'replacement must wait for preparation acknowledgement');
+  assert.equal(record.ready.group, previous);
+  assert.equal(previous.parent, e.buildings);
+  assert.equal(previous.visible, true);
+  await settle();
+  assert.notEqual(record.ready.group, previous);
+  assert.equal(previous.parent, null);
   for (let i = 1; i < 42; i++) {
     e.camera.position.set(i * 190, 60, 25);
     e.renderer.shadowMap.needsUpdate = false;
-    detail.update();
-    assert(detail.cells.filter((c) => c.mesh).length <= 32);
-    assert(detail.cells.filter((c) => c.mesh?.visible).length <= 24);
+    await settle();
+    assert(ready().length <= 32);
+    assert(ready().filter((r) => r.ready.group.visible).length <= 24);
+    assert(detail.queue.cacheBytes <= 96 * 1024 * 1024);
     assert(e.renderer.shadowMap.needsUpdate);
   }
   e.settings.quality = 'balanced';
   detail.update();
-  assert(detail.cells.every((c) => !c.mesh?.visible));
+  assert(ready().every((r) => !r.ready.group.visible));
+  assert.equal(detail.queue.pendingId, undefined);
+  detail.dispose();
+  assert.equal(e.buildings.children.length, 0);
   assert(replacements.exports.replacedBuilding({ buildingId: 152366 }));
   assert(
     replacements.exports.replacedBuilding({ structureId: 'osm-structure-19' }),

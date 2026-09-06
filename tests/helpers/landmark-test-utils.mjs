@@ -78,7 +78,7 @@ export function disposeGroup(group) {
   geometries.forEach((g) => g.dispose());
   materials.forEach((m) => m.dispose());
 }
-export function assertLOD(
+export async function assertLOD(
   LandmarkDetail,
   create,
   plan,
@@ -92,20 +92,42 @@ export function assertLOD(
     settings: { quality: 'high', buildings: true },
     camera: new THREE.PerspectiveCamera(),
     renderer: { shadowMap: { needsUpdate: false } },
+    landmarkWorker: {
+      request(_kind, captured) {
+        assert.deepEqual(captured, plan);
+        return {
+          promise: Promise.resolve().then(() => {
+            creates++;
+            return create(true, captured);
+          }),
+          cancel() {},
+        };
+      },
+      admitGroup: () => true,
+    },
     elevation: () => {
       throw new Error('Must use captured model base');
     },
   };
-  const lod = new LandmarkDetail(engine, (detail) => {
-    creates++;
-    return create(detail, plan);
-  });
+  const lod = new LandmarkDetail(
+    engine,
+    (detail) => {
+      creates++;
+      return create(detail, plan);
+    },
+    plan,
+  );
   const footprintCount = engine.data.solidWaterFootprints?.length ?? 0;
   const medium = lod.medium;
   for (const n of engine.data.nightMaterials)
     close(n.material.emissiveIntensity, n.intensity * 0.7, 1e-12);
   engine.settings.quality = 'ultra';
   engine.camera.position.copy(lod.bounds.getCenter(new THREE.Vector3()));
+  lod.update();
+  assert.equal(creates, 1);
+  assert.equal(lod.medium.visible, true);
+  assert.equal(lod.ultra, null);
+  for (let i = 0; i < 12; i++) await Promise.resolve();
   lod.update();
   assert.equal(creates, 2);
   assert.equal(lod.medium.visible, false);
@@ -137,5 +159,6 @@ export function assertLOD(
       walk[0].geometry.getAttribute('position').array,
       walk[1].geometry.getAttribute('position').array,
     );
+  lod.disposePending();
   disposeGroup(lod.holder);
 }

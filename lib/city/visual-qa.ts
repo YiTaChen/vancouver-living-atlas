@@ -398,7 +398,7 @@ export function installVisualQA(e: CityEngine) {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            name: `${quality}-${test.id}${durationMs > 8000 ? '-long' : ''}`,
+            name: `${quality}-${row.id}`,
             row,
             screenshot,
           }),

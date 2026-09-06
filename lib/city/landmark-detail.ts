@@ -1,3 +1,9 @@
+import { LandmarkLoadState } from './landmark-load-state';
+import {
+  createLandmarkWorkerService,
+  disposeDetachedLandmark,
+} from './landmark-worker-service';
+import type { ResolvedGroundPlanBase } from './landmark-worker-protocol';
 import * as THREE from 'three';
 import { project } from './geo';
 import { QUALITY } from './quality';
@@ -8,9 +14,11 @@ export class LandmarkDetail {
   ultra: THREE.Group | null = null;
   holder = new THREE.Group();
   bounds: THREE.Box3;
+  loadState: LandmarkLoadState<THREE.Group>;
   constructor(
     private e: CityEngine,
     private create: (detail: boolean) => THREE.Group,
+    private groundPlan?: ResolvedGroundPlanBase,
   ) {
     this.medium = create(false);
     const p = this.medium.userData.placement;
@@ -32,8 +40,40 @@ export class LandmarkDetail {
       });
       (e.data.solidWaterFootprints ||= []).push([world]);
     }
+    this.loadState = new LandmarkLoadState({
+      load: () => {
+        if (!this.groundPlan)
+          throw new Error(
+            'Resolved landmark ground plan unavailable; medium retained',
+          );
+        const client = (this.e.landmarkWorker ||=
+          createLandmarkWorkerService());
+        return client.request(
+          this.groundPlan.kind,
+          this.groundPlan,
+          this.bounds.distanceToPoint(this.e.camera.position),
+        );
+      },
+      prepare: (group, signal) => {
+        this.prepareNightGeometry(group);
+        return this.e.prepareLandmark?.(group, signal, this.holder);
+      },
+      attach: (group) => {
+        this.holder.add(group);
+        this.registerNight(group);
+        this.ultra = group;
+        this.e.renderer.shadowMap.needsUpdate = true;
+      },
+      release: disposeDetachedLandmark,
+      error: (message) => {
+        (this.e.data.landmarkWorkerErrors ||= {})[this.holder.name] = message;
+      },
+    });
   }
-  registerNight(group: THREE.Group) {
+  // Detached geometry only; cancellation can release it without stale engine registries.
+  prepareNightGeometry(group: THREE.Group) {
+    if (group.userData.nightGeometryPrepared) return;
+    group.userData.nightGeometryPrepared = true;
     const points = group.userData.nightPoints as number[][] | undefined;
     if (points?.length) {
       const size = 32,
@@ -66,7 +106,16 @@ export class LandmarkDetail {
       lights.name = 'Science World night light glow';
       lights.visible = this.e.uniforms.night.value > 0.15;
       group.add(lights);
-      (this.e.data.nightObjects ||= []).push(lights);
+      (group.userData.preparedNightObjects ||= []).push(lights);
+    }
+  }
+  registerNight(group: THREE.Group) {
+    if (group.userData.nightRegistered) return;
+    this.prepareNightGeometry(group);
+    group.userData.nightRegistered = true;
+    for (const object of group.userData.preparedNightObjects || []) {
+      object.visible = this.e.uniforms.night.value > 0.15;
+      (this.e.data.nightObjects ||= []).push(object);
     }
     const list = group.userData.nightMaterials || [];
     for (const n of list)
@@ -79,15 +128,26 @@ export class LandmarkDetail {
       this.e.settings.buildings &&
       range > 0 &&
       this.bounds.distanceToPoint(this.e.camera.position) < range;
-    if (active && !this.ultra) {
-      this.ultra = this.create(true);
-      this.registerNight(this.ultra);
-      this.holder.add(this.ultra);
+    if (active) this.loadState.start();
+    else if (
+      ['loading', 'preparing', 'prepared'].includes(this.loadState.status)
+    )
+      this.loadState.cancel();
+    if (
+      active &&
+      this.loadState.status === 'prepared' &&
+      this.e.landmarkWorker?.admitGroup()
+    )
+      this.loadState.commit();
+    const showUltra =
+      active && this.loadState.status === 'ready' && !!this.ultra;
+    if (this.medium.visible === showUltra)
       this.e.renderer.shadowMap.needsUpdate = true;
-    }
-    if (this.medium.visible === active)
-      this.e.renderer.shadowMap.needsUpdate = true;
-    this.medium.visible = !active;
-    if (this.ultra) this.ultra.visible = active;
+    this.medium.visible = !showUltra;
+    if (this.ultra) this.ultra.visible = showUltra;
+  }
+  /** Pending groups are outside the scene and require explicit release. */
+  disposePending() {
+    this.loadState.dispose();
   }
 }

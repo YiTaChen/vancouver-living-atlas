@@ -220,14 +220,14 @@ test('Marine entry is a real aperture across the old eight-metre shell seam', ()
   }
   disposeGroup(g);
 });
-test('serialized Stage7 DTOs are geometry deterministic and real LOD lifecycle preserves night/footprints', () => {
+test('serialized Stage7 DTOs are geometry deterministic and real LOD lifecycle preserves night/footprints', async () => {
   for (const p of plans) {
     const a = createResolvedLandmark(false, p),
       b = createResolvedLandmark(false, JSON.parse(JSON.stringify(p)));
     assert.equal(geometryDigest(a), geometryDigest(b));
     disposeGroup(a);
     disposeGroup(b);
-    assertLOD(
+    await assertLOD(
       LandmarkDetail,
       createResolvedLandmark,
       p,

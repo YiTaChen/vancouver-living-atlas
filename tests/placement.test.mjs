@@ -31,6 +31,7 @@ const { MapPlacement } = await import(
     './geo': geoUrl,
     './placement-geometry': geometryUrl,
     './ground-surface': cityModule('ground-surface'),
+    './visible-obstacles': cityModule('visible-obstacles'),
   })
 );
 const world = (extra = {}) => ({
@@ -391,6 +392,7 @@ const { StreetNavigation } = await import(
     './travel-camera': cityModule('travel-camera'),
     './assets/walker': cityModule('assets/walker'),
     './ground-surface': cityModule('ground-surface'),
+    './visible-obstacles': cityModule('visible-obstacles'),
     './driver-camera': cityModule('driver-camera'),
     './assets/cockpits': cityModule('assets/cockpits'),
     './landmark-footprints.json': landmarkUrl,
@@ -1488,4 +1490,74 @@ test('rejoining a second finger after a pan keeps gesture ownership without rest
   } finally {
     close();
   }
+});
+
+// These use the existing MapPlacement fixture and actual pick() implementation.
+test('visible roof picking ignores hidden nearer roofs without missing a visible farther roof', () => {
+  const f = fixture(),
+    near = new THREE.Mesh(
+      new THREE.BoxGeometry(20, 1, 20),
+      new THREE.MeshBasicMaterial(),
+    ),
+    far = near.clone();
+  near.position.y = 80;
+  far.position.y = 40;
+  near.visible = false;
+  f.e.landmarks.add(near, far);
+  f.e.landmarks.updateMatrixWorld(true);
+  f.placement.begin('walk');
+  assert.equal(
+    f.placement.preview.result.valid,
+    false,
+    'visible farther roof must still obstruct',
+  );
+  far.visible = false;
+  f.placement.pick(true);
+  assert.equal(f.placement.preview.result.valid, true);
+  near.visible = true;
+  f.placement.pick(true);
+  assert.equal(f.placement.preview.result.valid, false);
+  f.placement.destroy();
+  near.geometry.dispose();
+  near.material.dispose();
+});
+test('MapPlacement honors hidden landmark ancestors and restoring them re-enables roof occlusion', () => {
+  const f = fixture(),
+    holder = new THREE.Group(),
+    roof = new THREE.Mesh(
+      new THREE.BoxGeometry(20, 1, 20),
+      new THREE.MeshBasicMaterial(),
+    );
+  roof.position.y = 40;
+  holder.add(roof);
+  f.e.landmarks.add(holder);
+  f.e.landmarks.updateMatrixWorld(true);
+  f.placement.begin('walk');
+  assert.equal(f.placement.preview.result.valid, false);
+  for (const parent of [holder, f.e.landmarks]) {
+    parent.visible = false;
+    f.placement.pick(true);
+    assert.equal(f.placement.preview.result.valid, true);
+    assert.equal(roof.visible, true);
+    parent.visible = true;
+    f.placement.pick(true);
+    assert.equal(f.placement.preview.result.valid, false);
+  }
+  // Visual layers never disable physical ground-clearance checks.
+  f.e.landmarks.visible = false;
+  f.e.navigation.clearGround = () => false;
+  f.placement.pick(true);
+  assert.equal(f.placement.preview.result.valid, false);
+  f.placement.destroy();
+  roof.geometry.dispose();
+  roof.material.dispose();
+});
+test('hidden explicit bridge proxy remains pickable because visibility filtering applies only to roof obstacles', () => {
+  const f = fixture({ bridge: true });
+  f.placement.bridgeMesh.visible = false;
+  f.placement.begin('walk');
+  assert.equal(f.placement.preview.result.valid, true);
+  assert.equal(f.placement.preview.result.point.surface, 'bridge');
+  assert.equal(f.placement.preview.result.point.y, 30);
+  f.placement.destroy();
 });

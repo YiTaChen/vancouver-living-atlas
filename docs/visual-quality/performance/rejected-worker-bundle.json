@@ -1,0 +1,1560 @@
+{
+  "revision": "1e2d44d239426dd90a0b3d4f724286cbdca9df05",
+  "sourceFingerprint": "9d9c6e648c81c4a23feb243661b351fcb84266c5fb304cee3b5ee4ddae7ebf31",
+  "kind": "release-cold-detail-v1",
+  "id": "bc-entry-cold-ultra-8s-14p00h",
+  "quality": "ultra",
+  "hour": 14,
+  "valid": false,
+  "environmentValid": true,
+  "arrivalCount": 0,
+  "measurement": {
+    "schema": "release-render-window-v1",
+    "elapsedMs": 8015.5999999940395,
+    "actionMs": 96.60000000149012,
+    "valid": true,
+    "flags": {
+      "hidden": false,
+      "aborted": false,
+      "contextLost": false,
+      "disposed": false,
+      "modeMismatch": false
+    },
+    "initialMode": "orbit",
+    "initialHour": 14,
+    "finalHour": 14,
+    "night": 0,
+    "frames": {
+      "count": 236,
+      "p50Ms": 32.79999999701977,
+      "p95Ms": 47.5,
+      "p99Ms": 64.90000000596046,
+      "maxMs": 148.39999999850988,
+      "over50Ms": 8,
+      "over100Ms": 2
+    },
+    "coldFirst2s": {
+      "count": 55,
+      "p50Ms": 32.5,
+      "p95Ms": 64.90000000596046,
+      "p99Ms": 148.39999999850988,
+      "maxMs": 148.39999999850988,
+      "over50Ms": 6,
+      "over100Ms": 2
+    },
+    "coldFirstFrame": {
+      "elapsedMs": 139.79999999701977,
+      "gapMs": 139.79999999701977
+    },
+    "renderCPU": {
+      "count": 236,
+      "p50Ms": 7.800000004470348,
+      "p95Ms": 21.899999998509884,
+      "p99Ms": 27.100000001490116,
+      "maxMs": 120.39999999850988,
+      "over50Ms": 1,
+      "over100Ms": 1
+    },
+    "submittedFrames": 236,
+    "traveledMeters": 0,
+    "travelSimulationSeconds": 0,
+    "collisionFrames": 0,
+    "trace": [
+      {
+        "elapsedMs": 1012.0999999940395,
+        "windowMs": 1012.0999999940395,
+        "windowMeters": 0,
+        "measuredSpeed": 0,
+        "heldKeys": [],
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "mode": "orbit",
+        "yaw": 0,
+        "controllerSpeed": 0,
+        "surfaceId": "ground",
+        "boatSurfaceId": null,
+        "camera": [
+          1054.1307169871104,
+          12.000000000000004,
+          1085.6608334906105
+        ],
+        "quaternion": [
+          0.03144261200947764,
+          0.885029880870531,
+          0.060426088388561394,
+          -0.4605237886997511
+        ],
+        "target": [
+          1078.0085004161847,
+          8,
+          1102.3924908656052
+        ],
+        "cameraDistance": 0,
+        "cockpit": {
+          "mode": "orbit",
+          "perspective": "third",
+          "interior": "clear"
+        },
+        "quality": "ultra",
+        "render": [
+          2560,
+          1440
+        ],
+        "triangles": 4401516,
+        "calls": 345,
+        "geometries": 613,
+        "textures": 26
+      },
+      {
+        "elapsedMs": 2026.2999999970198,
+        "windowMs": 1014.2000000029802,
+        "windowMeters": 0,
+        "measuredSpeed": 0,
+        "heldKeys": [],
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "mode": "orbit",
+        "yaw": 0,
+        "controllerSpeed": 0,
+        "surfaceId": "ground",
+        "boatSurfaceId": null,
+        "camera": [
+          1054.1307169871104,
+          12.000000000000004,
+          1085.6608334906105
+        ],
+        "quaternion": [
+          0.03144261200947764,
+          0.885029880870531,
+          0.060426088388561394,
+          -0.4605237886997511
+        ],
+        "target": [
+          1078.0085004161847,
+          8,
+          1102.3924908656052
+        ],
+        "cameraDistance": 0,
+        "cockpit": {
+          "mode": "orbit",
+          "perspective": "third",
+          "interior": "clear"
+        },
+        "quality": "ultra",
+        "render": [
+          2560,
+          1440
+        ],
+        "triangles": 3171189,
+        "calls": 297,
+        "geometries": 624,
+        "textures": 26
+      },
+      {
+        "elapsedMs": 3031.39999999851,
+        "windowMs": 1005.1000000014901,
+        "windowMeters": 0,
+        "measuredSpeed": 0,
+        "heldKeys": [],
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "mode": "orbit",
+        "yaw": 0,
+        "controllerSpeed": 0,
+        "surfaceId": "ground",
+        "boatSurfaceId": null,
+        "camera": [
+          1054.1307169871104,
+          12.000000000000004,
+          1085.6608334906105
+        ],
+        "quaternion": [
+          0.03144261200947764,
+          0.885029880870531,
+          0.060426088388561394,
+          -0.4605237886997511
+        ],
+        "target": [
+          1078.0085004161847,
+          8,
+          1102.3924908656052
+        ],
+        "cameraDistance": 0,
+        "cockpit": {
+          "mode": "orbit",
+          "perspective": "third",
+          "interior": "clear"
+        },
+        "quality": "ultra",
+        "render": [
+          2560,
+          1440
+        ],
+        "triangles": 3170613,
+        "calls": 296,
+        "geometries": 632,
+        "textures": 26
+      },
+      {
+        "elapsedMs": 4046.5999999940395,
+        "windowMs": 1015.1999999955297,
+        "windowMeters": 0,
+        "measuredSpeed": 0,
+        "heldKeys": [],
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "mode": "orbit",
+        "yaw": 0,
+        "controllerSpeed": 0,
+        "surfaceId": "ground",
+        "boatSurfaceId": null,
+        "camera": [
+          1054.1307169871104,
+          12.000000000000004,
+          1085.6608334906105
+        ],
+        "quaternion": [
+          0.03144261200947764,
+          0.885029880870531,
+          0.060426088388561394,
+          -0.4605237886997511
+        ],
+        "target": [
+          1078.0085004161847,
+          8,
+          1102.3924908656052
+        ],
+        "cameraDistance": 0,
+        "cockpit": {
+          "mode": "orbit",
+          "perspective": "third",
+          "interior": "clear"
+        },
+        "quality": "ultra",
+        "render": [
+          2560,
+          1440
+        ],
+        "triangles": 3170613,
+        "calls": 296,
+        "geometries": 645,
+        "textures": 26
+      },
+      {
+        "elapsedMs": 5063.39999999851,
+        "windowMs": 1016.8000000044703,
+        "windowMeters": 0,
+        "measuredSpeed": 0,
+        "heldKeys": [],
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "mode": "orbit",
+        "yaw": 0,
+        "controllerSpeed": 0,
+        "surfaceId": "ground",
+        "boatSurfaceId": null,
+        "camera": [
+          1054.1307169871104,
+          12.000000000000004,
+          1085.6608334906105
+        ],
+        "quaternion": [
+          0.03144261200947764,
+          0.885029880870531,
+          0.060426088388561394,
+          -0.4605237886997511
+        ],
+        "target": [
+          1078.0085004161847,
+          8,
+          1102.3924908656052
+        ],
+        "cameraDistance": 0,
+        "cockpit": {
+          "mode": "orbit",
+          "perspective": "third",
+          "interior": "clear"
+        },
+        "quality": "ultra",
+        "render": [
+          2560,
+          1440
+        ],
+        "triangles": 3170613,
+        "calls": 296,
+        "geometries": 648,
+        "textures": 26
+      },
+      {
+        "elapsedMs": 6088.29999999702,
+        "windowMs": 1024.8999999985099,
+        "windowMeters": 0,
+        "measuredSpeed": 0,
+        "heldKeys": [],
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "mode": "orbit",
+        "yaw": 0,
+        "controllerSpeed": 0,
+        "surfaceId": "ground",
+        "boatSurfaceId": null,
+        "camera": [
+          1054.1307169871104,
+          12.000000000000004,
+          1085.6608334906105
+        ],
+        "quaternion": [
+          0.03144261200947764,
+          0.885029880870531,
+          0.060426088388561394,
+          -0.4605237886997511
+        ],
+        "target": [
+          1078.0085004161847,
+          8,
+          1102.3924908656052
+        ],
+        "cameraDistance": 0,
+        "cockpit": {
+          "mode": "orbit",
+          "perspective": "third",
+          "interior": "clear"
+        },
+        "quality": "ultra",
+        "render": [
+          2560,
+          1440
+        ],
+        "triangles": 3170613,
+        "calls": 296,
+        "geometries": 648,
+        "textures": 26
+      },
+      {
+        "elapsedMs": 7095.5999999940395,
+        "windowMs": 1007.2999999970198,
+        "windowMeters": 0,
+        "measuredSpeed": 0,
+        "heldKeys": [],
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "mode": "orbit",
+        "yaw": 0,
+        "controllerSpeed": 0,
+        "surfaceId": "ground",
+        "boatSurfaceId": null,
+        "camera": [
+          1054.1307169871104,
+          12.000000000000004,
+          1085.6608334906105
+        ],
+        "quaternion": [
+          0.03144261200947764,
+          0.885029880870531,
+          0.060426088388561394,
+          -0.4605237886997511
+        ],
+        "target": [
+          1078.0085004161847,
+          8,
+          1102.3924908656052
+        ],
+        "cameraDistance": 0,
+        "cockpit": {
+          "mode": "orbit",
+          "perspective": "third",
+          "interior": "clear"
+        },
+        "quality": "ultra",
+        "render": [
+          2560,
+          1440
+        ],
+        "triangles": 3170613,
+        "calls": 296,
+        "geometries": 648,
+        "textures": 26
+      }
+    ],
+    "landmarks": [
+      {
+        "name": "Science World/medium",
+        "ultraPresentInitially": false,
+        "firstAttachedMs": null,
+        "firstSubmittedMs": null,
+        "constructionMs": [],
+        "attachmentUpdateMs": [],
+        "loadStateTimeline": [
+          {
+            "elapsedMs": 0.19999999552965164,
+            "state": "idle"
+          },
+          {
+            "elapsedMs": 111.09999999403954,
+            "state": "loading"
+          },
+          {
+            "elapsedMs": 295.19999999552965,
+            "state": "failed"
+          }
+        ],
+        "visibleLevel": "medium",
+        "nightIntensityRange": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "Canada Place/medium",
+        "ultraPresentInitially": false,
+        "firstAttachedMs": null,
+        "firstSubmittedMs": null,
+        "constructionMs": [],
+        "attachmentUpdateMs": [],
+        "loadStateTimeline": [
+          {
+            "elapsedMs": 0.19999999552965164,
+            "state": "idle"
+          },
+          {
+            "elapsedMs": 111.09999999403954,
+            "state": "loading"
+          },
+          {
+            "elapsedMs": 295.19999999552965,
+            "state": "failed"
+          }
+        ],
+        "visibleLevel": "medium",
+        "nightIntensityRange": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "BC Place — original detailed model",
+        "ultraPresentInitially": false,
+        "firstAttachedMs": null,
+        "firstSubmittedMs": null,
+        "constructionMs": [],
+        "attachmentUpdateMs": [],
+        "loadStateTimeline": [
+          {
+            "elapsedMs": 0.19999999552965164,
+            "state": "idle"
+          },
+          {
+            "elapsedMs": 111.29999999701977,
+            "state": "loading"
+          },
+          {
+            "elapsedMs": 295.19999999552965,
+            "state": "failed"
+          }
+        ],
+        "visibleLevel": "medium",
+        "nightIntensityRange": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "Harbour Centre — original detailed model",
+        "ultraPresentInitially": false,
+        "firstAttachedMs": null,
+        "firstSubmittedMs": null,
+        "constructionMs": [],
+        "attachmentUpdateMs": [],
+        "loadStateTimeline": [
+          {
+            "elapsedMs": 0.19999999552965164,
+            "state": "idle"
+          },
+          {
+            "elapsedMs": 111.5,
+            "state": "loading"
+          },
+          {
+            "elapsedMs": 295.19999999552965,
+            "state": "failed"
+          }
+        ],
+        "visibleLevel": "medium",
+        "nightIntensityRange": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "Marine Building — original Art Deco interpretation",
+        "ultraPresentInitially": false,
+        "firstAttachedMs": null,
+        "firstSubmittedMs": null,
+        "constructionMs": [],
+        "attachmentUpdateMs": [],
+        "loadStateTimeline": [
+          {
+            "elapsedMs": 0.19999999552965164,
+            "state": "idle"
+          },
+          {
+            "elapsedMs": 111.59999999403954,
+            "state": "loading"
+          },
+          {
+            "elapsedMs": 295.19999999552965,
+            "state": "failed"
+          }
+        ],
+        "visibleLevel": "medium",
+        "nightIntensityRange": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "Vancouver Convention Centre West/medium",
+        "ultraPresentInitially": false,
+        "firstAttachedMs": null,
+        "firstSubmittedMs": null,
+        "constructionMs": [],
+        "attachmentUpdateMs": [],
+        "loadStateTimeline": [
+          {
+            "elapsedMs": 0.19999999552965164,
+            "state": "idle"
+          },
+          {
+            "elapsedMs": 111.59999999403954,
+            "state": "loading"
+          },
+          {
+            "elapsedMs": 295.19999999552965,
+            "state": "failed"
+          }
+        ],
+        "visibleLevel": "medium",
+        "nightIntensityRange": [
+          0,
+          0
+        ]
+      },
+      {
+        "name": "Vancouver House / recessed balcony lattice",
+        "ultraPresentInitially": false,
+        "firstAttachedMs": null,
+        "firstSubmittedMs": null,
+        "constructionMs": [],
+        "attachmentUpdateMs": [],
+        "loadStateTimeline": [
+          {
+            "elapsedMs": 0.19999999552965164,
+            "state": "idle"
+          },
+          {
+            "elapsedMs": 111.59999999403954,
+            "state": "loading"
+          },
+          {
+            "elapsedMs": 295.19999999552965,
+            "state": "failed"
+          }
+        ],
+        "visibleLevel": "medium",
+        "nightIntensityRange": [
+          0,
+          0
+        ]
+      }
+    ],
+    "workerJobs": [],
+    "rawGaps": [
+      {
+        "elapsedMs": 139.79999999701977,
+        "gapMs": 139.79999999701977
+      },
+      {
+        "elapsedMs": 169.5,
+        "gapMs": 29.700000002980232
+      },
+      {
+        "elapsedMs": 191.19999999552965,
+        "gapMs": 21.69999999552965
+      },
+      {
+        "elapsedMs": 217.19999999552965,
+        "gapMs": 26
+      },
+      {
+        "elapsedMs": 237.09999999403954,
+        "gapMs": 19.899999998509884
+      },
+      {
+        "elapsedMs": 302,
+        "gapMs": 64.90000000596046
+      },
+      {
+        "elapsedMs": 358.5,
+        "gapMs": 56.5
+      },
+      {
+        "elapsedMs": 409.3999999985099,
+        "gapMs": 50.899999998509884
+      },
+      {
+        "elapsedMs": 462.59999999403954,
+        "gapMs": 53.19999999552965
+      },
+      {
+        "elapsedMs": 493,
+        "gapMs": 30.400000005960464
+      },
+      {
+        "elapsedMs": 530.0999999940395,
+        "gapMs": 37.099999994039536
+      },
+      {
+        "elapsedMs": 562.5999999940395,
+        "gapMs": 32.5
+      },
+      {
+        "elapsedMs": 582.2999999970198,
+        "gapMs": 19.700000002980232
+      },
+      {
+        "elapsedMs": 614,
+        "gapMs": 31.700000002980232
+      },
+      {
+        "elapsedMs": 648.2999999970198,
+        "gapMs": 34.29999999701977
+      },
+      {
+        "elapsedMs": 796.6999999955297,
+        "gapMs": 148.39999999850988
+      },
+      {
+        "elapsedMs": 807.6999999955297,
+        "gapMs": 11
+      },
+      {
+        "elapsedMs": 829.8999999985099,
+        "gapMs": 22.200000002980232
+      },
+      {
+        "elapsedMs": 852.6999999955297,
+        "gapMs": 22.799999997019768
+      },
+      {
+        "elapsedMs": 861.5999999940395,
+        "gapMs": 8.899999998509884
+      },
+      {
+        "elapsedMs": 877.0999999940395,
+        "gapMs": 15.5
+      },
+      {
+        "elapsedMs": 906,
+        "gapMs": 28.900000005960464
+      },
+      {
+        "elapsedMs": 952.5999999940395,
+        "gapMs": 46.599999994039536
+      },
+      {
+        "elapsedMs": 991.2999999970198,
+        "gapMs": 38.70000000298023
+      },
+      {
+        "elapsedMs": 1012.1999999955297,
+        "gapMs": 20.899999998509884
+      },
+      {
+        "elapsedMs": 1043.1999999955297,
+        "gapMs": 31
+      },
+      {
+        "elapsedMs": 1079.2999999970198,
+        "gapMs": 36.100000001490116
+      },
+      {
+        "elapsedMs": 1112.5999999940395,
+        "gapMs": 33.29999999701977
+      },
+      {
+        "elapsedMs": 1150.5,
+        "gapMs": 37.900000005960464
+      },
+      {
+        "elapsedMs": 1183,
+        "gapMs": 32.5
+      },
+      {
+        "elapsedMs": 1215.8999999985099,
+        "gapMs": 32.899999998509884
+      },
+      {
+        "elapsedMs": 1248.5999999940395,
+        "gapMs": 32.69999999552965
+      },
+      {
+        "elapsedMs": 1294.2999999970198,
+        "gapMs": 45.70000000298023
+      },
+      {
+        "elapsedMs": 1325.7999999970198,
+        "gapMs": 31.5
+      },
+      {
+        "elapsedMs": 1357.1999999955297,
+        "gapMs": 31.399999998509884
+      },
+      {
+        "elapsedMs": 1378.1999999955297,
+        "gapMs": 21
+      },
+      {
+        "elapsedMs": 1412.2999999970198,
+        "gapMs": 34.100000001490116
+      },
+      {
+        "elapsedMs": 1446.2999999970198,
+        "gapMs": 34
+      },
+      {
+        "elapsedMs": 1493.0999999940395,
+        "gapMs": 46.79999999701977
+      },
+      {
+        "elapsedMs": 1531,
+        "gapMs": 37.900000005960464
+      },
+      {
+        "elapsedMs": 1551.1999999955297,
+        "gapMs": 20.19999999552965
+      },
+      {
+        "elapsedMs": 1583,
+        "gapMs": 31.80000000447035
+      },
+      {
+        "elapsedMs": 1615.1999999955297,
+        "gapMs": 32.19999999552965
+      },
+      {
+        "elapsedMs": 1650.3999999985099,
+        "gapMs": 35.20000000298023
+      },
+      {
+        "elapsedMs": 1687.7999999970198,
+        "gapMs": 37.399999998509884
+      },
+      {
+        "elapsedMs": 1720.0999999940395,
+        "gapMs": 32.29999999701977
+      },
+      {
+        "elapsedMs": 1766.5,
+        "gapMs": 46.400000005960464
+      },
+      {
+        "elapsedMs": 1797.7999999970198,
+        "gapMs": 31.299999997019768
+      },
+      {
+        "elapsedMs": 1829.6999999955297,
+        "gapMs": 31.899999998509884
+      },
+      {
+        "elapsedMs": 1863.5,
+        "gapMs": 33.80000000447035
+      },
+      {
+        "elapsedMs": 1895.6999999955297,
+        "gapMs": 32.19999999552965
+      },
+      {
+        "elapsedMs": 1914.5,
+        "gapMs": 18.80000000447035
+      },
+      {
+        "elapsedMs": 1961.3999999985099,
+        "gapMs": 46.899999998509884
+      },
+      {
+        "elapsedMs": 1988,
+        "gapMs": 26.600000001490116
+      },
+      {
+        "elapsedMs": 2026.2999999970198,
+        "gapMs": 38.29999999701977
+      },
+      {
+        "elapsedMs": 2078.6999999955297,
+        "gapMs": 52.399999998509884
+      },
+      {
+        "elapsedMs": 2098.6999999955297,
+        "gapMs": 20
+      },
+      {
+        "elapsedMs": 2135.2999999970198,
+        "gapMs": 36.600000001490116
+      },
+      {
+        "elapsedMs": 2168.6999999955297,
+        "gapMs": 33.399999998509884
+      },
+      {
+        "elapsedMs": 2204.0999999940395,
+        "gapMs": 35.399999998509884
+      },
+      {
+        "elapsedMs": 2242.0999999940395,
+        "gapMs": 38
+      },
+      {
+        "elapsedMs": 2275.1999999955297,
+        "gapMs": 33.100000001490116
+      },
+      {
+        "elapsedMs": 2321.6999999955297,
+        "gapMs": 46.5
+      },
+      {
+        "elapsedMs": 2351.89999999851,
+        "gapMs": 30.200000002980232
+      },
+      {
+        "elapsedMs": 2383.39999999851,
+        "gapMs": 31.5
+      },
+      {
+        "elapsedMs": 2417.6999999955297,
+        "gapMs": 34.29999999701977
+      },
+      {
+        "elapsedMs": 2437.5,
+        "gapMs": 19.80000000447035
+      },
+      {
+        "elapsedMs": 2471.89999999851,
+        "gapMs": 34.399999998509884
+      },
+      {
+        "elapsedMs": 2506.5,
+        "gapMs": 34.600000001490116
+      },
+      {
+        "elapsedMs": 2546.5,
+        "gapMs": 40
+      },
+      {
+        "elapsedMs": 2597.39999999851,
+        "gapMs": 50.899999998509884
+      },
+      {
+        "elapsedMs": 2628.0999999940395,
+        "gapMs": 30.69999999552965
+      },
+      {
+        "elapsedMs": 2649.2999999970198,
+        "gapMs": 21.200000002980232
+      },
+      {
+        "elapsedMs": 2681.39999999851,
+        "gapMs": 32.100000001490116
+      },
+      {
+        "elapsedMs": 2716.5,
+        "gapMs": 35.100000001490116
+      },
+      {
+        "elapsedMs": 2752.39999999851,
+        "gapMs": 35.899999998509884
+      },
+      {
+        "elapsedMs": 2790.0999999940395,
+        "gapMs": 37.69999999552965
+      },
+      {
+        "elapsedMs": 2822.6999999955297,
+        "gapMs": 32.600000001490116
+      },
+      {
+        "elapsedMs": 2855.5,
+        "gapMs": 32.80000000447035
+      },
+      {
+        "elapsedMs": 2887.5999999940395,
+        "gapMs": 32.099999994039536
+      },
+      {
+        "elapsedMs": 2920.5999999940395,
+        "gapMs": 33
+      },
+      {
+        "elapsedMs": 2952.39999999851,
+        "gapMs": 31.80000000447035
+      },
+      {
+        "elapsedMs": 2984.89999999851,
+        "gapMs": 32.5
+      },
+      {
+        "elapsedMs": 3031.39999999851,
+        "gapMs": 46.5
+      },
+      {
+        "elapsedMs": 3060.89999999851,
+        "gapMs": 29.5
+      },
+      {
+        "elapsedMs": 3091.2999999970198,
+        "gapMs": 30.399999998509884
+      },
+      {
+        "elapsedMs": 3122.5999999940395,
+        "gapMs": 31.299999997019768
+      },
+      {
+        "elapsedMs": 3144,
+        "gapMs": 21.400000005960464
+      },
+      {
+        "elapsedMs": 3178.6999999955297,
+        "gapMs": 34.69999999552965
+      },
+      {
+        "elapsedMs": 3212.89999999851,
+        "gapMs": 34.20000000298023
+      },
+      {
+        "elapsedMs": 3262,
+        "gapMs": 49.100000001490116
+      },
+      {
+        "elapsedMs": 3295.89999999851,
+        "gapMs": 33.899999998509884
+      },
+      {
+        "elapsedMs": 3315.89999999851,
+        "gapMs": 20
+      },
+      {
+        "elapsedMs": 3347.7999999970198,
+        "gapMs": 31.899999998509884
+      },
+      {
+        "elapsedMs": 3382.6999999955297,
+        "gapMs": 34.899999998509884
+      },
+      {
+        "elapsedMs": 3431.0999999940395,
+        "gapMs": 48.399999998509884
+      },
+      {
+        "elapsedMs": 3467.5,
+        "gapMs": 36.400000005960464
+      },
+      {
+        "elapsedMs": 3501.1999999955297,
+        "gapMs": 33.69999999552965
+      },
+      {
+        "elapsedMs": 3520.5,
+        "gapMs": 19.30000000447035
+      },
+      {
+        "elapsedMs": 3552.89999999851,
+        "gapMs": 32.399999998509884
+      },
+      {
+        "elapsedMs": 3587.6999999955297,
+        "gapMs": 34.79999999701977
+      },
+      {
+        "elapsedMs": 3626.89999999851,
+        "gapMs": 39.20000000298023
+      },
+      {
+        "elapsedMs": 3665.0999999940395,
+        "gapMs": 38.19999999552965
+      },
+      {
+        "elapsedMs": 3712.5999999940395,
+        "gapMs": 47.5
+      },
+      {
+        "elapsedMs": 3744.0999999940395,
+        "gapMs": 31.5
+      },
+      {
+        "elapsedMs": 3765.5999999940395,
+        "gapMs": 21.5
+      },
+      {
+        "elapsedMs": 3797.5999999940395,
+        "gapMs": 32
+      },
+      {
+        "elapsedMs": 3833.0999999940395,
+        "gapMs": 35.5
+      },
+      {
+        "elapsedMs": 3866.7999999970198,
+        "gapMs": 33.70000000298023
+      },
+      {
+        "elapsedMs": 3904.5999999940395,
+        "gapMs": 37.79999999701977
+      },
+      {
+        "elapsedMs": 3937.5,
+        "gapMs": 32.900000005960464
+      },
+      {
+        "elapsedMs": 3983.6999999955297,
+        "gapMs": 46.19999999552965
+      },
+      {
+        "elapsedMs": 4014.5,
+        "gapMs": 30.80000000447035
+      },
+      {
+        "elapsedMs": 4046.6999999955297,
+        "gapMs": 32.19999999552965
+      },
+      {
+        "elapsedMs": 4067.7999999970198,
+        "gapMs": 21.100000001490116
+      },
+      {
+        "elapsedMs": 4100.39999999851,
+        "gapMs": 32.600000001490116
+      },
+      {
+        "elapsedMs": 4135.69999999553,
+        "gapMs": 35.29999999701977
+      },
+      {
+        "elapsedMs": 4183.0999999940395,
+        "gapMs": 47.399999998509884
+      },
+      {
+        "elapsedMs": 4220.79999999702,
+        "gapMs": 37.70000000298023
+      },
+      {
+        "elapsedMs": 4241.5999999940395,
+        "gapMs": 20.799999997019768
+      },
+      {
+        "elapsedMs": 4273.5999999940395,
+        "gapMs": 32
+      },
+      {
+        "elapsedMs": 4321.0999999940395,
+        "gapMs": 47.5
+      },
+      {
+        "elapsedMs": 4340.39999999851,
+        "gapMs": 19.30000000447035
+      },
+      {
+        "elapsedMs": 4375.29999999702,
+        "gapMs": 34.899999998509884
+      },
+      {
+        "elapsedMs": 4406.5,
+        "gapMs": 31.200000002980232
+      },
+      {
+        "elapsedMs": 4439.19999999553,
+        "gapMs": 32.69999999552965
+      },
+      {
+        "elapsedMs": 4474.5,
+        "gapMs": 35.30000000447035
+      },
+      {
+        "elapsedMs": 4505.69999999553,
+        "gapMs": 31.19999999552965
+      },
+      {
+        "elapsedMs": 4535.69999999553,
+        "gapMs": 30
+      },
+      {
+        "elapsedMs": 4566.19999999553,
+        "gapMs": 30.5
+      },
+      {
+        "elapsedMs": 4597.39999999851,
+        "gapMs": 31.200000002980232
+      },
+      {
+        "elapsedMs": 4630.0999999940395,
+        "gapMs": 32.69999999552965
+      },
+      {
+        "elapsedMs": 4663.29999999702,
+        "gapMs": 33.20000000298023
+      },
+      {
+        "elapsedMs": 4696.29999999702,
+        "gapMs": 33
+      },
+      {
+        "elapsedMs": 4737.89999999851,
+        "gapMs": 41.600000001490116
+      },
+      {
+        "elapsedMs": 4770.5,
+        "gapMs": 32.600000001490116
+      },
+      {
+        "elapsedMs": 4803.19999999553,
+        "gapMs": 32.69999999552965
+      },
+      {
+        "elapsedMs": 4836.39999999851,
+        "gapMs": 33.20000000298023
+      },
+      {
+        "elapsedMs": 4869.5,
+        "gapMs": 33.100000001490116
+      },
+      {
+        "elapsedMs": 4902.5,
+        "gapMs": 33
+      },
+      {
+        "elapsedMs": 4935.79999999702,
+        "gapMs": 33.29999999701977
+      },
+      {
+        "elapsedMs": 4969.29999999702,
+        "gapMs": 33.5
+      },
+      {
+        "elapsedMs": 4999.89999999851,
+        "gapMs": 30.600000001490116
+      },
+      {
+        "elapsedMs": 5031.29999999702,
+        "gapMs": 31.399999998509884
+      },
+      {
+        "elapsedMs": 5063.39999999851,
+        "gapMs": 32.100000001490116
+      },
+      {
+        "elapsedMs": 5096.5999999940395,
+        "gapMs": 33.19999999552965
+      },
+      {
+        "elapsedMs": 5129.69999999553,
+        "gapMs": 33.100000001490116
+      },
+      {
+        "elapsedMs": 5162.5,
+        "gapMs": 32.80000000447035
+      },
+      {
+        "elapsedMs": 5198.19999999553,
+        "gapMs": 35.69999999552965
+      },
+      {
+        "elapsedMs": 5230.5,
+        "gapMs": 32.30000000447035
+      },
+      {
+        "elapsedMs": 5263.69999999553,
+        "gapMs": 33.19999999552965
+      },
+      {
+        "elapsedMs": 5297.0999999940395,
+        "gapMs": 33.399999998509884
+      },
+      {
+        "elapsedMs": 5330.19999999553,
+        "gapMs": 33.100000001490116
+      },
+      {
+        "elapsedMs": 5363.39999999851,
+        "gapMs": 33.20000000298023
+      },
+      {
+        "elapsedMs": 5396.19999999553,
+        "gapMs": 32.79999999701977
+      },
+      {
+        "elapsedMs": 5429.89999999851,
+        "gapMs": 33.70000000298023
+      },
+      {
+        "elapsedMs": 5462.5999999940395,
+        "gapMs": 32.69999999552965
+      },
+      {
+        "elapsedMs": 5496.0999999940395,
+        "gapMs": 33.5
+      },
+      {
+        "elapsedMs": 5529.29999999702,
+        "gapMs": 33.20000000298023
+      },
+      {
+        "elapsedMs": 5562.0999999940395,
+        "gapMs": 32.79999999701977
+      },
+      {
+        "elapsedMs": 5593.39999999851,
+        "gapMs": 31.30000000447035
+      },
+      {
+        "elapsedMs": 5627.39999999851,
+        "gapMs": 34
+      },
+      {
+        "elapsedMs": 5659.19999999553,
+        "gapMs": 31.799999997019768
+      },
+      {
+        "elapsedMs": 5693,
+        "gapMs": 33.80000000447035
+      },
+      {
+        "elapsedMs": 5725.0999999940395,
+        "gapMs": 32.099999994039536
+      },
+      {
+        "elapsedMs": 5758,
+        "gapMs": 32.900000005960464
+      },
+      {
+        "elapsedMs": 5791.69999999553,
+        "gapMs": 33.69999999552965
+      },
+      {
+        "elapsedMs": 5824.5,
+        "gapMs": 32.80000000447035
+      },
+      {
+        "elapsedMs": 5857.5999999940395,
+        "gapMs": 33.099999994039536
+      },
+      {
+        "elapsedMs": 5890.5999999940395,
+        "gapMs": 33
+      },
+      {
+        "elapsedMs": 5924.0999999940395,
+        "gapMs": 33.5
+      },
+      {
+        "elapsedMs": 5956.79999999702,
+        "gapMs": 32.70000000298023
+      },
+      {
+        "elapsedMs": 5990.0999999940395,
+        "gapMs": 33.29999999701977
+      },
+      {
+        "elapsedMs": 6022.89999999851,
+        "gapMs": 32.80000000447035
+      },
+      {
+        "elapsedMs": 6056.29999999702,
+        "gapMs": 33.399999998509884
+      },
+      {
+        "elapsedMs": 6088.29999999702,
+        "gapMs": 32
+      },
+      {
+        "elapsedMs": 6121.5,
+        "gapMs": 33.20000000298023
+      },
+      {
+        "elapsedMs": 6154.5,
+        "gapMs": 33
+      },
+      {
+        "elapsedMs": 6187.0999999940395,
+        "gapMs": 32.599999994039536
+      },
+      {
+        "elapsedMs": 6220.29999999702,
+        "gapMs": 33.20000000298023
+      },
+      {
+        "elapsedMs": 6255,
+        "gapMs": 34.70000000298023
+      },
+      {
+        "elapsedMs": 6287.29999999702,
+        "gapMs": 32.29999999701977
+      },
+      {
+        "elapsedMs": 6319.69999999553,
+        "gapMs": 32.399999998509884
+      },
+      {
+        "elapsedMs": 6352.5,
+        "gapMs": 32.80000000447035
+      },
+      {
+        "elapsedMs": 6386.0999999940395,
+        "gapMs": 33.599999994039536
+      },
+      {
+        "elapsedMs": 6419.89999999851,
+        "gapMs": 33.80000000447035
+      },
+      {
+        "elapsedMs": 6452.69999999553,
+        "gapMs": 32.79999999701977
+      },
+      {
+        "elapsedMs": 6485.79999999702,
+        "gapMs": 33.100000001490116
+      },
+      {
+        "elapsedMs": 6518.29999999702,
+        "gapMs": 32.5
+      },
+      {
+        "elapsedMs": 6551.5,
+        "gapMs": 33.20000000298023
+      },
+      {
+        "elapsedMs": 6583.19999999553,
+        "gapMs": 31.69999999552965
+      },
+      {
+        "elapsedMs": 6615.5,
+        "gapMs": 32.30000000447035
+      },
+      {
+        "elapsedMs": 6648.5,
+        "gapMs": 33
+      },
+      {
+        "elapsedMs": 6680,
+        "gapMs": 31.5
+      },
+      {
+        "elapsedMs": 6712.39999999851,
+        "gapMs": 32.399999998509884
+      },
+      {
+        "elapsedMs": 6744.69999999553,
+        "gapMs": 32.29999999701977
+      },
+      {
+        "elapsedMs": 6777.29999999702,
+        "gapMs": 32.600000001490116
+      },
+      {
+        "elapsedMs": 6809.79999999702,
+        "gapMs": 32.5
+      },
+      {
+        "elapsedMs": 6841.0999999940395,
+        "gapMs": 31.299999997019768
+      },
+      {
+        "elapsedMs": 6873.29999999702,
+        "gapMs": 32.20000000298023
+      },
+      {
+        "elapsedMs": 6905.5999999940395,
+        "gapMs": 32.29999999701977
+      },
+      {
+        "elapsedMs": 6938.0999999940395,
+        "gapMs": 32.5
+      },
+      {
+        "elapsedMs": 6970.29999999702,
+        "gapMs": 32.20000000298023
+      },
+      {
+        "elapsedMs": 7002.0999999940395,
+        "gapMs": 31.799999997019768
+      },
+      {
+        "elapsedMs": 7033,
+        "gapMs": 30.900000005960464
+      },
+      {
+        "elapsedMs": 7064,
+        "gapMs": 31
+      },
+      {
+        "elapsedMs": 7095.69999999553,
+        "gapMs": 31.69999999552965
+      },
+      {
+        "elapsedMs": 7125.29999999702,
+        "gapMs": 29.600000001490116
+      },
+      {
+        "elapsedMs": 7155.69999999553,
+        "gapMs": 30.399999998509884
+      },
+      {
+        "elapsedMs": 7186.19999999553,
+        "gapMs": 30.5
+      },
+      {
+        "elapsedMs": 7216.5999999940395,
+        "gapMs": 30.399999998509884
+      },
+      {
+        "elapsedMs": 7247.19999999553,
+        "gapMs": 30.600000001490116
+      },
+      {
+        "elapsedMs": 7278,
+        "gapMs": 30.80000000447035
+      },
+      {
+        "elapsedMs": 7311.19999999553,
+        "gapMs": 33.19999999552965
+      },
+      {
+        "elapsedMs": 7339.69999999553,
+        "gapMs": 28.5
+      },
+      {
+        "elapsedMs": 7370.39999999851,
+        "gapMs": 30.700000002980232
+      },
+      {
+        "elapsedMs": 7401.79999999702,
+        "gapMs": 31.399999998509884
+      },
+      {
+        "elapsedMs": 7432.19999999553,
+        "gapMs": 30.399999998509884
+      },
+      {
+        "elapsedMs": 7462.5,
+        "gapMs": 30.30000000447035
+      },
+      {
+        "elapsedMs": 7492.79999999702,
+        "gapMs": 30.299999997019768
+      },
+      {
+        "elapsedMs": 7523.79999999702,
+        "gapMs": 31
+      },
+      {
+        "elapsedMs": 7555,
+        "gapMs": 31.200000002980232
+      },
+      {
+        "elapsedMs": 7585.89999999851,
+        "gapMs": 30.899999998509884
+      },
+      {
+        "elapsedMs": 7619.29999999702,
+        "gapMs": 33.399999998509884
+      },
+      {
+        "elapsedMs": 7650,
+        "gapMs": 30.700000002980232
+      },
+      {
+        "elapsedMs": 7681.0999999940395,
+        "gapMs": 31.099999994039536
+      },
+      {
+        "elapsedMs": 7715.29999999702,
+        "gapMs": 34.20000000298023
+      },
+      {
+        "elapsedMs": 7748.79999999702,
+        "gapMs": 33.5
+      },
+      {
+        "elapsedMs": 7784.29999999702,
+        "gapMs": 35.5
+      },
+      {
+        "elapsedMs": 7817.29999999702,
+        "gapMs": 33
+      },
+      {
+        "elapsedMs": 7850.29999999702,
+        "gapMs": 33
+      },
+      {
+        "elapsedMs": 7883.5,
+        "gapMs": 33.20000000298023
+      },
+      {
+        "elapsedMs": 7917,
+        "gapMs": 33.5
+      },
+      {
+        "elapsedMs": 7949.89999999851,
+        "gapMs": 32.899999998509884
+      },
+      {
+        "elapsedMs": 7982.5999999940395,
+        "gapMs": 32.69999999552965
+      },
+      {
+        "elapsedMs": 8015.5999999940395,
+        "gapMs": 33
+      }
+    ],
+    "note": "RAF gaps measure responsiveness. Async attachmentUpdateMs excludes worker creation; worker factory/decode timings exclude queue, packing, transfer and GPU time. Load states are frame samples. First submitted marks a render callback, not pixel/occlusion verification. No GPU timer query."
+  },
+  "viewport": [
+    1920,
+    1080
+  ],
+  "dpr": 1,
+  "render": [
+    2560,
+    1440
+  ],
+  "camera": [
+    1054.1307169871104,
+    12.000000000000004,
+    1085.6608334906105
+  ],
+  "target": [
+    1078.0085004161847,
+    8,
+    1102.3924908656052
+  ],
+  "protocol": "8 wall seconds, observer starts before apply; no discarded warm-up. First submission is not pixel verification."
+}
