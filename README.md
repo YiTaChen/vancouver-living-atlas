@@ -12,7 +12,7 @@ The five-language application is publicly hosted on Firebase Hosting. This repos
 
 https://github.com/user-attachments/assets/e5bf31c6-9eef-4c7f-827b-ef1349b9461c
 
-A tour of the current project: detailed landmarks, walking, a left-hand-drive cockpit, sailing, local-map zoom and day-to-night lighting. All footage comes from the running 3D application.
+Recorded on September 5, before the latest road, landmark and bus upgrades: detailed landmarks, walking, a left-hand-drive cockpit, sailing, local-map zoom and day-to-night lighting. All footage comes from the running 3D application.
 
 **Compact preview:** 960 × 540 · 30 fps · 3.6 MB (93% smaller). [Download preview](docs/videos/2026-09-05/project-intro-readme.mp4?raw=true) · [Full 1080p film](docs/videos/2026-09-05/project-intro.mp4?raw=true) · [Reproduce the film](docs/videos/2026-09-05/README.md)
 
@@ -35,10 +35,10 @@ English is the default for a first visit. The header language menu also offers F
 
 ## What is built
 
-- **7,630 geographic building solids**, rendered as **7,806 polygon parts**, including measured 2009 City geometry and reconciled OSM tower heights.
+- **7,630 geographic building solids**, rendered as **7,800 polygon parts**, including measured 2009 City geometry and reconciled OSM tower heights.
 - A **257 × 273 terrain grid** (roughly 20 m), interpolated from official 2002 contours. Stanley Park reaches about **76 m**, with real Downtown relief rather than a flat base.
 - Actual coastlines, park boundaries, lakes, beaches and street lines; 810 park trail features and regional North Shore landforms.
-- **36,201 rendered trees** from public street-tree positions plus original forest infill; spatially chunked canopy detail changes with viewing distance.
+- **36,041 rendered trees** from public street-tree positions plus original forest infill; spatially chunked canopy detail changes with viewing distance.
 - Original Science World, Canada Place, BC Place, Harbour Centre, Marine Building, Vancouver Convention Centre West and Vancouver House models; Burrard, Granville, Cambie and Lions Gate bridge structures.
 - Original façade patterns, Gastown shopfronts and steam clock, rooftop equipment, cars, ferries, sailboats, original moving train models and simulated night lighting.
 
@@ -50,7 +50,7 @@ This is a geographic visualization, not a photographic reconstruction or a certi
 
 Rail plan geometry comes from OpenStreetMap: approximately 1.12 km of waterfront railway and 855/894 m of each elevated Expo direction. Station canopies, building passages and tunnels are excluded. Heights, trains and repeated passes are illustrative; the steam service is fictional. Entire trains fade out at the cropped ends before a new pass starts.
 
-Street navigation is an exploration feature: simplified collision and vehicle motion are included, rather than a full traffic or driving simulation. Frame rates depend on GPU, viewport and settings. Original release Chrome reviews, before the train addition, measured approximately 31–53 FPS across detailed street, bridge and peninsula views. See [source provenance and qualifications](DATA_SOURCES.md).
+Street navigation is an exploration feature: simplified collision and vehicle motion are included, rather than a full traffic or driving simulation. Frame rates depend on GPU, viewport and settings. The [ten-stage upgrade and acceptance record](docs/visual-quality/UPGRADE_TASKS.md) covers roads, beaches, landmark detail and loading. See the [loading and rendering measurements](docs/visual-quality/performance/README.md) and [300× clock comparison](docs/visual-quality/clock-1080/README.md). Ultra remains more demanding, and first-time detail loading can still cause a visible pause. See [source provenance and qualifications](DATA_SOURCES.md).
 
 ## Local minimap
 

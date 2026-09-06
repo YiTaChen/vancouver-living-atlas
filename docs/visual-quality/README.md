@@ -45,3 +45,7 @@ See [the completed local QA record](QA.md) for measured frame rates, checks and 
 Architectural proportions and source precision are documented in [primary landmarks](PRIMARY_LANDMARKS.md) and [secondary landmarks](SECONDARY_LANDMARKS.md). This remains an original geographic visualization, not photogrammetry or a survey-grade digital twin.
 
 Convention Centre sources and mapped roof interpretation: [CONVENTION_CENTRE.md](CONVENTION_CENTRE.md).
+
+## Completed street, architecture and coast upgrade
+
+See the [ten-stage delivery record](UPGRADE_TASKS.md), [bounded loading changes](performance/README.md), [bus addition](buses/README.md) and [final release acceptance](stage-10-final/README.md). The final acceptance explicitly records residual first-use Ultra pauses and lower Ultra driving frame rates.

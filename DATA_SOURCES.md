@@ -128,7 +128,7 @@ Forest canopy placement, moving vehicles, ferries, sailboats, street furniture, 
 | `terrain.json` | 257 × 273 contour-derived samples, approximately 20m |
 | `context-terrain.json` | 211 × 246 regional DEM samples, approximately 100m |
 
-Metadata and reconciliation reports are also distributed. Data records are not counts of unique buildings, streets or all trees in Vancouver. The current renderer creates 36,201 trees after source filtering and procedural forest infill.
+Metadata and reconciliation reports are also distributed. Data records are not counts of unique buildings, streets or all trees in Vancouver. The current renderer creates 36,041 trees after source filtering and procedural forest infill.
 
 Portable preparation tools, explicit input requirements and snapshot hashes are in [tools/README.md](tools/README.md). Raw snapshots and all intermediate files are not included. Re-fetching evolving upstream sources may change results. The portable tools were checked against the original preparation snapshots: detailed/context terrain, buildings, bridge routes, regional coast and seven published texture maps reproduced the release bytes.
 

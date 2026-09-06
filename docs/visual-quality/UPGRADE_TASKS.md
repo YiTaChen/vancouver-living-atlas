@@ -13,7 +13,7 @@ Approved scope (2026-09-05): finish each stage in order, validate it, then commi
 | 7 | Complete | [Marine Building, Canada Place and Science World detail](landmarks-primary/README.md) |
 | 8 | Complete | [Convention Centre, BC Place, Harbour Centre and Vancouver House detail](landmarks-secondary/README.md) |
 | 9 | Complete | [Worker landmarks, bounded facade uploads, tree selection and measured startup/stall reduction](performance/README.md) |
-| 10 | Pending | Day/dusk/night and long-travel acceptance; final release evidence |
+| 10 | Complete | [30 day/dusk/night captures, four continuous-travel runs and final release evidence](stage-10-final/README.md) |
 
 ## Baseline procedure
 
@@ -24,7 +24,7 @@ VANCOUVER_VISUAL_QA=1 VANCOUVER_STATIC_EXPORT=1 npm run build
 node tools/serve-visual-qa.mjs baseline
 ```
 
-Open the printed local URL, set the test viewport to 1920 × 1080, then use **Run High baseline** and **Run Ultra baseline**. Keep the browser visible. Each of eight fixed cases warms for 2.5 seconds, then measures eight seconds of actual requestAnimationFrame intervals. The Robson case uses the existing driving controller with forward input. Scene time is fixed at 14:00; city traffic remains enabled. Save reports and actual canvas images under ignored `work/visual-qa/baseline`.
+Open the printed local URL, set the test viewport to 1920 × 1080, then use **Run High baseline** and **Run Ultra baseline**. Keep the browser visible. Each selected fixed case warms for 2.5 seconds, then measures eight seconds of actual requestAnimationFrame intervals. The Robson case uses the existing driving controller with forward input. Scene time is fixed at 14:00; city traffic remains enabled. Save reports and actual canvas images under ignored `work/visual-qa/baseline`.
 
 The report records the physical render size and actual browser/device renderer, average FPS, p50/p95/p99/max frame intervals, >50ms and >100ms counts, position and camera. Any sample with a hidden document is invalid. Timing includes browser scheduling; it is not an isolated GPU timing query. The renderer disables info.autoReset and resets once before its composer: `calls`/`triangles` include that sampled frame's beauty, AO-normal and any shadow passes. They are not unique scene geometry counts or averages across the sample.
 
@@ -49,3 +49,9 @@ Validation: TypeScript check passed; all 103 regression tests passed in an isola
 - Bound nearby geometry and textures from the start; defer broad performance tuning until there is measured evidence.
 - Compare the same camera, time, viewport and quality, using real application captures.
 - Do not represent inferred lane/facade details as surveyed conditions.
+
+## Additional requested work
+
+- [Vancouver-style buses](buses/README.md): complete and pushed as `3b265e8`.
+- [Measured 300× default time flow](clock-1080/README.md): complete and pushed as `970e786`.
+- Stage 10 records remaining first-use Ultra pauses and lower Ultra driving FPS; completion does not mean zero stutter on every GPU. High remains the default quality.

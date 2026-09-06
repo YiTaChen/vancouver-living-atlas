@@ -567,6 +567,80 @@ export function installVisualQA(e: CityEngine) {
         }
       })(),
   );
+  button(
+    'Run release visual suite',
+    () =>
+      void (async () => {
+        if (running) return;
+        running = true;
+        try {
+          const views = [
+            'marine-entry',
+            'science-entry',
+            'canada-sails',
+            'bc-envelope',
+            'harbour-tower',
+            'convention-roof',
+            'house-balconies',
+            'causeway-south',
+            'second-beach',
+            'third-beach',
+          ];
+          let count = 0;
+          for (const view of views)
+            for (const hour of [14, 19, 23]) {
+              const quality = views.indexOf(view) < 7 ? 'ultra' : 'high';
+              apply(view, quality);
+              e.setClock({ hour, running: false });
+              status.textContent = `Release visual ${view} / ${hour}:00 / ${quality}`;
+              await collect(4500);
+              const id = `${view}-release-${hour}h`;
+              const row = {
+                kind: 'visual-check',
+                id,
+                quality,
+                hour,
+                valid:
+                  !document.hidden &&
+                  !e.disposed &&
+                  Object.keys(e.data.landmarkWorkerErrors || {}).length === 0,
+                viewport: [innerWidth, innerHeight],
+                render: [
+                  e.renderer.domElement.width,
+                  e.renderer.domElement.height,
+                ],
+                camera: e.camera.position.toArray(),
+                target: e.controls.target.toArray(),
+                mode: e.navigation!.mode,
+                night: e.uniforms.night.value,
+                workerErrors: e.data.landmarkWorkerErrors || [],
+                landmarkStates: e.landmarkDetails.map((d) => ({
+                  name: d.holder.name,
+                  state: d.loadState.status,
+                  mediumVisible: d.medium.visible,
+                  ultraVisible: !!d.ultra?.visible,
+                })),
+              };
+              const response = await fetch('/__visual-qa', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  name: `${quality}-${id}`,
+                  row,
+                  screenshot: e.screenshot(),
+                }),
+              });
+              if (!response.ok) throw new Error('Release visual save failed');
+              count++;
+            }
+          status.textContent = `Completed release visual suite: ${count} views`;
+        } catch (error) {
+          status.textContent = String(error);
+        } finally {
+          running = false;
+        }
+      })(),
+  );
   button('Inspect buses', () => {
     if (running || !e.traffic?.busRoutes.length) return;
     e.navigation?.setMode('orbit');
