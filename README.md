@@ -2,7 +2,9 @@
 
 An original, explorable browser reconstruction of Vancouver: the entire Downtown peninsula, Stanley Park, English Bay and False Creek through Science World. The city follows public coastlines, street geometry and actual terrain relief, with original procedural architecture and landscape detail.
 
-**[Open the atlas](https://vancouver-living-atlas-yita.web.app)** · [Data and accuracy](DATA_SOURCES.md) · [Manager-loop development record](docs/PROGRESS.md)
+**Live demo (Firebase): [vancouver-living-atlas-yita.web.app](https://vancouver-living-atlas-yita.web.app/)**
+
+[Data and accuracy](DATA_SOURCES.md) · [Manager-loop development record](docs/PROGRESS.md)
 
 The five-language application is publicly hosted on Firebase Hosting. This repository is public, and the application can also run locally.
 
