@@ -125,3 +125,75 @@ test('Science World and Canada Place have passable ground-level holes in their o
     );
   }
 });
+
+test('the station rear doorway and entire SkyWalk connect to the lower SeaBus lounge', () => {
+  const { e } = fixture();
+  e.elevation = () => 13.5;
+  const interiors = new PublicInteriors(e),
+    s = interiors.sites.find((s) => s.id === 'waterfront');
+  const path = [
+    [0, 0],
+    [-6, -8],
+    [-6, -16],
+    [-6, -43],
+    [9, -140],
+    [10, -146],
+    [19, -172],
+    [27, -192],
+    [29, -197],
+    [35, -220],
+    [35, -239],
+  ];
+  e.landmarks.updateMatrixWorld(true);
+  for (let i = 1; i < path.length; i++) {
+    const a = path[i - 1],
+      b = path[i],
+      n = Math.ceil(Math.hypot(b[0] - a[0], b[1] - a[1]) * 5);
+    for (let j = 0; j <= n; j++) {
+      const x = a[0] + ((b[0] - a[0]) * j) / n,
+        z = a[1] + ((b[1] - a[1]) * j) / n,
+        world = interiors.world(s, x, z);
+      assert.equal(interiors.clear(...world, 'walk'), true, `route ${x},${z}`);
+      assert.equal(interiors.clear(...world, 'boat'), false);
+      const floor = interiors.height(...world);
+      assert.ok(Number.isFinite(floor));
+      const ray = new THREE.Raycaster(
+        new THREE.Vector3(world[0], floor + 2, world[1]),
+        new THREE.Vector3(0, -1, 0),
+        0,
+        2.1,
+      );
+      const hits = ray
+        .intersectObject(s.group, true)
+        .filter((h) => h.object.userData.walkSurface);
+      assert.ok(
+        hits.some((h) => Math.abs(h.point.y - floor) < 0.025),
+        `physical floor ${x},${z}`,
+      );
+    }
+  }
+  assert.equal(interiors.height(...interiors.world(s, 35, -220)), 4.5);
+  const origin = interiors.world(s, -6, -14);
+  const direction = new THREE.Vector3(
+    Math.sin(s.yaw + Math.PI),
+    0,
+    Math.cos(s.yaw + Math.PI),
+  );
+  const hits = new THREE.Raycaster(
+    new THREE.Vector3(origin[0], s.origin.y + s.floor + 1.6, origin[1]),
+    direction,
+    0,
+    4,
+  ).intersectObject(s.envelope, true);
+  assert.equal(hits.length, 0, 'rear doorway is a genuine opening');
+  e.settings.mode = 'walk';
+  e.camera.position.set(
+    ...[
+      ...interiors.world(s, 35, -220).slice(0, 1),
+      6,
+      interiors.world(s, 35, -220)[1],
+    ],
+  );
+  interiors.update();
+  assert.equal(s.group.visible, true);
+});

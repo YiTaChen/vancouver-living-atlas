@@ -7,6 +7,11 @@ import { auditCausewayTravel } from './causeway-qa';
 import { installReleaseQAControls } from './release-qa-controls';
 
 const cases = [
+  {id:'station-lobby', interiorSite:'waterfront', interiorAt:[0,5], interiorYaw:Math.PI},
+  {id:'station-skywalk', interiorSite:'waterfront', interiorAt:[-6,-28], interiorYaw:Math.PI},
+  {id:'station-terminal', interiorSite:'waterfront', interiorAt:[29,-202], interiorYaw:Math.PI},
+  {id:'canada-lounge', interiorSite:'canada', interiorAt:[-22,-62], interiorYaw:0},
+  {id:'station-front', landmarkPose:{coord:[-123.11182,49.28571],yaw:-.77,baseY:14,camera:[0,4,38],target:[0,8,0]}},
   {
     id: 'english-beach-detail',
     coord: [-123.14323, 49.28716],
@@ -280,6 +285,12 @@ export function installVisualQA(e: CityEngine) {
       labels: false,
       autoRotate: false,
     });
+    if ('interiorSite' in test && e.navigation && e.interiors) {
+      const site=e.interiors.sites.find(s=>s.id===test.interiorSite)!;const [x,z]=e.interiors.world(site,...test.interiorAt as [number,number]);
+      e.applySettings({...e.settings,mode:'walk'});
+      e.navigation.startAt('walk',{x,z,y:e.interiors.height(x,z)!+1.25,yaw:site.yaw+test.interiorYaw,surface:'ground',name:test.id,snappedDistance:0});
+      e.onTravelResume('walk');e.setClock({hour:14,running:false});
+    }
     if ('skyHour' in test) {
       e.setClock({ hour: test.skyHour, running: false });
       e.controls.maxPolarAngle = Math.PI * 0.95;

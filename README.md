@@ -24,7 +24,7 @@ English is the default for a first visit. The header language menu also offers F
 
 ## Explore / 操作
 
-**Enter landmark interiors:** open Layers and choose the Science World, Canada Place or Waterfront Station entrance. Walk through the open doors to explore their representative public spaces. Close Orbit views automatically reveal the interiors; the Layers cutaway toggle restores the complete roofs. [Scope and references](docs/interiors.md).
+**Enter landmark interiors:** open Layers and choose the Science World, Canada Place or Waterfront Station entrance. Walk through the open doors to explore their representative public spaces. Waterfront Station’s rear SeaBus signs lead through a glazed SkyWalk to the boarding lounge. The station and Canada Place include detailed floor finishes, column decoration, furniture and wayfinding. Close Orbit views automatically reveal the interiors; the Layers cutaway toggle restores the complete roofs. [Scope and references](docs/interiors.md).
 
 **Default driving car:** an original red, open-top roadster with sculpted bodywork and a matching left-hand cockpit. Classic remains available in the car selector. The roadster now accelerates at 16 m/s² with a 259 km/h speed cap and a 260 km/h instrument scale. Sustained Downtown driving above 100 km/h for five real seconds triggers a scripted police stop: automatic braking, an officer approaching with “please safe driving”, then returning to the patrol car and departing. Mode, camera or placement changes cancel the scene. The scene briefly uses a wider chase view; controls resume after departure. Boat acceleration response is doubled while retaining the same cruising equilibrium and water handling. [Model and references](docs/vehicles/red-roadster.md).
 
