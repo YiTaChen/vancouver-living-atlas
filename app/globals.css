@@ -2412,7 +2412,7 @@ a {
   place-items: center;
   border-radius: 50%;
 }
-.atlas.touch-ui.mobile-hud-hidden .ui-chrome:not(.mode-switch) {
+.atlas.touch-ui.mobile-hud-hidden .ui-chrome:not(.mode-switch):not(.touch-drive-controls) {
   display: none !important;
 }
 .about-repo-link {

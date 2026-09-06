@@ -557,7 +557,6 @@ export default function Home() {
             setMobilePanel(null);
             setPanel(null);
             setAbout(false);
-            engine.current?.navigation?.blur();
           }}
         >
           {mobileHudHidden ? <Eye size={20} /> : <EyeOff size={20} />}
@@ -645,7 +644,6 @@ export default function Home() {
             </button>
           </div>
           {settings.mode !== 'orbit' &&
-            !mobileHudHidden &&
             !placing &&
             !about &&
             !panel &&
