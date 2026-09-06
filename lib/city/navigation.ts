@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { drivingYawDelta } from './driving-steering';
 import { TrafficStop } from './traffic-stop';
 import { ROADSTER_ACCELERATION, ROADSTER_TOP_SPEED } from './traffic-stop-state';
 import { safeTouchAxis } from './touch-input';
@@ -925,7 +926,7 @@ export class StreetNavigation {
       );
       if (!stopped && !forward) this.speed *= Math.pow(0.78, dt);
       if (!stopped && (pressed(' ') || this.touchBrake)) this.speed *= Math.pow(0.007, dt);
-      if (!stopped) this.yaw += turn * dt * (0.55 + Math.min(30,Math.abs(this.speed)) * 0.026);
+      if (!stopped) this.yaw += drivingYawDelta(turn, this.speed, dt);
       this.move(
         Math.sin(this.yaw) * this.speed * dt,
         Math.cos(this.yaw) * this.speed * dt,

@@ -398,6 +398,7 @@ const { StreetNavigation } = await import(
     './ground-surface': cityModule('ground-surface'),
     './visible-obstacles': cityModule('visible-obstacles'),
     './driver-camera': cityModule('driver-camera'),
+    './driving-steering': cityModule('driving-steering'),
     './assets/cockpits': cityModule('assets/cockpits'),
     './landmark-footprints.json': landmarkUrl,
   })
