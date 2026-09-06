@@ -67,6 +67,12 @@ import {
   type MessageKey,
 } from '@/lib/i18n';
 import type { CityEngine } from '@/lib/city/engine';
+import {
+  DEFAULT_MINIMAP_SPAN,
+  MINIMAP_SPANS,
+  zoomMinimap,
+  minimapZoomKey,
+} from '@/lib/city/minimap';
 import type { PlacementPreview } from '@/lib/city/placement';
 import {
   canSwitchStreetMode,
@@ -123,6 +129,7 @@ export default function Home() {
   const [placing, setPlacing] = useState<TravelMode | null>(null);
   const [placementPreview, setPlacementPreview] =
     useState<PlacementPreview | null>(null);
+  const [minimapSpan, setMinimapSpan] = useState<number>(DEFAULT_MINIMAP_SPAN);
   const [stats, setStats] = useState<SceneStats>({
     buildings: 0,
     roads: 0,
@@ -178,6 +185,31 @@ export default function Home() {
       engine.current?.destroy();
     };
   }, [go]);
+  useEffect(() => {
+    if (ready) engine.current?.setMinimapSpan(minimapSpan);
+  }, [ready, minimapSpan]);
+  useEffect(() => {
+    const canvas = minimap.current;
+    if (!canvas) return;
+    let lastWheel = -Infinity;
+    const wheel = (event: WheelEvent) => {
+      if (
+        settingsRef.current.mode === 'orbit' ||
+        event.ctrlKey ||
+        event.metaKey
+      )
+        return;
+      event.preventDefault();
+      event.stopPropagation();
+      if (!event.deltaY || performance.now() - lastWheel < 140) return;
+      lastWheel = performance.now();
+      setMinimapSpan((span) =>
+        zoomMinimap(span, event.deltaY < 0 ? 'in' : 'out'),
+      );
+    };
+    canvas.addEventListener('wheel', wheel, { passive: false });
+    return () => canvas.removeEventListener('wheel', wheel);
+  }, []);
   useEffect(() => {
     const placement = engine.current?.placement;
     if (!ready || !placement) return;
@@ -1094,24 +1126,90 @@ export default function Home() {
           </div>
         </section>
       )}
-      <section className="map-inset glass ui-chrome">
+      <section
+        className="map-inset glass ui-chrome"
+        aria-label={tr(settings.mode === 'orbit' ? 'minimap' : 'localMinimap')}
+      >
         <div className="mini-title">
-          <span>{tr('peninsula')}</span>
-          <span>N ↑</span>
+          <span className="mini-location-title">
+            {settings.mode !== 'orbit' &&
+              (settings.mode === 'boat' ? (
+                <Ship size={15} />
+              ) : settings.mode === 'drive' ? (
+                <Car size={15} />
+              ) : (
+                <Footprints size={15} />
+              ))}
+            {tr(settings.mode === 'orbit' ? 'peninsula' : 'youAreHere')}
+          </span>
+          <span aria-label={tr('northUp')}>N ↑</span>
         </div>
-        <canvas
-          ref={minimap}
-          width={340}
-          height={268}
-          aria-label={tr('minimap')}
-          onClick={(ev) => {
-            if (settings.mode !== 'orbit') return;
-            engine.current?.navigateMinimap(ev.nativeEvent);
-          }}
-        />
+        <div className="mini-map-surface">
+          <canvas
+            ref={minimap}
+            width={560}
+            height={360}
+            tabIndex={settings.mode === 'orbit' ? -1 : 0}
+            aria-label={tr(
+              settings.mode === 'orbit' ? 'minimap' : 'localMinimapHelp',
+            )}
+            onPointerDown={(ev) => ev.stopPropagation()}
+            onKeyDown={(ev) => {
+              if (settings.mode === 'orbit') return;
+              const direction = minimapZoomKey(ev);
+              if (direction) {
+                ev.preventDefault();
+                ev.stopPropagation();
+                setMinimapSpan((span) => zoomMinimap(span, direction));
+              }
+            }}
+            onClick={(ev) => {
+              if (settings.mode !== 'orbit') return;
+              engine.current?.navigateMinimap(ev.nativeEvent);
+            }}
+          />
+          {settings.mode !== 'orbit' && (
+            <div className="mini-zoom">
+              <button
+                disabled={!ready || minimapSpan <= MINIMAP_SPANS[0]}
+                aria-label={tr('minimapZoomIn')}
+                title={tr('minimapZoomIn')}
+                onClick={() =>
+                  setMinimapSpan((span) => zoomMinimap(span, 'in'))
+                }
+              >
+                <Plus size={16} />
+              </button>
+              <button
+                disabled={
+                  !ready ||
+                  minimapSpan >= MINIMAP_SPANS[MINIMAP_SPANS.length - 1]
+                }
+                aria-label={tr('minimapZoomOut')}
+                title={tr('minimapZoomOut')}
+                onClick={() =>
+                  setMinimapSpan((span) => zoomMinimap(span, 'out'))
+                }
+              >
+                <Minus size={16} />
+              </button>
+            </div>
+          )}
+        </div>
         <div className="mini-caption">
-          <span>Stanley Park ↔ Science World</span>
-          <span>5 km</span>
+          {settings.mode === 'orbit' ? (
+            <span>Stanley Park ↔ Science World</span>
+          ) : (
+            <>
+              <span className="mini-follow">
+                <i />
+                {tr('followingLocation')}
+              </span>
+              <span className="mini-coordinates">
+                {stats.lat?.toFixed(5)}, {stats.lon?.toFixed(5)}
+              </span>
+            </>
+          )}
         </div>
       </section>
       {settings.mode !== 'orbit' && (

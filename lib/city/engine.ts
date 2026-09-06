@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { LocalMinimap, minimapPose, minimapWorldPoint } from './minimap';
 import { replacedBuilding } from './replaced-buildings';
 import type { LandmarkDetail } from './landmark-detail';
 import { FacadeDetails } from './facade-details';
@@ -124,8 +125,7 @@ export class CityEngine {
     position: THREE.Vector3;
     id: string;
   }[] = [];
-  minimapCanvas: HTMLCanvasElement | null = null;
-  miniMapTransform = { scale: 1, xmin: 0, zmin: 0, ox: 0, oy: 0 };
+  minimap: LocalMinimap | null = null;
   constructor(
     public container: HTMLElement,
     onStats: (s: SceneStats) => void,
@@ -1235,6 +1235,7 @@ export class CityEngine {
     if (this.settings.mode === 'orbit') this.controls.update();
     else this.navigation?.update((time - this.lastTime) / 1000);
     this.sailingWaves?.update();
+    this.minimap?.draw(time);
     if (
       this.settings.mode === 'orbit' &&
       this.onLand(this.camera.position.x, this.camera.position.z)
@@ -1276,14 +1277,8 @@ export class CityEngine {
       this.stats.speed = Math.round((this.navigation?.speed || 0) * 3.6);
       this.stats.clock = this.clock.snapshot();
       this.stats.heading = this.controls.getAzimuthalAngle();
-      this.stats.lon = unproject(
-        this.controls.target.x,
-        this.controls.target.z,
-      )[0];
-      this.stats.lat = unproject(
-        this.controls.target.x,
-        this.controls.target.z,
-      )[1];
+      const location = minimapPose(this.navigation, this.controls.target);
+      [this.stats.lon, this.stats.lat] = unproject(location.x, location.z);
       this.stats.distance = Math.round(
         this.camera.position.distanceTo(this.controls.target),
       );
@@ -1374,83 +1369,34 @@ export class CityEngine {
     }
   }
   drawMinimap(canvas: HTMLCanvasElement) {
-    this.minimapCanvas = canvas;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-    const w = canvas.width,
-      h = canvas.height,
-      xmin = -2690,
-      zmin = -3230,
-      scale = Math.min((w - 16) / 5100, (h - 16) / 5350),
-      ox = (w - 5100 * scale) / 2,
-      oy = 8;
-    this.miniMapTransform = { scale, xmin, zmin, ox, oy };
-    ctx.clearRect(0, 0, w, h);
-    ctx.fillStyle = '#1b424e';
-    ctx.fillRect(0, 0, w, h);
-    const polygon = (poly: number[][][], color: string) => {
-      ctx.beginPath();
-      for (const ring of poly) {
-        ring.forEach((p, i) => {
-          const x = (p[0] - xmin) * scale + ox,
-            y = (p[1] - zmin) * scale + oy;
-          i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
-        });
-        ctx.closePath();
-      }
-      ctx.fillStyle = color;
-      ctx.fill('evenodd');
-    };
-    for (const poly of this.landPolys) polygon(poly, '#7b958c');
-    for (const p of this.parkPolys) polygon(p.poly, '#425f49');
-    ctx.strokeStyle = '#b9c2ab88';
-    ctx.lineWidth = 0.6;
-    for (const f of this.data.roads.features.filter((f: Feature) =>
-      /arterial/i.test(f.properties.class || ''),
-    ))
-      for (const l of lines(f)) {
-        ctx.beginPath();
-        l.map(project).forEach((p, i) =>
-          i
-            ? ctx.lineTo((p[0] - xmin) * scale + ox, (p[1] - zmin) * scale + oy)
-            : ctx.moveTo(
-                (p[0] - xmin) * scale + ox,
-                (p[1] - zmin) * scale + oy,
-              ),
-        );
-        ctx.stroke();
-      }
-    for (const v of VIEWS.filter((v) =>
-      ['science', 'stanley', 'canada'].includes(v.id),
-    )) {
-      const [x, z] = project(v.coord);
-      ctx.beginPath();
-      ctx.arc(
-        (x - xmin) * scale + ox,
-        (z - zmin) * scale + oy,
-        3,
-        0,
-        Math.PI * 2,
+    if (this.minimap?.canvas !== canvas)
+      this.minimap = new LocalMinimap(this, canvas, (id) =>
+        viewText(this.locale, id, 'name'),
       );
-      ctx.fillStyle = '#e2e9a8';
-      ctx.fill();
-    }
+    this.minimap.draw(performance.now(), true);
+  }
+  setMinimapSpan(span: number) {
+    if (!this.minimap) return;
+    this.minimap.span = span;
+    this.minimap.draw(performance.now(), true);
   }
   navigateMinimap(event: MouseEvent) {
-    const canvas = this.minimapCanvas;
-    if (!canvas) return;
-    const rect = canvas.getBoundingClientRect(),
-      { scale, xmin, zmin, ox, oy } = this.miniMapTransform,
-      x =
-        (((event.clientX - rect.left) / rect.width) * canvas.width - ox) /
-          scale +
-        xmin,
-      z =
-        (((event.clientY - rect.top) / rect.height) * canvas.height - oy) /
-          scale +
-        zmin,
-      coord = unproject(x, z);
-    this.fly({ ...VIEWS[0], coord, distance: 1300, elevation: 0.8 });
+    const map = this.minimap;
+    if (!map || this.navigation?.mode !== 'orbit') return;
+    const canvas = map.canvas,
+      rect = canvas.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    const point = minimapWorldPoint(
+      (((event.clientX - rect.left) / rect.width) * canvas.width) / 2,
+      (((event.clientY - rect.top) / rect.height) * canvas.height) / 2,
+      map.transform,
+    );
+    this.fly({
+      ...VIEWS[0],
+      coord: unproject(point.x, point.z),
+      distance: 1300,
+      elevation: 0.8,
+    });
   }
 
   screenshot() {
@@ -1469,6 +1415,7 @@ export class CityEngine {
     cancelAnimationFrame(this.raf);
     this.resizeObserver.disconnect();
     this.labelElements.forEach((l) => l.element.remove());
+    this.minimap = null;
     this.navigation?.destroy();
     this.placement?.destroy();
     this.controls.dispose();

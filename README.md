@@ -42,6 +42,10 @@ Rail plan geometry comes from OpenStreetMap: approximately 1.12 km of waterfront
 
 Street navigation is an exploration feature: simplified collision and vehicle motion are included, rather than a full traffic or driving simulation. Frame rates depend on GPU, viewport and settings. Original release Chrome reviews, before the train addition, measured approximately 31–53 FPS across detailed street, bridge and peninsula views. See [source provenance and qualifications](DATA_SOURCES.md).
 
+## Local minimap
+
+While walking, driving or boating, the minimap follows your actual position with a cyan heading arrow and north at the top. Use its **+ / −** buttons, scroll over the map, or focus the map and press **+ / −** to zoom independently of the 3D camera. Nearby roads, building footprints, shores, lakes and a distance scale provide context. The selected zoom is retained when switching travel modes; Orbit retains the clickable peninsula overview. The local minimap is also available on phones.
+
 ## Graphics quality
 
 Open **Layers → Visual quality** to choose **Balanced**, **High detail** (default), or **Ultra detail**. Ultra adds close landmark structure, textured branching trees, facade geometry and a higher physical rendering resolution. New viewpoints make the stadium, lookout and Marine Building easy to inspect. High and Balanced remain available for lower GPU load. See [graphics budgets, original asset provenance and validation](docs/visual-quality/README.md).
