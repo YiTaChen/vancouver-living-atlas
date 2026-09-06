@@ -147,3 +147,9 @@ The steam locomotive, tender, coaches, electric trains, tracks, guideway and smo
 See [verified operators, geometry and precision notes](docs/HARBOUR_SOURCES.md). `public/data/harbour-sites.json`, `harbour-piers.json` and `harbour-routes.json` combine OSM facility geometry (© OpenStreetMap contributors, ODbL 1.0) with explicitly marked original illustrative berth occupancy and local animation paths. Helijet and Harbour Air list Victoria/Nanaimo services; the cruise demonstration uses the First Narrows exit toward Alaska/Inside Passage. Timings and flight tracks are illustrative, not live departures. No operator imagery or existing 3D assets were reused.
 
 The original helicopter, floatplane, cruise ship, motorboat and yacht models in `lib/city/harbour-models.ts` are MIT. Curved hulls, windows, cabins, rotors, balconies, lifeboats and decks are generated from original geometry. Data licenses remain separate from the application MIT license.
+
+## Vancouver-style city buses (September 2026)
+
+The original procedural low-floor bus in `lib/city/city-buses.ts` uses blue bodywork, yellow waist/sill accents, dark window bands, two right-side passenger doors, roof equipment and a rear grille. Exterior reference: [TransLink's LFSe+ introduction and official photograph](https://buzzer.translink.ca/2023/02/translink-begins-new-era-of-bus-electrification/). The photograph was viewed as a reference; no photograph, logo texture or third-party 3D model is distributed.
+
+The model is an approximation, not a manufacturer CAD model. Its generic amber destination board and movement on selected major-road segments are illustrative: they are not live locations, actual route assignments or a transit timetable. Up to 28 buses replace ordinary-car slots on eligible segments, sharing one instanced geometry and material. Buses farther than 1 km from the camera are omitted; ground height and vehicle pitch follow the road relief.

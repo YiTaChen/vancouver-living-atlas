@@ -503,6 +503,85 @@ export function installVisualQA(e: CityEngine) {
     'Measure selected 60s',
     () => void run(e.settings.quality, selectedCase, 60000),
   );
+  button(
+    'Compare clock rates',
+    () =>
+      void (async () => {
+        if (running) return;
+        running = true;
+        try {
+          for (const quality of ['high', 'ultra'] as const) {
+            apply('canada-sails', quality);
+            await collect(6000);
+            for (const [index, rate] of [30, 300, 300, 30].entries()) {
+              e.setClock({ hour: 18, rate, running: true });
+              const startHour = e.clock.hour;
+              status.textContent = `Clock ${quality} ${rate}x / sample ${index + 1} of 4 / 30s`;
+              const sample = await collect(30000);
+              const endHour = e.clock.hour;
+              e.setClock({ running: false });
+              const id = `clock-${rate}x-${index + 1}`;
+              const row = {
+                kind: 'clock-rate-comparison',
+                id,
+                quality,
+                rate,
+                startHour,
+                endHour,
+                valid: !sample.hidden && !e.disposed,
+                viewport: [innerWidth, innerHeight],
+                render: [
+                  e.renderer.domElement.width,
+                  e.renderer.domElement.height,
+                ],
+                sampleMs: sample.elapsed,
+                frames: sample.gaps.length,
+                fps: (sample.gaps.length * 1000) / sample.elapsed,
+                p50Ms: percentile(sample.gaps, 0.5),
+                p95Ms: percentile(sample.gaps, 0.95),
+                p99Ms: percentile(sample.gaps, 0.99),
+                maxMs: Math.max(...sample.gaps),
+                over100Ms: sample.gaps.filter((g) => g > 100).length,
+                camera: e.camera.position.toArray(),
+                target: e.controls.target.toArray(),
+              };
+              const response = await fetch('/__visual-qa', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  name: `${quality}-${id}`,
+                  row,
+                  screenshot: e.screenshot(),
+                }),
+              });
+              if (!response.ok) throw new Error('Clock sample save failed');
+              output.value = JSON.stringify(row, null, 2);
+            }
+          }
+          status.textContent = 'Completed clock comparison: 8 samples';
+        } catch (error) {
+          status.textContent = String(error);
+        } finally {
+          running = false;
+          e.setClock({ running: false });
+        }
+      })(),
+  );
+  button('Inspect buses', () => {
+    if (running || !e.traffic?.busRoutes.length) return;
+    e.navigation?.setMode('orbit');
+    e.setClock({ hour: 14, running: false });
+    const r = e.traffic.busRoutes[0],
+      t = (r.phase + ((performance.now() / 1000) * r.speed) / r.length) % 1;
+    const x = r.a[0] + (r.b[0] - r.a[0]) * t,
+      z = r.a[1] + (r.b[1] - r.a[1]) * t;
+    const y = e.data.roadRelief?.(x, z) ?? e.elevation(x, z);
+    e.camera.position.set(x + 24, y + 12, z + 24);
+    e.controls.target.set(x, y + 2, z);
+    e.controls.update();
+    selectedCase = 'buses';
+    status.textContent = `Buses: ${e.traffic.busRoutes.length} routes / ${e.traffic.buses.count} nearby instances`;
+  });
   button('Save current view', () => {
     if (running) return;
     running = true;

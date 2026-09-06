@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { createBuses, updateBuses, type BusRoute } from './city-buses';
 import { DetailedTrees, registerTree, type ForestTree } from './detailed-trees';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import type { CityEngine } from './engine';
@@ -19,6 +20,8 @@ export interface Traffic {
     phase: number;
   }[];
   boats: THREE.Group[];
+  buses: THREE.InstancedMesh;
+  busRoutes: BusRoute[];
 }
 export function createNature(e: CityEngine) {
   const woodPolys = e.data.context.features
@@ -353,7 +356,8 @@ export function createStreetDetails(e: CityEngine): Traffic {
       !/bridge|causeway/i.test(f.properties.name || ''),
   );
   const lampPoints = roadDecorations(e, e.data.roadGraph),
-    routes: Traffic['routes'] = [];
+    routes: Traffic['routes'] = [],
+    busRoutes: BusRoute[] = [];
   const dummy = new THREE.Object3D();
   for (let k = 0; k < roads.length; k++) {
     const f = roads[k],
@@ -384,7 +388,15 @@ export function createStreetDetails(e: CityEngine): Traffic {
                 b[1] + pz * w * (w < 10 ? 0.21 : 0.23) * direction,
               ];
             if (e.onLand((aa[0] + bb[0]) / 2, (aa[1] + bb[1]) / 2))
-              routes.push({
+              (w >= 10 &&
+              len > 110 &&
+              busRoutes.length < 28 &&
+              /ROBSON|BURRARD|GRANVILLE|GEORGIA|DAVIE|DENMAN|PENDER|HASTINGS/i.test(
+                f.properties.name || '',
+              )
+                ? busRoutes
+                : routes
+              ).push({
                 a: direction > 0 ? aa : bb,
                 b: direction > 0 ? bb : aa,
                 length: len,
@@ -454,10 +466,28 @@ export function createStreetDetails(e: CityEngine): Traffic {
   body.frustumCulled = cabins.frustumCulled = false;
   e.trafficGroup.add(body, cabins);
   const boats: THREE.Group[] = [];
-  return { mesh: body, cabins, lamps: lightCaps, routes, boats };
+  const buses = createBuses(busRoutes.length);
+  buses.count = 0;
+  e.trafficGroup.add(buses);
+  return {
+    mesh: body,
+    cabins,
+    lamps: lightCaps,
+    routes,
+    boats,
+    buses,
+    busRoutes,
+  };
 }
 const dummy = new THREE.Object3D();
 export function updateTraffic(e: CityEngine, traffic: Traffic, time: number) {
+  updateBuses(
+    traffic.buses,
+    traffic.busRoutes,
+    time,
+    (x, z) => e.data.roadRelief?.(x, z) ?? e.elevation(x, z),
+    e.camera.position,
+  );
   traffic.routes.forEach((r, i) => {
     const t = (r.phase + (time * r.speed) / r.length) % 1,
       x = THREE.MathUtils.lerp(r.a[0], r.b[0], t),
