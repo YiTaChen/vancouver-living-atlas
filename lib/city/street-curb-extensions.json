@@ -1,0 +1,60 @@
+{
+  "id": "water-tree-1176",
+  "sourceRoadId": "29:0",
+  "sourceTreeIndex": 1176,
+  "sourceTreeCoordinates": [
+    -123.104572,
+    49.28352
+  ],
+  "treeXZ": [
+    1701.158946347664,
+    276.0735999998312
+  ],
+  "asphaltWidth": 8.2,
+  "note": "Original illustrative curb extension, not a surveyed curb or measured lane layout.",
+  "points": [
+    [
+      1705.6996055370616,
+      278.398804446357
+    ],
+    [
+      1696.0714670979958,
+      275.69714751066243
+    ],
+    [
+      1696.2065499447804,
+      275.21574058870914
+    ],
+    [
+      1699.6420139834875,
+      274.81705067628087
+    ],
+    [
+      1703.1081438215513,
+      275.78964717313096
+    ],
+    [
+      1705.8346883838462,
+      277.9173975244037
+    ]
+  ],
+  "center": [
+    1702.128298507948,
+    272.6190322965395
+  ],
+  "tangent": [
+    -0.9628138439065655,
+    -0.2701656935694535
+  ],
+  "outward": [
+    -0.2701656935694535,
+    0.9628138439065655
+  ],
+  "station": 22.387460167997187,
+  "treeDistance": 3.587991308137957,
+  "noseDistance": 2.787991308137957,
+  "remainingAsphalt": 6.8879913081379565,
+  "sidewalkOverlap": 0.5,
+  "recommendedVehicleCenterOffset": 1.7219999999999998,
+  "vehicleAllowanceNote": "For a straight 1.8m-wide NPC, 0.21*asphaltWidth leaves about 0.166m from the nose; current 0.23*width leaves only about 0.002m."
+}

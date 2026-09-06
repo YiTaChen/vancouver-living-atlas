@@ -28,7 +28,7 @@ for r in samples:
     table.append(f"| {r['id']} | {r['quality']} | {r['fps']:.1f} | {r['p95Ms']:.1f} | {r['p99Ms']:.1f} | {r['maxMs']:.1f} | {r['over100Ms']} | [Image]({name}.jpg) |")
 (target / 'README.md').write_text(
     f'# {label} measurements\n\n'
-    'Actual local application renders, 1920 × 1080 viewport, DPR 1. '
+    f'Actual local application renders, 1920 × 1080 viewport, DPR {sorted(set(r["dpr"] for r in samples))}. '
     'JPEG review images are resized copies of the saved canvas PNGs. '
     'See measurements.json for device, source revision, physical render size, camera poses and movement. '
     'Each sample is 8 seconds after 2.5 seconds of warm-up. '

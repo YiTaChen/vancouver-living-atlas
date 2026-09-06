@@ -1,0 +1,346 @@
+{
+  "source": {
+    "roads": "public/data/roads.geojson",
+    "trees": "public/data/trees.json",
+    "sha256": {
+      "roads": "77543c74f4e567a65db14c8d33f9d6250d0f40bdd5f99031c1267aa8dc3373fb",
+      "trees": "2ba858b2afa255bef8ad7f6c7aade750151d0990ad492c68e2c2915a92e3267d"
+    },
+    "attribution": "Contains information licensed under the Open Government Licence – Vancouver.",
+    "note": "Measured tree XY constrain original display road widths; not surveyed carriageway/curb widths or lane counts."
+  },
+  "constraints": [
+    {
+      "id": "29:0",
+      "name": "WATER ST",
+      "coordinates": [
+        [
+          -123.1042618,
+          49.2834967
+        ],
+        [
+          -123.1063833,
+          49.283885
+        ]
+      ],
+      "originalWidth": 18,
+      "asphaltWidth": 8.2,
+      "corridorWidth": 22,
+      "sidewalkEach": 6.9,
+      "sides": [
+        {
+          "count": 5,
+          "spanFraction": 0.4702870577212997,
+          "lowDistance": 4.942006342189244
+        },
+        {
+          "count": 6,
+          "spanFraction": 0.6381387568907115,
+          "lowDistance": 6.230348035383984
+        }
+      ],
+      "minTreeCenterEdgeClearance": -0.5120086918620124,
+      "residualAsphaltTreeCenters": [
+        {
+          "treeIndex": 1176,
+          "coordinates": [
+            -123.104572,
+            49.28352
+          ],
+          "station": 22.387460167997187,
+          "distance": 3.5879913081379873,
+          "signedDistance": -3.587991308137988,
+          "intrusionMetres": 0.5120086918620124
+        }
+      ]
+    },
+    {
+      "id": "31:0",
+      "name": "ROBSON ST",
+      "coordinates": [
+        [
+          -123.1269797,
+          49.2860047
+        ],
+        [
+          -123.1279092,
+          49.2866066
+        ]
+      ],
+      "originalWidth": 18,
+      "asphaltWidth": 12,
+      "corridorWidth": 22,
+      "sidewalkEach": 5,
+      "sides": [
+        {
+          "count": 7,
+          "spanFraction": 0.6095229622280653,
+          "lowDistance": 6.8805704762700195
+        },
+        {
+          "count": 4,
+          "spanFraction": 0.696059360224285,
+          "lowDistance": 6.821373782582166
+        }
+      ],
+      "minTreeCenterEdgeClearance": 0.3790691996324407,
+      "residualAsphaltTreeCenters": []
+    },
+    {
+      "id": "85:0",
+      "name": "ROBSON ST",
+      "coordinates": [
+        [
+          -123.1228089,
+          49.2832957
+        ],
+        [
+          -123.12482,
+          49.284602
+        ]
+      ],
+      "originalWidth": 18,
+      "asphaltWidth": 11.7,
+      "corridorWidth": 22,
+      "sidewalkEach": 5.15,
+      "sides": [
+        {
+          "count": 15,
+          "spanFraction": 0.72646041029474,
+          "lowDistance": 6.698601075336234
+        },
+        {
+          "count": 14,
+          "spanFraction": 0.6579659383403313,
+          "lowDistance": 7.473691929027979
+        }
+      ],
+      "minTreeCenterEdgeClearance": 0.616702243562715,
+      "residualAsphaltTreeCenters": []
+    },
+    {
+      "id": "214:0",
+      "name": "ROBSON ST",
+      "coordinates": [
+        [
+          -123.1285517,
+          49.2870226
+        ],
+        [
+          -123.1299287,
+          49.2879141
+        ]
+      ],
+      "originalWidth": 18,
+      "asphaltWidth": 12.4,
+      "corridorWidth": 22,
+      "sidewalkEach": 4.8,
+      "sides": [
+        {
+          "count": 10,
+          "spanFraction": 0.7700064567201427,
+          "lowDistance": 7.174985576406571
+        },
+        {
+          "count": 10,
+          "spanFraction": 0.7722014047160296,
+          "lowDistance": 7.0401767983969625
+        }
+      ],
+      "minTreeCenterEdgeClearance": 0.7957894525838718,
+      "residualAsphaltTreeCenters": []
+    },
+    {
+      "id": "330:0",
+      "name": "ROBSON ST",
+      "coordinates": [
+        [
+          -123.132289,
+          49.2894422
+        ],
+        [
+          -123.1338611,
+          49.2904588
+        ]
+      ],
+      "originalWidth": 18,
+      "asphaltWidth": 12.1,
+      "corridorWidth": 22,
+      "sidewalkEach": 4.95,
+      "sides": [
+        {
+          "count": 11,
+          "spanFraction": 0.6804922057044488,
+          "lowDistance": 6.869179319371137
+        },
+        {
+          "count": 8,
+          "spanFraction": 0.6538540378429452,
+          "lowDistance": 6.9268752613187905
+        }
+      ],
+      "minTreeCenterEdgeClearance": 0.6791459458473854,
+      "residualAsphaltTreeCenters": []
+    },
+    {
+      "id": "384:0",
+      "name": "ROBSON ST",
+      "coordinates": [
+        [
+          -123.1311062,
+          49.2886765
+        ],
+        [
+          -123.132289,
+          49.2894422
+        ]
+      ],
+      "originalWidth": 18,
+      "asphaltWidth": 12.1,
+      "corridorWidth": 22,
+      "sidewalkEach": 4.95,
+      "sides": [
+        {
+          "count": 9,
+          "spanFraction": 0.7225404336050758,
+          "lowDistance": 6.851074179831142
+        },
+        {
+          "count": 7,
+          "spanFraction": 0.6629334662057748,
+          "lowDistance": 7.527809250819372
+        }
+      ],
+      "minTreeCenterEdgeClearance": 0.7604482712203042,
+      "residualAsphaltTreeCenters": []
+    },
+    {
+      "id": "846:0",
+      "name": "WATER ST",
+      "coordinates": [
+        [
+          -123.1063833,
+          49.283885
+        ],
+        [
+          -123.1087774,
+          49.2843192
+        ]
+      ],
+      "originalWidth": 18,
+      "asphaltWidth": 7.7,
+      "corridorWidth": 22,
+      "sidewalkEach": 7.15,
+      "sides": [
+        {
+          "count": 7,
+          "spanFraction": 0.35184185043006505,
+          "lowDistance": 4.681161810276843
+        },
+        {
+          "count": 9,
+          "spanFraction": 0.764847889648567,
+          "lowDistance": 5.660363758267954
+        }
+      ],
+      "minTreeCenterEdgeClearance": 0.5376902639078502,
+      "residualAsphaltTreeCenters": []
+    },
+    {
+      "id": "1218:0",
+      "name": "ROBSON ST",
+      "coordinates": [
+        [
+          -123.1299287,
+          49.2879141
+        ],
+        [
+          -123.1311062,
+          49.2886765
+        ]
+      ],
+      "originalWidth": 18,
+      "asphaltWidth": 12.9,
+      "corridorWidth": 22,
+      "sidewalkEach": 4.55,
+      "sides": [
+        {
+          "count": 8,
+          "spanFraction": 0.6152344056300708,
+          "lowDistance": 7.291410919232055
+        },
+        {
+          "count": 6,
+          "spanFraction": 0.5546948391924946,
+          "lowDistance": 7.370074624643292
+        }
+      ],
+      "minTreeCenterEdgeClearance": 0.8000084750623815,
+      "residualAsphaltTreeCenters": []
+    },
+    {
+      "id": "1360:0",
+      "name": "ROBSON ST",
+      "coordinates": [
+        [
+          -123.12482,
+          49.284602
+        ],
+        [
+          -123.1269797,
+          49.2860047
+        ]
+      ],
+      "originalWidth": 18,
+      "asphaltWidth": 12.2,
+      "corridorWidth": 22,
+      "sidewalkEach": 4.9,
+      "sides": [
+        {
+          "count": 15,
+          "spanFraction": 0.7512183061085311,
+          "lowDistance": 6.947755327061808
+        },
+        {
+          "count": 18,
+          "spanFraction": 0.7446341321764879,
+          "lowDistance": 7.111789567778092
+        }
+      ],
+      "minTreeCenterEdgeClearance": 0.2568454763953145,
+      "residualAsphaltTreeCenters": []
+    },
+    {
+      "id": "1543:0",
+      "name": "ROBSON ST",
+      "coordinates": [
+        [
+          -123.1338611,
+          49.2904588
+        ],
+        [
+          -123.1350533,
+          49.2912296
+        ]
+      ],
+      "originalWidth": 18,
+      "asphaltWidth": 12.4,
+      "corridorWidth": 22,
+      "sidewalkEach": 4.8,
+      "sides": [
+        {
+          "count": 10,
+          "spanFraction": 0.739228396814192,
+          "lowDistance": 7.02375464552386
+        },
+        {
+          "count": 8,
+          "spanFraction": 0.6727770341172027,
+          "lowDistance": 7.114149532619677
+        }
+      ],
+      "minTreeCenterEdgeClearance": 0.6733034069426669,
+      "residualAsphaltTreeCenters": []
+    }
+  ]
+}

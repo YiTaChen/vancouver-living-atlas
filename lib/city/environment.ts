@@ -5,6 +5,7 @@ import type { CityEngine } from './engine';
 import { project, rings, lines, inPolygon, hash } from './geo';
 import type { Feature } from './types';
 import { lakeSurfaces } from './water-world';
+import { roadDecorations } from './road-decorations';
 export interface Traffic {
   mesh: THREE.InstancedMesh;
   cabins: THREE.InstancedMesh;
@@ -292,16 +293,15 @@ export function createNature(e: CityEngine) {
 export function createStreetDetails(e: CityEngine): Traffic {
   const roads = e.data.roads.features.filter(
     (f: Feature) =>
-      !/bikeway|lane|private/i.test(f.properties.class || '') &&
+      !/bikeway|lane|private|non.city/i.test(f.properties.class || '') &&
       !/bridge|causeway/i.test(f.properties.name || ''),
   );
-  const lampPoints: number[][] = [],
-    markPositions: number[] = [],
+  const lampPoints = roadDecorations(e, e.data.roadGraph),
     routes: Traffic['routes'] = [];
   const dummy = new THREE.Object3D();
   for (let k = 0; k < roads.length; k++) {
     const f = roads[k],
-      w = f.properties.width || 10;
+      w = e.data.roadWidths?.get(f) ?? f.properties.width ?? 10;
     for (const line of lines(f)) {
       const ps = line.map(project);
       for (let i = 0; i < ps.length - 1; i++) {
@@ -316,12 +316,12 @@ export function createStreetDetails(e: CityEngine): Traffic {
         if (len > 55 && hash(k * 23 + i) > 0.6) {
           const direction = hash(k + 7) > 0.5 ? 1 : -1;
           const aa = [
-              a[0] + px * w * 0.23 * direction,
-              a[1] + pz * w * 0.23 * direction,
+              a[0] + px * w * (w < 10 ? 0.21 : 0.23) * direction,
+              a[1] + pz * w * (w < 10 ? 0.21 : 0.23) * direction,
             ],
             bb = [
-              b[0] + px * w * 0.23 * direction,
-              b[1] + pz * w * 0.23 * direction,
+              b[0] + px * w * (w < 10 ? 0.21 : 0.23) * direction,
+              b[1] + pz * w * (w < 10 ? 0.21 : 0.23) * direction,
             ];
           if (e.onLand((aa[0] + bb[0]) / 2, (aa[1] + bb[1]) / 2))
             routes.push({
@@ -332,57 +332,9 @@ export function createStreetDetails(e: CityEngine): Traffic {
               phase: hash(k + 4),
             });
         }
-        for (let d = 12; d < len; d += 45) {
-          const x = a[0] + dx * d,
-            z = a[1] + dz * d;
-          if (e.onLand(x, z))
-            lampPoints.push([
-              x + px * (w / 2 + 1),
-              z + pz * (w / 2 + 1),
-              Math.atan2(dx, dz),
-            ]);
-        }
-        if (w < 12) continue;
-        for (let d = 8; d < len - 8; d += 15) {
-          const x = a[0] + dx * d,
-            z = a[1] + dz * d;
-          for (const p of [
-            [x - px * 0.16, z - pz * 0.16],
-            [x + px * 0.16, z + pz * 0.16],
-            [x + dx * 5 + px * 0.16, z + dz * 5 + pz * 0.16],
-            [x - px * 0.16, z - pz * 0.16],
-            [x + dx * 5 + px * 0.16, z + dz * 5 + pz * 0.16],
-            [x + dx * 5 - px * 0.16, z + dz * 5 - pz * 0.16],
-          ])
-            markPositions.push(p[0], e.elevation(p[0], p[1]) + 1.12, p[1]);
-        }
-        // Crosswalk stripes sit a few metres back from arterial intersections.
-        for (const end of [8, len - 8])
-          for (let d = -w / 2 + 1; d < w / 2 - 1; d += 1.7) {
-            const x = a[0] + dx * end + px * d,
-              z = a[1] + dz * end + pz * d;
-            for (const p of [
-              [x, z],
-              [x + px * 0.8, z + pz * 0.8],
-              [x + dx * 3.3 + px * 0.8, z + dz * 3.3 + pz * 0.8],
-              [x, z],
-              [x + dx * 3.3 + px * 0.8, z + dz * 3.3 + pz * 0.8],
-              [x + dx * 3.3, z + dz * 3.3],
-            ])
-              markPositions.push(p[0], e.elevation(p[0], p[1]) + 1.13, p[1]);
-          }
       }
     }
   }
-  const markings = new THREE.Mesh(
-    e.geometry(markPositions),
-    new THREE.MeshStandardMaterial({
-      color: 0xc9c9b6,
-      roughness: 1,
-      side: THREE.DoubleSide,
-    }),
-  );
-  e.roads.add(markings);
   const lampGeo = mergeGeometries([
     new THREE.CylinderGeometry(0.07, 0.13, 8, 6).translate(0, 4, 0),
     new THREE.BoxGeometry(1.9, 0.12, 0.12).translate(0.8, 7.9, 0),
@@ -449,7 +401,11 @@ export function updateTraffic(e: CityEngine, traffic: Traffic, time: number) {
     const t = (r.phase + (time * r.speed) / r.length) % 1,
       x = THREE.MathUtils.lerp(r.a[0], r.b[0], t),
       z = THREE.MathUtils.lerp(r.a[1], r.b[1], t);
-    dummy.position.set(x, e.elevation(x, z) + 1.8, z);
+    dummy.position.set(
+      x,
+      (e.data.roadRelief?.(x, z) ?? e.elevation(x, z)) + 1.8,
+      z,
+    );
     dummy.rotation.set(0, Math.atan2(r.b[0] - r.a[0], r.b[1] - r.a[1]), 0);
     dummy.updateMatrix();
     traffic.mesh.setMatrixAt(i, dummy.matrix);

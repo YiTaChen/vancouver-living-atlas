@@ -80,6 +80,7 @@ export function installVisualQA(e: CityEngine) {
       const mode = 'drive' in test ? 'drive' : 'walk';
       e.navigation!.setMode(mode, test.street);
       e.settings.mode = mode;
+      e.applySettings({ ...e.settings, mode });
       e.navigation!.cameraDistances[mode] = mode === 'drive' ? 10 : 0;
       e.navigation!.snapCamera = true;
       e.navigation!.update(0);

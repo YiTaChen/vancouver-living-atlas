@@ -563,7 +563,7 @@ export class StreetNavigation {
     const [a, b] = chosen;
     this.position.set((a[0] + b[0]) / 2, 0, (a[1] + b[1]) / 2);
     this.surface = 'ground';
-    this.position.y = this.e.elevation(this.position.x, this.position.z) + 1.25;
+    this.position.y = this.roadHeight(this.position.x, this.position.z);
     this.yaw = Math.atan2(b[0] - a[0], b[1] - a[1]);
     this.pitch = 0.04;
     this.snapCamera = true;
@@ -645,13 +645,17 @@ export class StreetNavigation {
         const deck = this.reachableDeck(x, z);
         this.position.x = x;
         this.position.z = z;
-        this.position.y = deck ?? this.e.elevation(x, z) + 1.25;
+        this.position.y = deck ?? this.roadHeight(x, z);
         this.surface = deck === undefined ? 'ground' : 'bridge';
       } else {
         this.speed = 0;
         break;
       }
     }
+  }
+  roadHeight(x: number, z: number) {
+    const fallback = this.e.elevation(x, z) + 1.05;
+    return (this.e.data?.roadSurface?.sample(x, z, fallback) ?? fallback) + 0.2;
   }
   update(dt: number) {
     if (this.mode === 'orbit') return;

@@ -1,0 +1,654 @@
+{
+  "source": {
+    "roads": "public/data/roads.geojson",
+    "trees": "public/data/trees.json",
+    "roadSha256": "77543c74f4e567a65db14c8d33f9d6250d0f40bdd5f99031c1267aa8dc3373fb",
+    "treeSha256": "2ba858b2afa255bef8ad7f6c7aade750151d0990ad492c68e2c2915a92e3267d",
+    "attribution": "Contains information licensed under the Open Government Licence – Vancouver.",
+    "note": "Numbered-block grouping of original source coordinates; display widths constrained by measured trees, not surveyed carriageway widths."
+  },
+  "projection": {
+    "origin": [
+      -123.128,
+      49.286
+    ],
+    "xMetresPerDegree": 72612.21386153261,
+    "zMetresPerDegree": -111320
+  },
+  "blocks": [
+    {
+      "name": "200-300 WATER ST",
+      "baseName": "WATER ST",
+      "sourceIds": [
+        "673:0",
+        "1465:0"
+      ],
+      "width": 18,
+      "points": [
+        [
+          1395.7955421751467,
+          187.10665600028847
+        ],
+        [
+          1337.778383299734,
+          170.8428040000618
+        ],
+        [
+          1267.6785520379312,
+          151.59557599977404
+        ],
+        [
+          1237.7913648120357,
+          147.17617200033288
+        ]
+      ],
+      "length": 163.159996927856,
+      "sources": [
+        {
+          "id": "673:0",
+          "startStation": 0,
+          "endStation": 60.2536605183465,
+          "reversed": false
+        },
+        {
+          "id": "1465:0",
+          "startStation": 60.2536605183465,
+          "endStation": 163.159996927856,
+          "reversed": false
+        }
+      ],
+      "coordinates": [
+        [
+          -123.1087774,
+          49.2843192
+        ],
+        [
+          -123.1095764,
+          49.2844653
+        ],
+        [
+          -123.1105418,
+          49.2846382
+        ],
+        [
+          -123.1109534,
+          49.2846779
+        ]
+      ],
+      "result": {
+        "originalWidth": 18,
+        "corridorWidth": 22,
+        "sidewalkEach": 6.8,
+        "length": 163.159996927856,
+        "sides": [
+          {
+            "candidates": 9,
+            "row": [
+              {
+                "station": 51.95139875822788,
+                "distance": 4.759611929986687,
+                "side": -1,
+                "id": 17558,
+                "point": [
+                  1344.487751860523,
+                  177.66671999991814
+                ]
+              },
+              {
+                "station": 57.844068230621815,
+                "distance": 6.87393907985413,
+                "side": -1,
+                "id": 1185,
+                "point": [
+                  1338.2431014676874,
+                  178.11200000037587
+                ]
+              },
+              {
+                "station": 65.17394196388713,
+                "distance": 6.926701199491222,
+                "side": -1,
+                "id": 17559,
+                "point": [
+                  1331.1997167233596,
+                  176.21956000040797
+                ]
+              },
+              {
+                "station": 105.12556100942719,
+                "distance": 7.0448231154652285,
+                "side": -1,
+                "id": 1186,
+                "point": [
+                  1292.6426311632363,
+                  165.75547999993404
+                ]
+              },
+              {
+                "station": 106.60691338773348,
+                "distance": 5.489078640364046,
+                "side": -1,
+                "id": 19306,
+                "point": [
+                  1291.6260601686456,
+                  163.86303999996613
+                ]
+              },
+              {
+                "station": 129.38924806770285,
+                "distance": 8.627521137828863,
+                "side": -1,
+                "id": 7455,
+                "point": [
+                  1268.825825016936,
+                  160.85740000043586
+                ]
+              },
+              {
+                "station": 133.90598225261584,
+                "distance": 9.504214847708615,
+                "side": -1,
+                "id": 7454,
+                "point": [
+                  1265.3404387510952,
+                  160.85740000043586
+                ]
+              },
+              {
+                "station": 135.3033416858198,
+                "distance": 9.485780820898137,
+                "side": -1,
+                "id": 18658,
+                "point": [
+                  1263.9608066881137,
+                  160.634760000207
+                ]
+              },
+              {
+                "station": 136.56662652313054,
+                "distance": 8.884869013301131,
+                "side": -1,
+                "id": 7453,
+                "point": [
+                  1262.7990112661669,
+                  159.85551999980146
+                ]
+              }
+            ],
+            "span": 84.61522776490266,
+            "spanFraction": 0.5186027786107199,
+            "eligible": true,
+            "reason": "supported",
+            "spread": 2.8052388322818373,
+            "lowDistance": 6.319994904058097
+          },
+          {
+            "candidates": 7,
+            "row": [
+              {
+                "station": 15.064694024651429,
+                "distance": 4.887107979853832,
+                "side": 1,
+                "id": 1071,
+                "point": [
+                  1382.6091641375453,
+                  178.33463999981376
+                ]
+              },
+              {
+                "station": 25.744101913861098,
+                "distance": 4.783649411801868,
+                "side": 1,
+                "id": 13113,
+                "point": [
+                  1372.2982297694434,
+                  175.55164000051235
+                ]
+              },
+              {
+                "station": 90.08511980738865,
+                "distance": 7.012641202797466,
+                "side": 1,
+                "id": 19303,
+                "point": [
+                  1310.8682968418682,
+                  156.18196000037557
+                ]
+              },
+              {
+                "station": 95.18182278102162,
+                "distance": 6.65220423398553,
+                "side": 1,
+                "id": 17560,
+                "point": [
+                  1305.8580540856897,
+                  155.18008000053214
+                ]
+              },
+              {
+                "station": 125.59611105684729,
+                "distance": 5.8049799879254635,
+                "side": 1,
+                "id": 7006,
+                "point": [
+                  1276.304883044365,
+                  147.94427999981735
+                ]
+              },
+              {
+                "station": 143.0518250270821,
+                "distance": 5.68536947828801,
+                "side": 1,
+                "id": 11459,
+                "point": [
+                  1258.514890647802,
+                  144.49335999982935
+                ]
+              },
+              {
+                "station": 150.639142891005,
+                "distance": 6.363923585408776,
+                "side": 1,
+                "id": 19312,
+                "point": [
+                  1251.1084448340514,
+                  142.71224000037137
+                ]
+              }
+            ],
+            "span": 135.57444886635358,
+            "spanFraction": 0.8309294644464853,
+            "eligible": true,
+            "reason": "supported",
+            "spread": 1.5477878247295118,
+            "lowDistance": 5.046760279540668
+          }
+        ],
+        "reason": "constrained",
+        "limitedByMinimum": false,
+        "asphaltWidth": 8.4
+      },
+      "perSource": [
+        {
+          "id": "673:0",
+          "result": {
+            "originalWidth": 18,
+            "corridorWidth": 22,
+            "sidewalkEach": 2,
+            "length": 60.2536605183465,
+            "sides": [
+              {
+                "candidates": 0,
+                "row": [],
+                "span": 0,
+                "spanFraction": 0,
+                "eligible": false,
+                "reason": "sparse"
+              },
+              {
+                "candidates": 2,
+                "row": [],
+                "span": 0,
+                "spanFraction": 0,
+                "eligible": false,
+                "reason": "sparse"
+              }
+            ],
+            "reason": "insufficient-rows",
+            "limitedByMinimum": false
+          }
+        },
+        {
+          "id": "1465:0",
+          "result": {
+            "originalWidth": 18,
+            "corridorWidth": 22,
+            "sidewalkEach": 2,
+            "length": 102.90633640950952,
+            "sides": [
+              {
+                "candidates": 6,
+                "row": [
+                  {
+                    "station": 44.87190049108069,
+                    "distance": 7.0448231154652285,
+                    "side": -1,
+                    "id": 1186,
+                    "point": [
+                      1292.6426311632363,
+                      165.75547999993404
+                    ]
+                  },
+                  {
+                    "station": 69.13558754935636,
+                    "distance": 8.627521137828863,
+                    "side": -1,
+                    "id": 7455,
+                    "point": [
+                      1268.825825016936,
+                      160.85740000043586
+                    ]
+                  },
+                  {
+                    "station": 73.65232173426936,
+                    "distance": 9.504214847708615,
+                    "side": -1,
+                    "id": 7454,
+                    "point": [
+                      1265.3404387510952,
+                      160.85740000043586
+                    ]
+                  },
+                  {
+                    "station": 75.0496811674733,
+                    "distance": 9.485780820898137,
+                    "side": -1,
+                    "id": 18658,
+                    "point": [
+                      1263.9608066881137,
+                      160.634760000207
+                    ]
+                  },
+                  {
+                    "station": 76.31296600478404,
+                    "distance": 8.884869013301131,
+                    "side": -1,
+                    "id": 7453,
+                    "point": [
+                      1262.7990112661669,
+                      159.85551999980146
+                    ]
+                  }
+                ],
+                "span": 31.441065513703357,
+                "spanFraction": 0.3055308993664447,
+                "eligible": false,
+                "reason": "short-span"
+              },
+              {
+                "candidates": 5,
+                "row": [
+                  {
+                    "station": 29.83145928904215,
+                    "distance": 7.012641202797466,
+                    "side": 1,
+                    "id": 19303,
+                    "point": [
+                      1310.8682968418682,
+                      156.18196000037557
+                    ]
+                  },
+                  {
+                    "station": 34.92816226267512,
+                    "distance": 6.65220423398553,
+                    "side": 1,
+                    "id": 17560,
+                    "point": [
+                      1305.8580540856897,
+                      155.18008000053214
+                    ]
+                  },
+                  {
+                    "station": 65.3424505385008,
+                    "distance": 5.8049799879254635,
+                    "side": 1,
+                    "id": 7006,
+                    "point": [
+                      1276.304883044365,
+                      147.94427999981735
+                    ]
+                  },
+                  {
+                    "station": 82.7981645087356,
+                    "distance": 5.68536947828801,
+                    "side": 1,
+                    "id": 11459,
+                    "point": [
+                      1258.514890647802,
+                      144.49335999982935
+                    ]
+                  },
+                  {
+                    "station": 90.38548237265852,
+                    "distance": 6.363923585408776,
+                    "side": 1,
+                    "id": 19312,
+                    "point": [
+                      1251.1084448340514,
+                      142.71224000037137
+                    ]
+                  }
+                ],
+                "span": 60.554023083616364,
+                "spanFraction": 0.5884382361319842,
+                "eligible": true,
+                "reason": "supported",
+                "spread": 0.9432337417499443,
+                "lowDistance": 5.781057885997972
+              }
+            ],
+            "reason": "insufficient-rows",
+            "limitedByMinimum": false
+          }
+        }
+      ],
+      "allInteriorTrees": [
+        {
+          "treeIndex": 1071,
+          "coordinates": [
+            -123.108959,
+            49.284398
+          ],
+          "station": 15.064694024651429,
+          "distance": 4.887107979853832,
+          "signedDistance": 4.887107979853833,
+          "oldInsideAsphalt": true,
+          "newInsideAsphalt": false,
+          "edgeClearance": 0.687107979853832
+        },
+        {
+          "treeIndex": 1185,
+          "coordinates": [
+            -123.10957,
+            49.2844
+          ],
+          "station": 57.844068230621815,
+          "distance": 6.87393907985413,
+          "signedDistance": -6.873939079854131,
+          "oldInsideAsphalt": true,
+          "newInsideAsphalt": false,
+          "edgeClearance": 2.6739390798541303
+        },
+        {
+          "treeIndex": 1186,
+          "coordinates": [
+            -123.110198,
+            49.284511
+          ],
+          "station": 105.12556100942719,
+          "distance": 7.0448231154652285,
+          "signedDistance": -7.044823115465228,
+          "oldInsideAsphalt": true,
+          "newInsideAsphalt": false,
+          "edgeClearance": 2.8448231154652284
+        },
+        {
+          "treeIndex": 7006,
+          "coordinates": [
+            -123.110423,
+            49.284671
+          ],
+          "station": 125.59611105684729,
+          "distance": 5.8049799879254635,
+          "signedDistance": 5.804979987925463,
+          "oldInsideAsphalt": true,
+          "newInsideAsphalt": false,
+          "edgeClearance": 1.6049799879254634
+        },
+        {
+          "treeIndex": 7453,
+          "coordinates": [
+            -123.110609,
+            49.284564
+          ],
+          "station": 136.56662652313054,
+          "distance": 8.884869013301131,
+          "signedDistance": -8.884869013301131,
+          "oldInsideAsphalt": true,
+          "newInsideAsphalt": false,
+          "edgeClearance": 4.684869013301131
+        },
+        {
+          "treeIndex": 7454,
+          "coordinates": [
+            -123.110574,
+            49.284555
+          ],
+          "station": 133.90598225261584,
+          "distance": 9.504214847708615,
+          "signedDistance": -9.504214847708617,
+          "oldInsideAsphalt": false,
+          "newInsideAsphalt": false,
+          "edgeClearance": 5.304214847708615
+        },
+        {
+          "treeIndex": 7455,
+          "coordinates": [
+            -123.110526,
+            49.284555
+          ],
+          "station": 129.38924806770285,
+          "distance": 8.627521137828863,
+          "signedDistance": -8.627521137828863,
+          "oldInsideAsphalt": true,
+          "newInsideAsphalt": false,
+          "edgeClearance": 4.427521137828863
+        },
+        {
+          "treeIndex": 11459,
+          "coordinates": [
+            -123.110668,
+            49.284702
+          ],
+          "station": 143.0518250270821,
+          "distance": 5.68536947828801,
+          "signedDistance": 5.685369478288011,
+          "oldInsideAsphalt": true,
+          "newInsideAsphalt": false,
+          "edgeClearance": 1.4853694782880096
+        },
+        {
+          "treeIndex": 13113,
+          "coordinates": [
+            -123.109101,
+            49.284423
+          ],
+          "station": 25.744101913861098,
+          "distance": 4.783649411801868,
+          "signedDistance": 4.783649411801869,
+          "oldInsideAsphalt": true,
+          "newInsideAsphalt": false,
+          "edgeClearance": 0.5836494118018676
+        },
+        {
+          "treeIndex": 17558,
+          "coordinates": [
+            -123.109484,
+            49.284404
+          ],
+          "station": 51.95139875822788,
+          "distance": 4.759611929986687,
+          "signedDistance": -4.759611929986688,
+          "oldInsideAsphalt": true,
+          "newInsideAsphalt": false,
+          "edgeClearance": 0.5596119299866871
+        },
+        {
+          "treeIndex": 17559,
+          "coordinates": [
+            -123.109667,
+            49.284417
+          ],
+          "station": 65.17394196388713,
+          "distance": 6.926701199491222,
+          "signedDistance": -6.926701199491222,
+          "oldInsideAsphalt": true,
+          "newInsideAsphalt": false,
+          "edgeClearance": 2.726701199491222
+        },
+        {
+          "treeIndex": 17560,
+          "coordinates": [
+            -123.110016,
+            49.284606
+          ],
+          "station": 95.18182278102162,
+          "distance": 6.65220423398553,
+          "signedDistance": 6.652204233985531,
+          "oldInsideAsphalt": true,
+          "newInsideAsphalt": false,
+          "edgeClearance": 2.4522042339855297
+        },
+        {
+          "treeIndex": 18658,
+          "coordinates": [
+            -123.110593,
+            49.284557
+          ],
+          "station": 135.3033416858198,
+          "distance": 9.485780820898137,
+          "signedDistance": -9.485780820898137,
+          "oldInsideAsphalt": false,
+          "newInsideAsphalt": false,
+          "edgeClearance": 5.285780820898137
+        },
+        {
+          "treeIndex": 19303,
+          "coordinates": [
+            -123.109947,
+            49.284597
+          ],
+          "station": 90.08511980738865,
+          "distance": 7.012641202797466,
+          "signedDistance": 7.012641202797465,
+          "oldInsideAsphalt": true,
+          "newInsideAsphalt": false,
+          "edgeClearance": 2.812641202797466
+        },
+        {
+          "treeIndex": 19306,
+          "coordinates": [
+            -123.110212,
+            49.284528
+          ],
+          "station": 106.60691338773348,
+          "distance": 5.489078640364046,
+          "signedDistance": -5.489078640364046,
+          "oldInsideAsphalt": true,
+          "newInsideAsphalt": false,
+          "edgeClearance": 1.2890786403640462
+        },
+        {
+          "treeIndex": 19312,
+          "coordinates": [
+            -123.11077,
+            49.284718
+          ],
+          "station": 150.639142891005,
+          "distance": 6.363923585408776,
+          "signedDistance": 6.363923585408776,
+          "oldInsideAsphalt": true,
+          "newInsideAsphalt": false,
+          "edgeClearance": 2.163923585408776
+        }
+      ],
+      "treeAudit": {
+        "count": 16,
+        "oldInsideAsphalt": 14,
+        "newInsideAsphalt": 0,
+        "minimumClearance": 0.5596119299866871
+      }
+    }
+  ],
+  "rejected": []
+}

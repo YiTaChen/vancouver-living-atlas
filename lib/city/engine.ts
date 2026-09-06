@@ -1,4 +1,5 @@
 import { enterLocalMap, finishLocalMapTransition } from './local-map-camera';
+import { createRoadSurfaces } from './road-surfaces';
 import { TravelReturn } from './travel-return';
 import type { TravelMode } from './placement-geometry';
 import type { TravelView } from './travel-camera';
@@ -346,7 +347,9 @@ export class CityEngine {
     this.clock.resetTimebase(this.fpsAt);
     this.animate(this.fpsAt);
     if (process.env.VANCOUVER_VISUAL_QA === '1')
-      void import('./visual-qa').then(({ installVisualQA }) => installVisualQA(this));
+      void import('./visual-qa').then(({ installVisualQA }) =>
+        installVisualQA(this),
+      );
   }
   pixelRatio() {
     const w = Math.max(1, this.container.clientWidth),
@@ -915,107 +918,7 @@ export class CityEngine {
     return m;
   }
   makeRoads() {
-    let count = 0;
-    const batches: Record<string, number[][][]> = {};
-    for (const f of this.data.roads.features) {
-      const t = String(
-          f.properties.type || f.properties.class || '',
-        ).toLowerCase(),
-        n = String(f.properties.name || '');
-      if (/bridge|causeway/i.test(n) || /bikeway/.test(t)) continue;
-      const kind = String(
-        Number(f.properties.width) ||
-          (/lane/.test(t) ? 4 : /arterial/.test(t) ? 18 : 9),
-      );
-      batches[kind] ??= [];
-      for (const l of lines(f)) {
-        batches[kind].push(l.map(project));
-        count++;
-      }
-    }
-    for (const [kind, ls] of Object.entries(batches)) {
-      const width = Number(kind);
-      const positions: number[] = [],
-        edge: number[] = [];
-      for (const l of ls) {
-        for (let i = 0; i < l.length - 1; i++) {
-          const a = l[i],
-            b = l[i + 1],
-            len = Math.hypot(b[0] - a[0], b[1] - a[1]);
-          if (len < 0.1) continue;
-          for (let j = 0, steps = Math.ceil(len / 18); j < steps; j++) {
-            const t = j / steps,
-              s = (j + 1) / steps,
-              x = a[0] + (b[0] - a[0]) * t,
-              z = a[1] + (b[1] - a[1]) * t,
-              xx = a[0] + (b[0] - a[0]) * s,
-              zz = a[1] + (b[1] - a[1]) * s;
-            for (const [w, array, offset] of [
-              [width + 4, edge, 1.18],
-              [width, positions, 1.05],
-            ] as [number, number[], number][]) {
-              const dx = (((b[1] - a[1]) / len) * w) / 2,
-                dz = ((-(b[0] - a[0]) / len) * w) / 2;
-              const points =
-                array === edge
-                  ? [-1, 1].flatMap((sign) => {
-                      const ix = (dx * width) / w,
-                        iz = (dz * width) / w;
-                      return [
-                        [x + dx * sign, z + dz * sign],
-                        [x + ix * sign, z + iz * sign],
-                        [xx + ix * sign, zz + iz * sign],
-                        [x + dx * sign, z + dz * sign],
-                        [xx + ix * sign, zz + iz * sign],
-                        [xx + dx * sign, zz + dz * sign],
-                      ];
-                    })
-                  : [
-                      [x - dx, z - dz],
-                      [x + dx, z + dz],
-                      [xx + dx, zz + dz],
-                      [x - dx, z - dz],
-                      [xx + dx, zz + dz],
-                      [xx - dx, zz - dz],
-                    ];
-              for (const p of points)
-                array.push(p[0], this.elevation(p[0], p[1]) + offset, p[1]);
-            }
-          }
-        }
-      }
-      for (const [p, color] of [
-        [edge, 0xc8c5b8],
-        [positions, 0x697579],
-      ] as [number[], number][]) {
-        const geometry = this.geometry(p),
-          uv: number[] = [];
-        for (let i = 0; i < p.length; i += 3) uv.push(p[i] / 3, p[i + 2] / 3);
-        geometry.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
-        const kind = color === 0xc8c5b8 ? 'sidewalk-concrete' : 'asphalt-fine';
-        if (!this.roadMaterials.has(kind)) {
-          const loader = new THREE.TextureLoader(),
-            map = loader.load(`/textures/${kind}-albedo.png`);
-          map.wrapS = map.wrapT = THREE.RepeatWrapping;
-          map.colorSpace = THREE.SRGBColorSpace;
-          map.anisotropy = 8;
-          this.roadMaterials.set(
-            kind,
-            new THREE.MeshStandardMaterial({
-              map,
-              color: 0xe1e2df,
-              roughness: 0.94,
-              side: THREE.DoubleSide,
-            }),
-          );
-        }
-        const mesh = new THREE.Mesh(geometry, this.roadMaterials.get(kind));
-        mesh.receiveShadow = true;
-        mesh.userData.walkSurface = true;
-        this.roads.add(mesh);
-      }
-    }
-    this.stats.roads = count;
+    createRoadSurfaces(this);
   }
   flyTo(id: string, animate = true) {
     this.placement?.cancel();

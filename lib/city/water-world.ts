@@ -231,6 +231,11 @@ export class WaterWorld {
       }
     this.index(poly);
   }
+  solidAt(x: number, z: number) {
+    return (
+      this.obstacles.get(`${Math.floor(x / 40)},${Math.floor(z / 40)}`) || []
+    ).some((polygon) => inPolygon([x, z], polygon));
+  }
   at(x: number, z: number): WaterSurface | null {
     if (!Number.isFinite(x + z)) return null;
     const [lon, lat] = unproject(x, z);

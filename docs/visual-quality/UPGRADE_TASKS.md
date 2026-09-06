@@ -5,7 +5,7 @@ Approved scope (2026-09-05): finish each stage in order, validate it, then commi
 | Stage | Status | Deliverable |
 | --- | --- | --- |
 | 1 | Complete | [16 fixed-view/driving samples and actual captures](baseline/README.md) |
-| 2 | Pending | Road junctions, continuous markings, curb/sidewalk continuity and asphalt material |
+| 2 | Complete | [Connected pavement, markings, terrain-aligned curbs and tree-row clearance](roads/README.md) |
 | 3 | Pending | Representative building classes, consistent facade dimensions and improved materials |
 | 4 | Pending | Stanley Park Causeway continuity, gradients, approach and roadside structure |
 | 5 | Pending | Second/Third Beach terrain, dry/wet transitions and walking/boat boundaries |
