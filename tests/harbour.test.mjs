@@ -18,6 +18,9 @@ const { HarbourPath, harbourVisible } = await import(
 );
 const { createHarbour, updateHarbour } = await import(cityModule('harbour'));
 const { createLandmarks } = await import(cityModule('landmarks'));
+const { finishLocalMapTransition } = await import(
+  cityModule('local-map-camera')
+);
 const { BoatController } = await import(cityModule('boat-controller'));
 const { addSailingWaves } = await import(cityModule('water-waves'));
 const source = read('lib/city/engine.ts'),
@@ -29,7 +32,9 @@ const methods = cls.members
   .filter(
     (n) =>
       ts.isMethodDeclaration(n) &&
-      ['elevation', 'focusHarbour'].includes(n.name.getText(ast)),
+      ['elevation', 'focusHarbour', 'completeLocalMapTransition'].includes(
+        n.name.getText(ast),
+      ),
   )
   .map((n) => n.getText(ast));
 const methodCode = ts.transpileModule(
@@ -45,8 +50,9 @@ const Methods = new Function(
   'THREE',
   'unproject',
   'updateHarbour',
+  'finishLocalMapTransition',
   methodCode.replace('export class Methods', 'return class Methods'),
-)(THREE, unproject, updateHarbour);
+)(THREE, unproject, updateHarbour, finishLocalMapTransition);
 const data = Object.fromEntries(
   ['land', 'context-land', 'context', 'buildings'].map((n) => [
     n,
@@ -333,11 +339,16 @@ test('regional bank camera stays over water instead of entering terrain', () => 
   const p = project([-123.16742803, 49.32723941]),
     boat = new BoatController(e);
   assert(boat.start({ x: p[0], z: p[1], yaw: -0.01728246, waterId: 'sea' }));
-  boat.update(0, { thrust: 0, turn: 0, neutral: false }, 0, true);
-  assert.equal(
-    e.waterWorld.at(e.camera.position.x, e.camera.position.z)?.id,
-    'sea',
-  );
+  for (const distance of [0, 18, 90]) {
+    for (const lookYaw of [0, Math.PI / 2, -Math.PI / 2]) {
+      boat.lookYaw = lookYaw;
+      boat.update(0, { thrust: 0, turn: 0, neutral: false }, 0, true, distance);
+      assert.equal(
+        e.waterWorld.at(e.camera.position.x, e.camera.position.z)?.id,
+        'sea',
+      );
+    }
+  }
 });
 
 test('full cruise envelope clears rendered pier and grounded landmark footprints along the interpolated route', () => {

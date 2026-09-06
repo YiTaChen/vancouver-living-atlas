@@ -10,6 +10,16 @@ import {
   type TravelMode,
 } from './placement-geometry';
 import { BoatController } from './boat-controller';
+import { makeWalker } from './assets/walker';
+import { GroundSurfaceIndex } from './ground-surface';
+import { makeCockpit } from './assets/cockpits';
+import {
+  firstPerson,
+  TRAVEL_DEFAULT_DISTANCE,
+  zoomTravel,
+  type InteriorView,
+  type TravelView,
+} from './travel-camera';
 export class StreetNavigation {
   mode: 'orbit' | TravelMode = 'orbit';
   keys = new Set<string>();
@@ -23,9 +33,57 @@ export class StreetNavigation {
   last = [0, 0];
   car = new THREE.Group();
   boat: BoatController;
+  cameraDistances = { ...TRAVEL_DEFAULT_DISTANCE };
+  renderedDistance = 0;
+  interiors: Record<'drive' | 'boat', InteriorView> = {
+    drive: 'interior',
+    boat: 'interior',
+  };
+  walker = makeWalker();
+  walkingDistance = 0;
+  cockpits = { drive: makeCockpit('drive'), boat: makeCockpit('boat') };
+  cameraSignature = '';
+  cameraDOMSignature = '';
+  groundSurface: GroundSurfaceIndex | null = null;
+  touches = new Map<number, [number, number]>();
+  blockedPointers = new Set<number>();
+  pinchDistance = 0;
+  wheelQuietUntil = 0;
+  steering = 0;
   collisions = new Map<string, number[][][][]>();
   constructor(public e: CityEngine) {
     this.boat = new BoatController(e);
+    this.walker.group.visible = false;
+    this.walker.group.traverse((object) => {
+      if (object instanceof THREE.Mesh) object.castShadow = false;
+    });
+    // Cheap contact shadow follows the walker without refreshing city shadow maps.
+    for (const [radius, opacity] of [
+      [0.24, 0.14],
+      [0.36, 0.08],
+      [0.5, 0.035],
+    ]) {
+      const shadow = new THREE.Mesh(
+        new THREE.CircleGeometry(radius, 24),
+        new THREE.MeshBasicMaterial({
+          color: 0x15272c,
+          transparent: true,
+          opacity,
+          depthWrite: false,
+        }),
+      );
+      shadow.rotation.x = -Math.PI / 2;
+      shadow.position.y = 0.012 + radius * 0.01;
+      shadow.scale.y = 0.7;
+      this.walker.group.add(shadow);
+    }
+    this.cockpits.drive.visible = this.cockpits.boat.visible = false;
+    e.scene.add(this.walker.group);
+    if (!e.camera.parent) e.scene.add(e.camera);
+    e.camera.add(this.cockpits.drive, this.cockpits.boat);
+    // Keep instruments and the steering wheel above the bottom HUD.
+    for (const cockpit of Object.values(this.cockpits))
+      cockpit.position.set(0, 0.2, -0.22);
     for (const f of [
       ...e.data.buildings.features,
       ...landmarkFootprints.features,
@@ -126,9 +184,14 @@ export class StreetNavigation {
     window.addEventListener('keyup', this.keyUp);
     window.addEventListener('blur', this.blur);
     const canvas = e.renderer.domElement;
-    canvas.addEventListener('pointerdown', this.pointerDown);
-    canvas.addEventListener('pointermove', this.pointerMove);
-    window.addEventListener('pointerup', this.pointerUp);
+    canvas.addEventListener('wheel', this.wheel, {
+      passive: false,
+      capture: true,
+    });
+    canvas.addEventListener('pointerdown', this.pointerDown, true);
+    canvas.addEventListener('pointermove', this.pointerMove, true);
+    window.addEventListener('pointerup', this.pointerUp, true);
+    window.addEventListener('pointercancel', this.pointerUp, true);
   }
   keyDown = (ev: KeyboardEvent) => {
     if (
@@ -200,20 +263,117 @@ export class StreetNavigation {
   blur = () => {
     this.keys.clear();
     this.dragging = false;
+    this.touches.clear();
+    this.pinchDistance = 0;
     this.speed = 0;
     if (this.boat) {
       this.boat.pulse = null;
       this.boat.state.throttle = 0;
     }
   };
+  get cameraDistance() {
+    return this.mode === 'orbit' ? 0 : this.cameraDistances[this.mode];
+  }
+  get cameraView(): TravelView {
+    return {
+      mode: this.mode,
+      perspective:
+        this.mode !== 'orbit' && firstPerson(this.mode, this.renderedDistance)
+          ? 'first'
+          : 'third',
+      interior:
+        this.mode === 'drive' || this.mode === 'boat'
+          ? this.interiors[this.mode]
+          : 'clear',
+    };
+  }
+  notifyCamera() {
+    const view = this.cameraView,
+      signature = JSON.stringify(view);
+    const distance = this.cameraDistance.toFixed(2);
+    const domSignature = signature + distance;
+    if (domSignature !== this.cameraDOMSignature) {
+      const canvas = this.e.renderer.domElement;
+      canvas.setAttribute?.('data-travel-mode', this.mode);
+      canvas.setAttribute?.('data-camera-view', view.perspective);
+      canvas.setAttribute?.('data-camera-distance', distance);
+      this.cameraDOMSignature = domSignature;
+    }
+    if (signature === this.cameraSignature) return;
+    this.cameraSignature = signature;
+    this.e.onTravelView?.(view);
+  }
+  setInterior(view: InteriorView) {
+    if (this.mode !== 'drive' && this.mode !== 'boat') return;
+    this.interiors[this.mode] = view;
+    this.updateCockpit(0, 0);
+    this.notifyCamera();
+  }
+  zoom(factor: number) {
+    if (this.mode === 'orbit') return;
+    const next = zoomTravel(this.cameraDistance, factor);
+    if (next.exit) {
+      this.wheelQuietUntil = performance.now() + 450;
+      this.touches.forEach((_, id) => this.blockedPointers.add(id));
+      this.e.leaveTravelAtLocation();
+      return;
+    }
+    this.cameraDistances[this.mode] = next.distance;
+    this.notifyCamera();
+  }
+  wheel = (ev: WheelEvent) => {
+    if (ev.ctrlKey || ev.metaKey || ev.altKey) return;
+    if (this.mode === 'orbit') {
+      if (performance.now() >= this.wheelQuietUntil) return;
+      // Consume the remainder of the same gesture after switching to Orbit.
+      this.wheelQuietUntil = performance.now() + 180;
+    } else {
+      const pixels =
+        ev.deltaY * (ev.deltaMode === 1 ? 16 : ev.deltaMode === 2 ? 600 : 1);
+      this.zoom(Math.exp(THREE.MathUtils.clamp(pixels * 0.003, -0.7, 0.7)));
+    }
+    ev.preventDefault();
+    ev.stopImmediatePropagation();
+  };
   pointerDown = (ev: PointerEvent) => {
     if (this.mode === 'orbit') return;
     this.e.renderer.domElement.focus({ preventScroll: true });
+    if (ev.pointerType === 'touch') {
+      ev.preventDefault();
+      ev.stopImmediatePropagation();
+      this.e.renderer.domElement.setPointerCapture?.(ev.pointerId);
+      this.touches.set(ev.pointerId, [ev.clientX, ev.clientY]);
+      if (this.touches.size > 1) {
+        const [a, b] = [...this.touches.values()];
+        this.pinchDistance = Math.hypot(a[0] - b[0], a[1] - b[1]);
+        this.dragging = false;
+        return;
+      }
+    }
     this.dragging = true;
     this.last = [ev.clientX, ev.clientY];
   };
   pointerMove = (ev: PointerEvent) => {
-    if (!this.dragging || this.mode === 'orbit') return;
+    if (this.blockedPointers.has(ev.pointerId)) {
+      ev.preventDefault();
+      ev.stopImmediatePropagation();
+      return;
+    }
+    if (this.mode === 'orbit') return;
+    if (this.touches.has(ev.pointerId)) {
+      ev.preventDefault();
+      ev.stopImmediatePropagation();
+      this.touches.set(ev.pointerId, [ev.clientX, ev.clientY]);
+      if (this.touches.size > 1) {
+        const [a, b] = [...this.touches.values()];
+        const distance = Math.hypot(a[0] - b[0], a[1] - b[1]);
+        if (this.pinchDistance > 4 && distance > 4)
+          this.zoom(this.pinchDistance / distance);
+        this.pinchDistance = distance;
+        return;
+      }
+    }
+    if (!this.dragging) return;
     if (this.mode === 'boat')
       this.boat.lookYaw -= (ev.clientX - this.last[0]) * 0.004;
     else this.yaw -= (ev.clientX - this.last[0]) * 0.004;
@@ -224,8 +384,14 @@ export class StreetNavigation {
     );
     this.last = [ev.clientX, ev.clientY];
   };
-  pointerUp = () => {
-    this.dragging = false;
+  pointerUp = (ev: PointerEvent) => {
+    if (this.blockedPointers.delete(ev.pointerId))
+      ev.stopImmediatePropagation();
+    this.touches.delete(ev.pointerId);
+    this.pinchDistance = 0;
+    const remaining = [...this.touches.values()][0];
+    this.dragging = this.mode !== 'orbit' && this.touches.size === 1;
+    if (this.dragging && remaining) this.last = [...remaining];
   };
   blocked(x: number, z: number) {
     if (this.reachableDeck(x, z) !== undefined) return false;
@@ -301,7 +467,13 @@ export class StreetNavigation {
     this.car.visible = mode === 'drive';
     this.e.controls.enabled = mode === 'orbit';
     if (mode === 'orbit') {
+      this.blur();
+      this.walker.group.visible = false;
+      this.cockpits.drive.visible = this.cockpits.boat.visible = false;
+      this.e.camera.fov = 42;
+      this.e.camera.up.set(0, 1, 0);
       this.e.camera.near = 2;
+      this.notifyCamera();
       this.e.camera.updateProjectionMatrix();
       return;
     }
@@ -448,7 +620,19 @@ export class StreetNavigation {
   }
   update(dt: number) {
     if (this.mode === 'orbit') return;
-    dt = Math.min(0.05, dt);
+    dt = Math.max(0, Math.min(0.05, dt));
+    this.renderedDistance = this.snapCamera
+      ? this.cameraDistance
+      : THREE.MathUtils.lerp(
+          this.renderedDistance,
+          this.cameraDistance,
+          1 - Math.exp(-dt * 12),
+        );
+    const before = this.position.clone();
+    this.walker.group.visible =
+      this.mode === 'walk' && this.renderedDistance >= 2;
+    this.car.visible = this.mode === 'drive' && this.renderedDistance > 3.5;
+    this.e.camera.up.set(0, 1, 0);
     const pressed = (...s: string[]) => s.some((k) => this.keys.has(k)),
       forward =
         Number(pressed('w', 'arrowup')) - Number(pressed('s', 'arrowdown')),
@@ -460,10 +644,13 @@ export class StreetNavigation {
         { thrust: forward, turn, neutral: pressed(' ') },
         this.pitch,
         this.snapCamera,
+        this.renderedDistance,
       );
       this.position.copy(this.boat.model.position);
       this.yaw = this.boat.state.yaw;
       this.speed = this.boat.state.speed;
+      this.updateCockpit(dt, turn);
+      this.notifyCamera();
       this.snapCamera = false;
       return;
     }
@@ -484,46 +671,136 @@ export class StreetNavigation {
         Math.cos(this.yaw) * forward * speed * dt,
       );
     }
+    const distance = this.renderedDistance;
     const dir = new THREE.Vector3(Math.sin(this.yaw), 0, Math.cos(this.yaw));
-    if (this.mode === 'walk') {
-      this.e.camera.position
-        .copy(this.position)
-        .add(new THREE.Vector3(0, 1.75, 0));
-      this.e.camera.lookAt(
-        this.position
-          .clone()
-          .addScaledVector(dir, 30)
-          .add(new THREE.Vector3(0, 1.75 - this.pitch * 25, 0)),
-      );
-    } else {
-      this.car.position.copy(this.position);
-      this.car.rotation.y = this.yaw;
-      const pos = this.position
-        .clone()
-        .addScaledVector(dir, -14)
-        .add(new THREE.Vector3(0, 6.3, 0));
-      pos.y = Math.max(pos.y, this.e.elevation(pos.x, pos.z) + 2);
-      if (this.snapCamera) this.e.camera.position.copy(pos);
-      else this.e.camera.position.lerp(pos, 0.16);
-      this.e.camera.lookAt(
-        this.position
-          .clone()
-          .addScaledVector(dir, 7)
-          .add(new THREE.Vector3(0, 1.4 - this.pitch * 10, 0)),
-      );
+    const walked = this.position.distanceTo(before);
+    this.walkingDistance += walked;
+    this.walker.group.position.copy(this.position);
+    if (this.mode === 'walk')
+      this.walker.group.position.y = this.walkingHeight();
+    this.walker.group.rotation.y = this.yaw;
+    if (this.mode === 'walk')
+      this.walker.update(this.walkingDistance, walked > 0.0001);
+    this.car.position.copy(this.position);
+    this.car.rotation.y = this.yaw;
+    const eyeHeight = this.mode === 'walk' ? 1.68 : 1.45;
+    const eye = (
+      this.mode === 'walk' ? this.walker.group.position : this.position
+    )
+      .clone()
+      .add(new THREE.Vector3(0, eyeHeight, 0));
+    const blend = THREE.MathUtils.smoothstep(
+      distance,
+      0,
+      this.mode === 'walk' ? 2 : 5,
+    );
+    const pos = eye.clone().addScaledVector(dir, -distance * blend);
+    pos.y += distance * (this.mode === 'walk' ? 0.28 : 0.35) * blend;
+    // Clip the chase segment at walls/banks; collision checks never move the player.
+    const steps = Math.ceil(distance / 1.5);
+    for (let step = 1; step <= steps; step++) {
+      const t = step / steps;
+      const x = eye.x + (pos.x - eye.x) * t,
+        z = eye.z + (pos.z - eye.z) * t;
+      if (!this.clearGround(x, z) && this.surface !== 'bridge') {
+        pos.x = eye.x + ((pos.x - eye.x) * (step - 1)) / steps;
+        pos.z = eye.z + ((pos.z - eye.z) * (step - 1)) / steps;
+        break;
+      }
     }
+    if (blend > 0.5)
+      pos.y = Math.max(pos.y, this.e.elevation(pos.x, pos.z) + 2);
+    // Distance itself is eased, so the eye remains attached to movement without drift.
+    this.e.camera.position.copy(pos);
+    this.e.camera.lookAt(
+      eye
+        .clone()
+        .addScaledVector(
+          dir,
+          THREE.MathUtils.lerp(
+            25,
+            this.mode === 'walk'
+              ? Math.min(1.5, Math.max(0, distance - 2) * 0.75)
+              : 2,
+            blend,
+          ),
+        )
+        .add(
+          new THREE.Vector3(
+            0,
+            -(this.mode === 'walk' ? 0.5 : 0.25) * blend -
+              this.pitch * (25 - blend * (this.mode === 'walk' ? 20 : 15)),
+            0,
+          ),
+        ),
+    );
     this.e.controls.target.copy(this.position).addScaledVector(dir, 25);
-    this.snapCamera = false;
-    this.e.camera.near = 0.25;
+    this.e.camera.near = 0.08;
+    this.e.camera.fov = THREE.MathUtils.lerp(58, 48, blend);
     this.e.camera.updateProjectionMatrix();
+    this.updateCockpit(dt, turn);
+    this.notifyCamera();
+    this.snapCamera = false;
   }
+  walkingHeight() {
+    if (this.surface === 'bridge') return this.position.y;
+    if (!this.groundSurface) {
+      const meshes: THREE.Mesh[] = [];
+      this.e.scene.traverse((object) => {
+        if (object instanceof THREE.Mesh && object.userData.walkSurface)
+          meshes.push(object);
+      });
+      this.groundSurface = new GroundSurfaceIndex(meshes);
+    }
+    return (
+      (this.groundSurface.sample(
+        this.position.x,
+        this.position.z,
+        this.position.y,
+      ) ?? this.e.elevation(this.position.x, this.position.z)) + 0.02
+    );
+  }
+  updateCockpit(dt: number, turn: number) {
+    this.steering = THREE.MathUtils.lerp(
+      this.steering,
+      turn,
+      1 - Math.exp(-dt * 7),
+    );
+    for (const mode of ['drive', 'boat'] as const) {
+      const cockpit = this.cockpits[mode];
+      cockpit.visible =
+        this.mode === mode &&
+        firstPerson(mode, this.renderedDistance) &&
+        this.interiors[mode] === 'interior';
+      if (!cockpit.visible) continue;
+      const {
+        speedGauge: spec,
+        speedNeedle,
+        steeringWheel,
+        steeringMaxRadians,
+      } = cockpit.userData;
+      const value = Math.abs(this.speed) * spec.metresPerSecondMultiplier;
+      speedNeedle.rotation.z = THREE.MathUtils.lerp(
+        spec.startAngle,
+        spec.endAngle,
+        Math.min(1, value / spec.maxSpeed),
+      );
+      steeringWheel.rotation.z = -this.steering * steeringMaxRadians;
+    }
+  }
+
   destroy() {
     window.removeEventListener('keydown', this.keyDown);
     window.removeEventListener('keyup', this.keyUp);
     window.removeEventListener('blur', this.blur);
     const c = this.e.renderer.domElement;
-    c.removeEventListener('pointerdown', this.pointerDown);
-    c.removeEventListener('pointermove', this.pointerMove);
-    window.removeEventListener('pointerup', this.pointerUp);
+    c.removeEventListener('wheel', this.wheel, true);
+    c.removeEventListener('pointerdown', this.pointerDown, true);
+    c.removeEventListener('pointermove', this.pointerMove, true);
+    window.removeEventListener('pointerup', this.pointerUp, true);
+    window.removeEventListener('pointercancel', this.pointerUp, true);
+    this.touches.clear();
+    this.blockedPointers.clear();
+    this.groundSurface = null;
   }
 }

@@ -1,3 +1,5 @@
+import { enterLocalMap, finishLocalMapTransition } from './local-map-camera';
+import type { TravelView } from './travel-camera';
 import * as THREE from 'three';
 import { LocalMinimap, minimapPose, minimapWorldPoint } from './minimap';
 import { replacedBuilding } from './replaced-buildings';
@@ -109,6 +111,9 @@ export class CityEngine {
   fpsAt = 0;
   frames = 0;
   transition: null | {
+    localMap?: boolean;
+    fromQuaternion?: THREE.Quaternion;
+    toQuaternion?: THREE.Quaternion;
     start: number;
     duration: number;
     from: THREE.Vector3;
@@ -116,6 +121,8 @@ export class CityEngine {
     fromTarget: THREE.Vector3;
     toTarget: THREE.Vector3;
   } = null;
+  onLocalOrbit: () => void = () => {};
+  onTravelView: (view: TravelView) => void = () => {};
   onStats: (s: SceneStats) => void;
   onReady: () => void;
   onError: (s: string) => void;
@@ -424,6 +431,7 @@ export class CityEngine {
           ? object.material
           : [object.material];
         if (
+          object.userData.excludeFromSSAO ||
           object.userData.alphaFoliage ||
           object.userData.railVehicle ||
           object.userData.harbourVehicle ||
@@ -444,7 +452,8 @@ export class CityEngine {
             : [object.material];
           return (
             object.visible &&
-            (object.userData.alphaFoliage ||
+            (object.userData.excludeFromSSAO ||
+              object.userData.alphaFoliage ||
               materials.every((m) => m.transparent && !m.depthWrite))
           );
         });
@@ -615,6 +624,7 @@ export class CityEngine {
       new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 1 }),
     );
     mesh.receiveShadow = true;
+    mesh.userData.walkSurface = true;
     this.terrain.add(mesh);
   }
   polygonMesh(poly: number[][][], color: number, offset = 0.5) {
@@ -658,6 +668,7 @@ export class CityEngine {
       }),
     );
     m.receiveShadow = true;
+    m.userData.walkSurface = true;
     this.terrain.add(m);
     return m;
   }
@@ -991,6 +1002,7 @@ export class CityEngine {
         }
         const mesh = new THREE.Mesh(geometry, this.roadMaterials.get(kind));
         mesh.receiveShadow = true;
+        mesh.userData.walkSurface = true;
         this.roads.add(mesh);
       }
     }
@@ -1002,6 +1014,7 @@ export class CityEngine {
     this.fly(v, animate);
   }
   fly(v: Viewpoint, animate = true) {
+    this.completeLocalMapTransition();
     const distance =
         v.distance *
         (v.distance >= 7800
@@ -1035,7 +1048,21 @@ export class CityEngine {
       this.controls.update();
     }
   }
+  completeLocalMapTransition() {
+    finishLocalMapTransition(this);
+  }
+  leaveTravelAtLocation() {
+    if (!enterLocalMap(this)) return;
+    this.onLocalOrbit();
+  }
   zoom(f: number) {
+    if (this.navigation && this.navigation.mode !== 'orbit') {
+      this.navigation.zoom(f);
+      return;
+    }
+    if (!Number.isFinite(f) || f <= 0) return;
+    this.completeLocalMapTransition();
+    this.transition = null;
     this.camera.position
       .sub(this.controls.target)
       .multiplyScalar(f)
@@ -1043,6 +1070,7 @@ export class CityEngine {
     this.controls.update();
   }
   focusTrain(kind: TrainKind) {
+    this.completeLocalMapTransition();
     const train = this.railway?.trains.find((t) => t.kind === kind);
     if (!train) return;
     this.placement?.cancel();
@@ -1082,6 +1110,7 @@ export class CityEngine {
     };
   }
   focusHarbour(kind: HarbourKind) {
+    this.completeLocalMapTransition();
     const actor = this.harbour?.actors.find((a) => a.kind === kind);
     if (!actor) return;
     if (actor.offRoute) {
@@ -1213,7 +1242,15 @@ export class CityEngine {
         this.transition.toTarget,
         u,
       );
+      if (this.transition.fromQuaternion && this.transition.toQuaternion)
+        this.camera.quaternion.slerpQuaternions(
+          this.transition.fromQuaternion,
+          this.transition.toQuaternion,
+          u,
+        );
+      else this.camera.lookAt(this.controls.target);
       if (t === 1) {
+        if (this.transition.localMap) this.controls.enabled = true;
         this.transition = null;
         this.renderer.shadowMap.needsUpdate = true;
       }
@@ -1232,12 +1269,14 @@ export class CityEngine {
         this.harbour,
         this.lastTime ? (time - this.lastTime) / 1000 : 0,
       );
-    if (this.settings.mode === 'orbit') this.controls.update();
-    else this.navigation?.update((time - this.lastTime) / 1000);
+    if (this.settings.mode === 'orbit') {
+      if (!this.transition) this.controls.update();
+    } else this.navigation?.update((time - this.lastTime) / 1000);
     this.sailingWaves?.update();
     this.minimap?.draw(time);
     if (
       this.settings.mode === 'orbit' &&
+      !this.transition?.localMap &&
       this.onLand(this.camera.position.x, this.camera.position.z)
     )
       this.camera.position.y = Math.max(

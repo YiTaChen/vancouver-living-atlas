@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, writeFileSync } from 'node:fs';
 import ts from 'typescript';
 import * as THREE from 'three';
+import { cityModule } from './helpers/city-modules.mjs';
 const read = (p) => readFileSync(new URL(p, import.meta.url), 'utf8');
 const encode = (code) =>
   'data:text/javascript;base64,' + Buffer.from(code).toString('base64');
@@ -48,16 +49,19 @@ const methods = engineClass.members
   .filter(
     (n) =>
       ts.isMethodDeclaration(n) &&
-      ['elevation', 'focusTrain'].includes(n.name.getText(ast)),
+      ['elevation', 'focusTrain', 'completeLocalMapTransition'].includes(
+        n.name.getText(ast),
+      ),
   )
   .map((n) => n.getText(ast));
 const { EngineMethods } = await import(
   compile(
-    `import * as THREE from 'three';import {unproject} from './geo';import {updateRailway} from './railway';export class EngineMethods {${methods.join('\n')}}`,
+    `import * as THREE from 'three';import {unproject} from './geo';import {updateRailway} from './railway';import {finishLocalMapTransition} from './local-map-camera';export class EngineMethods {${methods.join('\n')}}`,
     {
       three: import.meta.resolve('three'),
       './geo': geoUrl,
       './railway': railUrl,
+      './local-map-camera': cityModule('local-map-camera'),
     },
   )
 );

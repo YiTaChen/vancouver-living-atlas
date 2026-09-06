@@ -106,6 +106,7 @@ export function createNature(e: CityEngine) {
       }),
     );
     mesh.receiveShadow = true;
+    mesh.userData.walkSurface = true;
     e.terrain.add(mesh);
   }
   // Trails are geographic source lines. Merge their geometry to keep draw calls low.
@@ -133,6 +134,7 @@ export function createNature(e: CityEngine) {
           roughness: 1,
         }),
       );
+    m.userData.walkSurface = true;
     e.roads.add(m);
     pathGeos.forEach((g) => g.dispose());
   }

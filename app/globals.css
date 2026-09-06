@@ -1006,6 +1006,66 @@ a {
   padding: 18px;
   border-radius: 14px;
 }
+.travel-camera-card {
+  position: absolute;
+  z-index: 12;
+  top: 104px;
+  right: 94px;
+  width: 242px;
+  padding: 13px;
+  border-radius: 12px;
+  color: #dce6d7;
+}
+.travel-camera-card > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+.travel-camera-card strong {
+  font-weight: 500;
+}
+.travel-camera-card p {
+  margin: 8px 0 0;
+  color: #a5c0bd;
+  font-size: 11px;
+  line-height: 1.5;
+}
+.interior-options {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+}
+.interior-options button {
+  flex: 1;
+  border-radius: 6px;
+  border: 1px solid #ffffff25;
+  padding: 8px 4px;
+  font-size: 12px;
+}
+.interior-options button[aria-pressed='true'] {
+  background: #dce7a2;
+  border-color: #dce7a2;
+  color: #142d36;
+}
+@media (max-width: 900px) {
+  .travel-camera-card {
+    top: 158px;
+    right: 90px;
+    width: 218px;
+  }
+}
+@media (max-width: 640px) {
+  .travel-camera-card {
+    top: 134px;
+    right: 72px;
+    width: 206px;
+    padding: 10px;
+  }
+  .travel-camera-card p {
+    font-size: 10px;
+  }
+}
 .street-mode .street-controls {
   display: block;
 }
@@ -1876,4 +1936,49 @@ a {
   font-size: 10px;
   color: #a5bbb9;
   font-variant-numeric: tabular-nums;
+}
+
+/* Stack travel view choices above the local map on narrow screens. */
+@media (max-width: 640px) {
+  .travel-camera-card {
+    width: 220px;
+    padding: 8px;
+  }
+  .travel-camera-card:has(.interior-options) > div:first-child {
+    display: none;
+  }
+  .travel-camera-card .interior-options {
+    margin-top: 0;
+  }
+  .travel-camera-card .interior-options button {
+    padding: 7px 4px;
+  }
+  .street-mode:not(.placement-mode):not(.clean) .map-inset {
+    top: 218px;
+  }
+  .street-mode:has(.interior-options):not(.placement-mode):not(.clean)
+    .map-inset {
+    top: 190px;
+  }
+  .street-mode .map-inset canvas {
+    aspect-ratio: 14 / 8;
+  }
+}
+@media (max-width: 640px) and (max-height: 650px) {
+  .travel-camera-card p {
+    display: none;
+  }
+  .street-mode:not(.placement-mode):not(.clean) .map-inset {
+    top: 182px;
+  }
+  .street-mode .map-inset canvas {
+    aspect-ratio: 14 / 6;
+  }
+}
+@media (min-width: 641px) and (max-height: 540px) {
+  .travel-camera-card {
+    top: 174px;
+    right: 278px;
+    width: 220px;
+  }
 }

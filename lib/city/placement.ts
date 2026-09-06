@@ -115,6 +115,7 @@ export class MapPlacement {
     e.controls.addEventListener('change', this.queue);
   }
   begin(mode: TravelMode) {
+    this.e.completeLocalMapTransition?.();
     const wasStreet = this.e.navigation!.mode !== 'orbit';
     const start = this.e.navigation!.position.clone();
     if (!this.mode) this.savedDamping = this.e.controls.enableDamping;

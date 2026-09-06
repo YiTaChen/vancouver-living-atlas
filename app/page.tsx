@@ -67,6 +67,7 @@ import {
   type MessageKey,
 } from '@/lib/i18n';
 import type { CityEngine } from '@/lib/city/engine';
+import type { TravelView } from '@/lib/city/travel-camera';
 import {
   DEFAULT_MINIMAP_SPAN,
   MINIMAP_SPANS,
@@ -126,6 +127,12 @@ export default function Home() {
     [tour, setTour] = useState(false),
     [clean, setClean] = useState(false),
     [notice, setNotice] = useState('');
+  const [localOrbit, setLocalOrbit] = useState(false);
+  const [travelView, setTravelView] = useState<TravelView>({
+    mode: 'orbit',
+    perspective: 'third',
+    interior: 'interior',
+  });
   const [placing, setPlacing] = useState<TravelMode | null>(null);
   const [placementPreview, setPlacementPreview] =
     useState<PlacementPreview | null>(null);
@@ -152,6 +159,7 @@ export default function Home() {
     settingsRef = useRef(settings);
   settingsRef.current = settings;
   const go = useCallback((id: string) => {
+    setLocalOrbit(false);
     setView(id);
     setSettings((s) => ({ ...s, mode: 'orbit' }));
     engine.current?.flyTo(id);
@@ -185,6 +193,22 @@ export default function Home() {
       engine.current?.destroy();
     };
   }, [go]);
+  useEffect(() => {
+    const city = engine.current;
+    if (!ready || !city) return;
+    city.onTravelView = setTravelView;
+    if (city.navigation) setTravelView(city.navigation.cameraView);
+    city.onLocalOrbit = () => {
+      setTour(false);
+      setPlacing(null);
+      setLocalOrbit(true);
+      setSettings((s) => ({ ...s, mode: 'orbit', autoRotate: false }));
+    };
+    return () => {
+      city.onTravelView = () => {};
+      city.onLocalOrbit = () => {};
+    };
+  }, [ready]);
   useEffect(() => {
     if (ready) engine.current?.setMinimapSpan(minimapSpan);
   }, [ready, minimapSpan]);
@@ -274,7 +298,8 @@ export default function Home() {
         setClean(false);
         setPanel(null);
         setTour(false);
-        if (settingsRef.current.mode !== 'orbit') go('overview');
+        if (settingsRef.current.mode !== 'orbit')
+          engine.current?.leaveTravelAtLocation();
       }
     };
     window.addEventListener('keydown', key);
@@ -359,6 +384,7 @@ export default function Home() {
     if (!ready) return;
     setTour(false);
     setPanel(null);
+    setLocalOrbit(false);
     setView(kind === 'steam' ? 'railway' : 'skytrain');
     change({ mode: 'orbit', autoRotate: false, trains: true });
     engine.current?.focusTrain(kind);
@@ -367,6 +393,7 @@ export default function Home() {
     if (!ready) return;
     setTour(false);
     setPanel(null);
+    setLocalOrbit(false);
     setView('harbour');
     change({ mode: 'orbit', autoRotate: false, harbour: true });
     engine.current?.focusHarbour(kind);
@@ -413,7 +440,7 @@ export default function Home() {
       setTour(false);
       engine.current?.placement?.cancel();
       change({ mode: 'orbit', autoRotate: false });
-      go(view);
+      engine.current?.leaveTravelAtLocation();
     } else if (!switchInScene(mode as TravelMode))
       beginPlacement(mode as TravelMode);
   };
@@ -470,6 +497,50 @@ export default function Home() {
       className={`atlas ${clean ? 'clean' : ''} ${settings.mode !== 'orbit' ? 'street-mode' : ''} ${placing ? 'placement-mode' : ''}`}
     >
       <div className="scene" ref={host} />
+      {ready && settings.mode !== 'orbit' && (
+        <aside
+          className="travel-camera-card glass ui-chrome"
+          aria-label={tr('travelCamera')}
+          data-perspective={travelView.perspective}
+        >
+          <div>
+            <Camera size={15} />
+            <strong>
+              {tr(
+                travelView.perspective === 'first'
+                  ? 'firstPersonView'
+                  : 'thirdPersonView',
+              )}
+            </strong>
+          </div>
+          {(settings.mode === 'drive' || settings.mode === 'boat') &&
+          travelView.perspective === 'first' ? (
+            <div
+              className="interior-options"
+              role="group"
+              aria-label={tr('vehicleView')}
+            >
+              {(['interior', 'clear'] as const).map((style) => (
+                <button
+                  key={style}
+                  aria-pressed={travelView.interior === style}
+                  onClick={() => engine.current?.navigation?.setInterior(style)}
+                >
+                  {tr(style === 'interior' ? 'interiorView' : 'clearView')}
+                </button>
+              ))}
+            </div>
+          ) : (
+            <p>
+              {tr(
+                settings.mode === 'walk'
+                  ? 'walkCameraHint'
+                  : 'vehicleCameraHint',
+              )}
+            </p>
+          )}
+        </aside>
+      )}
       <div
         className={`map-labels ${!settings.labels || clean ? 'hide-labels' : ''}`}
         ref={labelHost}
@@ -751,8 +822,8 @@ export default function Home() {
           {VIEWS.map((v, i) => (
             <button
               key={v.id}
-              aria-pressed={view === v.id}
-              className={`view-button ${view === v.id ? 'selected' : ''}`}
+              aria-pressed={!localOrbit && view === v.id}
+              className={`view-button ${!localOrbit && view === v.id ? 'selected' : ''}`}
               onClick={() => selectView(v.id)}
             >
               <span className="view-number">
@@ -787,7 +858,7 @@ export default function Home() {
           title={tr('zoomIn')}
           aria-label={tr('zoomIn')}
           onClick={() => engine.current?.zoom(0.75)}
-          disabled={settings.mode !== 'orbit'}
+          disabled={!ready}
         >
           <Plus size={20} />
         </button>
@@ -795,7 +866,7 @@ export default function Home() {
           title={tr('zoomOut')}
           aria-label={tr('zoomOut')}
           onClick={() => engine.current?.zoom(1.33)}
-          disabled={settings.mode !== 'orbit'}
+          disabled={!ready}
         >
           <Minus size={20} />
         </button>
@@ -1279,6 +1350,8 @@ export default function Home() {
                 ? tr('brakeHelp')
                 : tr('speedHelp')}{' '}
             · {tr('lookHelp')}
+            <br />
+            {tr('travelZoomHelp')}
           </p>
           {settings.mode === 'boat' && (
             <button className="boat-neutral" {...helmControl('neutral')}>
@@ -1306,18 +1379,27 @@ export default function Home() {
       )}
       <div className="view-caption ui-chrome">
         <span>
-          {viewText(locale, current.id, 'tag')} /{' '}
-          {String(VIEWS.indexOf(current) + 1).padStart(2, '0')}
+          {localOrbit
+            ? tr('yourLocation')
+            : `${viewText(locale, current.id, 'tag')} / ${String(VIEWS.indexOf(current) + 1).padStart(2, '0')}`}
         </span>
-        <h2>{viewText(locale, current.id, 'name')}</h2>
-        <p>{viewText(locale, current.id, 'description')}</p>
+        <h2>
+          {localOrbit ? tr('localView') : viewText(locale, current.id, 'name')}
+        </h2>
+        <p>
+          {localOrbit
+            ? tr('localViewDescription')
+            : viewText(locale, current.id, 'description')}
+        </p>
       </div>
       <footer className="bottom-bar glass ui-chrome">
         <div>
           <MapPin size={15} />
           <b>
             {settings.mode === 'orbit'
-              ? viewText(locale, current.id, 'name')
+              ? localOrbit
+                ? tr('localView')
+                : viewText(locale, current.id, 'name')
               : settings.mode === 'walk'
                 ? tr('streetWalk')
                 : settings.mode === 'boat'

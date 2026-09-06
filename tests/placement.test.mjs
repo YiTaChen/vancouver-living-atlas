@@ -383,6 +383,10 @@ const { StreetNavigation } = await import(
     './bridges': bridgeUrl,
     './placement-geometry': geometryUrl,
     './boat-controller': cityModule('boat-controller'),
+    './travel-camera': cityModule('travel-camera'),
+    './assets/walker': cityModule('assets/walker'),
+    './ground-surface': cityModule('ground-surface'),
+    './assets/cockpits': cityModule('assets/cockpits'),
     './landmark-footprints.json': landmarkUrl,
   })
 );
@@ -919,4 +923,178 @@ test('pointer and keyboard mode selection share in-place switching while Boat an
       } else if (entry === 'pointer')
         assert.deepEqual(calls, ['place', 'capture', 'drag']);
     }
+});
+
+const { enterLocalMap, finishLocalMapTransition } = await import(
+  cityModule('local-map-camera')
+);
+const cameraPoint = (surface = 'ground') => ({
+  x: 7.13,
+  y: surface === 'bridge' ? 60 : surface === 'water' ? 45 : 2.45,
+  z: 6.91,
+  yaw: 0.63,
+  surface,
+  waterId: 'lake',
+});
+function settleCamera(nav) {
+  for (let i = 0; i < 100; i++) nav.update(1 / 60);
+}
+
+test('walking zoom reveals an animated person without changing position, and each street mode remembers its camera', () => {
+  const { nav, e } = navigationFixture();
+  nav.startAt('walk', cameraPoint());
+  assert.equal(nav.walker.group.visible, false);
+  const pose = nav.position.toArray(),
+    yaw = nav.yaw;
+  nav.zoom(4);
+  settleCamera(nav);
+  assert(nav.walker.group.visible);
+  assert.deepEqual(nav.walker.group.position.toArray(), [
+    pose[0],
+    e.elevation(pose[0], pose[2]) + 0.02,
+    pose[2],
+  ]);
+  assert.deepEqual(nav.position.toArray(), pose);
+  assert.equal(nav.yaw, yaw);
+  nav.hold('forward', true);
+  const moved = nav.position.clone();
+  nav.update(0.05);
+  assert(nav.position.distanceTo(moved) > 0);
+  assert(nav.walkingDistance > 0);
+  nav.hold('forward', false);
+  nav.switchStreetMode('drive');
+  assert.equal(nav.cameraDistance, 14);
+  nav.zoom(0.2);
+  settleCamera(nav);
+  assert.equal(nav.car.visible, false);
+  assert(nav.cockpits.drive.visible);
+  nav.setInterior('clear');
+  assert.equal(nav.cockpits.drive.visible, false);
+  assert.equal(e.controls.enabled, false);
+  nav.switchStreetMode('walk');
+  assert.equal(nav.cameraDistance, 6);
+  assert(nav.walker.group.visible);
+  nav.destroy();
+});
+
+test('zoom and interior toggles retain active input, speed, yaw and the boat helm', () => {
+  for (const mode of ['drive', 'boat']) {
+    const { nav, e } = navigationFixture();
+    e.waterWorld = {
+      canOccupy: () => true,
+      at: () => ({ id: 'lake', kind: 'lake', level: 45 }),
+    };
+    nav.startAt(mode, cameraPoint(mode === 'boat' ? 'water' : 'ground'));
+    nav.hold('forward', true);
+    nav.speed = 4;
+    nav.boat.state.speed = 4;
+    nav.boat.state.throttle = 0.6;
+    const position = nav.position.toArray(),
+      yaw = nav.yaw;
+    nav.zoom(0.15);
+    nav.setInterior('clear');
+    assert.deepEqual(nav.position.toArray(), position);
+    assert.equal(nav.yaw, yaw);
+    assert.equal(nav.speed, 4);
+    assert.equal(nav.boat.state.speed, 4);
+    assert.equal(nav.boat.state.throttle, 0.6);
+    assert(nav.keys.has('w'));
+    nav.update(0.05);
+    assert(nav.position.distanceTo(new THREE.Vector3(...position)) > 0);
+    nav.hold('forward', false);
+    settleCamera(nav);
+    assert.equal(nav.cameraView.perspective, 'first');
+    assert.equal((mode === 'boat' ? nav.boat.model : nav.car).visible, false);
+    nav.setInterior('interior');
+    assert(nav.cockpits[mode].visible);
+    nav.destroy();
+  }
+});
+
+test('far zoom exits once at the exact ground, bridge or elevated lake position without selecting a distant viewpoint', () => {
+  for (const [mode, surface] of [
+    ['walk', 'ground'],
+    ['drive', 'bridge'],
+    ['boat', 'water'],
+  ]) {
+    const { nav, e } = navigationFixture();
+    e.waterWorld = {
+      canOccupy: () => true,
+      at: () => ({ id: 'lake', kind: 'lake', level: 45 }),
+    };
+    e.renderer.shadowMap = { needsUpdate: false };
+    let exits = 0;
+    e.leaveTravelAtLocation = () => {
+      if (enterLocalMap(e)) exits++;
+    };
+    nav.startAt(mode, cameraPoint(surface));
+    e.settings = { mode, quality: 'ultra', autoRotate: true };
+    const position = nav.position.clone();
+    nav.hold('forward', true);
+    nav.zoom(100);
+    assert.equal(exits, 1);
+    assert.equal(nav.mode, 'orbit');
+    assert.equal(e.settings.mode, 'orbit');
+    assert.equal(e.settings.quality, 'ultra');
+    assert.equal(e.controls.enabled, false);
+    assert.equal(e.controls.autoRotate, false);
+    assert.deepEqual(e.controls.target.toArray(), position.toArray());
+    assert.deepEqual(e.transition.toTarget.toArray(), position.toArray());
+    assert(Math.abs(e.transition.to.distanceTo(position) - 200) < 1e-8);
+    assert.equal(e.camera.fov, 42);
+    assert.equal(nav.keys.size, 0);
+    assert(
+      !nav.car.visible && !nav.walker.group.visible && !nav.boat.model.visible,
+    );
+    assert(!nav.cockpits.drive.visible && !nav.cockpits.boat.visible);
+    const wheel = new Event('wheel', { cancelable: true });
+    Object.defineProperty(wheel, 'deltaY', { value: 400 });
+    nav.wheel(wheel);
+    assert(wheel.defaultPrevented, 'remaining wheel inertia is consumed');
+    assert.equal(exits, 1);
+    nav.zoom(1.3);
+    assert.equal(exits, 1);
+    finishLocalMapTransition(e);
+    assert.equal(e.controls.enabled, true);
+    assert.equal(e.transition, null);
+    assert(Math.abs(e.camera.position.distanceTo(position) - 200) < 1e-8);
+    nav.destroy();
+  }
+});
+
+test('two-finger zoom never turns or moves the player and consumes the remaining pointer after exit', () => {
+  const { nav, e } = navigationFixture();
+  e.renderer.shadowMap = { needsUpdate: false };
+  e.leaveTravelAtLocation = () => enterLocalMap(e);
+  nav.startAt('walk', cameraPoint());
+  const touch = (id, x) => ({
+    pointerId: id,
+    pointerType: 'touch',
+    clientX: x,
+    clientY: 0,
+    preventDefault() {},
+    stopImmediatePropagation() {
+      this.stopped = true;
+    },
+  });
+  const position = nav.position.toArray(),
+    yaw = nav.yaw;
+  nav.pointerDown(touch(1, 0));
+  nav.pointerDown(touch(2, 100));
+  nav.pointerMove(touch(2, 50));
+  assert.equal(nav.cameraDistance, 2);
+  assert.equal(nav.yaw, yaw);
+  assert.deepEqual(nav.position.toArray(), position);
+  nav.cameraDistances.walk = 90;
+  nav.pointerMove(touch(2, 10));
+  assert.equal(nav.mode, 'orbit');
+  const remainder = touch(1, 30);
+  nav.pointerMove(remainder);
+  assert(remainder.stopped);
+  nav.pointerUp(touch(1, 30));
+  nav.pointerUp(touch(2, 10));
+  assert.equal(nav.blockedPointers.size, 0);
+  assert.equal(nav.touches.size, 0);
+  assert.equal(nav.dragging, false);
+  nav.destroy();
 });

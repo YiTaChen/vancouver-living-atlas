@@ -43,7 +43,13 @@ export class BoatController {
     this.model.visible = this.wake.visible = false;
     this.pulse = null;
   }
-  update(dt: number, input: BoatInput, pitch: number, snap: boolean) {
+  update(
+    dt: number,
+    input: BoatInput,
+    pitch: number,
+    snap: boolean,
+    distance = 18,
+  ) {
     dt = Math.max(0, Math.min(0.1, dt));
     this.time += dt;
     if (this.pulse) {
@@ -90,28 +96,31 @@ export class BoatController {
       0.38,
       Math.abs(s.speed) * 0.055,
     );
+    this.model.visible = distance > 3.5;
+    const blend = THREE.MathUtils.smoothstep(distance, 0, 5);
     const yaw = s.yaw + this.lookYaw,
       dir = new THREE.Vector3(Math.sin(yaw), 0, Math.cos(yaw));
     const pos = this.model.position
       .clone()
-      .addScaledVector(dir, -18)
-      .add(new THREE.Vector3(0, 7 + pitch * 8, 0));
+      .addScaledVector(dir, -distance * blend)
+      .add(new THREE.Vector3(0, 2.05 + distance * 0.275 * blend, 0));
     // Keep every point of the chase line over the same water body. This also
     // works along the regional shoreline, whose heights differ from core DEM.
     const origin = this.model.position,
       desired = pos.clone();
-    for (let step = 1; step <= 9; step++) {
-      const t = step / 9,
+    const steps = Math.max(1, Math.ceil(distance / 2));
+    for (let step = 1; step <= steps; step++) {
+      const t = step / steps,
         x = origin.x + (desired.x - origin.x) * t,
         z = origin.z + (desired.z - origin.z) * t;
       if (!this.e.waterWorld.canOccupy(x, z, 0, surface.id, 0, 0.4)) {
-        const safe = (step - 1) / 9;
+        const safe = (step - 1) / steps;
         pos.x = origin.x + (desired.x - origin.x) * safe;
         pos.z = origin.z + (desired.z - origin.z) * safe;
         break;
       }
     }
-    if (snap) this.e.camera.position.copy(pos);
+    if (snap || blend < 0.5) this.e.camera.position.copy(pos);
     else {
       const next = this.e.camera.position
         .clone()
@@ -122,11 +131,25 @@ export class BoatController {
     }
     const target = this.model.position
       .clone()
-      .addScaledVector(dir, 6)
-      .add(new THREE.Vector3(0, 1.2, 0));
+      .addScaledVector(dir, 25 - blend * 19)
+      .add(
+        new THREE.Vector3(
+          0,
+          2.05 - blend * 0.85 - pitch * (25 - blend * 15),
+          0,
+        ),
+      );
+    this.e.camera.up.set(0, 1, 0);
+    if (blend < 1) {
+      const deckUp = new THREE.Vector3(0, 1, 0).applyQuaternion(
+        this.model.quaternion,
+      );
+      this.e.camera.up.lerp(deckUp, (1 - blend) * 0.55).normalize();
+    }
     this.e.camera.lookAt(target);
     this.e.controls.target.copy(target);
-    this.e.camera.near = 0.15;
+    this.e.camera.near = 0.08;
+    this.e.camera.fov = THREE.MathUtils.lerp(58, 48, blend);
     this.e.camera.updateProjectionMatrix();
   }
 }
