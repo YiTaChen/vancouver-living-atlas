@@ -7,7 +7,7 @@ export interface ClockState {
 export const CLOCK_RATES = [1, 10, 30, 60, 120, 300] as const;
 export const DEFAULT_CLOCK: Readonly<ClockState> = {
   hour: 16,
-  rate: 30,
+  rate: 300,
   running: true,
 };
 

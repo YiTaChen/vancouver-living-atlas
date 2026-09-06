@@ -18,14 +18,14 @@ const { CityClock, DEFAULT_CLOCK, CLOCK_RATES, formatClock, sunAngle } =
   );
 const near = (a, b) => assert(Math.abs(a - b) < 1e-8, `${a} differs from ${b}`);
 
-test('clock starts running at the slow default rate and advances independently of frame rate', () => {
+test('clock starts running at the 300x default rate and advances independently of frame rate', () => {
   assert.equal(DEFAULT_CLOCK.running, true);
-  assert.equal(DEFAULT_CLOCK.rate, 30);
+  assert.equal(DEFAULT_CLOCK.rate, 300);
   for (const frames of [1, 30, 60, 120]) {
     const clock = new CityClock();
     clock.tick(0);
     for (let n = 1; n <= frames; n++) clock.tick((60_000 * n) / frames);
-    near(clock.hour, 16.5);
+    near(clock.hour, 21);
   }
 });
 test('all offered speeds work and midnight wraps into the following day', () => {
@@ -41,7 +41,7 @@ test('all offered speeds work and midnight wraps into the following day', () => 
   near(clock.hour, 23.9);
 });
 test('fixing time stops only the clock and resuming does not catch up paused time', () => {
-  const clock = new CityClock();
+  const clock = new CityClock({ rate: 30 });
   clock.tick(0);
   clock.configure({ running: false }, 60_000);
   near(clock.hour, 16.5);
@@ -53,7 +53,7 @@ test('fixing time stops only the clock and resuming does not catch up paused tim
   near(clock.hour, 17);
 });
 test('rate changes and manual seeks preserve unrelated clock settings without resetting to 16:00', () => {
-  const clock = new CityClock();
+  const clock = new CityClock({ rate: 30 });
   clock.tick(0);
   clock.configure({ rate: 60 }, 60_000);
   near(clock.hour, 16.5);
@@ -71,7 +71,7 @@ test('rate changes and manual seeks preserve unrelated clock settings without re
   near(clock.hour, 0);
 });
 test('hidden tabs suspend scene time and return without a time jump', () => {
-  const clock = new CityClock();
+  const clock = new CityClock({ rate: 30 });
   clock.tick(0);
   clock.setVisible(false, 30_000);
   near(clock.hour, 16.25);
@@ -110,7 +110,7 @@ test('clock readouts use actual minutes and solar lighting is continuous across 
 });
 
 test('out-of-order frame timestamps cannot double-count elapsed time', () => {
-  const clock = new CityClock();
+  const clock = new CityClock({ rate: 30 });
   clock.tick(1000);
   clock.tick(500);
   clock.tick(2000);
@@ -156,7 +156,7 @@ const THREE = await import('three');
 function engineFixture() {
   const calls = { resize: 0, mode: 0, stats: [] };
   const e = Object.assign(new EngineMethods(), {
-    clock: new CityClock(),
+    clock: new CityClock({ rate: 30 }),
     settings: {
       mode: 'orbit',
       trees: true,
