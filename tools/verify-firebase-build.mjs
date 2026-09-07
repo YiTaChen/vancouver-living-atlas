@@ -34,7 +34,17 @@ assert(
   !scripts.includes('LOCAL VISUAL QA'),
   'Instrumented QA builds must never be deployed',
 );
-for (const language of ['Français', 'Español', 'zh-Hant', 'zh-Hans'])
+for (const language of [
+  'Français',
+  'Español',
+  'zh-Hant',
+  'zh-Hans',
+  'Deutsch',
+  '日本語',
+  '한국어',
+  'Українська',
+  'Русский',
+])
   assert(
     scripts.includes(language),
     `Missing language in client bundle: ${language}`,
@@ -46,6 +56,6 @@ assert(
   'Only public assets may be hosted',
 );
 console.log(
-  'Firebase static build verified: English HTML, five-language UI and geographic assets.',
+  'Firebase static build verified: English HTML, ten-language UI and geographic assets.',
 );
 await verifyLandmarkWorker(root);

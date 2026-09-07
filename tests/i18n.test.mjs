@@ -3,7 +3,18 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import ts from 'typescript';
 
-const locales = ['en', 'fr', 'es', 'zh-Hant', 'zh-Hans'];
+const locales = [
+  'en',
+  'fr',
+  'es',
+  'zh-Hant',
+  'zh-Hans',
+  'de',
+  'ja',
+  'ko',
+  'uk',
+  'ru',
+];
 const catalogs = Object.fromEntries(
   locales.map((id) => [
     id,
@@ -33,7 +44,7 @@ const i18n = await import(
   `data:text/javascript;base64,${Buffer.from(module).toString('base64')}`
 );
 
-test('all five languages cover every visible message and preserve substitutions', () => {
+test('all ten languages cover every visible message and preserve substitutions', () => {
   const keys = Object.keys(catalogs.en).sort();
   for (const locale of locales) {
     assert.deepEqual(Object.keys(catalogs[locale]).sort(), keys, locale);
@@ -51,7 +62,7 @@ test('all five languages cover every visible message and preserve substitutions'
 
 test('first visits and invalid saved preferences use English, valid choices persist', () => {
   assert.equal(i18n.DEFAULT_LOCALE, 'en');
-  for (const value of [null, undefined, '', 'de', 'zh', 42])
+  for (const value of [null, undefined, '', 'xx', 'zh', 'ua', 42])
     assert.equal(i18n.resolveLocale(value), 'en');
   for (const locale of locales)
     assert.equal(i18n.resolveLocale(locale), locale);
@@ -92,4 +103,23 @@ test('both requested Chinese scripts remain distinct', () => {
     catalogs['zh-Hant'].loadingDetails,
     catalogs['zh-Hans'].loadingDetails,
   );
+});
+
+test('language menu and catalogs expose the same ten locales', () => {
+  assert.deepEqual(
+    i18n.LANGUAGES.map((language) => language.id),
+    locales,
+  );
+  assert.deepEqual(Object.keys(i18n.MESSAGES).sort(), [...locales].sort());
+  for (const [id, label] of Object.entries({
+    de: 'Deutsch',
+    ja: '日本語',
+    ko: '한국어',
+    uk: 'Українська',
+    ru: 'Русский',
+  }))
+    assert.equal(
+      i18n.LANGUAGES.find((language) => language.id === id).label,
+      label,
+    );
 });
