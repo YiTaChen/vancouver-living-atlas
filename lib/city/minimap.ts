@@ -212,7 +212,7 @@ export class LocalMinimap {
     if (time - this.lastDraw < 100 && !force) return;
     this.lastDraw = time;
     if (!this.canvas.clientWidth || !this.canvas.clientHeight) return;
-    const pose = minimapPose(this.e.navigation, this.e.controls.target);
+    const pose = this.e.flight?.pose || minimapPose(this.e.navigation, this.e.controls.target);
     const key = [
       pose.x.toFixed(2),
       pose.z.toFixed(2),

@@ -37,6 +37,8 @@ import {
   Map as MapIcon,
   SlidersHorizontal,
 } from 'lucide-react';
+import { FlightControls, flightText } from '@/components/flight-controls';
+import { EMPTY_FLIGHT, type FlightSnapshot } from '@/lib/city/flight-snapshot';
 import { TravelJoystick } from '@/components/travel-joystick';
 import { SkyControls } from '@/components/sky-controls';
 import {
@@ -102,6 +104,7 @@ export default function Home() {
     labelHost = useRef<HTMLDivElement>(null),
     minimap = useRef<HTMLCanvasElement>(null),
     engine = useRef<CityEngine | null>(null);
+  const [flight, setFlight] = useState<FlightSnapshot>(EMPTY_FLIGHT);
   const [touchUI, setTouchUI] = useState(false);
   const [mobileHudHidden, setMobileHudHidden] = useState(false);
   const [interiorCutaway, setInteriorCutaway] = useState(true);
@@ -245,6 +248,8 @@ export default function Home() {
   useEffect(() => {
     const city = engine.current;
     if (!ready || !city) return;
+    if (city.flight) { city.flight.onChange = setFlight; setFlight(city.flight.snapshot); }
+    city.onFlightMode = (mode) => { setTour(false); setPlacing(null); setSettings(s => ({...s,mode,autoRotate:false})); };
     city.onTravelReturnChange = setReturnMode;
     city.onTravelResume = (mode) => {
       setLocalOrbit(false);
@@ -263,6 +268,8 @@ export default function Home() {
     if (process.env.VANCOUVER_VISUAL_QA === '1')
       city.startupQA?.reactCommitted(city);
     return () => {
+      if(city.flight) city.flight.onChange = () => {};
+      city.onFlightMode = () => {};
       city.onTravelReturnChange = () => {};
       city.onTravelResume = () => {};
       city.onTravelView = () => {};
@@ -350,6 +357,7 @@ export default function Home() {
           )
         )
           return;
+        if (engine.current?.flight?.placing) { engine.current.flight.cancelPlacement(); return; }
         if (engine.current?.placement?.mode) {
           ev.preventDefault();
           engine.current.placement.cancel();
@@ -469,6 +477,7 @@ export default function Home() {
     setNotice('savedImage');
   };
   const beginPlacement = (mode: TravelMode) => {
+    engine.current?.flight?.clear();
     if (!ready || !engine.current?.placement) {
       setNotice('placementUnavailable');
       return;
@@ -496,10 +505,18 @@ export default function Home() {
     change({ mode, autoRotate: false });
     return true;
   };
+  const beginFlight = () => {
+    if(!ready) return;
+    setTour(false); setPanel(null); setPlacing(null); setMobilePanel(null); setClean(false);
+    engine.current?.flight?.beginPlacement();
+  };
   const switchMode = (mode: string) => {
+    if(mode === 'flight') { beginFlight(); return; }
+    if(mode !== 'orbit') engine.current?.flight?.clear();
     if (mode === 'orbit') {
       setTour(false);
       engine.current?.placement?.cancel();
+      engine.current?.flight?.cancelPlacement();
       change({ mode: 'orbit', autoRotate: false });
       engine.current?.leaveTravelAtLocation();
     } else if (!switchInScene(mode as TravelMode))
@@ -555,10 +572,11 @@ export default function Home() {
   });
   return (
     <main
-      className={`atlas ${clean ? 'clean' : ''} ${settings.mode !== 'orbit' ? 'street-mode' : ''} ${placing ? 'placement-mode' : ''} ${touchUI ? 'touch-ui' : ''} ${touchUI && mobileHudHidden ? 'mobile-hud-hidden' : ''} ${mobilePanel ? `mobile-${mobilePanel}-open` : ''}`}
+      className={`atlas ${clean ? 'clean' : ''} ${settings.mode !== 'orbit' ? 'street-mode' : ''} ${placing || flight.placing ? 'placement-mode' : ''} ${flight.placing ? 'flight-placement-mode' : ''} ${settings.mode==='flight'?'flight-mode':''} ${touchUI ? 'touch-ui' : ''} ${touchUI && mobileHudHidden ? 'mobile-hud-hidden' : ''} ${mobilePanel ? `mobile-${mobilePanel}-open` : ''}`}
     >
       {stats.trafficStop && settings.mode === 'drive' && <div role="status" className="traffic-stop-caption glass">{stats.trafficStop === 'please safe driving' ? stats.trafficStop : tr('policeStop')}</div>}
       <div className="scene" ref={host} />
+      <FlightControls controller={engine.current?.flight || null} state={flight} locale={locale} touch={touchUI} controlsEnabled={!about && !panel && (!mobilePanel || mobilePanel === 'map')} panelVisible={!about && !panel && !mobilePanel}/>
       {touchUI && ready && (
         <button
           className="mobile-hud-toggle glass"
@@ -593,7 +611,7 @@ export default function Home() {
                 <MapIcon size={21} />
               </button>
             )}
-            {!placing && settings.mode !== 'orbit' && (
+            {!placing && settings.mode !== 'orbit' && settings.mode !== 'flight' && (
               <button
                 className="glass"
                 aria-label={tr('touchTravelOptions')}
@@ -655,7 +673,7 @@ export default function Home() {
               <Minus size={22} />
             </button>
           </div>
-          {settings.mode !== 'orbit' &&
+          {settings.mode !== 'orbit' && settings.mode !== 'flight' &&
             !placing &&
             !about &&
             !panel &&
@@ -745,7 +763,7 @@ export default function Home() {
         </>
       )}
 
-      {ready && settings.mode !== 'orbit' && (
+      {ready && settings.mode !== 'orbit' && settings.mode !== 'flight' && (
         <aside
           className="travel-camera-card glass ui-chrome"
           aria-label={tr('travelCamera')}
@@ -892,7 +910,7 @@ export default function Home() {
       </header>
       <div className="mode-switch glass ui-chrome">
         <RadioGroup
-          value={placing || settings.mode}
+          value={flight.placing ? 'flight' : placing || settings.mode}
           onValueChange={switchMode}
           className="mode-radio"
           aria-label={tr('explorationMode')}
@@ -902,12 +920,13 @@ export default function Home() {
             { id: 'walk', name: tr('walk'), icon: PersonStanding },
             { id: 'drive', name: tr('drive'), icon: Car },
             { id: 'boat', name: tr('boat'), icon: Ship },
+            { id: 'flight', name: flightText(locale,'fly'), icon: Plane },
           ].map((m) => (
             <label
-              className={`mode-pill ${(placing || settings.mode) === m.id ? 'active' : ''} ${m.id !== 'orbit' && (placing || !canSwitchStreetMode(settings.mode, m.id)) ? 'figure-handle' : ''}`}
+              className={`mode-pill ${(flight.placing ? 'flight' : placing || settings.mode) === m.id ? 'active' : ''} ${m.id !== 'orbit' && (placing || !canSwitchStreetMode(settings.mode, m.id)) ? 'figure-handle' : ''}`}
               key={m.id}
               title={
-                m.id === 'orbit' ||
+                m.id === 'orbit' || m.id === 'flight' ||
                 (!placing && canSwitchStreetMode(settings.mode, m.id))
                   ? m.name
                   : tr(
@@ -919,12 +938,12 @@ export default function Home() {
                     )
               }
               onPointerDownCapture={
-                m.id === 'orbit'
+                m.id === 'orbit' || m.id === 'flight'
                   ? undefined
                   : (event) => dragFigure(event, m.id as TravelMode)
               }
               onClickCapture={
-                m.id === 'orbit'
+                m.id === 'flight' ? (event) => {event.preventDefault(); event.stopPropagation(); beginFlight();} : m.id === 'orbit'
                   ? undefined
                   : (event) => {
                       if (event.detail > 0) {
@@ -1528,7 +1547,7 @@ export default function Home() {
         <div className="mini-title">
           <span className="mini-location-title">
             {settings.mode !== 'orbit' &&
-              (settings.mode === 'boat' ? (
+              (settings.mode === 'flight' ? <Plane size={15}/> : settings.mode === 'boat' ? (
                 <Ship size={15} />
               ) : settings.mode === 'drive' ? (
                 <Car size={15} />
@@ -1607,7 +1626,7 @@ export default function Home() {
           )}
         </div>
       </section>
-      {settings.mode !== 'orbit' && (
+      {settings.mode !== 'orbit' && settings.mode !== 'flight' && (
         <div className="street-controls glass ui-chrome">
           <div className="street-title">
             <span>
@@ -1649,7 +1668,7 @@ export default function Home() {
               <button
                 key={id}
                 onClick={() =>
-                  engine.current?.navigation?.setMode(settings.mode, id)
+                  settings.mode !== 'flight' && engine.current?.navigation?.setMode(settings.mode, id)
                 }
               >
                 {label}
@@ -1724,7 +1743,9 @@ export default function Home() {
               ? localOrbit
                 ? tr('localView')
                 : viewText(locale, current.id, 'name')
-              : settings.mode === 'walk'
+              : settings.mode === 'flight'
+                ? flightText(locale,flight.kind || 'fly')
+                : settings.mode === 'walk'
                 ? tr('streetWalk')
                 : settings.mode === 'boat'
                   ? tr('streetBoat')

@@ -38,7 +38,7 @@ export interface Settings {
   terrain: boolean;
   autoRotate: boolean;
   quality: VisualQuality;
-  mode: 'orbit' | 'walk' | 'drive' | 'boat';
+  mode: 'orbit' | 'walk' | 'drive' | 'boat' | 'flight';
 }
 export interface Viewpoint {
   id: string;

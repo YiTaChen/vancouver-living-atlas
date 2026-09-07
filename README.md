@@ -28,6 +28,7 @@ Both are H.264 MP4s. The compact version is about 93% smaller. [Recording, editi
 | **A city with real relief** | Downtown slopes, Stanley Park's higher ground, the Seawall, lakes, beaches and four major bridges. **15 viewpoints**, map labels and an automatic city tour help you find your way. |
 | **Landmarks, outside and inside** | Detailed Science World, Canada Place, Waterfront Station, BC Place, Harbour Centre, Marine Building, Convention Centre West and Vancouver House. Enter three public interiors on foot or reveal them with a close aerial cutaway. |
 | **Walk, drive and boat** | Place your starting point on the map, then move through the city. First-person, character, chase and cabin views share smooth camera zoom. A local minimap follows your position and heading. |
+| **Fly above Vancouver** | Pilot a floatplane or helicopter, explore both cockpits, take off and land, or join a sightseeing cruise around Downtown and Stanley Park. |
 | **Streets and beaches** | Improved road surfaces, markings, building façades and Stanley Park paths; continuous Lions Gate railings; beach logs, volleyball nets and Kitsilano basketball courts. |
 | **A moving city** | Cars and Vancouver-style buses, electric SkyTrains, a fictional steam train with white chimney steam, harbour aircraft, cruise ships and moving boats. Private boats remain moored. |
 | **Day, night and sky** | Flowing time, city lights, a moving sun and moon, lunar phases, stars, aurora and meteors—with manual controls. |
@@ -37,16 +38,16 @@ Both are H.264 MP4s. The compact version is about 93% smaller. [Recording, editi
 
 **Try the roadster:** Drive starts with an original red convertible and a left-hand-drive cockpit. The original Classic car remains selectable without relocating. The roadster can exceed 200 km/h; sustaining more than 100 km/h in Downtown for five seconds triggers a scripted police stop and safety reminder. [Vehicle design and references](docs/vehicles/red-roadster.md).
 
-## Flight preview
+## Fly above Vancouver
 
-**Pilotable aircraft are complete on [`feature/flight-exploration`](https://github.com/YiTaChen/vancouver-living-atlas/tree/feature/flight-exploration), but are not yet merged into `main` or deployed to the Firebase demo.** The live demo's harbour aircraft are ambient traffic.
+**Choose Fly in the [live demo](https://vancouver-living-atlas-yita.web.app/) to pilot a floatplane or helicopter.** Pilotable aircraft are included in `main`, alongside the harbour's ambient air traffic.
 
 - Place on a clear road to launch a **helicopter**, or on open water for a **floatplane**. Original exteriors and cockpits support cabin, unobstructed first-person and chase views.
 - Distinct handling: helicopter collective, hover and descent; floatplane throttle, water takeoff and stall response. Landings produce impact-dependent camera shake; invalid surfaces and collisions trigger temporary fire/smoke effects.
 - **Auto cruise** joins a circuit around Downtown and Stanley Park. Zoom out to explore the map while the aircraft continues flying; a separate **Return to aircraft** button brings you back even after panning. Starting another vehicle or flight replaces the previous aircraft.
 - Desktop pitch/roll/yaw and power controls, mobile stick and power lever, a following minimap and all ten interface languages are included.
 
-This is assisted sightseeing flight with approximate physics. [Development plan, controls, 396-test validation and known limits](https://github.com/YiTaChen/vancouver-living-atlas/blob/feature/flight-exploration/docs/flight-development.md).
+This is assisted sightseeing flight with approximate physics. [Development plan, controls, validation and known limits](docs/flight-development.md).
 
 ## Controls
 
@@ -56,7 +57,7 @@ This is assisted sightseeing flight with approximate physics. [Development plan,
 | **Walk** | **W / S** forward/back, **A / D** turn, **Shift** faster; drag to look. | Left stick moves and strafes; drag the scene to look. |
 | **Drive** | **W / S** throttle/reverse, **A / D** steer, **Space** brake. | Left stick controls throttle/reverse and steering. |
 | **Boat** | **W / S** throttle/reverse, **A / D** rudder, **Space** neutral. | Left stick controls propulsion and steering. |
-| **Fly — preview branch** | **W / S** nose down/up, **A / D** bank, **Q / E** yaw, **R / F** power, **C** cruise; helicopter **H** hover, **X** descend. | Flight stick, separate throttle/collective lever, yaw and helicopter controls. |
+| **Fly** | **W / S** nose down/up, **A / D** bank, **Q / E** yaw, **R / F** power, **C** cruise; helicopter **H** hover, **X** descend. | Flight stick, separate throttle/collective lever, yaw and helicopter controls. |
 
 **Choose a starting point.** Select Walk, Drive or Boat, then click a suitable place—or drag its icon onto the map. Zoom in for precision. Roads snap to valid driving positions; boats need room clear of shores and docks. On mobile, tap a valid location to start; placement keeps only the Cancel control over the map.
 
@@ -110,7 +111,7 @@ npm ci
 npm run dev
 ```
 
-Open the URL printed in the terminal. To try pilotable aircraft, switch to `feature/flight-exploration` before starting the development server.
+Open the URL printed in the terminal. All five exploration modes are available from `main`.
 
 ```sh
 npm run check           # TypeScript
