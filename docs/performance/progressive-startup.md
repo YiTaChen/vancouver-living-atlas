@@ -2,6 +2,8 @@
 
 Branch: `perf/progressive-city-startup`, based on `7443b95`. The performance validation below was local-only.
 
+**Current repository status (2026-09-06):** these startup improvements are now included in `main` through [`05da6b0`](https://github.com/YiTaChen/vancouver-living-atlas/commit/05da6b0). The release note and branch wording below preserve the earlier experiment timeline; they do not describe today's merge status. The measurements remain those of the original local comparison.
+
 **Release update, 2026-09-06:** after a subsequent explicit deployment request, application commit `fa83a58` (these optimizations plus ten-language support) was deployed to [Firebase](https://vancouver-living-atlas-yita.web.app/). The live HTML and language bundle matched the validated build. GitHub main was not merged.
 
 ## Changes and invariants

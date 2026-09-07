@@ -1,144 +1,156 @@
 # Vancouver · Living Atlas
 
-An original, explorable browser reconstruction of Vancouver: the entire Downtown peninsula, Stanley Park, English Bay and False Creek through Science World. The city follows public coastlines, street geometry and actual terrain relief, with original procedural architecture and landscape detail.
+**Explore Vancouver from the skyline, the street and the water—in your browser.**
 
-**Live demo (Firebase): [vancouver-living-atlas-yita.web.app](https://vancouver-living-atlas-yita.web.app/)**
+An interactive 3D city covering Downtown, Stanley Park, English Bay, Kitsilano Beach and False Creek through Science World. Public geographic data provide the streets, coastlines and terrain; original procedural models bring the landmarks, interiors, vegetation and moving city to life.
 
-**Flight preview branch:** `feature/flight-exploration` adds pilotable floatplanes and helicopters. This branch has not been merged into main or deployed to the live demo. [Development plan, controls and validation](docs/flight-development.md).
+**[Open the live demo →](https://vancouver-living-atlas-yita.web.app/)** · [Watch the film](#explore-vancouver-in-30-seconds) · [Run locally](#run-locally) · [Data & accuracy](DATA_SOURCES.md)
 
-**License: noncommercial research/personal learning only · prominent repo attribution required · commercial use requires written permission.** [Full terms](LICENSE)
-
-[Data and accuracy](DATA_SOURCES.md) · [Manager-loop development record](docs/PROGRESS.md)
-
-The ten-language application is publicly hosted on Firebase Hosting. This repository is public, and the application can also run locally.
+**Source-available, noncommercial use only.** Research, learning and permitted demonstrations require prominent source attribution. Commercial use requires written permission. [License and earlier MIT releases](#license).
 
 ## Explore Vancouver in 30 seconds
 
 https://github.com/user-attachments/assets/e5bf31c6-9eef-4c7f-827b-ef1349b9461c
 
-Recorded on September 5, before the latest road, landmark and bus upgrades: detailed landmarks, walking, a left-hand-drive cockpit, sailing, local-map zoom and day-to-night lighting. All footage comes from the running 3D application.
+Real footage from the running application: an aerial tour, landmark detail, walking, cockpit driving, boating and changing daylight. Recorded **September 5, 2026**, before the subsequent city-detail, mobile, sky and flight updates.
 
-**Compact preview:** 960 × 540 · 30 fps · 3.6 MB (93% smaller). [Download preview](docs/videos/2026-09-05/project-intro-readme.mp4?raw=true) · [Full 1080p film](docs/videos/2026-09-05/project-intro.mp4?raw=true) · [Reproduce the film](docs/videos/2026-09-05/README.md)
+| Video | Resolution | Duration / frame rate | Size |
+| --- | --- | --- | --- |
+| [Compact MP4](docs/videos/2026-09-05/project-intro-readme.mp4?raw=true) | 960 × 540 | 30 s · 30 fps | 3.6 MB |
+| [Full-quality MP4](docs/videos/2026-09-05/project-intro.mp4?raw=true) | 1920 × 1080 | 30 s · 30 fps | ~49 MB |
 
-## Languages
+Both are H.264 MP4s. The compact version is about 93% smaller. [Recording, editing and reproduction files](docs/videos/2026-09-05/README.md).
 
-English is the default for a first visit. The header language menu also offers Français, Español, 中文（繁體）, 中文（简体）, Deutsch, 日本語, 한국어, Українська and Русский. A selection updates the interface and map labels without resetting the scene, and is remembered on that browser.
+## What you can explore
 
-## Explore / 操作
+| Experience | In the live demo |
+| --- | --- |
+| **A city with real relief** | Downtown slopes, Stanley Park's higher ground, the Seawall, lakes, beaches and four major bridges. **15 viewpoints**, map labels and an automatic city tour help you find your way. |
+| **Landmarks, outside and inside** | Detailed Science World, Canada Place, Waterfront Station, BC Place, Harbour Centre, Marine Building, Convention Centre West and Vancouver House. Enter three public interiors on foot or reveal them with a close aerial cutaway. |
+| **Walk, drive and boat** | Place your starting point on the map, then move through the city. First-person, character, chase and cabin views share smooth camera zoom. A local minimap follows your position and heading. |
+| **Streets and beaches** | Improved road surfaces, markings, building façades and Stanley Park paths; continuous Lions Gate railings; beach logs, volleyball nets and Kitsilano basketball courts. |
+| **A moving city** | Cars and Vancouver-style buses, electric SkyTrains, a fictional steam train with white chimney steam, harbour aircraft, cruise ships and moving boats. Private boats remain moored. |
+| **Day, night and sky** | Flowing time, city lights, a moving sun and moon, lunar phases, stars, aurora and meteors—with manual controls. |
+| **Phone and tablet controls** | A continuous thumbstick, touch look/zoom, compact panels and a hide-interface button that keeps movement controls available. |
 
-**Enter landmark interiors:** open Layers and choose the Science World, Canada Place or Waterfront Station entrance. Walk through the open doors to explore their representative public spaces. Waterfront Station’s rear SeaBus signs lead through a glazed SkyWalk to the boarding lounge. The station and Canada Place include detailed floor finishes, column decoration, furniture and wayfinding. Close Orbit views automatically reveal the interiors; the Layers cutaway toggle restores the complete roofs. [Scope and references](docs/interiors.md).
+**Try an interior:** open **Layers** and choose the Science World, Canada Place or Waterfront Station entrance. Walk through the doors; follow the station's SeaBus signs through the glazed SkyWalk to its boarding lounge. Close overhead views reveal floors and furnishings. These are representative public spaces, not complete surveyed interiors; boarding SeaBus is not implemented. [Interior scope and references](docs/interiors.md).
 
-**Default driving car:** an original red, open-top roadster with sculpted bodywork and a matching left-hand cockpit. Classic remains available in the car selector. The roadster now accelerates at 16 m/s² with a 259 km/h speed cap and a 260 km/h instrument scale. Sustained Downtown driving above 100 km/h for five real seconds triggers a scripted police stop: automatic braking, an officer approaching with “please safe driving”, then returning to the patrol car and departing. Mode, camera or placement changes cancel the scene. The scene briefly uses a wider chase view; controls resume after departure. Boat acceleration response is doubled while retaining the same cruising equilibrium and water handling. [Model and references](docs/vehicles/red-roadster.md).
+**Try the roadster:** Drive starts with an original red convertible and a left-hand-drive cockpit. The original Classic car remains selectable without relocating. The roadster can exceed 200 km/h; sustaining more than 100 km/h in Downtown for five seconds triggers a scripted police stop and safety reminder. [Vehicle design and references](docs/vehicles/red-roadster.md).
 
-**Phone / tablet:** the left thumbstick moves continuously (walk: forward/back and strafe; drive/boat: throttle/reverse and steering). Drag the scene to look and pinch to zoom. Map, travel settings and tools open from compact buttons; the local map can stay open while moving. Placement shows only a Cancel button—tap a valid ground/road/water location to start. Vehicle selection and cockpit options live in Travel options.
+## Flight preview
 
-- **鳥瞰 / Orbit:** drag to rotate, wheel or +/− to zoom, right-drag to pan. Fourteen city, park, landmark, harbour and railway viewpoints, north-up reset, a clickable minimap and an automatic city tour are included.
-- **步行 / Walk:** drag the person in the mode bar onto the main map, or select Walk and click an open ground location. Zoom in before dropping for greater precision. W/S move, A/D turn, drag to look, Shift moves faster.
-- **駕車 / Drive:** drag the car onto the map, or select Drive and click near a road. The preview shows the actual snapped road position before starting; distant roads, water and building interiors are rejected. W/S throttle/reverse, A/D steer, Space brakes. Bridge decks and ground-level underpasses remain separate. While driving, use **Classic / Roadster** in the upper-right camera card to switch between the original car and an open-top two-seat sports car without resetting your location, speed or zoom.
-- **開船 / Boat:** drag the boat onto open water, or choose Coal Harbour, False Creek or Lost Lagoon. W/S control throttle and reverse, A/D steer the rudder, Space selects neutral. The boat coasts with momentum, responds to sea waves or calmer lake water, and stops at shores and docks.
-- **飛行 / Fly (this branch):** choose Fly, then tap an open road for a helicopter or a clear water runway for a floatplane. W pushes the nose down, S pulls it up, A/D bank, Q/E yaw, R/F change power; helicopters also support X descent and H hover. Touch uses a stick, separate throttle/collective lever and yaw/descent controls. Choose cockpit, clear first person or chase view. Auto cruise joins a circuit around Downtown and Stanley Park; zooming out starts cruise and offers a separate Return to aircraft button that survives map panning. Starting another vehicle or flight replaces the previous aircraft.
-- **重新放置 / Choose a new start:** use the button in street controls to return to a nearby aerial view and place again. Esc cancels placement. Mouse/touch map drags adjust the view without dropping; a tap places. Keyboard users can select a mode, focus the map and press Enter to start at its centre, or activate Start here for the previewed point. Gastown, Robson and Beach Avenue remain explicit quick starts.
-- **City buses:** original Vancouver-style blue/yellow low-floor buses join major-road traffic, with passenger doors, roof equipment and slope-following movement. One shared instanced model, capped fleet and distance culling keep the addition bounded. Service patterns are illustrative.
-- **時間 / Time:** the separate clock button shows the current scene time. Time flows by default at 300× (one real minute is five city hours; a full day takes 4 minutes 48 seconds). Choose 1×, 10×, 30×, 60×, 120× or 300×, set any minute of the day, or turn off “Let time flow” to fix the light at that moment. Walking, driving, traffic and water animation retain their normal speed. Scene time pauses while the tab is hidden. “Hide time” hides the toolbar’s numeric time while keeping the clock button and panel available; time is shown by default.
-- **天空 / Sky effects:** open Time → Sky effects for a moving sun and moon, eight lunar phases plus an eclipse preview, faint adjustable stars, aurora curtains and meteors. The first night after each page load defaults to a half moon and aurora; subsequent simulated nights have a stable 1-in-3 aurora chance. Visibility, star density, aurora strength/density and meteor frequency are adjustable in all ten supported languages. Sky cycles are illustrative, not live astronomical or aurora forecasts. [Implementation and visual checks](docs/visual-quality/sky-effects-final/README.md).
-- **圖層 / Layers:** control trees, buildings, traffic, trains, harbour aircraft and boats, and labels. Choose Balanced, High detail or Ultra detail.
-- **列車 / Trains:** a locomotive, coal tender and four coaches travel the Waterfront–Gastown railway with rising white chimney steam. Two four-car electric SkyTrains travel in opposite directions on the Expo elevated tracks near Science World. Open Layers and choose “Find steam train” or “Find SkyTrain” for a close view; trains are visible by default. Their speed is independent of the day/night clock.
-- **風景 / Capture:** export the current rendered view as PNG, or hide the interface for an immersive view. Esc restores controls and returns street modes to orbit.
+**Pilotable aircraft are complete on [`feature/flight-exploration`](https://github.com/YiTaChen/vancouver-living-atlas/tree/feature/flight-exploration), but are not yet merged into `main` or deployed to the Firebase demo.** The live demo's harbour aircraft are ambient traffic.
 
-## What is built
+- Place on a clear road to launch a **helicopter**, or on open water for a **floatplane**. Original exteriors and cockpits support cabin, unobstructed first-person and chase views.
+- Distinct handling: helicopter collective, hover and descent; floatplane throttle, water takeoff and stall response. Landings produce impact-dependent camera shake; invalid surfaces and collisions trigger temporary fire/smoke effects.
+- **Auto cruise** joins a circuit around Downtown and Stanley Park. Zoom out to explore the map while the aircraft continues flying; a separate **Return to aircraft** button brings you back even after panning. Starting another vehicle or flight replaces the previous aircraft.
+- Desktop pitch/roll/yaw and power controls, mobile stick and power lever, a following minimap and all ten interface languages are included.
 
-- **7,630 geographic building solids**, rendered as **7,800 polygon parts**, including measured 2009 City geometry and reconciled OSM tower heights.
-- A **257 × 273 terrain grid** (roughly 20 m), interpolated from official 2002 contours. Stanley Park reaches about **76 m**, with real Downtown relief rather than a flat base.
-- Actual coastlines, park boundaries, lakes, beaches and street lines; 810 park trail features and regional North Shore landforms.
-- **36,041 rendered trees** from public street-tree positions plus original forest infill; spatially chunked canopy detail changes with viewing distance.
-- Original Science World, Canada Place, BC Place, Harbour Centre, Marine Building, Vancouver Convention Centre West and Vancouver House models; Burrard, Granville, Cambie and Lions Gate bridge structures.
-- Original façade patterns, Gastown shopfronts and steam clock, rooftop equipment, cars, ferries, sailboats, original moving train models and simulated night lighting.
+This is assisted sightseeing flight with approximate physics. [Development plan, controls, 396-test validation and known limits](https://github.com/YiTaChen/vancouver-living-atlas/blob/feature/flight-exploration/docs/flight-development.md).
 
-No Unreal Engine, finished third-party city model, Google imagery or copied reference-project code is used.
+## Controls
 
-## Accuracy and scope
+| Mode | Desktop | Phone / tablet |
+| --- | --- | --- |
+| **Orbit** | Drag to rotate; right-drag to pan; scroll or **+ / −** to zoom. | Drag to orbit; pinch to zoom. |
+| **Walk** | **W / S** forward/back, **A / D** turn, **Shift** faster; drag to look. | Left stick moves and strafes; drag the scene to look. |
+| **Drive** | **W / S** throttle/reverse, **A / D** steer, **Space** brake. | Left stick controls throttle/reverse and steering. |
+| **Boat** | **W / S** throttle/reverse, **A / D** rudder, **Space** neutral. | Left stick controls propulsion and steering. |
+| **Fly — preview branch** | **W / S** nose down/up, **A / D** bank, **Q / E** yaw, **R / F** power, **C** cruise; helicopter **H** hover, **X** descend. | Flight stick, separate throttle/collective lever, yaw and helicopter controls. |
 
-This is a geographic visualization, not a photographic reconstruction or a certified digital twin. Source dates differ: core contours and shoreline date to 2002, measured building parts to 2009, supplemented by OSM records retrieved in September 2026. Terrain interpolation, procedural façades, representative signs, tree canopy, bridge heights and road widths are visual approximations. Buildings are seated on the displayed terrain; stored source base elevations remain available in the data. Outer North Shore and south-shore terrain provides coarse regional context.
+**Choose a starting point.** Select Walk, Drive or Boat, then click a suitable place—or drag its icon onto the map. Zoom in for precision. Roads snap to valid driving positions; boats need room clear of shores and docks. On mobile, tap a valid location to start; placement keeps only the Cancel control over the map.
 
-Rail plan geometry comes from OpenStreetMap: approximately 1.12 km of waterfront railway and 855/894 m of each elevated Expo direction. Station canopies, building passages and tunnels are excluded. Heights, trains and repeated passes are illustrative; the steam service is fictional. Entire trains fade out at the cropped ends before a new pass starts.
+**Change your view.** Scroll, pinch or use **+ / −** while travelling. Walk zooms between first person and an animated character; Drive and Boat zoom into their interiors, with an unobstructed first-person option. Vehicle and cabin selectors are in the camera panel, or **Travel options** on mobile.
 
-Street navigation is an exploration feature: simplified collision and vehicle motion are included, rather than a full traffic or driving simulation. Frame rates depend on GPU, viewport and settings. The [ten-stage upgrade and acceptance record](docs/visual-quality/UPGRADE_TASKS.md) covers roads, beaches, landmark detail and loading. See the [loading and rendering measurements](docs/visual-quality/performance/README.md) and [300× clock comparison](docs/visual-quality/clock-1080/README.md). Ultra remains more demanding, and first-time detail loading can still cause a visible pause. See [source provenance and qualifications](DATA_SOURCES.md).
+**Look around and return.** Zoom beyond a ground/water travel view to a local aerial map. Rotate, then zoom back in to resume the same mode and position. Panning to another coordinate cancels that return. Walk ↔ Drive switches in place; boat/land transitions require a suitable new start. The aircraft preview has its own persistent return behavior described above.
 
-## Local minimap
+**Find yourself.** The local minimap follows your actual position with a heading arrow, nearby roads, shores, building footprints and a distance scale. Its zoom is independent of the 3D camera. Mobile panels can be collapsed; hiding the interface retains the joystick and your character or vehicle. The GitHub link is in **Information** on mobile. Capture exports the rendered view as a PNG.
 
-While walking, driving or boating, the minimap follows your actual position with a cyan heading arrow and north at the top. Use its **+ / −** buttons, scroll over the map, or focus the map and press **+ / −** to zoom independently of the 3D camera. Nearby roads, building footprints, shores, lakes and a distance scale provide context. The selected zoom is retained when switching travel modes; Orbit retains the clickable peninsula overview. The local minimap is also available on phones.
+## Time, sky and languages
 
-## Travel cameras
+The **Time** button controls the scene clock. Time flows at **300× by default**: a full day takes 4 minutes 48 seconds. Adjust the speed, set a time directly, freeze it, or hide the toolbar's numeric time. Movement and traffic retain their normal speed; the clock pauses while the tab is hidden.
 
-Scroll, pinch or use **+ / −** to change camera distance while walking, driving or sailing.
+Under **Time → Sky effects**, toggle the sun, moon, stars, aurora and meteors; adjust star density, aurora strength/density and meteor frequency. There are eight lunar phases plus an eclipse preview. The first simulated night after a page load starts with a half moon and aurora; later nights have a one-in-three aurora chance. These cycles are illustrative, not astronomical predictions or live forecasts. [Sky implementation and visual checks](docs/visual-quality/sky-effects-final/README.md).
 
-- **Walk:** zoom from first person to a third-person view with an animated character.
-- **Drive and boat:** zoom into the vehicle interior, then use the upper-right controls to choose the cabin view or an unobstructed first-person view. The car has a left-hand-drive interior; drag to look around independently of steering.
-- **Look around and return:** zoom farther out to a local map at your current position. Rotate the map to inspect nearby scenery, then zoom back in to resume the same travel mode, position and heading. Panning to a different coordinate cancels this return; choose a new starting point to re-enter.
+**Ten languages:** English (first-visit default), Français, Español, 中文（繁體）, 中文（简体）, Deutsch, 日本語, 한국어, Українська and Русский. Changing language updates controls and map labels without resetting the scene; the browser remembers the selection.
 
-Switching **Walk ↔ Drive** keeps you in the scene. Switching between a boat and a land mode opens placement for the appropriate surface. The local minimap follows your position and zooms independently of the 3D camera.
+## Rendering and startup
 
-## Graphics quality
+Choose quality under **Layers → Visual quality**:
 
-Open **Layers → Visual quality** to choose **Balanced**, **High detail** (default), or **Ultra detail**. Ultra adds close landmark structure, textured branching trees, facade geometry and a higher physical rendering resolution. New viewpoints make the stadium, lookout and Marine Building easy to inspect. High and Balanced remain available for lower GPU load. See [graphics budgets, original asset provenance and validation](docs/visual-quality/README.md).
+| Setting | Intended experience |
+| --- | --- |
+| **Balanced** | Reduced decoration and rendering cost; the default geometry profile on mobile. |
+| **High detail** | Desktop default, with nearby façade and tree detail. |
+| **Ultra detail** | Richer nearby landmarks, trees and façades, with higher resolution on supported renderers. |
+
+Phones and tablets also use a **compatible rendering path** that avoids the HDR post-processing chain and caps physical rendering resolution. Desktop can force it with `?graphics=compatible`. [Mobile rendering changes and validation](docs/visual-quality/mobile-compatible/README.md).
+
+Startup now shows a **stage-estimated percentage plus an animated activity bar**. Required geographic requests run concurrently, repeated terrain calculations are cached, and road processing skips irrelevant regions. Small rooftop details are built in bounded background steps; existing façade, tree and Ultra-landmark detail is prepared according to distance and quality. Walk, Drive and Boat resources remain ready before entry, preserving their camera transitions. This is incremental detail preparation, not full-city geographic streaming.
+
+In three local runs per version/profile, median page-to-interactive time changed from **18.13 → 15.75 s on desktop** and **15.68 → 15.07 s in a phone-sized compatible profile**. Sample ranges overlap; the latter is desktop Chrome, not iPhone hardware. First-use pauses remain possible, and these results do not establish universal FPS, memory or battery savings. [Measurements](docs/performance/progressive-startup.md) · [Accepted and rejected experiments](docs/performance/experiment-decisions.md) · [Rendering budgets](docs/visual-quality/README.md).
+
+## Built from geography, with original models
+
+- About **7,800 building polygon parts**, derived from City of Vancouver geometry and reconciled OpenStreetMap heights. Parts are not a count of unique buildings.
+- A **257 × 273 terrain grid**, roughly 20 m spacing, interpolated from public contours; Stanley Park reaches about 76 m.
+- **36,041 rendered trees**, combining public street-tree positions and original forest infill, with distance-based canopy detail.
+- Original procedural landmarks, interiors, bridges, façades, vehicles and environmental effects. No Unreal Engine or finished third-party city model is used; reference photographs are not bundled as city textures.
+
+Source dates differ: core terrain/shoreline data date to 2002 and measured buildings to 2009, supplemented by OSM. Façades, interiors, bridge elevations and vehicle behavior are approximations. Rail and harbour routes are demonstration paths; the steam service is fictional, and traffic is not live. This is a geographic visualization, not a photographic reconstruction or certified digital twin. [Data provenance](DATA_SOURCES.md) · [Harbour references](docs/HARBOUR_SOURCES.md).
 
 ## Run locally
 
-Requires Node.js **22.13+**, npm, and a browser with WebGL 2.
+Requires **Node.js 22.13+**, npm and a browser with **WebGL 2**. The app serves its own geographic assets; no map API key is required.
 
 ```sh
+git clone https://github.com/YiTaChen/vancouver-living-atlas.git
+cd vancouver-living-atlas
 npm ci
 npm run dev
 ```
 
-Open the local URL printed in the terminal. The application serves its own geographic assets; no map API key is required. A web server is necessary because the app loads geographic files with HTTP requests.
+Open the URL printed in the terminal. To try pilotable aircraft, switch to `feature/flight-exploration` before starting the development server.
 
 ```sh
-npm run check   # TypeScript
-npm test        # geography, height intervals, coast classification and bridge continuity
-npm run build   # production Worker and client assets
-npm start      # local production preview through Wrangler
+npm run check           # TypeScript
+npm test                # Geometry, navigation, simulation and lifecycle checks
+npm run build:firebase  # Static production build plus asset/locale verification
 ```
 
-The renderer is in `lib/city/`; geographic data are in `public/data/`; original surface textures are in `public/textures/`. `tools/README.md` describes source-data preparation and the raw inputs needed to rebuild datasets.
+**Stack:** TypeScript, React, Three.js and vinext/Vite. Renderer and simulation: [`lib/city/`](lib/city/); geographic assets: [`public/data/`](public/data/); source preparation: [`tools/README.md`](tools/README.md). The separate `npm run build` / `npm start` path builds and previews the Worker-based version.
 
-## Manager loop
+### Firebase Hosting
 
-Implementation → independent geographic/architecture review → browser inspection → correction → validation → commit and push. Each stage is preserved in public Git history, with findings in [docs/PROGRESS.md](docs/PROGRESS.md). The reference attachments are visual benchmarks only and are not included in the repository.
+`npm run build:firebase` exports `dist/client` with geographic assets, textures and local fonts. Its verifier checks the English initial page, ten-language support, key assets and emitted landmark worker. Hosting is static; no Cloud Functions are required.
+
+For an authorized deployment to **your own** Firebase project, build first, authenticate with the Firebase CLI, then run:
+
+```sh
+firebase deploy --only hosting --project YOUR_FIREBASE_PROJECT_ID
+```
+
+The checked-in `.firebaserc` names the owner's project; use an explicit project ID for your own permitted copy. Building locally does not deploy.
+
+## Development and evidence
+
+This project is developed with GPT-6 Astra through a manager loop: **implement → independent review → inspect the running browser → correct → validate → commit**. The public history and records document both successful changes and rejected experiments.
+
+[Development record](docs/PROGRESS.md) · [Ten-stage city upgrade](docs/visual-quality/UPGRADE_TASKS.md) · [Interior checks](docs/interiors.md) · [Startup experiment log](docs/performance/experiment-decisions.md) · [Flight branch validation](https://github.com/YiTaChen/vancouver-living-atlas/blob/feature/flight-exploration/docs/flight-development.md)
+
+Reports are dated snapshots with their own test counts, hardware and release state. Desktop/mobile viewport checks are recorded separately from physical-device feedback.
 
 ## License
 
-Original material is now offered under the custom **Vancouver Living Atlas Noncommercial Research and Attribution License 1.0**, see [LICENSE](LICENSE). This is source-available, not OSI-approved open source.
+Original material uses the **Vancouver Living Atlas Noncommercial Research and Attribution License 1.0**. This is source-available, not OSI-approved open source. [Full terms](LICENSE).
 
-- **Allowed:** noncommercial academic research, teaching, personal learning and attributed hobby demonstrations.
-- **Not allowed without written permission:** commercial products/services, client work, monetization, sales or commercial repackaging. Crediting this repo does not make commercial use permissible.
-- **Attribution required:** personal as well as academic reuse must clearly credit **Vancouver Living Atlas by YiTaChen** and link to **https://github.com/YiTaChen/vancouver-living-atlas**. Put credit near the beginning of a fork's README, visibly in a demo's main interface, and in videos/images or their captions as specified in LICENSE. Include the license; identify modifications.
-- **No plagiarism or unauthorized copies:** do not claim the original project as your own, remove/hide credits, or share clones outside the license conditions.
+- **Permitted:** noncommercial academic research, teaching, personal learning and attributed hobby demonstrations.
+- **Requires written permission:** commercial products/services, client work, monetization and commercial repackaging. Attribution alone does not authorize commercial use.
+- **Credit required:** clearly identify **Vancouver Living Atlas by YiTaChen** and link to [this repository](https://github.com/YiTaChen/vancouver-living-atlas). Preserve the license, identify modifications, and place credit prominently in repositories, demo interfaces, publications and media as specified in LICENSE.
+- **No plagiarism or uncredited copies:** do not claim the original material as your own, hide its source or redistribute outside the license conditions.
 
-**中文摘要：** 允許非商用學術研究、教學與個人學習；未經書面許可禁止商用。個人引用、改作、展示、影片或轉載也必須明顯註明「出自 Vancouver Living Atlas／YiTaChen」並附本 repo 連結。不得冒稱原創、移除出處或違規重製散布。完整英文 LICENSE 為準。
+**中文摘要：** 允許非商用學術研究、教學與個人學習；商用須事先取得書面許可。個人引用、改作或展示亦須明顯註明本 repo 與作者出處，並遵守完整英文 LICENSE。
 
-**Earlier MIT releases:** this change starts with the 2026-09-06 license-change commit. It cannot revoke rights already granted for material released through [`e380869`](https://github.com/YiTaChen/vancouver-living-atlas/tree/e380869), including MIT commercial permissions. The [historical MIT notice](docs/licensing/MIT-before-2026-09-06.txt) is retained for those releases, not offered as an alternative for future additions.
+**Earlier MIT releases retain their grants.** The September 6 license change cannot revoke permissions for material released through [`e380869`](https://github.com/YiTaChen/vancouver-living-atlas/tree/e380869). The [historical MIT notice](docs/licensing/MIT-before-2026-09-06.txt) applies to those releases, not as an alternative license for later additions.
 
-Geographic data and third-party dependencies keep their own terms, including **Open Government Licence – Vancouver**, **Open Database License 1.0**, Canadian/USGS terrain terms and individual software/font licenses. The combined geographic database remains ODbL with City attribution; the new restrictions do not relicense those sources. See [DATA_SOURCES.md](DATA_SOURCES.md).
-
-For commercial permission or other exceptions, contact **YiTaChen through this repository**. A request alone is not authorization.
-
-## Firebase Hosting
-
-The Firebase build exports a static site, including the geographic data, textures and locally bundled fonts. It does not require Cloud Functions or a server runtime.
-
-```sh
-npm ci
-npm run check
-npm test
-npm run build:firebase
-firebase deploy --only hosting --project vancouver-living-atlas-yita
-```
-
-`firebase.json` publishes only `dist/client`. The build verifier checks English initial HTML, all five locale bundles and the main geographic assets. `.firebaserc` selects the owner's dedicated `vancouver-living-atlas-yita` project. To publish your own copy, pass your own project ID explicitly. The existing `npm run build` still builds the Sites-compatible version.
-
-### Explore the harbour
-
-Choose **Boat** to the right of Drive, then drag the boat icon onto open water (zoom in for a precise launch). Use **W/S** for throttle/reverse, **A/D** for the rudder, and **Space** for neutral. Release the throttle to coast; drag to look around. Touch controls use press-and-hold. Coal Harbour, False Creek and Lost Lagoon are available as quick starts. Sea waves and boat inertia differ from calm lake motion; the whole hull stops at shores and docks.
-
-The Layers panel contains a **Harbour** switch and **Find floatplane / helicopter / cruise ship** controls. Aircraft and cruises follow original local demonstration paths based on verified service destinations; this is not live traffic or a navigation chart. Private boats remain moored. [Harbour sources and precision](docs/HARBOUR_SOURCES.md).
+Third-party data, software and fonts retain their own terms, including **Open Government Licence – Vancouver** and **ODbL 1.0**; these are not relicensed by the project's custom terms. See [data attribution](DATA_SOURCES.md). Contact YiTaChen through this repository for permission requests.
