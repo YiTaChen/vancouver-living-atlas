@@ -345,27 +345,40 @@ a {
   color: #a9c1c2;
   max-width: 500px;
 }
+.loading-progress {
+  width: min(320px, calc(100vw - 48px));
+  margin: 26px auto;
+}
+.loading-progress-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  color: #b7cdce;
+  font-size: 12px;
+  text-align: left;
+}
+.loading-progress-label strong {
+  color: #dce7a2;
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
 .loading-line {
-  height: 2px;
-  width: 180px;
-  margin: 28px auto;
+  height: 6px;
+  margin-top: 10px;
+  border-radius: 6px;
   background: #27434a;
   overflow: hidden;
 }
-.loading-line:after {
-  content: '';
-  display: block;
-  background: #dce7a2;
-  width: 60%;
+.loading-fill {
   height: 100%;
-  animation: loading 1.2s infinite ease-in-out;
+  background: #dce7a2;
+  transition: width 160ms ease-out;
 }
-@keyframes loading {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(200%);
+@media (prefers-reduced-motion: reduce) {
+  .loading-fill {
+    transition: none;
   }
 }
 @media (max-width: 1000px) {

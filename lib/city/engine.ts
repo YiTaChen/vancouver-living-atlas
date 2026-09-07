@@ -1,3 +1,4 @@
+import { paintStartupProgress } from './startup-progress';
 import { ScenePreparationQueue } from './scene-preparation';
 import { PublicInteriors } from './interiors';
 import { isMobileGraphics, supportsHDRTarget } from './graphics-profile';
@@ -173,6 +174,7 @@ export class CityEngine {
     onStats: (s: SceneStats) => void,
     onReady: () => void,
     onError: (s: string) => void,
+    private onProgress: (percent: number) => void = () => {},
   ) {
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.mark('engine.constructor.body.begin');
@@ -326,6 +328,18 @@ export class CityEngine {
     }
   }
   async load() {
+    const advance = (percent: number) =>
+      paintStartupProgress(
+        percent,
+        this.onProgress,
+        () => this.disposed || this.contextLost,
+      );
+    if (!(await advance(3))) return;
+    let filesComplete = 0;
+    const fileDone = () => {
+      if (!this.disposed && !this.contextLost)
+        this.onProgress(3 + Math.floor((++filesComplete / 17) * 12));
+    };
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('load.data.fetch-and-decode', 'async-wall');
     }
@@ -346,6 +360,7 @@ export class CityEngine {
         if (!res.ok)
           throw new Error(`Could not load ${n} data (${res.status})`);
         this.data[n] = await res.json();
+        fileDone();
       }),
       ...[
         ['terrain', 'elevation', false],
@@ -362,12 +377,15 @@ export class CityEngine {
         if (!res.ok) {
           if (required)
             throw new Error(`Could not load ${name} (${res.status})`);
+          fileDone();
           return;
         }
         this.data[String(key)] = await res.json();
+        fileDone();
       }),
     ]);
     if (this.disposed) return;
+    if (!(await advance(15))) return;
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('load.geographic-masks');
     }
@@ -399,12 +417,14 @@ export class CityEngine {
       this.startupQA?.phase('geometry.context');
     }
     makeContext(this);
+    if (!(await advance(27))) return;
     if (process.env.VANCOUVER_VISUAL_QA === '1')
       this.startupQA?.phase('geometry.causeway-prepare');
     prepareCauseway(this);
     if (process.env.VANCOUVER_VISUAL_QA === '1')
       this.startupQA?.phase('geometry.roads');
     this.makeRoads();
+    if (!(await advance(48))) return;
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('geometry.buildings');
     }
@@ -417,12 +437,14 @@ export class CityEngine {
       this.startupQA?.phase('geometry.nature');
     }
     createNature(this);
+    if (!(await advance(64))) return;
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('geometry.ground-harmonization');
     }
     harmonizeGround(this);
     createBeachAmenities(this);
     // Resolve landmark feet and entries from the final rendered ground.
+    if (!(await advance(75))) return;
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('geometry.landmarks-medium-and-ground-plan');
     }
@@ -451,6 +473,7 @@ export class CityEngine {
     // Roof furniture is invisible at the opening overview. Build it in bounded
     // background steps only for detail profiles; basic roofs already exist.
     this.scheduleScenery?.();
+    if (!(await advance(82))) return;
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('geometry.traffic-and-road-details');
     }
@@ -463,6 +486,7 @@ export class CityEngine {
       this.startupQA?.phase('geometry.harbour-and-dock-collision');
     }
     this.harbour = createHarbour(this);
+    if (!(await advance(88))) return;
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('controller.navigation');
     }
@@ -475,6 +499,7 @@ export class CityEngine {
       this.startupQA?.phase('controller.placement-proxies');
     }
     this.placement = new MapPlacement(this);
+    if (!(await advance(92))) return;
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('render.composer-setup');
     }
@@ -491,6 +516,7 @@ export class CityEngine {
     }
     this.resizeQuality();
     this.applySettings(this.settings);
+    if (!(await advance(95))) return;
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('render.scene-compileAsync', 'async-wall');
     }
@@ -501,6 +527,7 @@ export class CityEngine {
     }
 
     if (this.disposed || this.contextLost) return;
+    if (!(await advance(98))) return;
     if (process.env.VANCOUVER_VISUAL_QA === '1')
       this.startupQA?.phase('render.composer-warmup');
     // Allocate and run the current postprocessing pipeline while loading is visible.
@@ -544,6 +571,7 @@ export class CityEngine {
       this.startupQA?.mark('engine.onReady.called');
       this.startupQA?.begin('react.onReady-callback');
     }
+    this.onProgress(100);
     this.onReady();
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.end('react.onReady-callback');

@@ -149,6 +149,7 @@ export default function Home() {
       /* English remains the default. */
     }
   }, []);
+  const [loadProgress, setLoadProgress] = useState(0);
   const [ready, setReady] = useState(false),
     [error, setError] = useState(''),
     [view, setView] = useState('overview'),
@@ -204,29 +205,38 @@ export default function Home() {
   }, []);
   useEffect(() => {
     let stopped = false;
-    import('@/lib/city/engine').then(({ CityEngine }) => {
-      if (stopped || !host.current) return;
-      try {
-        engine.current = new CityEngine(
-          host.current,
-          setStats,
-          () => {
-            setReady(true);
-            if (engine.current) setSettings({ ...engine.current.settings });
-            engine.current?.setLocale(localeRef.current);
-            if (labelHost.current)
-              engine.current?.attachLabels(labelHost.current, go);
-            if (minimap.current) engine.current?.drawMinimap(minimap.current);
-          },
-          (message) => {
-            setError(message);
-            setReady(false);
-          },
-        );
-      } catch (e) {
-        setError(String(e));
-      }
-    });
+    setLoadProgress(0);
+    import('@/lib/city/engine')
+      .then(({ CityEngine }) => {
+        if (stopped || !host.current) return;
+        try {
+          engine.current = new CityEngine(
+            host.current,
+            setStats,
+            () => {
+              setReady(true);
+              if (engine.current) setSettings({ ...engine.current.settings });
+              engine.current?.setLocale(localeRef.current);
+              if (labelHost.current)
+                engine.current?.attachLabels(labelHost.current, go);
+              if (minimap.current) engine.current?.drawMinimap(minimap.current);
+            },
+            (message) => {
+              setError(message);
+              setReady(false);
+            },
+            (percent) => {
+              if (!stopped)
+                setLoadProgress((previous) => Math.max(previous, percent));
+            },
+          );
+        } catch (e) {
+          setError(String(e));
+        }
+      })
+      .catch((reason) => {
+        if (!stopped) setError(String(reason));
+      });
     return () => {
       stopped = true;
       engine.current?.destroy();
@@ -1826,7 +1836,25 @@ export default function Home() {
               </>
             ) : (
               <>
-                <div className="loading-line" />
+                <div className="loading-progress">
+                  <div className="loading-progress-label">
+                    <span>{tr('loadingProgress')}</span>
+                    <strong>{loadProgress}%</strong>
+                  </div>
+                  <div
+                    className="loading-line"
+                    role="progressbar"
+                    aria-label={tr('loadingProgress')}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-valuenow={loadProgress}
+                  >
+                    <div
+                      className="loading-fill"
+                      style={{ width: `${loadProgress}%` }}
+                    />
+                  </div>
+                </div>
                 <p>{tr('loadingDetails')}</p>
               </>
             )}
