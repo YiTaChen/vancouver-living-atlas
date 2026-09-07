@@ -1,0 +1,602 @@
+{
+  "revision": "7443b95469f51d775e4fe7ccdf0fe91853b57133",
+  "sourceFingerprint": "99046d8b1519b2b183b102a643b938fb477d71891ab351c2c44613f6c29ca70a",
+  "preparedRoadPlan": true,
+  "optionalScenery": {
+    "pending": 0,
+    "steps": 0,
+    "maxPumpMs": 0,
+    "finished": 0,
+    "failures": 0
+  },
+  "kind": "startup-wall-v1",
+  "id": "startup",
+  "valid": true,
+  "measurement": {
+    "schema": "local-startup-wall-v1",
+    "marker": "LOCAL VISUAL QA STARTUP v1",
+    "createdAt": "2026-09-07T00:05:29.749Z",
+    "originPerformanceMs": 783.9000000059605,
+    "performanceTimeOrigin": 1788739528965.5,
+    "status": "interactive",
+    "valid": true,
+    "error": null,
+    "hiddenDuringMeasurement": false,
+    "capabilities": {
+      "quality": "balanced",
+      "viewport": [
+        390,
+        844
+      ],
+      "devicePixelRatio": 1,
+      "renderPixelRatio": 1,
+      "canvas": [
+        390,
+        844
+      ],
+      "maxTextureSize": 16384,
+      "maxSamples": 8,
+      "maxAttributes": 16,
+      "maxVaryings": 30,
+      "precision": "highp",
+      "parallelShaderCompile": true,
+      "gpuTimerQueryAvailable": true,
+      "gpuTimerQueryUsed": false
+    },
+    "spans": [
+      {
+        "name": "constructor.body",
+        "kind": "sync-main-thread-wall",
+        "startMs": 1.5,
+        "endMs": 42.5,
+        "wallMs": 41,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "constructor.renderer-controls",
+        "kind": "sync-main-thread-wall",
+        "startMs": 1.5,
+        "endMs": 38.8999999910593,
+        "wallMs": 37.3999999910593,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "constructor.environment-pmrem",
+        "kind": "sync-main-thread-wall",
+        "startMs": 38.8999999910593,
+        "endMs": 38.8999999910593,
+        "wallMs": 0,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "constructor.scene-and-events",
+        "kind": "sync-main-thread-wall",
+        "startMs": 38.8999999910593,
+        "endMs": 39.79999999701977,
+        "wallMs": 0.9000000059604645,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "load.data.fetch-and-decode",
+        "kind": "async-wall",
+        "startMs": 40.29999999701977,
+        "endMs": 194.5,
+        "wallMs": 154.20000000298023,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "load.geographic-masks",
+        "kind": "sync-main-thread-wall",
+        "startMs": 194.5,
+        "endMs": 327.5,
+        "wallMs": 133,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "geometry.road-worker-start",
+        "kind": "async-wall",
+        "startMs": 327.5,
+        "endMs": 347.20000000298023,
+        "wallMs": 19.700000002980232,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "geometry.water",
+        "kind": "sync-main-thread-wall",
+        "startMs": 347.20000000298023,
+        "endMs": 347.8999999910593,
+        "wallMs": 0.699999988079071,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "geometry.land",
+        "kind": "sync-main-thread-wall",
+        "startMs": 347.8999999910593,
+        "endMs": 1562.8999999910593,
+        "wallMs": 1215,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "geometry.context",
+        "kind": "sync-main-thread-wall",
+        "startMs": 1562.8999999910593,
+        "endMs": 1781.2999999970198,
+        "wallMs": 218.40000000596046,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "geometry.buildings",
+        "kind": "sync-main-thread-wall",
+        "startMs": 1781.3999999910593,
+        "endMs": 2429.5999999940395,
+        "wallMs": 648.2000000029802,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "geometry.bridge-approaches",
+        "kind": "sync-main-thread-wall",
+        "startMs": 2429.5999999940395,
+        "endMs": 3780.5999999940395,
+        "wallMs": 1351,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "geometry.nature",
+        "kind": "sync-main-thread-wall",
+        "startMs": 3780.5999999940395,
+        "endMs": 4587.5999999940395,
+        "wallMs": 807,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "geometry.road-worker-join",
+        "kind": "async-wall",
+        "startMs": 4587.5999999940395,
+        "endMs": 7320.5,
+        "wallMs": 2732.9000000059605,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "geometry.roads",
+        "kind": "sync-main-thread-wall",
+        "startMs": 7320.5,
+        "endMs": 9180.09999999404,
+        "wallMs": 1859.5999999940395,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "geometry.ground-harmonization",
+        "kind": "sync-main-thread-wall",
+        "startMs": 9180.09999999404,
+        "endMs": 12326,
+        "wallMs": 3145.9000000059605,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "geometry.landmarks-medium-and-ground-plan",
+        "kind": "sync-main-thread-wall",
+        "startMs": 12326,
+        "endMs": 13426.70000000298,
+        "wallMs": 1100.7000000029802,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "collision.waterworld-and-footprints",
+        "kind": "sync-main-thread-wall",
+        "startMs": 13426.70000000298,
+        "endMs": 13545.09999999404,
+        "wallMs": 118.3999999910593,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "geometry.streetfronts-and-roofs",
+        "kind": "sync-main-thread-wall",
+        "startMs": 13545.09999999404,
+        "endMs": 13926.70000000298,
+        "wallMs": 381.6000000089407,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "geometry.traffic-and-road-details",
+        "kind": "sync-main-thread-wall",
+        "startMs": 13926.70000000298,
+        "endMs": 15203.39999999106,
+        "wallMs": 1276.699999988079,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "geometry.railway",
+        "kind": "sync-main-thread-wall",
+        "startMs": 15203.39999999106,
+        "endMs": 15248,
+        "wallMs": 44.6000000089407,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "geometry.harbour-and-dock-collision",
+        "kind": "sync-main-thread-wall",
+        "startMs": 15248,
+        "endMs": 15478.89999999106,
+        "wallMs": 230.8999999910593,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "controller.navigation",
+        "kind": "sync-main-thread-wall",
+        "startMs": 15478.89999999106,
+        "endMs": 15573.5,
+        "wallMs": 94.6000000089407,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "geometry.sailing-waves",
+        "kind": "sync-main-thread-wall",
+        "startMs": 15573.5,
+        "endMs": 15577.59999999404,
+        "wallMs": 4.0999999940395355,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "controller.placement-proxies",
+        "kind": "sync-main-thread-wall",
+        "startMs": 15577.59999999404,
+        "endMs": 15598.70000000298,
+        "wallMs": 21.100000008940697,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "render.composer-setup",
+        "kind": "sync-main-thread-wall",
+        "startMs": 15598.70000000298,
+        "endMs": 15598.70000000298,
+        "wallMs": 0,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "render.quality-and-initial-lighting",
+        "kind": "sync-main-thread-wall",
+        "startMs": 15598.70000000298,
+        "endMs": 15599.89999999106,
+        "wallMs": 1.199999988079071,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "render.scene-compileAsync",
+        "kind": "async-wall",
+        "startMs": 15599.89999999106,
+        "endMs": 15723,
+        "wallMs": 123.1000000089407,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "render.composer-warmup",
+        "kind": "sync-main-thread-wall",
+        "startMs": 15723.09999999404,
+        "endMs": 15723.59999999404,
+        "wallMs": 0.5,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "react.onReady-callback",
+        "kind": "sync-main-thread-wall",
+        "startMs": 15723.59999999404,
+        "endMs": 15750.29999999702,
+        "wallMs": 26.700000002980232,
+        "complete": true,
+        "interrupted": false
+      },
+      {
+        "name": "render.first-city-frame",
+        "kind": "sync-main-thread-wall",
+        "startMs": 15750.39999999106,
+        "endMs": 16521.59999999404,
+        "wallMs": 771.2000000029802,
+        "complete": true,
+        "interrupted": false
+      }
+    ],
+    "marks": [
+      {
+        "name": "engine.field-initialization.begin",
+        "elapsedMs": 0
+      },
+      {
+        "name": "engine.constructor.body.begin",
+        "elapsedMs": 1.5
+      },
+      {
+        "name": "engine.constructor.body.end",
+        "elapsedMs": 42.5
+      },
+      {
+        "name": "render.scene-compileAsync.resolved",
+        "elapsedMs": 15723
+      },
+      {
+        "name": "render.composer-warmup.finished",
+        "elapsedMs": 15723.59999999404
+      },
+      {
+        "name": "engine.onReady.called",
+        "elapsedMs": 15723.59999999404
+      },
+      {
+        "name": "engine.onReady.returned",
+        "elapsedMs": 15750.29999999702
+      },
+      {
+        "name": "city.first-frame.submitted",
+        "elapsedMs": 16521.70000000298,
+        "detail": {
+          "calls": 765,
+          "triangles": 3883105,
+          "canvas": [
+            390,
+            844
+          ]
+        }
+      },
+      {
+        "name": "react.ready-effect.committed",
+        "elapsedMs": 16555.79999999702
+      },
+      {
+        "name": "ui.interactive-eligibility.checked",
+        "elapsedMs": 16567.39999999106,
+        "detail": {
+          "eligible": true,
+          "navigation": true,
+          "placement": true,
+          "loadingOverlay": false
+        }
+      },
+      {
+        "name": "ui.interactive-eligible",
+        "elapsedMs": 16567.39999999106
+      },
+      {
+        "name": "ui.next-frame-opportunity",
+        "elapsedMs": 16580.20000000298
+      }
+    ],
+    "dataResources": [
+      {
+        "path": "/data/buildings.geojson",
+        "startMs": 41.3999999910593,
+        "wallMs": 29,
+        "requestStartMs": 44.79999999701977,
+        "responseStartMs": 58.599999994039536,
+        "responseEndMs": 70.3999999910593,
+        "transferSize": 3840348,
+        "encodedBodySize": 3840048,
+        "decodedBodySize": 3840048
+      },
+      {
+        "path": "/data/roads.geojson",
+        "startMs": 41.599999994039536,
+        "wallMs": 9.5,
+        "requestStartMs": 46.099999994039536,
+        "responseStartMs": 47.79999999701977,
+        "responseEndMs": 51.099999994039536,
+        "transferSize": 773987,
+        "encodedBodySize": 773687,
+        "decodedBodySize": 773687
+      },
+      {
+        "path": "/data/parks.geojson",
+        "startMs": 41.599999994039536,
+        "wallMs": 10.400000005960464,
+        "requestStartMs": 47.099999994039536,
+        "responseStartMs": 48.5,
+        "responseEndMs": 52,
+        "transferSize": 87344,
+        "encodedBodySize": 87044,
+        "decodedBodySize": 87044
+      },
+      {
+        "path": "/data/land.geojson",
+        "startMs": 41.599999994039536,
+        "wallMs": 23,
+        "requestStartMs": 48.099999994039536,
+        "responseStartMs": 62.3999999910593,
+        "responseEndMs": 64.59999999403954,
+        "transferSize": 300240,
+        "encodedBodySize": 299940,
+        "decodedBodySize": 299940
+      },
+      {
+        "path": "/data/context.geojson",
+        "startMs": 41.70000000298023,
+        "wallMs": 22.099999994039536,
+        "requestStartMs": 49.099999994039536,
+        "responseStartMs": 62.29999999701977,
+        "responseEndMs": 63.79999999701977,
+        "transferSize": 220487,
+        "encodedBodySize": 220187,
+        "decodedBodySize": 220187
+      },
+      {
+        "path": "/data/shoreline.geojson",
+        "startMs": 41.79999999701977,
+        "wallMs": 24.299999997019768,
+        "requestStartMs": 51.29999999701977,
+        "responseStartMs": 62.70000000298023,
+        "responseEndMs": 66.09999999403954,
+        "transferSize": 147128,
+        "encodedBodySize": 146828,
+        "decodedBodySize": 146828
+      },
+      {
+        "path": "/data/paths.geojson",
+        "startMs": 41.79999999701977,
+        "wallMs": 25.5,
+        "requestStartMs": 49.29999999701977,
+        "responseStartMs": 62.70000000298023,
+        "responseEndMs": 67.29999999701977,
+        "transferSize": 320438,
+        "encodedBodySize": 320138,
+        "decodedBodySize": 320138
+      },
+      {
+        "path": "/data/context-land.geojson",
+        "startMs": 41.8999999910593,
+        "wallMs": 23.400000005960464,
+        "requestStartMs": 52.29999999701977,
+        "responseStartMs": 62.5,
+        "responseEndMs": 65.29999999701977,
+        "transferSize": 22496,
+        "encodedBodySize": 22196,
+        "decodedBodySize": 22196
+      },
+      {
+        "path": "/data/terrain.json",
+        "startMs": 42,
+        "wallMs": 29.899999991059303,
+        "requestStartMs": 64,
+        "responseStartMs": 65.79999999701977,
+        "responseEndMs": 71.8999999910593,
+        "transferSize": 303556,
+        "encodedBodySize": 303256,
+        "decodedBodySize": 303256
+      },
+      {
+        "path": "/data/bridges.json",
+        "startMs": 42.099999994039536,
+        "wallMs": 31.600000008940697,
+        "requestStartMs": 64.8999999910593,
+        "responseStartMs": 66.5,
+        "responseEndMs": 73.70000000298023,
+        "transferSize": 62650,
+        "encodedBodySize": 62350,
+        "decodedBodySize": 62350
+      },
+      {
+        "path": "/data/trees.json",
+        "startMs": 42.20000000298023,
+        "wallMs": 34.29999999701977,
+        "requestStartMs": 65.5,
+        "responseStartMs": 67.79999999701977,
+        "responseEndMs": 76.5,
+        "transferSize": 1070434,
+        "encodedBodySize": 1070134,
+        "decodedBodySize": 1070134
+      },
+      {
+        "path": "/data/context-terrain.json",
+        "startMs": 42.20000000298023,
+        "wallMs": 35.599999994039536,
+        "requestStartMs": 66.3999999910593,
+        "responseStartMs": 68.20000000298023,
+        "responseEndMs": 77.79999999701977,
+        "transferSize": 286037,
+        "encodedBodySize": 285737,
+        "decodedBodySize": 285737
+      },
+      {
+        "path": "/data/railways.json",
+        "startMs": 42.29999999701977,
+        "wallMs": 35.900000005960464,
+        "requestStartMs": 67.59999999403954,
+        "responseStartMs": 69,
+        "responseEndMs": 78.20000000298023,
+        "transferSize": 13914,
+        "encodedBodySize": 13614,
+        "decodedBodySize": 13614
+      },
+      {
+        "path": "/data/harbour-sites.json",
+        "startMs": 42.29999999701977,
+        "wallMs": 36.70000000298023,
+        "requestStartMs": 70.79999999701977,
+        "responseStartMs": 72.3999999910593,
+        "responseEndMs": 79,
+        "transferSize": 22221,
+        "encodedBodySize": 21921,
+        "decodedBodySize": 21921
+      },
+      {
+        "path": "/data/harbour-routes.json",
+        "startMs": 42.29999999701977,
+        "wallMs": 37.29999999701977,
+        "requestStartMs": 72.29999999701977,
+        "responseStartMs": 74.29999999701977,
+        "responseEndMs": 79.59999999403954,
+        "transferSize": 47631,
+        "encodedBodySize": 47331,
+        "decodedBodySize": 47331
+      },
+      {
+        "path": "/data/harbour-piers.json",
+        "startMs": 42.3999999910593,
+        "wallMs": 38.6000000089407,
+        "requestStartMs": 74.20000000298023,
+        "responseStartMs": 77.29999999701977,
+        "responseEndMs": 81,
+        "transferSize": 93803,
+        "encodedBodySize": 93503,
+        "decodedBodySize": 93503
+      },
+      {
+        "path": "/data/beach-coast.json",
+        "startMs": 42.5,
+        "wallMs": 120.59999999403954,
+        "requestStartMs": 76.79999999701977,
+        "responseStartMs": 79.79999999701977,
+        "responseEndMs": 163.09999999403954,
+        "transferSize": 4966987,
+        "encodedBodySize": 4966687,
+        "decodedBodySize": 4966687
+      }
+    ],
+    "navigationTiming": [
+      {
+        "type": "reload",
+        "startTime": 0,
+        "domInteractive": 430.79999999701977,
+        "domContentLoadedEventEnd": 481.1000000089407,
+        "loadEventEnd": 649.6000000089407,
+        "responseEnd": 12.900000005960464,
+        "transferSize": 38083
+      }
+    ],
+    "gpuTimeMeasured": false,
+    "interpretation": "Synchronous elapsed time may include driver waits. Async compile/fetch wall time is not CPU or GPU duration. First city frame submitted is not a presentation fence. Interactive eligibility is DOM/controller readiness, not a successful user gesture."
+  },
+  "viewport": [
+    390,
+    844
+  ],
+  "render": [
+    390,
+    844
+  ]
+}

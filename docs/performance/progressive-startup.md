@@ -15,6 +15,8 @@ Branch: `perf/progressive-city-startup`, based on `7443b95`. No Firebase release
 
 ## Rejected experiments
 
+See the [detailed experiment and decision log / 實驗與決策紀錄](experiment-decisions.md) for every attempted variant, its evidence, adoption/rejection reasons, unimplemented options and the checklist for a future main comparison. Exploratory reports are archived separately and never included in the final comparison.
+
 Full precomputed 3D roads added about 24 MB gzip. A smaller 2D road plan added about 3 MB gzip and did not reliably improve total startup. A one-shot road worker (including transferable result buffers) also failed to produce reliable net gains. None of these assets, worker modules or dependencies ships in this branch.
 
 ## Reproduction and limits
