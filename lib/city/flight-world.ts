@@ -1,8 +1,8 @@
 import * as THREE from 'three';
 import type { CityEngine } from './engine';
 import { inPolygon, project, unproject } from './geo';
-import type { AircraftKind, FlightSurface } from './flight-state';
-type Volume = { bounds:THREE.Box3; local?:THREE.Box3; inverse?:THREE.Matrix4; polygon?:number[][][] };
+import type { AircraftKind, FlightSurface, FlightState } from './flight-state';
+type Volume = { bounds:THREE.Box3; local?:THREE.Box3; inverse?:THREE.Matrix4; polygon?:number[][][]; mesh?:THREE.Mesh };
 export class FlightWorld {
   cells=new Map<string,Volume[]>();
   constructor(private e:CityEngine){
@@ -23,11 +23,10 @@ export class FlightWorld {
         if(!o.geometry.boundingBox)return;
         // Keep triangle raycasts for these few nearby landmarks: aggregate bounds
         // are broad phase only and do not turn courtyards into solid blocks.
-        this.landmarkMeshes.push(o);
+        this.add({mesh:o,bounds:o.geometry.boundingBox.clone().applyMatrix4(o.matrixWorld)});
       });
     }
   }
-  landmarkMeshes:THREE.Mesh[]=[];
   add(v:Volume){for(let x=Math.floor(v.bounds.min.x/80);x<=Math.floor(v.bounds.max.x/80);x++)for(let z=Math.floor(v.bounds.min.z/80);z<=Math.floor(v.bounds.max.z/80);z++){
     const key=x+','+z;const cell=this.cells.get(key)||[];cell.push(v);this.cells.set(key,cell);
   }}
@@ -43,7 +42,10 @@ export class FlightWorld {
     for(let x=Math.floor(sweep.min.x/80);x<=Math.floor(sweep.max.x/80);x++)for(let z=Math.floor(sweep.min.z/80);z<=Math.floor(sweep.max.z/80);z++)for(const v of this.cells.get(x+','+z)||[])seen.add(v);
     for(const v of seen){
       if(!v.bounds.intersectsBox(sweep))continue;
-      if(v.inverse&&v.local){
+      if(v.mesh){
+        const delta=b.clone().sub(a),length=delta.length();
+        if(length>0.001 && new THREE.Raycaster(a,delta.normalize(),0,length+radius).intersectObject(v.mesh,false).length) return true;
+      }else if(v.inverse&&v.local){
         const aa=a.clone().applyMatrix4(v.inverse),bb=b.clone().applyMatrix4(v.inverse),box=v.local.clone().expandByScalar(radius),delta=bb.clone().sub(aa),length=delta.length();
         if(box.containsPoint(aa)||box.containsPoint(bb))return true;
         const hit=new THREE.Ray(aa,delta.normalize()).intersectBox(box,new THREE.Vector3());if(hit&&hit.distanceTo(aa)<=length)return true;
@@ -55,16 +57,23 @@ export class FlightWorld {
         }
       }
     }
-    const d=b.clone().sub(a),length=d.length();
-    if(length>0.001){
-      const ray=new THREE.Raycaster(a,d.normalize(),0,length+radius);
-      for(const mesh of this.landmarkMeshes){
-        const box=mesh.geometry.boundingBox!.clone().applyMatrix4(mesh.matrixWorld);
-        if(!box.intersectsBox(sweep))continue;
-        if(ray.intersectObject(mesh,false).length)return true;
-      }
-    }
     return false;
+  }
+  climbHeading(s:FlightState){
+    let best=s.yaw,bestScore=-Infinity;
+    for(let i=0;i<24;i++){
+      const yaw=s.yaw+(i%2?1:-1)*Math.ceil(i/2)*Math.PI/12;
+      let clearance=0;let previous=new THREE.Vector3(s.x,s.y+3,s.z);
+      for(let d=30;d<=1800;d+=30){
+        const x=s.x+Math.sin(yaw)*d,z=s.z-Math.cos(yaw)*d;
+        if(!this.supported(x,z))break;
+        const y=Math.min(413,s.y+3+Math.max(0,d-(s.phase==='grounded'?240:0))*.21),p=new THREE.Vector3(x,y,z);
+        if((s.phase==='grounded'&&d<300&&this.surface(x,z).kind!=='water')||y<this.surface(x,z).height+3||this.hit(previous,p,8))break;
+        clearance=d;previous=p;
+      }
+      const score=clearance-i*2;if(score>bestScore){bestScore=score;best=yaw;}
+    }
+    return best;
   }
   launch(x:number,z:number):{kind:AircraftKind;x:number;y:number;z:number;yaw:number}|null{
     if(!this.supported(x,z))return null;
@@ -72,7 +81,17 @@ export class FlightWorld {
     if(water){
       if(!this.e.waterWorld!.canOccupy(x,z,0,water.id,8,7.5))return null;
       const p=new THREE.Vector3(x,water.level+3,z);if(this.hit(p,p,7.5))return null;
-      return{kind:'seaplane',x,y:water.level,z,yaw:0};
+      // Select a clear initial water run, with the longest safe corridor winning.
+      let yaw=0,best=0;
+      for(let i=0;i<16;i++){const a=i*Math.PI/8;let length=0;
+        for(let d=30;d<=650;d+=30){const xx=x+Math.sin(a)*d,zz=z-Math.cos(a)*d;
+          if(this.e.waterWorld!.at(xx,zz)?.id!==water.id || this.hit(new THREE.Vector3(xx,water.level+3,zz),new THREE.Vector3(xx,water.level+3,zz),7.5))break;
+          length=d;
+        }
+        if(length>best){best=length;yaw=a;}
+      }
+      if(best<300)return null;
+      return{kind:'seaplane',x,y:water.level,z,yaw};
     }
     let best:{d:number;x:number;z:number;yaw:number}|null=null;
     for(const edge of this.e.placement!.world.roads){

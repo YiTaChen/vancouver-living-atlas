@@ -1,3 +1,4 @@
+import { FlightController } from './flight-controller';
 import { paintStartupProgress } from './startup-progress';
 import { ScenePreparationQueue } from './scene-preparation';
 import { PublicInteriors } from './interiors';
@@ -116,6 +117,8 @@ export class CityEngine {
   harbour: Harbour | null = null;
   sailingWaves: ReturnType<typeof addSailingWaves> | null = null;
   navigation: StreetNavigation | null = null;
+  flight: FlightController | null = null;
+  onFlightMode: (mode: 'orbit' | 'flight') => void = () => {};
   placement: MapPlacement | null = null;
   travelReturn: TravelReturn;
   settings = { ...DEFAULT_SETTINGS };
@@ -499,6 +502,7 @@ export class CityEngine {
       this.startupQA?.phase('controller.placement-proxies');
     }
     this.placement = new MapPlacement(this);
+    this.flight = new FlightController(this);
     if (!(await advance(92))) return;
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('render.composer-setup');
@@ -1074,6 +1078,7 @@ export class CityEngine {
     createRoadSurfaces(this);
   }
   flyTo(id: string, animate = true) {
+    if (this.flight?.attached) this.flight.detach();
     this.placement?.cancel();
     const v = VIEWS.find((p) => p.id === id) || VIEWS[0];
     this.fly(v, animate);
@@ -1118,10 +1123,12 @@ export class CityEngine {
     finishLocalMapTransition(this);
   }
   leaveTravelAtLocation(remember = false) {
+    if (this.flight?.attached) { this.flight.detach(); return; }
     if (!enterLocalMap(this, remember)) return;
     this.onLocalOrbit();
   }
   zoom(f: number) {
+    if (this.flight?.attached) { this.flight.zoom(f); return; }
     if (this.navigation && this.navigation.mode !== 'orbit') {
       this.navigation.zoom(f);
       return;
@@ -1137,6 +1144,7 @@ export class CityEngine {
     this.travelReturn?.update();
   }
   focusTrain(kind: TrainKind) {
+    if(this.flight?.attached) this.flight.detach();
     this.travelReturn?.invalidate(true);
     this.completeLocalMapTransition();
     const train = this.railway?.trains.find((t) => t.kind === kind);
@@ -1178,6 +1186,7 @@ export class CityEngine {
     };
   }
   focusHarbour(kind: HarbourKind) {
+    if(this.flight?.attached) this.flight.detach();
     this.travelReturn?.invalidate(true);
     this.completeLocalMapTransition();
     const actor = this.harbour?.actors.find((a) => a.kind === kind);
@@ -1203,8 +1212,11 @@ export class CityEngine {
     };
   }
   applySettings(settings: Settings) {
-    if (settings.mode !== this.settings.mode)
-      this.navigation?.setMode(settings.mode);
+    if (settings.mode !== this.settings.mode) {
+      if (settings.mode === 'walk' || settings.mode === 'drive' || settings.mode === 'boat') this.flight?.clear();
+      if (settings.mode === 'orbit' && this.flight?.attached) this.flight.detach();
+      if (settings.mode !== 'flight') this.navigation?.setMode(settings.mode);
+    }
     this.settings = { ...settings };
     this.scheduleScenery?.();
     this.buildings.visible = settings.buildings;
@@ -1342,7 +1354,8 @@ export class CityEngine {
       );
     if (this.settings.mode === 'orbit') {
       if (!this.transition) this.controls.update();
-    } else this.navigation?.update((time - this.lastTime) / 1000);
+    } else if (this.settings.mode !== 'flight') this.navigation?.update((time - this.lastTime) / 1000);
+    this.flight?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
     this.travelReturn?.update();
     this.sailingWaves?.update();
     this.minimap?.draw(time);
@@ -1392,10 +1405,10 @@ export class CityEngine {
       this.stats.renderHeight = this.renderer.domElement.height;
       this.stats.fps = Math.round((this.frames * 1000) / (time - this.fpsAt));
       this.stats.trafficStop = this.navigation?.trafficStop?.caption || '';
-      this.stats.speed = Math.round((this.navigation?.speed || 0) * 3.6);
+      this.stats.speed = Math.round((this.flight?.attached ? this.flight.state?.speed || 0 : this.navigation?.speed || 0) * 3.6);
       this.stats.clock = this.clock.snapshot();
       this.stats.heading = this.controls.getAzimuthalAngle();
-      const location = minimapPose(this.navigation, this.controls.target);
+      const location = this.flight?.pose || minimapPose(this.navigation, this.controls.target);
       [this.stats.lon, this.stats.lat] = unproject(location.x, location.z);
       this.stats.distance = Math.round(
         this.camera.position.distanceTo(this.controls.target),
@@ -1403,7 +1416,7 @@ export class CityEngine {
       this.stats.elevation = Math.round(
         this.settings.mode === 'orbit'
           ? this.elevation(this.controls.target.x, this.controls.target.z)
-          : this.navigation?.position.y || 0,
+          : this.flight?.attached ? this.flight.state!.y : this.navigation?.position.y || 0,
       );
       this.onStats({ ...this.stats });
       this.fpsAt = time;
@@ -1539,6 +1552,7 @@ export class CityEngine {
     this.labelElements.forEach((l) => l.element.remove());
     this.minimap = null;
     this.travelReturn?.destroy();
+    this.flight?.destroy();
     this.navigation?.destroy();
     this.placement?.destroy();
     this.controls.dispose();

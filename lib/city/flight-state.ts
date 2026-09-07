@@ -8,20 +8,20 @@ export interface FlightState {
   vx: number; vy: number; vz: number; yaw: number; pitch: number; roll: number;
   speed: number; power: number; phase: FlightPhase; cruise: boolean;
   hover: boolean; hoverHeight: number; attached: boolean; stalled: boolean;
-  impact: number; crashAge: number; age: number; join: boolean;
+  climbYaw: number; climbing: boolean; impact: number; crashAge: number; age: number; join: boolean;
 }
 export const clamp = (n: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, Number.isFinite(n) ? n : 0));
 const damp = (a: number, b: number, rate: number, dt: number) => a + (b-a)*(1-Math.exp(-rate*dt));
 const angle = (a: number) => Math.atan2(Math.sin(a), Math.cos(a));
-export const FLIGHT_LOOP = { x: -400, z: -1100, rx: 2250, rz: 2300, altitude: 410 };
+export const FLIGHT_LOOP = { x: -350, z: -650, rx: 2850, rz: 3000, altitude: 410 };
 export function createFlight(kind: AircraftKind, x: number, y: number, z: number, yaw = 0): FlightState {
   return { kind,x,y,z,yaw, vx:0,vy:0,vz:0,pitch:0,roll:0,speed:0,power:0,
     phase:'grounded',cruise:false,hover:false,hoverHeight:y,attached:true,
-    stalled:false,impact:0,crashAge:0,age:0,join:true };
+    stalled:false,climbYaw:yaw,climbing:true,impact:0,crashAge:0,age:0,join:true };
 }
 export function setFlightCruise(s: FlightState, enabled: boolean) {
   if (s.phase==='crashed') return;
-  s.cruise=enabled; s.hover=false; s.join=true;
+  s.cruise=enabled; s.hover=false; s.join=true;s.climbing=s.y<FLIGHT_LOOP.altitude-15;s.climbYaw=s.yaw;
 }
 export function setFlightHover(s: FlightState, enabled: boolean) {
   if(s.kind!=='helicopter'||s.phase==='crashed') return;
@@ -46,7 +46,8 @@ export function stepFlight(s: FlightState, raw: FlightInput, dt: number, surface
     const nearestX=l.x+Math.cos(t)*l.rx,nearestZ=l.z+Math.sin(t)*l.rz;
     s.join=Math.hypot(s.x-nearestX,s.z-nearestZ)>160;
     const look=t+0.20,tx=l.x+Math.cos(look)*l.rx,tz=l.z+Math.sin(look)*l.rz;
-    desiredYaw=Math.atan2(tx-s.x,-(tz-s.z));
+    if(s.y>=l.altitude-15)s.climbing=false;
+    desiredYaw=s.climbing?s.climbYaw:Math.atan2(tx-s.x,-(tz-s.z));
     targetHeight=Math.max(l.altitude,surfaceAt(s.x,s.z).height+120);
     // Coordinated, rate-limited turn; never translate onto the route.
     const turn=angle(desiredYaw-s.yaw);
@@ -72,7 +73,7 @@ export function stepFlight(s: FlightState, raw: FlightInput, dt: number, surface
     s.stalled=false;
     if(s.cruise){
       const turn=angle(desiredYaw-s.yaw);s.yaw+=clamp(turn*0.9,-0.42,0.42)*dt;
-      const speed=s.y < ground.height+35 ? 3 : Math.min(40,12+Math.max(0,s.y-ground.height-35)*0.3);
+      const speed=s.climbing ? 0 : 40;
       s.vx=damp(s.vx,Math.sin(s.yaw)*speed,0.6,dt);s.vz=damp(s.vz,-Math.cos(s.yaw)*speed,0.6,dt);
       s.vy=damp(s.vy,clamp((targetHeight-s.y)*0.28,-5,7),1,dt);
       s.pitch=damp(s.pitch,-0.13,2,dt);s.roll=damp(s.roll,r*0.3,2,dt);
