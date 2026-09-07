@@ -584,7 +584,7 @@ export default function Home() {
     >
       {stats.trafficStop && settings.mode === 'drive' && <div role="status" className="traffic-stop-caption glass">{stats.trafficStop === 'please safe driving' ? stats.trafficStop : tr('policeStop')}</div>}
       <div className="scene" ref={host} />
-      <FlightControls key={flight.attached ? flight.kind || 'flight' : 'placement'} controller={engine.current?.flight || null} state={flight} locale={locale} touch={touchUI} controlsEnabled={!about && !panel && (!mobilePanel || mobilePanel === 'map')} panelVisible={!about && !panel && !mobilePanel}/>
+      <FlightControls key={flight.attached ? flight.kind || 'flight' : 'placement'} controller={engine.current?.flight || null} state={flight} locale={locale} touch={touchUI} controlsEnabled={!about && !panel && (!mobilePanel || mobilePanel === 'map')} panelVisible={!about && !panel && (!mobilePanel || mobilePanel === 'travel')} mobileOptionsOpen={mobilePanel === 'travel'} onCloseMobileOptions={() => setMobilePanel(null)}/>
       {touchUI && ready && (
         <button
           className="mobile-hud-toggle glass"
@@ -619,10 +619,10 @@ export default function Home() {
                 <MapIcon size={21} />
               </button>
             )}
-            {!placing && settings.mode !== 'orbit' && settings.mode !== 'flight' && (
+            {!placing && settings.mode !== 'orbit' && (
               <button
                 className="glass"
-                aria-label={tr('touchTravelOptions')}
+                aria-label={settings.mode === 'flight' ? flightText(locale, 'options') : tr('touchTravelOptions')}
                 aria-expanded={mobilePanel === 'travel'}
                 onClick={() => {
                   setPanel(null);
@@ -696,7 +696,7 @@ export default function Home() {
                 onBrake={touchBrake}
               />
             )}
-          {mobilePanel === 'travel' && !placing && (
+          {mobilePanel === 'travel' && settings.mode !== 'flight' && !placing && (
             <section
               className="mobile-travel-sheet glass ui-chrome"
               aria-label={tr('touchTravelOptions')}

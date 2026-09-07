@@ -2520,32 +2520,48 @@ a {
 .atlas.touch-ui .mode-radio {width:100%;}
 .atlas.touch-ui .mode-pill {flex:1;justify-content:center;padding:8px 5px;min-width:0;}
 .atlas.touch-ui .mode-pill svg {width:15px;height:15px;flex-shrink:0;}
-.atlas.touch-ui .flight-panel {top:120px;left:12px;right:auto;width:calc(100% - 100px);max-width:280px;padding:6px 10px;}
+.atlas.touch-ui .flight-panel.mobile-travel-sheet {top:116px;left:auto;right:64px;width:min(278px,calc(100vw - 88px));max-height:calc(100dvh - 156px);padding:12px;}
 .atlas.touch-ui .flight-panel header {font-size:14px;}
-.atlas.touch-ui .flight-instruments {margin:3px 0 5px;font-size:12px;}
+.atlas.touch-ui .flight-instruments {margin:8px 0;font-size:12px;}
 .atlas.touch-ui .flight-instruments b {display:inline;font-size:14px;margin-left:3px;}
-.atlas.touch-ui .flight-options {max-height:min(280px,calc(100dvh - 450px));padding-bottom:5px;}
-.atlas.touch-ui .flight-power {left:auto;right:12px;bottom:120px;width:72px;padding:8px;}
+.atlas.touch-ui .flight-options {max-height:none;overflow:visible;padding-bottom:5px;}
+.atlas.touch-ui .flight-helm {position:absolute;z-index:34;right:max(12px,env(safe-area-inset-right));bottom:max(24px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:flex-end;gap:8px;width:104px;pointer-events:none;}
+.atlas.touch-ui .flight-cruise {pointer-events:auto;display:flex;align-items:center;justify-content:center;gap:6px;width:104px;min-height:44px;padding:8px;border:1px solid #4e7177;border-radius:13px;font-size:14px;line-height:1.2;overflow-wrap:anywhere;}
+.flight-cruise svg {flex-shrink:0;}
+.flight-cruise[aria-pressed=true] {color:#17363c;background:#dce7a2;border-color:#dce7a2;}
+.flight-cruise:focus-visible {outline:2px solid #e0eaa0;outline-offset:2px;}
+.atlas.touch-ui .flight-power {position:static;pointer-events:auto;width:72px;padding:8px;}
 .atlas.touch-ui .flight-power-track {height:92px;padding:12px 14px;}
 .atlas.touch-ui .flight-power strong {font-size:20px;}
-.atlas.touch-ui .flight-yaw {left:18px;right:auto;bottom:158px;}
+.atlas.touch-ui.flight-mode .mobile-zoom {right:max(100px,calc(env(safe-area-inset-right) + 100px));bottom:max(24px,env(safe-area-inset-bottom));}
 .atlas.touch-ui .flight-return {top:121px;left:12px;right:auto;max-width:calc(100% - 80px);font-size:14px;}
 .atlas.touch-ui .flight-placement {bottom:24px;width:auto;padding:5px;max-width:calc(100% - 90px);}
 .atlas.touch-ui .flight-placement button {font-size:14px;}
-.atlas.touch-ui .flight-alert {bottom:250px;font-size:13px;width:calc(100% - 180px);max-width:300px;text-align:center;padding:8px;}
+.atlas.touch-ui .flight-alert {bottom:190px;font-size:13px;left:12px;transform:none;width:calc(100% - 140px);max-width:300px;text-align:center;padding:8px;}
 .atlas.touch-ui.flight-placement-mode .mobile-actions {display:none;}
-@media(max-height:650px) and (orientation:portrait){
-  .atlas.touch-ui .flight-power {bottom:24px;}
-  .atlas.touch-ui.flight-mode .mobile-zoom {right:94px;bottom:24px;}
+@media(max-height:700px) and (orientation:portrait){
+  .atlas.touch-ui.flight-mode .mobile-actions {flex-direction:row;gap:4px;}
+  .atlas.touch-ui .flight-panel.mobile-travel-sheet {top:170px;right:12px;width:min(278px,calc(100vw - 24px));max-height:calc(100dvh - 194px);}
+  .atlas.touch-ui.flight-mode .map-inset {top:170px;right:12px;}
 }
 @media(max-height:540px) and (orientation:landscape){
-  .atlas.touch-ui .flight-panel {top:100px;left:12px;width:260px;max-width:calc(100% - 280px);}
-  .atlas.touch-ui .flight-panel.collapsed .flight-instruments {margin:0;font-size:11px;}
-  .atlas.touch-ui .flight-panel.expanded {left:154px;width:min(340px,calc(100% - 350px));max-width:none;max-height:calc(100dvh - 190px);overflow-y:auto;overscroll-behavior:contain;}
-  .atlas.touch-ui .flight-options {max-height:none;overflow:visible;}
-  .atlas.touch-ui .flight-power {bottom:14px;right:12px;width:72px;}
-  .atlas.touch-ui .flight-power-track {height:70px;}
-  .atlas.touch-ui .flight-yaw {bottom:18px;left:154px;}
-  .atlas.touch-ui.flight-mode .mobile-zoom {right:94px;bottom:18px;}
-  .atlas.touch-ui .flight-alert {bottom:84px;}
+  .atlas.touch-ui.flight-mode .mobile-actions {right:132px;}
+  .atlas.touch-ui .flight-panel.mobile-travel-sheet {top:100px;right:132px;width:300px;max-height:calc(100dvh - 124px);}
+  .atlas.touch-ui .flight-helm {bottom:max(14px,env(safe-area-inset-bottom));}
+  .atlas.touch-ui .flight-power label {display:none;}
+  .atlas.touch-ui .flight-power-track {height:42px;padding-top:8px;padding-bottom:8px;}
+  .atlas.touch-ui.flight-mode .mobile-zoom {bottom:max(14px,env(safe-area-inset-bottom));}
+  .atlas.touch-ui .flight-alert {bottom:150px;left:154px;width:calc(100% - 330px);}
+}
+/* Short landscape viewports include space taken by mobile browser chrome. */
+@media(max-height:360px) and (orientation:landscape){
+  .atlas.touch-ui .flight-helm,.atlas.touch-ui .flight-cruise {width:128px;}
+  .atlas.touch-ui .flight-cruise svg {display:none;}
+  .atlas.touch-ui.flight-mode .mobile-actions {right:148px;}
+  .atlas.touch-ui .flight-power {width:104px;display:grid;grid-template-columns:1fr 44px;gap:4px;padding:6px;}
+  .atlas.touch-ui .flight-power strong {grid-column:1/-1;margin:0;line-height:24px;}
+  .atlas.touch-ui .flight-power [data-flight-key=r] {grid-column:2;grid-row:2;}
+  .atlas.touch-ui .flight-power [data-flight-key=f] {grid-column:2;grid-row:3;}
+  .atlas.touch-ui .flight-power-track {grid-column:1;grid-row:2/span 2;height:92px;padding:8px 4px;}
+  .atlas.touch-ui.flight-mode .mobile-zoom {right:132px;}
 }

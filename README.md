@@ -59,7 +59,7 @@ This is assisted sightseeing flight with approximate physics. [Development plan,
 | **Walk** | **W / S** forward/back, **A / D** turn, **Shift** faster; drag to look. | Left stick moves and strafes; drag the scene to look. |
 | **Drive** | **W / S** throttle/reverse, **A / D** steer, **Space** brake. | Left stick controls throttle/reverse and steering. |
 | **Boat** | **W / S** throttle/reverse, **A / D** rudder, **Space** neutral. | Left stick controls propulsion and steering. |
-| **Fly** | **W / S** nose down/up, **A / D** bank, **Q / E** yaw, **R / F** power, **C** cruise; helicopter **H** hover, **X** descend. | Flight stick, throttle/collective lever with +/− buttons, yaw and helicopter controls. Compact instruments with expandable flight options. |
+| **Fly** | **W / S** nose down/up, **A / D** bank, **Q / E** yaw, **R / F** power, **C** cruise; helicopter **H** hover, **X** descend. | Flight stick; lower-right throttle/collective lever with +/− buttons and Auto cruise above it. Camera and other flight settings open from the toolbar. |
 
 **Choose a starting point.** Select Walk, Drive or Boat, then click a suitable place—or drag its icon onto the map. Zoom in for precision. Roads snap to valid driving positions; boats need room clear of shores and docks. On mobile, tap a valid location to start; placement keeps only the Cancel control over the map.
 

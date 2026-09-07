@@ -14,13 +14,12 @@ import {
   MoveRight,
   Plus,
   Minus,
-  SlidersHorizontal,
 } from 'lucide-react';
 import { Slider } from './ui/slider';
 import { TravelJoystick } from './travel-joystick';
 import type { FlightController } from '@/lib/city/flight-controller';
 import type { FlightSnapshot } from '@/lib/city/flight-snapshot';
-import type { Locale } from '@/lib/i18n';
+import { translate, type Locale } from '@/lib/i18n';
 import messages from '@/lib/i18n/flight.json';
 export function flightText(locale: Locale, key: keyof typeof messages.en) {
   return messages[locale][key];
@@ -102,6 +101,8 @@ export function FlightControls({
   touch,
   controlsEnabled = true,
   panelVisible = true,
+  mobileOptionsOpen = false,
+  onCloseMobileOptions,
 }: {
   controller: FlightController | null;
   state: FlightSnapshot;
@@ -109,12 +110,21 @@ export function FlightControls({
   touch: boolean;
   controlsEnabled?: boolean;
   panelVisible?: boolean;
+  mobileOptionsOpen?: boolean;
+  onCloseMobileOptions?: () => void;
 }) {
   const [help, setHelp] = useState(false);
-  const [expanded, setExpanded] = useState(false);
   const t = (key: keyof typeof messages.en) => flightText(locale, key);
   const move = useCallback(
-    (x: number, y: number) => controller?.setStick(x, y),
+    (x: number, y: number) => {
+      controller?.setStick(x, y);
+      // With no separate mobile pedals, coordinate the helicopter's heading
+      // with the stick; floatplanes already turn through banking.
+      controller?.setHold(
+        'yaw',
+        controller.snapshot.kind === 'helicopter' ? x : 0,
+      );
+    },
     [controller],
   );
   const noop = useCallback(() => {}, []);
@@ -126,7 +136,6 @@ export function FlightControls({
   }, [controller, canPilot]);
   if (!controller) return null;
   const isHeli = state.kind === 'helicopter';
-  const bodyVisible = !touch || expanded;
   const keyButton = (
     code: string,
     label: keyof typeof messages.en,
@@ -198,9 +207,9 @@ export function FlightControls({
       )}
       {state.attached && (
         <>
-          {panelVisible && (
+          {panelVisible && (!touch || mobileOptionsOpen) && (
             <section
-              className={`flight-panel glass ui-chrome ${bodyVisible ? 'expanded' : 'collapsed'}`}
+              className={`flight-panel glass ui-chrome ${touch ? 'mobile-travel-sheet' : ''}`}
               aria-label={t('fly')}
             >
               <header>
@@ -208,16 +217,10 @@ export function FlightControls({
                 <strong>{t(state.kind || 'seaplane')}</strong>
                 {touch ? (
                   <button
-                    aria-label={t('options')}
-                    aria-expanded={expanded}
-                    aria-controls="flight-options"
-                    onClick={() => setExpanded(!expanded)}
+                    aria-label={translate(locale, 'close')}
+                    onClick={onCloseMobileOptions}
                   >
-                    {expanded ? (
-                      <X size={19} />
-                    ) : (
-                      <SlidersHorizontal size={19} />
-                    )}
+                    <X size={19} />
                   </button>
                 ) : (
                   <button
@@ -237,18 +240,20 @@ export function FlightControls({
                   {t('airspeed')} <b>{state.speed} kn</b>
                 </span>
               </div>
-              {bodyVisible && (
-                <div id="flight-options" className="flight-options">
+              <div id="flight-options" className="flight-options">
+                {(!touch || isHeli) && (
                   <div className="flight-actions">
-                    <button
-                      aria-pressed={state.cruise}
-                      disabled={state.phase === 'crashed'}
-                      onClick={() => controller.cruise()}
-                    >
-                      <Navigation size={15} />
-                      {t(state.cruise ? 'pauseCruise' : 'cruise')}
-                      <kbd>C</kbd>
-                    </button>
+                    {!touch && (
+                      <button
+                        aria-pressed={state.cruise}
+                        disabled={state.phase === 'crashed'}
+                        onClick={() => controller.cruise()}
+                      >
+                        <Navigation size={15} />
+                        {t(state.cruise ? 'pauseCruise' : 'cruise')}
+                        <kbd>C</kbd>
+                      </button>
+                    )}
                     {isHeli && (
                       <button
                         aria-pressed={state.hover}
@@ -260,53 +265,53 @@ export function FlightControls({
                       </button>
                     )}
                   </div>
-                  <fieldset className="flight-views" aria-label={t('cockpit')}>
-                    {(['cockpit', 'clear', 'chase'] as const).map((v) => (
-                      <button
-                        key={v}
-                        aria-pressed={state.view === v}
-                        onClick={() => controller.setView(v)}
-                      >
-                        {v === 'chase' && <Camera size={14} />}
-                        {t(v)}
-                      </button>
-                    ))}
-                  </fieldset>
-                  <button
-                    className="flight-new"
-                    onClick={() => controller.beginPlacement()}
-                  >
-                    {t('newFlight')}
-                  </button>
-                  {touch && (
+                )}
+                <fieldset className="flight-views" aria-label={t('cockpit')}>
+                  {(['cockpit', 'clear', 'chase'] as const).map((v) => (
                     <button
-                      className="flight-help-toggle"
-                      aria-expanded={help}
-                      onClick={() => setHelp(!help)}
+                      key={v}
+                      aria-pressed={state.view === v}
+                      onClick={() => controller.setView(v)}
                     >
-                      <HelpCircle size={16} />
-                      {t('help')}
+                      {v === 'chase' && <Camera size={14} />}
+                      {t(v)}
                     </button>
-                  )}
-                  {help && (
-                    <div className="flight-help">
-                      <p>{t('intro')}</p>
-                      <p>{touch ? t('touchHint') : t('controls')}</p>
-                      <p>
-                        {t('powerHint')}
-                        {isHeli && (
-                          <>
-                            {' '}
-                            · H: {t('hover')} · X: {t('descend')}
-                          </>
-                        )}{' '}
-                        · C: {t('cruise')}
-                      </p>
-                      <p>{t('cruiseHint')}</p>
-                    </div>
-                  )}
-                </div>
-              )}
+                  ))}
+                </fieldset>
+                <button
+                  className="flight-new"
+                  onClick={() => controller.beginPlacement()}
+                >
+                  {t('newFlight')}
+                </button>
+                {touch && (
+                  <button
+                    className="flight-help-toggle"
+                    aria-expanded={help}
+                    onClick={() => setHelp(!help)}
+                  >
+                    <HelpCircle size={16} />
+                    {t('help')}
+                  </button>
+                )}
+                {help && (
+                  <div className="flight-help">
+                    <p>{t('intro')}</p>
+                    <p>{touch ? t('touchHint') : t('controls')}</p>
+                    <p>
+                      {t('powerHint')}
+                      {isHeli && (
+                        <>
+                          {' '}
+                          · H: {t('hover')} · X: {t('descend')}
+                        </>
+                      )}{' '}
+                      · C: {t('cruise')}
+                    </p>
+                    <p>{t('cruiseHint')}</p>
+                  </div>
+                )}
+              </div>
               {state.cruise && (
                 <small>{t(state.join ? 'joining' : 'circling')}</small>
               )}
@@ -314,31 +319,51 @@ export function FlightControls({
           )}
           {canPilot && (
             <>
-              <section
-                className="flight-power glass"
-                data-flight-power
-                aria-label={t(isHeli ? 'collective' : 'throttle')}
-              >
-                <label id="flight-power-label">
-                  {t(isHeli ? 'collective' : 'throttle')}
-                </label>
-                <strong>{Math.round(state.power * 100)}%</strong>
-                {keyButton('r', 'powerUp', <Plus size={18} />)}
-                <div className="flight-power-track">
-                  <Slider
-                    orientation="vertical"
-                    aria-labelledby="flight-power-label"
-                    min={0}
-                    max={100}
-                    step={1}
-                    value={[Math.round(state.power * 100)]}
-                    onValueChange={(v) =>
-                      controller.setPower((Array.isArray(v) ? v[0] : v) / 100)
-                    }
-                  />
-                </div>
-                {keyButton('f', 'powerDown', <Minus size={18} />)}
-              </section>
+              <div className="flight-helm">
+                {touch && (
+                  <button
+                    className="flight-cruise glass"
+                    aria-label={t('cruise')}
+                    aria-pressed={state.cruise}
+                    title={t(
+                      state.cruise
+                        ? state.join
+                          ? 'joining'
+                          : 'circling'
+                        : 'cruise',
+                    )}
+                    onClick={() => controller.cruise()}
+                  >
+                    <Navigation size={18} />
+                    <span>{t('cruise')}</span>
+                  </button>
+                )}
+                <section
+                  className="flight-power glass"
+                  data-flight-power
+                  aria-label={t(isHeli ? 'collective' : 'throttle')}
+                >
+                  <label id="flight-power-label">
+                    {t(isHeli ? 'collective' : 'throttle')}
+                  </label>
+                  <strong>{Math.round(state.power * 100)}%</strong>
+                  {keyButton('r', 'powerUp', <Plus size={18} />)}
+                  <div className="flight-power-track">
+                    <Slider
+                      orientation="vertical"
+                      aria-labelledby="flight-power-label"
+                      min={0}
+                      max={100}
+                      step={1}
+                      value={[Math.round(state.power * 100)]}
+                      onValueChange={(v) =>
+                        controller.setPower((Array.isArray(v) ? v[0] : v) / 100)
+                      }
+                    />
+                  </div>
+                  {keyButton('f', 'powerDown', <Minus size={18} />)}
+                </section>
+              </div>
               {touch ? (
                 <TravelJoystick
                   mode="walk"
@@ -358,11 +383,13 @@ export function FlightControls({
                   {keyButton('d', 'bankRight', <MoveRight size={19} />)}
                 </fieldset>
               )}
-              <fieldset className="flight-yaw glass" aria-label={t('help')}>
-                {keyButton('q', 'left', <MoveLeft size={19} />)}
-                {keyButton('e', 'right', <MoveRight size={19} />)}
-                {isHeli && keyButton('x', 'descend', <ArrowDown size={19} />)}
-              </fieldset>
+              {!touch && (
+                <fieldset className="flight-yaw glass" aria-label={t('help')}>
+                  {keyButton('q', 'left', <MoveLeft size={19} />)}
+                  {keyButton('e', 'right', <MoveRight size={19} />)}
+                  {isHeli && keyButton('x', 'descend', <ArrowDown size={19} />)}
+                </fieldset>
+              )}
             </>
           )}
           {(state.stalled ||
