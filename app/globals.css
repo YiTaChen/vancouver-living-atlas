@@ -2493,7 +2493,10 @@ a {
 .flight-options {max-height:calc(100dvh - 330px);overflow-y:auto;overscroll-behavior:contain;}
 .flight-panel .flight-new {margin-top:9px;width:100%;color:#bbd0d0;font-size:13px;background:transparent;border-style:dashed;}
 .flight-panel .flight-help-toggle {margin-top:8px;width:100%;}
-.flight-power {position:absolute;z-index:34;left:28px;bottom:82px;width:86px;padding:10px;border-radius:16px;text-align:center;touch-action:none;}
+.flight-power {position:static;pointer-events:auto;width:86px;padding:10px;border-radius:16px;text-align:center;touch-action:none;}
+.flight-helm {position:absolute;z-index:34;left:28px;bottom:82px;display:flex;flex-direction:column;align-items:flex-start;gap:8px;pointer-events:none;}
+.flight-cruise {pointer-events:auto;display:flex;align-items:center;justify-content:center;gap:6px;max-width:150px;min-height:44px;padding:8px;border:1px solid #4e7177;border-radius:13px;font-size:14px;line-height:1.2;overflow-wrap:anywhere;}
+.flight-cruise kbd {font:600 12px ui-monospace,monospace;}
 .flight-power label {font-size:12px;line-height:1.3;display:block;overflow-wrap:anywhere;}
 .flight-power strong {display:block;font-size:22px;color:#dce7a2;margin:5px 0;font-variant-numeric:tabular-nums;}
 .flight-power button {width:100%;}
@@ -2525,7 +2528,7 @@ a {
 .atlas.touch-ui .flight-instruments {margin:8px 0;font-size:12px;}
 .atlas.touch-ui .flight-instruments b {display:inline;font-size:14px;margin-left:3px;}
 .atlas.touch-ui .flight-options {max-height:none;overflow:visible;padding-bottom:5px;}
-.atlas.touch-ui .flight-helm {position:absolute;z-index:34;right:max(12px,env(safe-area-inset-right));bottom:max(24px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:flex-end;gap:8px;width:104px;pointer-events:none;}
+.atlas.touch-ui .flight-helm {left:auto;position:absolute;z-index:34;right:max(12px,env(safe-area-inset-right));bottom:max(24px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:flex-end;gap:8px;width:104px;pointer-events:none;}
 .atlas.touch-ui .flight-cruise {pointer-events:auto;display:flex;align-items:center;justify-content:center;gap:6px;width:104px;min-height:44px;padding:8px;border:1px solid #4e7177;border-radius:13px;font-size:14px;line-height:1.2;overflow-wrap:anywhere;}
 .flight-cruise svg {flex-shrink:0;}
 .flight-cruise[aria-pressed=true] {color:#17363c;background:#dce7a2;border-color:#dce7a2;}

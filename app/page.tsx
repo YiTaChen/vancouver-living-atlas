@@ -584,7 +584,7 @@ export default function Home() {
     >
       {stats.trafficStop && settings.mode === 'drive' && <div role="status" className="traffic-stop-caption glass">{stats.trafficStop === 'please safe driving' ? stats.trafficStop : tr('policeStop')}</div>}
       <div className="scene" ref={host} />
-      <FlightControls key={flight.attached ? flight.kind || 'flight' : 'placement'} controller={engine.current?.flight || null} state={flight} locale={locale} touch={touchUI} controlsEnabled={!about && !panel && (!mobilePanel || mobilePanel === 'map')} panelVisible={!about && !panel && (!mobilePanel || mobilePanel === 'travel')} mobileOptionsOpen={mobilePanel === 'travel'} onCloseMobileOptions={() => setMobilePanel(null)}/>
+      <FlightControls key={flight.attached ? flight.kind || 'flight' : 'placement'} controller={engine.current?.flight || null} state={flight} locale={locale} touch={touchUI} controlsEnabled={!about && !panel && (!mobilePanel || mobilePanel === 'map')} panelVisible={!about && !panel && (!mobilePanel || mobilePanel === 'travel')} optionsOpen={mobilePanel === 'travel'} onCloseOptions={() => setMobilePanel(null)}/>
       {touchUI && ready && (
         <button
           className="mobile-hud-toggle glass"
@@ -1209,6 +1209,20 @@ export default function Home() {
             }}
           />
         </button>
+        {!touchUI && settings.mode === 'flight' && flight.attached && (
+          <button
+            title={flightText(locale, 'options')}
+            aria-label={flightText(locale, 'options')}
+            aria-expanded={mobilePanel === 'travel'}
+            aria-controls="flight-options"
+            onClick={() => {
+              setPanel(null);
+              setMobilePanel(mobilePanel === 'travel' ? null : 'travel');
+            }}
+          >
+            <SlidersHorizontal size={19} />
+          </button>
+        )}
         <span />
         <button
           title={

@@ -101,8 +101,8 @@ export function FlightControls({
   touch,
   controlsEnabled = true,
   panelVisible = true,
-  mobileOptionsOpen = false,
-  onCloseMobileOptions,
+  optionsOpen = false,
+  onCloseOptions,
 }: {
   controller: FlightController | null;
   state: FlightSnapshot;
@@ -110,8 +110,8 @@ export function FlightControls({
   touch: boolean;
   controlsEnabled?: boolean;
   panelVisible?: boolean;
-  mobileOptionsOpen?: boolean;
-  onCloseMobileOptions?: () => void;
+  optionsOpen?: boolean;
+  onCloseOptions?: () => void;
 }) {
   const [help, setHelp] = useState(false);
   const t = (key: keyof typeof messages.en) => flightText(locale, key);
@@ -207,7 +207,7 @@ export function FlightControls({
       )}
       {state.attached && (
         <>
-          {panelVisible && (!touch || mobileOptionsOpen) && (
+          {panelVisible && optionsOpen && (
             <section
               className={`flight-panel glass ui-chrome ${touch ? 'mobile-travel-sheet' : ''}`}
               aria-label={t('fly')}
@@ -215,22 +215,12 @@ export function FlightControls({
               <header>
                 {isHeli ? <Helicopter size={19} /> : <Plane size={19} />}
                 <strong>{t(state.kind || 'seaplane')}</strong>
-                {touch ? (
-                  <button
-                    aria-label={translate(locale, 'close')}
-                    onClick={onCloseMobileOptions}
-                  >
-                    <X size={19} />
-                  </button>
-                ) : (
-                  <button
-                    aria-label={t('help')}
-                    aria-expanded={help}
-                    onClick={() => setHelp(!help)}
-                  >
-                    <HelpCircle size={18} />
-                  </button>
-                )}
+                <button
+                  aria-label={translate(locale, 'close')}
+                  onClick={onCloseOptions}
+                >
+                  <X size={19} />
+                </button>
               </header>
               <div className="flight-instruments">
                 <span>
@@ -241,19 +231,8 @@ export function FlightControls({
                 </span>
               </div>
               <div id="flight-options" className="flight-options">
-                {(!touch || isHeli) && (
+                {isHeli && (
                   <div className="flight-actions">
-                    {!touch && (
-                      <button
-                        aria-pressed={state.cruise}
-                        disabled={state.phase === 'crashed'}
-                        onClick={() => controller.cruise()}
-                      >
-                        <Navigation size={15} />
-                        {t(state.cruise ? 'pauseCruise' : 'cruise')}
-                        <kbd>C</kbd>
-                      </button>
-                    )}
                     {isHeli && (
                       <button
                         aria-pressed={state.hover}
@@ -284,16 +263,14 @@ export function FlightControls({
                 >
                   {t('newFlight')}
                 </button>
-                {touch && (
-                  <button
-                    className="flight-help-toggle"
-                    aria-expanded={help}
-                    onClick={() => setHelp(!help)}
-                  >
-                    <HelpCircle size={16} />
-                    {t('help')}
-                  </button>
-                )}
+                <button
+                  className="flight-help-toggle"
+                  aria-expanded={help}
+                  onClick={() => setHelp(!help)}
+                >
+                  <HelpCircle size={16} />
+                  {t('help')}
+                </button>
                 {help && (
                   <div className="flight-help">
                     <p>{t('intro')}</p>
@@ -320,24 +297,23 @@ export function FlightControls({
           {canPilot && (
             <>
               <div className="flight-helm">
-                {touch && (
-                  <button
-                    className="flight-cruise glass"
-                    aria-label={t('cruise')}
-                    aria-pressed={state.cruise}
-                    title={t(
-                      state.cruise
-                        ? state.join
-                          ? 'joining'
-                          : 'circling'
-                        : 'cruise',
-                    )}
-                    onClick={() => controller.cruise()}
-                  >
-                    <Navigation size={18} />
-                    <span>{t('cruise')}</span>
-                  </button>
-                )}
+                <button
+                  className="flight-cruise glass"
+                  aria-label={t('cruise')}
+                  aria-pressed={state.cruise}
+                  title={t(
+                    state.cruise
+                      ? state.join
+                        ? 'joining'
+                        : 'circling'
+                      : 'cruise',
+                  )}
+                  onClick={() => controller.cruise()}
+                >
+                  <Navigation size={18} />
+                  <span>{t('cruise')}</span>
+                  {!touch && <kbd>C</kbd>}
+                </button>
                 <section
                   className="flight-power glass"
                   data-flight-power

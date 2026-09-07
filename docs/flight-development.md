@@ -95,3 +95,9 @@ Validation:
 - Power sits at the lower right with a separate, labeled Auto cruise toggle immediately above it. It shows the active state and remains visible with the stick and power controls when Hide interface is enabled. Zoom occupies its own adjacent space.
 - Short portrait layouts arrange tool icons in a row. Very short landscape layouts put the +/− buttons beside the lever so the cruise control clears the mode selector, including mobile browser chrome and longer localized labels.
 - Validation: TypeScript and touched-component lint passed; 14 flight-session regressions passed; Firebase production build and emitted-worker checks passed. Browser viewport checks covered phone 390 × 844 and 320 × 568, landscape 844 × 390 and 844 × 320 (including the longer French cruise label), and tablet 768 × 1024. Both aircraft use the compact touch layout; the cruise toggle, optional camera settings and hidden-interface controls were exercised. A tablet stick drag took over from helicopter hover. Viewport QA does not represent physical iOS hardware testing.
+
+## Desktop flight controls without a persistent card (2026-09-07)
+
+- Desktop now follows the touch layout's optional-card behavior. Flight options open from the right toolbar, preserving instruments, camera selection, new flight, helicopter hover and help; a close button dismisses the card.
+- Auto cruise is a separate button immediately above the desktop power lever. Its pressed state and C shortcut remain visible. Mobile retains its lower-right lever and cruise arrangement.
+- Validation: TypeScript, component lint, 14 flight-session regressions and Firebase production build checks passed. Actual browser checks covered both airframes, cruise activation, optional settings, cockpit selection, closing settings and starting a replacement flight.

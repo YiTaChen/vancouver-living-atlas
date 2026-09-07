@@ -55,6 +55,8 @@ Choose **Fly**, then place an aircraft on a suitable launch surface. The marker 
 - **Auto cruise** joins a circuit around Downtown and Stanley Park. Zoom out to explore the map while the aircraft continues flying; a separate **Return to aircraft** button brings you back even after panning. Starting another vehicle or flight replaces the previous aircraft.
 - **Landing and collision feedback:** harder touchdowns shake the camera more. Invalid landings or impacts with buildings/bridges trigger fire and smoke, return to a local overview after eight simulation seconds, and clear the effect after twenty.
 
+On desktop, the flight information card stays closed until you open **Flight options** in the right toolbar. **Auto cruise** sits directly above the left power lever, with its active state and **C** shortcut visible.
+
 Desktop controls display their keyboard shortcuts; **R / F** and **WASD** keep working after adjusting the power slider. Mobile pilots use the left stick and a separate throttle/collective lever, with tap/hold +/− controls.
 
 This is assisted sightseeing flight with approximate physics. [Development plan, controls, validation and known limits](docs/flight-development.md).
