@@ -2499,7 +2499,7 @@ a {
 .flight-return {position:absolute;z-index:34;top:163px;right:94px;padding:13px 18px;color:#e0eaa0;}
 .flight-placement {position:absolute;z-index:35;bottom:86px;left:50%;transform:translateX(-50%);max-width:calc(100% - 36px);width:780px;display:flex;align-items:center;gap:12px;padding:14px;border-radius:14px;flex-wrap:wrap;}
 .flight-placement span {flex:1;font-size:14px;min-width:190px;}
-.flight-placement small {width:100%;color:#ffac99;}
+.flight-placement output {width:100%;color:#ffac99;font-size:12px;}
 .flight-alert {position:absolute;z-index:38;bottom:82px;left:50%;transform:translateX(-50%);padding:12px 18px;border-radius:12px;color:#ffe1b7;max-width:calc(100% - 36px);font-size:14px;pointer-events:none;}
 .flight-placement-mode .explore-panel,.flight-placement-mode .view-caption,.flight-placement-mode .map-inset {display:none!important;}
 .flight-mode:not(.touch-ui) .map-inset {bottom:116px;top:auto;width:230px;}
@@ -2520,4 +2520,15 @@ a {
 .atlas.touch-ui .flight-placement span {font-size:12px;}
 .atlas.touch-ui .flight-placement button {font-size:12px;}
 .atlas.touch-ui .flight-alert {bottom:14px;font-size:12px;}
-@media(max-height:540px){.atlas.touch-ui .flight-panel{max-width:270px;top:62px;left:125px;}.atlas.touch-ui .flight-panel header,.atlas.touch-ui .flight-instruments{display:none}.atlas.touch-ui .flight-power{bottom:75px}.atlas.touch-ui .flight-power-track{height:80px}.atlas.touch-ui .flight-yaw{bottom:16px}.atlas.touch-ui .flight-help{max-height:130px}}
+.flight-panel .flight-new {margin-top:9px;width:100%;padding:5px;min-height:30px;color:#bbd0d0;font-size:11px;background:transparent;border-style:dashed;}
+@media(max-height:540px) and (orientation:landscape){
+  .atlas.touch-ui .flight-panel {top:auto;bottom:12px;left:146px;width:calc(100% - 338px);max-width:450px;display:grid;grid-template-columns:1fr auto;gap:5px;}
+  .atlas.touch-ui .flight-panel header,.atlas.touch-ui .flight-instruments {display:none;}
+  .atlas.touch-ui .flight-actions,.atlas.touch-ui .flight-views,.atlas.touch-ui .flight-panel small {margin-top:0;}
+  .atlas.touch-ui .flight-views,.atlas.touch-ui .flight-panel small,.atlas.touch-ui .flight-help {grid-column:1/-1;}
+  .atlas.touch-ui .flight-panel .flight-new {margin-top:0;width:auto;padding:5px 9px;}
+  .atlas.touch-ui .flight-power {bottom:75px;}
+  .atlas.touch-ui .flight-power-track {height:80px;}
+  .atlas.touch-ui .flight-yaw {bottom:16px;}
+  .atlas.touch-ui .flight-help {max-height:90px;}
+}

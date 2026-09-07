@@ -516,6 +516,7 @@ export default function Home() {
     if (mode === 'orbit') {
       setTour(false);
       engine.current?.placement?.cancel();
+      engine.current?.flight?.cancelPlacement();
       change({ mode: 'orbit', autoRotate: false });
       engine.current?.leaveTravelAtLocation();
     } else if (!switchInScene(mode as TravelMode))
@@ -575,7 +576,7 @@ export default function Home() {
     >
       {stats.trafficStop && settings.mode === 'drive' && <div role="status" className="traffic-stop-caption glass">{stats.trafficStop === 'please safe driving' ? stats.trafficStop : tr('policeStop')}</div>}
       <div className="scene" ref={host} />
-      <FlightControls controller={engine.current?.flight || null} state={flight} locale={locale} touch={touchUI} controlsEnabled={!about && !panel && (!mobilePanel || mobilePanel === 'map')}/>
+      <FlightControls controller={engine.current?.flight || null} state={flight} locale={locale} touch={touchUI} controlsEnabled={!about && !panel && (!mobilePanel || mobilePanel === 'map')} panelVisible={!about && !panel && !mobilePanel}/>
       {touchUI && ready && (
         <button
           className="mobile-hud-toggle glass"
@@ -942,7 +943,7 @@ export default function Home() {
                   : (event) => dragFigure(event, m.id as TravelMode)
               }
               onClickCapture={
-                m.id === 'orbit' || m.id === 'flight'
+                m.id === 'flight' ? (event) => {event.preventDefault(); event.stopPropagation(); beginFlight();} : m.id === 'orbit'
                   ? undefined
                   : (event) => {
                       if (event.detail > 0) {
