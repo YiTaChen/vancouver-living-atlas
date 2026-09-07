@@ -15,6 +15,11 @@ export interface FlightSnapshot {
   stalled: boolean;
   crashSeconds: number;
   warning: string;
+  preview: {
+    screen: [number, number];
+    valid: boolean;
+    kind: AircraftKind | null;
+  } | null;
 }
 export const EMPTY_FLIGHT: FlightSnapshot = {
   exists: false,
@@ -32,4 +37,5 @@ export const EMPTY_FLIGHT: FlightSnapshot = {
   stalled: false,
   crashSeconds: 0,
   warning: '',
+  preview: null,
 };

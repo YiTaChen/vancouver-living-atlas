@@ -2472,34 +2472,47 @@ a {
 .traffic-stop-caption {position:absolute;z-index:45;top:170px;left:50%;transform:translateX(-50%);padding:14px 22px;border:1px solid #7896ac;border-radius:14px;color:#fff;text-align:center;pointer-events:none;max-width:calc(100% - 36px);font-size:18px;}
 @media(max-width:1024px){.traffic-stop-caption{top:124px;font-size:15px;padding:10px 16px;}}
 
-/* Flight uses its own compact HUD; power and stick remain when UI is hidden. */
-.flight-panel { position:absolute;z-index:32;right:94px;top:162px;width:286px;padding:14px;border-radius:16px;font-size:13px; }
-.flight-panel header {display:flex;align-items:center;gap:8px;margin-bottom:10px;}
-.flight-panel header button {margin-left:auto;}
-.flight-panel button,.flight-placement button,.flight-yaw button,.flight-return {display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid #4e7177;border-radius:9px;padding:9px;color:#dfeddd;min-height:38px;background:#18333bcc;}
+/* Flight: shared controls, with essential inputs retained when HUD is hidden. */
+.flight-panel {position:absolute;z-index:32;right:94px;top:162px;width:286px;padding:14px;border-radius:16px;font-size:13px;}
+.flight-panel header {display:flex;align-items:center;gap:8px;}
+.flight-panel header strong {flex:1;min-width:0;}
+.flight-panel button,.flight-placement button,.flight-yaw button,.flight-stick button,.flight-power button,.flight-return {display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid #4e7177;border-radius:9px;padding:8px;color:#dfeddd;min-height:44px;background:#18333bcc;}
+.flight-panel header button {flex-shrink:0;min-width:44px;}
 .flight-panel button[aria-pressed=true] {background:#dce7a2;color:#17363c;}
-.flight-instruments {display:flex;justify-content:space-between;gap:8px;margin:12px 0;color:#adc7cb;}
+[data-flight-key]:active {background:#dce7a2;color:#17363c;}
+[data-flight-key]:focus-visible {outline:2px solid #e0eaa0;outline-offset:2px;}
+.flight-panel kbd,.flight-power kbd,.flight-yaw kbd,.flight-stick kbd {font:600 12px ui-monospace,monospace;opacity:.8;}
+.flight-instruments {display:flex;justify-content:space-between;gap:8px;margin:10px 0;color:#adc7cb;}
 .flight-instruments b {display:block;color:#edf3df;font-size:20px;font-variant-numeric:tabular-nums;}
 .flight-actions,.flight-views {display:flex;gap:6px;margin-top:9px;}
 .flight-actions button {flex:1;}
-.flight-views button {flex:1;font-size:11px;padding:7px 4px;}
+.flight-views button {flex:1;font-size:12px;padding:7px 4px;}
 .flight-panel small {display:block;color:#b5d0d4;margin-top:9px;}
-.flight-help {max-height:220px;overflow:auto;font-size:12px;line-height:1.6;color:#bed1d4;}
+.flight-help {font-size:13px;line-height:1.6;color:#bed1d4;}
 .flight-help p {margin:10px 0;}
-.flight-power {position:absolute;z-index:34;left:28px;bottom:134px;width:96px;padding:12px 14px;border-radius:16px;text-align:center;touch-action:none;}
-.flight-power label {font-size:12px;line-height:1.3;display:block;}
-.flight-power strong {display:block;font-size:21px;color:#dce7a2;margin:7px 0;}
-.flight-power-track {height:156px;display:flex;justify-content:center;padding:8px 24px;}
-.flight-power [data-slot=slider] {height:100%;width:16px;}
+.flight-options {max-height:calc(100dvh - 330px);overflow-y:auto;overscroll-behavior:contain;}
+.flight-panel .flight-new {margin-top:9px;width:100%;color:#bbd0d0;font-size:13px;background:transparent;border-style:dashed;}
+.flight-panel .flight-help-toggle {margin-top:8px;width:100%;}
+.flight-power {position:absolute;z-index:34;left:28px;bottom:82px;width:86px;padding:10px;border-radius:16px;text-align:center;touch-action:none;}
+.flight-power label {font-size:12px;line-height:1.3;display:block;overflow-wrap:anywhere;}
+.flight-power strong {display:block;font-size:22px;color:#dce7a2;margin:5px 0;font-variant-numeric:tabular-nums;}
+.flight-power button {width:100%;}
+.flight-power-track {height:128px;display:flex;justify-content:center;padding:12px 20px;}
+.flight-power [data-slot=slider] {height:100%;width:20px;}
+.flight-power [data-slot=slider] > div {min-height:0;}
 .flight-power [data-slot=slider-track] {width:7px;background:#46666d;}
 .flight-power [data-slot=slider-range] {background:#dce7a2;}
 .flight-power [data-slot=slider-thumb] {width:31px;height:15px;border-radius:4px;background:#e5edb3;}
-.flight-power small {font-size:11px;color:#b6ced1;}
-.flight-yaw {position:absolute;z-index:34;bottom:78px;left:28px;display:flex;gap:7px;border-radius:12px;padding:6px;touch-action:none;}
+.flight-stick {position:absolute;z-index:34;left:126px;bottom:144px;display:grid;grid-template-columns:repeat(3,48px);gap:5px;padding:6px;border-radius:12px;touch-action:none;}
+.flight-stick button:first-child {grid-column:2;}
+.flight-stick button:nth-child(2) {grid-column:1;}
+.flight-yaw {position:absolute;z-index:34;bottom:82px;left:126px;display:flex;gap:5px;border-radius:12px;padding:6px;touch-action:none;}
+.flight-yaw button {min-width:48px;}
 .flight-return {position:absolute;z-index:34;top:163px;right:94px;padding:13px 18px;color:#e0eaa0;}
 .flight-placement {position:absolute;z-index:35;bottom:86px;left:50%;transform:translateX(-50%);max-width:calc(100% - 36px);width:780px;display:flex;align-items:center;gap:12px;padding:14px;border-radius:14px;flex-wrap:wrap;}
 .flight-placement span {flex:1;font-size:14px;min-width:190px;}
-.flight-placement output {width:100%;color:#ffac99;font-size:12px;}
+.flight-placement output {width:100%;color:#ffac99;font-size:13px;}
+.flight-placement-marker {z-index:36;margin:0;}
 .flight-alert {position:absolute;z-index:38;bottom:82px;left:50%;transform:translateX(-50%);padding:12px 18px;border-radius:12px;color:#ffe1b7;max-width:calc(100% - 36px);font-size:14px;pointer-events:none;}
 .flight-placement-mode .explore-panel,.flight-placement-mode .view-caption,.flight-placement-mode .map-inset {display:none!important;}
 .flight-mode:not(.touch-ui) .map-inset {bottom:116px;top:auto;width:230px;}
@@ -2507,28 +2520,32 @@ a {
 .atlas.touch-ui .mode-radio {width:100%;}
 .atlas.touch-ui .mode-pill {flex:1;justify-content:center;padding:8px 5px;min-width:0;}
 .atlas.touch-ui .mode-pill svg {width:15px;height:15px;flex-shrink:0;}
-.atlas.touch-ui .flight-panel {top:120px;left:12px;right:auto;width:calc(100% - 78px);max-width:310px;padding:10px;}
-.atlas.touch-ui .flight-panel header {margin-bottom:2px;}
-.atlas.touch-ui .flight-instruments {margin:6px 0;}
-.atlas.touch-ui .flight-instruments b {display:inline;font-size:16px;margin-left:5px;}
-.atlas.touch-ui .flight-power {left:auto;right:14px;bottom:110px;width:82px;padding:10px 8px;}
-.atlas.touch-ui .flight-power-track {height:130px;}
-.atlas.touch-ui .flight-power [data-slot=slider] > div {min-height:0;}
-.atlas.touch-ui .flight-yaw {left:auto;right:14px;bottom:52px;}
-.atlas.touch-ui .flight-return {top:121px;left:12px;right:auto;max-width:calc(100% - 80px);font-size:13px;}
-.atlas.touch-ui .flight-placement {bottom:65px;padding:10px;gap:8px;}
-.atlas.touch-ui .flight-placement span {font-size:12px;}
-.atlas.touch-ui .flight-placement button {font-size:12px;}
-.atlas.touch-ui .flight-alert {bottom:14px;font-size:12px;}
-.flight-panel .flight-new {margin-top:9px;width:100%;padding:5px;min-height:30px;color:#bbd0d0;font-size:11px;background:transparent;border-style:dashed;}
+.atlas.touch-ui .flight-panel {top:120px;left:12px;right:auto;width:calc(100% - 100px);max-width:280px;padding:6px 10px;}
+.atlas.touch-ui .flight-panel header {font-size:14px;}
+.atlas.touch-ui .flight-instruments {margin:3px 0 5px;font-size:12px;}
+.atlas.touch-ui .flight-instruments b {display:inline;font-size:14px;margin-left:3px;}
+.atlas.touch-ui .flight-options {max-height:min(280px,calc(100dvh - 450px));padding-bottom:5px;}
+.atlas.touch-ui .flight-power {left:auto;right:12px;bottom:120px;width:72px;padding:8px;}
+.atlas.touch-ui .flight-power-track {height:92px;padding:12px 14px;}
+.atlas.touch-ui .flight-power strong {font-size:20px;}
+.atlas.touch-ui .flight-yaw {left:18px;right:auto;bottom:158px;}
+.atlas.touch-ui .flight-return {top:121px;left:12px;right:auto;max-width:calc(100% - 80px);font-size:14px;}
+.atlas.touch-ui .flight-placement {bottom:24px;width:auto;padding:5px;max-width:calc(100% - 90px);}
+.atlas.touch-ui .flight-placement button {font-size:14px;}
+.atlas.touch-ui .flight-alert {bottom:250px;font-size:13px;width:calc(100% - 180px);max-width:300px;text-align:center;padding:8px;}
+.atlas.touch-ui.flight-placement-mode .mobile-actions {display:none;}
+@media(max-height:650px) and (orientation:portrait){
+  .atlas.touch-ui .flight-power {bottom:24px;}
+  .atlas.touch-ui.flight-mode .mobile-zoom {right:94px;bottom:24px;}
+}
 @media(max-height:540px) and (orientation:landscape){
-  .atlas.touch-ui .flight-panel {top:auto;bottom:12px;left:146px;width:calc(100% - 338px);max-width:450px;display:grid;grid-template-columns:1fr auto;gap:5px;}
-  .atlas.touch-ui .flight-panel header,.atlas.touch-ui .flight-instruments {display:none;}
-  .atlas.touch-ui .flight-actions,.atlas.touch-ui .flight-views,.atlas.touch-ui .flight-panel small {margin-top:0;}
-  .atlas.touch-ui .flight-views,.atlas.touch-ui .flight-panel small,.atlas.touch-ui .flight-help {grid-column:1/-1;}
-  .atlas.touch-ui .flight-panel .flight-new {margin-top:0;width:auto;padding:5px 9px;}
-  .atlas.touch-ui .flight-power {bottom:75px;}
-  .atlas.touch-ui .flight-power-track {height:80px;}
-  .atlas.touch-ui .flight-yaw {bottom:16px;}
-  .atlas.touch-ui .flight-help {max-height:90px;}
+  .atlas.touch-ui .flight-panel {top:100px;left:12px;width:260px;max-width:calc(100% - 280px);}
+  .atlas.touch-ui .flight-panel.collapsed .flight-instruments {margin:0;font-size:11px;}
+  .atlas.touch-ui .flight-panel.expanded {left:154px;width:min(340px,calc(100% - 350px));max-width:none;max-height:calc(100dvh - 190px);overflow-y:auto;overscroll-behavior:contain;}
+  .atlas.touch-ui .flight-options {max-height:none;overflow:visible;}
+  .atlas.touch-ui .flight-power {bottom:14px;right:12px;width:72px;}
+  .atlas.touch-ui .flight-power-track {height:70px;}
+  .atlas.touch-ui .flight-yaw {bottom:18px;left:154px;}
+  .atlas.touch-ui.flight-mode .mobile-zoom {right:94px;bottom:18px;}
+  .atlas.touch-ui .flight-alert {bottom:84px;}
 }

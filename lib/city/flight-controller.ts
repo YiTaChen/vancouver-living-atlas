@@ -50,6 +50,11 @@ export class FlightController {
   lookYaw = 0;
   lookPitch = 0.18;
   keys = new Set<string>();
+  private buttonKeys = new Set<string>();
+  private inputEnabled = true;
+  private preview: FlightSnapshot['preview'] = null;
+  private placementScreen: [number, number] | null = null;
+  private previewUpdated = 0;
   touch = { x: 0, y: 0, yaw: 0, descend: false };
   private clock = 0;
   private published = 0;
@@ -81,10 +86,12 @@ export class FlightController {
         transparent: true,
         opacity: 0.85,
         depthTest: false,
+        depthWrite: false,
       }),
     );
     this.ring.rotation.x = -Math.PI / 2;
     this.ring.visible = false;
+    this.ring.renderOrder = 100;
     e.scene.add(this.ring);
     const c = e.renderer.domElement;
     c.addEventListener('pointerdown', this.down, true);
@@ -125,6 +132,7 @@ export class FlightController {
       stalled: !!s?.stalled,
       crashSeconds: s ? Math.max(0, Math.ceil(8 - s.crashAge)) : 0,
       warning: this.warning,
+      preview: this.preview,
     };
   }
   notify() {
@@ -155,6 +163,8 @@ export class FlightController {
     this.placing = false;
     this.ring.visible = false;
     this.drop = null;
+    this.hidePreview();
+    this.pointers.clear();
     this.warning = '';
     this.notify();
   }
@@ -167,12 +177,28 @@ export class FlightController {
       moved: false,
       figure: true,
     };
+    this.pointers.set(ev.pointerId, [ev.clientX, ev.clientY]);
+  }
+  private hidePreview() {
+    this.preview = null;
+    this.placementScreen = null;
+    this.ring.visible = false;
   }
   pick(sx: number, sy: number, commit = false) {
     if (!this.placing || !this.world) return;
     const rect = this.e.renderer.domElement.getBoundingClientRect();
-    if (sx < rect.left || sx > rect.right || sy < rect.top || sy > rect.bottom)
+    if (
+      sx < rect.left ||
+      sx > rect.right ||
+      sy < rect.top ||
+      sy > rect.bottom
+    ) {
+      this.hidePreview();
+      this.notify();
       return;
+    }
+    this.placementScreen = [sx, sy];
+    this.previewUpdated = this.clock;
     const ray = new THREE.Raycaster();
     this.e.camera.updateMatrixWorld();
     ray.setFromCamera(
@@ -218,10 +244,23 @@ export class FlightController {
       this.ring.visible = true;
       this.ring.position.copy(point);
       this.ring.position.y += 0.25;
+      // Keep the footprint readable in the overview, down to its true size nearby.
+      this.ring.scale.setScalar(Math.max(1, (distance * 1.8) / rect.height));
       (this.ring.material as THREE.MeshBasicMaterial).color.set(
         launch ? 0xe0eaa0 : 0xff8b73,
       );
-    }
+    } else this.ring.visible = false;
+    this.preview = {
+      screen: [sx, sy],
+      valid: !!launch,
+      kind:
+        launch?.kind ||
+        (point
+          ? this.e.waterWorld!.at(point.x, point.z)
+            ? 'seaplane'
+            : 'helicopter'
+          : null),
+    };
     this.warning = launch ? launch.kind : 'invalid';
     this.notify();
     if (commit && launch)
@@ -324,7 +363,7 @@ export class FlightController {
     }
     this.state = null;
     this.placing = false;
-    this.ring.visible = false;
+    this.hidePreview();
     this.warning = '';
     this.blend = null;
     this.boundaryRecovery = false;
@@ -341,12 +380,36 @@ export class FlightController {
     this.notify();
   }
   setStick(x: number, y: number) {
+    if (!this.inputEnabled) return;
     this.touch.x = clamp(x, -1, 1);
     this.touch.y = clamp(y, -1, 1);
   }
   setHold(field: 'yaw' | 'descend', value: number | boolean) {
+    if (!this.inputEnabled) return;
     if (field === 'yaw') this.touch.yaw = clamp(Number(value), -1, 1);
     else this.touch.descend = Boolean(value);
+  }
+  setInputEnabled(enabled: boolean) {
+    this.inputEnabled = enabled;
+    if (!enabled) {
+      if (!this.placing) this.clearInput();
+      else {
+        // Leaving a flight can start a new figure drag in the same gesture.
+        // The HUD's input gate must not cancel that placement pointer.
+        this.keys.clear();
+        this.buttonKeys.clear();
+        this.touch = { x: 0, y: 0, yaw: 0, descend: false };
+      }
+    }
+  }
+  setButtonKey(key: string, pressed: boolean) {
+    if (!pressed) this.buttonKeys.delete(key);
+    else if (
+      this.inputEnabled &&
+      this.attached &&
+      this.state?.phase !== 'crashed'
+    )
+      this.buttonKeys.add(key);
   }
   enableCruise(enabled: boolean) {
     const s = this.state;
@@ -387,6 +450,7 @@ export class FlightController {
   }
   clearInput = () => {
     this.keys.clear();
+    this.buttonKeys.clear();
     this.touch = { x: 0, y: 0, yaw: 0, descend: false };
     this.pointers.clear();
     this.drop = null;
@@ -398,19 +462,28 @@ export class FlightController {
   keyDown = (ev: KeyboardEvent) => {
     if (
       !this.attached ||
+      !this.inputEnabled ||
+      this.state?.phase === 'crashed' ||
       ev.defaultPrevented ||
       ev.ctrlKey ||
       ev.metaKey ||
       ev.altKey
     )
       return;
-    if (
-      ev.target instanceof Element &&
-      ev.target.closest(
-        'input,textarea,select,[contenteditable="true"],[role="slider"],[role="dialog"],[role="listbox"],[role="combobox"]',
+    if (ev.target instanceof Element) {
+      const target = ev.target;
+      if (
+        target.closest(
+          '[role="dialog"],[role="listbox"],[role="combobox"],textarea,select,[contenteditable]:not([contenteditable="false"])',
+        )
       )
-    )
-      return;
+        return;
+      // A power slider keeps focus after dragging. Flight letters still pilot;
+      // arrows/Home/End retain their native, accessible slider behavior.
+      const powerLetter =
+        target.closest('[data-flight-power]') && /^Key[A-Z]$/.test(ev.code);
+      if (!powerLetter && target.closest('input,[role="slider"]')) return;
+    }
     const key = ev.code.replace('Key', '').toLowerCase();
     if (
       ![
@@ -442,6 +515,8 @@ export class FlightController {
   };
   down = (ev: PointerEvent) => {
     if (this.placing) {
+      if (ev.button !== 0) return;
+      this.pointers.set(ev.pointerId, [ev.clientX, ev.clientY]);
       if (!this.drop)
         this.drop = {
           x: ev.clientX,
@@ -450,6 +525,10 @@ export class FlightController {
           moved: false,
           figure: false,
         };
+      if (this.pointers.size > 1) {
+        this.drop.moved = true;
+        this.drop.figure = false;
+      } else this.pick(ev.clientX, ev.clientY);
       return;
     }
     if (!this.attached || ev.button !== 0) return;
@@ -461,10 +540,25 @@ export class FlightController {
     this.lastPinch = 0;
   };
   move = (ev: PointerEvent) => {
-    if (this.placing && this.drop) {
-      if (Math.hypot(ev.clientX - this.drop.x, ev.clientY - this.drop.y) > 6)
+    if (this.placing) {
+      if (
+        this.drop &&
+        ev.pointerId === this.drop.id &&
+        Math.hypot(ev.clientX - this.drop.x, ev.clientY - this.drop.y) > 6
+      )
         this.drop.moved = true;
-      if (this.drop.figure) this.pick(ev.clientX, ev.clientY);
+      const draggingFigure = this.drop?.figure && this.drop.id === ev.pointerId;
+      if (
+        this.pointers.size <= 1 &&
+        (draggingFigure || ev.target === this.e.renderer.domElement)
+      ) {
+        this.placementScreen = [ev.clientX, ev.clientY];
+        if (!this.preview || this.clock - this.previewUpdated >= 0.08)
+          this.pick(ev.clientX, ev.clientY);
+      } else if (this.preview) {
+        this.hidePreview();
+        this.notify();
+      }
       return;
     }
     const old = this.pointers.get(ev.pointerId);
@@ -488,7 +582,10 @@ export class FlightController {
     if (this.placing && this.drop?.id === ev.pointerId) {
       const drop = this.drop;
       this.drop = null;
-      if ((!drop.figure && !drop.moved) || (drop.figure && drop.moved))
+      if (
+        this.pointers.size <= 1 &&
+        ((!drop.figure && !drop.moved) || (drop.figure && drop.moved))
+      )
         this.pick(ev.clientX, ev.clientY, true);
     }
     this.pointers.delete(ev.pointerId);
@@ -498,6 +595,8 @@ export class FlightController {
     this.drop = null;
     this.pointers.clear();
     this.lastPinch = 0;
+    this.hidePreview();
+    this.notify();
   };
   wheel = (ev: WheelEvent) => {
     if (!this.attached || ev.ctrlKey || ev.metaKey) return;
@@ -539,6 +638,12 @@ export class FlightController {
   update(rawDt: number) {
     const dt = clamp(rawDt, 0, 0.1);
     this.clock += dt;
+    if (
+      this.placing &&
+      this.placementScreen &&
+      this.clock - this.previewUpdated >= 0.08
+    )
+      this.pick(...this.placementScreen);
     for (const effect of this.effects) {
       effect.age += dt;
       effect.group.children.forEach((obj, i) => {
@@ -588,23 +693,25 @@ export class FlightController {
       if (this.boundaryRecovery && !s.cruise) this.enableCruise(true);
     }
     this.accumulator += dt;
+    const held = (a: string, b?: string) =>
+      this.inputEnabled &&
+      (this.keys.has(a) ||
+        this.buttonKeys.has(a) ||
+        (!!b && (this.keys.has(b) || this.buttonKeys.has(b))))
+        ? 1
+        : 0;
     if (s.attached && s.phase !== 'crashed' && !this.boundaryRecovery) {
-      if (this.keys.has('r') || this.keys.has('f')) {
-        s.power = clamp(
-          s.power + dt * 0.25 * (this.keys.has('r') ? 1 : -1),
-          0,
-          1,
-        );
+      const powerDirection = held('r') - held('f');
+      if (powerDirection) {
+        s.power = clamp(s.power + dt * 0.25 * powerDirection, 0, 1);
         s.hover = s.cruise = false;
       }
     }
-    const held = (a: string, b?: string) =>
-      this.keys.has(a) || (!!b && this.keys.has(b)) ? 1 : 0;
     const input = {
       pitch: held('s', 'arrowdown') - held('w', 'arrowup') - this.touch.y,
       roll: held('d', 'arrowright') - held('a', 'arrowleft') + this.touch.x,
       yaw: held('e') - held('q') + this.touch.yaw,
-      descend: this.keys.has('x') || this.touch.descend,
+      descend: !!held('x') || this.touch.descend,
     };
     if (this.boundaryRecovery) {
       input.pitch = input.roll = input.yaw = 0;

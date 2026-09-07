@@ -47,6 +47,8 @@ Both are H.264 MP4s. The compact version is about 93% smaller. [Recording, editi
 - **Auto cruise** joins a circuit around Downtown and Stanley Park. Zoom out to explore the map while the aircraft continues flying; a separate **Return to aircraft** button brings you back even after panning. Starting another vehicle or flight replaces the previous aircraft.
 - Desktop pitch/roll/yaw and power controls, mobile stick and power lever, a following minimap and all ten interface languages are included.
 
+Drag **Fly** onto the map or tap a location: the aircraft marker shows a check or cross and selects a floatplane on water or a helicopter on a clear road. Desktop controls display their keyboard shortcuts; **R / F** and **WASD** keep working after adjusting the power slider.
+
 This is assisted sightseeing flight with approximate physics. [Development plan, controls, validation and known limits](docs/flight-development.md).
 
 ## Controls
@@ -57,7 +59,7 @@ This is assisted sightseeing flight with approximate physics. [Development plan,
 | **Walk** | **W / S** forward/back, **A / D** turn, **Shift** faster; drag to look. | Left stick moves and strafes; drag the scene to look. |
 | **Drive** | **W / S** throttle/reverse, **A / D** steer, **Space** brake. | Left stick controls throttle/reverse and steering. |
 | **Boat** | **W / S** throttle/reverse, **A / D** rudder, **Space** neutral. | Left stick controls propulsion and steering. |
-| **Fly** | **W / S** nose down/up, **A / D** bank, **Q / E** yaw, **R / F** power, **C** cruise; helicopter **H** hover, **X** descend. | Flight stick, separate throttle/collective lever, yaw and helicopter controls. |
+| **Fly** | **W / S** nose down/up, **A / D** bank, **Q / E** yaw, **R / F** power, **C** cruise; helicopter **H** hover, **X** descend. | Flight stick, throttle/collective lever with +/− buttons, yaw and helicopter controls. Compact instruments with expandable flight options. |
 
 **Choose a starting point.** Select Walk, Drive or Boat, then click a suitable place—or drag its icon onto the map. Zoom in for precision. Roads snap to valid driving positions; boats need room clear of shores and docks. On mobile, tap a valid location to start; placement keeps only the Cancel control over the map.
 
@@ -137,7 +139,7 @@ The checked-in `.firebaserc` names the owner's project; use an explicit project 
 
 This project is developed with GPT-6 Astra through a manager loop: **implement → independent review → inspect the running browser → correct → validate → commit**. The public history and records document both successful changes and rejected experiments.
 
-[Development record](docs/PROGRESS.md) · [Ten-stage city upgrade](docs/visual-quality/UPGRADE_TASKS.md) · [Interior checks](docs/interiors.md) · [Startup experiment log](docs/performance/experiment-decisions.md) · [Flight branch validation](https://github.com/YiTaChen/vancouver-living-atlas/blob/feature/flight-exploration/docs/flight-development.md)
+[Development record](docs/PROGRESS.md) · [Ten-stage city upgrade](docs/visual-quality/UPGRADE_TASKS.md) · [Interior checks](docs/interiors.md) · [Startup experiment log](docs/performance/experiment-decisions.md) · [Flight development and validation](docs/flight-development.md)
 
 Reports are dated snapshots with their own test counts, hardware and release state. Desktop/mobile viewport checks are recorded separately from physical-device feedback.
 

@@ -41,7 +41,14 @@
     "intro": "Raise power to take off. Floatplanes need a water run; helicopters lift vertically.",
     "cruiseHint": "Cruise keeps flying when you zoom out. Use Return to aircraft to rejoin.",
     "beach": "Sand landing: more power and a longer takeoff run",
-    "loading": "Preparing aircraft…"
+    "loading": "Preparing aircraft…",
+    "powerUp": "Increase power",
+    "powerDown": "Decrease power",
+    "pitchDown": "Nose down",
+    "pitchUp": "Nose up",
+    "bankLeft": "Bank left",
+    "bankRight": "Bank right",
+    "options": "Flight options"
   },
   "fr": {
     "fly": "Voler",
@@ -85,7 +92,14 @@
     "intro": "Augmentez la puissance pour décoller. Les hydravions accélèrent sur l’eau ; les hélicoptères montent à la verticale.",
     "cruiseHint": "La croisière se poursuit lorsque vous dézoomez. Touchez Revenir à l’appareil pour le rejoindre.",
     "beach": "Décollage après atterrissage sur le sable : plus de puissance et d’élan nécessaires",
-    "loading": "Préparation de l’appareil…"
+    "loading": "Préparation de l’appareil…",
+    "powerUp": "Augmenter la puissance",
+    "powerDown": "Réduire la puissance",
+    "pitchDown": "Baisser le nez",
+    "pitchUp": "Lever le nez",
+    "bankLeft": "Incliner à gauche",
+    "bankRight": "Incliner à droite",
+    "options": "Options de vol"
   },
   "es": {
     "fly": "Volar",
@@ -129,7 +143,14 @@
     "intro": "Aumenta la potencia para despegar. Los hidroaviones necesitan acelerar sobre el agua; los helicópteros despegan verticalmente.",
     "cruiseHint": "El crucero continúa al alejar la vista. Usa Volver a la aeronave para regresar.",
     "beach": "Aterrizaje en arena: se necesita más potencia y recorrido para despegar",
-    "loading": "Preparando aeronave…"
+    "loading": "Preparando aeronave…",
+    "powerUp": "Aumentar potencia",
+    "powerDown": "Reducir potencia",
+    "pitchDown": "Bajar el morro",
+    "pitchUp": "Subir el morro",
+    "bankLeft": "Inclinar a la izquierda",
+    "bankRight": "Inclinar a la derecha",
+    "options": "Opciones de vuelo"
   },
   "zh-Hant": {
     "fly": "飛行",
@@ -173,7 +194,14 @@
     "intro": "提高動力即可起飛。水上飛機需要在水面滑行加速，直升機則垂直升空。",
     "cruiseHint": "縮小視角後仍會繼續巡航。按「返回原飛機」即可回到機上。",
     "beach": "沙灘著陸：再次起飛需要更大動力與更長的滑跑距離",
-    "loading": "正在準備飛機…"
+    "loading": "正在準備飛機…",
+    "powerUp": "增加推力",
+    "powerDown": "降低推力",
+    "pitchDown": "機頭向下",
+    "pitchUp": "機頭向上",
+    "bankLeft": "向左側傾",
+    "bankRight": "向右側傾",
+    "options": "飛行選項"
   },
   "zh-Hans": {
     "fly": "飞行",
@@ -217,7 +245,14 @@
     "intro": "提高动力即可起飞。水上飞机需要在水面滑行加速，直升机则垂直升空。",
     "cruiseHint": "缩小视角后仍会继续巡航。按“返回原飞机”即可回到机上。",
     "beach": "沙滩着陆：再次起飞需要更大动力与更长的滑跑距离",
-    "loading": "正在准备飞机…"
+    "loading": "正在准备飞机…",
+    "powerUp": "增加推力",
+    "powerDown": "降低推力",
+    "pitchDown": "机头向下",
+    "pitchUp": "机头向上",
+    "bankLeft": "向左侧倾",
+    "bankRight": "向右侧倾",
+    "options": "飞行选项"
   },
   "de": {
     "fly": "Fliegen",
@@ -261,7 +296,14 @@
     "intro": "Zum Abheben Leistung erhöhen. Wasserflugzeuge brauchen einen Anlauf auf dem Wasser; Hubschrauber steigen senkrecht.",
     "cruiseHint": "Der Rundflug läuft beim Herauszoomen weiter. Mit Zurück zum Luftfahrzeug steigst du wieder ein.",
     "beach": "Sandlandung: mehr Leistung und längerer Anlauf zum Abheben nötig",
-    "loading": "Luftfahrzeug wird vorbereitet…"
+    "loading": "Luftfahrzeug wird vorbereitet…",
+    "powerUp": "Leistung erhöhen",
+    "powerDown": "Leistung verringern",
+    "pitchDown": "Nase senken",
+    "pitchUp": "Nase heben",
+    "bankLeft": "Nach links rollen",
+    "bankRight": "Nach rechts rollen",
+    "options": "Flugoptionen"
   },
   "ja": {
     "fly": "飛行",
@@ -305,7 +347,14 @@
     "intro": "出力を上げて離陸します。水上飛行機は水面での加速が必要です。ヘリコプターは垂直に上昇します。",
     "cruiseHint": "ズームアウトしても巡航は続きます。「元の機体に戻る」で再び搭乗できます。",
     "beach": "砂浜に着陸：再離陸には高い出力と長い滑走距離が必要です",
-    "loading": "機体を準備中…"
+    "loading": "機体を準備中…",
+    "powerUp": "出力を上げる",
+    "powerDown": "出力を下げる",
+    "pitchDown": "機首を下げる",
+    "pitchUp": "機首を上げる",
+    "bankLeft": "左に傾ける",
+    "bankRight": "右に傾ける",
+    "options": "飛行設定"
   },
   "ko": {
     "fly": "비행",
@@ -349,7 +398,14 @@
     "intro": "출력을 높여 이륙하세요. 수상비행기는 수면에서 가속해야 하며 헬리콥터는 수직으로 상승합니다.",
     "cruiseHint": "축소해도 순항은 계속됩니다. ‘원래 항공기로 복귀’를 눌러 다시 탑승하세요.",
     "beach": "모래사장 착륙: 재이륙에는 더 높은 출력과 긴 활주 거리가 필요합니다",
-    "loading": "항공기 준비 중…"
+    "loading": "항공기 준비 중…",
+    "powerUp": "출력 높이기",
+    "powerDown": "출력 낮추기",
+    "pitchDown": "기수 내리기",
+    "pitchUp": "기수 올리기",
+    "bankLeft": "왼쪽으로 기울이기",
+    "bankRight": "오른쪽으로 기울이기",
+    "options": "비행 설정"
   },
   "uk": {
     "fly": "Політ",
@@ -393,7 +449,14 @@
     "intro": "Збільште потужність для зльоту. Гідролітаку потрібен розбіг по воді, а гелікоптер піднімається вертикально.",
     "cruiseHint": "Автополіт триває після віддалення камери. Натисніть «Повернутися на борт», щоб приєднатися знову.",
     "beach": "Посадка на пісок: для зльоту потрібно більше потужності та довший розбіг",
-    "loading": "Підготовка повітряного судна…"
+    "loading": "Підготовка повітряного судна…",
+    "powerUp": "Збільшити тягу",
+    "powerDown": "Зменшити тягу",
+    "pitchDown": "Опустити ніс",
+    "pitchUp": "Підняти ніс",
+    "bankLeft": "Крен ліворуч",
+    "bankRight": "Крен праворуч",
+    "options": "Параметри польоту"
   },
   "ru": {
     "fly": "Полёт",
@@ -437,6 +500,13 @@
     "intro": "Увеличьте мощность для взлёта. Гидросамолёту нужен разбег по воде, а вертолёт поднимается вертикально.",
     "cruiseHint": "Автополёт продолжается при отдалении камеры. Нажмите «Вернуться на борт», чтобы вернуться к воздушному судну.",
     "beach": "Посадка на песок: для взлёта нужно больше мощности и более длинный разбег",
-    "loading": "Подготовка воздушного судна…"
+    "loading": "Подготовка воздушного судна…",
+    "powerUp": "Увеличить тягу",
+    "powerDown": "Уменьшить тягу",
+    "pitchDown": "Опустить нос",
+    "pitchUp": "Поднять нос",
+    "bankLeft": "Крен влево",
+    "bankRight": "Крен вправо",
+    "options": "Параметры полёта"
   }
 }

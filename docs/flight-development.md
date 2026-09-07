@@ -67,3 +67,23 @@ This is assisted sightseeing flight, with approximate aerodynamic constants and 
 There is one player-owned aircraft session. Flight collision structures are prepared at placement, and aircraft geometry at launch; none is added to the city scene at initial load. Each aircraft's original exterior and cockpit together are about 12,000 triangles, with shared geometry/materials, no extra scene-wide shadow pass and a 36-particle crash effect. World collision only visits nearby grid cells. UI telemetry publishes about eight times per second rather than on every physics step.
 
 Physics uses fixed 1/60-second substeps and is independent of the 300× city clock. Very long frames are capped for stability, so flight/accident time pauses while the page is suspended rather than advancing invisibly in the background. Actual iPhone/iPad Safari hardware performance and low-memory tab recovery still require device feedback; viewport testing is not equivalent to hardware emulation.
+
+## Flight controls refinement (2026-09-07)
+
+The flight branch was first merged into `main` and deployed as `9c2f817`. The following refinement is a separate checkpoint.
+
+- Both aircraft expose the same W/S pitch, A/D bank, Q/E yaw and R/F power controls. Desktop has a labeled pitch/bank pad. Touch retains the analog stick; both layouts retain the power lever and add labeled +/− buttons that support tapping and holding. X descent and H hover remain helicopter-specific.
+- Root cause of the focus bug: the keyboard handler discarded every event from an input or slider, including the power lever's focused range input. Flight letters now pass through that specific lever, while its native arrow/Home/End controls, text fields and dialogs keep their normal keyboard behavior. Opening a blocking panel releases and gates pilot inputs.
+- Keyboard and held buttons have separate input ownership; opposite power directions cancel, and releasing one source does not release the other. Pointer cancellation, blur, unmount and mode changes release controls. A transition from piloting directly into a new aircraft drag preserves the placement gesture.
+- Placement previews follow pointer movement, refresh under camera zoom/pan, and display a type-specific aircraft marker plus a check/cross. The ground ring stays readable from overview distance. Raycasts are limited to about 12 updates/second while placing, and previews stop outside placement. A pan or multi-pointer gesture cannot commit a launch.
+- Mobile instruments default to a small collapsed card; camera, cruise, new flight and help are in an expandable scroll area. Placement shows only Cancel. The joystick, power lever and directional buttons remain present with Hide interface. Portrait and landscape reserve separate space for essential controls and zoom buttons.
+- All added labels are translated in the existing ten locales. No new scene assets, physics changes, dependencies or paid services are introduced.
+
+Validation:
+
+- Full suite: **404 passed, 0 failed**. New regressions cover both airframes with the power slider focused, R/F limits and simultaneous input, separate keyboard/button release, native slider arrows, text/dialog exclusion, blocked pilot controls, placement validity/type, camera refresh, pan/pinch cancellation and a replacement figure drag.
+- TypeScript, lint for the touched flight modules, and the Firebase static build/landmark worker checks pass.
+- In the actual browser, dragging the helicopter collective kept the range input focused; C engaged cruise and W immediately returned to manual control. The floatplane also responded to R and W with the throttle focused. Physical power-button presses changed the displayed percentage and released normally.
+- Phone layouts **390 × 844** and **320 × 568**, landscape **844 × 390**, and tablet **768 × 1024** were inspected. The landscape expanded panel was moved away from the stick and yaw controls after the initial review; small portrait puts zoom alongside the lower power controls. Essential controls remained present with the interface hidden, and a tablet stick drag took over from helicopter hover.
+- Mobile placement showed only Cancel, a red crossed aircraft marker over an invalid city location, and a successful Fly-icon drag onto water. The final Firebase production output was served separately at localhost for the helicopter/focus/tablet checks, avoiding development hot-reload resets during validation.
+- These are browser viewport checks on this computer, not physical iPhone/iPad Safari hardware tests.

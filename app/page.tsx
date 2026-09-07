@@ -522,6 +522,14 @@ export default function Home() {
     } else if (!switchInScene(mode as TravelMode))
       beginPlacement(mode as TravelMode);
   };
+  const dragAircraft = (event: React.PointerEvent<HTMLElement>) => {
+    if (event.button !== 0 || !ready) return;
+    event.preventDefault();
+    event.stopPropagation();
+    setTour(false); setPanel(null); setPlacing(null); setMobilePanel(null); setClean(false);
+    event.currentTarget.setPointerCapture(event.pointerId);
+    engine.current?.flight?.startDrag(event.nativeEvent);
+  };
   const dragFigure = (
     event: React.PointerEvent<HTMLElement>,
     mode: TravelMode,
@@ -576,7 +584,7 @@ export default function Home() {
     >
       {stats.trafficStop && settings.mode === 'drive' && <div role="status" className="traffic-stop-caption glass">{stats.trafficStop === 'please safe driving' ? stats.trafficStop : tr('policeStop')}</div>}
       <div className="scene" ref={host} />
-      <FlightControls controller={engine.current?.flight || null} state={flight} locale={locale} touch={touchUI} controlsEnabled={!about && !panel && (!mobilePanel || mobilePanel === 'map')} panelVisible={!about && !panel && !mobilePanel}/>
+      <FlightControls key={flight.attached ? flight.kind || 'flight' : 'placement'} controller={engine.current?.flight || null} state={flight} locale={locale} touch={touchUI} controlsEnabled={!about && !panel && (!mobilePanel || mobilePanel === 'map')} panelVisible={!about && !panel && !mobilePanel}/>
       {touchUI && ready && (
         <button
           className="mobile-hud-toggle glass"
@@ -938,12 +946,13 @@ export default function Home() {
                     )
               }
               onPointerDownCapture={
-                m.id === 'orbit' || m.id === 'flight'
+                m.id === 'orbit'
                   ? undefined
+                  : m.id === 'flight' ? dragAircraft
                   : (event) => dragFigure(event, m.id as TravelMode)
               }
               onClickCapture={
-                m.id === 'flight' ? (event) => {event.preventDefault(); event.stopPropagation(); beginFlight();} : m.id === 'orbit'
+                m.id === 'flight' ? (event) => {event.preventDefault(); event.stopPropagation(); if (event.detail === 0) beginFlight();} : m.id === 'orbit'
                   ? undefined
                   : (event) => {
                       if (event.detail > 0) {

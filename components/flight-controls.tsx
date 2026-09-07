@@ -1,5 +1,5 @@
 'use client';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   Plane,
   Helicopter,
@@ -9,8 +9,12 @@ import {
   Camera,
   HelpCircle,
   ArrowDown,
+  ArrowUp,
   MoveLeft,
   MoveRight,
+  Plus,
+  Minus,
+  SlidersHorizontal,
 } from 'lucide-react';
 import { Slider } from './ui/slider';
 import { TravelJoystick } from './travel-joystick';
@@ -21,6 +25,76 @@ import messages from '@/lib/i18n/flight.json';
 export function flightText(locale: Locale, key: keyof typeof messages.en) {
   return messages[locale][key];
 }
+
+/** Pointer capture keeps each held control independent of the other hand. */
+function FlightHoldButton({
+  controller,
+  code,
+  label,
+  children,
+}: {
+  controller: FlightController;
+  code: string;
+  label: string;
+  children: React.ReactNode;
+}) {
+  const pointer = useRef<number | null>(null);
+  const release = () => {
+    pointer.current = null;
+    controller.setButtonKey(code, false);
+  };
+  useEffect(
+    () => () => controller.setButtonKey(code, false),
+    [controller, code],
+  );
+  const press = () => {
+    // A quick tap changes power too; holding continues smoothly in the flight loop.
+    if (code === 'r' || code === 'f')
+      controller.setPower(
+        controller.snapshot.power + (code === 'r' ? 0.025 : -0.025),
+      );
+    controller.setButtonKey(code, true);
+  };
+  return (
+    <button
+      type="button"
+      data-flight-key={code}
+      aria-label={`${label} (${code.toUpperCase()})`}
+      title={`${label} · ${code.toUpperCase()}`}
+      onPointerDown={(event) => {
+        if (event.button !== 0 || pointer.current !== null) return;
+        event.preventDefault();
+        pointer.current = event.pointerId;
+        event.currentTarget.setPointerCapture(event.pointerId);
+        press();
+      }}
+      onPointerUp={release}
+      onPointerCancel={release}
+      onLostPointerCapture={release}
+      onKeyDown={(event) => {
+        if (event.key === ' ' || event.key === 'Enter') {
+          event.preventDefault();
+          if (!event.repeat) press();
+        }
+      }}
+      onKeyUp={(event) => {
+        if (event.key === ' ' || event.key === 'Enter') release();
+      }}
+      onBlur={release}
+      onClick={(event) => {
+        // Assistive technologies can activate a button without pointer/key events.
+        if (event.detail === 0 && (code === 'r' || code === 'f'))
+          controller.setPower(
+            controller.snapshot.power + (code === 'r' ? 0.025 : -0.025),
+          );
+      }}
+    >
+      {children}
+      <kbd>{code.toUpperCase()}</kbd>
+    </button>
+  );
+}
+
 export function FlightControls({
   controller,
   state,
@@ -37,72 +111,81 @@ export function FlightControls({
   panelVisible?: boolean;
 }) {
   const [help, setHelp] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const t = (key: keyof typeof messages.en) => flightText(locale, key);
   const move = useCallback(
-    (x: number, y: number) => {
-      controller?.setStick(x, y);
-    },
+    (x: number, y: number) => controller?.setStick(x, y),
     [controller],
   );
   const noop = useCallback(() => {}, []);
   const canPilot =
     controlsEnabled && state.attached && state.phase !== 'crashed';
   useEffect(() => {
-    const reset = () => {
-      controller?.clearInput();
-    };
-    if (!canPilot) reset();
-    return reset;
+    controller?.setInputEnabled(canPilot);
+    return () => controller?.setInputEnabled(false);
   }, [controller, canPilot]);
   if (!controller) return null;
-  const hold = (field: 'yaw' | 'descend', value: number | boolean) => ({
-    onPointerDown: (e: React.PointerEvent<HTMLButtonElement>) => {
-      e.preventDefault();
-      e.currentTarget.setPointerCapture(e.pointerId);
-      controller.setHold(field, value);
-    },
-    onPointerUp: () => controller.setHold(field, field === 'yaw' ? 0 : false),
-    onPointerCancel: () =>
-      controller.setHold(field, field === 'yaw' ? 0 : false),
-    onLostPointerCapture: () =>
-      controller.setHold(field, field === 'yaw' ? 0 : false),
-    onKeyDown: (e: React.KeyboardEvent) => {
-      if (e.key === ' ' || e.key === 'Enter') {
-        e.preventDefault();
-        controller.setHold(field, value);
-      }
-    },
-    onKeyUp: () => controller.setHold(field, field === 'yaw' ? 0 : false),
-    onBlur: () => controller.setHold(field, field === 'yaw' ? 0 : false),
-  });
+  const isHeli = state.kind === 'helicopter';
+  const bodyVisible = !touch || expanded;
+  const keyButton = (
+    code: string,
+    label: keyof typeof messages.en,
+    icon: React.ReactNode,
+  ) => (
+    <FlightHoldButton controller={controller} code={code} label={t(label)}>
+      {icon}
+    </FlightHoldButton>
+  );
   return (
     <>
       {state.placing && (
-        <section
-          className="flight-placement glass ui-chrome"
-          aria-label={t('fly')}
-        >
-          <Plane size={20} />
-          <span>{t('placement')}</span>
-          {!touch && (
-            <>
-              <button onClick={() => controller.quick('seaplane')}>
-                {t('quickPlane')}
-              </button>
-              <button onClick={() => controller.quick('helicopter')}>
-                {t('quickHeli')}
-              </button>
-            </>
+        <>
+          {state.preview && (
+            <figure
+              className={`placement-marker flight-placement-marker ${state.preview.valid ? 'valid' : 'invalid'}`}
+              style={{
+                left: state.preview.screen[0],
+                top: state.preview.screen[1],
+              }}
+              aria-label={
+                state.preview.valid
+                  ? t(state.preview.kind || 'fly')
+                  : t('invalid')
+              }
+            >
+              {state.preview.kind === 'helicopter' ? (
+                <Helicopter size={32} />
+              ) : (
+                <Plane size={32} />
+              )}
+              <span>{state.preview.valid ? '✓' : '×'}</span>
+            </figure>
           )}
-          <button
-            onClick={() => controller.cancelPlacement()}
-            aria-label={t('cancel')}
+          <section
+            className="flight-placement glass ui-chrome"
+            aria-label={t('fly')}
           >
-            <X size={19} />
-            {t('cancel')}
-          </button>
-          {state.warning === 'invalid' && <output>{t('invalid')}</output>}
-        </section>
+            {!touch && (
+              <>
+                <Plane size={20} />
+                <span>{t('placement')}</span>
+                <button onClick={() => controller.quick('seaplane')}>
+                  {t('quickPlane')}
+                </button>
+                <button onClick={() => controller.quick('helicopter')}>
+                  {t('quickHeli')}
+                </button>
+              </>
+            )}
+            <button onClick={() => controller.cancelPlacement()}>
+              <X size={19} />
+              {t('cancel')}
+            </button>
+            {!touch && state.warning === 'invalid' && (
+              <output>{t('invalid')}</output>
+            )}
+          </section>
+        </>
       )}
       {panelVisible && state.exists && !state.attached && !state.placing && (
         <button
@@ -117,23 +200,34 @@ export function FlightControls({
         <>
           {panelVisible && (
             <section
-              className="flight-panel glass ui-chrome"
+              className={`flight-panel glass ui-chrome ${bodyVisible ? 'expanded' : 'collapsed'}`}
               aria-label={t('fly')}
             >
               <header>
-                {state.kind === 'helicopter' ? (
-                  <Helicopter size={19} />
-                ) : (
-                  <Plane size={19} />
-                )}
+                {isHeli ? <Helicopter size={19} /> : <Plane size={19} />}
                 <strong>{t(state.kind || 'seaplane')}</strong>
-                <button
-                  aria-label={t('help')}
-                  aria-expanded={help}
-                  onClick={() => setHelp(!help)}
-                >
-                  <HelpCircle size={18} />
-                </button>
+                {touch ? (
+                  <button
+                    aria-label={t('options')}
+                    aria-expanded={expanded}
+                    aria-controls="flight-options"
+                    onClick={() => setExpanded(!expanded)}
+                  >
+                    {expanded ? (
+                      <X size={19} />
+                    ) : (
+                      <SlidersHorizontal size={19} />
+                    )}
+                  </button>
+                ) : (
+                  <button
+                    aria-label={t('help')}
+                    aria-expanded={help}
+                    onClick={() => setHelp(!help)}
+                  >
+                    <HelpCircle size={18} />
+                  </button>
+                )}
               </header>
               <div className="flight-instruments">
                 <span>
@@ -143,71 +237,93 @@ export function FlightControls({
                   {t('airspeed')} <b>{state.speed} kn</b>
                 </span>
               </div>
-              <div className="flight-actions">
-                <button
-                  aria-pressed={state.cruise}
-                  disabled={state.phase === 'crashed'}
-                  onClick={() => controller.cruise()}
-                >
-                  <Navigation size={15} />
-                  {t(state.cruise ? 'pauseCruise' : 'cruise')}
-                </button>
-                {state.kind === 'helicopter' && (
+              {bodyVisible && (
+                <div id="flight-options" className="flight-options">
+                  <div className="flight-actions">
+                    <button
+                      aria-pressed={state.cruise}
+                      disabled={state.phase === 'crashed'}
+                      onClick={() => controller.cruise()}
+                    >
+                      <Navigation size={15} />
+                      {t(state.cruise ? 'pauseCruise' : 'cruise')}
+                      <kbd>C</kbd>
+                    </button>
+                    {isHeli && (
+                      <button
+                        aria-pressed={state.hover}
+                        disabled={state.phase === 'crashed'}
+                        onClick={() => controller.hover()}
+                      >
+                        {t('hover')}
+                        <kbd>H</kbd>
+                      </button>
+                    )}
+                  </div>
+                  <fieldset className="flight-views" aria-label={t('cockpit')}>
+                    {(['cockpit', 'clear', 'chase'] as const).map((v) => (
+                      <button
+                        key={v}
+                        aria-pressed={state.view === v}
+                        onClick={() => controller.setView(v)}
+                      >
+                        {v === 'chase' && <Camera size={14} />}
+                        {t(v)}
+                      </button>
+                    ))}
+                  </fieldset>
                   <button
-                    aria-pressed={state.hover}
-                    disabled={state.phase === 'crashed'}
-                    onClick={() => controller.hover()}
+                    className="flight-new"
+                    onClick={() => controller.beginPlacement()}
                   >
-                    {t('hover')}
+                    {t('newFlight')}
                   </button>
-                )}
-              </div>
-              <button
-                className="flight-new"
-                onClick={() => controller.beginPlacement()}
-              >
-                {t('newFlight')}
-              </button>
-              <fieldset className="flight-views" aria-label={t('cockpit')}>
-                {(['cockpit', 'clear', 'chase'] as const).map((v) => (
-                  <button
-                    key={v}
-                    aria-pressed={state.view === v}
-                    onClick={() => controller.setView(v)}
-                  >
-                    {v === 'chase' && <Camera size={14} />}
-                    {t(v)}
-                  </button>
-                ))}
-              </fieldset>
+                  {touch && (
+                    <button
+                      className="flight-help-toggle"
+                      aria-expanded={help}
+                      onClick={() => setHelp(!help)}
+                    >
+                      <HelpCircle size={16} />
+                      {t('help')}
+                    </button>
+                  )}
+                  {help && (
+                    <div className="flight-help">
+                      <p>{t('intro')}</p>
+                      <p>{touch ? t('touchHint') : t('controls')}</p>
+                      <p>
+                        {t('powerHint')}
+                        {isHeli && (
+                          <>
+                            {' '}
+                            · H: {t('hover')} · X: {t('descend')}
+                          </>
+                        )}{' '}
+                        · C: {t('cruise')}
+                      </p>
+                      <p>{t('cruiseHint')}</p>
+                    </div>
+                  )}
+                </div>
+              )}
               {state.cruise && (
                 <small>{t(state.join ? 'joining' : 'circling')}</small>
               )}
-              {help && (
-                <div className="flight-help">
-                  <p>{t('intro')}</p>
-                  <p>{touch ? t('touchHint') : t('controls')}</p>
-                  <p>
-                    {t('powerHint')} · H: {t('hover')} · X: {t('descend')} · C:{' '}
-                    {t('cruise')}
-                  </p>
-                  <p>{t('cruiseHint')}</p>
-                </div>
-              )}
             </section>
           )}
-          {state.phase !== 'crashed' && controlsEnabled && (
+          {canPilot && (
             <>
               <section
                 className="flight-power glass"
-                aria-label={t(
-                  state.kind === 'helicopter' ? 'collective' : 'throttle',
-                )}
+                data-flight-power
+                aria-label={t(isHeli ? 'collective' : 'throttle')}
               >
                 <label id="flight-power-label">
-                  {t(state.kind === 'helicopter' ? 'collective' : 'throttle')}
+                  {t(isHeli ? 'collective' : 'throttle')}
                 </label>
                 <strong>{Math.round(state.power * 100)}%</strong>
+                {keyButton('r', 'powerUp', <Plus size={18} />)}
                 <div className="flight-power-track">
                   <Slider
                     orientation="vertical"
@@ -221,9 +337,9 @@ export function FlightControls({
                     }
                   />
                 </div>
-                {!touch && <small>R / F</small>}
+                {keyButton('f', 'powerDown', <Minus size={18} />)}
               </section>
-              {touch && (
+              {touch ? (
                 <TravelJoystick
                   mode="walk"
                   label={t('touchHint')}
@@ -231,20 +347,22 @@ export function FlightControls({
                   onMove={move}
                   onBrake={noop}
                 />
+              ) : (
+                <fieldset
+                  className="flight-stick glass"
+                  aria-label={t('controls')}
+                >
+                  {keyButton('w', 'pitchDown', <ArrowDown size={19} />)}
+                  {keyButton('a', 'bankLeft', <MoveLeft size={19} />)}
+                  {keyButton('s', 'pitchUp', <ArrowUp size={19} />)}
+                  {keyButton('d', 'bankRight', <MoveRight size={19} />)}
+                </fieldset>
               )}
-              <div className="flight-yaw glass">
-                <button aria-label={t('left')} {...hold('yaw', -1)}>
-                  <MoveLeft size={22} />
-                </button>
-                {state.kind === 'helicopter' && (
-                  <button aria-label={t('descend')} {...hold('descend', true)}>
-                    <ArrowDown size={22} />
-                  </button>
-                )}
-                <button aria-label={t('right')} {...hold('yaw', 1)}>
-                  <MoveRight size={22} />
-                </button>
-              </div>
+              <fieldset className="flight-yaw glass" aria-label={t('help')}>
+                {keyButton('q', 'left', <MoveLeft size={19} />)}
+                {keyButton('e', 'right', <MoveRight size={19} />)}
+                {isHeli && keyButton('x', 'descend', <ArrowDown size={19} />)}
+              </fieldset>
             </>
           )}
           {(state.stalled ||
