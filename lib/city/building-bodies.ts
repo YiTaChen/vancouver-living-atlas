@@ -77,6 +77,7 @@ export function createBuildingBodies(e: CityEngine) {
     const first = firstByKey.get(key)!;
     foundations.set(key, e.elevation(...first.center) - 0.4);
   }
+  e.data.flightBuildingVolumes = prepared.map(({key, polygon, h, min}) => ({polygon, minY: foundations.get(key)! + min, maxY: foundations.get(key)! + h}));
   e.data.buildingProfiles = profiles;
   e.data.buildingFoundations = foundations;
   const positions: number[] = [],

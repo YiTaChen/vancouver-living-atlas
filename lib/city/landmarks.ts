@@ -28,6 +28,7 @@ class Builder {
   >();
   origin = new THREE.Vector3();
   yaw = 0;
+  collisionScope = false;
   constructor(public engine: CityEngine) {}
   at(lon: number, lat: number, yaw = 0, base?: number) {
     const [x, z] = project([lon, lat]);
@@ -51,7 +52,14 @@ class Builder {
       ),
       world = new THREE.Matrix4().makeRotationY(this.yaw);
     world.setPosition(this.origin);
-    g.applyMatrix4(world.multiply(local));
+    world.multiply(local);
+    if (this.collisionScope) {
+      g.computeBoundingBox();
+      (this.engine.data.flightBridgeVolumes ||= []).push({
+        matrix: world.toArray(), min: g.boundingBox!.min.toArray(), max: g.boundingBox!.max.toArray(),
+      });
+    }
+    g.applyMatrix4(world);
     g.deleteAttribute('uv');
     g = g.index ? g.toNonIndexed() : g;
     const key = color + ':' + metal;
@@ -236,8 +244,10 @@ export function createLandmarks(engine: CityEngine) {
     );
   }
   // Burrard, Granville, and Cambie: bridge decks follow actual endpoints.
+  b.collisionScope = true;
   for (const s of engine.data.bridges.mainSpines)
     bridge(b, engine, s.start, s.end, s.estimatedDeckM, s.kind);
+  b.collisionScope = false;
   // Siwash Rock, the outcrop off Stanley Park's western cliffs.
   b.at(-123.15987, 49.30552, 0, 0);
   b.cylinder(4.2, 9.5, 17, 0x756d5b, 0, 8.5, 0, 7);
