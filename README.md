@@ -8,7 +8,7 @@ An original, explorable browser reconstruction of Vancouver: the entire Downtown
 
 [Data and accuracy](DATA_SOURCES.md) · [Manager-loop development record](docs/PROGRESS.md)
 
-The application is publicly hosted on Firebase Hosting; this branch may include changes not yet deployed. This repository is public, and the application can also run locally.
+The ten-language application is publicly hosted on Firebase Hosting. This repository is public, and the application can also run locally.
 
 ## Explore Vancouver in 30 seconds
 
@@ -20,7 +20,7 @@ Recorded on September 5, before the latest road, landmark and bus upgrades: deta
 
 ## Languages
 
-English is the default for a first visit. The header language menu also offers Français, Español, 中文（繁體）, 中文（简体）, Deutsch, 日本語, 한국어, Українська and Русский. The five newly added languages on this branch have not yet been deployed. A selection updates the interface and map labels without resetting the scene, and is remembered on that browser.
+English is the default for a first visit. The header language menu also offers Français, Español, 中文（繁體）, 中文（简体）, Deutsch, 日本語, 한국어, Українська and Русский. A selection updates the interface and map labels without resetting the scene, and is remembered on that browser.
 
 ## Explore / 操作
 

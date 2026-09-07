@@ -1,6 +1,8 @@
 # Progressive startup — local validation
 
-Branch: `perf/progressive-city-startup`, based on `7443b95`. No Firebase release or merge into main.
+Branch: `perf/progressive-city-startup`, based on `7443b95`. The performance validation below was local-only.
+
+**Release update, 2026-09-06:** after a subsequent explicit deployment request, application commit `fa83a58` (these optimizations plus ten-language support) was deployed to [Firebase](https://vancouver-living-atlas-yita.web.app/). The live HTML and language bundle matched the validated build. GitHub main was not merged.
 
 ## Changes and invariants
 
@@ -52,4 +54,4 @@ Chrome at 390×844 with the compatible renderer, using the existing QA High-deta
 
 The new rooftop queue completed 11,025 steps, with maximum pump observations of 1.2–1.4 ms in the three desktop startup samples and no failures. The three compatible-profile starts scheduled zero steps. After High/Ultra has already built optional roofs, switching to Balanced retains those existing meshes; this change avoids fresh scheduling rather than promising immediate reclamation of all warmed detail.
 
-No remote deployment was performed. Production output must be rebuilt without `VANCOUVER_VISUAL_QA`; `npm run build:firebase` verifies this and does not deploy.
+No remote deployment was performed during the original performance experiment; see the subsequent release update above. Production output must be rebuilt without `VANCOUVER_VISUAL_QA`; `npm run build:firebase` verifies this and does not deploy.
