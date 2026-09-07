@@ -348,6 +348,13 @@ export function createStreetfronts(e: CityEngine) {
 
 /** Modest original rooftop plant, placed strictly inside each measured footprint. */
 export function createRoofDetails(e: CityEngine) {
+  for (const _ of roofDetailSteps(e)) {
+    /* Synchronous compatibility for geometry audits. */
+  }
+}
+export function* roofDetailSteps(
+  e: CityEngine,
+): Generator<void, void, unknown> {
   const boxes: {
       x: number;
       y: number;
@@ -359,6 +366,7 @@ export function createRoofDetails(e: CityEngine) {
     }[] = [],
     highest = new Map<string, any>();
   for (const f of e.data.buildings.features) {
+    yield;
     if (replacedBuilding(f.properties)) continue;
     const key = String(
       f.properties.structureId ?? f.properties.buildingId ?? f.properties.id,
@@ -370,6 +378,7 @@ export function createRoofDetails(e: CityEngine) {
       highest.set(key, f);
   }
   for (const [key, f] of highest) {
+    yield;
     const height = f.properties.height,
       foundation = (e.data.buildingFoundations as Map<string, number>).get(key),
       seed = hashId(key) % 4096;
@@ -411,18 +420,31 @@ export function createRoofDetails(e: CityEngine) {
       boxes.length,
     ),
     obj = new THREE.Object3D();
-  boxes.forEach((b, i) => {
-    obj.rotation.set(0, -0.78, 0);
-    obj.position.set(b.x, b.y + b.h / 2, b.z);
-    obj.scale.set(b.w, b.h, b.d);
-    obj.updateMatrix();
-    body.setMatrixAt(i, obj.matrix);
-    obj.position.y = b.y + b.h + 0.08;
-    obj.scale.set(Math.min(b.w, b.d) * 0.65, 1, Math.min(b.w, b.d) * 0.65);
-    obj.updateMatrix();
-    vents.setMatrixAt(i, obj.matrix);
-  });
-  body.castShadow = true;
-  body.receiveShadow = true;
-  e.buildings.add(body, vents);
+  let attached = false;
+  try {
+    for (const [i, b] of boxes.entries()) {
+      if (i % 64 === 0) yield;
+      obj.rotation.set(0, -0.78, 0);
+      obj.position.set(b.x, b.y + b.h / 2, b.z);
+      obj.scale.set(b.w, b.h, b.d);
+      obj.updateMatrix();
+      body.setMatrixAt(i, obj.matrix);
+      obj.position.y = b.y + b.h + 0.08;
+      obj.scale.set(Math.min(b.w, b.d) * 0.65, 1, Math.min(b.w, b.d) * 0.65);
+      obj.updateMatrix();
+      vents.setMatrixAt(i, obj.matrix);
+    }
+    body.castShadow = true;
+    body.receiveShadow = true;
+    e.buildings.add(body, vents);
+    attached = true;
+  } finally {
+    if (!attached) {
+      for (const mesh of [body, vents]) {
+        mesh.geometry.dispose();
+        (mesh.material as THREE.Material).dispose();
+        mesh.dispose();
+      }
+    }
+  }
 }

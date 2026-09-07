@@ -546,6 +546,7 @@ export function installVisualQA(e: CityEngine) {
       return;
     }
     const row = {
+      optionalScenery: { pending: e.sceneryPreparation.pending, ...e.sceneryPreparation.stats },
       kind: 'startup-wall-v1',
       id: 'startup',
       valid: measurement.valid,

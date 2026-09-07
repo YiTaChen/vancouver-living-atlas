@@ -1,3 +1,4 @@
+import { ScenePreparationQueue } from './scene-preparation';
 import { PublicInteriors } from './interiors';
 import { isMobileGraphics, supportsHDRTarget } from './graphics-profile';
 import { SkyEffects } from './sky-effects';
@@ -32,7 +33,7 @@ import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import { FXAAShader } from 'three/addons/shaders/FXAAShader.js';
 import Delaunator from 'delaunator';
-import { createStreetfronts, createRoofDetails } from './streetfronts';
+import { createStreetfronts, roofDetailSteps } from './streetfronts';
 import { createBridgeApproaches } from './bridges';
 import { prepareCauseway } from './causeway';
 import { makeContext } from './context';
@@ -126,6 +127,8 @@ export class CityEngine {
     distance: 0,
   };
   data: Record<string, any> = {};
+  sceneryPreparation = new ScenePreparationQueue();
+  roofsScheduled = false;
   landPolys: number[][][][] = [];
   beachGround!: BeachGround;
   parkPolys: { name: string; poly: number[][][] }[] = [];
@@ -337,39 +340,33 @@ export class CityEngine {
       'shoreline',
       'context-land',
     ];
-    await Promise.all(
-      names.map(async (n) => {
+    await Promise.all([
+      ...names.map(async (n) => {
         const res = await fetch(`/data/${n}.geojson`);
         if (!res.ok)
           throw new Error(`Could not load ${n} data (${res.status})`);
         this.data[n] = await res.json();
       }),
-    );
-    const t = await fetch('/data/terrain.json');
-    if (t.ok) this.data.elevation = await t.json();
-    const bridgeData = await fetch('/data/bridges.json');
-    if (bridgeData.ok) this.data.bridges = await bridgeData.json();
-    const tr = await fetch('/data/trees.json');
-    if (tr.ok) this.data.trees = await tr.json();
-    const ctx = await fetch('/data/context-terrain.json');
-    if (ctx.ok) this.data.contextTerrain = await ctx.json();
-    const rail = await fetch('/data/railways.json');
-    if (!rail.ok)
-      throw new Error(`Could not load railway data (${rail.status})`);
-    this.data.railways = await rail.json();
-    for (const name of ['harbour-sites', 'harbour-routes', 'harbour-piers']) {
-      const response = await fetch(`/data/${name}.json`);
-      if (!response.ok)
-        throw new Error(`Could not load ${name} (${response.status})`);
-      this.data[name] = await response.json();
-    }
-    if (this.disposed) return;
-    const coastResponse = await fetch('/data/beach-coast.json');
-    if (!coastResponse.ok)
-      throw new Error(
-        `Could not load coastal terrain (${coastResponse.status})`,
-      );
-    this.data.beachCoast = (await coastResponse.json()) as BeachCoastData;
+      ...[
+        ['terrain', 'elevation', false],
+        ['bridges', 'bridges', false],
+        ['trees', 'trees', false],
+        ['context-terrain', 'contextTerrain', false],
+        ['railways', 'railways', true],
+        ['harbour-sites', 'harbour-sites', true],
+        ['harbour-routes', 'harbour-routes', true],
+        ['harbour-piers', 'harbour-piers', true],
+        ['beach-coast', 'beachCoast', true],
+      ].map(async ([name, key, required]) => {
+        const res = await fetch(`/data/${name}.json`);
+        if (!res.ok) {
+          if (required)
+            throw new Error(`Could not load ${name} (${res.status})`);
+          return;
+        }
+        this.data[String(key)] = await res.json();
+      }),
+    ]);
     if (this.disposed) return;
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('load.geographic-masks');
@@ -402,13 +399,11 @@ export class CityEngine {
       this.startupQA?.phase('geometry.context');
     }
     makeContext(this);
-    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+    if (process.env.VANCOUVER_VISUAL_QA === '1')
       this.startupQA?.phase('geometry.causeway-prepare');
-    }
     prepareCauseway(this);
-    if (process.env.VANCOUVER_VISUAL_QA === '1') {
+    if (process.env.VANCOUVER_VISUAL_QA === '1')
       this.startupQA?.phase('geometry.roads');
-    }
     this.makeRoads();
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('geometry.buildings');
@@ -453,7 +448,9 @@ export class CityEngine {
       this.startupQA?.phase('geometry.streetfronts-and-roofs');
     }
     createStreetfronts(this);
-    createRoofDetails(this);
+    // Roof furniture is invisible at the opening overview. Build it in bounded
+    // background steps only for detail profiles; basic roofs already exist.
+    this.scheduleScenery?.();
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('geometry.traffic-and-road-details');
     }
@@ -691,6 +688,16 @@ export class CityEngine {
     };
     this.composer.insertPass(this.ssao, 1);
   }
+  scheduleScenery() {
+    if (
+      !this.roofsScheduled &&
+      this.settings.quality !== 'balanced' &&
+      this.data.buildingFoundations
+    ) {
+      this.roofsScheduled = true;
+      this.sceneryPreparation.add(roofDetailSteps(this));
+    }
+  }
   renderScene() {
     this.detailedTrees?.update();
     this.facadeDetails?.update();
@@ -730,6 +737,13 @@ export class CityEngine {
     if (this.composer) this.composer.render();
     else this.renderer.render(this.scene, this.camera);
     this.landmarkWarmup?.tick();
+    this.sceneryPreparation.pump(
+      this.settings.quality === 'balanced'
+        ? 0
+        : this.transition || this.settings.mode !== 'orbit'
+          ? 0.5
+          : 1.5,
+    );
   }
   elevation(x: number, z: number): number {
     return this.beachGround?.height(x, z) ?? this.rawElevation(x, z);
@@ -824,6 +838,26 @@ export class CityEngine {
     this.scene.add(this.water);
   }
   makeLand() {
+    // Shared triangle vertices need the same elevation/park classification.
+    // Keep exact coordinates (no quantization) and release caches after build.
+    const samples = new Map<string, { height: number; color: number }>();
+    const sample = (x: number, z: number) => {
+      const key = `${x}:${z}`;
+      let value = samples.get(key);
+      if (!value) {
+        const park = this.parkPolys.find((p) => inPolygon([x, z], p.poly));
+        value = {
+          height: this.elevation(x, z),
+          color: park
+            ? park.name === 'Stanley Park'
+              ? 0x476d3f
+              : 0x658a4f
+            : 0x95998a,
+        };
+        samples.set(key, value);
+      }
+      return value;
+    };
     const positions: number[] = [],
       colors: number[] = [];
     for (const [polyIndex, poly] of (
@@ -855,16 +889,9 @@ export class CityEngine {
         )
           [p[1], p[2]] = [p[2], p[1]];
         for (const q of p) {
-          const h = this.elevation(q[0], q[1]);
-          positions.push(q[0], h, q[1]);
-          const park = this.parkPolys.find((p) => inPolygon(q, p.poly));
-          const c = new THREE.Color(
-            park
-              ? park.name === 'Stanley Park'
-                ? 0x476d3f
-                : 0x658a4f
-              : 0x95998a,
-          ).multiplyScalar(
+          const value = sample(q[0], q[1]);
+          positions.push(q[0], value.height, q[1]);
+          const c = new THREE.Color(value.color).multiplyScalar(
             0.97 +
               hash(Math.round(cx / 60) + Math.round(cz / 60) * 781) * 0.065,
           );
@@ -1151,6 +1178,7 @@ export class CityEngine {
     if (settings.mode !== this.settings.mode)
       this.navigation?.setMode(settings.mode);
     this.settings = { ...settings };
+    this.scheduleScenery?.();
     this.buildings.visible = settings.buildings;
     this.vegetation.visible = settings.trees;
     this.controls.autoRotate = settings.autoRotate;
@@ -1486,6 +1514,7 @@ export class CityEngine {
     this.placement?.destroy();
     this.controls.dispose();
     this.landmarkDetails.forEach((l) => l.disposePending());
+    this.sceneryPreparation.dispose();
     this.landmarkWarmup?.dispose();
     this.landmarkWorker?.dispose();
     this.detailedTrees?.dispose();

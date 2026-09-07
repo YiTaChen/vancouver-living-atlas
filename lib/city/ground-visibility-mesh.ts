@@ -26,6 +26,24 @@ function flatWorld(mesh: THREE.Mesh): number[] {
   return out;
 }
 
+// Reject distant chunks before allocating expanded world-space vertex arrays.
+// Keep source slots/order and protected flags so correction semantics stay exact.
+function touchesRegions(
+  mesh: THREE.Mesh,
+  regions: readonly (readonly number[])[],
+) {
+  mesh.updateWorldMatrix(true, false);
+  if (!mesh.geometry.boundingBox) mesh.geometry.computeBoundingBox();
+  const box = mesh.geometry.boundingBox!.clone().applyMatrix4(mesh.matrixWorld);
+  return regions.some(
+    (b) =>
+      box.min.x <= b[2] &&
+      box.max.x >= b[0] &&
+      box.min.z <= b[3] &&
+      box.max.z >= b[1],
+  );
+}
+
 /** Call exactly once, after makeLand, makeRoads and createNature; before any
  * GroundSurfaceIndex/StreetNavigation construction. Mutates only the supplied
  * first terrain mesh's geometry. It remains the same mesh, in the same child
@@ -69,7 +87,11 @@ export function applyGroundVisibility(
         // A second guard prevents accidental upper-floor selection in the caller.
         protectedSurface: !!mesh.userData.protectedSurface,
         level: mesh.userData.protectedSurface ? 'upper' : 'ground',
-        positions: mesh.userData.protectedSurface ? [] : flatWorld(mesh),
+        positions:
+          mesh.userData.protectedSurface ||
+          !touchesRegions(mesh, options.regions ?? [options.bounds])
+            ? []
+            : flatWorld(mesh),
       }),
     ),
     options,
@@ -116,10 +138,20 @@ export function applyRoadLowering(
   lowerPaths: readonly GroundCover[],
   options: Parameters<typeof prepareRoadLowering>[2],
 ) {
+  const margin = options.blendM ?? 6;
+  const expanded = [
+    options.bounds[0] - margin,
+    options.bounds[1] - margin,
+    options.bounds[2] + margin,
+    options.bounds[3] + margin,
+  ];
   const sources: GroundCover[] = asphaltMeshes.map((mesh) => ({
     id: mesh.name,
     kind: 'asphalt',
-    positions: flatWorld(mesh),
+    positions:
+      mesh.userData.protectedSurface || !touchesRegions(mesh, [expanded])
+        ? []
+        : flatWorld(mesh),
     level: mesh.userData.protectedSurface ? 'upper' : 'ground',
     protectedSurface: !!mesh.userData.protectedSurface,
   }));
@@ -127,7 +159,8 @@ export function applyRoadLowering(
     changes = [];
   for (let i = 0; i < asphaltMeshes.length; i++) {
     const mesh = asphaltMeshes[i];
-    if (mesh.userData.protectedSurface) continue;
+    if (mesh.userData.protectedSurface || !sources[i].positions.length)
+      continue;
     const previous = mesh.geometry;
     if (!previous.boundingBox) previous.computeBoundingBox();
     const box = previous.boundingBox!.clone().applyMatrix4(mesh.matrixWorld);

@@ -1,0 +1,71 @@
+{
+  "revision": "7443b95469f51d775e4fe7ccdf0fe91853b57133",
+  "sourceFingerprint": "c478261f553c47bbbdc12e01bda210c6dc6d1920b6d69bc0f5f2b26c858e7332",
+  "id": "robson-drive",
+  "quality": "high",
+  "hour": 14,
+  "skySettings": {
+    "sun": true,
+    "moon": true,
+    "stars": true,
+    "aurora": true,
+    "meteors": true,
+    "moonPhase": "auto",
+    "auroraMode": "auto",
+    "starDensity": 0.45,
+    "auroraIntensity": 0.45,
+    "auroraDensity": 0.45,
+    "meteorFrequency": 0.3
+  },
+  "sampleMs": 8010.200000000012,
+  "valid": true,
+  "viewport": [
+    390,
+    844
+  ],
+  "dpr": 1,
+  "render": [
+    390,
+    844
+  ],
+  "fps": 60.04843824124233,
+  "p50Ms": 16.699999999982538,
+  "p95Ms": 18,
+  "p99Ms": 18.60000000000582,
+  "maxMs": 18.70000000001164,
+  "over50Ms": 0,
+  "over100Ms": 0,
+  "frames": 481,
+  "start": [
+    303.92205172832195,
+    34.06083199646445,
+    228.33401800037095
+  ],
+  "end": [
+    16.20372028210819,
+    40.09365411170513,
+    -58.176330859223704
+  ],
+  "camera": [
+    31.792758133667665,
+    48.99365306022893,
+    -42.652743429860756
+  ],
+  "target": [
+    -1.5110978773535138,
+    40.09365411170513,
+    -75.81677352876025
+  ],
+  "triangles": 1901709,
+  "calls": 218,
+  "geometries": 699,
+  "textures": 18,
+  "nearTrees": 210,
+  "beachAmenities": {
+    "courts": 2,
+    "volleyball": 8,
+    "logs": 21,
+    "triangles": 41944,
+    "batches": 2
+  }
+}

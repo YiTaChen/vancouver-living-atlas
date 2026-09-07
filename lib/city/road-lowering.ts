@@ -1,3 +1,4 @@
+import { orderedBounds } from './ordered-bounds';
 /** Original LicenseRef-Vancouver-Living-Atlas-NC-1.0 (see LICENSE; prior MIT grants remain valid). A local, downward-only repair of existing ground asphalt.
  * Upper decks and source paths remain untouched. The correction is zero with
  * zero derivative at its six-metre perimeter. Path footprint boundaries are
@@ -41,6 +42,20 @@ export interface RoadLoweringResult {
     maximumSharedVertexYDifferenceM: number;
     conformingEdgeInsertions: number;
   };
+}
+// Plans are immutable once prepared. Reuse an ordered broad phase across the
+// many vertex-height queries without changing any triangle arithmetic.
+const constraintIndices = new WeakMap<
+  RoadLoweringPlan,
+  ReturnType<typeof orderedBounds<Constraint>>
+>();
+function constraintsFor(plan: RoadLoweringPlan) {
+  let index = constraintIndices.get(plan);
+  if (!index) {
+    index = orderedBounds(plan.constraints, (c) => c.bounds, 12, 0);
+    constraintIndices.set(plan, index);
+  }
+  return index;
 }
 const EPS = 1e-8;
 const extend = (b: Bounds, p: number): Bounds => [
@@ -120,6 +135,12 @@ export function prepareRoadLowering(
         pathTriangles.push({ id: source.id, triangle: t });
     }
   }
+  const pathIndex = orderedBounds(
+    pathTriangles,
+    (p) => p.triangle.bounds,
+    12,
+    0,
+  );
   const focus = options.focusBounds ?? options.bounds;
   G.validateBounds(focus);
   if (
@@ -147,7 +168,7 @@ export function prepareRoadLowering(
         continue;
       const t = G.triangle(source.positions, i);
       if (!t) continue;
-      for (const { id, triangle: path } of pathTriangles) {
+      for (const { id, triangle: path } of pathIndex.query(t.bounds)) {
         if (!G.overlaps(t.bounds, path.bounds)) continue;
         let active = G.intersect(t.points, path.points);
         if (!active.length) continue;
@@ -186,7 +207,12 @@ export function roadLoweringAt(
   originalY: number,
 ): number {
   let correction = 0;
-  for (const c of plan.constraints) {
+  for (const c of constraintsFor(plan).query([
+    point[0],
+    point[1],
+    point[0],
+    point[1],
+  ])) {
     if (
       point[0] < c.bounds[0] ||
       point[0] > c.bounds[2] ||
@@ -250,9 +276,7 @@ export function lowerRoadSurface(
     const t = G.triangle(input.positions, i);
     if (!t) continue;
     result.statistics.inputPlanAreaM2 += G.area(t.points);
-    const nearby = plan.constraints.filter((c) =>
-      G.overlaps(t.bounds, c.bounds),
-    );
+    const nearby = constraintsFor(plan).query(t.bounds);
     if (!nearby.length) continue;
     const parts: PatchTriangle[] = [];
     for (

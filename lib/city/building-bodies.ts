@@ -64,6 +64,9 @@ export function createBuildingBodies(e: CityEngine) {
       prepared.push({ key, polygon, center, h, min });
     }
   }
+  const firstByKey = new Map<string, (typeof prepared)[number]>();
+  for (const part of prepared)
+    if (!firstByKey.has(part.key)) firstByKey.set(part.key, part);
   const structures = summarizeStructures(parts),
     profiles = new Map<string, Profile>(),
     foundations = new Map<string, number>();
@@ -71,7 +74,7 @@ export function createBuildingBodies(e: CityEngine) {
     profiles.set(key, createProfile(structure));
     // Keep the previous foundation datum. Choosing a larger podium for style
     // classification must not lift or lower an existing compound building.
-    const first = prepared.find((p) => p.key === key)!;
+    const first = firstByKey.get(key)!;
     foundations.set(key, e.elevation(...first.center) - 0.4);
   }
   e.data.buildingProfiles = profiles;
