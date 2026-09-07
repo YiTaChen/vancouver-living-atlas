@@ -1854,6 +1854,7 @@ export default function Home() {
                       style={{ width: `${loadProgress}%` }}
                     />
                   </div>
+                  <div className="loading-activity" aria-hidden="true" />
                 </div>
                 <p>{tr('loadingDetails')}</p>
               </>

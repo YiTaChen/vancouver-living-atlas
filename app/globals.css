@@ -376,7 +376,31 @@ a {
   background: #dce7a2;
   transition: width 160ms ease-out;
 }
+.loading-activity {
+  height: 2px;
+  width: 180px;
+  max-width: 100%;
+  margin: 18px auto 0;
+  background: #27434a;
+  overflow: hidden;
+}
+.loading-activity::after {
+  content: '';
+  display: block;
+  width: 60%;
+  height: 100%;
+  background: #dce7a2;
+  animation: loading-activity 1.2s infinite ease-in-out;
+}
+@keyframes loading-activity {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(200%); }
+}
 @media (prefers-reduced-motion: reduce) {
+  .loading-activity::after {
+    animation: none;
+    margin: auto;
+  }
   .loading-fill {
     transition: none;
   }
