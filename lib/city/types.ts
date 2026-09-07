@@ -110,6 +110,18 @@ export const VIEWS: Viewpoint[] = [
       '五座白色帆頂面向 Burrard Inlet，港灣、遊輪碼頭與市中心在這裡相遇。',
   },
   {
+    id: 'waterfront',
+    name: 'Waterfront Station',
+    zh: 'Waterfront 海濱車站',
+    coord: [-123.11182, 49.28571],
+    distance: 350,
+    targetHeight: 12,
+    azimuth: 2.4,
+    elevation: 0.62,
+    tag: '地標',
+    description: '歷史車站大廳與通往 SeaBus 碼頭的海濱通道。',
+  },
+  {
     id: 'bcplace',
     name: 'BC Place',
     zh: '卑詩體育館',

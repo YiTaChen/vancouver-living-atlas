@@ -1438,6 +1438,7 @@ export class CityEngine {
       convention: 38,
       harbour: 30,
       canada: 70,
+      waterfront: 28,
       railway: 12,
       skytrain: 18,
       english: 7,
