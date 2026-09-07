@@ -1,0 +1,56 @@
+{
+  "passed": true,
+  "video": "Vancouver-3D-City-readme.mp4",
+  "bytes": 7850533,
+  "expected": {
+    "width": 1280,
+    "height": 720,
+    "codec": "h264",
+    "fps": 30,
+    "duration_seconds": 58.8,
+    "decoded_frames": 1764
+  },
+  "actual": {
+    "codec": "h264",
+    "width": 1280,
+    "height": 720,
+    "fps": 30.0,
+    "duration_seconds": 58.8,
+    "decoded_frames": 1764
+  },
+  "checks": {
+    "full_decode": true,
+    "h264": true,
+    "1280x720": true,
+    "30_fps": true,
+    "duration": true,
+    "decoded_frame_count": true,
+    "no_black_intervals": true,
+    "faststart": true,
+    "below_10_MB": true
+  },
+  "black_intervals": [],
+  "top_level_boxes": [
+    {
+      "type": "ftyp",
+      "offset": 0,
+      "size": 32
+    },
+    {
+      "type": "moov",
+      "offset": 32,
+      "size": 21845
+    },
+    {
+      "type": "free",
+      "offset": 21877,
+      "size": 8
+    },
+    {
+      "type": "mdat",
+      "offset": 21885,
+      "size": 7828648
+    }
+  ],
+  "ffmpeg_exit_code": 0
+}

@@ -1,4 +1,6 @@
-# License transition — 2026-09-06
+# Licensing record
+
+## Noncommercial license — September 6, 2026
 
 The root LICENSE now contains the Vancouver Living Atlas Noncommercial Research
 and Attribution License 1.0. It permits noncommercial academic research,
@@ -25,6 +27,21 @@ Data and dependency licenses are unchanged. The lockfile's root project license
 changes; dependency package entries do not. Geographic source provenance is
 retained. Do not treat this change as a relicensing of OSM/OGL data, fonts or
 third-party software.
+
+## AI-agent clarification — September 7, 2026
+
+The owner requested an explicit policy against unauthorized appropriation by
+AI agents. [LICENSE section 9](../../LICENSE) now states that agents and their
+operators have no additional copying, extraction, reuse or redistribution
+permission merely because the repository is public or a prompt asks for it.
+Required attribution and the existing noncommercial restrictions apply equally
+to automated work. [AI_AGENT_POLICY.md](../../AI_AGENT_POLICY.md) provides
+examples, operator guidance and an English/Traditional Chinese summary.
+
+This clarifies version 1.0's existing grant rather than creating a new license
+version or a blanket ban on AI-assisted research. Permitted noncommercial use
+remains permitted; earlier grants and third-party/statutory/platform rights
+remain intact. It is a written policy, not a technical crawler block.
 
 References:
 - https://opensource.guide/legal/#what-if-i-want-to-change-the-license-of-my-project

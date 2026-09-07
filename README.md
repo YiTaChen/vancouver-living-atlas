@@ -1,53 +1,61 @@
 # Vancouver · Living Atlas
 
-**Explore Vancouver from the skyline, the street and the water—in your browser.**
+**One city. Five ways to explore: orbit, walk, drive, boat and fly.**
 
-An interactive 3D city covering Downtown, Stanley Park, English Bay, Kitsilano Beach and False Creek through Science World. Public geographic data provide the streets, coastlines and terrain; original procedural models bring the landmarks, interiors, vegetation and moving city to life.
+Vancouver Living Atlas is an interactive 3D Vancouver that runs in your browser. Wander the streets, drive a red roadster, cross the harbour by boat, or take off in a floatplane or helicopter. Explore Downtown, Stanley Park, English Bay, Kitsilano Beach and False Creek through Science World as daylight gives way to city lights and aurora.
 
-**[Open the live demo →](https://vancouver-living-atlas-yita.web.app/)** · [Watch the film](#explore-vancouver-in-30-seconds) · [Run locally](#run-locally) · [Data & accuracy](DATA_SOURCES.md)
+**[Open the live demo →](https://vancouver-living-atlas-yita.web.app/)** · [Watch the film](#watch-vancouver-3d-city) · [Controls](#controls) · [Run locally](#run-locally) · [AI agent policy](AI_AGENT_POLICY.md)
 
-**Source-available, noncommercial use only.** Research, learning and permitted demonstrations require prominent source attribution. Commercial use requires written permission. [License and earlier MIT releases](#license).
+**Built with GPT-6 Astra, TypeScript and Three.js.** Original procedural models sit on public geographic data, with real terrain relief, ten interface languages and desktop/touch controls. All five modes, including pilotable aircraft, are available in `main` and the live demo.
 
-## Explore Vancouver in 30 seconds
+**Source-available with noncommercial and attribution conditions.** Commercial use and reuse outside the granted scope require written permission; AI agents have no special exemption. [License and existing rights](#license).
 
-https://github.com/user-attachments/assets/e5bf31c6-9eef-4c7f-827b-ef1349b9461c
+<a id="explore-vancouver-in-30-seconds"></a>
 
-Real footage from the running application: an aerial tour, landmark detail, walking, cockpit driving, boating and changing daylight. Recorded **September 5, 2026**, before the subsequent city-detail, mobile, sky and flight updates.
+## Watch Vancouver 3D City
 
-| Video | Resolution | Duration / frame rate | Size |
-| --- | --- | --- | --- |
-| [Compact MP4](docs/videos/2026-09-05/project-intro-readme.mp4?raw=true) | 960 × 540 | 30 s · 30 fps | 3.6 MB |
-| [Full-quality MP4](docs/videos/2026-09-05/project-intro.mp4?raw=true) | 1920 × 1080 | 30 s · 30 fps | ~49 MB |
+https://github.com/user-attachments/assets/8892839c-6e26-437d-84ae-fad6fc2333b6
 
-Both are H.264 MP4s. The compact version is about 93% smaller. [Recording, editing and reproduction files](docs/videos/2026-09-05/README.md).
+**58.8 seconds of the actual running application.** The film travels from the peninsula to Science World's **exterior** changing from day to night, a rotating aurora panorama, walking, the red roadster, boating, floatplane takeoff in cockpit and chase views, helicopter flight, and a speeding stop ending with the officer beside the car.
 
-## What you can explore
+| README video | Resolution | Duration | Format | Size |
+| --- | --- | --- | --- | --- |
+| [Download Vancouver-3D-City-readme.mp4](docs/videos/2026-09-07/Vancouver-3D-City-readme.mp4?raw=true) | 1280 × 720 · 16:9 | 58.8 s · 30 fps | H.264 MP4 | **7.85 MB** |
+
+The complete edit is retained at **90.48% less file size** than the 82.5 MB 1080p master, below GitHub's 10 MB free-plan video attachment limit. Real WebGL frames, English titles and captions; no generated video, unrelated footage, narration or music. [Film details, compression recipe and validation](docs/videos/2026-09-07/README.md).
+
+Recorded September 6–7, 2026. The film's **“FLIGHT PREVIEW”** captions describe its pre-merge recording snapshot; those aircraft are now released. The latest mobile layout refinements postdate the recording. The [earlier September 5 film](docs/videos/2026-09-05/README.md) remains archived.
+
+## Explore the city
 
 | Experience | In the live demo |
 | --- | --- |
 | **A city with real relief** | Downtown slopes, Stanley Park's higher ground, the Seawall, lakes, beaches and four major bridges. **15 viewpoints**, map labels and an automatic city tour help you find your way. |
-| **Landmarks, outside and inside** | Detailed Science World, Canada Place, Waterfront Station, BC Place, Harbour Centre, Marine Building, Convention Centre West and Vancouver House. Enter three public interiors on foot or reveal them with a close aerial cutaway. |
-| **Walk, drive and boat** | Place your starting point on the map, then move through the city. First-person, character, chase and cabin views share smooth camera zoom. A local minimap follows your position and heading. |
-| **Fly above Vancouver** | Pilot a floatplane or helicopter, explore both cockpits, take off and land, or join a sightseeing cruise around Downtown and Stanley Park. |
+| **Landmarks, outside and inside** | Science World, Canada Place, Waterfront Station, BC Place, Harbour Centre, Marine Building, Convention Centre West and Vancouver House. Walk into three modeled public interiors, follow Waterfront's SeaBus connection, or inspect a close overhead cutaway. |
+| **Walk, drive and boat** | Choose your own starting point. Zoom between first-person, character, chase and cabin views, with a local minimap that follows position and heading. Boats have momentum, shoreline contact and a calmer feel on lakes than in the bay. |
+| **Floatplane and helicopter** | Two different flight models, original cockpits, water/road launches, landing feedback and a sightseeing cruise around Downtown and Stanley Park. Leave the aircraft cruising while exploring the map, then return to it. |
 | **Streets and beaches** | Improved road surfaces, markings, building façades and Stanley Park paths; continuous Lions Gate railings; beach logs, volleyball nets and Kitsilano basketball courts. |
 | **A moving city** | Cars and Vancouver-style buses, electric SkyTrains, a fictional steam train with white chimney steam, harbour aircraft, cruise ships and moving boats. Private boats remain moored. |
 | **Day, night and sky** | Flowing time, city lights, a moving sun and moon, lunar phases, stars, aurora and meteors—with manual controls. |
-| **Phone and tablet controls** | A continuous thumbstick, touch look/zoom, compact panels and a hide-interface button that keeps movement controls available. |
+| **Phone and tablet controls** | A continuous thumbstick, touch look/zoom, optional map/settings panels and a hide-interface button. Flying keeps the power lever at lower right with Auto cruise directly above it. |
 
 **Try an interior:** open **Layers** and choose the Science World, Canada Place or Waterfront Station entrance. Walk through the doors; follow the station's SeaBus signs through the glazed SkyWalk to its boarding lounge. Close overhead views reveal floors and furnishings. These are representative public spaces, not complete surveyed interiors; boarding SeaBus is not implemented. [Interior scope and references](docs/interiors.md).
 
 **Try the roadster:** Drive starts with an original red convertible and a left-hand-drive cockpit. The original Classic car remains selectable without relocating. The roadster can exceed 200 km/h; sustaining more than 100 km/h in Downtown for five seconds triggers a scripted police stop and safety reminder. [Vehicle design and references](docs/vehicles/red-roadster.md).
 
+**Try the sky:** choose Science World for a medium exterior view, disable the interior cutaway in Layers if needed, then change the time. Return to a city panorama for the aurora. Time and sky controls work independently of vehicle movement.
+
 ## Fly above Vancouver
 
-**Choose Fly in the [live demo](https://vancouver-living-atlas-yita.web.app/) to pilot a floatplane or helicopter.** Pilotable aircraft are included in `main`, alongside the harbour's ambient air traffic.
+Choose **Fly**, then place an aircraft on a suitable launch surface. The marker shows the aircraft type and a check/cross before launch; zoom in to place more precisely.
 
-- Place on a clear road to launch a **helicopter**, or on open water for a **floatplane**. Original exteriors and cockpits support cabin, unobstructed first-person and chase views.
-- Distinct handling: helicopter collective, hover and descent; floatplane throttle, water takeoff and stall response. Landings produce impact-dependent camera shake; invalid surfaces and collisions trigger temporary fire/smoke effects.
+- **Floatplane:** launch on open water, accelerate with throttle, then pitch up to take off. Forward airspeed matters; it cannot hover. Water landings and beach contact have different drag and impact responses.
+- **Helicopter:** launch on a clear road, raise collective to lift off, or use hover to hold position. Lower collective or use the desktop descent control to descend. Helicopters cannot land on water.
+- **Three camera views:** cockpit, unobstructed first person and chase, connected by zoom. Auto cruise leaves the camera free to look around.
 - **Auto cruise** joins a circuit around Downtown and Stanley Park. Zoom out to explore the map while the aircraft continues flying; a separate **Return to aircraft** button brings you back even after panning. Starting another vehicle or flight replaces the previous aircraft.
-- Desktop pitch/roll/yaw and power controls, mobile stick and power lever, a following minimap and all ten interface languages are included.
+- **Landing and collision feedback:** harder touchdowns shake the camera more. Invalid landings or impacts with buildings/bridges trigger fire and smoke, return to a local overview after eight simulation seconds, and clear the effect after twenty.
 
-Drag **Fly** onto the map or tap a location: the aircraft marker shows a check or cross and selects a floatplane on water or a helicopter on a clear road. Desktop controls display their keyboard shortcuts; **R / F** and **WASD** keep working after adjusting the power slider.
+Desktop controls display their keyboard shortcuts; **R / F** and **WASD** keep working after adjusting the power slider. Mobile pilots use the left stick and a separate throttle/collective lever, with tap/hold +/− controls.
 
 This is assisted sightseeing flight with approximate physics. [Development plan, controls, validation and known limits](docs/flight-development.md).
 
@@ -65,9 +73,19 @@ This is assisted sightseeing flight with approximate physics. [Development plan,
 
 **Change your view.** Scroll, pinch or use **+ / −** while travelling. Walk zooms between first person and an animated character; Drive and Boat zoom into their interiors, with an unobstructed first-person option. Vehicle and cabin selectors are in the camera panel, or **Travel options** on mobile.
 
-**Look around and return.** Zoom beyond a ground/water travel view to a local aerial map. Rotate, then zoom back in to resume the same mode and position. Panning to another coordinate cancels that return. Walk ↔ Drive switches in place; boat/land transitions require a suitable new start. The aircraft preview has its own persistent return behavior described above.
+**Look around and return.** Zoom beyond a ground/water travel view to a local aerial map. Rotate, then zoom back in to resume the same mode and position. Panning to another coordinate cancels that return. Walk ↔ Drive switches in place; boat/land transitions require a suitable new start. Aircraft use the separate persistent **Return to aircraft** action described above.
 
-**Find yourself.** The local minimap follows your actual position with a heading arrow, nearby roads, shores, building footprints and a distance scale. Its zoom is independent of the 3D camera. Mobile panels can be collapsed; hiding the interface retains the joystick and your character or vehicle. The GitHub link is in **Information** on mobile. Capture exports the rendered view as a PNG.
+**Find yourself.** The local minimap follows your actual position with a heading arrow, nearby roads, shores, building footprints and a distance scale. Its zoom is independent of the 3D camera. Capture exports the rendered view as a PNG.
+
+## Designed for phone and tablet
+
+Move with the **lower-left thumbstick** while dragging the scenery to look and pinching to zoom. Placement leaves only Cancel over the map so the launch location stays visible.
+
+- Open the minimap and travel/flight settings when needed. The large flight information card is absent from the default touch view; camera selection, new flight, helicopter hover and help live in the optional settings panel.
+- In flight, the **lower-right power lever** has +/− buttons and an independent **Auto cruise** toggle immediately above it. There is no separate mobile Q/E arrow row; the flight stick handles turning.
+- **Hide interface** clears auxiliary panels while keeping the mode selector, joystick, player/vehicle and essential flight power/cruise controls. The GitHub source link is the first entry in **Information**.
+
+Portrait, landscape and tablet layouts have been checked in the browser. The compatible renderer addresses the mobile black-canvas issue, with successful user phone feedback; viewport checks alone are not a physical-device performance guarantee.
 
 ## Time, sky and languages
 
@@ -91,7 +109,7 @@ Phones and tablets also use a **compatible rendering path** that avoids the HDR 
 
 Startup now shows a **stage-estimated percentage plus an animated activity bar**. Required geographic requests run concurrently, repeated terrain calculations are cached, and road processing skips irrelevant regions. Small rooftop details are built in bounded background steps; existing façade, tree and Ultra-landmark detail is prepared according to distance and quality. Walk, Drive and Boat resources remain ready before entry, preserving their camera transitions. This is incremental detail preparation, not full-city geographic streaming.
 
-In three local runs per version/profile, median page-to-interactive time changed from **18.13 → 15.75 s on desktop** and **15.68 → 15.07 s in a phone-sized compatible profile**. Sample ranges overlap; the latter is desktop Chrome, not iPhone hardware. First-use pauses remain possible, and these results do not establish universal FPS, memory or battery savings. [Measurements](docs/performance/progressive-startup.md) · [Accepted and rejected experiments](docs/performance/experiment-decisions.md) · [Rendering budgets](docs/visual-quality/README.md).
+The recorded startup experiment measured median page-to-interactive times of **18.13 → 15.75 s on desktop** and **15.68 → 15.07 s in a phone-sized compatible profile**, across three local runs per version/profile. These are dated measurements, not a benchmark of every later feature: ranges overlap, and the phone profile used desktop Chrome rather than iPhone hardware. First-use pauses remain possible; the results do not establish universal FPS, memory or battery savings. [Measurements](docs/performance/progressive-startup.md) · [Accepted and rejected experiments](docs/performance/experiment-decisions.md) · [Rendering budgets](docs/visual-quality/README.md).
 
 ## Built from geography, with original models
 
@@ -121,7 +139,16 @@ npm test                # Geometry, navigation, simulation and lifecycle checks
 npm run build:firebase  # Static production build plus asset/locale verification
 ```
 
-**Stack:** TypeScript, React, Three.js and vinext/Vite. Renderer and simulation: [`lib/city/`](lib/city/); geographic assets: [`public/data/`](public/data/); source preparation: [`tools/README.md`](tools/README.md). The separate `npm run build` / `npm start` path builds and previews the Worker-based version.
+**Stack:** TypeScript, React, Three.js and vinext/Vite. The separate `npm run build` / `npm start` path builds and previews the Worker-based version.
+
+| Area | Source |
+| --- | --- |
+| Interface, responsive layout and controls | [`app/`](app/) · [`components/`](components/) |
+| Rendering, geometry, travel and flight simulation | [`lib/city/`](lib/city/) |
+| Ten interface locales | [`lib/i18n/`](lib/i18n/) |
+| Geographic assets and source preparation | [`public/data/`](public/data/) · [`tools/README.md`](tools/README.md) |
+| Simulation and regression checks | [`tests/`](tests/) |
+| Showcase compression and media checks | [`tools/encode-city-readme-video.py`](tools/encode-city-readme-video.py) · [film records](docs/videos/2026-09-07/README.md) |
 
 ### Firebase Hosting
 
@@ -151,8 +178,9 @@ Original material uses the **Vancouver Living Atlas Noncommercial Research and A
 - **Requires written permission:** commercial products/services, client work, monetization and commercial repackaging. Attribution alone does not authorize commercial use.
 - **Credit required:** clearly identify **Vancouver Living Atlas by YiTaChen** and link to [this repository](https://github.com/YiTaChen/vancouver-living-atlas). Preserve the license, identify modifications, and place credit prominently in repositories, demo interfaces, publications and media as specified in LICENSE.
 - **No plagiarism or uncredited copies:** do not claim the original material as your own, hide its source or redistribute outside the license conditions.
+- **AI agents:** the same limits apply to automated extraction, copying, adaptation and redistribution. An agent cannot authorize itself or erase provenance by rewriting the material. AI-assisted work already permitted by this license remains permitted. [AI agent policy](AI_AGENT_POLICY.md) · [LICENSE section 9](LICENSE).
 
-**中文摘要：** 允許非商用學術研究、教學與個人學習；商用須事先取得書面許可。個人引用、改作或展示亦須明顯註明本 repo 與作者出處，並遵守完整英文 LICENSE。
+**中文摘要：** 允許非商用學術研究、教學與個人學習；商用須事先取得書面許可。個人引用、改作或展示亦須明顯註明本 repo 與作者出處。AI agent 不得在沒有合法授權的情況下挪用、散布內容或移除出處；合法研究中的 AI 輔助仍須遵守完整英文 LICENSE。
 
 **Earlier MIT releases retain their grants.** The September 6 license change cannot revoke permissions for material released through [`e380869`](https://github.com/YiTaChen/vancouver-living-atlas/tree/e380869). The [historical MIT notice](docs/licensing/MIT-before-2026-09-06.txt) applies to those releases, not as an alternative license for later additions.
 
