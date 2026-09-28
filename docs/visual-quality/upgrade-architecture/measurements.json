@@ -1,0 +1,626 @@
+[
+  {
+    "revision": "0f0b2a40603908e53e2bd0e2d1ab8f1655e56a50",
+    "sourceFingerprint": "a3511273a2ef3b4264e630565d3e7eba684ea8f5904979d03771c3072c9be7ac",
+    "kind": "upgrade-matched-v1",
+    "id": "atlas-aerial",
+    "quality": "high",
+    "valid": true,
+    "sampleMs": 8046.600000004459,
+    "frames": 175,
+    "fps": 21.74831605894453,
+    "p50Ms": 49.80000000001746,
+    "p95Ms": 83.40000000002328,
+    "p99Ms": 166.59999999997672,
+    "maxMs": 199.89999999999418,
+    "over50Ms": 65,
+    "over100Ms": 3,
+    "hour": 14,
+    "fov": 48,
+    "viewport": [
+      1300,
+      672
+    ],
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1521.3465663384245,
+      503.2979999999977,
+      924.7160000000582
+    ],
+    "target": [
+      691.3465663384244,
+      88.29799999999776,
+      64.71600000005822
+    ],
+    "mode": "orbit",
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "calls": 1176,
+    "triangles": 7258757,
+    "geometries": 628,
+    "textures": 48,
+    "settleMs": 5049.400000004476,
+    "warmupVisible": true,
+    "detailReady": true,
+    "architectureAtSettle": {
+      "selectedCells": 16,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 16,
+      "readyCells": 27,
+      "visibleCells": 16,
+      "visibleInstances": 7807,
+      "allocatedInstances": 12745,
+      "droppedAtBudget": 14,
+      "maxPlanMs": 10.600000001490116,
+      "maxAttachmentMs": 63.5
+    },
+    "architecture": {
+      "selectedCells": 16,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 16,
+      "readyCells": 27,
+      "visibleCells": 16,
+      "visibleInstances": 7807,
+      "allocatedInstances": 12745,
+      "droppedAtBudget": 14,
+      "maxPlanMs": 10.600000001490116,
+      "maxAttachmentMs": 63.5
+    },
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "protocol": "Fixed 1920x1080 drawing buffer; 14h; warm-up at least 5s and until selected architecture is ready, capped at 30s; 8s visible RAF sample. settleMs reports streaming wait separately; hidden warm-up or detail timeout invalidates capture. Render counters include multipass work, not unique geometry."
+  },
+  {
+    "revision": "0f0b2a40603908e53e2bd0e2d1ab8f1655e56a50",
+    "sourceFingerprint": "a3511273a2ef3b4264e630565d3e7eba684ea8f5904979d03771c3072c9be7ac",
+    "kind": "upgrade-matched-v1",
+    "id": "citizen",
+    "quality": "high",
+    "valid": true,
+    "sampleMs": 8045.600000004459,
+    "frames": 156,
+    "fps": 19.389479964193292,
+    "p50Ms": 50,
+    "p95Ms": 84.10000000000582,
+    "p99Ms": 200.5,
+    "maxMs": 232.89999999999418,
+    "over50Ms": 69,
+    "over100Ms": 6,
+    "hour": 14,
+    "fov": 48,
+    "viewport": [
+      1300,
+      672
+    ],
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1370.8310667002615,
+      11.036944825924714,
+      180.10840682268375
+    ],
+    "target": [
+      1342.7149153396945,
+      8.360944825924713,
+      172.22665367571906
+    ],
+    "mode": "walk",
+    "position": [
+      1366.7869627374403,
+      8.360944825924713,
+      178.97473000017513
+    ],
+    "calls": 1338,
+    "triangles": 7267389,
+    "geometries": 718,
+    "textures": 51,
+    "settleMs": 5029.400000007445,
+    "warmupVisible": true,
+    "detailReady": true,
+    "architectureAtSettle": {
+      "selectedCells": 23,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 23,
+      "readyCells": 38,
+      "visibleCells": 23,
+      "visibleInstances": 14759,
+      "allocatedInstances": 23999,
+      "droppedAtBudget": 29,
+      "maxPlanMs": 22.400000005960464,
+      "maxAttachmentMs": 63.5
+    },
+    "architecture": {
+      "selectedCells": 23,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 23,
+      "readyCells": 38,
+      "visibleCells": 23,
+      "visibleInstances": 14759,
+      "allocatedInstances": 23999,
+      "droppedAtBudget": 29,
+      "maxPlanMs": 22.400000005960464,
+      "maxAttachmentMs": 63.5
+    },
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "protocol": "Fixed 1920x1080 drawing buffer; 14h; warm-up at least 5s and until selected architecture is ready, capped at 30s; 8s visible RAF sample. settleMs reports streaming wait separately; hidden warm-up or detail timeout invalidates capture. Render counters include multipass work, not unique geometry."
+  },
+  {
+    "revision": "0f0b2a40603908e53e2bd0e2d1ab8f1655e56a50",
+    "sourceFingerprint": "a3511273a2ef3b4264e630565d3e7eba684ea8f5904979d03771c3072c9be7ac",
+    "kind": "upgrade-matched-v1",
+    "id": "gastown-roofs",
+    "quality": "high",
+    "valid": true,
+    "sampleMs": 8027.900000002992,
+    "frames": 204,
+    "fps": 25.411377819843793,
+    "p50Ms": 49,
+    "p95Ms": 51.10000000000582,
+    "p99Ms": 116.79999999998836,
+    "maxMs": 184.30000000001746,
+    "over50Ms": 52,
+    "over100Ms": 3,
+    "hour": 14,
+    "fov": 48,
+    "viewport": [
+      1300,
+      672
+    ],
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1536.766720003152,
+      111.16079999999994,
+      359.9040000002202
+    ],
+    "target": [
+      1466.766720003152,
+      22.16079999999992,
+      244.90400000022018
+    ],
+    "mode": "orbit",
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "calls": 553,
+    "triangles": 4586343,
+    "geometries": 644,
+    "textures": 51,
+    "settleMs": 7687.500000001484,
+    "warmupVisible": true,
+    "detailReady": true,
+    "architectureAtSettle": {
+      "selectedCells": 23,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 23,
+      "readyCells": 38,
+      "visibleCells": 23,
+      "visibleInstances": 15126,
+      "allocatedInstances": 21588,
+      "droppedAtBudget": 24,
+      "maxPlanMs": 22.400000005960464,
+      "maxAttachmentMs": 63.5
+    },
+    "architecture": {
+      "selectedCells": 23,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 23,
+      "readyCells": 38,
+      "visibleCells": 23,
+      "visibleInstances": 15126,
+      "allocatedInstances": 21588,
+      "droppedAtBudget": 24,
+      "maxPlanMs": 22.400000005960464,
+      "maxAttachmentMs": 63.5
+    },
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "protocol": "Fixed 1920x1080 drawing buffer; 14h; warm-up at least 5s and until selected architecture is ready, capped at 30s; 8s visible RAF sample. settleMs reports streaming wait separately; hidden warm-up or detail timeout invalidates capture. Render counters include multipass work, not unique geometry."
+  },
+  {
+    "revision": "0f0b2a40603908e53e2bd0e2d1ab8f1655e56a50",
+    "sourceFingerprint": "a3511273a2ef3b4264e630565d3e7eba684ea8f5904979d03771c3072c9be7ac",
+    "kind": "upgrade-matched-v1",
+    "id": "gastown-street",
+    "quality": "high",
+    "valid": true,
+    "sampleMs": 8003.19999999553,
+    "frames": 159,
+    "fps": 19.867053178739607,
+    "p50Ms": 49.89999999999418,
+    "p95Ms": 99.60000000000582,
+    "p99Ms": 150.39999999999418,
+    "maxMs": 233.5,
+    "over50Ms": 67,
+    "over100Ms": 5,
+    "hour": 14,
+    "fov": 58,
+    "viewport": [
+      1300,
+      672
+    ],
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1366.7869627374403,
+      9.860944825924713,
+      178.97473000017513
+    ],
+    "target": [
+      1342.7149153396945,
+      8.360944825924713,
+      172.22665367571906
+    ],
+    "mode": "walk",
+    "position": [
+      1366.7869627374403,
+      8.360944825924713,
+      178.97473000017513
+    ],
+    "calls": 1342,
+    "triangles": 8154235,
+    "geometries": 649,
+    "textures": 51,
+    "settleMs": 5041.4000000014785,
+    "warmupVisible": true,
+    "detailReady": true,
+    "architectureAtSettle": {
+      "selectedCells": 23,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 23,
+      "readyCells": 38,
+      "visibleCells": 23,
+      "visibleInstances": 14759,
+      "allocatedInstances": 23999,
+      "droppedAtBudget": 29,
+      "maxPlanMs": 22.400000005960464,
+      "maxAttachmentMs": 63.5
+    },
+    "architecture": {
+      "selectedCells": 23,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 23,
+      "readyCells": 38,
+      "visibleCells": 23,
+      "visibleInstances": 14759,
+      "allocatedInstances": 23999,
+      "droppedAtBudget": 29,
+      "maxPlanMs": 22.400000005960464,
+      "maxAttachmentMs": 63.5
+    },
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "protocol": "Fixed 1920x1080 drawing buffer; 14h; warm-up at least 5s and until selected architecture is ready, capped at 30s; 8s visible RAF sample. settleMs reports streaming wait separately; hidden warm-up or detail timeout invalidates capture. Render counters include multipass work, not unique geometry."
+  },
+  {
+    "revision": "0f0b2a40603908e53e2bd0e2d1ab8f1655e56a50",
+    "sourceFingerprint": "a3511273a2ef3b4264e630565d3e7eba684ea8f5904979d03771c3072c9be7ac",
+    "kind": "upgrade-matched-v1",
+    "id": "atlas-aerial",
+    "quality": "ultra",
+    "valid": true,
+    "sampleMs": 8016.60000000149,
+    "frames": 155,
+    "fps": 19.334880123739637,
+    "p50Ms": 49.89999999999418,
+    "p95Ms": 101,
+    "p99Ms": 200,
+    "maxMs": 200.29999999998836,
+    "over50Ms": 68,
+    "over100Ms": 9,
+    "hour": 14,
+    "fov": 48,
+    "viewport": [
+      1300,
+      672
+    ],
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1521.3465663384245,
+      503.2979999999977,
+      924.7160000000582
+    ],
+    "target": [
+      691.3465663384244,
+      88.29799999999776,
+      64.71600000005822
+    ],
+    "mode": "orbit",
+    "position": [
+      1366.7869627374403,
+      8.360944825924713,
+      178.97473000017513
+    ],
+    "calls": 1185,
+    "triangles": 7547185,
+    "geometries": 810,
+    "textures": 52,
+    "settleMs": 15617.900000001478,
+    "warmupVisible": true,
+    "detailReady": true,
+    "architectureAtSettle": {
+      "selectedCells": 30,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 30,
+      "readyCells": 36,
+      "visibleCells": 30,
+      "visibleInstances": 27490,
+      "allocatedInstances": 32570,
+      "droppedAtBudget": 37,
+      "maxPlanMs": 22.400000005960464,
+      "maxAttachmentMs": 63.5
+    },
+    "architecture": {
+      "selectedCells": 30,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 30,
+      "readyCells": 36,
+      "visibleCells": 30,
+      "visibleInstances": 27490,
+      "allocatedInstances": 32570,
+      "droppedAtBudget": 37,
+      "maxPlanMs": 22.400000005960464,
+      "maxAttachmentMs": 63.5
+    },
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "protocol": "Fixed 1920x1080 drawing buffer; 14h; warm-up at least 5s and until selected architecture is ready, capped at 30s; 8s visible RAF sample. settleMs reports streaming wait separately; hidden warm-up or detail timeout invalidates capture. Render counters include multipass work, not unique geometry."
+  },
+  {
+    "revision": "0f0b2a40603908e53e2bd0e2d1ab8f1655e56a50",
+    "sourceFingerprint": "a3511273a2ef3b4264e630565d3e7eba684ea8f5904979d03771c3072c9be7ac",
+    "kind": "upgrade-matched-v1",
+    "id": "citizen",
+    "quality": "ultra",
+    "valid": true,
+    "sampleMs": 8015.5999999985215,
+    "frames": 158,
+    "fps": 19.711562453219866,
+    "p50Ms": 50,
+    "p95Ms": 100.09999999997672,
+    "p99Ms": 150,
+    "maxMs": 150.10000000003492,
+    "over50Ms": 73,
+    "over100Ms": 8,
+    "hour": 14,
+    "fov": 48,
+    "viewport": [
+      1300,
+      672
+    ],
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1370.8310667002615,
+      11.036944825924714,
+      180.10840682268375
+    ],
+    "target": [
+      1342.7149153396945,
+      8.360944825924713,
+      172.22665367571906
+    ],
+    "mode": "walk",
+    "position": [
+      1366.7869627374403,
+      8.360944825924713,
+      178.97473000017513
+    ],
+    "calls": 1388,
+    "triangles": 8612367,
+    "geometries": 848,
+    "textures": 52,
+    "settleMs": 5046.800000001502,
+    "warmupVisible": true,
+    "detailReady": true,
+    "architectureAtSettle": {
+      "selectedCells": 30,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 30,
+      "readyCells": 38,
+      "visibleCells": 30,
+      "visibleInstances": 22104,
+      "allocatedInstances": 29276,
+      "droppedAtBudget": 50,
+      "maxPlanMs": 27.900000005960464,
+      "maxAttachmentMs": 63.5
+    },
+    "architecture": {
+      "selectedCells": 30,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 30,
+      "readyCells": 38,
+      "visibleCells": 30,
+      "visibleInstances": 22104,
+      "allocatedInstances": 29276,
+      "droppedAtBudget": 50,
+      "maxPlanMs": 27.900000005960464,
+      "maxAttachmentMs": 63.5
+    },
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "protocol": "Fixed 1920x1080 drawing buffer; 14h; warm-up at least 5s and until selected architecture is ready, capped at 30s; 8s visible RAF sample. settleMs reports streaming wait separately; hidden warm-up or detail timeout invalidates capture. Render counters include multipass work, not unique geometry."
+  },
+  {
+    "revision": "0f0b2a40603908e53e2bd0e2d1ab8f1655e56a50",
+    "sourceFingerprint": "a3511273a2ef3b4264e630565d3e7eba684ea8f5904979d03771c3072c9be7ac",
+    "kind": "upgrade-matched-v1",
+    "id": "gastown-roofs",
+    "quality": "ultra",
+    "valid": true,
+    "sampleMs": 8099.600000007456,
+    "frames": 193,
+    "fps": 23.82833720181519,
+    "p50Ms": 34.10000000000582,
+    "p95Ms": 82.89999999999418,
+    "p99Ms": 184,
+    "maxMs": 200,
+    "over50Ms": 41,
+    "over100Ms": 6,
+    "hour": 14,
+    "fov": 48,
+    "viewport": [
+      1300,
+      672
+    ],
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1536.766720003152,
+      111.16079999999994,
+      359.9040000002202
+    ],
+    "target": [
+      1466.766720003152,
+      22.16079999999992,
+      244.90400000022018
+    ],
+    "mode": "orbit",
+    "position": [
+      1366.7869627374403,
+      8.360944825924713,
+      178.97473000017513
+    ],
+    "calls": 548,
+    "triangles": 5960575,
+    "geometries": 832,
+    "textures": 52,
+    "settleMs": 7597.89999999851,
+    "warmupVisible": true,
+    "detailReady": true,
+    "architectureAtSettle": {
+      "selectedCells": 30,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 30,
+      "readyCells": 38,
+      "visibleCells": 30,
+      "visibleInstances": 22143,
+      "allocatedInstances": 27912,
+      "droppedAtBudget": 46,
+      "maxPlanMs": 22.400000005960464,
+      "maxAttachmentMs": 63.5
+    },
+    "architecture": {
+      "selectedCells": 30,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 30,
+      "readyCells": 38,
+      "visibleCells": 30,
+      "visibleInstances": 22143,
+      "allocatedInstances": 27912,
+      "droppedAtBudget": 46,
+      "maxPlanMs": 22.400000005960464,
+      "maxAttachmentMs": 63.5
+    },
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "protocol": "Fixed 1920x1080 drawing buffer; 14h; warm-up at least 5s and until selected architecture is ready, capped at 30s; 8s visible RAF sample. settleMs reports streaming wait separately; hidden warm-up or detail timeout invalidates capture. Render counters include multipass work, not unique geometry."
+  },
+  {
+    "revision": "0f0b2a40603908e53e2bd0e2d1ab8f1655e56a50",
+    "sourceFingerprint": "a3511273a2ef3b4264e630565d3e7eba684ea8f5904979d03771c3072c9be7ac",
+    "kind": "upgrade-matched-v1",
+    "id": "gastown-street",
+    "quality": "ultra",
+    "valid": true,
+    "sampleMs": 8052.9000000014785,
+    "frames": 173,
+    "fps": 21.48294403258059,
+    "p50Ms": 50,
+    "p95Ms": 83.70000000001164,
+    "p99Ms": 100.30000000004657,
+    "maxMs": 117.20000000001164,
+    "over50Ms": 74,
+    "over100Ms": 2,
+    "hour": 14,
+    "fov": 58,
+    "viewport": [
+      1300,
+      672
+    ],
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1366.7869627374403,
+      9.860944825924713,
+      178.97473000017513
+    ],
+    "target": [
+      1342.7149153396945,
+      8.360944825924713,
+      172.22665367571906
+    ],
+    "mode": "walk",
+    "position": [
+      1366.7869627374403,
+      8.360944825924713,
+      178.97473000017513
+    ],
+    "calls": 1398,
+    "triangles": 9622457,
+    "geometries": 848,
+    "textures": 52,
+    "settleMs": 5001.199999998498,
+    "warmupVisible": true,
+    "detailReady": true,
+    "architectureAtSettle": {
+      "selectedCells": 30,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 30,
+      "readyCells": 38,
+      "visibleCells": 30,
+      "visibleInstances": 22104,
+      "allocatedInstances": 29276,
+      "droppedAtBudget": 50,
+      "maxPlanMs": 27.900000005960464,
+      "maxAttachmentMs": 63.5
+    },
+    "architecture": {
+      "selectedCells": 30,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 30,
+      "readyCells": 38,
+      "visibleCells": 30,
+      "visibleInstances": 22104,
+      "allocatedInstances": 29276,
+      "droppedAtBudget": 50,
+      "maxPlanMs": 27.900000005960464,
+      "maxAttachmentMs": 63.5
+    },
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "protocol": "Fixed 1920x1080 drawing buffer; 14h; warm-up at least 5s and until selected architecture is ready, capped at 30s; 8s visible RAF sample. settleMs reports streaming wait separately; hidden warm-up or detail timeout invalidates capture. Render counters include multipass work, not unique geometry."
+  }
+]

@@ -3,6 +3,7 @@ import type { CityEngine } from './engine';
 import { rings, project } from './geo';
 import { replacedBuilding } from './replaced-buildings';
 import { FacadeDetails } from './facade-details';
+import { installArchitectureSurface } from './architecture-material';
 import {
   createProfile,
   facadeTemplates,
@@ -77,7 +78,11 @@ export function createBuildingBodies(e: CityEngine) {
     const first = firstByKey.get(key)!;
     foundations.set(key, e.elevation(...first.center) - 0.4);
   }
-  e.data.flightBuildingVolumes = prepared.map(({key, polygon, h, min}) => ({polygon, minY: foundations.get(key)! + min, maxY: foundations.get(key)! + h}));
+  e.data.flightBuildingVolumes = prepared.map(({ key, polygon, h, min }) => ({
+    polygon,
+    minY: foundations.get(key)! + min,
+    maxY: foundations.get(key)! + h,
+  }));
   e.data.buildingProfiles = profiles;
   e.data.buildingFoundations = foundations;
   const positions: number[] = [],
@@ -291,6 +296,7 @@ export function createBuildingBodies(e: CityEngine) {
       `#include <emissivemap_fragment>
       totalEmissiveRadiance+=vec3(1.0,.66,.32)*facadeLit*.8;`,
     );
+    installArchitectureSurface(s);
   };
   const geometry = e.geometry(positions, normals, colors, uv);
   geometry.setAttribute('aStyle', new THREE.Float32BufferAttribute(styles, 1));
