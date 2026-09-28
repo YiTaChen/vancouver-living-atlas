@@ -1,0 +1,35 @@
+{
+  "name": "Original Vancouver citizen",
+  "authoring": "Procedural original geometry and baked procedural PBR, no external source assets",
+  "generator": "build_citizen.py, Blender 4.5.12 LTS",
+  "heightMetres": 1.81,
+  "forward": "+Z",
+  "up": "+Y",
+  "groundY": 0,
+  "vertices": 19542,
+  "triangles": 37799,
+  "joints": 22,
+  "materialSlots": 1,
+  "textureSize": 2048,
+  "animations": [
+    {
+      "name": "idle",
+      "duration": 2.0,
+      "strideMetres": 0
+    },
+    {
+      "name": "walk",
+      "duration": 1.0,
+      "strideMetres": 1.0
+    },
+    {
+      "name": "run",
+      "duration": 0.8,
+      "strideMetres": 1.9
+    }
+  ],
+  "runtimeNotes": "In-place animation. Distance-driven clip sampling; each navigator owns its GLB and GPU resources. Keep procedural fallback until loading completes. Both legs obey reach bounds; shared continuous pelvis skinning aligns layered coat/denim deformation. Neck overlaps the compressed head. CPU tests sample 40 poses per clip for grounded soles and intact shin-to-ankle attachment.",
+  "license": "Repository LICENSE",
+  "exportedBytes": 6668168,
+  "gpuTextureEstimateMiB": 64.0
+}

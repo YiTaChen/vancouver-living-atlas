@@ -1,0 +1,70 @@
+{
+  "passed": true,
+  "checks": [
+    "GLB container integrity",
+    "embedded self-contained images",
+    "triangle counts match generator",
+    "finite position bounds",
+    "normal attributes present",
+    "static meshes only",
+    "baked PBR maps present",
+    "core atlas modules <=3 materials"
+  ],
+  "assets": [
+    {
+      "asset": "heritage-shop-bay",
+      "lod": 0,
+      "bytes": 1948044,
+      "triangles": 8128,
+      "materials": 3,
+      "primitives": 3,
+      "imageBytes": 1345286,
+      "alphaModes": [
+        "OPAQUE",
+        "BLEND",
+        "OPAQUE"
+      ]
+    },
+    {
+      "asset": "heritage-shop-bay",
+      "lod": 1,
+      "bytes": 424572,
+      "triangles": 604,
+      "materials": 2,
+      "primitives": 2,
+      "imageBytes": 381272,
+      "alphaModes": [
+        "OPAQUE",
+        "BLEND"
+      ]
+    },
+    {
+      "asset": "modern-lobby-bay",
+      "lod": 0,
+      "bytes": 1661616,
+      "triangles": 6260,
+      "materials": 3,
+      "primitives": 3,
+      "imageBytes": 1163769,
+      "alphaModes": [
+        "OPAQUE",
+        "BLEND",
+        "OPAQUE"
+      ]
+    },
+    {
+      "asset": "modern-lobby-bay",
+      "lod": 1,
+      "bytes": 353960,
+      "triangles": 556,
+      "materials": 3,
+      "primitives": 3,
+      "imageBytes": 314147,
+      "alphaModes": [
+        "OPAQUE",
+        "BLEND",
+        "OPAQUE"
+      ]
+    }
+  ]
+}

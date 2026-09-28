@@ -1,7 +1,12 @@
 import * as THREE from 'three';
 import { replacedBuilding } from './replaced-buildings';
-import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import type { CityEngine } from './engine';
+import {
+  StreetscapeKit,
+  type StreetBaySource,
+  type StreetBayLoader,
+} from './streetscape-kit';
+import { streetBayCell, streetBayThreshold } from './streetscape-placement';
 import { project, rings, hash, inPolygon } from './geo';
 import { GroundSurfaceIndex } from './ground-surface';
 import {
@@ -14,9 +19,21 @@ import {
 } from './facade-profile';
 // Original architectural embellishments for the close-view Gastown corridor.
 // These are representative street detail, not claims about current businesses.
-export function createStreetfronts(e: CityEngine) {
-  const batches = new Map<string, { color: number; instances: number[][] }>(),
-    textures: THREE.CanvasTexture[] = [];
+export function createStreetfronts(e: CityEngine, loader?: StreetBayLoader) {
+  type Fallback = StreetBaySource & {
+    handles: {
+      mesh: THREE.InstancedMesh;
+      index: number;
+      matrix: THREE.Matrix4;
+    }[];
+  };
+  const sources: Fallback[] = [];
+  let activeSource: Fallback | undefined;
+  const hiddenMatrix = new THREE.Matrix4().makeScale(0, 0, 0);
+  const batches = new Map<
+    string,
+    { color: number; instances: { values: number[]; source?: Fallback }[] }
+  >();
   const box = (
     w: number,
     h: number,
@@ -29,7 +46,10 @@ export function createStreetfronts(e: CityEngine) {
   ) => {
     const key = color + ':' + Math.floor(x / 180) + ':' + Math.floor(z / 180);
     if (!batches.has(key)) batches.set(key, { color, instances: [] });
-    batches.get(key)!.instances.push([w, h, d, x, y, z, yaw]);
+    batches.get(key)!.instances.push({
+      values: [w, h, d, x, y, z, yaw],
+      source: activeSource,
+    });
   };
   const names = ['COFFEE', 'BOOKS', 'GALLERY', 'STUDIO', 'RECORDS', 'GASTOWN'];
   const signs = names.map((name, i) => {
@@ -50,10 +70,16 @@ export function createStreetfronts(e: CityEngine) {
     const t = new THREE.CanvasTexture(c);
     t.colorSpace = THREE.SRGBColorSpace;
     t.anisotropy = 4;
-    textures.push(t);
+    e.extraTextures.add(t);
     return new THREE.MeshStandardMaterial({ map: t, roughness: 0.9 });
   });
-  const signGeos: THREE.BufferGeometry[][] = names.map(() => []);
+  const signBatches = new Map<
+    string,
+    {
+      material: THREE.Material;
+      instances: { matrix: THREE.Matrix4; source?: Fallback }[];
+    }
+  >();
   const sidewalkMeshes: THREE.Mesh[] = [];
   e.roads.traverse((o) => {
     if (
@@ -104,6 +130,7 @@ export function createStreetfronts(e: CityEngine) {
         continue;
       const extent = { minHeightM: 0, heightM: Number(f.properties.height) };
       for (let i = 0; i < ring.length; i++) {
+        activeSource = undefined;
         const a = ring[i],
           b = ring[(i + 1) % ring.length],
           len = Math.hypot(b[0] - a[0], b[1] - a[1]);
@@ -177,6 +204,35 @@ export function createStreetfronts(e: CityEngine) {
           }) as [number | null, number | null, number | null];
           const entry = fitEntrance(profile, extent, ground, jambs);
           if (!entry) continue;
+          const threshold = streetBayThreshold(
+            profile,
+            extent.heightM,
+            0,
+            ground,
+            jambs,
+          );
+          activeSource = undefined;
+          if (!e.compatibleGraphics && threshold !== null) {
+            const source: Fallback = {
+              id: sources.length,
+              placement: {
+                asset: 'heritage-shop-bay',
+                x: x + nx * 0.015,
+                y: threshold,
+                z: z + nz * 0.015,
+                yaw,
+              },
+              handles: [],
+              setDetailed(detailed) {
+                for (const { mesh, index, matrix } of source.handles) {
+                  mesh.setMatrixAt(index, detailed ? hiddenMatrix : matrix);
+                  mesh.instanceMatrix.needsUpdate = true;
+                }
+              },
+            };
+            sources.push(source);
+            activeSource = source;
+          }
           const side = hash(profile.seed + u) > 0.5 ? 0x43564e : 0x624737,
             middle = (entry.thresholdY + entry.headY) / 2;
           box(
@@ -231,10 +287,20 @@ export function createStreetfronts(e: CityEngine) {
             yaw,
             side,
           );
-          const g = new THREE.PlaneGeometry(3.9, 0.29);
-          g.rotateY(yaw);
-          g.translate(x + nx * 1.27, entry.headY - 0.1, z + nz * 1.27);
-          signGeos[n % names.length].push(g);
+          const sign = new THREE.Object3D();
+          sign.rotation.y = yaw;
+          sign.position.set(x + nx * 1.27, entry.headY - 0.1, z + nz * 1.27);
+          sign.updateMatrix();
+          const signKey = `${n % names.length}:${streetBayCell(x, z)}`;
+          if (!signBatches.has(signKey))
+            signBatches.set(signKey, {
+              material: signs[n % names.length],
+              instances: [],
+            });
+          signBatches.get(signKey)!.instances.push({
+            matrix: sign.matrix.clone(),
+            source: activeSource,
+          });
           n++;
         }
       }
@@ -254,12 +320,17 @@ export function createStreetfronts(e: CityEngine) {
       materials.get(color)!,
       instances.length,
     );
-    instances.forEach(([w, h, d, x, y, z, yaw], i) => {
+    instances.forEach(({ values: [w, h, d, x, y, z, yaw], source }, i) => {
       detailTransform.position.set(x, y, z);
       detailTransform.scale.set(w, h, d);
       detailTransform.rotation.set(0, yaw, 0);
       detailTransform.updateMatrix();
       mesh.setMatrixAt(i, detailTransform.matrix);
+      source?.handles.push({
+        mesh,
+        index: i,
+        matrix: detailTransform.matrix.clone(),
+      });
     });
     mesh.castShadow = true;
     mesh.receiveShadow = true;
@@ -271,12 +342,97 @@ export function createStreetfronts(e: CityEngine) {
     lod.addLevel(new THREE.Group(), 900);
     e.landmarks.add(lod);
   }
-  for (let i = 0; i < names.length; i++)
-    if (signGeos[i].length) {
-      const mesh = new THREE.Mesh(mergeGeometries(signGeos[i])!, signs[i]);
-      e.landmarks.add(mesh);
-      signGeos[i].forEach((g) => g.dispose());
+  const signGeometry = new THREE.PlaneGeometry(3.9, 0.29);
+  for (const { material, instances } of signBatches.values()) {
+    const mesh = new THREE.InstancedMesh(
+      signGeometry,
+      material,
+      instances.length,
+    );
+    instances.forEach(({ matrix, source }, index) => {
+      mesh.setMatrixAt(index, matrix);
+      source?.handles.push({ mesh, index, matrix });
+    });
+    mesh.computeBoundingSphere();
+    e.landmarks.add(mesh);
+  }
+  // Modern entries use the same measured wall and pavement tests. Their opaque
+  // shallow back panel covers the body shader's generic ground glazing. There
+  // is no old physical shop to hide on these non-heritage edges.
+  const modernLocations = new Set<string>();
+  for (const feature of e.compatibleGraphics ? [] : e.data.buildings.features) {
+    const p = feature.properties,
+      height = Number(p.height);
+    if (replacedBuilding(p) || p.minHeight > 0 || height < 18 || height > 180)
+      continue;
+    const key = String(p.structureId ?? p.buildingId ?? p.id);
+    const foundation = foundations.get(key),
+      profile = profiles.get(key);
+    if (
+      foundation === undefined ||
+      !profile ||
+      profile.kind === 'heritage-brick'
+    )
+      continue;
+    for (const polygon of rings(feature)) {
+      const ring = polygon[0].slice(0, -1).map(project);
+      const signedArea = ring.reduce((sum, a, i) => {
+        const b = ring[(i + 1) % ring.length];
+        return sum + a[0] * b[1] - b[0] * a[1];
+      }, 0);
+      if (signedArea < 0) ring.reverse();
+      for (let i = 0; i < ring.length; i++) {
+        const a = ring[i],
+          b = ring[(i + 1) % ring.length];
+        const length = Math.hypot(b[0] - a[0], b[1] - a[1]);
+        if (length < 9 || length > 75) continue;
+        const dx = (b[0] - a[0]) / length,
+          dz = (b[1] - a[1]) / length;
+        const nx = dz,
+          nz = -dx,
+          x = (a[0] + b[0]) / 2,
+          z = (a[1] + b[1]) / 2;
+        const location = `${Math.round(x * 10)},${Math.round(z * 10)}`;
+        if (modernLocations.has(location)) continue;
+        const grades = [-1.625, 0, 1.625].map((offset) => {
+          const px = x + dx * offset + nx * 0.55,
+            pz = z + dz * offset + nz * 0.55;
+          if (e.waterWorld.solidAt(px, pz)) return null;
+          return sidewalks.sample(px, pz, e.elevation(px, pz) + 1.18) ?? null;
+        });
+        const threshold = streetBayThreshold(
+          profile,
+          height,
+          0,
+          foundation,
+          grades,
+        );
+        const tipX = x + nx * 1.75,
+          tipZ = z + nz * 1.75;
+        if (
+          threshold === null ||
+          e.waterWorld.solidAt(tipX, tipZ) ||
+          sidewalks.sample(tipX, tipZ, threshold) === undefined
+        )
+          continue;
+        modernLocations.add(location);
+        sources.push({
+          id: sources.length,
+          handles: [],
+          placement: {
+            asset: 'modern-lobby-bay',
+            x: x + nx * 0.015,
+            y: threshold,
+            z: z + nz * 0.015,
+            yaw: Math.atan2(nx, nz),
+          },
+          setDetailed() {
+            /* Generic body glazing remains behind the relief. */
+          },
+        });
+      }
     }
+  }
   // Gastown's steam clock, positioned from its map location. Original clock-face art.
   const [cx, cz] = project([-123.10865, 49.28443]),
     ground = e.elevation(cx, cz) + 1.3,
@@ -344,6 +500,7 @@ export function createStreetfronts(e: CityEngine) {
     g.add(m);
   }
   e.landmarks.add(g);
+  return e.compatibleGraphics ? null : new StreetscapeKit(e, sources, loader);
 }
 
 /** Modest original rooftop plant, placed strictly inside each measured footprint. */

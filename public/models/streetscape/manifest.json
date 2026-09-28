@@ -1,0 +1,142 @@
+{
+  "kit": "Vancouver original streetscape kit",
+  "version": 2,
+  "license": "LicenseRef-Vancouver-Living-Atlas-NC-1.0",
+  "geometryAuthor": "Original procedural modelling for Vancouver Living Atlas",
+  "units": "metres",
+  "upAxis": "+Y",
+  "frontAxis": "+Z",
+  "origin": "Ground centre of facade plane for facade modules; ground centre for furniture",
+  "coordinateConversion": "Blender (x,y,z) exports as glTF (x,z,-y). No manual loader rotation required.",
+  "reproduction": "Blender 4.5+: blender --background --python generate_streetscape.py -- --output OUTPUT [--skip-render]",
+  "placementNotes": [
+    "Compact bay +Z points toward the street. Place local z=0 on the existing facade plane; the complete shipped geometry sits outside the opaque GIS wall in +Z.",
+    "Compact bays are 3.2 m tall surface-mounted relief. The shallow interior occupies the first 0.3 m outside the GIS wall; the canopy projects farther. No entry or walkable interior is claimed.",
+    "Use facade modules in near-street LOD only, and suppress overlapping procedural ground details within their extents.",
+    "Use uniform scale, ideally 1; adjust placement or repeat bays instead of stretching door and human-scale details.",
+    "Keep the compact bay crown at least 0.02 m below the physical bottom of the preserved first upper window sill. Suppress only overlapping procedural ground frontage; retain upper window frames and sills.",
+    "Facade modules are original architectural typologies and have not been surveyed; they are not exact historic reconstructions.",
+    "Glazing uses alpha-blended standard PBR, no transmission extension. Sort transparent primitives normally and disable glass depthWrite if integration requires it.",
+    "Emissive diffusers are visual materials, not runtime point lights. No shadows or lights are exported."
+  ],
+  "lodRecommendations": {
+    "lod0": "0\u201360 m, detailed frames/bevels/interior props",
+    "lod1": "60\u2013150 m, same silhouette without small contents and most bevels",
+    "beyond": "Cull furniture; rely on existing city massing for facades. Tune distances to projected size and device."
+  },
+  "referenceSources": [
+    {
+      "title": "City of Vancouver Gastown Heritage Management Plan",
+      "url": "https://vancouver.ca/files/cov/gastown-heritage-management-plan-2001.pdf",
+      "use": "Typological research only; no images, meshes or texture pixels copied."
+    },
+    {
+      "title": "City of Vancouver Gastown HA-2 Design Guidelines",
+      "url": "https://vancouver.ca/files/cov/gastown-ha2-design-guidelines.pdf",
+      "use": "General storefront, cornice and masonry proportions only."
+    },
+    {
+      "title": "City of Vancouver Central Area Pedestrian Weather Protection",
+      "url": "https://guidelines.vancouver.ca/guidelines-central-area-pedestrian-weather-protection.pdf",
+      "use": "General rain-canopy function only."
+    }
+  ],
+  "assets": [
+    {
+      "id": "heritage-shop-bay",
+      "description": "Original compact 3.2 m ground-storey facade with recessed entry, moulded cornice, masonry piers, glazed shop display, enamel rain hood and shallow interior. Fictional Harbour & Pine sign.",
+      "lods": [
+        {
+          "vertices": 4732,
+          "triangles": 8128,
+          "materials": 3,
+          "bounds": {
+            "min": [-1.625, 0.0, 0.0228],
+            "max": [1.625, 3.1959, 1.2435]
+          },
+          "pbrAtlas": {
+            "resolution": 1024,
+            "maps": ["basecolor", "normal", "ORM"],
+            "occlusion": "R=1 (unbaked); roughness in G; metallic in B"
+          },
+          "level": 0,
+          "file": "heritage-shop-bay.lod0.glb",
+          "bytes": 1948044
+        },
+        {
+          "vertices": 394,
+          "triangles": 604,
+          "materials": 2,
+          "bounds": {
+            "min": [-1.625, 0.0, 0.0228],
+            "max": [1.625, 3.1959, 1.2435]
+          },
+          "pbrAtlas": {
+            "resolution": 512,
+            "maps": ["basecolor", "normal", "ORM"],
+            "occlusion": "R=1 (unbaked); roughness in G; metallic in B"
+          },
+          "level": 1,
+          "file": "heritage-shop-bay.lod1.glb",
+          "bytes": 424572
+        }
+      ],
+      "anchors": {
+        "ground": [0, 0, 0],
+        "streetFacing": [0, 0, 1],
+        "entry": [-0.875, 0, 0.01]
+      }
+    },
+    {
+      "id": "modern-lobby-bay",
+      "description": "Original compact 3.2 m ground-storey facade with double entry, slim glazed rain canopy, suspension ties, stone jambs and cedar interior.",
+      "lods": [
+        {
+          "vertices": 3470,
+          "triangles": 6260,
+          "materials": 3,
+          "bounds": {
+            "min": [-1.6, 0.0, 0.0255],
+            "max": [1.6, 3.2, 1.7285]
+          },
+          "pbrAtlas": {
+            "resolution": 1024,
+            "maps": ["basecolor", "normal", "ORM"],
+            "occlusion": "R=1 (unbaked); roughness in G; metallic in B"
+          },
+          "level": 0,
+          "file": "modern-lobby-bay.lod0.glb",
+          "bytes": 1661616
+        },
+        {
+          "vertices": 356,
+          "triangles": 556,
+          "materials": 3,
+          "bounds": {
+            "min": [-1.6, 0.0, 0.0255],
+            "max": [1.6, 3.2, 1.7285]
+          },
+          "pbrAtlas": {
+            "resolution": 512,
+            "maps": ["basecolor", "normal", "ORM"],
+            "occlusion": "R=1 (unbaked); roughness in G; metallic in B"
+          },
+          "level": 1,
+          "file": "modern-lobby-bay.lod1.glb",
+          "bytes": 353960
+        }
+      ],
+      "anchors": {
+        "ground": [0, 0, 0],
+        "streetFacing": [0, 0, 1],
+        "entry": [0, 0, 0.01]
+      }
+    }
+  ],
+  "interface": {
+    "maximumHeightM": 3.2,
+    "minimumEntryClearanceM": 2.3,
+    "reliefBackMinM": 0.0228,
+    "foundationDatumNote": "Pavement is generally terrain + 1.18 m, shared facade foundation terrain - 0.4 m. Placement uses actual sidewalk samples and first upper pane clearance; do not scale modules to force a fit."
+  }
+}
