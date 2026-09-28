@@ -22,6 +22,7 @@ import * as THREE from 'three';
 import { LocalMinimap, minimapPose, minimapWorldPoint } from './minimap';
 import type { LandmarkDetail } from './landmark-detail';
 import { FacadeDetails } from './facade-details';
+import { ArchitecturalDetails } from './architecture-details';
 import { createBuildingBodies } from './building-bodies';
 import type { DetailedTrees } from './detailed-trees';
 import { QUALITY, qualityPixelRatio } from './quality';
@@ -35,7 +36,7 @@ import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import { FXAAShader } from 'three/addons/shaders/FXAAShader.js';
 import Delaunator from 'delaunator';
-import { createStreetfronts, roofDetailSteps } from './streetfronts';
+import { createStreetfronts } from './streetfronts';
 import { createBridgeApproaches } from './bridges';
 import { prepareCauseway } from './causeway';
 import { makeContext } from './context';
@@ -99,6 +100,7 @@ export class CityEngine {
   vegetation = new THREE.Group();
   detailedTrees: DetailedTrees | null = null;
   facadeDetails: FacadeDetails | null = null;
+  architecturalDetails: ArchitecturalDetails | null = null;
   roads = new THREE.Group();
   terrain = new THREE.Group();
   landmarks = new THREE.Group();
@@ -132,7 +134,6 @@ export class CityEngine {
   };
   data: Record<string, any> = {};
   sceneryPreparation = new ScenePreparationQueue();
-  roofsScheduled = false;
   landPolys: number[][][][] = [];
   beachGround!: BeachGround;
   parkPolys: { name: string; poly: number[][][] }[] = [];
@@ -721,18 +722,14 @@ export class CityEngine {
     this.composer.insertPass(this.ssao, 1);
   }
   scheduleScenery() {
-    if (
-      !this.roofsScheduled &&
-      this.settings.quality !== 'balanced' &&
-      this.data.buildingFoundations
-    ) {
-      this.roofsScheduled = true;
-      this.sceneryPreparation.add(roofDetailSteps(this));
-    }
+    // Roof appearance now follows the same bounded camera selection as street
+    // detail instead of permanently adding equipment for every city building.
+    this.architecturalDetails?.update(true);
   }
   renderScene() {
     this.detailedTrees?.update();
     this.facadeDetails?.update();
+    this.architecturalDetails?.update();
     this.landmarkWorker?.beginFrame();
     this.landmarkDetails.forEach((l) => l.update());
     this.interiors?.update();
@@ -1027,6 +1024,8 @@ export class CityEngine {
   }
   makeBuildings() {
     createBuildingBodies(this);
+    if (!this.compatibleGraphics)
+      this.architecturalDetails = new ArchitecturalDetails(this);
   }
   ribbon(
     points: number[][],
@@ -1562,6 +1561,7 @@ export class CityEngine {
     this.landmarkWorker?.dispose();
     this.detailedTrees?.dispose();
     this.facadeDetails?.dispose();
+    this.architecturalDetails?.dispose();
     this.scene.traverse((o) => {
       const m = o as THREE.Mesh;
       m.geometry?.dispose();

@@ -75,7 +75,11 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
     fixedResolution();
     e.renderer.shadowMap.needsUpdate = true;
   }
-  async function collect(duration: number) {
+  async function collect(
+    duration: number,
+    ready: () => boolean = () => true,
+    maxDuration = duration,
+  ) {
     const gaps: number[] = [];
     let last = performance.now(),
       hidden = document.hidden;
@@ -90,7 +94,12 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
           hidden ||= document.hidden;
           gaps.push(now - last);
           last = now;
-          if (e.disposed || now - start >= duration) resolve();
+          if (
+            e.disposed ||
+            now - start >= maxDuration ||
+            (now - start >= duration && ready())
+          )
+            resolve();
           else requestAnimationFrame(frame);
         };
         requestAnimationFrame(frame);
@@ -121,7 +130,21 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
       for (const view of VIEWS) {
         status.textContent = `Preparing ${view} / ${quality}`;
         select(view, quality);
-        await collect(5000);
+        // Compare fully warmed views. Streaming latency remains explicit evidence,
+        // and a hidden warmup or incomplete selected set invalidates the capture.
+        const detailReady = () => {
+          const stats = e.architecturalDetails?.stats;
+          return (
+            !stats ||
+            (stats.pendingCells === 0 &&
+              stats.readySelectedCells === stats.selectedCells)
+          );
+        };
+        const warmup = await collect(5000, detailReady, 30000);
+        const settled = detailReady();
+        const architectureAtSettle = e.architecturalDetails
+          ? { ...e.architecturalDetails.stats }
+          : null;
         fixedResolution();
         status.textContent = `Measuring ${view} / ${quality}`;
         const sample = await collect(8000);
@@ -134,6 +157,8 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
           ...sample,
           valid:
             sample.valid &&
+            warmup.valid &&
+            settled &&
             e.renderer.domElement.width === WIDTH &&
             e.renderer.domElement.height === HEIGHT,
           hour: e.clock.hour,
@@ -148,11 +173,18 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
           triangles: e.renderer.info.render.triangles,
           geometries: e.renderer.info.memory.geometries,
           textures: e.renderer.info.memory.textures,
+          settleMs: warmup.sampleMs,
+          warmupVisible: warmup.valid,
+          detailReady: settled,
+          architectureAtSettle,
+          architecture: e.architecturalDetails
+            ? { ...e.architecturalDetails.stats }
+            : null,
           renderer: extension
             ? gl.getParameter(extension.UNMASKED_RENDERER_WEBGL)
             : gl.getParameter(gl.RENDERER),
           protocol:
-            'Fixed 1920x1080 drawing buffer; 14h; 5s warm-up, 8s visible RAF sample. Render counters include multipass work, not unique geometry.',
+            'Fixed 1920x1080 drawing buffer; 14h; warm-up at least 5s and until selected architecture is ready, capped at 30s; 8s visible RAF sample. settleMs reports streaming wait separately; hidden warm-up or detail timeout invalidates capture. Render counters include multipass work, not unique geometry.',
         };
         const response = await fetch('/__visual-qa', {
           method: 'POST',

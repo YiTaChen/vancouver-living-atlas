@@ -49,6 +49,20 @@ if (
   new Set(rows.map((r) => r.sourceFingerprint)).size !== 1
 )
   throw new Error('Both four-view High and Ultra suites are required');
+const hasReadiness = rows.some((r) => r.settleMs !== undefined);
+if (
+  hasReadiness &&
+  rows.some(
+    (r) =>
+      !Number.isFinite(r.settleMs) ||
+      r.settleMs < 5000 ||
+      r.detailReady !== true ||
+      r.warmupVisible !== true,
+  )
+)
+  throw new Error(
+    'Streamed captures require a visible, ready architecture warmup',
+  );
 await mkdir(target, { recursive: true });
 for (const row of rows) {
   const name = `${row.quality}-${row.id}.png`;
@@ -61,14 +75,26 @@ await writeFile(
 const table = rows
   .map(
     (r) =>
-      `| ${r.quality} | ${r.id} | ${r.fps.toFixed(1)} | ${r.p95Ms.toFixed(1)} | ${r.maxMs.toFixed(1)} | ${r.over100Ms} | [PNG](${r.quality}-${r.id}.png) |`,
+      `| ${r.quality} | ${r.id} | ${r.fps.toFixed(1)} | ${r.p95Ms.toFixed(1)} | ${r.maxMs.toFixed(1)} | ${r.over100Ms} |` +
+      (hasReadiness
+        ? ` ${(r.settleMs / 1000).toFixed(2)} | ${r.detailReady ? 'Yes' : 'No'} |`
+        : '') +
+      ` [PNG](${r.quality}-${r.id}.png) |`,
   )
   .join('\n');
 await writeFile(
   resolve(target, 'README.md'),
   `# ${label}\n\n` +
-    `Actual local WebGL renders, fixed 1920×1080 drawing buffer and 14:00. High and Ultra have identical pixel counts here, unlike normal quality presets. Each view settles for 5 seconds before an 8-second visible-browser RAF sample. These short samples are diagnostic, not a universal FPS or long-session guarantee.\n\n` +
+    `Actual local WebGL renders, fixed 1920×1080 drawing buffer and 14:00. High and Ultra have identical pixel counts here, unlike normal quality presets. ` +
+    (hasReadiness
+      ? `Each view settles for at least 5 seconds, then waits for selected architecture cells to finish, up to 30 seconds. The table records the actual settle time and detail readiness separately from the following 8-second visible-browser RAF sample. A hidden warmup or detail timeout invalidates a capture. Comparisons to the fixed 5-second P0 warmup measure warmed rendering, not identical first-use latency. `
+      : `Each view settles for 5 seconds before an 8-second visible-browser RAF sample. `) +
+    `These short samples are diagnostic, not a universal FPS or long-session guarantee.\n\n` +
     `Device: ${rows[0].renderer}. Parent revision: \`${rows[0].revision}\`; the JSON records the source fingerprint at server startup, including uncommitted changes. Rebuild before starting the server; this source hash alone does not verify the served bundle. Counters include multipass rendering, not unique geometry.\n\n` +
-    `| Quality | View | FPS | p95 ms | Max ms | >100 ms | Capture |\n| --- | --- | ---: | ---: | ---: | ---: | --- |\n${table}\n`,
+    `| Quality | View | FPS | p95 ms | Max ms | >100 ms |` +
+    (hasReadiness ? ` Settle s | Detail ready |` : '') +
+    ` Capture |\n| --- | --- | ---: | ---: | ---: | ---: |` +
+    (hasReadiness ? ` ---: | --- |` : '') +
+    ` --- |\n${table}\n`,
 );
 console.log(`Archived ${rows.length} original PNG captures to ${target}`);
