@@ -87,7 +87,7 @@ await writeFile(
   `# ${label}\n\n` +
     `Actual local WebGL renders, fixed 1920×1080 drawing buffer and 14:00. High and Ultra have identical pixel counts here, unlike normal quality presets. ` +
     (hasReadiness
-      ? `Each view settles for at least 5 seconds, then waits for selected architecture cells to finish, up to 30 seconds. The table records the actual settle time and detail readiness separately from the following 8-second visible-browser RAF sample. A hidden warmup or detail timeout invalidates a capture. Comparisons to the fixed 5-second P0 warmup measure warmed rendering, not identical first-use latency. `
+      ? `Each view settles for at least 5 seconds, then waits for selected architecture cells and applicable street/citizen assets to finish, up to 30 seconds. The table records the actual settle time and detail readiness separately from the following 8-second visible-browser RAF sample. A hidden warmup or detail timeout invalidates a capture. Comparisons to the fixed 5-second P0 warmup measure warmed rendering, not identical first-use latency. `
       : `Each view settles for 5 seconds before an 8-second visible-browser RAF sample. `) +
     `These short samples are diagnostic, not a universal FPS or long-session guarantee.\n\n` +
     `Device: ${rows[0].renderer}. Parent revision: \`${rows[0].revision}\`; the JSON records the source fingerprint at server startup, including uncommitted changes. Rebuild before starting the server; this source hash alone does not verify the served bundle. Counters include multipass rendering, not unique geometry.\n\n` +

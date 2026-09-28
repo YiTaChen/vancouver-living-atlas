@@ -1,0 +1,762 @@
+[
+  {
+    "revision": "d5248edab00610b9cfaf3d8f2cff33e02ad76193",
+    "sourceFingerprint": "7c1f5c3484f4b18654f7d001f7a392a44073432e512872c215eab2227d155d94",
+    "kind": "upgrade-matched-v1",
+    "id": "atlas-aerial",
+    "quality": "high",
+    "valid": true,
+    "sampleMs": 8029.800000008952,
+    "frames": 189,
+    "fps": 23.53732347004773,
+    "p50Ms": 49.5,
+    "p95Ms": 67.89999999999418,
+    "p99Ms": 85.29999999998836,
+    "maxMs": 98.69999999998254,
+    "over50Ms": 62,
+    "over100Ms": 0,
+    "hour": 14,
+    "fov": 48,
+    "viewport": [
+      1300,
+      672
+    ],
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1521.3465663384245,
+      503.2979999999977,
+      924.7160000000582
+    ],
+    "target": [
+      691.3465663384244,
+      88.29799999999776,
+      64.71600000005822
+    ],
+    "mode": "orbit",
+    "position": [
+      1340.475637202572,
+      9.156779716045936,
+      171.59892062371281
+    ],
+    "calls": 1281,
+    "triangles": 7215135,
+    "geometries": 687,
+    "textures": 61,
+    "settleMs": 5001.500000011933,
+    "warmupVisible": true,
+    "detailReady": true,
+    "architectureAtSettle": {
+      "selectedCells": 16,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 16,
+      "readyCells": 36,
+      "visibleCells": 16,
+      "visibleInstances": 7807,
+      "allocatedInstances": 20616,
+      "droppedAtBudget": 21,
+      "maxPlanMs": 16.299999997019768,
+      "maxAttachmentMs": 13.100000008940697
+    },
+    "architecture": {
+      "selectedCells": 16,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 16,
+      "readyCells": 36,
+      "visibleCells": 16,
+      "visibleInstances": 7807,
+      "allocatedInstances": 20616,
+      "droppedAtBudget": 21,
+      "maxPlanMs": 16.299999997019768,
+      "maxAttachmentMs": 13.100000008940697
+    },
+    "streetscape": {
+      "loaded": true,
+      "loading": false,
+      "failed": false,
+      "candidatesByAsset": {
+        "heritage-shop-bay": 108,
+        "modern-lobby-bay": 13
+      },
+      "candidateBays": 121,
+      "selectedBays": 0,
+      "pendingCells": 0,
+      "cacheCells": 3,
+      "visibleCells": 0,
+      "visibleBays": 0,
+      "lod0Bays": 0
+    },
+    "citizen": "ready",
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "protocol": "Fixed 1920x1080 drawing buffer; 14h; warm-up at least 5s and until selected architecture and applicable street/citizen assets are ready, capped at 30s; 8s visible RAF sample. settleMs reports streaming wait separately; hidden warm-up or detail timeout invalidates capture. Render counters include multipass work, not unique geometry."
+  },
+  {
+    "revision": "d5248edab00610b9cfaf3d8f2cff33e02ad76193",
+    "sourceFingerprint": "7c1f5c3484f4b18654f7d001f7a392a44073432e512872c215eab2227d155d94",
+    "kind": "upgrade-matched-v1",
+    "id": "citizen",
+    "quality": "high",
+    "valid": true,
+    "sampleMs": 8073.600000011909,
+    "frames": 166,
+    "fps": 20.560840269490082,
+    "p50Ms": 50,
+    "p95Ms": 83,
+    "p99Ms": 84.90000000002328,
+    "maxMs": 116,
+    "over50Ms": 80,
+    "over100Ms": 1,
+    "hour": 14,
+    "fov": 48,
+    "viewport": [
+      1300,
+      672
+    ],
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1370.8310667002615,
+      11.036944825924714,
+      180.10840682268375
+    ],
+    "target": [
+      1342.7149153396945,
+      8.360944825924713,
+      172.22665367571906
+    ],
+    "mode": "walk",
+    "position": [
+      1366.7869627374403,
+      8.360944825924713,
+      178.97473000017513
+    ],
+    "calls": 1329,
+    "triangles": 7367115,
+    "geometries": 689,
+    "textures": 61,
+    "settleMs": 5012.500000002969,
+    "warmupVisible": true,
+    "detailReady": true,
+    "architectureAtSettle": {
+      "selectedCells": 23,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 23,
+      "readyCells": 38,
+      "visibleCells": 23,
+      "visibleInstances": 14759,
+      "allocatedInstances": 23696,
+      "droppedAtBudget": 24,
+      "maxPlanMs": 16.299999997019768,
+      "maxAttachmentMs": 41.19999998807907
+    },
+    "architecture": {
+      "selectedCells": 23,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 23,
+      "readyCells": 38,
+      "visibleCells": 23,
+      "visibleInstances": 14759,
+      "allocatedInstances": 23696,
+      "droppedAtBudget": 24,
+      "maxPlanMs": 16.299999997019768,
+      "maxAttachmentMs": 41.19999998807907
+    },
+    "streetscape": {
+      "loaded": true,
+      "loading": false,
+      "failed": false,
+      "candidatesByAsset": {
+        "heritage-shop-bay": 108,
+        "modern-lobby-bay": 13
+      },
+      "candidateBays": 121,
+      "selectedBays": 23,
+      "pendingCells": 0,
+      "cacheCells": 4,
+      "visibleCells": 3,
+      "visibleBays": 23,
+      "lod0Bays": 2
+    },
+    "citizen": "ready",
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "protocol": "Fixed 1920x1080 drawing buffer; 14h; warm-up at least 5s and until selected architecture and applicable street/citizen assets are ready, capped at 30s; 8s visible RAF sample. settleMs reports streaming wait separately; hidden warm-up or detail timeout invalidates capture. Render counters include multipass work, not unique geometry."
+  },
+  {
+    "revision": "d5248edab00610b9cfaf3d8f2cff33e02ad76193",
+    "sourceFingerprint": "7c1f5c3484f4b18654f7d001f7a392a44073432e512872c215eab2227d155d94",
+    "kind": "upgrade-matched-v1",
+    "id": "gastown-roofs",
+    "quality": "high",
+    "valid": true,
+    "sampleMs": 8010.100000002974,
+    "frames": 206,
+    "fps": 25.717531616324827,
+    "p50Ms": 48.80000000001746,
+    "p95Ms": 51.70000000001164,
+    "p99Ms": 84.29999999998836,
+    "maxMs": 100.10000000000582,
+    "over50Ms": 56,
+    "over100Ms": 1,
+    "hour": 14,
+    "fov": 48,
+    "viewport": [
+      1300,
+      672
+    ],
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1536.766720003152,
+      111.16079999999994,
+      359.9040000002202
+    ],
+    "target": [
+      1466.766720003152,
+      22.16079999999992,
+      244.90400000022018
+    ],
+    "mode": "orbit",
+    "position": [
+      1340.475637202572,
+      9.156779716045936,
+      171.59892062371281
+    ],
+    "calls": 558,
+    "triangles": 4541785,
+    "geometries": 689,
+    "textures": 61,
+    "settleMs": 5047.100000005972,
+    "warmupVisible": true,
+    "detailReady": true,
+    "architectureAtSettle": {
+      "selectedCells": 23,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 23,
+      "readyCells": 38,
+      "visibleCells": 23,
+      "visibleInstances": 15126,
+      "allocatedInstances": 23229,
+      "droppedAtBudget": 23,
+      "maxPlanMs": 16.299999997019768,
+      "maxAttachmentMs": 41.19999998807907
+    },
+    "architecture": {
+      "selectedCells": 23,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 23,
+      "readyCells": 38,
+      "visibleCells": 23,
+      "visibleInstances": 15126,
+      "allocatedInstances": 23229,
+      "droppedAtBudget": 23,
+      "maxPlanMs": 16.299999997019768,
+      "maxAttachmentMs": 41.19999998807907
+    },
+    "streetscape": {
+      "loaded": true,
+      "loading": false,
+      "failed": false,
+      "candidatesByAsset": {
+        "heritage-shop-bay": 108,
+        "modern-lobby-bay": 13
+      },
+      "candidateBays": 121,
+      "selectedBays": 9,
+      "pendingCells": 0,
+      "cacheCells": 4,
+      "visibleCells": 2,
+      "visibleBays": 9,
+      "lod0Bays": 0
+    },
+    "citizen": "ready",
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "protocol": "Fixed 1920x1080 drawing buffer; 14h; warm-up at least 5s and until selected architecture and applicable street/citizen assets are ready, capped at 30s; 8s visible RAF sample. settleMs reports streaming wait separately; hidden warm-up or detail timeout invalidates capture. Render counters include multipass work, not unique geometry."
+  },
+  {
+    "revision": "d5248edab00610b9cfaf3d8f2cff33e02ad76193",
+    "sourceFingerprint": "7c1f5c3484f4b18654f7d001f7a392a44073432e512872c215eab2227d155d94",
+    "kind": "upgrade-matched-v1",
+    "id": "gastown-street",
+    "quality": "high",
+    "valid": true,
+    "sampleMs": 8026.600000008941,
+    "frames": 152,
+    "fps": 18.93703436072941,
+    "p50Ms": 50.10000000000582,
+    "p95Ms": 83.60000000000582,
+    "p99Ms": 134.30000000001746,
+    "maxMs": 250.20000000001164,
+    "over50Ms": 79,
+    "over100Ms": 5,
+    "hour": 14,
+    "fov": 58,
+    "viewport": [
+      1300,
+      672
+    ],
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1366.7869627374403,
+      9.860944825924713,
+      178.97473000017513
+    ],
+    "target": [
+      1342.7149153396945,
+      8.360944825924713,
+      172.22665367571906
+    ],
+    "mode": "walk",
+    "position": [
+      1366.7869627374403,
+      8.360944825924713,
+      178.97473000017513
+    ],
+    "calls": 1441,
+    "triangles": 8154873,
+    "geometries": 689,
+    "textures": 61,
+    "settleMs": 5024.000000005966,
+    "warmupVisible": true,
+    "detailReady": true,
+    "architectureAtSettle": {
+      "selectedCells": 23,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 23,
+      "readyCells": 38,
+      "visibleCells": 23,
+      "visibleInstances": 14759,
+      "allocatedInstances": 22441,
+      "droppedAtBudget": 23,
+      "maxPlanMs": 16.299999997019768,
+      "maxAttachmentMs": 41.19999998807907
+    },
+    "architecture": {
+      "selectedCells": 23,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 23,
+      "readyCells": 38,
+      "visibleCells": 23,
+      "visibleInstances": 14759,
+      "allocatedInstances": 22441,
+      "droppedAtBudget": 23,
+      "maxPlanMs": 16.299999997019768,
+      "maxAttachmentMs": 41.19999998807907
+    },
+    "streetscape": {
+      "loaded": true,
+      "loading": false,
+      "failed": false,
+      "candidatesByAsset": {
+        "heritage-shop-bay": 108,
+        "modern-lobby-bay": 13
+      },
+      "candidateBays": 121,
+      "selectedBays": 23,
+      "pendingCells": 0,
+      "cacheCells": 4,
+      "visibleCells": 3,
+      "visibleBays": 23,
+      "lod0Bays": 2
+    },
+    "citizen": "ready",
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "protocol": "Fixed 1920x1080 drawing buffer; 14h; warm-up at least 5s and until selected architecture and applicable street/citizen assets are ready, capped at 30s; 8s visible RAF sample. settleMs reports streaming wait separately; hidden warm-up or detail timeout invalidates capture. Render counters include multipass work, not unique geometry."
+  },
+  {
+    "revision": "d5248edab00610b9cfaf3d8f2cff33e02ad76193",
+    "sourceFingerprint": "7c1f5c3484f4b18654f7d001f7a392a44073432e512872c215eab2227d155d94",
+    "kind": "upgrade-matched-v1",
+    "id": "atlas-aerial",
+    "quality": "ultra",
+    "valid": true,
+    "sampleMs": 8001.900000002992,
+    "frames": 167,
+    "fps": 20.870043364693082,
+    "p50Ms": 50,
+    "p95Ms": 83.40000000002328,
+    "p99Ms": 100.5,
+    "maxMs": 100.70000000001164,
+    "over50Ms": 74,
+    "over100Ms": 4,
+    "hour": 14,
+    "fov": 48,
+    "viewport": [
+      1300,
+      672
+    ],
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1521.3465663384245,
+      503.2979999999977,
+      924.7160000000582
+    ],
+    "target": [
+      691.3465663384244,
+      88.29799999999776,
+      64.71600000005822
+    ],
+    "mode": "orbit",
+    "position": [
+      1366.7869627374403,
+      8.360944825924713,
+      178.97473000017513
+    ],
+    "calls": 1295,
+    "triangles": 7549753,
+    "geometries": 781,
+    "textures": 62,
+    "settleMs": 16315.500000002969,
+    "warmupVisible": true,
+    "detailReady": true,
+    "architectureAtSettle": {
+      "selectedCells": 30,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 30,
+      "readyCells": 36,
+      "visibleCells": 30,
+      "visibleInstances": 27490,
+      "allocatedInstances": 32277,
+      "droppedAtBudget": 31,
+      "maxPlanMs": 27.30000001192093,
+      "maxAttachmentMs": 42.1000000089407
+    },
+    "architecture": {
+      "selectedCells": 30,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 30,
+      "readyCells": 36,
+      "visibleCells": 30,
+      "visibleInstances": 27490,
+      "allocatedInstances": 32277,
+      "droppedAtBudget": 31,
+      "maxPlanMs": 27.30000001192093,
+      "maxAttachmentMs": 42.1000000089407
+    },
+    "streetscape": {
+      "loaded": true,
+      "loading": false,
+      "failed": false,
+      "candidatesByAsset": {
+        "heritage-shop-bay": 108,
+        "modern-lobby-bay": 13
+      },
+      "candidateBays": 121,
+      "selectedBays": 0,
+      "pendingCells": 0,
+      "cacheCells": 4,
+      "visibleCells": 0,
+      "visibleBays": 0,
+      "lod0Bays": 0
+    },
+    "citizen": "ready",
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "protocol": "Fixed 1920x1080 drawing buffer; 14h; warm-up at least 5s and until selected architecture and applicable street/citizen assets are ready, capped at 30s; 8s visible RAF sample. settleMs reports streaming wait separately; hidden warm-up or detail timeout invalidates capture. Render counters include multipass work, not unique geometry."
+  },
+  {
+    "revision": "d5248edab00610b9cfaf3d8f2cff33e02ad76193",
+    "sourceFingerprint": "7c1f5c3484f4b18654f7d001f7a392a44073432e512872c215eab2227d155d94",
+    "kind": "upgrade-matched-v1",
+    "id": "citizen",
+    "quality": "ultra",
+    "valid": true,
+    "sampleMs": 8025.70000000298,
+    "frames": 130,
+    "fps": 16.197964040513813,
+    "p50Ms": 50.5,
+    "p95Ms": 133.60000000003492,
+    "p99Ms": 216.89999999996508,
+    "maxMs": 233.09999999997672,
+    "over50Ms": 73,
+    "over100Ms": 20,
+    "hour": 14,
+    "fov": 48,
+    "viewport": [
+      1300,
+      672
+    ],
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1370.8310667002615,
+      11.036944825924714,
+      180.10840682268375
+    ],
+    "target": [
+      1342.7149153396945,
+      8.360944825924713,
+      172.22665367571906
+    ],
+    "mode": "walk",
+    "position": [
+      1366.7869627374403,
+      8.360944825924713,
+      178.97473000017513
+    ],
+    "calls": 1411,
+    "triangles": 8757509,
+    "geometries": 820,
+    "textures": 62,
+    "settleMs": 5023.700000005949,
+    "warmupVisible": true,
+    "detailReady": true,
+    "architectureAtSettle": {
+      "selectedCells": 30,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 30,
+      "readyCells": 38,
+      "visibleCells": 30,
+      "visibleInstances": 22104,
+      "allocatedInstances": 29276,
+      "droppedAtBudget": 44,
+      "maxPlanMs": 29,
+      "maxAttachmentMs": 42.3999999910593
+    },
+    "architecture": {
+      "selectedCells": 30,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 30,
+      "readyCells": 38,
+      "visibleCells": 30,
+      "visibleInstances": 22104,
+      "allocatedInstances": 29276,
+      "droppedAtBudget": 44,
+      "maxPlanMs": 29,
+      "maxAttachmentMs": 42.3999999910593
+    },
+    "streetscape": {
+      "loaded": true,
+      "loading": false,
+      "failed": false,
+      "candidatesByAsset": {
+        "heritage-shop-bay": 108,
+        "modern-lobby-bay": 13
+      },
+      "candidateBays": 121,
+      "selectedBays": 28,
+      "pendingCells": 0,
+      "cacheCells": 5,
+      "visibleCells": 3,
+      "visibleBays": 28,
+      "lod0Bays": 3
+    },
+    "citizen": "ready",
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "protocol": "Fixed 1920x1080 drawing buffer; 14h; warm-up at least 5s and until selected architecture and applicable street/citizen assets are ready, capped at 30s; 8s visible RAF sample. settleMs reports streaming wait separately; hidden warm-up or detail timeout invalidates capture. Render counters include multipass work, not unique geometry."
+  },
+  {
+    "revision": "d5248edab00610b9cfaf3d8f2cff33e02ad76193",
+    "sourceFingerprint": "7c1f5c3484f4b18654f7d001f7a392a44073432e512872c215eab2227d155d94",
+    "kind": "upgrade-matched-v1",
+    "id": "gastown-roofs",
+    "quality": "ultra",
+    "valid": true,
+    "sampleMs": 8044.300000002957,
+    "frames": 178,
+    "fps": 22.127469139631113,
+    "p50Ms": 49.59999999997672,
+    "p95Ms": 83.60000000003492,
+    "p99Ms": 149.79999999998836,
+    "maxMs": 249.89999999996508,
+    "over50Ms": 59,
+    "over100Ms": 5,
+    "hour": 14,
+    "fov": 48,
+    "viewport": [
+      1300,
+      672
+    ],
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1536.766720003152,
+      111.16079999999994,
+      359.9040000002202
+    ],
+    "target": [
+      1466.766720003152,
+      22.16079999999992,
+      244.90400000022018
+    ],
+    "mode": "orbit",
+    "position": [
+      1366.7869627374403,
+      8.360944825924713,
+      178.97473000017513
+    ],
+    "calls": 583,
+    "triangles": 5981391,
+    "geometries": 804,
+    "textures": 62,
+    "settleMs": 7553.500000002969,
+    "warmupVisible": true,
+    "detailReady": true,
+    "architectureAtSettle": {
+      "selectedCells": 30,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 30,
+      "readyCells": 38,
+      "visibleCells": 30,
+      "visibleInstances": 22143,
+      "allocatedInstances": 27511,
+      "droppedAtBudget": 40,
+      "maxPlanMs": 27.30000001192093,
+      "maxAttachmentMs": 42.3999999910593
+    },
+    "architecture": {
+      "selectedCells": 30,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 30,
+      "readyCells": 38,
+      "visibleCells": 30,
+      "visibleInstances": 22143,
+      "allocatedInstances": 27511,
+      "droppedAtBudget": 40,
+      "maxPlanMs": 27.30000001192093,
+      "maxAttachmentMs": 42.3999999910593
+    },
+    "streetscape": {
+      "loaded": true,
+      "loading": false,
+      "failed": false,
+      "candidatesByAsset": {
+        "heritage-shop-bay": 108,
+        "modern-lobby-bay": 13
+      },
+      "candidateBays": 121,
+      "selectedBays": 30,
+      "pendingCells": 0,
+      "cacheCells": 5,
+      "visibleCells": 3,
+      "visibleBays": 30,
+      "lod0Bays": 0
+    },
+    "citizen": "ready",
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "protocol": "Fixed 1920x1080 drawing buffer; 14h; warm-up at least 5s and until selected architecture and applicable street/citizen assets are ready, capped at 30s; 8s visible RAF sample. settleMs reports streaming wait separately; hidden warm-up or detail timeout invalidates capture. Render counters include multipass work, not unique geometry."
+  },
+  {
+    "revision": "d5248edab00610b9cfaf3d8f2cff33e02ad76193",
+    "sourceFingerprint": "7c1f5c3484f4b18654f7d001f7a392a44073432e512872c215eab2227d155d94",
+    "kind": "upgrade-matched-v1",
+    "id": "gastown-street",
+    "quality": "ultra",
+    "valid": true,
+    "sampleMs": 8087.6000000030035,
+    "frames": 133,
+    "fps": 16.444928037977967,
+    "p50Ms": 50.40000000002328,
+    "p95Ms": 132.69999999995343,
+    "p99Ms": 183.5,
+    "maxMs": 200,
+    "over50Ms": 83,
+    "over100Ms": 13,
+    "hour": 14,
+    "fov": 58,
+    "viewport": [
+      1300,
+      672
+    ],
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1366.7869627374403,
+      9.860944825924713,
+      178.97473000017513
+    ],
+    "target": [
+      1342.7149153396945,
+      8.360944825924713,
+      172.22665367571906
+    ],
+    "mode": "walk",
+    "position": [
+      1366.7869627374403,
+      8.360944825924713,
+      178.97473000017513
+    ],
+    "calls": 1509,
+    "triangles": 9695093,
+    "geometries": 820,
+    "textures": 62,
+    "settleMs": 6273.200000000012,
+    "warmupVisible": true,
+    "detailReady": true,
+    "architectureAtSettle": {
+      "selectedCells": 30,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 30,
+      "readyCells": 38,
+      "visibleCells": 30,
+      "visibleInstances": 22104,
+      "allocatedInstances": 29276,
+      "droppedAtBudget": 44,
+      "maxPlanMs": 29,
+      "maxAttachmentMs": 42.3999999910593
+    },
+    "architecture": {
+      "selectedCells": 30,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 30,
+      "readyCells": 38,
+      "visibleCells": 30,
+      "visibleInstances": 22104,
+      "allocatedInstances": 29276,
+      "droppedAtBudget": 44,
+      "maxPlanMs": 29,
+      "maxAttachmentMs": 42.3999999910593
+    },
+    "streetscape": {
+      "loaded": true,
+      "loading": false,
+      "failed": false,
+      "candidatesByAsset": {
+        "heritage-shop-bay": 108,
+        "modern-lobby-bay": 13
+      },
+      "candidateBays": 121,
+      "selectedBays": 28,
+      "pendingCells": 0,
+      "cacheCells": 5,
+      "visibleCells": 3,
+      "visibleBays": 28,
+      "lod0Bays": 3
+    },
+    "citizen": "ready",
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "protocol": "Fixed 1920x1080 drawing buffer; 14h; warm-up at least 5s and until selected architecture and applicable street/citizen assets are ready, capped at 30s; 8s visible RAF sample. settleMs reports streaming wait separately; hidden warm-up or detail timeout invalidates capture. Render counters include multipass work, not unique geometry."
+  }
+]

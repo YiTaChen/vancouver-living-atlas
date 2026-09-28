@@ -24,6 +24,7 @@ import {
 } from './placement-geometry';
 import { BoatController } from './boat-controller';
 import { makeWalker } from './assets/walker';
+import { makeCitizen } from './citizen';
 import { GroundSurfaceIndex, walkableGroundMeshes } from './ground-surface';
 import { DriverCameraMotion, DRIVER_LEFT_OFFSET } from './driver-camera';
 import type { TravelBookmark } from './travel-return';
@@ -83,7 +84,11 @@ export class StreetNavigation {
     drive: 'interior',
     boat: 'interior',
   };
-  walker = makeWalker();
+  walker: {
+    group: THREE.Group;
+    update(distance: number, moving: boolean, dt?: number, speed?: number): void;
+    dispose?(): void;
+  };
   walkingDistance = 0;
   cockpits = { drive: makeCockpit('drive'), boat: makeCockpit('boat') };
   cameraSignature = '';
@@ -96,6 +101,7 @@ export class StreetNavigation {
   steering = 0;
   collisions = new Map<string, number[][][][]>();
   constructor(public e: CityEngine) {
+    this.walker = e.compatibleGraphics ? makeWalker() : makeCitizen();
     this.boat = new BoatController(e);
     this.trafficStop = new TrafficStop(this);
     this.walker.group.visible = false;
@@ -960,7 +966,9 @@ export class StreetNavigation {
       this.walker.group.position.y = this.walkingHeight();
     this.walker.group.rotation.y = this.yaw;
     if (this.mode === 'walk')
-      this.walker.update(this.walkingDistance, walked > 0.0001);
+      this.walker.update(
+        this.walkingDistance, walked > 0.0001, dt, dt > 0 ? walked / dt : 0,
+      );
     this.car.position.copy(this.position);
     this.car.rotation.y = this.yaw;
     if (this.mode === 'drive') {
@@ -1198,6 +1206,7 @@ export class StreetNavigation {
   }
 
   destroy() {
+    this.walker.dispose?.();
     this.trafficStop?.destroy();
     window.removeEventListener('keydown', this.keyDown);
     window.removeEventListener('keyup', this.keyUp);

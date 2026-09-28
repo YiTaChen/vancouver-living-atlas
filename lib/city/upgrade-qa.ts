@@ -134,10 +134,21 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
         // and a hidden warmup or incomplete selected set invalidates the capture.
         const detailReady = () => {
           const stats = e.architecturalDetails?.stats;
+          const kit = e.streetscapeKit?.snapshot();
+          const street = view === 'gastown-street' || view === 'citizen';
           return (
-            !stats ||
-            (stats.pendingCells === 0 &&
-              stats.readySelectedCells === stats.selectedCells)
+            (!stats ||
+              (stats.pendingCells === 0 &&
+                stats.readySelectedCells === stats.selectedCells)) &&
+            (!kit ||
+              (!kit.loading &&
+                !kit.failed &&
+                kit.pendingCells === 0 &&
+                (!kit.selectedBays || kit.loaded) &&
+                (!street || kit.visibleBays > 0))) &&
+            (!street ||
+              e.compatibleGraphics ||
+              e.navigation?.walker.group.userData.assetState === 'ready')
           );
         };
         const warmup = await collect(5000, detailReady, 30000);
@@ -180,11 +191,15 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
           architecture: e.architecturalDetails
             ? { ...e.architecturalDetails.stats }
             : null,
+          streetscape: e.streetscapeKit?.snapshot() ?? null,
+          citizen:
+            e.navigation?.walker.group.userData.assetState ??
+            'procedural-compatible',
           renderer: extension
             ? gl.getParameter(extension.UNMASKED_RENDERER_WEBGL)
             : gl.getParameter(gl.RENDERER),
           protocol:
-            'Fixed 1920x1080 drawing buffer; 14h; warm-up at least 5s and until selected architecture is ready, capped at 30s; 8s visible RAF sample. settleMs reports streaming wait separately; hidden warm-up or detail timeout invalidates capture. Render counters include multipass work, not unique geometry.',
+            'Fixed 1920x1080 drawing buffer; 14h; warm-up at least 5s and until selected architecture and applicable street/citizen assets are ready, capped at 30s; 8s visible RAF sample. settleMs reports streaming wait separately; hidden warm-up or detail timeout invalidates capture. Render counters include multipass work, not unique geometry.',
         };
         const response = await fetch('/__visual-qa', {
           method: 'POST',
@@ -211,6 +226,93 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
     button.onclick = () => void suite(quality);
     section.appendChild(button);
   }
+  for (const view of VIEWS) {
+    const button = document.createElement('button');
+    button.textContent = `Upgrade preview ${view}`;
+    button.onclick = () => {
+      if (busy) return;
+      select(view, e.settings.quality);
+      status.textContent = `Preview ${view} / ${e.settings.quality}`;
+    };
+    section.appendChild(button);
+  }
+  const inspect = document.createElement('button');
+  inspect.textContent = 'Inspect upgrade assets';
+  inspect.onclick = () => {
+    if (busy) return;
+    status.textContent = JSON.stringify({
+      architecture: e.architecturalDetails?.stats,
+      streetscape: e.streetscapeKit?.snapshot(),
+      citizen: e.navigation?.walker.group.userData,
+    });
+  };
+  section.appendChild(inspect);
+  const motion = document.createElement('button');
+  motion.textContent = 'Upgrade citizen motion 8s';
+  motion.onclick = async () => {
+    if (busy) return;
+    busy = true;
+    const nav = e.navigation!;
+    let hidden = document.hidden;
+    const visibility = () => {
+      hidden ||= document.hidden;
+      if (hidden) nav.keys.clear();
+    };
+    document.addEventListener('visibilitychange', visibility);
+    try {
+      select('citizen', e.settings.quality);
+      status.textContent = 'Preparing citizen motion';
+      const warmup = await collect(
+        5000,
+        () => nav.walker.group.userData.assetState === 'ready',
+        30000,
+      );
+      if (!warmup.valid || nav.walker.group.userData.assetState !== 'ready')
+        throw new Error('Citizen did not become ready in a visible page');
+      const startDistance = nav.walkingDistance;
+      const startPosition = nav.position.toArray();
+      nav.keys.add('w');
+      for (const seconds of [2, 4, 8]) {
+        status.textContent = `Recording citizen motion ${seconds}s`;
+        const sample = await collect(seconds === 8 ? 4000 : 2000);
+        const row = {
+          kind: 'upgrade-citizen-motion-v1',
+          seconds,
+          ...sample,
+          valid: sample.valid && !hidden && nav.walkingDistance > startDistance,
+          quality: e.settings.quality,
+          mode: nav.mode,
+          startPosition,
+          position: nav.position.toArray(),
+          distance: nav.walkingDistance - startDistance,
+          citizen: nav.walker.group.userData,
+          render: [e.renderer.domElement.width, e.renderer.domElement.height],
+          protocol:
+            'Existing W navigation input, third-person camera, unchanged movement speed. Snapshots during 8 seconds of real motion; no synthetic character displacement.',
+        };
+        const response = await fetch('/__visual-qa', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: `${e.settings.quality}-citizen-motion-${seconds}s`,
+            row,
+            screenshot: e.screenshot(),
+          }),
+        });
+        if (!response.ok || !row.valid)
+          throw new Error('Citizen motion capture failed');
+      }
+      status.textContent =
+        'Completed citizen motion: 3 real navigation captures';
+    } catch (error) {
+      status.textContent = `Citizen motion failed: ${error}`;
+    } finally {
+      nav.keys.clear();
+      document.removeEventListener('visibilitychange', visibility);
+      busy = false;
+    }
+  };
+  section.appendChild(motion);
   const restore = document.createElement('button');
   restore.textContent = 'Restore normal render size';
   restore.onclick = () => {

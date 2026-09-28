@@ -37,6 +37,7 @@ import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import { FXAAShader } from 'three/addons/shaders/FXAAShader.js';
 import Delaunator from 'delaunator';
 import { createStreetfronts } from './streetfronts';
+import type { StreetscapeKit } from './streetscape-kit';
 import { createBridgeApproaches } from './bridges';
 import { prepareCauseway } from './causeway';
 import { makeContext } from './context';
@@ -101,6 +102,7 @@ export class CityEngine {
   detailedTrees: DetailedTrees | null = null;
   facadeDetails: FacadeDetails | null = null;
   architecturalDetails: ArchitecturalDetails | null = null;
+  streetscapeKit: StreetscapeKit | null = null;
   roads = new THREE.Group();
   terrain = new THREE.Group();
   landmarks = new THREE.Group();
@@ -473,7 +475,7 @@ export class CityEngine {
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('geometry.streetfronts-and-roofs');
     }
-    createStreetfronts(this);
+    this.streetscapeKit = createStreetfronts(this);
     // Roof furniture is invisible at the opening overview. Build it in bounded
     // background steps only for detail profiles; basic roofs already exist.
     this.scheduleScenery?.();
@@ -730,6 +732,7 @@ export class CityEngine {
     this.detailedTrees?.update();
     this.facadeDetails?.update();
     this.architecturalDetails?.update();
+    this.streetscapeKit?.update();
     this.landmarkWorker?.beginFrame();
     this.landmarkDetails.forEach((l) => l.update());
     this.interiors?.update();
@@ -1562,6 +1565,7 @@ export class CityEngine {
     this.detailedTrees?.dispose();
     this.facadeDetails?.dispose();
     this.architecturalDetails?.dispose();
+    this.streetscapeKit?.dispose();
     this.scene.traverse((o) => {
       const m = o as THREE.Mesh;
       m.geometry?.dispose();
