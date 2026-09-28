@@ -15,8 +15,8 @@ const revision = execFileSync('git', ['rev-parse', 'HEAD'], {
 // HEAD is the parent revision while validating an uncommitted stage. Hash the
 // actual visual source and data as well, so that distinction stays explicit.
 const visualFiles = [...new Set(execFileSync('git', [
-  'ls-files', '-co', '--exclude-standard', '--', 'lib', 'app',
-  'public/data', 'public/textures', 'package.json', 'package-lock.json', 'vite.config.ts',
+  'ls-files', '-co', '--exclude-standard', '--', 'lib', 'app', 'components',
+  'public/data', 'public/textures', 'public/models', 'package.json', 'package-lock.json', 'vite.config.ts',
 ], {encoding:'utf8'}).trim().split('\n'))].sort();
 const digest = createHash('sha256');
 for (const file of visualFiles) {
@@ -31,6 +31,9 @@ const mime = {
   '.json': 'application/json',
   '.geojson': 'application/json',
   '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.webp': 'image/webp',
+  '.glb': 'model/gltf-binary',
   '.svg': 'image/svg+xml',
   '.woff2': 'font/woff2',
 };
