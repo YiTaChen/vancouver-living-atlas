@@ -1,0 +1,394 @@
+[
+  {
+    "revision": "cc661eba9582f87358d2c8440f071aa63281e69f",
+    "sourceFingerprint": "c114e609a0fc791c7d204fb99f2a5ae1a9775de797855852f46254e716a8e918",
+    "kind": "upgrade-matched-v1",
+    "id": "atlas-aerial",
+    "quality": "high",
+    "valid": true,
+    "sampleMs": 8038.400000002992,
+    "frames": 160,
+    "fps": 19.904458598718705,
+    "p50Ms": 50,
+    "p95Ms": 100,
+    "p99Ms": 182.89999999999418,
+    "maxMs": 299.79999999998836,
+    "over50Ms": 69,
+    "over100Ms": 6,
+    "hour": 14,
+    "fov": 48,
+    "viewport": [
+      1300,
+      672
+    ],
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1521.3465663384245,
+      503.2979999999977,
+      924.7160000000582
+    ],
+    "target": [
+      691.3465663384244,
+      88.29799999999776,
+      64.71600000005822
+    ],
+    "mode": "orbit",
+    "position": [
+      1366.7869627374403,
+      8.360944825924713,
+      178.97473000017513
+    ],
+    "calls": 1181,
+    "triangles": 7316559,
+    "geometries": 847,
+    "textures": 52,
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "protocol": "Fixed 1920x1080 drawing buffer; 14h; 5s warm-up, 8s visible RAF sample. Render counters include multipass work, not unique geometry."
+  },
+  {
+    "revision": "cc661eba9582f87358d2c8440f071aa63281e69f",
+    "sourceFingerprint": "c114e609a0fc791c7d204fb99f2a5ae1a9775de797855852f46254e716a8e918",
+    "kind": "upgrade-matched-v1",
+    "id": "citizen",
+    "quality": "high",
+    "valid": true,
+    "sampleMs": 8096.89999999851,
+    "frames": 176,
+    "fps": 21.736714051060577,
+    "p50Ms": 49.90000000002328,
+    "p95Ms": 99.79999999998836,
+    "p99Ms": 100.89999999996508,
+    "maxMs": 134.19999999995343,
+    "over50Ms": 68,
+    "over100Ms": 4,
+    "hour": 14,
+    "fov": 48,
+    "viewport": [
+      1300,
+      672
+    ],
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1370.8310667002615,
+      11.036944825924714,
+      180.10840682268375
+    ],
+    "target": [
+      1342.7149153396945,
+      8.360944825924713,
+      172.22665367571906
+    ],
+    "mode": "walk",
+    "position": [
+      1366.7869627374403,
+      8.360944825924713,
+      178.97473000017513
+    ],
+    "calls": 1296,
+    "triangles": 7245285,
+    "geometries": 847,
+    "textures": 52,
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "protocol": "Fixed 1920x1080 drawing buffer; 14h; 5s warm-up, 8s visible RAF sample. Render counters include multipass work, not unique geometry."
+  },
+  {
+    "revision": "cc661eba9582f87358d2c8440f071aa63281e69f",
+    "sourceFingerprint": "c114e609a0fc791c7d204fb99f2a5ae1a9775de797855852f46254e716a8e918",
+    "kind": "upgrade-matched-v1",
+    "id": "gastown-roofs",
+    "quality": "high",
+    "valid": true,
+    "sampleMs": 8005.599999999977,
+    "frames": 142,
+    "fps": 17.73758369141606,
+    "p50Ms": 50,
+    "p95Ms": 116.59999999997672,
+    "p99Ms": 232.39999999996508,
+    "maxMs": 399.8999999999651,
+    "over50Ms": 67,
+    "over100Ms": 10,
+    "hour": 14,
+    "fov": 48,
+    "viewport": [
+      1300,
+      672
+    ],
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1536.766720003152,
+      111.16079999999994,
+      359.9040000002202
+    ],
+    "target": [
+      1466.766720003152,
+      22.16079999999992,
+      244.90400000022018
+    ],
+    "mode": "orbit",
+    "position": [
+      1366.7869627374403,
+      8.360944825924713,
+      178.97473000017513
+    ],
+    "calls": 514,
+    "triangles": 4628873,
+    "geometries": 847,
+    "textures": 52,
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "protocol": "Fixed 1920x1080 drawing buffer; 14h; 5s warm-up, 8s visible RAF sample. Render counters include multipass work, not unique geometry."
+  },
+  {
+    "revision": "cc661eba9582f87358d2c8440f071aa63281e69f",
+    "sourceFingerprint": "c114e609a0fc791c7d204fb99f2a5ae1a9775de797855852f46254e716a8e918",
+    "kind": "upgrade-matched-v1",
+    "id": "gastown-street",
+    "quality": "high",
+    "valid": true,
+    "sampleMs": 8031.4000000014785,
+    "frames": 165,
+    "fps": 20.54436337375422,
+    "p50Ms": 50,
+    "p95Ms": 99.70000000001164,
+    "p99Ms": 100.40000000002328,
+    "maxMs": 116.89999999996508,
+    "over50Ms": 68,
+    "over100Ms": 3,
+    "hour": 14,
+    "fov": 58,
+    "viewport": [
+      1300,
+      672
+    ],
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1366.7869627374403,
+      9.860944825924713,
+      178.97473000017513
+    ],
+    "target": [
+      1342.7149153396945,
+      8.360944825924713,
+      172.22665367571906
+    ],
+    "mode": "walk",
+    "position": [
+      1366.7869627374403,
+      8.360944825924713,
+      178.97473000017513
+    ],
+    "calls": 1323,
+    "triangles": 8134405,
+    "geometries": 847,
+    "textures": 52,
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "protocol": "Fixed 1920x1080 drawing buffer; 14h; 5s warm-up, 8s visible RAF sample. Render counters include multipass work, not unique geometry."
+  },
+  {
+    "revision": "cc661eba9582f87358d2c8440f071aa63281e69f",
+    "sourceFingerprint": "c114e609a0fc791c7d204fb99f2a5ae1a9775de797855852f46254e716a8e918",
+    "kind": "upgrade-matched-v1",
+    "id": "atlas-aerial",
+    "quality": "ultra",
+    "valid": true,
+    "sampleMs": 8038.900000000023,
+    "frames": 169,
+    "fps": 21.022776748062483,
+    "p50Ms": 49.90000000002328,
+    "p95Ms": 83.90000000002328,
+    "p99Ms": 133,
+    "maxMs": 250.20000000001164,
+    "over50Ms": 70,
+    "over100Ms": 5,
+    "hour": 14,
+    "fov": 48,
+    "viewport": [
+      1300,
+      672
+    ],
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1521.3465663384245,
+      503.2979999999977,
+      924.7160000000582
+    ],
+    "target": [
+      691.3465663384244,
+      88.29799999999776,
+      64.71600000005822
+    ],
+    "mode": "orbit",
+    "position": [
+      1366.7869627374403,
+      8.360944825924713,
+      178.97473000017513
+    ],
+    "calls": 1163,
+    "triangles": 7650167,
+    "geometries": 847,
+    "textures": 52,
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "protocol": "Fixed 1920x1080 drawing buffer; 14h; 5s warm-up, 8s visible RAF sample. Render counters include multipass work, not unique geometry."
+  },
+  {
+    "revision": "cc661eba9582f87358d2c8440f071aa63281e69f",
+    "sourceFingerprint": "c114e609a0fc791c7d204fb99f2a5ae1a9775de797855852f46254e716a8e918",
+    "kind": "upgrade-matched-v1",
+    "id": "citizen",
+    "quality": "ultra",
+    "valid": true,
+    "sampleMs": 8033.299999999988,
+    "frames": 152,
+    "fps": 18.92124033709686,
+    "p50Ms": 50,
+    "p95Ms": 100.29999999998836,
+    "p99Ms": 150.5,
+    "maxMs": 166.29999999998836,
+    "over50Ms": 71,
+    "over100Ms": 11,
+    "hour": 14,
+    "fov": 48,
+    "viewport": [
+      1300,
+      672
+    ],
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1370.8310667002615,
+      11.036944825924714,
+      180.10840682268375
+    ],
+    "target": [
+      1342.7149153396945,
+      8.360944825924713,
+      172.22665367571906
+    ],
+    "mode": "walk",
+    "position": [
+      1366.7869627374403,
+      8.360944825924713,
+      178.97473000017513
+    ],
+    "calls": 1355,
+    "triangles": 8549775,
+    "geometries": 847,
+    "textures": 52,
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "protocol": "Fixed 1920x1080 drawing buffer; 14h; 5s warm-up, 8s visible RAF sample. Render counters include multipass work, not unique geometry."
+  },
+  {
+    "revision": "cc661eba9582f87358d2c8440f071aa63281e69f",
+    "sourceFingerprint": "c114e609a0fc791c7d204fb99f2a5ae1a9775de797855852f46254e716a8e918",
+    "kind": "upgrade-matched-v1",
+    "id": "gastown-roofs",
+    "quality": "ultra",
+    "valid": true,
+    "sampleMs": 8012.600000004459,
+    "frames": 195,
+    "fps": 24.336669745137844,
+    "p50Ms": 49.20000000001164,
+    "p95Ms": 66.79999999998836,
+    "p99Ms": 133.20000000001164,
+    "maxMs": 249.89999999996508,
+    "over50Ms": 51,
+    "over100Ms": 4,
+    "hour": 14,
+    "fov": 48,
+    "viewport": [
+      1300,
+      672
+    ],
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1536.766720003152,
+      111.16079999999994,
+      359.9040000002202
+    ],
+    "target": [
+      1466.766720003152,
+      22.16079999999992,
+      244.90400000022018
+    ],
+    "mode": "orbit",
+    "position": [
+      1366.7869627374403,
+      8.360944825924713,
+      178.97473000017513
+    ],
+    "calls": 520,
+    "triangles": 5968935,
+    "geometries": 847,
+    "textures": 52,
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "protocol": "Fixed 1920x1080 drawing buffer; 14h; 5s warm-up, 8s visible RAF sample. Render counters include multipass work, not unique geometry."
+  },
+  {
+    "revision": "cc661eba9582f87358d2c8440f071aa63281e69f",
+    "sourceFingerprint": "c114e609a0fc791c7d204fb99f2a5ae1a9775de797855852f46254e716a8e918",
+    "kind": "upgrade-matched-v1",
+    "id": "gastown-street",
+    "quality": "ultra",
+    "valid": true,
+    "sampleMs": 8038.700000000012,
+    "frames": 181,
+    "fps": 22.51607847039941,
+    "p50Ms": 49.90000000002328,
+    "p95Ms": 67.39999999996508,
+    "p99Ms": 100,
+    "maxMs": 100.70000000001164,
+    "over50Ms": 67,
+    "over100Ms": 1,
+    "hour": 14,
+    "fov": 58,
+    "viewport": [
+      1300,
+      672
+    ],
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1366.7869627374403,
+      9.860944825924713,
+      178.97473000017513
+    ],
+    "target": [
+      1342.7149153396945,
+      8.360944825924713,
+      172.22665367571906
+    ],
+    "mode": "walk",
+    "position": [
+      1366.7869627374403,
+      8.360944825924713,
+      178.97473000017513
+    ],
+    "calls": 1372,
+    "triangles": 9541649,
+    "geometries": 847,
+    "textures": 52,
+    "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "protocol": "Fixed 1920x1080 drawing buffer; 14h; 5s warm-up, 8s visible RAF sample. Render counters include multipass work, not unique geometry."
+  }
+]

@@ -5,6 +5,7 @@ import type { VisualQuality } from './quality';
 import { project } from './geo';
 import { auditCausewayTravel } from './causeway-qa';
 import { installReleaseQAControls } from './release-qa-controls';
+import { installUpgradeQA } from './upgrade-qa';
 
 const cases = [
   {id:'station-lobby', interiorSite:'waterfront', interiorAt:[0,5], interiorYaw:Math.PI},
@@ -261,6 +262,7 @@ export function installVisualQA(e: CityEngine) {
   output.style.cssText = 'display:block;width:100%;height:70px;color:white';
   panel.appendChild(label);
   panel.appendChild(status);
+  installUpgradeQA(e, panel);
   let running = false,
     selectedCase = 'downtown';
   const button = (name: string, fn: () => void) => {
