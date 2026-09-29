@@ -1,0 +1,65 @@
+{
+  "source": "Actual connected Arterial Water Street RoadGraph edges2973 and3794; source29:0 and846:0. Fixed chord remains inside their source centerlines with sub-metre deviation.",
+  "sourceNodeIds": [
+    2838,
+    2745,
+    2681
+  ],
+  "sourceEdgeIds": [
+    2973,
+    3794
+  ],
+  "sourceIds": [
+    "29:0",
+    "846:0"
+  ],
+  "sourceCoordinates": [
+    [
+      -123.1042618,
+      49.2834967
+    ],
+    [
+      -123.1063833,
+      49.283885
+    ],
+    [
+      -123.1087774,
+      49.2843192
+    ]
+  ],
+  "sourcePathLengthM": 340.4318971169564,
+  "chordLengthM": 340.4316584329576,
+  "startXZ": [
+    1704.4201986244195,
+    273.28826168075756
+  ],
+  "endXZ": [
+    1415.0585986383298,
+    192.48575031961587
+  ],
+  "startLonLat": [
+    -123.10452708672572,
+    49.28354502100539
+  ],
+  "endLonLat": [
+    -123.10851211327427,
+    49.28427087899461
+  ],
+  "direction": [
+    -0.9631528231591542,
+    -0.2689547159663703
+  ],
+  "yaw": -1.843103920259478,
+  "usableLengthM": 300.4316584329576,
+  "endpointInsetM": 20,
+  "bodyProbeRadiusM": 0.6,
+  "sampleStepM": 0.25,
+  "maxDistanceToActualRoadCenterlineM": 0.20119559777822177,
+  "minimumActualRoadWidthM": 7.7,
+  "samples": 3606,
+  "blockedSamples": 0,
+  "offLandSamples": 0,
+  "failures": [],
+  "offLand": [],
+  "protocol": "QA initial placement only. Use nav.startAt(walk,{x,y:nav.roadHeight(x,z),z,yaw,surface:ground}); keep actual W speed4m/s for the existing60s leg. Maximum travel240m leaves>60m continuation reserve; no in-leg heading/position rewrite. Before placement, perform actual nav.clearGround+travelSurfaces.lookup preflight along this300m span. This static audit validates source building/landmark footprints and landmask; live resolver remains authoritative."
+}

@@ -1,0 +1,482 @@
+[
+  {
+    "revision": "cfbe34853e06940b58626d1f72d911ac16c00b74",
+    "sourceFingerprint": "58a09f7ff60e3f8177d70f9cf7b7b8c33703e7db28bf62a18bd55d0fd0a91d65",
+    "kind": "upgrade-lighting-v1",
+    "id": "gastown-roofs",
+    "hour": 14,
+    "quality": "high",
+    "valid": true,
+    "settleMs": 5005.499999994063,
+    "maxPoseError": 1.4210854715202004e-14,
+    "expectedPose": {
+      "camera": [
+        1536.766720003152,
+        111.16079999999992,
+        359.9040000002202
+      ],
+      "target": [
+        1466.766720003152,
+        22.16079999999992,
+        244.90400000022018
+      ]
+    },
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1536.766720003152,
+      111.16079999999994,
+      359.9040000002202
+    ],
+    "target": [
+      1466.766720003152,
+      22.16079999999992,
+      244.90400000022018
+    ],
+    "shadowCoverage": {
+      "mode": "orbit",
+      "quality": "high",
+      "extent": 160,
+      "center": [
+        1466.766720003152,
+        22.16079999999992,
+        244.90400000022018
+      ],
+      "anchor": [
+        1465.8650781441265,
+        28.683713952220955,
+        246.75209924420238
+      ],
+      "mapSize": 2048,
+      "texelMetres": 0.15625,
+      "sunElevationSine": 0.952477105658189,
+      "normalBias": 0.1015625,
+      "depthOffsetMetres": 0.04,
+      "bias": -4.255319148936171e-06
+    },
+    "ssaoExclusions": {
+      "watchedObjects": 3058,
+      "candidates": 181,
+      "hiddenLastPass": 82
+    },
+    "streetscape": {
+      "loaded": true,
+      "loading": false,
+      "failed": false,
+      "candidatesByAsset": {
+        "heritage-shop-bay": 108,
+        "modern-lobby-bay": 18
+      },
+      "candidateBays": 126,
+      "selectedBays": 9,
+      "pendingCells": 0,
+      "cacheCells": 7,
+      "visibleCells": 2,
+      "visibleBays": 9,
+      "lod0Bays": 0
+    },
+    "protocol": "Actual High renderer at fixed 1080p, three fixed hours and two fixed cameras; visible readiness warmup. Visual inspection, not a matched performance sample."
+  },
+  {
+    "revision": "cfbe34853e06940b58626d1f72d911ac16c00b74",
+    "sourceFingerprint": "58a09f7ff60e3f8177d70f9cf7b7b8c33703e7db28bf62a18bd55d0fd0a91d65",
+    "kind": "upgrade-lighting-v1",
+    "id": "gastown-roofs",
+    "hour": 19,
+    "quality": "high",
+    "valid": true,
+    "settleMs": 5017.799999999988,
+    "maxPoseError": 1.4210854715202004e-14,
+    "expectedPose": {
+      "camera": [
+        1536.766720003152,
+        111.16079999999992,
+        359.9040000002202
+      ],
+      "target": [
+        1466.766720003152,
+        22.16079999999992,
+        244.90400000022018
+      ]
+    },
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1536.766720003152,
+      111.16079999999994,
+      359.9040000002202
+    ],
+    "target": [
+      1466.766720003152,
+      22.16079999999992,
+      244.90400000022018
+    ],
+    "shadowCoverage": {
+      "mode": "orbit",
+      "quality": "high",
+      "extent": 160,
+      "center": [
+        1466.766720003152,
+        22.16079999999992,
+        244.90400000022018
+      ],
+      "anchor": [
+        1465.3314305779004,
+        22.727663483741594,
+        245.33374095549453
+      ],
+      "mapSize": 2048,
+      "texelMetres": 0.15625,
+      "sunElevationSine": 0.33512961647361483,
+      "normalBias": 0.21507773043043094,
+      "depthOffsetMetres": 0.16695814636740589,
+      "bias": -1.7761504932702754e-05
+    },
+    "ssaoExclusions": {
+      "watchedObjects": 3058,
+      "candidates": 181,
+      "hiddenLastPass": 82
+    },
+    "streetscape": {
+      "loaded": true,
+      "loading": false,
+      "failed": false,
+      "candidatesByAsset": {
+        "heritage-shop-bay": 108,
+        "modern-lobby-bay": 18
+      },
+      "candidateBays": 126,
+      "selectedBays": 9,
+      "pendingCells": 0,
+      "cacheCells": 7,
+      "visibleCells": 2,
+      "visibleBays": 9,
+      "lod0Bays": 0
+    },
+    "protocol": "Actual High renderer at fixed 1080p, three fixed hours and two fixed cameras; visible readiness warmup. Visual inspection, not a matched performance sample."
+  },
+  {
+    "revision": "cfbe34853e06940b58626d1f72d911ac16c00b74",
+    "sourceFingerprint": "58a09f7ff60e3f8177d70f9cf7b7b8c33703e7db28bf62a18bd55d0fd0a91d65",
+    "kind": "upgrade-lighting-v1",
+    "id": "gastown-roofs",
+    "hour": 23,
+    "quality": "high",
+    "valid": true,
+    "settleMs": 5059.299999994051,
+    "maxPoseError": 1.4210854715202004e-14,
+    "expectedPose": {
+      "camera": [
+        1536.766720003152,
+        111.16079999999992,
+        359.9040000002202
+      ],
+      "target": [
+        1466.766720003152,
+        22.16079999999992,
+        244.90400000022018
+      ]
+    },
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1536.766720003152,
+      111.16079999999994,
+      359.9040000002202
+    ],
+    "target": [
+      1466.766720003152,
+      22.16079999999992,
+      244.90400000022018
+    ],
+    "shadowCoverage": {
+      "mode": "orbit",
+      "quality": "high",
+      "extent": 160,
+      "center": [
+        1466.766720003152,
+        22.16079999999992,
+        244.90400000022018
+      ],
+      "anchor": [
+        1459.7460206226547,
+        22.85974331733516,
+        248.1711172304602
+      ],
+      "mapSize": 2048,
+      "texelMetres": 0.15625,
+      "sunElevationSine": 0.08909146411176228,
+      "normalBias": 0.2415625,
+      "depthOffsetMetres": 0.3855736433535108,
+      "bias": -4.1018472697182e-05
+    },
+    "ssaoExclusions": {
+      "watchedObjects": 3058,
+      "candidates": 181,
+      "hiddenLastPass": 88
+    },
+    "streetscape": {
+      "loaded": true,
+      "loading": false,
+      "failed": false,
+      "candidatesByAsset": {
+        "heritage-shop-bay": 108,
+        "modern-lobby-bay": 18
+      },
+      "candidateBays": 126,
+      "selectedBays": 9,
+      "pendingCells": 0,
+      "cacheCells": 7,
+      "visibleCells": 2,
+      "visibleBays": 9,
+      "lod0Bays": 0
+    },
+    "protocol": "Actual High renderer at fixed 1080p, three fixed hours and two fixed cameras; visible readiness warmup. Visual inspection, not a matched performance sample."
+  },
+  {
+    "revision": "cfbe34853e06940b58626d1f72d911ac16c00b74",
+    "sourceFingerprint": "58a09f7ff60e3f8177d70f9cf7b7b8c33703e7db28bf62a18bd55d0fd0a91d65",
+    "kind": "upgrade-lighting-v1",
+    "id": "gastown-street",
+    "hour": 14,
+    "quality": "high",
+    "valid": true,
+    "settleMs": 5028.1000000030035,
+    "maxPoseError": 0,
+    "expectedPose": {
+      "camera": [
+        1366.7869627374403,
+        9.860944825924713,
+        178.97473000017513
+      ],
+      "target": [
+        1342.7149153396945,
+        8.360944825924713,
+        172.22665367571906
+      ]
+    },
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1366.7869627374403,
+      9.860944825924713,
+      178.97473000017513
+    ],
+    "target": [
+      1342.7149153396945,
+      8.360944825924713,
+      172.22665367571906
+    ],
+    "shadowCoverage": {
+      "mode": "walk",
+      "quality": "high",
+      "extent": 170,
+      "center": [
+        1342.7149153396945,
+        8.360944825924713,
+        172.22665367571906
+      ],
+      "anchor": [
+        1341.8176372070116,
+        14.2680746026425,
+        173.8483310503655
+      ],
+      "mapSize": 2048,
+      "texelMetres": 0.166015625,
+      "sunElevationSine": 0.952477105658189,
+      "normalBias": 0.10791015625,
+      "depthOffsetMetres": 0.04,
+      "bias": -4.255319148936171e-06
+    },
+    "ssaoExclusions": {
+      "watchedObjects": 3058,
+      "candidates": 181,
+      "hiddenLastPass": 88
+    },
+    "streetscape": {
+      "loaded": true,
+      "loading": false,
+      "failed": false,
+      "candidatesByAsset": {
+        "heritage-shop-bay": 108,
+        "modern-lobby-bay": 18
+      },
+      "candidateBays": 126,
+      "selectedBays": 23,
+      "pendingCells": 0,
+      "cacheCells": 7,
+      "visibleCells": 3,
+      "visibleBays": 23,
+      "lod0Bays": 2
+    },
+    "protocol": "Actual High renderer at fixed 1080p, three fixed hours and two fixed cameras; visible readiness warmup. Visual inspection, not a matched performance sample."
+  },
+  {
+    "revision": "cfbe34853e06940b58626d1f72d911ac16c00b74",
+    "sourceFingerprint": "58a09f7ff60e3f8177d70f9cf7b7b8c33703e7db28bf62a18bd55d0fd0a91d65",
+    "kind": "upgrade-lighting-v1",
+    "id": "gastown-street",
+    "hour": 19,
+    "quality": "high",
+    "valid": true,
+    "settleMs": 5021.999999997031,
+    "maxPoseError": 0,
+    "expectedPose": {
+      "camera": [
+        1366.7869627374403,
+        9.860944825924713,
+        178.97473000017513
+      ],
+      "target": [
+        1342.7149153396945,
+        8.360944825924713,
+        172.22665367571906
+      ]
+    },
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1366.7869627374403,
+      9.860944825924713,
+      178.97473000017513
+    ],
+    "target": [
+      1342.7149153396945,
+      8.360944825924713,
+      172.22665367571906
+    ],
+    "shadowCoverage": {
+      "mode": "walk",
+      "quality": "high",
+      "extent": 170,
+      "center": [
+        1342.7149153396945,
+        8.360944825924713,
+        172.22665367571906
+      ],
+      "anchor": [
+        1345.7794920619067,
+        7.15869310472425,
+        171.14952728478562
+      ],
+      "mapSize": 2048,
+      "texelMetres": 0.166015625,
+      "sunElevationSine": 0.33512961647361483,
+      "normalBias": 0.22142538668043094,
+      "depthOffsetMetres": 0.19606305415146383,
+      "bias": -2.085777171824083e-05
+    },
+    "ssaoExclusions": {
+      "watchedObjects": 3058,
+      "candidates": 181,
+      "hiddenLastPass": 82
+    },
+    "streetscape": {
+      "loaded": true,
+      "loading": false,
+      "failed": false,
+      "candidatesByAsset": {
+        "heritage-shop-bay": 108,
+        "modern-lobby-bay": 18
+      },
+      "candidateBays": 126,
+      "selectedBays": 23,
+      "pendingCells": 0,
+      "cacheCells": 7,
+      "visibleCells": 3,
+      "visibleBays": 23,
+      "lod0Bays": 2
+    },
+    "protocol": "Actual High renderer at fixed 1080p, three fixed hours and two fixed cameras; visible readiness warmup. Visual inspection, not a matched performance sample."
+  },
+  {
+    "revision": "cfbe34853e06940b58626d1f72d911ac16c00b74",
+    "sourceFingerprint": "58a09f7ff60e3f8177d70f9cf7b7b8c33703e7db28bf62a18bd55d0fd0a91d65",
+    "kind": "upgrade-lighting-v1",
+    "id": "gastown-street",
+    "hour": 23,
+    "quality": "high",
+    "valid": true,
+    "settleMs": 5004.199999994016,
+    "maxPoseError": 0,
+    "expectedPose": {
+      "camera": [
+        1366.7869627374403,
+        9.860944825924713,
+        178.97473000017513
+      ],
+      "target": [
+        1342.7149153396945,
+        8.360944825924713,
+        172.22665367571906
+      ]
+    },
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      1366.7869627374403,
+      9.860944825924713,
+      178.97473000017513
+    ],
+    "target": [
+      1342.7149153396945,
+      8.360944825924713,
+      172.22665367571906
+    ],
+    "shadowCoverage": {
+      "mode": "walk",
+      "quality": "high",
+      "extent": 170,
+      "center": [
+        1342.7149153396945,
+        8.360944825924713,
+        172.22665367571906
+      ],
+      "anchor": [
+        1336.4441707155552,
+        8.918830069281938,
+        175.1518549058958
+      ],
+      "mapSize": 2048,
+      "texelMetres": 0.166015625,
+      "sunElevationSine": 0.08909146411176228,
+      "normalBias": 0.24791015625,
+      "depthOffsetMetres": 0.5053856699233017,
+      "bias": -5.376443297056401e-05
+    },
+    "ssaoExclusions": {
+      "watchedObjects": 3058,
+      "candidates": 181,
+      "hiddenLastPass": 88
+    },
+    "streetscape": {
+      "loaded": true,
+      "loading": false,
+      "failed": false,
+      "candidatesByAsset": {
+        "heritage-shop-bay": 108,
+        "modern-lobby-bay": 18
+      },
+      "candidateBays": 126,
+      "selectedBays": 23,
+      "pendingCells": 0,
+      "cacheCells": 7,
+      "visibleCells": 3,
+      "visibleBays": 23,
+      "lod0Bays": 2
+    },
+    "protocol": "Actual High renderer at fixed 1080p, three fixed hours and two fixed cameras; visible readiness warmup. Visual inspection, not a matched performance sample."
+  }
+]

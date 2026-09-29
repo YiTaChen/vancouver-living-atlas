@@ -1,0 +1,694 @@
+{
+  "source": "Current repository named RoadGraph edges; 8 intervals between 9 distinct source crossing streets.",
+  "startNode": 1994,
+  "endNode": 1257,
+  "nodeIds": [
+    1994,
+    1968,
+    1913,
+    1795,
+    1752,
+    1707,
+    1604,
+    1516,
+    1445,
+    1371,
+    1297,
+    1257
+  ],
+  "edgeIds": [
+    3953,
+    3798,
+    588,
+    2999,
+    3775,
+    2753,
+    340,
+    3095,
+    3022,
+    858,
+    665
+  ],
+  "sourcePathLengthM": 1346.8841277151712,
+  "straightLengthM": 1346.883573951812,
+  "direction": [
+    -0.7094077158856744,
+    -0.7047983347326171
+  ],
+  "normal": [
+    0.7047983347326171,
+    -0.7094077158856744
+  ],
+  "startXZ": [
+    415.67587947125975,
+    339.6261879997863
+  ],
+  "endXZ": [
+    -539.8137202898291,
+    -609.6551120001666
+  ],
+  "startLonLat": [
+    -123.1222754,
+    49.2829491
+  ],
+  "endLonLat": [
+    -123.1354342,
+    49.2914766
+  ],
+  "yaw": -2.3529351597511754,
+  "sourceCenterlineDeviationM": 0.5527954474128194,
+  "offsetProbes": [
+    {
+      "offset": 0,
+      "blockedSamples": 0,
+      "firstBlocked": null,
+      "lastBlocked": null,
+      "pavementMissingSamples": 2694,
+      "totalSamples": 2694
+    },
+    {
+      "offset": 7,
+      "blockedSamples": 0,
+      "firstBlocked": null,
+      "lastBlocked": null,
+      "pavementMissingSamples": 579,
+      "totalSamples": 2694
+    },
+    {
+      "offset": 8,
+      "blockedSamples": 0,
+      "firstBlocked": null,
+      "lastBlocked": null,
+      "pavementMissingSamples": 579,
+      "totalSamples": 2694
+    },
+    {
+      "offset": 9,
+      "blockedSamples": 0,
+      "firstBlocked": null,
+      "lastBlocked": null,
+      "pavementMissingSamples": 523,
+      "totalSamples": 2694
+    },
+    {
+      "offset": 10,
+      "blockedSamples": 171,
+      "firstBlocked": 169.5,
+      "lastBlocked": 1177,
+      "pavementMissingSamples": 327,
+      "totalSamples": 2694
+    },
+    {
+      "offset": -7,
+      "blockedSamples": 13,
+      "firstBlocked": 123.5,
+      "lastBlocked": 129.5,
+      "pavementMissingSamples": 474,
+      "totalSamples": 2694
+    },
+    {
+      "offset": -8,
+      "blockedSamples": 13,
+      "firstBlocked": 123.5,
+      "lastBlocked": 129.5,
+      "pavementMissingSamples": 472,
+      "totalSamples": 2694
+    },
+    {
+      "offset": -9,
+      "blockedSamples": 37,
+      "firstBlocked": 120.5,
+      "lastBlocked": 431.5,
+      "pavementMissingSamples": 262,
+      "totalSamples": 2694
+    },
+    {
+      "offset": -10,
+      "blockedSamples": 102,
+      "firstBlocked": 120.5,
+      "lastBlocked": 432,
+      "pavementMissingSamples": 201,
+      "totalSamples": 2694
+    }
+  ],
+  "crossings": [
+    {
+      "name": "BURRARD ST",
+      "nodes": [
+        {
+          "id": 1994,
+          "point": [
+            415.67587947125975,
+            339.6261879997863
+          ],
+          "lonLat": [
+            -123.1222754,
+            49.2829491
+          ],
+          "distance": 0
+        },
+        {
+          "id": 1968,
+          "point": [
+            376.9372633769408,
+            301.042676000543
+          ],
+          "lonLat": [
+            -123.1228089,
+            49.2832957
+          ],
+          "distance": 54.67506816524545
+        }
+      ],
+      "distance": 27.337534082622724,
+      "point": [
+        396.2824218597596,
+        320.3587395026576
+      ]
+    },
+    {
+      "name": "THURLOW ST",
+      "nodes": [
+        {
+          "id": 1913,
+          "point": [
+            230.9068400797031,
+            155.6253600001989
+          ],
+          "lonLat": [
+            -123.12482,
+            49.284602
+          ],
+          "distance": 260.7600593646863
+        }
+      ],
+      "distance": 260.7600593646863,
+      "point": [
+        230.69068136314476,
+        155.842932394777
+      ]
+    },
+    {
+      "name": "BUTE ST",
+      "nodes": [
+        {
+          "id": 1795,
+          "point": [
+            74.08624180243613,
+            -0.5232039997864035
+          ],
+          "lonLat": [
+            -123.1269797,
+            49.2860047
+          ],
+          "distance": 482.0630496704663
+        }
+      ],
+      "distance": 482.0630496704663,
+      "point": [
+        73.69663249165183,
+        -0.13104664408524513
+      ]
+    },
+    {
+      "name": "JERVIS ST",
+      "nodes": [
+        {
+          "id": 1752,
+          "point": [
+            6.593189018284689,
+            -67.52671199972951
+          ],
+          "lonLat": [
+            -123.1279092,
+            49.2866066
+          ],
+          "distance": 577.167102943826
+        },
+        {
+          "id": 1707,
+          "point": [
+            -40.06015838759614,
+            -113.8358319998747
+          ],
+          "lonLat": [
+            -123.1285517,
+            49.2870226
+          ],
+          "distance": 642.901938224488
+        }
+      ],
+      "distance": 610.034520584157,
+      "point": [
+        -17.08731638775953,
+        -90.325126237338
+      ]
+    },
+    {
+      "name": "BROUGHTON ST",
+      "nodes": [
+        {
+          "id": 1604,
+          "point": [
+            -140.0471768742627,
+            -213.07761200005274
+          ],
+          "lonLat": [
+            -123.1299287,
+            49.2879141
+          ],
+          "distance": 783.778941907359
+        }
+      ],
+      "distance": 783.778941907359,
+      "point": [
+        -140.34294946653046,
+        -212.779905055013
+      ]
+    },
+    {
+      "name": "NICOLA ST",
+      "nodes": [
+        {
+          "id": 1516,
+          "point": [
+            -225.54805869704353,
+            -297.947979999972
+          ],
+          "lonLat": [
+            -123.1311062,
+            49.2886765
+          ],
+          "distance": 904.2504212219565
+        }
+      ],
+      "distance": 904.2504212219565,
+      "point": [
+        -225.80634643646732,
+        -297.6880030587162
+      ]
+    },
+    {
+      "name": "CARDERO ST",
+      "nodes": [
+        {
+          "id": 1445,
+          "point": [
+            -311.43378525211244,
+            -383.18570400022935
+          ],
+          "lonLat": [
+            -123.132289,
+            49.2894422
+          ],
+          "distance": 1025.2538242563494
+        }
+      ],
+      "distance": 1025.2538242563494,
+      "point": [
+        -311.6470941974897,
+        -382.9710000143361
+      ]
+    },
+    {
+      "name": "BIDWELL ST",
+      "nodes": [
+        {
+          "id": 1371,
+          "point": [
+            -425.5874466641317,
+            -496.35361600020843
+          ],
+          "lonLat": [
+            -123.1338611,
+            49.2904588
+          ],
+          "distance": 1185.9958683813893
+        }
+      ],
+      "distance": 1185.9958683813893,
+      "point": [
+        -425.67874056702857,
+        -496.2617250351811
+      ]
+    },
+    {
+      "name": "DENMAN ST",
+      "nodes": [
+        {
+          "id": 1297,
+          "point": [
+            -512.1557280292203,
+            -582.1590719999815
+          ],
+          "lonLat": [
+            -123.1350533,
+            49.2912296
+          ],
+          "distance": 1307.883617632358
+        },
+        {
+          "id": 1257,
+          "point": [
+            -539.8137202898291,
+            -609.6551120001666
+          ],
+          "lonLat": [
+            -123.1354342,
+            49.2914766
+          ],
+          "distance": 1346.8835739518117
+        }
+      ],
+      "distance": 1327.3835957920849,
+      "point": [
+        -525.9802853237165,
+        -595.9115598658684
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "from": "BURRARD ST",
+      "to": "THURLOW ST",
+      "lengthM": 233.4225252820636,
+      "structures": 3,
+      "families": {
+        "before": {
+          "midrise-grid": 1,
+          "lowrise-masonry": 2
+        },
+        "after": {
+          "midrise-grid": 1,
+          "lowrise-masonry": 2
+        }
+      },
+      "kitBefore": {},
+      "modernKitAfterScan": 0,
+      "structureIds": [
+        "148546",
+        "148144",
+        "osm-structure-78"
+      ]
+    },
+    {
+      "from": "THURLOW ST",
+      "to": "BUTE ST",
+      "lengthM": 221.30299030577999,
+      "structures": 2,
+      "families": {
+        "before": {
+          "lowrise-masonry": 1,
+          "midrise-grid": 1
+        },
+        "after": {
+          "lowrise-masonry": 1,
+          "midrise-grid": 1
+        }
+      },
+      "kitBefore": {},
+      "modernKitAfterScan": 0,
+      "structureIds": [
+        "149665",
+        "150083"
+      ]
+    },
+    {
+      "from": "BUTE ST",
+      "to": "JERVIS ST",
+      "lengthM": 127.97147091369072,
+      "structures": 7,
+      "families": {
+        "before": {
+          "lowrise-masonry": 4,
+          "midrise-grid": 1,
+          "curtain-wall": 1,
+          "balcony-slab": 1
+        },
+        "after": {
+          "lowrise-masonry": 3,
+          "midrise-grid": 1,
+          "domestic-cladding": 1,
+          "curtain-wall": 1,
+          "balcony-slab": 1
+        }
+      },
+      "kitBefore": {},
+      "modernKitAfterScan": 0,
+      "structureIds": [
+        "150580",
+        "150570",
+        "149775",
+        "150222",
+        "150357",
+        "osm-structure-184",
+        "osm-structure-446"
+      ]
+    },
+    {
+      "from": "JERVIS ST",
+      "to": "BROUGHTON ST",
+      "lengthM": 173.744421323202,
+      "structures": 8,
+      "families": {
+        "before": {
+          "midrise-grid": 3,
+          "lowrise-masonry": 4,
+          "curtain-wall": 1
+        },
+        "after": {
+          "midrise-grid": 3,
+          "lowrise-masonry": 4,
+          "curtain-wall": 1
+        }
+      },
+      "kitBefore": {},
+      "modernKitAfterScan": 0,
+      "structureIds": [
+        "151120",
+        "151211",
+        "151331",
+        "151296",
+        "151060",
+        "151273",
+        "150960",
+        "151564"
+      ]
+    },
+    {
+      "from": "BROUGHTON ST",
+      "to": "NICOLA ST",
+      "lengthM": 120.47147931459745,
+      "structures": 5,
+      "families": {
+        "before": {
+          "curtain-wall": 1,
+          "midrise-grid": 1,
+          "lowrise-masonry": 3
+        },
+        "after": {
+          "curtain-wall": 1,
+          "midrise-grid": 1,
+          "domestic-cladding": 3
+        }
+      },
+      "kitBefore": {},
+      "modernKitAfterScan": 0,
+      "structureIds": [
+        "151782",
+        "151874",
+        "151245",
+        "151567",
+        "151452"
+      ]
+    },
+    {
+      "from": "NICOLA ST",
+      "to": "CARDERO ST",
+      "lengthM": 121.00340303439293,
+      "structures": 8,
+      "families": {
+        "before": {
+          "lowrise-masonry": 4,
+          "midrise-grid": 3,
+          "balcony-slab": 1
+        },
+        "after": {
+          "lowrise-masonry": 1,
+          "domestic-cladding": 3,
+          "midrise-grid": 3,
+          "balcony-slab": 1
+        }
+      },
+      "kitBefore": {},
+      "modernKitAfterScan": 0,
+      "structureIds": [
+        "152125",
+        "152297",
+        "152307",
+        "151972",
+        "151883",
+        "osm-structure-160",
+        "osm-structure-501",
+        "osm-structure-502"
+      ]
+    },
+    {
+      "from": "CARDERO ST",
+      "to": "BIDWELL ST",
+      "lengthM": 160.7420441250399,
+      "structures": 10,
+      "families": {
+        "before": {
+          "midrise-grid": 1,
+          "lowrise-masonry": 8,
+          "balcony-slab": 1
+        },
+        "after": {
+          "midrise-grid": 1,
+          "lowrise-masonry": 3,
+          "domestic-cladding": 5,
+          "balcony-slab": 1
+        }
+      },
+      "kitBefore": {},
+      "modernKitAfterScan": 0,
+      "structureIds": [
+        "152595",
+        "152675",
+        "152771",
+        "152741",
+        "152615",
+        "152754",
+        "osm-structure-161",
+        "osm-structure-162",
+        "osm-structure-368",
+        "osm-structure-369"
+      ]
+    },
+    {
+      "from": "BIDWELL ST",
+      "to": "DENMAN ST",
+      "lengthM": 141.38772741069556,
+      "structures": 4,
+      "families": {
+        "before": {
+          "midrise-grid": 1,
+          "lowrise-masonry": 3
+        },
+        "after": {
+          "midrise-grid": 1,
+          "lowrise-masonry": 2,
+          "domestic-cladding": 1
+        }
+      },
+      "kitBefore": {},
+      "modernKitAfterScan": 0,
+      "structureIds": [
+        "153009",
+        "153085",
+        "153053",
+        "152979"
+      ]
+    }
+  ],
+  "wholeCity": {
+    "structures": 3370,
+    "before": {
+      "lowrise-masonry": 2328,
+      "midrise-grid": 524,
+      "curtain-wall": 178,
+      "heritage-brick": 155,
+      "balcony-slab": 185
+    },
+    "after": {
+      "domestic-cladding": 1352,
+      "lowrise-masonry": 976,
+      "midrise-grid": 524,
+      "curtain-wall": 178,
+      "heritage-brick": 155,
+      "balcony-slab": 185
+    }
+  },
+  "regions": {
+    "Gastown/downtown-east": {
+      "structures": 333,
+      "before": {
+        "heritage-brick": 155,
+        "balcony-slab": 24,
+        "curtain-wall": 23,
+        "lowrise-masonry": 81,
+        "midrise-grid": 50
+      },
+      "after": {
+        "heritage-brick": 155,
+        "balcony-slab": 24,
+        "curtain-wall": 23,
+        "domestic-cladding": 34,
+        "lowrise-masonry": 47,
+        "midrise-grid": 50
+      }
+    },
+    "West End": {
+      "structures": 1037,
+      "before": {
+        "curtain-wall": 58,
+        "lowrise-masonry": 665,
+        "midrise-grid": 257,
+        "balcony-slab": 57
+      },
+      "after": {
+        "curtain-wall": 58,
+        "domestic-cladding": 341,
+        "midrise-grid": 257,
+        "lowrise-masonry": 324,
+        "balcony-slab": 57
+      }
+    },
+    "False Creek north / Yaletown": {
+      "structures": 358,
+      "before": {
+        "lowrise-masonry": 155,
+        "curtain-wall": 46,
+        "midrise-grid": 101,
+        "balcony-slab": 56
+      },
+      "after": {
+        "lowrise-masonry": 111,
+        "domestic-cladding": 44,
+        "curtain-wall": 46,
+        "midrise-grid": 101,
+        "balcony-slab": 56
+      }
+    },
+    "Other": {
+      "structures": 1642,
+      "before": {
+        "lowrise-masonry": 1427,
+        "midrise-grid": 116,
+        "balcony-slab": 48,
+        "curtain-wall": 51
+      },
+      "after": {
+        "domestic-cladding": 933,
+        "lowrise-masonry": 494,
+        "midrise-grid": 116,
+        "balcony-slab": 48,
+        "curtain-wall": 51
+      }
+    }
+  },
+  "protocol": {
+    "maxSeconds": 360,
+    "speedMps": 4,
+    "start": "Use existing navigation startAt/setup once at startXZ,ground surface; set yaw once. All subsequent motion must be unchanged W input.",
+    "stop": "Stop W once dot(nav.positionXZ - startXZ, direction) >= straightLengthM; otherwise timeout after 360s and report incomplete. Record actual crossing-gate progression.",
+    "proof": "At each gate also record abs(dot(positionXZ-startXZ, normal)); >6m lateral departure fails the straight centerline route. Never claim an intersection gate reached from elapsed time alone.",
+    "limitations": [
+      "Source graph is connected, but this is geometry preflight; live navigation and protected-surface resolver remain authoritative.",
+      "Centerline is a valid rendered road corridor, not a pedestrian safety recommendation. Cars/people may be dynamic during live QA.",
+      "Street sidewalk offsets are audited separately; none may be assumed continuously walkable across source junction gaps.",
+      "A 180 s leg at 4m/s is720m and does not cover all8sourceblocks. Fullroute is360s maximum with actual endpoint gate."
+    ]
+  }
+}

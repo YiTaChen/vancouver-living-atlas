@@ -17,6 +17,8 @@ export type ArchitecturePart = {
   profile: Profile;
   /** Exposed roof; higher source parts remain clear of decorative equipment. */
   roof: boolean;
+  /** Actual body roof descriptor, never inferred again by the detail layer. */
+  roofEaveHeight?: number;
   roofExclusions?: number[][][][];
 };
 export type ArchitectureBox = {
@@ -115,7 +117,9 @@ export function* architectureWork(
     yield null;
     if (!ring || ring.length < 3 || h < 5 || h > 300) continue;
     const seed = hashId(part.key),
-      heritage = profile.kind === 'heritage-brick';
+      heritage = profile.kind === 'heritage-brick',
+      domestic = profile.kind === 'domestic-cladding',
+      wallTop = part.roofEaveHeight ?? h;
     const stone = STONE[seed % STONE.length],
       metal = METAL[(seed >>> 3) % METAL.length];
     const sign = signedArea(ring) > 0 ? 1 : -1;
@@ -161,6 +165,38 @@ export function* architectureWork(
     });
 
     if (tier === 'roof') {
+      if (part.roofEaveHeight !== undefined || domestic) {
+        // Sloped roofs and small domestic flat roofs never receive the large
+        // commercial HVAC/parapet kit. Inset eaves stay inside the source envelope.
+        for (const edge of edges) {
+          yield null;
+          if (edge.length < 2 || edge.length > 50) continue;
+          const trim = edgeBox(
+            edge,
+            Math.max(0.1, edge.length - 0.12),
+            0.1,
+            0.15,
+            0.5,
+            wallTop - 0.075,
+            -0.08,
+            'cornice',
+            0xb0b2a7,
+          );
+          if (
+            roofBoxFits(
+              polygon,
+              trim.x,
+              trim.z,
+              trim.width,
+              trim.depth,
+              trim.yaw,
+              part.roofExclusions,
+            )
+          )
+            yield trim;
+        }
+        continue;
+      }
       // Thin coping and shadow lines read at district scale without altering measured massing.
       for (const edge of edges) {
         yield null;
@@ -340,11 +376,14 @@ export function* architectureWork(
       yield null;
       if (edge.length < 4 || edge.length > 100) continue;
       const grid = fitBays(profile, edge.length);
-      const rows = windowRows(profile, { minHeightM: min, heightM: h });
+      const rows = windowRows(profile, { minHeightM: min, heightM: wallTop });
       // Gastown already has its own verified storefronts/surrounds. Its new roof
       // is useful, but double-stacking those frames would create z-fighting.
       if (!heritage) {
         for (const row of rows) {
+          // Domestic ground openings use shader trim so the representative door
+          // can replace one pane without a physical sill crossing the door.
+          if (domestic && row === 0) continue;
           for (let bay = 0; bay < Math.min(grid.count, 22); bay++) {
             const w = windowBounds(profile, grid, bay, row),
               mid = (w.left + w.right) / 2;
@@ -385,7 +424,7 @@ export function* architectureWork(
           }
           yield null;
         }
-        if (min < 0.1) {
+        if (min < 0.1 && !domestic) {
           // Storey datum stays aligned with the ground-window shader. Decorative
           // canopy remains above pedestrian clearance; it is not a new doorway.
           for (let bay = 0; bay <= grid.count; bay++) {

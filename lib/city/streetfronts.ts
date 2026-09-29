@@ -389,32 +389,43 @@ export function createStreetfronts(e: CityEngine, loader?: StreetBayLoader) {
         const dx = (b[0] - a[0]) / length,
           dz = (b[1] - a[1]) / length;
         const nx = dz,
-          nz = -dx,
-          x = (a[0] + b[0]) / 2,
-          z = (a[1] + b[1]) / 2;
-        const location = `${Math.round(x * 10)},${Math.round(z * 10)}`;
+          nz = -dx;
+        // Stable source edge identity: select at most one bay, preferring the
+        // center. A blocked/set-back center may have real pavement at a quarter.
+        const location = `${Math.round(((a[0] + b[0]) / 2) * 10)},${Math.round(((a[1] + b[1]) / 2) * 10)}`;
         if (modernLocations.has(location)) continue;
-        const grades = [-1.625, 0, 1.625].map((offset) => {
-          const px = x + dx * offset + nx * 0.55,
-            pz = z + dz * offset + nz * 0.55;
-          if (e.waterWorld.solidAt(px, pz)) return null;
-          return sidewalks.sample(px, pz, e.elevation(px, pz) + 1.18) ?? null;
-        });
-        const threshold = streetBayThreshold(
-          profile,
-          height,
-          0,
-          foundation,
-          grades,
-        );
-        const tipX = x + nx * 1.75,
-          tipZ = z + nz * 1.75;
-        if (
-          threshold === null ||
-          e.waterWorld.solidAt(tipX, tipZ) ||
-          sidewalks.sample(tipX, tipZ, threshold) === undefined
-        )
-          continue;
+        let accepted: { x: number; z: number; threshold: number } | undefined;
+        for (const fraction of [0.5, 0.25, 0.75]) {
+          const u = length * fraction;
+          if (u < 1.8 || u > length - 1.8) continue;
+          const x = a[0] + dx * u,
+            z = a[1] + dz * u;
+          const grades = [-1.625, 0, 1.625].map((offset) => {
+            const px = x + dx * offset + nx * 0.55,
+              pz = z + dz * offset + nz * 0.55;
+            if (e.waterWorld.solidAt(px, pz)) return null;
+            return sidewalks.sample(px, pz, e.elevation(px, pz) + 1.18) ?? null;
+          });
+          const threshold = streetBayThreshold(
+            profile,
+            height,
+            0,
+            foundation,
+            grades,
+          );
+          const tipX = x + nx * 1.75,
+            tipZ = z + nz * 1.75;
+          if (
+            threshold === null ||
+            e.waterWorld.solidAt(tipX, tipZ) ||
+            sidewalks.sample(tipX, tipZ, threshold) === undefined
+          )
+            continue;
+          accepted = { x, z, threshold };
+          break;
+        }
+        if (!accepted) continue;
+        const { x, z, threshold } = accepted;
         modernLocations.add(location);
         sources.push({
           id: sources.length,

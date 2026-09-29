@@ -3,6 +3,7 @@ import type { CityEngine } from './engine';
 import { project, rings } from './geo';
 import { replacedBuilding } from './replaced-buildings';
 import { type Profile } from './facade-profile';
+import type { PitchedRoof } from './building-roof';
 import { roofCellWork } from './architecture-roof-budget';
 import {
   architectureWork,
@@ -90,6 +91,9 @@ export class ArchitecturalDetails {
     const groups = new Map<string, Cell>();
     const profiles = e.data.buildingProfiles as Map<string, Profile>;
     const foundations = e.data.buildingFoundations as Map<string, number>;
+    const bodyRoofs = e.data.buildingRoofs as
+      | Map<string, PitchedRoof>
+      | undefined;
     const structureParts = new Map<string, ArchitecturePart[]>();
     const allParts: ArchitecturePart[] = [];
     for (const f of e.data.buildings.features) {
@@ -120,6 +124,7 @@ export class ArchitecturalDetails {
           ground,
           profile,
           roof: true,
+          roofEaveHeight: bodyRoofs?.get(key)?.eaveHeight,
         };
         allParts.push(part);
         if (!structureParts.has(key)) structureParts.set(key, []);

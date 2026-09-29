@@ -1,0 +1,352 @@
+[
+  {
+    "revision": "cfbe34853e06940b58626d1f72d911ac16c00b74",
+    "sourceFingerprint": "58a09f7ff60e3f8177d70f9cf7b7b8c33703e7db28bf62a18bd55d0fd0a91d65",
+    "kind": "upgrade-regional-v1",
+    "id": "kitsilano-gables",
+    "expectedPose": {
+      "camera": [
+        -1649.1808577204172,
+        58.3359004254979,
+        1402.4722622001366
+      ],
+      "target": [
+        -1714.1808577204172,
+        8.335900425497908,
+        1312.4722622001366
+      ]
+    },
+    "sourceId": "134681",
+    "sourceCoord": [
+      -123.151607335,
+      49.274209915
+    ],
+    "sourceRoof": "Pitched",
+    "sourceDataset": "cov-2009",
+    "sourceEpoch": 2009,
+    "nearbyRoofsWithin90m": 42,
+    "note": "Source-supported type; representative gable pitch and ridge direction. Nearby count is geographic coverage, not an on-screen visibility claim.",
+    "maxPoseError": 1.4210854715202004e-14,
+    "quality": "high",
+    "valid": true,
+    "settleMs": 7060.499999994041,
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      -1649.1808577204172,
+      58.33590042549788,
+      1402.4722622001366
+    ],
+    "target": [
+      -1714.1808577204172,
+      8.335900425497908,
+      1312.4722622001366
+    ],
+    "architecture": {
+      "selectedCells": 23,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 23,
+      "readyCells": 23,
+      "visibleCells": 23,
+      "visibleInstances": 19597,
+      "allocatedInstances": 19597,
+      "droppedAtBudget": 13,
+      "maxPlanMs": 2.4000000059604645,
+      "maxAttachmentMs": 13.599999994039536
+    },
+    "streetscape": {
+      "loaded": false,
+      "loading": false,
+      "failed": false,
+      "candidatesByAsset": {
+        "heritage-shop-bay": 108,
+        "modern-lobby-bay": 18
+      },
+      "candidateBays": 126,
+      "selectedBays": 0,
+      "pendingCells": 0,
+      "cacheCells": 0,
+      "visibleCells": 0,
+      "visibleBays": 0,
+      "lod0Bays": 0
+    },
+    "modernBay": null,
+    "protocol": "Actual source-backed regional view, High, 14:00, fixed 1080p; visible readiness warmup, separate from four-view matched performance samples."
+  },
+  {
+    "revision": "cfbe34853e06940b58626d1f72d911ac16c00b74",
+    "sourceFingerprint": "58a09f7ff60e3f8177d70f9cf7b7b8c33703e7db28bf62a18bd55d0fd0a91d65",
+    "kind": "upgrade-regional-v1",
+    "id": "west-end-gables",
+    "expectedPose": {
+      "camera": [
+        -255.12587354845445,
+        88.00105709984022,
+        526.8636187005329
+      ],
+      "target": [
+        -205.12587354845445,
+        48.00105709984024,
+        461.863618700533
+      ]
+    },
+    "sourceId": "145450",
+    "sourceCoord": [
+      -123.13082495,
+      49.2818510275
+    ],
+    "sourceRoof": "Pitched",
+    "sourceDataset": "cov-2009",
+    "sourceEpoch": 2009,
+    "nearbyRoofsWithin90m": 25,
+    "note": "Source-supported type; representative gable pitch and ridge direction. Nearby count is geographic coverage, not an on-screen visibility claim.",
+    "maxPoseError": 3.1776437161565096e-14,
+    "quality": "high",
+    "valid": true,
+    "settleMs": 10956.400000002977,
+    "render": [
+      1920,
+      1080
+    ],
+    "camera": [
+      -255.12587354845448,
+      88.00105709984024,
+      526.8636187005329
+    ],
+    "target": [
+      -205.12587354845445,
+      48.00105709984024,
+      461.863618700533
+    ],
+    "architecture": {
+      "selectedCells": 23,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 23,
+      "readyCells": 38,
+      "visibleCells": 23,
+      "visibleInstances": 22875,
+      "allocatedInstances": 29227,
+      "droppedAtBudget": 35,
+      "maxPlanMs": 2.4000000059604645,
+      "maxAttachmentMs": 13.599999994039536
+    },
+    "streetscape": {
+      "loaded": false,
+      "loading": false,
+      "failed": false,
+      "candidatesByAsset": {
+        "heritage-shop-bay": 108,
+        "modern-lobby-bay": 18
+      },
+      "candidateBays": 126,
+      "selectedBays": 0,
+      "pendingCells": 0,
+      "cacheCells": 0,
+      "visibleCells": 0,
+      "visibleBays": 0,
+      "lod0Bays": 0
+    },
+    "modernBay": null,
+    "protocol": "Actual source-backed regional view, High, 14:00, fixed 1080p; visible readiness warmup, separate from four-view matched performance samples."
+  },
+  {
+    "revision": "cfbe34853e06940b58626d1f72d911ac16c00b74",
+    "sourceFingerprint": "58a09f7ff60e3f8177d70f9cf7b7b8c33703e7db28bf62a18bd55d0fd0a91d65",
+    "kind": "upgrade-regional-v1",
+    "id": "west-end-modern-bay",
+    "sourceId": "140475",
+    "sourceCoord": [
+      -123.13022787415413,
+      49.277532425066354
+    ],
+    "expectedBayPosition": [
+      -161.77087453640135,
+      32.98445807412949,
+      942.6104416136913
+    ],
+    "groundMinimumY": 35.69024253682111,
+    "expectedPose": {
+      "camera": [
+        -156.41322140328037,
+        35.69024253682111,
+        936.6694355620903
+      ],
+      "target": [
+        -161.77087453640135,
+        34.58445807412949,
+        942.6104416136913
+      ]
+    },
+    "camera": [
+      -156.41322140328037,
+      35.69024253682111,
+      936.6694355620903
+    ],
+    "target": [
+      -161.77087453640135,
+      34.58445807412949,
+      942.6104416136913
+    ],
+    "note": "Representative original modern bay on an actual source edge and existing pavement. Camera uses an 8 m horizontal setback and respects the public land elevation + 4 m orbit minimum. Await modernBayQAState.ready before capture; inspect the image for occlusion. Source identity does not assert a surveyed or enterable lobby.",
+    "maxPoseError": 0,
+    "quality": "high",
+    "valid": true,
+    "settleMs": 5609.199999991062,
+    "render": [
+      1920,
+      1080
+    ],
+    "architecture": {
+      "selectedCells": 23,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 23,
+      "readyCells": 38,
+      "visibleCells": 23,
+      "visibleInstances": 21855,
+      "allocatedInstances": 37230,
+      "droppedAtBudget": 44,
+      "maxPlanMs": 2.4000000059604645,
+      "maxAttachmentMs": 13.599999994039536
+    },
+    "streetscape": {
+      "loaded": true,
+      "loading": false,
+      "failed": false,
+      "candidatesByAsset": {
+        "heritage-shop-bay": 108,
+        "modern-lobby-bay": 18
+      },
+      "candidateBays": 126,
+      "selectedBays": 1,
+      "pendingCells": 0,
+      "cacheCells": 1,
+      "visibleCells": 1,
+      "visibleBays": 1,
+      "lod0Bays": 1
+    },
+    "modernBay": {
+      "ready": true,
+      "matchedPrimitives": 3,
+      "streetscape": {
+        "loaded": true,
+        "loading": false,
+        "failed": false,
+        "candidatesByAsset": {
+          "heritage-shop-bay": 108,
+          "modern-lobby-bay": 18
+        },
+        "candidateBays": 126,
+        "selectedBays": 1,
+        "pendingCells": 0,
+        "cacheCells": 1,
+        "visibleCells": 1,
+        "visibleBays": 1,
+        "lod0Bays": 1
+      }
+    },
+    "protocol": "Actual source-backed regional view, High, 14:00, fixed 1080p; visible readiness warmup, separate from four-view matched performance samples."
+  },
+  {
+    "revision": "cfbe34853e06940b58626d1f72d911ac16c00b74",
+    "sourceFingerprint": "58a09f7ff60e3f8177d70f9cf7b7b8c33703e7db28bf62a18bd55d0fd0a91d65",
+    "kind": "upgrade-regional-v1",
+    "id": "yaletown-modern-bay",
+    "sourceId": "143422",
+    "sourceCoord": [
+      -123.11830440843212,
+      49.27867025844494
+    ],
+    "expectedBayPosition": [
+      704.0183684411332,
+      19.469251746153507,
+      815.946829909161
+    ],
+    "groundMinimumY": 21.862642370286693,
+    "expectedPose": {
+      "camera": [
+        709.8880643763979,
+        21.862642370286693,
+        821.3825147443532
+      ],
+      "target": [
+        704.0183684411332,
+        21.06925174615351,
+        815.946829909161
+      ]
+    },
+    "camera": [
+      709.8880643763979,
+      21.862642370286693,
+      821.3825147443532
+    ],
+    "target": [
+      704.0183684411332,
+      21.06925174615351,
+      815.946829909161
+    ],
+    "note": "Representative original modern bay on an actual source edge and existing pavement. Camera uses an 8 m horizontal setback and respects the public land elevation + 4 m orbit minimum. Await modernBayQAState.ready before capture; inspect the image for occlusion. Source identity does not assert a surveyed or enterable lobby.",
+    "maxPoseError": 0,
+    "quality": "high",
+    "valid": true,
+    "settleMs": 12697.09999999404,
+    "render": [
+      1920,
+      1080
+    ],
+    "architecture": {
+      "selectedCells": 23,
+      "pendingCells": 0,
+      "buildingCells": 0,
+      "readySelectedCells": 23,
+      "readyCells": 38,
+      "visibleCells": 23,
+      "visibleInstances": 22530,
+      "allocatedInstances": 36885,
+      "droppedAtBudget": 65,
+      "maxPlanMs": 8.200000002980232,
+      "maxAttachmentMs": 20.600000008940697
+    },
+    "streetscape": {
+      "loaded": true,
+      "loading": false,
+      "failed": false,
+      "candidatesByAsset": {
+        "heritage-shop-bay": 108,
+        "modern-lobby-bay": 18
+      },
+      "candidateBays": 126,
+      "selectedBays": 1,
+      "pendingCells": 0,
+      "cacheCells": 2,
+      "visibleCells": 1,
+      "visibleBays": 1,
+      "lod0Bays": 1
+    },
+    "modernBay": {
+      "ready": true,
+      "matchedPrimitives": 3,
+      "streetscape": {
+        "loaded": true,
+        "loading": false,
+        "failed": false,
+        "candidatesByAsset": {
+          "heritage-shop-bay": 108,
+          "modern-lobby-bay": 18
+        },
+        "candidateBays": 126,
+        "selectedBays": 1,
+        "pendingCells": 0,
+        "cacheCells": 2,
+        "visibleCells": 1,
+        "visibleBays": 1,
+        "lod0Bays": 1
+      }
+    },
+    "protocol": "Actual source-backed regional view, High, 14:00, fixed 1080p; visible readiness warmup, separate from four-view matched performance samples."
+  }
+]
