@@ -118,13 +118,13 @@ export function* architectureWork(
       heritage = profile.kind === 'heritage-brick';
     const stone = STONE[seed % STONE.length],
       metal = METAL[(seed >>> 3) % METAL.length];
+    const sign = signedArea(ring) > 0 ? 1 : -1;
     const edges = ring
       .map((a, i) => {
         const b = ring[(i + 1) % ring.length],
           dx = b[0] - a[0],
           dz = b[1] - a[1];
-        const length = Math.hypot(dx, dz),
-          sign = signedArea(ring) > 0 ? 1 : -1;
+        const length = Math.hypot(dx, dz);
         return {
           a,
           dx,

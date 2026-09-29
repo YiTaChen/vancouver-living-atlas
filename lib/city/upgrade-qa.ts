@@ -2,6 +2,11 @@
 import type { CityEngine } from './engine';
 import type { VisualQuality } from './quality';
 import { project } from './geo';
+import {
+  clearQAOrbitMomentum,
+  captureQAPose,
+  qaPoseError,
+} from './upgrade-qa-pose';
 
 const VIEWS = [
   'atlas-aerial',
@@ -23,6 +28,7 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
   section.appendChild(status);
   parent.insertBefore(section, parent.firstChild);
   let busy = false;
+  let expectedPose: ReturnType<typeof captureQAPose> | null = null;
   function fixedResolution() {
     e.renderer.setPixelRatio(1);
     e.renderer.setSize(WIDTH, HEIGHT, false);
@@ -44,6 +50,8 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
       labels: false,
       autoRotate: false,
     });
+    clearQAOrbitMomentum(e.controls);
+    e.controls.enabled = !busy;
     e.setClock({ hour: 14, running: false });
     e.camera.fov = 48;
     e.camera.near = 0.15;
@@ -74,6 +82,7 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
     e.ensureSSAO();
     fixedResolution();
     e.renderer.shadowMap.needsUpdate = true;
+    expectedPose = captureQAPose(e.camera, e.controls);
   }
   async function collect(
     duration: number,
@@ -81,6 +90,7 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
     maxDuration = duration,
   ) {
     const gaps: number[] = [];
+    let maxPoseError = 0;
     let last = performance.now(),
       hidden = document.hidden;
     const start = last;
@@ -92,6 +102,11 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
       await new Promise<void>((resolve) => {
         const frame = (now: number) => {
           hidden ||= document.hidden;
+          if (expectedPose)
+            maxPoseError = Math.max(
+              maxPoseError,
+              qaPoseError(e.camera, e.controls, expectedPose),
+            );
           gaps.push(now - last);
           last = now;
           if (
@@ -111,7 +126,8 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
     const percentile = (p: number) =>
       sorted[Math.min(sorted.length - 1, Math.floor(sorted.length * p))] || 0;
     return {
-      valid: !hidden && !e.disposed,
+      valid: !hidden && !e.disposed && maxPoseError < 0.05,
+      maxPoseError,
       sampleMs: last - start,
       frames: gaps.length,
       fps: (gaps.length * 1000) / (last - start),
@@ -172,6 +188,7 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
             settled &&
             e.renderer.domElement.width === WIDTH &&
             e.renderer.domElement.height === HEIGHT,
+          expectedPose,
           hour: e.clock.hour,
           fov: e.camera.fov,
           viewport: [innerWidth, innerHeight],
@@ -192,6 +209,8 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
             ? { ...e.architecturalDetails.stats }
             : null,
           streetscape: e.streetscapeKit?.snapshot() ?? null,
+          shadowCoverage: e.shadowCoverageState,
+          ssaoExclusions: e.aoExclusions ? { ...e.aoExclusions.stats } : null,
           citizen:
             e.navigation?.walker.group.userData.assetState ??
             'procedural-compatible',
@@ -210,13 +229,14 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
             screenshot: e.screenshot(),
           }),
         });
-        if (!response.ok) throw new Error(`Capture failed: ${response.status}`);
+        if (!response.ok || !row.valid) throw new Error(`Capture failed or camera/readiness invalid: ${response.status}`);
       }
       status.textContent = `Completed matched ${quality}: 4 views`;
     } catch (error) {
       status.textContent = `Upgrade check failed: ${error}`;
     } finally {
       busy = false;
+      e.controls.enabled = e.navigation?.mode === 'orbit';
     }
   }
   for (const quality of ['high', 'ultra'] as const) {
@@ -261,6 +281,7 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
     document.addEventListener('visibilitychange', visibility);
     try {
       select('citizen', e.settings.quality);
+      expectedPose = null; // This check intentionally follows real navigation.
       status.textContent = 'Preparing citizen motion';
       const warmup = await collect(
         5000,
@@ -310,9 +331,77 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
       nav.keys.clear();
       document.removeEventListener('visibilitychange', visibility);
       busy = false;
+      e.controls.enabled = e.navigation?.mode === 'orbit';
     }
   };
   section.appendChild(motion);
+  const lighting = document.createElement('button');
+  lighting.textContent = 'Upgrade lighting sweep';
+  lighting.onclick = async () => {
+    if (busy) return;
+    busy = true;
+    try {
+      for (const view of ['gastown-roofs', 'gastown-street'] as const) {
+        for (const hour of [14, 19, 23]) {
+          select(view, 'high');
+          e.setClock({ hour, running: false });
+          status.textContent = `Lighting ${view} / ${hour}:00`;
+          const ready = () => {
+            const architecture = e.architecturalDetails?.stats;
+            const kit = e.streetscapeKit?.snapshot();
+            return (
+              (!architecture ||
+                (architecture.pendingCells === 0 &&
+                  architecture.readySelectedCells ===
+                    architecture.selectedCells)) &&
+              (!kit ||
+                (!kit.failed &&
+                  !kit.loading &&
+                  kit.pendingCells === 0 &&
+                  (!kit.selectedBays || kit.loaded)))
+            );
+          };
+          const warmup = await collect(5000, ready, 30000);
+          const row = {
+            kind: 'upgrade-lighting-v1',
+            id: view,
+            hour,
+            quality: 'high',
+            valid: warmup.valid && ready(),
+            settleMs: warmup.sampleMs,
+            maxPoseError: warmup.maxPoseError,
+            expectedPose,
+            render: [e.renderer.domElement.width, e.renderer.domElement.height],
+            camera: e.camera.position.toArray(),
+            target: e.controls.target.toArray(),
+            shadowCoverage: e.shadowCoverageState,
+            ssaoExclusions: e.aoExclusions ? { ...e.aoExclusions.stats } : null,
+            streetscape: e.streetscapeKit?.snapshot(),
+            protocol:
+              'Actual High renderer at fixed 1080p, three fixed hours and two fixed cameras; visible readiness warmup. Visual inspection, not a matched performance sample.',
+          };
+          const response = await fetch('/__visual-qa', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: `high-lighting-${view}-${hour}h`,
+              row,
+              screenshot: e.screenshot(),
+            }),
+          });
+          if (!response.ok || !row.valid)
+            throw new Error('Lighting capture failed');
+        }
+      }
+      status.textContent = 'Completed lighting sweep: 6 actual renders';
+    } catch (error) {
+      status.textContent = `Lighting sweep failed: ${error}`;
+    } finally {
+      busy = false;
+      e.controls.enabled = e.navigation?.mode === 'orbit';
+    }
+  };
+  section.appendChild(lighting);
   const restore = document.createElement('button');
   restore.textContent = 'Restore normal render size';
   restore.onclick = () => {
