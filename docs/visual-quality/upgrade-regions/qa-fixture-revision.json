@@ -1,0 +1,13 @@
+{
+  "priorCaptureSourceFingerprint": "58a09f7ff60e3f8177d70f9cf7b7b8c33703e7db28bf62a18bd55d0fd0a91d65",
+  "correctedEnduranceSourceFingerprint": "5323c088c2ee52ba5cdf711dc509e763b0d9ff57d69fcd903ba823a2cbb20639",
+  "changedVisualSourceFiles": [
+    {
+      "path": "lib/city/upgrade-endurance-qa.ts",
+      "before": "7e2bc5020ff4b22d9ac403fa98790a8f6046ab70740f0f98b03c881ea38451b7",
+      "after": "75e44c622a4d89048d59e5157e79b35e72f6c9e33a224a0b7baf0e4592a2b0e6"
+    }
+  ],
+  "allOtherVisualSourceFilesIdentical": true,
+  "note": "Only the opt-in endurance QA module changed after the18 visual captures, compatible check and Robson pass. The corrected10-minute report uses its rebuilt QA bundle. Production engine, navigation, collision, models, rendering and datasets are byte-identical across these fingerprints. Test and documentation changes are outside the visual-source hash."
+}

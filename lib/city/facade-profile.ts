@@ -7,7 +7,8 @@ export type FacadeKind =
   | 'lowrise-masonry'
   | 'midrise-grid'
   | 'balcony-slab'
-  | 'curtain-wall';
+  | 'curtain-wall'
+  | 'domestic-cladding';
 export type Identity = {
   structureId?: string | number;
   buildingId?: string | number;
@@ -133,6 +134,23 @@ export const facadeTemplates: readonly Template[] = [
     balconies: false,
     colors: [0x96acaf, 0x8d9fa5, 0xa1b1b0],
   },
+  {
+    kind: 'domestic-cladding',
+    styleIndex: 5,
+    targetBayM: 2.65,
+    storeyM: 2.85,
+    groundStoreyM: 1.35,
+    edgeMarginM: 0.5,
+    pane: [0.25, 0.75, 0.26, 0.79],
+    wallRoughness: 0.88,
+    glassRoughness: 0.31,
+    brickNormalScale: 0,
+    brickTileM: 1.728,
+    frameWidthM: 0.07,
+    frameDepthM: 0.055,
+    balconies: false,
+    colors: [0xc1bda9, 0x97a7a1, 0xb8b2a6, 0x98a5ae],
+  },
 ];
 function finite(value: number, name: string): number {
   if (!Number.isFinite(value)) throw new Error(`${name} must be finite`);
@@ -200,13 +218,15 @@ export function createProfile(structure: Structure): Profile {
     heritage = h < 48 && x > 700 && x < 1850 && z > -70 && z < 540;
   const index = heritage
     ? 0
-    : h < 18
-      ? 1
-      : h < 48
-        ? 2
-        : h < 180 && area < 1800 && hash % 100 < 55
-          ? 3
-          : 4;
+    : h <= 12 && area <= 350
+      ? 5
+      : h < 18
+        ? 1
+        : h < 48
+          ? 2
+          : h < 180 && area < 1800 && hash % 100 < 55
+            ? 3
+            : 4;
   const { colors, ...template } = facadeTemplates[index];
   return Object.freeze({
     ...template,
@@ -337,6 +357,7 @@ export function groundGlazing(
 ): readonly [number, number] {
   if (
     profile.kind === 'heritage-brick' ||
+    profile.kind === 'domestic-cladding' ||
     extent.minHeightM > 0 ||
     !frontageGrades.length ||
     !Number.isFinite(foundationY) ||

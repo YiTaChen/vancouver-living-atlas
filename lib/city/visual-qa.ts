@@ -6,6 +6,7 @@ import { project } from './geo';
 import { auditCausewayTravel } from './causeway-qa';
 import { installReleaseQAControls } from './release-qa-controls';
 import { installUpgradeQA } from './upgrade-qa';
+import { installUpgradeEnduranceQA } from './upgrade-endurance-qa';
 
 const cases = [
   {id:'station-lobby', interiorSite:'waterfront', interiorAt:[0,5], interiorYaw:Math.PI},
@@ -262,15 +263,29 @@ export function installVisualQA(e: CityEngine) {
   output.style.cssText = 'display:block;width:100%;height:70px;color:white';
   panel.appendChild(label);
   panel.appendChild(status);
-  installUpgradeQA(e, panel);
   let running = false,
     selectedCase = 'downtown';
+  const runLease = {
+    isRunning: () => running,
+    begin: () => {
+      if (running) return false;
+      running = true;
+      return true;
+    },
+    end: () => {
+      running = false;
+    },
+  };
+  installUpgradeQA(e, panel, runLease);
   const button = (name: string, fn: () => void) => {
     const b = document.createElement('button');
     b.textContent = name;
     b.style.cssText =
       'padding:7px;margin:3px;border:1px solid #709598;cursor:pointer';
-    b.onclick = fn;
+    b.onclick = () => {
+      if (running && name !== 'Stop upgrade endurance') return;
+      fn();
+    };
     panel.appendChild(b);
   };
   const apply = (id: string, quality: VisualQuality) => {
@@ -579,14 +594,17 @@ export function installVisualQA(e: CityEngine) {
       const test = cases.find((c) => c.id === id);
       return !!test && ('view' in test || 'landmarkPose' in test);
     },
-    begin: () => {
-      if (running) return false;
-      running = true;
-      return true;
-    },
-    end: () => {
-      running = false;
-    },
+    begin: runLease.begin,
+    end: runLease.end,
+    panel,
+    status,
+    output,
+  });
+  installUpgradeEnduranceQA(e, {
+    button,
+    apply,
+    begin: runLease.begin,
+    end: runLease.end,
     panel,
     status,
     output,

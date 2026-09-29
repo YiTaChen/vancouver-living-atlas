@@ -67,20 +67,38 @@ float architectureNoise(vec2 p){
     vec3 enrichedWall=wall*(.89+weather*.17);
     float footStain=(1.0-smoothstep(vLayout.w+.1,vLayout.w+2.4,vFacade.y));
     enrichedWall*=1.0-footStain*.12;
-    if(facadeStyle>1){
+    if(facadeStyle>1 && facadeStyle<5){
       vec2 panel=fract(vFacade.xy/vec2(1.7,pattern.x));
       vec2 seamAA=max(fwidth(vFacade.xy/vec2(1.7,pattern.x)),vec2(.002));
       float panelSeam=1.0-smoothstep(.0,.009+seamAA.x,min(panel.x,1.0-panel.x));
       enrichedWall*=1.0-panelSeam*.13;
     }
+    if(facadeStyle==5){
+      float course=fract(vFacade.y/.19), courseAA=max(fwidth(vFacade.y/.19),.006);
+      float lap=1.0-smoothstep(.0,.065+courseAA,min(course,1.0-course));
+      enrichedWall*=1.0-lap*.105*(1.0-smoothstep(.35,1.2,courseAA));
+      float trim=(1.0-smoothstep(.015,.025+aa.x,abs(grid.x-bounds.x)))+(1.0-smoothstep(.015,.025+aa.x,abs(grid.x-bounds.y)));
+      float trimHeight=smoothstep(bounds.z-aa.y,bounds.z+aa.y,grid.y)*(1.0-smoothstep(bounds.w-aa.y,bounds.w+aa.y,grid.y))*valid;
+      enrichedWall=mix(enrichedWall,vec3(.63,.65,.61),min(1.0,trim)*trimHeight*.24);
+    }
     diffuseColor.rgb=mix(enrichedWall,enrichedGlass,facadePane);
+    if(facadeStyle==5 && vBaseWindow.y<-.5){
+      vec2 door=vec2(abs(vFacade.x-vBaseWindow.x),vFacade.y+vBaseWindow.y+1.0);
+      vec2 doorAA=max(fwidth(vFacade.xy),vec2(.006));
+      float panel=(1.0-smoothstep(.43-doorAA.x,.43+doorAA.x,door.x))*smoothstep(-doorAA.y,doorAA.y,door.y)*(1.0-smoothstep(2.15-doorAA.y,2.15+doorAA.y,door.y));
+      vec3 paint=mix(vec3(.10,.15,.14),vec3(.23,.19,.145),mod(vFacade.w,3.0)/2.0);
+      float recess=smoothstep(.02,.06,door.x)*smoothstep(.03,.10,door.y)*(1.0-smoothstep(2.05,2.13,door.y));
+      diffuseColor.rgb=mix(diffuseColor.rgb,paint*mix(.7,1.0,recess),panel);
+      facadePane*=1.0-panel; facadeLit*=1.0-panel;
+    }
   `,
   );
   // Roof UVs intentionally retain the old negative sentinel. World coordinates
   // add mineral grain, membrane bays and subdued material variation at any scale.
   const roof = `
     if(vFacade.x<0.0){
-      vec2 roofUv=vArchitectureWorld.xz;
+      // aLayout is a roof frame on negative-UV triangles, shared by both slopes.
+      vec2 roofUv=vec2(dot(vArchitectureWorld.xz,vLayout.xy),dot(vArchitectureWorld.xz,vec2(-vLayout.y,vLayout.x)))-vLayout.zw;
       float roofSeed=architectureHash(vec2(vFacade.w,18.0));
       float roofNoise=architectureNoise(roofUv*.9)+architectureNoise(roofUv*.13)*.65;
       vec3 roofBase=mix(vec3(.145,.175,.174),vec3(.285,.275,.239),roofSeed);
@@ -89,6 +107,15 @@ float architectureNoise(vec2 p){
       float roofJoint=1.0-smoothstep(.0,.014+roofAA.x,min(roofGrid.x,1.0-roofGrid.x));
       roofJoint=max(roofJoint,1.0-smoothstep(.0,.014+roofAA.y,min(roofGrid.y,1.0-roofGrid.y)));
       diffuseColor.rgb=roofBase*(.87+roofNoise*.14)*(1.0-roofJoint*.11);
+      if(vFacade.y< -1.5){
+        vec2 shingle=fract(vec2(roofUv.x/.45+step(.5,fract(roofUv.y/.48))*.5,roofUv.y/.24));
+        vec2 shingleAA=max(fwidth(vec2(roofUv.x/.45,roofUv.y/.24)),vec2(.006));
+        float line=(1.0-smoothstep(.0,.025+shingleAA.y,min(shingle.y,1.0-shingle.y)));
+        line=max(line,(1.0-smoothstep(.0,.025+shingleAA.x,min(shingle.x,1.0-shingle.x)))*.45);
+        vec3 slate=mix(vec3(.10,.135,.145),vec3(.22,.215,.20),roofSeed);
+        float shingleDetail=1.0-smoothstep(.35,1.5,max(shingleAA.x,shingleAA.y));
+        diffuseColor.rgb=slate*(.9+roofNoise*.12)*(1.0-line*.14*shingleDetail);
+      }
     }
   `;
   shader.fragmentShader = shader.fragmentShader.replace(

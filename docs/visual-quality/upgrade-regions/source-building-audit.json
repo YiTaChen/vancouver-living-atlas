@@ -1,0 +1,324 @@
+{
+  "kind": "domestic-source-audit-v1",
+  "sourceFeatures": 7630,
+  "renderedParts": 7794,
+  "renderedStructures": 3370,
+  "familyCounts": {
+    "heritage-brick": 155,
+    "lowrise-masonry": 976,
+    "midrise-grid": 524,
+    "balcony-slab": 185,
+    "curtain-wall": 178,
+    "domestic-cladding": 1352
+  },
+  "eligibleGables": 676,
+  "roofSourceCounts": {
+    "cov-2009": 676
+  },
+  "roofTagCounts": {
+    "Pitched": 676
+  },
+  "extraTriangles": 2704,
+  "bodyMeshes": 1,
+  "mergedBodyTriangles": 177092,
+  "maxEnvelopeError": 1.7763568394002505e-15,
+  "minUpNormal": 0.8938673616019336,
+  "regions": [
+    {
+      "name": "West End and west downtown sample",
+      "bbox": [
+        -123.15,
+        49.28,
+        -123.127,
+        49.295
+      ],
+      "structures": 830,
+      "families": {
+        "heritage-brick": 0,
+        "lowrise-masonry": 277,
+        "midrise-grid": 233,
+        "balcony-slab": 46,
+        "curtain-wall": 42,
+        "domestic-cladding": 232
+      },
+      "eligibleGables": 122
+    },
+    {
+      "name": "Gastown and east downtown sample",
+      "bbox": [
+        -123.117,
+        49.28,
+        -123.095,
+        49.291
+      ],
+      "structures": 309,
+      "families": {
+        "heritage-brick": 152,
+        "lowrise-masonry": 46,
+        "midrise-grid": 45,
+        "balcony-slab": 19,
+        "curtain-wall": 15,
+        "domestic-cladding": 32
+      },
+      "eligibleGables": 15
+    },
+    {
+      "name": "Kitsilano and south False Creek sample",
+      "bbox": [
+        -123.165,
+        49.267,
+        -123.11,
+        49.28
+      ],
+      "structures": 1732,
+      "families": {
+        "heritage-brick": 0,
+        "lowrise-masonry": 486,
+        "midrise-grid": 155,
+        "balcony-slab": 70,
+        "curtain-wall": 57,
+        "domestic-cladding": 964
+      },
+      "eligibleGables": 499
+    }
+  ],
+  "candidates": [
+    {
+      "region": "West End and west downtown sample",
+      "houses": [
+        {
+          "key": "145450",
+          "coord": [
+            -123.13082495,
+            49.2818510275
+          ],
+          "sourceRoof": "Pitched",
+          "source": "cov-2009",
+          "height": 10.14,
+          "eaveHeight": 8.551462372739797,
+          "frame": {
+            "axis": [
+              0.6995972268413803,
+              -0.714537416931997
+            ],
+            "origin": [
+              -473.524329368595,
+              176.54839499049314
+            ],
+            "edge": 2
+          },
+          "kind": "domestic-cladding",
+          "nearbyWithin90m": 25
+        },
+        {
+          "key": "145467",
+          "coord": [
+            -123.1309403225,
+            49.2818902925
+          ],
+          "sourceRoof": "Pitched",
+          "source": "cov-2009",
+          "height": 9.81,
+          "eaveHeight": 8.283434926135538,
+          "frame": {
+            "axis": [
+              0.6996851809003432,
+              -0.7144512912917537
+            ],
+            "origin": [
+              -476.2413200280182,
+              167.5630927166184
+            ],
+            "edge": 0
+          },
+          "kind": "domestic-cladding",
+          "nearbyWithin90m": 24
+        },
+        {
+          "key": "145281",
+          "coord": [
+            -123.13064752,
+            49.28171993
+          ],
+          "sourceRoof": "Pitched",
+          "source": "cov-2009",
+          "height": 8.26,
+          "eaveHeight": 6.095200714131744,
+          "frame": {
+            "axis": [
+              0.6997637635524807,
+              -0.7143743242998504
+            ],
+            "origin": [
+              -474.89311502816173,
+              196.0746631702691
+            ],
+            "edge": 2
+          },
+          "kind": "domestic-cladding",
+          "nearbyWithin90m": 22
+        }
+      ]
+    },
+    {
+      "region": "Gastown and east downtown sample",
+      "houses": [
+        {
+          "key": "144520",
+          "coord": [
+            -123.09677014500001,
+            49.2805178775
+          ],
+          "sourceRoof": "Pitched",
+          "source": "cov-2009",
+          "height": 11.56,
+          "eaveHeight": 10.470118388575074,
+          "frame": {
+            "axis": [
+              0.0014190347263613639,
+              0.9999989931697157
+            ],
+            "origin": [
+              613.4871631929802,
+              -2266.8006328193883
+            ],
+            "edge": 1
+          },
+          "kind": "domestic-cladding",
+          "nearbyWithin90m": 4
+        },
+        {
+          "key": "144527",
+          "coord": [
+            -123.096660745,
+            49.2805208975
+          ],
+          "sourceRoof": "Pitched",
+          "source": "cov-2009",
+          "height": 10.5,
+          "eaveHeight": 9.0201016516652,
+          "frame": {
+            "axis": [
+              0.0013387357047303418,
+              0.9999991038929549
+            ],
+            "origin": [
+              612.979587687519,
+              -2274.7941071200007
+            ],
+            "edge": 1
+          },
+          "kind": "domestic-cladding",
+          "nearbyWithin90m": 4
+        },
+        {
+          "key": "144590",
+          "coord": [
+            -123.0960334,
+            49.2805433175
+          ],
+          "sourceRoof": "Pitched",
+          "source": "cov-2009",
+          "height": 7.87,
+          "eaveHeight": 5.666399999999999,
+          "frame": {
+            "axis": [
+              0.0012239983906448615,
+              0.9999992509136892
+            ],
+            "origin": [
+              610.2785438304713,
+              -2320.4203538654765
+            ],
+            "edge": 3
+          },
+          "kind": "domestic-cladding",
+          "nearbyWithin90m": 4
+        }
+      ]
+    },
+    {
+      "region": "Kitsilano and south False Creek sample",
+      "houses": [
+        {
+          "key": "134681",
+          "coord": [
+            -123.151607335,
+            49.274209915
+          ],
+          "sourceRoof": "Pitched",
+          "source": "cov-2009",
+          "height": 7.42,
+          "eaveHeight": 5.3424,
+          "frame": {
+            "axis": [
+              0.009048651046441765,
+              -0.9999590601190831
+            ],
+            "origin": [
+              -1327.9295541540223,
+              -1702.234575851965
+            ],
+            "edge": 2
+          },
+          "kind": "domestic-cladding",
+          "nearbyWithin90m": 42
+        },
+        {
+          "key": "137679",
+          "coord": [
+            -123.14859089000001,
+            49.276017695
+          ],
+          "sourceRoof": "Pitched",
+          "source": "cov-2009",
+          "height": 9.85,
+          "eaveHeight": 8.409139311600363,
+          "frame": {
+            "axis": [
+              0.002206286258957738,
+              0.9999975661475099
+            ],
+            "origin": [
+              1107.9287588907844,
+              1497.5981612092926
+            ],
+            "edge": 3
+          },
+          "kind": "domestic-cladding",
+          "nearbyWithin90m": 42
+        },
+        {
+          "key": "134768",
+          "coord": [
+            -123.1497735675,
+            49.274264294999995
+          ],
+          "sourceRoof": "Pitched",
+          "source": "cov-2009",
+          "height": 6.9,
+          "eaveHeight": 5.347169102475156,
+          "frame": {
+            "axis": [
+              0.9996104921767718,
+              0.02790813376261397
+            ],
+            "origin": [
+              -1543.9514101886978,
+              1350.033331623153
+            ],
+            "edge": 2
+          },
+          "kind": "domestic-cladding",
+          "nearbyWithin90m": 41
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Counts describe existing repository data; cov-2009 epoch remains 2009.",
+    "All 3 regional boxes are explicit visual-QA sample extents, not official neighborhood boundaries.",
+    "A Pitched source tag confirms only pitched type; simple gable, pitch and ridge direction are representative.",
+    "Audit executes production body builder with constant foundation for geometry/provenance; terrain and visibility require browser QA."
+  ]
+}

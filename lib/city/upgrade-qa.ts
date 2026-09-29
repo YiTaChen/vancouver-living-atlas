@@ -3,6 +3,18 @@ import type { CityEngine } from './engine';
 import type { VisualQuality } from './quality';
 import { project } from './geo';
 import {
+  DOMESTIC_QA_VIEWS,
+  selectDomesticQA,
+  type DomesticQAView,
+} from './domestic-qa';
+import {
+  MODERN_BAY_QA_VIEWS,
+  selectModernBayQA,
+  modernBayQAState,
+  restoreModernBayQA,
+  type ModernBayQAView,
+} from './modern-bay-qa';
+import {
   clearQAOrbitMomentum,
   captureQAPose,
   qaPoseError,
@@ -18,7 +30,17 @@ type View = (typeof VIEWS)[number];
 const WIDTH = 1920,
   HEIGHT = 1080;
 
-export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
+type QARunLease = {
+  isRunning(): boolean;
+  begin(): boolean;
+  end(): void;
+};
+
+export function installUpgradeQA(
+  e: CityEngine,
+  parent: HTMLElement,
+  lease?: QARunLease,
+) {
   const section = document.createElement('section');
   section.setAttribute('aria-label', 'City quality upgrade checks');
   section.style.cssText = 'border:1px solid #b6cd85;padding:8px;margin:8px 0';
@@ -39,6 +61,7 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
     e.camera.updateProjectionMatrix();
   }
   function select(view: View, quality: VisualQuality) {
+    restoreModernBayQA(e);
     const nav = e.navigation!;
     nav.keys.clear();
     nav.setMode('orbit');
@@ -140,7 +163,7 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
     };
   }
   async function suite(quality: VisualQuality) {
-    if (busy) return;
+    if (busy || lease?.begin() === false) return;
     busy = true;
     try {
       for (const view of VIEWS) {
@@ -229,7 +252,10 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
             screenshot: e.screenshot(),
           }),
         });
-        if (!response.ok || !row.valid) throw new Error(`Capture failed or camera/readiness invalid: ${response.status}`);
+        if (!response.ok || !row.valid)
+          throw new Error(
+            `Capture failed or camera/readiness invalid: ${response.status}`,
+          );
       }
       status.textContent = `Completed matched ${quality}: 4 views`;
     } catch (error) {
@@ -237,6 +263,7 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
     } finally {
       busy = false;
       e.controls.enabled = e.navigation?.mode === 'orbit';
+      lease?.end();
     }
   }
   for (const quality of ['high', 'ultra'] as const) {
@@ -250,7 +277,7 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
     const button = document.createElement('button');
     button.textContent = `Upgrade preview ${view}`;
     button.onclick = () => {
-      if (busy) return;
+      if (busy || lease?.isRunning()) return;
       select(view, e.settings.quality);
       status.textContent = `Preview ${view} / ${e.settings.quality}`;
     };
@@ -259,7 +286,7 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
   const inspect = document.createElement('button');
   inspect.textContent = 'Inspect upgrade assets';
   inspect.onclick = () => {
-    if (busy) return;
+    if (busy || lease?.isRunning()) return;
     status.textContent = JSON.stringify({
       architecture: e.architecturalDetails?.stats,
       streetscape: e.streetscapeKit?.snapshot(),
@@ -270,7 +297,7 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
   const motion = document.createElement('button');
   motion.textContent = 'Upgrade citizen motion 8s';
   motion.onclick = async () => {
-    if (busy) return;
+    if (busy || lease?.begin() === false) return;
     busy = true;
     const nav = e.navigation!;
     let hidden = document.hidden;
@@ -332,13 +359,14 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
       document.removeEventListener('visibilitychange', visibility);
       busy = false;
       e.controls.enabled = e.navigation?.mode === 'orbit';
+      lease?.end();
     }
   };
   section.appendChild(motion);
   const lighting = document.createElement('button');
   lighting.textContent = 'Upgrade lighting sweep';
   lighting.onclick = async () => {
-    if (busy) return;
+    if (busy || lease?.begin() === false) return;
     busy = true;
     try {
       for (const view of ['gastown-roofs', 'gastown-street'] as const) {
@@ -399,13 +427,87 @@ export function installUpgradeQA(e: CityEngine, parent: HTMLElement) {
     } finally {
       busy = false;
       e.controls.enabled = e.navigation?.mode === 'orbit';
+      lease?.end();
     }
   };
   section.appendChild(lighting);
+  const regional = document.createElement('button');
+  regional.textContent = 'Upgrade regional views';
+  regional.onclick = async () => {
+    if (busy || lease?.begin() === false) return;
+    busy = true;
+    try {
+      const views = [...DOMESTIC_QA_VIEWS, ...MODERN_BAY_QA_VIEWS];
+      for (const view of views) {
+        restoreModernBayQA(e);
+        e.applySettings({ ...e.settings, quality: 'high' });
+        const modern =
+          view.id === 'west-end-modern-bay' ||
+          view.id === 'yaletown-modern-bay';
+        const metadata = modern
+          ? selectModernBayQA(e, view.id as ModernBayQAView)
+          : selectDomesticQA(e, view.id as DomesticQAView);
+        expectedPose = metadata.expectedPose;
+        e.controls.enabled = false;
+        status.textContent = `Preparing regional ${view.id}`;
+        const ready = () => {
+          const stats = e.architecturalDetails?.stats;
+          return (
+            (!stats ||
+              (stats.pendingCells === 0 &&
+                stats.readySelectedCells === stats.selectedCells)) &&
+            (!modern || modernBayQAState(e, view.id as ModernBayQAView).ready)
+          );
+        };
+        const warmup = await collect(5000, ready, 30000);
+        const row = {
+          kind: 'upgrade-regional-v1',
+          ...metadata,
+          maxPoseError: warmup.maxPoseError,
+          quality: e.settings.quality,
+          valid: warmup.valid && ready(),
+          settleMs: warmup.sampleMs,
+          render: [e.renderer.domElement.width, e.renderer.domElement.height],
+          camera: e.camera.position.toArray(),
+          target: e.controls.target.toArray(),
+          architecture: e.architecturalDetails
+            ? { ...e.architecturalDetails.stats }
+            : null,
+          streetscape: e.streetscapeKit?.snapshot(),
+          modernBay: modern
+            ? modernBayQAState(e, view.id as ModernBayQAView)
+            : null,
+          protocol:
+            'Actual source-backed regional view, High, 14:00, fixed 1080p; visible readiness warmup, separate from four-view matched performance samples.',
+        };
+        const response = await fetch('/__visual-qa', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: `high-regional-${view.id}`,
+            row,
+            screenshot: e.screenshot(),
+          }),
+        });
+        if (!response.ok || !row.valid)
+          throw new Error(`Regional view failed: ${view.id}`);
+      }
+      status.textContent = 'Completed regional views: 4 source-backed captures';
+    } catch (error) {
+      status.textContent = `Regional check failed: ${error}`;
+    } finally {
+      restoreModernBayQA(e);
+      busy = false;
+      e.controls.enabled = e.navigation?.mode === 'orbit';
+      lease?.end();
+    }
+  };
+  section.appendChild(regional);
   const restore = document.createElement('button');
   restore.textContent = 'Restore normal render size';
   restore.onclick = () => {
-    if (busy) return;
+    if (busy || lease?.isRunning()) return;
+    restoreModernBayQA(e);
     const w = e.container.clientWidth,
       h = e.container.clientHeight;
     e.camera.aspect = w / h;
