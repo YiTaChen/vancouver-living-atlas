@@ -7,6 +7,12 @@ import { SkyEffects } from './sky-effects';
 import { createBeachAmenities } from './beach-amenities';
 import { installSSAOBlur4 } from './ssao-blur4';
 import { trackSSAOResources } from './ssao-resources';
+import { SSAOExclusions } from './ssao-exclusions';
+import {
+  shadowCoverage,
+  SHADOW_DEPTH,
+  type ShadowCoverage,
+} from './shadow-policy';
 import { LandmarkGpuWarmup } from './gpu-landmark-warmup';
 import { warmComposer } from './warm-composer';
 import type { LandmarkWorkerClient } from './landmark-worker-client';
@@ -93,6 +99,8 @@ export class CityEngine {
   fxaa: ShaderPass | null = null;
   pageHide = () => this.destroy();
   ssao: SSAOPass | null = null;
+  aoExclusions: SSAOExclusions | null = null;
+  shadowCoverageState: ShadowCoverage | null = null;
   roadMaterials = new Map<string, THREE.MeshStandardMaterial>();
   camera: THREE.PerspectiveCamera;
   renderer: THREE.WebGLRenderer;
@@ -297,8 +305,8 @@ export class CityEngine {
       right: 2700,
       top: 2700,
       bottom: -2700,
-      near: 100,
-      far: 9500,
+      near: SHADOW_DEPTH.near,
+      far: SHADOW_DEPTH.far,
     });
     this.sun.shadow.mapSize.set(2048, 2048);
     this.sun.shadow.bias = -0.0002;
@@ -632,30 +640,50 @@ export class CityEngine {
     );
   }
   updateShadowFrustum() {
-    if (this.settings.mode !== 'orbit') return;
-    const distance = this.camera.position.distanceTo(this.controls.target);
-    const close = this.settings.quality === 'ultra' && distance < 1800;
-    const extent = close
-      ? Math.ceil(Math.max(140, distance * 0.95) / 32) * 32
-      : 2700;
-    const anchor = close
-      ? this.controls.target.clone().divideScalar(32).round().multiplyScalar(32)
-      : new THREE.Vector3();
-    if (
-      this.sun.shadow.camera.right === extent &&
-      this.sun.target.position.equals(anchor)
-    )
-      return;
-    this.sun.position.sub(this.sun.target.position).add(anchor);
-    this.sun.target.position.copy(anchor);
-    Object.assign(this.sun.shadow.camera, {
-      left: -extent,
-      right: extent,
-      top: extent,
-      bottom: -extent,
+    if (this.compatibleGraphics || this.settings.quality === 'balanced') return;
+    const direction = this.sun.position.clone().sub(this.sun.target.position);
+    const coverage = shadowCoverage({
+      mode: this.settings.mode,
+      quality: this.settings.quality,
+      distance: this.camera.position.distanceTo(this.controls.target),
+      focus: this.controls.target.toArray(),
+      sunDirection: direction.toArray(),
+      mapSize: this.sun.shadow.mapSize.x,
+      previous: this.shadowCoverageState,
+      refreshing: this.renderer.shadowMap.needsUpdate,
     });
-    this.sun.shadow.camera.updateProjectionMatrix();
-    this.renderer.shadowMap.needsUpdate = true;
+    const camera = this.sun.shadow.camera;
+    const resized =
+      camera.right !== coverage.extent ||
+      camera.near !== SHADOW_DEPTH.near ||
+      camera.far !== SHADOW_DEPTH.far;
+    const moved =
+      this.sun.target.position.x !== coverage.anchor[0] ||
+      this.sun.target.position.y !== coverage.anchor[1] ||
+      this.sun.target.position.z !== coverage.anchor[2];
+    const biased =
+      this.sun.shadow.normalBias !== coverage.normalBias ||
+      this.sun.shadow.bias !== coverage.bias;
+    this.shadowCoverageState = coverage;
+    if (moved) {
+      // Translate light and target together: solar direction must remain exact.
+      this.sun.target.position.fromArray(coverage.anchor);
+      this.sun.position.copy(direction).add(this.sun.target.position);
+    }
+    if (resized) {
+      Object.assign(camera, {
+        left: -coverage.extent,
+        right: coverage.extent,
+        top: coverage.extent,
+        bottom: -coverage.extent,
+        near: SHADOW_DEPTH.near,
+        far: SHADOW_DEPTH.far,
+      });
+      camera.updateProjectionMatrix();
+    }
+    this.sun.shadow.normalBias = coverage.normalBias;
+    this.sun.shadow.bias = coverage.bias;
+    if (moved || resized || biased) this.renderer.shadowMap.needsUpdate = true;
   }
   ensureSSAO() {
     if (this.compatibleGraphics || this.ssao || !this.composer) return;
@@ -677,50 +705,11 @@ export class CityEngine {
     this.ssao.maxDistance = 0.005;
     // Match the two-sided road/deck surfaces used in the beauty pass.
     this.ssao.normalMaterial.side = THREE.DoubleSide;
-    const decorative: THREE.Mesh[] = [];
-    this.scene.traverse((object) => {
-      if (!(object instanceof THREE.Mesh)) return;
-      const materials = Array.isArray(object.material)
-        ? object.material
-        : [object.material];
-      if (
-        object.userData.excludeFromSSAO ||
-        object.userData.alphaFoliage ||
-        object.userData.railVehicle ||
-        object.userData.harbourVehicle ||
-        materials.every((m) => m.transparent && !m.depthWrite)
-      )
-        decorative.push(object);
-    });
+    const exclusions = new SSAOExclusions(this.scene);
+    this.aoExclusions = exclusions;
+    trackSSAOResources(this.ssao).restores.add(() => exclusions.dispose());
     const renderAO = this.ssao.render.bind(this.ssao);
-    this.ssao.render = (...args) => {
-      const visible = [
-        ...new Set([
-          ...decorative,
-          ...(this.detailedTrees?.pools.map((p) => p.foliage) || []),
-        ]),
-      ].filter((object) => {
-        const materials = Array.isArray(object.material)
-          ? object.material
-          : [object.material];
-        return (
-          object.visible &&
-          (object.userData.excludeFromSSAO ||
-            object.userData.alphaFoliage ||
-            materials.every((m) => m.transparent && !m.depthWrite))
-        );
-      });
-      visible.forEach((object) => {
-        object.visible = false;
-      });
-      try {
-        renderAO(...args);
-      } finally {
-        visible.forEach((object) => {
-          object.visible = true;
-        });
-      }
-    };
+    this.ssao.render = (...args) => exclusions.render(() => renderAO(...args));
     this.composer.insertPass(this.ssao, 1);
   }
   scheduleScenery() {
@@ -1230,23 +1219,13 @@ export class CityEngine {
       settings.quality !== 'balanced' &&
       this.camera.position.distanceTo(this.controls.target) < 4500;
     this.controls.autoRotateSpeed = 0.5;
-    const extent = settings.mode === 'orbit' ? 2700 : 170;
-    Object.assign(this.sun.shadow.camera, {
-      left: -extent,
-      right: extent,
-      top: extent,
-      bottom: -extent,
-    });
-    this.sun.shadow.camera.updateProjectionMatrix();
-    if (settings.mode !== 'orbit')
-      this.sun.target.position.copy(this.controls.target);
-    else this.sun.target.position.set(0, 0, 0);
     this.trafficGroup.visible = settings.traffic;
     if (this.railway) this.railway.group.visible = settings.trains;
     if (this.harbour) this.harbour.group.visible = settings.harbour;
     this.landmarks.visible = settings.buildings;
     this.detailedTrees?.update(true);
     this.updateLighting(true);
+    this.updateShadowFrustum?.();
   }
   setClock(patch: Partial<ClockState>) {
     this.clock.configure(patch, performance.now());
@@ -1370,14 +1349,6 @@ export class CityEngine {
         this.camera.position.y,
         this.elevation(this.camera.position.x, this.camera.position.z) + 4,
       );
-    if (
-      this.settings.mode !== 'orbit' &&
-      this.sun.target.position.distanceTo(this.controls.target) > 60
-    ) {
-      this.sun.position.sub(this.sun.target.position).add(this.controls.target);
-      this.sun.target.position.copy(this.controls.target);
-      this.renderer.shadowMap.needsUpdate = true;
-    }
     this.updateLabels();
     // LOD changes alter shadow casters even when the sun does not move.
     if (this.camera.position.distanceTo(this.lastShadowCamera) > 120) {
@@ -1553,6 +1524,8 @@ export class CityEngine {
     this.resizeObserver.disconnect();
     this.labelElements.forEach((l) => l.element.remove());
     this.minimap = null;
+    this.aoExclusions?.dispose();
+    this.aoExclusions = null;
     this.travelReturn?.destroy();
     this.flight?.destroy();
     this.navigation?.destroy();

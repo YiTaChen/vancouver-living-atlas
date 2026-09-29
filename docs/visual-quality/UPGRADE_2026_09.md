@@ -7,7 +7,7 @@ Approved scope: improve the existing Vancouver atlas in stages, validate each re
 | P0 | Matched-resolution aerial, roof, street and citizen baseline | Complete: [8 captures](upgrade-baseline/README.md) |
 | P1 | Ordinary-building materials, roofs and low-rise architecture | Complete: [8 captures](upgrade-architecture/README.md) |
 | P2 | Original Blender streetscape GLBs and rigged citizen | Complete: [8 captures and motion](upgrade-assets/README.md) |
-| P3 | Bounded visible detail, asset lifecycle and rendering calibration | Pending |
+| P3 | Bounded visible detail, asset lifecycle and rendering calibration | Complete: [8 matched and 6 lighting captures](upgrade-render/README.md) |
 | P4 | Expand reusable architecture across the existing city and validate travel | Pending |
 
 ## Matched evidence
@@ -47,3 +47,15 @@ The original citizen is a privately owned skinned GLB: 37,799 triangles, 22 join
 Both generators, manifests, licensing and geometry/lifecycle tests are checked in. No third-party model, texture or reference-project code is included. Asset readiness is now part of the matched street/citizen warmup; captures record actual selected/visible kit counts and citizen state. `Upgrade citizen motion 8s` records three real movement snapshots using existing navigation input rather than moving the mesh independently.
 
 P2 validation: TypeScript, all 428 tests and the normal Firebase build passed. Eight final matched images and three actual moving-citizen captures share one source fingerprint. Chrome reported no warnings/errors. High measured 18.9–25.7 FPS and Ultra 16.2–22.1 FPS; several Ultra samples are slower than P1, so this is a content-quality gain rather than a claimed rendering speedup. The source-data placement audit accepts 108 heritage and 13 modern bays before range/LOD budgets; it does not imply every frontage is upgraded. Original coat/denim weight discontinuity, a neck attachment gap and physical sill clearance were corrected before acceptance.
+
+## P3 implementation
+
+High and Ultra now use the same camera-distance-aware shadow coverage policy with their existing map sizes. The light and its target translate together, preserving solar direction. Coverage snaps in the light plane to actual shadow texels; a retained unsnapped center prevents quantization drift as the sun moves. Bounded recentering and extent hysteresis avoid redrawing for every small camera movement. Near-contact bias is calibrated in metres against the existing shadow depth range. This improves the use of the existing maps rather than increasing their resolution or introducing cascaded shadows.
+
+SSAO exclusion membership now follows public scene child-add/remove events, including asynchronously loaded glass, foliage and disappearing asset cells. The guard restores object visibility and scene material overrides even when the normal pass fails, and unregisters listeners on pass or engine disposal. Opaque landmark glass still participates in the normal render.
+
+Roof cells retain the same 650-instance limit but distribute a first equipment pair across eligible roofs, then spend remaining capacity on prominent roofs. Previously, source iteration could exhaust a cell on small roofs before reaching a large central roof. Producers pause after their first pair and resume only while useful capacity remains; cancellation closes paused producers and deferred descriptors stay bounded. A source diagnostic for the nearest 16 roof cells measured 18,052 cooperative preparation steps versus 13,447 for the old unfair order; these are scheduling steps, not measured frame time. The discarded first draft used 38,979 steps. Browser readiness and actual image evidence determine whether the accepted policy remains practical.
+
+Low-sun validation exposed roof shadow bands with the noon calibration. Receiver bias now accounts for the PCF footprint and solar slope, stays bounded in world metres, and remains paired with the cached solar shadow map until its scheduled refresh. The close noon calibration is preserved. QA drains residual OrbitControls damping before setting a view, prevents orbit input during capture, and rejects any frame drifting more than 5 cm from the assigned camera/target. Earlier archived P0–P2 matched poses were checked against P0 and remain consistent.
+
+P3 validation: TypeScript, all 444 repository tests and the normal Firebase build passed. All eight matched captures and six fixed-pose lighting captures have one source fingerprint and valid readiness; Chrome reported no runtime warnings/errors. High measured 20.1–26.2 FPS and Ultra 21.2–25.2 FPS on the same Radeon Pro 560X, with at most 15.03 s warmup. Short-sample variance prevents a broad speedup claim.

@@ -3,6 +3,7 @@ import type { CityEngine } from './engine';
 import { project, rings } from './geo';
 import { replacedBuilding } from './replaced-buildings';
 import { type Profile } from './facade-profile';
+import { roofCellWork } from './architecture-roof-budget';
 import {
   architectureWork,
   type ArchitectureBox,
@@ -249,7 +250,14 @@ export class ArchitecturalDetails {
       if (!record) return;
       this.build = {
         record,
-        work: architectureWork(record.cell.parts, record.tier),
+        work:
+          record.tier === 'roof'
+            ? roofCellWork(
+                record.cell.parts,
+                ARCHITECTURE_BUDGET.roofInstancesPerCell,
+                this.e.camera.position.toArray(),
+              )
+            : architectureWork(record.cell.parts, record.tier),
         masonry: [],
         metal: [],
       };
