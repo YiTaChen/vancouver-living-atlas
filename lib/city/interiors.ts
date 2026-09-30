@@ -4,6 +4,8 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { project, inPolygon } from './geo';
 import type { CityEngine } from './engine';
 import type { PlacementPoint } from './placement-geometry';
+import { LightLabExhibit } from './light-lab-exhibit';
+import type { LightLevels } from './light-lab';
 export type InteriorId = 'science' | 'canada' | 'waterfront';
 type P = [number, number, number];
 type XZ = [number, number];
@@ -230,6 +232,8 @@ interface Site {
 export class PublicInteriors {
   sites: Site[] = [];
   cutawayEnabled = true;
+  private lightLab: LightLabExhibit | null = null;
+  setLightLabMix(levels: LightLevels) { this.lightLab?.setLevels(levels); }
   constructor(private e: CityEngine) {
     e.renderer.localClippingEnabled = true;
     for (const id of ['science', 'canada', 'waterfront'] as InteriorId[])
@@ -391,6 +395,15 @@ export class PublicInteriors {
         [13, -11, 0x64a987],
       ]) {
         obstacle(x, z, 4, 3, 0.9, c);
+        if (x === 13 && z === -11) {
+          // Display and support stay inside the existing island collision bounds.
+          parts.box([3.8, 2, 0.18], [x, f + 2, z - 1.1], 0x243f4c);
+          parts.box([0.18, 1.4, 0.2], [x, f + 1.2, z - 1.05], steel);
+          this.lightLab = new LightLabExhibit();
+          this.lightLab.screen.position.set(x, f + 2, z - 1.201);
+          group.add(this.lightLab.screen);
+          continue;
+        }
         parts.add(
           'structure',
           new THREE.TorusGeometry(1, 0.075, 8, 28)
@@ -407,7 +420,11 @@ export class PublicInteriors {
         7,
         Math.PI,
       );
-      parts.sign('PUZZLES & ILLUSIONS', [15, f + 3, -20], 8, Math.PI);
+      // Keep the wayfinding board above both first- and third-person cameras
+      // approaching the new lab. Its former eye-level plane hid the exhibit.
+      parts.sign('PUZZLES & ILLUSIONS', [15, f + 6.2, -20], 8, Math.PI);
+      for (const x of [12, 18])
+        parts.beam([x, f + 6.7, -20], [x, f + 8.6, -20], 0.025, steel);
       obstacle(49, -34, 6, 1.5, 1.1, 0x357d93); // admissions
       for (let i = 0; i < 5; i++)
         parts.box([0.8, 0.5, 0.2], [47 + i, f + 1.35, -34], 0x153745);

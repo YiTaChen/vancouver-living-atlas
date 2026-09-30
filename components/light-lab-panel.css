@@ -1,0 +1,410 @@
+.light-lab-card {
+  --trail-accent: #a9dbed;
+}
+.light-lab-card .discovery-stamp {
+  border-style: solid;
+  background: #93ccdb0a;
+}
+.light-lab-card .discovery-stamp svg {
+  color: #9adddd;
+}
+.light-lab-hud > .discovery-primary {
+  width: 100%;
+}
+.light-lab-hud .discovery-primary span {
+  margin-left: auto;
+  font-family: ui-monospace, monospace;
+}
+.light-lab-link {
+  color: #c9dcaf;
+  font-size: 12px;
+  min-height: 40px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.light-lab-link:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.light-lab-directions {
+  color: #abc5c3;
+  font-size: 10px;
+  line-height: 1.5;
+  margin-top: 9px;
+}
+.light-lab-dialog {
+  max-width: 580px !important;
+}
+.light-lab-summary {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  border-top: 1px solid #ffffff18;
+  border-bottom: 1px solid #ffffff18;
+  padding: 12px 0;
+  font-size: 12px;
+  color: #c9dbb7;
+}
+.light-lab-summary span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.light-lab-challenge small {
+  font:
+    11px ui-monospace,
+    monospace;
+  color: #b5cbb7;
+}
+.light-lab-challenge h3 {
+  font-size: 19px;
+  font-weight: 550;
+  color: #eff3d7;
+  margin: 3px 0 8px;
+}
+.light-lab-challenge p,
+.light-lab-intro p {
+  font-size: 13px;
+  line-height: 1.65;
+  color: #bfd0c5;
+}
+.light-lab-swatches {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  padding: 3px 0;
+}
+.light-lab-swatches > div {
+  padding: 13px;
+  border: 1px solid #c2d7c329;
+  border-radius: 12px;
+  background: #071c2488;
+  text-align: center;
+}
+.light-lab-swatches span {
+  display: block;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  margin: 0 auto 12px;
+  border: 1px solid #ffffff55;
+  box-shadow: 0 0 0 6px #ffffff07;
+}
+.light-lab-swatches b {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: #eff1d9;
+}
+.light-lab-swatches small {
+  display: block;
+  min-height: 30px;
+  font-size: 11px;
+  line-height: 1.4;
+  margin-top: 5px;
+  color: #b0c7c3;
+}
+.light-lab-sliders {
+  display: grid;
+  gap: 13px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.light-lab-sliders label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: #dee7d0;
+  min-height: 38px;
+}
+.light-lab-sliders label > span {
+  width: 68px;
+  flex-shrink: 0;
+}
+.light-lab-sliders input {
+  flex: 1;
+  min-width: 0;
+  accent-color: #dda9a3;
+  height: 32px;
+  cursor: pointer;
+}
+.light-lab-sliders label:nth-of-type(2) input {
+  accent-color: #bddba8;
+}
+.light-lab-sliders label:nth-of-type(3) input {
+  accent-color: #92c1ec;
+}
+.light-lab-sliders output {
+  width: 43px;
+  font:
+    11px ui-monospace,
+    monospace;
+  text-align: right;
+}
+.light-lab-sliders:disabled {
+  opacity: 0.5;
+}
+.light-lab-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.light-lab-actions .discovery-primary {
+  flex: 1;
+}
+.light-lab-hint {
+  border: 1px solid #91b8a030;
+  border-radius: 8px;
+  padding: 9px 12px;
+  color: #bed0b5;
+  font-size: 12px;
+}
+.light-lab-hint summary {
+  cursor: pointer;
+  min-height: 24px;
+}
+.light-lab-hint p {
+  line-height: 1.6;
+  margin: 8px 0 0;
+}
+.light-lab-earned {
+  text-align: center;
+  color: #e4dba3;
+  padding: 8px 0;
+}
+.light-lab-earned svg {
+  margin: 0 auto 12px;
+}
+.light-lab-earned h3 {
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+.light-lab-earned p {
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 10px 0 18px;
+  color: #bfcfbf;
+}
+.light-lab-earned > .discovery-primary {
+  margin: 0 auto 6px;
+  min-width: 180px;
+}
+.light-lab-feedback {
+  font-size: 12px;
+  line-height: 1.7;
+  padding: 12px;
+  border-radius: 9px;
+  background: #a9cfb211;
+  border: 1px solid #8fae943b;
+  color: #d6e6ba;
+}
+.light-lab-feedback.wrong,
+.light-lab-feedback.blocked {
+  background: #cbb0740a;
+  border-color: #dbb18044;
+  color: #e9d4b2;
+}
+.light-lab-beams {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 110px;
+  margin: 0 0 12px;
+  border-radius: 12px;
+  background: #081b2288;
+  isolation: isolate;
+}
+.light-lab-beams i {
+  display: block;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #ff0000;
+  mix-blend-mode: screen;
+}
+.light-lab-beams i + i {
+  margin-left: -20px;
+}
+.light-lab-beams i:nth-child(2) {
+  background: #00ff00;
+}
+.light-lab-beams i:nth-child(3) {
+  background: #0000ff;
+}
+.light-lab-intro .discovery-primary {
+  width: 100%;
+  margin-top: 14px;
+}
+@media (max-height: 540px) {
+  .atlas.touch-ui .light-lab-directions {
+    display: none;
+  }
+  .atlas.touch-ui .light-lab-hud .discovery-objective {
+    margin: 0 0 5px;
+  }
+  .light-lab-swatches span {
+    width: 46px;
+    height: 46px;
+  }
+  .light-lab-dialog {
+    gap: 12px;
+  }
+}
+
+/* Keep the mixer and its submit action together in a short landscape viewport.
+ * Intro and earned-stamp views retain their ordinary single-column layout. */
+@media (min-width: 620px) and (max-height: 540px) {
+  .light-lab-dialog:has(.light-lab-sliders) {
+    width: min(800px, calc(100vw - 24px));
+    max-width: 800px !important;
+    max-height: calc(100dvh - 20px);
+    padding: 12px 16px;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    grid-template-rows: auto auto auto auto auto;
+    gap: 6px 18px;
+    align-content: start;
+  }
+  .light-lab-dialog:has(.light-lab-sliders) > [data-slot='dialog-header'] {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    padding-right: 42px;
+    gap: 1px;
+  }
+  .light-lab-dialog:has(.light-lab-sliders) .discovery-eyebrow {
+    font-size: 9px;
+    line-height: 12px;
+    padding-right: 0;
+    letter-spacing: 1px;
+  }
+  .light-lab-dialog:has(.light-lab-sliders) .discovery-title {
+    font-size: 21px;
+    line-height: 25px;
+    margin: 0;
+  }
+  .light-lab-dialog:has(.light-lab-sliders) [data-slot='dialog-description'] {
+    max-width: none;
+    font-size: 11px;
+    line-height: 15px;
+  }
+  .light-lab-dialog:has(.light-lab-sliders) > .discovery-close {
+    position: sticky;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    align-self: start;
+    top: 0;
+    right: auto;
+    width: 36px;
+    height: 36px;
+    z-index: 2;
+    background: #14343b;
+  }
+  .light-lab-dialog:has(.light-lab-sliders) .light-lab-summary {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    padding: 4px 0;
+    min-height: 25px;
+    gap: 12px;
+    font-size: 11px;
+  }
+  .light-lab-dialog:has(.light-lab-sliders) .light-lab-summary svg {
+    width: 14px;
+    height: 14px;
+  }
+  .light-lab-dialog:has(.light-lab-sliders) .light-lab-challenge {
+    grid-column: 1;
+    grid-row: 3;
+    padding-top: 3px;
+  }
+  .light-lab-dialog:has(.light-lab-sliders) .light-lab-challenge h3 {
+    font-size: 16px;
+    line-height: 20px;
+    margin: 1px 0 3px;
+  }
+  .light-lab-dialog:has(.light-lab-sliders) .light-lab-challenge p {
+    font-size: 11px;
+    line-height: 15px;
+  }
+  .light-lab-dialog:has(.light-lab-sliders) .light-lab-swatches {
+    grid-column: 1;
+    grid-row: 4;
+    gap: 10px;
+    padding: 0;
+  }
+  .light-lab-dialog:has(.light-lab-sliders) .light-lab-swatches > div {
+    padding: 8px;
+  }
+  .light-lab-dialog:has(.light-lab-sliders) .light-lab-swatches span {
+    width: 38px;
+    height: 38px;
+    margin-bottom: 7px;
+    box-shadow: 0 0 0 3px #ffffff07;
+  }
+  .light-lab-dialog:has(.light-lab-sliders) .light-lab-swatches b,
+  .light-lab-dialog:has(.light-lab-sliders) .light-lab-swatches small {
+    font-size: 10px;
+    line-height: 14px;
+  }
+  .light-lab-dialog:has(.light-lab-sliders) .light-lab-swatches small {
+    min-height: 0;
+    margin-top: 2px;
+  }
+  .light-lab-dialog:has(.light-lab-sliders) .light-lab-sliders {
+    grid-column: 2;
+    grid-row: 3 / 5;
+    align-content: center;
+    gap: 5px;
+    border-left: 1px solid #b0c6b827;
+    padding-left: 16px;
+  }
+  .light-lab-dialog:has(.light-lab-sliders) .light-lab-sliders label {
+    min-height: 40px;
+    gap: 8px;
+    font-size: 11px;
+  }
+  .light-lab-dialog:has(.light-lab-sliders) .light-lab-sliders label > span {
+    width: 61px;
+  }
+  .light-lab-dialog:has(.light-lab-sliders) .light-lab-sliders output {
+    width: 37px;
+  }
+  .light-lab-dialog:has(.light-lab-sliders) .light-lab-actions {
+    grid-column: 2;
+    grid-row: 5;
+    gap: 8px;
+    padding-left: 16px;
+  }
+  .light-lab-dialog:has(.light-lab-sliders)
+    .light-lab-actions
+    .discovery-primary {
+    min-height: 40px;
+    padding: 7px 10px;
+  }
+  .light-lab-dialog:has(.light-lab-sliders) .light-lab-actions .light-lab-link {
+    font-size: 10px;
+  }
+  .light-lab-dialog:has(.light-lab-sliders) .light-lab-hint {
+    grid-column: 1;
+    grid-row: 5;
+    align-self: start;
+    padding: 6px 9px;
+    font-size: 11px;
+  }
+  .light-lab-dialog:has(.light-lab-sliders) > .light-lab-feedback,
+  .light-lab-dialog:has(.light-lab-sliders) > .discovery-notes,
+  .light-lab-dialog:has(.light-lab-sliders) > .discovery-footer,
+  .light-lab-dialog:has(.light-lab-sliders) > .discovery-error {
+    grid-column: 1 / -1;
+  }
+  .light-lab-dialog:has(.light-lab-sliders) > .discovery-notes {
+    margin-top: 3px;
+  }
+  .light-lab-dialog:has(.light-lab-sliders) > .discovery-footer {
+    padding-top: 8px;
+  }
+}
