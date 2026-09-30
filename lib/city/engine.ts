@@ -1,4 +1,5 @@
 import { FlightController } from './flight-controller';
+import { clearOrbitGesture } from './orbit-lifecycle';
 import { paintStartupProgress } from './startup-progress';
 import { ScenePreparationQueue } from './scene-preparation';
 import { PublicInteriors } from './interiors';
@@ -84,8 +85,14 @@ export class CityEngine {
   lastLightHour = -1;
   lastShadowHour = -1;
   lastSolarShadowUpdate = 0;
-  visibilityChange = () =>
-    this.clock.setVisible(!document.hidden, performance.now());
+  visibilityChange = () => {
+    if (this.disposed) return;
+    if (document.hidden) this.clearHeldInput();
+    this.clock.setVisible(
+      !document.hidden && !this.pageSuspended,
+      performance.now(),
+    );
+  };
   locale: Locale = DEFAULT_LOCALE;
   scene = new THREE.Scene();
   environmentTarget: THREE.WebGLRenderTarget | null = null;
@@ -98,7 +105,27 @@ export class CityEngine {
   composer: EffectComposer | null = null;
   renderPass: RenderPass | null = null;
   fxaa: ShaderPass | null = null;
-  pageHide = () => this.destroy();
+  // A BFCache entry retains this exact document and React tree. Disposing its
+  // canvas on persisted pagehide would leave a dead city when Back restores it.
+  pageSuspended = false;
+  private suspendedAt = 0;
+  private renderReady = false;
+  private loadAbort = new AbortController();
+  pageHide = (event: PageTransitionEvent) => {
+    if (event.persisted) this.suspendPage();
+    else this.destroy();
+  };
+  pageShow = (event: PageTransitionEvent) => {
+    if (event.persisted) this.resumePage();
+  };
+  private graphicsContextLost = (event: Event) => {
+    if (this.disposed) return;
+    event.preventDefault();
+    this.contextLost = true;
+    // A restored GL context does not restore our rendered PMREM/shadow contents.
+    // Release this engine and expose the existing explicit reload action.
+    this.failInitialization(new Error('graphics-context-lost'));
+  };
   ssao: SSAOPass | null = null;
   aoExclusions: SSAOExclusions | null = null;
   shadowCoverageState: ShadowCoverage | null = null;
@@ -201,148 +228,186 @@ export class CityEngine {
     this.onStats = onStats;
     this.onReady = onReady;
     this.onError = onError;
+    try {
+      this.camera = new THREE.PerspectiveCamera(
+        42,
+        container.clientWidth / container.clientHeight,
+        2,
+        45000,
+      );
+      this.renderer = new THREE.WebGLRenderer({
+        antialias: false,
+        alpha: false,
+        powerPreference: 'high-performance',
+        preserveDrawingBuffer: false,
+      });
+      this.compatibleGraphics =
+        isMobileGraphics(navigator.userAgent, navigator.maxTouchPoints) ||
+        new URLSearchParams(location.search).get('graphics') === 'compatible' ||
+        !supportsHDRTarget(this.renderer);
+      if (this.compatibleGraphics) this.settings.quality = 'balanced';
+      this.renderer.domElement.dataset.graphics = this.compatibleGraphics
+        ? 'compatible'
+        : 'hdr';
+      this.renderer.setPixelRatio(this.pixelRatio());
+      this.renderer.setSize(container.clientWidth, container.clientHeight);
+      this.renderer.info.autoReset = false;
+      this.renderer.outputColorSpace = THREE.SRGBColorSpace;
+      this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      this.renderer.toneMappingExposure = 1.13;
+      this.renderer.shadowMap.autoUpdate = false;
+      this.renderer.shadowMap.needsUpdate = true;
+      this.renderer.shadowMap.enabled = !this.compatibleGraphics;
+      this.renderer.shadowMap.type = THREE.PCFShadowMap;
+      this.renderer.domElement.setAttribute(
+        'aria-label',
+        translate(this.locale, 'canvasLabel'),
+      );
+      this.renderer.domElement.tabIndex = 0;
+      container.appendChild(this.renderer.domElement);
+      this.renderer.domElement.addEventListener(
+        'webglcontextlost',
+        this.graphicsContextLost,
+      );
+      this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+      this.travelReturn = new TravelReturn(this);
+      this.travelReturn.attach();
+      this.controls.enableDamping = true;
+      this.controls.dampingFactor = 0.07;
+      this.controls.minDistance = 28;
+      this.controls.maxDistance = 18000;
+      this.controls.maxPolarAngle = Math.PI * 0.485;
+      this.controls.screenSpacePanning = false;
+      this.controls.zoomSpeed = 0.75;
+      this.controls.rotateSpeed = 0.65;
+      this.controls.addEventListener('start', () => {
+        this.transition = null;
+      });
+      this.sky.scale.setScalar(35000);
+      this.sky.material.uniforms.turbidity.value = 3;
+      this.sky.material.uniforms.rayleigh.value = 1.7;
+      this.sky.material.uniforms.mieCoefficient.value = 0.005;
+      this.sky.material.uniforms.mieDirectionalG.value = 0.8;
+      this.sky.material.uniforms.sunPosition.value.set(-4000, 5000, 1400);
+      this.sky.material.uniforms.showSunDisc.value = false;
+      this.scene.add(this.sky);
+      this.skyEffects = new SkyEffects(this.scene);
+      if (process.env.VANCOUVER_VISUAL_QA === '1') {
+        this.startupQA?.end('constructor.renderer-controls');
+        this.startupQA?.begin('constructor.environment-pmrem');
+      }
+      if (!this.compatibleGraphics) {
+        const pmrem = new THREE.PMREMGenerator(this.renderer),
+          envScene = new THREE.Scene();
+        envScene.add(this.sky.clone());
+        try {
+          this.environmentTarget = pmrem.fromScene(envScene, 0.04);
+          this.scene.environment = this.environmentTarget.texture;
+          this.scene.environmentIntensity = 0.012;
+        } finally {
+          pmrem.dispose();
+        }
+      }
+      if (process.env.VANCOUVER_VISUAL_QA === '1') {
+        this.startupQA?.end('constructor.environment-pmrem');
+        this.startupQA?.begin('constructor.scene-and-events');
+      }
+
+      this.scene.add(
+        this.ambient,
+        this.sun,
+        this.buildings,
+        this.vegetation,
+        this.roads,
+        this.terrain,
+        this.landmarks,
+        this.trafficGroup,
+      );
+      this.sun.position.set(-2500, 3600, 1400);
+      this.sun.castShadow = true;
+      Object.assign(this.sun.shadow.camera, {
+        left: -2700,
+        right: 2700,
+        top: 2700,
+        bottom: -2700,
+        near: SHADOW_DEPTH.near,
+        far: SHADOW_DEPTH.far,
+      });
+      this.sun.shadow.mapSize.set(2048, 2048);
+      this.sun.shadow.bias = -0.0002;
+      this.sun.shadow.normalBias = 1.2;
+      this.scene.add(this.sun.target);
+      this.scene.background = new THREE.Color(0xbdd9e3);
+      this.scene.fog = new THREE.FogExp2(0xbdd9e3, 0.000027);
+      this.flyTo('overview', false);
+      this.resizeObserver = new ResizeObserver(() => {
+        if (this.disposed || this.contextLost) return;
+        const w = container.clientWidth,
+          h = container.clientHeight;
+        this.camera.aspect = w / h;
+        this.camera.updateProjectionMatrix();
+        this.renderer.setSize(w, h);
+        this.composer?.setSize(w, h);
+        this.resizeQuality();
+      });
+      this.resizeObserver.observe(container);
+      if (process.env.VANCOUVER_VISUAL_QA === '1') {
+        this.startupQA?.end('constructor.scene-and-events');
+      }
+    } catch (error) {
+      // The caller cannot destroy an instance whose constructor never returned.
+      this.destroy();
+      throw error;
+    }
     document.addEventListener('visibilitychange', this.visibilityChange);
-    this.camera = new THREE.PerspectiveCamera(
-      42,
-      container.clientWidth / container.clientHeight,
-      2,
-      45000,
-    );
-    this.renderer = new THREE.WebGLRenderer({
-      antialias: false,
-      alpha: false,
-      powerPreference: 'high-performance',
-      preserveDrawingBuffer: false,
-    });
-    this.compatibleGraphics =
-      isMobileGraphics(navigator.userAgent, navigator.maxTouchPoints) ||
-      new URLSearchParams(location.search).get('graphics') === 'compatible' ||
-      !supportsHDRTarget(this.renderer);
-    if (this.compatibleGraphics) this.settings.quality = 'balanced';
-    this.renderer.domElement.dataset.graphics = this.compatibleGraphics
-      ? 'compatible'
-      : 'hdr';
-    this.renderer.setPixelRatio(this.pixelRatio());
-    this.renderer.setSize(container.clientWidth, container.clientHeight);
-    this.renderer.info.autoReset = false;
-    this.renderer.outputColorSpace = THREE.SRGBColorSpace;
-    this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1.13;
-    this.renderer.shadowMap.autoUpdate = false;
-    this.renderer.shadowMap.needsUpdate = true;
-    this.renderer.shadowMap.enabled = !this.compatibleGraphics;
-    this.renderer.shadowMap.type = THREE.PCFShadowMap;
-    this.renderer.domElement.setAttribute(
-      'aria-label',
-      translate(this.locale, 'canvasLabel'),
-    );
-    this.renderer.domElement.tabIndex = 0;
-    container.appendChild(this.renderer.domElement);
-    this.renderer.domElement.addEventListener('webglcontextlost', (event) => {
-      if (this.disposed) return;
-      event.preventDefault();
-      this.contextLost = true;
-      this.landmarkWarmup?.invalidate('Graphics context lost');
-      if (process.env.VANCOUVER_VISUAL_QA === '1') {
-        this.startupQA?.fail('graphics-context-lost');
-      }
-
-      cancelAnimationFrame(this.raf);
-      this.onError('graphics-context-lost');
-    });
-    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-    this.travelReturn = new TravelReturn(this);
-    this.travelReturn.attach();
-    this.controls.enableDamping = true;
-    this.controls.dampingFactor = 0.07;
-    this.controls.minDistance = 28;
-    this.controls.maxDistance = 18000;
-    this.controls.maxPolarAngle = Math.PI * 0.485;
-    this.controls.screenSpacePanning = false;
-    this.controls.zoomSpeed = 0.75;
-    this.controls.rotateSpeed = 0.65;
-    this.controls.addEventListener('start', () => {
-      this.transition = null;
-    });
-    this.sky.scale.setScalar(35000);
-    this.sky.material.uniforms.turbidity.value = 3;
-    this.sky.material.uniforms.rayleigh.value = 1.7;
-    this.sky.material.uniforms.mieCoefficient.value = 0.005;
-    this.sky.material.uniforms.mieDirectionalG.value = 0.8;
-    this.sky.material.uniforms.sunPosition.value.set(-4000, 5000, 1400);
-    this.sky.material.uniforms.showSunDisc.value = false;
-    this.scene.add(this.sky);
-    this.skyEffects = new SkyEffects(this.scene);
-    if (process.env.VANCOUVER_VISUAL_QA === '1') {
-      this.startupQA?.end('constructor.renderer-controls');
-      this.startupQA?.begin('constructor.environment-pmrem');
-    }
-    if (!this.compatibleGraphics) {
-      const pmrem = new THREE.PMREMGenerator(this.renderer),
-        envScene = new THREE.Scene();
-      envScene.add(this.sky.clone());
-      this.environmentTarget = pmrem.fromScene(envScene, 0.04);
-      this.scene.environment = this.environmentTarget.texture;
-      this.scene.environmentIntensity = 0.012;
-      pmrem.dispose();
-    }
-    if (process.env.VANCOUVER_VISUAL_QA === '1') {
-      this.startupQA?.end('constructor.environment-pmrem');
-      this.startupQA?.begin('constructor.scene-and-events');
-    }
-
-    this.scene.add(
-      this.ambient,
-      this.sun,
-      this.buildings,
-      this.vegetation,
-      this.roads,
-      this.terrain,
-      this.landmarks,
-      this.trafficGroup,
-    );
-    this.sun.position.set(-2500, 3600, 1400);
-    this.sun.castShadow = true;
-    Object.assign(this.sun.shadow.camera, {
-      left: -2700,
-      right: 2700,
-      top: 2700,
-      bottom: -2700,
-      near: SHADOW_DEPTH.near,
-      far: SHADOW_DEPTH.far,
-    });
-    this.sun.shadow.mapSize.set(2048, 2048);
-    this.sun.shadow.bias = -0.0002;
-    this.sun.shadow.normalBias = 1.2;
-    this.scene.add(this.sun.target);
-    this.scene.background = new THREE.Color(0xbdd9e3);
-    this.scene.fog = new THREE.FogExp2(0xbdd9e3, 0.000027);
-    this.flyTo('overview', false);
-    this.resizeObserver = new ResizeObserver(() => {
-      const w = container.clientWidth,
-        h = container.clientHeight;
-      this.camera.aspect = w / h;
-      this.camera.updateProjectionMatrix();
-      this.renderer.setSize(w, h);
-      this.composer?.setSize(w, h);
-      this.resizeQuality();
-    });
-    this.resizeObserver.observe(container);
-    if (process.env.VANCOUVER_VISUAL_QA === '1') {
-      this.startupQA?.end('constructor.scene-and-events');
-    }
-
-    this.load().catch((e) => {
-      if (process.env.VANCOUVER_VISUAL_QA === '1') {
-        this.startupQA?.fail(e);
-      }
-      console.error('Vancouver scene initialization failed', e);
-      if (!this.disposed) this.onError(String(e.message || e));
-    });
+    window.addEventListener('pagehide', this.pageHide);
+    window.addEventListener('pageshow', this.pageShow);
+    this.load().catch((error) => this.failInitialization(error));
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.end('constructor.body');
       this.startupQA?.mark('engine.constructor.body.end');
     }
+  }
+  private failInitialization(error: unknown) {
+    if (this.disposed) return;
+    const message = this.contextLost
+      ? 'graphics-context-lost'
+      : error instanceof Error
+        ? error.message
+        : String(error);
+    if (process.env.VANCOUVER_VISUAL_QA === '1') this.startupQA?.fail(error);
+    console.error('Vancouver scene initialization failed', error);
+    this.destroy();
+    this.onError(message);
+  }
+  private clearHeldInput() {
+    if (this.controls) clearOrbitGesture(this.controls);
+    this.navigation?.blur();
+    this.flight?.clearInput();
+    this.travelReturn?.clearGesture();
+    this.placement?.cancel();
+  }
+  private suspendPage() {
+    if (this.disposed || this.pageSuspended) return;
+    this.pageSuspended = true;
+    this.suspendedAt = performance.now();
+    this.clock.setVisible(false, this.suspendedAt);
+    cancelAnimationFrame(this.raf);
+    this.raf = 0;
+    this.clearHeldInput();
+  }
+  private resumePage() {
+    if (this.disposed || this.contextLost || !this.pageSuspended) return;
+    const now = performance.now();
+    if (this.transition)
+      this.transition.start += Math.max(0, now - this.suspendedAt);
+    this.pageSuspended = false;
+    this.clearHeldInput();
+    this.clock.resetTimebase(now);
+    this.clock.setVisible(!document.hidden, now);
+    this.lastTime = this.fpsAt = now;
+    this.frames = 0;
+    if (this.renderReady) this.raf = requestAnimationFrame(this.animate);
   }
   async load() {
     const advance = (percent: number) =>
@@ -373,7 +438,9 @@ export class CityEngine {
     ];
     await Promise.all([
       ...names.map(async (n) => {
-        const res = await fetch(`/data/${n}.geojson`);
+        const res = await fetch(`/data/${n}.geojson`, {
+          signal: this.loadAbort.signal,
+        });
         if (!res.ok)
           throw new Error(`Could not load ${n} data (${res.status})`);
         this.data[n] = await res.json();
@@ -390,7 +457,9 @@ export class CityEngine {
         ['harbour-piers', 'harbour-piers', true],
         ['beach-coast', 'beachCoast', true],
       ].map(async ([name, key, required]) => {
-        const res = await fetch(`/data/${name}.json`);
+        const res = await fetch(`/data/${name}.json`, {
+          signal: this.loadAbort.signal,
+        });
         if (!res.ok) {
           if (required)
             throw new Error(`Could not load ${name} (${res.status})`);
@@ -579,7 +648,6 @@ export class CityEngine {
       this.startupQA?.mark('render.composer-warmup.finished');
     }
     if (this.disposed || this.contextLost) return;
-    window.addEventListener('pagehide', this.pageHide, { once: true });
     if (
       process.env.NODE_ENV === 'development' &&
       new URLSearchParams(location.search).has('inspect')
@@ -596,8 +664,9 @@ export class CityEngine {
       this.startupQA?.mark('engine.onReady.returned');
     }
 
+    this.renderReady = true;
     this.fpsAt = performance.now();
-    this.clock.setVisible(!document.hidden, this.fpsAt);
+    this.clock.setVisible(!document.hidden && !this.pageSuspended, this.fpsAt);
     this.clock.resetTimebase(this.fpsAt);
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.begin('render.first-city-frame');
@@ -1287,7 +1356,7 @@ export class CityEngine {
     }
   }
   animate = (time: number) => {
-    if (this.disposed || this.contextLost) return;
+    if (this.disposed || this.contextLost || this.pageSuspended) return;
     this.raf = requestAnimationFrame(this.animate);
     this.uniforms.time.value = time / 1000;
     this.tickClock(time);
@@ -1531,13 +1600,15 @@ export class CityEngine {
       this.startupQA?.dispose();
     }
     window.removeEventListener('pagehide', this.pageHide);
+    window.removeEventListener('pageshow', this.pageShow);
     this.disposed = true;
+    this.loadAbort.abort();
     if (process.env.NODE_ENV === 'development') {
       const inspectWindow = window as Window & { __atlas?: CityEngine };
       if (inspectWindow.__atlas === this) delete inspectWindow.__atlas;
     }
     cancelAnimationFrame(this.raf);
-    this.resizeObserver.disconnect();
+    this.resizeObserver?.disconnect();
     this.labelElements.forEach((l) => l.element.remove());
     this.minimap = null;
     this.aoExclusions?.dispose();
@@ -1546,7 +1617,7 @@ export class CityEngine {
     this.flight?.destroy();
     this.navigation?.destroy();
     this.placement?.destroy();
-    this.controls.dispose();
+    this.controls?.dispose();
     this.landmarkDetails.forEach((l) => l.disposePending());
     this.sceneryPreparation.dispose();
     this.landmarkWarmup?.dispose();
@@ -1575,8 +1646,12 @@ export class CityEngine {
     this.composer?.passes.forEach((p) => p.dispose());
     this.composer?.dispose();
     for (const m of this.roadMaterials.values()) m.map?.dispose();
-    this.renderer.dispose();
+    this.renderer?.domElement.removeEventListener(
+      'webglcontextlost',
+      this.graphicsContextLost,
+    );
+    this.renderer?.dispose();
 
-    this.renderer.domElement.remove();
+    this.renderer?.domElement.remove();
   }
 }
