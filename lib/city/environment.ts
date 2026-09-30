@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { prepareParkPaths } from './park-paths';
 import { createBuses, updateBuses, type BusRoute } from './city-buses';
 import { DetailedTrees, registerTree, type ForestTree } from './detailed-trees';
+import { createCanopyGeometry } from './assets/tree-canopy';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import type { CityEngine } from './engine';
 import { project, rings, lines, inPolygon, hash } from './geo';
@@ -250,38 +251,20 @@ export function createNature(e: CityEngine) {
         seed,
       });
     }
-  const coniferGeos = [
-    new THREE.ConeGeometry(0.25, 0.55, 7).translate(0, 0.57, 0),
-    new THREE.ConeGeometry(0.205, 0.47, 7).translate(0, 0.76, 0),
-    new THREE.ConeGeometry(0.15, 0.4, 7).translate(0, 0.97, 0),
-  ];
-  const conifer = mergeGeometries(coniferGeos)!;
-  const leafGeos = [
-    new THREE.IcosahedronGeometry(1, 1)
-      .scale(0.23, 0.31, 0.22)
-      .translate(0, 0.76, 0),
-    new THREE.IcosahedronGeometry(1, 1)
-      .scale(0.18, 0.24, 0.19)
-      .translate(0.11, 0.62, 0),
-    new THREE.IcosahedronGeometry(1, 1)
-      .scale(0.18, 0.24, 0.18)
-      .translate(-0.1, 0.64, 0.06),
-  ];
-  const leaf = mergeGeometries(leafGeos)!;
-  const lowLeaf = mergeGeometries([
-    new THREE.IcosahedronGeometry(1, 0)
-      .scale(0.25, 0.33, 0.23)
-      .translate(0, 0.76, 0),
-    new THREE.IcosahedronGeometry(1, 0)
-      .scale(0.19, 0.25, 0.2)
-      .translate(0.11, 0.62, 0),
-    new THREE.IcosahedronGeometry(1, 0)
-      .scale(0.19, 0.25, 0.19)
-      .translate(-0.1, 0.64, 0.06),
-  ])!;
+  const conifer = createCanopyGeometry(true),
+    leaf = createCanopyGeometry(false),
+    lowLeaf = createCanopyGeometry(false, 'distant');
   const mats = [
-    new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 1 }),
-    new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 1 }),
+    new THREE.MeshStandardMaterial({
+      color: 0xffffff,
+      roughness: 1,
+      vertexColors: true,
+    }),
+    new THREE.MeshStandardMaterial({
+      color: 0xffffff,
+      roughness: 1,
+      vertexColors: true,
+    }),
   ];
   const cells = new Map<string, typeof trees>();
   for (const t of trees) {
