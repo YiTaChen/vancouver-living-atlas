@@ -86,6 +86,15 @@ export function headingVector(yaw: number) {
   return { x: Math.sin(yaw), y: Math.cos(yaw) };
 }
 
+/** Keep a destination readable at the edge when it is outside the local map. */
+export function destinationMapPoint(x: number, y: number, width: number, height: number) {
+  const cx = width / 2, cy = height / 2;
+  const dx = x - cx, dy = y - cy;
+  const halfWidth = Math.max(1, cx - 16), halfHeight = Math.max(1, cy - 34);
+  const fraction = Math.min(1, halfWidth / (Math.abs(dx) || 1), halfHeight / (Math.abs(dy) || 1));
+  return { x: cx + dx * fraction, y: cy + dy * fraction, angle: Math.atan2(dy, dx), clipped: fraction < 1 };
+}
+
 interface MapPath {
   path: Path2D;
   xmin: number;
@@ -220,6 +229,9 @@ export class LocalMinimap {
       pose.following,
       this.span,
       this.e.locale,
+      this.e.discoveryTarget?.x,
+      this.e.discoveryTarget?.z,
+      this.e.discoveryTarget?.label,
       this.canvas.clientWidth,
       this.canvas.clientHeight,
     ].join(':');
@@ -379,6 +391,28 @@ export class LocalMinimap {
         if (named.size >= 5) break;
       }
     }
+    const destination = this.e.discoveryTarget;
+    if (destination) {
+      const marker = destinationMapPoint(px(destination.x), py(destination.z), w, h);
+      ctx.save();
+      ctx.translate(marker.x, marker.y);
+      ctx.rotate(marker.clipped ? marker.angle : Math.PI / 4);
+      ctx.beginPath();
+      if (marker.clipped) {
+        ctx.moveTo(9, 0);
+        ctx.lineTo(-6, -6);
+        ctx.lineTo(-3, 0);
+        ctx.lineTo(-6, 6);
+        ctx.closePath();
+      } else ctx.rect(-5, -5, 10, 10);
+      ctx.strokeStyle = '#182f36';
+      ctx.lineWidth = 4;
+      ctx.stroke();
+      ctx.fillStyle = '#ffd58a';
+      ctx.fill();
+      ctx.restore();
+      label(destination.label, marker.x, marker.y - 17, '#ffe3ad');
+    }
     const x = px(pose.x),
       y = py(pose.z);
     if (pose.following) {
@@ -450,6 +484,9 @@ export class LocalMinimap {
       following: String(pose.following),
       lon: coord[0].toFixed(5),
       lat: coord[1].toFixed(5),
+      destinationX: destination ? String(destination.x) : '',
+      destinationZ: destination ? String(destination.z) : '',
+      destinationLabel: destination?.label || '',
     });
   }
 }

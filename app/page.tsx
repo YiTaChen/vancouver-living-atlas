@@ -40,6 +40,9 @@ import {
 import { FlightControls, flightText } from '@/components/flight-controls';
 import { EMPTY_FLIGHT, type FlightSnapshot } from '@/lib/city/flight-snapshot';
 import { TravelJoystick } from '@/components/travel-joystick';
+import { DiscoveryPanel, type DiscoveryTarget } from '@/components/discovery-panel';
+import type { DiscoveryRoute } from '@/lib/city/discovery-routes';
+import { placeDiscoveryStart } from '@/lib/city/discovery-runtime';
 import { SkyControls } from '@/components/sky-controls';
 import {
   DEFAULT_SKY,
@@ -578,12 +581,34 @@ export default function Home() {
       }
     },
   });
+  const beginDiscovery = useCallback((route: DiscoveryRoute, next: number) => {
+    const city = engine.current;
+    if (!city || !placeDiscoveryStart(city, route, next)) return false;
+    setTour(false);
+    setPanel(null);
+    setPlacing(null);
+    setMobilePanel(null);
+    setLocalOrbit(false);
+    setSettings({ ...city.settings, mode: 'walk', autoRotate: false });
+    return true;
+  }, []);
+  const discoveryTarget = useCallback((target: DiscoveryTarget | null) => {
+    engine.current?.setDiscoveryTarget(target);
+  }, []);
   return (
     <main
+      data-travel-mode={settings.mode}
       className={`atlas ${clean ? 'clean' : ''} ${settings.mode !== 'orbit' ? 'street-mode' : ''} ${placing || flight.placing ? 'placement-mode' : ''} ${flight.placing ? 'flight-placement-mode' : ''} ${settings.mode==='flight'?'flight-mode':''} ${touchUI ? 'touch-ui' : ''} ${touchUI && mobileHudHidden ? 'mobile-hud-hidden' : ''} ${mobilePanel ? `mobile-${mobilePanel}-open` : ''}`}
     >
       {stats.trafficStop && settings.mode === 'drive' && <div role="status" className="traffic-stop-caption glass">{stats.trafficStop === 'please safe driving' ? stats.trafficStop : tr('policeStop')}</div>}
       <div className="scene" ref={host} />
+      <DiscoveryPanel
+        city={engine.current}
+        locale={locale}
+        visible={ready && !clean && !about && !placing && !flight.placing && !(touchUI && mobileHudHidden) && !panel && !mobilePanel}
+        onBegin={beginDiscovery}
+        onTargetChange={discoveryTarget}
+      />
       <FlightControls key={flight.attached ? flight.kind || 'flight' : 'placement'} controller={engine.current?.flight || null} state={flight} locale={locale} touch={touchUI} controlsEnabled={!about && !panel && (!mobilePanel || mobilePanel === 'map')} panelVisible={!about && !panel && (!mobilePanel || mobilePanel === 'travel')} optionsOpen={mobilePanel === 'travel'} onCloseOptions={() => setMobilePanel(null)}/>
       {touchUI && ready && (
         <button

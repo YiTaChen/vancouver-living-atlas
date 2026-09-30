@@ -26,6 +26,7 @@ import type { TravelMode } from './placement-geometry';
 import type { TravelView } from './travel-camera';
 import * as THREE from 'three';
 import { LocalMinimap, minimapPose, minimapWorldPoint } from './minimap';
+import { DiscoveryMarker, type DiscoveryTarget } from './discovery-marker';
 import type { LandmarkDetail } from './landmark-detail';
 import { FacadeDetails } from './facade-details';
 import { ArchitecturalDetails } from './architecture-details';
@@ -183,6 +184,8 @@ export class CityEngine {
     id: string;
   }[] = [];
   minimap: LocalMinimap | null = null;
+  discoveryTarget: DiscoveryTarget | null = null;
+  private discoveryMarker: DiscoveryMarker | null = null;
   constructor(
     public container: HTMLElement,
     onStats: (s: SceneStats) => void,
@@ -1339,6 +1342,7 @@ export class CityEngine {
     this.flight?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
     this.travelReturn?.update();
     this.sailingWaves?.update();
+    this.discoveryMarker?.update(time, !!this.discoveryTarget && this.settings.mode === 'walk');
     this.minimap?.draw(time);
     if (
       this.settings.mode === 'orbit' &&
@@ -1472,6 +1476,18 @@ export class CityEngine {
       if (visible)
         l.element.style.transform = `translate(${((p.x + 1) * w) / 2}px,${((1 - p.y) * h) / 2}px) translate(-50%,-100%)`;
     }
+  }
+  setDiscoveryTarget(target: DiscoveryTarget | null) {
+    if (this.disposed) return;
+    this.discoveryTarget = target && Number.isFinite(target.x) && Number.isFinite(target.z)
+      ? { ...target } : null;
+    if (this.discoveryTarget) {
+      this.discoveryMarker ??= new DiscoveryMarker(this.scene);
+      const { x, z } = this.discoveryTarget;
+      this.discoveryMarker.place(this.discoveryTarget, this.navigation?.groundHeight(x, z) ?? this.elevation(x, z));
+    }
+    this.discoveryMarker?.update(performance.now(), !!this.discoveryTarget && this.settings.mode === 'walk');
+    this.minimap?.draw(performance.now(), true);
   }
   drawMinimap(canvas: HTMLCanvasElement) {
     if (this.minimap?.canvas !== canvas)

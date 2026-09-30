@@ -216,7 +216,33 @@ test('renderer repaints moving poses, preserves inland water holes, skips unchan
     nav.mode = 'orbit';
     renderer.draw(700);
     assert.equal(canvas.dataset.following, 'false');
+    e.discoveryTarget = { x: 200, z: 150, label: 'A field note' };
+    renderer.draw(800);
+    assert.equal(canvas.dataset.destinationX, '200');
+    e.discoveryTarget = { x: 220, z: 170, label: 'The next field note' };
+    renderer.draw(900);
+    assert.equal(canvas.dataset.destinationX, '220');
+    assert.equal(canvas.dataset.destinationLabel, 'The next field note');
+    e.discoveryTarget = null;
+    renderer.draw(1000);
+    assert.equal(canvas.dataset.destinationLabel, '');
+    assert.equal(canvas.dataset.destinationX, '');
   } finally {
     globalThis.Path2D = previousPath;
+  }
+});
+
+test('destination markers preserve direction when clipped and remain inside responsive map edges', () => {
+  for (const [w, h] of [[280, 180], [190, 122], [560, 360]]) {
+    const center = map.destinationMapPoint(w / 2, h / 2, w, h);
+    assert.equal(center.clipped, false);
+    for (const [dx, dy] of [[1000, 0], [-1000, 0], [0, 1000], [0, -1000], [700, -1200]]) {
+      const marker = map.destinationMapPoint(w / 2 + dx, h / 2 + dy, w, h);
+      assert.equal(marker.clipped, true);
+      assert(marker.x >= 16 && marker.x <= w - 16);
+      assert(marker.y >= 34 && marker.y <= h - 34);
+      near(Math.atan2(marker.y - h / 2, marker.x - w / 2), Math.atan2(dy, dx));
+      near(marker.angle, Math.atan2(dy, dx));
+    }
   }
 });

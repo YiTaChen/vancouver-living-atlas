@@ -1,0 +1,526 @@
+.discovery-launch,
+.discovery-hud {
+  position: absolute;
+  z-index: 17;
+  top: 162px;
+  left: calc(50% + 92px);
+  transform: translateX(-50%);
+  border-radius: 13px;
+  color: #eef1df;
+}
+.discovery-launch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 15px;
+  font-size: 13px;
+  min-height: 44px;
+}
+.discovery-launch small {
+  color: #ccda9a;
+  font:
+    600 11px ui-monospace,
+    monospace;
+  border-left: 1px solid #ffffff20;
+  padding-left: 10px;
+}
+.discovery-hud {
+  width: 328px;
+  padding: 12px;
+  max-height: calc(100dvh - 270px);
+  overflow: auto;
+}
+.discovery-hud header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.discovery-hud header button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 28px;
+  color: #c1cebe;
+  font-size: 11px;
+  text-align: left;
+}
+.discovery-hud header button:first-child {
+  flex: 1;
+  min-width: 0;
+}
+.discovery-hud header button span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.discovery-icon {
+  justify-content: center;
+  border: 1px solid #ffffff25;
+  border-radius: 7px;
+  min-width: 32px;
+}
+.discovery-objective {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 9px 0;
+}
+.discovery-objective > div {
+  flex: 1;
+  min-width: 0;
+}
+.discovery-objective small {
+  display: block;
+  font-size: 10px;
+  color: #aec2ba;
+}
+.discovery-objective strong {
+  display: block;
+  font-size: 14px;
+  line-height: 1.4;
+  margin-top: 3px;
+  font-weight: 550;
+}
+.discovery-objective > b {
+  font:
+    500 23px ui-monospace,
+    monospace;
+  text-align: right;
+  color: #ecdda8;
+}
+.discovery-objective > b small {
+  display: inline;
+  margin-left: 3px;
+}
+.discovery-bearing {
+  color: #ebd295;
+  display: flex;
+}
+.discovery-hud progress {
+  appearance: none;
+  display: block;
+  height: 3px;
+  width: 100%;
+  border: 0;
+  border-radius: 3px;
+  background: #ffffff20;
+}
+.discovery-hud progress::-webkit-progress-bar {
+  background: #ffffff20;
+  border-radius: 3px;
+}
+.discovery-hud progress::-webkit-progress-value {
+  background: #e8d291;
+  border-radius: 3px;
+}
+.discovery-hud progress::-moz-progress-bar {
+  background: #e8d291;
+  border-radius: 3px;
+}
+.discovery-hint {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #bbcbbf;
+  margin: 8px 0;
+}
+.discovery-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid #d5e1a269;
+  border-radius: 8px;
+  background: #d7e5a3;
+  color: #18353b;
+  font-size: 12px;
+  font-weight: 600;
+}
+.discovery-primary:disabled {
+  background: #284249;
+  border-color: #527078;
+  color: #c5d2ce;
+  cursor: default;
+  opacity: 0.8;
+}
+.discovery-primary kbd {
+  font:
+    600 11px ui-monospace,
+    monospace;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  opacity: 0.65;
+  margin-left: auto;
+  padding: 0 4px;
+}
+.discovery-actions {
+  display: flex;
+  gap: 6px;
+}
+.discovery-actions .discovery-primary {
+  flex: 1;
+}
+.discovery-rejoin {
+  min-width: 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #74847a;
+  border-radius: 8px;
+  color: #d7e5a3;
+}
+.discovery-earned {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  color: #e8d291;
+  padding: 15px 0;
+  font-size: 14px;
+}
+.discovery-finished > .discovery-primary {
+  width: 100%;
+}
+.discovery-recent {
+  margin-top: 10px;
+  border-top: 1px solid #ffffff20;
+  padding-top: 9px;
+  font-size: 11px;
+  color: #c9d6c7;
+}
+.discovery-recent summary {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.discovery-recent p {
+  line-height: 1.6;
+  margin: 8px 0 2px;
+}
+.discovery-qa {
+  font:
+    10px ui-monospace,
+    monospace;
+  margin-top: 6px;
+  color: #dbb8f2;
+  min-height: 28px;
+}
+.discovery-journal {
+  width: min(660px, calc(100vw - 28px));
+  max-width: 660px !important;
+  max-height: calc(100dvh - 36px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 1px solid #88a89444;
+  border-radius: 20px;
+  padding: 28px;
+  background: linear-gradient(145deg, #14343b, #102a31);
+  box-shadow: 0 24px 80px #04171acc;
+  gap: 18px;
+}
+.discovery-close {
+  position: absolute;
+  right: 16px;
+  top: 14px;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid #b5cbb230;
+  color: #dce7d2;
+}
+.discovery-eyebrow {
+  font:
+    10px ui-monospace,
+    monospace;
+  letter-spacing: 2px;
+  color: #d5dca9;
+  padding-right: 35px;
+}
+.discovery-title {
+  font-size: 27px;
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: -0.6px;
+  margin: 4px 0;
+}
+.discovery-journal [data-slot='dialog-description'] {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #b9cfca;
+  max-width: 490px;
+}
+.discovery-totals {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  font-size: 12px;
+  padding: 13px 0;
+  border-top: 1px solid #b7cfb52b;
+  border-bottom: 1px solid #b7cfb52b;
+}
+.discovery-totals > span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #c9d7c0;
+}
+.discovery-totals b {
+  font:
+    600 19px ui-monospace,
+    monospace;
+  color: #e3e9b6;
+}
+.discovery-route-list {
+  display: grid;
+  gap: 12px;
+}
+.discovery-route {
+  display: flex;
+  gap: 15px;
+  padding: 16px;
+  background: #ffffff05;
+  border: 1px solid #9ebdab28;
+  border-radius: 13px;
+}
+.discovery-stamp {
+  height: 65px;
+  width: 61px;
+  border: 1px dashed var(--trail-accent);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 3px;
+  color: var(--trail-accent);
+  flex-shrink: 0;
+  opacity: 0.65;
+}
+.discovery-stamp.earned {
+  border-style: solid;
+  opacity: 1;
+  background: #e1e7b50d;
+  transform: rotate(-5deg);
+}
+.discovery-stamp span {
+  font:
+    10px ui-monospace,
+    monospace;
+  letter-spacing: 2px;
+}
+.discovery-route-body {
+  flex: 1;
+  min-width: 0;
+}
+.discovery-route h3 {
+  font-weight: 550;
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--trail-accent);
+  margin: 0 0 5px;
+}
+.discovery-route p {
+  color: #b8cbc4;
+  line-height: 1.6;
+  font-size: 12px;
+  margin: 0 0 7px;
+}
+.discovery-route small {
+  font:
+    11px ui-monospace,
+    monospace;
+  color: #abc0b8;
+  display: block;
+}
+.discovery-route .discovery-primary {
+  margin-top: 12px;
+  min-width: 140px;
+  justify-content: space-between;
+}
+.discovery-notes {
+  margin-top: 14px;
+  color: #cad8c5;
+  font-size: 12px;
+}
+.discovery-notes summary {
+  cursor: pointer;
+  padding: 4px 0;
+}
+.discovery-notes > div {
+  padding-top: 12px;
+}
+.discovery-notes h4 {
+  margin: 0 0 5px;
+  font-size: 13px;
+  color: #e3e8ca;
+  font-weight: 500;
+}
+.discovery-footer {
+  border-top: 1px solid #ffffff18;
+  padding-top: 12px;
+}
+.discovery-footer p {
+  font-size: 11px;
+  line-height: 1.6;
+  margin: 0 0 6px;
+  color: #b8ccc4;
+}
+.discovery-footer small {
+  font-size: 10px;
+  line-height: 1.5;
+  color: #93ada4;
+  display: block;
+  margin-top: 4px;
+}
+.discovery-error {
+  border: 1px solid #dca78d69;
+  background: #684b3b33;
+  padding: 10px;
+  border-radius: 8px;
+  color: #ffd5b7;
+  font-size: 12px;
+}
+.atlas.touch-ui .discovery-launch,
+.atlas.touch-ui .discovery-hud {
+  top: 116px;
+  left: 12px;
+  transform: none;
+  max-width: calc(100vw - 88px);
+}
+.atlas.touch-ui .discovery-hud {
+  width: 300px;
+  max-height: calc(100dvh - 340px);
+}
+.atlas.touch-ui .discovery-launch {
+  font-size: 12px;
+}
+.atlas.touch-ui .discovery-hud .discovery-primary {
+  min-height: 44px;
+}
+.atlas.touch-ui .discovery-hud kbd {
+  display: none;
+}
+.atlas.touch-ui .discovery-icon {
+  min-height: 36px;
+  min-width: 36px;
+}
+@media (max-height: 540px) {
+  .atlas.touch-ui .discovery-launch,
+  .atlas.touch-ui .discovery-hud {
+    top: 100px;
+  }
+  .atlas.touch-ui .discovery-hud {
+    width: 290px;
+    max-height: calc(100dvh - 220px);
+    padding: 9px;
+  }
+  .atlas.touch-ui .discovery-hud header {
+    margin-bottom: 4px;
+  }
+  .atlas.touch-ui .discovery-hud header button {
+    min-height: 28px;
+  }
+  .atlas.touch-ui .discovery-objective {
+    margin: 0 0 6px;
+  }
+  .atlas.touch-ui .discovery-hint,
+  .atlas.touch-ui .discovery-recent {
+    display: none;
+  }
+  .atlas.touch-ui .discovery-actions {
+    margin-top: 6px;
+  }
+  .atlas.touch-ui .discovery-hud .discovery-primary {
+    min-height: 36px;
+  }
+  .discovery-journal {
+    padding: 18px;
+    max-height: calc(100dvh - 20px);
+  }
+}
+@media (max-width: 480px) {
+  .discovery-journal {
+    padding: 20px 16px;
+  }
+  .discovery-route {
+    padding: 12px;
+    gap: 11px;
+  }
+  .discovery-stamp {
+    width: 43px;
+    height: 54px;
+  }
+  .discovery-route h3 {
+    font-size: 14px;
+  }
+  .discovery-title {
+    font-size: 23px;
+  }
+}
+
+.discovery-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #d5dda8;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-size: 11px;
+}
+
+@media (min-width: 901px) and (max-width: 1100px) {
+  .atlas:not(.touch-ui) .discovery-launch,
+  .atlas:not(.touch-ui) .discovery-hud {
+    top: 208px;
+  }
+}
+
+/* During a walking trail the passport replaces the large desktop travel card.
+ * Pausing restores that card; drive/boat controls and touch joysticks are intact. */
+.atlas:not(.touch-ui) .discovery-hud {
+  left: 26px;
+  top: 215px;
+  transform: none;
+  width: 286px;
+  max-height: calc(100dvh - 300px);
+}
+.atlas:not(.touch-ui)[data-travel-mode='walk']:has(.discovery-hud)
+  .street-controls {
+  display: none;
+}
+.discovery-walk-help {
+  margin-top: 10px;
+  border-top: 1px solid #ffffff18;
+  padding-top: 9px;
+  font-size: 11px;
+  color: #bdcfc6;
+}
+.discovery-walk-help summary {
+  cursor: pointer;
+}
+.discovery-walk-help p {
+  line-height: 1.5;
+  margin: 8px 0;
+}
+.discovery-walk-buttons {
+  display: flex;
+  gap: 6px;
+}
+.discovery-walk-buttons button {
+  flex: 1;
+  min-height: 38px;
+  border: 1px solid #70948a66;
+  border-radius: 7px;
+  display: grid;
+  place-items: center;
+  touch-action: none;
+}
+.discovery-walk-buttons button:active {
+  background: #d7e5a3;
+  color: #18353b;
+}
+.atlas.touch-ui .discovery-walk-help {
+  display: none;
+}

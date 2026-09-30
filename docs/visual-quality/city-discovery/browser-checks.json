@@ -1,0 +1,62 @@
+{
+  "revision": "d66a249af45beac1a09e80d25bbee64e23e0318c",
+  "sourceFingerprint": "1810c5cfdad53db6e2e6667cb5c549af0798d443e7aa628263f03dde75d80ede",
+  "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+  "date": "2026-09-30",
+  "checks": {
+    "typescript": "pass",
+    "tests": {
+      "passed": 488,
+      "failed": 0
+    },
+    "productionBuild": "pass: Firebase static verifier and emitted landmark worker"
+  },
+  "browser": "Codex in-app browser (Chromium), final source build",
+  "gastown": {
+    "initialNotes": 0,
+    "firstLegAcceptedMeters": 57,
+    "reloadedAfterFirstNote": true,
+    "restoredNotesAfterReload": 1,
+    "explicitRejoin": true,
+    "secondLegAcceptedMeters": 82,
+    "thirdLegAcceptedMeters": 95,
+    "finalNotes": 3,
+    "finalStamps": 1,
+    "allCollectionsManual": true,
+    "movement": "QA control holds real forward navigation input; original collisions/speed retained"
+  },
+  "otherRoutes": {
+    "robson": "live start/preflight pass; not a full new traversal",
+    "westEnd": "live start/preflight pass; not a full new traversal"
+  },
+  "responsive": {
+    "portrait": [
+      390,
+      844
+    ],
+    "landscape": [
+      844,
+      390
+    ],
+    "checks": [
+      "objective/collect visible",
+      "landscape pause and journal usable",
+      "joystick retained",
+      "route switch works",
+      "desktop reset restores normal walking controls"
+    ],
+    "realPhonePerformanceTest": false
+  },
+  "finalBrowserWarnings": [],
+  "chromeLimitation": "Early build walked and collected two stops. Later Chrome WebGL context loss caused the browser to block further context creation on this origin; cause unproven. No browser graphics/security settings were changed. Final full flow verified independently, not claimed as a Chrome reliability fix.",
+  "productionBrowser": {
+    "reloadWithSavedStamp": true,
+    "notes": 3,
+    "stamps": 1,
+    "locale": "zh-Hant",
+    "qaPanelPresent": false,
+    "diagnosticButtons": 0,
+    "warnings": []
+  }
+}
