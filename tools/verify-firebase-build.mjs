@@ -34,6 +34,10 @@ assert(
   !scripts.includes('LOCAL VISUAL QA'),
   'Instrumented QA builds must never be deployed',
 );
+assert(
+  !scripts.includes('Discovery walk to next stop') && !scripts.includes('Cancel discovery walking QA'),
+  'Discovery movement diagnostics must not ship in the public build',
+);
 for (const language of [
   'Français',
   'Español',

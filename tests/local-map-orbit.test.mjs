@@ -1,4 +1,4 @@
-import test from 'node:test';
+import test, { mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import ts from 'typescript';
@@ -110,7 +110,14 @@ function fixture({ mode = 'walk', ground = false, yaw = 0, lookYaw = 0 } = {}) {
       e.transition.start = now - elapsed;
       // Prevent the unrelated 800ms stats callback path from running.
       e.fpsAt = now;
-      e.animate(now);
+      // animate reads performance.now for transitions. Keep the frame's clock
+      // deterministic even if another test/build preempts this process.
+      const clock = mock.method(performance, 'now', () => now);
+      try {
+        e.animate(now);
+      } finally {
+        clock.mock.restore();
+      }
     },
     // Null-element controls installed no listeners; dispose() assumes a DOM
     // element in this Three version, so there is nothing to disconnect here.
