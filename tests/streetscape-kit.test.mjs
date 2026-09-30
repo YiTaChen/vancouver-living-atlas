@@ -201,6 +201,54 @@ test('long route evicts inactive pages and returning never duplicates scene page
   assert.equal(e.landmarks.children.length, 0);
 });
 
+test('shop identities follow bounded heritage selections and page eviction releases only owned buffers', async () => {
+  const e = host(),
+    rows = sources(100);
+  rows.forEach((source, index) => {
+    source.identity = index % 6;
+  });
+  rows[1].placement.asset = 'modern-lobby-bay';
+  const material = new THREE.MeshStandardMaterial();
+  let materialDisposed = 0,
+    geometryDisposed = 0;
+  material.addEventListener('dispose', () => materialDisposed++);
+  const kit = new StreetscapeKit(e, rows, async () => model(), material);
+  kit.update();
+  await settle();
+  pump(kit);
+  const artworks = () => {
+    const meshes = [];
+    kit.group.traverse((object) => {
+      if (object.userData.streetIdentity && object.parent.visible)
+        meshes.push(object);
+    });
+    return meshes;
+  };
+  assert.equal(
+    artworks().length,
+    1,
+    'one draw per active cell, no material-per-shop batches',
+  );
+  assert.equal(
+    artworks()[0].count,
+    (24 - 1) * 3,
+    'modern lobbies remain lobbies',
+  );
+  artworks()[0].geometry.addEventListener('dispose', () => geometryDisposed++);
+  e.settings.quality = 'balanced';
+  pump(kit);
+  assert.equal(artworks().length, 0);
+  assert.ok(rows.every((source) => !source.detailed));
+  kit.dispose();
+  assert.equal(geometryDisposed, 1);
+  assert.equal(
+    materialDisposed,
+    0,
+    'root fallback shares and owns the atlas material',
+  );
+  material.dispose();
+});
+
 test('transparent glazing primitives do not cast opaque canopy shadows', async () => {
   const e = host();
   const kit = new StreetscapeKit(e, sources(1), async () => {

@@ -1,0 +1,39 @@
+{
+  "date": "2026-09-30",
+  "parentRevision": "801564f95bc2f884123328f394de1b954b8a0190",
+  "matchedCaptureSourceFingerprint": "69b78ee8429a2d960ffdb2008b02dfbd21f7946071c78da2064ec7da2d602394",
+  "finalSourceFingerprint": "18d7952345627251e7a617d512d9b9fcd93139aa41ad0cb7c293d253dcd2188a",
+  "finalChangeAfterMatchedCaptures": "Raise interior wayfinding sign and add suspension rods, preserving existing collision.",
+  "checks": {
+    "fullSuiteBeforeFinalSignAdjustment": {
+      "passed": 511,
+      "failed": 0
+    },
+    "interiorLabSuiteAfterAdjustment": {
+      "passed": 17,
+      "failed": 0
+    },
+    "finalTypeScript": "passed",
+    "productionExportAndWorkerVerifier": "passed",
+    "fourGateWalk": "passed",
+    "incorrectRecipeRejected": "passed",
+    "threeRecipesAndStamp": "passed",
+    "reloadProgressWithFreshVisitRequired": "passed",
+    "trailExclusivity": "passed",
+    "thirdPersonExhibitSightline": "passed",
+    "portrait390x844": "passed",
+    "landscape844x390": "passed",
+    "finalQAConsoleWarningsAndErrors": [],
+    "productionCityLoaded": "passed",
+    "productionSavedExperiments": 3,
+    "productionStampRetained": true,
+    "productionQAControlsAbsent": true,
+    "productionConsoleWarningsAndErrors": []
+  },
+  "limitations": [
+    "Mobile checks are desktop responsive emulation.",
+    "Short frame samples do not establish FPS improvement.",
+    "BFCache lifecycle is exercised in Node; browser BFCache admission is not verified.",
+    "Historical Chrome context-loss root cause remains unproven."
+  ]
+}

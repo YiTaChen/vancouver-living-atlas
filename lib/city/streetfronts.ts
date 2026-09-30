@@ -7,6 +7,12 @@ import {
   type StreetBayLoader,
 } from './streetscape-kit';
 import { streetBayCell, streetBayThreshold } from './streetscape-placement';
+import {
+  createShopIdentityMaterial,
+  createShopPanelBatch,
+  shopIdentityFor,
+  type ShopPanel,
+} from './shopfront-identity';
 import { project, rings, hash, inPolygon } from './geo';
 import { GroundSurfaceIndex } from './ground-surface';
 import {
@@ -51,35 +57,11 @@ export function createStreetfronts(e: CityEngine, loader?: StreetBayLoader) {
       source: activeSource,
     });
   };
-  const names = ['COFFEE', 'BOOKS', 'GALLERY', 'STUDIO', 'RECORDS', 'GASTOWN'];
-  const signs = names.map((name, i) => {
-    const c = document.createElement('canvas');
-    c.width = 512;
-    c.height = 96;
-    const ctx = c.getContext('2d')!;
-    ctx.fillStyle = ['#28463f', '#4a3a31', '#233b46'][i % 3];
-    ctx.fillRect(0, 0, 512, 96);
-    ctx.strokeStyle = '#c1b88e';
-    ctx.lineWidth = 3;
-    ctx.strokeRect(6, 6, 500, 84);
-    ctx.font = '500 38px Georgia';
-    ctx.fillStyle = '#e5daba';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(name, 256, 49);
-    const t = new THREE.CanvasTexture(c);
-    t.colorSpace = THREE.SRGBColorSpace;
-    t.anisotropy = 4;
-    e.extraTextures.add(t);
-    return new THREE.MeshStandardMaterial({ map: t, roughness: 0.9 });
-  });
-  const signBatches = new Map<
-    string,
-    {
-      material: THREE.Material;
-      instances: { matrix: THREE.Matrix4; source?: Fallback }[];
-    }
-  >();
+  const identityMaterial = createShopIdentityMaterial(
+    document.createElement('canvas'),
+  );
+  e.extraTextures.add(identityMaterial.map!);
+  const signBatches = new Map<string, (ShopPanel & { source?: Fallback })[]>();
   const sidewalkMeshes: THREE.Mesh[] = [];
   e.roads.traverse((o) => {
     if (
@@ -92,7 +74,6 @@ export function createStreetfronts(e: CityEngine, loader?: StreetBayLoader) {
   const sidewalks = new GroundSurfaceIndex(sidewalkMeshes),
     profiles = e.data.buildingProfiles as Map<string, Profile>,
     foundations = e.data.buildingFoundations as Map<string, number>;
-  let n = 0;
   for (const f of e.data.buildings.features) {
     if (
       replacedBuilding(f.properties) ||
@@ -211,10 +192,12 @@ export function createStreetfronts(e: CityEngine, loader?: StreetBayLoader) {
             ground,
             jambs,
           );
+          const identity = shopIdentityFor(`${key}:${i}:${u}`);
           activeSource = undefined;
           if (!e.compatibleGraphics && threshold !== null) {
             const source: Fallback = {
               id: sources.length,
+              identity,
               placement: {
                 asset: 'heritage-shop-bay',
                 x: x + nx * 0.015,
@@ -287,21 +270,39 @@ export function createStreetfronts(e: CityEngine, loader?: StreetBayLoader) {
             yaw,
             side,
           );
-          const sign = new THREE.Object3D();
-          sign.rotation.y = yaw;
-          sign.position.set(x + nx * 1.27, entry.headY - 0.1, z + nz * 1.27);
-          sign.updateMatrix();
-          const signKey = `${n % names.length}:${streetBayCell(x, z)}`;
-          if (!signBatches.has(signKey))
-            signBatches.set(signKey, {
-              material: signs[n % names.length],
-              instances: [],
-            });
-          signBatches.get(signKey)!.instances.push({
-            matrix: sign.matrix.clone(),
-            source: activeSource,
-          });
-          n++;
+          const signKey = streetBayCell(x, z);
+          if (!signBatches.has(signKey)) signBatches.set(signKey, []);
+          const panel = (
+            role: ShopPanel['role'],
+            along: number,
+            y: number,
+            depth: number,
+            width: number,
+            height: number,
+          ) => {
+            const sign = new THREE.Object3D();
+            sign.rotation.y = yaw;
+            sign.position.set(
+              x + dx * along + nx * depth,
+              y,
+              z + dz * along + nz * depth,
+            );
+            sign.scale.set(width, height, 1);
+            sign.updateMatrix();
+            signBatches
+              .get(signKey)!
+              .push({
+                matrix: sign.matrix.clone(),
+                source: activeSource,
+                identity,
+                role,
+              });
+          };
+          panel('fascia', 0, entry.headY - 0.1, 1.271, 3.9, 0.29);
+          // Painted display/backing replaces the flat fallback glazing only;
+          // the existing jambs and window frame stay in front of these planes.
+          panel('display', -1.23, middle, 0.245, 2.18, entry.heightM - 0.18);
+          panel('notice', 1.23, middle, 0.245, 2.18, entry.heightM - 0.18);
         }
       }
     }
@@ -342,15 +343,9 @@ export function createStreetfronts(e: CityEngine, loader?: StreetBayLoader) {
     lod.addLevel(new THREE.Group(), 900);
     e.landmarks.add(lod);
   }
-  const signGeometry = new THREE.PlaneGeometry(3.9, 0.29);
-  for (const { material, instances } of signBatches.values()) {
-    const mesh = new THREE.InstancedMesh(
-      signGeometry,
-      material,
-      instances.length,
-    );
+  for (const instances of signBatches.values()) {
+    const mesh = createShopPanelBatch(instances, identityMaterial);
     instances.forEach(({ matrix, source }, index) => {
-      mesh.setMatrixAt(index, matrix);
       source?.handles.push({ mesh, index, matrix });
     });
     mesh.computeBoundingSphere();
@@ -511,7 +506,9 @@ export function createStreetfronts(e: CityEngine, loader?: StreetBayLoader) {
     g.add(m);
   }
   e.landmarks.add(g);
-  return e.compatibleGraphics ? null : new StreetscapeKit(e, sources, loader);
+  return e.compatibleGraphics
+    ? null
+    : new StreetscapeKit(e, sources, loader, identityMaterial);
 }
 
 /** Modest original rooftop plant, placed strictly inside each measured footprint. */

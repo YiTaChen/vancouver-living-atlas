@@ -43,6 +43,7 @@ import { TravelJoystick } from '@/components/travel-joystick';
 import { DiscoveryPanel, type DiscoveryTarget } from '@/components/discovery-panel';
 import type { DiscoveryRoute } from '@/lib/city/discovery-routes';
 import { placeDiscoveryStart } from '@/lib/city/discovery-runtime';
+import { placeLightLabStart } from '@/lib/city/light-lab-runtime';
 import { SkyControls } from '@/components/sky-controls';
 import {
   DEFAULT_SKY,
@@ -211,6 +212,8 @@ export default function Home() {
   }, []);
   useEffect(() => {
     let stopped = false;
+    setReady(false);
+    setError('');
     setLoadProgress(0);
     import('@/lib/city/engine')
       .then(({ CityEngine }) => {
@@ -218,8 +221,9 @@ export default function Home() {
         try {
           engine.current = new CityEngine(
             host.current,
-            setStats,
+            (snapshot) => { if (!stopped) setStats(snapshot); },
             () => {
+              if (stopped) return;
               setReady(true);
               if (engine.current) setSettings({ ...engine.current.settings });
               engine.current?.setLocale(localeRef.current);
@@ -228,6 +232,7 @@ export default function Home() {
               if (minimap.current) engine.current?.drawMinimap(minimap.current);
             },
             (message) => {
+              if (stopped) return;
               setError(message);
               setReady(false);
             },
@@ -237,7 +242,7 @@ export default function Home() {
             },
           );
         } catch (e) {
-          setError(String(e));
+          if (!stopped) setError(String(e));
         }
       })
       .catch((reason) => {
@@ -246,6 +251,7 @@ export default function Home() {
     return () => {
       stopped = true;
       engine.current?.destroy();
+      engine.current = null;
     };
   }, [go]);
   useEffect(() => {
@@ -595,6 +601,17 @@ export default function Home() {
   const discoveryTarget = useCallback((target: DiscoveryTarget | null) => {
     engine.current?.setDiscoveryTarget(target);
   }, []);
+  const beginLightLab = useCallback(() => {
+    const city = engine.current;
+    if (!city || !placeLightLabStart(city)) return false;
+    setTour(false);
+    setPanel(null);
+    setPlacing(null);
+    setMobilePanel(null);
+    setLocalOrbit(false);
+    setSettings({ ...city.settings, mode: 'walk', autoRotate: false });
+    return true;
+  }, []);
   return (
     <main
       data-travel-mode={settings.mode}
@@ -607,6 +624,7 @@ export default function Home() {
         locale={locale}
         visible={ready && !clean && !about && !placing && !flight.placing && !(touchUI && mobileHudHidden) && !panel && !mobilePanel}
         onBegin={beginDiscovery}
+        onBeginLab={beginLightLab}
         onTargetChange={discoveryTarget}
       />
       <FlightControls key={flight.attached ? flight.kind || 'flight' : 'placement'} controller={engine.current?.flight || null} state={flight} locale={locale} touch={touchUI} controlsEnabled={!about && !panel && (!mobilePanel || mobilePanel === 'map')} panelVisible={!about && !panel && (!mobilePanel || mobilePanel === 'travel')} optionsOpen={mobilePanel === 'travel'} onCloseOptions={() => setMobilePanel(null)}/>

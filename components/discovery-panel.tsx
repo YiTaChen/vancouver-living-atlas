@@ -9,6 +9,7 @@ import {
   BookOpen,
   Check,
   Footprints,
+  FlaskConical,
   MapPin,
   Pause,
   RefreshCw,
@@ -44,13 +45,15 @@ import {
 } from '@/lib/city/discovery';
 import { discoverySample } from '@/lib/city/discovery-runtime';
 import './discovery-panel.css';
+import { LightLabPanel } from './light-lab-panel';
+import { lightLabCopy } from '@/lib/city/light-lab-copy';
 
 const EN = {
   title: 'City field notes',
   intro:
-    'Three short walks. Nine observations. Discover the city at street level and build your Vancouver passport.',
+    'Three short walks, nine observations and an indoor light lab. Explore the city and build your Vancouver passport.',
   notes: 'notes',
-  stamps: 'stamps',
+  stamps: 'walking stamps',
   close: 'Close field notes',
   start: 'Start walk',
   resume: 'Rejoin last stop',
@@ -85,9 +88,10 @@ const EN = {
 };
 const HANT: typeof EN = {
   title: '城市探索手帳',
-  intro: '三條短程散步、九篇觀察筆記。走進街道，收集你的溫哥華探索印章。',
+  intro:
+    '三條短程散步、九篇觀察筆記，還有室內光色實驗室。走進城市，收集你的溫哥華探索印章。',
   notes: '篇筆記',
-  stamps: '枚印章',
+  stamps: '枚散步印章',
   close: '關閉探索手帳',
   start: '開始散步',
   resume: '從上一站繼續',
@@ -120,9 +124,10 @@ const HANT: typeof EN = {
 };
 const HANS: typeof EN = {
   title: '城市探索手帐',
-  intro: '三条短程散步、九篇观察笔记。走进街道，收集你的温哥华探索印章。',
+  intro:
+    '三条短程散步、九篇观察笔记，还有室内光色实验室。走进城市，收集你的温哥华探索印章。',
   notes: '篇笔记',
-  stamps: '枚印章',
+  stamps: '枚散步印章',
   close: '关闭探索手帐',
   start: '开始散步',
   resume: '从上一站继续',
@@ -172,6 +177,7 @@ interface Props {
   locale: Locale;
   visible: boolean;
   onBegin(route: DiscoveryRoute, next: number): boolean;
+  onBeginLab(): boolean;
   onTargetChange(target: DiscoveryTarget | null): void;
 }
 function DiscoveryMoveButton({
@@ -236,10 +242,14 @@ export function DiscoveryPanel({
   locale,
   visible,
   onBegin,
+  onBeginLab,
   onTargetChange,
 }: Props) {
   const text = locale === 'zh-Hant' ? HANT : locale === 'zh-Hans' ? HANS : EN;
   const contentLocale = locale.startsWith('zh') ? locale : 'en';
+  const labText = lightLabCopy(locale);
+  const [labRequest, setLabRequest] = useState(0);
+  const [labActive, setLabActive] = useState(false);
   const [save, setSave] = useState(emptyDiscoverySave);
   const saveRef = useRef(save);
   const [open, setOpen] = useState(false),
@@ -288,6 +298,7 @@ export function DiscoveryPanel({
   const progress = save.routes[route.id];
   const checkpoint = route.stops[progress.next];
   useEffect(() => {
+    if (labActive) return;
     const target =
       running && checkpoint
         ? {
@@ -298,7 +309,7 @@ export function DiscoveryPanel({
         : null;
     onTargetChange(target);
     return () => onTargetChange(null);
-  }, [running, checkpoint, locale, onTargetChange]);
+  }, [running, checkpoint, locale, labActive, onTargetChange]);
   useEffect(() => {
     if (!city || !running) return;
     const sample = () => {
@@ -445,7 +456,7 @@ export function DiscoveryPanel({
   };
   return (
     <>
-      {visible && !running && !finished && (
+      {visible && !running && !finished && !labActive && (
         <button
           ref={trigger}
           className="discovery-launch glass ui-chrome"
@@ -600,6 +611,15 @@ export function DiscoveryPanel({
           )}
         </section>
       )}
+      <LightLabPanel
+        city={city}
+        locale={locale}
+        visible={visible}
+        request={labRequest}
+        onBegin={onBeginLab}
+        onTargetChange={onTargetChange}
+        onActiveChange={setLabActive}
+      />
       <span className="sr-only" role="status">
         {announcement}
       </span>
@@ -644,6 +664,30 @@ export function DiscoveryPanel({
             </p>
           )}
           <div className="discovery-route-list">
+            <article className="discovery-route light-lab-card">
+              <div className="discovery-stamp" aria-hidden="true">
+                <FlaskConical size={25} />
+                <span>LAB</span>
+              </div>
+              <div className="discovery-route-body">
+                <h3>{labText.title}</h3>
+                <p>{labText.intro}</p>
+                <small>
+                  {labText.place} · 3 {labText.progress}
+                </small>
+                <button
+                  className="discovery-primary"
+                  onClick={() => {
+                    pause();
+                    setOpen(false);
+                    setLabRequest((value) => value + 1);
+                  }}
+                >
+                  {labText.open}
+                  <ArrowUpRight size={16} />
+                </button>
+              </div>
+            </article>
             {DISCOVERY_ROUTES.map((item, index) => {
               const stored = save.routes[item.id];
               return (

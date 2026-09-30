@@ -35,7 +35,7 @@ assert(
   'Instrumented QA builds must never be deployed',
 );
 assert(
-  !scripts.includes('Discovery walk to next stop') && !scripts.includes('Cancel discovery walking QA'),
+  !scripts.includes('Discovery walk to next stop') && !scripts.includes('Cancel discovery walking QA') && !scripts.includes('Lab walk to next marker') && !scripts.includes('Cancel lab walking QA'),
   'Discovery movement diagnostics must not ship in the public build',
 );
 for (const language of [

@@ -5,9 +5,17 @@ import type {
   StreetBayPlacement,
 } from './streetscape-placement';
 import { streetBayCell, STREET_BAY_HEIGHT_M } from './streetscape-placement';
+import {
+  createShopPanelBatch,
+  detailedShopPanels,
+  shopIdentityFor,
+  type ShopPanel,
+} from './shopfront-identity';
 
 export type StreetBaySource = {
   id: number;
+  /** Original shop artwork remains stable between the fallback and both LODs. */
+  identity?: number;
   placement: StreetBayPlacement;
   /** Toggles only this frontage's old ground detail. Upper windows remain. */
   setDetailed(active: boolean): void;
@@ -124,6 +132,7 @@ export class StreetscapeKit {
     private readonly e: Host,
     sources: StreetBaySource[],
     loader?: StreetBayLoader,
+    private readonly identityMaterial?: THREE.MeshStandardMaterial,
   ) {
     this.loader =
       loader ?? (async (url) => (await new GLTFLoader().loadAsync(url)).scene);
@@ -236,6 +245,21 @@ export class StreetscapeKit {
       batches.get(key)!.push(source);
     }
     const transform = new THREE.Object3D();
+    const identityPanels: ShopPanel[] = [];
+    if (this.identityMaterial)
+      for (const { source } of selections) {
+        const p = source.placement;
+        if (p.asset !== 'heritage-shop-bay') continue;
+        transform.position.set(p.x, p.y, p.z);
+        transform.rotation.set(0, p.yaw, 0);
+        transform.updateMatrix();
+        identityPanels.push(
+          ...detailedShopPanels(
+            source.identity ?? shopIdentityFor(`${p.x}:${p.z}:${p.yaw}`),
+            transform.matrix,
+          ),
+        );
+      }
     for (const [key, sources] of batches) {
       for (const part of this.templates.get(key)!) {
         const mesh = new THREE.InstancedMesh(
@@ -261,6 +285,8 @@ export class StreetscapeKit {
         group.add(mesh);
       }
     }
+    if (identityPanels.length)
+      group.add(createShopPanelBatch(identityPanels, this.identityMaterial!));
     group.visible = false;
     this.group.add(group);
     return {
@@ -275,7 +301,12 @@ export class StreetscapeKit {
     this.show(page, false);
     page.group.removeFromParent();
     page.group.traverse((object) => {
-      if (object instanceof THREE.InstancedMesh) object.dispose();
+      if (object instanceof THREE.InstancedMesh) {
+        // GLB template buffers are shared; each identity batch owns its tiny
+        // instanced atlas attribute and plane buffer, but not the shared material.
+        if (object.userData.streetIdentity) object.geometry.dispose();
+        object.dispose();
+      }
     });
   }
 
