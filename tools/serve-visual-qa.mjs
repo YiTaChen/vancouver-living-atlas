@@ -16,7 +16,7 @@ const revision = execFileSync('git', ['rev-parse', 'HEAD'], {
 // actual visual source and data as well, so that distinction stays explicit.
 const visualFiles = [...new Set(execFileSync('git', [
   'ls-files', '-co', '--exclude-standard', '--', 'lib', 'app', 'components',
-  'public/data', 'public/textures', 'public/models', 'package.json', 'package-lock.json', 'vite.config.ts',
+  'public/data', 'public/textures', 'public/materials', 'public/models', 'package.json', 'package-lock.json', 'vite.config.ts',
 ], {encoding:'utf8'}).trim().split('\n'))].sort();
 const digest = createHash('sha256');
 for (const file of visualFiles) {

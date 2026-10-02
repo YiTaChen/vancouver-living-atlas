@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-01",
+  "url": "http://localhost:3100/",
+  "checks": [
+    {
+      "viewport": [
+        1280,
+        800
+      ],
+      "weather": "海岸陰天",
+      "result": "passed; translated initial clear label and overcast selection verified"
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "weather": "晴朗",
+      "result": "passed; scrollable panel, close/reopen, selection verified"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "weather": "海岸陰天",
+      "result": "passed; scrollable panel and selection verified"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "url": "http://localhost:3100/?graphics=compatible",
+      "graphics": "compatible",
+      "weather": "海岸陰天",
+      "qaPanels": 0,
+      "result": "passed"
+    }
+  ],
+  "console": [],
+  "limitations": "Desktop browser viewport overrides, not a physical mobile GPU or touch performance test. No new gameplay interaction run in this stage."
+}

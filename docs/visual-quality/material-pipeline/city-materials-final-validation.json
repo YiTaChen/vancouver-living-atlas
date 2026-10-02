@@ -1,0 +1,624 @@
+{
+  "runtimeMaps": {
+    "color": {
+      "bytes": 475586,
+      "sha256": "82e6b67cd2de6ba798a1fb93b53720983d8d6132858eefa661e88f2159a07c78",
+      "dimensions": [
+        1024,
+        512
+      ]
+    },
+    "normal": {
+      "bytes": 199341,
+      "sha256": "37300a5b124a642fec3b8661aecf91bbe91662c15bc53ce5c8754d9ae65c9a7c",
+      "dimensions": [
+        1024,
+        512
+      ],
+      "channelRanges": [
+        [
+          116,
+          139
+        ],
+        [
+          116,
+          139
+        ],
+        [
+          254,
+          255
+        ]
+      ],
+      "maxUnitLengthError": 0.004251
+    },
+    "orm": {
+      "bytes": 158578,
+      "sha256": "339db0daeab8081f725ee02ec9bf9d6fcecb480b64abf01dedd7f1a06bbee1ce",
+      "dimensions": [
+        1024,
+        512
+      ]
+    }
+  },
+  "slots": [
+    {
+      "id": "heritage-brick",
+      "slot": 0,
+      "tileMeters": [
+        1.728,
+        1.728
+      ],
+      "sourceMaps": {
+        "color": {
+          "bytes": 153372,
+          "sha256": "d66dee08cdff0d0054edf0a08738edf2b80b1d2c1b0579b4ea4f38eb51ea7faf"
+        },
+        "normal": {
+          "bytes": 97764,
+          "sha256": "1b18f6112496313c227a498a93b5ee5a6299e67cc67066ff346198dd4e05bfc2",
+          "channelRanges": [
+            [
+              76,
+              179
+            ],
+            [
+              76,
+              179
+            ],
+            [
+              237,
+              255
+            ]
+          ],
+          "maxUnitLengthError": 0.005351
+        },
+        "orm": {
+          "bytes": 63808,
+          "sha256": "f0a5b5359753085b772334892851c162db0a0bab99612b407c592bdbca811882"
+        }
+      },
+      "encodedAverageColor": [
+        0.536286,
+        0.36389,
+        0.278636
+      ]
+    },
+    {
+      "id": "sandstone",
+      "slot": 1,
+      "tileMeters": [
+        1.2,
+        1.2
+      ],
+      "sourceMaps": {
+        "color": {
+          "bytes": 135322,
+          "sha256": "7d370f02016b15b0b702a47445d4f0f2b2555c3d623e12b16b19e157abd5337a"
+        },
+        "normal": {
+          "bytes": 83560,
+          "sha256": "30a5ba0a9ff28d05419bd9339a7746f841959c4e276028ce0a7c35c7be93eaba",
+          "channelRanges": [
+            [
+              125,
+              130
+            ],
+            [
+              125,
+              130
+            ],
+            [
+              255,
+              255
+            ]
+          ],
+          "maxUnitLengthError": 0.0002
+        },
+        "orm": {
+          "bytes": 43039,
+          "sha256": "5458aa7d79979230563fcd4e8615d330b024276fda4685c9e49b072a2ad4f2c1"
+        }
+      },
+      "encodedAverageColor": [
+        0.646237,
+        0.596421,
+        0.496766
+      ]
+    },
+    {
+      "id": "concrete",
+      "slot": 2,
+      "tileMeters": [
+        1.5,
+        1.5
+      ],
+      "sourceMaps": {
+        "color": {
+          "bytes": 126294,
+          "sha256": "edf1314b0da424c5dc136fedf3a488d2a9d1a682df47f4e3c34b4cffac0574f6"
+        },
+        "normal": {
+          "bytes": 54562,
+          "sha256": "87f3c2f269c8b1dc320b61bff6619d057e0bb3f7b3eb40ca14759c453595c442",
+          "channelRanges": [
+            [
+              124,
+              130
+            ],
+            [
+              125,
+              130
+            ],
+            [
+              255,
+              255
+            ]
+          ],
+          "maxUnitLengthError": 0.000384
+        },
+        "orm": {
+          "bytes": 43280,
+          "sha256": "4718d11d96e519000b877c02e5ff2cff23876c81417b937b35ae63ec0f675081"
+        }
+      },
+      "encodedAverageColor": [
+        0.569371,
+        0.579385,
+        0.549356
+      ]
+    },
+    {
+      "id": "cedar",
+      "slot": 3,
+      "tileMeters": [
+        1.52,
+        1.52
+      ],
+      "sourceMaps": {
+        "color": {
+          "bytes": 132796,
+          "sha256": "a449185795f6b8f1ba4b8be4d54a5c29d4de9962e3130dcd6f8a78c5eab92c09"
+        },
+        "normal": {
+          "bytes": 52785,
+          "sha256": "5a22afe24646ee76b7fd876817e65a7a6e40fb1691b559171156d6098c38c215",
+          "channelRanges": [
+            [
+              124,
+              131
+            ],
+            [
+              109,
+              146
+            ],
+            [
+              254,
+              255
+            ]
+          ],
+          "maxUnitLengthError": 0.003148
+        },
+        "orm": {
+          "bytes": 42974,
+          "sha256": "3701c80f980c8f530cb49650e36b3007db658d04298a1029716d6a4d337e8f43"
+        }
+      },
+      "encodedAverageColor": [
+        0.559027,
+        0.549053,
+        0.469189
+      ]
+    },
+    {
+      "id": "roof-shingle",
+      "slot": 4,
+      "tileMeters": [
+        1.8,
+        1.92
+      ],
+      "sourceMaps": {
+        "color": {
+          "bytes": 101307,
+          "sha256": "cc77c3a8056cb2cdd57c750eed1b5ed27469dc12353f1f3a85ce62a62310a56f"
+        },
+        "normal": {
+          "bytes": 61588,
+          "sha256": "91710aae7ae2586e886135dd7e565e1aaa57f22817dbd1825531df7adf434e61",
+          "channelRanges": [
+            [
+              93,
+              162
+            ],
+            [
+              96,
+              159
+            ],
+            [
+              247,
+              255
+            ]
+          ],
+          "maxUnitLengthError": 0.005289
+        },
+        "orm": {
+          "bytes": 53979,
+          "sha256": "f501c57e209e4d6c42d39780b63d4937ef476f766c24198603a8439eb7b16311"
+        }
+      },
+      "encodedAverageColor": [
+        0.277387,
+        0.297215,
+        0.297215
+      ]
+    },
+    {
+      "id": "street-brick",
+      "slot": 5,
+      "tileMeters": [
+        1.92,
+        1.92
+      ],
+      "sourceMaps": {
+        "color": {
+          "bytes": 153086,
+          "sha256": "bdd741a363828769779de08ca1dc1d319c30a125e28cbe36c79269c7adce6312"
+        },
+        "normal": {
+          "bytes": 92806,
+          "sha256": "a405a6bdc51558083a23d0a25e91e1000cc823ac55c25e082c777f049c65dcba",
+          "channelRanges": [
+            [
+              82,
+              173
+            ],
+            [
+              82,
+              173
+            ],
+            [
+              240,
+              255
+            ]
+          ],
+          "maxUnitLengthError": 0.005351
+        },
+        "orm": {
+          "bytes": 65038,
+          "sha256": "8c821e368b938b11de92669178da013e985f59163cd976ae9c593d1881dc8b76"
+        }
+      },
+      "encodedAverageColor": [
+        0.45372,
+        0.312559,
+        0.23632
+      ]
+    },
+    {
+      "id": "painted-metal",
+      "slot": 6,
+      "tileMeters": [
+        0.8,
+        0.8
+      ],
+      "sourceMaps": {
+        "color": {
+          "bytes": 86418,
+          "sha256": "e572f72749f87e6f270d92d92d8f3d6e1d1516f0929256b8b6c4250421559560"
+        },
+        "normal": {
+          "bytes": 26884,
+          "sha256": "138704881990a261abcba11cafb18cca8d33a09a44d660d6fad6ae17c2fda0f5",
+          "channelRanges": [
+            [
+              126,
+              129
+            ],
+            [
+              126,
+              129
+            ],
+            [
+              255,
+              255
+            ]
+          ],
+          "maxUnitLengthError": 7.7e-05
+        },
+        "orm": {
+          "bytes": 43781,
+          "sha256": "c17d43084e048d7a8b8aa7f05b053a7e1aa6f7d76a262223bf78a985fba41775"
+        }
+      },
+      "encodedAverageColor": [
+        0.280289,
+        0.330323,
+        0.310311
+      ]
+    },
+    {
+      "id": "asphalt",
+      "slot": 7,
+      "tileMeters": [
+        3,
+        3
+      ],
+      "sourceMaps": {
+        "color": {
+          "bytes": 152700,
+          "sha256": "c2e2fca56421002a2b9ea10af8d7ac152d3ecd716dea48e35dcde1b823e269ec"
+        },
+        "normal": {
+          "bytes": 136269,
+          "sha256": "5650eced60b71ce0000b6db29136c71dd8b65eb90690f40332ce189105b16ee1",
+          "channelRanges": [
+            [
+              124,
+              131
+            ],
+            [
+              123,
+              132
+            ],
+            [
+              255,
+              255
+            ]
+          ],
+          "maxUnitLengthError": 0.000692
+        },
+        "orm": {
+          "bytes": 43406,
+          "sha256": "705a5d0241df654d50b2514f1c786440f324886d22a33d3bb6a127077eb588ba"
+        }
+      },
+      "encodedAverageColor": [
+        0.259805,
+        0.279812,
+        0.279812
+      ]
+    }
+  ],
+  "passed": true,
+  "catalogSha256": "c4e26c42122d394b0ddda5653dbe588e4701bcab97dc2de66420e2411310aa95",
+  "generatorSha256": "b155078b96ef841d6a4275fb723dcf32b25dd1cef6eb9eee52dba5caf347ef0e",
+  "blenderSourceAudit": "passed",
+  "editableSources": [
+    {
+      "file": "/Users/adam/Documents/Codex/2026-09-04/ji/vancouver-twin/tools/assets/city-materials/source/city-material-library.blend",
+      "surfaceIds": [
+        "asphalt",
+        "cedar",
+        "concrete",
+        "heritage-brick",
+        "painted-metal",
+        "roof-shingle",
+        "sandstone",
+        "street-brick"
+      ],
+      "packedImagesMatchSource": true,
+      "colorSpacesAndORMChannels": true,
+      "physicalUVScale": true,
+      "sha256": "b214c6b392181c320a4e5df3b8e3c6841927f5e8c3d572b064591e4f66216f80"
+    },
+    {
+      "file": "/Users/adam/Documents/Codex/2026-09-04/ji/vancouver-twin/tools/assets/streetscape/source/heritage-shop-bay.lod0.blend",
+      "surfaceIds": [
+        "cedar",
+        "heritage-brick",
+        "painted-metal",
+        "sandstone"
+      ],
+      "packedImagesMatchSource": true,
+      "colorSpacesAndORMChannels": true,
+      "physicalUVScale": true,
+      "sha256": "4f0ec9c5882eb3b3b84a26c7d49f34d77ebce3d7221c114288243da147403961"
+    },
+    {
+      "file": "/Users/adam/Documents/Codex/2026-09-04/ji/vancouver-twin/tools/assets/streetscape/source/heritage-shop-bay.lod1.blend",
+      "surfaceIds": [
+        "cedar",
+        "heritage-brick",
+        "painted-metal",
+        "sandstone"
+      ],
+      "packedImagesMatchSource": true,
+      "colorSpacesAndORMChannels": true,
+      "physicalUVScale": true,
+      "sha256": "e8ee7fa17908684f1717d89ca446e0840c8c68eb0fe7d7a9acba0dd9cb3fae1d"
+    },
+    {
+      "file": "/Users/adam/Documents/Codex/2026-09-04/ji/vancouver-twin/tools/assets/streetscape/source/modern-lobby-bay.lod0.blend",
+      "surfaceIds": [
+        "cedar",
+        "painted-metal",
+        "sandstone"
+      ],
+      "packedImagesMatchSource": true,
+      "colorSpacesAndORMChannels": true,
+      "physicalUVScale": true,
+      "sha256": "1c2d4446062fc65211585b255098a1a204dab58511652fe403441285f7ef13b5"
+    },
+    {
+      "file": "/Users/adam/Documents/Codex/2026-09-04/ji/vancouver-twin/tools/assets/streetscape/source/modern-lobby-bay.lod1.blend",
+      "surfaceIds": [
+        "cedar",
+        "painted-metal",
+        "sandstone"
+      ],
+      "packedImagesMatchSource": true,
+      "colorSpacesAndORMChannels": true,
+      "physicalUVScale": true,
+      "sha256": "d9f9087fe1907855439852c1ed28ea69435baf490088fe1bff3d159bba13d2ab"
+    }
+  ],
+  "shippingGLBs": [
+    {
+      "asset": "heritage-shop-bay",
+      "lod": 0,
+      "file": "/Users/adam/Documents/Codex/2026-09-04/ji/vancouver-twin/public/models/streetscape/heritage-shop-bay.lod0.glb",
+      "sha256": "985f36a9283982d06faa0e99634322fe7f613d1eb8be0b7ab74d3e1b48c8a898",
+      "maps": {
+        "color": {
+          "sha256": "6785de7d8ac738f5cfbdfac8debf08dfdcc2900a7588651e459532dead133d80",
+          "bytes": 892902,
+          "dimensions": [
+            1024,
+            1024
+          ]
+        },
+        "normal": {
+          "sha256": "14c730cb8b534240c32c54f2b611a6dcb710d402d5860a73590ab3e77a39b20c",
+          "bytes": 177557,
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "validCoveredFraction": 0.999989
+        },
+        "orm": {
+          "sha256": "cb1e313467e5808ebb1dc174ed595b9271a1f77dae6b6260d47e7f2212778d04",
+          "bytes": 631813,
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "coveredPixels": 902773,
+          "roughnessRange": [
+            41,
+            232
+          ],
+          "metallicRange": [
+            0,
+            140
+          ]
+        }
+      }
+    },
+    {
+      "asset": "heritage-shop-bay",
+      "lod": 1,
+      "file": "/Users/adam/Documents/Codex/2026-09-04/ji/vancouver-twin/public/models/streetscape/heritage-shop-bay.lod1.glb",
+      "sha256": "63b03dc729d1bac065ce1c4fa786fedb907f95773820fa6752ff473e3aab56ac",
+      "maps": {
+        "color": {
+          "sha256": "cc1bbda53c41273673b1fbbac13e363e15e6ed8bff1fae9e0b07106d2f935579",
+          "bytes": 283272,
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        "normal": {
+          "sha256": "9cb93bcef54482a51157eeb86a10dea78ad4b4755e7f134af4192e1fb181dc4a",
+          "bytes": 54213,
+          "dimensions": [
+            512,
+            512
+          ],
+          "validCoveredFraction": 0.999996
+        },
+        "orm": {
+          "sha256": "c6f7034bdf3c45e39e0fce82de1e1f76e215725fcc9cb1171f250b3ab5b3f110",
+          "bytes": 178197,
+          "dimensions": [
+            512,
+            512
+          ],
+          "coveredPixels": 254936,
+          "roughnessRange": [
+            41,
+            231
+          ],
+          "metallicRange": [
+            0,
+            140
+          ]
+        }
+      }
+    },
+    {
+      "asset": "modern-lobby-bay",
+      "lod": 0,
+      "file": "/Users/adam/Documents/Codex/2026-09-04/ji/vancouver-twin/public/models/streetscape/modern-lobby-bay.lod0.glb",
+      "sha256": "756fc1912f199ad4d8a3d7f124b1819c5923754392f9bfc8aee27a9bfddde164",
+      "maps": {
+        "color": {
+          "sha256": "dd16f6830b2bac7cda8fdb2b0c6cd6216d5b5aa500f9f25adc36d35d6a4c81aa",
+          "bytes": 728266,
+          "dimensions": [
+            1024,
+            1024
+          ]
+        },
+        "normal": {
+          "sha256": "b580ff99fb189e17844e63163ab3ef756eed458b9c10c14403fe482cf8039e77",
+          "bytes": 148925,
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "validCoveredFraction": 1.0
+        },
+        "orm": {
+          "sha256": "a567091023829c35d6b625a8c284bd2a4d3d1a79f485d8b685b0260ae869a9e3",
+          "bytes": 498612,
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "coveredPixels": 928842,
+          "roughnessRange": [
+            41,
+            209
+          ],
+          "metallicRange": [
+            0,
+            38
+          ]
+        }
+      }
+    },
+    {
+      "asset": "modern-lobby-bay",
+      "lod": 1,
+      "file": "/Users/adam/Documents/Codex/2026-09-04/ji/vancouver-twin/public/models/streetscape/modern-lobby-bay.lod1.glb",
+      "sha256": "e808ce8665581bf55c915867b840483e39cf27b389ba505b5c83d3cdaab54f3e",
+      "maps": {
+        "color": {
+          "sha256": "339c723e74f5ee5953726a0a98f7b1197f7688487689c0268033fbd731fb0f5b",
+          "bytes": 214839,
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        "normal": {
+          "sha256": "477e973f465b3d34936d6673d21a19943b8f28c635ae4cf92a743d1df1a5be24",
+          "bytes": 28670,
+          "dimensions": [
+            512,
+            512
+          ],
+          "validCoveredFraction": 1.0
+        },
+        "orm": {
+          "sha256": "bba3e9c3647a83757fac6f2ec9e0e385a139e73da1035d9025b4b38190af9199",
+          "bytes": 134912,
+          "dimensions": [
+            512,
+            512
+          ],
+          "coveredPixels": 243525,
+          "roughnessRange": [
+            41,
+            209
+          ],
+          "metallicRange": [
+            0,
+            38
+          ]
+        }
+      }
+    }
+  ]
+}
