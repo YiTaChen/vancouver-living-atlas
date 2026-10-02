@@ -1,4 +1,4 @@
-import test from 'node:test';
+import test, { beforeEach, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import ts from 'typescript';
@@ -25,14 +25,30 @@ const compile = (name, imports = {}) =>
       .outputText.replace(
         /from ['"]([^'"]+)['"]/g,
         (_, id) => `from '${imports[id] || id}'`,
+      )
+      .replace(
+        /import\(['"]([^'"]+)['"]\)/g,
+        (_, id) => `import('${imports[id] || id}')`,
       ),
   );
+let previousQA;
+beforeEach(() => {
+  previousQA = process.env.VANCOUVER_VISUAL_QA;
+  process.env.VANCOUVER_VISUAL_QA = '1';
+});
+afterEach(() => {
+  if (previousQA === undefined) delete process.env.VANCOUVER_VISUAL_QA;
+  else process.env.VANCOUVER_VISUAL_QA = previousQA;
+});
 const selection = compile('../lib/city/tree-selection.ts'),
   { DetailedTrees } = await import(
     compile('../lib/city/detailed-trees.ts', {
       three: fakeThree,
       './tree-selection': selection,
       './assets/tree-geometry': fakeFactory,
+      './assets/tree-material-candidate': cityModule(
+        'assets/tree-material-candidate',
+      ),
       './geo': cityModule('geo'),
       './quality': cityModule('quality'),
     })
@@ -223,4 +239,213 @@ test('an existing pool keeps scene ownership; early disposal does not double-dis
   assert.deepEqual(counts, { trunk: 1, leaf: 1, depth: 1 });
   f.d.update(true);
   assert.equal(f.d.pools.length, 1);
+});
+
+async function candidateRequests(run) {
+  const original = THREE.ImageLoader.prototype.load,
+    requests = [];
+  THREE.ImageLoader.prototype.load = function (url, ok, _progress, error) {
+    requests.push({ url, ok, error });
+    return {};
+  };
+  try {
+    return await run(requests);
+  } finally {
+    THREE.ImageLoader.prototype.load = original;
+  }
+}
+async function waitForCandidateRequests(requests) {
+  for (let i = 0; i < 20 && requests.length === 0; i++)
+    await new Promise(setImmediate);
+  assert.equal(
+    requests.length,
+    5,
+    'lazy module loads only when the QA setter requests it',
+  );
+}
+function completeCandidate(requests) {
+  requests.forEach((request, i) =>
+    request.ok({ width: 1024 >> i, height: 1024 >> i }),
+  );
+}
+function populated() {
+  const f = setup();
+  f.d.update();
+  settle('leaf');
+  settle('bark');
+  for (let i = 0; i < 6; i++) f.d.update();
+  return f;
+}
+function disposePoolScene(f) {
+  f.d.group.traverse((mesh) => {
+    mesh.customDepthMaterial?.dispose();
+    mesh.geometry?.dispose();
+    mesh.material?.dispose();
+    if (mesh.isInstancedMesh) mesh.dispose();
+  });
+  for (const texture of f.e.extraTextures) texture.dispose();
+}
+
+test('production refuses material candidates without loading images or allocating any candidate resources', async () => {
+  const f = populated(),
+    materials = f.d.pools.map((pool) => pool.foliage.material);
+  for (const flag of [undefined, '0']) {
+    if (flag === undefined) delete process.env.VANCOUVER_VISUAL_QA;
+    else process.env.VANCOUVER_VISUAL_QA = flag;
+    await candidateRequests(async (requests) => {
+      assert.equal(await f.d.setMaterialCandidate('leaf-rgba'), false);
+      assert.equal(await f.d.setMaterialCandidate('baseline'), false);
+      assert.equal(requests.length, 0);
+    });
+    assert.deepEqual(f.d.getMaterialCandidateState(), {
+      requested: 'baseline',
+      active: 'baseline',
+      status: 'idle',
+      extraTextures: 0,
+    });
+    assert.equal(f.e.extraTextures.size, 2);
+    assert.deepEqual(
+      f.d.pools.map((pool) => pool.foliage.material),
+      materials,
+    );
+  }
+  f.d.dispose();
+  disposePoolScene(f);
+});
+
+test('explicit leaf opt-in swaps color and shadow together without changing any selected source, matrix, geometry or LOD cost', async () => {
+  const f = populated(),
+    originals = f.d.pools.map((pool) => ({
+      geometry: pool.foliage.geometry,
+      material: pool.foliage.material,
+      depth: pool.foliage.customDepthMaterial,
+      matrix: pool.foliage.instanceMatrix.array.slice(),
+      count: pool.count,
+    })),
+    hidden = [...f.d.hidden],
+    sources = JSON.stringify(
+      f.d.trees.map(({ x, y, z, h, seed, variant }) => ({
+        x,
+        y,
+        z,
+        h,
+        seed,
+        variant,
+      })),
+    );
+  assert.deepEqual(f.d.getMaterialCandidateState(), {
+    requested: 'baseline',
+    active: 'baseline',
+    status: 'idle',
+    extraTextures: 0,
+  });
+  let pending;
+  await candidateRequests(async (requests) => {
+    pending = f.d.setMaterialCandidate('leaf-rgba');
+    assert.equal(f.d.getMaterialCandidateState().active, 'baseline');
+    assert.equal(f.d.pools[0].foliage.material, originals[0].material);
+    await waitForCandidateRequests(requests);
+    completeCandidate(requests);
+  });
+  assert.equal(await pending, true);
+  assert.equal(f.d.getMaterialCandidateState().active, 'leaf-rgba');
+  assert.equal(f.e.extraTextures.size, 3);
+  f.d.pools.forEach((pool, i) => {
+    assert.equal(pool.foliage.geometry, originals[i].geometry);
+    assert.deepEqual(pool.foliage.instanceMatrix.array, originals[i].matrix);
+    assert.equal(pool.count, originals[i].count);
+    assert.notEqual(pool.foliage.material, originals[i].material);
+    assert.equal(
+      pool.foliage.material.map,
+      pool.foliage.customDepthMaterial.map,
+    );
+  });
+  assert.deepEqual([...f.d.hidden], hidden);
+  assert.equal(
+    JSON.stringify(
+      f.d.trees.map(({ x, y, z, h, seed, variant }) => ({
+        x,
+        y,
+        z,
+        h,
+        seed,
+        variant,
+      })),
+    ),
+    sources,
+  );
+  assert.equal(globalThis.__treeFactories.length, 6);
+  assert.equal(await f.d.setMaterialCandidate('baseline'), true);
+  f.d.pools.forEach((pool, i) => {
+    assert.equal(pool.foliage.material, originals[i].material);
+    assert.equal(pool.foliage.customDepthMaterial, originals[i].depth);
+  });
+  assert.equal(globalThis.__treeFactories.length, 6);
+  f.d.dispose();
+  disposePoolScene(f);
+});
+
+test('switching back while loading or a failed leaf mip cannot override the chosen baseline', async () => {
+  for (const failure of [false, true]) {
+    const f = populated();
+    let pending, baseline;
+    await candidateRequests(async (requests) => {
+      pending = f.d.setMaterialCandidate('leaf-rgba');
+      await waitForCandidateRequests(requests);
+      if (failure) requests[2].error(new Error('missing mip'));
+      else baseline = f.d.setMaterialCandidate('baseline');
+      completeCandidate(requests);
+    });
+    if (baseline) assert.equal(await baseline, true);
+    assert.equal(await pending, false);
+    assert.equal(f.d.getMaterialCandidateState().active, 'baseline');
+    assert.equal(f.d.hidden.size, 30);
+    f.d.dispose();
+    disposePoolScene(f);
+  }
+});
+
+test('active candidate disposal releases dormant baseline leaf/depth while scene retains active candidate ownership', async () => {
+  const f = populated(),
+    counts = {
+      leaf: 0,
+      depth: 0,
+      trunk: 0,
+      candidateLeaf: 0,
+      candidateDepth: 0,
+    };
+  for (const [key, material] of Object.entries(f.d.materials))
+    material.addEventListener('dispose', () => counts[key]++);
+  let pending;
+  await candidateRequests(async (requests) => {
+    pending = f.d.setMaterialCandidate('leaf-rgba');
+    await waitForCandidateRequests(requests);
+    completeCandidate(requests);
+  });
+  await pending;
+  const pool = f.d.pools[0];
+  pool.foliage.material.addEventListener(
+    'dispose',
+    () => counts.candidateLeaf++,
+  );
+  pool.foliage.customDepthMaterial.addEventListener(
+    'dispose',
+    () => counts.candidateDepth++,
+  );
+  f.d.dispose();
+  f.d.dispose();
+  assert.deepEqual(counts, {
+    leaf: 1,
+    depth: 1,
+    trunk: 0,
+    candidateLeaf: 0,
+    candidateDepth: 0,
+  });
+  assert.equal(await f.d.setMaterialCandidate('baseline'), false);
+  disposePoolScene(f);
+  assert.equal(counts.leaf, 1);
+  assert.equal(counts.depth, 1);
+  assert.ok(
+    counts.trunk > 0 && counts.candidateLeaf > 0 && counts.candidateDepth > 0,
+  );
 });

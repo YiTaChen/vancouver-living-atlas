@@ -1,0 +1,1921 @@
+{
+  "schemaVersion": 1,
+  "baselineCommit": "4967c72dfda532eb8151bf477b29eafe54a93d5d",
+  "scope": "Offline editable Blender assets for owner integration. No runtime/public replacement, placement, population or GPU acceptance.",
+  "license": "LicenseRef-Vancouver-Living-Atlas-NC-1.0",
+  "coordinateNotes": "Metres; glTF Y-up. Per-track manifests define origins/forward directions. Material study layout is not city placement.",
+  "inventoryNotes": "New tracks plus selected reused architectural/perennial sources and shared texture dependencies. Not an inventory of the entire repository.",
+  "files": [
+    {
+      "path": "tools/assets/architecture-expansion/INTEGRATION_INVENTORY.csv",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 7758,
+      "sha256": "2d73171f50bd32d7737b26a061d80d28318c56a693ff7f0605650788baf65f21"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/README.md",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 11859,
+      "sha256": "041cede5fab209634dda3e4d67e67b00053e12bf5ae6596d7b3ff9f6ad2289a9"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/concrete-chamfer-corner.lod0.glb",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 239020,
+      "sha256": "92ab186002eda5f9eedb10cd00fe374163380cf45628e35720cb6950d17a2d43"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/concrete-chamfer-corner.lod1.glb",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 228544,
+      "sha256": "6d465227e96207e13bec49c3219cc916d19fb9305107a0bad94ecff23a91001a"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/concrete-shadow-plinth.lod0.glb",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 230204,
+      "sha256": "8e052a4c48fcab7f6637587de020373e15d87738bfb02d8738098c651ec3ef92"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/concrete-shadow-plinth.lod1.glb",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 229796,
+      "sha256": "fb66705803d2dc379d3e065c9c56a0a9a34540db1af12e1d32c5a664cc35d0dc"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/modern-parapet-cap.lod0.glb",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 164340,
+      "sha256": "99e7eba42f085a31fa5839504ae1f555041c41911644373e616d16e9e5a0e13a"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/modern-parapet-cap.lod1.glb",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 161840,
+      "sha256": "dbb39173177b8c0c6b5e26e8876678063b507bcbb91959a2287bf93b09d2da8d"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/modern-recessed-window-surround.lod0.glb",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 164336,
+      "sha256": "d86e11bc9a058f2c0bf167757cfacfa7d3a8e2adec5a00c6d0e7cfdce2a02c4c"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/modern-recessed-window-surround.lod1.glb",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 162704,
+      "sha256": "9902d3a3aa8da4eecfeb92e71bb46123df229f324a82d4b003053077ace1dfdb"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/modern-sill-drip.lod0.glb",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 163708,
+      "sha256": "4ffbc27581ec89f38fbc1e939868ea228ab779ff822c4238a2233382771d9b15"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/modern-sill-drip.lod1.glb",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 162456,
+      "sha256": "a5123b8c14d9ad07a10328094ef4a3738873d0104117fc4a3155cd285b511156"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/residential-cedar-sill.lod0.glb",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 234228,
+      "sha256": "9799bf34eb174dadc3fae00ee717749f43417f45e1022e426e01596b51eee278"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/residential-cedar-sill.lod1.glb",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 232664,
+      "sha256": "876cb6089d04d82d57a6353411b35ba46c7692eb9810e8134b4a1b36ae526c8b"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/residential-cedar-window-surround.lod0.glb",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 242148,
+      "sha256": "5beacd0e5f7220747f05fed2df2eae8d94cb2f27aed6f3d9485095232ecf1fe9"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/residential-cedar-window-surround.lod1.glb",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 237252,
+      "sha256": "3d712d3624689102715a44ead7fa1359c49ba459fc89c60e05e45fe797516acd"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/residential-gabled-entry-canopy.lod0.glb",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 244928,
+      "sha256": "114bcdfdf3059a77568c1073f6d20ef4924e75551b69ea1167bd9cfc7a432793"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/residential-gabled-entry-canopy.lod1.glb",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 237556,
+      "sha256": "e8b56d532417ebfe41ff75e84b32f500c14eb79f93c805c3c23c71cb7de82702"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/audit_reexport.py",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 2869,
+      "sha256": "ae135ab338e198bb9c148333473a27192ad19b8ba024eac7c21ddd1900f0912b"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/build_architecture_expansion.py",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 12697,
+      "sha256": "a42a6ac4c347d9f2e870cefcb75028423d335b0d360553beaa83a3a3d2292112"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/catalog.json",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 2716,
+      "sha256": "6b6a7225f455f93f14ee1b5fd88f2ba1c5195109dd39e2a23fffbb2d0e68434a"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/compose_previews.py",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 2302,
+      "sha256": "8eb08135c0afaf7c7d5caafee86bd0429e080aec0fe09af413b7fc60c8e2362d"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/cost-report.json",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 740,
+      "sha256": "ca1958b5cec06256e79fcdf7ae3b5a4c939bcb6c893cf466edb79d4cfe321f4d"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/manifest.json",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 18770,
+      "sha256": "9f2d8f7df96dc17b31107b613b3a7230656f2d776184509e69c622c7f2117f8b"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/preview-lod0.png",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 2313298,
+      "sha256": "d0c5a86f036eb203124cce8571c5e0ea20eed49accbecc860e7302a6aef19b24"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/preview-lod1.png",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 2300841,
+      "sha256": "34dd2d48f2af955c5b6f3138aa02b9c923cd160be65de1a7021c45eb0be34f65"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/preview.png",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 2853771,
+      "sha256": "ae94ddf281ee8c466b5999af2c129ef4d5b49a4b89b0a7cd7ff8dde972e37c68"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/reexport-validation.json",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 9555,
+      "sha256": "184948f6c49bf923fe67fe34178c1762105651986260cb6ac99f10ef555a5df6"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/concrete-chamfer-corner.lod0.blend",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 283495,
+      "sha256": "aec1605a81e108a76e786899250502d0c037e23eb14cf48e53a0aed16003c59f"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/concrete-chamfer-corner.lod1.blend",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 283059,
+      "sha256": "32ab72e2dfd0c324eeb7d3834844a035888b213180d006f741c32b89d9f785b6"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/concrete-shadow-plinth.lod0.blend",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 283017,
+      "sha256": "13184c2e3ae375a64cb11fd3bd6c0808be1f5bf640f1f825f86f42a1c576ea15"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/concrete-shadow-plinth.lod1.blend",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 282015,
+      "sha256": "a1027d6ea9efd6fdf63a24b45975845bf9f64e89ad88faf0e07b913ed9e19bc0"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/modern-parapet-cap.lod0.blend",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 226629,
+      "sha256": "55ccd38932aaf3e2f5f7d89500731a22317b1daddea2611d25aab960bf10b0b8"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/modern-parapet-cap.lod1.blend",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 226060,
+      "sha256": "62f0b673475f4c46c58b1fda328893c9b207aa060743e8bf69e0bb5f854e6b92"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/modern-recessed-window-surround.lod0.blend",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 226056,
+      "sha256": "9f1a3f16a65973209c6c8da2fcabdb611a850249dadf4f84b5687d835f9c7597"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/modern-recessed-window-surround.lod1.blend",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 226265,
+      "sha256": "d9bce8d45ceeda617ef3e29705f1b65cb43b7e9c89dd221ffd70bc67fd6a74b9"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/modern-sill-drip.lod0.blend",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 226202,
+      "sha256": "4f4e36c7838935f01666dd388a8c85ae8d6d3cefecd8ff88dc427f87a2df7906"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/modern-sill-drip.lod1.blend",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 226206,
+      "sha256": "c2a123dda918928ee3de06a038c920f51f3f3c1ef81346463e18b52720cd94d2"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/residential-cedar-sill.lod0.blend",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 300406,
+      "sha256": "3843e0de41c7011dc76d91d2f8820ff808f339750d6e234085cadad28ab1950f"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/residential-cedar-sill.lod1.blend",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 299689,
+      "sha256": "f71e5d8e9e85e27d39689f24f0b1e1dd2da6d1aeeda158aaf63d88cd3017f955"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/residential-cedar-window-surround.lod0.blend",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 306867,
+      "sha256": "cb967828748869a838fbf00ca0e7e65590dc521c2988d61b442e7003efe2459d"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/residential-cedar-window-surround.lod1.blend",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 301393,
+      "sha256": "f25e14e4e2ab74213e30021405c56d978419855b307771096cf9c27c599ffa6a"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/residential-gabled-entry-canopy.lod0.blend",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 303372,
+      "sha256": "e1a0d9612ec509117685f8f4da2e0674d49d6e31ef11919fe2567fa853d467bf"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/residential-gabled-entry-canopy.lod1.blend",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 301628,
+      "sha256": "7234c211af8883d2079b036279c0eaed48338e871f26b2798e9d913e8db21d5b"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/test-results.json",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 788,
+      "sha256": "35b2a6d971a39c3445ce194be0f898d800c6b3434bbd663a971e143858f346af"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/test_source_workflow.py",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 6424,
+      "sha256": "aa4db3d14c9cd762cceee1311d7a97cc4f0ac6dd77024ec3603fe03d36033656"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/test_validate_architecture_expansion.py",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 3248,
+      "sha256": "cb562e2d2dd4ff47f6ddef2905ed8f66ee45be497699dfaf4df813e122ca9f6d"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/validate_architecture_expansion.py",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 9736,
+      "sha256": "2de5a6df555970c7c446fb6e918e8bdaf247ebb8e18be1eda983b8003b9ce93e"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/validation.json",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 3744,
+      "sha256": "47558b25036d794ef4133ce54e253077d8b7453a72f111bdf45392bd5eb9d8f9"
+    },
+    {
+      "path": "tools/assets/architecture-expansion/visual-review.json",
+      "track": "architecture-expansion",
+      "status": "new",
+      "bytes": 1040,
+      "sha256": "9df9176b9aeea8b3645fb608e16778afa68a29673c3123d2ef001eb0c59fe69c"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/README.md",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 9140,
+      "sha256": "53d13ce35f57a7d30601bb5a14aa0b9bc3640cf4fcd1823a3f549788bcf2f8c0"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/alpha-coverage.json",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 5109,
+      "sha256": "ff13e84a3f0a55c2bfeb3bc6ee583a411bd7df7f13be4f03c6e2986fd5abcb14"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/audit_source_roundtrip.py",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 2587,
+      "sha256": "e70c25404aa0378a4dda029b47e361f033b4ff4cfaa56cecd3cc69c524a454f3"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/build_vegetation_ground.py",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 19376,
+      "sha256": "7260a63a175b5dc2d258526762978e1c733787c9023facf3fd9ef801b56755a7"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/export-edit-safety.json",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 551,
+      "sha256": "6a7462287765f138e9af37d3e46a95a5ccd65d77cbc9aa71c3359471d2d65697"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/export_from_source.py",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 6895,
+      "sha256": "d40ef299be7012d2d25c4fe34c149a818569f3cb0c0a05c6a950c5bad164abf8"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/alder_sprig_lod0.glb",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 1117680,
+      "sha256": "5765d0ae6d3fa437c4a0d2a7c41de4796392ce810acef018584998c54f1371d3"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/alder_sprig_lod1.glb",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 1114680,
+      "sha256": "ce6588ccb58ff35ca6f518247970d99012d10633f31b7f9dcb59a2fc34cdd0c2"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/alder_sprig_lod2.glb",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 1111396,
+      "sha256": "17d147e1b0186813a6253bd327fa566297ee8819a71dbc99246b9d305cd9e686"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/douglas_fir_sprig_lod0.glb",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 1117712,
+      "sha256": "3de9e9ba8c001c03026964750a9b8631a074753afc2bef81863ad3c7c4ad026c"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/douglas_fir_sprig_lod1.glb",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 1114712,
+      "sha256": "93abc6440a5d39a70e3a584aa40b0b610b32d5448a49b99174e10618d6f12c97"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/douglas_fir_sprig_lod2.glb",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 1111428,
+      "sha256": "4134964634bf6827540ef9c8ba62a58056d86794b7e5c0e73a101a5a9f2e73ce"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/maple_sprig_lod0.glb",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 1117680,
+      "sha256": "b9c7af5c16029d9309a405af802ba3195cef68a566380a84481e117340108165"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/maple_sprig_lod1.glb",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 1114680,
+      "sha256": "e84bc65ce30ff735b1d751e8d59bf691f11fc62bedd66c8fb012a3ac21928ee5"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/maple_sprig_lod2.glb",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 1111396,
+      "sha256": "91a264117b798b3eaad06b8f212e971208c0960dbf89c3227674de99f09b8b79"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/soil_grass_slope_lod0.glb",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 985884,
+      "sha256": "1284c8d0f754b40523662f9589e649bfc9e1817929062018e8ef48e6632ed9a1"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/soil_grass_slope_lod1.glb",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 942388,
+      "sha256": "ed342fbcfcd695e5aabc4abf1c02d25cc74c3d4d654f2b43d8a38bce51b98f48"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/soil_grass_slope_lod2.glb",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 931576,
+      "sha256": "9e1284684fe6e493d1036affc562c77c8124dce37ebb95e4b3973cb7761abd27"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/western_redcedar_sprig_lod0.glb",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 1117736,
+      "sha256": "21f90231e96a389347854ec068c13234646910cfa1f54071137540609e8cbc5d"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/western_redcedar_sprig_lod1.glb",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 1114736,
+      "sha256": "d2274b6ec248e8cf28f5cf64e057b07fd463a6158ec7e6a22d676dd8da3dd2c8"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/western_redcedar_sprig_lod2.glb",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 1111452,
+      "sha256": "42a3691b3fc6dd639d810841bf99956eeb2256d23820ecf3cc94559b3feb9eea"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/manifest.json",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 11175,
+      "sha256": "3c4c7fc3a116df450f31a214cad176f3cd12b688529e050b0e6ca5ebcf2eb8ee"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/bark_basecolor.png",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 201725,
+      "sha256": "29a4640e7b0bcce8dda65d164992feec273b84eb30cc6bceebd1f94fd6b251d0"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/bark_normal.png",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 559427,
+      "sha256": "d580f12e68b8b2186f0885fe6b8d4a1820e19b06bf45645c3ae8378f6edd0082"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/bark_orm.png",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 67066,
+      "sha256": "2109adce8735783d4a502be81108a8e9c0e95fe18ff089ea5a96ca7c79a88fe3"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/grass_basecolor.png",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 252788,
+      "sha256": "678d283e62d543ba04e3dec2ec4847c47fdd878bc91ead9c82a2b694dea58a5f"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/grass_normal.png",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 581991,
+      "sha256": "74cb6b02204c37026f6beebdc99001929bd331d5edc884feeef3c2ba830b90ac"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/grass_orm.png",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 52412,
+      "sha256": "18fd14b3329257af888ab8d6ca1f038d4d7643aee47b3c32393fbe8f0d7643ce"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/leaf_atlas_rgba.png",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 274504,
+      "sha256": "2eff86a192a7fbd791abb2a55ec414a3b5bc778b59f3101ff79b8512524ef50f"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/leaf_mip_0_1024.png",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 274504,
+      "sha256": "2eff86a192a7fbd791abb2a55ec414a3b5bc778b59f3101ff79b8512524ef50f"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/leaf_mip_1_512.png",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 105487,
+      "sha256": "6c3a8623f6512949d14982a813d02bb813ba2dfcdcae558cdde049fa359d94b3"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/leaf_mip_2_256.png",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 36596,
+      "sha256": "952d1bd5de15898b213a621ed4088e6e034214209c79ac8fe2a1e1daf8c0122e"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/leaf_mip_3_128.png",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 12083,
+      "sha256": "b12f7714f9aab804ab9abbe0ea649ddf027afff3fa73e06d2f4ac2580020e4ac"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/leaf_mip_4_64.png",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 4042,
+      "sha256": "64d94eab64a8f6b969a4f7ad9dd9cfbaa206f50e3dec925f40359087282f30b4"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/soil_basecolor.png",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 207860,
+      "sha256": "ff47ea60cd6fa7586e0df74178fe1fd7d4bab01f0eaf3a4d8cd0ebce77bc2c1f"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/soil_grass_blend_weight.png",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 108987,
+      "sha256": "7274615051340d6211c89f67b71b35c6684db39305f83eb7790f7b76323db4b7"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/soil_grass_edge_basecolor.png",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 308056,
+      "sha256": "5c32552aed44c98857d762f2ae4f40dfa6bb6074037d02d9f6189a8146291087"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/soil_grass_edge_normal.png",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 570431,
+      "sha256": "0d2a72a2bdd993986ca7b2211d7f73c46af5fcf116616b05ce73ccba8c0fb85b"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/soil_grass_edge_orm.png",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 47536,
+      "sha256": "b4d807a765c80a11fbe5adfaefc2aecf5bab61840a475469f3b9c4bd42132c37"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/soil_normal.png",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 475469,
+      "sha256": "a962cb174883009121d67edd4ede35196a38abe64eab0e9e45d9a46453aa0cd6"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/soil_orm.png",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 47536,
+      "sha256": "b4d807a765c80a11fbe5adfaefc2aecf5bab61840a475469f3b9c4bd42132c37"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/previews/vegetation_ground_board.png",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 1846676,
+      "sha256": "d528c5bc86079ecd09e68736af4fcbc758fe4604057094a6a24226b2ef66e808"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/source/vegetation_ground.blend",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 3737569,
+      "sha256": "afc223cbfc59c7f7e8311bc5599f17a24c7123e10b4edd2c7f48f3e65e775926"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/source-roundtrip.json",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 3877,
+      "sha256": "6ed530af6924144cd706dafa92f40040fdb0192c528d16a884bdde7b551ace61"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/test_export_edit_safety.py",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 3579,
+      "sha256": "0d36277fd76183dac52ae7eb01ad9a589bf99e2f777e6ee4edafce9fc5381642"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/validate_vegetation_ground.py",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 4893,
+      "sha256": "be95c6d2b659ff90df36ca20fb4815841b2c3d2b8dec07eda564bd13d3932947"
+    },
+    {
+      "path": "tools/assets/vegetation_ground/validation.json",
+      "track": "vegetation-ground",
+      "status": "new",
+      "bytes": 2807,
+      "sha256": "a2e491d495cbca54dd7391c4b408cd98c1fd44fba0f669236e7b05125fc1d1a4"
+    },
+    {
+      "path": "tools/assets/role-materials/README.md",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 7314,
+      "sha256": "a700f2a4398421076fcd7b52d7b1728c787f2ef299f5b5b01140b0545e1a1e6b"
+    },
+    {
+      "path": "tools/assets/role-materials/audit.py",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 3061,
+      "sha256": "eb479402ed9b6d3126924b10961a832f87e499ed680ef0915d7bd1ddbc91a55a"
+    },
+    {
+      "path": "tools/assets/role-materials/build.py",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 12347,
+      "sha256": "6f2c11bbc053e5e52f1db83907c8d9794cfd4d8bc6d423d815871a64092c5fcd"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/dusk.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 783002,
+      "sha256": "a16e717db2cb2b9dd2dbc99f4c5e733a002926803731d4879485fa734707637d"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/interior-material-study.glb",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 490124,
+      "sha256": "e9270c31422a36ee996995ff6ca6f936a3a5eb0e9da96eaa6fcbb59b0dbe836e"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/landmark-material-study.glb",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 233008,
+      "sha256": "a67cc1b276277e4be0a42bebf99a35da8b959aa8c508d96a1ec7255873459918"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/manifest.json",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 3169,
+      "sha256": "d7fa6763fc4cda40b708e9f9b05ac85f4bf63d846accdb7bb24449906bee6473"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/night.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 624771,
+      "sha256": "ee620c078e425798f0a5584869d2c4db5c6d573193dd3e6f4ee2280f69b94264"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/overcast.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 736990,
+      "sha256": "9518c72b689a16fbe77f1fd42a787f4124d48dd8cc53deea2ffe11916c7841c0"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/sunny.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 709002,
+      "sha256": "bbb4228ebca3477194036b12bed374924f7eff8b044d3ce9e29289dc3ce35091"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/interior-matte-plaster-basecolor.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 75983,
+      "sha256": "a8848b358d92e8825be100e8cc96a8a5d7fb8524dfb19b6ff2aaebe9dd5afe36"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/interior-matte-plaster-normal.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 46370,
+      "sha256": "ff1bd31b4fc10ddbce682058e6f8e7cec4ce14ec0dcd788f72d71a1f1b654cc4"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/interior-matte-plaster-orm.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 51372,
+      "sha256": "4b68bfe6e93546479009d96053c09ae2dc835e39dc15f117f29c3c5fc8d2fa53"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/interior-oak-veneer-basecolor.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 59267,
+      "sha256": "531aa7357eddef8bc41d25e874fdfd2e06ee1b86220804b40f04762ab388b0f0"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/interior-oak-veneer-normal.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 11344,
+      "sha256": "8ddac1b202278320007981a0599b31f0e3a45c6c30bf6b194a80ae2f3b457eb3"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/interior-oak-veneer-orm.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 51381,
+      "sha256": "96d05b5a97411a3666c03d83b01becdfe9b1d3a67b387d8ab8feaa0d239ce0ff"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/interior-terrazzo-basecolor.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 90872,
+      "sha256": "6cd5973cb1c479aa6ccf8d859320a21542b7d517eeb78bb91a11565e6c92d805"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/interior-terrazzo-normal.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 1779,
+      "sha256": "38a6a499200f260a2ac5b7e6472b63af025ed967a4b3e55ef8c53b5098d09366"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/interior-terrazzo-orm.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 51574,
+      "sha256": "c7ae0c5f2a6246cf8830ed19c239b22a78cdafbeec1af4d80ee464180041bc6c"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/landmark-brushed-aluminum-basecolor.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 2507,
+      "sha256": "c79321473f294833cb1190df24a385c6c3363680f585bbf65296b4098a7b0346"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/landmark-brushed-aluminum-normal.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 5952,
+      "sha256": "fbe1d21d69b781fddd36e0f183a0f5cbbca91d4c9ed8899ac622b7924a6404ea"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/landmark-brushed-aluminum-orm.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 51582,
+      "sha256": "ebd7bb06ce9a962c140052761fa26e8f8cba0110f99ba866b2b250d4db365c33"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/landmark-pale-panel-basecolor.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 86245,
+      "sha256": "63397614d943ae917ebdb8a8dce0a917a21eb12f00879c47693427c61b18d05c"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/landmark-pale-panel-normal.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 1779,
+      "sha256": "38a6a499200f260a2ac5b7e6472b63af025ed967a4b3e55ef8c53b5098d09366"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/landmark-pale-panel-orm.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 51381,
+      "sha256": "96d05b5a97411a3666c03d83b01becdfe9b1d3a67b387d8ab8feaa0d239ce0ff"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/vehicle-red-paint-basecolor.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 65073,
+      "sha256": "a731a29781f4531e9694e4941196d20f4fc5a126687c73fd0c3604d52f5bfcd6"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/vehicle-red-paint-normal.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 1779,
+      "sha256": "38a6a499200f260a2ac5b7e6472b63af025ed967a4b3e55ef8c53b5098d09366"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/vehicle-red-paint-orm.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 51558,
+      "sha256": "d4b63ec0e155e2993592798466be0a4b6bcf293feb4fc9c5555286b1c13d0785"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/vehicle-seat-leather-basecolor.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 60392,
+      "sha256": "17ff618888f430363d681e0f94b6c7ec505a3d9970438344dcae03f687b7b1a1"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/vehicle-seat-leather-normal.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 77866,
+      "sha256": "1625b4f3704f13b8cbcbb9b5ba421b481aec853e5c72f67cffd2349f90be0525"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/vehicle-seat-leather-orm.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 51399,
+      "sha256": "437155a0c763e73f6da2d0db3d3cf2c1fca959d1f2d6eb157d2027cb45137bb8"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/vehicle-tire-rubber-basecolor.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 5559,
+      "sha256": "e22b9b13a7e63042ba84c20e3b94405ea8c16a0b61e35185f0e5f402154bab7a"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/vehicle-tire-rubber-normal.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 33838,
+      "sha256": "496eac92438d967c5f092a3ac9b700adea6d1683d94f95295ff1b2d7c67086f5"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/vehicle-tire-rubber-orm.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 51376,
+      "sha256": "70bf49cfed533563e935661c7627f316d1a95ceffdc73ba8cd5fe2511ce35caf"
+    },
+    {
+      "path": "tools/assets/role-materials/exports/vehicle-material-study.glb",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 453812,
+      "sha256": "056f481b30e9ec0cca7f23936ba3549f286662a619d73ff6da8aae3e743dbf11"
+    },
+    {
+      "path": "tools/assets/role-materials/qa/source-edit-test.json",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 207,
+      "sha256": "f28796eac3f3452f58aaef831c9f3d356ac557ca70e60429f332804479e661f6"
+    },
+    {
+      "path": "tools/assets/role-materials/qa/validation.json",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 5887,
+      "sha256": "f684ab7fd9c1e8933e3641aeb1085d1b6a327d07cac131669de472c1d8160004"
+    },
+    {
+      "path": "tools/assets/role-materials/qa/visual-review.json",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 1204,
+      "sha256": "95085cba34c9d0f1c55c89292ea42e1e2d961b90cfb9b54edd28b36fc10d29ff"
+    },
+    {
+      "path": "tools/assets/role-materials/source/role-material-library.blend",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 2444608,
+      "sha256": "b9d7ba20c0fc9f72c0a00845ab59ae0a8fab0707e5e27242c60d40817caee6eb"
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/interior-matte-plaster-basecolor.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 75983,
+      "sha256": "a8848b358d92e8825be100e8cc96a8a5d7fb8524dfb19b6ff2aaebe9dd5afe36"
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/interior-matte-plaster-normal.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 61003,
+      "sha256": "5b99de46b48ab9ac8a9e17f54d16d86cac0d84f6bdd02b8255f30a0323e314a4"
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/interior-matte-plaster-orm.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 51372,
+      "sha256": "4b68bfe6e93546479009d96053c09ae2dc835e39dc15f117f29c3c5fc8d2fa53"
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/interior-oak-veneer-basecolor.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 59267,
+      "sha256": "531aa7357eddef8bc41d25e874fdfd2e06ee1b86220804b40f04762ab388b0f0"
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/interior-oak-veneer-normal.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 16829,
+      "sha256": "dc0e5e922f6a3a122703ce0878e2fe333fb0f4c2776c9c3a9a79180871cd98ac"
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/interior-oak-veneer-orm.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 51381,
+      "sha256": "96d05b5a97411a3666c03d83b01becdfe9b1d3a67b387d8ab8feaa0d239ce0ff"
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/interior-terrazzo-basecolor.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 90872,
+      "sha256": "6cd5973cb1c479aa6ccf8d859320a21542b7d517eeb78bb91a11565e6c92d805"
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/interior-terrazzo-normal.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 47389,
+      "sha256": "bd402ec65d06f0ce19dc1a32c823bb97f8f0c24588240bf5fce918313e88cafc"
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/interior-terrazzo-orm.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 51574,
+      "sha256": "c7ae0c5f2a6246cf8830ed19c239b22a78cdafbeec1af4d80ee464180041bc6c"
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/landmark-brushed-aluminum-basecolor.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 2507,
+      "sha256": "c79321473f294833cb1190df24a385c6c3363680f585bbf65296b4098a7b0346"
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/landmark-brushed-aluminum-normal.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 32303,
+      "sha256": "fa5095a04fe3499affff1f6020a0c481f458795b2c924cf9bfa7cefffaaf9cf1"
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/landmark-brushed-aluminum-orm.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 51582,
+      "sha256": "ebd7bb06ce9a962c140052761fa26e8f8cba0110f99ba866b2b250d4db365c33"
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/landmark-pale-panel-basecolor.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 86245,
+      "sha256": "63397614d943ae917ebdb8a8dce0a917a21eb12f00879c47693427c61b18d05c"
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/landmark-pale-panel-normal.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 47389,
+      "sha256": "bd402ec65d06f0ce19dc1a32c823bb97f8f0c24588240bf5fce918313e88cafc"
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/landmark-pale-panel-orm.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 51381,
+      "sha256": "96d05b5a97411a3666c03d83b01becdfe9b1d3a67b387d8ab8feaa0d239ce0ff"
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/vehicle-red-paint-basecolor.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 65073,
+      "sha256": "a731a29781f4531e9694e4941196d20f4fc5a126687c73fd0c3604d52f5bfcd6"
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/vehicle-red-paint-normal.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 47389,
+      "sha256": "bd402ec65d06f0ce19dc1a32c823bb97f8f0c24588240bf5fce918313e88cafc"
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/vehicle-red-paint-orm.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 51558,
+      "sha256": "d4b63ec0e155e2993592798466be0a4b6bcf293feb4fc9c5555286b1c13d0785"
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/vehicle-seat-leather-basecolor.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 60392,
+      "sha256": "17ff618888f430363d681e0f94b6c7ec505a3d9970438344dcae03f687b7b1a1"
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/vehicle-seat-leather-normal.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 76607,
+      "sha256": "c96e9f1b8816d1f986f52b979f5542e07a68f20d7c3b00cb5e7aac8dc30fe2ec"
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/vehicle-seat-leather-orm.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 51399,
+      "sha256": "437155a0c763e73f6da2d0db3d3cf2c1fca959d1f2d6eb157d2027cb45137bb8"
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/vehicle-tire-rubber-basecolor.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 5559,
+      "sha256": "e22b9b13a7e63042ba84c20e3b94405ea8c16a0b61e35185f0e5f402154bab7a"
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/vehicle-tire-rubber-normal.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 66531,
+      "sha256": "fb0b95bb6be68526d2cb95111daf1e7f37cf188b49118576fd166ad82d7edfdc"
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/vehicle-tire-rubber-orm.png",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 51376,
+      "sha256": "70bf49cfed533563e935661c7627f316d1a95ceffdc73ba8cd5fe2511ce35caf"
+    },
+    {
+      "path": "tools/assets/role-materials/test_source_edits.py",
+      "track": "role-materials",
+      "status": "new",
+      "bytes": 1355,
+      "sha256": "6bc3a764f494234be71ffa9b469b8234feb469f327d9caf5efd562b7714c7f95"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/README.zh-TW.md",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 5951,
+      "sha256": "1a370ee8fc5135a67688b877d9507031465c7ddd0a44d1c83d971fd746f52536"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/audit_glb.py",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 1166,
+      "sha256": "6705241f89682a679e1b52e008c43ec1cb3cb6cd58dbdc773d55ad557f2765a7"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/build_optimized.py",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 6999,
+      "sha256": "07a83aa25183b3291b0a0b2aa644865d3b554603efa2888476befdfb5d23c025"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/compare-rig.mjs",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 2292,
+      "sha256": "775fbeeb8f4f658bd22cc24bb3e4fc0dce613d264357a85492bd9bc7acbcf3dc"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/export_from_blend.py",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 1176,
+      "sha256": "b4d39ad01fa77aaeda62d6512d00a459e81813d8008869751771e13f9cee1f07"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/finalize_manifest.py",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 1404,
+      "sha256": "4d0f6fb79b7ccc824c5021d890ba9fd448d2dc30a6477d1b2ff19b430adcd7c9"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/glb/citizen-lod0.glb",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 3498312,
+      "sha256": "14d66fabe097abf82ef36800561c06ee7263c0acfd6b5ea1265a40ed35841ff8"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/glb/citizen-lod1.glb",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 3222256,
+      "sha256": "816bb1c26fbf658419c46e72fde923c59d8c6f3916f5c0aefea8f186cb6ed679"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/glb/citizen-lod2.glb",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 2001060,
+      "sha256": "51c7c5b1f7f0f17e399c00b04334072abf0e92f0731ccce8b04262cf85c788f2"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/manifest.json",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 2827,
+      "sha256": "79d372d0462919565cbb5a4555aa79dfe0e124eb6c5198caa05bc5c9f4a91100"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/glb-audit.json",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 1796,
+      "sha256": "dd09f09743a8a8d909716144b14302cbe37177b1a44c59428152def3f09685d1"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/glb-audit.txt",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 1797,
+      "sha256": "012fffe9ba2ed0d5f228d8fd3d1611dd5b96b09e4b74ab1248d1c023be94ee34"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/lod0-front.png",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 516587,
+      "sha256": "4a9117392976466893558f37dad315cffde2b42fd95b251484b09eaacb4edec0"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/lod0-run-back.png",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 515020,
+      "sha256": "7f023d5c1ec2bccf59ea900ea1b3038ac072e443133a42d1cdc8d2d11d33a62e"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/lod0-tests.txt",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 450,
+      "sha256": "0c05cc602089b7fdf605221ef57f9c600cb87a37f6027ff71ed405ef53ab6bbc"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/lod0-walk.png",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 514254,
+      "sha256": "9a91214462cc11e710c81431cbf509173d852d3bbe7c4551d197d83e610c04cb"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/lod1-front.png",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 516735,
+      "sha256": "79e3eb86ce08f38e09ba2799d658d5ddd2b0ff803ba7772c553b3ee36b7020ee"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/lod1-run-back.png",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 514919,
+      "sha256": "4c67d0eb22db3e0e8cb0e1c16e6563cb2651bb86c3797a1731f0ccb2fe5bbffa"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/lod1-tests.txt",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 450,
+      "sha256": "f29cc5a2e256780f32937598f800f289e699d86974315edb684b0fe35a0fd971"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/lod1-walk.png",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 514189,
+      "sha256": "206f3e869013484ca905b6832a360d6941d3e4afc3d464d2b0f3104221baf4c2"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/lod2-front.png",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 514983,
+      "sha256": "7b3e7a21630d165199e0c0bcf551959c07b82b566ebec5883d97c14e74baeb37"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/lod2-run-back.png",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 513341,
+      "sha256": "bc01edcdd357b2d0078cb4f77a640d28b1be3f31af6929f13e05b930ce9cff98"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/lod2-tests.txt",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 450,
+      "sha256": "300bdaff4d474c561eb813e380e976dc1753afed5a2f77252aaf6cf7cca0c680"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/lod2-walk.png",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 513164,
+      "sha256": "e808ee8205fd5d6d13d5edeec08fefaaa77af681ed0c91463b88cca643968c24"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/reference-front.png",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 516979,
+      "sha256": "595a2336efc65a89642cefafdc248746db8578517987bc9eaaa2efa52f047d03"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/reference-run-back.png",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 516162,
+      "sha256": "79ced49adad8efb9095b923ef4eda326d62f91e9c835548e4dee247ebeeaab29"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/reference-walk.png",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 515384,
+      "sha256": "6e23f93d72257b014b34d57e51a90080603db160eb04cffce5713a0976ccfc7b"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/rig-comparison.json",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 1370,
+      "sha256": "fde20cdc5480a5b0fd068992de8cfd23a7e9921b874571b9f65b7982ae155fa6"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/rig-comparison.txt",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 594,
+      "sha256": "93698cb62741b02e206b54b45fda34a0d9d9e65394a873b7bcc9b088e9bc2fe5"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/source-roundtrip.txt",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 1827,
+      "sha256": "a70f443dbfcfbad7666cf3bb19ce6f8b4ea234dc8713e6b30d8c284363b25a1d"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/render_exports.py",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 1266,
+      "sha256": "d1c36e76272ffa5dc271fab4c48739410f27c8408f1134cd0f6f7e262199fb22"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/sha256.json",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 4333,
+      "sha256": "46f6dbf3f9be6abda44183e84ad123ba1cc10cba1d4087456148c5e993d7a9e0"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/source/citizen-lod0.blend",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 3488744,
+      "sha256": "1e15ea4ad8eef3625e0baf6eb078c0d83ea8e79153dd8ff3c6dfae3bbf1806e8"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/source/citizen-lod1.blend",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 2988132,
+      "sha256": "3ac0899e560d999f071779400678551383a2f5a6a642ca898918f3022223f911"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/source/citizen-lod2.blend",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 1761796,
+      "sha256": "8a0175ff27befa11b2d7b3fce2864d56541f654d8888ca3818c447b834c24495"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/source/citizen-reference.blend",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 6670963,
+      "sha256": "4c411cfdc1eb61d76227f44d34dbe06f8bd9bf4b8ed1898dfdb2d8b7ec3a0281"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/textures/Citizen_BaseColor-1024.png",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 696823,
+      "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/textures/Citizen_BaseColor-2048.png",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 2034807,
+      "sha256": "61e8adf2d94be594a09819e3222e0c5ba24f55813ad94568629442d11f9a6bd0"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/textures/Citizen_BaseColor-512.png",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 236267,
+      "sha256": "aa022d5b7337335111157bf7b5fc4afa6e2b1ded5dad184c2c378f8110e7c1a1"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/textures/Citizen_Normal-1024.png",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 679771,
+      "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/textures/Citizen_Normal-2048.png",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 2205084,
+      "sha256": "234ac96e978b748752f55dd6ea824e25c2d7133c8d7ff65ad9d9e76d10a420a4"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/textures/Citizen_Normal-512.png",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 213441,
+      "sha256": "e68051b931b669c827ed49c023115873670b2d45bd44ba234e6e21c0c887486a"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/textures/Citizen_Roughness-1024.png",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 309221,
+      "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/textures/Citizen_Roughness-2048.png",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 627519,
+      "sha256": "545690c1519092af7b3c7fb6f069b50d7105c72e1644c2e496408c75fd5e9fc7"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/textures/Citizen_Roughness-512.png",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 133995,
+      "sha256": "a9b5e8798cd96a4107471c8a4a8e5a49044fbabaa16c37e08044015adb59ec2a"
+    },
+    {
+      "path": "tools/assets/citizen/optimization/validate-citizen.test.mjs",
+      "track": "citizen-optimization",
+      "status": "new",
+      "bytes": 5614,
+      "sha256": "2236fb44083f9609d78e8a337cc0e81f5efb9726f29015e2579876dbc51806d4"
+    },
+    {
+      "path": "tools/assets/architecture-details/source/flat-metal-awning.lod0.blend",
+      "track": "existing-architecture-sources",
+      "status": "reused",
+      "bytes": 227060,
+      "sha256": "0919bbaf3300eb80915a936abff33743b55298a379ed9010e5c7e024b3c60985"
+    },
+    {
+      "path": "tools/assets/architecture-details/source/flat-metal-awning.lod1.blend",
+      "track": "existing-architecture-sources",
+      "status": "reused",
+      "bytes": 227077,
+      "sha256": "0384b126fda6ef2c5a9649fcfb7587d058308b53418db489a2a07347a33fc8f0"
+    },
+    {
+      "path": "tools/assets/architecture-details/source/heritage-cornice.lod0.blend",
+      "track": "existing-architecture-sources",
+      "status": "reused",
+      "bytes": 321315,
+      "sha256": "5a5760b12e55563854afcd05db1755c846293a7b40a10cc2dbe183aab1bd6150"
+    },
+    {
+      "path": "tools/assets/architecture-details/source/heritage-cornice.lod1.blend",
+      "track": "existing-architecture-sources",
+      "status": "reused",
+      "bytes": 321158,
+      "sha256": "87b968df2cdf2057de204ec8856445923f4779657058d25d9e3b33339af7b46b"
+    },
+    {
+      "path": "tools/assets/architecture-details/source/heritage-window-frame.lod0.blend",
+      "track": "existing-architecture-sources",
+      "status": "reused",
+      "bytes": 226039,
+      "sha256": "c65838b3a5e08895adce7788c1ea37c4696fb5a91f7943e250e34637e1dfd14f"
+    },
+    {
+      "path": "tools/assets/architecture-details/source/heritage-window-frame.lod1.blend",
+      "track": "existing-architecture-sources",
+      "status": "reused",
+      "bytes": 226178,
+      "sha256": "0985df756dc5352c8a50863b1542638c79b8c9580a2ce5cee4dcb6f9c996f774"
+    },
+    {
+      "path": "tools/assets/architecture-details/source/residential-entry-surround.lod0.blend",
+      "track": "existing-architecture-sources",
+      "status": "reused",
+      "bytes": 304691,
+      "sha256": "0ea41c17de647187f49394417ece7b4b8c116b90ca9809eaa9486a9ec5bf3a24"
+    },
+    {
+      "path": "tools/assets/architecture-details/source/residential-entry-surround.lod1.blend",
+      "track": "existing-architecture-sources",
+      "status": "reused",
+      "bytes": 300917,
+      "sha256": "76c3829fcff9e6b6eb4b1dc7ce59fdcfd139ef301d445f948ddd2fa19dbe067f"
+    },
+    {
+      "path": "tools/assets/architecture-details/source/sandstone-corner.lod0.blend",
+      "track": "existing-architecture-sources",
+      "status": "reused",
+      "bytes": 323630,
+      "sha256": "4934eb55006f9fafc769d2a86b080e8de8d9b9b38a4f807fb981d1a636a77cca"
+    },
+    {
+      "path": "tools/assets/architecture-details/source/sandstone-corner.lod1.blend",
+      "track": "existing-architecture-sources",
+      "status": "reused",
+      "bytes": 321586,
+      "sha256": "90db1f0b62f36e209a9ecef458e3b252cc5b7a3c2ce9b436283b43fa1cdfc63b"
+    },
+    {
+      "path": "tools/assets/architecture-details/source/sandstone-plinth.lod0.blend",
+      "track": "existing-architecture-sources",
+      "status": "reused",
+      "bytes": 321067,
+      "sha256": "7ae84abcbfc90760bc8829ca745e647deb849d885168909c614c6939122c88c4"
+    },
+    {
+      "path": "tools/assets/architecture-details/source/sandstone-plinth.lod1.blend",
+      "track": "existing-architecture-sources",
+      "status": "reused",
+      "bytes": 320981,
+      "sha256": "61574fb6e8a7b3ca3f1fe2fd2f3bf70bcbcb5e2c2776a6df2a4e030ba0772e64"
+    },
+    {
+      "path": "tools/assets/architecture-details/source/sandstone-sill.lod0.blend",
+      "track": "existing-architecture-sources",
+      "status": "reused",
+      "bytes": 321295,
+      "sha256": "5e353f93799618e2d956354001d68cfa75f7257ca67b719970043f3af5ddbf40"
+    },
+    {
+      "path": "tools/assets/architecture-details/source/sandstone-sill.lod1.blend",
+      "track": "existing-architecture-sources",
+      "status": "reused",
+      "bytes": 321043,
+      "sha256": "7ef01fb7d9a174e832c444c58e96da8073614e878df26848a25898d70d706edb"
+    },
+    {
+      "path": "tools/assets/architecture-details/source/sloped-metal-awning.lod0.blend",
+      "track": "existing-architecture-sources",
+      "status": "reused",
+      "bytes": 227416,
+      "sha256": "30087a74849f524dd66c428b066d2822c4ec48d8ef27721e0fb2f4000863322a"
+    },
+    {
+      "path": "tools/assets/architecture-details/source/sloped-metal-awning.lod1.blend",
+      "track": "existing-architecture-sources",
+      "status": "reused",
+      "bytes": 227397,
+      "sha256": "d6a126ac41913ca5df510be32aaa9753e69abf33d5fc419009d1986fe1baeec4"
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/flat-metal-awning.lod0.glb",
+      "track": "existing-architecture-exports",
+      "status": "reused",
+      "bytes": 163032,
+      "sha256": "7d78c35a4ae0e2ed9b317d0f3427ee5acbd8e72f8db6ab3190c11aaabc0fe08e"
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/flat-metal-awning.lod1.glb",
+      "track": "existing-architecture-exports",
+      "status": "reused",
+      "bytes": 162408,
+      "sha256": "2f1795465baa5c56661dd401a89dfcdc5f92c5b2ff44d06b0a92d0dea5bf3319"
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/heritage-cornice.lod0.glb",
+      "track": "existing-architecture-exports",
+      "status": "reused",
+      "bytes": 266896,
+      "sha256": "8d02dd181fc141cc7573740678c6e12d45d597b1968dfc1dfc57af286007fa62"
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/heritage-cornice.lod1.glb",
+      "track": "existing-architecture-exports",
+      "status": "reused",
+      "bytes": 266272,
+      "sha256": "232c064a8a1d4a2fbbfdf649073401325348a7e4b9bc32a57740be0e7530e009"
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/heritage-window-frame.lod0.glb",
+      "track": "existing-architecture-exports",
+      "status": "reused",
+      "bytes": 162660,
+      "sha256": "6dea351d9f267a0bdae09a707d1a463ca0de2c3af84b3a697efcc6db69623f62"
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/heritage-window-frame.lod1.glb",
+      "track": "existing-architecture-exports",
+      "status": "reused",
+      "bytes": 161840,
+      "sha256": "530028a112f57a64e07a29b0f86dc3ac2b2cdb63beaefe436868dd958b48aefe"
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/residential-entry-surround.lod0.glb",
+      "track": "existing-architecture-exports",
+      "status": "reused",
+      "bytes": 244516,
+      "sha256": "10e4a42965f16261a29a6569189706dcc9d926a07e0f6ed271afaa59ca7b94ac"
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/residential-entry-surround.lod1.glb",
+      "track": "existing-architecture-exports",
+      "status": "reused",
+      "bytes": 234760,
+      "sha256": "4681b0e75f5578881eb12991684dfeee70909001144b07c25adf007af13286bd"
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/sandstone-corner.lod0.glb",
+      "track": "existing-architecture-exports",
+      "status": "reused",
+      "bytes": 282820,
+      "sha256": "cae5efe3f4858f699f3f87c5dbaf581a250a72358c91c42554075dce501a5ba3"
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/sandstone-corner.lod1.glb",
+      "track": "existing-architecture-exports",
+      "status": "reused",
+      "bytes": 266004,
+      "sha256": "78d324ff237fcff8feb647dd9f50c4dcdf71be49f7b7126be3921ddca29d6ed0"
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/sandstone-plinth.lod0.glb",
+      "track": "existing-architecture-exports",
+      "status": "reused",
+      "bytes": 266284,
+      "sha256": "dc6e46f072e87e170cbf936e4a6c57be353278e39319d81112518e264c8fe427"
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/sandstone-plinth.lod1.glb",
+      "track": "existing-architecture-exports",
+      "status": "reused",
+      "bytes": 265968,
+      "sha256": "0d6737824b2c576bb7ffdcca0474460d2b71223bb7353e34c2c7a77fb04b3ad8"
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/sandstone-sill.lod0.glb",
+      "track": "existing-architecture-exports",
+      "status": "reused",
+      "bytes": 266936,
+      "sha256": "a431e56f133566fdeb14cf817130f2248487884ba6373525e9147205fa016c31"
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/sandstone-sill.lod1.glb",
+      "track": "existing-architecture-exports",
+      "status": "reused",
+      "bytes": 265684,
+      "sha256": "215df5c44b33e26d3d632bec11c5ae4c19234b4e59d4acee8a5d7a787f53d81e"
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/sloped-metal-awning.lod0.glb",
+      "track": "existing-architecture-exports",
+      "status": "reused",
+      "bytes": 164248,
+      "sha256": "75cd27de84c505401ddff0ea1f30801b5c635be284092f92b849192b709ce1ab"
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/sloped-metal-awning.lod1.glb",
+      "track": "existing-architecture-exports",
+      "status": "reused",
+      "bytes": 163624,
+      "sha256": "f66137784696ff4703b54f3aaa08814e8a3d2cf942bb369944f292a95c336755"
+    },
+    {
+      "path": "tools/assets/residential-perennial/source/before.blend",
+      "track": "existing-perennial-sources",
+      "status": "reused",
+      "bytes": 92699,
+      "sha256": "8cef78d4ab938868dcafb0762a7d658c2782acc3b2c4046c11c1d6f5b7d4a539"
+    },
+    {
+      "path": "tools/assets/residential-perennial/source/before.glb",
+      "track": "existing-perennial-sources",
+      "status": "reused",
+      "bytes": 2296,
+      "sha256": "0b5d323ef0dce7a01d558c98f497190a7493ebb5a93f482cb3dc9d9363e033a9"
+    },
+    {
+      "path": "tools/assets/residential-perennial/source/before.json",
+      "track": "existing-perennial-sources",
+      "status": "reused",
+      "bytes": 4135,
+      "sha256": "9e24555cdf2e4fa7b0ee93bbac1b601c3f50d06a111207c183b4ff072e7add42"
+    },
+    {
+      "path": "tools/assets/residential-perennial/source/before.png",
+      "track": "existing-perennial-sources",
+      "status": "reused",
+      "bytes": 352001,
+      "sha256": "1fab9431e2cdb70a57b4708aa97b5f142cdb071c008b8e836ac63a5ae629c5dc"
+    },
+    {
+      "path": "tools/assets/residential-perennial/source/perennial.blend",
+      "track": "existing-perennial-sources",
+      "status": "reused",
+      "bytes": 93750,
+      "sha256": "86d87041332b90d35969f1f1ebc664dba0441b3861c4020ee218f4dd094420a2"
+    },
+    {
+      "path": "tools/assets/residential-perennial/source/perennial.glb",
+      "track": "existing-perennial-sources",
+      "status": "reused",
+      "bytes": 2300,
+      "sha256": "3b7d0d4f101b8fa41abc68e45f158cab9bdc1056cc00ab50094028f09c7587ee"
+    },
+    {
+      "path": "tools/assets/residential-perennial/source/perennial.json",
+      "track": "existing-perennial-sources",
+      "status": "reused",
+      "bytes": 4314,
+      "sha256": "c51ea7d3fab47e6af556691a1bbdd6c9ef927f574071cd1da6a078f5aa540174"
+    },
+    {
+      "path": "tools/assets/residential-perennial/source/perennial.png",
+      "track": "existing-perennial-sources",
+      "status": "reused",
+      "bytes": 342703,
+      "sha256": "14d095bcb8c5aba023f3c444461c3b3e5d6a80ba026d4058bc59ad7c0097abfa"
+    },
+    {
+      "path": "tools/assets/residential-perennial/source/residential-perennial-data.ts",
+      "track": "existing-perennial-sources",
+      "status": "reused",
+      "bytes": 2284,
+      "sha256": "56a66f4307e994d16141ceb228eacf6d03e44901f25aa9181b8cadddeca43cc1"
+    },
+    {
+      "path": "tools/assets/residential-perennial/source/validation.json",
+      "track": "existing-perennial-sources",
+      "status": "reused",
+      "bytes": 930,
+      "sha256": "310c0dfda175e27946b60aca317da8caef67e4edbca0a05b4718b1a40cf9ed1b"
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/asphalt-color.png",
+      "track": "existing-shared-surface-maps",
+      "status": "reused",
+      "bytes": 152700,
+      "sha256": "c2e2fca56421002a2b9ea10af8d7ac152d3ecd716dea48e35dcde1b823e269ec"
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/asphalt-normal.png",
+      "track": "existing-shared-surface-maps",
+      "status": "reused",
+      "bytes": 136269,
+      "sha256": "5650eced60b71ce0000b6db29136c71dd8b65eb90690f40332ce189105b16ee1"
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/asphalt-orm.png",
+      "track": "existing-shared-surface-maps",
+      "status": "reused",
+      "bytes": 43406,
+      "sha256": "705a5d0241df654d50b2514f1c786440f324886d22a33d3bb6a127077eb588ba"
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/cedar-color.png",
+      "track": "existing-shared-surface-maps",
+      "status": "reused",
+      "bytes": 132796,
+      "sha256": "a449185795f6b8f1ba4b8be4d54a5c29d4de9962e3130dcd6f8a78c5eab92c09"
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/cedar-normal.png",
+      "track": "existing-shared-surface-maps",
+      "status": "reused",
+      "bytes": 52785,
+      "sha256": "5a22afe24646ee76b7fd876817e65a7a6e40fb1691b559171156d6098c38c215"
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/cedar-orm.png",
+      "track": "existing-shared-surface-maps",
+      "status": "reused",
+      "bytes": 42974,
+      "sha256": "3701c80f980c8f530cb49650e36b3007db658d04298a1029716d6a4d337e8f43"
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/concrete-color.png",
+      "track": "existing-shared-surface-maps",
+      "status": "reused",
+      "bytes": 126294,
+      "sha256": "edf1314b0da424c5dc136fedf3a488d2a9d1a682df47f4e3c34b4cffac0574f6"
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/concrete-normal.png",
+      "track": "existing-shared-surface-maps",
+      "status": "reused",
+      "bytes": 54562,
+      "sha256": "87f3c2f269c8b1dc320b61bff6619d057e0bb3f7b3eb40ca14759c453595c442"
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/concrete-orm.png",
+      "track": "existing-shared-surface-maps",
+      "status": "reused",
+      "bytes": 43280,
+      "sha256": "4718d11d96e519000b877c02e5ff2cff23876c81417b937b35ae63ec0f675081"
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/heritage-brick-color.png",
+      "track": "existing-shared-surface-maps",
+      "status": "reused",
+      "bytes": 153372,
+      "sha256": "d66dee08cdff0d0054edf0a08738edf2b80b1d2c1b0579b4ea4f38eb51ea7faf"
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/heritage-brick-normal.png",
+      "track": "existing-shared-surface-maps",
+      "status": "reused",
+      "bytes": 97764,
+      "sha256": "1b18f6112496313c227a498a93b5ee5a6299e67cc67066ff346198dd4e05bfc2"
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/heritage-brick-orm.png",
+      "track": "existing-shared-surface-maps",
+      "status": "reused",
+      "bytes": 63808,
+      "sha256": "f0a5b5359753085b772334892851c162db0a0bab99612b407c592bdbca811882"
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/painted-metal-color.png",
+      "track": "existing-shared-surface-maps",
+      "status": "reused",
+      "bytes": 86418,
+      "sha256": "e572f72749f87e6f270d92d92d8f3d6e1d1516f0929256b8b6c4250421559560"
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/painted-metal-normal.png",
+      "track": "existing-shared-surface-maps",
+      "status": "reused",
+      "bytes": 26884,
+      "sha256": "138704881990a261abcba11cafb18cca8d33a09a44d660d6fad6ae17c2fda0f5"
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/painted-metal-orm.png",
+      "track": "existing-shared-surface-maps",
+      "status": "reused",
+      "bytes": 43781,
+      "sha256": "c17d43084e048d7a8b8aa7f05b053a7e1aa6f7d76a262223bf78a985fba41775"
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/roof-shingle-color.png",
+      "track": "existing-shared-surface-maps",
+      "status": "reused",
+      "bytes": 101307,
+      "sha256": "cc77c3a8056cb2cdd57c750eed1b5ed27469dc12353f1f3a85ce62a62310a56f"
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/roof-shingle-normal.png",
+      "track": "existing-shared-surface-maps",
+      "status": "reused",
+      "bytes": 61588,
+      "sha256": "91710aae7ae2586e886135dd7e565e1aaa57f22817dbd1825531df7adf434e61"
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/roof-shingle-orm.png",
+      "track": "existing-shared-surface-maps",
+      "status": "reused",
+      "bytes": 53979,
+      "sha256": "f501c57e209e4d6c42d39780b63d4937ef476f766c24198603a8439eb7b16311"
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/sandstone-color.png",
+      "track": "existing-shared-surface-maps",
+      "status": "reused",
+      "bytes": 135322,
+      "sha256": "7d370f02016b15b0b702a47445d4f0f2b2555c3d623e12b16b19e157abd5337a"
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/sandstone-normal.png",
+      "track": "existing-shared-surface-maps",
+      "status": "reused",
+      "bytes": 83560,
+      "sha256": "30a5ba0a9ff28d05419bd9339a7746f841959c4e276028ce0a7c35c7be93eaba"
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/sandstone-orm.png",
+      "track": "existing-shared-surface-maps",
+      "status": "reused",
+      "bytes": 43039,
+      "sha256": "5458aa7d79979230563fcd4e8615d330b024276fda4685c9e49b072a2ad4f2c1"
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/street-brick-color.png",
+      "track": "existing-shared-surface-maps",
+      "status": "reused",
+      "bytes": 153086,
+      "sha256": "bdd741a363828769779de08ca1dc1d319c30a125e28cbe36c79269c7adce6312"
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/street-brick-normal.png",
+      "track": "existing-shared-surface-maps",
+      "status": "reused",
+      "bytes": 92806,
+      "sha256": "a405a6bdc51558083a23d0a25e91e1000cc823ac55c25e082c777f049c65dcba"
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/street-brick-orm.png",
+      "track": "existing-shared-surface-maps",
+      "status": "reused",
+      "bytes": 65038,
+      "sha256": "8c821e368b938b11de92669178da013e985f59163cd976ae9c593d1881dc8b76"
+    }
+  ]
+}

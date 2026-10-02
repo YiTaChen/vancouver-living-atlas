@@ -1,4 +1,4 @@
-/** LOCAL VISUAL QA: robson-sill-blender-candidate-v1. No production placement. */
+/** LOCAL VISUAL QA: bounded source-edge sill comparisons. No production placement. */
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import {
@@ -13,8 +13,13 @@ import {
   type ArchitectureQAContext,
 } from './architecture-details';
 import { cityReliefMaterial } from './city-surface-material';
-import type { CityMaterialLibrary } from './material-library';
+import {
+  CITY_MATERIAL_MANIFEST,
+  CITY_MATERIAL_SLOT,
+  type CityMaterialLibrary,
+} from './material-library';
 import manifest from '../../tools/assets/architecture-details/runtime-candidate/manifest.json';
+import expansion from '../../tools/assets/architecture-expansion/manifest.json';
 
 export const ARCHITECTURE_MODULE_CANDIDATE = {
   id: 'robson-sill-blender-candidate-v1',
@@ -39,6 +44,65 @@ export const ARCHITECTURE_MODULE_CANDIDATE = {
     },
   ],
 } as const;
+export type ArchitectureCandidateVariant =
+  | 'robson-sills'
+  | 'modern-sills'
+  | 'cedar-sills';
+// Explicit QA samples on existing source edges, never a new region predicate.
+// No model expands its replaced volume; linear span alone may scale 0.75–1.5×.
+export const ARCHITECTURE_EXPANSION_CANDIDATES = {
+  'modern-sills': {
+    id: 'source-modern-sill-drip-v1',
+    asset: 'modern-sill-drip',
+    profile: 'midrise-grid',
+    surface: 'painted-metal',
+    maximumInstances: 32,
+    maximumExtraTriangles: 1280,
+    frameDistance: 26,
+    sources: [
+      {
+        sourceKey: '145639',
+        sourceFeature: '133049',
+        edgeKey: '-326.275,445.400|-336.041,435.450',
+      },
+    ],
+  },
+  'cedar-sills': {
+    id: 'source-residential-cedar-sill-v1',
+    asset: 'residential-cedar-sill',
+    profile: 'domestic-cladding',
+    surface: 'cedar',
+    maximumInstances: 32,
+    maximumExtraTriangles: 896,
+    frameDistance: 18,
+    sources: [
+      {
+        sourceKey: '145755',
+        sourceFeature: '105546',
+        edgeKey: '-229.513,444.825|-239.811,434.495',
+      },
+      {
+        sourceKey: '145677',
+        sourceFeature: '104898',
+        edgeKey: '-242.321,434.725|-247.862,429.170',
+      },
+    ],
+  },
+} as const;
+function candidateSpec(variant: ArchitectureCandidateVariant) {
+  if (variant === 'robson-sills')
+    return {
+      ...ARCHITECTURE_MODULE_CANDIDATE,
+      asset: 'sandstone-sill',
+      profile: null,
+      surface: 'sandstone',
+      frameDistance: 44,
+      lods: manifest.lods,
+    };
+  const spec = ARCHITECTURE_EXPANSION_CANDIDATES[variant];
+  const asset = expansion.assets.find((item) => item.id === spec.asset)!;
+  return { ...spec, lods: asset.lods };
+}
 export type ArchitectureCandidateLOD = 'auto' | 0 | 1;
 export type ArchitectureCandidateLoader = (
   lod: 0 | 1,
@@ -67,11 +131,15 @@ export function architectureBoxKey(box: ArchitectureBox) {
  * existing boxes by their full placement/size key; never generate population. */
 export function selectArchitectureCandidateSills(
   parts: readonly ArchitecturePart[],
+  variant: ArchitectureCandidateVariant = 'robson-sills',
 ) {
+  const spec = candidateSpec(variant);
+  const span = spec.lods[0].bounds.max[0] - spec.lods[0].bounds.min[0];
   const found = new Map<string, SelectedSill>();
   const ambiguous = new Set<string>();
-  for (const source of ARCHITECTURE_MODULE_CANDIDATE.sources) {
+  for (const source of spec.sources) {
     for (const part of parts.filter((p) => p.key === source.sourceKey)) {
+      if (spec.profile && part.profile.kind !== spec.profile) continue;
       const ring = part.polygon[0];
       const edgeIndex = ring.findIndex(
         (a, i) =>
@@ -102,6 +170,8 @@ export function selectArchitectureCandidateSills(
           Math.abs(box.depth - 0.31) > 1e-6 ||
           box.width < 1.4 ||
           box.width > 5 ||
+          (variant !== 'robson-sills' &&
+            (box.width / span < 0.75 || box.width / span > 1.5)) ||
           box.y - part.ground < part.profile.groundStoreyM + 0.5
         )
           continue;
@@ -135,7 +205,7 @@ export function selectArchitectureCandidateSills(
           a.box.x - b.box.x ||
           a.box.z - b.box.z,
       )
-      .slice(0, ARCHITECTURE_MODULE_CANDIDATE.maximumInstances),
+      .slice(0, spec.maximumInstances),
   );
 }
 
@@ -175,6 +245,7 @@ function releaseImported(scene: THREE.Object3D) {
 export function extractArchitectureCandidate(
   scene: THREE.Object3D,
   lod: 0 | 1,
+  variant: ArchitectureCandidateVariant = 'robson-sills',
 ) {
   let result: THREE.BufferGeometry | null = null;
   try {
@@ -187,7 +258,7 @@ export function extractArchitectureCandidate(
       throw new Error('Architecture candidate requires one static mesh');
     const mesh = meshes[0];
     result = mesh.geometry.clone().applyMatrix4(mesh.matrixWorld);
-    const expected = manifest.lods[lod];
+    const expected = candidateSpec(variant).lods[lod];
     const triangles =
       (result.index?.count ?? result.getAttribute('position').count) / 3;
     if (triangles !== expected.triangles)
@@ -215,7 +286,35 @@ export function extractArchitectureCandidate(
   }
 }
 
-async function defaultLoader(lod: 0 | 1) {
+async function defaultLoader(
+  lod: 0 | 1,
+  variant: ArchitectureCandidateVariant,
+) {
+  if (variant !== 'robson-sills') {
+    const urls = {
+      'modern-sills': [
+        new URL(
+          '../../tools/assets/architecture-expansion/assets/modern-sill-drip.lod0.glb',
+          import.meta.url,
+        ).href,
+        new URL(
+          '../../tools/assets/architecture-expansion/assets/modern-sill-drip.lod1.glb',
+          import.meta.url,
+        ).href,
+      ],
+      'cedar-sills': [
+        new URL(
+          '../../tools/assets/architecture-expansion/assets/residential-cedar-sill.lod0.glb',
+          import.meta.url,
+        ).href,
+        new URL(
+          '../../tools/assets/architecture-expansion/assets/residential-cedar-sill.lod1.glb',
+          import.meta.url,
+        ).href,
+      ],
+    };
+    return (await new GLTFLoader().loadAsync(urls[variant][lod])).scene;
+  }
   // Static new URL references emit these two GLBs only in the QA import graph.
   const url =
     lod === 0
@@ -258,13 +357,19 @@ export class ArchitectureModuleCandidate implements ArchitectureQAAdapter {
   private regime: 0 | 1 | null = null;
   private lodMode: ArchitectureCandidateLOD = 'auto';
   private focus = new THREE.Vector3();
+  private loader: ArchitectureCandidateLoader;
+  readonly spec: ReturnType<typeof candidateSpec>;
 
   constructor(
     private host: Host,
-    private loader: ArchitectureCandidateLoader = defaultLoader,
+    loader?: ArchitectureCandidateLoader,
+    readonly variant: ArchitectureCandidateVariant = 'robson-sills',
   ) {
+    this.spec = candidateSpec(variant);
+    this.loader = loader ?? ((lod) => defaultLoader(lod, variant));
     const requested = selectArchitectureCandidateSills(
       host.details.cells.flatMap((cell) => cell.parts),
+      variant,
     );
     this.selected = new Map();
     const requestedParts = new Set(
@@ -289,7 +394,7 @@ export class ArchitectureModuleCandidate implements ArchitectureQAAdapter {
         }
     }
     this.material = cityReliefMaterial(host.library);
-    this.material.name = 'QA Blender sill using shared city atlas';
+    this.material.name = `QA Blender ${this.spec.asset} using shared city atlas`;
     for (const { box } of this.selected.values())
       this.focus.add(new THREE.Vector3(box.x, box.y, box.z));
     if (this.selected.size) this.focus.multiplyScalar(1 / this.selected.size);
@@ -311,7 +416,7 @@ export class ArchitectureModuleCandidate implements ArchitectureQAAdapter {
           releaseImported(scene);
           return;
         }
-        const geometry = extractArchitectureCandidate(scene, lod);
+        const geometry = extractArchitectureCandidate(scene, lod, this.variant);
         if (this.disposed) {
           geometry.dispose();
           return;
@@ -391,10 +496,13 @@ export class ArchitectureModuleCandidate implements ArchitectureQAAdapter {
     if (!chosen.length) return null;
     const geometry = this.templates.get(lod)!.clone();
     this.ownedBatchGeometry.add(geometry);
+    const bounds = this.spec.lods[lod].bounds;
+    const span = bounds.max[0] - bounds.min[0];
+    const slot = CITY_MATERIAL_SLOT[this.spec.surface];
     const sizes = new Float32Array(chosen.length * 3),
-      slots = new Float32Array(chosen.length).fill(1);
+      slots = new Float32Array(chosen.length).fill(slot);
     chosen.forEach(({ box }, index) =>
-      sizes.set([box.width / 1.4, 1, 1], index * 3),
+      sizes.set([box.width / span, 1, 1], index * 3),
     );
     geometry.setAttribute(
       'aReliefSize',
@@ -417,7 +525,11 @@ export class ArchitectureModuleCandidate implements ArchitectureQAAdapter {
     const position = new THREE.Vector3(),
       scale = new THREE.Vector3(),
       matrix = new THREE.Matrix4();
-    const centre = new THREE.Vector3(0, 0.08, 0.13),
+    const centre = new THREE.Vector3(
+        (bounds.min[0] + bounds.max[0]) / 2,
+        (bounds.min[1] + bounds.max[1]) / 2,
+        (bounds.min[2] + bounds.max[2]) / 2,
+      ),
       color = new THREE.Color();
     chosen.forEach(({ box, match }, index) => {
       rotation.setFromAxisAngle(axis, match!.yaw);
@@ -426,22 +538,30 @@ export class ArchitectureModuleCandidate implements ArchitectureQAAdapter {
         .applyQuaternion(rotation)
         .negate()
         .add(new THREE.Vector3(box.x, box.y, box.z));
-      scale.set(box.width / 1.4, 1, 1);
+      scale.set(box.width / span, 1, 1);
       matrix.compose(position, rotation, scale);
       mesh.setMatrixAt(index, matrix);
-      mesh.setColorAt(index, color.setHex(box.color));
+      mesh.setColorAt(
+        index,
+        this.variant === 'robson-sills'
+          ? color.setHex(box.color)
+          : color
+              .fromArray(CITY_MATERIAL_MANIFEST.materials[slot].averageColor)
+              .convertSRGBToLinear(),
+      );
     });
     mesh.computeBoundingBox();
     mesh.computeBoundingSphere();
     mesh.userData.architectureCandidate = {
-      id: ARCHITECTURE_MODULE_CANDIDATE.id,
+      id: this.spec.id,
+      variant: this.variant,
       lod,
       sources: chosen.map(({ match }) => ({
         sourceKey: match!.sourceKey,
         edgeKey: match!.edgeKey,
       })),
       replacedBoxes: chosen.map(({ box }) => ({ ...box })),
-      perInstanceTriangles: manifest.lods[lod].triangles,
+      perInstanceTriangles: this.spec.lods[lod].triangles,
       originalPerInstanceTriangles: 12,
     };
     mesh.userData.releaseArchitectureCandidate = () => {
@@ -481,19 +601,21 @@ export class ArchitectureModuleCandidate implements ArchitectureQAAdapter {
       }
     });
     return {
-      id: ARCHITECTURE_MODULE_CANDIDATE.id,
+      id: this.spec.id,
+      variant: this.variant,
+      asset: this.spec.asset,
+      surface: this.spec.surface,
       status: this.status,
       error: this.error,
-      sources: ARCHITECTURE_MODULE_CANDIDATE.sources,
+      sources: this.spec.sources,
       selectedExistingInstances: this.selected.size,
       allocatedReplacements: allocated,
       visibleReplacements: visible,
       visibleBatches: batches,
       visibleTriangles: triangles,
       visibleTriangleDelta: triangles - visible * 12,
-      maximumInstances: ARCHITECTURE_MODULE_CANDIDATE.maximumInstances,
-      maximumExtraTriangles:
-        ARCHITECTURE_MODULE_CANDIDATE.maximumExtraTriangles,
+      maximumInstances: this.spec.maximumInstances,
+      maximumExtraTriangles: this.spec.maximumExtraTriangles,
       lodMode: this.lodMode,
       activeLOD: this.regime,
       templates: this.templates.size,

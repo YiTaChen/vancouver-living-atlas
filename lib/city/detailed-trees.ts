@@ -5,6 +5,10 @@ import {
 } from './tree-selection';
 import * as THREE from 'three';
 import { createTreeGeometry } from './assets/tree-geometry';
+import type {
+  TreeLeafCandidate,
+  TreeMaterialCandidate,
+} from './assets/tree-material-candidate';
 import { hash } from './geo';
 import type { CityEngine } from './engine';
 import { QUALITY, type VisualQuality } from './quality';
@@ -46,6 +50,9 @@ export class DetailedTrees {
   private refresh = false;
   private disposed = false;
   private wantedPools = 0;
+  private leafCandidate: TreeLeafCandidate | null = null;
+  private requestedMaterial: TreeMaterialCandidate = 'baseline';
+  private activeMaterial: TreeMaterialCandidate = 'baseline';
   private materials: {
     trunk: THREE.MeshStandardMaterial;
     leaf: THREE.MeshStandardMaterial;
@@ -150,6 +157,52 @@ export class DetailedTrees {
     depth.customProgramCacheKey = () => 'atlas-neutral-matte-depth-v2';
     this.materials = { trunk: trunkMat, leaf: leafMat, depth };
   }
+  /** Explicit QA opt-in. A failed or superseded load keeps the baseline; changing
+   * this mode never regenerates geometry, instances, source seeds or LOD pools. */
+  async setMaterialCandidate(mode: TreeMaterialCandidate): Promise<boolean> {
+    if (process.env.VANCOUVER_VISUAL_QA !== '1') return false;
+    if (
+      this.disposed ||
+      this.e.disposed ||
+      !['baseline', 'leaf-rgba'].includes(mode)
+    )
+      return false;
+    this.requestedMaterial = mode;
+    if (mode === 'leaf-rgba') {
+      if (!this.leafCandidate) {
+        const { TreeLeafCandidate } =
+          await import('./assets/tree-material-candidate');
+        if (this.disposed || this.e.disposed || this.requestedMaterial !== mode)
+          return false;
+        this.leafCandidate ??= new TreeLeafCandidate(this.e);
+      }
+      if (
+        !(await this.leafCandidate.load()) ||
+        this.disposed ||
+        this.e.disposed ||
+        this.requestedMaterial !== mode
+      )
+        return false;
+    }
+    this.activeMaterial = mode;
+    const materials =
+      mode === 'leaf-rgba' ? this.leafCandidate!.materials : this.materials;
+    if (materials)
+      for (const pool of this.pools) {
+        pool.foliage.material = materials.leaf;
+        pool.foliage.customDepthMaterial = materials.depth;
+      }
+    this.e.renderer.shadowMap.needsUpdate = true;
+    return true;
+  }
+  getMaterialCandidateState() {
+    return {
+      requested: this.requestedMaterial,
+      active: this.activeMaterial,
+      status: this.leafCandidate?.status ?? 'idle',
+      extraTextures: this.leafCandidate ? 1 : 0,
+    };
+  }
   /** At most one unchanged geometry factory per render update; High never
    * creates Ultra pools. Unbuilt pools leave their original tree slots visible. */
   private buildNextPool() {
@@ -176,7 +229,9 @@ export class DetailedTrees {
     );
     const foliage = new THREE.InstancedMesh(
       geometry.foliage,
-      this.materials.leaf,
+      this.activeMaterial === 'leaf-rgba'
+        ? this.leafCandidate!.materials!.leaf
+        : this.materials.leaf,
       240,
     );
     for (const m of [trunk, foliage]) {
@@ -187,7 +242,10 @@ export class DetailedTrees {
       m.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
       this.group.add(m);
     }
-    foliage.customDepthMaterial = this.materials.depth;
+    foliage.customDepthMaterial =
+      this.activeMaterial === 'leaf-rgba'
+        ? this.leafCandidate!.materials!.depth
+        : this.materials.depth;
     foliage.userData.alphaFoliage = true;
     // Dense append-only array: Engine's existing SSAO foliage enumeration stays valid.
     this.pools.push({ trunk, foliage, count: 0 });
@@ -201,11 +259,17 @@ export class DetailedTrees {
     this.disposed = true;
     this.assetsReady = false;
     this.wantedPools = 0;
-    if (this.materials && this.pools.length === 0) {
-      this.materials.trunk.dispose();
+    if (
+      this.materials &&
+      (this.pools.length === 0 || this.activeMaterial === 'leaf-rgba')
+    ) {
+      if (this.pools.length === 0) this.materials.trunk.dispose();
       this.materials.leaf.dispose();
       this.materials.depth.dispose();
     }
+    this.leafCandidate?.dispose(
+      this.pools.length > 0 && this.activeMaterial === 'leaf-rgba',
+    );
     this.materials = null;
   }
   update(force = false) {

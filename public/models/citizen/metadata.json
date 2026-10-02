@@ -1,16 +1,16 @@
 {
   "name": "Original Vancouver citizen",
   "authoring": "Procedural original geometry and baked procedural PBR, no external source assets",
-  "generator": "build_citizen.py, Blender 4.5.12 LTS",
+  "generator": "Original build_citizen.py, Blender 4.5.12 LTS; texture optimization and re-export, Blender 4.3.2",
   "heightMetres": 1.81,
   "forward": "+Z",
   "up": "+Y",
   "groundY": 0,
-  "vertices": 19542,
+  "vertices": 29063,
   "triangles": 37799,
   "joints": 22,
   "materialSlots": 1,
-  "textureSize": 2048,
+  "textureSize": 1024,
   "animations": [
     {
       "name": "idle",
@@ -30,6 +30,19 @@
   ],
   "runtimeNotes": "In-place animation. Distance-driven clip sampling; each navigator owns its GLB and GPU resources. Keep procedural fallback until loading completes. Both legs obey reach bounds; shared continuous pelvis skinning aligns layered coat/denim deformation. Neck overlaps the compressed head. CPU tests sample 40 poses per clip for grounded soles and intact shin-to-ankle attachment.",
   "license": "Repository LICENSE",
-  "exportedBytes": 6668168,
-  "gpuTextureEstimateMiB": 64.0
+  "exportedBytes": 3498312,
+  "gpuTextureEstimateMiB": 16,
+  "provenance": {
+    "originalGenerator": "tools/assets/citizen/build_citizen.py",
+    "originalGlb": "tools/assets/citizen/runtime-reference/vancouver-citizen-2048.glb",
+    "originalSha256": "1df2fce2764e996f8067d154ff82964425e82f6338ba74f3109b487331eb0840",
+    "acceptedGlbSource": "tools/assets/citizen/optimization/glb/citizen-lod0.glb",
+    "acceptedSha256": "14d66fabe097abf82ef36800561c06ee7263c0acfd6b5ea1265a40ed35841ff8",
+    "editableSource": "tools/assets/citizen/optimization/source/citizen-lod0.blend",
+    "editableSourceSha256": "1e15ea4ad8eef3625e0baf6eb078c0d83ea8e79153dd8ff3c6dfae3bbf1806e8",
+    "method": "Re-export of the original rigged citizen with three embedded 1024 PNG maps. Original triangles, UV connectivity, 22-bone rig and idle/walk/run clips preserved; 15 extra exported seam vertices.",
+    "acceptance": "Accepted after High 1080p comparisons under four lighting conditions and an 8-second movement comparison.",
+    "benefit": "47.5% smaller GLB and 75% lower estimated RGBA8 texture allocation with full mip chains (64 to 16 MiB). No measured FPS improvement; one material draw and 37,799 triangles unchanged.",
+    "handoffInventory": "Original optimization handoff files remain unchanged; runtime-reference preserves the former production input outside that inventory."
+  }
 }

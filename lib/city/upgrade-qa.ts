@@ -3,6 +3,8 @@ import type { CityEngine } from './engine';
 import type { VisualQuality } from './quality';
 import { QACPUProfile } from './qa-cpu-profile';
 import { installArchitectureModuleCandidateQA } from './architecture-module-candidate-qa';
+import { installOfflineMaterialStudyQA } from './offline-material-study-qa';
+import { installOfflineAssetValidationQA } from './offline-asset-validation-qa';
 import { project } from './geo';
 import { sampleAtmosphere, type AtmosphereMode } from './atmosphere';
 import {
@@ -75,7 +77,10 @@ export function upgradeSceneEvidence(e: CityEngine) {
     : [];
   return {
     atmosphere: e.atmosphere,
-    architectureModuleCandidate: e.data?.architectureModuleCandidate?.snapshot?.() ?? null,
+    citizenAsset: e.navigation?.walker.group.userData ?? null,
+    treeMaterialCandidate: e.detailedTrees?.getMaterialCandidateState() ?? null,
+    architectureModuleCandidate:
+      e.data?.architectureModuleCandidate?.snapshot?.() ?? null,
     sharedMaterials: materialEvidence(e),
     residentialGround: report
       ? {
@@ -143,7 +148,35 @@ export function installUpgradeQA(
   cpuLabel.appendChild(cpuToggle);
   section.appendChild(cpuLabel);
   let busy = false;
-  installArchitectureModuleCandidateQA(e, section, () => busy || lease?.isRunning() === true);
+  const assetLease = {
+    begin: () => {
+      if (busy || lease?.begin() === false) return false;
+      busy = true;
+      return true;
+    },
+    end: () => {
+      busy = false;
+      lease?.end();
+    },
+    isRunning: () => busy || lease?.isRunning() === true,
+  };
+  installArchitectureModuleCandidateQA(
+    e,
+    section,
+    () => busy || lease?.isRunning() === true,
+  );
+  installOfflineMaterialStudyQA(e, section, assetLease);
+  installOfflineAssetValidationQA(
+    e,
+    section,
+    assetLease,
+    () =>
+      void suite(
+        'high',
+        ['citizen'],
+        'offline-' + e.navigation?.walker.group.userData.assetVariant,
+      ),
+  );
   let expectedPose: ReturnType<typeof captureQAPose> | null = null;
   function fixedResolution() {
     e.renderer.setPixelRatio(1);
@@ -257,13 +290,17 @@ export function installUpgradeQA(
       over100Ms: gaps.filter((n) => n > 100).length,
     };
   }
-  async function suite(quality: VisualQuality) {
+  async function suite(
+    quality: VisualQuality,
+    views: readonly View[] = VIEWS,
+    prefix = '',
+  ) {
     if (busy || lease?.begin() === false) return;
     busy = true;
     const instrumented = cpuToggle.checked;
     cpuToggle.disabled = true;
     try {
-      for (const view of VIEWS) {
+      for (const view of views) {
         status.textContent = `Preparing ${view} / ${quality}`;
         select(view, quality);
         // Compare fully warmed views. Streaming latency remains explicit evidence,
@@ -300,15 +337,22 @@ export function installUpgradeQA(
           cpu.wrap(e, 'renderScene', 'renderScene');
           cpu.wrap(e.renderer, 'render', 'renderer.render');
           if (e.ssao) cpu.wrap(e.ssao, 'render', 'ssao.render');
-          if (e.navigation) cpu.wrap(e.navigation, 'update', 'navigation.update');
-          if (e.detailedTrees) cpu.wrap(e.detailedTrees, 'update', 'trees.update');
-          if (e.architecturalDetails) cpu.wrap(e.architecturalDetails, 'update', 'architecture.update');
-          if (e.streetscapeKit) cpu.wrap(e.streetscapeKit, 'update', 'streetscape.update');
-          if (e.facadeDetails) cpu.wrap(e.facadeDetails, 'update', 'facades.update');
+          if (e.navigation)
+            cpu.wrap(e.navigation, 'update', 'navigation.update');
+          if (e.detailedTrees)
+            cpu.wrap(e.detailedTrees, 'update', 'trees.update');
+          if (e.architecturalDetails)
+            cpu.wrap(e.architecturalDetails, 'update', 'architecture.update');
+          if (e.streetscapeKit)
+            cpu.wrap(e.streetscapeKit, 'update', 'streetscape.update');
+          if (e.facadeDetails)
+            cpu.wrap(e.facadeDetails, 'update', 'facades.update');
           if (e.interiors) cpu.wrap(e.interiors, 'update', 'interiors.update');
         }
         let cpuProfile: ReturnType<QACPUProfile['stop']> | null = null;
-        const sample = await collect(8000).finally(() => { cpuProfile = cpu?.stop() ?? null; });
+        const sample = await collect(8000).finally(() => {
+          cpuProfile = cpu?.stop() ?? null;
+        });
         const gl = e.renderer.getContext();
         const extension = gl.getExtension('WEBGL_debug_renderer_info');
         const row = {
@@ -363,7 +407,7 @@ export function installUpgradeQA(
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            name: `${quality}-${view}${instrumented ? '-cpu' : ''}`,
+            name: `${prefix ? prefix + '-' : ''}${quality}-${view}${instrumented ? '-cpu' : ''}`,
             row,
             screenshot: e.screenshot(),
           }),
@@ -373,7 +417,7 @@ export function installUpgradeQA(
             `Capture failed or camera/readiness invalid: ${response.status}`,
           );
       }
-      status.textContent = `Completed matched ${quality}: 4 views`;
+      status.textContent = `Completed matched ${quality}: ${views.length} views`;
     } catch (error) {
       status.textContent = `Upgrade check failed: ${error}`;
     } finally {
@@ -460,7 +504,7 @@ export function installUpgradeQA(
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            name: `${e.settings.quality}-citizen-motion-${seconds}s`,
+            name: `offline-${nav.walker.group.userData.assetVariant}-${e.settings.quality}-citizen-motion-${seconds}s`,
             row,
             screenshot: e.screenshot(),
           }),

@@ -54,12 +54,32 @@ assert(
 );
 assert(
   !scripts.includes('robson-sill-blender-candidate-v1') &&
+    !scripts.includes('source-modern-sill-drip-v1') &&
+    !scripts.includes('source-residential-cedar-sill-v1') &&
     !scripts.includes('Replace existing upper sills (QA only)'),
   'Blender architecture candidate controls and code must not ship',
 );
 assert(
   !files.some((name) => /sandstone-sill\.lod[01].*\.glb$/.test(name)),
   'Opt-in Blender architecture candidate assets must not ship',
+);
+assert(
+  !scripts.includes('Candidate straight RGBA foliage') &&
+    !scripts.includes('uTreeCandidateSolidUV') &&
+    !scripts.includes('/__offline-assets/') &&
+    !scripts.includes('Save asset checkpoint') &&
+    !scripts.includes('Render offline role materials'),
+  'Offline asset comparison shaders, loaders and controls must not ship',
+);
+assert(
+  !files.some((name) =>
+    /(?:modern-sill-drip|residential-cedar-sill)\.lod[01].*\.glb$/.test(name),
+  ) &&
+    !files.some((name) => name.startsWith('textures/trees/candidate/')) &&
+    !files.some((name) =>
+      /(?:candidate-lod0-1024|vancouver-citizen-2048)\.glb$/.test(name),
+    ),
+  'Unaccepted or reference offline assets must not ship',
 );
 for (const language of [
   'Français',

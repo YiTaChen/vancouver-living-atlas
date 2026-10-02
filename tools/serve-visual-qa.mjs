@@ -14,10 +14,39 @@ const revision = execFileSync('git', ['rev-parse', 'HEAD'], {
 }).trim();
 // HEAD is the parent revision while validating an uncommitted stage. Hash the
 // actual visual source and data as well, so that distinction stays explicit.
-const visualFiles = [...new Set(execFileSync('git', [
-  'ls-files', '-co', '--exclude-standard', '--', 'lib', 'app', 'components',
-  'public/data', 'public/textures', 'public/materials', 'public/models', 'package.json', 'package-lock.json', 'vite.config.ts',
-], {encoding:'utf8'}).trim().split('\n'))].sort();
+const visualFiles = [
+  ...new Set(
+    execFileSync(
+      'git',
+      [
+        'ls-files',
+        '-co',
+        '--exclude-standard',
+        '--',
+        'lib',
+        'app',
+        'components',
+        'public/data',
+        'public/textures',
+        'public/materials',
+        'public/models',
+        'package.json',
+        'package-lock.json',
+        'vite.config.ts',
+        'tools/serve-visual-qa.mjs',
+        'tools/assets/offline-handoff/manifest.json',
+        'tools/assets/role-materials/exports/*.glb',
+        'tools/assets/architecture-expansion/assets/*.glb',
+        'tools/assets/citizen/runtime-reference/*.glb',
+        'tools/assets/vegetation-runtime-candidate/manifest.json',
+        'tools/assets/vegetation_ground/maps/leaf_mip_*.png',
+      ],
+      { encoding: 'utf8' },
+    )
+      .trim()
+      .split('\n'),
+  ),
+].sort();
 const digest = createHash('sha256');
 for (const file of visualFiles) {
   digest.update(file + '\0');
@@ -40,6 +69,27 @@ const mime = {
 createServer(async (req, res) => {
   try {
     const url = new URL(req.url, 'http://localhost:3100');
+    // Offline study assets are available only on this local QA server. Keep
+    // unaccepted models out of public/ and out of the production deployment.
+    if (req.method === 'GET' && url.pathname.startsWith('/__offline-assets/')) {
+      const relative = decodeURIComponent(
+        url.pathname.slice('/__offline-assets/'.length),
+      );
+      if (
+        !/^(?:(?:role-materials\/exports|vegetation_ground\/exports|architecture-expansion\/assets|citizen\/runtime-reference)\/[a-z0-9_.-]+\.glb|vegetation_ground\/maps\/leaf_mip_[0-4]_(?:1024|512|256|128|64)\.png)$/.test(
+          relative,
+        )
+      ) {
+        res.writeHead(404);
+        return res.end('Not found');
+      }
+      const body = await readFile(resolve('tools/assets', relative));
+      res.writeHead(200, {
+        'Content-Type': mime[extname(relative)],
+        'Cache-Control': 'no-store',
+      });
+      return res.end(body);
+    }
     if (req.method === 'POST' && url.pathname === '/__visual-qa') {
       if (
         req.headers.origin &&

@@ -1,0 +1,13 @@
+{
+  "status": "pass",
+  "checks": [
+    "generator module import has no file side effects",
+    "edited packed source SHA256 unchanged by export",
+    "mesh edit survives export",
+    "object translation survives display offset subtraction",
+    "unsupported shader node is rejected",
+    "canonical source SHA256 unchanged",
+    "six semantic negative cases rejected: object-space normals, wrong normal/ORM/base color spaces, wrong alpha socket, anisotropy"
+  ],
+  "sourceSHA256": "afc223cbfc59c7f7e8311bc5599f17a24c7123e10b4edd2c7f48f3e65e775926"
+}

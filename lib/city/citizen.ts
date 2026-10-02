@@ -2,7 +2,36 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { makeWalker } from './assets/walker';
 
-const CITIZEN_URL = '/models/citizen/vancouver-citizen.glb';
+// Content revision avoids reusing a cached 2048 atlas at the stable asset path.
+const CITIZEN_URL =
+  '/models/citizen/vancouver-citizen.glb?v=14d66fabe097';
+export type CitizenQAVariant = 'baseline-2048' | 'candidate-1024';
+const DEFAULT_CITIZEN_VARIANT: CitizenQAVariant = 'candidate-1024';
+const QA_ASSET_URLS = {
+  'baseline-2048':
+    '/__offline-assets/citizen/runtime-reference/vancouver-citizen-2048.glb',
+  'candidate-1024': CITIZEN_URL,
+} as const;
+const qaSelectors = new WeakMap<
+  THREE.Group,
+  (variant: CitizenQAVariant) => Promise<boolean>
+>();
+
+/** Local gated QA uses the normal loader and private ownership lifecycle. */
+export async function selectCitizenAssetForQA(
+  group: THREE.Group,
+  variant: CitizenQAVariant,
+) {
+  if (process.env.VANCOUVER_VISUAL_QA !== '1')
+    throw new Error('Citizen comparison requires the local visual QA build');
+  if (!Object.prototype.hasOwnProperty.call(QA_ASSET_URLS, variant))
+    throw new Error('Unknown citizen comparison asset');
+  const select = qaSelectors.get(group);
+  if (!select) throw new Error('Citizen is unavailable or already disposed');
+  if (!(await select(variant)))
+    throw new Error('Citizen comparison asset failed or was superseded');
+  return group.userData.assetVariant as CitizenQAVariant;
+}
 const WALK_STRIDE = 1;
 const RUN_STRIDE = 1.9;
 
@@ -12,7 +41,7 @@ type CitizenAsset = {
 };
 type CitizenOptions = {
   /** Override only for local tests or an explicitly chosen original asset. */
-  load?: () => Promise<CitizenAsset>;
+  load?: (url: string) => Promise<CitizenAsset>;
 };
 
 /** Dispose a privately owned scene, including the procedural loading fallback. */
@@ -56,7 +85,12 @@ function disposeModel(root: THREE.Object3D) {
 export function makeCitizen(options: CitizenOptions = {}) {
   const group = new THREE.Group();
   group.name = 'Vancouver citizen';
-  group.userData = { assetState: 'fallback', forward: '+Z', groundY: 0 };
+  group.userData = {
+    assetState: 'fallback',
+    assetVariant: 'procedural',
+    forward: '+Z',
+    groundY: 0,
+  };
   let fallback: ReturnType<typeof makeWalker> | null = makeWalker();
   group.add(fallback.group);
   fallback.group.traverse((object) => {
@@ -64,6 +98,10 @@ export function makeCitizen(options: CitizenOptions = {}) {
   });
   let requested = false;
   let disposed = false;
+  let generation = 0;
+  let activeVariant: CitizenQAVariant | undefined;
+  let pendingVariant: CitizenQAVariant | undefined;
+  let inFlight: Promise<boolean> | undefined;
   let model: THREE.Group | undefined;
   let mixer: THREE.AnimationMixer | undefined;
   let idle: THREE.AnimationAction | undefined;
@@ -75,58 +113,103 @@ export function makeCitizen(options: CitizenOptions = {}) {
   let runWeight = 0;
   let idleTime = 0;
 
-  async function load() {
-    if (requested || disposed) return;
+  function loadAsset(variant: CitizenQAVariant): Promise<boolean> {
+    if (disposed) return Promise.resolve(false);
+    if (pendingVariant === variant && inFlight) return inFlight;
+    if (activeVariant === variant && !pendingVariant)
+      return Promise.resolve(true);
     requested = true;
+    const ticket = ++generation;
+    pendingVariant = variant;
     group.userData.assetState = 'loading';
-    let asset: CitizenAsset | undefined;
-    try {
-      // Deliberately owned per navigator: no shared mutable skeleton, texture or
-      // disposal state can survive a destroyed/recreated city engine.
-      asset = await (options.load?.() ??
-        new GLTFLoader().loadAsync(CITIZEN_URL));
-      if (disposed) {
-        disposeModel(asset.scene);
-        return;
+    group.userData.requestedAssetVariant = variant;
+    delete group.userData.assetError;
+    inFlight = (async () => {
+      let asset: CitizenAsset | undefined;
+      let nextMixer: THREE.AnimationMixer | undefined;
+      try {
+        // Each navigator owns its decoded image, skeleton and geometry. During
+        // QA swaps the current actor remains visible until its replacement is valid.
+        const url = process.env.VANCOUVER_VISUAL_QA === '1'
+          ? QA_ASSET_URLS[variant]
+          : CITIZEN_URL;
+        asset = await (options.load?.(url) ?? new GLTFLoader().loadAsync(url));
+        if (disposed || ticket !== generation) {
+          disposeModel(asset.scene);
+          return false;
+        }
+        const clips = new Map(
+          asset.animations.map((clip) => [clip.name, clip]),
+        );
+        if (!clips.has('idle') || !clips.has('walk') || !clips.has('run'))
+          throw new Error('Citizen is missing its idle, walk or run clip');
+        const nextModel = asset.scene;
+        nextModel.name = 'Original rigged citizen — 38k PBR';
+        nextModel.traverse((object) => {
+          if (!(object instanceof THREE.Mesh)) return;
+          object.castShadow = false;
+          object.receiveShadow = true;
+          object.frustumCulled = false;
+        });
+        nextMixer = new THREE.AnimationMixer(nextModel);
+        const nextIdle = nextMixer.clipAction(clips.get('idle')!).play();
+        const nextWalk = nextMixer.clipAction(clips.get('walk')!).play();
+        const nextRun = nextMixer.clipAction(clips.get('run')!).play();
+        for (const action of [nextIdle, nextWalk, nextRun])
+          action.paused = true;
+        // Validate the first sampled pose before replacing any live mixer state.
+        samplePose(nextMixer, nextIdle, nextWalk, nextRun, lastDistance);
+        const previousModel = model;
+        const previousMixer = mixer;
+        model = nextModel;
+        mixer = nextMixer;
+        idle = nextIdle;
+        walk = nextWalk;
+        run = nextRun;
+        // Current distance, blend weights and idle phase were retained above.
+        group.add(model);
+        if (previousModel) {
+          previousMixer?.stopAllAction();
+          previousMixer?.uncacheRoot(previousModel);
+          group.remove(previousModel);
+          disposeModel(previousModel);
+        }
+        if (fallback) {
+          group.remove(fallback.group);
+          disposeModel(fallback.group);
+          fallback = null;
+        }
+        activeVariant = variant;
+        group.userData.assetState = 'ready';
+        group.userData.assetVariant = variant;
+        group.userData.heightMetres = 1.81;
+        group.userData.strideMetres = { walk: WALK_STRIDE, run: RUN_STRIDE };
+        return true;
+      } catch (error) {
+        nextMixer?.stopAllAction();
+        if (asset) {
+          nextMixer?.uncacheRoot(asset.scene);
+          disposeModel(asset.scene);
+        }
+        if (!disposed && ticket === generation) {
+          group.userData.assetState = model ? 'ready' : 'fallback-error';
+          group.userData.assetError = String(error);
+        }
+        // Failed initial loads keep the procedural walker; failed QA swaps keep
+        // the previous validated citizen, without retrying on every frame.
+        return false;
+      } finally {
+        if (ticket === generation) {
+          pendingVariant = undefined;
+          inFlight = undefined;
+          delete group.userData.requestedAssetVariant;
+        }
       }
-      const clips = new Map(asset.animations.map((clip) => [clip.name, clip]));
-      if (!clips.has('idle') || !clips.has('walk') || !clips.has('run'))
-        throw new Error('Citizen is missing its idle, walk or run clip');
-      model = asset.scene;
-      model.name = 'Original rigged citizen — 38k PBR';
-      model.traverse((object) => {
-        if (!(object instanceof THREE.Mesh)) return;
-        object.castShadow = false;
-        object.receiveShadow = true;
-        // This single actor has animated limbs beyond the rest-pose bounds.
-        object.frustumCulled = false;
-      });
-      mixer = new THREE.AnimationMixer(model);
-      idle = mixer.clipAction(clips.get('idle')!).play();
-      walk = mixer.clipAction(clips.get('walk')!).play();
-      run = mixer.clipAction(clips.get('run')!).play();
-      for (const action of [idle, walk, run]) action.paused = true;
-      applyPose(lastDistance, 0, false, 0);
-      group.add(model);
-      if (fallback) {
-        group.remove(fallback.group);
-        disposeModel(fallback.group);
-        fallback = null;
-      }
-      group.userData.assetState = 'ready';
-      group.userData.heightMetres = 1.81;
-      group.userData.strideMetres = { walk: WALK_STRIDE, run: RUN_STRIDE };
-    } catch {
-      mixer?.stopAllAction();
-      if (model) mixer?.uncacheRoot(model);
-      if (asset) disposeModel(asset.scene);
-      model = undefined;
-      mixer = undefined;
-      idle = walk = run = undefined;
-      if (!disposed) group.userData.assetState = 'fallback-error';
-      // The original walker remains usable even offline or with a corrupt GLB.
-    }
+    })();
+    return inFlight;
   }
+  if (process.env.VANCOUVER_VISUAL_QA === '1')
+    qaSelectors.set(group, loadAsset);
 
   function applyPose(
     distance: number,
@@ -139,14 +222,26 @@ export function makeCitizen(options: CitizenOptions = {}) {
     movementWeight += (Number(moving) - movementWeight) * blend;
     runWeight += (Number(speed > 2.4) - runWeight) * blend;
     idleTime += dt;
-    idle.time = idleTime % idle.getClip().duration;
-    walk.time = ((distance / WALK_STRIDE) % 1) * walk.getClip().duration;
-    run.time = ((distance / RUN_STRIDE) % 1) * run.getClip().duration;
-    idle.setEffectiveWeight(1 - movementWeight);
-    walk.setEffectiveWeight(movementWeight * (1 - runWeight));
-    run.setEffectiveWeight(movementWeight * runWeight);
+    samplePose(mixer, idle, walk, run, distance);
+  }
+
+  function samplePose(
+    targetMixer: THREE.AnimationMixer,
+    targetIdle: THREE.AnimationAction,
+    targetWalk: THREE.AnimationAction,
+    targetRun: THREE.AnimationAction,
+    distance: number,
+  ) {
+    targetIdle.time = idleTime % targetIdle.getClip().duration;
+    targetWalk.time =
+      ((distance / WALK_STRIDE) % 1) * targetWalk.getClip().duration;
+    targetRun.time =
+      ((distance / RUN_STRIDE) % 1) * targetRun.getClip().duration;
+    targetIdle.setEffectiveWeight(1 - movementWeight);
+    targetWalk.setEffectiveWeight(movementWeight * (1 - runWeight));
+    targetRun.setEffectiveWeight(movementWeight * runWeight);
     // Travel owns position; clip phase is metres walked, never wall-clock drift.
-    mixer.update(0);
+    targetMixer.update(0);
   }
 
   function update(
@@ -156,7 +251,7 @@ export function makeCitizen(options: CitizenOptions = {}) {
     speed?: number,
   ) {
     if (disposed) return;
-    void load();
+    if (!requested) void loadAsset(DEFAULT_CITIZEN_VARIANT);
     const now =
       typeof performance === 'undefined' ? Date.now() : performance.now();
     const delta =
@@ -182,6 +277,8 @@ export function makeCitizen(options: CitizenOptions = {}) {
   function dispose() {
     if (disposed) return;
     disposed = true;
+    generation++;
+    qaSelectors.delete(group);
     mixer?.stopAllAction();
     if (model) mixer?.uncacheRoot(model);
     disposeModel(group);

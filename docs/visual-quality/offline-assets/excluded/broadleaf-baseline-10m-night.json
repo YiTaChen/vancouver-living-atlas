@@ -1,0 +1,138 @@
+{
+  "revision": "4967c72dfda532eb8151bf477b29eafe54a93d5d",
+  "sourceFingerprint": "ce82fd515ecd4c0228e266832763f5015e2bc9e3698d8ca82c0f373002c0fcdb",
+  "kind": "offline-asset-checkpoint-v1",
+  "valid": true,
+  "hidden": false,
+  "maxPoseError": 0,
+  "sampleMs": 8017.699999997043,
+  "frames": 196,
+  "fps": 24.445913416574864,
+  "p50Ms": 35.09999999997672,
+  "p95Ms": 51,
+  "warmup": {
+    "valid": true,
+    "hidden": false,
+    "maxPoseError": 0,
+    "sampleMs": 5034.699999994016,
+    "frames": 129,
+    "fps": 25.62218205655815,
+    "p50Ms": 34.199999999953434,
+    "p95Ms": 50.29999999993015
+  },
+  "ready": true,
+  "quality": "high",
+  "atmosphere": "clear",
+  "hour": 23,
+  "expectedPose": {
+    "camera": [
+      1504.6534013802527,
+      21.32476696993882,
+      240.83407364148195
+    ],
+    "target": [
+      1486.8076910288985,
+      15.833779169522156,
+      219.96831999989865
+    ]
+  },
+  "camera": [
+    1504.6534013802527,
+    21.32476696993882,
+    240.83407364148195
+  ],
+  "target": [
+    1486.8076910288985,
+    15.833779169522156,
+    219.96831999989865
+  ],
+  "mode": "orbit",
+  "render": [
+    1920,
+    1080
+  ],
+  "calls": 1080,
+  "triangles": 7130531,
+  "geometries": 780,
+  "textures": 57,
+  "architecture": {
+    "selectedCells": 23,
+    "pendingCells": 0,
+    "buildingCells": 0,
+    "readySelectedCells": 23,
+    "readyCells": 37,
+    "visibleCells": 23,
+    "visibleInstances": 14006,
+    "allocatedInstances": 24131,
+    "droppedAtBudget": 54,
+    "maxPlanMs": 1.1999999955296516,
+    "maxAttachmentMs": 10.899999998509884
+  },
+  "modules": {
+    "id": "source-residential-cedar-sill-v1",
+    "variant": "cedar-sills",
+    "status": "off",
+    "productionDefaultsUnchanged": true,
+    "candidateGPUAndVisualGate": "unverified"
+  },
+  "citizen": {
+    "assetState": "ready",
+    "assetVariant": "baseline-2048",
+    "forward": "+Z",
+    "groundY": 0,
+    "heightMetres": 1.81,
+    "strideMetres": {
+      "walk": 1,
+      "run": 1.9
+    }
+  },
+  "tree": {
+    "requested": "baseline",
+    "active": "baseline",
+    "status": "idle",
+    "extraTextures": 0
+  },
+  "treeProbe": {
+    "x": 1486.8076910288985,
+    "y": 4.943779169522156,
+    "z": 219.96831999989865,
+    "height": 19.8,
+    "seed": 17557,
+    "conifer": false,
+    "distance": 10
+  },
+  "treePools": [
+    {
+      "count": 28,
+      "map": "",
+      "shadowMapMatches": true
+    },
+    {
+      "count": 38,
+      "map": "",
+      "shadowMapMatches": true
+    },
+    {
+      "count": 28,
+      "map": "",
+      "shadowMapMatches": true
+    },
+    {
+      "count": 0,
+      "map": "",
+      "shadowMapMatches": true
+    },
+    {
+      "count": 0,
+      "map": "",
+      "shadowMapMatches": true
+    },
+    {
+      "count": 0,
+      "map": "",
+      "shadowMapMatches": true
+    }
+  ],
+  "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+  "protocol": "Actual fixed1080p renderer; unchanged camera and selected source objects; visible5s warmup and8s uninstrumented RAF sample per lighting condition. Draw counters include all render passes. No synthetic asset movement."
+}

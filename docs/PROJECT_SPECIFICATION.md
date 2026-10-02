@@ -1,6 +1,8 @@
 # Vancouver Living Atlas 專案規格與後續開發計畫
 
-**2026-10-02 後續檢查點：** 階段 B 的區域規則集中與來源對照已實作；階段 C／D 已建立實際 Blender 離線候選資產，但尚未啟用全城或街段擴展。SSAO 重複遍歷已移除並有隔離 CPU 測試，**不代表人物視角 149.7 ms p95 問題已解決**。GitHub 權限更新後已發布至 [draft PR #1](https://github.com/YiTaChen/vancouver-living-atlas/pull/1)，各階段內容與驗證版本逐一對照相同；[發布紀錄](PUBLICATION_2026_10.md)保留 commit 對應。瀏覽器／GPU 驗收仍受執行環境限制。完整交付、限制、測試和後續驗收步驟見 [本次優化檢查點](OPTIMIZATION_2026_10.md)。下列 2026-10-01 數據保留為歷史基準。
+**2026-10-02 素材整合檢查點：** 已找到並驗證新的 [Blender 素材列表](BLENDER_ASSET_HANDOFF_2026_10.md)，273 個列管檔案完整性通過。在實際城市 renderer 完成 43 份有效人物、窗台、葉片與 PBR 試片紀錄後，正式採用完整幾何的 1024 px 市民：下載量 −47.5%、貼圖估算 64 → 16 MiB，沒有 FPS 提升證據。窗台保留來源邊受控 QA；新葉片未顯示視覺改善，維持現有預設。其他素材需先建立尺寸、公尺 UV 及語意角色契約。最後 **651/651 tests、TypeScript、正式 Firebase build／worker／QA 隔離**通過，正式 UI smoke 完成。完整採用依據、建構步驟與下一輪接口見 [素材整合規格](OFFLINE_ASSET_INTEGRATION_2026_10.md)及 [GPU 比較紀錄](visual-quality/offline-assets/README.md)。
+
+**2026-10-02 先前檢查點（歷史）：** 階段 B 區域規則與來源對照、SSAO 遍歷改良及離線候選已由 [PR #1](https://github.com/YiTaChen/vancouver-living-atlas/pull/1) 合併 main（`4967c72`）。當時的環境限制、CPU 結果與未驗收項目見 [優化檢查點](OPTIMIZATION_2026_10.md)和 [發布紀錄](PUBLICATION_2026_10.md)。本次本機 AMD GPU 比較解除了部分畫面驗收限制，不表示先前 149.7 ms p95 或全城／全平台效能目標已解決。下列 2026-10-01 的 563 項測試與其他數據保留為歷史基準。
 
 狀態日期：**2026-10-01**。本文件描述目前 repository 的產品能力、技術結構、資產製作、驗收方式與建議開發順序。它是專案規格，不以競品宣傳、單張截圖或尚未執行的計畫作為完成證據。
 

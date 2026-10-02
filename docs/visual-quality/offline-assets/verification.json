@@ -1,0 +1,66 @@
+{
+  "schema": "offline-assets-verification-v1",
+  "date": "2026-10-02",
+  "baseRevision": "4967c72dfda532eb8151bf477b29eafe54a93d5d",
+  "sourceBranchRevision": "127be5cb672b5865d37d8f318a5b1ee55fcab732",
+  "tests": {
+    "total": 651,
+    "pass": 651,
+    "fail": 0,
+    "skipped": 0
+  },
+  "checks": {
+    "check": {
+      "command": "npm run check",
+      "exitCode": 0,
+      "sha256": "455c89e2c267bce4737bf0328ef9383090bd75b3988edd7beb4f041fb9723dcf",
+      "localLog": "work/offline-assets-validation/check-final.txt"
+    },
+    "tests": {
+      "command": "npm test",
+      "exitCode": 0,
+      "sha256": "442c4857f7c5af871c4af70a7bbb218e155d4e5881aa237a26b0aa1e2dcc3b2a",
+      "localLog": "work/offline-assets-validation/tests-final.txt"
+    },
+    "firebase-build": {
+      "command": "npm run build:firebase",
+      "exitCode": 0,
+      "sha256": "d802c6780ce5b874c64d2d0490820654d218afeccc5dc929fe9ea0ded6d44936",
+      "localLog": "work/offline-assets-validation/firebase-build-final.txt"
+    }
+  },
+  "validQaRecords": 43,
+  "integrity": {
+    "files": 273,
+    "bytes": 98157861,
+    "report": "source-integrity.json"
+  },
+  "acceptedCitizen": {
+    "originalGenerator": "tools/assets/citizen/build_citizen.py",
+    "originalGlb": "tools/assets/citizen/runtime-reference/vancouver-citizen-2048.glb",
+    "originalSha256": "1df2fce2764e996f8067d154ff82964425e82f6338ba74f3109b487331eb0840",
+    "acceptedGlbSource": "tools/assets/citizen/optimization/glb/citizen-lod0.glb",
+    "acceptedSha256": "14d66fabe097abf82ef36800561c06ee7263c0acfd6b5ea1265a40ed35841ff8",
+    "editableSource": "tools/assets/citizen/optimization/source/citizen-lod0.blend",
+    "editableSourceSha256": "1e15ea4ad8eef3625e0baf6eb078c0d83ea8e79153dd8ff3c6dfae3bbf1806e8",
+    "method": "Re-export of the original rigged citizen with three embedded 1024 PNG maps. Original triangles, UV connectivity, 22-bone rig and idle/walk/run clips preserved; 15 extra exported seam vertices.",
+    "acceptance": "Accepted after High 1080p comparisons under four lighting conditions and an 8-second movement comparison.",
+    "benefit": "47.5% smaller GLB and 75% lower estimated RGBA8 texture allocation with full mip chains (64 to 16 MiB). No measured FPS improvement; one material draw and 37,799 triangles unchanged.",
+    "handoffInventory": "Original optimization handoff files remain unchanged; runtime-reference preserves the former production input outside that inventory."
+  },
+  "limitations": [
+    "RGBA8 texture allocation is an estimate, not measured VRAM",
+    "No FPS improvement demonstrated",
+    "65m tree comparison not executed; conifer four-lighting matrix not executed",
+    "No mobile device or GPU timer benchmarks",
+    "Git push and Hosting results must be checked independently against delivered revision"
+  ],
+  "productionUiSmoke": {
+    "report": "production-ui-smoke.json",
+    "screenshot": "production-ui-smoke.jpg",
+    "qaControls": 0,
+    "consoleWarnings": 0,
+    "consoleErrors": 0,
+    "scope": "Normal city loading, Walk/Gastown start, third person zoom, afternoon and fixed time. No performance benchmark."
+  }
+}

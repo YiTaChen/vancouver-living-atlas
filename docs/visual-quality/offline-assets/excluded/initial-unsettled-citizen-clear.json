@@ -1,0 +1,124 @@
+{
+  "revision": "4967c72dfda532eb8151bf477b29eafe54a93d5d",
+  "sourceFingerprint": "6644421d2f1c662318cd8a9075eec48fe9592f391c3d0eecef4fce1c5358d116",
+  "kind": "offline-asset-checkpoint-v1",
+  "valid": false,
+  "hidden": false,
+  "maxPoseError": 0,
+  "sampleMs": 8019.0999999940395,
+  "frames": 179,
+  "fps": 22.321706924733828,
+  "p50Ms": 49.400000000001455,
+  "p95Ms": 51.400000000001455,
+  "warmup": {
+    "valid": true,
+    "hidden": false,
+    "maxPoseError": 0,
+    "sampleMs": 5025.299999994037,
+    "frames": 117,
+    "fps": 23.28219210796148,
+    "p50Ms": 48.69999999999709,
+    "p95Ms": 51.5
+  },
+  "ready": false,
+  "quality": "high",
+  "atmosphere": "clear",
+  "hour": 14,
+  "expectedPose": {
+    "camera": [
+      1370.8310667002615,
+      11.036944825924714,
+      180.10840682268375
+    ],
+    "target": [
+      1342.7149153396945,
+      8.360944825924713,
+      172.22665367571906
+    ]
+  },
+  "camera": [
+    1370.8310667002615,
+    11.036944825924714,
+    180.10840682268375
+  ],
+  "target": [
+    1342.7149153396945,
+    8.360944825924713,
+    172.22665367571906
+  ],
+  "mode": "walk",
+  "render": [
+    1920,
+    1080
+  ],
+  "calls": 1139,
+  "triangles": 7497107,
+  "geometries": 728,
+  "textures": 55,
+  "architecture": {
+    "selectedCells": 23,
+    "pendingCells": 0,
+    "buildingCells": 0,
+    "readySelectedCells": 23,
+    "readyCells": 23,
+    "visibleCells": 23,
+    "visibleInstances": 14759,
+    "allocatedInstances": 14759,
+    "droppedAtBudget": 16,
+    "maxPlanMs": 1.2999999970197678,
+    "maxAttachmentMs": 6.600000001490116
+  },
+  "modules": null,
+  "citizen": {
+    "assetState": "ready",
+    "assetVariant": "baseline-2048",
+    "forward": "+Z",
+    "groundY": 0,
+    "heightMetres": 1.81,
+    "strideMetres": {
+      "walk": 1,
+      "run": 1.9
+    }
+  },
+  "tree": {
+    "requested": "baseline",
+    "active": "baseline",
+    "status": "idle",
+    "extraTextures": 0
+  },
+  "treeProbe": null,
+  "treePools": [
+    {
+      "count": 17,
+      "map": "",
+      "shadowMapMatches": true
+    },
+    {
+      "count": 30,
+      "map": "",
+      "shadowMapMatches": true
+    },
+    {
+      "count": 23,
+      "map": "",
+      "shadowMapMatches": true
+    },
+    {
+      "count": 0,
+      "map": "",
+      "shadowMapMatches": true
+    },
+    {
+      "count": 0,
+      "map": "",
+      "shadowMapMatches": true
+    },
+    {
+      "count": 0,
+      "map": "",
+      "shadowMapMatches": true
+    }
+  ],
+  "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+  "protocol": "Actual fixed1080p renderer; unchanged camera and selected source objects; visible5s warmup and8s uninstrumented RAF sample per lighting condition. Draw counters include all render passes. No synthetic asset movement."
+}

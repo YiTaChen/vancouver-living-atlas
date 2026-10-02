@@ -1,0 +1,90 @@
+{
+  "source": "public/models/citizen/vancouver-citizen.glb",
+  "sourceSha256": "1df2fce2764e996f8067d154ff82964425e82f6338ba74f3109b487331eb0840",
+  "blender": "4.3.2",
+  "assets": [
+    {
+      "id": "reference",
+      "triangles": 37799,
+      "vertices": 29048,
+      "bones": 22,
+      "materials": 1,
+      "textureSize": 2048,
+      "estimatedRgba8MipTextureMiB": 64.0,
+      "glbBytes": 6668168,
+      "sourceFile": "source/citizen-reference.blend",
+      "sourceSha256": "4c411cfdc1eb61d76227f44d34dbe06f8bd9bf4b8ed1898dfdb2d8b7ec3a0281"
+    },
+    {
+      "id": "lod0",
+      "triangles": 37799,
+      "vertices": 29048,
+      "bones": 22,
+      "materials": 1,
+      "textureSize": 1024,
+      "estimatedRgba8MipTextureMiB": 16.0,
+      "glbBytes": 3498312,
+      "sourceFile": "source/citizen-lod0.blend",
+      "sourceSha256": "1e15ea4ad8eef3625e0baf6eb078c0d83ea8e79153dd8ff3c6dfae3bbf1806e8",
+      "glbFile": "glb/citizen-lod0.glb",
+      "glbSha256": "14d66fabe097abf82ef36800561c06ee7263c0acfd6b5ea1265a40ed35841ff8",
+      "status": "texture-only close-view candidate"
+    },
+    {
+      "id": "lod1",
+      "triangles": 30825,
+      "vertices": 16018,
+      "bones": 22,
+      "materials": 1,
+      "textureSize": 1024,
+      "estimatedRgba8MipTextureMiB": 16.0,
+      "glbBytes": 3222256,
+      "sourceFile": "source/citizen-lod1.blend",
+      "sourceSha256": "3ac0899e560d999f071779400678551383a2f5a6a642ca898918f3022223f911",
+      "glbFile": "glb/citizen-lod1.glb",
+      "glbSha256": "816bb1c26fbf658419c46e72fde923c59d8c6f3916f5c0aefea8f186cb6ed679",
+      "status": "mid/far-distance candidate; localized cloth-edge differences require integration QA"
+    },
+    {
+      "id": "lod2",
+      "triangles": 27531,
+      "vertices": 14371,
+      "bones": 22,
+      "materials": 1,
+      "textureSize": 512,
+      "estimatedRgba8MipTextureMiB": 4.0,
+      "glbBytes": 2001060,
+      "sourceFile": "source/citizen-lod2.blend",
+      "sourceSha256": "8a0175ff27befa11b2d7b3fce2864d56541f654d8888ca3818c447b834c24495",
+      "glbFile": "glb/citizen-lod2.glb",
+      "glbSha256": "51c7c5b1f7f0f17e399c00b04334072abf0e92f0731ccce8b04262cf85c788f2",
+      "status": "mid/far-distance candidate; localized cloth-edge differences require integration QA"
+    }
+  ],
+  "coordinateSystem": {
+    "unit": "metre",
+    "gltfUp": "+Y",
+    "gltfForward": "+Z",
+    "blenderUp": "+Z",
+    "blenderForward": "-Y"
+  },
+  "runtimeIntegrated": false,
+  "sourceType": "Editable reconstruction from original shipping GLB, not original procedural authoring scene",
+  "animations": [
+    {
+      "name": "idle",
+      "seconds": 2,
+      "strideMetres": 0
+    },
+    {
+      "name": "walk",
+      "seconds": 1,
+      "strideMetres": 1
+    },
+    {
+      "name": "run",
+      "seconds": 0.8,
+      "strideMetres": 1.9
+    }
+  ]
+}

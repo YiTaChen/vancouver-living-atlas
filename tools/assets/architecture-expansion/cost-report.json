@@ -1,0 +1,24 @@
+{
+  "scope": "offline architecture expansion only; runtime unchanged",
+  "assets": 8,
+  "independentBlenderSources": 16,
+  "glbFiles": 16,
+  "trianglesByLOD": {
+    "0": 644,
+    "1": 320
+  },
+  "glbBytes": 3335724,
+  "sourceBytes": 4302359,
+  "maximumMaterialsPerGLB": 1,
+  "maximumPrimitivesPerGLB": 1,
+  "uniqueSharedSurfaceFamilies": [
+    "cedar",
+    "concrete",
+    "painted-metal"
+  ],
+  "newTextureSourceFiles": 0,
+  "naiveUnsharedTextureRGBAWithMipmapsMiB": 56.25,
+  "textureEstimateNote": "16 standalone GLBs each embed 3 existing 480x480 PNGs; estimate is uncompressed RGBA mip residency, not measured GPU usage. Runtime should share existing city surfaces.",
+  "runtimeIntegrated": false,
+  "runtimeFrameTimeMeasured": false
+}

@@ -40,6 +40,11 @@ async function fixture(action) {
   });
   const nav = {
     keys: new Set(),
+    walker: {
+      group: Object.assign(new THREE.Group(), {
+        userData: { assetState: 'ready', assetVariant: 'candidate-1024' },
+      }),
+    },
     mode: 'walk',
     position: new THREE.Vector3(),
     yaw: 0,
@@ -204,6 +209,7 @@ test('ten-leg control uses resets only between legs and separates reset distance
     const { row } = f.saved[0];
     assert.equal(row.completed, true);
     assert.equal(row.valid, true);
+    assert.deepEqual(row.citizenAsset, f.nav.walker.group.userData);
     assert.equal(row.legs.length, 10);
     assert.equal(row.resets.length, 10);
     assert.equal(row.observedWalkingMs, 600000);

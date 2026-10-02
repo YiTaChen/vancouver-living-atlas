@@ -1,0 +1,156 @@
+{
+  "revision": "4967c72dfda532eb8151bf477b29eafe54a93d5d",
+  "sourceFingerprint": "ce82fd515ecd4c0228e266832763f5015e2bc9e3698d8ca82c0f373002c0fcdb",
+  "kind": "offline-asset-checkpoint-v1",
+  "valid": true,
+  "hidden": false,
+  "maxPoseError": 0,
+  "sampleMs": 8019.799999999988,
+  "frames": 246,
+  "fps": 30.67408164792144,
+  "p50Ms": 33.29999999998836,
+  "p95Ms": 34.899999999965075,
+  "warmup": {
+    "valid": true,
+    "hidden": false,
+    "maxPoseError": 0,
+    "sampleMs": 5006,
+    "frames": 155,
+    "fps": 30.962844586496203,
+    "p50Ms": 33.29999999998836,
+    "p95Ms": 35.09999999997672
+  },
+  "ready": true,
+  "quality": "high",
+  "atmosphere": "clear",
+  "hour": 14,
+  "expectedPose": {
+    "camera": [
+      -351.1423042557223,
+      58.61198411163977,
+      460.04103511380623
+    ],
+    "target": [
+      -331.2188276843254,
+      56.46448214286713,
+      440.48487709125186
+    ]
+  },
+  "camera": [
+    -351.1423042557223,
+    58.61198411163977,
+    460.04103511380623
+  ],
+  "target": [
+    -331.2188276843254,
+    56.46448214286713,
+    440.48487709125186
+  ],
+  "mode": "orbit",
+  "render": [
+    1920,
+    1080
+  ],
+  "calls": 712,
+  "triangles": 3774389,
+  "geometries": 772,
+  "textures": 57,
+  "architecture": {
+    "selectedCells": 23,
+    "pendingCells": 0,
+    "buildingCells": 0,
+    "readySelectedCells": 23,
+    "readyCells": 38,
+    "visibleCells": 23,
+    "visibleInstances": 22796,
+    "allocatedInstances": 31659,
+    "droppedAtBudget": 40,
+    "maxPlanMs": 1.1999999955296516,
+    "maxAttachmentMs": 10.899999998509884
+  },
+  "modules": {
+    "id": "source-modern-sill-drip-v1",
+    "variant": "modern-sills",
+    "asset": "modern-sill-drip",
+    "surface": "painted-metal",
+    "status": "ready",
+    "error": null,
+    "sources": [
+      {
+        "sourceKey": "145639",
+        "sourceFeature": "133049",
+        "edgeKey": "-326.275,445.400|-336.041,435.450"
+      }
+    ],
+    "selectedExistingInstances": 24,
+    "allocatedReplacements": 24,
+    "visibleReplacements": 24,
+    "visibleBatches": 1,
+    "visibleTriangles": 1248,
+    "visibleTriangleDelta": 960,
+    "maximumInstances": 32,
+    "maximumExtraTriangles": 1280,
+    "lodMode": 0,
+    "activeLOD": 0,
+    "templates": 2,
+    "sharedAtlasReady": true,
+    "retainedPrivateTextureObjects": 0,
+    "previewTexturePolicy": "Embedded maps decode transiently and are disposed before attachment; shared atlas is retained by engine",
+    "affectedCells": [
+      "-2,1"
+    ],
+    "candidateGPUAndVisualGate": "unverified"
+  },
+  "citizen": {
+    "assetState": "ready",
+    "assetVariant": "baseline-2048",
+    "forward": "+Z",
+    "groundY": 0,
+    "heightMetres": 1.81,
+    "strideMetres": {
+      "walk": 1,
+      "run": 1.9
+    }
+  },
+  "tree": {
+    "requested": "baseline",
+    "active": "baseline",
+    "status": "idle",
+    "extraTextures": 0
+  },
+  "treeProbe": null,
+  "treePools": [
+    {
+      "count": 57,
+      "map": "",
+      "shadowMapMatches": true
+    },
+    {
+      "count": 44,
+      "map": "",
+      "shadowMapMatches": true
+    },
+    {
+      "count": 42,
+      "map": "",
+      "shadowMapMatches": true
+    },
+    {
+      "count": 0,
+      "map": "",
+      "shadowMapMatches": true
+    },
+    {
+      "count": 0,
+      "map": "",
+      "shadowMapMatches": true
+    },
+    {
+      "count": 0,
+      "map": "",
+      "shadowMapMatches": true
+    }
+  ],
+  "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+  "protocol": "Actual fixed1080p renderer; unchanged camera and selected source objects; visible5s warmup and8s uninstrumented RAF sample per lighting condition. Draw counters include all render passes. No synthetic asset movement."
+}

@@ -1,0 +1,46 @@
+{
+  "revision": "4967c72dfda532eb8151bf477b29eafe54a93d5d",
+  "sourceFingerprint": "ce82fd515ecd4c0228e266832763f5015e2bc9e3698d8ca82c0f373002c0fcdb",
+  "kind": "upgrade-citizen-motion-v1",
+  "seconds": 2,
+  "valid": true,
+  "maxPoseError": 0,
+  "sampleMs": 2018.2000000000116,
+  "frames": 51,
+  "fps": 25.270042612228572,
+  "p50Ms": 34.20000000001164,
+  "p95Ms": 51.20000000001164,
+  "p99Ms": 51.5,
+  "maxMs": 51.5,
+  "over50Ms": 6,
+  "over100Ms": 0,
+  "quality": "high",
+  "mode": "walk",
+  "startPosition": [
+    1366.7869627374403,
+    8.360944825924713,
+    178.97473000017513
+  ],
+  "position": [
+    1358.9722132702368,
+    8.613557520397912,
+    176.78403450220372
+  ],
+  "distance": 8.11993036752304,
+  "citizen": {
+    "assetState": "ready",
+    "assetVariant": "baseline-2048",
+    "forward": "+Z",
+    "groundY": 0,
+    "heightMetres": 1.81,
+    "strideMetres": {
+      "walk": 1,
+      "run": 1.9
+    }
+  },
+  "render": [
+    1920,
+    1080
+  ],
+  "protocol": "Existing W navigation input, third-person camera, unchanged movement speed. Snapshots during 8 seconds of real motion; no synthetic character displacement."
+}

@@ -1,0 +1,446 @@
+{
+  "schemaVersion": 1,
+  "status": "offline integration candidates; no runtime replacement",
+  "provenance": "Original analytic geometry/textures authored for Vancouver Living Atlas; no downloaded imagery, scans or third-party assets. Repository LICENSE applies.",
+  "units": "metres; Blender Z-up, GLB Y-up",
+  "normalConvention": "OpenGL +Y",
+  "alphaContract": "Straight RGBA cutout .4, double-sided; NOT compatible with existing neutral-matte/aSolid decoder without reviewed shader and solid UV changes.",
+  "assets": [
+    {
+      "id": "maple_sprig_lod0",
+      "file": "exports/maple_sprig_lod0.glb",
+      "lod": 0,
+      "role": "representative 1.25 m sapling/branch study; not mature city-tree replacement",
+      "vertices": 152,
+      "triangles": 188,
+      "primitives": 2,
+      "bytes": 1117680,
+      "boundsBlender": [
+        [
+          -0.512802,
+          -0.506977,
+          0.0
+        ],
+        [
+          0.612289,
+          0.557901,
+          1.2
+        ]
+      ]
+    },
+    {
+      "id": "maple_sprig_lod1",
+      "file": "exports/maple_sprig_lod1.glb",
+      "lod": 1,
+      "role": "representative 1.25 m sapling/branch study; not mature city-tree replacement",
+      "vertices": 114,
+      "triangles": 136,
+      "primitives": 2,
+      "bytes": 1114680,
+      "boundsBlender": [
+        [
+          -0.512802,
+          -0.506977,
+          0.0
+        ],
+        [
+          0.612289,
+          0.557901,
+          1.2
+        ]
+      ]
+    },
+    {
+      "id": "maple_sprig_lod2",
+      "file": "exports/maple_sprig_lod2.glb",
+      "lod": 2,
+      "role": "representative 1.25 m sapling/branch study; not mature city-tree replacement",
+      "vertices": 70,
+      "triangles": 80,
+      "primitives": 2,
+      "bytes": 1111396,
+      "boundsBlender": [
+        [
+          -0.491873,
+          -0.416117,
+          0.0
+        ],
+        [
+          0.612289,
+          0.557901,
+          1.2
+        ]
+      ]
+    },
+    {
+      "id": "alder_sprig_lod0",
+      "file": "exports/alder_sprig_lod0.glb",
+      "lod": 0,
+      "role": "representative 1.25 m sapling/branch study; not mature city-tree replacement",
+      "vertices": 152,
+      "triangles": 188,
+      "primitives": 2,
+      "bytes": 1117680,
+      "boundsBlender": [
+        [
+          -0.512802,
+          -0.506977,
+          0.0
+        ],
+        [
+          0.612289,
+          0.557901,
+          1.2
+        ]
+      ]
+    },
+    {
+      "id": "alder_sprig_lod1",
+      "file": "exports/alder_sprig_lod1.glb",
+      "lod": 1,
+      "role": "representative 1.25 m sapling/branch study; not mature city-tree replacement",
+      "vertices": 114,
+      "triangles": 136,
+      "primitives": 2,
+      "bytes": 1114680,
+      "boundsBlender": [
+        [
+          -0.512802,
+          -0.506977,
+          0.0
+        ],
+        [
+          0.612289,
+          0.557901,
+          1.2
+        ]
+      ]
+    },
+    {
+      "id": "alder_sprig_lod2",
+      "file": "exports/alder_sprig_lod2.glb",
+      "lod": 2,
+      "role": "representative 1.25 m sapling/branch study; not mature city-tree replacement",
+      "vertices": 70,
+      "triangles": 80,
+      "primitives": 2,
+      "bytes": 1111396,
+      "boundsBlender": [
+        [
+          -0.491873,
+          -0.416117,
+          0.0
+        ],
+        [
+          0.612289,
+          0.557901,
+          1.2
+        ]
+      ]
+    },
+    {
+      "id": "douglas_fir_sprig_lod0",
+      "file": "exports/douglas_fir_sprig_lod0.glb",
+      "lod": 0,
+      "role": "representative 1.25 m sapling/branch study; not mature city-tree replacement",
+      "vertices": 152,
+      "triangles": 188,
+      "primitives": 2,
+      "bytes": 1117712,
+      "boundsBlender": [
+        [
+          -0.512802,
+          -0.506977,
+          0.0
+        ],
+        [
+          0.612289,
+          0.557901,
+          1.2
+        ]
+      ]
+    },
+    {
+      "id": "douglas_fir_sprig_lod1",
+      "file": "exports/douglas_fir_sprig_lod1.glb",
+      "lod": 1,
+      "role": "representative 1.25 m sapling/branch study; not mature city-tree replacement",
+      "vertices": 114,
+      "triangles": 136,
+      "primitives": 2,
+      "bytes": 1114712,
+      "boundsBlender": [
+        [
+          -0.512802,
+          -0.506977,
+          0.0
+        ],
+        [
+          0.612289,
+          0.557901,
+          1.2
+        ]
+      ]
+    },
+    {
+      "id": "douglas_fir_sprig_lod2",
+      "file": "exports/douglas_fir_sprig_lod2.glb",
+      "lod": 2,
+      "role": "representative 1.25 m sapling/branch study; not mature city-tree replacement",
+      "vertices": 70,
+      "triangles": 80,
+      "primitives": 2,
+      "bytes": 1111428,
+      "boundsBlender": [
+        [
+          -0.491873,
+          -0.416117,
+          0.0
+        ],
+        [
+          0.612289,
+          0.557901,
+          1.2
+        ]
+      ]
+    },
+    {
+      "id": "western_redcedar_sprig_lod0",
+      "file": "exports/western_redcedar_sprig_lod0.glb",
+      "lod": 0,
+      "role": "representative 1.25 m sapling/branch study; not mature city-tree replacement",
+      "vertices": 152,
+      "triangles": 188,
+      "primitives": 2,
+      "bytes": 1117736,
+      "boundsBlender": [
+        [
+          -0.512802,
+          -0.506977,
+          0.0
+        ],
+        [
+          0.612289,
+          0.557901,
+          1.2
+        ]
+      ]
+    },
+    {
+      "id": "western_redcedar_sprig_lod1",
+      "file": "exports/western_redcedar_sprig_lod1.glb",
+      "lod": 1,
+      "role": "representative 1.25 m sapling/branch study; not mature city-tree replacement",
+      "vertices": 114,
+      "triangles": 136,
+      "primitives": 2,
+      "bytes": 1114736,
+      "boundsBlender": [
+        [
+          -0.512802,
+          -0.506977,
+          0.0
+        ],
+        [
+          0.612289,
+          0.557901,
+          1.2
+        ]
+      ]
+    },
+    {
+      "id": "western_redcedar_sprig_lod2",
+      "file": "exports/western_redcedar_sprig_lod2.glb",
+      "lod": 2,
+      "role": "representative 1.25 m sapling/branch study; not mature city-tree replacement",
+      "vertices": 70,
+      "triangles": 80,
+      "primitives": 2,
+      "bytes": 1111452,
+      "boundsBlender": [
+        [
+          -0.491873,
+          -0.416117,
+          0.0
+        ],
+        [
+          0.612289,
+          0.557901,
+          1.2
+        ]
+      ]
+    },
+    {
+      "id": "soil_grass_slope_lod0",
+      "file": "exports/soil_grass_slope_lod0.glb",
+      "lod": 0,
+      "role": "bounded sloped ground replacement sample; no overlay/population",
+      "vertices": 289,
+      "triangles": 512,
+      "primitives": 1,
+      "bytes": 985884,
+      "boundsBlender": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          2.0,
+          2.0,
+          0.1
+        ]
+      ]
+    },
+    {
+      "id": "soil_grass_slope_lod1",
+      "file": "exports/soil_grass_slope_lod1.glb",
+      "lod": 1,
+      "role": "bounded sloped ground replacement sample; no overlay/population",
+      "vertices": 81,
+      "triangles": 128,
+      "primitives": 1,
+      "bytes": 942388,
+      "boundsBlender": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          2.0,
+          2.0,
+          0.1
+        ]
+      ]
+    },
+    {
+      "id": "soil_grass_slope_lod2",
+      "file": "exports/soil_grass_slope_lod2.glb",
+      "lod": 2,
+      "role": "bounded sloped ground replacement sample; no overlay/population",
+      "vertices": 25,
+      "triangles": 32,
+      "primitives": 1,
+      "bytes": 931576,
+      "boundsBlender": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          2.0,
+          2.0,
+          0.1
+        ]
+      ]
+    }
+  ],
+  "maps": [
+    {
+      "file": "maps/bark_basecolor.png",
+      "bytes": 201725,
+      "sha256": "29a4640e7b0bcce8dda65d164992feec273b84eb30cc6bceebd1f94fd6b251d0"
+    },
+    {
+      "file": "maps/bark_normal.png",
+      "bytes": 559427,
+      "sha256": "d580f12e68b8b2186f0885fe6b8d4a1820e19b06bf45645c3ae8378f6edd0082"
+    },
+    {
+      "file": "maps/bark_orm.png",
+      "bytes": 67066,
+      "sha256": "2109adce8735783d4a502be81108a8e9c0e95fe18ff089ea5a96ca7c79a88fe3"
+    },
+    {
+      "file": "maps/grass_basecolor.png",
+      "bytes": 252788,
+      "sha256": "678d283e62d543ba04e3dec2ec4847c47fdd878bc91ead9c82a2b694dea58a5f"
+    },
+    {
+      "file": "maps/grass_normal.png",
+      "bytes": 581991,
+      "sha256": "74cb6b02204c37026f6beebdc99001929bd331d5edc884feeef3c2ba830b90ac"
+    },
+    {
+      "file": "maps/grass_orm.png",
+      "bytes": 52412,
+      "sha256": "18fd14b3329257af888ab8d6ca1f038d4d7643aee47b3c32393fbe8f0d7643ce"
+    },
+    {
+      "file": "maps/leaf_atlas_rgba.png",
+      "bytes": 274504,
+      "sha256": "2eff86a192a7fbd791abb2a55ec414a3b5bc778b59f3101ff79b8512524ef50f"
+    },
+    {
+      "file": "maps/leaf_mip_0_1024.png",
+      "bytes": 274504,
+      "sha256": "2eff86a192a7fbd791abb2a55ec414a3b5bc778b59f3101ff79b8512524ef50f"
+    },
+    {
+      "file": "maps/leaf_mip_1_512.png",
+      "bytes": 105487,
+      "sha256": "6c3a8623f6512949d14982a813d02bb813ba2dfcdcae558cdde049fa359d94b3"
+    },
+    {
+      "file": "maps/leaf_mip_2_256.png",
+      "bytes": 36596,
+      "sha256": "952d1bd5de15898b213a621ed4088e6e034214209c79ac8fe2a1e1daf8c0122e"
+    },
+    {
+      "file": "maps/leaf_mip_3_128.png",
+      "bytes": 12083,
+      "sha256": "b12f7714f9aab804ab9abbe0ea649ddf027afff3fa73e06d2f4ac2580020e4ac"
+    },
+    {
+      "file": "maps/leaf_mip_4_64.png",
+      "bytes": 4042,
+      "sha256": "64d94eab64a8f6b969a4f7ad9dd9cfbaa206f50e3dec925f40359087282f30b4"
+    },
+    {
+      "file": "maps/soil_basecolor.png",
+      "bytes": 207860,
+      "sha256": "ff47ea60cd6fa7586e0df74178fe1fd7d4bab01f0eaf3a4d8cd0ebce77bc2c1f"
+    },
+    {
+      "file": "maps/soil_grass_blend_weight.png",
+      "bytes": 108987,
+      "sha256": "7274615051340d6211c89f67b71b35c6684db39305f83eb7790f7b76323db4b7"
+    },
+    {
+      "file": "maps/soil_grass_edge_basecolor.png",
+      "bytes": 308056,
+      "sha256": "5c32552aed44c98857d762f2ae4f40dfa6bb6074037d02d9f6189a8146291087"
+    },
+    {
+      "file": "maps/soil_grass_edge_normal.png",
+      "bytes": 570431,
+      "sha256": "0d2a72a2bdd993986ca7b2211d7f73c46af5fcf116616b05ce73ccba8c0fb85b"
+    },
+    {
+      "file": "maps/soil_grass_edge_orm.png",
+      "bytes": 47536,
+      "sha256": "b4d807a765c80a11fbe5adfaefc2aecf5bab61840a475469f3b9c4bd42132c37"
+    },
+    {
+      "file": "maps/soil_normal.png",
+      "bytes": 475469,
+      "sha256": "a962cb174883009121d67edd4ede35196a38abe64eab0e9e45d9a46453aa0cd6"
+    },
+    {
+      "file": "maps/soil_orm.png",
+      "bytes": 47536,
+      "sha256": "b4d807a765c80a11fbe5adfaefc2aecf5bab61840a475469f3b9c4bd42132c37"
+    }
+  ],
+  "budgets": {
+    "maxMapDimension": 1024,
+    "groundLOD0Triangles": 512,
+    "sprigLOD0Triangles": 208,
+    "maxPrimitivesPerSprig": 2,
+    "populationAdded": 0,
+    "RGBA8BaseMapsWithMipUpperBoundBytes": 23767722,
+    "mipReferenceFiles": "Manual QA/reference mip levels, not loaded by GLB. GLBs embed repeated textures for standalone inspection; deduplicate before integration."
+  }
+}

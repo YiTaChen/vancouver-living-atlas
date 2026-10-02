@@ -1,0 +1,106 @@
+{
+  "status": "opt-in runtime test; baseline remains default",
+  "source": "tools/assets/vegetation_ground/manifest.json",
+  "sourceManifestSha256": "3c4c7fc3a116df450f31a214cad176f3cd12b688529e050b0e6ca5ebcf2eb8ee",
+  "alphaCutoff": 0.4,
+  "files": [
+    {
+      "file": "leaf_mip_0_1024.png",
+      "size": 1024,
+      "sha256": "2eff86a192a7fbd791abb2a55ec414a3b5bc778b59f3101ff79b8512524ef50f"
+    },
+    {
+      "file": "leaf_mip_1_512.png",
+      "size": 512,
+      "sha256": "6c3a8623f6512949d14982a813d02bb813ba2dfcdcae558cdde049fa359d94b3"
+    },
+    {
+      "file": "leaf_mip_2_256.png",
+      "size": 256,
+      "sha256": "952d1bd5de15898b213a621ed4088e6e034214209c79ac8fe2a1e1daf8c0122e"
+    },
+    {
+      "file": "leaf_mip_3_128.png",
+      "size": 128,
+      "sha256": "b12f7714f9aab804ab9abbe0ea649ddf027afff3fa73e06d2f4ac2580020e4ac"
+    },
+    {
+      "file": "leaf_mip_4_64.png",
+      "size": 64,
+      "sha256": "64d94eab64a8f6b969a4f7ad9dd9cfbaa206f50e3dec925f40359087282f30b4"
+    }
+  ],
+  "solidSamples": [
+    {
+      "uv": [
+        0.16357421875,
+        0.77490234375
+      ],
+      "pixel": [
+        167,
+        230
+      ],
+      "rgba": [
+        53,
+        80,
+        24,
+        255
+      ]
+    },
+    {
+      "uv": [
+        0.74169921875,
+        0.90673828125
+      ],
+      "pixel": [
+        759,
+        95
+      ],
+      "rgba": [
+        53,
+        85,
+        32,
+        255
+      ]
+    },
+    {
+      "uv": [
+        0.09619140625,
+        0.17431640625
+      ],
+      "pixel": [
+        98,
+        845
+      ],
+      "rgba": [
+        45,
+        67,
+        29,
+        255
+      ]
+    },
+    {
+      "uv": [
+        0.59619140625,
+        0.17431640625
+      ],
+      "pixel": [
+        610,
+        845
+      ],
+      "rgba": [
+        49,
+        73,
+        35,
+        255
+      ]
+    }
+  ],
+  "rgba8MipBytes": 5586944,
+  "mipPolicy": "One texture, five supplied coverage-corrected mip levels. WebGL2 immutable storage caps minification at verified 64px mip; no generated unverified tail.",
+  "excluded": [
+    "sprig geometry: representative saplings, not mature-tree replacement",
+    "bark: existing branch UVs are not metre-scaled",
+    "ground: no terrain overlay or surface replacement authorized by this adapter"
+  ]
+}

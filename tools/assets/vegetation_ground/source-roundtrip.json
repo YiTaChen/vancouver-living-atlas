@@ -1,0 +1,97 @@
+{
+  "status": "pass",
+  "blender": "4.3.2",
+  "assets": [
+    {
+      "asset": "maple_sprig_lod0",
+      "geometryAttributesAndIndices": "exact byte equality",
+      "embeddedMaps": "exact SHA256 equality",
+      "materialsAndSamplers": "exact JSON equality including MASK/cutoff/wrap modes"
+    },
+    {
+      "asset": "maple_sprig_lod1",
+      "geometryAttributesAndIndices": "exact byte equality",
+      "embeddedMaps": "exact SHA256 equality",
+      "materialsAndSamplers": "exact JSON equality including MASK/cutoff/wrap modes"
+    },
+    {
+      "asset": "maple_sprig_lod2",
+      "geometryAttributesAndIndices": "exact byte equality",
+      "embeddedMaps": "exact SHA256 equality",
+      "materialsAndSamplers": "exact JSON equality including MASK/cutoff/wrap modes"
+    },
+    {
+      "asset": "alder_sprig_lod0",
+      "geometryAttributesAndIndices": "exact byte equality",
+      "embeddedMaps": "exact SHA256 equality",
+      "materialsAndSamplers": "exact JSON equality including MASK/cutoff/wrap modes"
+    },
+    {
+      "asset": "alder_sprig_lod1",
+      "geometryAttributesAndIndices": "exact byte equality",
+      "embeddedMaps": "exact SHA256 equality",
+      "materialsAndSamplers": "exact JSON equality including MASK/cutoff/wrap modes"
+    },
+    {
+      "asset": "alder_sprig_lod2",
+      "geometryAttributesAndIndices": "exact byte equality",
+      "embeddedMaps": "exact SHA256 equality",
+      "materialsAndSamplers": "exact JSON equality including MASK/cutoff/wrap modes"
+    },
+    {
+      "asset": "douglas_fir_sprig_lod0",
+      "geometryAttributesAndIndices": "exact byte equality",
+      "embeddedMaps": "exact SHA256 equality",
+      "materialsAndSamplers": "exact JSON equality including MASK/cutoff/wrap modes"
+    },
+    {
+      "asset": "douglas_fir_sprig_lod1",
+      "geometryAttributesAndIndices": "exact byte equality",
+      "embeddedMaps": "exact SHA256 equality",
+      "materialsAndSamplers": "exact JSON equality including MASK/cutoff/wrap modes"
+    },
+    {
+      "asset": "douglas_fir_sprig_lod2",
+      "geometryAttributesAndIndices": "exact byte equality",
+      "embeddedMaps": "exact SHA256 equality",
+      "materialsAndSamplers": "exact JSON equality including MASK/cutoff/wrap modes"
+    },
+    {
+      "asset": "western_redcedar_sprig_lod0",
+      "geometryAttributesAndIndices": "exact byte equality",
+      "embeddedMaps": "exact SHA256 equality",
+      "materialsAndSamplers": "exact JSON equality including MASK/cutoff/wrap modes"
+    },
+    {
+      "asset": "western_redcedar_sprig_lod1",
+      "geometryAttributesAndIndices": "exact byte equality",
+      "embeddedMaps": "exact SHA256 equality",
+      "materialsAndSamplers": "exact JSON equality including MASK/cutoff/wrap modes"
+    },
+    {
+      "asset": "western_redcedar_sprig_lod2",
+      "geometryAttributesAndIndices": "exact byte equality",
+      "embeddedMaps": "exact SHA256 equality",
+      "materialsAndSamplers": "exact JSON equality including MASK/cutoff/wrap modes"
+    },
+    {
+      "asset": "soil_grass_slope_lod0",
+      "geometryAttributesAndIndices": "exact byte equality",
+      "embeddedMaps": "exact SHA256 equality",
+      "materialsAndSamplers": "exact JSON equality including MASK/cutoff/wrap modes"
+    },
+    {
+      "asset": "soil_grass_slope_lod1",
+      "geometryAttributesAndIndices": "exact byte equality",
+      "embeddedMaps": "exact SHA256 equality",
+      "materialsAndSamplers": "exact JSON equality including MASK/cutoff/wrap modes"
+    },
+    {
+      "asset": "soil_grass_slope_lod2",
+      "geometryAttributesAndIndices": "exact byte equality",
+      "embeddedMaps": "exact SHA256 equality",
+      "materialsAndSamplers": "exact JSON equality including MASK/cutoff/wrap modes"
+    }
+  ],
+  "note": "Audited actual safe source exporter including shipping alpha patch and ground samplers. No source regeneration or save."
+}

@@ -1,0 +1,1918 @@
+{
+  "status": "pass",
+  "scope": "file integrity and self-contained finite GLB; track audits required separately; no application/GPU claim",
+  "files": 273,
+  "totalBytes": 98157861,
+  "results": [
+    {
+      "path": "tools/assets/architecture-expansion/INTEGRATION_INVENTORY.csv",
+      "bytes": 7758
+    },
+    {
+      "path": "tools/assets/architecture-expansion/README.md",
+      "bytes": 11859
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/concrete-chamfer-corner.lod0.glb",
+      "bytes": 239020,
+      "triangles": 136,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/concrete-chamfer-corner.lod1.glb",
+      "bytes": 228544,
+      "triangles": 24,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/concrete-shadow-plinth.lod0.glb",
+      "bytes": 230204,
+      "triangles": 44,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/concrete-shadow-plinth.lod1.glb",
+      "bytes": 229796,
+      "triangles": 40,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/modern-parapet-cap.lod0.glb",
+      "bytes": 164340,
+      "triangles": 60,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/modern-parapet-cap.lod1.glb",
+      "bytes": 161840,
+      "triangles": 28,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/modern-recessed-window-surround.lod0.glb",
+      "bytes": 164336,
+      "triangles": 56,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/modern-recessed-window-surround.lod1.glb",
+      "bytes": 162704,
+      "triangles": 40,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/modern-sill-drip.lod0.glb",
+      "bytes": 163708,
+      "triangles": 52,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/modern-sill-drip.lod1.glb",
+      "bytes": 162456,
+      "triangles": 36,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/residential-cedar-sill.lod0.glb",
+      "bytes": 234228,
+      "triangles": 40,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/residential-cedar-sill.lod1.glb",
+      "bytes": 232664,
+      "triangles": 20,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/residential-cedar-window-surround.lod0.glb",
+      "bytes": 242148,
+      "triangles": 112,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/residential-cedar-window-surround.lod1.glb",
+      "bytes": 237252,
+      "triangles": 64,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/residential-gabled-entry-canopy.lod0.glb",
+      "bytes": 244928,
+      "triangles": 144,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-expansion/assets/residential-gabled-entry-canopy.lod1.glb",
+      "bytes": 237556,
+      "triangles": 68,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-expansion/audit_reexport.py",
+      "bytes": 2869
+    },
+    {
+      "path": "tools/assets/architecture-expansion/build_architecture_expansion.py",
+      "bytes": 12697
+    },
+    {
+      "path": "tools/assets/architecture-expansion/catalog.json",
+      "bytes": 2716
+    },
+    {
+      "path": "tools/assets/architecture-expansion/compose_previews.py",
+      "bytes": 2302
+    },
+    {
+      "path": "tools/assets/architecture-expansion/cost-report.json",
+      "bytes": 740
+    },
+    {
+      "path": "tools/assets/architecture-expansion/manifest.json",
+      "bytes": 18770
+    },
+    {
+      "path": "tools/assets/architecture-expansion/preview-lod0.png",
+      "bytes": 2313298,
+      "pixels": [
+        1280,
+        2310
+      ]
+    },
+    {
+      "path": "tools/assets/architecture-expansion/preview-lod1.png",
+      "bytes": 2300841,
+      "pixels": [
+        1280,
+        2310
+      ]
+    },
+    {
+      "path": "tools/assets/architecture-expansion/preview.png",
+      "bytes": 2853771,
+      "pixels": [
+        2560,
+        2310
+      ]
+    },
+    {
+      "path": "tools/assets/architecture-expansion/reexport-validation.json",
+      "bytes": 9555
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/concrete-chamfer-corner.lod0.blend",
+      "bytes": 283495
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/concrete-chamfer-corner.lod1.blend",
+      "bytes": 283059
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/concrete-shadow-plinth.lod0.blend",
+      "bytes": 283017
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/concrete-shadow-plinth.lod1.blend",
+      "bytes": 282015
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/modern-parapet-cap.lod0.blend",
+      "bytes": 226629
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/modern-parapet-cap.lod1.blend",
+      "bytes": 226060
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/modern-recessed-window-surround.lod0.blend",
+      "bytes": 226056
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/modern-recessed-window-surround.lod1.blend",
+      "bytes": 226265
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/modern-sill-drip.lod0.blend",
+      "bytes": 226202
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/modern-sill-drip.lod1.blend",
+      "bytes": 226206
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/residential-cedar-sill.lod0.blend",
+      "bytes": 300406
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/residential-cedar-sill.lod1.blend",
+      "bytes": 299689
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/residential-cedar-window-surround.lod0.blend",
+      "bytes": 306867
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/residential-cedar-window-surround.lod1.blend",
+      "bytes": 301393
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/residential-gabled-entry-canopy.lod0.blend",
+      "bytes": 303372
+    },
+    {
+      "path": "tools/assets/architecture-expansion/source/residential-gabled-entry-canopy.lod1.blend",
+      "bytes": 301628
+    },
+    {
+      "path": "tools/assets/architecture-expansion/test-results.json",
+      "bytes": 788
+    },
+    {
+      "path": "tools/assets/architecture-expansion/test_source_workflow.py",
+      "bytes": 6424
+    },
+    {
+      "path": "tools/assets/architecture-expansion/test_validate_architecture_expansion.py",
+      "bytes": 3248
+    },
+    {
+      "path": "tools/assets/architecture-expansion/validate_architecture_expansion.py",
+      "bytes": 9736
+    },
+    {
+      "path": "tools/assets/architecture-expansion/validation.json",
+      "bytes": 3744
+    },
+    {
+      "path": "tools/assets/architecture-expansion/visual-review.json",
+      "bytes": 1040
+    },
+    {
+      "path": "tools/assets/vegetation_ground/README.md",
+      "bytes": 9140
+    },
+    {
+      "path": "tools/assets/vegetation_ground/alpha-coverage.json",
+      "bytes": 5109
+    },
+    {
+      "path": "tools/assets/vegetation_ground/audit_source_roundtrip.py",
+      "bytes": 2587
+    },
+    {
+      "path": "tools/assets/vegetation_ground/build_vegetation_ground.py",
+      "bytes": 19376
+    },
+    {
+      "path": "tools/assets/vegetation_ground/export-edit-safety.json",
+      "bytes": 551
+    },
+    {
+      "path": "tools/assets/vegetation_ground/export_from_source.py",
+      "bytes": 6895
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/alder_sprig_lod0.glb",
+      "bytes": 1117680,
+      "triangles": 188,
+      "primitives": 2,
+      "materials": 2,
+      "images": 4,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/alder_sprig_lod1.glb",
+      "bytes": 1114680,
+      "triangles": 136,
+      "primitives": 2,
+      "materials": 2,
+      "images": 4,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/alder_sprig_lod2.glb",
+      "bytes": 1111396,
+      "triangles": 80,
+      "primitives": 2,
+      "materials": 2,
+      "images": 4,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/douglas_fir_sprig_lod0.glb",
+      "bytes": 1117712,
+      "triangles": 188,
+      "primitives": 2,
+      "materials": 2,
+      "images": 4,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/douglas_fir_sprig_lod1.glb",
+      "bytes": 1114712,
+      "triangles": 136,
+      "primitives": 2,
+      "materials": 2,
+      "images": 4,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/douglas_fir_sprig_lod2.glb",
+      "bytes": 1111428,
+      "triangles": 80,
+      "primitives": 2,
+      "materials": 2,
+      "images": 4,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/maple_sprig_lod0.glb",
+      "bytes": 1117680,
+      "triangles": 188,
+      "primitives": 2,
+      "materials": 2,
+      "images": 4,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/maple_sprig_lod1.glb",
+      "bytes": 1114680,
+      "triangles": 136,
+      "primitives": 2,
+      "materials": 2,
+      "images": 4,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/maple_sprig_lod2.glb",
+      "bytes": 1111396,
+      "triangles": 80,
+      "primitives": 2,
+      "materials": 2,
+      "images": 4,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/soil_grass_slope_lod0.glb",
+      "bytes": 985884,
+      "triangles": 512,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/soil_grass_slope_lod1.glb",
+      "bytes": 942388,
+      "triangles": 128,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/soil_grass_slope_lod2.glb",
+      "bytes": 931576,
+      "triangles": 32,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/western_redcedar_sprig_lod0.glb",
+      "bytes": 1117736,
+      "triangles": 188,
+      "primitives": 2,
+      "materials": 2,
+      "images": 4,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/western_redcedar_sprig_lod1.glb",
+      "bytes": 1114736,
+      "triangles": 136,
+      "primitives": 2,
+      "materials": 2,
+      "images": 4,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/vegetation_ground/exports/western_redcedar_sprig_lod2.glb",
+      "bytes": 1111452,
+      "triangles": 80,
+      "primitives": 2,
+      "materials": 2,
+      "images": 4,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/vegetation_ground/manifest.json",
+      "bytes": 11175
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/bark_basecolor.png",
+      "bytes": 201725,
+      "pixels": [
+        512,
+        512
+      ]
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/bark_normal.png",
+      "bytes": 559427,
+      "pixels": [
+        512,
+        512
+      ]
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/bark_orm.png",
+      "bytes": 67066,
+      "pixels": [
+        512,
+        512
+      ]
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/grass_basecolor.png",
+      "bytes": 252788,
+      "pixels": [
+        512,
+        512
+      ]
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/grass_normal.png",
+      "bytes": 581991,
+      "pixels": [
+        512,
+        512
+      ]
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/grass_orm.png",
+      "bytes": 52412,
+      "pixels": [
+        512,
+        512
+      ]
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/leaf_atlas_rgba.png",
+      "bytes": 274504,
+      "pixels": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/leaf_mip_0_1024.png",
+      "bytes": 274504,
+      "pixels": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/leaf_mip_1_512.png",
+      "bytes": 105487,
+      "pixels": [
+        512,
+        512
+      ]
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/leaf_mip_2_256.png",
+      "bytes": 36596,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/leaf_mip_3_128.png",
+      "bytes": 12083,
+      "pixels": [
+        128,
+        128
+      ]
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/leaf_mip_4_64.png",
+      "bytes": 4042,
+      "pixels": [
+        64,
+        64
+      ]
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/soil_basecolor.png",
+      "bytes": 207860,
+      "pixels": [
+        512,
+        512
+      ]
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/soil_grass_blend_weight.png",
+      "bytes": 108987,
+      "pixels": [
+        512,
+        512
+      ]
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/soil_grass_edge_basecolor.png",
+      "bytes": 308056,
+      "pixels": [
+        512,
+        512
+      ]
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/soil_grass_edge_normal.png",
+      "bytes": 570431,
+      "pixels": [
+        512,
+        512
+      ]
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/soil_grass_edge_orm.png",
+      "bytes": 47536,
+      "pixels": [
+        512,
+        512
+      ]
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/soil_normal.png",
+      "bytes": 475469,
+      "pixels": [
+        512,
+        512
+      ]
+    },
+    {
+      "path": "tools/assets/vegetation_ground/maps/soil_orm.png",
+      "bytes": 47536,
+      "pixels": [
+        512,
+        512
+      ]
+    },
+    {
+      "path": "tools/assets/vegetation_ground/previews/vegetation_ground_board.png",
+      "bytes": 1846676,
+      "pixels": [
+        1400,
+        1100
+      ]
+    },
+    {
+      "path": "tools/assets/vegetation_ground/source/vegetation_ground.blend",
+      "bytes": 3737569
+    },
+    {
+      "path": "tools/assets/vegetation_ground/source-roundtrip.json",
+      "bytes": 3877
+    },
+    {
+      "path": "tools/assets/vegetation_ground/test_export_edit_safety.py",
+      "bytes": 3579
+    },
+    {
+      "path": "tools/assets/vegetation_ground/validate_vegetation_ground.py",
+      "bytes": 4893
+    },
+    {
+      "path": "tools/assets/vegetation_ground/validation.json",
+      "bytes": 2807
+    },
+    {
+      "path": "tools/assets/role-materials/README.md",
+      "bytes": 7314
+    },
+    {
+      "path": "tools/assets/role-materials/audit.py",
+      "bytes": 3061
+    },
+    {
+      "path": "tools/assets/role-materials/build.py",
+      "bytes": 12347
+    },
+    {
+      "path": "tools/assets/role-materials/exports/dusk.png",
+      "bytes": 783002,
+      "pixels": [
+        1000,
+        650
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/interior-material-study.glb",
+      "bytes": 490124,
+      "triangles": 1620,
+      "primitives": 6,
+      "materials": 3,
+      "images": 9,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/role-materials/exports/landmark-material-study.glb",
+      "bytes": 233008,
+      "triangles": 1080,
+      "primitives": 4,
+      "materials": 2,
+      "images": 6,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/role-materials/exports/manifest.json",
+      "bytes": 3169
+    },
+    {
+      "path": "tools/assets/role-materials/exports/night.png",
+      "bytes": 624771,
+      "pixels": [
+        1000,
+        650
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/overcast.png",
+      "bytes": 736990,
+      "pixels": [
+        1000,
+        650
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/sunny.png",
+      "bytes": 709002,
+      "pixels": [
+        1000,
+        650
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/interior-matte-plaster-basecolor.png",
+      "bytes": 75983,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/interior-matte-plaster-normal.png",
+      "bytes": 46370,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/interior-matte-plaster-orm.png",
+      "bytes": 51372,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/interior-oak-veneer-basecolor.png",
+      "bytes": 59267,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/interior-oak-veneer-normal.png",
+      "bytes": 11344,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/interior-oak-veneer-orm.png",
+      "bytes": 51381,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/interior-terrazzo-basecolor.png",
+      "bytes": 90872,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/interior-terrazzo-normal.png",
+      "bytes": 1779,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/interior-terrazzo-orm.png",
+      "bytes": 51574,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/landmark-brushed-aluminum-basecolor.png",
+      "bytes": 2507,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/landmark-brushed-aluminum-normal.png",
+      "bytes": 5952,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/landmark-brushed-aluminum-orm.png",
+      "bytes": 51582,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/landmark-pale-panel-basecolor.png",
+      "bytes": 86245,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/landmark-pale-panel-normal.png",
+      "bytes": 1779,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/landmark-pale-panel-orm.png",
+      "bytes": 51381,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/vehicle-red-paint-basecolor.png",
+      "bytes": 65073,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/vehicle-red-paint-normal.png",
+      "bytes": 1779,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/vehicle-red-paint-orm.png",
+      "bytes": 51558,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/vehicle-seat-leather-basecolor.png",
+      "bytes": 60392,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/vehicle-seat-leather-normal.png",
+      "bytes": 77866,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/vehicle-seat-leather-orm.png",
+      "bytes": 51399,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/vehicle-tire-rubber-basecolor.png",
+      "bytes": 5559,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/vehicle-tire-rubber-normal.png",
+      "bytes": 33838,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/textures/vehicle-tire-rubber-orm.png",
+      "bytes": 51376,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/exports/vehicle-material-study.glb",
+      "bytes": 453812,
+      "triangles": 1860,
+      "primitives": 6,
+      "materials": 3,
+      "images": 9,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/role-materials/qa/source-edit-test.json",
+      "bytes": 207
+    },
+    {
+      "path": "tools/assets/role-materials/qa/validation.json",
+      "bytes": 5887
+    },
+    {
+      "path": "tools/assets/role-materials/qa/visual-review.json",
+      "bytes": 1204
+    },
+    {
+      "path": "tools/assets/role-materials/source/role-material-library.blend",
+      "bytes": 2444608
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/interior-matte-plaster-basecolor.png",
+      "bytes": 75983,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/interior-matte-plaster-normal.png",
+      "bytes": 61003,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/interior-matte-plaster-orm.png",
+      "bytes": 51372,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/interior-oak-veneer-basecolor.png",
+      "bytes": 59267,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/interior-oak-veneer-normal.png",
+      "bytes": 16829,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/interior-oak-veneer-orm.png",
+      "bytes": 51381,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/interior-terrazzo-basecolor.png",
+      "bytes": 90872,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/interior-terrazzo-normal.png",
+      "bytes": 47389,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/interior-terrazzo-orm.png",
+      "bytes": 51574,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/landmark-brushed-aluminum-basecolor.png",
+      "bytes": 2507,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/landmark-brushed-aluminum-normal.png",
+      "bytes": 32303,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/landmark-brushed-aluminum-orm.png",
+      "bytes": 51582,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/landmark-pale-panel-basecolor.png",
+      "bytes": 86245,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/landmark-pale-panel-normal.png",
+      "bytes": 47389,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/landmark-pale-panel-orm.png",
+      "bytes": 51381,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/vehicle-red-paint-basecolor.png",
+      "bytes": 65073,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/vehicle-red-paint-normal.png",
+      "bytes": 47389,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/vehicle-red-paint-orm.png",
+      "bytes": 51558,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/vehicle-seat-leather-basecolor.png",
+      "bytes": 60392,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/vehicle-seat-leather-normal.png",
+      "bytes": 76607,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/vehicle-seat-leather-orm.png",
+      "bytes": 51399,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/vehicle-tire-rubber-basecolor.png",
+      "bytes": 5559,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/vehicle-tire-rubber-normal.png",
+      "bytes": 66531,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/source/textures/vehicle-tire-rubber-orm.png",
+      "bytes": 51376,
+      "pixels": [
+        256,
+        256
+      ]
+    },
+    {
+      "path": "tools/assets/role-materials/test_source_edits.py",
+      "bytes": 1355
+    },
+    {
+      "path": "tools/assets/citizen/optimization/README.zh-TW.md",
+      "bytes": 5951
+    },
+    {
+      "path": "tools/assets/citizen/optimization/audit_glb.py",
+      "bytes": 1166
+    },
+    {
+      "path": "tools/assets/citizen/optimization/build_optimized.py",
+      "bytes": 6999
+    },
+    {
+      "path": "tools/assets/citizen/optimization/compare-rig.mjs",
+      "bytes": 2292
+    },
+    {
+      "path": "tools/assets/citizen/optimization/export_from_blend.py",
+      "bytes": 1176
+    },
+    {
+      "path": "tools/assets/citizen/optimization/finalize_manifest.py",
+      "bytes": 1404
+    },
+    {
+      "path": "tools/assets/citizen/optimization/glb/citizen-lod0.glb",
+      "bytes": 3498312,
+      "triangles": 37799,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 1,
+      "animations": 3
+    },
+    {
+      "path": "tools/assets/citizen/optimization/glb/citizen-lod1.glb",
+      "bytes": 3222256,
+      "triangles": 30825,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 1,
+      "animations": 3
+    },
+    {
+      "path": "tools/assets/citizen/optimization/glb/citizen-lod2.glb",
+      "bytes": 2001060,
+      "triangles": 27531,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 1,
+      "animations": 3
+    },
+    {
+      "path": "tools/assets/citizen/optimization/manifest.json",
+      "bytes": 2827
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/glb-audit.json",
+      "bytes": 1796
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/glb-audit.txt",
+      "bytes": 1797
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/lod0-front.png",
+      "bytes": 516587,
+      "pixels": [
+        640,
+        720
+      ]
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/lod0-run-back.png",
+      "bytes": 515020,
+      "pixels": [
+        640,
+        720
+      ]
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/lod0-tests.txt",
+      "bytes": 450
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/lod0-walk.png",
+      "bytes": 514254,
+      "pixels": [
+        640,
+        720
+      ]
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/lod1-front.png",
+      "bytes": 516735,
+      "pixels": [
+        640,
+        720
+      ]
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/lod1-run-back.png",
+      "bytes": 514919,
+      "pixels": [
+        640,
+        720
+      ]
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/lod1-tests.txt",
+      "bytes": 450
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/lod1-walk.png",
+      "bytes": 514189,
+      "pixels": [
+        640,
+        720
+      ]
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/lod2-front.png",
+      "bytes": 514983,
+      "pixels": [
+        640,
+        720
+      ]
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/lod2-run-back.png",
+      "bytes": 513341,
+      "pixels": [
+        640,
+        720
+      ]
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/lod2-tests.txt",
+      "bytes": 450
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/lod2-walk.png",
+      "bytes": 513164,
+      "pixels": [
+        640,
+        720
+      ]
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/reference-front.png",
+      "bytes": 516979,
+      "pixels": [
+        640,
+        720
+      ]
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/reference-run-back.png",
+      "bytes": 516162,
+      "pixels": [
+        640,
+        720
+      ]
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/reference-walk.png",
+      "bytes": 515384,
+      "pixels": [
+        640,
+        720
+      ]
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/rig-comparison.json",
+      "bytes": 1370
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/rig-comparison.txt",
+      "bytes": 594
+    },
+    {
+      "path": "tools/assets/citizen/optimization/qa/source-roundtrip.txt",
+      "bytes": 1827
+    },
+    {
+      "path": "tools/assets/citizen/optimization/render_exports.py",
+      "bytes": 1266
+    },
+    {
+      "path": "tools/assets/citizen/optimization/sha256.json",
+      "bytes": 4333
+    },
+    {
+      "path": "tools/assets/citizen/optimization/source/citizen-lod0.blend",
+      "bytes": 3488744
+    },
+    {
+      "path": "tools/assets/citizen/optimization/source/citizen-lod1.blend",
+      "bytes": 2988132
+    },
+    {
+      "path": "tools/assets/citizen/optimization/source/citizen-lod2.blend",
+      "bytes": 1761796
+    },
+    {
+      "path": "tools/assets/citizen/optimization/source/citizen-reference.blend",
+      "bytes": 6670963
+    },
+    {
+      "path": "tools/assets/citizen/optimization/textures/Citizen_BaseColor-1024.png",
+      "bytes": 696823,
+      "pixels": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "path": "tools/assets/citizen/optimization/textures/Citizen_BaseColor-2048.png",
+      "bytes": 2034807,
+      "pixels": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "path": "tools/assets/citizen/optimization/textures/Citizen_BaseColor-512.png",
+      "bytes": 236267,
+      "pixels": [
+        512,
+        512
+      ]
+    },
+    {
+      "path": "tools/assets/citizen/optimization/textures/Citizen_Normal-1024.png",
+      "bytes": 679771,
+      "pixels": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "path": "tools/assets/citizen/optimization/textures/Citizen_Normal-2048.png",
+      "bytes": 2205084,
+      "pixels": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "path": "tools/assets/citizen/optimization/textures/Citizen_Normal-512.png",
+      "bytes": 213441,
+      "pixels": [
+        512,
+        512
+      ]
+    },
+    {
+      "path": "tools/assets/citizen/optimization/textures/Citizen_Roughness-1024.png",
+      "bytes": 309221,
+      "pixels": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "path": "tools/assets/citizen/optimization/textures/Citizen_Roughness-2048.png",
+      "bytes": 627519,
+      "pixels": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "path": "tools/assets/citizen/optimization/textures/Citizen_Roughness-512.png",
+      "bytes": 133995,
+      "pixels": [
+        512,
+        512
+      ]
+    },
+    {
+      "path": "tools/assets/citizen/optimization/validate-citizen.test.mjs",
+      "bytes": 5614
+    },
+    {
+      "path": "tools/assets/architecture-details/source/flat-metal-awning.lod0.blend",
+      "bytes": 227060
+    },
+    {
+      "path": "tools/assets/architecture-details/source/flat-metal-awning.lod1.blend",
+      "bytes": 227077
+    },
+    {
+      "path": "tools/assets/architecture-details/source/heritage-cornice.lod0.blend",
+      "bytes": 321315
+    },
+    {
+      "path": "tools/assets/architecture-details/source/heritage-cornice.lod1.blend",
+      "bytes": 321158
+    },
+    {
+      "path": "tools/assets/architecture-details/source/heritage-window-frame.lod0.blend",
+      "bytes": 226039
+    },
+    {
+      "path": "tools/assets/architecture-details/source/heritage-window-frame.lod1.blend",
+      "bytes": 226178
+    },
+    {
+      "path": "tools/assets/architecture-details/source/residential-entry-surround.lod0.blend",
+      "bytes": 304691
+    },
+    {
+      "path": "tools/assets/architecture-details/source/residential-entry-surround.lod1.blend",
+      "bytes": 300917
+    },
+    {
+      "path": "tools/assets/architecture-details/source/sandstone-corner.lod0.blend",
+      "bytes": 323630
+    },
+    {
+      "path": "tools/assets/architecture-details/source/sandstone-corner.lod1.blend",
+      "bytes": 321586
+    },
+    {
+      "path": "tools/assets/architecture-details/source/sandstone-plinth.lod0.blend",
+      "bytes": 321067
+    },
+    {
+      "path": "tools/assets/architecture-details/source/sandstone-plinth.lod1.blend",
+      "bytes": 320981
+    },
+    {
+      "path": "tools/assets/architecture-details/source/sandstone-sill.lod0.blend",
+      "bytes": 321295
+    },
+    {
+      "path": "tools/assets/architecture-details/source/sandstone-sill.lod1.blend",
+      "bytes": 321043
+    },
+    {
+      "path": "tools/assets/architecture-details/source/sloped-metal-awning.lod0.blend",
+      "bytes": 227416
+    },
+    {
+      "path": "tools/assets/architecture-details/source/sloped-metal-awning.lod1.blend",
+      "bytes": 227397
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/flat-metal-awning.lod0.glb",
+      "bytes": 163032,
+      "triangles": 36,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/flat-metal-awning.lod1.glb",
+      "bytes": 162408,
+      "triangles": 28,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/heritage-cornice.lod0.glb",
+      "bytes": 266896,
+      "triangles": 32,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/heritage-cornice.lod1.glb",
+      "bytes": 266272,
+      "triangles": 24,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/heritage-window-frame.lod0.glb",
+      "bytes": 162660,
+      "triangles": 40,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/heritage-window-frame.lod1.glb",
+      "bytes": 161840,
+      "triangles": 32,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/residential-entry-surround.lod0.glb",
+      "bytes": 244516,
+      "triangles": 128,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/residential-entry-surround.lod1.glb",
+      "bytes": 234760,
+      "triangles": 40,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/sandstone-corner.lod0.glb",
+      "bytes": 282820,
+      "triangles": 212,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/sandstone-corner.lod1.glb",
+      "bytes": 266004,
+      "triangles": 20,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/sandstone-plinth.lod0.glb",
+      "bytes": 266284,
+      "triangles": 24,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/sandstone-plinth.lod1.glb",
+      "bytes": 265968,
+      "triangles": 20,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/sandstone-sill.lod0.glb",
+      "bytes": 266936,
+      "triangles": 32,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/sandstone-sill.lod1.glb",
+      "bytes": 265684,
+      "triangles": 16,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/sloped-metal-awning.lod0.glb",
+      "bytes": 164248,
+      "triangles": 48,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/architecture-details/assets/sloped-metal-awning.lod1.glb",
+      "bytes": 163624,
+      "triangles": 40,
+      "primitives": 1,
+      "materials": 1,
+      "images": 3,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/residential-perennial/source/before.blend",
+      "bytes": 92699
+    },
+    {
+      "path": "tools/assets/residential-perennial/source/before.glb",
+      "bytes": 2296,
+      "triangles": 7,
+      "primitives": 1,
+      "materials": 1,
+      "images": 0,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/residential-perennial/source/before.json",
+      "bytes": 4135
+    },
+    {
+      "path": "tools/assets/residential-perennial/source/before.png",
+      "bytes": 352001,
+      "pixels": [
+        640,
+        480
+      ]
+    },
+    {
+      "path": "tools/assets/residential-perennial/source/perennial.blend",
+      "bytes": 93750
+    },
+    {
+      "path": "tools/assets/residential-perennial/source/perennial.glb",
+      "bytes": 2300,
+      "triangles": 7,
+      "primitives": 1,
+      "materials": 1,
+      "images": 0,
+      "skins": 0,
+      "animations": 0
+    },
+    {
+      "path": "tools/assets/residential-perennial/source/perennial.json",
+      "bytes": 4314
+    },
+    {
+      "path": "tools/assets/residential-perennial/source/perennial.png",
+      "bytes": 342703,
+      "pixels": [
+        640,
+        480
+      ]
+    },
+    {
+      "path": "tools/assets/residential-perennial/source/residential-perennial-data.ts",
+      "bytes": 2284
+    },
+    {
+      "path": "tools/assets/residential-perennial/source/validation.json",
+      "bytes": 930
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/asphalt-color.png",
+      "bytes": 152700,
+      "pixels": [
+        480,
+        480
+      ]
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/asphalt-normal.png",
+      "bytes": 136269,
+      "pixels": [
+        480,
+        480
+      ]
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/asphalt-orm.png",
+      "bytes": 43406,
+      "pixels": [
+        480,
+        480
+      ]
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/cedar-color.png",
+      "bytes": 132796,
+      "pixels": [
+        480,
+        480
+      ]
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/cedar-normal.png",
+      "bytes": 52785,
+      "pixels": [
+        480,
+        480
+      ]
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/cedar-orm.png",
+      "bytes": 42974,
+      "pixels": [
+        480,
+        480
+      ]
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/concrete-color.png",
+      "bytes": 126294,
+      "pixels": [
+        480,
+        480
+      ]
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/concrete-normal.png",
+      "bytes": 54562,
+      "pixels": [
+        480,
+        480
+      ]
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/concrete-orm.png",
+      "bytes": 43280,
+      "pixels": [
+        480,
+        480
+      ]
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/heritage-brick-color.png",
+      "bytes": 153372,
+      "pixels": [
+        480,
+        480
+      ]
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/heritage-brick-normal.png",
+      "bytes": 97764,
+      "pixels": [
+        480,
+        480
+      ]
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/heritage-brick-orm.png",
+      "bytes": 63808,
+      "pixels": [
+        480,
+        480
+      ]
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/painted-metal-color.png",
+      "bytes": 86418,
+      "pixels": [
+        480,
+        480
+      ]
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/painted-metal-normal.png",
+      "bytes": 26884,
+      "pixels": [
+        480,
+        480
+      ]
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/painted-metal-orm.png",
+      "bytes": 43781,
+      "pixels": [
+        480,
+        480
+      ]
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/roof-shingle-color.png",
+      "bytes": 101307,
+      "pixels": [
+        480,
+        480
+      ]
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/roof-shingle-normal.png",
+      "bytes": 61588,
+      "pixels": [
+        480,
+        480
+      ]
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/roof-shingle-orm.png",
+      "bytes": 53979,
+      "pixels": [
+        480,
+        480
+      ]
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/sandstone-color.png",
+      "bytes": 135322,
+      "pixels": [
+        480,
+        480
+      ]
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/sandstone-normal.png",
+      "bytes": 83560,
+      "pixels": [
+        480,
+        480
+      ]
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/sandstone-orm.png",
+      "bytes": 43039,
+      "pixels": [
+        480,
+        480
+      ]
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/street-brick-color.png",
+      "bytes": 153086,
+      "pixels": [
+        480,
+        480
+      ]
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/street-brick-normal.png",
+      "bytes": 92806,
+      "pixels": [
+        480,
+        480
+      ]
+    },
+    {
+      "path": "tools/assets/city-materials/source/textures/street-brick-orm.png",
+      "bytes": 65038,
+      "pixels": [
+        480,
+        480
+      ]
+    }
+  ]
+}

@@ -6,6 +6,8 @@ import { clearQAOrbitMomentum } from './upgrade-qa-pose';
 import {
   ArchitectureModuleCandidate,
   ARCHITECTURE_MODULE_CANDIDATE,
+  ARCHITECTURE_EXPANSION_CANDIDATES,
+  type ArchitectureCandidateVariant,
   type ArchitectureCandidateLOD,
 } from './architecture-module-candidate';
 
@@ -17,8 +19,24 @@ export function installArchitectureModuleCandidateQA(
   const field = document.createElement('fieldset');
   const legend = document.createElement('legend');
   legend.textContent =
-    'Blender architecture candidate: Robson source frontages';
+    'Blender architecture candidates: source-edge upper sills';
   field.appendChild(legend);
+  const variantSelect = document.createElement('select');
+  variantSelect.setAttribute(
+    'aria-label',
+    'Architecture module candidate family',
+  );
+  for (const [value, text] of [
+    ['robson-sills', 'Existing sandstone / Robson'],
+    ['modern-sills', 'New folded metal / source 145639'],
+    ['cedar-sills', 'New cedar / sources 145755,145677'],
+  ]) {
+    const option = document.createElement('option');
+    option.value = value;
+    option.textContent = text;
+    variantSelect.appendChild(option);
+  }
+  field.appendChild(variantSelect);
   const enable = document.createElement('input');
   enable.type = 'checkbox';
   enable.id = 'architecture-module-candidate';
@@ -41,7 +59,7 @@ export function installArchitectureModuleCandidateQA(
   }
   field.appendChild(lod);
   const frame = document.createElement('button');
-  frame.textContent = 'Frame Robson source frontages';
+  frame.textContent = 'Frame selected source frontages';
   field.appendChild(frame);
   const status = document.createElement('p');
   status.id = 'architecture-module-candidate-status';
@@ -51,9 +69,14 @@ export function installArchitectureModuleCandidateQA(
   parent.appendChild(field);
   let candidate: ArchitectureModuleCandidate | null = null;
   let mode: ArchitectureCandidateLOD = 'auto';
+  let variant: ArchitectureCandidateVariant = 'robson-sills';
   const evidence = () =>
     candidate?.snapshot() ?? {
-      id: ARCHITECTURE_MODULE_CANDIDATE.id,
+      id:
+        variant === 'robson-sills'
+          ? ARCHITECTURE_MODULE_CANDIDATE.id
+          : ARCHITECTURE_EXPANSION_CANDIDATES[variant].id,
+      variant,
       status: 'off',
       productionDefaultsUnchanged: true,
       candidateGPUAndVisualGate: 'unverified',
@@ -83,14 +106,18 @@ export function installArchitectureModuleCandidateQA(
     }
     if (candidate) return;
     e.data.architectureModuleCandidate = { snapshot: evidence };
-    candidate = new ArchitectureModuleCandidate({
-      details,
-      camera: e.camera,
-      settings: () => e.settings,
-      compatibleGraphics: e.compatibleGraphics,
-      library: getCityMaterialLibrary(e),
-      onChange: refresh,
-    });
+    candidate = new ArchitectureModuleCandidate(
+      {
+        details,
+        camera: e.camera,
+        settings: () => e.settings,
+        compatibleGraphics: e.compatibleGraphics,
+        library: getCityMaterialLibrary(e),
+        onChange: refresh,
+      },
+      undefined,
+      variant,
+    );
     if (!details.setQAModuleAdapter(candidate)) {
       candidate = null;
       enable.checked = false;
@@ -104,6 +131,19 @@ export function installArchitectureModuleCandidateQA(
     refresh();
   }
   enable.onchange = () => toggle(enable.checked);
+  variantSelect.onchange = () => {
+    if (busy() || e.disposed) {
+      variantSelect.value = variant;
+      return;
+    }
+    const next = variantSelect.value as ArchitectureCandidateVariant;
+    if (!['robson-sills', 'modern-sills', 'cedar-sills'].includes(next)) return;
+    const wasEnabled = enable.checked;
+    if (candidate) toggle(false);
+    variant = next;
+    if (wasEnabled) toggle(true);
+    refresh();
+  };
   lod.onchange = () => {
     if (busy()) {
       lod.value = String(mode);
@@ -142,9 +182,16 @@ export function installArchitectureModuleCandidateQA(
     e.setAtmosphere('clear');
     e.camera.fov = 48;
     e.camera.near = 0.15;
+    const distance = candidate.spec.frameDistance;
     e.camera.position
       .copy(target)
-      .add(new THREE.Vector3(Math.sin(yaw) * 44, 2, Math.cos(yaw) * 44));
+      .add(
+        new THREE.Vector3(
+          Math.sin(yaw) * distance,
+          2,
+          Math.cos(yaw) * distance,
+        ),
+      );
     e.controls.target.copy(target);
     e.controls.update();
     e.renderer.setPixelRatio(1);
@@ -161,10 +208,13 @@ export function installArchitectureModuleCandidateQA(
   const parameters = new URLSearchParams(
     typeof location === 'undefined' ? '' : location.search,
   );
+  const requestedVariant = parameters.get(ARCHITECTURE_MODULE_CANDIDATE.query);
   if (
-    parameters.get(ARCHITECTURE_MODULE_CANDIDATE.query) ===
-    ARCHITECTURE_MODULE_CANDIDATE.value
+    requestedVariant &&
+    ['robson-sills', 'modern-sills', 'cedar-sills'].includes(requestedVariant)
   ) {
+    variant = requestedVariant as ArchitectureCandidateVariant;
+    variantSelect.value = variant;
     const requested = parameters.get('architectureLOD');
     mode = requested === '0' ? 0 : requested === '1' ? 1 : 'auto';
     lod.value = String(mode);

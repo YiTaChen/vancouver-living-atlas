@@ -1,0 +1,74 @@
+[
+  {
+    "id": "lod0",
+    "boneOrderIdentical": true,
+    "maxMatrixDifference": 7.081156488397689e-7,
+    "clips": [
+      {
+        "name": "idle",
+        "duration": 2,
+        "samples": 40
+      },
+      {
+        "name": "walk",
+        "duration": 1,
+        "samples": 40
+      },
+      {
+        "name": "run",
+        "duration": 0.800000011920929,
+        "samples": 40
+      }
+    ],
+    "finiteAttributes": true,
+    "uvPerVertex": true
+  },
+  {
+    "id": "lod1",
+    "boneOrderIdentical": true,
+    "maxMatrixDifference": 7.081156488397689e-7,
+    "clips": [
+      {
+        "name": "idle",
+        "duration": 2,
+        "samples": 40
+      },
+      {
+        "name": "walk",
+        "duration": 1,
+        "samples": 40
+      },
+      {
+        "name": "run",
+        "duration": 0.800000011920929,
+        "samples": 40
+      }
+    ],
+    "finiteAttributes": true,
+    "uvPerVertex": true
+  },
+  {
+    "id": "lod2",
+    "boneOrderIdentical": true,
+    "maxMatrixDifference": 7.081156488397689e-7,
+    "clips": [
+      {
+        "name": "idle",
+        "duration": 2,
+        "samples": 40
+      },
+      {
+        "name": "walk",
+        "duration": 1,
+        "samples": 40
+      },
+      {
+        "name": "run",
+        "duration": 0.800000011920929,
+        "samples": 40
+      }
+    ],
+    "finiteAttributes": true,
+    "uvPerVertex": true
+  }
+]

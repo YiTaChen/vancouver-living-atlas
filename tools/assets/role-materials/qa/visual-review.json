@@ -1,0 +1,27 @@
+{
+  "inspected_by": "asset-author visual inspection",
+  "renderer": "Blender 4.3.2 Cycles CPU 96 samples; AgX",
+  "lighting": [
+    "sunny",
+    "overcast",
+    "dusk",
+    "night"
+  ],
+  "results": [
+    "All eight role silhouettes readable in four conditions; metallic reflection distinct from nonmetal panel.",
+    "Rubber remains deliberately dark; nighttime fine tread is subdued.",
+    "Wood directional repetition is visible and should be checked against real furniture UV scale.",
+    "No prelit shadows in base maps; curved samples and coupons checked."
+  ],
+  "limits": [
+    "Offline material study only; no runtime GPU/FPS or full-scene integration claim.",
+    "Sphere pole UV distortion is expected; runtime meshes need their own appropriate unwrap."
+  ],
+  "source_sha256": "b9d7ba20c0fc9f72c0a00845ab59ae0a8fab0707e5e27242c60d40817caee6eb",
+  "previews": {
+    "sunny": "bbb4228ebca3477194036b12bed374924f7eff8b044d3ce9e29289dc3ce35091",
+    "overcast": "9518c72b689a16fbe77f1fd42a787f4124d48dd8cc53deea2ffe11916c7841c0",
+    "dusk": "a16e717db2cb2b9dd2dbc99f4c5e733a002926803731d4879485fa734707637d",
+    "night": "ee620c078e425798f0a5584869d2c4db5c6d573193dd3e6f4ee2280f69b94264"
+  }
+}
