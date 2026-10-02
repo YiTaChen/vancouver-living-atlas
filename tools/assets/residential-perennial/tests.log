@@ -1,0 +1,19 @@
+✔ bed planning reserves the actual offset door center, facade ends and existing footprint (1.952955ms)
+✔ clearance detects crossing-only thin paths, containment and exact edge contact (0.171929ms)
+✔ terrain draping splits at real interpolation diagonals and rejects missing/steep support (1.973215ms)
+✔ surface indexing respects mesh transforms and drawRange without changing source vertices (0.379493ms)
+✔ representative gardens use one bounded batch material and never add collision or walking floors (3.9864ms)
+✔ actual road surfaces and neighbor footprints conservatively reject covered beds (1.357907ms)
+✔ non-domestic and compound structures cannot silently receive residential gardens (0.389447ms)
+✔ source selection is deterministic and capped at 500 plots with local batches (140.463482ms)
+✔ Blender perennial retains the seven-face budget, connected interior edges, bounded UVs and one shared material (1.252599ms)
+✔ perennial source is used deterministically within previous radius/height for every seed phase (4.602129ms)
+✔ shared ring vertices stay joined on slopes, and failed samples retain existing fallback behavior (0.33127ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 672.658839

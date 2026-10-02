@@ -82,6 +82,7 @@
   "reload": "Recargar mapa",
   "loadErrorDetail": "No se pudieron cargar algunos elementos del mapa. Comprueba tu conexión y vuelve a cargarlo.",
   "graphicsError": "Se interrumpió el renderizado. Recarga el mapa o cierra otras pestañas 3D y vuelve a intentarlo.",
+  "graphicsUnavailable": "Este navegador no pudo iniciar los gráficos WebGL 2. Prueba a recargar el mapa o ábrelo en otro navegador o dispositivo compatible con WebGL 2.",
   "canvasLabel": "Mapa 3D interactivo de Vancouver. Arrastra para girar, usa la rueda para acercar o alejar y arrastra con el botón derecho para desplazar la vista.",
   "goToPlace": "Ir a {name}",
   "invalidView": "Elige un punto de vista válido y una hora entre 0 y 24.",

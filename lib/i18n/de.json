@@ -82,6 +82,7 @@
   "reload": "Karte neu laden",
   "loadErrorDetail": "Einige Kartendaten konnten nicht geladen werden. Prüfe deine Verbindung und lade die Karte erneut.",
   "graphicsError": "Die Grafikausgabe wurde unterbrochen. Lade die Karte erneut oder schließe andere 3D-Tabs und versuche es nochmals.",
+  "graphicsUnavailable": "Dieser Browser konnte die WebGL-2-Grafik nicht starten. Lade die Karte erneut oder öffne sie in einem anderen Browser oder auf einem anderen Gerät mit WebGL-2-Unterstützung.",
   "canvasLabel": "Interaktive 3D-Karte von Vancouver. Ziehen zum Drehen, Scrollen zum Zoomen und Ziehen mit rechter Maustaste zum Verschieben.",
   "goToPlace": "Zu {name}",
   "invalidView": "Wähle einen gültigen Aussichtspunkt und eine Uhrzeit zwischen 0 und 24 Uhr.",

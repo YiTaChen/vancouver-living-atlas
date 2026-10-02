@@ -1,0 +1,125 @@
+name: Hosted browser QA
+
+on:
+  # Current hosted runner cannot provide WebGL2, even under reviewed Mesa.
+  # Keep diagnostics reproducible without repeating known-unavailable probes.
+  workflow_dispatch:
+    inputs:
+      matched:
+        description: Run bounded same-runner High ABBA captures after the production smoke
+        type: boolean
+        default: false
+      baseline_ref:
+        description: Existing repository commit for the matched baseline (never deployed)
+        type: string
+        default: c402a41c0157464c34376d1860f8afc7ac3b715f
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hosted-browser-qa-${{ github.ref }}
+  cancel-in-progress: true
+
+# Matched capture stays off until a graphics-capable environment is available.
+# Manual dispatch is available only once the workflow exists on the default branch.
+env:
+  RUN_MATCHED: 'false'
+  # Explicit software-renderer feasibility profile; normal sandbox is retained.
+  # The original default-profile failure remains in run 36975023214.
+  QA_RENDERER_PROFILE: mesa
+  QA_BASELINE_QUERY: ''
+  QA_CANDIDATE_QUERY: ''
+
+jobs:
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: candidate
+    steps:
+      - name: Check out candidate without stored credentials
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          path: candidate
+          persist-credentials: false
+
+      - name: Set up Node 24
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+          package-manager-cache: false
+
+      - name: Install locked dependencies and validate the evidence harness
+        run: |
+          npm ci
+          node --test tests/hosted-browser-qa.test.mjs
+
+      - name: Check runner-provided Chrome and display support
+        run: |
+          command -v google-chrome
+          google-chrome --version
+          command -v Xvfb
+          node --version
+          npm --version
+          echo 'Use official runner-installed Chrome, normal Chromium sandbox and Xvfb; no sandbox or graphics-security overrides.' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Build verified production assets (no deployment)
+        run: |
+          npm run build:firebase
+          mkdir -p work/browser-builds
+          mv dist/client work/browser-builds/production
+          echo "QA_CANDIDATE_REVISION=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - name: Production WebGL and UI smoke
+        timeout-minutes: 5
+        env:
+          QA_LOG_PREVIEWS: ${{ (env.RUN_MATCHED == 'true' || inputs.matched == true) && '0' || '1' }}
+        run: xvfb-run -a node tools/hosted-browser-qa.mjs smoke --root work/browser-builds/production
+
+      - name: Check out matched baseline without stored credentials
+        if: env.RUN_MATCHED == 'true' || inputs.matched == true
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          path: baseline
+          ref: ${{ inputs.baseline_ref || 'c402a41c0157464c34376d1860f8afc7ac3b715f' }}
+          persist-credentials: false
+
+      - name: Build both opt-in QA bundles before any matched timing
+        if: env.RUN_MATCHED == 'true' || inputs.matched == true
+        run: |
+          VANCOUVER_VISUAL_QA=1 VANCOUVER_STATIC_EXPORT=1 npm run build
+          mv dist/client work/browser-builds/candidate
+          cd ../baseline
+          npm ci
+          VANCOUVER_VISUAL_QA=1 VANCOUVER_STATIC_EXPORT=1 npm run build
+          echo "QA_BASELINE_REVISION=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - name: Same-runner High ABBA captures via the existing upgrade UI
+        if: env.RUN_MATCHED == 'true' || inputs.matched == true
+        timeout-minutes: 15
+        run: xvfb-run -a node tools/hosted-browser-qa.mjs matched --root work/browser-builds/candidate --baseline ../baseline/dist/client
+
+      - name: Enforce 20 MB artifact cap
+        id: budget
+        if: always()
+        run: node tools/hosted-browser-qa.mjs check-artifacts
+
+      - name: Upload only bounded browser evidence
+        if: always() && steps.budget.outcome == 'success'
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+        with:
+          name: hosted-browser-qa-${{ github.run_id }}-${{ github.run_attempt }}
+          path: candidate/work/visual-qa/hosted-browser/
+          retention-days: 7
+          if-no-files-found: warn
+          compression-level: 0
+          include-hidden-files: false
+
+      - name: Record acceptance boundaries
+        if: always()
+        run: |
+          echo 'See the profile-prefixed *-smoke.json / *-matched.json and original PNG captures in the bounded 7-day artifact.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'At most two 640×360 JPEG preview records are emitted in logs. These are review aids, not replacement full-resolution evidence.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Hosted Chrome can be software-rendered. Functional readiness is not a performance gate, Radeon acceptance, phone acceptance or a long-session test. No deploy, merge, secrets, traces or video.' >> "$GITHUB_STEP_SUMMARY"

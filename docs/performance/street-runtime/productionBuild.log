@@ -1,0 +1,66 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> vancouver-living-atlas@0.1.0 build:firebase
+> VANCOUVER_STATIC_EXPORT=1 vinext build && node tools/verify-firebase-build.mjs
+
+
+  vinext build  (Vite 8.2.2)
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mProxy environment variables detected. We'll use your proxy for fetch requests.[0m
+
+
+[1/5] analyze client references...
+transforming...
+✓ 239 modules transformed.
+rendering chunks...
+✓ built in 811ms
+[2/5] analyze server references...
+transforming...
+✓ 629 modules transformed.
+rendering chunks...
+✓ built in 1.64s
+[3/5] build rsc environment...
+transforming...
+✓ 230 modules transformed.
+rendering chunks...
+computing gzip size...
+✓ built in 625ms
+[4/5] build client environment...
+transforming...
+✓ 2389 modules transformed.
+rendering chunks...
+computing gzip size...
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 2.57s
+[5/5] build ssr environment...
+transforming...
+✓ 621 modules transformed.
+rendering chunks...
+computing gzip size...
+✓ built in 1.08s
+[0m  Pre-rendering all routes (output: 'export')...
+[vinext] Production server for prerendering running at http://127.0.0.1:34691
+  Prerendered 2 routes (0 skipped).
+  Discovered 1 CDN warmup path(s).
+[0m
+  Route (app)
+  ─ ○ /
+
+  ○ Static
+
+  ○ Routes marked static were confirmed by speculative prerender (attempted render
+    succeeded without dynamic API usage).
+
+  Build complete. Run `vinext start` to start the production server.
+
+Firebase static build verified: English HTML, ten-language UI and geographic assets.
+Emitted landmark worker verified: initializes without Window/DOM and handles protocol messages.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

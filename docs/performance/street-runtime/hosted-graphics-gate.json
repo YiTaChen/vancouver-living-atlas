@@ -1,0 +1,79 @@
+{
+  "status": "blocked",
+  "sourceCommit": "6c6e0c567468d4afc19d64fcb60e9cc4be985363",
+  "validation": {
+    "run": 36981137575,
+    "conclusion": "success",
+    "testsPassed": 625,
+    "url": "https://github.com/YiTaChen/vancouver-living-atlas/actions/runs/36981137575"
+  },
+  "defaultAttempt": {
+    "run": 36975023214,
+    "conclusion": "failure",
+    "reason": "WebGL2 unavailable without renderer overrides"
+  },
+  "mesaAttempt": {
+    "run": 36981137641,
+    "conclusion": "failure",
+    "url": "https://github.com/YiTaChen/vancouver-living-atlas/actions/runs/36981137641",
+    "artifact": "https://github.com/YiTaChen/vancouver-living-atlas/actions/runs/36981137641/artifacts/11215890534",
+    "profile": "mesa",
+    "browser": "154.0.8037.57",
+    "requestedArguments": [
+      "--enable-automation",
+      "--use-gl=angle",
+      "--use-angle=gl"
+    ],
+    "graphicsEnvironment": {
+      "LIBGL_ALWAYS_SOFTWARE": "true",
+      "GALLIUM_DRIVER": "llvmpipe"
+    },
+    "sandboxRequested": true,
+    "graphicsBlocklistBypassed": false,
+    "gpuWatchdogDisabled": false,
+    "gpu": {
+      "devices": [
+        {
+          "vendor": "Google Inc. (Mesa)",
+          "device": "ANGLE (Mesa, llvmpipe (LLVM 20.1.2 256 bits), OpenGL 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2)",
+          "driverVersion": "25.2.8"
+        }
+      ],
+      "glRenderer": "ANGLE (Mesa, llvmpipe (LLVM 20.1.2 256 bits), OpenGL 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2)",
+      "glVendor": "Google Inc. (Mesa)",
+      "glVersion": "OpenGL ES 3.0 (ANGLE 2.1.28731 git hash: 1ff8799c596d)",
+      "featureStatus": {
+        "2d_canvas": "disabled_software",
+        "direct_rendering_display_compositor": "disabled_off_ok",
+        "gpu_compositing": "disabled_software",
+        "multiple_raster_threads": "disabled_off",
+        "opengl": "disabled_off",
+        "rasterization": "disabled_software",
+        "raw_draw": "disabled_off_ok",
+        "skia_graphite": "disabled_off",
+        "trees_in_viz": "disabled_off",
+        "video_decode": "disabled_software",
+        "video_encode": "disabled_software",
+        "vulkan": "disabled_off",
+        "webgl": "disabled_off",
+        "webgpu": "disabled_off",
+        "webgpu_on_vk_via_gl_interop": "disabled_off",
+        "webnn": "disabled_off"
+      }
+    },
+    "capability": {
+      "available": false,
+      "contextLost": null,
+      "probePassed": false,
+      "renderer": "",
+      "version": "",
+      "reason": "WebGL2 unavailable under the selected renderer profile"
+    },
+    "error": "Real WebGL2 clear/readback capability is unavailable"
+  },
+  "acceptedApplicationCaptures": 0,
+  "acceptedFrameTimeMeasurements": 0,
+  "physicalDeviceAcceptance": false,
+  "nextRequirement": "Graphics-capable browser/runner with ordinary security controls intact; C/D remain default-off.",
+  "scheduling": "New diagnostic workflow changed to manual-only after preserving both failures; standard source/test/build CI remains automatic."
+}

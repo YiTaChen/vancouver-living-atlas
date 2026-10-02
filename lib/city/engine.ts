@@ -1,6 +1,7 @@
 import { FlightController } from './flight-controller';
 import { clearOrbitGesture } from './orbit-lifecycle';
 import { paintStartupProgress } from './startup-progress';
+import { GraphicsUnavailableError } from './startup-error';
 import { ScenePreparationQueue } from './scene-preparation';
 import { PublicInteriors } from './interiors';
 import { isMobileGraphics, supportsHDRTarget } from './graphics-profile';
@@ -14,6 +15,7 @@ import { createResidentialGround } from './residential-ground';
 import { installSSAOBlur4 } from './ssao-blur4';
 import { trackSSAOResources } from './ssao-resources';
 import { SSAOExclusions } from './ssao-exclusions';
+import { installSSAOVisibility } from './ssao-visibility';
 import {
   shadowCoverage,
   SHADOW_DEPTH,
@@ -246,12 +248,16 @@ export class CityEngine {
         2,
         45000,
       );
-      this.renderer = new THREE.WebGLRenderer({
-        antialias: false,
-        alpha: false,
-        powerPreference: 'high-performance',
-        preserveDrawingBuffer: false,
-      });
+      try {
+        this.renderer = new THREE.WebGLRenderer({
+          antialias: false,
+          alpha: false,
+          powerPreference: 'high-performance',
+          preserveDrawingBuffer: false,
+        });
+      } catch (cause) {
+        throw new GraphicsUnavailableError(cause);
+      }
       this.compatibleGraphics =
         isMobileGraphics(navigator.userAgent, navigator.maxTouchPoints) ||
         new URLSearchParams(location.search).get('graphics') === 'compatible' ||
@@ -781,9 +787,11 @@ export class CityEngine {
     this.ssao.normalMaterial.side = THREE.DoubleSide;
     const exclusions = new SSAOExclusions(this.scene);
     this.aoExclusions = exclusions;
-    trackSSAOResources(this.ssao).restores.add(() => exclusions.dispose());
-    const renderAO = this.ssao.render.bind(this.ssao);
-    this.ssao.render = (...args) => exclusions.render(() => renderAO(...args));
+    const visibility = installSSAOVisibility(this.ssao, exclusions);
+    trackSSAOResources(this.ssao).restores.add(() => {
+      visibility.restore();
+      exclusions.dispose();
+    });
     this.composer.insertPass(this.ssao, 1);
   }
   scheduleScenery() {

@@ -1,0 +1,58 @@
+name: Validate city
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-city-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Check out proposed code without retaining credentials
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+
+      - name: Set up Node 24
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+          package-manager-cache: false
+
+      - name: Show tool versions
+        run: |
+          node --version
+          npm --version
+          python3 --version
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run check
+
+      - name: Runtime, geometry and offline asset regressions
+        run: npm test
+
+      - name: Audit architectural GLB contracts (no Blender source claim)
+        run: python3 tools/assets/architecture-details/validate_architecture_details.py --skip-blender
+
+      - name: Build and verify production Firebase output (no deployment)
+        run: npm run build:firebase
+
+      - name: Explain validation boundaries
+        if: always()
+        run: |
+          echo 'This workflow does not deploy, merge, run GPU/browser acceptance or open Blender sources.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Repository lint has 190 pre-existing diagnostics at the 2026-10-02 checkpoint; lint is not a passing gate here.' >> "$GITHUB_STEP_SUMMARY"

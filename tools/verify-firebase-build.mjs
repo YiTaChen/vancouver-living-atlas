@@ -35,8 +35,31 @@ assert(
   'Instrumented QA builds must never be deployed',
 );
 assert(
-  !scripts.includes('Discovery walk to next stop') && !scripts.includes('Cancel discovery walking QA') && !scripts.includes('Lab walk to next marker') && !scripts.includes('Cancel lab walking QA'),
+  !scripts.includes('cpu-submission-profile-v1') &&
+    !scripts.includes('Record CPU method timings (instrumented)'),
+  'CPU profiling controls must not ship in the public build',
+);
+assert(
+  !scripts.includes('residential-perennial-qa-v1') &&
+    !scripts.includes('qaPerennial') &&
+    !scripts.includes('residentialPerennialQA'),
+  'Experimental Blender perennial geometry and controls must not ship in production',
+);
+assert(
+  !scripts.includes('Discovery walk to next stop') &&
+    !scripts.includes('Cancel discovery walking QA') &&
+    !scripts.includes('Lab walk to next marker') &&
+    !scripts.includes('Cancel lab walking QA'),
   'Discovery movement diagnostics must not ship in the public build',
+);
+assert(
+  !scripts.includes('robson-sill-blender-candidate-v1') &&
+    !scripts.includes('Replace existing upper sills (QA only)'),
+  'Blender architecture candidate controls and code must not ship',
+);
+assert(
+  !files.some((name) => /sandstone-sill\.lod[01].*\.glb$/.test(name)),
+  'Opt-in Blender architecture candidate assets must not ship',
 );
 for (const language of [
   'Français',

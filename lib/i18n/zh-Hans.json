@@ -82,6 +82,7 @@
   "reload": "重新加载地图",
   "loadErrorDetail": "部分地图资源无法加载。请检查网络连接，然后重新加载地图。",
   "graphicsError": "画面渲染中断。请重新加载地图，或关闭其他 3D 标签页后再试一次。",
+  "graphicsUnavailable": "此浏览器无法启动 WebGL 2 图形。请尝试重新加载，或使用其他支持 WebGL 2 的浏览器或设备打开地图。",
   "canvasLabel": "互动式 3D 温哥华地图。拖动可旋转，滚轮可缩放，按住右键拖动可平移。",
   "goToPlace": "前往{name}",
   "invalidView": "请选择有效的观景点，并将时间设置为 0 至 24 时。",

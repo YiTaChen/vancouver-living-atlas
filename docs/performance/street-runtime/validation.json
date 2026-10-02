@@ -1,0 +1,77 @@
+{
+  "date": "2026-10-02",
+  "base": "a1364e932195e7c7e0dce093e40e1c94ecb94bcb",
+  "implementationCommits": [
+    "e50b817f98eef38c618bd735d0f66651e6b918c5",
+    "9e69073fc3c8381b3ed43d54c0165e0778ad611d",
+    "96b91afe5d98087a1036c67ae4ca585ad8d30933",
+    "b6b69985af094894bb3ed81f2b090469f04aff6b"
+  ],
+  "tests": {
+    "basePassed": 563,
+    "candidatePassed": 585,
+    "failed": 0
+  },
+  "typecheck": "passed",
+  "productionFirebaseBuild": "passed; QA CPU marker and controls excluded; landmark worker verified",
+  "lint": {
+    "status": "fails identically to base",
+    "baseErrors": 190,
+    "candidateErrors": 190,
+    "newNormalizedDiagnostics": [],
+    "normalization": "strip source line and column, compare multisets of complete diagnostics"
+  },
+  "architecture": {
+    "actualBlenderSourceAudit": "passed",
+    "glbAndCorruptionTests": 10,
+    "nodeTests": 2,
+    "assets": 16,
+    "LOD0Triangles": 552,
+    "LOD1Triangles": 220
+  },
+  "perennial": {
+    "focusedTestsPassed": 11,
+    "actualBlenderExportReopen": "passed",
+    "runtimeIntegration": "unapplied patch; production unchanged"
+  },
+  "independentReview": {
+    "status": "no blockers",
+    "targetedTestsPassed": 32,
+    "scope": "SSAO visibility restoration/fallback, CPU profiler ownership, region parity/reordering"
+  },
+  "browser": {
+    "status": "blocked",
+    "frameTimeImprovementClaimed": false,
+    "reason": "cloud localhost access blocked; local Chromium required process socket denied, including escalation with normal sandbox"
+  },
+  "publication": {
+    "status": "blocked, local commits only",
+    "reason": "git CLI no write credential; connected Git tree API403 Resource not accessible by integration"
+  },
+  "logs": {
+    "tests": {
+      "sha256": "12d4a53bc15635bc5a127a8f05598dbd16884cc2d36286c28fb1869873cc9361",
+      "bytes": 61821
+    },
+    "typecheck": {
+      "sha256": "001a92f0f28e1b91b4f16a791be880ee254b4746b98dcea482156391e6022365",
+      "bytes": 381
+    },
+    "productionBuild": {
+      "sha256": "50c7b190599172165fe2626a9d4dd6dabf227926ba55dd0a043d2a2693ff1cd0",
+      "bytes": 2246
+    },
+    "baselineTests": {
+      "sha256": "abb3826c796ec5bf4f435ee53754f0adab4484f5e448d780f9022760e94989d1",
+      "bytes": 59446
+    },
+    "baselineLint": {
+      "sha256": "a34c37a8b1da223edc2c1f9f89961de4d1e9da3597ff96a365baf9745177b817",
+      "bytes": 51078
+    },
+    "candidateLint": {
+      "sha256": "dbe28add516760f0a9f9dc0a4ffcf409b531ada1bac808a23f47f56f5e305a07",
+      "bytes": 51078
+    }
+  }
+}

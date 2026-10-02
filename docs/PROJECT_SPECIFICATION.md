@@ -1,5 +1,7 @@
 # Vancouver Living Atlas 專案規格與後續開發計畫
 
+**2026-10-02 後續檢查點：** 階段 B 的區域規則集中與來源對照已實作；階段 C／D 已建立實際 Blender 離線候選資產，但尚未啟用全城或街段擴展。SSAO 重複遍歷已移除並有隔離 CPU 測試，**不代表人物視角 149.7 ms p95 問題已解決**。GitHub 權限更新後已發布至 [draft PR #1](https://github.com/YiTaChen/vancouver-living-atlas/pull/1)，各階段內容與驗證版本逐一對照相同；[發布紀錄](PUBLICATION_2026_10.md)保留 commit 對應。瀏覽器／GPU 驗收仍受執行環境限制。完整交付、限制、測試和後續驗收步驟見 [本次優化檢查點](OPTIMIZATION_2026_10.md)。下列 2026-10-01 數據保留為歷史基準。
+
 狀態日期：**2026-10-01**。本文件描述目前 repository 的產品能力、技術結構、資產製作、驗收方式與建議開發順序。它是專案規格，不以競品宣傳、單張截圖或尚未執行的計畫作為完成證據。
 
 本輪已完成 **563 項 repository 測試、TypeScript、正式 Firebase build、24 組場景擷取及一段 Water Street 持續行走驗收**。最後的天氣選單翻譯標籤修正後，已重新通過 TypeScript、正式建置與 production UI 檢查。實測仍有人物視角 frame-time 退步，技術驗收完成不代表效能缺口消失。**本輪技術驗收已完成；Git 交付以本文件所在版本及交付紀錄為準。** 線上 demo、repository 版本與部署結果仍應分別辨識。
@@ -232,7 +234,7 @@ catalog generator 是從程式重新生成預設材質，不會讀回手動修�
 | 地標確有獨特形態 | 具名資產及來源 ID 對齊 | 輪廓、高度、地面、碰撞和資料歸屬。 |
 | 單筆來源錯誤 | 可追溯的資料修正 | 修正前後輸入、理由及回歸案例。 |
 
-現況仍有遺留：Gastown 建築／街面類型選擇含 bounding box；本輪 Water Street 鋪面已改用精確道路名稱、可選 civic block 前綴及街段邊界。兩者應分開描述，不能說全部地理判斷都已資料化。
+2026-10-02 更新：Gastown 建築／街面類型選擇的相容 bounding box 已集中為具名規則，保留既有邊界差異與高度條件；Water Street 精確道路名稱、可選 civic block 前綴及街段邊界也使用同一配置入口。來源 ID／匹配数量與資料指紋有對照測試。這不是官方區界重建，也沒有宣稱移除所有地理 bounding box。見 [區域規則](REGION_RULES.md)。
 
 ## 8. 完成項目與本輪交付盤點
 

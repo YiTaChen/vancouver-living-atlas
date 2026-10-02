@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import {
+import { cityModule } from './helpers/city-modules.mjs';
+const {
   structureKey,
   summarizeStructures,
   createProfile,
@@ -10,7 +11,7 @@ import {
   wallV,
   sampleFacade,
   fitEntrance,
-} from '../lib/city/facade-profile.ts';
+} = await import(cityModule('facade-profile'));
 const close = (a, b, eps = 1e-9) =>
   assert.ok(Math.abs(a - b) < eps, `${a} != ${b}`);
 const make = (overrides = {}) =>
@@ -178,7 +179,7 @@ test('steep, absent, uphill-obstructed, and elevated-part entrances rejected', (
 });
 
 test('ground-floor glazing clears frontage grade without inventing entrances or elevated windows', async () => {
-  const { groundGlazing } = await import('../lib/city/facade-profile.ts');
+  const { groundGlazing } = await import(cityModule('facade-profile'));
   const profile = make({ center: [-500, 100], heightM: 24 });
   assert.deepEqual(
     groundGlazing(profile, extent, 10, [11.5, 11.6, 11.55]),

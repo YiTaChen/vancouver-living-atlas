@@ -1,0 +1,111 @@
+{
+  "kind": "ssao-visibility-synthetic-cpu-v1",
+  "recordedAt": "2026-10-02T05:41:37.948Z",
+  "node": "v24.19.0",
+  "three": "185",
+  "cpu": "AMD EPYC 9V74 80-Core Processor",
+  "scaleSource": {
+    "path": "docs/visual-quality/material-pipeline/measurements.json",
+    "capture": "finalCaptures.high-citizen.ssaoExclusions",
+    "watchedObjects": 2701,
+    "candidates": 177,
+    "hiddenLastPass": 61
+  },
+  "protocol": {
+    "warmupPairs": 1000,
+    "iterationsPerRound": 2000,
+    "rounds": 12,
+    "alternatedOrder": true
+  },
+  "algorithmicWork": {
+    "baselineSceneVisits": 2701,
+    "candidateSceneVisits": 0,
+    "baselineDraws": 4,
+    "candidateDraws": 4
+  },
+  "medianMsPerMockFrame": {
+    "baseline": 0.12830398575000002,
+    "candidate": 0.0024358130000000527,
+    "saved": 0.12586817274999995
+  },
+  "samples": [
+    {
+      "round": 0,
+      "order": "baseline-candidate",
+      "baselineMs": 0.10102568200000007,
+      "candidateMs": 0.0016279645000000756
+    },
+    {
+      "round": 1,
+      "order": "candidate-baseline",
+      "baselineMs": 0.095234064,
+      "candidateMs": 0.0018811415000000126
+    },
+    {
+      "round": 2,
+      "order": "baseline-candidate",
+      "baselineMs": 0.124325239,
+      "candidateMs": 0.0016080345000000307
+    },
+    {
+      "round": 3,
+      "order": "candidate-baseline",
+      "baselineMs": 0.10496657400000003,
+      "candidateMs": 0.002066906999999901
+    },
+    {
+      "round": 4,
+      "order": "baseline-candidate",
+      "baselineMs": 0.10713064950000012,
+      "candidateMs": 0.0016688464999999723
+    },
+    {
+      "round": 5,
+      "order": "candidate-baseline",
+      "baselineMs": 0.19583349249999993,
+      "candidateMs": 0.0016770489999998971
+    },
+    {
+      "round": 6,
+      "order": "baseline-candidate",
+      "baselineMs": 0.22111294799999995,
+      "candidateMs": 0.003727540999999974
+    },
+    {
+      "round": 7,
+      "order": "candidate-baseline",
+      "baselineMs": 0.13228273250000006,
+      "candidateMs": 0.008118160999999872
+    },
+    {
+      "round": 8,
+      "order": "baseline-candidate",
+      "baselineMs": 0.09890785299999993,
+      "candidateMs": 0.0028047190000002045
+    },
+    {
+      "round": 9,
+      "order": "candidate-baseline",
+      "baselineMs": 0.13560914849999994,
+      "candidateMs": 0.0028581045000000815
+    },
+    {
+      "round": 10,
+      "order": "baseline-candidate",
+      "baselineMs": 0.2818968209999998,
+      "candidateMs": 0.003561439999999948
+    },
+    {
+      "round": 11,
+      "order": "candidate-baseline",
+      "baselineMs": 0.2911699864999996,
+      "candidateMs": 0.003583278000000064
+    }
+  ],
+  "limitations": [
+    "Synthetic 27-group scene matches archived object/candidate/hidden counts, not actual app topology or geometry.",
+    "Three SSAOPass render executes with a no-op renderer: CPU visibility/wrapper overhead only, no WebGL or GPU work.",
+    "Do not interpret this as app FPS, frame-time-tail, or browser performance improvement.",
+    "One process and one machine; browser paired captures are required for end-user performance claims."
+  ]
+}

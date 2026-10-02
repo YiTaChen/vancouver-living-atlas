@@ -42,6 +42,7 @@ const code = ts.transpileModule(
   import {SSAOPass} from '${import.meta.resolve('three/addons/postprocessing/SSAOPass.js')}';
   import {shadowCoverage, SHADOW_DEPTH} from '${cityModule('shadow-policy')}';
   import {SSAOExclusions} from '${cityModule('ssao-exclusions')}';
+  import {installSSAOVisibility} from '${cityModule('ssao-visibility')}';
   import {trackSSAOResources} from '${cityModule('ssao-resources')}';
   import {installSSAOBlur4} from '${cityModule('ssao-blur4')}';
   import {sampleAtmosphere, applyAtmosphereSky, normalizeAtmosphere} from '${cityModule('atmosphere')}';

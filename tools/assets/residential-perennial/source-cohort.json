@@ -1,0 +1,170 @@
+{
+  "status": "Pre-clearance candidate audit only; accepted runtime plots require actual terrain and road tests. No invented accepted IDs.",
+  "input": "public/data/buildings.geojson",
+  "inputSha256": "57cf77f2f7afbceeb3ea4b7dcb87c33d7f56a6df57c33306792503f1dba538ec",
+  "candidateCount": 1200,
+  "plotCap": 500,
+  "first20Candidates": [
+    {
+      "key": "137668",
+      "center": [
+        -1353.9739930096907,
+        1116.5011946000338
+      ],
+      "heightM": 7.81
+    },
+    {
+      "key": "132848",
+      "center": [
+        -1755.2053063084254,
+        1443.9873800000892
+      ],
+      "heightM": 11.25
+    },
+    {
+      "key": "137128",
+      "center": [
+        329.15043931202445,
+        1150.4947047001558
+      ],
+      "heightM": 4.44
+    },
+    {
+      "key": "134134",
+      "center": [
+        -1585.39910276576,
+        1346.6925867998443
+      ],
+      "heightM": 7.55
+    },
+    {
+      "key": "131215",
+      "center": [
+        -2570.244731407996,
+        1548.9924747001673
+      ],
+      "heightM": 10.09
+    },
+    {
+      "key": "131289",
+      "center": [
+        -2287.487324714774,
+        1546.234800000193
+      ],
+      "heightM": 11.12
+    },
+    {
+      "key": "152562",
+      "center": [
+        -32.85884207752075,
+        -458.99332526654206
+      ],
+      "heightM": 6.39
+    },
+    {
+      "key": "130356",
+      "center": [
+        -2542.7938654881837,
+        1607.6550534003036
+      ],
+      "heightM": 7.3
+    },
+    {
+      "key": "131192",
+      "center": [
+        -2554.6447233816016,
+        1552.5997993002431
+      ],
+      "heightM": 11.33
+    },
+    {
+      "key": "131864",
+      "center": [
+        -2553.898632884201,
+        1507.6428276801312
+      ],
+      "heightM": 10.31
+    },
+    {
+      "key": "134193",
+      "center": [
+        -1455.3535322284945,
+        1340.9712954000595
+      ],
+      "heightM": 5.97
+    },
+    {
+      "key": "133470",
+      "center": [
+        -1749.3505835045585,
+        1387.4899753003401
+      ],
+      "heightM": 3.64
+    },
+    {
+      "key": "124431",
+      "center": [
+        -462.94661222588974,
+        1986.6086493003736
+      ],
+      "heightM": 11.22
+    },
+    {
+      "key": "122361",
+      "center": [
+        -1604.3623270074804,
+        2113.1188199000935
+      ],
+      "heightM": 8.85
+    },
+    {
+      "key": "130355",
+      "center": [
+        -2571.130055825362,
+        1606.2585440002383
+      ],
+      "heightM": 8.97
+    },
+    {
+      "key": "130331",
+      "center": [
+        -2384.3610945332803,
+        1610.1976022000777
+      ],
+      "heightM": 11.58
+    },
+    {
+      "key": "134188",
+      "center": [
+        -1759.0971394408048,
+        1342.6388690002077
+      ],
+      "heightM": 9.27
+    },
+    {
+      "key": "131879",
+      "center": [
+        -2569.2172685814567,
+        1507.4100019001671
+      ],
+      "heightM": 9.9
+    },
+    {
+      "key": "129125",
+      "center": [
+        -1562.8653544377541,
+        1677.107601400391
+      ],
+      "heightM": 10.37
+    },
+    {
+      "key": "153247",
+      "center": [
+        -2122.549588580988,
+        -1689.6650540000564
+      ],
+      "heightM": 3.89
+    }
+  ],
+  "selection": "Existing domestic-cladding profile, single part, ground level, 3.5–12 m, deterministic hash order; runtime then rejects overlapping road/building/accepted beds and requires terrain sample."
+}

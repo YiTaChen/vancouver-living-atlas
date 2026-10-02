@@ -6,6 +6,9 @@ import * as THREE from 'three';
 import { Sky } from 'three/addons/objects/Sky.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { cityModule } from './helpers/city-modules.mjs';
+const { GraphicsUnavailableError, startupErrorMessageKey } = await import(
+  cityModule('startup-error')
+);
 
 // Run the production constructor and lifecycle methods. Only browser/GPU
 // acquisition is substituted so failure paths can be deterministic in Node.
@@ -56,9 +59,11 @@ const threeURL = import.meta.resolve('three');
 const fakeThreeURL = moduleURL(`
   export * from ${JSON.stringify(threeURL)};
   export class WebGLRenderer {
-    constructor() {
+    constructor(options) {
       const f = globalThis.__engineLifecycle;
-      if (f.fail === 'renderer') throw new Error('WebGL unavailable');
+      f.rendererAttempts++;
+      f.rendererOptions = options;
+      if (f.fail === 'renderer') throw f.failure;
       this.domElement = f.canvas;
       this.shadowMap = {};
       this.info = {};
@@ -72,6 +77,7 @@ const fakeThreeURL = moduleURL(`
 const code = ts.transpileModule(
   `
   import * as THREE from ${JSON.stringify(fakeThreeURL)};
+  import { GraphicsUnavailableError } from ${JSON.stringify(cityModule('startup-error'))};
   import { clearOrbitGesture } from ${JSON.stringify(cityModule('orbit-lifecycle'))};
   import { CityClock } from ${JSON.stringify(cityModule('clock'))};
   import { installAtmosphereSky, applyAtmosphereSky, sampleAtmosphere } from ${JSON.stringify(cityModule('atmosphere'))};
@@ -124,7 +130,13 @@ class TrackedTarget extends EventTarget {
     return this.active.get(type)?.size || 0;
   }
 }
-function setup({ fail, load = () => new Promise(() => {}) } = {}) {
+function setup({
+  fail,
+  failure = new Error(
+    fail === 'renderer' ? 'WebGL unavailable' : 'Observer setup failed',
+  ),
+  load = () => new Promise(() => {}),
+} = {}) {
   const document = new TrackedTarget(),
     window = new TrackedTarget(),
     canvas = new TrackedTarget();
@@ -168,7 +180,9 @@ function setup({ fail, load = () => new Promise(() => {}) } = {}) {
     document,
     window,
     fail,
+    failure,
     load,
+    rendererAttempts: 0,
     rendererDisposals: 0,
     controlDisposals: 0,
     canvasRemovals: 0,
@@ -192,7 +206,7 @@ function setup({ fail, load = () => new Promise(() => {}) } = {}) {
     },
     ResizeObserver: class {
       constructor() {
-        if (fail === 'observer') throw new Error('Observer setup failed');
+        if (fail === 'observer') throw failure;
       }
       observe() {}
       disconnect() {
@@ -248,10 +262,25 @@ test('constructor failures cannot retain document listeners, canvases or acquire
   for (const fail of ['renderer', 'observer']) {
     const f = setup({ fail });
     try {
-      assert.throws(
-        f.create,
-        fail === 'renderer' ? /WebGL unavailable/ : /Observer setup failed/,
-      );
+      assert.throws(f.create, (error) => {
+        if (fail === 'renderer') {
+          assert(error instanceof GraphicsUnavailableError);
+          assert.equal(error.code, 'graphics-unavailable');
+          assert.equal(error.cause, f.failure);
+          assert.equal(startupErrorMessageKey(error), 'graphicsUnavailable');
+        } else {
+          assert.equal(error, f.failure);
+          assert.equal(startupErrorMessageKey(error), 'loadErrorDetail');
+        }
+        return true;
+      });
+      assert.equal(f.rendererAttempts, 1, 'no fallback or renderer retry');
+      assert.deepEqual(f.rendererOptions, {
+        antialias: false,
+        alpha: false,
+        powerPreference: 'high-performance',
+        preserveDrawingBuffer: false,
+      });
       assert.equal(f.document.count('visibilitychange'), 0);
       assert.equal(f.window.count('pagehide'), 0);
       assert.equal(f.window.count('pageshow'), 0);
@@ -260,6 +289,40 @@ test('constructor failures cannot retain document listeners, canvases or acquire
       assert.equal(f.canvasRemovals, fail === 'renderer' ? 0 : 1);
     } finally {
       f.close();
+    }
+  }
+});
+
+test('only renderer acquisition failures are classified as unavailable, regardless of thrown message or type', () => {
+  for (const failure of [
+    new Error('Error creating WebGL context.'),
+    new Error('different browser message'),
+    'WebGL unavailable',
+    { message: 'graphics-context-lost' },
+    null,
+  ]) {
+    for (const fail of ['renderer', 'observer']) {
+      const f = setup({ fail, failure });
+      try {
+        let caught = false;
+        try {
+          f.create();
+        } catch (error) {
+          caught = true;
+          assert.equal(
+            startupErrorMessageKey(error),
+            fail === 'renderer' ? 'graphicsUnavailable' : 'loadErrorDetail',
+          );
+          if (fail === 'renderer') assert.equal(error.cause, f.failure);
+          else assert.equal(error, f.failure);
+        }
+        assert(caught);
+        assert.equal(f.document.count('visibilitychange'), 0);
+        assert.equal(f.canvas.count('webglcontextlost'), 0);
+        assert.equal(f.rendererDisposals, fail === 'renderer' ? 0 : 1);
+      } finally {
+        f.close();
+      }
     }
   }
 });

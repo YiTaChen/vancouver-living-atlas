@@ -12,6 +12,26 @@ import {
   type ArchitectureTier,
 } from './architecture-plan';
 
+export type ArchitectureQAContext = {
+  id: string;
+  tier: ArchitectureTier;
+  surface: 'masonry' | 'metal';
+  sourcePart(box: ArchitectureBox): ArchitecturePart | undefined;
+};
+/** The implementation is imported only by the separately gated visual-QA UI. */
+export interface ArchitectureQAAdapter {
+  readonly affectedCells: ReadonlySet<string>;
+  didAttach?(): void;
+  assemble(
+    boxes: readonly ArchitectureBox[],
+    context: ArchitectureQAContext,
+  ): {
+    meshes: THREE.InstancedMesh[];
+    consumed: Set<number>;
+  } | null;
+  update(): boolean;
+  dispose(): void;
+}
 type Cell = { id: string; parts: ArchitecturePart[]; bounds: THREE.Box3 };
 type RecordState = {
   id: string;
@@ -27,6 +47,7 @@ type Build = {
   work: Generator<ArchitectureBox | null>;
   masonry: ArchitectureBox[];
   metal: ArchitectureBox[];
+  qaSourceParts?: WeakMap<ArchitectureBox, ArchitecturePart>;
 };
 export const ARCHITECTURE_BUDGET = {
   cellMetres: 220,
@@ -72,6 +93,7 @@ export class ArchitecturalDetails {
   private quality = '';
   private tick = 0;
   private disposed = false;
+  private qaAdapter: ArchitectureQAAdapter | null = null;
   private matrix = new THREE.Matrix4();
   private position = new THREE.Vector3();
   private rotation = new THREE.Quaternion();
@@ -165,8 +187,37 @@ export class ArchitecturalDetails {
       );
   }
 
+  /** QA-only replacement hook; the normal build cannot enable this adapter. */
+  setQAModuleAdapter(adapter: ArchitectureQAAdapter | null) {
+    if (process.env.VANCOUVER_VISUAL_QA !== '1' || this.disposed) {
+      adapter?.dispose();
+      return false;
+    }
+    if (adapter === this.qaAdapter) return true;
+    const cells = new Set([
+      ...(this.qaAdapter?.affectedCells ?? []),
+      ...(adapter?.affectedCells ?? []),
+    ]);
+    this.qaAdapter?.dispose();
+    this.qaAdapter = adapter;
+    this.invalidateQAStreetCells(cells);
+    return true;
+  }
+  invalidateQAStreetCells(cells: ReadonlySet<string>) {
+    if (process.env.VANCOUVER_VISUAL_QA !== '1' || this.disposed) return;
+    if (!cells.size) return;
+    const affected = (record: RecordState) =>
+      record.tier === 'street' && cells.has(record.cell.id);
+    if (this.build && affected(this.build.record)) this.cancelBuild();
+    this.pending = this.pending.filter((record) => !affected(record));
+    for (const record of this.records.values())
+      if (affected(record)) this.release(record);
+    this.last.set(Infinity, Infinity, Infinity);
+  }
   update(force = false) {
     if (this.disposed) return;
+    if (process.env.VANCOUVER_VISUAL_QA === '1' && this.qaAdapter?.update())
+      this.invalidateQAStreetCells(this.qaAdapter.affectedCells);
     this.tick++;
     const q = this.e.settings.buildings ? this.e.settings.quality : 'off';
     if (
@@ -249,11 +300,27 @@ export class ArchitecturalDetails {
     this.refreshStats();
   }
 
+  private *qaStreetWork(
+    parts: readonly ArchitecturePart[],
+    sources: WeakMap<ArchitectureBox, ArchitecturePart>,
+  ) {
+    if (process.env.VANCOUVER_VISUAL_QA !== '1') return;
+    for (const part of parts)
+      for (const box of architectureWork([part], 'street')) {
+        if (box) sources.set(box, part);
+        yield box;
+      }
+  }
   private pump() {
     if (!this.build) {
       const record = this.pending.shift();
       if (!record) return;
+      const qaSourceParts =
+        process.env.VANCOUVER_VISUAL_QA === '1' && record.tier === 'street'
+          ? new WeakMap<ArchitectureBox, ArchitecturePart>()
+          : undefined;
       this.build = {
+        qaSourceParts,
         record,
         work:
           record.tier === 'roof'
@@ -262,7 +329,9 @@ export class ArchitecturalDetails {
                 ARCHITECTURE_BUDGET.roofInstancesPerCell,
                 this.e.camera.position.toArray(),
               )
-            : architectureWork(record.cell.parts, record.tier),
+            : qaSourceParts
+              ? this.qaStreetWork(record.cell.parts, qaSourceParts)
+              : architectureWork(record.cell.parts, record.tier),
         masonry: [],
         metal: [],
       };
@@ -296,7 +365,33 @@ export class ArchitecturalDetails {
     if (!complete) return;
     const attachStart = performance.now();
     for (const surface of ['masonry', 'metal'] as const) {
-      const boxes = build[surface];
+      let boxes = build[surface];
+      if (!boxes.length) continue;
+      if (process.env.VANCOUVER_VISUAL_QA === '1' && this.qaAdapter) {
+        const replacement = this.qaAdapter.assemble(boxes, {
+          id: build.record.id,
+          tier: build.record.tier,
+          surface,
+          sourcePart: (box) => build.qaSourceParts?.get(box),
+        });
+        if (replacement) {
+          const valid = [...replacement.consumed].every(
+            (index) =>
+              Number.isInteger(index) && index >= 0 && index < boxes.length,
+          );
+          const count = replacement.meshes.reduce(
+            (sum, mesh) => sum + mesh.count,
+            0,
+          );
+          if (!valid || count !== replacement.consumed.size)
+            throw new Error(
+              'QA architecture replacements must preserve population',
+            );
+          boxes = boxes.filter((_, index) => !replacement.consumed.has(index));
+          for (const mesh of replacement.meshes) build.record.group.add(mesh);
+          build.record.count += count;
+        }
+      }
       if (!boxes.length) continue;
       const mesh = new THREE.InstancedMesh(
         this.geometry,
@@ -332,6 +427,7 @@ export class ArchitecturalDetails {
     );
     this.build = null;
     this.evict();
+    if (process.env.VANCOUVER_VISUAL_QA === '1') this.qaAdapter?.didAttach?.();
   }
 
   private cancelBuild() {
@@ -340,7 +436,11 @@ export class ArchitecturalDetails {
   }
   private release(record: RecordState) {
     record.group.traverse((o) => {
-      if (o instanceof THREE.InstancedMesh) o.dispose();
+      if (o instanceof THREE.InstancedMesh) {
+        if (process.env.VANCOUVER_VISUAL_QA === '1')
+          o.userData.releaseArchitectureCandidate?.();
+        o.dispose();
+      }
     });
     record.group.clear();
     record.group.removeFromParent();
@@ -378,10 +478,12 @@ export class ArchitecturalDetails {
   dispose() {
     if (this.disposed) return;
     this.disposed = true;
+    if (process.env.VANCOUVER_VISUAL_QA === '1') this.qaAdapter?.dispose();
+    this.qaAdapter = null;
     this.cancelBuild();
     this.pending.length = 0;
     this.selected.clear();
-    for (const record of [...this.records.values()]) this.release(record);
+    for (const record of this.records.values()) this.release(record);
     this.root.removeFromParent();
     this.geometry.dispose();
     this.materials.masonry.dispose();

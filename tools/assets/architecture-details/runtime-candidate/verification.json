@@ -1,0 +1,51 @@
+{
+  "status": "passed automated candidate gate; browser GPU/visual gate unverified",
+  "applicationSourceSha256": {
+    "lib/city/architecture-details.ts": "ebe73ae9f51ddc4675d7f3d6d1b27052ce6344ba2a098b05cb9992632f776096",
+    "lib/city/architecture-module-candidate.ts": "8aa84600887442966cecbb6556d2291556fc0c122e9d9b3d21e166c36ed19807",
+    "lib/city/architecture-module-candidate-qa.ts": "d080e152875f814cc8aad4a9cddfceef0cfb5f04cba95ed9b8f35162cba8b6c5",
+    "lib/city/upgrade-qa.ts": "344dcfe03f130184ca229e40376d0a8b113503e85a4b37723cdba6f0966d4b2e",
+    "tools/verify-firebase-build.mjs": "3b407f7675fd26993a83612809c1c8230d5c01cfe6d3c86ad0916f0661dd3f2b"
+  },
+  "fullRepositoryTests": {
+    "passed": 600,
+    "failed": 0
+  },
+  "focusedCandidateArchitectureAndLeaseTests": {
+    "passed": 22,
+    "failed": 0
+  },
+  "typescript": "passed",
+  "targetedLint": {
+    "passedFiles": [
+      "lib/city/architecture-module-candidate.ts",
+      "lib/city/architecture-module-candidate-qa.ts",
+      "lib/city/architecture-details.ts",
+      "tests/architecture-module-candidate.test.mjs",
+      "tools/audit-architecture-module-candidate.mjs",
+      "tools/verify-firebase-build.mjs"
+    ],
+    "knownExistingFindings": "upgrade-qa.ts retains four pre-existing catch/template-string lint findings also present at26a2ae5; no blanket repository lint-clean claim"
+  },
+  "blenderFittedSourceAudit": "passed",
+  "qaBuild": {
+    "passed": true,
+    "assets": [
+      "_next/static/media/sandstone-sill.lod0.Dgl-A5fs.glb",
+      "_next/static/media/sandstone-sill.lod1.CLsyr5yh.glb"
+    ],
+    "candidateMarkerPresent": true
+  },
+  "normalFirebaseBuild": {
+    "passed": true,
+    "candidateGLBAssets": [],
+    "candidateMarkerPresent": false,
+    "existingFirebaseChecks": "passed",
+    "emittedLandmarkWorker": "passed"
+  },
+  "notRun": [
+    "browser visual comparison",
+    "GPU frame-time acceptance",
+    "real-device checks"
+  ]
+}

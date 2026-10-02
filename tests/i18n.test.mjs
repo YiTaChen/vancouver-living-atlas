@@ -68,6 +68,17 @@ test('first visits and invalid saved preferences use English, valid choices pers
     assert.equal(i18n.resolveLocale(locale), locale);
 });
 
+test('every locale distinguishes unavailable graphics, interrupted graphics and asset loading', () => {
+  for (const locale of locales) {
+    const message = i18n.translate(locale, 'graphicsUnavailable');
+    assert.match(message, /WebGL[ -]2/, locale);
+    assert.notEqual(message, i18n.translate(locale, 'graphicsError'), locale);
+    assert.notEqual(message, i18n.translate(locale, 'loadErrorDetail'), locale);
+    if (locale !== 'en')
+      assert.notEqual(message, catalogs.en.graphicsUnavailable, locale);
+  }
+});
+
 test('localized map labels and numeric messages resolve without placeholders', () => {
   for (const locale of locales) {
     assert(

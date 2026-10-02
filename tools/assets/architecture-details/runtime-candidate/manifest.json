@@ -1,0 +1,80 @@
+{
+  "id": "robson-sill-blender-candidate-v1",
+  "status": "QA opt-in only; integrated visual and GPU gate unverified",
+  "blenderVersion": "4.3.2",
+  "builderSha256": "09c454a21ec451a1bad98afd683ea20a1c35a4a5a22819a49c23644916f7a799",
+  "catalogSha256": "c4e26c42122d394b0ddda5653dbe588e4701bcab97dc2de66420e2411310aa95",
+  "units": "metres",
+  "upAxis": "+Y",
+  "frontAxis": "+Z",
+  "surface": "sandstone",
+  "tileMeters": [
+    1.2,
+    1.2
+  ],
+  "originalHeightMetres": 0.18,
+  "fittedHeightMetres": 0.16,
+  "runtimeScale": "X span only; Y=Z=1",
+  "lods": [
+    {
+      "level": 0,
+      "file": "assets/sandstone-sill.lod0.glb",
+      "source": "source/sandstone-sill.lod0.blend",
+      "triangles": 32,
+      "triangleCap": 64,
+      "materials": 1,
+      "primitives": 1,
+      "bounds": {
+        "min": [
+          -0.7,
+          0.0,
+          0.02
+        ],
+        "max": [
+          0.7,
+          0.16,
+          0.24
+        ]
+      },
+      "bytes": 267060,
+      "sha256": "bd9592be9c2b1f2ec6305564851048e917791dab306bc06ffed272dfa1049edc",
+      "sourceSha256": "bc6196a6c1dc6fc903a5316b8ac518795232d2490f7eaef9e7c233b19aebb89a",
+      "surface": "sandstone",
+      "tileMeters": [
+        1.2,
+        1.2
+      ],
+      "inputSourceSha256": "5e353f93799618e2d956354001d68cfa75f7257ca67b719970043f3af5ddbf40"
+    },
+    {
+      "level": 1,
+      "file": "assets/sandstone-sill.lod1.glb",
+      "source": "source/sandstone-sill.lod1.blend",
+      "triangles": 16,
+      "triangleCap": 32,
+      "materials": 1,
+      "primitives": 1,
+      "bounds": {
+        "min": [
+          -0.7,
+          0.0,
+          0.02
+        ],
+        "max": [
+          0.7,
+          0.16,
+          0.24
+        ]
+      },
+      "bytes": 265812,
+      "sha256": "688954e734f7b619fe6c63da637bcf3dbfcc0ec4c8ddf3da02871a0b044142c6",
+      "sourceSha256": "7f017e842a20da85c9d79dc116fdec94b39ab4674c18afa2c2bd2d4072bee4a3",
+      "surface": "sandstone",
+      "tileMeters": [
+        1.2,
+        1.2
+      ],
+      "inputSourceSha256": "7ef01fb7d9a174e832c444c58e96da8073614e878df26848a25898d70d706edb"
+    }
+  ]
+}
