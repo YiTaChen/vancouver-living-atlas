@@ -74,6 +74,7 @@ const code = ts.transpileModule(
   import * as THREE from ${JSON.stringify(fakeThreeURL)};
   import { clearOrbitGesture } from ${JSON.stringify(cityModule('orbit-lifecycle'))};
   import { CityClock } from ${JSON.stringify(cityModule('clock'))};
+  import { installAtmosphereSky, applyAtmosphereSky, sampleAtmosphere } from ${JSON.stringify(cityModule('atmosphere'))};
   const isMobileGraphics = () => true;
   const supportsHDRTarget = () => false;
   const translate = () => 'City';

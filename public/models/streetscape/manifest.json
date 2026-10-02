@@ -1,8 +1,14 @@
 {
   "kit": "Vancouver original streetscape kit",
-  "version": 2,
+  "version": 3,
   "license": "LicenseRef-Vancouver-Living-Atlas-NC-1.0",
   "geometryAuthor": "Original procedural modelling for Vancouver Living Atlas",
+  "interface": {
+    "maximumHeightM": 3.2,
+    "minimumEntryClearanceM": 2.3,
+    "reliefBackMinM": 0.0228,
+    "foundationDatumNote": "Pavement is generally terrain + 1.18 m, shared facade foundation terrain - 0.4 m. Placement uses actual sidewalk samples and first upper pane clearance; do not scale modules to force a fit."
+  },
   "units": "metres",
   "upAxis": "+Y",
   "frontAxis": "+Z",
@@ -10,7 +16,7 @@
   "coordinateConversion": "Blender (x,y,z) exports as glTF (x,z,-y). No manual loader rotation required.",
   "reproduction": "Blender 4.5+: blender --background --python generate_streetscape.py -- --output OUTPUT [--skip-render]",
   "placementNotes": [
-    "Compact bay +Z points toward the street. Place local z=0 on the existing facade plane; the complete shipped geometry sits outside the opaque GIS wall in +Z.",
+    "Facade module +Z points toward the street. Place local z=0 on the existing facade plane. Compact shipped bays sit entirely in +Z outside the opaque GIS wall; optional full-height library modules may extend into -Z.",
     "Compact bays are 3.2 m tall surface-mounted relief. The shallow interior occupies the first 0.3 m outside the GIS wall; the canopy projects farther. No entry or walkable interior is claimed.",
     "Use facade modules in near-street LOD only, and suppress overlapping procedural ground details within their extents.",
     "Use uniform scale, ideally 1; adjust placement or repeat bays instead of stretching door and human-scale details.",
@@ -51,40 +57,78 @@
           "triangles": 8128,
           "materials": 3,
           "bounds": {
-            "min": [-1.625, 0.0, 0.0228],
-            "max": [1.625, 3.1959, 1.2435]
+            "min": [
+              -1.625,
+              0.0,
+              0.0228
+            ],
+            "max": [
+              1.625,
+              3.1959,
+              1.2435
+            ]
           },
           "pbrAtlas": {
             "resolution": 1024,
-            "maps": ["basecolor", "normal", "ORM"],
+            "maps": [
+              "basecolor",
+              "normal",
+              "ORM"
+            ],
             "occlusion": "R=1 (unbaked); roughness in G; metallic in B"
           },
           "level": 0,
           "file": "heritage-shop-bay.lod0.glb",
-          "bytes": 1948044
+          "bytes": 2304912,
+          "sha256": "985f36a9283982d06faa0e99634322fe7f613d1eb8be0b7ab74d3e1b48c8a898"
         },
         {
           "vertices": 394,
           "triangles": 604,
           "materials": 2,
           "bounds": {
-            "min": [-1.625, 0.0, 0.0228],
-            "max": [1.625, 3.1959, 1.2435]
+            "min": [
+              -1.625,
+              0.0,
+              0.0228
+            ],
+            "max": [
+              1.625,
+              3.1959,
+              1.2435
+            ]
           },
           "pbrAtlas": {
             "resolution": 512,
-            "maps": ["basecolor", "normal", "ORM"],
+            "maps": [
+              "basecolor",
+              "normal",
+              "ORM"
+            ],
             "occlusion": "R=1 (unbaked); roughness in G; metallic in B"
           },
           "level": 1,
           "file": "heritage-shop-bay.lod1.glb",
-          "bytes": 424572
+          "bytes": 559020,
+          "sha256": "63b03dc729d1bac065ce1c4fa786fedb907f95773820fa6752ff473e3aab56ac"
         }
       ],
       "anchors": {
-        "ground": [0, 0, 0],
-        "streetFacing": [0, 0, 1],
-        "entry": [-0.875, 0, 0.01]
+        "ground": [
+          0,
+          0,
+          0
+        ],
+        "streetFacing": [
+          0,
+          0,
+          1
+        ],
+        "entry": [
+          -0.875,
+          0,
+          0.01
+        ]
       }
     },
     {
@@ -96,47 +140,80 @@
           "triangles": 6260,
           "materials": 3,
           "bounds": {
-            "min": [-1.6, 0.0, 0.0255],
-            "max": [1.6, 3.2, 1.7285]
+            "min": [
+              -1.6,
+              0.0,
+              0.0255
+            ],
+            "max": [
+              1.6,
+              3.2,
+              1.7285
+            ]
           },
           "pbrAtlas": {
             "resolution": 1024,
-            "maps": ["basecolor", "normal", "ORM"],
+            "maps": [
+              "basecolor",
+              "normal",
+              "ORM"
+            ],
             "occlusion": "R=1 (unbaked); roughness in G; metallic in B"
           },
           "level": 0,
           "file": "modern-lobby-bay.lod0.glb",
-          "bytes": 1661616
+          "bytes": 1873464,
+          "sha256": "756fc1912f199ad4d8a3d7f124b1819c5923754392f9bfc8aee27a9bfddde164"
         },
         {
           "vertices": 356,
           "triangles": 556,
           "materials": 3,
           "bounds": {
-            "min": [-1.6, 0.0, 0.0255],
-            "max": [1.6, 3.2, 1.7285]
+            "min": [
+              -1.6,
+              0.0,
+              0.0255
+            ],
+            "max": [
+              1.6,
+              3.2,
+              1.7285
+            ]
           },
           "pbrAtlas": {
             "resolution": 512,
-            "maps": ["basecolor", "normal", "ORM"],
+            "maps": [
+              "basecolor",
+              "normal",
+              "ORM"
+            ],
             "occlusion": "R=1 (unbaked); roughness in G; metallic in B"
           },
           "level": 1,
           "file": "modern-lobby-bay.lod1.glb",
-          "bytes": 353960
+          "bytes": 418300,
+          "sha256": "e808ce8665581bf55c915867b840483e39cf27b389ba505b5c83d3cdaab54f3e"
         }
       ],
       "anchors": {
-        "ground": [0, 0, 0],
-        "streetFacing": [0, 0, 1],
-        "entry": [0, 0, 0.01]
+        "ground": [
+          0,
+          0,
+          0
+        ],
+        "streetFacing": [
+          0,
+          0,
+          1
+        ],
+        "entry": [
+          0,
+          0,
+          0.01
+        ]
       }
     }
   ],
-  "interface": {
-    "maximumHeightM": 3.2,
-    "minimumEntryClearanceM": 2.3,
-    "reliefBackMinM": 0.0228,
-    "foundationDatumNote": "Pavement is generally terrain + 1.18 m, shared facade foundation terrain - 0.4 m. Placement uses actual sidewalk samples and first upper pane clearance; do not scale modules to force a fit."
-  }
+  "sharedMaterialCatalog": "tools/assets/city-materials/catalog.json"
 }

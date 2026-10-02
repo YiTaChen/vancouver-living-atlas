@@ -1,0 +1,165 @@
+{
+  "version": 1,
+  "license": "LicenseRef-Vancouver-Living-Atlas-NC-1.0",
+  "atlas": {
+    "width": 1024,
+    "height": 512,
+    "columns": 4,
+    "rows": 2,
+    "slotSize": 256,
+    "padding": 8
+  },
+  "materials": [
+    {
+      "id": "heritage-brick",
+      "tileMeters": [
+        1.728,
+        1.728
+      ],
+      "roughness": 0.84,
+      "metalness": 0,
+      "averageColor": [
+        0.536283,
+        0.363903,
+        0.278636
+      ],
+      "reliefMeters": 0.003,
+      "pattern": "brick"
+    },
+    {
+      "id": "sandstone",
+      "tileMeters": [
+        1.2,
+        1.2
+      ],
+      "roughness": 0.79,
+      "metalness": 0,
+      "averageColor": [
+        0.646236,
+        0.596414,
+        0.496772
+      ],
+      "reliefMeters": 0.0005,
+      "pattern": "stone"
+    },
+    {
+      "id": "concrete",
+      "tileMeters": [
+        1.5,
+        1.5
+      ],
+      "roughness": 0.87,
+      "metalness": 0,
+      "averageColor": [
+        0.569376,
+        0.579384,
+        0.549359
+      ],
+      "reliefMeters": 0.0007,
+      "pattern": "concrete"
+    },
+    {
+      "id": "cedar",
+      "tileMeters": [
+        1.52,
+        1.52
+      ],
+      "roughness": 0.77,
+      "metalness": 0,
+      "averageColor": [
+        0.559034,
+        0.549052,
+        0.469189
+      ],
+      "reliefMeters": 0.002,
+      "pattern": "cladding"
+    },
+    {
+      "id": "roof-shingle",
+      "tileMeters": [
+        1.8,
+        1.92
+      ],
+      "roughness": 0.92,
+      "metalness": 0,
+      "averageColor": [
+        0.277377,
+        0.297218,
+        0.297218
+      ],
+      "reliefMeters": 0.002,
+      "pattern": "shingle"
+    },
+    {
+      "id": "street-brick",
+      "tileMeters": [
+        1.92,
+        1.92
+      ],
+      "roughness": 0.91,
+      "metalness": 0,
+      "averageColor": [
+        0.453722,
+        0.312566,
+        0.236324
+      ],
+      "reliefMeters": 0.003,
+      "pattern": "paver"
+    },
+    {
+      "id": "painted-metal",
+      "tileMeters": [
+        0.8,
+        0.8
+      ],
+      "roughness": 0.39,
+      "metalness": 0.12,
+      "averageColor": [
+        0.280282,
+        0.330333,
+        0.310312
+      ],
+      "reliefMeters": 0.00012,
+      "pattern": "paint"
+    },
+    {
+      "id": "asphalt",
+      "tileMeters": [
+        3,
+        3
+      ],
+      "roughness": 0.93,
+      "metalness": 0,
+      "averageColor": [
+        0.259805,
+        0.279812,
+        0.279812
+      ],
+      "reliefMeters": 0.001,
+      "pattern": "aggregate"
+    }
+  ],
+  "maps": {
+    "color": "color.png",
+    "normal": "normal.png",
+    "orm": "orm.png"
+  },
+  "normalConvention": "OpenGL +Y tangent",
+  "uvConvention": "metres; atlas row zero is lower UV row",
+  "authoring": "Blender 4.5 material library; original periodic mathematical surfaces, no baked illumination",
+  "source": "tools/assets/city-materials/source/city-material-library.blend",
+  "files": {
+    "color": {
+      "bytes": 475586,
+      "sha256": "82e6b67cd2de6ba798a1fb93b53720983d8d6132858eefa661e88f2159a07c78"
+    },
+    "normal": {
+      "bytes": 199341,
+      "sha256": "37300a5b124a642fec3b8661aecf91bbe91662c15bc53ce5c8754d9ae65c9a7c"
+    },
+    "orm": {
+      "bytes": 158578,
+      "sha256": "339db0daeab8081f725ee02ec9bf9d6fcecb480b64abf01dedd7f1a06bbee1ce"
+    }
+  }
+}

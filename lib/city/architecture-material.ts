@@ -1,11 +1,25 @@
 import type * as THREE from 'three';
+import { sampleAtmosphere } from './atmosphere';
 
 type Shader = Parameters<THREE.MeshStandardMaterial['onBeforeCompile']>[0];
 
-/** Original analytic architectural surfacing, layered on the shared metre-based
- * pane mask. No image download, extra material or additional city draw call.
+/** Original architectural weathering and glazing, layered on the shared PBR
+ * surface and metre-based pane mask. No additional city draw call.
  * Interior parallax is an appearance approximation, not traversable rooms. */
-export function installArchitectureSurface(shader: Shader) {
+export function installArchitectureSurface(
+  shader: Shader,
+  atmosphere?: {
+    skyHorizon?: THREE.IUniform<THREE.Color>;
+    skyZenith?: THREE.IUniform<THREE.Color>;
+  },
+) {
+  const fallback = sampleAtmosphere(14);
+  shader.uniforms.uAtlasSkyHorizon = atmosphere?.skyHorizon ?? {
+    value: fallback.horizon,
+  };
+  shader.uniforms.uAtlasSkyZenith = atmosphere?.skyZenith ?? {
+    value: fallback.zenith,
+  };
   shader.vertexShader =
     `varying vec3 vArchitectureWorld;
 varying vec3 vArchitectureNormal;\n` + shader.vertexShader;
@@ -17,7 +31,8 @@ varying vec3 vArchitectureNormal;\n` + shader.vertexShader;
   `,
   );
   shader.fragmentShader =
-    `varying vec3 vArchitectureWorld;
+    `uniform vec3 uAtlasSkyHorizon, uAtlasSkyZenith;
+varying vec3 vArchitectureWorld;
 varying vec3 vArchitectureNormal;
 float architectureHash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
 float architectureNoise(vec2 p){
@@ -54,7 +69,7 @@ float architectureNoise(vec2 p){
       *(1.0-smoothstep(.30,.35,room.y))*step(.11,room.y);
     roomColor*=1.0-furnishing*.42;
     float fresnel=pow(1.0-min(1.0,facing),3.0);
-    vec3 skyTint=mix(vec3(.09,.145,.16),vec3(.29,.39,.41),smoothstep(.04,.95,paneUV.y));
+    vec3 skyTint=mix(uAtlasSkyHorizon*.28,uAtlasSkyZenith*.65,smoothstep(.04,.95,paneUV.y));
     vec3 enrichedGlass=mix(roomColor,skyTint,.36+fresnel*.43);
     enrichedGlass*=.85+roomSeed*.28;
     float reveal=smoothstep(.0,.075,paneUV.x)*smoothstep(.0,.065,1.0-paneUV.y);
@@ -74,9 +89,8 @@ float architectureNoise(vec2 p){
       enrichedWall*=1.0-panelSeam*.13;
     }
     if(facadeStyle==5){
-      float course=fract(vFacade.y/.19), courseAA=max(fwidth(vFacade.y/.19),.006);
-      float lap=1.0-smoothstep(.0,.065+courseAA,min(course,1.0-course));
-      enrichedWall*=1.0-lap*.105*(1.0-smoothstep(.35,1.2,courseAA));
+      // The Blender-authored cedar tile already contains the lap courses.
+      // Keep only the window trim here to avoid two overlapping cladding grids.
       float trim=(1.0-smoothstep(.015,.025+aa.x,abs(grid.x-bounds.x)))+(1.0-smoothstep(.015,.025+aa.x,abs(grid.x-bounds.y)));
       float trimHeight=smoothstep(bounds.z-aa.y,bounds.z+aa.y,grid.y)*(1.0-smoothstep(bounds.w-aa.y,bounds.w+aa.y,grid.y))*valid;
       enrichedWall=mix(enrichedWall,vec3(.63,.65,.61),min(1.0,trim)*trimHeight*.24);
@@ -93,28 +107,20 @@ float architectureNoise(vec2 p){
     }
   `,
   );
-  // Roof UVs intentionally retain the old negative sentinel. World coordinates
-  // add mineral grain, membrane bays and subdued material variation at any scale.
+  // Roof UVs retain their existing negative sentinel and authored metre frame.
+  // Pitched roofs use the shared shingle tile; flat roofs use asphalt/membrane.
   const roof = `
     if(vFacade.x<0.0){
-      // aLayout is a roof frame on negative-UV triangles, shared by both slopes.
-      vec2 roofUv=vec2(dot(vArchitectureWorld.xz,vLayout.xy),dot(vArchitectureWorld.xz,vec2(-vLayout.y,vLayout.x)))-vLayout.zw;
+      vec2 roofUv=cityMetres;
       float roofSeed=architectureHash(vec2(vFacade.w,18.0));
-      float roofNoise=architectureNoise(roofUv*.9)+architectureNoise(roofUv*.13)*.65;
-      vec3 roofBase=mix(vec3(.145,.175,.174),vec3(.285,.275,.239),roofSeed);
-      vec2 roofGrid=fract(roofUv/3.8+roofSeed);
-      vec2 roofAA=max(fwidth(roofUv/3.8),vec2(.002));
-      float roofJoint=1.0-smoothstep(.0,.014+roofAA.x,min(roofGrid.x,1.0-roofGrid.x));
-      roofJoint=max(roofJoint,1.0-smoothstep(.0,.014+roofAA.y,min(roofGrid.y,1.0-roofGrid.y)));
-      diffuseColor.rgb=roofBase*(.87+roofNoise*.14)*(1.0-roofJoint*.11);
-      if(vFacade.y< -1.5){
-        vec2 shingle=fract(vec2(roofUv.x/.45+step(.5,fract(roofUv.y/.48))*.5,roofUv.y/.24));
-        vec2 shingleAA=max(fwidth(vec2(roofUv.x/.45,roofUv.y/.24)),vec2(.006));
-        float line=(1.0-smoothstep(.0,.025+shingleAA.y,min(shingle.y,1.0-shingle.y)));
-        line=max(line,(1.0-smoothstep(.0,.025+shingleAA.x,min(shingle.x,1.0-shingle.x)))*.45);
-        vec3 slate=mix(vec3(.10,.135,.145),vec3(.22,.215,.20),roofSeed);
-        float shingleDetail=1.0-smoothstep(.35,1.5,max(shingleAA.x,shingleAA.y));
-        diffuseColor.rgb=slate*(.9+roofNoise*.12)*(1.0-line*.14*shingleDetail);
+      float roofWeather=architectureNoise(roofUv*.13);
+      diffuseColor.rgb=cityFinish.color*(.93+roofWeather*.1)*(0.94+roofSeed*.12);
+      if(vFacade.y>= -1.5){
+        vec2 roofGrid=fract(roofUv/3.8+roofSeed);
+        vec2 roofAA=max(fwidth(roofUv/3.8),vec2(.002));
+        float roofJoint=1.0-smoothstep(.0,.014+roofAA.x,min(roofGrid.x,1.0-roofGrid.x));
+        roofJoint=max(roofJoint,1.0-smoothstep(.0,.014+roofAA.y,min(roofGrid.y,1.0-roofGrid.y)));
+        diffuseColor.rgb*=1.0-roofJoint*.08;
       }
     }
   `;
@@ -123,8 +129,8 @@ float architectureNoise(vec2 p){
     `${roof}\n#include <roughnessmap_fragment>`,
   );
   shader.fragmentShader = shader.fragmentShader.replace(
-    'roughnessFactor=vFacade.x>=0.0?mix(pattern.z,pattern.w,facadePane):.86;',
-    `roughnessFactor=vFacade.x>=0.0?mix(pattern.z,pattern.w,facadePane):.91;
-    roughnessFactor=clamp(roughnessFactor+(architectureNoise(vArchitectureWorld.xz*.3)-.5)*.09*(1.0-facadePane),.17,.96);`,
+    'roughnessFactor=mix(cityFinish.roughness,pattern.w,facadePane);',
+    `roughnessFactor=mix(cityFinish.roughness,pattern.w,facadePane);
+    roughnessFactor=clamp(roughnessFactor+(architectureNoise(vArchitectureWorld.xz*.3)-.5)*.045*(1.0-facadePane),.17,.97);`,
   );
 }

@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "license": "LicenseRef-Vancouver-Living-Atlas-NC-1.0",
+  "atlas": { "width": 1024, "height": 512, "columns": 4, "rows": 2, "slotSize": 256, "padding": 8 },
+  "materials": [
+    {"id":"heritage-brick","tileMeters":[1.728,1.728],"roughness":0.84,"metalness":0,"averageColor":[0.55,0.36,0.27],"reliefMeters":0.003,"pattern":"brick"},
+    {"id":"sandstone","tileMeters":[1.2,1.2],"roughness":0.79,"metalness":0,"averageColor":[0.65,0.60,0.50],"reliefMeters":0.0005,"pattern":"stone"},
+    {"id":"concrete","tileMeters":[1.5,1.5],"roughness":0.87,"metalness":0,"averageColor":[0.57,0.58,0.55],"reliefMeters":0.0007,"pattern":"concrete"},
+    {"id":"cedar","tileMeters":[1.52,1.52],"roughness":0.77,"metalness":0,"averageColor":[0.56,0.55,0.47],"reliefMeters":0.002,"pattern":"cladding"},
+    {"id":"roof-shingle","tileMeters":[1.8,1.92],"roughness":0.92,"metalness":0,"averageColor":[0.28,0.30,0.30],"reliefMeters":0.002,"pattern":"shingle"},
+    {"id":"street-brick","tileMeters":[1.92,1.92],"roughness":0.91,"metalness":0,"averageColor":[0.47,0.32,0.24],"reliefMeters":0.003,"pattern":"paver"},
+    {"id":"painted-metal","tileMeters":[0.8,0.8],"roughness":0.39,"metalness":0.12,"averageColor":[0.28,0.33,0.31],"reliefMeters":0.00012,"pattern":"paint"},
+    {"id":"asphalt","tileMeters":[3,3],"roughness":0.93,"metalness":0,"averageColor":[0.26,0.28,0.28],"reliefMeters":0.001,"pattern":"aggregate"}
+  ]
+}

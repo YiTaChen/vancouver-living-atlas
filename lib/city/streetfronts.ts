@@ -1,4 +1,6 @@
 import * as THREE from 'three';
+import { getCityMaterialLibrary } from './material-library';
+import { cityReliefMaterial } from './city-surface-material';
 import { replacedBuilding } from './replaced-buildings';
 import type { CityEngine } from './engine';
 import {
@@ -15,6 +17,7 @@ import {
 } from './shopfront-identity';
 import { project, rings, hash, inPolygon } from './geo';
 import { GroundSurfaceIndex } from './ground-surface';
+import { heritageFrontage, type HeritageOpening } from './heritage-frontage';
 import {
   fitBays,
   fitEntrance,
@@ -38,7 +41,14 @@ export function createStreetfronts(e: CityEngine, loader?: StreetBayLoader) {
   const hiddenMatrix = new THREE.Matrix4().makeScale(0, 0, 0);
   const batches = new Map<
     string,
-    { color: number; instances: { values: number[]; source?: Fallback }[] }
+    {
+      instances: {
+        values: number[];
+        color: number;
+        surface: number;
+        source?: Fallback;
+      }[];
+    }
   >();
   const box = (
     w: number,
@@ -49,11 +59,16 @@ export function createStreetfronts(e: CityEngine, loader?: StreetBayLoader) {
     z: number,
     yaw: number,
     color: number,
+    surface = 1,
   ) => {
-    const key = color + ':' + Math.floor(x / 180) + ':' + Math.floor(z / 180);
-    if (!batches.has(key)) batches.set(key, { color, instances: [] });
+    // All opaque relief has the same surface response. Per-instance colors
+    // retain each finish without one draw per finish in every spatial cell.
+    const key = streetBayCell(x, z);
+    if (!batches.has(key)) batches.set(key, { instances: [] });
     batches.get(key)!.instances.push({
       values: [w, h, d, x, y, z, yaw],
+      color,
+      surface,
       source: activeSource,
     });
   };
@@ -123,6 +138,7 @@ export function createStreetfronts(e: CityEngine, loader?: StreetBayLoader) {
           yaw = Math.atan2(nx, nz);
         // Physical surrounds use the same pane boundaries as the body shader.
         const grid = fitBays(profile, len);
+        const acceptedOpenings: HeritageOpening[] = [];
         for (let bay = 0; bay < grid.count; bay++)
           for (const row of windowRows(profile, extent)) {
             const pane = windowBounds(profile, grid, bay, row),
@@ -185,6 +201,7 @@ export function createStreetfronts(e: CityEngine, loader?: StreetBayLoader) {
           }) as [number | null, number | null, number | null];
           const entry = fitEntrance(profile, extent, ground, jambs);
           if (!entry) continue;
+          acceptedOpenings.push({ center: u, threshold: entry.thresholdY });
           const threshold = streetBayThreshold(
             profile,
             extent.heightM,
@@ -227,6 +244,7 @@ export function createStreetfronts(e: CityEngine, loader?: StreetBayLoader) {
             z + nz * 0.15,
             yaw,
             0x243b40,
+            -1,
           );
           for (const t of [-2.45, 0, 2.45])
             box(
@@ -238,6 +256,7 @@ export function createStreetfronts(e: CityEngine, loader?: StreetBayLoader) {
               z + dz * t + nz * 0.28,
               yaw,
               0x31433f,
+              6,
             );
           box(
             4.95,
@@ -259,6 +278,7 @@ export function createStreetfronts(e: CityEngine, loader?: StreetBayLoader) {
             z + nz * 0.6,
             yaw,
             side,
+            6,
           );
           box(
             5.25,
@@ -269,6 +289,7 @@ export function createStreetfronts(e: CityEngine, loader?: StreetBayLoader) {
             z + nz * 1.2,
             yaw,
             side,
+            6,
           );
           const signKey = streetBayCell(x, z);
           if (!signBatches.has(signKey)) signBatches.set(signKey, []);
@@ -289,14 +310,12 @@ export function createStreetfronts(e: CityEngine, loader?: StreetBayLoader) {
             );
             sign.scale.set(width, height, 1);
             sign.updateMatrix();
-            signBatches
-              .get(signKey)!
-              .push({
-                matrix: sign.matrix.clone(),
-                source: activeSource,
-                identity,
-                role,
-              });
+            signBatches.get(signKey)!.push({
+              matrix: sign.matrix.clone(),
+              source: activeSource,
+              identity,
+              role,
+            });
           };
           panel('fascia', 0, entry.headY - 0.1, 1.271, 3.9, 0.29);
           // Painted display/backing replaces the flat fallback glazing only;
@@ -304,35 +323,118 @@ export function createStreetfronts(e: CityEngine, loader?: StreetBayLoader) {
           panel('display', -1.23, middle, 0.245, 2.18, entry.heightM - 0.18);
           panel('notice', 1.23, middle, 0.245, 2.18, entry.heightM - 0.18);
         }
+        // These finishes belong to the parent facade and survive the bay's
+        // fallback/GLB switch. Pavement validation forbids dressing party walls
+        // or inventing a sill/step across a missing or steep sidewalk segment.
+        activeSource = undefined;
+        const relief = heritageFrontage(
+          len,
+          ground,
+          profile,
+          extent,
+          acceptedOpenings,
+          (u) => {
+            const px = a[0] + dx * u + nx * 0.3,
+              pz = a[1] + dz * u + nz * 0.3;
+            if (e.waterWorld.solidAt(px, pz)) return null;
+            return sidewalks.sample(px, pz, e.elevation(px, pz) + 1.18) ?? null;
+          },
+        );
+        for (const part of relief)
+          box(
+            part.width,
+            part.height,
+            part.depth,
+            a[0] + dx * part.u + nx * part.offset,
+            part.y,
+            a[1] + dz * part.u + nz * part.offset,
+            yaw,
+            part.color,
+          );
+        // Slender timber sashes turn the large flat upper panes into readable
+        // human-scale windows. Existing stone surrounds stay in the same place.
+        if (acceptedOpenings.length)
+          for (let bay = 0; bay < grid.count; bay++)
+            for (const row of windowRows(profile, extent)) {
+              const pane = windowBounds(profile, grid, bay, row),
+                u = (pane.left + pane.right) / 2,
+                x = a[0] + dx * u + nx * 0.046,
+                z = a[1] + dz * u + nz * 0.046,
+                color = profile.seed % 2 ? 0x605e50 : 0x71715d;
+              box(
+                0.045,
+                pane.top - pane.bottom,
+                0.07,
+                x,
+                ground + (pane.bottom + pane.top) / 2,
+                z,
+                yaw,
+                color,
+                6,
+              );
+              box(
+                pane.right - pane.left,
+                0.065,
+                0.07,
+                x,
+                ground + pane.bottom + (pane.top - pane.bottom) * 0.56,
+                z,
+                yaw,
+                color,
+                6,
+              );
+            }
       }
     }
   }
-  const detailGeometry = new THREE.BoxGeometry(1, 1, 1),
+  const detailGeometry = batches.size
+      ? new THREE.BoxGeometry(1, 1, 1)
+      : undefined,
     detailTransform = new THREE.Object3D();
-  const materials = new Map<number, THREE.MeshStandardMaterial>();
-  for (const { color, instances } of batches.values()) {
-    if (!materials.has(color))
-      materials.set(
-        color,
-        new THREE.MeshStandardMaterial({ color, roughness: 0.84 }),
-      );
+  const detailMaterial = batches.size
+    ? cityReliefMaterial(getCityMaterialLibrary(e))
+    : undefined;
+  const detailColor = new THREE.Color();
+  for (const { instances } of batches.values()) {
+    const geometry = detailGeometry!.clone();
+    geometry.setAttribute(
+      'aReliefSurface',
+      new THREE.InstancedBufferAttribute(
+        new Float32Array(instances.map((instance) => instance.surface)),
+        1,
+      ),
+    );
+    geometry.setAttribute(
+      'aReliefSize',
+      new THREE.InstancedBufferAttribute(
+        new Float32Array(
+          instances.flatMap((instance) => instance.values.slice(0, 3)),
+        ),
+        3,
+      ),
+    );
     const mesh = new THREE.InstancedMesh(
-      detailGeometry,
-      materials.get(color)!,
+      geometry,
+      detailMaterial!,
       instances.length,
     );
-    instances.forEach(({ values: [w, h, d, x, y, z, yaw], source }, i) => {
-      detailTransform.position.set(x, y, z);
-      detailTransform.scale.set(w, h, d);
-      detailTransform.rotation.set(0, yaw, 0);
-      detailTransform.updateMatrix();
-      mesh.setMatrixAt(i, detailTransform.matrix);
-      source?.handles.push({
-        mesh,
-        index: i,
-        matrix: detailTransform.matrix.clone(),
-      });
-    });
+    mesh.name = 'Gastown heritage facade relief';
+    mesh.userData.heritageRelief = true;
+    instances.forEach(
+      ({ values: [w, h, d, x, y, z, yaw], color, source }, i) => {
+        detailTransform.position.set(x, y, z);
+        detailTransform.scale.set(w, h, d);
+        detailTransform.rotation.set(0, yaw, 0);
+        detailTransform.updateMatrix();
+        mesh.setMatrixAt(i, detailTransform.matrix);
+        mesh.setColorAt(i, detailColor.setHex(color));
+        source?.handles.push({
+          mesh,
+          index: i,
+          matrix: detailTransform.matrix.clone(),
+        });
+      },
+    );
     mesh.castShadow = true;
     mesh.receiveShadow = true;
     mesh.computeBoundingSphere();
@@ -343,6 +445,7 @@ export function createStreetfronts(e: CityEngine, loader?: StreetBayLoader) {
     lod.addLevel(new THREE.Group(), 900);
     e.landmarks.add(lod);
   }
+  detailGeometry?.dispose();
   for (const instances of signBatches.values()) {
     const mesh = createShopPanelBatch(instances, identityMaterial);
     instances.forEach(({ matrix, source }, index) => {

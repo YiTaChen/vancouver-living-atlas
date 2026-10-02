@@ -4,6 +4,14 @@ Original reusable near-street assets created for Vancouver Living Atlas. They ex
 
 ## Generate
 
+For the shared city material workflow and independently editable per-LOD Blender
+sources, use [the city PBR library](../city-materials/README.md). The shipped v3
+bays are saved before baking under `source/heritage-shop-bay.lod{0,1}.blend` and
+`source/modern-lobby-bay.lod{0,1}.blend`. `--from-source DIRECTORY` re-exports
+those edited sources without regenerating their shape or UVs. The shared catalog
+controls physical texture scale; bay UVs are reprojected after the compact shape
+is finalized. Glass remains a separate PBR material.
+
 Requires Blender 4.5 or newer (including its bundled NumPy). Paths are portable; no package installs or network requests occur.
 
 ```sh

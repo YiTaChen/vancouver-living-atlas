@@ -5,6 +5,10 @@ import { replacedBuilding } from './replaced-buildings';
 import { FacadeDetails } from './facade-details';
 import { installArchitectureSurface } from './architecture-material';
 import {
+  getCityMaterialLibrary,
+  installCityMaterialLibrary,
+} from './material-library';
+import {
   planPitchedRoof,
   pitchedRoofTriangles,
   roofFrame,
@@ -264,28 +268,15 @@ export function createBuildingBodies(e: CityEngine) {
           vertex(flat[i].x, ground + h, flat[i].y, 0, 1, 0, -1, -1, roofLayout);
     }
   }
-  const loader = new THREE.TextureLoader();
-  const texture = (name: string, color = false) => {
-    const t = loader.load(`/textures/${name}.png`);
-    t.wrapS = t.wrapT = THREE.RepeatWrapping;
-    t.colorSpace = color ? THREE.SRGBColorSpace : THREE.NoColorSpace;
-    t.anisotropy = 8;
-    e.extraTextures.add(t);
-    return t;
-  };
-  const brick = texture('brick-terracotta-albedo', true),
-    normalMap = texture('brick-terracotta-normal');
-  normalMap.repeat.setScalar(1 / 1.728);
+  const materialLibrary = getCityMaterialLibrary(e);
   const material = new THREE.MeshStandardMaterial({
     vertexColors: true,
-    normalMap,
     roughness: 0.8,
     metalness: 0.05,
     side: THREE.DoubleSide,
   });
   material.onBeforeCompile = (s) => {
     s.uniforms.uNight = e.uniforms.night;
-    s.uniforms.uBrick = { value: brick };
     s.uniforms.uPattern = {
       value: facadeTemplates.map(
         (p) =>
@@ -312,7 +303,7 @@ export function createBuildingBodies(e: CityEngine) {
       '#include <begin_vertex>\nvFacade=vec4(uv,aStyle,aSeed);vLayout=aLayout;vTop=aTop;vBaseWindow=aBaseWindow;',
     );
     s.fragmentShader =
-      `uniform sampler2D uBrick; uniform float uNight;
+      `uniform float uNight;
       uniform vec4 uPattern[${facadeTemplates.length}]; uniform vec4 uPaneBounds[${facadeTemplates.length}]; uniform float uBrickWeights[${facadeTemplates.length}];
       varying vec4 vFacade; varying vec4 vLayout; varying float vTop; varying vec2 vBaseWindow;\n` +
       s.fragmentShader;
@@ -322,6 +313,15 @@ export function createBuildingBodies(e: CityEngine) {
       float facadePane=0.0, facadeLit=0.0, facadeNormal=0.0;
       int facadeStyle=int(clamp(floor(vFacade.z+.5),0.0,${facadeTemplates.length - 1}.0));
       vec4 pattern=uPattern[facadeStyle], bounds=uPaneBounds[facadeStyle];
+      // Original metre-scale PBR surfaces share one atlas with street details.
+      // Keep the existing pane layout and geographic body; only surfacing changes.
+      float citySlot=facadeStyle==0?0.0:(facadeStyle==1?1.0:(facadeStyle==5?3.0:2.0));
+      vec2 cityMetres=vFacade.xy;
+      if(vFacade.x<0.0){
+        citySlot=vFacade.y< -1.5?4.0:7.0;
+        cityMetres=vec2(dot(vArchitectureWorld.xz,vLayout.xy),dot(vArchitectureWorld.xz,vec2(-vLayout.y,vLayout.x)))-vLayout.zw;
+      }
+      CitySurface cityFinish=citySurface(citySlot,cityMetres);
       if(vFacade.x>=0.0){
         vec2 cell=vec2((vFacade.x-vLayout.y)/vLayout.x,(vFacade.y-pattern.y)/pattern.x);
         vec2 grid=fract(cell), aa=max(fwidth(cell)*.8,vec2(.003));
@@ -341,8 +341,11 @@ export function createBuildingBodies(e: CityEngine) {
           facadePane*=1.0-step(abs(cellId.x-entryBay),.1)*step(abs(cellId.y),.1);
         }
         float variation=fract(sin(dot(cellId+vFacade.w,vec2(127.1,311.7)))*43758.5453);
-        vec3 wall=diffuseColor.rgb;
-        if(facadeStyle<2) wall*=mix(vec3(1.0),texture2D(uBrick,vFacade.xy/1.728).rgb*1.75,facadeStyle==0?.78:.18);
+        // Retain modest per-building palette variation without multiplying the
+        // baked basecolor by a second dark diffuse material.
+        vec3 facadeTint=diffuseColor.rgb/max(.001,max(diffuseColor.r,max(diffuseColor.g,diffuseColor.b)));
+        vec3 wall=cityFinish.color*mix(vec3(1.0),facadeTint,.18);
+        wall*=mix(.94,1.06,mod(vFacade.w,29.0)/28.0);
         float band=(1.0-smoothstep(.025,.055,grid.y))*step(pattern.y,vFacade.y);
         wall*=1.0-band*(facadeStyle==4?.13:.055);
         vec3 glass=mix(vec3(.075,.14,.165),vec3(.19,.29,.32),smoothstep(.1,.9,grid.y));
@@ -359,29 +362,27 @@ export function createBuildingBodies(e: CityEngine) {
     s.fragmentShader = s.fragmentShader.replace(
       '#include <roughnessmap_fragment>',
       `#include <roughnessmap_fragment>
-      roughnessFactor=vFacade.x>=0.0?mix(pattern.z,pattern.w,facadePane):.86;`,
+      roughnessFactor=mix(cityFinish.roughness,pattern.w,facadePane);`,
     );
     s.fragmentShader = s.fragmentShader.replace(
       '#include <metalnessmap_fragment>',
       `#include <metalnessmap_fragment>
-      metalnessFactor=mix(.035,.18,facadePane);`,
+      metalnessFactor=mix(cityFinish.metalness,.18,facadePane);`,
     );
     s.fragmentShader = s.fragmentShader.replace(
       '#include <normal_fragment_maps>',
       `
-      vec3 mapN=texture2D(normalMap,vNormalMapUv).xyz*2.0-1.0;
-      if(facadeNormal>.001){
-        mapN.xy*=facadeNormal;
-        normal=normalize(tbn*mapN);
-      }`,
+      normal=citySurfaceNormal(cityFinish,-vViewPosition,normal,.72*(1.0-facadePane));`,
     );
     s.fragmentShader = s.fragmentShader.replace(
       '#include <emissivemap_fragment>',
       `#include <emissivemap_fragment>
       totalEmissiveRadiance+=vec3(1.0,.66,.32)*facadeLit*.8;`,
     );
-    installArchitectureSurface(s);
+    installArchitectureSurface(s, e.uniforms);
+    installCityMaterialLibrary(s, materialLibrary);
   };
+  material.customProgramCacheKey = () => 'atlas-city-bodies-pbr-v1';
   const geometry = e.geometry(positions, normals, colors, uv);
   geometry.setAttribute('aStyle', new THREE.Float32BufferAttribute(styles, 1));
   geometry.setAttribute(
