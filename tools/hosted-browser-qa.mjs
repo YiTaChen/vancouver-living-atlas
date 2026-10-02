@@ -50,6 +50,141 @@ export const LAUNCH_OPTIONS = Object.freeze({
   ignoreDefaultArgs: REMOVED_DEFAULT_ARGS,
   timeout: 30_000,
 });
+export const RENDERER_PROFILES = Object.freeze({
+  default: Object.freeze({
+    args: Object.freeze([]),
+    environment: Object.freeze({}),
+  }),
+  mesa: Object.freeze({
+    args: ['--use-gl=angle', '--use-angle=gl'],
+    environment: { LIBGL_ALWAYS_SOFTWARE: 'true', GALLIUM_DRIVER: 'llvmpipe' },
+  }),
+});
+export function launchOptionsForProfile(
+  profile = 'default',
+  environment = process.env,
+) {
+  assert(
+    Object.hasOwn(RENDERER_PROFILES, profile),
+    'Unknown renderer profile; use default or mesa',
+  );
+  const selected = RENDERER_PROFILES[profile];
+  for (const key of [
+    'ANGLE_GL_VENDOR',
+    'ANGLE_GL_RENDERER',
+    'ANGLE_GL_VERSION',
+    'MESA_GL_VERSION_OVERRIDE',
+    'MESA_GLSL_VERSION_OVERRIDE',
+    'MESA_EXTENSION_OVERRIDE',
+    'MESA_NO_ERROR',
+    'MESA_LOADER_DRIVER_OVERRIDE',
+    'LIBGL_ALWAYS_INDIRECT',
+  ]) {
+    assert(
+      environment[key] === undefined,
+      `Graphics override is not allowed: ${key}`,
+    );
+  }
+  for (const key of ['LIBGL_ALWAYS_SOFTWARE', 'GALLIUM_DRIVER']) {
+    assert(
+      environment[key] === undefined ||
+        environment[key] === selected.environment[key],
+      `Graphics environment conflicts with selected profile: ${key}`,
+    );
+  }
+  return {
+    ...LAUNCH_OPTIONS,
+    args: [...LAUNCH_OPTIONS.args, ...selected.args],
+    env: { ...environment, ...selected.environment },
+  };
+}
+export function assertProfileRenderer(profile, renderer) {
+  assert(Object.hasOwn(RENDERER_PROFILES, profile), 'Unknown renderer profile');
+  if (profile === 'mesa')
+    assert(
+      /llvmpipe/i.test(renderer),
+      'Mesa profile did not report an actual llvmpipe renderer',
+    );
+}
+export function assertProfileCapability(profile, capability) {
+  assert(Object.hasOwn(RENDERER_PROFILES, profile), 'Unknown renderer profile');
+  assert(
+    capability?.available &&
+      capability.probePassed &&
+      capability.contextLost === false,
+    'Real WebGL2 clear/readback capability is unavailable',
+  );
+  assertProfileRenderer(profile, capability.renderer);
+}
+export function preflightEvidence(profile, details = {}) {
+  assert(Object.hasOwn(RENDERER_PROFILES, profile), 'Unknown renderer profile');
+  const small = (value) => boundedText(value ?? '').slice(0, 256);
+  const gpu = details.gpu ?? {};
+  const capability = details.capability;
+  const evidence = {
+    kind: 'hosted-browser-preflight-v1',
+    profile,
+    browser: small(details.browser),
+    executable: small(details.launchArgs?.[0]),
+    sandboxRequested: true,
+    graphicsBlocklistBypassed: details.launchArgs
+      ? details.launchArgs.some((arg) =>
+          /^--ignore-gpu-blocklist(?:=|$)/.test(arg),
+        )
+      : null,
+    gpuWatchdogDisabled: details.launchArgs
+      ? details.launchArgs.some((arg) =>
+          /^--disable-gpu-watchdog(?:=|$)/.test(arg),
+        )
+      : null,
+    requestedArguments: [
+      ...LAUNCH_OPTIONS.args,
+      ...RENDERER_PROFILES[profile].args,
+    ],
+    graphicsEnvironment: RENDERER_PROFILES[profile].environment,
+    effectiveArguments: (details.launchArgs ?? []).slice(0, 64).map(small),
+    effectiveArgumentsTruncated:
+      (details.launchArgs?.length ?? 0) > 64 ||
+      (details.launchArgs ?? []).some((arg) => String(arg).length > 256),
+    gpu: {
+      devices: (gpu.devices ?? []).slice(0, 4).map((device) => ({
+        vendor: small(device.vendorString),
+        device: small(device.deviceString),
+        driverVersion: small(device.driverVersion),
+      })),
+      glRenderer: small(gpu.auxAttributes?.glRenderer),
+      glVendor: small(gpu.auxAttributes?.glVendor),
+      glVersion: small(gpu.auxAttributes?.glVersion),
+      featureStatus: Object.fromEntries(
+        Object.entries(gpu.featureStatus ?? {})
+          .slice(0, 24)
+          .map(([key, value]) => [
+            small(key).slice(0, 64),
+            small(value).slice(0, 64),
+          ]),
+      ),
+    },
+    capability: capability
+      ? {
+          available: capability.available === true,
+          contextLost: capability.contextLost ?? null,
+          probePassed: capability.probePassed === true,
+          renderer: small(capability.renderer),
+          version: small(capability.version),
+          reason: small(capability.reason),
+          drawingBuffer: capability.drawingBuffer,
+          probePixel: capability.probePixel,
+        }
+      : null,
+    error: small(details.error),
+    hardwareAcceptance: false,
+  };
+  assert(
+    Buffer.byteLength(JSON.stringify(evidence)) <= 24_000,
+    'Preflight diagnostic exceeds 24 KB cap',
+  );
+  return evidence;
+}
 export const ABBA = ['baseline-a', 'candidate-a', 'candidate-b', 'baseline-b'];
 const ORIGIN = 'http://127.0.0.1:3100';
 const OUTPUT = resolve('work/visual-qa/hosted-browser');
@@ -87,7 +222,7 @@ export function queryString(value = '') {
 }
 export function assertSafeLaunch(args) {
   const forbidden =
-    /^(--no-sandbox|--disable-setuid-sandbox|--disable-gpu-sandbox|--disable-seccomp-filter-sandbox|--disable-namespace-sandbox|--single-process|--disable-web-security|--ignore-certificate-errors|--enable-unsafe-swiftshader)(=|$)/;
+    /^(--no-sandbox|--disable-setuid-sandbox|--disable-gpu-sandbox|--disable-seccomp-filter-sandbox|--disable-namespace-sandbox|--single-process|--ignore-gpu-blocklist|--disable-gpu-watchdog|--disable-web-security|--ignore-certificate-errors|--enable-unsafe-swiftshader)(=|$)/;
   assert(
     !args.some(
       (arg) =>
@@ -218,6 +353,7 @@ export async function artifactWriter(root) {
     );
     await writeFile(join(root, name), body);
     sizes.set(name, body.length);
+    return name;
   };
 }
 export async function startServer(root, onCapture = null, port = 3100) {
@@ -290,7 +426,7 @@ async function inspectWebGL(page, selector = null) {
     if (!gl)
       return {
         available: false,
-        reason: 'WebGL2 unavailable without renderer overrides',
+        reason: 'WebGL2 unavailable under the selected renderer profile',
       };
     const extension = gl.getExtension('WEBGL_debug_renderer_info');
     const renderer = extension
@@ -319,7 +455,7 @@ async function inspectWebGL(page, selector = null) {
     return result;
   }, selector);
 }
-async function openCity(browser, query) {
+async function openCity(browser, query, profile = 'default') {
   const context = await browser.newContext({
     viewport: { width: 1920, height: 1080 },
     deviceScaleFactor: 1,
@@ -390,6 +526,7 @@ async function openCity(browser, query) {
       gl.available && !gl.contextLost && gl.drawingBuffer.every((n) => n > 0),
       'City WebGL context not ready',
     );
+    assertProfileRenderer(profile, gl.renderer);
     return { context, page, events, counts, gl };
   } catch (error) {
     await context.close();
@@ -431,11 +568,12 @@ async function logPreview(browser, bytes, name, save) {
       console.log('Preview omitted: 24 KB cap; use the run artifact.');
       return;
     }
-    await save(`${name}-preview.jpg`, jpeg);
+    const file = await save(`${name}-preview.jpg`, jpeg);
     console.log(
       'VLA_QA_PREVIEW ' +
         JSON.stringify({
           name,
+          file,
           mime: 'image/jpeg',
           width: 640,
           height: 360,
@@ -468,11 +606,11 @@ async function confirmCityReady(city) {
   );
   return gl;
 }
-async function runSmoke(browser, root, save, previews) {
+async function runSmoke(browser, root, save, previews, profile) {
   const server = await startServer(root);
   let city;
   try {
-    city = await openCity(browser, '');
+    city = await openCity(browser, '', profile);
     assert.equal(
       await city.page.locator('#visual-qa-panel').count(),
       0,
@@ -490,14 +628,15 @@ async function runSmoke(browser, root, save, previews) {
     assertSanity(city);
     const png = await city.page.screenshot({ type: 'png', fullPage: false });
     assert(png.length <= LIMITS.png, 'Smoke screenshot exceeds cap');
-    await save('production-smoke.png', png);
+    const screenshot = await save('production-smoke.png', png);
     const finalGL = await confirmCityReady(city);
+    assertProfileRenderer(profile, finalGL.renderer);
     assertSanity(city);
     const result = {
       gl: finalGL,
       counts: city.counts,
       events: city.events,
-      screenshot: 'production-smoke.png',
+      screenshot,
       qaControlsAbsent: true,
       productionControlsExercised: true,
     };
@@ -510,7 +649,7 @@ async function runSmoke(browser, root, save, previews) {
     await closeServer(server);
   }
 }
-async function runMatched(browser, roots, queries, save, previews) {
+async function runMatched(browser, roots, queries, save, previews, profile) {
   const runs = [],
     previewPNGs = [];
   for (const label of ABBA) {
@@ -541,7 +680,7 @@ async function runMatched(browser, roots, queries, save, previews) {
     });
     let city;
     try {
-      city = await openCity(browser, queries[variant]);
+      city = await openCity(browser, queries[variant], profile);
       await city.page.locator('#upgrade-qa-status').waitFor();
       await city.page
         .getByRole('button', { name: 'Upgrade matched high', exact: true })
@@ -640,8 +779,13 @@ export async function main(args = process.argv.slice(2)) {
     );
     return;
   }
+  const profile = process.env.QA_RENDERER_PROFILE ?? 'default';
+  const launchOptions = launchOptionsForProfile(profile);
+  const saveProfile = (name, ...args) => save(`${profile}-${name}`, ...args);
+  const diagnostic = {};
   const result = {
     mode,
+    rendererProfile: profile,
     status: 'running',
     node: process.version,
     platform: process.platform,
@@ -651,7 +795,18 @@ export async function main(args = process.argv.slice(2)) {
     limits: LIMITS,
     note: 'GitHub-hosted Linux/Xvfb only. Software rendering is identified below; this is not Radeon or phone acceptance, nor a GPU benchmark.',
   };
-  let browser;
+  let browser,
+    preflightEmitted = false;
+  const reportPreflight = async () => {
+    const preflight = preflightEvidence(profile, diagnostic);
+    await saveProfile(
+      mode + '-preflight.json',
+      JSON.stringify(preflight, null, 2) + '\n',
+      true,
+    );
+    console.log('VLA_QA_PREFLIGHT ' + JSON.stringify(preflight));
+    preflightEmitted = true;
+  };
   // A hard harness ceiling leaves time for bounded failure evidence/upload in the 25-minute job.
   const watchdog = setTimeout(
     () => {
@@ -686,24 +841,31 @@ export async function main(args = process.argv.slice(2)) {
       };
     }
     const { chromium } = await import('playwright');
-    browser = await chromium.launch(LAUNCH_OPTIONS);
+    browser = await chromium.launch(launchOptions);
     result.browser = browser.version();
+    diagnostic.browser = result.browser;
     const session = await browser.newBrowserCDPSession();
     const { arguments: launchArgs } = await session.send(
       'Browser.getBrowserCommandLine',
     );
+    diagnostic.launchArgs = launchArgs;
     assertSafeLaunch(launchArgs);
     result.unsafeLaunchFlagsAbsent = true;
     result.browserChannel = LAUNCH_OPTIONS.channel;
     result.browserExecutable = launchArgs[0];
+    try {
+      diagnostic.gpu = (await session.send('SystemInfo.getInfo')).gpu;
+    } catch (error) {
+      diagnostic.error =
+        'GPU diagnostics unavailable: ' + boundedText(error.message);
+    }
     await session.detach();
     const probe = await browser.newPage();
     result.capability = await inspectWebGL(probe);
     await probe.close();
-    assert(
-      result.capability.available && result.capability.probePassed,
-      JSON.stringify(result.capability),
-    );
+    diagnostic.capability = result.capability;
+    assertProfileCapability(profile, result.capability);
+    await reportPreflight();
     result.softwareRenderer =
       /swiftshader|llvmpipe|softpipe|software|lavapipe/i.test(
         result.capability.renderer,
@@ -713,8 +875,9 @@ export async function main(args = process.argv.slice(2)) {
         ? await runSmoke(
             browser,
             root,
-            save,
+            saveProfile,
             process.env.QA_LOG_PREVIEWS !== '0',
+            profile,
           )
         : await runMatched(
             browser,
@@ -723,28 +886,36 @@ export async function main(args = process.argv.slice(2)) {
               baseline: queryString(process.env.QA_BASELINE_QUERY),
               candidate: queryString(process.env.QA_CANDIDATE_QUERY),
             },
-            save,
+            saveProfile,
             process.env.QA_LOG_PREVIEWS !== '0',
+            profile,
           );
     result.status = 'passed';
   } catch (error) {
     result.status = 'failed';
     result.error = boundedText(error.message);
+    diagnostic.error = result.error;
     process.exitCode = 1;
   } finally {
     await browser?.close();
     clearTimeout(watchdog);
-    await save(mode + '.json', JSON.stringify(result, null, 2) + '\n', true);
+    if (!preflightEmitted) await reportPreflight();
+    await saveProfile(
+      mode + '.json',
+      JSON.stringify(result, null, 2) + '\n',
+      true,
+    );
     console.log(
       'VLA_QA_RESULT ' +
         JSON.stringify({
           mode,
+          rendererProfile: profile,
           status: result.status,
           browser: result.browser,
           renderer: result.capability?.renderer,
           softwareRenderer: result.softwareRenderer,
           error: result.error,
-          artifact: mode + '.json',
+          artifact: `${profile}-${mode}.json`,
         }),
     );
   }

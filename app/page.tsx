@@ -89,6 +89,7 @@ import {
   type MessageKey,
 } from '@/lib/i18n';
 import type { CityEngine } from '@/lib/city/engine';
+import { startupErrorMessageKey } from '@/lib/city/startup-error';
 import type { TravelView } from '@/lib/city/travel-camera';
 import {
   DEFAULT_MINIMAP_SPAN,
@@ -163,7 +164,9 @@ export default function Home() {
   }, []);
   const [loadProgress, setLoadProgress] = useState(0);
   const [ready, setReady] = useState(false),
-    [error, setError] = useState(''),
+    [error, setError] = useState<ReturnType<
+      typeof startupErrorMessageKey
+    > | null>(null),
     [view, setView] = useState('overview'),
     [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS),
     [panel, setPanel] = useState<'layers' | 'time' | null>(null),
@@ -219,7 +222,7 @@ export default function Home() {
   useEffect(() => {
     let stopped = false;
     setReady(false);
-    setError('');
+    setError(null);
     setLoadProgress(0);
     import('@/lib/city/engine')
       .then(({ CityEngine }) => {
@@ -241,7 +244,7 @@ export default function Home() {
             },
             (message) => {
               if (stopped) return;
-              setError(message);
+              setError(startupErrorMessageKey(message));
               setReady(false);
             },
             (percent) => {
@@ -250,11 +253,11 @@ export default function Home() {
             },
           );
         } catch (e) {
-          if (!stopped) setError(String(e));
+          if (!stopped) setError(startupErrorMessageKey(e));
         }
       })
       .catch((reason) => {
-        if (!stopped) setError(String(reason));
+        if (!stopped) setError(startupErrorMessageKey(reason));
       });
     return () => {
       stopped = true;
@@ -2047,13 +2050,7 @@ export default function Home() {
             <p>{error ? tr('loadFailed') : tr('loading')}</p>
             {error ? (
               <>
-                <p>
-                  {tr(
-                    error === 'graphics-context-lost'
-                      ? 'graphicsError'
-                      : 'loadErrorDetail',
-                  )}
-                </p>
+                <p>{tr(error)}</p>
                 <button onClick={() => location.reload()}>
                   {tr('reload')}
                 </button>

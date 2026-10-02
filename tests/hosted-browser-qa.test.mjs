@@ -19,6 +19,10 @@ import {
   sampleInterpretation,
   startServer,
   assertCityReadySnapshot,
+  launchOptionsForProfile,
+  assertProfileCapability,
+  assertProfileRenderer,
+  preflightEvidence,
 } from '../tools/hosted-browser-qa.mjs';
 
 function capture(id = 'citizen') {
@@ -288,4 +292,149 @@ test('post-control smoke readiness rejects lost contexts and reappearing loading
   );
   assert.throws(() => assertCityReadySnapshot(gl, 1, true));
   assert.throws(() => assertCityReadySnapshot(gl, 0, false));
+});
+
+test('renderer profiles are exact, explicit and do not weaken browser protections', () => {
+  const defaultOptions = launchOptionsForProfile('default', { DISPLAY: ':99' });
+  assert.deepEqual(defaultOptions.args, ['--enable-automation']);
+  assert.deepEqual(defaultOptions.env, { DISPLAY: ':99' });
+  const mesa = launchOptionsForProfile('mesa', { DISPLAY: ':99' });
+  assert.deepEqual(mesa.args, [
+    '--enable-automation',
+    '--use-gl=angle',
+    '--use-angle=gl',
+  ]);
+  assert.deepEqual(mesa.env, {
+    DISPLAY: ':99',
+    LIBGL_ALWAYS_SOFTWARE: 'true',
+    GALLIUM_DRIVER: 'llvmpipe',
+  });
+  assert.equal(mesa.chromiumSandbox, true);
+  assert.equal(mesa.ignoreDefaultArgs, REMOVED_DEFAULT_ARGS);
+  for (const bad of [
+    'swiftshader',
+    'vulkan',
+    'mesa --no-sandbox',
+    '',
+    '__proto__',
+  ])
+    assert.throws(() => launchOptionsForProfile(bad, {}));
+  for (const key of [
+    'ANGLE_GL_VENDOR',
+    'ANGLE_GL_RENDERER',
+    'ANGLE_GL_VERSION',
+    'MESA_GL_VERSION_OVERRIDE',
+    'MESA_GLSL_VERSION_OVERRIDE',
+    'MESA_EXTENSION_OVERRIDE',
+    'MESA_NO_ERROR',
+    'MESA_LOADER_DRIVER_OVERRIDE',
+    'LIBGL_ALWAYS_INDIRECT',
+  ]) {
+    assert.throws(() => launchOptionsForProfile('mesa', { [key]: 'fake' }));
+  }
+  assert.throws(() =>
+    launchOptionsForProfile('default', { GALLIUM_DRIVER: 'llvmpipe' }),
+  );
+  assert.throws(() =>
+    launchOptionsForProfile('mesa', { LIBGL_ALWAYS_SOFTWARE: 'false' }),
+  );
+  assert.throws(() => assertSafeLaunch(['--disable-gpu-watchdog']));
+  assert.throws(() => assertSafeLaunch(['--ignore-gpu-blocklist']));
+});
+test('Mesa must prove actual llvmpipe and readback before application evidence', () => {
+  const gl = {
+    available: true,
+    probePassed: true,
+    contextLost: false,
+    renderer: 'ANGLE (Mesa, llvmpipe (LLVM 18.1.8), OpenGL)',
+  };
+  assertProfileCapability('mesa', gl);
+  assertProfileRenderer('mesa', gl.renderer);
+  assert.throws(() =>
+    assertProfileCapability('mesa', { ...gl, available: false }),
+  );
+  assert.throws(() =>
+    assertProfileCapability('mesa', { ...gl, probePassed: false }),
+  );
+  assert.throws(() =>
+    assertProfileCapability('mesa', { ...gl, renderer: 'ANGLE SwiftShader' }),
+  );
+  assert.throws(() => assertProfileRenderer('mesa', 'WebGL 2.0'));
+});
+test('both pinned profiles have safe effective argv without launching any browser', async () => {
+  const require = createRequire(import.meta.url);
+  const { server } = require(
+    require
+      .resolve('playwright-core/package.json')
+      .replace(/package\.json$/, 'lib/coreBundle.js'),
+  );
+  const playwright = server.createPlaywright({ sdkLanguage: 'javascript' });
+  for (const profile of ['default', 'mesa']) {
+    const options = launchOptionsForProfile(profile, {});
+    const original = await playwright.chromium.defaultArgs(
+      options,
+      false,
+      '/tmp/qa-nonexistent-profile',
+    );
+    const effective = original.filter(
+      (flag) => !options.ignoreDefaultArgs.includes(flag),
+    );
+    assertSafeLaunch(effective);
+    assert.equal(effective.includes('--use-angle=gl'), profile === 'mesa');
+    assert.equal(effective.includes('--use-gl=angle'), profile === 'mesa');
+    assert(
+      !effective.some((flag) => /unsafe|sandbox|watchdog|blocklist/.test(flag)),
+    );
+  }
+  assert.equal(playwright.allBrowsers().length, 0);
+});
+test('preflight JSON is bounded, profile-specific and only exposes known diagnostic fields', () => {
+  const details = {
+    browser: '154.0.test',
+    launchArgs: [
+      '/opt/google/chrome/chrome',
+      '--enable-automation',
+      '--use-gl=angle',
+      '--use-angle=gl',
+    ],
+    gpu: {
+      devices: [
+        {
+          vendorString: 'Mesa',
+          deviceString: 'llvmpipe',
+          driverVersion: 'test',
+          secret: 'never-print',
+        },
+      ],
+      auxAttributes: { glRenderer: 'llvmpipe', secret: 'never-print' },
+      featureStatus: { webgl2: 'unavailable' },
+      secret: 'never-print',
+    },
+    capability: {
+      available: false,
+      reason: 'WebGL2 unavailable under the selected renderer profile',
+    },
+    secret: 'never-print',
+  };
+  const report = preflightEvidence('mesa', details);
+  assert.equal(report.profile, 'mesa');
+  assert.equal(report.capability.available, false);
+  assert.equal(report.hardwareAcceptance, false);
+  assert.equal(report.gpu.glRenderer, 'llvmpipe');
+  assert.equal(report.graphicsBlocklistBypassed, false);
+  assert.equal(report.gpuWatchdogDisabled, false);
+  assert.equal(preflightEvidence('default').gpuWatchdogDisabled, null);
+  const rejected = preflightEvidence('mesa', {
+    launchArgs: ['--disable-gpu-watchdog', '--ignore-gpu-blocklist'],
+  });
+  assert.equal(rejected.gpuWatchdogDisabled, true);
+  assert.equal(rejected.graphicsBlocklistBypassed, true);
+  assert.doesNotMatch(JSON.stringify(report), /never-print/);
+  assert(Buffer.byteLength(JSON.stringify(report)) < 24_000);
+  const huge = preflightEvidence('default', {
+    launchArgs: Array(300).fill('x'.repeat(5000)),
+  });
+  assert.equal(huge.effectiveArguments.length, 64);
+  assert.equal(huge.effectiveArgumentsTruncated, true);
+  assert(Buffer.byteLength(JSON.stringify(huge)) < 24_000);
 });

@@ -82,6 +82,7 @@
   "reload": "Reload map",
   "loadErrorDetail": "Some map assets could not be loaded. Check your connection and reload the map.",
   "graphicsError": "Graphics rendering was interrupted. Reload the map, or close other 3D tabs and try again.",
+  "graphicsUnavailable": "This browser could not start WebGL 2 graphics. Try reloading, or open the map in another browser or on another device with WebGL 2 support.",
   "canvasLabel": "Interactive 3D Vancouver map. Drag to rotate, scroll to zoom and right-drag to pan.",
   "goToPlace": "Go to {name}",
   "invalidView": "Choose a valid viewpoint and a time between 0 and 24 hours.",

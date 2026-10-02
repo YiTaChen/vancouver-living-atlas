@@ -1,6 +1,7 @@
 import { FlightController } from './flight-controller';
 import { clearOrbitGesture } from './orbit-lifecycle';
 import { paintStartupProgress } from './startup-progress';
+import { GraphicsUnavailableError } from './startup-error';
 import { ScenePreparationQueue } from './scene-preparation';
 import { PublicInteriors } from './interiors';
 import { isMobileGraphics, supportsHDRTarget } from './graphics-profile';
@@ -247,12 +248,16 @@ export class CityEngine {
         2,
         45000,
       );
-      this.renderer = new THREE.WebGLRenderer({
-        antialias: false,
-        alpha: false,
-        powerPreference: 'high-performance',
-        preserveDrawingBuffer: false,
-      });
+      try {
+        this.renderer = new THREE.WebGLRenderer({
+          antialias: false,
+          alpha: false,
+          powerPreference: 'high-performance',
+          preserveDrawingBuffer: false,
+        });
+      } catch (cause) {
+        throw new GraphicsUnavailableError(cause);
+      }
       this.compatibleGraphics =
         isMobileGraphics(navigator.userAgent, navigator.maxTouchPoints) ||
         new URLSearchParams(location.search).get('graphics') === 'compatible' ||

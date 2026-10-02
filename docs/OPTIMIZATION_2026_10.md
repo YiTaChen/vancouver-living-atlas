@@ -14,8 +14,8 @@ This resolves the GitHub blocker below, not the browser/GPU gate.
 | Stage | Delivered | Acceptance still required |
 | --- | --- | --- |
 | B: region rules | Named compatibility-region rules, exact Water Street selection, optional source-ID filters and pinned current-data audit. Full-input and shuffled-input parity preserve current footprints, selections and ordering. See [rule audit](REGION_RULES.md). | No new region coverage was enabled; intentional future cohort changes require fixture/source review. |
-| C: architectural modules | Eight original Blender-authored components, sixteen independent LOD source/GLB pairs, metre UV/material/clearance/budget validation and offline preview. See [kit](../tools/assets/architecture-details/README.md). | Source-edge runtime replacement, slope/entrance and High/Ultra/compatible scene comparisons remain gated. Assets are outside public/ and do not expand production content. |
-| D: vegetation/materials | Blender-authored joined-edge seven-triangle perennial, before/after source and GLB exports, source-derived runtime geometry, tests and an unapplied integration patch. See [candidate and wider inventory](../tools/assets/residential-perennial/README.md). | Accepted-plot equality, actual-city visuals and GPU/device performance. Leaf/bark, soil/grass, landmark and other material work is assessed, not declared complete. Production gardens are unchanged. |
+| C: architectural modules | Eight original Blender-authored components and sixteen independent LOD source/GLB pairs. A separate fitted Blender sill candidate replaces56 genuinely emitted Robson instances only under QA opt-in; default matrix/color buffers match the original across19,312 allocated instances. See [kit](../tools/assets/architecture-details/README.md) and [bounded integration](../tools/assets/architecture-details/runtime-candidate/README.md). | Actual slope/entrance and High/Ultra/compatible visuals, GPU/device costs and the other module integrations remain gated. Production output excludes candidate code, controls and GLBs; no production coverage expansion. |
+| D: vegetation/materials | Blender-authored joined-edge seven-triangle perennial, before/after source and GLB exports, plus explicit QA-only integration. Full measured-city inputs preserve accepted plots, plant placement, geometry/material budgets and navigation/collision data. See [candidate and wider inventory](../tools/assets/residential-perennial/README.md). | Actual-city lighting/LOD visuals, repeated engine teardown and GPU/device performance. Leaf/bark, soil/grass, landmark and other material work is assessed, not declared complete. Production gardens are unchanged. |
 | E: performance | Removed one provably redundant SSAO scene traversal, preserving every render submission and visibility behavior; compatibility fallback and lifecycle regression tests. Optional local-QA CPU-method profiler now distinguishes submission spans from frame intervals. See [isolated benchmark](performance/street-runtime/README.md). | The historical citizen 149.7 ms p95 regression is **not diagnosed or fixed**. Actual-device repeated frame-time, cold/warm start, memory and multi-pass/GPU evidence remains required. No wider population/coverage rollout. |
 | F: optional activity | Not started. | Visual and performance prerequisites have not passed. |
 
@@ -62,7 +62,11 @@ This resolves the GitHub blocker below, not the browser/GPU gate.
    sum categories. `renderer.render` includes CPU submission/driver waits, not
    GPU completion. Correlate expensive render, navigation and detail updates
    with a browser performance/GPU trace before selecting a further optimization.
-5. Apply candidate asset integration only in a validation branch. Compare
+5. Enable candidate asset integration only in an instrumented validation build.
+   The perennial comparison requires exactly one explicit `qaPerennial=baseline`
+   or `qaPerennial=blender` query value. Normal production builds eliminate its
+   helper, geometry data and control, and the build verifier checks this.
+   Compare
    accepted source IDs, placement/clearance, LOD transitions and ground contact;
    inspect clear/overcast at 14:00, 19:00, 19:48 and 23:00. Repeat actual walking,
    mode/quality changes and bounded cache/resource observations. Revert a failed

@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "blenderSources": "passed",
+  "checks": [
+    "actual independently opened fitted LOD sources",
+    "original artist inputs unchanged",
+    "physical metre UVs and shared packed maps",
+    "fitted height/depth containment envelope",
+    "actual GLB origin axes triangles normals tangents source hashes"
+  ],
+  "assets": [
+    {
+      "id": "sandstone-sill",
+      "lod": 0,
+      "triangles": 32,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 267060,
+      "clearanceChecked": false
+    },
+    {
+      "id": "sandstone-sill",
+      "lod": 1,
+      "triangles": 16,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 265812,
+      "clearanceChecked": false
+    }
+  ],
+  "runtimeVisualAndGpuGate": "unverified"
+}

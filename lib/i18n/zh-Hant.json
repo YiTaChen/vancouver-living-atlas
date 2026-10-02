@@ -82,6 +82,7 @@
   "reload": "重新載入地圖",
   "loadErrorDetail": "部分地圖資源無法載入。請檢查網路連線，然後重新載入地圖。",
   "graphicsError": "畫面繪製中斷。請重新載入地圖，或關閉其他 3D 分頁後再試一次。",
+  "graphicsUnavailable": "此瀏覽器無法啟動 WebGL 2 圖形。請嘗試重新載入，或使用其他支援 WebGL 2 的瀏覽器或裝置開啟地圖。",
   "canvasLabel": "互動式 3D 溫哥華地圖。拖曳可旋轉，滾輪可縮放，按住右鍵拖曳可平移。",
   "goToPlace": "前往{name}",
   "invalidView": "請選擇有效的觀景點，並將時間設定為 0 至 24 時。",

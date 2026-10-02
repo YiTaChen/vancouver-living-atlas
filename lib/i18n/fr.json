@@ -82,6 +82,7 @@
   "reload": "Recharger la carte",
   "loadErrorDetail": "Certains éléments de la carte n’ont pas pu être chargés. Vérifiez votre connexion et rechargez la carte.",
   "graphicsError": "Le rendu graphique a été interrompu. Rechargez la carte ou fermez les autres onglets 3D, puis réessayez.",
+  "graphicsUnavailable": "Ce navigateur n’a pas pu démarrer le rendu WebGL 2. Essayez de recharger la carte, ou ouvrez-la dans un autre navigateur ou sur un autre appareil compatible avec WebGL 2.",
   "canvasLabel": "Carte 3D interactive de Vancouver. Glissez pour faire pivoter la vue, utilisez la molette pour zoomer et glissez avec le bouton droit pour déplacer la vue.",
   "goToPlace": "Aller à {name}",
   "invalidView": "Choisissez un point de vue valide et une heure entre 0 et 24 h.",

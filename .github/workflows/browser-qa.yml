@@ -27,6 +27,9 @@ concurrency:
 # before workflow_dispatch becomes available on the default branch.
 env:
   RUN_MATCHED: 'false'
+  # Explicit software-renderer feasibility profile; normal sandbox is retained.
+  # The original default-profile failure remains in run 36975023214.
+  QA_RENDERER_PROFILE: mesa
   QA_BASELINE_QUERY: ''
   QA_CANDIDATE_QUERY: ''
 
@@ -119,6 +122,6 @@ jobs:
       - name: Record acceptance boundaries
         if: always()
         run: |
-          echo 'See smoke.json / matched.json and original PNG captures in the bounded 7-day artifact.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'See the profile-prefixed *-smoke.json / *-matched.json and original PNG captures in the bounded 7-day artifact.' >> "$GITHUB_STEP_SUMMARY"
           echo 'At most two 640×360 JPEG preview records are emitted in logs. These are review aids, not replacement full-resolution evidence.' >> "$GITHUB_STEP_SUMMARY"
           echo 'Hosted Chrome can be software-rendered. Functional readiness is not a performance gate, Radeon acceptance, phone acceptance or a long-session test. No deploy, merge, secrets, traces or video.' >> "$GITHUB_STEP_SUMMARY"

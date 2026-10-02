@@ -1,0 +1,564 @@
+{
+  "id": "robson-sill-blender-candidate-v1",
+  "kind": "full-real-data CPU placement audit",
+  "fingerprints": {
+    "public/data/buildings.geojson": "57cf77f2f7afbceeb3ea4b7dcb87c33d7f56a6df57c33306792503f1dba538ec",
+    "public/data/roads.geojson": "77543c74f4e567a65db14c8d33f9d6250d0f40bdd5f99031c1267aa8dc3373fb",
+    "public/data/trees.json": "2ba858b2afa255bef8ad7f6c7aade750151d0990ad492c68e2c2915a92e3267d"
+  },
+  "allCitySourceFeatures": 7630,
+  "groundFixtureMetres": 20,
+  "groundNote": "Uniform test datum isolates source ordering. Runtime uses unchanged engine foundations; actual GLB containment tests cover the inherited oriented volumes, not surveyed sidewalk validation.",
+  "maximumReplacementInstances": 64,
+  "cohorts": [
+    {
+      "cellId": "-3,-4",
+      "allSourcePartsInCell": 43,
+      "emittedCellCap": 1800,
+      "selected": [
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 142
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 146
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 150
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 154
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 158
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 162
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 166
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 170
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 174
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 178
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 182
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 186
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 190
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 194
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 198
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 202
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 206
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 210
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 214
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 218
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 222
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 226
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 230
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 234
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 238
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 242
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 246
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 250
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 254
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 258
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 262
+        },
+        {
+          "sourceKey": "153090",
+          "edgeKey": "-564.925,-658.545|-576.282,-669.010",
+          "plannerIndex": 266
+        },
+        {
+          "sourceKey": "153102",
+          "edgeKey": "-580.273,-672.830|-591.064,-683.035",
+          "plannerIndex": 1108
+        },
+        {
+          "sourceKey": "153102",
+          "edgeKey": "-580.273,-672.830|-591.064,-683.035",
+          "plannerIndex": 1112
+        },
+        {
+          "sourceKey": "153102",
+          "edgeKey": "-580.273,-672.830|-591.064,-683.035",
+          "plannerIndex": 1116
+        },
+        {
+          "sourceKey": "153102",
+          "edgeKey": "-580.273,-672.830|-591.064,-683.035",
+          "plannerIndex": 1120
+        },
+        {
+          "sourceKey": "153102",
+          "edgeKey": "-580.273,-672.830|-591.064,-683.035",
+          "plannerIndex": 1124
+        },
+        {
+          "sourceKey": "153102",
+          "edgeKey": "-580.273,-672.830|-591.064,-683.035",
+          "plannerIndex": 1128
+        },
+        {
+          "sourceKey": "153102",
+          "edgeKey": "-580.273,-672.830|-591.064,-683.035",
+          "plannerIndex": 1132
+        },
+        {
+          "sourceKey": "153102",
+          "edgeKey": "-580.273,-672.830|-591.064,-683.035",
+          "plannerIndex": 1136
+        },
+        {
+          "sourceKey": "153102",
+          "edgeKey": "-580.273,-672.830|-591.064,-683.035",
+          "plannerIndex": 1140
+        },
+        {
+          "sourceKey": "153102",
+          "edgeKey": "-580.273,-672.830|-591.064,-683.035",
+          "plannerIndex": 1144
+        },
+        {
+          "sourceKey": "153102",
+          "edgeKey": "-580.273,-672.830|-591.064,-683.035",
+          "plannerIndex": 1148
+        },
+        {
+          "sourceKey": "153102",
+          "edgeKey": "-580.273,-672.830|-591.064,-683.035",
+          "plannerIndex": 1152
+        },
+        {
+          "sourceKey": "153102",
+          "edgeKey": "-580.273,-672.830|-591.064,-683.035",
+          "plannerIndex": 1156
+        },
+        {
+          "sourceKey": "153102",
+          "edgeKey": "-580.273,-672.830|-591.064,-683.035",
+          "plannerIndex": 1160
+        },
+        {
+          "sourceKey": "153102",
+          "edgeKey": "-580.273,-672.830|-591.064,-683.035",
+          "plannerIndex": 1164
+        },
+        {
+          "sourceKey": "153102",
+          "edgeKey": "-580.273,-672.830|-591.064,-683.035",
+          "plannerIndex": 1168
+        },
+        {
+          "sourceKey": "153102",
+          "edgeKey": "-580.273,-672.830|-591.064,-683.035",
+          "plannerIndex": 1172
+        },
+        {
+          "sourceKey": "153102",
+          "edgeKey": "-580.273,-672.830|-591.064,-683.035",
+          "plannerIndex": 1176
+        },
+        {
+          "sourceKey": "153102",
+          "edgeKey": "-580.273,-672.830|-591.064,-683.035",
+          "plannerIndex": 1180
+        },
+        {
+          "sourceKey": "153102",
+          "edgeKey": "-580.273,-672.830|-591.064,-683.035",
+          "plannerIndex": 1184
+        },
+        {
+          "sourceKey": "153102",
+          "edgeKey": "-580.273,-672.830|-591.064,-683.035",
+          "plannerIndex": 1188
+        },
+        {
+          "sourceKey": "153102",
+          "edgeKey": "-580.273,-672.830|-591.064,-683.035",
+          "plannerIndex": 1192
+        },
+        {
+          "sourceKey": "153102",
+          "edgeKey": "-580.273,-672.830|-591.064,-683.035",
+          "plannerIndex": 1196
+        },
+        {
+          "sourceKey": "153102",
+          "edgeKey": "-580.273,-672.830|-591.064,-683.035",
+          "plannerIndex": 1200
+        }
+      ]
+    }
+  ],
+  "selectedExistingInstances": 56,
+  "populationDelta": 0,
+  "productionPlannerOrderChanged": false,
+  "sourceInstances": {
+    "153090": 32,
+    "153102": 24
+  },
+  "plannedSinglePassTriangles": {
+    "baseline": 672,
+    "lod0": 1792,
+    "lod1": 896,
+    "lod0Delta": 1120,
+    "lod1Delta": 224
+  },
+  "maximumCandidateTriangleDelta": 1280,
+  "retainedPrivateTextureObjects": 0,
+  "transientTextureNote": "Standard GLTFLoader decodes embedded source maps, then immediately disposes them before geometry is attached with the shared city atlas.",
+  "productionCodeAndAssetExclusion": "Requires separately executed normal Firebase build verification",
+  "visualGpuAndDeviceGate": "unverified",
+  "baselineComparison": {
+    "revision": "26a2ae5",
+    "fullDefaultBuffersEqual": true,
+    "baselineInstances": 19312,
+    "currentDefaultInstances": 19312,
+    "candidateTransformsPresentInBaseline": 56,
+    "batchMatrixColorHashes": [
+      [
+        "-1,-2/roof/masonry",
+        441,
+        "088364bb3e3ec84b0633bda56408d2e82a61e98364d9b70c87662be167cc1fb2",
+        "01dfa28dec986865e3658124e617de821b2c6cd67fe3761138b1211df77133ae"
+      ],
+      [
+        "-1,-2/roof/metal",
+        209,
+        "3b187dd2547599e52fc44b2ba188dac0a4c1d2a8fbc15cfd1304ddf94996e567",
+        "ef21f25aa328923844a3ac2f66d5876ff011cf3fbfcffbb075b6d5f2b398956b"
+      ],
+      [
+        "-1,-3/roof/masonry",
+        438,
+        "88ed87dddc054f3893afa2d7fbb3271e8ab1932146f4148f381a4619bc8cbae9",
+        "78adc78c24b715963fd3ef31ad164f544e8177b490036f3c04b117ff34515176"
+      ],
+      [
+        "-1,-3/roof/metal",
+        212,
+        "54677302d9ea6bced6d0349917867134bc781bd3f3ae60d426587302fe1563e8",
+        "aaf7aed556648a41a73d6f4fb14c4efe5f6cb6767527bb743d41b70b85401f16"
+      ],
+      [
+        "-1,-4/roof/masonry",
+        473,
+        "de628b59f5b574ddd30cabb0dbbaf8af5a887701ba5bd1b231351d8e673b9855",
+        "65d35942a38ef32353027d8764fa301870644e2bb67264ec4d7034f6c87130dc"
+      ],
+      [
+        "-1,-4/roof/metal",
+        177,
+        "66777c5e23fce1a0d0fc568f5a1f23cb149912ba36e9cee030b81682032a38a3",
+        "479836121d630a8d1e243880c1a1ea66cecb081aa8426bf1cca55daab0fe1586"
+      ],
+      [
+        "-2,-2/roof/masonry",
+        366,
+        "35b396f38733eac4f48e179a87e66bc8607fdaba3b6265b55307ed2e47f5b314",
+        "8aace97f90648332df8548098509d235e9d36caa6b6b7c062c47936dca4d29de"
+      ],
+      [
+        "-2,-2/roof/metal",
+        284,
+        "bd66814d7d6cd7626218040aed83f00184a89ec52f3a8c2b7c11e71b282f6fdc",
+        "420e277d0c30cfaf2d1ba969e77f758941268af01d9ddbe86fcb2fe731e42421"
+      ],
+      [
+        "-2,-3/roof/masonry",
+        461,
+        "037c8f239c324d83a8416b3c5a8d1e123c84110f4e92cad23047238f6d5a4005",
+        "9a1770212f8da2f488b4631c3881178c7fc7a46c349a7c3281f4c45e5a6d3730"
+      ],
+      [
+        "-2,-3/roof/metal",
+        189,
+        "c8f0a4b1c491a42e402219b076c080d229e1274b0b9078befc788c32827e8a05",
+        "89a454fb1d8603b775748869b5f4b4e6f6465834e1ca038aae1436b41886812b"
+      ],
+      [
+        "-2,-3/street/masonry",
+        1800,
+        "33fb5c0cb6c12999e39b55f31baf105cb8fa5b892114992c8b4d99d213365e47",
+        "66d3c2b8defbc3170fb1789d7be3785f5743ce937c61f6610c92722d695cc3d3"
+      ],
+      [
+        "-2,-4/roof/masonry",
+        327,
+        "5a68125e4bd68bf662e091f9483a99cfe5dbe4362161477ff1585e9efdc5ccc3",
+        "a9f21757e3355897a2208ee4f29fa6b74c1cd9e5110e9fac5d596a78ba4ffcd0"
+      ],
+      [
+        "-2,-4/roof/metal",
+        143,
+        "fa28cc7e95850cb2eeccf868240778911cc6ee0c721e707ba4bfcb768df916c8",
+        "0735cf521ef93fd9f18229ee31f35a48dedd92c0073e5595707eb8dd6fd7c176"
+      ],
+      [
+        "-2,-4/street/masonry",
+        28,
+        "47b1de87282935083e6838c2b49e692f8ea504a5fccc44b982ba2492fe67ffd7",
+        "4dc7c8f637b0bd6cd3b5dcfec542a9a7525c6eb1b59291aed01071530103826d"
+      ],
+      [
+        "-3,-2/roof/masonry",
+        458,
+        "331b80935f5c438ca974708abebe0f947aeb8701fdc97765e503d99f096e0ffc",
+        "18ae93bb945b4412a17cb617f2b670fca25f257ffe35fabd014af151a15a6bbf"
+      ],
+      [
+        "-3,-2/roof/metal",
+        192,
+        "1048b67ab88c43d7b5771f82f77fd7ff84e0d8072994bb2e462ba501b179e9d3",
+        "3cfe1319e45ac8c5b17963641a63b8dac980657acbf4fa07cef0c662f3c17684"
+      ],
+      [
+        "-3,-3/roof/masonry",
+        432,
+        "34d3cd920845daa1c71d5248593026da5ca3ea7f35c667cb2cbc965183fe5d85",
+        "c457e95d6e87b7e87610b48bb82e5bd6cc8a25012f1861a8ce3792f4a091051e"
+      ],
+      [
+        "-3,-3/roof/metal",
+        218,
+        "78e1bb03e44a621c0b0280176962be38057dbdc6b1c79cd85d18b65a750d6dbe",
+        "43d94a160895da95b083b55f1d40eae0a95871c2daf7dadf4a0f98a1d636271c"
+      ],
+      [
+        "-3,-3/street/masonry",
+        1800,
+        "b3c998817b171e217440075e5f4b209b951699be05e562490131d8e71583ba3a",
+        "5c1c96255062928a83a12c0ef2cb80d28b6e243759f9d6ec4407afc5c99efc33"
+      ],
+      [
+        "-3,-4/roof/masonry",
+        435,
+        "15fac1c95b39131d952f7fb98e410e7a57740d3f9399cf69928d0f826c418581",
+        "29027e67acaca37f5f8db165bc1d313bdb7e6bb8e0b427c23a4baca65d81ccbd"
+      ],
+      [
+        "-3,-4/roof/metal",
+        215,
+        "005bda0a04908a636aded5afb1f8d6c9ad884ce5fc6782032b15a96a2bca002d",
+        "cd50ac6ce14ce32bd8cededcdb7a790169ded0ac266bce988fd71b561c411d49"
+      ],
+      [
+        "-3,-4/street/masonry",
+        1800,
+        "ee5a4574183406fcf51d16e241324908a896d43a81830794fc0972c2cb2b4ba3",
+        "a0bca555aeeab9ea5962d16311af0aaf30d12b1d159b3db287b3f941877eb9f8"
+      ],
+      [
+        "-3,-5/roof/masonry",
+        84,
+        "601dbd73999282db8772634261eff3a68a3a8a7bfb37832d8f630d89d5f8f7ac",
+        "3c8e2a31889fd608a624ae9ba2bfd2028496ed9079851afb54c7d9fe78c5cc7f"
+      ],
+      [
+        "-3,-5/roof/metal",
+        40,
+        "04059fba1c775ba35eec5d182ac2c481787ee085c1ba4bf1298943f5833c4569",
+        "6928b21ca680f18bccd18de59b2cc6b7cbdcd0d1625962b52a4796ff2a034573"
+      ],
+      [
+        "-3,-5/street/masonry",
+        595,
+        "730a03e7f7ed9715262a3558d60050586290d588023a723dd5cf21ba68544564",
+        "cceb1226cdad542cf398c0830358f43f6e91d34edbf06f9fb3a04a8172739ec9"
+      ],
+      [
+        "-4,-2/roof/masonry",
+        452,
+        "ea774ecb61f3fd832aefd7a1cb1d9b3bcba7d27df75e75fcb4dda6df9451c60c",
+        "45d90231c08ae4de194a35f3eb46c68d7987d0f7acaa8a6ec57e04e296f9c4b3"
+      ],
+      [
+        "-4,-2/roof/metal",
+        198,
+        "caaf1798e73d263ff5a7ea5ed1c6492bac16800bcdb613f18ec7f78b8eeddd5d",
+        "d443b4e849a4f98bbc156e5d0ea390f07f3f983d54d79d170f4ee3235bacfaaa"
+      ],
+      [
+        "-4,-3/roof/masonry",
+        373,
+        "36350a054526a4b18c51f5567e5cf980ef25c6037ec8bf908f99c682a145abbd",
+        "8860f78ae572a20dd3212b070aacaa0499386aee8a03159c31e7d2b317c1b19c"
+      ],
+      [
+        "-4,-3/roof/metal",
+        277,
+        "45489ab4ba10d79bcfd86a50ea5dcf64c90611c0b593949af616fbd6ab8f42e6",
+        "d491c378a1ceaa84076d84f3eaf298a2b3bee42e0671359add0b4864b1275df9"
+      ],
+      [
+        "-4,-3/street/masonry",
+        1800,
+        "856bbf5416dc4aec44abf74910bdc82dddb16c26399b41ac32121a761b672315",
+        "a3057806e6cd9d51249200d3682187892811b01f55b9da15c1035a26362d165c"
+      ],
+      [
+        "-4,-4/roof/masonry",
+        373,
+        "a302f6ed6ef2ead15ce13bbc8cdb4b8aac7863e95126d69913bd748ef615db99",
+        "833efd1e88aab523dd2226a04d0362da9f2380f2e310988dd9a31a1fbf445906"
+      ],
+      [
+        "-4,-4/roof/metal",
+        277,
+        "a46ff4002b8fdd10c1793e4789db60a7e7285c8505edf643883eb2727b10a438",
+        "a7cb906313cf4e40a5aa67411e61c0efc5b53430fa5d71f6e1cbe60b8953dbd4"
+      ],
+      [
+        "-4,-4/street/masonry",
+        1800,
+        "7b29f000538ebe57dea49f2790ad205a7b3fd2232ac492b914fffa64abe77706",
+        "05e8ad2893667886674829eda6e7f23bb9efb8a5c9a683c0fdaa40ac0cdd57ad"
+      ],
+      [
+        "-5,-2/roof/masonry",
+        443,
+        "4fccd861d732d4fc5a80836db0921efb4d10c0c88656204e745129ef573562c1",
+        "85f990829366248bb8f39d4fabf3000bf5859789392b37e64a38f1e7d2ea5ada"
+      ],
+      [
+        "-5,-2/roof/metal",
+        207,
+        "2c4a44a8a610f3c1f9a71168357ebab0bd18202c9b8168a616c917357c12e913",
+        "b746b17d17ef91ae3ecc5934f30eeb822efa2b73c4b7f6c3a58bd5390de3ca9c"
+      ],
+      [
+        "-5,-3/roof/masonry",
+        434,
+        "43074185e8648265d077581e6dfcfe580083dcb6aa016b743553c3250c36040e",
+        "cbc8e1f32e6423b5c353127abf295c3669890d0820fb4a769b6c324d083924a1"
+      ],
+      [
+        "-5,-3/roof/metal",
+        216,
+        "1e2bec509697a8847c0bdb8df4d3a2d4e999ed11c8bbeb1879c6fd86943299c0",
+        "c32691c586ec6d79ccd413f0a3d90225ea6ff0f84c27e261cbcbd148d078db23"
+      ],
+      [
+        "-5,-4/roof/masonry",
+        492,
+        "ccb7691b0e6ea42ad86506563cebba79d111a733ec54006ba07be403053d3a76",
+        "caf16893b450d0df4bd5d8aa2a30d1bec66bc84dd97a5c7767d0251b52c9a93a"
+      ],
+      [
+        "-5,-4/roof/metal",
+        153,
+        "f7c60e46278b14a3834750d67cd086cd09fb27256a49f8360febe6c9fc6ad912",
+        "cf358b613af122159d3cda4e409e5f63ae382f1b442be2a592fab1459b3c2a3f"
+      ]
+    ]
+  }
+}

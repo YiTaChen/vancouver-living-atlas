@@ -2,6 +2,7 @@
 import type { CityEngine } from './engine';
 import type { VisualQuality } from './quality';
 import { QACPUProfile } from './qa-cpu-profile';
+import { installArchitectureModuleCandidateQA } from './architecture-module-candidate-qa';
 import { project } from './geo';
 import { sampleAtmosphere, type AtmosphereMode } from './atmosphere';
 import {
@@ -74,6 +75,7 @@ export function upgradeSceneEvidence(e: CityEngine) {
     : [];
   return {
     atmosphere: e.atmosphere,
+    architectureModuleCandidate: e.data?.architectureModuleCandidate?.snapshot?.() ?? null,
     sharedMaterials: materialEvidence(e),
     residentialGround: report
       ? {
@@ -141,6 +143,7 @@ export function installUpgradeQA(
   cpuLabel.appendChild(cpuToggle);
   section.appendChild(cpuLabel);
   let busy = false;
+  installArchitectureModuleCandidateQA(e, section, () => busy || lease?.isRunning() === true);
   let expectedPose: ReturnType<typeof captureQAPose> | null = null;
   function fixedResolution() {
     e.renderer.setPixelRatio(1);

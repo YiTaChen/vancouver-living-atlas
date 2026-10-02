@@ -150,3 +150,12 @@ provenance is the existing [shared city library](../city-materials/README.md).
 Geometry source, generator, maps and exports inherit the repository's Vancouver
 Living Atlas Noncommercial Research and Attribution License 1.0. Existing notices,
 source attribution and third-party data terms remain unchanged.
+
+## Opt-in runtime candidate
+
+A separately gated [Robson sill integration candidate](runtime-candidate/README.md)
+now replaces 56 already-emitted upper sills on two exact source frontages in local
+QA builds. It has fitted real Blender LOD sources, capped full-city placement and
+failure/disposal tests. Normal production builds exclude its loader/UI/assets.
+The original eight-module kit remains offline; the browser visual/GPU gate and
+broader Phase C production integration are still pending.

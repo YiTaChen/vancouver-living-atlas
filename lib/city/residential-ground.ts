@@ -1,4 +1,8 @@
 import * as THREE from 'three';
+import {
+  createPerennialQAEvidence,
+  appendBlenderPerennialQA,
+} from './residential-perennial-qa';
 import type { CityEngine } from './engine';
 import { GroundSurfaceIndex } from './ground-surface';
 import { project, rings } from './geo';
@@ -58,6 +62,15 @@ export function residentialSurfaceTriangles(mesh: THREE.Mesh): Triangle[] {
 /** Original illustrative foundation gardens, not parcel/use/landscaping survey.
  * No footprint edits, walk surfaces, collision, textures, shadow casters or animation. */
 export function createResidentialGround(e: CityEngine) {
+  const perennialQA =
+    process.env.VANCOUVER_VISUAL_QA === '1' && typeof window !== 'undefined'
+      ? createPerennialQAEvidence(window.location?.search ?? '')
+      : null;
+  // A fresh build owns its diagnostic evidence; no shared cross-engine state.
+  if (process.env.VANCOUVER_VISUAL_QA === '1') {
+    delete e.data.residentialPerennialQA;
+    if (perennialQA) e.data.residentialPerennialQA = perennialQA;
+  }
   const footprints: Footprint[] = [];
   for (const f of e.data.buildings.features) {
     if (replacedBuilding(f.properties)) continue;
@@ -195,6 +208,12 @@ export function createResidentialGround(e: CityEngine) {
         add(batch, plan.positions, [0x786c55, 0x82745d, 0x716c55][seed % 3]);
         accepted.push({ bounds: g.boundsOf(polygon), polygon });
         report.beds++;
+        if (process.env.VANCOUVER_VISUAL_QA === '1')
+          perennialQA?.beds.push({
+            sourceId: source.key,
+            cell: key,
+            positions: [...plan.positions],
+          });
         // Two low clustered perennials per bed, fully contained by its inset.
         const dx = edge.b[0] - edge.a[0],
           dz = edge.b[1] - edge.a[1],
@@ -204,37 +223,62 @@ export function createResidentialGround(e: CityEngine) {
             z = center[1] + (dz / length) * 0.38 * side;
           const base = ground.sample(x, z, plan.y);
           if (base === undefined) continue;
-          const plant: number[] = [];
-          for (let k = 0; k < 7; k++) {
-            const a = (k * Math.PI * 2) / 7 + (seed % 7),
-              b = ((k + 1) * Math.PI * 2) / 7 + (seed % 7);
-            const radius = 0.23 + (k % 3) * 0.028,
-              height = 0.19 + (seed % 4) * 0.022;
-            plant.push(
+          if (process.env.VANCOUVER_VISUAL_QA === '1')
+            perennialQA?.plants.push({
+              sourceId: source.key,
+              cell: key,
+              center: [x, base, z],
+              seed,
+              firstVertex: batch.positions.length / 3,
+            });
+          if (
+            process.env.VANCOUVER_VISUAL_QA === '1' &&
+            perennialQA?.variant === 'blender'
+          ) {
+            appendBlenderPerennialQA(
+              batch,
               x,
-              base + height,
               z,
-              x + Math.cos(b) * radius,
-              (ground.sample(
+              base,
+              seed,
+              (px, pz, fallback) => ground.sample(px, pz, fallback),
+              new THREE.Color(
+                [0x687355, 0x737a5c, 0x606d51][(seed + (side > 0 ? 1 : 0)) % 3],
+              ),
+            );
+          } else {
+            const plant: number[] = [];
+            for (let k = 0; k < 7; k++) {
+              const a = (k * Math.PI * 2) / 7 + (seed % 7),
+                b = ((k + 1) * Math.PI * 2) / 7 + (seed % 7);
+              const radius = 0.23 + (k % 3) * 0.028,
+                height = 0.19 + (seed % 4) * 0.022;
+              plant.push(
+                x,
+                base + height,
+                z,
                 x + Math.cos(b) * radius,
+                (ground.sample(
+                  x + Math.cos(b) * radius,
+                  z + Math.sin(b) * radius,
+                  base,
+                ) ?? base) + 0.025,
                 z + Math.sin(b) * radius,
-                base,
-              ) ?? base) + 0.025,
-              z + Math.sin(b) * radius,
-              x + Math.cos(a) * radius,
-              (ground.sample(
                 x + Math.cos(a) * radius,
+                (ground.sample(
+                  x + Math.cos(a) * radius,
+                  z + Math.sin(a) * radius,
+                  base,
+                ) ?? base) + 0.025,
                 z + Math.sin(a) * radius,
-                base,
-              ) ?? base) + 0.025,
-              z + Math.sin(a) * radius,
+              );
+            }
+            add(
+              batch,
+              plant,
+              [0x687355, 0x737a5c, 0x606d51][(seed + (side > 0 ? 1 : 0)) % 3],
             );
           }
-          add(
-            batch,
-            plant,
-            [0x687355, 0x737a5c, 0x606d51][(seed + (side > 0 ? 1 : 0)) % 3],
-          );
           report.plants++;
         }
       }
