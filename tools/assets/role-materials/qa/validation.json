@@ -1,0 +1,162 @@
+{
+  "source": {
+    "mesh_count": 16,
+    "materials": 8,
+    "packed_maps": 24,
+    "metres": true,
+    "coupon_dimensions_m": [
+      1.2,
+      1.2,
+      0.2
+    ]
+  },
+  "exports": [
+    {
+      "file": "exports/interior-material-study.glb",
+      "meshes": 6,
+      "triangles": 1620,
+      "bytes": 490124,
+      "sha256": "e9270c31422a36ee996995ff6ca6f936a3a5eb0e9da96eaa6fcbb59b0dbe836e",
+      "import_PBR_UV_finite_pass": true
+    },
+    {
+      "file": "exports/landmark-material-study.glb",
+      "meshes": 4,
+      "triangles": 1080,
+      "bytes": 233008,
+      "sha256": "a67cc1b276277e4be0a42bebf99a35da8b959aa8c508d96a1ec7255873459918",
+      "import_PBR_UV_finite_pass": true
+    },
+    {
+      "file": "exports/vehicle-material-study.glb",
+      "meshes": 6,
+      "triangles": 1860,
+      "bytes": 453812,
+      "sha256": "056f481b30e9ec0cca7f23936ba3549f286662a619d73ff6da8aae3e743dbf11",
+      "import_PBR_UV_finite_pass": true
+    }
+  ],
+  "maps": [
+    {
+      "file": "exports/textures/interior-matte-plaster-basecolor.png",
+      "sha256": "a8848b358d92e8825be100e8cc96a8a5d7fb8524dfb19b6ff2aaebe9dd5afe36",
+      "source_roundtrip_identical": true
+    },
+    {
+      "file": "exports/textures/interior-matte-plaster-normal.png",
+      "sha256": "ff1bd31b4fc10ddbce682058e6f8e7cec4ce14ec0dcd788f72d71a1f1b654cc4",
+      "source_roundtrip_identical": true
+    },
+    {
+      "file": "exports/textures/interior-matte-plaster-orm.png",
+      "sha256": "4b68bfe6e93546479009d96053c09ae2dc835e39dc15f117f29c3c5fc8d2fa53",
+      "source_roundtrip_identical": true
+    },
+    {
+      "file": "exports/textures/interior-oak-veneer-basecolor.png",
+      "sha256": "531aa7357eddef8bc41d25e874fdfd2e06ee1b86220804b40f04762ab388b0f0",
+      "source_roundtrip_identical": true
+    },
+    {
+      "file": "exports/textures/interior-oak-veneer-normal.png",
+      "sha256": "8ddac1b202278320007981a0599b31f0e3a45c6c30bf6b194a80ae2f3b457eb3",
+      "source_roundtrip_identical": true
+    },
+    {
+      "file": "exports/textures/interior-oak-veneer-orm.png",
+      "sha256": "96d05b5a97411a3666c03d83b01becdfe9b1d3a67b387d8ab8feaa0d239ce0ff",
+      "source_roundtrip_identical": true
+    },
+    {
+      "file": "exports/textures/interior-terrazzo-basecolor.png",
+      "sha256": "6cd5973cb1c479aa6ccf8d859320a21542b7d517eeb78bb91a11565e6c92d805",
+      "source_roundtrip_identical": true
+    },
+    {
+      "file": "exports/textures/interior-terrazzo-normal.png",
+      "sha256": "38a6a499200f260a2ac5b7e6472b63af025ed967a4b3e55ef8c53b5098d09366",
+      "source_roundtrip_identical": true
+    },
+    {
+      "file": "exports/textures/interior-terrazzo-orm.png",
+      "sha256": "c7ae0c5f2a6246cf8830ed19c239b22a78cdafbeec1af4d80ee464180041bc6c",
+      "source_roundtrip_identical": true
+    },
+    {
+      "file": "exports/textures/landmark-brushed-aluminum-basecolor.png",
+      "sha256": "c79321473f294833cb1190df24a385c6c3363680f585bbf65296b4098a7b0346",
+      "source_roundtrip_identical": true
+    },
+    {
+      "file": "exports/textures/landmark-brushed-aluminum-normal.png",
+      "sha256": "fbe1d21d69b781fddd36e0f183a0f5cbbca91d4c9ed8899ac622b7924a6404ea",
+      "source_roundtrip_identical": true
+    },
+    {
+      "file": "exports/textures/landmark-brushed-aluminum-orm.png",
+      "sha256": "ebd7bb06ce9a962c140052761fa26e8f8cba0110f99ba866b2b250d4db365c33",
+      "source_roundtrip_identical": true
+    },
+    {
+      "file": "exports/textures/landmark-pale-panel-basecolor.png",
+      "sha256": "63397614d943ae917ebdb8a8dce0a917a21eb12f00879c47693427c61b18d05c",
+      "source_roundtrip_identical": true
+    },
+    {
+      "file": "exports/textures/landmark-pale-panel-normal.png",
+      "sha256": "38a6a499200f260a2ac5b7e6472b63af025ed967a4b3e55ef8c53b5098d09366",
+      "source_roundtrip_identical": true
+    },
+    {
+      "file": "exports/textures/landmark-pale-panel-orm.png",
+      "sha256": "96d05b5a97411a3666c03d83b01becdfe9b1d3a67b387d8ab8feaa0d239ce0ff",
+      "source_roundtrip_identical": true
+    },
+    {
+      "file": "exports/textures/vehicle-red-paint-basecolor.png",
+      "sha256": "a731a29781f4531e9694e4941196d20f4fc5a126687c73fd0c3604d52f5bfcd6",
+      "source_roundtrip_identical": true
+    },
+    {
+      "file": "exports/textures/vehicle-red-paint-normal.png",
+      "sha256": "38a6a499200f260a2ac5b7e6472b63af025ed967a4b3e55ef8c53b5098d09366",
+      "source_roundtrip_identical": true
+    },
+    {
+      "file": "exports/textures/vehicle-red-paint-orm.png",
+      "sha256": "d4b63ec0e155e2993592798466be0a4b6bcf293feb4fc9c5555286b1c13d0785",
+      "source_roundtrip_identical": true
+    },
+    {
+      "file": "exports/textures/vehicle-seat-leather-basecolor.png",
+      "sha256": "17ff618888f430363d681e0f94b6c7ec505a3d9970438344dcae03f687b7b1a1",
+      "source_roundtrip_identical": true
+    },
+    {
+      "file": "exports/textures/vehicle-seat-leather-normal.png",
+      "sha256": "1625b4f3704f13b8cbcbb9b5ba421b481aec853e5c72f67cffd2349f90be0525",
+      "source_roundtrip_identical": true
+    },
+    {
+      "file": "exports/textures/vehicle-seat-leather-orm.png",
+      "sha256": "437155a0c763e73f6da2d0db3d3cf2c1fca959d1f2d6eb157d2027cb45137bb8",
+      "source_roundtrip_identical": true
+    },
+    {
+      "file": "exports/textures/vehicle-tire-rubber-basecolor.png",
+      "sha256": "e22b9b13a7e63042ba84c20e3b94405ea8c16a0b61e35185f0e5f402154bab7a",
+      "source_roundtrip_identical": true
+    },
+    {
+      "file": "exports/textures/vehicle-tire-rubber-normal.png",
+      "sha256": "496eac92438d967c5f092a3ac9b700adea6d1683d94f95295ff1b2d7c67086f5",
+      "source_roundtrip_identical": true
+    },
+    {
+      "file": "exports/textures/vehicle-tire-rubber-orm.png",
+      "sha256": "70bf49cfed533563e935661c7627f316d1a95ceffdc73ba8cd5fe2511ce35caf",
+      "source_roundtrip_identical": true
+    }
+  ],
+  "passed": true
+}

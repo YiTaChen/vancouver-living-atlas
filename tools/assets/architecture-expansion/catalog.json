@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "license": "LicenseRef-Vancouver-Living-Atlas-NC-1.0",
+  "assets": [
+    {"id":"modern-recessed-window-surround","labelZh":"現代深窗洞框","role":"window-frame","surface":"painted-metal","profiles":["midrise-grid","curtain-wall"],"triangleCaps":[64,40],"clearance":{"min":[-0.96,0.14,0.019],"max":[0.96,1.61,0.261]},"purposeZh":"以 0.24 公尺深的空心折返窗洞區分現代窗框；保留 1.92 × 1.47 公尺空窗洞。"},
+    {"id":"modern-sill-drip","labelZh":"現代折板滴水窗台","role":"sill","surface":"painted-metal","profiles":["midrise-grid","curtain-wall"],"triangleCaps":[56,40],"purposeZh":"連續斜面、後端上翻及前端下折滴水，為折板而非實心石材窗台。"},
+    {"id":"modern-parapet-cap","labelZh":"現代女兒牆壓頂","role":"parapet","surface":"painted-metal","profiles":["midrise-grid","balcony-slab","curtain-wall"],"triangleCaps":[64,32],"clearance":{"min":[-1.2,0,0.056],"max":[1.2,0.105,0.444]},"purposeZh":"中空倒 U 形壓頂、排水斜度與雙側折邊；內部保留女兒牆插入空間，不替換屋頂或新增高度資料。"},
+    {"id":"concrete-shadow-plinth","labelZh":"混凝土凹槽基座","role":"base","surface":"concrete","profiles":["midrise-grid","balcony-slab","curtain-wall"],"triangleCaps":[48,44],"purposeZh":"近地倒角與水平凹槽以真幾何形成分段，不在底色烘焙陰影。"},
+    {"id":"concrete-chamfer-corner","labelZh":"混凝土倒角轉角","role":"corner","surface":"concrete","profiles":["midrise-grid","balcony-slab"],"triangleCaps":[280,32],"purposeZh":"兩翼連續 L 形護角、寬面外角倒角及兩條淺分縫；使用外角 datum，不能新增建築 footprint。"},
+    {"id":"residential-cedar-window-surround","labelZh":"住宅雪松窗框","role":"window-frame","surface":"cedar","profiles":["domestic-cladding"],"triangleCaps":[160,64],"clearance":{"min":[-0.64,0.1,0.019],"max":[0.64,1.62,0.181]},"purposeZh":"獨立直立窗梃、搭接上帽與內側止口，保持 1.28 × 1.52 公尺空窗洞。"},
+    {"id":"residential-cedar-sill","labelZh":"住宅雪松斜窗台","role":"sill","surface":"cedar","profiles":["domestic-cladding"],"triangleCaps":[48,28],"purposeZh":"厚木斜窗台、外挑雙端、下緣滴水槽及前鼻倒角；可與雪松窗框配套，但保持各自編輯來源。"},
+    {"id":"residential-gabled-entry-canopy","labelZh":"住宅雙坡入口雨棚","role":"awning","surface":"cedar","profiles":["domestic-cladding"],"triangleCaps":[240,120],"clearance":{"min":[-1,0,0.019],"max":[1,2.3,1.081]},"purposeZh":"雙坡木質罩棚、前後山形封邊、托架與椽條；無門板、地板或低於 2.30 公尺的支柱。"}
+  ]
+}

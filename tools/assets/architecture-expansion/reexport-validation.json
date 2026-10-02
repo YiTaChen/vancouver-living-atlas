@@ -1,0 +1,307 @@
+{
+  "passed": true,
+  "checks": [
+    "full independent Blender and GLB candidate audit",
+    "input sources preserved byte for byte",
+    "actual indexed position normal UV tangent equivalence",
+    "physical bounds triangles shared-map equivalence"
+  ],
+  "candidateAudit": {
+    "passed": true,
+    "blenderSources": "passed",
+    "checks": [
+      "exact eight-asset catalog",
+      "actual indexed GLB triangles and strict LOD reduction",
+      "one material and draw primitive",
+      "bounds and single axis conversion",
+      "packed PBR map hashes and node wiring",
+      "physical metre UVs and GLB repeats",
+      "independent saved source hash verification",
+      "window/parapet/pedestrian clearance",
+      "identical LOD primary bounds",
+      "no runtime integration"
+    ],
+    "sourceFiles": 16,
+    "glbFiles": 16,
+    "totalTrianglesByLOD": {
+      "0": 644,
+      "1": 320
+    },
+    "assets": [
+      {
+        "id": "modern-recessed-window-surround",
+        "lod": 0,
+        "triangles": 56,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 164336,
+        "clearanceChecked": true
+      },
+      {
+        "id": "modern-recessed-window-surround",
+        "lod": 1,
+        "triangles": 40,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 162704,
+        "clearanceChecked": true
+      },
+      {
+        "id": "modern-sill-drip",
+        "lod": 0,
+        "triangles": 52,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 163708,
+        "clearanceChecked": false
+      },
+      {
+        "id": "modern-sill-drip",
+        "lod": 1,
+        "triangles": 36,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 162456,
+        "clearanceChecked": false
+      },
+      {
+        "id": "modern-parapet-cap",
+        "lod": 0,
+        "triangles": 60,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 164340,
+        "clearanceChecked": true
+      },
+      {
+        "id": "modern-parapet-cap",
+        "lod": 1,
+        "triangles": 28,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 161840,
+        "clearanceChecked": true
+      },
+      {
+        "id": "concrete-shadow-plinth",
+        "lod": 0,
+        "triangles": 44,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 230204,
+        "clearanceChecked": false
+      },
+      {
+        "id": "concrete-shadow-plinth",
+        "lod": 1,
+        "triangles": 40,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 229796,
+        "clearanceChecked": false
+      },
+      {
+        "id": "concrete-chamfer-corner",
+        "lod": 0,
+        "triangles": 136,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 239020,
+        "clearanceChecked": false
+      },
+      {
+        "id": "concrete-chamfer-corner",
+        "lod": 1,
+        "triangles": 24,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 228544,
+        "clearanceChecked": false
+      },
+      {
+        "id": "residential-cedar-window-surround",
+        "lod": 0,
+        "triangles": 112,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 242148,
+        "clearanceChecked": true
+      },
+      {
+        "id": "residential-cedar-window-surround",
+        "lod": 1,
+        "triangles": 64,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 237252,
+        "clearanceChecked": true
+      },
+      {
+        "id": "residential-cedar-sill",
+        "lod": 0,
+        "triangles": 40,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 234228,
+        "clearanceChecked": false
+      },
+      {
+        "id": "residential-cedar-sill",
+        "lod": 1,
+        "triangles": 20,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 232664,
+        "clearanceChecked": false
+      },
+      {
+        "id": "residential-gabled-entry-canopy",
+        "lod": 0,
+        "triangles": 144,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 244928,
+        "clearanceChecked": true
+      },
+      {
+        "id": "residential-gabled-entry-canopy",
+        "lod": 1,
+        "triangles": 68,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 237556,
+        "clearanceChecked": true
+      }
+    ]
+  },
+  "comparisons": [
+    {
+      "id": "modern-recessed-window-surround",
+      "lod": 0,
+      "inputSourceSha256": "9f1a3f16a65973209c6c8da2fcabdb611a850249dadf4f84b5687d835f9c7597",
+      "geometryPbrSignature": "7a989615ce01d2f26c72b7ab769e0e5eb11a1156eabd222da9e517950b372e2d",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "modern-recessed-window-surround",
+      "lod": 1,
+      "inputSourceSha256": "d9bce8d45ceeda617ef3e29705f1b65cb43b7e9c89dd221ffd70bc67fd6a74b9",
+      "geometryPbrSignature": "07b0f8e1b1cff305880ed2a6bc6e78e87b3d2609779bc33b19920e69402b7d85",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "modern-sill-drip",
+      "lod": 0,
+      "inputSourceSha256": "4f4e36c7838935f01666dd388a8c85ae8d6d3cefecd8ff88dc427f87a2df7906",
+      "geometryPbrSignature": "e6b485f3477c686202da7d5b907ebfb4056d8080312aeab656c6a5f5d3641539",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "modern-sill-drip",
+      "lod": 1,
+      "inputSourceSha256": "c2a123dda918928ee3de06a038c920f51f3f3c1ef81346463e18b52720cd94d2",
+      "geometryPbrSignature": "71f63733a1ad3e71c9d164008e6f7fd417a7cb44684b63fdb6a95cd494593b62",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "modern-parapet-cap",
+      "lod": 0,
+      "inputSourceSha256": "55ccd38932aaf3e2f5f7d89500731a22317b1daddea2611d25aab960bf10b0b8",
+      "geometryPbrSignature": "a337156cc6a099712a7eb40477b8a22c291e9cf2c646315caf42f7909b24d3fb",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "modern-parapet-cap",
+      "lod": 1,
+      "inputSourceSha256": "62f0b673475f4c46c58b1fda328893c9b207aa060743e8bf69e0bb5f854e6b92",
+      "geometryPbrSignature": "23c0b5e60599bb9e1e2b0cde5a8e83454e0fd62eac45f9297fc691bcbb570919",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "concrete-shadow-plinth",
+      "lod": 0,
+      "inputSourceSha256": "13184c2e3ae375a64cb11fd3bd6c0808be1f5bf640f1f825f86f42a1c576ea15",
+      "geometryPbrSignature": "87da16df61da1af41da08037cf0a6570e0ceac05497befc676f52bf21d5fdce7",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "concrete-shadow-plinth",
+      "lod": 1,
+      "inputSourceSha256": "a1027d6ea9efd6fdf63a24b45975845bf9f64e89ad88faf0e07b913ed9e19bc0",
+      "geometryPbrSignature": "081cd64abf72668f9a568ab3d5b65ebe20f079512681c92199e225caec2afcf2",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "concrete-chamfer-corner",
+      "lod": 0,
+      "inputSourceSha256": "aec1605a81e108a76e786899250502d0c037e23eb14cf48e53a0aed16003c59f",
+      "geometryPbrSignature": "29fb39046c69b02a90afa414d419a45c7494a41b7ef78fcd766a8ea045e0cf74",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "concrete-chamfer-corner",
+      "lod": 1,
+      "inputSourceSha256": "32ab72e2dfd0c324eeb7d3834844a035888b213180d006f741c32b89d9f785b6",
+      "geometryPbrSignature": "324ba50deeb3146fc239620f618cd519901116a0fd99ab170d51f0c4f221158c",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "residential-cedar-window-surround",
+      "lod": 0,
+      "inputSourceSha256": "cb967828748869a838fbf00ca0e7e65590dc521c2988d61b442e7003efe2459d",
+      "geometryPbrSignature": "55033d9aae8871c6acc7cf0e1e65d71152eb045fbc64b271c8bbab702676c823",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "residential-cedar-window-surround",
+      "lod": 1,
+      "inputSourceSha256": "f25e14e4e2ab74213e30021405c56d978419855b307771096cf9c27c599ffa6a",
+      "geometryPbrSignature": "71bd5702141e87addfee7977d3f5e49614f4ea81d7bbcc0cfba34297f1ced956",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "residential-cedar-sill",
+      "lod": 0,
+      "inputSourceSha256": "3843e0de41c7011dc76d91d2f8820ff808f339750d6e234085cadad28ab1950f",
+      "geometryPbrSignature": "4d542cf4296799e1588d6df6a8dff30254fd84286ddb8d0f2c0bc97b81883b90",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "residential-cedar-sill",
+      "lod": 1,
+      "inputSourceSha256": "f71e5d8e9e85e27d39689f24f0b1e1dd2da6d1aeeda158aaf63d88cd3017f955",
+      "geometryPbrSignature": "1bac848bf27539408c4beaedf48b44a08ab9acd37d7b7319ff0c975592f82ebe",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "residential-gabled-entry-canopy",
+      "lod": 0,
+      "inputSourceSha256": "e1a0d9612ec509117685f8f4da2e0674d49d6e31ef11919fe2567fa853d467bf",
+      "geometryPbrSignature": "665c1acd1abba17597f711f0108fcebcb0f6f0c4da02780afd7a1278cb2e4623",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "residential-gabled-entry-canopy",
+      "lod": 1,
+      "inputSourceSha256": "7234c211af8883d2079b036279c0eaed48338e871f26b2798e9d913e8db21d5b",
+      "geometryPbrSignature": "d465715f3f5df3089a74ea3dda1d0bef680ea5ead535a420a3c34433ffbd8d8c",
+      "unchangedInput": true,
+      "equivalentExport": true
+    }
+  ]
+}

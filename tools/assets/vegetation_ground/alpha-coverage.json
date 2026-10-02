@@ -1,0 +1,176 @@
+{
+  "cutoff": 0.4,
+  "measurement": "uncompressed texel coverage, not projected crown silhouette",
+  "mips": [
+    {
+      "level": 0,
+      "size": 1024,
+      "cells": [
+        {
+          "species": "maple",
+          "baseCoverage": 0.21414566040039062,
+          "boxCoverage": 0.21414566040039062,
+          "correctedCoverage": 0.21414566040039062,
+          "alphaScale": 1
+        },
+        {
+          "species": "alder",
+          "baseCoverage": 0.2316741943359375,
+          "boxCoverage": 0.2316741943359375,
+          "correctedCoverage": 0.2316741943359375,
+          "alphaScale": 1
+        },
+        {
+          "species": "douglas_fir",
+          "baseCoverage": 0.13465499877929688,
+          "boxCoverage": 0.13465499877929688,
+          "correctedCoverage": 0.13465499877929688,
+          "alphaScale": 1
+        },
+        {
+          "species": "western_redcedar",
+          "baseCoverage": 0.30260467529296875,
+          "boxCoverage": 0.30260467529296875,
+          "correctedCoverage": 0.30260467529296875,
+          "alphaScale": 1
+        }
+      ]
+    },
+    {
+      "level": 1,
+      "size": 512,
+      "cells": [
+        {
+          "species": "maple",
+          "baseCoverage": 0.21414566040039062,
+          "boxCoverage": 0.21697998046875,
+          "correctedCoverage": 0.2141571044921875,
+          "alphaScale": 0.7532124899327757
+        },
+        {
+          "species": "alder",
+          "baseCoverage": 0.2316741943359375,
+          "boxCoverage": 0.2358245849609375,
+          "correctedCoverage": 0.2276611328125,
+          "alphaScale": 0.7426103495061398
+        },
+        {
+          "species": "douglas_fir",
+          "baseCoverage": 0.13465499877929688,
+          "boxCoverage": 0.142669677734375,
+          "correctedCoverage": 0.1346588134765625,
+          "alphaScale": 0.8234212480485439
+        },
+        {
+          "species": "western_redcedar",
+          "baseCoverage": 0.30260467529296875,
+          "boxCoverage": 0.310150146484375,
+          "correctedCoverage": 0.302581787109375,
+          "alphaScale": 0.7920692585408686
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "size": 256,
+      "cells": [
+        {
+          "species": "maple",
+          "baseCoverage": 0.21414566040039062,
+          "boxCoverage": 0.21893310546875,
+          "correctedCoverage": 0.214111328125,
+          "alphaScale": 0.767394944280386
+        },
+        {
+          "species": "alder",
+          "baseCoverage": 0.2316741943359375,
+          "boxCoverage": 0.23602294921875,
+          "correctedCoverage": 0.231689453125,
+          "alphaScale": 0.7076252825558187
+        },
+        {
+          "species": "douglas_fir",
+          "baseCoverage": 0.13465499877929688,
+          "boxCoverage": 0.1529541015625,
+          "correctedCoverage": 0.1346435546875,
+          "alphaScale": 0.8000275187194346
+        },
+        {
+          "species": "western_redcedar",
+          "baseCoverage": 0.30260467529296875,
+          "boxCoverage": 0.314453125,
+          "correctedCoverage": 0.302490234375,
+          "alphaScale": 0.717390336841345
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "size": 128,
+      "cells": [
+        {
+          "species": "maple",
+          "baseCoverage": 0.21414566040039062,
+          "boxCoverage": 0.21533203125,
+          "correctedCoverage": 0.21435546875,
+          "alphaScale": 0.9562251307070253
+        },
+        {
+          "species": "alder",
+          "baseCoverage": 0.2316741943359375,
+          "boxCoverage": 0.23193359375,
+          "correctedCoverage": 0.231689453125,
+          "alphaScale": 0.9813876263797285
+        },
+        {
+          "species": "douglas_fir",
+          "baseCoverage": 0.13465499877929688,
+          "boxCoverage": 0.1533203125,
+          "correctedCoverage": 0.12939453125,
+          "alphaScale": 0.9500836469233034
+        },
+        {
+          "species": "western_redcedar",
+          "baseCoverage": 0.30260467529296875,
+          "boxCoverage": 0.326171875,
+          "correctedCoverage": 0.30224609375,
+          "alphaScale": 0.7531231246888639
+        }
+      ]
+    },
+    {
+      "level": 4,
+      "size": 64,
+      "cells": [
+        {
+          "species": "maple",
+          "baseCoverage": 0.21414566040039062,
+          "boxCoverage": 0.22265625,
+          "correctedCoverage": 0.2138671875,
+          "alphaScale": 0.9220781005918979
+        },
+        {
+          "species": "alder",
+          "baseCoverage": 0.2316741943359375,
+          "boxCoverage": 0.2353515625,
+          "correctedCoverage": 0.2314453125,
+          "alphaScale": 0.9576777912676333
+        },
+        {
+          "species": "douglas_fir",
+          "baseCoverage": 0.13465499877929688,
+          "boxCoverage": 0.1337890625,
+          "correctedCoverage": 0.134765625,
+          "alphaScale": 1.0014933802187445
+        },
+        {
+          "species": "western_redcedar",
+          "baseCoverage": 0.30260467529296875,
+          "boxCoverage": 0.34765625,
+          "correctedCoverage": 0.302734375,
+          "alphaScale": 0.6241562433540822
+        }
+      ]
+    }
+  ]
+}

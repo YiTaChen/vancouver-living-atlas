@@ -1,0 +1,125 @@
+{
+  "status": "pass",
+  "checks": [
+    "GLB2 header and embedded images",
+    "finite positions, normals and UVs",
+    "unit normals, valid indices and nondegenerate triangles",
+    "manifest triangle/draw bounds",
+    "MASK foliage vs opaque bark/ground",
+    "PNG CRC/hash/dimensions and +Z normal hemisphere",
+    "per-cell mip coverage error <0.8 percentage points"
+  ],
+  "notValidated": [
+    "runtime integration",
+    "projected crown coverage and shadow silhouette",
+    "night/day browser rendering",
+    "FPS, GPU timings, device memory"
+  ],
+  "assets": [
+    {
+      "asset": "maple_sprig_lod0",
+      "triangles": 188,
+      "primitives": 2,
+      "GLBBytes": 1117680,
+      "status": "pass"
+    },
+    {
+      "asset": "maple_sprig_lod1",
+      "triangles": 136,
+      "primitives": 2,
+      "GLBBytes": 1114680,
+      "status": "pass"
+    },
+    {
+      "asset": "maple_sprig_lod2",
+      "triangles": 80,
+      "primitives": 2,
+      "GLBBytes": 1111396,
+      "status": "pass"
+    },
+    {
+      "asset": "alder_sprig_lod0",
+      "triangles": 188,
+      "primitives": 2,
+      "GLBBytes": 1117680,
+      "status": "pass"
+    },
+    {
+      "asset": "alder_sprig_lod1",
+      "triangles": 136,
+      "primitives": 2,
+      "GLBBytes": 1114680,
+      "status": "pass"
+    },
+    {
+      "asset": "alder_sprig_lod2",
+      "triangles": 80,
+      "primitives": 2,
+      "GLBBytes": 1111396,
+      "status": "pass"
+    },
+    {
+      "asset": "douglas_fir_sprig_lod0",
+      "triangles": 188,
+      "primitives": 2,
+      "GLBBytes": 1117712,
+      "status": "pass"
+    },
+    {
+      "asset": "douglas_fir_sprig_lod1",
+      "triangles": 136,
+      "primitives": 2,
+      "GLBBytes": 1114712,
+      "status": "pass"
+    },
+    {
+      "asset": "douglas_fir_sprig_lod2",
+      "triangles": 80,
+      "primitives": 2,
+      "GLBBytes": 1111428,
+      "status": "pass"
+    },
+    {
+      "asset": "western_redcedar_sprig_lod0",
+      "triangles": 188,
+      "primitives": 2,
+      "GLBBytes": 1117736,
+      "status": "pass"
+    },
+    {
+      "asset": "western_redcedar_sprig_lod1",
+      "triangles": 136,
+      "primitives": 2,
+      "GLBBytes": 1114736,
+      "status": "pass"
+    },
+    {
+      "asset": "western_redcedar_sprig_lod2",
+      "triangles": 80,
+      "primitives": 2,
+      "GLBBytes": 1111452,
+      "status": "pass"
+    },
+    {
+      "asset": "soil_grass_slope_lod0",
+      "triangles": 512,
+      "primitives": 1,
+      "GLBBytes": 985884,
+      "status": "pass"
+    },
+    {
+      "asset": "soil_grass_slope_lod1",
+      "triangles": 128,
+      "primitives": 1,
+      "GLBBytes": 942388,
+      "status": "pass"
+    },
+    {
+      "asset": "soil_grass_slope_lod2",
+      "triangles": 32,
+      "primitives": 1,
+      "GLBBytes": 931576,
+      "status": "pass"
+    }
+  ]
+}

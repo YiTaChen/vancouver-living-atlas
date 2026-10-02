@@ -1,0 +1,25 @@
+{
+  "scope": "isolated imported GLB appearance, not city integration",
+  "inspected": true,
+  "blenderVersion": "4.3.2",
+  "renderEngine": "Cycles",
+  "samples": 24,
+  "lightingAndCameraMatchedAcrossLOD": true,
+  "previewFiles": {
+    "preview-lod0.png": "d0c5a86f036eb203124cce8571c5e0ea20eed49accbecc860e7302a6aef19b24",
+    "preview-lod1.png": "34dd2d48f2af955c5b6f3138aa02b9c923cd160be65de1a7021c45eb0be34f65",
+    "preview.png": "ae94ddf281ee8c466b5999af2c129ef4d5b49a4b89b0a7cd7ff8dde972e37c68"
+  },
+  "checks": [
+    "all eight labeled assets fully in frame",
+    "LOD pairs preserve corresponding silhouettes and empty openings",
+    "material identities and physical scale consistent",
+    "fine drip/fold/joint/fascia detail reduces at LOD1",
+    "no preview light or floor exported into GLBs"
+  ],
+  "limitations": [
+    "representative component models, no surveyed building claims",
+    "not tested in browser scene",
+    "world ground, source-edge fitting and upper-window clearance remain integration responsibilities"
+  ]
+}

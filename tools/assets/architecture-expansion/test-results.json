@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "testsRun": 12,
+  "failures": 0,
+  "errors": 0,
+  "command": "python3 -m unittest discover -s tools/assets/architecture-expansion -p 'test_*.py'",
+  "blenderVersion": "4.3.2",
+  "testSources": {
+    "test_validate_architecture_expansion.py": "cb562e2d2dd4ff47f6ddef2905ed8f66ee45be497699dfaf4df813e122ca9f6d",
+    "test_source_workflow.py": "aa4db3d14c9cd762cceee1311d7a97cc4f0ac6dd77024ec3603fe03d36033656"
+  },
+  "sourceWorkflowSubcases": [
+    "31 mm source geometry edit survives both LODs",
+    "original inputs unchanged",
+    "added node rejected",
+    "physical scale change rejected",
+    "coat change rejected",
+    "tint change rejected",
+    "normal strength change rejected",
+    "painted packed image rejected",
+    "same source/output rejected"
+  ]
+}

@@ -1,0 +1,168 @@
+{
+  "passed": true,
+  "blenderSources": "passed",
+  "checks": [
+    "exact eight-asset catalog",
+    "actual indexed GLB triangles and strict LOD reduction",
+    "one material and draw primitive",
+    "bounds and single axis conversion",
+    "packed PBR map hashes and node wiring",
+    "physical metre UVs and GLB repeats",
+    "independent saved source hash verification",
+    "window/parapet/pedestrian clearance",
+    "identical LOD primary bounds",
+    "no runtime integration"
+  ],
+  "sourceFiles": 16,
+  "glbFiles": 16,
+  "totalTrianglesByLOD": {
+    "0": 644,
+    "1": 320
+  },
+  "assets": [
+    {
+      "id": "modern-recessed-window-surround",
+      "lod": 0,
+      "triangles": 56,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 164336,
+      "clearanceChecked": true
+    },
+    {
+      "id": "modern-recessed-window-surround",
+      "lod": 1,
+      "triangles": 40,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 162704,
+      "clearanceChecked": true
+    },
+    {
+      "id": "modern-sill-drip",
+      "lod": 0,
+      "triangles": 52,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 163708,
+      "clearanceChecked": false
+    },
+    {
+      "id": "modern-sill-drip",
+      "lod": 1,
+      "triangles": 36,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 162456,
+      "clearanceChecked": false
+    },
+    {
+      "id": "modern-parapet-cap",
+      "lod": 0,
+      "triangles": 60,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 164340,
+      "clearanceChecked": true
+    },
+    {
+      "id": "modern-parapet-cap",
+      "lod": 1,
+      "triangles": 28,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 161840,
+      "clearanceChecked": true
+    },
+    {
+      "id": "concrete-shadow-plinth",
+      "lod": 0,
+      "triangles": 44,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 230204,
+      "clearanceChecked": false
+    },
+    {
+      "id": "concrete-shadow-plinth",
+      "lod": 1,
+      "triangles": 40,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 229796,
+      "clearanceChecked": false
+    },
+    {
+      "id": "concrete-chamfer-corner",
+      "lod": 0,
+      "triangles": 136,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 239020,
+      "clearanceChecked": false
+    },
+    {
+      "id": "concrete-chamfer-corner",
+      "lod": 1,
+      "triangles": 24,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 228544,
+      "clearanceChecked": false
+    },
+    {
+      "id": "residential-cedar-window-surround",
+      "lod": 0,
+      "triangles": 112,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 242148,
+      "clearanceChecked": true
+    },
+    {
+      "id": "residential-cedar-window-surround",
+      "lod": 1,
+      "triangles": 64,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 237252,
+      "clearanceChecked": true
+    },
+    {
+      "id": "residential-cedar-sill",
+      "lod": 0,
+      "triangles": 40,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 234228,
+      "clearanceChecked": false
+    },
+    {
+      "id": "residential-cedar-sill",
+      "lod": 1,
+      "triangles": 20,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 232664,
+      "clearanceChecked": false
+    },
+    {
+      "id": "residential-gabled-entry-canopy",
+      "lod": 0,
+      "triangles": 144,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 244928,
+      "clearanceChecked": true
+    },
+    {
+      "id": "residential-gabled-entry-canopy",
+      "lod": 1,
+      "triangles": 68,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 237556,
+      "clearanceChecked": true
+    }
+  ]
+}

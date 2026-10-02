@@ -1,0 +1,98 @@
+[
+  {
+    "file": "citizen-lod0.glb",
+    "bytes": 3498312,
+    "triangles": 37799,
+    "joints": 22,
+    "primitives": 1,
+    "images": [
+      {
+        "name": "Citizen_Normal-1024",
+        "width": 1024,
+        "height": 1024,
+        "bytes": 679771
+      },
+      {
+        "name": "Citizen_BaseColor-1024",
+        "width": 1024,
+        "height": 1024,
+        "bytes": 696823
+      },
+      {
+        "name": "Citizen_Roughness-1024",
+        "width": 1024,
+        "height": 1024,
+        "bytes": 309221
+      }
+    ],
+    "animations": [
+      "idle",
+      "run",
+      "walk"
+    ]
+  },
+  {
+    "file": "citizen-lod1.glb",
+    "bytes": 3222256,
+    "triangles": 30825,
+    "joints": 22,
+    "primitives": 1,
+    "images": [
+      {
+        "name": "Citizen_Normal-1024",
+        "width": 1024,
+        "height": 1024,
+        "bytes": 679771
+      },
+      {
+        "name": "Citizen_BaseColor-1024",
+        "width": 1024,
+        "height": 1024,
+        "bytes": 696823
+      },
+      {
+        "name": "Citizen_Roughness-1024",
+        "width": 1024,
+        "height": 1024,
+        "bytes": 309221
+      }
+    ],
+    "animations": [
+      "idle",
+      "run",
+      "walk"
+    ]
+  },
+  {
+    "file": "citizen-lod2.glb",
+    "bytes": 2001060,
+    "triangles": 27531,
+    "joints": 22,
+    "primitives": 1,
+    "images": [
+      {
+        "name": "Citizen_Normal-512",
+        "width": 512,
+        "height": 512,
+        "bytes": 213441
+      },
+      {
+        "name": "Citizen_BaseColor-512",
+        "width": 512,
+        "height": 512,
+        "bytes": 236267
+      },
+      {
+        "name": "Citizen_Roughness-512",
+        "width": 512,
+        "height": 512,
+        "bytes": 133995
+      }
+    ],
+    "animations": [
+      "idle",
+      "run",
+      "walk"
+    ]
+  }
+]

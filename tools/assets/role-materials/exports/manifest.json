@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "blender": "4.3.2",
+  "status": "offline candidates; integration deferred",
+  "roles": [
+    {
+      "id": "landmark-brushed-aluminum",
+      "tile_metres": 1.0,
+      "map_resolution": [
+        256,
+        256
+      ],
+      "maps": {
+        "basecolor": "textures/landmark-brushed-aluminum-basecolor.png",
+        "orm": "textures/landmark-brushed-aluminum-orm.png",
+        "normal": "textures/landmark-brushed-aluminum-normal.png"
+      }
+    },
+    {
+      "id": "landmark-pale-panel",
+      "tile_metres": 1.0,
+      "map_resolution": [
+        256,
+        256
+      ],
+      "maps": {
+        "basecolor": "textures/landmark-pale-panel-basecolor.png",
+        "orm": "textures/landmark-pale-panel-orm.png",
+        "normal": "textures/landmark-pale-panel-normal.png"
+      }
+    },
+    {
+      "id": "vehicle-red-paint",
+      "tile_metres": 0.5,
+      "map_resolution": [
+        256,
+        256
+      ],
+      "maps": {
+        "basecolor": "textures/vehicle-red-paint-basecolor.png",
+        "orm": "textures/vehicle-red-paint-orm.png",
+        "normal": "textures/vehicle-red-paint-normal.png"
+      }
+    },
+    {
+      "id": "vehicle-tire-rubber",
+      "tile_metres": 0.5,
+      "map_resolution": [
+        256,
+        256
+      ],
+      "maps": {
+        "basecolor": "textures/vehicle-tire-rubber-basecolor.png",
+        "orm": "textures/vehicle-tire-rubber-orm.png",
+        "normal": "textures/vehicle-tire-rubber-normal.png"
+      }
+    },
+    {
+      "id": "vehicle-seat-leather",
+      "tile_metres": 0.5,
+      "map_resolution": [
+        256,
+        256
+      ],
+      "maps": {
+        "basecolor": "textures/vehicle-seat-leather-basecolor.png",
+        "orm": "textures/vehicle-seat-leather-orm.png",
+        "normal": "textures/vehicle-seat-leather-normal.png"
+      }
+    },
+    {
+      "id": "interior-terrazzo",
+      "tile_metres": 1.0,
+      "map_resolution": [
+        256,
+        256
+      ],
+      "maps": {
+        "basecolor": "textures/interior-terrazzo-basecolor.png",
+        "orm": "textures/interior-terrazzo-orm.png",
+        "normal": "textures/interior-terrazzo-normal.png"
+      }
+    },
+    {
+      "id": "interior-oak-veneer",
+      "tile_metres": 1.0,
+      "map_resolution": [
+        256,
+        256
+      ],
+      "maps": {
+        "basecolor": "textures/interior-oak-veneer-basecolor.png",
+        "orm": "textures/interior-oak-veneer-orm.png",
+        "normal": "textures/interior-oak-veneer-normal.png"
+      }
+    },
+    {
+      "id": "interior-matte-plaster",
+      "tile_metres": 1.0,
+      "map_resolution": [
+        256,
+        256
+      ],
+      "maps": {
+        "basecolor": "textures/interior-matte-plaster-basecolor.png",
+        "orm": "textures/interior-matte-plaster-orm.png",
+        "normal": "textures/interior-matte-plaster-normal.png"
+      }
+    }
+  ],
+  "color_space": {
+    "basecolor": "sRGB",
+    "normal": "Non-Color OpenGL +Y tangent",
+    "orm": "Non-Color R=1 G=roughness B=metallic"
+  },
+  "resident_rgba_mips_mib": 8.0,
+  "provenance": "Original analytic periodic textures and authored sample meshes; no external textures/models",
+  "source_objects": 16
+}
