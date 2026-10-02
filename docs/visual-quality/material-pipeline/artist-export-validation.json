@@ -1,0 +1,68 @@
+{
+  "passed": true,
+  "allEightSlots": true,
+  "atlasPaddingAndHashes": true,
+  "encodedMeans": true,
+  "allNormalsUnitAndForward": true,
+  "sourcesUnchanged": true,
+  "artistLinearColor": [
+    0.18,
+    0.36,
+    0.72
+  ],
+  "encodedSRGB": [
+    118,
+    162,
+    221
+  ],
+  "encodedORM": [
+    255,
+    51,
+    153
+  ],
+  "encodedTangentNormal": [
+    153,
+    115,
+    252
+  ],
+  "channelIsolation": [
+    {
+      "surface": "heritage-brick",
+      "changedChannels": [
+        "color",
+        "normal",
+        "orm"
+      ]
+    },
+    {
+      "surface": "sandstone",
+      "changedChannels": []
+    },
+    {
+      "surface": "concrete",
+      "changedChannels": []
+    },
+    {
+      "surface": "cedar",
+      "changedChannels": [
+        "normal"
+      ]
+    },
+    {
+      "surface": "roof-shingle",
+      "changedChannels": []
+    },
+    {
+      "surface": "street-brick",
+      "changedChannels": []
+    },
+    {
+      "surface": "painted-metal",
+      "changedChannels": []
+    },
+    {
+      "surface": "asphalt",
+      "changedChannels": []
+    }
+  ]
+}

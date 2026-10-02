@@ -1,4 +1,10 @@
 import * as THREE from 'three';
+import {
+  treeRandom as rng,
+  treeClusterSeed,
+  treeSprayIndices,
+  CONIFER_PRIMARY_BOUGHS,
+} from './tree-structure';
 
 export type TreeDetail = 'medium' | 'ultra';
 export interface TreeGeometry {
@@ -30,15 +36,6 @@ type UV = readonly [number, number];
 type RGB = readonly [number, number, number];
 const UP = new THREE.Vector3(0, 1, 0);
 const TAU = Math.PI * 2;
-function rng(seed: number) {
-  let state = seed >>> 0;
-  return () => {
-    state ^= state << 13;
-    state ^= state >>> 17;
-    state ^= state << 5;
-    return (state >>> 0) / 4294967296;
-  };
-}
 function v(x = 0, y = 0, z = 0) {
   return new THREE.Vector3(x, y, z);
 }
@@ -200,9 +197,10 @@ function tuft(
   cell: number,
   random: () => number,
   ultra: boolean,
+  sides = 5,
 ) {
   const { axis, right, across } = frame(direction);
-  const n = 5;
+  const n = sides;
   const rings: V3[][] = [],
     normals: V3[][] = [];
   const levels = ultra ? [-0.42, 0.4] : [0];
@@ -286,7 +284,7 @@ function tuft(
 
 /** Six vertices/four triangles make a folded leaf spray, never a camera billboard. */
 function spray(
-  out: Surface,
+  out: Surface | null,
   center: V3,
   direction: V3,
   width: number,
@@ -294,6 +292,7 @@ function spray(
   roll: number,
   cell: number,
   tint: RGB,
+  bounds?: THREE.Box3,
 ) {
   const { axis, right, across } = frame(direction);
   const horizontal = right
@@ -313,6 +312,9 @@ function spray(
   const lt = point(-0.5, 0.5),
     mt = point(0, 0.5),
     rt = point(0.5, 0.5);
+  if (bounds)
+    for (const point of [lb, mb, rb, lt, mt, rt]) bounds.expandByPoint(point);
+  if (!out) return;
   const uv = (x: number, y: number) => atlasUV(cell, x, y);
   out.triangle(lb, mb, lt, [uv(0, 0), uv(0.5, 0), uv(0, 1)], tint);
   out.triangle(mb, mt, lt, [uv(0.5, 0), uv(0.5, 1), uv(0, 1)], tint);
@@ -328,26 +330,65 @@ export function createTreeGeometry(
   const vi = Number.isFinite(variant) ? ((Math.floor(variant) % 3) + 3) % 3 : 0;
   const ultra = detail === 'ultra';
   const random = rng((conifer ? 0x732b915 : 0x41f615d) + vi * 12347);
+  const detailRandom = rng((conifer ? 0x815fc23 : 0x622cad9) + vi * 12347);
   const wood = new Surface(),
     leaves = new Surface();
-  let branchSeed = 100 + vi * 379;
+  const primaryAnchors: V3[] = [];
+  // Use every full-detail leaf spray as one shared silhouette reference. Computing
+  // bounds from the emitted tier would rescale all branches when detail changes.
+  const referenceBounds = new THREE.Box3(v(), v());
+  const sprayIndices = treeSprayIndices(conifer, ultra);
   const cell = conifer ? (vi === 1 ? 3 : 2) : vi === 1 ? 1 : 0;
-  const shoot = (points: V3[], radii: number[], sides: number, cap = false) =>
-    branch(wood, points, radii, sides, branchSeed++, cap);
-  const cluster = (p: V3, direction: V3, scale: number) => {
+  const shoot = (points: V3[], radii: number[], sides: number, cap = false) => {
+    const end = points[points.length - 1];
+    branch(
+      wood,
+      points,
+      radii,
+      sides,
+      treeClusterSeed(vi, end.x, end.y, end.z),
+      cap,
+    );
+  };
+  const cluster = (
+    p: V3,
+    direction: V3,
+    scale: number,
+    primary = true,
+    emit = true,
+  ) => {
+    if (primary) primaryAnchors.push(p.clone());
+    const seed = treeClusterSeed(vi, p.x, p.y, p.z);
     const size = conifer
       ? v(scale * 0.8, scale * 0.55, scale)
       : v(scale * 1.06, scale * 0.92, scale);
-    tuft(leaves, p, size, direction, cell, random, ultra);
-    const count = ultra ? (conifer ? 5 : 12) : conifer ? 2 : 4;
+    // The opaque volume sits behind the leaf sprays. Its previous full-size
+    // hull dominated street-level silhouettes with large smooth green facets.
+    // Keep the same triangles, but let the existing cut-out leaves form edges.
+    if (emit)
+      tuft(
+        leaves,
+        p,
+        size.multiplyScalar(conifer ? 0.64 : 0.72),
+        direction,
+        cell,
+        rng(seed),
+        ultra,
+        // Four saved interior faces fund one more cut-out needle spray at the
+        // medium tier: 6 + 3×4 triangles replaces 10 + 2×4, exactly the same cost.
+        conifer && !ultra ? 3 : 5,
+      );
+    const count = conifer ? 5 : 12;
     for (let k = 0; k < count; k++) {
-      const azimuth = k * 2.399963 + random() * 0.8;
+      const selected = emit && sprayIndices.includes(k);
+      const leafRandom = rng(seed + 7937 * (k + 1));
+      const azimuth = k * 2.399963 + leafRandom() * 0.8;
       const y = 1 - ((k + 0.5) / count) * 2;
       const rr = Math.sqrt(Math.max(0, 1 - y * y));
       const radial = v(Math.cos(azimuth) * rr, y, Math.sin(azimuth) * rr);
       const position = p
         .clone()
-        .addScaledVector(radial, scale * (0.48 + random() * 0.36));
+        .addScaledVector(radial, scale * (0.48 + leafRandom() * 0.36));
       const orientation = direction
         .clone()
         .multiplyScalar(conifer ? 0.7 : 0.25)
@@ -355,19 +396,20 @@ export function createTreeGeometry(
         .add(v(0, 0.2, 0))
         .normalize();
       const tint: RGB = [
-        0.84 + random() * 0.15,
-        0.9 + random() * 0.1,
-        0.8 + random() * 0.17,
+        0.84 + leafRandom() * 0.15,
+        0.9 + leafRandom() * 0.1,
+        0.8 + leafRandom() * 0.17,
       ];
       spray(
-        leaves,
+        selected ? leaves : null,
         position,
         orientation,
         scale * (conifer ? 1.5 : 1.65),
         scale * (conifer ? 1.9 : 1.7),
-        random() * TAU,
+        leafRandom() * TAU,
         cell,
         tint,
+        referenceBounds,
       );
     }
   };
@@ -397,7 +439,7 @@ export function createTreeGeometry(
     );
   }
   if (conifer) {
-    const counts = ultra ? [5, 5, 5, 4, 4, 3, 3] : [4, 4, 4, 3, 2];
+    const counts = CONIFER_PRIMARY_BOUGHS;
     for (let tier = 0; tier < counts.length; tier++) {
       const f = tier / counts.length;
       const height = 0.27 + f * 0.65 + (random() - 0.5) * 0.025;
@@ -436,19 +478,25 @@ export function createTreeGeometry(
         );
         const direction = end.clone().sub(start).normalize();
         cluster(middle.clone().lerp(end, 0.32), direction, 0.106 - f * 0.042);
-        if (ultra) {
+        {
           const aa = a + (k % 2 ? -0.72 : 0.66);
           const tip = middle
             .clone()
             .add(
               v(
                 Math.cos(aa) * length * 0.58,
-                -0.01 + random() * 0.038,
+                -0.01 + detailRandom() * 0.038,
                 Math.sin(aa) * length * 0.58,
               ),
             );
-          shoot([middle, tip], [0.0036, 0.0009], 4);
-          cluster(tip, tip.clone().sub(middle), 0.075 - f * 0.027);
+          if (ultra) shoot([middle, tip], [0.0036, 0.0009], 4);
+          cluster(
+            tip,
+            tip.clone().sub(middle),
+            0.075 - f * 0.027,
+            false,
+            ultra,
+          );
         }
       }
     }
@@ -516,16 +564,16 @@ export function createTreeGeometry(
           v(Math.cos(aa) * 0.4, 0.8, Math.sin(aa) * 0.4),
           0.118 + random() * 0.018,
         );
-        if (ultra)
-          for (const side of [-1, 1]) {
-            const direction = v(
-              Math.cos(aa + side * 0.9),
-              0.7 + random() * 0.4,
-              Math.sin(aa + side * 0.9),
-            ).normalize();
-            const twigTip = elbow
-              .clone()
-              .addScaledVector(direction, 0.075 + random() * 0.03);
+        for (const side of [-1, 1]) {
+          const direction = v(
+            Math.cos(aa + side * 0.9),
+            0.7 + detailRandom() * 0.4,
+            Math.sin(aa + side * 0.9),
+          ).normalize();
+          const twigTip = elbow
+            .clone()
+            .addScaledVector(direction, 0.075 + detailRandom() * 0.03);
+          if (ultra)
             shoot(
               [
                 elbow,
@@ -538,8 +586,14 @@ export function createTreeGeometry(
               [0.003, 0.002, 0.0007],
               4,
             );
-            cluster(twigTip, direction, 0.082 + random() * 0.016);
-          }
+          cluster(
+            twigTip,
+            direction,
+            0.082 + detailRandom() * 0.016,
+            false,
+            ultra,
+          );
+        }
       }
     }
     // Fill the centre of the fork, rather than putting a small detached tuft at
@@ -552,17 +606,14 @@ export function createTreeGeometry(
   const foliage = leaves.finish(
     `tree-${conifer ? 'conifer' : 'broadleaf'}-${vi}-${detail}-foliage`,
   );
-  trunk.computeBoundingBox();
-  foliage.computeBoundingBox();
-  const bounds = trunk.boundingBox!.clone().union(foliage.boundingBox!);
   const width = Math.max(
-    bounds.max.x - bounds.min.x,
-    bounds.max.z - bounds.min.z,
+    referenceBounds.max.x - referenceBounds.min.x,
+    referenceBounds.max.z - referenceBounds.min.z,
   );
   const horizontal = (0.46 + vi * 0.015) / width;
   const transform = new THREE.Matrix4().makeScale(
     horizontal,
-    1 / bounds.max.y,
+    1 / referenceBounds.max.y,
     horizontal,
   );
   for (const geometry of [trunk, foliage]) {
@@ -576,7 +627,30 @@ export function createTreeGeometry(
       normalizedHeight: 1,
       targetCrownWidth: 0.46 + vi * 0.015,
       originalProceduralAsset: true,
+      primaryCrownAnchors: primaryAnchors.map((p) =>
+        p.clone().applyMatrix4(transform).toArray(),
+      ),
+      silhouetteReference: referenceBounds.clone().applyMatrix4(transform),
     };
+  }
+  // Match the distant crown's restrained interior occlusion, baked into the
+  // existing vertex colours. No per-frame shader or texture cost is added.
+  const position = foliage.getAttribute('position'),
+    tint = foliage.getAttribute('color');
+  for (let i = 0; i < position.count; i++) {
+    const top = THREE.MathUtils.clamp((position.getY(i) - 0.25) / 0.75, 0, 1),
+      rim = THREE.MathUtils.clamp(
+        Math.hypot(position.getX(i), position.getZ(i)) / 0.23,
+        0,
+        1,
+      ),
+      shade = 0.82 + top * 0.12 + rim * 0.06;
+    tint.setXYZ(
+      i,
+      tint.getX(i) * shade,
+      tint.getY(i) * shade,
+      tint.getZ(i) * shade,
+    );
   }
   return { trunk, foliage };
 }

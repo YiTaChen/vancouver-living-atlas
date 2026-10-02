@@ -5,7 +5,12 @@ import { ScenePreparationQueue } from './scene-preparation';
 import { PublicInteriors } from './interiors';
 import { isMobileGraphics, supportsHDRTarget } from './graphics-profile';
 import { SkyEffects } from './sky-effects';
+import {
+  AtmosphereEnvironment, applyAtmosphereSky, installAtmosphereSky,
+  normalizeAtmosphere, sampleAtmosphere, type AtmosphereMode,
+} from './atmosphere';
 import { createBeachAmenities } from './beach-amenities';
+import { createResidentialGround } from './residential-ground';
 import { installSSAOBlur4 } from './ssao-blur4';
 import { trackSSAOResources } from './ssao-resources';
 import { SSAOExclusions } from './ssao-exclusions';
@@ -51,7 +56,7 @@ import { prepareCauseway } from './causeway';
 import { makeContext } from './context';
 import { StreetNavigation } from './navigation';
 import { MapPlacement } from './placement';
-import { CityClock, sunAngle, type ClockState } from './clock';
+import { CityClock, type ClockState } from './clock';
 import { createLandmarks } from './landmarks';
 import { createRailway, updateRailway, type Railway } from './railway';
 import type { TrainKind } from './rail-path';
@@ -96,6 +101,8 @@ export class CityEngine {
   locale: Locale = DEFAULT_LOCALE;
   scene = new THREE.Scene();
   environmentTarget: THREE.WebGLRenderTarget | null = null;
+  private environmentCache: AtmosphereEnvironment | null = null;
+  atmosphere: AtmosphereMode = 'clear';
   extraTextures = new Set<THREE.Texture>();
   contextLost = false;
   compatibleGraphics = false;
@@ -179,7 +186,11 @@ export class CityEngine {
   ambient = new THREE.HemisphereLight(0xc9e7ff, 0x66746b, 2.2);
   water!: THREE.Mesh;
   waterWorld!: WaterWorld;
-  uniforms = { night: { value: 0 }, time: { value: 0 } };
+  uniforms = {
+    night: { value: 0 }, time: { value: 0 },
+    skyHorizon: { value: new THREE.Color() },
+    skyZenith: { value: new THREE.Color() },
+  };
   disposed = false;
   frame = 0;
   resizeObserver: ResizeObserver;
@@ -284,12 +295,8 @@ export class CityEngine {
         this.transition = null;
       });
       this.sky.scale.setScalar(35000);
-      this.sky.material.uniforms.turbidity.value = 3;
-      this.sky.material.uniforms.rayleigh.value = 1.7;
-      this.sky.material.uniforms.mieCoefficient.value = 0.005;
-      this.sky.material.uniforms.mieDirectionalG.value = 0.8;
-      this.sky.material.uniforms.sunPosition.value.set(-4000, 5000, 1400);
-      this.sky.material.uniforms.showSunDisc.value = false;
+      installAtmosphereSky(this.sky);
+      applyAtmosphereSky(this.sky, sampleAtmosphere(this.clock.hour, this.atmosphere));
       this.scene.add(this.sky);
       this.skyEffects = new SkyEffects(this.scene);
       if (process.env.VANCOUVER_VISUAL_QA === '1') {
@@ -297,16 +304,10 @@ export class CityEngine {
         this.startupQA?.begin('constructor.environment-pmrem');
       }
       if (!this.compatibleGraphics) {
-        const pmrem = new THREE.PMREMGenerator(this.renderer),
-          envScene = new THREE.Scene();
-        envScene.add(this.sky.clone());
-        try {
-          this.environmentTarget = pmrem.fromScene(envScene, 0.04);
-          this.scene.environment = this.environmentTarget.texture;
-          this.scene.environmentIntensity = 0.012;
-        } finally {
-          pmrem.dispose();
-        }
+        this.environmentCache = new AtmosphereEnvironment(this.renderer, this.sky);
+        this.environmentTarget = this.environmentCache.get(this.atmosphere,
+          sampleAtmosphere(this.clock.hour, this.atmosphere).environmentPhase);
+        this.scene.environment = this.environmentTarget.texture;
       }
       if (process.env.VANCOUVER_VISUAL_QA === '1') {
         this.startupQA?.end('constructor.environment-pmrem');
@@ -529,6 +530,7 @@ export class CityEngine {
     }
     harmonizeGround(this);
     createBeachAmenities(this);
+    createResidentialGround(this);
     // Resolve landmark feet and entries from the final rendered ground.
     if (!(await advance(75))) return;
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
@@ -1305,6 +1307,12 @@ export class CityEngine {
     this.stats.clock = this.clock.snapshot();
     this.onStats({ ...this.stats });
   }
+  setAtmosphere(mode: AtmosphereMode) {
+    const next = normalizeAtmosphere(mode);
+    if (next === this.atmosphere || this.disposed || this.contextLost) return;
+    this.atmosphere = next;
+    this.updateLighting(true);
+  }
   tickClock(time: number) {
     this.clock.tick(time);
     if (
@@ -1317,9 +1325,8 @@ export class CityEngine {
     const hour = this.clock.hour;
     this.lastLightHour = hour;
     this.lastLightUpdate = time;
-    const a = sunAngle(hour),
-      day = Math.max(0, Math.sin(a)),
-      night = 1 - THREE.MathUtils.smoothstep(day, 0, 0.38);
+    const lighting = sampleAtmosphere(hour, this.atmosphere),
+      { angle: a, night } = lighting;
     this.uniforms.night.value = night;
     for (const n of this.data.nightMaterials || [])
       n.material.emissiveIntensity = night * n.intensity;
@@ -1330,23 +1337,31 @@ export class CityEngine {
       ).emissiveIntensity = 0.05 + night * 1.7;
     this.sun.position.set(
       Math.cos(a) * 4500,
-      Math.max(300, Math.sin(a) * 5000),
+      Math.sin(a) * 5000,
       1400,
     );
-    this.sky.material.uniforms.sunPosition.value.copy(this.sun.position);
-    this.sky.visible = day > 0.05;
+    applyAtmosphereSky(this.sky, lighting);
+    this.sky.visible = true;
+    this.uniforms.skyHorizon.value.copy(lighting.horizon);
+    this.uniforms.skyZenith.value.copy(lighting.zenith);
+    if (this.skyEffects) this.skyEffects.atmosphereVisibility = lighting.celestialVisibility;
     this.sun.position.add(this.sun.target.position);
-    this.sun.intensity = day * 2.3 + 0.04;
-    this.sun.color.set(night > 0.2 ? 0xffad73 : 0xffeed6);
-    this.ambient.intensity = 0.4 + day * 1.3;
-    const bg = new THREE.Color(0x102536).lerp(
-      new THREE.Color(0xbedce9),
-      Math.pow(day, 0.5),
-    );
-    this.scene.environmentIntensity = 0.002 + day * 0.016;
-    this.scene.background = bg;
-    if (this.scene.fog) this.scene.fog.color.copy(bg);
-    this.renderer.toneMappingExposure = 1.06 + night * 0.1;
+    this.sun.intensity = lighting.sunIntensity;
+    this.sun.color.copy(lighting.sunColor);
+    this.ambient.intensity = lighting.ambientIntensity;
+    this.ambient.color.copy(lighting.hemisphereSky);
+    this.ambient.groundColor.copy(lighting.hemisphereGround);
+    if (this.environmentCache) {
+      this.environmentTarget = this.environmentCache.get(this.atmosphere, lighting.environmentPhase);
+      this.scene.environment = this.environmentTarget.texture;
+    }
+    this.scene.environmentIntensity = lighting.environmentIntensity;
+    this.scene.background = lighting.horizon;
+    if (this.scene.fog) {
+      this.scene.fog.color.copy(lighting.horizon);
+      if (this.scene.fog instanceof THREE.FogExp2) this.scene.fog.density = lighting.fogDensity;
+    }
+    this.renderer.toneMappingExposure = lighting.exposure;
     const hourDelta = Math.abs(hour - this.lastShadowHour);
     const movedSun = Math.min(hourDelta, 24 - hourDelta) >= 1 / 30;
     if (force || (movedSun && time - this.lastSolarShadowUpdate >= 750)) {
@@ -1640,7 +1655,7 @@ export class CityEngine {
         }
       }
     });
-    this.environmentTarget?.dispose();
+    this.environmentCache?.dispose();
     this.extraTextures.forEach((t) => t.dispose());
     this.sun.shadow.dispose();
     this.composer?.passes.forEach((p) => p.dispose());

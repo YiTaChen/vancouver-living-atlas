@@ -14,6 +14,7 @@ import {
 export class SkyEffects {
   settings = { ...DEFAULT_SKY };
   qaTime: number | null = null;
+  atmosphereVisibility = 1;
   readonly group = new THREE.Group();
   private cycle = new NightSkyCycle();
   private stars: THREE.Points;
@@ -50,7 +51,7 @@ export class SkyEffects {
       color+=vec3(5.,3.,1.2)*disc+vec3(1.,.81,.48)*glow;alpha=max(alpha,disc+glow);
       vec3 right=normalize(cross(moonDir,vec3(0.,1.,0.)));vec3 up=cross(right,moonDir);
       vec2 uv=vec2(dot(d,right),dot(d,up))/.014;float r=dot(uv,uv);
-      if(r<1. && dot(d,moonDir)>.9 && moonOn>.5){
+      if(r<1. && dot(d,moonDir)>.9 && moonOn>.001){
         float z=sqrt(max(0.,1.-r));vec3 n=vec3(uv,z);
         vec3 light=vec3(sin(phase*6.2831853),.025,-cos(phase*6.2831853));
         float lit=smoothstep(-.025,.06,dot(n,light));
@@ -147,21 +148,22 @@ export class SkyEffects {
         ? cycle.phase
         : Math.max(0, MOON_PHASES.indexOf(s.moonPhase) - 1) / 8;
     u.eclipse.value = s.moonPhase === 'eclipse' ? 1 : 0;
-    u.sunOn.value = s.sun ? 1 : 0;
-    u.moonOn.value = s.moon ? 1 : 0;
+    const visibility = THREE.MathUtils.clamp(this.atmosphereVisibility, 0, 1);
+    u.sunOn.value = s.sun ? visibility : 0;
+    u.moonOn.value = s.moon ? visibility : 0;
     u.aurora.value =
       s.aurora && (s.auroraMode === 'always' || cycle.aurora)
-        ? s.auroraIntensity
+        ? s.auroraIntensity * visibility
         : 0;
     u.density.value = s.auroraDensity;
     u.time.value =
       process.env.VANCOUVER_VISUAL_QA === '1' && this.qaTime !== null
         ? this.qaTime
         : time / 1000;
-    u.meteors.value = s.meteors ? s.meteorFrequency : 0;
+    u.meteors.value = s.meteors && visibility > 0.5 ? s.meteorFrequency : 0;
     this.stars.visible = s.stars && u.night.value > 0.001;
     (this.stars.material as THREE.ShaderMaterial).uniforms.night.value =
-      u.night.value;
+      u.night.value * visibility;
     this.stars.geometry.setDrawRange(0, Math.round(s.starDensity * 3200));
     this.stars.rotation.y = (hour / 24) * Math.PI * 2;
     this.group.position.copy(camera.position);

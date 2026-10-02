@@ -1,0 +1,30 @@
+{
+  "scope": "Actual City buildings, terrain and connected road/sidewalk source mesh; excludes separate path meshes and non-road landmark ground pads. All potential opaque cells, not camera-visible frame submission.",
+  "baseline": {
+    "heritageBays": 108,
+    "modernBays": 18,
+    "opaqueDraws": 200,
+    "opaqueBoxes": 118967,
+    "opaqueTriangles": 1427604,
+    "instanceColorBytes": 0,
+    "instanceMatrixBytes": 7613888,
+    "distinctMaterials": 9
+  },
+  "candidate": {
+    "heritageBays": 108,
+    "modernBays": 18,
+    "opaqueDraws": 26,
+    "opaqueBoxes": 127911,
+    "opaqueTriangles": 1534932,
+    "instanceColorBytes": 1534932,
+    "instanceMatrixBytes": 8186304,
+    "distinctMaterials": 1
+  },
+  "selectedSource": {
+    "buildings": 71,
+    "edges": 127,
+    "legacyFallbackOpenings": 259,
+    "reliefBoxes": 1748,
+    "sashBoxes": 7196
+  }
+}

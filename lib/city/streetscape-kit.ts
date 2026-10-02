@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import streetKitManifest from '../../public/models/streetscape/manifest.json';
 import type {
   StreetBayAsset,
   StreetBayPlacement,
@@ -162,7 +163,10 @@ export class StreetscapeKit {
       kinds.flatMap((kind) =>
         [0, 1].map(async (level) => {
           const scene = await this.loader(
-            `/models/streetscape/${kind}.lod${level}.glb`,
+            `/models/streetscape/${kind}.lod${level}.glb?v=${streetKitManifest.assets
+              .find((asset) => asset.id === kind)!
+              .lods.find((lod) => lod.level === level)!
+              .sha256.slice(0, 12)}`,
           );
           const parts = flattenStreetBay(scene);
           if (this.disposed || this.e.disposed) {

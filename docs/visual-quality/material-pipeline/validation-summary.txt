@@ -1,0 +1,36 @@
+npm test
+ℹ tests 563
+ℹ suites 0
+ℹ pass 563
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 36697.313363
+
+npm run check
+
+> vancouver-living-atlas@0.1.0 check
+> tsc --noEmit --incremental false
+
+
+Final post-UI-label-fix npm run check
+
+> vancouver-living-atlas@0.1.0 check
+> tsc --noEmit --incremental false
+
+
+Final production build verification
+
+  ○ Routes marked static were confirmed by speculative prerender (attempted render
+    succeeded without dynamic API usage).
+
+  Build complete. Run `vinext start` to start the production server.
+
+Firebase static build verified: English HTML, ten-language UI and geographic assets.
+Emitted landmark worker verified: initializes without Window/DOM and handles protocol messages.
+
+Production UI
+Desktop 1280x800; portrait 390x844; landscape 844x390; compatible 844x390: passed.
+Translated initial clear label, weather selection, scroll and close/reopen checked. Compatible graphics mode and zero QA panels; console entries: 0.
+Desktop viewport emulation only; not physical mobile performance or a new gameplay test.

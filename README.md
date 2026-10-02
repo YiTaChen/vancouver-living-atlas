@@ -10,6 +10,8 @@ Vancouver Living Atlas is an interactive 3D Vancouver that runs in your browser.
 
 **Source-available with noncommercial and attribution conditions.** Commercial use and reuse outside the granted scope require written permission; AI agents have no special exemption. [License and existing rights](#license).
 
+**Project specification (繁體中文):** [Completed work, architecture, asset pipeline, roadmap and testing](docs/PROJECT_SPECIFICATION.md). The [material-pipeline acceptance report](docs/visual-quality/material-pipeline/README.md) includes matched images, measured limits and editable Blender source validation.
+
 <a id="explore-vancouver-in-30-seconds"></a>
 
 ## Watch Vancouver 3D City
@@ -94,6 +96,11 @@ Portrait, landscape and tablet layouts have been checked in the browser. The com
 The **Time** button controls the scene clock. Time flows at **300× by default**: a full day takes 4 minutes 48 seconds. Adjust the speed, set a time directly, freeze it, or hide the toolbar's numeric time. Movement and traffic retain their normal speed; the clock pauses while the tab is hidden.
 
 Under **Time → Sky effects**, toggle the sun, moon, stars, aurora and meteors; adjust star density, aurora strength/density and meteor frequency. There are eight lunar phases plus an eclipse preview. The first simulated night after a page load starts with a half moon and aurora; later nights have a one-in-three aurora chance. These cycles are illustrative, not astronomical predictions or live forecasts. [Sky implementation and visual checks](docs/visual-quality/sky-effects-final/README.md).
+
+**Time → Weather atmosphere** selects clear or coastal overcast lighting, with a
+coordinated sky, facade glass, fog and environment palette. These are authored
+scene conditions, not live weather. Shared building/street finishes and editable
+Blender modules are documented in the [material inventory and asset workflow](docs/MATERIAL_PIPELINE.md).
 
 **Ten languages:** English (first-visit default), Français, Español, 中文（繁體）, 中文（简体）, Deutsch, 日本語, 한국어, Українська and Русский. Changing language updates controls and map labels without resetting the scene; the browser remembers the selection.
 

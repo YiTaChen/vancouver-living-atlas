@@ -145,6 +145,7 @@ export function createFixture({ harmonize = true } = {}) {
     camera: new THREE.PerspectiveCamera(42, 1.5, 0.08, 45000),
     controls: { target: new THREE.Vector3(), enabled: false },
     stats: {},
+    extraTextures: new Set(),
     renderer: {
       domElement: {
         addEventListener() {},
@@ -194,7 +195,15 @@ export function createFixture({ harmonize = true } = {}) {
   // Causeway bridges, nature's ground paths, road index, then StreetNavigation.
   e.makeLand();
   load('lib/city/causeway.ts').prepareCauseway(e);
-  load('lib/city/road-surfaces.ts').createRoadSurfaces(e);
+  // This fixture audits geometry and reachability without a browser. Preserve
+  // real material construction/ownership while avoiding DOM image requests.
+  const loadTexture = THREE.TextureLoader.prototype.load;
+  THREE.TextureLoader.prototype.load = () => new THREE.Texture();
+  try {
+    load('lib/city/road-surfaces.ts').createRoadSurfaces(e);
+  } finally {
+    THREE.TextureLoader.prototype.load = loadTexture;
+  }
   load('lib/city/causeway-meshes.ts').createCausewayMeshes(e);
   const coastalMesh = new THREE.Mesh(
     e.geometry(e.data.beachCoast.pathPositions),

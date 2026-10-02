@@ -41,3 +41,7 @@ firebase-debug.log*
 
 # incremental compiler state
 *.tsbuildinfo
+
+# Blender authoring backups and Python caches; canonical .blend sources are tracked.
+*.blend1
+__pycache__/

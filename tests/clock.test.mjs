@@ -2,6 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import ts from 'typescript';
+import { Sky } from 'three/addons/objects/Sky.js';
+import { cityModule } from './helpers/city-modules.mjs';
+const { installAtmosphereSky } = await import(cityModule('atmosphere'));
 const source = readFileSync(
   new URL('../lib/city/clock.ts', import.meta.url),
   'utf8',
@@ -141,7 +144,7 @@ assert.equal(methods.length, selected.length);
 const clockUrl =
   'data:text/javascript;base64,' + Buffer.from(code).toString('base64');
 const compiled = ts.transpileModule(
-  `import * as THREE from '${import.meta.resolve('three')}'; import {sunAngle} from '${clockUrl}'; export class EngineMethods {${methods.join('\n')}}`,
+  `import * as THREE from '${import.meta.resolve('three')}'; import {sunAngle} from '${clockUrl}'; import {sampleAtmosphere,applyAtmosphereSky} from '${cityModule('atmosphere')}'; export class EngineMethods {${methods.join('\n')}}`,
   {
     compilerOptions: {
       module: ts.ModuleKind.ESNext,
@@ -174,10 +177,14 @@ function engineFixture() {
     renderer: { shadowMap: { enabled: true, needsUpdate: false } },
     sun: new THREE.DirectionalLight(),
     ambient: new THREE.HemisphereLight(),
-    sky: {
-      material: { uniforms: { sunPosition: { value: new THREE.Vector3() } } },
+    sky: new Sky(),
+    atmosphere: 'clear',
+    uniforms: {
+      night: { value: 0 },
+      time: { value: 123 },
+      skyHorizon: { value: new THREE.Color() },
+      skyZenith: { value: new THREE.Color() },
     },
-    uniforms: { night: { value: 0 }, time: { value: 123 } },
     data: {},
     scene: new THREE.Scene(),
     stats: {},
@@ -189,6 +196,7 @@ function engineFixture() {
     lastShadowHour: -1,
     lastSolarShadowUpdate: 0,
   });
+  installAtmosphereSky(e.sky);
   e.clock.tick(0);
   return { e, calls };
 }

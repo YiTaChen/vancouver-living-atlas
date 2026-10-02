@@ -5,7 +5,7 @@ Optional: --skip-render. GLB coordinates: metres, Y up, front +Z; pivot at
 ground-level centre of the facade. Blender authoring uses Z up, front -Y.
 """
 from pathlib import Path
-import bpy, bmesh, math, json, argparse, sys, random
+import bpy, bmesh, math, json, argparse, sys, random, hashlib
 from mathutils import Vector
 import numpy as np
 
@@ -14,9 +14,12 @@ p=argparse.ArgumentParser()
 p.add_argument('--output', default=str(Path(__file__).resolve().parent))
 p.add_argument('--skip-render', action='store_true')
 p.add_argument('--quick-preview', action='store_true', help='Render only the compact bay detail preview')
+p.add_argument('--only-shipping', action='store_true', help='Build the two reusable modules loaded by the city')
+p.add_argument('--shared-materials', type=Path, help='City material source/textures directory; reuse the shared PBR library')
+p.add_argument('--from-source', type=Path, help='Re-export edited ID.lod0.blend / ID.lod1.blend files without changing their dimensions or UVs')
 A=p.parse_args(args)
 OUT=Path(A.output).resolve()
-for d in ['assets','previews','textures']: (OUT/d).mkdir(parents=True,exist_ok=True)
+for d in ['assets','previews','textures','source']: (OUT/d).mkdir(parents=True,exist_ok=True)
 bpy.ops.object.select_all(action='SELECT'); bpy.ops.object.delete(use_global=False)
 for m in list(bpy.data.materials): bpy.data.materials.remove(m)
 bpy.context.scene.unit_settings.system='METRIC'
@@ -94,6 +97,29 @@ M={
  'window':material('Recessed upper glazing',(.095,.16,.18),.22,.55),
  'light':material('Warm frosted diffuser',(.91,.71,.39),.42,emission=.55),
 }
+for role,mat in M.items(): mat['surface_role']=role
+if A.shared_materials:
+    catalog=json.loads((Path(__file__).resolve().parents[1]/'city-materials'/'catalog.json').read_text())
+    surface_specs={entry['id']:entry for entry in catalog['materials']}
+    for role,surface in {'brick':'heritage-brick','stone':'sandstone','paint':'painted-metal','metal':'painted-metal','wood':'cedar'}.items():
+        spec=surface_specs[surface]; mat=M[role]; nt=mat.node_tree; nt.nodes.clear()
+        out=nt.nodes.new('ShaderNodeOutputMaterial'); bs=nt.nodes.new('ShaderNodeBsdfPrincipled'); nt.links.new(bs.outputs[0],out.inputs['Surface'])
+        uv=nt.nodes.new('ShaderNodeUVMap'); uv.uv_map='UVMap'
+        scale=nt.nodes.new('ShaderNodeVectorMath'); scale.operation='MULTIPLY'
+        # Existing module source UVs are metres / 2.
+        scale.inputs[1].default_value=(2/spec['tileMeters'][0],2/spec['tileMeters'][1],1)
+        nt.links.new(uv.outputs['UV'],scale.inputs[0])
+        nodes={}
+        for key in ['color','normal','orm']:
+            image=bpy.data.images.load(str(A.shared_materials.resolve()/f'{surface}-{key}.png'),check_existing=True)
+            image.colorspace_settings.name='sRGB' if key=='color' else 'Non-Color'; image.pack()
+            tex=nt.nodes.new('ShaderNodeTexImage'); tex.image=image; nt.links.new(scale.outputs[0],tex.inputs['Vector']); nodes[key]=tex
+        nt.links.new(nodes['color'].outputs['Color'],bs.inputs['Base Color'])
+        normal=nt.nodes.new('ShaderNodeNormalMap'); normal.uv_map='UVMap'; normal.inputs['Strength'].default_value=.65
+        nt.links.new(nodes['normal'].outputs['Color'],normal.inputs['Color']); nt.links.new(normal.outputs[0],bs.inputs['Normal'])
+        sep=nt.nodes.new('ShaderNodeSeparateColor'); sep.mode='RGB'; nt.links.new(nodes['orm'].outputs['Color'],sep.inputs[0])
+        nt.links.new(sep.outputs['Green'],bs.inputs['Roughness']); nt.links.new(sep.outputs['Blue'],bs.inputs['Metallic'])
+        mat['city_surface_id']=surface
 PARTS=[]; LEVEL=0
 
 def add(obj,name,mat):
@@ -361,7 +387,8 @@ def heritage_bay():
     # Compact independent ground-storey facade unit; human dimensions never scaled.
     cube('Low sandstone threshold',(0,.20,.105),(3.2,.75,.21),'stone',.023)
     for x in [-1.49,1.49]:
-        cube('Brick end pier',(x,.15,2.21),(.22,.44,4.21),'brick',.012)
+        # End the pier at the cornice underside; overlapping outer caps baked black.
+        cube('Brick end pier',(x,.15,(.105+4.10)/2),(.22,.44,4.10-.105),'brick',.012)
         cube('Sandstone pier shoe',(x,.105,.46),(.25,.53,.60),'stone',.020)
         cube('Pier capital',(x,.045,3.61),(.27,.59,.16),'stone',.020)
     cube('Door shop dividing pilaster',(-.43,.08,1.94),(.115,.33,3.45),'paint',.015)
@@ -401,7 +428,9 @@ def heritage_bay():
 
 def modern_bay():
     cube('Terrazzo entry threshold',(0,.29,.105),(3.20,.76,.21),'stone',.022)
-    for x in [-1.495,1.495]: cube('Honed stone facade jamb',(x,.29,2.27),(.21,.64,4.15),'stone',.025)
+    # Keep the ground datum, but stop jambs at the lintel underside. Both
+    # formerly shared a front plane through the lintel's end rectangles.
+    for x in [-1.495,1.495]: cube('Honed stone facade jamb',(x,.29,(.195+4.14)/2),(.21,.64,4.14-.195),'stone',.025)
     cube('Honed stone top lintel',(0,.30,4.245),(3.2,.66,.21),'stone',.026)
     cube('Lobby rear wall',(0,1.47,2.16),(2.79,.10,3.94),'stone',.015)
     cube('Lobby floor',(0,.84,.23),(2.78,1.35,.15),'stone',.023)
@@ -443,7 +472,7 @@ def clear_parts():
     for ob in list(bpy.data.objects): bpy.data.objects.remove(ob,do_unlink=True)
     PARTS=[]
 
-def finish(name):
+def finish(name, authored=False):
     bpy.ops.object.select_all(action='DESELECT')
     for o in PARTS: o.select_set(True)
     bpy.context.view_layer.objects.active=PARTS[0]
@@ -453,7 +482,7 @@ def finish(name):
     # Compact bay assets mount in front of uncut GIS walls. Their shallow display
     # recess stays visible without changing measured massing or collision. X/Z
     # dimensions remain in metres; only non-walkable interior depth is compressed.
-    if name in ['heritage-shop-bay','modern-lobby-bay']:
+    if not authored and name in ['heritage-shop-bay','modern-lobby-bay']:
         for vertex in ob.data.vertices:
             y=vertex.co.y
             vertex.co.y=(y*.18 if y>0 else y)-.30
@@ -464,6 +493,9 @@ def finish(name):
             if vertex.co.z>2.40:
                 vertex.co.z=2.40+(vertex.co.z-2.40)*(.80/1.95)
         ob.data.update()
+    # Reproject after compact-bay deformation: texture scale follows final
+    # metres, including the redesigned crown and shallow display interior.
+    if not authored: uv_metric(ob)
     # Triangulate explicitly for stable measured counts and exporter compatibility.
     mod=ob.modifiers.new('Runtime triangles','TRIANGULATE'); bpy.ops.object.modifier_apply(modifier=mod.name)
     # Join can leave repeated material slots. Deduplicate while preserving per-face material.
@@ -540,9 +572,10 @@ def bake_opaque_atlas(ob,key,stats):
     nm=nt.nodes.new('ShaderNodeNormalMap'); nm.uv_map='UVMap'; nt.links.new(ims[1].outputs['Color'],nm.inputs['Color']); nt.links.new(nm.outputs['Normal'],bs.inputs['Normal'])
     sep=nt.nodes.new('ShaderNodeSeparateColor'); sep.mode='RGB'; nt.links.new(ims[2].outputs['Color'],sep.inputs[0])
     nt.links.new(sep.outputs['Green'],bs.inputs['Roughness']); nt.links.new(sep.outputs['Blue'],bs.inputs['Metallic'])
-    indices=[1 if source[f.material_index]==M['glass'] else 2 if source[f.material_index]==M['light'] else 0 for f in ob.data.polygons]
+    roles={mat.get('surface_role'):mat for mat in source}
+    indices=[1 if source[f.material_index].get('surface_role')=='glass' else 2 if source[f.material_index].get('surface_role')=='light' else 0 for f in ob.data.polygons]
     ob.data.materials.clear()
-    for mat in [atlas,M['glass'],M['light']]: ob.data.materials.append(mat)
+    for mat in [atlas,roles.get('glass',M['glass']),roles.get('light',M['light'])]: ob.data.materials.append(mat)
     for f,i in zip(ob.data.polygons,indices): f.material_index=i
     stats['materials']=len(set(indices)); stats['pbrAtlas']={'resolution':1024 if LEVEL==0 else 512,'maps':['basecolor','normal','ORM'],'occlusion':'R=1 (unbaked); roughness in G; metallic in B'}
 
@@ -550,7 +583,8 @@ def render_stage():
     clear_parts(); global LEVEL,PARTS
     LEVEL=0
     # Display placement only; module source pivots are untouched in their exports.
-    for key,x,y in [('heritage-shopfront',-5,0),('modern-lobby-bay',.23,.16),('heritage-shop-bay',3.43,0),('transit-shelter',8,-1.1),('heritage-lamp',-1.7,-2.3),('cedar-bench',-5,-2.1)]:
+    preview_assets=[('modern-lobby-bay',.23,.16),('heritage-shop-bay',3.43,0)] if A.only_shipping else [('heritage-shopfront',-5,0),('modern-lobby-bay',.23,.16),('heritage-shop-bay',3.43,0),('transit-shelter',8,-1.1),('heritage-lamp',-1.7,-2.3),('cedar-bench',-5,-2.1)]
+    for key,x,y in preview_assets:
         # Preview the actual exported files, including baked atlas and GLB normals.
         before=set(bpy.data.objects)
         bpy.ops.import_scene.gltf(filepath=str(OUT/'assets'/f'{key}.lod0.glb'))
@@ -605,18 +639,40 @@ manifest={'kit':'Vancouver original streetscape kit','version':2,'license':'Lice
  {'title':'City of Vancouver Central Area Pedestrian Weather Protection','url':'https://guidelines.vancouver.ca/guidelines-central-area-pedestrian-weather-protection.pdf','use':'General rain-canopy function only.'}],
  'assets':[]}
 for key,builder in BUILDERS.items():
+    if A.only_shipping and key not in ['heritage-shop-bay','modern-lobby-bay']: continue
     entry={'id':key,'description':DESCRIPTIONS[key],'lods':[],'anchors':{'ground':[0,0,0],'streetFacing':[0,0,1]}}
     if key in ['heritage-shopfront','modern-lobby']: entry['anchors']['entry']=[0,0,.01]
     if key=='heritage-shop-bay': entry['anchors']['entry']=[-.875,0,.01]
     if key=='modern-lobby-bay': entry['anchors']['entry']=[0,0,.01]
     for lev in [0,1]:
-        LEVEL=lev; clear_parts(); builder(); ob,stats=finish(key)
+        LEVEL=lev; clear_parts()
+        if A.from_source:
+            source_file=A.from_source.resolve()/f'{key}.lod{lev}.blend'
+            if not source_file.exists(): raise FileNotFoundError(source_file)
+            with bpy.data.libraries.load(str(source_file),link=False) as (data_from,data_to):
+                data_to.objects=list(data_from.objects)
+            PARTS=[]
+            for loaded in data_to.objects:
+                if loaded and loaded.type=='MESH':
+                    bpy.context.collection.objects.link(loaded); PARTS.append(loaded)
+            if not PARTS: raise ValueError(f'No mesh in {source_file}')
+        else: builder()
+        ob,stats=finish(key,authored=bool(A.from_source))
+        # Save the actual dimensioned module before baking flattens materials.
+        # Each file opens as an independent editable Blender scene.
+        author_scene=bpy.data.scenes.new(key+' editable source')
+        author_scene.unit_settings.system='METRIC'; author_scene.collection.objects.link(ob)
+        bpy.data.libraries.write(str(OUT/'source'/f'{key}.lod{lev}.blend'),{author_scene},path_remap='RELATIVE',compress=True)
+        bpy.data.scenes.remove(author_scene)
         if key in ['heritage-shop-bay','modern-lobby-bay','transit-shelter']: bake_opaque_atlas(ob,key,stats)
         file=OUT/'assets'/f'{key}.lod{lev}.glb'
         bpy.ops.export_scene.gltf(filepath=str(file),export_format='GLB',use_selection=True,export_yup=True,export_extras=True,export_animations=False,export_cameras=False,export_lights=False)
-        stats.update({'level':lev,'file':f'assets/{file.name}','bytes':file.stat().st_size})
+        stats.update({'level':lev,'file':f'assets/{file.name}','bytes':file.stat().st_size,'sha256':hashlib.sha256(file.read_bytes()).hexdigest()})
         entry['lods'].append(stats)
     manifest['assets'].append(entry)
+if A.shared_materials:
+    manifest['sharedMaterialCatalog']='tools/assets/city-materials/catalog.json'
+    manifest['version']=3
 (OUT/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
 if not A.skip_render: render_stage()
 print('KIT COMPLETE:',OUT)

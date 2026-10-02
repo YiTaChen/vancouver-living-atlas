@@ -40,11 +40,15 @@ import {
 import { FlightControls, flightText } from '@/components/flight-controls';
 import { EMPTY_FLIGHT, type FlightSnapshot } from '@/lib/city/flight-snapshot';
 import { TravelJoystick } from '@/components/travel-joystick';
-import { DiscoveryPanel, type DiscoveryTarget } from '@/components/discovery-panel';
+import {
+  DiscoveryPanel,
+  type DiscoveryTarget,
+} from '@/components/discovery-panel';
 import type { DiscoveryRoute } from '@/lib/city/discovery-routes';
 import { placeDiscoveryStart } from '@/lib/city/discovery-runtime';
 import { placeLightLabStart } from '@/lib/city/light-lab-runtime';
 import { SkyControls } from '@/components/sky-controls';
+import type { AtmosphereMode } from '@/lib/city/atmosphere';
 import {
   DEFAULT_SKY,
   normalizeSky,
@@ -70,6 +74,7 @@ import {
 import {
   Select,
   SelectTrigger,
+  SelectValue,
   SelectContent,
   SelectItem,
 } from '@/components/ui/select';
@@ -163,6 +168,7 @@ export default function Home() {
     [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS),
     [panel, setPanel] = useState<'layers' | 'time' | null>(null),
     [skySettings, setSkySettings] = useState<SkySettings>({ ...DEFAULT_SKY }),
+    [atmosphere, setAtmosphere] = useState<AtmosphereMode>('clear'),
     [hideTime, setHideTime] = useState(false),
     [about, setAbout] = useState(false),
     [tour, setTour] = useState(false),
@@ -221,7 +227,9 @@ export default function Home() {
         try {
           engine.current = new CityEngine(
             host.current,
-            (snapshot) => { if (!stopped) setStats(snapshot); },
+            (snapshot) => {
+              if (!stopped) setStats(snapshot);
+            },
             () => {
               if (stopped) return;
               setReady(true);
@@ -257,8 +265,15 @@ export default function Home() {
   useEffect(() => {
     const city = engine.current;
     if (!ready || !city) return;
-    if (city.flight) { city.flight.onChange = setFlight; setFlight(city.flight.snapshot); }
-    city.onFlightMode = (mode) => { setTour(false); setPlacing(null); setSettings(s => ({...s,mode,autoRotate:false})); };
+    if (city.flight) {
+      city.flight.onChange = setFlight;
+      setFlight(city.flight.snapshot);
+    }
+    city.onFlightMode = (mode) => {
+      setTour(false);
+      setPlacing(null);
+      setSettings((s) => ({ ...s, mode, autoRotate: false }));
+    };
     city.onTravelReturnChange = setReturnMode;
     city.onTravelResume = (mode) => {
       setLocalOrbit(false);
@@ -277,7 +292,7 @@ export default function Home() {
     if (process.env.VANCOUVER_VISUAL_QA === '1')
       city.startupQA?.reactCommitted(city);
     return () => {
-      if(city.flight) city.flight.onChange = () => {};
+      if (city.flight) city.flight.onChange = () => {};
       city.onFlightMode = () => {};
       city.onTravelReturnChange = () => {};
       city.onTravelResume = () => {};
@@ -366,7 +381,10 @@ export default function Home() {
           )
         )
           return;
-        if (engine.current?.flight?.placing) { engine.current.flight.cancelPlacement(); return; }
+        if (engine.current?.flight?.placing) {
+          engine.current.flight.cancelPlacement();
+          return;
+        }
         if (engine.current?.placement?.mode) {
           ev.preventDefault();
           engine.current.placement.cancel();
@@ -515,13 +533,20 @@ export default function Home() {
     return true;
   };
   const beginFlight = () => {
-    if(!ready) return;
-    setTour(false); setPanel(null); setPlacing(null); setMobilePanel(null); setClean(false);
+    if (!ready) return;
+    setTour(false);
+    setPanel(null);
+    setPlacing(null);
+    setMobilePanel(null);
+    setClean(false);
     engine.current?.flight?.beginPlacement();
   };
   const switchMode = (mode: string) => {
-    if(mode === 'flight') { beginFlight(); return; }
-    if(mode !== 'orbit') engine.current?.flight?.clear();
+    if (mode === 'flight') {
+      beginFlight();
+      return;
+    }
+    if (mode !== 'orbit') engine.current?.flight?.clear();
     if (mode === 'orbit') {
       setTour(false);
       engine.current?.placement?.cancel();
@@ -535,7 +560,11 @@ export default function Home() {
     if (event.button !== 0 || !ready) return;
     event.preventDefault();
     event.stopPropagation();
-    setTour(false); setPanel(null); setPlacing(null); setMobilePanel(null); setClean(false);
+    setTour(false);
+    setPanel(null);
+    setPlacing(null);
+    setMobilePanel(null);
+    setClean(false);
     event.currentTarget.setPointerCapture(event.pointerId);
     engine.current?.flight?.startDrag(event.nativeEvent);
   };
@@ -615,19 +644,48 @@ export default function Home() {
   return (
     <main
       data-travel-mode={settings.mode}
-      className={`atlas ${clean ? 'clean' : ''} ${settings.mode !== 'orbit' ? 'street-mode' : ''} ${placing || flight.placing ? 'placement-mode' : ''} ${flight.placing ? 'flight-placement-mode' : ''} ${settings.mode==='flight'?'flight-mode':''} ${touchUI ? 'touch-ui' : ''} ${touchUI && mobileHudHidden ? 'mobile-hud-hidden' : ''} ${mobilePanel ? `mobile-${mobilePanel}-open` : ''}`}
+      className={`atlas ${clean ? 'clean' : ''} ${settings.mode !== 'orbit' ? 'street-mode' : ''} ${placing || flight.placing ? 'placement-mode' : ''} ${flight.placing ? 'flight-placement-mode' : ''} ${settings.mode === 'flight' ? 'flight-mode' : ''} ${touchUI ? 'touch-ui' : ''} ${touchUI && mobileHudHidden ? 'mobile-hud-hidden' : ''} ${mobilePanel ? `mobile-${mobilePanel}-open` : ''}`}
     >
-      {stats.trafficStop && settings.mode === 'drive' && <div role="status" className="traffic-stop-caption glass">{stats.trafficStop === 'please safe driving' ? stats.trafficStop : tr('policeStop')}</div>}
+      {stats.trafficStop && settings.mode === 'drive' && (
+        <div role="status" className="traffic-stop-caption glass">
+          {stats.trafficStop === 'please safe driving'
+            ? stats.trafficStop
+            : tr('policeStop')}
+        </div>
+      )}
       <div className="scene" ref={host} />
       <DiscoveryPanel
         city={engine.current}
         locale={locale}
-        visible={ready && !clean && !about && !placing && !flight.placing && !(touchUI && mobileHudHidden) && !panel && !mobilePanel}
+        visible={
+          ready &&
+          !clean &&
+          !about &&
+          !placing &&
+          !flight.placing &&
+          !(touchUI && mobileHudHidden) &&
+          !panel &&
+          !mobilePanel
+        }
         onBegin={beginDiscovery}
         onBeginLab={beginLightLab}
         onTargetChange={discoveryTarget}
       />
-      <FlightControls key={flight.attached ? flight.kind || 'flight' : 'placement'} controller={engine.current?.flight || null} state={flight} locale={locale} touch={touchUI} controlsEnabled={!about && !panel && (!mobilePanel || mobilePanel === 'map')} panelVisible={!about && !panel && (!mobilePanel || mobilePanel === 'travel')} optionsOpen={mobilePanel === 'travel'} onCloseOptions={() => setMobilePanel(null)}/>
+      <FlightControls
+        key={flight.attached ? flight.kind || 'flight' : 'placement'}
+        controller={engine.current?.flight || null}
+        state={flight}
+        locale={locale}
+        touch={touchUI}
+        controlsEnabled={
+          !about && !panel && (!mobilePanel || mobilePanel === 'map')
+        }
+        panelVisible={
+          !about && !panel && (!mobilePanel || mobilePanel === 'travel')
+        }
+        optionsOpen={mobilePanel === 'travel'}
+        onCloseOptions={() => setMobilePanel(null)}
+      />
       {touchUI && ready && (
         <button
           className="mobile-hud-toggle glass"
@@ -665,7 +723,11 @@ export default function Home() {
             {!placing && settings.mode !== 'orbit' && (
               <button
                 className="glass"
-                aria-label={settings.mode === 'flight' ? flightText(locale, 'options') : tr('touchTravelOptions')}
+                aria-label={
+                  settings.mode === 'flight'
+                    ? flightText(locale, 'options')
+                    : tr('touchTravelOptions')
+                }
                 aria-expanded={mobilePanel === 'travel'}
                 onClick={() => {
                   setPanel(null);
@@ -724,7 +786,8 @@ export default function Home() {
               <Minus size={22} />
             </button>
           </div>
-          {settings.mode !== 'orbit' && settings.mode !== 'flight' &&
+          {settings.mode !== 'orbit' &&
+            settings.mode !== 'flight' &&
             !placing &&
             !about &&
             !panel &&
@@ -739,78 +802,80 @@ export default function Home() {
                 onBrake={touchBrake}
               />
             )}
-          {mobilePanel === 'travel' && settings.mode !== 'flight' && !placing && (
-            <section
-              className="mobile-travel-sheet glass ui-chrome"
-              aria-label={tr('touchTravelOptions')}
-            >
-              <div className="touch-sheet-title">
-                <strong>{tr('touchTravelOptions')}</strong>
-                <button
-                  aria-label={tr('close')}
-                  onClick={() => setMobilePanel(null)}
-                >
-                  <X size={18} />
-                </button>
-              </div>
-              {settings.mode === 'drive' && (
-                <div
-                  className="car-options"
-                  role="group"
-                  aria-label={tr('carModel')}
-                >
-                  {(['classic', 'roadster'] as const).map((model) => (
-                    <button
-                      key={model}
-                      aria-pressed={carModel === model}
-                      onClick={() => {
-                        engine.current?.navigation?.setCarModel(model);
-                        setCarModel(model);
-                      }}
-                    >
-                      {tr(model === 'classic' ? 'classicCar' : 'roadsterCar')}
-                    </button>
-                  ))}
-                </div>
-              )}
-              {(settings.mode === 'drive' || settings.mode === 'boat') &&
-                travelView.perspective === 'first' && (
-                  <div
-                    className="interior-options"
-                    role="group"
-                    aria-label={tr('vehicleView')}
+          {mobilePanel === 'travel' &&
+            settings.mode !== 'flight' &&
+            !placing && (
+              <section
+                className="mobile-travel-sheet glass ui-chrome"
+                aria-label={tr('touchTravelOptions')}
+              >
+                <div className="touch-sheet-title">
+                  <strong>{tr('touchTravelOptions')}</strong>
+                  <button
+                    aria-label={tr('close')}
+                    onClick={() => setMobilePanel(null)}
                   >
-                    {(['interior', 'clear'] as const).map((style) => (
+                    <X size={18} />
+                  </button>
+                </div>
+                {settings.mode === 'drive' && (
+                  <div
+                    className="car-options"
+                    role="group"
+                    aria-label={tr('carModel')}
+                  >
+                    {(['classic', 'roadster'] as const).map((model) => (
                       <button
-                        key={style}
-                        aria-pressed={travelView.interior === style}
-                        onClick={() =>
-                          engine.current?.navigation?.setInterior(style)
-                        }
+                        key={model}
+                        aria-pressed={carModel === model}
+                        onClick={() => {
+                          engine.current?.navigation?.setCarModel(model);
+                          setCarModel(model);
+                        }}
                       >
-                        {tr(
-                          style === 'interior' ? 'interiorView' : 'clearView',
-                        )}
+                        {tr(model === 'classic' ? 'classicCar' : 'roadsterCar')}
                       </button>
                     ))}
                   </div>
                 )}
-              <button
-                className="choose-start"
-                onClick={() => beginPlacement(settings.mode as TravelMode)}
-              >
-                <MapPin size={16} />
-                {tr('placementChange')}
-              </button>
-              <p>
-                {tr(
-                  settings.mode === 'walk'
-                    ? 'touchWalkHint'
-                    : 'touchVehicleHint',
-                )}
-              </p>
-            </section>
-          )}
+                {(settings.mode === 'drive' || settings.mode === 'boat') &&
+                  travelView.perspective === 'first' && (
+                    <div
+                      className="interior-options"
+                      role="group"
+                      aria-label={tr('vehicleView')}
+                    >
+                      {(['interior', 'clear'] as const).map((style) => (
+                        <button
+                          key={style}
+                          aria-pressed={travelView.interior === style}
+                          onClick={() =>
+                            engine.current?.navigation?.setInterior(style)
+                          }
+                        >
+                          {tr(
+                            style === 'interior' ? 'interiorView' : 'clearView',
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                <button
+                  className="choose-start"
+                  onClick={() => beginPlacement(settings.mode as TravelMode)}
+                >
+                  <MapPin size={16} />
+                  {tr('placementChange')}
+                </button>
+                <p>
+                  {tr(
+                    settings.mode === 'walk'
+                      ? 'touchWalkHint'
+                      : 'touchVehicleHint',
+                  )}
+                </p>
+              </section>
+            )}
         </>
       )}
 
@@ -971,13 +1036,14 @@ export default function Home() {
             { id: 'walk', name: tr('walk'), icon: PersonStanding },
             { id: 'drive', name: tr('drive'), icon: Car },
             { id: 'boat', name: tr('boat'), icon: Ship },
-            { id: 'flight', name: flightText(locale,'fly'), icon: Plane },
+            { id: 'flight', name: flightText(locale, 'fly'), icon: Plane },
           ].map((m) => (
             <label
               className={`mode-pill ${(flight.placing ? 'flight' : placing || settings.mode) === m.id ? 'active' : ''} ${m.id !== 'orbit' && (placing || !canSwitchStreetMode(settings.mode, m.id)) ? 'figure-handle' : ''}`}
               key={m.id}
               title={
-                m.id === 'orbit' || m.id === 'flight' ||
+                m.id === 'orbit' ||
+                m.id === 'flight' ||
                 (!placing && canSwitchStreetMode(settings.mode, m.id))
                   ? m.name
                   : tr(
@@ -991,18 +1057,25 @@ export default function Home() {
               onPointerDownCapture={
                 m.id === 'orbit'
                   ? undefined
-                  : m.id === 'flight' ? dragAircraft
-                  : (event) => dragFigure(event, m.id as TravelMode)
+                  : m.id === 'flight'
+                    ? dragAircraft
+                    : (event) => dragFigure(event, m.id as TravelMode)
               }
               onClickCapture={
-                m.id === 'flight' ? (event) => {event.preventDefault(); event.stopPropagation(); if (event.detail === 0) beginFlight();} : m.id === 'orbit'
-                  ? undefined
-                  : (event) => {
-                      if (event.detail > 0) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                      }
+                m.id === 'flight'
+                  ? (event) => {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      if (event.detail === 0) beginFlight();
                     }
+                  : m.id === 'orbit'
+                    ? undefined
+                    : (event) => {
+                        if (event.detail > 0) {
+                          event.preventDefault();
+                          event.stopPropagation();
+                        }
+                      }
               }
             >
               <RadioGroupItem
@@ -1451,6 +1524,33 @@ export default function Home() {
             <br />
             {tr('timeDayLength', { minutes: number(1440 / clock.rate) })}
           </p>
+          <label className="clock-field-label" htmlFor="atmosphere-mode">
+            {tr('atmosphereTitle')}
+          </label>
+          <Select
+            value={atmosphere}
+            onValueChange={(value) => {
+              if (value !== 'clear' && value !== 'overcast') return;
+              setAtmosphere(value);
+              engine.current?.setAtmosphere(value);
+            }}
+          >
+            <SelectTrigger
+              id="atmosphere-mode"
+              aria-label={tr('atmosphereTitle')}
+            >
+              <SelectValue>
+                {tr(atmosphere === 'clear' ? 'atmosphereClear' : 'atmosphereOvercast')}
+              </SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="clear">{tr('atmosphereClear')}</SelectItem>
+              <SelectItem value="overcast">
+                {tr('atmosphereOvercast')}
+              </SelectItem>
+            </SelectContent>
+          </Select>
+          <p className="settings-note">{tr('atmosphereHint')}</p>
           <SkyControls
             value={skySettings}
             tr={tr}
@@ -1500,17 +1600,46 @@ export default function Home() {
           ))}
           <label className="layer-row">
             <span>{tr('interiorCutaway')}</span>
-            <Switch aria-label={tr('interiorCutaway')} checked={interiorCutaway} onCheckedChange={v=>{setInteriorCutaway(v);if(engine.current?.interiors)engine.current.interiors.cutawayEnabled=v;}} />
+            <Switch
+              aria-label={tr('interiorCutaway')}
+              checked={interiorCutaway}
+              onCheckedChange={(v) => {
+                setInteriorCutaway(v);
+                if (engine.current?.interiors)
+                  engine.current.interiors.cutawayEnabled = v;
+              }}
+            />
           </label>
           <p className="panel-note">{tr('interiorHint')}</p>
           <div className="rail-actions">
-            {(['science','canada','waterfront'] as const).map(id=><button key={id} onClick={()=>{
-              const e=engine.current;if(!e?.interiors)return;
-              e.placement?.cancel();
-              e.applySettings({...e.settings,mode:'walk',autoRotate:false,buildings:true});
-              e.navigation?.startAt('walk',e.interiors.entry(id));
-              setSettings({...e.settings,mode:'walk'});setPanel(null);setMobilePanel(null);
-            }}>{tr(id==='science'?'enterScience':id==='canada'?'enterCanada':'enterWaterfront')}</button>)}
+            {(['science', 'canada', 'waterfront'] as const).map((id) => (
+              <button
+                key={id}
+                onClick={() => {
+                  const e = engine.current;
+                  if (!e?.interiors) return;
+                  e.placement?.cancel();
+                  e.applySettings({
+                    ...e.settings,
+                    mode: 'walk',
+                    autoRotate: false,
+                    buildings: true,
+                  });
+                  e.navigation?.startAt('walk', e.interiors.entry(id));
+                  setSettings({ ...e.settings, mode: 'walk' });
+                  setPanel(null);
+                  setMobilePanel(null);
+                }}
+              >
+                {tr(
+                  id === 'science'
+                    ? 'enterScience'
+                    : id === 'canada'
+                      ? 'enterCanada'
+                      : 'enterWaterfront',
+                )}
+              </button>
+            ))}
           </div>
           <div className="rail-actions">
             <button disabled={!ready} onClick={() => findTrain('steam')}>
@@ -1613,7 +1742,9 @@ export default function Home() {
         <div className="mini-title">
           <span className="mini-location-title">
             {settings.mode !== 'orbit' &&
-              (settings.mode === 'flight' ? <Plane size={15}/> : settings.mode === 'boat' ? (
+              (settings.mode === 'flight' ? (
+                <Plane size={15} />
+              ) : settings.mode === 'boat' ? (
                 <Ship size={15} />
               ) : settings.mode === 'drive' ? (
                 <Car size={15} />
@@ -1734,7 +1865,8 @@ export default function Home() {
               <button
                 key={id}
                 onClick={() =>
-                  settings.mode !== 'flight' && engine.current?.navigation?.setMode(settings.mode, id)
+                  settings.mode !== 'flight' &&
+                  engine.current?.navigation?.setMode(settings.mode, id)
                 }
               >
                 {label}
@@ -1810,12 +1942,12 @@ export default function Home() {
                 ? tr('localView')
                 : viewText(locale, current.id, 'name')
               : settings.mode === 'flight'
-                ? flightText(locale,flight.kind || 'fly')
+                ? flightText(locale, flight.kind || 'fly')
                 : settings.mode === 'walk'
-                ? tr('streetWalk')
-                : settings.mode === 'boat'
-                  ? tr('streetBoat')
-                  : tr('streetDrive')}
+                  ? tr('streetWalk')
+                  : settings.mode === 'boat'
+                    ? tr('streetBoat')
+                    : tr('streetDrive')}
           </b>
           <span className="muted">
             {settings.mode === 'orbit'
@@ -1866,7 +1998,12 @@ export default function Home() {
           >
             <X size={18} />
           </DialogClose>
-          <a className="about-repo-link" href="https://github.com/YiTaChen/vancouver-living-atlas" target="_blank" rel="noreferrer">
+          <a
+            className="about-repo-link"
+            href="https://github.com/YiTaChen/vancouver-living-atlas"
+            target="_blank"
+            rel="noreferrer"
+          >
             GitHub · Vancouver Living Atlas <ArrowUpRight size={16} />
           </a>
           <DialogHeader>

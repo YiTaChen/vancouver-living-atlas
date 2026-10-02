@@ -70,7 +70,12 @@ function fixture(compatibleGraphics = false) {
   };
 }
 
-test('actual frontage fixture switches only eligible ground detail, keeps upper frames and restores fallback', async () => {
+test('actual frontage fixture switches only eligible ground detail, keeps upper frames and restores fallback', async (t) => {
+  t.mock.method(
+    THREE.TextureLoader.prototype,
+    'load',
+    () => new THREE.Texture(),
+  );
   const oldDocument = globalThis.document;
   globalThis.document = {
     createElement() {

@@ -2,6 +2,12 @@
 import type { CityEngine } from './engine';
 import type { VisualQuality } from './quality';
 import { project } from './geo';
+import { sampleAtmosphere, type AtmosphereMode } from './atmosphere';
+import {
+  CITY_MATERIAL_MANIFEST,
+  getCityMaterialLibrary,
+} from './material-library';
+import { RESIDENTIAL_GROUND_LIMITS } from './residential-ground-plan';
 import {
   DOMESTIC_QA_VIEWS,
   selectDomesticQA,
@@ -19,6 +25,84 @@ import {
   captureQAPose,
   qaPoseError,
 } from './upgrade-qa-pose';
+
+/** Local evidence only; inspect existing atlas ownership without initiating a
+ * second load. Three named textures prove the shared library was initialized by
+ * the production scene before its cached readiness uniform is read. */
+function materialEvidence(e: CityEngine) {
+  const atlasNames = ['color', 'normal', 'orm'].map(
+    (name) => `Shared city material ${name}`,
+  );
+  const owned = [...(e.extraTextures ?? [])].filter((texture) =>
+    atlasNames.includes(texture.name),
+  );
+  const initialized = atlasNames.every((name) =>
+    owned.some((texture) => texture.name === name),
+  );
+  const library = initialized ? getCityMaterialLibrary(e) : null;
+  return {
+    manifestVersion: CITY_MATERIAL_MANIFEST.version,
+    slots: CITY_MATERIAL_MANIFEST.materials.map((material) => material.id),
+    atlas: CITY_MATERIAL_MANIFEST.atlas,
+    mapFiles: CITY_MATERIAL_MANIFEST.files,
+    initialized,
+    ready: library?.ready.value === 1 && !e.disposed,
+    ownedTextures: owned.length,
+    fallback:
+      'Catalogue average colors and surface response while atlas maps are unavailable.',
+  };
+}
+
+export function upgradeSceneEvidence(e: CityEngine) {
+  const report = e.data?.residentialGround;
+  const examples = (report?.examples ?? []) as {
+    key: string;
+    center: number[];
+  }[];
+  const target = e.controls?.target;
+  const nearby = target
+    ? examples
+        .map((example) => ({
+          ...example,
+          distanceToTargetM: Math.hypot(
+            example.center[0] - target.x,
+            example.center[1] - target.z,
+          ),
+        }))
+        .sort((a, b) => a.distanceToTargetM - b.distanceToTargetM)
+    : [];
+  return {
+    atmosphere: e.atmosphere,
+    sharedMaterials: materialEvidence(e),
+    residentialGround: report
+      ? {
+          candidates: report.candidates,
+          plots: report.plots,
+          beds: report.beds,
+          plants: report.plants,
+          triangles: report.triangles,
+          batches: report.batches,
+          limits: RESIDENTIAL_GROUND_LIMITS,
+          maximumTriangles:
+            RESIDENTIAL_GROUND_LIMITS.plots *
+            2 *
+            (RESIDENTIAL_GROUND_LIMITS.maxBedTriangles + 14),
+          withinCaps:
+            report.plots <= RESIDENTIAL_GROUND_LIMITS.plots &&
+            report.beds <= RESIDENTIAL_GROUND_LIMITS.plots * 2 &&
+            report.triangles <=
+              RESIDENTIAL_GROUND_LIMITS.plots *
+                2 *
+                (RESIDENTIAL_GROUND_LIMITS.maxBedTriangles + 14),
+          nearbyPlotsWithin90m: nearby.filter(
+            (example) => example.distanceToTargetM <= 90,
+          ).length,
+          nearestSourceExamples: nearby.slice(0, 8),
+          note: 'Representative foundation planting selected from existing domestic-cladding profiles; nearby counts are geographic coverage, not on-screen visibility.',
+        }
+      : null,
+  };
+}
 
 const VIEWS = [
   'atlas-aerial',
@@ -62,6 +146,7 @@ export function installUpgradeQA(
   }
   function select(view: View, quality: VisualQuality) {
     restoreModernBayQA(e);
+    e.setAtmosphere('clear');
     const nav = e.navigation!;
     nav.keys.clear();
     nav.setMode('orbit');
@@ -176,6 +261,7 @@ export function installUpgradeQA(
           const kit = e.streetscapeKit?.snapshot();
           const street = view === 'gastown-street' || view === 'citizen';
           return (
+            materialEvidence(e).ready &&
             (!stats ||
               (stats.pendingCells === 0 &&
                 stats.readySelectedCells === stats.selectedCells)) &&
@@ -202,6 +288,9 @@ export function installUpgradeQA(
         const extension = gl.getExtension('WEBGL_debug_renderer_info');
         const row = {
           kind: 'upgrade-matched-v1',
+          ...upgradeSceneEvidence(e),
+          atmosphere: e.atmosphere,
+          paving: e.data.pavementStats,
           id: view,
           quality,
           ...sample,
@@ -288,6 +377,7 @@ export function installUpgradeQA(
   inspect.onclick = () => {
     if (busy || lease?.isRunning()) return;
     status.textContent = JSON.stringify({
+      ...upgradeSceneEvidence(e),
       architecture: e.architecturalDetails?.stats,
       streetscape: e.streetscapeKit?.snapshot(),
       citizen: e.navigation?.walker.group.userData,
@@ -365,19 +455,21 @@ export function installUpgradeQA(
   section.appendChild(motion);
   const lighting = document.createElement('button');
   lighting.textContent = 'Upgrade lighting sweep';
-  lighting.onclick = async () => {
+  const runLighting = async (atmosphere: AtmosphereMode) => {
     if (busy || lease?.begin() === false) return;
     busy = true;
     try {
       for (const view of ['gastown-roofs', 'gastown-street'] as const) {
-        for (const hour of [14, 19, 23]) {
+        for (const hour of [14, 19, 19.8, 23]) {
           select(view, 'high');
+          e.setAtmosphere(atmosphere);
           e.setClock({ hour, running: false });
-          status.textContent = `Lighting ${view} / ${hour}:00`;
+          status.textContent = `Lighting ${view} / ${Math.floor(hour)}:${String(Math.round((hour % 1) * 60)).padStart(2, '0')}`;
           const ready = () => {
             const architecture = e.architecturalDetails?.stats;
             const kit = e.streetscapeKit?.snapshot();
             return (
+              materialEvidence(e).ready &&
               (!architecture ||
                 (architecture.pendingCells === 0 &&
                   architecture.readySelectedCells ===
@@ -392,6 +484,9 @@ export function installUpgradeQA(
           const warmup = await collect(5000, ready, 30000);
           const row = {
             kind: 'upgrade-lighting-v1',
+            ...upgradeSceneEvidence(e),
+            atmosphere,
+            palette: sampleAtmosphere(hour, atmosphere),
             id: view,
             hour,
             quality: 'high',
@@ -406,13 +501,13 @@ export function installUpgradeQA(
             ssaoExclusions: e.aoExclusions ? { ...e.aoExclusions.stats } : null,
             streetscape: e.streetscapeKit?.snapshot(),
             protocol:
-              'Actual High renderer at fixed 1080p, three fixed hours and two fixed cameras; visible readiness warmup. Visual inspection, not a matched performance sample.',
+              'Actual High renderer at fixed 1080p, four fixed hours (14, 19, 19.8 twilight, 23) and two fixed cameras; visible readiness warmup. Visual inspection, not a matched performance sample.',
           };
           const response = await fetch('/__visual-qa', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              name: `high-lighting-${view}-${hour}h`,
+              name: `high-${atmosphere === 'overcast' ? 'overcast-' : ''}lighting-${view}-${String(hour).replace('.', 'p')}h`,
               row,
               screenshot: e.screenshot(),
             }),
@@ -421,7 +516,7 @@ export function installUpgradeQA(
             throw new Error('Lighting capture failed');
         }
       }
-      status.textContent = 'Completed lighting sweep: 6 actual renders';
+      status.textContent = `Completed ${atmosphere} lighting sweep: 8 actual renders`;
     } catch (error) {
       status.textContent = `Lighting sweep failed: ${error}`;
     } finally {
@@ -430,7 +525,12 @@ export function installUpgradeQA(
       lease?.end();
     }
   };
+  lighting.onclick = () => runLighting('clear');
   section.appendChild(lighting);
+  const overcast = document.createElement('button');
+  overcast.textContent = 'Upgrade overcast sweep';
+  overcast.onclick = () => runLighting('overcast');
+  section.appendChild(overcast);
   const regional = document.createElement('button');
   regional.textContent = 'Upgrade regional views';
   regional.onclick = async () => {
@@ -440,6 +540,7 @@ export function installUpgradeQA(
       const views = [...DOMESTIC_QA_VIEWS, ...MODERN_BAY_QA_VIEWS];
       for (const view of views) {
         restoreModernBayQA(e);
+        e.setAtmosphere('clear');
         e.applySettings({ ...e.settings, quality: 'high' });
         const modern =
           view.id === 'west-end-modern-bay' ||
@@ -453,6 +554,7 @@ export function installUpgradeQA(
         const ready = () => {
           const stats = e.architecturalDetails?.stats;
           return (
+            materialEvidence(e).ready &&
             (!stats ||
               (stats.pendingCells === 0 &&
                 stats.readySelectedCells === stats.selectedCells)) &&
@@ -462,6 +564,7 @@ export function installUpgradeQA(
         const warmup = await collect(5000, ready, 30000);
         const row = {
           kind: 'upgrade-regional-v1',
+          ...upgradeSceneEvidence(e),
           ...metadata,
           maxPoseError: warmup.maxPoseError,
           quality: e.settings.quality,

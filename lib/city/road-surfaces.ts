@@ -5,6 +5,10 @@ import { cityRoadGraph } from './street-layout';
 import extension from './street-curb-extensions.json';
 import type { Point } from './road-graph';
 import { buildPavement } from './pavement';
+import { heritageFrames, partitionHeritagePaving } from './heritage-paving';
+import { heritagePavingMaterial } from './heritage-paving-material';
+import { getCityMaterialLibrary } from './material-library';
+import { cityGroundMaterial } from './city-surface-material';
 import {
   drapeTriangles,
   gridHeightField,
@@ -50,36 +54,17 @@ export function createRoadSurfaces(e: CityEngine) {
   const relief =
     e.data.roadRelief || gridHeightField((x, z) => e.elevation(x, z));
   e.data.roadRelief = relief;
-  const loader = new THREE.TextureLoader();
+  const library = getCityMaterialLibrary(e);
   const material = (kind: 'asphalt-fine' | 'sidewalk-concrete') => {
-    if (!e.roadMaterials.has(kind)) {
-      const map = loader.load(`/textures/${kind}-albedo.png`);
-      map.wrapS = map.wrapT = THREE.RepeatWrapping;
-      map.colorSpace = THREE.SRGBColorSpace;
-      map.anisotropy = 8;
-      const normalMap =
-        kind === 'asphalt-fine'
-          ? loader.load('/textures/asphalt-fine-normal.png')
-          : null;
-      if (normalMap) {
-        normalMap.wrapS = normalMap.wrapT = THREE.RepeatWrapping;
-        normalMap.colorSpace = THREE.NoColorSpace;
-        normalMap.anisotropy = 8;
-      }
+    if (!e.roadMaterials.has(kind))
       e.roadMaterials.set(
         kind,
-        new THREE.MeshStandardMaterial({
-          map,
-          normalMap,
-          normalScale: new THREE.Vector2(0.32, 0.32),
-          color: 0xe1e2df,
-          roughness: 0.94,
-          side: THREE.DoubleSide,
-        }),
+        cityGroundMaterial(library, kind === 'asphalt-fine' ? 7 : 2),
       );
-    }
     return e.roadMaterials.get(kind)!;
   };
+  const waterFrames = heritageFrames(graph);
+  let heritageTriangles = 0;
   for (const [source, kind, offset] of [
     [pavement.asphalt, 'asphalt-fine', 1.05],
     [pavement.sidewalks, 'sidewalk-concrete', 1.18],
@@ -89,15 +74,42 @@ export function createRoadSurfaces(e: CityEngine) {
       source.indices,
       (x, z) => relief(x, z) + offset,
     );
+    const sidewalk = kind === 'sidewalk-concrete';
+    const { plain, heritage } = partitionHeritagePaving(
+      positions,
+      uv,
+      waterFrames,
+      sidewalk,
+    );
     addStreetMeshes(
       e,
-      positions,
+      plain.positions,
       material(kind),
-      kind === 'asphalt-fine' ? 'Connected road pavement' : 'Clipped sidewalks',
-      uv,
+      sidewalk ? 'Clipped sidewalks' : 'Connected road pavement',
+      plain.uv,
       true,
-      kind === 'asphalt-fine',
+      !sidewalk,
     );
+    if (heritage.positions.length) {
+      const detailed = heritagePavingMaterial(
+        material(kind),
+        sidewalk,
+        library,
+      );
+      addStreetMeshes(
+        e,
+        heritage.positions,
+        detailed,
+        sidewalk ? 'Water Street brick footways' : 'Water Street brick road',
+        heritage.uv,
+        true,
+        !sidewalk,
+        false,
+        false,
+        { aHeritagePaving: { array: heritage.paving, itemSize: 4 } },
+      );
+      heritageTriangles += heritage.positions.length / 9;
+    }
   }
   const positions: number[] = [],
     uv: number[] = [];
@@ -118,7 +130,9 @@ export function createRoadSurfaces(e: CityEngine) {
         [a[0], ay + 0.13, a[1], 0, 0.13],
       ]) {
         positions.push(x, y, z);
-        uv.push(u, v);
+        // Shared ground materials interpret every incoming UV as metres / 3,
+        // including these vertical curb strips (whose local u follows length).
+        uv.push(u / 3, v / 3);
       }
     }
   }
@@ -132,6 +146,8 @@ export function createRoadSurfaces(e: CityEngine) {
   e.data.pavementStats = {
     ...pavement.stats,
     curbSegments: pavement.curbs.length,
+    heritageFrames: waterFrames.length,
+    heritageTriangles,
   };
   e.stats.roads = graph.edges.length;
 }

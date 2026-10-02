@@ -2,6 +2,7 @@
 import type { CityEngine } from './engine';
 import type { VisualQuality } from './quality';
 import { ARCHITECTURE_BUDGET } from './architecture-details';
+import { upgradeSceneEvidence } from './upgrade-qa';
 import {
   enduranceFrameSummary,
   summarizeEnduranceMemory,
@@ -63,6 +64,16 @@ const WATER_ENDURANCE_ROUTE: GroundRoute = {
     'Connected WATER ST arterial RoadGraph edges 2973,3794; source IDs 29:0,846:0; nodes 2838→2745→2681. The fixed chord is inset 20m at each end, spans 300.432m and deviates at most 0.202m from the source centerline. Initial placement only; live preflight and movement collision checks remain authoritative.',
 };
 const RUNS: readonly RunConfig[] = [
+  {
+    id: 'water-street-detail-walk',
+    label: 'Upgrade Water Street detail walk',
+    routes: ['water-street'],
+    placements: { 'water-street': WATER_ENDURANCE_ROUTE },
+    legs: 1,
+    legMs: 60000,
+    protocol:
+      'One 60s continuous actual W-input walk along the audited 300.432m Water Street arterial route. One initial placement; no position or heading rewrites during the measured leg. Live collision and protected-surface preflight remain mandatory.',
+  },
   {
     id: 'route-endurance-10m',
     label: 'Upgrade route endurance 10m',
@@ -164,6 +175,7 @@ const heapSnapshot = () => {
 function memorySnapshot(e: CityEngine) {
   const architecture = e.architecturalDetails;
   return {
+    ...upgradeSceneEvidence(e),
     architecture: architecture
       ? { ...architecture.stats, cacheCells: architecture.records.size }
       : null,
@@ -653,6 +665,7 @@ export function installUpgradeEnduranceQA(e: CityEngine, ui: UI) {
         !controller.signal.aborted;
       const row = {
         kind: 'upgrade-route-endurance-v1',
+        ...upgradeSceneEvidence(e),
         id: config.id,
         quality,
         hour,
