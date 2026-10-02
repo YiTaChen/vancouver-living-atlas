@@ -1,0 +1,55 @@
+{
+  "checks": {
+    "typeScript": true,
+    "focusedTests": {
+      "pass": 42,
+      "fail": 0
+    },
+    "regressionTests": {
+      "pass": 660,
+      "fail": 0
+    },
+    "productionStaticBuild": true,
+    "landmarkWorkerProtocol": true,
+    "productionQAIsolation": true
+  },
+  "rendererComparison": {
+    "pairs": 20,
+    "validRecords": 40,
+    "views": 5,
+    "conditions": 4,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "fpsImprovementClaimed": false
+  },
+  "clock": {
+    "hour": 10,
+    "rate": 300,
+    "running": true,
+    "firstMinuteHour": 15,
+    "fullNightAfterSeconds": 126,
+    "hour23AfterSeconds": 156,
+    "loadTimeExcluded": true
+  },
+  "auroraVisual": {
+    "file": "aurora-auto.png",
+    "record": "aurora-auto.json",
+    "hour": 23,
+    "mode": "auto",
+    "render": [
+      2400,
+      1350
+    ],
+    "benchmark": false
+  },
+  "logHashes": {
+    "focused-tests": "4ea015af6cd90b24c966c7de9f267a0a3506a4ea8be6f150ca6e06162407cd8e",
+    "typecheck": "455c89e2c267bce4737bf0328ef9383090bd75b3988edd7beb4f041fb9723dcf",
+    "regression-tests": "1e91cb27fc2bf4d52d89328b737a48c61a078b963279628d954f87bec946b717",
+    "baseline-qa-build": "b40658fce885f081d0460d50f9081229409529ac3c80f422f759203cf8850f2e",
+    "candidate-qa-build": "8b5c66076a78c17da8352bcb78fb72b7be1907a45f9182727c239df8df494b32",
+    "production-build": "82f13b36ba188ec7f03d559a306785191f11ffe39a42e235f8251f9fe99fc503"
+  }
+}

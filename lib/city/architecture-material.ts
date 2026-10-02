@@ -1,5 +1,6 @@
-import type * as THREE from 'three';
+import * as THREE from 'three';
 import { sampleAtmosphere } from './atmosphere';
+import { FLAT_ROOF_FINISHES } from './building-surface-palette';
 
 type Shader = Parameters<THREE.MeshStandardMaterial['onBeforeCompile']>[0];
 
@@ -20,6 +21,15 @@ export function installArchitectureSurface(
   shader.uniforms.uAtlasSkyZenith = atmosphere?.skyZenith ?? {
     value: fallback.zenith,
   };
+  shader.uniforms.uFlatRoofFinish = {
+    value: FLAT_ROOF_FINISHES.map((finish) => {
+      const color = new THREE.Color().setRGB(
+        ...finish.colorSRGB,
+        THREE.SRGBColorSpace,
+      );
+      return new THREE.Vector4(color.r, color.g, color.b, finish.roughness);
+    }),
+  };
   shader.vertexShader =
     `varying vec3 vArchitectureWorld;
 varying vec3 vArchitectureNormal;\n` + shader.vertexShader;
@@ -32,6 +42,7 @@ varying vec3 vArchitectureNormal;\n` + shader.vertexShader;
   );
   shader.fragmentShader =
     `uniform vec3 uAtlasSkyHorizon, uAtlasSkyZenith;
+uniform vec4 uFlatRoofFinish[3];
 varying vec3 vArchitectureWorld;
 varying vec3 vArchitectureNormal;
 float architectureHash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
@@ -69,13 +80,18 @@ float architectureNoise(vec2 p){
       *(1.0-smoothstep(.30,.35,room.y))*step(.11,room.y);
     roomColor*=1.0-furnishing*.42;
     float fresnel=pow(1.0-min(1.0,facing),3.0);
-    vec3 skyTint=mix(uAtlasSkyHorizon*.28,uAtlasSkyZenith*.65,smoothstep(.04,.95,paneUV.y));
-    vec3 enrichedGlass=mix(roomColor,skyTint,.36+fresnel*.43);
+    // Sky radiance belongs to reflection, not a dark diffuse pigment that is
+    // illuminated a second time. It still follows the actual sky at night.
+    vec3 skyTint=mix(uAtlasSkyHorizon,uAtlasSkyZenith,smoothstep(.04,.95,paneUV.y));
+    vec3 enrichedGlass=roomColor;
+    architectureGlassReflection=skyTint*(.18+fresnel*.34);
     enrichedGlass*=.85+roomSeed*.28;
     float reveal=smoothstep(.0,.075,paneUV.x)*smoothstep(.0,.065,1.0-paneUV.y);
     enrichedGlass*=mix(.48,1.0,reveal);
+    architectureGlassReflection*=mix(.8,1.0,reveal);
     float divider=1.0-smoothstep(.009,.018+max(.002,fwidth(paneUV.x)),abs(paneUV.x-.5));
     enrichedGlass=mix(enrichedGlass,vec3(.09,.12,.12),divider*step(1.5,float(facadeStyle))*.45);
+    architectureGlassReflection*=1.0-divider*step(1.5,float(facadeStyle))*.45;
     // Large scale weathering, masonry variation and concrete joints. Noise is
     // deliberately low contrast; material scale remains in metres, not pixels.
     float weather=architectureNoise(vFacade.xy*vec2(.23,.11)+vFacade.ww);
@@ -114,7 +130,12 @@ float architectureNoise(vec2 p){
       vec2 roofUv=cityMetres;
       float roofSeed=architectureHash(vec2(vFacade.w,18.0));
       float roofWeather=architectureNoise(roofUv*.13);
-      diffuseColor.rgb=cityFinish.color*(.93+roofWeather*.1)*(0.94+roofSeed*.12);
+      vec3 roofColor=cityFinish.color;
+      if(vFacade.y>= -1.5){
+        int roofFinish=int(clamp(floor(vRoofFinish+.5),0.0,2.0));
+        roofColor=uFlatRoofFinish[roofFinish].rgb*cityFinish.color/max(uCityAverageColor[7],vec3(.025));
+      }
+      diffuseColor.rgb=roofColor*(.93+roofWeather*.1)*(0.94+roofSeed*.12);
       if(vFacade.y>= -1.5){
         vec2 roofGrid=fract(roofUv/3.8+roofSeed);
         vec2 roofAA=max(fwidth(roofUv/3.8),vec2(.002));
@@ -131,6 +152,12 @@ float architectureNoise(vec2 p){
   shader.fragmentShader = shader.fragmentShader.replace(
     'roughnessFactor=mix(cityFinish.roughness,pattern.w,facadePane);',
     `roughnessFactor=mix(cityFinish.roughness,pattern.w,facadePane);
+    if(vFacade.x<0.0 && vFacade.y>= -1.5) roughnessFactor=uFlatRoofFinish[int(clamp(floor(vRoofFinish+.5),0.0,2.0))].w;
     roughnessFactor=clamp(roughnessFactor+(architectureNoise(vArchitectureWorld.xz*.3)-.5)*.045*(1.0-facadePane),.17,.97);`,
+  );
+  shader.fragmentShader = shader.fragmentShader.replace(
+    '#include <lights_fragment_end>',
+    `#include <lights_fragment_end>
+    if(vFacade.x>=0.0) reflectedLight.indirectSpecular+=architectureGlassReflection*facadePane;`,
   );
 }

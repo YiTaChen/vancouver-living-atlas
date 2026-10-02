@@ -4,6 +4,7 @@ import { rings, project } from './geo';
 import { replacedBuilding } from './replaced-buildings';
 import { FacadeDetails } from './facade-details';
 import { installArchitectureSurface } from './architecture-material';
+import { selectFlatRoofFinish } from './building-surface-palette';
 import {
   getCityMaterialLibrary,
   installCityMaterialLibrary,
@@ -132,6 +133,7 @@ export function createBuildingBodies(e: CityEngine) {
     layouts: number[] = [],
     tops: number[] = [],
     seeds: number[] = [],
+    roofFinishes: number[] = [],
     baseWindows: number[] = [];
   for (const { key, polygon, h, min } of prepared) {
     // Normalize the projected copy before choosing facade edges and roof phase.
@@ -144,6 +146,7 @@ export function createBuildingBodies(e: CityEngine) {
       if (area < 0) ring.reverse();
     }
     const profile = profiles.get(key)!,
+      roofFinish = selectFlatRoofFinish(profile.kind, profile.seed),
       ground = foundations.get(key)!,
       color = new THREE.Color(profile.wallColor),
       roof = buildingRoofs.get(key),
@@ -172,6 +175,7 @@ export function createBuildingBodies(e: CityEngine) {
       uv.push(u, v);
       styles.push(profile.styleIndex);
       seeds.push(profile.seed);
+      roofFinishes.push(roofFinish);
       layouts.push(...layout);
       tops.push(wallTop);
       baseWindows.push(...baseWindow);
@@ -295,22 +299,23 @@ export function createBuildingBodies(e: CityEngine) {
       value: facadeTemplates.map((p) => p.brickNormalScale),
     };
     s.vertexShader =
-      `attribute float aStyle; attribute float aSeed; attribute vec4 aLayout; attribute float aTop; attribute vec2 aBaseWindow;
-      varying vec4 vFacade; varying vec4 vLayout; varying float vTop; varying vec2 vBaseWindow;\n` +
+      `attribute float aStyle; attribute float aSeed; attribute float aRoofFinish; attribute vec4 aLayout; attribute float aTop; attribute vec2 aBaseWindow;
+      varying vec4 vFacade; varying vec4 vLayout; varying float vTop; varying float vRoofFinish; varying vec2 vBaseWindow;\n` +
       s.vertexShader;
     s.vertexShader = s.vertexShader.replace(
       '#include <begin_vertex>',
-      '#include <begin_vertex>\nvFacade=vec4(uv,aStyle,aSeed);vLayout=aLayout;vTop=aTop;vBaseWindow=aBaseWindow;',
+      '#include <begin_vertex>\nvFacade=vec4(uv,aStyle,aSeed);vLayout=aLayout;vTop=aTop;vRoofFinish=aRoofFinish;vBaseWindow=aBaseWindow;',
     );
     s.fragmentShader =
       `uniform float uNight;
       uniform vec4 uPattern[${facadeTemplates.length}]; uniform vec4 uPaneBounds[${facadeTemplates.length}]; uniform float uBrickWeights[${facadeTemplates.length}];
-      varying vec4 vFacade; varying vec4 vLayout; varying float vTop; varying vec2 vBaseWindow;\n` +
+      varying vec4 vFacade; varying vec4 vLayout; varying float vTop; varying float vRoofFinish; varying vec2 vBaseWindow;\n` +
       s.fragmentShader;
     s.fragmentShader = s.fragmentShader.replace(
       '#include <color_fragment>',
       `#include <color_fragment>
       float facadePane=0.0, facadeLit=0.0, facadeNormal=0.0;
+      vec3 architectureGlassReflection=vec3(0.0);
       int facadeStyle=int(clamp(floor(vFacade.z+.5),0.0,${facadeTemplates.length - 1}.0));
       vec4 pattern=uPattern[facadeStyle], bounds=uPaneBounds[facadeStyle];
       // Original metre-scale PBR surfaces share one atlas with street details.
@@ -341,10 +346,10 @@ export function createBuildingBodies(e: CityEngine) {
           facadePane*=1.0-step(abs(cellId.x-entryBay),.1)*step(abs(cellId.y),.1);
         }
         float variation=fract(sin(dot(cellId+vFacade.w,vec2(127.1,311.7)))*43758.5453);
-        // Retain modest per-building palette variation without multiplying the
-        // baked basecolor by a second dark diffuse material.
-        vec3 facadeTint=diffuseColor.rgb/max(.001,max(diffuseColor.r,max(diffuseColor.g,diffuseColor.b)));
-        vec3 wall=cityFinish.color*mix(vec3(1.0),facadeTint,.18);
+        // The representative building palette owns both hue and reflectance.
+        // Authored maps provide variation around their catalogue mean, so the
+        // finish is applied once instead of replacing every wall's brightness.
+        vec3 wall=diffuseColor.rgb*cityFinish.color/max(uCityAverageColor[int(citySlot)],vec3(.025));
         wall*=mix(.94,1.06,mod(vFacade.w,29.0)/28.0);
         float band=(1.0-smoothstep(.025,.055,grid.y))*step(pattern.y,vFacade.y);
         wall*=1.0-band*(facadeStyle==4?.13:.055);
@@ -382,9 +387,13 @@ export function createBuildingBodies(e: CityEngine) {
     installArchitectureSurface(s, e.uniforms);
     installCityMaterialLibrary(s, materialLibrary);
   };
-  material.customProgramCacheKey = () => 'atlas-city-bodies-pbr-v1';
+  material.customProgramCacheKey = () => 'atlas-city-bodies-pbr-v2';
   const geometry = e.geometry(positions, normals, colors, uv);
   geometry.setAttribute('aStyle', new THREE.Float32BufferAttribute(styles, 1));
+  geometry.setAttribute(
+    'aRoofFinish',
+    new THREE.Float32BufferAttribute(roofFinishes, 1),
+  );
   geometry.setAttribute(
     'aLayout',
     new THREE.Float32BufferAttribute(layouts, 4),

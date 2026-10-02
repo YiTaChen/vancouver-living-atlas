@@ -1,0 +1,88 @@
+{
+  "revision": "dfbd80d32a81a8c611ee6a4835e3cf78898d053d",
+  "sourceFingerprint": "7218914ca33bc11d18d45eb78207146dbce43129434d62f38819fcfa8a459f56",
+  "kind": "offline-asset-checkpoint-v1",
+  "valid": true,
+  "hidden": false,
+  "maxPoseError": 0,
+  "sampleMs": 8012.799999994051,
+  "frames": 192,
+  "fps": 23.961661341870826,
+  "p50Ms": 49,
+  "p95Ms": 50.89999999999418,
+  "warmup": {
+    "valid": true,
+    "hidden": false,
+    "maxPoseError": 0,
+    "sampleMs": 6057.199999994045,
+    "frames": 146,
+    "fps": 24.10354619298414,
+    "p50Ms": 34.20000000001164,
+    "p95Ms": 50.70000000001164
+  },
+  "ready": true,
+  "quality": "high",
+  "atmosphere": "clear",
+  "hour": 14,
+  "expectedPose": {
+    "camera": [
+      1521.3465663384245,
+      503.2979999999977,
+      924.7160000000582
+    ],
+    "target": [
+      691.3465663384244,
+      88.29799999999776,
+      64.71600000005822
+    ]
+  },
+  "camera": [
+    1521.3465663384245,
+    503.2979999999977,
+    924.7160000000582
+  ],
+  "target": [
+    691.3465663384244,
+    88.29799999999776,
+    64.71600000005822
+  ],
+  "mode": "orbit",
+  "render": [
+    1920,
+    1080
+  ],
+  "calls": 1073,
+  "triangles": 7411443,
+  "geometries": 648,
+  "textures": 45,
+  "architecture": {
+    "selectedCells": 16,
+    "pendingCells": 0,
+    "buildingCells": 0,
+    "readySelectedCells": 16,
+    "readyCells": 16,
+    "visibleCells": 16,
+    "visibleInstances": 7611,
+    "allocatedInstances": 7611,
+    "droppedAtBudget": 8,
+    "maxPlanMs": 1.7999999970197678,
+    "maxAttachmentMs": 2.7000000029802322
+  },
+  "modules": null,
+  "citizen": {
+    "assetState": "fallback",
+    "assetVariant": "procedural",
+    "forward": "+Z",
+    "groundY": 0
+  },
+  "tree": {
+    "requested": "baseline",
+    "active": "baseline",
+    "status": "idle",
+    "extraTextures": 0
+  },
+  "treeProbe": null,
+  "treePools": [],
+  "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+  "protocol": "Actual fixed1080p renderer; unchanged camera and selected source objects; visible5s warmup and8s uninstrumented RAF sample per lighting condition. Draw counters include all render passes. No synthetic asset movement."
+}

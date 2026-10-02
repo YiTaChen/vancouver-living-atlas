@@ -1,0 +1,88 @@
+{
+  "revision": "dfbd80d32a81a8c611ee6a4835e3cf78898d053d",
+  "sourceFingerprint": "7218914ca33bc11d18d45eb78207146dbce43129434d62f38819fcfa8a459f56",
+  "kind": "offline-asset-checkpoint-v1",
+  "valid": true,
+  "hidden": false,
+  "maxPoseError": 0,
+  "sampleMs": 8010.399999988076,
+  "frames": 294,
+  "fps": 36.702287026919706,
+  "p50Ms": 32.80000000000291,
+  "p95Ms": 34.10000000000582,
+  "warmup": {
+    "valid": true,
+    "hidden": false,
+    "maxPoseError": 0,
+    "sampleMs": 5000.899999988076,
+    "frames": 185,
+    "fps": 36.99334119867246,
+    "p50Ms": 32.70000000001164,
+    "p95Ms": 34.19999999999709
+  },
+  "ready": true,
+  "quality": "high",
+  "atmosphere": "overcast",
+  "hour": 14,
+  "expectedPose": {
+    "camera": [
+      3546.6829513814514,
+      6428.002928656675,
+      4287.155322326365
+    ],
+    "target": [
+      -145.22442772272677,
+      8,
+      -278.2999999997469
+    ]
+  },
+  "camera": [
+    3546.6829513814514,
+    6428.002928656675,
+    4287.155322326365
+  ],
+  "target": [
+    -145.22442772272677,
+    8,
+    -278.2999999997469
+  ],
+  "mode": "orbit",
+  "render": [
+    1920,
+    1080
+  ],
+  "calls": 775,
+  "triangles": 3887629,
+  "geometries": 631,
+  "textures": 41,
+  "architecture": {
+    "selectedCells": 0,
+    "pendingCells": 0,
+    "buildingCells": 0,
+    "readySelectedCells": 0,
+    "readyCells": 0,
+    "visibleCells": 0,
+    "visibleInstances": 0,
+    "allocatedInstances": 0,
+    "droppedAtBudget": 0,
+    "maxPlanMs": 0,
+    "maxAttachmentMs": 0
+  },
+  "modules": null,
+  "citizen": {
+    "assetState": "fallback",
+    "assetVariant": "procedural",
+    "forward": "+Z",
+    "groundY": 0
+  },
+  "tree": {
+    "requested": "baseline",
+    "active": "baseline",
+    "status": "idle",
+    "extraTextures": 0
+  },
+  "treeProbe": null,
+  "treePools": [],
+  "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+  "protocol": "Actual fixed1080p renderer; unchanged camera and selected source objects; visible5s warmup and8s uninstrumented RAF sample per lighting condition. Draw counters include all render passes. No synthetic asset movement."
+}

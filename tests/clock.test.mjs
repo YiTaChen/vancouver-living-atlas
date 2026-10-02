@@ -4,7 +4,9 @@ import { readFileSync } from 'node:fs';
 import ts from 'typescript';
 import { Sky } from 'three/addons/objects/Sky.js';
 import { cityModule } from './helpers/city-modules.mjs';
-const { installAtmosphereSky } = await import(cityModule('atmosphere'));
+const { installAtmosphereSky, sampleAtmosphere } = await import(
+  cityModule('atmosphere')
+);
 const source = readFileSync(
   new URL('../lib/city/clock.ts', import.meta.url),
   'utf8',
@@ -21,15 +23,67 @@ const { CityClock, DEFAULT_CLOCK, CLOCK_RATES, formatClock, sunAngle } =
   );
 const near = (a, b) => assert(Math.abs(a - b) < 1e-8, `${a} differs from ${b}`);
 
-test('clock starts running at the 300x default rate and advances independently of frame rate', () => {
+test('a fresh scene stays in daylight through its first minute at the frame-independent 300x default', () => {
+  assert.equal(DEFAULT_CLOCK.hour, 10);
   assert.equal(DEFAULT_CLOCK.running, true);
   assert.equal(DEFAULT_CLOCK.rate, 300);
   for (const frames of [1, 30, 60, 120]) {
     const clock = new CityClock();
+    assert.deepEqual(clock.snapshot(), { hour: 10, rate: 300, running: true });
     clock.tick(0);
-    for (let n = 1; n <= frames; n++) clock.tick((60_000 * n) / frames);
-    near(clock.hour, 21);
+    for (let n = 1; n <= frames; n++) {
+      clock.tick((60_000 * n) / frames);
+      const lighting = sampleAtmosphere(clock.hour);
+      assert.equal(lighting.night, 0);
+      assert(lighting.sunIntensity > 1.5);
+    }
+    near(clock.hour, 15);
   }
+});
+test('the default 300x cycle reaches night after 126 seconds for evening sky effects', () => {
+  const clock = new CityClock();
+  clock.tick(0);
+  clock.tick(126_000);
+  near(clock.hour, 20.5);
+  assert.equal(sampleAtmosphere(clock.hour).night, 1);
+  assert.equal(clock.snapshot().running, true);
+  assert.equal(clock.snapshot().rate, 300);
+});
+test('loading duration does not consume scene time before the first frame or after a timebase reset', () => {
+  const firstFrameAt = 180_000;
+  for (const reset of [false, true]) {
+    const clock = new CityClock();
+    if (reset) {
+      clock.tick(0);
+      clock.resetTimebase(firstFrameAt);
+    }
+    assert.equal(clock.tick(firstFrameAt), false);
+    near(clock.hour, 10);
+    clock.tick(firstFrameAt + 60_000);
+    near(clock.hour, 15);
+    assert.equal(clock.calendarDay, 0);
+  }
+});
+test('explicit hour, slower rate and fixed night choices override the opening defaults', () => {
+  const fast = new CityClock({ hour: 16, rate: 300, running: true });
+  fast.tick(180_000);
+  fast.tick(240_000);
+  assert.deepEqual(fast.snapshot(), { hour: 21, rate: 300, running: true });
+  assert.equal(sampleAtmosphere(fast.hour).night, 1);
+
+  const slow = new CityClock({ hour: 8.25, rate: 30, running: true });
+  slow.tick(180_000);
+  slow.tick(240_000);
+  assert.deepEqual(slow.snapshot(), { hour: 8.75, rate: 30, running: true });
+
+  const night = new CityClock({ hour: 23, rate: 300, running: false });
+  night.tick(180_000);
+  night.tick(240_000);
+  assert.deepEqual(night.snapshot(), { hour: 23, rate: 300, running: false });
+  night.configure({ running: true }, 240_000);
+  night.tick(300_000);
+  assert.deepEqual(night.snapshot(), { hour: 4, rate: 300, running: true });
+  assert.equal(night.calendarDay, 1);
 });
 test('all offered speeds work and midnight wraps into the following day', () => {
   for (const rate of CLOCK_RATES) {
@@ -44,7 +98,7 @@ test('all offered speeds work and midnight wraps into the following day', () => 
   near(clock.hour, 23.9);
 });
 test('fixing time stops only the clock and resuming does not catch up paused time', () => {
-  const clock = new CityClock({ rate: 30 });
+  const clock = new CityClock({ hour: 16, rate: 30 });
   clock.tick(0);
   clock.configure({ running: false }, 60_000);
   near(clock.hour, 16.5);
@@ -55,8 +109,8 @@ test('fixing time stops only the clock and resuming does not catch up paused tim
   clock.tick(960_000);
   near(clock.hour, 17);
 });
-test('rate changes and manual seeks preserve unrelated clock settings without resetting to 16:00', () => {
-  const clock = new CityClock({ rate: 30 });
+test('rate changes and manual seeks preserve unrelated settings without resetting to the opening hour', () => {
+  const clock = new CityClock({ hour: 16, rate: 30 });
   clock.tick(0);
   clock.configure({ rate: 60 }, 60_000);
   near(clock.hour, 16.5);
@@ -74,7 +128,7 @@ test('rate changes and manual seeks preserve unrelated clock settings without re
   near(clock.hour, 0);
 });
 test('hidden tabs suspend scene time and return without a time jump', () => {
-  const clock = new CityClock({ rate: 30 });
+  const clock = new CityClock({ hour: 16, rate: 30 });
   clock.tick(0);
   clock.setVisible(false, 30_000);
   near(clock.hour, 16.25);
@@ -93,7 +147,7 @@ test('invalid controls cannot poison the clock or mutate its state via a snapsho
   assert(Number.isFinite(clock.hour));
   const snapshot = clock.snapshot();
   snapshot.hour = 1;
-  near(clock.hour, 16);
+  near(clock.hour, 10);
   clock.configure({ rate: 0 }, 0);
   assert.equal(clock.snapshot().rate, 1);
   clock.configure({ rate: 999 }, 0);
@@ -113,7 +167,7 @@ test('clock readouts use actual minutes and solar lighting is continuous across 
 });
 
 test('out-of-order frame timestamps cannot double-count elapsed time', () => {
-  const clock = new CityClock({ rate: 30 });
+  const clock = new CityClock({ hour: 16, rate: 30 });
   clock.tick(1000);
   clock.tick(500);
   clock.tick(2000);
@@ -159,7 +213,7 @@ const THREE = await import('three');
 function engineFixture() {
   const calls = { resize: 0, mode: 0, stats: [] };
   const e = Object.assign(new EngineMethods(), {
-    clock: new CityClock({ rate: 30 }),
+    clock: new CityClock(),
     settings: {
       mode: 'orbit',
       trees: true,
@@ -204,10 +258,35 @@ test('clock ticks update lighting without resizing render targets or resetting n
   const { e, calls } = engineFixture();
   e.updateLighting(true, 0);
   e.tickClock(60_000);
-  near(e.clock.hour, 16.5);
+  near(e.clock.hour, 15);
   assert.equal(calls.resize, 0);
   assert.equal(calls.mode, 0);
   assert.equal(e.uniforms.time.value, 123);
+});
+test('fresh-scene lighting opens in daylight and manual night and fast controls remain effective', () => {
+  const { e, calls } = engineFixture();
+  e.updateLighting(true, 0);
+  assert.equal(e.uniforms.night.value, 0);
+  assert(e.sun.intensity > 1.5);
+  e.tickClock(60_000);
+  assert.equal(e.uniforms.night.value, 0);
+  near(e.clock.hour, 15);
+
+  e.setClock({ hour: 23, rate: 300, running: false });
+  assert.deepEqual(calls.stats.at(-1).clock, {
+    hour: 23,
+    rate: 300,
+    running: false,
+  });
+  assert.equal(e.uniforms.night.value, 1);
+  e.clock.resetTimebase(60_000);
+  e.tickClock(120_000);
+  near(e.clock.hour, 23);
+  e.setClock({ running: true });
+  e.clock.resetTimebase(120_000);
+  e.tickClock(180_000);
+  near(e.clock.hour, 4);
+  assert.equal(e.uniforms.night.value, 1);
 });
 test('layer and mode changes do not reset the independent clock', () => {
   const { e, calls } = engineFixture();

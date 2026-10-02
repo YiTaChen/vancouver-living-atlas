@@ -1,0 +1,24 @@
+{
+  "initialLoadingClock": "10:00",
+  "qaControls": 0,
+  "rate": "300× · 預設",
+  "flowing": "true",
+  "observedFlowingClock": "19:37",
+  "console": [],
+  "nightWithoutManualClockChange": "00:48",
+  "walk": {
+    "mode": "walk",
+    "quickStart": "Gastown",
+    "hour": "15:00",
+    "atmosphere": "overcast",
+    "screenshot": "production-walk.jpg"
+  },
+  "drive": {
+    "mode": "drive",
+    "quickStart": "Burrard",
+    "hour": "15:00",
+    "atmosphere": "overcast",
+    "checked": "true",
+    "screenshot": "production-drive.jpg"
+  }
+}
