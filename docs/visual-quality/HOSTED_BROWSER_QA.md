@@ -1,0 +1,51 @@
+# Bounded hosted browser evidence
+
+This harness adds a separate read-only GitHub Actions browser check. It is not a deployment, a merge gate declaring hardware acceptance, or a replacement for the recorded Radeon and real-phone checks. The initial commit contains the harness and its local tests; **actual hosted execution and visual inspection are still pending**.
+
+## Automatic smoke and optional matched checks
+
+`.github/workflows/browser-qa.yml` runs the production smoke on pushes to main and pull requests. It uses SHA-pinned official checkout/setup-node/upload-artifact actions, locked Playwright 1.63.0, Node 24 and the official Google Chrome already supplied by the Ubuntu 24.04 runner. The runner image and installed Chrome may change over time; every run records the actual Chrome version, renderer, exact repository revisions and SHA-256 fingerprints of the served build files. Compare baseline and candidate within the same job, never across different runner/browser versions.
+
+Chrome runs headed inside Xvfb using Playwright's supported `chrome` channel and `chromiumSandbox: true`. Before launch it removes Playwright 1.63.0’s unsafe SwiftShader, phishing/IPC/self-XSS, popup/repost, mock/basic credential-store and security-relevant disabled-feature defaults using an exact version-pinned `ignoreDefaultArgs` list. A no-launch regression oracle checks the effective arguments against the installed package. The only explicit added flag is `--enable-automation`, which permits read-only CDP argument inspection. Other standard automation defaults remain; this is not an unmodified manual Chrome session. The harness also checks its actual launch arguments for forbidden sandbox/security/unsafe software-renderer flags. It does not change AppArmor, user namespaces, setuid permissions, sysctls, certificate handling or other system security settings. A sandbox or WebGL failure is a failed check. There is no unsafe fallback.
+
+The smoke first creates a real WebGL2 context and verifies a clear/readback pixel. It then opens the separately verified production static bundle, waits for the loading overlay to leave and the real city context and controls to become ready, exercises Zoom in and Return to overview, verifies local QA controls are absent, checks console/page/request/HTTP errors, and saves an actual 1920×1080 viewport screenshot. This is evidence of startup/UI readiness, not a pixel-perfect visual oracle. Inspect the screenshot.
+
+Matched mode is initially disabled to establish normal sandbox/WebGL feasibility first. Enable it in a reviewed PR commit by changing the checked-in `RUN_MATCHED: 'false'` to `'true'`. This works before the new workflow is on the default branch. Once available, workflow_dispatch also offers a `matched` input and baseline commit input. The checked-in baseline is c402a41c0157464c34376d1860f8afc7ac3b715f; update that exact ref deliberately when selecting another baseline. No branch is merged by this workflow.
+
+Both opt-in QA bundles are built fully before matched timing. The harness runs baseline-a, candidate-a, candidate-b, baseline-b sequentially in one browser process, with one fresh context and one loopback server at a time. There are no concurrent builds or other rendering city pages during samples. The default address is http://127.0.0.1:3100/ and output is ignored `work/visual-qa/hosted-browser/`. The server's bounded `/__visual-qa` receiver replaces the manual server only for this harness; no runtime QA code is changed.
+
+It clicks the existing **Upgrade matched high** UI without injecting a new benchmark or changing movement/render behavior. Each suite runs the existing atlas-aerial, Gastown roofs, Gastown street and citizen views: clear weather, 14:00, fixed 1920×1080 drawing buffer, minimum five-second warmup with architecture/street/citizen readiness capped by the existing 30-second wait, followed by the existing eight-second visible RAF sample. CPU instrumentation is off. All 16 original measurement rows are preserved. Each row must be valid, visible, ready and pose-stable; camera/target positions, navigation mode and renderer must match between runs. Original first-pass citizen/Gastown-street PNGs for both revisions are retained (four matched images); the remaining shots are intentionally not archived to keep the budget bounded.
+
+`QA_BASELINE_QUERY` and `QA_CANDIDATE_QUERY` in the workflow accept bounded local query strings for future explicitly implemented runtime feature toggles. Empty values are the default. The harness does not invent or activate such toggles. Both the query and built-source fingerprint are recorded.
+
+## Interpretation and budgets
+
+- A successful functional check never sets a performance gate to passed. Raw frames, sample duration, p50/p95/p99, max and >100 ms counts remain available. Fewer than 100 frames in an eight-second sample are explicitly marked insufficient for timing interpretation. Even higher-count samples are short diagnostics, with only two observations per variant.
+- Software renderer names such as llvmpipe, SwiftShader, softpipe or lavapipe are classified explicitly. Unknown/unmasked names remain recorded rather than asserted to be hardware. A hosted software p95 is not comparable to the historical Radeon 149.7 ms result. These runs do not establish Radeon, phone, long-session, smooth navigation or universal FPS acceptance.
+- Compatible-graphics/citizen fallback state remains in each original measurement row. A valid fallback screenshot does not establish readiness or visual acceptance of the full detailed citizen asset.
+- The job has a 25-minute total timeout. Smoke has a four-minute harness ceiling and five-minute step ceiling; matched has a 14-minute harness ceiling and 15-minute step ceiling. Existing UI waits are bounded. An interruption can leave partial evidence; absence of `status: passed` is never success.
+- All artifact writes share a 20,000,000-byte cap, checked again before upload. PNGs are capped at 4 MB each; request bodies at 6 MB; each measurement row at 64 KB. Only the known evidence directory is uploaded, for seven days. Console detail is capped at 40 entries of 1,000 characters, while counts remain complete. No traces, HARs, video, downloads, browser profiles, credentials or entire build directories are uploaded.
+- Browser-origin requests are restricted to loopback (plus in-memory data/blob resources); WebSockets and external origins are blocked and counted as failures. Service workers and file downloads are disabled. GitHub token permissions are contents:read and checkout credentials are not retained. No secrets or write/deploy credentials are provided.
+
+## Retrieve and inspect actual evidence
+
+Open the specific GitHub Actions run and download `hosted-browser-qa-<run-id>-<attempt>` from its Artifacts section within seven days. Inspect `smoke.json`, optional `matched.json`, the PNGs and `artifact-manifest.json` (filename/byte/hash inventory). The GitHub connector also supports listing a run's artifacts and downloading an artifact ZIP with its returned artifact ID; use those supported operations rather than guessing private download URLs.
+
+For environments where the authorized workflow-log reader is the available retrieval route, logs contain at most two `VLA_QA_PREVIEW ` JSON lines per job. Smoke-only emits one production preview; matched mode suppresses that and emits at most the two candidate citizen/Gastown previews after timing finishes. Each is an actual 640×360 JPEG, at most 24 KB before Base64, with dimensions, byte count and SHA-256. Decode only the `base64` field, verify byte length/hash, and inspect the image. Oversize previews are omitted with an explicit message; full-resolution artifact evidence remains the source of record. Preview compression is not visual regression approval.
+
+## Local commands and verification boundaries
+
+On a machine with normal sandboxed Chrome and Xvfb, build first and then run:
+
+```sh
+npm ci
+npm run build:firebase
+xvfb-run -a node tools/hosted-browser-qa.mjs smoke
+# With two already-built opt-in QA directories:
+xvfb-run -a node tools/hosted-browser-qa.mjs matched --root /path/candidate/dist/client --baseline /path/baseline/dist/client
+node tools/hosted-browser-qa.mjs check-artifacts
+```
+
+The harness has no build command and cannot silently rebuild during a timing run. Unit tests run with `node --test tests/hosted-browser-qa.test.mjs` and cover input/capture validation, low-frame interpretation, pose matching, cumulative artifact limits, symlink rejection and workflow constraints. Passing these tests does not demonstrate a browser launch or a render. The implementation checkpoint passed all 595 repository tests (including ten harness tests), TypeScript checking, the verified production Firebase build, focused lint, JavaScript syntax checking and YAML parsing. The normal-sandbox hosted browser launch has not yet been run at this checkpoint.
+
+Official references: [Playwright browser launch options](https://playwright.dev/docs/api/class-browsertype#browser-type-launch) document the sandbox default and channel support; [Chrome channels](https://playwright.dev/docs/browsers#google-chrome--microsoft-edge), [Linux/Xvfb CI](https://playwright.dev/docs/ci#running-headed), [official Playwright 1.63.0](https://github.com/microsoft/playwright/releases/tag/v1.63.0), and [pinned upload-artifact v6.0.0](https://github.com/actions/upload-artifact/commit/b7c566a772e6b6bfb58ed0dc250532a479d7789f).
