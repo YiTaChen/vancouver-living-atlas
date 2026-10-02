@@ -1,0 +1,161 @@
+{
+  "passed": true,
+  "blenderSources": "passed",
+  "checks": [
+    "actual GLB triangles and one material/primitive budget",
+    "static origin and axes",
+    "real metre bounds",
+    "finite normals tangents UVs",
+    "non-degenerate triangles",
+    "open entry and window/awning clearance",
+    "LOD primary bounds within 2 cm",
+    "shared packed PBR source maps",
+    "editable independent LOD source hashes and physical UVs"
+  ],
+  "assets": [
+    {
+      "id": "sandstone-sill",
+      "lod": 0,
+      "triangles": 32,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 266936,
+      "clearanceChecked": false
+    },
+    {
+      "id": "sandstone-sill",
+      "lod": 1,
+      "triangles": 16,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 265684,
+      "clearanceChecked": false
+    },
+    {
+      "id": "heritage-window-frame",
+      "lod": 0,
+      "triangles": 40,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 162660,
+      "clearanceChecked": true
+    },
+    {
+      "id": "heritage-window-frame",
+      "lod": 1,
+      "triangles": 32,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 161840,
+      "clearanceChecked": true
+    },
+    {
+      "id": "heritage-cornice",
+      "lod": 0,
+      "triangles": 32,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 266896,
+      "clearanceChecked": false
+    },
+    {
+      "id": "heritage-cornice",
+      "lod": 1,
+      "triangles": 24,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 266272,
+      "clearanceChecked": false
+    },
+    {
+      "id": "sandstone-plinth",
+      "lod": 0,
+      "triangles": 24,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 266284,
+      "clearanceChecked": false
+    },
+    {
+      "id": "sandstone-plinth",
+      "lod": 1,
+      "triangles": 20,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 265968,
+      "clearanceChecked": false
+    },
+    {
+      "id": "sandstone-corner",
+      "lod": 0,
+      "triangles": 212,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 282820,
+      "clearanceChecked": false
+    },
+    {
+      "id": "sandstone-corner",
+      "lod": 1,
+      "triangles": 20,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 266004,
+      "clearanceChecked": false
+    },
+    {
+      "id": "residential-entry-surround",
+      "lod": 0,
+      "triangles": 128,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 244516,
+      "clearanceChecked": true
+    },
+    {
+      "id": "residential-entry-surround",
+      "lod": 1,
+      "triangles": 40,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 234760,
+      "clearanceChecked": true
+    },
+    {
+      "id": "sloped-metal-awning",
+      "lod": 0,
+      "triangles": 48,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 164248,
+      "clearanceChecked": true
+    },
+    {
+      "id": "sloped-metal-awning",
+      "lod": 1,
+      "triangles": 40,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 163624,
+      "clearanceChecked": true
+    },
+    {
+      "id": "flat-metal-awning",
+      "lod": 0,
+      "triangles": 36,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 163032,
+      "clearanceChecked": true
+    },
+    {
+      "id": "flat-metal-awning",
+      "lod": 1,
+      "triangles": 28,
+      "materials": 1,
+      "drawPrimitives": 1,
+      "bytes": 162408,
+      "clearanceChecked": true
+    }
+  ]
+}

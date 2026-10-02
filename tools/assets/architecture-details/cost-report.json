@@ -1,0 +1,73 @@
+{
+  "scope": "Offline Phase C candidates only; runtime integration and performance gate pending",
+  "baselineRevision": "9e69073fc3c8381b3ed43d54c0165e0778ad611d",
+  "productionAssetsUnchanged": true,
+  "productionInstanceDelta": 0,
+  "productionGeometryDelta": 0,
+  "productionTextureDelta": 0,
+  "production": [
+    {
+      "id": "heritage-shop-bay",
+      "lod": 0,
+      "trianglesBefore": 8128,
+      "trianglesAfter": 8128,
+      "materialsBefore": 3,
+      "materialsAfter": 3,
+      "bytesBefore": 2304912,
+      "bytesAfter": 2304912,
+      "unchangedSha256": "985f36a9283982d06faa0e99634322fe7f613d1eb8be0b7ab74d3e1b48c8a898"
+    },
+    {
+      "id": "heritage-shop-bay",
+      "lod": 1,
+      "trianglesBefore": 604,
+      "trianglesAfter": 604,
+      "materialsBefore": 2,
+      "materialsAfter": 2,
+      "bytesBefore": 559020,
+      "bytesAfter": 559020,
+      "unchangedSha256": "63b03dc729d1bac065ce1c4fa786fedb907f95773820fa6752ff473e3aab56ac"
+    },
+    {
+      "id": "modern-lobby-bay",
+      "lod": 0,
+      "trianglesBefore": 6260,
+      "trianglesAfter": 6260,
+      "materialsBefore": 3,
+      "materialsAfter": 3,
+      "bytesBefore": 1873464,
+      "bytesAfter": 1873464,
+      "unchangedSha256": "756fc1912f199ad4d8a3d7f124b1819c5923754392f9bfc8aee27a9bfddde164"
+    },
+    {
+      "id": "modern-lobby-bay",
+      "lod": 1,
+      "trianglesBefore": 556,
+      "trianglesAfter": 556,
+      "materialsBefore": 3,
+      "materialsAfter": 3,
+      "bytesBefore": 418300,
+      "bytesAfter": 418300,
+      "unchangedSha256": "e808ce8665581bf55c915867b840483e39cf27b389ba505b5c83d3cdaab54f3e"
+    }
+  ],
+  "offlineCandidate": {
+    "assetsBefore": 0,
+    "assetsAfter": 8,
+    "independentLodSources": 16,
+    "trianglesLod0": 552,
+    "trianglesLod1": 220,
+    "materialsPerExport": 1,
+    "primitivesPerExport": 1,
+    "glbBytes": 3603952,
+    "editableSourceBytes": 4538850,
+    "sharedSurfaceFamilies": 3,
+    "newSourceTextureMaps": 0,
+    "naiveIndependentTextureGpuBytesRgbaMipEstimate": 58982400
+  },
+  "limitations": [
+    "Offline authored inventory is additive; there is no claim of improved runtime FPS or reduced shipping triangles.",
+    "Standalone GLB embedded maps repeat across assets. Future runtime trial must reuse shared atlas rather than retain duplicate images.",
+    "No integrated street, slope, LOD-switch, High/Ultra/compatible or target-device performance acceptance is claimed."
+  ]
+}

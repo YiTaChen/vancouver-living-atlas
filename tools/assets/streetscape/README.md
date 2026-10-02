@@ -53,3 +53,11 @@ Only the compact heritage and modern bays are loaded in the app. Optional furnit
 Validate shipping GLBs with `python3 tools/assets/streetscape/validate_streetscape.py`. Validate a full source build with `python3 tools/assets/streetscape/validate_streetscape.py --root work/streetscape-source`.
 
 Runtime caps are High: 4 cells, 24 bays, 6 LOD0; Ultra: 6 cells, 36 bays, 10 LOD0. Remaining visible modules use LOD1. Cache is limited to 12 cells, and one cell is assembled per frame. Only the exact upgraded ground-frontage instances are suppressed; all upper windows and cap-excluded shops remain.
+
+## Offline architectural detail candidates
+
+The [original architecture detail kit](../architecture-details/README.md) adds
+independently editable sill, open frame, cornice, plinth, corner, open residential
+entry and two awning candidates. It includes real Blender sources, one-material
+GLBs, preview and geometry/UV/clearance validation. It is not loaded by the city;
+production expansion remains gated on representative street and performance QA.

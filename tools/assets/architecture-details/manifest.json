@@ -1,0 +1,600 @@
+{
+  "kit": "Original architecture detail modules",
+  "version": 1,
+  "status": "offline-candidate; no runtime integration",
+  "license": "LicenseRef-Vancouver-Living-Atlas-NC-1.0",
+  "units": "metres",
+  "upAxis": "+Y",
+  "frontAxis": "+Z",
+  "origin": "Facade attachment plane at local ground datum; corners use external corner datum",
+  "blenderVersion": "4.3.2",
+  "catalogSha256": "c4e26c42122d394b0ddda5653dbe588e4701bcab97dc2de66420e2411310aa95",
+  "builderSha256": "6d4f18dfbfcba83face9ea485171d8229eed318125e8acf1ad6b03a6b17539f5",
+  "sourceMaps": {
+    "sandstone": {
+      "color": "7d370f02016b15b0b702a47445d4f0f2b2555c3d623e12b16b19e157abd5337a",
+      "normal": "30a5ba0a9ff28d05419bd9339a7746f841959c4e276028ce0a7c35c7be93eaba",
+      "orm": "5458aa7d79979230563fcd4e8615d330b024276fda4685c9e49b072a2ad4f2c1"
+    },
+    "painted-metal": {
+      "color": "e572f72749f87e6f270d92d92d8f3d6e1d1516f0929256b8b6c4250421559560",
+      "normal": "138704881990a261abcba11cafb18cca8d33a09a44d660d6fad6ae17c2fda0f5",
+      "orm": "c17d43084e048d7a8b8aa7f05b053a7e1aa6f7d76a262223bf78a985fba41775"
+    },
+    "cedar": {
+      "color": "a449185795f6b8f1ba4b8be4d54a5c29d4de9962e3130dcd6f8a78c5eab92c09",
+      "normal": "5a22afe24646ee76b7fd876817e65a7a6e40fb1691b559171156d6098c38c215",
+      "orm": "3701c80f980c8f530cb49650e36b3007db658d04298a1029716d6a4d337e8f43"
+    }
+  },
+  "assets": [
+    {
+      "id": "sandstone-sill",
+      "role": "sill",
+      "lods": [
+        {
+          "level": 0,
+          "file": "assets/sandstone-sill.lod0.glb",
+          "source": "source/sandstone-sill.lod0.blend",
+          "triangles": 32,
+          "triangleCap": 64,
+          "materials": 1,
+          "primitives": 1,
+          "bounds": {
+            "min": [
+              -0.7,
+              0.0,
+              0.02
+            ],
+            "max": [
+              0.7,
+              0.18,
+              0.24
+            ]
+          },
+          "bytes": 266936,
+          "sha256": "a431e56f133566fdeb14cf817130f2248487884ba6373525e9147205fa016c31",
+          "sourceSha256": "5e353f93799618e2d956354001d68cfa75f7257ca67b719970043f3af5ddbf40",
+          "surface": "sandstone",
+          "tileMeters": [
+            1.2,
+            1.2
+          ]
+        },
+        {
+          "level": 1,
+          "file": "assets/sandstone-sill.lod1.glb",
+          "source": "source/sandstone-sill.lod1.blend",
+          "triangles": 16,
+          "triangleCap": 32,
+          "materials": 1,
+          "primitives": 1,
+          "bounds": {
+            "min": [
+              -0.7,
+              0.0,
+              0.02
+            ],
+            "max": [
+              0.7,
+              0.18,
+              0.24
+            ]
+          },
+          "bytes": 265684,
+          "sha256": "215df5c44b33e26d3d632bec11c5ae4c19234b4e59d4acee8a5d7a787f53d81e",
+          "sourceSha256": "7ef01fb7d9a174e832c444c58e96da8073614e878df26848a25898d70d706edb",
+          "surface": "sandstone",
+          "tileMeters": [
+            1.2,
+            1.2
+          ]
+        }
+      ],
+      "maximumMaterials": 1
+    },
+    {
+      "id": "heritage-window-frame",
+      "role": "window-frame",
+      "lods": [
+        {
+          "level": 0,
+          "file": "assets/heritage-window-frame.lod0.glb",
+          "source": "source/heritage-window-frame.lod0.blend",
+          "triangles": 40,
+          "triangleCap": 64,
+          "materials": 1,
+          "primitives": 1,
+          "bounds": {
+            "min": [
+              -0.7,
+              0.0,
+              0.02
+            ],
+            "max": [
+              0.7,
+              1.6,
+              0.14
+            ]
+          },
+          "bytes": 162660,
+          "sha256": "6dea351d9f267a0bdae09a707d1a463ca0de2c3af84b3a697efcc6db69623f62",
+          "sourceSha256": "c65838b3a5e08895adce7788c1ea37c4696fb5a91f7943e250e34637e1dfd14f",
+          "surface": "painted-metal",
+          "tileMeters": [
+            0.8,
+            0.8
+          ]
+        },
+        {
+          "level": 1,
+          "file": "assets/heritage-window-frame.lod1.glb",
+          "source": "source/heritage-window-frame.lod1.blend",
+          "triangles": 32,
+          "triangleCap": 40,
+          "materials": 1,
+          "primitives": 1,
+          "bounds": {
+            "min": [
+              -0.7,
+              0.0,
+              0.02
+            ],
+            "max": [
+              0.7,
+              1.6,
+              0.14
+            ]
+          },
+          "bytes": 161840,
+          "sha256": "530028a112f57a64e07a29b0f86dc3ac2b2cdb63beaefe436868dd958b48aefe",
+          "sourceSha256": "0985df756dc5352c8a50863b1542638c79b8c9580a2ce5cee4dcb6f9c996f774",
+          "surface": "painted-metal",
+          "tileMeters": [
+            0.8,
+            0.8
+          ]
+        }
+      ],
+      "maximumMaterials": 1,
+      "clearance": {
+        "min": [
+          -0.6,
+          0.1,
+          0.019
+        ],
+        "max": [
+          0.6,
+          1.5,
+          0.141
+        ]
+      }
+    },
+    {
+      "id": "heritage-cornice",
+      "role": "cornice",
+      "lods": [
+        {
+          "level": 0,
+          "file": "assets/heritage-cornice.lod0.glb",
+          "source": "source/heritage-cornice.lod0.blend",
+          "triangles": 32,
+          "triangleCap": 48,
+          "materials": 1,
+          "primitives": 1,
+          "bounds": {
+            "min": [
+              -1.0,
+              0.0,
+              0.02
+            ],
+            "max": [
+              1.0,
+              0.24,
+              0.36
+            ]
+          },
+          "bytes": 266896,
+          "sha256": "8d02dd181fc141cc7573740678c6e12d45d597b1968dfc1dfc57af286007fa62",
+          "sourceSha256": "5a5760b12e55563854afcd05db1755c846293a7b40a10cc2dbe183aab1bd6150",
+          "surface": "sandstone",
+          "tileMeters": [
+            1.2,
+            1.2
+          ]
+        },
+        {
+          "level": 1,
+          "file": "assets/heritage-cornice.lod1.glb",
+          "source": "source/heritage-cornice.lod1.blend",
+          "triangles": 24,
+          "triangleCap": 32,
+          "materials": 1,
+          "primitives": 1,
+          "bounds": {
+            "min": [
+              -1.0,
+              0.0,
+              0.02
+            ],
+            "max": [
+              1.0,
+              0.24,
+              0.36
+            ]
+          },
+          "bytes": 266272,
+          "sha256": "232c064a8a1d4a2fbbfdf649073401325348a7e4b9bc32a57740be0e7530e009",
+          "sourceSha256": "87b968df2cdf2057de204ec8856445923f4779657058d25d9e3b33339af7b46b",
+          "surface": "sandstone",
+          "tileMeters": [
+            1.2,
+            1.2
+          ]
+        }
+      ],
+      "maximumMaterials": 1
+    },
+    {
+      "id": "sandstone-plinth",
+      "role": "base",
+      "lods": [
+        {
+          "level": 0,
+          "file": "assets/sandstone-plinth.lod0.glb",
+          "source": "source/sandstone-plinth.lod0.blend",
+          "triangles": 24,
+          "triangleCap": 40,
+          "materials": 1,
+          "primitives": 1,
+          "bounds": {
+            "min": [
+              -1.0,
+              0.0,
+              0.02
+            ],
+            "max": [
+              1.0,
+              0.42,
+              0.2
+            ]
+          },
+          "bytes": 266284,
+          "sha256": "dc6e46f072e87e170cbf936e4a6c57be353278e39319d81112518e264c8fe427",
+          "sourceSha256": "7ae84abcbfc90760bc8829ca745e647deb849d885168909c614c6939122c88c4",
+          "surface": "sandstone",
+          "tileMeters": [
+            1.2,
+            1.2
+          ]
+        },
+        {
+          "level": 1,
+          "file": "assets/sandstone-plinth.lod1.glb",
+          "source": "source/sandstone-plinth.lod1.blend",
+          "triangles": 20,
+          "triangleCap": 28,
+          "materials": 1,
+          "primitives": 1,
+          "bounds": {
+            "min": [
+              -1.0,
+              0.0,
+              0.02
+            ],
+            "max": [
+              1.0,
+              0.42,
+              0.2
+            ]
+          },
+          "bytes": 265968,
+          "sha256": "0d6737824b2c576bb7ffdcca0474460d2b71223bb7353e34c2c7a77fb04b3ad8",
+          "sourceSha256": "61574fb6e8a7b3ca3f1fe2fd2f3bf70bcbcb5e2c2776a6df2a4e030ba0772e64",
+          "surface": "sandstone",
+          "tileMeters": [
+            1.2,
+            1.2
+          ]
+        }
+      ],
+      "maximumMaterials": 1
+    },
+    {
+      "id": "sandstone-corner",
+      "role": "corner",
+      "lods": [
+        {
+          "level": 0,
+          "file": "assets/sandstone-corner.lod0.glb",
+          "source": "source/sandstone-corner.lod0.blend",
+          "triangles": 212,
+          "triangleCap": 224,
+          "materials": 1,
+          "primitives": 1,
+          "bounds": {
+            "min": [
+              0.0,
+              0.0,
+              0.02
+            ],
+            "max": [
+              0.26,
+              2.4,
+              0.26
+            ]
+          },
+          "bytes": 282820,
+          "sha256": "cae5efe3f4858f699f3f87c5dbaf581a250a72358c91c42554075dce501a5ba3",
+          "sourceSha256": "4934eb55006f9fafc769d2a86b080e8de8d9b9b38a4f807fb981d1a636a77cca",
+          "surface": "sandstone",
+          "tileMeters": [
+            1.2,
+            1.2
+          ]
+        },
+        {
+          "level": 1,
+          "file": "assets/sandstone-corner.lod1.glb",
+          "source": "source/sandstone-corner.lod1.blend",
+          "triangles": 20,
+          "triangleCap": 24,
+          "materials": 1,
+          "primitives": 1,
+          "bounds": {
+            "min": [
+              0.0,
+              0.0,
+              0.02
+            ],
+            "max": [
+              0.26,
+              2.4,
+              0.26
+            ]
+          },
+          "bytes": 266004,
+          "sha256": "78d324ff237fcff8feb647dd9f50c4dcdf71be49f7b7126be3921ddca29d6ed0",
+          "sourceSha256": "90db1f0b62f36e209a9ecef458e3b252cc5b7a3c2ce9b436283b43fa1cdfc63b",
+          "surface": "sandstone",
+          "tileMeters": [
+            1.2,
+            1.2
+          ]
+        }
+      ],
+      "maximumMaterials": 1
+    },
+    {
+      "id": "residential-entry-surround",
+      "role": "entrance",
+      "lods": [
+        {
+          "level": 0,
+          "file": "assets/residential-entry-surround.lod0.glb",
+          "source": "source/residential-entry-surround.lod0.blend",
+          "triangles": 128,
+          "triangleCap": 160,
+          "materials": 1,
+          "primitives": 1,
+          "bounds": {
+            "min": [
+              -0.65,
+              0.0,
+              0.02
+            ],
+            "max": [
+              0.65,
+              2.5,
+              0.206
+            ]
+          },
+          "bytes": 244516,
+          "sha256": "10e4a42965f16261a29a6569189706dcc9d926a07e0f6ed271afaa59ca7b94ac",
+          "sourceSha256": "0ea41c17de647187f49394417ece7b4b8c116b90ca9809eaa9486a9ec5bf3a24",
+          "surface": "cedar",
+          "tileMeters": [
+            1.52,
+            1.52
+          ]
+        },
+        {
+          "level": 1,
+          "file": "assets/residential-entry-surround.lod1.glb",
+          "source": "source/residential-entry-surround.lod1.blend",
+          "triangles": 40,
+          "triangleCap": 48,
+          "materials": 1,
+          "primitives": 1,
+          "bounds": {
+            "min": [
+              -0.65,
+              0.0,
+              0.02
+            ],
+            "max": [
+              0.65,
+              2.5,
+              0.19
+            ]
+          },
+          "bytes": 234760,
+          "sha256": "4681b0e75f5578881eb12991684dfeee70909001144b07c25adf007af13286bd",
+          "sourceSha256": "76c3829fcff9e6b6eb4b1dc7ce59fdcfd139ef301d445f948ddd2fa19dbe067f",
+          "surface": "cedar",
+          "tileMeters": [
+            1.52,
+            1.52
+          ]
+        }
+      ],
+      "maximumMaterials": 1,
+      "clearance": {
+        "min": [
+          -0.52,
+          0,
+          0.019
+        ],
+        "max": [
+          0.52,
+          2.3,
+          0.207
+        ]
+      }
+    },
+    {
+      "id": "sloped-metal-awning",
+      "role": "awning",
+      "lods": [
+        {
+          "level": 0,
+          "file": "assets/sloped-metal-awning.lod0.glb",
+          "source": "source/sloped-metal-awning.lod0.blend",
+          "triangles": 48,
+          "triangleCap": 48,
+          "materials": 1,
+          "primitives": 1,
+          "bounds": {
+            "min": [
+              -0.8,
+              2.37,
+              0.02
+            ],
+            "max": [
+              0.8,
+              2.7,
+              0.87
+            ]
+          },
+          "bytes": 164248,
+          "sha256": "75cd27de84c505401ddff0ea1f30801b5c635be284092f92b849192b709ce1ab",
+          "sourceSha256": "30087a74849f524dd66c428b066d2822c4ec48d8ef27721e0fb2f4000863322a",
+          "surface": "painted-metal",
+          "tileMeters": [
+            0.8,
+            0.8
+          ]
+        },
+        {
+          "level": 1,
+          "file": "assets/sloped-metal-awning.lod1.glb",
+          "source": "source/sloped-metal-awning.lod1.blend",
+          "triangles": 40,
+          "triangleCap": 40,
+          "materials": 1,
+          "primitives": 1,
+          "bounds": {
+            "min": [
+              -0.8,
+              2.37,
+              0.02
+            ],
+            "max": [
+              0.8,
+              2.7,
+              0.87
+            ]
+          },
+          "bytes": 163624,
+          "sha256": "f66137784696ff4703b54f3aaa08814e8a3d2cf942bb369944f292a95c336755",
+          "sourceSha256": "d6a126ac41913ca5df510be32aaa9753e69abf33d5fc419009d1986fe1baeec4",
+          "surface": "painted-metal",
+          "tileMeters": [
+            0.8,
+            0.8
+          ]
+        }
+      ],
+      "maximumMaterials": 1,
+      "clearance": {
+        "min": [
+          -0.8,
+          0,
+          0.019
+        ],
+        "max": [
+          0.8,
+          2.3,
+          0.871
+        ]
+      }
+    },
+    {
+      "id": "flat-metal-awning",
+      "role": "awning",
+      "lods": [
+        {
+          "level": 0,
+          "file": "assets/flat-metal-awning.lod0.glb",
+          "source": "source/flat-metal-awning.lod0.blend",
+          "triangles": 36,
+          "triangleCap": 40,
+          "materials": 1,
+          "primitives": 1,
+          "bounds": {
+            "min": [
+              -0.9,
+              2.48,
+              0.02
+            ],
+            "max": [
+              0.9,
+              2.65,
+              1.02
+            ]
+          },
+          "bytes": 163032,
+          "sha256": "7d78c35a4ae0e2ed9b317d0f3427ee5acbd8e72f8db6ab3190c11aaabc0fe08e",
+          "sourceSha256": "0919bbaf3300eb80915a936abff33743b55298a379ed9010e5c7e024b3c60985",
+          "surface": "painted-metal",
+          "tileMeters": [
+            0.8,
+            0.8
+          ]
+        },
+        {
+          "level": 1,
+          "file": "assets/flat-metal-awning.lod1.glb",
+          "source": "source/flat-metal-awning.lod1.blend",
+          "triangles": 28,
+          "triangleCap": 28,
+          "materials": 1,
+          "primitives": 1,
+          "bounds": {
+            "min": [
+              -0.9,
+              2.48,
+              0.02
+            ],
+            "max": [
+              0.9,
+              2.65,
+              1.02
+            ]
+          },
+          "bytes": 162408,
+          "sha256": "2f1795465baa5c56661dd401a89dfcdc5f92c5b2ff44d06b0a92d0dea5bf3319",
+          "sourceSha256": "0384b126fda6ef2c5a9649fcfb7587d058308b53418db489a2a07347a33fc8f0",
+          "surface": "painted-metal",
+          "tileMeters": [
+            0.8,
+            0.8
+          ]
+        }
+      ],
+      "maximumMaterials": 1,
+      "clearance": {
+        "min": [
+          -0.9,
+          0,
+          0.019
+        ],
+        "max": [
+          0.9,
+          2.3,
+          1.021
+        ]
+      }
+    }
+  ]
+}

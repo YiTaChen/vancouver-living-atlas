@@ -1,0 +1,300 @@
+{
+  "passed": true,
+  "checks": [
+    "full independent Blender and GLB candidate audit",
+    "input sources preserved byte for byte",
+    "actual indexed position normal UV tangent equivalence",
+    "physical bounds triangles shared-map equivalence"
+  ],
+  "candidateAudit": {
+    "passed": true,
+    "blenderSources": "passed",
+    "checks": [
+      "actual GLB triangles and one material/primitive budget",
+      "static origin and axes",
+      "real metre bounds",
+      "finite normals tangents UVs",
+      "non-degenerate triangles",
+      "open entry and window/awning clearance",
+      "LOD primary bounds within 2 cm",
+      "shared packed PBR source maps",
+      "editable independent LOD source hashes and physical UVs"
+    ],
+    "assets": [
+      {
+        "id": "sandstone-sill",
+        "lod": 0,
+        "triangles": 32,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 266936,
+        "clearanceChecked": false
+      },
+      {
+        "id": "sandstone-sill",
+        "lod": 1,
+        "triangles": 16,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 265684,
+        "clearanceChecked": false
+      },
+      {
+        "id": "heritage-window-frame",
+        "lod": 0,
+        "triangles": 40,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 162660,
+        "clearanceChecked": true
+      },
+      {
+        "id": "heritage-window-frame",
+        "lod": 1,
+        "triangles": 32,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 161840,
+        "clearanceChecked": true
+      },
+      {
+        "id": "heritage-cornice",
+        "lod": 0,
+        "triangles": 32,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 266896,
+        "clearanceChecked": false
+      },
+      {
+        "id": "heritage-cornice",
+        "lod": 1,
+        "triangles": 24,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 266272,
+        "clearanceChecked": false
+      },
+      {
+        "id": "sandstone-plinth",
+        "lod": 0,
+        "triangles": 24,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 266284,
+        "clearanceChecked": false
+      },
+      {
+        "id": "sandstone-plinth",
+        "lod": 1,
+        "triangles": 20,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 265968,
+        "clearanceChecked": false
+      },
+      {
+        "id": "sandstone-corner",
+        "lod": 0,
+        "triangles": 212,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 282820,
+        "clearanceChecked": false
+      },
+      {
+        "id": "sandstone-corner",
+        "lod": 1,
+        "triangles": 20,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 266004,
+        "clearanceChecked": false
+      },
+      {
+        "id": "residential-entry-surround",
+        "lod": 0,
+        "triangles": 128,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 244516,
+        "clearanceChecked": true
+      },
+      {
+        "id": "residential-entry-surround",
+        "lod": 1,
+        "triangles": 40,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 234760,
+        "clearanceChecked": true
+      },
+      {
+        "id": "sloped-metal-awning",
+        "lod": 0,
+        "triangles": 48,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 164248,
+        "clearanceChecked": true
+      },
+      {
+        "id": "sloped-metal-awning",
+        "lod": 1,
+        "triangles": 40,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 163624,
+        "clearanceChecked": true
+      },
+      {
+        "id": "flat-metal-awning",
+        "lod": 0,
+        "triangles": 36,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 163032,
+        "clearanceChecked": true
+      },
+      {
+        "id": "flat-metal-awning",
+        "lod": 1,
+        "triangles": 28,
+        "materials": 1,
+        "drawPrimitives": 1,
+        "bytes": 162408,
+        "clearanceChecked": true
+      }
+    ]
+  },
+  "comparisons": [
+    {
+      "id": "sandstone-sill",
+      "lod": 0,
+      "inputSourceSha256": "5e353f93799618e2d956354001d68cfa75f7257ca67b719970043f3af5ddbf40",
+      "geometryPbrSignature": "71060737fc56adfdb30653ff91b451827f9513c77b45b8a5cd18bce29b1f7411",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "sandstone-sill",
+      "lod": 1,
+      "inputSourceSha256": "7ef01fb7d9a174e832c444c58e96da8073614e878df26848a25898d70d706edb",
+      "geometryPbrSignature": "f5c2cced1439bc784f239c5bad4825dd7bea5768fc25fe627c21e19e4606bec6",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "heritage-window-frame",
+      "lod": 0,
+      "inputSourceSha256": "c65838b3a5e08895adce7788c1ea37c4696fb5a91f7943e250e34637e1dfd14f",
+      "geometryPbrSignature": "8f8ba0ed8db6dfc14ea7b2610e5c7658d5a9888c7a4f5d012ba13fc41f5a24ad",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "heritage-window-frame",
+      "lod": 1,
+      "inputSourceSha256": "0985df756dc5352c8a50863b1542638c79b8c9580a2ce5cee4dcb6f9c996f774",
+      "geometryPbrSignature": "be47e173af6d7f59c2eb4b076b9115016fb2ee71660ec02a483b1d7f5242fe20",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "heritage-cornice",
+      "lod": 0,
+      "inputSourceSha256": "5a5760b12e55563854afcd05db1755c846293a7b40a10cc2dbe183aab1bd6150",
+      "geometryPbrSignature": "cb60aa768c0fbba8a4c1eea4eeb92a73fd8c68e0366b3fbf960d7967e5944f1f",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "heritage-cornice",
+      "lod": 1,
+      "inputSourceSha256": "87b968df2cdf2057de204ec8856445923f4779657058d25d9e3b33339af7b46b",
+      "geometryPbrSignature": "1541940c0063a8dcc0e6ace760442eda80e7629ee701ac7b945b4d08c6da5297",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "sandstone-plinth",
+      "lod": 0,
+      "inputSourceSha256": "7ae84abcbfc90760bc8829ca745e647deb849d885168909c614c6939122c88c4",
+      "geometryPbrSignature": "b71d076b7cc10cd8e014f3cfd3101babc48dd967018570ef4009dd8289e964a6",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "sandstone-plinth",
+      "lod": 1,
+      "inputSourceSha256": "61574fb6e8a7b3ca3f1fe2fd2f3bf70bcbcb5e2c2776a6df2a4e030ba0772e64",
+      "geometryPbrSignature": "04207022c3a3a4d1579092bc03cf40291f883d4ff909e9886ae2779260145afd",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "sandstone-corner",
+      "lod": 0,
+      "inputSourceSha256": "4934eb55006f9fafc769d2a86b080e8de8d9b9b38a4f807fb981d1a636a77cca",
+      "geometryPbrSignature": "9df8578facf113ca5f90c7a781eb9b001cc7c01c6e434b1adb764262d30b0190",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "sandstone-corner",
+      "lod": 1,
+      "inputSourceSha256": "90db1f0b62f36e209a9ecef458e3b252cc5b7a3c2ce9b436283b43fa1cdfc63b",
+      "geometryPbrSignature": "42f8549054a8f2bc036458a2639289ed77dee92f0cb0f0f1e65b66fd60a2a61b",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "residential-entry-surround",
+      "lod": 0,
+      "inputSourceSha256": "0ea41c17de647187f49394417ece7b4b8c116b90ca9809eaa9486a9ec5bf3a24",
+      "geometryPbrSignature": "88d96a5fb928d78eec8168332ad25dba3a28241f762c3a4222f4347ff96b2c46",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "residential-entry-surround",
+      "lod": 1,
+      "inputSourceSha256": "76c3829fcff9e6b6eb4b1dc7ce59fdcfd139ef301d445f948ddd2fa19dbe067f",
+      "geometryPbrSignature": "c7df3a042d119e06e323f13d64f3b866610bd6f12c9cd7a77c30ccf7ccf90c08",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "sloped-metal-awning",
+      "lod": 0,
+      "inputSourceSha256": "30087a74849f524dd66c428b066d2822c4ec48d8ef27721e0fb2f4000863322a",
+      "geometryPbrSignature": "80e26207384b32818321d3cdcfebc0ca7381487825664c17304d769804582c5b",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "sloped-metal-awning",
+      "lod": 1,
+      "inputSourceSha256": "d6a126ac41913ca5df510be32aaa9753e69abf33d5fc419009d1986fe1baeec4",
+      "geometryPbrSignature": "a65fb7544a3524ffa96d59274e693498a1e51d6d01bb8d52709c5238191952f2",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "flat-metal-awning",
+      "lod": 0,
+      "inputSourceSha256": "0919bbaf3300eb80915a936abff33743b55298a379ed9010e5c7e024b3c60985",
+      "geometryPbrSignature": "09951a73521d268ee25c586a5cd82c520f8a3038cc0d11060729d6247733995b",
+      "unchangedInput": true,
+      "equivalentExport": true
+    },
+    {
+      "id": "flat-metal-awning",
+      "lod": 1,
+      "inputSourceSha256": "0384b126fda6ef2c5a9649fcfb7587d058308b53418db489a2a07347a33fc8f0",
+      "geometryPbrSignature": "da555a8d66c65cfd6ed230e011dc8f1fb6ee31de38754885fdbcc6f776ff4beb",
+      "unchangedInput": true,
+      "equivalentExport": true
+    }
+  ]
+}
