@@ -1,6 +1,7 @@
 /** LOCAL VISUAL QA: matched-resolution city, street and character evidence. */
 import type { CityEngine } from './engine';
 import type { VisualQuality } from './quality';
+import { QACPUProfile } from './qa-cpu-profile';
 import { project } from './geo';
 import { sampleAtmosphere, type AtmosphereMode } from './atmosphere';
 import {
@@ -133,6 +134,12 @@ export function installUpgradeQA(
   status.textContent = 'Matched 1920 × 1080 · 14:00 · four scales';
   section.appendChild(status);
   parent.insertBefore(section, parent.firstChild);
+  const cpuLabel = document.createElement('label');
+  const cpuToggle = document.createElement('input');
+  cpuToggle.type = 'checkbox';
+  cpuLabel.textContent = 'Record CPU method timings (instrumented) ';
+  cpuLabel.appendChild(cpuToggle);
+  section.appendChild(cpuLabel);
   let busy = false;
   let expectedPose: ReturnType<typeof captureQAPose> | null = null;
   function fixedResolution() {
@@ -250,6 +257,8 @@ export function installUpgradeQA(
   async function suite(quality: VisualQuality) {
     if (busy || lease?.begin() === false) return;
     busy = true;
+    const instrumented = cpuToggle.checked;
+    cpuToggle.disabled = true;
     try {
       for (const view of VIEWS) {
         status.textContent = `Preparing ${view} / ${quality}`;
@@ -283,7 +292,20 @@ export function installUpgradeQA(
           : null;
         fixedResolution();
         status.textContent = `Measuring ${view} / ${quality}`;
-        const sample = await collect(8000);
+        const cpu = instrumented ? new QACPUProfile() : null;
+        if (cpu) {
+          cpu.wrap(e, 'renderScene', 'renderScene');
+          cpu.wrap(e.renderer, 'render', 'renderer.render');
+          if (e.ssao) cpu.wrap(e.ssao, 'render', 'ssao.render');
+          if (e.navigation) cpu.wrap(e.navigation, 'update', 'navigation.update');
+          if (e.detailedTrees) cpu.wrap(e.detailedTrees, 'update', 'trees.update');
+          if (e.architecturalDetails) cpu.wrap(e.architecturalDetails, 'update', 'architecture.update');
+          if (e.streetscapeKit) cpu.wrap(e.streetscapeKit, 'update', 'streetscape.update');
+          if (e.facadeDetails) cpu.wrap(e.facadeDetails, 'update', 'facades.update');
+          if (e.interiors) cpu.wrap(e.interiors, 'update', 'interiors.update');
+        }
+        let cpuProfile: ReturnType<QACPUProfile['stop']> | null = null;
+        const sample = await collect(8000).finally(() => { cpuProfile = cpu?.stop() ?? null; });
         const gl = e.renderer.getContext();
         const extension = gl.getExtension('WEBGL_debug_renderer_info');
         const row = {
@@ -294,6 +316,8 @@ export function installUpgradeQA(
           id: view,
           quality,
           ...sample,
+          instrumented,
+          cpuProfile,
           valid:
             sample.valid &&
             warmup.valid &&
@@ -336,7 +360,7 @@ export function installUpgradeQA(
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            name: `${quality}-${view}`,
+            name: `${quality}-${view}${instrumented ? '-cpu' : ''}`,
             row,
             screenshot: e.screenshot(),
           }),
@@ -351,6 +375,7 @@ export function installUpgradeQA(
       status.textContent = `Upgrade check failed: ${error}`;
     } finally {
       busy = false;
+      cpuToggle.disabled = false;
       e.controls.enabled = e.navigation?.mode === 'orbit';
       lease?.end();
     }

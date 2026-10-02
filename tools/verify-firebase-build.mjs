@@ -35,6 +35,11 @@ assert(
   'Instrumented QA builds must never be deployed',
 );
 assert(
+  !scripts.includes('cpu-submission-profile-v1') &&
+    !scripts.includes('Record CPU method timings (instrumented)'),
+  'CPU profiling controls must not ship in the public build',
+);
+assert(
   !scripts.includes('Discovery walk to next stop') && !scripts.includes('Cancel discovery walking QA') && !scripts.includes('Lab walk to next marker') && !scripts.includes('Cancel lab walking QA'),
   'Discovery movement diagnostics must not ship in the public build',
 );
