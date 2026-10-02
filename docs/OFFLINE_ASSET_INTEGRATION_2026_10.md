@@ -8,6 +8,7 @@
 |---|---|---|
 | 城市整合基準 | `4967c72dfda532eb8151bf477b29eafe54a93d5d` | 本次比較的既有 main；包含來源區域規則與既有 QA 候選 |
 | 新素材分支 | `assets/blender-offline-handoff`，`127be5c` | 可編輯 Blender 來源、GLB、貼圖與離線報告；原交付未自動替換城市 runtime |
+| 整合實作 revision | [`43c44ba`](https://github.com/YiTaChen/vancouver-living-atlas/commit/43c44ba) | 素材 merge、runtime、測試與主要證據；後續文件正規化不改 runtime |
 | 本次工作分支 | `codex/offline-assets-validation` | 素材合併及受控場景比較；交付 revision 可從本文件的 main 歷史定位 |
 | 更新的入口清單 | [BLENDER_ASSET_HANDOFF_2026_10.md](BLENDER_ASSET_HANDOFF_2026_10.md) | 區分本批新增、既有重用與待整合內容 |
 | 逐檔 inventory | [offline-handoff/manifest.json](../tools/assets/offline-handoff/manifest.json) | 包含來源／匯出／貼圖／報告的大小與 SHA-256；不是 273 個獨立模型 |
