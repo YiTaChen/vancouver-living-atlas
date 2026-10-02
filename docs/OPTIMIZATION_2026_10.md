@@ -4,6 +4,11 @@ Base: `a1364e932195e7c7e0dce093e40e1c94ecb94bcb` (main). This checkpoint separat
 implemented code, offline candidate assets, runtime acceptance and publication.
 It does not mark all roadmap stages complete.
 
+**Publication update:** the owner subsequently updated GitHub access. The five
+verified stages are now in [draft PR #1](https://github.com/YiTaChen/vancouver-living-atlas/pull/1);
+all remote trees equal the validated local trees. See the [publication record](PUBLICATION_2026_10.md).
+This resolves the GitHub blocker below, not the browser/GPU gate.
+
 ## Stage status
 
 | Stage | Delivered | Acceptance still required |
