@@ -1,0 +1,72 @@
+--- a/lib/city/residential-ground.ts
++++ b/lib/city/residential-ground.ts
+@@ -1,4 +1,5 @@
+ import * as THREE from 'three';
++import { residentialPerennial } from './assets/residential-perennial';
+ import type { CityEngine } from './engine';
+ import { GroundSurfaceIndex } from './ground-surface';
+ import { project, rings } from './geo';
+@@ -124,11 +125,16 @@
+     batch: { positions: number[]; colors: number[] },
+     positions: number[],
+     color: number,
++    colorScale?: readonly number[],
+   ) => {
+     const tint = new THREE.Color(color);
+     batch.positions.push(...positions);
+     for (let i = 0; i < positions.length; i += 3)
+-      batch.colors.push(tint.r, tint.g, tint.b);
++      batch.colors.push(
++        tint.r * (colorScale?.[i] ?? 1),
++        tint.g * (colorScale?.[i + 1] ?? 1),
++        tint.b * (colorScale?.[i + 2] ?? 1),
++      );
+   };
+   for (const source of candidates) {
+     if (report.plots >= limits.plots) break;
+@@ -204,36 +210,18 @@
+             z = center[1] + (dz / length) * 0.38 * side;
+           const base = ground.sample(x, z, plan.y);
+           if (base === undefined) continue;
+-          const plant: number[] = [];
+-          for (let k = 0; k < 7; k++) {
+-            const a = (k * Math.PI * 2) / 7 + (seed % 7),
+-              b = ((k + 1) * Math.PI * 2) / 7 + (seed % 7);
+-            const radius = 0.23 + (k % 3) * 0.028,
+-              height = 0.19 + (seed % 4) * 0.022;
+-            plant.push(
+-              x,
+-              base + height,
+-              z,
+-              x + Math.cos(b) * radius,
+-              (ground.sample(
+-                x + Math.cos(b) * radius,
+-                z + Math.sin(b) * radius,
+-                base,
+-              ) ?? base) + 0.025,
+-              z + Math.sin(b) * radius,
+-              x + Math.cos(a) * radius,
+-              (ground.sample(
+-                x + Math.cos(a) * radius,
+-                z + Math.sin(a) * radius,
+-                base,
+-              ) ?? base) + 0.025,
+-              z + Math.sin(a) * radius,
+-            );
+-          }
++          const plant = residentialPerennial(
++            x,
++            z,
++            base,
++            seed,
++            (px, pz, fallback) => ground.sample(px, pz, fallback),
++          );
+           add(
+             batch,
+-            plant,
++            plant.positions,
+             [0x687355, 0x737a5c, 0x606d51][(seed + (side > 0 ? 1 : 0)) % 3],
++            plant.colors,
+           );
+           report.plants++;
+         }
