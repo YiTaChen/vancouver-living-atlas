@@ -1,3 +1,4 @@
+import { CITY_REGION_SELECTORS } from './region-rules';
 import * as THREE from 'three';
 import { getCityMaterialLibrary } from './material-library';
 import { cityReliefMaterial } from './city-surface-material';
@@ -92,11 +93,15 @@ export function createStreetfronts(e: CityEngine, loader?: StreetBayLoader) {
   for (const f of e.data.buildings.features) {
     if (
       replacedBuilding(f.properties) ||
-      f.properties.minHeight > 0 ||
-      f.properties.height < 7 ||
-      f.properties.height > 34
+      !CITY_REGION_SELECTORS.heritageStreetfrontHeight(
+        f.properties.height,
+        f.properties.minHeight,
+      )
     )
       continue;
+    const key = String(
+      f.properties.structureId ?? f.properties.buildingId ?? f.properties.id,
+    );
     for (const polygon of rings(f)) {
       const ring = polygon[0].slice(0, -1).map(project),
         center = ring.reduce(
@@ -104,10 +109,10 @@ export function createStreetfronts(e: CityEngine, loader?: StreetBayLoader) {
           [0, 0],
         );
       if (
-        center[0] < 700 ||
-        center[0] > 1850 ||
-        center[1] < -70 ||
-        center[1] > 540
+        !CITY_REGION_SELECTORS.heritageStreetfrontRegion(
+          center as [number, number],
+          key,
+        )
       )
         continue;
       let area = ring.reduce((s, a, i) => {
@@ -115,12 +120,7 @@ export function createStreetfronts(e: CityEngine, loader?: StreetBayLoader) {
         return s + a[0] * b[1] - b[0] * a[1];
       }, 0);
       if (area < 0) ring.reverse();
-      const key = String(
-          f.properties.structureId ??
-            f.properties.buildingId ??
-            f.properties.id,
-        ),
-        ground = foundations.get(key),
+      const ground = foundations.get(key),
         profile = profiles.get(key);
       if (ground === undefined || !profile || profile.kind !== 'heritage-brick')
         continue;

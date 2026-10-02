@@ -1,3 +1,4 @@
+import { CITY_REGION_SELECTORS } from './region-rules';
 import type { RoadGraph, Point } from './road-graph';
 
 /** Source-selected Water Street material treatment; no change to source surface shape
@@ -10,37 +11,22 @@ export interface HeritageFrame {
   sidewalkHalf: number;
 }
 export function heritageFrames(graph: RoadGraph): HeritageFrame[] {
-  return (
-    graph.edges
-      // The city source also labels the western arterial as "200-300 WATER ST".
-      // Match an optional explicit civic block, never arbitrary substring names.
-      .filter((edge) =>
-        edge.names.some((name) =>
-          /^(?:\d+(?:-\d+)? )?WATER ST$/i.test(
-            name
-              .trim()
-              .replace(/[–—]/g, '-')
-              .replace(/\s*-\s*/g, '-')
-              .replace(/\s+/g, ' '),
-          ),
-        ),
-      )
-      .filter(
-        (edge) => graph.nodes[edge.a].level === 'ground' && edge.length > 0.1,
-      )
-      .map((edge) => {
-        const a = graph.nodes[edge.a].point,
-          b = graph.nodes[edge.b].point;
-        const length = Math.hypot(b[0] - a[0], b[1] - a[1]);
-        return {
-          origin: a,
-          tangent: [(b[0] - a[0]) / length, (b[1] - a[1]) / length],
-          length,
-          roadHalf: edge.width / 2,
-          sidewalkHalf: edge.corridorWidth / 2,
-        };
-      })
-  );
+  return graph.edges
+    .filter((edge) =>
+      CITY_REGION_SELECTORS.waterStreetPaving(edge, graph.nodes[edge.a].level),
+    )
+    .map((edge) => {
+      const a = graph.nodes[edge.a].point,
+        b = graph.nodes[edge.b].point;
+      const length = Math.hypot(b[0] - a[0], b[1] - a[1]);
+      return {
+        origin: a,
+        tangent: [(b[0] - a[0]) / length, (b[1] - a[1]) / length],
+        length,
+        roadHalf: edge.width / 2,
+        sidewalkHalf: edge.corridorWidth / 2,
+      };
+    });
 }
 export function frameCoordinate(frame: HeritageFrame, x: number, z: number) {
   const dx = x - frame.origin[0],

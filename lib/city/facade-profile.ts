@@ -1,4 +1,6 @@
-/** Original, dependency-free facade layout prototype. All distances are metres.
+import { CITY_REGION_SELECTORS } from './region-rules';
+
+/** Original, DOM/Three-free facade layout prototype. All distances are metres.
  * Styles are representative geometry, not classifications of actual building use.
  * This module never changes geographic footprints, foundation, or source heights.
  */
@@ -215,7 +217,7 @@ export function createProfile(structure: Structure): Profile {
   } = structure;
   [h, area, x, z].forEach((n) => finite(n, 'structure'));
   const hash = hashId(key),
-    heritage = h < 48 && x > 700 && x < 1850 && z > -70 && z < 540;
+    heritage = CITY_REGION_SELECTORS.heritageFacade(structure);
   const index = heritage
     ? 0
     : h <= 12 && area <= 350
