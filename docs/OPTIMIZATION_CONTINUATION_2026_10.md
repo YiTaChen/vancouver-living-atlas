@@ -42,12 +42,19 @@ on the same commit succeeded. The dot cloud browser independently reported
 disabled graphics when opening the deployed baseline; neither result proves
 Firebase is unavailable to a graphics-capable user browser.
 
-A single distinct Mesa software-renderer feasibility profile is prepared using
+The single distinct Mesa software-renderer feasibility attempt used
 documented ANGLE OpenGL selection and Mesa llvmpipe. It keeps sandbox, blocklist
 and GPU watchdog protections intact, removes unsafe Playwright defaults before
 launch, and requires actual llvmpipe identification plus pixel readback before
-app work. Its hosted result must be recorded after execution; preparation and
-unit tests are not that result. Original failed-default evidence remains separate.
+app work. [Run 36981137641](https://github.com/YiTaChen/vancouver-living-atlas/actions/runs/36981137641)
+selected real llvmpipe, but WebGL remained disabled and clear/readback failed.
+No app capture or timing was accepted. Original failed-default evidence remains
+separate. The diagnostic is now manual-only to avoid repeating this known
+capability failure; this does not clear the graphics gate.
+[Standard CI](https://github.com/YiTaChen/vancouver-living-atlas/actions/runs/36981137575)
+on the same published commit passed all 625 tests, typecheck and production build.
+The [structured result](performance/street-runtime/hosted-graphics-gate.json)
+records the exact renderer and limits.
 
 Both C/D candidates remain default-off. Their actual-city lighting/LOD visuals,
 repeated browser teardown, GPU/frame-time and physical-device acceptance remain

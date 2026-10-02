@@ -1,10 +1,8 @@
 name: Hosted browser QA
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+  # Current hosted runner cannot provide WebGL2, even under reviewed Mesa.
+  # Keep diagnostics reproducible without repeating known-unavailable probes.
   workflow_dispatch:
     inputs:
       matched:
@@ -23,8 +21,8 @@ concurrency:
   group: hosted-browser-qa-${{ github.ref }}
   cancel-in-progress: true
 
-# This checked-in switch permits a reviewed PR commit to enable matched evidence
-# before workflow_dispatch becomes available on the default branch.
+# Matched capture stays off until a graphics-capable environment is available.
+# Manual dispatch is available only once the workflow exists on the default branch.
 env:
   RUN_MATCHED: 'false'
   # Explicit software-renderer feasibility profile; normal sandbox is retained.

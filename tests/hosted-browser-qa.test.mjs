@@ -184,7 +184,8 @@ test('workflow is bounded, read-only, SHA-pinned and can enable matched runs bef
   assert.match(workflow, /retention-days: 7/);
   assert.match(workflow, /contents: read/);
   assert.match(workflow, /RUN_MATCHED: '(?:true|false)'/);
-  assert.match(workflow, /pull_request:/);
+  assert.match(workflow, /workflow_dispatch:/);
+  assert.doesNotMatch(workflow, /^  (?:push|pull_request):/m);
   assert.match(workflow, /xvfb-run -a node tools\/hosted-browser-qa.mjs smoke/);
   for (const match of workflow.matchAll(/uses: ([^\n]+)/g))
     assert.match(
