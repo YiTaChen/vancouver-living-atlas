@@ -4,6 +4,8 @@
 
 TypeScript 檢查與 **660/660 項測試通過**。實際瀏覽器的 **5 個視點 × 4 種條件，前後版本各 20 份**對照已完成，全部有效且相機一致。陰天市中心、Gastown 屋頂、步行與駕車能辨識較明亮的外牆和玻璃，灰白屋頂與保留的深色屋頂形成差異；夜間窗燈正常，auto 極光也已實際渲染確認。短測沒有 FPS 提升證據。原始畫面、測量 JSON、版本與來源 fingerprint 保存於[城市可讀性視覺驗證](visual-quality/city-readability/README.md)，正式建置與發布另記錄於該索引。
 
+本階段實作已由 [d0434b4](https://github.com/YiTaChen/vancouver-living-atlas/commit/d0434b4da98308a3b25eb47c7b6cd980d664ec48)推送並合併 main，[正式CI與部署](https://github.com/YiTaChen/vancouver-living-atlas/actions/runs/37073167190)成功；線上編譯來源亦核對到10:00／300倍預設及新材質shader。後續驗證文件的提交只保存發布證據。
+
 ## 根因：素材如何被建築 shader 使用
 
 | 問題 | 既有行為 | 對初始畫面的影響 | 本階段修正 |

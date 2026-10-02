@@ -1,0 +1,23 @@
+{
+  "url": "https://vancouver-living-atlas-yita.web.app/",
+  "initialLoadingClock": "10:00",
+  "initialReadyClock": "14:49",
+  "initialQAControls": 0,
+  "sourceCommit": "d0434b4da98308a3b25eb47c7b6cd980d664ec48",
+  "excludedAttempt": {
+    "reason": "graphics-context-lost during first downtown switch",
+    "timestamp": "2026-10-02T22:41:43.084Z",
+    "recovery": "Used normal Reload map UI, then repeated same downtown14h WebMCP action successfully; no cause established."
+  },
+  "retry": {
+    "checkedAt": "2026-10-02T22:46:44.867Z",
+    "walkEnabled": true,
+    "time": "15:00",
+    "atmosphere": "overcast",
+    "view": "downtown",
+    "qaControls": 0,
+    "newConsoleErrors": [],
+    "screenshot": "live-downtown-overcast.jpg"
+  },
+  "benchmark": false
+}

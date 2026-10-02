@@ -2,6 +2,12 @@
 
 完成 **20 組前後配對、40 份有效 renderer JSON**。採用改良的代表性平屋頂／外牆與玻璃；這是外觀修正，短測沒有 FPS 提升證據。完整原因與實作規格見 [CITY_READABILITY_2026_10.md](../../CITY_READABILITY_2026_10.md)。
 
+## 發布
+
+實作 commit [d0434b4](https://github.com/YiTaChen/vancouver-living-atlas/commit/d0434b4da98308a3b25eb47c7b6cd980d664ec48)已推送並合併 main。[GitHub Actions 37073167190](https://github.com/YiTaChen/vancouver-living-atlas/actions/runs/37073167190)的來源驗證、正式 build 與 Firebase 部署全部成功，完整 job/step結果見[deployment-result.json](deployment-result.json)。[線上版本](https://vancouver-living-atlas-yita.web.app)的實際 HTML／page import 已解析到新 engine，確認屋頂uniform、v2建築shader、玻璃反射以及page內 `hour:10,rate:300,running:true`；hash與路徑見[hosting-verification.json](hosting-verification.json)。本機與CI build的chunk檔名/hash不同，核對依據是線上實際引用路徑、來源標記及精確commit的成功部署，沒有宣稱兩套編譯產物byte相同。
+
+[線上UI重測](live-ui-smoke.json)另記錄一次市中心切換時的 `graphics-context-lost`：使用正常 Reload map 後重試相同動作成功，再固定15:00／陰天取[線上截圖](live-downtown-overcast.jpg)，沒有新的 console warning/error。沒有判定中斷原因，也沒有把此首次失敗刪除或當作成功樣本；這份 smoke 不能證明長時間 GPU 穩定性。
+
 ## 擷取與版本
 
 實際 Codex in-app browser WebGL、ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)。High、固定 1920 × 1080 drawing buffer、可見頁面至少 5 秒 warmup、來源建築細節 ready，再量測 8 秒未插入 CPU instrumentation 的 RAF。每組 camera／target／mode／quality／atmosphere／hour 均逐欄相等，maxPoseError=0。晴天14h、陰天14h、晴天黃昏19.8h、晴天夜23h。城市時間固定；既有交通、波浪與天空動畫仍會隨渲染時間前進，所以總 draw counters 有少量差異。
