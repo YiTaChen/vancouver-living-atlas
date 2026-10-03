@@ -2,7 +2,7 @@
 
 Based on Vancouver Living Atlas by YiTaChen  
 Source: https://github.com/YiTaChen/vancouver-living-atlas  
-License: [Vancouver Living Atlas Noncommercial Research and Attribution 1.0](../../../../LICENSE)
+License: [Vancouver Living Atlas Noncommercial Research and Attribution 1.0](../../../LICENSE)
 
 此工具是 2026-10-03 待開發規格的新包共通檢查，不改寫任何舊 manifest。
 
