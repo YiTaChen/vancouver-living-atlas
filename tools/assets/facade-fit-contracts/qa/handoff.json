@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "vancouver-facade-fit-reference/v1",
+  "packageId": "facade-fit-contracts",
+  "scope": "Offline adaptation contract referencing unchanged existing editable models; no runtime activation or new exports",
+  "taskStatuses": {
+    "C01": {
+      "offlineContract": "offline_complete",
+      "integration": "runtime_pending_webgl"
+    },
+    "C02": {
+      "offlineContract": "offline_complete",
+      "integration": "runtime_pending_webgl"
+    },
+    "C03": {
+      "offlineContract": "offline_complete",
+      "integration": "runtime_pending_webgl"
+    }
+  },
+  "newModelFiles": 0,
+  "moduleTypesReferenced": 16,
+  "moduleLODReferences": 32,
+  "otherExistingLODReferences": 6,
+  "checks": {
+    "pythonTests": {
+      "status": "pass",
+      "count": 13,
+      "log": "qa/python-tests.log",
+      "sha256": "8d5542a408979ad04d53b2c1cbefb8670b70079d700d2b591413a6290a5879b8"
+    },
+    "nodeTests": {
+      "status": "pass",
+      "count": 35,
+      "log": "qa/node-tests.log",
+      "sha256": "1bfad329ef43db9af7f89f03c43d5191ca3c53a5fc93262fdf882fa138e4f850"
+    },
+    "cpuValidation": {
+      "status": "pass",
+      "path": "qa/validation.json",
+      "sha256": "1e599670b696b96ad7ae540b7ad20301bf2d25a975bcb78f4011ef04b05b51b2"
+    },
+    "existingConsumerRegressionTests": {
+      "status": "pass",
+      "count": 25,
+      "log": "qa/existing-consumer-tests.log",
+      "sha256": "1354e6691d9bbbaf0db2f3b8eda5bba051722cf45b6d3bc18c69ad4655ec1687",
+      "scope": "architecture-detail-assets, architecture-module-candidate, architecture-expansion-candidate, streetscape-placement"
+    },
+    "scopedOxlint": {
+      "status": "pass",
+      "command": "node_modules/.bin/oxlint tools/assets/facade-fit-contracts/*.mjs"
+    },
+    "scopedOxfmt": {
+      "status": "pass",
+      "command": "node_modules/.bin/oxfmt --check tools/assets/facade-fit-contracts/*.mjs"
+    }
+  },
+  "sourceSamples": {
+    "existingUpperSillFits": 88,
+    "actualSourceWindowSizeRejections": 2,
+    "runtimeCellCapAdmission": "not_run",
+    "actualPavementSamples": "not_run",
+    "inventedWorldPlacements": 0
+  },
+  "importantFindings": [
+    "Original sandstone 0.18 m section cannot replace 0.16 m box; reference the existing fitted variant explicitly.",
+    "Heritage window has no physical glazing stop; cedar stop only exists at LOD0.",
+    "Modern/cedar source window examples reject incompatible apertures rather than resize the module.",
+    "Cedar canopy retains ground-origin Y=2.36..3.10; residential clear opening remains 1.04x2.30.",
+    "Heritage/modern complete bay depths include their canopy and remain distinct; neither opens a GIS wall."
+  ],
+  "notRun": [
+    "new Blender sources/reexports/previews (none required for unchanged references)",
+    "scene source-pavement fit",
+    "WebGL visual acceptance",
+    "LOD/load/dispose lifecycle",
+    "GPU/frame-time",
+    "production activation or deployment"
+  ],
+  "nextIntegrationEntrypoints": [
+    "lib/city/architecture-plan.ts",
+    "lib/city/architecture-module-candidate.ts",
+    "lib/city/streetfronts.ts",
+    "lib/city/streetscape-placement.ts",
+    "lib/city/building-bodies.ts"
+  ],
+  "fallback": "Keep existing procedural/shader geometry when any source, width, opening, handedness, terrain, upper-window or roof check fails."
+}

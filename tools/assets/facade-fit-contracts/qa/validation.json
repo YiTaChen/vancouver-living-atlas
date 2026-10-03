@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "vancouver-facade-fit-reference/v1",
+  "status": "pass",
+  "contractStatus": "offline_complete",
+  "runtimeStatus": "runtime_pending_webgl",
+  "scope": "C01\u2013C03 reference/adaptation contract only; existing geometry measured, not newly modelled or activated",
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux",
+    "node": "v24.19.0",
+    "WebGL": "not_run",
+    "BlenderReopen": "not_run (sources unchanged; hashes verified)"
+  },
+  "counts": {
+    "moduleTypes": 16,
+    "moduleLODs": 32,
+    "existingFittedVariantLODs": 2,
+    "productionBayReferenceLODs": 4,
+    "referencedGLBsMeasured": 38,
+    "openingVolumeLODs": 16,
+    "openingVolumeRays": 1200
+  },
+  "checks": {
+    "pinnedGLBAndEditableSourceHashes": "pass",
+    "transformedBoundsTrianglesAndImageCosts": "pass",
+    "allModuleLegacyPBRUVAndIndexChecks": "pass",
+    "triangleClippedOpeningVolumes": "pass",
+    "interiorRaysAndSolidStopControlRays": "pass",
+    "versionedMetadataExactMatch": "pass",
+    "sourceSelectedFitReplay": "pass",
+    "savedEvidenceFreshness": "pass"
+  },
+  "sourceFitCounts": {
+    "total": 90,
+    "compatible": 88,
+    "rejected": 2,
+    "byVariant": {
+      "robson-sills": 56,
+      "modern-sills": 24,
+      "cedar-sills": 8
+    }
+  },
+  "preservedContracts": {
+    "cedarCanopyYMinMaxM": [
+      2.36,
+      3.1
+    ],
+    "residentialEntryClearM": [
+      1.04,
+      2.3
+    ],
+    "modernOpeningM": [
+      1.92,
+      1.47
+    ],
+    "cedarOpeningM": [
+      1.28,
+      1.52
+    ],
+    "heritageBayCompleteDepthM": 1.2207,
+    "modernBayCompleteDepthM": 1.703
+  },
+  "evidence": {
+    "geometry": "qa/geometry-checks.json",
+    "sourceFits": "qa/source-examples.json",
+    "measurements": "qa/measurements.json"
+  },
+  "runtimeChecks": {
+    "sourcePavementSampling": "not_run",
+    "streetAcceptance": "not_run",
+    "WebGLVisuals": "not_run",
+    "LODAndLifecycle": "not_run",
+    "GPUAndFrameTime": "not_run",
+    "productionActivation": "not_run"
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "packageId": "city-scale-audit",
+  "version": "1.0.0",
+  "baseRevision": "5574d55719f10d1575127d8b92cbd23ff71e446f",
+  "taskIds": ["A01", "A02", "A03", "A04"],
+  "scope": "Read-only source and CPU consumer audit; no new runtime geometry or material adoption",
+  "coordinateSystem": {
+    "source": "EPSG:4326",
+    "scene": "local metres, +X east, +Y up, +Z south",
+    "originLonLat": [-123.128, 49.286],
+    "projectionConsumer": "lib/city/geo.ts"
+  },
+  "buildings": {
+    "dataset": "public/data/buildings.geojson",
+    "consumer": "lib/city/building-bodies.ts",
+    "identityPrecedence": [
+      "structureId",
+      "buildingId",
+      "id",
+      "canonical projected outer-ring key rounded to 0.001m"
+    ],
+    "sourceHeight": "height ?? hgt_agl ?? 8",
+    "effectiveHeightMinimumM": 2,
+    "heightMaximumM": 350,
+    "minimumHeightMinimumM": 0,
+    "validInterval": "0 <= minHeight < height; source height means top, not thickness",
+    "sourceVolumeDatum": "base + minHeight to base + height",
+    "displayFoundation": "elevation(first accepted polygon outer-ring vertex-mean center) - 0.4",
+    "foundationOffsetM": -0.4,
+    "foundationOrder": "Preserve original source order. Profile classification is order-independent; first-part foundation need not be.",
+    "preserve": [
+      "source IDs",
+      "source dataset/epoch",
+      "polygon holes",
+      "MultiPolygon parts",
+      "height",
+      "minHeight",
+      "reconciliation",
+      "shared foundation",
+      "replacement exclusions"
+    ],
+    "roof": {
+      "sourceGeometryTags": ["pitched", "gabled"],
+      "requirements": {
+        "structureParts": 1,
+        "minHeightM": 0,
+        "heightM": [3.5, 12],
+        "rings": 1,
+        "outerVertices": 4,
+        "areaM2": [25, 350],
+        "minimumEdgeM": 3,
+        "maximumEdgeRatio": 4,
+        "maximumAbsoluteCornerCosine": 0.08
+      },
+      "ridgeHeight": "source effective height; never add rise above it",
+      "shapeConfidence": "source roof tag; ridge and eaves are representative, not surveyed",
+      "flatFinishConfidence": "representative seeded appearance, never a measured material classification",
+      "flatFinishIds": ["asphalt", "mineral-gravel", "coated-membrane"],
+      "finishSlots": {
+        "heritage-brick": [8, 12, 0],
+        "lowrise-masonry": [8, 12, 0],
+        "midrise-grid": [0, 6, 14],
+        "balcony-slab": [0, 6, 14],
+        "curtain-wall": [0, 6, 14],
+        "domestic-cladding": [4, 8, 8]
+      },
+      "invalidSeedFallbackIndex": 1,
+      "surfaceMarkers": { "flat": [-1, -1], "pitched": [-1, -2] }
+    }
+  },
+  "ground": {
+    "datasets": [
+      "public/data/terrain.json",
+      "public/data/terrain-metadata.json",
+      "public/data/land.geojson",
+      "public/data/beach-coast.json",
+      "public/data/shoreline.geojson"
+    ],
+    "consumers": [
+      "lib/city/engine.ts",
+      "lib/city/beach-ground.ts",
+      "lib/city/harmonize-ground.ts",
+      "lib/city/park-paths.ts"
+    ],
+    "couponSizesM": [
+      [2, 2],
+      [10, 10]
+    ],
+    "mapDimensionStudyPx": [512, 1024],
+    "existingSlope": "tools/assets/vegetation_ground/exports/soil_grass_slope_lod0.glb",
+    "existingSlopeSizeXYZM": [2, 0.1, 2],
+    "existingSurfacePeriodM": [2, 2],
+    "soilGrassWrapping": ["repeat", "repeat"],
+    "soilGrassEdgeWrapping": ["clamp", "repeat"],
+    "newTerrainOverlaysAllowed": false,
+    "couponGrantsNavigationSurface": false,
+    "researchOnly": true
+  },
+  "clock": {
+    "default": { "hour": 10, "rate": 300, "running": true },
+    "cityHoursAtElapsedSeconds": [
+      [0, 10],
+      [60, 15],
+      [126, 20.5],
+      [156, 23]
+    ],
+    "movementClock": "Real elapsed seconds, never city clock rate",
+    "requiredCases": [
+      "rate=1",
+      "rate=300",
+      "clock paused",
+      "hidden-page clock",
+      "first-night auto aurora",
+      "finite day/night atmosphere",
+      "bounded sea/lake waves"
+    ],
+    "waterAndSkyShadersPreserved": true
+  },
+  "structures": {
+    "bridgeDataset": "public/data/bridges.json",
+    "railDataset": "public/data/railways.json",
+    "bridgeNodeToleranceM": 0.25,
+    "sourceLengthRoundingToleranceM": 0.011,
+    "railGradeCaps": { "steam": 0.025, "skytrain": 0.055 },
+    "bridgeWidthAndHeightConfidence": "display estimates as explicitly labelled in source; not engineering survey",
+    "railElevationConfidence": "terrain + clearance + 0.65m with grade limiter; not survey",
+    "namedCloseStructureProposals": [],
+    "noNewModelsReason": "No source-backed joint/support/guardrail deficit is demonstrated by this CPU scope. Existing Lions railings already have source paths; retain them and require close-view evidence before proposing a component."
+  },
+  "runtimeChecks": {
+    "status": "not_run",
+    "reason": "Offline CPU audit only; no WebGL rendering, GPU timing, scene acceptance or deployment claimed."
+  }
+}

@@ -1,0 +1,392 @@
+{
+  "status": "pass",
+  "scope": "actual existing GLB CPU geometry; no live placements",
+  "results": [
+    {
+      "id": "sandstone-sill",
+      "lod": 0,
+      "status": "pass",
+      "trianglesMeasured": 32,
+      "openingCheck": "not_applicable: no empty-volume contract",
+      "geometryDatumVertices": 0,
+      "solidControlRays": []
+    },
+    {
+      "id": "sandstone-sill",
+      "lod": 1,
+      "status": "pass",
+      "trianglesMeasured": 16,
+      "openingCheck": "not_applicable: no empty-volume contract",
+      "geometryDatumVertices": 0,
+      "solidControlRays": []
+    },
+    {
+      "id": "heritage-window-frame",
+      "lod": 0,
+      "status": "pass",
+      "trianglesMeasured": 40,
+      "triangleClipObstructions": 0,
+      "openVolumeRays": 75,
+      "rayObstructions": 0,
+      "geometryDatumVertices": 0,
+      "solidControlRays": [
+        {
+          "name": "solid-left-jamb",
+          "distancesM": [
+            0.12,
+            0.24
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heritage-window-frame",
+      "lod": 1,
+      "status": "pass",
+      "trianglesMeasured": 32,
+      "triangleClipObstructions": 0,
+      "openVolumeRays": 75,
+      "rayObstructions": 0,
+      "geometryDatumVertices": 0,
+      "solidControlRays": [
+        {
+          "name": "solid-left-jamb",
+          "distancesM": [
+            0.12,
+            0.24
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heritage-cornice",
+      "lod": 0,
+      "status": "pass",
+      "trianglesMeasured": 32,
+      "openingCheck": "not_applicable: no empty-volume contract",
+      "geometryDatumVertices": 0,
+      "solidControlRays": []
+    },
+    {
+      "id": "heritage-cornice",
+      "lod": 1,
+      "status": "pass",
+      "trianglesMeasured": 24,
+      "openingCheck": "not_applicable: no empty-volume contract",
+      "geometryDatumVertices": 0,
+      "solidControlRays": []
+    },
+    {
+      "id": "sandstone-plinth",
+      "lod": 0,
+      "status": "pass",
+      "trianglesMeasured": 24,
+      "openingCheck": "not_applicable: no empty-volume contract",
+      "geometryDatumVertices": 0,
+      "solidControlRays": []
+    },
+    {
+      "id": "sandstone-plinth",
+      "lod": 1,
+      "status": "pass",
+      "trianglesMeasured": 20,
+      "openingCheck": "not_applicable: no empty-volume contract",
+      "geometryDatumVertices": 0,
+      "solidControlRays": []
+    },
+    {
+      "id": "sandstone-corner",
+      "lod": 0,
+      "status": "pass",
+      "trianglesMeasured": 212,
+      "openingCheck": "not_applicable: no empty-volume contract",
+      "geometryDatumVertices": 0,
+      "solidControlRays": []
+    },
+    {
+      "id": "sandstone-corner",
+      "lod": 1,
+      "status": "pass",
+      "trianglesMeasured": 20,
+      "openingCheck": "not_applicable: no empty-volume contract",
+      "geometryDatumVertices": 0,
+      "solidControlRays": []
+    },
+    {
+      "id": "residential-entry-surround",
+      "lod": 0,
+      "status": "pass",
+      "trianglesMeasured": 128,
+      "triangleClipObstructions": 0,
+      "openVolumeRays": 75,
+      "rayObstructions": 0,
+      "geometryDatumVertices": 0,
+      "solidControlRays": [
+        {
+          "name": "open-entry-jamb",
+          "distancesM": [
+            0.12,
+            0.29,
+            0.306
+          ]
+        }
+      ]
+    },
+    {
+      "id": "residential-entry-surround",
+      "lod": 1,
+      "status": "pass",
+      "trianglesMeasured": 40,
+      "triangleClipObstructions": 0,
+      "openVolumeRays": 75,
+      "rayObstructions": 0,
+      "geometryDatumVertices": 0,
+      "solidControlRays": [
+        {
+          "name": "open-entry-jamb",
+          "distancesM": [
+            0.12,
+            0.29
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sloped-metal-awning",
+      "lod": 0,
+      "status": "pass",
+      "trianglesMeasured": 48,
+      "triangleClipObstructions": 0,
+      "openVolumeRays": 75,
+      "rayObstructions": 0,
+      "geometryDatumVertices": 0,
+      "solidControlRays": []
+    },
+    {
+      "id": "sloped-metal-awning",
+      "lod": 1,
+      "status": "pass",
+      "trianglesMeasured": 40,
+      "triangleClipObstructions": 0,
+      "openVolumeRays": 75,
+      "rayObstructions": 0,
+      "geometryDatumVertices": 0,
+      "solidControlRays": []
+    },
+    {
+      "id": "flat-metal-awning",
+      "lod": 0,
+      "status": "pass",
+      "trianglesMeasured": 36,
+      "triangleClipObstructions": 0,
+      "openVolumeRays": 75,
+      "rayObstructions": 0,
+      "geometryDatumVertices": 0,
+      "solidControlRays": []
+    },
+    {
+      "id": "flat-metal-awning",
+      "lod": 1,
+      "status": "pass",
+      "trianglesMeasured": 28,
+      "triangleClipObstructions": 0,
+      "openVolumeRays": 75,
+      "rayObstructions": 0,
+      "geometryDatumVertices": 0,
+      "solidControlRays": []
+    },
+    {
+      "id": "modern-recessed-window-surround",
+      "lod": 0,
+      "status": "pass",
+      "trianglesMeasured": 56,
+      "triangleClipObstructions": 0,
+      "openVolumeRays": 75,
+      "rayObstructions": 0,
+      "geometryDatumVertices": 2,
+      "solidControlRays": [
+        {
+          "name": "return-and-stop",
+          "distancesM": [
+            0.1392308,
+            0.355
+          ]
+        }
+      ]
+    },
+    {
+      "id": "modern-recessed-window-surround",
+      "lod": 1,
+      "status": "pass",
+      "trianglesMeasured": 40,
+      "triangleClipObstructions": 0,
+      "openVolumeRays": 75,
+      "rayObstructions": 0,
+      "geometryDatumVertices": 2,
+      "solidControlRays": [
+        {
+          "name": "return-and-stop",
+          "distancesM": [
+            0.1392308,
+            0.36
+          ]
+        }
+      ]
+    },
+    {
+      "id": "modern-sill-drip",
+      "lod": 0,
+      "status": "pass",
+      "trianglesMeasured": 52,
+      "openingCheck": "not_applicable: no empty-volume contract",
+      "geometryDatumVertices": 0,
+      "solidControlRays": []
+    },
+    {
+      "id": "modern-sill-drip",
+      "lod": 1,
+      "status": "pass",
+      "trianglesMeasured": 36,
+      "openingCheck": "not_applicable: no empty-volume contract",
+      "geometryDatumVertices": 0,
+      "solidControlRays": []
+    },
+    {
+      "id": "modern-parapet-cap",
+      "lod": 0,
+      "status": "pass",
+      "trianglesMeasured": 60,
+      "triangleClipObstructions": 0,
+      "openVolumeRays": 75,
+      "rayObstructions": 0,
+      "geometryDatumVertices": 0,
+      "solidControlRays": []
+    },
+    {
+      "id": "modern-parapet-cap",
+      "lod": 1,
+      "status": "pass",
+      "trianglesMeasured": 28,
+      "triangleClipObstructions": 0,
+      "openVolumeRays": 75,
+      "rayObstructions": 0,
+      "geometryDatumVertices": 0,
+      "solidControlRays": []
+    },
+    {
+      "id": "concrete-shadow-plinth",
+      "lod": 0,
+      "status": "pass",
+      "trianglesMeasured": 44,
+      "openingCheck": "not_applicable: no empty-volume contract",
+      "geometryDatumVertices": 0,
+      "solidControlRays": []
+    },
+    {
+      "id": "concrete-shadow-plinth",
+      "lod": 1,
+      "status": "pass",
+      "trianglesMeasured": 40,
+      "openingCheck": "not_applicable: no empty-volume contract",
+      "geometryDatumVertices": 0,
+      "solidControlRays": []
+    },
+    {
+      "id": "concrete-chamfer-corner",
+      "lod": 0,
+      "status": "pass",
+      "trianglesMeasured": 136,
+      "openingCheck": "not_applicable: no empty-volume contract",
+      "geometryDatumVertices": 0,
+      "solidControlRays": []
+    },
+    {
+      "id": "concrete-chamfer-corner",
+      "lod": 1,
+      "status": "pass",
+      "trianglesMeasured": 24,
+      "openingCheck": "not_applicable: no empty-volume contract",
+      "geometryDatumVertices": 0,
+      "solidControlRays": []
+    },
+    {
+      "id": "residential-cedar-window-surround",
+      "lod": 0,
+      "status": "pass",
+      "trianglesMeasured": 112,
+      "triangleClipObstructions": 0,
+      "openVolumeRays": 75,
+      "rayObstructions": 0,
+      "geometryDatumVertices": 0,
+      "solidControlRays": [
+        {
+          "name": "cedar-jamb-stop",
+          "distancesM": [
+            0.12,
+            0.2,
+            0.23
+          ]
+        }
+      ]
+    },
+    {
+      "id": "residential-cedar-window-surround",
+      "lod": 1,
+      "status": "pass",
+      "trianglesMeasured": 64,
+      "triangleClipObstructions": 0,
+      "openVolumeRays": 75,
+      "rayObstructions": 0,
+      "geometryDatumVertices": 0,
+      "solidControlRays": [
+        {
+          "name": "cedar-jamb-stop",
+          "distancesM": [
+            0.12,
+            0.2
+          ]
+        }
+      ]
+    },
+    {
+      "id": "residential-cedar-sill",
+      "lod": 0,
+      "status": "pass",
+      "trianglesMeasured": 40,
+      "openingCheck": "not_applicable: no empty-volume contract",
+      "geometryDatumVertices": 0,
+      "solidControlRays": []
+    },
+    {
+      "id": "residential-cedar-sill",
+      "lod": 1,
+      "status": "pass",
+      "trianglesMeasured": 20,
+      "openingCheck": "not_applicable: no empty-volume contract",
+      "geometryDatumVertices": 0,
+      "solidControlRays": []
+    },
+    {
+      "id": "residential-gabled-entry-canopy",
+      "lod": 0,
+      "status": "pass",
+      "trianglesMeasured": 144,
+      "triangleClipObstructions": 0,
+      "openVolumeRays": 75,
+      "rayObstructions": 0,
+      "geometryDatumVertices": 2,
+      "solidControlRays": []
+    },
+    {
+      "id": "residential-gabled-entry-canopy",
+      "lod": 1,
+      "status": "pass",
+      "trianglesMeasured": 68,
+      "triangleClipObstructions": 0,
+      "openVolumeRays": 75,
+      "rayObstructions": 0,
+      "geometryDatumVertices": 2,
+      "solidControlRays": []
+    }
+  ]
+}

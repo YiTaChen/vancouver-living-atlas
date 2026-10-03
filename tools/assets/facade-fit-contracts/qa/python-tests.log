@@ -1,0 +1,18 @@
+test_bounds_or_cost_tampering_rejected (test_validate.ReferenceContractTests.test_bounds_or_cost_tampering_rejected) ... ok
+test_canopy_datum_cannot_be_rebased (test_validate.ReferenceContractTests.test_canopy_datum_cannot_be_rebased) ... ok
+test_corrupt_glb_container_is_rejected (test_validate.ReferenceContractTests.test_corrupt_glb_container_is_rejected) ... ok
+test_current_glb_opening_triangle_added_is_rejected (test_validate.ReferenceContractTests.test_current_glb_opening_triangle_added_is_rejected) ... ok
+test_current_reference_and_geometry (test_validate.ReferenceContractTests.test_current_reference_and_geometry) ... ok
+test_distinct_schema_rejects_model_schema (test_validate.ReferenceContractTests.test_distinct_schema_rejects_model_schema) ... ok
+test_exact_triangle_clip_catches_panel_between_rays (test_validate.ReferenceContractTests.test_exact_triangle_clip_catches_panel_between_rays) ... ok
+test_glass_stop_and_handedness_are_versioned (test_validate.ReferenceContractTests.test_glass_stop_and_handedness_are_versioned) ... ok
+test_missing_frame_fails_solid_control_probe (test_validate.ReferenceContractTests.test_missing_frame_fails_solid_control_probe) ... ok
+test_physical_stop_depth_requires_real_intersection (test_validate.ReferenceContractTests.test_physical_stop_depth_requires_real_intersection) ... ok
+test_source_hash_tampering_rejected (test_validate.ReferenceContractTests.test_source_hash_tampering_rejected) ... ok
+test_transform_applied_once_and_no_mirror_silently_accepted (test_validate.ReferenceContractTests.test_transform_applied_once_and_no_mirror_silently_accepted) ... ok
+test_triangle_clip_does_not_confuse_aabb_overlap_with_triangle_overlap (test_validate.ReferenceContractTests.test_triangle_clip_does_not_confuse_aabb_overlap_with_triangle_overlap) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 3.971s
+
+OK

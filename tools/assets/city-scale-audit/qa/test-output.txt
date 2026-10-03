@@ -1,0 +1,20 @@
+✔ all 7,630 source solids remain uniquely traceable and exclusions are explicit (0.93714ms)
+✔ input data stays unchanged during audit; source volume never uses 2m render clamp (0.70806ms)
+✔ malformed source rings and missing finite coordinates are rejected (1.277073ms)
+✔ duplicate IDs and invalid source vertical intervals fail rather than invent replacement data (0.545218ms)
+✔ real foundation order sensitivity and source clamps remain visible, not silently fixed (0.250872ms)
+✔ source roof tags cannot grow a ridge above the inherited building height (0.245865ms)
+✔ 3 actual slope GLBs preserve transformed Y-up bounds, physical UV, sampler and cost distinction (10.547378ms)
+✔ clock rates and paused clock do not change actual bus, train or wave calculations (0.237302ms)
+✔ CoV subsequence proof rejects invented/skipped vertices and accepts reversed original paths (0.271833ms)
+✔ rail source attribution and actual generated grade remain valid without claiming surveyed height (0.197603ms)
+✔ all recorded input hashes match real files and deterministic stored evidence matches recomputation (48.578885ms)
+✔ research completion never promotes new materials, geometry or WebGL acceptance (0.259705ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1000.351395

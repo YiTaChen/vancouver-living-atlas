@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "packageId": "city-scale-audit",
+  "baseRevision": "5574d55719f10d1575127d8b92cbd23ff71e446f",
+  "taskIds": [
+    "A01",
+    "A02",
+    "A03",
+    "A04"
+  ],
+  "assetStatus": "partial",
+  "integrationStatus": "runtime_pending_webgl",
+  "webglAvailable": false,
+  "manifest": "../manifest.json",
+  "sourceEditsPreserved": true,
+  "taskStatus": {
+    "A01": {
+      "status": "offline_complete",
+      "scope": "source-rule JSON and source/CPU comparison only"
+    },
+    "A02": {
+      "status": "partial",
+      "scope": "existing surface/coupon measurements and research contract; missing 10m coupon/renders"
+    },
+    "A03": {
+      "status": "offline_complete",
+      "scope": "CPU numeric/source-routing checks only"
+    },
+    "A04": {
+      "status": "offline_complete",
+      "scope": "source geometry/provenance/grade audit; no demonstrated component deficit, no new model"
+    }
+  },
+  "offlineEvidence": [
+    "report.json",
+    "buildings.jsonl",
+    "source-hashes.json"
+  ],
+  "runtimeChecks": {
+    "status": "not_run",
+    "reason": "Offline CPU audit only; no WebGL rendering, GPU timing, scene acceptance or deployment claimed."
+  },
+  "intendedConsumers": [
+    "lib/city/building-bodies.ts",
+    "lib/city/facade-profile.ts",
+    "lib/city/engine.ts",
+    "lib/city/clock.ts",
+    "lib/city/bridges.ts",
+    "lib/city/rail-path.ts"
+  ],
+  "replaces": [],
+  "knownLimitations": [
+    "Closed finite rings are checked; polygon self-intersection and inter-building volumetric overlap are not re-proven here.",
+    "Source provenance links are retained, not fetched; raw pre-reconciliation CoV/OSM acquisition is not re-run.",
+    "A02 remains partial: no new 10m coupons, sand surface or four-light render matrix.",
+    "No image-quality improvement, FPS, GPU allocation, runtime integration or deployment is claimed."
+  ],
+  "nextIntegrationSteps": [
+    "Review known foundation ordering and source-height clamp cases before changing source data.",
+    "Complete selected 2m/10m surface coupons and four-light CPU renders if material work is justified.",
+    "Keep current geometry/datum and shaders; test source-selected runtime samples with WebGL before changing adoption."
+  ]
+}
