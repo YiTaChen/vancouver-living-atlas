@@ -1,0 +1,36 @@
+{
+  "traffic-sedan": {
+    "variant": "sedan",
+    "width": 1.86,
+    "bodyWidth": 1.8,
+    "height": 1.48,
+    "length": 4.5,
+    "front": 2.3,
+    "rear": -2.2,
+    "wheelbase": 2.7,
+    "radius": 0.32,
+    "track": 1.57,
+    "cabinRear": -1.22,
+    "cabinFront": 1.08,
+    "roofRear": -0.65,
+    "roofFront": 0.45,
+    "shoulder": 0.94
+  },
+  "traffic-suv": {
+    "variant": "suv",
+    "width": 1.92,
+    "bodyWidth": 1.86,
+    "height": 1.76,
+    "length": 4.65,
+    "front": 2.375,
+    "rear": -2.275,
+    "wheelbase": 2.78,
+    "radius": 0.35,
+    "track": 1.62,
+    "cabinRear": -1.84,
+    "cabinFront": 1.13,
+    "roofRear": -1.4,
+    "roofFront": 0.54,
+    "shoulder": 1.08
+  }
+}
