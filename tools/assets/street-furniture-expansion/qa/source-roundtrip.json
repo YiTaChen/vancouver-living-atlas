@@ -1,0 +1,136 @@
+{
+  "status": "pass",
+  "blenderVersion": "4.3.2",
+  "exportCommand": "export.py --source source --output <fresh-directory>",
+  "generatorInvoked": false,
+  "records": [
+    {
+      "id": "cedar-bench.lod0",
+      "sourceSha256": "4b58593e851aab7812f112616b5b60a7b9c0bc14df3f79532b0e22cd2e67ea3f",
+      "sourceReopened": true,
+      "sourceUnchanged": true,
+      "glbByteIdentical": true,
+      "glbSha256": "a60d4179fe27780919a53e581b93a4c9be02be9806c0de6ff5b95b676dffa248"
+    },
+    {
+      "id": "cedar-bench.lod1",
+      "sourceSha256": "8a465c1790c0cd7b07ff85802296731ccd1c707a0572e95e212ac7c2c04b13c0",
+      "sourceReopened": true,
+      "sourceUnchanged": true,
+      "glbByteIdentical": true,
+      "glbSha256": "52e6ad93074c5d0d9384ffe7d7c6745b0d201c08ba836dfdb6bc04fd2cb6bfb1"
+    },
+    {
+      "id": "heritage-lamp.lod0",
+      "sourceSha256": "5e30b97aec0784c97f00c0e328d7bfcf5da4f9516ad0f26aab131fb992caf3c6",
+      "sourceReopened": true,
+      "sourceUnchanged": true,
+      "glbByteIdentical": true,
+      "glbSha256": "5ed3170132b884f7e3dc4f996981ff44cf128e4de03063c07939b93d074ecb42"
+    },
+    {
+      "id": "heritage-lamp.lod1",
+      "sourceSha256": "a7b7a26693ddaa269eaf8b66547fd949319dd93e4bc80cb11d32c852be57531c",
+      "sourceReopened": true,
+      "sourceUnchanged": true,
+      "glbByteIdentical": true,
+      "glbSha256": "9877a18d4a82dc3c6ec776d5184dc310f357276fa36acdbeb343008ed5f1e92e"
+    },
+    {
+      "id": "transit-shelter.lod0",
+      "sourceSha256": "c78d1cd15d9d04076eff2488bb51d09307d7c901a37b30c43a249634812f87fc",
+      "sourceReopened": true,
+      "sourceUnchanged": true,
+      "glbByteIdentical": true,
+      "glbSha256": "6647785c496a016ee153feba97993705a10373854d20938f136a5abb43d8123c"
+    },
+    {
+      "id": "transit-shelter.lod1",
+      "sourceSha256": "02d6f6e27c7429c6346cee11a3a16d89a6d0e1dbc9332d056a3636f89025a6b4",
+      "sourceReopened": true,
+      "sourceUnchanged": true,
+      "glbByteIdentical": true,
+      "glbSha256": "a43328e71a7fa7380c335d4daa73e8562d1de7f33e1698e37ce2289ea676dd02"
+    },
+    {
+      "id": "arterial-lamp-8m.lod0",
+      "sourceSha256": "62e0128dfe83affd7ce2237d6f7c4fc500634a8c450d3d192713775609bab0c3",
+      "sourceReopened": true,
+      "sourceUnchanged": true,
+      "glbByteIdentical": true,
+      "glbSha256": "2b80e20de1fa435e107d91467728317565ced114f9ef228dfeb297edaf5672a7"
+    },
+    {
+      "id": "arterial-lamp-8m.lod1",
+      "sourceSha256": "7e40853ff651dcbe0566f2a76afc4498e10d6cefe0c09afba362d9ea2047dedf",
+      "sourceReopened": true,
+      "sourceUnchanged": true,
+      "glbByteIdentical": true,
+      "glbSha256": "97c1b741d54f65e3da6c4ce6e8b761b83e31ec54d56e85122959d9581091996b"
+    },
+    {
+      "id": "garbage-bin.lod0",
+      "sourceSha256": "7a77083d074a9e296ef3f86693643bf222d95f7db27194cac3811f803aacb778",
+      "sourceReopened": true,
+      "sourceUnchanged": true,
+      "glbByteIdentical": true,
+      "glbSha256": "17ba1925f7bd79ab7d8a4f5da1956dd4e65e9b775e4bf379c2f8ac7ad358dedb"
+    },
+    {
+      "id": "garbage-bin.lod1",
+      "sourceSha256": "123e5c627636be6eb853e5a639ce6fade03f6ccda79bbf3d73e21b4b1c692005",
+      "sourceReopened": true,
+      "sourceUnchanged": true,
+      "glbByteIdentical": true,
+      "glbSha256": "1974f04cff170307e4239da84a53e91f797ec9fa37146782abf1e529446d8896"
+    },
+    {
+      "id": "fire-hydrant.lod0",
+      "sourceSha256": "be74d05f7d48050640655d1081372b2d2ff896f23242144c7e09f07da4e86825",
+      "sourceReopened": true,
+      "sourceUnchanged": true,
+      "glbByteIdentical": true,
+      "glbSha256": "7707dd6eee3472bc2c96b46052be75b71b6b974f4d8099ac5ed50dfab7ac811d"
+    },
+    {
+      "id": "fire-hydrant.lod1",
+      "sourceSha256": "6e6c9142339efe47ec100e8ec6e8c7e450fb7fff97492de8b01f189cffa1e23d",
+      "sourceReopened": true,
+      "sourceUnchanged": true,
+      "glbByteIdentical": true,
+      "glbSha256": "db9f89295e73768e6288389e4cfc70740c626ca1466a9cfba3a6d27ada9bfbef"
+    },
+    {
+      "id": "bicycle-rack.lod0",
+      "sourceSha256": "77b3dfdf6ea38378ed248cc081b12f75e7706a574fa22df488e9b7deb20f990a",
+      "sourceReopened": true,
+      "sourceUnchanged": true,
+      "glbByteIdentical": true,
+      "glbSha256": "0b67e0cff1ff41599e0c5d79d17a084969995be156051b87b525c4f90df9f71a"
+    },
+    {
+      "id": "bicycle-rack.lod1",
+      "sourceSha256": "f470294628e5a11a71938992fe9a4e6b7168b4edea536db3a3e8bf38066db931",
+      "sourceReopened": true,
+      "sourceUnchanged": true,
+      "glbByteIdentical": true,
+      "glbSha256": "c34b0f4dffbd22fec0ffc874edb54870e8cd2dc388d9a5316df0f4b1e65e68d8"
+    },
+    {
+      "id": "bollard.lod0",
+      "sourceSha256": "6741699ffd67b8405853ee2b68fda398529cc61eefb70e6d9451602b8c6e281e",
+      "sourceReopened": true,
+      "sourceUnchanged": true,
+      "glbByteIdentical": true,
+      "glbSha256": "3d1eca13b4e656d37cc16fe49d8c1ae5aff4f9c4266e3c7119d864f232dbf3f8"
+    },
+    {
+      "id": "bollard.lod1",
+      "sourceSha256": "1bcd8a1907ebc91a3675f29acb9ac40a698461cc4c32df3a75c7e56884e7f984",
+      "sourceReopened": true,
+      "sourceUnchanged": true,
+      "glbByteIdentical": true,
+      "glbSha256": "f763e6f92d01beb50d7fd4734d3db39256bde6f5c34d7d7c9dabffc8fe74ae69"
+    }
+  ]
+}

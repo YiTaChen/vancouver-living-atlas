@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "status": "proposal-only",
+  "runtimeStatus": "runtime_pending_webgl",
+  "sourceFile": "public/data/roads.geojson",
+  "sourceFileSha256": "77543c74f4e567a65db14c8d33f9d6250d0f40bdd5f99031c1267aa8dc3373fb",
+  "selectedSourceEdges": [
+    {
+      "sourceKey": "road-sha256:38b9e83efe3503f21ba90f3bc2a77c1904072c51582b697e3226bd3e343f4087",
+      "name": "WATER ST",
+      "source": "cov-public-streets",
+      "featureIndexForDebugOnly": 29,
+      "featureProperties": {
+        "name": "WATER ST",
+        "class": "Arterial",
+        "width": 18,
+        "source": "cov-public-streets",
+        "type": "Arterial"
+      },
+      "geometrySha256": "ec9eb72efca09f88d8ab5741817e9871aee8c3cb3bf79d6972bc35027ca23270",
+      "selectionPurpose": "Representative sample edge only; not evidence of any existing physical prop or stop."
+    },
+    {
+      "sourceKey": "road-sha256:42aaf45ea832f656c46bd688b597062770390429630a9cb9ba89d30240de4d02",
+      "name": "W GEORGIA ST",
+      "source": "cov-public-streets",
+      "featureIndexForDebugOnly": 20,
+      "featureProperties": {
+        "name": "W GEORGIA ST",
+        "class": "Arterial",
+        "width": 18,
+        "source": "cov-public-streets",
+        "type": "Arterial"
+      },
+      "geometrySha256": "ffa843c37ece378972b88418c83b25de03deb586f9e9412d2b6f4fdd56f8e4b8",
+      "selectionPurpose": "Representative sample edge only; not evidence of any existing physical prop or stop."
+    }
+  ],
+  "activePlacements": [],
+  "worldXYZOverrides": [],
+  "populationDelta": 0,
+  "proposedSampleCaps": {
+    "cedar-bench": 2,
+    "heritage-lamp": 2,
+    "arterial-lamp-8m": 2,
+    "transit-shelter": 1,
+    "garbage-bin": 1,
+    "fire-hydrant": 1,
+    "bicycle-rack": 1,
+    "bollard": 2
+  },
+  "activationPolicy": "Caps are proposals, not spawn permission. F01 replaces source-associated existing slots only. F02 remains empty until explicit source-selected slots and placement evidence are available. Shelter needs independently verified stop data, absent here.",
+  "placementInputsRequired": [
+    "stable selected source key",
+    "authoritative sidewalk/terrain samples",
+    "existing replacement slot ID",
+    "footprint at unit scale",
+    "doorway approach polygon padded 1.5 m",
+    "parked-car full swept door polygon; representative minimum 0.9 m",
+    "continuous remaining pedestrian corridor at least 1.8 m",
+    "road/rail exclusion polygons"
+  ],
+  "fixtureGate": "placement.py is offline only; runtime consumer integration required",
+  "knownSourceLimits": [
+    "roads source has no unique per-feature external identifier, so geometry/name/source digest is used instead of array index identity",
+    "road centerline and approximate width do not prove sidewalk width",
+    "no authoritative shelter/bench/bin/hydrant/rack/bollard survey supplied",
+    "roadDecorations current lamp ground+1 offset must be replaced with sampled ground for this zero-datum asset, not copied blindly"
+  ]
+}

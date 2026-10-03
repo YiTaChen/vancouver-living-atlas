@@ -1,0 +1,18 @@
+test_door_car_and_road_exclusions (__main__.PlacementTests.test_door_car_and_road_exclusions) ... ok
+test_good_candidate_still_not_runtime_accepted (__main__.PlacementTests.test_good_candidate_still_not_runtime_accepted) ... ok
+test_missing_exclusion_layer (__main__.PlacementTests.test_missing_exclusion_layer) ... ok
+test_missing_terrain (__main__.PlacementTests.test_missing_terrain) ... ok
+test_nonconvex_rejected (__main__.PlacementTests.test_nonconvex_rejected) ... ok
+test_outside_sidewalk (__main__.PlacementTests.test_outside_sidewalk) ... ok
+test_pedestrian_rejected (__main__.PlacementTests.test_pedestrian_rejected) ... ok
+test_population_rejected (__main__.PlacementTests.test_population_rejected) ... ok
+test_rotated_intersection (__main__.PlacementTests.test_rotated_intersection) ... ok
+test_scale_rejected (__main__.PlacementTests.test_scale_rejected) ... ok
+test_separated_polygons (__main__.PlacementTests.test_separated_polygons) ... ok
+test_slope_rejected (__main__.PlacementTests.test_slope_rejected) ... ok
+test_source_required (__main__.PlacementTests.test_source_required) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.001s
+
+OK

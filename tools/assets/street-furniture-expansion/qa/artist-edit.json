@@ -1,0 +1,19 @@
+{
+  "status": "pass",
+  "sourceIsDisposableCopy": true,
+  "shippedSourcesUnchanged": true,
+  "editedSourceSha256": "717f610cd4080a2b4a6a2fa4dfb8806781817da1d532e7d03694dd65cd5b1dab",
+  "editedGlbSha256": "cdfad52b4426848c900c44a71336c9399580670bb860577f75ad142de660cbc0",
+  "checks": {
+    "meshVertexTranslationM": 0.007,
+    "vertexSurvivedReimport": true,
+    "uvTranslationU": 0.125,
+    "uvSurvivedReimport": true,
+    "roughness": 0.731,
+    "materialSurvivedReimport": true,
+    "bevelModifierEvaluated": true,
+    "sourceBytesPreserved": true,
+    "unsupportedProceduralGraphRejected": true
+  },
+  "rejectionReason": "Unsupported edited shader graph: bake or implement explicit preservation before export"
+}

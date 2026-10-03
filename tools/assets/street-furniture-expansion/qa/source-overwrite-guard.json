@@ -1,0 +1,8 @@
+{
+  "status": "pass",
+  "command": "blender -b -t 2 --python-exit-code 1 --python tools/assets/street-furniture-expansion/build.py",
+  "expectedExitCode": 1,
+  "observedExitCode": 1,
+  "rejection": "Editable sources already exist. Use export.py to preserve edits, or --force-reset-sources only for an intentional rebuild.",
+  "all16SourceHashesUnchanged": true
+}

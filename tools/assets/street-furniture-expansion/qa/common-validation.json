@@ -1,0 +1,610 @@
+{
+  "status": "pass",
+  "scope": "common packaging, source hashes, rest-pose transformed GLB geometry and costs only; package-specific Blender, semantic and runtime checks required",
+  "results": [
+    {
+      "assetId": "cedar-bench",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -1.0099999904632568,
+          -1.966970300526505e-08,
+          -0.3995785852887267
+        ],
+        "max": [
+          1.0099999904632568,
+          0.9853602945804596,
+          0.30000000300346763
+        ],
+        "size": [
+          2.0199999809265137,
+          0.9853603142501626,
+          0.6995785882921943
+        ]
+      },
+      "triangles": 756,
+      "vertices": 1390,
+      "primitives": 2,
+      "bytes": 74304,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 74304,
+      "images": [],
+      "nodeNames": [
+        "metal",
+        "wood"
+      ],
+      "materialNames": [
+        "metal",
+        "wood"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "cedar-bench",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -1.0099999904632568,
+          0.0,
+          -0.40095970034599304
+        ],
+        "max": [
+          1.0099999904632568,
+          0.984935075044632,
+          0.30000001192092896
+        ],
+        "size": [
+          2.0199999809265137,
+          0.984935075044632,
+          0.700959712266922
+        ]
+      },
+      "triangles": 200,
+      "vertices": 384,
+      "primitives": 2,
+      "bytes": 22512,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 22512,
+      "images": [],
+      "nodeNames": [
+        "metal",
+        "wood"
+      ],
+      "materialNames": [
+        "metal",
+        "wood"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "heritage-lamp",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -1.0649999380111694,
+          0.0,
+          -0.23499999940395355
+        ],
+        "max": [
+          1.0649999380111694,
+          4.489999771118164,
+          0.23499999940395355
+        ],
+        "size": [
+          2.129999876022339,
+          4.489999771118164,
+          0.4699999988079071
+        ]
+      },
+      "triangles": 1292,
+      "vertices": 2479,
+      "primitives": 2,
+      "bytes": 129672,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 129672,
+      "images": [],
+      "nodeNames": [
+        "metal",
+        "diffuser"
+      ],
+      "materialNames": [
+        "metal",
+        "diffuser"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "heritage-lamp",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -1.059809684753418,
+          0.0,
+          -0.2298096865415573
+        ],
+        "max": [
+          1.059809684753418,
+          4.489999771118164,
+          0.2298096865415573
+        ],
+        "size": [
+          2.119619369506836,
+          4.489999771118164,
+          0.4596193730831146
+        ]
+      },
+      "triangles": 228,
+      "vertices": 460,
+      "primitives": 2,
+      "bytes": 26336,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 26336,
+      "images": [],
+      "nodeNames": [
+        "metal",
+        "diffuser"
+      ],
+      "materialNames": [
+        "metal",
+        "diffuser"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "transit-shelter",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -2.2799999713897705,
+          0.0,
+          -1.5199999529868364
+        ],
+        "max": [
+          2.2799997329711914,
+          2.819999847561121,
+          0.34000000171363354
+        ],
+        "size": [
+          4.559999704360962,
+          2.819999847561121,
+          1.85999995470047
+        ]
+      },
+      "triangles": 2164,
+      "vertices": 4370,
+      "primitives": 4,
+      "bytes": 228404,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 228404,
+      "images": [],
+      "nodeNames": [
+        "metal",
+        "glass",
+        "diffuser",
+        "wood"
+      ],
+      "materialNames": [
+        "metal",
+        "glass",
+        "diffuser",
+        "wood"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "transit-shelter",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -2.2799999713897705,
+          0.0,
+          -1.5199999529868364
+        ],
+        "max": [
+          2.2799997329711914,
+          2.819999847561121,
+          0.34000000171363354
+        ],
+        "size": [
+          4.559999704360962,
+          2.819999847561121,
+          1.85999995470047
+        ]
+      },
+      "triangles": 584,
+      "vertices": 1140,
+      "primitives": 4,
+      "bytes": 63844,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 63844,
+      "images": [],
+      "nodeNames": [
+        "metal",
+        "glass",
+        "diffuser",
+        "wood"
+      ],
+      "materialNames": [
+        "metal",
+        "glass",
+        "diffuser",
+        "wood"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "arterial-lamp-8m",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.15000000596046448,
+          0.0,
+          -0.17000000178813934
+        ],
+        "max": [
+          1.7599999904632568,
+          8.0,
+          0.17000000178813934
+        ],
+        "size": [
+          1.9099999964237213,
+          8.0,
+          0.3400000035762787
+        ]
+      },
+      "triangles": 252,
+      "vertices": 514,
+      "primitives": 2,
+      "bytes": 29144,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 29144,
+      "images": [],
+      "nodeNames": [
+        "metal",
+        "diffuser"
+      ],
+      "materialNames": [
+        "metal",
+        "diffuser"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "arterial-lamp-8m",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.15000000596046448,
+          0.0,
+          -0.17000000178813934
+        ],
+        "max": [
+          1.7599999904632568,
+          8.0,
+          0.17000000178813934
+        ],
+        "size": [
+          1.9099999964237213,
+          8.0,
+          0.3400000035762787
+        ]
+      },
+      "triangles": 108,
+      "vertices": 208,
+      "primitives": 2,
+      "bytes": 13576,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 13576,
+      "images": [],
+      "nodeNames": [
+        "metal",
+        "diffuser"
+      ],
+      "materialNames": [
+        "metal",
+        "diffuser"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "garbage-bin",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.28999999165534973,
+          0.0,
+          -0.28999999165534973
+        ],
+        "max": [
+          0.28999999165534973,
+          0.9700000286102295,
+          0.28999996185302734
+        ],
+        "size": [
+          0.5799999833106995,
+          0.9700000286102295,
+          0.5799999535083771
+        ]
+      },
+      "triangles": 528,
+      "vertices": 1152,
+      "primitives": 1,
+      "bytes": 60184,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 60184,
+      "images": [],
+      "nodeNames": [
+        "metal"
+      ],
+      "materialNames": [
+        "metal"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "garbage-bin",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.28999999165534973,
+          0.0,
+          -0.28999999165534973
+        ],
+        "max": [
+          0.28999999165534973,
+          0.9700000286102295,
+          0.28999996185302734
+        ],
+        "size": [
+          0.5799999833106995,
+          0.9700000286102295,
+          0.5799999535083771
+        ]
+      },
+      "triangles": 96,
+      "vertices": 192,
+      "primitives": 1,
+      "bytes": 11500,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 11500,
+      "images": [],
+      "nodeNames": [
+        "metal"
+      ],
+      "materialNames": [
+        "metal"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "fire-hydrant",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.2750000059604645,
+          0.0,
+          -0.18000000715255737
+        ],
+        "max": [
+          0.2750000059604645,
+          0.8540000319480896,
+          0.23000001907348633
+        ],
+        "size": [
+          0.550000011920929,
+          0.8540000319480896,
+          0.4100000262260437
+        ]
+      },
+      "triangles": 320,
+      "vertices": 665,
+      "primitives": 1,
+      "bytes": 35484,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 35484,
+      "images": [],
+      "nodeNames": [
+        "metal"
+      ],
+      "materialNames": [
+        "metal"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "fire-hydrant",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.2750000059604645,
+          0.0,
+          -0.18000000715255737
+        ],
+        "max": [
+          0.2750000059604645,
+          0.8540000319480896,
+          0.23000001907348633
+        ],
+        "size": [
+          0.550000011920929,
+          0.8540000319480896,
+          0.4100000262260437
+        ]
+      },
+      "triangles": 192,
+      "vertices": 390,
+      "primitives": 1,
+      "bytes": 21516,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 21516,
+      "images": [],
+      "nodeNames": [
+        "metal"
+      ],
+      "materialNames": [
+        "metal"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "bicycle-rack",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.4850000098270286,
+          0.0,
+          -0.08500000545391731
+        ],
+        "max": [
+          0.4850000321787884,
+          0.8400000333786011,
+          0.08500000386656417
+        ],
+        "size": [
+          0.970000042005817,
+          0.8400000333786011,
+          0.17000000932048148
+        ]
+      },
+      "triangles": 228,
+      "vertices": 432,
+      "primitives": 1,
+      "bytes": 23864,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 23864,
+      "images": [],
+      "nodeNames": [
+        "metal"
+      ],
+      "materialNames": [
+        "metal"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "bicycle-rack",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.4850000089210542,
+          0.0,
+          -0.08500000454794517
+        ],
+        "max": [
+          0.485000031272814,
+          0.8400000333786011,
+          0.08500000296058977
+        ],
+        "size": [
+          0.9700000401938682,
+          0.8400000333786011,
+          0.17000000750853494
+        ]
+      },
+      "triangles": 84,
+      "vertices": 172,
+      "primitives": 1,
+      "bytes": 10516,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 10516,
+      "images": [],
+      "nodeNames": [
+        "metal"
+      ],
+      "materialNames": [
+        "metal"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "bollard",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.0949999988079071,
+          0.0,
+          -0.0949999988079071
+        ],
+        "max": [
+          0.0949999988079071,
+          0.8999999761581421,
+          0.0949999988079071
+        ],
+        "size": [
+          0.1899999976158142,
+          0.8999999761581421,
+          0.1899999976158142
+        ]
+      },
+      "triangles": 160,
+      "vertices": 288,
+      "primitives": 2,
+      "bytes": 17676,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 17676,
+      "images": [],
+      "nodeNames": [
+        "metal",
+        "diffuser"
+      ],
+      "materialNames": [
+        "metal",
+        "diffuser"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "bollard",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.0949999988079071,
+          0.0,
+          -0.0949999988079071
+        ],
+        "max": [
+          0.0949999988079071,
+          0.8999999761581421,
+          0.0949999988079071
+        ],
+        "size": [
+          0.1899999976158142,
+          0.8999999761581421,
+          0.1899999976158142
+        ]
+      },
+      "triangles": 104,
+      "vertices": 192,
+      "primitives": 2,
+      "bytes": 12724,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 12724,
+      "images": [],
+      "nodeNames": [
+        "metal",
+        "diffuser"
+      ],
+      "materialNames": [
+        "metal",
+        "diffuser"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    }
+  ]
+}

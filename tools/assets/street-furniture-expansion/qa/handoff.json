@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "packageId": "street-furniture-expansion",
+  "baseRevision": "8d07c4cdd81d991a4ee54214126b42e4b40f3f1c",
+  "taskIds": [
+    "F01",
+    "F02"
+  ],
+  "assetStatus": "offline_complete",
+  "integrationStatus": "runtime_pending_webgl",
+  "webglAvailable": false,
+  "manifest": "../manifest.json",
+  "sourceEditsPreserved": true,
+  "offlineEvidence": [
+    "validation.json",
+    "measurements.json",
+    "common-validation.json",
+    "blender-audit.json",
+    "source-roundtrip.json",
+    "artist-edit.json",
+    "preview-index.json",
+    "visual-review.json",
+    "collision-proxies.json",
+    "placement-tests.log",
+    "validator-tests.log",
+    "source-overwrite-guard.json"
+  ],
+  "taskChecks": {
+    "F01": "pass",
+    "F02": "pass"
+  },
+  "runtimeChecks": {
+    "status": "not_run",
+    "reason": "Asset environment Cycles CPU evidence is not WebGL acceptance. Runtime sampling, integration and deployment are deferred."
+  },
+  "intendedConsumers": [
+    "lib/city/environment.ts:source-selected roadDecorations/lamp adapter",
+    "future source-selected sidewalk-furniture adapter",
+    "tools/assets/transit-station-spaces:transit-shelter dependency (offline layout only)"
+  ],
+  "replaces": [
+    "No runtime items replaced now. Proposed future cedar-bench/heritage-lamp/transit-shelter generator instances and selected existing 8 m arterial-lamp slots. New F02 IDs have zero active slots."
+  ],
+  "rootFrame": {
+    "units": "metres",
+    "upAxis": "+Y",
+    "frontAxis": "+Z",
+    "scale": [
+      1,
+      1,
+      1
+    ],
+    "groundY": 0,
+    "shelterException": "Original front-post frame retained; complete bounds X[-2.28,2.28],Y[0,2.82],Z[-1.52,.34]"
+  },
+  "preserve": [
+    "bench width 2.02 m and seat center .48 m, top .509 m",
+    "heritage-lamp 4.49 m; never stretch into 8 m arterial",
+    "shelter envelope 4.56 x 2.82 x 1.86 m and headroom >=2.59 m",
+    "stable source selection and current population caps",
+    "wood/metal/glass/diffuser roles; no runtime point lights"
+  ],
+  "materialReuse": [
+    "cedar semantic surface for wood",
+    "painted-metal semantic surface for metal",
+    "glass/diffuser dedicated role materials"
+  ],
+  "textureStatement": "No maps embedded or added. Roles are untextured Principled placeholders until explicit shared-library consumer binding.",
+  "costs": {
+    "glbBytes": 781256,
+    "geometryBytes": 781256,
+    "embeddedImageBytes": 0,
+    "sourceBytes": 1513177,
+    "uniqueTexelBytesWithMips": 0,
+    "glbCount": 16,
+    "sourceCount": 16
+  },
+  "knownLimitations": [
+    "Clearance sampled using CPU rays and simple conservative proxies; not legal accessibility certification.",
+    "Not a city WebGL placement/performance/render validation.",
+    "No source-selected props enabled; proposed F02 slots remain empty.",
+    "Only untextured Principled semantic role materials accepted by exporter.",
+    "LOD1 deliberately simplifies slat count, cast detail and tubular cross-sections.",
+    "Source component AABB proxies are broadphase candidates, not navigation clearance certification.",
+    "No fixture survey or verified bus stop source available in this package; source-selected road edges are only research candidates.",
+    "First denoise attempt was unsupported by this Blender build; final previews use CPU 16 samples without denoiser.",
+    "No commits or runtime/public edits made by this asset worker."
+  ],
+  "nextIntegrationSteps": [
+    "Run package validator and inspect source edits before promotion.",
+    "Resolve authoritative replacement slots/stop identity and walkable polygons for selected source edges; retain population.",
+    "Bind shared role materials with their physical UV periods; preserve glass/diffuser semantics.",
+    "Sample terrain at >=3 points, reject slope >.14 m, and replace legacy lamp ground+1 with actual zero-ground datum.",
+    "Apply footprints, 1.8 m pedestrian route, doorway approaches and complete parked-car door sweeps; narrowphase-test individual proxies.",
+    "Run WebGL same-camera sunny/overcast/dusk/night, near/mid/far LOD and lifecycle/performance acceptance.",
+    "Only after sample acceptance decide public assets, consumer activation and release."
+  ]
+}
