@@ -1,0 +1,233 @@
+{
+  "schemaVersion": 1,
+  "status": "pass",
+  "blenderVersion": "4.3.2",
+  "renderer": "Cycles CPU",
+  "cpuThreads": 2,
+  "cpuModel": "AMD EPYC 9V74 80-Core Processor",
+  "denoising": {
+    "enabled": false,
+    "reason": "Blender build lacks OpenImageDenoise"
+  },
+  "originalSourcesUnchanged": true,
+  "sourceReopenReexport": [
+    {
+      "source": "source/city-bus-12m-exterior.lod0.blend",
+      "sourceSha256": "facb19080148b5839d835af2ce994cc50facbd2e1d414ce6428a6e4d13576d27",
+      "editableMeshes": 17,
+      "retainedModifiers": 1,
+      "reexportSha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+      "deliveredSha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+      "binaryIdentical": true,
+      "status": "pass"
+    },
+    {
+      "source": "source/city-bus-12m-exterior.lod1.blend",
+      "sourceSha256": "d9858acf335c4068831f4cd6b45d0464a51d85c22750ec57c1f29f2619b54ee9",
+      "editableMeshes": 17,
+      "retainedModifiers": 0,
+      "reexportSha256": "a4ccbb6a4b2f032a4d950ee0883c51ebe1ecd314734b539c60aa5fd6c605b3f0",
+      "deliveredSha256": "a4ccbb6a4b2f032a4d950ee0883c51ebe1ecd314734b539c60aa5fd6c605b3f0",
+      "binaryIdentical": true,
+      "status": "pass"
+    },
+    {
+      "source": "source/city-bus-12m-exterior.lod2.blend",
+      "sourceSha256": "2cb3c1433a2837172c27efa833b41b09cabe3e34ef790f8a9577867f56bec6a4",
+      "editableMeshes": 8,
+      "retainedModifiers": 0,
+      "reexportSha256": "36a7f8cfa1b3b53b8e212618e80523a7be3f7fd8e86bef98cf9c93f83bcfd948",
+      "deliveredSha256": "36a7f8cfa1b3b53b8e212618e80523a7be3f7fd8e86bef98cf9c93f83bcfd948",
+      "binaryIdentical": true,
+      "status": "pass"
+    },
+    {
+      "source": "source/city-bus-12m-interior.lod0.blend",
+      "sourceSha256": "8ad2cac5b11f479beac3ca19b16fc409e08c24f1ced5ee0a1b3e87120b130f1e",
+      "editableMeshes": 72,
+      "retainedModifiers": 25,
+      "reexportSha256": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d",
+      "deliveredSha256": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d",
+      "binaryIdentical": true,
+      "status": "pass"
+    },
+    {
+      "source": "source/city-bus-12m-interior.lod1.blend",
+      "sourceSha256": "f62a7aac9d42d63e0350a0b0fbd42f6c20603ac512ffc6477ba3ab7d9a2eb5fb",
+      "editableMeshes": 62,
+      "retainedModifiers": 0,
+      "reexportSha256": "6ac509bee7a8eed10b04ae8c6de1b776087bb6a822c75846b5c4e258045819d5",
+      "deliveredSha256": "6ac509bee7a8eed10b04ae8c6de1b776087bb6a822c75846b5c4e258045819d5",
+      "binaryIdentical": true,
+      "status": "pass"
+    }
+  ],
+  "sourceEditPreservation": {
+    "status": "pass",
+    "sourceCopySha256": "bcc6e889f1ada50390714dc4f0d2478d0732afec3ec6fd28e8b42775961a1c3e",
+    "exportSha256": "f7f4d9a3d32c2f790d1126cca475b4d43686f1f55daf674b2426bb69b0643dd4",
+    "geometryEditM": 0.017,
+    "measuredRoofTopDeltaM": 0.01699995994567871,
+    "materialPaintRedLinear": 0.08100000023841858,
+    "objectExtraPreserved": true,
+    "workflow": "Copy original source, edit mesh/material/custom property, save compressed .blend, reopen it, run source-preserving export. Generator never invoked."
+  },
+  "interiorBatchEditPreservation": {
+    "status": "pass",
+    "componentId": "seat-01-cushion",
+    "sourceCopySha256": "6ed95727e98ef3766da7c08f15949bab75c724e1a620c7868d179b94cfaf5803",
+    "exportSha256": "8d6b0eb06596ad19f39fce05c076a0693102c2623c4100c2a9a5b094bda122f5",
+    "measuredGeometryDeltaM": 0.012000024318695068,
+    "geometryBatchNodeId": "interior-batch-seat",
+    "zeroDrawAnchorPreserved": true,
+    "artistExtraPreserved": true
+  },
+  "staticBatchEquivalence": [
+    {
+      "file": "exports/city-bus-12m-interior.lod0.glb",
+      "status": "pass",
+      "sourceComponentCount": 72,
+      "maximumVertexDeltaM": 2.086162567138672e-07,
+      "sourceTriangles": 3760,
+      "batchedTriangles": 3760,
+      "sourcePrimitives": 72,
+      "batchedPrimitives": 7,
+      "uvAndNormalChannelsCompared": 144,
+      "unbatchedSha256": "b7ee79675a25e8a6d1d004158e61913cde215fdfc8ca4423c9cca67d3c87e12e",
+      "batchedSha256": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+    },
+    {
+      "file": "exports/city-bus-12m-interior.lod1.glb",
+      "status": "pass",
+      "sourceComponentCount": 62,
+      "maximumVertexDeltaM": 2.086162567138672e-07,
+      "sourceTriangles": 888,
+      "batchedTriangles": 888,
+      "sourcePrimitives": 62,
+      "batchedPrimitives": 7,
+      "uvAndNormalChannelsCompared": 124,
+      "unbatchedSha256": "2dd9a11ef4eea7f5a8e2232ad7d80c2b4610a2554cd435dfe48f28c0c600dc7a",
+      "batchedSha256": "6ac509bee7a8eed10b04ae8c6de1b776087bb6a822c75846b5c4e258045819d5"
+    }
+  ],
+  "actualGLBReimports": [
+    {
+      "file": "exports/city-bus-12m-exterior.lod0.glb",
+      "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+      "boundsM": {
+        "min": [
+          -1.5199999809265137,
+          0.0,
+          -5.818999767303467
+        ],
+        "max": [
+          1.5199999809265137,
+          3.069999933242798,
+          6.215000152587891
+        ],
+        "size": [
+          3.0399999618530273,
+          3.069999933242798,
+          12.033999919891357
+        ]
+      },
+      "status": "pass",
+      "cameraAndLightCount": 0
+    },
+    {
+      "file": "exports/city-bus-12m-exterior.lod1.glb",
+      "sha256": "a4ccbb6a4b2f032a4d950ee0883c51ebe1ecd314734b539c60aa5fd6c605b3f0",
+      "boundsM": {
+        "min": [
+          -1.5199999809265137,
+          0.0,
+          -5.811999797821045
+        ],
+        "max": [
+          1.5199999809265137,
+          3.069999933242798,
+          6.215000152587891
+        ],
+        "size": [
+          3.0399999618530273,
+          3.069999933242798,
+          12.026999950408936
+        ]
+      },
+      "status": "pass",
+      "cameraAndLightCount": 0
+    },
+    {
+      "file": "exports/city-bus-12m-exterior.lod2.glb",
+      "sha256": "36a7f8cfa1b3b53b8e212618e80523a7be3f7fd8e86bef98cf9c93f83bcfd948",
+      "boundsM": {
+        "min": [
+          -1.5199999809265137,
+          0.0,
+          -5.800000190734863
+        ],
+        "max": [
+          1.5199999809265137,
+          3.069999933242798,
+          6.210000038146973
+        ],
+        "size": [
+          3.0399999618530273,
+          3.069999933242798,
+          12.010000228881836
+        ]
+      },
+      "status": "pass",
+      "cameraAndLightCount": 0
+    },
+    {
+      "file": "exports/city-bus-12m-interior.lod0.glb",
+      "sha256": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d",
+      "boundsM": {
+        "min": [
+          -1.1775000095367432,
+          0.25999999046325684,
+          -5.679999828338623
+        ],
+        "max": [
+          1.1775000095367432,
+          2.700000047683716,
+          5.75
+        ],
+        "size": [
+          2.3550000190734863,
+          2.440000057220459,
+          11.429999828338623
+        ]
+      },
+      "status": "pass",
+      "cameraAndLightCount": 0
+    },
+    {
+      "file": "exports/city-bus-12m-interior.lod1.glb",
+      "sha256": "6ac509bee7a8eed10b04ae8c6de1b776087bb6a822c75846b5c4e258045819d5",
+      "boundsM": {
+        "min": [
+          -1.1775000095367432,
+          0.25999999046325684,
+          -5.679999828338623
+        ],
+        "max": [
+          1.1775000095367432,
+          2.700000047683716,
+          5.75
+        ],
+        "size": [
+          2.3550000190734863,
+          2.440000057220459,
+          11.429999828338623
+        ]
+      },
+      "status": "pass",
+      "cameraAndLightCount": 0
+    }
+  ],
+  "warnings": [
+    "Blender extension cache attempted a read-only home-directory write; export and rendering do not depend on that cache."
+  ]
+}

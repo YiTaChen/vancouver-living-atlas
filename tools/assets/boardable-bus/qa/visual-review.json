@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "status": "pass",
+  "method": "Visual inspection of actual GLB Cycles CPU renders; no browser or WebGL review",
+  "reviewed": [
+    "previews/contact-exterior.png",
+    "previews/contact-passenger.png",
+    "previews/interior-aisle.png",
+    "previews/doors-open.png",
+    "previews/entry-front.png",
+    "previews/lod-2.png",
+    "previews/lod-2-rear.png"
+  ],
+  "findings": [
+    "Hollow glazed shell, wheel arches, opened door gaps, full floor, wheelchair bay and separate seats are visible",
+    "Same-camera LOD0/1 preserve recognisable silhouette and apertures; LOD2 intentionally closed nonboarding",
+    "All entry and seat views show a physically modelled cabin; seat/standing camera points are not inside solid geometry",
+    "The section reveals actual floor, wheel wells, seat pedestals, partition and roof separation",
+    "Renders remain visibly grainy at 24 CPU samples without denoising; contact sheets downsample for compact review",
+    "Pre-publication LOD2 dark opaque side and rear window cues restore the far-view glazing band; capability remains closed, empty and nonboarding",
+    "Export-only interior batching preserves the visible geometry and source edits while reducing each interior LOD to seven rendering primitives"
+  ],
+  "geometryCorrectionsVerified": [
+    "Front wheel-well shortened to preserve the full 1.15 m front entry passage",
+    "Side-panel thickness placed inside the nominal 2.50 m body envelope; actual centre section checked"
+  ]
+}

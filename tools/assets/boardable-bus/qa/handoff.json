@@ -1,0 +1,164 @@
+{
+  "schemaVersion": 1,
+  "packageId": "boardable-bus",
+  "baseRevision": "8b95f013297597845d542463d6ce635105a95c4f",
+  "sourceBranch": "assets/development-backlog-oct3",
+  "packageCommit": "Not committed by asset worker; parent integrator owns the final commit",
+  "taskIds": [
+    "D02",
+    "D03"
+  ],
+  "assetStatus": "offline_complete",
+  "integrationStatus": "runtime_pending_webgl",
+  "webglAvailable": false,
+  "manifest": "../manifest.json",
+  "sourceEditsPreserved": true,
+  "offlineEvidence": [
+    "validation.json",
+    "common-validation.json",
+    "blender-validation.json",
+    "measurements.json",
+    "previews/index.json",
+    "previews/contact-exterior.png",
+    "previews/contact-passenger.png",
+    "regression-tests.txt",
+    "visual-review.json",
+    "batching-review.json"
+  ],
+  "taskChecks": {
+    "D02": {
+      "status": "pass",
+      "scope": "Hollow shaped exterior, opening geometry, independently animated door leaves, wheels, LODs and common-root metadata"
+    },
+    "D03": {
+      "status": "pass",
+      "scope": "Actual cabin, floor, seats/pelvis/cameras, rails, driver partition, stop bell, display, reserved clear region"
+    },
+    "D06": {
+      "status": "not_run",
+      "reason": "Runtime service/boarding/rider states outside this offline package"
+    }
+  },
+  "runtimeChecks": {
+    "status": "not_run",
+    "reason": "No browser/WebGL acceptance performed; existing runtime unchanged",
+    "items": [
+      "shared material binding and transparency sorting",
+      "real source stop and threshold alignment",
+      "service and passenger state machine",
+      "moving frame and collision continuity",
+      "state-aware LOD locking and lazy load",
+      "repeat boarding/alighting, failures and disposal",
+      "device input and GPU costs"
+    ]
+  },
+  "intendedConsumers": [
+    "lib/city/city-buses.ts"
+  ],
+  "replaces": [
+    "Future opt-in replacement of busGeometry display mesh only after runtime sample acceptance"
+  ],
+  "loadFiles": {
+    "exterior": "../exports/city-bus-12m-exterior.lod0.glb",
+    "interior": "../exports/city-bus-12m-interior.lod0.glb",
+    "collision": "../manifest.json#/vehicles/0/collision"
+  },
+  "origin": "vehicle root: tyre Y=0, centreline X=0, axle midpoint Z=0; +Z forward, -X right; scale1",
+  "exportBatching": {
+    "interiorPrimitivesPerLOD": [
+      7,
+      7
+    ],
+    "sourceObjectsEditable": true,
+    "componentAnchors": "Original mesh nodes remain zero-draw anchors",
+    "geometryCrosscheck": "Exact batch-node extras.componentRanges copied into manifest lod.staticBatching; validator checks every vertex/index range and source node transform",
+    "bindingRule": "Render material batch meshes; use original named anchors and numeric metadata for interaction/collision. Do not expect floor or seat component anchors themselves to have a mesh."
+  },
+  "sharedRoles": [
+    "paint",
+    "rubber",
+    "glass",
+    "lights",
+    "floor",
+    "panel",
+    "seat",
+    "rail"
+  ],
+  "knownLimitations": [
+    "Representative all-low-floor proposal, not measured production vehicle or accessibility certification",
+    "LOD2 intentionally closed/empty/nonboarding; never use with occupants or open doors",
+    "CPU renders are 640x400, 24 samples without denoising because this Blender build lacks OpenImageDenoise; modest grain is visible",
+    "Collision primitives conservatively enclose static cabin geometry; dynamic door collision and legal stop/walk-surface connection require runtime implementation",
+    "No source route, stop state, ridership, D06, WebGL, full-city FPS, or deployment claims"
+  ],
+  "nextIntegrationSteps": [
+    "Validate source hashes and vehicle-local datum; discard old ground+1.08 placement offset",
+    "Load exterior0 + interior0 and bind shared semantic roles, accounting for all primitives",
+    "Use D01 actual stop/service data and explicit sill connection at Y=.36",
+    "Implement state-aware LOD/collision and D06 service/passenger states on elapsed time",
+    "Run WebGL sample views, all entry/seat cameras, door state, repeated boarding/disposal and GPU budget checks before publishing"
+  ],
+  "fullFileList": [
+    ".gitignore",
+    "README.zh-TW.md",
+    "batch_static.py",
+    "build.py",
+    "export.py",
+    "exports/city-bus-12m-exterior.lod0.glb",
+    "exports/city-bus-12m-exterior.lod1.glb",
+    "exports/city-bus-12m-exterior.lod2.glb",
+    "exports/city-bus-12m-interior.lod0.glb",
+    "exports/city-bus-12m-interior.lod1.glb",
+    "finalize.py",
+    "manifest.json",
+    "metadata.py",
+    "qa/batching-review.json",
+    "qa/blender-validation.json",
+    "qa/common-validation.json",
+    "qa/handoff.json",
+    "qa/inventory.json",
+    "qa/measurements.json",
+    "qa/previews/contact-exterior.png",
+    "qa/previews/contact-passenger.png",
+    "qa/previews/doors-open.png",
+    "qa/previews/driver-view.png",
+    "qa/previews/entry-front.png",
+    "qa/previews/entry-rear.png",
+    "qa/previews/exterior-front.png",
+    "qa/previews/exterior-rear.png",
+    "qa/previews/exterior-right-side.png",
+    "qa/previews/exterior-top.png",
+    "qa/previews/index.json",
+    "qa/previews/interior-aisle.png",
+    "qa/previews/light-clear.png",
+    "qa/previews/light-dusk.png",
+    "qa/previews/light-night.png",
+    "qa/previews/light-overcast.png",
+    "qa/previews/lod-0.png",
+    "qa/previews/lod-1.png",
+    "qa/previews/lod-2-rear.png",
+    "qa/previews/lod-2.png",
+    "qa/previews/longitudinal-section.png",
+    "qa/previews/seat-01-view.png",
+    "qa/previews/seat-02-view.png",
+    "qa/previews/seat-03-view.png",
+    "qa/previews/seat-04-view.png",
+    "qa/previews/seat-05-view.png",
+    "qa/previews/seat-06-view.png",
+    "qa/previews/seat-07-view.png",
+    "qa/previews/seat-08-view.png",
+    "qa/previews/seat-09-view.png",
+    "qa/previews/seat-10-view.png",
+    "qa/regression-tests.txt",
+    "qa/validation.json",
+    "qa/visual-review.json",
+    "qa_blender.py",
+    "source/city-bus-12m-exterior.lod0.blend",
+    "source/city-bus-12m-exterior.lod1.blend",
+    "source/city-bus-12m-exterior.lod2.blend",
+    "source/city-bus-12m-interior.lod0.blend",
+    "source/city-bus-12m-interior.lod1.blend",
+    "test_contract.py",
+    "validate.py"
+  ]
+}
