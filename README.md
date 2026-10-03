@@ -12,6 +12,8 @@ Vancouver Living Atlas is an interactive 3D Vancouver that runs in your browser.
 
 **Project specification (繁體中文):** [Completed work, architecture, asset pipeline, roadmap and testing](docs/PROJECT_SPECIFICATION.md). The [material-pipeline acceptance report](docs/visual-quality/material-pipeline/README.md) includes matched images, measured limits and editable Blender source validation.
 
+**AI development backlog (繁體中文):** [City-scale to street-scale requirements, asset dimensions/budgets, offline Blender handoff and future bus/SkyTrain interiors and boarding](docs/AI_AGENT_DEVELOPMENT_BACKLOG.md). Asset agents without WebGL can complete offline production; runtime integration and browser acceptance remain separate.
+
 <a id="explore-vancouver-in-30-seconds"></a>
 
 ## Watch Vancouver 3D City

@@ -1,5 +1,7 @@
 # Vancouver Living Atlas 專案規格與後續開發計畫
 
+**2026-10-03 待開發需求與 AI 交接：** 新增[城市景觀至街景需求清單](AI_AGENT_DEVELOPMENT_BACKLOG.md)，按城市、街區、建築、交通空間、車輛、家具及人物排序，區分現有優化與新增，列出檔案格式、尺寸／原點、LOD／資源提案預算及無 WebGL agent 的離線完成條件。公車與 SkyTrain 已有程序外觀及移動整理，但沒有可搭乘內部；來源製作、內裝／錨點交接及後續場景／搭乘整合分開列管。這次更新是需求文件，沒有實作新模型或搭乘功能。
+
 **2026-10-02 城市明亮度檢查點：** 修正平屋頂一律使用深色瀝青、外牆原有明度被 atlas 替換、玻璃天空色再次受漫反射照明等問題。加入來源 seed 穩定的三種代表性平屋頂，沿用既有 Blender atlas；城市幾何、碰撞、地形、全域曝光及日夜光照設定未改。開場改為 **10:00、持續 300 倍速**，第一分鐘仍是白天，約 126 秒進入夜間。完成 **20 組同相機前後配對、40 份有效 GPU 畫面紀錄，660/660 tests、TypeScript、正式 Firebase build／worker／QA 隔離**；陰天屋頂、外牆及步行／駕車近景已檢查，auto 極光正常。短測沒有 FPS 提升證據，配色亦不是實測材料分類。完整原因、成本、測試建構方法與後續規劃見 [城市明亮度規格](CITY_READABILITY_2026_10.md)及 [實際畫面與數據](visual-quality/city-readability/README.md)。
 
 **2026-10-02 素材整合檢查點：** 已找到並驗證新的 [Blender 素材列表](BLENDER_ASSET_HANDOFF_2026_10.md)，273 個列管檔案完整性通過。在實際城市 renderer 完成 43 份有效人物、窗台、葉片與 PBR 試片紀錄後，正式採用完整幾何的 1024 px 市民：下載量 −47.5%、貼圖估算 64 → 16 MiB，沒有 FPS 提升證據。窗台保留來源邊受控 QA；新葉片未顯示視覺改善，維持現有預設。其他素材需先建立尺寸、公尺 UV 及語意角色契約。最後 **651/651 tests、TypeScript、正式 Firebase build／worker／QA 隔離**通過，正式 UI smoke 完成。完整採用依據、建構步驟與下一輪接口見 [素材整合規格](OFFLINE_ASSET_INTEGRATION_2026_10.md)及 [GPU 比較紀錄](visual-quality/offline-assets/README.md)。
