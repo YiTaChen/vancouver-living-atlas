@@ -1,0 +1,2454 @@
+{
+  "status": "pass",
+  "engine": "Cycles",
+  "device": "CPU",
+  "samples": 12,
+  "resolution": [
+    640,
+    480
+  ],
+  "threads": 2,
+  "blenderVersion": "4.3.2",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "lightingScope": "offline studio studies; clear/overcast/dusk/night are not city WebGL weather reproduction",
+  "referencesExcludedFromRuntime": true,
+  "records": [
+    {
+      "assetId": "hvac-compact-single",
+      "lod": 0,
+      "view": "front",
+      "condition": "clear",
+      "file": "qa/previews/hvac-compact-single.lod0.front.clear.png",
+      "sha256": "c6c4cee7a6996d236c7e39ed07ff7958b2f5c19298abf0d9ec7aa1cbe2b63484",
+      "inputGlb": "exports/hvac-compact-single.lod0.glb",
+      "inputSha256": "696673e0add593d237c41ff1809c4b6f29f0bdc8b1c41fc9b4596e1248fe26ac",
+      "seconds": 3.483,
+      "cameraLocationBlenderM": [
+        0.0,
+        -7.0,
+        0.8500000238418579
+      ],
+      "cameraTargetBlenderM": [
+        0.0,
+        0.0,
+        0.550000011920929
+      ],
+      "orthographicScaleM": 2.596,
+      "references": [],
+      "rulerLengthM": null,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-compact-single",
+      "lod": 0,
+      "view": "side",
+      "condition": "clear",
+      "file": "qa/previews/hvac-compact-single.lod0.side.clear.png",
+      "sha256": "2241dd362dc1af480e239af63eedddfc6f411a7d6846e5b0e79adc19a18b65ab",
+      "inputGlb": "exports/hvac-compact-single.lod0.glb",
+      "inputSha256": "696673e0add593d237c41ff1809c4b6f29f0bdc8b1c41fc9b4596e1248fe26ac",
+      "seconds": 2.645,
+      "cameraLocationBlenderM": [
+        7.0,
+        0.0,
+        0.8500000238418579
+      ],
+      "cameraTargetBlenderM": [
+        0.0,
+        0.0,
+        0.550000011920929
+      ],
+      "orthographicScaleM": 2.4,
+      "references": [],
+      "rulerLengthM": null,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-compact-single",
+      "lod": 0,
+      "view": "back",
+      "condition": "clear",
+      "file": "qa/previews/hvac-compact-single.lod0.back.clear.png",
+      "sha256": "50d778d603c9fdc69cf6ca4d69ee60bbd1e8ba217f2c105631330e03568ff0fc",
+      "inputGlb": "exports/hvac-compact-single.lod0.glb",
+      "inputSha256": "696673e0add593d237c41ff1809c4b6f29f0bdc8b1c41fc9b4596e1248fe26ac",
+      "seconds": 2.741,
+      "cameraLocationBlenderM": [
+        0.0,
+        7.0,
+        0.8500000238418579
+      ],
+      "cameraTargetBlenderM": [
+        0.0,
+        0.0,
+        0.550000011920929
+      ],
+      "orthographicScaleM": 2.596,
+      "references": [],
+      "rulerLengthM": null,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-compact-single",
+      "lod": 0,
+      "view": "top",
+      "condition": "clear",
+      "file": "qa/previews/hvac-compact-single.lod0.top.clear.png",
+      "sha256": "a64f0b1b620896fe7ec4f8f0ab4d488617a14797219a69a1cef13a1c3a113dac",
+      "inputGlb": "exports/hvac-compact-single.lod0.glb",
+      "inputSha256": "696673e0add593d237c41ff1809c4b6f29f0bdc8b1c41fc9b4596e1248fe26ac",
+      "seconds": 3.045,
+      "cameraLocationBlenderM": [
+        0.0,
+        0.0,
+        7.550000190734863
+      ],
+      "cameraTargetBlenderM": [
+        0.0,
+        0.0,
+        0.550000011920929
+      ],
+      "orthographicScaleM": 2.596,
+      "references": [],
+      "rulerLengthM": null,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-compact-single",
+      "lod": 0,
+      "view": "scale",
+      "condition": "clear",
+      "file": "qa/previews/hvac-compact-single.lod0.scale.clear.png",
+      "sha256": "343f64290d913796c54b73694e1864efe4506f7b3566952987fdbd922f0cba22",
+      "inputGlb": "exports/hvac-compact-single.lod0.glb",
+      "inputSha256": "696673e0add593d237c41ff1809c4b6f29f0bdc8b1c41fc9b4596e1248fe26ac",
+      "seconds": 2.951,
+      "cameraLocationBlenderM": [
+        5.599999904632568,
+        -8.0,
+        5.650000095367432
+      ],
+      "cameraTargetBlenderM": [
+        0.6000000238418579,
+        0.0,
+        0.8500000238418579
+      ],
+      "orthographicScaleM": 5.35,
+      "references": [
+        {
+          "heightM": 1.75,
+          "footY": 0,
+          "topY": 1.75,
+          "referenceOnly": true
+        },
+        {
+          "heightM": 1.81,
+          "footY": 0,
+          "topY": 1.81,
+          "referenceOnly": true
+        }
+      ],
+      "rulerLengthM": 1,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-compact-single",
+      "lod": 0,
+      "view": "scale",
+      "condition": "overcast",
+      "file": "qa/previews/hvac-compact-single.lod0.scale.overcast.png",
+      "sha256": "174792f12ad60a6e1d688faff1e33fec8e96b7c0afaca73b7061a1e875c2bca4",
+      "inputGlb": "exports/hvac-compact-single.lod0.glb",
+      "inputSha256": "696673e0add593d237c41ff1809c4b6f29f0bdc8b1c41fc9b4596e1248fe26ac",
+      "seconds": 2.96,
+      "cameraLocationBlenderM": [
+        5.599999904632568,
+        -8.0,
+        5.650000095367432
+      ],
+      "cameraTargetBlenderM": [
+        0.6000000238418579,
+        0.0,
+        0.8500000238418579
+      ],
+      "orthographicScaleM": 5.35,
+      "references": [
+        {
+          "heightM": 1.75,
+          "footY": 0,
+          "topY": 1.75,
+          "referenceOnly": true
+        },
+        {
+          "heightM": 1.81,
+          "footY": 0,
+          "topY": 1.81,
+          "referenceOnly": true
+        }
+      ],
+      "rulerLengthM": 1,
+      "lighting": {
+        "world": [
+          0.62,
+          0.68,
+          0.72,
+          1
+        ],
+        "strength": 0.72,
+        "sunEnergy": 0.2,
+        "sunColor": [
+          0.85,
+          0.92,
+          1
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-compact-single",
+      "lod": 0,
+      "view": "scale",
+      "condition": "dusk",
+      "file": "qa/previews/hvac-compact-single.lod0.scale.dusk.png",
+      "sha256": "b6b5f69d9834e50f25441682e344a389cc1ff9db79aa4ed5b30d7739b367eff1",
+      "inputGlb": "exports/hvac-compact-single.lod0.glb",
+      "inputSha256": "696673e0add593d237c41ff1809c4b6f29f0bdc8b1c41fc9b4596e1248fe26ac",
+      "seconds": 3.036,
+      "cameraLocationBlenderM": [
+        5.599999904632568,
+        -8.0,
+        5.650000095367432
+      ],
+      "cameraTargetBlenderM": [
+        0.6000000238418579,
+        0.0,
+        0.8500000238418579
+      ],
+      "orthographicScaleM": 5.35,
+      "references": [
+        {
+          "heightM": 1.75,
+          "footY": 0,
+          "topY": 1.75,
+          "referenceOnly": true
+        },
+        {
+          "heightM": 1.81,
+          "footY": 0,
+          "topY": 1.81,
+          "referenceOnly": true
+        }
+      ],
+      "rulerLengthM": 1,
+      "lighting": {
+        "world": [
+          0.16,
+          0.22,
+          0.36,
+          1
+        ],
+        "strength": 0.3,
+        "sunEnergy": 1.3,
+        "sunColor": [
+          1,
+          0.43,
+          0.16
+        ],
+        "sunRotation": [
+          1.31,
+          -0.25,
+          -0.9
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-compact-single",
+      "lod": 0,
+      "view": "scale",
+      "condition": "night",
+      "file": "qa/previews/hvac-compact-single.lod0.scale.night.png",
+      "sha256": "8eba83a77ff208b19b7519882b6ea0dcea72eed7ceb734423917f910c78c5d39",
+      "inputGlb": "exports/hvac-compact-single.lod0.glb",
+      "inputSha256": "696673e0add593d237c41ff1809c4b6f29f0bdc8b1c41fc9b4596e1248fe26ac",
+      "seconds": 2.906,
+      "cameraLocationBlenderM": [
+        5.599999904632568,
+        -8.0,
+        5.650000095367432
+      ],
+      "cameraTargetBlenderM": [
+        0.6000000238418579,
+        0.0,
+        0.8500000238418579
+      ],
+      "orthographicScaleM": 5.35,
+      "references": [
+        {
+          "heightM": 1.75,
+          "footY": 0,
+          "topY": 1.75,
+          "referenceOnly": true
+        },
+        {
+          "heightM": 1.81,
+          "footY": 0,
+          "topY": 1.81,
+          "referenceOnly": true
+        }
+      ],
+      "rulerLengthM": 1,
+      "lighting": {
+        "world": [
+          0.035,
+          0.06,
+          0.13,
+          1
+        ],
+        "strength": 0.18,
+        "sunEnergy": 0.14,
+        "sunColor": [
+          0.45,
+          0.62,
+          1
+        ],
+        "sunRotation": [
+          0.7,
+          0.25,
+          -0.3
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-compact-single",
+      "lod": 1,
+      "view": "front",
+      "condition": "clear",
+      "file": "qa/previews/hvac-compact-single.lod1.front.clear.png",
+      "sha256": "e08ac2efefea2bd4591b5d6729c409f713d467e2d443a0b90ad97ae3dce81d23",
+      "inputGlb": "exports/hvac-compact-single.lod1.glb",
+      "inputSha256": "57dc05e148844919da0f08f403b8ca838b97fb690daffbeb780a144df62c0b81",
+      "seconds": 3.105,
+      "cameraLocationBlenderM": [
+        0.0,
+        -7.0,
+        0.8500000238418579
+      ],
+      "cameraTargetBlenderM": [
+        0.0,
+        0.0,
+        0.550000011920929
+      ],
+      "orthographicScaleM": 2.596,
+      "references": [],
+      "rulerLengthM": null,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-compact-single",
+      "lod": 1,
+      "view": "side",
+      "condition": "clear",
+      "file": "qa/previews/hvac-compact-single.lod1.side.clear.png",
+      "sha256": "66a40cdaf38a7f6e625a9ecc21acb50fd98bef59e7568c4a35f074ba14adf878",
+      "inputGlb": "exports/hvac-compact-single.lod1.glb",
+      "inputSha256": "57dc05e148844919da0f08f403b8ca838b97fb690daffbeb780a144df62c0b81",
+      "seconds": 2.699,
+      "cameraLocationBlenderM": [
+        7.0,
+        0.0,
+        0.8500000238418579
+      ],
+      "cameraTargetBlenderM": [
+        0.0,
+        0.0,
+        0.550000011920929
+      ],
+      "orthographicScaleM": 2.4,
+      "references": [],
+      "rulerLengthM": null,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-compact-single",
+      "lod": 1,
+      "view": "back",
+      "condition": "clear",
+      "file": "qa/previews/hvac-compact-single.lod1.back.clear.png",
+      "sha256": "040e344a828e3d43a95936083fd8c530cc6931160e2e4d6550998b2815efff8c",
+      "inputGlb": "exports/hvac-compact-single.lod1.glb",
+      "inputSha256": "57dc05e148844919da0f08f403b8ca838b97fb690daffbeb780a144df62c0b81",
+      "seconds": 2.793,
+      "cameraLocationBlenderM": [
+        0.0,
+        7.0,
+        0.8500000238418579
+      ],
+      "cameraTargetBlenderM": [
+        0.0,
+        0.0,
+        0.550000011920929
+      ],
+      "orthographicScaleM": 2.596,
+      "references": [],
+      "rulerLengthM": null,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-compact-single",
+      "lod": 1,
+      "view": "top",
+      "condition": "clear",
+      "file": "qa/previews/hvac-compact-single.lod1.top.clear.png",
+      "sha256": "3d0bc1d1eae871213ae697398edde781996186fa4595f05f4fed5dc8c6d03790",
+      "inputGlb": "exports/hvac-compact-single.lod1.glb",
+      "inputSha256": "57dc05e148844919da0f08f403b8ca838b97fb690daffbeb780a144df62c0b81",
+      "seconds": 3.044,
+      "cameraLocationBlenderM": [
+        0.0,
+        0.0,
+        7.550000190734863
+      ],
+      "cameraTargetBlenderM": [
+        0.0,
+        0.0,
+        0.550000011920929
+      ],
+      "orthographicScaleM": 2.596,
+      "references": [],
+      "rulerLengthM": null,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-compact-single",
+      "lod": 1,
+      "view": "scale",
+      "condition": "clear",
+      "file": "qa/previews/hvac-compact-single.lod1.scale.clear.png",
+      "sha256": "85d8f0c95cc4cf7dc01c59b04d48a6bbefb6cb5a4cf22e3637f713c2325cef7e",
+      "inputGlb": "exports/hvac-compact-single.lod1.glb",
+      "inputSha256": "57dc05e148844919da0f08f403b8ca838b97fb690daffbeb780a144df62c0b81",
+      "seconds": 2.884,
+      "cameraLocationBlenderM": [
+        5.599999904632568,
+        -8.0,
+        5.650000095367432
+      ],
+      "cameraTargetBlenderM": [
+        0.6000000238418579,
+        0.0,
+        0.8500000238418579
+      ],
+      "orthographicScaleM": 5.35,
+      "references": [
+        {
+          "heightM": 1.75,
+          "footY": 0,
+          "topY": 1.75,
+          "referenceOnly": true
+        },
+        {
+          "heightM": 1.81,
+          "footY": 0,
+          "topY": 1.81,
+          "referenceOnly": true
+        }
+      ],
+      "rulerLengthM": 1,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-compact-single",
+      "lod": 1,
+      "view": "scale",
+      "condition": "overcast",
+      "file": "qa/previews/hvac-compact-single.lod1.scale.overcast.png",
+      "sha256": "35d785e06792559de1ce683d90778779203ad8029849ea0dfe83ce018e4e8fe5",
+      "inputGlb": "exports/hvac-compact-single.lod1.glb",
+      "inputSha256": "57dc05e148844919da0f08f403b8ca838b97fb690daffbeb780a144df62c0b81",
+      "seconds": 2.843,
+      "cameraLocationBlenderM": [
+        5.599999904632568,
+        -8.0,
+        5.650000095367432
+      ],
+      "cameraTargetBlenderM": [
+        0.6000000238418579,
+        0.0,
+        0.8500000238418579
+      ],
+      "orthographicScaleM": 5.35,
+      "references": [
+        {
+          "heightM": 1.75,
+          "footY": 0,
+          "topY": 1.75,
+          "referenceOnly": true
+        },
+        {
+          "heightM": 1.81,
+          "footY": 0,
+          "topY": 1.81,
+          "referenceOnly": true
+        }
+      ],
+      "rulerLengthM": 1,
+      "lighting": {
+        "world": [
+          0.62,
+          0.68,
+          0.72,
+          1
+        ],
+        "strength": 0.72,
+        "sunEnergy": 0.2,
+        "sunColor": [
+          0.85,
+          0.92,
+          1
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-compact-single",
+      "lod": 1,
+      "view": "scale",
+      "condition": "dusk",
+      "file": "qa/previews/hvac-compact-single.lod1.scale.dusk.png",
+      "sha256": "ab9d4e8d8d1c0950a41aad235c185ee19c84b4b5983f386df1bd41a174b355e3",
+      "inputGlb": "exports/hvac-compact-single.lod1.glb",
+      "inputSha256": "57dc05e148844919da0f08f403b8ca838b97fb690daffbeb780a144df62c0b81",
+      "seconds": 2.844,
+      "cameraLocationBlenderM": [
+        5.599999904632568,
+        -8.0,
+        5.650000095367432
+      ],
+      "cameraTargetBlenderM": [
+        0.6000000238418579,
+        0.0,
+        0.8500000238418579
+      ],
+      "orthographicScaleM": 5.35,
+      "references": [
+        {
+          "heightM": 1.75,
+          "footY": 0,
+          "topY": 1.75,
+          "referenceOnly": true
+        },
+        {
+          "heightM": 1.81,
+          "footY": 0,
+          "topY": 1.81,
+          "referenceOnly": true
+        }
+      ],
+      "rulerLengthM": 1,
+      "lighting": {
+        "world": [
+          0.16,
+          0.22,
+          0.36,
+          1
+        ],
+        "strength": 0.3,
+        "sunEnergy": 1.3,
+        "sunColor": [
+          1,
+          0.43,
+          0.16
+        ],
+        "sunRotation": [
+          1.31,
+          -0.25,
+          -0.9
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-compact-single",
+      "lod": 1,
+      "view": "scale",
+      "condition": "night",
+      "file": "qa/previews/hvac-compact-single.lod1.scale.night.png",
+      "sha256": "e8e8473d217961ed36f7020b19bffb79c9ec1bb4351a94506ce28cc20883dad8",
+      "inputGlb": "exports/hvac-compact-single.lod1.glb",
+      "inputSha256": "57dc05e148844919da0f08f403b8ca838b97fb690daffbeb780a144df62c0b81",
+      "seconds": 3.005,
+      "cameraLocationBlenderM": [
+        5.599999904632568,
+        -8.0,
+        5.650000095367432
+      ],
+      "cameraTargetBlenderM": [
+        0.6000000238418579,
+        0.0,
+        0.8500000238418579
+      ],
+      "orthographicScaleM": 5.35,
+      "references": [
+        {
+          "heightM": 1.75,
+          "footY": 0,
+          "topY": 1.75,
+          "referenceOnly": true
+        },
+        {
+          "heightM": 1.81,
+          "footY": 0,
+          "topY": 1.81,
+          "referenceOnly": true
+        }
+      ],
+      "rulerLengthM": 1,
+      "lighting": {
+        "world": [
+          0.035,
+          0.06,
+          0.13,
+          1
+        ],
+        "strength": 0.18,
+        "sunEnergy": 0.14,
+        "sunColor": [
+          0.45,
+          0.62,
+          1
+        ],
+        "sunRotation": [
+          0.7,
+          0.25,
+          -0.3
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-medium-twin",
+      "lod": 0,
+      "view": "front",
+      "condition": "clear",
+      "file": "qa/previews/hvac-medium-twin.lod0.front.clear.png",
+      "sha256": "7dc77a768310ada9a38d40b2c4144b5aec562aacb970f219e1ddc2da5b7108fb",
+      "inputGlb": "exports/hvac-medium-twin.lod0.glb",
+      "inputSha256": "9f421db8b33722dffa78afd2f4dbc899c3b50640f3eaeaeec2f9795d02e56b60",
+      "seconds": 3.151,
+      "cameraLocationBlenderM": [
+        0.0,
+        -7.0,
+        0.9750000238418579
+      ],
+      "cameraTargetBlenderM": [
+        0.0,
+        0.0,
+        0.675000011920929
+      ],
+      "orthographicScaleM": 3.1506,
+      "references": [],
+      "rulerLengthM": null,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-medium-twin",
+      "lod": 0,
+      "view": "side",
+      "condition": "clear",
+      "file": "qa/previews/hvac-medium-twin.lod0.side.clear.png",
+      "sha256": "16f29cc2a0f565db681416c38121a9b32301489e93218e244cd54634353f9a8c",
+      "inputGlb": "exports/hvac-medium-twin.lod0.glb",
+      "inputSha256": "9f421db8b33722dffa78afd2f4dbc899c3b50640f3eaeaeec2f9795d02e56b60",
+      "seconds": 2.689,
+      "cameraLocationBlenderM": [
+        7.0,
+        0.0,
+        0.9750000238418579
+      ],
+      "cameraTargetBlenderM": [
+        0.0,
+        0.0,
+        0.675000011920929
+      ],
+      "orthographicScaleM": 2.8800000000000003,
+      "references": [],
+      "rulerLengthM": null,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-medium-twin",
+      "lod": 0,
+      "view": "back",
+      "condition": "clear",
+      "file": "qa/previews/hvac-medium-twin.lod0.back.clear.png",
+      "sha256": "a337269a3ad84cfdeb2c041772c9b2d97343e6f8b1e8cd608228ff61c797fd10",
+      "inputGlb": "exports/hvac-medium-twin.lod0.glb",
+      "inputSha256": "9f421db8b33722dffa78afd2f4dbc899c3b50640f3eaeaeec2f9795d02e56b60",
+      "seconds": 2.615,
+      "cameraLocationBlenderM": [
+        0.0,
+        7.0,
+        0.9750000238418579
+      ],
+      "cameraTargetBlenderM": [
+        0.0,
+        0.0,
+        0.675000011920929
+      ],
+      "orthographicScaleM": 3.1506,
+      "references": [],
+      "rulerLengthM": null,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-medium-twin",
+      "lod": 0,
+      "view": "top",
+      "condition": "clear",
+      "file": "qa/previews/hvac-medium-twin.lod0.top.clear.png",
+      "sha256": "fbc166037a7a23b0ffd1f360c7df5f89dc5b2146898f0bc669a60da4874a8071",
+      "inputGlb": "exports/hvac-medium-twin.lod0.glb",
+      "inputSha256": "9f421db8b33722dffa78afd2f4dbc899c3b50640f3eaeaeec2f9795d02e56b60",
+      "seconds": 3.176,
+      "cameraLocationBlenderM": [
+        0.0,
+        0.0,
+        7.675000190734863
+      ],
+      "cameraTargetBlenderM": [
+        0.0,
+        0.0,
+        0.675000011920929
+      ],
+      "orthographicScaleM": 3.1506,
+      "references": [],
+      "rulerLengthM": null,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-medium-twin",
+      "lod": 0,
+      "view": "scale",
+      "condition": "clear",
+      "file": "qa/previews/hvac-medium-twin.lod0.scale.clear.png",
+      "sha256": "935c650acc72be737981a3f2a30adb90784e6d48ea1c956f93a3543a2cff162c",
+      "inputGlb": "exports/hvac-medium-twin.lod0.glb",
+      "inputSha256": "9f421db8b33722dffa78afd2f4dbc899c3b50640f3eaeaeec2f9795d02e56b60",
+      "seconds": 2.973,
+      "cameraLocationBlenderM": [
+        5.599999904632568,
+        -8.0,
+        5.650000095367432
+      ],
+      "cameraTargetBlenderM": [
+        0.6000000238418579,
+        0.0,
+        0.8500000238418579
+      ],
+      "orthographicScaleM": 5.417199999999999,
+      "references": [
+        {
+          "heightM": 1.75,
+          "footY": 0,
+          "topY": 1.75,
+          "referenceOnly": true
+        },
+        {
+          "heightM": 1.81,
+          "footY": 0,
+          "topY": 1.81,
+          "referenceOnly": true
+        }
+      ],
+      "rulerLengthM": 1,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-medium-twin",
+      "lod": 0,
+      "view": "scale",
+      "condition": "overcast",
+      "file": "qa/previews/hvac-medium-twin.lod0.scale.overcast.png",
+      "sha256": "3169d36226ca22a5b80f20dc8f637e0a1d7114ea55b17abd8791339fe2e4b63f",
+      "inputGlb": "exports/hvac-medium-twin.lod0.glb",
+      "inputSha256": "9f421db8b33722dffa78afd2f4dbc899c3b50640f3eaeaeec2f9795d02e56b60",
+      "seconds": 3.023,
+      "cameraLocationBlenderM": [
+        5.599999904632568,
+        -8.0,
+        5.650000095367432
+      ],
+      "cameraTargetBlenderM": [
+        0.6000000238418579,
+        0.0,
+        0.8500000238418579
+      ],
+      "orthographicScaleM": 5.417199999999999,
+      "references": [
+        {
+          "heightM": 1.75,
+          "footY": 0,
+          "topY": 1.75,
+          "referenceOnly": true
+        },
+        {
+          "heightM": 1.81,
+          "footY": 0,
+          "topY": 1.81,
+          "referenceOnly": true
+        }
+      ],
+      "rulerLengthM": 1,
+      "lighting": {
+        "world": [
+          0.62,
+          0.68,
+          0.72,
+          1
+        ],
+        "strength": 0.72,
+        "sunEnergy": 0.2,
+        "sunColor": [
+          0.85,
+          0.92,
+          1
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-medium-twin",
+      "lod": 0,
+      "view": "scale",
+      "condition": "dusk",
+      "file": "qa/previews/hvac-medium-twin.lod0.scale.dusk.png",
+      "sha256": "bda44206462bfca68ea65f70460de6522e11710895f770c086392d40f4d5bfbc",
+      "inputGlb": "exports/hvac-medium-twin.lod0.glb",
+      "inputSha256": "9f421db8b33722dffa78afd2f4dbc899c3b50640f3eaeaeec2f9795d02e56b60",
+      "seconds": 3.043,
+      "cameraLocationBlenderM": [
+        5.599999904632568,
+        -8.0,
+        5.650000095367432
+      ],
+      "cameraTargetBlenderM": [
+        0.6000000238418579,
+        0.0,
+        0.8500000238418579
+      ],
+      "orthographicScaleM": 5.417199999999999,
+      "references": [
+        {
+          "heightM": 1.75,
+          "footY": 0,
+          "topY": 1.75,
+          "referenceOnly": true
+        },
+        {
+          "heightM": 1.81,
+          "footY": 0,
+          "topY": 1.81,
+          "referenceOnly": true
+        }
+      ],
+      "rulerLengthM": 1,
+      "lighting": {
+        "world": [
+          0.16,
+          0.22,
+          0.36,
+          1
+        ],
+        "strength": 0.3,
+        "sunEnergy": 1.3,
+        "sunColor": [
+          1,
+          0.43,
+          0.16
+        ],
+        "sunRotation": [
+          1.31,
+          -0.25,
+          -0.9
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-medium-twin",
+      "lod": 0,
+      "view": "scale",
+      "condition": "night",
+      "file": "qa/previews/hvac-medium-twin.lod0.scale.night.png",
+      "sha256": "16b52ea542c86b25c1a8eddac813cff22e1274e5ee1a1ce30321692438edcfd4",
+      "inputGlb": "exports/hvac-medium-twin.lod0.glb",
+      "inputSha256": "9f421db8b33722dffa78afd2f4dbc899c3b50640f3eaeaeec2f9795d02e56b60",
+      "seconds": 3.083,
+      "cameraLocationBlenderM": [
+        5.599999904632568,
+        -8.0,
+        5.650000095367432
+      ],
+      "cameraTargetBlenderM": [
+        0.6000000238418579,
+        0.0,
+        0.8500000238418579
+      ],
+      "orthographicScaleM": 5.417199999999999,
+      "references": [
+        {
+          "heightM": 1.75,
+          "footY": 0,
+          "topY": 1.75,
+          "referenceOnly": true
+        },
+        {
+          "heightM": 1.81,
+          "footY": 0,
+          "topY": 1.81,
+          "referenceOnly": true
+        }
+      ],
+      "rulerLengthM": 1,
+      "lighting": {
+        "world": [
+          0.035,
+          0.06,
+          0.13,
+          1
+        ],
+        "strength": 0.18,
+        "sunEnergy": 0.14,
+        "sunColor": [
+          0.45,
+          0.62,
+          1
+        ],
+        "sunRotation": [
+          0.7,
+          0.25,
+          -0.3
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-medium-twin",
+      "lod": 1,
+      "view": "front",
+      "condition": "clear",
+      "file": "qa/previews/hvac-medium-twin.lod1.front.clear.png",
+      "sha256": "1d8f0798a73091d22c826986c01144181707f61f7d9d7db276323bda8c0b7b15",
+      "inputGlb": "exports/hvac-medium-twin.lod1.glb",
+      "inputSha256": "98869e938071237953d8c5fd0305cb2216f6b623d797fc81699ae44fca0c6aa9",
+      "seconds": 3.06,
+      "cameraLocationBlenderM": [
+        0.0,
+        -7.0,
+        0.9750000238418579
+      ],
+      "cameraTargetBlenderM": [
+        0.0,
+        0.0,
+        0.675000011920929
+      ],
+      "orthographicScaleM": 3.1506,
+      "references": [],
+      "rulerLengthM": null,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-medium-twin",
+      "lod": 1,
+      "view": "side",
+      "condition": "clear",
+      "file": "qa/previews/hvac-medium-twin.lod1.side.clear.png",
+      "sha256": "452835c344dd17c480681e61c6bfa668147968f6afb3ac2c91f11e183d36cd90",
+      "inputGlb": "exports/hvac-medium-twin.lod1.glb",
+      "inputSha256": "98869e938071237953d8c5fd0305cb2216f6b623d797fc81699ae44fca0c6aa9",
+      "seconds": 2.773,
+      "cameraLocationBlenderM": [
+        7.0,
+        0.0,
+        0.9750000238418579
+      ],
+      "cameraTargetBlenderM": [
+        0.0,
+        0.0,
+        0.675000011920929
+      ],
+      "orthographicScaleM": 2.8800000000000003,
+      "references": [],
+      "rulerLengthM": null,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-medium-twin",
+      "lod": 1,
+      "view": "back",
+      "condition": "clear",
+      "file": "qa/previews/hvac-medium-twin.lod1.back.clear.png",
+      "sha256": "4a72d2b62089e6a85ac523c65873246aace8a4fb3bc79103144a5d0cd219cf71",
+      "inputGlb": "exports/hvac-medium-twin.lod1.glb",
+      "inputSha256": "98869e938071237953d8c5fd0305cb2216f6b623d797fc81699ae44fca0c6aa9",
+      "seconds": 2.711,
+      "cameraLocationBlenderM": [
+        0.0,
+        7.0,
+        0.9750000238418579
+      ],
+      "cameraTargetBlenderM": [
+        0.0,
+        0.0,
+        0.675000011920929
+      ],
+      "orthographicScaleM": 3.1506,
+      "references": [],
+      "rulerLengthM": null,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-medium-twin",
+      "lod": 1,
+      "view": "top",
+      "condition": "clear",
+      "file": "qa/previews/hvac-medium-twin.lod1.top.clear.png",
+      "sha256": "ab7cbfc9352d26a0843a2d9c553252f05b430df009711f80a1c4db7df113eea5",
+      "inputGlb": "exports/hvac-medium-twin.lod1.glb",
+      "inputSha256": "98869e938071237953d8c5fd0305cb2216f6b623d797fc81699ae44fca0c6aa9",
+      "seconds": 3.11,
+      "cameraLocationBlenderM": [
+        0.0,
+        0.0,
+        7.675000190734863
+      ],
+      "cameraTargetBlenderM": [
+        0.0,
+        0.0,
+        0.675000011920929
+      ],
+      "orthographicScaleM": 3.1506,
+      "references": [],
+      "rulerLengthM": null,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-medium-twin",
+      "lod": 1,
+      "view": "scale",
+      "condition": "clear",
+      "file": "qa/previews/hvac-medium-twin.lod1.scale.clear.png",
+      "sha256": "a8dbcdd7dda0f4dd2e2712f3a9bf58393ca27783feec70f2bbb5081355c722d6",
+      "inputGlb": "exports/hvac-medium-twin.lod1.glb",
+      "inputSha256": "98869e938071237953d8c5fd0305cb2216f6b623d797fc81699ae44fca0c6aa9",
+      "seconds": 2.961,
+      "cameraLocationBlenderM": [
+        5.599999904632568,
+        -8.0,
+        5.650000095367432
+      ],
+      "cameraTargetBlenderM": [
+        0.6000000238418579,
+        0.0,
+        0.8500000238418579
+      ],
+      "orthographicScaleM": 5.417199999999999,
+      "references": [
+        {
+          "heightM": 1.75,
+          "footY": 0,
+          "topY": 1.75,
+          "referenceOnly": true
+        },
+        {
+          "heightM": 1.81,
+          "footY": 0,
+          "topY": 1.81,
+          "referenceOnly": true
+        }
+      ],
+      "rulerLengthM": 1,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-medium-twin",
+      "lod": 1,
+      "view": "scale",
+      "condition": "overcast",
+      "file": "qa/previews/hvac-medium-twin.lod1.scale.overcast.png",
+      "sha256": "094563f3130f9ef9704057e12cba214a7ee0bdd1c88e522883887583adf74782",
+      "inputGlb": "exports/hvac-medium-twin.lod1.glb",
+      "inputSha256": "98869e938071237953d8c5fd0305cb2216f6b623d797fc81699ae44fca0c6aa9",
+      "seconds": 2.994,
+      "cameraLocationBlenderM": [
+        5.599999904632568,
+        -8.0,
+        5.650000095367432
+      ],
+      "cameraTargetBlenderM": [
+        0.6000000238418579,
+        0.0,
+        0.8500000238418579
+      ],
+      "orthographicScaleM": 5.417199999999999,
+      "references": [
+        {
+          "heightM": 1.75,
+          "footY": 0,
+          "topY": 1.75,
+          "referenceOnly": true
+        },
+        {
+          "heightM": 1.81,
+          "footY": 0,
+          "topY": 1.81,
+          "referenceOnly": true
+        }
+      ],
+      "rulerLengthM": 1,
+      "lighting": {
+        "world": [
+          0.62,
+          0.68,
+          0.72,
+          1
+        ],
+        "strength": 0.72,
+        "sunEnergy": 0.2,
+        "sunColor": [
+          0.85,
+          0.92,
+          1
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-medium-twin",
+      "lod": 1,
+      "view": "scale",
+      "condition": "dusk",
+      "file": "qa/previews/hvac-medium-twin.lod1.scale.dusk.png",
+      "sha256": "c46e35a0af7ee4bd880a665cb406ec8f3152cd6b695d8eb6f77cda7df2ba6172",
+      "inputGlb": "exports/hvac-medium-twin.lod1.glb",
+      "inputSha256": "98869e938071237953d8c5fd0305cb2216f6b623d797fc81699ae44fca0c6aa9",
+      "seconds": 2.899,
+      "cameraLocationBlenderM": [
+        5.599999904632568,
+        -8.0,
+        5.650000095367432
+      ],
+      "cameraTargetBlenderM": [
+        0.6000000238418579,
+        0.0,
+        0.8500000238418579
+      ],
+      "orthographicScaleM": 5.417199999999999,
+      "references": [
+        {
+          "heightM": 1.75,
+          "footY": 0,
+          "topY": 1.75,
+          "referenceOnly": true
+        },
+        {
+          "heightM": 1.81,
+          "footY": 0,
+          "topY": 1.81,
+          "referenceOnly": true
+        }
+      ],
+      "rulerLengthM": 1,
+      "lighting": {
+        "world": [
+          0.16,
+          0.22,
+          0.36,
+          1
+        ],
+        "strength": 0.3,
+        "sunEnergy": 1.3,
+        "sunColor": [
+          1,
+          0.43,
+          0.16
+        ],
+        "sunRotation": [
+          1.31,
+          -0.25,
+          -0.9
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-medium-twin",
+      "lod": 1,
+      "view": "scale",
+      "condition": "night",
+      "file": "qa/previews/hvac-medium-twin.lod1.scale.night.png",
+      "sha256": "0be28b1386f010e09dbbd2050da1c4dcb0f8033a3e632abe408f9a5232c99d59",
+      "inputGlb": "exports/hvac-medium-twin.lod1.glb",
+      "inputSha256": "98869e938071237953d8c5fd0305cb2216f6b623d797fc81699ae44fca0c6aa9",
+      "seconds": 2.929,
+      "cameraLocationBlenderM": [
+        5.599999904632568,
+        -8.0,
+        5.650000095367432
+      ],
+      "cameraTargetBlenderM": [
+        0.6000000238418579,
+        0.0,
+        0.8500000238418579
+      ],
+      "orthographicScaleM": 5.417199999999999,
+      "references": [
+        {
+          "heightM": 1.75,
+          "footY": 0,
+          "topY": 1.75,
+          "referenceOnly": true
+        },
+        {
+          "heightM": 1.81,
+          "footY": 0,
+          "topY": 1.81,
+          "referenceOnly": true
+        }
+      ],
+      "rulerLengthM": 1,
+      "lighting": {
+        "world": [
+          0.035,
+          0.06,
+          0.13,
+          1
+        ],
+        "strength": 0.18,
+        "sunEnergy": 0.14,
+        "sunColor": [
+          0.45,
+          0.62,
+          1
+        ],
+        "sunRotation": [
+          0.7,
+          0.25,
+          -0.3
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-wide-twin",
+      "lod": 0,
+      "view": "front",
+      "condition": "clear",
+      "file": "qa/previews/hvac-wide-twin.lod0.front.clear.png",
+      "sha256": "2491362fdd8bddf39ec799792a23d86705f4b77046f9f5325aa73db42bf8cba8",
+      "inputGlb": "exports/hvac-wide-twin.lod0.glb",
+      "inputSha256": "fd044bd6994fb81c4cadb28c9a150f4c41b7d8ee05ef2949b531b7f0e42085da",
+      "seconds": 2.697,
+      "cameraLocationBlenderM": [
+        0.0,
+        -7.0,
+        1.0
+      ],
+      "cameraTargetBlenderM": [
+        0.0,
+        0.0,
+        0.699999988079071
+      ],
+      "orthographicScaleM": 4.259799999999999,
+      "references": [],
+      "rulerLengthM": null,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-wide-twin",
+      "lod": 0,
+      "view": "side",
+      "condition": "clear",
+      "file": "qa/previews/hvac-wide-twin.lod0.side.clear.png",
+      "sha256": "ac9489f77fc77c770fd19a9bfb19989a3c5e2238731ab9ea482c00c5eaa51143",
+      "inputGlb": "exports/hvac-wide-twin.lod0.glb",
+      "inputSha256": "fd044bd6994fb81c4cadb28c9a150f4c41b7d8ee05ef2949b531b7f0e42085da",
+      "seconds": 2.835,
+      "cameraLocationBlenderM": [
+        7.0,
+        0.0,
+        1.0
+      ],
+      "cameraTargetBlenderM": [
+        0.0,
+        0.0,
+        0.699999988079071
+      ],
+      "orthographicScaleM": 2.9866666666666664,
+      "references": [],
+      "rulerLengthM": null,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-wide-twin",
+      "lod": 0,
+      "view": "back",
+      "condition": "clear",
+      "file": "qa/previews/hvac-wide-twin.lod0.back.clear.png",
+      "sha256": "b4780b620069d52fb2bbce97b9efeb272d1efaf5a1a4892c17ad8a3b70a43276",
+      "inputGlb": "exports/hvac-wide-twin.lod0.glb",
+      "inputSha256": "fd044bd6994fb81c4cadb28c9a150f4c41b7d8ee05ef2949b531b7f0e42085da",
+      "seconds": 2.508,
+      "cameraLocationBlenderM": [
+        0.0,
+        7.0,
+        1.0
+      ],
+      "cameraTargetBlenderM": [
+        0.0,
+        0.0,
+        0.699999988079071
+      ],
+      "orthographicScaleM": 4.259799999999999,
+      "references": [],
+      "rulerLengthM": null,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-wide-twin",
+      "lod": 0,
+      "view": "top",
+      "condition": "clear",
+      "file": "qa/previews/hvac-wide-twin.lod0.top.clear.png",
+      "sha256": "58315aebcc59bc6e7aca2024496e0cfbf57617e0dd33ebd19a483398a2f07f88",
+      "inputGlb": "exports/hvac-wide-twin.lod0.glb",
+      "inputSha256": "fd044bd6994fb81c4cadb28c9a150f4c41b7d8ee05ef2949b531b7f0e42085da",
+      "seconds": 3.063,
+      "cameraLocationBlenderM": [
+        0.0,
+        0.0,
+        7.699999809265137
+      ],
+      "cameraTargetBlenderM": [
+        0.0,
+        0.0,
+        0.699999988079071
+      ],
+      "orthographicScaleM": 4.259799999999999,
+      "references": [],
+      "rulerLengthM": null,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-wide-twin",
+      "lod": 0,
+      "view": "scale",
+      "condition": "clear",
+      "file": "qa/previews/hvac-wide-twin.lod0.scale.clear.png",
+      "sha256": "c18fea9a156370b10cd331b6fa71d0486b9b091638e0c482e64f75c863bc29d9",
+      "inputGlb": "exports/hvac-wide-twin.lod0.glb",
+      "inputSha256": "fd044bd6994fb81c4cadb28c9a150f4c41b7d8ee05ef2949b531b7f0e42085da",
+      "seconds": 3.034,
+      "cameraLocationBlenderM": [
+        5.599999904632568,
+        -8.0,
+        5.650000095367432
+      ],
+      "cameraTargetBlenderM": [
+        0.6000000238418579,
+        0.0,
+        0.8500000238418579
+      ],
+      "orthographicScaleM": 6.507599999999999,
+      "references": [
+        {
+          "heightM": 1.75,
+          "footY": 0,
+          "topY": 1.75,
+          "referenceOnly": true
+        },
+        {
+          "heightM": 1.81,
+          "footY": 0,
+          "topY": 1.81,
+          "referenceOnly": true
+        }
+      ],
+      "rulerLengthM": 1,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-wide-twin",
+      "lod": 0,
+      "view": "scale",
+      "condition": "overcast",
+      "file": "qa/previews/hvac-wide-twin.lod0.scale.overcast.png",
+      "sha256": "112182f1aef29c00d0808e5a39081cebbc5db38a6060a890bf7d4e964b70a3ec",
+      "inputGlb": "exports/hvac-wide-twin.lod0.glb",
+      "inputSha256": "fd044bd6994fb81c4cadb28c9a150f4c41b7d8ee05ef2949b531b7f0e42085da",
+      "seconds": 2.935,
+      "cameraLocationBlenderM": [
+        5.599999904632568,
+        -8.0,
+        5.650000095367432
+      ],
+      "cameraTargetBlenderM": [
+        0.6000000238418579,
+        0.0,
+        0.8500000238418579
+      ],
+      "orthographicScaleM": 6.507599999999999,
+      "references": [
+        {
+          "heightM": 1.75,
+          "footY": 0,
+          "topY": 1.75,
+          "referenceOnly": true
+        },
+        {
+          "heightM": 1.81,
+          "footY": 0,
+          "topY": 1.81,
+          "referenceOnly": true
+        }
+      ],
+      "rulerLengthM": 1,
+      "lighting": {
+        "world": [
+          0.62,
+          0.68,
+          0.72,
+          1
+        ],
+        "strength": 0.72,
+        "sunEnergy": 0.2,
+        "sunColor": [
+          0.85,
+          0.92,
+          1
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-wide-twin",
+      "lod": 0,
+      "view": "scale",
+      "condition": "dusk",
+      "file": "qa/previews/hvac-wide-twin.lod0.scale.dusk.png",
+      "sha256": "f1ba6bbf25b6c17f76cbd516a38f01c2cac1ab84c5e1ec72d83ecf7a450a9768",
+      "inputGlb": "exports/hvac-wide-twin.lod0.glb",
+      "inputSha256": "fd044bd6994fb81c4cadb28c9a150f4c41b7d8ee05ef2949b531b7f0e42085da",
+      "seconds": 2.977,
+      "cameraLocationBlenderM": [
+        5.599999904632568,
+        -8.0,
+        5.650000095367432
+      ],
+      "cameraTargetBlenderM": [
+        0.6000000238418579,
+        0.0,
+        0.8500000238418579
+      ],
+      "orthographicScaleM": 6.507599999999999,
+      "references": [
+        {
+          "heightM": 1.75,
+          "footY": 0,
+          "topY": 1.75,
+          "referenceOnly": true
+        },
+        {
+          "heightM": 1.81,
+          "footY": 0,
+          "topY": 1.81,
+          "referenceOnly": true
+        }
+      ],
+      "rulerLengthM": 1,
+      "lighting": {
+        "world": [
+          0.16,
+          0.22,
+          0.36,
+          1
+        ],
+        "strength": 0.3,
+        "sunEnergy": 1.3,
+        "sunColor": [
+          1,
+          0.43,
+          0.16
+        ],
+        "sunRotation": [
+          1.31,
+          -0.25,
+          -0.9
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-wide-twin",
+      "lod": 0,
+      "view": "scale",
+      "condition": "night",
+      "file": "qa/previews/hvac-wide-twin.lod0.scale.night.png",
+      "sha256": "6cff681c5846794021053086315f0d86a02614ed5730f44c259be51ac2815509",
+      "inputGlb": "exports/hvac-wide-twin.lod0.glb",
+      "inputSha256": "fd044bd6994fb81c4cadb28c9a150f4c41b7d8ee05ef2949b531b7f0e42085da",
+      "seconds": 2.971,
+      "cameraLocationBlenderM": [
+        5.599999904632568,
+        -8.0,
+        5.650000095367432
+      ],
+      "cameraTargetBlenderM": [
+        0.6000000238418579,
+        0.0,
+        0.8500000238418579
+      ],
+      "orthographicScaleM": 6.507599999999999,
+      "references": [
+        {
+          "heightM": 1.75,
+          "footY": 0,
+          "topY": 1.75,
+          "referenceOnly": true
+        },
+        {
+          "heightM": 1.81,
+          "footY": 0,
+          "topY": 1.81,
+          "referenceOnly": true
+        }
+      ],
+      "rulerLengthM": 1,
+      "lighting": {
+        "world": [
+          0.035,
+          0.06,
+          0.13,
+          1
+        ],
+        "strength": 0.18,
+        "sunEnergy": 0.14,
+        "sunColor": [
+          0.45,
+          0.62,
+          1
+        ],
+        "sunRotation": [
+          0.7,
+          0.25,
+          -0.3
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-wide-twin",
+      "lod": 1,
+      "view": "front",
+      "condition": "clear",
+      "file": "qa/previews/hvac-wide-twin.lod1.front.clear.png",
+      "sha256": "3fd6348417acfdd5170b4bf165ca8e7c3f000dec8083cdf227e0f7aa23002a56",
+      "inputGlb": "exports/hvac-wide-twin.lod1.glb",
+      "inputSha256": "95dff8624674ff8bdb3f59549de2471ff87e85e1910ca6c759bb5b3dde0a3c25",
+      "seconds": 2.721,
+      "cameraLocationBlenderM": [
+        0.0,
+        -7.0,
+        1.0
+      ],
+      "cameraTargetBlenderM": [
+        0.0,
+        0.0,
+        0.699999988079071
+      ],
+      "orthographicScaleM": 4.259799999999999,
+      "references": [],
+      "rulerLengthM": null,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-wide-twin",
+      "lod": 1,
+      "view": "side",
+      "condition": "clear",
+      "file": "qa/previews/hvac-wide-twin.lod1.side.clear.png",
+      "sha256": "57dda1fb14a6450db9281c6e644d5a66dce78016808291f7449cd3fb1ff41a06",
+      "inputGlb": "exports/hvac-wide-twin.lod1.glb",
+      "inputSha256": "95dff8624674ff8bdb3f59549de2471ff87e85e1910ca6c759bb5b3dde0a3c25",
+      "seconds": 2.885,
+      "cameraLocationBlenderM": [
+        7.0,
+        0.0,
+        1.0
+      ],
+      "cameraTargetBlenderM": [
+        0.0,
+        0.0,
+        0.699999988079071
+      ],
+      "orthographicScaleM": 2.9866666666666664,
+      "references": [],
+      "rulerLengthM": null,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-wide-twin",
+      "lod": 1,
+      "view": "back",
+      "condition": "clear",
+      "file": "qa/previews/hvac-wide-twin.lod1.back.clear.png",
+      "sha256": "f098f5efe37e4f3f401307f4989919eda719c6ff88c1614ba8ba3cc29fb4c4c5",
+      "inputGlb": "exports/hvac-wide-twin.lod1.glb",
+      "inputSha256": "95dff8624674ff8bdb3f59549de2471ff87e85e1910ca6c759bb5b3dde0a3c25",
+      "seconds": 2.363,
+      "cameraLocationBlenderM": [
+        0.0,
+        7.0,
+        1.0
+      ],
+      "cameraTargetBlenderM": [
+        0.0,
+        0.0,
+        0.699999988079071
+      ],
+      "orthographicScaleM": 4.259799999999999,
+      "references": [],
+      "rulerLengthM": null,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-wide-twin",
+      "lod": 1,
+      "view": "top",
+      "condition": "clear",
+      "file": "qa/previews/hvac-wide-twin.lod1.top.clear.png",
+      "sha256": "f42f1dd7f0ba1b603cf7ea2b411963733cb6d6bfca521984b5353077c6394e3c",
+      "inputGlb": "exports/hvac-wide-twin.lod1.glb",
+      "inputSha256": "95dff8624674ff8bdb3f59549de2471ff87e85e1910ca6c759bb5b3dde0a3c25",
+      "seconds": 2.912,
+      "cameraLocationBlenderM": [
+        0.0,
+        0.0,
+        7.699999809265137
+      ],
+      "cameraTargetBlenderM": [
+        0.0,
+        0.0,
+        0.699999988079071
+      ],
+      "orthographicScaleM": 4.259799999999999,
+      "references": [],
+      "rulerLengthM": null,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-wide-twin",
+      "lod": 1,
+      "view": "scale",
+      "condition": "clear",
+      "file": "qa/previews/hvac-wide-twin.lod1.scale.clear.png",
+      "sha256": "28ba2569277e34dc34509a56dff94543d2f4c483f4e5addeffe0e0ecea2e21e7",
+      "inputGlb": "exports/hvac-wide-twin.lod1.glb",
+      "inputSha256": "95dff8624674ff8bdb3f59549de2471ff87e85e1910ca6c759bb5b3dde0a3c25",
+      "seconds": 2.815,
+      "cameraLocationBlenderM": [
+        5.599999904632568,
+        -8.0,
+        5.650000095367432
+      ],
+      "cameraTargetBlenderM": [
+        0.6000000238418579,
+        0.0,
+        0.8500000238418579
+      ],
+      "orthographicScaleM": 6.507599999999999,
+      "references": [
+        {
+          "heightM": 1.75,
+          "footY": 0,
+          "topY": 1.75,
+          "referenceOnly": true
+        },
+        {
+          "heightM": 1.81,
+          "footY": 0,
+          "topY": 1.81,
+          "referenceOnly": true
+        }
+      ],
+      "rulerLengthM": 1,
+      "lighting": {
+        "world": [
+          0.42,
+          0.49,
+          0.58,
+          1
+        ],
+        "strength": 0.65,
+        "sunEnergy": 2.1,
+        "sunColor": [
+          1,
+          0.95,
+          0.85
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-wide-twin",
+      "lod": 1,
+      "view": "scale",
+      "condition": "overcast",
+      "file": "qa/previews/hvac-wide-twin.lod1.scale.overcast.png",
+      "sha256": "5c8364ea1a88002685acaf9c1d4a3a91f1f1ddd11ebb7fdddc59df2303e44c11",
+      "inputGlb": "exports/hvac-wide-twin.lod1.glb",
+      "inputSha256": "95dff8624674ff8bdb3f59549de2471ff87e85e1910ca6c759bb5b3dde0a3c25",
+      "seconds": 2.917,
+      "cameraLocationBlenderM": [
+        5.599999904632568,
+        -8.0,
+        5.650000095367432
+      ],
+      "cameraTargetBlenderM": [
+        0.6000000238418579,
+        0.0,
+        0.8500000238418579
+      ],
+      "orthographicScaleM": 6.507599999999999,
+      "references": [
+        {
+          "heightM": 1.75,
+          "footY": 0,
+          "topY": 1.75,
+          "referenceOnly": true
+        },
+        {
+          "heightM": 1.81,
+          "footY": 0,
+          "topY": 1.81,
+          "referenceOnly": true
+        }
+      ],
+      "rulerLengthM": 1,
+      "lighting": {
+        "world": [
+          0.62,
+          0.68,
+          0.72,
+          1
+        ],
+        "strength": 0.72,
+        "sunEnergy": 0.2,
+        "sunColor": [
+          0.85,
+          0.92,
+          1
+        ],
+        "sunRotation": [
+          0.48,
+          -0.55,
+          -0.6
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-wide-twin",
+      "lod": 1,
+      "view": "scale",
+      "condition": "dusk",
+      "file": "qa/previews/hvac-wide-twin.lod1.scale.dusk.png",
+      "sha256": "bcad0a1e5a4e7391327a18063dc7bbd3a9b21f2cf00d8b37915fd9d1ec4f54b2",
+      "inputGlb": "exports/hvac-wide-twin.lod1.glb",
+      "inputSha256": "95dff8624674ff8bdb3f59549de2471ff87e85e1910ca6c759bb5b3dde0a3c25",
+      "seconds": 2.973,
+      "cameraLocationBlenderM": [
+        5.599999904632568,
+        -8.0,
+        5.650000095367432
+      ],
+      "cameraTargetBlenderM": [
+        0.6000000238418579,
+        0.0,
+        0.8500000238418579
+      ],
+      "orthographicScaleM": 6.507599999999999,
+      "references": [
+        {
+          "heightM": 1.75,
+          "footY": 0,
+          "topY": 1.75,
+          "referenceOnly": true
+        },
+        {
+          "heightM": 1.81,
+          "footY": 0,
+          "topY": 1.81,
+          "referenceOnly": true
+        }
+      ],
+      "rulerLengthM": 1,
+      "lighting": {
+        "world": [
+          0.16,
+          0.22,
+          0.36,
+          1
+        ],
+        "strength": 0.3,
+        "sunEnergy": 1.3,
+        "sunColor": [
+          1,
+          0.43,
+          0.16
+        ],
+        "sunRotation": [
+          1.31,
+          -0.25,
+          -0.9
+        ]
+      }
+    },
+    {
+      "assetId": "hvac-wide-twin",
+      "lod": 1,
+      "view": "scale",
+      "condition": "night",
+      "file": "qa/previews/hvac-wide-twin.lod1.scale.night.png",
+      "sha256": "22819c8f79ecc62c845359018db29bfb52c071d9296ca54c619963f5e397356a",
+      "inputGlb": "exports/hvac-wide-twin.lod1.glb",
+      "inputSha256": "95dff8624674ff8bdb3f59549de2471ff87e85e1910ca6c759bb5b3dde0a3c25",
+      "seconds": 2.899,
+      "cameraLocationBlenderM": [
+        5.599999904632568,
+        -8.0,
+        5.650000095367432
+      ],
+      "cameraTargetBlenderM": [
+        0.6000000238418579,
+        0.0,
+        0.8500000238418579
+      ],
+      "orthographicScaleM": 6.507599999999999,
+      "references": [
+        {
+          "heightM": 1.75,
+          "footY": 0,
+          "topY": 1.75,
+          "referenceOnly": true
+        },
+        {
+          "heightM": 1.81,
+          "footY": 0,
+          "topY": 1.81,
+          "referenceOnly": true
+        }
+      ],
+      "rulerLengthM": 1,
+      "lighting": {
+        "world": [
+          0.035,
+          0.06,
+          0.13,
+          1
+        ],
+        "strength": 0.18,
+        "sunEnergy": 0.14,
+        "sunColor": [
+          0.45,
+          0.62,
+          1
+        ],
+        "sunRotation": [
+          0.7,
+          0.25,
+          -0.3
+        ]
+      }
+    }
+  ],
+  "contactSheets": [
+    {
+      "file": "qa/previews/lod-views.png",
+      "sha256": "34c564d1a9bbe7557e9ec45a79de20a6ba1d3a7b9c2b44a58e364c38e4b7d73e",
+      "kind": "labelled contact sheet of unmodified render inputs"
+    },
+    {
+      "file": "qa/previews/four-light-scale.png",
+      "sha256": "43d09dfed69b9706c39d1eedb298de2b1a089808d49f7e340584b3459b8f8b98",
+      "kind": "labelled contact sheet of unmodified render inputs"
+    }
+  ],
+  "visualReview": "qa/visual-review.json"
+}

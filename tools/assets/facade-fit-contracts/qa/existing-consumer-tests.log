@@ -1,0 +1,35 @@
+✔ Phase C offline kit has every planned detail role and independently editable LODs (10.823651ms)
+✔ Phase C GLB audit and negative corruption tests pass without claiming Blender inspection (98.778308ms)
+✔ all16 expansion exports retain audited byte hashes, source hashes, single materials and exact644/320 triangle costs (8.893902ms)
+✔ modern-sills: actual full-city capped source selection and LOD geometry stay inside replaced volumes (260.543772ms)
+ℹ {"variant":"modern-sills","selected":24,"sourceCounts":{"145639":24},"triangleDelta":960}
+✔ modern-sills: incompatible profile, unmatched source edge and incompatible renderer retain baseline (127.804457ms)
+✔ modern-sills: malformed GLB bounds reject replacement, dispose imports and retain existing fallback (86.094146ms)
+✔ cedar-sills: actual full-city capped source selection and LOD geometry stay inside replaced volumes (98.243514ms)
+ℹ {"variant":"cedar-sills","selected":8,"sourceCounts":{"145677":3,"145755":5},"triangleDelta":224}
+✔ cedar-sills: incompatible profile, unmatched source edge and incompatible renderer retain baseline (44.613396ms)
+✔ cedar-sills: malformed GLB bounds reject replacement, dispose imports and retain existing fallback (71.40819ms)
+✔ candidate uses actual Blender exports with bounded physical scale and source hashes (7.054378ms)
+✔ source planner selects all56 existing upper sills on two exact Robson edges, independent of source order (111.124993ms)
+✔ candidate keeps instance/cell caps and confines every actual GLB vertex to the old sill volume (239.138574ms)
+✔ LOD transitions, quality changes and distance fallback preserve population and bound batch memory (179.353333ms)
+✔ disable restores original instance and triangle counts without disposing shared atlas textures (99.303389ms)
+✔ shared material binds the existing atlas and metre instance dimensions, without private texture maps (82.831338ms)
+✔ one failed LOD retains complete original fallback and releases successfully loaded templates (75.680097ms)
+✔ late GLBs after disposal release each owned geometry/material/texture/image once and never attach (35.161917ms)
+✔ malformed loaded geometry is rejected and its owned originals are still released (1.189983ms)
+✔ compatible graphics never loads candidate GLBs or replaces existing sills (59.580342ms)
+✔ normal production guard cannot install even an explicitly supplied candidate adapter (52.938896ms)
+✔ full-city capped planner actually emits every selected sill before index1800 without reordering or raising limits (59.214291ms)
+✔ a coincident box belonging to another source part cannot receive a candidate replacement (62.019625ms)
+✔ LOD hysteresis resists threshold jitter and only the affected source cell is invalidated (93.772183ms)
+✔ re-enabling after a pending load isolates old results from the new active candidate (71.535408ms)
+✔ actual frontage fixture switches only eligible ground detail, keeps upper frames and restores fallback (37.169881ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2099.753421

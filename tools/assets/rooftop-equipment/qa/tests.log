@@ -1,0 +1,27 @@
+test_changed_source_bytes (test_validate.RooftopContractTests.test_changed_source_bytes) ... ok
+test_degenerate_triangle (test_validate.RooftopContractTests.test_degenerate_triangle) ... ok
+test_double_sided (test_validate.RooftopContractTests.test_double_sided) ... ok
+test_missing_common_field (test_validate.RooftopContractTests.test_missing_common_field) ... ok
+test_negative_scale (test_validate.RooftopContractTests.test_negative_scale) ... ok
+test_no_tangent (test_validate.RooftopContractTests.test_no_tangent) ... ok
+test_no_uv (test_validate.RooftopContractTests.test_no_uv) ... ok
+test_nonfinite_vertex (test_validate.RooftopContractTests.test_nonfinite_vertex) ... ok
+test_out_of_bounds_index (test_validate.RooftopContractTests.test_out_of_bounds_index) ... ok
+test_positive (test_validate.RooftopContractTests.test_positive) ... ok
+test_qa_node (test_validate.RooftopContractTests.test_qa_node) ... ok
+test_runtime_claim_rejected (test_validate.RooftopContractTests.test_runtime_claim_rejected) ... ok
+test_transform_applied (test_validate.RooftopContractTests.test_transform_applied) ... ok
+test_truncated_glb (test_validate.RooftopContractTests.test_truncated_glb) ... ok
+test_wrong_bounds (test_validate.RooftopContractTests.test_wrong_bounds) ... ok
+test_wrong_clearance (test_validate.RooftopContractTests.test_wrong_clearance) ... ok
+test_wrong_datum (test_validate.RooftopContractTests.test_wrong_datum) ... ok
+test_wrong_footprint (test_validate.RooftopContractTests.test_wrong_footprint) ... ok
+test_wrong_glb_hash (test_validate.RooftopContractTests.test_wrong_glb_hash) ... ok
+test_wrong_material_role (test_validate.RooftopContractTests.test_wrong_material_role) ... ok
+test_wrong_size (test_validate.RooftopContractTests.test_wrong_size) ... ok
+test_wrong_source_hash (test_validate.RooftopContractTests.test_wrong_source_hash) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 0.339s
+
+OK

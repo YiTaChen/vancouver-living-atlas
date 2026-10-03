@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "schema": "vancouver-city-scale-source-audit/1",
+  "packageId": "city-scale-audit",
+  "version": "1.0.0",
+  "baseRevision": "5574d55719f10d1575127d8b92cbd23ff71e446f",
+  "status": "partial",
+  "units": "metres",
+  "coordinateSystem": "EPSG:4326 source; scene +X east, +Y up, +Z south; origin [-123.128,49.286]",
+  "provenance": {
+    "project": "Vancouver Living Atlas by YiTaChen",
+    "source": "https://github.com/YiTaChen/vancouver-living-atlas",
+    "license": "Vancouver Living Atlas Noncommercial Research and Attribution 1.0",
+    "dataAttribution": "City of Vancouver Open Government Licence; OpenStreetMap contributors ODbL-1.0, separately retained in source data",
+    "sourceRules": "source-rules.json",
+    "actualInputHashes": "qa/source-hashes.json"
+  },
+  "reexportCommand": "node tools/assets/city-scale-audit/audit.mjs --write",
+  "validationCommand": "node tools/assets/city-scale-audit/audit.mjs --check && node --test tools/assets/city-scale-audit/audit.test.mjs",
+  "assets": [],
+  "textures": [],
+  "deliverableKind": "source-rules-and-cpu-evidence; not a GLB asset bundle",
+  "noAssetReason": "A01 requires source rules, A02 reuses measured research coupons, A03 is CPU research, and no source-backed close-structure deficit justified A04 new geometry.",
+  "taskIds": ["A01", "A02", "A03", "A04"],
+  "runtimeAdoption": false,
+  "geometryBytesAddedToRuntime": 0,
+  "textureBytesAddedToRuntime": 0,
+  "offlineChecks": {
+    "cpu": "pass",
+    "newBlenderRenderMatrix": "not_run",
+    "A02": "partial"
+  },
+  "runtimeChecks": {
+    "status": "not_run",
+    "reason": "No WebGL, new runtime consumer, scene quality or performance evidence in this package"
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "status": "pass",
+  "lods": 18,
+  "assemblyCosts": [
+    {
+      "assemblyId": "waterfront-portico",
+      "lods": [
+        {
+          "level": 0,
+          "triangles": 7380,
+          "primitives": 13,
+          "geometryBytes": 867252,
+          "bytes": 867252,
+          "drawInterpretation": "instance-counted primitives before batching; not measured renderer draw calls"
+        },
+        {
+          "level": 1,
+          "triangles": 1800,
+          "primitives": 13,
+          "geometryBytes": 187684,
+          "bytes": 187684,
+          "drawInterpretation": "instance-counted primitives before batching; not measured renderer draw calls"
+        },
+        {
+          "level": 2,
+          "triangles": 264,
+          "primitives": 13,
+          "geometryBytes": 45100,
+          "bytes": 45100,
+          "drawInterpretation": "instance-counted primitives before batching; not measured renderer draw calls"
+        }
+      ]
+    },
+    {
+      "assemblyId": "waterfront-upper-window-patch",
+      "lods": [
+        {
+          "level": 0,
+          "triangles": 64,
+          "primitives": 1,
+          "geometryBytes": 6660,
+          "bytes": 6660,
+          "drawInterpretation": "instance-counted primitives before batching; not measured renderer draw calls"
+        },
+        {
+          "level": 1,
+          "triangles": 64,
+          "primitives": 1,
+          "geometryBytes": 6660,
+          "bytes": 6660,
+          "drawInterpretation": "instance-counted primitives before batching; not measured renderer draw calls"
+        },
+        {
+          "level": 2,
+          "triangles": 32,
+          "primitives": 1,
+          "geometryBytes": 4136,
+          "bytes": 4136,
+          "drawInterpretation": "instance-counted primitives before batching; not measured renderer draw calls"
+        }
+      ]
+    },
+    {
+      "assemblyId": "marine-entry-decoration",
+      "lods": [
+        {
+          "level": 0,
+          "triangles": 1916,
+          "primitives": 2,
+          "geometryBytes": 169484,
+          "bytes": 169484,
+          "drawInterpretation": "instance-counted primitives before batching; not measured renderer draw calls"
+        },
+        {
+          "level": 1,
+          "triangles": 868,
+          "primitives": 2,
+          "geometryBytes": 80684,
+          "bytes": 80684,
+          "drawInterpretation": "instance-counted primitives before batching; not measured renderer draw calls"
+        },
+        {
+          "level": 2,
+          "triangles": 348,
+          "primitives": 2,
+          "geometryBytes": 34132,
+          "bytes": 34132,
+          "drawInterpretation": "instance-counted primitives before batching; not measured renderer draw calls"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,327 @@
+{
+  "status": "pass",
+  "packageId": "roof-surface-studies",
+  "assetStatus": "offline_complete",
+  "integrationStatus": "runtime_pending_webgl",
+  "scope": "B02 offline only",
+  "common": {
+    "status": "pass",
+    "scope": "common packaging, source hashes, rest-pose transformed GLB geometry and costs only; package-specific Blender, semantic and runtime checks required",
+    "results": [
+      {
+        "assetId": "roof-mineral-grain-coupon-2m",
+        "lod": 0,
+        "boundsM": {
+          "min": [
+            -1.0,
+            0.0,
+            -1.0
+          ],
+          "max": [
+            1.0,
+            0.0,
+            1.0
+          ],
+          "size": [
+            2.0,
+            0.0,
+            2.0
+          ]
+        },
+        "triangles": 2,
+        "vertices": 4,
+        "primitives": 1,
+        "bytes": 202740,
+        "embeddedImageBytes": 200335,
+        "geometryBytes": 2405,
+        "images": [
+          {
+            "sha256": "4184dfa45d8bb506f11e1a591407342994965b54405addb62d2b2f7133bedb26",
+            "width": 256,
+            "height": 256,
+            "bytes": 133237,
+            "texelBytesWithMips": 349525.3333333333
+          },
+          {
+            "sha256": "726b7f196228fb839912cbe1931bb2cf85b9c876ffc8a89c07ae46fdd279e0be",
+            "width": 256,
+            "height": 256,
+            "bytes": 34075,
+            "texelBytesWithMips": 349525.3333333333
+          },
+          {
+            "sha256": "232bdea457187c564ef92f38591c025dd37c11ede3bc533d5974d0a11a2e88e8",
+            "width": 256,
+            "height": 256,
+            "bytes": 33023,
+            "texelBytesWithMips": 349525.3333333333
+          }
+        ],
+        "nodeNames": [
+          "roof-mineral-grain-coupon-2m-inspection"
+        ],
+        "materialNames": [
+          "roof-mineral-grain-baked-inspection"
+        ],
+        "boundsScope": "rest-pose scene node transforms; no skin deformation",
+        "skins": 0
+      },
+      {
+        "assetId": "roof-mineral-grain-coupon-10m",
+        "lod": 0,
+        "boundsM": {
+          "min": [
+            -5.0,
+            0.0,
+            -5.0
+          ],
+          "max": [
+            5.0,
+            0.0,
+            5.0
+          ],
+          "size": [
+            10.0,
+            0.0,
+            10.0
+          ]
+        },
+        "triangles": 2,
+        "vertices": 4,
+        "primitives": 1,
+        "bytes": 202740,
+        "embeddedImageBytes": 200335,
+        "geometryBytes": 2405,
+        "images": [
+          {
+            "sha256": "4184dfa45d8bb506f11e1a591407342994965b54405addb62d2b2f7133bedb26",
+            "width": 256,
+            "height": 256,
+            "bytes": 133237,
+            "texelBytesWithMips": 349525.3333333333
+          },
+          {
+            "sha256": "726b7f196228fb839912cbe1931bb2cf85b9c876ffc8a89c07ae46fdd279e0be",
+            "width": 256,
+            "height": 256,
+            "bytes": 34075,
+            "texelBytesWithMips": 349525.3333333333
+          },
+          {
+            "sha256": "232bdea457187c564ef92f38591c025dd37c11ede3bc533d5974d0a11a2e88e8",
+            "width": 256,
+            "height": 256,
+            "bytes": 33023,
+            "texelBytesWithMips": 349525.3333333333
+          }
+        ],
+        "nodeNames": [
+          "roof-mineral-grain-coupon-10m-inspection"
+        ],
+        "materialNames": [
+          "roof-mineral-grain-baked-inspection"
+        ],
+        "boundsScope": "rest-pose scene node transforms; no skin deformation",
+        "skins": 0
+      },
+      {
+        "assetId": "roof-membrane-seams-coupon-2m",
+        "lod": 0,
+        "boundsM": {
+          "min": [
+            -1.0,
+            0.0,
+            -1.0
+          ],
+          "max": [
+            1.0,
+            0.0,
+            1.0
+          ],
+          "size": [
+            2.0,
+            0.0,
+            2.0
+          ]
+        },
+        "triangles": 2,
+        "vertices": 4,
+        "primitives": 1,
+        "bytes": 43296,
+        "embeddedImageBytes": 40888,
+        "geometryBytes": 2408,
+        "images": [
+          {
+            "sha256": "9893c52af0d3b43ed71ff695f4b4a6135d7a40faa0df104f546008001a2bba46",
+            "width": 256,
+            "height": 256,
+            "bytes": 27834,
+            "texelBytesWithMips": 349525.3333333333
+          },
+          {
+            "sha256": "9c9fcb794e5d0c4738430556dbc5dab201ba30fc980ce10f5854b05194b5df86",
+            "width": 256,
+            "height": 256,
+            "bytes": 12453,
+            "texelBytesWithMips": 349525.3333333333
+          },
+          {
+            "sha256": "6879c85b02523bce0c8bedb1e55e51938d005cbf479d1f0d71f22f58493447c2",
+            "width": 256,
+            "height": 256,
+            "bytes": 601,
+            "texelBytesWithMips": 349525.3333333333
+          }
+        ],
+        "nodeNames": [
+          "roof-membrane-seams-coupon-2m-inspection"
+        ],
+        "materialNames": [
+          "roof-membrane-seams-baked-inspection"
+        ],
+        "boundsScope": "rest-pose scene node transforms; no skin deformation",
+        "skins": 0
+      },
+      {
+        "assetId": "roof-membrane-seams-coupon-10m",
+        "lod": 0,
+        "boundsM": {
+          "min": [
+            -5.0,
+            0.0,
+            -5.0
+          ],
+          "max": [
+            5.0,
+            0.0,
+            5.0
+          ],
+          "size": [
+            10.0,
+            0.0,
+            10.0
+          ]
+        },
+        "triangles": 2,
+        "vertices": 4,
+        "primitives": 1,
+        "bytes": 43300,
+        "embeddedImageBytes": 40888,
+        "geometryBytes": 2412,
+        "images": [
+          {
+            "sha256": "9893c52af0d3b43ed71ff695f4b4a6135d7a40faa0df104f546008001a2bba46",
+            "width": 256,
+            "height": 256,
+            "bytes": 27834,
+            "texelBytesWithMips": 349525.3333333333
+          },
+          {
+            "sha256": "9c9fcb794e5d0c4738430556dbc5dab201ba30fc980ce10f5854b05194b5df86",
+            "width": 256,
+            "height": 256,
+            "bytes": 12453,
+            "texelBytesWithMips": 349525.3333333333
+          },
+          {
+            "sha256": "6879c85b02523bce0c8bedb1e55e51938d005cbf479d1f0d71f22f58493447c2",
+            "width": 256,
+            "height": 256,
+            "bytes": 601,
+            "texelBytesWithMips": 349525.3333333333
+          }
+        ],
+        "nodeNames": [
+          "roof-membrane-seams-coupon-10m-inspection"
+        ],
+        "materialNames": [
+          "roof-membrane-seams-baked-inspection"
+        ],
+        "boundsScope": "rest-pose scene node transforms; no skin deformation",
+        "skins": 0
+      }
+    ]
+  },
+  "packageSpecific": {
+    "status": "pass",
+    "maps": [
+      {
+        "map": "roof-mineral-grain-color.png",
+        "meanRGB": [
+          148.25906372070312,
+          153.2995147705078,
+          143.22010803222656
+        ],
+        "wrapMeanDelta8bit": 0.9869791666666666,
+        "adjacentMeanDelta8bit": 0.9764144199346405,
+        "status": "pass"
+      },
+      {
+        "map": "roof-mineral-grain-normal.png",
+        "meanRGB": [
+          127.54380798339844,
+          127.49809265136719,
+          253.66461181640625
+        ],
+        "wrapMeanDelta8bit": 9.58203125,
+        "adjacentMeanDelta8bit": 9.602568423202614,
+        "status": "pass"
+      },
+      {
+        "map": "roof-mineral-grain-orm.png",
+        "meanRGB": [
+          255.0,
+          226.91726684570312,
+          0.0
+        ],
+        "wrapMeanDelta8bit": 0.5774739583333334,
+        "adjacentMeanDelta8bit": 0.5537709354575163,
+        "status": "pass"
+      },
+      {
+        "map": "roof-membrane-seams-color.png",
+        "meanRGB": [
+          185.00001525878906,
+          191.99996948242188,
+          187.00001525878906
+        ],
+        "wrapMeanDelta8bit": 0.0,
+        "adjacentMeanDelta8bit": 6.127450980392157e-05,
+        "status": "pass"
+      },
+      {
+        "map": "roof-membrane-seams-normal.png",
+        "meanRGB": [
+          127.50039672851562,
+          127.50419616699219,
+          254.99935913085938
+        ],
+        "wrapMeanDelta8bit": 4.102213541666667,
+        "adjacentMeanDelta8bit": 0.42685100081699345,
+        "status": "pass"
+      },
+      {
+        "map": "roof-membrane-seams-orm.png",
+        "meanRGB": [
+          255.0,
+          209.09194946289062,
+          0.0
+        ],
+        "wrapMeanDelta8bit": 0.125,
+        "adjacentMeanDelta8bit": 0.12215073529411764,
+        "status": "pass"
+      }
+    ],
+    "sourceEdits": "pass",
+    "actualReimports": 4,
+    "actualCpuPreviews": 10,
+    "sourcePreserved": true,
+    "webgl": "not_run",
+    "environment": {
+      "blender": "4.3.2",
+      "renderer": "Cycles CPU",
+      "threads": 2
+    }
+  },
+  "uniqueTextureBytesWithMips": 2097152.0
+}

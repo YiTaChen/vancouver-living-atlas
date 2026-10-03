@@ -1,0 +1,382 @@
+{
+  "schemaVersion": 1,
+  "packageId": "street-furniture-expansion",
+  "files": [
+    {
+      "file": ".gitignore",
+      "bytes": 43,
+      "sha256": "706f39ae7515f6af2604d2fb01fc480515ffa7cadba1631ce32593f6eb7e39a9"
+    },
+    {
+      "file": "README.zh-TW.md",
+      "bytes": 8915,
+      "sha256": "6b6db4b4dcc6103bbed38c4cffdf437957bc6edebbb569a0b497f2283dbb7e68"
+    },
+    {
+      "file": "audit.py",
+      "bytes": 13430,
+      "sha256": "b86c180f7ebef0d0c5a9bdd08c65d713a75e2a7338e617d62ebf6769e91e2be5"
+    },
+    {
+      "file": "build.log",
+      "bytes": 12918,
+      "sha256": "363fbabc4db87a81998d2e6173834b125a0e906d8f2798a2865c350603a5e67b"
+    },
+    {
+      "file": "build.py",
+      "bytes": 11134,
+      "sha256": "5595b6456b614dee862bb6a8ca872aa0c364edb9f2ad66925713f035c6f038e8"
+    },
+    {
+      "file": "compose_previews.py",
+      "bytes": 2467,
+      "sha256": "a100d6e8cbbe4664f09f7fce331b345facdebad29a7c722a4794a07c1935c512"
+    },
+    {
+      "file": "export.py",
+      "bytes": 12103,
+      "sha256": "dd64d047423f80b75f61aaac0110bf64f161b801f89711ff9633a9c0295629cd"
+    },
+    {
+      "file": "exports/arterial-lamp-8m.lod0.glb",
+      "bytes": 29144,
+      "sha256": "2b80e20de1fa435e107d91467728317565ced114f9ef228dfeb297edaf5672a7"
+    },
+    {
+      "file": "exports/arterial-lamp-8m.lod1.glb",
+      "bytes": 13576,
+      "sha256": "97c1b741d54f65e3da6c4ce6e8b761b83e31ec54d56e85122959d9581091996b"
+    },
+    {
+      "file": "exports/bicycle-rack.lod0.glb",
+      "bytes": 23864,
+      "sha256": "0b67e0cff1ff41599e0c5d79d17a084969995be156051b87b525c4f90df9f71a"
+    },
+    {
+      "file": "exports/bicycle-rack.lod1.glb",
+      "bytes": 10516,
+      "sha256": "c34b0f4dffbd22fec0ffc874edb54870e8cd2dc388d9a5316df0f4b1e65e68d8"
+    },
+    {
+      "file": "exports/bollard.lod0.glb",
+      "bytes": 17676,
+      "sha256": "3d1eca13b4e656d37cc16fe49d8c1ae5aff4f9c4266e3c7119d864f232dbf3f8"
+    },
+    {
+      "file": "exports/bollard.lod1.glb",
+      "bytes": 12724,
+      "sha256": "f763e6f92d01beb50d7fd4734d3db39256bde6f5c34d7d7c9dabffc8fe74ae69"
+    },
+    {
+      "file": "exports/cedar-bench.lod0.glb",
+      "bytes": 74304,
+      "sha256": "a60d4179fe27780919a53e581b93a4c9be02be9806c0de6ff5b95b676dffa248"
+    },
+    {
+      "file": "exports/cedar-bench.lod1.glb",
+      "bytes": 22512,
+      "sha256": "52e6ad93074c5d0d9384ffe7d7c6745b0d201c08ba836dfdb6bc04fd2cb6bfb1"
+    },
+    {
+      "file": "exports/fire-hydrant.lod0.glb",
+      "bytes": 35484,
+      "sha256": "7707dd6eee3472bc2c96b46052be75b71b6b974f4d8099ac5ed50dfab7ac811d"
+    },
+    {
+      "file": "exports/fire-hydrant.lod1.glb",
+      "bytes": 21516,
+      "sha256": "db9f89295e73768e6288389e4cfc70740c626ca1466a9cfba3a6d27ada9bfbef"
+    },
+    {
+      "file": "exports/garbage-bin.lod0.glb",
+      "bytes": 60184,
+      "sha256": "17ba1925f7bd79ab7d8a4f5da1956dd4e65e9b775e4bf379c2f8ac7ad358dedb"
+    },
+    {
+      "file": "exports/garbage-bin.lod1.glb",
+      "bytes": 11500,
+      "sha256": "1974f04cff170307e4239da84a53e91f797ec9fa37146782abf1e529446d8896"
+    },
+    {
+      "file": "exports/heritage-lamp.lod0.glb",
+      "bytes": 129672,
+      "sha256": "5ed3170132b884f7e3dc4f996981ff44cf128e4de03063c07939b93d074ecb42"
+    },
+    {
+      "file": "exports/heritage-lamp.lod1.glb",
+      "bytes": 26336,
+      "sha256": "9877a18d4a82dc3c6ec776d5184dc310f357276fa36acdbeb343008ed5f1e92e"
+    },
+    {
+      "file": "exports/transit-shelter.lod0.glb",
+      "bytes": 228404,
+      "sha256": "6647785c496a016ee153feba97993705a10373854d20938f136a5abb43d8123c"
+    },
+    {
+      "file": "exports/transit-shelter.lod1.glb",
+      "bytes": 63844,
+      "sha256": "a43328e71a7fa7380c335d4daa73e8562d1de7f33e1698e37ce2289ea676dd02"
+    },
+    {
+      "file": "manifest.json",
+      "bytes": 63816,
+      "sha256": "a047b465f83a6d2604485895a1dfb66ec4d50c192838afed0d92fc2c82cdcacb"
+    },
+    {
+      "file": "placement-proposal.json",
+      "bytes": 2981,
+      "sha256": "77b6b7342f20844a84c532e2f1a9891cb1df4ba034eb8201d9e9e78e7d80c73d"
+    },
+    {
+      "file": "placement.py",
+      "bytes": 3091,
+      "sha256": "c0294edfcbd46a42ff80dc1d5090c7e21630321b01072507346b6ecf1bbb0a38"
+    },
+    {
+      "file": "qa/artist-edit.json",
+      "bytes": 716,
+      "sha256": "ce713be51d02e31da089d1c94932e1769ac22d89f15ddc9195a40f1b9c8a58bc"
+    },
+    {
+      "file": "qa/audit.log",
+      "bytes": 768547,
+      "sha256": "18ea9f4943fa82f3c3306bb527b74a7d6b0120a9b1cae530d07bf8e209062c70"
+    },
+    {
+      "file": "qa/blender-audit.json",
+      "bytes": 9244,
+      "sha256": "7f6c827dc1a7cc55c6102f33359eb7120dab1f8aebb2826afb07a16cfe17e18d"
+    },
+    {
+      "file": "qa/collision-proxies.json",
+      "bytes": 58310,
+      "sha256": "e3437bb0a663751232a4d9483a0f5925181f508d06dbb30f95b96f16ccde6600"
+    },
+    {
+      "file": "qa/common-validation.json",
+      "bytes": 13351,
+      "sha256": "62af36cfd7ebc06e39db2e31654d0655a009cdfb2235759680bfdf9ad8a36a6d"
+    },
+    {
+      "file": "qa/handoff.json",
+      "bytes": 4214,
+      "sha256": "5837c47f5162d0480ff98fb2bbc84cf7a34760f84a817cf2556025272eb6ce81"
+    },
+    {
+      "file": "qa/measurements.json",
+      "bytes": 9793,
+      "sha256": "c60596d81c7cecc01eab133d09ee34c9a88e96168ea233d2728a9c6516f0df3a"
+    },
+    {
+      "file": "qa/placement-tests.log",
+      "bytes": 1204,
+      "sha256": "2b21a0cfcc74fbb68cf5564623b440e085c112058ae192a027e7bd98388c9dcb"
+    },
+    {
+      "file": "qa/preview-index.json",
+      "bytes": 26829,
+      "sha256": "89d0b6f5fd2743f43477cd041e36c81ab170d82519481ac32e3bf026510a8040"
+    },
+    {
+      "file": "qa/previews/arterial-lamp-8m.four-light.png",
+      "bytes": 191051,
+      "sha256": "042a58ffa89eda66a3921946a9314b2f1ce4b84d798b0bf5aeffe8dd1832a2bb"
+    },
+    {
+      "file": "qa/previews/arterial-lamp-8m.lod-views.png",
+      "bytes": 326572,
+      "sha256": "67e6a05c0cbfb907ddd33977cb9126d0186a9b3290464ca903b6dff942c3686c"
+    },
+    {
+      "file": "qa/previews/bicycle-rack.four-light.png",
+      "bytes": 218061,
+      "sha256": "8aa3f587015d0fb0b066a8658e4a5da98db000c85577faf10fb8fd67228726fe"
+    },
+    {
+      "file": "qa/previews/bicycle-rack.lod-views.png",
+      "bytes": 392220,
+      "sha256": "d10b2fada5308d42a90583c24ab11ca041f81801dfe1f0a35b99597f0aa95207"
+    },
+    {
+      "file": "qa/previews/bollard.four-light.png",
+      "bytes": 237627,
+      "sha256": "e21bea9e2e5544e42391febc8eae958ed66ec41cb9725d69e2f7de0ac2f58172"
+    },
+    {
+      "file": "qa/previews/bollard.lod-views.png",
+      "bytes": 421910,
+      "sha256": "965b652a6f068f471132334f56197da953ec6adf36c236baca9734ffd1b08d5b"
+    },
+    {
+      "file": "qa/previews/cedar-bench.four-light.png",
+      "bytes": 216273,
+      "sha256": "f1c172efdcfc32fef380ada63a4bcb9562457ecb0fa46593bc1ec8a6e1314b1e"
+    },
+    {
+      "file": "qa/previews/cedar-bench.lod-views.png",
+      "bytes": 393406,
+      "sha256": "201b7b3c54c21fe06fc69b0fc642e58c1d35dfc86e70543ec36a94eac19c7a6c"
+    },
+    {
+      "file": "qa/previews/fire-hydrant.four-light.png",
+      "bytes": 231222,
+      "sha256": "de9969698048ff34a63a457faf1ef6c11ab95c2c92081773caca5a12c766a5ca"
+    },
+    {
+      "file": "qa/previews/fire-hydrant.lod-views.png",
+      "bytes": 414556,
+      "sha256": "cccd8ff51e8b621cb2cedb685f34a6500e1ac2508a2d15dd9ae48cf1ea85500f"
+    },
+    {
+      "file": "qa/previews/garbage-bin.four-light.png",
+      "bytes": 235395,
+      "sha256": "acae24a9dca3565ec7dde660194ad33510c29555dd10aa96fc8588dd4e4e1624"
+    },
+    {
+      "file": "qa/previews/garbage-bin.lod-views.png",
+      "bytes": 419690,
+      "sha256": "baabaa0739fc8b77ab31d30c0483a801f977e44981b1c8f256dea69cca2b844b"
+    },
+    {
+      "file": "qa/previews/heritage-lamp.four-light.png",
+      "bytes": 227423,
+      "sha256": "6bf396ef634318908aafc0aac5c6290a26b22937d3336c7cc5895a3e23d49e33"
+    },
+    {
+      "file": "qa/previews/heritage-lamp.lod-views.png",
+      "bytes": 392792,
+      "sha256": "67b1c35199a68a88e58ff356639fe36cf79e4c83346bbc9216eb083900e94ab0"
+    },
+    {
+      "file": "qa/previews/transit-shelter.four-light.png",
+      "bytes": 263094,
+      "sha256": "a4fd0d85a6f1f1b2d04c55f3c430753a07b125b76f09d27c923a890fd3071f2b"
+    },
+    {
+      "file": "qa/previews/transit-shelter.lod-views.png",
+      "bytes": 482379,
+      "sha256": "1b4bd43a7fc90748517a18c35dbb18c2133e2007be7cea7b2d653ededa5f9aa2"
+    },
+    {
+      "file": "qa/source-overwrite-guard.json",
+      "bytes": 363,
+      "sha256": "3fe2a9fc750eba451f9f3007d55c48742be6ff4daa6a67b752ddc193096aa3b0"
+    },
+    {
+      "file": "qa/source-roundtrip.json",
+      "bytes": 5217,
+      "sha256": "17c54bd883782bf1806613732ffb62ebffaf607a18c68d8d6c8d82f07eb5d98b"
+    },
+    {
+      "file": "qa/validation.json",
+      "bytes": 1067,
+      "sha256": "74236e4976cba2a0d3a2d74b6975e152453b4283f96198eaf2ceb9ee57fc77d8"
+    },
+    {
+      "file": "qa/validator-tests.log",
+      "bytes": 1077,
+      "sha256": "58490c04d0e75aff7465ba3fb2f95d34abdd2c5894d08a586f1e9c5d9555601d"
+    },
+    {
+      "file": "qa/visual-review.json",
+      "bytes": 3794,
+      "sha256": "694189baa30e952c6e6a6d7bed566d2e575e6ffb592f0779c1e34aff193ce2c9"
+    },
+    {
+      "file": "source/arterial-lamp-8m.lod0.blend",
+      "bytes": 91249,
+      "sha256": "62e0128dfe83affd7ce2237d6f7c4fc500634a8c450d3d192713775609bab0c3"
+    },
+    {
+      "file": "source/arterial-lamp-8m.lod1.blend",
+      "bytes": 90120,
+      "sha256": "7e40853ff651dcbe0566f2a76afc4498e10d6cefe0c09afba362d9ea2047dedf"
+    },
+    {
+      "file": "source/bicycle-rack.lod0.blend",
+      "bytes": 89713,
+      "sha256": "77b3dfdf6ea38378ed248cc081b12f75e7706a574fa22df488e9b7deb20f990a"
+    },
+    {
+      "file": "source/bicycle-rack.lod1.blend",
+      "bytes": 88467,
+      "sha256": "f470294628e5a11a71938992fe9a4e6b7168b4edea536db3a3e8bf38066db931"
+    },
+    {
+      "file": "source/bollard.lod0.blend",
+      "bytes": 89416,
+      "sha256": "6741699ffd67b8405853ee2b68fda398529cc61eefb70e6d9451602b8c6e281e"
+    },
+    {
+      "file": "source/bollard.lod1.blend",
+      "bytes": 88714,
+      "sha256": "1bcd8a1907ebc91a3675f29acb9ac40a698461cc4c32df3a75c7e56884e7f984"
+    },
+    {
+      "file": "source/cedar-bench.lod0.blend",
+      "bytes": 96454,
+      "sha256": "4b58593e851aab7812f112616b5b60a7b9c0bc14df3f79532b0e22cd2e67ea3f"
+    },
+    {
+      "file": "source/cedar-bench.lod1.blend",
+      "bytes": 92552,
+      "sha256": "8a465c1790c0cd7b07ff85802296731ccd1c707a0572e95e212ac7c2c04b13c0"
+    },
+    {
+      "file": "source/fire-hydrant.lod0.blend",
+      "bytes": 92068,
+      "sha256": "be74d05f7d48050640655d1081372b2d2ff896f23242144c7e09f07da4e86825"
+    },
+    {
+      "file": "source/fire-hydrant.lod1.blend",
+      "bytes": 90455,
+      "sha256": "6e6c9142339efe47ec100e8ec6e8c7e450fb7fff97492de8b01f189cffa1e23d"
+    },
+    {
+      "file": "source/garbage-bin.lod0.blend",
+      "bytes": 90502,
+      "sha256": "7a77083d074a9e296ef3f86693643bf222d95f7db27194cac3811f803aacb778"
+    },
+    {
+      "file": "source/garbage-bin.lod1.blend",
+      "bytes": 88637,
+      "sha256": "123e5c627636be6eb853e5a639ce6fade03f6ccda79bbf3d73e21b4b1c692005"
+    },
+    {
+      "file": "source/heritage-lamp.lod0.blend",
+      "bytes": 106124,
+      "sha256": "5e30b97aec0784c97f00c0e328d7bfcf5da4f9516ad0f26aab131fb992caf3c6"
+    },
+    {
+      "file": "source/heritage-lamp.lod1.blend",
+      "bytes": 93532,
+      "sha256": "a7b7a26693ddaa269eaf8b66547fd949319dd93e4bc80cb11d32c852be57531c"
+    },
+    {
+      "file": "source/transit-shelter.lod0.blend",
+      "bytes": 120542,
+      "sha256": "c78d1cd15d9d04076eff2488bb51d09307d7c901a37b30c43a249634812f87fc"
+    },
+    {
+      "file": "source/transit-shelter.lod1.blend",
+      "bytes": 104632,
+      "sha256": "02d6f6e27c7429c6346cee11a3a16d89a6d0e1dbc9332d056a3636f89025a6b4"
+    },
+    {
+      "file": "test_placement.py",
+      "bytes": 2840,
+      "sha256": "9d33a7808e5eafeab02ef1177ff86f83e1568e9fb360ca19e9ca24b71c6b7325"
+    },
+    {
+      "file": "test_validate.py",
+      "bytes": 2055,
+      "sha256": "6ad8402d834505c90f370e2a876abffff4c4b58c4eba8bd40b8649d0aab57890"
+    },
+    {
+      "file": "validate.py",
+      "bytes": 6414,
+      "sha256": "cbfda4bbad8465ec5fe97c89049ff1c448563007f3d9884210c7d1dada922cb5"
+    }
+  ],
+  "note": "Inventory excludes itself, Python cache, Blender backup files and ephemeral individual QA renders."
+}

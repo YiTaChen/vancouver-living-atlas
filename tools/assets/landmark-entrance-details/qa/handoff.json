@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "packageId": "landmark-entrance-details",
+  "baseRevision": "8b95f013297597845d542463d6ce635105a95c4f",
+  "taskIds": [
+    "B04"
+  ],
+  "assetStatus": "offline_complete",
+  "integrationStatus": "runtime_pending_webgl",
+  "webglAvailable": false,
+  "manifest": "../manifest.json",
+  "assemblyPlan": "../assembly-plan.json",
+  "sourceEditsPreserved": true,
+  "offlineEvidence": [
+    "validation.json",
+    "common-validation.json",
+    "measurements.json",
+    "blender-audit.json",
+    "source-edit-test.json",
+    "preview-index.json",
+    "visual-review.json",
+    "verification.json",
+    "source-fingerprints.json"
+  ],
+  "runtimeChecks": {
+    "status": "not_run",
+    "reason": "No city WebGL acceptance; offline Cycles CPU is not browser evidence"
+  },
+  "intendedConsumers": [
+    "lib/city/interiors.ts",
+    "lib/city/assets/marine-entry.ts"
+  ],
+  "replaces": [
+    "Waterfront six .6-radius x 8 m columns and 1.6 x .35 x 1.6 m capitals",
+    "Marine original terracotta decoration batch",
+    "Marine upper transom grille only"
+  ],
+  "additive": [
+    "Waterfront existing 28 x 3.5 m pediment front moulding",
+    "one existing upper 3 x 5 m window surround pilot"
+  ],
+  "retains": [
+    "building shells, source geometry and original placements",
+    "existing collision and closed Marine solidFootprints",
+    "Waterfront entrance opening and doors",
+    "Marine glass, door frames, revolving drum, lobby and night-light roles"
+  ],
+  "materialReuse": [
+    "shared sandstone",
+    "texture-free shared marine-terracotta",
+    "texture-free shared marine-copper"
+  ],
+  "knownLimitations": [
+    "Original architectural interpretation, not a surveyed restoration or copied artwork",
+    "LOD0/1 window is intentionally identical 64-triangle detail",
+    "LOD2 deliberately simplifies column fluting, capital profile, archivolt layers and fan bars; sample-test switching distances",
+    "No new door action, interior or Marine navigability",
+    "All 13 upper windows are eligible source positions but only one-window pilot is budgeted here; expansion requires runtime residency review",
+    "Preview assembly omits retained shells, pediment infill and entablature; these must remain in integration",
+    "CPU ray sampling verifies exported openings but is not a gameplay collision certification",
+    "Source build logged harmless Blender read-only extension-cache warnings; artifact saves and hashes passed",
+    "Denoising disabled because this Blender build lacks OpenImageDenoise; previews use 16 CPU samples"
+  ],
+  "nextIntegrationSteps": [
+    "Use assembly-plan source-local transforms at scale 1; apply Marine thresholdY-.16 once",
+    "Suppress exactly replaced procedural pieces, preserve shells/glazing/night/collision",
+    "Bind semantic shared materials and preserve UVs rather than using current UV-stripping Parts.add blindly",
+    "Load candidate only in controlled source-selected QA; establish LOD/cache/fallback/disposal",
+    "Run same-camera WebGL clear/overcast/dusk/night, entry clearances and walking/driving checks",
+    "Run final repository checks/build and new-package production isolation before any rollout"
+  ],
+  "commitStatus": "not committed by asset worker",
+  "publicRuntimeModified": false
+}

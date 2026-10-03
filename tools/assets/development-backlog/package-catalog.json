@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "packages": [
+    {
+      "id": "architecture-details",
+      "roots": [
+        "tools/assets/architecture-details"
+      ],
+      "manifests": [
+        {
+          "path": "tools/assets/architecture-details/manifest.json",
+          "itemsPointer": "/assets"
+        }
+      ],
+      "currentState": "offline_candidates_with_qa_adapter",
+      "note": "Eight families, separate Robson fitted candidate retained; no new schema migration.",
+      "historicalEvidence": [
+        "tools/assets/architecture-details/validation.json",
+        "tools/assets/architecture-details/reexport-validation.json",
+        "tools/assets/architecture-details/runtime-candidate/manifest.json"
+      ]
+    },
+    {
+      "id": "architecture-expansion",
+      "roots": [
+        "tools/assets/architecture-expansion"
+      ],
+      "manifests": [
+        {
+          "path": "tools/assets/architecture-expansion/manifest.json",
+          "itemsPointer": "/assets"
+        }
+      ],
+      "currentState": "offline_candidates_two_qa_families",
+      "note": "Eight families; modern and cedar sills have source-selected QA only.",
+      "historicalEvidence": [
+        "tools/assets/architecture-expansion/validation.json",
+        "tools/assets/architecture-expansion/reexport-validation.json",
+        "docs/OFFLINE_ASSET_INTEGRATION_2026_10.md"
+      ]
+    },
+    {
+      "id": "city-materials",
+      "roots": [
+        "tools/assets/city-materials",
+        "public/materials/city"
+      ],
+      "manifests": [
+        {
+          "path": "public/materials/city/manifest.json",
+          "itemsPointer": "/materials"
+        }
+      ],
+      "currentState": "production_default",
+      "note": "Eight surface roles and three runtime atlas maps; source textures are distinct from runtime atlas.",
+      "historicalEvidence": [
+        "docs/MATERIAL_PIPELINE.md"
+      ]
+    },
+    {
+      "id": "streetscape",
+      "roots": [
+        "tools/assets/streetscape",
+        "public/models/streetscape"
+      ],
+      "manifests": [
+        {
+          "path": "public/models/streetscape/manifest.json",
+          "itemsPointer": "/assets"
+        }
+      ],
+      "currentState": "two_shipping_bay_families",
+      "note": "Furniture builders exist but no shipping furniture asset records; four independent editable bay sources.",
+      "historicalEvidence": [
+        "docs/MATERIAL_PIPELINE.md",
+        "tests/streetscape-kit.test.mjs"
+      ]
+    },
+    {
+      "id": "vegetation-ground",
+      "roots": [
+        "tools/assets/vegetation_ground",
+        "tools/assets/vegetation-runtime-candidate"
+      ],
+      "manifests": [
+        {
+          "path": "tools/assets/vegetation_ground/manifest.json",
+          "itemsPointer": "/assets"
+        }
+      ],
+      "currentState": "offline_studies_leaf_qa_only",
+      "note": "Twelve sprig studies and three ground coupons; not mature tree templates.",
+      "historicalEvidence": [
+        "tools/assets/vegetation_ground/validation.json",
+        "tools/assets/vegetation_ground/source-roundtrip.json",
+        "tools/assets/vegetation-runtime-candidate/manifest.json"
+      ]
+    },
+    {
+      "id": "role-materials",
+      "roots": [
+        "tools/assets/role-materials"
+      ],
+      "manifests": [
+        {
+          "path": "tools/assets/role-materials/exports/manifest.json",
+          "itemsPointer": "/roles"
+        }
+      ],
+      "currentState": "offline_material_studies",
+      "note": "Eight roles, 24 maps and three study GLBs; no complete vehicle/landmark/interior packages.",
+      "historicalEvidence": [
+        "tools/assets/role-materials/qa/validation.json",
+        "tools/assets/role-materials/qa/source-edit-test.json"
+      ]
+    },
+    {
+      "id": "citizen",
+      "roots": [
+        "tools/assets/citizen",
+        "public/models/citizen"
+      ],
+      "manifests": [
+        {
+          "path": "tools/assets/citizen/optimization/manifest.json",
+          "itemsPointer": "/assets"
+        }
+      ],
+      "currentState": "lod0_shipping_lod1_lod2_offline",
+      "note": "Historical source path/runtimeIntegrated flag are not current adoption truth; current public GLB is compared by hash.",
+      "historicalEvidence": [
+        "tools/assets/citizen/optimization/qa/glb-audit.json",
+        "tools/assets/citizen/optimization/qa/rig-comparison.json",
+        "docs/OFFLINE_ASSET_INTEGRATION_2026_10.md"
+      ]
+    },
+    {
+      "id": "residential-perennial",
+      "roots": [
+        "tools/assets/residential-perennial"
+      ],
+      "manifests": [],
+      "currentState": "offline_candidate_qa_only",
+      "note": "Seven-triangle Blender-derived candidate retained separately from procedural runtime default.",
+      "historicalEvidence": [
+        "tools/assets/residential-perennial/source/validation.json",
+        "tools/assets/residential-perennial/qa-parity.json"
+      ]
+    },
+    {
+      "id": "offline-handoff",
+      "roots": [
+        "tools/assets/offline-handoff"
+      ],
+      "manifests": [],
+      "currentState": "historical_integrity_index",
+      "note": "273-file prior delivery inventory, not 273 independent models; original evidence remains unchanged.",
+      "historicalEvidence": [
+        "tools/assets/offline-handoff/validation.json"
+      ]
+    }
+  ]
+}

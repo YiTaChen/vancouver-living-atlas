@@ -1,0 +1,358 @@
+{
+  "status": "pass",
+  "renders": [
+    {
+      "file": "qa/previews/coupons-2m-clear.png",
+      "sha256": "9e85ee81e9fb2cd92f2c757ef3c35dafc9f65ae950eed8a71575dbfce264de6f",
+      "condition": "clear",
+      "couponSizeM": 2,
+      "physicalRepeatM": [
+        2,
+        2
+      ],
+      "imports": [
+        {
+          "file": "exports/roof-mineral-grain-2m.inspection.glb",
+          "sha256": "468242c4df4a55fd426cdf7529c915aef80ec054fb6bcb73bd0e06b939aa2783"
+        },
+        {
+          "file": "exports/roof-membrane-seams-2m.inspection.glb",
+          "sha256": "27510bc3eca07603ec0b46f291bd61984ae5aa789d6c8130287a31bdd2fab378"
+        }
+      ],
+      "samples": 12,
+      "resolution": [
+        960,
+        640
+      ],
+      "renderer": "Cycles CPU",
+      "threads": 2,
+      "camera": [
+        1.5,
+        -2.9000000953674316,
+        5.0
+      ],
+      "orthoScaleM": 8.100000381469727,
+      "sunEnergy": 2.4,
+      "worldStrength": 0.55,
+      "exposure": 0,
+      "qaReferences": {
+        "rulerLengthM": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline study lighting, not the city renderer or calibrated Vancouver illuminance."
+    },
+    {
+      "file": "qa/previews/coupons-2m-overcast.png",
+      "sha256": "fb2297c0573143e85cda186499c5bdaaa53ed390c481c5dd58909c1cbd90b60a",
+      "condition": "overcast",
+      "couponSizeM": 2,
+      "physicalRepeatM": [
+        2,
+        2
+      ],
+      "imports": [
+        {
+          "file": "exports/roof-mineral-grain-2m.inspection.glb",
+          "sha256": "468242c4df4a55fd426cdf7529c915aef80ec054fb6bcb73bd0e06b939aa2783"
+        },
+        {
+          "file": "exports/roof-membrane-seams-2m.inspection.glb",
+          "sha256": "27510bc3eca07603ec0b46f291bd61984ae5aa789d6c8130287a31bdd2fab378"
+        }
+      ],
+      "samples": 12,
+      "resolution": [
+        960,
+        640
+      ],
+      "renderer": "Cycles CPU",
+      "threads": 2,
+      "camera": [
+        1.5,
+        -2.9000000953674316,
+        5.0
+      ],
+      "orthoScaleM": 8.100000381469727,
+      "sunEnergy": 0.3,
+      "worldStrength": 0.85,
+      "exposure": 0,
+      "qaReferences": {
+        "rulerLengthM": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline study lighting, not the city renderer or calibrated Vancouver illuminance."
+    },
+    {
+      "file": "qa/previews/coupons-2m-dusk.png",
+      "sha256": "43687b0eb90d7d5d723f5179bb8ec4f537fb03c7b9e0bd3ca1fe2f5922250660",
+      "condition": "dusk",
+      "couponSizeM": 2,
+      "physicalRepeatM": [
+        2,
+        2
+      ],
+      "imports": [
+        {
+          "file": "exports/roof-mineral-grain-2m.inspection.glb",
+          "sha256": "468242c4df4a55fd426cdf7529c915aef80ec054fb6bcb73bd0e06b939aa2783"
+        },
+        {
+          "file": "exports/roof-membrane-seams-2m.inspection.glb",
+          "sha256": "27510bc3eca07603ec0b46f291bd61984ae5aa789d6c8130287a31bdd2fab378"
+        }
+      ],
+      "samples": 12,
+      "resolution": [
+        960,
+        640
+      ],
+      "renderer": "Cycles CPU",
+      "threads": 2,
+      "camera": [
+        1.5,
+        -2.9000000953674316,
+        5.0
+      ],
+      "orthoScaleM": 8.100000381469727,
+      "sunEnergy": 0.75,
+      "worldStrength": 0.13,
+      "exposure": 0,
+      "qaReferences": {
+        "rulerLengthM": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline study lighting, not the city renderer or calibrated Vancouver illuminance."
+    },
+    {
+      "file": "qa/previews/coupons-2m-night.png",
+      "sha256": "c267efa9b3ef0b7549b1fc72f704289fa2d8e9209d8fdce95f643d400f1c64ee",
+      "condition": "night",
+      "couponSizeM": 2,
+      "physicalRepeatM": [
+        2,
+        2
+      ],
+      "imports": [
+        {
+          "file": "exports/roof-mineral-grain-2m.inspection.glb",
+          "sha256": "468242c4df4a55fd426cdf7529c915aef80ec054fb6bcb73bd0e06b939aa2783"
+        },
+        {
+          "file": "exports/roof-membrane-seams-2m.inspection.glb",
+          "sha256": "27510bc3eca07603ec0b46f291bd61984ae5aa789d6c8130287a31bdd2fab378"
+        }
+      ],
+      "samples": 12,
+      "resolution": [
+        960,
+        640
+      ],
+      "renderer": "Cycles CPU",
+      "threads": 2,
+      "camera": [
+        1.5,
+        -2.9000000953674316,
+        5.0
+      ],
+      "orthoScaleM": 8.100000381469727,
+      "sunEnergy": 0.11,
+      "worldStrength": 0.045,
+      "exposure": 0,
+      "qaReferences": {
+        "rulerLengthM": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline study lighting, not the city renderer or calibrated Vancouver illuminance."
+    },
+    {
+      "file": "qa/previews/coupons-10m-clear.png",
+      "sha256": "633879f3d19d0e9764e79738fa8b1e421eed6781e0c6c14c1260f7a7a205a6bf",
+      "condition": "clear",
+      "couponSizeM": 10,
+      "physicalRepeatM": [
+        2,
+        2
+      ],
+      "imports": [
+        {
+          "file": "exports/roof-mineral-grain-10m.inspection.glb",
+          "sha256": "e0cca52f6aee60a90f3992364704ecdf63eecdbc9d4f83c766911a9f581d5424"
+        },
+        {
+          "file": "exports/roof-membrane-seams-10m.inspection.glb",
+          "sha256": "e690ca5cec39a142fbb73e87e6d0243842e51593cca6aff772759198e0cf041b"
+        }
+      ],
+      "samples": 12,
+      "resolution": [
+        960,
+        640
+      ],
+      "renderer": "Cycles CPU",
+      "threads": 2,
+      "camera": [
+        7.5,
+        -14.5,
+        19.0
+      ],
+      "orthoScaleM": 24.100000381469727,
+      "sunEnergy": 2.4,
+      "worldStrength": 0.55,
+      "exposure": 0,
+      "qaReferences": {
+        "rulerLengthM": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline study lighting, not the city renderer or calibrated Vancouver illuminance."
+    },
+    {
+      "file": "qa/previews/coupons-10m-overcast.png",
+      "sha256": "c79086342a41e8b7bccd927c6e9aa0635bfa81b8ef0b74554c6ed433d9c48f49",
+      "condition": "overcast",
+      "couponSizeM": 10,
+      "physicalRepeatM": [
+        2,
+        2
+      ],
+      "imports": [
+        {
+          "file": "exports/roof-mineral-grain-10m.inspection.glb",
+          "sha256": "e0cca52f6aee60a90f3992364704ecdf63eecdbc9d4f83c766911a9f581d5424"
+        },
+        {
+          "file": "exports/roof-membrane-seams-10m.inspection.glb",
+          "sha256": "e690ca5cec39a142fbb73e87e6d0243842e51593cca6aff772759198e0cf041b"
+        }
+      ],
+      "samples": 12,
+      "resolution": [
+        960,
+        640
+      ],
+      "renderer": "Cycles CPU",
+      "threads": 2,
+      "camera": [
+        7.5,
+        -14.5,
+        19.0
+      ],
+      "orthoScaleM": 24.100000381469727,
+      "sunEnergy": 0.3,
+      "worldStrength": 0.85,
+      "exposure": 0,
+      "qaReferences": {
+        "rulerLengthM": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline study lighting, not the city renderer or calibrated Vancouver illuminance."
+    },
+    {
+      "file": "qa/previews/coupons-10m-dusk.png",
+      "sha256": "6dd08d3047fd3465f1335012478a422bed990c74e957e17c0d24335590b8c4cf",
+      "condition": "dusk",
+      "couponSizeM": 10,
+      "physicalRepeatM": [
+        2,
+        2
+      ],
+      "imports": [
+        {
+          "file": "exports/roof-mineral-grain-10m.inspection.glb",
+          "sha256": "e0cca52f6aee60a90f3992364704ecdf63eecdbc9d4f83c766911a9f581d5424"
+        },
+        {
+          "file": "exports/roof-membrane-seams-10m.inspection.glb",
+          "sha256": "e690ca5cec39a142fbb73e87e6d0243842e51593cca6aff772759198e0cf041b"
+        }
+      ],
+      "samples": 12,
+      "resolution": [
+        960,
+        640
+      ],
+      "renderer": "Cycles CPU",
+      "threads": 2,
+      "camera": [
+        7.5,
+        -14.5,
+        19.0
+      ],
+      "orthoScaleM": 24.100000381469727,
+      "sunEnergy": 0.75,
+      "worldStrength": 0.13,
+      "exposure": 0,
+      "qaReferences": {
+        "rulerLengthM": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline study lighting, not the city renderer or calibrated Vancouver illuminance."
+    },
+    {
+      "file": "qa/previews/coupons-10m-night.png",
+      "sha256": "7cab904f2c2bd05c2aa1c3ca3d20bd16cba42bc89034b32d5b35a3d51546b6e4",
+      "condition": "night",
+      "couponSizeM": 10,
+      "physicalRepeatM": [
+        2,
+        2
+      ],
+      "imports": [
+        {
+          "file": "exports/roof-mineral-grain-10m.inspection.glb",
+          "sha256": "e0cca52f6aee60a90f3992364704ecdf63eecdbc9d4f83c766911a9f581d5424"
+        },
+        {
+          "file": "exports/roof-membrane-seams-10m.inspection.glb",
+          "sha256": "e690ca5cec39a142fbb73e87e6d0243842e51593cca6aff772759198e0cf041b"
+        }
+      ],
+      "samples": 12,
+      "resolution": [
+        960,
+        640
+      ],
+      "renderer": "Cycles CPU",
+      "threads": 2,
+      "camera": [
+        7.5,
+        -14.5,
+        19.0
+      ],
+      "orthoScaleM": 24.100000381469727,
+      "sunEnergy": 0.11,
+      "worldStrength": 0.045,
+      "exposure": 0,
+      "qaReferences": {
+        "rulerLengthM": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline study lighting, not the city renderer or calibrated Vancouver illuminance."
+    }
+  ],
+  "referenceObjectsExported": false
+}

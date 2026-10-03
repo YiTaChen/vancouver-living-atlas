@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "status": "pass",
+  "recordedAt": "2026-10-03T21:37:31.152227+00:00",
+  "sourceBaseRevision": "5574d55719f10d1575127d8b92cbd23ff71e446f",
+  "executionHead": "8b95f013297597845d542463d6ce635105a95c4f",
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41"
+  },
+  "scope": "Inventory baseline file identity, GLB container and 27-requirement mapping integrity only. No new asset completion or application acceptance.",
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "tools/assets/development-backlog/inventory.py"
+      ],
+      "exitCode": 0,
+      "durationSeconds": 1.505756,
+      "stdout": "{\"status\": \"pass\", \"scope\": \"baseline file/GLB container integrity and 27-ID mapping only\", \"summary\": {\"requirementCount\": 27, \"packageCount\": 9, \"legacyAssetRecordCount\": 53, \"fingerprintedFiles\": 436, \"fingerprintedDiskBytes\": 135685751, \"auditedGlbFiles\": 63, \"uniqueExternalMapPngHashes\": 80, \"uniqueExternalMapPngDiskBytes\": 15167662, \"mapCostCaveat\": \"PNG disk-byte deduplication only. Embedded images, authored mip identity, GPU residency and VRAM are not deduced from this total.\"}}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/assets/development-backlog",
+        "-p",
+        "test_inventory.py",
+        "-v"
+      ],
+      "exitCode": 0,
+      "durationSeconds": 1.711068,
+      "stdout": "",
+      "stderr": "test_absolute_traversal_and_symlink_escape_rejected (test_inventory.InventoryTests.test_absolute_traversal_and_symlink_escape_rejected) ... ok\ntest_all_27_requirements_and_real_asset_references (test_inventory.InventoryTests.test_all_27_requirements_and_real_asset_references) ... ok\ntest_current_citizen_adoption_is_payload_identity_not_old_flag (test_inventory.InventoryTests.test_current_citizen_adoption_is_payload_identity_not_old_flag) ... ok\ntest_datum_drift_rejected (test_inventory.InventoryTests.test_datum_drift_rejected) ... ok\ntest_deterministic_source_baseline_snapshot (test_inventory.InventoryTests.test_deterministic_source_baseline_snapshot) ... ok\ntest_duplicate_and_tampered_files_rejected (test_inventory.InventoryTests.test_duplicate_and_tampered_files_rejected) ... ok\ntest_duplicate_requirement_rejected (test_inventory.InventoryTests.test_duplicate_requirement_rejected) ... ok\ntest_every_recorded_file_hash_and_byte_size (test_inventory.InventoryTests.test_every_recorded_file_hash_and_byte_size) ... ok\ntest_false_new_webgl_pass_rejected (test_inventory.InventoryTests.test_false_new_webgl_pass_rejected) ... ok\ntest_false_new_work_completion_rejected (test_inventory.InventoryTests.test_false_new_work_completion_rejected) ... ok\ntest_json_pointer_escape (test_inventory.InventoryTests.test_json_pointer_escape) ... ok\ntest_missing_requirement_rejected (test_inventory.InventoryTests.test_missing_requirement_rejected) ... ok\ntest_nonimage_cost_is_explicitly_not_gpu_or_geometry_payload (test_inventory.InventoryTests.test_nonimage_cost_is_explicitly_not_gpu_or_geometry_payload) ... ok\ntest_unknown_asset_rejected (test_inventory.InventoryTests.test_unknown_asset_rejected) ... ok\ntest_wrong_asset_package_rejected (test_inventory.InventoryTests.test_wrong_asset_package_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 15 tests in 1.648s\n\nOK\n"
+    }
+  ],
+  "blender": {
+    "status": "not_run"
+  },
+  "webgl": {
+    "status": "not_run"
+  },
+  "applicationTests": {
+    "status": "not_run",
+    "reason": "This package does not change app/runtime or existing asset files; repository-wide checks are owned by integration."
+  },
+  "deployment": {
+    "status": "not_run"
+  }
+}

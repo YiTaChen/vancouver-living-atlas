@@ -1,0 +1,38 @@
+{
+  "status": "pass",
+  "reviewMethod": "Agent visual inspection of actual Cycles CPU GLB-reimport PNG contact sheets plus template images; not city/browser acceptance",
+  "reviewedPreviewIndexSha256": "2dbf0da01807be488b6c2485794f5b398b742bbf1f6ac94237d13fd7421b5b1a",
+  "reviewedSheets": [
+    {
+      "file": "qa/previews/template-contact-sheet.png",
+      "sha256": "983b630d8dfca2c3cc65461d783f8d21db587fb587ddc20338b24bac57313c1b"
+    },
+    {
+      "file": "qa/previews/lod-contact-sheet.png",
+      "sha256": "7cfdd740945935f7117ee3219c4bd9b93142f9f4a53ca7defb8eb235e1360752"
+    },
+    {
+      "file": "qa/previews/side-back-top-contact-sheet.png",
+      "sha256": "a1ac8f3c37e7520f369f77966a056cb602628232aa31639872336956cb05127a"
+    },
+    {
+      "file": "qa/previews/lighting-contact-sheet.png",
+      "sha256": "fb426de2159975a684981b13f7688e9209bcda2a416984a485ea580f4602af99"
+    }
+  ],
+  "findings": [
+    "Six templates are readable at true metre scale next to the 1 m ruler and 1.75/1.81 m human references",
+    "Column height, capital underside datum, full 28 m triangular pediment and tall upper-window opening remain coherent",
+    "Stepped window reveal is visible in LOD0/1; exact open hole remains at LOD2",
+    "Marine ceramic layers surround the retained empty arch and copper fan stays recessed above the lower doorway area",
+    "Side/top images show shallow wall-attached depth, no unexpected world displacement or double axis conversion",
+    "LOD2 visibly coarsens fluting, capital and arch layers while retaining bounds and CPU-tested apertures",
+    "Sunny/overcast/dusk/night materials are legible under fixed offline conditions; no baked illumination and no city brightness/performance claim",
+    "Waterfront assembly deliberately lacks retained shell, entablature and triangle infill; the assembly plan explicitly keeps them"
+  ],
+  "limitations": [
+    "Low-sample CPU research images, not photoreal restoration",
+    "Full runtime transition/facade seam/transparent-glass/night-light behavior remains not_run"
+  ],
+  "renderCount": 44
+}

@@ -1,0 +1,67 @@
+{
+  "status": "pass",
+  "scope": "Human-reviewed offline material study; no runtime acceptance",
+  "reviewer": "AI agent direct image inspection",
+  "reviewedImages": [
+    {
+      "file": "qa/previews/coupons-10m-clear.png",
+      "sha256": "633879f3d19d0e9764e79738fa8b1e421eed6781e0c6c14c1260f7a7a205a6bf"
+    },
+    {
+      "file": "qa/previews/coupons-10m-dusk.png",
+      "sha256": "6dd08d3047fd3465f1335012478a422bed990c74e957e17c0d24335590b8c4cf"
+    },
+    {
+      "file": "qa/previews/coupons-10m-night.png",
+      "sha256": "7cab904f2c2bd05c2aa1c3ca3d20bd16cba42bc89034b32d5b35a3d51546b6e4"
+    },
+    {
+      "file": "qa/previews/coupons-10m-overcast.png",
+      "sha256": "c79086342a41e8b7bccd927c6e9aa0635bfa81b8ef0b74554c6ed433d9c48f49"
+    },
+    {
+      "file": "qa/previews/coupons-2m-clear.png",
+      "sha256": "9e85ee81e9fb2cd92f2c757ef3c35dafc9f65ae950eed8a71575dbfce264de6f"
+    },
+    {
+      "file": "qa/previews/coupons-2m-dusk.png",
+      "sha256": "43687b0eb90d7d5d723f5179bb8ec4f537fb03c7b9e0bd3ca1fe2f5922250660"
+    },
+    {
+      "file": "qa/previews/coupons-2m-night.png",
+      "sha256": "c267efa9b3ef0b7549b1fc72f704289fa2d8e9209d8fdce95f643d400f1c64ee"
+    },
+    {
+      "file": "qa/previews/coupons-2m-overcast.png",
+      "sha256": "fb2297c0573143e85cda186499c5bdaaa53ed390c481c5dd58909c1cbd90b60a"
+    },
+    {
+      "file": "qa/previews/roof-membrane-seams-grazing-detail.png",
+      "sha256": "9e548e7971b2adaa871cf2ddb88c643d9da213a3a168193bde7cff26d653a43e"
+    },
+    {
+      "file": "qa/previews/roof-mineral-grain-grazing-detail.png",
+      "sha256": "d901f763ae79136944bb83235b63e15cf928e142f296d2368677d7e31de190b9"
+    }
+  ],
+  "findings": [
+    "The two original bright neutral palette roles remain distinguishable in clear/overcast light; membrane is lighter and mineral slightly warm-grey/green.",
+    "Both 2m and 10m coupon overviews retain the same two-metre physical repeat; the 1m ruler and 1.75m/1.81m study figures are visible and never exported.",
+    "Mineral grain and membrane lap normals are deliberately subtle in overview; grazing-angle actual reimport renders expose their distinct relief.",
+    "No baked lighting exists in base color: the actual exporter uses EMIT for pigment and ORM, NORMAL for tangents. Preview shadowing is scene lighting only.",
+    "Dusk and night darken both surfaces at fixed exposure. Night is intentionally very dim and is not evidence of city visibility."
+  ],
+  "knownLimitations": [
+    "At the 0.68m close-up view, 256px over a 2m tile shows expected bilinear softness, especially on thin membrane laps. Source 512px bakes preserve more detail but are not runtime candidates.",
+    "Two-triangle flat coupons have no true displacement, gravel silhouettes, edge flashing, roof thickness, drainage or collision.",
+    "Low 12-sample overview renders contain Monte Carlo noise; detail renders use 32 samples.",
+    "Full 2m periodic repetition can become visible on larger roofs. WebGL filtering, far-distance fade, source-local phase and color normalization require scene testing.",
+    "The membrane longitudinal lap is 1m spaced within a 2m x 2m tile; end laps repeat at 2m. This is a representative study, not a surveyed product installation."
+  ],
+  "resolution": [
+    960,
+    640
+  ],
+  "renderEngine": "Cycles CPU",
+  "conditionClaim": "Offline clear/overcast/dusk/night study lighting, not matching city weather."
+}

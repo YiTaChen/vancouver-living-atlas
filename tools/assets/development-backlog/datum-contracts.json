@@ -1,0 +1,577 @@
+{
+  "schemaVersion": 1,
+  "scope": "Declared legacy dimensions and verified source rules, not fresh Blender measurement or regulatory approval.",
+  "contracts": [
+    {
+      "id": "heritage-bay-relief",
+      "requirementIds": [
+        "C01"
+      ],
+      "basis": "existing_manifest_declaration",
+      "contract": "W×H×D=3.25×3.1959×1.2207 m; Z=[0.0228,1.2435]. Canopy included; not enterable interior depth.",
+      "evidence": [
+        {
+          "path": "public/models/streetscape/manifest.json",
+          "pointer": "/assets/0/lods/0/bounds",
+          "expected": {
+            "min": [
+              -1.625,
+              0.0,
+              0.0228
+            ],
+            "max": [
+              1.625,
+              3.1959,
+              1.2435
+            ]
+          }
+        },
+        {
+          "path": "public/models/streetscape/manifest.json",
+          "pointer": "/origin",
+          "expected": "Ground centre of facade plane for facade modules; ground centre for furniture"
+        }
+      ]
+    },
+    {
+      "id": "modern-bay-relief",
+      "requirementIds": [
+        "C02"
+      ],
+      "basis": "existing_manifest_declaration",
+      "contract": "W×H×D=3.20×3.20×1.703 m; Z=[0.0255,1.7285]. Attached in front of unopened GIS wall, not a new room.",
+      "evidence": [
+        {
+          "path": "public/models/streetscape/manifest.json",
+          "pointer": "/assets/1/lods/0/bounds",
+          "expected": {
+            "min": [
+              -1.6,
+              0.0,
+              0.0255
+            ],
+            "max": [
+              1.6,
+              3.2,
+              1.7285
+            ]
+          }
+        },
+        {
+          "path": "public/models/streetscape/manifest.json",
+          "pointer": "/interface",
+          "expected": {
+            "maximumHeightM": 3.2,
+            "minimumEntryClearanceM": 2.3,
+            "reliefBackMinM": 0.0228,
+            "foundationDatumNote": "Pavement is generally terrain + 1.18 m, shared facade foundation terrain - 0.4 m. Placement uses actual sidewalk samples and first upper pane clearance; do not scale modules to force a fit."
+          }
+        }
+      ]
+    },
+    {
+      "id": "gabled-canopy-ground-origin",
+      "requirementIds": [
+        "C03"
+      ],
+      "basis": "existing_manifest_declaration",
+      "contract": "Size=2.00×0.74×1.06 m, Y=[2.36,3.10]. Ground origin must remain; 3.10 is not object height; never recenter minimum Y to zero.",
+      "evidence": [
+        {
+          "path": "tools/assets/architecture-expansion/manifest.json",
+          "pointer": "/assets/7/lods/0/bounds",
+          "expected": {
+            "min": [
+              -1.0,
+              2.36,
+              0.02
+            ],
+            "max": [
+              1.0,
+              3.1,
+              1.08
+            ]
+          }
+        },
+        {
+          "path": "tools/assets/architecture-expansion/manifest.json",
+          "pointer": "/assets/7/clearance",
+          "expected": {
+            "min": [
+              -1,
+              0,
+              0.019
+            ],
+            "max": [
+              1,
+              2.3,
+              1.081
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "window-clear-openings",
+      "requirementIds": [
+        "C02",
+        "C03"
+      ],
+      "basis": "existing_manifest_declaration",
+      "contract": "Modern outer size 2.20×1.75×0.24 m with 1.92×1.47 m opening; cedar outer 1.62×1.84×0.16 m with 1.28×1.52 m opening. Bounds do not substitute for opening tests.",
+      "evidence": [
+        {
+          "path": "tools/assets/architecture-expansion/manifest.json",
+          "pointer": "/assets/0/lods/0/bounds",
+          "expected": {
+            "min": [
+              -1.1,
+              0.0,
+              0.02
+            ],
+            "max": [
+              1.1,
+              1.75,
+              0.26
+            ]
+          }
+        },
+        {
+          "path": "tools/assets/architecture-expansion/manifest.json",
+          "pointer": "/assets/0/clearance",
+          "expected": {
+            "min": [
+              -0.96,
+              0.14,
+              0.019
+            ],
+            "max": [
+              0.96,
+              1.61,
+              0.261
+            ]
+          }
+        },
+        {
+          "path": "tools/assets/architecture-expansion/manifest.json",
+          "pointer": "/assets/5/lods/0/bounds",
+          "expected": {
+            "min": [
+              -0.81,
+              0.0,
+              0.02
+            ],
+            "max": [
+              0.81,
+              1.84,
+              0.18
+            ]
+          }
+        },
+        {
+          "path": "tools/assets/architecture-expansion/manifest.json",
+          "pointer": "/assets/5/clearance",
+          "expected": {
+            "min": [
+              -0.64,
+              0.1,
+              0.019
+            ],
+            "max": [
+              0.64,
+              1.62,
+              0.181
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "residential-entry-and-legacy-awnings",
+      "requirementIds": [
+        "C01",
+        "C03"
+      ],
+      "basis": "existing_manifest_declaration",
+      "contract": "Entry outer 1.30×2.50 m, clearance 1.04×2.30 m. Sloped/flat awnings also retain ground origins with respective Ymin 2.37/2.48 m, rather than bases at zero.",
+      "evidence": [
+        {
+          "path": "tools/assets/architecture-details/manifest.json",
+          "pointer": "/assets/5/clearance",
+          "expected": {
+            "min": [
+              -0.52,
+              0,
+              0.019
+            ],
+            "max": [
+              0.52,
+              2.3,
+              0.207
+            ]
+          }
+        },
+        {
+          "path": "tools/assets/architecture-details/manifest.json",
+          "pointer": "/assets/6/lods/0/bounds",
+          "expected": {
+            "min": [
+              -0.8,
+              2.37,
+              0.02
+            ],
+            "max": [
+              0.8,
+              2.7,
+              0.87
+            ]
+          }
+        },
+        {
+          "path": "tools/assets/architecture-details/manifest.json",
+          "pointer": "/assets/7/lods/0/bounds",
+          "expected": {
+            "min": [
+              -0.9,
+              2.48,
+              0.02
+            ],
+            "max": [
+              0.9,
+              2.65,
+              1.02
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "actual-sidewalk-threshold",
+      "requirementIds": [
+        "C01",
+        "C02",
+        "C03"
+      ],
+      "basis": "current_source_rule",
+      "contract": "At least three actual pavement samples; maximum height spread 0.14 m; threshold=max+0.02 m; preserve upper sill/first-pane clearance and reject elevated parts.",
+      "evidence": [
+        {
+          "path": "lib/city/streetscape-placement.ts",
+          "contains": "pavement.length < 3"
+        },
+        {
+          "path": "lib/city/streetscape-placement.ts",
+          "contains": "if (high - low > 0.14) return null;"
+        },
+        {
+          "path": "lib/city/streetscape-placement.ts",
+          "contains": "const threshold = high + 0.02;"
+        },
+        {
+          "path": "lib/city/streetscape-placement.ts",
+          "contains": "threshold + STREET_BAY_HEIGHT_M <= ceiling"
+        }
+      ]
+    },
+    {
+      "id": "roof-unit-footprint",
+      "requirementIds": [
+        "B01"
+      ],
+      "basis": "current_source_rule",
+      "contract": "Existing units nominal W=2.20–3.61, D=1.65–2.45 m; H=0.9–1.4 m, first high-rise unit may be 2.5 m. New base datum must be Y=0 with all pipes included in bounds; preserve containment/holes/exclusions and no small domestic/sloped-roof equipment.",
+      "evidence": [
+        {
+          "path": "lib/city/architecture-plan.ts",
+          "contains": "const width = 2.2 + (seed % 4) * 0.47,"
+        },
+        {
+          "path": "lib/city/architecture-plan.ts",
+          "contains": "depth = 1.65 + ((seed >>> 4) % 3) * 0.4;"
+        },
+        {
+          "path": "lib/city/architecture-plan.ts",
+          "contains": "placed === 0 && h > 50 ? 2.5 : 0.9 + ((seed >>> placed) % 3) * 0.25;"
+        },
+        {
+          "path": "lib/city/architecture-plan.ts",
+          "contains": "export function roofBoxFits("
+        }
+      ]
+    },
+    {
+      "id": "mature-tree-normalization",
+      "requirementIds": [
+        "B03"
+      ],
+      "basis": "current_source_envelope_and_new_template_contract",
+      "contract": "Existing near geometry normalized to roughly 1 m and scaled by source height. Near crown width 0.46–0.49×height; far crown radius capped 0.285×height. New 10 m template requires sourceHeight/10 exactly once (22.9 m source => 2.29 scale), not sourceHeight again; species/source clearance may require explicit changes.",
+      "evidence": [
+        {
+          "path": "lib/city/detailed-trees.ts",
+          "contains": "dummy.scale.setScalar(t.h);"
+        },
+        {
+          "path": "lib/city/assets/tree-geometry.ts",
+          "contains": "targetCrownWidth: 0.46 + vi * 0.015"
+        },
+        {
+          "path": "lib/city/assets/tree-canopy.ts",
+          "contains": "maximumCrownRadius: 0.285"
+        }
+      ]
+    },
+    {
+      "id": "sprig-and-ground-study-identity",
+      "requirementIds": [
+        "A02",
+        "B03",
+        "C04",
+        "F03"
+      ],
+      "basis": "existing_manifest_declaration",
+      "contract": "Sprigs are approximately 1.25 m-class branch studies, not mature tree templates. Manifest geometry bounds report max Blender Z=1.2 m; preserve that distinction. Ground samples are 2×2 m with 0.1 m rise, not navigation or draped city terrain.",
+      "evidence": [
+        {
+          "path": "tools/assets/vegetation_ground/manifest.json",
+          "pointer": "/assets/0/boundsBlender",
+          "expected": [
+            [
+              -0.512802,
+              -0.506977,
+              0.0
+            ],
+            [
+              0.612289,
+              0.557901,
+              1.2
+            ]
+          ]
+        },
+        {
+          "path": "tools/assets/vegetation_ground/manifest.json",
+          "pointer": "/assets/12/boundsBlender",
+          "expected": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              2.0,
+              2.0,
+              0.1
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "furniture-generator-nominal-only",
+      "requirementIds": [
+        "D01",
+        "F01"
+      ],
+      "basis": "generator_parameters_not_reexported_measurements",
+      "contract": "Historic lamp nominal 4.49 m, bench width 2.02 m and seat center 0.48 m, shelter nominal 4.56×2.82×1.86 m. Need actual independent re-exported GLB bounds; do not stretch lamp to arterial-light height.",
+      "evidence": [
+        {
+          "path": "tools/assets/streetscape/generate_streetscape.py",
+          "contains": "(.02,4.49)"
+        },
+        {
+          "path": "tools/assets/streetscape/generate_streetscape.py",
+          "contains": "(0,y,.48),(2.02,.094,.058)"
+        },
+        {
+          "path": "tools/assets/streetscape/generate_streetscape.py",
+          "contains": "extrude_x('Swept shelter roof',profile,4.56,'metal')"
+        }
+      ]
+    },
+    {
+      "id": "legacy-bus-contact-offset",
+      "requirementIds": [
+        "D02",
+        "D03",
+        "D06"
+      ],
+      "basis": "current_source_parameters_not_new_cabin_measurements",
+      "contract": "Legacy body nominal length 12 m/width 2.5 m; mirrors increase width. Wheel center Y=0.52 and radius 0.51 imply tire contact Y≈0.01; runtime adds ground+1.08. New exterior/interior/door/collision must share tire-contact root and explicit legacyToVehicleRoot; do not call old offset floor height.",
+      "evidence": [
+        {
+          "path": "lib/city/city-buses.ts",
+          "contains": "box(2.5, 2.55, 12, 0, 1.9, 0, blue);"
+        },
+        {
+          "path": "lib/city/city-buses.ts",
+          "contains": "new THREE.CylinderGeometry(0.51, 0.51, 0.26, 12)"
+        },
+        {
+          "path": "lib/city/city-buses.ts",
+          "contains": ".translate(side * 1.22, 0.52, z),"
+        },
+        {
+          "path": "lib/city/city-buses.ts",
+          "contains": "const y = ground(x, z) + 1.08;"
+        }
+      ]
+    },
+    {
+      "id": "legacy-metro-rail-datum",
+      "requirementIds": [
+        "D04",
+        "D05",
+        "D06"
+      ],
+      "basis": "current_source_parameters_not_new_cabin_measurements",
+      "contract": "Nominal car length 17 m, body width 2.65 m, roof cylinder diameter 2.8 m, coupler envelope may extend to 17.8 m. Wheel contact at local Y≈0.02; rail top is path Y=0. New floor/door/platform heights must use explicit rail-contact datum, not body center.",
+      "evidence": [
+        {
+          "path": "lib/city/railway.ts",
+          "contains": "kind === 'engine' ? 14 : kind === 'tender' ? 9 : kind === 'coach' ? 20 : 17;"
+        },
+        {
+          "path": "lib/city/railway.ts",
+          "contains": "box(metro ? 2.65 : 2.95, 2.55, length - 1, 0, 2.4)"
+        },
+        {
+          "path": "lib/city/railway.ts",
+          "contains": "const roof = cylinder(metro ? 1.4 : 1.58"
+        },
+        {
+          "path": "lib/city/railway.ts",
+          "contains": "wheelPositions.push(new THREE.Vector3(x, wheelRadius + 0.02, z));"
+        },
+        {
+          "path": "lib/city/railway.ts",
+          "contains": "box(0.09, 0.15, length, side * 0.7175, -0.075)"
+        }
+      ]
+    },
+    {
+      "id": "waterfront-and-marine-entry",
+      "requirementIds": [
+        "B04"
+      ],
+      "basis": "current_source_parameters",
+      "contract": "Waterfront columns radius 0.6 m/height 8 m, capitals 1.6×0.35×1.6 m, pediment span 28 m/rise 3.5 m. Marine inner half-width 2.55 m/spring Y3.7/rise 2.82 m; preserve facade datum and collision, do not infer interior access from a visual opening.",
+      "evidence": [
+        {
+          "path": "lib/city/interiors.ts",
+          "contains": "envelope.cylinder(0.6, 8, [x, f + 4, 19], cream);"
+        },
+        {
+          "path": "lib/city/interiors.ts",
+          "contains": "envelope.box([1.6, 0.35, 1.6]"
+        },
+        {
+          "path": "lib/city/assets/marine-entry.ts",
+          "contains": "const INNER_RX = 2.55,"
+        },
+        {
+          "path": "lib/city/assets/marine-entry.ts",
+          "contains": "INNER_RY = 2.82,"
+        },
+        {
+          "path": "lib/city/assets/marine-entry.ts",
+          "contains": "SPRING_Y = 3.7,"
+        }
+      ]
+    },
+    {
+      "id": "citizen-root-rig-and-source-history",
+      "requirementIds": [
+        "F04"
+      ],
+      "basis": "current_loader_and_historical_manifest",
+      "contract": "Keep declared 1.81 m citizen height and existing 22-bone animated contract. Editable optimization sources are reconstructed from GLB, not original sculpt history; manifest authoring vertices differ from exported seam vertices. Current loader adopts only byte-identical 1024 LOD0; lower LODs remain candidates.",
+      "evidence": [
+        {
+          "path": "lib/city/citizen.ts",
+          "contains": "group.userData.heightMetres = 1.81;"
+        },
+        {
+          "path": "lib/city/citizen.ts",
+          "contains": "'/models/citizen/vancouver-citizen.glb?v=14d66fabe097';"
+        },
+        {
+          "path": "tools/assets/citizen/optimization/manifest.json",
+          "pointer": "/sourceType",
+          "expected": "Editable reconstruction from original shipping GLB, not original procedural authoring scene"
+        },
+        {
+          "path": "tools/assets/citizen/optimization/manifest.json",
+          "pointer": "/assets/1/bones",
+          "expected": 22
+        }
+      ]
+    },
+    {
+      "id": "material-semantic-and-alpha-boundaries",
+      "requirementIds": [
+        "B03",
+        "E02",
+        "E04",
+        "F03",
+        "F05"
+      ],
+      "basis": "current_source_and_manifest_contract",
+      "contract": "Roadster leather names driver head; seats use dark and UV is removed. Interiors Parts also removes UV. Ground edge clamps U/repeats V, low-frequency weights are not pixel masks. Straight-RGBA foliage cannot use legacy min(RGB) neutral-matte decoding.",
+      "evidence": [
+        {
+          "path": "lib/city/assets/roadster.ts",
+          "contains": "flat.deleteAttribute('uv');"
+        },
+        {
+          "path": "lib/city/assets/roadster.ts",
+          "contains": "add('leather', new THREE.SphereGeometry(0.115, 12, 10), [0.44, 1.27, -0.34]);"
+        },
+        {
+          "path": "lib/city/interiors.ts",
+          "contains": "flat.deleteAttribute('uv');"
+        },
+        {
+          "path": "lib/city/detailed-trees.ts",
+          "contains": "float matte = min(leafRGB.r,min(leafRGB.g,leafRGB.b));"
+        },
+        {
+          "path": "tools/assets/vegetation_ground/manifest.json",
+          "pointer": "/alphaContract",
+          "expected": "Straight RGBA cutout .4, double-sided; NOT compatible with existing neutral-matte/aSolid decoder without reviewed shader and solid UV changes."
+        },
+        {
+          "path": "tools/assets/vegetation_ground/README.md",
+          "contains": "U=CLAMP_TO_EDGE、V=REPEAT"
+        }
+      ]
+    },
+    {
+      "id": "elapsed-time-is-not-city-clock",
+      "requirementIds": [
+        "A03",
+        "D06"
+      ],
+      "basis": "current_source_rule",
+      "contract": "Opening clock hour=10/rate=300/running=true. Navigation, traffic and passenger service must use elapsed real time, never the 300× visual clock.",
+      "evidence": [
+        {
+          "path": "lib/city/clock.ts",
+          "contains": "hour: 10,"
+        },
+        {
+          "path": "lib/city/clock.ts",
+          "contains": "rate: 300,"
+        },
+        {
+          "path": "lib/city/clock.ts",
+          "contains": "running: true,"
+        },
+        {
+          "path": "lib/city/clock.ts",
+          "contains": "It never advances navigation, waves or traffic time."
+        }
+      ]
+    }
+  ]
+}

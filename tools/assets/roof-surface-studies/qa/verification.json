@@ -1,0 +1,34 @@
+{
+  "status": "pass",
+  "commands": [
+    {
+      "command": "python3 tools/assets/roof-surface-studies/validate.py --write-report",
+      "exitCode": 0
+    },
+    {
+      "command": "python3 tools/assets/package-contract/validate.py tools/assets/roof-surface-studies",
+      "exitCode": 0
+    },
+    {
+      "command": "python3 tools/assets/roof-surface-studies/test_validate.py",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "exitCode": 0
+    },
+    {
+      "command": "blender -b -t 2 --factory-startup --python-exit-code 1 --python tools/assets/roof-surface-studies/test_source_edits.py",
+      "exitCode": 0,
+      "evidence": "source-edit-test.json"
+    }
+  ],
+  "scriptHashes": {
+    "render_details.py": "6e1345c458bacc841ab7c571ef687a39cb8984e4f8c25558f41fb2fc6146609f",
+    "build.py": "a163d7405607472d1a63265d310bcf090f924ac56e53003427f1d4f90d311485",
+    "test_validate.py": "a399f069325b73cf32af6d825743510c612c1106fea06e6a772c0ab261140133",
+    "validate.py": "786a701d8d7ac745f80d5c908444ec6028ae19d34f78e0c6f5c8ed63826eebf7",
+    "test_source_edits.py": "5ba10a51f5709049d533bea6e3375bf0f704d3dd8875c640ab4dc2373c3845b7"
+  },
+  "noRuntimeOrPublicChanges": true,
+  "scope": "Package-owned files only; parent owns repository aggregate tests."
+}

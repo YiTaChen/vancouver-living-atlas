@@ -1,0 +1,228 @@
+{
+  "status": "pass",
+  "scope": "common packaging, source hashes, rest-pose transformed GLB geometry and costs only; package-specific Blender, semantic and runtime checks required",
+  "results": [
+    {
+      "assetId": "hvac-compact-single",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -1.100000023841858,
+          0.0,
+          -0.824999988079071
+        ],
+        "max": [
+          1.100000023841858,
+          1.100000023841858,
+          0.824999988079071
+        ],
+        "size": [
+          2.200000047683716,
+          1.100000023841858,
+          1.649999976158142
+        ]
+      },
+      "triangles": 324,
+      "vertices": 612,
+      "primitives": 2,
+      "bytes": 34572,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 34572,
+      "images": [],
+      "nodeNames": [
+        "body-shell"
+      ],
+      "materialNames": [
+        "shared-metal-detail",
+        "shared-metal-housing"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "hvac-compact-single",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -1.100000023841858,
+          0.0,
+          -0.824999988079071
+        ],
+        "max": [
+          1.100000023841858,
+          1.100000023841858,
+          0.824999988079071
+        ],
+        "size": [
+          2.200000047683716,
+          1.100000023841858,
+          1.649999976158142
+        ]
+      },
+      "triangles": 70,
+      "vertices": 136,
+      "primitives": 2,
+      "bytes": 9908,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 9908,
+      "images": [],
+      "nodeNames": [
+        "body-shell"
+      ],
+      "materialNames": [
+        "shared-metal-detail",
+        "shared-metal-housing"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "hvac-medium-twin",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -1.3350000381469727,
+          0.0,
+          -1.024999976158142
+        ],
+        "max": [
+          1.3350000381469727,
+          1.350000023841858,
+          1.024999976158142
+        ],
+        "size": [
+          2.6700000762939453,
+          1.350000023841858,
+          2.049999952316284
+        ]
+      },
+      "triangles": 388,
+      "vertices": 730,
+      "primitives": 2,
+      "bytes": 40740,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 40740,
+      "images": [],
+      "nodeNames": [
+        "body-shell"
+      ],
+      "materialNames": [
+        "shared-metal-detail",
+        "shared-metal-housing"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "hvac-medium-twin",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -1.3350000381469727,
+          0.0,
+          -1.024999976158142
+        ],
+        "max": [
+          1.3350000381469727,
+          1.350000023841858,
+          1.024999976158142
+        ],
+        "size": [
+          2.6700000762939453,
+          1.350000023841858,
+          2.049999952316284
+        ]
+      },
+      "triangles": 92,
+      "vertices": 176,
+      "primitives": 2,
+      "bytes": 11980,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 11980,
+      "images": [],
+      "nodeNames": [
+        "body-shell"
+      ],
+      "materialNames": [
+        "shared-metal-detail",
+        "shared-metal-housing"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "hvac-wide-twin",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -1.8049999475479126,
+          0.0,
+          -1.225000023841858
+        ],
+        "max": [
+          1.8049999475479126,
+          1.399999976158142,
+          1.225000023841858
+        ],
+        "size": [
+          3.609999895095825,
+          1.399999976158142,
+          2.450000047683716
+        ]
+      },
+      "triangles": 388,
+      "vertices": 730,
+      "primitives": 2,
+      "bytes": 40736,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 40736,
+      "images": [],
+      "nodeNames": [
+        "body-shell"
+      ],
+      "materialNames": [
+        "shared-metal-detail",
+        "shared-metal-housing"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "hvac-wide-twin",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -1.8049999475479126,
+          0.0,
+          -1.225000023841858
+        ],
+        "max": [
+          1.8049999475479126,
+          1.399999976158142,
+          1.225000023841858
+        ],
+        "size": [
+          3.609999895095825,
+          1.399999976158142,
+          2.450000047683716
+        ]
+      },
+      "triangles": 92,
+      "vertices": 176,
+      "primitives": 2,
+      "bytes": 11976,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 11976,
+      "images": [],
+      "nodeNames": [
+        "body-shell"
+      ],
+      "materialNames": [
+        "shared-metal-detail",
+        "shared-metal-housing"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    }
+  ]
+}

@@ -1,0 +1,1551 @@
+{
+  "schemaVersion": 1,
+  "packageId": "mature-tree-templates",
+  "version": "2.0.0",
+  "baseRevision": "8b95f013297597845d542463d6ce635105a95c4f",
+  "status": "offline_complete",
+  "units": "metres",
+  "coordinateSystem": {
+    "authoringUp": "+Z",
+    "gltfUp": "+Y",
+    "conversion": "Blender (x,y,z) -> glTF (x,z,-y) once; authoring scale applied"
+  },
+  "provenance": {
+    "credit": "Based on Vancouver Living Atlas by YiTaChen",
+    "source": "https://github.com/YiTaChen/vancouver-living-atlas",
+    "license": "Vancouver Living Atlas Noncommercial Research and Attribution 1.0",
+    "geometry": "Original mature branching/crown construction in build.py, no external mesh or sprig geometry reuse.",
+    "maps": "Existing original vegetation_ground straight-alpha atlas reused; original bark maps downsampled to 256, normal vectors renormalized. No third-party imagery.",
+    "dimensionSources": [
+      "docs/AI_AGENT_DEVELOPMENT_BACKLOG.md#B03",
+      "lib/city/assets/tree-geometry.ts",
+      "lib/city/assets/tree-canopy.ts"
+    ],
+    "blenderVersion": "4.3.2",
+    "generatorSha256": "395d7f355cc8a33e86604c0f159896d998996ba03de54d98b1c574089a150ef1",
+    "exporterSha256": "e4960e5cc149b40761c539d565883bf3b22fe1e6b4e41d02d831cec0ca086377",
+    "texturePreprocessSha256": "6e4ba2aa878bcab494d2278307e1689517f43847b4c9470a40f76c017f0bd7ca"
+  },
+  "reexportCommand": "blender -b -t 2 --python-exit-code 1 --python tools/assets/mature-tree-templates/export.py -- --source tools/assets/mature-tree-templates/source --output /tmp/mature-tree-reexport",
+  "validationCommand": "python3 tools/assets/mature-tree-templates/validate.py",
+  "assets": [
+    {
+      "id": "mature-maple",
+      "taskId": "B03",
+      "variant": "maple",
+      "kind": "mature-tree-template",
+      "source": "source/mature-maple.lod0.blend",
+      "sourceSha256": "51d1359da55c807c220a979bc6ededcb04aa7ce1b9e7aec64073cea66064c3dc",
+      "lods": [
+        {
+          "level": 0,
+          "source": "source/mature-maple.lod0.blend",
+          "sourceSha256": "51d1359da55c807c220a979bc6ededcb04aa7ce1b9e7aec64073cea66064c3dc",
+          "file": "exports/mature-maple.lod0.glb",
+          "sha256": "3f7a4e958c14ddcce720745b987f1af5f642c44cf1fe0e9399346695d868f22c",
+          "boundsM": {
+            "min": [
+              -2.4195356369018555,
+              0.0,
+              -2.3496997356414795
+            ],
+            "max": [
+              2.360464334487915,
+              10.0,
+              2.232037305831909
+            ],
+            "size": [
+              4.7799999713897705,
+              10.0,
+              4.581737041473389
+            ]
+          },
+          "triangles": 7696,
+          "vertices": 14770,
+          "primitives": 4,
+          "bytes": 779568,
+          "geometryBytes": 779568,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 1,
+          "source": "source/mature-maple.lod1.blend",
+          "sourceSha256": "f34a94670874d138ca9330ac600ab423820a917b48dd97d5bd58398c3d7bd80f",
+          "file": "exports/mature-maple.lod1.glb",
+          "sha256": "a7b7d2d1e19d2769652ab5b03fc6599dc7c92f07ca4dcb7ffc753d45a149bae2",
+          "boundsM": {
+            "min": [
+              -2.4141902923583984,
+              0.0,
+              -2.3836309909820557
+            ],
+            "max": [
+              2.365809679031372,
+              10.0,
+              2.132826328277588
+            ],
+            "size": [
+              4.7799999713897705,
+              10.0,
+              4.5164573192596436
+            ]
+          },
+          "triangles": 1284,
+          "vertices": 1430,
+          "primitives": 4,
+          "bytes": 87700,
+          "geometryBytes": 87700,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 2,
+          "source": "source/mature-maple.lod2.blend",
+          "sourceSha256": "d79a375b322bdcec165070c197ff58cd97806796da58b4d768f179fd0992927e",
+          "file": "exports/mature-maple.lod2.glb",
+          "sha256": "ab36fd819294e3d80b18bc4afc8ed3fee1869ebcf3bfec0e91781f413f90f25b",
+          "boundsM": {
+            "min": [
+              -2.385688543319702,
+              0.0,
+              -2.309751510620117
+            ],
+            "max": [
+              2.3943114280700684,
+              10.0,
+              2.1362366676330566
+            ],
+            "size": [
+              4.7799999713897705,
+              10.0,
+              4.445988178253174
+            ]
+          },
+          "triangles": 222,
+          "vertices": 156,
+          "primitives": 3,
+          "bytes": 15392,
+          "geometryBytes": 15392,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -2.4195356369018555,
+          0.0,
+          -2.3496997356414795
+        ],
+        "max": [
+          2.360464334487915,
+          10.0,
+          2.232037305831909
+        ],
+        "size": [
+          4.7799999713897705,
+          10.0,
+          4.581737041473389
+        ]
+      },
+      "expectedDimensionsM": {
+        "height": 10,
+        "widthRange": [
+          4.6,
+          4.9
+        ],
+        "maximumHorizontalRadius": 2.85
+      },
+      "dimensionToleranceM": {
+        "height": 0.02,
+        "crownEnvelope": 0.18
+      },
+      "dimensionBasis": "Representative authored crown constrained to current consumer envelope, not surveyed species proportions. Original mature hierarchy, no sprig scaling.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "ground contact at trunk centre"
+      },
+      "attachmentDatum": {
+        "kind": "terrain-ground",
+        "planeY": 0
+      },
+      "frontAxis": "+Z",
+      "templateHeightM": 10,
+      "normalizationMode": "physical-template-source-height-divided-by-template-height",
+      "sourceHeightScaling": {
+        "formula": "uniformScale = sourceHeightM / templateHeightM",
+        "example": {
+          "sourceHeightM": 22.9,
+          "uniformScale": 2.29
+        },
+        "preserve": [
+          "sourceId",
+          "sourceSeed",
+          "sourcePosition",
+          "sourceHeight",
+          "existingPopulation",
+          "roadClearance"
+        ]
+      },
+      "materialBindings": [
+        {
+          "node": "trunk",
+          "material": "bark-opaque",
+          "role": "trunk",
+          "surfaceId": "vegetation-ground-bark",
+          "maps": {
+            "baseColor": "textures/bark_basecolor.png",
+            "normal": "textures/bark_normal.png",
+            "orm": "textures/bark_orm.png"
+          },
+          "channels": {
+            "normal": "OpenGL +Y, linear",
+            "orm": "R=1, G=roughness, B=0, linear"
+          },
+          "physicalTileM": [
+            0.8,
+            1.6
+          ],
+          "runtimeUvScale": "Multiply bark UV by sourceHeightM/templateHeightM per instance after physical template scaling. Keep leaf atlas UV unchanged; do not clone textures per height.",
+          "levels": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "node": "branches",
+          "material": "bark-opaque",
+          "role": "branches",
+          "surfaceId": "vegetation-ground-bark",
+          "sameAs": "trunk",
+          "levels": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "node": "foliage-cards",
+          "material": "foliage-straight-alpha",
+          "role": "foliage-cutout",
+          "surfaceId": "vegetation-ground-leaf-straight-rgba",
+          "maps": {
+            "baseColorAlpha": "textures/leaf_atlas_rgba.png"
+          },
+          "channels": {
+            "rgb": "sRGB unassociated color",
+            "alpha": "linear coverage"
+          },
+          "alphaMode": "MASK",
+          "alphaCutoff": 0.4,
+          "doubleSided": true,
+          "atlasCell": 0,
+          "levels": [
+            0,
+            1
+          ]
+        },
+        {
+          "node": "foliage-core",
+          "material": "foliage-solid-interior",
+          "role": "foliage-solid",
+          "surfaceId": "species-solid-crown-interior",
+          "maps": {},
+          "alphaMode": "OPAQUE",
+          "solidLogic": "Standard opaque material, identical color/depth/shadow coverage; no legacy RGB decoder or aSolid patch.",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "node": "foliage-core",
+          "material": "foliage-straight-alpha",
+          "role": "foliage-inner-cutout",
+          "levels": [
+            0
+          ],
+          "surfaceId": "vegetation-ground-leaf-straight-rgba",
+          "maps": {
+            "baseColorAlpha": "textures/leaf_atlas_rgba.png"
+          },
+          "channels": {
+            "rgb": "sRGB unassociated color",
+            "alpha": "linear coverage"
+          },
+          "alphaMode": "MASK",
+          "alphaCutoff": 0.4,
+          "doubleSided": true,
+          "solidLogic": "No opaque crown surfaces in broadleaf LOD0; inner and outer leaves share the same coverage."
+        }
+      ],
+      "textureMode": "external-shared",
+      "textureCost": {
+        "geometryBytes": 882660,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 882660,
+        "uniqueTexelBytesWithMips": 6640981.333333333,
+        "newUniqueTexelBytesWithMips": 6640981.333333333,
+        "productionResidencyDelta": "not measured; offline source reuse does not establish production residency",
+        "accounting": "1024 RGBA leaf + three 256 RGBA bark maps, shared once by SHA. All candidate residency counted; full RGBA8 mip estimate, not PNG download bytes. No mip correction PNGs automatically bound."
+      },
+      "lodPolicy": {
+        "levels": [
+          0,
+          1,
+          2
+        ],
+        "triangleCaps": [
+          8000,
+          2000,
+          240
+        ],
+        "geometryByteCaps": [
+          1048576,
+          262144,
+          65536
+        ],
+        "recommendedDistanceM": [
+          25,
+          65,
+          150
+        ],
+        "mode": "proposal only; city projected-size/LOD acceptance pending",
+        "nestedLeafClusters": false,
+        "stableClusterIdSubset": true,
+        "leafCenterPolicy": "LOD1 uses retained cluster IDs with a deterministic crown-envelope adjustment; exact centres are not identical. Main scaffold paths are unchanged.",
+        "farFallback": "LOD2 coarse closed crown volumes, no giant leaf billboard"
+      },
+      "clearance": {
+        "minimumClearTrunkHeightM": 2.5,
+        "maximumCrownRadiusM": 2.85,
+        "preserveExistingRoadClearance": true,
+        "note": "Scale every clearance with sourceHeightM/10; these are representative geometry values, not pruning certification."
+      },
+      "collision": {
+        "kind": "cylinder-proxy",
+        "radiusM": 0.3,
+        "heightM": 2.5,
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "use": "Optional trunk-only primitive; retain current city tree collision policy."
+      },
+      "anchors": [
+        {
+          "id": "ground-contact",
+          "positionM": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "template-top",
+          "positionM": [
+            0,
+            10,
+            0
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "sourceSpecies": [
+          "maple"
+        ],
+        "uniformScalingOnly": true,
+        "sourceSeedRole": "Use stable source seed for species/template choice and yaw; no regenerated placement",
+        "forbidden": [
+          "multiply physical 10 m template directly by source height",
+          "replace municipal height with 10 m",
+          "scale the 1.25 m research sprigs into mature trees"
+        ]
+      },
+      "intendedConsumer": [
+        "lib/city/detailed-trees.ts",
+        "lib/city/assets/tree-geometry.ts",
+        "lib/city/assets/tree-structure.ts",
+        "lib/city/tree-road-clearance.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "scope": "editable Blender source, true source-preserving reexport/edit test, actual GLB reimport, CPU UV/alpha/dimensions/roles/cost, Cycles CPU previews and alpha-aware silhouette checks",
+        "evidence": [
+          "qa/validation.json",
+          "qa/common-validation.json",
+          "qa/blender-audit.json",
+          "qa/source-roundtrip.json",
+          "qa/source-edit-safety.json",
+          "qa/preview-index.json",
+          "qa/visual-review.json",
+          "qa/tests.log"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "state": "runtime_pending_webgl",
+        "required": [
+          "source-scale conversion",
+          "shared texture/material loading",
+          "color/depth parity",
+          "shadow silhouette",
+          "10/30/65m four-light species matrix",
+          "instance pool/collision/clearance",
+          "disposal/cache",
+          "GPU time/overdraw/memory"
+        ]
+      },
+      "nearBroadleafRevision": "Version 2: opaque inner blobs replaced by five-plane masked inner leaf clusters; same atlas, explicit material binding per LOD."
+    },
+    {
+      "id": "mature-alder",
+      "taskId": "B03",
+      "variant": "alder",
+      "kind": "mature-tree-template",
+      "source": "source/mature-alder.lod0.blend",
+      "sourceSha256": "f701423d76511fcaf68319ff8767bb3e13b095545c40e11fdcc6afdbc207a352",
+      "lods": [
+        {
+          "level": 0,
+          "source": "source/mature-alder.lod0.blend",
+          "sourceSha256": "f701423d76511fcaf68319ff8767bb3e13b095545c40e11fdcc6afdbc207a352",
+          "file": "exports/mature-alder.lod0.glb",
+          "sha256": "52c619691b7dd9a2c6ef371ddfc60e436ebf34cd921e08dfa9a7ec258070a5be",
+          "boundsM": {
+            "min": [
+              -2.3485870361328125,
+              0.0,
+              -2.2963156700134277
+            ],
+            "max": [
+              2.3214128017425537,
+              10.0,
+              2.0775091648101807
+            ],
+            "size": [
+              4.669999837875366,
+              10.0,
+              4.373824834823608
+            ]
+          },
+          "triangles": 7680,
+          "vertices": 14738,
+          "primitives": 4,
+          "bytes": 777996,
+          "geometryBytes": 777996,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 1,
+          "source": "source/mature-alder.lod1.blend",
+          "sourceSha256": "9ba8c73d91286f6343bb5a61227c83046bf35eb91794d3d8c5faafbead4935f3",
+          "file": "exports/mature-alder.lod1.glb",
+          "sha256": "720b9fd48e80db1e0998eb8fe9dc379e36c8f8e984bf4c20107ae44a93d711f0",
+          "boundsM": {
+            "min": [
+              -2.4024956226348877,
+              0.0,
+              -2.287274122238159
+            ],
+            "max": [
+              2.2675042152404785,
+              10.0,
+              2.0085811614990234
+            ],
+            "size": [
+              4.669999837875366,
+              10.0,
+              4.295855283737183
+            ]
+          },
+          "triangles": 1284,
+          "vertices": 1430,
+          "primitives": 4,
+          "bytes": 87724,
+          "geometryBytes": 87724,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 2,
+          "source": "source/mature-alder.lod2.blend",
+          "sourceSha256": "9f6a9a121ab14d6ad030d2f5d22d1159fbe9fcaad0c9635324948892bc9295da",
+          "file": "exports/mature-alder.lod2.glb",
+          "sha256": "4e868be89620eb734f8ec6d2e8657c61b27bd40c1af7db9f0b7ee2f490c6a40e",
+          "boundsM": {
+            "min": [
+              -2.32312273979187,
+              0.0,
+              -2.22430682182312
+            ],
+            "max": [
+              2.346877098083496,
+              10.0,
+              2.0587732791900635
+            ],
+            "size": [
+              4.669999837875366,
+              10.0,
+              4.283080101013184
+            ]
+          },
+          "triangles": 222,
+          "vertices": 156,
+          "primitives": 3,
+          "bytes": 15396,
+          "geometryBytes": 15396,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -2.3485870361328125,
+          0.0,
+          -2.2963156700134277
+        ],
+        "max": [
+          2.3214128017425537,
+          10.0,
+          2.0775091648101807
+        ],
+        "size": [
+          4.669999837875366,
+          10.0,
+          4.373824834823608
+        ]
+      },
+      "expectedDimensionsM": {
+        "height": 10,
+        "widthRange": [
+          4.6,
+          4.9
+        ],
+        "maximumHorizontalRadius": 2.85
+      },
+      "dimensionToleranceM": {
+        "height": 0.02,
+        "crownEnvelope": 0.18
+      },
+      "dimensionBasis": "Representative authored crown constrained to current consumer envelope, not surveyed species proportions. Original mature hierarchy, no sprig scaling.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "ground contact at trunk centre"
+      },
+      "attachmentDatum": {
+        "kind": "terrain-ground",
+        "planeY": 0
+      },
+      "frontAxis": "+Z",
+      "templateHeightM": 10,
+      "normalizationMode": "physical-template-source-height-divided-by-template-height",
+      "sourceHeightScaling": {
+        "formula": "uniformScale = sourceHeightM / templateHeightM",
+        "example": {
+          "sourceHeightM": 22.9,
+          "uniformScale": 2.29
+        },
+        "preserve": [
+          "sourceId",
+          "sourceSeed",
+          "sourcePosition",
+          "sourceHeight",
+          "existingPopulation",
+          "roadClearance"
+        ]
+      },
+      "materialBindings": [
+        {
+          "node": "trunk",
+          "material": "bark-opaque",
+          "role": "trunk",
+          "surfaceId": "vegetation-ground-bark",
+          "maps": {
+            "baseColor": "textures/bark_basecolor.png",
+            "normal": "textures/bark_normal.png",
+            "orm": "textures/bark_orm.png"
+          },
+          "channels": {
+            "normal": "OpenGL +Y, linear",
+            "orm": "R=1, G=roughness, B=0, linear"
+          },
+          "physicalTileM": [
+            0.8,
+            1.6
+          ],
+          "runtimeUvScale": "Multiply bark UV by sourceHeightM/templateHeightM per instance after physical template scaling. Keep leaf atlas UV unchanged; do not clone textures per height.",
+          "levels": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "node": "branches",
+          "material": "bark-opaque",
+          "role": "branches",
+          "surfaceId": "vegetation-ground-bark",
+          "sameAs": "trunk",
+          "levels": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "node": "foliage-cards",
+          "material": "foliage-straight-alpha",
+          "role": "foliage-cutout",
+          "surfaceId": "vegetation-ground-leaf-straight-rgba",
+          "maps": {
+            "baseColorAlpha": "textures/leaf_atlas_rgba.png"
+          },
+          "channels": {
+            "rgb": "sRGB unassociated color",
+            "alpha": "linear coverage"
+          },
+          "alphaMode": "MASK",
+          "alphaCutoff": 0.4,
+          "doubleSided": true,
+          "atlasCell": 1,
+          "levels": [
+            0,
+            1
+          ]
+        },
+        {
+          "node": "foliage-core",
+          "material": "foliage-solid-interior",
+          "role": "foliage-solid",
+          "surfaceId": "species-solid-crown-interior",
+          "maps": {},
+          "alphaMode": "OPAQUE",
+          "solidLogic": "Standard opaque material, identical color/depth/shadow coverage; no legacy RGB decoder or aSolid patch.",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "node": "foliage-core",
+          "material": "foliage-straight-alpha",
+          "role": "foliage-inner-cutout",
+          "levels": [
+            0
+          ],
+          "surfaceId": "vegetation-ground-leaf-straight-rgba",
+          "maps": {
+            "baseColorAlpha": "textures/leaf_atlas_rgba.png"
+          },
+          "channels": {
+            "rgb": "sRGB unassociated color",
+            "alpha": "linear coverage"
+          },
+          "alphaMode": "MASK",
+          "alphaCutoff": 0.4,
+          "doubleSided": true,
+          "solidLogic": "No opaque crown surfaces in broadleaf LOD0; inner and outer leaves share the same coverage."
+        }
+      ],
+      "textureMode": "external-shared",
+      "textureCost": {
+        "geometryBytes": 881116,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 881116,
+        "uniqueTexelBytesWithMips": 6640981.333333333,
+        "newUniqueTexelBytesWithMips": 6640981.333333333,
+        "productionResidencyDelta": "not measured; offline source reuse does not establish production residency",
+        "accounting": "1024 RGBA leaf + three 256 RGBA bark maps, shared once by SHA. All candidate residency counted; full RGBA8 mip estimate, not PNG download bytes. No mip correction PNGs automatically bound."
+      },
+      "lodPolicy": {
+        "levels": [
+          0,
+          1,
+          2
+        ],
+        "triangleCaps": [
+          8000,
+          2000,
+          240
+        ],
+        "geometryByteCaps": [
+          1048576,
+          262144,
+          65536
+        ],
+        "recommendedDistanceM": [
+          25,
+          65,
+          150
+        ],
+        "mode": "proposal only; city projected-size/LOD acceptance pending",
+        "nestedLeafClusters": false,
+        "stableClusterIdSubset": true,
+        "leafCenterPolicy": "LOD1 uses retained cluster IDs with a deterministic crown-envelope adjustment; exact centres are not identical. Main scaffold paths are unchanged.",
+        "farFallback": "LOD2 coarse closed crown volumes, no giant leaf billboard"
+      },
+      "clearance": {
+        "minimumClearTrunkHeightM": 2.5,
+        "maximumCrownRadiusM": 2.85,
+        "preserveExistingRoadClearance": true,
+        "note": "Scale every clearance with sourceHeightM/10; these are representative geometry values, not pruning certification."
+      },
+      "collision": {
+        "kind": "cylinder-proxy",
+        "radiusM": 0.3,
+        "heightM": 2.5,
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "use": "Optional trunk-only primitive; retain current city tree collision policy."
+      },
+      "anchors": [
+        {
+          "id": "ground-contact",
+          "positionM": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "template-top",
+          "positionM": [
+            0,
+            10,
+            0
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "sourceSpecies": [
+          "alder"
+        ],
+        "uniformScalingOnly": true,
+        "sourceSeedRole": "Use stable source seed for species/template choice and yaw; no regenerated placement",
+        "forbidden": [
+          "multiply physical 10 m template directly by source height",
+          "replace municipal height with 10 m",
+          "scale the 1.25 m research sprigs into mature trees"
+        ]
+      },
+      "intendedConsumer": [
+        "lib/city/detailed-trees.ts",
+        "lib/city/assets/tree-geometry.ts",
+        "lib/city/assets/tree-structure.ts",
+        "lib/city/tree-road-clearance.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "scope": "editable Blender source, true source-preserving reexport/edit test, actual GLB reimport, CPU UV/alpha/dimensions/roles/cost, Cycles CPU previews and alpha-aware silhouette checks",
+        "evidence": [
+          "qa/validation.json",
+          "qa/common-validation.json",
+          "qa/blender-audit.json",
+          "qa/source-roundtrip.json",
+          "qa/source-edit-safety.json",
+          "qa/preview-index.json",
+          "qa/visual-review.json",
+          "qa/tests.log"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "state": "runtime_pending_webgl",
+        "required": [
+          "source-scale conversion",
+          "shared texture/material loading",
+          "color/depth parity",
+          "shadow silhouette",
+          "10/30/65m four-light species matrix",
+          "instance pool/collision/clearance",
+          "disposal/cache",
+          "GPU time/overdraw/memory"
+        ]
+      },
+      "nearBroadleafRevision": "Version 2: opaque inner blobs replaced by five-plane masked inner leaf clusters; same atlas, explicit material binding per LOD."
+    },
+    {
+      "id": "mature-douglas-fir",
+      "taskId": "B03",
+      "variant": "douglas-fir",
+      "kind": "mature-tree-template",
+      "source": "source/mature-douglas-fir.lod0.blend",
+      "sourceSha256": "f955792e65eeab51869631e07dc9170f62cb486d653e081314cf425e3b1f00bf",
+      "lods": [
+        {
+          "level": 0,
+          "source": "source/mature-douglas-fir.lod0.blend",
+          "sourceSha256": "f955792e65eeab51869631e07dc9170f62cb486d653e081314cf425e3b1f00bf",
+          "file": "exports/mature-douglas-fir.lod0.glb",
+          "sha256": "9c5f6e6ee4da71d0795db96d17329b601f0a58d4e7e2a0412898ebb22b1264dc",
+          "boundsM": {
+            "min": [
+              -2.246401071548462,
+              0.0,
+              -2.292567491531372
+            ],
+            "max": [
+              2.453598976135254,
+              10.0,
+              2.2243361473083496
+            ],
+            "size": [
+              4.700000047683716,
+              10.0,
+              4.516903638839722
+            ]
+          },
+          "triangles": 7634,
+          "vertices": 9425,
+          "primitives": 4,
+          "bytes": 540908,
+          "geometryBytes": 540908,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 1,
+          "source": "source/mature-douglas-fir.lod1.blend",
+          "sourceSha256": "0a2924b8523c9f17115c89053bfdc43033c9f0c4777303e14d1a672ce49d365c",
+          "file": "exports/mature-douglas-fir.lod1.glb",
+          "sha256": "19185412e754fe0d49d462550a229b1e171ea04adaafc4dd87159da399ea1522",
+          "boundsM": {
+            "min": [
+              -2.1973800659179688,
+              0.0,
+              -2.3297626972198486
+            ],
+            "max": [
+              2.502619981765747,
+              10.0,
+              2.1638195514678955
+            ],
+            "size": [
+              4.700000047683716,
+              10.0,
+              4.493582248687744
+            ]
+          },
+          "triangles": 1680,
+          "vertices": 1815,
+          "primitives": 4,
+          "bytes": 117612,
+          "geometryBytes": 117612,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 2,
+          "source": "source/mature-douglas-fir.lod2.blend",
+          "sourceSha256": "8c3b563819ff2f4654a1f58a68255236362e0662909dab4afbe1dd6f38ed5548",
+          "file": "exports/mature-douglas-fir.lod2.glb",
+          "sha256": "346dcc1444589b2d924b40210abe3447030dca64ad0aa72f8a533ad179d099d6",
+          "boundsM": {
+            "min": [
+              -2.455057144165039,
+              0.0,
+              -2.1504712104797363
+            ],
+            "max": [
+              2.2449426651000977,
+              10.0,
+              2.1243104934692383
+            ],
+            "size": [
+              4.699999809265137,
+              10.0,
+              4.274781703948975
+            ]
+          },
+          "triangles": 188,
+          "vertices": 140,
+          "primitives": 3,
+          "bytes": 14620,
+          "geometryBytes": 14620,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -2.246401071548462,
+          0.0,
+          -2.292567491531372
+        ],
+        "max": [
+          2.453598976135254,
+          10.0,
+          2.2243361473083496
+        ],
+        "size": [
+          4.700000047683716,
+          10.0,
+          4.516903638839722
+        ]
+      },
+      "expectedDimensionsM": {
+        "height": 10,
+        "widthRange": [
+          4.6,
+          4.9
+        ],
+        "maximumHorizontalRadius": 2.85
+      },
+      "dimensionToleranceM": {
+        "height": 0.02,
+        "crownEnvelope": 0.18
+      },
+      "dimensionBasis": "Representative authored crown constrained to current consumer envelope, not surveyed species proportions. Original mature hierarchy, no sprig scaling.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "ground contact at trunk centre"
+      },
+      "attachmentDatum": {
+        "kind": "terrain-ground",
+        "planeY": 0
+      },
+      "frontAxis": "+Z",
+      "templateHeightM": 10,
+      "normalizationMode": "physical-template-source-height-divided-by-template-height",
+      "sourceHeightScaling": {
+        "formula": "uniformScale = sourceHeightM / templateHeightM",
+        "example": {
+          "sourceHeightM": 22.9,
+          "uniformScale": 2.29
+        },
+        "preserve": [
+          "sourceId",
+          "sourceSeed",
+          "sourcePosition",
+          "sourceHeight",
+          "existingPopulation",
+          "roadClearance"
+        ]
+      },
+      "materialBindings": [
+        {
+          "node": "trunk",
+          "material": "bark-opaque",
+          "role": "trunk",
+          "surfaceId": "vegetation-ground-bark",
+          "maps": {
+            "baseColor": "textures/bark_basecolor.png",
+            "normal": "textures/bark_normal.png",
+            "orm": "textures/bark_orm.png"
+          },
+          "channels": {
+            "normal": "OpenGL +Y, linear",
+            "orm": "R=1, G=roughness, B=0, linear"
+          },
+          "physicalTileM": [
+            0.8,
+            1.6
+          ],
+          "runtimeUvScale": "Multiply bark UV by sourceHeightM/templateHeightM per instance after physical template scaling. Keep leaf atlas UV unchanged; do not clone textures per height.",
+          "levels": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "node": "branches",
+          "material": "bark-opaque",
+          "role": "branches",
+          "surfaceId": "vegetation-ground-bark",
+          "sameAs": "trunk",
+          "levels": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "node": "foliage-cards",
+          "material": "foliage-straight-alpha",
+          "role": "foliage-cutout",
+          "surfaceId": "vegetation-ground-leaf-straight-rgba",
+          "maps": {
+            "baseColorAlpha": "textures/leaf_atlas_rgba.png"
+          },
+          "channels": {
+            "rgb": "sRGB unassociated color",
+            "alpha": "linear coverage"
+          },
+          "alphaMode": "MASK",
+          "alphaCutoff": 0.4,
+          "doubleSided": true,
+          "atlasCell": 2,
+          "levels": [
+            0,
+            1
+          ]
+        },
+        {
+          "node": "foliage-core",
+          "material": "foliage-solid-interior",
+          "role": "foliage-solid",
+          "surfaceId": "species-solid-crown-interior",
+          "maps": {},
+          "alphaMode": "OPAQUE",
+          "solidLogic": "Standard opaque material, identical color/depth/shadow coverage; no legacy RGB decoder or aSolid patch.",
+          "levels": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "textureMode": "external-shared",
+      "textureCost": {
+        "geometryBytes": 673140,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 673140,
+        "uniqueTexelBytesWithMips": 6640981.333333333,
+        "newUniqueTexelBytesWithMips": 6640981.333333333,
+        "productionResidencyDelta": "not measured; offline source reuse does not establish production residency",
+        "accounting": "1024 RGBA leaf + three 256 RGBA bark maps, shared once by SHA. All candidate residency counted; full RGBA8 mip estimate, not PNG download bytes. No mip correction PNGs automatically bound."
+      },
+      "lodPolicy": {
+        "levels": [
+          0,
+          1,
+          2
+        ],
+        "triangleCaps": [
+          8000,
+          2000,
+          240
+        ],
+        "geometryByteCaps": [
+          1048576,
+          262144,
+          65536
+        ],
+        "recommendedDistanceM": [
+          25,
+          65,
+          150
+        ],
+        "mode": "proposal only; city projected-size/LOD acceptance pending",
+        "nestedLeafClusters": false,
+        "stableClusterIdSubset": true,
+        "leafCenterPolicy": "LOD1 uses retained cluster IDs with a deterministic crown-envelope adjustment; exact centres are not identical. Main scaffold paths are unchanged.",
+        "farFallback": "LOD2 coarse closed crown volumes, no giant leaf billboard"
+      },
+      "clearance": {
+        "minimumClearTrunkHeightM": 2.5,
+        "maximumCrownRadiusM": 2.85,
+        "preserveExistingRoadClearance": true,
+        "note": "Scale every clearance with sourceHeightM/10; these are representative geometry values, not pruning certification."
+      },
+      "collision": {
+        "kind": "cylinder-proxy",
+        "radiusM": 0.3,
+        "heightM": 2.5,
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "use": "Optional trunk-only primitive; retain current city tree collision policy."
+      },
+      "anchors": [
+        {
+          "id": "ground-contact",
+          "positionM": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "template-top",
+          "positionM": [
+            0,
+            10,
+            0
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "sourceSpecies": [
+          "douglas-fir"
+        ],
+        "uniformScalingOnly": true,
+        "sourceSeedRole": "Use stable source seed for species/template choice and yaw; no regenerated placement",
+        "forbidden": [
+          "multiply physical 10 m template directly by source height",
+          "replace municipal height with 10 m",
+          "scale the 1.25 m research sprigs into mature trees"
+        ]
+      },
+      "intendedConsumer": [
+        "lib/city/detailed-trees.ts",
+        "lib/city/assets/tree-geometry.ts",
+        "lib/city/assets/tree-structure.ts",
+        "lib/city/tree-road-clearance.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "scope": "editable Blender source, true source-preserving reexport/edit test, actual GLB reimport, CPU UV/alpha/dimensions/roles/cost, Cycles CPU previews and alpha-aware silhouette checks",
+        "evidence": [
+          "qa/validation.json",
+          "qa/common-validation.json",
+          "qa/blender-audit.json",
+          "qa/source-roundtrip.json",
+          "qa/source-edit-safety.json",
+          "qa/preview-index.json",
+          "qa/visual-review.json",
+          "qa/tests.log"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "state": "runtime_pending_webgl",
+        "required": [
+          "source-scale conversion",
+          "shared texture/material loading",
+          "color/depth parity",
+          "shadow silhouette",
+          "10/30/65m four-light species matrix",
+          "instance pool/collision/clearance",
+          "disposal/cache",
+          "GPU time/overdraw/memory"
+        ]
+      }
+    },
+    {
+      "id": "mature-western-redcedar",
+      "taskId": "B03",
+      "variant": "western-redcedar",
+      "kind": "mature-tree-template",
+      "source": "source/mature-western-redcedar.lod0.blend",
+      "sourceSha256": "1bc7046797563281009ab71f7db2e04e2fb4ba739a46e873ba68695b7c200fec",
+      "lods": [
+        {
+          "level": 0,
+          "source": "source/mature-western-redcedar.lod0.blend",
+          "sourceSha256": "1bc7046797563281009ab71f7db2e04e2fb4ba739a46e873ba68695b7c200fec",
+          "file": "exports/mature-western-redcedar.lod0.glb",
+          "sha256": "e080b30c5b76ef2ab4f35046cbe1a7215e176b462d0a42dfefe0240bb228b0ee",
+          "boundsM": {
+            "min": [
+              -2.393444299697876,
+              0.0,
+              -2.3959128856658936
+            ],
+            "max": [
+              2.366555690765381,
+              10.0,
+              2.187472343444824
+            ],
+            "size": [
+              4.759999990463257,
+              10.0,
+              4.583385229110718
+            ]
+          },
+          "triangles": 7634,
+          "vertices": 9425,
+          "primitives": 4,
+          "bytes": 540904,
+          "geometryBytes": 540904,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 1,
+          "source": "source/mature-western-redcedar.lod1.blend",
+          "sourceSha256": "aea5430b71d0a41d7e6d4b950a88f81ac474fba6538e2bc5d0f82ab2d924579e",
+          "file": "exports/mature-western-redcedar.lod1.glb",
+          "sha256": "5674761020c4f1ad9ff96332b9d8ad07f3a7e375f34f96b773f480ed61e2f063",
+          "boundsM": {
+            "min": [
+              -2.3472115993499756,
+              0.0,
+              -2.296102523803711
+            ],
+            "max": [
+              2.4127883911132812,
+              10.0,
+              2.2098820209503174
+            ],
+            "size": [
+              4.759999990463257,
+              10.0,
+              4.505984544754028
+            ]
+          },
+          "triangles": 1680,
+          "vertices": 1815,
+          "primitives": 4,
+          "bytes": 117636,
+          "geometryBytes": 117636,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 2,
+          "source": "source/mature-western-redcedar.lod2.blend",
+          "sourceSha256": "68290b8a768cc6849cff01f27fc96d0c65c2f998f257ab0ae229958e798a4286",
+          "file": "exports/mature-western-redcedar.lod2.glb",
+          "sha256": "e4b8a8af7cf47d839e0f1cb74f2351f1620566bee7135a69f7587e4df98decc8",
+          "boundsM": {
+            "min": [
+              -2.3815596103668213,
+              0.0,
+              -2.4135007858276367
+            ],
+            "max": [
+              2.3784403800964355,
+              10.0,
+              2.20986270904541
+            ],
+            "size": [
+              4.759999990463257,
+              10.0,
+              4.623363494873047
+            ]
+          },
+          "triangles": 188,
+          "vertices": 140,
+          "primitives": 3,
+          "bytes": 14652,
+          "geometryBytes": 14652,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -2.393444299697876,
+          0.0,
+          -2.3959128856658936
+        ],
+        "max": [
+          2.366555690765381,
+          10.0,
+          2.187472343444824
+        ],
+        "size": [
+          4.759999990463257,
+          10.0,
+          4.583385229110718
+        ]
+      },
+      "expectedDimensionsM": {
+        "height": 10,
+        "widthRange": [
+          4.6,
+          4.9
+        ],
+        "maximumHorizontalRadius": 2.85
+      },
+      "dimensionToleranceM": {
+        "height": 0.02,
+        "crownEnvelope": 0.18
+      },
+      "dimensionBasis": "Representative authored crown constrained to current consumer envelope, not surveyed species proportions. Original mature hierarchy, no sprig scaling.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "ground contact at trunk centre"
+      },
+      "attachmentDatum": {
+        "kind": "terrain-ground",
+        "planeY": 0
+      },
+      "frontAxis": "+Z",
+      "templateHeightM": 10,
+      "normalizationMode": "physical-template-source-height-divided-by-template-height",
+      "sourceHeightScaling": {
+        "formula": "uniformScale = sourceHeightM / templateHeightM",
+        "example": {
+          "sourceHeightM": 22.9,
+          "uniformScale": 2.29
+        },
+        "preserve": [
+          "sourceId",
+          "sourceSeed",
+          "sourcePosition",
+          "sourceHeight",
+          "existingPopulation",
+          "roadClearance"
+        ]
+      },
+      "materialBindings": [
+        {
+          "node": "trunk",
+          "material": "bark-opaque",
+          "role": "trunk",
+          "surfaceId": "vegetation-ground-bark",
+          "maps": {
+            "baseColor": "textures/bark_basecolor.png",
+            "normal": "textures/bark_normal.png",
+            "orm": "textures/bark_orm.png"
+          },
+          "channels": {
+            "normal": "OpenGL +Y, linear",
+            "orm": "R=1, G=roughness, B=0, linear"
+          },
+          "physicalTileM": [
+            0.8,
+            1.6
+          ],
+          "runtimeUvScale": "Multiply bark UV by sourceHeightM/templateHeightM per instance after physical template scaling. Keep leaf atlas UV unchanged; do not clone textures per height.",
+          "levels": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "node": "branches",
+          "material": "bark-opaque",
+          "role": "branches",
+          "surfaceId": "vegetation-ground-bark",
+          "sameAs": "trunk",
+          "levels": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "node": "foliage-cards",
+          "material": "foliage-straight-alpha",
+          "role": "foliage-cutout",
+          "surfaceId": "vegetation-ground-leaf-straight-rgba",
+          "maps": {
+            "baseColorAlpha": "textures/leaf_atlas_rgba.png"
+          },
+          "channels": {
+            "rgb": "sRGB unassociated color",
+            "alpha": "linear coverage"
+          },
+          "alphaMode": "MASK",
+          "alphaCutoff": 0.4,
+          "doubleSided": true,
+          "atlasCell": 3,
+          "levels": [
+            0,
+            1
+          ]
+        },
+        {
+          "node": "foliage-core",
+          "material": "foliage-solid-interior",
+          "role": "foliage-solid",
+          "surfaceId": "species-solid-crown-interior",
+          "maps": {},
+          "alphaMode": "OPAQUE",
+          "solidLogic": "Standard opaque material, identical color/depth/shadow coverage; no legacy RGB decoder or aSolid patch.",
+          "levels": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "textureMode": "external-shared",
+      "textureCost": {
+        "geometryBytes": 673192,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 673192,
+        "uniqueTexelBytesWithMips": 6640981.333333333,
+        "newUniqueTexelBytesWithMips": 6640981.333333333,
+        "productionResidencyDelta": "not measured; offline source reuse does not establish production residency",
+        "accounting": "1024 RGBA leaf + three 256 RGBA bark maps, shared once by SHA. All candidate residency counted; full RGBA8 mip estimate, not PNG download bytes. No mip correction PNGs automatically bound."
+      },
+      "lodPolicy": {
+        "levels": [
+          0,
+          1,
+          2
+        ],
+        "triangleCaps": [
+          8000,
+          2000,
+          240
+        ],
+        "geometryByteCaps": [
+          1048576,
+          262144,
+          65536
+        ],
+        "recommendedDistanceM": [
+          25,
+          65,
+          150
+        ],
+        "mode": "proposal only; city projected-size/LOD acceptance pending",
+        "nestedLeafClusters": false,
+        "stableClusterIdSubset": true,
+        "leafCenterPolicy": "LOD1 uses retained cluster IDs with a deterministic crown-envelope adjustment; exact centres are not identical. Main scaffold paths are unchanged.",
+        "farFallback": "LOD2 coarse closed crown volumes, no giant leaf billboard"
+      },
+      "clearance": {
+        "minimumClearTrunkHeightM": 2.5,
+        "maximumCrownRadiusM": 2.85,
+        "preserveExistingRoadClearance": true,
+        "note": "Scale every clearance with sourceHeightM/10; these are representative geometry values, not pruning certification."
+      },
+      "collision": {
+        "kind": "cylinder-proxy",
+        "radiusM": 0.3,
+        "heightM": 2.5,
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "use": "Optional trunk-only primitive; retain current city tree collision policy."
+      },
+      "anchors": [
+        {
+          "id": "ground-contact",
+          "positionM": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "template-top",
+          "positionM": [
+            0,
+            10,
+            0
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "sourceSpecies": [
+          "western-redcedar"
+        ],
+        "uniformScalingOnly": true,
+        "sourceSeedRole": "Use stable source seed for species/template choice and yaw; no regenerated placement",
+        "forbidden": [
+          "multiply physical 10 m template directly by source height",
+          "replace municipal height with 10 m",
+          "scale the 1.25 m research sprigs into mature trees"
+        ]
+      },
+      "intendedConsumer": [
+        "lib/city/detailed-trees.ts",
+        "lib/city/assets/tree-geometry.ts",
+        "lib/city/assets/tree-structure.ts",
+        "lib/city/tree-road-clearance.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "scope": "editable Blender source, true source-preserving reexport/edit test, actual GLB reimport, CPU UV/alpha/dimensions/roles/cost, Cycles CPU previews and alpha-aware silhouette checks",
+        "evidence": [
+          "qa/validation.json",
+          "qa/common-validation.json",
+          "qa/blender-audit.json",
+          "qa/source-roundtrip.json",
+          "qa/source-edit-safety.json",
+          "qa/preview-index.json",
+          "qa/visual-review.json",
+          "qa/tests.log"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "state": "runtime_pending_webgl",
+        "required": [
+          "source-scale conversion",
+          "shared texture/material loading",
+          "color/depth parity",
+          "shadow silhouette",
+          "10/30/65m four-light species matrix",
+          "instance pool/collision/clearance",
+          "disposal/cache",
+          "GPU time/overdraw/memory"
+        ]
+      }
+    }
+  ],
+  "textures": [
+    {
+      "id": "bark-basecolor",
+      "file": "exports/textures/bark_basecolor.png",
+      "sha256": "05921c188fa1c9b0768459790bba2515d36cca3efe9ba743670d6c664e6cd628",
+      "width": 256,
+      "height": 256,
+      "bytes": 77181,
+      "uniqueTexelBytesWithMips": 349525.3333333333,
+      "reusedFrom": "tools/assets/vegetation_ground/maps/bark_basecolor.png",
+      "newUnique": true,
+      "derivation": "256px Lanczos + vector-renormalized normal derivative",
+      "runtimeDedupKey": "sha256",
+      "colorSpace": "sRGB"
+    },
+    {
+      "id": "bark-normal",
+      "file": "exports/textures/bark_normal.png",
+      "sha256": "974ff6c09687297a5c06112e0f64dd9ad1f8f77b624947193ff8e3382933e5bd",
+      "width": 256,
+      "height": 256,
+      "bytes": 127592,
+      "uniqueTexelBytesWithMips": 349525.3333333333,
+      "reusedFrom": "tools/assets/vegetation_ground/maps/bark_normal.png",
+      "newUnique": true,
+      "derivation": "256px Lanczos + vector-renormalized normal derivative",
+      "runtimeDedupKey": "sha256",
+      "colorSpace": "linear"
+    },
+    {
+      "id": "bark-orm",
+      "file": "exports/textures/bark_orm.png",
+      "sha256": "a736df0665f087929f44f505740767b859630b16261eabfcf15bf1a1fb485a14",
+      "width": 256,
+      "height": 256,
+      "bytes": 22782,
+      "uniqueTexelBytesWithMips": 349525.3333333333,
+      "reusedFrom": "tools/assets/vegetation_ground/maps/bark_orm.png",
+      "newUnique": true,
+      "derivation": "256px Lanczos + vector-renormalized normal derivative",
+      "runtimeDedupKey": "sha256",
+      "colorSpace": "linear"
+    },
+    {
+      "id": "leaf-atlas-rgba",
+      "file": "exports/textures/leaf_atlas_rgba.png",
+      "sha256": "2eff86a192a7fbd791abb2a55ec414a3b5bc778b59f3101ff79b8512524ef50f",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 274504,
+      "uniqueTexelBytesWithMips": 5592405.333333333,
+      "reusedFrom": "tools/assets/vegetation_ground/maps/leaf_atlas_rgba.png",
+      "newUnique": true,
+      "derivation": "exact existing straight-alpha atlas",
+      "runtimeDedupKey": "sha256",
+      "colorSpace": "sRGB"
+    }
+  ],
+  "textureBudget": {
+    "newUniqueLimitBytes": 8388608,
+    "newUniqueBytesWithMips": 6640981.333333333,
+    "candidateTotalBytesWithMips": 6640981.333333333,
+    "additionalProductionResidencyBytes": "not measured; none of this offline candidate is assumed resident"
+  },
+  "runtimeStatus": "runtime_pending_webgl",
+  "visualSuitability": {
+    "nearBroadleaf": "offline_pass: no opaque LOD0 crown blobs",
+    "photorealism": "not_claimed",
+    "runtime": "not_run"
+  }
+}

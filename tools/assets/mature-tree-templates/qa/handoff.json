@@ -1,0 +1,68 @@
+{
+  "taskId": "B03",
+  "packageId": "mature-tree-templates",
+  "offlineStatus": "offline_complete",
+  "runtimeStatus": "runtime_pending_webgl",
+  "delivered": {
+    "species": 4,
+    "editableBlenderSources": 12,
+    "ordinaryExternalTextureGLBs": 12,
+    "cyclesCpuViews": 8,
+    "cpuSilhouetteBoards": 4,
+    "uniqueRuntimePngs": 4
+  },
+  "sourceRevision": "8b95f013297597845d542463d6ce635105a95c4f",
+  "packageVersion": "2.0.0",
+  "nearBroadleafVisualSuitability": "offline_pass; opaque blobs removed and actual reimport render reviewed",
+  "requiredScaling": {
+    "templateHeightM": 10,
+    "formula": "sourceHeightM / 10",
+    "example22_9m": 2.29,
+    "barkUvMultiplier": "same sourceHeightM/10 per instance, bark only; keep leaf atlas UV unchanged"
+  },
+  "candidateTextureRgba8FullMipsBytes": 6640981.333333333,
+  "maxActualRadiusM": 2.5953814196054883,
+  "worstCpuLodSilhouetteIoU": 0.6294760066188637,
+  "integrationEntrypoint": [
+    "lib/city/detailed-trees.ts",
+    "lib/city/assets/tree-geometry.ts",
+    "lib/city/assets/tree-structure.ts",
+    "lib/city/tree-road-clearance.ts"
+  ],
+  "runtimeNotTested": [
+    "WebGL color/depth/shadow alpha parity",
+    "authored mip upload or automatic mip needle retention",
+    "10/30/65m and grazing-angle city comparison",
+    "LOD transition quality",
+    "source-specific terrain/road clearance and collision",
+    "instancing/source population cap",
+    "texture dedup/cache/disposal",
+    "GPU time, overdraw and resident memory"
+  ],
+  "importantLimitations": [
+    "Representative procedural species envelopes, not botanical scans.",
+    "LOD1 retains sampled cluster IDs but deterministic envelope adjustment changes centres; trunk and primary scaffolds are stable.",
+    "LOD2 is a coarse closed crown proxy, unsuitable for close viewing.",
+    "Near broadleaf opacity blobs are removed; conifers and lower LODs remain stylized. Offline approval is not a claim of full realism or improved city imagery.",
+    "Near broadleaf inner/outer layers now share MASK coverage; added alpha-tested surface overlap needs GPU overdraw measurement.",
+    "All candidate maps count toward 6.333 MiB; reuse from an offline library is not existing production residency.",
+    "Five authored leaf mip PNGs are not embedded or automatically consumed by ordinary GLBs."
+  ],
+  "productionChanges": false,
+  "publicChanges": false,
+  "commitCreated": false,
+  "evidence": [
+    "qa/validation.json",
+    "qa/common-validation.json",
+    "qa/measurements.json",
+    "qa/blender-audit.json",
+    "qa/leaf-cluster-bounds.json",
+    "qa/texture-derivation.json",
+    "qa/source-roundtrip.json",
+    "qa/source-edit-safety.json",
+    "qa/tests.log",
+    "qa/preview-index.json",
+    "qa/visual-review.json",
+    "qa/broadleaf-revision.json"
+  ]
+}

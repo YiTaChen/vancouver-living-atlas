@@ -1,0 +1,320 @@
+{
+  "status": "pass",
+  "blenderVersion": "4.3.2",
+  "environment": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "mode": "actual Blender source reopening and GLB reimport CPU",
+  "records": [
+    {
+      "assetId": "mature-maple",
+      "lod": 0,
+      "status": "pass",
+      "sourceTriangles": 7696,
+      "editableMeshObjects": 4,
+      "sourceUnchanged": true,
+      "maximumMetricUvError": 2.184596281651352e-07,
+      "reimportBoundsM": {
+        "min": [
+          -2.4195356369018555,
+          0.0,
+          -2.3496997356414795
+        ],
+        "max": [
+          2.360464334487915,
+          10.0,
+          2.232037305831909
+        ],
+        "size": [
+          4.7799999713897705,
+          10.0,
+          4.581737041473389
+        ]
+      }
+    },
+    {
+      "assetId": "mature-maple",
+      "lod": 1,
+      "status": "pass",
+      "sourceTriangles": 1284,
+      "editableMeshObjects": 4,
+      "sourceUnchanged": true,
+      "maximumMetricUvError": 2.184596281651352e-07,
+      "reimportBoundsM": {
+        "min": [
+          -2.4141902923583984,
+          0.0,
+          -2.3836309909820557
+        ],
+        "max": [
+          2.365809679031372,
+          10.0,
+          2.132826328277588
+        ],
+        "size": [
+          4.7799999713897705,
+          10.0,
+          4.5164573192596436
+        ]
+      }
+    },
+    {
+      "assetId": "mature-maple",
+      "lod": 2,
+      "status": "pass",
+      "sourceTriangles": 222,
+      "editableMeshObjects": 3,
+      "sourceUnchanged": true,
+      "maximumMetricUvError": 1.9624185032540709e-07,
+      "reimportBoundsM": {
+        "min": [
+          -2.385688543319702,
+          0.0,
+          -2.309751510620117
+        ],
+        "max": [
+          2.3943114280700684,
+          10.0,
+          2.1362366676330566
+        ],
+        "size": [
+          4.7799999713897705,
+          10.0,
+          4.445988178253174
+        ]
+      }
+    },
+    {
+      "assetId": "mature-alder",
+      "lod": 0,
+      "status": "pass",
+      "sourceTriangles": 7680,
+      "editableMeshObjects": 4,
+      "sourceUnchanged": true,
+      "maximumMetricUvError": 1.562894045292751e-07,
+      "reimportBoundsM": {
+        "min": [
+          -2.3485870361328125,
+          0.0,
+          -2.2963156700134277
+        ],
+        "max": [
+          2.3214128017425537,
+          10.0,
+          2.0775091648101807
+        ],
+        "size": [
+          4.669999837875366,
+          10.0,
+          4.373824834823608
+        ]
+      }
+    },
+    {
+      "assetId": "mature-alder",
+      "lod": 1,
+      "status": "pass",
+      "sourceTriangles": 1284,
+      "editableMeshObjects": 4,
+      "sourceUnchanged": true,
+      "maximumMetricUvError": 1.562894045292751e-07,
+      "reimportBoundsM": {
+        "min": [
+          -2.4024956226348877,
+          0.0,
+          -2.287274122238159
+        ],
+        "max": [
+          2.2675042152404785,
+          10.0,
+          2.0085811614990234
+        ],
+        "size": [
+          4.669999837875366,
+          10.0,
+          4.295855283737183
+        ]
+      }
+    },
+    {
+      "assetId": "mature-alder",
+      "lod": 2,
+      "status": "pass",
+      "sourceTriangles": 222,
+      "editableMeshObjects": 3,
+      "sourceUnchanged": true,
+      "maximumMetricUvError": 1.2693210660330578e-07,
+      "reimportBoundsM": {
+        "min": [
+          -2.32312273979187,
+          0.0,
+          -2.22430682182312
+        ],
+        "max": [
+          2.346877098083496,
+          10.0,
+          2.0587732791900635
+        ],
+        "size": [
+          4.669999837875366,
+          10.0,
+          4.283080101013184
+        ]
+      }
+    },
+    {
+      "assetId": "mature-douglas-fir",
+      "lod": 0,
+      "status": "pass",
+      "sourceTriangles": 7634,
+      "editableMeshObjects": 4,
+      "sourceUnchanged": true,
+      "maximumMetricUvError": 2.3272585014666447e-07,
+      "reimportBoundsM": {
+        "min": [
+          -2.246401071548462,
+          0.0,
+          -2.292567491531372
+        ],
+        "max": [
+          2.453598976135254,
+          10.0,
+          2.2243361473083496
+        ],
+        "size": [
+          4.700000047683716,
+          10.0,
+          4.516903638839722
+        ]
+      }
+    },
+    {
+      "assetId": "mature-douglas-fir",
+      "lod": 1,
+      "status": "pass",
+      "sourceTriangles": 1680,
+      "editableMeshObjects": 4,
+      "sourceUnchanged": true,
+      "maximumMetricUvError": 2.3272585014666447e-07,
+      "reimportBoundsM": {
+        "min": [
+          -2.1973800659179688,
+          0.0,
+          -2.3297626972198486
+        ],
+        "max": [
+          2.502619981765747,
+          10.0,
+          2.1638195514678955
+        ],
+        "size": [
+          4.700000047683716,
+          10.0,
+          4.493582248687744
+        ]
+      }
+    },
+    {
+      "assetId": "mature-douglas-fir",
+      "lod": 2,
+      "status": "pass",
+      "sourceTriangles": 188,
+      "editableMeshObjects": 3,
+      "sourceUnchanged": true,
+      "maximumMetricUvError": 9.947753376593482e-08,
+      "reimportBoundsM": {
+        "min": [
+          -2.455057144165039,
+          0.0,
+          -2.1504712104797363
+        ],
+        "max": [
+          2.2449426651000977,
+          10.0,
+          2.1243104934692383
+        ],
+        "size": [
+          4.699999809265137,
+          10.0,
+          4.274781703948975
+        ]
+      }
+    },
+    {
+      "assetId": "mature-western-redcedar",
+      "lod": 0,
+      "status": "pass",
+      "sourceTriangles": 7634,
+      "editableMeshObjects": 4,
+      "sourceUnchanged": true,
+      "maximumMetricUvError": 1.7703230792420754e-07,
+      "reimportBoundsM": {
+        "min": [
+          -2.393444299697876,
+          0.0,
+          -2.3959128856658936
+        ],
+        "max": [
+          2.366555690765381,
+          10.0,
+          2.187472343444824
+        ],
+        "size": [
+          4.759999990463257,
+          10.0,
+          4.583385229110718
+        ]
+      }
+    },
+    {
+      "assetId": "mature-western-redcedar",
+      "lod": 1,
+      "status": "pass",
+      "sourceTriangles": 1680,
+      "editableMeshObjects": 4,
+      "sourceUnchanged": true,
+      "maximumMetricUvError": 1.7703230792420754e-07,
+      "reimportBoundsM": {
+        "min": [
+          -2.3472115993499756,
+          0.0,
+          -2.296102523803711
+        ],
+        "max": [
+          2.4127883911132812,
+          10.0,
+          2.2098820209503174
+        ],
+        "size": [
+          4.759999990463257,
+          10.0,
+          4.505984544754028
+        ]
+      }
+    },
+    {
+      "assetId": "mature-western-redcedar",
+      "lod": 2,
+      "status": "pass",
+      "sourceTriangles": 188,
+      "editableMeshObjects": 3,
+      "sourceUnchanged": true,
+      "maximumMetricUvError": 2.0705022940603612e-07,
+      "reimportBoundsM": {
+        "min": [
+          -2.3815596103668213,
+          0.0,
+          -2.4135007858276367
+        ],
+        "max": [
+          2.3784403800964355,
+          10.0,
+          2.20986270904541
+        ],
+        "size": [
+          4.759999990463257,
+          10.0,
+          4.623363494873047
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,1045 @@
+{
+  "status": "rendered",
+  "blenderVersion": "4.3.2",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "noRuntimeExportsFromQA": true,
+  "lightingScope": "offline material studies, not city weather/GPU acceptance",
+  "renders": [
+    {
+      "file": "qa/previews/waterfront-column-lod0-front.png",
+      "sha256": "9d2a4c64975e36e04853dc85e8876f3295ac8ef526e781a6e9fb5c12aae30aad",
+      "measuredHumanHeightsM": {
+        "1.75": 1.75,
+        "1.81": 1.8100000619888306
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "waterfront-column",
+      "lod": 0,
+      "view": "front",
+      "lighting": "sunny",
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "sourceGLB": "exports/waterfront-column.lod0.glb",
+      "sourceSha256": "3127003f867e60bc2c9727c67a7d54540f2fe8e770f85a72a7a579abe95e91df"
+    },
+    {
+      "file": "qa/previews/waterfront-column-lod1-front.png",
+      "sha256": "902913c9e1ab952802ce9364d3a9ae5eb277a71f5a907f9b44b3cd6008f8696e",
+      "measuredHumanHeightsM": {
+        "1.75": 1.75,
+        "1.81": 1.8100000619888306
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "waterfront-column",
+      "lod": 1,
+      "view": "front",
+      "lighting": "sunny",
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "sourceGLB": "exports/waterfront-column.lod1.glb",
+      "sourceSha256": "4db99310417d833399c356f9bfaf254c33885991e13666318a6e442a380b6587"
+    },
+    {
+      "file": "qa/previews/waterfront-column-lod2-front.png",
+      "sha256": "b0ee419134b8281ceba4a80a0e9b972818a3092b70d8702530e7cd819ff3bd14",
+      "measuredHumanHeightsM": {
+        "1.75": 1.75,
+        "1.81": 1.8100000619888306
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "waterfront-column",
+      "lod": 2,
+      "view": "front",
+      "lighting": "sunny",
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "sourceGLB": "exports/waterfront-column.lod2.glb",
+      "sourceSha256": "36d6914716878b4088013d02ffe71995218dfbb346434d3b21ea84c370e2a9fa"
+    },
+    {
+      "file": "qa/previews/waterfront-column-side.png",
+      "sha256": "98838660aac0206c8835d4699a27d382c57b0e09c7089ab89a1a16d21fa4adf5",
+      "measuredHumanHeightsM": {},
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "waterfront-column",
+      "lod": 0,
+      "view": "side",
+      "lighting": "sunny",
+      "sourceGLB": "exports/waterfront-column.lod0.glb",
+      "sourceSha256": "3127003f867e60bc2c9727c67a7d54540f2fe8e770f85a72a7a579abe95e91df"
+    },
+    {
+      "file": "qa/previews/waterfront-column-back.png",
+      "sha256": "7776e2b7ae899f6433aec635b77a3fee5e77a465b05afa4d4000cfd8408645c0",
+      "measuredHumanHeightsM": {},
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "waterfront-column",
+      "lod": 0,
+      "view": "back",
+      "lighting": "sunny",
+      "sourceGLB": "exports/waterfront-column.lod0.glb",
+      "sourceSha256": "3127003f867e60bc2c9727c67a7d54540f2fe8e770f85a72a7a579abe95e91df"
+    },
+    {
+      "file": "qa/previews/waterfront-column-top.png",
+      "sha256": "cabd640533e6e39c3074e88b698cd569f78cda14668f4f2426200052658d2c18",
+      "measuredHumanHeightsM": {},
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "waterfront-column",
+      "lod": 0,
+      "view": "top",
+      "lighting": "sunny",
+      "sourceGLB": "exports/waterfront-column.lod0.glb",
+      "sourceSha256": "3127003f867e60bc2c9727c67a7d54540f2fe8e770f85a72a7a579abe95e91df"
+    },
+    {
+      "file": "qa/previews/waterfront-capital-lod0-front.png",
+      "sha256": "56d498a33be542245b41ede7726fba68b5d27b44f04fbcb32f1c942ef6618c63",
+      "measuredHumanHeightsM": {
+        "1.75": 1.75,
+        "1.81": 1.8100000619888306
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "waterfront-capital",
+      "lod": 0,
+      "view": "front",
+      "lighting": "sunny",
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "sourceGLB": "exports/waterfront-capital.lod0.glb",
+      "sourceSha256": "06f484312699a1d13c486b58ada1ab1dae9aa0dd19a5b7ee022b7d6d42d1acd8"
+    },
+    {
+      "file": "qa/previews/waterfront-capital-lod1-front.png",
+      "sha256": "e162be9af71ea5e126aebc5d4e1435231195129a5ecb84d24918ede75cbeb898",
+      "measuredHumanHeightsM": {
+        "1.75": 1.75,
+        "1.81": 1.8100000619888306
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "waterfront-capital",
+      "lod": 1,
+      "view": "front",
+      "lighting": "sunny",
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "sourceGLB": "exports/waterfront-capital.lod1.glb",
+      "sourceSha256": "c1da18982c14c6f905a8f3ce082e5d0153b61f876f079c6cc6ad06a6c72a2a5b"
+    },
+    {
+      "file": "qa/previews/waterfront-capital-lod2-front.png",
+      "sha256": "f75f35a5da9f83424512d77d1875ff15006d0ee5f20d2c030be64b1382ba8304",
+      "measuredHumanHeightsM": {
+        "1.75": 1.75,
+        "1.81": 1.8100000619888306
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "waterfront-capital",
+      "lod": 2,
+      "view": "front",
+      "lighting": "sunny",
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "sourceGLB": "exports/waterfront-capital.lod2.glb",
+      "sourceSha256": "e25919aa2ecd98a57d97bc4d1b2b90b2745e2e3fbfa962926e6bb994da3ebbe6"
+    },
+    {
+      "file": "qa/previews/waterfront-capital-side.png",
+      "sha256": "d95cc551540a56bc8820492624ead58648d769df7782f9f674466648d672177c",
+      "measuredHumanHeightsM": {},
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "waterfront-capital",
+      "lod": 0,
+      "view": "side",
+      "lighting": "sunny",
+      "sourceGLB": "exports/waterfront-capital.lod0.glb",
+      "sourceSha256": "06f484312699a1d13c486b58ada1ab1dae9aa0dd19a5b7ee022b7d6d42d1acd8"
+    },
+    {
+      "file": "qa/previews/waterfront-capital-back.png",
+      "sha256": "05aa700a9049985c827b9b596239d7416b6f60811ac7477f2cdac28f66f79a26",
+      "measuredHumanHeightsM": {},
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "waterfront-capital",
+      "lod": 0,
+      "view": "back",
+      "lighting": "sunny",
+      "sourceGLB": "exports/waterfront-capital.lod0.glb",
+      "sourceSha256": "06f484312699a1d13c486b58ada1ab1dae9aa0dd19a5b7ee022b7d6d42d1acd8"
+    },
+    {
+      "file": "qa/previews/waterfront-capital-top.png",
+      "sha256": "968ca454e00befb2a68ed9f10edaef11d8f88566de788cbb1964daf555bd5109",
+      "measuredHumanHeightsM": {},
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "waterfront-capital",
+      "lod": 0,
+      "view": "top",
+      "lighting": "sunny",
+      "sourceGLB": "exports/waterfront-capital.lod0.glb",
+      "sourceSha256": "06f484312699a1d13c486b58ada1ab1dae9aa0dd19a5b7ee022b7d6d42d1acd8"
+    },
+    {
+      "file": "qa/previews/waterfront-pediment-moulding-lod0-front.png",
+      "sha256": "1b9107a68cd39c33c38430a34b6d1fdd04d3d18bde1692f67e3e9ffccff70ad9",
+      "measuredHumanHeightsM": {
+        "1.75": 1.75,
+        "1.81": 1.8100000619888306
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "waterfront-pediment-moulding",
+      "lod": 0,
+      "view": "front",
+      "lighting": "sunny",
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "sourceGLB": "exports/waterfront-pediment-moulding.lod0.glb",
+      "sourceSha256": "2e7543f161b245fee1c378070391843c8becc961d4acaaff6ffdde322ec26861"
+    },
+    {
+      "file": "qa/previews/waterfront-pediment-moulding-lod1-front.png",
+      "sha256": "491cf054ed2b2a27c88bd1924aa928efbde5a3385e7791a8ff7332d424491fac",
+      "measuredHumanHeightsM": {
+        "1.75": 1.75,
+        "1.81": 1.8100000619888306
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "waterfront-pediment-moulding",
+      "lod": 1,
+      "view": "front",
+      "lighting": "sunny",
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "sourceGLB": "exports/waterfront-pediment-moulding.lod1.glb",
+      "sourceSha256": "294d69503b79def4f2fa31a7914a250f7965d239918b80943bb7e060b7e34e79"
+    },
+    {
+      "file": "qa/previews/waterfront-pediment-moulding-lod2-front.png",
+      "sha256": "3942b0af564faec08d7a18ad5b795569e6637130c8fef1fa3cf78563a15bf2b6",
+      "measuredHumanHeightsM": {
+        "1.75": 1.75,
+        "1.81": 1.8100000619888306
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "waterfront-pediment-moulding",
+      "lod": 2,
+      "view": "front",
+      "lighting": "sunny",
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "sourceGLB": "exports/waterfront-pediment-moulding.lod2.glb",
+      "sourceSha256": "2c28c17ed64cb48e9286991c03f13939b794da8d0a387ae2c1708f626b8716fb"
+    },
+    {
+      "file": "qa/previews/waterfront-pediment-moulding-side.png",
+      "sha256": "6cc75d7cefd5e2206f1cd1d3748902edec2a60322b04587235fbee2ff2cd2a55",
+      "measuredHumanHeightsM": {},
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "waterfront-pediment-moulding",
+      "lod": 0,
+      "view": "side",
+      "lighting": "sunny",
+      "sourceGLB": "exports/waterfront-pediment-moulding.lod0.glb",
+      "sourceSha256": "2e7543f161b245fee1c378070391843c8becc961d4acaaff6ffdde322ec26861"
+    },
+    {
+      "file": "qa/previews/waterfront-pediment-moulding-back.png",
+      "sha256": "6a4fbd56382320fc82ffe36bbdc1dd2a3cd9af39f2bc27398c4b1369ddf56176",
+      "measuredHumanHeightsM": {},
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "waterfront-pediment-moulding",
+      "lod": 0,
+      "view": "back",
+      "lighting": "sunny",
+      "sourceGLB": "exports/waterfront-pediment-moulding.lod0.glb",
+      "sourceSha256": "2e7543f161b245fee1c378070391843c8becc961d4acaaff6ffdde322ec26861"
+    },
+    {
+      "file": "qa/previews/waterfront-pediment-moulding-top.png",
+      "sha256": "7abd72d953324d8a9c0c4f8e4d12cb1eb312d148cd435aec3410736460c75306",
+      "measuredHumanHeightsM": {},
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "waterfront-pediment-moulding",
+      "lod": 0,
+      "view": "top",
+      "lighting": "sunny",
+      "sourceGLB": "exports/waterfront-pediment-moulding.lod0.glb",
+      "sourceSha256": "2e7543f161b245fee1c378070391843c8becc961d4acaaff6ffdde322ec26861"
+    },
+    {
+      "file": "qa/previews/waterfront-window-recess-lod0-front.png",
+      "sha256": "f2d2a3dfa17e7ba77c9f07c7dd769531df7104358a7ffeefa9bcef908996eec1",
+      "measuredHumanHeightsM": {
+        "1.75": 1.75,
+        "1.81": 1.8100000619888306
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "waterfront-window-recess",
+      "lod": 0,
+      "view": "front",
+      "lighting": "sunny",
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "sourceGLB": "exports/waterfront-window-recess.lod0.glb",
+      "sourceSha256": "b92a43ebe470953b257c35baf0261203cbf23ef5a96086f3b85b79abb7e98125"
+    },
+    {
+      "file": "qa/previews/waterfront-window-recess-lod1-front.png",
+      "sha256": "0f3fabae2e00205c4f53f90d71005d88303ab2be730ca298c944bf6fd5e86ab2",
+      "measuredHumanHeightsM": {
+        "1.75": 1.75,
+        "1.81": 1.8100000619888306
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "waterfront-window-recess",
+      "lod": 1,
+      "view": "front",
+      "lighting": "sunny",
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "sourceGLB": "exports/waterfront-window-recess.lod1.glb",
+      "sourceSha256": "5374c2a85262181d75b7be203c6263a7adf7697f10e4c8633645c6d12d968fbe"
+    },
+    {
+      "file": "qa/previews/waterfront-window-recess-lod2-front.png",
+      "sha256": "454c52b677c88d8ad9f048079ee443f61aa73c243449e041af1fe5a4da18390c",
+      "measuredHumanHeightsM": {
+        "1.75": 1.75,
+        "1.81": 1.8100000619888306
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "waterfront-window-recess",
+      "lod": 2,
+      "view": "front",
+      "lighting": "sunny",
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "sourceGLB": "exports/waterfront-window-recess.lod2.glb",
+      "sourceSha256": "ef9286cc39a85a5b3a7425cb088b211fa30d1e04e4195d5d9eeb123e91d1aeef"
+    },
+    {
+      "file": "qa/previews/waterfront-window-recess-side.png",
+      "sha256": "6e9858d5f8fab98cc26bbc9400ee7185a12775e3d9673286fec530fccba6f10c",
+      "measuredHumanHeightsM": {},
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "waterfront-window-recess",
+      "lod": 0,
+      "view": "side",
+      "lighting": "sunny",
+      "sourceGLB": "exports/waterfront-window-recess.lod0.glb",
+      "sourceSha256": "b92a43ebe470953b257c35baf0261203cbf23ef5a96086f3b85b79abb7e98125"
+    },
+    {
+      "file": "qa/previews/waterfront-window-recess-back.png",
+      "sha256": "cdcd5c105e688ed4f46a7c121bdc5e91068586168c2a84f9006bb319c8e3d8cb",
+      "measuredHumanHeightsM": {},
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "waterfront-window-recess",
+      "lod": 0,
+      "view": "back",
+      "lighting": "sunny",
+      "sourceGLB": "exports/waterfront-window-recess.lod0.glb",
+      "sourceSha256": "b92a43ebe470953b257c35baf0261203cbf23ef5a96086f3b85b79abb7e98125"
+    },
+    {
+      "file": "qa/previews/waterfront-window-recess-top.png",
+      "sha256": "d9adf0b86c88ad2d109c3c4f9d9e5f146341e2cb57dc439607e34a4e683b6f0e",
+      "measuredHumanHeightsM": {},
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "waterfront-window-recess",
+      "lod": 0,
+      "view": "top",
+      "lighting": "sunny",
+      "sourceGLB": "exports/waterfront-window-recess.lod0.glb",
+      "sourceSha256": "b92a43ebe470953b257c35baf0261203cbf23ef5a96086f3b85b79abb7e98125"
+    },
+    {
+      "file": "qa/previews/marine-archivolt-relief-lod0-front.png",
+      "sha256": "45dce12ce0d4000b5f4c6f13a006151a0874b6cabc3e41f95f5b0cccf3de4f0f",
+      "measuredHumanHeightsM": {
+        "1.75": 1.75,
+        "1.81": 1.8100000619888306
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "marine-archivolt-relief",
+      "lod": 0,
+      "view": "front",
+      "lighting": "sunny",
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "sourceGLB": "exports/marine-archivolt-relief.lod0.glb",
+      "sourceSha256": "08665a972152b9737cf32da00cfdbbf20ba03a83ede9c826b12e1e25911de467"
+    },
+    {
+      "file": "qa/previews/marine-archivolt-relief-lod1-front.png",
+      "sha256": "446d687489eb789bf8f7fbd7f9b26dc43c83597a94d8e0ead5092fbc9daf26da",
+      "measuredHumanHeightsM": {
+        "1.75": 1.75,
+        "1.81": 1.8100000619888306
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "marine-archivolt-relief",
+      "lod": 1,
+      "view": "front",
+      "lighting": "sunny",
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "sourceGLB": "exports/marine-archivolt-relief.lod1.glb",
+      "sourceSha256": "fdf7c412c8d64e8aed076111d6ec65b692e02c9e107f23725377cc281231335b"
+    },
+    {
+      "file": "qa/previews/marine-archivolt-relief-lod2-front.png",
+      "sha256": "d51967866160f8a0a703e105691f5c0284a1392af0ec34785744018e023308ff",
+      "measuredHumanHeightsM": {
+        "1.75": 1.75,
+        "1.81": 1.8100000619888306
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "marine-archivolt-relief",
+      "lod": 2,
+      "view": "front",
+      "lighting": "sunny",
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "sourceGLB": "exports/marine-archivolt-relief.lod2.glb",
+      "sourceSha256": "972d020ad1c7a32d11f61834b40ec19e7bd05bbf2e467237f5006d770c9ce407"
+    },
+    {
+      "file": "qa/previews/marine-archivolt-relief-side.png",
+      "sha256": "1fa26aeb2b12f58109770452135a21389f53d1279cc3fcc07e81c4ea752da57e",
+      "measuredHumanHeightsM": {},
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "marine-archivolt-relief",
+      "lod": 0,
+      "view": "side",
+      "lighting": "sunny",
+      "sourceGLB": "exports/marine-archivolt-relief.lod0.glb",
+      "sourceSha256": "08665a972152b9737cf32da00cfdbbf20ba03a83ede9c826b12e1e25911de467"
+    },
+    {
+      "file": "qa/previews/marine-archivolt-relief-back.png",
+      "sha256": "25cae2c06478d8165d90592f0f571fa8a828f2c645ded52e757c26987f96717b",
+      "measuredHumanHeightsM": {},
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "marine-archivolt-relief",
+      "lod": 0,
+      "view": "back",
+      "lighting": "sunny",
+      "sourceGLB": "exports/marine-archivolt-relief.lod0.glb",
+      "sourceSha256": "08665a972152b9737cf32da00cfdbbf20ba03a83ede9c826b12e1e25911de467"
+    },
+    {
+      "file": "qa/previews/marine-archivolt-relief-top.png",
+      "sha256": "9fc0c7d2522417a32ef0d98d8c40bed96aadbb1c64a562056ff8a575033bd251",
+      "measuredHumanHeightsM": {},
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "marine-archivolt-relief",
+      "lod": 0,
+      "view": "top",
+      "lighting": "sunny",
+      "sourceGLB": "exports/marine-archivolt-relief.lod0.glb",
+      "sourceSha256": "08665a972152b9737cf32da00cfdbbf20ba03a83ede9c826b12e1e25911de467"
+    },
+    {
+      "file": "qa/previews/marine-copper-grille-lod0-front.png",
+      "sha256": "14728203f7a173b3f4f99d2e0a1cd2923eaa602cd5d7ed5d57e8395b8e4672e1",
+      "measuredHumanHeightsM": {
+        "1.75": 1.75,
+        "1.81": 1.8100000619888306
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "marine-copper-grille",
+      "lod": 0,
+      "view": "front",
+      "lighting": "sunny",
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "sourceGLB": "exports/marine-copper-grille.lod0.glb",
+      "sourceSha256": "a0eb72fc685d3b21345a59a596e3d1539ed6c89b70aea562093f5c836e9eb136"
+    },
+    {
+      "file": "qa/previews/marine-copper-grille-lod1-front.png",
+      "sha256": "908f0f4a8ba911fa6e28fb273be2d2e2cc1c8563127bea8209a200e88ed40ebb",
+      "measuredHumanHeightsM": {
+        "1.75": 1.75,
+        "1.81": 1.8100000619888306
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "marine-copper-grille",
+      "lod": 1,
+      "view": "front",
+      "lighting": "sunny",
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "sourceGLB": "exports/marine-copper-grille.lod1.glb",
+      "sourceSha256": "613051dfa58b219928eea7dd4be3cf3bd3587eb48226f4944b9ed27bdd79a986"
+    },
+    {
+      "file": "qa/previews/marine-copper-grille-lod2-front.png",
+      "sha256": "99ad34c0ff0fb87e9f1c698ec0a5ec291f7c734db63b6f98626647ca69b89ea8",
+      "measuredHumanHeightsM": {
+        "1.75": 1.75,
+        "1.81": 1.8100000619888306
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "marine-copper-grille",
+      "lod": 2,
+      "view": "front",
+      "lighting": "sunny",
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "sourceGLB": "exports/marine-copper-grille.lod2.glb",
+      "sourceSha256": "21b859febcafec7f1c6f43c3b0d10ce759281d37ae66d3e4ca2a2a3a42eaf8fa"
+    },
+    {
+      "file": "qa/previews/marine-copper-grille-side.png",
+      "sha256": "37c43927193c2c44bd0e9c33e6db5e4a21ec82932ad62c4434462f3a9dc7a43e",
+      "measuredHumanHeightsM": {},
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "marine-copper-grille",
+      "lod": 0,
+      "view": "side",
+      "lighting": "sunny",
+      "sourceGLB": "exports/marine-copper-grille.lod0.glb",
+      "sourceSha256": "a0eb72fc685d3b21345a59a596e3d1539ed6c89b70aea562093f5c836e9eb136"
+    },
+    {
+      "file": "qa/previews/marine-copper-grille-back.png",
+      "sha256": "40893970bc1bbea20d0b504fed003c199a201a5be2e7ed26b571d3937c6266c2",
+      "measuredHumanHeightsM": {},
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "marine-copper-grille",
+      "lod": 0,
+      "view": "back",
+      "lighting": "sunny",
+      "sourceGLB": "exports/marine-copper-grille.lod0.glb",
+      "sourceSha256": "a0eb72fc685d3b21345a59a596e3d1539ed6c89b70aea562093f5c836e9eb136"
+    },
+    {
+      "file": "qa/previews/marine-copper-grille-top.png",
+      "sha256": "a58022fb109dad1838f3fc1da001773af03f7d22716ee919cfd48cd72fb96da7",
+      "measuredHumanHeightsM": {},
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        640,
+        640
+      ],
+      "assetId": "marine-copper-grille",
+      "lod": 0,
+      "view": "top",
+      "lighting": "sunny",
+      "sourceGLB": "exports/marine-copper-grille.lod0.glb",
+      "sourceSha256": "a0eb72fc685d3b21345a59a596e3d1539ed6c89b70aea562093f5c836e9eb136"
+    },
+    {
+      "file": "qa/previews/waterfront-sunny.png",
+      "sha256": "96b561a829da6f5ea192c179a167970bdf2a19f6737f47324875e3331b8a4222",
+      "measuredHumanHeightsM": {
+        "1.75": 1.75,
+        "1.81": 1.8100000619888306
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        960,
+        640
+      ],
+      "assembly": "waterfront",
+      "lod": 0,
+      "lighting": "sunny",
+      "view": "front",
+      "source": "delivered GLBs reimported, authored unscaled assembly transforms; no consumer shell",
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ]
+    },
+    {
+      "file": "qa/previews/waterfront-overcast.png",
+      "sha256": "b5ed416920ec072c72ce553b3ad07f58a77063f71791421de10217883f4e9723",
+      "measuredHumanHeightsM": {
+        "1.75": 1.75,
+        "1.81": 1.8100000619888306
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        960,
+        640
+      ],
+      "assembly": "waterfront",
+      "lod": 0,
+      "lighting": "overcast",
+      "view": "front",
+      "source": "delivered GLBs reimported, authored unscaled assembly transforms; no consumer shell",
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ]
+    },
+    {
+      "file": "qa/previews/waterfront-dusk.png",
+      "sha256": "27b79c95e43ad5d3df8262c5a29e5872bcaea86aaf94001e76ec5c2974abf5de",
+      "measuredHumanHeightsM": {
+        "1.75": 1.75,
+        "1.81": 1.8100000619888306
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        960,
+        640
+      ],
+      "assembly": "waterfront",
+      "lod": 0,
+      "lighting": "dusk",
+      "view": "front",
+      "source": "delivered GLBs reimported, authored unscaled assembly transforms; no consumer shell",
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ]
+    },
+    {
+      "file": "qa/previews/waterfront-night.png",
+      "sha256": "930855d5328a494370c54cc093ba92845dbcb7eb51b4dcea0a489596b145bb39",
+      "measuredHumanHeightsM": {
+        "1.75": 1.75,
+        "1.81": 1.8100000619888306
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        960,
+        640
+      ],
+      "assembly": "waterfront",
+      "lod": 0,
+      "lighting": "night",
+      "view": "front",
+      "source": "delivered GLBs reimported, authored unscaled assembly transforms; no consumer shell",
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ]
+    },
+    {
+      "file": "qa/previews/marine-sunny.png",
+      "sha256": "5d6a43244b9215dc5c5b885fc4ece59ff555904fb448f13d1f0c05f75633971e",
+      "measuredHumanHeightsM": {
+        "1.75": 1.75,
+        "1.81": 1.8100000619888306
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        960,
+        640
+      ],
+      "assembly": "marine",
+      "lod": 0,
+      "lighting": "sunny",
+      "view": "front",
+      "source": "delivered GLBs reimported, authored unscaled assembly transforms; no consumer shell",
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ]
+    },
+    {
+      "file": "qa/previews/marine-overcast.png",
+      "sha256": "92ed3c37a92d058362b6d0b36b2cecec1184418acff1d2bbb50b4724bc76e9cf",
+      "measuredHumanHeightsM": {
+        "1.75": 1.75,
+        "1.81": 1.8100000619888306
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        960,
+        640
+      ],
+      "assembly": "marine",
+      "lod": 0,
+      "lighting": "overcast",
+      "view": "front",
+      "source": "delivered GLBs reimported, authored unscaled assembly transforms; no consumer shell",
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ]
+    },
+    {
+      "file": "qa/previews/marine-dusk.png",
+      "sha256": "c6be5570a169968c16d45d4f7d8e8a608801d669896b5aa22c81bf047ecdcea2",
+      "measuredHumanHeightsM": {
+        "1.75": 1.75,
+        "1.81": 1.8100000619888306
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        960,
+        640
+      ],
+      "assembly": "marine",
+      "lod": 0,
+      "lighting": "dusk",
+      "view": "front",
+      "source": "delivered GLBs reimported, authored unscaled assembly transforms; no consumer shell",
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ]
+    },
+    {
+      "file": "qa/previews/marine-night.png",
+      "sha256": "5f2602be265c00a72cc84154d419032e01b4ffce41e167fa30aee57f17d4378b",
+      "measuredHumanHeightsM": {
+        "1.75": 1.75,
+        "1.81": 1.8100000619888306
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        960,
+        640
+      ],
+      "assembly": "marine",
+      "lod": 0,
+      "lighting": "night",
+      "view": "front",
+      "source": "delivered GLBs reimported, authored unscaled assembly transforms; no consumer shell",
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ]
+    }
+  ]
+}
