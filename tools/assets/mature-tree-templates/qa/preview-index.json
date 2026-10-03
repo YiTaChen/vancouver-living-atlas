@@ -1,0 +1,277 @@
+{
+  "status": "pass",
+  "renderer": "Blender Cycles CPU",
+  "blenderVersion": "4.3.2",
+  "samples": 24,
+  "threads": 2,
+  "source": "actual GLB reimport, no source-only render",
+  "referenceObjectsExcludedFromRuntime": true,
+  "humanReferenceMeasurements": [
+    {
+      "requestedHeightM": 1.75,
+      "actualHeightM": 1.75,
+      "minimumZ": 0.0,
+      "runtimeExported": false
+    },
+    {
+      "requestedHeightM": 1.81,
+      "actualHeightM": 1.809999942779541,
+      "minimumZ": 0.0,
+      "runtimeExported": false
+    },
+    {
+      "requestedHeightM": 1.75,
+      "actualHeightM": 1.75,
+      "minimumZ": 0.0,
+      "runtimeExported": false
+    },
+    {
+      "requestedHeightM": 1.81,
+      "actualHeightM": 1.809999942779541,
+      "minimumZ": 0.0,
+      "runtimeExported": false
+    },
+    {
+      "requestedHeightM": 1.75,
+      "actualHeightM": 1.75,
+      "minimumZ": 0.0,
+      "runtimeExported": false
+    },
+    {
+      "requestedHeightM": 1.81,
+      "actualHeightM": 1.809999942779541,
+      "minimumZ": 0.0,
+      "runtimeExported": false
+    },
+    {
+      "requestedHeightM": 1.75,
+      "actualHeightM": 1.75,
+      "minimumZ": 0.0,
+      "runtimeExported": false
+    },
+    {
+      "requestedHeightM": 1.81,
+      "actualHeightM": 1.809999942779541,
+      "minimumZ": 0.0,
+      "runtimeExported": false
+    },
+    {
+      "requestedHeightM": 1.75,
+      "actualHeightM": 1.75,
+      "minimumZ": 0.0,
+      "runtimeExported": false
+    },
+    {
+      "requestedHeightM": 1.81,
+      "actualHeightM": 1.809999942779541,
+      "minimumZ": 0.0,
+      "runtimeExported": false
+    }
+  ],
+  "rulerHeightM": 1,
+  "runtimeAcceptance": "not_run",
+  "glbSha256References": {
+    "exports/mature-maple.lod0.glb": "3f7a4e958c14ddcce720745b987f1af5f642c44cf1fe0e9399346695d868f22c",
+    "exports/mature-alder.lod0.glb": "52c619691b7dd9a2c6ef371ddfc60e436ebf34cd921e08dfa9a7ec258070a5be",
+    "exports/mature-douglas-fir.lod0.glb": "9c5f6e6ee4da71d0795db96d17329b601f0a58d4e7e2a0412898ebb22b1264dc",
+    "exports/mature-western-redcedar.lod0.glb": "e080b30c5b76ef2ab4f35046cbe1a7215e176b462d0a42dfefe0240bb228b0ee",
+    "exports/mature-maple.lod1.glb": "a7b7d2d1e19d2769652ab5b03fc6599dc7c92f07ca4dcb7ffc753d45a149bae2",
+    "exports/mature-maple.lod2.glb": "ab36fd819294e3d80b18bc4afc8ed3fee1869ebcf3bfec0e91781f413f90f25b",
+    "exports/mature-alder.lod1.glb": "720b9fd48e80db1e0998eb8fe9dc379e36c8f8e984bf4c20107ae44a93d711f0",
+    "exports/mature-alder.lod2.glb": "4e868be89620eb734f8ec6d2e8657c61b27bd40c1af7db9f0b7ee2f490c6a40e",
+    "exports/mature-douglas-fir.lod1.glb": "19185412e754fe0d49d462550a229b1e171ea04adaafc4dd87159da399ea1522",
+    "exports/mature-douglas-fir.lod2.glb": "346dcc1444589b2d924b40210abe3447030dca64ad0aa72f8a533ad179d099d6",
+    "exports/mature-western-redcedar.lod1.glb": "5674761020c4f1ad9ff96332b9d8ad07f3a7e375f34f96b773f480ed61e2f063",
+    "exports/mature-western-redcedar.lod2.glb": "e4b8a8af7cf47d839e0f1cb74f2351f1620566bee7135a69f7587e4df98decc8"
+  },
+  "previews": [
+    {
+      "file": "qa/previews/mature-lod0-clear.png",
+      "lighting": "clear",
+      "lods": [
+        0
+      ],
+      "assets": [
+        "exports/mature-maple.lod0.glb",
+        "exports/mature-alder.lod0.glb",
+        "exports/mature-douglas-fir.lod0.glb",
+        "exports/mature-western-redcedar.lod0.glb"
+      ],
+      "refsM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "sha256": "18e971721c1b6f4a1e929fa6f603d385d2caebcd3b94f7e95bf5bf7be8ac18e1",
+      "pixels": [
+        1200,
+        660
+      ]
+    },
+    {
+      "file": "qa/previews/mature-lod0-overcast.png",
+      "lighting": "overcast",
+      "lods": [
+        0
+      ],
+      "assets": [
+        "exports/mature-maple.lod0.glb",
+        "exports/mature-alder.lod0.glb",
+        "exports/mature-douglas-fir.lod0.glb",
+        "exports/mature-western-redcedar.lod0.glb"
+      ],
+      "refsM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "sha256": "795aa0af921b5e195df7b9e440abe703a3ef19d4cf4772da21476b629e13aeb9",
+      "pixels": [
+        1200,
+        660
+      ]
+    },
+    {
+      "file": "qa/previews/mature-lod0-dusk.png",
+      "lighting": "dusk",
+      "lods": [
+        0
+      ],
+      "assets": [
+        "exports/mature-maple.lod0.glb",
+        "exports/mature-alder.lod0.glb",
+        "exports/mature-douglas-fir.lod0.glb",
+        "exports/mature-western-redcedar.lod0.glb"
+      ],
+      "refsM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "sha256": "bee0f87beabaabed4ba2d2f02270df2f583695ddd792d02e5364e55af07f82f6",
+      "pixels": [
+        1200,
+        660
+      ]
+    },
+    {
+      "file": "qa/previews/mature-lod0-night.png",
+      "lighting": "night",
+      "lods": [
+        0
+      ],
+      "assets": [
+        "exports/mature-maple.lod0.glb",
+        "exports/mature-alder.lod0.glb",
+        "exports/mature-douglas-fir.lod0.glb",
+        "exports/mature-western-redcedar.lod0.glb"
+      ],
+      "refsM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "sha256": "59f982df815511f7f02d132ce042f5a149a86af9de82a746faebe4fc6bb2322e",
+      "pixels": [
+        1200,
+        660
+      ]
+    },
+    {
+      "file": "qa/previews/maple-lod-comparison.png",
+      "lighting": "clear",
+      "lods": [
+        0,
+        1,
+        2
+      ],
+      "assets": [
+        "exports/mature-maple.lod0.glb",
+        "exports/mature-maple.lod1.glb",
+        "exports/mature-maple.lod2.glb"
+      ],
+      "refsM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "sha256": "e7ecb3eddd8e4b79de8a8212def5f162eddaf598c87adc7df3e29654d301a62e",
+      "pixels": [
+        1050,
+        660
+      ]
+    },
+    {
+      "file": "qa/previews/alder-lod-comparison.png",
+      "lighting": "clear",
+      "lods": [
+        0,
+        1,
+        2
+      ],
+      "assets": [
+        "exports/mature-alder.lod0.glb",
+        "exports/mature-alder.lod1.glb",
+        "exports/mature-alder.lod2.glb"
+      ],
+      "refsM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "sha256": "0e2e3f5beee7c5943d09007009ba29cb8b498cee219a1b528cbe70c999567876",
+      "pixels": [
+        1050,
+        660
+      ]
+    },
+    {
+      "file": "qa/previews/douglas-fir-lod-comparison.png",
+      "lighting": "clear",
+      "lods": [
+        0,
+        1,
+        2
+      ],
+      "assets": [
+        "exports/mature-douglas-fir.lod0.glb",
+        "exports/mature-douglas-fir.lod1.glb",
+        "exports/mature-douglas-fir.lod2.glb"
+      ],
+      "refsM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "sha256": "dda4e141fcff62e9b471abc357bdafa3f053d2f7598ca03cdb88f18e1080f0d4",
+      "pixels": [
+        1050,
+        660
+      ]
+    },
+    {
+      "file": "qa/previews/western-redcedar-lod-comparison.png",
+      "lighting": "clear",
+      "lods": [
+        0,
+        1,
+        2
+      ],
+      "assets": [
+        "exports/mature-western-redcedar.lod0.glb",
+        "exports/mature-western-redcedar.lod1.glb",
+        "exports/mature-western-redcedar.lod2.glb"
+      ],
+      "refsM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "sha256": "f5ad84a7927b490159399a85df67873badbca2f8910b8e1c93519e20e39c9e2c",
+      "pixels": [
+        1050,
+        660
+      ]
+    }
+  ]
+}

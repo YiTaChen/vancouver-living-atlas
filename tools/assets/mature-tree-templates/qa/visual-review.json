@@ -1,0 +1,60 @@
+{
+  "status": "pass",
+  "revision": "2.0.0",
+  "scope": "Independent inspection of actual exported/reimported GLB Cycles CPU images after the focused broadleaf quality revision. No full-realism or runtime-comparison claim.",
+  "nearBroadleafVisualSuitability": "offline_pass",
+  "reviewedImages": [
+    {
+      "file": "qa/previews/mature-lod0-clear.png",
+      "sha256": "18e971721c1b6f4a1e929fa6f603d385d2caebcd3b94f7e95bf5bf7be8ac18e1"
+    },
+    {
+      "file": "qa/previews/mature-lod0-overcast.png",
+      "sha256": "795aa0af921b5e195df7b9e440abe703a3ef19d4cf4772da21476b629e13aeb9"
+    },
+    {
+      "file": "qa/previews/mature-lod0-dusk.png",
+      "sha256": "bee0f87beabaabed4ba2d2f02270df2f583695ddd792d02e5364e55af07f82f6"
+    },
+    {
+      "file": "qa/previews/mature-lod0-night.png",
+      "sha256": "59f982df815511f7f02d132ce042f5a149a86af9de82a746faebe4fc6bb2322e"
+    },
+    {
+      "file": "qa/previews/maple-lod-comparison.png",
+      "sha256": "e7ecb3eddd8e4b79de8a8212def5f162eddaf598c87adc7df3e29654d301a62e"
+    },
+    {
+      "file": "qa/previews/alder-lod-comparison.png",
+      "sha256": "0e2e3f5beee7c5943d09007009ba29cb8b498cee219a1b528cbe70c999567876"
+    },
+    {
+      "file": "qa/previews/douglas-fir-lod-comparison.png",
+      "sha256": "dda4e141fcff62e9b471abc357bdafa3f053d2f7598ca03cdb88f18e1080f0d4"
+    },
+    {
+      "file": "qa/previews/western-redcedar-lod-comparison.png",
+      "sha256": "f5ad84a7927b490159399a85df67873badbca2f8910b8e1c93519e20e39c9e2c"
+    }
+  ],
+  "checks": {
+    "nearBroadleafOpaqueBlobRemoval": "pass: zero opaque foliage triangles in both LOD0 broadleaf models",
+    "branchAssociatedLayeredLeafCoverage": "pass",
+    "full10mSilhouetteAndGroundDatum": "pass",
+    "clearTrunkAndBranchHierarchy": "pass",
+    "subMetreCutoutLeafClusters": "pass",
+    "straightAlphaEdgesAgainstBrightBackground": "pass",
+    "fourLightingPreviews": "pass",
+    "allThreeLodsShownPerSpecies": "pass",
+    "metricRulerAndHumanReferences": "pass"
+  },
+  "findings": [
+    "Maple and alder LOD0 are now built from outer and inner atlas-masked clusters. The smooth bright opaque crown blobs seen in version 1 are absent; small leaves and branch gaps define the crown.",
+    "The revision keeps the same dimensions, branch skeleton and texture set. All ten unaffected GLBs are byte-identical to version 1.",
+    "LOD1 and LOD2 remain deliberately coarse opaque aggregate proxies. Their brightness/density changes are visible in the side-by-side close display and require actual city-distance transition testing.",
+    "The conifer LOD0 layering is unchanged. Fine needles, night readability and mip behavior still require the city renderer.",
+    "More triangles now use alpha masking. CPU images do not establish GPU overdraw, texture residency delta or frame-time improvement."
+  ],
+  "photorealism": "not_claimed",
+  "runtimeStatus": "not_run"
+}

@@ -1,0 +1,41 @@
+{
+  "status": "pass",
+  "records": [
+    {
+      "role": "basecolor",
+      "source": "tools/assets/vegetation_ground/maps/bark_basecolor.png",
+      "sourceSha256": "29a4640e7b0bcce8dda65d164992feec273b84eb30cc6bceebd1f94fd6b251d0",
+      "output": "source/textures/bark_basecolor.png",
+      "sha256": "05921c188fa1c9b0768459790bba2515d36cca3efe9ba743670d6c664e6cd628",
+      "dimensions": [
+        256,
+        256
+      ],
+      "method": "Lanczos"
+    },
+    {
+      "role": "normal",
+      "source": "tools/assets/vegetation_ground/maps/bark_normal.png",
+      "sourceSha256": "d580f12e68b8b2186f0885fe6b8d4a1820e19b06bf45645c3ae8378f6edd0082",
+      "output": "source/textures/bark_normal.png",
+      "sha256": "974ff6c09687297a5c06112e0f64dd9ad1f8f77b624947193ff8e3382933e5bd",
+      "dimensions": [
+        256,
+        256
+      ],
+      "method": "Lanczos; tangent normal RGB decoded/renormalized/re-encoded"
+    },
+    {
+      "role": "orm",
+      "source": "tools/assets/vegetation_ground/maps/bark_orm.png",
+      "sourceSha256": "2109adce8735783d4a502be81108a8e9c0e95fe18ff089ea5a96ca7c79a88fe3",
+      "output": "source/textures/bark_orm.png",
+      "sha256": "a736df0665f087929f44f505740767b859630b16261eabfcf15bf1a1fb485a14",
+      "dimensions": [
+        256,
+        256
+      ],
+      "method": "Lanczos"
+    }
+  ]
+}
