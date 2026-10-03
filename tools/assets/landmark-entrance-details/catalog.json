@@ -1,0 +1,19 @@
+{
+  "packageId": "landmark-entrance-details",
+  "baseRevision": "8b95f013297597845d542463d6ce635105a95c4f",
+  "license": "LicenseRef-Vancouver-Living-Atlas-NC-1.0",
+  "budget": {"id":"B-HERO", "triangles":[12000,3000,500], "geometryBytes":[1048576,262144,65536]},
+  "materials": [
+    {"name":"landmark-sandstone", "role":"heritage-stone", "surfaceId":"sandstone", "baseColorLinear":[0.64,0.57,0.43,1], "roughness":0.79, "metallic":0, "tileMeters":1.2},
+    {"name":"landmark-terracotta", "role":"glazed-terracotta", "surfaceId":"marine-terracotta", "baseColorLinear":[0.61,0.43,0.25,1], "roughness":0.49, "metallic":0.03, "tileMeters":1},
+    {"name":"landmark-copper", "role":"copper-grille", "surfaceId":"marine-copper", "baseColorLinear":[0.33,0.23,0.105,1], "roughness":0.36, "metallic":0.76, "tileMeters":1}
+  ],
+  "assets": [
+    {"id":"waterfront-column", "kind":"column", "material":"landmark-sandstone", "dimensionsM":[1.2,8,1.2], "expectedMinM":[-0.6,0,-0.6], "datum":"column-base", "basis":"Existing envelope.cylinder(0.6,8), interiors.ts; original restrained fluting within its envelope"},
+    {"id":"waterfront-capital", "kind":"capital", "material":"landmark-sandstone", "dimensionsM":[1.6,0.35,1.6], "expectedMinM":[-0.8,0,-0.8], "datum":"capital-underside", "basis":"Existing 1.6 x .35 x 1.6 box centered at f+8; original layered capital interpretation"},
+    {"id":"waterfront-pediment-moulding", "kind":"pediment-moulding", "material":"landmark-sandstone", "dimensionsM":[28,3.5,0.24], "expectedMinM":[-14,0,0], "datum":"pediment-front-base", "basis":"Existing 28 x 3.5 m triangle; additive front-face moulding within silhouette, not a replacement shell"},
+    {"id":"waterfront-window-recess", "kind":"window-reveal", "material":"landmark-sandstone", "dimensionsM":[3.32,5.32,0.24], "expectedMinM":[-1.66,0,0], "datum":"window-surround-lower-centre", "basis":"3 x 5 m existing upper glazing plus proposed .16 m surround; no shell opening or glass replacement"},
+    {"id":"marine-archivolt-relief", "kind":"archivolt-relief", "material":"landmark-terracotta", "dimensionsM":[8.24,7.18,0.44], "expectedMinM":[-4.12,0.16,-0.2], "datum":"marine-unlifted-entry-frame", "basis":"MARINE_ENTRY_CONTRACT rx2.55 spring3.7 rise2.82; existing archivolt outer rx3.6/ry3.64; new original geometric chevrons"},
+    {"id":"marine-copper-grille", "kind":"transom-grille", "material":"landmark-copper", "dimensionsM":[5.1,3.37,0.12], "expectedMinM":[-2.55,3.15,-1.2], "datum":"marine-unlifted-entry-frame", "basis":"Existing recessed transom above y3.19 at doorZ=-1.2; original geometric fan and vertical rhythm"}
+  ]
+}

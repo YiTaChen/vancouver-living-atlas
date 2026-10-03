@@ -1,0 +1,35 @@
+{
+  "status": "pass",
+  "CPU": {
+    "packageValidator": "pass",
+    "commonContract": "pass",
+    "tests": {
+      "status": "pass",
+      "passed": 15,
+      "failed": 0,
+      "evidence": "tests.log"
+    }
+  },
+  "Blender": {
+    "sourceReopen": 18,
+    "actualGLBReimport": 18,
+    "byteIdenticalPreservingReexport": 18,
+    "sourceEditTest": "pass",
+    "CyclesCPURenders": 44,
+    "humanReferencesMeasuredM": [
+      1.75,
+      1.81
+    ],
+    "QAReferenceRulerNominalLengthM": 1
+  },
+  "visualReview": "pass",
+  "runtimeChecks": {
+    "status": "not_run",
+    "reason": "Offline package only; no GPU city scene, performance, lifecycle or gameplay acceptance"
+  },
+  "productionBuild": {
+    "status": "not_run",
+    "reason": "Parent integration task owns final repository build and all-new-package isolation"
+  },
+  "sourcesPreserved": true
+}

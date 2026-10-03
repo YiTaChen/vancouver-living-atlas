@@ -1,0 +1,654 @@
+{
+  "status": "pass",
+  "scope": "common packaging, source hashes, rest-pose transformed GLB geometry and costs only; package-specific Blender, semantic and runtime checks required",
+  "results": [
+    {
+      "assetId": "waterfront-column",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.6000000238418579,
+          0.0,
+          -0.6000000238418579
+        ],
+        "max": [
+          0.6000000238418579,
+          8.0,
+          0.6000000238418579
+        ],
+        "size": [
+          1.2000000476837158,
+          8.0,
+          1.2000000476837158
+        ]
+      },
+      "triangles": 764,
+      "vertices": 1928,
+      "primitives": 1,
+      "bytes": 98764,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 98764,
+      "images": [],
+      "nodeNames": [
+        "waterfront-column"
+      ],
+      "materialNames": [
+        "landmark-sandstone"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "waterfront-column",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.6000000238418579,
+          0.0,
+          -0.6000000238418579
+        ],
+        "max": [
+          0.6000000238418579,
+          8.0,
+          0.6000000238418579
+        ],
+        "size": [
+          1.2000000476837158,
+          8.0,
+          1.2000000476837158
+        ]
+      },
+      "triangles": 188,
+      "vertices": 336,
+      "primitives": 1,
+      "bytes": 18880,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 18880,
+      "images": [],
+      "nodeNames": [
+        "waterfront-column"
+      ],
+      "materialNames": [
+        "landmark-sandstone"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "waterfront-column",
+      "lod": 2,
+      "boundsM": {
+        "min": [
+          -0.6000000238418579,
+          0.0,
+          -0.6000000238418579
+        ],
+        "max": [
+          0.6000000238418579,
+          8.0,
+          0.6000000238418579
+        ],
+        "size": [
+          1.2000000476837158,
+          8.0,
+          1.2000000476837158
+        ]
+      },
+      "triangles": 28,
+      "vertices": 48,
+      "primitives": 1,
+      "bytes": 4080,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 4080,
+      "images": [],
+      "nodeNames": [
+        "waterfront-column"
+      ],
+      "materialNames": [
+        "landmark-sandstone"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "waterfront-capital",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.800000011920929,
+          0.0,
+          -0.800000011920929
+        ],
+        "max": [
+          0.800000011920929,
+          0.3499999940395355,
+          0.800000011920929
+        ],
+        "size": [
+          1.600000023841858,
+          0.3499999940395355,
+          1.600000023841858
+        ]
+      },
+      "triangles": 388,
+      "vertices": 700,
+      "primitives": 1,
+      "bytes": 37616,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 37616,
+      "images": [],
+      "nodeNames": [
+        "waterfront-capital"
+      ],
+      "materialNames": [
+        "landmark-sandstone"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "waterfront-capital",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.800000011920929,
+          0.0,
+          -0.800000011920929
+        ],
+        "max": [
+          0.800000011920929,
+          0.3499999940395355,
+          0.800000011920929
+        ],
+        "size": [
+          1.600000023841858,
+          0.3499999940395355,
+          1.600000023841858
+        ]
+      },
+      "triangles": 104,
+      "vertices": 192,
+      "primitives": 1,
+      "bytes": 11504,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 11504,
+      "images": [],
+      "nodeNames": [
+        "waterfront-capital"
+      ],
+      "materialNames": [
+        "landmark-sandstone"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "waterfront-capital",
+      "lod": 2,
+      "boundsM": {
+        "min": [
+          -0.800000011920929,
+          0.0,
+          -0.800000011920929
+        ],
+        "max": [
+          0.800000011920929,
+          0.3499999940395355,
+          0.800000011920929
+        ],
+        "size": [
+          1.600000023841858,
+          0.3499999940395355,
+          1.600000023841858
+        ]
+      },
+      "triangles": 12,
+      "vertices": 24,
+      "primitives": 1,
+      "bytes": 2856,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 2856,
+      "images": [],
+      "nodeNames": [
+        "waterfront-capital"
+      ],
+      "materialNames": [
+        "landmark-sandstone"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "waterfront-pediment-moulding",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -14.0,
+          0.0,
+          0.0
+        ],
+        "max": [
+          14.0,
+          3.5,
+          0.23999999463558197
+        ],
+        "size": [
+          28.0,
+          3.5,
+          0.23999999463558197
+        ]
+      },
+      "triangles": 468,
+      "vertices": 912,
+      "primitives": 1,
+      "bytes": 48972,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 48972,
+      "images": [],
+      "nodeNames": [
+        "waterfront-pediment-moulding"
+      ],
+      "materialNames": [
+        "landmark-sandstone"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "waterfront-pediment-moulding",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -14.0,
+          0.0,
+          0.0
+        ],
+        "max": [
+          14.0,
+          3.5,
+          0.23999999463558197
+        ],
+        "size": [
+          28.0,
+          3.5,
+          0.23999999463558197
+        ]
+      },
+      "triangles": 48,
+      "vertices": 72,
+      "primitives": 1,
+      "bytes": 5380,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 5380,
+      "images": [],
+      "nodeNames": [
+        "waterfront-pediment-moulding"
+      ],
+      "materialNames": [
+        "landmark-sandstone"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "waterfront-pediment-moulding",
+      "lod": 2,
+      "boundsM": {
+        "min": [
+          -14.0,
+          0.0,
+          0.0
+        ],
+        "max": [
+          14.0,
+          3.5,
+          0.23999999463558197
+        ],
+        "size": [
+          28.0,
+          3.5,
+          0.23999999463558197
+        ]
+      },
+      "triangles": 24,
+      "vertices": 36,
+      "primitives": 1,
+      "bytes": 3484,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 3484,
+      "images": [],
+      "nodeNames": [
+        "waterfront-pediment-moulding"
+      ],
+      "materialNames": [
+        "landmark-sandstone"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "waterfront-window-recess",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -1.659999966621399,
+          0.0,
+          0.0
+        ],
+        "max": [
+          1.659999966621399,
+          5.320000171661377,
+          0.23999999463558197
+        ],
+        "size": [
+          3.319999933242798,
+          5.320000171661377,
+          0.23999999463558197
+        ]
+      },
+      "triangles": 64,
+      "vertices": 96,
+      "primitives": 1,
+      "bytes": 6660,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 6660,
+      "images": [],
+      "nodeNames": [
+        "waterfront-window-recess"
+      ],
+      "materialNames": [
+        "landmark-sandstone"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "waterfront-window-recess",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -1.659999966621399,
+          0.0,
+          0.0
+        ],
+        "max": [
+          1.659999966621399,
+          5.320000171661377,
+          0.23999999463558197
+        ],
+        "size": [
+          3.319999933242798,
+          5.320000171661377,
+          0.23999999463558197
+        ]
+      },
+      "triangles": 64,
+      "vertices": 96,
+      "primitives": 1,
+      "bytes": 6660,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 6660,
+      "images": [],
+      "nodeNames": [
+        "waterfront-window-recess"
+      ],
+      "materialNames": [
+        "landmark-sandstone"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "waterfront-window-recess",
+      "lod": 2,
+      "boundsM": {
+        "min": [
+          -1.659999966621399,
+          0.0,
+          0.0
+        ],
+        "max": [
+          1.659999966621399,
+          5.320000171661377,
+          0.23999999463558197
+        ],
+        "size": [
+          3.319999933242798,
+          5.320000171661377,
+          0.23999999463558197
+        ]
+      },
+      "triangles": 32,
+      "vertices": 48,
+      "primitives": 1,
+      "bytes": 4136,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 4136,
+      "images": [],
+      "nodeNames": [
+        "waterfront-window-recess"
+      ],
+      "materialNames": [
+        "landmark-sandstone"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "marine-archivolt-relief",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -4.119999885559082,
+          0.1599999964237213,
+          -0.20000000298023224
+        ],
+        "max": [
+          4.119999885559082,
+          7.340000152587891,
+          0.23999999463558197
+        ],
+        "size": [
+          8.239999771118164,
+          7.180000156164169,
+          0.4399999976158142
+        ]
+      },
+      "triangles": 1448,
+      "vertices": 2376,
+      "primitives": 1,
+      "bytes": 125236,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 125236,
+      "images": [],
+      "nodeNames": [
+        "marine-archivolt-relief"
+      ],
+      "materialNames": [
+        "landmark-terracotta"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "marine-archivolt-relief",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -4.119999885559082,
+          0.1599999964237213,
+          -0.20000000298023224
+        ],
+        "max": [
+          4.119999885559082,
+          7.340000152587891,
+          0.23999999463558197
+        ],
+        "size": [
+          8.239999771118164,
+          7.180000156164169,
+          0.4399999976158142
+        ]
+      },
+      "triangles": 568,
+      "vertices": 968,
+      "primitives": 1,
+      "bytes": 52040,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 52040,
+      "images": [],
+      "nodeNames": [
+        "marine-archivolt-relief"
+      ],
+      "materialNames": [
+        "landmark-terracotta"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "marine-archivolt-relief",
+      "lod": 2,
+      "boundsM": {
+        "min": [
+          -4.119999885559082,
+          0.1599999964237213,
+          -0.20000000298023224
+        ],
+        "max": [
+          4.119999885559082,
+          7.340000152587891,
+          0.23999999463558197
+        ],
+        "size": [
+          8.239999771118164,
+          7.180000156164169,
+          0.4399999976158142
+        ]
+      },
+      "triangles": 184,
+      "vertices": 316,
+      "primitives": 1,
+      "bytes": 18120,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 18120,
+      "images": [],
+      "nodeNames": [
+        "marine-archivolt-relief"
+      ],
+      "materialNames": [
+        "landmark-terracotta"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "marine-copper-grille",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -2.549999952316284,
+          3.1500000953674316,
+          -1.2000000476837158
+        ],
+        "max": [
+          2.549999952316284,
+          6.519999980926514,
+          -1.0800000429153442
+        ],
+        "size": [
+          5.099999904632568,
+          3.369999885559082,
+          0.12000000476837158
+        ]
+      },
+      "triangles": 468,
+      "vertices": 822,
+      "primitives": 1,
+      "bytes": 44248,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 44248,
+      "images": [],
+      "nodeNames": [
+        "marine-copper-grille"
+      ],
+      "materialNames": [
+        "landmark-copper"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "marine-copper-grille",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -2.549999952316284,
+          3.1500000953674316,
+          -1.2000000476837158
+        ],
+        "max": [
+          2.549999952316284,
+          6.519999980926514,
+          -1.0800000429153442
+        ],
+        "size": [
+          5.099999904632568,
+          3.369999885559082,
+          0.12000000476837158
+        ]
+      },
+      "triangles": 300,
+      "vertices": 520,
+      "primitives": 1,
+      "bytes": 28644,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 28644,
+      "images": [],
+      "nodeNames": [
+        "marine-copper-grille"
+      ],
+      "materialNames": [
+        "landmark-copper"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "marine-copper-grille",
+      "lod": 2,
+      "boundsM": {
+        "min": [
+          -2.549999952316284,
+          3.1500000953674316,
+          -1.2000000476837158
+        ],
+        "max": [
+          2.549999952316284,
+          6.519999980926514,
+          -1.0800000429153442
+        ],
+        "size": [
+          5.099999904632568,
+          3.369999885559082,
+          0.12000000476837158
+        ]
+      },
+      "triangles": 164,
+      "vertices": 276,
+      "primitives": 1,
+      "bytes": 16012,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 16012,
+      "images": [],
+      "nodeNames": [
+        "marine-copper-grille"
+      ],
+      "materialNames": [
+        "landmark-copper"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    }
+  ]
+}

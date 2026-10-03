@@ -1,0 +1,755 @@
+{
+  "schemaVersion": 1,
+  "status": "pass",
+  "packageId": "landmark-entrance-details",
+  "baseRevision": "8b95f013297597845d542463d6ce635105a95c4f",
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "blender": "4.3.2",
+    "CPUThreads": 2
+  },
+  "totals": {
+    "sourceFiles": 18,
+    "sourceBytes": 1645640,
+    "glbFiles": 18,
+    "glbTotalBytes": 533292,
+    "geometryBytes": 533292,
+    "embeddedImageBytes": 0,
+    "uniqueTexelBytesWithMips": 0,
+    "templatesOneEachTrianglesByLOD": [
+      3600,
+      1272,
+      444
+    ],
+    "materialRoles": 3
+  },
+  "assets": [
+    {
+      "id": "waterfront-column",
+      "sourceBytesByLOD": [
+        96655,
+        88678,
+        86770
+      ],
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/waterfront-column.lod0.glb",
+          "source": "source/waterfront-column.lod0.blend",
+          "sourceSha256": "05a16ecec1b2478042be9a0fbfe438d44abcb429fabe026c2f7da1bc0644b5ce",
+          "sha256": "3127003f867e60bc2c9727c67a7d54540f2fe8e770f85a72a7a579abe95e91df",
+          "boundsM": {
+            "min": [
+              -0.6000000238418579,
+              0.0,
+              -0.6000000238418579
+            ],
+            "max": [
+              0.6000000238418579,
+              8.0,
+              0.6000000238418579
+            ],
+            "size": [
+              1.2000000476837158,
+              8.0,
+              1.2000000476837158
+            ]
+          },
+          "triangles": 764,
+          "vertices": 1928,
+          "primitives": 1,
+          "bytes": 98764,
+          "geometryBytes": 98764,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 1,
+          "file": "exports/waterfront-column.lod1.glb",
+          "source": "source/waterfront-column.lod1.blend",
+          "sourceSha256": "e35924ce4cd4af31435194533a45dcc5fd46e91163ce1313e6db909bd6521111",
+          "sha256": "4db99310417d833399c356f9bfaf254c33885991e13666318a6e442a380b6587",
+          "boundsM": {
+            "min": [
+              -0.6000000238418579,
+              0.0,
+              -0.6000000238418579
+            ],
+            "max": [
+              0.6000000238418579,
+              8.0,
+              0.6000000238418579
+            ],
+            "size": [
+              1.2000000476837158,
+              8.0,
+              1.2000000476837158
+            ]
+          },
+          "triangles": 188,
+          "vertices": 336,
+          "primitives": 1,
+          "bytes": 18880,
+          "geometryBytes": 18880,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 2,
+          "file": "exports/waterfront-column.lod2.glb",
+          "source": "source/waterfront-column.lod2.blend",
+          "sourceSha256": "178b90bce5e438e27397a0bf50014eb0b484157572df57fd88eb47fd02e57268",
+          "sha256": "36d6914716878b4088013d02ffe71995218dfbb346434d3b21ea84c370e2a9fa",
+          "boundsM": {
+            "min": [
+              -0.6000000238418579,
+              0.0,
+              -0.6000000238418579
+            ],
+            "max": [
+              0.6000000238418579,
+              8.0,
+              0.6000000238418579
+            ],
+            "size": [
+              1.2000000476837158,
+              8.0,
+              1.2000000476837158
+            ]
+          },
+          "triangles": 28,
+          "vertices": 48,
+          "primitives": 1,
+          "bytes": 4080,
+          "geometryBytes": 4080,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "textureCost": {
+        "geometryBytes": 121724,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 121724,
+        "uniqueTexelBytesWithMips": 0
+      }
+    },
+    {
+      "id": "waterfront-capital",
+      "sourceBytesByLOD": [
+        91404,
+        88479,
+        86453
+      ],
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/waterfront-capital.lod0.glb",
+          "source": "source/waterfront-capital.lod0.blend",
+          "sourceSha256": "b344c6a6564838833f4a377d5b0afa5e7cde31c71699f09d1becf11a0232b914",
+          "sha256": "06f484312699a1d13c486b58ada1ab1dae9aa0dd19a5b7ee022b7d6d42d1acd8",
+          "boundsM": {
+            "min": [
+              -0.800000011920929,
+              0.0,
+              -0.800000011920929
+            ],
+            "max": [
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "size": [
+              1.600000023841858,
+              0.3499999940395355,
+              1.600000023841858
+            ]
+          },
+          "triangles": 388,
+          "vertices": 700,
+          "primitives": 1,
+          "bytes": 37616,
+          "geometryBytes": 37616,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 1,
+          "file": "exports/waterfront-capital.lod1.glb",
+          "source": "source/waterfront-capital.lod1.blend",
+          "sourceSha256": "a8af950e22952dc6368a9ba0de974372b0f8def61f21830154e7ac401f4fec03",
+          "sha256": "c1da18982c14c6f905a8f3ce082e5d0153b61f876f079c6cc6ad06a6c72a2a5b",
+          "boundsM": {
+            "min": [
+              -0.800000011920929,
+              0.0,
+              -0.800000011920929
+            ],
+            "max": [
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "size": [
+              1.600000023841858,
+              0.3499999940395355,
+              1.600000023841858
+            ]
+          },
+          "triangles": 104,
+          "vertices": 192,
+          "primitives": 1,
+          "bytes": 11504,
+          "geometryBytes": 11504,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 2,
+          "file": "exports/waterfront-capital.lod2.glb",
+          "source": "source/waterfront-capital.lod2.blend",
+          "sourceSha256": "6053a1cc78d5b78ab353df7a24bc8fd7a608fafc4cf4bd6c6051e8ace795ff78",
+          "sha256": "e25919aa2ecd98a57d97bc4d1b2b90b2745e2e3fbfa962926e6bb994da3ebbe6",
+          "boundsM": {
+            "min": [
+              -0.800000011920929,
+              0.0,
+              -0.800000011920929
+            ],
+            "max": [
+              0.800000011920929,
+              0.3499999940395355,
+              0.800000011920929
+            ],
+            "size": [
+              1.600000023841858,
+              0.3499999940395355,
+              1.600000023841858
+            ]
+          },
+          "triangles": 12,
+          "vertices": 24,
+          "primitives": 1,
+          "bytes": 2856,
+          "geometryBytes": 2856,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "textureCost": {
+        "geometryBytes": 51976,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 51976,
+        "uniqueTexelBytesWithMips": 0
+      }
+    },
+    {
+      "id": "waterfront-pediment-moulding",
+      "sourceBytesByLOD": [
+        97076,
+        87359,
+        86545
+      ],
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/waterfront-pediment-moulding.lod0.glb",
+          "source": "source/waterfront-pediment-moulding.lod0.blend",
+          "sourceSha256": "7e0c774fdb35ad1ef04fe45c7136a6d20aff69f5f7a94c9827c2b06a70c46a33",
+          "sha256": "2e7543f161b245fee1c378070391843c8becc961d4acaaff6ffdde322ec26861",
+          "boundsM": {
+            "min": [
+              -14.0,
+              0.0,
+              0.0
+            ],
+            "max": [
+              14.0,
+              3.5,
+              0.23999999463558197
+            ],
+            "size": [
+              28.0,
+              3.5,
+              0.23999999463558197
+            ]
+          },
+          "triangles": 468,
+          "vertices": 912,
+          "primitives": 1,
+          "bytes": 48972,
+          "geometryBytes": 48972,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 1,
+          "file": "exports/waterfront-pediment-moulding.lod1.glb",
+          "source": "source/waterfront-pediment-moulding.lod1.blend",
+          "sourceSha256": "2cdecd0ea666c2f69e06271d59dcd31ad06f100fad074aa14dff4444d15e275d",
+          "sha256": "294d69503b79def4f2fa31a7914a250f7965d239918b80943bb7e060b7e34e79",
+          "boundsM": {
+            "min": [
+              -14.0,
+              0.0,
+              0.0
+            ],
+            "max": [
+              14.0,
+              3.5,
+              0.23999999463558197
+            ],
+            "size": [
+              28.0,
+              3.5,
+              0.23999999463558197
+            ]
+          },
+          "triangles": 48,
+          "vertices": 72,
+          "primitives": 1,
+          "bytes": 5380,
+          "geometryBytes": 5380,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 2,
+          "file": "exports/waterfront-pediment-moulding.lod2.glb",
+          "source": "source/waterfront-pediment-moulding.lod2.blend",
+          "sourceSha256": "2f8505d231d801905fef029696f823459a286b681104639c010ea7694da742b4",
+          "sha256": "2c28c17ed64cb48e9286991c03f13939b794da8d0a387ae2c1708f626b8716fb",
+          "boundsM": {
+            "min": [
+              -14.0,
+              0.0,
+              0.0
+            ],
+            "max": [
+              14.0,
+              3.5,
+              0.23999999463558197
+            ],
+            "size": [
+              28.0,
+              3.5,
+              0.23999999463558197
+            ]
+          },
+          "triangles": 24,
+          "vertices": 36,
+          "primitives": 1,
+          "bytes": 3484,
+          "geometryBytes": 3484,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "textureCost": {
+        "geometryBytes": 57836,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 57836,
+        "uniqueTexelBytesWithMips": 0
+      }
+    },
+    {
+      "id": "waterfront-window-recess",
+      "sourceBytesByLOD": [
+        87352,
+        87449,
+        86919
+      ],
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/waterfront-window-recess.lod0.glb",
+          "source": "source/waterfront-window-recess.lod0.blend",
+          "sourceSha256": "5be14d22079a70c33c6b5e8014a83ba45e8441f2168b0aeb91c94b986492755a",
+          "sha256": "b92a43ebe470953b257c35baf0261203cbf23ef5a96086f3b85b79abb7e98125",
+          "boundsM": {
+            "min": [
+              -1.659999966621399,
+              0.0,
+              0.0
+            ],
+            "max": [
+              1.659999966621399,
+              5.320000171661377,
+              0.23999999463558197
+            ],
+            "size": [
+              3.319999933242798,
+              5.320000171661377,
+              0.23999999463558197
+            ]
+          },
+          "triangles": 64,
+          "vertices": 96,
+          "primitives": 1,
+          "bytes": 6660,
+          "geometryBytes": 6660,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 1,
+          "file": "exports/waterfront-window-recess.lod1.glb",
+          "source": "source/waterfront-window-recess.lod1.blend",
+          "sourceSha256": "2f40c3f8cf52a3362d296bba30999990cbda53be86d36e7a37596a099a13945c",
+          "sha256": "5374c2a85262181d75b7be203c6263a7adf7697f10e4c8633645c6d12d968fbe",
+          "boundsM": {
+            "min": [
+              -1.659999966621399,
+              0.0,
+              0.0
+            ],
+            "max": [
+              1.659999966621399,
+              5.320000171661377,
+              0.23999999463558197
+            ],
+            "size": [
+              3.319999933242798,
+              5.320000171661377,
+              0.23999999463558197
+            ]
+          },
+          "triangles": 64,
+          "vertices": 96,
+          "primitives": 1,
+          "bytes": 6660,
+          "geometryBytes": 6660,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 2,
+          "file": "exports/waterfront-window-recess.lod2.glb",
+          "source": "source/waterfront-window-recess.lod2.blend",
+          "sourceSha256": "76b6d29d64a15e8f705e31d9cddc3cb11b26282ff41f7762ce9a062e35ceb7bb",
+          "sha256": "ef9286cc39a85a5b3a7425cb088b211fa30d1e04e4195d5d9eeb123e91d1aeef",
+          "boundsM": {
+            "min": [
+              -1.659999966621399,
+              0.0,
+              0.0
+            ],
+            "max": [
+              1.659999966621399,
+              5.320000171661377,
+              0.23999999463558197
+            ],
+            "size": [
+              3.319999933242798,
+              5.320000171661377,
+              0.23999999463558197
+            ]
+          },
+          "triangles": 32,
+          "vertices": 48,
+          "primitives": 1,
+          "bytes": 4136,
+          "geometryBytes": 4136,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "textureCost": {
+        "geometryBytes": 17456,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 17456,
+        "uniqueTexelBytesWithMips": 0
+      }
+    },
+    {
+      "id": "marine-archivolt-relief",
+      "sourceBytesByLOD": [
+        106209,
+        97436,
+        90738
+      ],
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/marine-archivolt-relief.lod0.glb",
+          "source": "source/marine-archivolt-relief.lod0.blend",
+          "sourceSha256": "bc9acbac4581df1179717ebd01877ef00b998af81e3fa84d2a3d3f852bfe1567",
+          "sha256": "08665a972152b9737cf32da00cfdbbf20ba03a83ede9c826b12e1e25911de467",
+          "boundsM": {
+            "min": [
+              -4.119999885559082,
+              0.1599999964237213,
+              -0.20000000298023224
+            ],
+            "max": [
+              4.119999885559082,
+              7.340000152587891,
+              0.23999999463558197
+            ],
+            "size": [
+              8.239999771118164,
+              7.180000156164169,
+              0.4399999976158142
+            ]
+          },
+          "triangles": 1448,
+          "vertices": 2376,
+          "primitives": 1,
+          "bytes": 125236,
+          "geometryBytes": 125236,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 1,
+          "file": "exports/marine-archivolt-relief.lod1.glb",
+          "source": "source/marine-archivolt-relief.lod1.blend",
+          "sourceSha256": "d5fb63b5596a38b8ad5cae06022764e2eaf607cdd7c5a7b0186652b97b717d5b",
+          "sha256": "fdf7c412c8d64e8aed076111d6ec65b692e02c9e107f23725377cc281231335b",
+          "boundsM": {
+            "min": [
+              -4.119999885559082,
+              0.1599999964237213,
+              -0.20000000298023224
+            ],
+            "max": [
+              4.119999885559082,
+              7.340000152587891,
+              0.23999999463558197
+            ],
+            "size": [
+              8.239999771118164,
+              7.180000156164169,
+              0.4399999976158142
+            ]
+          },
+          "triangles": 568,
+          "vertices": 968,
+          "primitives": 1,
+          "bytes": 52040,
+          "geometryBytes": 52040,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 2,
+          "file": "exports/marine-archivolt-relief.lod2.glb",
+          "source": "source/marine-archivolt-relief.lod2.blend",
+          "sourceSha256": "46a14336a7320cdbf3dc50b5874e1753a1ed2c1595a076bce538b973d125a812",
+          "sha256": "972d020ad1c7a32d11f61834b40ec19e7bd05bbf2e467237f5006d770c9ce407",
+          "boundsM": {
+            "min": [
+              -4.119999885559082,
+              0.1599999964237213,
+              -0.20000000298023224
+            ],
+            "max": [
+              4.119999885559082,
+              7.340000152587891,
+              0.23999999463558197
+            ],
+            "size": [
+              8.239999771118164,
+              7.180000156164169,
+              0.4399999976158142
+            ]
+          },
+          "triangles": 184,
+          "vertices": 316,
+          "primitives": 1,
+          "bytes": 18120,
+          "geometryBytes": 18120,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "textureCost": {
+        "geometryBytes": 195396,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 195396,
+        "uniqueTexelBytesWithMips": 0
+      }
+    },
+    {
+      "id": "marine-copper-grille",
+      "sourceBytesByLOD": [
+        97068,
+        93337,
+        89713
+      ],
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/marine-copper-grille.lod0.glb",
+          "source": "source/marine-copper-grille.lod0.blend",
+          "sourceSha256": "9f2485f88b988dcd9af067b782d7a0047c429cb898713004440e1fc7a23aaa06",
+          "sha256": "a0eb72fc685d3b21345a59a596e3d1539ed6c89b70aea562093f5c836e9eb136",
+          "boundsM": {
+            "min": [
+              -2.549999952316284,
+              3.1500000953674316,
+              -1.2000000476837158
+            ],
+            "max": [
+              2.549999952316284,
+              6.519999980926514,
+              -1.0800000429153442
+            ],
+            "size": [
+              5.099999904632568,
+              3.369999885559082,
+              0.12000000476837158
+            ]
+          },
+          "triangles": 468,
+          "vertices": 822,
+          "primitives": 1,
+          "bytes": 44248,
+          "geometryBytes": 44248,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 1,
+          "file": "exports/marine-copper-grille.lod1.glb",
+          "source": "source/marine-copper-grille.lod1.blend",
+          "sourceSha256": "d8adc977db17a008f897cf69efcd1b69af385a2d8037c1441fac3df631a09226",
+          "sha256": "613051dfa58b219928eea7dd4be3cf3bd3587eb48226f4944b9ed27bdd79a986",
+          "boundsM": {
+            "min": [
+              -2.549999952316284,
+              3.1500000953674316,
+              -1.2000000476837158
+            ],
+            "max": [
+              2.549999952316284,
+              6.519999980926514,
+              -1.0800000429153442
+            ],
+            "size": [
+              5.099999904632568,
+              3.369999885559082,
+              0.12000000476837158
+            ]
+          },
+          "triangles": 300,
+          "vertices": 520,
+          "primitives": 1,
+          "bytes": 28644,
+          "geometryBytes": 28644,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 2,
+          "file": "exports/marine-copper-grille.lod2.glb",
+          "source": "source/marine-copper-grille.lod2.blend",
+          "sourceSha256": "3f5bd1ac1966e7aa6a00e461487396f30a3bde563ff443a1d39216d445167439",
+          "sha256": "21b859febcafec7f1c6f43c3b0d10ce759281d37ae66d3e4ca2a2a3a42eaf8fa",
+          "boundsM": {
+            "min": [
+              -2.549999952316284,
+              3.1500000953674316,
+              -1.2000000476837158
+            ],
+            "max": [
+              2.549999952316284,
+              6.519999980926514,
+              -1.0800000429153442
+            ],
+            "size": [
+              5.099999904632568,
+              3.369999885559082,
+              0.12000000476837158
+            ]
+          },
+          "triangles": 164,
+          "vertices": 276,
+          "primitives": 1,
+          "bytes": 16012,
+          "geometryBytes": 16012,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "textureCost": {
+        "geometryBytes": 88904,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 88904,
+        "uniqueTexelBytesWithMips": 0
+      }
+    }
+  ],
+  "assemblyCosts": [
+    {
+      "assemblyId": "waterfront-portico",
+      "lods": [
+        {
+          "level": 0,
+          "triangles": 7380,
+          "primitives": 13,
+          "geometryBytes": 867252,
+          "bytes": 867252,
+          "drawInterpretation": "instance-counted primitives before batching; not measured renderer draw calls"
+        },
+        {
+          "level": 1,
+          "triangles": 1800,
+          "primitives": 13,
+          "geometryBytes": 187684,
+          "bytes": 187684,
+          "drawInterpretation": "instance-counted primitives before batching; not measured renderer draw calls"
+        },
+        {
+          "level": 2,
+          "triangles": 264,
+          "primitives": 13,
+          "geometryBytes": 45100,
+          "bytes": 45100,
+          "drawInterpretation": "instance-counted primitives before batching; not measured renderer draw calls"
+        }
+      ]
+    },
+    {
+      "assemblyId": "waterfront-upper-window-patch",
+      "lods": [
+        {
+          "level": 0,
+          "triangles": 64,
+          "primitives": 1,
+          "geometryBytes": 6660,
+          "bytes": 6660,
+          "drawInterpretation": "instance-counted primitives before batching; not measured renderer draw calls"
+        },
+        {
+          "level": 1,
+          "triangles": 64,
+          "primitives": 1,
+          "geometryBytes": 6660,
+          "bytes": 6660,
+          "drawInterpretation": "instance-counted primitives before batching; not measured renderer draw calls"
+        },
+        {
+          "level": 2,
+          "triangles": 32,
+          "primitives": 1,
+          "geometryBytes": 4136,
+          "bytes": 4136,
+          "drawInterpretation": "instance-counted primitives before batching; not measured renderer draw calls"
+        }
+      ]
+    },
+    {
+      "assemblyId": "marine-entry-decoration",
+      "lods": [
+        {
+          "level": 0,
+          "triangles": 1916,
+          "primitives": 2,
+          "geometryBytes": 169484,
+          "bytes": 169484,
+          "drawInterpretation": "instance-counted primitives before batching; not measured renderer draw calls"
+        },
+        {
+          "level": 1,
+          "triangles": 868,
+          "primitives": 2,
+          "geometryBytes": 80684,
+          "bytes": 80684,
+          "drawInterpretation": "instance-counted primitives before batching; not measured renderer draw calls"
+        },
+        {
+          "level": 2,
+          "triangles": 348,
+          "primitives": 2,
+          "geometryBytes": 34132,
+          "bytes": 34132,
+          "drawInterpretation": "instance-counted primitives before batching; not measured renderer draw calls"
+        }
+      ]
+    }
+  ],
+  "costInterpretation": "Unique files are download cost; assembly cost repeats template bytes per instance conservatively before cache. Geometry bytes include GLB headers/JSON/padding. No GPU allocation, WebGL draw or frame-time measurement."
+}
