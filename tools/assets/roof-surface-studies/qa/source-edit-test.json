@@ -1,0 +1,69 @@
+{
+  "status": "pass",
+  "blender": "4.3.2",
+  "device": "CPU",
+  "threads": 2,
+  "sourceHashes": {
+    "roof-mineral-grain.lod0.blend": "d44c8ddcb4e42906e7518c297834a7e4cef0013f81377cb85b9506de9773524d",
+    "roof-membrane-seams.lod0.blend": "f6acf44f16887d75a76b2fef79c755027598dedcae3fcc116c77ab76b4a23baf"
+  },
+  "unchangedRuntimeMapHashMatches": {
+    "roof-membrane-seams-normal.png": true,
+    "roof-membrane-seams-orm.png": true,
+    "roof-mineral-grain-orm.png": true,
+    "roof-membrane-seams-color.png": true,
+    "roof-mineral-grain-color.png": true,
+    "roof-mineral-grain-normal.png": true
+  },
+  "periodicityRebake": {
+    "status": "pass",
+    "method": "Insert UV vector shift (2m,2m,0) upstream of every procedural coordinate; re-bake both complete surfaces from saved shifted Blender sources. Compare runtime pixels to unshifted re-bake.",
+    "maps": {
+      "roof-membrane-seams-normal.png": {
+        "maximumDelta8bit": 0.9999923706054688,
+        "meanDelta8bit": 1.144400448538363e-05
+      },
+      "roof-membrane-seams-orm.png": {
+        "maximumDelta8bit": 1.0,
+        "meanDelta8bit": 7.62939453125e-06
+      },
+      "roof-mineral-grain-orm.png": {
+        "maximumDelta8bit": 1.0,
+        "meanDelta8bit": 3.814697265625e-06
+      },
+      "roof-membrane-seams-color.png": {
+        "maximumDelta8bit": 0.0,
+        "meanDelta8bit": 0.0
+      },
+      "roof-mineral-grain-color.png": {
+        "maximumDelta8bit": 1.0,
+        "meanDelta8bit": 7.62939453125e-06
+      },
+      "roof-mineral-grain-normal.png": {
+        "maximumDelta8bit": 1.0,
+        "meanDelta8bit": 0.00019073483417741954
+      }
+    },
+    "toleranceMaximum8bit": 3,
+    "toleranceMean8bit": 0.05
+  },
+  "artistEdit": {
+    "source": "roof-mineral-grain.lod0.blend",
+    "node": "EDIT_BASE_TINT (linear from existing sRGB palette)",
+    "operation": "RGB linear factor 0.8",
+    "inputSourceHashBeforeExport": "69534a7441f27336c3fac1eeb85e248a72ce75cd99af386c66a75c1807ef5162",
+    "inputSourceHashAfterExport": "69534a7441f27336c3fac1eeb85e248a72ce75cd99af386c66a75c1807ef5162",
+    "changedMaps": {
+      "roof-membrane-seams-normal.png": false,
+      "roof-membrane-seams-orm.png": false,
+      "roof-mineral-grain-orm.png": false,
+      "roof-membrane-seams-color.png": false,
+      "roof-mineral-grain-color.png": true,
+      "roof-mineral-grain-normal.png": false
+    },
+    "expected": "Only mineral base color changes; normal, ORM and membrane maps remain exact."
+  },
+  "unsupportedCoatRejected": "roof-mineral-grain: unsupported Coat Weight; this exporter is opaque color/normal/ORM only",
+  "sourceInputsUnchanged": true,
+  "temporaryOutputPolicy": "Full scratch bakes removed after hash evidence was recorded. No defaults were regenerated."
+}

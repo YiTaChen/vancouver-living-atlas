@@ -1,0 +1,65 @@
+{
+  "status": "pass",
+  "renders": [
+    {
+      "surfaceId": "roof-mineral-grain",
+      "file": "qa/previews/roof-mineral-grain-grazing-detail.png",
+      "sha256": "d901f763ae79136944bb83235b63e15cf928e142f296d2368677d7e31de190b9",
+      "import": "exports/roof-mineral-grain-2m.inspection.glb",
+      "importSha256": "468242c4df4a55fd426cdf7529c915aef80ec054fb6bcb73bd0e06b939aa2783",
+      "renderer": "Cycles CPU",
+      "threads": 2,
+      "samples": 32,
+      "resolution": [
+        960,
+        640
+      ],
+      "cameraPositionM": [
+        0.18000000715255737,
+        -0.5,
+        0.25
+      ],
+      "cameraTargetM": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "orthographicWidthM": 0.68,
+      "sunElevationApproxDegrees": 12,
+      "exposure": 0,
+      "inspectionOnly": true,
+      "postprocessing": "None: close-up is an actual camera render of delivered GLB. AgX display transform only.",
+      "scope": "Magnifies baked relief and filtering; not city appearance or a physical reflectance measurement."
+    },
+    {
+      "surfaceId": "roof-membrane-seams",
+      "file": "qa/previews/roof-membrane-seams-grazing-detail.png",
+      "sha256": "9e548e7971b2adaa871cf2ddb88c643d9da213a3a168193bde7cff26d653a43e",
+      "import": "exports/roof-membrane-seams-2m.inspection.glb",
+      "importSha256": "27510bc3eca07603ec0b46f291bd61984ae5aa789d6c8130287a31bdd2fab378",
+      "renderer": "Cycles CPU",
+      "threads": 2,
+      "samples": 32,
+      "resolution": [
+        960,
+        640
+      ],
+      "cameraPositionM": [
+        0.18000000715255737,
+        -0.5,
+        0.25
+      ],
+      "cameraTargetM": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "orthographicWidthM": 0.68,
+      "sunElevationApproxDegrees": 12,
+      "exposure": 0,
+      "inspectionOnly": true,
+      "postprocessing": "None: close-up is an actual camera render of delivered GLB. AgX display transform only.",
+      "scope": "Magnifies baked relief and filtering; not city appearance or a physical reflectance measurement."
+    }
+  ]
+}
