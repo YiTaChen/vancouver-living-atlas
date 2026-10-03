@@ -1,0 +1,87 @@
+{
+  "status": "pass",
+  "sourceEditsPreserved": true,
+  "sourceHashesUnchanged": true,
+  "roundtrip": [
+    {
+      "file": "hvac-medium-twin.lod0.glb",
+      "sourceSha256": "ed32e33894bc4017b117129f73d5d48b727e3007509ad2d0fb5015b0b3365d0b",
+      "originalSha256": "9f421db8b33722dffa78afd2f4dbc899c3b50640f3eaeaeec2f9795d02e56b60",
+      "reexportSha256": "9f421db8b33722dffa78afd2f4dbc899c3b50640f3eaeaeec2f9795d02e56b60",
+      "byteIdentical": true,
+      "geometryUvPbrEqual": true
+    },
+    {
+      "file": "hvac-medium-twin.lod1.glb",
+      "sourceSha256": "911d3d7d58a0308bf35e3f5c2dfed364278bf153449aa83576a91a5faa097239",
+      "originalSha256": "98869e938071237953d8c5fd0305cb2216f6b623d797fc81699ae44fca0c6aa9",
+      "reexportSha256": "98869e938071237953d8c5fd0305cb2216f6b623d797fc81699ae44fca0c6aa9",
+      "byteIdentical": true,
+      "geometryUvPbrEqual": true
+    },
+    {
+      "file": "hvac-compact-single.lod1.glb",
+      "sourceSha256": "34f1d089cf83c27de9936a7fb959ea0abe6b3e366606b0b0bc247b690f454589",
+      "originalSha256": "57dc05e148844919da0f08f403b8ca838b97fb690daffbeb780a144df62c0b81",
+      "reexportSha256": "57dc05e148844919da0f08f403b8ca838b97fb690daffbeb780a144df62c0b81",
+      "byteIdentical": true,
+      "geometryUvPbrEqual": true
+    },
+    {
+      "file": "hvac-wide-twin.lod0.glb",
+      "sourceSha256": "0ac275fdf872c65f4db850ee8fda8f925ff43e07636deadfdfe86ce507b5c139",
+      "originalSha256": "fd044bd6994fb81c4cadb28c9a150f4c41b7d8ee05ef2949b531b7f0e42085da",
+      "reexportSha256": "fd044bd6994fb81c4cadb28c9a150f4c41b7d8ee05ef2949b531b7f0e42085da",
+      "byteIdentical": true,
+      "geometryUvPbrEqual": true
+    },
+    {
+      "file": "hvac-compact-single.lod0.glb",
+      "sourceSha256": "8b113ad3b810169df87b7e046e5342cae055d47b2528d09671fda60b990eea6d",
+      "originalSha256": "696673e0add593d237c41ff1809c4b6f29f0bdc8b1c41fc9b4596e1248fe26ac",
+      "reexportSha256": "696673e0add593d237c41ff1809c4b6f29f0bdc8b1c41fc9b4596e1248fe26ac",
+      "byteIdentical": true,
+      "geometryUvPbrEqual": true
+    },
+    {
+      "file": "hvac-wide-twin.lod1.glb",
+      "sourceSha256": "00f8297e95e8263b8055f406aa6ec4531ca46dbfa8f27d5adcfb0f6488926bf8",
+      "originalSha256": "95dff8624674ff8bdb3f59549de2471ff87e85e1910ca6c759bb5b3dde0a3c25",
+      "reexportSha256": "95dff8624674ff8bdb3f59549de2471ff87e85e1910ca6c759bb5b3dde0a3c25",
+      "byteIdentical": true,
+      "geometryUvPbrEqual": true
+    }
+  ],
+  "editedSourceCases": [
+    {
+      "lod": 0,
+      "geometryOffsetM": 0.011,
+      "sourceUvUOffset": 0.0625,
+      "baseColorLinear": [
+        0.38,
+        0.44,
+        0.41,
+        1
+      ],
+      "roughness": 0.57,
+      "geometryUvPbrPreserved": true
+    },
+    {
+      "lod": 1,
+      "geometryOffsetM": 0.011,
+      "sourceUvUOffset": 0.0625,
+      "baseColorLinear": [
+        0.38,
+        0.44,
+        0.41,
+        1
+      ],
+      "roughness": 0.57,
+      "geometryUvPbrPreserved": true
+    }
+  ],
+  "unsupportedMaterialEdit": "rejected without source mutation",
+  "sourceOutputOverwrite": "rejected without source mutation",
+  "seconds": 7.166,
+  "scope": "Real Blender reopen/reexport; temporary edited sources only; no WebGL"
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "packageId": "rooftop-equipment",
+  "baseRevision": "5574d55719f10d1575127d8b92cbd23ff71e446f",
+  "assets": [
+    {"id":"hvac-compact-single","variant":"compact-single-fan","dimensionsM":[2.2,1.1,1.65],"fans":1,"fanRadiusM":0.45},
+    {"id":"hvac-medium-twin","variant":"medium-twin-fan","dimensionsM":[2.67,1.35,2.05],"fans":2,"fanRadiusM":0.43},
+    {"id":"hvac-wide-twin","variant":"wide-twin-fan","dimensionsM":[3.61,1.4,2.45],"fans":2,"fanRadiusM":0.57}
+  ],
+  "materials": [
+    {"material":"shared-metal-housing","role":"shared-metal","surfaceId":"painted-metal","baseColorLinear":[0.46,0.51,0.49,1],"roughness":0.39,"metallic":0.12},
+    {"material":"shared-metal-detail","role":"shared-metal-grille","surfaceId":"painted-metal","baseColorLinear":[0.105,0.14,0.13,1],"roughness":0.39,"metallic":0.12}
+  ],
+  "budget":{"triangles":[480,96],"geometryBytes":[98304,24576],"primitives":2,"sourceBytes":20971520},
+  "dimensionBasis":"Representative original HVAC designs; existing architecture-plan.ts nominal footprint range, not manufacturer measurements. Heights include base and fan guard.",
+  "license":"LicenseRef-Vancouver-Living-Atlas-NC-1.0"
+}
