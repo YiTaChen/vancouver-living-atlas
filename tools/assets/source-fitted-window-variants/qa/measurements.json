@@ -1,0 +1,347 @@
+{
+  "status": "pass",
+  "method": "independent GLB accessor decode and scene transforms exactly once; native Blender reopening corroborated",
+  "environment": {
+    "os": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "python": "3.12.14",
+    "blender": "4.3.2",
+    "renderEngine": "Cycles CPU",
+    "webgl": "not_run"
+  },
+  "results": [
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 0,
+      "sourceBytes": 91348,
+      "sourceSha256": "f4eae28d460dc4dee32db729f2a3de57f1b7d45fb547080173025ddfcbf7637a",
+      "glbSha256": "38da7234e7987342cd2d23216806dc7079ea2e8add1c6e3348ae0a6d7f119e55",
+      "sourceCompression": "Zstandard compressed native editable Blender mesh",
+      "boundsM": {
+        "min": [
+          -1.4342008829116821,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          1.4342008829116821,
+          2.444499969482422,
+          0.25999999046325684
+        ],
+        "size": [
+          2.8684017658233643,
+          2.444499969482422,
+          0.23999999091029167
+        ]
+      },
+      "triangles": 88,
+      "vertices": 136,
+      "primitives": 1,
+      "bytes": 10248,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 10248,
+      "images": [],
+      "nodeNames": [
+        "window-frame"
+      ],
+      "materialNames": [
+        "painted-metal"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0,
+      "uniqueTexelBytesWithMips": 0
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 1,
+      "sourceBytes": 91177,
+      "sourceSha256": "ecafb5b06c7cffda7da7582889a86148d343a956fbfb05de249c2044853f6ae0",
+      "glbSha256": "c81bf83db1087e1ad029e642fa655d8310b75bb702939fa6ab52f24324fa3c95",
+      "sourceCompression": "Zstandard compressed native editable Blender mesh",
+      "boundsM": {
+        "min": [
+          -1.4342008829116821,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          1.4342008829116821,
+          2.444499969482422,
+          0.25999999046325684
+        ],
+        "size": [
+          2.8684017658233643,
+          2.444499969482422,
+          0.23999999091029167
+        ]
+      },
+      "triangles": 72,
+      "vertices": 112,
+      "primitives": 1,
+      "bytes": 9004,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 9004,
+      "images": [],
+      "nodeNames": [
+        "window-frame"
+      ],
+      "materialNames": [
+        "painted-metal"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0,
+      "uniqueTexelBytesWithMips": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 0,
+      "sourceBytes": 91374,
+      "sourceSha256": "39bc6b5677336fefc5fc9e5c7e537346932e5412c66609f775c7725cf6399501",
+      "glbSha256": "a0a793735de865e0c4d1e89c523de863216d8d22dc14ef2510dedfc89b0e690e",
+      "sourceCompression": "Zstandard compressed native editable Blender mesh",
+      "boundsM": {
+        "min": [
+          -0.7492585182189941,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          0.7492585182189941,
+          1.6505000591278076,
+          0.18000000715255737
+        ],
+        "size": [
+          1.4985170364379883,
+          1.6505000591278076,
+          0.1600000075995922
+        ]
+      },
+      "triangles": 88,
+      "vertices": 136,
+      "primitives": 1,
+      "bytes": 10188,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 10188,
+      "images": [],
+      "nodeNames": [
+        "window-frame"
+      ],
+      "materialNames": [
+        "cedar"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0,
+      "uniqueTexelBytesWithMips": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 1,
+      "sourceBytes": 91193,
+      "sourceSha256": "fa13a308fefa98ab65be3d163d964fd4423a9e7a4f7c7e791b5129b3dfad0451",
+      "glbSha256": "0c5bb9c7b68e760698bb09fbb59328c29e4444427ac7c9358e7ca08e8d123cef",
+      "sourceCompression": "Zstandard compressed native editable Blender mesh",
+      "boundsM": {
+        "min": [
+          -0.7492585182189941,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          0.7492585182189941,
+          1.6505000591278076,
+          0.18000000715255737
+        ],
+        "size": [
+          1.4985170364379883,
+          1.6505000591278076,
+          0.1600000075995922
+        ]
+      },
+      "triangles": 72,
+      "vertices": 112,
+      "primitives": 1,
+      "bytes": 8940,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 8940,
+      "images": [],
+      "nodeNames": [
+        "window-frame"
+      ],
+      "materialNames": [
+        "cedar"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0,
+      "uniqueTexelBytesWithMips": 0
+    },
+    {
+      "assetId": "modern-source-window-paired-sill",
+      "lod": 0,
+      "sourceBytes": 87837,
+      "sourceSha256": "2699734258abbb9369bcd448847f790bfc9a799db8b7b1f0682ab4d87c04d7c6",
+      "glbSha256": "cbe860dbc72dd1daf85f04b728ffd0db8ab81b79b4ec543cdbaaffbc8ad3813e",
+      "sourceCompression": "Zstandard compressed native section mesh; n-gon caps triangulated only in export memory",
+      "boundsM": {
+        "min": [
+          -1.50420081615448,
+          -0.12999999523162842,
+          0.019999999552965164
+        ],
+        "max": [
+          1.50420081615448,
+          -0.006000000052154064,
+          0.3199999928474426
+        ],
+        "size": [
+          3.00840163230896,
+          0.12399999517947435,
+          0.29999999329447746
+        ]
+      },
+      "triangles": 40,
+      "vertices": 66,
+      "primitives": 1,
+      "bytes": 7512,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 7512,
+      "images": [],
+      "nodeNames": [
+        "window-sill"
+      ],
+      "materialNames": [
+        "painted-metal"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0,
+      "uniqueTexelBytesWithMips": 0
+    },
+    {
+      "assetId": "modern-source-window-paired-sill",
+      "lod": 1,
+      "sourceBytes": 87962,
+      "sourceSha256": "4d0224f58e55670715114a4abe66bd13b9c205134b72e6d0575fe8c01befc870",
+      "glbSha256": "f44f570ac007b54e794a4d5c8f0c08afeeb6fbf116bd1730845d76ca38df75b2",
+      "sourceCompression": "Zstandard compressed native section mesh; n-gon caps triangulated only in export memory",
+      "boundsM": {
+        "min": [
+          -1.50420081615448,
+          -0.12999999523162842,
+          0.019999999552965164
+        ],
+        "max": [
+          1.50420081615448,
+          -0.006000000052154064,
+          0.3199999928474426
+        ],
+        "size": [
+          3.00840163230896,
+          0.12399999517947435,
+          0.29999999329447746
+        ]
+      },
+      "triangles": 28,
+      "vertices": 48,
+      "primitives": 1,
+      "bytes": 6576,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 6576,
+      "images": [],
+      "nodeNames": [
+        "window-sill"
+      ],
+      "materialNames": [
+        "painted-metal"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0,
+      "uniqueTexelBytesWithMips": 0
+    },
+    {
+      "assetId": "cedar-source-window-paired-sill",
+      "lod": 0,
+      "sourceBytes": 87848,
+      "sourceSha256": "5a122b4689ff33afc8ab8af3ddb3baa419d50c8e71461ce432703786c1dffdfe",
+      "glbSha256": "f52e54c33843775ec39d238ca21f2c8b3f6716c1169c9dd036fa286ac7686f94",
+      "sourceCompression": "Zstandard compressed native section mesh; n-gon caps triangulated only in export memory",
+      "boundsM": {
+        "min": [
+          -0.8192585110664368,
+          -0.12999999523162842,
+          0.019999999552965164
+        ],
+        "max": [
+          0.8192585110664368,
+          -0.006000000052154064,
+          0.3100000023841858
+        ],
+        "size": [
+          1.6385170221328735,
+          0.12399999517947435,
+          0.2900000028312206
+        ]
+      },
+      "triangles": 36,
+      "vertices": 60,
+      "primitives": 1,
+      "bytes": 7024,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 7024,
+      "images": [],
+      "nodeNames": [
+        "window-sill"
+      ],
+      "materialNames": [
+        "cedar"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0,
+      "uniqueTexelBytesWithMips": 0
+    },
+    {
+      "assetId": "cedar-source-window-paired-sill",
+      "lod": 1,
+      "sourceBytes": 87780,
+      "sourceSha256": "31549694398247c6c28eaf7f2f3bc1b41850a4aa27473ddfe2ecd1bd627e7402",
+      "glbSha256": "63d9c379bee7bb3d01eb293969e223d0d7df905aa153d96ed080e3caa7638a88",
+      "sourceCompression": "Zstandard compressed native section mesh; n-gon caps triangulated only in export memory",
+      "boundsM": {
+        "min": [
+          -0.8192585110664368,
+          -0.12999999523162842,
+          0.019999999552965164
+        ],
+        "max": [
+          0.8192585110664368,
+          -0.006000000052154064,
+          0.3100000023841858
+        ],
+        "size": [
+          1.6385170221328735,
+          0.12399999517947435,
+          0.2900000028312206
+        ]
+      },
+      "triangles": 20,
+      "vertices": 36,
+      "primitives": 1,
+      "bytes": 5772,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 5772,
+      "images": [],
+      "nodeNames": [
+        "window-sill"
+      ],
+      "materialNames": [
+        "cedar"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0,
+      "uniqueTexelBytesWithMips": 0
+    }
+  ],
+  "totals": {
+    "glbBytes": 65264,
+    "sourceBytes": 716519,
+    "embeddedImageBytes": 0,
+    "newUniqueTexelBytesWithMips": 0
+  }
+}

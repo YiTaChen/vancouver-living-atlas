@@ -1,0 +1,578 @@
+{
+  "status": "pass",
+  "scope": "offline illustrative four lights and identical camera/scale paired LODs; not actual city lighting nor WebGL acceptance",
+  "inputGlbSha256": {
+    "exports/modern-source-window-surround.lod0.glb": "38da7234e7987342cd2d23216806dc7079ea2e8add1c6e3348ae0a6d7f119e55",
+    "exports/modern-source-window-surround.lod1.glb": "c81bf83db1087e1ad029e642fa655d8310b75bb702939fa6ab52f24324fa3c95",
+    "exports/cedar-source-window-surround.lod0.glb": "a0a793735de865e0c4d1e89c523de863216d8d22dc14ef2510dedfc89b0e690e",
+    "exports/cedar-source-window-surround.lod1.glb": "0c5bb9c7b68e760698bb09fbb59328c29e4444427ac7c9358e7ca08e8d123cef"
+  },
+  "images": [
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 0,
+      "view": "oblique",
+      "lighting": "clear",
+      "file": "qa/previews/modern-source-window-surround.lod0.oblique.clear.png",
+      "sha256": "42fd18bb053311581129bbb1f290916ad06f08b89f9f0923731a6e4fb8453aa2",
+      "bytes": 406358,
+      "inputGlbSha256": "38da7234e7987342cd2d23216806dc7079ea2e8add1c6e3348ae0a6d7f119e55",
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        640,
+        440
+      ],
+      "samples": 20,
+      "exposure": 0
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 0,
+      "view": "oblique",
+      "lighting": "overcast",
+      "file": "qa/previews/modern-source-window-surround.lod0.oblique.overcast.png",
+      "sha256": "97d9ab87b41c7391a73ce34d5d4db5b45c8031784d26f417e7c5009f28cd40e4",
+      "bytes": 392736,
+      "inputGlbSha256": "38da7234e7987342cd2d23216806dc7079ea2e8add1c6e3348ae0a6d7f119e55",
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        640,
+        440
+      ],
+      "samples": 20,
+      "exposure": 0
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 0,
+      "view": "oblique",
+      "lighting": "dusk",
+      "file": "qa/previews/modern-source-window-surround.lod0.oblique.dusk.png",
+      "sha256": "df60d4631c5234e249fe7484812c5e6d739903fbf36bb9e647a77e7e76b13cd5",
+      "bytes": 462427,
+      "inputGlbSha256": "38da7234e7987342cd2d23216806dc7079ea2e8add1c6e3348ae0a6d7f119e55",
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        640,
+        440
+      ],
+      "samples": 20,
+      "exposure": 0
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 0,
+      "view": "oblique",
+      "lighting": "night",
+      "file": "qa/previews/modern-source-window-surround.lod0.oblique.night.png",
+      "sha256": "90b43de050a8bd0ddf7d35066333901ee3d33db43fcc064d1edd54c3cbf3806c",
+      "bytes": 399555,
+      "inputGlbSha256": "38da7234e7987342cd2d23216806dc7079ea2e8add1c6e3348ae0a6d7f119e55",
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        640,
+        440
+      ],
+      "samples": 20,
+      "exposure": 0
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 0,
+      "view": "front",
+      "lighting": "clear",
+      "file": "qa/previews/modern-source-window-surround.lod0.front.clear.png",
+      "sha256": "7a930e4e3b94fe12a6d994d8cb7889a30cc5fda1ca58b27576b77a920716ab62",
+      "bytes": 319642,
+      "inputGlbSha256": "38da7234e7987342cd2d23216806dc7079ea2e8add1c6e3348ae0a6d7f119e55",
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        640,
+        440
+      ],
+      "samples": 20,
+      "exposure": 0
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 0,
+      "view": "rear",
+      "lighting": "clear",
+      "file": "qa/previews/modern-source-window-surround.lod0.rear.clear.png",
+      "sha256": "3e4c11690a2a483b46e53b0f1620c2d5d72cde15be9f0255a9aeccc6f6dd9605",
+      "bytes": 408925,
+      "inputGlbSha256": "38da7234e7987342cd2d23216806dc7079ea2e8add1c6e3348ae0a6d7f119e55",
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        640,
+        440
+      ],
+      "samples": 20,
+      "exposure": 0
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 1,
+      "view": "oblique",
+      "lighting": "clear",
+      "file": "qa/previews/modern-source-window-surround.lod1.oblique.clear.png",
+      "sha256": "a0740b86a8c216f0c3edf32e28d9b39d5000d5281c5d2a561884a85e7b7d45b5",
+      "bytes": 405678,
+      "inputGlbSha256": "c81bf83db1087e1ad029e642fa655d8310b75bb702939fa6ab52f24324fa3c95",
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        640,
+        440
+      ],
+      "samples": 20,
+      "exposure": 0
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 1,
+      "view": "oblique",
+      "lighting": "overcast",
+      "file": "qa/previews/modern-source-window-surround.lod1.oblique.overcast.png",
+      "sha256": "95dcdf1f9313b8623f72ab4bd27e3bcb5310fc8058251bb2efb273e05351e293",
+      "bytes": 392205,
+      "inputGlbSha256": "c81bf83db1087e1ad029e642fa655d8310b75bb702939fa6ab52f24324fa3c95",
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        640,
+        440
+      ],
+      "samples": 20,
+      "exposure": 0
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 1,
+      "view": "oblique",
+      "lighting": "dusk",
+      "file": "qa/previews/modern-source-window-surround.lod1.oblique.dusk.png",
+      "sha256": "995cf13d6e7f8810a6ff61532aa5cbf23d21313bbfdb3f1f78391ae5d2546d10",
+      "bytes": 462512,
+      "inputGlbSha256": "c81bf83db1087e1ad029e642fa655d8310b75bb702939fa6ab52f24324fa3c95",
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        640,
+        440
+      ],
+      "samples": 20,
+      "exposure": 0
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 1,
+      "view": "oblique",
+      "lighting": "night",
+      "file": "qa/previews/modern-source-window-surround.lod1.oblique.night.png",
+      "sha256": "34a83b4ed11ee9a7e2a7873eec361efd2c5acdea82a2755506d023347c12e55d",
+      "bytes": 399387,
+      "inputGlbSha256": "c81bf83db1087e1ad029e642fa655d8310b75bb702939fa6ab52f24324fa3c95",
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        640,
+        440
+      ],
+      "samples": 20,
+      "exposure": 0
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 1,
+      "view": "front",
+      "lighting": "clear",
+      "file": "qa/previews/modern-source-window-surround.lod1.front.clear.png",
+      "sha256": "b2f950d344f7690ecddb84f032c118a7ded372b7298787bba6a92f412a2a681e",
+      "bytes": 320375,
+      "inputGlbSha256": "c81bf83db1087e1ad029e642fa655d8310b75bb702939fa6ab52f24324fa3c95",
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        640,
+        440
+      ],
+      "samples": 20,
+      "exposure": 0
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 1,
+      "view": "rear",
+      "lighting": "clear",
+      "file": "qa/previews/modern-source-window-surround.lod1.rear.clear.png",
+      "sha256": "7c48669b2847f209d23aaa65690eac89db40da83506ea188988bf4e4b9193cd4",
+      "bytes": 407710,
+      "inputGlbSha256": "c81bf83db1087e1ad029e642fa655d8310b75bb702939fa6ab52f24324fa3c95",
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        640,
+        440
+      ],
+      "samples": 20,
+      "exposure": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 0,
+      "view": "oblique",
+      "lighting": "clear",
+      "file": "qa/previews/cedar-source-window-surround.lod0.oblique.clear.png",
+      "sha256": "3416ca0774b76e3d3baa4293090fd0a53c400d9b4085fc6bca58982165723abf",
+      "bytes": 418284,
+      "inputGlbSha256": "a0a793735de865e0c4d1e89c523de863216d8d22dc14ef2510dedfc89b0e690e",
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        640,
+        440
+      ],
+      "samples": 20,
+      "exposure": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 0,
+      "view": "oblique",
+      "lighting": "overcast",
+      "file": "qa/previews/cedar-source-window-surround.lod0.oblique.overcast.png",
+      "sha256": "fb603621b1e4c96d9a0e8721637f997dd85102061f79008a339b9997bbd2cea6",
+      "bytes": 409114,
+      "inputGlbSha256": "a0a793735de865e0c4d1e89c523de863216d8d22dc14ef2510dedfc89b0e690e",
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        640,
+        440
+      ],
+      "samples": 20,
+      "exposure": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 0,
+      "view": "oblique",
+      "lighting": "dusk",
+      "file": "qa/previews/cedar-source-window-surround.lod0.oblique.dusk.png",
+      "sha256": "fa680f0a05300c1463d0e2df1d4d0259aa6f91799605bd2016aa436e670f99cf",
+      "bytes": 494064,
+      "inputGlbSha256": "a0a793735de865e0c4d1e89c523de863216d8d22dc14ef2510dedfc89b0e690e",
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        640,
+        440
+      ],
+      "samples": 20,
+      "exposure": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 0,
+      "view": "oblique",
+      "lighting": "night",
+      "file": "qa/previews/cedar-source-window-surround.lod0.oblique.night.png",
+      "sha256": "a0fdbbc7c56b3d7f4ea7b5b35df0777ad7dc06048615b99022bcd5142620a32b",
+      "bytes": 427352,
+      "inputGlbSha256": "a0a793735de865e0c4d1e89c523de863216d8d22dc14ef2510dedfc89b0e690e",
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        640,
+        440
+      ],
+      "samples": 20,
+      "exposure": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 0,
+      "view": "front",
+      "lighting": "clear",
+      "file": "qa/previews/cedar-source-window-surround.lod0.front.clear.png",
+      "sha256": "c075d93cbad12c4beb6218d76f7c0237fc551fd93b27e1c86e814cd45e41297a",
+      "bytes": 331197,
+      "inputGlbSha256": "a0a793735de865e0c4d1e89c523de863216d8d22dc14ef2510dedfc89b0e690e",
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        640,
+        440
+      ],
+      "samples": 20,
+      "exposure": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 0,
+      "view": "rear",
+      "lighting": "clear",
+      "file": "qa/previews/cedar-source-window-surround.lod0.rear.clear.png",
+      "sha256": "15a211010397445d2212856c766130f7de627bc528a8b3dd5f59080495c42d82",
+      "bytes": 428854,
+      "inputGlbSha256": "a0a793735de865e0c4d1e89c523de863216d8d22dc14ef2510dedfc89b0e690e",
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        640,
+        440
+      ],
+      "samples": 20,
+      "exposure": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 1,
+      "view": "oblique",
+      "lighting": "clear",
+      "file": "qa/previews/cedar-source-window-surround.lod1.oblique.clear.png",
+      "sha256": "e8e715feece310947f711688559f86cf85ed00a610c209c46eea68d72547a629",
+      "bytes": 418268,
+      "inputGlbSha256": "0c5bb9c7b68e760698bb09fbb59328c29e4444427ac7c9358e7ca08e8d123cef",
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        640,
+        440
+      ],
+      "samples": 20,
+      "exposure": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 1,
+      "view": "oblique",
+      "lighting": "overcast",
+      "file": "qa/previews/cedar-source-window-surround.lod1.oblique.overcast.png",
+      "sha256": "8e06a42051b395b5d62334ac810a2ff90ff99b7f674c9a63f7aaac547f4c8c63",
+      "bytes": 408716,
+      "inputGlbSha256": "0c5bb9c7b68e760698bb09fbb59328c29e4444427ac7c9358e7ca08e8d123cef",
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        640,
+        440
+      ],
+      "samples": 20,
+      "exposure": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 1,
+      "view": "oblique",
+      "lighting": "dusk",
+      "file": "qa/previews/cedar-source-window-surround.lod1.oblique.dusk.png",
+      "sha256": "cad226f8535d769c3240419cd1d7e684af62394ca8e389ac4ec7f7d552b78303",
+      "bytes": 493734,
+      "inputGlbSha256": "0c5bb9c7b68e760698bb09fbb59328c29e4444427ac7c9358e7ca08e8d123cef",
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        640,
+        440
+      ],
+      "samples": 20,
+      "exposure": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 1,
+      "view": "oblique",
+      "lighting": "night",
+      "file": "qa/previews/cedar-source-window-surround.lod1.oblique.night.png",
+      "sha256": "a808221bb81c15636dc3662ee08d50d72d52158dca42b12854d09eb7689c15de",
+      "bytes": 427421,
+      "inputGlbSha256": "0c5bb9c7b68e760698bb09fbb59328c29e4444427ac7c9358e7ca08e8d123cef",
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        640,
+        440
+      ],
+      "samples": 20,
+      "exposure": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 1,
+      "view": "front",
+      "lighting": "clear",
+      "file": "qa/previews/cedar-source-window-surround.lod1.front.clear.png",
+      "sha256": "144a6290bae994cb455436aa4df25d19ff1c43bbf16eca95bf26493d2b9a0993",
+      "bytes": 331783,
+      "inputGlbSha256": "0c5bb9c7b68e760698bb09fbb59328c29e4444427ac7c9358e7ca08e8d123cef",
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        640,
+        440
+      ],
+      "samples": 20,
+      "exposure": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 1,
+      "view": "rear",
+      "lighting": "clear",
+      "file": "qa/previews/cedar-source-window-surround.lod1.rear.clear.png",
+      "sha256": "f86841deb31d2c561fe78d693e8fb8a3634ddc72584514c45496aa02f60c5e51",
+      "bytes": 427830,
+      "inputGlbSha256": "0c5bb9c7b68e760698bb09fbb59328c29e4444427ac7c9358e7ca08e8d123cef",
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        640,
+        440
+      ],
+      "samples": 20,
+      "exposure": 0
+    }
+  ],
+  "visualReview": {
+    "status": "pass",
+    "review": "Both 12-image contact sheets inspected: frame apertures unobstructed, inner lip/recess visible, outer silhouette and size stable across LODs, 1m/1.75m/1.81m references present, four light responses distinct without emissive frames. Rear-view in-scene text is reversed; contact-sheet labels identify views. Night intentionally dark; 20 sample CPU noise retained.",
+    "contactSheets": [
+      {
+        "file": "qa/cedar-source-window-surround.contact.png",
+        "sha256": "fc9b6a6a18a470e6db400603e629c3f81bedf1613d4ad4fa4a0742ccb9e9d527"
+      },
+      {
+        "file": "qa/modern-source-window-surround.contact.png",
+        "sha256": "8e7762602ce78d25387ade0d39962f2ba7c4fc06559d550c6770a90dee3c44e9"
+      }
+    ]
+  }
+}

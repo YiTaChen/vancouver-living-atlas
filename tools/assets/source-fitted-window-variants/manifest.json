@@ -1,0 +1,1285 @@
+{
+  "schemaVersion": 1,
+  "packageId": "source-fitted-window-variants",
+  "version": "1.1.0",
+  "baseRevision": "aef5e31d4eb8d5d3f832d0931373bf6583227033",
+  "status": "offline_complete",
+  "units": "metres",
+  "coordinateSystem": {
+    "authoringUp": "+Z",
+    "gltfUp": "+Y",
+    "front": "+Z",
+    "authoringFront": "-Y",
+    "conversion": "Blender (x,y,z) -> glTF (x,z,-y), exactly once"
+  },
+  "provenance": {
+    "credit": "Based on Vancouver Living Atlas by YiTaChen",
+    "license": "LicenseRef-Vancouver-Living-Atlas-NC-1.0",
+    "source": "https://github.com/YiTaChen/vancouver-living-atlas",
+    "geometry": "Original parameterized cross-section ring, new stable IDs; not stretched/imported legacy GLBs",
+    "sourceEvidence": "qa/source-fixtures.json",
+    "dimensionDefinition": "production visual window mask dimensions on source GIS edges; not a survey of physical window frames",
+    "materialSource": "tools/assets/city-materials/catalog.json, semantic roles only, no private maps",
+    "generatorSha256": "5e6655af1418517f7318c70101ba798dba34b61ef298096d2ff3a91666020705",
+    "exporterSha256": "d1095171c4e4a941cdbf01297e65790ac0778a142be5c58628772ad6b02e999a",
+    "fitContractSha256": "adb20da6b4a336d27d95433cd484723cdd1fe03f0af53ff303ad60ea0a9481ee",
+    "oldPackagesPreserved": true,
+    "acceptanceScope": "offline_complete for two optional source-fitted frame + new paired-sill assemblies; only valid when prior sill is explicitly suppressed. No runtime activation.",
+    "pairedSillGeneratorSha256": "7076b00969321898638dd02a2b55b4fa9003c0c49cd93028b7bcf062c4bc5476",
+    "legacySillOverlapDiagnostic": "qa/existing-sill-coexistence.json remains negative evidence for the unsafe old-sill + new-frame combination"
+  },
+  "reexportCommand": "blender -b -t 2 --python-exit-code 1 --python tools/assets/source-fitted-window-variants/export.py -- --source tools/assets/source-fitted-window-variants/source --output /tmp/source-fitted-windows-reexport-NEW",
+  "validationCommand": "python3 tools/assets/source-fitted-window-variants/validate.py && node --test tools/assets/source-fitted-window-variants/fit.test.mjs tools/assets/source-fitted-window-variants/assembly.test.mjs && python3 -m unittest discover -s tools/assets/source-fitted-window-variants -p test_validate.py",
+  "assets": [
+    {
+      "id": "modern-source-window-surround",
+      "taskId": "C02",
+      "variant": "modern-recessed",
+      "kind": "source-fitted-window-frame",
+      "source": "source/modern-source-window-surround.lod0.blend",
+      "sourceSha256": "f4eae28d460dc4dee32db729f2a3de57f1b7d45fb547080173025ddfcbf7637a",
+      "lods": [
+        {
+          "level": 0,
+          "source": "source/modern-source-window-surround.lod0.blend",
+          "sourceSha256": "f4eae28d460dc4dee32db729f2a3de57f1b7d45fb547080173025ddfcbf7637a",
+          "file": "exports/modern-source-window-surround.lod0.glb",
+          "sha256": "38da7234e7987342cd2d23216806dc7079ea2e8add1c6e3348ae0a6d7f119e55",
+          "boundsM": {
+            "min": [
+              -1.4342008829116821,
+              0.0,
+              0.019999999552965164
+            ],
+            "max": [
+              1.4342008829116821,
+              2.444499969482422,
+              0.25999999046325684
+            ],
+            "size": [
+              2.8684017658233643,
+              2.444499969482422,
+              0.23999999091029167
+            ]
+          },
+          "triangles": 88,
+          "vertices": 136,
+          "primitives": 1,
+          "bytes": 10248,
+          "geometryBytes": 10248,
+          "embeddedImageBytes": 0,
+          "capabilities": {
+            "openingsPreserved": true,
+            "physicalGlassStop": true,
+            "passableGISOpening": false
+          }
+        },
+        {
+          "level": 1,
+          "source": "source/modern-source-window-surround.lod1.blend",
+          "sourceSha256": "ecafb5b06c7cffda7da7582889a86148d343a956fbfb05de249c2044853f6ae0",
+          "file": "exports/modern-source-window-surround.lod1.glb",
+          "sha256": "c81bf83db1087e1ad029e642fa655d8310b75bb702939fa6ab52f24324fa3c95",
+          "boundsM": {
+            "min": [
+              -1.4342008829116821,
+              0.0,
+              0.019999999552965164
+            ],
+            "max": [
+              1.4342008829116821,
+              2.444499969482422,
+              0.25999999046325684
+            ],
+            "size": [
+              2.8684017658233643,
+              2.444499969482422,
+              0.23999999091029167
+            ]
+          },
+          "triangles": 72,
+          "vertices": 112,
+          "primitives": 1,
+          "bytes": 9004,
+          "geometryBytes": 9004,
+          "embeddedImageBytes": 0,
+          "capabilities": {
+            "openingsPreserved": true,
+            "physicalGlassStop": true,
+            "passableGISOpening": false
+          }
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -1.4342008829116821,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          1.4342008829116821,
+          2.444499969482422,
+          0.25999999046325684
+        ],
+        "size": [
+          2.8684017658233643,
+          2.444499969482422,
+          0.23999999091029167
+        ]
+      },
+      "expectedDimensionsM": {
+        "width": 2.8684017277138936,
+        "height": 2.4445000000000006,
+        "depth": 0.24,
+        "clearOpeningWidth": 2.6684017277138934,
+        "clearOpeningHeight": 2.2445000000000004,
+        "section": 0.1
+      },
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Aperture recomputed from actual source edge length and production fitBays/windowBounds. Section, bevel and recess are representative design choices, not measured physical architecture. No nonuniform scaling.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "frame horizontal centre, outer-frame lower edge, source wall plane"
+      },
+      "attachmentDatum": {
+        "kind": "outer-frame-bottom-at-wall-plane",
+        "wallPlaneZ": 0,
+        "sourceDatum": "actual windowBounds.bottom",
+        "rootYRule": "windowBounds.bottom - sectionM",
+        "sectionM": 0.1,
+        "localOpeningBottomM": 0.1,
+        "frontAxis": "+Z",
+        "upAxis": "+Y",
+        "neverUse": "sill-slot component-bottom Y or recentered bounds"
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "painted-metal",
+          "role": "painted-metal",
+          "surfaceId": "painted-metal",
+          "maps": {},
+          "channels": {},
+          "primitiveBindingsByLod": {
+            "0": [
+              {
+                "node": "window-frame",
+                "primitive": 0
+              }
+            ],
+            "1": [
+              {
+                "node": "window-frame",
+                "primitive": 0
+              }
+            ]
+          },
+          "tileMeters": [
+            0.8,
+            0.8
+          ],
+          "uvConvention": "source dominant-axis metres/tileMeters; glTF V flip once; direct shared surface UV, not packed atlas coordinates",
+          "bindingRequirement": "Rebind by semantic role to existing shared city material. If using atlas, apply its slot transform in consumer; do not sample atlas with standalone surface UV.",
+          "placeholder": "opaque untextured catalog average converted sRGB to linear; no baked lighting or maps"
+        }
+      ],
+      "textureMode": "none-shared-material-roles",
+      "textureCost": {
+        "geometryBytes": 19252,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 19252,
+        "uniqueTexelBytesWithMips": 0,
+        "newUniqueTexelBytesWithMips": 0,
+        "runtimeSharedMaterials": "consumer must deduplicate; not demonstrated by source role names"
+      },
+      "lodPolicy": {
+        "levels": [
+          0,
+          1
+        ],
+        "triangleCaps": [
+          256,
+          80
+        ],
+        "geometryByteCaps": [
+          65536,
+          24576
+        ],
+        "primitiveCaps": [
+          1,
+          1
+        ],
+        "selection": "bounded existing visible facade detail subset; suggested projected-size/distance gating requires WebGL integration",
+        "preserve": [
+          "outer bounds",
+          "root datum",
+          "clear aperture",
+          "four-sided physical stop"
+        ],
+        "suggestedDistanceM": [
+          30,
+          80
+        ]
+      },
+      "clearance": {
+        "kind": "clear-frame-aperture",
+        "boundsM": {
+          "min": [
+            -1.3342008638569467,
+            0.1,
+            0.01
+          ],
+          "max": [
+            1.3342008638569467,
+            2.3445000000000005,
+            0.27
+          ]
+        },
+        "widthM": 2.6684017277138934,
+        "heightM": 2.2445000000000004,
+        "physicalGlassStop": {
+          "rearZ": 0.06,
+          "frontZ": 0.075,
+          "thicknessM": 0.015,
+          "revealExtraM": 0.02,
+          "sides": [
+            "left",
+            "right",
+            "top",
+            "bottom"
+          ]
+        },
+        "recessFromFrontToStopFaceM": 0.185,
+        "frontBevelM": 0.008,
+        "glassIncluded": false,
+        "scope": "unobstructed decorative frame only; GIS wall and collision remain solid"
+      },
+      "collision": {
+        "kind": "none",
+        "reason": "decorative replacement only; retain existing source wall and collision, no new passability"
+      },
+      "anchors": [
+        {
+          "id": "wall-frame-origin",
+          "positionM": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "clear-opening-lower-centre",
+          "positionM": [
+            0,
+            0.1,
+            0.06
+          ]
+        },
+        {
+          "id": "clear-opening-centre",
+          "positionM": [
+            0,
+            1.2222500000000003,
+            0.06
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "profiles": [
+          "midrise-grid"
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "openingToleranceM": 0.02,
+        "occlusionToleranceM": 1e-06,
+        "fitFunction": "fit.mjs:fitWindow",
+        "parameterizedDesign": "build.py:loops_for with designs.json; changing aperture dimensions creates a new reviewed stable variant, not a transform",
+        "sourceFixtures": "qa/source-fixtures.json",
+        "sourceIDsAreFixturesNotActivation": true,
+        "entryExclusionsRequired": true,
+        "preserve": [
+          "source geometry",
+          "wall/collision",
+          "cedar sill",
+          "canopy ground datum and clearance",
+          "shader glass"
+        ],
+        "fallback": "retain-existing-procedural-or-shader-detail"
+      },
+      "intendedConsumer": [
+        "lib/city/architecture-module-candidate.ts",
+        "lib/city/architecture-plan.ts",
+        "lib/city/facade-profile.ts:fitBays/windowBounds"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/common-validation.json",
+          "qa/fit-tests.log",
+          "qa/positive-fit-fixtures.json",
+          "qa/source-edit-preservation.json",
+          "qa/blender-audit.json",
+          "qa/preview-index.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "state": "runtime_pending_webgl",
+        "required": [
+          "source cell admission and single-source replacement",
+          "remove only replaced procedural frame detail; preserve sill/canopy",
+          "avoid overlap with existing sill lip",
+          "shared material binding and disposal",
+          "actual GIS-wall shader alignment",
+          "four city lights / High Ultra fallback",
+          "LOD transitions, draws, frame-time and GPU cost"
+        ]
+      }
+    },
+    {
+      "id": "cedar-source-window-surround",
+      "taskId": "C03",
+      "variant": "residential-cedar",
+      "kind": "source-fitted-window-frame",
+      "source": "source/cedar-source-window-surround.lod0.blend",
+      "sourceSha256": "39bc6b5677336fefc5fc9e5c7e537346932e5412c66609f775c7725cf6399501",
+      "lods": [
+        {
+          "level": 0,
+          "source": "source/cedar-source-window-surround.lod0.blend",
+          "sourceSha256": "39bc6b5677336fefc5fc9e5c7e537346932e5412c66609f775c7725cf6399501",
+          "file": "exports/cedar-source-window-surround.lod0.glb",
+          "sha256": "a0a793735de865e0c4d1e89c523de863216d8d22dc14ef2510dedfc89b0e690e",
+          "boundsM": {
+            "min": [
+              -0.7492585182189941,
+              0.0,
+              0.019999999552965164
+            ],
+            "max": [
+              0.7492585182189941,
+              1.6505000591278076,
+              0.18000000715255737
+            ],
+            "size": [
+              1.4985170364379883,
+              1.6505000591278076,
+              0.1600000075995922
+            ]
+          },
+          "triangles": 88,
+          "vertices": 136,
+          "primitives": 1,
+          "bytes": 10188,
+          "geometryBytes": 10188,
+          "embeddedImageBytes": 0,
+          "capabilities": {
+            "openingsPreserved": true,
+            "physicalGlassStop": true,
+            "passableGISOpening": false
+          }
+        },
+        {
+          "level": 1,
+          "source": "source/cedar-source-window-surround.lod1.blend",
+          "sourceSha256": "fa13a308fefa98ab65be3d163d964fd4423a9e7a4f7c7e791b5129b3dfad0451",
+          "file": "exports/cedar-source-window-surround.lod1.glb",
+          "sha256": "0c5bb9c7b68e760698bb09fbb59328c29e4444427ac7c9358e7ca08e8d123cef",
+          "boundsM": {
+            "min": [
+              -0.7492585182189941,
+              0.0,
+              0.019999999552965164
+            ],
+            "max": [
+              0.7492585182189941,
+              1.6505000591278076,
+              0.18000000715255737
+            ],
+            "size": [
+              1.4985170364379883,
+              1.6505000591278076,
+              0.1600000075995922
+            ]
+          },
+          "triangles": 72,
+          "vertices": 112,
+          "primitives": 1,
+          "bytes": 8940,
+          "geometryBytes": 8940,
+          "embeddedImageBytes": 0,
+          "capabilities": {
+            "openingsPreserved": true,
+            "physicalGlassStop": true,
+            "passableGISOpening": false
+          }
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.7492585182189941,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          0.7492585182189941,
+          1.6505000591278076,
+          0.18000000715255737
+        ],
+        "size": [
+          1.4985170364379883,
+          1.6505000591278076,
+          0.1600000075995922
+        ]
+      },
+      "expectedDimensionsM": {
+        "width": 1.4985170585149246,
+        "height": 1.6505000000000005,
+        "depth": 0.16,
+        "clearOpeningWidth": 1.3585170585149247,
+        "clearOpeningHeight": 1.5105000000000004,
+        "section": 0.07
+      },
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Aperture recomputed from actual source edge length and production fitBays/windowBounds. Section, bevel and recess are representative design choices, not measured physical architecture. No nonuniform scaling.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "frame horizontal centre, outer-frame lower edge, source wall plane"
+      },
+      "attachmentDatum": {
+        "kind": "outer-frame-bottom-at-wall-plane",
+        "wallPlaneZ": 0,
+        "sourceDatum": "actual windowBounds.bottom",
+        "rootYRule": "windowBounds.bottom - sectionM",
+        "sectionM": 0.07,
+        "localOpeningBottomM": 0.07,
+        "frontAxis": "+Z",
+        "upAxis": "+Y",
+        "neverUse": "sill-slot component-bottom Y or recentered bounds"
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "cedar",
+          "role": "cedar",
+          "surfaceId": "cedar",
+          "maps": {},
+          "channels": {},
+          "primitiveBindingsByLod": {
+            "0": [
+              {
+                "node": "window-frame",
+                "primitive": 0
+              }
+            ],
+            "1": [
+              {
+                "node": "window-frame",
+                "primitive": 0
+              }
+            ]
+          },
+          "tileMeters": [
+            1.52,
+            1.52
+          ],
+          "uvConvention": "source dominant-axis metres/tileMeters; glTF V flip once; direct shared surface UV, not packed atlas coordinates",
+          "bindingRequirement": "Rebind by semantic role to existing shared city material. If using atlas, apply its slot transform in consumer; do not sample atlas with standalone surface UV.",
+          "placeholder": "opaque untextured catalog average converted sRGB to linear; no baked lighting or maps"
+        }
+      ],
+      "textureMode": "none-shared-material-roles",
+      "textureCost": {
+        "geometryBytes": 19128,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 19128,
+        "uniqueTexelBytesWithMips": 0,
+        "newUniqueTexelBytesWithMips": 0,
+        "runtimeSharedMaterials": "consumer must deduplicate; not demonstrated by source role names"
+      },
+      "lodPolicy": {
+        "levels": [
+          0,
+          1
+        ],
+        "triangleCaps": [
+          256,
+          80
+        ],
+        "geometryByteCaps": [
+          65536,
+          24576
+        ],
+        "primitiveCaps": [
+          1,
+          1
+        ],
+        "selection": "bounded existing visible facade detail subset; suggested projected-size/distance gating requires WebGL integration",
+        "preserve": [
+          "outer bounds",
+          "root datum",
+          "clear aperture",
+          "four-sided physical stop"
+        ],
+        "suggestedDistanceM": [
+          30,
+          80
+        ]
+      },
+      "clearance": {
+        "kind": "clear-frame-aperture",
+        "boundsM": {
+          "min": [
+            -0.6792585292574623,
+            0.07,
+            0.01
+          ],
+          "max": [
+            0.6792585292574623,
+            1.5805000000000005,
+            0.19
+          ]
+        },
+        "widthM": 1.3585170585149247,
+        "heightM": 1.5105000000000004,
+        "physicalGlassStop": {
+          "rearZ": 0.05,
+          "frontZ": 0.065,
+          "thicknessM": 0.015,
+          "revealExtraM": 0.018,
+          "sides": [
+            "left",
+            "right",
+            "top",
+            "bottom"
+          ]
+        },
+        "recessFromFrontToStopFaceM": 0.115,
+        "frontBevelM": 0.006,
+        "glassIncluded": false,
+        "scope": "unobstructed decorative frame only; GIS wall and collision remain solid"
+      },
+      "collision": {
+        "kind": "none",
+        "reason": "decorative replacement only; retain existing source wall and collision, no new passability"
+      },
+      "anchors": [
+        {
+          "id": "wall-frame-origin",
+          "positionM": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "clear-opening-lower-centre",
+          "positionM": [
+            0,
+            0.07,
+            0.05
+          ]
+        },
+        {
+          "id": "clear-opening-centre",
+          "positionM": [
+            0,
+            0.8252500000000003,
+            0.05
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "profiles": [
+          "domestic-cladding"
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "openingToleranceM": 0.02,
+        "occlusionToleranceM": 1e-06,
+        "fitFunction": "fit.mjs:fitWindow",
+        "parameterizedDesign": "build.py:loops_for with designs.json; changing aperture dimensions creates a new reviewed stable variant, not a transform",
+        "sourceFixtures": "qa/source-fixtures.json",
+        "sourceIDsAreFixturesNotActivation": true,
+        "entryExclusionsRequired": true,
+        "preserve": [
+          "source geometry",
+          "wall/collision",
+          "cedar sill",
+          "canopy ground datum and clearance",
+          "shader glass"
+        ],
+        "fallback": "retain-existing-procedural-or-shader-detail"
+      },
+      "intendedConsumer": [
+        "lib/city/architecture-module-candidate.ts",
+        "lib/city/architecture-plan.ts",
+        "lib/city/facade-profile.ts:fitBays/windowBounds"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/common-validation.json",
+          "qa/fit-tests.log",
+          "qa/positive-fit-fixtures.json",
+          "qa/source-edit-preservation.json",
+          "qa/blender-audit.json",
+          "qa/preview-index.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "state": "runtime_pending_webgl",
+        "required": [
+          "source cell admission and single-source replacement",
+          "remove only replaced procedural frame detail; preserve sill/canopy",
+          "avoid overlap with existing sill lip",
+          "shared material binding and disposal",
+          "actual GIS-wall shader alignment",
+          "four city lights / High Ultra fallback",
+          "LOD transitions, draws, frame-time and GPU cost"
+        ]
+      }
+    },
+    {
+      "id": "modern-source-window-paired-sill",
+      "taskId": "C02",
+      "variant": "folded-metal",
+      "kind": "source-fitted-paired-window-sill",
+      "source": "source/modern-source-window-paired-sill.lod0.blend",
+      "sourceSha256": "2699734258abbb9369bcd448847f790bfc9a799db8b7b1f0682ab4d87c04d7c6",
+      "lods": [
+        {
+          "level": 0,
+          "source": "source/modern-source-window-paired-sill.lod0.blend",
+          "sourceSha256": "2699734258abbb9369bcd448847f790bfc9a799db8b7b1f0682ab4d87c04d7c6",
+          "file": "exports/modern-source-window-paired-sill.lod0.glb",
+          "sha256": "cbe860dbc72dd1daf85f04b728ffd0db8ab81b79b4ec543cdbaaffbc8ad3813e",
+          "boundsM": {
+            "min": [
+              -1.50420081615448,
+              -0.12999999523162842,
+              0.019999999552965164
+            ],
+            "max": [
+              1.50420081615448,
+              -0.006000000052154064,
+              0.3199999928474426
+            ],
+            "size": [
+              3.00840163230896,
+              0.12399999517947435,
+              0.29999999329447746
+            ]
+          },
+          "triangles": 40,
+          "vertices": 66,
+          "primitives": 1,
+          "bytes": 7512,
+          "geometryBytes": 7512,
+          "embeddedImageBytes": 0,
+          "capabilities": {
+            "slopedDrainageFace": true,
+            "physicalDripOrNose": true,
+            "sharedFrameRoot": true
+          }
+        },
+        {
+          "level": 1,
+          "source": "source/modern-source-window-paired-sill.lod1.blend",
+          "sourceSha256": "4d0224f58e55670715114a4abe66bd13b9c205134b72e6d0575fe8c01befc870",
+          "file": "exports/modern-source-window-paired-sill.lod1.glb",
+          "sha256": "f44f570ac007b54e794a4d5c8f0c08afeeb6fbf116bd1730845d76ca38df75b2",
+          "boundsM": {
+            "min": [
+              -1.50420081615448,
+              -0.12999999523162842,
+              0.019999999552965164
+            ],
+            "max": [
+              1.50420081615448,
+              -0.006000000052154064,
+              0.3199999928474426
+            ],
+            "size": [
+              3.00840163230896,
+              0.12399999517947435,
+              0.29999999329447746
+            ]
+          },
+          "triangles": 28,
+          "vertices": 48,
+          "primitives": 1,
+          "bytes": 6576,
+          "geometryBytes": 6576,
+          "embeddedImageBytes": 0,
+          "capabilities": {
+            "slopedDrainageFace": true,
+            "physicalDripOrNose": true,
+            "sharedFrameRoot": true
+          }
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -1.50420081615448,
+          -0.12999999523162842,
+          0.019999999552965164
+        ],
+        "max": [
+          1.50420081615448,
+          -0.006000000052154064,
+          0.3199999928474426
+        ],
+        "size": [
+          3.00840163230896,
+          0.12399999517947435,
+          0.29999999329447746
+        ]
+      },
+      "expectedDimensionsM": {
+        "width": 3.0084017277138937,
+        "height": 0.124,
+        "depth": 0.3,
+        "maximumY": -0.006,
+        "minimumY": -0.13
+      },
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Original paired sill based on actual source aperture + twice chosen frame section + 0.14m end projection. Top=windowBounds.bottom-sectionM-0.006m, slope/drop and physical drip are representative proposals. No old sill-slot Y.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "shared frame root; sill itself occupies negative local Y"
+      },
+      "attachmentDatum": {
+        "kind": "shared-window-frame-root",
+        "wallPlaneZ": 0,
+        "rootYRule": "windowBounds.bottom - sectionM",
+        "sectionM": 0.1,
+        "sillTopYRule": "windowBounds.bottom-sectionM-0.006",
+        "localTopY": -0.006,
+        "minimumLocalY": -0.13,
+        "frameSeparationM": 0.006,
+        "neverUse": "legacy sill-slot Y or recentered sill bounds"
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "painted-metal",
+          "role": "painted-metal",
+          "surfaceId": "painted-metal",
+          "maps": {},
+          "channels": {},
+          "primitiveBindingsByLod": {
+            "0": [
+              {
+                "node": "window-sill",
+                "primitive": 0
+              }
+            ],
+            "1": [
+              {
+                "node": "window-sill",
+                "primitive": 0
+              }
+            ]
+          },
+          "tileMeters": [
+            0.8,
+            0.8
+          ],
+          "uvConvention": "source dominant-axis metres/tileMeters; glTF V flip once; direct shared surface UV, not packed atlas coordinates",
+          "bindingRequirement": "Rebind by semantic role to existing shared city material. If using atlas, apply its slot transform in consumer; do not sample atlas with standalone surface UV.",
+          "placeholder": "opaque untextured catalog average converted sRGB to linear; no baked lighting or maps"
+        }
+      ],
+      "textureMode": "none-shared-material-roles",
+      "textureCost": {
+        "geometryBytes": 14088,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 14088,
+        "uniqueTexelBytesWithMips": 0,
+        "newUniqueTexelBytesWithMips": 0
+      },
+      "lodPolicy": {
+        "levels": [
+          0,
+          1
+        ],
+        "triangleCaps": [
+          256,
+          80
+        ],
+        "geometryByteCaps": [
+          65536,
+          24576
+        ],
+        "primitiveCaps": [
+          1,
+          1
+        ],
+        "selection": "bounded existing visible facade detail subset; suggested projected-size/distance gating requires WebGL integration",
+        "preserve": [
+          "outer bounds",
+          "shared frame root",
+          "sloped top",
+          "physical nose/drip",
+          "6mm lower-frame gap"
+        ],
+        "suggestedDistanceM": [
+          30,
+          80
+        ]
+      },
+      "clearance": {
+        "kind": "entire-sill-below-frame",
+        "maximumLocalY": -0.006,
+        "minimumLocalY": -0.13,
+        "frameSeparationM": 0.006,
+        "depthM": 0.3,
+        "scope": "strict separated actual GLB bounds below frame; combined aperture triangle/ray checks"
+      },
+      "collision": {
+        "kind": "none",
+        "reason": "decorative replacement only; retain existing source wall and collision, no new passability"
+      },
+      "anchors": [
+        {
+          "id": "shared-frame-root",
+          "positionM": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "sill-rear-top",
+          "positionM": [
+            0,
+            -0.006,
+            0.02
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "frameAssetId": "modern-source-window-surround",
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "rootTranslationM": [
+          0,
+          0,
+          0
+        ],
+        "fitFunction": "fit.mjs:fitAssembly",
+        "requires": "explicit selected old-sill suppression only while optional pair candidate is enabled",
+        "oldFilesRemainUnchanged": true,
+        "canopyAndGISWallCollisionRemainUnchanged": true,
+        "sourceIDsAreFixturesNotActivation": true,
+        "fallback": "retain entire existing frame/sill detail if assembly is not admitted"
+      },
+      "intendedConsumer": [
+        "lib/city/architecture-module-candidate.ts",
+        "lib/city/architecture-plan.ts",
+        "lib/city/facade-profile.ts:fitBays/windowBounds"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/positive-assembly-fixtures.json",
+          "qa/assembly-preview-index.json",
+          "qa/source-edit-preservation.json",
+          "qa/blender-audit.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "state": "runtime_pending_webgl",
+        "required": [
+          "source cell admission and single-source replacement",
+          "remove only replaced procedural frame detail; preserve sill/canopy",
+          "avoid overlap with existing sill lip",
+          "shared material binding and disposal",
+          "actual GIS-wall shader alignment",
+          "four city lights / High Ultra fallback",
+          "LOD transitions, draws, frame-time and GPU cost"
+        ]
+      }
+    },
+    {
+      "id": "cedar-source-window-paired-sill",
+      "taskId": "C03",
+      "variant": "sloped-cedar",
+      "kind": "source-fitted-paired-window-sill",
+      "source": "source/cedar-source-window-paired-sill.lod0.blend",
+      "sourceSha256": "5a122b4689ff33afc8ab8af3ddb3baa419d50c8e71461ce432703786c1dffdfe",
+      "lods": [
+        {
+          "level": 0,
+          "source": "source/cedar-source-window-paired-sill.lod0.blend",
+          "sourceSha256": "5a122b4689ff33afc8ab8af3ddb3baa419d50c8e71461ce432703786c1dffdfe",
+          "file": "exports/cedar-source-window-paired-sill.lod0.glb",
+          "sha256": "f52e54c33843775ec39d238ca21f2c8b3f6716c1169c9dd036fa286ac7686f94",
+          "boundsM": {
+            "min": [
+              -0.8192585110664368,
+              -0.12999999523162842,
+              0.019999999552965164
+            ],
+            "max": [
+              0.8192585110664368,
+              -0.006000000052154064,
+              0.3100000023841858
+            ],
+            "size": [
+              1.6385170221328735,
+              0.12399999517947435,
+              0.2900000028312206
+            ]
+          },
+          "triangles": 36,
+          "vertices": 60,
+          "primitives": 1,
+          "bytes": 7024,
+          "geometryBytes": 7024,
+          "embeddedImageBytes": 0,
+          "capabilities": {
+            "slopedDrainageFace": true,
+            "physicalDripOrNose": true,
+            "sharedFrameRoot": true
+          }
+        },
+        {
+          "level": 1,
+          "source": "source/cedar-source-window-paired-sill.lod1.blend",
+          "sourceSha256": "31549694398247c6c28eaf7f2f3bc1b41850a4aa27473ddfe2ecd1bd627e7402",
+          "file": "exports/cedar-source-window-paired-sill.lod1.glb",
+          "sha256": "63d9c379bee7bb3d01eb293969e223d0d7df905aa153d96ed080e3caa7638a88",
+          "boundsM": {
+            "min": [
+              -0.8192585110664368,
+              -0.12999999523162842,
+              0.019999999552965164
+            ],
+            "max": [
+              0.8192585110664368,
+              -0.006000000052154064,
+              0.3100000023841858
+            ],
+            "size": [
+              1.6385170221328735,
+              0.12399999517947435,
+              0.2900000028312206
+            ]
+          },
+          "triangles": 20,
+          "vertices": 36,
+          "primitives": 1,
+          "bytes": 5772,
+          "geometryBytes": 5772,
+          "embeddedImageBytes": 0,
+          "capabilities": {
+            "slopedDrainageFace": true,
+            "physicalDripOrNose": true,
+            "sharedFrameRoot": true
+          }
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.8192585110664368,
+          -0.12999999523162842,
+          0.019999999552965164
+        ],
+        "max": [
+          0.8192585110664368,
+          -0.006000000052154064,
+          0.3100000023841858
+        ],
+        "size": [
+          1.6385170221328735,
+          0.12399999517947435,
+          0.2900000028312206
+        ]
+      },
+      "expectedDimensionsM": {
+        "width": 1.6385170585149247,
+        "height": 0.124,
+        "depth": 0.29,
+        "maximumY": -0.006,
+        "minimumY": -0.13
+      },
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Original paired sill based on actual source aperture + twice chosen frame section + 0.14m end projection. Top=windowBounds.bottom-sectionM-0.006m, slope/drop and physical drip are representative proposals. No old sill-slot Y.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "shared frame root; sill itself occupies negative local Y"
+      },
+      "attachmentDatum": {
+        "kind": "shared-window-frame-root",
+        "wallPlaneZ": 0,
+        "rootYRule": "windowBounds.bottom - sectionM",
+        "sectionM": 0.07,
+        "sillTopYRule": "windowBounds.bottom-sectionM-0.006",
+        "localTopY": -0.006,
+        "minimumLocalY": -0.13,
+        "frameSeparationM": 0.006,
+        "neverUse": "legacy sill-slot Y or recentered sill bounds"
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "cedar",
+          "role": "cedar",
+          "surfaceId": "cedar",
+          "maps": {},
+          "channels": {},
+          "primitiveBindingsByLod": {
+            "0": [
+              {
+                "node": "window-sill",
+                "primitive": 0
+              }
+            ],
+            "1": [
+              {
+                "node": "window-sill",
+                "primitive": 0
+              }
+            ]
+          },
+          "tileMeters": [
+            1.52,
+            1.52
+          ],
+          "uvConvention": "source dominant-axis metres/tileMeters; glTF V flip once; direct shared surface UV, not packed atlas coordinates",
+          "bindingRequirement": "Rebind by semantic role to existing shared city material. If using atlas, apply its slot transform in consumer; do not sample atlas with standalone surface UV.",
+          "placeholder": "opaque untextured catalog average converted sRGB to linear; no baked lighting or maps"
+        }
+      ],
+      "textureMode": "none-shared-material-roles",
+      "textureCost": {
+        "geometryBytes": 12796,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 12796,
+        "uniqueTexelBytesWithMips": 0,
+        "newUniqueTexelBytesWithMips": 0
+      },
+      "lodPolicy": {
+        "levels": [
+          0,
+          1
+        ],
+        "triangleCaps": [
+          256,
+          80
+        ],
+        "geometryByteCaps": [
+          65536,
+          24576
+        ],
+        "primitiveCaps": [
+          1,
+          1
+        ],
+        "selection": "bounded existing visible facade detail subset; suggested projected-size/distance gating requires WebGL integration",
+        "preserve": [
+          "outer bounds",
+          "shared frame root",
+          "sloped top",
+          "physical nose/drip",
+          "6mm lower-frame gap"
+        ],
+        "suggestedDistanceM": [
+          30,
+          80
+        ]
+      },
+      "clearance": {
+        "kind": "entire-sill-below-frame",
+        "maximumLocalY": -0.006,
+        "minimumLocalY": -0.13,
+        "frameSeparationM": 0.006,
+        "depthM": 0.29,
+        "scope": "strict separated actual GLB bounds below frame; combined aperture triangle/ray checks"
+      },
+      "collision": {
+        "kind": "none",
+        "reason": "decorative replacement only; retain existing source wall and collision, no new passability"
+      },
+      "anchors": [
+        {
+          "id": "shared-frame-root",
+          "positionM": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "sill-rear-top",
+          "positionM": [
+            0,
+            -0.006,
+            0.02
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "frameAssetId": "cedar-source-window-surround",
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "rootTranslationM": [
+          0,
+          0,
+          0
+        ],
+        "fitFunction": "fit.mjs:fitAssembly",
+        "requires": "explicit selected old-sill suppression only while optional pair candidate is enabled",
+        "oldFilesRemainUnchanged": true,
+        "canopyAndGISWallCollisionRemainUnchanged": true,
+        "sourceIDsAreFixturesNotActivation": true,
+        "fallback": "retain entire existing frame/sill detail if assembly is not admitted"
+      },
+      "intendedConsumer": [
+        "lib/city/architecture-module-candidate.ts",
+        "lib/city/architecture-plan.ts",
+        "lib/city/facade-profile.ts:fitBays/windowBounds"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/positive-assembly-fixtures.json",
+          "qa/assembly-preview-index.json",
+          "qa/source-edit-preservation.json",
+          "qa/blender-audit.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "state": "runtime_pending_webgl",
+        "required": [
+          "source cell admission and single-source replacement",
+          "remove only replaced procedural frame detail; preserve sill/canopy",
+          "avoid overlap with existing sill lip",
+          "shared material binding and disposal",
+          "actual GIS-wall shader alignment",
+          "four city lights / High Ultra fallback",
+          "LOD transitions, draws, frame-time and GPU cost"
+        ]
+      }
+    }
+  ],
+  "textures": [],
+  "runtimeStatus": "runtime_pending_webgl",
+  "assemblies": [
+    {
+      "id": "modern-source-window-paired-assembly",
+      "taskId": "C02",
+      "frameId": "modern-source-window-surround",
+      "sillId": "modern-source-window-paired-sill",
+      "commonRoot": "source windowBounds.bottom - chosen frame section",
+      "transforms": {
+        "frame": {
+          "translationM": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        "sill": {
+          "translationM": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      "existingSillPolicy": "Suppress only the source-selected previous sill descriptor while this optional pair is enabled. Preserve all old source/export files. Restore old detail on fallback/disposal.",
+      "frameSillGapM": 0.006,
+      "sourceFixtureEvidence": "qa/positive-assembly-fixtures.json",
+      "geometryEvidence": "qa/validation.json:optionalPairedAssemblies",
+      "runtimeStatus": "runtime_pending_webgl",
+      "assemblyOfflineStatus": "pass"
+    },
+    {
+      "id": "cedar-source-window-paired-assembly",
+      "taskId": "C03",
+      "frameId": "cedar-source-window-surround",
+      "sillId": "cedar-source-window-paired-sill",
+      "commonRoot": "source windowBounds.bottom - chosen frame section",
+      "transforms": {
+        "frame": {
+          "translationM": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        "sill": {
+          "translationM": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      "existingSillPolicy": "Suppress only the source-selected previous sill descriptor while this optional pair is enabled. Preserve all old source/export files. Restore old detail on fallback/disposal.",
+      "frameSillGapM": 0.006,
+      "sourceFixtureEvidence": "qa/positive-assembly-fixtures.json",
+      "geometryEvidence": "qa/validation.json:optionalPairedAssemblies",
+      "runtimeStatus": "runtime_pending_webgl",
+      "assemblyOfflineStatus": "pass"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "modern-source-window-surround": {
+    "id": "modern-source-window-surround",
+    "taskId": "C02",
+    "variant": "modern-recessed",
+    "structureId": "145639",
+    "featureId": "133049",
+    "edgeKey": "-326.275,445.400|-336.041,435.450",
+    "surfaceId": "painted-metal",
+    "sectionM": 0.1,
+    "depthM": 0.24,
+    "stopRearZ": 0.06,
+    "stopThicknessM": 0.015,
+    "revealExtraM": 0.02,
+    "bevelM": 0.008,
+    "openingWidthM": 2.6684017277138934,
+    "openingHeightM": 2.2445000000000004,
+    "backZ": 0.02,
+    "tileMeters": [
+      0.8,
+      0.8
+    ],
+    "averageColor": [
+      0.28,
+      0.33,
+      0.31
+    ],
+    "roughness": 0.39,
+    "metalness": 0.12
+  },
+  "cedar-source-window-surround": {
+    "id": "cedar-source-window-surround",
+    "taskId": "C03",
+    "variant": "residential-cedar",
+    "structureId": "145755",
+    "featureId": "105546",
+    "edgeKey": "-229.513,444.825|-239.811,434.495",
+    "surfaceId": "cedar",
+    "sectionM": 0.07,
+    "depthM": 0.16,
+    "stopRearZ": 0.05,
+    "stopThicknessM": 0.015,
+    "revealExtraM": 0.018,
+    "bevelM": 0.006,
+    "openingWidthM": 1.3585170585149247,
+    "openingHeightM": 1.5105000000000004,
+    "backZ": 0.02,
+    "tileMeters": [
+      1.52,
+      1.52
+    ],
+    "averageColor": [
+      0.56,
+      0.55,
+      0.47
+    ],
+    "roughness": 0.77,
+    "metalness": 0
+  }
+}

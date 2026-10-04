@@ -1,0 +1,158 @@
+{
+  "status": "pass",
+  "blenderVersion": "4.3.2",
+  "results": [
+    {
+      "assetId": "cedar-source-window-paired-sill",
+      "lod": 0,
+      "editablePolygonFaces": 12,
+      "editableQuadFaces": 10,
+      "meshVertices": 20,
+      "source": "cedar-source-window-paired-sill.lod0.blend",
+      "sourceSha256": "5a122b4689ff33afc8ab8af3ddb3baa419d50c8e71461ce432703786c1dffdfe",
+      "nativeReopened": true,
+      "watertight": true,
+      "signedVolumeM3": 0.04739246452346822,
+      "eulerCharacteristic": 2,
+      "sourceScale": [
+        1,
+        1,
+        1
+      ],
+      "baselineAttributeAndIndexParity": true
+    },
+    {
+      "assetId": "cedar-source-window-paired-sill",
+      "lod": 1,
+      "editablePolygonFaces": 8,
+      "editableQuadFaces": 6,
+      "meshVertices": 12,
+      "source": "cedar-source-window-paired-sill.lod1.blend",
+      "sourceSha256": "31549694398247c6c28eaf7f2f3bc1b41850a4aa27473ddfe2ecd1bd627e7402",
+      "nativeReopened": true,
+      "watertight": true,
+      "signedVolumeM3": 0.04785944187526431,
+      "eulerCharacteristic": 2,
+      "sourceScale": [
+        1,
+        1,
+        1
+      ],
+      "baselineAttributeAndIndexParity": true
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 0,
+      "editablePolygonFaces": 44,
+      "editableQuadFaces": 44,
+      "meshVertices": 44,
+      "source": "cedar-source-window-surround.lod0.blend",
+      "sourceSha256": "39bc6b5677336fefc5fc9e5c7e537346932e5412c66609f775c7725cf6399501",
+      "nativeReopened": true,
+      "watertight": true,
+      "signedVolumeM3": 0.05223031177381501,
+      "eulerCharacteristic": 0,
+      "sourceScale": [
+        1,
+        1,
+        1
+      ],
+      "baselineAttributeAndIndexParity": true
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 1,
+      "editablePolygonFaces": 36,
+      "editableQuadFaces": 36,
+      "meshVertices": 36,
+      "source": "cedar-source-window-surround.lod1.blend",
+      "sourceSha256": "fa13a308fefa98ab65be3d163d964fd4423a9e7a4f7c7e791b5129b3dfad0451",
+      "nativeReopened": true,
+      "watertight": true,
+      "signedVolumeM3": 0.05212472294480935,
+      "eulerCharacteristic": 0,
+      "sourceScale": [
+        1,
+        1,
+        1
+      ],
+      "baselineAttributeAndIndexParity": true
+    },
+    {
+      "assetId": "modern-source-window-paired-sill",
+      "lod": 0,
+      "editablePolygonFaces": 13,
+      "editableQuadFaces": 11,
+      "meshVertices": 22,
+      "source": "modern-source-window-paired-sill.lod0.blend",
+      "sourceSha256": "2699734258abbb9369bcd448847f790bfc9a799db8b7b1f0682ab4d87c04d7c6",
+      "nativeReopened": true,
+      "watertight": true,
+      "signedVolumeM3": 0.017779649918657024,
+      "eulerCharacteristic": 2,
+      "sourceScale": [
+        1,
+        1,
+        1
+      ],
+      "baselineAttributeAndIndexParity": true
+    },
+    {
+      "assetId": "modern-source-window-paired-sill",
+      "lod": 1,
+      "editablePolygonFaces": 10,
+      "editableQuadFaces": 8,
+      "meshVertices": 16,
+      "source": "modern-source-window-paired-sill.lod1.blend",
+      "sourceSha256": "4d0224f58e55670715114a4abe66bd13b9c205134b72e6d0575fe8c01befc870",
+      "nativeReopened": true,
+      "watertight": true,
+      "signedVolumeM3": 0.02068275757699238,
+      "eulerCharacteristic": 2,
+      "sourceScale": [
+        1,
+        1,
+        1
+      ],
+      "baselineAttributeAndIndexParity": true
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 0,
+      "editablePolygonFaces": 44,
+      "editableQuadFaces": 44,
+      "meshVertices": 44,
+      "source": "modern-source-window-surround.lod0.blend",
+      "sourceSha256": "f4eae28d460dc4dee32db729f2a3de57f1b7d45fb547080173025ddfcbf7637a",
+      "nativeReopened": true,
+      "watertight": true,
+      "signedVolumeM3": 0.20082267808436502,
+      "eulerCharacteristic": 0,
+      "sourceScale": [
+        1,
+        1,
+        1
+      ],
+      "baselineAttributeAndIndexParity": true
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 1,
+      "editablePolygonFaces": 36,
+      "editableQuadFaces": 36,
+      "meshVertices": 36,
+      "source": "modern-source-window-surround.lod1.blend",
+      "sourceSha256": "ecafb5b06c7cffda7da7582889a86148d343a956fbfb05de249c2044853f6ae0",
+      "nativeReopened": true,
+      "watertight": true,
+      "signedVolumeM3": 0.20050381381174034,
+      "eulerCharacteristic": 0,
+      "sourceScale": [
+        1,
+        1,
+        1
+      ],
+      "baselineAttributeAndIndexParity": true
+    }
+  ]
+}

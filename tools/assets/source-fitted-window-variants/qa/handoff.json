@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 1,
+  "packageId": "source-fitted-window-variants",
+  "taskIds": [
+    "C02",
+    "C03"
+  ],
+  "assetStatus": "offline_complete",
+  "integrationStatus": "runtime_pending_webgl",
+  "sourceFixtures": [
+    {
+      "id": "modern-source-window-surround",
+      "source": {
+        "structureId": "145639",
+        "featureId": "133049",
+        "edgeKey": "-326.275,445.400|-336.041,435.450",
+        "edgeLengthM": 13.942008638569467
+      },
+      "opening": {
+        "bay": 0,
+        "row": 1,
+        "left": 0.6335502159642368,
+        "right": 3.30195194367813,
+        "bottom": 8.2365,
+        "top": 10.481
+      },
+      "attachment": {
+        "rootYAboveFoundationM": 8.1365,
+        "sourceWindowLowerEdgeM": 8.2365,
+        "localOpeningBottomM": 0.1,
+        "alongM": 1.9677510798211835,
+        "wallPlaneZ": 0
+      }
+    },
+    {
+      "id": "cedar-source-window-surround",
+      "source": {
+        "structureId": "145755",
+        "featureId": "105546",
+        "edgeKey": "-229.513,444.825|-239.811,434.495",
+        "edgeLengthM": 14.58517058514925
+      },
+      "opening": {
+        "bay": 0,
+        "row": 1,
+        "left": 1.1792585292574624,
+        "right": 2.537775587772387,
+        "bottom": 4.941000000000001,
+        "top": 6.451500000000001
+      },
+      "attachment": {
+        "rootYAboveFoundationM": 4.871,
+        "sourceWindowLowerEdgeM": 4.941000000000001,
+        "localOpeningBottomM": 0.07,
+        "alongM": 1.8585170585149249,
+        "wallPlaneZ": 0
+      }
+    }
+  ],
+  "completed": [
+    "two new editable source-fitted variants × two LODs",
+    "physical bevel, recess and four-sided glazing stop both LODs",
+    "actual-source recomputation and general scalar fit contract",
+    "clear opening triangle clipping and finite-ray tests",
+    "source-preserving export plus four real artist-edit proofs",
+    "common manifest/validator and 24 actual-GLB CPU images",
+    "two new optional paired sills × two LODs",
+    "actual combined GLB separating-plane non-overlap, opening rays and source attachment verification",
+    "explicit old-sill suppression contract with fallback retained",
+    "24 additional actual paired-assembly CPU images"
+  ],
+  "preservedLegacy": [
+    "architecture-expansion schema and exports",
+    "existing cedar sill",
+    "ground-datum canopy",
+    "GIS geometry and collision",
+    "all public/runtime code"
+  ],
+  "knownOfflineAssemblyBlocker": {
+    "evidence": "qa/existing-sill-coexistence.json",
+    "status": "blocked",
+    "reason": "Actual source-selected legacy sill intersects new closed lower rail for both assets and LODs; do not overlay them unchanged",
+    "scope": "Only the unsafe new frame + retained OLD sill combination; the new paired sill solves it when selected-old-sill suppression is explicit"
+  },
+  "runtimeChecks": {
+    "status": "not_run",
+    "required": [
+      "optional atomic frame and paired-sill replacement, old-sill suppression and restoration",
+      "source wall shader alignment at actual foundation",
+      "cell caps, material rebinding, bounded LOD",
+      "four city lighting conditions and WebGL screenshots",
+      "draws, memory, frame time, disposal"
+    ]
+  },
+  "limits": [
+    "New frames do not cut true holes in GIS walls",
+    "No glass mesh: existing shader glazing remains",
+    "Fixture IDs do not activate assets at world XYZ",
+    "Source-preserving exporter supports explicit mesh/UV and opaque Principled factors; unsupported nodes/modifiers fail",
+    "Unitless per-surface UV requires shared atlas slot mapping by consumer",
+    "No runtime/public changes or deployment"
+  ],
+  "nextSteps": [
+    "Call fitAssembly with actual source data and exact existingSillSlotId; require suppressExistingSill=true",
+    "Load frame + its matching new paired sill with shared root windowBounds.bottom-sectionM; no transform recentering",
+    "Only while optional candidate is admitted, suppress prior selected sill and replaced procedural frame detail; keep old files and restore fallback on removal",
+    "Keep cedar canopy ground datum, GIS wall, collision and all source geometry unchanged",
+    "Rebind shared semantic material roles, implement bounded LOD/cache/disposal, then run real WebGL acceptance"
+  ],
+  "assemblies": [
+    {
+      "id": "modern-source-window-paired-assembly",
+      "taskId": "C02",
+      "frameId": "modern-source-window-surround",
+      "sillId": "modern-source-window-paired-sill",
+      "commonRoot": "source windowBounds.bottom - chosen frame section",
+      "transforms": {
+        "frame": {
+          "translationM": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        "sill": {
+          "translationM": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      "existingSillPolicy": "Suppress only the source-selected previous sill descriptor while this optional pair is enabled. Preserve all old source/export files. Restore old detail on fallback/disposal.",
+      "frameSillGapM": 0.006,
+      "sourceFixtureEvidence": "qa/positive-assembly-fixtures.json",
+      "geometryEvidence": "qa/validation.json:optionalPairedAssemblies",
+      "runtimeStatus": "runtime_pending_webgl",
+      "assemblyOfflineStatus": "pass"
+    },
+    {
+      "id": "cedar-source-window-paired-assembly",
+      "taskId": "C03",
+      "frameId": "cedar-source-window-surround",
+      "sillId": "cedar-source-window-paired-sill",
+      "commonRoot": "source windowBounds.bottom - chosen frame section",
+      "transforms": {
+        "frame": {
+          "translationM": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        "sill": {
+          "translationM": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      "existingSillPolicy": "Suppress only the source-selected previous sill descriptor while this optional pair is enabled. Preserve all old source/export files. Restore old detail on fallback/disposal.",
+      "frameSillGapM": 0.006,
+      "sourceFixtureEvidence": "qa/positive-assembly-fixtures.json",
+      "geometryEvidence": "qa/validation.json:optionalPairedAssemblies",
+      "runtimeStatus": "runtime_pending_webgl",
+      "assemblyOfflineStatus": "pass"
+    }
+  ],
+  "optionalPairOfflineStatus": "pass"
+}

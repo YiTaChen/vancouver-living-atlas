@@ -1,0 +1,213 @@
+{
+  "schemaVersion": 1,
+  "status": "pass",
+  "method": "Actual prepareParts/summarizeStructures/createProfile, source polygon projection, fitBays/windowBounds bay0 row1; foundation-local scalar evidence only",
+  "fixtures": [
+    {
+      "id": "modern-source-window-surround",
+      "design": {
+        "id": "modern-source-window-surround",
+        "taskId": "C02",
+        "variant": "modern-recessed",
+        "structureId": "145639",
+        "featureId": "133049",
+        "edgeKey": "-326.275,445.400|-336.041,435.450",
+        "surfaceId": "painted-metal",
+        "sectionM": 0.1,
+        "depthM": 0.24,
+        "stopRearZ": 0.06,
+        "stopThicknessM": 0.015,
+        "revealExtraM": 0.02,
+        "bevelM": 0.008,
+        "openingWidthM": 2.6684017277138934,
+        "openingHeightM": 2.2445000000000004,
+        "backZ": 0.02
+      },
+      "input": {
+        "source": {
+          "structureId": "145639",
+          "featureId": "133049",
+          "edgeKey": "-326.275,445.400|-336.041,435.450",
+          "edgeLengthM": 13.942008638569467
+        },
+        "profile": {
+          "kind": "midrise-grid",
+          "styleIndex": 2,
+          "targetBayM": 3.4,
+          "storeyM": 3.35,
+          "groundStoreyM": 4.25,
+          "edgeMarginM": 0.3,
+          "pane": [
+            0.1,
+            0.9,
+            0.19,
+            0.86
+          ],
+          "wallRoughness": 0.78,
+          "glassRoughness": 0.28,
+          "brickNormalScale": 0,
+          "brickTileM": 1.728,
+          "frameWidthM": 0.1,
+          "frameDepthM": 0.1,
+          "balconies": false,
+          "wallColor": 11908005,
+          "seed": 3611
+        },
+        "heightM": 24.74,
+        "minHeightM": 0,
+        "wallTopM": 24.74,
+        "bay": 0,
+        "row": 1,
+        "entryExclusions": [],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "grid": {
+        "count": 4,
+        "pitchM": 3.335502159642367,
+        "originM": 0.3,
+        "endM": 13.642008638569466
+      },
+      "opening": {
+        "bay": 0,
+        "row": 1,
+        "left": 0.6335502159642368,
+        "right": 3.30195194367813,
+        "bottom": 8.2365,
+        "top": 10.481
+      },
+      "attachment": {
+        "rootYAboveFoundationM": 8.1365,
+        "sourceWindowLowerEdgeM": 8.2365,
+        "localOpeningBottomM": 0.1,
+        "alongM": 1.9677510798211835,
+        "wallPlaneZ": 0
+      },
+      "legacyComparison": {
+        "moduleId": "modern-recessed-window-surround",
+        "fitReason": "opening-mismatch",
+        "oldDimensionCheckRootY": 8.096499999999999,
+        "doNotUseOldSillSlotAsFrameOrigin": true
+      }
+    },
+    {
+      "id": "cedar-source-window-surround",
+      "design": {
+        "id": "cedar-source-window-surround",
+        "taskId": "C03",
+        "variant": "residential-cedar",
+        "structureId": "145755",
+        "featureId": "105546",
+        "edgeKey": "-229.513,444.825|-239.811,434.495",
+        "surfaceId": "cedar",
+        "sectionM": 0.07,
+        "depthM": 0.16,
+        "stopRearZ": 0.05,
+        "stopThicknessM": 0.015,
+        "revealExtraM": 0.018,
+        "bevelM": 0.006,
+        "openingWidthM": 1.3585170585149247,
+        "openingHeightM": 1.5105000000000004,
+        "backZ": 0.02
+      },
+      "input": {
+        "source": {
+          "structureId": "145755",
+          "featureId": "105546",
+          "edgeKey": "-229.513,444.825|-239.811,434.495",
+          "edgeLengthM": 14.58517058514925
+        },
+        "profile": {
+          "kind": "domestic-cladding",
+          "styleIndex": 5,
+          "targetBayM": 2.65,
+          "storeyM": 2.85,
+          "groundStoreyM": 1.35,
+          "edgeMarginM": 0.5,
+          "pane": [
+            0.25,
+            0.75,
+            0.26,
+            0.79
+          ],
+          "wallRoughness": 0.88,
+          "glassRoughness": 0.31,
+          "brickNormalScale": 0,
+          "brickTileM": 1.728,
+          "frameWidthM": 0.07,
+          "frameDepthM": 0.055,
+          "balconies": false,
+          "wallColor": 12104358,
+          "seed": 1326
+        },
+        "heightM": 8.92,
+        "minHeightM": 0,
+        "wallTopM": 8.92,
+        "bay": 0,
+        "row": 1,
+        "entryExclusions": [],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "grid": {
+        "count": 5,
+        "pitchM": 2.7170341170298498,
+        "originM": 0.5,
+        "endM": 14.08517058514925
+      },
+      "opening": {
+        "bay": 0,
+        "row": 1,
+        "left": 1.1792585292574624,
+        "right": 2.537775587772387,
+        "bottom": 4.941000000000001,
+        "top": 6.451500000000001
+      },
+      "attachment": {
+        "rootYAboveFoundationM": 4.871,
+        "sourceWindowLowerEdgeM": 4.941000000000001,
+        "localOpeningBottomM": 0.07,
+        "alongM": 1.8585170585149249,
+        "wallPlaneZ": 0
+      },
+      "legacyComparison": {
+        "moduleId": "residential-cedar-window-surround",
+        "fitReason": "opening-mismatch",
+        "oldDimensionCheckRootY": 4.841000000000001,
+        "doNotUseOldSillSlotAsFrameOrigin": true
+      }
+    }
+  ],
+  "sourceFingerprints": {
+    "public/data/buildings.geojson": "57cf77f2f7afbceeb3ea4b7dcb87c33d7f56a6df57c33306792503f1dba538ec",
+    "lib/city/facade-profile.ts": "86e6e4bae22d24bb7e944d6de44725baa765ab16d4c8556ef55932988a814d19",
+    "lib/city/building-roof.ts": "9ff6778b9bb72b7f4959ed45ffd177b9d142d5361cf5dd57d357b3470101b530",
+    "lib/city/architecture-module-candidate.ts": "1dfaa9a36924f11cea2abec7fbd13958a1b2b4adf3270a25e87cc2fa4f58b686",
+    "lib/city/architecture-plan.ts": "2713a91f687e658f62d59cbdc7c3a3e99623a8e3a5075e9eeb034cc1de4fded6",
+    "lib/city/building-bodies.ts": "dca28bd9340ec34ea531b4397dd1c69fa6946836e37224f12f3f04dbcc2efac1",
+    "lib/city/navigation.ts": "b55276e47e939028f50a3629149dfd6bba97527211deb46dce369c9d9fa4247e",
+    "tools/assets/architecture-expansion/manifest.json": "9f2d8f7df96dc17b31107b613b3a7230656f2d776184509e69c622c7f2117f8b",
+    "tools/assets/architecture-expansion/build_architecture_expansion.py": "a42a6ac4c347d9f2e870cefcb75028423d335b0d360553beaa83a3a3d2292112",
+    "tools/assets/facade-fit-contracts/qa/source-examples.json": "1ec2467b3086cf9993b4648105396f0ea36ff41138c7578cbb4e525844133a82",
+    "tools/assets/city-materials/catalog.json": "c4e26c42122d394b0ddda5653dbe588e4701bcab97dc2de66420e2411310aa95",
+    "tools/assets/architecture-expansion/assets/residential-cedar-sill.lod0.glb": "9799bf34eb174dadc3fae00ee717749f43417f45e1022e426e01596b51eee278",
+    "tools/assets/architecture-expansion/source/residential-cedar-sill.lod0.blend": "3843e0de41c7011dc76d91d2f8820ff808f339750d6e234085cadad28ab1950f",
+    "tools/assets/architecture-expansion/assets/residential-gabled-entry-canopy.lod0.glb": "114bcdfdf3059a77568c1073f6d20ef4924e75551b69ea1167bd9cfc7a432793",
+    "tools/assets/architecture-expansion/source/residential-gabled-entry-canopy.lod0.blend": "e1a0d9612ec509117685f8f4da2e0674d49d6e31ef11919fe2567fa853d467bf",
+    "tools/assets/architecture-expansion/assets/residential-cedar-sill.lod1.glb": "876cb6089d04d82d57a6353411b35ba46c7692eb9810e8134b4a1b36ae526c8b",
+    "tools/assets/architecture-expansion/source/residential-cedar-sill.lod1.blend": "f71e5d8e9e85e27d39689f24f0b1e1dd2da6d1aeeda158aaf63d88cd3017f955",
+    "tools/assets/architecture-expansion/assets/residential-gabled-entry-canopy.lod1.glb": "e8b56d532417ebfe41ff75e84b32f500c14eb79f93c805c3c23c71cb7de82702",
+    "tools/assets/architecture-expansion/source/residential-gabled-entry-canopy.lod1.blend": "7234c211af8883d2079b036279c0eaed48338e871f26b2798e9d913e8db21d5b"
+  },
+  "limitations": [
+    "GIS shader openings are visual masks, not true wall or collision apertures",
+    "No scene activation, world XYZ placement, cell admission or WebGL acceptance",
+    "Source IDs select reproducible tests only; general fit uses profile and dimensions"
+  ]
+}
