@@ -1,0 +1,1009 @@
+ERROR Draco mesh compression is not available because library could not be found at /usr/bin/4.3/python/lib/python3.13/site-packages/libextern_draco.so
+16:24:32 | INFO: Starting glTF 2.0 export
+16:24:32 | INFO: Extracting primitive: Cube
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 3
+16:24:32 | INFO: Extracting primitive: Cube.158
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cube.157
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cube.135
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.140
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.145
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.150
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.125
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.130
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.105
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.110
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.115
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.120
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.095
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.100
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.004
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cube.092
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.007
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.006
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.005
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.004
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.003
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.002
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.001
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Finished glTF 2.0 export in 0.04650235176086426 s
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+16:24:32 | INFO: Data are loaded, start creating Blender stuff
+16:24:32 | INFO: Blender create Mesh node Cube
+16:24:32 | INFO: Blender create Mesh node Cube.158
+16:24:32 | INFO: Blender create Mesh node Cube.157
+16:24:32 | INFO: Blender create Mesh node Cube.135
+16:24:32 | INFO: Blender create Mesh node Cube.140
+16:24:32 | INFO: Blender create Mesh node Cube.145
+16:24:32 | INFO: Blender create Mesh node Cube.150
+16:24:32 | INFO: Blender create Mesh node Cube.125
+16:24:32 | INFO: Blender create Mesh node Cube.130
+16:24:32 | INFO: Blender create Mesh node Cube.105
+16:24:32 | INFO: Blender create Mesh node Cube.110
+16:24:32 | INFO: Blender create Mesh node Cube.115
+16:24:32 | INFO: Blender create Mesh node Cube.120
+16:24:32 | INFO: Blender create Mesh node Cube.095
+16:24:32 | INFO: Blender create Mesh node Cube.100
+16:24:32 | INFO: Blender create Mesh node Cube.004
+16:24:32 | INFO: Blender create Mesh node Cube.092
+16:24:32 | INFO: Blender create Mesh node Cylinder.007
+16:24:32 | INFO: Blender create Mesh node Cylinder.006
+16:24:32 | INFO: Blender create Mesh node Cylinder.005
+16:24:32 | INFO: Blender create Mesh node Cylinder.004
+16:24:32 | INFO: Blender create Mesh node Cylinder.003
+16:24:32 | INFO: Blender create Mesh node Cylinder.002
+16:24:32 | INFO: Blender create Mesh node Cylinder.001
+16:24:32 | INFO: Blender create Mesh node Cylinder
+16:24:32 | INFO: glTF import finished in 0.02s
+16:24:32 | INFO: Starting glTF 2.0 export
+16:24:32 | INFO: Extracting primitive: Cube
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 3
+16:24:32 | INFO: Extracting primitive: Cube.142
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cube.141
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cube.119
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.124
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.129
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.134
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.109
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.114
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.089
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.094
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.099
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.104
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.079
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.084
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.004
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cube.076
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.007
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.006
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.005
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.004
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.003
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.002
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.001
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Finished glTF 2.0 export in 0.04287409782409668 s
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+16:24:32 | INFO: Data are loaded, start creating Blender stuff
+16:24:32 | INFO: Blender create Mesh node Cube
+16:24:32 | INFO: Blender create Mesh node Cube.142
+16:24:32 | INFO: Blender create Mesh node Cube.141
+16:24:32 | INFO: Blender create Mesh node Cube.119
+16:24:32 | INFO: Blender create Mesh node Cube.124
+16:24:32 | INFO: Blender create Mesh node Cube.129
+16:24:32 | INFO: Blender create Mesh node Cube.134
+16:24:32 | INFO: Blender create Mesh node Cube.109
+16:24:32 | INFO: Blender create Mesh node Cube.114
+16:24:32 | INFO: Blender create Mesh node Cube.089
+16:24:32 | INFO: Blender create Mesh node Cube.094
+16:24:32 | INFO: Blender create Mesh node Cube.099
+16:24:32 | INFO: Blender create Mesh node Cube.104
+16:24:32 | INFO: Blender create Mesh node Cube.079
+16:24:32 | INFO: Blender create Mesh node Cube.084
+16:24:32 | INFO: Blender create Mesh node Cube.004
+16:24:32 | INFO: Blender create Mesh node Cube.076
+16:24:32 | INFO: Blender create Mesh node Cylinder.007
+16:24:32 | INFO: Blender create Mesh node Cylinder.006
+16:24:32 | INFO: Blender create Mesh node Cylinder.005
+16:24:32 | INFO: Blender create Mesh node Cylinder.004
+16:24:32 | INFO: Blender create Mesh node Cylinder.003
+16:24:32 | INFO: Blender create Mesh node Cylinder.002
+16:24:32 | INFO: Blender create Mesh node Cylinder.001
+16:24:32 | INFO: Blender create Mesh node Cylinder
+16:24:32 | INFO: glTF import finished in 0.02s
+16:24:32 | INFO: Starting glTF 2.0 export
+16:24:32 | INFO: Extracting primitive: Cube
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.013
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cube.012
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cube.002
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.007
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.006
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.005
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.004
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.003
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.002
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.001
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Finished glTF 2.0 export in 0.03951287269592285 s
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+16:24:32 | INFO: Data are loaded, start creating Blender stuff
+16:24:32 | INFO: Blender create Mesh node Cube
+16:24:32 | INFO: Blender create Mesh node Cube.013
+16:24:32 | INFO: Blender create Mesh node Cube.012
+16:24:32 | INFO: Blender create Mesh node Cube.002
+16:24:32 | INFO: Blender create Mesh node Cylinder.007
+16:24:32 | INFO: Blender create Mesh node Cylinder.006
+16:24:32 | INFO: Blender create Mesh node Cylinder.005
+16:24:32 | INFO: Blender create Mesh node Cylinder.004
+16:24:32 | INFO: Blender create Mesh node Cylinder.003
+16:24:32 | INFO: Blender create Mesh node Cylinder.002
+16:24:32 | INFO: Blender create Mesh node Cylinder.001
+16:24:32 | INFO: Blender create Mesh node Cylinder
+16:24:32 | INFO: glTF import finished in 0.01s
+16:24:32 | INFO: Starting glTF 2.0 export
+16:24:32 | INFO: Extracting primitive: Cube
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 3
+16:24:32 | INFO: Extracting primitive: Cube.158
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cube.157
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cube.135
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.140
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.145
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.150
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.125
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.130
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.105
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.110
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.115
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.120
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.095
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.100
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.004
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.007
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.006
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.005
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.004
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.003
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.002
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder.001
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cylinder
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Finished glTF 2.0 export in 0.04048585891723633 s
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+16:24:32 | INFO: Data are loaded, start creating Blender stuff
+16:24:32 | INFO: Blender create Mesh node Cube
+16:24:32 | INFO: Blender create Mesh node Cube.158
+16:24:32 | INFO: Blender create Mesh node Cube.157
+16:24:32 | INFO: Blender create Mesh node Cube.135
+16:24:32 | INFO: Blender create Mesh node Cube.140
+16:24:32 | INFO: Blender create Mesh node Cube.145
+16:24:32 | INFO: Blender create Mesh node Cube.150
+16:24:32 | INFO: Blender create Mesh node Cube.125
+16:24:32 | INFO: Blender create Mesh node Cube.130
+16:24:32 | INFO: Blender create Mesh node Cube.105
+16:24:32 | INFO: Blender create Mesh node Cube.110
+16:24:32 | INFO: Blender create Mesh node Cube.115
+16:24:32 | INFO: Blender create Mesh node Cube.120
+16:24:32 | INFO: Blender create Mesh node Cube.095
+16:24:32 | INFO: Blender create Mesh node Cube.100
+16:24:32 | INFO: Blender create Mesh node Cube.004
+16:24:32 | INFO: Blender create Mesh node Cylinder.007
+16:24:32 | INFO: Blender create Mesh node Cylinder.006
+16:24:32 | INFO: Blender create Mesh node Cylinder.005
+16:24:32 | INFO: Blender create Mesh node Cylinder.004
+16:24:32 | INFO: Blender create Mesh node Cylinder.003
+16:24:32 | INFO: Blender create Mesh node Cylinder.002
+16:24:32 | INFO: Blender create Mesh node Cylinder.001
+16:24:32 | INFO: Blender create Mesh node Cylinder
+16:24:32 | INFO: glTF import finished in 0.02s
+16:24:32 | INFO: Starting glTF 2.0 export
+16:24:32 | INFO: Extracting primitive: Cube
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 3
+16:24:32 | INFO: Extracting primitive: Cube.142
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cube.141
+16:24:32 | INFO: Primitives created: 1
+16:24:32 | INFO: Extracting primitive: Cube.119
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.124
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:32 | INFO: Primitives created: 2
+16:24:32 | INFO: Extracting primitive: Cube.129
+16:24:32 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.134
+16:24:33 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.109
+16:24:33 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.114
+16:24:33 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.089
+16:24:33 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.094
+16:24:33 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.099
+16:24:33 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.104
+16:24:33 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.079
+16:24:33 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.084
+16:24:33 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.004
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder.007
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder.006
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder.005
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder.004
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder.003
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder.002
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder.001
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Finished glTF 2.0 export in 0.042569875717163086 s
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+16:24:33 | INFO: Data are loaded, start creating Blender stuff
+16:24:33 | INFO: Blender create Mesh node Cube
+16:24:33 | INFO: Blender create Mesh node Cube.142
+16:24:33 | INFO: Blender create Mesh node Cube.141
+16:24:33 | INFO: Blender create Mesh node Cube.119
+16:24:33 | INFO: Blender create Mesh node Cube.124
+16:24:33 | INFO: Blender create Mesh node Cube.129
+16:24:33 | INFO: Blender create Mesh node Cube.134
+16:24:33 | INFO: Blender create Mesh node Cube.109
+16:24:33 | INFO: Blender create Mesh node Cube.114
+16:24:33 | INFO: Blender create Mesh node Cube.089
+16:24:33 | INFO: Blender create Mesh node Cube.094
+16:24:33 | INFO: Blender create Mesh node Cube.099
+16:24:33 | INFO: Blender create Mesh node Cube.104
+16:24:33 | INFO: Blender create Mesh node Cube.079
+16:24:33 | INFO: Blender create Mesh node Cube.084
+16:24:33 | INFO: Blender create Mesh node Cube.004
+16:24:33 | INFO: Blender create Mesh node Cylinder.007
+16:24:33 | INFO: Blender create Mesh node Cylinder.006
+16:24:33 | INFO: Blender create Mesh node Cylinder.005
+16:24:33 | INFO: Blender create Mesh node Cylinder.004
+16:24:33 | INFO: Blender create Mesh node Cylinder.003
+16:24:33 | INFO: Blender create Mesh node Cylinder.002
+16:24:33 | INFO: Blender create Mesh node Cylinder.001
+16:24:33 | INFO: Blender create Mesh node Cylinder
+16:24:33 | INFO: glTF import finished in 0.02s
+16:24:33 | INFO: Starting glTF 2.0 export
+16:24:33 | INFO: Extracting primitive: Cube
+16:24:33 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.013
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.012
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.002
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder.007
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder.006
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder.005
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder.004
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder.003
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder.002
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder.001
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Finished glTF 2.0 export in 0.01959395408630371 s
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+16:24:33 | INFO: Data are loaded, start creating Blender stuff
+16:24:33 | INFO: Blender create Mesh node Cube
+16:24:33 | INFO: Blender create Mesh node Cube.013
+16:24:33 | INFO: Blender create Mesh node Cube.012
+16:24:33 | INFO: Blender create Mesh node Cube.002
+16:24:33 | INFO: Blender create Mesh node Cylinder.007
+16:24:33 | INFO: Blender create Mesh node Cylinder.006
+16:24:33 | INFO: Blender create Mesh node Cylinder.005
+16:24:33 | INFO: Blender create Mesh node Cylinder.004
+16:24:33 | INFO: Blender create Mesh node Cylinder.003
+16:24:33 | INFO: Blender create Mesh node Cylinder.002
+16:24:33 | INFO: Blender create Mesh node Cylinder.001
+16:24:33 | INFO: Blender create Mesh node Cylinder
+16:24:33 | INFO: glTF import finished in 0.01s
+16:24:33 | INFO: Starting glTF 2.0 export
+16:24:33 | INFO: Extracting primitive: Cube.001
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.002
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.054
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.055
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.056
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.057
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.036
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.039
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.042
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.045
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.048
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.051
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.018
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.021
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.024
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.027
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.030
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.033
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Finished glTF 2.0 export in 0.036565303802490234 s
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+16:24:33 | INFO: Data are loaded, start creating Blender stuff
+16:24:33 | INFO: Blender create Mesh node interior-batch-metro-wall
+16:24:33 | INFO: Blender create Mesh node interior-batch-metro-floor
+16:24:33 | INFO: Blender create Mesh node interior-batch-metro-rail
+16:24:33 | INFO: Blender create Mesh node interior-batch-metro-screen
+16:24:33 | INFO: Blender create Mesh node interior-batch-metro-priority-seat
+16:24:33 | INFO: Blender create Mesh node interior-batch-metro-seat
+16:24:33 | INFO: glTF import finished in 0.01s
+16:24:33 | INFO: Starting glTF 2.0 export
+16:24:33 | INFO: Extracting primitive: Cube.001
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.002
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.054
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.055
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.056
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.057
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.036
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.039
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.042
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.045
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.048
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.051
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.018
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.021
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.024
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.027
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.030
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.033
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Finished glTF 2.0 export in 0.0869913101196289 s
+
+16:24:33 | INFO: Starting glTF 2.0 export
+16:24:33 | INFO: Extracting primitive: Cube.001
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.002
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.042
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.043
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.044
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.045
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.030
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.032
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.034
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.036
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.038
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.040
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.018
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.020
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.022
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.024
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.026
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.028
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Finished glTF 2.0 export in 0.03322458267211914 s
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+16:24:33 | INFO: Data are loaded, start creating Blender stuff
+16:24:33 | INFO: Blender create Mesh node interior-batch-metro-wall
+16:24:33 | INFO: Blender create Mesh node interior-batch-metro-floor
+16:24:33 | INFO: Blender create Mesh node interior-batch-metro-rail
+16:24:33 | INFO: Blender create Mesh node interior-batch-metro-screen
+16:24:33 | INFO: Blender create Mesh node interior-batch-metro-priority-seat
+16:24:33 | INFO: Blender create Mesh node interior-batch-metro-seat
+16:24:33 | INFO: glTF import finished in 0.01s
+16:24:33 | INFO: Starting glTF 2.0 export
+16:24:33 | INFO: Extracting primitive: Cube.001
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.002
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.042
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.043
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.044
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.045
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.030
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.032
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.034
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.036
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.038
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.040
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.018
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.020
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.022
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.024
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.026
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.028
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Finished glTF 2.0 export in 0.03283214569091797 s
+
+16:24:33 | INFO: Starting glTF 2.0 export
+16:24:33 | INFO: Extracting primitive: Cube
+16:24:33 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:33 | INFO: Primitives created: 3
+16:24:33 | INFO: Extracting primitive: Cube.158
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.157
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.135
+16:24:33 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.140
+16:24:33 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.145
+16:24:33 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.150
+16:24:33 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.125
+16:24:33 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.130
+16:24:33 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.105
+16:24:33 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.110
+16:24:33 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.115
+16:24:33 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.120
+16:24:33 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.095
+16:24:33 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.100
+16:24:33 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:33 | INFO: Primitives created: 2
+16:24:33 | INFO: Extracting primitive: Cube.004
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cube.084
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder.007
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder.006
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder.005
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder.004
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder.003
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder.002
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder.001
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Extracting primitive: Cylinder
+16:24:33 | INFO: Primitives created: 1
+16:24:33 | INFO: Finished glTF 2.0 export in 0.04347848892211914 s
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+16:24:33 | INFO: Data are loaded, start creating Blender stuff
+16:24:33 | INFO: Blender create Mesh node Cube
+16:24:33 | INFO: Blender create Mesh node Cube.158
+16:24:33 | INFO: Blender create Mesh node Cube.157
+16:24:33 | INFO: Blender create Mesh node Cube.135
+16:24:33 | INFO: Blender create Mesh node Cube.140
+16:24:33 | INFO: Blender create Mesh node Cube.145
+16:24:33 | INFO: Blender create Mesh node Cube.150
+16:24:33 | INFO: Blender create Mesh node Cube.125
+16:24:33 | INFO: Blender create Mesh node Cube.130
+16:24:33 | INFO: Blender create Mesh node Cube.105
+16:24:33 | INFO: Blender create Mesh node Cube.110
+16:24:33 | INFO: Blender create Mesh node Cube.115
+16:24:33 | INFO: Blender create Mesh node Cube.120
+16:24:33 | INFO: Blender create Mesh node Cube.095
+16:24:33 | INFO: Blender create Mesh node Cube.100
+16:24:33 | INFO: Blender create Mesh node Cube.004
+16:24:33 | INFO: Blender create Mesh node Cube.084
+16:24:34 | INFO: Blender create Mesh node Cylinder.007
+16:24:34 | INFO: Blender create Mesh node Cylinder.006
+16:24:34 | INFO: Blender create Mesh node Cylinder.005
+16:24:34 | INFO: Blender create Mesh node Cylinder.004
+16:24:34 | INFO: Blender create Mesh node Cylinder.003
+16:24:34 | INFO: Blender create Mesh node Cylinder.002
+16:24:34 | INFO: Blender create Mesh node Cylinder.001
+16:24:34 | INFO: Blender create Mesh node Cylinder
+16:24:34 | INFO: glTF import finished in 0.02s
+16:24:34 | INFO: Starting glTF 2.0 export
+16:24:34 | INFO: Extracting primitive: Cube
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 3
+16:24:34 | INFO: Extracting primitive: Cube.142
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cube.141
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cube.119
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.124
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.129
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.134
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.109
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.114
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.089
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.094
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.099
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.104
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.079
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.084
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.004
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cube.068
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cylinder.007
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cylinder.006
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cylinder.005
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cylinder.004
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cylinder.003
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cylinder.002
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cylinder.001
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cylinder
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Finished glTF 2.0 export in 0.04377341270446777 s
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+16:24:34 | INFO: Data are loaded, start creating Blender stuff
+16:24:34 | INFO: Blender create Mesh node Cube
+16:24:34 | INFO: Blender create Mesh node Cube.142
+16:24:34 | INFO: Blender create Mesh node Cube.141
+16:24:34 | INFO: Blender create Mesh node Cube.119
+16:24:34 | INFO: Blender create Mesh node Cube.124
+16:24:34 | INFO: Blender create Mesh node Cube.129
+16:24:34 | INFO: Blender create Mesh node Cube.134
+16:24:34 | INFO: Blender create Mesh node Cube.109
+16:24:34 | INFO: Blender create Mesh node Cube.114
+16:24:34 | INFO: Blender create Mesh node Cube.089
+16:24:34 | INFO: Blender create Mesh node Cube.094
+16:24:34 | INFO: Blender create Mesh node Cube.099
+16:24:34 | INFO: Blender create Mesh node Cube.104
+16:24:34 | INFO: Blender create Mesh node Cube.079
+16:24:34 | INFO: Blender create Mesh node Cube.084
+16:24:34 | INFO: Blender create Mesh node Cube.004
+16:24:34 | INFO: Blender create Mesh node Cube.068
+16:24:34 | INFO: Blender create Mesh node Cylinder.007
+16:24:34 | INFO: Blender create Mesh node Cylinder.006
+16:24:34 | INFO: Blender create Mesh node Cylinder.005
+16:24:34 | INFO: Blender create Mesh node Cylinder.004
+16:24:34 | INFO: Blender create Mesh node Cylinder.003
+16:24:34 | INFO: Blender create Mesh node Cylinder.002
+16:24:34 | INFO: Blender create Mesh node Cylinder.001
+16:24:34 | INFO: Blender create Mesh node Cylinder
+16:24:34 | INFO: glTF import finished in 0.02s
+16:24:34 | INFO: Starting glTF 2.0 export
+16:24:34 | INFO: Extracting primitive: Cube
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.013
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cube.012
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cube.002
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cylinder.007
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cylinder.006
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cylinder.005
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cylinder.004
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cylinder.003
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cylinder.002
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cylinder.001
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cylinder
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Finished glTF 2.0 export in 0.04593682289123535 s
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+16:24:34 | INFO: Data are loaded, start creating Blender stuff
+16:24:34 | INFO: Blender create Mesh node Cube
+16:24:34 | INFO: Blender create Mesh node Cube.013
+16:24:34 | INFO: Blender create Mesh node Cube.012
+16:24:34 | INFO: Blender create Mesh node Cube.002
+16:24:34 | INFO: Blender create Mesh node Cylinder.007
+16:24:34 | INFO: Blender create Mesh node Cylinder.006
+16:24:34 | INFO: Blender create Mesh node Cylinder.005
+16:24:34 | INFO: Blender create Mesh node Cylinder.004
+16:24:34 | INFO: Blender create Mesh node Cylinder.003
+16:24:34 | INFO: Blender create Mesh node Cylinder.002
+16:24:34 | INFO: Blender create Mesh node Cylinder.001
+16:24:34 | INFO: Blender create Mesh node Cylinder
+16:24:34 | INFO: glTF import finished in 0.01s
+Info: Saved "edited-source.blend"
+16:24:34 | INFO: Starting glTF 2.0 export
+16:24:34 | INFO: Extracting primitive: Cube
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 3
+16:24:34 | INFO: Extracting primitive: Cube.158
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cube.157
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cube.135
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.140
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.145
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.150
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.125
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.130
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.105
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.110
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.115
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.120
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.095
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.100
+16:24:34 | WARNING: The active Vertex Color will not be exported, as it is not used in the node tree of the material
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.004
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cube.092
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cylinder.007
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cylinder.006
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cylinder.005
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cylinder.004
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cylinder.003
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cylinder.002
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cylinder.001
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cylinder
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Finished glTF 2.0 export in 0.0434727668762207 s
+
+Info: Saved "edited-interior-source.blend"
+16:24:34 | INFO: Starting glTF 2.0 export
+16:24:34 | INFO: Extracting primitive: Cube.001
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cube
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cylinder
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cube.002
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cube.054
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cube.055
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cube.056
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cube.057
+16:24:34 | INFO: Primitives created: 1
+16:24:34 | INFO: Extracting primitive: Cube.036
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.039
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.042
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.045
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.048
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.051
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.018
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.021
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.024
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.027
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.030
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Extracting primitive: Cube.033
+16:24:34 | INFO: Primitives created: 2
+16:24:34 | INFO: Finished glTF 2.0 export in 0.042365074157714844 s
+
+Blender 4.3.2
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/boardable-metro/source/expo-metro-lead-exterior.lod0.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/boardable-metro/source/expo-metro-lead-exterior.lod1.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/boardable-metro/source/expo-metro-lead-exterior.lod2.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/boardable-metro/source/expo-metro-middle-exterior.lod0.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/boardable-metro/source/expo-metro-middle-exterior.lod1.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/boardable-metro/source/expo-metro-middle-exterior.lod2.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/boardable-metro/source/expo-metro-shared-interior.lod0.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/boardable-metro/source/expo-metro-shared-interior.lod0.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/boardable-metro/source/expo-metro-shared-interior.lod1.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/boardable-metro/source/expo-metro-shared-interior.lod1.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/boardable-metro/source/expo-metro-tail-exterior.lod0.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/boardable-metro/source/expo-metro-tail-exterior.lod1.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/boardable-metro/source/expo-metro-tail-exterior.lod2.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/boardable-metro/source/expo-metro-lead-exterior.lod0.blend"
+Read blend: "/tmp/metro-source-audit-x2ez2nx7/edited-source.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/boardable-metro/source/expo-metro-shared-interior.lod0.blend"
+Read blend: "/tmp/metro-source-audit-x2ez2nx7/edited-interior-source.blend"
+
+Blender quit

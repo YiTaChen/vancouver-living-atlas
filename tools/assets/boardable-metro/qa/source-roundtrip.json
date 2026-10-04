@@ -1,0 +1,1000 @@
+{
+  "status": "pass",
+  "blenderVersion": "4.3.2",
+  "device": "CPU",
+  "threads": 2,
+  "sources": [
+    {
+      "source": "expo-metro-lead-exterior.lod0.blend",
+      "sourceSha256": "4b1ac6d4f63b3d4a5139093ce08fe9c987082616849a2e2a5318f609539443fc",
+      "output": "expo-metro-lead-exterior.lod0.glb",
+      "outputSha256": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+      "sourceUnchanged": true,
+      "status": "pass",
+      "actualDeliveredSha256": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+      "reimportBoundsM": {
+        "min": [
+          -1.399999976158142,
+          0.0,
+          -8.899999618530273
+        ],
+        "max": [
+          1.4000000953674316,
+          3.4800000190734863,
+          8.899999618530273
+        ],
+        "size": [
+          2.8000000715255737,
+          3.4800000190734863,
+          17.799999237060547
+        ]
+      },
+      "triangles": 2388,
+      "sourceBytes": 110884,
+      "sourceUnder20MiB": true
+    },
+    {
+      "source": "expo-metro-lead-exterior.lod1.blend",
+      "sourceSha256": "f435bee45eea53bf38ed61c8ba137e216ab4f7db1fc02b65dc7668feb77a15fa",
+      "output": "expo-metro-lead-exterior.lod1.glb",
+      "outputSha256": "04601a4b007e4c37b8ca25f0ffc0de1b12b3bb6dec4bc34b540b31458e17a502",
+      "sourceUnchanged": true,
+      "status": "pass",
+      "actualDeliveredSha256": "04601a4b007e4c37b8ca25f0ffc0de1b12b3bb6dec4bc34b540b31458e17a502",
+      "reimportBoundsM": {
+        "min": [
+          -1.399999976158142,
+          0.0,
+          -8.899999618530273
+        ],
+        "max": [
+          1.4000000953674316,
+          3.4800000190734863,
+          8.899999618530273
+        ],
+        "size": [
+          2.8000000715255737,
+          3.4800000190734863,
+          17.799999237060547
+        ]
+      },
+      "triangles": 1940,
+      "sourceBytes": 108568,
+      "sourceUnder20MiB": true
+    },
+    {
+      "source": "expo-metro-lead-exterior.lod2.blend",
+      "sourceSha256": "8e3f6592905025062a355165863827da12b331d54549d53a8ec5ecf9b36b4f9e",
+      "output": "expo-metro-lead-exterior.lod2.glb",
+      "outputSha256": "6bc8efd804f341250845b5ab122bc2215a1e5bbbbfd65953add8d222a48a6fd6",
+      "sourceUnchanged": true,
+      "status": "pass",
+      "actualDeliveredSha256": "6bc8efd804f341250845b5ab122bc2215a1e5bbbbfd65953add8d222a48a6fd6",
+      "reimportBoundsM": {
+        "min": [
+          -1.399999976158142,
+          0.0,
+          -8.899999618530273
+        ],
+        "max": [
+          1.399999976158142,
+          3.4800000190734863,
+          8.899999618530273
+        ],
+        "size": [
+          2.799999952316284,
+          3.4800000190734863,
+          17.799999237060547
+        ]
+      },
+      "triangles": 312,
+      "sourceBytes": 94162,
+      "sourceUnder20MiB": true
+    },
+    {
+      "source": "expo-metro-middle-exterior.lod0.blend",
+      "sourceSha256": "dde3c76999a1ad55f6212aff3d4eda3a370853469c2bcfcd55efaccfd0b66b7c",
+      "output": "expo-metro-middle-exterior.lod0.glb",
+      "outputSha256": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+      "sourceUnchanged": true,
+      "status": "pass",
+      "actualDeliveredSha256": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+      "reimportBoundsM": {
+        "min": [
+          -1.399999976158142,
+          0.0,
+          -8.899999618530273
+        ],
+        "max": [
+          1.4000000953674316,
+          3.4800000190734863,
+          8.899999618530273
+        ],
+        "size": [
+          2.8000000715255737,
+          3.4800000190734863,
+          17.799999237060547
+        ]
+      },
+      "triangles": 2388,
+      "sourceBytes": 109923,
+      "sourceUnder20MiB": true
+    },
+    {
+      "source": "expo-metro-middle-exterior.lod1.blend",
+      "sourceSha256": "96e7913920801d302405f16333d32de4378c4927a4a645769eae4665ceb55d8d",
+      "output": "expo-metro-middle-exterior.lod1.glb",
+      "outputSha256": "72024af0b12eff31f3070f38b97cf0de23205b630f9f1bf2d3abfd9098cd82fc",
+      "sourceUnchanged": true,
+      "status": "pass",
+      "actualDeliveredSha256": "72024af0b12eff31f3070f38b97cf0de23205b630f9f1bf2d3abfd9098cd82fc",
+      "reimportBoundsM": {
+        "min": [
+          -1.399999976158142,
+          0.0,
+          -8.899999618530273
+        ],
+        "max": [
+          1.4000000953674316,
+          3.4800000190734863,
+          8.899999618530273
+        ],
+        "size": [
+          2.8000000715255737,
+          3.4800000190734863,
+          17.799999237060547
+        ]
+      },
+      "triangles": 1940,
+      "sourceBytes": 107413,
+      "sourceUnder20MiB": true
+    },
+    {
+      "source": "expo-metro-middle-exterior.lod2.blend",
+      "sourceSha256": "05a5ea69054f45197e36506b2abf14e8ec506472fb44701e05b44078c79aba11",
+      "output": "expo-metro-middle-exterior.lod2.glb",
+      "outputSha256": "bf2a04515b8c9478a982d3875b47dafac50884dd66a3103c9ae8fd4a182ed92c",
+      "sourceUnchanged": true,
+      "status": "pass",
+      "actualDeliveredSha256": "bf2a04515b8c9478a982d3875b47dafac50884dd66a3103c9ae8fd4a182ed92c",
+      "reimportBoundsM": {
+        "min": [
+          -1.399999976158142,
+          0.0,
+          -8.899999618530273
+        ],
+        "max": [
+          1.399999976158142,
+          3.4800000190734863,
+          8.899999618530273
+        ],
+        "size": [
+          2.799999952316284,
+          3.4800000190734863,
+          17.799999237060547
+        ]
+      },
+      "triangles": 312,
+      "sourceBytes": 94121,
+      "sourceUnder20MiB": true
+    },
+    {
+      "source": "expo-metro-shared-interior.lod0.blend",
+      "sourceSha256": "b856fb70b0b53cb09666e19cad1a2c3387d7a93b36c3c817e84c33d0e70142af",
+      "output": "expo-metro-shared-interior.lod0.glb",
+      "outputSha256": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775",
+      "sourceUnchanged": true,
+      "status": "pass",
+      "actualDeliveredSha256": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775",
+      "reimportBoundsM": {
+        "min": [
+          -1.225000023841858,
+          0.8799999952316284,
+          -8.5
+        ],
+        "max": [
+          1.225000023841858,
+          3.1700000762939453,
+          8.5
+        ],
+        "size": [
+          2.450000047683716,
+          2.290000081062317,
+          17.0
+        ]
+      },
+      "triangles": 1032,
+      "sourceBytes": 103151,
+      "sourceUnder20MiB": true
+    },
+    {
+      "source": "expo-metro-shared-interior.lod1.blend",
+      "sourceSha256": "c23acc00c53aeeedfa88051c9042db57cd62c9f766079f26eb83bedf963e18c1",
+      "output": "expo-metro-shared-interior.lod1.glb",
+      "outputSha256": "79cc69b436c7c40dcc21feee9218e4bf3156af1a18494080983a17183167e52e",
+      "sourceUnchanged": true,
+      "status": "pass",
+      "actualDeliveredSha256": "79cc69b436c7c40dcc21feee9218e4bf3156af1a18494080983a17183167e52e",
+      "reimportBoundsM": {
+        "min": [
+          -1.225000023841858,
+          0.8799999952316284,
+          -8.5
+        ],
+        "max": [
+          1.225000023841858,
+          3.1700000762939453,
+          8.5
+        ],
+        "size": [
+          2.450000047683716,
+          2.290000081062317,
+          17.0
+        ]
+      },
+      "triangles": 712,
+      "sourceBytes": 100674,
+      "sourceUnder20MiB": true
+    },
+    {
+      "source": "expo-metro-tail-exterior.lod0.blend",
+      "sourceSha256": "00060b4aa01dbda74228b65d69e049d5efce85a705f58f968c4f0c893415ebcd",
+      "output": "expo-metro-tail-exterior.lod0.glb",
+      "outputSha256": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+      "sourceUnchanged": true,
+      "status": "pass",
+      "actualDeliveredSha256": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+      "reimportBoundsM": {
+        "min": [
+          -1.399999976158142,
+          0.0,
+          -8.899999618530273
+        ],
+        "max": [
+          1.4000000953674316,
+          3.4800000190734863,
+          8.899999618530273
+        ],
+        "size": [
+          2.8000000715255737,
+          3.4800000190734863,
+          17.799999237060547
+        ]
+      },
+      "triangles": 2388,
+      "sourceBytes": 112037,
+      "sourceUnder20MiB": true
+    },
+    {
+      "source": "expo-metro-tail-exterior.lod1.blend",
+      "sourceSha256": "d4a0f18cc6a0e9a33b677e02a377f1ba0bdfab0f04d3ada0f234de2317c1b06b",
+      "output": "expo-metro-tail-exterior.lod1.glb",
+      "outputSha256": "71697569e0d0e85a96de0f11f4ab97750c4b39678977eeefe7eebcfb51cccc1e",
+      "sourceUnchanged": true,
+      "status": "pass",
+      "actualDeliveredSha256": "71697569e0d0e85a96de0f11f4ab97750c4b39678977eeefe7eebcfb51cccc1e",
+      "reimportBoundsM": {
+        "min": [
+          -1.399999976158142,
+          0.0,
+          -8.899999618530273
+        ],
+        "max": [
+          1.4000000953674316,
+          3.4800000190734863,
+          8.899999618530273
+        ],
+        "size": [
+          2.8000000715255737,
+          3.4800000190734863,
+          17.799999237060547
+        ]
+      },
+      "triangles": 1940,
+      "sourceBytes": 108354,
+      "sourceUnder20MiB": true
+    },
+    {
+      "source": "expo-metro-tail-exterior.lod2.blend",
+      "sourceSha256": "85863f52190f58558d66d2aade90e15a97357b7943be8a5a41a55126c0b929b3",
+      "output": "expo-metro-tail-exterior.lod2.glb",
+      "outputSha256": "27517d3ddd0195b3c18d1444f93b64a9e55b10c206f010d3a17397c47d370f82",
+      "sourceUnchanged": true,
+      "status": "pass",
+      "actualDeliveredSha256": "27517d3ddd0195b3c18d1444f93b64a9e55b10c206f010d3a17397c47d370f82",
+      "reimportBoundsM": {
+        "min": [
+          -1.399999976158142,
+          0.0,
+          -8.899999618530273
+        ],
+        "max": [
+          1.399999976158142,
+          3.4800000190734863,
+          8.899999618530273
+        ],
+        "size": [
+          2.799999952316284,
+          3.4800000190734863,
+          17.799999237060547
+        ]
+      },
+      "triangles": 312,
+      "sourceBytes": 94237,
+      "sourceUnder20MiB": true
+    }
+  ],
+  "editedSourceProof": {
+    "status": "pass",
+    "originalSourceUnchanged": true,
+    "originalSourceSha256": "4b1ac6d4f63b3d4a5139093ce08fe9c987082616849a2e2a5318f609539443fc",
+    "editedSourceSha256": "e8d31267cd0ee85eaedeb3777405d33a309b3c9408e0f023cc9b43abfad66aad",
+    "editedExportSha256": "39d34546714694671247593cded79c18fe91d7294db4380a108905849f9d7cdc",
+    "geometryDeltaYMetres": 0.010999917984008789,
+    "materialRoughness": 0.12300000339746475,
+    "proof": "A copied source vertex moved +0.011m and material roughness changed to .123; source-preserving exporter retained both changes without executing build.py."
+  },
+  "workOutputsRetainedOutsidePackage": "/tmp/metro-source-audit-x2ez2nx7",
+  "editedInteriorBatchProof": {
+    "status": "pass",
+    "originalSourceUnchanged": true,
+    "originalSourceSha256": "b856fb70b0b53cb09666e19cad1a2c3387d7a93b36c3c817e84c33d0e70142af",
+    "editedSourceSha256": "6e0c58101d6f4399e0629b4511586e0c2fd3714554307f9f65d36da41258bab8",
+    "editedExportSha256": "6d18328649e5196b8c8e9f636ebef56b915ddbf7c6d85a4428a7bcf84991c448",
+    "floorTopYMetres": 0.9610000215470791,
+    "floorTopDeltaMetres": 0.01100002154707913,
+    "materialRoughness": 0.12300000339746475,
+    "batchPrimitives": 6,
+    "proof": "Editable floor top vertices raised 11mm and metro-floor roughness changed to .123 in a copied source; both persist through actual six-primitive export-only batching."
+  },
+  "staticBatchComparisons": [
+    {
+      "file": "expo-metro-shared-interior.lod0.glb",
+      "status": "pass",
+      "unbatchedSha256": "3290d9ffadfe37ced03131f89cd4d603a582e3484bc28002dce66ec507b55235",
+      "batchedSha256": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775",
+      "unbatchedPrimitives": 32,
+      "batchedPrimitives": 6,
+      "trianglesUnchanged": 1032,
+      "verticesUnchanged": 1968,
+      "componentRanges": [
+        {
+          "componentId": "ceiling",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-wall",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.7939677238464355e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "interior-walls",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-wall",
+          "triangles": 192,
+          "attributeMaxErrors": {
+            "POSITION": 4.76837158203125e-07,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "floor",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-floor",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.60770320892334e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "handrails",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 336,
+          "attributeMaxErrors": {
+            "POSITION": 1.8347054719924927e-07,
+            "NORMAL": 2.5212881893388328e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-01",
+          "sourcePrimitive": 1,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.3096799850463867e-07,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-02",
+          "sourcePrimitive": 1,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-03",
+          "sourcePrimitive": 1,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-04",
+          "sourcePrimitive": 1,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-05",
+          "sourcePrimitive": 1,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-06",
+          "sourcePrimitive": 1,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.3096799850463867e-07,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-01",
+          "sourcePrimitive": 1,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.3096799850463867e-07,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-02",
+          "sourcePrimitive": 1,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-03",
+          "sourcePrimitive": 1,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-04",
+          "sourcePrimitive": 1,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-05",
+          "sourcePrimitive": 1,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-06",
+          "sourcePrimitive": 1,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.3096799850463867e-07,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "next-stop-screen--1--4.3",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-screen",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 5.960464477539063e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "next-stop-screen--1-4.3",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-screen",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 5.960464477539063e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "next-stop-screen-1--4.3",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-screen",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 5.960464477539063e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "next-stop-screen-1-4.3",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-screen",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 5.960464477539063e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-01",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-priority-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-06",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-priority-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-02",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-03",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-04",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-05",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-01",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-02",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-03",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-04",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-05",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-06",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        }
+      ]
+    },
+    {
+      "file": "expo-metro-shared-interior.lod1.glb",
+      "status": "pass",
+      "unbatchedSha256": "11b59ca8510dbc20c259a96d02a0aafb0d2b2d71360c238ab9b3b231620e4e51",
+      "batchedSha256": "79cc69b436c7c40dcc21feee9218e4bf3156af1a18494080983a17183167e52e",
+      "unbatchedPrimitives": 20,
+      "batchedPrimitives": 6,
+      "trianglesUnchanged": 712,
+      "verticesUnchanged": 1392,
+      "componentRanges": [
+        {
+          "componentId": "ceiling",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-wall",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.7939677238464355e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "interior-walls",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-wall",
+          "triangles": 192,
+          "attributeMaxErrors": {
+            "POSITION": 4.76837158203125e-07,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "floor",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-floor",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.60770320892334e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "handrails",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 160,
+          "attributeMaxErrors": {
+            "POSITION": 1.7508864402770996e-07,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "next-stop-screen--1--4.3",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-screen",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 5.960464477539063e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "next-stop-screen--1-4.3",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-screen",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 5.960464477539063e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "next-stop-screen-1--4.3",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-screen",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 5.960464477539063e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "next-stop-screen-1-4.3",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-screen",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 5.960464477539063e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-01",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-priority-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-06",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-priority-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-02",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-03",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-04",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-05",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-01",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-02",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-03",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-04",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-05",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-06",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        }
+      ]
+    }
+  ]
+}

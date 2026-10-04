@@ -1,0 +1,169 @@
+{
+  "status": "pass",
+  "checks": {
+    "commonPackaging": "pass",
+    "finiteGeometryAndNormalizedNormals": "pass",
+    "triangleWindingMatchesNormals": "pass",
+    "uv": "pass",
+    "losslessStaticInteriorBatchRangesAndZeroDrawAnchors": "pass",
+    "duplicateExactTriangles": "pass",
+    "frameTreeAndActualNodeAnchors": "pass",
+    "actualDoorOpenClosedRaySections": "pass",
+    "actualFloorWindingAndHeight": "pass",
+    "actualAisleHeadroomAndFreeZones": "pass",
+    "human175And181CapsuleProbes": "pass",
+    "seatPelvisCushionAndCameraAnchors": "pass",
+    "doorTwoStageSweepEnvelope": "pass",
+    "collisionReferencesAndVisibleFloorSeatBounds": "pass",
+    "actualWheelRadiusAndContact": "pass",
+    "steelRailWheelAndBogieMaterialPrimitives": "pass",
+    "staticGangwayOpenings": "pass",
+    "lodBudgetsAndDatums": "pass"
+  },
+  "geometryTests": [
+    {
+      "vehicleId": "expo-metro-lead",
+      "lod": 0,
+      "doorRaySamples": 180,
+      "aisleHeadroomRays": 126,
+      "floorTriangleCentroidChecks": 16,
+      "doorMotionSamplesPerLeaf": 21,
+      "actualLeafSurfaceSweepRays": 432,
+      "humanCapsuleSphereTriangleTests": 240,
+      "status": "pass"
+    },
+    {
+      "vehicleId": "expo-metro-lead",
+      "lod": 1,
+      "doorRaySamples": 180,
+      "aisleHeadroomRays": 126,
+      "floorTriangleCentroidChecks": 16,
+      "doorMotionSamplesPerLeaf": 21,
+      "actualLeafSurfaceSweepRays": 432,
+      "humanCapsuleSphereTriangleTests": 240,
+      "status": "pass"
+    },
+    {
+      "vehicleId": "expo-metro-middle",
+      "lod": 0,
+      "doorRaySamples": 180,
+      "aisleHeadroomRays": 126,
+      "floorTriangleCentroidChecks": 18,
+      "doorMotionSamplesPerLeaf": 21,
+      "actualLeafSurfaceSweepRays": 432,
+      "humanCapsuleSphereTriangleTests": 240,
+      "status": "pass"
+    },
+    {
+      "vehicleId": "expo-metro-middle",
+      "lod": 1,
+      "doorRaySamples": 180,
+      "aisleHeadroomRays": 126,
+      "floorTriangleCentroidChecks": 18,
+      "doorMotionSamplesPerLeaf": 21,
+      "actualLeafSurfaceSweepRays": 432,
+      "humanCapsuleSphereTriangleTests": 240,
+      "status": "pass"
+    },
+    {
+      "vehicleId": "expo-metro-tail",
+      "lod": 0,
+      "doorRaySamples": 180,
+      "aisleHeadroomRays": 126,
+      "floorTriangleCentroidChecks": 16,
+      "doorMotionSamplesPerLeaf": 21,
+      "actualLeafSurfaceSweepRays": 432,
+      "humanCapsuleSphereTriangleTests": 240,
+      "status": "pass"
+    },
+    {
+      "vehicleId": "expo-metro-tail",
+      "lod": 1,
+      "doorRaySamples": 180,
+      "aisleHeadroomRays": 126,
+      "floorTriangleCentroidChecks": 16,
+      "doorMotionSamplesPerLeaf": 21,
+      "actualLeafSurfaceSweepRays": 432,
+      "humanCapsuleSphereTriangleTests": 240,
+      "status": "pass"
+    }
+  ],
+  "negativeTests": [
+    {
+      "test": "missing exterior asset",
+      "status": "pass",
+      "outcome": "rejected"
+    },
+    {
+      "test": "frame cycle",
+      "status": "pass",
+      "outcome": "rejected"
+    },
+    {
+      "test": "reversed floor winding",
+      "status": "pass",
+      "outcome": "rejected"
+    },
+    {
+      "test": "wrong door parent",
+      "status": "pass",
+      "outcome": "rejected"
+    },
+    {
+      "test": "undersized door",
+      "status": "pass",
+      "outcome": "rejected"
+    },
+    {
+      "test": "seat unknown frame",
+      "status": "pass",
+      "outcome": "rejected"
+    },
+    {
+      "test": "nonfinite metadata",
+      "status": "pass",
+      "outcome": "rejected"
+    },
+    {
+      "test": "zero normal",
+      "status": "pass",
+      "outcome": "rejected"
+    },
+    {
+      "test": "rubber tire role on rail wheel",
+      "status": "pass",
+      "outcome": "rejected"
+    },
+    {
+      "test": "coarse LOD boarding claim",
+      "status": "pass",
+      "outcome": "rejected"
+    },
+    {
+      "test": "nonunit seat quaternion",
+      "status": "pass",
+      "outcome": "rejected"
+    },
+    {
+      "test": "nonunit quaternion",
+      "status": "pass",
+      "outcome": "rejected"
+    }
+  ],
+  "geometryAttributes": {
+    "POSITION": "finite",
+    "NORMAL": "unit and winding aligned",
+    "TEXCOORD_0": "present on every primitive",
+    "TANGENT": "not emitted; no normal texture or tangent-space shader in delivered material"
+  },
+  "scopeLimits": [
+    "CPU uses actual GLB triangles and sampled section rays, not a certified continuous collision solver.",
+    "Exact duplicate triangle check does not certify absence of every partial coplanar overlap.",
+    "Inter-car telescoping envelope is conservative metadata; moving traversal remains disabled.",
+    "WebGL transparency sorting, dynamic collision, passenger attachment and D06 not run."
+  ],
+  "runtimeChecks": {
+    "status": "not_run",
+    "integrationStatus": "runtime_pending_webgl"
+  }
+}

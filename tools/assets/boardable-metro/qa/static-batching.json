@@ -1,0 +1,654 @@
+{
+  "status": "pass",
+  "method": "Fresh unbatched source export compared to actual delivered batched GLB; exact component index order/material identity and float32 geometry attribute comparison.",
+  "results": [
+    {
+      "file": "expo-metro-shared-interior.lod0.glb",
+      "status": "pass",
+      "unbatchedSha256": "3290d9ffadfe37ced03131f89cd4d603a582e3484bc28002dce66ec507b55235",
+      "batchedSha256": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775",
+      "unbatchedPrimitives": 32,
+      "batchedPrimitives": 6,
+      "trianglesUnchanged": 1032,
+      "verticesUnchanged": 1968,
+      "componentRanges": [
+        {
+          "componentId": "ceiling",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-wall",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.7939677238464355e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "interior-walls",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-wall",
+          "triangles": 192,
+          "attributeMaxErrors": {
+            "POSITION": 4.76837158203125e-07,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "floor",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-floor",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.60770320892334e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "handrails",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 336,
+          "attributeMaxErrors": {
+            "POSITION": 1.8347054719924927e-07,
+            "NORMAL": 2.5212881893388328e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-01",
+          "sourcePrimitive": 1,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.3096799850463867e-07,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-02",
+          "sourcePrimitive": 1,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-03",
+          "sourcePrimitive": 1,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-04",
+          "sourcePrimitive": 1,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-05",
+          "sourcePrimitive": 1,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-06",
+          "sourcePrimitive": 1,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.3096799850463867e-07,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-01",
+          "sourcePrimitive": 1,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.3096799850463867e-07,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-02",
+          "sourcePrimitive": 1,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-03",
+          "sourcePrimitive": 1,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-04",
+          "sourcePrimitive": 1,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-05",
+          "sourcePrimitive": 1,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-06",
+          "sourcePrimitive": 1,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.3096799850463867e-07,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "next-stop-screen--1--4.3",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-screen",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 5.960464477539063e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "next-stop-screen--1-4.3",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-screen",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 5.960464477539063e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "next-stop-screen-1--4.3",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-screen",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 5.960464477539063e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "next-stop-screen-1-4.3",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-screen",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 5.960464477539063e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-01",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-priority-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-06",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-priority-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-02",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-03",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-04",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-05",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-01",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-02",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-03",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-04",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-05",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-06",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        }
+      ]
+    },
+    {
+      "file": "expo-metro-shared-interior.lod1.glb",
+      "status": "pass",
+      "unbatchedSha256": "11b59ca8510dbc20c259a96d02a0aafb0d2b2d71360c238ab9b3b231620e4e51",
+      "batchedSha256": "79cc69b436c7c40dcc21feee9218e4bf3156af1a18494080983a17183167e52e",
+      "unbatchedPrimitives": 20,
+      "batchedPrimitives": 6,
+      "trianglesUnchanged": 712,
+      "verticesUnchanged": 1392,
+      "componentRanges": [
+        {
+          "componentId": "ceiling",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-wall",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.7939677238464355e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "interior-walls",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-wall",
+          "triangles": 192,
+          "attributeMaxErrors": {
+            "POSITION": 4.76837158203125e-07,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "floor",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-floor",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.60770320892334e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "handrails",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-rail",
+          "triangles": 160,
+          "attributeMaxErrors": {
+            "POSITION": 1.7508864402770996e-07,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "next-stop-screen--1--4.3",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-screen",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 5.960464477539063e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "next-stop-screen--1-4.3",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-screen",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 5.960464477539063e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "next-stop-screen-1--4.3",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-screen",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 5.960464477539063e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "next-stop-screen-1-4.3",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-screen",
+          "triangles": 12,
+          "attributeMaxErrors": {
+            "POSITION": 5.960464477539063e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-01",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-priority-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-06",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-priority-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-02",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-03",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-04",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-left-05",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-01",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-02",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-03",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-04",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-05",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "seat-right-06",
+          "sourcePrimitive": 0,
+          "batchNode": "interior-batch-metro-seat",
+          "triangles": 24,
+          "attributeMaxErrors": {
+            "POSITION": 4.470348358154297e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        }
+      ]
+    }
+  ]
+}
