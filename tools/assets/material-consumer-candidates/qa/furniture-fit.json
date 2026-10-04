@@ -1,0 +1,22 @@
+{
+  "status": "pass",
+  "results": [
+    {
+      "level": 0,
+      "status": "pass",
+      "placements": 58,
+      "collisionFootprintsExpanded": 0
+    },
+    {
+      "level": 1,
+      "status": "pass",
+      "placements": 58,
+      "collisionFootprintsExpanded": 0
+    }
+  ],
+  "negativeTests": [
+    "escaped collision footprint rejected",
+    "changed source obstacle rejected"
+  ],
+  "runtimeIntegration": "not_run; no visual replacement or collision edits applied"
+}

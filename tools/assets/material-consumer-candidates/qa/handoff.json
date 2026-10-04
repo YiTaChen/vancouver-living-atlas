@@ -1,0 +1,131 @@
+{
+  "status": "offline_complete",
+  "packageId": "material-consumer-candidates",
+  "perId": {
+    "E02": {
+      "offline": "implemented_and_tested",
+      "runtime": "runtime_pending_webgl",
+      "deliverables": [
+        "adapters/consumer-candidates.mjs",
+        "adapters/source-patches.mjs",
+        "adapters/metre-uv.mjs",
+        "qa/consumer-validation.json"
+      ],
+      "remaining": [
+        "Production import/feature gating",
+        "continuous charts if seams visible",
+        "GPU/drive/camera acceptance",
+        "F04 rig placement integration"
+      ]
+    },
+    "E03": {
+      "offline": "audit_complete_no_verified_geometry_gap",
+      "runtime": "existing_geometry_retained",
+      "deliverables": [
+        "qa/harbour-aircraft-gap-audit.json"
+      ],
+      "newParts": 0,
+      "remaining": [
+        "Actual runtime near-view inspection if a concrete part gap is claimed"
+      ]
+    },
+    "E04": {
+      "offline": "implemented_and_tested",
+      "runtime": "runtime_pending_webgl",
+      "deliverables": [
+        "adapters/consumer-candidates.mjs",
+        "adapters/furniture-plan.mjs",
+        "source/",
+        "exports/",
+        "qa/furniture-fit.json",
+        "qa/blender-validation.json",
+        "batch_static.py",
+        "audit_batch.py",
+        "qa/static-batching.json"
+      ],
+      "remaining": [
+        "Runtime material integration",
+        "Optional visual-only replacement of named old furniture callsites",
+        "Screens/night/cutaway/clearance WebGL validation"
+      ],
+      "staticBatching": {
+        "status": "offline_verified",
+        "sourceBlendHashesUnchanged": true,
+        "primitivesPerLOD": 2,
+        "chairPrimitivesBefore": [
+          10,
+          8
+        ],
+        "counterPrimitivesBefore": [
+          7,
+          5
+        ],
+        "glbBytesBefore": 110664,
+        "glbBytesAfter": 125452,
+        "geometryBufferBytesBefore": 78432,
+        "geometryBufferBytesAfter": 88608,
+        "proposed58PlacementSubmissionsBefore": [
+          568,
+          452
+        ],
+        "proposed58PlacementSubmissionsAfter": [
+          116,
+          116
+        ],
+        "nodeContract": "furniture-module-root moves complete module; named source parts are zero-draw anchors; read batch componentRanges for actual geometry",
+        "gpuDrawsMeasured": false,
+        "instancingEnabled": false,
+        "sourceCLIReexportByteIdentical": true
+      }
+    },
+    "F05": {
+      "offline": "shared_catalog_binding_implemented_and_tested",
+      "runtime": "runtime_pending_webgl",
+      "deliverables": [
+        "shared-surface-catalog.json",
+        "adapters/shared-surfaces.mjs"
+      ],
+      "newMaps": 0,
+      "remaining": [
+        "Lazy cache/dedup/disposal integration",
+        "Four-light shader acceptance",
+        "No pale-panel landmark consumer migration in this package"
+      ]
+    }
+  },
+  "evidence": {
+    "validation": "qa/validation.json",
+    "commonContract": "qa/common-validation.json",
+    "regression": "qa/current-source-fixtures.json",
+    "measurements": "qa/measurements.json",
+    "sourceEdit": "qa/blender-validation.json",
+    "previews": "qa/previews/",
+    "visualReview": "qa/visual-review.json",
+    "renderCoverage": "qa/render-coverage.json",
+    "viewsAndLODs": "qa/previews/furniture-views-lods.png",
+    "fourLight": "qa/previews/furniture-four-light.png",
+    "existingRegressionTests": "qa/existing-regression-tests.tap",
+    "unitTests": "qa/unit-tests.tap",
+    "staticBatching": "qa/static-batching.json",
+    "scopedLint": "qa/scoped-lint.log"
+  },
+  "preserved": [
+    "runtime/public untouched",
+    "source triangles/normals/transforms unchanged in material adapters",
+    "site floor/door/collision/entry unchanged",
+    "driver skin untextured",
+    "specialised harbour/aircraft geometry/controllers unchanged",
+    "original role-material maps unchanged",
+    "All four furniture .blend files byte-identical; all source components/modifiers remain editable",
+    "Fresh unbatched furniture exports byte-identical to prior delivery; batch per-component triangles, normals, both UV sets and transforms equivalent"
+  ],
+  "integration": "README.zh-TW.md#\u6574\u5408\u4ea4\u63a5\u9806\u5e8f",
+  "notClaimed": [
+    "GPU performance",
+    "gameplay acceptance",
+    "active PBR rollout",
+    "new harbour/aircraft geometry",
+    "new high table use",
+    "deployment"
+  ]
+}

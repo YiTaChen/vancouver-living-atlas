@@ -1,0 +1,113 @@
+{
+  "frame": {
+    "units": "m",
+    "up": "+Y",
+    "forward": "+Z",
+    "driverSide": "+X",
+    "legacyToVehicleRoot": {
+      "translationM": [
+        0,
+        0,
+        0
+      ],
+      "rotationQuaternionXYZW": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "rebasing": "forbidden; original wheelwell bounds extend below Y=0"
+  },
+  "seatCushionCentreM": [
+    0.44,
+    0.53,
+    -0.21
+  ],
+  "seatCushionRadiiM": [
+    0.275,
+    0.085,
+    0.32
+  ],
+  "seatSurfaceTopM": 0.615,
+  "seatBackCentreM": [
+    0.44,
+    0.86,
+    -0.57
+  ],
+  "seatBackRotationXYZRad": [
+    -0.14,
+    0,
+    0
+  ],
+  "driverHeadCentreM": [
+    0.44,
+    1.27,
+    -0.34
+  ],
+  "driverHeadRadiusM": 0.115,
+  "driverTorsoCentreM": [
+    0.44,
+    0.93,
+    -0.39
+  ],
+  "driverTorsoSizeM": [
+    0.34,
+    0.44,
+    0.2
+  ],
+  "driverTorsoRotationXYZRad": [
+    -0.1,
+    0,
+    0
+  ],
+  "hipProxyM": [
+    0.44,
+    0.711099,
+    -0.368037
+  ],
+  "hipProxyBasis": "bottom centre of old torso box, not an authored rig bone",
+  "handEndpointsM": [
+    [
+      0.25,
+      0.88,
+      0.29
+    ],
+    [
+      0.63,
+      0.88,
+      0.29
+    ]
+  ],
+  "steeringCentreM": [
+    0.44,
+    0.88,
+    0.4
+  ],
+  "steeringRadiusM": 0.16,
+  "steeringRotationXYZRad": [
+    0.25,
+    0,
+    0
+  ],
+  "neutralNavigationEyeM": [
+    0.45,
+    1.2,
+    0
+  ],
+  "feetOrPedals": {
+    "status": "not_present_in_current_exterior",
+    "newFit": "must be labelled proposed, not measured/preserved"
+  },
+  "source": [
+    "lib/city/assets/roadster.ts",
+    "lib/city/navigation.ts",
+    "lib/city/driver-camera.ts"
+  ],
+  "fixture": "qa/current-source-fixtures.json"
+}

@@ -43,3 +43,32 @@ for (const dir of readdirSync('tools/assets', { withFileTypes: true })) {
     python([`${contract}/validate.py`, packageRoot]);
   });
 }
+
+// Execute the new CPU consumers as well as checking their stored GLB metadata.
+// These probes use locked Node dependencies and do not require Blender or WebGL.
+const cpuSuites = [
+  ['source-fitted-window-variants', 'source-selected frames and paired sills reject incompatible assemblies', [
+    ['--test', 'fit.test.mjs', 'assembly.test.mjs'],
+  ]],
+  ['material-consumer-candidates', 'material consumers preserve geometry, navigation and shared-map roles', [
+    ['--test', 'test-consumers.mjs'],
+    ['validate-consumers.mjs'],
+    ['validate-furniture.mjs'],
+  ]],
+  ['citizen-character-variants', 'character LODs preserve bind rigs, clips and protected surface regions', [
+    ['validate_cpu.mjs'],
+  ]],
+  ['roadster-driver-fit', 'optional cockpit adapter preserves unaffected source geometry and contact tests', [
+    ['test-contact.mjs'],
+    ['audit-adapter.mjs'],
+  ]],
+];
+for (const [directory, title, commands] of cpuSuites) {
+  const root = path.join('tools/assets', directory);
+  if (!existsSync(path.join(root, 'manifest.json'))) continue;
+  test(title, () => {
+    for (const args of commands) {
+      command(process.execPath, args.map((arg) => arg.startsWith('--') ? arg : path.join(root, arg)));
+    }
+  });
+}

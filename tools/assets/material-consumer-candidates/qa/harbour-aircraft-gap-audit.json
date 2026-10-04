@@ -1,0 +1,3033 @@
+{
+  "taskId": "E03",
+  "status": "offline_audit_complete_no_verified_asset_gap",
+  "newAssets": 0,
+  "decision": "Retain existing specialised procedural geometry. Source inspection verifies seats, rails, metal controls, complete hulls, wings, rotor assemblies and detached cockpits. UV deletion alone does not establish a missing geometry part. No named near-view part omission verified; no replacement made.",
+  "harbour": [
+    {
+      "factory": "makeHelicopter",
+      "hash": "5feab68ce2396d642de189c0eb6c079cf102b0677b6bbde09a7f613c9f2782b5",
+      "triangles": 2284,
+      "vertices": 6852,
+      "meshes": 4,
+      "boundsM": {
+        "min": [
+          -6.948256969451904,
+          0.010000001639127731,
+          -8.904999976158141
+        ],
+        "max": [
+          6.948256969451904,
+          4.550000190734863,
+          7.098256969451905
+        ],
+        "size": [
+          13.896513938903809,
+          4.5400001890957355,
+          16.003256945610048
+        ]
+      },
+      "metadata": {
+        "rotor": {
+          "name": "main-rotor",
+          "position": [
+            0,
+            4.36,
+            0.15
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ],
+          "spinAxis": null
+        },
+        "tailRotor": {
+          "name": "tail-rotor",
+          "position": [
+            0.27,
+            2.79,
+            -7.88
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ],
+          "spinAxis": null
+        },
+        "rotorAxis": "y",
+        "tailRotorAxis": "x",
+        "nominal": {
+          "airframeLength": 13,
+          "rotorDiameter": 14
+        },
+        "origin": "skid-ground-contact",
+        "kind": "helicopter",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -6.948256969451904,
+            0.010000001639127731,
+            -8.904999976158141
+          ],
+          "max": [
+            6.948256969451904,
+            4.550000190734863,
+            7.098256969451905
+          ]
+        },
+        "drawCalls": 4,
+        "triangles": 2284
+      }
+    },
+    {
+      "factory": "makeSeaplane",
+      "hash": "b4ffcbc1151b50b389ff060604c3b9f6627deac6cb454d95221a1ad16f0a3072",
+      "triangles": 2228,
+      "vertices": 6684,
+      "meshes": 3,
+      "boundsM": {
+        "min": [
+          -9.53549575805664,
+          -0.47999998927116394,
+          -7.150000095367432
+        ],
+        "max": [
+          9.53549575805664,
+          5.880000114440918,
+          7.504999982118607
+        ],
+        "size": [
+          19.07099151611328,
+          6.360000103712082,
+          14.655000077486038
+        ]
+      },
+      "metadata": {
+        "propeller": {
+          "name": "propeller",
+          "position": [
+            0,
+            2.58,
+            7.08
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ],
+          "spinAxis": null
+        },
+        "propellerAxis": "z",
+        "nominal": {
+          "length": 15,
+          "wingspan": 19
+        },
+        "waterline": 0,
+        "origin": "float-waterline",
+        "kind": "seaplane",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -9.53549575805664,
+            -0.47999998927116394,
+            -7.150000095367432
+          ],
+          "max": [
+            9.53549575805664,
+            5.880000114440918,
+            7.504999982118607
+          ]
+        },
+        "drawCalls": 3,
+        "triangles": 2228
+      }
+    },
+    {
+      "factory": "makeCruiseShip",
+      "hash": "9afbcb4f5e6b87f3055d90ced3c715f1f20febc530dbcada9a54ebad46fd3744",
+      "triangles": 19842,
+      "vertices": 59526,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -16,
+          -7,
+          -125
+        ],
+        "max": [
+          16,
+          49.959999084472656,
+          125
+        ],
+        "size": [
+          32,
+          56.959999084472656,
+          250
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 250,
+          "hullBeam": 32,
+          "heightAboveWater": 50
+        },
+        "funnelTop": [
+          0,
+          45.75,
+          -34
+        ],
+        "kind": "cruise-ship",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -16,
+            -7,
+            -125
+          ],
+          "max": [
+            16,
+            49.959999084472656,
+            125
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 19842
+      }
+    },
+    {
+      "factory": "makeMotorboat",
+      "hash": "0630b95d1761d1b6929b18efc7266ab46b0267ce033a8876f4cb37b3db6ac02e",
+      "triangles": 1906,
+      "vertices": 5718,
+      "meshes": 3,
+      "boundsM": {
+        "min": [
+          -1.2000000476837158,
+          -0.8600000143051147,
+          -3.8100000005960464
+        ],
+        "max": [
+          1.2000000476837158,
+          2.075000047683716,
+          3.299999952316284
+        ],
+        "size": [
+          2.4000000953674316,
+          2.9350000619888306,
+          7.109999952912331
+        ]
+      },
+      "metadata": {
+        "propeller": {
+          "name": "outboard-propeller",
+          "position": [
+            0,
+            -0.52,
+            -3.67
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ],
+          "spinAxis": null
+        },
+        "propellerAxis": "z",
+        "waterline": 0,
+        "nominal": {
+          "length": 7,
+          "hullBeam": 2.4
+        },
+        "driverSeat": [
+          0.52,
+          1.1,
+          -0.8
+        ],
+        "kind": "motorboat",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.2000000476837158,
+            -0.8600000143051147,
+            -3.8100000005960464
+          ],
+          "max": [
+            1.2000000476837158,
+            2.075000047683716,
+            3.299999952316284
+          ]
+        },
+        "drawCalls": 3,
+        "triangles": 1906
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 0,
+      "hash": "09c77c86d337a3c0026a77386514ccea0fb3b43a216065788ef104e13b4a1b3c",
+      "triangles": 1776,
+      "vertices": 5328,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.960800051689148,
+          -0.6299999952316284,
+          -6.480000019073486
+        ],
+        "max": [
+          1.960800051689148,
+          3.7339999675750732,
+          6
+        ],
+        "size": [
+          3.921600103378296,
+          4.363999962806702,
+          12.480000019073486
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 12,
+          "hullBeam": 3.54
+        },
+        "variant": 0,
+        "kind": "motor-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.960800051689148,
+            -0.6299999952316284,
+            -6.480000019073486
+          ],
+          "max": [
+            1.960800051689148,
+            3.7339999675750732,
+            6
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1776
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 1,
+      "hash": "dd628bddcad58ccbecc66befe5bdffb812eb3b839a24145837baf2c9279f6c0d",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.4459999799728394,
+          -0.949999988079071,
+          -4
+        ],
+        "max": [
+          1.4459999799728394,
+          10.996000289916992,
+          4
+        ],
+        "size": [
+          2.8919999599456787,
+          11.946000277996063,
+          8
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 8,
+          "hullBeam": 2.55
+        },
+        "variant": 1,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.4459999799728394,
+            -0.949999988079071,
+            -4
+          ],
+          "max": [
+            1.4459999799728394,
+            10.996000289916992,
+            4
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 2,
+      "hash": "5d3c832e36ab857a5f925d6edd55c7cb958ff8a20e8e237d8f2299c8106e6d65",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.8229999542236328,
+          -0.949999988079071,
+          -6.5
+        ],
+        "max": [
+          1.8229999542236328,
+          17.381000518798828,
+          6.5
+        ],
+        "size": [
+          3.6459999084472656,
+          18.3310005068779,
+          13
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 13,
+          "hullBeam": 3.275
+        },
+        "variant": 2,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.8229999542236328,
+            -0.949999988079071,
+            -6.5
+          ],
+          "max": [
+            1.8229999542236328,
+            17.381000518798828,
+            6.5
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 3,
+      "hash": "96ae2b9ab02293ab14e329393314f7aaf087f76ec22ad9205ab1de751aeec8a6",
+      "triangles": 1776,
+      "vertices": 5328,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.6721999645233154,
+          -0.6299999952316284,
+          -4.860000133514404
+        ],
+        "max": [
+          1.6721999645233154,
+          3.683000087738037,
+          4.5
+        ],
+        "size": [
+          3.344399929046631,
+          4.3130000829696655,
+          9.360000133514404
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 9,
+          "hullBeam": 2.985
+        },
+        "variant": 3,
+        "kind": "motor-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.6721999645233154,
+            -0.6299999952316284,
+            -4.860000133514404
+          ],
+          "max": [
+            1.6721999645233154,
+            3.683000087738037,
+            4.5
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1776
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 4,
+      "hash": "8adbe7fe6abd0141dabf861327af10b35589e1cb13a65b4990b69ed6254e1c74",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.8983999490737915,
+          -0.949999988079071,
+          -7
+        ],
+        "max": [
+          1.8983999490737915,
+          18.65799903869629,
+          7
+        ],
+        "size": [
+          3.796799898147583,
+          19.60799902677536,
+          14
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 14,
+          "hullBeam": 3.42
+        },
+        "variant": 4,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.8983999490737915,
+            -0.949999988079071,
+            -7
+          ],
+          "max": [
+            1.8983999490737915,
+            18.65799903869629,
+            7
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 5,
+      "hash": "3dd35cd746306150fb536c65e75707150dcb62eae1700ba4769e139ca887edc4",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.5967999696731567,
+          -0.949999988079071,
+          -5
+        ],
+        "max": [
+          1.5967999696731567,
+          13.550000190734863,
+          5
+        ],
+        "size": [
+          3.1935999393463135,
+          14.500000178813934,
+          10
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 10,
+          "hullBeam": 2.84
+        },
+        "variant": 5,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.5967999696731567,
+            -0.949999988079071,
+            -5
+          ],
+          "max": [
+            1.5967999696731567,
+            13.550000190734863,
+            5
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 6,
+      "hash": "3ee8513102dec3c5c4b9f307202d0270b92b3a06d88682bc0ff42e7b4c13da79",
+      "triangles": 1776,
+      "vertices": 5328,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -2.2493999004364014,
+          -0.6299999952316284,
+          -8.100000381469727
+        ],
+        "max": [
+          2.2493999004364014,
+          3.7850000858306885,
+          7.5
+        ],
+        "size": [
+          4.498799800872803,
+          4.415000081062317,
+          15.600000381469727
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 15,
+          "hullBeam": 4.095
+        },
+        "variant": 6,
+        "kind": "motor-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -2.2493999004364014,
+            -0.6299999952316284,
+            -8.100000381469727
+          ],
+          "max": [
+            2.2493999004364014,
+            3.7850000858306885,
+            7.5
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1776
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 7,
+      "hash": "d3e16234fdd96d7385c345066406761db9eb29b09f27821a6f2e71d2f2e1431c",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.6721999645233154,
+          -0.949999988079071,
+          -5.5
+        ],
+        "max": [
+          1.6721999645233154,
+          14.82699966430664,
+          5.5
+        ],
+        "size": [
+          3.344399929046631,
+          15.776999652385712,
+          11
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 11,
+          "hullBeam": 2.985
+        },
+        "variant": 7,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.6721999645233154,
+            -0.949999988079071,
+            -5.5
+          ],
+          "max": [
+            1.6721999645233154,
+            14.82699966430664,
+            5.5
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 8,
+      "hash": "7ef31c33912a3caa199fab949fc2941921ccc21057ba039dcb5bc0e31dc59060",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -2.0492000579833984,
+          -0.949999988079071,
+          -8
+        ],
+        "max": [
+          2.0492000579833984,
+          21.211999893188477,
+          8
+        ],
+        "size": [
+          4.098400115966797,
+          22.161999881267548,
+          16
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 16,
+          "hullBeam": 3.71
+        },
+        "variant": 8,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -2.0492000579833984,
+            -0.949999988079071,
+            -8
+          ],
+          "max": [
+            2.0492000579833984,
+            21.211999893188477,
+            8
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 9,
+      "hash": "09c77c86d337a3c0026a77386514ccea0fb3b43a216065788ef104e13b4a1b3c",
+      "triangles": 1776,
+      "vertices": 5328,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.960800051689148,
+          -0.6299999952316284,
+          -6.480000019073486
+        ],
+        "max": [
+          1.960800051689148,
+          3.7339999675750732,
+          6
+        ],
+        "size": [
+          3.921600103378296,
+          4.363999962806702,
+          12.480000019073486
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 12,
+          "hullBeam": 3.54
+        },
+        "variant": 9,
+        "kind": "motor-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.960800051689148,
+            -0.6299999952316284,
+            -6.480000019073486
+          ],
+          "max": [
+            1.960800051689148,
+            3.7339999675750732,
+            6
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1776
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 10,
+      "hash": "dd628bddcad58ccbecc66befe5bdffb812eb3b839a24145837baf2c9279f6c0d",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.4459999799728394,
+          -0.949999988079071,
+          -4
+        ],
+        "max": [
+          1.4459999799728394,
+          10.996000289916992,
+          4
+        ],
+        "size": [
+          2.8919999599456787,
+          11.946000277996063,
+          8
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 8,
+          "hullBeam": 2.55
+        },
+        "variant": 10,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.4459999799728394,
+            -0.949999988079071,
+            -4
+          ],
+          "max": [
+            1.4459999799728394,
+            10.996000289916992,
+            4
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 11,
+      "hash": "5d3c832e36ab857a5f925d6edd55c7cb958ff8a20e8e237d8f2299c8106e6d65",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.8229999542236328,
+          -0.949999988079071,
+          -6.5
+        ],
+        "max": [
+          1.8229999542236328,
+          17.381000518798828,
+          6.5
+        ],
+        "size": [
+          3.6459999084472656,
+          18.3310005068779,
+          13
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 13,
+          "hullBeam": 3.275
+        },
+        "variant": 11,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.8229999542236328,
+            -0.949999988079071,
+            -6.5
+          ],
+          "max": [
+            1.8229999542236328,
+            17.381000518798828,
+            6.5
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 12,
+      "hash": "96ae2b9ab02293ab14e329393314f7aaf087f76ec22ad9205ab1de751aeec8a6",
+      "triangles": 1776,
+      "vertices": 5328,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.6721999645233154,
+          -0.6299999952316284,
+          -4.860000133514404
+        ],
+        "max": [
+          1.6721999645233154,
+          3.683000087738037,
+          4.5
+        ],
+        "size": [
+          3.344399929046631,
+          4.3130000829696655,
+          9.360000133514404
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 9,
+          "hullBeam": 2.985
+        },
+        "variant": 12,
+        "kind": "motor-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.6721999645233154,
+            -0.6299999952316284,
+            -4.860000133514404
+          ],
+          "max": [
+            1.6721999645233154,
+            3.683000087738037,
+            4.5
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1776
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 13,
+      "hash": "8adbe7fe6abd0141dabf861327af10b35589e1cb13a65b4990b69ed6254e1c74",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.8983999490737915,
+          -0.949999988079071,
+          -7
+        ],
+        "max": [
+          1.8983999490737915,
+          18.65799903869629,
+          7
+        ],
+        "size": [
+          3.796799898147583,
+          19.60799902677536,
+          14
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 14,
+          "hullBeam": 3.42
+        },
+        "variant": 13,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.8983999490737915,
+            -0.949999988079071,
+            -7
+          ],
+          "max": [
+            1.8983999490737915,
+            18.65799903869629,
+            7
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 14,
+      "hash": "3dd35cd746306150fb536c65e75707150dcb62eae1700ba4769e139ca887edc4",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.5967999696731567,
+          -0.949999988079071,
+          -5
+        ],
+        "max": [
+          1.5967999696731567,
+          13.550000190734863,
+          5
+        ],
+        "size": [
+          3.1935999393463135,
+          14.500000178813934,
+          10
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 10,
+          "hullBeam": 2.84
+        },
+        "variant": 14,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.5967999696731567,
+            -0.949999988079071,
+            -5
+          ],
+          "max": [
+            1.5967999696731567,
+            13.550000190734863,
+            5
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 15,
+      "hash": "3ee8513102dec3c5c4b9f307202d0270b92b3a06d88682bc0ff42e7b4c13da79",
+      "triangles": 1776,
+      "vertices": 5328,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -2.2493999004364014,
+          -0.6299999952316284,
+          -8.100000381469727
+        ],
+        "max": [
+          2.2493999004364014,
+          3.7850000858306885,
+          7.5
+        ],
+        "size": [
+          4.498799800872803,
+          4.415000081062317,
+          15.600000381469727
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 15,
+          "hullBeam": 4.095
+        },
+        "variant": 15,
+        "kind": "motor-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -2.2493999004364014,
+            -0.6299999952316284,
+            -8.100000381469727
+          ],
+          "max": [
+            2.2493999004364014,
+            3.7850000858306885,
+            7.5
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1776
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 16,
+      "hash": "d3e16234fdd96d7385c345066406761db9eb29b09f27821a6f2e71d2f2e1431c",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.6721999645233154,
+          -0.949999988079071,
+          -5.5
+        ],
+        "max": [
+          1.6721999645233154,
+          14.82699966430664,
+          5.5
+        ],
+        "size": [
+          3.344399929046631,
+          15.776999652385712,
+          11
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 11,
+          "hullBeam": 2.985
+        },
+        "variant": 16,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.6721999645233154,
+            -0.949999988079071,
+            -5.5
+          ],
+          "max": [
+            1.6721999645233154,
+            14.82699966430664,
+            5.5
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 17,
+      "hash": "7ef31c33912a3caa199fab949fc2941921ccc21057ba039dcb5bc0e31dc59060",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -2.0492000579833984,
+          -0.949999988079071,
+          -8
+        ],
+        "max": [
+          2.0492000579833984,
+          21.211999893188477,
+          8
+        ],
+        "size": [
+          4.098400115966797,
+          22.161999881267548,
+          16
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 16,
+          "hullBeam": 3.71
+        },
+        "variant": 17,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -2.0492000579833984,
+            -0.949999988079071,
+            -8
+          ],
+          "max": [
+            2.0492000579833984,
+            21.211999893188477,
+            8
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 18,
+      "hash": "09c77c86d337a3c0026a77386514ccea0fb3b43a216065788ef104e13b4a1b3c",
+      "triangles": 1776,
+      "vertices": 5328,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.960800051689148,
+          -0.6299999952316284,
+          -6.480000019073486
+        ],
+        "max": [
+          1.960800051689148,
+          3.7339999675750732,
+          6
+        ],
+        "size": [
+          3.921600103378296,
+          4.363999962806702,
+          12.480000019073486
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 12,
+          "hullBeam": 3.54
+        },
+        "variant": 18,
+        "kind": "motor-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.960800051689148,
+            -0.6299999952316284,
+            -6.480000019073486
+          ],
+          "max": [
+            1.960800051689148,
+            3.7339999675750732,
+            6
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1776
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 19,
+      "hash": "dd628bddcad58ccbecc66befe5bdffb812eb3b839a24145837baf2c9279f6c0d",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.4459999799728394,
+          -0.949999988079071,
+          -4
+        ],
+        "max": [
+          1.4459999799728394,
+          10.996000289916992,
+          4
+        ],
+        "size": [
+          2.8919999599456787,
+          11.946000277996063,
+          8
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 8,
+          "hullBeam": 2.55
+        },
+        "variant": 19,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.4459999799728394,
+            -0.949999988079071,
+            -4
+          ],
+          "max": [
+            1.4459999799728394,
+            10.996000289916992,
+            4
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 20,
+      "hash": "5d3c832e36ab857a5f925d6edd55c7cb958ff8a20e8e237d8f2299c8106e6d65",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.8229999542236328,
+          -0.949999988079071,
+          -6.5
+        ],
+        "max": [
+          1.8229999542236328,
+          17.381000518798828,
+          6.5
+        ],
+        "size": [
+          3.6459999084472656,
+          18.3310005068779,
+          13
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 13,
+          "hullBeam": 3.275
+        },
+        "variant": 20,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.8229999542236328,
+            -0.949999988079071,
+            -6.5
+          ],
+          "max": [
+            1.8229999542236328,
+            17.381000518798828,
+            6.5
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 21,
+      "hash": "96ae2b9ab02293ab14e329393314f7aaf087f76ec22ad9205ab1de751aeec8a6",
+      "triangles": 1776,
+      "vertices": 5328,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.6721999645233154,
+          -0.6299999952316284,
+          -4.860000133514404
+        ],
+        "max": [
+          1.6721999645233154,
+          3.683000087738037,
+          4.5
+        ],
+        "size": [
+          3.344399929046631,
+          4.3130000829696655,
+          9.360000133514404
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 9,
+          "hullBeam": 2.985
+        },
+        "variant": 21,
+        "kind": "motor-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.6721999645233154,
+            -0.6299999952316284,
+            -4.860000133514404
+          ],
+          "max": [
+            1.6721999645233154,
+            3.683000087738037,
+            4.5
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1776
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 22,
+      "hash": "8adbe7fe6abd0141dabf861327af10b35589e1cb13a65b4990b69ed6254e1c74",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.8983999490737915,
+          -0.949999988079071,
+          -7
+        ],
+        "max": [
+          1.8983999490737915,
+          18.65799903869629,
+          7
+        ],
+        "size": [
+          3.796799898147583,
+          19.60799902677536,
+          14
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 14,
+          "hullBeam": 3.42
+        },
+        "variant": 22,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.8983999490737915,
+            -0.949999988079071,
+            -7
+          ],
+          "max": [
+            1.8983999490737915,
+            18.65799903869629,
+            7
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 23,
+      "hash": "3dd35cd746306150fb536c65e75707150dcb62eae1700ba4769e139ca887edc4",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.5967999696731567,
+          -0.949999988079071,
+          -5
+        ],
+        "max": [
+          1.5967999696731567,
+          13.550000190734863,
+          5
+        ],
+        "size": [
+          3.1935999393463135,
+          14.500000178813934,
+          10
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 10,
+          "hullBeam": 2.84
+        },
+        "variant": 23,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.5967999696731567,
+            -0.949999988079071,
+            -5
+          ],
+          "max": [
+            1.5967999696731567,
+            13.550000190734863,
+            5
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 24,
+      "hash": "3ee8513102dec3c5c4b9f307202d0270b92b3a06d88682bc0ff42e7b4c13da79",
+      "triangles": 1776,
+      "vertices": 5328,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -2.2493999004364014,
+          -0.6299999952316284,
+          -8.100000381469727
+        ],
+        "max": [
+          2.2493999004364014,
+          3.7850000858306885,
+          7.5
+        ],
+        "size": [
+          4.498799800872803,
+          4.415000081062317,
+          15.600000381469727
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 15,
+          "hullBeam": 4.095
+        },
+        "variant": 24,
+        "kind": "motor-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -2.2493999004364014,
+            -0.6299999952316284,
+            -8.100000381469727
+          ],
+          "max": [
+            2.2493999004364014,
+            3.7850000858306885,
+            7.5
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1776
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 25,
+      "hash": "d3e16234fdd96d7385c345066406761db9eb29b09f27821a6f2e71d2f2e1431c",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.6721999645233154,
+          -0.949999988079071,
+          -5.5
+        ],
+        "max": [
+          1.6721999645233154,
+          14.82699966430664,
+          5.5
+        ],
+        "size": [
+          3.344399929046631,
+          15.776999652385712,
+          11
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 11,
+          "hullBeam": 2.985
+        },
+        "variant": 25,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.6721999645233154,
+            -0.949999988079071,
+            -5.5
+          ],
+          "max": [
+            1.6721999645233154,
+            14.82699966430664,
+            5.5
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 26,
+      "hash": "7ef31c33912a3caa199fab949fc2941921ccc21057ba039dcb5bc0e31dc59060",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -2.0492000579833984,
+          -0.949999988079071,
+          -8
+        ],
+        "max": [
+          2.0492000579833984,
+          21.211999893188477,
+          8
+        ],
+        "size": [
+          4.098400115966797,
+          22.161999881267548,
+          16
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 16,
+          "hullBeam": 3.71
+        },
+        "variant": 26,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -2.0492000579833984,
+            -0.949999988079071,
+            -8
+          ],
+          "max": [
+            2.0492000579833984,
+            21.211999893188477,
+            8
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 27,
+      "hash": "09c77c86d337a3c0026a77386514ccea0fb3b43a216065788ef104e13b4a1b3c",
+      "triangles": 1776,
+      "vertices": 5328,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.960800051689148,
+          -0.6299999952316284,
+          -6.480000019073486
+        ],
+        "max": [
+          1.960800051689148,
+          3.7339999675750732,
+          6
+        ],
+        "size": [
+          3.921600103378296,
+          4.363999962806702,
+          12.480000019073486
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 12,
+          "hullBeam": 3.54
+        },
+        "variant": 27,
+        "kind": "motor-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.960800051689148,
+            -0.6299999952316284,
+            -6.480000019073486
+          ],
+          "max": [
+            1.960800051689148,
+            3.7339999675750732,
+            6
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1776
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 28,
+      "hash": "dd628bddcad58ccbecc66befe5bdffb812eb3b839a24145837baf2c9279f6c0d",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.4459999799728394,
+          -0.949999988079071,
+          -4
+        ],
+        "max": [
+          1.4459999799728394,
+          10.996000289916992,
+          4
+        ],
+        "size": [
+          2.8919999599456787,
+          11.946000277996063,
+          8
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 8,
+          "hullBeam": 2.55
+        },
+        "variant": 28,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.4459999799728394,
+            -0.949999988079071,
+            -4
+          ],
+          "max": [
+            1.4459999799728394,
+            10.996000289916992,
+            4
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 29,
+      "hash": "5d3c832e36ab857a5f925d6edd55c7cb958ff8a20e8e237d8f2299c8106e6d65",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.8229999542236328,
+          -0.949999988079071,
+          -6.5
+        ],
+        "max": [
+          1.8229999542236328,
+          17.381000518798828,
+          6.5
+        ],
+        "size": [
+          3.6459999084472656,
+          18.3310005068779,
+          13
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 13,
+          "hullBeam": 3.275
+        },
+        "variant": 29,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.8229999542236328,
+            -0.949999988079071,
+            -6.5
+          ],
+          "max": [
+            1.8229999542236328,
+            17.381000518798828,
+            6.5
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 30,
+      "hash": "96ae2b9ab02293ab14e329393314f7aaf087f76ec22ad9205ab1de751aeec8a6",
+      "triangles": 1776,
+      "vertices": 5328,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.6721999645233154,
+          -0.6299999952316284,
+          -4.860000133514404
+        ],
+        "max": [
+          1.6721999645233154,
+          3.683000087738037,
+          4.5
+        ],
+        "size": [
+          3.344399929046631,
+          4.3130000829696655,
+          9.360000133514404
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 9,
+          "hullBeam": 2.985
+        },
+        "variant": 30,
+        "kind": "motor-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.6721999645233154,
+            -0.6299999952316284,
+            -4.860000133514404
+          ],
+          "max": [
+            1.6721999645233154,
+            3.683000087738037,
+            4.5
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1776
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 31,
+      "hash": "8adbe7fe6abd0141dabf861327af10b35589e1cb13a65b4990b69ed6254e1c74",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.8983999490737915,
+          -0.949999988079071,
+          -7
+        ],
+        "max": [
+          1.8983999490737915,
+          18.65799903869629,
+          7
+        ],
+        "size": [
+          3.796799898147583,
+          19.60799902677536,
+          14
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 14,
+          "hullBeam": 3.42
+        },
+        "variant": 31,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.8983999490737915,
+            -0.949999988079071,
+            -7
+          ],
+          "max": [
+            1.8983999490737915,
+            18.65799903869629,
+            7
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 32,
+      "hash": "3dd35cd746306150fb536c65e75707150dcb62eae1700ba4769e139ca887edc4",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.5967999696731567,
+          -0.949999988079071,
+          -5
+        ],
+        "max": [
+          1.5967999696731567,
+          13.550000190734863,
+          5
+        ],
+        "size": [
+          3.1935999393463135,
+          14.500000178813934,
+          10
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 10,
+          "hullBeam": 2.84
+        },
+        "variant": 32,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.5967999696731567,
+            -0.949999988079071,
+            -5
+          ],
+          "max": [
+            1.5967999696731567,
+            13.550000190734863,
+            5
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 33,
+      "hash": "3ee8513102dec3c5c4b9f307202d0270b92b3a06d88682bc0ff42e7b4c13da79",
+      "triangles": 1776,
+      "vertices": 5328,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -2.2493999004364014,
+          -0.6299999952316284,
+          -8.100000381469727
+        ],
+        "max": [
+          2.2493999004364014,
+          3.7850000858306885,
+          7.5
+        ],
+        "size": [
+          4.498799800872803,
+          4.415000081062317,
+          15.600000381469727
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 15,
+          "hullBeam": 4.095
+        },
+        "variant": 33,
+        "kind": "motor-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -2.2493999004364014,
+            -0.6299999952316284,
+            -8.100000381469727
+          ],
+          "max": [
+            2.2493999004364014,
+            3.7850000858306885,
+            7.5
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1776
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 34,
+      "hash": "d3e16234fdd96d7385c345066406761db9eb29b09f27821a6f2e71d2f2e1431c",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.6721999645233154,
+          -0.949999988079071,
+          -5.5
+        ],
+        "max": [
+          1.6721999645233154,
+          14.82699966430664,
+          5.5
+        ],
+        "size": [
+          3.344399929046631,
+          15.776999652385712,
+          11
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 11,
+          "hullBeam": 2.985
+        },
+        "variant": 34,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.6721999645233154,
+            -0.949999988079071,
+            -5.5
+          ],
+          "max": [
+            1.6721999645233154,
+            14.82699966430664,
+            5.5
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 35,
+      "hash": "7ef31c33912a3caa199fab949fc2941921ccc21057ba039dcb5bc0e31dc59060",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -2.0492000579833984,
+          -0.949999988079071,
+          -8
+        ],
+        "max": [
+          2.0492000579833984,
+          21.211999893188477,
+          8
+        ],
+        "size": [
+          4.098400115966797,
+          22.161999881267548,
+          16
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 16,
+          "hullBeam": 3.71
+        },
+        "variant": 35,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -2.0492000579833984,
+            -0.949999988079071,
+            -8
+          ],
+          "max": [
+            2.0492000579833984,
+            21.211999893188477,
+            8
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 36,
+      "hash": "09c77c86d337a3c0026a77386514ccea0fb3b43a216065788ef104e13b4a1b3c",
+      "triangles": 1776,
+      "vertices": 5328,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.960800051689148,
+          -0.6299999952316284,
+          -6.480000019073486
+        ],
+        "max": [
+          1.960800051689148,
+          3.7339999675750732,
+          6
+        ],
+        "size": [
+          3.921600103378296,
+          4.363999962806702,
+          12.480000019073486
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 12,
+          "hullBeam": 3.54
+        },
+        "variant": 36,
+        "kind": "motor-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.960800051689148,
+            -0.6299999952316284,
+            -6.480000019073486
+          ],
+          "max": [
+            1.960800051689148,
+            3.7339999675750732,
+            6
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1776
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 37,
+      "hash": "dd628bddcad58ccbecc66befe5bdffb812eb3b839a24145837baf2c9279f6c0d",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.4459999799728394,
+          -0.949999988079071,
+          -4
+        ],
+        "max": [
+          1.4459999799728394,
+          10.996000289916992,
+          4
+        ],
+        "size": [
+          2.8919999599456787,
+          11.946000277996063,
+          8
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 8,
+          "hullBeam": 2.55
+        },
+        "variant": 37,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.4459999799728394,
+            -0.949999988079071,
+            -4
+          ],
+          "max": [
+            1.4459999799728394,
+            10.996000289916992,
+            4
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 38,
+      "hash": "5d3c832e36ab857a5f925d6edd55c7cb958ff8a20e8e237d8f2299c8106e6d65",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.8229999542236328,
+          -0.949999988079071,
+          -6.5
+        ],
+        "max": [
+          1.8229999542236328,
+          17.381000518798828,
+          6.5
+        ],
+        "size": [
+          3.6459999084472656,
+          18.3310005068779,
+          13
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 13,
+          "hullBeam": 3.275
+        },
+        "variant": 38,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.8229999542236328,
+            -0.949999988079071,
+            -6.5
+          ],
+          "max": [
+            1.8229999542236328,
+            17.381000518798828,
+            6.5
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 39,
+      "hash": "96ae2b9ab02293ab14e329393314f7aaf087f76ec22ad9205ab1de751aeec8a6",
+      "triangles": 1776,
+      "vertices": 5328,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.6721999645233154,
+          -0.6299999952316284,
+          -4.860000133514404
+        ],
+        "max": [
+          1.6721999645233154,
+          3.683000087738037,
+          4.5
+        ],
+        "size": [
+          3.344399929046631,
+          4.3130000829696655,
+          9.360000133514404
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 9,
+          "hullBeam": 2.985
+        },
+        "variant": 39,
+        "kind": "motor-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.6721999645233154,
+            -0.6299999952316284,
+            -4.860000133514404
+          ],
+          "max": [
+            1.6721999645233154,
+            3.683000087738037,
+            4.5
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1776
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 40,
+      "hash": "8adbe7fe6abd0141dabf861327af10b35589e1cb13a65b4990b69ed6254e1c74",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.8983999490737915,
+          -0.949999988079071,
+          -7
+        ],
+        "max": [
+          1.8983999490737915,
+          18.65799903869629,
+          7
+        ],
+        "size": [
+          3.796799898147583,
+          19.60799902677536,
+          14
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 14,
+          "hullBeam": 3.42
+        },
+        "variant": 40,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.8983999490737915,
+            -0.949999988079071,
+            -7
+          ],
+          "max": [
+            1.8983999490737915,
+            18.65799903869629,
+            7
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 41,
+      "hash": "3dd35cd746306150fb536c65e75707150dcb62eae1700ba4769e139ca887edc4",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.5967999696731567,
+          -0.949999988079071,
+          -5
+        ],
+        "max": [
+          1.5967999696731567,
+          13.550000190734863,
+          5
+        ],
+        "size": [
+          3.1935999393463135,
+          14.500000178813934,
+          10
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 10,
+          "hullBeam": 2.84
+        },
+        "variant": 41,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.5967999696731567,
+            -0.949999988079071,
+            -5
+          ],
+          "max": [
+            1.5967999696731567,
+            13.550000190734863,
+            5
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 42,
+      "hash": "3ee8513102dec3c5c4b9f307202d0270b92b3a06d88682bc0ff42e7b4c13da79",
+      "triangles": 1776,
+      "vertices": 5328,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -2.2493999004364014,
+          -0.6299999952316284,
+          -8.100000381469727
+        ],
+        "max": [
+          2.2493999004364014,
+          3.7850000858306885,
+          7.5
+        ],
+        "size": [
+          4.498799800872803,
+          4.415000081062317,
+          15.600000381469727
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 15,
+          "hullBeam": 4.095
+        },
+        "variant": 42,
+        "kind": "motor-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -2.2493999004364014,
+            -0.6299999952316284,
+            -8.100000381469727
+          ],
+          "max": [
+            2.2493999004364014,
+            3.7850000858306885,
+            7.5
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1776
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 43,
+      "hash": "d3e16234fdd96d7385c345066406761db9eb29b09f27821a6f2e71d2f2e1431c",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -1.6721999645233154,
+          -0.949999988079071,
+          -5.5
+        ],
+        "max": [
+          1.6721999645233154,
+          14.82699966430664,
+          5.5
+        ],
+        "size": [
+          3.344399929046631,
+          15.776999652385712,
+          11
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 11,
+          "hullBeam": 2.985
+        },
+        "variant": 43,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -1.6721999645233154,
+            -0.949999988079071,
+            -5.5
+          ],
+          "max": [
+            1.6721999645233154,
+            14.82699966430664,
+            5.5
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    },
+    {
+      "factory": "makeMooredYacht",
+      "variant": 44,
+      "hash": "7ef31c33912a3caa199fab949fc2941921ccc21057ba039dcb5bc0e31dc59060",
+      "triangles": 1720,
+      "vertices": 5160,
+      "meshes": 2,
+      "boundsM": {
+        "min": [
+          -2.0492000579833984,
+          -0.949999988079071,
+          -8
+        ],
+        "max": [
+          2.0492000579833984,
+          21.211999893188477,
+          8
+        ],
+        "size": [
+          4.098400115966797,
+          22.161999881267548,
+          16
+        ]
+      },
+      "metadata": {
+        "waterline": 0,
+        "nominal": {
+          "length": 16,
+          "hullBeam": 3.71
+        },
+        "variant": 44,
+        "kind": "sailing-yacht",
+        "units": "metres",
+        "forward": "+Z",
+        "up": "+Y",
+        "bounds": {
+          "min": [
+            -2.0492000579833984,
+            -0.949999988079071,
+            -8
+          ],
+          "max": [
+            2.0492000579833984,
+            21.211999893188477,
+            8
+          ]
+        },
+        "drawCalls": 2,
+        "triangles": 1720
+      }
+    }
+  ],
+  "playerAircraft": [
+    {
+      "kind": "seaplane",
+      "exterior": {
+        "hash": "048d33e7bbab4d3b63d3c7408ff1ead392c6eb8d17d7cb5cfef4198e68c617e4",
+        "triangles": 6720,
+        "vertices": 20160,
+        "meshes": 4,
+        "boundsM": {
+          "min": [
+            -7.59499979019165,
+            0,
+            -4.909999847412109
+          ],
+          "max": [
+            7.59499979019165,
+            4.625,
+            4.730000019073486
+          ],
+          "size": [
+            15.1899995803833,
+            4.625,
+            9.639999866485596
+          ]
+        }
+      },
+      "cockpit": {
+        "hash": "e79562d865ce4ac800899d4f2bc240e12f58b68d8d0683f731d602ae4b3fcf0a",
+        "triangles": 5298,
+        "vertices": 15894,
+        "meshes": 11,
+        "boundsM": {
+          "min": [
+            -1.0199999809265137,
+            -1.2000000476837158,
+            -1.575900673866272
+          ],
+          "max": [
+            1.0199999809265137,
+            0.7365248799324036,
+            0.35999998450279236
+          ],
+          "size": [
+            2.0399999618530273,
+            1.9365249276161194,
+            1.9359006583690643
+          ]
+        }
+      },
+      "forwardAxis": "-Z",
+      "upAxis": "+Y",
+      "landingDatum": "Y=0",
+      "metadata": {
+        "dimensions": {
+          "length": 9.8,
+          "span": 15.2,
+          "height": 4.65
+        }
+      },
+      "propellers": [
+        {
+          "name": "Seaplane propeller",
+          "position": [
+            0,
+            2.16,
+            -4.45
+          ],
+          "spinAxis": "z",
+          "spinRate": 94
+        }
+      ],
+      "stick": {
+        "position": [
+          -0.35,
+          -0.58,
+          -0.93
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          "XYZ"
+        ]
+      },
+      "instruments": {
+        "airspeedNeedle": {
+          "position": [
+            -0.5,
+            -0.324,
+            -1.302
+          ],
+          "rotation": [
+            0,
+            0,
+            2.443460952792061,
+            "XYZ"
+          ]
+        },
+        "altimeterNeedle": {
+          "position": [
+            -0.046,
+            -0.324,
+            -1.302
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "verticalSpeedNeedle": {
+          "position": [
+            -0.046,
+            -0.543,
+            -1.302
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "powerNeedle": {
+          "position": [
+            -0.5,
+            -0.543,
+            -1.302
+          ],
+          "rotation": [
+            0,
+            0,
+            2.443460952792061,
+            "XYZ"
+          ]
+        },
+        "headingCard": {
+          "position": [
+            -0.273,
+            -0.543,
+            -1.306
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "attitudeRoll": {
+          "position": [
+            -0.273,
+            -0.324,
+            -1.3070000000000002
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "attitudePitch": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        }
+      }
+    },
+    {
+      "kind": "helicopter",
+      "exterior": {
+        "hash": "bb68c8174498bac152a0832ed8423e8d1f3b9fa30dc1d8bb95e3728a3e70406f",
+        "triangles": 7312,
+        "vertices": 21936,
+        "meshes": 6,
+        "boundsM": {
+          "min": [
+            -5.690000057220459,
+            2.98023217215615e-10,
+            -6.560000057220459
+          ],
+          "max": [
+            5.690000057220459,
+            4.730000019073486,
+            7.345307414531708
+          ],
+          "size": [
+            11.380000114440918,
+            4.730000018775463,
+            13.905307471752167
+          ]
+        }
+      },
+      "cockpit": {
+        "hash": "e9f49f39dcfecef8a58affa2378cdec8453025a53c3641d48f5b1d11b4c78d29",
+        "triangles": 4674,
+        "vertices": 14022,
+        "meshes": 11,
+        "boundsM": {
+          "min": [
+            -1.0199999809265137,
+            -1.2000000476837158,
+            -1.575900673866272
+          ],
+          "max": [
+            1.0199999809265137,
+            0.7365248799324036,
+            0.35999998450279236
+          ],
+          "size": [
+            2.0399999618530273,
+            1.9365249276161194,
+            1.9359006583690643
+          ]
+        }
+      },
+      "forwardAxis": "-Z",
+      "upAxis": "+Y",
+      "landingDatum": "Y=0",
+      "metadata": {
+        "dimensions": {
+          "length": 10.9,
+          "rotorDiameter": 11.4,
+          "height": 4.74
+        }
+      },
+      "propellers": [
+        {
+          "name": "Main rotor",
+          "position": [
+            0,
+            3.72,
+            -0.87
+          ],
+          "spinAxis": "y",
+          "spinRate": 35
+        },
+        {
+          "name": "Tail rotor",
+          "position": [
+            0.26,
+            3.13,
+            6.38
+          ],
+          "spinAxis": "x",
+          "spinRate": 80
+        }
+      ],
+      "stick": {
+        "position": [
+          -0.33,
+          -0.8,
+          -0.87
+        ],
+        "rotation": [
+          0,
+          0,
+          0,
+          "XYZ"
+        ]
+      },
+      "instruments": {
+        "airspeedNeedle": {
+          "position": [
+            -0.5,
+            -0.324,
+            -1.302
+          ],
+          "rotation": [
+            0,
+            0,
+            2.443460952792061,
+            "XYZ"
+          ]
+        },
+        "altimeterNeedle": {
+          "position": [
+            -0.046,
+            -0.324,
+            -1.302
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "verticalSpeedNeedle": {
+          "position": [
+            -0.046,
+            -0.543,
+            -1.302
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "powerNeedle": {
+          "position": [
+            -0.5,
+            -0.543,
+            -1.302
+          ],
+          "rotation": [
+            0,
+            0,
+            2.443460952792061,
+            "XYZ"
+          ]
+        },
+        "headingCard": {
+          "position": [
+            -0.273,
+            -0.543,
+            -1.306
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "attitudeRoll": {
+          "position": [
+            -0.273,
+            -0.324,
+            -1.3070000000000002
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        "attitudePitch": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        }
+      }
+    }
+  ],
+  "interfaces": {
+    "harbourForward": "+Z",
+    "playerAircraftForward": "-Z",
+    "boatCollision": {
+      "halfLengthM": 3.5,
+      "radiusM": 1.35,
+      "source": "lib/city/water-world.ts:canOccupy"
+    },
+    "aircraftProbeRadiusM": 0.85,
+    "aircraftProbesM": {
+      "seaplane": [
+        [
+          0,
+          1.6,
+          0
+        ],
+        [
+          0,
+          1.7,
+          -4
+        ],
+        [
+          7.1,
+          3,
+          0
+        ],
+        [
+          -7.1,
+          3,
+          0
+        ],
+        [
+          0,
+          2,
+          4
+        ]
+      ],
+      "helicopter": [
+        [
+          0,
+          1.8,
+          0
+        ],
+        [
+          5,
+          3.5,
+          0
+        ],
+        [
+          -5,
+          3.5,
+          0
+        ],
+        [
+          0,
+          3.5,
+          -5
+        ],
+        [
+          0,
+          3.5,
+          5
+        ],
+        [
+          0,
+          2,
+          6.4
+        ]
+      ]
+    },
+    "boatDynamics": "advanceBoat(state,input,delta,world), delta clamped 0..0.1 s, up to 120 Hz substeps; wave bob/propeller owned by BoatController.",
+    "flightDynamics": "FlightController owns fixed elapsed-time stepping, collision probes, propeller spinAxis/spinRate, rotorBlur, detached cockpit and disposal. No scene-clock multiplication."
+  },
+  "sourceHashes": {
+    "lib/city/assets/roadster.ts": "e3e25bba28d32df58cbd1b26c66fb5b7657eb04bd4ab9688156d770eb58436f0",
+    "lib/city/interiors.ts": "62f813f8798eaeaf79463b3200d2fea65bcf91da631e925bfbb55a166fdac93c",
+    "lib/city/seabus-layout.ts": "d40906fbb9b508633d77414b3461547165f2907f55469ed7eec3c2c4b0ffb2c1",
+    "lib/city/navigation.ts": "b55276e47e939028f50a3629149dfd6bba97527211deb46dce369c9d9fa4247e",
+    "lib/city/driver-camera.ts": "911765020382258030d2dc8f386cfc7dc1f720aab5d88bbf4c04ef93beb903d0",
+    "lib/city/assets/cockpits.ts": "b8aed3f6379dfdc9a5a1115382e36af3b17e7183a29dd1e7458a10ac4d2465fc",
+    "lib/city/harbour-models.ts": "3d494df8a5b214327dcdfb4facb1fe79aca27d22a410bf39a8ce11d91e26a68d",
+    "lib/city/harbour.ts": "b5c18dd4208a88be3a206a8e1b3a78df6e734b90be97e38adea895698428c1ab",
+    "lib/city/harbour-path.ts": "c1c9135952bb65177544b9dd166838d8b139e0ce3092e8eaa038ba3ed99a6ff2",
+    "lib/city/boat-controller.ts": "e64b57cee7ca233ede9fcdfc277d46aff3a98269d88b68052365e2ba0aff4d33",
+    "lib/city/boat-physics.ts": "6ce2413d9e082e1d17f0d40e1bc67ef48056b3240adb99b1b6fe25a62b6f2954",
+    "lib/city/water-world.ts": "d816c253b44be7825eb5f1f2c6e714214da9cc228e5da30f70350fbde6023cc5",
+    "lib/city/assets/aircraft-models.ts": "037549b49b722250eba675217aeaed6416fc648cc88b395b77cc595e58eae308",
+    "lib/city/flight-controller.ts": "b370862d99e7d03ed673f721ccf1b1789464a9987dcf704b9b778e92e0cd4d1f",
+    "lib/city/flight-state.ts": "fc29f6da8200dddded4daa570001f6e510075db1ea58a17ee7f4ef37f6fa2818",
+    "lib/city/flight-geometry.ts": "6eb749ed990d2190368fce5196e0824a4235953dc94c5fd9764d1cb494128750"
+  },
+  "nearViewVisualInspection": "not_run in runtime; geometry/source CPU audit only"
+}

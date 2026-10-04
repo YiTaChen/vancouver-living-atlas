@@ -1,0 +1,90 @@
+{
+  "status": "pass",
+  "blender": "4.3.2",
+  "renderEngine": "Cycles CPU",
+  "threads": 2,
+  "sourceReopenAndGLBReimport": [
+    {
+      "assetId": "lecture-chair-module",
+      "lod": 0,
+      "sourceReopened": true,
+      "glbReimported": true,
+      "objects": 2,
+      "UV": true,
+      "editableMeshObjects": 10,
+      "editableModifiers": 20,
+      "sourceSha256": "92277ea9c86bff64e2f137fa2947a34269884f1da5cd27478d2eda36f9ac13c5",
+      "sourceUnchanged": true,
+      "generatorInvoked": false
+    },
+    {
+      "assetId": "lecture-chair-module",
+      "lod": 1,
+      "sourceReopened": true,
+      "glbReimported": true,
+      "objects": 2,
+      "UV": true,
+      "editableMeshObjects": 8,
+      "editableModifiers": 0,
+      "sourceSha256": "2198c38825db36f3efaf60ea745c6ce178b18d268f87282f3a650bf7858b0b51",
+      "sourceUnchanged": true,
+      "generatorInvoked": false
+    },
+    {
+      "assetId": "admissions-counter-module",
+      "lod": 0,
+      "sourceReopened": true,
+      "glbReimported": true,
+      "objects": 2,
+      "UV": true,
+      "editableMeshObjects": 7,
+      "editableModifiers": 14,
+      "sourceSha256": "72b57e402f349f5e331a7c9074435bd5f144d113878d671ed991fab264987a34",
+      "sourceUnchanged": true,
+      "generatorInvoked": false
+    },
+    {
+      "assetId": "admissions-counter-module",
+      "lod": 1,
+      "sourceReopened": true,
+      "glbReimported": true,
+      "objects": 2,
+      "UV": true,
+      "editableMeshObjects": 5,
+      "editableModifiers": 0,
+      "sourceSha256": "881ec66107abeffdfbcf83de7e3fccfc13f4ac1c3c416f59ab6fa1ea9bb77554",
+      "sourceUnchanged": true,
+      "generatorInvoked": false
+    }
+  ],
+  "editPreservation": {
+    "status": "pass",
+    "edit": "Raise authored seat upper vertices +0.01 m; reopen edited blend; export current evaluated mesh; reimport GLB",
+    "beforeTopM": 0.44999999180436134,
+    "afterTopM": 0.4599999785423279,
+    "deltaM": 0.009999986737966537,
+    "originalSourceUnchanged": true,
+    "actualBatchRangeVerticesMeasured": true,
+    "reimportSeatRayHitM": 0.46000003814697266,
+    "zeroDrawSeatAnchor": true,
+    "editedGLBSha256": "5dc171e46ac4c4912be76f812b1282d2a3e817f5ab90e25198ec467e11cc794b",
+    "render": "qa/previews/edited-chair-reimport.png"
+  },
+  "artifactHashes": {
+    "source/lecture-chair-module.lod1.blend": "2198c38825db36f3efaf60ea745c6ce178b18d268f87282f3a650bf7858b0b51",
+    "source/admissions-counter-module.lod0.blend": "72b57e402f349f5e331a7c9074435bd5f144d113878d671ed991fab264987a34",
+    "source/admissions-counter-module.lod1.blend": "881ec66107abeffdfbcf83de7e3fccfc13f4ac1c3c416f59ab6fa1ea9bb77554",
+    "source/lecture-chair-module.lod0.blend": "92277ea9c86bff64e2f137fa2947a34269884f1da5cd27478d2eda36f9ac13c5",
+    "exports/admissions-counter-module.lod0.glb": "2574c655ae72fd1dee2e6fa167209df460322baab19af8cdccca2eec046ae59d",
+    "exports/admissions-counter-module.lod1.glb": "b8f5c416b7731b9f21754ac1ea4af955445ba9b4302bb38da495c29d63044474",
+    "exports/lecture-chair-module.lod1.glb": "10c37c52ef6d429c75a0284be7eee3bb37130a5250742baf93e74335f1f55ebb",
+    "exports/lecture-chair-module.lod0.glb": "3633495198af224eed3fe06b71c4a4ab80045078c01fb9b04f4414610ea44466"
+  },
+  "referencesM": [
+    1,
+    1.75,
+    1.81
+  ],
+  "newMaps": 0,
+  "scope": "Offline reimport images only; no WebGL/gameplay acceptance"
+}

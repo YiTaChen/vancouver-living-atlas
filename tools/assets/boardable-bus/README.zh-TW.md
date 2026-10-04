@@ -45,7 +45,7 @@ blender -b -t 2 --python tools/assets/boardable-bus/export.py -- --output /tmp/b
 
 ```sh
 blender -b -t 2 --python tools/assets/boardable-bus/build.py -- --output /tmp/boardable-bus-generated
-blender -b -t 2 --python tools/assets/boardable-bus/export.py -- --source /tmp/boardable-bus-generated/source -- --output /tmp/boardable-bus-generated/exports
+blender -b -t 2 --python tools/assets/boardable-bus/export.py -- --source /tmp/boardable-bus-generated/source --output /tmp/boardable-bus-generated/exports
 ```
 
 在原包內經明確修改來源、重匯出後重建成本／metadata 並驗證：

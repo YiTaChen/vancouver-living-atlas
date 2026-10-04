@@ -1,0 +1,52 @@
+{
+  "status": "pass",
+  "checks": [
+    {
+      "command": "node --test tools/assets/material-consumer-candidates/test-consumers.mjs",
+      "status": "pass"
+    },
+    {
+      "command": "node tools/assets/material-consumer-candidates/validate-consumers.mjs",
+      "status": "pass"
+    },
+    {
+      "command": "node tools/assets/material-consumer-candidates/validate-furniture.mjs",
+      "status": "pass"
+    }
+  ],
+  "commonContract": "pass",
+  "renderCoverage": {
+    "renders": 24,
+    "views": [
+      "front",
+      "side",
+      "back",
+      "top"
+    ],
+    "lighting": [
+      "clear",
+      "overcast",
+      "dusk",
+      "night"
+    ],
+    "lods": [
+      0,
+      1
+    ],
+    "contactSheetPixelVerification": "pass"
+  },
+  "staticMaterialBatching": {
+    "status": "pass",
+    "primitivesPerLOD": 2,
+    "exactComponentRanges": "pass",
+    "sourceGeometryUVNormalsMaterialsAndTransformsEquivalent": "pass",
+    "negativeTests": 7,
+    "evidence": "qa/static-batching.json"
+  },
+  "sourceAndLODCount": 4,
+  "newAssets": 2,
+  "newMaps": 0,
+  "sourceEditPreservation": "pass",
+  "runtime": "not_run",
+  "scope": "Offline consumer candidates, furniture source/export, source regression and shared map contracts only; no active PBR/gameplay/WebGL acceptance."
+}
