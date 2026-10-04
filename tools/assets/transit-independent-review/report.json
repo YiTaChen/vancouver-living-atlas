@@ -1,0 +1,2480 @@
+{
+  "schemaVersion": 1,
+  "documentKind": "independent-transit-audit-reference",
+  "status": "pass",
+  "reviewedAtUtc": "2026-10-04T00:23:13.822828+00:00",
+  "command": "PYTHONDONTWRITEBYTECODE=1 python tools/assets/transit-independent-review/audit.py",
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41"
+  },
+  "scope": "D01-D05 offline source/GLB/frame/clearance/batching/dependency handoff; not a model package or runtime acceptance",
+  "inputs": [
+    {
+      "path": "docs/AI_AGENT_DEVELOPMENT_BACKLOG.md",
+      "bytes": 52601,
+      "sha256": "3f8f36a8083a83d145826cddf3bf519b6a7f6909a8f7a032764519a44de4e0d4"
+    },
+    {
+      "path": "tools/assets/boardable-bus/batch_static.py",
+      "bytes": 7162,
+      "sha256": "a745cf589a3ed058ad939a48c36fa8e77a557b7626d7870098161e19b52ee5df"
+    },
+    {
+      "path": "tools/assets/boardable-bus/build.py",
+      "bytes": 15260,
+      "sha256": "ece727b57e4d1a609b8a330a044e5d2f9b91b4908983873272c564c4aa7c1d4d"
+    },
+    {
+      "path": "tools/assets/boardable-bus/export.py",
+      "bytes": 1265,
+      "sha256": "9c42d217bba22327a5ff91fc7b654df39bdaa4079c75fa00d0d952fe3a38c4cd"
+    },
+    {
+      "path": "tools/assets/boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+      "bytes": 173088,
+      "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+    },
+    {
+      "path": "tools/assets/boardable-bus/exports/city-bus-12m-exterior.lod1.glb",
+      "bytes": 137088,
+      "sha256": "a4ccbb6a4b2f032a4d950ee0883c51ebe1ecd314734b539c60aa5fd6c605b3f0"
+    },
+    {
+      "path": "tools/assets/boardable-bus/exports/city-bus-12m-exterior.lod2.glb",
+      "bytes": 22556,
+      "sha256": "36a7f8cfa1b3b53b8e212618e80523a7be3f7fd8e86bef98cf9c93f83bcfd948"
+    },
+    {
+      "path": "tools/assets/boardable-bus/exports/city-bus-12m-interior.lod0.glb",
+      "bytes": 342612,
+      "sha256": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+    },
+    {
+      "path": "tools/assets/boardable-bus/exports/city-bus-12m-interior.lod1.glb",
+      "bytes": 122468,
+      "sha256": "6ac509bee7a8eed10b04ae8c6de1b776087bb6a822c75846b5c4e258045819d5"
+    },
+    {
+      "path": "tools/assets/boardable-bus/finalize.py",
+      "bytes": 8386,
+      "sha256": "e3c685519b194a1066c7fc1554bc7f85abb6c4a09e68bf5fee146c67d2230b3a"
+    },
+    {
+      "path": "tools/assets/boardable-bus/manifest.json",
+      "bytes": 331287,
+      "sha256": "32a35e7fdaa0f82600f8d161212b952177fae8515ca8095b2d55be118503076e"
+    },
+    {
+      "path": "tools/assets/boardable-bus/metadata.py",
+      "bytes": 14620,
+      "sha256": "5a923a2c482bc877c48ec375e7b533f844c7d85e0668d92b0f4a48375df98f8e"
+    },
+    {
+      "path": "tools/assets/boardable-bus/qa/batching-review.json",
+      "bytes": 994,
+      "sha256": "ada61798ce4e495cd45a55118a8ea73f7f5e6b401d2df0e260ced9d9ede68f78"
+    },
+    {
+      "path": "tools/assets/boardable-bus/qa/blender-validation.json",
+      "bytes": 7767,
+      "sha256": "70977c7b7e38d1453ecd198357a6e248819914a052b736ef43a3df757bb7ecbf"
+    },
+    {
+      "path": "tools/assets/boardable-bus/qa/common-validation.json",
+      "bytes": 12574,
+      "sha256": "c6ed6f00401288ce1e2bb47c9e26b832dc388789343a5490c6f42c926a9f3037"
+    },
+    {
+      "path": "tools/assets/boardable-bus/qa/handoff.json",
+      "bytes": 6210,
+      "sha256": "5e4a0c96bb0815d24e59834522abb0a3eb58a7cac4db37a5ef65c522057c87b5"
+    },
+    {
+      "path": "tools/assets/boardable-bus/qa/inventory.json",
+      "bytes": 9774,
+      "sha256": "3454fad65cb51f3fb5291e822dc80f6b76f20d3ec210627c03323246ab367864"
+    },
+    {
+      "path": "tools/assets/boardable-bus/qa/measurements.json",
+      "bytes": 12845,
+      "sha256": "0f32e1f87da08bfaaff927766c276eac485884a034284103782b99099e2d5f96"
+    },
+    {
+      "path": "tools/assets/boardable-bus/qa/previews/index.json",
+      "bytes": 25208,
+      "sha256": "a2b0aa24caddfc285ba34de452be4fba75e1ff01350042bf6345117465c8b953"
+    },
+    {
+      "path": "tools/assets/boardable-bus/qa/validation.json",
+      "bytes": 4523,
+      "sha256": "5a46c93be499eb5648cd2a93c5dded2573fc7afb00cd415b7ee2efa23c777c1d"
+    },
+    {
+      "path": "tools/assets/boardable-bus/qa/visual-review.json",
+      "bytes": 1507,
+      "sha256": "f4ddccc4269bbca8cb10b4125c37cc52e2e81c3b962ccb05c1a09f3f511ee4a2"
+    },
+    {
+      "path": "tools/assets/boardable-bus/qa_blender.py",
+      "bytes": 16821,
+      "sha256": "77533622549dcc5456b58ff2e757c499d13a5af5cc9902664d24c55276f65e24"
+    },
+    {
+      "path": "tools/assets/boardable-bus/source/city-bus-12m-exterior.lod0.blend",
+      "bytes": 117046,
+      "sha256": "facb19080148b5839d835af2ce994cc50facbd2e1d414ce6428a6e4d13576d27"
+    },
+    {
+      "path": "tools/assets/boardable-bus/source/city-bus-12m-exterior.lod1.blend",
+      "bytes": 112707,
+      "sha256": "d9858acf335c4068831f4cd6b45d0464a51d85c22750ec57c1f29f2619b54ee9"
+    },
+    {
+      "path": "tools/assets/boardable-bus/source/city-bus-12m-exterior.lod2.blend",
+      "bytes": 93019,
+      "sha256": "2cb3c1433a2837172c27efa833b41b09cabe3e34ef790f8a9577867f56bec6a4"
+    },
+    {
+      "path": "tools/assets/boardable-bus/source/city-bus-12m-interior.lod0.blend",
+      "bytes": 117464,
+      "sha256": "8ad2cac5b11f479beac3ca19b16fc409e08c24f1ced5ee0a1b3e87120b130f1e"
+    },
+    {
+      "path": "tools/assets/boardable-bus/source/city-bus-12m-interior.lod1.blend",
+      "bytes": 112392,
+      "sha256": "f62a7aac9d42d63e0350a0b0fbd42f6c20603ac512ffc6477ba3ab7d9a2eb5fb"
+    },
+    {
+      "path": "tools/assets/boardable-bus/test_contract.py",
+      "bytes": 3796,
+      "sha256": "54dbedf80e00d32bb727df6c2c24705611a31182a60a3c9f1abf2545f32bbf75"
+    },
+    {
+      "path": "tools/assets/boardable-bus/validate.py",
+      "bytes": 19267,
+      "sha256": "73dc048bde6008ecd8eae0708c9ea6397e577cbb9aaa0a2499e3942c1bf0f55e"
+    },
+    {
+      "path": "tools/assets/boardable-metro/audit_batch.py",
+      "bytes": 2819,
+      "sha256": "a0c70cf5a7cde954abe08221fc2661fe041e14e6932bd2c4fc1ec73e49189023"
+    },
+    {
+      "path": "tools/assets/boardable-metro/audit_blender.py",
+      "bytes": 5392,
+      "sha256": "ec25483787ac7137a467360c6f1221111a8bd7881b5f993791690b9b1b1c8c97"
+    },
+    {
+      "path": "tools/assets/boardable-metro/batch_static.py",
+      "bytes": 7243,
+      "sha256": "90ae879dc0f2d580f68a36e2dc623194031626916074ee30e6fd17675648cd13"
+    },
+    {
+      "path": "tools/assets/boardable-metro/build.py",
+      "bytes": 10928,
+      "sha256": "fd627c4d060877e1197a84553e93efda3540593979e888d8e4343a7abd094249"
+    },
+    {
+      "path": "tools/assets/boardable-metro/contract.py",
+      "bytes": 16463,
+      "sha256": "cd9dcd000790ac78037e679faef95ba34de2cabe84f12903496c011b59c2eec1"
+    },
+    {
+      "path": "tools/assets/boardable-metro/export.py",
+      "bytes": 1813,
+      "sha256": "ed805e81824bbc3c622488fd5ba0fd54ba57fc43c8aabb913088d39b02d05db6"
+    },
+    {
+      "path": "tools/assets/boardable-metro/exports/expo-metro-lead-exterior.lod0.glb",
+      "bytes": 231308,
+      "sha256": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3"
+    },
+    {
+      "path": "tools/assets/boardable-metro/exports/expo-metro-lead-exterior.lod1.glb",
+      "bytes": 200740,
+      "sha256": "04601a4b007e4c37b8ca25f0ffc0de1b12b3bb6dec4bc34b540b31458e17a502"
+    },
+    {
+      "path": "tools/assets/boardable-metro/exports/expo-metro-lead-exterior.lod2.glb",
+      "bytes": 37084,
+      "sha256": "6bc8efd804f341250845b5ab122bc2215a1e5bbbbfd65953add8d222a48a6fd6"
+    },
+    {
+      "path": "tools/assets/boardable-metro/exports/expo-metro-middle-exterior.lod0.glb",
+      "bytes": 231288,
+      "sha256": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498"
+    },
+    {
+      "path": "tools/assets/boardable-metro/exports/expo-metro-middle-exterior.lod1.glb",
+      "bytes": 200716,
+      "sha256": "72024af0b12eff31f3070f38b97cf0de23205b630f9f1bf2d3abfd9098cd82fc"
+    },
+    {
+      "path": "tools/assets/boardable-metro/exports/expo-metro-middle-exterior.lod2.glb",
+      "bytes": 37152,
+      "sha256": "bf2a04515b8c9478a982d3875b47dafac50884dd66a3103c9ae8fd4a182ed92c"
+    },
+    {
+      "path": "tools/assets/boardable-metro/exports/expo-metro-shared-interior.lod0.glb",
+      "bytes": 106616,
+      "sha256": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+    },
+    {
+      "path": "tools/assets/boardable-metro/exports/expo-metro-shared-interior.lod1.glb",
+      "bytes": 77956,
+      "sha256": "79cc69b436c7c40dcc21feee9218e4bf3156af1a18494080983a17183167e52e"
+    },
+    {
+      "path": "tools/assets/boardable-metro/exports/expo-metro-tail-exterior.lod0.glb",
+      "bytes": 231308,
+      "sha256": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95"
+    },
+    {
+      "path": "tools/assets/boardable-metro/exports/expo-metro-tail-exterior.lod1.glb",
+      "bytes": 200736,
+      "sha256": "71697569e0d0e85a96de0f11f4ab97750c4b39678977eeefe7eebcfb51cccc1e"
+    },
+    {
+      "path": "tools/assets/boardable-metro/exports/expo-metro-tail-exterior.lod2.glb",
+      "bytes": 37084,
+      "sha256": "27517d3ddd0195b3c18d1444f93b64a9e55b10c206f010d3a17397c47d370f82"
+    },
+    {
+      "path": "tools/assets/boardable-metro/finalize.py",
+      "bytes": 8768,
+      "sha256": "c887c8fa85c1a2c65753d15ab3f9b49fd909aafa0eebd180ddf558aad85ccf62"
+    },
+    {
+      "path": "tools/assets/boardable-metro/manifest.json",
+      "bytes": 349072,
+      "sha256": "85ae667daea268564b2dc4e2ee8e671b4d67c3fc865dd9178d38add5b4751f79"
+    },
+    {
+      "path": "tools/assets/boardable-metro/qa/common-validation.json",
+      "bytes": 21716,
+      "sha256": "34c6dd036c0ff7b1d6890406d40a8c5b6518cfb24ed184bccc1d45ebe5e32be4"
+    },
+    {
+      "path": "tools/assets/boardable-metro/qa/handoff.json",
+      "bytes": 36030,
+      "sha256": "c070a50af597d010847714e7501dc12930f3d08f2462d0661f9952a824ba9216"
+    },
+    {
+      "path": "tools/assets/boardable-metro/qa/measurements.json",
+      "bytes": 23919,
+      "sha256": "3c10717531b1c434989b98f6b55374811d447b503df367d827e2d53223389fe4"
+    },
+    {
+      "path": "tools/assets/boardable-metro/qa/render-report.json",
+      "bytes": 106369,
+      "sha256": "1c3c02753ae9ff1fb3a65211396e27a998e4552f21eaab3a8c9fca8d81be80b0"
+    },
+    {
+      "path": "tools/assets/boardable-metro/qa/source-roundtrip.json",
+      "bytes": 32620,
+      "sha256": "4772d20ac4160ffd55678cb32fc51e7fe003a30b64c5237c7ad7a1bfbbdba8c1"
+    },
+    {
+      "path": "tools/assets/boardable-metro/qa/static-batching.json",
+      "bytes": 21293,
+      "sha256": "8f666a6c987e01499872e458662b472c0e02766f4c98cc3efb1ae23221eb4d8a"
+    },
+    {
+      "path": "tools/assets/boardable-metro/qa/validation.json",
+      "bytes": 4780,
+      "sha256": "474c171e10393bf9d476576ba0a67d357b048f5a4e4525c2d3c47dcef014b7bf"
+    },
+    {
+      "path": "tools/assets/boardable-metro/qa/visual-review.json",
+      "bytes": 4818,
+      "sha256": "437cd286b178ee95ef868c54671698bef29974ced6c126b10bcc22e5dc9a8be1"
+    },
+    {
+      "path": "tools/assets/boardable-metro/render_previews.py",
+      "bytes": 7290,
+      "sha256": "6cb8aabf3730340c1748b5f274c5babee366c592db76ff8f63ba30dea7186fb7"
+    },
+    {
+      "path": "tools/assets/boardable-metro/source/expo-metro-lead-exterior.lod0.blend",
+      "bytes": 110884,
+      "sha256": "4b1ac6d4f63b3d4a5139093ce08fe9c987082616849a2e2a5318f609539443fc"
+    },
+    {
+      "path": "tools/assets/boardable-metro/source/expo-metro-lead-exterior.lod1.blend",
+      "bytes": 108568,
+      "sha256": "f435bee45eea53bf38ed61c8ba137e216ab4f7db1fc02b65dc7668feb77a15fa"
+    },
+    {
+      "path": "tools/assets/boardable-metro/source/expo-metro-lead-exterior.lod2.blend",
+      "bytes": 94162,
+      "sha256": "8e3f6592905025062a355165863827da12b331d54549d53a8ec5ecf9b36b4f9e"
+    },
+    {
+      "path": "tools/assets/boardable-metro/source/expo-metro-middle-exterior.lod0.blend",
+      "bytes": 109923,
+      "sha256": "dde3c76999a1ad55f6212aff3d4eda3a370853469c2bcfcd55efaccfd0b66b7c"
+    },
+    {
+      "path": "tools/assets/boardable-metro/source/expo-metro-middle-exterior.lod1.blend",
+      "bytes": 107413,
+      "sha256": "96e7913920801d302405f16333d32de4378c4927a4a645769eae4665ceb55d8d"
+    },
+    {
+      "path": "tools/assets/boardable-metro/source/expo-metro-middle-exterior.lod2.blend",
+      "bytes": 94121,
+      "sha256": "05a5ea69054f45197e36506b2abf14e8ec506472fb44701e05b44078c79aba11"
+    },
+    {
+      "path": "tools/assets/boardable-metro/source/expo-metro-shared-interior.lod0.blend",
+      "bytes": 103151,
+      "sha256": "b856fb70b0b53cb09666e19cad1a2c3387d7a93b36c3c817e84c33d0e70142af"
+    },
+    {
+      "path": "tools/assets/boardable-metro/source/expo-metro-shared-interior.lod1.blend",
+      "bytes": 100674,
+      "sha256": "c23acc00c53aeeedfa88051c9042db57cd62c9f766079f26eb83bedf963e18c1"
+    },
+    {
+      "path": "tools/assets/boardable-metro/source/expo-metro-tail-exterior.lod0.blend",
+      "bytes": 112037,
+      "sha256": "00060b4aa01dbda74228b65d69e049d5efce85a705f58f968c4f0c893415ebcd"
+    },
+    {
+      "path": "tools/assets/boardable-metro/source/expo-metro-tail-exterior.lod1.blend",
+      "bytes": 108354,
+      "sha256": "d4a0f18cc6a0e9a33b677e02a377f1ba0bdfab0f04d3ada0f234de2317c1b06b"
+    },
+    {
+      "path": "tools/assets/boardable-metro/source/expo-metro-tail-exterior.lod2.blend",
+      "bytes": 94237,
+      "sha256": "85863f52190f58558d66d2aade90e15a97357b7943be8a5a41a55126c0b929b3"
+    },
+    {
+      "path": "tools/assets/boardable-metro/test_validate.py",
+      "bytes": 2896,
+      "sha256": "9e43c612a0f5f14a851b3443e5a0e233be8d8cd9c3d6a54306c6ce982b714ecc"
+    },
+    {
+      "path": "tools/assets/boardable-metro/validate.py",
+      "bytes": 21462,
+      "sha256": "b414d12c872bf30d440f2001c5ddc58692edbe40b676ce6e9ef0af024e22a637"
+    },
+    {
+      "path": "tools/assets/package-contract/validate.py",
+      "bytes": 10710,
+      "sha256": "e9cd22ea3860e1b8193b2a127bd31b0c3941c1a2fc774a63067486082ade1465"
+    },
+    {
+      "path": "tools/assets/street-furniture-expansion/exports/transit-shelter.lod0.glb",
+      "bytes": 228404,
+      "sha256": "6647785c496a016ee153feba97993705a10373854d20938f136a5abb43d8123c"
+    },
+    {
+      "path": "tools/assets/street-furniture-expansion/exports/transit-shelter.lod1.glb",
+      "bytes": 63844,
+      "sha256": "a43328e71a7fa7380c335d4daa73e8562d1de7f33e1698e37ce2289ea676dd02"
+    },
+    {
+      "path": "tools/assets/street-furniture-expansion/manifest.json",
+      "bytes": 63816,
+      "sha256": "a047b465f83a6d2604485895a1dfb66ec4d50c192838afed0d92fc2c82cdcacb"
+    },
+    {
+      "path": "tools/assets/street-furniture-expansion/source/transit-shelter.lod0.blend",
+      "bytes": 120542,
+      "sha256": "c78d1cd15d9d04076eff2488bb51d09307d7c901a37b30c43a249634812f87fc"
+    },
+    {
+      "path": "tools/assets/street-furniture-expansion/source/transit-shelter.lod1.blend",
+      "bytes": 104632,
+      "sha256": "02d6f6e27c7429c6346cee11a3a16d89a6d0e1dbc9332d056a3636f89025a6b4"
+    },
+    {
+      "path": "tools/assets/transit-independent-review/README.md",
+      "bytes": 4629,
+      "sha256": "534e2458315029b35d49831cfc0b8cb35f8545bca4dcfa744225c4466ae55d71"
+    },
+    {
+      "path": "tools/assets/transit-independent-review/audit.py",
+      "bytes": 28333,
+      "sha256": "976d5e5052fe8476f352d1bbd5ee28314bd85461dd71f230dd557fa20fbf1bb0"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/audit_batch.py",
+      "bytes": 4804,
+      "sha256": "151e426bf9fafcfecfb672b239e038b0583f716eb9a6a7f80aeb463ea63a4397"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/audit_blender.py",
+      "bytes": 4770,
+      "sha256": "7e1e342ecf5ab5e2aaffeae4023b1d27c776fabdea36be3779ecccf07242e223"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/audit_thresholds.py",
+      "bytes": 7106,
+      "sha256": "03ec42580c1c37c677c96752feec9bb32634d0d2ee20270a10bb1ef307cafa79"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/batch_static.py",
+      "bytes": 7317,
+      "sha256": "034f8ec37e296b41893e54532290d513a61fd6b40e7d5f1b348aadc18c460a2a"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/build.py",
+      "bytes": 7143,
+      "sha256": "2e38bb51f8dea17195f37ea48a77eb2e78342f970866ac35a9563f854f91b08c"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/contract.py",
+      "bytes": 21463,
+      "sha256": "ba1580ae5517cf53c9b1b5ed9ab4b78415c3148a2a20994cea2f456cf0b6439c"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/export.py",
+      "bytes": 726,
+      "sha256": "30b5551a11fbb626fe5d4475d50a3363ae674451c30405cc03b1021f51dab8bb"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/exports/bus-stop-pole.lod0.glb",
+      "bytes": 52436,
+      "sha256": "a6de3fcb597ef01aad772ed81693e5d0ffb94f565090052db09db8b8a103226c"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/exports/bus-stop-pole.lod1.glb",
+      "bytes": 20468,
+      "sha256": "bccd02414db637a63aebdd00e1903c47e2453d4170d0a0d96f57218ab369bf02"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/exports/bus-threshold-deck.lod0.glb",
+      "bytes": 10728,
+      "sha256": "0d4394f81ad7c417e90fb0ddda2a3b5199f71055ef09b07bd3602a9590af5d2e"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/exports/bus-threshold-deck.lod1.glb",
+      "bytes": 4420,
+      "sha256": "f8c29798b4bed7e1c9e67ae1beeb554692e6f762fb8971e9786758492f0f13ba"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/exports/metro-threshold-deck.lod0.glb",
+      "bytes": 10788,
+      "sha256": "075ceb2ec81ad96c0df75134797c7c9d42119d58cdab65c7d4fafb77532c9767"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/exports/metro-threshold-deck.lod1.glb",
+      "bytes": 4468,
+      "sha256": "c461a0a4863c1619161775e95828a5cd1897ce21af8fd649ae24aed6fc04cce2"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/exports/platform-edge-2m.lod0.glb",
+      "bytes": 69624,
+      "sha256": "db3cd3905ee077b05883a6f74d1b1aae81c04d986742874251943b8dee9f13e8"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/exports/platform-edge-2m.lod1.glb",
+      "bytes": 9836,
+      "sha256": "345e1a8443a68f008ec7d4aa648e25c086d718e22c25f708e8e762d66d566818"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/exports/station-guidance-sign.lod0.glb",
+      "bytes": 64056,
+      "sha256": "03d2a972361986246a15283e64925f2a0a6e80aeb9df22e1df03f50d17ee3ef9"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/exports/station-guidance-sign.lod1.glb",
+      "bytes": 20228,
+      "sha256": "1a2032a474ba1eacbf6b7df64cca0d52b76e724e3b2d2c9e7f60b8f0ac1ae93b"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/finalize.py",
+      "bytes": 4533,
+      "sha256": "084db29e21282ec475e5bd05f35586e141e24f9ac33d0dbbbbf1276f326e018b"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/manifest.json",
+      "bytes": 36846,
+      "sha256": "5c3c245f5c5df9e8f1bcd70616c383e3223456e25060b2d40c2019b776700e31"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/qa/blender-validation.json",
+      "bytes": 9305,
+      "sha256": "df6c6dc4f355d3e8fff0bacf3fdb13003d116766a61b8274783f1c7928f38d58"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/qa/common-validation.json",
+      "bytes": 12526,
+      "sha256": "016de8f07420b5e7b1f523ed30d5ac6cc7268e491c92ad67669095e0166a4ded"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/qa/handoff.json",
+      "bytes": 2627,
+      "sha256": "95234a5aa042566d187d7c77a2806e62705700a6f7a66cd0fa5dfb39ebaa5706"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/qa/measurements.json",
+      "bytes": 12580,
+      "sha256": "b2f482ae9112360195e2f53de6452e2e0db00561896e78b05fafdbdb12de2129"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/qa/previews/index.json",
+      "bytes": 19247,
+      "sha256": "8c6f89fcf5ef5740b521a59746956f8bff71e114f380360acb7c0adc4d6d36d0"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/qa/source-audit.json",
+      "bytes": 2571,
+      "sha256": "94ea4bec45ea798801c854dada7f0b4b28e56142701f1166b64cac43129f15e1"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/qa/source-edit-proof.json",
+      "bytes": 643,
+      "sha256": "f22c054beee0f3909bece3a4ff1b7d9a61b7de955743784edc35c696bc5e554e"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/qa/static-batching.json",
+      "bytes": 39817,
+      "sha256": "298908c74d37f8fb11e746670ade7cbb98e1d94f200e4774835cb15c3cc1f2fa"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/qa/stored-contact-validation.json",
+      "bytes": 18399,
+      "sha256": "e0c1d3b4f730caf0525e8f16c0c295a1aba40273c2ad2c88c1e1b86314109b2b"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/qa/stored-pose-change.json",
+      "bytes": 748,
+      "sha256": "be200d1da5b1b55e8e147145802ae990e3a58868cc346a60de13f4d60d109ccb"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/qa/threshold-validation.json",
+      "bytes": 36615,
+      "sha256": "3ded96421ba01ed3555b5155d49e9f69e6e13dc7d44a0eefc6b534c1694660df"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/qa/validation.json",
+      "bytes": 2704,
+      "sha256": "70468927092690a11aae83f43b85acab7af324e64d68fc903eba7fb5e243fa27"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/qa/visual-review.json",
+      "bytes": 1679,
+      "sha256": "c15ea236a800b52bc90f0ddbb70c78e482f2a064c56e39a074cf1562c2538893"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/render_previews.py",
+      "bytes": 9291,
+      "sha256": "04189dab3376e24e62d664c7afafc663476ba11ee5305194c6880ad5dc01c65d"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/source/bus-stop-pole.lod0.blend",
+      "bytes": 93595,
+      "sha256": "b5ece54480b613a6a04dfdc6fa45717e69bf614cdd7f4491ef46333975e55f06"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/source/bus-stop-pole.lod1.blend",
+      "bytes": 91916,
+      "sha256": "9763adc9823c69a6d7dc0906db1fce1081cb3a7de65c415a1baea089d78100b5"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/source/bus-threshold-deck.lod0.blend",
+      "bytes": 88844,
+      "sha256": "23e8e5e2b3d19ee6792b8b53186b43aa91de02a09e3c783349678f8eb0fd190c"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/source/bus-threshold-deck.lod1.blend",
+      "bytes": 86629,
+      "sha256": "a179cfb53ea735e816503a0e27f738ccf264fd5ba0821983be53b528961f812d"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/source/metro-threshold-deck.lod0.blend",
+      "bytes": 89324,
+      "sha256": "5d1884605c1cabe464d7f0161fdfd033672d71bfe74e1530a24f90d319d62650"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/source/metro-threshold-deck.lod1.blend",
+      "bytes": 86653,
+      "sha256": "ca6470ef6eaeb335f1b54a8cf0c25041f44a9873f4c3ad4670309af4e386febc"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/source/platform-edge-2m.lod0.blend",
+      "bytes": 97264,
+      "sha256": "fd946ac2dc4a1c6145bd989ecc0e7e78e34a7c4f71fbddf0bfbaf1e7e581beca"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/source/platform-edge-2m.lod1.blend",
+      "bytes": 89008,
+      "sha256": "f49a309e2317cf39cc38fa0e15981b03644cd062d811fa94c092d7d7844b7f49"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/source/station-guidance-sign.lod0.blend",
+      "bytes": 92393,
+      "sha256": "d2dcba508f6a7e67bec7b988b27ccf773b11d115e9e97844bcfb085dcf109faf"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/source/station-guidance-sign.lod1.blend",
+      "bytes": 92002,
+      "sha256": "108a81651eb901d9dd8b041f9ba98f9290c4c220554f630b747d9550046bc898"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/station-layout.json",
+      "bytes": 148510,
+      "sha256": "b5719d5e714bd0658defe1da6c811ab8b73cfa844641ccf628e5bfa4c2cac701"
+    },
+    {
+      "path": "tools/assets/transit-station-spaces/validate.py",
+      "bytes": 12315,
+      "sha256": "bab7728ea2bf1cf4fc63fe165257d66c8b8f1a75982621066c1799173b9d0391"
+    }
+  ],
+  "dependencies": [
+    {
+      "packageId": "boardable-bus",
+      "manifest": "tools/assets/boardable-bus/manifest.json",
+      "sha256": "32a35e7fdaa0f82600f8d161212b952177fae8515ca8095b2d55be118503076e",
+      "matchesStationSnapshot": true
+    },
+    {
+      "packageId": "boardable-metro",
+      "manifest": "tools/assets/boardable-metro/manifest.json",
+      "sha256": "85ae667daea268564b2dc4e2ee8e671b4d67c3fc865dd9178d38add5b4751f79",
+      "matchesStationSnapshot": true
+    },
+    {
+      "packageId": "street-furniture-expansion",
+      "manifest": "tools/assets/street-furniture-expansion/manifest.json",
+      "sha256": "a047b465f83a6d2604485895a1dfb66ec4d50c192838afed0d92fc2c82cdcacb",
+      "matchesStationSnapshot": true
+    }
+  ],
+  "inputsUnchangedDuringRun": true,
+  "existingPackageValidators": [
+    {
+      "check": "common package contracts",
+      "status": "pass",
+      "exitCode": 0,
+      "stdout": "{\"packageId\": \"boardable-bus\", \"status\": \"pass\", \"glbCount\": 5}\n{\"packageId\": \"boardable-metro\", \"status\": \"pass\", \"glbCount\": 11}\n{\"packageId\": \"transit-station-spaces\", \"status\": \"pass\", \"glbCount\": 10}",
+      "stderr": ""
+    },
+    {
+      "check": "bus validator, in-memory reports",
+      "status": "pass",
+      "exitCode": 0,
+      "stdout": "{\"status\": \"pass\", \"checkCount\": 11, \"packageWrites\": \"diverted to memory\"}",
+      "stderr": ""
+    },
+    {
+      "check": "bus regressions",
+      "status": "pass",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "..........\n----------------------------------------------------------------------\nRan 10 tests in 0.201s\n\nOK"
+    },
+    {
+      "check": "metro regressions and geometry validator",
+      "status": "pass",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "........\n----------------------------------------------------------------------\nRan 8 tests in 5.737s\n\nOK"
+    },
+    {
+      "check": "station validator, in-memory reports",
+      "status": "pass",
+      "exitCode": 0,
+      "stdout": "{\"status\": \"pass\", \"negativeControls\": 9, \"packageWrites\": \"diverted to memory\"}",
+      "stderr": ""
+    }
+  ],
+  "independentVehicleChecks": [
+    {
+      "packageId": "boardable-bus",
+      "vehicleId": "city-bus-12m",
+      "lod": 0,
+      "status": "pass",
+      "openDoorwayRays": 578,
+      "seatChecks": [
+        {
+          "seatId": "seat-01",
+          "actualFlatTopSizeXZ_M": [
+            0.424000084400177,
+            0.40400028228759766
+          ],
+          "actualTopHeightM": 0.8100000023841858,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2850005938344916,
+          "nearestComponent": "seat-01-back"
+        },
+        {
+          "seatId": "seat-02",
+          "actualFlatTopSizeXZ_M": [
+            0.424000084400177,
+            0.40400028228759766
+          ],
+          "actualTopHeightM": 0.8100000023841858,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2850005938344916,
+          "nearestComponent": "seat-02-back"
+        },
+        {
+          "seatId": "seat-03",
+          "actualFlatTopSizeXZ_M": [
+            0.424000084400177,
+            0.40400004386901855
+          ],
+          "actualTopHeightM": 0.8100000023841858,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2850007973903494,
+          "nearestComponent": "seat-03-back"
+        },
+        {
+          "seatId": "seat-04",
+          "actualFlatTopSizeXZ_M": [
+            0.424000084400177,
+            0.40400004386901855
+          ],
+          "actualTopHeightM": 0.8100000023841858,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2850007973903494,
+          "nearestComponent": "seat-04-back"
+        },
+        {
+          "seatId": "seat-05",
+          "actualFlatTopSizeXZ_M": [
+            0.424000084400177,
+            0.40400004386901855
+          ],
+          "actualTopHeightM": 0.8100000023841858,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2850006786493969,
+          "nearestComponent": "seat-05-back"
+        },
+        {
+          "seatId": "seat-06",
+          "actualFlatTopSizeXZ_M": [
+            0.424000084400177,
+            0.40400004386901855
+          ],
+          "actualTopHeightM": 0.8100000023841858,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.28500067864938644,
+          "nearestComponent": "seat-06-back"
+        },
+        {
+          "seatId": "seat-07",
+          "actualFlatTopSizeXZ_M": [
+            0.424000084400177,
+            0.40400001406669617
+          ],
+          "actualTopHeightM": 0.8100000023841858,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2850006722882935,
+          "nearestComponent": "seat-07-back"
+        },
+        {
+          "seatId": "seat-08",
+          "actualFlatTopSizeXZ_M": [
+            0.424000084400177,
+            0.40400004386901855
+          ],
+          "actualTopHeightM": 0.8100000023841858,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.28500069561240227,
+          "nearestComponent": "seat-08-back"
+        },
+        {
+          "seatId": "seat-09",
+          "actualFlatTopSizeXZ_M": [
+            0.424000084400177,
+            0.403999924659729
+          ],
+          "actualTopHeightM": 0.8100000023841858,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.28500072953838057,
+          "nearestComponent": "seat-09-back"
+        },
+        {
+          "seatId": "seat-10",
+          "actualFlatTopSizeXZ_M": [
+            0.424000084400177,
+            0.403999924659729
+          ],
+          "actualTopHeightM": 0.8100000023841858,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.28500072953838057,
+          "nearestComponent": "seat-10-back"
+        }
+      ],
+      "wheelChecks": [
+        {
+          "nodeId": "wheel-rear-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.9800000190734863
+        },
+        {
+          "nodeId": "wheel-rear-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.9800000190734863
+        },
+        {
+          "nodeId": "wheel-front-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.9800000190734863
+        },
+        {
+          "nodeId": "wheel-front-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.9800000190734863
+        }
+      ],
+      "floorCentroidRays": 14,
+      "cabinHeadroomRays": 123,
+      "minimumSampledCabinHeadroomM": 2.2399999046325685,
+      "exteriorPrimitives": 21,
+      "interiorPrimitives": 7
+    },
+    {
+      "packageId": "boardable-bus",
+      "vehicleId": "city-bus-12m",
+      "lod": 1,
+      "status": "pass",
+      "openDoorwayRays": 578,
+      "seatChecks": [
+        {
+          "seatId": "seat-01",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.4399995803833008
+          ],
+          "actualTopHeightM": 0.8100000023841858,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2775450484337043,
+          "nearestComponent": "seat-01-back"
+        },
+        {
+          "seatId": "seat-02",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.4399995803833008
+          ],
+          "actualTopHeightM": 0.8100000023841858,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2775450484337043,
+          "nearestComponent": "seat-02-back"
+        },
+        {
+          "seatId": "seat-03",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.4399998188018799
+          ],
+          "actualTopHeightM": 0.8100000023841858,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.27754525202312036,
+          "nearestComponent": "seat-03-back"
+        },
+        {
+          "seatId": "seat-04",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.4399998188018799
+          ],
+          "actualTopHeightM": 0.8100000023841858,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.27754525202312036,
+          "nearestComponent": "seat-04-back"
+        },
+        {
+          "seatId": "seat-05",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.43999993801116943
+          ],
+          "actualTopHeightM": 0.8100000023841858,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2775450484337037,
+          "nearestComponent": "seat-05-back"
+        },
+        {
+          "seatId": "seat-06",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.43999993801116943
+          ],
+          "actualTopHeightM": 0.8100000023841858,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2775450484337037,
+          "nearestComponent": "seat-06-back"
+        },
+        {
+          "seatId": "seat-07",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.4400000274181366
+          ],
+          "actualTopHeightM": 0.8100000023841858,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2775450314679257,
+          "nearestComponent": "seat-07-back"
+        },
+        {
+          "seatId": "seat-08",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.440000057220459
+          ],
+          "actualTopHeightM": 0.8100000023841858,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.27754506539948287,
+          "nearestComponent": "seat-08-back"
+        },
+        {
+          "seatId": "seat-09",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.440000057220459
+          ],
+          "actualTopHeightM": 0.8100000023841858,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2775450993310442,
+          "nearestComponent": "seat-09-back"
+        },
+        {
+          "seatId": "seat-10",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.440000057220459
+          ],
+          "actualTopHeightM": 0.8100000023841858,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2775450993310442,
+          "nearestComponent": "seat-10-back"
+        }
+      ],
+      "wheelChecks": [
+        {
+          "nodeId": "wheel-rear-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.9800000190734863
+        },
+        {
+          "nodeId": "wheel-rear-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.9800000190734863
+        },
+        {
+          "nodeId": "wheel-front-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.9800000190734863
+        },
+        {
+          "nodeId": "wheel-front-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.9800000190734863
+        }
+      ],
+      "floorCentroidRays": 14,
+      "cabinHeadroomRays": 123,
+      "minimumSampledCabinHeadroomM": 2.2399999046325685,
+      "exteriorPrimitives": 21,
+      "interiorPrimitives": 7
+    },
+    {
+      "packageId": "boardable-metro",
+      "vehicleId": "expo-metro-lead",
+      "lod": 0,
+      "status": "pass",
+      "openDoorwayRays": 1734,
+      "seatChecks": [
+        {
+          "seatId": "seat-right-01",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-01"
+        },
+        {
+          "seatId": "seat-right-02",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.24336952548318325,
+          "nearestComponent": "handrails"
+        },
+        {
+          "seatId": "seat-right-03",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-03"
+        },
+        {
+          "seatId": "seat-right-04",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-04"
+        },
+        {
+          "seatId": "seat-right-05",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.24336957470064632,
+          "nearestComponent": "handrails"
+        },
+        {
+          "seatId": "seat-right-06",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-06"
+        },
+        {
+          "seatId": "seat-left-01",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-01"
+        },
+        {
+          "seatId": "seat-left-02",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.24336944070540423,
+          "nearestComponent": "handrails"
+        },
+        {
+          "seatId": "seat-left-03",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-03"
+        },
+        {
+          "seatId": "seat-left-04",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-04"
+        },
+        {
+          "seatId": "seat-left-05",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.24336948992906743,
+          "nearestComponent": "handrails"
+        },
+        {
+          "seatId": "seat-left-06",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-06"
+        }
+      ],
+      "wheelChecks": [
+        {
+          "nodeId": "wheel-rear-rear-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-rear-rear-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-rear-front-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-rear-front-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-front-rear-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-front-rear-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-front-front-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-front-front-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        }
+      ],
+      "floorCentroidRays": 16,
+      "cabinHeadroomRays": 123,
+      "minimumSampledCabinHeadroomM": 2.1600001335144037,
+      "exteriorPrimitives": 39,
+      "interiorPrimitives": 6
+    },
+    {
+      "packageId": "boardable-metro",
+      "vehicleId": "expo-metro-lead",
+      "lod": 1,
+      "status": "pass",
+      "openDoorwayRays": 1734,
+      "seatChecks": [
+        {
+          "seatId": "seat-right-01",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-01"
+        },
+        {
+          "seatId": "seat-right-02",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-02"
+        },
+        {
+          "seatId": "seat-right-03",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-03"
+        },
+        {
+          "seatId": "seat-right-04",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-04"
+        },
+        {
+          "seatId": "seat-right-05",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-05"
+        },
+        {
+          "seatId": "seat-right-06",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-06"
+        },
+        {
+          "seatId": "seat-left-01",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-01"
+        },
+        {
+          "seatId": "seat-left-02",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-02"
+        },
+        {
+          "seatId": "seat-left-03",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-03"
+        },
+        {
+          "seatId": "seat-left-04",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-04"
+        },
+        {
+          "seatId": "seat-left-05",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-05"
+        },
+        {
+          "seatId": "seat-left-06",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-06"
+        }
+      ],
+      "wheelChecks": [
+        {
+          "nodeId": "wheel-rear-rear-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-rear-rear-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-rear-front-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-rear-front-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-front-rear-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-front-rear-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-front-front-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-front-front-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        }
+      ],
+      "floorCentroidRays": 16,
+      "cabinHeadroomRays": 123,
+      "minimumSampledCabinHeadroomM": 2.1600001335144037,
+      "exteriorPrimitives": 39,
+      "interiorPrimitives": 6
+    },
+    {
+      "packageId": "boardable-metro",
+      "vehicleId": "expo-metro-middle",
+      "lod": 0,
+      "status": "pass",
+      "openDoorwayRays": 1734,
+      "seatChecks": [
+        {
+          "seatId": "seat-right-01",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-01"
+        },
+        {
+          "seatId": "seat-right-02",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.24336952548318325,
+          "nearestComponent": "handrails"
+        },
+        {
+          "seatId": "seat-right-03",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-03"
+        },
+        {
+          "seatId": "seat-right-04",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-04"
+        },
+        {
+          "seatId": "seat-right-05",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.24336957470064632,
+          "nearestComponent": "handrails"
+        },
+        {
+          "seatId": "seat-right-06",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-06"
+        },
+        {
+          "seatId": "seat-left-01",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-01"
+        },
+        {
+          "seatId": "seat-left-02",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.24336944070540423,
+          "nearestComponent": "handrails"
+        },
+        {
+          "seatId": "seat-left-03",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-03"
+        },
+        {
+          "seatId": "seat-left-04",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-04"
+        },
+        {
+          "seatId": "seat-left-05",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.24336948992906743,
+          "nearestComponent": "handrails"
+        },
+        {
+          "seatId": "seat-left-06",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-06"
+        }
+      ],
+      "wheelChecks": [
+        {
+          "nodeId": "wheel-rear-rear-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-rear-rear-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-rear-front-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-rear-front-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-front-rear-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-front-rear-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-front-front-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-front-front-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        }
+      ],
+      "floorCentroidRays": 18,
+      "cabinHeadroomRays": 123,
+      "minimumSampledCabinHeadroomM": 2.1600001335144037,
+      "exteriorPrimitives": 38,
+      "interiorPrimitives": 6
+    },
+    {
+      "packageId": "boardable-metro",
+      "vehicleId": "expo-metro-middle",
+      "lod": 1,
+      "status": "pass",
+      "openDoorwayRays": 1734,
+      "seatChecks": [
+        {
+          "seatId": "seat-right-01",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-01"
+        },
+        {
+          "seatId": "seat-right-02",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-02"
+        },
+        {
+          "seatId": "seat-right-03",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-03"
+        },
+        {
+          "seatId": "seat-right-04",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-04"
+        },
+        {
+          "seatId": "seat-right-05",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-05"
+        },
+        {
+          "seatId": "seat-right-06",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-06"
+        },
+        {
+          "seatId": "seat-left-01",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-01"
+        },
+        {
+          "seatId": "seat-left-02",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-02"
+        },
+        {
+          "seatId": "seat-left-03",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-03"
+        },
+        {
+          "seatId": "seat-left-04",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-04"
+        },
+        {
+          "seatId": "seat-left-05",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-05"
+        },
+        {
+          "seatId": "seat-left-06",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-06"
+        }
+      ],
+      "wheelChecks": [
+        {
+          "nodeId": "wheel-rear-rear-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-rear-rear-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-rear-front-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-rear-front-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-front-rear-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-front-rear-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-front-front-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-front-front-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        }
+      ],
+      "floorCentroidRays": 18,
+      "cabinHeadroomRays": 123,
+      "minimumSampledCabinHeadroomM": 2.1600001335144037,
+      "exteriorPrimitives": 38,
+      "interiorPrimitives": 6
+    },
+    {
+      "packageId": "boardable-metro",
+      "vehicleId": "expo-metro-tail",
+      "lod": 0,
+      "status": "pass",
+      "openDoorwayRays": 1734,
+      "seatChecks": [
+        {
+          "seatId": "seat-right-01",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-01"
+        },
+        {
+          "seatId": "seat-right-02",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.24336952548318325,
+          "nearestComponent": "handrails"
+        },
+        {
+          "seatId": "seat-right-03",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-03"
+        },
+        {
+          "seatId": "seat-right-04",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-04"
+        },
+        {
+          "seatId": "seat-right-05",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.24336957470064632,
+          "nearestComponent": "handrails"
+        },
+        {
+          "seatId": "seat-right-06",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-06"
+        },
+        {
+          "seatId": "seat-left-01",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-01"
+        },
+        {
+          "seatId": "seat-left-02",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.24336944070540423,
+          "nearestComponent": "handrails"
+        },
+        {
+          "seatId": "seat-left-03",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-03"
+        },
+        {
+          "seatId": "seat-left-04",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-04"
+        },
+        {
+          "seatId": "seat-left-05",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.24336948992906743,
+          "nearestComponent": "handrails"
+        },
+        {
+          "seatId": "seat-left-06",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-06"
+        }
+      ],
+      "wheelChecks": [
+        {
+          "nodeId": "wheel-rear-rear-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-rear-rear-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-rear-front-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-rear-front-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-front-rear-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-front-rear-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-front-front-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-front-front-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        }
+      ],
+      "floorCentroidRays": 16,
+      "cabinHeadroomRays": 123,
+      "minimumSampledCabinHeadroomM": 2.1600001335144037,
+      "exteriorPrimitives": 39,
+      "interiorPrimitives": 6
+    },
+    {
+      "packageId": "boardable-metro",
+      "vehicleId": "expo-metro-tail",
+      "lod": 1,
+      "status": "pass",
+      "openDoorwayRays": 1734,
+      "seatChecks": [
+        {
+          "seatId": "seat-right-01",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-01"
+        },
+        {
+          "seatId": "seat-right-02",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-02"
+        },
+        {
+          "seatId": "seat-right-03",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-03"
+        },
+        {
+          "seatId": "seat-right-04",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-04"
+        },
+        {
+          "seatId": "seat-right-05",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-05"
+        },
+        {
+          "seatId": "seat-right-06",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-right-06"
+        },
+        {
+          "seatId": "seat-left-01",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-01"
+        },
+        {
+          "seatId": "seat-left-02",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-02"
+        },
+        {
+          "seatId": "seat-left-03",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-03"
+        },
+        {
+          "seatId": "seat-left-04",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-04"
+        },
+        {
+          "seatId": "seat-left-05",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-05"
+        },
+        {
+          "seatId": "seat-left-06",
+          "actualFlatTopSizeXZ_M": [
+            0.4599999785423279,
+            0.46000003814697266
+          ],
+          "actualTopHeightM": 1.399999976158142,
+          "headRadiusM": 0.12,
+          "nearestHeadCentreToTriangleM": 0.2795643708686563,
+          "nearestComponent": "seat-left-06"
+        }
+      ],
+      "wheelChecks": [
+        {
+          "nodeId": "wheel-rear-rear-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-rear-rear-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-rear-front-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-rear-front-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-front-rear-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-front-rear-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-front-front-right",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        },
+        {
+          "nodeId": "wheel-front-front-left",
+          "contactY_M": 0.0,
+          "actualDiameterY_M": 0.7200000286102295
+        }
+      ],
+      "floorCentroidRays": 16,
+      "cabinHeadroomRays": 123,
+      "minimumSampledCabinHeadroomM": 2.1600001335144037,
+      "exteriorPrimitives": 39,
+      "interiorPrimitives": 6
+    }
+  ],
+  "independentBridgeChecks": [
+    {
+      "stopId": "research-bus-a",
+      "instanceId": "threshold-boarding-front",
+      "lod": 0,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-bus-a",
+      "instanceId": "threshold-boarding-front",
+      "lod": 1,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-bus-a",
+      "instanceId": "threshold-boarding-rear",
+      "lod": 0,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-bus-a",
+      "instanceId": "threshold-boarding-rear",
+      "lod": 1,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-bus-b",
+      "instanceId": "threshold-boarding-front",
+      "lod": 0,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-bus-b",
+      "instanceId": "threshold-boarding-front",
+      "lod": 1,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-bus-b",
+      "instanceId": "threshold-boarding-rear",
+      "lod": 0,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-bus-b",
+      "instanceId": "threshold-boarding-rear",
+      "lod": 1,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-01-boarding-right-rear",
+      "lod": 0,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-01-boarding-right-rear",
+      "lod": 1,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-01-boarding-right-center",
+      "lod": 0,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-01-boarding-right-center",
+      "lod": 1,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-01-boarding-right-front",
+      "lod": 0,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-01-boarding-right-front",
+      "lod": 1,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-02-boarding-right-rear",
+      "lod": 0,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-02-boarding-right-rear",
+      "lod": 1,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-02-boarding-right-center",
+      "lod": 0,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-02-boarding-right-center",
+      "lod": 1,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-02-boarding-right-front",
+      "lod": 0,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-02-boarding-right-front",
+      "lod": 1,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-03-boarding-right-rear",
+      "lod": 0,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-03-boarding-right-rear",
+      "lod": 1,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-03-boarding-right-center",
+      "lod": 0,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-03-boarding-right-center",
+      "lod": 1,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-03-boarding-right-front",
+      "lod": 0,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-03-boarding-right-front",
+      "lod": 1,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-04-boarding-right-rear",
+      "lod": 0,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-04-boarding-right-rear",
+      "lod": 1,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-04-boarding-right-center",
+      "lod": 0,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-04-boarding-right-center",
+      "lod": 1,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-04-boarding-right-front",
+      "lod": 0,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-04-boarding-right-front",
+      "lod": 1,
+      "status": "pass",
+      "storedFloorGapM": 0.0,
+      "storedWithinExclusion": true,
+      "deployedWalkSurfaceRays": 48,
+      "runtimeEnabled": false
+    }
+  ],
+  "actualPlatformPrimitiveCosts": [
+    {
+      "lod": 0,
+      "primitiveCountPerModule": 3,
+      "moduleInstances": 37,
+      "primitiveInstancesBeforeRuntimeInstancing": 111
+    },
+    {
+      "lod": 1,
+      "primitiveCountPerModule": 2,
+      "moduleInstances": 37,
+      "primitiveInstancesBeforeRuntimeInstancing": 74
+    }
+  ],
+  "stationSourceEvidence": "Current sources -> hash-matched raw Blender roundtrip -> explicit lossless static-batching comparison -> current final GLB hash; direct hashes also accepted when identical",
+  "totals": {
+    "sourceFiles": 26,
+    "glbFiles": 26,
+    "vehicleLodCases": 8,
+    "doorwayRays": 11560,
+    "seatHeadChecks": 92,
+    "bridgeLodCases": 32,
+    "deployedDeckSurfaceRays": 1536
+  },
+  "resolvedReviewObservation": {
+    "issue": "Stored bus and metro portable deck poses formerly hovered 0.05 m and 0.07 m above the research floor",
+    "status": "resolved",
+    "currentMethod": "Storage root Y derives from measured GLB bounds after stored rotation",
+    "independentVerification": "Actual transformed triangles in both LODs of every stored deck reach the floor within 0.00002 m and remain within the storage exclusion",
+    "maximumAbsoluteStoredFloorGapM": 0.0
+  },
+  "residualIntegrationRisks": [
+    "Research layouts intentionally have no resolved real stop/platform IDs or geographic walk/rail attachment.",
+    "Metro inter-car floor gap remains 0.30 m; moving inter-car traversal is disabled and not accepted.",
+    "Bridge relocation is a manual/actor-managed proposal: open/stopped/aligned gates, deployment motion and moving collision need D06; close doors only after retraction.",
+    "Passenger/open-door states require boarding-capable LOD0/1 plus lazy interior; LOD2 is closed/nonboarding.",
+    "37 platform LOD0 modules now have 111 primitive instances after export-only batching (previously 1,184), before runtime instancing; these are not measured GPU draw calls or FPS.",
+    "WebGL transparency, material rebinding, input, lifecycle/disposal, passenger attachment and runtime performance remain not_run."
+  ],
+  "limits": [
+    "Independent probes are sampled static geometry checks, not a continuous swept collision solver or accessibility/transport certification.",
+    "Seat checks use a 0.12 m head sphere centred 0.07 m above the authored camera eye; full animated body/rig fitting remains integration work.",
+    "Current source/GLB hashes were compared with existing Blender roundtrip evidence; this audit does not rerun Blender or author new renders.",
+    "No browser/GPU acceptance is claimed. Existing package validators are supplementary and separately identified.",
+    "Plain indexed-triangle GLB with non-sparse accessors only; unsupported representations fail instead of being silently skipped."
+  ],
+  "runtimeChecks": "not_run",
+  "integrationStatus": "runtime_pending_webgl"
+}
