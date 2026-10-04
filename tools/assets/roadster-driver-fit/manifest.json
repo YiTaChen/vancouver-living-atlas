@@ -1,0 +1,624 @@
+{
+  "schemaVersion": 1,
+  "packageId": "roadster-driver-fit",
+  "version": "1.0.0",
+  "baseRevision": "aef5e31d4eb8d5d3f832d0931373bf6583227033",
+  "status": "offline_complete_static_pose_candidate; runtime_pending_webgl",
+  "units": "m",
+  "coordinateSystem": {
+    "authoring": "Blender Z-up",
+    "exports": "glTF Y-up",
+    "conversion": "(x,y,z)->(x,z,-y) exactly once",
+    "consumer": "Original Three Roadster frame, root identity, Z-forward"
+  },
+  "provenance": {
+    "author": "Original local cockpit candidate derived from repository Roadster callsites; character owned by sibling package",
+    "source": "https://github.com/YiTaChen/vancouver-living-atlas",
+    "license": "Repository LICENSE, Vancouver Living Atlas Noncommercial Research and Attribution 1.0",
+    "sourceIdentity": "qa/adapter-preservation.json"
+  },
+  "reexportCommand": "blender -b -t 2 --python-exit-code 1 --python tools/assets/roadster-driver-fit/export.py -- --source tools/assets/roadster-driver-fit/source/roadster-cockpit-local.lod0.blend --output /tmp/roadster-cockpit-local.lod0.glb",
+  "validationCommand": "python tools/assets/roadster-driver-fit/validate.py",
+  "assets": [
+    {
+      "id": "roadster-cockpit-local",
+      "taskId": "F04",
+      "relatedTaskIds": [
+        "E02",
+        "F04"
+      ],
+      "variant": "optional-natural-driver-cockpit-v1",
+      "kind": "source-local-cockpit-replacement-parts",
+      "source": "source/roadster-cockpit-local.lod0.blend",
+      "sourceSha256": "ebe186a9369f299bd526c732ddce9720c30d35076250354d70fd40fb62f02130",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/roadster-cockpit-local.lod0.glb",
+          "sha256": "706d649ab14e3cc38c6693cbc9a8a7c69c5731d7ad9c3ad758234f33408c74c6",
+          "source": "source/roadster-cockpit-local.lod0.blend",
+          "sourceSha256": "ebe186a9369f299bd526c732ddce9720c30d35076250354d70fd40fb62f02130",
+          "boundsM": {
+            "min": [
+              -0.7849999964237213,
+              0.38500000536441803,
+              -0.4399999976158142
+            ],
+            "max": [
+              0.7850000150501728,
+              1.2799999713897705,
+              0.8899999856948853
+            ],
+            "size": [
+              1.5700000114738941,
+              0.8949999660253525,
+              1.3299999833106995
+            ]
+          },
+          "triangles": 1348,
+          "vertices": 2147,
+          "primitives": 15,
+          "bytes": 125864,
+          "embeddedImageBytes": 0,
+          "geometryBytes": 125864,
+          "images": [],
+          "nodeNames": [
+            "dashboard-preserved-passenger-and-center",
+            "dashboard-driver-clearance-header",
+            "dashboard-preserved-outboard",
+            "driver-floor-extension",
+            "steering-rim",
+            "steering-spoke-horizontal",
+            "steering-spoke-lower",
+            "driver-seat-cushion-039",
+            "driver-seat-back-040",
+            "driver-seat-headrest-041",
+            "driver-seat-bolster-042",
+            "driver-seat-bolster-043",
+            "driver-seat-seam-044",
+            "driver-seat-seam-045",
+            "driver-seat-seam-046"
+          ],
+          "materialNames": [
+            "cockpit-dark",
+            "cockpit-metal"
+          ],
+          "boundsScope": "rest-pose scene node transforms; no skin deformation",
+          "skins": 0
+        },
+        {
+          "level": 1,
+          "file": "exports/roadster-cockpit-local.lod1.glb",
+          "sha256": "a6b86d69660a113c2b5c24daa6cdcdfa8dfd8b50f6bfe4f3db50d0d62c989556",
+          "source": "source/roadster-cockpit-local.lod1.blend",
+          "sourceSha256": "3d896fead9aa932c32d4c062f43a8164a552860bcb79ffc0928923eb8e478805",
+          "boundsM": {
+            "min": [
+              -0.7849999964237213,
+              0.38500000536441803,
+              -0.4399999976158142
+            ],
+            "max": [
+              0.7850000150501728,
+              1.2799999713897705,
+              0.8899999856948853
+            ],
+            "size": [
+              1.5700000114738941,
+              0.8949999660253525,
+              1.3299999833106995
+            ]
+          },
+          "triangles": 1284,
+          "vertices": 2111,
+          "primitives": 15,
+          "bytes": 123752,
+          "embeddedImageBytes": 0,
+          "geometryBytes": 123752,
+          "images": [],
+          "nodeNames": [
+            "dashboard-preserved-passenger-and-center",
+            "dashboard-driver-clearance-header",
+            "dashboard-preserved-outboard",
+            "driver-floor-extension",
+            "steering-rim",
+            "steering-spoke-horizontal",
+            "steering-spoke-lower",
+            "driver-seat-cushion-039",
+            "driver-seat-back-040",
+            "driver-seat-headrest-041",
+            "driver-seat-bolster-042",
+            "driver-seat-bolster-043",
+            "driver-seat-seam-044",
+            "driver-seat-seam-045",
+            "driver-seat-seam-046"
+          ],
+          "materialNames": [
+            "cockpit-dark",
+            "cockpit-metal"
+          ],
+          "boundsScope": "rest-pose scene node transforms; no skin deformation",
+          "skins": 0
+        },
+        {
+          "level": 2,
+          "file": "exports/roadster-cockpit-local.lod2.glb",
+          "sha256": "b6ed43359b1832adcbc644746993b0bfe59ed8db2371772806d3c2e232bfee14",
+          "source": "source/roadster-cockpit-local.lod2.blend",
+          "sourceSha256": "8ffaff5cfe457952fbedaa6510d36d3e2af16371193bac754988083525699d1f",
+          "boundsM": {
+            "min": [
+              -0.7849999964237213,
+              0.38500000536441803,
+              -0.4399999976158142
+            ],
+            "max": [
+              0.7850000150501728,
+              1.2799999713897705,
+              0.8899999856948853
+            ],
+            "size": [
+              1.5700000114738941,
+              0.8949999660253525,
+              1.3299999833106995
+            ]
+          },
+          "triangles": 1156,
+          "vertices": 2025,
+          "primitives": 15,
+          "bytes": 119268,
+          "embeddedImageBytes": 0,
+          "geometryBytes": 119268,
+          "images": [],
+          "nodeNames": [
+            "dashboard-preserved-passenger-and-center",
+            "dashboard-driver-clearance-header",
+            "dashboard-preserved-outboard",
+            "driver-floor-extension",
+            "steering-rim",
+            "steering-spoke-horizontal",
+            "steering-spoke-lower",
+            "driver-seat-cushion-039",
+            "driver-seat-back-040",
+            "driver-seat-headrest-041",
+            "driver-seat-bolster-042",
+            "driver-seat-bolster-043",
+            "driver-seat-seam-044",
+            "driver-seat-seam-045",
+            "driver-seat-seam-046"
+          ],
+          "materialNames": [
+            "cockpit-dark",
+            "cockpit-metal"
+          ],
+          "boundsScope": "rest-pose scene node transforms; no skin deformation",
+          "skins": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.7849999964237213,
+          0.38500000536441803,
+          -0.4399999976158142
+        ],
+        "max": [
+          0.7850000150501728,
+          1.2799999713897705,
+          0.8899999856948853
+        ],
+        "size": [
+          1.5700000114738941,
+          0.8949999660253525,
+          1.3299999833106995
+        ]
+      },
+      "expectedDimensionsM": [
+        1.57,
+        0.895,
+        1.33
+      ],
+      "dimensionToleranceM": 1e-05,
+      "dimensionBasis": "Original Roadster root, retained dashboard lateral limits, original seat headrest height, driver-floor continuation Z=.89. No ground rebasing.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "frame": "original Roadster root"
+      },
+      "attachmentDatum": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "rotationQuaternionXYZW": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "role": "cockpit-dark",
+          "source": "original Roadster palette.dark; opaque roughness .65",
+          "consumer": "dashboard, steering rim, floor continuation, original driver seat"
+        },
+        {
+          "role": "cockpit-metal",
+          "source": "original Roadster palette.metal; metallic .65/roughness .30",
+          "consumer": "two steering spokes"
+        }
+      ],
+      "textureMode": "no textures; ordinary PBR local role materials",
+      "textureCost": {
+        "images": 0,
+        "bytes": 0,
+        "gpuEstimateBytes": 0
+      },
+      "lodPolicy": {
+        "levels": [
+          0,
+          1,
+          2
+        ],
+        "method": "Only steering rim/spoke tessellation reduces. Dashboard/floor bounds and all eight rigid-translated original seat parts retain exact source geometry. This is not a complete car LOD.",
+        "primitiveCountEach": 15,
+        "runtimeBatching": "not implemented or claimed; ordinary individually editable nodes"
+      },
+      "clearance": {
+        "scope": "Static natural-driver GLB triangles after morph weights then skinning; actual triangulated solids and open shell surfaces",
+        "report": "qa/driver-fit-summary.json",
+        "supportReport": "qa/candidate-seat-support.json",
+        "caveat": "Millimetre margins are static geometric observations, not animation/ergonomic certification. Backrest normal-gap samples remain explicitly reported."
+      },
+      "collision": {
+        "runtime": "unchanged; no collision/dynamics patch installed",
+        "offline": "actual dashboard, console, floor, steering and seat mesh solids; open shell surface intersections"
+      },
+      "anchors": [
+        {
+          "id": "root",
+          "positionM": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "driver-seat-original-to-candidate",
+          "translationM": [
+            0,
+            0,
+            0.265
+          ]
+        },
+        {
+          "id": "steering-center",
+          "positionM": [
+            0.44,
+            1.06,
+            0.4
+          ],
+          "rotationXYZRad": [
+            0.25,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "driver-character-root",
+          "positionM": [
+            0.44,
+            0,
+            -0.06
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "adapter": "adapters/cockpit-candidate.mjs:makeCockpitCandidate",
+        "optIn": "replacementGlb argument required; never auto-installed/imported by runtime",
+        "frame": "original Roadster identity, metres, Y-up, Z-forward, no rebasing",
+        "sourceIdentity": "SHA-256 gate and exact reviewed source-callsite labels",
+        "suppressionCounts": {
+          "dashboard": 1,
+          "steering-rim": 1,
+          "steering-spoke-horizontal": 1,
+          "steering-spoke-lower": 1,
+          "legacy-driver-torso": 1,
+          "legacy-driver-head": 1,
+          "legacy-driver-arm": 2,
+          "driver-seat-cushion": 1,
+          "driver-seat-back": 1,
+          "driver-seat-headrest": 1,
+          "driver-seat-bolster": 2,
+          "driver-seat-seam": 3
+        },
+        "replacementChanges": {
+          "schemaVersion": 1,
+          "version": "1.0.0",
+          "frame": "Roadster original +Y up, +Z forward, +X driver; root identity, units m",
+          "dashboard": {
+            "originalMin": [
+              -0.785,
+              0.71,
+              0.445
+            ],
+            "originalMax": [
+              0.785,
+              0.89,
+              0.775
+            ],
+            "driverOpeningX": [
+              0.2,
+              0.68
+            ],
+            "undersideY": 0.85,
+            "preservedTopY": 0.89
+          },
+          "steering": {
+            "originalCenter": [
+              0.44,
+              0.88,
+              0.4
+            ],
+            "candidateCenter": [
+              0.44,
+              1.06,
+              0.4
+            ],
+            "translation": [
+              0,
+              0.18,
+              0
+            ],
+            "radius": 0.16,
+            "tubeRadius": 0.019,
+            "rotationXYZ": [
+              0.25,
+              0,
+              0
+            ],
+            "spokes": [
+              [
+                [
+                  0.3,
+                  1.06,
+                  0.4
+                ],
+                [
+                  0.58,
+                  1.06,
+                  0.4
+                ]
+              ],
+              [
+                [
+                  0.44,
+                  1.06,
+                  0.4
+                ],
+                [
+                  0.44,
+                  0.91,
+                  0.44
+                ]
+              ]
+            ],
+            "spokeRadius": 0.013
+          },
+          "floorExtension": {
+            "min": [
+              0.2,
+              0.385,
+              0.635
+            ],
+            "max": [
+              0.68,
+              0.475,
+              0.89
+            ],
+            "note": "Driver-only extension meets existing floor at Z=.635. Original floor is unchanged. No recess, lower chassis change or pedals."
+          },
+          "driver": {
+            "family": "driver-roadster-fit",
+            "package": "citizen-character-variants",
+            "translation": [
+              0.44,
+              0,
+              -0.06
+            ],
+            "quaternion": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "clip": "driver-seated",
+            "sampleSeconds": 0.5
+          },
+          "preserved": [
+            "outer shell and hood",
+            "underbody",
+            "original cabin floor",
+            "center console",
+            "windshield and frame",
+            "all main wheels/pivots",
+            "navigation collision",
+            "vehicle dynamics",
+            "original camera",
+            "passenger seat exact; driver-seat geometry rigidly translated +.265Z"
+          ],
+          "suppressionCounts": {
+            "dashboard": 1,
+            "steering-rim": 1,
+            "steering-spoke-horizontal": 1,
+            "steering-spoke-lower": 1,
+            "legacy-driver-torso": 1,
+            "legacy-driver-head": 1,
+            "legacy-driver-arm": 2,
+            "driver-seat-cushion": 1,
+            "driver-seat-back": 1,
+            "driver-seat-headrest": 1,
+            "driver-seat-bolster": 2,
+            "driver-seat-seam": 3
+          },
+          "driverSeatTranslation": [
+            0,
+            0,
+            0.265
+          ]
+        },
+        "materialAdapter": "Optional combined mode clones local role materials and regenerates native metre UV via E02 helper; seat-upholstery binds vehicle-seat-leather without changing dashboard/floor/rim/metal fallback. Stale tangents removed; frozen ordinary GLB source UV/materials unchanged. See qa/material-composition.json.",
+        "humanDependency": "../citizen-character-variants/exports/driver-roadster-fit.lod{0,1,2}.glb; driver-seated clip .5s; corresponding editable sources remain owned there.",
+        "camera": "Original navigation [.45,1.2,0] retained; measured natural-driver eye target is metadata only, not migrated.",
+        "humanDependencyLock": [
+          {
+            "lod": 0,
+            "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod0.glb",
+            "sha256": "a6e21e8d1d97f8be38e49a716ee8a6ac9cca54fd31b84b13617c705b665c97fc",
+            "source": "tools/assets/citizen-character-variants/source/driver-roadster-fit.lod0.blend",
+            "sourceSha256": "ab824b64b42d00121e6281b4ecdb0f7ac0435c4747570cffb72d38743d55bd78",
+            "pose": {
+              "family": "driver-roadster-fit",
+              "package": "citizen-character-variants",
+              "translation": [
+                0.44,
+                0,
+                -0.06
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "clip": "driver-seated",
+              "sampleSeconds": 0.5
+            }
+          },
+          {
+            "lod": 1,
+            "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod1.glb",
+            "sha256": "1cb79599d359175c39ce0d466173f5293d7bbcb16a8f08450bd851c09ce0a0c0",
+            "source": "tools/assets/citizen-character-variants/source/driver-roadster-fit.lod1.blend",
+            "sourceSha256": "84b5aa6f6a5e931398fa2fcf4d6b7ec628d111d34b95db72f9dd16f537a45d83",
+            "pose": {
+              "family": "driver-roadster-fit",
+              "package": "citizen-character-variants",
+              "translation": [
+                0.44,
+                0,
+                -0.06
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "clip": "driver-seated",
+              "sampleSeconds": 0.5
+            }
+          },
+          {
+            "lod": 2,
+            "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod2.glb",
+            "sha256": "1198d8433e27e9b60c17d054548162315584e49e644d16426828005e846833ac",
+            "source": "tools/assets/citizen-character-variants/source/driver-roadster-fit.lod2.blend",
+            "sourceSha256": "628e42366d2bc527420d2b6867f54c96229177b2fa163fe2856242371d89a718",
+            "pose": {
+              "family": "driver-roadster-fit",
+              "package": "citizen-character-variants",
+              "translation": [
+                0.44,
+                0,
+                -0.06
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "clip": "driver-seated",
+              "sampleSeconds": 0.5
+            }
+          }
+        ]
+      },
+      "intendedConsumer": [
+        "lib/city/assets/roadster.ts (future explicit integration only)"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/adapter-preservation.json",
+          "qa/blender-audit.json",
+          "qa/source-edit-proof.json",
+          "qa/contact-kernel-tests.json",
+          "qa/driver-fit-summary.json",
+          "qa/cabin-envelope.json",
+          "qa/human-proportions.json",
+          "qa/material-composition.json",
+          "qa/candidate-seat-support.json",
+          "qa/render-evidence.json",
+          "qa/visual-review.json",
+          "qa/validation.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "state": "runtime_pending_webgl",
+        "required": [
+          "Actual runtime import and collision migration decision",
+          "Driver camera eye-height migration",
+          "Entry/exit, steering animation, pedals and seat belts",
+          "Dynamic body clearance, suspension movement and LOD switching",
+          "GPU draw/frame/memory and disposal checks"
+        ]
+      }
+    }
+  ],
+  "textures": [],
+  "runtimeStatus": "runtime_pending_webgl"
+}

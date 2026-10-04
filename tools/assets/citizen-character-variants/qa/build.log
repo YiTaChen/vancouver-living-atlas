@@ -1,0 +1,133 @@
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+16:46:22 | INFO: Data are loaded, start creating Blender stuff
+16:46:22 | INFO: Blender create Mesh node Tailored torso
+16:46:22 | INFO: glTF import finished in 0.12s
+Info: Saved "citizen.lod0.blend"
+ERROR Draco mesh compression is not available because library could not be found at /usr/bin/4.3/python/lib/python3.13/site-packages/libextern_draco.so
+16:46:22 | INFO: Starting glTF 2.0 export
+16:46:22 | INFO: Extracting primitive: Tailored torso
+16:46:22 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+16:46:22 | INFO: Primitives created: 1
+16:46:23 | INFO: Finished glTF 2.0 export in 0.5125980377197266 s
+
+BUILT citizen 0
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+16:46:23 | INFO: Data are loaded, start creating Blender stuff
+16:46:23 | INFO: Blender create Mesh node Tailored torso
+16:46:23 | INFO: glTF import finished in 0.10s
+Info: Saved "citizen.lod1.blend"
+16:46:23 | INFO: Starting glTF 2.0 export
+16:46:23 | INFO: Extracting primitive: Tailored torso
+16:46:23 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+16:46:23 | INFO: Primitives created: 1
+16:46:23 | INFO: Finished glTF 2.0 export in 0.4254610538482666 s
+
+BUILT citizen 1
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+16:46:23 | INFO: Data are loaded, start creating Blender stuff
+16:46:23 | INFO: Blender create Mesh node Tailored torso
+16:46:23 | INFO: glTF import finished in 0.10s
+Info: Saved "citizen.lod2.blend"
+16:46:24 | INFO: Starting glTF 2.0 export
+16:46:24 | INFO: Extracting primitive: Tailored torso
+16:46:24 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+16:46:24 | INFO: Primitives created: 1
+16:46:24 | INFO: Finished glTF 2.0 export in 0.4406595230102539 s
+
+BUILT citizen 2
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+16:46:24 | INFO: Data are loaded, start creating Blender stuff
+16:46:24 | INFO: Blender create Mesh node Tailored torso
+16:46:24 | INFO: glTF import finished in 0.11s
+Info: Saved "police.lod0.blend"
+16:46:24 | INFO: Starting glTF 2.0 export
+16:46:24 | INFO: Extracting primitive: Tailored torso
+Blender 4.3.2
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/citizen-character-variants/source/citizen.lod0.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/citizen-character-variants/source/citizen.lod1.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/citizen-character-variants/source/citizen.lod2.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/citizen-character-variants/source/police.lod0.blend"
+Error: Tangent space can only be computed for tris/quads, aborting
+16:46:24 | WARNING: Tailored torso: Could not calculate tangents. Please try to triangulate the mesh first.
+16:46:25 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+16:46:25 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+16:46:25 | INFO: Primitives created: 5
+16:46:25 | INFO: Finished glTF 2.0 export in 0.4612693786621094 s
+
+Warning: Tailored torso: Could not calculate tangents. Please try to triangulate the mesh first.
+BUILT police 0
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+16:46:25 | INFO: Data are loaded, start creating Blender stuff
+16:46:25 | INFO: Blender create Mesh node Tailored torso
+16:46:25 | INFO: glTF import finished in 0.10s
+Info: Saved "police.lod1.blend"
+16:46:25 | INFO: Starting glTF 2.0 export
+16:46:25 | INFO: Extracting primitive: Tailored torso
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/citizen-character-variants/source/police.lod1.blend"
+Error: Tangent space can only be computed for tris/quads, aborting
+16:46:25 | WARNING: Tailored torso: Could not calculate tangents. Please try to triangulate the mesh first.
+16:46:25 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+16:46:25 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+16:46:26 | INFO: Primitives created: 5
+16:46:26 | INFO: Finished glTF 2.0 export in 0.4222848415374756 s
+
+Warning: Tailored torso: Could not calculate tangents. Please try to triangulate the mesh first.
+BUILT police 1
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+16:46:26 | INFO: Data are loaded, start creating Blender stuff
+16:46:26 | INFO: Blender create Mesh node Tailored torso
+16:46:26 | INFO: glTF import finished in 0.10s
+Info: Saved "police.lod2.blend"
+16:46:26 | INFO: Starting glTF 2.0 export
+16:46:26 | INFO: Extracting primitive: Tailored torso
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/citizen-character-variants/source/police.lod2.blend"
+Error: Tangent space can only be computed for tris/quads, aborting
+16:46:26 | WARNING: Tailored torso: Could not calculate tangents. Please try to triangulate the mesh first.
+16:46:26 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+16:46:26 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+16:46:26 | INFO: Primitives created: 5
+16:46:27 | INFO: Finished glTF 2.0 export in 0.43609189987182617 s
+
+Warning: Tailored torso: Could not calculate tangents. Please try to triangulate the mesh first.
+BUILT police 2
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+16:46:27 | INFO: Data are loaded, start creating Blender stuff
+16:46:27 | INFO: Blender create Mesh node Tailored torso
+16:46:27 | INFO: glTF import finished in 0.11s
+Info: Saved "driver.lod0.blend"
+16:46:27 | INFO: Starting glTF 2.0 export
+16:46:27 | INFO: Extracting primitive: Tailored torso
+16:46:27 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+16:46:27 | INFO: Primitives created: 1
+16:46:27 | INFO: Finished glTF 2.0 export in 0.5990192890167236 s
+
+BUILT driver 0
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+16:46:28 | INFO: Data are loaded, start creating Blender stuff
+16:46:28 | INFO: Blender create Mesh node Tailored torso
+16:46:28 | INFO: glTF import finished in 0.11s
+Info: Saved "driver.lod1.blend"
+16:46:28 | INFO: Starting glTF 2.0 export
+16:46:28 | INFO: Extracting primitive: Tailored torso
+16:46:28 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+16:46:28 | INFO: Primitives created: 1
+16:46:28 | INFO: Finished glTF 2.0 export in 0.5146040916442871 s
+
+BUILT driver 1
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+16:46:28 | INFO: Data are loaded, start creating Blender stuff
+16:46:28 | INFO: Blender create Mesh node Tailored torso
+16:46:28 | INFO: glTF import finished in 0.10s
+Info: Saved "driver.lod2.blend"
+16:46:29 | INFO: Starting glTF 2.0 export
+16:46:29 | INFO: Extracting primitive: Tailored torso
+16:46:29 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+16:46:29 | INFO: Primitives created: 1
+16:46:29 | INFO: Finished glTF 2.0 export in 0.5528085231781006 s
+
+BUILT driver 2
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/citizen-character-variants/source/driver.lod0.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/citizen-character-variants/source/driver.lod1.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/citizen-character-variants/source/driver.lod2.blend"
+
+Blender quit

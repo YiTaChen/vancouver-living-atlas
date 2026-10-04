@@ -1,0 +1,530 @@
+{
+  "schemaVersion": 1,
+  "packageId": "citizen-character-variants",
+  "status": "pass",
+  "passed": 48,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "common-root-schema",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "name": "unchanged-public-baseline",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "name": "vancouver-citizen:common-fields",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "name": "vancouver-citizen:runtime-not-claimed",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "name": "vancouver-citizen:LOD0:packaging-cost-rig",
+      "status": "pass",
+      "details": {
+        "triangles": 37735,
+        "bytes": 2280072,
+        "sourcesBytes": 3481281,
+        "externalImages": 3
+      }
+    },
+    {
+      "name": "vancouver-citizen:LOD0:metric-bounds",
+      "status": "pass",
+      "details": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.42600005865097046
+        ]
+      }
+    },
+    {
+      "name": "vancouver-citizen:LOD1:packaging-cost-rig",
+      "status": "pass",
+      "details": {
+        "triangles": 31767,
+        "bytes": 2032440,
+        "sourcesBytes": 3260574,
+        "externalImages": 3
+      }
+    },
+    {
+      "name": "vancouver-citizen:LOD1:metric-bounds",
+      "status": "pass",
+      "details": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.42600005865097046
+        ]
+      }
+    },
+    {
+      "name": "vancouver-citizen:LOD2:packaging-cost-rig",
+      "status": "pass",
+      "details": {
+        "triangles": 29931,
+        "bytes": 1941592,
+        "sourcesBytes": 3181567,
+        "externalImages": 3
+      }
+    },
+    {
+      "name": "vancouver-citizen:LOD2:metric-bounds",
+      "status": "pass",
+      "details": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.42600005865097046
+        ]
+      }
+    },
+    {
+      "name": "vancouver-police:common-fields",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "name": "vancouver-police:runtime-not-claimed",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "name": "vancouver-police:LOD0:packaging-cost-rig",
+      "status": "pass",
+      "details": {
+        "triangles": 38483,
+        "bytes": 2334200,
+        "sourcesBytes": 3502945,
+        "externalImages": 3
+      }
+    },
+    {
+      "name": "vancouver-police:LOD0:metric-bounds",
+      "status": "pass",
+      "details": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8579999208450317,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.8550096068065614,
+          0.42600005865097046
+        ]
+      }
+    },
+    {
+      "name": "vancouver-police:LOD1:packaging-cost-rig",
+      "status": "pass",
+      "details": {
+        "triangles": 32515,
+        "bytes": 2086564,
+        "sourcesBytes": 3279316,
+        "externalImages": 3
+      }
+    },
+    {
+      "name": "vancouver-police:LOD1:metric-bounds",
+      "status": "pass",
+      "details": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8579999208450317,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.8550096068065614,
+          0.42600005865097046
+        ]
+      }
+    },
+    {
+      "name": "vancouver-police:LOD2:packaging-cost-rig",
+      "status": "pass",
+      "details": {
+        "triangles": 30679,
+        "bytes": 1995712,
+        "sourcesBytes": 3199864,
+        "externalImages": 3
+      }
+    },
+    {
+      "name": "vancouver-police:LOD2:metric-bounds",
+      "status": "pass",
+      "details": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8579999208450317,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.8550096068065614,
+          0.42600005865097046
+        ]
+      }
+    },
+    {
+      "name": "vancouver-driver:common-fields",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "name": "vancouver-driver:runtime-not-claimed",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "name": "vancouver-driver:LOD0:packaging-cost-rig",
+      "status": "pass",
+      "details": {
+        "triangles": 37735,
+        "bytes": 2296116,
+        "sourcesBytes": 3489254,
+        "externalImages": 3
+      }
+    },
+    {
+      "name": "vancouver-driver:LOD0:metric-bounds",
+      "status": "pass",
+      "details": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.42600005865097046
+        ]
+      }
+    },
+    {
+      "name": "vancouver-driver:LOD1:packaging-cost-rig",
+      "status": "pass",
+      "details": {
+        "triangles": 31767,
+        "bytes": 2048488,
+        "sourcesBytes": 3267940,
+        "externalImages": 3
+      }
+    },
+    {
+      "name": "vancouver-driver:LOD1:metric-bounds",
+      "status": "pass",
+      "details": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.42600005865097046
+        ]
+      }
+    },
+    {
+      "name": "vancouver-driver:LOD2:packaging-cost-rig",
+      "status": "pass",
+      "details": {
+        "triangles": 29931,
+        "bytes": 1957640,
+        "sourcesBytes": 3190453,
+        "externalImages": 3
+      }
+    },
+    {
+      "name": "vancouver-driver:LOD2:metric-bounds",
+      "status": "pass",
+      "details": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.42600005865097046
+        ]
+      }
+    },
+    {
+      "name": "vancouver-driver-roadster-fit:common-fields",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "name": "vancouver-driver-roadster-fit:runtime-not-claimed",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "name": "vancouver-driver-roadster-fit:LOD0:packaging-cost-rig",
+      "status": "pass",
+      "details": {
+        "triangles": 36417,
+        "bytes": 2264664,
+        "sourcesBytes": 3687964,
+        "externalImages": 3
+      }
+    },
+    {
+      "name": "vancouver-driver-roadster-fit:LOD0:metric-bounds",
+      "status": "pass",
+      "details": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.14308057725429535
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.32108063995838165
+        ]
+      }
+    },
+    {
+      "name": "vancouver-driver-roadster-fit:LOD1:packaging-cost-rig",
+      "status": "pass",
+      "details": {
+        "triangles": 30449,
+        "bytes": 2017036,
+        "sourcesBytes": 3466260,
+        "externalImages": 3
+      }
+    },
+    {
+      "name": "vancouver-driver-roadster-fit:LOD1:metric-bounds",
+      "status": "pass",
+      "details": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.14308057725429535
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.32108063995838165
+        ]
+      }
+    },
+    {
+      "name": "vancouver-driver-roadster-fit:LOD2:packaging-cost-rig",
+      "status": "pass",
+      "details": {
+        "triangles": 28613,
+        "bytes": 1926188,
+        "sourcesBytes": 3328433,
+        "externalImages": 3
+      }
+    },
+    {
+      "name": "vancouver-driver-roadster-fit:LOD2:metric-bounds",
+      "status": "pass",
+      "details": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.14308057725429535
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.32108063995838165
+        ]
+      }
+    },
+    {
+      "name": "all-external-image-references-deduplicated",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "name": "texture:citizen-baseColor",
+      "status": "pass",
+      "details": {
+        "role": "baseColor",
+        "bytes": 696823,
+        "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f"
+      }
+    },
+    {
+      "name": "texture:citizen-roughnessMetallicLegacy",
+      "status": "pass",
+      "details": {
+        "role": "roughnessMetallicLegacy",
+        "bytes": 309221,
+        "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e"
+      }
+    },
+    {
+      "name": "texture:citizen-normal",
+      "status": "pass",
+      "details": {
+        "role": "normal",
+        "bytes": 679771,
+        "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab"
+      }
+    },
+    {
+      "name": "actual-evidence:cpu-tests",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "name": "actual-evidence:blender-reimport",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "name": "actual-evidence:artist-edit-proof",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "name": "actual-evidence:visual-review",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "name": "fresh-blender-reimport-hashes",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "name": "three-lod-driver-study-clearance-and-inspection-only-status",
+      "status": "pass",
+      "details": null
+    },
+    {
+      "name": "preserved-source-reexport-equals-final",
+      "status": "pass",
+      "details": {
+        "sourceCount": 12,
+        "hashIdenticalCanonicalExports": true
+      }
+    },
+    {
+      "name": "baseline-and-natural-source-proofs-preserved-separately",
+      "status": "pass",
+      "details": {
+        "originalSources": 9,
+        "optionalNaturalSources": 3
+      }
+    },
+    {
+      "name": "explicit-inspection-gate-and-cockpit-dependency",
+      "status": "pass",
+      "details": {
+        "inspectionOnly": "driver",
+        "eligibleOnlyWithPinnedProfile": "driver-roadster-fit",
+        "staticPoseOnly": true
+      }
+    },
+    {
+      "name": "fresh-glb-cycles-previews",
+      "status": "pass",
+      "details": {
+        "count": 38,
+        "allInputsHashVerified": true
+      }
+    }
+  ],
+  "runtimeChecks": {
+    "status": "not_run",
+    "integrationStatus": "runtime_pending_webgl"
+  }
+}

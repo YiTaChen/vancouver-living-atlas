@@ -1,0 +1,255 @@
+{
+  "status": "inspection_only",
+  "clearanceStatus": "pass",
+  "usability": "tucked clearance-study pose; not comfortable-driver acceptance; natural extension conflicts with inherited dashboard and low steering wheel",
+  "roadsterGeometryScale": [
+    1,
+    1,
+    1
+  ],
+  "characterScale": [
+    1,
+    1,
+    1
+  ],
+  "roadsterRootTransform": "identity, inherited frame retained",
+  "characterPlacement": {
+    "translationM": [
+      0.44,
+      0,
+      -0.06
+    ],
+    "quaternion": [
+      0,
+      0,
+      0,
+      1
+    ]
+  },
+  "source": "lib/city/assets/roadster.ts",
+  "testedSteeringCenterM": [
+    0.44,
+    0.88,
+    0.4
+  ],
+  "actualRoadsterFixture": "tools/assets/material-consumer-candidates/qa/roadster.candidate.inspection.glb",
+  "seatedClip": "driver-seated",
+  "seat": {
+    "measuredSourceCushionCenter": [
+      0.44,
+      0.53,
+      -0.21
+    ],
+    "surfaceTopM": 0.615,
+    "proposedHipsBoneM": [
+      0.44,
+      0.72,
+      -0.06
+    ],
+    "sampledContactPoints": [
+      {
+        "skinY": 0.6390430131317486,
+        "seatY": 0.6205000281333923,
+        "gap": 0.01854298499835627,
+        "point": [
+          0.38051345802310443,
+          0.6390430131317486,
+          -0.016412265461986222
+        ]
+      },
+      {
+        "skinY": 0.642986707813694,
+        "seatY": 0.6205000281333923,
+        "gap": 0.022486679680301713,
+        "point": [
+          0.31411219210386965,
+          0.642986707813694,
+          -0.01638532456988636
+        ]
+      },
+      {
+        "skinY": 0.6260497463848411,
+        "seatY": 0.5992574823896439,
+        "gap": 0.026792263995197185,
+        "point": [
+          0.4372445010724756,
+          0.6260497463848411,
+          -0.026174616555693142
+        ]
+      },
+      {
+        "skinY": 0.6260497463848411,
+        "seatY": 0.5992574823896439,
+        "gap": 0.026792263995197185,
+        "point": [
+          0.4372445010724756,
+          0.6260497463848411,
+          -0.026174616555693142
+        ]
+      },
+      {
+        "skinY": 0.6473513616702331,
+        "seatY": 0.6205000281333923,
+        "gap": 0.02685133353684077,
+        "point": [
+          0.34085680251465494,
+          0.6473513616702331,
+          -0.02232094927370082
+        ]
+      },
+      {
+        "skinY": 0.6277229026158687,
+        "seatY": 0.6008225987111678,
+        "gap": 0.026900303904700884,
+        "point": [
+          0.4401110190241315,
+          0.6277229026158687,
+          -0.03712664077772651
+        ]
+      },
+      {
+        "skinY": 0.6277229026158687,
+        "seatY": 0.6008225987111678,
+        "gap": 0.026900303904700884,
+        "point": [
+          0.4401110190241315,
+          0.6277229026158687,
+          -0.03712664077772651
+        ]
+      },
+      {
+        "skinY": 0.6478033302631505,
+        "seatY": 0.6205000281333923,
+        "gap": 0.027303302129758178,
+        "point": [
+          0.5435930369875783,
+          0.6478033302631505,
+          -0.02175493091920222
+        ]
+      }
+    ],
+    "minimumSkinGapM": 0.01854298499835627,
+    "legacySeatBackEnvelopeGapM": 0.16912363500738703,
+    "backrestSupport": "Retained backpack and forward hip mean no contact with the original seatback; verify support or move a seat-local backrest in optional cockpit. Envelope separation is not a soft-body comfort measurement.",
+    "note": "Nearest mesh ray samples; not soft-body cushion compression simulation."
+  },
+  "hands": {
+    "L": {
+      "nearestSkinToWheelTubeSurfaceM": 0.00003120284095988954,
+      "nearestSkinPointRoadsterM": [
+        0.5668448565679669,
+        0.7854586334356825,
+        0.3952161544184869
+      ],
+      "vertices": 1244
+    },
+    "R": {
+      "nearestSkinToWheelTubeSurfaceM": 0.000007280820019696377,
+      "nearestSkinPointRoadsterM": [
+        0.2725344650187905,
+        0.8202368084610803,
+        0.39131521021841714
+      ],
+      "vertices": 1265
+    }
+  },
+  "feet": {
+    "proposedAnkleAnchorsM": [
+      [
+        0.3100000682386578,
+        0.6059999826959561,
+        0.43999984752462856
+      ],
+      [
+        0.5699998779562017,
+        0.6060001837261202,
+        0.4399998934485428
+      ]
+    ],
+    "sourceFloorSlabTopM": 0.475,
+    "actualMinimumSoleYM": 0.478990483330277,
+    "soleClearanceM": 0.003990483330277017,
+    "pedals": "not present; no invented existing pedal anchors"
+  },
+  "camera": {
+    "measuredFacialEyeBandMeanM": [
+      0.4397796792198008,
+      1.4336354947690724,
+      0.15713231188680826
+    ],
+    "eyeVertexCount": 1093,
+    "existingNavigationNeutralEyeM": [
+      0.45,
+      1.2,
+      0
+    ],
+    "verticalMismatchM": 0.23363549476907242,
+    "status": "runtime_pending_webgl; distinct cockpit camera system requires explicit migration"
+  },
+  "knees": {
+    "min": [
+      0.1323011275523986,
+      0.8762530808872959,
+      0.23243723646464814
+    ],
+    "max": [
+      0.7476988092721806,
+      0.971641127285493,
+      0.33493489201779236
+    ],
+    "wheelTubeMinimumSignedDistanceM": 0.0953273878009465,
+    "verticesInsideWheelTube": 0
+  },
+  "cabinSolidIntersections": [
+    {
+      "id": "dashboard",
+      "min": [
+        -0.785,
+        0.71,
+        0.445
+      ],
+      "max": [
+        0.785,
+        0.89,
+        0.775
+      ],
+      "intersectingTriangles": 0,
+      "dominantBones": {}
+    },
+    {
+      "id": "center-console",
+      "min": [
+        -0.1,
+        0.46,
+        -0.57
+      ],
+      "max": [
+        0.1,
+        0.78,
+        0.53
+      ],
+      "intersectingTriangles": 0,
+      "dominantBones": {}
+    },
+    {
+      "id": "cabin-floor",
+      "min": [
+        -0.7,
+        0.385,
+        -0.915
+      ],
+      "max": [
+        0.7,
+        0.475,
+        0.635
+      ],
+      "intersectingTriangles": 0,
+      "dominantBones": {}
+    }
+  ],
+  "limitations": [
+    "One-bone hands have no finger articulation; contact is approximate rather than closed finger grip.",
+    "Clearance-study pose has high knees. More naturally extended same-length legs conflict with existing dashboard and steering wheel. Usable driver fit remains partial.",
+    "No entry/exit transition or steering-turn animation is supplied."
+  ]
+}

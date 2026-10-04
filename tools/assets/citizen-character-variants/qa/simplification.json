@@ -1,0 +1,44 @@
+{
+  "method": "meshoptimizer index-only simplifyWithAttributes; LockBorder and explicit anatomical vertex locks; no vertex update, no UV/normal/weight interpolation, no seam welding",
+  "baselineSha256": "14d66fabe097abf82ef36800561c06ee7263c0acfd6b5ea1265a40ed35841ff8",
+  "sourceTriangles": 37799,
+  "protectedVertexCount": 22380,
+  "garmentComponents": [
+    5697,
+    4387
+  ],
+  "levels": [
+    {
+      "lod": 0,
+      "triangles": 37799,
+      "requestedRatio": 1,
+      "errorLimitM": 0,
+      "reportedErrorM": 0,
+      "protectedAdjacentTrianglesChanged": 0,
+      "runtimeTrianglesAfterZeroAreaCleanup": 37735
+    },
+    {
+      "lod": 1,
+      "triangles": 31831,
+      "requestedRatio": 0.84,
+      "errorLimitM": 0.001,
+      "reportedErrorM": 0.0009963298216462135,
+      "protectedAdjacentTrianglesChanged": 0,
+      "runtimeTrianglesAfterZeroAreaCleanup": 31767
+    },
+    {
+      "lod": 2,
+      "triangles": 29995,
+      "requestedRatio": 0.68,
+      "errorLimitM": 0.002,
+      "reportedErrorM": 0.001962396316230297,
+      "protectedAdjacentTrianglesChanged": 0,
+      "runtimeTrianglesAfterZeroAreaCleanup": 29931
+    }
+  ],
+  "runtimeCleanup": {
+    "zeroAreaTrianglesOmitted": 64,
+    "indexEntriesOmitted": 192,
+    "sourceVerticesUvsNormalsWeightsPreserved": true
+  }
+}

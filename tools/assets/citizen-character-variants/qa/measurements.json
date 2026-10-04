@@ -1,0 +1,598 @@
+{
+  "schemaVersion": 1,
+  "packageId": "citizen-character-variants",
+  "environment": {
+    "blender": "4.3.2",
+    "python": "3.12.14",
+    "cyclesDevice": "CPU",
+    "threads": 2,
+    "webgl": false,
+    "denoiser": "unavailable in installed Blender build; Cycles 32 sample raw PNG"
+  },
+  "assets": [
+    {
+      "id": "citizen.lod0",
+      "level": 0,
+      "source": "source/citizen.lod0.blend",
+      "sourceSha256": "aa0d574ac0303e0deddbc7d4fcf9074928f48bc225ed40853b632c18002130f4",
+      "sourceBytes": 3481281,
+      "file": "exports/citizen.lod0.glb",
+      "glb": "exports/citizen.lod0.glb",
+      "sha256": "14733b2a44621b91ff620821faa9a361fd6369458c1a50cb737df9b18453d38f",
+      "triangles": 37735,
+      "vertices": 29092,
+      "primitives": 1,
+      "bytes": 2280072,
+      "geometryBytes": 2280072,
+      "embeddedImageBytes": 0,
+      "requiredSharedImageFileBytes": 1685815,
+      "standaloneDownloadBytesIncludingMaps": 3965887,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.42600005865097046
+        ]
+      },
+      "seatedBoundsM": null
+    },
+    {
+      "id": "citizen.lod1",
+      "level": 1,
+      "source": "source/citizen.lod1.blend",
+      "sourceSha256": "c872f2f08cec97dbd6b7f31b8c00ca48b7be51e948e8f9a883e8607cc44e99ab",
+      "sourceBytes": 3260574,
+      "file": "exports/citizen.lod1.glb",
+      "glb": "exports/citizen.lod1.glb",
+      "sha256": "5cad4fcfc1782d6b5dfa7663f19dca84142b4d4b75c3cffc08e107fc6ef8ef6d",
+      "triangles": 31767,
+      "vertices": 25977,
+      "primitives": 1,
+      "bytes": 2032440,
+      "geometryBytes": 2032440,
+      "embeddedImageBytes": 0,
+      "requiredSharedImageFileBytes": 1685815,
+      "standaloneDownloadBytesIncludingMaps": 3718255,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.42600005865097046
+        ]
+      },
+      "seatedBoundsM": null
+    },
+    {
+      "id": "citizen.lod2",
+      "level": 2,
+      "source": "source/citizen.lod2.blend",
+      "sourceSha256": "f86beb80eb92d0e489b14f1e0eb43bd4d6bd9c6145f80fb3ada5acb5b1312912",
+      "sourceBytes": 3181567,
+      "file": "exports/citizen.lod2.glb",
+      "glb": "exports/citizen.lod2.glb",
+      "sha256": "2741325b8dd5b26756d0fa67ed809361013326c9ed21c6dca30bf4d70f425a33",
+      "triangles": 29931,
+      "vertices": 24803,
+      "primitives": 1,
+      "bytes": 1941592,
+      "geometryBytes": 1941592,
+      "embeddedImageBytes": 0,
+      "requiredSharedImageFileBytes": 1685815,
+      "standaloneDownloadBytesIncludingMaps": 3627407,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.42600005865097046
+        ]
+      },
+      "seatedBoundsM": null
+    },
+    {
+      "id": "police.lod0",
+      "level": 0,
+      "source": "source/police.lod0.blend",
+      "sourceSha256": "1b7d963e58269e5d01ce30098ef5172ce7e8e828ed532626ca79e3c2ed4b688c",
+      "sourceBytes": 3502945,
+      "file": "exports/police.lod0.glb",
+      "glb": "exports/police.lod0.glb",
+      "sha256": "0d312d3fda05662c3612f0aa29bcf26f2870f23dde8cbcbc6c260d2c9fdcedb0",
+      "triangles": 38483,
+      "vertices": 29734,
+      "primitives": 5,
+      "bytes": 2334200,
+      "geometryBytes": 2334200,
+      "embeddedImageBytes": 0,
+      "requiredSharedImageFileBytes": 1685815,
+      "standaloneDownloadBytesIncludingMaps": 4020015,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8579999208450317,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.8550096068065614,
+          0.42600005865097046
+        ]
+      },
+      "seatedBoundsM": null
+    },
+    {
+      "id": "police.lod1",
+      "level": 1,
+      "source": "source/police.lod1.blend",
+      "sourceSha256": "e8e649f7dda79844c764642e7353ccac47f940ef96e6ef56e708066ad487b2cb",
+      "sourceBytes": 3279316,
+      "file": "exports/police.lod1.glb",
+      "glb": "exports/police.lod1.glb",
+      "sha256": "325a1912d33c8f923954ed308883ff27577d6e200d3d40e31864e4ea1350411c",
+      "triangles": 32515,
+      "vertices": 26619,
+      "primitives": 5,
+      "bytes": 2086564,
+      "geometryBytes": 2086564,
+      "embeddedImageBytes": 0,
+      "requiredSharedImageFileBytes": 1685815,
+      "standaloneDownloadBytesIncludingMaps": 3772379,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8579999208450317,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.8550096068065614,
+          0.42600005865097046
+        ]
+      },
+      "seatedBoundsM": null
+    },
+    {
+      "id": "police.lod2",
+      "level": 2,
+      "source": "source/police.lod2.blend",
+      "sourceSha256": "eab7e82e52bd94085886ecf12375d5dada1bc6030e87bff2cda74184d95d4767",
+      "sourceBytes": 3199864,
+      "file": "exports/police.lod2.glb",
+      "glb": "exports/police.lod2.glb",
+      "sha256": "bb6ca6b0b780b4c1abd774ad3a790da10d86008988ac82a9f738e6cc6e8b001d",
+      "triangles": 30679,
+      "vertices": 25445,
+      "primitives": 5,
+      "bytes": 1995712,
+      "geometryBytes": 1995712,
+      "embeddedImageBytes": 0,
+      "requiredSharedImageFileBytes": 1685815,
+      "standaloneDownloadBytesIncludingMaps": 3681527,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8579999208450317,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.8550096068065614,
+          0.42600005865097046
+        ]
+      },
+      "seatedBoundsM": null
+    },
+    {
+      "id": "driver.lod0",
+      "level": 0,
+      "source": "source/driver.lod0.blend",
+      "sourceSha256": "3f6760f92b52ab9e8ce2c1883a9bd3d3320e690a89078ec62f843e6718168568",
+      "sourceBytes": 3489254,
+      "file": "exports/driver.lod0.glb",
+      "glb": "exports/driver.lod0.glb",
+      "sha256": "221f61dd1513ae63974234e6ec3458891cb8a0d6f1f703b2844e8e4b115759c9",
+      "triangles": 37735,
+      "vertices": 29092,
+      "primitives": 1,
+      "bytes": 2296116,
+      "geometryBytes": 2296116,
+      "embeddedImageBytes": 0,
+      "requiredSharedImageFileBytes": 1685815,
+      "standaloneDownloadBytesIncludingMaps": 3981931,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.42600005865097046
+        ]
+      },
+      "seatedBoundsM": {
+        "min": [
+          -0.30786729314006345,
+          0.478990483330277,
+          -0.24056282697736223
+        ],
+        "max": [
+          0.3076988092721806,
+          1.5860225871518137,
+          0.6959998868958363
+        ],
+        "size": [
+          0.6155661024122441,
+          1.1070321038215367,
+          0.9365627138731984
+        ]
+      }
+    },
+    {
+      "id": "driver.lod1",
+      "level": 1,
+      "source": "source/driver.lod1.blend",
+      "sourceSha256": "5f2a34af7b61bb1d4029e58d3ac58dd4df25641e5efb46f820e6ed14626ebfb9",
+      "sourceBytes": 3267940,
+      "file": "exports/driver.lod1.glb",
+      "glb": "exports/driver.lod1.glb",
+      "sha256": "1e2c1079c6cecc0406da5438b3e7d67c8c2700807fbd56270c29f7c2451e7e11",
+      "triangles": 31767,
+      "vertices": 25977,
+      "primitives": 1,
+      "bytes": 2048488,
+      "geometryBytes": 2048488,
+      "embeddedImageBytes": 0,
+      "requiredSharedImageFileBytes": 1685815,
+      "standaloneDownloadBytesIncludingMaps": 3734303,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.42600005865097046
+        ]
+      },
+      "seatedBoundsM": {
+        "min": [
+          -0.3076988724476014,
+          0.478990483330277,
+          -0.24056282697736223
+        ],
+        "max": [
+          0.3076988092721806,
+          1.5860225871518137,
+          0.6959998868958363
+        ],
+        "size": [
+          0.6153976817197819,
+          1.1070321038215367,
+          0.9365627138731984
+        ]
+      }
+    },
+    {
+      "id": "driver.lod2",
+      "level": 2,
+      "source": "source/driver.lod2.blend",
+      "sourceSha256": "dff45af670dc8f0b087067da07303b501d3e0ed1d6948f64a63a0cf641063027",
+      "sourceBytes": 3190453,
+      "file": "exports/driver.lod2.glb",
+      "glb": "exports/driver.lod2.glb",
+      "sha256": "2ac3f0b8e0834f0261662b3be987ed8739064a4d63e29ce8abb6d06184af7884",
+      "triangles": 29931,
+      "vertices": 24803,
+      "primitives": 1,
+      "bytes": 1957640,
+      "geometryBytes": 1957640,
+      "embeddedImageBytes": 0,
+      "requiredSharedImageFileBytes": 1685815,
+      "standaloneDownloadBytesIncludingMaps": 3643455,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.42600005865097046
+        ]
+      },
+      "seatedBoundsM": {
+        "min": [
+          -0.3076988724476014,
+          0.478990483330277,
+          -0.24056282697736223
+        ],
+        "max": [
+          0.3076988092721806,
+          1.5860225871518137,
+          0.6959998868958363
+        ],
+        "size": [
+          0.6153976817197819,
+          1.1070321038215367,
+          0.9365627138731984
+        ]
+      }
+    },
+    {
+      "id": "driver-roadster-fit.lod0",
+      "level": 0,
+      "source": "source/driver-roadster-fit.lod0.blend",
+      "sourceSha256": "ab824b64b42d00121e6281b4ecdb0f7ac0435c4747570cffb72d38743d55bd78",
+      "sourceBytes": 3687964,
+      "file": "exports/driver-roadster-fit.lod0.glb",
+      "glb": "exports/driver-roadster-fit.lod0.glb",
+      "sha256": "a6e21e8d1d97f8be38e49a716ee8a6ac9cca54fd31b84b13617c705b665c97fc",
+      "triangles": 36417,
+      "vertices": 27826,
+      "primitives": 2,
+      "bytes": 2264664,
+      "geometryBytes": 2264664,
+      "embeddedImageBytes": 0,
+      "requiredSharedImageFileBytes": 1685815,
+      "standaloneDownloadBytesIncludingMaps": 3950479,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.14308057725429535
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.32108063995838165
+        ]
+      },
+      "seatedBoundsM": {
+        "min": [
+          -0.30655678717570767,
+          0.4789906359952818,
+          -0.19170211113288121
+        ],
+        "max": [
+          0.30725888336866325,
+          1.589301580520836,
+          0.9160001938887365
+        ],
+        "size": [
+          0.6138156705443709,
+          1.1103109445255541,
+          1.1077023050216177
+        ]
+      }
+    },
+    {
+      "id": "driver-roadster-fit.lod1",
+      "level": 1,
+      "source": "source/driver-roadster-fit.lod1.blend",
+      "sourceSha256": "84b5aa6f6a5e931398fa2fcf4d6b7ec628d111d34b95db72f9dd16f537a45d83",
+      "sourceBytes": 3466260,
+      "file": "exports/driver-roadster-fit.lod1.glb",
+      "glb": "exports/driver-roadster-fit.lod1.glb",
+      "sha256": "1cb79599d359175c39ce0d466173f5293d7bbcb16a8f08450bd851c09ce0a0c0",
+      "triangles": 30449,
+      "vertices": 24711,
+      "primitives": 2,
+      "bytes": 2017036,
+      "geometryBytes": 2017036,
+      "embeddedImageBytes": 0,
+      "requiredSharedImageFileBytes": 1685815,
+      "standaloneDownloadBytesIncludingMaps": 3702851,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.14308057725429535
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.32108063995838165
+        ]
+      },
+      "seatedBoundsM": {
+        "min": [
+          -0.30652355878794,
+          0.4789906359952818,
+          -0.19170211113288121
+        ],
+        "max": [
+          0.30725888336866325,
+          1.589301580520836,
+          0.9160001938887365
+        ],
+        "size": [
+          0.6137824421566033,
+          1.1103109445255541,
+          1.1077023050216177
+        ]
+      }
+    },
+    {
+      "id": "driver-roadster-fit.lod2",
+      "level": 2,
+      "source": "source/driver-roadster-fit.lod2.blend",
+      "sourceSha256": "628e42366d2bc527420d2b6867f54c96229177b2fa163fe2856242371d89a718",
+      "sourceBytes": 3328433,
+      "file": "exports/driver-roadster-fit.lod2.glb",
+      "glb": "exports/driver-roadster-fit.lod2.glb",
+      "sha256": "1198d8433e27e9b60c17d054548162315584e49e644d16426828005e846833ac",
+      "triangles": 28613,
+      "vertices": 23537,
+      "primitives": 2,
+      "bytes": 1926188,
+      "geometryBytes": 1926188,
+      "embeddedImageBytes": 0,
+      "requiredSharedImageFileBytes": 1685815,
+      "standaloneDownloadBytesIncludingMaps": 3612003,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.14308057725429535
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.32108063995838165
+        ]
+      },
+      "seatedBoundsM": {
+        "min": [
+          -0.30652355878794,
+          0.4789906359952818,
+          -0.19170211113288121
+        ],
+        "max": [
+          0.30725888336866325,
+          1.589301580520836,
+          0.9160001938887365
+        ],
+        "size": [
+          0.6137824421566033,
+          1.1103109445255541,
+          1.1077023050216177
+        ]
+      }
+    }
+  ],
+  "textureFiles": [
+    {
+      "id": "citizen-baseColor",
+      "path": "exports/textures/citizen-53e23506fc52ad56.png",
+      "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "gpuFormatEstimate": "RGBA8 full mip chain",
+      "fileBytes": 696823,
+      "uniqueTexelBytesWithMips": 5592404,
+      "colorSpace": "sRGB",
+      "role": "baseColor",
+      "normalConvention": null,
+      "channelsMeaning": "RGB"
+    },
+    {
+      "id": "citizen-roughnessMetallicLegacy",
+      "path": "exports/textures/citizen-97cbd4395750f8b9.png",
+      "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "gpuFormatEstimate": "RGBA8 full mip chain",
+      "fileBytes": 309221,
+      "uniqueTexelBytesWithMips": 5592404,
+      "colorSpace": "Non-Color",
+      "role": "roughnessMetallicLegacy",
+      "normalConvention": null,
+      "channelsMeaning": "G=roughness; B retained from legacy map with material metallicFactor=0; no occlusion binding"
+    },
+    {
+      "id": "citizen-normal",
+      "path": "exports/textures/citizen-d750e70a2bafbdb5.png",
+      "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "gpuFormatEstimate": "RGBA8 full mip chain",
+      "fileBytes": 679771,
+      "uniqueTexelBytesWithMips": 5592404,
+      "colorSpace": "Non-Color",
+      "role": "normal",
+      "normalConvention": "OpenGL +Y",
+      "channelsMeaning": "RGB"
+    }
+  ],
+  "packageTotals": {
+    "GLBBytes": 25180712,
+    "sourceBlendBytes": 40335851,
+    "uniqueImageBytes": 1685815,
+    "uniqueTexelBytesWithMips": 16777212,
+    "previewsBytes": 27295758,
+    "previewCount": 38
+  },
+  "costInterpretation": "Storage/download and RGBA8+mip estimates only; no actual GPU memory/FPS measurements"
+}

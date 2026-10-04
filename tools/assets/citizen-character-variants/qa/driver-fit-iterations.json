@@ -1,0 +1,740 @@
+{
+  "selectedTrial": 2,
+  "reason": "Selected trial2 only as a collision-free clearance study; high knees prevent comfortable-driver acceptance. Extended trials5\u20138 hit dashboard and steering wheel; no distorted rig or car scale used.",
+  "iterations": [
+    {
+      "trial": 0,
+      "footForwardLocalM": 0.53,
+      "kneeOutwardBendParameter": 1.2,
+      "selected": false,
+      "intersections": [
+        {
+          "id": "dashboard",
+          "min": [
+            -0.785,
+            0.71,
+            0.445
+          ],
+          "max": [
+            0.785,
+            0.89,
+            0.775
+          ],
+          "intersectingTriangles": 35,
+          "dominantBones": {
+            "shinR": 17,
+            "shinL": 18
+          }
+        },
+        {
+          "id": "center-console",
+          "min": [
+            -0.1,
+            0.46,
+            -0.57
+          ],
+          "max": [
+            0.1,
+            0.78,
+            0.53
+          ],
+          "intersectingTriangles": 0,
+          "dominantBones": {}
+        },
+        {
+          "id": "cabin-floor",
+          "min": [
+            -0.7,
+            0.385,
+            -0.915
+          ],
+          "max": [
+            0.7,
+            0.475,
+            0.635
+          ],
+          "intersectingTriangles": 0,
+          "dominantBones": {}
+        }
+      ],
+      "knees": {
+        "min": [
+          0.08028803331070561,
+          0.8104207672009568,
+          0.22059642639005422
+        ],
+        "max": [
+          0.7991368339344264,
+          0.9192143345431419,
+          0.33192405495325383
+        ],
+        "wheelTubeMinimumSignedDistanceM": 0.11779320372005363,
+        "verticesInsideWheelTube": 0
+      },
+      "ankles": [
+        [
+          0.3100001895192452,
+          0.6060002323854456,
+          0.47000019489706146
+        ],
+        [
+          0.5700000352487529,
+          0.6060001896270057,
+          0.4700001254024909
+        ]
+      ]
+    },
+    {
+      "trial": 1,
+      "footForwardLocalM": 0.48,
+      "kneeOutwardBendParameter": 1.2,
+      "selected": false,
+      "intersections": [
+        {
+          "id": "dashboard",
+          "min": [
+            -0.785,
+            0.71,
+            0.445
+          ],
+          "max": [
+            0.785,
+            0.89,
+            0.775
+          ],
+          "intersectingTriangles": 0,
+          "dominantBones": {}
+        },
+        {
+          "id": "center-console",
+          "min": [
+            -0.1,
+            0.46,
+            -0.57
+          ],
+          "max": [
+            0.1,
+            0.78,
+            0.53
+          ],
+          "intersectingTriangles": 0,
+          "dominantBones": {}
+        },
+        {
+          "id": "cabin-floor",
+          "min": [
+            -0.7,
+            0.385,
+            -0.915
+          ],
+          "max": [
+            0.7,
+            0.475,
+            0.635
+          ],
+          "intersectingTriangles": 0,
+          "dominantBones": {}
+        }
+      ],
+      "knees": {
+        "min": [
+          0.07018729417256131,
+          0.828271941022674,
+          0.20282311745235193
+        ],
+        "max": [
+          0.8099749564197882,
+          0.9293018049983233,
+          0.31728625598560256
+        ],
+        "wheelTubeMinimumSignedDistanceM": 0.139081067694894,
+        "verticesInsideWheelTube": 0
+      },
+      "ankles": [
+        [
+          0.3100002943726764,
+          0.6059999185878152,
+          0.41999989743213717
+        ],
+        [
+          0.5699999081408149,
+          0.6060000657579525,
+          0.42000008904572894
+        ]
+      ]
+    },
+    {
+      "trial": 2,
+      "footForwardLocalM": 0.5,
+      "kneeOutwardBendParameter": 0.7,
+      "selected": true,
+      "intersections": [
+        {
+          "id": "dashboard",
+          "min": [
+            -0.785,
+            0.71,
+            0.445
+          ],
+          "max": [
+            0.785,
+            0.89,
+            0.775
+          ],
+          "intersectingTriangles": 0,
+          "dominantBones": {}
+        },
+        {
+          "id": "center-console",
+          "min": [
+            -0.1,
+            0.46,
+            -0.57
+          ],
+          "max": [
+            0.1,
+            0.78,
+            0.53
+          ],
+          "intersectingTriangles": 0,
+          "dominantBones": {}
+        },
+        {
+          "id": "cabin-floor",
+          "min": [
+            -0.7,
+            0.385,
+            -0.915
+          ],
+          "max": [
+            0.7,
+            0.475,
+            0.635
+          ],
+          "intersectingTriangles": 0,
+          "dominantBones": {}
+        }
+      ],
+      "knees": {
+        "min": [
+          0.13213269374691466,
+          0.8671196690529712,
+          0.23243723646464814
+        ],
+        "max": [
+          0.7476988092721806,
+          0.9718917044114447,
+          0.33517330391376093
+        ],
+        "wheelTubeMinimumSignedDistanceM": 0.0837142904779498,
+        "verticesInsideWheelTube": 0
+      },
+      "ankles": [
+        [
+          0.3100000682386578,
+          0.6059999826959561,
+          0.43999984752462856
+        ],
+        [
+          0.5699998779562017,
+          0.6060001837261202,
+          0.4399998934485428
+        ]
+      ]
+    },
+    {
+      "trial": 3,
+      "footForwardLocalM": 0.48,
+      "kneeOutwardBendParameter": 1.6,
+      "selected": false,
+      "intersections": [
+        {
+          "id": "dashboard",
+          "min": [
+            -0.785,
+            0.71,
+            0.445
+          ],
+          "max": [
+            0.785,
+            0.89,
+            0.775
+          ],
+          "intersectingTriangles": 0,
+          "dominantBones": {}
+        },
+        {
+          "id": "center-console",
+          "min": [
+            -0.1,
+            0.46,
+            -0.57
+          ],
+          "max": [
+            0.1,
+            0.78,
+            0.53
+          ],
+          "intersectingTriangles": 205,
+          "dominantBones": {
+            "shinR": 124,
+            "thighR": 81
+          }
+        },
+        {
+          "id": "cabin-floor",
+          "min": [
+            -0.7,
+            0.385,
+            -0.915
+          ],
+          "max": [
+            0.7,
+            0.475,
+            0.635
+          ],
+          "intersectingTriangles": 0,
+          "dominantBones": {}
+        }
+      ],
+      "knees": {
+        "min": [
+          0.04315265977125465,
+          0.7957881981991468,
+          0.1878016480762918
+        ],
+        "max": [
+          0.8366733830529451,
+          0.8958887739183574,
+          0.3084537098060707
+        ],
+        "wheelTubeMinimumSignedDistanceM": 0.17061525513625703,
+        "verticesInsideWheelTube": 0
+      },
+      "ankles": [
+        [
+          0.3100000858883916,
+          0.6060002198486902,
+          0.4200001129223851
+        ],
+        [
+          0.5699999095659171,
+          0.6060001102496387,
+          0.42000008553268064
+        ]
+      ]
+    },
+    {
+      "trial": 4,
+      "footForwardLocalM": 0.44,
+      "kneeOutwardBendParameter": 0.8,
+      "selected": false,
+      "intersections": [
+        {
+          "id": "dashboard",
+          "min": [
+            -0.785,
+            0.71,
+            0.445
+          ],
+          "max": [
+            0.785,
+            0.89,
+            0.775
+          ],
+          "intersectingTriangles": 0,
+          "dominantBones": {}
+        },
+        {
+          "id": "center-console",
+          "min": [
+            -0.1,
+            0.46,
+            -0.57
+          ],
+          "max": [
+            0.1,
+            0.78,
+            0.53
+          ],
+          "intersectingTriangles": 0,
+          "dominantBones": {}
+        },
+        {
+          "id": "cabin-floor",
+          "min": [
+            -0.7,
+            0.385,
+            -0.915
+          ],
+          "max": [
+            0.7,
+            0.475,
+            0.635
+          ],
+          "intersectingTriangles": 0,
+          "dominantBones": {}
+        }
+      ],
+      "knees": {
+        "min": [
+          0.11004224552745445,
+          0.8790785423110046,
+          0.21082769601833634
+        ],
+        "max": [
+          0.7702181750575081,
+          0.9741683176977873,
+          0.3177292193256831
+        ],
+        "wheelTubeMinimumSignedDistanceM": 0.11351146165402894,
+        "verticesInsideWheelTube": 0
+      },
+      "ankles": [
+        [
+          0.31000006554063597,
+          0.6060003264622519,
+          0.3800000156060152
+        ],
+        [
+          0.5699999887473437,
+          0.6060001316646075,
+          0.3800000585214655
+        ]
+      ]
+    },
+    {
+      "trial": 5,
+      "footForwardLocalM": 0.7,
+      "kneeOutwardBendParameter": 0,
+      "selected": false,
+      "purpose": "natural extension diagnostic",
+      "intersections": [
+        {
+          "id": "dashboard",
+          "min": [
+            -0.785,
+            0.71,
+            0.445
+          ],
+          "max": [
+            0.785,
+            0.89,
+            0.775
+          ],
+          "intersectingTriangles": 751,
+          "dominantBones": {
+            "shinR": 381,
+            "shinL": 370
+          }
+        },
+        {
+          "id": "center-console",
+          "min": [
+            -0.1,
+            0.46,
+            -0.57
+          ],
+          "max": [
+            0.1,
+            0.78,
+            0.53
+          ],
+          "intersectingTriangles": 0,
+          "dominantBones": {}
+        },
+        {
+          "id": "cabin-floor",
+          "min": [
+            -0.7,
+            0.385,
+            -0.915
+          ],
+          "max": [
+            0.7,
+            0.475,
+            0.635
+          ],
+          "intersectingTriangles": 0,
+          "dominantBones": {}
+        }
+      ],
+      "knees": {
+        "min": [
+          0.2738171175970565,
+          0.7759861912167901,
+          0.3173815155548002
+        ],
+        "max": [
+          0.6061272951843275,
+          0.910297557269877,
+          0.39986910228469924
+        ],
+        "wheelTubeMinimumSignedDistanceM": -0.010352488781718894,
+        "verticesInsideWheelTube": 5
+      },
+      "ankles": [
+        [
+          0.31000000393801525,
+          0.6059999991453584,
+          0.6400000151326836
+        ],
+        [
+          0.5700000009724414,
+          0.6059998563388533,
+          0.6399998874691948
+        ]
+      ]
+    },
+    {
+      "trial": 6,
+      "footForwardLocalM": 0.72,
+      "kneeOutwardBendParameter": 0,
+      "selected": false,
+      "purpose": "natural extension diagnostic",
+      "intersections": [
+        {
+          "id": "dashboard",
+          "min": [
+            -0.785,
+            0.71,
+            0.445
+          ],
+          "max": [
+            0.785,
+            0.89,
+            0.775
+          ],
+          "intersectingTriangles": 810,
+          "dominantBones": {
+            "shinR": 409,
+            "shinL": 401
+          }
+        },
+        {
+          "id": "center-console",
+          "min": [
+            -0.1,
+            0.46,
+            -0.57
+          ],
+          "max": [
+            0.1,
+            0.78,
+            0.53
+          ],
+          "intersectingTriangles": 0,
+          "dominantBones": {}
+        },
+        {
+          "id": "cabin-floor",
+          "min": [
+            -0.7,
+            0.385,
+            -0.915
+          ],
+          "max": [
+            0.7,
+            0.475,
+            0.635
+          ],
+          "intersectingTriangles": 0,
+          "dominantBones": {}
+        }
+      ],
+      "knees": {
+        "min": [
+          0.27301601055910046,
+          0.7556516476507497,
+          0.32194844736607114
+        ],
+        "max": [
+          0.6069333663610361,
+          0.8924287623206139,
+          0.4040536073055934
+        ],
+        "wheelTubeMinimumSignedDistanceM": -0.016416502830953854,
+        "verticesInsideWheelTube": 15
+      },
+      "ankles": [
+        [
+          0.3100000630006409,
+          0.6060001772061744,
+          0.6600000556294564
+        ],
+        [
+          0.5699999626536949,
+          0.6060003521947155,
+          0.6600001493654921
+        ]
+      ]
+    },
+    {
+      "trial": 7,
+      "footForwardLocalM": 0.74,
+      "kneeOutwardBendParameter": 0,
+      "selected": false,
+      "purpose": "natural extension diagnostic",
+      "intersections": [
+        {
+          "id": "dashboard",
+          "min": [
+            -0.785,
+            0.71,
+            0.445
+          ],
+          "max": [
+            0.785,
+            0.89,
+            0.775
+          ],
+          "intersectingTriangles": 863,
+          "dominantBones": {
+            "shinR": 438,
+            "shinL": 425
+          }
+        },
+        {
+          "id": "center-console",
+          "min": [
+            -0.1,
+            0.46,
+            -0.57
+          ],
+          "max": [
+            0.1,
+            0.78,
+            0.53
+          ],
+          "intersectingTriangles": 0,
+          "dominantBones": {}
+        },
+        {
+          "id": "cabin-floor",
+          "min": [
+            -0.7,
+            0.385,
+            -0.915
+          ],
+          "max": [
+            0.7,
+            0.475,
+            0.635
+          ],
+          "intersectingTriangles": 0,
+          "dominantBones": {}
+        }
+      ],
+      "knees": {
+        "min": [
+          0.27210873013033277,
+          0.7319191785802903,
+          0.32586032822339833
+        ],
+        "max": [
+          0.6078466227330228,
+          0.8709638616694376,
+          0.40757728284124967
+        ],
+        "wheelTubeMinimumSignedDistanceM": -0.01631596965759388,
+        "verticesInsideWheelTube": 20
+      },
+      "ankles": [
+        [
+          0.30999999935588485,
+          0.6059999736208911,
+          0.6800000474450851
+        ],
+        [
+          0.5700000165347547,
+          0.60599990712215,
+          0.6800000465328889
+        ]
+      ]
+    },
+    {
+      "trial": 8,
+      "footForwardLocalM": 0.72,
+      "kneeOutwardBendParameter": 0.25,
+      "selected": false,
+      "purpose": "natural extension diagnostic",
+      "intersections": [
+        {
+          "id": "dashboard",
+          "min": [
+            -0.785,
+            0.71,
+            0.445
+          ],
+          "max": [
+            0.785,
+            0.89,
+            0.775
+          ],
+          "intersectingTriangles": 718,
+          "dominantBones": {
+            "shinR": 364,
+            "shinL": 354
+          }
+        },
+        {
+          "id": "center-console",
+          "min": [
+            -0.1,
+            0.46,
+            -0.57
+          ],
+          "max": [
+            0.1,
+            0.78,
+            0.53
+          ],
+          "intersectingTriangles": 0,
+          "dominantBones": {}
+        },
+        {
+          "id": "cabin-floor",
+          "min": [
+            -0.7,
+            0.385,
+            -0.915
+          ],
+          "max": [
+            0.7,
+            0.475,
+            0.635
+          ],
+          "intersectingTriangles": 0,
+          "dominantBones": {}
+        }
+      ],
+      "knees": {
+        "min": [
+          0.23876308452574396,
+          0.7538807880071978,
+          0.3164318088026321
+        ],
+        "max": [
+          0.6411445355873351,
+          0.8902373991427646,
+          0.40189010091365784
+        ],
+        "wheelTubeMinimumSignedDistanceM": -0.010948090455303986,
+        "verticesInsideWheelTube": 18
+      },
+      "ankles": [
+        [
+          0.31000002517295366,
+          0.6060001354116952,
+          0.6599998765420889
+        ],
+        [
+          0.5699999849464843,
+          0.6060002742211263,
+          0.6600001492068677
+        ]
+      ]
+    }
+  ],
+  "evidencePhase": "Historical original-car trials before zero-area cleanup and final optional-cockpit hand/torso refinement; not final natural-driver acceptance."
+}

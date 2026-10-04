@@ -1,0 +1,53 @@
+{
+  "status": "pass",
+  "tests": [
+    {
+      "name": "closed-solid containment catches wholly internal triangles",
+      "status": "pass"
+    },
+    {
+      "name": "triangle crossing solid with all vertices outside",
+      "status": "pass"
+    },
+    {
+      "name": "nearby separated triangle minimum gap",
+      "status": "pass"
+    },
+    {
+      "name": "coplanar face contact is counted",
+      "status": "pass"
+    },
+    {
+      "name": "torus center hole is outside",
+      "status": "pass"
+    },
+    {
+      "name": "torus tube interior is inside",
+      "status": "pass"
+    },
+    {
+      "name": "torus triangle passing through hole is clear",
+      "status": "pass"
+    },
+    {
+      "name": "morph negative control: base positions are clear",
+      "status": "pass"
+    },
+    {
+      "name": "relative morph active weight reveals hidden penetration",
+      "status": "pass"
+    },
+    {
+      "name": "zeroing morph restores base clearance",
+      "status": "pass"
+    },
+    {
+      "name": "absolute morph target is accumulated as displacement from base",
+      "status": "pass"
+    },
+    {
+      "name": "morph is applied before skinning, verified with a rotated bone",
+      "status": "pass"
+    }
+  ]
+}

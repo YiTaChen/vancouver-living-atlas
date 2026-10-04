@@ -1,0 +1,243 @@
+ERROR Draco mesh compression is not available because library could not be found at /usr/bin/4.3/python/lib/python3.13/site-packages/libextern_draco.so
+17:42:25 | INFO: Starting glTF 2.0 export
+17:42:25 | INFO: Extracting primitive: Cube
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: Cube.001
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: Cube.002
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: Cube.003
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: Torus
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: Cylinder
+Blender 4.3.2
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/roadster-driver-fit/source/roadster-cockpit-local.lod0.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/roadster-driver-fit/source/roadster-cockpit-local.lod0.blend"
+Error: Tangent space can only be computed for tris/quads, aborting
+17:42:25 | WARNING: Cylinder: Could not calculate tangents. Please try to triangulate the mesh first.
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: Cylinder.001
+Error: Tangent space can only be computed for tris/quads, aborting
+17:42:25 | WARNING: Cylinder.001: Could not calculate tangents. Please try to triangulate the mesh first.
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-cushion/039
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-back/040
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-headrest/041
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-bolster/042
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-bolster/043
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-seam/044
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-seam/045
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-seam/046
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Finished glTF 2.0 export in 0.026554346084594727 s
+
+Warning: Cylinder: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: Cylinder.001: Could not calculate tangents. Please try to triangulate the mesh first.
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:42:25 | INFO: Data are loaded, start creating Blender stuff
+17:42:25 | INFO: Blender create Mesh node Cube
+17:42:25 | INFO: Blender create Mesh node Cube.001
+17:42:25 | INFO: Blender create Mesh node Cube.002
+17:42:25 | INFO: Blender create Mesh node Cube.003
+17:42:25 | INFO: Blender create Mesh node Torus
+17:42:25 | INFO: Blender create Mesh node Cylinder
+17:42:25 | INFO: Blender create Mesh node Cylinder.001
+17:42:25 | INFO: Blender create Mesh node driver-seat-cushion/039
+17:42:25 | INFO: Blender create Mesh node driver-seat-back/040
+17:42:25 | INFO: Blender create Mesh node driver-seat-headrest/041
+17:42:25 | INFO: Blender create Mesh node driver-seat-bolster/042
+17:42:25 | INFO: Blender create Mesh node driver-seat-bolster/043
+17:42:25 | INFO: Blender create Mesh node driver-seat-seam/044
+17:42:25 | INFO: Blender create Mesh node driver-seat-seam/045
+17:42:25 | INFO: Blender create Mesh node driver-seat-seam/046
+17:42:25 | INFO: glTF import finished in 0.01s
+17:42:25 | INFO: Starting glTF 2.0 export
+17:42:25 | INFO: Extracting primitive: Cube
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: Cube.001
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: Cube.002
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: Cube.003
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: Torus
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: Cylinder
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/roadster-driver-fit/source/roadster-cockpit-local.lod1.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/roadster-driver-fit/source/roadster-cockpit-local.lod1.blend"
+Error: Tangent space can only be computed for tris/quads, aborting
+17:42:25 | WARNING: Cylinder: Could not calculate tangents. Please try to triangulate the mesh first.
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: Cylinder.001
+Error: Tangent space can only be computed for tris/quads, aborting
+17:42:25 | WARNING: Cylinder.001: Could not calculate tangents. Please try to triangulate the mesh first.
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-cushion/039
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-back/040
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-headrest/041
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-bolster/042
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-bolster/043
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-seam/044
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-seam/045
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-seam/046
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Finished glTF 2.0 export in 0.023655176162719727 s
+
+Warning: Cylinder: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: Cylinder.001: Could not calculate tangents. Please try to triangulate the mesh first.
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:42:25 | INFO: Data are loaded, start creating Blender stuff
+17:42:25 | INFO: Blender create Mesh node Cube
+17:42:25 | INFO: Blender create Mesh node Cube.001
+17:42:25 | INFO: Blender create Mesh node Cube.002
+17:42:25 | INFO: Blender create Mesh node Cube.003
+17:42:25 | INFO: Blender create Mesh node Torus
+17:42:25 | INFO: Blender create Mesh node Cylinder
+17:42:25 | INFO: Blender create Mesh node Cylinder.001
+17:42:25 | INFO: Blender create Mesh node driver-seat-cushion/039
+17:42:25 | INFO: Blender create Mesh node driver-seat-back/040
+17:42:25 | INFO: Blender create Mesh node driver-seat-headrest/041
+17:42:25 | INFO: Blender create Mesh node driver-seat-bolster/042
+17:42:25 | INFO: Blender create Mesh node driver-seat-bolster/043
+17:42:25 | INFO: Blender create Mesh node driver-seat-seam/044
+17:42:25 | INFO: Blender create Mesh node driver-seat-seam/045
+17:42:25 | INFO: Blender create Mesh node driver-seat-seam/046
+17:42:25 | INFO: glTF import finished in 0.01s
+17:42:25 | INFO: Starting glTF 2.0 export
+17:42:25 | INFO: Extracting primitive: Cube
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: Cube.001
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: Cube.002
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: Cube.003
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: Torus
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: Cylinder
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/roadster-driver-fit/source/roadster-cockpit-local.lod2.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/roadster-driver-fit/source/roadster-cockpit-local.lod2.blend"
+Error: Tangent space can only be computed for tris/quads, aborting
+17:42:25 | WARNING: Cylinder: Could not calculate tangents. Please try to triangulate the mesh first.
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: Cylinder.001
+Error: Tangent space can only be computed for tris/quads, aborting
+17:42:25 | WARNING: Cylinder.001: Could not calculate tangents. Please try to triangulate the mesh first.
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-cushion/039
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-back/040
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-headrest/041
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-bolster/042
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-bolster/043
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-seam/044
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-seam/045
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-seam/046
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Finished glTF 2.0 export in 0.02167224884033203 s
+
+Warning: Cylinder: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: Cylinder.001: Could not calculate tangents. Please try to triangulate the mesh first.
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:42:25 | INFO: Data are loaded, start creating Blender stuff
+17:42:25 | INFO: Blender create Mesh node Cube
+17:42:25 | INFO: Blender create Mesh node Cube.001
+17:42:25 | INFO: Blender create Mesh node Cube.002
+17:42:25 | INFO: Blender create Mesh node Cube.003
+17:42:25 | INFO: Blender create Mesh node Torus
+17:42:25 | INFO: Blender create Mesh node Cylinder
+17:42:25 | INFO: Blender create Mesh node Cylinder.001
+17:42:25 | INFO: Blender create Mesh node driver-seat-cushion/039
+17:42:25 | INFO: Blender create Mesh node driver-seat-back/040
+17:42:25 | INFO: Blender create Mesh node driver-seat-headrest/041
+17:42:25 | INFO: Blender create Mesh node driver-seat-bolster/042
+17:42:25 | INFO: Blender create Mesh node driver-seat-bolster/043
+17:42:25 | INFO: Blender create Mesh node driver-seat-seam/044
+17:42:25 | INFO: Blender create Mesh node driver-seat-seam/045
+17:42:25 | INFO: Blender create Mesh node driver-seat-seam/046
+17:42:25 | INFO: glTF import finished in 0.01s
+Info: Saved "edited.blend"
+17:42:25 | INFO: Starting glTF 2.0 export
+17:42:25 | INFO: Extracting primitive: Cube
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: Cube.001
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: Cube.002
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: Cube.003
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: Torus
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: Cylinder
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/roadster-driver-fit/source/roadster-cockpit-local.lod0.blend"
+Read blend: "/tmp/roadster-fit-edit-proof-dwrzvi7c/edited.blend"
+Error: Tangent space can only be computed for tris/quads, aborting
+17:42:25 | WARNING: Cylinder: Could not calculate tangents. Please try to triangulate the mesh first.
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: Cylinder.001
+Error: Tangent space can only be computed for tris/quads, aborting
+17:42:25 | WARNING: Cylinder.001: Could not calculate tangents. Please try to triangulate the mesh first.
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-cushion/039
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-back/040
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-headrest/041
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-bolster/042
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-bolster/043
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-seam/044
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-seam/045
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Extracting primitive: driver-seat-seam/046
+17:42:25 | INFO: Primitives created: 1
+17:42:25 | INFO: Finished glTF 2.0 export in 0.02376532554626465 s
+
+Warning: Cylinder: Could not calculate tangents. Please try to triangulate the mesh first.
+Warning: Cylinder.001: Could not calculate tangents. Please try to triangulate the mesh first.
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:42:25 | INFO: Data are loaded, start creating Blender stuff
+17:42:25 | INFO: Blender create Mesh node Cube
+17:42:25 | INFO: Blender create Mesh node Cube.001
+17:42:25 | INFO: Blender create Mesh node Cube.002
+17:42:25 | INFO: Blender create Mesh node Cube.003
+17:42:25 | INFO: Blender create Mesh node Torus
+17:42:25 | INFO: Blender create Mesh node Cylinder
+17:42:25 | INFO: Blender create Mesh node Cylinder.001
+17:42:25 | INFO: Blender create Mesh node driver-seat-cushion/039
+17:42:25 | INFO: Blender create Mesh node driver-seat-back/040
+17:42:25 | INFO: Blender create Mesh node driver-seat-headrest/041
+17:42:25 | INFO: Blender create Mesh node driver-seat-bolster/042
+17:42:25 | INFO: Blender create Mesh node driver-seat-bolster/043
+17:42:25 | INFO: Blender create Mesh node driver-seat-seam/044
+17:42:25 | INFO: Blender create Mesh node driver-seat-seam/045
+17:42:25 | INFO: Blender create Mesh node driver-seat-seam/046
+17:42:25 | INFO: glTF import finished in 0.01s
+BLENDER_AUDIT_PASS
+Read blend: "/tmp/roadster-fit-edit-proof-dwrzvi7c/edited.blend"
+
+Blender quit

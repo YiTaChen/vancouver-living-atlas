@@ -1,0 +1,235 @@
+{
+  "status": "offline_complete_static_pose_candidate",
+  "runtimeStatus": "runtime_pending_webgl",
+  "ownedPackage": "tools/assets/roadster-driver-fit",
+  "noCommit": true,
+  "geometryFrozen": {
+    "specSha256": "a2b413a67933f24e5d0dc1f7c7175a0a5834ef2173c31d6f52ebd92ffa569052",
+    "exports": [
+      {
+        "lod": 0,
+        "file": "exports/roadster-cockpit-local.lod0.glb",
+        "sha256": "706d649ab14e3cc38c6693cbc9a8a7c69c5731d7ad9c3ad758234f33408c74c6",
+        "source": "source/roadster-cockpit-local.lod0.blend",
+        "sourceSha256": "ebe186a9369f299bd526c732ddce9720c30d35076250354d70fd40fb62f02130"
+      },
+      {
+        "lod": 1,
+        "file": "exports/roadster-cockpit-local.lod1.glb",
+        "sha256": "a6b86d69660a113c2b5c24daa6cdcdfa8dfd8b50f6bfe4f3db50d0d62c989556",
+        "source": "source/roadster-cockpit-local.lod1.blend",
+        "sourceSha256": "3d896fead9aa932c32d4c062f43a8164a552860bcb79ffc0928923eb8e478805"
+      },
+      {
+        "lod": 2,
+        "file": "exports/roadster-cockpit-local.lod2.glb",
+        "sha256": "b6ed43359b1832adcbc644746993b0bfe59ed8db2371772806d3c2e232bfee14",
+        "source": "source/roadster-cockpit-local.lod2.blend",
+        "sourceSha256": "8ffaff5cfe457952fbedaa6510d36d3e2af16371193bac754988083525699d1f"
+      }
+    ]
+  },
+  "humanDependencyLock": [
+    {
+      "lod": 0,
+      "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod0.glb",
+      "sha256": "a6e21e8d1d97f8be38e49a716ee8a6ac9cca54fd31b84b13617c705b665c97fc",
+      "source": "tools/assets/citizen-character-variants/source/driver-roadster-fit.lod0.blend",
+      "sourceSha256": "ab824b64b42d00121e6281b4ecdb0f7ac0435c4747570cffb72d38743d55bd78",
+      "pose": {
+        "family": "driver-roadster-fit",
+        "package": "citizen-character-variants",
+        "translation": [
+          0.44,
+          0,
+          -0.06
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "clip": "driver-seated",
+        "sampleSeconds": 0.5
+      }
+    },
+    {
+      "lod": 1,
+      "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod1.glb",
+      "sha256": "1cb79599d359175c39ce0d466173f5293d7bbcb16a8f08450bd851c09ce0a0c0",
+      "source": "tools/assets/citizen-character-variants/source/driver-roadster-fit.lod1.blend",
+      "sourceSha256": "84b5aa6f6a5e931398fa2fcf4d6b7ec628d111d34b95db72f9dd16f537a45d83",
+      "pose": {
+        "family": "driver-roadster-fit",
+        "package": "citizen-character-variants",
+        "translation": [
+          0.44,
+          0,
+          -0.06
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "clip": "driver-seated",
+        "sampleSeconds": 0.5
+      }
+    },
+    {
+      "lod": 2,
+      "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod2.glb",
+      "sha256": "1198d8433e27e9b60c17d054548162315584e49e644d16426828005e846833ac",
+      "source": "tools/assets/citizen-character-variants/source/driver-roadster-fit.lod2.blend",
+      "sourceSha256": "628e42366d2bc527420d2b6867f54c96229177b2fa163fe2856242371d89a718",
+      "pose": {
+        "family": "driver-roadster-fit",
+        "package": "citizen-character-variants",
+        "translation": [
+          0.44,
+          0,
+          -0.06
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "clip": "driver-seated",
+        "sampleSeconds": 0.5
+      }
+    }
+  ],
+  "changedOnly": [
+    "dashboard driver underside opening, top preserved",
+    "steering assembly rigid+.18Y",
+    "driver floor extension",
+    "eight original driver-seat parts rigid+.265Z",
+    "old decorative driver suppressed only in opt-in assembly"
+  ],
+  "preserved": "Original files, shell, passenger seat, underbody, original floor, windshield, main wheels/pivots, navigation/collision/dynamics and original camera remain untouched. Source-tested71 original local primitives are preserved.",
+  "fit": {
+    "status": "pass",
+    "reports": [
+      {
+        "lod": 0,
+        "status": "pass",
+        "nonHandGeometry": "pass",
+        "handGrip": "pass",
+        "triangles": 36417,
+        "activeMorphState": [
+          {
+            "mesh": "driver-grip-hands",
+            "dictionary": {
+              "DriverGrip": 0
+            },
+            "weights": [
+              1
+            ]
+          }
+        ]
+      },
+      {
+        "lod": 1,
+        "status": "pass",
+        "nonHandGeometry": "pass",
+        "handGrip": "pass",
+        "triangles": 30449,
+        "activeMorphState": [
+          {
+            "mesh": "driver-grip-hands",
+            "dictionary": {
+              "DriverGrip": 0
+            },
+            "weights": [
+              1
+            ]
+          }
+        ]
+      },
+      {
+        "lod": 2,
+        "status": "pass",
+        "nonHandGeometry": "pass",
+        "handGrip": "pass",
+        "triangles": 28613,
+        "activeMorphState": [
+          {
+            "mesh": "driver-grip-hands",
+            "dictionary": {
+              "DriverGrip": 0
+            },
+            "weights": [
+              1
+            ]
+          }
+        ]
+      }
+    ],
+    "limitations": [
+      "Geometry-only static natural pose; not an ergonomic certification.",
+      "Driver backpack removed, torso reclined8degrees, seat assembly shifted+.265mZ; measured cushion minimum gap~4.95mm and backrest coat-normal gaps min~22.5mm/median~42.9mm remain a static visual support approximation, not physical contact or comfort certification.",
+      "Pedals, seat belts, entry/exit, steering animation, gameplay, WebGL and camera migration are not supplied."
+    ]
+  },
+  "maximumSampledHandPenetrationM": [
+    0.002745540983018883,
+    0.0022839122428431383,
+    0.0022951859665829963
+  ],
+  "naturalEyeTargetRoadsterM": [
+    0.4397796792198029,
+    1.4720983817429911,
+    -0.058997586349904124
+  ],
+  "checks": {
+    "common": "pass",
+    "package": "pass",
+    "kernelFixtures": 12,
+    "adapterCombinations": 6,
+    "human22InverseBindsAndLimbLengths": "pass",
+    "sourceReopenAndArtistEditProof": "pass",
+    "materialComposition": "pass, all3LODs",
+    "shell": "0 new source-triangle crossings;8 explicitly retained original seat/door interfaces",
+    "cyclesCpuPreviews": 9,
+    "scopedOxlint": "pass"
+  },
+  "evidence": [
+    "qa/validation.json",
+    "qa/common-validation.json",
+    "qa/adapter-preservation.json",
+    "qa/material-composition.json",
+    "qa/human-proportions.json",
+    "qa/cabin-envelope.json",
+    "qa/driver-fit-summary.json",
+    "qa/candidate-seat-support.json",
+    "qa/source-edit-proof.json",
+    "qa/render-evidence.json",
+    "qa/visual-review.json"
+  ],
+  "limits": [
+    "Static measured geometry only; no gameplay, WebGL, dynamic clearance or ergonomic certification",
+    "Coat/backrest-normal minimum22.5mm/median42.9mm remains visible, cushion gap4.95mm; no soft-body contact claim",
+    "Hand depth is finite vertex/edge-midpoint/centroid sampling with3mm gate; not a continuous maximum-depth guarantee",
+    "Original decorative seam strips and inherited8seat/door joins are preserved source geometry",
+    "Camera target measured but not installed; pedals, seat belts, steering/entry/exit animations not provided"
+  ]
+}

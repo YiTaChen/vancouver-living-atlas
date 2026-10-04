@@ -1,0 +1,1943 @@
+{
+  "humanFile": "/tmp/atlas-driver-supported/driver-supported.glb",
+  "humanSha256": "938e71d10e865befc43802138fcf92c11cdc8d3d6475d9fb52ffc789a83ff188",
+  "results": [
+    {
+      "translationZ": 0.16,
+      "intersections": 6,
+      "parts": [
+        {
+          "collider": "driver-seat-cushion/039",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.004131015598680961,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighL",
+            "point": [
+              0.4482232016289723,
+              0.6204986251296766,
+              -0.032797181434561506
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-back/040",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.12358593810698991,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "chest",
+            "point": [
+              0.43105913066502577,
+              1.0698632817462608,
+              -0.23425677539344464
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-headrest/041",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.13980388992616039,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "chest",
+            "point": [
+              0.4392763247985112,
+              1.1296171893568467,
+              -0.23773904789138167
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-bolster/042",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.07817592106789749,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "chest",
+            "point": [
+              0.2758787437773412,
+              1.0818031818516372,
+              -0.1832748295524548
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-bolster/043",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.0779087656856119,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "upperArmL",
+            "point": [
+              0.6474793591152963,
+              1.108505767975617,
+              -0.16177968892901512
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-seam/044",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.08900899840320893,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "hips",
+            "point": [
+              0.3565152220435861,
+              0.6482305481226875,
+              -0.08069061116267082
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-seam/045",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 6,
+          "surfaceCrossingTriangles": 6,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {
+            "thighL": 3,
+            "thighR": 3
+          },
+          "minimumSeparationM": 0,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighR",
+            "point": [
+              0.3816402697004585,
+              0.6253817332800363,
+              -0.03286258097175622
+            ]
+          },
+          "sample": [
+            {
+              "bone": "thighL",
+              "point": [
+                0.4482232016289723,
+                0.6204986251296766,
+                -0.032797181434561506
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "thighR",
+              "point": [
+                0.4052254627535175,
+                0.6209706156940364,
+                -0.02193502337659925
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "thighR",
+              "point": [
+                0.4225051008197518,
+                0.621035925654563,
+                -0.03483425845522032
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "thighR",
+              "point": [
+                0.43178740095121704,
+                0.6192671647120715,
+                -0.022695255353011288
+              ],
+              "kind": "surface"
+            }
+          ]
+        },
+        {
+          "collider": "driver-seat-seam/046",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.04063091629709058,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighL",
+            "point": [
+              0.5284677356243492,
+              0.6661306362396902,
+              0.14457465443936557
+            ]
+          },
+          "sample": []
+        }
+      ]
+    },
+    {
+      "translationZ": 0.18,
+      "intersections": 14,
+      "parts": [
+        {
+          "collider": "driver-seat-cushion/039",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.0032903757357424135,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighL",
+            "point": [
+              0.4482232016289723,
+              0.6204986251296766,
+              -0.032797181434561506
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-back/040",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.10423333147909913,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "hips",
+            "point": [
+              0.4257939353952037,
+              0.8046003738016336,
+              -0.18241810828433264
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-headrest/041",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.12019507988032657,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "chest",
+            "point": [
+              0.4392763247985112,
+              1.1296171893568467,
+              -0.23773904789138167
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-bolster/042",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.06392325650965823,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "upperArmR",
+            "point": [
+              0.2270152906201285,
+              1.1046743123125078,
+              -0.1555690118356751
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-bolster/043",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.06283938493923483,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "upperArmL",
+            "point": [
+              0.6531911175217976,
+              1.1094212806973842,
+              -0.16144363137899065
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-seam/044",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.07434459162096832,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "hips",
+            "point": [
+              0.3565152220435861,
+              0.6482305481226875,
+              -0.08069061116267082
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-seam/045",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 14,
+          "surfaceCrossingTriangles": 14,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {
+            "thighL": 8,
+            "thighR": 6
+          },
+          "minimumSeparationM": 0,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighR",
+            "point": [
+              0.3816402697004585,
+              0.6253817332800363,
+              -0.03286258097175622
+            ]
+          },
+          "sample": [
+            {
+              "bone": "thighL",
+              "point": [
+                0.4482232016289723,
+                0.6204986251296766,
+                -0.032797181434561506
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "thighR",
+              "point": [
+                0.3994315828176987,
+                0.6203297131047583,
+                -0.008775115688093253
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "thighR",
+              "point": [
+                0.4052254627535175,
+                0.6209706156940364,
+                -0.02193502337659925
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "thighR",
+              "point": [
+                0.4256797662652554,
+                0.6181354858049182,
+                -0.00897719350612694
+              ],
+              "kind": "surface"
+            }
+          ]
+        },
+        {
+          "collider": "driver-seat-seam/046",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.046860181494577914,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighL",
+            "point": [
+              0.5284677356243492,
+              0.6661306362396902,
+              0.14457465443936557
+            ]
+          },
+          "sample": []
+        }
+      ]
+    },
+    {
+      "translationZ": 0.2,
+      "intersections": 0,
+      "parts": [
+        {
+          "collider": "driver-seat-cushion/039",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.002449735872803867,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighL",
+            "point": [
+              0.4482232016289723,
+              0.6204986251296766,
+              -0.032797181434561506
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-back/040",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.0842405274774207,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "hips",
+            "point": [
+              0.4257939353952037,
+              0.8046003738016336,
+              -0.18241810828433264
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-headrest/041",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.1006122282290346,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "chest",
+            "point": [
+              0.4392763247985112,
+              1.1296171893568467,
+              -0.23773904789138167
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-bolster/042",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.0490089576352361,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "upperArmR",
+            "point": [
+              0.2270152906201285,
+              1.1046743123125078,
+              -0.1555690118356751
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-bolster/043",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.04815692815248575,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "upperArmL",
+            "point": [
+              0.6525730073443774,
+              1.1029677682446217,
+              -0.15598176270114295
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-seam/044",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.061241294317176564,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "hips",
+            "point": [
+              0.5213372282064364,
+              0.7324564397008789,
+              -0.1538562267926411
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-seam/045",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.002165519733118673,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighL",
+            "point": [
+              0.44159061017542056,
+              0.6206957277699273,
+              0.00355421292236389
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-seam/046",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.053090667848817,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighL",
+            "point": [
+              0.5353765944803427,
+              0.6810313370229193,
+              0.18971665560478673
+            ]
+          },
+          "sample": []
+        }
+      ]
+    },
+    {
+      "translationZ": 0.22,
+      "intersections": 0,
+      "parts": [
+        {
+          "collider": "driver-seat-cushion/039",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.0030630428441584577,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighL",
+            "point": [
+              0.4482232016289723,
+              0.6204986251296766,
+              -0.032797181434561506
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-back/040",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.06425220267132009,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "hips",
+            "point": [
+              0.4257939353952037,
+              0.8046003738016336,
+              -0.18241810828433264
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-headrest/041",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.08102937657774273,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "chest",
+            "point": [
+              0.4392763247985112,
+              1.1296171893568467,
+              -0.23773904789138167
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-bolster/042",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.03451531454735109,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "upperArmR",
+            "point": [
+              0.22735950186006382,
+              1.0907173575312026,
+              -0.14271579771471554
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-bolster/043",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.034092388585668786,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "upperArmL",
+            "point": [
+              0.6560688431998869,
+              1.0894251013413236,
+              -0.14211334042827367
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-seam/044",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.05048498822399966,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "hips",
+            "point": [
+              0.3505310800941266,
+              0.6975394269339728,
+              -0.13144489931593908
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-seam/045",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.015434936292036558,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighL",
+            "point": [
+              0.4564579834022003,
+              0.6387076802815204,
+              0.034562642824598665
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-seam/046",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.059377961407848616,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighL",
+            "point": [
+              0.5353765944803427,
+              0.6810313370229193,
+              0.18971665560478673
+            ]
+          },
+          "sample": []
+        }
+      ]
+    },
+    {
+      "translationZ": 0.24,
+      "intersections": 0,
+      "parts": [
+        {
+          "collider": "driver-seat-cushion/039",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.0039036827071757133,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighL",
+            "point": [
+              0.4482232016289723,
+              0.6204986251296766,
+              -0.032797181434561506
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-back/040",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.04427442406806335,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "hips",
+            "point": [
+              0.4257939353952037,
+              0.8046003738016336,
+              -0.18241810828433264
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-headrest/041",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.06144652492645077,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "chest",
+            "point": [
+              0.4392763247985112,
+              1.1296171893568467,
+              -0.23773904789138167
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-bolster/042",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.02118504589682801,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "upperArmR",
+            "point": [
+              0.22105816903017653,
+              1.079308318132246,
+              -0.13029798727899022
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-bolster/043",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.02081424619943981,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "upperArmL",
+            "point": [
+              0.6601984573458393,
+              1.0870890238999302,
+              -0.13753424164038144
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-seam/044",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.03924260583501075,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "hips",
+            "point": [
+              0.3408762570333963,
+              0.7153293703685503,
+              -0.13849327717118626
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-seam/045",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.01974274622678589,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighL",
+            "point": [
+              0.448825743839078,
+              0.6482586155671893,
+              0.0642238953692382
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-seam/046",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.06566525496688023,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighL",
+            "point": [
+              0.5353765944803427,
+              0.6810313370229193,
+              0.18971665560478673
+            ]
+          },
+          "sample": []
+        }
+      ]
+    },
+    {
+      "translationZ": 0.25,
+      "intersections": 0,
+      "parts": [
+        {
+          "collider": "driver-seat-cushion/039",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.004324002638684341,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighL",
+            "point": [
+              0.4482232016289723,
+              0.6204986251296766,
+              -0.032797181434561506
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-back/040",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.03429524990111408,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "hips",
+            "point": [
+              0.4257939353952037,
+              0.8046003738016336,
+              -0.18241810828433264
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-headrest/041",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.05165509910080478,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "chest",
+            "point": [
+              0.4392763247985112,
+              1.1296171893568467,
+              -0.23773904789138167
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-bolster/042",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.014690405711310429,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "upperArmR",
+            "point": [
+              0.2196703819446018,
+              1.0823984297851448,
+              -0.13228480276601576
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-bolster/043",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.014387501078272415,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "upperArmL",
+            "point": [
+              0.6625583145795644,
+              1.0812120394746902,
+              -0.13016722064186806
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-seam/044",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.03402171241086081,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "hips",
+            "point": [
+              0.44869287356908927,
+              0.6727359411676688,
+              -0.10662612226151783
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-seam/045",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.021930924516137207,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighL",
+            "point": [
+              0.5275831483509732,
+              0.644189602419732,
+              0.06143780384839371
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-seam/046",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.06880890174639605,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighL",
+            "point": [
+              0.5353765944803427,
+              0.6810313370229193,
+              0.18971665560478673
+            ]
+          },
+          "sample": []
+        }
+      ]
+    },
+    {
+      "translationZ": 0.26,
+      "intersections": 0,
+      "parts": [
+        {
+          "collider": "driver-seat-cushion/039",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.004744322570193081,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighL",
+            "point": [
+              0.4482232016289723,
+              0.6204986251296766,
+              -0.032797181434561506
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-back/040",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.024332875230465786,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "hips",
+            "point": [
+              0.4257939353952037,
+              0.8046003738016336,
+              -0.18241810828433264
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-headrest/041",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.04186367327515881,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "chest",
+            "point": [
+              0.4392763247985112,
+              1.1296171893568467,
+              -0.23773904789138167
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-bolster/042",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.008249742429186652,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "upperArmR",
+            "point": [
+              0.2164594463399233,
+              1.0770780409313396,
+              -0.12497636054318403
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-bolster/043",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.008013557734340863,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "upperArmL",
+            "point": [
+              0.6713452207250681,
+              1.0730037702647977,
+              -0.11714703952052408
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-seam/044",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.026543666117419068,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "hips",
+            "point": [
+              0.43198486757014526,
+              0.7180848801306077,
+              -0.14594705909105815
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-seam/045",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.023833417600143784,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighR",
+            "point": [
+              0.35278623482380206,
+              0.6408464123582253,
+              0.015776180704142967
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-seam/046",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.07195763308771003,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighL",
+            "point": [
+              0.53559638757894,
+              0.6962048683900928,
+              0.2352498382358198
+            ]
+          },
+          "sample": []
+        }
+      ]
+    },
+    {
+      "translationZ": 0.27,
+      "intersections": 0,
+      "parts": [
+        {
+          "collider": "driver-seat-cushion/039",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.0051646425017015975,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighL",
+            "point": [
+              0.4482232016289723,
+              0.6204986251296766,
+              -0.032797181434561506
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-back/040",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.01438206945419156,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "hips",
+            "point": [
+              0.4474675272397766,
+              0.7676492222900629,
+              -0.1860509273022535
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-headrest/041",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.032072247449512856,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "chest",
+            "point": [
+              0.4392763247985112,
+              1.1296171893568467,
+              -0.23773904789138167
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-bolster/042",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.002247213557745735,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "upperArmR",
+            "point": [
+              0.20966184754931397,
+              1.0702309180916334,
+              -0.11398816229409577
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-bolster/043",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.00162861369210296,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "upperArmL",
+            "point": [
+              0.6670910217024668,
+              1.0709368064182512,
+              -0.11647894315961285
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-seam/044",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.019065619823977403,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "hips",
+            "point": [
+              0.44869287356908927,
+              0.6727359411676688,
+              -0.10662612226151783
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-seam/045",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.025917077303013875,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighR",
+            "point": [
+              0.34493255030706027,
+              0.645031529780566,
+              0.06330274764373978
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-seam/046",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.07510745697911851,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighL",
+            "point": [
+              0.53559638757894,
+              0.6962048683900928,
+              0.2352498382358198
+            ]
+          },
+          "sample": []
+        }
+      ]
+    },
+    {
+      "translationZ": 0.28,
+      "intersections": 16,
+      "parts": [
+        {
+          "collider": "driver-seat-cushion/039",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.005584962433210336,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighL",
+            "point": [
+              0.4482232016289723,
+              0.6204986251296766,
+              -0.032797181434561506
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-back/040",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.0044315118153718065,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "hips",
+            "point": [
+              0.4474675272397766,
+              0.7676492222900629,
+              -0.1860509273022535
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-headrest/041",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.022280821623866905,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "chest",
+            "point": [
+              0.4392763247985112,
+              1.1296171893568467,
+              -0.23773904789138167
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-bolster/042",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 6,
+          "surfaceCrossingTriangles": 6,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {
+            "upperArmR": 6
+          },
+          "minimumSeparationM": 0,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "upperArmR",
+            "point": [
+              0.17992622959304616,
+              1.073911301783204,
+              -0.1035713068653247
+            ]
+          },
+          "sample": [
+            {
+              "bone": "upperArmR",
+              "point": [
+                0.19067274674600757,
+                1.0661005086800839,
+                -0.10252686486773821
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "upperArmR",
+              "point": [
+                0.19828616840184846,
+                1.0693878265812173,
+                -0.10965886997202481
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "upperArmR",
+              "point": [
+                0.20464124816196183,
+                1.0593002828084397,
+                -0.10128746770142719
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "upperArmR",
+              "point": [
+                0.20966184754931397,
+                1.0702309180916334,
+                -0.11398816229409577
+              ],
+              "kind": "surface"
+            }
+          ]
+        },
+        {
+          "collider": "driver-seat-bolster/043",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 10,
+          "surfaceCrossingTriangles": 10,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {
+            "upperArmL": 10
+          },
+          "minimumSeparationM": 0,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "upperArmL",
+            "point": [
+              0.7016777405469095,
+              1.077646789690186,
+              -0.10536637694109714
+            ]
+          },
+          "sample": [
+            {
+              "bone": "upperArmL",
+              "point": [
+                0.6713452207250681,
+                1.0730037702647977,
+                -0.11714703952052408
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "upperArmL",
+              "point": [
+                0.6798665073575434,
+                1.0633540459406294,
+                -0.10478132360247645
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "upperArmL",
+              "point": [
+                0.67816541439114,
+                1.0757559980895985,
+                -0.11698505041958669
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "upperArmL",
+              "point": [
+                0.6670910217024668,
+                1.0709368064182512,
+                -0.11647894315961285
+              ],
+              "kind": "surface"
+            }
+          ]
+        },
+        {
+          "collider": "driver-seat-seam/044",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.011587573530535652,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "hips",
+            "point": [
+              0.44869287356908927,
+              0.6727359411676688,
+              -0.10662612226151783
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-seam/045",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.028125042861014745,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighR",
+            "point": [
+              0.34493255030706027,
+              0.645031529780566,
+              0.06330274764373978
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-seam/046",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.0782572808705271,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighL",
+            "point": [
+              0.53559638757894,
+              0.6962048683900928,
+              0.2352498382358198
+            ]
+          },
+          "sample": []
+        }
+      ]
+    },
+    {
+      "translationZ": 0.3,
+      "intersections": 162,
+      "parts": [
+        {
+          "collider": "driver-seat-cushion/039",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.006425602296227703,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighL",
+            "point": [
+              0.4482232016289723,
+              0.6204986251296766,
+              -0.032797181434561506
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-back/040",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 109,
+          "surfaceCrossingTriangles": 83,
+          "fullyContainedTriangles": 26,
+          "dominantBones": {
+            "hips": 47,
+            "chest": 39,
+            "spine": 23
+          },
+          "minimumSeparationM": 0,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "hips",
+            "point": [
+              0.34692799208215874,
+              0.7285351919288556,
+              -0.14576127418995125
+            ]
+          },
+          "sample": [
+            {
+              "bone": "hips",
+              "point": [
+                0.37181489254006245,
+                0.7217310811110265,
+                -0.13857763554533337
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "hips",
+              "point": [
+                0.38759144889645036,
+                0.718450753095363,
+                -0.13998051884867763
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "hips",
+              "point": [
+                0.3799553464590733,
+                0.7741512984919068,
+                -0.1785009223840584
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "hips",
+              "point": [
+                0.3867245015193074,
+                0.8022984682571708,
+                -0.1754090387041828
+              ],
+              "kind": "surface"
+            }
+          ]
+        },
+        {
+          "collider": "driver-seat-headrest/041",
+          "colliderTriangles": 288,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.0026979699725749513,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "chest",
+            "point": [
+              0.4392763247985112,
+              1.1296171893568467,
+              -0.23773904789138167
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-bolster/042",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 21,
+          "surfaceCrossingTriangles": 21,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {
+            "upperArmR": 21
+          },
+          "minimumSeparationM": 0,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "upperArmR",
+            "point": [
+              0.1653848760464263,
+              1.0611672559047525,
+              -0.07916629029828262
+            ]
+          },
+          "sample": [
+            {
+              "bone": "upperArmR",
+              "point": [
+                0.16746110332163028,
+                1.0650285555978605,
+                -0.08442574587950025
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "upperArmR",
+              "point": [
+                0.17228256569247902,
+                1.0557380915702947,
+                -0.08112197406588828
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "upperArmR",
+              "point": [
+                0.17836862580214954,
+                1.0525988691869563,
+                -0.08297532112227612
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "upperArmR",
+              "point": [
+                0.17930008239687423,
+                1.0659247607172815,
+                -0.09570799714764233
+              ],
+              "kind": "surface"
+            }
+          ]
+        },
+        {
+          "collider": "driver-seat-bolster/043",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 32,
+          "surfaceCrossingTriangles": 26,
+          "fullyContainedTriangles": 6,
+          "dominantBones": {
+            "upperArmL": 32
+          },
+          "minimumSeparationM": 0,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "upperArmL",
+            "point": [
+              0.6694243685411276,
+              1.029822568361026,
+              -0.07089482270478706
+            ]
+          },
+          "sample": [
+            {
+              "bone": "upperArmL",
+              "point": [
+                0.6958492222499331,
+                1.0552657267713261,
+                -0.09073449369259468
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "upperArmL",
+              "point": [
+                0.6959725121650201,
+                1.064609666241061,
+                -0.09862199384681891
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "upperArmL",
+              "point": [
+                0.7030111334327644,
+                1.0509915166060602,
+                -0.08195856710334859
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "upperArmL",
+              "point": [
+                0.6658432625487218,
+                1.0476936834060375,
+                -0.08986926096797618
+              ],
+              "kind": "surface"
+            }
+          ]
+        },
+        {
+          "collider": "driver-seat-seam/044",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.0037226485580689164,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "hips",
+            "point": [
+              0.44813632091016126,
+              0.6228585628858438,
+              -0.04913760676694674
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-seam/045",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.03276510798244496,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighL",
+            "point": [
+              0.5249167109862896,
+              0.6493289618166772,
+              0.0837436950185079
+            ]
+          },
+          "sample": []
+        },
+        {
+          "collider": "driver-seat-seam/046",
+          "colliderTriangles": 12,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 0,
+          "surfaceCrossingTriangles": 0,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {},
+          "minimumSeparationM": 0.08455692865334416,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "thighL",
+            "point": [
+              0.53559638757894,
+              0.6962048683900928,
+              0.2352498382358198
+            ]
+          },
+          "sample": []
+        }
+      ]
+    }
+  ]
+}

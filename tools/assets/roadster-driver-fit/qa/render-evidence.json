@@ -1,0 +1,733 @@
+[
+  {
+    "file": "qa/previews/module-lods-sunny.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 24,
+    "resolution": [
+      960,
+      480
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/roadster-driver-fit/exports/roadster-cockpit-local.lod0.glb",
+        "sha256": "706d649ab14e3cc38c6693cbc9a8a7c69c5731d7ad9c3ad758234f33408c74c6"
+      },
+      {
+        "file": "tools/assets/roadster-driver-fit/exports/roadster-cockpit-local.lod1.glb",
+        "sha256": "a6b86d69660a113c2b5c24daa6cdcdfa8dfd8b50f6bfe4f3db50d0d62c989556"
+      },
+      {
+        "file": "tools/assets/roadster-driver-fit/exports/roadster-cockpit-local.lod2.glb",
+        "sha256": "b6ed43359b1832adcbc644746993b0bfe59ed8db2371772806d3c2e232bfee14"
+      }
+    ],
+    "lighting": "sunny",
+    "leftToRightLods": [
+      0,
+      1,
+      2
+    ],
+    "axis": "Blender +Z up from glTF Y-up import"
+  },
+  {
+    "file": "qa/previews/module-lods-overcast.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 24,
+    "resolution": [
+      960,
+      480
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/roadster-driver-fit/exports/roadster-cockpit-local.lod0.glb",
+        "sha256": "706d649ab14e3cc38c6693cbc9a8a7c69c5731d7ad9c3ad758234f33408c74c6"
+      },
+      {
+        "file": "tools/assets/roadster-driver-fit/exports/roadster-cockpit-local.lod1.glb",
+        "sha256": "a6b86d69660a113c2b5c24daa6cdcdfa8dfd8b50f6bfe4f3db50d0d62c989556"
+      },
+      {
+        "file": "tools/assets/roadster-driver-fit/exports/roadster-cockpit-local.lod2.glb",
+        "sha256": "b6ed43359b1832adcbc644746993b0bfe59ed8db2371772806d3c2e232bfee14"
+      }
+    ],
+    "lighting": "overcast",
+    "leftToRightLods": [
+      0,
+      1,
+      2
+    ],
+    "axis": "Blender +Z up from glTF Y-up import"
+  },
+  {
+    "file": "qa/previews/module-lods-dusk.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 24,
+    "resolution": [
+      960,
+      480
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/roadster-driver-fit/exports/roadster-cockpit-local.lod0.glb",
+        "sha256": "706d649ab14e3cc38c6693cbc9a8a7c69c5731d7ad9c3ad758234f33408c74c6"
+      },
+      {
+        "file": "tools/assets/roadster-driver-fit/exports/roadster-cockpit-local.lod1.glb",
+        "sha256": "a6b86d69660a113c2b5c24daa6cdcdfa8dfd8b50f6bfe4f3db50d0d62c989556"
+      },
+      {
+        "file": "tools/assets/roadster-driver-fit/exports/roadster-cockpit-local.lod2.glb",
+        "sha256": "b6ed43359b1832adcbc644746993b0bfe59ed8db2371772806d3c2e232bfee14"
+      }
+    ],
+    "lighting": "dusk",
+    "leftToRightLods": [
+      0,
+      1,
+      2
+    ],
+    "axis": "Blender +Z up from glTF Y-up import"
+  },
+  {
+    "file": "qa/previews/module-lods-night.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 24,
+    "resolution": [
+      960,
+      480
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/roadster-driver-fit/exports/roadster-cockpit-local.lod0.glb",
+        "sha256": "706d649ab14e3cc38c6693cbc9a8a7c69c5731d7ad9c3ad758234f33408c74c6"
+      },
+      {
+        "file": "tools/assets/roadster-driver-fit/exports/roadster-cockpit-local.lod1.glb",
+        "sha256": "a6b86d69660a113c2b5c24daa6cdcdfa8dfd8b50f6bfe4f3db50d0d62c989556"
+      },
+      {
+        "file": "tools/assets/roadster-driver-fit/exports/roadster-cockpit-local.lod2.glb",
+        "sha256": "b6ed43359b1832adcbc644746993b0bfe59ed8db2371772806d3c2e232bfee14"
+      }
+    ],
+    "lighting": "night",
+    "leftToRightLods": [
+      0,
+      1,
+      2
+    ],
+    "axis": "Blender +Z up from glTF Y-up import"
+  },
+  {
+    "posedDriverBoundsGltf": {
+      "min": [
+        0.1334432065486908,
+        0.4789905250072479,
+        -0.25170212984085083
+      ],
+      "max": [
+        0.7472589015960693,
+        1.5893014669418335,
+        0.8560006022453308
+      ]
+    },
+    "sampledMorphWeights": [
+      {
+        "mesh": "Tailored torso.001",
+        "DriverGrip": 1.0
+      }
+    ],
+    "file": "qa/previews/driver-full.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 24,
+    "resolution": [
+      800,
+      560
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/roadster-driver-fit/qa/candidate.semantic-inspection.glb",
+        "sha256": "cd52bb37f443bc397a3e09babbcd7bcfb56fb3210f128c7fb85ade2f063c635b"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod0.glb",
+        "sha256": "a6e21e8d1d97f8be38e49a716ee8a6ac9cca54fd31b84b13617c705b665c97fc"
+      }
+    ],
+    "lighting": "sunny",
+    "clip": "driver-seated",
+    "seconds": 0.5,
+    "scale": [
+      1,
+      1,
+      1
+    ],
+    "qaOnlyHiddenNodes": []
+  },
+  {
+    "posedDriverBoundsGltf": {
+      "min": [
+        0.1334432065486908,
+        0.4789905250072479,
+        -0.25170212984085083
+      ],
+      "max": [
+        0.7472589015960693,
+        1.5893014669418335,
+        0.8560006022453308
+      ]
+    },
+    "sampledMorphWeights": [
+      {
+        "mesh": "Tailored torso.001",
+        "DriverGrip": 1.0
+      }
+    ],
+    "file": "qa/previews/driver-hands.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 24,
+    "resolution": [
+      800,
+      560
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/roadster-driver-fit/qa/candidate.semantic-inspection.glb",
+        "sha256": "cd52bb37f443bc397a3e09babbcd7bcfb56fb3210f128c7fb85ade2f063c635b"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod0.glb",
+        "sha256": "a6e21e8d1d97f8be38e49a716ee8a6ac9cca54fd31b84b13617c705b665c97fc"
+      }
+    ],
+    "lighting": "sunny",
+    "clip": "driver-seated",
+    "seconds": 0.5,
+    "scale": [
+      1,
+      1,
+      1
+    ],
+    "qaOnlyHiddenNodes": [
+      "preserved-source-part/026",
+      "preserved-source-part/080",
+      "preserved-source-part/012",
+      "Mesh_77",
+      "preserved-source-part/077",
+      "preserved-source-part/010",
+      "preserved-source-part/023",
+      "Mesh_82",
+      "underbody/020",
+      "preserved-source-part/063",
+      "preserved-source-part/075",
+      "preserved-source-part/038",
+      "Mesh_73",
+      "preserved-source-part/058",
+      "preserved-source-part/072",
+      "Mesh_76",
+      "passenger-seat-back/029",
+      "preserved-source-part/070",
+      "preserved-source-part/001",
+      "preserved-source-part/027",
+      "preserved-source-part/054",
+      "preserved-source-part/081",
+      "preserved-source-part/051",
+      "Mesh_78",
+      "passenger-seat-bolster/032",
+      "preserved-source-part/000",
+      "preserved-source-part/004",
+      "preserved-source-part/066",
+      "preserved-source-part/078",
+      "preserved-source-part/024",
+      "preserved-source-part/009",
+      "preserved-source-part/022",
+      "passenger-seat-bolster/031",
+      "preserved-source-part/048",
+      "preserved-source-part/064",
+      "preserved-source-part/076",
+      "passenger-seat-headrest/030",
+      "preserved-source-part/047",
+      "preserved-source-part/073",
+      "Mesh_80",
+      "preserved-source-part/007",
+      "preserved-source-part/019",
+      "preserved-source-part/067",
+      "Mesh_71",
+      "preserved-source-part/056",
+      "Mesh_74",
+      "passenger-seat-cushion/028",
+      "passenger-seat-seam/035",
+      "preserved-source-part/068",
+      "preserved-source-part/082",
+      "preserved-source-part/005",
+      "preserved-source-part/014",
+      "Mesh_79",
+      "passenger-seat-seam/033",
+      "preserved-source-part/008",
+      "preserved-source-part/052",
+      "preserved-source-part/079",
+      "passenger-seat-seam/034",
+      "preserved-source-part/013",
+      "preserved-source-part/025",
+      "preserved-source-part/011",
+      "preserved-source-part/003",
+      "preserved-source-part/049",
+      "preserved-source-part/065",
+      "preserved-source-part/002",
+      "preserved-source-part/062",
+      "preserved-source-part/074",
+      "Mesh_81",
+      "preserved-source-part/017",
+      "preserved-source-part/018",
+      "preserved-source-part/006",
+      "preserved-source-part/016",
+      "preserved-source-part/037",
+      "Mesh_72",
+      "preserved-source-part/057",
+      "preserved-source-part/071",
+      "Mesh_75",
+      "preserved-source-part/036",
+      "preserved-source-part/055",
+      "preserved-source-part/069",
+      "preserved-source-part/015"
+    ]
+  },
+  {
+    "posedDriverBoundsGltf": {
+      "min": [
+        0.1334432065486908,
+        0.4789905250072479,
+        -0.25170212984085083
+      ],
+      "max": [
+        0.7472589015960693,
+        1.5893014669418335,
+        0.8560006022453308
+      ]
+    },
+    "sampledMorphWeights": [
+      {
+        "mesh": "Tailored torso.001",
+        "DriverGrip": 1.0
+      }
+    ],
+    "file": "qa/previews/driver-footwell.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 24,
+    "resolution": [
+      800,
+      560
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/roadster-driver-fit/qa/candidate.semantic-inspection.glb",
+        "sha256": "cd52bb37f443bc397a3e09babbcd7bcfb56fb3210f128c7fb85ade2f063c635b"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod0.glb",
+        "sha256": "a6e21e8d1d97f8be38e49a716ee8a6ac9cca54fd31b84b13617c705b665c97fc"
+      }
+    ],
+    "lighting": "sunny",
+    "clip": "driver-seated",
+    "seconds": 0.5,
+    "scale": [
+      1,
+      1,
+      1
+    ],
+    "qaOnlyHiddenNodes": [
+      "Mesh_74",
+      "passenger-seat-seam/034",
+      "preserved-source-part/052",
+      "preserved-source-part/068",
+      "preserved-source-part/082",
+      "preserved-source-part/026",
+      "Mesh_79",
+      "preserved-source-part/023",
+      "preserved-source-part/049",
+      "preserved-source-part/065",
+      "preserved-source-part/079",
+      "preserved-source-part/009",
+      "preserved-source-part/062",
+      "underbody/020",
+      "preserved-source-part/007",
+      "preserved-source-part/038",
+      "preserved-source-part/057",
+      "preserved-source-part/074",
+      "Mesh_81",
+      "passenger-seat-headrest/030",
+      "passenger-seat-back/029",
+      "Mesh_72",
+      "preserved-source-part/015",
+      "preserved-source-part/055",
+      "preserved-source-part/071",
+      "Mesh_75",
+      "preserved-source-part/001",
+      "preserved-source-part/069",
+      "preserved-source-part/027",
+      "preserved-source-part/000",
+      "preserved-source-part/004",
+      "preserved-source-part/024",
+      "preserved-source-part/066",
+      "preserved-source-part/080",
+      "passenger-seat-bolster/032",
+      "passenger-seat-bolster/031",
+      "Mesh_77",
+      "preserved-source-part/011",
+      "preserved-source-part/022",
+      "preserved-source-part/063",
+      "preserved-source-part/077",
+      "preserved-source-part/017",
+      "preserved-source-part/019",
+      "preserved-source-part/058",
+      "preserved-source-part/067",
+      "preserved-source-part/075",
+      "Mesh_82",
+      "Mesh_73",
+      "preserved-source-part/006",
+      "preserved-source-part/072",
+      "Mesh_76",
+      "passenger-seat-seam/035",
+      "preserved-source-part/005",
+      "preserved-source-part/054",
+      "preserved-source-part/070",
+      "passenger-seat-cushion/028",
+      "preserved-source-part/008",
+      "preserved-source-part/013",
+      "preserved-source-part/025",
+      "preserved-source-part/051",
+      "preserved-source-part/081",
+      "passenger-seat-seam/033",
+      "preserved-source-part/012",
+      "preserved-source-part/048",
+      "Mesh_78",
+      "preserved-source-part/003",
+      "preserved-source-part/010",
+      "preserved-source-part/064",
+      "preserved-source-part/078",
+      "preserved-source-part/002",
+      "preserved-source-part/018",
+      "preserved-source-part/047",
+      "preserved-source-part/076",
+      "Mesh_80",
+      "preserved-source-part/016",
+      "preserved-source-part/037",
+      "preserved-source-part/056",
+      "preserved-source-part/073",
+      "Mesh_71",
+      "preserved-source-part/014",
+      "preserved-source-part/036"
+    ]
+  },
+  {
+    "camera": {
+      "locationBlenderM": [
+        4.0,
+        -0.15000000596046448,
+        1.25
+      ],
+      "rotationEulerRad": [
+        1.4951012134552002,
+        1.1576371861110601e-07,
+        1.5792229175567627
+      ],
+      "orthographicScaleM": 2.0
+    },
+    "posedDriverBoundsGltf": {
+      "min": [
+        0.1334432065486908,
+        0.4789905250072479,
+        -0.25170212984085083
+      ],
+      "max": [
+        0.7472589015960693,
+        1.5893014669418335,
+        0.8560006022453308
+      ]
+    },
+    "sampledMorphWeights": [
+      {
+        "mesh": "Tailored torso.001",
+        "DriverGrip": 1.0
+      }
+    ],
+    "file": "qa/previews/driver-side.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 24,
+    "resolution": [
+      800,
+      560
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/roadster-driver-fit/qa/candidate.semantic-inspection.glb",
+        "sha256": "cd52bb37f443bc397a3e09babbcd7bcfb56fb3210f128c7fb85ade2f063c635b"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod0.glb",
+        "sha256": "a6e21e8d1d97f8be38e49a716ee8a6ac9cca54fd31b84b13617c705b665c97fc"
+      }
+    ],
+    "lighting": "sunny",
+    "clip": "driver-seated",
+    "seconds": 0.5,
+    "scale": [
+      1,
+      1,
+      1
+    ],
+    "qaOnlyHiddenNodes": [
+      "Mesh_76",
+      "passenger-seat-seam/034",
+      "preserved-source-part/010",
+      "preserved-source-part/024",
+      "preserved-source-part/054",
+      "preserved-source-part/070",
+      "preserved-source-part/022",
+      "preserved-source-part/051",
+      "preserved-source-part/081",
+      "preserved-source-part/078",
+      "preserved-source-part/048",
+      "Mesh_78",
+      "preserved-source-part/019",
+      "preserved-source-part/064",
+      "preserved-source-part/047",
+      "preserved-source-part/076",
+      "preserved-source-part/073",
+      "Mesh_80",
+      "passenger-seat-cushion/028",
+      "preserved-source-part/056",
+      "Mesh_71",
+      "passenger-seat-seam/035",
+      "preserved-source-part/025",
+      "preserved-source-part/052",
+      "Mesh_74",
+      "passenger-seat-bolster/032",
+      "preserved-source-part/009",
+      "preserved-source-part/003",
+      "preserved-source-part/068",
+      "preserved-source-part/082",
+      "preserved-source-part/079",
+      "preserved-source-part/049",
+      "Mesh_79",
+      "preserved-source-part/007",
+      "preserved-source-part/018",
+      "preserved-source-part/065",
+      "preserved-source-part/016",
+      "preserved-source-part/062",
+      "preserved-source-part/074",
+      "Mesh_81",
+      "preserved-source-part/014",
+      "preserved-source-part/037",
+      "preserved-source-part/057",
+      "Mesh_72",
+      "preserved-source-part/004",
+      "preserved-source-part/013",
+      "preserved-source-part/026",
+      "preserved-source-part/036",
+      "preserved-source-part/055",
+      "preserved-source-part/071",
+      "Mesh_75",
+      "passenger-seat-seam/033",
+      "preserved-source-part/011",
+      "preserved-source-part/023",
+      "preserved-source-part/000",
+      "preserved-source-part/069",
+      "preserved-source-part/002",
+      "preserved-source-part/080",
+      "passenger-seat-bolster/031",
+      "preserved-source-part/017",
+      "preserved-source-part/066",
+      "underbody/020",
+      "Mesh_77",
+      "passenger-seat-headrest/030",
+      "preserved-source-part/006",
+      "preserved-source-part/063",
+      "preserved-source-part/001",
+      "preserved-source-part/077",
+      "preserved-source-part/067",
+      "preserved-source-part/075",
+      "preserved-source-part/015",
+      "preserved-source-part/038",
+      "Mesh_82",
+      "passenger-seat-back/029",
+      "preserved-source-part/005",
+      "preserved-source-part/058",
+      "preserved-source-part/027",
+      "Mesh_73",
+      "preserved-source-part/008",
+      "preserved-source-part/012",
+      "preserved-source-part/072"
+    ]
+  },
+  {
+    "camera": {
+      "locationBlenderM": [
+        -3.0,
+        0.8500000238418579,
+        1.2000000476837158
+      ],
+      "rotationEulerRad": [
+        1.503169298171997,
+        4.593563573962456e-08,
+        -1.8130372762680054
+      ],
+      "orthographicScaleM": 1.1799999475479126
+    },
+    "posedDriverBoundsGltf": {
+      "min": [
+        0.1334432065486908,
+        0.4789905250072479,
+        -0.25170212984085083
+      ],
+      "max": [
+        0.7472589015960693,
+        1.5893014669418335,
+        0.8560006022453308
+      ]
+    },
+    "sampledMorphWeights": [
+      {
+        "mesh": "Tailored torso.001",
+        "DriverGrip": 1.0
+      }
+    ],
+    "file": "qa/previews/driver-support.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 24,
+    "resolution": [
+      800,
+      560
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/roadster-driver-fit/qa/candidate.semantic-inspection.glb",
+        "sha256": "cd52bb37f443bc397a3e09babbcd7bcfb56fb3210f128c7fb85ade2f063c635b"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod0.glb",
+        "sha256": "a6e21e8d1d97f8be38e49a716ee8a6ac9cca54fd31b84b13617c705b665c97fc"
+      }
+    ],
+    "lighting": "sunny",
+    "clip": "driver-seated",
+    "seconds": 0.5,
+    "scale": [
+      1,
+      1,
+      1
+    ],
+    "qaOnlyHiddenNodes": [
+      "preserved-source-part/051",
+      "preserved-source-part/024",
+      "preserved-source-part/081",
+      "Mesh_78",
+      "preserved-source-part/022",
+      "preserved-source-part/048",
+      "preserved-source-part/064",
+      "preserved-source-part/078",
+      "preserved-source-part/003",
+      "preserved-source-part/011",
+      "passenger-seat-headrest/030",
+      "preserved-source-part/002",
+      "preserved-source-part/019",
+      "preserved-source-part/047",
+      "preserved-source-part/076",
+      "Mesh_80",
+      "preserved-source-part/056",
+      "preserved-source-part/073",
+      "passenger-seat-back/029",
+      "Mesh_71",
+      "preserved-source-part/027",
+      "passenger-seat-seam/035",
+      "Mesh_74",
+      "passenger-seat-bolster/032",
+      "preserved-source-part/052",
+      "preserved-source-part/068",
+      "preserved-source-part/082",
+      "preserved-source-part/049",
+      "Mesh_79",
+      "preserved-source-part/006",
+      "preserved-source-part/065",
+      "preserved-source-part/079",
+      "preserved-source-part/010",
+      "preserved-source-part/005",
+      "preserved-source-part/018",
+      "preserved-source-part/062",
+      "Mesh_81",
+      "preserved-source-part/016",
+      "preserved-source-part/037",
+      "preserved-source-part/057",
+      "preserved-source-part/074",
+      "preserved-source-part/001",
+      "preserved-source-part/007",
+      "Mesh_72",
+      "passenger-seat-cushion/028",
+      "preserved-source-part/036",
+      "preserved-source-part/014",
+      "preserved-source-part/055",
+      "preserved-source-part/071",
+      "Mesh_75",
+      "passenger-seat-seam/033",
+      "preserved-source-part/013",
+      "preserved-source-part/069",
+      "preserved-source-part/025",
+      "preserved-source-part/023",
+      "preserved-source-part/066",
+      "preserved-source-part/080",
+      "passenger-seat-bolster/031",
+      "preserved-source-part/004",
+      "preserved-source-part/009",
+      "Mesh_77",
+      "preserved-source-part/063",
+      "preserved-source-part/077",
+      "underbody/020",
+      "Mesh_82",
+      "preserved-source-part/038",
+      "preserved-source-part/058",
+      "preserved-source-part/075",
+      "preserved-source-part/017",
+      "preserved-source-part/067",
+      "Mesh_73",
+      "preserved-source-part/000",
+      "preserved-source-part/015",
+      "preserved-source-part/072",
+      "Mesh_76",
+      "passenger-seat-seam/034",
+      "preserved-source-part/008",
+      "preserved-source-part/012",
+      "preserved-source-part/054",
+      "preserved-source-part/070",
+      "preserved-source-part/026",
+      "steering-spoke-lower",
+      "steering-rim",
+      "dashboard-preserved-passenger-and-center",
+      "driver-seat-bolster-043",
+      "steering-spoke-horizontal",
+      "dashboard-preserved-outboard",
+      "center-console/050",
+      "dashboard-driver-clearance-header",
+      "driver-seat-bolster-042"
+    ]
+  }
+]

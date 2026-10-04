@@ -1,0 +1,68 @@
+{
+  "status": "pass",
+  "blender": "4.3.2",
+  "device": "CPU",
+  "threads": 2,
+  "results": [
+    {
+      "lod": 0,
+      "sourceReopened": true,
+      "sourceSha256": "ebe186a9369f299bd526c732ddce9720c30d35076250354d70fd40fb62f02130",
+      "sourceUnchanged": true,
+      "reexportEquivalent": true,
+      "editableQuads": 200,
+      "reimportBoundsM": {
+        "min": [
+          -0.7849999666213989,
+          0.38499999046325684,
+          -0.4399999976158142
+        ],
+        "max": [
+          0.7850000262260437,
+          1.2799999713897705,
+          0.8899999856948853
+        ]
+      }
+    },
+    {
+      "lod": 1,
+      "sourceReopened": true,
+      "sourceSha256": "3d896fead9aa932c32d4c062f43a8164a552860bcb79ffc0928923eb8e478805",
+      "sourceUnchanged": true,
+      "reexportEquivalent": true,
+      "editableQuads": 168,
+      "reimportBoundsM": {
+        "min": [
+          -0.7849999666213989,
+          0.38499999046325684,
+          -0.4399999976158142
+        ],
+        "max": [
+          0.7850000262260437,
+          1.2799999713897705,
+          0.8899999856948853
+        ]
+      }
+    },
+    {
+      "lod": 2,
+      "sourceReopened": true,
+      "sourceSha256": "8ffaff5cfe457952fbedaa6510d36d3e2af16371193bac754988083525699d1f",
+      "sourceUnchanged": true,
+      "reexportEquivalent": true,
+      "editableQuads": 108,
+      "reimportBoundsM": {
+        "min": [
+          -0.7849999666213989,
+          0.38499999046325684,
+          -0.4399999976158142
+        ],
+        "max": [
+          0.7850000262260437,
+          1.2799999713897705,
+          0.8899999856948853
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:04:30 | INFO: Data are loaded, start creating Blender stuff
+17:04:30 | INFO: Blender create Mesh node Tailored torso
+17:04:30 | INFO: glTF import finished in 0.13s
+Info: Saved "driver.lod0.blend"
+ERROR Draco mesh compression is not available because library could not be found at /usr/bin/4.3/python/lib/python3.13/site-packages/libextern_draco.so
+17:04:30 | INFO: Starting glTF 2.0 export
+17:04:30 | INFO: Extracting primitive: Tailored torso
+17:04:30 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+17:04:30 | INFO: Primitives created: 1
+17:04:31 | INFO: Finished glTF 2.0 export in 0.5829861164093018 s
+
+BUILT driver 0
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:04:31 | INFO: Data are loaded, start creating Blender stuff
+17:04:31 | INFO: Blender create Mesh node Tailored torso
+17:04:31 | INFO: glTF import finished in 0.10s
+Info: Saved "driver.lod1.blend"
+17:04:31 | INFO: Starting glTF 2.0 export
+17:04:31 | INFO: Extracting primitive: Tailored torso
+17:04:31 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+17:04:31 | INFO: Primitives created: 1
+17:04:31 | INFO: Finished glTF 2.0 export in 0.49024248123168945 s
+
+BUILT driver 1
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:04:31 | INFO: Data are loaded, start creating Blender stuff
+17:04:31 | INFO: Blender create Mesh node Tailored torso
+17:04:31 | INFO: glTF import finished in 0.10s
+Info: Saved "driver.lod2.blend"
+17:04:32 | INFO: Starting glTF 2.0 export
+17:04:32 | INFO: Extracting primitive: Tailored torso
+17:04:32 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+17:04:32 | INFO: Primitives created: 1
+17:04:32 | INFO: Finished glTF 2.0 export in 0.5124554634094238 s
+
+BUILT driver 2
+Blender 4.3.2
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/citizen-character-variants/source/driver.lod0.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/citizen-character-variants/source/driver.lod1.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/citizen-character-variants/source/driver.lod2.blend"
+
+Blender quit

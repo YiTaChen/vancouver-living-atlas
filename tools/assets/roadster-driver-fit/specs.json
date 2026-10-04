@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "version": "1.0.0",
+  "frame": "Roadster original +Y up, +Z forward, +X driver; root identity, units m",
+  "dashboard": {
+    "originalMin": [
+      -0.785,
+      0.71,
+      0.445
+    ],
+    "originalMax": [
+      0.785,
+      0.89,
+      0.775
+    ],
+    "driverOpeningX": [
+      0.2,
+      0.68
+    ],
+    "undersideY": 0.85,
+    "preservedTopY": 0.89
+  },
+  "steering": {
+    "originalCenter": [
+      0.44,
+      0.88,
+      0.4
+    ],
+    "candidateCenter": [
+      0.44,
+      1.06,
+      0.4
+    ],
+    "translation": [
+      0,
+      0.18,
+      0
+    ],
+    "radius": 0.16,
+    "tubeRadius": 0.019,
+    "rotationXYZ": [
+      0.25,
+      0,
+      0
+    ],
+    "spokes": [
+      [
+        [
+          0.3,
+          1.06,
+          0.4
+        ],
+        [
+          0.58,
+          1.06,
+          0.4
+        ]
+      ],
+      [
+        [
+          0.44,
+          1.06,
+          0.4
+        ],
+        [
+          0.44,
+          0.91,
+          0.44
+        ]
+      ]
+    ],
+    "spokeRadius": 0.013
+  },
+  "floorExtension": {
+    "min": [
+      0.2,
+      0.385,
+      0.635
+    ],
+    "max": [
+      0.68,
+      0.475,
+      0.89
+    ],
+    "note": "Driver-only extension meets existing floor at Z=.635. Original floor is unchanged. No recess, lower chassis change or pedals."
+  },
+  "driver": {
+    "family": "driver-roadster-fit",
+    "package": "citizen-character-variants",
+    "translation": [
+      0.44,
+      0,
+      -0.06
+    ],
+    "quaternion": [
+      0,
+      0,
+      0,
+      1
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ],
+    "clip": "driver-seated",
+    "sampleSeconds": 0.5
+  },
+  "preserved": [
+    "outer shell and hood",
+    "underbody",
+    "original cabin floor",
+    "center console",
+    "windshield and frame",
+    "all main wheels/pivots",
+    "navigation collision",
+    "vehicle dynamics",
+    "original camera",
+    "passenger seat exact; driver-seat geometry rigidly translated +.265Z"
+  ],
+  "suppressionCounts": {
+    "dashboard": 1,
+    "steering-rim": 1,
+    "steering-spoke-horizontal": 1,
+    "steering-spoke-lower": 1,
+    "legacy-driver-torso": 1,
+    "legacy-driver-head": 1,
+    "legacy-driver-arm": 2,
+    "driver-seat-cushion": 1,
+    "driver-seat-back": 1,
+    "driver-seat-headrest": 1,
+    "driver-seat-bolster": 2,
+    "driver-seat-seam": 3
+  },
+  "driverSeatTranslation": [
+    0,
+    0,
+    0.265
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "status": "pass",
+  "reports": [
+    {
+      "lod": 0,
+      "status": "pass",
+      "nonHandGeometry": "pass",
+      "handGrip": "pass",
+      "triangles": 36417,
+      "activeMorphState": [
+        {
+          "mesh": "driver-grip-hands",
+          "dictionary": {
+            "DriverGrip": 0
+          },
+          "weights": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "lod": 1,
+      "status": "pass",
+      "nonHandGeometry": "pass",
+      "handGrip": "pass",
+      "triangles": 30449,
+      "activeMorphState": [
+        {
+          "mesh": "driver-grip-hands",
+          "dictionary": {
+            "DriverGrip": 0
+          },
+          "weights": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "lod": 2,
+      "status": "pass",
+      "nonHandGeometry": "pass",
+      "handGrip": "pass",
+      "triangles": 28613,
+      "activeMorphState": [
+        {
+          "mesh": "driver-grip-hands",
+          "dictionary": {
+            "DriverGrip": 0
+          },
+          "weights": [
+            1
+          ]
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Geometry-only static natural pose; not an ergonomic certification.",
+    "Driver backpack removed, torso reclined8degrees, seat assembly shifted+.265mZ; measured cushion minimum gap~4.95mm and backrest coat-normal gaps min~22.5mm/median~42.9mm remain a static visual support approximation, not physical contact or comfort certification.",
+    "Pedals, seat belts, entry/exit, steering animation, gameplay, WebGL and camera migration are not supplied."
+  ]
+}

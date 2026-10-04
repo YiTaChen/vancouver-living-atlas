@@ -61,6 +61,7 @@ const cpuSuites = [
   ['roadster-driver-fit', 'optional cockpit adapter preserves unaffected source geometry and contact tests', [
     ['test-contact.mjs'],
     ['audit-adapter.mjs'],
+    ['check-fit.mjs', '--all'],
   ]],
 ];
 for (const [directory, title, commands] of cpuSuites) {

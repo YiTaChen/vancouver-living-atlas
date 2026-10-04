@@ -1,0 +1,58 @@
+{
+  "status": "pass",
+  "mode": "Optional materialCandidate only; no frozen source/GLB changes, no texture downloads",
+  "sourceUvContract": "Ordinary GLB keeps authored normalized primitive UV and inherited seat angular UV; combined mode replaces these in memory with exact triangle metre charts before E02 binding.",
+  "records": [
+    {
+      "lod": 0,
+      "ordinaryGlbUnchanged": true,
+      "replacementRoles": {
+        "dashboard-trim": 3,
+        "floor-trim": 1,
+        "steering-trim": 1,
+        "steering-metal": 2,
+        "seat-upholstery": 8
+      },
+      "allReplacementMetreUvErrorsBelowM": 0.000005,
+      "sharedMapsBoundOnlyToSeatMaterials": true,
+      "fallbackTrimAndMetalPreserved": true,
+      "shaderHookPreserved": true,
+      "nativeMetricUvFlipY": true,
+      "staleNormalizedUvTangentsDiscarded": true
+    },
+    {
+      "lod": 1,
+      "ordinaryGlbUnchanged": true,
+      "replacementRoles": {
+        "dashboard-trim": 3,
+        "floor-trim": 1,
+        "steering-trim": 1,
+        "steering-metal": 2,
+        "seat-upholstery": 8
+      },
+      "allReplacementMetreUvErrorsBelowM": 0.000005,
+      "sharedMapsBoundOnlyToSeatMaterials": true,
+      "fallbackTrimAndMetalPreserved": true,
+      "shaderHookPreserved": true,
+      "nativeMetricUvFlipY": true,
+      "staleNormalizedUvTangentsDiscarded": true
+    },
+    {
+      "lod": 2,
+      "ordinaryGlbUnchanged": true,
+      "replacementRoles": {
+        "dashboard-trim": 3,
+        "floor-trim": 1,
+        "steering-trim": 1,
+        "steering-metal": 2,
+        "seat-upholstery": 8
+      },
+      "allReplacementMetreUvErrorsBelowM": 0.000005,
+      "sharedMapsBoundOnlyToSeatMaterials": true,
+      "fallbackTrimAndMetalPreserved": true,
+      "shaderHookPreserved": true,
+      "nativeMetricUvFlipY": true,
+      "staleNormalizedUvTangentsDiscarded": true
+    }
+  ]
+}

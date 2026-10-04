@@ -1,0 +1,39 @@
+{
+  "status": "pass",
+  "meaning": "Final actual-export frames reviewed; citizen/police and pinned optional-cockpit natural driver are offline candidates; tucked study explicitly rejected for integration.",
+  "renderer": "Cycles CPU 32 samples, two threads; no denoiser in installed build",
+  "reviewed": [
+    "citizen-front.png",
+    "police-front.png",
+    "police-back.png",
+    "driver-side.png",
+    "driver-roadster-side.png",
+    "driver-roadster-front.png",
+    "driver-roadster-cutaway.png",
+    "citizen-lods-sunny.png",
+    "citizen-lods-overcast.png",
+    "police-lods-night.png",
+    "driver-lods-dusk.png",
+    "run-back-phase-0.775858.png",
+    "citizen-lod0-critical-waist.png",
+    "citizen-lod1-critical-waist.png",
+    "citizen-lod2-critical-waist.png",
+    "driver-roadster-fit-side.png",
+    "driver-roadster-fit-front.png",
+    "driver-roadster-fit-lods-sunny.png"
+  ],
+  "findings": {
+    "citizen": "Protected rear waist contours/UV visually track exported LOD0 under identical close-up camera; inherited layered crease shading remains. Sleeve/knee reduction and fine silhouette differences outside the protected region remain.",
+    "police": "Final LOD2 head no longer recolored after anatomical role correction. All three LODs preserve skin, collar, shoes and backpack. Hat and original small shield badges are visible.",
+    "driver": "Inspection-only tucked original-car study; retained evidence must not imply integration eligibility.",
+    "comparisons": "Multi-character arrays are qualitative side-by-side views: positions differ relative to area lights. Identical-location posterior-waist closeups provide stricter lighting comparisons.",
+    "scaleReferences": "Front/back/side images contain 1m ruler, 1.75m left mannequin and 1.81m right mannequin in QA only; marks not runtime meshes.",
+    "driver-roadster-fit": "Final -8 degree torso and removed daypack allow supported optional seat placement. DriverGrip weight1 is verified in each final character render. Fingers visibly curve at9/3 contact, while actual morphed triangle probes pass unchanged3mm depth goal. Static body support and eye height require the pinned optional cockpit, not the original car."
+  },
+  "runtime": "not_run",
+  "relatedCockpitViews": [
+    "tools/assets/roadster-driver-fit/qa/previews/driver-hands.png",
+    "tools/assets/roadster-driver-fit/qa/previews/driver-support.png",
+    "tools/assets/roadster-driver-fit/qa/previews/driver-side.png"
+  ]
+}
