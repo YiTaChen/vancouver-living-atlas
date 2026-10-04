@@ -1,0 +1,5938 @@
+{
+  "schemaVersion": 1,
+  "packageId": "transit-station-spaces",
+  "units": "m",
+  "coordinateSystem": "glTF Y-up, +Z vehicle approach, -X vehicle right; station modules have explicit track-facing edge +X",
+  "scope": "local research layouts only; not geographic route, accessibility certification, or boarding runtime",
+  "dependencies": [
+    {
+      "packageId": "boardable-bus",
+      "manifest": "../boardable-bus/manifest.json",
+      "version": "1.0.0",
+      "sha256AtLayoutBuild": "32a35e7fdaa0f82600f8d161212b952177fae8515ca8095b2d55be118503076e",
+      "identity": "local-package-dependency; not copied",
+      "geometryAuthoritative": true
+    },
+    {
+      "packageId": "boardable-metro",
+      "manifest": "../boardable-metro/manifest.json",
+      "version": "1.0.0",
+      "sha256AtLayoutBuild": "85ae667daea268564b2dc4e2ee8e671b4d67c3fc865dd9178d38add5b4751f79",
+      "identity": "local-package-dependency; not copied",
+      "geometryAuthoritative": true
+    },
+    {
+      "packageId": "street-furniture-expansion",
+      "manifest": "../street-furniture-expansion/manifest.json",
+      "version": "1.0.0",
+      "sha256AtLayoutBuild": "a047b465f83a6d2604485895a1dfb66ec4d50c192838afed0d92fc2c82cdcacb",
+      "identity": "local-package-dependency; not copied",
+      "geometryAuthoritative": true
+    }
+  ],
+  "busPairFrame": {
+    "frameId": "bus-pair-research",
+    "parentFrameId": null,
+    "translationM": [
+      0,
+      0,
+      0
+    ],
+    "rotationQuaternionXYZW": [
+      0,
+      0,
+      0,
+      1
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ],
+    "units": "m",
+    "upAxis": "+Y",
+    "frontAxis": "+Z"
+  },
+  "busPairSpatialMeaning": "two opposite-direction research islands; transforms are local scene demonstrations, not world locations",
+  "stops": [
+    {
+      "stopId": "research-bus-a",
+      "kind": "bus-stop",
+      "sourceStopId": null,
+      "provenance": {
+        "classification": "representative-research-layout",
+        "source": "docs/AI_AGENT_DEVELOPMENT_BACKLOG.md D01",
+        "realServiceOrRoute": false
+      },
+      "geographicPlacement": {
+        "status": "unresolved",
+        "worldTransform": null,
+        "reason": "No source-backed stop pair or walk-surface attachment selected"
+      },
+      "localFrame": {
+        "frameId": "research-bus-a",
+        "parentFrameId": "bus-pair-research",
+        "translationM": [
+          -8,
+          0,
+          0
+        ],
+        "rotationQuaternionXYZW": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "units": "m",
+        "upAxis": "+Y",
+        "frontAxis": "+Z"
+      },
+      "vehicleFrame": {
+        "frameId": "stopped-bus",
+        "parentFrameId": "research-bus-a",
+        "translationM": [
+          0,
+          0,
+          0
+        ],
+        "rotationQuaternionXYZW": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "units": "m",
+        "upAxis": "+Y",
+        "frontAxis": "+Z"
+      },
+      "vehicleRef": {
+        "packageId": "boardable-bus",
+        "profileId": "low-floor-bus-12m",
+        "vehicleId": "city-bus-12m"
+      },
+      "approachDirection": [
+        0,
+        0,
+        1
+      ],
+      "boardingSide": "right",
+      "floorHeightM": 0.36,
+      "floorBasis": "Explicit 0.36m level boarding-island research proposal matched to vehicle; not surveyed curb height",
+      "floorPolygonM": [
+        [
+          -6.4,
+          0.36,
+          -7
+        ],
+        [
+          -1.5,
+          0.36,
+          -7
+        ],
+        [
+          -1.5,
+          0.36,
+          7
+        ],
+        [
+          -6.4,
+          0.36,
+          7
+        ]
+      ],
+      "waitingPolygons": [
+        {
+          "id": "shelter-waiting",
+          "polygonM": [
+            [
+              -4.83,
+              0.36,
+              -2.25
+            ],
+            [
+              -4.43,
+              0.36,
+              -2.25
+            ],
+            [
+              -4.43,
+              0.36,
+              0.05
+            ],
+            [
+              -4.83,
+              0.36,
+              0.05
+            ]
+          ],
+          "purpose": "standing area in shelter, excludes bench"
+        },
+        {
+          "id": "open-waiting",
+          "polygonM": [
+            [
+              -4.2,
+              0.36,
+              -2.8
+            ],
+            [
+              -3.4,
+              0.36,
+              -2.8
+            ],
+            [
+              -3.4,
+              0.36,
+              2.8
+            ],
+            [
+              -4.2,
+              0.36,
+              2.8
+            ]
+          ],
+          "purpose": "outside approach and through corridor"
+        }
+      ],
+      "pedestrianCorridor": {
+        "polygonM": [
+          [
+            -3.3,
+            0.36,
+            -7
+          ],
+          [
+            -1.5,
+            0.36,
+            -7
+          ],
+          [
+            -1.5,
+            0.36,
+            7
+          ],
+          [
+            -3.3,
+            0.36,
+            7
+          ]
+        ],
+        "clearWidthM": 1.8,
+        "note": "Boarding approaches cross this corridor only during stopped boarding; no permanent obstacle allowed"
+      },
+      "doorAlignmentPoints": [
+        {
+          "doorGroupId": "front",
+          "vehicleAnchorId": "boarding-front",
+          "vehiclePointM": [
+            -1.7,
+            0.36,
+            4.275
+          ],
+          "stationPointM": [
+            -1.7,
+            0.36,
+            4.275
+          ],
+          "floorHeightM": 0.36,
+          "doorSillPointM": [
+            -1.25,
+            0.36,
+            4.275
+          ],
+          "platformEdgePointM": [
+            -1.5,
+            0.36,
+            4.275
+          ],
+          "horizontalThresholdGapM": 0.25,
+          "verticalDifferenceM": 0,
+          "openingWidthM": 1.15,
+          "approachPolygonM": [
+            [
+              -3,
+              0.36,
+              3.5250000000000004
+            ],
+            [
+              -1.5,
+              0.36,
+              3.5250000000000004
+            ],
+            [
+              -1.5,
+              0.36,
+              5.025
+            ],
+            [
+              -3,
+              0.36,
+              5.025
+            ]
+          ],
+          "thresholdDeck": {
+            "instanceId": "threshold-boarding-front",
+            "assetId": "bus-threshold-deck",
+            "packageId": "transit-station-spaces",
+            "frameId": "research-bus-a",
+            "deployedTransform": {
+              "frameId": "threshold-boarding-front",
+              "parentFrameId": "research-bus-a",
+              "translationM": [
+                -1.5,
+                0.36,
+                4.275
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "retractedTransform": {
+              "frameId": "threshold-boarding-front-stored",
+              "parentFrameId": "research-bus-a",
+              "translationM": [
+                -5.9,
+                0.86,
+                -4.5
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0.7071067811865475,
+                0.7071067811865476
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "storedFloorContact": {
+              "floorHeightM": 0.36,
+              "bottomHeightM": 0.36,
+              "derivation": "floorY minus minimumY of actual exported LOD0 bounds transformed by stored rotation; validate both LODs against actual GLB vertices",
+              "support": "research floor, no hidden holder"
+            },
+            "retractedMeaning": "Portable research plate stored upright at designated station-side storage strip; no automatic folding/slide mechanism or vehicle retrofit implied",
+            "transition": "Manual/actor relocation only with boarding area closed; interpolated motion path not yet validated",
+            "enabled": false,
+            "activationRequires": [
+              "vehicle stopped",
+              "correct profile and frame alignment",
+              "paired doorway fully open",
+              "station support and dynamic collision accepted by D06"
+            ],
+            "stationBearingPointM": [
+              -2.0,
+              0.36,
+              4.275
+            ],
+            "vehicleBearingPointM": [
+              -1.05,
+              0.36,
+              4.275
+            ],
+            "maximumTopHeightM": 0.375,
+            "maximumRiseM": 0.015,
+            "maximumGrade": 0.075,
+            "clearWidthM": 0.95,
+            "walkableSurfaceTriangulation": [
+              0,
+              2,
+              1,
+              0,
+              3,
+              2
+            ],
+            "walkableSurfacePolygonsM": [
+              [
+                [
+                  -2.0,
+                  0.36,
+                  3.8000000000000003
+                ],
+                [
+                  -1.8,
+                  0.375,
+                  3.8000000000000003
+                ],
+                [
+                  -1.8,
+                  0.375,
+                  4.75
+                ],
+                [
+                  -2.0,
+                  0.36,
+                  4.75
+                ]
+              ],
+              [
+                [
+                  -1.8,
+                  0.375,
+                  3.8000000000000003
+                ],
+                [
+                  -1.25,
+                  0.375,
+                  3.8000000000000003
+                ],
+                [
+                  -1.25,
+                  0.375,
+                  4.75
+                ],
+                [
+                  -1.8,
+                  0.375,
+                  4.75
+                ]
+              ],
+              [
+                [
+                  -1.25,
+                  0.375,
+                  3.8000000000000003
+                ],
+                [
+                  -1.05,
+                  0.36,
+                  3.8000000000000003
+                ],
+                [
+                  -1.05,
+                  0.36,
+                  4.75
+                ],
+                [
+                  -1.25,
+                  0.375,
+                  4.75
+                ]
+              ]
+            ],
+            "doorSweepPolicy": "Plate deploys only after leaves reach their full open endpoint; close doors only after plate is stored",
+            "modelNotCertification": true
+          }
+        },
+        {
+          "doorGroupId": "rear",
+          "vehicleAnchorId": "boarding-rear",
+          "vehiclePointM": [
+            -1.7,
+            0.36,
+            -0.625
+          ],
+          "stationPointM": [
+            -1.7,
+            0.36,
+            -0.625
+          ],
+          "floorHeightM": 0.36,
+          "doorSillPointM": [
+            -1.25,
+            0.36,
+            -0.625
+          ],
+          "platformEdgePointM": [
+            -1.5,
+            0.36,
+            -0.625
+          ],
+          "horizontalThresholdGapM": 0.25,
+          "verticalDifferenceM": 0,
+          "openingWidthM": 1.15,
+          "approachPolygonM": [
+            [
+              -3,
+              0.36,
+              -1.375
+            ],
+            [
+              -1.5,
+              0.36,
+              -1.375
+            ],
+            [
+              -1.5,
+              0.36,
+              0.125
+            ],
+            [
+              -3,
+              0.36,
+              0.125
+            ]
+          ],
+          "thresholdDeck": {
+            "instanceId": "threshold-boarding-rear",
+            "assetId": "bus-threshold-deck",
+            "packageId": "transit-station-spaces",
+            "frameId": "research-bus-a",
+            "deployedTransform": {
+              "frameId": "threshold-boarding-rear",
+              "parentFrameId": "research-bus-a",
+              "translationM": [
+                -1.5,
+                0.36,
+                -0.625
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "retractedTransform": {
+              "frameId": "threshold-boarding-rear-stored",
+              "parentFrameId": "research-bus-a",
+              "translationM": [
+                -5.9,
+                0.86,
+                -5.8
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0.7071067811865475,
+                0.7071067811865476
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "storedFloorContact": {
+              "floorHeightM": 0.36,
+              "bottomHeightM": 0.36,
+              "derivation": "floorY minus minimumY of actual exported LOD0 bounds transformed by stored rotation; validate both LODs against actual GLB vertices",
+              "support": "research floor, no hidden holder"
+            },
+            "retractedMeaning": "Portable research plate stored upright at designated station-side storage strip; no automatic folding/slide mechanism or vehicle retrofit implied",
+            "transition": "Manual/actor relocation only with boarding area closed; interpolated motion path not yet validated",
+            "enabled": false,
+            "activationRequires": [
+              "vehicle stopped",
+              "correct profile and frame alignment",
+              "paired doorway fully open",
+              "station support and dynamic collision accepted by D06"
+            ],
+            "stationBearingPointM": [
+              -2.0,
+              0.36,
+              -0.625
+            ],
+            "vehicleBearingPointM": [
+              -1.05,
+              0.36,
+              -0.625
+            ],
+            "maximumTopHeightM": 0.375,
+            "maximumRiseM": 0.015,
+            "maximumGrade": 0.075,
+            "clearWidthM": 0.95,
+            "walkableSurfaceTriangulation": [
+              0,
+              2,
+              1,
+              0,
+              3,
+              2
+            ],
+            "walkableSurfacePolygonsM": [
+              [
+                [
+                  -2.0,
+                  0.36,
+                  -1.1
+                ],
+                [
+                  -1.8,
+                  0.375,
+                  -1.1
+                ],
+                [
+                  -1.8,
+                  0.375,
+                  -0.15000000000000002
+                ],
+                [
+                  -2.0,
+                  0.36,
+                  -0.15000000000000002
+                ]
+              ],
+              [
+                [
+                  -1.8,
+                  0.375,
+                  -1.1
+                ],
+                [
+                  -1.25,
+                  0.375,
+                  -1.1
+                ],
+                [
+                  -1.25,
+                  0.375,
+                  -0.15000000000000002
+                ],
+                [
+                  -1.8,
+                  0.375,
+                  -0.15000000000000002
+                ]
+              ],
+              [
+                [
+                  -1.25,
+                  0.375,
+                  -1.1
+                ],
+                [
+                  -1.05,
+                  0.36,
+                  -1.1
+                ],
+                [
+                  -1.05,
+                  0.36,
+                  -0.15000000000000002
+                ],
+                [
+                  -1.25,
+                  0.375,
+                  -0.15000000000000002
+                ]
+              ]
+            ],
+            "doorSweepPolicy": "Plate deploys only after leaves reach their full open endpoint; close doors only after plate is stored",
+            "modelNotCertification": true
+          }
+        }
+      ],
+      "entryConnections": [
+        {
+          "connectionId": "research-bus-a-walk-entry",
+          "localPointM": [
+            -6.4,
+            0.36,
+            5.8
+          ],
+          "targetWalkSurfaceId": null,
+          "targetPointM": null,
+          "clearWidthM": 1.8,
+          "status": "unresolved-world-connection",
+          "connectorPolygonM": [
+            [
+              -8.4,
+              0.36,
+              4.9
+            ],
+            [
+              -6.4,
+              0.36,
+              4.9
+            ],
+            [
+              -6.4,
+              0.36,
+              6.7
+            ],
+            [
+              -8.4,
+              0.36,
+              6.7
+            ]
+          ]
+        }
+      ],
+      "instances": [
+        {
+          "assetId": "bus-stop-pole",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -4,
+            0.36,
+            6
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0.7071067811865475,
+            0,
+            0.7071067811865476
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "transit-shelter",
+          "packageId": "street-furniture-expansion",
+          "lodFiles": [
+            "exports/transit-shelter.lod0.glb",
+            "exports/transit-shelter.lod1.glb"
+          ],
+          "translationM": [
+            -4.65,
+            0.36,
+            -1.1
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0.7071067811865475,
+            0,
+            0.7071067811865476
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "referenceOnly": true,
+          "sourceRootPreserved": true
+        }
+      ],
+      "exclusions": [
+        {
+          "id": "vehicle-approach-envelope",
+          "type": "box",
+          "boundsM": {
+            "min": [
+              -1.45,
+              0,
+              -20
+            ],
+            "max": [
+              1.7,
+              3.4,
+              20
+            ],
+            "size": [
+              3.15,
+              3.4,
+              40
+            ]
+          },
+          "purpose": "keep road/bus approach free; not a valid pedestrian area"
+        },
+        {
+          "id": "door-sweeps",
+          "type": "vehicle-metadata-reference",
+          "ref": "boardable-bus/vehicles/0/doors/*/sweptBoundsM"
+        },
+        {
+          "id": "shelter-footprint",
+          "type": "polygon",
+          "polygonM": [
+            [
+              -6.17,
+              0.36,
+              -3.38
+            ],
+            [
+              -4.31,
+              0.36,
+              -3.38
+            ],
+            [
+              -4.31,
+              0.36,
+              1.18
+            ],
+            [
+              -6.17,
+              0.36,
+              1.18
+            ]
+          ],
+          "purpose": "shelter structure and bench; standing exception only in named free region"
+        },
+        {
+          "id": "parked-car-door-zone",
+          "type": "polygon",
+          "polygonM": [
+            [
+              -1.5,
+              0.36,
+              8
+            ],
+            [
+              -0.6,
+              0.36,
+              8
+            ],
+            [
+              -0.6,
+              0.36,
+              12
+            ],
+            [
+              -1.5,
+              0.36,
+              12
+            ]
+          ],
+          "minimumWidthM": 0.9,
+          "purpose": "representative exclusion outside stop island, not a parking placement"
+        },
+        {
+          "id": "threshold-boarding-front-storage",
+          "type": "polygon",
+          "polygonM": [
+            [
+              -5.94,
+              0.36,
+              -4.975
+            ],
+            [
+              -5.86,
+              0.36,
+              -4.975
+            ],
+            [
+              -5.86,
+              0.36,
+              -4.025
+            ],
+            [
+              -5.94,
+              0.36,
+              -4.025
+            ]
+          ],
+          "purpose": "Upright plate storage footprint outside pedestrian corridor; staff/actor managed research prop"
+        },
+        {
+          "id": "threshold-boarding-rear-storage",
+          "type": "polygon",
+          "polygonM": [
+            [
+              -5.94,
+              0.36,
+              -6.2749999999999995
+            ],
+            [
+              -5.86,
+              0.36,
+              -6.2749999999999995
+            ],
+            [
+              -5.86,
+              0.36,
+              -5.325
+            ],
+            [
+              -5.94,
+              0.36,
+              -5.325
+            ]
+          ],
+          "purpose": "Upright plate storage footprint outside pedestrian corridor; staff/actor managed research prop"
+        }
+      ],
+      "boardingGameplayEnabled": false,
+      "floorTriangulation": {
+        "indices": [
+          0,
+          2,
+          1,
+          0,
+          3,
+          2
+        ],
+        "normal": [
+          0,
+          1,
+          0
+        ],
+        "verticesRef": "floorPolygonM"
+      }
+    },
+    {
+      "stopId": "research-bus-b",
+      "kind": "bus-stop",
+      "sourceStopId": null,
+      "provenance": {
+        "classification": "representative-research-layout",
+        "source": "docs/AI_AGENT_DEVELOPMENT_BACKLOG.md D01",
+        "realServiceOrRoute": false
+      },
+      "geographicPlacement": {
+        "status": "unresolved",
+        "worldTransform": null,
+        "reason": "No source-backed stop pair or walk-surface attachment selected"
+      },
+      "localFrame": {
+        "frameId": "research-bus-b",
+        "parentFrameId": "bus-pair-research",
+        "translationM": [
+          8,
+          0,
+          22
+        ],
+        "rotationQuaternionXYZW": [
+          0,
+          1,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "units": "m",
+        "upAxis": "+Y",
+        "frontAxis": "+Z"
+      },
+      "vehicleFrame": {
+        "frameId": "stopped-bus",
+        "parentFrameId": "research-bus-b",
+        "translationM": [
+          0,
+          0,
+          0
+        ],
+        "rotationQuaternionXYZW": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "units": "m",
+        "upAxis": "+Y",
+        "frontAxis": "+Z"
+      },
+      "vehicleRef": {
+        "packageId": "boardable-bus",
+        "profileId": "low-floor-bus-12m",
+        "vehicleId": "city-bus-12m"
+      },
+      "approachDirection": [
+        0,
+        0,
+        1
+      ],
+      "boardingSide": "right",
+      "floorHeightM": 0.36,
+      "floorBasis": "Explicit 0.36m level boarding-island research proposal matched to vehicle; not surveyed curb height",
+      "floorPolygonM": [
+        [
+          -6.4,
+          0.36,
+          -7
+        ],
+        [
+          -1.5,
+          0.36,
+          -7
+        ],
+        [
+          -1.5,
+          0.36,
+          7
+        ],
+        [
+          -6.4,
+          0.36,
+          7
+        ]
+      ],
+      "waitingPolygons": [
+        {
+          "id": "shelter-waiting",
+          "polygonM": [
+            [
+              -4.83,
+              0.36,
+              -2.25
+            ],
+            [
+              -4.43,
+              0.36,
+              -2.25
+            ],
+            [
+              -4.43,
+              0.36,
+              0.05
+            ],
+            [
+              -4.83,
+              0.36,
+              0.05
+            ]
+          ],
+          "purpose": "standing area in shelter, excludes bench"
+        },
+        {
+          "id": "open-waiting",
+          "polygonM": [
+            [
+              -4.2,
+              0.36,
+              -2.8
+            ],
+            [
+              -3.4,
+              0.36,
+              -2.8
+            ],
+            [
+              -3.4,
+              0.36,
+              2.8
+            ],
+            [
+              -4.2,
+              0.36,
+              2.8
+            ]
+          ],
+          "purpose": "outside approach and through corridor"
+        }
+      ],
+      "pedestrianCorridor": {
+        "polygonM": [
+          [
+            -3.3,
+            0.36,
+            -7
+          ],
+          [
+            -1.5,
+            0.36,
+            -7
+          ],
+          [
+            -1.5,
+            0.36,
+            7
+          ],
+          [
+            -3.3,
+            0.36,
+            7
+          ]
+        ],
+        "clearWidthM": 1.8,
+        "note": "Boarding approaches cross this corridor only during stopped boarding; no permanent obstacle allowed"
+      },
+      "doorAlignmentPoints": [
+        {
+          "doorGroupId": "front",
+          "vehicleAnchorId": "boarding-front",
+          "vehiclePointM": [
+            -1.7,
+            0.36,
+            4.275
+          ],
+          "stationPointM": [
+            -1.7,
+            0.36,
+            4.275
+          ],
+          "floorHeightM": 0.36,
+          "doorSillPointM": [
+            -1.25,
+            0.36,
+            4.275
+          ],
+          "platformEdgePointM": [
+            -1.5,
+            0.36,
+            4.275
+          ],
+          "horizontalThresholdGapM": 0.25,
+          "verticalDifferenceM": 0,
+          "openingWidthM": 1.15,
+          "approachPolygonM": [
+            [
+              -3,
+              0.36,
+              3.5250000000000004
+            ],
+            [
+              -1.5,
+              0.36,
+              3.5250000000000004
+            ],
+            [
+              -1.5,
+              0.36,
+              5.025
+            ],
+            [
+              -3,
+              0.36,
+              5.025
+            ]
+          ],
+          "thresholdDeck": {
+            "instanceId": "threshold-boarding-front",
+            "assetId": "bus-threshold-deck",
+            "packageId": "transit-station-spaces",
+            "frameId": "research-bus-b",
+            "deployedTransform": {
+              "frameId": "threshold-boarding-front",
+              "parentFrameId": "research-bus-b",
+              "translationM": [
+                -1.5,
+                0.36,
+                4.275
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "retractedTransform": {
+              "frameId": "threshold-boarding-front-stored",
+              "parentFrameId": "research-bus-b",
+              "translationM": [
+                -5.9,
+                0.86,
+                -4.5
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0.7071067811865475,
+                0.7071067811865476
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "storedFloorContact": {
+              "floorHeightM": 0.36,
+              "bottomHeightM": 0.36,
+              "derivation": "floorY minus minimumY of actual exported LOD0 bounds transformed by stored rotation; validate both LODs against actual GLB vertices",
+              "support": "research floor, no hidden holder"
+            },
+            "retractedMeaning": "Portable research plate stored upright at designated station-side storage strip; no automatic folding/slide mechanism or vehicle retrofit implied",
+            "transition": "Manual/actor relocation only with boarding area closed; interpolated motion path not yet validated",
+            "enabled": false,
+            "activationRequires": [
+              "vehicle stopped",
+              "correct profile and frame alignment",
+              "paired doorway fully open",
+              "station support and dynamic collision accepted by D06"
+            ],
+            "stationBearingPointM": [
+              -2.0,
+              0.36,
+              4.275
+            ],
+            "vehicleBearingPointM": [
+              -1.05,
+              0.36,
+              4.275
+            ],
+            "maximumTopHeightM": 0.375,
+            "maximumRiseM": 0.015,
+            "maximumGrade": 0.075,
+            "clearWidthM": 0.95,
+            "walkableSurfaceTriangulation": [
+              0,
+              2,
+              1,
+              0,
+              3,
+              2
+            ],
+            "walkableSurfacePolygonsM": [
+              [
+                [
+                  -2.0,
+                  0.36,
+                  3.8000000000000003
+                ],
+                [
+                  -1.8,
+                  0.375,
+                  3.8000000000000003
+                ],
+                [
+                  -1.8,
+                  0.375,
+                  4.75
+                ],
+                [
+                  -2.0,
+                  0.36,
+                  4.75
+                ]
+              ],
+              [
+                [
+                  -1.8,
+                  0.375,
+                  3.8000000000000003
+                ],
+                [
+                  -1.25,
+                  0.375,
+                  3.8000000000000003
+                ],
+                [
+                  -1.25,
+                  0.375,
+                  4.75
+                ],
+                [
+                  -1.8,
+                  0.375,
+                  4.75
+                ]
+              ],
+              [
+                [
+                  -1.25,
+                  0.375,
+                  3.8000000000000003
+                ],
+                [
+                  -1.05,
+                  0.36,
+                  3.8000000000000003
+                ],
+                [
+                  -1.05,
+                  0.36,
+                  4.75
+                ],
+                [
+                  -1.25,
+                  0.375,
+                  4.75
+                ]
+              ]
+            ],
+            "doorSweepPolicy": "Plate deploys only after leaves reach their full open endpoint; close doors only after plate is stored",
+            "modelNotCertification": true
+          }
+        },
+        {
+          "doorGroupId": "rear",
+          "vehicleAnchorId": "boarding-rear",
+          "vehiclePointM": [
+            -1.7,
+            0.36,
+            -0.625
+          ],
+          "stationPointM": [
+            -1.7,
+            0.36,
+            -0.625
+          ],
+          "floorHeightM": 0.36,
+          "doorSillPointM": [
+            -1.25,
+            0.36,
+            -0.625
+          ],
+          "platformEdgePointM": [
+            -1.5,
+            0.36,
+            -0.625
+          ],
+          "horizontalThresholdGapM": 0.25,
+          "verticalDifferenceM": 0,
+          "openingWidthM": 1.15,
+          "approachPolygonM": [
+            [
+              -3,
+              0.36,
+              -1.375
+            ],
+            [
+              -1.5,
+              0.36,
+              -1.375
+            ],
+            [
+              -1.5,
+              0.36,
+              0.125
+            ],
+            [
+              -3,
+              0.36,
+              0.125
+            ]
+          ],
+          "thresholdDeck": {
+            "instanceId": "threshold-boarding-rear",
+            "assetId": "bus-threshold-deck",
+            "packageId": "transit-station-spaces",
+            "frameId": "research-bus-b",
+            "deployedTransform": {
+              "frameId": "threshold-boarding-rear",
+              "parentFrameId": "research-bus-b",
+              "translationM": [
+                -1.5,
+                0.36,
+                -0.625
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "retractedTransform": {
+              "frameId": "threshold-boarding-rear-stored",
+              "parentFrameId": "research-bus-b",
+              "translationM": [
+                -5.9,
+                0.86,
+                -5.8
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0.7071067811865475,
+                0.7071067811865476
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "storedFloorContact": {
+              "floorHeightM": 0.36,
+              "bottomHeightM": 0.36,
+              "derivation": "floorY minus minimumY of actual exported LOD0 bounds transformed by stored rotation; validate both LODs against actual GLB vertices",
+              "support": "research floor, no hidden holder"
+            },
+            "retractedMeaning": "Portable research plate stored upright at designated station-side storage strip; no automatic folding/slide mechanism or vehicle retrofit implied",
+            "transition": "Manual/actor relocation only with boarding area closed; interpolated motion path not yet validated",
+            "enabled": false,
+            "activationRequires": [
+              "vehicle stopped",
+              "correct profile and frame alignment",
+              "paired doorway fully open",
+              "station support and dynamic collision accepted by D06"
+            ],
+            "stationBearingPointM": [
+              -2.0,
+              0.36,
+              -0.625
+            ],
+            "vehicleBearingPointM": [
+              -1.05,
+              0.36,
+              -0.625
+            ],
+            "maximumTopHeightM": 0.375,
+            "maximumRiseM": 0.015,
+            "maximumGrade": 0.075,
+            "clearWidthM": 0.95,
+            "walkableSurfaceTriangulation": [
+              0,
+              2,
+              1,
+              0,
+              3,
+              2
+            ],
+            "walkableSurfacePolygonsM": [
+              [
+                [
+                  -2.0,
+                  0.36,
+                  -1.1
+                ],
+                [
+                  -1.8,
+                  0.375,
+                  -1.1
+                ],
+                [
+                  -1.8,
+                  0.375,
+                  -0.15000000000000002
+                ],
+                [
+                  -2.0,
+                  0.36,
+                  -0.15000000000000002
+                ]
+              ],
+              [
+                [
+                  -1.8,
+                  0.375,
+                  -1.1
+                ],
+                [
+                  -1.25,
+                  0.375,
+                  -1.1
+                ],
+                [
+                  -1.25,
+                  0.375,
+                  -0.15000000000000002
+                ],
+                [
+                  -1.8,
+                  0.375,
+                  -0.15000000000000002
+                ]
+              ],
+              [
+                [
+                  -1.25,
+                  0.375,
+                  -1.1
+                ],
+                [
+                  -1.05,
+                  0.36,
+                  -1.1
+                ],
+                [
+                  -1.05,
+                  0.36,
+                  -0.15000000000000002
+                ],
+                [
+                  -1.25,
+                  0.375,
+                  -0.15000000000000002
+                ]
+              ]
+            ],
+            "doorSweepPolicy": "Plate deploys only after leaves reach their full open endpoint; close doors only after plate is stored",
+            "modelNotCertification": true
+          }
+        }
+      ],
+      "entryConnections": [
+        {
+          "connectionId": "research-bus-b-walk-entry",
+          "localPointM": [
+            -6.4,
+            0.36,
+            5.8
+          ],
+          "targetWalkSurfaceId": null,
+          "targetPointM": null,
+          "clearWidthM": 1.8,
+          "status": "unresolved-world-connection",
+          "connectorPolygonM": [
+            [
+              -8.4,
+              0.36,
+              4.9
+            ],
+            [
+              -6.4,
+              0.36,
+              4.9
+            ],
+            [
+              -6.4,
+              0.36,
+              6.7
+            ],
+            [
+              -8.4,
+              0.36,
+              6.7
+            ]
+          ]
+        }
+      ],
+      "instances": [
+        {
+          "assetId": "bus-stop-pole",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -4,
+            0.36,
+            6
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0.7071067811865475,
+            0,
+            0.7071067811865476
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "transit-shelter",
+          "packageId": "street-furniture-expansion",
+          "lodFiles": [
+            "exports/transit-shelter.lod0.glb",
+            "exports/transit-shelter.lod1.glb"
+          ],
+          "translationM": [
+            -4.65,
+            0.36,
+            -1.1
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0.7071067811865475,
+            0,
+            0.7071067811865476
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "referenceOnly": true,
+          "sourceRootPreserved": true
+        }
+      ],
+      "exclusions": [
+        {
+          "id": "vehicle-approach-envelope",
+          "type": "box",
+          "boundsM": {
+            "min": [
+              -1.45,
+              0,
+              -20
+            ],
+            "max": [
+              1.7,
+              3.4,
+              20
+            ],
+            "size": [
+              3.15,
+              3.4,
+              40
+            ]
+          },
+          "purpose": "keep road/bus approach free; not a valid pedestrian area"
+        },
+        {
+          "id": "door-sweeps",
+          "type": "vehicle-metadata-reference",
+          "ref": "boardable-bus/vehicles/0/doors/*/sweptBoundsM"
+        },
+        {
+          "id": "shelter-footprint",
+          "type": "polygon",
+          "polygonM": [
+            [
+              -6.17,
+              0.36,
+              -3.38
+            ],
+            [
+              -4.31,
+              0.36,
+              -3.38
+            ],
+            [
+              -4.31,
+              0.36,
+              1.18
+            ],
+            [
+              -6.17,
+              0.36,
+              1.18
+            ]
+          ],
+          "purpose": "shelter structure and bench; standing exception only in named free region"
+        },
+        {
+          "id": "parked-car-door-zone",
+          "type": "polygon",
+          "polygonM": [
+            [
+              -1.5,
+              0.36,
+              8
+            ],
+            [
+              -0.6,
+              0.36,
+              8
+            ],
+            [
+              -0.6,
+              0.36,
+              12
+            ],
+            [
+              -1.5,
+              0.36,
+              12
+            ]
+          ],
+          "minimumWidthM": 0.9,
+          "purpose": "representative exclusion outside stop island, not a parking placement"
+        },
+        {
+          "id": "threshold-boarding-front-storage",
+          "type": "polygon",
+          "polygonM": [
+            [
+              -5.94,
+              0.36,
+              -4.975
+            ],
+            [
+              -5.86,
+              0.36,
+              -4.975
+            ],
+            [
+              -5.86,
+              0.36,
+              -4.025
+            ],
+            [
+              -5.94,
+              0.36,
+              -4.025
+            ]
+          ],
+          "purpose": "Upright plate storage footprint outside pedestrian corridor; staff/actor managed research prop"
+        },
+        {
+          "id": "threshold-boarding-rear-storage",
+          "type": "polygon",
+          "polygonM": [
+            [
+              -5.94,
+              0.36,
+              -6.2749999999999995
+            ],
+            [
+              -5.86,
+              0.36,
+              -6.2749999999999995
+            ],
+            [
+              -5.86,
+              0.36,
+              -5.325
+            ],
+            [
+              -5.94,
+              0.36,
+              -5.325
+            ]
+          ],
+          "purpose": "Upright plate storage footprint outside pedestrian corridor; staff/actor managed research prop"
+        }
+      ],
+      "boardingGameplayEnabled": false,
+      "floorTriangulation": {
+        "indices": [
+          0,
+          2,
+          1,
+          0,
+          3,
+          2
+        ],
+        "normal": [
+          0,
+          1,
+          0
+        ],
+        "verticesRef": "floorPolygonM"
+      }
+    },
+    {
+      "stopId": "research-metro-platform",
+      "kind": "rail-platform",
+      "sourceStopId": null,
+      "provenance": {
+        "classification": "representative-research-layout",
+        "railCandidateSource": "qa/source-audit.json",
+        "source": "boardable-metro manifest composition and door anchors",
+        "realServiceOrRoute": false
+      },
+      "geographicPlacement": {
+        "status": "unresolved",
+        "worldTransform": null,
+        "reason": "No surveyed platform, entrance or walk-surface; existing open-air rail alignments only"
+      },
+      "localFrame": {
+        "frameId": "research-metro-platform",
+        "parentFrameId": null,
+        "translationM": [
+          0,
+          0,
+          0
+        ],
+        "rotationQuaternionXYZW": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "units": "m",
+        "upAxis": "+Y",
+        "frontAxis": "+Z"
+      },
+      "vehicleFrame": {
+        "frameId": "stopped-consist",
+        "parentFrameId": "research-metro-platform",
+        "translationM": [
+          0,
+          0,
+          0
+        ],
+        "rotationQuaternionXYZW": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "units": "m",
+        "upAxis": "+Y",
+        "frontAxis": "+Z"
+      },
+      "vehicleRef": {
+        "packageId": "boardable-metro",
+        "profileId": "expo-metro-17m"
+      },
+      "approachDirection": [
+        0,
+        0,
+        1
+      ],
+      "boardingSide": "right",
+      "floorHeightM": 0.95,
+      "floorBasis": "Matches explicit rail-contact datum and vehicle sill, not legacy body height",
+      "floorPolygonM": [
+        [
+          -5.5,
+          0.95,
+          -37
+        ],
+        [
+          -1.5,
+          0.95,
+          -37
+        ],
+        [
+          -1.5,
+          0.95,
+          37
+        ],
+        [
+          -5.5,
+          0.95,
+          37
+        ]
+      ],
+      "platformWidthM": 4,
+      "platformLengthM": 74,
+      "consistBoundsM": {
+        "min": [
+          -1.4,
+          0,
+          -35.75
+        ],
+        "max": [
+          1.4,
+          3.48,
+          35.75
+        ],
+        "size": [
+          2.8,
+          3.48,
+          71.5
+        ]
+      },
+      "consistLengthM": 71.5,
+      "stoppingToleranceEachEndM": 1,
+      "actualMarginEachEndM": 1.25,
+      "waitingPolygons": [
+        {
+          "id": "waiting-strip",
+          "polygonM": [
+            [
+              -3.05,
+              0.95,
+              -35.5
+            ],
+            [
+              -2.15,
+              0.95,
+              -35.5
+            ],
+            [
+              -2.15,
+              0.95,
+              35.5
+            ],
+            [
+              -3.05,
+              0.95,
+              35.5
+            ]
+          ],
+          "purpose": "standing waiting strip behind tactile safety buffer"
+        }
+      ],
+      "pedestrianCorridor": {
+        "polygonM": [
+          [
+            -4.95,
+            0.95,
+            -37
+          ],
+          [
+            -3.15,
+            0.95,
+            -37
+          ],
+          [
+            -3.15,
+            0.95,
+            37
+          ],
+          [
+            -4.95,
+            0.95,
+            37
+          ]
+        ],
+        "clearWidthM": 1.8
+      },
+      "doorAlignmentPoints": [
+        {
+          "carId": "car-01",
+          "vehicleId": "expo-metro-lead",
+          "vehicleAnchorId": "boarding-right-rear",
+          "carLocalPointM": [
+            -1.65,
+            0.95,
+            -5.5
+          ],
+          "carToStation": {
+            "frameId": "car-01",
+            "parentFrameId": "research-metro-platform",
+            "translationM": [
+              0,
+              0,
+              26.85
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "units": "m",
+            "upAxis": "+Y",
+            "frontAxis": "+Z"
+          },
+          "stationPointM": [
+            -1.65,
+            0.95,
+            21.35
+          ],
+          "doorSillPointM": [
+            -1.28,
+            0.95,
+            21.35
+          ],
+          "platformEdgePointM": [
+            -1.5,
+            0.95,
+            21.35
+          ],
+          "horizontalThresholdGapM": 0.22,
+          "verticalDifferenceM": 0,
+          "floorHeightM": 0.95,
+          "openingWidthM": 1.4,
+          "approachPolygonM": [
+            [
+              -3,
+              0.95,
+              20.55
+            ],
+            [
+              -1.5,
+              0.95,
+              20.55
+            ],
+            [
+              -1.5,
+              0.95,
+              22.150000000000002
+            ],
+            [
+              -3,
+              0.95,
+              22.150000000000002
+            ]
+          ],
+          "thresholdDeck": {
+            "instanceId": "threshold-car-01-boarding-right-rear",
+            "assetId": "metro-threshold-deck",
+            "packageId": "transit-station-spaces",
+            "frameId": "research-metro-platform",
+            "deployedTransform": {
+              "frameId": "threshold-car-01-boarding-right-rear",
+              "parentFrameId": "research-metro-platform",
+              "translationM": [
+                -1.5,
+                0.95,
+                21.35
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "retractedTransform": {
+              "frameId": "threshold-car-01-boarding-right-rear-stored",
+              "parentFrameId": "research-metro-platform",
+              "translationM": [
+                -5.25,
+                1.429999989271164,
+                21.35
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0.7071067811865475,
+                0.7071067811865476
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "storedFloorContact": {
+              "floorHeightM": 0.95,
+              "bottomHeightM": 0.95,
+              "derivation": "floorY minus minimumY of actual exported LOD0 bounds transformed by stored rotation; validate both LODs against actual GLB vertices",
+              "support": "research floor, no hidden holder"
+            },
+            "retractedMeaning": "Portable research plate stored upright at designated station-side storage strip; no automatic folding/slide mechanism or vehicle retrofit implied",
+            "transition": "Manual/actor relocation only with boarding area closed; interpolated motion path not yet validated",
+            "enabled": false,
+            "activationRequires": [
+              "vehicle stopped",
+              "correct profile and frame alignment",
+              "paired doorway fully open",
+              "station support and dynamic collision accepted by D06"
+            ],
+            "stationBearingPointM": [
+              -1.98,
+              0.95,
+              21.35
+            ],
+            "vehicleBearingPointM": [
+              -1.08,
+              0.95,
+              21.35
+            ],
+            "maximumTopHeightM": 0.965,
+            "maximumRiseM": 0.015,
+            "maximumGrade": 0.075,
+            "clearWidthM": 1.1,
+            "walkableSurfaceTriangulation": [
+              0,
+              2,
+              1,
+              0,
+              3,
+              2
+            ],
+            "walkableSurfacePolygonsM": [
+              [
+                [
+                  -1.98,
+                  0.95,
+                  20.8
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  20.8
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  21.900000000000002
+                ],
+                [
+                  -1.98,
+                  0.95,
+                  21.900000000000002
+                ]
+              ],
+              [
+                [
+                  -1.78,
+                  0.965,
+                  20.8
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  20.8
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  21.900000000000002
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  21.900000000000002
+                ]
+              ],
+              [
+                [
+                  -1.28,
+                  0.965,
+                  20.8
+                ],
+                [
+                  -1.08,
+                  0.95,
+                  20.8
+                ],
+                [
+                  -1.08,
+                  0.95,
+                  21.900000000000002
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  21.900000000000002
+                ]
+              ]
+            ],
+            "doorSweepPolicy": "Plate deploys only after leaves reach their full open endpoint; close doors only after plate is stored",
+            "modelNotCertification": true
+          }
+        },
+        {
+          "carId": "car-01",
+          "vehicleId": "expo-metro-lead",
+          "vehicleAnchorId": "boarding-right-center",
+          "carLocalPointM": [
+            -1.65,
+            0.95,
+            0
+          ],
+          "carToStation": {
+            "frameId": "car-01",
+            "parentFrameId": "research-metro-platform",
+            "translationM": [
+              0,
+              0,
+              26.85
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "units": "m",
+            "upAxis": "+Y",
+            "frontAxis": "+Z"
+          },
+          "stationPointM": [
+            -1.65,
+            0.95,
+            26.85
+          ],
+          "doorSillPointM": [
+            -1.28,
+            0.95,
+            26.85
+          ],
+          "platformEdgePointM": [
+            -1.5,
+            0.95,
+            26.85
+          ],
+          "horizontalThresholdGapM": 0.22,
+          "verticalDifferenceM": 0,
+          "floorHeightM": 0.95,
+          "openingWidthM": 1.4,
+          "approachPolygonM": [
+            [
+              -3,
+              0.95,
+              26.05
+            ],
+            [
+              -1.5,
+              0.95,
+              26.05
+            ],
+            [
+              -1.5,
+              0.95,
+              27.650000000000002
+            ],
+            [
+              -3,
+              0.95,
+              27.650000000000002
+            ]
+          ],
+          "thresholdDeck": {
+            "instanceId": "threshold-car-01-boarding-right-center",
+            "assetId": "metro-threshold-deck",
+            "packageId": "transit-station-spaces",
+            "frameId": "research-metro-platform",
+            "deployedTransform": {
+              "frameId": "threshold-car-01-boarding-right-center",
+              "parentFrameId": "research-metro-platform",
+              "translationM": [
+                -1.5,
+                0.95,
+                26.85
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "retractedTransform": {
+              "frameId": "threshold-car-01-boarding-right-center-stored",
+              "parentFrameId": "research-metro-platform",
+              "translationM": [
+                -5.25,
+                1.429999989271164,
+                26.85
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0.7071067811865475,
+                0.7071067811865476
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "storedFloorContact": {
+              "floorHeightM": 0.95,
+              "bottomHeightM": 0.95,
+              "derivation": "floorY minus minimumY of actual exported LOD0 bounds transformed by stored rotation; validate both LODs against actual GLB vertices",
+              "support": "research floor, no hidden holder"
+            },
+            "retractedMeaning": "Portable research plate stored upright at designated station-side storage strip; no automatic folding/slide mechanism or vehicle retrofit implied",
+            "transition": "Manual/actor relocation only with boarding area closed; interpolated motion path not yet validated",
+            "enabled": false,
+            "activationRequires": [
+              "vehicle stopped",
+              "correct profile and frame alignment",
+              "paired doorway fully open",
+              "station support and dynamic collision accepted by D06"
+            ],
+            "stationBearingPointM": [
+              -1.98,
+              0.95,
+              26.85
+            ],
+            "vehicleBearingPointM": [
+              -1.08,
+              0.95,
+              26.85
+            ],
+            "maximumTopHeightM": 0.965,
+            "maximumRiseM": 0.015,
+            "maximumGrade": 0.075,
+            "clearWidthM": 1.1,
+            "walkableSurfaceTriangulation": [
+              0,
+              2,
+              1,
+              0,
+              3,
+              2
+            ],
+            "walkableSurfacePolygonsM": [
+              [
+                [
+                  -1.98,
+                  0.95,
+                  26.3
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  26.3
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  27.400000000000002
+                ],
+                [
+                  -1.98,
+                  0.95,
+                  27.400000000000002
+                ]
+              ],
+              [
+                [
+                  -1.78,
+                  0.965,
+                  26.3
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  26.3
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  27.400000000000002
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  27.400000000000002
+                ]
+              ],
+              [
+                [
+                  -1.28,
+                  0.965,
+                  26.3
+                ],
+                [
+                  -1.08,
+                  0.95,
+                  26.3
+                ],
+                [
+                  -1.08,
+                  0.95,
+                  27.400000000000002
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  27.400000000000002
+                ]
+              ]
+            ],
+            "doorSweepPolicy": "Plate deploys only after leaves reach their full open endpoint; close doors only after plate is stored",
+            "modelNotCertification": true
+          }
+        },
+        {
+          "carId": "car-01",
+          "vehicleId": "expo-metro-lead",
+          "vehicleAnchorId": "boarding-right-front",
+          "carLocalPointM": [
+            -1.65,
+            0.95,
+            5.5
+          ],
+          "carToStation": {
+            "frameId": "car-01",
+            "parentFrameId": "research-metro-platform",
+            "translationM": [
+              0,
+              0,
+              26.85
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "units": "m",
+            "upAxis": "+Y",
+            "frontAxis": "+Z"
+          },
+          "stationPointM": [
+            -1.65,
+            0.95,
+            32.35
+          ],
+          "doorSillPointM": [
+            -1.28,
+            0.95,
+            32.35
+          ],
+          "platformEdgePointM": [
+            -1.5,
+            0.95,
+            32.35
+          ],
+          "horizontalThresholdGapM": 0.22,
+          "verticalDifferenceM": 0,
+          "floorHeightM": 0.95,
+          "openingWidthM": 1.4,
+          "approachPolygonM": [
+            [
+              -3,
+              0.95,
+              31.55
+            ],
+            [
+              -1.5,
+              0.95,
+              31.55
+            ],
+            [
+              -1.5,
+              0.95,
+              33.15
+            ],
+            [
+              -3,
+              0.95,
+              33.15
+            ]
+          ],
+          "thresholdDeck": {
+            "instanceId": "threshold-car-01-boarding-right-front",
+            "assetId": "metro-threshold-deck",
+            "packageId": "transit-station-spaces",
+            "frameId": "research-metro-platform",
+            "deployedTransform": {
+              "frameId": "threshold-car-01-boarding-right-front",
+              "parentFrameId": "research-metro-platform",
+              "translationM": [
+                -1.5,
+                0.95,
+                32.35
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "retractedTransform": {
+              "frameId": "threshold-car-01-boarding-right-front-stored",
+              "parentFrameId": "research-metro-platform",
+              "translationM": [
+                -5.25,
+                1.429999989271164,
+                32.35
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0.7071067811865475,
+                0.7071067811865476
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "storedFloorContact": {
+              "floorHeightM": 0.95,
+              "bottomHeightM": 0.95,
+              "derivation": "floorY minus minimumY of actual exported LOD0 bounds transformed by stored rotation; validate both LODs against actual GLB vertices",
+              "support": "research floor, no hidden holder"
+            },
+            "retractedMeaning": "Portable research plate stored upright at designated station-side storage strip; no automatic folding/slide mechanism or vehicle retrofit implied",
+            "transition": "Manual/actor relocation only with boarding area closed; interpolated motion path not yet validated",
+            "enabled": false,
+            "activationRequires": [
+              "vehicle stopped",
+              "correct profile and frame alignment",
+              "paired doorway fully open",
+              "station support and dynamic collision accepted by D06"
+            ],
+            "stationBearingPointM": [
+              -1.98,
+              0.95,
+              32.35
+            ],
+            "vehicleBearingPointM": [
+              -1.08,
+              0.95,
+              32.35
+            ],
+            "maximumTopHeightM": 0.965,
+            "maximumRiseM": 0.015,
+            "maximumGrade": 0.075,
+            "clearWidthM": 1.1,
+            "walkableSurfaceTriangulation": [
+              0,
+              2,
+              1,
+              0,
+              3,
+              2
+            ],
+            "walkableSurfacePolygonsM": [
+              [
+                [
+                  -1.98,
+                  0.95,
+                  31.8
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  31.8
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  32.9
+                ],
+                [
+                  -1.98,
+                  0.95,
+                  32.9
+                ]
+              ],
+              [
+                [
+                  -1.78,
+                  0.965,
+                  31.8
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  31.8
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  32.9
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  32.9
+                ]
+              ],
+              [
+                [
+                  -1.28,
+                  0.965,
+                  31.8
+                ],
+                [
+                  -1.08,
+                  0.95,
+                  31.8
+                ],
+                [
+                  -1.08,
+                  0.95,
+                  32.9
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  32.9
+                ]
+              ]
+            ],
+            "doorSweepPolicy": "Plate deploys only after leaves reach their full open endpoint; close doors only after plate is stored",
+            "modelNotCertification": true
+          }
+        },
+        {
+          "carId": "car-02",
+          "vehicleId": "expo-metro-middle",
+          "vehicleAnchorId": "boarding-right-rear",
+          "carLocalPointM": [
+            -1.65,
+            0.95,
+            -5.5
+          ],
+          "carToStation": {
+            "frameId": "car-02",
+            "parentFrameId": "research-metro-platform",
+            "translationM": [
+              0,
+              0,
+              8.95
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "units": "m",
+            "upAxis": "+Y",
+            "frontAxis": "+Z"
+          },
+          "stationPointM": [
+            -1.65,
+            0.95,
+            3.4499999999999993
+          ],
+          "doorSillPointM": [
+            -1.28,
+            0.95,
+            3.4499999999999993
+          ],
+          "platformEdgePointM": [
+            -1.5,
+            0.95,
+            3.4499999999999993
+          ],
+          "horizontalThresholdGapM": 0.22,
+          "verticalDifferenceM": 0,
+          "floorHeightM": 0.95,
+          "openingWidthM": 1.4,
+          "approachPolygonM": [
+            [
+              -3,
+              0.95,
+              2.6499999999999995
+            ],
+            [
+              -1.5,
+              0.95,
+              2.6499999999999995
+            ],
+            [
+              -1.5,
+              0.95,
+              4.249999999999999
+            ],
+            [
+              -3,
+              0.95,
+              4.249999999999999
+            ]
+          ],
+          "thresholdDeck": {
+            "instanceId": "threshold-car-02-boarding-right-rear",
+            "assetId": "metro-threshold-deck",
+            "packageId": "transit-station-spaces",
+            "frameId": "research-metro-platform",
+            "deployedTransform": {
+              "frameId": "threshold-car-02-boarding-right-rear",
+              "parentFrameId": "research-metro-platform",
+              "translationM": [
+                -1.5,
+                0.95,
+                3.4499999999999993
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "retractedTransform": {
+              "frameId": "threshold-car-02-boarding-right-rear-stored",
+              "parentFrameId": "research-metro-platform",
+              "translationM": [
+                -5.25,
+                1.429999989271164,
+                3.4499999999999993
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0.7071067811865475,
+                0.7071067811865476
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "storedFloorContact": {
+              "floorHeightM": 0.95,
+              "bottomHeightM": 0.95,
+              "derivation": "floorY minus minimumY of actual exported LOD0 bounds transformed by stored rotation; validate both LODs against actual GLB vertices",
+              "support": "research floor, no hidden holder"
+            },
+            "retractedMeaning": "Portable research plate stored upright at designated station-side storage strip; no automatic folding/slide mechanism or vehicle retrofit implied",
+            "transition": "Manual/actor relocation only with boarding area closed; interpolated motion path not yet validated",
+            "enabled": false,
+            "activationRequires": [
+              "vehicle stopped",
+              "correct profile and frame alignment",
+              "paired doorway fully open",
+              "station support and dynamic collision accepted by D06"
+            ],
+            "stationBearingPointM": [
+              -1.98,
+              0.95,
+              3.4499999999999993
+            ],
+            "vehicleBearingPointM": [
+              -1.08,
+              0.95,
+              3.4499999999999993
+            ],
+            "maximumTopHeightM": 0.965,
+            "maximumRiseM": 0.015,
+            "maximumGrade": 0.075,
+            "clearWidthM": 1.1,
+            "walkableSurfaceTriangulation": [
+              0,
+              2,
+              1,
+              0,
+              3,
+              2
+            ],
+            "walkableSurfacePolygonsM": [
+              [
+                [
+                  -1.98,
+                  0.95,
+                  2.8999999999999995
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  2.8999999999999995
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  3.999999999999999
+                ],
+                [
+                  -1.98,
+                  0.95,
+                  3.999999999999999
+                ]
+              ],
+              [
+                [
+                  -1.78,
+                  0.965,
+                  2.8999999999999995
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  2.8999999999999995
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  3.999999999999999
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  3.999999999999999
+                ]
+              ],
+              [
+                [
+                  -1.28,
+                  0.965,
+                  2.8999999999999995
+                ],
+                [
+                  -1.08,
+                  0.95,
+                  2.8999999999999995
+                ],
+                [
+                  -1.08,
+                  0.95,
+                  3.999999999999999
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  3.999999999999999
+                ]
+              ]
+            ],
+            "doorSweepPolicy": "Plate deploys only after leaves reach their full open endpoint; close doors only after plate is stored",
+            "modelNotCertification": true
+          }
+        },
+        {
+          "carId": "car-02",
+          "vehicleId": "expo-metro-middle",
+          "vehicleAnchorId": "boarding-right-center",
+          "carLocalPointM": [
+            -1.65,
+            0.95,
+            0
+          ],
+          "carToStation": {
+            "frameId": "car-02",
+            "parentFrameId": "research-metro-platform",
+            "translationM": [
+              0,
+              0,
+              8.95
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "units": "m",
+            "upAxis": "+Y",
+            "frontAxis": "+Z"
+          },
+          "stationPointM": [
+            -1.65,
+            0.95,
+            8.95
+          ],
+          "doorSillPointM": [
+            -1.28,
+            0.95,
+            8.95
+          ],
+          "platformEdgePointM": [
+            -1.5,
+            0.95,
+            8.95
+          ],
+          "horizontalThresholdGapM": 0.22,
+          "verticalDifferenceM": 0,
+          "floorHeightM": 0.95,
+          "openingWidthM": 1.4,
+          "approachPolygonM": [
+            [
+              -3,
+              0.95,
+              8.149999999999999
+            ],
+            [
+              -1.5,
+              0.95,
+              8.149999999999999
+            ],
+            [
+              -1.5,
+              0.95,
+              9.75
+            ],
+            [
+              -3,
+              0.95,
+              9.75
+            ]
+          ],
+          "thresholdDeck": {
+            "instanceId": "threshold-car-02-boarding-right-center",
+            "assetId": "metro-threshold-deck",
+            "packageId": "transit-station-spaces",
+            "frameId": "research-metro-platform",
+            "deployedTransform": {
+              "frameId": "threshold-car-02-boarding-right-center",
+              "parentFrameId": "research-metro-platform",
+              "translationM": [
+                -1.5,
+                0.95,
+                8.95
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "retractedTransform": {
+              "frameId": "threshold-car-02-boarding-right-center-stored",
+              "parentFrameId": "research-metro-platform",
+              "translationM": [
+                -5.25,
+                1.429999989271164,
+                8.95
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0.7071067811865475,
+                0.7071067811865476
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "storedFloorContact": {
+              "floorHeightM": 0.95,
+              "bottomHeightM": 0.95,
+              "derivation": "floorY minus minimumY of actual exported LOD0 bounds transformed by stored rotation; validate both LODs against actual GLB vertices",
+              "support": "research floor, no hidden holder"
+            },
+            "retractedMeaning": "Portable research plate stored upright at designated station-side storage strip; no automatic folding/slide mechanism or vehicle retrofit implied",
+            "transition": "Manual/actor relocation only with boarding area closed; interpolated motion path not yet validated",
+            "enabled": false,
+            "activationRequires": [
+              "vehicle stopped",
+              "correct profile and frame alignment",
+              "paired doorway fully open",
+              "station support and dynamic collision accepted by D06"
+            ],
+            "stationBearingPointM": [
+              -1.98,
+              0.95,
+              8.95
+            ],
+            "vehicleBearingPointM": [
+              -1.08,
+              0.95,
+              8.95
+            ],
+            "maximumTopHeightM": 0.965,
+            "maximumRiseM": 0.015,
+            "maximumGrade": 0.075,
+            "clearWidthM": 1.1,
+            "walkableSurfaceTriangulation": [
+              0,
+              2,
+              1,
+              0,
+              3,
+              2
+            ],
+            "walkableSurfacePolygonsM": [
+              [
+                [
+                  -1.98,
+                  0.95,
+                  8.399999999999999
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  8.399999999999999
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  9.5
+                ],
+                [
+                  -1.98,
+                  0.95,
+                  9.5
+                ]
+              ],
+              [
+                [
+                  -1.78,
+                  0.965,
+                  8.399999999999999
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  8.399999999999999
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  9.5
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  9.5
+                ]
+              ],
+              [
+                [
+                  -1.28,
+                  0.965,
+                  8.399999999999999
+                ],
+                [
+                  -1.08,
+                  0.95,
+                  8.399999999999999
+                ],
+                [
+                  -1.08,
+                  0.95,
+                  9.5
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  9.5
+                ]
+              ]
+            ],
+            "doorSweepPolicy": "Plate deploys only after leaves reach their full open endpoint; close doors only after plate is stored",
+            "modelNotCertification": true
+          }
+        },
+        {
+          "carId": "car-02",
+          "vehicleId": "expo-metro-middle",
+          "vehicleAnchorId": "boarding-right-front",
+          "carLocalPointM": [
+            -1.65,
+            0.95,
+            5.5
+          ],
+          "carToStation": {
+            "frameId": "car-02",
+            "parentFrameId": "research-metro-platform",
+            "translationM": [
+              0,
+              0,
+              8.95
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "units": "m",
+            "upAxis": "+Y",
+            "frontAxis": "+Z"
+          },
+          "stationPointM": [
+            -1.65,
+            0.95,
+            14.45
+          ],
+          "doorSillPointM": [
+            -1.28,
+            0.95,
+            14.45
+          ],
+          "platformEdgePointM": [
+            -1.5,
+            0.95,
+            14.45
+          ],
+          "horizontalThresholdGapM": 0.22,
+          "verticalDifferenceM": 0,
+          "floorHeightM": 0.95,
+          "openingWidthM": 1.4,
+          "approachPolygonM": [
+            [
+              -3,
+              0.95,
+              13.649999999999999
+            ],
+            [
+              -1.5,
+              0.95,
+              13.649999999999999
+            ],
+            [
+              -1.5,
+              0.95,
+              15.25
+            ],
+            [
+              -3,
+              0.95,
+              15.25
+            ]
+          ],
+          "thresholdDeck": {
+            "instanceId": "threshold-car-02-boarding-right-front",
+            "assetId": "metro-threshold-deck",
+            "packageId": "transit-station-spaces",
+            "frameId": "research-metro-platform",
+            "deployedTransform": {
+              "frameId": "threshold-car-02-boarding-right-front",
+              "parentFrameId": "research-metro-platform",
+              "translationM": [
+                -1.5,
+                0.95,
+                14.45
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "retractedTransform": {
+              "frameId": "threshold-car-02-boarding-right-front-stored",
+              "parentFrameId": "research-metro-platform",
+              "translationM": [
+                -5.25,
+                1.429999989271164,
+                14.45
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0.7071067811865475,
+                0.7071067811865476
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "storedFloorContact": {
+              "floorHeightM": 0.95,
+              "bottomHeightM": 0.95,
+              "derivation": "floorY minus minimumY of actual exported LOD0 bounds transformed by stored rotation; validate both LODs against actual GLB vertices",
+              "support": "research floor, no hidden holder"
+            },
+            "retractedMeaning": "Portable research plate stored upright at designated station-side storage strip; no automatic folding/slide mechanism or vehicle retrofit implied",
+            "transition": "Manual/actor relocation only with boarding area closed; interpolated motion path not yet validated",
+            "enabled": false,
+            "activationRequires": [
+              "vehicle stopped",
+              "correct profile and frame alignment",
+              "paired doorway fully open",
+              "station support and dynamic collision accepted by D06"
+            ],
+            "stationBearingPointM": [
+              -1.98,
+              0.95,
+              14.45
+            ],
+            "vehicleBearingPointM": [
+              -1.08,
+              0.95,
+              14.45
+            ],
+            "maximumTopHeightM": 0.965,
+            "maximumRiseM": 0.015,
+            "maximumGrade": 0.075,
+            "clearWidthM": 1.1,
+            "walkableSurfaceTriangulation": [
+              0,
+              2,
+              1,
+              0,
+              3,
+              2
+            ],
+            "walkableSurfacePolygonsM": [
+              [
+                [
+                  -1.98,
+                  0.95,
+                  13.899999999999999
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  13.899999999999999
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  15.0
+                ],
+                [
+                  -1.98,
+                  0.95,
+                  15.0
+                ]
+              ],
+              [
+                [
+                  -1.78,
+                  0.965,
+                  13.899999999999999
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  13.899999999999999
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  15.0
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  15.0
+                ]
+              ],
+              [
+                [
+                  -1.28,
+                  0.965,
+                  13.899999999999999
+                ],
+                [
+                  -1.08,
+                  0.95,
+                  13.899999999999999
+                ],
+                [
+                  -1.08,
+                  0.95,
+                  15.0
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  15.0
+                ]
+              ]
+            ],
+            "doorSweepPolicy": "Plate deploys only after leaves reach their full open endpoint; close doors only after plate is stored",
+            "modelNotCertification": true
+          }
+        },
+        {
+          "carId": "car-03",
+          "vehicleId": "expo-metro-middle",
+          "vehicleAnchorId": "boarding-right-rear",
+          "carLocalPointM": [
+            -1.65,
+            0.95,
+            -5.5
+          ],
+          "carToStation": {
+            "frameId": "car-03",
+            "parentFrameId": "research-metro-platform",
+            "translationM": [
+              0,
+              0,
+              -8.95
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "units": "m",
+            "upAxis": "+Y",
+            "frontAxis": "+Z"
+          },
+          "stationPointM": [
+            -1.65,
+            0.95,
+            -14.45
+          ],
+          "doorSillPointM": [
+            -1.28,
+            0.95,
+            -14.45
+          ],
+          "platformEdgePointM": [
+            -1.5,
+            0.95,
+            -14.45
+          ],
+          "horizontalThresholdGapM": 0.22,
+          "verticalDifferenceM": 0,
+          "floorHeightM": 0.95,
+          "openingWidthM": 1.4,
+          "approachPolygonM": [
+            [
+              -3,
+              0.95,
+              -15.25
+            ],
+            [
+              -1.5,
+              0.95,
+              -15.25
+            ],
+            [
+              -1.5,
+              0.95,
+              -13.649999999999999
+            ],
+            [
+              -3,
+              0.95,
+              -13.649999999999999
+            ]
+          ],
+          "thresholdDeck": {
+            "instanceId": "threshold-car-03-boarding-right-rear",
+            "assetId": "metro-threshold-deck",
+            "packageId": "transit-station-spaces",
+            "frameId": "research-metro-platform",
+            "deployedTransform": {
+              "frameId": "threshold-car-03-boarding-right-rear",
+              "parentFrameId": "research-metro-platform",
+              "translationM": [
+                -1.5,
+                0.95,
+                -14.45
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "retractedTransform": {
+              "frameId": "threshold-car-03-boarding-right-rear-stored",
+              "parentFrameId": "research-metro-platform",
+              "translationM": [
+                -5.25,
+                1.429999989271164,
+                -14.45
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0.7071067811865475,
+                0.7071067811865476
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "storedFloorContact": {
+              "floorHeightM": 0.95,
+              "bottomHeightM": 0.95,
+              "derivation": "floorY minus minimumY of actual exported LOD0 bounds transformed by stored rotation; validate both LODs against actual GLB vertices",
+              "support": "research floor, no hidden holder"
+            },
+            "retractedMeaning": "Portable research plate stored upright at designated station-side storage strip; no automatic folding/slide mechanism or vehicle retrofit implied",
+            "transition": "Manual/actor relocation only with boarding area closed; interpolated motion path not yet validated",
+            "enabled": false,
+            "activationRequires": [
+              "vehicle stopped",
+              "correct profile and frame alignment",
+              "paired doorway fully open",
+              "station support and dynamic collision accepted by D06"
+            ],
+            "stationBearingPointM": [
+              -1.98,
+              0.95,
+              -14.45
+            ],
+            "vehicleBearingPointM": [
+              -1.08,
+              0.95,
+              -14.45
+            ],
+            "maximumTopHeightM": 0.965,
+            "maximumRiseM": 0.015,
+            "maximumGrade": 0.075,
+            "clearWidthM": 1.1,
+            "walkableSurfaceTriangulation": [
+              0,
+              2,
+              1,
+              0,
+              3,
+              2
+            ],
+            "walkableSurfacePolygonsM": [
+              [
+                [
+                  -1.98,
+                  0.95,
+                  -15.0
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  -15.0
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  -13.899999999999999
+                ],
+                [
+                  -1.98,
+                  0.95,
+                  -13.899999999999999
+                ]
+              ],
+              [
+                [
+                  -1.78,
+                  0.965,
+                  -15.0
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  -15.0
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  -13.899999999999999
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  -13.899999999999999
+                ]
+              ],
+              [
+                [
+                  -1.28,
+                  0.965,
+                  -15.0
+                ],
+                [
+                  -1.08,
+                  0.95,
+                  -15.0
+                ],
+                [
+                  -1.08,
+                  0.95,
+                  -13.899999999999999
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  -13.899999999999999
+                ]
+              ]
+            ],
+            "doorSweepPolicy": "Plate deploys only after leaves reach their full open endpoint; close doors only after plate is stored",
+            "modelNotCertification": true
+          }
+        },
+        {
+          "carId": "car-03",
+          "vehicleId": "expo-metro-middle",
+          "vehicleAnchorId": "boarding-right-center",
+          "carLocalPointM": [
+            -1.65,
+            0.95,
+            0
+          ],
+          "carToStation": {
+            "frameId": "car-03",
+            "parentFrameId": "research-metro-platform",
+            "translationM": [
+              0,
+              0,
+              -8.95
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "units": "m",
+            "upAxis": "+Y",
+            "frontAxis": "+Z"
+          },
+          "stationPointM": [
+            -1.65,
+            0.95,
+            -8.95
+          ],
+          "doorSillPointM": [
+            -1.28,
+            0.95,
+            -8.95
+          ],
+          "platformEdgePointM": [
+            -1.5,
+            0.95,
+            -8.95
+          ],
+          "horizontalThresholdGapM": 0.22,
+          "verticalDifferenceM": 0,
+          "floorHeightM": 0.95,
+          "openingWidthM": 1.4,
+          "approachPolygonM": [
+            [
+              -3,
+              0.95,
+              -9.75
+            ],
+            [
+              -1.5,
+              0.95,
+              -9.75
+            ],
+            [
+              -1.5,
+              0.95,
+              -8.149999999999999
+            ],
+            [
+              -3,
+              0.95,
+              -8.149999999999999
+            ]
+          ],
+          "thresholdDeck": {
+            "instanceId": "threshold-car-03-boarding-right-center",
+            "assetId": "metro-threshold-deck",
+            "packageId": "transit-station-spaces",
+            "frameId": "research-metro-platform",
+            "deployedTransform": {
+              "frameId": "threshold-car-03-boarding-right-center",
+              "parentFrameId": "research-metro-platform",
+              "translationM": [
+                -1.5,
+                0.95,
+                -8.95
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "retractedTransform": {
+              "frameId": "threshold-car-03-boarding-right-center-stored",
+              "parentFrameId": "research-metro-platform",
+              "translationM": [
+                -5.25,
+                1.429999989271164,
+                -8.95
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0.7071067811865475,
+                0.7071067811865476
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "storedFloorContact": {
+              "floorHeightM": 0.95,
+              "bottomHeightM": 0.95,
+              "derivation": "floorY minus minimumY of actual exported LOD0 bounds transformed by stored rotation; validate both LODs against actual GLB vertices",
+              "support": "research floor, no hidden holder"
+            },
+            "retractedMeaning": "Portable research plate stored upright at designated station-side storage strip; no automatic folding/slide mechanism or vehicle retrofit implied",
+            "transition": "Manual/actor relocation only with boarding area closed; interpolated motion path not yet validated",
+            "enabled": false,
+            "activationRequires": [
+              "vehicle stopped",
+              "correct profile and frame alignment",
+              "paired doorway fully open",
+              "station support and dynamic collision accepted by D06"
+            ],
+            "stationBearingPointM": [
+              -1.98,
+              0.95,
+              -8.95
+            ],
+            "vehicleBearingPointM": [
+              -1.08,
+              0.95,
+              -8.95
+            ],
+            "maximumTopHeightM": 0.965,
+            "maximumRiseM": 0.015,
+            "maximumGrade": 0.075,
+            "clearWidthM": 1.1,
+            "walkableSurfaceTriangulation": [
+              0,
+              2,
+              1,
+              0,
+              3,
+              2
+            ],
+            "walkableSurfacePolygonsM": [
+              [
+                [
+                  -1.98,
+                  0.95,
+                  -9.5
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  -9.5
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  -8.399999999999999
+                ],
+                [
+                  -1.98,
+                  0.95,
+                  -8.399999999999999
+                ]
+              ],
+              [
+                [
+                  -1.78,
+                  0.965,
+                  -9.5
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  -9.5
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  -8.399999999999999
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  -8.399999999999999
+                ]
+              ],
+              [
+                [
+                  -1.28,
+                  0.965,
+                  -9.5
+                ],
+                [
+                  -1.08,
+                  0.95,
+                  -9.5
+                ],
+                [
+                  -1.08,
+                  0.95,
+                  -8.399999999999999
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  -8.399999999999999
+                ]
+              ]
+            ],
+            "doorSweepPolicy": "Plate deploys only after leaves reach their full open endpoint; close doors only after plate is stored",
+            "modelNotCertification": true
+          }
+        },
+        {
+          "carId": "car-03",
+          "vehicleId": "expo-metro-middle",
+          "vehicleAnchorId": "boarding-right-front",
+          "carLocalPointM": [
+            -1.65,
+            0.95,
+            5.5
+          ],
+          "carToStation": {
+            "frameId": "car-03",
+            "parentFrameId": "research-metro-platform",
+            "translationM": [
+              0,
+              0,
+              -8.95
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "units": "m",
+            "upAxis": "+Y",
+            "frontAxis": "+Z"
+          },
+          "stationPointM": [
+            -1.65,
+            0.95,
+            -3.4499999999999993
+          ],
+          "doorSillPointM": [
+            -1.28,
+            0.95,
+            -3.4499999999999993
+          ],
+          "platformEdgePointM": [
+            -1.5,
+            0.95,
+            -3.4499999999999993
+          ],
+          "horizontalThresholdGapM": 0.22,
+          "verticalDifferenceM": 0,
+          "floorHeightM": 0.95,
+          "openingWidthM": 1.4,
+          "approachPolygonM": [
+            [
+              -3,
+              0.95,
+              -4.249999999999999
+            ],
+            [
+              -1.5,
+              0.95,
+              -4.249999999999999
+            ],
+            [
+              -1.5,
+              0.95,
+              -2.6499999999999995
+            ],
+            [
+              -3,
+              0.95,
+              -2.6499999999999995
+            ]
+          ],
+          "thresholdDeck": {
+            "instanceId": "threshold-car-03-boarding-right-front",
+            "assetId": "metro-threshold-deck",
+            "packageId": "transit-station-spaces",
+            "frameId": "research-metro-platform",
+            "deployedTransform": {
+              "frameId": "threshold-car-03-boarding-right-front",
+              "parentFrameId": "research-metro-platform",
+              "translationM": [
+                -1.5,
+                0.95,
+                -3.4499999999999993
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "retractedTransform": {
+              "frameId": "threshold-car-03-boarding-right-front-stored",
+              "parentFrameId": "research-metro-platform",
+              "translationM": [
+                -5.25,
+                1.429999989271164,
+                -3.4499999999999993
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0.7071067811865475,
+                0.7071067811865476
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "storedFloorContact": {
+              "floorHeightM": 0.95,
+              "bottomHeightM": 0.95,
+              "derivation": "floorY minus minimumY of actual exported LOD0 bounds transformed by stored rotation; validate both LODs against actual GLB vertices",
+              "support": "research floor, no hidden holder"
+            },
+            "retractedMeaning": "Portable research plate stored upright at designated station-side storage strip; no automatic folding/slide mechanism or vehicle retrofit implied",
+            "transition": "Manual/actor relocation only with boarding area closed; interpolated motion path not yet validated",
+            "enabled": false,
+            "activationRequires": [
+              "vehicle stopped",
+              "correct profile and frame alignment",
+              "paired doorway fully open",
+              "station support and dynamic collision accepted by D06"
+            ],
+            "stationBearingPointM": [
+              -1.98,
+              0.95,
+              -3.4499999999999993
+            ],
+            "vehicleBearingPointM": [
+              -1.08,
+              0.95,
+              -3.4499999999999993
+            ],
+            "maximumTopHeightM": 0.965,
+            "maximumRiseM": 0.015,
+            "maximumGrade": 0.075,
+            "clearWidthM": 1.1,
+            "walkableSurfaceTriangulation": [
+              0,
+              2,
+              1,
+              0,
+              3,
+              2
+            ],
+            "walkableSurfacePolygonsM": [
+              [
+                [
+                  -1.98,
+                  0.95,
+                  -3.999999999999999
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  -3.999999999999999
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  -2.8999999999999995
+                ],
+                [
+                  -1.98,
+                  0.95,
+                  -2.8999999999999995
+                ]
+              ],
+              [
+                [
+                  -1.78,
+                  0.965,
+                  -3.999999999999999
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  -3.999999999999999
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  -2.8999999999999995
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  -2.8999999999999995
+                ]
+              ],
+              [
+                [
+                  -1.28,
+                  0.965,
+                  -3.999999999999999
+                ],
+                [
+                  -1.08,
+                  0.95,
+                  -3.999999999999999
+                ],
+                [
+                  -1.08,
+                  0.95,
+                  -2.8999999999999995
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  -2.8999999999999995
+                ]
+              ]
+            ],
+            "doorSweepPolicy": "Plate deploys only after leaves reach their full open endpoint; close doors only after plate is stored",
+            "modelNotCertification": true
+          }
+        },
+        {
+          "carId": "car-04",
+          "vehicleId": "expo-metro-tail",
+          "vehicleAnchorId": "boarding-right-rear",
+          "carLocalPointM": [
+            -1.65,
+            0.95,
+            -5.5
+          ],
+          "carToStation": {
+            "frameId": "car-04",
+            "parentFrameId": "research-metro-platform",
+            "translationM": [
+              0,
+              0,
+              -26.85
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "units": "m",
+            "upAxis": "+Y",
+            "frontAxis": "+Z"
+          },
+          "stationPointM": [
+            -1.65,
+            0.95,
+            -32.35
+          ],
+          "doorSillPointM": [
+            -1.28,
+            0.95,
+            -32.35
+          ],
+          "platformEdgePointM": [
+            -1.5,
+            0.95,
+            -32.35
+          ],
+          "horizontalThresholdGapM": 0.22,
+          "verticalDifferenceM": 0,
+          "floorHeightM": 0.95,
+          "openingWidthM": 1.4,
+          "approachPolygonM": [
+            [
+              -3,
+              0.95,
+              -33.15
+            ],
+            [
+              -1.5,
+              0.95,
+              -33.15
+            ],
+            [
+              -1.5,
+              0.95,
+              -31.55
+            ],
+            [
+              -3,
+              0.95,
+              -31.55
+            ]
+          ],
+          "thresholdDeck": {
+            "instanceId": "threshold-car-04-boarding-right-rear",
+            "assetId": "metro-threshold-deck",
+            "packageId": "transit-station-spaces",
+            "frameId": "research-metro-platform",
+            "deployedTransform": {
+              "frameId": "threshold-car-04-boarding-right-rear",
+              "parentFrameId": "research-metro-platform",
+              "translationM": [
+                -1.5,
+                0.95,
+                -32.35
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "retractedTransform": {
+              "frameId": "threshold-car-04-boarding-right-rear-stored",
+              "parentFrameId": "research-metro-platform",
+              "translationM": [
+                -5.25,
+                1.429999989271164,
+                -32.35
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0.7071067811865475,
+                0.7071067811865476
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "storedFloorContact": {
+              "floorHeightM": 0.95,
+              "bottomHeightM": 0.95,
+              "derivation": "floorY minus minimumY of actual exported LOD0 bounds transformed by stored rotation; validate both LODs against actual GLB vertices",
+              "support": "research floor, no hidden holder"
+            },
+            "retractedMeaning": "Portable research plate stored upright at designated station-side storage strip; no automatic folding/slide mechanism or vehicle retrofit implied",
+            "transition": "Manual/actor relocation only with boarding area closed; interpolated motion path not yet validated",
+            "enabled": false,
+            "activationRequires": [
+              "vehicle stopped",
+              "correct profile and frame alignment",
+              "paired doorway fully open",
+              "station support and dynamic collision accepted by D06"
+            ],
+            "stationBearingPointM": [
+              -1.98,
+              0.95,
+              -32.35
+            ],
+            "vehicleBearingPointM": [
+              -1.08,
+              0.95,
+              -32.35
+            ],
+            "maximumTopHeightM": 0.965,
+            "maximumRiseM": 0.015,
+            "maximumGrade": 0.075,
+            "clearWidthM": 1.1,
+            "walkableSurfaceTriangulation": [
+              0,
+              2,
+              1,
+              0,
+              3,
+              2
+            ],
+            "walkableSurfacePolygonsM": [
+              [
+                [
+                  -1.98,
+                  0.95,
+                  -32.9
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  -32.9
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  -31.8
+                ],
+                [
+                  -1.98,
+                  0.95,
+                  -31.8
+                ]
+              ],
+              [
+                [
+                  -1.78,
+                  0.965,
+                  -32.9
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  -32.9
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  -31.8
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  -31.8
+                ]
+              ],
+              [
+                [
+                  -1.28,
+                  0.965,
+                  -32.9
+                ],
+                [
+                  -1.08,
+                  0.95,
+                  -32.9
+                ],
+                [
+                  -1.08,
+                  0.95,
+                  -31.8
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  -31.8
+                ]
+              ]
+            ],
+            "doorSweepPolicy": "Plate deploys only after leaves reach their full open endpoint; close doors only after plate is stored",
+            "modelNotCertification": true
+          }
+        },
+        {
+          "carId": "car-04",
+          "vehicleId": "expo-metro-tail",
+          "vehicleAnchorId": "boarding-right-center",
+          "carLocalPointM": [
+            -1.65,
+            0.95,
+            0
+          ],
+          "carToStation": {
+            "frameId": "car-04",
+            "parentFrameId": "research-metro-platform",
+            "translationM": [
+              0,
+              0,
+              -26.85
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "units": "m",
+            "upAxis": "+Y",
+            "frontAxis": "+Z"
+          },
+          "stationPointM": [
+            -1.65,
+            0.95,
+            -26.85
+          ],
+          "doorSillPointM": [
+            -1.28,
+            0.95,
+            -26.85
+          ],
+          "platformEdgePointM": [
+            -1.5,
+            0.95,
+            -26.85
+          ],
+          "horizontalThresholdGapM": 0.22,
+          "verticalDifferenceM": 0,
+          "floorHeightM": 0.95,
+          "openingWidthM": 1.4,
+          "approachPolygonM": [
+            [
+              -3,
+              0.95,
+              -27.650000000000002
+            ],
+            [
+              -1.5,
+              0.95,
+              -27.650000000000002
+            ],
+            [
+              -1.5,
+              0.95,
+              -26.05
+            ],
+            [
+              -3,
+              0.95,
+              -26.05
+            ]
+          ],
+          "thresholdDeck": {
+            "instanceId": "threshold-car-04-boarding-right-center",
+            "assetId": "metro-threshold-deck",
+            "packageId": "transit-station-spaces",
+            "frameId": "research-metro-platform",
+            "deployedTransform": {
+              "frameId": "threshold-car-04-boarding-right-center",
+              "parentFrameId": "research-metro-platform",
+              "translationM": [
+                -1.5,
+                0.95,
+                -26.85
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "retractedTransform": {
+              "frameId": "threshold-car-04-boarding-right-center-stored",
+              "parentFrameId": "research-metro-platform",
+              "translationM": [
+                -5.25,
+                1.429999989271164,
+                -26.85
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0.7071067811865475,
+                0.7071067811865476
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "storedFloorContact": {
+              "floorHeightM": 0.95,
+              "bottomHeightM": 0.95,
+              "derivation": "floorY minus minimumY of actual exported LOD0 bounds transformed by stored rotation; validate both LODs against actual GLB vertices",
+              "support": "research floor, no hidden holder"
+            },
+            "retractedMeaning": "Portable research plate stored upright at designated station-side storage strip; no automatic folding/slide mechanism or vehicle retrofit implied",
+            "transition": "Manual/actor relocation only with boarding area closed; interpolated motion path not yet validated",
+            "enabled": false,
+            "activationRequires": [
+              "vehicle stopped",
+              "correct profile and frame alignment",
+              "paired doorway fully open",
+              "station support and dynamic collision accepted by D06"
+            ],
+            "stationBearingPointM": [
+              -1.98,
+              0.95,
+              -26.85
+            ],
+            "vehicleBearingPointM": [
+              -1.08,
+              0.95,
+              -26.85
+            ],
+            "maximumTopHeightM": 0.965,
+            "maximumRiseM": 0.015,
+            "maximumGrade": 0.075,
+            "clearWidthM": 1.1,
+            "walkableSurfaceTriangulation": [
+              0,
+              2,
+              1,
+              0,
+              3,
+              2
+            ],
+            "walkableSurfacePolygonsM": [
+              [
+                [
+                  -1.98,
+                  0.95,
+                  -27.400000000000002
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  -27.400000000000002
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  -26.3
+                ],
+                [
+                  -1.98,
+                  0.95,
+                  -26.3
+                ]
+              ],
+              [
+                [
+                  -1.78,
+                  0.965,
+                  -27.400000000000002
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  -27.400000000000002
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  -26.3
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  -26.3
+                ]
+              ],
+              [
+                [
+                  -1.28,
+                  0.965,
+                  -27.400000000000002
+                ],
+                [
+                  -1.08,
+                  0.95,
+                  -27.400000000000002
+                ],
+                [
+                  -1.08,
+                  0.95,
+                  -26.3
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  -26.3
+                ]
+              ]
+            ],
+            "doorSweepPolicy": "Plate deploys only after leaves reach their full open endpoint; close doors only after plate is stored",
+            "modelNotCertification": true
+          }
+        },
+        {
+          "carId": "car-04",
+          "vehicleId": "expo-metro-tail",
+          "vehicleAnchorId": "boarding-right-front",
+          "carLocalPointM": [
+            -1.65,
+            0.95,
+            5.5
+          ],
+          "carToStation": {
+            "frameId": "car-04",
+            "parentFrameId": "research-metro-platform",
+            "translationM": [
+              0,
+              0,
+              -26.85
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "units": "m",
+            "upAxis": "+Y",
+            "frontAxis": "+Z"
+          },
+          "stationPointM": [
+            -1.65,
+            0.95,
+            -21.35
+          ],
+          "doorSillPointM": [
+            -1.28,
+            0.95,
+            -21.35
+          ],
+          "platformEdgePointM": [
+            -1.5,
+            0.95,
+            -21.35
+          ],
+          "horizontalThresholdGapM": 0.22,
+          "verticalDifferenceM": 0,
+          "floorHeightM": 0.95,
+          "openingWidthM": 1.4,
+          "approachPolygonM": [
+            [
+              -3,
+              0.95,
+              -22.150000000000002
+            ],
+            [
+              -1.5,
+              0.95,
+              -22.150000000000002
+            ],
+            [
+              -1.5,
+              0.95,
+              -20.55
+            ],
+            [
+              -3,
+              0.95,
+              -20.55
+            ]
+          ],
+          "thresholdDeck": {
+            "instanceId": "threshold-car-04-boarding-right-front",
+            "assetId": "metro-threshold-deck",
+            "packageId": "transit-station-spaces",
+            "frameId": "research-metro-platform",
+            "deployedTransform": {
+              "frameId": "threshold-car-04-boarding-right-front",
+              "parentFrameId": "research-metro-platform",
+              "translationM": [
+                -1.5,
+                0.95,
+                -21.35
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "retractedTransform": {
+              "frameId": "threshold-car-04-boarding-right-front-stored",
+              "parentFrameId": "research-metro-platform",
+              "translationM": [
+                -5.25,
+                1.429999989271164,
+                -21.35
+              ],
+              "rotationQuaternionXYZW": [
+                0,
+                0,
+                0.7071067811865475,
+                0.7071067811865476
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "units": "m",
+              "upAxis": "+Y",
+              "frontAxis": "+Z"
+            },
+            "storedFloorContact": {
+              "floorHeightM": 0.95,
+              "bottomHeightM": 0.95,
+              "derivation": "floorY minus minimumY of actual exported LOD0 bounds transformed by stored rotation; validate both LODs against actual GLB vertices",
+              "support": "research floor, no hidden holder"
+            },
+            "retractedMeaning": "Portable research plate stored upright at designated station-side storage strip; no automatic folding/slide mechanism or vehicle retrofit implied",
+            "transition": "Manual/actor relocation only with boarding area closed; interpolated motion path not yet validated",
+            "enabled": false,
+            "activationRequires": [
+              "vehicle stopped",
+              "correct profile and frame alignment",
+              "paired doorway fully open",
+              "station support and dynamic collision accepted by D06"
+            ],
+            "stationBearingPointM": [
+              -1.98,
+              0.95,
+              -21.35
+            ],
+            "vehicleBearingPointM": [
+              -1.08,
+              0.95,
+              -21.35
+            ],
+            "maximumTopHeightM": 0.965,
+            "maximumRiseM": 0.015,
+            "maximumGrade": 0.075,
+            "clearWidthM": 1.1,
+            "walkableSurfaceTriangulation": [
+              0,
+              2,
+              1,
+              0,
+              3,
+              2
+            ],
+            "walkableSurfacePolygonsM": [
+              [
+                [
+                  -1.98,
+                  0.95,
+                  -21.900000000000002
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  -21.900000000000002
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  -20.8
+                ],
+                [
+                  -1.98,
+                  0.95,
+                  -20.8
+                ]
+              ],
+              [
+                [
+                  -1.78,
+                  0.965,
+                  -21.900000000000002
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  -21.900000000000002
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  -20.8
+                ],
+                [
+                  -1.78,
+                  0.965,
+                  -20.8
+                ]
+              ],
+              [
+                [
+                  -1.28,
+                  0.965,
+                  -21.900000000000002
+                ],
+                [
+                  -1.08,
+                  0.95,
+                  -21.900000000000002
+                ],
+                [
+                  -1.08,
+                  0.95,
+                  -20.8
+                ],
+                [
+                  -1.28,
+                  0.965,
+                  -20.8
+                ]
+              ]
+            ],
+            "doorSweepPolicy": "Plate deploys only after leaves reach their full open endpoint; close doors only after plate is stored",
+            "modelNotCertification": true
+          }
+        }
+      ],
+      "entryConnections": [
+        {
+          "connectionId": "research-platform-walk-entry",
+          "localPointM": [
+            -5.5,
+            0.95,
+            0
+          ],
+          "targetWalkSurfaceId": null,
+          "targetPointM": null,
+          "clearWidthM": 1.8,
+          "status": "unresolved-world-connection",
+          "connectorPolygonM": [
+            [
+              -7.5,
+              0.95,
+              -0.9
+            ],
+            [
+              -4.95,
+              0.95,
+              -0.9
+            ],
+            [
+              -4.95,
+              0.95,
+              0.9
+            ],
+            [
+              -7.5,
+              0.95,
+              0.9
+            ]
+          ],
+          "levelConnectionOnly": true,
+          "undergroundConnection": false
+        }
+      ],
+      "instances": [
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            -36
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            -34
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            -32
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            -30
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            -28
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            -26
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            -24
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            -22
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            -20
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            -18
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            -16
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            -14
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            -12
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            -10
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            -8
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            -6
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            -4
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            -2
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            0
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            2
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            4
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            6
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            8
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            10
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            12
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            14
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            16
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            18
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            20
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            22
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            24
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            26
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            28
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            30
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            32
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            34
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "platform-edge-2m",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -3.5,
+            0,
+            36
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "assetId": "station-guidance-sign",
+          "packageId": "transit-station-spaces",
+          "translationM": [
+            -5.3,
+            0.95,
+            18
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0.7071067811865475,
+            0,
+            0.7071067811865476
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "exclusions": [
+        {
+          "id": "track-envelope",
+          "type": "box",
+          "boundsM": {
+            "min": [
+              -1.49,
+              0,
+              -40
+            ],
+            "max": [
+              1.49,
+              3.7,
+              40
+            ],
+            "size": [
+              2.98,
+              3.7,
+              80
+            ]
+          },
+          "purpose": "no permanent platform furniture or pedestrian path"
+        },
+        {
+          "id": "edge-safety-buffer",
+          "type": "polygon",
+          "polygonM": [
+            [
+              -2.15,
+              0.95,
+              -37
+            ],
+            [
+              -1.5,
+              0.95,
+              -37
+            ],
+            [
+              -1.5,
+              0.95,
+              37
+            ],
+            [
+              -2.15,
+              0.95,
+              37
+            ]
+          ],
+          "purpose": "keep waiting and furniture out; door approach only when authorized stopped state"
+        },
+        {
+          "id": "door-sweeps",
+          "type": "vehicle-metadata-reference",
+          "ref": "boardable-metro/vehicles/*/doors/*/sweptBoundsM",
+          "transform": "composition cars"
+        },
+        {
+          "id": "guidance-sign-footprint",
+          "type": "polygon",
+          "polygonM": [
+            [
+              -5.42,
+              0.95,
+              17.1
+            ],
+            [
+              -5.18,
+              0.95,
+              17.1
+            ],
+            [
+              -5.18,
+              0.95,
+              18.9
+            ],
+            [
+              -5.42,
+              0.95,
+              18.9
+            ]
+          ],
+          "purpose": "permanent structural sign posts, outside 1.8m corridor"
+        },
+        {
+          "id": "threshold-car-01-boarding-right-rear-storage",
+          "type": "polygon",
+          "polygonM": [
+            [
+              -5.29,
+              0.95,
+              20.8
+            ],
+            [
+              -5.21,
+              0.95,
+              20.8
+            ],
+            [
+              -5.21,
+              0.95,
+              21.900000000000002
+            ],
+            [
+              -5.29,
+              0.95,
+              21.900000000000002
+            ]
+          ],
+          "purpose": "Upright plate storage footprint outside pedestrian corridor; staff/actor managed research prop"
+        },
+        {
+          "id": "threshold-car-01-boarding-right-center-storage",
+          "type": "polygon",
+          "polygonM": [
+            [
+              -5.29,
+              0.95,
+              26.3
+            ],
+            [
+              -5.21,
+              0.95,
+              26.3
+            ],
+            [
+              -5.21,
+              0.95,
+              27.400000000000002
+            ],
+            [
+              -5.29,
+              0.95,
+              27.400000000000002
+            ]
+          ],
+          "purpose": "Upright plate storage footprint outside pedestrian corridor; staff/actor managed research prop"
+        },
+        {
+          "id": "threshold-car-01-boarding-right-front-storage",
+          "type": "polygon",
+          "polygonM": [
+            [
+              -5.29,
+              0.95,
+              31.8
+            ],
+            [
+              -5.21,
+              0.95,
+              31.8
+            ],
+            [
+              -5.21,
+              0.95,
+              32.9
+            ],
+            [
+              -5.29,
+              0.95,
+              32.9
+            ]
+          ],
+          "purpose": "Upright plate storage footprint outside pedestrian corridor; staff/actor managed research prop"
+        },
+        {
+          "id": "threshold-car-02-boarding-right-rear-storage",
+          "type": "polygon",
+          "polygonM": [
+            [
+              -5.29,
+              0.95,
+              2.8999999999999995
+            ],
+            [
+              -5.21,
+              0.95,
+              2.8999999999999995
+            ],
+            [
+              -5.21,
+              0.95,
+              3.999999999999999
+            ],
+            [
+              -5.29,
+              0.95,
+              3.999999999999999
+            ]
+          ],
+          "purpose": "Upright plate storage footprint outside pedestrian corridor; staff/actor managed research prop"
+        },
+        {
+          "id": "threshold-car-02-boarding-right-center-storage",
+          "type": "polygon",
+          "polygonM": [
+            [
+              -5.29,
+              0.95,
+              8.399999999999999
+            ],
+            [
+              -5.21,
+              0.95,
+              8.399999999999999
+            ],
+            [
+              -5.21,
+              0.95,
+              9.5
+            ],
+            [
+              -5.29,
+              0.95,
+              9.5
+            ]
+          ],
+          "purpose": "Upright plate storage footprint outside pedestrian corridor; staff/actor managed research prop"
+        },
+        {
+          "id": "threshold-car-02-boarding-right-front-storage",
+          "type": "polygon",
+          "polygonM": [
+            [
+              -5.29,
+              0.95,
+              13.899999999999999
+            ],
+            [
+              -5.21,
+              0.95,
+              13.899999999999999
+            ],
+            [
+              -5.21,
+              0.95,
+              15.0
+            ],
+            [
+              -5.29,
+              0.95,
+              15.0
+            ]
+          ],
+          "purpose": "Upright plate storage footprint outside pedestrian corridor; staff/actor managed research prop"
+        },
+        {
+          "id": "threshold-car-03-boarding-right-rear-storage",
+          "type": "polygon",
+          "polygonM": [
+            [
+              -5.29,
+              0.95,
+              -15.0
+            ],
+            [
+              -5.21,
+              0.95,
+              -15.0
+            ],
+            [
+              -5.21,
+              0.95,
+              -13.899999999999999
+            ],
+            [
+              -5.29,
+              0.95,
+              -13.899999999999999
+            ]
+          ],
+          "purpose": "Upright plate storage footprint outside pedestrian corridor; staff/actor managed research prop"
+        },
+        {
+          "id": "threshold-car-03-boarding-right-center-storage",
+          "type": "polygon",
+          "polygonM": [
+            [
+              -5.29,
+              0.95,
+              -9.5
+            ],
+            [
+              -5.21,
+              0.95,
+              -9.5
+            ],
+            [
+              -5.21,
+              0.95,
+              -8.399999999999999
+            ],
+            [
+              -5.29,
+              0.95,
+              -8.399999999999999
+            ]
+          ],
+          "purpose": "Upright plate storage footprint outside pedestrian corridor; staff/actor managed research prop"
+        },
+        {
+          "id": "threshold-car-03-boarding-right-front-storage",
+          "type": "polygon",
+          "polygonM": [
+            [
+              -5.29,
+              0.95,
+              -3.999999999999999
+            ],
+            [
+              -5.21,
+              0.95,
+              -3.999999999999999
+            ],
+            [
+              -5.21,
+              0.95,
+              -2.8999999999999995
+            ],
+            [
+              -5.29,
+              0.95,
+              -2.8999999999999995
+            ]
+          ],
+          "purpose": "Upright plate storage footprint outside pedestrian corridor; staff/actor managed research prop"
+        },
+        {
+          "id": "threshold-car-04-boarding-right-rear-storage",
+          "type": "polygon",
+          "polygonM": [
+            [
+              -5.29,
+              0.95,
+              -32.9
+            ],
+            [
+              -5.21,
+              0.95,
+              -32.9
+            ],
+            [
+              -5.21,
+              0.95,
+              -31.8
+            ],
+            [
+              -5.29,
+              0.95,
+              -31.8
+            ]
+          ],
+          "purpose": "Upright plate storage footprint outside pedestrian corridor; staff/actor managed research prop"
+        },
+        {
+          "id": "threshold-car-04-boarding-right-center-storage",
+          "type": "polygon",
+          "polygonM": [
+            [
+              -5.29,
+              0.95,
+              -27.400000000000002
+            ],
+            [
+              -5.21,
+              0.95,
+              -27.400000000000002
+            ],
+            [
+              -5.21,
+              0.95,
+              -26.3
+            ],
+            [
+              -5.29,
+              0.95,
+              -26.3
+            ]
+          ],
+          "purpose": "Upright plate storage footprint outside pedestrian corridor; staff/actor managed research prop"
+        },
+        {
+          "id": "threshold-car-04-boarding-right-front-storage",
+          "type": "polygon",
+          "polygonM": [
+            [
+              -5.29,
+              0.95,
+              -21.900000000000002
+            ],
+            [
+              -5.21,
+              0.95,
+              -21.900000000000002
+            ],
+            [
+              -5.21,
+              0.95,
+              -20.8
+            ],
+            [
+              -5.29,
+              0.95,
+              -20.8
+            ]
+          ],
+          "purpose": "Upright plate storage footprint outside pedestrian corridor; staff/actor managed research prop"
+        }
+      ],
+      "boardingGameplayEnabled": false,
+      "intercarTraversalEnabled": false,
+      "floorTriangulation": {
+        "indices": [
+          0,
+          2,
+          1,
+          0,
+          3,
+          2
+        ],
+        "normal": [
+          0,
+          1,
+          0
+        ],
+        "verticesRef": "floorPolygonM"
+      }
+    }
+  ],
+  "runtimeIntegrationStatus": "runtime_pending_webgl",
+  "unresolved": [
+    "source stop IDs",
+    "geographic placement",
+    "walk/rail surface attachment",
+    "real entrance levels and ramps/lifts",
+    "WebGL collision/LOD/performance",
+    "threshold deployment motion and D06 gameplay state gating"
+  ],
+  "prohibitedClaims": [
+    "No invented Waterfront underground connection",
+    "No live route/service claim",
+    "No cross-car traversal acceptance"
+  ]
+}

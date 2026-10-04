@@ -1,0 +1,1182 @@
+{
+  "status": "pass",
+  "method": "Fresh unbatched source GLB and actual batched binary per-component attributes, indices, materials and named-node transforms; no geometric simplification",
+  "results": [
+    {
+      "file": "bus-stop-pole.lod0.glb",
+      "status": "pass",
+      "unbatchedSha256": "080db88ab3dd84399a24a60c80b6d50031c5afb2ff4580e0174d32e475e10fdc",
+      "batchedSha256": "a6de3fcb597ef01aad772ed81693e5d0ffb94f565090052db09db8b8a103226c",
+      "unbatchedPrimitives": 11,
+      "batchedPrimitives": 3,
+      "materialRoles": 3,
+      "unbatchedBytes": 44592,
+      "batchedBytes": 52436,
+      "trianglesUnchanged": 548,
+      "verticesUnchanged": 1032,
+      "allOriginalNodeTransformsPreserved": true,
+      "componentRanges": [
+        {
+          "componentId": "ground-foot",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-painted-metal",
+          "triangleCount": 44,
+          "attributeMaxErrors": {
+            "POSITION": 0.0,
+            "NORMAL": 1.2101617041793133e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "pole",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-painted-metal",
+          "triangleCount": 44,
+          "attributeMaxErrors": {
+            "POSITION": 1.1920928955078125e-07,
+            "NORMAL": 1.2101617041793133e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "stop-sign-frame",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-painted-metal",
+          "triangleCount": 108,
+          "attributeMaxErrors": {
+            "POSITION": 1.1920928955078125e-07,
+            "NORMAL": 2.6389864848930245e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "sign-mount--0.21",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-painted-metal",
+          "triangleCount": 44,
+          "attributeMaxErrors": {
+            "POSITION": 1.862645149230957e-08,
+            "NORMAL": 1.2101617041793133e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "sign-mount-0.21",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-painted-metal",
+          "triangleCount": 44,
+          "attributeMaxErrors": {
+            "POSITION": 1.862645149230957e-08,
+            "NORMAL": 1.2101617041793133e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "stop-sign-face",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-sign-face",
+          "triangleCount": 108,
+          "attributeMaxErrors": {
+            "POSITION": 1.1920928955078125e-07,
+            "NORMAL": 2.6389864848930245e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "bus-pictogram-window",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-sign-face",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 5.960464477539063e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "bus-pictogram-body",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-sign-symbol",
+          "triangleCount": 108,
+          "attributeMaxErrors": {
+            "POSITION": 1.043081283569336e-07,
+            "NORMAL": 2.6389864848930245e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "bus-pictogram-wheel--0.1",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-sign-symbol",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 7.450580596923828e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "bus-pictogram-wheel-0.1",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-sign-symbol",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 7.450580596923828e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "generic-route-rule",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-sign-symbol",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 3.725290298461914e-09,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        }
+      ]
+    },
+    {
+      "file": "bus-stop-pole.lod1.glb",
+      "status": "pass",
+      "unbatchedSha256": "9dffa80b55e06f1b5f9838cc642151cc3430da193be9f8190085561c1787b390",
+      "batchedSha256": "bccd02414db637a63aebdd00e1903c47e2453d4170d0a0d96f57218ab369bf02",
+      "unbatchedPrimitives": 9,
+      "batchedPrimitives": 3,
+      "materialRoles": 3,
+      "unbatchedBytes": 16676,
+      "batchedBytes": 20468,
+      "trianglesUnchanged": 124,
+      "verticesUnchanged": 240,
+      "allOriginalNodeTransformsPreserved": true,
+      "componentRanges": [
+        {
+          "componentId": "ground-foot",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-painted-metal",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 0.0,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "pole",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-painted-metal",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 1.1920928955078125e-07,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "stop-sign-frame",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-painted-metal",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.7939677238464355e-09,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "stop-sign-face",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-sign-face",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 8.940696716308594e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "bus-pictogram-window",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-sign-face",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 5.960464477539063e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "bus-pictogram-body",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-sign-symbol",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 1.043081283569336e-07,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "bus-pictogram-wheel--0.1",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-sign-symbol",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 7.450580596923828e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "bus-pictogram-wheel-0.1",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-sign-symbol",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 7.450580596923828e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "generic-route-rule",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-sign-symbol",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 3.725290298461914e-09,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        }
+      ]
+    },
+    {
+      "file": "bus-threshold-deck.lod0.glb",
+      "status": "pass",
+      "unbatchedSha256": "d7a102ca64e3cfb48ea77b1aa177fe17dee8d44b9f0d6283cb02a1a13dcbaa47",
+      "batchedSha256": "0d4394f81ad7c417e90fb0ddda2a3b5199f71055ef09b07bd3602a9590af5d2e",
+      "unbatchedPrimitives": 4,
+      "batchedPrimitives": 2,
+      "materialRoles": 2,
+      "unbatchedBytes": 8324,
+      "batchedBytes": 10728,
+      "trianglesUnchanged": 56,
+      "verticesUnchanged": 108,
+      "allOriginalNodeTransformsPreserved": true,
+      "componentRanges": [
+        {
+          "componentId": "threshold-deck",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-painted-metal",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 0.0,
+            "NORMAL": 1.7785290462590808e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "deck-grip-strip",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 1.210719347000122e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "deck-grip-strip.001",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 1.862645149230957e-09,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "deck-grip-strip.002",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 1.210719347000122e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        }
+      ]
+    },
+    {
+      "file": "bus-threshold-deck.lod1.glb",
+      "status": "pass",
+      "unbatchedSha256": "04ee704a237da39702730ff1898e4132a63387fb72177054396236ea4979884d",
+      "batchedSha256": "f8c29798b4bed7e1c9e67ae1beeb554692e6f762fb8971e9786758492f0f13ba",
+      "unbatchedPrimitives": 1,
+      "batchedPrimitives": 1,
+      "materialRoles": 1,
+      "unbatchedBytes": 3068,
+      "batchedBytes": 4420,
+      "trianglesUnchanged": 20,
+      "verticesUnchanged": 36,
+      "allOriginalNodeTransformsPreserved": true,
+      "componentRanges": [
+        {
+          "componentId": "threshold-deck",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-painted-metal",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 0.0,
+            "NORMAL": 1.7785290462590808e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        }
+      ]
+    },
+    {
+      "file": "metro-threshold-deck.lod0.glb",
+      "status": "pass",
+      "unbatchedSha256": "72963bd4fb8fdc8e393700893d1e7883e546fbbb51bdcc9480ae42f4478cda5e",
+      "batchedSha256": "075ceb2ec81ad96c0df75134797c7c9d42119d58cdab65c7d4fafb77532c9767",
+      "unbatchedPrimitives": 4,
+      "batchedPrimitives": 2,
+      "materialRoles": 2,
+      "unbatchedBytes": 8360,
+      "batchedBytes": 10788,
+      "trianglesUnchanged": 56,
+      "verticesUnchanged": 108,
+      "allOriginalNodeTransformsPreserved": true,
+      "componentRanges": [
+        {
+          "componentId": "threshold-deck",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-painted-metal",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 0.0,
+            "NORMAL": 1.7785290462590808e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "deck-grip-strip",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 1.210719347000122e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "deck-grip-strip.001",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 5.587935447692871e-09,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "deck-grip-strip.002",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 1.210719347000122e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        }
+      ]
+    },
+    {
+      "file": "metro-threshold-deck.lod1.glb",
+      "status": "pass",
+      "unbatchedSha256": "1fd416bd7b90503c73b724244c70d27d131d1eba0409d82793145e2b92815a1d",
+      "batchedSha256": "c461a0a4863c1619161775e95828a5cd1897ce21af8fd649ae24aed6fc04cce2",
+      "unbatchedPrimitives": 1,
+      "batchedPrimitives": 1,
+      "materialRoles": 1,
+      "unbatchedBytes": 3100,
+      "batchedBytes": 4468,
+      "trianglesUnchanged": 20,
+      "verticesUnchanged": 36,
+      "allOriginalNodeTransformsPreserved": true,
+      "componentRanges": [
+        {
+          "componentId": "threshold-deck",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-painted-metal",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 0.0,
+            "NORMAL": 1.7785290462590808e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        }
+      ]
+    },
+    {
+      "file": "platform-edge-2m.lod0.glb",
+      "status": "pass",
+      "unbatchedSha256": "66973eacb942ed462a43bd6ae12c22958ba44461d89a66516d4d9c20ff1acea8",
+      "batchedSha256": "db3cd3905ee077b05883a6f74d1b1aae81c04d986742874251943b8dee9f13e8",
+      "unbatchedPrimitives": 32,
+      "batchedPrimitives": 3,
+      "materialRoles": 3,
+      "unbatchedBytes": 61800,
+      "batchedBytes": 69624,
+      "trianglesUnchanged": 576,
+      "verticesUnchanged": 1056,
+      "allOriginalNodeTransformsPreserved": true,
+      "componentRanges": [
+        {
+          "componentId": "platform-foundation",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-concrete",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 0.0,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "platform-deck",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-concrete",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.9802322387695312e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "platform-edge-cap",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-concrete",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.9802322387695312e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "tactile-band",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 1.2922100722789764e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "tactile-stud",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 2.7008354663848877e-08,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "tactile-stud.001",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 2.7008354663848877e-08,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "tactile-stud.002",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 2.421438694000244e-08,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "tactile-stud.003",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 2.421438694000244e-08,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "tactile-stud.004",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 2.421438694000244e-08,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "tactile-stud.005",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 2.421438694000244e-08,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "tactile-stud.006",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 2.7008354663848877e-08,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "tactile-stud.007",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 2.7008354663848877e-08,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "tactile-stud.008",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 2.7008354663848877e-08,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "tactile-stud.009",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 2.7008354663848877e-08,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "tactile-stud.010",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 2.421438694000244e-08,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "tactile-stud.011",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 2.421438694000244e-08,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "tactile-stud.012",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 2.421438694000244e-08,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "tactile-stud.013",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 2.421438694000244e-08,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "tactile-stud.014",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 2.7008354663848877e-08,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "tactile-stud.015",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 2.7008354663848877e-08,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "tactile-stud.016",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 2.7008354663848877e-08,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "tactile-stud.017",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 2.7008354663848877e-08,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "tactile-stud.018",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 2.421438694000244e-08,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "tactile-stud.019",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 2.421438694000244e-08,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "tactile-stud.020",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 2.421438694000244e-08,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "tactile-stud.021",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 2.421438694000244e-08,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "tactile-stud.022",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 2.7008354663848877e-08,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "tactile-stud.023",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 20,
+          "attributeMaxErrors": {
+            "POSITION": 2.7008354663848877e-08,
+            "NORMAL": 2.4612993643202685e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "edge-face-drain",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-painted-metal",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.584420144557953e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "edge-face-drain.001",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-painted-metal",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.584420144557953e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "edge-face-drain.002",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-painted-metal",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.584420144557953e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "edge-face-drain.003",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-painted-metal",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.584420144557953e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        }
+      ]
+    },
+    {
+      "file": "platform-edge-2m.lod1.glb",
+      "status": "pass",
+      "unbatchedSha256": "193e5b6f2952cb4dc04aa5bda1cbb51033d017b17fa545cba791c847c392ad4d",
+      "batchedSha256": "345e1a8443a68f008ec7d4aa648e25c086d718e22c25f708e8e762d66d566818",
+      "unbatchedPrimitives": 4,
+      "batchedPrimitives": 2,
+      "materialRoles": 2,
+      "unbatchedBytes": 7492,
+      "batchedBytes": 9836,
+      "trianglesUnchanged": 48,
+      "verticesUnchanged": 96,
+      "allOriginalNodeTransformsPreserved": true,
+      "componentRanges": [
+        {
+          "componentId": "platform-foundation",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-concrete",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 0.0,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "platform-deck",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-concrete",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.9802322387695312e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "platform-edge-cap",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-concrete",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.9802322387695312e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "tactile-band",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-tactile-yellow",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 1.2922100722789764e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        }
+      ]
+    },
+    {
+      "file": "station-guidance-sign.lod0.glb",
+      "status": "pass",
+      "unbatchedSha256": "41c7d7cc76a14cf56724038fcc07282c417535b42ace4c64228623b633f56afb",
+      "batchedSha256": "03d2a972361986246a15283e64925f2a0a6e80aeb9df22e1df03f50d17ee3ef9",
+      "unbatchedPrimitives": 9,
+      "batchedPrimitives": 3,
+      "materialRoles": 3,
+      "unbatchedBytes": 54260,
+      "batchedBytes": 64056,
+      "trianglesUnchanged": 696,
+      "verticesUnchanged": 1386,
+      "allOriginalNodeTransformsPreserved": true,
+      "componentRanges": [
+        {
+          "componentId": "sign-post--0.85",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-painted-metal",
+          "triangleCount": 108,
+          "attributeMaxErrors": {
+            "POSITION": 1.1920928955078125e-07,
+            "NORMAL": 2.6389864848930245e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "sign-foot--0.85",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-painted-metal",
+          "triangleCount": 108,
+          "attributeMaxErrors": {
+            "POSITION": 2.9802322387695312e-08,
+            "NORMAL": 2.6389864848930245e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "sign-post-0.85",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-painted-metal",
+          "triangleCount": 108,
+          "attributeMaxErrors": {
+            "POSITION": 1.1920928955078125e-07,
+            "NORMAL": 2.6389864848930245e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "sign-foot-0.85",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-painted-metal",
+          "triangleCount": 108,
+          "attributeMaxErrors": {
+            "POSITION": 2.9802322387695312e-08,
+            "NORMAL": 2.6389864848930245e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "guidance-panel",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-painted-metal",
+          "triangleCount": 108,
+          "attributeMaxErrors": {
+            "POSITION": 1.1920928955078125e-07,
+            "NORMAL": 2.6389864848930245e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "guidance-face",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-sign-face",
+          "triangleCount": 108,
+          "attributeMaxErrors": {
+            "POSITION": 5.960464477539063e-08,
+            "NORMAL": 2.6389864848930245e-08,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "direction-arrow",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-sign-symbol",
+          "triangleCount": 24,
+          "attributeMaxErrors": {
+            "POSITION": 0.0,
+            "NORMAL": 9.140376233673919e-09,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "generic-destination-rule-2.67",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-sign-symbol",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 3.725290298461914e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "generic-destination-rule-2.54",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-sign-symbol",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 3.725290298461914e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        }
+      ]
+    },
+    {
+      "file": "station-guidance-sign.lod1.glb",
+      "status": "pass",
+      "unbatchedSha256": "a273751c67eb96072a6752dcdc95ac7a0f6076d01b32b93e794a3483c2353928",
+      "batchedSha256": "1a2032a474ba1eacbf6b7df64cca0d52b76e724e3b2d2c9e7f60b8f0ac1ae93b",
+      "unbatchedPrimitives": 9,
+      "batchedPrimitives": 3,
+      "materialRoles": 3,
+      "unbatchedBytes": 16548,
+      "batchedBytes": 20228,
+      "trianglesUnchanged": 120,
+      "verticesUnchanged": 234,
+      "allOriginalNodeTransformsPreserved": true,
+      "componentRanges": [
+        {
+          "componentId": "sign-post--0.85",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-painted-metal",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.60770320892334e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "sign-foot--0.85",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-painted-metal",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.9802322387695312e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "sign-post-0.85",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-painted-metal",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.60770320892334e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "sign-foot-0.85",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-painted-metal",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.9802322387695312e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "guidance-panel",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-painted-metal",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 0.0,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "guidance-face",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-sign-face",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.9802322387695312e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "direction-arrow",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-sign-symbol",
+          "triangleCount": 24,
+          "attributeMaxErrors": {
+            "POSITION": 0.0,
+            "NORMAL": 9.140376233673919e-09,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "generic-destination-rule-2.67",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-sign-symbol",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 3.725290298461914e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "generic-destination-rule-2.54",
+          "sourcePrimitive": 0,
+          "batchNode": "module-batch-sign-symbol",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 3.725290298461914e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        }
+      ]
+    }
+  ],
+  "platform37ModulePrimitiveSubmissionProposal": {
+    "before": 1184,
+    "after": 111,
+    "moduleCount": 37,
+    "instancingEnabled": false,
+    "gpuDrawsMeasured": false
+  },
+  "originalSourceFilesUnmodified": true
+}

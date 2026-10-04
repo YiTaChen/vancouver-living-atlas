@@ -1,0 +1,62 @@
+{
+  "status": "offline_complete",
+  "integrationStatus": "runtime_pending_webgl",
+  "taskIds": [
+    "D01"
+  ],
+  "completed": [
+    "Five original editable station/threshold modules, two LODs each",
+    "Static export batches by exact material role; platform LOD0 drops from 32 to 3 primitives while source parts, triangles and anchor transforms are preserved",
+    "Referenced transit shelter without duplication",
+    "Source-preserving reexport and actual edit-survival proof",
+    "Actual GLB dimensions, primitives, triangle and byte costs",
+    "Vehicle metadata-derived paired bus/74m rail research layouts",
+    "CPU floor/frame/alignment/clearance tests plus nine negative controls",
+    "All 16 stored threshold poses grounded from actual transformed exported bounds; 32 LOD contact checks reject old hovering and sunken poses",
+    "Deployed deck endpoints, actual vehicle-floor support, open-door separation and headroom checks; closed-door overlap proves state gate necessary",
+    "14 compact actual-GLB Cycles CPU previews, four lighting conditions, human and metric scale"
+  ],
+  "notRun": [
+    "WebGL",
+    "geographic source placement",
+    "walk/rail attachment",
+    "D06 boarding/alighting",
+    "dynamic moving collision",
+    "GPU memory/frame-time",
+    "deployment"
+  ],
+  "unresolved": [
+    "real stop/platform IDs and entrance/walk connection",
+    "portable threshold deck deployment motion and D06 activation remain disabled",
+    "inter-car traversal remains disabled"
+  ],
+  "doorwayClearanceM": {
+    "bus": 2.084,
+    "metro": 2.034,
+    "minimumTarget": 2.0
+  },
+  "cabinFloorToOverheadM": {
+    "bus": 2.24,
+    "metro": 2.16,
+    "minimumTarget": 2.05
+  },
+  "researchIslandFloorHeightM": {
+    "bus": 0.36,
+    "metro": 0.95,
+    "realGroundConnection": "unresolved"
+  },
+  "thresholdAudit": "qa/threshold-validation.json",
+  "storedContactAudit": "qa/stored-contact-validation.json",
+  "staticBatchingAudit": "qa/static-batching.json",
+  "floorGeometryLookup": "Exact floor componentRanges triangles plus imported batch-mesh ray; zero-draw anchors are not used as geometry",
+  "sourceAudit": "qa/source-audit.json",
+  "stationLayout": "station-layout.json",
+  "dependencies": [
+    "boardable-bus",
+    "boardable-metro",
+    "street-furniture-expansion"
+  ],
+  "nextIntegration": "Choose source-backed stop/platform and local frame; attach walk/rail surfaces; audit authored thresholds and floor support before enabling boarding; preserve official route data",
+  "productionIsolation": "New package only; parent must run formal build/isolation audit",
+  "noCertificationClaim": true
+}

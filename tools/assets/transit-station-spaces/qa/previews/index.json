@@ -1,0 +1,552 @@
+{
+  "status": "rendered",
+  "renderer": "Blender 4.3.2 Cycles CPU",
+  "scope": "Actual GLB reimport evidence; local research only. Ground, island descriptors, schematic rail, people, ruler and lighting are QA-only.",
+  "lightingConditions": [
+    "sunny",
+    "overcast",
+    "dusk",
+    "night"
+  ],
+  "imageCount": 14,
+  "images": [
+    {
+      "file": "modules-lod0-sunny.png",
+      "lighting": "sunny",
+      "lod": 0,
+      "renderer": "Cycles CPU",
+      "samples": 32,
+      "actualGlbSources": [
+        {
+          "path": "transit-station-spaces/exports/bus-stop-pole.lod0.glb",
+          "sha256": "a6de3fcb597ef01aad772ed81693e5d0ffb94f565090052db09db8b8a103226c"
+        },
+        {
+          "path": "transit-station-spaces/exports/platform-edge-2m.lod0.glb",
+          "sha256": "db3cd3905ee077b05883a6f74d1b1aae81c04d986742874251943b8dee9f13e8"
+        },
+        {
+          "path": "transit-station-spaces/exports/station-guidance-sign.lod0.glb",
+          "sha256": "03d2a972361986246a15283e64925f2a0a6e80aeb9df22e1df03f50d17ee3ef9"
+        },
+        {
+          "path": "transit-station-spaces/exports/bus-threshold-deck.lod0.glb",
+          "sha256": "0d4394f81ad7c417e90fb0ddda2a3b5199f71055ef09b07bd3602a9590af5d2e"
+        },
+        {
+          "path": "transit-station-spaces/exports/metro-threshold-deck.lod0.glb",
+          "sha256": "075ceb2ec81ad96c0df75134797c7c9d42119d58cdab65c7d4fafb77532c9767"
+        }
+      ],
+      "qaReferences": {
+        "rulerM": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "notBrowserAcceptance": true
+    },
+    {
+      "file": "modules-lod0-overcast.png",
+      "lighting": "overcast",
+      "lod": 0,
+      "renderer": "Cycles CPU",
+      "samples": 32,
+      "actualGlbSources": [
+        {
+          "path": "transit-station-spaces/exports/bus-stop-pole.lod0.glb",
+          "sha256": "a6de3fcb597ef01aad772ed81693e5d0ffb94f565090052db09db8b8a103226c"
+        },
+        {
+          "path": "transit-station-spaces/exports/platform-edge-2m.lod0.glb",
+          "sha256": "db3cd3905ee077b05883a6f74d1b1aae81c04d986742874251943b8dee9f13e8"
+        },
+        {
+          "path": "transit-station-spaces/exports/station-guidance-sign.lod0.glb",
+          "sha256": "03d2a972361986246a15283e64925f2a0a6e80aeb9df22e1df03f50d17ee3ef9"
+        },
+        {
+          "path": "transit-station-spaces/exports/bus-threshold-deck.lod0.glb",
+          "sha256": "0d4394f81ad7c417e90fb0ddda2a3b5199f71055ef09b07bd3602a9590af5d2e"
+        },
+        {
+          "path": "transit-station-spaces/exports/metro-threshold-deck.lod0.glb",
+          "sha256": "075ceb2ec81ad96c0df75134797c7c9d42119d58cdab65c7d4fafb77532c9767"
+        }
+      ],
+      "qaReferences": {
+        "rulerM": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "notBrowserAcceptance": true
+    },
+    {
+      "file": "modules-lod0-dusk.png",
+      "lighting": "dusk",
+      "lod": 0,
+      "renderer": "Cycles CPU",
+      "samples": 32,
+      "actualGlbSources": [
+        {
+          "path": "transit-station-spaces/exports/bus-stop-pole.lod0.glb",
+          "sha256": "a6de3fcb597ef01aad772ed81693e5d0ffb94f565090052db09db8b8a103226c"
+        },
+        {
+          "path": "transit-station-spaces/exports/platform-edge-2m.lod0.glb",
+          "sha256": "db3cd3905ee077b05883a6f74d1b1aae81c04d986742874251943b8dee9f13e8"
+        },
+        {
+          "path": "transit-station-spaces/exports/station-guidance-sign.lod0.glb",
+          "sha256": "03d2a972361986246a15283e64925f2a0a6e80aeb9df22e1df03f50d17ee3ef9"
+        },
+        {
+          "path": "transit-station-spaces/exports/bus-threshold-deck.lod0.glb",
+          "sha256": "0d4394f81ad7c417e90fb0ddda2a3b5199f71055ef09b07bd3602a9590af5d2e"
+        },
+        {
+          "path": "transit-station-spaces/exports/metro-threshold-deck.lod0.glb",
+          "sha256": "075ceb2ec81ad96c0df75134797c7c9d42119d58cdab65c7d4fafb77532c9767"
+        }
+      ],
+      "qaReferences": {
+        "rulerM": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "notBrowserAcceptance": true
+    },
+    {
+      "file": "modules-lod0-night.png",
+      "lighting": "night",
+      "lod": 0,
+      "renderer": "Cycles CPU",
+      "samples": 32,
+      "actualGlbSources": [
+        {
+          "path": "transit-station-spaces/exports/bus-stop-pole.lod0.glb",
+          "sha256": "a6de3fcb597ef01aad772ed81693e5d0ffb94f565090052db09db8b8a103226c"
+        },
+        {
+          "path": "transit-station-spaces/exports/platform-edge-2m.lod0.glb",
+          "sha256": "db3cd3905ee077b05883a6f74d1b1aae81c04d986742874251943b8dee9f13e8"
+        },
+        {
+          "path": "transit-station-spaces/exports/station-guidance-sign.lod0.glb",
+          "sha256": "03d2a972361986246a15283e64925f2a0a6e80aeb9df22e1df03f50d17ee3ef9"
+        },
+        {
+          "path": "transit-station-spaces/exports/bus-threshold-deck.lod0.glb",
+          "sha256": "0d4394f81ad7c417e90fb0ddda2a3b5199f71055ef09b07bd3602a9590af5d2e"
+        },
+        {
+          "path": "transit-station-spaces/exports/metro-threshold-deck.lod0.glb",
+          "sha256": "075ceb2ec81ad96c0df75134797c7c9d42119d58cdab65c7d4fafb77532c9767"
+        }
+      ],
+      "qaReferences": {
+        "rulerM": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "notBrowserAcceptance": true
+    },
+    {
+      "file": "modules-lod1-sunny.png",
+      "lighting": "sunny",
+      "lod": 1,
+      "renderer": "Cycles CPU",
+      "samples": 32,
+      "actualGlbSources": [
+        {
+          "path": "transit-station-spaces/exports/bus-stop-pole.lod1.glb",
+          "sha256": "bccd02414db637a63aebdd00e1903c47e2453d4170d0a0d96f57218ab369bf02"
+        },
+        {
+          "path": "transit-station-spaces/exports/platform-edge-2m.lod1.glb",
+          "sha256": "345e1a8443a68f008ec7d4aa648e25c086d718e22c25f708e8e762d66d566818"
+        },
+        {
+          "path": "transit-station-spaces/exports/station-guidance-sign.lod1.glb",
+          "sha256": "1a2032a474ba1eacbf6b7df64cca0d52b76e724e3b2d2c9e7f60b8f0ac1ae93b"
+        },
+        {
+          "path": "transit-station-spaces/exports/bus-threshold-deck.lod1.glb",
+          "sha256": "f8c29798b4bed7e1c9e67ae1beeb554692e6f762fb8971e9786758492f0f13ba"
+        },
+        {
+          "path": "transit-station-spaces/exports/metro-threshold-deck.lod1.glb",
+          "sha256": "c461a0a4863c1619161775e95828a5cd1897ce21af8fd649ae24aed6fc04cce2"
+        }
+      ],
+      "qaReferences": {
+        "rulerM": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "notBrowserAcceptance": true
+    },
+    {
+      "file": "modules-lod1-overcast.png",
+      "lighting": "overcast",
+      "lod": 1,
+      "renderer": "Cycles CPU",
+      "samples": 32,
+      "actualGlbSources": [
+        {
+          "path": "transit-station-spaces/exports/bus-stop-pole.lod1.glb",
+          "sha256": "bccd02414db637a63aebdd00e1903c47e2453d4170d0a0d96f57218ab369bf02"
+        },
+        {
+          "path": "transit-station-spaces/exports/platform-edge-2m.lod1.glb",
+          "sha256": "345e1a8443a68f008ec7d4aa648e25c086d718e22c25f708e8e762d66d566818"
+        },
+        {
+          "path": "transit-station-spaces/exports/station-guidance-sign.lod1.glb",
+          "sha256": "1a2032a474ba1eacbf6b7df64cca0d52b76e724e3b2d2c9e7f60b8f0ac1ae93b"
+        },
+        {
+          "path": "transit-station-spaces/exports/bus-threshold-deck.lod1.glb",
+          "sha256": "f8c29798b4bed7e1c9e67ae1beeb554692e6f762fb8971e9786758492f0f13ba"
+        },
+        {
+          "path": "transit-station-spaces/exports/metro-threshold-deck.lod1.glb",
+          "sha256": "c461a0a4863c1619161775e95828a5cd1897ce21af8fd649ae24aed6fc04cce2"
+        }
+      ],
+      "qaReferences": {
+        "rulerM": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "notBrowserAcceptance": true
+    },
+    {
+      "file": "modules-lod1-dusk.png",
+      "lighting": "dusk",
+      "lod": 1,
+      "renderer": "Cycles CPU",
+      "samples": 32,
+      "actualGlbSources": [
+        {
+          "path": "transit-station-spaces/exports/bus-stop-pole.lod1.glb",
+          "sha256": "bccd02414db637a63aebdd00e1903c47e2453d4170d0a0d96f57218ab369bf02"
+        },
+        {
+          "path": "transit-station-spaces/exports/platform-edge-2m.lod1.glb",
+          "sha256": "345e1a8443a68f008ec7d4aa648e25c086d718e22c25f708e8e762d66d566818"
+        },
+        {
+          "path": "transit-station-spaces/exports/station-guidance-sign.lod1.glb",
+          "sha256": "1a2032a474ba1eacbf6b7df64cca0d52b76e724e3b2d2c9e7f60b8f0ac1ae93b"
+        },
+        {
+          "path": "transit-station-spaces/exports/bus-threshold-deck.lod1.glb",
+          "sha256": "f8c29798b4bed7e1c9e67ae1beeb554692e6f762fb8971e9786758492f0f13ba"
+        },
+        {
+          "path": "transit-station-spaces/exports/metro-threshold-deck.lod1.glb",
+          "sha256": "c461a0a4863c1619161775e95828a5cd1897ce21af8fd649ae24aed6fc04cce2"
+        }
+      ],
+      "qaReferences": {
+        "rulerM": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "notBrowserAcceptance": true
+    },
+    {
+      "file": "modules-lod1-night.png",
+      "lighting": "night",
+      "lod": 1,
+      "renderer": "Cycles CPU",
+      "samples": 32,
+      "actualGlbSources": [
+        {
+          "path": "transit-station-spaces/exports/bus-stop-pole.lod1.glb",
+          "sha256": "bccd02414db637a63aebdd00e1903c47e2453d4170d0a0d96f57218ab369bf02"
+        },
+        {
+          "path": "transit-station-spaces/exports/platform-edge-2m.lod1.glb",
+          "sha256": "345e1a8443a68f008ec7d4aa648e25c086d718e22c25f708e8e762d66d566818"
+        },
+        {
+          "path": "transit-station-spaces/exports/station-guidance-sign.lod1.glb",
+          "sha256": "1a2032a474ba1eacbf6b7df64cca0d52b76e724e3b2d2c9e7f60b8f0ac1ae93b"
+        },
+        {
+          "path": "transit-station-spaces/exports/bus-threshold-deck.lod1.glb",
+          "sha256": "f8c29798b4bed7e1c9e67ae1beeb554692e6f762fb8971e9786758492f0f13ba"
+        },
+        {
+          "path": "transit-station-spaces/exports/metro-threshold-deck.lod1.glb",
+          "sha256": "c461a0a4863c1619161775e95828a5cd1897ce21af8fd649ae24aed6fc04cce2"
+        }
+      ],
+      "qaReferences": {
+        "rulerM": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "notBrowserAcceptance": true
+    },
+    {
+      "file": "bus-island-alignment.png",
+      "lighting": "sunny",
+      "lod": null,
+      "renderer": "Cycles CPU",
+      "samples": 32,
+      "actualGlbSources": [
+        {
+          "path": "boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        },
+        {
+          "path": "boardable-bus/exports/city-bus-12m-interior.lod0.glb",
+          "sha256": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+        },
+        {
+          "path": "transit-station-spaces/exports/bus-stop-pole.lod0.glb",
+          "sha256": "a6de3fcb597ef01aad772ed81693e5d0ffb94f565090052db09db8b8a103226c"
+        },
+        {
+          "path": "street-furniture-expansion/exports/transit-shelter.lod0.glb",
+          "sha256": "6647785c496a016ee153feba97993705a10373854d20938f136a5abb43d8123c"
+        },
+        {
+          "path": "transit-station-spaces/exports/bus-threshold-deck.lod0.glb",
+          "sha256": "0d4394f81ad7c417e90fb0ddda2a3b5199f71055ef09b07bd3602a9590af5d2e"
+        },
+        {
+          "path": "transit-station-spaces/exports/bus-threshold-deck.lod0.glb",
+          "sha256": "0d4394f81ad7c417e90fb0ddda2a3b5199f71055ef09b07bd3602a9590af5d2e"
+        }
+      ],
+      "qaReferences": {
+        "rulerM": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "notBrowserAcceptance": true
+    },
+    {
+      "file": "bus-threshold-deployed.png",
+      "lighting": "overcast",
+      "lod": null,
+      "renderer": "Cycles CPU",
+      "samples": 32,
+      "actualGlbSources": [
+        {
+          "path": "boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        },
+        {
+          "path": "boardable-bus/exports/city-bus-12m-interior.lod0.glb",
+          "sha256": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+        },
+        {
+          "path": "transit-station-spaces/exports/bus-stop-pole.lod0.glb",
+          "sha256": "a6de3fcb597ef01aad772ed81693e5d0ffb94f565090052db09db8b8a103226c"
+        },
+        {
+          "path": "street-furniture-expansion/exports/transit-shelter.lod0.glb",
+          "sha256": "6647785c496a016ee153feba97993705a10373854d20938f136a5abb43d8123c"
+        },
+        {
+          "path": "transit-station-spaces/exports/bus-threshold-deck.lod0.glb",
+          "sha256": "0d4394f81ad7c417e90fb0ddda2a3b5199f71055ef09b07bd3602a9590af5d2e"
+        },
+        {
+          "path": "transit-station-spaces/exports/bus-threshold-deck.lod0.glb",
+          "sha256": "0d4394f81ad7c417e90fb0ddda2a3b5199f71055ef09b07bd3602a9590af5d2e"
+        }
+      ],
+      "qaReferences": {
+        "rulerM": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "notBrowserAcceptance": true
+    },
+    {
+      "file": "four-car-platform-74m.png",
+      "lighting": "overcast",
+      "lod": null,
+      "renderer": "Cycles CPU",
+      "samples": 32,
+      "actualGlbSources": [
+        {
+          "path": "transit-station-spaces/exports/platform-edge-2m.lod1.glb",
+          "sha256": "345e1a8443a68f008ec7d4aa648e25c086d718e22c25f708e8e762d66d566818"
+        },
+        {
+          "path": "transit-station-spaces/exports/station-guidance-sign.lod1.glb",
+          "sha256": "1a2032a474ba1eacbf6b7df64cca0d52b76e724e3b2d2c9e7f60b8f0ac1ae93b"
+        },
+        {
+          "path": "boardable-metro/exports/expo-metro-lead-exterior.lod1.glb",
+          "sha256": "04601a4b007e4c37b8ca25f0ffc0de1b12b3bb6dec4bc34b540b31458e17a502"
+        },
+        {
+          "path": "boardable-metro/exports/expo-metro-shared-interior.lod1.glb",
+          "sha256": "79cc69b436c7c40dcc21feee9218e4bf3156af1a18494080983a17183167e52e"
+        },
+        {
+          "path": "boardable-metro/exports/expo-metro-middle-exterior.lod1.glb",
+          "sha256": "72024af0b12eff31f3070f38b97cf0de23205b630f9f1bf2d3abfd9098cd82fc"
+        },
+        {
+          "path": "boardable-metro/exports/expo-metro-tail-exterior.lod1.glb",
+          "sha256": "71697569e0d0e85a96de0f11f4ab97750c4b39678977eeefe7eebcfb51cccc1e"
+        },
+        {
+          "path": "transit-station-spaces/exports/metro-threshold-deck.lod0.glb",
+          "sha256": "075ceb2ec81ad96c0df75134797c7c9d42119d58cdab65c7d4fafb77532c9767"
+        }
+      ],
+      "qaReferences": {
+        "rulerM": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "notBrowserAcceptance": true
+    },
+    {
+      "file": "platform-human-scale.png",
+      "lighting": "sunny",
+      "lod": null,
+      "renderer": "Cycles CPU",
+      "samples": 32,
+      "actualGlbSources": [
+        {
+          "path": "transit-station-spaces/exports/platform-edge-2m.lod1.glb",
+          "sha256": "345e1a8443a68f008ec7d4aa648e25c086d718e22c25f708e8e762d66d566818"
+        },
+        {
+          "path": "transit-station-spaces/exports/station-guidance-sign.lod1.glb",
+          "sha256": "1a2032a474ba1eacbf6b7df64cca0d52b76e724e3b2d2c9e7f60b8f0ac1ae93b"
+        },
+        {
+          "path": "boardable-metro/exports/expo-metro-lead-exterior.lod1.glb",
+          "sha256": "04601a4b007e4c37b8ca25f0ffc0de1b12b3bb6dec4bc34b540b31458e17a502"
+        },
+        {
+          "path": "boardable-metro/exports/expo-metro-shared-interior.lod1.glb",
+          "sha256": "79cc69b436c7c40dcc21feee9218e4bf3156af1a18494080983a17183167e52e"
+        },
+        {
+          "path": "boardable-metro/exports/expo-metro-middle-exterior.lod1.glb",
+          "sha256": "72024af0b12eff31f3070f38b97cf0de23205b630f9f1bf2d3abfd9098cd82fc"
+        },
+        {
+          "path": "boardable-metro/exports/expo-metro-tail-exterior.lod1.glb",
+          "sha256": "71697569e0d0e85a96de0f11f4ab97750c4b39678977eeefe7eebcfb51cccc1e"
+        },
+        {
+          "path": "transit-station-spaces/exports/metro-threshold-deck.lod0.glb",
+          "sha256": "075ceb2ec81ad96c0df75134797c7c9d42119d58cdab65c7d4fafb77532c9767"
+        }
+      ],
+      "qaReferences": {
+        "rulerM": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "notBrowserAcceptance": true
+    },
+    {
+      "file": "metro-threshold-deployed.png",
+      "lighting": "overcast",
+      "lod": null,
+      "renderer": "Cycles CPU",
+      "samples": 32,
+      "actualGlbSources": [
+        {
+          "path": "transit-station-spaces/exports/platform-edge-2m.lod1.glb",
+          "sha256": "345e1a8443a68f008ec7d4aa648e25c086d718e22c25f708e8e762d66d566818"
+        },
+        {
+          "path": "transit-station-spaces/exports/station-guidance-sign.lod1.glb",
+          "sha256": "1a2032a474ba1eacbf6b7df64cca0d52b76e724e3b2d2c9e7f60b8f0ac1ae93b"
+        },
+        {
+          "path": "boardable-metro/exports/expo-metro-lead-exterior.lod1.glb",
+          "sha256": "04601a4b007e4c37b8ca25f0ffc0de1b12b3bb6dec4bc34b540b31458e17a502"
+        },
+        {
+          "path": "boardable-metro/exports/expo-metro-shared-interior.lod1.glb",
+          "sha256": "79cc69b436c7c40dcc21feee9218e4bf3156af1a18494080983a17183167e52e"
+        },
+        {
+          "path": "boardable-metro/exports/expo-metro-middle-exterior.lod1.glb",
+          "sha256": "72024af0b12eff31f3070f38b97cf0de23205b630f9f1bf2d3abfd9098cd82fc"
+        },
+        {
+          "path": "boardable-metro/exports/expo-metro-tail-exterior.lod1.glb",
+          "sha256": "71697569e0d0e85a96de0f11f4ab97750c4b39678977eeefe7eebcfb51cccc1e"
+        },
+        {
+          "path": "transit-station-spaces/exports/metro-threshold-deck.lod0.glb",
+          "sha256": "075ceb2ec81ad96c0df75134797c7c9d42119d58cdab65c7d4fafb77532c9767"
+        }
+      ],
+      "qaReferences": {
+        "rulerM": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "notBrowserAcceptance": true
+    },
+    {
+      "file": "stored-deck-contact.png",
+      "lighting": "overcast",
+      "lod": null,
+      "renderer": "Cycles CPU",
+      "samples": 32,
+      "actualGlbSources": [
+        {
+          "path": "transit-station-spaces/exports/bus-threshold-deck.lod0.glb",
+          "sha256": "0d4394f81ad7c417e90fb0ddda2a3b5199f71055ef09b07bd3602a9590af5d2e"
+        },
+        {
+          "path": "transit-station-spaces/exports/metro-threshold-deck.lod0.glb",
+          "sha256": "075ceb2ec81ad96c0df75134797c7c9d42119d58cdab65c7d4fafb77532c9767"
+        }
+      ],
+      "qaReferences": {
+        "rulerM": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "notBrowserAcceptance": true
+    }
+  ]
+}

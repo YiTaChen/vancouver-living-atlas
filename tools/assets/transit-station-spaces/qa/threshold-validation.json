@@ -1,0 +1,1407 @@
+{
+  "status": "pass",
+  "scope": "Actual LOD0 GLBs transformed to all 12 metro door alignments and both bus doors; second bus stop uses same frame-invariant plate geometry",
+  "pose": "fully deployed plate plus fully open right doors; closed-door overlap is expected negative control",
+  "checks": [
+    {
+      "stopId": "research-bus-a",
+      "anchor": "boarding-front",
+      "carId": null,
+      "researchIslandFloorHeightM": 0.36,
+      "realGroundConnectionStatus": "unresolved",
+      "ordinaryCurbAccessClaim": false,
+      "actualGlbDoorOpenDeckOverlap": false,
+      "doorClosedDeckOverlapNegativeControl": [
+        "right-front-a",
+        "right-front-b"
+      ],
+      "actualDoorwayClearanceRays": [
+        {
+          "pointM": [
+            -1.7,
+            0.376,
+            4.275
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.45,
+            0.376,
+            4.275
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.28,
+            0.376,
+            4.275
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.2,
+            0.376,
+            4.275
+          ],
+          "hit": "body-shell",
+          "clearanceM": 2.0840000381469728,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.08,
+            0.376,
+            4.275
+          ],
+          "hit": "interior-batch-panel",
+          "clearanceM": 2.2239999046325685,
+          "rayLimitM": 4
+        }
+      ],
+      "cabinFloorToOverheadRay": {
+        "pointM": [
+          0,
+          0.361,
+          4.275
+        ],
+        "hit": "interior-batch-panel",
+        "clearanceM": 2.2389999046325686,
+        "rayLimitM": 4,
+        "floorToOverheadM": 2.2399999046325685
+      },
+      "cabinHeadroomMinimumTargetM": 2.05,
+      "doorwayMinimumTargetM": 2.0,
+      "minimumDoorwayHeadClearanceM": 2.0840000381469728,
+      "vehicleBearingSupportNode": "interior-batch-floor",
+      "vehicleFloorComponentRangeHit": {
+        "componentId": "floor",
+        "batchNode": "interior-batch-floor",
+        "indexStart": 0,
+        "indexCount": 36,
+        "triangleCount": 12,
+        "hitPointVehicleM": [
+          -1.0509999990463257,
+          0.36000001430511475,
+          4.275000095367432
+        ],
+        "hitTriangleInComponent": 8
+      },
+      "deckMaximumRiseM": 0.015,
+      "taperGrade": 0.075,
+      "humanHeightM": 1.81,
+      "requiredHeadMarginM": 0.15,
+      "stateGateRequired": true,
+      "status": "pass"
+    },
+    {
+      "stopId": "research-bus-a",
+      "anchor": "boarding-rear",
+      "carId": null,
+      "researchIslandFloorHeightM": 0.36,
+      "realGroundConnectionStatus": "unresolved",
+      "ordinaryCurbAccessClaim": false,
+      "actualGlbDoorOpenDeckOverlap": false,
+      "doorClosedDeckOverlapNegativeControl": [
+        "right-rear-a",
+        "right-rear-b"
+      ],
+      "actualDoorwayClearanceRays": [
+        {
+          "pointM": [
+            -1.7,
+            0.376,
+            -0.625
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.45,
+            0.376,
+            -0.625
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.28,
+            0.376,
+            -0.625
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.2,
+            0.376,
+            -0.625
+          ],
+          "hit": "body-shell",
+          "clearanceM": 2.0840000381469728,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.08,
+            0.376,
+            -0.625
+          ],
+          "hit": "interior-batch-panel",
+          "clearanceM": 2.2239999046325685,
+          "rayLimitM": 4
+        }
+      ],
+      "cabinFloorToOverheadRay": {
+        "pointM": [
+          0,
+          0.361,
+          -0.625
+        ],
+        "hit": "interior-batch-panel",
+        "clearanceM": 2.2389999046325686,
+        "rayLimitM": 4,
+        "floorToOverheadM": 2.2399999046325685
+      },
+      "cabinHeadroomMinimumTargetM": 2.05,
+      "doorwayMinimumTargetM": 2.0,
+      "minimumDoorwayHeadClearanceM": 2.0840000381469728,
+      "vehicleBearingSupportNode": "interior-batch-floor",
+      "vehicleFloorComponentRangeHit": {
+        "componentId": "floor",
+        "batchNode": "interior-batch-floor",
+        "indexStart": 0,
+        "indexCount": 36,
+        "triangleCount": 12,
+        "hitPointVehicleM": [
+          -1.0509999990463257,
+          0.36000001430511475,
+          -0.625
+        ],
+        "hitTriangleInComponent": 8
+      },
+      "deckMaximumRiseM": 0.015,
+      "taperGrade": 0.075,
+      "humanHeightM": 1.81,
+      "requiredHeadMarginM": 0.15,
+      "stateGateRequired": true,
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "anchor": "boarding-right-rear",
+      "carId": "car-01",
+      "researchIslandFloorHeightM": 0.95,
+      "realGroundConnectionStatus": "unresolved",
+      "ordinaryCurbAccessClaim": false,
+      "actualGlbDoorOpenDeckOverlap": false,
+      "doorClosedDeckOverlapNegativeControl": [
+        "door-right-rear-a",
+        "door-right-rear-b"
+      ],
+      "actualDoorwayClearanceRays": [
+        {
+          "pointM": [
+            -1.7,
+            0.966,
+            21.35
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.45,
+            0.966,
+            21.35
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.28,
+            0.966,
+            21.35
+          ],
+          "hit": "body-shell",
+          "clearanceM": 2.034,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.2,
+            0.966,
+            21.35
+          ],
+          "hit": "interior-batch-metro-wall",
+          "clearanceM": 2.144000371932983,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.08,
+            0.966,
+            21.35
+          ],
+          "hit": "interior-batch-metro-wall",
+          "clearanceM": 2.143999895095825,
+          "rayLimitM": 4
+        }
+      ],
+      "cabinFloorToOverheadRay": {
+        "pointM": [
+          0,
+          0.951,
+          21.35
+        ],
+        "hit": "interior-batch-metro-wall",
+        "clearanceM": 2.1590001335144042,
+        "rayLimitM": 4,
+        "floorToOverheadM": 2.160000133514404
+      },
+      "cabinHeadroomMinimumTargetM": 2.05,
+      "doorwayMinimumTargetM": 2.0,
+      "minimumDoorwayHeadClearanceM": 2.034,
+      "vehicleBearingSupportNode": "interior-batch-metro-floor",
+      "vehicleFloorComponentRangeHit": {
+        "componentId": "floor",
+        "batchNode": "interior-batch-metro-floor",
+        "indexStart": 0,
+        "indexCount": 36,
+        "triangleCount": 12,
+        "hitPointVehicleM": [
+          -1.0809999704360962,
+          0.9500000476837158,
+          -5.5
+        ],
+        "hitTriangleInComponent": 10
+      },
+      "deckMaximumRiseM": 0.015,
+      "taperGrade": 0.075,
+      "humanHeightM": 1.81,
+      "requiredHeadMarginM": 0.15,
+      "stateGateRequired": true,
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "anchor": "boarding-right-center",
+      "carId": "car-01",
+      "researchIslandFloorHeightM": 0.95,
+      "realGroundConnectionStatus": "unresolved",
+      "ordinaryCurbAccessClaim": false,
+      "actualGlbDoorOpenDeckOverlap": false,
+      "doorClosedDeckOverlapNegativeControl": [
+        "door-right-center-a",
+        "door-right-center-b"
+      ],
+      "actualDoorwayClearanceRays": [
+        {
+          "pointM": [
+            -1.7,
+            0.966,
+            26.85
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.45,
+            0.966,
+            26.85
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.28,
+            0.966,
+            26.85
+          ],
+          "hit": "body-shell",
+          "clearanceM": 2.034000238418579,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.2,
+            0.966,
+            26.85
+          ],
+          "hit": "interior-batch-metro-wall",
+          "clearanceM": 2.144000133514404,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.08,
+            0.966,
+            26.85
+          ],
+          "hit": "interior-batch-metro-wall",
+          "clearanceM": 2.144000133514404,
+          "rayLimitM": 4
+        }
+      ],
+      "cabinFloorToOverheadRay": {
+        "pointM": [
+          0,
+          0.951,
+          26.85
+        ],
+        "hit": "interior-batch-metro-wall",
+        "clearanceM": 2.1590001335144042,
+        "rayLimitM": 4,
+        "floorToOverheadM": 2.160000133514404
+      },
+      "cabinHeadroomMinimumTargetM": 2.05,
+      "doorwayMinimumTargetM": 2.0,
+      "minimumDoorwayHeadClearanceM": 2.034000238418579,
+      "vehicleBearingSupportNode": "interior-batch-metro-floor",
+      "vehicleFloorComponentRangeHit": {
+        "componentId": "floor",
+        "batchNode": "interior-batch-metro-floor",
+        "indexStart": 0,
+        "indexCount": 36,
+        "triangleCount": 12,
+        "hitPointVehicleM": [
+          -1.0809999704360962,
+          0.9500000476837158,
+          0.0
+        ],
+        "hitTriangleInComponent": 10
+      },
+      "deckMaximumRiseM": 0.015,
+      "taperGrade": 0.075,
+      "humanHeightM": 1.81,
+      "requiredHeadMarginM": 0.15,
+      "stateGateRequired": true,
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "anchor": "boarding-right-front",
+      "carId": "car-01",
+      "researchIslandFloorHeightM": 0.95,
+      "realGroundConnectionStatus": "unresolved",
+      "ordinaryCurbAccessClaim": false,
+      "actualGlbDoorOpenDeckOverlap": false,
+      "doorClosedDeckOverlapNegativeControl": [
+        "door-right-front-a",
+        "door-right-front-b"
+      ],
+      "actualDoorwayClearanceRays": [
+        {
+          "pointM": [
+            -1.7,
+            0.966,
+            32.35
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.45,
+            0.966,
+            32.35
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.28,
+            0.966,
+            32.35
+          ],
+          "hit": "body-shell",
+          "clearanceM": 2.034,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.2,
+            0.966,
+            32.35
+          ],
+          "hit": "interior-batch-metro-wall",
+          "clearanceM": 2.143999895095825,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.08,
+            0.966,
+            32.35
+          ],
+          "hit": "interior-batch-metro-wall",
+          "clearanceM": 2.144000133514404,
+          "rayLimitM": 4
+        }
+      ],
+      "cabinFloorToOverheadRay": {
+        "pointM": [
+          0,
+          0.951,
+          32.35
+        ],
+        "hit": "interior-batch-metro-wall",
+        "clearanceM": 2.1590001335144042,
+        "rayLimitM": 4,
+        "floorToOverheadM": 2.160000133514404
+      },
+      "cabinHeadroomMinimumTargetM": 2.05,
+      "doorwayMinimumTargetM": 2.0,
+      "minimumDoorwayHeadClearanceM": 2.034,
+      "vehicleBearingSupportNode": "interior-batch-metro-floor",
+      "vehicleFloorComponentRangeHit": {
+        "componentId": "floor",
+        "batchNode": "interior-batch-metro-floor",
+        "indexStart": 0,
+        "indexCount": 36,
+        "triangleCount": 12,
+        "hitPointVehicleM": [
+          -1.0809999704360962,
+          0.9500000476837158,
+          5.5
+        ],
+        "hitTriangleInComponent": 10
+      },
+      "deckMaximumRiseM": 0.015,
+      "taperGrade": 0.075,
+      "humanHeightM": 1.81,
+      "requiredHeadMarginM": 0.15,
+      "stateGateRequired": true,
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "anchor": "boarding-right-rear",
+      "carId": "car-02",
+      "researchIslandFloorHeightM": 0.95,
+      "realGroundConnectionStatus": "unresolved",
+      "ordinaryCurbAccessClaim": false,
+      "actualGlbDoorOpenDeckOverlap": false,
+      "doorClosedDeckOverlapNegativeControl": [
+        "door-right-rear-a",
+        "door-right-rear-b"
+      ],
+      "actualDoorwayClearanceRays": [
+        {
+          "pointM": [
+            -1.7,
+            0.966,
+            3.4499999999999993
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.45,
+            0.966,
+            3.4499999999999993
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.28,
+            0.966,
+            3.4499999999999993
+          ],
+          "hit": "body-shell",
+          "clearanceM": 2.034000238418579,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.2,
+            0.966,
+            3.4499999999999993
+          ],
+          "hit": "interior-batch-metro-wall",
+          "clearanceM": 2.144000371932983,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.08,
+            0.966,
+            3.4499999999999993
+          ],
+          "hit": "interior-batch-metro-wall",
+          "clearanceM": 2.143999895095825,
+          "rayLimitM": 4
+        }
+      ],
+      "cabinFloorToOverheadRay": {
+        "pointM": [
+          0,
+          0.951,
+          3.4499999999999993
+        ],
+        "hit": "interior-batch-metro-wall",
+        "clearanceM": 2.1590001335144042,
+        "rayLimitM": 4,
+        "floorToOverheadM": 2.160000133514404
+      },
+      "cabinHeadroomMinimumTargetM": 2.05,
+      "doorwayMinimumTargetM": 2.0,
+      "minimumDoorwayHeadClearanceM": 2.034000238418579,
+      "vehicleBearingSupportNode": "interior-batch-metro-floor",
+      "vehicleFloorComponentRangeHit": {
+        "componentId": "floor",
+        "batchNode": "interior-batch-metro-floor",
+        "indexStart": 0,
+        "indexCount": 36,
+        "triangleCount": 12,
+        "hitPointVehicleM": [
+          -1.0809999704360962,
+          0.9500000476837158,
+          -5.5
+        ],
+        "hitTriangleInComponent": 10
+      },
+      "deckMaximumRiseM": 0.015,
+      "taperGrade": 0.075,
+      "humanHeightM": 1.81,
+      "requiredHeadMarginM": 0.15,
+      "stateGateRequired": true,
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "anchor": "boarding-right-center",
+      "carId": "car-02",
+      "researchIslandFloorHeightM": 0.95,
+      "realGroundConnectionStatus": "unresolved",
+      "ordinaryCurbAccessClaim": false,
+      "actualGlbDoorOpenDeckOverlap": false,
+      "doorClosedDeckOverlapNegativeControl": [
+        "door-right-center-a",
+        "door-right-center-b"
+      ],
+      "actualDoorwayClearanceRays": [
+        {
+          "pointM": [
+            -1.7,
+            0.966,
+            8.95
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.45,
+            0.966,
+            8.95
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.28,
+            0.966,
+            8.95
+          ],
+          "hit": "body-shell",
+          "clearanceM": 2.034,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.2,
+            0.966,
+            8.95
+          ],
+          "hit": "interior-batch-metro-wall",
+          "clearanceM": 2.144000133514404,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.08,
+            0.966,
+            8.95
+          ],
+          "hit": "interior-batch-metro-wall",
+          "clearanceM": 2.144000133514404,
+          "rayLimitM": 4
+        }
+      ],
+      "cabinFloorToOverheadRay": {
+        "pointM": [
+          0,
+          0.951,
+          8.95
+        ],
+        "hit": "interior-batch-metro-wall",
+        "clearanceM": 2.1590001335144042,
+        "rayLimitM": 4,
+        "floorToOverheadM": 2.160000133514404
+      },
+      "cabinHeadroomMinimumTargetM": 2.05,
+      "doorwayMinimumTargetM": 2.0,
+      "minimumDoorwayHeadClearanceM": 2.034,
+      "vehicleBearingSupportNode": "interior-batch-metro-floor",
+      "vehicleFloorComponentRangeHit": {
+        "componentId": "floor",
+        "batchNode": "interior-batch-metro-floor",
+        "indexStart": 0,
+        "indexCount": 36,
+        "triangleCount": 12,
+        "hitPointVehicleM": [
+          -1.0809999704360962,
+          0.9500000476837158,
+          0.0
+        ],
+        "hitTriangleInComponent": 10
+      },
+      "deckMaximumRiseM": 0.015,
+      "taperGrade": 0.075,
+      "humanHeightM": 1.81,
+      "requiredHeadMarginM": 0.15,
+      "stateGateRequired": true,
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "anchor": "boarding-right-front",
+      "carId": "car-02",
+      "researchIslandFloorHeightM": 0.95,
+      "realGroundConnectionStatus": "unresolved",
+      "ordinaryCurbAccessClaim": false,
+      "actualGlbDoorOpenDeckOverlap": false,
+      "doorClosedDeckOverlapNegativeControl": [
+        "door-right-front-a",
+        "door-right-front-b"
+      ],
+      "actualDoorwayClearanceRays": [
+        {
+          "pointM": [
+            -1.7,
+            0.966,
+            14.45
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.45,
+            0.966,
+            14.45
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.28,
+            0.966,
+            14.45
+          ],
+          "hit": "body-shell",
+          "clearanceM": 2.034,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.2,
+            0.966,
+            14.45
+          ],
+          "hit": "interior-batch-metro-wall",
+          "clearanceM": 2.144000133514404,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.08,
+            0.966,
+            14.45
+          ],
+          "hit": "interior-batch-metro-wall",
+          "clearanceM": 2.143999895095825,
+          "rayLimitM": 4
+        }
+      ],
+      "cabinFloorToOverheadRay": {
+        "pointM": [
+          0,
+          0.951,
+          14.45
+        ],
+        "hit": "interior-batch-metro-wall",
+        "clearanceM": 2.1590001335144042,
+        "rayLimitM": 4,
+        "floorToOverheadM": 2.160000133514404
+      },
+      "cabinHeadroomMinimumTargetM": 2.05,
+      "doorwayMinimumTargetM": 2.0,
+      "minimumDoorwayHeadClearanceM": 2.034,
+      "vehicleBearingSupportNode": "interior-batch-metro-floor",
+      "vehicleFloorComponentRangeHit": {
+        "componentId": "floor",
+        "batchNode": "interior-batch-metro-floor",
+        "indexStart": 0,
+        "indexCount": 36,
+        "triangleCount": 12,
+        "hitPointVehicleM": [
+          -1.0809999704360962,
+          0.9500000476837158,
+          5.5
+        ],
+        "hitTriangleInComponent": 10
+      },
+      "deckMaximumRiseM": 0.015,
+      "taperGrade": 0.075,
+      "humanHeightM": 1.81,
+      "requiredHeadMarginM": 0.15,
+      "stateGateRequired": true,
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "anchor": "boarding-right-rear",
+      "carId": "car-03",
+      "researchIslandFloorHeightM": 0.95,
+      "realGroundConnectionStatus": "unresolved",
+      "ordinaryCurbAccessClaim": false,
+      "actualGlbDoorOpenDeckOverlap": false,
+      "doorClosedDeckOverlapNegativeControl": [
+        "door-right-rear-a",
+        "door-right-rear-b"
+      ],
+      "actualDoorwayClearanceRays": [
+        {
+          "pointM": [
+            -1.7,
+            0.966,
+            -14.45
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.45,
+            0.966,
+            -14.45
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.28,
+            0.966,
+            -14.45
+          ],
+          "hit": "body-shell",
+          "clearanceM": 2.034,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.2,
+            0.966,
+            -14.45
+          ],
+          "hit": "interior-batch-metro-wall",
+          "clearanceM": 2.144000371932983,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.08,
+            0.966,
+            -14.45
+          ],
+          "hit": "interior-batch-metro-wall",
+          "clearanceM": 2.143999895095825,
+          "rayLimitM": 4
+        }
+      ],
+      "cabinFloorToOverheadRay": {
+        "pointM": [
+          0,
+          0.951,
+          -14.45
+        ],
+        "hit": "interior-batch-metro-wall",
+        "clearanceM": 2.1590001335144042,
+        "rayLimitM": 4,
+        "floorToOverheadM": 2.160000133514404
+      },
+      "cabinHeadroomMinimumTargetM": 2.05,
+      "doorwayMinimumTargetM": 2.0,
+      "minimumDoorwayHeadClearanceM": 2.034,
+      "vehicleBearingSupportNode": "interior-batch-metro-floor",
+      "vehicleFloorComponentRangeHit": {
+        "componentId": "floor",
+        "batchNode": "interior-batch-metro-floor",
+        "indexStart": 0,
+        "indexCount": 36,
+        "triangleCount": 12,
+        "hitPointVehicleM": [
+          -1.0809999704360962,
+          0.9500000476837158,
+          -5.5
+        ],
+        "hitTriangleInComponent": 10
+      },
+      "deckMaximumRiseM": 0.015,
+      "taperGrade": 0.075,
+      "humanHeightM": 1.81,
+      "requiredHeadMarginM": 0.15,
+      "stateGateRequired": true,
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "anchor": "boarding-right-center",
+      "carId": "car-03",
+      "researchIslandFloorHeightM": 0.95,
+      "realGroundConnectionStatus": "unresolved",
+      "ordinaryCurbAccessClaim": false,
+      "actualGlbDoorOpenDeckOverlap": false,
+      "doorClosedDeckOverlapNegativeControl": [
+        "door-right-center-a",
+        "door-right-center-b"
+      ],
+      "actualDoorwayClearanceRays": [
+        {
+          "pointM": [
+            -1.7,
+            0.966,
+            -8.95
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.45,
+            0.966,
+            -8.95
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.28,
+            0.966,
+            -8.95
+          ],
+          "hit": "body-shell",
+          "clearanceM": 2.034,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.2,
+            0.966,
+            -8.95
+          ],
+          "hit": "interior-batch-metro-wall",
+          "clearanceM": 2.144000133514404,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.08,
+            0.966,
+            -8.95
+          ],
+          "hit": "interior-batch-metro-wall",
+          "clearanceM": 2.144000133514404,
+          "rayLimitM": 4
+        }
+      ],
+      "cabinFloorToOverheadRay": {
+        "pointM": [
+          0,
+          0.951,
+          -8.95
+        ],
+        "hit": "interior-batch-metro-wall",
+        "clearanceM": 2.1590001335144042,
+        "rayLimitM": 4,
+        "floorToOverheadM": 2.160000133514404
+      },
+      "cabinHeadroomMinimumTargetM": 2.05,
+      "doorwayMinimumTargetM": 2.0,
+      "minimumDoorwayHeadClearanceM": 2.034,
+      "vehicleBearingSupportNode": "interior-batch-metro-floor",
+      "vehicleFloorComponentRangeHit": {
+        "componentId": "floor",
+        "batchNode": "interior-batch-metro-floor",
+        "indexStart": 0,
+        "indexCount": 36,
+        "triangleCount": 12,
+        "hitPointVehicleM": [
+          -1.0809999704360962,
+          0.9500000476837158,
+          0.0
+        ],
+        "hitTriangleInComponent": 10
+      },
+      "deckMaximumRiseM": 0.015,
+      "taperGrade": 0.075,
+      "humanHeightM": 1.81,
+      "requiredHeadMarginM": 0.15,
+      "stateGateRequired": true,
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "anchor": "boarding-right-front",
+      "carId": "car-03",
+      "researchIslandFloorHeightM": 0.95,
+      "realGroundConnectionStatus": "unresolved",
+      "ordinaryCurbAccessClaim": false,
+      "actualGlbDoorOpenDeckOverlap": false,
+      "doorClosedDeckOverlapNegativeControl": [
+        "door-right-front-a",
+        "door-right-front-b"
+      ],
+      "actualDoorwayClearanceRays": [
+        {
+          "pointM": [
+            -1.7,
+            0.966,
+            -3.4499999999999993
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.45,
+            0.966,
+            -3.4499999999999993
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.28,
+            0.966,
+            -3.4499999999999993
+          ],
+          "hit": "body-shell",
+          "clearanceM": 2.034000238418579,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.2,
+            0.966,
+            -3.4499999999999993
+          ],
+          "hit": "interior-batch-metro-wall",
+          "clearanceM": 2.144000133514404,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.08,
+            0.966,
+            -3.4499999999999993
+          ],
+          "hit": "interior-batch-metro-wall",
+          "clearanceM": 2.143999895095825,
+          "rayLimitM": 4
+        }
+      ],
+      "cabinFloorToOverheadRay": {
+        "pointM": [
+          0,
+          0.951,
+          -3.4499999999999993
+        ],
+        "hit": "interior-batch-metro-wall",
+        "clearanceM": 2.1590001335144042,
+        "rayLimitM": 4,
+        "floorToOverheadM": 2.160000133514404
+      },
+      "cabinHeadroomMinimumTargetM": 2.05,
+      "doorwayMinimumTargetM": 2.0,
+      "minimumDoorwayHeadClearanceM": 2.034000238418579,
+      "vehicleBearingSupportNode": "interior-batch-metro-floor",
+      "vehicleFloorComponentRangeHit": {
+        "componentId": "floor",
+        "batchNode": "interior-batch-metro-floor",
+        "indexStart": 0,
+        "indexCount": 36,
+        "triangleCount": 12,
+        "hitPointVehicleM": [
+          -1.0809999704360962,
+          0.9500000476837158,
+          5.5
+        ],
+        "hitTriangleInComponent": 10
+      },
+      "deckMaximumRiseM": 0.015,
+      "taperGrade": 0.075,
+      "humanHeightM": 1.81,
+      "requiredHeadMarginM": 0.15,
+      "stateGateRequired": true,
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "anchor": "boarding-right-rear",
+      "carId": "car-04",
+      "researchIslandFloorHeightM": 0.95,
+      "realGroundConnectionStatus": "unresolved",
+      "ordinaryCurbAccessClaim": false,
+      "actualGlbDoorOpenDeckOverlap": false,
+      "doorClosedDeckOverlapNegativeControl": [
+        "door-right-rear-a",
+        "door-right-rear-b"
+      ],
+      "actualDoorwayClearanceRays": [
+        {
+          "pointM": [
+            -1.7,
+            0.966,
+            -32.35
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.45,
+            0.966,
+            -32.35
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.28,
+            0.966,
+            -32.35
+          ],
+          "hit": "body-shell",
+          "clearanceM": 2.034,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.2,
+            0.966,
+            -32.35
+          ],
+          "hit": "interior-batch-metro-wall",
+          "clearanceM": 2.144000133514404,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.08,
+            0.966,
+            -32.35
+          ],
+          "hit": "interior-batch-metro-wall",
+          "clearanceM": 2.143999895095825,
+          "rayLimitM": 4
+        }
+      ],
+      "cabinFloorToOverheadRay": {
+        "pointM": [
+          0,
+          0.951,
+          -32.35
+        ],
+        "hit": "interior-batch-metro-wall",
+        "clearanceM": 2.158999895095825,
+        "rayLimitM": 4,
+        "floorToOverheadM": 2.159999895095825
+      },
+      "cabinHeadroomMinimumTargetM": 2.05,
+      "doorwayMinimumTargetM": 2.0,
+      "minimumDoorwayHeadClearanceM": 2.034,
+      "vehicleBearingSupportNode": "interior-batch-metro-floor",
+      "vehicleFloorComponentRangeHit": {
+        "componentId": "floor",
+        "batchNode": "interior-batch-metro-floor",
+        "indexStart": 0,
+        "indexCount": 36,
+        "triangleCount": 12,
+        "hitPointVehicleM": [
+          -1.0809999704360962,
+          0.9500000476837158,
+          -5.5
+        ],
+        "hitTriangleInComponent": 10
+      },
+      "deckMaximumRiseM": 0.015,
+      "taperGrade": 0.075,
+      "humanHeightM": 1.81,
+      "requiredHeadMarginM": 0.15,
+      "stateGateRequired": true,
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "anchor": "boarding-right-center",
+      "carId": "car-04",
+      "researchIslandFloorHeightM": 0.95,
+      "realGroundConnectionStatus": "unresolved",
+      "ordinaryCurbAccessClaim": false,
+      "actualGlbDoorOpenDeckOverlap": false,
+      "doorClosedDeckOverlapNegativeControl": [
+        "door-right-center-a",
+        "door-right-center-b"
+      ],
+      "actualDoorwayClearanceRays": [
+        {
+          "pointM": [
+            -1.7,
+            0.966,
+            -26.85
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.45,
+            0.966,
+            -26.85
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.28,
+            0.966,
+            -26.85
+          ],
+          "hit": "body-shell",
+          "clearanceM": 2.034000238418579,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.2,
+            0.966,
+            -26.85
+          ],
+          "hit": "interior-batch-metro-wall",
+          "clearanceM": 2.144000133514404,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.08,
+            0.966,
+            -26.85
+          ],
+          "hit": "interior-batch-metro-wall",
+          "clearanceM": 2.144000133514404,
+          "rayLimitM": 4
+        }
+      ],
+      "cabinFloorToOverheadRay": {
+        "pointM": [
+          0,
+          0.951,
+          -26.85
+        ],
+        "hit": "interior-batch-metro-wall",
+        "clearanceM": 2.1590001335144042,
+        "rayLimitM": 4,
+        "floorToOverheadM": 2.160000133514404
+      },
+      "cabinHeadroomMinimumTargetM": 2.05,
+      "doorwayMinimumTargetM": 2.0,
+      "minimumDoorwayHeadClearanceM": 2.034000238418579,
+      "vehicleBearingSupportNode": "interior-batch-metro-floor",
+      "vehicleFloorComponentRangeHit": {
+        "componentId": "floor",
+        "batchNode": "interior-batch-metro-floor",
+        "indexStart": 0,
+        "indexCount": 36,
+        "triangleCount": 12,
+        "hitPointVehicleM": [
+          -1.0809999704360962,
+          0.9500000476837158,
+          0.0
+        ],
+        "hitTriangleInComponent": 10
+      },
+      "deckMaximumRiseM": 0.015,
+      "taperGrade": 0.075,
+      "humanHeightM": 1.81,
+      "requiredHeadMarginM": 0.15,
+      "stateGateRequired": true,
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "anchor": "boarding-right-front",
+      "carId": "car-04",
+      "researchIslandFloorHeightM": 0.95,
+      "realGroundConnectionStatus": "unresolved",
+      "ordinaryCurbAccessClaim": false,
+      "actualGlbDoorOpenDeckOverlap": false,
+      "doorClosedDeckOverlapNegativeControl": [
+        "door-right-front-a",
+        "door-right-front-b"
+      ],
+      "actualDoorwayClearanceRays": [
+        {
+          "pointM": [
+            -1.7,
+            0.966,
+            -21.35
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.45,
+            0.966,
+            -21.35
+          ],
+          "hit": null,
+          "clearanceM": 4,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.28,
+            0.966,
+            -21.35
+          ],
+          "hit": "body-shell",
+          "clearanceM": 2.034,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.2,
+            0.966,
+            -21.35
+          ],
+          "hit": "interior-batch-metro-wall",
+          "clearanceM": 2.144000133514404,
+          "rayLimitM": 4
+        },
+        {
+          "pointM": [
+            -1.08,
+            0.966,
+            -21.35
+          ],
+          "hit": "interior-batch-metro-wall",
+          "clearanceM": 2.143999895095825,
+          "rayLimitM": 4
+        }
+      ],
+      "cabinFloorToOverheadRay": {
+        "pointM": [
+          0,
+          0.951,
+          -21.35
+        ],
+        "hit": "interior-batch-metro-wall",
+        "clearanceM": 2.1590001335144042,
+        "rayLimitM": 4,
+        "floorToOverheadM": 2.160000133514404
+      },
+      "cabinHeadroomMinimumTargetM": 2.05,
+      "doorwayMinimumTargetM": 2.0,
+      "minimumDoorwayHeadClearanceM": 2.034,
+      "vehicleBearingSupportNode": "interior-batch-metro-floor",
+      "vehicleFloorComponentRangeHit": {
+        "componentId": "floor",
+        "batchNode": "interior-batch-metro-floor",
+        "indexStart": 0,
+        "indexCount": 36,
+        "triangleCount": 12,
+        "hitPointVehicleM": [
+          -1.0809999704360962,
+          0.9500000476837158,
+          5.5
+        ],
+        "hitTriangleInComponent": 10
+      },
+      "deckMaximumRiseM": 0.015,
+      "taperGrade": 0.075,
+      "humanHeightM": 1.81,
+      "requiredHeadMarginM": 0.15,
+      "stateGateRequired": true,
+      "status": "pass"
+    }
+  ],
+  "inputGlbHashes": {
+    "boardable-bus/exports/city-bus-12m-exterior.lod0.glb": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+    "boardable-bus/exports/city-bus-12m-interior.lod0.glb": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d",
+    "transit-station-spaces/exports/bus-threshold-deck.lod0.glb": "0d4394f81ad7c417e90fb0ddda2a3b5199f71055ef09b07bd3602a9590af5d2e",
+    "boardable-metro/exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+    "boardable-metro/exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775",
+    "transit-station-spaces/exports/metro-threshold-deck.lod0.glb": "075ceb2ec81ad96c0df75134797c7c9d42119d58cdab65c7d4fafb77532c9767",
+    "boardable-metro/exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+    "boardable-metro/exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95"
+  },
+  "staticOnly": true,
+  "deploymentInterpolation": "not_run",
+  "runtimeActivation": false,
+  "accessibilityCertification": false
+}

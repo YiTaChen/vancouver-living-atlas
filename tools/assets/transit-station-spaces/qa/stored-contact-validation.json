@@ -1,0 +1,718 @@
+{
+  "status": "pass",
+  "method": "actual GLB POSITION accessors with scene node and stored pose transforms applied once; both LODs",
+  "layoutSha256": "b5719d5e714bd0658defe1da6c811ab8b73cfa844641ccf628e5bfa4c2cac701",
+  "inputGlbHashes": {
+    "exports/bus-threshold-deck.lod0.glb": "0d4394f81ad7c417e90fb0ddda2a3b5199f71055ef09b07bd3602a9590af5d2e",
+    "exports/bus-threshold-deck.lod1.glb": "f8c29798b4bed7e1c9e67ae1beeb554692e6f762fb8971e9786758492f0f13ba",
+    "exports/metro-threshold-deck.lod0.glb": "075ceb2ec81ad96c0df75134797c7c9d42119d58cdab65c7d4fafb77532c9767",
+    "exports/metro-threshold-deck.lod1.glb": "c461a0a4863c1619161775e95828a5cd1897ce21af8fd649ae24aed6fc04cce2"
+  },
+  "checks": [
+    {
+      "stopId": "research-bus-a",
+      "instanceId": "threshold-boarding-front",
+      "lod": 0,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.915000000596047,
+          0.36,
+          -4.9749999940395355
+        ],
+        "max": [
+          -5.880000000447035,
+          1.309999988079071,
+          -4.0250000059604645
+        ]
+      },
+      "floorHeightM": 0.36,
+      "bottomHeightM": 0.36,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-bus-a",
+      "instanceId": "threshold-boarding-front",
+      "lod": 1,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.914999999664724,
+          0.36,
+          -4.9749999940395355
+        ],
+        "max": [
+          -5.880000000447035,
+          1.309999988079071,
+          -4.0250000059604645
+        ]
+      },
+      "floorHeightM": 0.36,
+      "bottomHeightM": 0.36,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-bus-a",
+      "instanceId": "threshold-boarding-rear",
+      "lod": 0,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.915000000596047,
+          0.36,
+          -6.274999994039535
+        ],
+        "max": [
+          -5.880000000447035,
+          1.309999988079071,
+          -5.325000005960464
+        ]
+      },
+      "floorHeightM": 0.36,
+      "bottomHeightM": 0.36,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-bus-a",
+      "instanceId": "threshold-boarding-rear",
+      "lod": 1,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.914999999664724,
+          0.36,
+          -6.274999994039535
+        ],
+        "max": [
+          -5.880000000447035,
+          1.309999988079071,
+          -5.325000005960464
+        ]
+      },
+      "floorHeightM": 0.36,
+      "bottomHeightM": 0.36,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-bus-b",
+      "instanceId": "threshold-boarding-front",
+      "lod": 0,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.915000000596047,
+          0.36,
+          -4.9749999940395355
+        ],
+        "max": [
+          -5.880000000447035,
+          1.309999988079071,
+          -4.0250000059604645
+        ]
+      },
+      "floorHeightM": 0.36,
+      "bottomHeightM": 0.36,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-bus-b",
+      "instanceId": "threshold-boarding-front",
+      "lod": 1,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.914999999664724,
+          0.36,
+          -4.9749999940395355
+        ],
+        "max": [
+          -5.880000000447035,
+          1.309999988079071,
+          -4.0250000059604645
+        ]
+      },
+      "floorHeightM": 0.36,
+      "bottomHeightM": 0.36,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-bus-b",
+      "instanceId": "threshold-boarding-rear",
+      "lod": 0,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.915000000596047,
+          0.36,
+          -6.274999994039535
+        ],
+        "max": [
+          -5.880000000447035,
+          1.309999988079071,
+          -5.325000005960464
+        ]
+      },
+      "floorHeightM": 0.36,
+      "bottomHeightM": 0.36,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-bus-b",
+      "instanceId": "threshold-boarding-rear",
+      "lod": 1,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.914999999664724,
+          0.36,
+          -6.274999994039535
+        ],
+        "max": [
+          -5.880000000447035,
+          1.309999988079071,
+          -5.325000005960464
+        ]
+      },
+      "floorHeightM": 0.36,
+      "bottomHeightM": 0.36,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-01-boarding-right-rear",
+      "lod": 0,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.2650000005960464,
+          0.95,
+          20.799999988079072
+        ],
+        "max": [
+          -5.230000000447035,
+          1.849999976158142,
+          21.90000001192093
+        ]
+      },
+      "floorHeightM": 0.95,
+      "bottomHeightM": 0.95,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-01-boarding-right-rear",
+      "lod": 1,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.264999999664724,
+          0.95,
+          20.799999988079072
+        ],
+        "max": [
+          -5.230000000447035,
+          1.849999976158142,
+          21.90000001192093
+        ]
+      },
+      "floorHeightM": 0.95,
+      "bottomHeightM": 0.95,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-01-boarding-right-center",
+      "lod": 0,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.2650000005960464,
+          0.95,
+          26.299999988079072
+        ],
+        "max": [
+          -5.230000000447035,
+          1.849999976158142,
+          27.40000001192093
+        ]
+      },
+      "floorHeightM": 0.95,
+      "bottomHeightM": 0.95,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-01-boarding-right-center",
+      "lod": 1,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.264999999664724,
+          0.95,
+          26.299999988079072
+        ],
+        "max": [
+          -5.230000000447035,
+          1.849999976158142,
+          27.40000001192093
+        ]
+      },
+      "floorHeightM": 0.95,
+      "bottomHeightM": 0.95,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-01-boarding-right-front",
+      "lod": 0,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.2650000005960464,
+          0.95,
+          31.799999988079072
+        ],
+        "max": [
+          -5.230000000447035,
+          1.849999976158142,
+          32.90000001192093
+        ]
+      },
+      "floorHeightM": 0.95,
+      "bottomHeightM": 0.95,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-01-boarding-right-front",
+      "lod": 1,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.264999999664724,
+          0.95,
+          31.799999988079072
+        ],
+        "max": [
+          -5.230000000447035,
+          1.849999976158142,
+          32.90000001192093
+        ]
+      },
+      "floorHeightM": 0.95,
+      "bottomHeightM": 0.95,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-02-boarding-right-rear",
+      "lod": 0,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.2650000005960464,
+          0.95,
+          2.8999999880790703
+        ],
+        "max": [
+          -5.230000000447035,
+          1.849999976158142,
+          4.000000011920928
+        ]
+      },
+      "floorHeightM": 0.95,
+      "bottomHeightM": 0.95,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-02-boarding-right-rear",
+      "lod": 1,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.264999999664724,
+          0.95,
+          2.8999999880790703
+        ],
+        "max": [
+          -5.230000000447035,
+          1.849999976158142,
+          4.000000011920928
+        ]
+      },
+      "floorHeightM": 0.95,
+      "bottomHeightM": 0.95,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-02-boarding-right-center",
+      "lod": 0,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.2650000005960464,
+          0.95,
+          8.39999998807907
+        ],
+        "max": [
+          -5.230000000447035,
+          1.849999976158142,
+          9.500000011920928
+        ]
+      },
+      "floorHeightM": 0.95,
+      "bottomHeightM": 0.95,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-02-boarding-right-center",
+      "lod": 1,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.264999999664724,
+          0.95,
+          8.39999998807907
+        ],
+        "max": [
+          -5.230000000447035,
+          1.849999976158142,
+          9.500000011920928
+        ]
+      },
+      "floorHeightM": 0.95,
+      "bottomHeightM": 0.95,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-02-boarding-right-front",
+      "lod": 0,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.2650000005960464,
+          0.95,
+          13.89999998807907
+        ],
+        "max": [
+          -5.230000000447035,
+          1.849999976158142,
+          15.000000011920928
+        ]
+      },
+      "floorHeightM": 0.95,
+      "bottomHeightM": 0.95,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-02-boarding-right-front",
+      "lod": 1,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.264999999664724,
+          0.95,
+          13.89999998807907
+        ],
+        "max": [
+          -5.230000000447035,
+          1.849999976158142,
+          15.000000011920928
+        ]
+      },
+      "floorHeightM": 0.95,
+      "bottomHeightM": 0.95,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-03-boarding-right-rear",
+      "lod": 0,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.2650000005960464,
+          0.95,
+          -15.000000011920928
+        ],
+        "max": [
+          -5.230000000447035,
+          1.849999976158142,
+          -13.89999998807907
+        ]
+      },
+      "floorHeightM": 0.95,
+      "bottomHeightM": 0.95,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-03-boarding-right-rear",
+      "lod": 1,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.264999999664724,
+          0.95,
+          -15.000000011920928
+        ],
+        "max": [
+          -5.230000000447035,
+          1.849999976158142,
+          -13.89999998807907
+        ]
+      },
+      "floorHeightM": 0.95,
+      "bottomHeightM": 0.95,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-03-boarding-right-center",
+      "lod": 0,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.2650000005960464,
+          0.95,
+          -9.500000011920928
+        ],
+        "max": [
+          -5.230000000447035,
+          1.849999976158142,
+          -8.39999998807907
+        ]
+      },
+      "floorHeightM": 0.95,
+      "bottomHeightM": 0.95,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-03-boarding-right-center",
+      "lod": 1,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.264999999664724,
+          0.95,
+          -9.500000011920928
+        ],
+        "max": [
+          -5.230000000447035,
+          1.849999976158142,
+          -8.39999998807907
+        ]
+      },
+      "floorHeightM": 0.95,
+      "bottomHeightM": 0.95,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-03-boarding-right-front",
+      "lod": 0,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.2650000005960464,
+          0.95,
+          -4.000000011920928
+        ],
+        "max": [
+          -5.230000000447035,
+          1.849999976158142,
+          -2.8999999880790703
+        ]
+      },
+      "floorHeightM": 0.95,
+      "bottomHeightM": 0.95,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-03-boarding-right-front",
+      "lod": 1,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.264999999664724,
+          0.95,
+          -4.000000011920928
+        ],
+        "max": [
+          -5.230000000447035,
+          1.849999976158142,
+          -2.8999999880790703
+        ]
+      },
+      "floorHeightM": 0.95,
+      "bottomHeightM": 0.95,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-04-boarding-right-rear",
+      "lod": 0,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.2650000005960464,
+          0.95,
+          -32.90000001192093
+        ],
+        "max": [
+          -5.230000000447035,
+          1.849999976158142,
+          -31.799999988079072
+        ]
+      },
+      "floorHeightM": 0.95,
+      "bottomHeightM": 0.95,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-04-boarding-right-rear",
+      "lod": 1,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.264999999664724,
+          0.95,
+          -32.90000001192093
+        ],
+        "max": [
+          -5.230000000447035,
+          1.849999976158142,
+          -31.799999988079072
+        ]
+      },
+      "floorHeightM": 0.95,
+      "bottomHeightM": 0.95,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-04-boarding-right-center",
+      "lod": 0,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.2650000005960464,
+          0.95,
+          -27.40000001192093
+        ],
+        "max": [
+          -5.230000000447035,
+          1.849999976158142,
+          -26.299999988079072
+        ]
+      },
+      "floorHeightM": 0.95,
+      "bottomHeightM": 0.95,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-04-boarding-right-center",
+      "lod": 1,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.264999999664724,
+          0.95,
+          -27.40000001192093
+        ],
+        "max": [
+          -5.230000000447035,
+          1.849999976158142,
+          -26.299999988079072
+        ]
+      },
+      "floorHeightM": 0.95,
+      "bottomHeightM": 0.95,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-04-boarding-right-front",
+      "lod": 0,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.2650000005960464,
+          0.95,
+          -21.90000001192093
+        ],
+        "max": [
+          -5.230000000447035,
+          1.849999976158142,
+          -20.799999988079072
+        ]
+      },
+      "floorHeightM": 0.95,
+      "bottomHeightM": 0.95,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    },
+    {
+      "stopId": "research-metro-platform",
+      "instanceId": "threshold-car-04-boarding-right-front",
+      "lod": 1,
+      "actualTransformedBoundsM": {
+        "min": [
+          -5.264999999664724,
+          0.95,
+          -21.90000001192093
+        ],
+        "max": [
+          -5.230000000447035,
+          1.849999976158142,
+          -20.799999988079072
+        ]
+      },
+      "floorHeightM": 0.95,
+      "bottomHeightM": 0.95,
+      "contactErrorM": 0.0,
+      "support": "research floor, no hidden holder",
+      "status": "pass"
+    }
+  ],
+  "runtimeActivation": false
+}

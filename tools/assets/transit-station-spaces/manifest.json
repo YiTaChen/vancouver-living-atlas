@@ -1,0 +1,1246 @@
+{
+  "schemaVersion": 1,
+  "packageId": "transit-station-spaces",
+  "version": "1.0.0",
+  "baseRevision": "67860e17929901e22ab26cbcd9767d94ed9deade",
+  "status": "offline_complete",
+  "units": "m",
+  "coordinateSystem": {
+    "authoring": "Blender Z-up, -Y forward",
+    "runtime": "glTF Y-up, +Z sign front/vehicle approach",
+    "conversion": "Blender(x,y,z) -> glTF(x,z,-y) exactly once",
+    "platformTrackFacingEdge": "+X"
+  },
+  "provenance": {
+    "project": "Vancouver Living Atlas by YiTaChen",
+    "source": "https://github.com/YiTaChen/vancouver-living-atlas",
+    "license": "Vancouver Living Atlas Noncommercial Research and Attribution 1.0",
+    "authoring": "Original editable procedural mesh; no downloaded logos, fonts, photos or artwork",
+    "references": [
+      "docs/AI_AGENT_DEVELOPMENT_BACKLOG.md D01 and common contract",
+      "boardable-bus/manifest.json",
+      "boardable-metro/manifest.json",
+      "street-furniture-expansion/manifest.json"
+    ],
+    "geographicAudit": "qa/source-audit.json"
+  },
+  "reexportCommand": "blender -b -t 2 --python tools/assets/transit-station-spaces/export.py -- --output /tmp/station-reexport",
+  "validationCommand": "python tools/assets/transit-station-spaces/validate.py",
+  "assets": [
+    {
+      "id": "bus-stop-pole",
+      "taskId": "D01",
+      "variant": "representative-research",
+      "kind": "station-module",
+      "source": "source/bus-stop-pole.lod0.blend",
+      "sourceSha256": "b5ece54480b613a6a04dfdc6fa45717e69bf614cdd7f4491ef46333975e55f06",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/bus-stop-pole.lod0.glb",
+          "sha256": "a6de3fcb597ef01aad772ed81693e5d0ffb94f565090052db09db8b8a103226c",
+          "source": "source/bus-stop-pole.lod0.blend",
+          "sourceSha256": "b5ece54480b613a6a04dfdc6fa45717e69bf614cdd7f4491ef46333975e55f06",
+          "sourceBytes": 93595,
+          "triangles": 548,
+          "vertices": 1032,
+          "primitives": 3,
+          "bytes": 52436,
+          "boundsM": {
+            "min": [
+              -0.28999999165534973,
+              0.0,
+              -0.12999999523162842
+            ],
+            "max": [
+              0.28999999165534973,
+              2.6649999618530273,
+              0.12999999523162842
+            ],
+            "size": [
+              0.5799999833106995,
+              2.6649999618530273,
+              0.25999999046325684
+            ]
+          },
+          "geometryBytes": 52436,
+          "embeddedImageBytes": 0,
+          "staticBatching": {
+            "sourceMeshNodeCount": 11,
+            "renderPrimitiveCount": 3,
+            "componentRanges": "nodes[].extras.componentRanges",
+            "actorRoot": "station-module-root"
+          }
+        },
+        {
+          "level": 1,
+          "file": "exports/bus-stop-pole.lod1.glb",
+          "sha256": "bccd02414db637a63aebdd00e1903c47e2453d4170d0a0d96f57218ab369bf02",
+          "source": "source/bus-stop-pole.lod1.blend",
+          "sourceSha256": "9763adc9823c69a6d7dc0906db1fce1081cb3a7de65c415a1baea089d78100b5",
+          "sourceBytes": 91916,
+          "triangles": 124,
+          "vertices": 240,
+          "primitives": 3,
+          "bytes": 20468,
+          "boundsM": {
+            "min": [
+              -0.28999999165534973,
+              0.0,
+              -0.12999999523162842
+            ],
+            "max": [
+              0.28999999165534973,
+              2.6649999618530273,
+              0.12999999523162842
+            ],
+            "size": [
+              0.5799999833106995,
+              2.6649999618530273,
+              0.25999999046325684
+            ]
+          },
+          "geometryBytes": 20468,
+          "embeddedImageBytes": 0,
+          "staticBatching": {
+            "sourceMeshNodeCount": 9,
+            "renderPrimitiveCount": 3,
+            "componentRanges": "nodes[].extras.componentRanges",
+            "actorRoot": "station-module-root"
+          }
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.28999999165534973,
+          0.0,
+          -0.12999999523162842
+        ],
+        "max": [
+          0.28999999165534973,
+          2.6649999618530273,
+          0.12999999523162842
+        ],
+        "size": [
+          0.5799999833106995,
+          2.6649999618530273,
+          0.25999999046325684
+        ]
+      },
+      "expectedDimensionsM": [
+        0.58,
+        2.665,
+        0.26
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Original representative dimensions; platform envelope follows boardable-metro floor profile; no surveyed station reproduction",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "ground or rail-contact base; no bounds recentering"
+      },
+      "attachmentDatum": {
+        "type": "ground-contact",
+        "planeY": 0
+      },
+      "frontAxis": "+Z sign face",
+      "materialBindings": [
+        {
+          "material": "painted-metal",
+          "semanticRole": "painted-metal",
+          "sharedSurfaceId": "station-painted-metal",
+          "primitiveSelection": {
+            "materialName": "painted-metal"
+          },
+          "maps": []
+        },
+        {
+          "material": "sign-face",
+          "semanticRole": "sign-face",
+          "sharedSurfaceId": "station-sign-face",
+          "primitiveSelection": {
+            "materialName": "sign-face"
+          },
+          "maps": []
+        },
+        {
+          "material": "sign-symbol",
+          "semanticRole": "sign-symbol",
+          "sharedSurfaceId": "station-sign-symbol",
+          "primitiveSelection": {
+            "materialName": "sign-symbol"
+          },
+          "maps": []
+        }
+      ],
+      "textureMode": "shared-role-placeholder",
+      "textureCost": {
+        "geometryBytes": 72904,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 72904,
+        "uniqueTexelBytesWithMips": 0
+      },
+      "lodPolicy": {
+        "distanceProposalM": [
+          0,
+          40
+        ],
+        "hysteresisM": 8,
+        "unitScaleOnly": true,
+        "sameDatumAndEnvelope": true,
+        "platformInstancesMayBatchByRole": true
+      },
+      "clearance": {
+        "avoidPedestrianCorridor": true
+      },
+      "collision": {
+        "type": "JSON-layout-polygons-and-module-AABBs",
+        "layoutRef": "station-layout.json",
+        "floorSupport": "platform module only; bus local research surfaces remain descriptors"
+      },
+      "anchors": [
+        {
+          "id": "ground-contact",
+          "pointM": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "read-face",
+          "pointM": [
+            0,
+            2.285,
+            0.1
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "profileIds": [
+          "low-floor-bus-12m",
+          "expo-metro-17m"
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "sourceRequirement": "Resolve source station/stop IDs and ground/rail/walk surfaces before geographic placement"
+      },
+      "intendedConsumer": [
+        "lib/city/city-buses.ts (future adapter)",
+        "lib/city/railway.ts (future adapter)",
+        "walk-surface/collision system (future D06 integration)"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/blender-validation.json",
+          "qa/source-edit-proof.json",
+          "qa/previews/index.json",
+          "qa/threshold-validation.json",
+          "qa/stored-contact-validation.json",
+          "qa/static-batching.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "integrationStatus": "runtime_pending_webgl"
+      }
+    },
+    {
+      "id": "platform-edge-2m",
+      "taskId": "D01",
+      "variant": "representative-research",
+      "kind": "station-module",
+      "source": "source/platform-edge-2m.lod0.blend",
+      "sourceSha256": "fd946ac2dc4a1c6145bd989ecc0e7e78e34a7c4f71fbddf0bfbaf1e7e581beca",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/platform-edge-2m.lod0.glb",
+          "sha256": "db3cd3905ee077b05883a6f74d1b1aae81c04d986742874251943b8dee9f13e8",
+          "source": "source/platform-edge-2m.lod0.blend",
+          "sourceSha256": "fd946ac2dc4a1c6145bd989ecc0e7e78e34a7c4f71fbddf0bfbaf1e7e581beca",
+          "sourceBytes": 97264,
+          "triangles": 576,
+          "vertices": 1056,
+          "primitives": 3,
+          "bytes": 69624,
+          "boundsM": {
+            "min": [
+              -2.0,
+              0.0,
+              -1.0
+            ],
+            "max": [
+              2.0,
+              0.9549999833106995,
+              1.0
+            ],
+            "size": [
+              4.0,
+              0.9549999833106995,
+              2.0
+            ]
+          },
+          "geometryBytes": 69624,
+          "embeddedImageBytes": 0,
+          "staticBatching": {
+            "sourceMeshNodeCount": 32,
+            "renderPrimitiveCount": 3,
+            "componentRanges": "nodes[].extras.componentRanges",
+            "actorRoot": "station-module-root"
+          }
+        },
+        {
+          "level": 1,
+          "file": "exports/platform-edge-2m.lod1.glb",
+          "sha256": "345e1a8443a68f008ec7d4aa648e25c086d718e22c25f708e8e762d66d566818",
+          "source": "source/platform-edge-2m.lod1.blend",
+          "sourceSha256": "f49a309e2317cf39cc38fa0e15981b03644cd062d811fa94c092d7d7844b7f49",
+          "sourceBytes": 89008,
+          "triangles": 48,
+          "vertices": 96,
+          "primitives": 2,
+          "bytes": 9836,
+          "boundsM": {
+            "min": [
+              -2.0,
+              0.0,
+              -1.0
+            ],
+            "max": [
+              2.0,
+              0.9519999623298645,
+              1.0
+            ],
+            "size": [
+              4.0,
+              0.9519999623298645,
+              2.0
+            ]
+          },
+          "geometryBytes": 9836,
+          "embeddedImageBytes": 0,
+          "staticBatching": {
+            "sourceMeshNodeCount": 4,
+            "renderPrimitiveCount": 2,
+            "componentRanges": "nodes[].extras.componentRanges",
+            "actorRoot": "station-module-root"
+          }
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -2.0,
+          0.0,
+          -1.0
+        ],
+        "max": [
+          2.0,
+          0.9549999833106995,
+          1.0
+        ],
+        "size": [
+          4.0,
+          0.9549999833106995,
+          2.0
+        ]
+      },
+      "expectedDimensionsM": [
+        4,
+        0.95,
+        2
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Original representative dimensions; platform envelope follows boardable-metro floor profile; no surveyed station reproduction",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "ground or rail-contact base; no bounds recentering"
+      },
+      "attachmentDatum": {
+        "type": "rail-contact-base",
+        "planeY": 0,
+        "walkSurfaceY": 0.95
+      },
+      "frontAxis": "+X track side",
+      "materialBindings": [
+        {
+          "material": "concrete",
+          "semanticRole": "concrete",
+          "sharedSurfaceId": "station-concrete",
+          "primitiveSelection": {
+            "materialName": "concrete"
+          },
+          "maps": []
+        },
+        {
+          "material": "painted-metal",
+          "semanticRole": "painted-metal",
+          "sharedSurfaceId": "station-painted-metal",
+          "primitiveSelection": {
+            "materialName": "painted-metal"
+          },
+          "maps": []
+        },
+        {
+          "material": "tactile-yellow",
+          "semanticRole": "tactile-yellow",
+          "sharedSurfaceId": "station-tactile-yellow",
+          "primitiveSelection": {
+            "materialName": "tactile-yellow"
+          },
+          "maps": []
+        }
+      ],
+      "textureMode": "shared-role-placeholder",
+      "textureCost": {
+        "geometryBytes": 79460,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 79460,
+        "uniqueTexelBytesWithMips": 0
+      },
+      "lodPolicy": {
+        "distanceProposalM": [
+          0,
+          40
+        ],
+        "hysteresisM": 8,
+        "unitScaleOnly": true,
+        "sameDatumAndEnvelope": true,
+        "platformInstancesMayBatchByRole": true
+      },
+      "clearance": {
+        "walkSurfaceY": 0.95,
+        "trackFacingEdgeX": 2,
+        "tileLengthM": 2
+      },
+      "collision": {
+        "type": "JSON-layout-polygons-and-module-AABBs",
+        "layoutRef": "station-layout.json",
+        "floorSupport": "platform module only; bus local research surfaces remain descriptors"
+      },
+      "anchors": [
+        {
+          "id": "platform-top",
+          "pointM": [
+            0,
+            0.95,
+            0
+          ]
+        },
+        {
+          "id": "track-edge",
+          "pointM": [
+            2,
+            0.95,
+            0
+          ]
+        },
+        {
+          "id": "join-forward",
+          "pointM": [
+            0,
+            0.95,
+            1
+          ]
+        },
+        {
+          "id": "join-back",
+          "pointM": [
+            0,
+            0.95,
+            -1
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "profileIds": [
+          "low-floor-bus-12m",
+          "expo-metro-17m"
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "sourceRequirement": "Resolve source station/stop IDs and ground/rail/walk surfaces before geographic placement"
+      },
+      "intendedConsumer": [
+        "lib/city/city-buses.ts (future adapter)",
+        "lib/city/railway.ts (future adapter)",
+        "walk-surface/collision system (future D06 integration)"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/blender-validation.json",
+          "qa/source-edit-proof.json",
+          "qa/previews/index.json",
+          "qa/threshold-validation.json",
+          "qa/stored-contact-validation.json",
+          "qa/static-batching.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "integrationStatus": "runtime_pending_webgl"
+      }
+    },
+    {
+      "id": "station-guidance-sign",
+      "taskId": "D01",
+      "variant": "representative-research",
+      "kind": "station-module",
+      "source": "source/station-guidance-sign.lod0.blend",
+      "sourceSha256": "d2dcba508f6a7e67bec7b988b27ccf773b11d115e9e97844bcfb085dcf109faf",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/station-guidance-sign.lod0.glb",
+          "sha256": "03d2a972361986246a15283e64925f2a0a6e80aeb9df22e1df03f50d17ee3ef9",
+          "source": "source/station-guidance-sign.lod0.blend",
+          "sourceSha256": "d2dcba508f6a7e67bec7b988b27ccf773b11d115e9e97844bcfb085dcf109faf",
+          "sourceBytes": 92393,
+          "triangles": 696,
+          "vertices": 1386,
+          "primitives": 3,
+          "bytes": 64056,
+          "boundsM": {
+            "min": [
+              -0.940000057220459,
+              0.0,
+              -0.11999999731779099
+            ],
+            "max": [
+              0.940000057220459,
+              2.8499999046325684,
+              0.11999999731779099
+            ],
+            "size": [
+              1.880000114440918,
+              2.8499999046325684,
+              0.23999999463558197
+            ]
+          },
+          "geometryBytes": 64056,
+          "embeddedImageBytes": 0,
+          "staticBatching": {
+            "sourceMeshNodeCount": 9,
+            "renderPrimitiveCount": 3,
+            "componentRanges": "nodes[].extras.componentRanges",
+            "actorRoot": "station-module-root"
+          }
+        },
+        {
+          "level": 1,
+          "file": "exports/station-guidance-sign.lod1.glb",
+          "sha256": "1a2032a474ba1eacbf6b7df64cca0d52b76e724e3b2d2c9e7f60b8f0ac1ae93b",
+          "source": "source/station-guidance-sign.lod1.blend",
+          "sourceSha256": "108a81651eb901d9dd8b041f9ba98f9290c4c220554f630b747d9550046bc898",
+          "sourceBytes": 92002,
+          "triangles": 120,
+          "vertices": 234,
+          "primitives": 3,
+          "bytes": 20228,
+          "boundsM": {
+            "min": [
+              -0.940000057220459,
+              0.0,
+              -0.11999999731779099
+            ],
+            "max": [
+              0.940000057220459,
+              2.8499999046325684,
+              0.11999999731779099
+            ],
+            "size": [
+              1.880000114440918,
+              2.8499999046325684,
+              0.23999999463558197
+            ]
+          },
+          "geometryBytes": 20228,
+          "embeddedImageBytes": 0,
+          "staticBatching": {
+            "sourceMeshNodeCount": 9,
+            "renderPrimitiveCount": 3,
+            "componentRanges": "nodes[].extras.componentRanges",
+            "actorRoot": "station-module-root"
+          }
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.940000057220459,
+          0.0,
+          -0.11999999731779099
+        ],
+        "max": [
+          0.940000057220459,
+          2.8499999046325684,
+          0.11999999731779099
+        ],
+        "size": [
+          1.880000114440918,
+          2.8499999046325684,
+          0.23999999463558197
+        ]
+      },
+      "expectedDimensionsM": [
+        1.88,
+        2.85,
+        0.24
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Original representative dimensions; platform envelope follows boardable-metro floor profile; no surveyed station reproduction",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "ground or rail-contact base; no bounds recentering"
+      },
+      "attachmentDatum": {
+        "type": "ground-contact",
+        "planeY": 0
+      },
+      "frontAxis": "+Z sign face",
+      "materialBindings": [
+        {
+          "material": "painted-metal",
+          "semanticRole": "painted-metal",
+          "sharedSurfaceId": "station-painted-metal",
+          "primitiveSelection": {
+            "materialName": "painted-metal"
+          },
+          "maps": []
+        },
+        {
+          "material": "sign-face",
+          "semanticRole": "sign-face",
+          "sharedSurfaceId": "station-sign-face",
+          "primitiveSelection": {
+            "materialName": "sign-face"
+          },
+          "maps": []
+        },
+        {
+          "material": "sign-symbol",
+          "semanticRole": "sign-symbol",
+          "sharedSurfaceId": "station-sign-symbol",
+          "primitiveSelection": {
+            "materialName": "sign-symbol"
+          },
+          "maps": []
+        }
+      ],
+      "textureMode": "shared-role-placeholder",
+      "textureCost": {
+        "geometryBytes": 84284,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 84284,
+        "uniqueTexelBytesWithMips": 0
+      },
+      "lodPolicy": {
+        "distanceProposalM": [
+          0,
+          40
+        ],
+        "hysteresisM": 8,
+        "unitScaleOnly": true,
+        "sameDatumAndEnvelope": true,
+        "platformInstancesMayBatchByRole": true
+      },
+      "clearance": {
+        "signUndersideHeightM": 2.33,
+        "betweenPostsM": 1.63
+      },
+      "collision": {
+        "type": "JSON-layout-polygons-and-module-AABBs",
+        "layoutRef": "station-layout.json",
+        "floorSupport": "platform module only; bus local research surfaces remain descriptors"
+      },
+      "anchors": [
+        {
+          "id": "ground-contact",
+          "pointM": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "clear-passage",
+          "pointM": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "read-face",
+          "pointM": [
+            0,
+            2.59,
+            0.085
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "profileIds": [
+          "low-floor-bus-12m",
+          "expo-metro-17m"
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "sourceRequirement": "Resolve source station/stop IDs and ground/rail/walk surfaces before geographic placement"
+      },
+      "intendedConsumer": [
+        "lib/city/city-buses.ts (future adapter)",
+        "lib/city/railway.ts (future adapter)",
+        "walk-surface/collision system (future D06 integration)"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/blender-validation.json",
+          "qa/source-edit-proof.json",
+          "qa/previews/index.json",
+          "qa/threshold-validation.json",
+          "qa/stored-contact-validation.json",
+          "qa/static-batching.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "integrationStatus": "runtime_pending_webgl"
+      }
+    },
+    {
+      "id": "bus-threshold-deck",
+      "taskId": "D01",
+      "variant": "representative-research",
+      "kind": "portable-threshold-deck",
+      "source": "source/bus-threshold-deck.lod0.blend",
+      "sourceSha256": "23e8e5e2b3d19ee6792b8b53186b43aa91de02a09e3c783349678f8eb0fd190c",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/bus-threshold-deck.lod0.glb",
+          "sha256": "0d4394f81ad7c417e90fb0ddda2a3b5199f71055ef09b07bd3602a9590af5d2e",
+          "source": "source/bus-threshold-deck.lod0.blend",
+          "sourceSha256": "23e8e5e2b3d19ee6792b8b53186b43aa91de02a09e3c783349678f8eb0fd190c",
+          "sourceBytes": 88844,
+          "triangles": 56,
+          "vertices": 108,
+          "primitives": 2,
+          "bytes": 10728,
+          "boundsM": {
+            "min": [
+              -0.5,
+              -0.019999999552965164,
+              -0.4749999940395355
+            ],
+            "max": [
+              0.44999998807907104,
+              0.015000000596046448,
+              0.4749999940395355
+            ],
+            "size": [
+              0.949999988079071,
+              0.03500000014901161,
+              0.949999988079071
+            ]
+          },
+          "geometryBytes": 10728,
+          "embeddedImageBytes": 0,
+          "staticBatching": {
+            "sourceMeshNodeCount": 4,
+            "renderPrimitiveCount": 2,
+            "componentRanges": "nodes[].extras.componentRanges",
+            "actorRoot": "station-module-root"
+          }
+        },
+        {
+          "level": 1,
+          "file": "exports/bus-threshold-deck.lod1.glb",
+          "sha256": "f8c29798b4bed7e1c9e67ae1beeb554692e6f762fb8971e9786758492f0f13ba",
+          "source": "source/bus-threshold-deck.lod1.blend",
+          "sourceSha256": "a179cfb53ea735e816503a0e27f738ccf264fd5ba0821983be53b528961f812d",
+          "sourceBytes": 86629,
+          "triangles": 20,
+          "vertices": 36,
+          "primitives": 1,
+          "bytes": 4420,
+          "boundsM": {
+            "min": [
+              -0.5,
+              -0.019999999552965164,
+              -0.4749999940395355
+            ],
+            "max": [
+              0.44999998807907104,
+              0.014999999664723873,
+              0.4749999940395355
+            ],
+            "size": [
+              0.949999988079071,
+              0.03499999921768904,
+              0.949999988079071
+            ]
+          },
+          "geometryBytes": 4420,
+          "embeddedImageBytes": 0,
+          "staticBatching": {
+            "sourceMeshNodeCount": 1,
+            "renderPrimitiveCount": 1,
+            "componentRanges": "nodes[].extras.componentRanges",
+            "actorRoot": "station-module-root"
+          }
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.5,
+          -0.019999999552965164,
+          -0.4749999940395355
+        ],
+        "max": [
+          0.44999998807907104,
+          0.015000000596046448,
+          0.4749999940395355
+        ],
+        "size": [
+          0.949999988079071,
+          0.03500000014901161,
+          0.949999988079071
+        ]
+      },
+      "expectedDimensionsM": [
+        0.95,
+        0.035,
+        0.95
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Original representative dimensions; platform envelope follows boardable-metro floor profile; no surveyed station reproduction",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "station edge floor datum at local X=0; +X crosses gap toward vehicle"
+      },
+      "attachmentDatum": {
+        "type": "platform-edge-floor",
+        "planeY": 0,
+        "maximumWalkSurfaceY": 0.015
+      },
+      "frontAxis": "+X toward vehicle",
+      "materialBindings": [
+        {
+          "material": "painted-metal",
+          "semanticRole": "painted-metal",
+          "sharedSurfaceId": "station-painted-metal",
+          "primitiveSelection": {
+            "materialName": "painted-metal"
+          },
+          "maps": []
+        },
+        {
+          "material": "tactile-yellow",
+          "semanticRole": "tactile-yellow",
+          "sharedSurfaceId": "station-tactile-yellow",
+          "primitiveSelection": {
+            "materialName": "tactile-yellow"
+          },
+          "maps": []
+        }
+      ],
+      "textureMode": "shared-role-placeholder",
+      "textureCost": {
+        "geometryBytes": 15148,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 15148,
+        "uniqueTexelBytesWithMips": 0
+      },
+      "lodPolicy": {
+        "distanceProposalM": [
+          0,
+          40
+        ],
+        "hysteresisM": 8,
+        "unitScaleOnly": true,
+        "sameDatumAndEnvelope": true,
+        "platformInstancesMayBatchByRole": true
+      },
+      "clearance": {
+        "clearWidthM": 0.95,
+        "maximumDeckRiseM": 0.015,
+        "taperRunM": 0.2,
+        "maximumGrade": 0.075,
+        "source": "station-layout.json stops[].doorAlignmentPoints[].thresholdDeck"
+      },
+      "collision": {
+        "type": "actual deck mesh plus three top walk polygons",
+        "metadata": "station-layout.json stops[].doorAlignmentPoints[].thresholdDeck.walkableSurfacePolygonsM",
+        "stateGate": "deployed only after matching doorway fully open; stow before door closing"
+      },
+      "anchors": [
+        {
+          "id": "station-bearing",
+          "pointM": [
+            -0.5,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "vehicle-bearing",
+          "pointM": [
+            0.45,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "deck-high-point",
+          "pointM": [
+            0,
+            0.015,
+            0
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "profileIds": [
+          "low-floor-bus-12m",
+          "expo-metro-17m"
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "sourceRequirement": "Resolve source station/stop IDs and ground/rail/walk surfaces before geographic placement"
+      },
+      "intendedConsumer": [
+        "lib/city/city-buses.ts (future adapter)",
+        "lib/city/railway.ts (future adapter)",
+        "walk-surface/collision system (future D06 integration)"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/blender-validation.json",
+          "qa/source-edit-proof.json",
+          "qa/previews/index.json",
+          "qa/threshold-validation.json",
+          "qa/stored-contact-validation.json",
+          "qa/static-batching.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "integrationStatus": "runtime_pending_webgl"
+      }
+    },
+    {
+      "id": "metro-threshold-deck",
+      "taskId": "D01",
+      "variant": "representative-research",
+      "kind": "portable-threshold-deck",
+      "source": "source/metro-threshold-deck.lod0.blend",
+      "sourceSha256": "5d1884605c1cabe464d7f0161fdfd033672d71bfe74e1530a24f90d319d62650",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/metro-threshold-deck.lod0.glb",
+          "sha256": "075ceb2ec81ad96c0df75134797c7c9d42119d58cdab65c7d4fafb77532c9767",
+          "source": "source/metro-threshold-deck.lod0.blend",
+          "sourceSha256": "5d1884605c1cabe464d7f0161fdfd033672d71bfe74e1530a24f90d319d62650",
+          "sourceBytes": 89324,
+          "triangles": 56,
+          "vertices": 108,
+          "primitives": 2,
+          "bytes": 10788,
+          "boundsM": {
+            "min": [
+              -0.47999998927116394,
+              -0.019999999552965164,
+              -0.550000011920929
+            ],
+            "max": [
+              0.41999998688697815,
+              0.015000000596046448,
+              0.550000011920929
+            ],
+            "size": [
+              0.8999999761581421,
+              0.03500000014901161,
+              1.100000023841858
+            ]
+          },
+          "geometryBytes": 10788,
+          "embeddedImageBytes": 0,
+          "staticBatching": {
+            "sourceMeshNodeCount": 4,
+            "renderPrimitiveCount": 2,
+            "componentRanges": "nodes[].extras.componentRanges",
+            "actorRoot": "station-module-root"
+          }
+        },
+        {
+          "level": 1,
+          "file": "exports/metro-threshold-deck.lod1.glb",
+          "sha256": "c461a0a4863c1619161775e95828a5cd1897ce21af8fd649ae24aed6fc04cce2",
+          "source": "source/metro-threshold-deck.lod1.blend",
+          "sourceSha256": "ca6470ef6eaeb335f1b54a8cf0c25041f44a9873f4c3ad4670309af4e386febc",
+          "sourceBytes": 86653,
+          "triangles": 20,
+          "vertices": 36,
+          "primitives": 1,
+          "bytes": 4468,
+          "boundsM": {
+            "min": [
+              -0.47999998927116394,
+              -0.019999999552965164,
+              -0.550000011920929
+            ],
+            "max": [
+              0.41999998688697815,
+              0.014999999664723873,
+              0.550000011920929
+            ],
+            "size": [
+              0.8999999761581421,
+              0.03499999921768904,
+              1.100000023841858
+            ]
+          },
+          "geometryBytes": 4468,
+          "embeddedImageBytes": 0,
+          "staticBatching": {
+            "sourceMeshNodeCount": 1,
+            "renderPrimitiveCount": 1,
+            "componentRanges": "nodes[].extras.componentRanges",
+            "actorRoot": "station-module-root"
+          }
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.47999998927116394,
+          -0.019999999552965164,
+          -0.550000011920929
+        ],
+        "max": [
+          0.41999998688697815,
+          0.015000000596046448,
+          0.550000011920929
+        ],
+        "size": [
+          0.8999999761581421,
+          0.03500000014901161,
+          1.100000023841858
+        ]
+      },
+      "expectedDimensionsM": [
+        0.8999999999999999,
+        0.035,
+        1.1
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Original representative dimensions; platform envelope follows boardable-metro floor profile; no surveyed station reproduction",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "station edge floor datum at local X=0; +X crosses gap toward vehicle"
+      },
+      "attachmentDatum": {
+        "type": "platform-edge-floor",
+        "planeY": 0,
+        "maximumWalkSurfaceY": 0.015
+      },
+      "frontAxis": "+X toward vehicle",
+      "materialBindings": [
+        {
+          "material": "painted-metal",
+          "semanticRole": "painted-metal",
+          "sharedSurfaceId": "station-painted-metal",
+          "primitiveSelection": {
+            "materialName": "painted-metal"
+          },
+          "maps": []
+        },
+        {
+          "material": "tactile-yellow",
+          "semanticRole": "tactile-yellow",
+          "sharedSurfaceId": "station-tactile-yellow",
+          "primitiveSelection": {
+            "materialName": "tactile-yellow"
+          },
+          "maps": []
+        }
+      ],
+      "textureMode": "shared-role-placeholder",
+      "textureCost": {
+        "geometryBytes": 15256,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 15256,
+        "uniqueTexelBytesWithMips": 0
+      },
+      "lodPolicy": {
+        "distanceProposalM": [
+          0,
+          40
+        ],
+        "hysteresisM": 8,
+        "unitScaleOnly": true,
+        "sameDatumAndEnvelope": true,
+        "platformInstancesMayBatchByRole": true
+      },
+      "clearance": {
+        "clearWidthM": 1.1,
+        "maximumDeckRiseM": 0.015,
+        "taperRunM": 0.2,
+        "maximumGrade": 0.075,
+        "source": "station-layout.json stops[].doorAlignmentPoints[].thresholdDeck"
+      },
+      "collision": {
+        "type": "actual deck mesh plus three top walk polygons",
+        "metadata": "station-layout.json stops[].doorAlignmentPoints[].thresholdDeck.walkableSurfacePolygonsM",
+        "stateGate": "deployed only after matching doorway fully open; stow before door closing"
+      },
+      "anchors": [
+        {
+          "id": "station-bearing",
+          "pointM": [
+            -0.48,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "vehicle-bearing",
+          "pointM": [
+            0.42,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "deck-high-point",
+          "pointM": [
+            0,
+            0.015,
+            0
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "profileIds": [
+          "low-floor-bus-12m",
+          "expo-metro-17m"
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "sourceRequirement": "Resolve source station/stop IDs and ground/rail/walk surfaces before geographic placement"
+      },
+      "intendedConsumer": [
+        "lib/city/city-buses.ts (future adapter)",
+        "lib/city/railway.ts (future adapter)",
+        "walk-surface/collision system (future D06 integration)"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/blender-validation.json",
+          "qa/source-edit-proof.json",
+          "qa/previews/index.json",
+          "qa/threshold-validation.json",
+          "qa/stored-contact-validation.json",
+          "qa/static-batching.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "integrationStatus": "runtime_pending_webgl"
+      }
+    }
+  ],
+  "textures": [],
+  "dependencies": [
+    {
+      "packageId": "boardable-bus",
+      "manifest": "../boardable-bus/manifest.json",
+      "version": "1.0.0",
+      "sha256AtLayoutBuild": "32a35e7fdaa0f82600f8d161212b952177fae8515ca8095b2d55be118503076e",
+      "identity": "local-package-dependency; not copied",
+      "geometryAuthoritative": true
+    },
+    {
+      "packageId": "boardable-metro",
+      "manifest": "../boardable-metro/manifest.json",
+      "version": "1.0.0",
+      "sha256AtLayoutBuild": "85ae667daea268564b2dc4e2ee8e671b4d67c3fc865dd9178d38add5b4751f79",
+      "identity": "local-package-dependency; not copied",
+      "geometryAuthoritative": true
+    },
+    {
+      "packageId": "street-furniture-expansion",
+      "manifest": "../street-furniture-expansion/manifest.json",
+      "version": "1.0.0",
+      "sha256AtLayoutBuild": "a047b465f83a6d2604485895a1dfb66ec4d50c192838afed0d92fc2c82cdcacb",
+      "identity": "local-package-dependency; not copied",
+      "geometryAuthoritative": true
+    }
+  ],
+  "stationLayout": "station-layout.json",
+  "scope": "offline_only",
+  "thresholdModules": {
+    "deployedStates": "station-layout.json stops[].doorAlignmentPoints[].thresholdDeck",
+    "motionPolicy": "Portable research decks; static stored/deployed poses only, no interpolated deployment acceptance",
+    "collisionGeometry": "threshold deck mesh with three top support polygons",
+    "certification": false
+  },
+  "runtimeChecks": {
+    "status": "not_run",
+    "integrationStatus": "runtime_pending_webgl"
+  },
+  "staticExportBatching": {
+    "status": "enabled",
+    "method": "lossless material and attribute signature batching",
+    "actorRoot": "station-module-root",
+    "originalParts": "Editable .blend parts unchanged; original GLB nodes retained as zero-draw component anchors",
+    "geometryLookup": "Batch node extras.componentRanges indexes its sole mesh primitive; sourceLocalToModuleMatrix records original component frame",
+    "evidence": "qa/static-batching.json",
+    "notInstancing": true,
+    "runtimeGpuDrawsMeasured": false
+  }
+}
