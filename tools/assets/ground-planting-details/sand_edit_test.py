@@ -1,0 +1,9 @@
+"""Prove sand master is editable before baking, without modifying shipped source."""
+from pathlib import Path
+import importlib.util,json,shutil,tempfile
+import bpy
+HERE=Path(__file__).resolve().parent;sp=importlib.util.spec_from_file_location('build',HERE/'build.py');b=importlib.util.module_from_spec(sp);sp.loader.exec_module(b)
+root=Path(tempfile.mkdtemp(prefix='sand-node-edit-'));src=HERE/'source/sand-procedural-master.blend';before=b.digest(src);copy=root/src.name;shutil.copy2(src,copy);bpy.ops.wm.open_mainfile(filepath=str(copy),use_scripts=False)
+m=bpy.data.materials['role-sand-procedural'];node=m.node_tree.nodes['EDIT_BASE_TINT (linear from existing sRGB palette)'];node.outputs[0].default_value=(.32,.20,.085,1);bpy.ops.wm.save_as_mainfile(filepath=str(copy),compress=True);h=b.digest(copy)
+sp=importlib.util.spec_from_file_location('exporter',HERE/'export.py');e=importlib.util.module_from_spec(sp);sp.loader.exec_module(e);shutil.copy2(HERE/'source/surface-sand-2m.lod0.blend',root/'surface-sand-2m.lod0.blend');e.run(root,root/'reexport',asset='surface-sand-2m',rebake_sand=True);out=root/'reexport/source/textures';changed=b.digest(out/'sand-color.png')!=b.digest(HERE/'source/textures/sand-color.png');b.need(changed and b.digest(copy)==h and b.digest(src)==before,'sand node edit proof')
+b.dump(HERE/'qa/sand-edit-proof.json',{'status':'pass','masterSourceSha256':before,'originalSourcePreserved':True,'editedSourcePreserved':True,'proceduralTintEditChangedActualBake':changed,'bakeResolution':[512,512],'bakeDevice':'Cycles CPU','originalColorSha256':b.digest(HERE/'source/textures/sand-color.png'),'editedColorSha256':b.digest(out/'sand-color.png'),'exportEntry':'export.run(..., rebake_sand=True)','changedGLBVerified':b.digest(root/'reexport/exports/surface-sand-2m.lod0.inspection.glb')!=b.digest(HERE/'exports/surface-sand-2m.lod0.inspection.glb')})

@@ -1,0 +1,1138 @@
+{
+  "status": "pass",
+  "scope": "common packaging, source hashes, rest-pose transformed GLB geometry and costs only; package-specific Blender, semantic and runtime checks required",
+  "results": [
+    {
+      "assetId": "curb-straight-1m",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.5,
+          0.0,
+          -0.09000000357627869
+        ],
+        "max": [
+          0.5,
+          0.15000000596046448,
+          0.09000000357627869
+        ],
+        "size": [
+          1.0,
+          0.15000000596046448,
+          0.18000000715255737
+        ]
+      },
+      "triangles": 20,
+      "vertices": 36,
+      "primitives": 1,
+      "bytes": 3756,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 3756,
+      "images": [],
+      "nodeNames": [
+        "curb-body"
+      ],
+      "materialNames": [
+        "role-concrete"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "curb-straight-1m",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.5,
+          0.0,
+          -0.09000000357627869
+        ],
+        "max": [
+          0.5,
+          0.15000000596046448,
+          0.09000000357627869
+        ],
+        "size": [
+          1.0,
+          0.15000000596046448,
+          0.18000000715255737
+        ]
+      },
+      "triangles": 12,
+      "vertices": 24,
+      "primitives": 1,
+      "bytes": 3128,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 3128,
+      "images": [],
+      "nodeNames": [
+        "curb-body"
+      ],
+      "materialNames": [
+        "role-concrete"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "perennial-rosette",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.22483648359775543,
+          0.0,
+          -0.22483648359775543
+        ],
+        "max": [
+          0.22483648359775543,
+          0.30000001192092896,
+          0.22483648359775543
+        ],
+        "size": [
+          0.44967296719551086,
+          0.30000001192092896,
+          0.44967296719551086
+        ]
+      },
+      "triangles": 48,
+      "vertices": 96,
+      "primitives": 1,
+      "bytes": 6868,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 6868,
+      "images": [],
+      "nodeNames": [
+        "perennial-rosette-leaves"
+      ],
+      "materialNames": [
+        "role-foliage"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "perennial-rosette",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.22949999570846558,
+          0.0,
+          -0.2549999952316284
+        ],
+        "max": [
+          0.20399999618530273,
+          0.30000001192092896,
+          0.20399999618530273
+        ],
+        "size": [
+          0.4334999918937683,
+          0.30000001192092896,
+          0.45899999141693115
+        ]
+      },
+      "triangles": 32,
+      "vertices": 64,
+      "primitives": 1,
+      "bytes": 5232,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 5232,
+      "images": [],
+      "nodeNames": [
+        "perennial-rosette-leaves"
+      ],
+      "materialNames": [
+        "role-foliage"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "perennial-tuft",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.15216904878616333,
+          0.0,
+          -0.1294427216053009
+        ],
+        "max": [
+          0.15216904878616333,
+          0.44999998807907104,
+          0.1599999964237213
+        ],
+        "size": [
+          0.30433809757232666,
+          0.44999998807907104,
+          0.2894427180290222
+        ]
+      },
+      "triangles": 20,
+      "vertices": 60,
+      "primitives": 1,
+      "bytes": 4956,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 4956,
+      "images": [],
+      "nodeNames": [
+        "perennial-tuft-leaves"
+      ],
+      "materialNames": [
+        "role-foliage"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "perennial-tuft",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.15216904878616333,
+          0.0,
+          -0.1294427216053009
+        ],
+        "max": [
+          0.15216904878616333,
+          0.44999998807907104,
+          0.1599999964237213
+        ],
+        "size": [
+          0.30433809757232666,
+          0.44999998807907104,
+          0.2894427180290222
+        ]
+      },
+      "triangles": 8,
+      "vertices": 24,
+      "primitives": 1,
+      "bytes": 3152,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 3152,
+      "images": [],
+      "nodeNames": [
+        "perennial-tuft-leaves"
+      ],
+      "materialNames": [
+        "role-foliage"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "planter-round",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.32499998807907104,
+          0.0,
+          -0.32499998807907104
+        ],
+        "max": [
+          0.32499998807907104,
+          0.4000000059604645,
+          0.32499998807907104
+        ],
+        "size": [
+          0.6499999761581421,
+          0.4000000059604645,
+          0.6499999761581421
+        ]
+      },
+      "triangles": 254,
+      "vertices": 385,
+      "primitives": 2,
+      "bytes": 23260,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 23260,
+      "images": [],
+      "nodeNames": [
+        "planter-round-shell-and-soil"
+      ],
+      "materialNames": [
+        "role-concrete",
+        "role-soil"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "planter-round",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.32499998807907104,
+          0.0,
+          -0.32499998807907104
+        ],
+        "max": [
+          0.32499998807907104,
+          0.4000000059604645,
+          0.32499998807907104
+        ],
+        "size": [
+          0.6499999761581421,
+          0.4000000059604645,
+          0.6499999761581421
+        ]
+      },
+      "triangles": 94,
+      "vertices": 145,
+      "primitives": 2,
+      "bytes": 10772,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 10772,
+      "images": [],
+      "nodeNames": [
+        "planter-round-shell-and-soil"
+      ],
+      "materialNames": [
+        "role-concrete",
+        "role-soil"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "planter-trough",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.4000000059604645,
+          0.0,
+          -0.30000001192092896
+        ],
+        "max": [
+          0.4000000059604645,
+          0.5,
+          0.30000001192092896
+        ],
+        "size": [
+          0.800000011920929,
+          0.5,
+          0.6000000238418579
+        ]
+      },
+      "triangles": 38,
+      "vertices": 68,
+      "primitives": 2,
+      "bytes": 6704,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 6704,
+      "images": [],
+      "nodeNames": [
+        "planter-trough-shell-and-soil"
+      ],
+      "materialNames": [
+        "role-concrete",
+        "role-soil"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "planter-trough",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.4000000059604645,
+          0.0,
+          -0.30000001192092896
+        ],
+        "max": [
+          0.4000000059604645,
+          0.5,
+          0.30000001192092896
+        ],
+        "size": [
+          0.800000011920929,
+          0.5,
+          0.6000000238418579
+        ]
+      },
+      "triangles": 30,
+      "vertices": 52,
+      "primitives": 2,
+      "bytes": 5884,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 5884,
+      "images": [],
+      "nodeNames": [
+        "planter-trough-shell-and-soil"
+      ],
+      "materialNames": [
+        "role-concrete",
+        "role-soil"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "soil-grass-edge-1m",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.20000000298023224,
+          0.0,
+          -0.5
+        ],
+        "max": [
+          0.20000000298023224,
+          0.0,
+          0.5
+        ],
+        "size": [
+          0.4000000059604645,
+          0.0,
+          1.0
+        ]
+      },
+      "triangles": 128,
+      "vertices": 81,
+      "primitives": 1,
+      "bytes": 7172,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 7172,
+      "images": [],
+      "nodeNames": [
+        "soil-grass-edge-surface"
+      ],
+      "materialNames": [
+        "role-soil-grass-edge"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "soil-grass-edge-1m",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.20000000298023224,
+          0.0,
+          -0.5
+        ],
+        "max": [
+          0.20000000298023224,
+          0.0,
+          0.5
+        ],
+        "size": [
+          0.4000000059604645,
+          0.0,
+          1.0
+        ]
+      },
+      "triangles": 8,
+      "vertices": 9,
+      "primitives": 1,
+      "bytes": 2692,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 2692,
+      "images": [],
+      "nodeNames": [
+        "soil-grass-edge-surface"
+      ],
+      "materialNames": [
+        "role-soil-grass-edge"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "surface-asphalt-10m",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -5.0,
+          0.0,
+          -5.0
+        ],
+        "max": [
+          5.0,
+          0.0,
+          5.0
+        ],
+        "size": [
+          10.0,
+          0.0,
+          10.0
+        ]
+      },
+      "triangles": 2,
+      "vertices": 4,
+      "primitives": 1,
+      "bytes": 2460,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 2460,
+      "images": [
+        {
+          "sha256": "272d02f372c58ffa12561e12ddb5b6d1d067c2d2a797511a9b8989a4e9d11291",
+          "width": 240,
+          "height": 240,
+          "bytes": 27573,
+          "texelBytesWithMips": 307200.0
+        },
+        {
+          "sha256": "d1d20428b115ad1f2d95e194e2b005bbcc65f55c31400d479d27a451b8fd838b",
+          "width": 240,
+          "height": 240,
+          "bytes": 44431,
+          "texelBytesWithMips": 307200.0
+        },
+        {
+          "sha256": "14f69cd2a64eb57580b2218116394da9d7a2193a1346f09bba08f4aa7df6528d",
+          "width": 240,
+          "height": 240,
+          "bytes": 13899,
+          "texelBytesWithMips": 307200.0
+        }
+      ],
+      "nodeNames": [
+        "asphalt-study-10m"
+      ],
+      "materialNames": [
+        "role-asphalt"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "surface-asphalt-2m",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -1.0,
+          0.0,
+          -1.0
+        ],
+        "max": [
+          1.0,
+          0.0,
+          1.0
+        ],
+        "size": [
+          2.0,
+          0.0,
+          2.0
+        ]
+      },
+      "triangles": 2,
+      "vertices": 4,
+      "primitives": 1,
+      "bytes": 2456,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 2456,
+      "images": [
+        {
+          "sha256": "272d02f372c58ffa12561e12ddb5b6d1d067c2d2a797511a9b8989a4e9d11291",
+          "width": 240,
+          "height": 240,
+          "bytes": 27573,
+          "texelBytesWithMips": 307200.0
+        },
+        {
+          "sha256": "d1d20428b115ad1f2d95e194e2b005bbcc65f55c31400d479d27a451b8fd838b",
+          "width": 240,
+          "height": 240,
+          "bytes": 44431,
+          "texelBytesWithMips": 307200.0
+        },
+        {
+          "sha256": "14f69cd2a64eb57580b2218116394da9d7a2193a1346f09bba08f4aa7df6528d",
+          "width": 240,
+          "height": 240,
+          "bytes": 13899,
+          "texelBytesWithMips": 307200.0
+        }
+      ],
+      "nodeNames": [
+        "asphalt-study-2m"
+      ],
+      "materialNames": [
+        "role-asphalt"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "surface-concrete-10m",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -5.0,
+          0.0,
+          -5.0
+        ],
+        "max": [
+          5.0,
+          0.0,
+          5.0
+        ],
+        "size": [
+          10.0,
+          0.0,
+          10.0
+        ]
+      },
+      "triangles": 2,
+      "vertices": 4,
+      "primitives": 1,
+      "bytes": 2476,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 2476,
+      "images": [
+        {
+          "sha256": "80d9b75c08564460d2d3f43e3e886ac203ef4f81a3c69497d677240b18abf3dd",
+          "width": 240,
+          "height": 240,
+          "bytes": 16012,
+          "texelBytesWithMips": 307200.0
+        },
+        {
+          "sha256": "9f51a3eccf7196241f07df33cf28b8d7f65583c84103f8738d25ceceb7fe7192",
+          "width": 240,
+          "height": 240,
+          "bytes": 42856,
+          "texelBytesWithMips": 307200.0
+        },
+        {
+          "sha256": "0388a0c62cd21deb1e4b603de00965e1578a38cc54e83b90cffbf30f98a5bc1e",
+          "width": 240,
+          "height": 240,
+          "bytes": 13891,
+          "texelBytesWithMips": 307200.0
+        }
+      ],
+      "nodeNames": [
+        "concrete-study-10m"
+      ],
+      "materialNames": [
+        "role-concrete"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "surface-concrete-2m",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -1.0,
+          0.0,
+          -1.0
+        ],
+        "max": [
+          1.0,
+          0.0,
+          1.0
+        ],
+        "size": [
+          2.0,
+          0.0,
+          2.0
+        ]
+      },
+      "triangles": 2,
+      "vertices": 4,
+      "primitives": 1,
+      "bytes": 2472,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 2472,
+      "images": [
+        {
+          "sha256": "80d9b75c08564460d2d3f43e3e886ac203ef4f81a3c69497d677240b18abf3dd",
+          "width": 240,
+          "height": 240,
+          "bytes": 16012,
+          "texelBytesWithMips": 307200.0
+        },
+        {
+          "sha256": "9f51a3eccf7196241f07df33cf28b8d7f65583c84103f8738d25ceceb7fe7192",
+          "width": 240,
+          "height": 240,
+          "bytes": 42856,
+          "texelBytesWithMips": 307200.0
+        },
+        {
+          "sha256": "0388a0c62cd21deb1e4b603de00965e1578a38cc54e83b90cffbf30f98a5bc1e",
+          "width": 240,
+          "height": 240,
+          "bytes": 13891,
+          "texelBytesWithMips": 307200.0
+        }
+      ],
+      "nodeNames": [
+        "concrete-study-2m"
+      ],
+      "materialNames": [
+        "role-concrete"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "surface-grass-10m",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -5.0,
+          0.0,
+          -5.0
+        ],
+        "max": [
+          5.0,
+          0.0,
+          5.0
+        ],
+        "size": [
+          10.0,
+          0.0,
+          10.0
+        ]
+      },
+      "triangles": 2,
+      "vertices": 4,
+      "primitives": 1,
+      "bytes": 2444,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 2444,
+      "images": [
+        {
+          "sha256": "74cb6b02204c37026f6beebdc99001929bd331d5edc884feeef3c2ba830b90ac",
+          "width": 512,
+          "height": 512,
+          "bytes": 581991,
+          "texelBytesWithMips": 1398101.3333333333
+        },
+        {
+          "sha256": "678d283e62d543ba04e3dec2ec4847c47fdd878bc91ead9c82a2b694dea58a5f",
+          "width": 512,
+          "height": 512,
+          "bytes": 252788,
+          "texelBytesWithMips": 1398101.3333333333
+        },
+        {
+          "sha256": "18fd14b3329257af888ab8d6ca1f038d4d7643aee47b3c32393fbe8f0d7643ce",
+          "width": 512,
+          "height": 512,
+          "bytes": 52412,
+          "texelBytesWithMips": 1398101.3333333333
+        }
+      ],
+      "nodeNames": [
+        "grass-study-10m"
+      ],
+      "materialNames": [
+        "role-grass"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "surface-grass-2m",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -1.0,
+          0.0,
+          -1.0
+        ],
+        "max": [
+          1.0,
+          0.0,
+          1.0
+        ],
+        "size": [
+          2.0,
+          0.0,
+          2.0
+        ]
+      },
+      "triangles": 2,
+      "vertices": 4,
+      "primitives": 1,
+      "bytes": 2440,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 2440,
+      "images": [
+        {
+          "sha256": "74cb6b02204c37026f6beebdc99001929bd331d5edc884feeef3c2ba830b90ac",
+          "width": 512,
+          "height": 512,
+          "bytes": 581991,
+          "texelBytesWithMips": 1398101.3333333333
+        },
+        {
+          "sha256": "678d283e62d543ba04e3dec2ec4847c47fdd878bc91ead9c82a2b694dea58a5f",
+          "width": 512,
+          "height": 512,
+          "bytes": 252788,
+          "texelBytesWithMips": 1398101.3333333333
+        },
+        {
+          "sha256": "18fd14b3329257af888ab8d6ca1f038d4d7643aee47b3c32393fbe8f0d7643ce",
+          "width": 512,
+          "height": 512,
+          "bytes": 52412,
+          "texelBytesWithMips": 1398101.3333333333
+        }
+      ],
+      "nodeNames": [
+        "grass-study-2m"
+      ],
+      "materialNames": [
+        "role-grass"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "surface-sand-10m",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -5.0,
+          0.0,
+          -5.0
+        ],
+        "max": [
+          5.0,
+          0.0,
+          5.0
+        ],
+        "size": [
+          10.0,
+          0.0,
+          10.0
+        ]
+      },
+      "triangles": 2,
+      "vertices": 4,
+      "primitives": 1,
+      "bytes": 2432,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 2432,
+      "images": [
+        {
+          "sha256": "676a17e361f8123018ca79f88ae9545eaecce6a8af639ddec6afcdd923a3989b",
+          "width": 512,
+          "height": 512,
+          "bytes": 113689,
+          "texelBytesWithMips": 1398101.3333333333
+        },
+        {
+          "sha256": "0608c5de401693cba16cc617de77ca4c5be2d85117c426a2752fa118a6fb21b0",
+          "width": 512,
+          "height": 512,
+          "bytes": 83783,
+          "texelBytesWithMips": 1398101.3333333333
+        },
+        {
+          "sha256": "f50ec60eb426f74b5dedf2d8f4406a16cc6234c1b1e998ca0efd6827fafd5aff",
+          "width": 512,
+          "height": 512,
+          "bytes": 77858,
+          "texelBytesWithMips": 1398101.3333333333
+        }
+      ],
+      "nodeNames": [
+        "sand-study-10m"
+      ],
+      "materialNames": [
+        "role-sand"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "surface-sand-2m",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -1.0,
+          0.0,
+          -1.0
+        ],
+        "max": [
+          1.0,
+          0.0,
+          1.0
+        ],
+        "size": [
+          2.0,
+          0.0,
+          2.0
+        ]
+      },
+      "triangles": 2,
+      "vertices": 4,
+      "primitives": 1,
+      "bytes": 2428,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 2428,
+      "images": [
+        {
+          "sha256": "676a17e361f8123018ca79f88ae9545eaecce6a8af639ddec6afcdd923a3989b",
+          "width": 512,
+          "height": 512,
+          "bytes": 113689,
+          "texelBytesWithMips": 1398101.3333333333
+        },
+        {
+          "sha256": "0608c5de401693cba16cc617de77ca4c5be2d85117c426a2752fa118a6fb21b0",
+          "width": 512,
+          "height": 512,
+          "bytes": 83783,
+          "texelBytesWithMips": 1398101.3333333333
+        },
+        {
+          "sha256": "f50ec60eb426f74b5dedf2d8f4406a16cc6234c1b1e998ca0efd6827fafd5aff",
+          "width": 512,
+          "height": 512,
+          "bytes": 77858,
+          "texelBytesWithMips": 1398101.3333333333
+        }
+      ],
+      "nodeNames": [
+        "sand-study-2m"
+      ],
+      "materialNames": [
+        "role-sand"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "surface-soil-10m",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -5.0,
+          0.0,
+          -5.0
+        ],
+        "max": [
+          5.0,
+          0.0,
+          5.0
+        ],
+        "size": [
+          10.0,
+          0.0,
+          10.0
+        ]
+      },
+      "triangles": 2,
+      "vertices": 4,
+      "primitives": 1,
+      "bytes": 2436,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 2436,
+      "images": [
+        {
+          "sha256": "a962cb174883009121d67edd4ede35196a38abe64eab0e9e45d9a46453aa0cd6",
+          "width": 512,
+          "height": 512,
+          "bytes": 475469,
+          "texelBytesWithMips": 1398101.3333333333
+        },
+        {
+          "sha256": "ff47ea60cd6fa7586e0df74178fe1fd7d4bab01f0eaf3a4d8cd0ebce77bc2c1f",
+          "width": 512,
+          "height": 512,
+          "bytes": 207860,
+          "texelBytesWithMips": 1398101.3333333333
+        },
+        {
+          "sha256": "b4d807a765c80a11fbe5adfaefc2aecf5bab61840a475469f3b9c4bd42132c37",
+          "width": 512,
+          "height": 512,
+          "bytes": 47536,
+          "texelBytesWithMips": 1398101.3333333333
+        }
+      ],
+      "nodeNames": [
+        "soil-study-10m"
+      ],
+      "materialNames": [
+        "role-soil"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "surface-soil-2m",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -1.0,
+          0.0,
+          -1.0
+        ],
+        "max": [
+          1.0,
+          0.0,
+          1.0
+        ],
+        "size": [
+          2.0,
+          0.0,
+          2.0
+        ]
+      },
+      "triangles": 2,
+      "vertices": 4,
+      "primitives": 1,
+      "bytes": 2432,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 2432,
+      "images": [
+        {
+          "sha256": "a962cb174883009121d67edd4ede35196a38abe64eab0e9e45d9a46453aa0cd6",
+          "width": 512,
+          "height": 512,
+          "bytes": 475469,
+          "texelBytesWithMips": 1398101.3333333333
+        },
+        {
+          "sha256": "ff47ea60cd6fa7586e0df74178fe1fd7d4bab01f0eaf3a4d8cd0ebce77bc2c1f",
+          "width": 512,
+          "height": 512,
+          "bytes": 207860,
+          "texelBytesWithMips": 1398101.3333333333
+        },
+        {
+          "sha256": "b4d807a765c80a11fbe5adfaefc2aecf5bab61840a475469f3b9c4bd42132c37",
+          "width": 512,
+          "height": 512,
+          "bytes": 47536,
+          "texelBytesWithMips": 1398101.3333333333
+        }
+      ],
+      "nodeNames": [
+        "soil-study-2m"
+      ],
+      "materialNames": [
+        "role-soil"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "surface-street-brick-10m",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -5.0,
+          0.0,
+          -5.0
+        ],
+        "max": [
+          5.0,
+          0.0,
+          5.0
+        ],
+        "size": [
+          10.0,
+          0.0,
+          10.0
+        ]
+      },
+      "triangles": 2,
+      "vertices": 4,
+      "primitives": 1,
+      "bytes": 2516,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 2516,
+      "images": [
+        {
+          "sha256": "d0d6289a7a8977771533afc1131fb65a88d51c8eb8491644296b1c654dcc8b5e",
+          "width": 240,
+          "height": 240,
+          "bytes": 26756,
+          "texelBytesWithMips": 307200.0
+        },
+        {
+          "sha256": "7e69abf9441b1bab7d7177d2cd91f830a97845e24dcfe133b4f661370c795661",
+          "width": 240,
+          "height": 240,
+          "bytes": 58900,
+          "texelBytesWithMips": 307200.0
+        },
+        {
+          "sha256": "fd144f4f51261606a5665341d0677b008e30c7c0df542f025c9df56a017bc7c2",
+          "width": 240,
+          "height": 240,
+          "bytes": 22259,
+          "texelBytesWithMips": 307200.0
+        }
+      ],
+      "nodeNames": [
+        "street-brick-study-10m"
+      ],
+      "materialNames": [
+        "role-street-brick"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "surface-street-brick-2m",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -1.0,
+          0.0,
+          -1.0
+        ],
+        "max": [
+          1.0,
+          0.0,
+          1.0
+        ],
+        "size": [
+          2.0,
+          0.0,
+          2.0
+        ]
+      },
+      "triangles": 2,
+      "vertices": 4,
+      "primitives": 1,
+      "bytes": 2512,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 2512,
+      "images": [
+        {
+          "sha256": "d0d6289a7a8977771533afc1131fb65a88d51c8eb8491644296b1c654dcc8b5e",
+          "width": 240,
+          "height": 240,
+          "bytes": 26756,
+          "texelBytesWithMips": 307200.0
+        },
+        {
+          "sha256": "7e69abf9441b1bab7d7177d2cd91f830a97845e24dcfe133b4f661370c795661",
+          "width": 240,
+          "height": 240,
+          "bytes": 58900,
+          "texelBytesWithMips": 307200.0
+        },
+        {
+          "sha256": "fd144f4f51261606a5665341d0677b008e30c7c0df542f025c9df56a017bc7c2",
+          "width": 240,
+          "height": 240,
+          "bytes": 22259,
+          "texelBytesWithMips": 307200.0
+        }
+      ],
+      "nodeNames": [
+        "street-brick-study-2m"
+      ],
+      "materialNames": [
+        "role-street-brick"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    }
+  ]
+}

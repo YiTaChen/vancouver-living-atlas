@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "packageId": "ground-planting-details",
+  "taskIds": [
+    "A02",
+    "C04",
+    "F03"
+  ],
+  "assetStatus": "offline_complete",
+  "integrationStatus": "runtime_pending_webgl",
+  "baseRevision": "752cd68b2664d7d87d1c89e31de2308b145ced3a",
+  "taskStatus": {
+    "A02": {
+      "status": "offline_complete",
+      "scope": "Missing true 2m/10m six-surface coupon studies, new editable 512 sand surface and four-light CPU evidence; supplements preserved city-scale-audit partial report"
+    },
+    "C04": {
+      "status": "offline_complete",
+      "scope": "Correct physical UV studies, reusable source-selected local curb/edge geometry and exclusion/contour/slope contracts; consumer unchanged"
+    },
+    "F03": {
+      "status": "offline_complete",
+      "scope": "Two small hollow planters and two low perennial variants, two LODs each; no population expansion"
+    }
+  },
+  "sourceEditsPreserved": true,
+  "deliverables": {
+    "editableCompressedBlendSources": 25,
+    "modelAssets": 18,
+    "runtimePropGLBs": 12,
+    "inspectionGLBs": 24,
+    "actualGLBReimports": 36,
+    "cyclesCPURenders": 32,
+    "negativeAndPositiveTests": 22,
+    "sharedInspectionPNGs": 20
+  },
+  "costs": {
+    "defaultPropPrivateMapBytes": 0,
+    "allInspectionUniqueTexelBytesWithMips": 18143914.666666664,
+    "allInspectionUniquePNGBytes": 3038450,
+    "sourceBlendBytes": 2184788,
+    "maximumLOD0Triangles": 254,
+    "maximumLOD1Triangles": 94,
+    "note": "Offline reused vegetation maps are fully counted when bound. The shared production city atlas is referenced by proven hashes; its inspected slot derivatives are QA-only."
+  },
+  "sourceSelection": {
+    "sourceId": "137668",
+    "protectedTerrainRoadNavigationUnchanged": true,
+    "plots": 500,
+    "beds": 977,
+    "plants": 1954,
+    "rejectedRigidContourReliefM": 0.05569640525199482,
+    "positiveRigidContourReliefM": 0.006759384160082149,
+    "positiveRigidFootprintReliefM": 0.0029044909569631017,
+    "newPopulation": 0
+  },
+  "offlineEvidence": [
+    "validation.json",
+    "common-validation.json",
+    "measurements.json",
+    "reimports.json",
+    "artist-edit-proof.json",
+    "sand-edit-proof.json",
+    "render-evidence.json",
+    "visual-review.json",
+    "tests.log",
+    "../placement-reference.json",
+    "../source-references.json",
+    "isolation.log"
+  ],
+  "runtimeChecks": {
+    "status": "not_run",
+    "reason": "No WebGL, city placement/navigation, GPU, device, continuous LOD or lifecycle validation; no publication or deployment."
+  },
+  "knownLimitations": [
+    "Source fixtures are existing representative gardens based on actual building footprints, not surveyed landscape data.",
+    "Positive planter footprint fit does not activate placement, relocate existing plants or approve a new collision volume; exact rendered-surface interior sampling remains required.",
+    "Coupons are flat local material studies and never navigation/terrain replacements.",
+    "Role-only runtime props require an explicit shared-material consumer binding; inspection variants are not automatically production-ready resource bundles.",
+    "City shader derivative/fade behavior is absent in Blender; original street-brick repeat/alias bands remain visible at 10m.",
+    "Night renders show unlit materials; runtime artificial lighting/readability is untested."
+  ],
+  "nextIntegrationSteps": [
+    "Inspect the two actual-source fixtures in placement-reference.json; preserve cohort/seed/plant slots.",
+    "Bind semantic material roles using existing engine-owned city atlas; count any optionally adopted offline ground maps.",
+    "Clip/drape local edge surface to current rendered triangles; reject roads, doors, neighbors and excessive relief.",
+    "Select one near-camera WebGL sample and compare four lighting conditions, grazing views and continuous LOD; verify collision/navigation unchanged.",
+    "Measure frame-time/GPU/memory/lifecycle before staging anything in public."
+  ],
+  "publicRuntimeLegacyEdits": false,
+  "commitCreated": false,
+  "productionIsolation": {
+    "status": "pass",
+    "protectedPayloadHashes": 110,
+    "distFilesChecked": 72,
+    "scope": "Existing dist/client exact payload/hash and package/GLB name scan only; no WebGL network observation or new production build claimed by this worker"
+  }
+}

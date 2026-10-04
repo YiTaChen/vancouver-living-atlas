@@ -1,0 +1,3933 @@
+{
+  "schemaVersion": 1,
+  "packageId": "ground-planting-details",
+  "version": "1.0.0",
+  "baseRevision": "752cd68b2664d7d87d1c89e31de2308b145ced3a",
+  "status": "offline_complete",
+  "integrationStatus": "runtime_pending_webgl",
+  "units": "metres",
+  "coordinateSystem": {
+    "authoring": "Blender Z-up",
+    "export": "glTF Y-up",
+    "mapping": "(x,y,z) -> (x,z,-y), once"
+  },
+  "provenance": {
+    "author": "Original additions based on Vancouver Living Atlas by YiTaChen",
+    "source": "https://github.com/YiTaChen/vancouver-living-atlas",
+    "license": "LicenseRef-Vancouver-Living-Atlas-NC-1.0",
+    "existingSources": [
+      "vegetation_ground maps and weight semantics",
+      "residential-perennial editable source and envelope",
+      "city-materials atlas and metre catalog"
+    ],
+    "surveyClaim": false
+  },
+  "reexportCommand": "blender -b -t 2 --python-exit-code 1 --python tools/assets/ground-planting-details/export.py -- --source tools/assets/ground-planting-details/source --output /tmp/ground-reexport",
+  "validationCommand": "python tools/assets/ground-planting-details/validate.py",
+  "assets": [
+    {
+      "id": "curb-straight-1m",
+      "taskId": "C04",
+      "variant": "local-reusable-detail",
+      "kind": "local-model",
+      "source": "source/curb-straight-1m.lod0.blend",
+      "sourceSha256": "ebced11db92525b618a35dc9b9ee4912afd674cc81926b79a88fa4b6e09e3ef1",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/curb-straight-1m.lod0.glb",
+          "sha256": "87e62d3ab2c1c9ab6a314bf1e3d5b0ab9f2eb9436caf675db3b9f631d0025bfd",
+          "source": "source/curb-straight-1m.lod0.blend",
+          "sourceSha256": "ebced11db92525b618a35dc9b9ee4912afd674cc81926b79a88fa4b6e09e3ef1",
+          "triangles": 20,
+          "vertices": 36,
+          "primitives": 1,
+          "bytes": 3756,
+          "boundsM": {
+            "min": [
+              -0.5,
+              0.0,
+              -0.09000000357627869
+            ],
+            "max": [
+              0.5,
+              0.15000000596046448,
+              0.09000000357627869
+            ],
+            "size": [
+              1.0,
+              0.15000000596046448,
+              0.18000000715255737
+            ]
+          },
+          "geometryBytes": 3756,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 1,
+          "file": "exports/curb-straight-1m.lod1.glb",
+          "sha256": "122dc2cb9fee517c23e1a2e5ee4ffc5049a34b98d87b32830900c7d81fa06b7c",
+          "source": "source/curb-straight-1m.lod1.blend",
+          "sourceSha256": "003684cea8cb21afc70a51541528af019a2b9dd58ed44f2e0f3c2c98751fe7e5",
+          "triangles": 12,
+          "vertices": 24,
+          "primitives": 1,
+          "bytes": 3128,
+          "boundsM": {
+            "min": [
+              -0.5,
+              0.0,
+              -0.09000000357627869
+            ],
+            "max": [
+              0.5,
+              0.15000000596046448,
+              0.09000000357627869
+            ],
+            "size": [
+              1.0,
+              0.15000000596046448,
+              0.18000000715255737
+            ]
+          },
+          "geometryBytes": 3128,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.5,
+          0.0,
+          -0.09000000357627869
+        ],
+        "max": [
+          0.5,
+          0.15000000596046448,
+          0.09000000357627869
+        ],
+        "size": [
+          1.0,
+          0.15000000596046448,
+          0.18000000715255737
+        ]
+      },
+      "expectedDimensionsM": [
+        1,
+        0.15,
+        0.18
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Representative design dimensions verified from exported GLB; not surveyed landscape measurements",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "attachmentDatum": {
+        "kind": "existing rendered ground surface",
+        "localY": 0,
+        "origin": "contact center; plane center for coupons; never a navigation elevation"
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "role-concrete",
+          "semanticRole": "concrete",
+          "sharedSurfaceId": "concrete",
+          "uvConvention": "UVMap normalized physical tile coordinates; multiply by tileMeters once to feed existing metre-UV city shader",
+          "tileMeters": [
+            1.5,
+            1.5
+          ],
+          "channels": {
+            "baseColor": "sRGB",
+            "normal": "Non-Color OpenGL +Y",
+            "orm": "linear R=1 neutral AO, G roughness, B metallic"
+          },
+          "runtimeBinding": "explicit semantic-role binding, no color guessing",
+          "inspectionBinding": "exports/textures deduplicated PNGs; inspection-only unless separately approved",
+          "inspectionMaps": {
+            "baseColor": {
+              "file": "exports/textures/9f51a3eccf7196241f07.png",
+              "sha256": "9f51a3eccf7196241f07df33cf28b8d7f65583c84103f8738d25ceceb7fe7192",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "sRGB"
+            },
+            "normal": {
+              "file": "exports/textures/80d9b75c08564460d2d3.png",
+              "sha256": "80d9b75c08564460d2d3f43e3e886ac203ef4f81a3c69497d677240b18abf3dd",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            },
+            "orm": {
+              "file": "exports/textures/0388a0c62cd21deb1e4b.png",
+              "sha256": "0388a0c62cd21deb1e4b603de00965e1578a38cc54e83b90cffbf30f98a5bc1e",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            }
+          },
+          "runtimeMapPolicy": "Existing engine-owned city atlas by named surface slot; do not load inspection derivative maps"
+        }
+      ],
+      "textureMode": "role-placeholders-shared-consumer-binding",
+      "textureCost": {
+        "geometryBytes": 6884,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 6884,
+        "uniqueTexelBytesWithMips": 0,
+        "allPackageInspectionCostReference": "qa/measurements.json",
+        "notes": "Prop default files bind zero new maps. Existing production city atlas is referenced separately; reused vegetation maps are not assumed resident."
+      },
+      "lodPolicy": {
+        "levels": [
+          0,
+          1
+        ],
+        "proposalDistancesM": [
+          0,
+          20,
+          55
+        ],
+        "switch": "one LOD active; cull beyond 55m proposal; runtime threshold/hysteresis pending",
+        "preserve": "root datum, role identity, plant height, rigid footprints",
+        "populationChange": 0
+      },
+      "clearance": {
+        "contract": "placement-reference.json",
+        "mustReject": [
+          "road or sidewalk triangle overlap",
+          "door gap/sweep overlap",
+          "contour/holes/neighbor overlap",
+          "nonfinite or unsampled heights"
+        ],
+        "rigidMaximumReliefM": 0.02,
+        "surfaceMaxReliefM": 0.5,
+        "newNavigation": false
+      },
+      "collision": {
+        "enabled": false,
+        "reason": "No new walk/collision surface; existing ground owns height. Planter proxy is metadata for later review."
+      },
+      "anchors": [],
+      "placementCompatibility": {
+        "referenceOnly": true,
+        "sourceReference": "placement-reference.json",
+        "sourceId": "137668",
+        "geographicPlacement": "unresolved runtime drape/clearance; coupons have no geographic placement",
+        "class": "existing source-selected planting contour; preserve 500-plot cap and two plant slots per bed",
+        "noNonUniformScaling": true,
+        "rigidPlanterSelectedBedResult": "reject: 0.0557 m contour relief exceeds 0.02 m rigid tolerance"
+      },
+      "intendedConsumer": [
+        "lib/city/residential-ground.ts",
+        "lib/city/residential-ground-plan.ts",
+        "lib/city/road-surfaces.ts",
+        "lib/city/material-library.ts",
+        "lib/city/beach-ground.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/reimports.json",
+          "qa/artist-edit-proof.json",
+          "qa/render-evidence.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "No WebGL terrain placement, navigation, GPU, frame time, device, lifecycle or deployment acceptance"
+      }
+    },
+    {
+      "id": "perennial-rosette",
+      "taskId": "F03/C04",
+      "variant": "local-reusable-detail",
+      "kind": "local-model",
+      "source": "source/perennial-rosette.lod0.blend",
+      "sourceSha256": "f1f80313e9f6bbbb7b9ed1531354567b39a41266722d2cb155903d1bd9fb4a1b",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/perennial-rosette.lod0.glb",
+          "sha256": "9f70ee0db01cbf55fcb4b52b1a30a5211993d12ec4c99d7e410b19cdab5e47ed",
+          "source": "source/perennial-rosette.lod0.blend",
+          "sourceSha256": "f1f80313e9f6bbbb7b9ed1531354567b39a41266722d2cb155903d1bd9fb4a1b",
+          "triangles": 48,
+          "vertices": 96,
+          "primitives": 1,
+          "bytes": 6868,
+          "boundsM": {
+            "min": [
+              -0.22483648359775543,
+              0.0,
+              -0.22483648359775543
+            ],
+            "max": [
+              0.22483648359775543,
+              0.30000001192092896,
+              0.22483648359775543
+            ],
+            "size": [
+              0.44967296719551086,
+              0.30000001192092896,
+              0.44967296719551086
+            ]
+          },
+          "geometryBytes": 6868,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 1,
+          "file": "exports/perennial-rosette.lod1.glb",
+          "sha256": "1ad6abaaa6c2e7a65a0864d1560cb87a6bf676140c948e01b0746580ca5d4f22",
+          "source": "source/perennial-rosette.lod1.blend",
+          "sourceSha256": "21d1418e507b184136b58733e79b60e69747da5a1e1c7096363ee4ccb2328481",
+          "triangles": 32,
+          "vertices": 64,
+          "primitives": 1,
+          "bytes": 5232,
+          "boundsM": {
+            "min": [
+              -0.22949999570846558,
+              0.0,
+              -0.2549999952316284
+            ],
+            "max": [
+              0.20399999618530273,
+              0.30000001192092896,
+              0.20399999618530273
+            ],
+            "size": [
+              0.4334999918937683,
+              0.30000001192092896,
+              0.45899999141693115
+            ]
+          },
+          "geometryBytes": 5232,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.22483648359775543,
+          0.0,
+          -0.22483648359775543
+        ],
+        "max": [
+          0.22483648359775543,
+          0.30000001192092896,
+          0.22483648359775543
+        ],
+        "size": [
+          0.44967296719551086,
+          0.30000001192092896,
+          0.44967296719551086
+        ]
+      },
+      "expectedDimensionsM": [
+        0.45,
+        0.3,
+        0.45
+      ],
+      "dimensionToleranceM": 0.04,
+      "dimensionBasis": "Representative design dimensions verified from exported GLB; not surveyed landscape measurements",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "attachmentDatum": {
+        "kind": "existing rendered ground surface",
+        "localY": 0,
+        "origin": "contact center; plane center for coupons; never a navigation elevation"
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "role-foliage",
+          "semanticRole": "foliage",
+          "sharedSurfaceId": "foliage",
+          "uvConvention": "UVMap normalized physical tile coordinates; multiply by tileMeters once to feed existing metre-UV city shader",
+          "tileMeters": [
+            1,
+            1
+          ],
+          "channels": {
+            "baseColor": "sRGB",
+            "normal": "Non-Color OpenGL +Y",
+            "orm": "linear R=1 neutral AO, G roughness, B metallic"
+          },
+          "runtimeBinding": "explicit semantic-role binding, no color guessing",
+          "inspectionBinding": "exports/textures deduplicated PNGs; inspection-only unless separately approved",
+          "inspectionMaps": {},
+          "runtimeMapPolicy": "Role-only props default to no maps; any optional candidate map binding must be explicitly selected and counted"
+        }
+      ],
+      "textureMode": "role-placeholders-shared-consumer-binding",
+      "textureCost": {
+        "geometryBytes": 12100,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 12100,
+        "uniqueTexelBytesWithMips": 0,
+        "allPackageInspectionCostReference": "qa/measurements.json",
+        "notes": "Prop default files bind zero new maps. Existing production city atlas is referenced separately; reused vegetation maps are not assumed resident."
+      },
+      "lodPolicy": {
+        "levels": [
+          0,
+          1
+        ],
+        "proposalDistancesM": [
+          0,
+          20,
+          55
+        ],
+        "switch": "one LOD active; cull beyond 55m proposal; runtime threshold/hysteresis pending",
+        "preserve": "root datum, role identity, plant height, rigid footprints",
+        "populationChange": 0
+      },
+      "clearance": {
+        "contract": "placement-reference.json",
+        "mustReject": [
+          "road or sidewalk triangle overlap",
+          "door gap/sweep overlap",
+          "contour/holes/neighbor overlap",
+          "nonfinite or unsampled heights"
+        ],
+        "rigidMaximumReliefM": 0.02,
+        "surfaceMaxReliefM": 0.5,
+        "newNavigation": false
+      },
+      "collision": {
+        "enabled": false,
+        "reason": "No new walk/collision surface; existing ground owns height. Planter proxy is metadata for later review."
+      },
+      "anchors": [],
+      "placementCompatibility": {
+        "referenceOnly": true,
+        "sourceReference": "placement-reference.json",
+        "sourceId": "137668",
+        "geographicPlacement": "unresolved runtime drape/clearance; coupons have no geographic placement",
+        "class": "existing source-selected planting contour; preserve 500-plot cap and two plant slots per bed",
+        "noNonUniformScaling": true,
+        "rigidPlanterSelectedBedResult": "reject: 0.0557 m contour relief exceeds 0.02 m rigid tolerance"
+      },
+      "intendedConsumer": [
+        "lib/city/residential-ground.ts",
+        "lib/city/residential-ground-plan.ts",
+        "lib/city/road-surfaces.ts",
+        "lib/city/material-library.ts",
+        "lib/city/beach-ground.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/reimports.json",
+          "qa/artist-edit-proof.json",
+          "qa/render-evidence.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "No WebGL terrain placement, navigation, GPU, frame time, device, lifecycle or deployment acceptance"
+      }
+    },
+    {
+      "id": "perennial-tuft",
+      "taskId": "F03/C04",
+      "variant": "local-reusable-detail",
+      "kind": "local-model",
+      "source": "source/perennial-tuft.lod0.blend",
+      "sourceSha256": "ab6390852e21f38cd653e08f560dc06b20a5db11e49ea0bc8b1496dc921fdddb",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/perennial-tuft.lod0.glb",
+          "sha256": "0dccd154931a409b420d20f56c57f85904381d70d2fe4493a662f85dbaf5831a",
+          "source": "source/perennial-tuft.lod0.blend",
+          "sourceSha256": "ab6390852e21f38cd653e08f560dc06b20a5db11e49ea0bc8b1496dc921fdddb",
+          "triangles": 20,
+          "vertices": 60,
+          "primitives": 1,
+          "bytes": 4956,
+          "boundsM": {
+            "min": [
+              -0.15216904878616333,
+              0.0,
+              -0.1294427216053009
+            ],
+            "max": [
+              0.15216904878616333,
+              0.44999998807907104,
+              0.1599999964237213
+            ],
+            "size": [
+              0.30433809757232666,
+              0.44999998807907104,
+              0.2894427180290222
+            ]
+          },
+          "geometryBytes": 4956,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 1,
+          "file": "exports/perennial-tuft.lod1.glb",
+          "sha256": "6dba849f8822d894cea99182e626596a33c68913f4a1046385ee992774c36445",
+          "source": "source/perennial-tuft.lod1.blend",
+          "sourceSha256": "e5d80c6db6bd122969b378267a337f7da9e16c34b2d33bf1d3e4d287c6faa3f6",
+          "triangles": 8,
+          "vertices": 24,
+          "primitives": 1,
+          "bytes": 3152,
+          "boundsM": {
+            "min": [
+              -0.15216904878616333,
+              0.0,
+              -0.1294427216053009
+            ],
+            "max": [
+              0.15216904878616333,
+              0.44999998807907104,
+              0.1599999964237213
+            ],
+            "size": [
+              0.30433809757232666,
+              0.44999998807907104,
+              0.2894427180290222
+            ]
+          },
+          "geometryBytes": 3152,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.15216904878616333,
+          0.0,
+          -0.1294427216053009
+        ],
+        "max": [
+          0.15216904878616333,
+          0.44999998807907104,
+          0.1599999964237213
+        ],
+        "size": [
+          0.30433809757232666,
+          0.44999998807907104,
+          0.2894427180290222
+        ]
+      },
+      "expectedDimensionsM": [
+        0.304,
+        0.45,
+        0.289
+      ],
+      "dimensionToleranceM": 0.04,
+      "dimensionBasis": "Representative design dimensions verified from exported GLB; not surveyed landscape measurements",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "attachmentDatum": {
+        "kind": "existing rendered ground surface",
+        "localY": 0,
+        "origin": "contact center; plane center for coupons; never a navigation elevation"
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "role-foliage",
+          "semanticRole": "foliage",
+          "sharedSurfaceId": "foliage",
+          "uvConvention": "UVMap normalized physical tile coordinates; multiply by tileMeters once to feed existing metre-UV city shader",
+          "tileMeters": [
+            1,
+            1
+          ],
+          "channels": {
+            "baseColor": "sRGB",
+            "normal": "Non-Color OpenGL +Y",
+            "orm": "linear R=1 neutral AO, G roughness, B metallic"
+          },
+          "runtimeBinding": "explicit semantic-role binding, no color guessing",
+          "inspectionBinding": "exports/textures deduplicated PNGs; inspection-only unless separately approved",
+          "inspectionMaps": {},
+          "runtimeMapPolicy": "Role-only props default to no maps; any optional candidate map binding must be explicitly selected and counted"
+        }
+      ],
+      "textureMode": "role-placeholders-shared-consumer-binding",
+      "textureCost": {
+        "geometryBytes": 8108,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 8108,
+        "uniqueTexelBytesWithMips": 0,
+        "allPackageInspectionCostReference": "qa/measurements.json",
+        "notes": "Prop default files bind zero new maps. Existing production city atlas is referenced separately; reused vegetation maps are not assumed resident."
+      },
+      "lodPolicy": {
+        "levels": [
+          0,
+          1
+        ],
+        "proposalDistancesM": [
+          0,
+          20,
+          55
+        ],
+        "switch": "one LOD active; cull beyond 55m proposal; runtime threshold/hysteresis pending",
+        "preserve": "root datum, role identity, plant height, rigid footprints",
+        "populationChange": 0
+      },
+      "clearance": {
+        "contract": "placement-reference.json",
+        "mustReject": [
+          "road or sidewalk triangle overlap",
+          "door gap/sweep overlap",
+          "contour/holes/neighbor overlap",
+          "nonfinite or unsampled heights"
+        ],
+        "rigidMaximumReliefM": 0.02,
+        "surfaceMaxReliefM": 0.5,
+        "newNavigation": false
+      },
+      "collision": {
+        "enabled": false,
+        "reason": "No new walk/collision surface; existing ground owns height. Planter proxy is metadata for later review."
+      },
+      "anchors": [],
+      "placementCompatibility": {
+        "referenceOnly": true,
+        "sourceReference": "placement-reference.json",
+        "sourceId": "137668",
+        "geographicPlacement": "unresolved runtime drape/clearance; coupons have no geographic placement",
+        "class": "existing source-selected planting contour; preserve 500-plot cap and two plant slots per bed",
+        "noNonUniformScaling": true,
+        "rigidPlanterSelectedBedResult": "reject: 0.0557 m contour relief exceeds 0.02 m rigid tolerance"
+      },
+      "intendedConsumer": [
+        "lib/city/residential-ground.ts",
+        "lib/city/residential-ground-plan.ts",
+        "lib/city/road-surfaces.ts",
+        "lib/city/material-library.ts",
+        "lib/city/beach-ground.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/reimports.json",
+          "qa/artist-edit-proof.json",
+          "qa/render-evidence.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "No WebGL terrain placement, navigation, GPU, frame time, device, lifecycle or deployment acceptance"
+      }
+    },
+    {
+      "id": "planter-round",
+      "taskId": "F03/C04",
+      "variant": "local-reusable-detail",
+      "kind": "local-model",
+      "source": "source/planter-round.lod0.blend",
+      "sourceSha256": "c37435b5f274a7528f897b809c1e701b71c16654c516c6431a0cbf4af1a931bb",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/planter-round.lod0.glb",
+          "sha256": "f1de699b1d4a7e2da441d2e3b12f31f051d290738af4518fe47167672f5df6da",
+          "source": "source/planter-round.lod0.blend",
+          "sourceSha256": "c37435b5f274a7528f897b809c1e701b71c16654c516c6431a0cbf4af1a931bb",
+          "triangles": 254,
+          "vertices": 385,
+          "primitives": 2,
+          "bytes": 23260,
+          "boundsM": {
+            "min": [
+              -0.32499998807907104,
+              0.0,
+              -0.32499998807907104
+            ],
+            "max": [
+              0.32499998807907104,
+              0.4000000059604645,
+              0.32499998807907104
+            ],
+            "size": [
+              0.6499999761581421,
+              0.4000000059604645,
+              0.6499999761581421
+            ]
+          },
+          "geometryBytes": 23260,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 1,
+          "file": "exports/planter-round.lod1.glb",
+          "sha256": "b312831ef1fb39e8100e33ef87a006fb9152f50c5a9d5694f8b1e25dcca7ad97",
+          "source": "source/planter-round.lod1.blend",
+          "sourceSha256": "36da0a78ac8085327797a91dbab7bf9f211a52816482f2317e2e77a8c7bdcf49",
+          "triangles": 94,
+          "vertices": 145,
+          "primitives": 2,
+          "bytes": 10772,
+          "boundsM": {
+            "min": [
+              -0.32499998807907104,
+              0.0,
+              -0.32499998807907104
+            ],
+            "max": [
+              0.32499998807907104,
+              0.4000000059604645,
+              0.32499998807907104
+            ],
+            "size": [
+              0.6499999761581421,
+              0.4000000059604645,
+              0.6499999761581421
+            ]
+          },
+          "geometryBytes": 10772,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.32499998807907104,
+          0.0,
+          -0.32499998807907104
+        ],
+        "max": [
+          0.32499998807907104,
+          0.4000000059604645,
+          0.32499998807907104
+        ],
+        "size": [
+          0.6499999761581421,
+          0.4000000059604645,
+          0.6499999761581421
+        ]
+      },
+      "expectedDimensionsM": [
+        0.65,
+        0.4,
+        0.65
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Representative design dimensions verified from exported GLB; not surveyed landscape measurements",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "attachmentDatum": {
+        "kind": "existing rendered ground surface",
+        "localY": 0,
+        "origin": "contact center; plane center for coupons; never a navigation elevation"
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "role-concrete",
+          "semanticRole": "concrete",
+          "sharedSurfaceId": "concrete",
+          "uvConvention": "UVMap normalized physical tile coordinates; multiply by tileMeters once to feed existing metre-UV city shader",
+          "tileMeters": [
+            1.5,
+            1.5
+          ],
+          "channels": {
+            "baseColor": "sRGB",
+            "normal": "Non-Color OpenGL +Y",
+            "orm": "linear R=1 neutral AO, G roughness, B metallic"
+          },
+          "runtimeBinding": "explicit semantic-role binding, no color guessing",
+          "inspectionBinding": "exports/textures deduplicated PNGs; inspection-only unless separately approved",
+          "inspectionMaps": {
+            "baseColor": {
+              "file": "exports/textures/9f51a3eccf7196241f07.png",
+              "sha256": "9f51a3eccf7196241f07df33cf28b8d7f65583c84103f8738d25ceceb7fe7192",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "sRGB"
+            },
+            "normal": {
+              "file": "exports/textures/80d9b75c08564460d2d3.png",
+              "sha256": "80d9b75c08564460d2d3f43e3e886ac203ef4f81a3c69497d677240b18abf3dd",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            },
+            "orm": {
+              "file": "exports/textures/0388a0c62cd21deb1e4b.png",
+              "sha256": "0388a0c62cd21deb1e4b603de00965e1578a38cc54e83b90cffbf30f98a5bc1e",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            }
+          },
+          "runtimeMapPolicy": "Existing engine-owned city atlas by named surface slot; do not load inspection derivative maps"
+        },
+        {
+          "material": "role-soil",
+          "semanticRole": "soil",
+          "sharedSurfaceId": "soil",
+          "uvConvention": "UVMap normalized physical tile coordinates; multiply by tileMeters once to feed existing metre-UV city shader",
+          "tileMeters": [
+            2,
+            2
+          ],
+          "channels": {
+            "baseColor": "sRGB",
+            "normal": "Non-Color OpenGL +Y",
+            "orm": "linear R=1 neutral AO, G roughness, B metallic"
+          },
+          "runtimeBinding": "explicit semantic-role binding, no color guessing",
+          "inspectionBinding": "exports/textures deduplicated PNGs; inspection-only unless separately approved",
+          "inspectionMaps": {
+            "baseColor": {
+              "file": "exports/textures/ff47ea60cd6fa7586e0d.png",
+              "sha256": "ff47ea60cd6fa7586e0df74178fe1fd7d4bab01f0eaf3a4d8cd0ebce77bc2c1f",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "sRGB"
+            },
+            "normal": {
+              "file": "exports/textures/a962cb174883009121d6.png",
+              "sha256": "a962cb174883009121d67edd4ede35196a38abe64eab0e9e45d9a46453aa0cd6",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            },
+            "orm": {
+              "file": "exports/textures/b4d807a765c80a11fbe5.png",
+              "sha256": "b4d807a765c80a11fbe5adfaefc2aecf5bab61840a475469f3b9c4bd42132c37",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            }
+          },
+          "runtimeMapPolicy": "Role-only props default to no maps; any optional candidate map binding must be explicitly selected and counted"
+        }
+      ],
+      "textureMode": "role-placeholders-shared-consumer-binding",
+      "textureCost": {
+        "geometryBytes": 34032,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 34032,
+        "uniqueTexelBytesWithMips": 0,
+        "allPackageInspectionCostReference": "qa/measurements.json",
+        "notes": "Prop default files bind zero new maps. Existing production city atlas is referenced separately; reused vegetation maps are not assumed resident."
+      },
+      "lodPolicy": {
+        "levels": [
+          0,
+          1
+        ],
+        "proposalDistancesM": [
+          0,
+          20,
+          55
+        ],
+        "switch": "one LOD active; cull beyond 55m proposal; runtime threshold/hysteresis pending",
+        "preserve": "root datum, role identity, plant height, rigid footprints",
+        "populationChange": 0
+      },
+      "clearance": {
+        "contract": "placement-reference.json",
+        "mustReject": [
+          "road or sidewalk triangle overlap",
+          "door gap/sweep overlap",
+          "contour/holes/neighbor overlap",
+          "nonfinite or unsampled heights"
+        ],
+        "rigidMaximumReliefM": 0.02,
+        "surfaceMaxReliefM": 0.5,
+        "newNavigation": false
+      },
+      "collision": {
+        "enabled": false,
+        "reason": "No new walk/collision surface; existing ground owns height. Planter proxy is metadata for later review.",
+        "futureProxy": {
+          "type": "aabb",
+          "min": [
+            -0.32499998807907104,
+            0.0,
+            -0.32499998807907104
+          ],
+          "max": [
+            0.32499998807907104,
+            0.4000000059604645,
+            0.32499998807907104
+          ],
+          "walkable": false,
+          "activation": "Only after footprint/door/road clearance and runtime collision approval"
+        }
+      },
+      "anchors": [],
+      "placementCompatibility": {
+        "referenceOnly": true,
+        "sourceReference": "placement-reference.json",
+        "sourceId": "137668",
+        "geographicPlacement": "unresolved runtime drape/clearance; coupons have no geographic placement",
+        "class": "existing source-selected planting contour; preserve 500-plot cap and two plant slots per bed",
+        "noNonUniformScaling": true,
+        "rigidPlanterSelectedBedResult": "reject: 0.0557 m contour relief exceeds 0.02 m rigid tolerance"
+      },
+      "intendedConsumer": [
+        "lib/city/residential-ground.ts",
+        "lib/city/residential-ground-plan.ts",
+        "lib/city/road-surfaces.ts",
+        "lib/city/material-library.ts",
+        "lib/city/beach-ground.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/reimports.json",
+          "qa/artist-edit-proof.json",
+          "qa/render-evidence.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "No WebGL terrain placement, navigation, GPU, frame time, device, lifecycle or deployment acceptance"
+      }
+    },
+    {
+      "id": "planter-trough",
+      "taskId": "F03/C04",
+      "variant": "local-reusable-detail",
+      "kind": "local-model",
+      "source": "source/planter-trough.lod0.blend",
+      "sourceSha256": "02a478a7a1dfb59d8f0deca8ce4d7e4c31fcc9917b2bdcd88a47db9f97ffbc86",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/planter-trough.lod0.glb",
+          "sha256": "d60d013ae1a01e9c822833f294bdbe8d2daab5437eb6aa802d64f7664c627771",
+          "source": "source/planter-trough.lod0.blend",
+          "sourceSha256": "02a478a7a1dfb59d8f0deca8ce4d7e4c31fcc9917b2bdcd88a47db9f97ffbc86",
+          "triangles": 38,
+          "vertices": 68,
+          "primitives": 2,
+          "bytes": 6704,
+          "boundsM": {
+            "min": [
+              -0.4000000059604645,
+              0.0,
+              -0.30000001192092896
+            ],
+            "max": [
+              0.4000000059604645,
+              0.5,
+              0.30000001192092896
+            ],
+            "size": [
+              0.800000011920929,
+              0.5,
+              0.6000000238418579
+            ]
+          },
+          "geometryBytes": 6704,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 1,
+          "file": "exports/planter-trough.lod1.glb",
+          "sha256": "741d51d33f29c463ef447ae3ad308fa9a7d53eacef0b356cc51cde33db975e6f",
+          "source": "source/planter-trough.lod1.blend",
+          "sourceSha256": "7e43b77083772803115f0c61b4379c426ce4e99acbc4c526c494d57bccc48e12",
+          "triangles": 30,
+          "vertices": 52,
+          "primitives": 2,
+          "bytes": 5884,
+          "boundsM": {
+            "min": [
+              -0.4000000059604645,
+              0.0,
+              -0.30000001192092896
+            ],
+            "max": [
+              0.4000000059604645,
+              0.5,
+              0.30000001192092896
+            ],
+            "size": [
+              0.800000011920929,
+              0.5,
+              0.6000000238418579
+            ]
+          },
+          "geometryBytes": 5884,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.4000000059604645,
+          0.0,
+          -0.30000001192092896
+        ],
+        "max": [
+          0.4000000059604645,
+          0.5,
+          0.30000001192092896
+        ],
+        "size": [
+          0.800000011920929,
+          0.5,
+          0.6000000238418579
+        ]
+      },
+      "expectedDimensionsM": [
+        0.8,
+        0.5,
+        0.6
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Representative design dimensions verified from exported GLB; not surveyed landscape measurements",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "attachmentDatum": {
+        "kind": "existing rendered ground surface",
+        "localY": 0,
+        "origin": "contact center; plane center for coupons; never a navigation elevation"
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "role-concrete",
+          "semanticRole": "concrete",
+          "sharedSurfaceId": "concrete",
+          "uvConvention": "UVMap normalized physical tile coordinates; multiply by tileMeters once to feed existing metre-UV city shader",
+          "tileMeters": [
+            1.5,
+            1.5
+          ],
+          "channels": {
+            "baseColor": "sRGB",
+            "normal": "Non-Color OpenGL +Y",
+            "orm": "linear R=1 neutral AO, G roughness, B metallic"
+          },
+          "runtimeBinding": "explicit semantic-role binding, no color guessing",
+          "inspectionBinding": "exports/textures deduplicated PNGs; inspection-only unless separately approved",
+          "inspectionMaps": {
+            "baseColor": {
+              "file": "exports/textures/9f51a3eccf7196241f07.png",
+              "sha256": "9f51a3eccf7196241f07df33cf28b8d7f65583c84103f8738d25ceceb7fe7192",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "sRGB"
+            },
+            "normal": {
+              "file": "exports/textures/80d9b75c08564460d2d3.png",
+              "sha256": "80d9b75c08564460d2d3f43e3e886ac203ef4f81a3c69497d677240b18abf3dd",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            },
+            "orm": {
+              "file": "exports/textures/0388a0c62cd21deb1e4b.png",
+              "sha256": "0388a0c62cd21deb1e4b603de00965e1578a38cc54e83b90cffbf30f98a5bc1e",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            }
+          },
+          "runtimeMapPolicy": "Existing engine-owned city atlas by named surface slot; do not load inspection derivative maps"
+        },
+        {
+          "material": "role-soil",
+          "semanticRole": "soil",
+          "sharedSurfaceId": "soil",
+          "uvConvention": "UVMap normalized physical tile coordinates; multiply by tileMeters once to feed existing metre-UV city shader",
+          "tileMeters": [
+            2,
+            2
+          ],
+          "channels": {
+            "baseColor": "sRGB",
+            "normal": "Non-Color OpenGL +Y",
+            "orm": "linear R=1 neutral AO, G roughness, B metallic"
+          },
+          "runtimeBinding": "explicit semantic-role binding, no color guessing",
+          "inspectionBinding": "exports/textures deduplicated PNGs; inspection-only unless separately approved",
+          "inspectionMaps": {
+            "baseColor": {
+              "file": "exports/textures/ff47ea60cd6fa7586e0d.png",
+              "sha256": "ff47ea60cd6fa7586e0df74178fe1fd7d4bab01f0eaf3a4d8cd0ebce77bc2c1f",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "sRGB"
+            },
+            "normal": {
+              "file": "exports/textures/a962cb174883009121d6.png",
+              "sha256": "a962cb174883009121d67edd4ede35196a38abe64eab0e9e45d9a46453aa0cd6",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            },
+            "orm": {
+              "file": "exports/textures/b4d807a765c80a11fbe5.png",
+              "sha256": "b4d807a765c80a11fbe5adfaefc2aecf5bab61840a475469f3b9c4bd42132c37",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            }
+          },
+          "runtimeMapPolicy": "Role-only props default to no maps; any optional candidate map binding must be explicitly selected and counted"
+        }
+      ],
+      "textureMode": "role-placeholders-shared-consumer-binding",
+      "textureCost": {
+        "geometryBytes": 12588,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 12588,
+        "uniqueTexelBytesWithMips": 0,
+        "allPackageInspectionCostReference": "qa/measurements.json",
+        "notes": "Prop default files bind zero new maps. Existing production city atlas is referenced separately; reused vegetation maps are not assumed resident."
+      },
+      "lodPolicy": {
+        "levels": [
+          0,
+          1
+        ],
+        "proposalDistancesM": [
+          0,
+          20,
+          55
+        ],
+        "switch": "one LOD active; cull beyond 55m proposal; runtime threshold/hysteresis pending",
+        "preserve": "root datum, role identity, plant height, rigid footprints",
+        "populationChange": 0
+      },
+      "clearance": {
+        "contract": "placement-reference.json",
+        "mustReject": [
+          "road or sidewalk triangle overlap",
+          "door gap/sweep overlap",
+          "contour/holes/neighbor overlap",
+          "nonfinite or unsampled heights"
+        ],
+        "rigidMaximumReliefM": 0.02,
+        "surfaceMaxReliefM": 0.5,
+        "newNavigation": false
+      },
+      "collision": {
+        "enabled": false,
+        "reason": "No new walk/collision surface; existing ground owns height. Planter proxy is metadata for later review.",
+        "futureProxy": {
+          "type": "aabb",
+          "min": [
+            -0.4000000059604645,
+            0.0,
+            -0.30000001192092896
+          ],
+          "max": [
+            0.4000000059604645,
+            0.5,
+            0.30000001192092896
+          ],
+          "walkable": false,
+          "activation": "Only after footprint/door/road clearance and runtime collision approval"
+        }
+      },
+      "anchors": [],
+      "placementCompatibility": {
+        "referenceOnly": true,
+        "sourceReference": "placement-reference.json",
+        "sourceId": "137668",
+        "geographicPlacement": "unresolved runtime drape/clearance; coupons have no geographic placement",
+        "class": "existing source-selected planting contour; preserve 500-plot cap and two plant slots per bed",
+        "noNonUniformScaling": true,
+        "rigidPlanterSelectedBedResult": "reject: 0.0557 m contour relief exceeds 0.02 m rigid tolerance"
+      },
+      "intendedConsumer": [
+        "lib/city/residential-ground.ts",
+        "lib/city/residential-ground-plan.ts",
+        "lib/city/road-surfaces.ts",
+        "lib/city/material-library.ts",
+        "lib/city/beach-ground.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/reimports.json",
+          "qa/artist-edit-proof.json",
+          "qa/render-evidence.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "No WebGL terrain placement, navigation, GPU, frame time, device, lifecycle or deployment acceptance"
+      }
+    },
+    {
+      "id": "soil-grass-edge-1m",
+      "taskId": "F03/C04",
+      "variant": "local-reusable-detail",
+      "kind": "local-model",
+      "source": "source/soil-grass-edge-1m.lod0.blend",
+      "sourceSha256": "8aa2a69d36600771ace0bbd3f8f277b12b81a6e908a8d5ad610545a7a9683d6d",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/soil-grass-edge-1m.lod0.glb",
+          "sha256": "b6d14ca04fe97503ab01c6a612cf9081ec129717dc830b230df682d9b5d08a78",
+          "source": "source/soil-grass-edge-1m.lod0.blend",
+          "sourceSha256": "8aa2a69d36600771ace0bbd3f8f277b12b81a6e908a8d5ad610545a7a9683d6d",
+          "triangles": 128,
+          "vertices": 81,
+          "primitives": 1,
+          "bytes": 7172,
+          "boundsM": {
+            "min": [
+              -0.20000000298023224,
+              0.0,
+              -0.5
+            ],
+            "max": [
+              0.20000000298023224,
+              0.0,
+              0.5
+            ],
+            "size": [
+              0.4000000059604645,
+              0.0,
+              1.0
+            ]
+          },
+          "geometryBytes": 7172,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 1,
+          "file": "exports/soil-grass-edge-1m.lod1.glb",
+          "sha256": "4f1028446bbc5fa994b029b09e9e3fdda4c4c305df692b972da225909409a5f0",
+          "source": "source/soil-grass-edge-1m.lod1.blend",
+          "sourceSha256": "2413a15b96bf864791a768146f95e1013c4da78fb3e87976d5c5288dcb4c6aaa",
+          "triangles": 8,
+          "vertices": 9,
+          "primitives": 1,
+          "bytes": 2692,
+          "boundsM": {
+            "min": [
+              -0.20000000298023224,
+              0.0,
+              -0.5
+            ],
+            "max": [
+              0.20000000298023224,
+              0.0,
+              0.5
+            ],
+            "size": [
+              0.4000000059604645,
+              0.0,
+              1.0
+            ]
+          },
+          "geometryBytes": 2692,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.20000000298023224,
+          0.0,
+          -0.5
+        ],
+        "max": [
+          0.20000000298023224,
+          0.0,
+          0.5
+        ],
+        "size": [
+          0.4000000059604645,
+          0.0,
+          1.0
+        ]
+      },
+      "expectedDimensionsM": [
+        0.4,
+        0,
+        1
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Representative design dimensions verified from exported GLB; not surveyed landscape measurements",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "attachmentDatum": {
+        "kind": "existing rendered ground surface",
+        "localY": 0,
+        "origin": "contact center; plane center for coupons; never a navigation elevation"
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "role-soil-grass-edge",
+          "semanticRole": "soil-grass-edge",
+          "sharedSurfaceId": "soil-grass-edge",
+          "uvConvention": "UVMap normalized physical tile coordinates; multiply by tileMeters once to feed existing metre-UV city shader",
+          "tileMeters": [
+            2,
+            2
+          ],
+          "channels": {
+            "baseColor": "sRGB",
+            "normal": "Non-Color OpenGL +Y",
+            "orm": "linear R=1 neutral AO, G roughness, B metallic"
+          },
+          "runtimeBinding": "explicit semantic-role binding, no color guessing",
+          "inspectionBinding": "exports/textures deduplicated PNGs; inspection-only unless separately approved",
+          "inspectionMaps": {
+            "baseColor": {
+              "file": "exports/textures/5c32552aed44c98857d7.png",
+              "sha256": "5c32552aed44c98857d762f2ae4f40dfa6bb6074037d02d9f6189a8146291087",
+              "wrapS": 33071,
+              "wrapT": 10497,
+              "colorSpace": "sRGB"
+            },
+            "normal": {
+              "file": "exports/textures/0d2a72a2bdd993986ca7.png",
+              "sha256": "0d2a72a2bdd993986ca7b2211d7f73c46af5fcf116616b05ce73ccba8c0fb85b",
+              "wrapS": 33071,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            },
+            "orm": {
+              "file": "exports/textures/b4d807a765c80a11fbe5.png",
+              "sha256": "b4d807a765c80a11fbe5adfaefc2aecf5bab61840a475469f3b9c4bd42132c37",
+              "wrapS": 33071,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            }
+          },
+          "runtimeMapPolicy": "Role-only props default to no maps; any optional candidate map binding must be explicitly selected and counted"
+        }
+      ],
+      "textureMode": "role-placeholders-shared-consumer-binding",
+      "textureCost": {
+        "geometryBytes": 9864,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 9864,
+        "uniqueTexelBytesWithMips": 0,
+        "allPackageInspectionCostReference": "qa/measurements.json",
+        "notes": "Prop default files bind zero new maps. Existing production city atlas is referenced separately; reused vegetation maps are not assumed resident."
+      },
+      "lodPolicy": {
+        "levels": [
+          0,
+          1
+        ],
+        "proposalDistancesM": [
+          0,
+          20,
+          55
+        ],
+        "switch": "one LOD active; cull beyond 55m proposal; runtime threshold/hysteresis pending",
+        "preserve": "root datum, role identity, plant height, rigid footprints",
+        "populationChange": 0
+      },
+      "clearance": {
+        "contract": "placement-reference.json",
+        "mustReject": [
+          "road or sidewalk triangle overlap",
+          "door gap/sweep overlap",
+          "contour/holes/neighbor overlap",
+          "nonfinite or unsampled heights"
+        ],
+        "rigidMaximumReliefM": 0.02,
+        "surfaceMaxReliefM": 0.5,
+        "newNavigation": false
+      },
+      "collision": {
+        "enabled": false,
+        "reason": "No new walk/collision surface; existing ground owns height. Planter proxy is metadata for later review."
+      },
+      "anchors": [],
+      "placementCompatibility": {
+        "referenceOnly": true,
+        "sourceReference": "placement-reference.json",
+        "sourceId": "137668",
+        "geographicPlacement": "unresolved runtime drape/clearance; coupons have no geographic placement",
+        "class": "existing source-selected planting contour; preserve 500-plot cap and two plant slots per bed",
+        "noNonUniformScaling": true,
+        "rigidPlanterSelectedBedResult": "reject: 0.0557 m contour relief exceeds 0.02 m rigid tolerance"
+      },
+      "intendedConsumer": [
+        "lib/city/residential-ground.ts",
+        "lib/city/residential-ground-plan.ts",
+        "lib/city/road-surfaces.ts",
+        "lib/city/material-library.ts",
+        "lib/city/beach-ground.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/reimports.json",
+          "qa/artist-edit-proof.json",
+          "qa/render-evidence.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "No WebGL terrain placement, navigation, GPU, frame time, device, lifecycle or deployment acceptance"
+      }
+    },
+    {
+      "id": "surface-asphalt-10m",
+      "taskId": "A02/C04",
+      "variant": "representative-offline-study",
+      "kind": "surface-study",
+      "source": "source/surface-asphalt-10m.lod0.blend",
+      "sourceSha256": "25f4af5f042c2d6b75e4875c6765f24dd5879e4eebcd468144eee34ba92246f6",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/surface-asphalt-10m.lod0.inspection.glb",
+          "sha256": "f31bb0fc04d90710d4b3cc46aea4cd4122e8d6187903c63b2ff9055dbd66cc28",
+          "source": "source/surface-asphalt-10m.lod0.blend",
+          "sourceSha256": "25f4af5f042c2d6b75e4875c6765f24dd5879e4eebcd468144eee34ba92246f6",
+          "triangles": 2,
+          "vertices": 4,
+          "primitives": 1,
+          "bytes": 2460,
+          "boundsM": {
+            "min": [
+              -5.0,
+              0.0,
+              -5.0
+            ],
+            "max": [
+              5.0,
+              0.0,
+              5.0
+            ],
+            "size": [
+              10.0,
+              0.0,
+              10.0
+            ]
+          },
+          "geometryBytes": 2460,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -5.0,
+          0.0,
+          -5.0
+        ],
+        "max": [
+          5.0,
+          0.0,
+          5.0
+        ],
+        "size": [
+          10.0,
+          0.0,
+          10.0
+        ]
+      },
+      "expectedDimensionsM": [
+        10,
+        0,
+        10
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Representative design dimensions verified from exported GLB; not surveyed landscape measurements",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "attachmentDatum": {
+        "kind": "existing rendered ground surface",
+        "localY": 0,
+        "origin": "contact center; plane center for coupons; never a navigation elevation"
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "role-asphalt",
+          "semanticRole": "asphalt",
+          "sharedSurfaceId": "asphalt",
+          "uvConvention": "UVMap normalized physical tile coordinates; multiply by tileMeters once to feed existing metre-UV city shader",
+          "tileMeters": [
+            3,
+            3
+          ],
+          "channels": {
+            "baseColor": "sRGB",
+            "normal": "Non-Color OpenGL +Y",
+            "orm": "linear R=1 neutral AO, G roughness, B metallic"
+          },
+          "runtimeBinding": "explicit semantic-role binding, no color guessing",
+          "inspectionBinding": "exports/textures deduplicated PNGs; inspection-only unless separately approved",
+          "inspectionMaps": {
+            "baseColor": {
+              "file": "exports/textures/d1d20428b115ad1f2d95.png",
+              "sha256": "d1d20428b115ad1f2d95e194e2b005bbcc65f55c31400d479d27a451b8fd838b",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "sRGB"
+            },
+            "normal": {
+              "file": "exports/textures/272d02f372c58ffa1256.png",
+              "sha256": "272d02f372c58ffa12561e12ddb5b6d1d067c2d2a797511a9b8989a4e9d11291",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            },
+            "orm": {
+              "file": "exports/textures/14f69cd2a64eb57580b2.png",
+              "sha256": "14f69cd2a64eb57580b2218116394da9d7a2193a1346f09bba08f4aa7df6528d",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            }
+          },
+          "runtimeMapPolicy": "Existing engine-owned city atlas by named surface slot; do not load inspection derivative maps"
+        }
+      ],
+      "textureMode": "external-shared-inspection",
+      "textureCost": {
+        "geometryBytes": 2460,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 2460,
+        "uniqueTexelBytesWithMips": 921600.0,
+        "allPackageInspectionCostReference": "qa/measurements.json",
+        "notes": "Prop default files bind zero new maps. Existing production city atlas is referenced separately; reused vegetation maps are not assumed resident."
+      },
+      "lodPolicy": {
+        "levels": [
+          0
+        ],
+        "proposalDistancesM": [],
+        "switch": "QA coupon has no runtime LOD",
+        "preserve": "root datum, role identity, plant height, rigid footprints",
+        "populationChange": 0
+      },
+      "clearance": {
+        "contract": "placement-reference.json",
+        "mustReject": [
+          "road or sidewalk triangle overlap",
+          "door gap/sweep overlap",
+          "contour/holes/neighbor overlap",
+          "nonfinite or unsampled heights"
+        ],
+        "rigidMaximumReliefM": 0.02,
+        "surfaceMaxReliefM": 0.5,
+        "newNavigation": false
+      },
+      "collision": {
+        "enabled": false,
+        "reason": "No new walk/collision surface; existing ground owns height. Planter proxy is metadata for later review."
+      },
+      "anchors": [],
+      "placementCompatibility": {
+        "referenceOnly": true,
+        "sourceReference": "placement-reference.json",
+        "sourceId": "137668",
+        "geographicPlacement": "unresolved runtime drape/clearance; coupons have no geographic placement",
+        "class": "existing source-selected planting contour; preserve 500-plot cap and two plant slots per bed",
+        "noNonUniformScaling": true,
+        "rigidPlanterSelectedBedResult": "reject: 0.0557 m contour relief exceeds 0.02 m rigid tolerance"
+      },
+      "intendedConsumer": [
+        "lib/city/residential-ground.ts",
+        "lib/city/residential-ground-plan.ts",
+        "lib/city/road-surfaces.ts",
+        "lib/city/material-library.ts",
+        "lib/city/beach-ground.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/reimports.json",
+          "qa/artist-edit-proof.json",
+          "qa/render-evidence.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "No WebGL terrain placement, navigation, GPU, frame time, device, lifecycle or deployment acceptance"
+      }
+    },
+    {
+      "id": "surface-asphalt-2m",
+      "taskId": "A02/C04",
+      "variant": "representative-offline-study",
+      "kind": "surface-study",
+      "source": "source/surface-asphalt-2m.lod0.blend",
+      "sourceSha256": "e58c305139666a6c8a6f2ecadd65a4c249b0d1fa5589644efcbada6277f8a200",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/surface-asphalt-2m.lod0.inspection.glb",
+          "sha256": "d6972dd81da1dcb82d2669911f805a8e9b216331c5119c469200018fe83d89bb",
+          "source": "source/surface-asphalt-2m.lod0.blend",
+          "sourceSha256": "e58c305139666a6c8a6f2ecadd65a4c249b0d1fa5589644efcbada6277f8a200",
+          "triangles": 2,
+          "vertices": 4,
+          "primitives": 1,
+          "bytes": 2456,
+          "boundsM": {
+            "min": [
+              -1.0,
+              0.0,
+              -1.0
+            ],
+            "max": [
+              1.0,
+              0.0,
+              1.0
+            ],
+            "size": [
+              2.0,
+              0.0,
+              2.0
+            ]
+          },
+          "geometryBytes": 2456,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -1.0,
+          0.0,
+          -1.0
+        ],
+        "max": [
+          1.0,
+          0.0,
+          1.0
+        ],
+        "size": [
+          2.0,
+          0.0,
+          2.0
+        ]
+      },
+      "expectedDimensionsM": [
+        2,
+        0,
+        2
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Representative design dimensions verified from exported GLB; not surveyed landscape measurements",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "attachmentDatum": {
+        "kind": "existing rendered ground surface",
+        "localY": 0,
+        "origin": "contact center; plane center for coupons; never a navigation elevation"
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "role-asphalt",
+          "semanticRole": "asphalt",
+          "sharedSurfaceId": "asphalt",
+          "uvConvention": "UVMap normalized physical tile coordinates; multiply by tileMeters once to feed existing metre-UV city shader",
+          "tileMeters": [
+            3,
+            3
+          ],
+          "channels": {
+            "baseColor": "sRGB",
+            "normal": "Non-Color OpenGL +Y",
+            "orm": "linear R=1 neutral AO, G roughness, B metallic"
+          },
+          "runtimeBinding": "explicit semantic-role binding, no color guessing",
+          "inspectionBinding": "exports/textures deduplicated PNGs; inspection-only unless separately approved",
+          "inspectionMaps": {
+            "baseColor": {
+              "file": "exports/textures/d1d20428b115ad1f2d95.png",
+              "sha256": "d1d20428b115ad1f2d95e194e2b005bbcc65f55c31400d479d27a451b8fd838b",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "sRGB"
+            },
+            "normal": {
+              "file": "exports/textures/272d02f372c58ffa1256.png",
+              "sha256": "272d02f372c58ffa12561e12ddb5b6d1d067c2d2a797511a9b8989a4e9d11291",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            },
+            "orm": {
+              "file": "exports/textures/14f69cd2a64eb57580b2.png",
+              "sha256": "14f69cd2a64eb57580b2218116394da9d7a2193a1346f09bba08f4aa7df6528d",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            }
+          },
+          "runtimeMapPolicy": "Existing engine-owned city atlas by named surface slot; do not load inspection derivative maps"
+        }
+      ],
+      "textureMode": "external-shared-inspection",
+      "textureCost": {
+        "geometryBytes": 2456,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 2456,
+        "uniqueTexelBytesWithMips": 921600.0,
+        "allPackageInspectionCostReference": "qa/measurements.json",
+        "notes": "Prop default files bind zero new maps. Existing production city atlas is referenced separately; reused vegetation maps are not assumed resident."
+      },
+      "lodPolicy": {
+        "levels": [
+          0
+        ],
+        "proposalDistancesM": [],
+        "switch": "QA coupon has no runtime LOD",
+        "preserve": "root datum, role identity, plant height, rigid footprints",
+        "populationChange": 0
+      },
+      "clearance": {
+        "contract": "placement-reference.json",
+        "mustReject": [
+          "road or sidewalk triangle overlap",
+          "door gap/sweep overlap",
+          "contour/holes/neighbor overlap",
+          "nonfinite or unsampled heights"
+        ],
+        "rigidMaximumReliefM": 0.02,
+        "surfaceMaxReliefM": 0.5,
+        "newNavigation": false
+      },
+      "collision": {
+        "enabled": false,
+        "reason": "No new walk/collision surface; existing ground owns height. Planter proxy is metadata for later review."
+      },
+      "anchors": [],
+      "placementCompatibility": {
+        "referenceOnly": true,
+        "sourceReference": "placement-reference.json",
+        "sourceId": "137668",
+        "geographicPlacement": "unresolved runtime drape/clearance; coupons have no geographic placement",
+        "class": "existing source-selected planting contour; preserve 500-plot cap and two plant slots per bed",
+        "noNonUniformScaling": true,
+        "rigidPlanterSelectedBedResult": "reject: 0.0557 m contour relief exceeds 0.02 m rigid tolerance"
+      },
+      "intendedConsumer": [
+        "lib/city/residential-ground.ts",
+        "lib/city/residential-ground-plan.ts",
+        "lib/city/road-surfaces.ts",
+        "lib/city/material-library.ts",
+        "lib/city/beach-ground.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/reimports.json",
+          "qa/artist-edit-proof.json",
+          "qa/render-evidence.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "No WebGL terrain placement, navigation, GPU, frame time, device, lifecycle or deployment acceptance"
+      }
+    },
+    {
+      "id": "surface-concrete-10m",
+      "taskId": "A02/C04",
+      "variant": "representative-offline-study",
+      "kind": "surface-study",
+      "source": "source/surface-concrete-10m.lod0.blend",
+      "sourceSha256": "2f9e3a0fccdebd08efefcf8d484fafd4caec9d4825b5e5e6ef08914f084b5550",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/surface-concrete-10m.lod0.inspection.glb",
+          "sha256": "3df21f17f27a3e3ee1e16f83f9df027d886d5df42b3bb674d7210417eac6307d",
+          "source": "source/surface-concrete-10m.lod0.blend",
+          "sourceSha256": "2f9e3a0fccdebd08efefcf8d484fafd4caec9d4825b5e5e6ef08914f084b5550",
+          "triangles": 2,
+          "vertices": 4,
+          "primitives": 1,
+          "bytes": 2476,
+          "boundsM": {
+            "min": [
+              -5.0,
+              0.0,
+              -5.0
+            ],
+            "max": [
+              5.0,
+              0.0,
+              5.0
+            ],
+            "size": [
+              10.0,
+              0.0,
+              10.0
+            ]
+          },
+          "geometryBytes": 2476,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -5.0,
+          0.0,
+          -5.0
+        ],
+        "max": [
+          5.0,
+          0.0,
+          5.0
+        ],
+        "size": [
+          10.0,
+          0.0,
+          10.0
+        ]
+      },
+      "expectedDimensionsM": [
+        10,
+        0,
+        10
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Representative design dimensions verified from exported GLB; not surveyed landscape measurements",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "attachmentDatum": {
+        "kind": "existing rendered ground surface",
+        "localY": 0,
+        "origin": "contact center; plane center for coupons; never a navigation elevation"
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "role-concrete",
+          "semanticRole": "concrete",
+          "sharedSurfaceId": "concrete",
+          "uvConvention": "UVMap normalized physical tile coordinates; multiply by tileMeters once to feed existing metre-UV city shader",
+          "tileMeters": [
+            1.5,
+            1.5
+          ],
+          "channels": {
+            "baseColor": "sRGB",
+            "normal": "Non-Color OpenGL +Y",
+            "orm": "linear R=1 neutral AO, G roughness, B metallic"
+          },
+          "runtimeBinding": "explicit semantic-role binding, no color guessing",
+          "inspectionBinding": "exports/textures deduplicated PNGs; inspection-only unless separately approved",
+          "inspectionMaps": {
+            "baseColor": {
+              "file": "exports/textures/9f51a3eccf7196241f07.png",
+              "sha256": "9f51a3eccf7196241f07df33cf28b8d7f65583c84103f8738d25ceceb7fe7192",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "sRGB"
+            },
+            "normal": {
+              "file": "exports/textures/80d9b75c08564460d2d3.png",
+              "sha256": "80d9b75c08564460d2d3f43e3e886ac203ef4f81a3c69497d677240b18abf3dd",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            },
+            "orm": {
+              "file": "exports/textures/0388a0c62cd21deb1e4b.png",
+              "sha256": "0388a0c62cd21deb1e4b603de00965e1578a38cc54e83b90cffbf30f98a5bc1e",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            }
+          },
+          "runtimeMapPolicy": "Existing engine-owned city atlas by named surface slot; do not load inspection derivative maps"
+        }
+      ],
+      "textureMode": "external-shared-inspection",
+      "textureCost": {
+        "geometryBytes": 2476,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 2476,
+        "uniqueTexelBytesWithMips": 921600.0,
+        "allPackageInspectionCostReference": "qa/measurements.json",
+        "notes": "Prop default files bind zero new maps. Existing production city atlas is referenced separately; reused vegetation maps are not assumed resident."
+      },
+      "lodPolicy": {
+        "levels": [
+          0
+        ],
+        "proposalDistancesM": [],
+        "switch": "QA coupon has no runtime LOD",
+        "preserve": "root datum, role identity, plant height, rigid footprints",
+        "populationChange": 0
+      },
+      "clearance": {
+        "contract": "placement-reference.json",
+        "mustReject": [
+          "road or sidewalk triangle overlap",
+          "door gap/sweep overlap",
+          "contour/holes/neighbor overlap",
+          "nonfinite or unsampled heights"
+        ],
+        "rigidMaximumReliefM": 0.02,
+        "surfaceMaxReliefM": 0.5,
+        "newNavigation": false
+      },
+      "collision": {
+        "enabled": false,
+        "reason": "No new walk/collision surface; existing ground owns height. Planter proxy is metadata for later review."
+      },
+      "anchors": [],
+      "placementCompatibility": {
+        "referenceOnly": true,
+        "sourceReference": "placement-reference.json",
+        "sourceId": "137668",
+        "geographicPlacement": "unresolved runtime drape/clearance; coupons have no geographic placement",
+        "class": "existing source-selected planting contour; preserve 500-plot cap and two plant slots per bed",
+        "noNonUniformScaling": true,
+        "rigidPlanterSelectedBedResult": "reject: 0.0557 m contour relief exceeds 0.02 m rigid tolerance"
+      },
+      "intendedConsumer": [
+        "lib/city/residential-ground.ts",
+        "lib/city/residential-ground-plan.ts",
+        "lib/city/road-surfaces.ts",
+        "lib/city/material-library.ts",
+        "lib/city/beach-ground.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/reimports.json",
+          "qa/artist-edit-proof.json",
+          "qa/render-evidence.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "No WebGL terrain placement, navigation, GPU, frame time, device, lifecycle or deployment acceptance"
+      }
+    },
+    {
+      "id": "surface-concrete-2m",
+      "taskId": "A02/C04",
+      "variant": "representative-offline-study",
+      "kind": "surface-study",
+      "source": "source/surface-concrete-2m.lod0.blend",
+      "sourceSha256": "3aba8898991fab6429a306f17c545d326a279d2541c91d2e991a948055204c0d",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/surface-concrete-2m.lod0.inspection.glb",
+          "sha256": "de2b2b09b2b7a346b478edbdb8eb828839d4edecc2bc77c3d69a42cbbdfaa402",
+          "source": "source/surface-concrete-2m.lod0.blend",
+          "sourceSha256": "3aba8898991fab6429a306f17c545d326a279d2541c91d2e991a948055204c0d",
+          "triangles": 2,
+          "vertices": 4,
+          "primitives": 1,
+          "bytes": 2472,
+          "boundsM": {
+            "min": [
+              -1.0,
+              0.0,
+              -1.0
+            ],
+            "max": [
+              1.0,
+              0.0,
+              1.0
+            ],
+            "size": [
+              2.0,
+              0.0,
+              2.0
+            ]
+          },
+          "geometryBytes": 2472,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -1.0,
+          0.0,
+          -1.0
+        ],
+        "max": [
+          1.0,
+          0.0,
+          1.0
+        ],
+        "size": [
+          2.0,
+          0.0,
+          2.0
+        ]
+      },
+      "expectedDimensionsM": [
+        2,
+        0,
+        2
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Representative design dimensions verified from exported GLB; not surveyed landscape measurements",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "attachmentDatum": {
+        "kind": "existing rendered ground surface",
+        "localY": 0,
+        "origin": "contact center; plane center for coupons; never a navigation elevation"
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "role-concrete",
+          "semanticRole": "concrete",
+          "sharedSurfaceId": "concrete",
+          "uvConvention": "UVMap normalized physical tile coordinates; multiply by tileMeters once to feed existing metre-UV city shader",
+          "tileMeters": [
+            1.5,
+            1.5
+          ],
+          "channels": {
+            "baseColor": "sRGB",
+            "normal": "Non-Color OpenGL +Y",
+            "orm": "linear R=1 neutral AO, G roughness, B metallic"
+          },
+          "runtimeBinding": "explicit semantic-role binding, no color guessing",
+          "inspectionBinding": "exports/textures deduplicated PNGs; inspection-only unless separately approved",
+          "inspectionMaps": {
+            "baseColor": {
+              "file": "exports/textures/9f51a3eccf7196241f07.png",
+              "sha256": "9f51a3eccf7196241f07df33cf28b8d7f65583c84103f8738d25ceceb7fe7192",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "sRGB"
+            },
+            "normal": {
+              "file": "exports/textures/80d9b75c08564460d2d3.png",
+              "sha256": "80d9b75c08564460d2d3f43e3e886ac203ef4f81a3c69497d677240b18abf3dd",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            },
+            "orm": {
+              "file": "exports/textures/0388a0c62cd21deb1e4b.png",
+              "sha256": "0388a0c62cd21deb1e4b603de00965e1578a38cc54e83b90cffbf30f98a5bc1e",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            }
+          },
+          "runtimeMapPolicy": "Existing engine-owned city atlas by named surface slot; do not load inspection derivative maps"
+        }
+      ],
+      "textureMode": "external-shared-inspection",
+      "textureCost": {
+        "geometryBytes": 2472,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 2472,
+        "uniqueTexelBytesWithMips": 921600.0,
+        "allPackageInspectionCostReference": "qa/measurements.json",
+        "notes": "Prop default files bind zero new maps. Existing production city atlas is referenced separately; reused vegetation maps are not assumed resident."
+      },
+      "lodPolicy": {
+        "levels": [
+          0
+        ],
+        "proposalDistancesM": [],
+        "switch": "QA coupon has no runtime LOD",
+        "preserve": "root datum, role identity, plant height, rigid footprints",
+        "populationChange": 0
+      },
+      "clearance": {
+        "contract": "placement-reference.json",
+        "mustReject": [
+          "road or sidewalk triangle overlap",
+          "door gap/sweep overlap",
+          "contour/holes/neighbor overlap",
+          "nonfinite or unsampled heights"
+        ],
+        "rigidMaximumReliefM": 0.02,
+        "surfaceMaxReliefM": 0.5,
+        "newNavigation": false
+      },
+      "collision": {
+        "enabled": false,
+        "reason": "No new walk/collision surface; existing ground owns height. Planter proxy is metadata for later review."
+      },
+      "anchors": [],
+      "placementCompatibility": {
+        "referenceOnly": true,
+        "sourceReference": "placement-reference.json",
+        "sourceId": "137668",
+        "geographicPlacement": "unresolved runtime drape/clearance; coupons have no geographic placement",
+        "class": "existing source-selected planting contour; preserve 500-plot cap and two plant slots per bed",
+        "noNonUniformScaling": true,
+        "rigidPlanterSelectedBedResult": "reject: 0.0557 m contour relief exceeds 0.02 m rigid tolerance"
+      },
+      "intendedConsumer": [
+        "lib/city/residential-ground.ts",
+        "lib/city/residential-ground-plan.ts",
+        "lib/city/road-surfaces.ts",
+        "lib/city/material-library.ts",
+        "lib/city/beach-ground.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/reimports.json",
+          "qa/artist-edit-proof.json",
+          "qa/render-evidence.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "No WebGL terrain placement, navigation, GPU, frame time, device, lifecycle or deployment acceptance"
+      }
+    },
+    {
+      "id": "surface-grass-10m",
+      "taskId": "A02/C04",
+      "variant": "representative-offline-study",
+      "kind": "surface-study",
+      "source": "source/surface-grass-10m.lod0.blend",
+      "sourceSha256": "c00d1843b84f7cef3ae8a74fb12154ec7a4661d8a8f15b02f956fea60b6555e4",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/surface-grass-10m.lod0.inspection.glb",
+          "sha256": "b6d652213da165afda7d1fabb4ac1c2282a58fb73c8e3d3a5e768831b9bf9d6a",
+          "source": "source/surface-grass-10m.lod0.blend",
+          "sourceSha256": "c00d1843b84f7cef3ae8a74fb12154ec7a4661d8a8f15b02f956fea60b6555e4",
+          "triangles": 2,
+          "vertices": 4,
+          "primitives": 1,
+          "bytes": 2444,
+          "boundsM": {
+            "min": [
+              -5.0,
+              0.0,
+              -5.0
+            ],
+            "max": [
+              5.0,
+              0.0,
+              5.0
+            ],
+            "size": [
+              10.0,
+              0.0,
+              10.0
+            ]
+          },
+          "geometryBytes": 2444,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -5.0,
+          0.0,
+          -5.0
+        ],
+        "max": [
+          5.0,
+          0.0,
+          5.0
+        ],
+        "size": [
+          10.0,
+          0.0,
+          10.0
+        ]
+      },
+      "expectedDimensionsM": [
+        10,
+        0,
+        10
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Representative design dimensions verified from exported GLB; not surveyed landscape measurements",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "attachmentDatum": {
+        "kind": "existing rendered ground surface",
+        "localY": 0,
+        "origin": "contact center; plane center for coupons; never a navigation elevation"
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "role-grass",
+          "semanticRole": "grass",
+          "sharedSurfaceId": "grass",
+          "uvConvention": "UVMap normalized physical tile coordinates; multiply by tileMeters once to feed existing metre-UV city shader",
+          "tileMeters": [
+            2,
+            2
+          ],
+          "channels": {
+            "baseColor": "sRGB",
+            "normal": "Non-Color OpenGL +Y",
+            "orm": "linear R=1 neutral AO, G roughness, B metallic"
+          },
+          "runtimeBinding": "explicit semantic-role binding, no color guessing",
+          "inspectionBinding": "exports/textures deduplicated PNGs; inspection-only unless separately approved",
+          "inspectionMaps": {
+            "baseColor": {
+              "file": "exports/textures/678d283e62d543ba04e3.png",
+              "sha256": "678d283e62d543ba04e3dec2ec4847c47fdd878bc91ead9c82a2b694dea58a5f",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "sRGB"
+            },
+            "normal": {
+              "file": "exports/textures/74cb6b02204c37026f6b.png",
+              "sha256": "74cb6b02204c37026f6beebdc99001929bd331d5edc884feeef3c2ba830b90ac",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            },
+            "orm": {
+              "file": "exports/textures/18fd14b3329257af888a.png",
+              "sha256": "18fd14b3329257af888ab8d6ca1f038d4d7643aee47b3c32393fbe8f0d7643ce",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            }
+          },
+          "runtimeMapPolicy": "Role-only props default to no maps; any optional candidate map binding must be explicitly selected and counted"
+        }
+      ],
+      "textureMode": "external-shared-inspection",
+      "textureCost": {
+        "geometryBytes": 2444,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 2444,
+        "uniqueTexelBytesWithMips": 4194304.0,
+        "allPackageInspectionCostReference": "qa/measurements.json",
+        "notes": "Prop default files bind zero new maps. Existing production city atlas is referenced separately; reused vegetation maps are not assumed resident."
+      },
+      "lodPolicy": {
+        "levels": [
+          0
+        ],
+        "proposalDistancesM": [],
+        "switch": "QA coupon has no runtime LOD",
+        "preserve": "root datum, role identity, plant height, rigid footprints",
+        "populationChange": 0
+      },
+      "clearance": {
+        "contract": "placement-reference.json",
+        "mustReject": [
+          "road or sidewalk triangle overlap",
+          "door gap/sweep overlap",
+          "contour/holes/neighbor overlap",
+          "nonfinite or unsampled heights"
+        ],
+        "rigidMaximumReliefM": 0.02,
+        "surfaceMaxReliefM": 0.5,
+        "newNavigation": false
+      },
+      "collision": {
+        "enabled": false,
+        "reason": "No new walk/collision surface; existing ground owns height. Planter proxy is metadata for later review."
+      },
+      "anchors": [],
+      "placementCompatibility": {
+        "referenceOnly": true,
+        "sourceReference": "placement-reference.json",
+        "sourceId": "137668",
+        "geographicPlacement": "unresolved runtime drape/clearance; coupons have no geographic placement",
+        "class": "existing source-selected planting contour; preserve 500-plot cap and two plant slots per bed",
+        "noNonUniformScaling": true,
+        "rigidPlanterSelectedBedResult": "reject: 0.0557 m contour relief exceeds 0.02 m rigid tolerance"
+      },
+      "intendedConsumer": [
+        "lib/city/residential-ground.ts",
+        "lib/city/residential-ground-plan.ts",
+        "lib/city/road-surfaces.ts",
+        "lib/city/material-library.ts",
+        "lib/city/beach-ground.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/reimports.json",
+          "qa/artist-edit-proof.json",
+          "qa/render-evidence.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "No WebGL terrain placement, navigation, GPU, frame time, device, lifecycle or deployment acceptance"
+      }
+    },
+    {
+      "id": "surface-grass-2m",
+      "taskId": "A02/C04",
+      "variant": "representative-offline-study",
+      "kind": "surface-study",
+      "source": "source/surface-grass-2m.lod0.blend",
+      "sourceSha256": "a6179e5bfc63280b51fed6db8715762eab49216597601a4bae84f8917403a1e1",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/surface-grass-2m.lod0.inspection.glb",
+          "sha256": "9913b1441bee1355e3a2f0121c833087ff51108cd822bb3f91ace1f1e70904d3",
+          "source": "source/surface-grass-2m.lod0.blend",
+          "sourceSha256": "a6179e5bfc63280b51fed6db8715762eab49216597601a4bae84f8917403a1e1",
+          "triangles": 2,
+          "vertices": 4,
+          "primitives": 1,
+          "bytes": 2440,
+          "boundsM": {
+            "min": [
+              -1.0,
+              0.0,
+              -1.0
+            ],
+            "max": [
+              1.0,
+              0.0,
+              1.0
+            ],
+            "size": [
+              2.0,
+              0.0,
+              2.0
+            ]
+          },
+          "geometryBytes": 2440,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -1.0,
+          0.0,
+          -1.0
+        ],
+        "max": [
+          1.0,
+          0.0,
+          1.0
+        ],
+        "size": [
+          2.0,
+          0.0,
+          2.0
+        ]
+      },
+      "expectedDimensionsM": [
+        2,
+        0,
+        2
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Representative design dimensions verified from exported GLB; not surveyed landscape measurements",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "attachmentDatum": {
+        "kind": "existing rendered ground surface",
+        "localY": 0,
+        "origin": "contact center; plane center for coupons; never a navigation elevation"
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "role-grass",
+          "semanticRole": "grass",
+          "sharedSurfaceId": "grass",
+          "uvConvention": "UVMap normalized physical tile coordinates; multiply by tileMeters once to feed existing metre-UV city shader",
+          "tileMeters": [
+            2,
+            2
+          ],
+          "channels": {
+            "baseColor": "sRGB",
+            "normal": "Non-Color OpenGL +Y",
+            "orm": "linear R=1 neutral AO, G roughness, B metallic"
+          },
+          "runtimeBinding": "explicit semantic-role binding, no color guessing",
+          "inspectionBinding": "exports/textures deduplicated PNGs; inspection-only unless separately approved",
+          "inspectionMaps": {
+            "baseColor": {
+              "file": "exports/textures/678d283e62d543ba04e3.png",
+              "sha256": "678d283e62d543ba04e3dec2ec4847c47fdd878bc91ead9c82a2b694dea58a5f",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "sRGB"
+            },
+            "normal": {
+              "file": "exports/textures/74cb6b02204c37026f6b.png",
+              "sha256": "74cb6b02204c37026f6beebdc99001929bd331d5edc884feeef3c2ba830b90ac",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            },
+            "orm": {
+              "file": "exports/textures/18fd14b3329257af888a.png",
+              "sha256": "18fd14b3329257af888ab8d6ca1f038d4d7643aee47b3c32393fbe8f0d7643ce",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            }
+          },
+          "runtimeMapPolicy": "Role-only props default to no maps; any optional candidate map binding must be explicitly selected and counted"
+        }
+      ],
+      "textureMode": "external-shared-inspection",
+      "textureCost": {
+        "geometryBytes": 2440,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 2440,
+        "uniqueTexelBytesWithMips": 4194304.0,
+        "allPackageInspectionCostReference": "qa/measurements.json",
+        "notes": "Prop default files bind zero new maps. Existing production city atlas is referenced separately; reused vegetation maps are not assumed resident."
+      },
+      "lodPolicy": {
+        "levels": [
+          0
+        ],
+        "proposalDistancesM": [],
+        "switch": "QA coupon has no runtime LOD",
+        "preserve": "root datum, role identity, plant height, rigid footprints",
+        "populationChange": 0
+      },
+      "clearance": {
+        "contract": "placement-reference.json",
+        "mustReject": [
+          "road or sidewalk triangle overlap",
+          "door gap/sweep overlap",
+          "contour/holes/neighbor overlap",
+          "nonfinite or unsampled heights"
+        ],
+        "rigidMaximumReliefM": 0.02,
+        "surfaceMaxReliefM": 0.5,
+        "newNavigation": false
+      },
+      "collision": {
+        "enabled": false,
+        "reason": "No new walk/collision surface; existing ground owns height. Planter proxy is metadata for later review."
+      },
+      "anchors": [],
+      "placementCompatibility": {
+        "referenceOnly": true,
+        "sourceReference": "placement-reference.json",
+        "sourceId": "137668",
+        "geographicPlacement": "unresolved runtime drape/clearance; coupons have no geographic placement",
+        "class": "existing source-selected planting contour; preserve 500-plot cap and two plant slots per bed",
+        "noNonUniformScaling": true,
+        "rigidPlanterSelectedBedResult": "reject: 0.0557 m contour relief exceeds 0.02 m rigid tolerance"
+      },
+      "intendedConsumer": [
+        "lib/city/residential-ground.ts",
+        "lib/city/residential-ground-plan.ts",
+        "lib/city/road-surfaces.ts",
+        "lib/city/material-library.ts",
+        "lib/city/beach-ground.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/reimports.json",
+          "qa/artist-edit-proof.json",
+          "qa/render-evidence.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "No WebGL terrain placement, navigation, GPU, frame time, device, lifecycle or deployment acceptance"
+      }
+    },
+    {
+      "id": "surface-sand-10m",
+      "taskId": "A02/C04",
+      "variant": "representative-offline-study",
+      "kind": "surface-study",
+      "source": "source/surface-sand-10m.lod0.blend",
+      "sourceSha256": "f9f79fc4a501555eb6081e9980248fa788b1b2db3a27f29978a8793f5d2f4a50",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/surface-sand-10m.lod0.inspection.glb",
+          "sha256": "a0f30e4f438b82ab745f7d6376c9125958d94b671c9efc0c60c53e935e3e7284",
+          "source": "source/surface-sand-10m.lod0.blend",
+          "sourceSha256": "f9f79fc4a501555eb6081e9980248fa788b1b2db3a27f29978a8793f5d2f4a50",
+          "triangles": 2,
+          "vertices": 4,
+          "primitives": 1,
+          "bytes": 2432,
+          "boundsM": {
+            "min": [
+              -5.0,
+              0.0,
+              -5.0
+            ],
+            "max": [
+              5.0,
+              0.0,
+              5.0
+            ],
+            "size": [
+              10.0,
+              0.0,
+              10.0
+            ]
+          },
+          "geometryBytes": 2432,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -5.0,
+          0.0,
+          -5.0
+        ],
+        "max": [
+          5.0,
+          0.0,
+          5.0
+        ],
+        "size": [
+          10.0,
+          0.0,
+          10.0
+        ]
+      },
+      "expectedDimensionsM": [
+        10,
+        0,
+        10
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Representative design dimensions verified from exported GLB; not surveyed landscape measurements",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "attachmentDatum": {
+        "kind": "existing rendered ground surface",
+        "localY": 0,
+        "origin": "contact center; plane center for coupons; never a navigation elevation"
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "role-sand",
+          "semanticRole": "sand",
+          "sharedSurfaceId": "sand",
+          "uvConvention": "UVMap normalized physical tile coordinates; multiply by tileMeters once to feed existing metre-UV city shader",
+          "tileMeters": [
+            2,
+            2
+          ],
+          "channels": {
+            "baseColor": "sRGB",
+            "normal": "Non-Color OpenGL +Y",
+            "orm": "linear R=1 neutral AO, G roughness, B metallic"
+          },
+          "runtimeBinding": "explicit semantic-role binding, no color guessing",
+          "inspectionBinding": "exports/textures deduplicated PNGs; inspection-only unless separately approved",
+          "inspectionMaps": {
+            "baseColor": {
+              "file": "exports/textures/0608c5de401693cba16c.png",
+              "sha256": "0608c5de401693cba16cc617de77ca4c5be2d85117c426a2752fa118a6fb21b0",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "sRGB"
+            },
+            "normal": {
+              "file": "exports/textures/676a17e361f8123018ca.png",
+              "sha256": "676a17e361f8123018ca79f88ae9545eaecce6a8af639ddec6afcdd923a3989b",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            },
+            "orm": {
+              "file": "exports/textures/f50ec60eb426f74b5ded.png",
+              "sha256": "f50ec60eb426f74b5dedf2d8f4406a16cc6234c1b1e998ca0efd6827fafd5aff",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            }
+          },
+          "runtimeMapPolicy": "Role-only props default to no maps; any optional candidate map binding must be explicitly selected and counted"
+        }
+      ],
+      "textureMode": "external-shared-inspection",
+      "textureCost": {
+        "geometryBytes": 2432,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 2432,
+        "uniqueTexelBytesWithMips": 4194304.0,
+        "allPackageInspectionCostReference": "qa/measurements.json",
+        "notes": "Prop default files bind zero new maps. Existing production city atlas is referenced separately; reused vegetation maps are not assumed resident."
+      },
+      "lodPolicy": {
+        "levels": [
+          0
+        ],
+        "proposalDistancesM": [],
+        "switch": "QA coupon has no runtime LOD",
+        "preserve": "root datum, role identity, plant height, rigid footprints",
+        "populationChange": 0
+      },
+      "clearance": {
+        "contract": "placement-reference.json",
+        "mustReject": [
+          "road or sidewalk triangle overlap",
+          "door gap/sweep overlap",
+          "contour/holes/neighbor overlap",
+          "nonfinite or unsampled heights"
+        ],
+        "rigidMaximumReliefM": 0.02,
+        "surfaceMaxReliefM": 0.5,
+        "newNavigation": false
+      },
+      "collision": {
+        "enabled": false,
+        "reason": "No new walk/collision surface; existing ground owns height. Planter proxy is metadata for later review."
+      },
+      "anchors": [],
+      "placementCompatibility": {
+        "referenceOnly": true,
+        "sourceReference": "placement-reference.json",
+        "sourceId": "137668",
+        "geographicPlacement": "unresolved runtime drape/clearance; coupons have no geographic placement",
+        "class": "existing source-selected planting contour; preserve 500-plot cap and two plant slots per bed",
+        "noNonUniformScaling": true,
+        "rigidPlanterSelectedBedResult": "reject: 0.0557 m contour relief exceeds 0.02 m rigid tolerance"
+      },
+      "intendedConsumer": [
+        "lib/city/residential-ground.ts",
+        "lib/city/residential-ground-plan.ts",
+        "lib/city/road-surfaces.ts",
+        "lib/city/material-library.ts",
+        "lib/city/beach-ground.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/reimports.json",
+          "qa/artist-edit-proof.json",
+          "qa/render-evidence.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "No WebGL terrain placement, navigation, GPU, frame time, device, lifecycle or deployment acceptance"
+      }
+    },
+    {
+      "id": "surface-sand-2m",
+      "taskId": "A02/C04",
+      "variant": "representative-offline-study",
+      "kind": "surface-study",
+      "source": "source/surface-sand-2m.lod0.blend",
+      "sourceSha256": "9b6948c6f9d7ec80c1f4a3b054ae450e8dbe3c6eba901d4778cc2d1f715a4684",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/surface-sand-2m.lod0.inspection.glb",
+          "sha256": "86c5690a01c81f7723aa2835a4758e65dc9f063fdc49a8242a841efde0b90645",
+          "source": "source/surface-sand-2m.lod0.blend",
+          "sourceSha256": "9b6948c6f9d7ec80c1f4a3b054ae450e8dbe3c6eba901d4778cc2d1f715a4684",
+          "triangles": 2,
+          "vertices": 4,
+          "primitives": 1,
+          "bytes": 2428,
+          "boundsM": {
+            "min": [
+              -1.0,
+              0.0,
+              -1.0
+            ],
+            "max": [
+              1.0,
+              0.0,
+              1.0
+            ],
+            "size": [
+              2.0,
+              0.0,
+              2.0
+            ]
+          },
+          "geometryBytes": 2428,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -1.0,
+          0.0,
+          -1.0
+        ],
+        "max": [
+          1.0,
+          0.0,
+          1.0
+        ],
+        "size": [
+          2.0,
+          0.0,
+          2.0
+        ]
+      },
+      "expectedDimensionsM": [
+        2,
+        0,
+        2
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Representative design dimensions verified from exported GLB; not surveyed landscape measurements",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "attachmentDatum": {
+        "kind": "existing rendered ground surface",
+        "localY": 0,
+        "origin": "contact center; plane center for coupons; never a navigation elevation"
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "role-sand",
+          "semanticRole": "sand",
+          "sharedSurfaceId": "sand",
+          "uvConvention": "UVMap normalized physical tile coordinates; multiply by tileMeters once to feed existing metre-UV city shader",
+          "tileMeters": [
+            2,
+            2
+          ],
+          "channels": {
+            "baseColor": "sRGB",
+            "normal": "Non-Color OpenGL +Y",
+            "orm": "linear R=1 neutral AO, G roughness, B metallic"
+          },
+          "runtimeBinding": "explicit semantic-role binding, no color guessing",
+          "inspectionBinding": "exports/textures deduplicated PNGs; inspection-only unless separately approved",
+          "inspectionMaps": {
+            "baseColor": {
+              "file": "exports/textures/0608c5de401693cba16c.png",
+              "sha256": "0608c5de401693cba16cc617de77ca4c5be2d85117c426a2752fa118a6fb21b0",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "sRGB"
+            },
+            "normal": {
+              "file": "exports/textures/676a17e361f8123018ca.png",
+              "sha256": "676a17e361f8123018ca79f88ae9545eaecce6a8af639ddec6afcdd923a3989b",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            },
+            "orm": {
+              "file": "exports/textures/f50ec60eb426f74b5ded.png",
+              "sha256": "f50ec60eb426f74b5dedf2d8f4406a16cc6234c1b1e998ca0efd6827fafd5aff",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            }
+          },
+          "runtimeMapPolicy": "Role-only props default to no maps; any optional candidate map binding must be explicitly selected and counted"
+        }
+      ],
+      "textureMode": "external-shared-inspection",
+      "textureCost": {
+        "geometryBytes": 2428,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 2428,
+        "uniqueTexelBytesWithMips": 4194304.0,
+        "allPackageInspectionCostReference": "qa/measurements.json",
+        "notes": "Prop default files bind zero new maps. Existing production city atlas is referenced separately; reused vegetation maps are not assumed resident."
+      },
+      "lodPolicy": {
+        "levels": [
+          0
+        ],
+        "proposalDistancesM": [],
+        "switch": "QA coupon has no runtime LOD",
+        "preserve": "root datum, role identity, plant height, rigid footprints",
+        "populationChange": 0
+      },
+      "clearance": {
+        "contract": "placement-reference.json",
+        "mustReject": [
+          "road or sidewalk triangle overlap",
+          "door gap/sweep overlap",
+          "contour/holes/neighbor overlap",
+          "nonfinite or unsampled heights"
+        ],
+        "rigidMaximumReliefM": 0.02,
+        "surfaceMaxReliefM": 0.5,
+        "newNavigation": false
+      },
+      "collision": {
+        "enabled": false,
+        "reason": "No new walk/collision surface; existing ground owns height. Planter proxy is metadata for later review."
+      },
+      "anchors": [],
+      "placementCompatibility": {
+        "referenceOnly": true,
+        "sourceReference": "placement-reference.json",
+        "sourceId": "137668",
+        "geographicPlacement": "unresolved runtime drape/clearance; coupons have no geographic placement",
+        "class": "existing source-selected planting contour; preserve 500-plot cap and two plant slots per bed",
+        "noNonUniformScaling": true,
+        "rigidPlanterSelectedBedResult": "reject: 0.0557 m contour relief exceeds 0.02 m rigid tolerance"
+      },
+      "intendedConsumer": [
+        "lib/city/residential-ground.ts",
+        "lib/city/residential-ground-plan.ts",
+        "lib/city/road-surfaces.ts",
+        "lib/city/material-library.ts",
+        "lib/city/beach-ground.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/reimports.json",
+          "qa/artist-edit-proof.json",
+          "qa/render-evidence.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "No WebGL terrain placement, navigation, GPU, frame time, device, lifecycle or deployment acceptance"
+      }
+    },
+    {
+      "id": "surface-soil-10m",
+      "taskId": "A02/C04",
+      "variant": "representative-offline-study",
+      "kind": "surface-study",
+      "source": "source/surface-soil-10m.lod0.blend",
+      "sourceSha256": "a4e788d8cb5cf842a558b8bb3512de0beba910318bf3e8ec74c02e6b4736d734",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/surface-soil-10m.lod0.inspection.glb",
+          "sha256": "0ad83a45b6a645c6d437f6663a0045bcc8a0c3aab5f27a19dbdf8354b70614aa",
+          "source": "source/surface-soil-10m.lod0.blend",
+          "sourceSha256": "a4e788d8cb5cf842a558b8bb3512de0beba910318bf3e8ec74c02e6b4736d734",
+          "triangles": 2,
+          "vertices": 4,
+          "primitives": 1,
+          "bytes": 2436,
+          "boundsM": {
+            "min": [
+              -5.0,
+              0.0,
+              -5.0
+            ],
+            "max": [
+              5.0,
+              0.0,
+              5.0
+            ],
+            "size": [
+              10.0,
+              0.0,
+              10.0
+            ]
+          },
+          "geometryBytes": 2436,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -5.0,
+          0.0,
+          -5.0
+        ],
+        "max": [
+          5.0,
+          0.0,
+          5.0
+        ],
+        "size": [
+          10.0,
+          0.0,
+          10.0
+        ]
+      },
+      "expectedDimensionsM": [
+        10,
+        0,
+        10
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Representative design dimensions verified from exported GLB; not surveyed landscape measurements",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "attachmentDatum": {
+        "kind": "existing rendered ground surface",
+        "localY": 0,
+        "origin": "contact center; plane center for coupons; never a navigation elevation"
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "role-soil",
+          "semanticRole": "soil",
+          "sharedSurfaceId": "soil",
+          "uvConvention": "UVMap normalized physical tile coordinates; multiply by tileMeters once to feed existing metre-UV city shader",
+          "tileMeters": [
+            2,
+            2
+          ],
+          "channels": {
+            "baseColor": "sRGB",
+            "normal": "Non-Color OpenGL +Y",
+            "orm": "linear R=1 neutral AO, G roughness, B metallic"
+          },
+          "runtimeBinding": "explicit semantic-role binding, no color guessing",
+          "inspectionBinding": "exports/textures deduplicated PNGs; inspection-only unless separately approved",
+          "inspectionMaps": {
+            "baseColor": {
+              "file": "exports/textures/ff47ea60cd6fa7586e0d.png",
+              "sha256": "ff47ea60cd6fa7586e0df74178fe1fd7d4bab01f0eaf3a4d8cd0ebce77bc2c1f",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "sRGB"
+            },
+            "normal": {
+              "file": "exports/textures/a962cb174883009121d6.png",
+              "sha256": "a962cb174883009121d67edd4ede35196a38abe64eab0e9e45d9a46453aa0cd6",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            },
+            "orm": {
+              "file": "exports/textures/b4d807a765c80a11fbe5.png",
+              "sha256": "b4d807a765c80a11fbe5adfaefc2aecf5bab61840a475469f3b9c4bd42132c37",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            }
+          },
+          "runtimeMapPolicy": "Role-only props default to no maps; any optional candidate map binding must be explicitly selected and counted"
+        }
+      ],
+      "textureMode": "external-shared-inspection",
+      "textureCost": {
+        "geometryBytes": 2436,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 2436,
+        "uniqueTexelBytesWithMips": 4194304.0,
+        "allPackageInspectionCostReference": "qa/measurements.json",
+        "notes": "Prop default files bind zero new maps. Existing production city atlas is referenced separately; reused vegetation maps are not assumed resident."
+      },
+      "lodPolicy": {
+        "levels": [
+          0
+        ],
+        "proposalDistancesM": [],
+        "switch": "QA coupon has no runtime LOD",
+        "preserve": "root datum, role identity, plant height, rigid footprints",
+        "populationChange": 0
+      },
+      "clearance": {
+        "contract": "placement-reference.json",
+        "mustReject": [
+          "road or sidewalk triangle overlap",
+          "door gap/sweep overlap",
+          "contour/holes/neighbor overlap",
+          "nonfinite or unsampled heights"
+        ],
+        "rigidMaximumReliefM": 0.02,
+        "surfaceMaxReliefM": 0.5,
+        "newNavigation": false
+      },
+      "collision": {
+        "enabled": false,
+        "reason": "No new walk/collision surface; existing ground owns height. Planter proxy is metadata for later review."
+      },
+      "anchors": [],
+      "placementCompatibility": {
+        "referenceOnly": true,
+        "sourceReference": "placement-reference.json",
+        "sourceId": "137668",
+        "geographicPlacement": "unresolved runtime drape/clearance; coupons have no geographic placement",
+        "class": "existing source-selected planting contour; preserve 500-plot cap and two plant slots per bed",
+        "noNonUniformScaling": true,
+        "rigidPlanterSelectedBedResult": "reject: 0.0557 m contour relief exceeds 0.02 m rigid tolerance"
+      },
+      "intendedConsumer": [
+        "lib/city/residential-ground.ts",
+        "lib/city/residential-ground-plan.ts",
+        "lib/city/road-surfaces.ts",
+        "lib/city/material-library.ts",
+        "lib/city/beach-ground.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/reimports.json",
+          "qa/artist-edit-proof.json",
+          "qa/render-evidence.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "No WebGL terrain placement, navigation, GPU, frame time, device, lifecycle or deployment acceptance"
+      }
+    },
+    {
+      "id": "surface-soil-2m",
+      "taskId": "A02/C04",
+      "variant": "representative-offline-study",
+      "kind": "surface-study",
+      "source": "source/surface-soil-2m.lod0.blend",
+      "sourceSha256": "e2f5dba2ec7abed189fef155d8dee104945924d801c47a703f4c726b5e0e2275",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/surface-soil-2m.lod0.inspection.glb",
+          "sha256": "2c10b9dcfb44aaa2c47c3034a66066772b5287584b0f71b73b826eecf997c98f",
+          "source": "source/surface-soil-2m.lod0.blend",
+          "sourceSha256": "e2f5dba2ec7abed189fef155d8dee104945924d801c47a703f4c726b5e0e2275",
+          "triangles": 2,
+          "vertices": 4,
+          "primitives": 1,
+          "bytes": 2432,
+          "boundsM": {
+            "min": [
+              -1.0,
+              0.0,
+              -1.0
+            ],
+            "max": [
+              1.0,
+              0.0,
+              1.0
+            ],
+            "size": [
+              2.0,
+              0.0,
+              2.0
+            ]
+          },
+          "geometryBytes": 2432,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -1.0,
+          0.0,
+          -1.0
+        ],
+        "max": [
+          1.0,
+          0.0,
+          1.0
+        ],
+        "size": [
+          2.0,
+          0.0,
+          2.0
+        ]
+      },
+      "expectedDimensionsM": [
+        2,
+        0,
+        2
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Representative design dimensions verified from exported GLB; not surveyed landscape measurements",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "attachmentDatum": {
+        "kind": "existing rendered ground surface",
+        "localY": 0,
+        "origin": "contact center; plane center for coupons; never a navigation elevation"
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "role-soil",
+          "semanticRole": "soil",
+          "sharedSurfaceId": "soil",
+          "uvConvention": "UVMap normalized physical tile coordinates; multiply by tileMeters once to feed existing metre-UV city shader",
+          "tileMeters": [
+            2,
+            2
+          ],
+          "channels": {
+            "baseColor": "sRGB",
+            "normal": "Non-Color OpenGL +Y",
+            "orm": "linear R=1 neutral AO, G roughness, B metallic"
+          },
+          "runtimeBinding": "explicit semantic-role binding, no color guessing",
+          "inspectionBinding": "exports/textures deduplicated PNGs; inspection-only unless separately approved",
+          "inspectionMaps": {
+            "baseColor": {
+              "file": "exports/textures/ff47ea60cd6fa7586e0d.png",
+              "sha256": "ff47ea60cd6fa7586e0df74178fe1fd7d4bab01f0eaf3a4d8cd0ebce77bc2c1f",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "sRGB"
+            },
+            "normal": {
+              "file": "exports/textures/a962cb174883009121d6.png",
+              "sha256": "a962cb174883009121d67edd4ede35196a38abe64eab0e9e45d9a46453aa0cd6",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            },
+            "orm": {
+              "file": "exports/textures/b4d807a765c80a11fbe5.png",
+              "sha256": "b4d807a765c80a11fbe5adfaefc2aecf5bab61840a475469f3b9c4bd42132c37",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            }
+          },
+          "runtimeMapPolicy": "Role-only props default to no maps; any optional candidate map binding must be explicitly selected and counted"
+        }
+      ],
+      "textureMode": "external-shared-inspection",
+      "textureCost": {
+        "geometryBytes": 2432,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 2432,
+        "uniqueTexelBytesWithMips": 4194304.0,
+        "allPackageInspectionCostReference": "qa/measurements.json",
+        "notes": "Prop default files bind zero new maps. Existing production city atlas is referenced separately; reused vegetation maps are not assumed resident."
+      },
+      "lodPolicy": {
+        "levels": [
+          0
+        ],
+        "proposalDistancesM": [],
+        "switch": "QA coupon has no runtime LOD",
+        "preserve": "root datum, role identity, plant height, rigid footprints",
+        "populationChange": 0
+      },
+      "clearance": {
+        "contract": "placement-reference.json",
+        "mustReject": [
+          "road or sidewalk triangle overlap",
+          "door gap/sweep overlap",
+          "contour/holes/neighbor overlap",
+          "nonfinite or unsampled heights"
+        ],
+        "rigidMaximumReliefM": 0.02,
+        "surfaceMaxReliefM": 0.5,
+        "newNavigation": false
+      },
+      "collision": {
+        "enabled": false,
+        "reason": "No new walk/collision surface; existing ground owns height. Planter proxy is metadata for later review."
+      },
+      "anchors": [],
+      "placementCompatibility": {
+        "referenceOnly": true,
+        "sourceReference": "placement-reference.json",
+        "sourceId": "137668",
+        "geographicPlacement": "unresolved runtime drape/clearance; coupons have no geographic placement",
+        "class": "existing source-selected planting contour; preserve 500-plot cap and two plant slots per bed",
+        "noNonUniformScaling": true,
+        "rigidPlanterSelectedBedResult": "reject: 0.0557 m contour relief exceeds 0.02 m rigid tolerance"
+      },
+      "intendedConsumer": [
+        "lib/city/residential-ground.ts",
+        "lib/city/residential-ground-plan.ts",
+        "lib/city/road-surfaces.ts",
+        "lib/city/material-library.ts",
+        "lib/city/beach-ground.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/reimports.json",
+          "qa/artist-edit-proof.json",
+          "qa/render-evidence.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "No WebGL terrain placement, navigation, GPU, frame time, device, lifecycle or deployment acceptance"
+      }
+    },
+    {
+      "id": "surface-street-brick-10m",
+      "taskId": "A02/C04",
+      "variant": "representative-offline-study",
+      "kind": "surface-study",
+      "source": "source/surface-street-brick-10m.lod0.blend",
+      "sourceSha256": "132fd558858ea4ed9dd29348e035832448028d281327f42114271d3a60f75d75",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/surface-street-brick-10m.lod0.inspection.glb",
+          "sha256": "5ddd7b304c06a5fff50dd197cc5ea5b391fc4b3f2dd3589f8ed8b410bea33a40",
+          "source": "source/surface-street-brick-10m.lod0.blend",
+          "sourceSha256": "132fd558858ea4ed9dd29348e035832448028d281327f42114271d3a60f75d75",
+          "triangles": 2,
+          "vertices": 4,
+          "primitives": 1,
+          "bytes": 2516,
+          "boundsM": {
+            "min": [
+              -5.0,
+              0.0,
+              -5.0
+            ],
+            "max": [
+              5.0,
+              0.0,
+              5.0
+            ],
+            "size": [
+              10.0,
+              0.0,
+              10.0
+            ]
+          },
+          "geometryBytes": 2516,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -5.0,
+          0.0,
+          -5.0
+        ],
+        "max": [
+          5.0,
+          0.0,
+          5.0
+        ],
+        "size": [
+          10.0,
+          0.0,
+          10.0
+        ]
+      },
+      "expectedDimensionsM": [
+        10,
+        0,
+        10
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Representative design dimensions verified from exported GLB; not surveyed landscape measurements",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "attachmentDatum": {
+        "kind": "existing rendered ground surface",
+        "localY": 0,
+        "origin": "contact center; plane center for coupons; never a navigation elevation"
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "role-street-brick",
+          "semanticRole": "street-brick",
+          "sharedSurfaceId": "street-brick",
+          "uvConvention": "UVMap normalized physical tile coordinates; multiply by tileMeters once to feed existing metre-UV city shader",
+          "tileMeters": [
+            1.92,
+            1.92
+          ],
+          "channels": {
+            "baseColor": "sRGB",
+            "normal": "Non-Color OpenGL +Y",
+            "orm": "linear R=1 neutral AO, G roughness, B metallic"
+          },
+          "runtimeBinding": "explicit semantic-role binding, no color guessing",
+          "inspectionBinding": "exports/textures deduplicated PNGs; inspection-only unless separately approved",
+          "inspectionMaps": {
+            "baseColor": {
+              "file": "exports/textures/7e69abf9441b1bab7d71.png",
+              "sha256": "7e69abf9441b1bab7d7177d2cd91f830a97845e24dcfe133b4f661370c795661",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "sRGB"
+            },
+            "normal": {
+              "file": "exports/textures/d0d6289a7a8977771533.png",
+              "sha256": "d0d6289a7a8977771533afc1131fb65a88d51c8eb8491644296b1c654dcc8b5e",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            },
+            "orm": {
+              "file": "exports/textures/fd144f4f51261606a566.png",
+              "sha256": "fd144f4f51261606a5665341d0677b008e30c7c0df542f025c9df56a017bc7c2",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            }
+          },
+          "runtimeMapPolicy": "Existing engine-owned city atlas by named surface slot; do not load inspection derivative maps"
+        }
+      ],
+      "textureMode": "external-shared-inspection",
+      "textureCost": {
+        "geometryBytes": 2516,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 2516,
+        "uniqueTexelBytesWithMips": 921600.0,
+        "allPackageInspectionCostReference": "qa/measurements.json",
+        "notes": "Prop default files bind zero new maps. Existing production city atlas is referenced separately; reused vegetation maps are not assumed resident."
+      },
+      "lodPolicy": {
+        "levels": [
+          0
+        ],
+        "proposalDistancesM": [],
+        "switch": "QA coupon has no runtime LOD",
+        "preserve": "root datum, role identity, plant height, rigid footprints",
+        "populationChange": 0
+      },
+      "clearance": {
+        "contract": "placement-reference.json",
+        "mustReject": [
+          "road or sidewalk triangle overlap",
+          "door gap/sweep overlap",
+          "contour/holes/neighbor overlap",
+          "nonfinite or unsampled heights"
+        ],
+        "rigidMaximumReliefM": 0.02,
+        "surfaceMaxReliefM": 0.5,
+        "newNavigation": false
+      },
+      "collision": {
+        "enabled": false,
+        "reason": "No new walk/collision surface; existing ground owns height. Planter proxy is metadata for later review."
+      },
+      "anchors": [],
+      "placementCompatibility": {
+        "referenceOnly": true,
+        "sourceReference": "placement-reference.json",
+        "sourceId": "137668",
+        "geographicPlacement": "unresolved runtime drape/clearance; coupons have no geographic placement",
+        "class": "existing source-selected planting contour; preserve 500-plot cap and two plant slots per bed",
+        "noNonUniformScaling": true,
+        "rigidPlanterSelectedBedResult": "reject: 0.0557 m contour relief exceeds 0.02 m rigid tolerance"
+      },
+      "intendedConsumer": [
+        "lib/city/residential-ground.ts",
+        "lib/city/residential-ground-plan.ts",
+        "lib/city/road-surfaces.ts",
+        "lib/city/material-library.ts",
+        "lib/city/beach-ground.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/reimports.json",
+          "qa/artist-edit-proof.json",
+          "qa/render-evidence.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "No WebGL terrain placement, navigation, GPU, frame time, device, lifecycle or deployment acceptance"
+      }
+    },
+    {
+      "id": "surface-street-brick-2m",
+      "taskId": "A02/C04",
+      "variant": "representative-offline-study",
+      "kind": "surface-study",
+      "source": "source/surface-street-brick-2m.lod0.blend",
+      "sourceSha256": "544e5e66f0be801d1b77ebb4e07f3b6f556341c28f3c4ee9cfda1152a641d3f2",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/surface-street-brick-2m.lod0.inspection.glb",
+          "sha256": "45a785d2447ad13bc89171615390cc650317c4f5e7ffebff2e048820ed2f4b5c",
+          "source": "source/surface-street-brick-2m.lod0.blend",
+          "sourceSha256": "544e5e66f0be801d1b77ebb4e07f3b6f556341c28f3c4ee9cfda1152a641d3f2",
+          "triangles": 2,
+          "vertices": 4,
+          "primitives": 1,
+          "bytes": 2512,
+          "boundsM": {
+            "min": [
+              -1.0,
+              0.0,
+              -1.0
+            ],
+            "max": [
+              1.0,
+              0.0,
+              1.0
+            ],
+            "size": [
+              2.0,
+              0.0,
+              2.0
+            ]
+          },
+          "geometryBytes": 2512,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -1.0,
+          0.0,
+          -1.0
+        ],
+        "max": [
+          1.0,
+          0.0,
+          1.0
+        ],
+        "size": [
+          2.0,
+          0.0,
+          2.0
+        ]
+      },
+      "expectedDimensionsM": [
+        2,
+        0,
+        2
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Representative design dimensions verified from exported GLB; not surveyed landscape measurements",
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "attachmentDatum": {
+        "kind": "existing rendered ground surface",
+        "localY": 0,
+        "origin": "contact center; plane center for coupons; never a navigation elevation"
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "role-street-brick",
+          "semanticRole": "street-brick",
+          "sharedSurfaceId": "street-brick",
+          "uvConvention": "UVMap normalized physical tile coordinates; multiply by tileMeters once to feed existing metre-UV city shader",
+          "tileMeters": [
+            1.92,
+            1.92
+          ],
+          "channels": {
+            "baseColor": "sRGB",
+            "normal": "Non-Color OpenGL +Y",
+            "orm": "linear R=1 neutral AO, G roughness, B metallic"
+          },
+          "runtimeBinding": "explicit semantic-role binding, no color guessing",
+          "inspectionBinding": "exports/textures deduplicated PNGs; inspection-only unless separately approved",
+          "inspectionMaps": {
+            "baseColor": {
+              "file": "exports/textures/7e69abf9441b1bab7d71.png",
+              "sha256": "7e69abf9441b1bab7d7177d2cd91f830a97845e24dcfe133b4f661370c795661",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "sRGB"
+            },
+            "normal": {
+              "file": "exports/textures/d0d6289a7a8977771533.png",
+              "sha256": "d0d6289a7a8977771533afc1131fb65a88d51c8eb8491644296b1c654dcc8b5e",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            },
+            "orm": {
+              "file": "exports/textures/fd144f4f51261606a566.png",
+              "sha256": "fd144f4f51261606a5665341d0677b008e30c7c0df542f025c9df56a017bc7c2",
+              "wrapS": 10497,
+              "wrapT": 10497,
+              "colorSpace": "Non-Color"
+            }
+          },
+          "runtimeMapPolicy": "Existing engine-owned city atlas by named surface slot; do not load inspection derivative maps"
+        }
+      ],
+      "textureMode": "external-shared-inspection",
+      "textureCost": {
+        "geometryBytes": 2512,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 2512,
+        "uniqueTexelBytesWithMips": 921600.0,
+        "allPackageInspectionCostReference": "qa/measurements.json",
+        "notes": "Prop default files bind zero new maps. Existing production city atlas is referenced separately; reused vegetation maps are not assumed resident."
+      },
+      "lodPolicy": {
+        "levels": [
+          0
+        ],
+        "proposalDistancesM": [],
+        "switch": "QA coupon has no runtime LOD",
+        "preserve": "root datum, role identity, plant height, rigid footprints",
+        "populationChange": 0
+      },
+      "clearance": {
+        "contract": "placement-reference.json",
+        "mustReject": [
+          "road or sidewalk triangle overlap",
+          "door gap/sweep overlap",
+          "contour/holes/neighbor overlap",
+          "nonfinite or unsampled heights"
+        ],
+        "rigidMaximumReliefM": 0.02,
+        "surfaceMaxReliefM": 0.5,
+        "newNavigation": false
+      },
+      "collision": {
+        "enabled": false,
+        "reason": "No new walk/collision surface; existing ground owns height. Planter proxy is metadata for later review."
+      },
+      "anchors": [],
+      "placementCompatibility": {
+        "referenceOnly": true,
+        "sourceReference": "placement-reference.json",
+        "sourceId": "137668",
+        "geographicPlacement": "unresolved runtime drape/clearance; coupons have no geographic placement",
+        "class": "existing source-selected planting contour; preserve 500-plot cap and two plant slots per bed",
+        "noNonUniformScaling": true,
+        "rigidPlanterSelectedBedResult": "reject: 0.0557 m contour relief exceeds 0.02 m rigid tolerance"
+      },
+      "intendedConsumer": [
+        "lib/city/residential-ground.ts",
+        "lib/city/residential-ground-plan.ts",
+        "lib/city/road-surfaces.ts",
+        "lib/city/material-library.ts",
+        "lib/city/beach-ground.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/reimports.json",
+          "qa/artist-edit-proof.json",
+          "qa/render-evidence.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "No WebGL terrain placement, navigation, GPU, frame time, device, lifecycle or deployment acceptance"
+      }
+    }
+  ],
+  "textures": [
+    {
+      "id": "80d9b75c08564460d2d3",
+      "file": "exports/textures/80d9b75c08564460d2d3.png",
+      "sha256": "80d9b75c08564460d2d3f43e3e886ac203ef4f81a3c69497d677240b18abf3dd",
+      "bytes": 16012,
+      "width": 240,
+      "height": 240,
+      "uniqueTexelBytesWithMips": 307200.0,
+      "scope": "shared inspection maps only; never automatically resident from role-only prop GLBs",
+      "residencyBasis": "Conservative RGBA8 full mip estimate; not GPU measurement"
+    },
+    {
+      "id": "9f51a3eccf7196241f07",
+      "file": "exports/textures/9f51a3eccf7196241f07.png",
+      "sha256": "9f51a3eccf7196241f07df33cf28b8d7f65583c84103f8738d25ceceb7fe7192",
+      "bytes": 42856,
+      "width": 240,
+      "height": 240,
+      "uniqueTexelBytesWithMips": 307200.0,
+      "scope": "shared inspection maps only; never automatically resident from role-only prop GLBs",
+      "residencyBasis": "Conservative RGBA8 full mip estimate; not GPU measurement"
+    },
+    {
+      "id": "0388a0c62cd21deb1e4b",
+      "file": "exports/textures/0388a0c62cd21deb1e4b.png",
+      "sha256": "0388a0c62cd21deb1e4b603de00965e1578a38cc54e83b90cffbf30f98a5bc1e",
+      "bytes": 13891,
+      "width": 240,
+      "height": 240,
+      "uniqueTexelBytesWithMips": 307200.0,
+      "scope": "shared inspection maps only; never automatically resident from role-only prop GLBs",
+      "residencyBasis": "Conservative RGBA8 full mip estimate; not GPU measurement"
+    },
+    {
+      "id": "a962cb174883009121d6",
+      "file": "exports/textures/a962cb174883009121d6.png",
+      "sha256": "a962cb174883009121d67edd4ede35196a38abe64eab0e9e45d9a46453aa0cd6",
+      "bytes": 475469,
+      "width": 512,
+      "height": 512,
+      "uniqueTexelBytesWithMips": 1398101.3333333333,
+      "scope": "shared inspection maps only; never automatically resident from role-only prop GLBs",
+      "residencyBasis": "Conservative RGBA8 full mip estimate; not GPU measurement"
+    },
+    {
+      "id": "ff47ea60cd6fa7586e0d",
+      "file": "exports/textures/ff47ea60cd6fa7586e0d.png",
+      "sha256": "ff47ea60cd6fa7586e0df74178fe1fd7d4bab01f0eaf3a4d8cd0ebce77bc2c1f",
+      "bytes": 207860,
+      "width": 512,
+      "height": 512,
+      "uniqueTexelBytesWithMips": 1398101.3333333333,
+      "scope": "shared inspection maps only; never automatically resident from role-only prop GLBs",
+      "residencyBasis": "Conservative RGBA8 full mip estimate; not GPU measurement"
+    },
+    {
+      "id": "b4d807a765c80a11fbe5",
+      "file": "exports/textures/b4d807a765c80a11fbe5.png",
+      "sha256": "b4d807a765c80a11fbe5adfaefc2aecf5bab61840a475469f3b9c4bd42132c37",
+      "bytes": 47536,
+      "width": 512,
+      "height": 512,
+      "uniqueTexelBytesWithMips": 1398101.3333333333,
+      "scope": "shared inspection maps only; never automatically resident from role-only prop GLBs",
+      "residencyBasis": "Conservative RGBA8 full mip estimate; not GPU measurement"
+    },
+    {
+      "id": "0d2a72a2bdd993986ca7",
+      "file": "exports/textures/0d2a72a2bdd993986ca7.png",
+      "sha256": "0d2a72a2bdd993986ca7b2211d7f73c46af5fcf116616b05ce73ccba8c0fb85b",
+      "bytes": 570431,
+      "width": 512,
+      "height": 512,
+      "uniqueTexelBytesWithMips": 1398101.3333333333,
+      "scope": "shared inspection maps only; never automatically resident from role-only prop GLBs",
+      "residencyBasis": "Conservative RGBA8 full mip estimate; not GPU measurement"
+    },
+    {
+      "id": "5c32552aed44c98857d7",
+      "file": "exports/textures/5c32552aed44c98857d7.png",
+      "sha256": "5c32552aed44c98857d762f2ae4f40dfa6bb6074037d02d9f6189a8146291087",
+      "bytes": 308056,
+      "width": 512,
+      "height": 512,
+      "uniqueTexelBytesWithMips": 1398101.3333333333,
+      "scope": "shared inspection maps only; never automatically resident from role-only prop GLBs",
+      "residencyBasis": "Conservative RGBA8 full mip estimate; not GPU measurement"
+    },
+    {
+      "id": "272d02f372c58ffa1256",
+      "file": "exports/textures/272d02f372c58ffa1256.png",
+      "sha256": "272d02f372c58ffa12561e12ddb5b6d1d067c2d2a797511a9b8989a4e9d11291",
+      "bytes": 27573,
+      "width": 240,
+      "height": 240,
+      "uniqueTexelBytesWithMips": 307200.0,
+      "scope": "shared inspection maps only; never automatically resident from role-only prop GLBs",
+      "residencyBasis": "Conservative RGBA8 full mip estimate; not GPU measurement"
+    },
+    {
+      "id": "d1d20428b115ad1f2d95",
+      "file": "exports/textures/d1d20428b115ad1f2d95.png",
+      "sha256": "d1d20428b115ad1f2d95e194e2b005bbcc65f55c31400d479d27a451b8fd838b",
+      "bytes": 44431,
+      "width": 240,
+      "height": 240,
+      "uniqueTexelBytesWithMips": 307200.0,
+      "scope": "shared inspection maps only; never automatically resident from role-only prop GLBs",
+      "residencyBasis": "Conservative RGBA8 full mip estimate; not GPU measurement"
+    },
+    {
+      "id": "14f69cd2a64eb57580b2",
+      "file": "exports/textures/14f69cd2a64eb57580b2.png",
+      "sha256": "14f69cd2a64eb57580b2218116394da9d7a2193a1346f09bba08f4aa7df6528d",
+      "bytes": 13899,
+      "width": 240,
+      "height": 240,
+      "uniqueTexelBytesWithMips": 307200.0,
+      "scope": "shared inspection maps only; never automatically resident from role-only prop GLBs",
+      "residencyBasis": "Conservative RGBA8 full mip estimate; not GPU measurement"
+    },
+    {
+      "id": "74cb6b02204c37026f6b",
+      "file": "exports/textures/74cb6b02204c37026f6b.png",
+      "sha256": "74cb6b02204c37026f6beebdc99001929bd331d5edc884feeef3c2ba830b90ac",
+      "bytes": 581991,
+      "width": 512,
+      "height": 512,
+      "uniqueTexelBytesWithMips": 1398101.3333333333,
+      "scope": "shared inspection maps only; never automatically resident from role-only prop GLBs",
+      "residencyBasis": "Conservative RGBA8 full mip estimate; not GPU measurement"
+    },
+    {
+      "id": "678d283e62d543ba04e3",
+      "file": "exports/textures/678d283e62d543ba04e3.png",
+      "sha256": "678d283e62d543ba04e3dec2ec4847c47fdd878bc91ead9c82a2b694dea58a5f",
+      "bytes": 252788,
+      "width": 512,
+      "height": 512,
+      "uniqueTexelBytesWithMips": 1398101.3333333333,
+      "scope": "shared inspection maps only; never automatically resident from role-only prop GLBs",
+      "residencyBasis": "Conservative RGBA8 full mip estimate; not GPU measurement"
+    },
+    {
+      "id": "18fd14b3329257af888a",
+      "file": "exports/textures/18fd14b3329257af888a.png",
+      "sha256": "18fd14b3329257af888ab8d6ca1f038d4d7643aee47b3c32393fbe8f0d7643ce",
+      "bytes": 52412,
+      "width": 512,
+      "height": 512,
+      "uniqueTexelBytesWithMips": 1398101.3333333333,
+      "scope": "shared inspection maps only; never automatically resident from role-only prop GLBs",
+      "residencyBasis": "Conservative RGBA8 full mip estimate; not GPU measurement"
+    },
+    {
+      "id": "676a17e361f8123018ca",
+      "file": "exports/textures/676a17e361f8123018ca.png",
+      "sha256": "676a17e361f8123018ca79f88ae9545eaecce6a8af639ddec6afcdd923a3989b",
+      "bytes": 113689,
+      "width": 512,
+      "height": 512,
+      "uniqueTexelBytesWithMips": 1398101.3333333333,
+      "scope": "shared inspection maps only; never automatically resident from role-only prop GLBs",
+      "residencyBasis": "Conservative RGBA8 full mip estimate; not GPU measurement"
+    },
+    {
+      "id": "0608c5de401693cba16c",
+      "file": "exports/textures/0608c5de401693cba16c.png",
+      "sha256": "0608c5de401693cba16cc617de77ca4c5be2d85117c426a2752fa118a6fb21b0",
+      "bytes": 83783,
+      "width": 512,
+      "height": 512,
+      "uniqueTexelBytesWithMips": 1398101.3333333333,
+      "scope": "shared inspection maps only; never automatically resident from role-only prop GLBs",
+      "residencyBasis": "Conservative RGBA8 full mip estimate; not GPU measurement"
+    },
+    {
+      "id": "f50ec60eb426f74b5ded",
+      "file": "exports/textures/f50ec60eb426f74b5ded.png",
+      "sha256": "f50ec60eb426f74b5dedf2d8f4406a16cc6234c1b1e998ca0efd6827fafd5aff",
+      "bytes": 77858,
+      "width": 512,
+      "height": 512,
+      "uniqueTexelBytesWithMips": 1398101.3333333333,
+      "scope": "shared inspection maps only; never automatically resident from role-only prop GLBs",
+      "residencyBasis": "Conservative RGBA8 full mip estimate; not GPU measurement"
+    },
+    {
+      "id": "d0d6289a7a8977771533",
+      "file": "exports/textures/d0d6289a7a8977771533.png",
+      "sha256": "d0d6289a7a8977771533afc1131fb65a88d51c8eb8491644296b1c654dcc8b5e",
+      "bytes": 26756,
+      "width": 240,
+      "height": 240,
+      "uniqueTexelBytesWithMips": 307200.0,
+      "scope": "shared inspection maps only; never automatically resident from role-only prop GLBs",
+      "residencyBasis": "Conservative RGBA8 full mip estimate; not GPU measurement"
+    },
+    {
+      "id": "7e69abf9441b1bab7d71",
+      "file": "exports/textures/7e69abf9441b1bab7d71.png",
+      "sha256": "7e69abf9441b1bab7d7177d2cd91f830a97845e24dcfe133b4f661370c795661",
+      "bytes": 58900,
+      "width": 240,
+      "height": 240,
+      "uniqueTexelBytesWithMips": 307200.0,
+      "scope": "shared inspection maps only; never automatically resident from role-only prop GLBs",
+      "residencyBasis": "Conservative RGBA8 full mip estimate; not GPU measurement"
+    },
+    {
+      "id": "fd144f4f51261606a566",
+      "file": "exports/textures/fd144f4f51261606a566.png",
+      "sha256": "fd144f4f51261606a5665341d0677b008e30c7c0df542f025c9df56a017bc7c2",
+      "bytes": 22259,
+      "width": 240,
+      "height": 240,
+      "uniqueTexelBytesWithMips": 307200.0,
+      "scope": "shared inspection maps only; never automatically resident from role-only prop GLBs",
+      "residencyBasis": "Conservative RGBA8 full mip estimate; not GPU measurement"
+    }
+  ],
+  "inspectionVariants": [
+    {
+      "assetId": "curb-straight-1m",
+      "level": 0,
+      "file": "exports/curb-straight-1m.lod0.inspection.glb",
+      "bytes": 4168,
+      "geometryBytes": 4168,
+      "embeddedImageBytes": 0,
+      "triangles": 20,
+      "primitives": 1
+    },
+    {
+      "assetId": "curb-straight-1m",
+      "level": 1,
+      "file": "exports/curb-straight-1m.lod1.inspection.glb",
+      "bytes": 3540,
+      "geometryBytes": 3540,
+      "embeddedImageBytes": 0,
+      "triangles": 12,
+      "primitives": 1
+    },
+    {
+      "assetId": "perennial-rosette",
+      "level": 0,
+      "file": "exports/perennial-rosette.lod0.inspection.glb",
+      "bytes": 6868,
+      "geometryBytes": 6868,
+      "embeddedImageBytes": 0,
+      "triangles": 48,
+      "primitives": 1
+    },
+    {
+      "assetId": "perennial-rosette",
+      "level": 1,
+      "file": "exports/perennial-rosette.lod1.inspection.glb",
+      "bytes": 5232,
+      "geometryBytes": 5232,
+      "embeddedImageBytes": 0,
+      "triangles": 32,
+      "primitives": 1
+    },
+    {
+      "assetId": "perennial-tuft",
+      "level": 0,
+      "file": "exports/perennial-tuft.lod0.inspection.glb",
+      "bytes": 4956,
+      "geometryBytes": 4956,
+      "embeddedImageBytes": 0,
+      "triangles": 20,
+      "primitives": 1
+    },
+    {
+      "assetId": "perennial-tuft",
+      "level": 1,
+      "file": "exports/perennial-tuft.lod1.inspection.glb",
+      "bytes": 3152,
+      "geometryBytes": 3152,
+      "embeddedImageBytes": 0,
+      "triangles": 8,
+      "primitives": 1
+    },
+    {
+      "assetId": "planter-round",
+      "level": 0,
+      "file": "exports/planter-round.lod0.inspection.glb",
+      "bytes": 23968,
+      "geometryBytes": 23968,
+      "embeddedImageBytes": 0,
+      "triangles": 254,
+      "primitives": 2
+    },
+    {
+      "assetId": "planter-round",
+      "level": 1,
+      "file": "exports/planter-round.lod1.inspection.glb",
+      "bytes": 11480,
+      "geometryBytes": 11480,
+      "embeddedImageBytes": 0,
+      "triangles": 94,
+      "primitives": 2
+    },
+    {
+      "assetId": "planter-trough",
+      "level": 0,
+      "file": "exports/planter-trough.lod0.inspection.glb",
+      "bytes": 7412,
+      "geometryBytes": 7412,
+      "embeddedImageBytes": 0,
+      "triangles": 38,
+      "primitives": 2
+    },
+    {
+      "assetId": "planter-trough",
+      "level": 1,
+      "file": "exports/planter-trough.lod1.inspection.glb",
+      "bytes": 6592,
+      "geometryBytes": 6592,
+      "embeddedImageBytes": 0,
+      "triangles": 30,
+      "primitives": 2
+    },
+    {
+      "assetId": "soil-grass-edge-1m",
+      "level": 0,
+      "file": "exports/soil-grass-edge-1m.lod0.inspection.glb",
+      "bytes": 7604,
+      "geometryBytes": 7604,
+      "embeddedImageBytes": 0,
+      "triangles": 128,
+      "primitives": 1
+    },
+    {
+      "assetId": "soil-grass-edge-1m",
+      "level": 1,
+      "file": "exports/soil-grass-edge-1m.lod1.inspection.glb",
+      "bytes": 3124,
+      "geometryBytes": 3124,
+      "embeddedImageBytes": 0,
+      "triangles": 8,
+      "primitives": 1
+    }
+  ],
+  "referenceOnlyMetadata": [
+    "placement-reference.json",
+    "source-references.json"
+  ],
+  "newRuntimePopulation": 0,
+  "replaces": []
+}

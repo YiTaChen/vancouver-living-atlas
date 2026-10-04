@@ -1,0 +1,151 @@
+{
+  "status": "pass",
+  "scope": "Offline asset geometry/material inspection only; not city visual acceptance",
+  "reviewedAll32ViaContactSheet": true,
+  "contactSheet": "qa/contact-sheet.png",
+  "contactSheetSha256": "c5c581c7a46adb1b1fa80dec69918e83953645d99239149e3315f7d763b35118",
+  "fullSizeReviewed": [
+    "qa/previews/props-0-oblique-clear.png",
+    "qa/previews/props-1-grazing-overcast.png",
+    "qa/previews/surface-2-oblique-clear.png",
+    "qa/previews/surface-10-oblique-clear.png"
+  ],
+  "findings": [
+    "Corrected initial overlapping trough-wall/rim faces by replacing box overlap with a single hollow ring mesh; no coplanar black stripes in final export.",
+    "Corrected initial double-gamma city-slot preview extraction; final PNG pixels exactly match the existing atlas slots.",
+    "Full human reference height visible in final prop views.",
+    "LOD1 keeps plant heights and tuft horizontal extrema; rosette loses leaves with small contour difference.",
+    "Existing street-brick atlas exhibits visible distant repetitive/alias bands in the unmodified 10m offline inspection; city derivative/fade shader not reproduced. No claim of visual improvement in city.",
+    "Night board is deliberately unlit and low contrast; no emissive/lit street setup is modeled or runtime-night-readability claim made."
+  ],
+  "renders": [
+    {
+      "file": "qa/previews/surface-2-oblique-clear.png",
+      "sha256": "74d3a8efe4bd2d8c33aa1b5369b8177fa34833dd42fad6d4c2b6b8067e11cd19"
+    },
+    {
+      "file": "qa/previews/surface-2-oblique-overcast.png",
+      "sha256": "e73f5881b45146a93723bdec581b3d74fc682f5f66f174d7597b6eecbfe27a2c"
+    },
+    {
+      "file": "qa/previews/surface-2-oblique-dusk.png",
+      "sha256": "49b1540f921cd6fbca23d30f6bcfc7c9ad767dc7001cb09e9c4945f34f6fc765"
+    },
+    {
+      "file": "qa/previews/surface-2-oblique-night.png",
+      "sha256": "8723d4ab944d708d940090963108909f297d00ec43a85cd2c15e1ca122664753"
+    },
+    {
+      "file": "qa/previews/surface-2-grazing-clear.png",
+      "sha256": "61c5ad2d3044dccd96d0d2a59812435bb3c4de3881454d89f0ba7f6139105d2e"
+    },
+    {
+      "file": "qa/previews/surface-2-grazing-overcast.png",
+      "sha256": "7ff68c76f73d2a75f906b82b6b5209da4ea59ccdb947fe42412103fc31470493"
+    },
+    {
+      "file": "qa/previews/surface-2-grazing-dusk.png",
+      "sha256": "9bc6bc35f093b7210553f73969a11f913a604ad3a7c620af11caee93004f4df8"
+    },
+    {
+      "file": "qa/previews/surface-2-grazing-night.png",
+      "sha256": "6afe255874646223f487e79b7d459b8e87d2894c99d4082d60d6781738d432e5"
+    },
+    {
+      "file": "qa/previews/surface-10-oblique-clear.png",
+      "sha256": "92f18eae785ca5ead214c450d639a8936c24c621a4fb646c88f9c5aab1b760dd"
+    },
+    {
+      "file": "qa/previews/surface-10-oblique-overcast.png",
+      "sha256": "2bf35b920c68517b4d955dd92ccd17cae2881742c47c25985be8240b6cb51c73"
+    },
+    {
+      "file": "qa/previews/surface-10-oblique-dusk.png",
+      "sha256": "8501ce99239b00e74c2f3a609282e9fc0164f0633b026bbf4891b0a088b9062e"
+    },
+    {
+      "file": "qa/previews/surface-10-oblique-night.png",
+      "sha256": "9e7e877cf7c72f62264320f5977b5eb48a9f4d467f3552cde272660005559ac1"
+    },
+    {
+      "file": "qa/previews/surface-10-grazing-clear.png",
+      "sha256": "eaa0ac0381117192f09713becb6df6ecd284a0378819a24aff944e3a1c7fed73"
+    },
+    {
+      "file": "qa/previews/surface-10-grazing-overcast.png",
+      "sha256": "5d16e2ae68b0adcdc26d6ac8c6bb5ef94fecba95028f674dcd375474a6c3ea8f"
+    },
+    {
+      "file": "qa/previews/surface-10-grazing-dusk.png",
+      "sha256": "8607d7029ed0f4504838e7e7f80ed3bdbc68663d52de808014af541457e26853"
+    },
+    {
+      "file": "qa/previews/surface-10-grazing-night.png",
+      "sha256": "842cb23d972c25ef786335a79e46736508046b4eaeb0bee7e7ca06cf0ed26920"
+    },
+    {
+      "file": "qa/previews/props-0-oblique-clear.png",
+      "sha256": "91f01b68dfb6701fc917c22c21bec38346f8e2d6f30df5b0f9d97e7cb833590f"
+    },
+    {
+      "file": "qa/previews/props-0-oblique-overcast.png",
+      "sha256": "a27eccf6fd44c7606aa80a794ed222cad3e35d2d8e24d3604349f1dc202c69d5"
+    },
+    {
+      "file": "qa/previews/props-0-oblique-dusk.png",
+      "sha256": "47b7287cbd05ba2e356b12d338e3f4594631464123dd761a504d915673d6bf72"
+    },
+    {
+      "file": "qa/previews/props-0-oblique-night.png",
+      "sha256": "1b8930a57261b2925b25c433dcde1546bee71aab0259278fbef06115b9ebd91c"
+    },
+    {
+      "file": "qa/previews/props-0-grazing-clear.png",
+      "sha256": "383111a5e94584c96cdf0c4691ba062d589858f16c948aec7973291780a3269e"
+    },
+    {
+      "file": "qa/previews/props-0-grazing-overcast.png",
+      "sha256": "79e49a5b513ceff2cc15a8157d1aa1d183dc66e20bf9d7f6bd9e003e0af2bcba"
+    },
+    {
+      "file": "qa/previews/props-0-grazing-dusk.png",
+      "sha256": "6772e5a357888bcd3d8dfb7c29320bcb43fe734e108190b4a7da1736882ac664"
+    },
+    {
+      "file": "qa/previews/props-0-grazing-night.png",
+      "sha256": "e5259c4febbd0270de856b0a07efadf9e018ee8b52150732752973b2f96d39fd"
+    },
+    {
+      "file": "qa/previews/props-1-oblique-clear.png",
+      "sha256": "5fc58de405253e299df79241f4715fd46ddb7fb6660f4089a0f9d52eed9afd41"
+    },
+    {
+      "file": "qa/previews/props-1-oblique-overcast.png",
+      "sha256": "901032607444312731d65f597bb1bb2f324796cd8ee16c54a46166a48354c3ec"
+    },
+    {
+      "file": "qa/previews/props-1-oblique-dusk.png",
+      "sha256": "1eaea4cbc84da24e6510cf4a0267d78e73e36980d3d8165cad4046c30f608013"
+    },
+    {
+      "file": "qa/previews/props-1-oblique-night.png",
+      "sha256": "540e28a21f5c490f0c6a5a7f1e66116aa539ac9c7cf0be4f0dfacb3a54014ace"
+    },
+    {
+      "file": "qa/previews/props-1-grazing-clear.png",
+      "sha256": "ada18084480afcc80871c1b00806c7458cb34d3a004bf6b1cec53a29f084e60f"
+    },
+    {
+      "file": "qa/previews/props-1-grazing-overcast.png",
+      "sha256": "f2ecf74b39f8e82f844972690989282dd2820e2729ac6cc3025d97c34775bf44"
+    },
+    {
+      "file": "qa/previews/props-1-grazing-dusk.png",
+      "sha256": "06536049d0e8f6b530efcbbef5599932121ce6cfee5cf9f1933e11ed798a92b2"
+    },
+    {
+      "file": "qa/previews/props-1-grazing-night.png",
+      "sha256": "f458afaa82d5d2382d584f5fe76c6e7c289070a7cdf7c5697132776179a4568f"
+    }
+  ]
+}

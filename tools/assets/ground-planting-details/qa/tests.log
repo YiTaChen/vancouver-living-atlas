@@ -1,0 +1,27 @@
+test_actual_source_positive_fit (__main__.Contracts.test_actual_source_positive_fit) ... ok
+test_actual_source_rigid_rejection (__main__.Contracts.test_actual_source_rigid_rejection) ... ok
+test_crossing_road (__main__.Contracts.test_crossing_road) ... ok
+test_deformable_relief_limit (__main__.Contracts.test_deformable_relief_limit) ... ok
+test_degenerate_triangle (__main__.Contracts.test_degenerate_triangle) ... ok
+test_door_exclusion (__main__.Contracts.test_door_exclusion) ... ok
+test_flat_source_fit (__main__.Contracts.test_flat_source_fit) ... ok
+test_hole_exclusion (__main__.Contracts.test_hole_exclusion) ... ok
+test_missing_source (__main__.Contracts.test_missing_source) ... ok
+test_missing_weight (__main__.Contracts.test_missing_weight) ... ok
+test_narrow_concavity_crossing (__main__.Contracts.test_narrow_concavity_crossing) ... ok
+test_negative_scale (__main__.Contracts.test_negative_scale) ... ok
+test_no_qa_camera (__main__.Contracts.test_no_qa_camera) ... ok
+test_nonfinite_height (__main__.Contracts.test_nonfinite_height) ... ok
+test_nonfinite_vertex (__main__.Contracts.test_nonfinite_vertex) ... ok
+test_outside_footprint (__main__.Contracts.test_outside_footprint) ... ok
+test_planar_edge_crop (__main__.Contracts.test_planar_edge_crop) ... ok
+test_positive_package (__main__.Contracts.test_positive_package) ... ok
+test_road_containment (__main__.Contracts.test_road_containment) ... ok
+test_three_samples (__main__.Contracts.test_three_samples) ... ok
+test_wrong_edge_sampler (__main__.Contracts.test_wrong_edge_sampler) ... ok
+test_wrong_uv_period (__main__.Contracts.test_wrong_uv_period) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 0.038s
+
+OK

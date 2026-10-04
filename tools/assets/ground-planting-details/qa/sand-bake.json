@@ -1,0 +1,25 @@
+{
+  "source": "source/sand-procedural-master.blend",
+  "sha256": "779fd0a65243fbec376b788093626674655074997ddd32ae0c9137ad47099ac0",
+  "sourcePreserved": true,
+  "resolution": [
+    512,
+    512
+  ],
+  "cyclesCPU": true,
+  "nodeCount": 29,
+  "maps": [
+    {
+      "file": "source/textures/sand-orm.png",
+      "sha256": "f50ec60eb426f74b5dedf2d8f4406a16cc6234c1b1e998ca0efd6827fafd5aff"
+    },
+    {
+      "file": "source/textures/sand-normal.png",
+      "sha256": "676a17e361f8123018ca79f88ae9545eaecce6a8af639ddec6afcdd923a3989b"
+    },
+    {
+      "file": "source/textures/sand-color.png",
+      "sha256": "0608c5de401693cba16cc617de77ca4c5be2d85117c426a2752fa118a6fb21b0"
+    }
+  ]
+}

@@ -1,0 +1,942 @@
+{
+  "status": "pass",
+  "blender": "4.3.2",
+  "files": [
+    {
+      "file": "exports/curb-straight-1m.lod0.glb",
+      "sha256": "87e62d3ab2c1c9ab6a314bf1e3d5b0ab9f2eb9436caf675db3b9f631d0025bfd",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -0.5,
+          0.0,
+          -0.09000000357627869
+        ],
+        "max": [
+          0.5,
+          0.15000000596046448,
+          0.09000000357627869
+        ],
+        "size": [
+          1.0,
+          0.15000000596046448,
+          0.18000000715255737
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/curb-straight-1m.lod0.inspection.glb",
+      "sha256": "e625906c7904b1da1fec21d9526a7efc4fb99bf047b566c94f701132c2eb044d",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -0.5,
+          0.0,
+          -0.09000000357627869
+        ],
+        "max": [
+          0.5,
+          0.15000000596046448,
+          0.09000000357627869
+        ],
+        "size": [
+          1.0,
+          0.15000000596046448,
+          0.18000000715255737
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/curb-straight-1m.lod1.glb",
+      "sha256": "122dc2cb9fee517c23e1a2e5ee4ffc5049a34b98d87b32830900c7d81fa06b7c",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -0.5,
+          0.0,
+          -0.09000000357627869
+        ],
+        "max": [
+          0.5,
+          0.15000000596046448,
+          0.09000000357627869
+        ],
+        "size": [
+          1.0,
+          0.15000000596046448,
+          0.18000000715255737
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/curb-straight-1m.lod1.inspection.glb",
+      "sha256": "3abacedac941755d685a8b150afee03bfa87e78099ba284309b935a6d528d364",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -0.5,
+          0.0,
+          -0.09000000357627869
+        ],
+        "max": [
+          0.5,
+          0.15000000596046448,
+          0.09000000357627869
+        ],
+        "size": [
+          1.0,
+          0.15000000596046448,
+          0.18000000715255737
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/perennial-rosette.lod0.glb",
+      "sha256": "9f70ee0db01cbf55fcb4b52b1a30a5211993d12ec4c99d7e410b19cdab5e47ed",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -0.22483648359775543,
+          0.0,
+          -0.22483648359775543
+        ],
+        "max": [
+          0.22483648359775543,
+          0.30000001192092896,
+          0.22483648359775543
+        ],
+        "size": [
+          0.44967296719551086,
+          0.30000001192092896,
+          0.44967296719551086
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/perennial-rosette.lod0.inspection.glb",
+      "sha256": "9f70ee0db01cbf55fcb4b52b1a30a5211993d12ec4c99d7e410b19cdab5e47ed",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -0.22483648359775543,
+          0.0,
+          -0.22483648359775543
+        ],
+        "max": [
+          0.22483648359775543,
+          0.30000001192092896,
+          0.22483648359775543
+        ],
+        "size": [
+          0.44967296719551086,
+          0.30000001192092896,
+          0.44967296719551086
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/perennial-rosette.lod1.glb",
+      "sha256": "1ad6abaaa6c2e7a65a0864d1560cb87a6bf676140c948e01b0746580ca5d4f22",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -0.22949999570846558,
+          0.0,
+          -0.2549999952316284
+        ],
+        "max": [
+          0.20399999618530273,
+          0.30000001192092896,
+          0.20399999618530273
+        ],
+        "size": [
+          0.4334999918937683,
+          0.30000001192092896,
+          0.45899999141693115
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/perennial-rosette.lod1.inspection.glb",
+      "sha256": "1ad6abaaa6c2e7a65a0864d1560cb87a6bf676140c948e01b0746580ca5d4f22",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -0.22949999570846558,
+          0.0,
+          -0.2549999952316284
+        ],
+        "max": [
+          0.20399999618530273,
+          0.30000001192092896,
+          0.20399999618530273
+        ],
+        "size": [
+          0.4334999918937683,
+          0.30000001192092896,
+          0.45899999141693115
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/perennial-tuft.lod0.glb",
+      "sha256": "0dccd154931a409b420d20f56c57f85904381d70d2fe4493a662f85dbaf5831a",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -0.15216904878616333,
+          0.0,
+          -0.1294427216053009
+        ],
+        "max": [
+          0.15216904878616333,
+          0.44999998807907104,
+          0.1599999964237213
+        ],
+        "size": [
+          0.30433809757232666,
+          0.44999998807907104,
+          0.2894427180290222
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/perennial-tuft.lod0.inspection.glb",
+      "sha256": "0dccd154931a409b420d20f56c57f85904381d70d2fe4493a662f85dbaf5831a",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -0.15216904878616333,
+          0.0,
+          -0.1294427216053009
+        ],
+        "max": [
+          0.15216904878616333,
+          0.44999998807907104,
+          0.1599999964237213
+        ],
+        "size": [
+          0.30433809757232666,
+          0.44999998807907104,
+          0.2894427180290222
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/perennial-tuft.lod1.glb",
+      "sha256": "6dba849f8822d894cea99182e626596a33c68913f4a1046385ee992774c36445",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -0.15216904878616333,
+          0.0,
+          -0.1294427216053009
+        ],
+        "max": [
+          0.15216904878616333,
+          0.44999998807907104,
+          0.1599999964237213
+        ],
+        "size": [
+          0.30433809757232666,
+          0.44999998807907104,
+          0.2894427180290222
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/perennial-tuft.lod1.inspection.glb",
+      "sha256": "6dba849f8822d894cea99182e626596a33c68913f4a1046385ee992774c36445",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -0.15216904878616333,
+          0.0,
+          -0.1294427216053009
+        ],
+        "max": [
+          0.15216904878616333,
+          0.44999998807907104,
+          0.1599999964237213
+        ],
+        "size": [
+          0.30433809757232666,
+          0.44999998807907104,
+          0.2894427180290222
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/planter-round.lod0.glb",
+      "sha256": "f1de699b1d4a7e2da441d2e3b12f31f051d290738af4518fe47167672f5df6da",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -0.32499998807907104,
+          0.0,
+          -0.32499998807907104
+        ],
+        "max": [
+          0.32499998807907104,
+          0.4000000059604645,
+          0.32499998807907104
+        ],
+        "size": [
+          0.6499999761581421,
+          0.4000000059604645,
+          0.6499999761581421
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/planter-round.lod0.inspection.glb",
+      "sha256": "43bcf64d6892a7120ea40af115eccbf1900dda20e93cf5fc1d4c5eefaf8b100a",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -0.32499998807907104,
+          0.0,
+          -0.32499998807907104
+        ],
+        "max": [
+          0.32499998807907104,
+          0.4000000059604645,
+          0.32499998807907104
+        ],
+        "size": [
+          0.6499999761581421,
+          0.4000000059604645,
+          0.6499999761581421
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/planter-round.lod1.glb",
+      "sha256": "b312831ef1fb39e8100e33ef87a006fb9152f50c5a9d5694f8b1e25dcca7ad97",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -0.32499998807907104,
+          0.0,
+          -0.32499998807907104
+        ],
+        "max": [
+          0.32499998807907104,
+          0.4000000059604645,
+          0.32499998807907104
+        ],
+        "size": [
+          0.6499999761581421,
+          0.4000000059604645,
+          0.6499999761581421
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/planter-round.lod1.inspection.glb",
+      "sha256": "e6901dcb7a7c83400dc60d6c3be90af896d3b389d90d2f8fa2b539a80669b260",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -0.32499998807907104,
+          0.0,
+          -0.32499998807907104
+        ],
+        "max": [
+          0.32499998807907104,
+          0.4000000059604645,
+          0.32499998807907104
+        ],
+        "size": [
+          0.6499999761581421,
+          0.4000000059604645,
+          0.6499999761581421
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/planter-trough.lod0.glb",
+      "sha256": "d60d013ae1a01e9c822833f294bdbe8d2daab5437eb6aa802d64f7664c627771",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -0.4000000059604645,
+          0.0,
+          -0.30000001192092896
+        ],
+        "max": [
+          0.4000000059604645,
+          0.5,
+          0.30000001192092896
+        ],
+        "size": [
+          0.800000011920929,
+          0.5,
+          0.6000000238418579
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/planter-trough.lod0.inspection.glb",
+      "sha256": "483b16b9a38690d571761776c0a305582f93bf96e38304518bb396b16c32dcf0",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -0.4000000059604645,
+          0.0,
+          -0.30000001192092896
+        ],
+        "max": [
+          0.4000000059604645,
+          0.5,
+          0.30000001192092896
+        ],
+        "size": [
+          0.800000011920929,
+          0.5,
+          0.6000000238418579
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/planter-trough.lod1.glb",
+      "sha256": "741d51d33f29c463ef447ae3ad308fa9a7d53eacef0b356cc51cde33db975e6f",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -0.4000000059604645,
+          0.0,
+          -0.30000001192092896
+        ],
+        "max": [
+          0.4000000059604645,
+          0.5,
+          0.30000001192092896
+        ],
+        "size": [
+          0.800000011920929,
+          0.5,
+          0.6000000238418579
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/planter-trough.lod1.inspection.glb",
+      "sha256": "4de4808a4c8e752103507279ad8ab05fa07951591a37166ef286938efa99e559",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -0.4000000059604645,
+          0.0,
+          -0.30000001192092896
+        ],
+        "max": [
+          0.4000000059604645,
+          0.5,
+          0.30000001192092896
+        ],
+        "size": [
+          0.800000011920929,
+          0.5,
+          0.6000000238418579
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/soil-grass-edge-1m.lod0.glb",
+      "sha256": "b6d14ca04fe97503ab01c6a612cf9081ec129717dc830b230df682d9b5d08a78",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -0.20000000298023224,
+          0.0,
+          -0.5
+        ],
+        "max": [
+          0.20000000298023224,
+          0.0,
+          0.5
+        ],
+        "size": [
+          0.4000000059604645,
+          0.0,
+          1.0
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/soil-grass-edge-1m.lod0.inspection.glb",
+      "sha256": "816b2fe25ddd657767a3068f8e7a4869902a2e81729e0f888670fd35c19e1f18",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -0.20000000298023224,
+          0.0,
+          -0.5
+        ],
+        "max": [
+          0.20000000298023224,
+          0.0,
+          0.5
+        ],
+        "size": [
+          0.4000000059604645,
+          0.0,
+          1.0
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/soil-grass-edge-1m.lod1.glb",
+      "sha256": "4f1028446bbc5fa994b029b09e9e3fdda4c4c305df692b972da225909409a5f0",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -0.20000000298023224,
+          0.0,
+          -0.5
+        ],
+        "max": [
+          0.20000000298023224,
+          0.0,
+          0.5
+        ],
+        "size": [
+          0.4000000059604645,
+          0.0,
+          1.0
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/soil-grass-edge-1m.lod1.inspection.glb",
+      "sha256": "0e38207757547a1c8a58b80b42ddd21bf1ed4c1ca0ecb483b6e0e1570bfe342b",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -0.20000000298023224,
+          0.0,
+          -0.5
+        ],
+        "max": [
+          0.20000000298023224,
+          0.0,
+          0.5
+        ],
+        "size": [
+          0.4000000059604645,
+          0.0,
+          1.0
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/surface-asphalt-10m.lod0.inspection.glb",
+      "sha256": "f31bb0fc04d90710d4b3cc46aea4cd4122e8d6187903c63b2ff9055dbd66cc28",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -5.0,
+          0.0,
+          -5.0
+        ],
+        "max": [
+          5.0,
+          0.0,
+          5.0
+        ],
+        "size": [
+          10.0,
+          0.0,
+          10.0
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/surface-asphalt-2m.lod0.inspection.glb",
+      "sha256": "d6972dd81da1dcb82d2669911f805a8e9b216331c5119c469200018fe83d89bb",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -1.0,
+          0.0,
+          -1.0
+        ],
+        "max": [
+          1.0,
+          0.0,
+          1.0
+        ],
+        "size": [
+          2.0,
+          0.0,
+          2.0
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/surface-concrete-10m.lod0.inspection.glb",
+      "sha256": "3df21f17f27a3e3ee1e16f83f9df027d886d5df42b3bb674d7210417eac6307d",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -5.0,
+          0.0,
+          -5.0
+        ],
+        "max": [
+          5.0,
+          0.0,
+          5.0
+        ],
+        "size": [
+          10.0,
+          0.0,
+          10.0
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/surface-concrete-2m.lod0.inspection.glb",
+      "sha256": "de2b2b09b2b7a346b478edbdb8eb828839d4edecc2bc77c3d69a42cbbdfaa402",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -1.0,
+          0.0,
+          -1.0
+        ],
+        "max": [
+          1.0,
+          0.0,
+          1.0
+        ],
+        "size": [
+          2.0,
+          0.0,
+          2.0
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/surface-grass-10m.lod0.inspection.glb",
+      "sha256": "b6d652213da165afda7d1fabb4ac1c2282a58fb73c8e3d3a5e768831b9bf9d6a",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -5.0,
+          0.0,
+          -5.0
+        ],
+        "max": [
+          5.0,
+          0.0,
+          5.0
+        ],
+        "size": [
+          10.0,
+          0.0,
+          10.0
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/surface-grass-2m.lod0.inspection.glb",
+      "sha256": "9913b1441bee1355e3a2f0121c833087ff51108cd822bb3f91ace1f1e70904d3",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -1.0,
+          0.0,
+          -1.0
+        ],
+        "max": [
+          1.0,
+          0.0,
+          1.0
+        ],
+        "size": [
+          2.0,
+          0.0,
+          2.0
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/surface-sand-10m.lod0.inspection.glb",
+      "sha256": "a0f30e4f438b82ab745f7d6376c9125958d94b671c9efc0c60c53e935e3e7284",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -5.0,
+          0.0,
+          -5.0
+        ],
+        "max": [
+          5.0,
+          0.0,
+          5.0
+        ],
+        "size": [
+          10.0,
+          0.0,
+          10.0
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/surface-sand-2m.lod0.inspection.glb",
+      "sha256": "86c5690a01c81f7723aa2835a4758e65dc9f063fdc49a8242a841efde0b90645",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -1.0,
+          0.0,
+          -1.0
+        ],
+        "max": [
+          1.0,
+          0.0,
+          1.0
+        ],
+        "size": [
+          2.0,
+          0.0,
+          2.0
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/surface-soil-10m.lod0.inspection.glb",
+      "sha256": "0ad83a45b6a645c6d437f6663a0045bcc8a0c3aab5f27a19dbdf8354b70614aa",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -5.0,
+          0.0,
+          -5.0
+        ],
+        "max": [
+          5.0,
+          0.0,
+          5.0
+        ],
+        "size": [
+          10.0,
+          0.0,
+          10.0
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/surface-soil-2m.lod0.inspection.glb",
+      "sha256": "2c10b9dcfb44aaa2c47c3034a66066772b5287584b0f71b73b826eecf997c98f",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -1.0,
+          0.0,
+          -1.0
+        ],
+        "max": [
+          1.0,
+          0.0,
+          1.0
+        ],
+        "size": [
+          2.0,
+          0.0,
+          2.0
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/surface-street-brick-10m.lod0.inspection.glb",
+      "sha256": "5ddd7b304c06a5fff50dd197cc5ea5b391fc4b3f2dd3589f8ed8b410bea33a40",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -5.0,
+          0.0,
+          -5.0
+        ],
+        "max": [
+          5.0,
+          0.0,
+          5.0
+        ],
+        "size": [
+          10.0,
+          0.0,
+          10.0
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    },
+    {
+      "file": "exports/surface-street-brick-2m.lod0.inspection.glb",
+      "sha256": "45a785d2447ad13bc89171615390cc650317c4f5e7ffebff2e048820ed2f4b5c",
+      "meshCount": 1,
+      "boundsM": {
+        "min": [
+          -1.0,
+          0.0,
+          -1.0
+        ],
+        "max": [
+          1.0,
+          0.0,
+          1.0
+        ],
+        "size": [
+          2.0,
+          0.0,
+          2.0
+        ]
+      },
+      "uvLayers": [
+        1
+      ],
+      "source": "Blender import_scene.gltf into factory empty scene; transformed vertex positions"
+    }
+  ]
+}
