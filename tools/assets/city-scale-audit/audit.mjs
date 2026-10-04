@@ -6,6 +6,7 @@ import { createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 import * as THREE from 'three';
 import { compileFunction } from 'node:vm';
+import { execFileSync } from 'node:child_process';
 import {
   ROOT,
   sources,
@@ -16,6 +17,25 @@ import {
 } from './cpu-modules.mjs';
 export const PACKAGE = 'tools/assets/city-scale-audit';
 export const digest = (v) => createHash('sha256').update(v).digest('hex');
+const historicalConsumer = (file) => file.startsWith('lib/city/') && /\.(?:ts|js)$/.test(file);
+/** The recorded consumer is immutable history; every GIS/model/config input stays live. */
+export function readAuditInput(file, revision, readCurrent = (name) => fs.readFileSync(path.join(ROOT, name)), readHistorical = (name, ref) => {
+  try {
+    return execFileSync('git', ['show', `${ref}:${name}`], { cwd: ROOT, maxBuffer: 32 * 1024 * 1024, stdio: ['ignore', 'pipe', 'pipe'] });
+  } catch (cause) {
+    throw new Error(`Recorded audit consumer unavailable: ${ref}:${name}. Fetch repository history (git fetch --unshallow where needed); no current-source fallback is permitted.`, { cause });
+  }
+}) {
+  assert.match(revision, /^[a-f0-9]{40}$/, 'Audit requires the complete recorded base revision');
+  assert(!path.posix.isAbsolute(file) && path.posix.normalize(file) === file && !file.startsWith('../'), 'Invalid audit input path');
+  return historicalConsumer(file) ? readHistorical(file, revision) : readCurrent(file);
+}
+export function measureAuditInput(file, revision, expectedSha256, readCurrent, readHistorical) {
+  const bytes = readAuditInput(file, revision, readCurrent, readHistorical);
+  const measured = { file, bytes: bytes.length, sha256: digest(bytes) };
+  if (expectedSha256 !== undefined) assert.equal(measured.sha256, expectedSha256, `Recorded audit input hash differs: ${file}`);
+  return measured;
+}
 const round = (n) => Number(n.toFixed(8));
 const histogram = (xs) =>
   Object.fromEntries(
@@ -1010,14 +1030,18 @@ export async function runAudit() {
     A03 = auditClock(rules),
     A04 = auditStructures(elevation, rules);
   assert.equal(JSON.stringify(buildings), snapshot, 'source data mutated');
-  // Hash all actually consumed TS/JSON/GLB/PNG files plus required provenance documents.
+  // Evaluate today's consumer/GIS geometry above. The handoff's runtime hash is
+  // its named immutable base, so a later integration does not rewrite history.
+  // All source data, models, documents and verifier code remain current inputs.
   sources.add('tools/assets/vegetation_ground/source/vegetation_ground.blend');
   sources.add('tools/assets/city-materials/source/city-material-library.blend');
+  const recorded = JSON.parse(fs.readFileSync(path.join(ROOT, PACKAGE, 'qa/source-hashes.json'), 'utf8'));
+  const historicalHashes = new Map(recorded.files.filter((input) => historicalConsumer(input.file)).map((input) => [input.file, input.sha256]));
   const inputFiles = [...sources]
     .sort((a, b) => (a < b ? -1 : Number(a > b)))
     .map((file) => {
-      const bytes = fs.readFileSync(path.join(ROOT, file));
-      return { file, bytes: bytes.length, sha256: digest(bytes) };
+      if (historicalConsumer(file)) assert(historicalHashes.has(file), `Unrecorded historical consumer: ${file}`);
+      return measureAuditInput(file, rules.baseRevision, historicalHashes.get(file));
     });
   const inputFingerprint = digest(JSON.stringify(inputFiles));
   const report = {

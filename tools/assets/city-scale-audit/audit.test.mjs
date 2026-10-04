@@ -12,6 +12,8 @@ import {
   measureGlb,
   serialize,
   digest,
+  readAuditInput,
+  measureAuditInput,
 } from './audit.mjs';
 const artifacts = await runAudit(),
   report = artifacts['report.json'],
@@ -225,10 +227,10 @@ test('rail source attribution and actual generated grade remain valid without cl
   }
   assert.deepEqual(report.A04.namedCloseStructureProposals, []);
 });
-test('all recorded input hashes match real files and deterministic stored evidence matches recomputation', () => {
+test('recorded runtime hashes use immutable base blobs while other measured inputs remain current', () => {
   for (const input of artifacts['source-hashes.json'].files)
     assert.equal(
-      digest(fs.readFileSync(path.join(ROOT, input.file))),
+      digest(readAuditInput(input.file, rules.baseRevision)),
       input.sha256,
       input.file,
     );
@@ -238,6 +240,19 @@ test('all recorded input hashes match real files and deterministic stored eviden
       serialize(name, value),
       name,
     );
+});
+test('historical hash corruption and current GIS/model drift both fail closed', () => {
+  const historical = Buffer.from('recorded runtime'), current = Buffer.from('current GIS');
+  const readCurrent = (file) => { assert(['public/data/buildings.geojson', 'lib/city/landmark-footprints.json'].includes(file)); return current; };
+  const readHistorical = (file, revision) => { assert.equal(file, 'lib/city/engine.ts'); assert.equal(revision, rules.baseRevision); return historical; };
+  assert.equal(measureAuditInput('lib/city/engine.ts', rules.baseRevision, digest(historical), readCurrent, readHistorical).sha256, digest(historical));
+  assert.throws(() => measureAuditInput('lib/city/engine.ts', rules.baseRevision, digest(current), readCurrent, readHistorical), /hash differs/);
+  assert.equal(measureAuditInput('public/data/buildings.geojson', rules.baseRevision, digest(current), readCurrent, readHistorical).sha256, digest(current));
+  assert.throws(() => measureAuditInput('public/data/buildings.geojson', rules.baseRevision, digest(historical), readCurrent, readHistorical), /hash differs/);
+  assert.equal(measureAuditInput('lib/city/landmark-footprints.json', rules.baseRevision, digest(current), readCurrent, readHistorical).sha256, digest(current));
+  assert.throws(() => measureAuditInput('lib/city/landmark-footprints.json', rules.baseRevision, digest(historical), readCurrent, readHistorical), /hash differs/);
+  assert.throws(() => readAuditInput('lib/city/engine.ts', '0'.repeat(40)), /Fetch repository history/);
+  assert.throws(() => readAuditInput('../secret', rules.baseRevision), /Invalid audit input path/);
 });
 test('research completion never promotes new materials, geometry or WebGL acceptance', () => {
   assert.equal(report.status, 'partial');

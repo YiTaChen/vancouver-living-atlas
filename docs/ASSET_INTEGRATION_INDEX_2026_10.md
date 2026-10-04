@@ -1,5 +1,7 @@
 # 2026-10 離線資產整合索引
 
+> **接手整合狀態：** 以下保留作者交付時的離線快照。後續城市 consumer、獨立 Blender／WebGL 驗證、採用與拒用決定請以 [Blender 素材驗證與城市整合紀錄](BLENDER_INTEGRATION_REPORT_2026_10.md) 為準；D06 搭乘功能仍未完成。
+
 更新：2026-10-04 UTC。來源需求：[AI_AGENT_DEVELOPMENT_BACKLOG.md](AI_AGENT_DEVELOPMENT_BACKLOG.md)。共同起點 `5574d55719f10d1575127d8b92cbd23ff71e446f`；索引封存：2026-10-04 01:22 UTC；人物、可選駕駛艙與本索引同版交付，精確身份以此檔所在commit及各manifest SHA-256為準；分支 `assets/development-backlog-oct3`；[PR #5](https://github.com/YiTaChen/vancouver-living-atlas/pull/5)。
 
 **本索引交接來源資產，不宣稱城市已採用。全部新候選的 WebGL、正式場景配置、GPU／效能、生命週期及搭乘驗收仍未執行。D06 是未實作的 runtime，且不在本次 asset-only 製作範圍。**

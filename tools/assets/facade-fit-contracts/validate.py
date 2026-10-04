@@ -18,7 +18,7 @@ def validate_manifest(manifest):
     revision = manifest.get('baseRevision', '')
     need(isinstance(revision, str) and len(revision) == 40 and all(c in '0123456789abcdef' for c in revision), 'recorded base revision')
     expected, geometry_checks = collect(revision)
-    need(manifest == expected, 'reference contract differs from current measured source or versioned fit definitions; review and refresh explicitly')
+    need(manifest == expected, 'reference contract differs from current measured assets, historical consumer or versioned fit definitions; review and refresh explicitly')
     return geometry_checks
 
 

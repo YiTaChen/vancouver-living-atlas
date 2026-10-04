@@ -2,6 +2,9 @@
  * never runtime activation rules. No world XYZ is emitted or accepted. */
 import fs from 'node:fs';
 import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
+import {fileURLToPath} from 'node:url';
 import {pathToFileURL} from 'node:url';
 import {cityModule} from '../../../tests/helpers/city-modules.mjs';
 import {data,prepareParts,summarizeStructures,createProfile,project,rings} from '../../../tests/helpers/region-rule-audit.mjs';
@@ -31,4 +34,19 @@ export function sourceFixtures(){
  for(const lod of [0,1])for(const id of ['residential-cedar-sill','residential-gabled-entry-canopy'])for(const [dir,ext] of [['assets','glb'],['source','blend']])paths.push(`tools/assets/architecture-expansion/${dir}/${id}.lod${lod}.${ext}`);
  return {schemaVersion:1,status:'pass',method:'Actual prepareParts/summarizeStructures/createProfile, source polygon projection, fitBays/windowBounds bay0 row1; foundation-local scalar evidence only',fixtures,sourceFingerprints:Object.fromEntries(paths.map(p=>[p,crypto.createHash('sha256').update(fs.readFileSync(new URL(p,root))).digest('hex')])),limitations:['GIS shader openings are visual masks, not true wall or collision apertures','No scene activation, world XYZ placement, cell admission or WebGL acceptance','Source IDs select reproducible tests only; general fit uses profile and dimensions']};
 }
-if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){const r=sourceFixtures();if(process.argv.includes('--write'))fs.writeFileSync(new URL('qa/source-fixtures.json',here),JSON.stringify(r,null,2)+'\n');console.log(JSON.stringify(r.fixtures.map(f=>({id:f.id,opening:f.opening,attachment:f.attachment})),null,2));}
+/** Historical consumer hashes stay pinned; current geometry/profile-derived
+ * fixtures and all authored assets/data remain independently checked. */
+export function validateSourceFixtures(live,saved,baseRevision) {
+ assert.match(baseRevision,/^[0-9a-f]{40}$/,'recorded base revision');
+ const {sourceFingerprints:actual,...liveGeometry}=live;
+ const {sourceFingerprints:expected,...savedGeometry}=saved;
+ assert.deepEqual(liveGeometry,savedGeometry,'current source geometry/profile fit drift');
+ assert.deepEqual(Object.keys(actual),Object.keys(expected),'fingerprint inventory drift');
+ for(const [path,hash] of Object.entries(expected)) {
+  const observed=path.startsWith('lib/city/') && /\.(?:ts|js)$/.test(path)
+   ? crypto.createHash('sha256').update(execFileSync('git',['show',`${baseRevision}:${path}`],{cwd:fileURLToPath(root)})).digest('hex')
+   : actual[path];
+  assert.equal(observed,hash,`historical consumer or protected asset drift: ${path}`);
+ }
+}
+if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){const r=sourceFixtures();if(process.argv.includes('--check'))validateSourceFixtures(r,JSON.parse(fs.readFileSync(new URL('qa/source-fixtures.json',here))),JSON.parse(fs.readFileSync(new URL('manifest.json',here))).baseRevision);if(process.argv.includes('--write'))fs.writeFileSync(new URL('qa/source-fixtures.json',here),JSON.stringify(r,null,2)+'\n');console.log(JSON.stringify(r.fixtures.map(f=>({id:f.id,opening:f.opening,attachment:f.attachment})),null,2));}

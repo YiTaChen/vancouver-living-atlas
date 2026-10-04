@@ -6,6 +6,8 @@ License: Vancouver Living Atlas Noncommercial Research and Attribution 1.0（沿
 
 狀態：離線製作與 CPU 驗證 `offline_complete`；城市整合 `runtime_pending_webgl`。本包補 A02 缺少的真正 10 m 表面試片及砂地研究，另交 C04／F03 局部模型。**沒有改動正式 consumer、public、舊素材包、全城地形／海岸／道路／walk／collision，也沒有新增花草人口或部署。** 舊 city-scale-audit 的 partial 報告保留為當時記錄；本包是補充證據，不能回寫成它當時已完成。
 
+2026-10-03 consumer 整合後，來源參照中的 `lib/city/*.ts`／`*.js` SHA 依本包完整 `baseRevision`（`752cd68b2664d7d87d1c89e31de2308b145ced3a`）核對不可變 Git blob；所有歷史 SHA 保留。GIS（包括 `lib/city/` 下的來源 JSON）、source `.blend`、GLB、PNG、atlas 像素／色彩、植栽 cohort 與配置檔仍核對當前工作樹，沒有放寬 geometry／UV／模型契約。缺少歷史 revision 明確失敗並提示取得完整歷史，不以當前 consumer 代替。依賴最小化回歸 `tests/blender-historical-source-hashes.test.mjs` 驗證偽造歷史 SHA、當前 GIS 差異與缺失 commit 都拒絕；它不需要 Blender、Pillow 或 WebGL。
+
 ## 交付物與用途
 
 - 六種表面：soil、grass、sand、concrete、asphalt、street-brick，各有真正 2×2 m 與 10×10 m 的平面研究件。每件只有兩個三角形；不是把 2 m 斜坡放大，不是可鋪全城的 terrain patch。試片没有世界配置、导航高度或碰撞。

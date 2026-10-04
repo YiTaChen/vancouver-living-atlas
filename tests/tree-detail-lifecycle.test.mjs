@@ -13,6 +13,32 @@ const fakeThree = url(
 const fakeFactory = url(
   `import {BoxGeometry} from '${threeURL}';export function createTreeGeometry(conifer,variant,detail){globalThis.__treeFactories.push({conifer,variant,detail});return {trunk:new BoxGeometry(),foliage:new BoxGeometry()};}`,
 );
+const fakeMatureTrees = url(`
+  import {Group} from '${threeURL}';
+  export class MatureTrees {
+    status='idle'; count=0; group=new Group(); pending=null;
+    constructor(host){host.vegetation.add(this.group);this.group.visible=false;}
+    load(){
+      globalThis.__matureLoads.push(this);
+      if(this.pending)return this.pending;
+      this.status='loading';
+      this.pending=new Promise(resolve=>{this.complete=(success=true)=>{
+        if(this.status==='disposed'){resolve(false);return;}
+        this.status=success?'ready':'failed';resolve(success);
+      };});
+      return this.pending;
+    }
+    reset(){this.count=0;}
+    add(tree){
+      globalThis.__matureAdds.push(tree);
+      if(this.status!=='ready'||tree.conifer)return false;
+      this.count++;return true;
+    }
+    finish(){this.group.visible=this.count>0;}
+    state(){return {status:this.status,count:this.count};}
+    dispose(){this.status='disposed';this.count=0;this.group.removeFromParent();}
+  }
+`);
 const compile = (name, imports = {}) =>
   url(
     ts
@@ -46,6 +72,7 @@ const selection = compile('../lib/city/tree-selection.ts'),
       three: fakeThree,
       './tree-selection': selection,
       './assets/tree-geometry': fakeFactory,
+      './assets/mature-trees': fakeMatureTrees,
       './assets/tree-material-candidate': cityModule(
         'assets/tree-material-candidate',
       ),
@@ -56,6 +83,8 @@ const selection = compile('../lib/city/tree-selection.ts'),
 function setup() {
   globalThis.__treeLoads = [];
   globalThis.__treeFactories = [];
+  globalThis.__matureLoads = [];
+  globalThis.__matureAdds = [];
   let elevations = 0;
   const e = {
     disposed: false,
@@ -154,6 +183,148 @@ test('Ultra adds only missing pools incrementally; return to High creates nothin
   f.d.update();
   assert.equal(globalThis.__treeFactories.length, 12);
   assert.ok(f.d.pools.slice(6).every((p) => p.count === 0));
+});
+
+test('High never loads or admits mature trees; Ultra loads once and restores the High baseline after an eight-tree near pool', async () => {
+  const f = populated(),
+    highCounts = f.d.pools.map((pool) => pool.count);
+  assert.equal(globalThis.__matureLoads.length, 0);
+  assert.equal(globalThis.__matureAdds.length, 0);
+  assert.equal(f.d.getGeometryCandidateState().status, 'idle');
+  f.e.settings.quality = 'ultra';
+  f.d.update();
+  assert.equal(globalThis.__matureLoads.length, 1);
+  assert.equal(f.d.getGeometryCandidateState().status, 'loading');
+  for (let i = 0; i < 5; i++) f.d.update();
+  assert.equal(
+    globalThis.__matureLoads.length,
+    1,
+    'in-flight load is never restarted',
+  );
+  assert.equal(f.d.getGeometryCandidateState().count, 0);
+  f.d.matureTrees.complete();
+  await new Promise(setImmediate);
+  f.d.update();
+  assert.equal(f.d.getGeometryCandidateState().count, 8);
+  assert.equal(f.d.matureTrees.group.visible, true);
+  assert(globalThis.__matureAdds.every((tree) => !tree.conifer));
+  assert.equal(
+    f.d.pools.reduce((sum, pool) => sum + pool.count, 0),
+    22,
+  );
+  const adds = globalThis.__matureAdds.length;
+  f.e.settings.quality = 'high';
+  f.d.update();
+  assert.equal(f.d.getGeometryCandidateState().count, 0);
+  assert.equal(f.d.matureTrees.group.visible, false);
+  assert.equal(
+    globalThis.__matureAdds.length,
+    adds,
+    'High never attempts an admission',
+  );
+  assert.deepEqual(
+    f.d.pools.slice(0, 6).map((pool) => pool.count),
+    highCounts,
+  );
+  assert(f.d.pools.slice(6).every((pool) => pool.count === 0));
+  assert.equal(f.d.hidden.size, 30);
+  f.e.settings.quality = 'balanced';
+  f.d.update();
+  assert.equal(f.d.getGeometryCandidateState().count, 0);
+  assert.equal(f.d.hidden.size, 0);
+  for (const tree of f.trees) {
+    const matrix = new THREE.Matrix4();
+    f.base.getMatrixAt(tree.seed, matrix);
+    assert.deepEqual(matrix.elements, tree.slots[0].matrix.elements);
+  }
+  f.d.dispose();
+  disposePoolScene(f);
+});
+
+test('Ultra lazy load requires a close broadleaf, and explicit QA loading in High still cannot admit one', async () => {
+  for (const condition of [
+    'conifers-only',
+    'outside-45m',
+    'trees-off',
+    'baseline',
+  ]) {
+    const f = setup();
+    f.e.settings.quality = 'ultra';
+    if (condition === 'conifers-only')
+      f.trees.forEach((tree) => {
+        tree.conifer = true;
+      });
+    if (condition === 'outside-45m') f.e.camera.position.set(0, 20, 100);
+    if (condition === 'trees-off') f.e.settings.trees = false;
+    if (condition === 'baseline') await f.d.setGeometryCandidate('baseline');
+    f.d.update(true);
+    assert.equal(globalThis.__matureLoads.length, 0, condition);
+    assert.equal(globalThis.__matureAdds.length, 0, condition);
+    f.d.dispose();
+    disposePoolScene(f);
+  }
+  const f = setup(),
+    requested = f.d.setGeometryCandidate('blender');
+  assert.equal(
+    globalThis.__matureLoads.length,
+    1,
+    'explicit QA preload remains available',
+  );
+  f.d.matureTrees.complete();
+  assert.equal(await requested, true);
+  f.d.update(true);
+  assert.equal(f.d.getGeometryCandidateState().count, 0);
+  assert.equal(globalThis.__matureAdds.length, 0);
+  assert.equal(
+    f.d.hidden.size,
+    0,
+    'pending baseline atlases leave original instances visible',
+  );
+  f.d.dispose();
+  disposePoolScene(f);
+});
+
+test('loaded Ultra trees return to original slots in High when old atlases failed; late completion cannot revive High or a disposed owner', async () => {
+  const f = setup();
+  f.e.settings.quality = 'ultra';
+  f.d.update();
+  settle('leaf');
+  settle('bark', false);
+  f.d.matureTrees.complete();
+  await new Promise(setImmediate);
+  f.d.update();
+  assert.equal(f.d.hidden.size, 8);
+  assert.equal(f.d.pools.length, 0);
+  f.e.settings.quality = 'high';
+  f.d.update();
+  assert.equal(f.d.hidden.size, 0);
+  assert.equal(f.d.getGeometryCandidateState().count, 0);
+  for (const tree of f.trees) {
+    const matrix = new THREE.Matrix4();
+    f.base.getMatrixAt(tree.seed, matrix);
+    assert.deepEqual(matrix.elements, tree.slots[0].matrix.elements);
+  }
+  f.d.dispose();
+  disposePoolScene(f);
+  for (const finishIn of ['high', 'disposed']) {
+    const g = setup();
+    g.e.settings.quality = 'ultra';
+    g.d.update();
+    if (finishIn === 'high') {
+      g.e.settings.quality = 'high';
+      g.d.update();
+    } else g.d.dispose();
+    g.d.refresh = false;
+    g.d.matureTrees.complete();
+    await new Promise(setImmediate);
+    if (finishIn === 'disposed') assert.equal(g.d.refresh, false);
+    g.d.update();
+    assert.equal(g.d.hidden.size, 0);
+    assert.equal(g.d.getGeometryCandidateState().count, 0);
+    assert.equal(globalThis.__matureAdds.length, 0);
+    g.d.dispose();
+    disposePoolScene(g);
+  }
 });
 test('failed bark and dispose-during-load cannot hide base trees or allocate geometry later', () => {
   const f = setup();

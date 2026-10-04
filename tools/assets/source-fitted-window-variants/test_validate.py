@@ -13,6 +13,14 @@ class Tests(unittest.TestCase):
    p=Path(td)/'mutant.glb';pack(doc,bytes(binary),p)
    with self.assertRaisesRegex(ValueError,match):v.validate_geometry(p,D,1)
  def test_full_package(self):self.assertEqual(v.validate()['status'],'pass')
+ def test_false_historical_consumer_hash(self):
+  revision=json.loads((HERE/'manifest.json').read_text())['baseRevision']
+  with self.assertRaisesRegex(ValueError,'historical consumer'):
+   v.check_source_fingerprints({'lib/city/architecture-plan.ts':'0'*64},revision)
+ def test_current_data_hash_is_not_read_from_history(self):
+  revision=json.loads((HERE/'manifest.json').read_text())['baseRevision']
+  with self.assertRaisesRegex(ValueError,'protected asset'):
+   v.check_source_fingerprints({'public/data/buildings.geojson':'0'*64},revision)
  def test_four_actual_geometry_fixtures(self):
   for aid,d in json.loads((HERE/'designs.json').read_text()).items():
    for lod in [0,1]:self.assertEqual(v.validate_geometry(HERE/'exports'/f'{aid}.lod{lod}.glb',d,lod)['status'],'pass')

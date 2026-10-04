@@ -2,6 +2,8 @@
 
 本包只新增來源規則、可重現 CPU 對照及交接證據。沒有修改 `public/`、城市來源、runtime、來源 Blender、正式材質或地標；沒有匯出替代整城 GLB。基準 HEAD：`5574d55719f10d1575127d8b92cbd23ff71e446f`。實際輸入以 `qa/source-hashes.json` 的逐檔 SHA-256 為準，不能只靠 HEAD 判斷工作樹。
 
+2026-10-03 整合時，runtime 可合法新增已驗證的資產 consumer。因此 `lib/city/*.ts`／`*.js` 的交接 SHA 改為核對完整 `baseRevision` 的不可變 Git blob，歷史 SHA 不會被當前整合覆寫；數值稽核仍執行當前 TypeScript consumer 和當前 GIS。其餘 GIS（包括 `lib/city/` 的來源 JSON）、GLB、PNG、Blender、規則、工具、來源文件仍核對工作樹。缺少歷史 commit 時明確失敗並提示取得完整歷史，不回退到當前檔案。工具自身 SHA／總 fingerprint 隨這次明確驗證器修改更新，建築 ledger、來源幾何、A01–A04 數值及 WebGL `not_run` 狀態不變；遷移逐檔差異記錄於 `qa/hash-contract-migration.json`。
+
 **整包狀態是 `partial`。** A01 的來源規則／數值對照、A03 的 CPU 研究、A04 的來源核對已完成各自離線範圍；A02 尚缺 10×10 m 實際 coupon 與新四條件 CPU 渲染。所有 WebGL、城市畫面改善、效能與發布均 `not_run`。本包不引用歷史截圖為本輪通過證據。
 
 ## 實際結果
@@ -19,7 +21,7 @@
 - `source-rules.json`：A01–A04 的機器可讀規則、datum、roof gates、finish 分布、coupon／時鐘／結構限制。
 - `audit.mjs`：讀取真實來源，呼叫現行 TypeScript 匯出函式，重新產生所有 CPU 證據。
 - `cpu-modules.mjs`：只讀 TypeScript loader；直接抽取 engine 的 `elevation/rawElevation` 方法，搭配真實 `BeachGround`。不把自寫近似 bilinear 函式當成 consumer。
-- `audit.test.mjs`：12 個回歸案例，包括反序穩定性、source clamp／datum 陷阱、無效輸入拒絕、實際 GLB、來源子列、clock 獨立與 deterministic report。
+- `audit.test.mjs`：13 個回歸案例，包括反序穩定性、source clamp／datum 陷阱、無效輸入拒絕、實際 GLB、來源子列、clock 獨立與 deterministic report；新增歷史 SHA 偽造、當前 GIS 差異與缺失歷史的拒絕。
 - `qa/report.json`：四項結果、精確數字、confidence、來源限制、缺口與未測項目。
 - `qa/buildings.jsonl`：7,794 個 accepted polygon parts 的完整數值 ledger。這是 CPU 對照資料，不是另一份城市 geometry 或 runtime 配置檔。
 - `qa/source-hashes.json`：實際消費的 TS、JSON、GLB、PNG、來源 Blender 與規格文件 SHA-256。包含 audit／loader 自身，來源檔沒有重烘焙或覆寫。
@@ -68,7 +70,7 @@ Existing Lions 外側欄桿 consumer 已依 OSM `70954668`／`70954672` 路徑�
 # 預設只讀核對。任何 input/report 差異均失敗；不自動更新基準。
 node tools/assets/city-scale-audit/audit.mjs --check
 
-# 12 個 CPU 回歸，包含存檔 evidence 與重新計算完全相同。
+# 13 個 CPU 回歸，包含存檔 evidence 與重新計算完全相同。
 node --test tools/assets/city-scale-audit/audit.test.mjs
 
 # 只有在檢視來源差異、確認規則仍相容後，才主動更新本包 qa/。

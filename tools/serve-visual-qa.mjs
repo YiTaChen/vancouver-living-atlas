@@ -12,6 +12,18 @@ await mkdir(output, { recursive: true });
 const revision = execFileSync('git', ['rev-parse', 'HEAD'], {
   encoding: 'utf8',
 }).trim();
+const deliveryPackages = [
+  'mature-tree-templates', 'rooftop-equipment', 'traffic-car-templates',
+  'boardable-bus', 'boardable-metro', 'transit-station-spaces',
+  'landmark-entrance-details', 'roof-surface-studies',
+  'street-furniture-expansion', 'ground-planting-details',
+  'source-fitted-window-variants', 'citizen-character-variants',
+];
+function isOfflineAssetPath(relative) {
+  if (/^(?:(?:role-materials\/exports|vegetation_ground\/exports|architecture-expansion\/assets|citizen\/runtime-reference)\/[a-z0-9_.-]+\.glb|vegetation_ground\/maps\/leaf_mip_[0-4]_(?:1024|512|256|128|64)\.png)$/.test(relative)) return true;
+  const match = /^([a-z0-9-]+)\/exports\/(?:textures\/)?([a-z0-9][a-z0-9_.-]*\.(?:glb|png))$/.exec(relative);
+  return !!match && deliveryPackages.includes(match[1]);
+}
 // HEAD is the parent revision while validating an uncommitted stage. Hash the
 // actual visual source and data as well, so that distinction stays explicit.
 const visualFiles = [
@@ -40,6 +52,10 @@ const visualFiles = [
         'tools/assets/citizen/runtime-reference/*.glb',
         'tools/assets/vegetation-runtime-candidate/manifest.json',
         'tools/assets/vegetation_ground/maps/leaf_mip_*.png',
+        ...deliveryPackages.flatMap((name) => [
+          `tools/assets/${name}/manifest.json`,
+          `tools/assets/${name}/exports`,
+        ]),
       ],
       { encoding: 'utf8' },
     )
@@ -75,11 +91,7 @@ createServer(async (req, res) => {
       const relative = decodeURIComponent(
         url.pathname.slice('/__offline-assets/'.length),
       );
-      if (
-        !/^(?:(?:role-materials\/exports|vegetation_ground\/exports|architecture-expansion\/assets|citizen\/runtime-reference)\/[a-z0-9_.-]+\.glb|vegetation_ground\/maps\/leaf_mip_[0-4]_(?:1024|512|256|128|64)\.png)$/.test(
-          relative,
-        )
-      ) {
+      if (!isOfflineAssetPath(relative)) {
         res.writeHead(404);
         return res.end('Not found');
       }

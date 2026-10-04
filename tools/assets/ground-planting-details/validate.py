@@ -7,6 +7,18 @@ sp=importlib.util.spec_from_file_location('common',HERE.parent/'package-contract
 REPEAT={'soil':[2,2],'grass':[2,2],'sand':[2,2],'concrete':[1.5,1.5],'asphalt':[3,3],'street-brick':[1.92,1.92],'soil-grass-edge':[2,2],'foliage':[1,1]}
 def j(p):return json.loads(Path(p).read_text())
 def dump(p,v):Path(p).write_text(json.dumps(v,indent=2)+'\n')
+def check_source_reference_hashes(rows,base_revision,read_current=None,read_historical=None):
+ c.need(isinstance(base_revision,str) and len(base_revision)==40 and all(x in '0123456789abcdef' for x in base_revision),'complete recorded source base revision')
+ if read_current is None:read_current=lambda path:(ROOT/path).read_bytes()
+ if read_historical is None:
+  def read_historical(path,revision):
+   try:return subprocess.check_output(['git','show',revision+':'+path],cwd=ROOT,stderr=subprocess.PIPE)
+   except subprocess.CalledProcessError as cause:raise RuntimeError('Recorded ground consumer unavailable: '+revision+':'+path+'. Fetch full repository history (git fetch --unshallow where needed); no current-source fallback.') from cause
+ for row in rows:
+  path=row['file'];c.need(isinstance(path,str) and not Path(path).is_absolute() and '..' not in Path(path).parts,'source dependency path')
+  data=read_historical(path,base_revision) if path.startswith('lib/city/') and path.endswith(('.ts','.js')) else read_current(path)
+  c.need(hashlib.sha256(data).hexdigest()==row['sha256'],'preserved source dependency hash changed: '+path)
+  c.need('bytes' not in row or len(data)==row['bytes'],'preserved source dependency byte count changed: '+path)
 def uv_span(d,blob):
  uv=[row for m in d['meshes']for p in m['primitives']for row in c.accessor(d,blob,p['attributes']['TEXCOORD_0'])];return [max(p[k]for p in uv)-min(p[k]for p in uv)for k in range(2)]
 def check_glb(path,aid,lod,study,inspection):
@@ -86,7 +98,9 @@ def validate():
  for a in m['assets']:
   for l in a['lods']:
    c.need(l['sourceSha256']==c.digest(HERE/l['source']),'source hash stale');c.need(all(abs(x-y)<=a['dimensionToleranceM'] for x,y in zip(l['boundsM']['size'],a['expectedDimensionsM'])),'independent design dimension target')
- for row in j(HERE/'source-references.json')['files']:c.need(c.digest(ROOT/row['file'])==row['sha256'],'preserved source dependency hash changed')
+ # The provenance consumer is immutable history. Current GIS/maps/Blender and
+ # all actual geometry/UV/pixel checks above remain strict working-tree inputs.
+ check_source_reference_hashes(j(HERE/'source-references.json')['files'],m['baseRevision'])
  results['packageChecks']={'physicalCouponSizesAndUV':'pass','edgeSamplerAndLowFrequencyWeight':'pass','twoLODPropBudgets':'pass','sourceSelectionAndPopulation':'pass','sourcePreservingArtistExport':'pass','actualGLBReimport':'pass','cyclesCPU32ViewMatrix':'pass','runtime':'not_run'};dump(HERE/'qa/validation.json',results);print(json.dumps({'status':'pass','assets':len(m['assets']),'GLBs':len(r['files']),'previews':len(re['renders'])}))
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('--finalize-manifest',action='store_true');a=p.parse_args()

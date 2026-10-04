@@ -26,6 +26,12 @@ class ReferenceContractTests(unittest.TestCase):
         m=copy.deepcopy(self.manifest); m['moduleContracts'][0]['lodReferences'][0]['glb']['sha256']='0'*64
         with self.assertRaisesRegex(ValueError, 'differs'): validate_manifest(m)
 
+    def test_historical_consumer_hash_tampering_rejected(self):
+        m=copy.deepcopy(self.manifest)
+        reference=next(r for r in m['sourceReferences'] if r['path']=='lib/city/architecture-plan.ts')
+        reference['sha256']='0'*64
+        with self.assertRaisesRegex(ValueError, 'differs'): validate_manifest(m)
+
     def test_bounds_or_cost_tampering_rejected(self):
         for field in ['bytes', 'triangles']:
             m=copy.deepcopy(self.manifest); m['moduleContracts'][0]['lodReferences'][0]['measurements'][field]+=1

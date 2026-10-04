@@ -10,6 +10,7 @@ import type { Feature } from './types';
 import { lakeSurfaces } from './water-world';
 import { roadDecorations } from './road-decorations';
 import { trimRoad } from './road-trim';
+import { TrafficVehicleAssets } from './traffic-vehicles';
 export interface Traffic {
   mesh: THREE.InstancedMesh;
   cabins: THREE.InstancedMesh;
@@ -24,6 +25,7 @@ export interface Traffic {
   boats: THREE.Group[];
   buses: THREE.InstancedMesh;
   busRoutes: BusRoute[];
+  vehicleAssets: TrafficVehicleAssets;
 }
 export function createNature(e: CityEngine) {
   const woodPolys = e.data.context.features
@@ -464,6 +466,7 @@ export function createStreetDetails(e: CityEngine): Traffic {
   const buses = createBuses(busRoutes.length);
   buses.count = 0;
   e.trafficGroup.add(buses);
+  const vehicleAssets = new TrafficVehicleAssets(routes, e.trafficGroup);
   return {
     mesh: body,
     cabins,
@@ -472,6 +475,7 @@ export function createStreetDetails(e: CityEngine): Traffic {
     boats,
     buses,
     busRoutes,
+    vehicleAssets,
   };
 }
 const dummy = new THREE.Object3D();
@@ -483,6 +487,16 @@ export function updateTraffic(e: CityEngine, traffic: Traffic, time: number) {
     (x, z) => e.data.roadRelief?.(x, z) ?? e.elevation(x, z),
     e.camera.position,
   );
+  const loaded = traffic.vehicleAssets.update(
+    time,
+    e.camera.position,
+    (x, z) => {
+      const fallback = (e.data.roadRelief?.(x, z) ?? e.elevation(x, z)) + 1.05;
+      return e.data.roadSurface?.sample(x, z, fallback) ?? fallback;
+    },
+  );
+  traffic.mesh.visible = traffic.cabins.visible = !loaded;
+  if (loaded) return;
   traffic.routes.forEach((r, i) => {
     const t = (r.phase + (time * r.speed) / r.length) % 1,
       x = THREE.MathUtils.lerp(r.a[0], r.b[0], t),

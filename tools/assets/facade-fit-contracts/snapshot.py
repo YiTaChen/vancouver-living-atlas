@@ -2,13 +2,21 @@
 from pathlib import Path
 import argparse
 import json
+import hashlib
 import subprocess
 from geometry import HERE, ROOT, common, legacy, digest, mesh_triangles, check_open_volume, check_witnesses, need
 from definitions import SCHEMA, PACKAGE_ID, VERSION, MODULE_PACKAGES, DEPENDENCIES, REJECTION_REASONS, definition, witnesses
 
 
-def file_reference(path):
-    return {'path': str(path.relative_to(ROOT)), 'sha256': digest(path), 'bytes': path.stat().st_size}
+def file_reference(path, baseline_revision=None):
+    relative = str(path.relative_to(ROOT))
+    # The audit records its consumer version, not a permanent ban on runtime
+    # improvements. Authored assets/data/tool references still use current bytes.
+    if baseline_revision and relative.startswith('lib/city/') and relative.endswith(('.ts', '.js')):
+        need(len(baseline_revision) == 40 and all(c in '0123456789abcdef' for c in baseline_revision), 'recorded base revision')
+        data = subprocess.check_output(['git', 'show', baseline_revision+':'+relative], cwd=ROOT)
+        return {'path': relative, 'sha256': hashlib.sha256(data).hexdigest(), 'bytes': len(data)}
+    return {'path': relative, 'sha256': digest(path), 'bytes': path.stat().st_size}
 
 
 def lod_reference(directory, asset, lod, check_legacy=True):
@@ -33,6 +41,7 @@ def lod_reference(directory, asset, lod, check_legacy=True):
 
 
 def collect(base_revision=None):
+    historical_revision = base_revision
     base_revision = base_revision or subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     contracts, checks, references = [], [], []
     for package in MODULE_PACKAGES:
@@ -84,7 +93,7 @@ def collect(base_revision=None):
             'fitEvaluatorScope': 'width and current streetBayThreshold only; not complete streetfront source eligibility',
             'pendingConsumerGates': ['existing heritage/modern source region and height gates', 'water and sidewalk coverage', 'modern canopy-tip pavement sample at 1.75 m projection', 'source-location deduplication and runtime cell/population budgets'],
             'accessibility': 'No GIS opening, floor, navigation or entry capability is created.'})
-    references += [file_reference(ROOT/path) for path in DEPENDENCIES]
+    references += [file_reference(ROOT/path, historical_revision) for path in DEPENDENCIES]
     snapshot = {
         'schemaVersion': SCHEMA, 'packageId': PACKAGE_ID, 'version': VERSION,
         'deliverableKind': 'source-reference-adaptation-contract', 'baseRevision': base_revision,

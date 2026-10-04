@@ -1,10 +1,20 @@
 """Independent actual-GLB opening, stop, normals/UV, datum and package audit."""
-import importlib.util,json,math,sys
+import importlib.util,json,math,sys,subprocess,hashlib
 from pathlib import Path
 HERE=Path(__file__).resolve().parent;ROOT=HERE.parents[2]
 def load(n,p):
  s=importlib.util.spec_from_file_location(n,p);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
 common=load('windows_common',HERE.parent/'package-contract/validate.py');geom=load('windows_geometry',HERE.parent/'facade-fit-contracts/geometry.py');need=common.need
+
+def check_source_fingerprints(fingerprints, baseline_revision):
+ need(isinstance(baseline_revision,str) and len(baseline_revision)==40 and all(c in '0123456789abcdef' for c in baseline_revision),'recorded base revision')
+ for path,sha in fingerprints.items():
+  if path.startswith('lib/city/') and path.endswith(('.ts', '.js')):
+   data=subprocess.check_output(['git','show',baseline_revision+':'+path],cwd=ROOT)
+   observed=hashlib.sha256(data).hexdigest()
+  else:
+   observed=common.digest(ROOT/path)
+  need(observed==sha,'historical consumer/protected asset drift: '+path)
 
 def check_aperture(triangles,points,d):
  w,h,s=d['openingWidthM'],d['openingHeightM'],d['sectionM'];back=d['backZ'];front=back+d['depthM'];stop=d['stopRearZ'];thick=d['stopThicknessM'];e=d['revealExtraM'];center=[0,s+h/2,stop+thick/2]
@@ -73,7 +83,9 @@ def validate(root=HERE):
  need(len(assembly_previews['inputGlbSha256'])==8,'eight paired preview input GLBs')
  for file,sha in assembly_previews['inputGlbSha256'].items():need(common.digest(root/file)==sha,'paired assembly rendered GLB drift')
  need(audit['status']==proof['status']==previews['status']==fits['status']=='pass','required offline evidence');need(len(audit['results'])==len(proof['results'])==8 and len(fits['results'])==4,'all four sources/LODs audited');need(previews['visualReview']['status']=='pass','visual review required');need(len(previews['images'])==24,'24 compact actual-GLB previews')
- for p,sha in source['sourceFingerprints'].items():need(common.digest(ROOT/p)==sha,'source/protected old asset drift: '+p)
+ check_source_fingerprints(source['sourceFingerprints'],m['baseRevision'])
+ live=subprocess.run(['node',str(HERE/'source_fixtures.mjs'),'--check'],cwd=ROOT,text=True,capture_output=True,timeout=120)
+ need(live.returncode==0,'current source geometry/profile fit drift: '+live.stderr)
  for image in previews['images']+assembly_previews['images']:need(common.digest(root/image['file'])==image['sha256'],'preview stale');need(image['device']=='CPU' and image['engine']=='Cycles','CPU preview required')
  for a in m['assets']:
   is_sill=a['id'] in sills;need(a['attachmentDatum']['kind']==('shared-window-frame-root' if is_sill else 'outer-frame-bottom-at-wall-plane') and a['frontAxis']=='+Z','datum semantics');d=(sills if is_sill else specs)[a['id']]
