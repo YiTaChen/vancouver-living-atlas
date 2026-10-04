@@ -1,0 +1,568 @@
+{
+  "status": "pass",
+  "method": "Fresh normal .blend source GLB compared to actual batched BIN per-component POSITION/NORMAL/UV, indices, material and named-node transforms; no geometry simplification",
+  "results": [
+    {
+      "file": "admissions-counter-module.lod0.glb",
+      "status": "pass",
+      "unbatchedSha256": "d05fd5b6fbcdfc2d9453842416453c1be2b5f52a46d58928a1ba55b03d5db34f",
+      "batchedSha256": "2574c655ae72fd1dee2e6fa167209df460322baab19af8cdccca2eec046ae59d",
+      "unbatchedPrimitives": 7,
+      "batchedPrimitives": 2,
+      "materialRoles": 2,
+      "unbatchedBytes": 34684,
+      "batchedBytes": 39300,
+      "unbatchedGeometryBufferBytes": 27144,
+      "batchedGeometryBufferBytes": 30576,
+      "trianglesUnchanged": 308,
+      "verticesUnchanged": 672,
+      "allOriginalNodeTransformsPreserved": true,
+      "componentRanges": [
+        {
+          "componentId": "counter-top",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_interior-oak-veneer-0",
+          "triangleCount": 44,
+          "attributeMaxErrors": {
+            "POSITION": 5.21540641784668e-08,
+            "NORMAL": 2.8307125865545402e-08,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "counter-front",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_interior-oak-veneer-0",
+          "triangleCount": 44,
+          "attributeMaxErrors": {
+            "POSITION": 2.9802322387695312e-08,
+            "NORMAL": 2.8306466837157984e-08,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "counter-side--0.68",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_interior-matte-plaster-1",
+          "triangleCount": 44,
+          "attributeMaxErrors": {
+            "POSITION": 2.9802322387695312e-08,
+            "NORMAL": 2.8307125865545402e-08,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "counter-side-0.68",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_interior-matte-plaster-1",
+          "triangleCount": 44,
+          "attributeMaxErrors": {
+            "POSITION": 2.9802322387695312e-08,
+            "NORMAL": 2.8307125865545402e-08,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "recessed-plinth",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_interior-matte-plaster-1",
+          "triangleCount": 44,
+          "attributeMaxErrors": {
+            "POSITION": 0.0,
+            "NORMAL": 2.8307125865545402e-08,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "working-shelf",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_interior-matte-plaster-1",
+          "triangleCount": 44,
+          "attributeMaxErrors": {
+            "POSITION": 2.2351741790771484e-08,
+            "NORMAL": 2.8307125865545402e-08,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "front-inset-rail",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_interior-matte-plaster-1",
+          "triangleCount": 44,
+          "attributeMaxErrors": {
+            "POSITION": 2.60770320892334e-08,
+            "NORMAL": 2.8306466837157984e-08,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        }
+      ],
+      "rangeValidation": {
+        "components": 7,
+        "triangles": 308,
+        "primitives": 2,
+        "zeroDrawAnchors": 7
+      }
+    },
+    {
+      "file": "admissions-counter-module.lod1.glb",
+      "status": "pass",
+      "unbatchedSha256": "9b81839b42f384bbe0634275bd96c09bd20a8498389b026e6de33cab715f30fc",
+      "batchedSha256": "b8f5c416b7731b9f21754ac1ea4af955445ba9b4302bb38da495c29d63044474",
+      "unbatchedPrimitives": 5,
+      "batchedPrimitives": 2,
+      "materialRoles": 2,
+      "unbatchedBytes": 10540,
+      "batchedBytes": 12764,
+      "unbatchedGeometryBufferBytes": 4872,
+      "batchedGeometryBufferBytes": 5520,
+      "trianglesUnchanged": 60,
+      "verticesUnchanged": 120,
+      "allOriginalNodeTransformsPreserved": true,
+      "componentRanges": [
+        {
+          "componentId": "counter-top",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_interior-oak-veneer-0",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 3.725290298461914e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "counter-front",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_interior-oak-veneer-0",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.9802322387695312e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "counter-side--0.68",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_interior-matte-plaster-1",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.9802322387695312e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "counter-side-0.68",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_interior-matte-plaster-1",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 2.9802322387695312e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "recessed-plinth",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_interior-matte-plaster-1",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 0.0,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        }
+      ],
+      "rangeValidation": {
+        "components": 5,
+        "triangles": 60,
+        "primitives": 2,
+        "zeroDrawAnchors": 5
+      }
+    },
+    {
+      "file": "lecture-chair-module.lod0.glb",
+      "status": "pass",
+      "unbatchedSha256": "9e26304e593f3ca51ad472550fbf47a97ca3a93b49e635f6da09cab7ddedf533",
+      "batchedSha256": "3633495198af224eed3fe06b71c4a4ab80045078c01fb9b04f4414610ea44466",
+      "unbatchedPrimitives": 10,
+      "batchedPrimitives": 2,
+      "materialRoles": 2,
+      "unbatchedBytes": 49128,
+      "batchedBytes": 54868,
+      "unbatchedGeometryBufferBytes": 38664,
+      "batchedGeometryBufferBytes": 43680,
+      "trianglesUnchanged": 440,
+      "verticesUnchanged": 960,
+      "allOriginalNodeTransformsPreserved": true,
+      "componentRanges": [
+        {
+          "componentId": "seat",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_interior-oak-veneer-0",
+          "triangleCount": 44,
+          "attributeMaxErrors": {
+            "POSITION": 3.725290298461914e-09,
+            "NORMAL": 2.8306466837157984e-08,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "back-slat-00",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_interior-oak-veneer-0",
+          "triangleCount": 44,
+          "attributeMaxErrors": {
+            "POSITION": 2.2351741790771484e-08,
+            "NORMAL": 2.8306466837157984e-08,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "back-slat-01",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_interior-oak-veneer-0",
+          "triangleCount": 44,
+          "attributeMaxErrors": {
+            "POSITION": 2.2351741790771484e-08,
+            "NORMAL": 2.8306466837157984e-08,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "back-slat-02",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_interior-oak-veneer-0",
+          "triangleCount": 44,
+          "attributeMaxErrors": {
+            "POSITION": 5.21540641784668e-08,
+            "NORMAL": 2.8306466837157984e-08,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "leg--0.265--0.25",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_landmark-brushed-aluminum-1",
+          "triangleCount": 44,
+          "attributeMaxErrors": {
+            "POSITION": 9.313225746154785e-09,
+            "NORMAL": 2.8306466837157984e-08,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "leg--0.265-0.25",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_landmark-brushed-aluminum-1",
+          "triangleCount": 44,
+          "attributeMaxErrors": {
+            "POSITION": 9.313225746154785e-09,
+            "NORMAL": 2.8306466837157984e-08,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "leg-0.265--0.25",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_landmark-brushed-aluminum-1",
+          "triangleCount": 44,
+          "attributeMaxErrors": {
+            "POSITION": 9.313225746154785e-09,
+            "NORMAL": 2.8306466837157984e-08,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "leg-0.265-0.25",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_landmark-brushed-aluminum-1",
+          "triangleCount": 44,
+          "attributeMaxErrors": {
+            "POSITION": 9.313225746154785e-09,
+            "NORMAL": 2.8306466837157984e-08,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "back-upright--0.27",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_landmark-brushed-aluminum-1",
+          "triangleCount": 44,
+          "attributeMaxErrors": {
+            "POSITION": 2.9802322387695312e-08,
+            "NORMAL": 2.8306466837157984e-08,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "back-upright-0.27",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_landmark-brushed-aluminum-1",
+          "triangleCount": 44,
+          "attributeMaxErrors": {
+            "POSITION": 2.9802322387695312e-08,
+            "NORMAL": 2.8306466837157984e-08,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        }
+      ],
+      "rangeValidation": {
+        "components": 10,
+        "triangles": 440,
+        "primitives": 2,
+        "zeroDrawAnchors": 10
+      }
+    },
+    {
+      "file": "lecture-chair-module.lod1.glb",
+      "status": "pass",
+      "unbatchedSha256": "ecc86cd97c0ffd46ac853db497d110d93b72b85516341b66faa2a7341a5d31b5",
+      "batchedSha256": "10c37c52ef6d429c75a0284be7eee3bb37130a5250742baf93e74335f1f55ebb",
+      "unbatchedPrimitives": 8,
+      "batchedPrimitives": 2,
+      "materialRoles": 2,
+      "unbatchedBytes": 16312,
+      "batchedBytes": 18520,
+      "unbatchedGeometryBufferBytes": 7752,
+      "batchedGeometryBufferBytes": 8832,
+      "trianglesUnchanged": 96,
+      "verticesUnchanged": 192,
+      "allOriginalNodeTransformsPreserved": true,
+      "componentRanges": [
+        {
+          "componentId": "seat",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_interior-oak-veneer-0",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 3.725290298461914e-09,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "back-simplified",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_interior-oak-veneer-0",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 1.4901161193847656e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "leg--0.265--0.25",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_landmark-brushed-aluminum-1",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 7.450580596923828e-09,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "leg--0.265-0.25",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_landmark-brushed-aluminum-1",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 7.450580596923828e-09,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "leg-0.265--0.25",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_landmark-brushed-aluminum-1",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 7.450580596923828e-09,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "leg-0.265-0.25",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_landmark-brushed-aluminum-1",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 7.450580596923828e-09,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "back-upright--0.27",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_landmark-brushed-aluminum-1",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 1.1175870895385742e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        },
+        {
+          "componentId": "back-upright-0.27",
+          "sourcePrimitive": 0,
+          "batchNode": "furniture-batch-EXPORT_landmark-brushed-aluminum-1",
+          "triangleCount": 12,
+          "attributeMaxErrors": {
+            "POSITION": 1.1175870895385742e-08,
+            "NORMAL": 0.0,
+            "TEXCOORD_0": 0.0,
+            "TEXCOORD_1": 0.0
+          },
+          "indicesIdenticalAfterVertexBaseSubtraction": true
+        }
+      ],
+      "rangeValidation": {
+        "components": 8,
+        "triangles": 96,
+        "primitives": 2,
+        "zeroDrawAnchors": 8
+      }
+    }
+  ],
+  "negativeTests": [
+    "range gap rejected",
+    "vertex overlap rejected",
+    "missing component rejected",
+    "anchor with draw geometry rejected",
+    "incorrect component bounds rejected",
+    "component-escaping binary index rejected",
+    "double batching rejected before write"
+  ],
+  "originalSourceFilesUnmodified": true,
+  "sourceHashes": {
+    "source/admissions-counter-module.lod0.blend": "72b57e402f349f5e331a7c9074435bd5f144d113878d671ed991fab264987a34",
+    "source/admissions-counter-module.lod1.blend": "881ec66107abeffdfbcf83de7e3fccfc13f4ac1c3c416f59ab6fa1ea9bb77554",
+    "source/lecture-chair-module.lod0.blend": "92277ea9c86bff64e2f137fa2947a34269884f1da5cd27478d2eda36f9ac13c5",
+    "source/lecture-chair-module.lod1.blend": "2198c38825db36f3efaf60ea745c6ce178b18d268f87282f3a650bf7858b0b51"
+  },
+  "placementPrimitiveSubmissionProposal": [
+    {
+      "lod": 0,
+      "chairInstances": 54,
+      "counterInstances": 4,
+      "chairBefore": 540,
+      "chairAfter": 108,
+      "counterBefore": 28,
+      "counterAfter": 8,
+      "totalBefore": 568,
+      "totalAfter": 116,
+      "instancingEnabled": false,
+      "gpuDrawsMeasured": false
+    },
+    {
+      "lod": 1,
+      "chairInstances": 54,
+      "counterInstances": 4,
+      "chairBefore": 432,
+      "chairAfter": 108,
+      "counterBefore": 20,
+      "counterAfter": 8,
+      "totalBefore": 452,
+      "totalAfter": 116,
+      "instancingEnabled": false,
+      "gpuDrawsMeasured": false
+    }
+  ],
+  "unbatchedTotalBytes": 110664,
+  "batchedTotalBytes": 125452,
+  "unbatchedGeometryBufferBytes": 78432,
+  "batchedGeometryBufferBytes": 88608,
+  "newTextureBytes": 0,
+  "costCaveat": "Primitive submissions are CPU asset estimates only. Preserved anchors/ranges and uint32 indices have file/buffer costs; no runtime FPS, draws or VRAM claim.",
+  "preBatchDeliveredGLBByteIdentity": [
+    {
+      "file": "admissions-counter-module.lod0.glb",
+      "previousDeliverySha256": "d05fd5b6fbcdfc2d9453842416453c1be2b5f52a46d58928a1ba55b03d5db34f",
+      "freshUnbatchedSha256": "d05fd5b6fbcdfc2d9453842416453c1be2b5f52a46d58928a1ba55b03d5db34f",
+      "byteIdentical": true
+    },
+    {
+      "file": "admissions-counter-module.lod1.glb",
+      "previousDeliverySha256": "9b81839b42f384bbe0634275bd96c09bd20a8498389b026e6de33cab715f30fc",
+      "freshUnbatchedSha256": "9b81839b42f384bbe0634275bd96c09bd20a8498389b026e6de33cab715f30fc",
+      "byteIdentical": true
+    },
+    {
+      "file": "lecture-chair-module.lod0.glb",
+      "previousDeliverySha256": "9e26304e593f3ca51ad472550fbf47a97ca3a93b49e635f6da09cab7ddedf533",
+      "freshUnbatchedSha256": "9e26304e593f3ca51ad472550fbf47a97ca3a93b49e635f6da09cab7ddedf533",
+      "byteIdentical": true
+    },
+    {
+      "file": "lecture-chair-module.lod1.glb",
+      "previousDeliverySha256": "ecc86cd97c0ffd46ac853db497d110d93b72b85516341b66faa2a7341a5d31b5",
+      "freshUnbatchedSha256": "ecc86cd97c0ffd46ac853db497d110d93b72b85516341b66faa2a7341a5d31b5",
+      "byteIdentical": true
+    }
+  ]
+}

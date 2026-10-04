@@ -1,0 +1,882 @@
+{
+  "blender": "4.3.2",
+  "status": "pass",
+  "assets": [
+    {
+      "file": "citizen.lod0.glb",
+      "sha256": "14733b2a44621b91ff620821faa9a361fd6369458c1a50cb737df9b18453d38f",
+      "blenderBoundsM": {
+        "min": [
+          -0.36451151967048645,
+          -0.1780000925064087,
+          0.0029900274239480495
+        ],
+        "max": [
+          0.3643709421157837,
+          0.24799998104572296,
+          1.8052752017974854
+        ]
+      },
+      "gltfBoundsM": {
+        "min": [
+          -0.36451151967048645,
+          0.0029900274239480495,
+          -0.24799998104572296
+        ],
+        "max": [
+          0.3643709421157837,
+          1.8052752017974854,
+          0.1780000925064087
+        ]
+      },
+      "bones": 22,
+      "images": [
+        {
+          "name": "Citizen_BaseColor-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "sRGB"
+        },
+        {
+          "name": "Citizen_Normal-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "Non-Color"
+        },
+        {
+          "name": "Citizen_Roughness-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "Non-Color"
+        }
+      ],
+      "actions": [
+        [
+          "idle_CitizenRig",
+          2.0
+        ],
+        [
+          "run_CitizenRig",
+          0.8
+        ],
+        [
+          "walk_CitizenRig",
+          1.0
+        ]
+      ],
+      "status": "pass"
+    },
+    {
+      "file": "citizen.lod1.glb",
+      "sha256": "5cad4fcfc1782d6b5dfa7663f19dca84142b4d4b75c3cffc08e107fc6ef8ef6d",
+      "blenderBoundsM": {
+        "min": [
+          -0.36451151967048645,
+          -0.1780000925064087,
+          0.0029900274239480495
+        ],
+        "max": [
+          0.3643709421157837,
+          0.24799998104572296,
+          1.8052752017974854
+        ]
+      },
+      "gltfBoundsM": {
+        "min": [
+          -0.36451151967048645,
+          0.0029900274239480495,
+          -0.24799998104572296
+        ],
+        "max": [
+          0.3643709421157837,
+          1.8052752017974854,
+          0.1780000925064087
+        ]
+      },
+      "bones": 22,
+      "images": [
+        {
+          "name": "Citizen_BaseColor-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "sRGB"
+        },
+        {
+          "name": "Citizen_Normal-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "Non-Color"
+        },
+        {
+          "name": "Citizen_Roughness-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "Non-Color"
+        }
+      ],
+      "actions": [
+        [
+          "idle_CitizenRig",
+          2.0
+        ],
+        [
+          "run_CitizenRig",
+          0.8
+        ],
+        [
+          "walk_CitizenRig",
+          1.0
+        ]
+      ],
+      "status": "pass"
+    },
+    {
+      "file": "citizen.lod2.glb",
+      "sha256": "2741325b8dd5b26756d0fa67ed809361013326c9ed21c6dca30bf4d70f425a33",
+      "blenderBoundsM": {
+        "min": [
+          -0.36451151967048645,
+          -0.1780000925064087,
+          0.0029900274239480495
+        ],
+        "max": [
+          0.3643709421157837,
+          0.24799998104572296,
+          1.8052752017974854
+        ]
+      },
+      "gltfBoundsM": {
+        "min": [
+          -0.36451151967048645,
+          0.0029900274239480495,
+          -0.24799998104572296
+        ],
+        "max": [
+          0.3643709421157837,
+          1.8052752017974854,
+          0.1780000925064087
+        ]
+      },
+      "bones": 22,
+      "images": [
+        {
+          "name": "Citizen_BaseColor-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "sRGB"
+        },
+        {
+          "name": "Citizen_Normal-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "Non-Color"
+        },
+        {
+          "name": "Citizen_Roughness-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "Non-Color"
+        }
+      ],
+      "actions": [
+        [
+          "idle_CitizenRig",
+          2.0
+        ],
+        [
+          "run_CitizenRig",
+          0.8
+        ],
+        [
+          "walk_CitizenRig",
+          1.0
+        ]
+      ],
+      "status": "pass"
+    },
+    {
+      "file": "driver-roadster-fit.lod0.glb",
+      "sha256": "a6e21e8d1d97f8be38e49a716ee8a6ac9cca54fd31b84b13617c705b665c97fc",
+      "blenderBoundsM": {
+        "min": [
+          -0.36451151967048645,
+          -0.1780000925064087,
+          0.0029900274239480495
+        ],
+        "max": [
+          0.3643709421157837,
+          0.14308054745197296,
+          1.8052752017974854
+        ]
+      },
+      "gltfBoundsM": {
+        "min": [
+          -0.36451151967048645,
+          0.0029900274239480495,
+          -0.14308054745197296
+        ],
+        "max": [
+          0.3643709421157837,
+          1.8052752017974854,
+          0.1780000925064087
+        ]
+      },
+      "bones": 22,
+      "images": [
+        {
+          "name": "Citizen_BaseColor-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "sRGB"
+        },
+        {
+          "name": "Citizen_Normal-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "Non-Color"
+        },
+        {
+          "name": "Citizen_Roughness-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "Non-Color"
+        }
+      ],
+      "actions": [
+        [
+          "driver-seated_CitizenRig",
+          1.0
+        ],
+        [
+          "driver-seated_Tailored torso.001",
+          1.0
+        ],
+        [
+          "idle_CitizenRig",
+          2.0
+        ],
+        [
+          "run_CitizenRig",
+          0.8
+        ],
+        [
+          "walk_CitizenRig",
+          1.0
+        ]
+      ],
+      "status": "pass"
+    },
+    {
+      "file": "driver-roadster-fit.lod1.glb",
+      "sha256": "1cb79599d359175c39ce0d466173f5293d7bbcb16a8f08450bd851c09ce0a0c0",
+      "blenderBoundsM": {
+        "min": [
+          -0.36451151967048645,
+          -0.1780000925064087,
+          0.0029900274239480495
+        ],
+        "max": [
+          0.3643709421157837,
+          0.14308054745197296,
+          1.8052752017974854
+        ]
+      },
+      "gltfBoundsM": {
+        "min": [
+          -0.36451151967048645,
+          0.0029900274239480495,
+          -0.14308054745197296
+        ],
+        "max": [
+          0.3643709421157837,
+          1.8052752017974854,
+          0.1780000925064087
+        ]
+      },
+      "bones": 22,
+      "images": [
+        {
+          "name": "Citizen_BaseColor-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "sRGB"
+        },
+        {
+          "name": "Citizen_Normal-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "Non-Color"
+        },
+        {
+          "name": "Citizen_Roughness-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "Non-Color"
+        }
+      ],
+      "actions": [
+        [
+          "driver-seated_CitizenRig",
+          1.0
+        ],
+        [
+          "driver-seated_Tailored torso.001",
+          1.0
+        ],
+        [
+          "idle_CitizenRig",
+          2.0
+        ],
+        [
+          "run_CitizenRig",
+          0.8
+        ],
+        [
+          "walk_CitizenRig",
+          1.0
+        ]
+      ],
+      "status": "pass"
+    },
+    {
+      "file": "driver-roadster-fit.lod2.glb",
+      "sha256": "1198d8433e27e9b60c17d054548162315584e49e644d16426828005e846833ac",
+      "blenderBoundsM": {
+        "min": [
+          -0.36451151967048645,
+          -0.1780000925064087,
+          0.0029900274239480495
+        ],
+        "max": [
+          0.3643709421157837,
+          0.14308054745197296,
+          1.8052752017974854
+        ]
+      },
+      "gltfBoundsM": {
+        "min": [
+          -0.36451151967048645,
+          0.0029900274239480495,
+          -0.14308054745197296
+        ],
+        "max": [
+          0.3643709421157837,
+          1.8052752017974854,
+          0.1780000925064087
+        ]
+      },
+      "bones": 22,
+      "images": [
+        {
+          "name": "Citizen_BaseColor-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "sRGB"
+        },
+        {
+          "name": "Citizen_Normal-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "Non-Color"
+        },
+        {
+          "name": "Citizen_Roughness-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "Non-Color"
+        }
+      ],
+      "actions": [
+        [
+          "driver-seated_CitizenRig",
+          1.0
+        ],
+        [
+          "driver-seated_Tailored torso.001",
+          1.0
+        ],
+        [
+          "idle_CitizenRig",
+          2.0
+        ],
+        [
+          "run_CitizenRig",
+          0.8
+        ],
+        [
+          "walk_CitizenRig",
+          1.0
+        ]
+      ],
+      "status": "pass"
+    },
+    {
+      "file": "driver.lod0.glb",
+      "sha256": "221f61dd1513ae63974234e6ec3458891cb8a0d6f1f703b2844e8e4b115759c9",
+      "blenderBoundsM": {
+        "min": [
+          -0.36451151967048645,
+          -0.1780000925064087,
+          0.0029900274239480495
+        ],
+        "max": [
+          0.3643709421157837,
+          0.24799998104572296,
+          1.8052752017974854
+        ]
+      },
+      "gltfBoundsM": {
+        "min": [
+          -0.36451151967048645,
+          0.0029900274239480495,
+          -0.24799998104572296
+        ],
+        "max": [
+          0.3643709421157837,
+          1.8052752017974854,
+          0.1780000925064087
+        ]
+      },
+      "bones": 22,
+      "images": [
+        {
+          "name": "Citizen_BaseColor-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "sRGB"
+        },
+        {
+          "name": "Citizen_Normal-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "Non-Color"
+        },
+        {
+          "name": "Citizen_Roughness-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "Non-Color"
+        }
+      ],
+      "actions": [
+        [
+          "driver-seated_CitizenRig",
+          1.0
+        ],
+        [
+          "idle_CitizenRig",
+          2.0
+        ],
+        [
+          "run_CitizenRig",
+          0.8
+        ],
+        [
+          "walk_CitizenRig",
+          1.0
+        ]
+      ],
+      "status": "pass"
+    },
+    {
+      "file": "driver.lod1.glb",
+      "sha256": "1e2c1079c6cecc0406da5438b3e7d67c8c2700807fbd56270c29f7c2451e7e11",
+      "blenderBoundsM": {
+        "min": [
+          -0.36451151967048645,
+          -0.1780000925064087,
+          0.0029900274239480495
+        ],
+        "max": [
+          0.3643709421157837,
+          0.24799998104572296,
+          1.8052752017974854
+        ]
+      },
+      "gltfBoundsM": {
+        "min": [
+          -0.36451151967048645,
+          0.0029900274239480495,
+          -0.24799998104572296
+        ],
+        "max": [
+          0.3643709421157837,
+          1.8052752017974854,
+          0.1780000925064087
+        ]
+      },
+      "bones": 22,
+      "images": [
+        {
+          "name": "Citizen_BaseColor-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "sRGB"
+        },
+        {
+          "name": "Citizen_Normal-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "Non-Color"
+        },
+        {
+          "name": "Citizen_Roughness-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "Non-Color"
+        }
+      ],
+      "actions": [
+        [
+          "driver-seated_CitizenRig",
+          1.0
+        ],
+        [
+          "idle_CitizenRig",
+          2.0
+        ],
+        [
+          "run_CitizenRig",
+          0.8
+        ],
+        [
+          "walk_CitizenRig",
+          1.0
+        ]
+      ],
+      "status": "pass"
+    },
+    {
+      "file": "driver.lod2.glb",
+      "sha256": "2ac3f0b8e0834f0261662b3be987ed8739064a4d63e29ce8abb6d06184af7884",
+      "blenderBoundsM": {
+        "min": [
+          -0.36451151967048645,
+          -0.1780000925064087,
+          0.0029900274239480495
+        ],
+        "max": [
+          0.3643709421157837,
+          0.24799998104572296,
+          1.8052752017974854
+        ]
+      },
+      "gltfBoundsM": {
+        "min": [
+          -0.36451151967048645,
+          0.0029900274239480495,
+          -0.24799998104572296
+        ],
+        "max": [
+          0.3643709421157837,
+          1.8052752017974854,
+          0.1780000925064087
+        ]
+      },
+      "bones": 22,
+      "images": [
+        {
+          "name": "Citizen_BaseColor-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "sRGB"
+        },
+        {
+          "name": "Citizen_Normal-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "Non-Color"
+        },
+        {
+          "name": "Citizen_Roughness-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "Non-Color"
+        }
+      ],
+      "actions": [
+        [
+          "driver-seated_CitizenRig",
+          1.0
+        ],
+        [
+          "idle_CitizenRig",
+          2.0
+        ],
+        [
+          "run_CitizenRig",
+          0.8
+        ],
+        [
+          "walk_CitizenRig",
+          1.0
+        ]
+      ],
+      "status": "pass"
+    },
+    {
+      "file": "police.lod0.glb",
+      "sha256": "0d312d3fda05662c3612f0aa29bcf26f2870f23dde8cbcbc6c260d2c9fdcedb0",
+      "blenderBoundsM": {
+        "min": [
+          -0.36451151967048645,
+          -0.1780000925064087,
+          0.0029900274239480495
+        ],
+        "max": [
+          0.3643709421157837,
+          0.24799998104572296,
+          1.8579999208450317
+        ]
+      },
+      "gltfBoundsM": {
+        "min": [
+          -0.36451151967048645,
+          0.0029900274239480495,
+          -0.24799998104572296
+        ],
+        "max": [
+          0.3643709421157837,
+          1.8579999208450317,
+          0.1780000925064087
+        ]
+      },
+      "bones": 22,
+      "images": [
+        {
+          "name": "Citizen_BaseColor-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "sRGB"
+        },
+        {
+          "name": "Citizen_Normal-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "Non-Color"
+        },
+        {
+          "name": "Citizen_Roughness-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "Non-Color"
+        }
+      ],
+      "actions": [
+        [
+          "idle_CitizenRig",
+          2.0
+        ],
+        [
+          "run_CitizenRig",
+          0.8
+        ],
+        [
+          "walk_CitizenRig",
+          1.0
+        ]
+      ],
+      "status": "pass"
+    },
+    {
+      "file": "police.lod1.glb",
+      "sha256": "325a1912d33c8f923954ed308883ff27577d6e200d3d40e31864e4ea1350411c",
+      "blenderBoundsM": {
+        "min": [
+          -0.36451151967048645,
+          -0.1780000925064087,
+          0.0029900274239480495
+        ],
+        "max": [
+          0.3643709421157837,
+          0.24799998104572296,
+          1.8579999208450317
+        ]
+      },
+      "gltfBoundsM": {
+        "min": [
+          -0.36451151967048645,
+          0.0029900274239480495,
+          -0.24799998104572296
+        ],
+        "max": [
+          0.3643709421157837,
+          1.8579999208450317,
+          0.1780000925064087
+        ]
+      },
+      "bones": 22,
+      "images": [
+        {
+          "name": "Citizen_BaseColor-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "sRGB"
+        },
+        {
+          "name": "Citizen_Normal-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "Non-Color"
+        },
+        {
+          "name": "Citizen_Roughness-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "Non-Color"
+        }
+      ],
+      "actions": [
+        [
+          "idle_CitizenRig",
+          2.0
+        ],
+        [
+          "run_CitizenRig",
+          0.8
+        ],
+        [
+          "walk_CitizenRig",
+          1.0
+        ]
+      ],
+      "status": "pass"
+    },
+    {
+      "file": "police.lod2.glb",
+      "sha256": "bb6ca6b0b780b4c1abd774ad3a790da10d86008988ac82a9f738e6cc6e8b001d",
+      "blenderBoundsM": {
+        "min": [
+          -0.36451151967048645,
+          -0.1780000925064087,
+          0.0029900274239480495
+        ],
+        "max": [
+          0.3643709421157837,
+          0.24799998104572296,
+          1.8579999208450317
+        ]
+      },
+      "gltfBoundsM": {
+        "min": [
+          -0.36451151967048645,
+          0.0029900274239480495,
+          -0.24799998104572296
+        ],
+        "max": [
+          0.3643709421157837,
+          1.8579999208450317,
+          0.1780000925064087
+        ]
+      },
+      "bones": 22,
+      "images": [
+        {
+          "name": "Citizen_BaseColor-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "sRGB"
+        },
+        {
+          "name": "Citizen_Normal-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "Non-Color"
+        },
+        {
+          "name": "Citizen_Roughness-1024",
+          "size": [
+            1024,
+            1024
+          ],
+          "colorSpace": "Non-Color"
+        }
+      ],
+      "actions": [
+        [
+          "idle_CitizenRig",
+          2.0
+        ],
+        [
+          "run_CitizenRig",
+          0.8
+        ],
+        [
+          "walk_CitizenRig",
+          1.0
+        ]
+      ],
+      "status": "pass"
+    }
+  ]
+}

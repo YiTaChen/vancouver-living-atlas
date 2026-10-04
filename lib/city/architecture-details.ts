@@ -5,6 +5,8 @@ import { replacedBuilding } from './replaced-buildings';
 import { type Profile } from './facade-profile';
 import type { PitchedRoof } from './building-roof';
 import { roofCellWork } from './architecture-roof-budget';
+import { RooftopEquipment } from './rooftop-equipment';
+import { getCityMaterialLibrary } from './material-library';
 import {
   architectureWork,
   type ArchitectureBox,
@@ -41,6 +43,7 @@ type RecordState = {
   ready: boolean;
   lastUsed: number;
   count: number;
+  rooftopUnits: number;
 };
 type Build = {
   record: RecordState;
@@ -60,7 +63,8 @@ export const ARCHITECTURE_BUDGET = {
 
 /** Bounded, original architectural appearance layered over unchanged GIS/collision.
  * Instance data is prepared cooperatively; at most one small cell uploads/frame.
- * No per-window objects, network fetch, texture allocation or unbounded cache. */
+ * Source footprints/collision stay unchanged. Near roofs may share six small
+ * Blender templates and the existing atlas; all other details remain boxes. */
 export class ArchitecturalDetails {
   readonly root = new THREE.Group();
   readonly cells: Cell[];
@@ -73,7 +77,12 @@ export class ArchitecturalDetails {
     }),
     metal: new THREE.MeshStandardMaterial({ roughness: 0.57, metalness: 0.38 }),
   };
+  readonly rooftopEquipment = new RooftopEquipment(() =>
+    this.e.extraTextures ? getCityMaterialLibrary(this.e as CityEngine) : null,
+  );
+  private rooftopEnabled = true;
   readonly stats = {
+    rooftopUnits: 0,
     selectedCells: 0,
     pendingCells: 0,
     buildingCells: 0,
@@ -105,8 +114,13 @@ export class ArchitecturalDetails {
     private e: Pick<
       CityEngine,
       'data' | 'buildings' | 'camera' | 'settings' | 'renderer'
-    >,
+    > &
+      Partial<
+        Pick<CityEngine, 'extraTextures' | 'disposed' | 'compatibleGraphics'>
+      >,
+    rooftopEquipment?: RooftopEquipment,
   ) {
+    if (rooftopEquipment) this.rooftopEquipment = rooftopEquipment;
     this.root.name =
       'Vancouver architecture — streamed roofs and lowrise fronts';
     this.e.buildings.add(this.root);
@@ -214,8 +228,25 @@ export class ArchitecturalDetails {
       if (affected(record)) this.release(record);
     this.last.set(Infinity, Infinity, Infinity);
   }
+  /** Reversible comparison control; production defaults to accepted assets. */
+  setRooftopEnabled(enabled: boolean) {
+    if (this.rooftopEnabled === enabled || this.disposed) return;
+    this.rooftopEnabled = enabled;
+    this.last.set(Infinity, Infinity, Infinity);
+  }
+  private invalidateRoofCells(cells: ReadonlySet<string>) {
+    if (!cells.size) return;
+    const affected = (record: RecordState) =>
+      record.tier === 'roof' && cells.has(record.cell.id);
+    if (this.build && affected(this.build.record)) this.cancelBuild();
+    this.pending = this.pending.filter((record) => !affected(record));
+    for (const record of this.records.values())
+      if (affected(record)) this.release(record);
+    this.last.set(Infinity, Infinity, Infinity);
+  }
   update(force = false) {
     if (this.disposed) return;
+    this.invalidateRoofCells(this.rooftopEquipment.takeInvalidated());
     if (process.env.VANCOUVER_VISUAL_QA === '1' && this.qaAdapter?.update())
       this.invalidateQAStreetCells(this.qaAdapter.affectedCells);
     this.tick++;
@@ -256,6 +287,13 @@ export class ArchitecturalDetails {
             .map((p) => ({ ...p, tier })),
         );
       }
+      this.rooftopEquipment.configure(
+        selected
+          .filter((p) => p.tier === 'roof')
+          .map((p) => ({ id: p.cell.id, distance: p.distance })),
+        this.rooftopEnabled && !this.e.compatibleGraphics ? q : 'off',
+      );
+      this.invalidateRoofCells(this.rooftopEquipment.takeInvalidated());
       // Nearby street architecture is ready before more distant rooftop decoration.
       selected.sort(
         (a, b) =>
@@ -279,6 +317,7 @@ export class ArchitecturalDetails {
             ready: false,
             lastUsed: this.tick,
             count: 0,
+            rooftopUnits: 0,
           };
           record.group.name = `Architecture ${id}`;
           record.group.visible = false;
@@ -367,6 +406,20 @@ export class ArchitecturalDetails {
     for (const surface of ['masonry', 'metal'] as const) {
       let boxes = build[surface];
       if (!boxes.length) continue;
+      if (build.record.tier === 'roof' && surface === 'metal') {
+        const replacement = this.rooftopEquipment.assemble(
+          boxes,
+          build.record.cell.id,
+          this.e.camera.position,
+        );
+        if (replacement?.units) {
+          boxes = boxes.filter((_, index) => !replacement.consumed.has(index));
+          for (const mesh of replacement.meshes) build.record.group.add(mesh);
+          // Count source descriptors to preserve the original hard admission cap.
+          build.record.count += replacement.consumed.size;
+          build.record.rooftopUnits = replacement.units;
+        }
+      }
       if (process.env.VANCOUVER_VISUAL_QA === '1' && this.qaAdapter) {
         const replacement = this.qaAdapter.assemble(boxes, {
           id: build.record.id,
@@ -464,6 +517,7 @@ export class ArchitecturalDetails {
     this.stats.readyCells = 0;
     this.stats.visibleCells = 0;
     this.stats.visibleInstances = 0;
+    this.stats.rooftopUnits = 0;
     this.stats.allocatedInstances = 0;
     for (const record of this.records.values()) {
       this.stats.readyCells += Number(record.ready);
@@ -472,6 +526,7 @@ export class ArchitecturalDetails {
         this.stats.readySelectedCells++;
         this.stats.visibleCells++;
         this.stats.visibleInstances += record.count;
+        this.stats.rooftopUnits += record.rooftopUnits;
       }
     }
   }
@@ -485,6 +540,7 @@ export class ArchitecturalDetails {
     this.selected.clear();
     for (const record of this.records.values()) this.release(record);
     this.root.removeFromParent();
+    this.rooftopEquipment.dispose();
     this.geometry.dispose();
     this.materials.masonry.dispose();
     this.materials.metal.dispose();

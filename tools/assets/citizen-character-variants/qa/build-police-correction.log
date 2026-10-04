@@ -1,0 +1,46 @@
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+16:59:44 | INFO: Data are loaded, start creating Blender stuff
+16:59:44 | INFO: Blender create Mesh node Tailored torso
+16:59:44 | INFO: glTF import finished in 0.12s
+Info: Saved "police.lod0.blend"
+ERROR Draco mesh compression is not available because library could not be found at /usr/bin/4.3/python/lib/python3.13/site-packages/libextern_draco.so
+16:59:44 | INFO: Starting glTF 2.0 export
+16:59:44 | INFO: Extracting primitive: Tailored torso
+16:59:45 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+16:59:45 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+16:59:45 | INFO: Primitives created: 5
+16:59:45 | INFO: Finished glTF 2.0 export in 0.5508601665496826 s
+
+BUILT police 0
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+16:59:45 | INFO: Data are loaded, start creating Blender stuff
+16:59:45 | INFO: Blender create Mesh node Tailored torso
+16:59:45 | INFO: glTF import finished in 0.11s
+Info: Saved "police.lod1.blend"
+16:59:45 | INFO: Starting glTF 2.0 export
+16:59:45 | INFO: Extracting primitive: Tailored torso
+16:59:46 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+16:59:46 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+16:59:46 | INFO: Primitives created: 5
+16:59:46 | INFO: Finished glTF 2.0 export in 0.44027018547058105 s
+
+BUILT police 1
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+16:59:46 | INFO: Data are loaded, start creating Blender stuff
+16:59:46 | INFO: Blender create Mesh node Tailored torso
+16:59:46 | INFO: glTF import finished in 0.10s
+Info: Saved "police.lod2.blend"
+16:59:46 | INFO: Starting glTF 2.0 export
+16:59:46 | INFO: Extracting primitive: Tailored torso
+16:59:46 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+16:59:46 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+16:59:47 | INFO: Primitives created: 5
+16:59:47 | INFO: Finished glTF 2.0 export in 0.4335942268371582 s
+
+BUILT police 2
+Blender 4.3.2
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/citizen-character-variants/source/police.lod0.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/citizen-character-variants/source/police.lod1.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/citizen-character-variants/source/police.lod2.blend"
+
+Blender quit

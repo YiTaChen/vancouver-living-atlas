@@ -1,0 +1,1184 @@
+{
+  "schemaVersion": 1,
+  "baseRevision": "5574d55719f10d1575127d8b92cbd23ff71e446f",
+  "statusScope": "All status fields describe NEW backlog work. ExistingBaseline describes pre-existing implementation only.",
+  "requirements": [
+    {
+      "id": "A01",
+      "title": "GIS量體、遠景城市色彩與材質角色",
+      "status": "planned",
+      "packageIds": [
+        "city-materials"
+      ],
+      "assetRefs": [],
+      "currentConsumers": [
+        "lib/city/building-bodies.ts",
+        "lib/city/facade-profile.ts",
+        "lib/city/building-surface-palette.ts",
+        "lib/city/city-surface-material.ts"
+      ],
+      "currentBaseline": "GIS-derived bodies, stable source profiles and shared opaque surface atlas already exist. Seed-selected finishes are representative, not surveyed materials.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "Audit source IDs, footprint/part/height/foundation contracts; report rule/catalog differences."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Compare source-selected aerial/near views and material roles without replacing GIS geometry."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "No new A01 rule/model or scene acceptance in this inventory."
+      ],
+      "evidence": [
+        "public/data/buildings.geojson",
+        "docs/CITY_READABILITY_2026_10.md"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    },
+    {
+      "id": "A02",
+      "title": "地形、海岸、公園地表",
+      "status": "planned",
+      "packageIds": [
+        "city-materials",
+        "vegetation-ground"
+      ],
+      "assetRefs": [
+        "vegetation-ground:soil_grass_slope_lod0",
+        "vegetation-ground:soil_grass_slope_lod1",
+        "vegetation-ground:soil_grass_slope_lod2"
+      ],
+      "currentConsumers": [
+        "lib/city/engine.ts",
+        "lib/city/harmonize-ground.ts",
+        "lib/city/beach-ground.ts"
+      ],
+      "currentBaseline": "Terrain/coast meshes remain source-derived. Existing 2×2 m slope studies are offline coupons, not terrain/navigation replacements.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "Reuse soil/grass/edge maps; inspect 2 m and 10 m material coupons with explicit sampling scale."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Drape or shade actual selected terrain; preserve coastline and navigation surfaces."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "No ground PBR integration or whole-city overlay authorized by a coupon."
+      ],
+      "evidence": [
+        "public/data/terrain.json",
+        "public/data/shoreline.geojson"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    },
+    {
+      "id": "A03",
+      "title": "水、天空、日夜與極光",
+      "status": "planned",
+      "packageIds": [],
+      "assetRefs": [],
+      "currentConsumers": [
+        "lib/city/water-waves.ts",
+        "lib/city/atmosphere.ts",
+        "lib/city/sky-effects.ts",
+        "lib/city/sky-state.ts",
+        "lib/city/clock.ts"
+      ],
+      "currentBaseline": "Dedicated dynamic shaders and the existing 10:00/running/300× city clock remain. Traffic/navigation time is a separate contract.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "Only numeric checks or clearly labeled offline material studies."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Renderer/reflection/fog/shadow/day-night checks in actual WebGL."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "No new renderer quality or performance result."
+      ],
+      "evidence": [
+        "docs/CITY_READABILITY_2026_10.md"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    },
+    {
+      "id": "A04",
+      "title": "橋梁、軌道、高架／港口連接",
+      "status": "planned",
+      "packageIds": [],
+      "assetRefs": [],
+      "currentConsumers": [
+        "lib/city/bridges.ts",
+        "lib/city/lions-railings.ts",
+        "lib/city/railway.ts",
+        "lib/city/rail-path.ts",
+        "lib/city/harbour-path.ts"
+      ],
+      "currentBaseline": "Existing procedural bridge/rail/harbour geometry follows mapped paths and established elevation contracts.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "Inventory source-backed structural gaps; produce only justified joint/support/guardrail modules."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Fit source bridge/rail paths and continuous heights; retain navigation/collision."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "No new structural module; source paths are not automatically service routes."
+      ],
+      "evidence": [
+        "public/data/bridges.json",
+        "public/data/railways.json",
+        "public/data/harbour-routes.json"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    },
+    {
+      "id": "B01",
+      "title": "屋頂機電與壓頂",
+      "status": "planned",
+      "packageIds": [
+        "architecture-expansion",
+        "city-materials"
+      ],
+      "assetRefs": [
+        "architecture-expansion:modern-parapet-cap"
+      ],
+      "currentConsumers": [
+        "lib/city/architecture-plan.ts",
+        "lib/city/architecture-details.ts"
+      ],
+      "currentBaseline": "Procedural rooftop equipment and roofBoxFits exist; modern-parapet-cap is an offline candidate.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "Model 2–3 independently editable equipment variants with footprint, zero-base datum and LODs; adapt existing cap."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Keep holes, higher-part exclusions, domestic/sloped-roof rejection and bounded sample placement."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "New equipment absent; cap fit/drainage contract not integrated."
+      ],
+      "evidence": [
+        "tests/architecture-roof-budget.test.mjs"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    },
+    {
+      "id": "B02",
+      "title": "平屋頂材質分類與近景細節",
+      "status": "planned",
+      "packageIds": [
+        "city-materials"
+      ],
+      "assetRefs": [
+        "city-materials:asphalt",
+        "city-materials:roof-shingle"
+      ],
+      "currentConsumers": [
+        "lib/city/building-surface-palette.ts",
+        "lib/city/building-bodies.ts",
+        "lib/city/building-roof.ts",
+        "lib/city/architecture-material.ts"
+      ],
+      "currentBaseline": "Three stable seeded flat-roof finishes already exist; no per-building surveyed roof-material tags.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "Only missing mineral grain/membrane coupon surfaces; record proposed versus sourced scale."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Keep source outline and brightness direction; compare four lighting conditions before adoption."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "No new material maps; existing palette QA is historical."
+      ],
+      "evidence": [
+        "docs/CITY_READABILITY_2026_10.md",
+        "docs/visual-quality/city-readability/README.md"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    },
+    {
+      "id": "B03",
+      "title": "成熟樹冠、主幹、葉簇",
+      "status": "planned",
+      "packageIds": [
+        "vegetation-ground"
+      ],
+      "assetRefs": [
+        "vegetation-ground:maple_sprig_lod0",
+        "vegetation-ground:maple_sprig_lod1",
+        "vegetation-ground:maple_sprig_lod2",
+        "vegetation-ground:alder_sprig_lod0",
+        "vegetation-ground:alder_sprig_lod1",
+        "vegetation-ground:alder_sprig_lod2",
+        "vegetation-ground:douglas_fir_sprig_lod0",
+        "vegetation-ground:douglas_fir_sprig_lod1",
+        "vegetation-ground:douglas_fir_sprig_lod2",
+        "vegetation-ground:western_redcedar_sprig_lod0",
+        "vegetation-ground:western_redcedar_sprig_lod1",
+        "vegetation-ground:western_redcedar_sprig_lod2"
+      ],
+      "currentConsumers": [
+        "lib/city/detailed-trees.ts",
+        "lib/city/assets/tree-geometry.ts",
+        "lib/city/assets/tree-structure.ts",
+        "lib/city/assets/tree-material-candidate.ts"
+      ],
+      "currentBaseline": "Mature procedural trees use normalized geometry multiplied by source height. Existing sprigs are research branches, not mature trees. Straight-RGBA leaf atlas is QA-only.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "Develop mature templates and grouped branch/leaf LODs; preserve source species/seed and declare templateHeightM/normalizationMode."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Use sourceHeightM/templateHeightM exactly once; fit clearance; match color/depth alpha and bounded pools."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "Mature template exports absent; bark meter-UV and leaf card geometry remain unresolved."
+      ],
+      "evidence": [
+        "public/data/trees.json",
+        "tools/assets/vegetation-runtime-candidate/manifest.json",
+        "tests/tree-canopy.test.mjs"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    },
+    {
+      "id": "B04",
+      "title": "Waterfront／Marine及其他地標局部",
+      "status": "planned",
+      "packageIds": [
+        "role-materials"
+      ],
+      "assetRefs": [
+        "role-materials:landmark-brushed-aluminum",
+        "role-materials:landmark-pale-panel"
+      ],
+      "currentConsumers": [
+        "lib/city/interiors.ts",
+        "lib/city/assets/marine-entry.ts",
+        "lib/city/assets/primary-landmarks.ts",
+        "lib/city/assets/secondary-landmarks.ts",
+        "lib/city/landmarks.ts"
+      ],
+      "currentBaseline": "Waterfront shell/columns and Marine decorative entry already exist; role-material studies do not replace those landmarks.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "Author source-aligned column-capital/pediment and Marine ornament parts only for named gaps."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Retain landmark shells, specialized glass/membranes/night windows and entry collision."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "Marine opening is visual recess, not an enterable interior; no new B04 component."
+      ],
+      "evidence": [
+        "docs/interiors.md"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    },
+    {
+      "id": "C01",
+      "title": "Gastown歷史街面",
+      "status": "planned",
+      "packageIds": [
+        "architecture-details",
+        "streetscape",
+        "city-materials"
+      ],
+      "assetRefs": [
+        "architecture-details:sandstone-sill",
+        "architecture-details:heritage-window-frame",
+        "architecture-details:heritage-cornice",
+        "architecture-details:sandstone-plinth",
+        "architecture-details:sandstone-corner",
+        "architecture-details:residential-entry-surround",
+        "architecture-details:sloped-metal-awning",
+        "architecture-details:flat-metal-awning",
+        "streetscape:heritage-shop-bay"
+      ],
+      "currentConsumers": [
+        "lib/city/architecture-details.ts",
+        "lib/city/architecture-module-candidate.ts",
+        "lib/city/heritage-frontage.ts",
+        "lib/city/streetfronts.ts",
+        "lib/city/streetscape-kit.ts",
+        "lib/city/streetscape-placement.ts"
+      ],
+      "currentBaseline": "Eight detail families have two editable LODs each. Heritage bay is shipping; the 56-sill Robson candidate is a distinct fitted QA package.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "Reuse existing parts first; add only justified corner/width/layout variants with new IDs."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Fit source openings/floors/edges, suppress replaced detail and preserve bay ground/upper-window clearance."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "Existing eight-part manifest remains offline-candidate; source inventory does not enable a rollout."
+      ],
+      "evidence": [
+        "tools/assets/architecture-details/runtime-candidate/manifest.json",
+        "tests/streetscape-placement.test.mjs"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    },
+    {
+      "id": "C02",
+      "title": "現代大廳及podium",
+      "status": "planned",
+      "packageIds": [
+        "architecture-expansion",
+        "streetscape",
+        "city-materials"
+      ],
+      "assetRefs": [
+        "architecture-expansion:modern-recessed-window-surround",
+        "architecture-expansion:modern-sill-drip",
+        "architecture-expansion:modern-parapet-cap",
+        "architecture-expansion:concrete-shadow-plinth",
+        "architecture-expansion:concrete-chamfer-corner",
+        "streetscape:modern-lobby-bay"
+      ],
+      "currentConsumers": [
+        "lib/city/architecture-plan.ts",
+        "lib/city/architecture-module-candidate.ts",
+        "lib/city/streetscape-kit.ts"
+      ],
+      "currentBaseline": "Modern bay is shipping; five modern expansion families remain candidates. Modern sill has a historical 24-instance source-selected QA comparison.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "Define opening datum, glass rebate, entry clearance and handedness using existing modules."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Implement general source-edge fit before rollout; do not compress doors or raise lobby into upper windows."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "Sill QA does not establish generic fit or all-family adoption."
+      ],
+      "evidence": [
+        "docs/OFFLINE_ASSET_INTEGRATION_2026_10.md",
+        "tests/architecture-expansion-candidate.test.mjs"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    },
+    {
+      "id": "C03",
+      "title": "住宅窗框、入口及雨棚",
+      "status": "planned",
+      "packageIds": [
+        "architecture-details",
+        "architecture-expansion",
+        "city-materials"
+      ],
+      "assetRefs": [
+        "architecture-details:residential-entry-surround",
+        "architecture-expansion:residential-cedar-window-surround",
+        "architecture-expansion:residential-cedar-sill",
+        "architecture-expansion:residential-gabled-entry-canopy"
+      ],
+      "currentConsumers": [
+        "lib/city/architecture-plan.ts",
+        "lib/city/architecture-module-candidate.ts",
+        "lib/city/residential-ground-plan.ts"
+      ],
+      "currentBaseline": "Cedar parts are candidates; eight cedar sill replacements have historical QA. Canopy retains ground-origin geometry with minimum Y=2.36 m.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "Preserve entry/window clearances and canopy datum; document compatible residential profiles."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Fit actual ground/openings and provide slope fallback without arbitrary scaling."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "No general placement contract or new C03 integration."
+      ],
+      "evidence": [
+        "docs/OFFLINE_ASSET_INTEGRATION_2026_10.md"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    },
+    {
+      "id": "C04",
+      "title": "鋪面、路緣、庭院與草土接界",
+      "status": "planned",
+      "packageIds": [
+        "city-materials",
+        "vegetation-ground",
+        "residential-perennial"
+      ],
+      "assetRefs": [
+        "city-materials:asphalt",
+        "city-materials:concrete",
+        "city-materials:street-brick"
+      ],
+      "currentConsumers": [
+        "lib/city/road-surfaces.ts",
+        "lib/city/heritage-paving.ts",
+        "lib/city/residential-ground.ts",
+        "lib/city/residential-ground-plan.ts",
+        "lib/city/ground-surface.ts"
+      ],
+      "currentBaseline": "Road/sidewalk surfaces and bounded source-selected residential gardens exist; ground studies remain separate offline samples.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "Audit meter UV/seams; provide only source-bounded contour/slope/edge metadata."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Preserve actual draped ground, travel surface heights and entrance/road exclusions."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "No general soil/grass consumer; no population expansion."
+      ],
+      "evidence": [
+        "public/data/roads.geojson",
+        "public/data/paths.geojson"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    },
+    {
+      "id": "D01",
+      "title": "公車站、SkyTrain月台及入口",
+      "status": "planned",
+      "packageIds": [
+        "streetscape"
+      ],
+      "assetRefs": [],
+      "currentConsumers": [
+        "lib/city/interiors.ts",
+        "lib/city/seabus-layout.ts",
+        "lib/city/travel-surfaces.ts",
+        "lib/city/rail-path.ts"
+      ],
+      "currentBaseline": "Shelter generator exists; Waterfront SkyWalk/SeaBus waiting space exists. No reusable station-layout.json or SkyTrain platform package is identified in baseline.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "Deliver independent stop/platform/sign modules and explicit station local frames/alignment/entry polygons."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Choose sourced stops and continuous accessible game surfaces; platform covers whole consist plus stop tolerance."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "SeaBus corridor is not a SkyTrain entrance; station source selection is still required."
+      ],
+      "evidence": [
+        "docs/interiors.md",
+        "public/data/railways.json"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    },
+    {
+      "id": "D02",
+      "title": "公車外殼、門及輪組",
+      "status": "planned",
+      "packageIds": [
+        "role-materials"
+      ],
+      "assetRefs": [
+        "role-materials:vehicle-red-paint",
+        "role-materials:vehicle-tire-rubber"
+      ],
+      "currentConsumers": [
+        "lib/city/city-buses.ts"
+      ],
+      "currentBaseline": "Current bus is a merged decorative solid-box exterior, nominal 12×2.5 m with separate mirror extent; wheels are merged.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "New hollow exterior with named dynamic door/wheel nodes, two/three LODs and explicit tire-contact vehicle frame."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Bind shared roles, preserve service timing and fit source roads; passenger states lock capable LODs."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "No editable bus exterior package or door animation; existing +1.08 ground offset is legacy."
+      ],
+      "evidence": [
+        "tests/city-buses.test.mjs"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    },
+    {
+      "id": "D03",
+      "title": "公車乘客與駕駛區",
+      "status": "planned",
+      "packageIds": [
+        "role-materials"
+      ],
+      "assetRefs": [
+        "role-materials:vehicle-seat-leather",
+        "role-materials:interior-matte-plaster"
+      ],
+      "currentConsumers": [
+        "lib/city/city-buses.ts"
+      ],
+      "currentBaseline": "No bus interior, walkable floor or passenger anchors exist in current bus geometry.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "Build real segmented floors, seats/poles/driver partition and door-swept clearance in the same vehicle root as exterior."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Lazy-load interior; align walk/floor/door/camera and collision before boarding."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "New cabin and interface absent; study coupons are not a bus."
+      ],
+      "evidence": [
+        "tests/city-buses.test.mjs"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    },
+    {
+      "id": "D04",
+      "title": "SkyTrain首尾中間車",
+      "status": "planned",
+      "packageIds": [
+        "role-materials"
+      ],
+      "assetRefs": [
+        "role-materials:landmark-brushed-aluminum",
+        "role-materials:vehicle-tire-rubber"
+      ],
+      "currentConsumers": [
+        "lib/city/railway.ts",
+        "lib/city/rail-path.ts"
+      ],
+      "currentBaseline": "Current metro uses nominal 17 m generic cars, solid-box body, decorative doors and opaque windows; wheel instancing and rail curve sampling exist.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "Build lead/middle/tail exterior profiles with hollow body, door nodes, wheel and gangway/coupler frames."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Preserve car-local slope/curve sampling and independent elapsed time; explicit whole-consist envelope."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "No new car-family assets or opening/door interface; 17 m nominal is not full coupler extent."
+      ],
+      "evidence": [
+        "tests/railway.test.mjs",
+        "public/data/railways.json"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    },
+    {
+      "id": "D05",
+      "title": "SkyTrain車廂及貫通道",
+      "status": "planned",
+      "packageIds": [
+        "role-materials"
+      ],
+      "assetRefs": [
+        "role-materials:vehicle-seat-leather",
+        "role-materials:interior-oak-veneer"
+      ],
+      "currentConsumers": [
+        "lib/city/railway.ts"
+      ],
+      "currentBaseline": "Current metro has no passenger interior or walkable gangway.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "Build one passenger-capable car first; floors/seats/standing/camera and gangway frame/swept clearance."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Validate rail-relative floor/platform datum and moving collision before cross-car walking."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "No interior/coupler crossing implementation; explicit new metadata required."
+      ],
+      "evidence": [
+        "tests/railway.test.mjs"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    },
+    {
+      "id": "D06",
+      "title": "路線停靠上下車與乘坐",
+      "status": "planned",
+      "packageIds": [],
+      "assetRefs": [],
+      "currentConsumers": [
+        "lib/city/city-buses.ts",
+        "lib/city/railway.ts",
+        "lib/city/rail-path.ts",
+        "lib/city/navigation.ts",
+        "lib/city/placement-geometry.ts",
+        "lib/city/engine.ts",
+        "lib/city/clock.ts"
+      ],
+      "currentBaseline": "Bus routes loop individual straight segments; cropped metro paths fade/reappear; focusTrain is an Orbit view. TravelMode has walk/drive/boat, no rider state.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "Check delivered station/vehicle frame and anchor contracts; asset work cannot complete runtime riding."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Implement continuous two-stop service, dwell/doors, explicit rider state, local attachment, safe boarding/alighting, terminal and disposal/error recovery."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "Entire passenger/service runtime is planned; no WebGL boarding acceptance."
+      ],
+      "evidence": [
+        "public/data/railways.json",
+        "tests/city-buses.test.mjs",
+        "tests/railway.test.mjs"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    },
+    {
+      "id": "E01",
+      "title": "共享轎車SUV及簡化車流",
+      "status": "planned",
+      "packageIds": [
+        "role-materials"
+      ],
+      "assetRefs": [
+        "role-materials:vehicle-red-paint",
+        "role-materials:vehicle-tire-rubber"
+      ],
+      "currentConsumers": [
+        "lib/city/environment.ts"
+      ],
+      "currentBaseline": "Ordinary traffic uses separate body/cabin boxes; reusable detailed sedan/SUV packages are absent.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "Build two shared source-preserving car families with wheelbase, turn/collision envelope and LODs."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Replace within existing traffic population/routes; keep simplified distant fallback."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "No new E01 car geometry."
+      ],
+      "evidence": [
+        "tools/assets/role-materials/exports/manifest.json"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    },
+    {
+      "id": "E02",
+      "title": "Roadster駕駛及材質",
+      "status": "planned",
+      "packageIds": [
+        "role-materials"
+      ],
+      "assetRefs": [
+        "role-materials:vehicle-red-paint",
+        "role-materials:vehicle-tire-rubber",
+        "role-materials:vehicle-seat-leather"
+      ],
+      "currentConsumers": [
+        "lib/city/assets/roadster.ts",
+        "lib/city/navigation.ts"
+      ],
+      "currentBaseline": "Roadster already has shaped surfaces and real cabin openings. Its batching deletes UV; leather names the driver head and seats belong to dark.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "Repair meter UV and semantic roles before map assignment; preserve seated driver anchors."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Compare actual cabin/seats and controls; retain vehicle dimensions/dynamics."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "Material-name substitution would put leather on the head; no new UV/roles in this inventory."
+      ],
+      "evidence": [
+        "docs/OFFLINE_ASSET_INTEGRATION_2026_10.md"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    },
+    {
+      "id": "E03",
+      "title": "港口航空近景部件",
+      "status": "planned",
+      "packageIds": [
+        "role-materials"
+      ],
+      "assetRefs": [
+        "role-materials:landmark-brushed-aluminum",
+        "role-materials:vehicle-seat-leather"
+      ],
+      "currentConsumers": [
+        "lib/city/harbour-models.ts",
+        "lib/city/harbour.ts",
+        "lib/city/assets/aircraft-models.ts",
+        "lib/city/assets/cockpits.ts",
+        "lib/city/boat-controller.ts",
+        "lib/city/flight-controller.ts"
+      ],
+      "currentBaseline": "Dedicated procedural hulls/aircraft/cockpits already exist and are legitimate source models.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "Inventory measured gaps and existing bounds/control datums before any small-part proposal."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Preserve hull/buoyancy/collision, wing/rotor and control/camera contracts."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "No evidenced need or approval inferred for full-model rebuild."
+      ],
+      "evidence": [
+        "public/data/harbour-sites.json"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    },
+    {
+      "id": "E04",
+      "title": "公共大廳SkyWalk及候船室",
+      "status": "planned",
+      "packageIds": [
+        "role-materials"
+      ],
+      "assetRefs": [
+        "role-materials:interior-terrazzo",
+        "role-materials:interior-oak-veneer",
+        "role-materials:interior-matte-plaster"
+      ],
+      "currentConsumers": [
+        "lib/city/interiors.ts",
+        "lib/city/seabus-layout.ts",
+        "lib/city/light-lab-runtime.ts"
+      ],
+      "currentBaseline": "Existing three public interiors include floors/entries/furniture; Parts.add removes UV and role-material studies remain unintegrated.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "Repair UV/role split; preserve actual doorway/floor/collision before modular furniture LODs."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Keep light lab, screens/night lighting, cutaway and passages."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "No complete interior rebuild; no new consumer integration."
+      ],
+      "evidence": [
+        "docs/interiors.md"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    },
+    {
+      "id": "F01",
+      "title": "路燈長椅及候車亭",
+      "status": "planned",
+      "packageIds": [
+        "streetscape",
+        "city-materials"
+      ],
+      "assetRefs": [],
+      "currentConsumers": [
+        "lib/city/environment.ts"
+      ],
+      "currentBaseline": "Street furniture exists procedurally in runtime. Streetscape generator has heritage-lamp/cedar-bench/transit-shelter, but shipping manifest contains only two bays.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "Export independent editable furniture and LODs; measure real GLBs after reopen; separate 7–9 m arterial-light research from historic lamp."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Source-select sidewalk placement with headroom/pedestrian clearance and correct material roles."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "Generator definitions are not delivered independent furniture assets."
+      ],
+      "evidence": [
+        "tools/assets/streetscape/generate_streetscape.py",
+        "public/models/streetscape/manifest.json"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    },
+    {
+      "id": "F02",
+      "title": "垃圾桶消防栓車架及防撞柱",
+      "status": "planned",
+      "packageIds": [],
+      "assetRefs": [],
+      "currentConsumers": [
+        "lib/city/environment.ts",
+        "lib/city/road-surfaces.ts",
+        "lib/city/ground-surface.ts"
+      ],
+      "currentBaseline": "No complete reusable bin/hydrant/bike-rack/bollard source+LOD pipeline identified in registered baseline packages; this is a scoped inventory finding.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "Create new modules with footprints and representative dimension basis."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Select a small source-backed sample and exclusions for walkways and vehicle doors."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "Location/source selection and all new F02 modules pending."
+      ],
+      "evidence": [
+        "docs/AI_AGENT_DEVELOPMENT_BACKLOG.md"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    },
+    {
+      "id": "F03",
+      "title": "花台矮植株及草土邊界",
+      "status": "planned",
+      "packageIds": [
+        "residential-perennial",
+        "vegetation-ground"
+      ],
+      "assetRefs": [],
+      "currentConsumers": [
+        "lib/city/residential-ground.ts",
+        "lib/city/residential-ground-plan.ts",
+        "lib/city/assets/residential-perennial-data.ts"
+      ],
+      "currentBaseline": "Seven-triangle perennial source/candidate and bounded garden system already exist; ground edge maps have distinct sampler/weight contracts.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "Reuse perennial and ground sources; audit low-plant and planter dimensions before minor additions."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Keep existing population/footprints; require real surface integration before deployment."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "Perennial candidate remains QA-only; low-frequency attribute is not per-pixel blend weight."
+      ],
+      "evidence": [
+        "tools/assets/residential-perennial/source/validation.json"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    },
+    {
+      "id": "F04",
+      "title": "Citizen LOD警員及駕駛變體",
+      "status": "planned",
+      "packageIds": [
+        "citizen"
+      ],
+      "assetRefs": [
+        "citizen:reference",
+        "citizen:lod0",
+        "citizen:lod1",
+        "citizen:lod2"
+      ],
+      "currentConsumers": [
+        "lib/city/citizen.ts",
+        "lib/city/traffic-stop.ts"
+      ],
+      "currentBaseline": "1024px full-geometry citizen LOD0 is shipping and byte-identical to candidate LOD0. LOD1/2 are offline candidates; old optimization metadata is historical.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "Fix cloth/shading differences and create explicit compatible variants; preserve 1.81 m/22 bones/idle-walk-run."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Implement distance selector/fade/residency and rig-safe variants before rollout."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "No LOD1/2 selector; police/driver are not recolored citizen atlas defaults."
+      ],
+      "evidence": [
+        "docs/OFFLINE_ASSET_INTEGRATION_2026_10.md",
+        "tests/citizen-candidate.test.mjs",
+        "tests/citizen-runtime.test.mjs"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    },
+    {
+      "id": "F05",
+      "title": "車漆皮革木皮金屬石材",
+      "status": "planned",
+      "packageIds": [
+        "city-materials",
+        "role-materials"
+      ],
+      "assetRefs": [
+        "role-materials:landmark-brushed-aluminum",
+        "role-materials:landmark-pale-panel",
+        "role-materials:vehicle-red-paint",
+        "role-materials:vehicle-tire-rubber",
+        "role-materials:vehicle-seat-leather",
+        "role-materials:interior-terrazzo",
+        "role-materials:interior-oak-veneer",
+        "role-materials:interior-matte-plaster"
+      ],
+      "currentConsumers": [
+        "lib/city/material-library.ts",
+        "lib/city/city-surface-material.ts",
+        "lib/city/assets/roadster.ts",
+        "lib/city/interiors.ts",
+        "lib/city/offline-material-study-qa.ts"
+      ],
+      "currentBaseline": "Eight shared city surfaces are shipping. Eight role surfaces/24 maps are offline studies with historical renderer coupon QA, not production consumer adoption.",
+      "offline": {
+        "status": "planned",
+        "scope": [
+          "Reuse editable nodes/maps and re-bake entrypoints; create only proven gaps and preserve meter periods/color space."
+        ],
+        "blenderChecks": "not_run"
+      },
+      "runtime": {
+        "status": "runtime_pending_webgl",
+        "scope": [
+          "Establish UV and semantic roles first; keep glass/leaves/water/membranes/LED/screens specialized."
+        ],
+        "webglChecks": "not_run"
+      },
+      "remaining": [
+        "Coupon visual checks do not establish whole-vehicle or whole-interior acceptance."
+      ],
+      "evidence": [
+        "tools/assets/role-materials/qa/validation.json",
+        "docs/OFFLINE_ASSET_INTEGRATION_2026_10.md"
+      ],
+      "release": {
+        "status": "not_adopted",
+        "note": "This inventory does not change runtime defaults or establish a deployment. Existing baseline adoption is recorded separately."
+      }
+    }
+  ]
+}

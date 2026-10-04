@@ -1,0 +1,29 @@
+{
+  "status": "pass-offline",
+  "scope": "Actual final-dependency GLB CPU renders visually inspected; no browser or geographic acceptance",
+  "inspected": [
+    "modules-lod0-sunny.png",
+    "modules-lod0-night.png",
+    "modules-lod1-overcast.png",
+    "bus-threshold-deployed.png",
+    "metro-threshold-deployed.png",
+    "four-car-platform-74m.png",
+    "stored-deck-contact.png"
+  ],
+  "findings": [
+    "Human/ruler scale visible, modules retain reasonable meter dimensions",
+    "LOD1 silhouette remains stable; detail reductions visible",
+    "Portable threshold decks visibly span gaps in fully open doorway pose",
+    "74m research platform accommodates complete four-car consist",
+    "No actual geographic source placement or browser acceptance claim",
+    "Stored bus/metro plates contact explicit research floor coupons after exported-bounds-derived grounding; stored proof uses only QA horizontal offsets for side-by-side viewing",
+    "Platform static batching preserves appearance and geometry while reducing LOD0 primitives from 32 to 3 per module"
+  ],
+  "knownLimitations": [
+    "CPU renders retain some Monte Carlo noise; build lacks OpenImageDenoise",
+    "Research island floor .36m and platform floor .95m need real-ground/walk connections",
+    "Portable deck relocation path and actual boarding remain unimplemented"
+  ],
+  "dependencyRefresh": "Five transit-dependent renders regenerated after final bus/metro batching; final source hashes verified by finalize.py",
+  "staticBatchingRefresh": "All 14 previews regenerated from current batched GLBs; module-scale, doorway, and stored-contact images inspected; silhouettes and roles remain consistent"
+}

@@ -1,0 +1,179 @@
+{
+  "status": "pass",
+  "interpretation": "No new source-triangle shell crossings. Original eight seat/backrest/bolster-to-door-shoulder assembly surface joins remain, explicitly verified by exact original triangle identities, not hidden or called clear.",
+  "scope": "Moved original driver seat and steering plus new foot pan vs unchanged outer-body/window/trim surfaces. Existing seat-to-floor support and original floor seams are excluded; open shell is not a closed-volume certification.",
+  "newSourceTriangleIntersections": 0,
+  "inheritedSourceTriangleIntersections": 8,
+  "floorExtension": {
+    "min": [
+      0.2,
+      0.385,
+      0.635
+    ],
+    "max": [
+      0.68,
+      0.475,
+      0.89
+    ],
+    "unchangedUnderbodyTopY": 0.31
+  },
+  "results": [
+    {
+      "collider": "preserved-source-part/010",
+      "colliderTriangles": 192,
+      "closedSolid": false,
+      "intersectingHumanTriangles": 8,
+      "surfaceCrossingTriangles": 8,
+      "fullyContainedTriangles": 0,
+      "dominantBones": {
+        "static": 8
+      },
+      "minimumSeparationM": 0,
+      "minimumIsLowerBound": false,
+      "nearestHumanTriangle": {
+        "bone": "static",
+        "point": [
+          0.6507045030593872,
+          0.7342925866444905,
+          -0.24650461475054422
+        ]
+      },
+      "sample": [
+        {
+          "bone": "static",
+          "point": [
+            0.6818840901056925,
+            0.7301812370618184,
+            -0.2756792108217875
+          ],
+          "kind": "surface"
+        },
+        {
+          "bone": "static",
+          "point": [
+            0.67623899380366,
+            0.7258379459381104,
+            -0.30649981896082557
+          ],
+          "kind": "surface"
+        },
+        {
+          "bone": "static",
+          "point": [
+            0.6698548992474873,
+            0.6969970663388569,
+            -0.2914090156555176
+          ],
+          "kind": "surface"
+        },
+        {
+          "bone": "static",
+          "point": [
+            0.7225000262260437,
+            0.9302006761233012,
+            -0.16459639867146808
+          ],
+          "kind": "surface"
+        }
+      ],
+      "baselineIntersectionCount": 8,
+      "baselineOriginalTriangleKeys": [
+        "driver-seat-back/040:190",
+        "driver-seat-back/040:192",
+        "driver-seat-back/040:193",
+        "driver-seat-bolster/043:0",
+        "driver-seat-bolster/043:1",
+        "driver-seat-bolster/043:9",
+        "driver-seat-bolster/043:10",
+        "driver-seat-bolster/043:11"
+      ],
+      "candidateOriginalTriangleKeys": [
+        "driver-seat-back/040:190",
+        "driver-seat-back/040:192",
+        "driver-seat-back/040:193",
+        "driver-seat-bolster/043:0",
+        "driver-seat-bolster/043:1",
+        "driver-seat-bolster/043:9",
+        "driver-seat-bolster/043:10",
+        "driver-seat-bolster/043:11"
+      ],
+      "newSourceTriangleIntersections": [],
+      "carriedOriginalInterface": true
+    },
+    {
+      "collider": "preserved-source-part/011",
+      "colliderTriangles": 1200,
+      "closedSolid": false,
+      "intersectingHumanTriangles": 0,
+      "surfaceCrossingTriangles": 0,
+      "fullyContainedTriangles": 0,
+      "dominantBones": {},
+      "minimumSeparationM": 0.05463074414091509,
+      "minimumIsLowerBound": false,
+      "nearestHumanTriangle": {
+        "bone": "static",
+        "point": [
+          0.6993908683458964,
+          0.5475109418233235,
+          0.09382170190413792
+        ]
+      },
+      "sample": [],
+      "baselineIntersectionCount": 0,
+      "baselineOriginalTriangleKeys": [],
+      "candidateOriginalTriangleKeys": [],
+      "newSourceTriangleIntersections": [],
+      "carriedOriginalInterface": false
+    },
+    {
+      "collider": "preserved-source-part/054",
+      "colliderTriangles": 2,
+      "closedSolid": false,
+      "intersectingHumanTriangles": 0,
+      "surfaceCrossingTriangles": 0,
+      "fullyContainedTriangles": 0,
+      "dominantBones": {},
+      "minimumSeparationM": 0.06928078003845471,
+      "minimumIsLowerBound": false,
+      "nearestHumanTriangle": {
+        "bone": "static",
+        "point": [
+          0.45843803031066843,
+          1.2277004641818186,
+          0.44744302312698353
+        ]
+      },
+      "sample": [],
+      "baselineIntersectionCount": 0,
+      "baselineOriginalTriangleKeys": [],
+      "candidateOriginalTriangleKeys": [],
+      "newSourceTriangleIntersections": [],
+      "carriedOriginalInterface": false
+    },
+    {
+      "collider": "preserved-source-part/057",
+      "colliderTriangles": 32,
+      "closedSolid": false,
+      "intersectingHumanTriangles": 0,
+      "surfaceCrossingTriangles": 0,
+      "fullyContainedTriangles": 0,
+      "dominantBones": {},
+      "minimumSeparationM": 0.044931545344152,
+      "minimumIsLowerBound": false,
+      "nearestHumanTriangle": {
+        "bone": "static",
+        "point": [
+          0.45843803031066843,
+          1.2277004641818186,
+          0.44744302312698353
+        ]
+      },
+      "sample": [],
+      "baselineIntersectionCount": 0,
+      "baselineOriginalTriangleKeys": [],
+      "candidateOriginalTriangleKeys": [],
+      "newSourceTriangleIntersections": [],
+      "carriedOriginalInterface": false
+    }
+  ]
+}

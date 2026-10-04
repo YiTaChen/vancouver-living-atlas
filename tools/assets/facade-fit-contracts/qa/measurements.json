@@ -1,0 +1,2254 @@
+{
+  "scope": "existing referenced GLBs, root-local transformed geometry",
+  "results": [
+    {
+      "id": "sandstone-sill",
+      "lod": 0,
+      "sha256": "a431e56f133566fdeb14cf817130f2248487884ba6373525e9147205fa016c31",
+      "boundsM": {
+        "min": [
+          -0.699999988079071,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          0.699999988079071,
+          0.18000000715255737,
+          0.23999999463558197
+        ],
+        "size": [
+          1.399999976158142,
+          0.18000000715255737,
+          0.2199999950826168
+        ]
+      },
+      "triangles": 32,
+      "vertices": 54,
+      "primitives": 1,
+      "bytes": 266936,
+      "embeddedImageBytes": 261921,
+      "geometryBytes": 5015,
+      "images": [
+        {
+          "sha256": "30a5ba0a9ff28d05419bd9339a7746f841959c4e276028ce0a7c35c7be93eaba",
+          "width": 480,
+          "height": 480,
+          "bytes": 83560,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "7d370f02016b15b0b702a47445d4f0f2b2555c3d623e12b16b19e157abd5337a",
+          "width": 480,
+          "height": 480,
+          "bytes": 135322,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "5458aa7d79979230563fcd4e8615d330b024276fda4685c9e49b072a2ad4f2c1",
+          "width": 480,
+          "height": 480,
+          "bytes": 43039,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "sandstone-sill"
+      ],
+      "materialNames": [
+        "City sandstone export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "sandstone-sill",
+      "lod": 1,
+      "sha256": "215df5c44b33e26d3d632bec11c5ae4c19234b4e59d4acee8a5d7a787f53d81e",
+      "boundsM": {
+        "min": [
+          -0.699999988079071,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          0.699999988079071,
+          0.18000000715255737,
+          0.23999999463558197
+        ],
+        "size": [
+          1.399999976158142,
+          0.18000000715255737,
+          0.2199999950826168
+        ]
+      },
+      "triangles": 16,
+      "vertices": 30,
+      "primitives": 1,
+      "bytes": 265684,
+      "embeddedImageBytes": 261921,
+      "geometryBytes": 3763,
+      "images": [
+        {
+          "sha256": "30a5ba0a9ff28d05419bd9339a7746f841959c4e276028ce0a7c35c7be93eaba",
+          "width": 480,
+          "height": 480,
+          "bytes": 83560,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "7d370f02016b15b0b702a47445d4f0f2b2555c3d623e12b16b19e157abd5337a",
+          "width": 480,
+          "height": 480,
+          "bytes": 135322,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "5458aa7d79979230563fcd4e8615d330b024276fda4685c9e49b072a2ad4f2c1",
+          "width": 480,
+          "height": 480,
+          "bytes": 43039,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "sandstone-sill"
+      ],
+      "materialNames": [
+        "City sandstone export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "heritage-window-frame",
+      "lod": 0,
+      "sha256": "6dea351d9f267a0bdae09a707d1a463ca0de2c3af84b3a697efcc6db69623f62",
+      "boundsM": {
+        "min": [
+          -0.699999988079071,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          0.699999988079071,
+          1.600000023841858,
+          0.14000000059604645
+        ],
+        "size": [
+          1.399999976158142,
+          1.600000023841858,
+          0.12000000104308128
+        ]
+      },
+      "triangles": 40,
+      "vertices": 64,
+      "primitives": 1,
+      "bytes": 162660,
+      "embeddedImageBytes": 157083,
+      "geometryBytes": 5577,
+      "images": [
+        {
+          "sha256": "138704881990a261abcba11cafb18cca8d33a09a44d660d6fad6ae17c2fda0f5",
+          "width": 480,
+          "height": 480,
+          "bytes": 26884,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "e572f72749f87e6f270d92d92d8f3d6e1d1516f0929256b8b6c4250421559560",
+          "width": 480,
+          "height": 480,
+          "bytes": 86418,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "c17d43084e048d7a8b8aa7f05b053a7e1aa6f7d76a262223bf78a985fba41775",
+          "width": 480,
+          "height": 480,
+          "bytes": 43781,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "heritage-window-frame"
+      ],
+      "materialNames": [
+        "City painted-metal export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "heritage-window-frame",
+      "lod": 1,
+      "sha256": "530028a112f57a64e07a29b0f86dc3ac2b2cdb63beaefe436868dd958b48aefe",
+      "boundsM": {
+        "min": [
+          -0.699999988079071,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          0.699999988079071,
+          1.600000023841858,
+          0.14000000059604645
+        ],
+        "size": [
+          1.399999976158142,
+          1.600000023841858,
+          0.12000000104308128
+        ]
+      },
+      "triangles": 32,
+      "vertices": 48,
+      "primitives": 1,
+      "bytes": 161840,
+      "embeddedImageBytes": 157083,
+      "geometryBytes": 4757,
+      "images": [
+        {
+          "sha256": "138704881990a261abcba11cafb18cca8d33a09a44d660d6fad6ae17c2fda0f5",
+          "width": 480,
+          "height": 480,
+          "bytes": 26884,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "e572f72749f87e6f270d92d92d8f3d6e1d1516f0929256b8b6c4250421559560",
+          "width": 480,
+          "height": 480,
+          "bytes": 86418,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "c17d43084e048d7a8b8aa7f05b053a7e1aa6f7d76a262223bf78a985fba41775",
+          "width": 480,
+          "height": 480,
+          "bytes": 43781,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "heritage-window-frame"
+      ],
+      "materialNames": [
+        "City painted-metal export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "heritage-cornice",
+      "lod": 0,
+      "sha256": "8d02dd181fc141cc7573740678c6e12d45d597b1968dfc1dfc57af286007fa62",
+      "boundsM": {
+        "min": [
+          -1.0,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          1.0,
+          0.23999999463558197,
+          0.36000001430511475
+        ],
+        "size": [
+          2.0,
+          0.23999999463558197,
+          0.3400000147521496
+        ]
+      },
+      "triangles": 32,
+      "vertices": 54,
+      "primitives": 1,
+      "bytes": 266896,
+      "embeddedImageBytes": 261921,
+      "geometryBytes": 4975,
+      "images": [
+        {
+          "sha256": "30a5ba0a9ff28d05419bd9339a7746f841959c4e276028ce0a7c35c7be93eaba",
+          "width": 480,
+          "height": 480,
+          "bytes": 83560,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "7d370f02016b15b0b702a47445d4f0f2b2555c3d623e12b16b19e157abd5337a",
+          "width": 480,
+          "height": 480,
+          "bytes": 135322,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "5458aa7d79979230563fcd4e8615d330b024276fda4685c9e49b072a2ad4f2c1",
+          "width": 480,
+          "height": 480,
+          "bytes": 43039,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "heritage-cornice"
+      ],
+      "materialNames": [
+        "City sandstone export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "heritage-cornice",
+      "lod": 1,
+      "sha256": "232c064a8a1d4a2fbbfdf649073401325348a7e4b9bc32a57740be0e7530e009",
+      "boundsM": {
+        "min": [
+          -1.0,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          1.0,
+          0.23999999463558197,
+          0.36000001430511475
+        ],
+        "size": [
+          2.0,
+          0.23999999463558197,
+          0.3400000147521496
+        ]
+      },
+      "triangles": 24,
+      "vertices": 42,
+      "primitives": 1,
+      "bytes": 266272,
+      "embeddedImageBytes": 261921,
+      "geometryBytes": 4351,
+      "images": [
+        {
+          "sha256": "30a5ba0a9ff28d05419bd9339a7746f841959c4e276028ce0a7c35c7be93eaba",
+          "width": 480,
+          "height": 480,
+          "bytes": 83560,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "7d370f02016b15b0b702a47445d4f0f2b2555c3d623e12b16b19e157abd5337a",
+          "width": 480,
+          "height": 480,
+          "bytes": 135322,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "5458aa7d79979230563fcd4e8615d330b024276fda4685c9e49b072a2ad4f2c1",
+          "width": 480,
+          "height": 480,
+          "bytes": 43039,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "heritage-cornice"
+      ],
+      "materialNames": [
+        "City sandstone export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "sandstone-plinth",
+      "lod": 0,
+      "sha256": "dc6e46f072e87e170cbf936e4a6c57be353278e39319d81112518e264c8fe427",
+      "boundsM": {
+        "min": [
+          -1.0,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          1.0,
+          0.41999998688697815,
+          0.20000000298023224
+        ],
+        "size": [
+          2.0,
+          0.41999998688697815,
+          0.18000000342726707
+        ]
+      },
+      "triangles": 24,
+      "vertices": 42,
+      "primitives": 1,
+      "bytes": 266284,
+      "embeddedImageBytes": 261921,
+      "geometryBytes": 4363,
+      "images": [
+        {
+          "sha256": "30a5ba0a9ff28d05419bd9339a7746f841959c4e276028ce0a7c35c7be93eaba",
+          "width": 480,
+          "height": 480,
+          "bytes": 83560,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "7d370f02016b15b0b702a47445d4f0f2b2555c3d623e12b16b19e157abd5337a",
+          "width": 480,
+          "height": 480,
+          "bytes": 135322,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "5458aa7d79979230563fcd4e8615d330b024276fda4685c9e49b072a2ad4f2c1",
+          "width": 480,
+          "height": 480,
+          "bytes": 43039,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "sandstone-plinth"
+      ],
+      "materialNames": [
+        "City sandstone export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "sandstone-plinth",
+      "lod": 1,
+      "sha256": "0d6737824b2c576bb7ffdcca0474460d2b71223bb7353e34c2c7a77fb04b3ad8",
+      "boundsM": {
+        "min": [
+          -1.0,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          1.0,
+          0.41999998688697815,
+          0.20000000298023224
+        ],
+        "size": [
+          2.0,
+          0.41999998688697815,
+          0.18000000342726707
+        ]
+      },
+      "triangles": 20,
+      "vertices": 36,
+      "primitives": 1,
+      "bytes": 265968,
+      "embeddedImageBytes": 261921,
+      "geometryBytes": 4047,
+      "images": [
+        {
+          "sha256": "30a5ba0a9ff28d05419bd9339a7746f841959c4e276028ce0a7c35c7be93eaba",
+          "width": 480,
+          "height": 480,
+          "bytes": 83560,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "7d370f02016b15b0b702a47445d4f0f2b2555c3d623e12b16b19e157abd5337a",
+          "width": 480,
+          "height": 480,
+          "bytes": 135322,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "5458aa7d79979230563fcd4e8615d330b024276fda4685c9e49b072a2ad4f2c1",
+          "width": 480,
+          "height": 480,
+          "bytes": 43039,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "sandstone-plinth"
+      ],
+      "materialNames": [
+        "City sandstone export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "sandstone-corner",
+      "lod": 0,
+      "sha256": "cae5efe3f4858f699f3f87c5dbaf581a250a72358c91c42554075dce501a5ba3",
+      "boundsM": {
+        "min": [
+          0.0,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          0.25999999046325684,
+          2.4000000953674316,
+          0.25999999046325684
+        ],
+        "size": [
+          0.25999999046325684,
+          2.4000000953674316,
+          0.23999999091029167
+        ]
+      },
+      "triangles": 212,
+      "vertices": 362,
+      "primitives": 1,
+      "bytes": 282820,
+      "embeddedImageBytes": 261921,
+      "geometryBytes": 20899,
+      "images": [
+        {
+          "sha256": "30a5ba0a9ff28d05419bd9339a7746f841959c4e276028ce0a7c35c7be93eaba",
+          "width": 480,
+          "height": 480,
+          "bytes": 83560,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "7d370f02016b15b0b702a47445d4f0f2b2555c3d623e12b16b19e157abd5337a",
+          "width": 480,
+          "height": 480,
+          "bytes": 135322,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "5458aa7d79979230563fcd4e8615d330b024276fda4685c9e49b072a2ad4f2c1",
+          "width": 480,
+          "height": 480,
+          "bytes": 43039,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "sandstone-corner"
+      ],
+      "materialNames": [
+        "City sandstone export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "sandstone-corner",
+      "lod": 1,
+      "sha256": "78d324ff237fcff8feb647dd9f50c4dcdf71be49f7b7126be3921ddca29d6ed0",
+      "boundsM": {
+        "min": [
+          0.0,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          0.25999999046325684,
+          2.4000000953674316,
+          0.25999999046325684
+        ],
+        "size": [
+          0.25999999046325684,
+          2.4000000953674316,
+          0.23999999091029167
+        ]
+      },
+      "triangles": 20,
+      "vertices": 36,
+      "primitives": 1,
+      "bytes": 266004,
+      "embeddedImageBytes": 261921,
+      "geometryBytes": 4083,
+      "images": [
+        {
+          "sha256": "30a5ba0a9ff28d05419bd9339a7746f841959c4e276028ce0a7c35c7be93eaba",
+          "width": 480,
+          "height": 480,
+          "bytes": 83560,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "7d370f02016b15b0b702a47445d4f0f2b2555c3d623e12b16b19e157abd5337a",
+          "width": 480,
+          "height": 480,
+          "bytes": 135322,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "5458aa7d79979230563fcd4e8615d330b024276fda4685c9e49b072a2ad4f2c1",
+          "width": 480,
+          "height": 480,
+          "bytes": 43039,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "sandstone-corner"
+      ],
+      "materialNames": [
+        "City sandstone export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "residential-entry-surround",
+      "lod": 0,
+      "sha256": "10e4a42965f16261a29a6569189706dcc9d926a07e0f6ed271afaa59ca7b94ac",
+      "boundsM": {
+        "min": [
+          -0.6499999761581421,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          0.6499999761581421,
+          2.5,
+          0.20600000023841858
+        ],
+        "size": [
+          1.2999999523162842,
+          2.5,
+          0.18600000068545341
+        ]
+      },
+      "triangles": 128,
+      "vertices": 270,
+      "primitives": 1,
+      "bytes": 244516,
+      "embeddedImageBytes": 228555,
+      "geometryBytes": 15961,
+      "images": [
+        {
+          "sha256": "5a22afe24646ee76b7fd876817e65a7a6e40fb1691b559171156d6098c38c215",
+          "width": 480,
+          "height": 480,
+          "bytes": 52785,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "a449185795f6b8f1ba4b8be4d54a5c29d4de9962e3130dcd6f8a78c5eab92c09",
+          "width": 480,
+          "height": 480,
+          "bytes": 132796,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "3701c80f980c8f530cb49650e36b3007db658d04298a1029716d6a4d337e8f43",
+          "width": 480,
+          "height": 480,
+          "bytes": 42974,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "residential-entry-surround"
+      ],
+      "materialNames": [
+        "City cedar export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "residential-entry-surround",
+      "lod": 1,
+      "sha256": "4681b0e75f5578881eb12991684dfeee70909001144b07c25adf007af13286bd",
+      "boundsM": {
+        "min": [
+          -0.6499999761581421,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          0.6499999761581421,
+          2.5,
+          0.1899999976158142
+        ],
+        "size": [
+          1.2999999523162842,
+          2.5,
+          0.16999999806284904
+        ]
+      },
+      "triangles": 40,
+      "vertices": 78,
+      "primitives": 1,
+      "bytes": 234760,
+      "embeddedImageBytes": 228555,
+      "geometryBytes": 6205,
+      "images": [
+        {
+          "sha256": "5a22afe24646ee76b7fd876817e65a7a6e40fb1691b559171156d6098c38c215",
+          "width": 480,
+          "height": 480,
+          "bytes": 52785,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "a449185795f6b8f1ba4b8be4d54a5c29d4de9962e3130dcd6f8a78c5eab92c09",
+          "width": 480,
+          "height": 480,
+          "bytes": 132796,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "3701c80f980c8f530cb49650e36b3007db658d04298a1029716d6a4d337e8f43",
+          "width": 480,
+          "height": 480,
+          "bytes": 42974,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "residential-entry-surround"
+      ],
+      "materialNames": [
+        "City cedar export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "sloped-metal-awning",
+      "lod": 0,
+      "sha256": "75cd27de84c505401ddff0ea1f30801b5c635be284092f92b849192b709ce1ab",
+      "boundsM": {
+        "min": [
+          -0.800000011920929,
+          2.369999885559082,
+          0.019999999552965164
+        ],
+        "max": [
+          0.800000011920929,
+          2.700000047683716,
+          0.8700000047683716
+        ],
+        "size": [
+          1.600000023841858,
+          0.3300001621246338,
+          0.8500000052154064
+        ]
+      },
+      "triangles": 48,
+      "vertices": 96,
+      "primitives": 1,
+      "bytes": 164248,
+      "embeddedImageBytes": 157083,
+      "geometryBytes": 7165,
+      "images": [
+        {
+          "sha256": "138704881990a261abcba11cafb18cca8d33a09a44d660d6fad6ae17c2fda0f5",
+          "width": 480,
+          "height": 480,
+          "bytes": 26884,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "e572f72749f87e6f270d92d92d8f3d6e1d1516f0929256b8b6c4250421559560",
+          "width": 480,
+          "height": 480,
+          "bytes": 86418,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "c17d43084e048d7a8b8aa7f05b053a7e1aa6f7d76a262223bf78a985fba41775",
+          "width": 480,
+          "height": 480,
+          "bytes": 43781,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "sloped-metal-awning"
+      ],
+      "materialNames": [
+        "City painted-metal export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "sloped-metal-awning",
+      "lod": 1,
+      "sha256": "f66137784696ff4703b54f3aaa08814e8a3d2cf942bb369944f292a95c336755",
+      "boundsM": {
+        "min": [
+          -0.800000011920929,
+          2.369999885559082,
+          0.019999999552965164
+        ],
+        "max": [
+          0.800000011920929,
+          2.700000047683716,
+          0.8700000047683716
+        ],
+        "size": [
+          1.600000023841858,
+          0.3300001621246338,
+          0.8500000052154064
+        ]
+      },
+      "triangles": 40,
+      "vertices": 84,
+      "primitives": 1,
+      "bytes": 163624,
+      "embeddedImageBytes": 157083,
+      "geometryBytes": 6541,
+      "images": [
+        {
+          "sha256": "138704881990a261abcba11cafb18cca8d33a09a44d660d6fad6ae17c2fda0f5",
+          "width": 480,
+          "height": 480,
+          "bytes": 26884,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "e572f72749f87e6f270d92d92d8f3d6e1d1516f0929256b8b6c4250421559560",
+          "width": 480,
+          "height": 480,
+          "bytes": 86418,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "c17d43084e048d7a8b8aa7f05b053a7e1aa6f7d76a262223bf78a985fba41775",
+          "width": 480,
+          "height": 480,
+          "bytes": 43781,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "sloped-metal-awning"
+      ],
+      "materialNames": [
+        "City painted-metal export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "flat-metal-awning",
+      "lod": 0,
+      "sha256": "7d78c35a4ae0e2ed9b317d0f3427ee5acbd8e72f8db6ab3190c11aaabc0fe08e",
+      "boundsM": {
+        "min": [
+          -0.8999999761581421,
+          2.4800000190734863,
+          0.019999999552965164
+        ],
+        "max": [
+          0.8999999761581421,
+          2.6500000953674316,
+          1.0199999809265137
+        ],
+        "size": [
+          1.7999999523162842,
+          0.1700000762939453,
+          0.9999999813735485
+        ]
+      },
+      "triangles": 36,
+      "vertices": 72,
+      "primitives": 1,
+      "bytes": 163032,
+      "embeddedImageBytes": 157083,
+      "geometryBytes": 5949,
+      "images": [
+        {
+          "sha256": "138704881990a261abcba11cafb18cca8d33a09a44d660d6fad6ae17c2fda0f5",
+          "width": 480,
+          "height": 480,
+          "bytes": 26884,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "e572f72749f87e6f270d92d92d8f3d6e1d1516f0929256b8b6c4250421559560",
+          "width": 480,
+          "height": 480,
+          "bytes": 86418,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "c17d43084e048d7a8b8aa7f05b053a7e1aa6f7d76a262223bf78a985fba41775",
+          "width": 480,
+          "height": 480,
+          "bytes": 43781,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "flat-metal-awning"
+      ],
+      "materialNames": [
+        "City painted-metal export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "flat-metal-awning",
+      "lod": 1,
+      "sha256": "2f1795465baa5c56661dd401a89dfcdc5f92c5b2ff44d06b0a92d0dea5bf3319",
+      "boundsM": {
+        "min": [
+          -0.8999999761581421,
+          2.4800000190734863,
+          0.019999999552965164
+        ],
+        "max": [
+          0.8999999761581421,
+          2.6500000953674316,
+          1.0199999809265137
+        ],
+        "size": [
+          1.7999999523162842,
+          0.1700000762939453,
+          0.9999999813735485
+        ]
+      },
+      "triangles": 28,
+      "vertices": 60,
+      "primitives": 1,
+      "bytes": 162408,
+      "embeddedImageBytes": 157083,
+      "geometryBytes": 5325,
+      "images": [
+        {
+          "sha256": "138704881990a261abcba11cafb18cca8d33a09a44d660d6fad6ae17c2fda0f5",
+          "width": 480,
+          "height": 480,
+          "bytes": 26884,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "e572f72749f87e6f270d92d92d8f3d6e1d1516f0929256b8b6c4250421559560",
+          "width": 480,
+          "height": 480,
+          "bytes": 86418,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "c17d43084e048d7a8b8aa7f05b053a7e1aa6f7d76a262223bf78a985fba41775",
+          "width": 480,
+          "height": 480,
+          "bytes": 43781,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "flat-metal-awning"
+      ],
+      "materialNames": [
+        "City painted-metal export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "modern-recessed-window-surround",
+      "lod": 0,
+      "sha256": "d86e11bc9a058f2c0bf167757cfacfa7d3a8e2adec5a00c6d0e7cfdce2a02c4c",
+      "boundsM": {
+        "min": [
+          -1.100000023841858,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          1.100000023841858,
+          1.75,
+          0.25999999046325684
+        ],
+        "size": [
+          2.200000047683716,
+          1.75,
+          0.23999999091029167
+        ]
+      },
+      "triangles": 56,
+      "vertices": 96,
+      "primitives": 1,
+      "bytes": 164336,
+      "embeddedImageBytes": 157083,
+      "geometryBytes": 7253,
+      "images": [
+        {
+          "sha256": "138704881990a261abcba11cafb18cca8d33a09a44d660d6fad6ae17c2fda0f5",
+          "width": 480,
+          "height": 480,
+          "bytes": 26884,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "e572f72749f87e6f270d92d92d8f3d6e1d1516f0929256b8b6c4250421559560",
+          "width": 480,
+          "height": 480,
+          "bytes": 86418,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "c17d43084e048d7a8b8aa7f05b053a7e1aa6f7d76a262223bf78a985fba41775",
+          "width": 480,
+          "height": 480,
+          "bytes": 43781,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "modern-recessed-window-surround"
+      ],
+      "materialNames": [
+        "City painted-metal export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "modern-recessed-window-surround",
+      "lod": 1,
+      "sha256": "9902d3a3aa8da4eecfeb92e71bb46123df229f324a82d4b003053077ace1dfdb",
+      "boundsM": {
+        "min": [
+          -1.100000023841858,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          1.100000023841858,
+          1.75,
+          0.25999999046325684
+        ],
+        "size": [
+          2.200000047683716,
+          1.75,
+          0.23999999091029167
+        ]
+      },
+      "triangles": 40,
+      "vertices": 64,
+      "primitives": 1,
+      "bytes": 162704,
+      "embeddedImageBytes": 157083,
+      "geometryBytes": 5621,
+      "images": [
+        {
+          "sha256": "138704881990a261abcba11cafb18cca8d33a09a44d660d6fad6ae17c2fda0f5",
+          "width": 480,
+          "height": 480,
+          "bytes": 26884,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "e572f72749f87e6f270d92d92d8f3d6e1d1516f0929256b8b6c4250421559560",
+          "width": 480,
+          "height": 480,
+          "bytes": 86418,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "c17d43084e048d7a8b8aa7f05b053a7e1aa6f7d76a262223bf78a985fba41775",
+          "width": 480,
+          "height": 480,
+          "bytes": 43781,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "modern-recessed-window-surround"
+      ],
+      "materialNames": [
+        "City painted-metal export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "modern-sill-drip",
+      "lod": 0,
+      "sha256": "4ffbc27581ec89f38fbc1e939868ea228ab779ff822c4238a2233382771d9b15",
+      "boundsM": {
+        "min": [
+          -1.1299999952316284,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          1.1299999952316284,
+          0.1599999964237213,
+          0.3199999928474426
+        ],
+        "size": [
+          2.259999990463257,
+          0.1599999964237213,
+          0.29999999329447746
+        ]
+      },
+      "triangles": 52,
+      "vertices": 84,
+      "primitives": 1,
+      "bytes": 163708,
+      "embeddedImageBytes": 157083,
+      "geometryBytes": 6625,
+      "images": [
+        {
+          "sha256": "138704881990a261abcba11cafb18cca8d33a09a44d660d6fad6ae17c2fda0f5",
+          "width": 480,
+          "height": 480,
+          "bytes": 26884,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "e572f72749f87e6f270d92d92d8f3d6e1d1516f0929256b8b6c4250421559560",
+          "width": 480,
+          "height": 480,
+          "bytes": 86418,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "c17d43084e048d7a8b8aa7f05b053a7e1aa6f7d76a262223bf78a985fba41775",
+          "width": 480,
+          "height": 480,
+          "bytes": 43781,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "modern-sill-drip"
+      ],
+      "materialNames": [
+        "City painted-metal export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "modern-sill-drip",
+      "lod": 1,
+      "sha256": "a5123b8c14d9ad07a10328094ef4a3738873d0104117fc4a3155cd285b511156",
+      "boundsM": {
+        "min": [
+          -1.1299999952316284,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          1.1299999952316284,
+          0.1599999964237213,
+          0.3199999928474426
+        ],
+        "size": [
+          2.259999990463257,
+          0.1599999964237213,
+          0.29999999329447746
+        ]
+      },
+      "triangles": 36,
+      "vertices": 60,
+      "primitives": 1,
+      "bytes": 162456,
+      "embeddedImageBytes": 157083,
+      "geometryBytes": 5373,
+      "images": [
+        {
+          "sha256": "138704881990a261abcba11cafb18cca8d33a09a44d660d6fad6ae17c2fda0f5",
+          "width": 480,
+          "height": 480,
+          "bytes": 26884,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "e572f72749f87e6f270d92d92d8f3d6e1d1516f0929256b8b6c4250421559560",
+          "width": 480,
+          "height": 480,
+          "bytes": 86418,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "c17d43084e048d7a8b8aa7f05b053a7e1aa6f7d76a262223bf78a985fba41775",
+          "width": 480,
+          "height": 480,
+          "bytes": 43781,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "modern-sill-drip"
+      ],
+      "materialNames": [
+        "City painted-metal export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "modern-parapet-cap",
+      "lod": 0,
+      "sha256": "99e7eba42f085a31fa5839504ae1f555041c41911644373e616d16e9e5a0e13a",
+      "boundsM": {
+        "min": [
+          -1.2000000476837158,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          1.2000000476837158,
+          0.1899999976158142,
+          0.47999998927116394
+        ],
+        "size": [
+          2.4000000953674316,
+          0.1899999976158142,
+          0.4599999897181988
+        ]
+      },
+      "triangles": 60,
+      "vertices": 96,
+      "primitives": 1,
+      "bytes": 164340,
+      "embeddedImageBytes": 157083,
+      "geometryBytes": 7257,
+      "images": [
+        {
+          "sha256": "138704881990a261abcba11cafb18cca8d33a09a44d660d6fad6ae17c2fda0f5",
+          "width": 480,
+          "height": 480,
+          "bytes": 26884,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "e572f72749f87e6f270d92d92d8f3d6e1d1516f0929256b8b6c4250421559560",
+          "width": 480,
+          "height": 480,
+          "bytes": 86418,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "c17d43084e048d7a8b8aa7f05b053a7e1aa6f7d76a262223bf78a985fba41775",
+          "width": 480,
+          "height": 480,
+          "bytes": 43781,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "modern-parapet-cap"
+      ],
+      "materialNames": [
+        "City painted-metal export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "modern-parapet-cap",
+      "lod": 1,
+      "sha256": "dbb39173177b8c0c6b5e26e8876678063b507bcbb91959a2287bf93b09d2da8d",
+      "boundsM": {
+        "min": [
+          -1.2000000476837158,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          1.2000000476837158,
+          0.1899999976158142,
+          0.47999998927116394
+        ],
+        "size": [
+          2.4000000953674316,
+          0.1899999976158142,
+          0.4599999897181988
+        ]
+      },
+      "triangles": 28,
+      "vertices": 48,
+      "primitives": 1,
+      "bytes": 161840,
+      "embeddedImageBytes": 157083,
+      "geometryBytes": 4757,
+      "images": [
+        {
+          "sha256": "138704881990a261abcba11cafb18cca8d33a09a44d660d6fad6ae17c2fda0f5",
+          "width": 480,
+          "height": 480,
+          "bytes": 26884,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "e572f72749f87e6f270d92d92d8f3d6e1d1516f0929256b8b6c4250421559560",
+          "width": 480,
+          "height": 480,
+          "bytes": 86418,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "c17d43084e048d7a8b8aa7f05b053a7e1aa6f7d76a262223bf78a985fba41775",
+          "width": 480,
+          "height": 480,
+          "bytes": 43781,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "modern-parapet-cap"
+      ],
+      "materialNames": [
+        "City painted-metal export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "concrete-shadow-plinth",
+      "lod": 0,
+      "sha256": "8e052a4c48fcab7f6637587de020373e15d87738bfb02d8738098c651ec3ef92",
+      "boundsM": {
+        "min": [
+          -1.2000000476837158,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          1.2000000476837158,
+          0.5,
+          0.18000000715255737
+        ],
+        "size": [
+          2.4000000953674316,
+          0.5,
+          0.1600000075995922
+        ]
+      },
+      "triangles": 44,
+      "vertices": 74,
+      "primitives": 1,
+      "bytes": 230204,
+      "embeddedImageBytes": 224136,
+      "geometryBytes": 6068,
+      "images": [
+        {
+          "sha256": "87f3c2f269c8b1dc320b61bff6619d057e0bb3f7b3eb40ca14759c453595c442",
+          "width": 480,
+          "height": 480,
+          "bytes": 54562,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "edf1314b0da424c5dc136fedf3a488d2a9d1a682df47f4e3c34b4cffac0574f6",
+          "width": 480,
+          "height": 480,
+          "bytes": 126294,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "4718d11d96e519000b877c02e5ff2cff23876c81417b937b35ae63ec0f675081",
+          "width": 480,
+          "height": 480,
+          "bytes": 43280,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "concrete-shadow-plinth"
+      ],
+      "materialNames": [
+        "City concrete export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "concrete-shadow-plinth",
+      "lod": 1,
+      "sha256": "fb66705803d2dc379d3e065c9c56a0a9a34540db1af12e1d32c5a664cc35d0dc",
+      "boundsM": {
+        "min": [
+          -1.2000000476837158,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          1.2000000476837158,
+          0.5,
+          0.18000000715255737
+        ],
+        "size": [
+          2.4000000953674316,
+          0.5,
+          0.1600000075995922
+        ]
+      },
+      "triangles": 40,
+      "vertices": 66,
+      "primitives": 1,
+      "bytes": 229796,
+      "embeddedImageBytes": 224136,
+      "geometryBytes": 5660,
+      "images": [
+        {
+          "sha256": "87f3c2f269c8b1dc320b61bff6619d057e0bb3f7b3eb40ca14759c453595c442",
+          "width": 480,
+          "height": 480,
+          "bytes": 54562,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "edf1314b0da424c5dc136fedf3a488d2a9d1a682df47f4e3c34b4cffac0574f6",
+          "width": 480,
+          "height": 480,
+          "bytes": 126294,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "4718d11d96e519000b877c02e5ff2cff23876c81417b937b35ae63ec0f675081",
+          "width": 480,
+          "height": 480,
+          "bytes": 43280,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "concrete-shadow-plinth"
+      ],
+      "materialNames": [
+        "City concrete export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "concrete-chamfer-corner",
+      "lod": 0,
+      "sha256": "92ab186002eda5f9eedb10cd00fe374163380cf45628e35720cb6950d17a2d43",
+      "boundsM": {
+        "min": [
+          0.0,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          0.36000001430511475,
+          2.700000047683716,
+          0.3799999952316284
+        ],
+        "size": [
+          0.36000001430511475,
+          2.700000047683716,
+          0.35999999567866325
+        ]
+      },
+      "triangles": 136,
+      "vertices": 246,
+      "primitives": 1,
+      "bytes": 239020,
+      "embeddedImageBytes": 224136,
+      "geometryBytes": 14884,
+      "images": [
+        {
+          "sha256": "87f3c2f269c8b1dc320b61bff6619d057e0bb3f7b3eb40ca14759c453595c442",
+          "width": 480,
+          "height": 480,
+          "bytes": 54562,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "edf1314b0da424c5dc136fedf3a488d2a9d1a682df47f4e3c34b4cffac0574f6",
+          "width": 480,
+          "height": 480,
+          "bytes": 126294,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "4718d11d96e519000b877c02e5ff2cff23876c81417b937b35ae63ec0f675081",
+          "width": 480,
+          "height": 480,
+          "bytes": 43280,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "concrete-chamfer-corner"
+      ],
+      "materialNames": [
+        "City concrete export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "concrete-chamfer-corner",
+      "lod": 1,
+      "sha256": "6d465227e96207e13bec49c3219cc916d19fb9305107a0bad94ecff23a91001a",
+      "boundsM": {
+        "min": [
+          0.0,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          0.36000001430511475,
+          2.700000047683716,
+          0.3799999952316284
+        ],
+        "size": [
+          0.36000001430511475,
+          2.700000047683716,
+          0.35999999567866325
+        ]
+      },
+      "triangles": 24,
+      "vertices": 42,
+      "primitives": 1,
+      "bytes": 228544,
+      "embeddedImageBytes": 224136,
+      "geometryBytes": 4408,
+      "images": [
+        {
+          "sha256": "87f3c2f269c8b1dc320b61bff6619d057e0bb3f7b3eb40ca14759c453595c442",
+          "width": 480,
+          "height": 480,
+          "bytes": 54562,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "edf1314b0da424c5dc136fedf3a488d2a9d1a682df47f4e3c34b4cffac0574f6",
+          "width": 480,
+          "height": 480,
+          "bytes": 126294,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "4718d11d96e519000b877c02e5ff2cff23876c81417b937b35ae63ec0f675081",
+          "width": 480,
+          "height": 480,
+          "bytes": 43280,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "concrete-chamfer-corner"
+      ],
+      "materialNames": [
+        "City concrete export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "residential-cedar-window-surround",
+      "lod": 0,
+      "sha256": "5beacd0e5f7220747f05fed2df2eae8d94cb2f27aed6f3d9485095232ecf1fe9",
+      "boundsM": {
+        "min": [
+          -0.8100000023841858,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          0.8100000023841858,
+          1.840000033378601,
+          0.18000000715255737
+        ],
+        "size": [
+          1.6200000047683716,
+          1.840000033378601,
+          0.1600000075995922
+        ]
+      },
+      "triangles": 112,
+      "vertices": 222,
+      "primitives": 1,
+      "bytes": 242148,
+      "embeddedImageBytes": 228555,
+      "geometryBytes": 13593,
+      "images": [
+        {
+          "sha256": "5a22afe24646ee76b7fd876817e65a7a6e40fb1691b559171156d6098c38c215",
+          "width": 480,
+          "height": 480,
+          "bytes": 52785,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "a449185795f6b8f1ba4b8be4d54a5c29d4de9962e3130dcd6f8a78c5eab92c09",
+          "width": 480,
+          "height": 480,
+          "bytes": 132796,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "3701c80f980c8f530cb49650e36b3007db658d04298a1029716d6a4d337e8f43",
+          "width": 480,
+          "height": 480,
+          "bytes": 42974,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "residential-cedar-window-surround"
+      ],
+      "materialNames": [
+        "City cedar export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "residential-cedar-window-surround",
+      "lod": 1,
+      "sha256": "3d712d3624689102715a44ead7fa1359c49ba459fc89c60e05e45fe797516acd",
+      "boundsM": {
+        "min": [
+          -0.8100000023841858,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          0.8100000023841858,
+          1.840000033378601,
+          0.18000000715255737
+        ],
+        "size": [
+          1.6200000047683716,
+          1.840000033378601,
+          0.1600000075995922
+        ]
+      },
+      "triangles": 64,
+      "vertices": 126,
+      "primitives": 1,
+      "bytes": 237252,
+      "embeddedImageBytes": 228555,
+      "geometryBytes": 8697,
+      "images": [
+        {
+          "sha256": "5a22afe24646ee76b7fd876817e65a7a6e40fb1691b559171156d6098c38c215",
+          "width": 480,
+          "height": 480,
+          "bytes": 52785,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "a449185795f6b8f1ba4b8be4d54a5c29d4de9962e3130dcd6f8a78c5eab92c09",
+          "width": 480,
+          "height": 480,
+          "bytes": 132796,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "3701c80f980c8f530cb49650e36b3007db658d04298a1029716d6a4d337e8f43",
+          "width": 480,
+          "height": 480,
+          "bytes": 42974,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "residential-cedar-window-surround"
+      ],
+      "materialNames": [
+        "City cedar export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "residential-cedar-sill",
+      "lod": 0,
+      "sha256": "9799bf34eb174dadc3fae00ee717749f43417f45e1022e426e01596b51eee278",
+      "boundsM": {
+        "min": [
+          -0.8100000023841858,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          0.8100000023841858,
+          0.12999999523162842,
+          0.3100000023841858
+        ],
+        "size": [
+          1.6200000047683716,
+          0.12999999523162842,
+          0.2900000028312206
+        ]
+      },
+      "triangles": 40,
+      "vertices": 66,
+      "primitives": 1,
+      "bytes": 234228,
+      "embeddedImageBytes": 228555,
+      "geometryBytes": 5673,
+      "images": [
+        {
+          "sha256": "5a22afe24646ee76b7fd876817e65a7a6e40fb1691b559171156d6098c38c215",
+          "width": 480,
+          "height": 480,
+          "bytes": 52785,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "a449185795f6b8f1ba4b8be4d54a5c29d4de9962e3130dcd6f8a78c5eab92c09",
+          "width": 480,
+          "height": 480,
+          "bytes": 132796,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "3701c80f980c8f530cb49650e36b3007db658d04298a1029716d6a4d337e8f43",
+          "width": 480,
+          "height": 480,
+          "bytes": 42974,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "residential-cedar-sill"
+      ],
+      "materialNames": [
+        "City cedar export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "residential-cedar-sill",
+      "lod": 1,
+      "sha256": "876cb6089d04d82d57a6353411b35ba46c7692eb9810e8134b4a1b36ae526c8b",
+      "boundsM": {
+        "min": [
+          -0.8100000023841858,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          0.8100000023841858,
+          0.12999999523162842,
+          0.3100000023841858
+        ],
+        "size": [
+          1.6200000047683716,
+          0.12999999523162842,
+          0.2900000028312206
+        ]
+      },
+      "triangles": 20,
+      "vertices": 36,
+      "primitives": 1,
+      "bytes": 232664,
+      "embeddedImageBytes": 228555,
+      "geometryBytes": 4109,
+      "images": [
+        {
+          "sha256": "5a22afe24646ee76b7fd876817e65a7a6e40fb1691b559171156d6098c38c215",
+          "width": 480,
+          "height": 480,
+          "bytes": 52785,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "a449185795f6b8f1ba4b8be4d54a5c29d4de9962e3130dcd6f8a78c5eab92c09",
+          "width": 480,
+          "height": 480,
+          "bytes": 132796,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "3701c80f980c8f530cb49650e36b3007db658d04298a1029716d6a4d337e8f43",
+          "width": 480,
+          "height": 480,
+          "bytes": 42974,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "residential-cedar-sill"
+      ],
+      "materialNames": [
+        "City cedar export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "residential-gabled-entry-canopy",
+      "lod": 0,
+      "sha256": "114bcdfdf3059a77568c1073f6d20ef4924e75551b69ea1167bd9cfc7a432793",
+      "boundsM": {
+        "min": [
+          -1.0,
+          2.359999895095825,
+          0.019999999552965164
+        ],
+        "max": [
+          1.0,
+          3.0999999046325684,
+          1.0800000429153442
+        ],
+        "size": [
+          2.0,
+          0.7400000095367432,
+          1.060000043362379
+        ]
+      },
+      "triangles": 144,
+      "vertices": 276,
+      "primitives": 1,
+      "bytes": 244928,
+      "embeddedImageBytes": 228555,
+      "geometryBytes": 16373,
+      "images": [
+        {
+          "sha256": "5a22afe24646ee76b7fd876817e65a7a6e40fb1691b559171156d6098c38c215",
+          "width": 480,
+          "height": 480,
+          "bytes": 52785,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "a449185795f6b8f1ba4b8be4d54a5c29d4de9962e3130dcd6f8a78c5eab92c09",
+          "width": 480,
+          "height": 480,
+          "bytes": 132796,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "3701c80f980c8f530cb49650e36b3007db658d04298a1029716d6a4d337e8f43",
+          "width": 480,
+          "height": 480,
+          "bytes": 42974,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "residential-gabled-entry-canopy"
+      ],
+      "materialNames": [
+        "City cedar export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "residential-gabled-entry-canopy",
+      "lod": 1,
+      "sha256": "e8b56d532417ebfe41ff75e84b32f500c14eb79f93c805c3c23c71cb7de82702",
+      "boundsM": {
+        "min": [
+          -1.0,
+          2.359999895095825,
+          0.019999999552965164
+        ],
+        "max": [
+          1.0,
+          3.0999999046325684,
+          1.0800000429153442
+        ],
+        "size": [
+          2.0,
+          0.7400000095367432,
+          1.060000043362379
+        ]
+      },
+      "triangles": 68,
+      "vertices": 132,
+      "primitives": 1,
+      "bytes": 237556,
+      "embeddedImageBytes": 228555,
+      "geometryBytes": 9001,
+      "images": [
+        {
+          "sha256": "5a22afe24646ee76b7fd876817e65a7a6e40fb1691b559171156d6098c38c215",
+          "width": 480,
+          "height": 480,
+          "bytes": 52785,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "a449185795f6b8f1ba4b8be4d54a5c29d4de9962e3130dcd6f8a78c5eab92c09",
+          "width": 480,
+          "height": 480,
+          "bytes": 132796,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "3701c80f980c8f530cb49650e36b3007db658d04298a1029716d6a4d337e8f43",
+          "width": 480,
+          "height": 480,
+          "bytes": 42974,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "residential-gabled-entry-canopy"
+      ],
+      "materialNames": [
+        "City cedar export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "robson-sill-blender-candidate-v1",
+      "lod": 0,
+      "sha256": "bd9592be9c2b1f2ec6305564851048e917791dab306bc06ffed272dfa1049edc",
+      "boundsM": {
+        "min": [
+          -0.699999988079071,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          0.699999988079071,
+          0.1600000113248825,
+          0.23999999463558197
+        ],
+        "size": [
+          1.399999976158142,
+          0.1600000113248825,
+          0.2199999950826168
+        ]
+      },
+      "triangles": 32,
+      "vertices": 54,
+      "primitives": 1,
+      "bytes": 267060,
+      "embeddedImageBytes": 261921,
+      "geometryBytes": 5139,
+      "images": [
+        {
+          "sha256": "30a5ba0a9ff28d05419bd9339a7746f841959c4e276028ce0a7c35c7be93eaba",
+          "width": 480,
+          "height": 480,
+          "bytes": 83560,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "7d370f02016b15b0b702a47445d4f0f2b2555c3d623e12b16b19e157abd5337a",
+          "width": 480,
+          "height": 480,
+          "bytes": 135322,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "5458aa7d79979230563fcd4e8615d330b024276fda4685c9e49b072a2ad4f2c1",
+          "width": 480,
+          "height": 480,
+          "bytes": 43039,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "sandstone-sill"
+      ],
+      "materialNames": [
+        "City sandstone export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "robson-sill-blender-candidate-v1",
+      "lod": 1,
+      "sha256": "688954e734f7b619fe6c63da637bcf3dbfcc0ec4c8ddf3da02871a0b044142c6",
+      "boundsM": {
+        "min": [
+          -0.699999988079071,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          0.699999988079071,
+          0.1600000113248825,
+          0.23999999463558197
+        ],
+        "size": [
+          1.399999976158142,
+          0.1600000113248825,
+          0.2199999950826168
+        ]
+      },
+      "triangles": 16,
+      "vertices": 30,
+      "primitives": 1,
+      "bytes": 265812,
+      "embeddedImageBytes": 261921,
+      "geometryBytes": 3891,
+      "images": [
+        {
+          "sha256": "30a5ba0a9ff28d05419bd9339a7746f841959c4e276028ce0a7c35c7be93eaba",
+          "width": 480,
+          "height": 480,
+          "bytes": 83560,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "7d370f02016b15b0b702a47445d4f0f2b2555c3d623e12b16b19e157abd5337a",
+          "width": 480,
+          "height": 480,
+          "bytes": 135322,
+          "texelBytesWithMips": 1228800.0
+        },
+        {
+          "sha256": "5458aa7d79979230563fcd4e8615d330b024276fda4685c9e49b072a2ad4f2c1",
+          "width": 480,
+          "height": 480,
+          "bytes": 43039,
+          "texelBytesWithMips": 1228800.0
+        }
+      ],
+      "nodeNames": [
+        "sandstone-sill"
+      ],
+      "materialNames": [
+        "City sandstone export"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "heritage-shop-bay",
+      "lod": 0,
+      "sha256": "985f36a9283982d06faa0e99634322fe7f613d1eb8be0b7ab74d3e1b48c8a898",
+      "boundsM": {
+        "min": [
+          -1.625,
+          0.0,
+          0.022800005972385406
+        ],
+        "max": [
+          1.625,
+          3.1958975791931152,
+          1.243499994277954
+        ],
+        "size": [
+          3.25,
+          3.1958975791931152,
+          1.2206999883055687
+        ]
+      },
+      "triangles": 8128,
+      "vertices": 17184,
+      "primitives": 3,
+      "bytes": 2304912,
+      "embeddedImageBytes": 1702272,
+      "geometryBytes": 602640,
+      "images": [
+        {
+          "sha256": "14c730cb8b534240c32c54f2b611a6dcb710d402d5860a73590ab3e77a39b20c",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 177557,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "6785de7d8ac738f5cfbdfac8debf08dfdcc2900a7588651e459532dead133d80",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 892902,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "cb1e313467e5808ebb1dc174ed595b9271a1f77dae6b6260d47e7f2212778d04",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 631813,
+          "texelBytesWithMips": 5592405.333333333
+        }
+      ],
+      "nodeNames": [
+        "heritage-shop-bay"
+      ],
+      "materialNames": [
+        "heritage-shop-bay-lod0 original baked opaque PBR",
+        "Clear cool glazing \u2022 alpha blend",
+        "Warm frosted diffuser"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "heritage-shop-bay",
+      "lod": 1,
+      "sha256": "63b03dc729d1bac065ce1c4fa786fedb907f95773820fa6752ff473e3aab56ac",
+      "boundsM": {
+        "min": [
+          -1.625,
+          0.0,
+          0.022800005972385406
+        ],
+        "max": [
+          1.625,
+          3.1958975791931152,
+          1.243499994277954
+        ],
+        "size": [
+          3.25,
+          3.1958975791931152,
+          1.2206999883055687
+        ]
+      },
+      "triangles": 604,
+      "vertices": 1150,
+      "primitives": 2,
+      "bytes": 559020,
+      "embeddedImageBytes": 515682,
+      "geometryBytes": 43338,
+      "images": [
+        {
+          "sha256": "9cb93bcef54482a51157eeb86a10dea78ad4b4755e7f134af4192e1fb181dc4a",
+          "width": 512,
+          "height": 512,
+          "bytes": 54213,
+          "texelBytesWithMips": 1398101.3333333333
+        },
+        {
+          "sha256": "cc1bbda53c41273673b1fbbac13e363e15e6ed8bff1fae9e0b07106d2f935579",
+          "width": 512,
+          "height": 512,
+          "bytes": 283272,
+          "texelBytesWithMips": 1398101.3333333333
+        },
+        {
+          "sha256": "c6f7034bdf3c45e39e0fce82de1e1f76e215725fcc9cb1171f250b3ab5b3f110",
+          "width": 512,
+          "height": 512,
+          "bytes": 178197,
+          "texelBytesWithMips": 1398101.3333333333
+        }
+      ],
+      "nodeNames": [
+        "heritage-shop-bay"
+      ],
+      "materialNames": [
+        "heritage-shop-bay-lod1 original baked opaque PBR",
+        "Clear cool glazing \u2022 alpha blend"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "modern-lobby-bay",
+      "lod": 0,
+      "sha256": "756fc1912f199ad4d8a3d7f124b1819c5923754392f9bfc8aee27a9bfddde164",
+      "boundsM": {
+        "min": [
+          -1.600000023841858,
+          0.0,
+          0.02550002560019493
+        ],
+        "max": [
+          1.600000023841858,
+          3.200000047683716,
+          1.7284998893737793
+        ],
+        "size": [
+          3.200000047683716,
+          3.200000047683716,
+          1.7029998637735844
+        ]
+      },
+      "triangles": 6260,
+      "vertices": 14253,
+      "primitives": 3,
+      "bytes": 1873464,
+      "embeddedImageBytes": 1375803,
+      "geometryBytes": 497661,
+      "images": [
+        {
+          "sha256": "b580ff99fb189e17844e63163ab3ef756eed458b9c10c14403fe482cf8039e77",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 148925,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "dd16f6830b2bac7cda8fdb2b0c6cd6216d5b5aa500f9f25adc36d35d6a4c81aa",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 728266,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "a567091023829c35d6b625a8c284bd2a4d3d1a79f485d8b685b0260ae869a9e3",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 498612,
+          "texelBytesWithMips": 5592405.333333333
+        }
+      ],
+      "nodeNames": [
+        "modern-lobby-bay"
+      ],
+      "materialNames": [
+        "modern-lobby-bay-lod0 original baked opaque PBR",
+        "Clear cool glazing \u2022 alpha blend",
+        "Warm frosted diffuser"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "id": "modern-lobby-bay",
+      "lod": 1,
+      "sha256": "e808ce8665581bf55c915867b840483e39cf27b389ba505b5c83d3cdaab54f3e",
+      "boundsM": {
+        "min": [
+          -1.600000023841858,
+          0.0,
+          0.02550002560019493
+        ],
+        "max": [
+          1.600000023841858,
+          3.200000047683716,
+          1.7284998893737793
+        ],
+        "size": [
+          3.200000047683716,
+          3.200000047683716,
+          1.7029998637735844
+        ]
+      },
+      "triangles": 556,
+      "vertices": 1018,
+      "primitives": 3,
+      "bytes": 418300,
+      "embeddedImageBytes": 378421,
+      "geometryBytes": 39879,
+      "images": [
+        {
+          "sha256": "477e973f465b3d34936d6673d21a19943b8f28c635ae4cf92a743d1df1a5be24",
+          "width": 512,
+          "height": 512,
+          "bytes": 28670,
+          "texelBytesWithMips": 1398101.3333333333
+        },
+        {
+          "sha256": "339c723e74f5ee5953726a0a98f7b1197f7688487689c0268033fbd731fb0f5b",
+          "width": 512,
+          "height": 512,
+          "bytes": 214839,
+          "texelBytesWithMips": 1398101.3333333333
+        },
+        {
+          "sha256": "bba3e9c3647a83757fac6f2ec9e0e385a139e73da1035d9025b4b38190af9199",
+          "width": 512,
+          "height": 512,
+          "bytes": 134912,
+          "texelBytesWithMips": 1398101.3333333333
+        }
+      ],
+      "nodeNames": [
+        "modern-lobby-bay"
+      ],
+      "materialNames": [
+        "modern-lobby-bay-lod1 original baked opaque PBR",
+        "Clear cool glazing \u2022 alpha blend",
+        "Warm frosted diffuser"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    }
+  ]
+}

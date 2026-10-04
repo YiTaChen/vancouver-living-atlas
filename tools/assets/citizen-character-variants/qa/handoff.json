@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "packageId": "citizen-character-variants",
+  "baseRevision": "aef5e31d4eb8d5d3f832d0931373bf6583227033",
+  "taskIds": [
+    "F04"
+  ],
+  "assetStatus": "offline_complete",
+  "perVariantStatus": {
+    "citizen": "offline_complete",
+    "police": "offline_complete",
+    "driver": "inspection_only_rejected_for_integration",
+    "driver-roadster-fit": "offline_complete_optional_profile"
+  },
+  "integrationStatus": "runtime_pending_webgl",
+  "webglAvailable": false,
+  "manifest": "../manifest.json",
+  "sourceEditsPreserved": true,
+  "offlineEvidence": [
+    "validation.json",
+    "measurements.json",
+    "cpu-tests.json",
+    "blender-reimport.json",
+    "artist-edit-proof.json",
+    "source-preserving-export.json",
+    "lod-surface-audit.json",
+    "driver-fit.json",
+    "render-evidence.json"
+  ],
+  "runtimeChecks": {
+    "status": "not_run",
+    "reason": "No WebGL scene, selector/fade/cache/GPU performance acceptance performed"
+  },
+  "intendedConsumers": [
+    "lib/city/assets/roadster.ts",
+    "lib/city/assets/walker.ts",
+    "lib/city/citizen.ts",
+    "lib/city/driver-camera.ts",
+    "lib/city/navigation.ts",
+    "lib/city/traffic-stop.ts"
+  ],
+  "replaces": [],
+  "replacementIntent": "Candidates only. No active selector, public asset, navigation, old package or car change.",
+  "naturalDriverFit": {
+    "family": "vancouver-driver-roadster-fit",
+    "status": "offline_complete",
+    "dependency": {
+      "packageId": "roadster-driver-fit",
+      "specs": {
+        "file": "tools/assets/roadster-driver-fit/specs.json",
+        "sha256": "a2b413a67933f24e5d0dc1f7c7175a0a5834ef2173c31d6f52ebd92ffa569052"
+      },
+      "lods": [
+        {
+          "level": 0,
+          "file": "tools/assets/roadster-driver-fit/exports/roadster-cockpit-local.lod0.glb",
+          "sha256": "706d649ab14e3cc38c6693cbc9a8a7c69c5731d7ad9c3ad758234f33408c74c6"
+        },
+        {
+          "level": 1,
+          "file": "tools/assets/roadster-driver-fit/exports/roadster-cockpit-local.lod1.glb",
+          "sha256": "a6b86d69660a113c2b5c24daa6cdcdfa8dfd8b50f6bfe4f3db50d0d62c989556"
+        },
+        {
+          "level": 2,
+          "file": "tools/assets/roadster-driver-fit/exports/roadster-cockpit-local.lod2.glb",
+          "sha256": "b6ed43359b1832adcbc644746993b0bfe59ed8db2371772806d3c2e232bfee14"
+        }
+      ],
+      "mutualManifestHashing": false
+    },
+    "profile": "roadster-driver-fit-optional",
+    "source": "source/driver-roadster-fit.lod0.blend",
+    "glb": "exports/driver-roadster-fit.lod0.glb",
+    "pose": "Natural trial6 hips/legs and exact rig; torso-8 degrees, driver-only backpack removal, seated-only DriverGrip, wrists behind9/3 rim at centre [.44,1.06,.4]",
+    "cameraChangeRequired": {
+      "measuredFacialEyeBandMeanM": [
+        0.4397796792198029,
+        1.4720983817429911,
+        -0.058997586349904124
+      ],
+      "eyeVertexCount": 1093,
+      "existingNavigationNeutralEyeM": [
+        0.45,
+        1.2,
+        0
+      ],
+      "verticalMismatchM": 0.27209838174299117,
+      "status": "runtime_pending_webgl; distinct cockpit camera system requires explicit migration"
+    },
+    "morphOwnership": "Stop/fade driver-seated before idle/walk/run; default DriverGrip0, seated1; no forced global weight"
+  },
+  "driverFit": {
+    "status": "inspection_only",
+    "clearanceStatus": "pass",
+    "usability": "tucked clearance-study pose; not comfortable-driver acceptance; natural extension conflicts with inherited dashboard and low steering wheel",
+    "scale": [
+      1,
+      1,
+      1
+    ],
+    "cameraChangeRequired": {
+      "measuredFacialEyeBandMeanM": [
+        0.4397796792198008,
+        1.4336354947690724,
+        0.15713231188680826
+      ],
+      "eyeVertexCount": 1093,
+      "existingNavigationNeutralEyeM": [
+        0.45,
+        1.2,
+        0
+      ],
+      "verticalMismatchM": 0.23363549476907242,
+      "status": "runtime_pending_webgl; distinct cockpit camera system requires explicit migration"
+    },
+    "collisionEvidence": [
+      {
+        "id": "dashboard",
+        "min": [
+          -0.785,
+          0.71,
+          0.445
+        ],
+        "max": [
+          0.785,
+          0.89,
+          0.775
+        ],
+        "intersectingTriangles": 0,
+        "dominantBones": {}
+      },
+      {
+        "id": "center-console",
+        "min": [
+          -0.1,
+          0.46,
+          -0.57
+        ],
+        "max": [
+          0.1,
+          0.78,
+          0.53
+        ],
+        "intersectingTriangles": 0,
+        "dominantBones": {}
+      },
+      {
+        "id": "cabin-floor",
+        "min": [
+          -0.7,
+          0.385,
+          -0.915
+        ],
+        "max": [
+          0.7,
+          0.475,
+          0.635
+        ],
+        "intersectingTriangles": 0,
+        "dominantBones": {}
+      }
+    ],
+    "note": "Read fit report and cutaway; does not reuse short decorative driver hip or imply camera adoption."
+  },
+  "knownLimitations": [
+    "Editable source retains64 inherited exactly zero-area triangles; every runtime export omits those64 triangles (192 index entries) while retaining positions, UVs, normals, weights and binds.",
+    "LOD1/2 simplify only garment surfaces outside the protected waist; reduced sleeve/knee fold and silhouette detail remains, so no lossless or FPS claim.",
+    "Posterior waist crease shading inherited from accepted LOD0 remains; matching vertices/UV/weights does not guarantee every arbitrary blend pose is artifact-free.",
+    "Three shared PNG URLs and content hashes do not guarantee current-loader GPU deduplication; cache/refcount integration still required.",
+    "Generic driver is a rejected inspection-only tucked study. The natural driver-roadster-fit family is compatible only with pinned optional cockpit payloads; original car/camera remain unchanged. Static support is a geometric approximation, not ergonomic or dynamic certification.",
+    "Natural driver retains22 bones and adds a seated-only finger corrective on separate hand mesh. Static sampled contact tolerates at most3mm penetration; no steering-turn, entry/exit, pedals or seatbelt animation.",
+    "Seat contact is sampled rigid geometry; no soft-cushion compression simulation or pedal placement because current car has no pedals.",
+    "Police cap adds height; original green collar/cuffs/backpack retained intentionally, not an official-uniform replica."
+  ],
+  "nextIntegrationSteps": [
+    "Review protected waist three-phase exports and police skin isolation at every LOD.",
+    "Keep current public LOD0 default; add explicitly gated stable family/LOD selector.",
+    "Introduce content-hash geometry/image cache, texture/material refcounts and independent SkeletonUtils clones; verify actual GPU reuse.",
+    "Preserve stable root, distance-driven clip phase, blend weights and failed/late async load disposal; add 2 m hysteresis and bounded 150 ms dither fade in a controlled sample.",
+    "Never select generic driver (integrationEligible=false). For driver-roadster-fit, require exact cockpit dependency hashes and [0.44,0,-0.06] attachment; bind driver-seated and release its corrective on exit. Static fit does not activate gameplay or migrate camera.",
+    "Test actual High1080p and low-end WebGL four lights, motion, failure/disposal/residency and draw/frame costs before sample acceptance."
+  ]
+}

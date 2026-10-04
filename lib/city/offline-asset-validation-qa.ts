@@ -1,7 +1,8 @@
 /** LOCAL VISUAL QA: same-pose offline asset comparisons, never a production UI. */
 import type { CityEngine } from './engine';
 import { selectCitizenAssetForQA, type CitizenQAVariant } from './citizen';
-import { project } from './geo';
+import { hash, project } from './geo';
+import { ROOFTOP_EQUIPMENT, ROOFTOP_TEMPLATES } from './rooftop-equipment';
 import {
   clearQAOrbitMomentum,
   captureQAPose,
@@ -43,6 +44,9 @@ export function installOfflineAssetValidationQA(
       status.textContent = `Ready ${label}: ${JSON.stringify({
         citizen: e.navigation?.walker.group.userData,
         tree: e.detailedTrees?.getMaterialCandidateState(),
+        treeGeometry: e.detailedTrees?.getGeometryCandidateState?.(),
+        trafficGeometry: e.traffic?.vehicleAssets?.stats,
+        rooftopGeometry: rooftopEvidence(),
       })}`;
     } catch (error) {
       status.textContent = `Asset switch failed: ${error}`;
@@ -75,10 +79,163 @@ export function installOfflineAssetValidationQA(
             throw new Error('Tree candidate failed to load');
         }, variant),
     );
+  for (const variant of ['baseline', 'blender'] as const)
+    button(
+      `Tree geometry ${variant}`,
+      () =>
+        void change(async () => {
+          if (!e.detailedTrees || !(await e.detailedTrees.setGeometryCandidate(variant)))
+            throw new Error('Tree geometry candidate failed to load');
+        }, `tree geometry ${variant}`),
+    );
+  for (const enabled of [false, true])
+    button(
+      `Traffic geometry ${enabled ? 'blender' : 'baseline'}`,
+      () => void change(async () => {
+        if (!e.traffic?.vehicleAssets?.setEnabled(enabled))
+          throw new Error('Traffic geometry comparison unavailable');
+      }, `traffic geometry ${enabled ? 'blender' : 'baseline'}`),
+    );
+  let rooftopEnabled = true;
+  function rooftopEvidence() {
+    const architecture = e.architecturalDetails;
+    if (!architecture) return null;
+    const batches: { name: string; count: number; trianglesPerInstance: number }[] = [];
+    architecture.root.traverse((object) => {
+      if (!object.userData.rooftopEquipment) return;
+      const mesh = object as import('three').InstancedMesh;
+      if (!mesh.isInstancedMesh || !mesh.visible) return;
+      for (let ancestor = mesh.parent; ancestor; ancestor = ancestor.parent) if (!ancestor.visible) return;
+      batches.push({ name: mesh.name, count: mesh.count, trianglesPerInstance: (mesh.geometry.index?.count ?? mesh.geometry.getAttribute('position').count) / 3 });
+    });
+    return { enabled: rooftopEnabled, stats: { ...architecture.rooftopEquipment.stats }, admittedUnits: architecture.stats.rooftopUnits, batches, admission: ROOFTOP_EQUIPMENT, sourceTemplates: ROOFTOP_TEMPLATES };
+  }
+  for (const enabled of [false, true])
+    button(
+      `Rooftop geometry ${enabled ? 'blender' : 'baseline'}`,
+      () => void change(async () => {
+        if (!e.architecturalDetails) throw new Error('Rooftop geometry comparison unavailable');
+        e.architecturalDetails.setRooftopEnabled(enabled);
+        rooftopEnabled = enabled;
+      }, `rooftop geometry ${enabled ? 'blender' : 'baseline'}`),
+    );
+
+  async function captureSourceTraffic(enabled: boolean) {
+    if (e.disposed || !lease.begin()) return;
+    const variant = enabled ? 'blender' : 'baseline';
+    let hidden = document.hidden;
+    const visibility = () => { hidden ||= document.hidden; };
+    document.addEventListener('visibilitychange', visibility);
+    const frame = () => new Promise<void>((resolve, reject) => {
+      const timeout = window.setTimeout(() => reject(new Error('No visible animation frame')), 3000);
+      requestAnimationFrame(() => {
+        window.clearTimeout(timeout);
+        if (hidden || document.hidden || e.disposed || e.contextLost) reject(new Error('Hidden, disposed or lost WebGL context'));
+        else resolve();
+      });
+    });
+    try {
+      status.textContent = `Preparing source traffic car ${variant}`;
+      const traffic = e.traffic;
+      if (!traffic || traffic.vehicleAssets.stats.status !== 'ready') throw new Error('Traffic templates are not ready; retry after loading');
+      const routeIndex = traffic.routes.findIndex((r) => r.length > 0 && [r.length, r.speed, r.phase, ...r.a, ...r.b].every(Number.isFinite));
+      if (routeIndex < 0) throw new Error('No valid source traffic route');
+      const route = traffic.routes[routeIndex];
+      const yaw = Math.atan2(route.b[0] - route.a[0], route.b[1] - route.a[1]);
+      const sourceAt = (timeSeconds: number) => {
+        const phase = (route.phase + timeSeconds * route.speed / route.length) % 1;
+        const x = route.a[0] + (route.b[0] - route.a[0]) * phase;
+        const z = route.a[1] + (route.b[1] - route.a[1]) * phase;
+        const fallback = (e.data.roadRelief?.(x, z) ?? e.elevation(x, z)) + 1.05;
+        const roadGround = e.data.roadSurface?.sample(x, z, fallback) ?? fallback;
+        if (![x, z, roadGround].every(Number.isFinite)) throw new Error('Non-finite source traffic ground');
+        return { timeSeconds, phase, x, z, roadGround, fallback };
+      };
+      if (!traffic.vehicleAssets.setEnabled(enabled)) throw new Error('Traffic comparison unavailable');
+      e.navigation?.keys.clear();
+      e.navigation?.setMode('orbit');
+      e.transition = null;
+      e.applySettings({ ...e.settings, mode: 'orbit', quality: 'high', traffic: true, labels: false, autoRotate: false });
+      clearQAOrbitMomentum(e.controls);
+      e.controls.enabled = false;
+      // Keep the live elapsed-time traffic and city clock running. This is an
+      // appearance probe, not a frozen-phase or same-position performance sample.
+      e.setClock({ hour: 14, running: true });
+      e.setAtmosphere('clear');
+      e.renderer.setPixelRatio(1);
+      e.renderer.setSize(1920, 1080, false);
+      e.composer?.setPixelRatio(1);
+      e.composer?.setSize(1920, 1080);
+      e.fxaa?.uniforms.resolution.value.set(1 / 1920, 1 / 1080);
+      e.camera.aspect = 1920 / 1080;
+      e.camera.fov = 42;
+      e.camera.near = 0.15;
+      e.controls.minDistance = 0.5;
+      const framed = sourceAt(performance.now() / 1000);
+      const dx = Math.sin(yaw), dz = Math.cos(yaw);
+      e.camera.position.set(framed.x - dx * 20 + dz * 15, framed.roadGround + 10, framed.z - dz * 20 - dx * 15);
+      e.controls.target.set(framed.x, framed.roadGround + 1, framed.z);
+      e.camera.updateProjectionMatrix();
+      e.controls.update();
+      e.renderer.shadowMap.needsUpdate = true;
+      const expectedPose = captureQAPose(e.camera, e.controls);
+      await frame();
+      await frame();
+      const captured = sourceAt(Number(e.uniforms.time.value));
+      const gl = e.renderer.getContext();
+      const programs = e.renderer.info.programs ?? [];
+      const linked = (program: (typeof programs)[number]) => Boolean(program.program) && gl.getProgramParameter(program.program as WebGLProgram, gl.LINK_STATUS) === true;
+      const shaderReady = programs.length > 0 && programs.every(linked) && (!enabled || programs.some((p) => p.cacheKey.includes('traffic-source-wheel-v1') && linked(p)));
+      const trafficReady = traffic.vehicleAssets.stats.status === 'ready' && (enabled ? traffic.vehicleAssets.group.visible && traffic.vehicleAssets.stats.actors === traffic.routes.length && traffic.vehicleAssets.stats.lodCounts[0] > 0 : traffic.mesh.visible && traffic.cabins.visible);
+      const ndc = e.controls.target.clone().set(captured.x, captured.roadGround + 1, captured.z).project(e.camera);
+      const valid = !hidden && !document.hidden && !e.disposed && !e.contextLost && !gl.isContextLost() && shaderReady && trafficReady && qaPoseError(e.camera, e.controls, expectedPose) < 0.05 && Math.abs(ndc.x) < 0.9 && Math.abs(ndc.y) < 0.9 && ndc.z > -1 && ndc.z < 1;
+      if (!valid) throw new Error('Traffic moved out of view, shader/load not ready, hidden or lost context; no capture saved');
+      const model = hash(routeIndex + 91) < 0.28 ? 'suv' : 'sedan';
+      const row = {
+        kind: 'source-traffic-appearance-v1', valid, variant, shaderReady, trafficReady,
+        performanceNowSeconds: performance.now() / 1000,
+        framed, captured, routeIndex, route: { ...route, a: [...route.a], b: [...route.b] }, yaw,
+        camera: e.camera.position.toArray(), target: e.controls.target.toArray(), expectedPose,
+        projectedSource: ndc.toArray(), render: [e.renderer.domElement.width, e.renderer.domElement.height],
+        quality: e.settings.quality, atmosphere: 'clear', requestedHour: 14, clock: e.clock.snapshot(),
+        trafficGeometry: { ...traffic.vehicleAssets.stats, lodCounts: [...traffic.vehicleAssets.stats.lodCounts] },
+        routePopulation: traffic.routes.length, roadGround: captured.roadGround,
+        vehicle: {
+          selectedGeometry: enabled ? model : 'legacy-body-and-cabin', sourceVariant: model,
+          authoredBoundsM: model === 'suv' ? { min: [-0.96, 0, -2.277], max: [0.96, 1.76, 2.382] } : { min: [-0.93, 0, -2.202], max: [0.93, 1.48, 2.307] },
+          boundsBasis: 'Delivered traffic-car-templates bounds rounded to 1 mm; unit-scale wheel-contact datum, +Z forward; runtime close LOD fits front/rear and cross-road samples. Legacy box origin remains roadRelief/elevation +1.8 m.',
+        },
+        protocol: 'Single appearance capture of an existing route actor after two visible RAF updates, High 1920x1080, side/rear 25 m and ground +10 m. Traffic and solar clock keep running; no actor is created, teleported or frozen. Baseline and Blender are separate live-phase views, not matched-phase FPS evidence.',
+      };
+      const response = await fetch('/__visual-qa', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: `source-traffic-${variant}`, row, screenshot: e.screenshot() }),
+        signal: AbortSignal.timeout(10000),
+      });
+      if (!response.ok) throw new Error(`Traffic capture upload failed (${response.status})`);
+      status.textContent = `Saved source-traffic-${variant}: existing ${model}, route ${routeIndex}, live phase ${captured.phase.toFixed(4)}`;
+    } catch (error) {
+      status.textContent = `Source traffic capture failed: ${error}`;
+    } finally {
+      document.removeEventListener('visibilitychange', visibility);
+      e.navigation?.keys.clear();
+      if (!e.disposed) e.controls.enabled = e.navigation?.mode === 'orbit';
+      lease.end();
+    }
+  }
+  for (const enabled of [false, true])
+    button(`Capture source traffic car ${enabled ? 'blender' : 'baseline'}`, () => void captureSourceTraffic(enabled));
 
   let tree:
     | NonNullable<CityEngine['detailedTrees']>['trees'][number]
     | undefined;
+  for (const quality of ['high', 'ultra'] as const)
+    button(`Asset comparison ${quality}`, () => {
+      if (lease.isRunning()) return;
+      e.applySettings({ ...e.settings, quality });
+      e.detailedTrees?.update(true);
+      status.textContent = `Comparison quality: ${quality}`;
+    });
   for (const conifer of [false, true])
     for (const distance of [10, 30, 65])
       button(
@@ -105,7 +262,7 @@ export function installOfflineAssetValidationQA(
           e.applySettings({
             ...e.settings,
             mode: 'orbit',
-            quality: 'high',
+            quality: e.settings.quality === 'ultra' ? 'ultra' : 'high',
             labels: false,
             autoRotate: false,
           });
@@ -215,6 +372,9 @@ export function installOfflineAssetValidationQA(
             const architecture = e.architecturalDetails?.stats;
             const modules = e.data.architectureModuleCandidate?.snapshot?.();
             const leaves = e.detailedTrees?.getMaterialCandidateState();
+            const treeGeometry = e.detailedTrees?.getGeometryCandidateState?.();
+            const trafficGeometry = e.traffic?.vehicleAssets?.stats;
+            const rooftopGeometry = e.architecturalDetails?.rooftopEquipment.stats;
             return (
               (!architecture ||
                 (architecture.pendingCells === 0 &&
@@ -228,6 +388,9 @@ export function installOfflineAssetValidationQA(
               (!leaves ||
                 leaves.active === 'baseline' ||
                 leaves.status === 'ready') &&
+              (!treeGeometry || e.settings.quality !== 'ultra' || treeGeometry.active === 'baseline' || treeGeometry.status === 'ready') &&
+              (!trafficGeometry || !trafficGeometry.enabled || trafficGeometry.status === 'ready') &&
+              (!rooftopGeometry || !rooftopEnabled || rooftopGeometry.selectedCells === 0 || rooftopGeometry.status === 'ready') &&
               (e.navigation?.mode !== 'walk' ||
                 e.navigation.walker.group.userData.assetState === 'ready')
             );
@@ -281,6 +444,9 @@ export function installOfflineAssetValidationQA(
               modules,
               citizen: e.navigation?.walker.group.userData,
               tree: leaves,
+              treeGeometry: e.detailedTrees?.getGeometryCandidateState?.() ?? null,
+              trafficGeometry: e.traffic?.vehicleAssets?.stats ?? null,
+              rooftopGeometry: rooftopEvidence(),
               treeProbe: e.data.offlineTreeProbe ?? null,
               treePools: e.detailedTrees?.pools.map((p) => ({
                 count: p.count,

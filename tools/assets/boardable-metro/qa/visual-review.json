@@ -1,0 +1,66 @@
+{
+  "status": "pass",
+  "reviewedAtUtc": "2026-10-03T23:32:04.997453+00:00",
+  "reviewMethod": "Original 119-frame review retained for byte-identical exterior assets. After export-only interior batching, all 83 interior-containing actual-GLB frames were rerendered and visually reviewed through the refreshed overview, boarding, lighting, interior LOD, all entry and all seat contact sheets.",
+  "reviewedGlbSha256": {
+    "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+    "exports/expo-metro-lead-exterior.lod1.glb": "04601a4b007e4c37b8ca25f0ffc0de1b12b3bb6dec4bc34b540b31458e17a502",
+    "exports/expo-metro-lead-exterior.lod2.glb": "6bc8efd804f341250845b5ab122bc2215a1e5bbbbfd65953add8d222a48a6fd6",
+    "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+    "exports/expo-metro-middle-exterior.lod1.glb": "72024af0b12eff31f3070f38b97cf0de23205b630f9f1bf2d3abfd9098cd82fc",
+    "exports/expo-metro-middle-exterior.lod2.glb": "bf2a04515b8c9478a982d3875b47dafac50884dd66a3103c9ae8fd4a182ed92c",
+    "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775",
+    "exports/expo-metro-shared-interior.lod1.glb": "79cc69b436c7c40dcc21feee9218e4bf3156af1a18494080983a17183167e52e",
+    "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+    "exports/expo-metro-tail-exterior.lod1.glb": "71697569e0d0e85a96de0f11f4ab97750c4b39678977eeefe7eebcfb51cccc1e",
+    "exports/expo-metro-tail-exterior.lod2.glb": "27517d3ddd0195b3c18d1444f93b64a9e55b10c206f010d3a17397c47d370f82"
+  },
+  "reviewedContactSheets": [
+    "previews/contact-boarding.png",
+    "previews/contact-interior-lods.png",
+    "previews/contact-lead-entries.png",
+    "previews/contact-lead-lods.png",
+    "previews/contact-lead-seats.png",
+    "previews/contact-lighting.png",
+    "previews/contact-middle-entries.png",
+    "previews/contact-middle-lods.png",
+    "previews/contact-middle-seats.png",
+    "previews/contact-overview.png",
+    "previews/contact-tail-entries.png",
+    "previews/contact-tail-lods.png",
+    "previews/contact-tail-seats.png"
+  ],
+  "findings": {
+    "wholeObjectFraming": "pass; front/rear/top cameras widened after initial cropping was found",
+    "hollowCabinAndDoors": "pass; open doorway visibly exposes continuous interior floor and independent sliding leaves",
+    "leadMiddleTailIdentity": "pass; outer end observation windows and inner/middle gangway openings differ",
+    "lodShapeAndDatum": "pass; all LODs fit the full frame and preserve width/height/contact datum; coarse LOD is explicitly closed and nonboardable",
+    "seatsAndEntries": "pass; all 36 seat-camera and 18 entry views show cabin space; priority seats and clear zones are distinct",
+    "interiorLodPair": "pass; same aisle camera, ceiling/floor/major passage retained",
+    "scaleReference": "pass; 1m ruler and procedural 1.75m/1.81m figures, on QA platform at floor/sill Y=.95",
+    "materialRoles": "pass; steel-metal wheel/bogie/coupler primitives separately CPU-verified; rubber restricted to bellows",
+    "fourLightingConditions": "pass; clear/overcast/dusk/night distinguish surfaces; no claim of city renderer parity",
+    "staticInteriorBatching": "pass; six material primitives at each interior LOD, geometry and framing visually preserved. Exact component binary comparison maximum attribute error 4.76837158203125e-07; editable sources/exterior exports unchanged."
+  },
+  "repairsCompleted": [
+    "Window mullions moved entirely inside wall spans after actual door-leaf sweep collision revealed 45mm intrusion.",
+    "Overhead rail raised to preserve at least 2.05m passenger clearance.",
+    "Front/rear/top orthographic framing expanded to include complete bounds.",
+    "QA humanoid construction corrected to actual full reference heights.",
+    "Wheel/bogie/coupler placeholder rubber replaced by steel-metal with actual primitive validation."
+  ],
+  "knownLimitations": [
+    "Visible Monte Carlo noise at requested 8 samples; this Blender build lacks OpenImageDenoise.",
+    "Low-poly representative research geometry, not an exact manufactured SkyTrain model.",
+    "LOD1 simplifies livery detail and LOD2 loses openings by declared design.",
+    "No runtime transparent sorting, animation timing, dynamic collision or moving inter-car traversal acceptance."
+  ],
+  "batchRevisionReview": {
+    "status": "pass",
+    "interiorContainingFramesRerendered": 83,
+    "exteriorOnlyFramesRetained": 36,
+    "allOriginalComponentAnchorsPreserved": true,
+    "sourceEditProof": "qa/source-roundtrip.json editedInteriorBatchProof",
+    "componentBinaryProof": "qa/static-batching.json"
+  }
+}

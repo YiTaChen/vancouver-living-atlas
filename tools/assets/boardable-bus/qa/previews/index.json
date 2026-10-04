@@ -1,0 +1,850 @@
+{
+  "status": "pass",
+  "scope": "Actual exported GLB reimport; Cycles CPU only; no WebGL acceptance",
+  "references": {
+    "oneMetreRuler": true,
+    "humanHeightsM": [
+      1.75,
+      1.81
+    ],
+    "runtimeExcluded": true
+  },
+  "renders": [
+    {
+      "file": "exterior-front.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "clear",
+      "cameraPositionVehicleM": [
+        0,
+        3.5,
+        16
+      ],
+      "targetVehicleM": [
+        0,
+        1.55,
+        0.2
+      ],
+      "description": "Actual GLB front, 1m ruler and 1.75/1.81m references",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod0.glb",
+        "exports/city-bus-12m-interior.lod0.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod0.glb": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+        "exports/city-bus-12m-interior.lod0.glb": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      },
+      "sha256": "ae91f490b478bcde7d712271b30174af89e04e90b5d1292e76e9bb85efe8bd3e"
+    },
+    {
+      "file": "exterior-right-side.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "clear",
+      "cameraPositionVehicleM": [
+        -15,
+        4.2,
+        3
+      ],
+      "targetVehicleM": [
+        0,
+        1.35,
+        0.2
+      ],
+      "description": "Right side closed independent doors, tyres and hollow glazed shell",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod0.glb",
+        "exports/city-bus-12m-interior.lod0.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod0.glb": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+        "exports/city-bus-12m-interior.lod0.glb": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      },
+      "sha256": "15cd5dfc90f42f9997ac332b361e07cdba4cfc46dd8747880019aa1f0eed03b6"
+    },
+    {
+      "file": "exterior-rear.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "clear",
+      "cameraPositionVehicleM": [
+        0,
+        3.5,
+        -16
+      ],
+      "targetVehicleM": [
+        0,
+        1.55,
+        0.2
+      ],
+      "description": "",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod0.glb",
+        "exports/city-bus-12m-interior.lod0.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod0.glb": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+        "exports/city-bus-12m-interior.lod0.glb": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      },
+      "sha256": "a23a334c2ab734d14ef06789f437ea704ff427d2021b1d3f5c7d17463e6ecc80"
+    },
+    {
+      "file": "exterior-top.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "clear",
+      "cameraPositionVehicleM": [
+        0.01,
+        20,
+        0.2
+      ],
+      "targetVehicleM": [
+        0,
+        0,
+        0.2
+      ],
+      "description": "",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod0.glb",
+        "exports/city-bus-12m-interior.lod0.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod0.glb": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+        "exports/city-bus-12m-interior.lod0.glb": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      },
+      "sha256": "dd1bc4f1a739b77735cbbe6f238aae114e20bc1e7afedfab049d83400e3cf6f4"
+    },
+    {
+      "file": "light-clear.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "clear",
+      "cameraPositionVehicleM": [
+        -12,
+        7,
+        12
+      ],
+      "targetVehicleM": [
+        0,
+        1.2,
+        0.2
+      ],
+      "description": "",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod0.glb",
+        "exports/city-bus-12m-interior.lod0.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod0.glb": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+        "exports/city-bus-12m-interior.lod0.glb": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      },
+      "sha256": "1d98a5b8a9e7dfb9d61c324d70783532ce7085ed92367baa8874984c765b1e8c"
+    },
+    {
+      "file": "light-overcast.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "overcast",
+      "cameraPositionVehicleM": [
+        -12,
+        7,
+        12
+      ],
+      "targetVehicleM": [
+        0,
+        1.2,
+        0.2
+      ],
+      "description": "",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod0.glb",
+        "exports/city-bus-12m-interior.lod0.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod0.glb": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+        "exports/city-bus-12m-interior.lod0.glb": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      },
+      "sha256": "4256250eaa521f9cc4a705a8b821244a5e2fbdde881fe48914a4c96497eba6eb"
+    },
+    {
+      "file": "light-dusk.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "dusk",
+      "cameraPositionVehicleM": [
+        -12,
+        7,
+        12
+      ],
+      "targetVehicleM": [
+        0,
+        1.2,
+        0.2
+      ],
+      "description": "",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod0.glb",
+        "exports/city-bus-12m-interior.lod0.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod0.glb": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+        "exports/city-bus-12m-interior.lod0.glb": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      },
+      "sha256": "fc006568029fae54fb0dab9a1619e19ca4309a2227359661aaa51f1d8a29fb3a"
+    },
+    {
+      "file": "light-night.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "night",
+      "cameraPositionVehicleM": [
+        -12,
+        7,
+        12
+      ],
+      "targetVehicleM": [
+        0,
+        1.2,
+        0.2
+      ],
+      "description": "",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod0.glb",
+        "exports/city-bus-12m-interior.lod0.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod0.glb": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+        "exports/city-bus-12m-interior.lod0.glb": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      },
+      "sha256": "e7dd928a96ba8b65732ac37d78e7dc234ae77986f9714e594ec3631f50aa6b66"
+    },
+    {
+      "file": "lod-0.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "clear",
+      "cameraPositionVehicleM": [
+        -12,
+        7,
+        12
+      ],
+      "targetVehicleM": [
+        0,
+        1.2,
+        0.2
+      ],
+      "description": "Same camera; LOD2 is closed empty nonboarding fallback",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod0.glb",
+        "exports/city-bus-12m-interior.lod0.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod0.glb": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+        "exports/city-bus-12m-interior.lod0.glb": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      },
+      "sha256": "62380af9790207c0c2fafa8d0c40ffc52e1a7baeaec552bbe402bd9609bb05ad"
+    },
+    {
+      "file": "lod-1.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "clear",
+      "cameraPositionVehicleM": [
+        -12,
+        7,
+        12
+      ],
+      "targetVehicleM": [
+        0,
+        1.2,
+        0.2
+      ],
+      "description": "Same camera; LOD2 is closed empty nonboarding fallback",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod1.glb",
+        "exports/city-bus-12m-interior.lod1.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod1.glb": "a4ccbb6a4b2f032a4d950ee0883c51ebe1ecd314734b539c60aa5fd6c605b3f0",
+        "exports/city-bus-12m-interior.lod1.glb": "6ac509bee7a8eed10b04ae8c6de1b776087bb6a822c75846b5c4e258045819d5"
+      },
+      "sha256": "4cbb59653ddf58d149436a31e3d5ad7de67ee117d289f3e865ce37b91c1e4ef8"
+    },
+    {
+      "file": "lod-2.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "clear",
+      "cameraPositionVehicleM": [
+        -12,
+        7,
+        12
+      ],
+      "targetVehicleM": [
+        0,
+        1.2,
+        0.2
+      ],
+      "description": "Same camera; LOD2 is closed empty nonboarding fallback",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod2.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod2.glb": "36a7f8cfa1b3b53b8e212618e80523a7be3f7fd8e86bef98cf9c93f83bcfd948"
+      },
+      "sha256": "55c28cfdcd11015bc0ce19edf563eed236f9cd4c156148399889c896e362dc18"
+    },
+    {
+      "file": "doors-open.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "clear",
+      "cameraPositionVehicleM": [
+        -15,
+        4.2,
+        3
+      ],
+      "targetVehicleM": [
+        0,
+        1.35,
+        0.2
+      ],
+      "description": "",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod0.glb",
+        "exports/city-bus-12m-interior.lod0.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod0.glb": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+        "exports/city-bus-12m-interior.lod0.glb": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      },
+      "sha256": "581beed858bfd8a003664afdd5187a255b4f753ee18018491c664f6777d70dae"
+    },
+    {
+      "file": "entry-front.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "clear",
+      "cameraPositionVehicleM": [
+        -2.8,
+        1.61,
+        4.275
+      ],
+      "targetVehicleM": [
+        0.5,
+        1.5,
+        4.275
+      ],
+      "description": "Entry eye viewpoint through actual open portal",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod0.glb",
+        "exports/city-bus-12m-interior.lod0.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod0.glb": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+        "exports/city-bus-12m-interior.lod0.glb": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      },
+      "sha256": "275bda740272a60f5e2344463cb2ec36949ea3d7a794ab6e96679fc273a50394"
+    },
+    {
+      "file": "entry-rear.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "clear",
+      "cameraPositionVehicleM": [
+        -2.8,
+        1.61,
+        -0.625
+      ],
+      "targetVehicleM": [
+        0.5,
+        1.5,
+        -0.625
+      ],
+      "description": "Entry eye viewpoint through actual open portal",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod0.glb",
+        "exports/city-bus-12m-interior.lod0.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod0.glb": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+        "exports/city-bus-12m-interior.lod0.glb": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      },
+      "sha256": "b9be480d3c10b8ca417e9e3b58b54eddc7fd317b3a501e68db8d94329672bf66"
+    },
+    {
+      "file": "interior-aisle.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "clear",
+      "cameraPositionVehicleM": [
+        0,
+        1.99,
+        -5.3
+      ],
+      "targetVehicleM": [
+        0,
+        1.5,
+        4.6
+      ],
+      "description": "Standing 1.81m eye-height study, continuous real floor and unobstructed central aisle",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod0.glb",
+        "exports/city-bus-12m-interior.lod0.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod0.glb": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+        "exports/city-bus-12m-interior.lod0.glb": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      },
+      "sha256": "baa75aa42e4d83609338454e53b587841aff6ae2475b18ae3506513f85186e2c"
+    },
+    {
+      "file": "seat-01-view.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "clear",
+      "cameraPositionVehicleM": [
+        -0.83,
+        1.47,
+        -4.824999999999999
+      ],
+      "targetVehicleM": [
+        -0.5395,
+        1.47,
+        -0.8249999999999993
+      ],
+      "description": "Exact metadata camera eye; one view for every passenger seat",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod0.glb",
+        "exports/city-bus-12m-interior.lod0.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod0.glb": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+        "exports/city-bus-12m-interior.lod0.glb": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      },
+      "sha256": "fb345d75e3b8b9ddb053c4850488666e19a6f9514131bc8d17d8b61c23375509"
+    },
+    {
+      "file": "seat-02-view.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "clear",
+      "cameraPositionVehicleM": [
+        0.83,
+        1.47,
+        -4.824999999999999
+      ],
+      "targetVehicleM": [
+        0.5395,
+        1.47,
+        -0.8249999999999993
+      ],
+      "description": "Exact metadata camera eye; one view for every passenger seat",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod0.glb",
+        "exports/city-bus-12m-interior.lod0.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod0.glb": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+        "exports/city-bus-12m-interior.lod0.glb": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      },
+      "sha256": "1de854ee10ccf8562453329a45a8ad329832083aec46ffc648a1ec1b2f27fdb6"
+    },
+    {
+      "file": "seat-03-view.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "clear",
+      "cameraPositionVehicleM": [
+        -0.83,
+        1.47,
+        -4.0249999999999995
+      ],
+      "targetVehicleM": [
+        -0.5395,
+        1.47,
+        -0.024999999999999467
+      ],
+      "description": "Exact metadata camera eye; one view for every passenger seat",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod0.glb",
+        "exports/city-bus-12m-interior.lod0.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod0.glb": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+        "exports/city-bus-12m-interior.lod0.glb": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      },
+      "sha256": "4198d861f8ff2082d92c72afb7d758aa8e350d088cad64921b568dada433ac22"
+    },
+    {
+      "file": "seat-04-view.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "clear",
+      "cameraPositionVehicleM": [
+        0.83,
+        1.47,
+        -4.0249999999999995
+      ],
+      "targetVehicleM": [
+        0.5395,
+        1.47,
+        -0.024999999999999467
+      ],
+      "description": "Exact metadata camera eye; one view for every passenger seat",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod0.glb",
+        "exports/city-bus-12m-interior.lod0.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod0.glb": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+        "exports/city-bus-12m-interior.lod0.glb": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      },
+      "sha256": "d8b65d7f74c2f4ed5bab0a741406a32cd85113df823010d9d5eea8cd5038141e"
+    },
+    {
+      "file": "seat-05-view.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "clear",
+      "cameraPositionVehicleM": [
+        -0.83,
+        1.47,
+        -1.8250000000000002
+      ],
+      "targetVehicleM": [
+        -0.5395,
+        1.47,
+        2.175
+      ],
+      "description": "Exact metadata camera eye; one view for every passenger seat",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod0.glb",
+        "exports/city-bus-12m-interior.lod0.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod0.glb": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+        "exports/city-bus-12m-interior.lod0.glb": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      },
+      "sha256": "5aec5acb1278b65854a8894196fc9732735971fa6d2defbd7ec480c38148106c"
+    },
+    {
+      "file": "seat-06-view.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "clear",
+      "cameraPositionVehicleM": [
+        0.83,
+        1.47,
+        -1.8250000000000002
+      ],
+      "targetVehicleM": [
+        0.5395,
+        1.47,
+        2.175
+      ],
+      "description": "Exact metadata camera eye; one view for every passenger seat",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod0.glb",
+        "exports/city-bus-12m-interior.lod0.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod0.glb": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+        "exports/city-bus-12m-interior.lod0.glb": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      },
+      "sha256": "a7617208cba83f8e391ead877c2cb1acd8a26f8373d561299e9b978d040ebaa1"
+    },
+    {
+      "file": "seat-07-view.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "clear",
+      "cameraPositionVehicleM": [
+        0.83,
+        1.47,
+        0.525
+      ],
+      "targetVehicleM": [
+        0.5395,
+        1.47,
+        4.525
+      ],
+      "description": "Exact metadata camera eye; one view for every passenger seat",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod0.glb",
+        "exports/city-bus-12m-interior.lod0.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod0.glb": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+        "exports/city-bus-12m-interior.lod0.glb": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      },
+      "sha256": "30a255a75414d43e3ddd142a42be4c38d9ebe170fecf9678b86c9b256ccf80bd"
+    },
+    {
+      "file": "seat-08-view.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "clear",
+      "cameraPositionVehicleM": [
+        0.83,
+        1.47,
+        1.325
+      ],
+      "targetVehicleM": [
+        0.5395,
+        1.47,
+        5.325
+      ],
+      "description": "Exact metadata camera eye; one view for every passenger seat",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod0.glb",
+        "exports/city-bus-12m-interior.lod0.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod0.glb": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+        "exports/city-bus-12m-interior.lod0.glb": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      },
+      "sha256": "a176a90b3e54250a7d5acb6aa8550f6ce8d73d9e2df60e9301ec24076ed6ebfa"
+    },
+    {
+      "file": "seat-09-view.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "clear",
+      "cameraPositionVehicleM": [
+        -0.83,
+        1.47,
+        2.125
+      ],
+      "targetVehicleM": [
+        -0.5395,
+        1.47,
+        6.125
+      ],
+      "description": "Exact metadata camera eye; one view for every passenger seat",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod0.glb",
+        "exports/city-bus-12m-interior.lod0.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod0.glb": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+        "exports/city-bus-12m-interior.lod0.glb": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      },
+      "sha256": "c7f9c419a75b6193ee504ac7367546fa7353439a167b3975938902e14fcf39eb"
+    },
+    {
+      "file": "seat-10-view.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "clear",
+      "cameraPositionVehicleM": [
+        0.83,
+        1.47,
+        2.125
+      ],
+      "targetVehicleM": [
+        0.5395,
+        1.47,
+        6.125
+      ],
+      "description": "Exact metadata camera eye; one view for every passenger seat",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod0.glb",
+        "exports/city-bus-12m-interior.lod0.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod0.glb": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+        "exports/city-bus-12m-interior.lod0.glb": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      },
+      "sha256": "6feaaab46d8f3a4196b13383f0558ba0d01336b2debd3e655cf6acb224b253d7"
+    },
+    {
+      "file": "driver-view.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "clear",
+      "cameraPositionVehicleM": [
+        0.77,
+        1.51,
+        4.9
+      ],
+      "targetVehicleM": [
+        0.77,
+        1.4,
+        10
+      ],
+      "description": "",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod0.glb",
+        "exports/city-bus-12m-interior.lod0.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod0.glb": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+        "exports/city-bus-12m-interior.lod0.glb": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      },
+      "sha256": "9ccde7d9fe4f6b2cc25f744fa9514be917de9c9c87c72773ac634c5ae967179f"
+    },
+    {
+      "file": "longitudinal-section.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "clear",
+      "cameraPositionVehicleM": [
+        -12,
+        6,
+        11
+      ],
+      "targetVehicleM": [
+        0.4,
+        1.2,
+        0.2
+      ],
+      "description": "QA-only bisected reimported GLB; cut right half and ceiling to reveal floor/wheelwells/seats; runtime unchanged",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod0.glb",
+        "exports/city-bus-12m-interior.lod0.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod0.glb": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+        "exports/city-bus-12m-interior.lod0.glb": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      },
+      "sha256": "852089a859f0194c0a7e196c81303bf0aadbb39a71926fcaaefbc3e7c9ed371f"
+    },
+    {
+      "file": "lod-2-rear.png",
+      "renderer": "Cycles CPU",
+      "samples": 24,
+      "resolution": [
+        640,
+        400
+      ],
+      "lighting": "clear",
+      "cameraPositionVehicleM": [
+        0,
+        3.5,
+        -16
+      ],
+      "targetVehicleM": [
+        0,
+        1.55,
+        0.2
+      ],
+      "description": "Closed opaque rear-window silhouette cue; unchanged LOD2 datum/bounds",
+      "actualGLBSources": [
+        "exports/city-bus-12m-exterior.lod2.glb"
+      ],
+      "actualGLBSha256": {
+        "exports/city-bus-12m-exterior.lod2.glb": "36a7f8cfa1b3b53b8e212618e80523a7be3f7fd8e86bef98cf9c93f83bcfd948"
+      },
+      "sha256": "de3d84e6350db1d1dcbb612ae59280c20dc243c35db29aff8a9dfc6db6e01ee6"
+    }
+  ]
+}

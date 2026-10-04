@@ -1,0 +1,274 @@
+{
+  "status": "pass",
+  "engine": "Cycles",
+  "device": "CPU",
+  "threads": 2,
+  "samples": 24,
+  "resolution": [
+    640,
+    420
+  ],
+  "source": "actual delivered GLB imported into blank scene per image",
+  "inputGlbSha256": {
+    "exports/traffic-sedan.lod0.glb": "f15f54aa806023c354d02c7509e31029ae9a0991984d078bb562f55fd57f8eb8",
+    "exports/traffic-sedan.lod1.glb": "66bc16c5b5094a4e08430f759d536a2858f172b130311f15300b13c3aa813822",
+    "exports/traffic-sedan.lod2.glb": "6f92637cb715ee705cc38c27088020772c110985cb632efd51de2a68bf25a2d8",
+    "exports/traffic-suv.lod0.glb": "013df7a8b6c1d0bb45a6dbe027035beee12356c1c2c1911a097fd36c5283c126",
+    "exports/traffic-suv.lod1.glb": "1a2a3f9805144a7183b20aeef3702d93065fa934831cdfa78937c331287e155f",
+    "exports/traffic-suv.lod2.glb": "0678933975fadd122fa56e6c5e96b655cb7eb3944b3a187cd9cf9b9934d89f09"
+  },
+  "qaReferences": {
+    "rulerM": 1,
+    "humanHeightsM": [
+      1.75,
+      1.81
+    ],
+    "runtimeExported": false
+  },
+  "lighting": "offline research only; not city weather, WebGL, or GPU acceptance",
+  "images": [
+    {
+      "file": "qa/previews/traffic-sedan-front.png",
+      "assetId": "traffic-sedan",
+      "lods": [
+        0
+      ],
+      "view": "front",
+      "light": "sunny",
+      "sha256": "bb243094ac513dcbf3f0ccff5484e7a7eefa3badd6b2c81a7bc1fb47c123c987",
+      "bytes": 383337
+    },
+    {
+      "file": "qa/previews/traffic-sedan-side.png",
+      "assetId": "traffic-sedan",
+      "lods": [
+        0
+      ],
+      "view": "side",
+      "light": "sunny",
+      "sha256": "401832b1251a26cc826fe08cd98304d5201626a3c8930a60235b035411d2cf37",
+      "bytes": 390499
+    },
+    {
+      "file": "qa/previews/traffic-sedan-rear.png",
+      "assetId": "traffic-sedan",
+      "lods": [
+        0
+      ],
+      "view": "rear",
+      "light": "sunny",
+      "sha256": "271524dfd17de1e4ad64739ba13a66d554cbfc8d8bd4778a0af4d09754a06fbf",
+      "bytes": 391188
+    },
+    {
+      "file": "qa/previews/traffic-sedan-top.png",
+      "assetId": "traffic-sedan",
+      "lods": [
+        0
+      ],
+      "view": "top",
+      "light": "sunny",
+      "sha256": "5dcb0eea023685fe5a35bdbb261d57ca509cfc8f3226db3285869223e6c1aba0",
+      "bytes": 382093
+    },
+    {
+      "file": "qa/previews/traffic-sedan-lod0-lod1.png",
+      "assetId": "traffic-sedan",
+      "lods": [
+        0,
+        1
+      ],
+      "view": "same-view-pair",
+      "light": "sunny",
+      "leftLod": 0,
+      "rightLod": 1,
+      "sha256": "b45eccf0cedbde561d64a18bb2ac311ebe12bc7ff1739b31c6b4086a1935e0f4",
+      "bytes": 395949
+    },
+    {
+      "file": "qa/previews/traffic-sedan-lod1-lod2.png",
+      "assetId": "traffic-sedan",
+      "lods": [
+        1,
+        2
+      ],
+      "view": "same-view-pair",
+      "light": "sunny",
+      "leftLod": 1,
+      "rightLod": 2,
+      "sha256": "7f8eb30a53ea9b3e74647edbe15dd6525634d88b0c66e6d84e8b48fe0e54813b",
+      "bytes": 394804
+    },
+    {
+      "file": "qa/previews/traffic-sedan-sunny.png",
+      "assetId": "traffic-sedan",
+      "lods": [
+        0
+      ],
+      "view": "three-quarter",
+      "light": "sunny",
+      "sha256": "d76d8194e07d02cf98b666d3b74e61588157b38ada2e36fe47fe63353b2c6a45",
+      "bytes": 397534
+    },
+    {
+      "file": "qa/previews/traffic-sedan-overcast.png",
+      "assetId": "traffic-sedan",
+      "lods": [
+        0
+      ],
+      "view": "three-quarter",
+      "light": "overcast",
+      "sha256": "77cb8bc8be577307f05a2c627cee0848b76bccb30f21f816b75f2358c16b9084",
+      "bytes": 408008
+    },
+    {
+      "file": "qa/previews/traffic-sedan-dusk.png",
+      "assetId": "traffic-sedan",
+      "lods": [
+        0
+      ],
+      "view": "three-quarter",
+      "light": "dusk",
+      "sha256": "00667b845ca54f738fb2404369d3eb89f6319f29b36c136a1abd8fe0472661e5",
+      "bytes": 466533
+    },
+    {
+      "file": "qa/previews/traffic-sedan-night.png",
+      "assetId": "traffic-sedan",
+      "lods": [
+        0
+      ],
+      "view": "three-quarter",
+      "light": "night",
+      "sha256": "8ca40b30e62d692e26eb3beb10c1dc2df0a8bf9725fc8d1bdc0345d9fe9169f0",
+      "bytes": 397043
+    },
+    {
+      "file": "qa/previews/traffic-suv-front.png",
+      "assetId": "traffic-suv",
+      "lods": [
+        0
+      ],
+      "view": "front",
+      "light": "sunny",
+      "sha256": "e15863246601b87b6218347ad9b434a4ae50165ba9e1c0bca3ccae71cd43479b",
+      "bytes": 387160
+    },
+    {
+      "file": "qa/previews/traffic-suv-side.png",
+      "assetId": "traffic-suv",
+      "lods": [
+        0
+      ],
+      "view": "side",
+      "light": "sunny",
+      "sha256": "146a1ede579ce833a4fad68f50c9d337ca5b50ec42ee85528424163eefe89a54",
+      "bytes": 397763
+    },
+    {
+      "file": "qa/previews/traffic-suv-rear.png",
+      "assetId": "traffic-suv",
+      "lods": [
+        0
+      ],
+      "view": "rear",
+      "light": "sunny",
+      "sha256": "8645e4fd0a1ab9acd4df26c59f75dac2d0c64667ce1ecc7979fbeca9a49360bd",
+      "bytes": 393575
+    },
+    {
+      "file": "qa/previews/traffic-suv-top.png",
+      "assetId": "traffic-suv",
+      "lods": [
+        0
+      ],
+      "view": "top",
+      "light": "sunny",
+      "sha256": "516b33cdb5356588199287571fc9f242b097aed1ea14096e7e2099ac4d1f82d5",
+      "bytes": 391078
+    },
+    {
+      "file": "qa/previews/traffic-suv-lod0-lod1.png",
+      "assetId": "traffic-suv",
+      "lods": [
+        0,
+        1
+      ],
+      "view": "same-view-pair",
+      "light": "sunny",
+      "leftLod": 0,
+      "rightLod": 1,
+      "sha256": "88aa6fc48126a4411514da22e75d474975d29a644da3be00c4a50826d1061903",
+      "bytes": 404173
+    },
+    {
+      "file": "qa/previews/traffic-suv-lod1-lod2.png",
+      "assetId": "traffic-suv",
+      "lods": [
+        1,
+        2
+      ],
+      "view": "same-view-pair",
+      "light": "sunny",
+      "leftLod": 1,
+      "rightLod": 2,
+      "sha256": "e534c5eee132f576b19a52dea0667e62743fb25c4241d4fcedc3bb835cc73f79",
+      "bytes": 402409
+    },
+    {
+      "file": "qa/previews/traffic-suv-sunny.png",
+      "assetId": "traffic-suv",
+      "lods": [
+        0
+      ],
+      "view": "three-quarter",
+      "light": "sunny",
+      "sha256": "8e7f31d59c644a3874b688c9eefa034ac84a71827a7a121b666fe9bcdd8a0450",
+      "bytes": 406285
+    },
+    {
+      "file": "qa/previews/traffic-suv-overcast.png",
+      "assetId": "traffic-suv",
+      "lods": [
+        0
+      ],
+      "view": "three-quarter",
+      "light": "overcast",
+      "sha256": "fbef8b55fa991b91c8d4b73d50f9b5e685116eb4d66f14bd94b0303472d09edf",
+      "bytes": 414435
+    },
+    {
+      "file": "qa/previews/traffic-suv-dusk.png",
+      "assetId": "traffic-suv",
+      "lods": [
+        0
+      ],
+      "view": "three-quarter",
+      "light": "dusk",
+      "sha256": "587196ef015a32a7ea618277a424d73c6a379928ffbefd9c1e11b7aaa51c44f4",
+      "bytes": 472672
+    },
+    {
+      "file": "qa/previews/traffic-suv-night.png",
+      "assetId": "traffic-suv",
+      "lods": [
+        0
+      ],
+      "view": "three-quarter",
+      "light": "night",
+      "sha256": "53bc97cff96f2e2bbe38404ef52b38419fbdd7d3f9fce8fa197917657adfb820",
+      "bytes": 402082
+    }
+  ],
+  "visualReview": {
+    "status": "pass",
+    "scope": "All twenty final role-batched GLB images inspected as a labelled contact sheet; native-resolution sedan side view confirms painted-metal hubs and preserved wheel geometry. Four views, LOD pairs and four lights reviewed.",
+    "observations": [
+      "Static semantic batching retains the authored body/window/lens silhouettes.",
+      "Wheel hubs now correctly use recolorable painted-metal; glass is only window and lamp glazing.",
+      "LOD2 intentionally preserves the coarse silhouette; wheel geometry is static and named wheel nodes are metadata-only Empties.",
+      "1 m ruler and distinct 1.75/1.81 m humans are QA only; top view prioritizes footprint.",
+      "Reflective windscreen highlights and 24-sample CPU noise remain; no browser/GPU acceptance."
+    ]
+  }
+}

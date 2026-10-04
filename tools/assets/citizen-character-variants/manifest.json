@@ -1,0 +1,1637 @@
+{
+  "schemaVersion": 1,
+  "packageId": "citizen-character-variants",
+  "version": "1.0.0",
+  "baseRevision": "aef5e31d4eb8d5d3f832d0931373bf6583227033",
+  "status": "offline_complete",
+  "units": "metres",
+  "coordinateSystem": {
+    "authoring": "Blender +Z up / -Y front",
+    "runtime": "glTF +Y up / +Z front",
+    "conversion": "[x,y,z] authoring -> [x,z,-y] glTF once; no rig reset or nonuniform scale"
+  },
+  "provenance": {
+    "source": "public/models/citizen/vancouver-citizen.glb",
+    "sourceSha256": "14d66fabe097abf82ef36800561c06ee7263c0acfd6b5ea1265a40ed35841ff8",
+    "originalGenerator": "tools/assets/citizen/build_citizen.py",
+    "sourceNature": "GLB-reconstructed editable rig/UV/mesh/materials with baked actions; not recovered sculpt/bake history",
+    "oldOptimization": "tools/assets/citizen/optimization/ unchanged",
+    "license": "Repository LICENSE; Vancouver Living Atlas Noncommercial Research and Attribution 1.0",
+    "attribution": "Based on Vancouver Living Atlas by YiTaChen",
+    "sourceUrl": "https://github.com/YiTaChen/vancouver-living-atlas",
+    "newOriginalWork": [
+      "anatomically protected LOD index simplification",
+      "original cap and abstract shield badges",
+      "separate garment-only navy material",
+      "same-rig seated driver pose"
+    ]
+  },
+  "reexportCommand": "blender -b -t 2 --python-exit-code 1 --python tools/assets/citizen-character-variants/export.py -- --out /tmp/citizen-review-export",
+  "validationCommand": "node tools/assets/citizen-character-variants/validate_cpu.mjs && python tools/assets/citizen-character-variants/validate.py",
+  "assets": [
+    {
+      "id": "vancouver-citizen",
+      "taskId": "F04",
+      "variant": "citizen",
+      "kind": "rigged-character",
+      "status": "offline_complete",
+      "source": "source/citizen.lod0.blend",
+      "sourceSha256": "aa0d574ac0303e0deddbc7d4fcf9074928f48bc225ed40853b632c18002130f4",
+      "lods": [
+        {
+          "level": 0,
+          "source": "source/citizen.lod0.blend",
+          "sourceSha256": "aa0d574ac0303e0deddbc7d4fcf9074928f48bc225ed40853b632c18002130f4",
+          "sourceBytes": 3481281,
+          "file": "exports/citizen.lod0.glb",
+          "glb": "exports/citizen.lod0.glb",
+          "sha256": "14733b2a44621b91ff620821faa9a361fd6369458c1a50cb737df9b18453d38f",
+          "triangles": 37735,
+          "vertices": 29092,
+          "primitives": 1,
+          "bytes": 2280072,
+          "geometryBytes": 2280072,
+          "embeddedImageBytes": 0,
+          "requiredSharedImageFileBytes": 1685815,
+          "standaloneDownloadBytesIncludingMaps": 3965887,
+          "boundsM": {
+            "min": [
+              -0.36451148986816406,
+              0.0029903140384703875,
+              -0.24799999594688416
+            ],
+            "max": [
+              0.36437079310417175,
+              1.8052752017974854,
+              0.1780000627040863
+            ],
+            "size": [
+              0.7288822829723358,
+              1.802284887759015,
+              0.42600005865097046
+            ]
+          },
+          "seatedBoundsM": null
+        },
+        {
+          "level": 1,
+          "source": "source/citizen.lod1.blend",
+          "sourceSha256": "c872f2f08cec97dbd6b7f31b8c00ca48b7be51e948e8f9a883e8607cc44e99ab",
+          "sourceBytes": 3260574,
+          "file": "exports/citizen.lod1.glb",
+          "glb": "exports/citizen.lod1.glb",
+          "sha256": "5cad4fcfc1782d6b5dfa7663f19dca84142b4d4b75c3cffc08e107fc6ef8ef6d",
+          "triangles": 31767,
+          "vertices": 25977,
+          "primitives": 1,
+          "bytes": 2032440,
+          "geometryBytes": 2032440,
+          "embeddedImageBytes": 0,
+          "requiredSharedImageFileBytes": 1685815,
+          "standaloneDownloadBytesIncludingMaps": 3718255,
+          "boundsM": {
+            "min": [
+              -0.36451148986816406,
+              0.0029903140384703875,
+              -0.24799999594688416
+            ],
+            "max": [
+              0.36437079310417175,
+              1.8052752017974854,
+              0.1780000627040863
+            ],
+            "size": [
+              0.7288822829723358,
+              1.802284887759015,
+              0.42600005865097046
+            ]
+          },
+          "seatedBoundsM": null
+        },
+        {
+          "level": 2,
+          "source": "source/citizen.lod2.blend",
+          "sourceSha256": "f86beb80eb92d0e489b14f1e0eb43bd4d6bd9c6145f80fb3ada5acb5b1312912",
+          "sourceBytes": 3181567,
+          "file": "exports/citizen.lod2.glb",
+          "glb": "exports/citizen.lod2.glb",
+          "sha256": "2741325b8dd5b26756d0fa67ed809361013326c9ed21c6dca30bf4d70f425a33",
+          "triangles": 29931,
+          "vertices": 24803,
+          "primitives": 1,
+          "bytes": 1941592,
+          "geometryBytes": 1941592,
+          "embeddedImageBytes": 0,
+          "requiredSharedImageFileBytes": 1685815,
+          "standaloneDownloadBytesIncludingMaps": 3627407,
+          "boundsM": {
+            "min": [
+              -0.36451148986816406,
+              0.0029903140384703875,
+              -0.24799999594688416
+            ],
+            "max": [
+              0.36437079310417175,
+              1.8052752017974854,
+              0.1780000627040863
+            ],
+            "size": [
+              0.7288822829723358,
+              1.802284887759015,
+              0.42600005865097046
+            ]
+          },
+          "seatedBoundsM": null
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.42600005865097046
+        ]
+      },
+      "expectedDimensionsM": {
+        "bodyStature": 1.81,
+        "hatTop": null
+      },
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Accepted public citizen original geometry and 1.81 m source contract; original new cap adds about 5.3 cm. Bounds are measured actual exported rest stance.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "unchanged navigation-owned ground origin"
+      },
+      "attachmentDatum": {
+        "type": "ground-contact",
+        "soleYApproxM": 0.003
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "materialName": "citizen-atlas-protected",
+          "materialIndex": 0,
+          "role": "citizen-protected-atlas",
+          "surfaceId": "citizen-protected-atlas",
+          "primitives": [
+            {
+              "mesh": 0,
+              "primitive": 0
+            }
+          ],
+          "maps": {
+            "baseColor": {
+              "path": "exports/textures/citizen-53e23506fc52ad56.png",
+              "texCoord": 0,
+              "colorSpace": "sRGB"
+            },
+            "normal": {
+              "path": "exports/textures/citizen-d750e70a2bafbdb5.png",
+              "texCoord": 0,
+              "colorSpace": "Non-Color"
+            },
+            "roughnessMetallicLegacy": {
+              "path": "exports/textures/citizen-97cbd4395750f8b9.png",
+              "texCoord": 0,
+              "colorSpace": "Non-Color"
+            }
+          },
+          "alphaMode": "OPAQUE",
+          "doubleSided": true,
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 1
+        }
+      ],
+      "textureMode": "external/shared-content-addressed",
+      "textureCost": {
+        "geometryBytes": 2280072,
+        "embeddedImageBytes": 0,
+        "GLBTotalBytes": 2280072,
+        "requiredSharedImageFileBytes": 1685815,
+        "standaloneDownloadBytesIncludingMaps": 3965887,
+        "uniqueTexelBytesWithMips": 16777212,
+        "gpuDeduplication": "not implemented; identical URLs/hashes alone do not deduplicate separate loader-created THREE.Texture objects"
+      },
+      "lodPolicy": {
+        "proposedSwitchDistanceM": [
+          8,
+          20
+        ],
+        "hysteresisM": 2,
+        "fadeSeconds": 0.15,
+        "status": "proposal_runtime_not_run",
+        "playerAndSeatedDriver": "LOD0",
+        "errorLimitsM": [
+          0,
+          0.001,
+          0.002
+        ],
+        "protectedAreas": [
+          "entire waist Y=.78–1.08",
+          "face",
+          "hands",
+          "shoes",
+          "collar",
+          "backpack",
+          "all non-garment components"
+        ]
+      },
+      "clearance": {
+        "envelope": "actual animated bounds; navigation collision unchanged",
+        "addedClearanceM": 0
+      },
+      "collision": {
+        "type": "none-exported",
+        "reason": "navigation owns existing collision; driver fit uses exact source dashboard/console/floor boxes, not a replacement collider"
+      },
+      "anchors": [],
+      "placementCompatibility": {
+        "units": "metres",
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "profiles": [
+          "existing-citizen-navigation"
+        ],
+        "legacyToVehicleRoot": null,
+        "driverPlacement": null
+      },
+      "intendedConsumer": [
+        "lib/city/citizen.ts"
+      ],
+      "rig": {
+        "bones": 22,
+        "inverseBindMatrices": "bit-exact accepted public baseline; source rest edits refused",
+        "clips": {
+          "idle": 2,
+          "walk": 1,
+          "run": 0.8
+        },
+        "stridesM": {
+          "walk": 1,
+          "run": 1.9
+        },
+        "rootMotion": "none; navigation owns translation and distance phase"
+      },
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/cpu-tests.json",
+          "qa/blender-reimport.json",
+          "qa/artist-edit-proof.json",
+          "qa/source-preserving-export.json",
+          "qa/render-evidence.json",
+          "qa/lod-surface-audit.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "No WebGL acceptance in this offline package",
+        "integrationStatus": "runtime_pending_webgl"
+      },
+      "integrationEligible": true,
+      "integrationMode": "controlled-sample-candidate"
+    },
+    {
+      "id": "vancouver-police",
+      "taskId": "F04",
+      "variant": "police",
+      "kind": "rigged-character",
+      "status": "offline_complete",
+      "source": "source/police.lod0.blend",
+      "sourceSha256": "1b7d963e58269e5d01ce30098ef5172ce7e8e828ed532626ca79e3c2ed4b688c",
+      "lods": [
+        {
+          "level": 0,
+          "source": "source/police.lod0.blend",
+          "sourceSha256": "1b7d963e58269e5d01ce30098ef5172ce7e8e828ed532626ca79e3c2ed4b688c",
+          "sourceBytes": 3502945,
+          "file": "exports/police.lod0.glb",
+          "glb": "exports/police.lod0.glb",
+          "sha256": "0d312d3fda05662c3612f0aa29bcf26f2870f23dde8cbcbc6c260d2c9fdcedb0",
+          "triangles": 38483,
+          "vertices": 29734,
+          "primitives": 5,
+          "bytes": 2334200,
+          "geometryBytes": 2334200,
+          "embeddedImageBytes": 0,
+          "requiredSharedImageFileBytes": 1685815,
+          "standaloneDownloadBytesIncludingMaps": 4020015,
+          "boundsM": {
+            "min": [
+              -0.36451148986816406,
+              0.0029903140384703875,
+              -0.24799999594688416
+            ],
+            "max": [
+              0.36437079310417175,
+              1.8579999208450317,
+              0.1780000627040863
+            ],
+            "size": [
+              0.7288822829723358,
+              1.8550096068065614,
+              0.42600005865097046
+            ]
+          },
+          "seatedBoundsM": null
+        },
+        {
+          "level": 1,
+          "source": "source/police.lod1.blend",
+          "sourceSha256": "e8e649f7dda79844c764642e7353ccac47f940ef96e6ef56e708066ad487b2cb",
+          "sourceBytes": 3279316,
+          "file": "exports/police.lod1.glb",
+          "glb": "exports/police.lod1.glb",
+          "sha256": "325a1912d33c8f923954ed308883ff27577d6e200d3d40e31864e4ea1350411c",
+          "triangles": 32515,
+          "vertices": 26619,
+          "primitives": 5,
+          "bytes": 2086564,
+          "geometryBytes": 2086564,
+          "embeddedImageBytes": 0,
+          "requiredSharedImageFileBytes": 1685815,
+          "standaloneDownloadBytesIncludingMaps": 3772379,
+          "boundsM": {
+            "min": [
+              -0.36451148986816406,
+              0.0029903140384703875,
+              -0.24799999594688416
+            ],
+            "max": [
+              0.36437079310417175,
+              1.8579999208450317,
+              0.1780000627040863
+            ],
+            "size": [
+              0.7288822829723358,
+              1.8550096068065614,
+              0.42600005865097046
+            ]
+          },
+          "seatedBoundsM": null
+        },
+        {
+          "level": 2,
+          "source": "source/police.lod2.blend",
+          "sourceSha256": "eab7e82e52bd94085886ecf12375d5dada1bc6030e87bff2cda74184d95d4767",
+          "sourceBytes": 3199864,
+          "file": "exports/police.lod2.glb",
+          "glb": "exports/police.lod2.glb",
+          "sha256": "bb6ca6b0b780b4c1abd774ad3a790da10d86008988ac82a9f738e6cc6e8b001d",
+          "triangles": 30679,
+          "vertices": 25445,
+          "primitives": 5,
+          "bytes": 1995712,
+          "geometryBytes": 1995712,
+          "embeddedImageBytes": 0,
+          "requiredSharedImageFileBytes": 1685815,
+          "standaloneDownloadBytesIncludingMaps": 3681527,
+          "boundsM": {
+            "min": [
+              -0.36451148986816406,
+              0.0029903140384703875,
+              -0.24799999594688416
+            ],
+            "max": [
+              0.36437079310417175,
+              1.8579999208450317,
+              0.1780000627040863
+            ],
+            "size": [
+              0.7288822829723358,
+              1.8550096068065614,
+              0.42600005865097046
+            ]
+          },
+          "seatedBoundsM": null
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8579999208450317,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.8550096068065614,
+          0.42600005865097046
+        ]
+      },
+      "expectedDimensionsM": {
+        "bodyStature": 1.81,
+        "hatTop": 1.858
+      },
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Accepted public citizen original geometry and 1.81 m source contract; original new cap adds about 5.3 cm. Bounds are measured actual exported rest stance.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "unchanged navigation-owned ground origin"
+      },
+      "attachmentDatum": {
+        "type": "ground-contact",
+        "soleYApproxM": 0.003
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "materialName": "citizen-atlas-protected",
+          "materialIndex": 0,
+          "role": "citizen-protected-atlas",
+          "surfaceId": "citizen-protected-atlas",
+          "primitives": [
+            {
+              "mesh": 0,
+              "primitive": 0
+            }
+          ],
+          "maps": {
+            "baseColor": {
+              "path": "exports/textures/citizen-53e23506fc52ad56.png",
+              "texCoord": 0,
+              "colorSpace": "sRGB"
+            },
+            "normal": {
+              "path": "exports/textures/citizen-d750e70a2bafbdb5.png",
+              "texCoord": 0,
+              "colorSpace": "Non-Color"
+            },
+            "roughnessMetallicLegacy": {
+              "path": "exports/textures/citizen-97cbd4395750f8b9.png",
+              "texCoord": 0,
+              "colorSpace": "Non-Color"
+            }
+          },
+          "alphaMode": "OPAQUE",
+          "doubleSided": true,
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 1
+        },
+        {
+          "materialName": "police-uniform-clothing-only",
+          "materialIndex": 1,
+          "role": "police-uniform-cloth",
+          "surfaceId": "police-uniform-cloth",
+          "primitives": [
+            {
+              "mesh": 0,
+              "primitive": 1
+            }
+          ],
+          "maps": {
+            "normal": {
+              "path": "exports/textures/citizen-d750e70a2bafbdb5.png",
+              "texCoord": 0,
+              "colorSpace": "Non-Color"
+            },
+            "roughnessMetallicLegacy": {
+              "path": "exports/textures/citizen-97cbd4395750f8b9.png",
+              "texCoord": 0,
+              "colorSpace": "Non-Color"
+            }
+          },
+          "alphaMode": "OPAQUE",
+          "doubleSided": true,
+          "baseColorFactor": [
+            0.017999999225139618,
+            0.03099999949336052,
+            0.06199999898672104,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 1
+        },
+        {
+          "materialName": "police-hat-fabric",
+          "materialIndex": 2,
+          "role": "police-cap-cloth",
+          "surfaceId": "police-cap-cloth",
+          "primitives": [
+            {
+              "mesh": 0,
+              "primitive": 2
+            }
+          ],
+          "maps": {},
+          "alphaMode": "OPAQUE",
+          "doubleSided": true,
+          "baseColorFactor": [
+            0.017999999225139618,
+            0.03099999949336052,
+            0.06199999898672104,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.8299999833106995
+        },
+        {
+          "materialName": "police-peak-leather",
+          "materialIndex": 3,
+          "role": "police-cap-peak-leather",
+          "surfaceId": "police-cap-peak-leather",
+          "primitives": [
+            {
+              "mesh": 0,
+              "primitive": 3
+            }
+          ],
+          "maps": {},
+          "alphaMode": "OPAQUE",
+          "doubleSided": true,
+          "baseColorFactor": [
+            0.020999999716877937,
+            0.02500000037252903,
+            0.03099999949336052,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.47999998927116394
+        },
+        {
+          "materialName": "police-original-badge-brass",
+          "materialIndex": 4,
+          "role": "police-original-badge-metal",
+          "surfaceId": "police-original-badge-metal",
+          "primitives": [
+            {
+              "mesh": 0,
+              "primitive": 4
+            }
+          ],
+          "maps": {},
+          "alphaMode": "OPAQUE",
+          "doubleSided": true,
+          "baseColorFactor": [
+            0.6600000262260437,
+            0.4399999976158142,
+            0.11999999731779099,
+            1
+          ],
+          "metallicFactor": 0.7200000286102295,
+          "roughnessFactor": 0.30000001192092896
+        }
+      ],
+      "textureMode": "external/shared-content-addressed",
+      "textureCost": {
+        "geometryBytes": 2334200,
+        "embeddedImageBytes": 0,
+        "GLBTotalBytes": 2334200,
+        "requiredSharedImageFileBytes": 1685815,
+        "standaloneDownloadBytesIncludingMaps": 4020015,
+        "uniqueTexelBytesWithMips": 16777212,
+        "gpuDeduplication": "not implemented; identical URLs/hashes alone do not deduplicate separate loader-created THREE.Texture objects"
+      },
+      "lodPolicy": {
+        "proposedSwitchDistanceM": [
+          8,
+          20
+        ],
+        "hysteresisM": 2,
+        "fadeSeconds": 0.15,
+        "status": "proposal_runtime_not_run",
+        "playerAndSeatedDriver": "LOD0",
+        "errorLimitsM": [
+          0,
+          0.001,
+          0.002
+        ],
+        "protectedAreas": [
+          "entire waist Y=.78–1.08",
+          "face",
+          "hands",
+          "shoes",
+          "collar",
+          "backpack",
+          "all non-garment components"
+        ]
+      },
+      "clearance": {
+        "envelope": "actual animated bounds; navigation collision unchanged",
+        "addedClearanceM": 0.053
+      },
+      "collision": {
+        "type": "none-exported",
+        "reason": "navigation owns existing collision; driver fit uses exact source dashboard/console/floor boxes, not a replacement collider"
+      },
+      "anchors": [],
+      "placementCompatibility": {
+        "units": "metres",
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "profiles": [
+          "existing-citizen-navigation"
+        ],
+        "legacyToVehicleRoot": null,
+        "driverPlacement": null
+      },
+      "intendedConsumer": [
+        "lib/city/assets/walker.ts",
+        "lib/city/traffic-stop.ts"
+      ],
+      "rig": {
+        "bones": 22,
+        "inverseBindMatrices": "bit-exact accepted public baseline; source rest edits refused",
+        "clips": {
+          "idle": 2,
+          "walk": 1,
+          "run": 0.8
+        },
+        "stridesM": {
+          "walk": 1,
+          "run": 1.9
+        },
+        "rootMotion": "none; navigation owns translation and distance phase"
+      },
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/cpu-tests.json",
+          "qa/blender-reimport.json",
+          "qa/artist-edit-proof.json",
+          "qa/source-preserving-export.json",
+          "qa/render-evidence.json",
+          "qa/lod-surface-audit.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "No WebGL acceptance in this offline package",
+        "integrationStatus": "runtime_pending_webgl"
+      },
+      "integrationEligible": true,
+      "integrationMode": "controlled-sample-candidate"
+    },
+    {
+      "id": "vancouver-driver",
+      "taskId": "F04",
+      "variant": "driver",
+      "kind": "rejected-rigged-pose-study",
+      "status": "inspection_only",
+      "source": "source/driver.lod0.blend",
+      "sourceSha256": "3f6760f92b52ab9e8ce2c1883a9bd3d3320e690a89078ec62f843e6718168568",
+      "lods": [
+        {
+          "level": 0,
+          "source": "source/driver.lod0.blend",
+          "sourceSha256": "3f6760f92b52ab9e8ce2c1883a9bd3d3320e690a89078ec62f843e6718168568",
+          "sourceBytes": 3489254,
+          "file": "exports/driver.lod0.glb",
+          "glb": "exports/driver.lod0.glb",
+          "sha256": "221f61dd1513ae63974234e6ec3458891cb8a0d6f1f703b2844e8e4b115759c9",
+          "triangles": 37735,
+          "vertices": 29092,
+          "primitives": 1,
+          "bytes": 2296116,
+          "geometryBytes": 2296116,
+          "embeddedImageBytes": 0,
+          "requiredSharedImageFileBytes": 1685815,
+          "standaloneDownloadBytesIncludingMaps": 3981931,
+          "boundsM": {
+            "min": [
+              -0.36451148986816406,
+              0.0029903140384703875,
+              -0.24799999594688416
+            ],
+            "max": [
+              0.36437079310417175,
+              1.8052752017974854,
+              0.1780000627040863
+            ],
+            "size": [
+              0.7288822829723358,
+              1.802284887759015,
+              0.42600005865097046
+            ]
+          },
+          "seatedBoundsM": {
+            "min": [
+              -0.30786729314006345,
+              0.478990483330277,
+              -0.24056282697736223
+            ],
+            "max": [
+              0.3076988092721806,
+              1.5860225871518137,
+              0.6959998868958363
+            ],
+            "size": [
+              0.6155661024122441,
+              1.1070321038215367,
+              0.9365627138731984
+            ]
+          }
+        },
+        {
+          "level": 1,
+          "source": "source/driver.lod1.blend",
+          "sourceSha256": "5f2a34af7b61bb1d4029e58d3ac58dd4df25641e5efb46f820e6ed14626ebfb9",
+          "sourceBytes": 3267940,
+          "file": "exports/driver.lod1.glb",
+          "glb": "exports/driver.lod1.glb",
+          "sha256": "1e2c1079c6cecc0406da5438b3e7d67c8c2700807fbd56270c29f7c2451e7e11",
+          "triangles": 31767,
+          "vertices": 25977,
+          "primitives": 1,
+          "bytes": 2048488,
+          "geometryBytes": 2048488,
+          "embeddedImageBytes": 0,
+          "requiredSharedImageFileBytes": 1685815,
+          "standaloneDownloadBytesIncludingMaps": 3734303,
+          "boundsM": {
+            "min": [
+              -0.36451148986816406,
+              0.0029903140384703875,
+              -0.24799999594688416
+            ],
+            "max": [
+              0.36437079310417175,
+              1.8052752017974854,
+              0.1780000627040863
+            ],
+            "size": [
+              0.7288822829723358,
+              1.802284887759015,
+              0.42600005865097046
+            ]
+          },
+          "seatedBoundsM": {
+            "min": [
+              -0.3076988724476014,
+              0.478990483330277,
+              -0.24056282697736223
+            ],
+            "max": [
+              0.3076988092721806,
+              1.5860225871518137,
+              0.6959998868958363
+            ],
+            "size": [
+              0.6153976817197819,
+              1.1070321038215367,
+              0.9365627138731984
+            ]
+          }
+        },
+        {
+          "level": 2,
+          "source": "source/driver.lod2.blend",
+          "sourceSha256": "dff45af670dc8f0b087067da07303b501d3e0ed1d6948f64a63a0cf641063027",
+          "sourceBytes": 3190453,
+          "file": "exports/driver.lod2.glb",
+          "glb": "exports/driver.lod2.glb",
+          "sha256": "2ac3f0b8e0834f0261662b3be987ed8739064a4d63e29ce8abb6d06184af7884",
+          "triangles": 29931,
+          "vertices": 24803,
+          "primitives": 1,
+          "bytes": 1957640,
+          "geometryBytes": 1957640,
+          "embeddedImageBytes": 0,
+          "requiredSharedImageFileBytes": 1685815,
+          "standaloneDownloadBytesIncludingMaps": 3643455,
+          "boundsM": {
+            "min": [
+              -0.36451148986816406,
+              0.0029903140384703875,
+              -0.24799999594688416
+            ],
+            "max": [
+              0.36437079310417175,
+              1.8052752017974854,
+              0.1780000627040863
+            ],
+            "size": [
+              0.7288822829723358,
+              1.802284887759015,
+              0.42600005865097046
+            ]
+          },
+          "seatedBoundsM": {
+            "min": [
+              -0.3076988724476014,
+              0.478990483330277,
+              -0.24056282697736223
+            ],
+            "max": [
+              0.3076988092721806,
+              1.5860225871518137,
+              0.6959998868958363
+            ],
+            "size": [
+              0.6153976817197819,
+              1.1070321038215367,
+              0.9365627138731984
+            ]
+          }
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.42600005865097046
+        ]
+      },
+      "expectedDimensionsM": {
+        "bodyStature": 1.81,
+        "hatTop": null
+      },
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Accepted public citizen original geometry and 1.81 m source contract; original new cap adds about 5.3 cm. Bounds are measured actual exported rest stance.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "unchanged navigation-owned ground origin"
+      },
+      "attachmentDatum": {
+        "type": "ground-contact",
+        "soleYApproxM": 0.003
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "materialName": "citizen-atlas-protected",
+          "materialIndex": 0,
+          "role": "citizen-protected-atlas",
+          "surfaceId": "citizen-protected-atlas",
+          "primitives": [
+            {
+              "mesh": 0,
+              "primitive": 0
+            }
+          ],
+          "maps": {
+            "baseColor": {
+              "path": "exports/textures/citizen-53e23506fc52ad56.png",
+              "texCoord": 0,
+              "colorSpace": "sRGB"
+            },
+            "normal": {
+              "path": "exports/textures/citizen-d750e70a2bafbdb5.png",
+              "texCoord": 0,
+              "colorSpace": "Non-Color"
+            },
+            "roughnessMetallicLegacy": {
+              "path": "exports/textures/citizen-97cbd4395750f8b9.png",
+              "texCoord": 0,
+              "colorSpace": "Non-Color"
+            }
+          },
+          "alphaMode": "OPAQUE",
+          "doubleSided": true,
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 1
+        }
+      ],
+      "textureMode": "external/shared-content-addressed",
+      "textureCost": {
+        "geometryBytes": 2296116,
+        "embeddedImageBytes": 0,
+        "GLBTotalBytes": 2296116,
+        "requiredSharedImageFileBytes": 1685815,
+        "standaloneDownloadBytesIncludingMaps": 3981931,
+        "uniqueTexelBytesWithMips": 16777212,
+        "gpuDeduplication": "not implemented; identical URLs/hashes alone do not deduplicate separate loader-created THREE.Texture objects"
+      },
+      "lodPolicy": {
+        "proposedSwitchDistanceM": [
+          8,
+          20
+        ],
+        "hysteresisM": 2,
+        "fadeSeconds": 0.15,
+        "status": "proposal_runtime_not_run",
+        "playerAndSeatedDriver": "LOD0",
+        "errorLimitsM": [
+          0,
+          0.001,
+          0.002
+        ],
+        "protectedAreas": [
+          "entire waist Y=.78–1.08",
+          "face",
+          "hands",
+          "shoes",
+          "collar",
+          "backpack",
+          "all non-garment components"
+        ]
+      },
+      "clearance": {
+        "driverFitEvidence": "qa/driver-fit.json",
+        "status": "inspection_only",
+        "compatibility": "tucked study only"
+      },
+      "collision": {
+        "type": "none-exported",
+        "reason": "navigation owns existing collision; driver fit uses exact source dashboard/console/floor boxes, not a replacement collider"
+      },
+      "anchors": [
+        {
+          "id": "hips",
+          "positionM": [
+            0.4400000000000003,
+            0.7200000286102298,
+            -0.05999998767772374
+          ],
+          "frame": "Roadster unchanged root",
+          "basis": "measured same-rig posed bone head"
+        },
+        {
+          "id": "head",
+          "positionM": [
+            0.4399999999999967,
+            1.3192924178852496,
+            0.04187674611207093
+          ],
+          "frame": "Roadster unchanged root",
+          "basis": "measured same-rig posed bone head"
+        },
+        {
+          "id": "handL",
+          "positionM": [
+            0.5819998339901933,
+            0.8802384538903142,
+            0.3501868964816434
+          ],
+          "frame": "Roadster unchanged root",
+          "basis": "measured same-rig posed bone head"
+        },
+        {
+          "id": "handR",
+          "positionM": [
+            0.2980001238410796,
+            0.8802384636354201,
+            0.35018715617621277
+          ],
+          "frame": "Roadster unchanged root",
+          "basis": "measured same-rig posed bone head"
+        },
+        {
+          "id": "footL",
+          "positionM": [
+            0.5699998779562017,
+            0.6060001837261202,
+            0.43999989344854284
+          ],
+          "frame": "Roadster unchanged root",
+          "basis": "measured same-rig posed bone head"
+        },
+        {
+          "id": "footR",
+          "positionM": [
+            0.3100000682386578,
+            0.6059999826959561,
+            0.43999984752462856
+          ],
+          "frame": "Roadster unchanged root",
+          "basis": "measured same-rig posed bone head"
+        },
+        {
+          "id": "driver-eye-proposed",
+          "positionM": [
+            0.4397796792198008,
+            1.4336354947690724,
+            0.15713231188680826
+          ],
+          "frame": "Roadster unchanged root",
+          "basis": "mean of actual posed front facial eye-band vertices, proposed camera migration; not a current runtime camera"
+        }
+      ],
+      "placementCompatibility": {
+        "units": "metres",
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "profiles": [],
+        "legacyToVehicleRoot": "identity",
+        "driverPlacement": {
+          "translationM": [
+            0.44,
+            0,
+            -0.06
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "runtimeSelectable": false
+      },
+      "intendedConsumer": [],
+      "rig": {
+        "bones": 22,
+        "inverseBindMatrices": "bit-exact accepted public baseline; source rest edits refused",
+        "clips": {
+          "idle": 2,
+          "walk": 1,
+          "run": 0.8,
+          "driver-seated": 1
+        },
+        "stridesM": {
+          "walk": 1,
+          "run": 1.9
+        },
+        "rootMotion": "none; navigation owns translation and distance phase"
+      },
+      "offlineChecks": {
+        "status": "pass_for_inspection_only",
+        "evidence": [
+          "qa/cpu-tests.json",
+          "qa/blender-reimport.json",
+          "qa/artist-edit-proof.json",
+          "qa/source-preserving-export.json",
+          "qa/render-evidence.json",
+          "qa/lod-surface-audit.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "No WebGL acceptance in this offline package",
+        "integrationStatus": "runtime_pending_webgl"
+      },
+      "integrationEligible": false,
+      "integrationMode": "inspection-only",
+      "rejectionReason": "Tucked original-car clearance study; high knees and original-cabin ergonomics rejected as an integration driver"
+    },
+    {
+      "id": "vancouver-driver-roadster-fit",
+      "taskId": "F04",
+      "variant": "driver-roadster-fit",
+      "kind": "rigged-character",
+      "status": "offline_complete",
+      "source": "source/driver-roadster-fit.lod0.blend",
+      "sourceSha256": "ab824b64b42d00121e6281b4ecdb0f7ac0435c4747570cffb72d38743d55bd78",
+      "lods": [
+        {
+          "level": 0,
+          "source": "source/driver-roadster-fit.lod0.blend",
+          "sourceSha256": "ab824b64b42d00121e6281b4ecdb0f7ac0435c4747570cffb72d38743d55bd78",
+          "sourceBytes": 3687964,
+          "file": "exports/driver-roadster-fit.lod0.glb",
+          "glb": "exports/driver-roadster-fit.lod0.glb",
+          "sha256": "a6e21e8d1d97f8be38e49a716ee8a6ac9cca54fd31b84b13617c705b665c97fc",
+          "triangles": 36417,
+          "vertices": 27826,
+          "primitives": 2,
+          "bytes": 2264664,
+          "geometryBytes": 2264664,
+          "embeddedImageBytes": 0,
+          "requiredSharedImageFileBytes": 1685815,
+          "standaloneDownloadBytesIncludingMaps": 3950479,
+          "boundsM": {
+            "min": [
+              -0.36451148986816406,
+              0.0029903140384703875,
+              -0.14308057725429535
+            ],
+            "max": [
+              0.36437079310417175,
+              1.8052752017974854,
+              0.1780000627040863
+            ],
+            "size": [
+              0.7288822829723358,
+              1.802284887759015,
+              0.32108063995838165
+            ]
+          },
+          "seatedBoundsM": {
+            "min": [
+              -0.30655678717570767,
+              0.4789906359952818,
+              -0.19170211113288121
+            ],
+            "max": [
+              0.30725888336866325,
+              1.589301580520836,
+              0.9160001938887365
+            ],
+            "size": [
+              0.6138156705443709,
+              1.1103109445255541,
+              1.1077023050216177
+            ]
+          }
+        },
+        {
+          "level": 1,
+          "source": "source/driver-roadster-fit.lod1.blend",
+          "sourceSha256": "84b5aa6f6a5e931398fa2fcf4d6b7ec628d111d34b95db72f9dd16f537a45d83",
+          "sourceBytes": 3466260,
+          "file": "exports/driver-roadster-fit.lod1.glb",
+          "glb": "exports/driver-roadster-fit.lod1.glb",
+          "sha256": "1cb79599d359175c39ce0d466173f5293d7bbcb16a8f08450bd851c09ce0a0c0",
+          "triangles": 30449,
+          "vertices": 24711,
+          "primitives": 2,
+          "bytes": 2017036,
+          "geometryBytes": 2017036,
+          "embeddedImageBytes": 0,
+          "requiredSharedImageFileBytes": 1685815,
+          "standaloneDownloadBytesIncludingMaps": 3702851,
+          "boundsM": {
+            "min": [
+              -0.36451148986816406,
+              0.0029903140384703875,
+              -0.14308057725429535
+            ],
+            "max": [
+              0.36437079310417175,
+              1.8052752017974854,
+              0.1780000627040863
+            ],
+            "size": [
+              0.7288822829723358,
+              1.802284887759015,
+              0.32108063995838165
+            ]
+          },
+          "seatedBoundsM": {
+            "min": [
+              -0.30652355878794,
+              0.4789906359952818,
+              -0.19170211113288121
+            ],
+            "max": [
+              0.30725888336866325,
+              1.589301580520836,
+              0.9160001938887365
+            ],
+            "size": [
+              0.6137824421566033,
+              1.1103109445255541,
+              1.1077023050216177
+            ]
+          }
+        },
+        {
+          "level": 2,
+          "source": "source/driver-roadster-fit.lod2.blend",
+          "sourceSha256": "628e42366d2bc527420d2b6867f54c96229177b2fa163fe2856242371d89a718",
+          "sourceBytes": 3328433,
+          "file": "exports/driver-roadster-fit.lod2.glb",
+          "glb": "exports/driver-roadster-fit.lod2.glb",
+          "sha256": "1198d8433e27e9b60c17d054548162315584e49e644d16426828005e846833ac",
+          "triangles": 28613,
+          "vertices": 23537,
+          "primitives": 2,
+          "bytes": 1926188,
+          "geometryBytes": 1926188,
+          "embeddedImageBytes": 0,
+          "requiredSharedImageFileBytes": 1685815,
+          "standaloneDownloadBytesIncludingMaps": 3612003,
+          "boundsM": {
+            "min": [
+              -0.36451148986816406,
+              0.0029903140384703875,
+              -0.14308057725429535
+            ],
+            "max": [
+              0.36437079310417175,
+              1.8052752017974854,
+              0.1780000627040863
+            ],
+            "size": [
+              0.7288822829723358,
+              1.802284887759015,
+              0.32108063995838165
+            ]
+          },
+          "seatedBoundsM": {
+            "min": [
+              -0.30652355878794,
+              0.4789906359952818,
+              -0.19170211113288121
+            ],
+            "max": [
+              0.30725888336866325,
+              1.589301580520836,
+              0.9160001938887365
+            ],
+            "size": [
+              0.6137824421566033,
+              1.1103109445255541,
+              1.1077023050216177
+            ]
+          }
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.14308057725429535
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.32108063995838165
+        ]
+      },
+      "expectedDimensionsM": {
+        "bodyStature": 1.81,
+        "hatTop": null
+      },
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Accepted public citizen original geometry and 1.81 m source contract; original new cap adds about 5.3 cm. Bounds are measured actual exported rest stance.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "unchanged navigation-owned ground origin"
+      },
+      "attachmentDatum": {
+        "type": "ground-contact",
+        "soleYApproxM": 0.003
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "materialName": "citizen-atlas-protected",
+          "materialIndex": 0,
+          "role": "citizen-protected-atlas",
+          "surfaceId": "citizen-protected-atlas",
+          "primitives": [
+            {
+              "mesh": 0,
+              "primitive": 0
+            },
+            {
+              "mesh": 1,
+              "primitive": 0
+            }
+          ],
+          "maps": {
+            "baseColor": {
+              "path": "exports/textures/citizen-53e23506fc52ad56.png",
+              "texCoord": 0,
+              "colorSpace": "sRGB"
+            },
+            "normal": {
+              "path": "exports/textures/citizen-d750e70a2bafbdb5.png",
+              "texCoord": 0,
+              "colorSpace": "Non-Color"
+            },
+            "roughnessMetallicLegacy": {
+              "path": "exports/textures/citizen-97cbd4395750f8b9.png",
+              "texCoord": 0,
+              "colorSpace": "Non-Color"
+            }
+          },
+          "alphaMode": "OPAQUE",
+          "doubleSided": true,
+          "baseColorFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 1
+        }
+      ],
+      "textureMode": "external/shared-content-addressed",
+      "textureCost": {
+        "geometryBytes": 2264664,
+        "embeddedImageBytes": 0,
+        "GLBTotalBytes": 2264664,
+        "requiredSharedImageFileBytes": 1685815,
+        "standaloneDownloadBytesIncludingMaps": 3950479,
+        "uniqueTexelBytesWithMips": 16777212,
+        "gpuDeduplication": "not implemented; identical URLs/hashes alone do not deduplicate separate loader-created THREE.Texture objects"
+      },
+      "lodPolicy": {
+        "proposedSwitchDistanceM": [
+          8,
+          20
+        ],
+        "hysteresisM": 2,
+        "fadeSeconds": 0.15,
+        "status": "proposal_runtime_not_run",
+        "playerAndSeatedDriver": "LOD0",
+        "errorLimitsM": [
+          0,
+          0.001,
+          0.002
+        ],
+        "protectedAreas": [
+          "entire waist Y=.78–1.08",
+          "face",
+          "hands",
+          "shoes",
+          "collar",
+          "backpack",
+          "all non-garment components"
+        ]
+      },
+      "clearance": {
+        "status": "pass",
+        "scope": "static morph-before-skin full-triangle fit; no dynamics/ergonomic certification",
+        "profile": "roadster-driver-fit",
+        "fitReports": [
+          "tools/assets/roadster-driver-fit/qa/driver-fit-lod0.json",
+          "tools/assets/roadster-driver-fit/qa/driver-fit-lod1.json",
+          "tools/assets/roadster-driver-fit/qa/driver-fit-lod2.json"
+        ],
+        "originalCarCompatibility": "incompatible; original solid dashboard and low steering wheel remain unchanged"
+      },
+      "collision": {
+        "type": "none-exported",
+        "reason": "navigation owns existing collision; driver fit uses exact source dashboard/console/floor boxes, not a replacement collider"
+      },
+      "anchors": [
+        {
+          "id": "hips",
+          "positionM": [
+            0.4400000000000003,
+            0.7200000286102298,
+            -0.05999998767772374
+          ],
+          "frame": "Roadster unchanged root",
+          "basis": "measured same-rig posed bone head"
+        },
+        {
+          "id": "head",
+          "positionM": [
+            0.44000000000000006,
+            1.3252313308565253,
+            -0.12819475290559001
+          ],
+          "frame": "Roadster unchanged root",
+          "basis": "measured same-rig posed bone head"
+        },
+        {
+          "id": "handL",
+          "positionM": [
+            0.5999999194848831,
+            1.0599998404656001,
+            0.2719999903952705
+          ],
+          "frame": "Roadster unchanged root",
+          "basis": "measured same-rig posed bone head"
+        },
+        {
+          "id": "handR",
+          "positionM": [
+            0.28000015028754416,
+            1.059999903096428,
+            0.27200003873236084
+          ],
+          "frame": "Roadster unchanged root",
+          "basis": "measured same-rig posed bone head"
+        },
+        {
+          "id": "footL",
+          "positionM": [
+            0.5699999626536949,
+            0.6060003521947155,
+            0.6600001493654921
+          ],
+          "frame": "Roadster unchanged root",
+          "basis": "measured same-rig posed bone head"
+        },
+        {
+          "id": "footR",
+          "positionM": [
+            0.310000063000641,
+            0.6060001772061744,
+            0.6600000556294563
+          ],
+          "frame": "Roadster unchanged root",
+          "basis": "measured same-rig posed bone head"
+        },
+        {
+          "id": "driver-eye-proposed",
+          "positionM": [
+            0.4397796792198029,
+            1.4720983817429911,
+            -0.058997586349904124
+          ],
+          "frame": "Roadster unchanged root",
+          "basis": "mean of actual posed front facial eye-band vertices, proposed camera migration; not a current runtime camera"
+        }
+      ],
+      "placementCompatibility": {
+        "units": "metres",
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "profiles": [
+          "roadster-driver-fit-optional"
+        ],
+        "legacyToVehicleRoot": "identity",
+        "driverPlacement": {
+          "translationM": [
+            0.44,
+            0,
+            -0.06
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ]
+        }
+      },
+      "intendedConsumer": [
+        "lib/city/assets/roadster.ts",
+        "lib/city/navigation.ts",
+        "lib/city/driver-camera.ts"
+      ],
+      "rig": {
+        "bones": 22,
+        "inverseBindMatrices": "bit-exact accepted public baseline; source rest edits refused",
+        "clips": {
+          "idle": 2,
+          "walk": 1,
+          "run": 0.8,
+          "driver-seated": 1
+        },
+        "stridesM": {
+          "walk": 1,
+          "run": 1.9
+        },
+        "rootMotion": "none; navigation owns translation and distance phase",
+        "poseCorrective": {
+          "name": "DriverGrip",
+          "mesh": "driver-grip-hands",
+          "defaultWeight": 0,
+          "seatedWeight": 1,
+          "clip": "driver-seated",
+          "ownership": "Clip-owned only. Stop/fade driver-seated when leaving driving; never force weight1 globally. idle/walk/run restore0.",
+          "sourceAction": "driver-grip is merged into driver-seated by source-preserving exporter"
+        }
+      },
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/cpu-tests.json",
+          "qa/blender-reimport.json",
+          "qa/artist-edit-proof.json",
+          "qa/source-preserving-export.json",
+          "qa/render-evidence.json",
+          "qa/lod-surface-audit.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "No WebGL acceptance in this offline package",
+        "integrationStatus": "runtime_pending_webgl"
+      },
+      "integrationEligible": true,
+      "integrationMode": "optional-profile-only",
+      "requiredCockpit": {
+        "packageId": "roadster-driver-fit",
+        "specs": {
+          "file": "tools/assets/roadster-driver-fit/specs.json",
+          "sha256": "a2b413a67933f24e5d0dc1f7c7175a0a5834ef2173c31d6f52ebd92ffa569052"
+        },
+        "lods": [
+          {
+            "level": 0,
+            "file": "tools/assets/roadster-driver-fit/exports/roadster-cockpit-local.lod0.glb",
+            "sha256": "706d649ab14e3cc38c6693cbc9a8a7c69c5731d7ad9c3ad758234f33408c74c6"
+          },
+          {
+            "level": 1,
+            "file": "tools/assets/roadster-driver-fit/exports/roadster-cockpit-local.lod1.glb",
+            "sha256": "a6b86d69660a113c2b5c24daa6cdcdfa8dfd8b50f6bfe4f3db50d0d62c989556"
+          },
+          {
+            "level": 2,
+            "file": "tools/assets/roadster-driver-fit/exports/roadster-cockpit-local.lod2.glb",
+            "sha256": "b6ed43359b1832adcbc644746993b0bfe59ed8db2371772806d3c2e232bfee14"
+          }
+        ],
+        "mutualManifestHashing": false
+      },
+      "driverVariantChanges": {
+        "backpack": "9 daypack/harness components removed only in this family",
+        "torsoDegrees": -8,
+        "hipAndLegLengths": "unchanged original22-bone rig",
+        "grip": "9/3-o-clock, wrists behind rim, first15mm straight finger approach then length-preserving28mm curl; no extra bones",
+        "drawPrimitives": 2
+      }
+    }
+  ],
+  "textures": [
+    {
+      "id": "citizen-baseColor",
+      "path": "exports/textures/citizen-53e23506fc52ad56.png",
+      "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "gpuFormatEstimate": "RGBA8 full mip chain",
+      "fileBytes": 696823,
+      "uniqueTexelBytesWithMips": 5592404,
+      "colorSpace": "sRGB",
+      "role": "baseColor",
+      "normalConvention": null,
+      "channelsMeaning": "RGB"
+    },
+    {
+      "id": "citizen-roughnessMetallicLegacy",
+      "path": "exports/textures/citizen-97cbd4395750f8b9.png",
+      "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "gpuFormatEstimate": "RGBA8 full mip chain",
+      "fileBytes": 309221,
+      "uniqueTexelBytesWithMips": 5592404,
+      "colorSpace": "Non-Color",
+      "role": "roughnessMetallicLegacy",
+      "normalConvention": null,
+      "channelsMeaning": "G=roughness; B retained from legacy map with material metallicFactor=0; no occlusion binding"
+    },
+    {
+      "id": "citizen-normal",
+      "path": "exports/textures/citizen-d750e70a2bafbdb5.png",
+      "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "gpuFormatEstimate": "RGBA8 full mip chain",
+      "fileBytes": 679771,
+      "uniqueTexelBytesWithMips": 5592404,
+      "colorSpace": "Non-Color",
+      "role": "normal",
+      "normalConvention": "OpenGL +Y",
+      "channelsMeaning": "RGB"
+    }
+  ]
+}

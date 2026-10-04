@@ -1,0 +1,630 @@
+{
+  "status": "pass",
+  "scope": "offline optional frame plus new paired sill, illustrative four lights and identical camera/scale paired LODs; not actual city lighting nor WebGL acceptance",
+  "inputGlbSha256": {
+    "exports/modern-source-window-surround.lod0.glb": "38da7234e7987342cd2d23216806dc7079ea2e8add1c6e3348ae0a6d7f119e55",
+    "exports/modern-source-window-paired-sill.lod0.glb": "cbe860dbc72dd1daf85f04b728ffd0db8ab81b79b4ec543cdbaaffbc8ad3813e",
+    "exports/modern-source-window-surround.lod1.glb": "c81bf83db1087e1ad029e642fa655d8310b75bb702939fa6ab52f24324fa3c95",
+    "exports/modern-source-window-paired-sill.lod1.glb": "f44f570ac007b54e794a4d5c8f0c08afeeb6fbf116bd1730845d76ca38df75b2",
+    "exports/cedar-source-window-surround.lod0.glb": "a0a793735de865e0c4d1e89c523de863216d8d22dc14ef2510dedfc89b0e690e",
+    "exports/cedar-source-window-paired-sill.lod0.glb": "f52e54c33843775ec39d238ca21f2c8b3f6716c1169c9dd036fa286ac7686f94",
+    "exports/cedar-source-window-surround.lod1.glb": "0c5bb9c7b68e760698bb09fbb59328c29e4444427ac7c9358e7ca08e8d123cef",
+    "exports/cedar-source-window-paired-sill.lod1.glb": "63d9c379bee7bb3d01eb293969e223d0d7df905aa153d96ed080e3caa7638a88"
+  },
+  "images": [
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 0,
+      "view": "oblique",
+      "lighting": "clear",
+      "file": "qa/previews/modern-source-window-surround.paired.lod0.oblique.clear.png",
+      "sha256": "8a13577609fc6f6c74f682610202821537ed09114c597aac2ad14378e5fa7412",
+      "bytes": 268250,
+      "inputGlbSha256": "38da7234e7987342cd2d23216806dc7079ea2e8add1c6e3348ae0a6d7f119e55",
+      "inputSillGlbSha256": "cbe860dbc72dd1daf85f04b728ffd0db8ab81b79b4ec543cdbaaffbc8ad3813e",
+      "qaSharedRootLiftM": 0.13,
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        512,
+        352
+      ],
+      "samples": 16,
+      "exposure": 0
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 0,
+      "view": "oblique",
+      "lighting": "overcast",
+      "file": "qa/previews/modern-source-window-surround.paired.lod0.oblique.overcast.png",
+      "sha256": "57dd837870b8977161b572b38a80e049f879b0856b3c51a4e41a8663ff296739",
+      "bytes": 258738,
+      "inputGlbSha256": "38da7234e7987342cd2d23216806dc7079ea2e8add1c6e3348ae0a6d7f119e55",
+      "inputSillGlbSha256": "cbe860dbc72dd1daf85f04b728ffd0db8ab81b79b4ec543cdbaaffbc8ad3813e",
+      "qaSharedRootLiftM": 0.13,
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        512,
+        352
+      ],
+      "samples": 16,
+      "exposure": 0
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 0,
+      "view": "oblique",
+      "lighting": "dusk",
+      "file": "qa/previews/modern-source-window-surround.paired.lod0.oblique.dusk.png",
+      "sha256": "b705bd993e6f9269314d9198273e02e27a4b86ee6aa47c89982f0c60c89105f8",
+      "bytes": 301550,
+      "inputGlbSha256": "38da7234e7987342cd2d23216806dc7079ea2e8add1c6e3348ae0a6d7f119e55",
+      "inputSillGlbSha256": "cbe860dbc72dd1daf85f04b728ffd0db8ab81b79b4ec543cdbaaffbc8ad3813e",
+      "qaSharedRootLiftM": 0.13,
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        512,
+        352
+      ],
+      "samples": 16,
+      "exposure": 0
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 0,
+      "view": "oblique",
+      "lighting": "night",
+      "file": "qa/previews/modern-source-window-surround.paired.lod0.oblique.night.png",
+      "sha256": "66948daba4adaea62b5f18075cee4213457d149e75d99d25f7eec240d8511884",
+      "bytes": 259612,
+      "inputGlbSha256": "38da7234e7987342cd2d23216806dc7079ea2e8add1c6e3348ae0a6d7f119e55",
+      "inputSillGlbSha256": "cbe860dbc72dd1daf85f04b728ffd0db8ab81b79b4ec543cdbaaffbc8ad3813e",
+      "qaSharedRootLiftM": 0.13,
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        512,
+        352
+      ],
+      "samples": 16,
+      "exposure": 0
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 0,
+      "view": "front",
+      "lighting": "clear",
+      "file": "qa/previews/modern-source-window-surround.paired.lod0.front.clear.png",
+      "sha256": "99d1d677a0fdad15a4d18f8247693b0e2e94e078a92c67ecd734dc807ed48d73",
+      "bytes": 213913,
+      "inputGlbSha256": "38da7234e7987342cd2d23216806dc7079ea2e8add1c6e3348ae0a6d7f119e55",
+      "inputSillGlbSha256": "cbe860dbc72dd1daf85f04b728ffd0db8ab81b79b4ec543cdbaaffbc8ad3813e",
+      "qaSharedRootLiftM": 0.13,
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        512,
+        352
+      ],
+      "samples": 16,
+      "exposure": 0
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 0,
+      "view": "rear",
+      "lighting": "clear",
+      "file": "qa/previews/modern-source-window-surround.paired.lod0.rear.clear.png",
+      "sha256": "8e9f02d15e1e9426aaceb9c881aaa872ca10273c50455752261a6bee370d745d",
+      "bytes": 268874,
+      "inputGlbSha256": "38da7234e7987342cd2d23216806dc7079ea2e8add1c6e3348ae0a6d7f119e55",
+      "inputSillGlbSha256": "cbe860dbc72dd1daf85f04b728ffd0db8ab81b79b4ec543cdbaaffbc8ad3813e",
+      "qaSharedRootLiftM": 0.13,
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        512,
+        352
+      ],
+      "samples": 16,
+      "exposure": 0
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 1,
+      "view": "oblique",
+      "lighting": "clear",
+      "file": "qa/previews/modern-source-window-surround.paired.lod1.oblique.clear.png",
+      "sha256": "83ab4adf1c5339680c8ecec0c32b5cbf112a8e3112e82ead4940cd8a75370afe",
+      "bytes": 267873,
+      "inputGlbSha256": "c81bf83db1087e1ad029e642fa655d8310b75bb702939fa6ab52f24324fa3c95",
+      "inputSillGlbSha256": "f44f570ac007b54e794a4d5c8f0c08afeeb6fbf116bd1730845d76ca38df75b2",
+      "qaSharedRootLiftM": 0.13,
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        512,
+        352
+      ],
+      "samples": 16,
+      "exposure": 0
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 1,
+      "view": "oblique",
+      "lighting": "overcast",
+      "file": "qa/previews/modern-source-window-surround.paired.lod1.oblique.overcast.png",
+      "sha256": "724f6c6210224d97a83d2b8c7013cc1fe09097851b837396e2a301c4bac38e0d",
+      "bytes": 258489,
+      "inputGlbSha256": "c81bf83db1087e1ad029e642fa655d8310b75bb702939fa6ab52f24324fa3c95",
+      "inputSillGlbSha256": "f44f570ac007b54e794a4d5c8f0c08afeeb6fbf116bd1730845d76ca38df75b2",
+      "qaSharedRootLiftM": 0.13,
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        512,
+        352
+      ],
+      "samples": 16,
+      "exposure": 0
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 1,
+      "view": "oblique",
+      "lighting": "dusk",
+      "file": "qa/previews/modern-source-window-surround.paired.lod1.oblique.dusk.png",
+      "sha256": "5253b1bb75fb20885e6d684448175fc7041a5ec0517684a0642292f135b214a9",
+      "bytes": 301440,
+      "inputGlbSha256": "c81bf83db1087e1ad029e642fa655d8310b75bb702939fa6ab52f24324fa3c95",
+      "inputSillGlbSha256": "f44f570ac007b54e794a4d5c8f0c08afeeb6fbf116bd1730845d76ca38df75b2",
+      "qaSharedRootLiftM": 0.13,
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        512,
+        352
+      ],
+      "samples": 16,
+      "exposure": 0
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 1,
+      "view": "oblique",
+      "lighting": "night",
+      "file": "qa/previews/modern-source-window-surround.paired.lod1.oblique.night.png",
+      "sha256": "96f62c47c29b241e96319e597292595d74adb25ae4a680265051980c8635ad5a",
+      "bytes": 259308,
+      "inputGlbSha256": "c81bf83db1087e1ad029e642fa655d8310b75bb702939fa6ab52f24324fa3c95",
+      "inputSillGlbSha256": "f44f570ac007b54e794a4d5c8f0c08afeeb6fbf116bd1730845d76ca38df75b2",
+      "qaSharedRootLiftM": 0.13,
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        512,
+        352
+      ],
+      "samples": 16,
+      "exposure": 0
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 1,
+      "view": "front",
+      "lighting": "clear",
+      "file": "qa/previews/modern-source-window-surround.paired.lod1.front.clear.png",
+      "sha256": "b4fb38b72ae28983eee2fd77140f8196563cf975738dcf24b345622bfd221abb",
+      "bytes": 214270,
+      "inputGlbSha256": "c81bf83db1087e1ad029e642fa655d8310b75bb702939fa6ab52f24324fa3c95",
+      "inputSillGlbSha256": "f44f570ac007b54e794a4d5c8f0c08afeeb6fbf116bd1730845d76ca38df75b2",
+      "qaSharedRootLiftM": 0.13,
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        512,
+        352
+      ],
+      "samples": 16,
+      "exposure": 0
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 1,
+      "view": "rear",
+      "lighting": "clear",
+      "file": "qa/previews/modern-source-window-surround.paired.lod1.rear.clear.png",
+      "sha256": "52a4097ef11652fb90d7e1595672c5da9c43877bcf27a9fc931aca02a03f5a58",
+      "bytes": 267964,
+      "inputGlbSha256": "c81bf83db1087e1ad029e642fa655d8310b75bb702939fa6ab52f24324fa3c95",
+      "inputSillGlbSha256": "f44f570ac007b54e794a4d5c8f0c08afeeb6fbf116bd1730845d76ca38df75b2",
+      "qaSharedRootLiftM": 0.13,
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        512,
+        352
+      ],
+      "samples": 16,
+      "exposure": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 0,
+      "view": "oblique",
+      "lighting": "clear",
+      "file": "qa/previews/cedar-source-window-surround.paired.lod0.oblique.clear.png",
+      "sha256": "d6996c73a7ddc10853d0b20193950ba2e54ffdea20df22223883da81881def8d",
+      "bytes": 278850,
+      "inputGlbSha256": "a0a793735de865e0c4d1e89c523de863216d8d22dc14ef2510dedfc89b0e690e",
+      "inputSillGlbSha256": "f52e54c33843775ec39d238ca21f2c8b3f6716c1169c9dd036fa286ac7686f94",
+      "qaSharedRootLiftM": 0.13,
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        512,
+        352
+      ],
+      "samples": 16,
+      "exposure": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 0,
+      "view": "oblique",
+      "lighting": "overcast",
+      "file": "qa/previews/cedar-source-window-surround.paired.lod0.oblique.overcast.png",
+      "sha256": "64f9e7bbb3854df65ae87f40714384e6ac6ec774568406f9ac78cc6a6a64b5a5",
+      "bytes": 271787,
+      "inputGlbSha256": "a0a793735de865e0c4d1e89c523de863216d8d22dc14ef2510dedfc89b0e690e",
+      "inputSillGlbSha256": "f52e54c33843775ec39d238ca21f2c8b3f6716c1169c9dd036fa286ac7686f94",
+      "qaSharedRootLiftM": 0.13,
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        512,
+        352
+      ],
+      "samples": 16,
+      "exposure": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 0,
+      "view": "oblique",
+      "lighting": "dusk",
+      "file": "qa/previews/cedar-source-window-surround.paired.lod0.oblique.dusk.png",
+      "sha256": "989c95cd2f147f489e12ec5dfd603377b90769f8b6be8f1e6823075b95d0b2e5",
+      "bytes": 326876,
+      "inputGlbSha256": "a0a793735de865e0c4d1e89c523de863216d8d22dc14ef2510dedfc89b0e690e",
+      "inputSillGlbSha256": "f52e54c33843775ec39d238ca21f2c8b3f6716c1169c9dd036fa286ac7686f94",
+      "qaSharedRootLiftM": 0.13,
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        512,
+        352
+      ],
+      "samples": 16,
+      "exposure": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 0,
+      "view": "oblique",
+      "lighting": "night",
+      "file": "qa/previews/cedar-source-window-surround.paired.lod0.oblique.night.png",
+      "sha256": "aca3470b6c716b147f6914741ce2d93e6e6fbf9449c4b4a8a1e058dfc26d3f46",
+      "bytes": 282374,
+      "inputGlbSha256": "a0a793735de865e0c4d1e89c523de863216d8d22dc14ef2510dedfc89b0e690e",
+      "inputSillGlbSha256": "f52e54c33843775ec39d238ca21f2c8b3f6716c1169c9dd036fa286ac7686f94",
+      "qaSharedRootLiftM": 0.13,
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        512,
+        352
+      ],
+      "samples": 16,
+      "exposure": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 0,
+      "view": "front",
+      "lighting": "clear",
+      "file": "qa/previews/cedar-source-window-surround.paired.lod0.front.clear.png",
+      "sha256": "e9b4a95858538a9ed412b8bfc9b65291abdcef0591809d9e16168981b2935bc9",
+      "bytes": 221070,
+      "inputGlbSha256": "a0a793735de865e0c4d1e89c523de863216d8d22dc14ef2510dedfc89b0e690e",
+      "inputSillGlbSha256": "f52e54c33843775ec39d238ca21f2c8b3f6716c1169c9dd036fa286ac7686f94",
+      "qaSharedRootLiftM": 0.13,
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        512,
+        352
+      ],
+      "samples": 16,
+      "exposure": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 0,
+      "view": "rear",
+      "lighting": "clear",
+      "file": "qa/previews/cedar-source-window-surround.paired.lod0.rear.clear.png",
+      "sha256": "3dc00475a335f719f2e3cd8be2dfb3689dfbd0eced90e24cc74bf3db5575bdb1",
+      "bytes": 283452,
+      "inputGlbSha256": "a0a793735de865e0c4d1e89c523de863216d8d22dc14ef2510dedfc89b0e690e",
+      "inputSillGlbSha256": "f52e54c33843775ec39d238ca21f2c8b3f6716c1169c9dd036fa286ac7686f94",
+      "qaSharedRootLiftM": 0.13,
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        512,
+        352
+      ],
+      "samples": 16,
+      "exposure": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 1,
+      "view": "oblique",
+      "lighting": "clear",
+      "file": "qa/previews/cedar-source-window-surround.paired.lod1.oblique.clear.png",
+      "sha256": "ef21d90d50890284a5a10548d48ea099871c816db8da0453ad19282de40da274",
+      "bytes": 278468,
+      "inputGlbSha256": "0c5bb9c7b68e760698bb09fbb59328c29e4444427ac7c9358e7ca08e8d123cef",
+      "inputSillGlbSha256": "63d9c379bee7bb3d01eb293969e223d0d7df905aa153d96ed080e3caa7638a88",
+      "qaSharedRootLiftM": 0.13,
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        512,
+        352
+      ],
+      "samples": 16,
+      "exposure": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 1,
+      "view": "oblique",
+      "lighting": "overcast",
+      "file": "qa/previews/cedar-source-window-surround.paired.lod1.oblique.overcast.png",
+      "sha256": "07ac288f89847d1fe8905b996e7bedcd03032a9bedf6818ac292c0808695fa9b",
+      "bytes": 271256,
+      "inputGlbSha256": "0c5bb9c7b68e760698bb09fbb59328c29e4444427ac7c9358e7ca08e8d123cef",
+      "inputSillGlbSha256": "63d9c379bee7bb3d01eb293969e223d0d7df905aa153d96ed080e3caa7638a88",
+      "qaSharedRootLiftM": 0.13,
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        512,
+        352
+      ],
+      "samples": 16,
+      "exposure": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 1,
+      "view": "oblique",
+      "lighting": "dusk",
+      "file": "qa/previews/cedar-source-window-surround.paired.lod1.oblique.dusk.png",
+      "sha256": "61d0fff3031f6c5c8080a3183bf423690d743c0fbcb0b8f75ef4ac9691d40870",
+      "bytes": 326953,
+      "inputGlbSha256": "0c5bb9c7b68e760698bb09fbb59328c29e4444427ac7c9358e7ca08e8d123cef",
+      "inputSillGlbSha256": "63d9c379bee7bb3d01eb293969e223d0d7df905aa153d96ed080e3caa7638a88",
+      "qaSharedRootLiftM": 0.13,
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        512,
+        352
+      ],
+      "samples": 16,
+      "exposure": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 1,
+      "view": "oblique",
+      "lighting": "night",
+      "file": "qa/previews/cedar-source-window-surround.paired.lod1.oblique.night.png",
+      "sha256": "26a62dac001417e40b9308d09696329ee17288aa0abff768402b58199ad12dcc",
+      "bytes": 282302,
+      "inputGlbSha256": "0c5bb9c7b68e760698bb09fbb59328c29e4444427ac7c9358e7ca08e8d123cef",
+      "inputSillGlbSha256": "63d9c379bee7bb3d01eb293969e223d0d7df905aa153d96ed080e3caa7638a88",
+      "qaSharedRootLiftM": 0.13,
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        512,
+        352
+      ],
+      "samples": 16,
+      "exposure": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 1,
+      "view": "front",
+      "lighting": "clear",
+      "file": "qa/previews/cedar-source-window-surround.paired.lod1.front.clear.png",
+      "sha256": "22553d7eed04c50708a1e7be5630487510c93b0f9023e5641d16a06587513bc6",
+      "bytes": 221388,
+      "inputGlbSha256": "0c5bb9c7b68e760698bb09fbb59328c29e4444427ac7c9358e7ca08e8d123cef",
+      "inputSillGlbSha256": "63d9c379bee7bb3d01eb293969e223d0d7df905aa153d96ed080e3caa7638a88",
+      "qaSharedRootLiftM": 0.13,
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        512,
+        352
+      ],
+      "samples": 16,
+      "exposure": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 1,
+      "view": "rear",
+      "lighting": "clear",
+      "file": "qa/previews/cedar-source-window-surround.paired.lod1.rear.clear.png",
+      "sha256": "356cf379059cccc902d1fcfac50329d09b2065c918e2099fcd27642355ab5f19",
+      "bytes": 282739,
+      "inputGlbSha256": "0c5bb9c7b68e760698bb09fbb59328c29e4444427ac7c9358e7ca08e8d123cef",
+      "inputSillGlbSha256": "63d9c379bee7bb3d01eb293969e223d0d7df905aa153d96ed080e3caa7638a88",
+      "qaSharedRootLiftM": 0.13,
+      "scaleReferencesM": [
+        1,
+        1.75,
+        1.81
+      ],
+      "engine": "Cycles",
+      "device": "CPU",
+      "resolution": [
+        512,
+        352
+      ],
+      "samples": 16,
+      "exposure": 0
+    }
+  ],
+  "visualReview": {
+    "status": "pass",
+    "contactSheets": [
+      {
+        "file": "qa/cedar-source-window-surround.paired.contact.png",
+        "sha256": "6518c14cf0af1161f23778c657cba4b000947a9a36813fb1a645619b51310d36"
+      },
+      {
+        "file": "qa/modern-source-window-surround.paired.contact.png",
+        "sha256": "886c76b8b37fd264b87ecc5b9683863c92df91d007cb38bafc342bf98b055cd2"
+      }
+    ],
+    "review": "Both paired assembly contact sheets inspected across both LODs, four light presets, front and rear. New sloping sill projects under the frame with a consistent narrow separation, unchanged clear opening and frame silhouette, physical sill nose and suitable scale references. No old sill loaded. QA lifts both members together by 0.13m only to stage their shared root near the reference floor; this is not a placement datum. CPU sample noise retained; rear in-scene labels reversed."
+  }
+}

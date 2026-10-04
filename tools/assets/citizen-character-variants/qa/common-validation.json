@@ -1,0 +1,993 @@
+{
+  "status": "pass",
+  "scope": "common packaging, source hashes, rest-pose transformed GLB geometry and costs only; package-specific Blender, semantic and runtime checks required",
+  "results": [
+    {
+      "assetId": "vancouver-citizen",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.42600005865097046
+        ]
+      },
+      "triangles": 37735,
+      "vertices": 29092,
+      "primitives": 1,
+      "bytes": 2280072,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 2280072,
+      "images": [
+        {
+          "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 679771,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 696823,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 309221,
+          "texelBytesWithMips": 5592405.333333333
+        }
+      ],
+      "nodeNames": [
+        "head",
+        "neck",
+        "handR",
+        "foreArmR",
+        "upperArmR",
+        "clavicleR",
+        "handL",
+        "foreArmL",
+        "upperArmL",
+        "clavicleL",
+        "chest",
+        "spine",
+        "toeR",
+        "footR",
+        "shinR",
+        "thighR",
+        "toeL",
+        "footL",
+        "shinL",
+        "thighL",
+        "hips",
+        "root",
+        "citizen-body",
+        "CitizenRig"
+      ],
+      "materialNames": [
+        "citizen-atlas-protected"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 1
+    },
+    {
+      "assetId": "vancouver-citizen",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.42600005865097046
+        ]
+      },
+      "triangles": 31767,
+      "vertices": 25977,
+      "primitives": 1,
+      "bytes": 2032440,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 2032440,
+      "images": [
+        {
+          "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 679771,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 696823,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 309221,
+          "texelBytesWithMips": 5592405.333333333
+        }
+      ],
+      "nodeNames": [
+        "head",
+        "neck",
+        "handR",
+        "foreArmR",
+        "upperArmR",
+        "clavicleR",
+        "handL",
+        "foreArmL",
+        "upperArmL",
+        "clavicleL",
+        "chest",
+        "spine",
+        "toeR",
+        "footR",
+        "shinR",
+        "thighR",
+        "toeL",
+        "footL",
+        "shinL",
+        "thighL",
+        "hips",
+        "root",
+        "citizen-body",
+        "CitizenRig"
+      ],
+      "materialNames": [
+        "citizen-atlas-protected"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 1
+    },
+    {
+      "assetId": "vancouver-citizen",
+      "lod": 2,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.42600005865097046
+        ]
+      },
+      "triangles": 29931,
+      "vertices": 24803,
+      "primitives": 1,
+      "bytes": 1941592,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 1941592,
+      "images": [
+        {
+          "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 679771,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 696823,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 309221,
+          "texelBytesWithMips": 5592405.333333333
+        }
+      ],
+      "nodeNames": [
+        "head",
+        "neck",
+        "handR",
+        "foreArmR",
+        "upperArmR",
+        "clavicleR",
+        "handL",
+        "foreArmL",
+        "upperArmL",
+        "clavicleL",
+        "chest",
+        "spine",
+        "toeR",
+        "footR",
+        "shinR",
+        "thighR",
+        "toeL",
+        "footL",
+        "shinL",
+        "thighL",
+        "hips",
+        "root",
+        "citizen-body",
+        "CitizenRig"
+      ],
+      "materialNames": [
+        "citizen-atlas-protected"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 1
+    },
+    {
+      "assetId": "vancouver-police",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8579999208450317,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.8550096068065614,
+          0.42600005865097046
+        ]
+      },
+      "triangles": 38483,
+      "vertices": 29734,
+      "primitives": 5,
+      "bytes": 2334200,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 2334200,
+      "images": [
+        {
+          "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 679771,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 696823,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 309221,
+          "texelBytesWithMips": 5592405.333333333
+        }
+      ],
+      "nodeNames": [
+        "head",
+        "neck",
+        "handR",
+        "foreArmR",
+        "upperArmR",
+        "clavicleR",
+        "handL",
+        "foreArmL",
+        "upperArmL",
+        "clavicleL",
+        "chest",
+        "spine",
+        "toeR",
+        "footR",
+        "shinR",
+        "thighR",
+        "toeL",
+        "footL",
+        "shinL",
+        "thighL",
+        "hips",
+        "root",
+        "police-body",
+        "CitizenRig"
+      ],
+      "materialNames": [
+        "citizen-atlas-protected",
+        "police-uniform-clothing-only",
+        "police-hat-fabric",
+        "police-peak-leather",
+        "police-original-badge-brass"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 1
+    },
+    {
+      "assetId": "vancouver-police",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8579999208450317,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.8550096068065614,
+          0.42600005865097046
+        ]
+      },
+      "triangles": 32515,
+      "vertices": 26619,
+      "primitives": 5,
+      "bytes": 2086564,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 2086564,
+      "images": [
+        {
+          "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 679771,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 696823,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 309221,
+          "texelBytesWithMips": 5592405.333333333
+        }
+      ],
+      "nodeNames": [
+        "head",
+        "neck",
+        "handR",
+        "foreArmR",
+        "upperArmR",
+        "clavicleR",
+        "handL",
+        "foreArmL",
+        "upperArmL",
+        "clavicleL",
+        "chest",
+        "spine",
+        "toeR",
+        "footR",
+        "shinR",
+        "thighR",
+        "toeL",
+        "footL",
+        "shinL",
+        "thighL",
+        "hips",
+        "root",
+        "police-body",
+        "CitizenRig"
+      ],
+      "materialNames": [
+        "citizen-atlas-protected",
+        "police-uniform-clothing-only",
+        "police-hat-fabric",
+        "police-peak-leather",
+        "police-original-badge-brass"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 1
+    },
+    {
+      "assetId": "vancouver-police",
+      "lod": 2,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8579999208450317,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.8550096068065614,
+          0.42600005865097046
+        ]
+      },
+      "triangles": 30679,
+      "vertices": 25445,
+      "primitives": 5,
+      "bytes": 1995712,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 1995712,
+      "images": [
+        {
+          "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 679771,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 696823,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 309221,
+          "texelBytesWithMips": 5592405.333333333
+        }
+      ],
+      "nodeNames": [
+        "head",
+        "neck",
+        "handR",
+        "foreArmR",
+        "upperArmR",
+        "clavicleR",
+        "handL",
+        "foreArmL",
+        "upperArmL",
+        "clavicleL",
+        "chest",
+        "spine",
+        "toeR",
+        "footR",
+        "shinR",
+        "thighR",
+        "toeL",
+        "footL",
+        "shinL",
+        "thighL",
+        "hips",
+        "root",
+        "police-body",
+        "CitizenRig"
+      ],
+      "materialNames": [
+        "citizen-atlas-protected",
+        "police-uniform-clothing-only",
+        "police-hat-fabric",
+        "police-peak-leather",
+        "police-original-badge-brass"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 1
+    },
+    {
+      "assetId": "vancouver-driver",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.42600005865097046
+        ]
+      },
+      "triangles": 37735,
+      "vertices": 29092,
+      "primitives": 1,
+      "bytes": 2296116,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 2296116,
+      "images": [
+        {
+          "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 679771,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 696823,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 309221,
+          "texelBytesWithMips": 5592405.333333333
+        }
+      ],
+      "nodeNames": [
+        "head",
+        "neck",
+        "handR",
+        "foreArmR",
+        "upperArmR",
+        "clavicleR",
+        "handL",
+        "foreArmL",
+        "upperArmL",
+        "clavicleL",
+        "chest",
+        "spine",
+        "toeR",
+        "footR",
+        "shinR",
+        "thighR",
+        "toeL",
+        "footL",
+        "shinL",
+        "thighL",
+        "hips",
+        "root",
+        "driver-body",
+        "CitizenRig"
+      ],
+      "materialNames": [
+        "citizen-atlas-protected"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 1
+    },
+    {
+      "assetId": "vancouver-driver",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.42600005865097046
+        ]
+      },
+      "triangles": 31767,
+      "vertices": 25977,
+      "primitives": 1,
+      "bytes": 2048488,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 2048488,
+      "images": [
+        {
+          "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 679771,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 696823,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 309221,
+          "texelBytesWithMips": 5592405.333333333
+        }
+      ],
+      "nodeNames": [
+        "head",
+        "neck",
+        "handR",
+        "foreArmR",
+        "upperArmR",
+        "clavicleR",
+        "handL",
+        "foreArmL",
+        "upperArmL",
+        "clavicleL",
+        "chest",
+        "spine",
+        "toeR",
+        "footR",
+        "shinR",
+        "thighR",
+        "toeL",
+        "footL",
+        "shinL",
+        "thighL",
+        "hips",
+        "root",
+        "driver-body",
+        "CitizenRig"
+      ],
+      "materialNames": [
+        "citizen-atlas-protected"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 1
+    },
+    {
+      "assetId": "vancouver-driver",
+      "lod": 2,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.42600005865097046
+        ]
+      },
+      "triangles": 29931,
+      "vertices": 24803,
+      "primitives": 1,
+      "bytes": 1957640,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 1957640,
+      "images": [
+        {
+          "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 679771,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 696823,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 309221,
+          "texelBytesWithMips": 5592405.333333333
+        }
+      ],
+      "nodeNames": [
+        "head",
+        "neck",
+        "handR",
+        "foreArmR",
+        "upperArmR",
+        "clavicleR",
+        "handL",
+        "foreArmL",
+        "upperArmL",
+        "clavicleL",
+        "chest",
+        "spine",
+        "toeR",
+        "footR",
+        "shinR",
+        "thighR",
+        "toeL",
+        "footL",
+        "shinL",
+        "thighL",
+        "hips",
+        "root",
+        "driver-body",
+        "CitizenRig"
+      ],
+      "materialNames": [
+        "citizen-atlas-protected"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 1
+    },
+    {
+      "assetId": "vancouver-driver-roadster-fit",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.14308057725429535
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.32108063995838165
+        ]
+      },
+      "triangles": 36417,
+      "vertices": 27826,
+      "primitives": 2,
+      "bytes": 2264664,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 2264664,
+      "images": [
+        {
+          "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 679771,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 696823,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 309221,
+          "texelBytesWithMips": 5592405.333333333
+        }
+      ],
+      "nodeNames": [
+        "head",
+        "neck",
+        "handR",
+        "foreArmR",
+        "upperArmR",
+        "clavicleR",
+        "handL",
+        "foreArmL",
+        "upperArmL",
+        "clavicleL",
+        "chest",
+        "spine",
+        "toeR",
+        "footR",
+        "shinR",
+        "thighR",
+        "toeL",
+        "footL",
+        "shinL",
+        "thighL",
+        "hips",
+        "root",
+        "driver-grip-hands",
+        "driver-roadster-fit-body",
+        "CitizenRig"
+      ],
+      "materialNames": [
+        "citizen-atlas-protected"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 1
+    },
+    {
+      "assetId": "vancouver-driver-roadster-fit",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.14308057725429535
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.32108063995838165
+        ]
+      },
+      "triangles": 30449,
+      "vertices": 24711,
+      "primitives": 2,
+      "bytes": 2017036,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 2017036,
+      "images": [
+        {
+          "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 679771,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 696823,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 309221,
+          "texelBytesWithMips": 5592405.333333333
+        }
+      ],
+      "nodeNames": [
+        "head",
+        "neck",
+        "handR",
+        "foreArmR",
+        "upperArmR",
+        "clavicleR",
+        "handL",
+        "foreArmL",
+        "upperArmL",
+        "clavicleL",
+        "chest",
+        "spine",
+        "toeR",
+        "footR",
+        "shinR",
+        "thighR",
+        "toeL",
+        "footL",
+        "shinL",
+        "thighL",
+        "hips",
+        "root",
+        "driver-grip-hands",
+        "driver-roadster-fit-body",
+        "CitizenRig"
+      ],
+      "materialNames": [
+        "citizen-atlas-protected"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 1
+    },
+    {
+      "assetId": "vancouver-driver-roadster-fit",
+      "lod": 2,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.14308057725429535
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.32108063995838165
+        ]
+      },
+      "triangles": 28613,
+      "vertices": 23537,
+      "primitives": 2,
+      "bytes": 1926188,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 1926188,
+      "images": [
+        {
+          "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 679771,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 696823,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 309221,
+          "texelBytesWithMips": 5592405.333333333
+        }
+      ],
+      "nodeNames": [
+        "head",
+        "neck",
+        "handR",
+        "foreArmR",
+        "upperArmR",
+        "clavicleR",
+        "handL",
+        "foreArmL",
+        "upperArmL",
+        "clavicleL",
+        "chest",
+        "spine",
+        "toeR",
+        "footR",
+        "shinR",
+        "thighR",
+        "toeL",
+        "footL",
+        "shinL",
+        "thighL",
+        "hips",
+        "root",
+        "driver-grip-hands",
+        "driver-roadster-fit-body",
+        "CitizenRig"
+      ],
+      "materialNames": [
+        "citizen-atlas-protected"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 1
+    }
+  ]
+}

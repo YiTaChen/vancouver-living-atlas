@@ -1,0 +1,498 @@
+{
+  "status": "pass",
+  "scope": "hand/rim only; exact optional-cockpit helper reused, not an independent full-cabin audit",
+  "results": [
+    {
+      "lod": 0,
+      "sourceSha256": "a6e21e8d1d97f8be38e49a716ee8a6ac9cca54fd31b84b13617c705b665c97fc",
+      "maximumDepthM": 0.002745540983018883,
+      "depth": {
+        "quantiles": {
+          "count": 104,
+          "p50M": 0.0008710888011922245,
+          "p95M": 0.002745540983018883,
+          "maxM": 0.002745540983018883
+        },
+        "byRegion": {
+          "corrective-moved-distal-region": {
+            "count": 104,
+            "p50M": 0.0008710888011922245,
+            "p95M": 0.002745540983018883,
+            "maxM": 0.002745540983018883
+          }
+        },
+        "byBone": {
+          "handR": {
+            "count": 55,
+            "p50M": 0.0007340046035454678,
+            "p95M": 0.002745540983018883,
+            "maxM": 0.002745540983018883
+          },
+          "handL": {
+            "count": 49,
+            "p50M": 0.000985732784224361,
+            "p95M": 0.0027158577778127347,
+            "maxM": 0.0027158577778127347
+          }
+        },
+        "method": "Actual solid containment and nearest triangle surface distance on triangle vertices, centroid and edge midpoints; finite sampling, not continuous penetration maximum",
+        "testedSamples": 10822,
+        "insideSamples": 104,
+        "maximumSampledPenetrationM": 0.002745540983018883,
+        "deepestSample": [
+          0.2798969126764261,
+          1.0329466258312339,
+          0.3787304745334453
+        ]
+      },
+      "byHand": {
+        "handL": {
+          "collider": "steering-rim",
+          "colliderTriangles": 320,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 17,
+          "surfaceCrossingTriangles": 16,
+          "fullyContainedTriangles": 1,
+          "dominantBones": {
+            "handL": 17
+          },
+          "minimumSeparationM": 0,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "handL",
+            "point": [
+              0.6157405306932295,
+              1.0351875957940744,
+              0.38647831305353214
+            ]
+          },
+          "sample": [
+            {
+              "bone": "handL",
+              "point": [
+                0.5985152469445412,
+                1.0337285696088536,
+                0.37492779921396757
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "handL",
+              "point": [
+                0.6052302503259641,
+                1.0354327122235059,
+                0.3799637783224606
+              ],
+              "kind": "contained"
+            },
+            {
+              "bone": "handL",
+              "point": [
+                0.5982959490186723,
+                1.0382578691213162,
+                0.3754323701515251
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "handL",
+              "point": [
+                0.6063694093514813,
+                1.0323881257752459,
+                0.3793188779324109
+              ],
+              "kind": "surface"
+            }
+          ]
+        },
+        "handR": {
+          "collider": "steering-rim",
+          "colliderTriangles": 320,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 18,
+          "surfaceCrossingTriangles": 16,
+          "fullyContainedTriangles": 2,
+          "dominantBones": {
+            "handR": 18
+          },
+          "minimumSeparationM": 0,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "handR",
+            "point": [
+              0.2649155139867308,
+              1.0323666624045131,
+              0.3838978672978211
+            ]
+          },
+          "sample": [
+            {
+              "bone": "handR",
+              "point": [
+                0.28183985945499745,
+                1.0345060319130923,
+                0.3748170112991594
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "handR",
+              "point": [
+                0.28818791697336466,
+                1.0346404603013237,
+                0.37027515403324507
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "handR",
+              "point": [
+                0.27483052235990924,
+                1.032540668398048,
+                0.37875183560866066
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "handR",
+              "point": [
+                0.2740574933624411,
+                1.0311518506129753,
+                0.37797725400476745
+              ],
+              "kind": "surface"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "lod": 1,
+      "sourceSha256": "1cb79599d359175c39ce0d466173f5293d7bbcb16a8f08450bd851c09ce0a0c0",
+      "maximumDepthM": 0.0022839122428431383,
+      "depth": {
+        "quantiles": {
+          "count": 68,
+          "p50M": 0.0005322678059964234,
+          "p95M": 0.0022839122428431383,
+          "maxM": 0.0022839122428431383
+        },
+        "byRegion": {
+          "corrective-moved-distal-region": {
+            "count": 68,
+            "p50M": 0.0005322678059964234,
+            "p95M": 0.0022839122428431383,
+            "maxM": 0.0022839122428431383
+          }
+        },
+        "byBone": {
+          "handR": {
+            "count": 34,
+            "p50M": 0.00044718220538106476,
+            "p95M": 0.0022559045692376557,
+            "maxM": 0.0022559045692376557
+          },
+          "handL": {
+            "count": 34,
+            "p50M": 0.0011280653992545662,
+            "p95M": 0.0022839122428431383,
+            "maxM": 0.0022839122428431383
+          }
+        },
+        "method": "Actual solid containment and nearest triangle surface distance on triangle vertices, centroid and edge midpoints; finite sampling, not continuous penetration maximum",
+        "testedSamples": 10822,
+        "insideSamples": 68,
+        "maximumSampledPenetrationM": 0.0022839122428431383,
+        "deepestSample": [
+          0.6001820448270555,
+          1.0366196073513425,
+          0.3794164258152548
+        ]
+      },
+      "byHand": {
+        "handL": {
+          "collider": "steering-rim",
+          "colliderTriangles": 256,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 14,
+          "surfaceCrossingTriangles": 14,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {
+            "handL": 14
+          },
+          "minimumSeparationM": 0,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "handL",
+            "point": [
+              0.6157405306932295,
+              1.0351875957940744,
+              0.38647831305353214
+            ]
+          },
+          "sample": [
+            {
+              "bone": "handL",
+              "point": [
+                0.5985152469445412,
+                1.0337285696088536,
+                0.37492779921396757
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "handL",
+              "point": [
+                0.6052302503259641,
+                1.0354327122235059,
+                0.3799637783224606
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "handL",
+              "point": [
+                0.5982959490186723,
+                1.0382578691213162,
+                0.3754323701515251
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "handL",
+              "point": [
+                0.6063694093514813,
+                1.0323881257752459,
+                0.3793188779324109
+              ],
+              "kind": "surface"
+            }
+          ]
+        },
+        "handR": {
+          "collider": "steering-rim",
+          "colliderTriangles": 256,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 13,
+          "surfaceCrossingTriangles": 13,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {
+            "handR": 13
+          },
+          "minimumSeparationM": 0,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "handR",
+            "point": [
+              0.26788866431739194,
+              1.0534364625996606,
+              0.3823079886236167
+            ]
+          },
+          "sample": [
+            {
+              "bone": "handR",
+              "point": [
+                0.28183985945499745,
+                1.0345060319130923,
+                0.3748170112991594
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "handR",
+              "point": [
+                0.28818791697336466,
+                1.0346404603013237,
+                0.37027515403324507
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "handR",
+              "point": [
+                0.27483052235990924,
+                1.032540668398048,
+                0.37875183560866066
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "handR",
+              "point": [
+                0.2740574933624411,
+                1.0311518506129753,
+                0.37797725400476745
+              ],
+              "kind": "surface"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "lod": 2,
+      "sourceSha256": "1198d8433e27e9b60c17d054548162315584e49e644d16426828005e846833ac",
+      "maximumDepthM": 0.0022951859665829963,
+      "depth": {
+        "quantiles": {
+          "count": 23,
+          "p50M": 0.0020494679938132857,
+          "p95M": 0.0022951859665829963,
+          "maxM": 0.0022951859665829963
+        },
+        "byRegion": {
+          "corrective-moved-distal-region": {
+            "count": 23,
+            "p50M": 0.0020494679938132857,
+            "p95M": 0.0022951859665829963,
+            "maxM": 0.0022951859665829963
+          }
+        },
+        "byBone": {
+          "handR": {
+            "count": 8,
+            "p50M": 0.0020494679938132857,
+            "p95M": 0.0020494679938132857,
+            "maxM": 0.0020494679938132857
+          },
+          "handL": {
+            "count": 15,
+            "p50M": 0.0014772562086369852,
+            "p95M": 0.0022951859665829963,
+            "maxM": 0.0022951859665829963
+          }
+        },
+        "method": "Actual solid containment and nearest triangle surface distance on triangle vertices, centroid and edge midpoints; finite sampling, not continuous penetration maximum",
+        "testedSamples": 10822,
+        "insideSamples": 23,
+        "maximumSampledPenetrationM": 0.0022951859665829963,
+        "deepestSample": [
+          0.6001820448270555,
+          1.0366196073513425,
+          0.3794164258152548
+        ]
+      },
+      "byHand": {
+        "handL": {
+          "collider": "steering-rim",
+          "colliderTriangles": 144,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 11,
+          "surfaceCrossingTriangles": 11,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {
+            "handL": 11
+          },
+          "minimumSeparationM": 0,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "handL",
+            "point": [
+              0.6157405306932295,
+              1.0351875957940744,
+              0.38647831305353214
+            ]
+          },
+          "sample": [
+            {
+              "bone": "handL",
+              "point": [
+                0.5985152469445412,
+                1.0337285696088536,
+                0.37492779921396757
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "handL",
+              "point": [
+                0.6052302503259641,
+                1.0354327122235059,
+                0.3799637783224606
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "handL",
+              "point": [
+                0.5982959490186723,
+                1.0382578691213162,
+                0.3754323701515251
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "handL",
+              "point": [
+                0.6063694093514813,
+                1.0323881257752459,
+                0.3793188779324109
+              ],
+              "kind": "surface"
+            }
+          ]
+        },
+        "handR": {
+          "collider": "steering-rim",
+          "colliderTriangles": 144,
+          "closedSolid": true,
+          "intersectingHumanTriangles": 7,
+          "surfaceCrossingTriangles": 7,
+          "fullyContainedTriangles": 0,
+          "dominantBones": {
+            "handR": 7
+          },
+          "minimumSeparationM": 0,
+          "minimumIsLowerBound": false,
+          "nearestHumanTriangle": {
+            "bone": "handR",
+            "point": [
+              0.2778026585242729,
+              1.0517832190835086,
+              0.3773360424640164
+            ]
+          },
+          "sample": [
+            {
+              "bone": "handR",
+              "point": [
+                0.28183985945499745,
+                1.0345060319130923,
+                0.3748170112991594
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "handR",
+              "point": [
+                0.28818791697336466,
+                1.0346404603013237,
+                0.37027515403324507
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "handR",
+              "point": [
+                0.27483052235990924,
+                1.032540668398048,
+                0.37875183560866066
+              ],
+              "kind": "surface"
+            },
+            {
+              "bone": "handR",
+              "point": [
+                0.2740574933624411,
+                1.0311518506129753,
+                0.37797725400476745
+              ],
+              "kind": "surface"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

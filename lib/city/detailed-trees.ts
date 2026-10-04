@@ -5,6 +5,7 @@ import {
 } from './tree-selection';
 import * as THREE from 'three';
 import { createTreeGeometry } from './assets/tree-geometry';
+import { MatureTrees } from './assets/mature-trees';
 import type {
   TreeLeafCandidate,
   TreeMaterialCandidate,
@@ -53,6 +54,8 @@ export class DetailedTrees {
   private leafCandidate: TreeLeafCandidate | null = null;
   private requestedMaterial: TreeMaterialCandidate = 'baseline';
   private activeMaterial: TreeMaterialCandidate = 'baseline';
+  private geometryCandidate: 'baseline' | 'blender' = 'blender';
+  private matureTrees: MatureTrees;
   private materials: {
     trunk: THREE.MeshStandardMaterial;
     leaf: THREE.MeshStandardMaterial;
@@ -73,6 +76,7 @@ export class DetailedTrees {
     this.spatial = new TreeSelection(this.trees);
     this.group.name = 'Nearby textured trees';
     e.vegetation.add(this.group);
+    this.matureTrees = new MatureTrees(e);
   }
   initialize() {
     if (this.ready || this.disposed || this.e.disposed) return;
@@ -203,6 +207,22 @@ export class DetailedTrees {
       extraTextures: this.leafCandidate ? 1 : 0,
     };
   }
+  async setGeometryCandidate(mode: 'baseline' | 'blender') {
+    if (
+      process.env.VANCOUVER_VISUAL_QA !== '1' ||
+      this.disposed ||
+      this.e.disposed
+    )
+      return false;
+    this.geometryCandidate = mode;
+    if (mode === 'blender') await this.matureTrees.load();
+    if (this.disposed || this.e.disposed) return false;
+    this.update(true);
+    return mode === 'baseline' || this.matureTrees.status === 'ready';
+  }
+  getGeometryCandidateState() {
+    return { active: this.geometryCandidate, ...this.matureTrees.state() };
+  }
   /** At most one unchanged geometry factory per render update; High never
    * creates Ultra pools. Unbuilt pools leave their original tree slots visible. */
   private buildNextPool() {
@@ -257,6 +277,7 @@ export class DetailedTrees {
   dispose() {
     if (this.disposed) return;
     this.disposed = true;
+    this.matureTrees.dispose();
     this.assetsReady = false;
     this.wantedPools = 0;
     if (
@@ -303,10 +324,27 @@ export class DetailedTrees {
         : 6
       : 0;
     if (this.selection.length) this.initialize();
+    // Browser comparisons rejected the mature broadleaf cost in High. Only
+    // Ultra pays for this package, once an eligible close source tree exists.
+    const useMatureTrees =
+      quality === 'ultra' && this.geometryCandidate === 'blender';
+    if (
+      useMatureTrees &&
+      this.matureTrees.status === 'idle' &&
+      this.selection.some(({ t, d }) => !t.conifer && d < 45 * 45)
+    )
+      void this.matureTrees.load().then(() => {
+        if (!this.disposed && !this.e.disposed) this.refresh = true;
+      });
     const built = this.buildNextPool();
     if (!changed && !built && !this.refresh) return;
     this.refresh = false;
-    const selected = this.assetsReady ? this.selection : [];
+    const selected =
+      this.assetsReady ||
+      (useMatureTrees && this.matureTrees.status === 'ready')
+        ? this.selection
+        : [];
+    this.matureTrees.reset();
     for (const p of this.pools) p.count = 0;
     const next = new Set<ForestTree>(),
       dirty = new Set<THREE.InstancedMesh>();
@@ -315,6 +353,21 @@ export class DetailedTrees {
       zero = new THREE.Matrix4().makeScale(0, 0, 0);
     for (let i = 0; i < selected.length; i++) {
       const { t, d } = selected[i];
+      if (
+        useMatureTrees &&
+        !t.conifer &&
+        d < 45 * 45 &&
+        this.matureTrees.count < 8 &&
+        this.matureTrees.add(t)
+      ) {
+        next.add(t);
+        if (!this.hidden.has(t))
+          for (const slot of t.slots || []) {
+            slot.mesh.setMatrixAt(slot.index, zero);
+            dirty.add(slot.mesh);
+          }
+        continue;
+      }
       const detail = quality === 'ultra' && d < 220 * 220 && i < 480 ? 1 : 0;
       const slot = (t.conifer ? 3 : 0) + t.variant;
       const pool = this.pools[detail * 6 + slot] || this.pools[slot];
@@ -347,6 +400,7 @@ export class DetailedTrees {
           dirty.add(slot.mesh);
         }
     this.hidden = next;
+    this.matureTrees.finish();
     for (const mesh of dirty) mesh.instanceMatrix.needsUpdate = true;
     for (const p of this.pools) {
       p.trunk.count = p.foliage.count = p.count;
@@ -357,5 +411,6 @@ export class DetailedTrees {
     this.group.visible = quality !== 'balanced';
     this.e.renderer.shadowMap.needsUpdate = true;
     this.e.data.detailedTreeCount = next.size;
+    this.e.data.matureTreeAssets = this.getGeometryCandidateState();
   }
 }

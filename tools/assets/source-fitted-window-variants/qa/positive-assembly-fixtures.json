@@ -1,0 +1,330 @@
+{
+  "status": "pass",
+  "scope": "two real source-selected optional pairs, two LODs, explicit old-sill suppression; no runtime activation",
+  "results": [
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 0,
+      "existingSillSlotId": "modern-sills:existing-planner-sill:7",
+      "result": {
+        "compatible": true,
+        "reason": null,
+        "status": "offline-paired-assembly-compatible",
+        "assemblyAccepted": true,
+        "assemblyStatus": "offline-geometric-pair-only",
+        "runtimeStatus": "runtime_pending_webgl",
+        "assetId": "modern-source-window-surround",
+        "lod": 0,
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "source": {
+          "structureId": "145639",
+          "featureId": "133049",
+          "edgeKey": "-326.275,445.400|-336.041,435.450",
+          "edgeLengthM": 13.942008638569467
+        },
+        "opening": {
+          "bay": 0,
+          "row": 1,
+          "left": 0.6335502159642368,
+          "right": 3.30195194367813,
+          "bottom": 8.2365,
+          "top": 10.481
+        },
+        "clearApertureM": {
+          "width": 2.6684017277138934,
+          "height": 2.2445000000000004
+        },
+        "attachment": {
+          "frame": "source-edge-foundation-local",
+          "alongM": 1.9677510798211835,
+          "rootYAboveFoundationM": 8.1365,
+          "wallNormalOffsetM": 0,
+          "wallPlaneZ": 0,
+          "localOpeningBottomM": 0.1,
+          "rule": "rootY=actual windowBounds.bottom-chosen sectionM; never use sill slot Y or recenter bounds"
+        },
+        "preserveExisting": [
+          "source-footprint-height-foundation",
+          "GIS-wall-and-collision",
+          "cedar-sill",
+          "ground-datum-entry-canopy",
+          "shader-glazing"
+        ],
+        "noNewWorldPlacement": true,
+        "createsPassableOpening": false,
+        "sillAssetId": "modern-source-window-paired-sill",
+        "sillAttachment": {
+          "frame": "same-window-frame-root",
+          "translationM": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "topYAboveFoundationM": 8.1305,
+          "frameBottomYAboveFoundationM": 8.1365,
+          "verifiedGapM": 0.006,
+          "rule": "sillTop=actual windowBounds.bottom-sectionM-0.006; never legacy sill-slot Y"
+        },
+        "replacement": {
+          "mode": "optional-atomic-pair",
+          "suppressExistingSillSlotId": "modern-sills:existing-planner-sill:7",
+          "retainOldFiles": true,
+          "requireCandidateEnabled": true,
+          "keepCanopyAndGISWallCollision": true
+        }
+      }
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 1,
+      "existingSillSlotId": "modern-sills:existing-planner-sill:7",
+      "result": {
+        "compatible": true,
+        "reason": null,
+        "status": "offline-paired-assembly-compatible",
+        "assemblyAccepted": true,
+        "assemblyStatus": "offline-geometric-pair-only",
+        "runtimeStatus": "runtime_pending_webgl",
+        "assetId": "modern-source-window-surround",
+        "lod": 1,
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "source": {
+          "structureId": "145639",
+          "featureId": "133049",
+          "edgeKey": "-326.275,445.400|-336.041,435.450",
+          "edgeLengthM": 13.942008638569467
+        },
+        "opening": {
+          "bay": 0,
+          "row": 1,
+          "left": 0.6335502159642368,
+          "right": 3.30195194367813,
+          "bottom": 8.2365,
+          "top": 10.481
+        },
+        "clearApertureM": {
+          "width": 2.6684017277138934,
+          "height": 2.2445000000000004
+        },
+        "attachment": {
+          "frame": "source-edge-foundation-local",
+          "alongM": 1.9677510798211835,
+          "rootYAboveFoundationM": 8.1365,
+          "wallNormalOffsetM": 0,
+          "wallPlaneZ": 0,
+          "localOpeningBottomM": 0.1,
+          "rule": "rootY=actual windowBounds.bottom-chosen sectionM; never use sill slot Y or recenter bounds"
+        },
+        "preserveExisting": [
+          "source-footprint-height-foundation",
+          "GIS-wall-and-collision",
+          "cedar-sill",
+          "ground-datum-entry-canopy",
+          "shader-glazing"
+        ],
+        "noNewWorldPlacement": true,
+        "createsPassableOpening": false,
+        "sillAssetId": "modern-source-window-paired-sill",
+        "sillAttachment": {
+          "frame": "same-window-frame-root",
+          "translationM": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "topYAboveFoundationM": 8.1305,
+          "frameBottomYAboveFoundationM": 8.1365,
+          "verifiedGapM": 0.006,
+          "rule": "sillTop=actual windowBounds.bottom-sectionM-0.006; never legacy sill-slot Y"
+        },
+        "replacement": {
+          "mode": "optional-atomic-pair",
+          "suppressExistingSillSlotId": "modern-sills:existing-planner-sill:7",
+          "retainOldFiles": true,
+          "requireCandidateEnabled": true,
+          "keepCanopyAndGISWallCollision": true
+        }
+      }
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 0,
+      "existingSillSlotId": "cedar-sills:existing-planner-sill:7",
+      "result": {
+        "compatible": true,
+        "reason": null,
+        "status": "offline-paired-assembly-compatible",
+        "assemblyAccepted": true,
+        "assemblyStatus": "offline-geometric-pair-only",
+        "runtimeStatus": "runtime_pending_webgl",
+        "assetId": "cedar-source-window-surround",
+        "lod": 0,
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "source": {
+          "structureId": "145755",
+          "featureId": "105546",
+          "edgeKey": "-229.513,444.825|-239.811,434.495",
+          "edgeLengthM": 14.58517058514925
+        },
+        "opening": {
+          "bay": 0,
+          "row": 1,
+          "left": 1.1792585292574624,
+          "right": 2.537775587772387,
+          "bottom": 4.941000000000001,
+          "top": 6.451500000000001
+        },
+        "clearApertureM": {
+          "width": 1.3585170585149247,
+          "height": 1.5105000000000004
+        },
+        "attachment": {
+          "frame": "source-edge-foundation-local",
+          "alongM": 1.8585170585149249,
+          "rootYAboveFoundationM": 4.871,
+          "wallNormalOffsetM": 0,
+          "wallPlaneZ": 0,
+          "localOpeningBottomM": 0.07,
+          "rule": "rootY=actual windowBounds.bottom-chosen sectionM; never use sill slot Y or recenter bounds"
+        },
+        "preserveExisting": [
+          "source-footprint-height-foundation",
+          "GIS-wall-and-collision",
+          "cedar-sill",
+          "ground-datum-entry-canopy",
+          "shader-glazing"
+        ],
+        "noNewWorldPlacement": true,
+        "createsPassableOpening": false,
+        "sillAssetId": "cedar-source-window-paired-sill",
+        "sillAttachment": {
+          "frame": "same-window-frame-root",
+          "translationM": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "topYAboveFoundationM": 4.865,
+          "frameBottomYAboveFoundationM": 4.871,
+          "verifiedGapM": 0.006,
+          "rule": "sillTop=actual windowBounds.bottom-sectionM-0.006; never legacy sill-slot Y"
+        },
+        "replacement": {
+          "mode": "optional-atomic-pair",
+          "suppressExistingSillSlotId": "cedar-sills:existing-planner-sill:7",
+          "retainOldFiles": true,
+          "requireCandidateEnabled": true,
+          "keepCanopyAndGISWallCollision": true
+        }
+      }
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 1,
+      "existingSillSlotId": "cedar-sills:existing-planner-sill:7",
+      "result": {
+        "compatible": true,
+        "reason": null,
+        "status": "offline-paired-assembly-compatible",
+        "assemblyAccepted": true,
+        "assemblyStatus": "offline-geometric-pair-only",
+        "runtimeStatus": "runtime_pending_webgl",
+        "assetId": "cedar-source-window-surround",
+        "lod": 1,
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "source": {
+          "structureId": "145755",
+          "featureId": "105546",
+          "edgeKey": "-229.513,444.825|-239.811,434.495",
+          "edgeLengthM": 14.58517058514925
+        },
+        "opening": {
+          "bay": 0,
+          "row": 1,
+          "left": 1.1792585292574624,
+          "right": 2.537775587772387,
+          "bottom": 4.941000000000001,
+          "top": 6.451500000000001
+        },
+        "clearApertureM": {
+          "width": 1.3585170585149247,
+          "height": 1.5105000000000004
+        },
+        "attachment": {
+          "frame": "source-edge-foundation-local",
+          "alongM": 1.8585170585149249,
+          "rootYAboveFoundationM": 4.871,
+          "wallNormalOffsetM": 0,
+          "wallPlaneZ": 0,
+          "localOpeningBottomM": 0.07,
+          "rule": "rootY=actual windowBounds.bottom-chosen sectionM; never use sill slot Y or recenter bounds"
+        },
+        "preserveExisting": [
+          "source-footprint-height-foundation",
+          "GIS-wall-and-collision",
+          "cedar-sill",
+          "ground-datum-entry-canopy",
+          "shader-glazing"
+        ],
+        "noNewWorldPlacement": true,
+        "createsPassableOpening": false,
+        "sillAssetId": "cedar-source-window-paired-sill",
+        "sillAttachment": {
+          "frame": "same-window-frame-root",
+          "translationM": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "topYAboveFoundationM": 4.865,
+          "frameBottomYAboveFoundationM": 4.871,
+          "verifiedGapM": 0.006,
+          "rule": "sillTop=actual windowBounds.bottom-sectionM-0.006; never legacy sill-slot Y"
+        },
+        "replacement": {
+          "mode": "optional-atomic-pair",
+          "suppressExistingSillSlotId": "cedar-sills:existing-planner-sill:7",
+          "retainOldFiles": true,
+          "requireCandidateEnabled": true,
+          "keepCanopyAndGISWallCollision": true
+        }
+      }
+    }
+  ]
+}

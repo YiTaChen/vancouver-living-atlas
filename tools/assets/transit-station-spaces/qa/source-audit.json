@@ -1,0 +1,79 @@
+{
+  "status": "complete",
+  "method": "Read repository source inventory and exact feature properties; no newly researched geographic placement",
+  "inputs": [
+    {
+      "path": "public/data/railways.json",
+      "sha256": "afbc7b5a83c60c49c183dae9e0b83d9e955929a952e02f29d01e301d354fc46a"
+    },
+    {
+      "path": "public/data/roads.geojson",
+      "sha256": "77543c74f4e567a65db14c8d33f9d6250d0f40bdd5f99031c1267aa8dc3373fb"
+    },
+    {
+      "path": "public/data/paths.geojson",
+      "sha256": "daf512c6eaee772df831462f3f0418f848d3737317b7219db51754ce0fae36b9"
+    },
+    {
+      "path": "DATA_SOURCES.md",
+      "sha256": "05092a15055d55b3470762aef5f9f694b7ff73072995018a4553cebff0bcee66"
+    },
+    {
+      "path": "lib/city/city-buses.ts",
+      "sha256": "f18a2208d546353af4560ec3ca26037376a308ca99202f390e4bf7c46ba39d72"
+    }
+  ],
+  "railCandidates": [
+    {
+      "routeId": "waterfront-gastown-steam-demo",
+      "kind": "steam",
+      "sourceIds": [
+        85214016,
+        764843622,
+        949249832
+      ],
+      "sourceRelationIds": [
+        1861617
+      ],
+      "sourceTimestamp": "2026-09-04T23:22:30Z",
+      "lengthM": 1119.04,
+      "selectedAsStation": false
+    },
+    {
+      "routeId": "expo-stadium-science-world-eastbound",
+      "kind": "skytrain",
+      "sourceIds": [
+        809550055,
+        923573507,
+        923573505,
+        1044143593
+      ],
+      "sourceRelationIds": [
+        5881297
+      ],
+      "sourceTimestamp": "2026-09-04T23:22:30Z",
+      "lengthM": 855.2,
+      "selectedAsStation": false
+    },
+    {
+      "routeId": "expo-science-world-stadium-westbound",
+      "kind": "skytrain",
+      "sourceIds": [
+        1044143594,
+        923573502,
+        923573506,
+        379689170
+      ],
+      "sourceRelationIds": [
+        207813
+      ],
+      "sourceTimestamp": "2026-09-04T23:22:30Z",
+      "lengthM": 893.61,
+      "selectedAsStation": false
+    }
+  ],
+  "railFinding": "Source-backed open-air Expo alignment exists; no platform footprint, surveyed floor, or entry connection record. Existing files omit underground sections. No station selected.",
+  "busFinding": "No stop_id, bus_stop or stopId feature metadata in repository roads/paths; procedural city bus route display is not a source-backed stop pair.",
+  "decision": "Unplaced representative local layouts; external map, stop IDs, walk-surface and rail-profile selection required before integration",
+  "license": "Existing rail geographic source remains ODbL-1.0, \u00a9 OpenStreetMap contributors. No new geographic geometry copied."
+}

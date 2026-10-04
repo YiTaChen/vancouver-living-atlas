@@ -1,0 +1,294 @@
+{
+  "status": "pass",
+  "scope": "common packaging, source hashes, rest-pose transformed GLB geometry and costs only; package-specific Blender, semantic and runtime checks required",
+  "results": [
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -1.4342008829116821,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          1.4342008829116821,
+          2.444499969482422,
+          0.25999999046325684
+        ],
+        "size": [
+          2.8684017658233643,
+          2.444499969482422,
+          0.23999999091029167
+        ]
+      },
+      "triangles": 88,
+      "vertices": 136,
+      "primitives": 1,
+      "bytes": 10248,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 10248,
+      "images": [],
+      "nodeNames": [
+        "window-frame"
+      ],
+      "materialNames": [
+        "painted-metal"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -1.4342008829116821,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          1.4342008829116821,
+          2.444499969482422,
+          0.25999999046325684
+        ],
+        "size": [
+          2.8684017658233643,
+          2.444499969482422,
+          0.23999999091029167
+        ]
+      },
+      "triangles": 72,
+      "vertices": 112,
+      "primitives": 1,
+      "bytes": 9004,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 9004,
+      "images": [],
+      "nodeNames": [
+        "window-frame"
+      ],
+      "materialNames": [
+        "painted-metal"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.7492585182189941,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          0.7492585182189941,
+          1.6505000591278076,
+          0.18000000715255737
+        ],
+        "size": [
+          1.4985170364379883,
+          1.6505000591278076,
+          0.1600000075995922
+        ]
+      },
+      "triangles": 88,
+      "vertices": 136,
+      "primitives": 1,
+      "bytes": 10188,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 10188,
+      "images": [],
+      "nodeNames": [
+        "window-frame"
+      ],
+      "materialNames": [
+        "cedar"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.7492585182189941,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          0.7492585182189941,
+          1.6505000591278076,
+          0.18000000715255737
+        ],
+        "size": [
+          1.4985170364379883,
+          1.6505000591278076,
+          0.1600000075995922
+        ]
+      },
+      "triangles": 72,
+      "vertices": 112,
+      "primitives": 1,
+      "bytes": 8940,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 8940,
+      "images": [],
+      "nodeNames": [
+        "window-frame"
+      ],
+      "materialNames": [
+        "cedar"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "modern-source-window-paired-sill",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -1.50420081615448,
+          -0.12999999523162842,
+          0.019999999552965164
+        ],
+        "max": [
+          1.50420081615448,
+          -0.006000000052154064,
+          0.3199999928474426
+        ],
+        "size": [
+          3.00840163230896,
+          0.12399999517947435,
+          0.29999999329447746
+        ]
+      },
+      "triangles": 40,
+      "vertices": 66,
+      "primitives": 1,
+      "bytes": 7512,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 7512,
+      "images": [],
+      "nodeNames": [
+        "window-sill"
+      ],
+      "materialNames": [
+        "painted-metal"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "modern-source-window-paired-sill",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -1.50420081615448,
+          -0.12999999523162842,
+          0.019999999552965164
+        ],
+        "max": [
+          1.50420081615448,
+          -0.006000000052154064,
+          0.3199999928474426
+        ],
+        "size": [
+          3.00840163230896,
+          0.12399999517947435,
+          0.29999999329447746
+        ]
+      },
+      "triangles": 28,
+      "vertices": 48,
+      "primitives": 1,
+      "bytes": 6576,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 6576,
+      "images": [],
+      "nodeNames": [
+        "window-sill"
+      ],
+      "materialNames": [
+        "painted-metal"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "cedar-source-window-paired-sill",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.8192585110664368,
+          -0.12999999523162842,
+          0.019999999552965164
+        ],
+        "max": [
+          0.8192585110664368,
+          -0.006000000052154064,
+          0.3100000023841858
+        ],
+        "size": [
+          1.6385170221328735,
+          0.12399999517947435,
+          0.2900000028312206
+        ]
+      },
+      "triangles": 36,
+      "vertices": 60,
+      "primitives": 1,
+      "bytes": 7024,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 7024,
+      "images": [],
+      "nodeNames": [
+        "window-sill"
+      ],
+      "materialNames": [
+        "cedar"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "cedar-source-window-paired-sill",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.8192585110664368,
+          -0.12999999523162842,
+          0.019999999552965164
+        ],
+        "max": [
+          0.8192585110664368,
+          -0.006000000052154064,
+          0.3100000023841858
+        ],
+        "size": [
+          1.6385170221328735,
+          0.12399999517947435,
+          0.2900000028312206
+        ]
+      },
+      "triangles": 20,
+      "vertices": 36,
+      "primitives": 1,
+      "bytes": 5772,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 5772,
+      "images": [],
+      "nodeNames": [
+        "window-sill"
+      ],
+      "materialNames": [
+        "cedar"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "sourcePackage": "tools/assets/rooftop-equipment",
+  "sourceRevision": "dc6e6b5",
+  "assets": [
+    {
+      "id": "hvac-compact-single",
+      "size": [
+        2.200000047683716,
+        1.100000023841858,
+        1.649999976158142
+      ],
+      "lods": [
+        {
+          "file": "hvac-compact-single.lod0.glb",
+          "sha256": "696673e0add593d237c41ff1809c4b6f29f0bdc8b1c41fc9b4596e1248fe26ac",
+          "triangles": 324,
+          "bytes": 34572
+        },
+        {
+          "file": "hvac-compact-single.lod1.glb",
+          "sha256": "57dc05e148844919da0f08f403b8ca838b97fb690daffbeb780a144df62c0b81",
+          "triangles": 70,
+          "bytes": 9908
+        }
+      ]
+    },
+    {
+      "id": "hvac-medium-twin",
+      "size": [
+        2.6700000762939453,
+        1.350000023841858,
+        2.049999952316284
+      ],
+      "lods": [
+        {
+          "file": "hvac-medium-twin.lod0.glb",
+          "sha256": "9f421db8b33722dffa78afd2f4dbc899c3b50640f3eaeaeec2f9795d02e56b60",
+          "triangles": 388,
+          "bytes": 40740
+        },
+        {
+          "file": "hvac-medium-twin.lod1.glb",
+          "sha256": "98869e938071237953d8c5fd0305cb2216f6b623d797fc81699ae44fca0c6aa9",
+          "triangles": 92,
+          "bytes": 11980
+        }
+      ]
+    },
+    {
+      "id": "hvac-wide-twin",
+      "size": [
+        3.609999895095825,
+        1.399999976158142,
+        2.450000047683716
+      ],
+      "lods": [
+        {
+          "file": "hvac-wide-twin.lod0.glb",
+          "sha256": "fd044bd6994fb81c4cadb28c9a150f4c41b7d8ee05ef2949b531b7f0e42085da",
+          "triangles": 388,
+          "bytes": 40736
+        },
+        {
+          "file": "hvac-wide-twin.lod1.glb",
+          "sha256": "95dff8624674ff8bdb3f59549de2471ff87e85e1910ca6c759bb5b3dde0a3c25",
+          "triangles": 92,
+          "bytes": 11976
+        }
+      ]
+    }
+  ]
+}

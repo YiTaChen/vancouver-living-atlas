@@ -1,0 +1,225 @@
+{
+  "status": "pass",
+  "method": "actual native Blender edits, save/reopen, ordinary glTF export and independent accessor/material comparison",
+  "results": [
+    {
+      "source": "cedar-source-window-paired-sill.lod0.blend",
+      "originalSourceSha256": "5a122b4689ff33afc8ab8af3ddb3baa419d50c8e71461ce432703786c1dffdfe",
+      "editedSourceSha256": "00e93b42f202f8799585acf0894b2c163970470bce91b73749f921ffeded4155",
+      "editedGlbSha256": "dc9cfc7d504386f9c81e8b60abd9f3e70269e6183a399081ae78d1604b02c1fe",
+      "vertexEditM": [
+        0.003,
+        0,
+        0
+      ],
+      "uvEditU": 0.017,
+      "roughnessEdit": 0.02,
+      "expectedEditedVertexGltfM": [
+        -0.8162584900856018,
+        -0.006000000052154064,
+        0.019999999552965164
+      ],
+      "expectedEditedGltfUV": [
+        0.030157895758748055,
+        1.0855263099074364
+      ],
+      "expectedRoughness": 0.7899999618530273,
+      "geometryPreserved": true,
+      "uvPreserved": true,
+      "materialFactorPreserved": true,
+      "originalAndEditedSourcesUnchangedByExport": true
+    },
+    {
+      "source": "cedar-source-window-paired-sill.lod1.blend",
+      "originalSourceSha256": "31549694398247c6c28eaf7f2f3bc1b41850a4aa27473ddfe2ecd1bd627e7402",
+      "editedSourceSha256": "cb39c99be834f753b7e2dd325540f874938f7a58dd75894d65807baa2a896d63",
+      "editedGlbSha256": "d264762f70be629ecd8d842515417d67eb8e5c74d4e35d6f7f0966008030b9b0",
+      "vertexEditM": [
+        0.003,
+        0,
+        0
+      ],
+      "uvEditU": 0.017,
+      "roughnessEdit": 0.02,
+      "expectedEditedVertexGltfM": [
+        -0.8162584900856018,
+        -0.006000000052154064,
+        0.019999999552965164
+      ],
+      "expectedEditedGltfUV": [
+        0.030157895758748055,
+        1.0855263099074364
+      ],
+      "expectedRoughness": 0.7899999618530273,
+      "geometryPreserved": true,
+      "uvPreserved": true,
+      "materialFactorPreserved": true,
+      "originalAndEditedSourcesUnchangedByExport": true
+    },
+    {
+      "source": "cedar-source-window-surround.lod0.blend",
+      "originalSourceSha256": "39bc6b5677336fefc5fc9e5c7e537346932e5412c66609f775c7725cf6399501",
+      "editedSourceSha256": "57d461358766b24a3924daf614057335292be146487c14b737d7ff5c22bf15bd",
+      "editedGlbSha256": "b0cec4c99574da393e4b8182cd8ece0c126339dd01f06b30837daa0674ec2ce6",
+      "vertexEditM": [
+        0.003,
+        0,
+        0
+      ],
+      "uvEditU": 0.017,
+      "roughnessEdit": 0.02,
+      "expectedEditedVertexGltfM": [
+        -0.7462584972381592,
+        0.0,
+        0.019999999552965164
+      ],
+      "expectedEditedGltfUV": [
+        -0.4759332537651062,
+        0.9868421051651239
+      ],
+      "expectedRoughness": 0.7899999618530273,
+      "geometryPreserved": true,
+      "uvPreserved": true,
+      "materialFactorPreserved": true,
+      "originalAndEditedSourcesUnchangedByExport": true
+    },
+    {
+      "source": "cedar-source-window-surround.lod1.blend",
+      "originalSourceSha256": "fa13a308fefa98ab65be3d163d964fd4423a9e7a4f7c7e791b5129b3dfad0451",
+      "editedSourceSha256": "3722231d7c61a07aaf52dda7385a5579742c7d46c263fdf00a096f7f89f3ee83",
+      "editedGlbSha256": "01873d10e53300d7e326060e4470361cfbd09598da369625abbc26018160bff1",
+      "vertexEditM": [
+        0.003,
+        0,
+        0
+      ],
+      "uvEditU": 0.017,
+      "roughnessEdit": 0.02,
+      "expectedEditedVertexGltfM": [
+        -0.7462584972381592,
+        0.0,
+        0.019999999552965164
+      ],
+      "expectedEditedGltfUV": [
+        -0.4759332537651062,
+        0.9868421051651239
+      ],
+      "expectedRoughness": 0.7899999618530273,
+      "geometryPreserved": true,
+      "uvPreserved": true,
+      "materialFactorPreserved": true,
+      "originalAndEditedSourcesUnchangedByExport": true
+    },
+    {
+      "source": "modern-source-window-paired-sill.lod0.blend",
+      "originalSourceSha256": "2699734258abbb9369bcd448847f790bfc9a799db8b7b1f0682ab4d87c04d7c6",
+      "editedSourceSha256": "1bc49ee7326988a908aa6028fc161bd3821cd2f7a3a88480496c06c3cb800c54",
+      "editedGlbSha256": "5c52cb3ea06436a10488581ae1bfbb54c57c475b3137d3acd9dfc0be2db36d9b",
+      "vertexEditM": [
+        0.003,
+        0,
+        0
+      ],
+      "uvEditU": 0.017,
+      "roughnessEdit": 0.02,
+      "expectedEditedVertexGltfM": [
+        -1.501200795173645,
+        -0.006000000052154064,
+        0.019999999552965164
+      ],
+      "expectedEditedGltfUV": [
+        0.041999999433755875,
+        1.058749996125698
+      ],
+      "expectedRoughness": 0.4099999964237213,
+      "geometryPreserved": true,
+      "uvPreserved": true,
+      "materialFactorPreserved": true,
+      "originalAndEditedSourcesUnchangedByExport": true
+    },
+    {
+      "source": "modern-source-window-paired-sill.lod1.blend",
+      "originalSourceSha256": "4d0224f58e55670715114a4abe66bd13b9c205134b72e6d0575fe8c01befc870",
+      "editedSourceSha256": "da3ad119ed442f3d68aeeefec26692ba8dde87c8a8af2b1f1b022e3c17db4bb5",
+      "editedGlbSha256": "ed9a1402da1829f2e96ecb870cd06549f487a22aa6e98158e366cb5ece78a18d",
+      "vertexEditM": [
+        0.003,
+        0,
+        0
+      ],
+      "uvEditU": 0.017,
+      "roughnessEdit": 0.02,
+      "expectedEditedVertexGltfM": [
+        -1.501200795173645,
+        -0.006000000052154064,
+        0.019999999552965164
+      ],
+      "expectedEditedGltfUV": [
+        0.041999999433755875,
+        1.058749996125698
+      ],
+      "expectedRoughness": 0.4099999964237213,
+      "geometryPreserved": true,
+      "uvPreserved": true,
+      "materialFactorPreserved": true,
+      "originalAndEditedSourcesUnchangedByExport": true
+    },
+    {
+      "source": "modern-source-window-surround.lod0.blend",
+      "originalSourceSha256": "f4eae28d460dc4dee32db729f2a3de57f1b7d45fb547080173025ddfcbf7637a",
+      "editedSourceSha256": "9ef0d440cde67244511dedf2f6d89f44fa90a4343c56844f04729295d88add8b",
+      "editedGlbSha256": "0412c41ff85ee1b2de8d51313e579e62b00c7e8a637a3293f8cc360cff8d643c",
+      "vertexEditM": [
+        0.003,
+        0,
+        0
+      ],
+      "uvEditU": 0.017,
+      "roughnessEdit": 0.02,
+      "expectedEditedVertexGltfM": [
+        -1.4312008619308472,
+        0.0,
+        0.019999999552965164
+      ],
+      "expectedEditedGltfUV": [
+        -1.7757511138916016,
+        0.9750000014901161
+      ],
+      "expectedRoughness": 0.4099999964237213,
+      "geometryPreserved": true,
+      "uvPreserved": true,
+      "materialFactorPreserved": true,
+      "originalAndEditedSourcesUnchangedByExport": true
+    },
+    {
+      "source": "modern-source-window-surround.lod1.blend",
+      "originalSourceSha256": "ecafb5b06c7cffda7da7582889a86148d343a956fbfb05de249c2044853f6ae0",
+      "editedSourceSha256": "d8286c0bf1e3e4ceccb89af678e5a4f1975a9466081ceb0427a68928bce7c802",
+      "editedGlbSha256": "f611535537789f9536f67cec20c608c79c0ff3cf0de856501462f806504ceda1",
+      "vertexEditM": [
+        0.003,
+        0,
+        0
+      ],
+      "uvEditU": 0.017,
+      "roughnessEdit": 0.02,
+      "expectedEditedVertexGltfM": [
+        -1.4312008619308472,
+        0.0,
+        0.019999999552965164
+      ],
+      "expectedEditedGltfUV": [
+        -1.7757511138916016,
+        0.9750000014901161
+      ],
+      "expectedRoughness": 0.4099999964237213,
+      "geometryPreserved": true,
+      "uvPreserved": true,
+      "materialFactorPreserved": true,
+      "originalAndEditedSourcesUnchangedByExport": true
+    }
+  ],
+  "unsupportedMaterialNodeRejected": "unsupported material nodes cannot be silently flattened",
+  "temporaryProofFiles": "not packaged; repeat this audit to regenerate",
+  "limitation": "single mesh with explicit quads and supported opaque Principled factors; arbitrary nodes/modifiers are rejected, never silently rebuilt"
+}

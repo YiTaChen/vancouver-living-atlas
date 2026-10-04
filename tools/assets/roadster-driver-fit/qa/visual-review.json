@@ -1,0 +1,54 @@
+{
+  "status": "pass_with_documented_limits",
+  "imagesReviewed": [
+    {
+      "file": "qa/previews/module-lods-sunny.png",
+      "sha256": "a3906916e77d9c4ab93110d1dd3c5be2d2627c315605b0a4642b9fc09ea781ac"
+    },
+    {
+      "file": "qa/previews/module-lods-overcast.png",
+      "sha256": "7384138654f63ed2635b614a9a5a0d18fdb2e24a2ba48611ff5aeef16207b421"
+    },
+    {
+      "file": "qa/previews/module-lods-dusk.png",
+      "sha256": "becc3d5fe59e32efe815648a046f701c9ee106c6fe412ce49515ba8377a34b23"
+    },
+    {
+      "file": "qa/previews/module-lods-night.png",
+      "sha256": "cc0bb7f9437695e57208550cf190c785285abba1fcc8842602cf9da9d15a1e5c"
+    },
+    {
+      "file": "qa/previews/driver-full.png",
+      "sha256": "632513b88c77b5f12b9b39854757d182e540a02dd3429ede9a86de9a6a68f42f"
+    },
+    {
+      "file": "qa/previews/driver-hands.png",
+      "sha256": "b960b8adfe9100eb339fcce7cf563a9ac86a8cca5066967e5fe987f8e2272ee4"
+    },
+    {
+      "file": "qa/previews/driver-footwell.png",
+      "sha256": "5436d6e4852b5b4df95f6d789f678973850fe83d81dbcc0421df652fcd8ea93e"
+    },
+    {
+      "file": "qa/previews/driver-side.png",
+      "sha256": "d0b9e7a15b7f427d8f552216950cba1a35e8b5b883dc5d3da8b41f1c048aa84e"
+    },
+    {
+      "file": "qa/previews/driver-support.png",
+      "sha256": "edbca4e501497589d9dd87b047f4b40aa6c26b88a4ce64c5ed5e12b8fd666613"
+    }
+  ],
+  "observations": [
+    "All five actual reimport driver views and four module-lighting views inspected. Full view preserves original Roadster exterior silhouette, wheels and windshield.",
+    "Side view includes full seated character, natural extended feet, dashboard opening and raised steering; no nonuniform scaling.",
+    "Hands view shows approximate9/3 grip with fingers around rim; actual active-morph depth is measured separately, not accepted by visual inspection alone.",
+    "Support view deliberately hides console and seat side bolsters to expose the actual cushion/backrest air gap; hidden-node inventory is in render evidence.",
+    "Footwell view shows both soles over driver-only continuation and original-floor join.",
+    "Three module LODs retain matching support geometry and opaque dark/metal roles in sunny, overcast, dusk and night settings."
+  ],
+  "limits": [
+    "Backrest gap remains visible and quantified; no comfort/ergonomic or physical compression claim.",
+    "Original decorative seat seam strips are preserved as rigid source geometry, including source floating-over-curved-cushion appearance.",
+    "Cycles24 samples is compact evidence and shows some glass/edge noise; no WebGL performance or gameplay certification."
+  ]
+}

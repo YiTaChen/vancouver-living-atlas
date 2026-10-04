@@ -1,0 +1,392 @@
+{
+  "status": "pass",
+  "originalModel": "public/models/citizen/vancouver-citizen.glb",
+  "originalSha256": "14d66fabe097abf82ef36800561c06ee7263c0acfd6b5ea1265a40ed35841ff8",
+  "statement": "Original approximately 1.81 m citizen, all 22 inverse binds and exact limb lengths preserved; no human or car nonuniform scale.",
+  "records": [
+    {
+      "lod": 0,
+      "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod0.glb",
+      "sha256": "a6e21e8d1d97f8be38e49a716ee8a6ac9cca54fd31b84b13617c705b665c97fc",
+      "skins": 2,
+      "bonesPerSkin": 22,
+      "standingHeadTopM": 1.8052750824785593,
+      "originalStandingHeadTopM": 1.8052752016878484,
+      "maximumInverseBindDelta": 0,
+      "maximumLimbLengthDeltaM": 1.6195751098568856e-7,
+      "maximumPosedBoneWorldScaleError": 7.627871743132175e-7,
+      "originalLengths": [
+        {
+          "pair": [
+            "thighL",
+            "shinL"
+          ],
+          "m": 0.42511779740704425
+        },
+        {
+          "pair": [
+            "shinL",
+            "footL"
+          ],
+          "m": 0.37604394846996736
+        },
+        {
+          "pair": [
+            "upperArmL",
+            "foreArmL"
+          ],
+          "m": 0.29074556391990636
+        },
+        {
+          "pair": [
+            "foreArmL",
+            "handL"
+          ],
+          "m": 0.2276335014206192
+        },
+        {
+          "pair": [
+            "thighR",
+            "shinR"
+          ],
+          "m": 0.4251177974070443
+        },
+        {
+          "pair": [
+            "shinR",
+            "footR"
+          ],
+          "m": 0.3760439484699672
+        },
+        {
+          "pair": [
+            "upperArmR",
+            "foreArmR"
+          ],
+          "m": 0.2907455582211402
+        },
+        {
+          "pair": [
+            "foreArmR",
+            "handR"
+          ],
+          "m": 0.2276334258773033
+        }
+      ],
+      "posedLengths": [
+        {
+          "pair": [
+            "thighL",
+            "shinL"
+          ],
+          "m": 0.42511783934621683
+        },
+        {
+          "pair": [
+            "shinL",
+            "footL"
+          ],
+          "m": 0.37604408067164913
+        },
+        {
+          "pair": [
+            "upperArmL",
+            "foreArmL"
+          ],
+          "m": 0.29074544437153715
+        },
+        {
+          "pair": [
+            "foreArmL",
+            "handL"
+          ],
+          "m": 0.2276333394631082
+        },
+        {
+          "pair": [
+            "thighR",
+            "shinR"
+          ],
+          "m": 0.4251177582582172
+        },
+        {
+          "pair": [
+            "shinR",
+            "footR"
+          ],
+          "m": 0.3760440899779351
+        },
+        {
+          "pair": [
+            "upperArmR",
+            "foreArmR"
+          ],
+          "m": 0.2907454560699796
+        },
+        {
+          "pair": [
+            "foreArmR",
+            "handR"
+          ],
+          "m": 0.22763340061718665
+        }
+      ]
+    },
+    {
+      "lod": 1,
+      "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod1.glb",
+      "sha256": "1cb79599d359175c39ce0d466173f5293d7bbcb16a8f08450bd851c09ce0a0c0",
+      "skins": 2,
+      "bonesPerSkin": 22,
+      "standingHeadTopM": 1.8052750824785593,
+      "originalStandingHeadTopM": 1.8052752016878484,
+      "maximumInverseBindDelta": 0,
+      "maximumLimbLengthDeltaM": 1.6195751098568856e-7,
+      "maximumPosedBoneWorldScaleError": 7.627871743132175e-7,
+      "originalLengths": [
+        {
+          "pair": [
+            "thighL",
+            "shinL"
+          ],
+          "m": 0.42511779740704425
+        },
+        {
+          "pair": [
+            "shinL",
+            "footL"
+          ],
+          "m": 0.37604394846996736
+        },
+        {
+          "pair": [
+            "upperArmL",
+            "foreArmL"
+          ],
+          "m": 0.29074556391990636
+        },
+        {
+          "pair": [
+            "foreArmL",
+            "handL"
+          ],
+          "m": 0.2276335014206192
+        },
+        {
+          "pair": [
+            "thighR",
+            "shinR"
+          ],
+          "m": 0.4251177974070443
+        },
+        {
+          "pair": [
+            "shinR",
+            "footR"
+          ],
+          "m": 0.3760439484699672
+        },
+        {
+          "pair": [
+            "upperArmR",
+            "foreArmR"
+          ],
+          "m": 0.2907455582211402
+        },
+        {
+          "pair": [
+            "foreArmR",
+            "handR"
+          ],
+          "m": 0.2276334258773033
+        }
+      ],
+      "posedLengths": [
+        {
+          "pair": [
+            "thighL",
+            "shinL"
+          ],
+          "m": 0.42511783934621683
+        },
+        {
+          "pair": [
+            "shinL",
+            "footL"
+          ],
+          "m": 0.37604408067164913
+        },
+        {
+          "pair": [
+            "upperArmL",
+            "foreArmL"
+          ],
+          "m": 0.29074544437153715
+        },
+        {
+          "pair": [
+            "foreArmL",
+            "handL"
+          ],
+          "m": 0.2276333394631082
+        },
+        {
+          "pair": [
+            "thighR",
+            "shinR"
+          ],
+          "m": 0.4251177582582172
+        },
+        {
+          "pair": [
+            "shinR",
+            "footR"
+          ],
+          "m": 0.3760440899779351
+        },
+        {
+          "pair": [
+            "upperArmR",
+            "foreArmR"
+          ],
+          "m": 0.2907454560699796
+        },
+        {
+          "pair": [
+            "foreArmR",
+            "handR"
+          ],
+          "m": 0.22763340061718665
+        }
+      ]
+    },
+    {
+      "lod": 2,
+      "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod2.glb",
+      "sha256": "1198d8433e27e9b60c17d054548162315584e49e644d16426828005e846833ac",
+      "skins": 2,
+      "bonesPerSkin": 22,
+      "standingHeadTopM": 1.8052750824785593,
+      "originalStandingHeadTopM": 1.8052752016878484,
+      "maximumInverseBindDelta": 0,
+      "maximumLimbLengthDeltaM": 1.6195751098568856e-7,
+      "maximumPosedBoneWorldScaleError": 7.627871743132175e-7,
+      "originalLengths": [
+        {
+          "pair": [
+            "thighL",
+            "shinL"
+          ],
+          "m": 0.42511779740704425
+        },
+        {
+          "pair": [
+            "shinL",
+            "footL"
+          ],
+          "m": 0.37604394846996736
+        },
+        {
+          "pair": [
+            "upperArmL",
+            "foreArmL"
+          ],
+          "m": 0.29074556391990636
+        },
+        {
+          "pair": [
+            "foreArmL",
+            "handL"
+          ],
+          "m": 0.2276335014206192
+        },
+        {
+          "pair": [
+            "thighR",
+            "shinR"
+          ],
+          "m": 0.4251177974070443
+        },
+        {
+          "pair": [
+            "shinR",
+            "footR"
+          ],
+          "m": 0.3760439484699672
+        },
+        {
+          "pair": [
+            "upperArmR",
+            "foreArmR"
+          ],
+          "m": 0.2907455582211402
+        },
+        {
+          "pair": [
+            "foreArmR",
+            "handR"
+          ],
+          "m": 0.2276334258773033
+        }
+      ],
+      "posedLengths": [
+        {
+          "pair": [
+            "thighL",
+            "shinL"
+          ],
+          "m": 0.42511783934621683
+        },
+        {
+          "pair": [
+            "shinL",
+            "footL"
+          ],
+          "m": 0.37604408067164913
+        },
+        {
+          "pair": [
+            "upperArmL",
+            "foreArmL"
+          ],
+          "m": 0.29074544437153715
+        },
+        {
+          "pair": [
+            "foreArmL",
+            "handL"
+          ],
+          "m": 0.2276333394631082
+        },
+        {
+          "pair": [
+            "thighR",
+            "shinR"
+          ],
+          "m": 0.4251177582582172
+        },
+        {
+          "pair": [
+            "shinR",
+            "footR"
+          ],
+          "m": 0.3760440899779351
+        },
+        {
+          "pair": [
+            "upperArmR",
+            "foreArmR"
+          ],
+          "m": 0.2907454560699796
+        },
+        {
+          "pair": [
+            "foreArmR",
+            "handR"
+          ],
+          "m": 0.22763340061718665
+        }
+      ]
+    }
+  ]
+}

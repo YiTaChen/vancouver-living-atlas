@@ -1,0 +1,130 @@
+{
+  "status": "pass",
+  "scope": "offline E01 package, no WebGL acceptance",
+  "commonContract": "pass",
+  "results": [
+    {
+      "assetId": "traffic-sedan",
+      "lod": 0,
+      "status": "pass",
+      "triangles": 1252,
+      "bytes": 136820,
+      "primitives": 11,
+      "checks": [
+        "common GLB/hashes/bounds/normals/indices",
+        "UV/tangents",
+        "source compression and reopen audit hash",
+        "dimension and shared datum",
+        "wheel centres/radii and real arch relief",
+        "unique coplanar triangles",
+        "three semantic roles/no maps",
+        "collision and static turning envelope",
+        "LOD budgets and bounds",
+        "11/7/3 semantic batching cap"
+      ]
+    },
+    {
+      "assetId": "traffic-sedan",
+      "lod": 1,
+      "status": "pass",
+      "triangles": 564,
+      "bytes": 70956,
+      "primitives": 7,
+      "checks": [
+        "common GLB/hashes/bounds/normals/indices",
+        "UV/tangents",
+        "source compression and reopen audit hash",
+        "dimension and shared datum",
+        "wheel centres/radii and real arch relief",
+        "unique coplanar triangles",
+        "three semantic roles/no maps",
+        "collision and static turning envelope",
+        "LOD budgets and bounds",
+        "11/7/3 semantic batching cap"
+      ]
+    },
+    {
+      "assetId": "traffic-sedan",
+      "lod": 2,
+      "status": "pass",
+      "triangles": 116,
+      "bytes": 18484,
+      "primitives": 3,
+      "checks": [
+        "common GLB/hashes/bounds/normals/indices",
+        "UV/tangents",
+        "source compression and reopen audit hash",
+        "dimension and shared datum",
+        "wheel centres/radii and real arch relief",
+        "unique coplanar triangles",
+        "three semantic roles/no maps",
+        "collision and static turning envelope",
+        "LOD budgets and bounds",
+        "11/7/3 semantic batching cap"
+      ]
+    },
+    {
+      "assetId": "traffic-suv",
+      "lod": 0,
+      "status": "pass",
+      "triangles": 1252,
+      "bytes": 137192,
+      "primitives": 11,
+      "checks": [
+        "common GLB/hashes/bounds/normals/indices",
+        "UV/tangents",
+        "source compression and reopen audit hash",
+        "dimension and shared datum",
+        "wheel centres/radii and real arch relief",
+        "unique coplanar triangles",
+        "three semantic roles/no maps",
+        "collision and static turning envelope",
+        "LOD budgets and bounds",
+        "11/7/3 semantic batching cap"
+      ]
+    },
+    {
+      "assetId": "traffic-suv",
+      "lod": 1,
+      "status": "pass",
+      "triangles": 564,
+      "bytes": 71324,
+      "primitives": 7,
+      "checks": [
+        "common GLB/hashes/bounds/normals/indices",
+        "UV/tangents",
+        "source compression and reopen audit hash",
+        "dimension and shared datum",
+        "wheel centres/radii and real arch relief",
+        "unique coplanar triangles",
+        "three semantic roles/no maps",
+        "collision and static turning envelope",
+        "LOD budgets and bounds",
+        "11/7/3 semantic batching cap"
+      ]
+    },
+    {
+      "assetId": "traffic-suv",
+      "lod": 2,
+      "status": "pass",
+      "triangles": 116,
+      "bytes": 18468,
+      "primitives": 3,
+      "checks": [
+        "common GLB/hashes/bounds/normals/indices",
+        "UV/tangents",
+        "source compression and reopen audit hash",
+        "dimension and shared datum",
+        "wheel centres/radii and real arch relief",
+        "unique coplanar triangles",
+        "three semantic roles/no maps",
+        "collision and static turning envelope",
+        "LOD budgets and bounds",
+        "11/7/3 semantic batching cap"
+      ]
+    }
+  ],
+  "sourceEditProof": "pass",
+  "previewCount": 20,
+  "runtimeChecks": "not_run"
+}

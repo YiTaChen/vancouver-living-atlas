@@ -1,0 +1,688 @@
+{
+  "blender": "4.3.2",
+  "device": "CPU",
+  "threads": 2,
+  "assets": [
+    {
+      "id": "citizen",
+      "lod": 0,
+      "source": "source/citizen.lod0.blend",
+      "export": "exports/citizen.lod0.glb",
+      "maps": [
+        {
+          "uri": "textures/citizen-d750e70a2bafbdb5.png",
+          "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+          "bytes": 679771
+        },
+        {
+          "uri": "textures/citizen-53e23506fc52ad56.png",
+          "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+          "bytes": 696823
+        },
+        {
+          "uri": "textures/citizen-97cbd4395750f8b9.png",
+          "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+          "bytes": 309221
+        }
+      ],
+      "info": {}
+    },
+    {
+      "id": "citizen",
+      "lod": 1,
+      "source": "source/citizen.lod1.blend",
+      "export": "exports/citizen.lod1.glb",
+      "maps": [
+        {
+          "uri": "textures/citizen-d750e70a2bafbdb5.png",
+          "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+          "bytes": 679771
+        },
+        {
+          "uri": "textures/citizen-53e23506fc52ad56.png",
+          "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+          "bytes": 696823
+        },
+        {
+          "uri": "textures/citizen-97cbd4395750f8b9.png",
+          "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+          "bytes": 309221
+        }
+      ],
+      "info": {}
+    },
+    {
+      "id": "citizen",
+      "lod": 2,
+      "source": "source/citizen.lod2.blend",
+      "export": "exports/citizen.lod2.glb",
+      "maps": [
+        {
+          "uri": "textures/citizen-d750e70a2bafbdb5.png",
+          "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+          "bytes": 679771
+        },
+        {
+          "uri": "textures/citizen-53e23506fc52ad56.png",
+          "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+          "bytes": 696823
+        },
+        {
+          "uri": "textures/citizen-97cbd4395750f8b9.png",
+          "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+          "bytes": 309221
+        }
+      ],
+      "info": {}
+    },
+    {
+      "id": "police",
+      "lod": 0,
+      "source": "source/police.lod0.blend",
+      "export": "exports/police.lod0.glb",
+      "maps": [
+        {
+          "uri": "textures/citizen-d750e70a2bafbdb5.png",
+          "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+          "bytes": 679771
+        },
+        {
+          "uri": "textures/citizen-53e23506fc52ad56.png",
+          "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+          "bytes": 696823
+        },
+        {
+          "uri": "textures/citizen-97cbd4395750f8b9.png",
+          "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+          "bytes": 309221
+        }
+      ],
+      "info": {
+        "garmentOnlyFaces": 16462,
+        "hatAddsStatureM": 0.0535,
+        "design": "original abstract shield; no official insignia, external textures or models"
+      }
+    },
+    {
+      "id": "police",
+      "lod": 1,
+      "source": "source/police.lod1.blend",
+      "export": "exports/police.lod1.glb",
+      "maps": [
+        {
+          "uri": "textures/citizen-d750e70a2bafbdb5.png",
+          "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+          "bytes": 679771
+        },
+        {
+          "uri": "textures/citizen-53e23506fc52ad56.png",
+          "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+          "bytes": 696823
+        },
+        {
+          "uri": "textures/citizen-97cbd4395750f8b9.png",
+          "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+          "bytes": 309221
+        }
+      ],
+      "info": {
+        "garmentOnlyFaces": 10494,
+        "hatAddsStatureM": 0.0535,
+        "design": "original abstract shield; no official insignia, external textures or models"
+      }
+    },
+    {
+      "id": "police",
+      "lod": 2,
+      "source": "source/police.lod2.blend",
+      "export": "exports/police.lod2.glb",
+      "maps": [
+        {
+          "uri": "textures/citizen-d750e70a2bafbdb5.png",
+          "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+          "bytes": 679771
+        },
+        {
+          "uri": "textures/citizen-53e23506fc52ad56.png",
+          "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+          "bytes": 696823
+        },
+        {
+          "uri": "textures/citizen-97cbd4395750f8b9.png",
+          "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+          "bytes": 309221
+        }
+      ],
+      "info": {
+        "garmentOnlyFaces": 8658,
+        "hatAddsStatureM": 0.0535,
+        "design": "original abstract shield; no official insignia, external textures or models"
+      }
+    },
+    {
+      "id": "driver",
+      "lod": 0,
+      "source": "source/driver.lod0.blend",
+      "export": "exports/driver.lod0.glb",
+      "maps": [
+        {
+          "uri": "textures/citizen-d750e70a2bafbdb5.png",
+          "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+          "bytes": 679771
+        },
+        {
+          "uri": "textures/citizen-53e23506fc52ad56.png",
+          "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+          "bytes": 696823
+        },
+        {
+          "uri": "textures/citizen-97cbd4395750f8b9.png",
+          "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+          "bytes": 309221
+        }
+      ],
+      "info": {
+        "placementToRoadsterRoot": {
+          "translation": [
+            0.44,
+            0,
+            -0.06
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        "clip": "driver-seated",
+        "boneHeadsBlenderLocalM": {
+          "hips": [
+            1.8932661725304283e-29,
+            0.0,
+            0.7200000286102295
+          ],
+          "head": [
+            -1.9396554742684598e-15,
+            -0.10187670588493347,
+            1.3192923069000244
+          ],
+          "handL": [
+            0.1419999748468399,
+            -0.41018688678741455,
+            0.8802382946014404
+          ],
+          "handR": [
+            -0.1420000046491623,
+            -0.41018691658973694,
+            0.8802382946014404
+          ],
+          "footL": [
+            0.1300000101327896,
+            -0.5,
+            0.6060000658035278
+          ],
+          "footR": [
+            -0.12999999523162842,
+            -0.4999999403953552,
+            0.6060000061988831
+          ]
+        },
+        "seatContact": "Proposed hip position in measured cushion footprint; does not reuse short decorative driver hip.",
+        "feet": "Proposed ankle at Y=.606; original floor slab top=.475, expected shoe sole=.479. Current Roadster has no pedals.",
+        "source": "lib/city/assets/roadster.ts",
+        "cameraContract": "Measured seated head to be reported; existing camera [.45,1.2,0] is not silently moved."
+      }
+    },
+    {
+      "id": "driver",
+      "lod": 1,
+      "source": "source/driver.lod1.blend",
+      "export": "exports/driver.lod1.glb",
+      "maps": [
+        {
+          "uri": "textures/citizen-d750e70a2bafbdb5.png",
+          "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+          "bytes": 679771
+        },
+        {
+          "uri": "textures/citizen-53e23506fc52ad56.png",
+          "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+          "bytes": 696823
+        },
+        {
+          "uri": "textures/citizen-97cbd4395750f8b9.png",
+          "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+          "bytes": 309221
+        }
+      ],
+      "info": {
+        "placementToRoadsterRoot": {
+          "translation": [
+            0.44,
+            0,
+            -0.06
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        "clip": "driver-seated",
+        "boneHeadsBlenderLocalM": {
+          "hips": [
+            1.8932661725304283e-29,
+            0.0,
+            0.7200000286102295
+          ],
+          "head": [
+            -1.9396554742684598e-15,
+            -0.10187670588493347,
+            1.3192923069000244
+          ],
+          "handL": [
+            0.1419999748468399,
+            -0.41018688678741455,
+            0.8802382946014404
+          ],
+          "handR": [
+            -0.1420000046491623,
+            -0.41018691658973694,
+            0.8802382946014404
+          ],
+          "footL": [
+            0.1300000101327896,
+            -0.5,
+            0.6060000658035278
+          ],
+          "footR": [
+            -0.12999999523162842,
+            -0.4999999403953552,
+            0.6060000061988831
+          ]
+        },
+        "seatContact": "Proposed hip position in measured cushion footprint; does not reuse short decorative driver hip.",
+        "feet": "Proposed ankle at Y=.606; original floor slab top=.475, expected shoe sole=.479. Current Roadster has no pedals.",
+        "source": "lib/city/assets/roadster.ts",
+        "cameraContract": "Measured seated head to be reported; existing camera [.45,1.2,0] is not silently moved."
+      }
+    },
+    {
+      "id": "driver",
+      "lod": 2,
+      "source": "source/driver.lod2.blend",
+      "export": "exports/driver.lod2.glb",
+      "maps": [
+        {
+          "uri": "textures/citizen-d750e70a2bafbdb5.png",
+          "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+          "bytes": 679771
+        },
+        {
+          "uri": "textures/citizen-53e23506fc52ad56.png",
+          "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+          "bytes": 696823
+        },
+        {
+          "uri": "textures/citizen-97cbd4395750f8b9.png",
+          "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+          "bytes": 309221
+        }
+      ],
+      "info": {
+        "placementToRoadsterRoot": {
+          "translation": [
+            0.44,
+            0,
+            -0.06
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        "clip": "driver-seated",
+        "boneHeadsBlenderLocalM": {
+          "hips": [
+            1.8932661725304283e-29,
+            0.0,
+            0.7200000286102295
+          ],
+          "head": [
+            -1.9396554742684598e-15,
+            -0.10187670588493347,
+            1.3192923069000244
+          ],
+          "handL": [
+            0.1419999748468399,
+            -0.41018688678741455,
+            0.8802382946014404
+          ],
+          "handR": [
+            -0.1420000046491623,
+            -0.41018691658973694,
+            0.8802382946014404
+          ],
+          "footL": [
+            0.1300000101327896,
+            -0.5,
+            0.6060000658035278
+          ],
+          "footR": [
+            -0.12999999523162842,
+            -0.4999999403953552,
+            0.6060000061988831
+          ]
+        },
+        "seatContact": "Proposed hip position in measured cushion footprint; does not reuse short decorative driver hip.",
+        "feet": "Proposed ankle at Y=.606; original floor slab top=.475, expected shoe sole=.479. Current Roadster has no pedals.",
+        "source": "lib/city/assets/roadster.ts",
+        "cameraContract": "Measured seated head to be reported; existing camera [.45,1.2,0] is not silently moved."
+      }
+    },
+    {
+      "id": "driver-roadster-fit",
+      "lod": 0,
+      "source": "source/driver-roadster-fit.lod0.blend",
+      "export": "exports/driver-roadster-fit.lod0.glb",
+      "maps": [
+        {
+          "uri": "textures/citizen-d750e70a2bafbdb5.png",
+          "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+          "bytes": 679771
+        },
+        {
+          "uri": "textures/citizen-53e23506fc52ad56.png",
+          "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+          "bytes": 696823
+        },
+        {
+          "uri": "textures/citizen-97cbd4395750f8b9.png",
+          "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+          "bytes": 309221
+        }
+      ],
+      "info": {
+        "placementToRoadsterRoot": {
+          "translation": [
+            0.44,
+            0,
+            -0.06
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        "clip": "driver-seated",
+        "boneHeadsBlenderLocalM": {
+          "hips": [
+            1.8932661725304283e-29,
+            0.0,
+            0.7200000286102295
+          ],
+          "head": [
+            -4.1642956071571025e-16,
+            0.06819478422403336,
+            1.3252313137054443
+          ],
+          "handL": [
+            0.1600000262260437,
+            -0.3319999873638153,
+            1.059999942779541
+          ],
+          "handR": [
+            -0.1599999964237213,
+            -0.3320000171661377,
+            1.059999942779541
+          ],
+          "footL": [
+            0.12999998033046722,
+            -0.7200000882148743,
+            0.6060000658035278
+          ],
+          "footR": [
+            -0.12999995052814484,
+            -0.7200000286102295,
+            0.6060000061988831
+          ]
+        },
+        "seatContact": "Proposed hip position in measured cushion footprint; does not reuse short decorative driver hip.",
+        "feet": "Proposed ankle at Y=.606; original floor slab top=.475, expected shoe sole=.479. Current Roadster has no pedals.",
+        "source": "lib/city/assets/roadster.ts",
+        "cameraContract": "Measured seated head to be reported; existing camera [.45,1.2,0] is not silently moved.",
+        "grip": {
+          "handVertices": 2503,
+          "curledFingerVertices": 1260,
+          "morph": "DriverGrip",
+          "action": "driver-grip",
+          "mergedInto": "driver-seated",
+          "basisUnchanged": true
+        },
+        "compatibilityProfile": "roadster-driver-fit optional cockpit only",
+        "steeringCenterM": [
+          0.44,
+          1.06,
+          0.4
+        ],
+        "naturalLegs": "Same full-scale diagnostic trial6 hips and legs; -8 degree supported torso, driver-only backpack removal and pose-specific grip corrective"
+      }
+    },
+    {
+      "id": "driver-roadster-fit",
+      "lod": 1,
+      "source": "source/driver-roadster-fit.lod1.blend",
+      "export": "exports/driver-roadster-fit.lod1.glb",
+      "maps": [
+        {
+          "uri": "textures/citizen-d750e70a2bafbdb5.png",
+          "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+          "bytes": 679771
+        },
+        {
+          "uri": "textures/citizen-53e23506fc52ad56.png",
+          "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+          "bytes": 696823
+        },
+        {
+          "uri": "textures/citizen-97cbd4395750f8b9.png",
+          "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+          "bytes": 309221
+        }
+      ],
+      "info": {
+        "placementToRoadsterRoot": {
+          "translation": [
+            0.44,
+            0,
+            -0.06
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        "clip": "driver-seated",
+        "boneHeadsBlenderLocalM": {
+          "hips": [
+            1.8932661725304283e-29,
+            0.0,
+            0.7200000286102295
+          ],
+          "head": [
+            -4.1642956071571025e-16,
+            0.06819478422403336,
+            1.3252313137054443
+          ],
+          "handL": [
+            0.1600000262260437,
+            -0.3319999873638153,
+            1.059999942779541
+          ],
+          "handR": [
+            -0.1599999964237213,
+            -0.3320000171661377,
+            1.059999942779541
+          ],
+          "footL": [
+            0.12999998033046722,
+            -0.7200000882148743,
+            0.6060000658035278
+          ],
+          "footR": [
+            -0.12999995052814484,
+            -0.7200000286102295,
+            0.6060000061988831
+          ]
+        },
+        "seatContact": "Proposed hip position in measured cushion footprint; does not reuse short decorative driver hip.",
+        "feet": "Proposed ankle at Y=.606; original floor slab top=.475, expected shoe sole=.479. Current Roadster has no pedals.",
+        "source": "lib/city/assets/roadster.ts",
+        "cameraContract": "Measured seated head to be reported; existing camera [.45,1.2,0] is not silently moved.",
+        "grip": {
+          "handVertices": 2503,
+          "curledFingerVertices": 1260,
+          "morph": "DriverGrip",
+          "action": "driver-grip",
+          "mergedInto": "driver-seated",
+          "basisUnchanged": true
+        },
+        "compatibilityProfile": "roadster-driver-fit optional cockpit only",
+        "steeringCenterM": [
+          0.44,
+          1.06,
+          0.4
+        ],
+        "naturalLegs": "Same full-scale diagnostic trial6 hips and legs; -8 degree supported torso, driver-only backpack removal and pose-specific grip corrective"
+      }
+    },
+    {
+      "id": "driver-roadster-fit",
+      "lod": 2,
+      "source": "source/driver-roadster-fit.lod2.blend",
+      "export": "exports/driver-roadster-fit.lod2.glb",
+      "maps": [
+        {
+          "uri": "textures/citizen-d750e70a2bafbdb5.png",
+          "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+          "bytes": 679771
+        },
+        {
+          "uri": "textures/citizen-53e23506fc52ad56.png",
+          "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+          "bytes": 696823
+        },
+        {
+          "uri": "textures/citizen-97cbd4395750f8b9.png",
+          "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+          "bytes": 309221
+        }
+      ],
+      "info": {
+        "placementToRoadsterRoot": {
+          "translation": [
+            0.44,
+            0,
+            -0.06
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        "clip": "driver-seated",
+        "boneHeadsBlenderLocalM": {
+          "hips": [
+            1.8932661725304283e-29,
+            0.0,
+            0.7200000286102295
+          ],
+          "head": [
+            -4.1642956071571025e-16,
+            0.06819478422403336,
+            1.3252313137054443
+          ],
+          "handL": [
+            0.1600000262260437,
+            -0.3319999873638153,
+            1.059999942779541
+          ],
+          "handR": [
+            -0.1599999964237213,
+            -0.3320000171661377,
+            1.059999942779541
+          ],
+          "footL": [
+            0.12999998033046722,
+            -0.7200000882148743,
+            0.6060000658035278
+          ],
+          "footR": [
+            -0.12999995052814484,
+            -0.7200000286102295,
+            0.6060000061988831
+          ]
+        },
+        "seatContact": "Proposed hip position in measured cushion footprint; does not reuse short decorative driver hip.",
+        "feet": "Proposed ankle at Y=.606; original floor slab top=.475, expected shoe sole=.479. Current Roadster has no pedals.",
+        "source": "lib/city/assets/roadster.ts",
+        "cameraContract": "Measured seated head to be reported; existing camera [.45,1.2,0] is not silently moved.",
+        "grip": {
+          "handVertices": 2503,
+          "curledFingerVertices": 1260,
+          "morph": "DriverGrip",
+          "action": "driver-grip",
+          "mergedInto": "driver-seated",
+          "basisUnchanged": true
+        },
+        "compatibilityProfile": "roadster-driver-fit optional cockpit only",
+        "steeringCenterM": [
+          0.44,
+          1.06,
+          0.4
+        ],
+        "naturalLegs": "Same full-scale diagnostic trial6 hips and legs; -8 degree supported torso, driver-only backpack removal and pose-specific grip corrective"
+      }
+    }
+  ]
+}

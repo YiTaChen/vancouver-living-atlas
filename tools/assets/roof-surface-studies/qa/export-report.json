@@ -1,0 +1,333 @@
+{
+  "baseRevision": "5574d55719f10d1575127d8b92cbd23ff71e446f",
+  "blender": "4.3.2",
+  "device": "CPU",
+  "threads": 2,
+  "bakeSamples": 8,
+  "sourceBakeResolution": [
+    512,
+    512
+  ],
+  "runtimeResolution": [
+    256,
+    256
+  ],
+  "surfaces": [
+    {
+      "id": "roof-mineral-grain",
+      "source": "source/roof-mineral-grain.lod0.blend",
+      "sourceSha256": "d44c8ddcb4e42906e7518c297834a7e4cef0013f81377cb85b9506de9773524d",
+      "sourceReopened": true,
+      "proceduralNodeCount": 23,
+      "textureInputCount": 0,
+      "sourceObjects": [
+        "roof-mineral-grain-coupon-2m",
+        "roof-mineral-grain-coupon-10m"
+      ],
+      "sourceSha256AfterExport": "d44c8ddcb4e42906e7518c297834a7e4cef0013f81377cb85b9506de9773524d",
+      "maps": [
+        {
+          "channel": "color",
+          "file": "exports/textures/roof-mineral-grain-color.png",
+          "sha256": "232bdea457187c564ef92f38591c025dd37c11ede3bc533d5974d0a11a2e88e8",
+          "bytes": 33023,
+          "sourceBake": "source/textures/roof-mineral-grain-color.png",
+          "sourceBakeSha256": "f0738025d269e20022d36fea858a6507fb71f8cac41436ebe38623e90e6336be",
+          "averageEncodedRGB": [
+            148.25906372070312,
+            153.2995147705078,
+            143.22010803222656
+          ],
+          "minimumRGB": [
+            145,
+            149,
+            140
+          ],
+          "maximumRGB": [
+            152,
+            157,
+            147
+          ]
+        },
+        {
+          "channel": "normal",
+          "file": "exports/textures/roof-mineral-grain-normal.png",
+          "sha256": "4184dfa45d8bb506f11e1a591407342994965b54405addb62d2b2f7133bedb26",
+          "bytes": 133237,
+          "sourceBake": "source/textures/roof-mineral-grain-normal.png",
+          "sourceBakeSha256": "3f62b3884ccd62144615caf7214a2b0368d34780bf2eb069c07837578db7204d",
+          "averageEncodedRGB": [
+            127.54380798339844,
+            127.49809265136719,
+            253.66461181640625
+          ],
+          "minimumRGB": [
+            85,
+            88,
+            248
+          ],
+          "maximumRGB": [
+            168,
+            166,
+            255
+          ]
+        },
+        {
+          "channel": "orm",
+          "file": "exports/textures/roof-mineral-grain-orm.png",
+          "sha256": "726b7f196228fb839912cbe1931bb2cf85b9c876ffc8a89c07ae46fdd279e0be",
+          "bytes": 34075,
+          "sourceBake": "source/textures/roof-mineral-grain-orm.png",
+          "sourceBakeSha256": "1bf831923c32d3709c8029c2fcd598d96b1a055a05d7867ca0dd286cdb2d703b",
+          "averageEncodedRGB": [
+            255.0,
+            226.91726684570312,
+            0.0
+          ],
+          "minimumRGB": [
+            255,
+            221,
+            0
+          ],
+          "maximumRGB": [
+            255,
+            233,
+            0
+          ]
+        }
+      ],
+      "exports": [
+        "exports/roof-mineral-grain-2m.inspection.glb",
+        "exports/roof-mineral-grain-10m.inspection.glb"
+      ]
+    },
+    {
+      "id": "roof-membrane-seams",
+      "source": "source/roof-membrane-seams.lod0.blend",
+      "sourceSha256": "f6acf44f16887d75a76b2fef79c755027598dedcae3fcc116c77ab76b4a23baf",
+      "sourceReopened": true,
+      "proceduralNodeCount": 29,
+      "textureInputCount": 0,
+      "sourceObjects": [
+        "roof-membrane-seams-coupon-2m",
+        "roof-membrane-seams-coupon-10m"
+      ],
+      "sourceSha256AfterExport": "f6acf44f16887d75a76b2fef79c755027598dedcae3fcc116c77ab76b4a23baf",
+      "maps": [
+        {
+          "channel": "color",
+          "file": "exports/textures/roof-membrane-seams-color.png",
+          "sha256": "6879c85b02523bce0c8bedb1e55e51938d005cbf479d1f0d71f22f58493447c2",
+          "bytes": 601,
+          "sourceBake": "source/textures/roof-membrane-seams-color.png",
+          "sourceBakeSha256": "3767ef1b09bfac2f4e3d0a23164daa30b75a8aeac1199e0e5a2b89ae47358c97",
+          "averageEncodedRGB": [
+            185.00001525878906,
+            191.99996948242188,
+            187.00001525878906
+          ],
+          "minimumRGB": [
+            185,
+            191,
+            187
+          ],
+          "maximumRGB": [
+            186,
+            193,
+            188
+          ]
+        },
+        {
+          "channel": "normal",
+          "file": "exports/textures/roof-membrane-seams-normal.png",
+          "sha256": "9893c52af0d3b43ed71ff695f4b4a6135d7a40faa0df104f546008001a2bba46",
+          "bytes": 27834,
+          "sourceBake": "source/textures/roof-membrane-seams-normal.png",
+          "sourceBakeSha256": "4b21fc585ae02d656b6a136cb51e2417a37eb9bcc44f456adde1263b80737432",
+          "averageEncodedRGB": [
+            127.50039672851562,
+            127.50419616699219,
+            254.99935913085938
+          ],
+          "minimumRGB": [
+            116,
+            116,
+            254
+          ],
+          "maximumRGB": [
+            139,
+            139,
+            255
+          ]
+        },
+        {
+          "channel": "orm",
+          "file": "exports/textures/roof-membrane-seams-orm.png",
+          "sha256": "9c9fcb794e5d0c4738430556dbc5dab201ba30fc980ce10f5854b05194b5df86",
+          "bytes": 12453,
+          "sourceBake": "source/textures/roof-membrane-seams-orm.png",
+          "sourceBakeSha256": "6d874e4cfefb05603c7e8d2e06071f5382cd19630a566772fd13a2c77a63205b",
+          "averageEncodedRGB": [
+            255.0,
+            209.09194946289062,
+            0.0
+          ],
+          "minimumRGB": [
+            255,
+            208,
+            0
+          ],
+          "maximumRGB": [
+            255,
+            211,
+            0
+          ]
+        }
+      ],
+      "exports": [
+        "exports/roof-membrane-seams-2m.inspection.glb",
+        "exports/roof-membrane-seams-10m.inspection.glb"
+      ]
+    }
+  ],
+  "sourcePreserved": true,
+  "pipelineReuse": "city-materials/export_material_library.py: principled validation, material copy, actual Cycles bake, linear filter/normal renormalization and PNG writer",
+  "startedUtc": "2026-10-03T21:26:55Z",
+  "reimports": [
+    {
+      "file": "roof-mineral-grain-2m.inspection.glb",
+      "sha256": "468242c4df4a55fd426cdf7529c915aef80ec054fb6bcb73bd0e06b939aa2783",
+      "blenderBoundsM": {
+        "min": [
+          -1.0,
+          -1.0,
+          0.0
+        ],
+        "max": [
+          1.0,
+          1.0,
+          0.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          0.0
+        ]
+      },
+      "uvRange": [
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "meshes": 1,
+      "materialNames": [
+        "roof-mineral-grain-baked-inspection"
+      ]
+    },
+    {
+      "file": "roof-mineral-grain-10m.inspection.glb",
+      "sha256": "e0cca52f6aee60a90f3992364704ecdf63eecdbc9d4f83c766911a9f581d5424",
+      "blenderBoundsM": {
+        "min": [
+          -5.0,
+          -5.0,
+          0.0
+        ],
+        "max": [
+          5.0,
+          5.0,
+          0.0
+        ],
+        "size": [
+          10.0,
+          10.0,
+          0.0
+        ]
+      },
+      "uvRange": [
+        0.0,
+        0.0,
+        5.0,
+        5.0
+      ],
+      "meshes": 1,
+      "materialNames": [
+        "roof-mineral-grain-baked-inspection"
+      ]
+    },
+    {
+      "file": "roof-membrane-seams-2m.inspection.glb",
+      "sha256": "27510bc3eca07603ec0b46f291bd61984ae5aa789d6c8130287a31bdd2fab378",
+      "blenderBoundsM": {
+        "min": [
+          -1.0,
+          -1.0,
+          0.0
+        ],
+        "max": [
+          1.0,
+          1.0,
+          0.0
+        ],
+        "size": [
+          2.0,
+          2.0,
+          0.0
+        ]
+      },
+      "uvRange": [
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "meshes": 1,
+      "materialNames": [
+        "roof-membrane-seams-baked-inspection"
+      ]
+    },
+    {
+      "file": "roof-membrane-seams-10m.inspection.glb",
+      "sha256": "e690ca5cec39a142fbb73e87e6d0243842e51593cca6aff772759198e0cf041b",
+      "blenderBoundsM": {
+        "min": [
+          -5.0,
+          -5.0,
+          0.0
+        ],
+        "max": [
+          5.0,
+          5.0,
+          0.0
+        ],
+        "size": [
+          10.0,
+          10.0,
+          0.0
+        ]
+      },
+      "uvRange": [
+        0.0,
+        0.0,
+        5.0,
+        5.0
+      ],
+      "meshes": 1,
+      "materialNames": [
+        "roof-membrane-seams-baked-inspection"
+      ]
+    }
+  ],
+  "previews": [
+    "qa/previews/coupons-2m-clear.png",
+    "qa/previews/coupons-2m-overcast.png",
+    "qa/previews/coupons-2m-dusk.png",
+    "qa/previews/coupons-2m-night.png",
+    "qa/previews/coupons-10m-clear.png",
+    "qa/previews/coupons-10m-overcast.png",
+    "qa/previews/coupons-10m-dusk.png",
+    "qa/previews/coupons-10m-night.png"
+  ],
+  "finishedUtc": "2026-10-03T21:27:43Z"
+}

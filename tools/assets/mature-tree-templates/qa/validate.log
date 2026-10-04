@@ -1,0 +1,655 @@
+{
+  "status": "pass",
+  "scope": "offline CPU packaging, metric geometry, alpha/UV/channel/cost and alpha-aware orthographic silhouette audit; not WebGL acceptance",
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "projection": "320x528 CPU triangle raster, bilinear straight-alpha cutoff .4; no shader lighting"
+  },
+  "assets": [
+    {
+      "assetId": "mature-maple",
+      "lod": 0,
+      "status": "pass",
+      "triangles": 7696,
+      "geometryBytes": 779568,
+      "boundsM": {
+        "min": [
+          -2.4195356369018555,
+          0.0,
+          -2.3496997356414795
+        ],
+        "max": [
+          2.360464334487915,
+          10.0,
+          2.232037305831909
+        ],
+        "size": [
+          4.7799999713897705,
+          10.0,
+          4.581737041473389
+        ]
+      },
+      "maximumCrownRadiusM": 2.4800214852808575,
+      "minimumCanopyHeightM": 4.3444132804870605,
+      "primitives": 4,
+      "embeddedImageBytes": 0,
+      "opaqueFoliageTriangles": 0,
+      "alphaFoliageTriangles": 7072
+    },
+    {
+      "assetId": "mature-maple",
+      "lod": 1,
+      "status": "pass",
+      "triangles": 1284,
+      "geometryBytes": 87700,
+      "boundsM": {
+        "min": [
+          -2.4141902923583984,
+          0.0,
+          -2.3836309909820557
+        ],
+        "max": [
+          2.365809679031372,
+          10.0,
+          2.132826328277588
+        ],
+        "size": [
+          4.7799999713897705,
+          10.0,
+          4.5164573192596436
+        ]
+      },
+      "maximumCrownRadiusM": 2.4652237486970767,
+      "minimumCanopyHeightM": 4.484020709991455,
+      "primitives": 4,
+      "embeddedImageBytes": 0,
+      "opaqueFoliageTriangles": 712,
+      "alphaFoliageTriangles": 356
+    },
+    {
+      "assetId": "mature-maple",
+      "lod": 2,
+      "status": "pass",
+      "triangles": 222,
+      "geometryBytes": 15392,
+      "boundsM": {
+        "min": [
+          -2.385688543319702,
+          0.0,
+          -2.309751510620117
+        ],
+        "max": [
+          2.3943114280700684,
+          10.0,
+          2.1362366676330566
+        ],
+        "size": [
+          4.7799999713897705,
+          10.0,
+          4.445988178253174
+        ]
+      },
+      "maximumCrownRadiusM": 2.4474732995684194,
+      "minimumCanopyHeightM": 4.407436370849609,
+      "primitives": 3,
+      "embeddedImageBytes": 0,
+      "opaqueFoliageTriangles": 180,
+      "alphaFoliageTriangles": 0
+    },
+    {
+      "assetId": "mature-alder",
+      "lod": 0,
+      "status": "pass",
+      "triangles": 7680,
+      "geometryBytes": 777996,
+      "boundsM": {
+        "min": [
+          -2.3485870361328125,
+          0.0,
+          -2.2963156700134277
+        ],
+        "max": [
+          2.3214128017425537,
+          10.0,
+          2.0775091648101807
+        ],
+        "size": [
+          4.669999837875366,
+          10.0,
+          4.373824834823608
+        ]
+      },
+      "maximumCrownRadiusM": 2.366626493745924,
+      "minimumCanopyHeightM": 4.260312557220459,
+      "primitives": 4,
+      "embeddedImageBytes": 0,
+      "opaqueFoliageTriangles": 0,
+      "alphaFoliageTriangles": 7056
+    },
+    {
+      "assetId": "mature-alder",
+      "lod": 1,
+      "status": "pass",
+      "triangles": 1284,
+      "geometryBytes": 87724,
+      "boundsM": {
+        "min": [
+          -2.4024956226348877,
+          0.0,
+          -2.287274122238159
+        ],
+        "max": [
+          2.2675042152404785,
+          10.0,
+          2.0085811614990234
+        ],
+        "size": [
+          4.669999837875366,
+          10.0,
+          4.295855283737183
+        ]
+      },
+      "maximumCrownRadiusM": 2.403186059801738,
+      "minimumCanopyHeightM": 4.526134014129639,
+      "primitives": 4,
+      "embeddedImageBytes": 0,
+      "opaqueFoliageTriangles": 712,
+      "alphaFoliageTriangles": 356
+    },
+    {
+      "assetId": "mature-alder",
+      "lod": 2,
+      "status": "pass",
+      "triangles": 222,
+      "geometryBytes": 15396,
+      "boundsM": {
+        "min": [
+          -2.32312273979187,
+          0.0,
+          -2.22430682182312
+        ],
+        "max": [
+          2.346877098083496,
+          10.0,
+          2.0587732791900635
+        ],
+        "size": [
+          4.669999837875366,
+          10.0,
+          4.283080101013184
+        ]
+      },
+      "maximumCrownRadiusM": 2.3636311814909257,
+      "minimumCanopyHeightM": 4.20833158493042,
+      "primitives": 3,
+      "embeddedImageBytes": 0,
+      "opaqueFoliageTriangles": 180,
+      "alphaFoliageTriangles": 0
+    },
+    {
+      "assetId": "mature-douglas-fir",
+      "lod": 0,
+      "status": "pass",
+      "triangles": 7634,
+      "geometryBytes": 540908,
+      "boundsM": {
+        "min": [
+          -2.246401071548462,
+          0.0,
+          -2.292567491531372
+        ],
+        "max": [
+          2.453598976135254,
+          10.0,
+          2.2243361473083496
+        ],
+        "size": [
+          4.700000047683716,
+          10.0,
+          4.516903638839722
+        ]
+      },
+      "maximumCrownRadiusM": 2.50014992331591,
+      "minimumCanopyHeightM": 2.6770129203796387,
+      "primitives": 4,
+      "embeddedImageBytes": 0,
+      "opaqueFoliageTriangles": 3608,
+      "alphaFoliageTriangles": 2706
+    },
+    {
+      "assetId": "mature-douglas-fir",
+      "lod": 1,
+      "status": "pass",
+      "triangles": 1680,
+      "geometryBytes": 117612,
+      "boundsM": {
+        "min": [
+          -2.1973800659179688,
+          0.0,
+          -2.3297626972198486
+        ],
+        "max": [
+          2.502619981765747,
+          10.0,
+          2.1638195514678955
+        ],
+        "size": [
+          4.700000047683716,
+          10.0,
+          4.493582248687744
+        ]
+      },
+      "maximumCrownRadiusM": 2.50582483118101,
+      "minimumCanopyHeightM": 2.8235793113708496,
+      "primitives": 4,
+      "embeddedImageBytes": 0,
+      "opaqueFoliageTriangles": 752,
+      "alphaFoliageTriangles": 376
+    },
+    {
+      "assetId": "mature-douglas-fir",
+      "lod": 2,
+      "status": "pass",
+      "triangles": 188,
+      "geometryBytes": 14620,
+      "boundsM": {
+        "min": [
+          -2.455057144165039,
+          0.0,
+          -2.1504712104797363
+        ],
+        "max": [
+          2.2449426651000977,
+          10.0,
+          2.1243104934692383
+        ],
+        "size": [
+          4.699999809265137,
+          10.0,
+          4.274781703948975
+        ]
+      },
+      "maximumCrownRadiusM": 2.4570261528600734,
+      "minimumCanopyHeightM": 2.8322484493255615,
+      "primitives": 3,
+      "embeddedImageBytes": 0,
+      "opaqueFoliageTriangles": 140,
+      "alphaFoliageTriangles": 0
+    },
+    {
+      "assetId": "mature-western-redcedar",
+      "lod": 0,
+      "status": "pass",
+      "triangles": 7634,
+      "geometryBytes": 540904,
+      "boundsM": {
+        "min": [
+          -2.393444299697876,
+          0.0,
+          -2.3959128856658936
+        ],
+        "max": [
+          2.366555690765381,
+          10.0,
+          2.187472343444824
+        ],
+        "size": [
+          4.759999990463257,
+          10.0,
+          4.583385229110718
+        ]
+      },
+      "maximumCrownRadiusM": 2.476411396143515,
+      "minimumCanopyHeightM": 2.7219111919403076,
+      "primitives": 4,
+      "embeddedImageBytes": 0,
+      "opaqueFoliageTriangles": 3608,
+      "alphaFoliageTriangles": 2706
+    },
+    {
+      "assetId": "mature-western-redcedar",
+      "lod": 1,
+      "status": "pass",
+      "triangles": 1680,
+      "geometryBytes": 117636,
+      "boundsM": {
+        "min": [
+          -2.3472115993499756,
+          0.0,
+          -2.296102523803711
+        ],
+        "max": [
+          2.4127883911132812,
+          10.0,
+          2.2098820209503174
+        ],
+        "size": [
+          4.759999990463257,
+          10.0,
+          4.505984544754028
+        ]
+      },
+      "maximumCrownRadiusM": 2.4409221749327434,
+      "minimumCanopyHeightM": 2.9191417694091797,
+      "primitives": 4,
+      "embeddedImageBytes": 0,
+      "opaqueFoliageTriangles": 752,
+      "alphaFoliageTriangles": 376
+    },
+    {
+      "assetId": "mature-western-redcedar",
+      "lod": 2,
+      "status": "pass",
+      "triangles": 188,
+      "geometryBytes": 14652,
+      "boundsM": {
+        "min": [
+          -2.3815596103668213,
+          0.0,
+          -2.4135007858276367
+        ],
+        "max": [
+          2.3784403800964355,
+          10.0,
+          2.20986270904541
+        ],
+        "size": [
+          4.759999990463257,
+          10.0,
+          4.623363494873047
+        ]
+      },
+      "maximumCrownRadiusM": 2.5953814196054883,
+      "minimumCanopyHeightM": 2.8383326530456543,
+      "primitives": 3,
+      "embeddedImageBytes": 0,
+      "opaqueFoliageTriangles": 140,
+      "alphaFoliageTriangles": 0
+    }
+  ],
+  "textures": {
+    "candidateUniqueRgba8FullMipsBytes": 6640981.333333333,
+    "limitBytes": 8388608,
+    "deltaVsProduction": "not measured; offline assets never assumed resident",
+    "embeddedImageBytes": 0,
+    "alphaCoverage": [
+      {
+        "species": "maple",
+        "baseCoverageAtPoint4": 0.21414566040039062
+      },
+      {
+        "species": "alder",
+        "baseCoverageAtPoint4": 0.2316741943359375
+      },
+      {
+        "species": "douglas-fir",
+        "baseCoverageAtPoint4": 0.13465499877929688
+      },
+      {
+        "species": "western-redcedar",
+        "baseCoverageAtPoint4": 0.30260467529296875
+      }
+    ],
+    "authoredMipReference": "../vegetation_ground/alpha-coverage.json; not bound by ordinary GLB",
+    "automaticMipRisk": "Standard glTF does not carry authored coverage mips. Runtime must measure thin needles and choose approved mip upload; offline base coverage is not distant GPU acceptance."
+  },
+  "lodProjections": [
+    {
+      "assetId": "mature-maple",
+      "lod": 1,
+      "view": "front",
+      "intersectionOverUnion": 0.6986845649636347,
+      "areaRatioToLOD0": 0.9824216703342764,
+      "status": "pass",
+      "thresholds": {
+        "minimumIoU": 0.62,
+        "areaRatio": [
+          0.7,
+          1.35
+        ]
+      },
+      "image": "qa/previews/maple-alpha-silhouettes.png"
+    },
+    {
+      "assetId": "mature-maple",
+      "lod": 2,
+      "view": "front",
+      "intersectionOverUnion": 0.7187797516559645,
+      "areaRatioToLOD0": 1.2228596877292257,
+      "status": "pass",
+      "thresholds": {
+        "minimumIoU": 0.62,
+        "areaRatio": [
+          0.7,
+          1.35
+        ]
+      },
+      "image": "qa/previews/maple-alpha-silhouettes.png"
+    },
+    {
+      "assetId": "mature-maple",
+      "lod": 1,
+      "view": "side",
+      "intersectionOverUnion": 0.6845220679255475,
+      "areaRatioToLOD0": 1.0158097444046432,
+      "status": "pass",
+      "thresholds": {
+        "minimumIoU": 0.62,
+        "areaRatio": [
+          0.7,
+          1.35
+        ]
+      },
+      "image": "qa/previews/maple-alpha-silhouettes.png"
+    },
+    {
+      "assetId": "mature-maple",
+      "lod": 2,
+      "view": "side",
+      "intersectionOverUnion": 0.7034088427405746,
+      "areaRatioToLOD0": 1.310835196207816,
+      "status": "pass",
+      "thresholds": {
+        "minimumIoU": 0.62,
+        "areaRatio": [
+          0.7,
+          1.35
+        ]
+      },
+      "image": "qa/previews/maple-alpha-silhouettes.png"
+    },
+    {
+      "assetId": "mature-alder",
+      "lod": 1,
+      "view": "front",
+      "intersectionOverUnion": 0.6931365082209578,
+      "areaRatioToLOD0": 0.9697956843531742,
+      "status": "pass",
+      "thresholds": {
+        "minimumIoU": 0.62,
+        "areaRatio": [
+          0.7,
+          1.35
+        ]
+      },
+      "image": "qa/previews/alder-alpha-silhouettes.png"
+    },
+    {
+      "assetId": "mature-alder",
+      "lod": 2,
+      "view": "front",
+      "intersectionOverUnion": 0.7091615396750276,
+      "areaRatioToLOD0": 1.2588085062024392,
+      "status": "pass",
+      "thresholds": {
+        "minimumIoU": 0.62,
+        "areaRatio": [
+          0.7,
+          1.35
+        ]
+      },
+      "image": "qa/previews/alder-alpha-silhouettes.png"
+    },
+    {
+      "assetId": "mature-alder",
+      "lod": 1,
+      "view": "side",
+      "intersectionOverUnion": 0.6819332153815144,
+      "areaRatioToLOD0": 0.9920424403183024,
+      "status": "pass",
+      "thresholds": {
+        "minimumIoU": 0.62,
+        "areaRatio": [
+          0.7,
+          1.35
+        ]
+      },
+      "image": "qa/previews/alder-alpha-silhouettes.png"
+    },
+    {
+      "assetId": "mature-alder",
+      "lod": 2,
+      "view": "side",
+      "intersectionOverUnion": 0.6992271608735774,
+      "areaRatioToLOD0": 1.3444827586206896,
+      "status": "pass",
+      "thresholds": {
+        "minimumIoU": 0.62,
+        "areaRatio": [
+          0.7,
+          1.35
+        ]
+      },
+      "image": "qa/previews/alder-alpha-silhouettes.png"
+    },
+    {
+      "assetId": "mature-douglas-fir",
+      "lod": 1,
+      "view": "front",
+      "intersectionOverUnion": 0.6668153334968668,
+      "areaRatioToLOD0": 0.8849771770105667,
+      "status": "pass",
+      "thresholds": {
+        "minimumIoU": 0.62,
+        "areaRatio": [
+          0.7,
+          1.35
+        ]
+      },
+      "image": "qa/previews/douglas-fir-alpha-silhouettes.png"
+    },
+    {
+      "assetId": "mature-douglas-fir",
+      "lod": 2,
+      "view": "front",
+      "intersectionOverUnion": 0.7382236179415773,
+      "areaRatioToLOD0": 1.2194537613799712,
+      "status": "pass",
+      "thresholds": {
+        "minimumIoU": 0.62,
+        "areaRatio": [
+          0.7,
+          1.35
+        ]
+      },
+      "image": "qa/previews/douglas-fir-alpha-silhouettes.png"
+    },
+    {
+      "assetId": "mature-douglas-fir",
+      "lod": 1,
+      "view": "side",
+      "intersectionOverUnion": 0.6459251494866236,
+      "areaRatioToLOD0": 0.8464642685338607,
+      "status": "pass",
+      "thresholds": {
+        "minimumIoU": 0.62,
+        "areaRatio": [
+          0.7,
+          1.35
+        ]
+      },
+      "image": "qa/previews/douglas-fir-alpha-silhouettes.png"
+    },
+    {
+      "assetId": "mature-douglas-fir",
+      "lod": 2,
+      "view": "side",
+      "intersectionOverUnion": 0.7407339561580265,
+      "areaRatioToLOD0": 1.2856379282698167,
+      "status": "pass",
+      "thresholds": {
+        "minimumIoU": 0.62,
+        "areaRatio": [
+          0.7,
+          1.35
+        ]
+      },
+      "image": "qa/previews/douglas-fir-alpha-silhouettes.png"
+    },
+    {
+      "assetId": "mature-western-redcedar",
+      "lod": 1,
+      "view": "front",
+      "intersectionOverUnion": 0.6826937184297123,
+      "areaRatioToLOD0": 0.834662583697068,
+      "status": "pass",
+      "thresholds": {
+        "minimumIoU": 0.62,
+        "areaRatio": [
+          0.7,
+          1.35
+        ]
+      },
+      "image": "qa/previews/western-redcedar-alpha-silhouettes.png"
+    },
+    {
+      "assetId": "mature-western-redcedar",
+      "lod": 2,
+      "view": "front",
+      "intersectionOverUnion": 0.772841450155588,
+      "areaRatioToLOD0": 1.1612468292237026,
+      "status": "pass",
+      "thresholds": {
+        "minimumIoU": 0.62,
+        "areaRatio": [
+          0.7,
+          1.35
+        ]
+      },
+      "image": "qa/previews/western-redcedar-alpha-silhouettes.png"
+    },
+    {
+      "assetId": "mature-western-redcedar",
+      "lod": 1,
+      "view": "side",
+      "intersectionOverUnion": 0.6294760066188637,
+      "areaRatioToLOD0": 0.778805394990366,
+      "status": "pass",
+      "thresholds": {
+        "minimumIoU": 0.62,
+        "areaRatio": [
+          0.7,
+          1.35
+        ]
+      },
+      "image": "qa/previews/western-redcedar-alpha-silhouettes.png"
+    },
+    {
+      "assetId": "mature-western-redcedar",
+      "lod": 2,
+      "view": "side",
+      "intersectionOverUnion": 0.7823004404605517,
+      "areaRatioToLOD0": 1.2220375722543353,
+      "status": "pass",
+      "thresholds": {
+        "minimumIoU": 0.62,
+        "areaRatio": [
+          0.7,
+          1.35
+        ]
+      },
+      "image": "qa/previews/western-redcedar-alpha-silhouettes.png"
+    }
+  ]
+}

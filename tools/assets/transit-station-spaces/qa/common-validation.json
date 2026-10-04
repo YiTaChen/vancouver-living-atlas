@@ -1,0 +1,516 @@
+{
+  "status": "pass",
+  "scope": "common packaging, source hashes, rest-pose transformed GLB geometry and costs only; package-specific Blender, semantic and runtime checks required",
+  "results": [
+    {
+      "assetId": "bus-stop-pole",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.28999999165534973,
+          0.0,
+          -0.12999999523162842
+        ],
+        "max": [
+          0.28999999165534973,
+          2.6649999618530273,
+          0.12999999523162842
+        ],
+        "size": [
+          0.5799999833106995,
+          2.6649999618530273,
+          0.25999999046325684
+        ]
+      },
+      "triangles": 548,
+      "vertices": 1032,
+      "primitives": 3,
+      "bytes": 52436,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 52436,
+      "images": [],
+      "nodeNames": [
+        "ground-foot",
+        "pole",
+        "stop-sign-frame",
+        "stop-sign-face",
+        "bus-pictogram-body",
+        "bus-pictogram-window",
+        "bus-pictogram-wheel--0.1",
+        "bus-pictogram-wheel-0.1",
+        "generic-route-rule",
+        "sign-mount--0.21",
+        "sign-mount-0.21",
+        "ground-contact",
+        "read-face",
+        "station-module-root",
+        "module-batch-painted-metal",
+        "module-batch-sign-face",
+        "module-batch-sign-symbol"
+      ],
+      "materialNames": [
+        "painted-metal",
+        "sign-face",
+        "sign-symbol"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "bus-stop-pole",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.28999999165534973,
+          0.0,
+          -0.12999999523162842
+        ],
+        "max": [
+          0.28999999165534973,
+          2.6649999618530273,
+          0.12999999523162842
+        ],
+        "size": [
+          0.5799999833106995,
+          2.6649999618530273,
+          0.25999999046325684
+        ]
+      },
+      "triangles": 124,
+      "vertices": 240,
+      "primitives": 3,
+      "bytes": 20468,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 20468,
+      "images": [],
+      "nodeNames": [
+        "ground-foot",
+        "pole",
+        "stop-sign-frame",
+        "stop-sign-face",
+        "bus-pictogram-body",
+        "bus-pictogram-window",
+        "bus-pictogram-wheel--0.1",
+        "bus-pictogram-wheel-0.1",
+        "generic-route-rule",
+        "ground-contact",
+        "read-face",
+        "station-module-root",
+        "module-batch-painted-metal",
+        "module-batch-sign-face",
+        "module-batch-sign-symbol"
+      ],
+      "materialNames": [
+        "painted-metal",
+        "sign-face",
+        "sign-symbol"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "platform-edge-2m",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -2.0,
+          0.0,
+          -1.0
+        ],
+        "max": [
+          2.0,
+          0.9549999833106995,
+          1.0
+        ],
+        "size": [
+          4.0,
+          0.9549999833106995,
+          2.0
+        ]
+      },
+      "triangles": 576,
+      "vertices": 1056,
+      "primitives": 3,
+      "bytes": 69624,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 69624,
+      "images": [],
+      "nodeNames": [
+        "platform-foundation",
+        "platform-deck",
+        "platform-edge-cap",
+        "tactile-band",
+        "tactile-stud",
+        "tactile-stud.001",
+        "tactile-stud.002",
+        "tactile-stud.003",
+        "tactile-stud.004",
+        "tactile-stud.005",
+        "tactile-stud.006",
+        "tactile-stud.007",
+        "tactile-stud.008",
+        "tactile-stud.009",
+        "tactile-stud.010",
+        "tactile-stud.011",
+        "tactile-stud.012",
+        "tactile-stud.013",
+        "tactile-stud.014",
+        "tactile-stud.015",
+        "tactile-stud.016",
+        "tactile-stud.017",
+        "tactile-stud.018",
+        "tactile-stud.019",
+        "tactile-stud.020",
+        "tactile-stud.021",
+        "tactile-stud.022",
+        "tactile-stud.023",
+        "edge-face-drain",
+        "edge-face-drain.001",
+        "edge-face-drain.002",
+        "edge-face-drain.003",
+        "platform-top",
+        "track-edge",
+        "join-forward",
+        "join-back",
+        "station-module-root",
+        "module-batch-concrete",
+        "module-batch-tactile-yellow",
+        "module-batch-painted-metal"
+      ],
+      "materialNames": [
+        "concrete",
+        "tactile-yellow",
+        "painted-metal"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "platform-edge-2m",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -2.0,
+          0.0,
+          -1.0
+        ],
+        "max": [
+          2.0,
+          0.9519999623298645,
+          1.0
+        ],
+        "size": [
+          4.0,
+          0.9519999623298645,
+          2.0
+        ]
+      },
+      "triangles": 48,
+      "vertices": 96,
+      "primitives": 2,
+      "bytes": 9836,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 9836,
+      "images": [],
+      "nodeNames": [
+        "platform-foundation",
+        "platform-deck",
+        "platform-edge-cap",
+        "tactile-band",
+        "platform-top",
+        "track-edge",
+        "join-forward",
+        "join-back",
+        "station-module-root",
+        "module-batch-concrete",
+        "module-batch-tactile-yellow"
+      ],
+      "materialNames": [
+        "concrete",
+        "tactile-yellow"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "station-guidance-sign",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.940000057220459,
+          0.0,
+          -0.11999999731779099
+        ],
+        "max": [
+          0.940000057220459,
+          2.8499999046325684,
+          0.11999999731779099
+        ],
+        "size": [
+          1.880000114440918,
+          2.8499999046325684,
+          0.23999999463558197
+        ]
+      },
+      "triangles": 696,
+      "vertices": 1386,
+      "primitives": 3,
+      "bytes": 64056,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 64056,
+      "images": [],
+      "nodeNames": [
+        "sign-post--0.85",
+        "sign-foot--0.85",
+        "sign-post-0.85",
+        "sign-foot-0.85",
+        "guidance-panel",
+        "guidance-face",
+        "direction-arrow",
+        "generic-destination-rule-2.67",
+        "generic-destination-rule-2.54",
+        "ground-contact",
+        "clear-passage",
+        "read-face",
+        "station-module-root",
+        "module-batch-painted-metal",
+        "module-batch-sign-face",
+        "module-batch-sign-symbol"
+      ],
+      "materialNames": [
+        "painted-metal",
+        "sign-face",
+        "sign-symbol"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "station-guidance-sign",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.940000057220459,
+          0.0,
+          -0.11999999731779099
+        ],
+        "max": [
+          0.940000057220459,
+          2.8499999046325684,
+          0.11999999731779099
+        ],
+        "size": [
+          1.880000114440918,
+          2.8499999046325684,
+          0.23999999463558197
+        ]
+      },
+      "triangles": 120,
+      "vertices": 234,
+      "primitives": 3,
+      "bytes": 20228,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 20228,
+      "images": [],
+      "nodeNames": [
+        "sign-post--0.85",
+        "sign-foot--0.85",
+        "sign-post-0.85",
+        "sign-foot-0.85",
+        "guidance-panel",
+        "guidance-face",
+        "direction-arrow",
+        "generic-destination-rule-2.67",
+        "generic-destination-rule-2.54",
+        "ground-contact",
+        "clear-passage",
+        "read-face",
+        "station-module-root",
+        "module-batch-painted-metal",
+        "module-batch-sign-face",
+        "module-batch-sign-symbol"
+      ],
+      "materialNames": [
+        "painted-metal",
+        "sign-face",
+        "sign-symbol"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "bus-threshold-deck",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.5,
+          -0.019999999552965164,
+          -0.4749999940395355
+        ],
+        "max": [
+          0.44999998807907104,
+          0.015000000596046448,
+          0.4749999940395355
+        ],
+        "size": [
+          0.949999988079071,
+          0.03500000014901161,
+          0.949999988079071
+        ]
+      },
+      "triangles": 56,
+      "vertices": 108,
+      "primitives": 2,
+      "bytes": 10728,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 10728,
+      "images": [],
+      "nodeNames": [
+        "threshold-deck",
+        "deck-grip-strip",
+        "deck-grip-strip.001",
+        "deck-grip-strip.002",
+        "station-bearing",
+        "vehicle-bearing",
+        "deck-high-point",
+        "station-module-root",
+        "module-batch-painted-metal",
+        "module-batch-tactile-yellow"
+      ],
+      "materialNames": [
+        "painted-metal",
+        "tactile-yellow"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "bus-threshold-deck",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.5,
+          -0.019999999552965164,
+          -0.4749999940395355
+        ],
+        "max": [
+          0.44999998807907104,
+          0.014999999664723873,
+          0.4749999940395355
+        ],
+        "size": [
+          0.949999988079071,
+          0.03499999921768904,
+          0.949999988079071
+        ]
+      },
+      "triangles": 20,
+      "vertices": 36,
+      "primitives": 1,
+      "bytes": 4420,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 4420,
+      "images": [],
+      "nodeNames": [
+        "threshold-deck",
+        "station-bearing",
+        "vehicle-bearing",
+        "deck-high-point",
+        "station-module-root",
+        "module-batch-painted-metal"
+      ],
+      "materialNames": [
+        "painted-metal"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "metro-threshold-deck",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.47999998927116394,
+          -0.019999999552965164,
+          -0.550000011920929
+        ],
+        "max": [
+          0.41999998688697815,
+          0.015000000596046448,
+          0.550000011920929
+        ],
+        "size": [
+          0.8999999761581421,
+          0.03500000014901161,
+          1.100000023841858
+        ]
+      },
+      "triangles": 56,
+      "vertices": 108,
+      "primitives": 2,
+      "bytes": 10788,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 10788,
+      "images": [],
+      "nodeNames": [
+        "threshold-deck",
+        "deck-grip-strip",
+        "deck-grip-strip.001",
+        "deck-grip-strip.002",
+        "station-bearing",
+        "vehicle-bearing",
+        "deck-high-point",
+        "station-module-root",
+        "module-batch-painted-metal",
+        "module-batch-tactile-yellow"
+      ],
+      "materialNames": [
+        "painted-metal",
+        "tactile-yellow"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "metro-threshold-deck",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.47999998927116394,
+          -0.019999999552965164,
+          -0.550000011920929
+        ],
+        "max": [
+          0.41999998688697815,
+          0.014999999664723873,
+          0.550000011920929
+        ],
+        "size": [
+          0.8999999761581421,
+          0.03499999921768904,
+          1.100000023841858
+        ]
+      },
+      "triangles": 20,
+      "vertices": 36,
+      "primitives": 1,
+      "bytes": 4468,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 4468,
+      "images": [],
+      "nodeNames": [
+        "threshold-deck",
+        "station-bearing",
+        "vehicle-bearing",
+        "deck-high-point",
+        "station-module-root",
+        "module-batch-painted-metal"
+      ],
+      "materialNames": [
+        "painted-metal"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    }
+  ]
+}

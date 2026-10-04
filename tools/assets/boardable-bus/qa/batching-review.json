@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "status": "pass",
+  "scope": "Pre-publication interior draw batching and closed LOD2 window cue; no runtime changes",
+  "interiorSourceHashesUnchanged": [
+    true,
+    true
+  ],
+  "exteriorLOD01HashesUnchanged": [
+    true,
+    true
+  ],
+  "lod2BoundsExactlyUnchanged": true,
+  "lod2TrianglesBefore": 196,
+  "lod2TrianglesAfter": 208,
+  "interiorPrimitivesBefore": [
+    72,
+    62
+  ],
+  "interiorPrimitivesAfter": [
+    7,
+    7
+  ],
+  "interiorTrianglesUnchanged": [
+    3760,
+    888
+  ],
+  "floorSurfacesExactlyUnchanged": true,
+  "seatMetadataExactlyUnchanged": true,
+  "doorMetadataExactlyUnchanged": true,
+  "collisionIDsExactlyUnchanged": true,
+  "maxCollisionEnvelopeQuantizationDeltaM": 1.043081283569336e-07,
+  "evidence": [
+    "blender-validation.json#/staticBatchEquivalence",
+    "blender-validation.json#/interiorBatchEditPreservation",
+    "validation.json",
+    "regression-tests.txt",
+    "previews/lod-2.png",
+    "previews/lod-2-rear.png"
+  ]
+}

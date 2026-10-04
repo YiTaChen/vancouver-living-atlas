@@ -1,0 +1,43 @@
+✔ sandstone-sill: exact-size synthetic slot is offline-compatible at both LODs (2.659049ms)
+✔ heritage-window-frame: exact-size synthetic slot is offline-compatible at both LODs (0.24961ms)
+✔ heritage-cornice: exact-size synthetic slot is offline-compatible at both LODs (0.196651ms)
+✔ sandstone-plinth: exact-size synthetic slot is offline-compatible at both LODs (0.529504ms)
+✔ sandstone-corner: exact-size synthetic slot is offline-compatible at both LODs (0.259855ms)
+✔ residential-entry-surround: exact-size synthetic slot is offline-compatible at both LODs (0.202139ms)
+✔ sloped-metal-awning: exact-size synthetic slot is offline-compatible at both LODs (0.422175ms)
+✔ flat-metal-awning: exact-size synthetic slot is offline-compatible at both LODs (0.257401ms)
+✔ modern-recessed-window-surround: exact-size synthetic slot is offline-compatible at both LODs (0.221679ms)
+✔ modern-sill-drip: exact-size synthetic slot is offline-compatible at both LODs (0.483937ms)
+✔ modern-parapet-cap: exact-size synthetic slot is offline-compatible at both LODs (0.70881ms)
+✔ concrete-shadow-plinth: exact-size synthetic slot is offline-compatible at both LODs (0.240296ms)
+✔ concrete-chamfer-corner: exact-size synthetic slot is offline-compatible at both LODs (0.125416ms)
+✔ residential-cedar-window-surround: exact-size synthetic slot is offline-compatible at both LODs (0.124094ms)
+✔ residential-cedar-sill: exact-size synthetic slot is offline-compatible at both LODs (0.132927ms)
+✔ residential-gabled-entry-canopy: exact-size synthetic slot is offline-compatible at both LODs (0.143813ms)
+✔ reference schema is distinct from an exported model package (0.077825ms)
+✔ no unknown, missing or new source slot gains a placement (0.457759ms)
+✔ every type rejects incompatible profiles, malformed dimensions and absent exclusion evidence (0.750552ms)
+✔ linear width limits are inclusive; cross-section does not stretch (0.318442ms)
+✔ original sandstone 0.18 m is rejected, existing fitted 0.16 m variant fits (0.269088ms)
+✔ windows compare clear aperture dimensions, not outer dimensions (0.166847ms)
+✔ physical glass-stop requirements match actual per-LOD geometry (0.203932ms)
+✔ corner needs exterior right-angle adjacent edge and authored handedness (0.221628ms)
+✔ parapet requires flat exposed roof, fitting insert and actual polygon/hole clearance (0.622522ms)
+✔ entry exclusions and short source edges cannot be bypassed (0.241128ms)
+✔ source part and eave height interval is preserved (0.219665ms)
+✔ domestic ground windows stay reserved for existing door shader (0.092046ms)
+✔ actual pavement basis and three distinct finite sample IDs are required (0.285103ms)
+✔ 0.14 m grade boundary and highest-sample +0.02 m threshold match current source (0.116313ms)
+✔ residential surround preserves 1.04 x 2.30 m clear opening (0.095061ms)
+✔ cedar canopy retains 2.36–3.10 ground datum, upper windows, roof and entry clearance (0.261107ms)
+✔ heritage/modern bay depth remains different and neither is walkable interior (0.455985ms)
+✔ bay fit delegates current 3-point, slope and first-upper-window limit behavior (0.524697ms)
+✔ actual source examples are deterministic, valid selections, and honest about rejected window sizes (158.861609ms)
+ℹ tests 35
+ℹ suites 0
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 813.388669

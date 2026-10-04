@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "packageId": "roof-surface-studies",
+  "baseRevision": "5574d55719f10d1575127d8b92cbd23ff71e446f",
+  "taskIds": [
+    "B02"
+  ],
+  "assetStatus": "offline_complete",
+  "integrationStatus": "runtime_pending_webgl",
+  "webglAvailable": false,
+  "manifest": "../manifest.json",
+  "sourceEditsPreserved": true,
+  "offlineEvidence": [
+    "validation.json",
+    "measurements.json",
+    "export-report.json",
+    "source-edit-test.json",
+    "render-evidence.json",
+    "detail-render-evidence.json",
+    "visual-review.json",
+    "verification.json"
+  ],
+  "runtimeChecks": {
+    "status": "not_run",
+    "reason": "Offline asset work; browser scene acceptance is owned by integration task."
+  },
+  "intendedConsumers": [
+    "lib/city/building-surface-palette.ts",
+    "lib/city/building-bodies.ts",
+    "lib/city/city-surface-material.ts"
+  ],
+  "replaces": [],
+  "candidateRoles": [
+    "mineral-gravel",
+    "coated-membrane"
+  ],
+  "requiredUnchanged": [
+    "Existing source footprint/holes/height and roof kind",
+    "Stable profile seed and existing asphalt/mineral/membrane mix",
+    "Pitched shingle and landmark dedicated membranes/glass",
+    "Existing collision/navigation and 10:00, 300x city-clock defaults"
+  ],
+  "sourceFiles": [
+    {
+      "file": "source/roof-mineral-grain.lod0.blend",
+      "sha256": "d44c8ddcb4e42906e7518c297834a7e4cef0013f81377cb85b9506de9773524d"
+    },
+    {
+      "file": "source/roof-membrane-seams.lod0.blend",
+      "sha256": "f6acf44f16887d75a76b2fef79c755027598dedcae3fcc116c77ab76b4a23baf"
+    }
+  ],
+  "inspectionFiles": [
+    "exports/roof-mineral-grain-2m.inspection.glb",
+    "exports/roof-mineral-grain-10m.inspection.glb",
+    "exports/roof-membrane-seams-2m.inspection.glb",
+    "exports/roof-membrane-seams-10m.inspection.glb"
+  ],
+  "sharedSurfaceMaps": [
+    "exports/textures/roof-mineral-grain-color.png",
+    "exports/textures/roof-mineral-grain-normal.png",
+    "exports/textures/roof-mineral-grain-orm.png",
+    "exports/textures/roof-membrane-seams-color.png",
+    "exports/textures/roof-membrane-seams-normal.png",
+    "exports/textures/roof-membrane-seams-orm.png"
+  ],
+  "datum": "Roof-local Y=0, horizontal coupon center root; standard glTF Y-up conversion applied once. Source UV metres / 2 => glTF tile UV.",
+  "textureBudget": {
+    "capBytes": 4194304,
+    "uniqueRuntimeMaps": 6,
+    "uniqueTexelBytesWithMips": 2097152.0,
+    "basis": "RGBA8 x full-mip 4/3 conservative estimate. No GPU residency measured.",
+    "tradeoff": "Both surfaces were actually baked at 512px (source/textures, 8MiB if ever all resident), then area-filtered in linear color/data to 256px; normal vectors renormalized. Six 512px runtime maps would be 8MiB and exceed the cap. Six 256px candidates total 2MiB; fine mineral grain is reduced, so inspect WebGL minification before any activation.",
+    "source512BakeExcludedFromRuntime": true,
+    "inspectionGlbsExcludedFromRuntime": true,
+    "alternativeForSceneEvaluation": "Alternative for scene comparison: load only one chosen 512px three-map surface (4MiB) and leave the other roof role on its existing fallback, versus both 256px surface sets (2MiB). One 512px set plus the other 256px set would be 5MiB and exceeds the cap. Higher source bake resolution is not a claim of improved WebGL appearance."
+  },
+  "offlineChecks": {
+    "proceduralEditableSource": "pass",
+    "sourcePreservingReexport": "pass",
+    "artistTintEditIsolation": "pass",
+    "actualTwoMetrePeriodicRebake": "pass",
+    "actualGlbReimportDimensionsAndUv": "pass",
+    "pbrChannelsTangentsHashesAndCosts": "pass",
+    "fourLightTwoSizeCpuPreviews": "pass",
+    "perMaterialGrazingAngleActualGlbPreviews": "pass",
+    "visualReview": "pass"
+  },
+  "knownLimitations": [
+    "At the 0.68m close-up view, 256px over a 2m tile shows expected bilinear softness, especially on thin membrane laps. Source 512px bakes preserve more detail but are not runtime candidates.",
+    "Two-triangle flat coupons have no true displacement, gravel silhouettes, edge flashing, roof thickness, drainage or collision.",
+    "Low 12-sample overview renders contain Monte Carlo noise; detail renders use 32 samples.",
+    "Full 2m periodic repetition can become visible on larger roofs. WebGL filtering, far-distance fade, source-local phase and color normalization require scene testing.",
+    "The membrane longitudinal lap is 1m spaced within a 2m x 2m tile; end laps repeat at 2m. This is a representative study, not a surveyed product installation.",
+    "The grazing-angle mineral close-up is visibly soft at 256px. It is not equivalent to the 512px source bake. Compare both-256 (2MiB) against one-role-512 only (4MiB) in the source-selected scene before choosing a residency policy."
+  ],
+  "nextIntegrationSteps": [
+    "Use surface maps, not coupon GLBs; retain existing flat-roof material selection and geometry.",
+    "Add roof-local metre UV and shared loader; reuse each of six 256px maps once. Do not ship source 512px bakes.",
+    "Preserve base palette/normalization and shade color only once; OpenGL +Y normal, ORM R1/Grough/Bmetal.",
+    "Choose a bounded source-ID sample of flat roofs; compare original/candidate at same camera and four city lighting conditions.",
+    "Measure minification/repetition, sharp seams, average brightness, fallback/disposal and actual unique map residency.",
+    "Keep runtime default unchanged until browser visuals, lifecycle and performance pass; only then decide public asset publication."
+  ],
+  "costSummary": {
+    "inspectionGlbTotalBytes": 492076,
+    "inspectionGeometryBytes": 9630,
+    "inspectionEmbeddedImageBytes": 482446,
+    "uniqueSharedMapDownloadBytes": 241223,
+    "uniqueRuntimeTexelBytesWithMips": 2097152
+  },
+  "license": "Vancouver Living Atlas Noncommercial Research and Attribution 1.0; original project license retained."
+}

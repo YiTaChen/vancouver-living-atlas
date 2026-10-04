@@ -1,0 +1,642 @@
+{
+  "referenceOnly": true,
+  "sourceOfGeometry": "Original local detail meshes; historic sources preserved intact",
+  "existingMaterialPolicy": "city atlas is production-shared. Vegetation maps are offline candidates and are fully counted when bound in inspection variants.",
+  "files": [
+    {
+      "file": "docs/AI_AGENT_DEVELOPMENT_BACKLOG.md",
+      "sha256": "3f8f36a8083a83d145826cddf3bf519b6a7f6909a8f7a032764519a44de4e0d4",
+      "bytes": 52601
+    },
+    {
+      "file": "docs/CITY_READABILITY_2026_10.md",
+      "sha256": "4b7191f186a6baf735b6cc8b38ca66a25bb093cff06407ec75b090b24871b7a3",
+      "bytes": 13214
+    },
+    {
+      "file": "docs/MATERIAL_PIPELINE.md",
+      "sha256": "255f4c637daf432d06e0d9c595fe74f5229162dccf07328c7b7ef22886ae213f",
+      "bytes": 17387
+    },
+    {
+      "file": "docs/OFFLINE_ASSET_INTEGRATION_2026_10.md",
+      "sha256": "a180ba8db08e4f4738c75e43ff032a184bdd97b255490a72787cf1ee1e8e342a",
+      "bytes": 24997
+    },
+    {
+      "file": "docs/PROJECT_SPECIFICATION.md",
+      "sha256": "748ec526c6b07e8b206bf59d14d8e700f3e4e97fd713bac294806fb322eaaa33",
+      "bytes": 48122
+    },
+    {
+      "file": "lib/city/architecture-material.ts",
+      "sha256": "d7c3743701d1f2e04017d9e24a41d7406d66223fc37db876250cc013e5ca5e25",
+      "bytes": 8386
+    },
+    {
+      "file": "lib/city/assets/cockpits.ts",
+      "sha256": "b8aed3f6379dfdc9a5a1115382e36af3b17e7183a29dd1e7458a10ac4d2465fc",
+      "bytes": 21892
+    },
+    {
+      "file": "lib/city/assets/residential-perennial-data.ts",
+      "sha256": "56a66f4307e994d16141ceb228eacf6d03e44901f25aa9181b8cadddeca43cc1",
+      "bytes": 2284
+    },
+    {
+      "file": "lib/city/assets/residential-perennial.ts",
+      "sha256": "3d4287d743108528fee11aafd15edbbbab80f9107e33dba89cd60dd53e96f57d",
+      "bytes": 1125
+    },
+    {
+      "file": "lib/city/assets/roadster.ts",
+      "sha256": "e3e25bba28d32df58cbd1b26c66fb5b7657eb04bd4ab9688156d770eb58436f0",
+      "bytes": 13761
+    },
+    {
+      "file": "lib/city/assets/walker.ts",
+      "sha256": "b99690de4da8f38fb925685d4af2fce64fb6388d7402381d1dfee4efcc6d48e9",
+      "bytes": 17246
+    },
+    {
+      "file": "lib/city/atmosphere.ts",
+      "sha256": "e8e2a565e0fdcc568c39df6d8980c464cd9a53a186604960e726748e2cf0741c",
+      "bytes": 6995
+    },
+    {
+      "file": "lib/city/beach-ground.ts",
+      "sha256": "bc7184a1b222ce138e3b9bad11263676bd9166dd06773b5bc91ecc9b5e5c48d7",
+      "bytes": 6009
+    },
+    {
+      "file": "lib/city/beach-surface.ts",
+      "sha256": "bd0f4c31733e1bef970a520f971532e6a53dc655629df54f5b92ffa3eb8d65c7",
+      "bytes": 9450
+    },
+    {
+      "file": "lib/city/boat-controller.ts",
+      "sha256": "e64b57cee7ca233ede9fcdfc277d46aff3a98269d88b68052365e2ba0aff4d33",
+      "bytes": 5330
+    },
+    {
+      "file": "lib/city/boat-physics.ts",
+      "sha256": "6ce2413d9e082e1d17f0d40e1bc67ef48056b3240adb99b1b6fe25a62b6f2954",
+      "bytes": 2590
+    },
+    {
+      "file": "lib/city/bridges.ts",
+      "sha256": "6d78e7f5257551886e5bf467d3f36bee864f3a9171c89967883740d862860d66",
+      "bytes": 6746
+    },
+    {
+      "file": "lib/city/building-bodies.ts",
+      "sha256": "dca28bd9340ec34ea531b4397dd1c69fa6946836e37224f12f3f04dbcc2efac1",
+      "bytes": 16009
+    },
+    {
+      "file": "lib/city/building-roof.ts",
+      "sha256": "9ff6778b9bb72b7f4959ed45ffd177b9d142d5361cf5dd57d357b3470101b530",
+      "bytes": 5644
+    },
+    {
+      "file": "lib/city/building-surface-palette.ts",
+      "sha256": "4ed846624ccb218569f906a2e0399c46156855c97f34cd4e874101394f47e8be",
+      "bytes": 2330
+    },
+    {
+      "file": "lib/city/causeway-city-cuts.json",
+      "sha256": "3c8dc38a1e80a3c8266421b951104d1f3b45300e9757ac1b3ff5f4e9e6f89cc3",
+      "bytes": 7119
+    },
+    {
+      "file": "lib/city/causeway-geometry.ts",
+      "sha256": "dd9ecd615c299595131676af4260c7c5b95557fbc88162e37b2463f8ca8a431a",
+      "bytes": 30385
+    },
+    {
+      "file": "lib/city/causeway-meshes.ts",
+      "sha256": "eea643d6ecdc6d6a68c21770366a925ffe6f0523f3e06048fc36c3e13fa3f3e0",
+      "bytes": 11383
+    },
+    {
+      "file": "lib/city/causeway-no-fill.json",
+      "sha256": "176ee3db09189bc3d820d2e4fbe90bcb0fde7fc091cc9841dc075d5eb9d8b6c1",
+      "bytes": 4730
+    },
+    {
+      "file": "lib/city/causeway-profile.ts",
+      "sha256": "ed35fd3b9477254b685e3138114da71cf90405df683d0678c391224695759532",
+      "bytes": 15997
+    },
+    {
+      "file": "lib/city/causeway-walkways.ts",
+      "sha256": "7cdb7b5e65f8acb358c12f762491a16b3050fa7a5ec594559bb0821ba62faa81",
+      "bytes": 2728
+    },
+    {
+      "file": "lib/city/causeway.ts",
+      "sha256": "0fcae13d72f763fa30a3692431a9303ab25642d1a320e04f1355da840cb2c3a4",
+      "bytes": 4598
+    },
+    {
+      "file": "lib/city/citizen.ts",
+      "sha256": "e16100c4a6ad929065425588351d832fbfdc51e8b104aae75a5af7e362a10d65",
+      "bytes": 10748
+    },
+    {
+      "file": "lib/city/city-surface-material.ts",
+      "sha256": "07ea4d8c25926f703efa575e455efa7145bddda8dd8b1270d8e55149262f969e",
+      "bytes": 4164
+    },
+    {
+      "file": "lib/city/clock.ts",
+      "sha256": "9f8e2afcca996ea51ef3ceb30ee534544e1f352ae5726ea7375f91857ec8ea0d",
+      "bytes": 2442
+    },
+    {
+      "file": "lib/city/driver-camera.ts",
+      "sha256": "911765020382258030d2dc8f386cfc7dc1f720aab5d88bbf4c04ef93beb903d0",
+      "bytes": 1318
+    },
+    {
+      "file": "lib/city/driving-steering.ts",
+      "sha256": "a58842cdcc28c64421ef53058bd3e6077f5ab7ebea55eb633ffe2616f01dfe8e",
+      "bytes": 345
+    },
+    {
+      "file": "lib/city/engine.ts",
+      "sha256": "84dd1b9f945280f745dc5de0d3fd235e2b7fe499143f8d45e164fe1daf7e0fe1",
+      "bytes": 61802
+    },
+    {
+      "file": "lib/city/environment.ts",
+      "sha256": "66450ad80a61b664b8aef10f118c87dd3ad17db04c9c1b0021191e68d5a64dfa",
+      "bytes": 17383
+    },
+    {
+      "file": "lib/city/facade-details.ts",
+      "sha256": "d30f5171e9d153561646bc84f85bd7ce70c01235d2faaf4f3681861f4ba318b5",
+      "bytes": 4106
+    },
+    {
+      "file": "lib/city/facade-page-preparation.ts",
+      "sha256": "c5435dd3b170092fc7dede071e999892eb71f2085bb4e58113130d2d7d8d9420",
+      "bytes": 3988
+    },
+    {
+      "file": "lib/city/facade-pages.ts",
+      "sha256": "e02f11fc5a1d630ed77fa8994a3b453115414faf1f9c49205e7bcbb7d08d5f4a",
+      "bytes": 6494
+    },
+    {
+      "file": "lib/city/facade-plan.ts",
+      "sha256": "d399207a75d79e6f3d8ee7cf52d5c995fff439ee0e73e7eadebd8ba7dad0e410",
+      "bytes": 2944
+    },
+    {
+      "file": "lib/city/facade-profile.ts",
+      "sha256": "86e6e4bae22d24bb7e944d6de44725baa765ab16d4c8556ef55932988a814d19",
+      "bytes": 11959
+    },
+    {
+      "file": "lib/city/facade-queue.ts",
+      "sha256": "13df7666d71cd211e5fdb792d4f71eff2ca801567682b12a2524c62c0c8da8c6",
+      "bytes": 12217
+    },
+    {
+      "file": "lib/city/geo.ts",
+      "sha256": "60c01edb97732574f980770a2f0499f2eb9021a0d8075eb272ea18785570494e",
+      "bytes": 2769
+    },
+    {
+      "file": "lib/city/ground-harmonization-scopes.ts",
+      "sha256": "982a4d35aa8dbd0701a40e940de27d37de00572422d8455452bb43905986f4fa",
+      "bytes": 1286
+    },
+    {
+      "file": "lib/city/ground-surface.ts",
+      "sha256": "d8e05f4511335c984d053029969cb4d1a0d6c0c9a8a856d7530c40b33fb4e0a8",
+      "bytes": 6812
+    },
+    {
+      "file": "lib/city/ground-visibility-mesh.ts",
+      "sha256": "e5413a0f8830cf15ebb3b2993575df41e408c9ce7810cb372f09182350769e58",
+      "bytes": 8203
+    },
+    {
+      "file": "lib/city/ground-visibility.ts",
+      "sha256": "4b8a2f55bd0337f67653ae42e2ab6b17871b18fe07fb7790b7ef4d07f679652e",
+      "bytes": 16647
+    },
+    {
+      "file": "lib/city/harbour-models.ts",
+      "sha256": "3d494df8a5b214327dcdfb4facb1fe79aca27d22a410bf39a8ce11d91e26a68d",
+      "bytes": 36176
+    },
+    {
+      "file": "lib/city/harmonize-ground.ts",
+      "sha256": "701b95c742111b032512c82d082348fafb8242783e1aa9d3a88d62e1b5d14f50",
+      "bytes": 2958
+    },
+    {
+      "file": "lib/city/heritage-paving-material.ts",
+      "sha256": "0808cbc463d1718b14c4f85b61debaece6338e7fe4b6830418df2398bb945ce7",
+      "bytes": 1753
+    },
+    {
+      "file": "lib/city/heritage-paving.ts",
+      "sha256": "23ad05162e4aa83f37c63a4cc64f1c1af44e1b0905ce6b0b4ff53a476ae91cac",
+      "bytes": 10298
+    },
+    {
+      "file": "lib/city/landmark-footprints.json",
+      "sha256": "cf44d69c0411de2488bc86fa5b21ed48eddadbad4a16fcd3a7a4b06ead01b74b",
+      "bytes": 5725
+    },
+    {
+      "file": "lib/city/lions-railings.ts",
+      "sha256": "87a94bd5d8f824b874ad9e34456a9cf56abc08815ab8b64f7420584d9af77716",
+      "bytes": 5041
+    },
+    {
+      "file": "lib/city/main-cross-section-data.json",
+      "sha256": "23be5e7cd2c839f02d804f3a10b9c288d9a4590b2124b88b707628bf1a4c1bd0",
+      "bytes": 6809
+    },
+    {
+      "file": "lib/city/main-cross-section.ts",
+      "sha256": "5de0e94002db2fe4d1557adbc806e71d9c20004a8ebd7c24d2c30b3502450f5c",
+      "bytes": 4604
+    },
+    {
+      "file": "lib/city/main-road-geometry.ts",
+      "sha256": "ae985d665a924bdfb0096eaa7c8000bb604531541163422960221ee2e7565e8f",
+      "bytes": 13327
+    },
+    {
+      "file": "lib/city/material-library.ts",
+      "sha256": "009ea28f25e8d7e315f27ae4dc7965024d15cac92759c3456b0d0d3c035e3768",
+      "bytes": 10168
+    },
+    {
+      "file": "lib/city/navigation.ts",
+      "sha256": "b55276e47e939028f50a3629149dfd6bba97527211deb46dce369c9d9fa4247e",
+      "bytes": 41338
+    },
+    {
+      "file": "lib/city/north-walkways-source.json",
+      "sha256": "7cbfbe023ec94f43611d3b2fc8ca6587e92aae7dd69eb5eb3e3107ad08d22f18",
+      "bytes": 31469
+    },
+    {
+      "file": "lib/city/numbered-blocks.ts",
+      "sha256": "354b46c50c9d794d4058caa9397273884cb6ef647482fe9d4aa37e8a95596b9c",
+      "bytes": 6195
+    },
+    {
+      "file": "lib/city/ordered-bounds.ts",
+      "sha256": "e8a850330722f32435ccec33f4059743945bf90fa31ef36b3fa6d1b827a505c6",
+      "bytes": 2487
+    },
+    {
+      "file": "lib/city/park-paths.ts",
+      "sha256": "b7f24b99b0faa939258bdb9e3e33650309ef8b84d8e44e6a396a56e5001e9311",
+      "bytes": 1364
+    },
+    {
+      "file": "lib/city/pavement.ts",
+      "sha256": "bda53bbfd8ac68252ae85ff322a5258e10f83af8ec2ab3f513cf5227f55c1e10",
+      "bytes": 17334
+    },
+    {
+      "file": "lib/city/placement-geometry.ts",
+      "sha256": "54a9cf85a9dc1a1cce8d7bd0ba46da5419550893d345b70fd273d1e6daaa682d",
+      "bytes": 4670
+    },
+    {
+      "file": "lib/city/region-rules.ts",
+      "sha256": "76ee3956e6f8c2c2f14f3e31f62ab83f1f7d5167fae8b8ba3b0ef465dde83617",
+      "bytes": 5085
+    },
+    {
+      "file": "lib/city/replaced-buildings.ts",
+      "sha256": "c31d842301a73fb870e1e6e0ade7cd3dd81fb8174872ab4f40b4020982e349dc",
+      "bytes": 525
+    },
+    {
+      "file": "lib/city/residential-ground-plan.ts",
+      "sha256": "f752e72051a8cc3428c0b0645b234e404efa70697a8fd6dc57ac3cb604218ca8",
+      "bytes": 5874
+    },
+    {
+      "file": "lib/city/residential-ground.ts",
+      "sha256": "738c06b00827532130da1003bf8fd86eb3d49bb393f408d725435a3444c47237",
+      "bytes": 11350
+    },
+    {
+      "file": "lib/city/residential-perennial-qa.ts",
+      "sha256": "ea7101f112e84c9fa2f60eb62c3d11245d1c915a1bfca606ce87ddb1763b5407",
+      "bytes": 1388
+    },
+    {
+      "file": "lib/city/road-graph.ts",
+      "sha256": "ee710ab807b3be51be0db017e8dc1c0bbe68fdaf9608e5c3115fd2e733205cfa",
+      "bytes": 22003
+    },
+    {
+      "file": "lib/city/road-lowering.ts",
+      "sha256": "a700aaaad984e77734cd1e5df69142ba7659d13dd7026b0983d239378a0b0b5d",
+      "bytes": 15869
+    },
+    {
+      "file": "lib/city/road-surfaces.ts",
+      "sha256": "ccd98e61dbcc321d47d5c1e6e0826431f4c5d04fa34c8b434d0984b24e831a4d",
+      "bytes": 4759
+    },
+    {
+      "file": "lib/city/road-trim.ts",
+      "sha256": "5023111cf6fbcc3798f5e78fcdf7467becd6e7e32a986a8ce625272325cb6671",
+      "bytes": 1546
+    },
+    {
+      "file": "lib/city/seabus-layout.ts",
+      "sha256": "d40906fbb9b508633d77414b3461547165f2907f55469ed7eec3c2c4b0ffb2c1",
+      "bytes": 882
+    },
+    {
+      "file": "lib/city/shore-lowering.ts",
+      "sha256": "69ffc92652fc382a0fd5ced83afffd47eeda3ac1a64f26ab50ac8e6ba93a5853",
+      "bytes": 3604
+    },
+    {
+      "file": "lib/city/south-profile-data.json",
+      "sha256": "d83c5a70096d873cb87049ee1632ef2ce82a44d953566cd77c72e6148885a901",
+      "bytes": 81546
+    },
+    {
+      "file": "lib/city/south-profile.ts",
+      "sha256": "ae2faee2934d62e8d03ed2799479b1acf28ca00b1108cac4700254cdd04927b8",
+      "bytes": 8614
+    },
+    {
+      "file": "lib/city/street-curb-extensions.json",
+      "sha256": "4e721370f8e9fa79c1d71be7996634566afa295ab69640164246d1cd776ffe90",
+      "bytes": 1317
+    },
+    {
+      "file": "lib/city/street-layout.ts",
+      "sha256": "d99059f249075f4657c7a235a89e3cf83214d702c53ab40d7c8bddd7b86e9af5",
+      "bytes": 5074
+    },
+    {
+      "file": "lib/city/street-meshes.ts",
+      "sha256": "ba9dbda647e36067d1ec60ade069fdad87e0b78e366c0848a7ab5f490dfba13b",
+      "bytes": 2387
+    },
+    {
+      "file": "lib/city/surface-meshing.ts",
+      "sha256": "0ab0e7a06f84eb7411d5063de55286172b4bddbb9283089e541b994c71ec69a7",
+      "bytes": 4386
+    },
+    {
+      "file": "lib/city/surface-reachability.ts",
+      "sha256": "8609f5670bfeca50b0c8054df75b70458cdb829ec94e8e5e7f8aca9d53298062",
+      "bytes": 8721
+    },
+    {
+      "file": "lib/city/terrain-draped-path.ts",
+      "sha256": "c7c36b46a297d7d5a54f19af30576a461788637014477046f18e8f04e07b44c6",
+      "bytes": 5696
+    },
+    {
+      "file": "lib/city/touch-input.ts",
+      "sha256": "f8cd660e1bb3d944faab2c6fcdad7f9aa59cc479a24ccca5bd2091c91303b4b1",
+      "bytes": 609
+    },
+    {
+      "file": "lib/city/traffic-stop-state.ts",
+      "sha256": "09e93a5ecd7e9655de91aae73029690509c26789a94843ccb9522f887f3207d4",
+      "bytes": 1861
+    },
+    {
+      "file": "lib/city/traffic-stop.ts",
+      "sha256": "03cde478a39f3402bdcfbe9a59d1d62f1901983a191e734215e49f1304cad7a7",
+      "bytes": 7536
+    },
+    {
+      "file": "lib/city/travel-camera.ts",
+      "sha256": "b37cab09e04a356de2dce1fc81e043fe6d4da43a651927ea48eaacada7e9a5d8",
+      "bytes": 1360
+    },
+    {
+      "file": "lib/city/travel-surfaces.ts",
+      "sha256": "103d03484c129540db1a4f6101795fe5b8bd42cd3dc764f57ce4f7333a839a39",
+      "bytes": 4511
+    },
+    {
+      "file": "lib/city/tree-road-clearance.ts",
+      "sha256": "7001a7431153894e291ddceff0ce080355a9c566349db18ff72daabc2d1a14d5",
+      "bytes": 8789
+    },
+    {
+      "file": "lib/city/upper-walkway-profile.ts",
+      "sha256": "01f18b04edd7de6915a524fb91d23c138dcfdc1951c23ae71d9930de8c7b3920",
+      "bytes": 17545
+    },
+    {
+      "file": "lib/city/wake.ts",
+      "sha256": "5690d75d6779abb5af036383833daac3b3a0079e760cf2f3d7ec5a965df95f02",
+      "bytes": 1612
+    },
+    {
+      "file": "lib/city/walkway-attachments.ts",
+      "sha256": "463d4713964e056dfdf611146dcd411413d0c1d8bc47507ca48e79e2f2eeb1fc",
+      "bytes": 3677
+    },
+    {
+      "file": "lib/city/walkway-ground-connectors.json",
+      "sha256": "f3ca7279ddfe16cd3227f6bdd383cbb2153b0b89fda211cf7fff0e65abc767bd",
+      "bytes": 12536
+    },
+    {
+      "file": "lib/city/water-world.ts",
+      "sha256": "d816c253b44be7825eb5f1f2c6e714214da9cc228e5da30f70350fbde6023cc5",
+      "bytes": 11777
+    },
+    {
+      "file": "lib/city/west-walk-supports.ts",
+      "sha256": "00842aa90d757a128cfd4473fb5fa19453a6f36760df9427e8e28d65850fc3f2",
+      "bytes": 11124
+    },
+    {
+      "file": "public/data/beach-coast.json",
+      "sha256": "47b787f94717fd489ddcdf0c91fc30a81eee65cce7d4fa6e2eea9763b6023459",
+      "bytes": 4966687
+    },
+    {
+      "file": "public/data/bridges.json",
+      "sha256": "52fcf8c310ecedff1782db2c1274af3f032905cdaf461b4a5c85ab0aa6d4faef",
+      "bytes": 62350
+    },
+    {
+      "file": "public/data/buildings.geojson",
+      "sha256": "57cf77f2f7afbceeb3ea4b7dcb87c33d7f56a6df57c33306792503f1dba538ec",
+      "bytes": 3840048
+    },
+    {
+      "file": "public/data/context.geojson",
+      "sha256": "8490953cc264cd3090811fd5cba11cf23fb9d88434f58c99d0f100014fa86ec1",
+      "bytes": 220187
+    },
+    {
+      "file": "public/data/land.geojson",
+      "sha256": "4329b72163668afeee2289160ef00dc9d61c2857d1917447eceaa243c0c30450",
+      "bytes": 299940
+    },
+    {
+      "file": "public/data/parks.geojson",
+      "sha256": "3601c392311b2377a98cb072dd6143746561e25f4c1a5c6b9c6a0659d4bc75b3",
+      "bytes": 87044
+    },
+    {
+      "file": "public/data/paths.geojson",
+      "sha256": "daf512c6eaee772df831462f3f0418f848d3737317b7219db51754ce0fae36b9",
+      "bytes": 320138
+    },
+    {
+      "file": "public/data/roads.geojson",
+      "sha256": "77543c74f4e567a65db14c8d33f9d6250d0f40bdd5f99031c1267aa8dc3373fb",
+      "bytes": 773687
+    },
+    {
+      "file": "public/data/terrain.json",
+      "sha256": "c52c4ae53c3f76ae5cdfdb32765b53d7c61fec4f7d9db03b02c7f7d722853908",
+      "bytes": 303256
+    },
+    {
+      "file": "public/data/trees.json",
+      "sha256": "2ba858b2afa255bef8ad7f6c7aade750151d0990ad492c68e2c2915a92e3267d",
+      "bytes": 1070134
+    },
+    {
+      "file": "public/materials/city/color.png",
+      "sha256": "82e6b67cd2de6ba798a1fb93b53720983d8d6132858eefa661e88f2159a07c78",
+      "bytes": 475586
+    },
+    {
+      "file": "public/materials/city/manifest.json",
+      "sha256": "0a2ba06267b2d172908e89a5ed3cc9b514f0ca398435c9c3cc31d03e9e5861f4",
+      "bytes": 3288
+    },
+    {
+      "file": "public/materials/city/normal.png",
+      "sha256": "37300a5b124a642fec3b8661aecf91bbe91662c15bc53ce5c8754d9ae65c9a7c",
+      "bytes": 199341
+    },
+    {
+      "file": "public/materials/city/orm.png",
+      "sha256": "339db0daeab8081f725ee02ec9bf9d6fcecb480b64abf01dedd7f1a06bbee1ce",
+      "bytes": 158578
+    },
+    {
+      "file": "tools/assets/city-materials/catalog.json",
+      "sha256": "c4e26c42122d394b0ddda5653dbe588e4701bcab97dc2de66420e2411310aa95",
+      "bytes": 1422
+    },
+    {
+      "file": "tools/assets/city-scale-audit/qa/handoff.json",
+      "sha256": "171d283195b0b690a853f851106f3ea05d449471d7e2420530cb92da9ae80687",
+      "bytes": 2227
+    },
+    {
+      "file": "tools/assets/residential-perennial/qa-parity.json",
+      "sha256": "d5e96fae9d25303d5a6f877f1db8a841f8cc617aa1480f1a7136bbd6fe62d3f3",
+      "bytes": 105843
+    },
+    {
+      "file": "tools/assets/residential-perennial/source/perennial.blend",
+      "sha256": "86d87041332b90d35969f1f1ebc664dba0441b3861c4020ee218f4dd094420a2",
+      "bytes": 93750
+    },
+    {
+      "file": "tools/assets/residential-perennial/source/perennial.json",
+      "sha256": "c51ea7d3fab47e6af556691a1bbdd6c9ef927f574071cd1da6a078f5aa540174",
+      "bytes": 4314
+    },
+    {
+      "file": "tools/assets/vegetation_ground/manifest.json",
+      "sha256": "3c4c7fc3a116df450f31a214cad176f3cd12b688529e050b0e6ca5ebcf2eb8ee",
+      "bytes": 11175
+    },
+    {
+      "file": "tools/assets/vegetation_ground/maps/grass_basecolor.png",
+      "sha256": "678d283e62d543ba04e3dec2ec4847c47fdd878bc91ead9c82a2b694dea58a5f",
+      "bytes": 252788
+    },
+    {
+      "file": "tools/assets/vegetation_ground/maps/grass_normal.png",
+      "sha256": "74cb6b02204c37026f6beebdc99001929bd331d5edc884feeef3c2ba830b90ac",
+      "bytes": 581991
+    },
+    {
+      "file": "tools/assets/vegetation_ground/maps/grass_orm.png",
+      "sha256": "18fd14b3329257af888ab8d6ca1f038d4d7643aee47b3c32393fbe8f0d7643ce",
+      "bytes": 52412
+    },
+    {
+      "file": "tools/assets/vegetation_ground/maps/soil_basecolor.png",
+      "sha256": "ff47ea60cd6fa7586e0df74178fe1fd7d4bab01f0eaf3a4d8cd0ebce77bc2c1f",
+      "bytes": 207860
+    },
+    {
+      "file": "tools/assets/vegetation_ground/maps/soil_grass_blend_weight.png",
+      "sha256": "7274615051340d6211c89f67b71b35c6684db39305f83eb7790f7b76323db4b7",
+      "bytes": 108987
+    },
+    {
+      "file": "tools/assets/vegetation_ground/maps/soil_grass_edge_basecolor.png",
+      "sha256": "5c32552aed44c98857d762f2ae4f40dfa6bb6074037d02d9f6189a8146291087",
+      "bytes": 308056
+    },
+    {
+      "file": "tools/assets/vegetation_ground/maps/soil_grass_edge_normal.png",
+      "sha256": "0d2a72a2bdd993986ca7b2211d7f73c46af5fcf116616b05ce73ccba8c0fb85b",
+      "bytes": 570431
+    },
+    {
+      "file": "tools/assets/vegetation_ground/maps/soil_grass_edge_orm.png",
+      "sha256": "b4d807a765c80a11fbe5adfaefc2aecf5bab61840a475469f3b9c4bd42132c37",
+      "bytes": 47536
+    },
+    {
+      "file": "tools/assets/vegetation_ground/maps/soil_normal.png",
+      "sha256": "a962cb174883009121d67edd4ede35196a38abe64eab0e9e45d9a46453aa0cd6",
+      "bytes": 475469
+    },
+    {
+      "file": "tools/assets/vegetation_ground/maps/soil_orm.png",
+      "sha256": "b4d807a765c80a11fbe5adfaefc2aecf5bab61840a475469f3b9c4bd42132c37",
+      "bytes": 47536
+    },
+    {
+      "file": "tools/assets/vegetation_ground/source/vegetation_ground.blend",
+      "sha256": "afc223cbfc59c7f7e8311bc5599f17a24c7123e10b4edd2c7f48f3e65e775926",
+      "bytes": 3737569
+    },
+    {
+      "file": "tools/assets/roof-surface-studies/build.py",
+      "sha256": "a163d7405607472d1a63265d310bcf090f924ac56e53003427f1d4f90d311485",
+      "bytes": 21773
+    },
+    {
+      "file": "tools/assets/city-materials/export_material_library.py",
+      "sha256": "94ac60bc74c37757fc886ff76e108825c68196663726f33a321758d79734df0d",
+      "bytes": 21848
+    },
+    {
+      "file": "tools/causeway-cpu.mjs",
+      "sha256": "fc0c6a37e6cbecbe4666718360924342957a83e0a62669ac2f94665f8309988c",
+      "bytes": 13039
+    }
+  ]
+}

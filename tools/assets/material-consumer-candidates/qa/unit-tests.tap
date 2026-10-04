@@ -1,0 +1,16 @@
+✔ Exact metre triangle charts retain transformed box attributes (3.131046ms)
+✔ Curved and merged geometry keeps metre chart distances (3.424781ms)
+✔ Flat floor charts share XZ phase and sloped charts retain physical distances (0.268287ms)
+✔ Zero-area inherited triangles stay finite rather than moving vertices (0.272603ms)
+✔ Shared eight surface maps use correct channel, physical repeat, and UV orientation (0.825302ms)
+✔ Binding rejects screens/glass, unknown maps and protects shader hooks (0.969285ms)
+✔ Source patches fail closed when reviewed callsites change (0.754387ms)
+✔ Only the authored Roadster seat scope is changed to leather role (0.833605ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 307.126607

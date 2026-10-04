@@ -1,0 +1,880 @@
+{
+  "schemaVersion": 1,
+  "packageId": "rooftop-equipment",
+  "version": "1.0.0",
+  "baseRevision": "5574d55719f10d1575127d8b92cbd23ff71e446f",
+  "status": "offline_complete",
+  "units": "metres",
+  "coordinateSystem": {
+    "authoring": {
+      "up": "+Z",
+      "front": "-Y"
+    },
+    "gltf": {
+      "up": "+Y",
+      "front": "+Z"
+    },
+    "conversion": "Blender (x,y,z) -> glTF (x,z,-y), once by standard exporter"
+  },
+  "provenance": {
+    "source": "original procedural authored meshes for Vancouver Living Atlas",
+    "credit": "Based on Vancouver Living Atlas by YiTaChen",
+    "repository": "https://github.com/YiTaChen/vancouver-living-atlas",
+    "license": "LicenseRef-Vancouver-Living-Atlas-NC-1.0",
+    "dimensionBasis": "Representative original HVAC designs; existing architecture-plan.ts nominal footprint range, not manufacturer measurements. Heights include base and fan guard.",
+    "blenderVersion": "4.3.2",
+    "catalogSha256": "9f04da9fe5757b137ad496757e9139602bdb811345ac01f511604a4889b4a43b",
+    "generatorSha256": "1a36e3ff8f9db7b413c7f2caf502b1a76c17afa3949e884a3b67fcfdd6566a30",
+    "exporterSha256": "7583ee330035519238c4a4ff0c4380b7d121ebadd2eda0da6797a060f3d91feb",
+    "scope": "B01 first asset batch; existing parapet retained via compatibility adapter"
+  },
+  "reexportCommand": "blender --background --factory-startup --threads 2 --python-exit-code 1 --python tools/assets/rooftop-equipment/export.py -- --source tools/assets/rooftop-equipment/source --output /tmp/rooftop-equipment-reexport",
+  "validationCommand": "python3 tools/assets/rooftop-equipment/validate.py --root tools/assets/rooftop-equipment --blender-audit --report tools/assets/rooftop-equipment/qa/validation.json",
+  "assets": [
+    {
+      "id": "hvac-compact-single",
+      "taskId": "B01",
+      "variant": "compact-single-fan",
+      "kind": "rooftop-hvac",
+      "source": "source/hvac-compact-single.lod0.blend",
+      "sourceSha256": "8b113ad3b810169df87b7e046e5342cae055d47b2528d09671fda60b990eea6d",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/hvac-compact-single.lod0.glb",
+          "sha256": "696673e0add593d237c41ff1809c4b6f29f0bdc8b1c41fc9b4596e1248fe26ac",
+          "source": "source/hvac-compact-single.lod0.blend",
+          "sourceSha256": "8b113ad3b810169df87b7e046e5342cae055d47b2528d09671fda60b990eea6d",
+          "boundsM": {
+            "min": [
+              -1.100000023841858,
+              0.0,
+              -0.824999988079071
+            ],
+            "max": [
+              1.100000023841858,
+              1.100000023841858,
+              0.824999988079071
+            ],
+            "size": [
+              2.200000047683716,
+              1.100000023841858,
+              1.649999976158142
+            ]
+          },
+          "triangles": 324,
+          "vertices": 612,
+          "primitives": 2,
+          "bytes": 34572,
+          "geometryBytes": 34572,
+          "embeddedImageBytes": 0,
+          "triangleCap": 480
+        },
+        {
+          "level": 1,
+          "file": "exports/hvac-compact-single.lod1.glb",
+          "sha256": "57dc05e148844919da0f08f403b8ca838b97fb690daffbeb780a144df62c0b81",
+          "source": "source/hvac-compact-single.lod1.blend",
+          "sourceSha256": "34f1d089cf83c27de9936a7fb959ea0abe6b3e366606b0b0bc247b690f454589",
+          "boundsM": {
+            "min": [
+              -1.100000023841858,
+              0.0,
+              -0.824999988079071
+            ],
+            "max": [
+              1.100000023841858,
+              1.100000023841858,
+              0.824999988079071
+            ],
+            "size": [
+              2.200000047683716,
+              1.100000023841858,
+              1.649999976158142
+            ]
+          },
+          "triangles": 70,
+          "vertices": 136,
+          "primitives": 2,
+          "bytes": 9908,
+          "geometryBytes": 9908,
+          "embeddedImageBytes": 0,
+          "triangleCap": 96
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -1.100000023841858,
+          0.0,
+          -0.824999988079071
+        ],
+        "max": [
+          1.100000023841858,
+          1.100000023841858,
+          0.824999988079071
+        ],
+        "size": [
+          2.200000047683716,
+          1.100000023841858,
+          1.649999976158142
+        ]
+      },
+      "expectedDimensionsM": [
+        2.2,
+        1.1,
+        1.65
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Representative original HVAC designs; existing architecture-plan.ts nominal footprint range, not manufacturer measurements. Heights include base and fan guard.",
+      "pivot": {
+        "frameId": "asset-root",
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "centre of roof-contact curb"
+      },
+      "attachmentDatum": {
+        "kind": "roof-contact",
+        "axis": "+Y",
+        "planeY": 0,
+        "minimumY": 0
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "shared-metal-housing",
+          "role": "shared-metal",
+          "surfaceId": "painted-metal",
+          "maps": [],
+          "primitiveMatch": "material index resolved by material name",
+          "physicalTileMeters": [
+            0.8,
+            0.8
+          ]
+        },
+        {
+          "material": "shared-metal-detail",
+          "role": "shared-metal-grille",
+          "surfaceId": "painted-metal",
+          "maps": [],
+          "primitiveMatch": "material index resolved by material name",
+          "physicalTileMeters": [
+            0.8,
+            0.8
+          ]
+        }
+      ],
+      "textureMode": "shared",
+      "textureCost": {
+        "geometryBytes": 44480,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 44480,
+        "uniqueTexelBytesWithMips": 0
+      },
+      "lodPolicy": {
+        "levels": [
+          0,
+          1
+        ],
+        "recommendedDistanceM": [
+          35,
+          110
+        ],
+        "mode": "proposal, sample-measure before activation",
+        "farFallback": "existing architecture descriptor boxes; no all-city residency",
+        "nearInstanceCaps": {
+          "High": 24,
+          "Ultra": 48
+        },
+        "pilotCellCap": 2
+      },
+      "clearance": {
+        "frameId": "asset-root",
+        "footprintPolygonXZ": [
+          [
+            -1.1,
+            -0.825
+          ],
+          [
+            1.1,
+            -0.825
+          ],
+          [
+            1.1,
+            0.825
+          ],
+          [
+            -1.1,
+            0.825
+          ]
+        ],
+        "roofExclusionMarginM": 1,
+        "interUnitRadiusM": 2.175,
+        "serviceFace": "+Z",
+        "serviceAccessM": 1,
+        "reason": "existing roofBoxFits width/depth +2 m and radius +0.8 m rules retained, not safety-code certification"
+      },
+      "collision": {
+        "kind": "box-primitives",
+        "frameId": "asset-root",
+        "primitives": [
+          {
+            "type": "box",
+            "centreM": [
+              0,
+              0.55,
+              0
+            ],
+            "sizeM": [
+              2.2,
+              1.1,
+              1.65
+            ]
+          }
+        ],
+        "use": "optional conservative decorative envelope; no new navigation roof surface"
+      },
+      "anchors": [
+        {
+          "id": "roof-contact",
+          "frameId": "asset-root",
+          "positionM": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "service-face",
+          "frameId": "asset-root",
+          "positionM": [
+            0,
+            0.539,
+            0.825
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "profiles": [
+          "heritage-brick",
+          "lowrise-masonry",
+          "midrise-grid",
+          "balcony-slab",
+          "curtain-wall"
+        ],
+        "roofTypes": [
+          "flat exposed roof"
+        ],
+        "reject": [
+          "domestic-cladding",
+          "roofEaveHeight defined",
+          "part.roof false",
+          "polygon holes",
+          "higher source parts exclusions"
+        ],
+        "legacyNominalFootprintRangeM": {
+          "width": [
+            2.2,
+            3.61
+          ],
+          "depth": [
+            1.65,
+            2.45
+          ]
+        },
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "selection": "choose fitting fixed-size variant by source seed, do not nonuniformly stretch to descriptor",
+        "datumTransform": "translation.y = ground + part.height; do not reuse legacy box-centre offset",
+        "fitTest": "roofBoxFits(polygon,x,z,fullWidth+2,fullDepth+2,yaw,part.roofExclusions)",
+        "sourceStatus": "representative placement, no measured per-building HVAC data"
+      },
+      "intendedConsumer": [
+        "lib/city/architecture-plan.ts",
+        "lib/city/architecture-details.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/blender-audit.json",
+          "qa/source-roundtrip.json",
+          "qa/preview-index.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "No WebGL city integration performed; asset-only package"
+      }
+    },
+    {
+      "id": "hvac-medium-twin",
+      "taskId": "B01",
+      "variant": "medium-twin-fan",
+      "kind": "rooftop-hvac",
+      "source": "source/hvac-medium-twin.lod0.blend",
+      "sourceSha256": "ed32e33894bc4017b117129f73d5d48b727e3007509ad2d0fb5015b0b3365d0b",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/hvac-medium-twin.lod0.glb",
+          "sha256": "9f421db8b33722dffa78afd2f4dbc899c3b50640f3eaeaeec2f9795d02e56b60",
+          "source": "source/hvac-medium-twin.lod0.blend",
+          "sourceSha256": "ed32e33894bc4017b117129f73d5d48b727e3007509ad2d0fb5015b0b3365d0b",
+          "boundsM": {
+            "min": [
+              -1.3350000381469727,
+              0.0,
+              -1.024999976158142
+            ],
+            "max": [
+              1.3350000381469727,
+              1.350000023841858,
+              1.024999976158142
+            ],
+            "size": [
+              2.6700000762939453,
+              1.350000023841858,
+              2.049999952316284
+            ]
+          },
+          "triangles": 388,
+          "vertices": 730,
+          "primitives": 2,
+          "bytes": 40740,
+          "geometryBytes": 40740,
+          "embeddedImageBytes": 0,
+          "triangleCap": 480
+        },
+        {
+          "level": 1,
+          "file": "exports/hvac-medium-twin.lod1.glb",
+          "sha256": "98869e938071237953d8c5fd0305cb2216f6b623d797fc81699ae44fca0c6aa9",
+          "source": "source/hvac-medium-twin.lod1.blend",
+          "sourceSha256": "911d3d7d58a0308bf35e3f5c2dfed364278bf153449aa83576a91a5faa097239",
+          "boundsM": {
+            "min": [
+              -1.3350000381469727,
+              0.0,
+              -1.024999976158142
+            ],
+            "max": [
+              1.3350000381469727,
+              1.350000023841858,
+              1.024999976158142
+            ],
+            "size": [
+              2.6700000762939453,
+              1.350000023841858,
+              2.049999952316284
+            ]
+          },
+          "triangles": 92,
+          "vertices": 176,
+          "primitives": 2,
+          "bytes": 11980,
+          "geometryBytes": 11980,
+          "embeddedImageBytes": 0,
+          "triangleCap": 96
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -1.3350000381469727,
+          0.0,
+          -1.024999976158142
+        ],
+        "max": [
+          1.3350000381469727,
+          1.350000023841858,
+          1.024999976158142
+        ],
+        "size": [
+          2.6700000762939453,
+          1.350000023841858,
+          2.049999952316284
+        ]
+      },
+      "expectedDimensionsM": [
+        2.67,
+        1.35,
+        2.05
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Representative original HVAC designs; existing architecture-plan.ts nominal footprint range, not manufacturer measurements. Heights include base and fan guard.",
+      "pivot": {
+        "frameId": "asset-root",
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "centre of roof-contact curb"
+      },
+      "attachmentDatum": {
+        "kind": "roof-contact",
+        "axis": "+Y",
+        "planeY": 0,
+        "minimumY": 0
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "shared-metal-housing",
+          "role": "shared-metal",
+          "surfaceId": "painted-metal",
+          "maps": [],
+          "primitiveMatch": "material index resolved by material name",
+          "physicalTileMeters": [
+            0.8,
+            0.8
+          ]
+        },
+        {
+          "material": "shared-metal-detail",
+          "role": "shared-metal-grille",
+          "surfaceId": "painted-metal",
+          "maps": [],
+          "primitiveMatch": "material index resolved by material name",
+          "physicalTileMeters": [
+            0.8,
+            0.8
+          ]
+        }
+      ],
+      "textureMode": "shared",
+      "textureCost": {
+        "geometryBytes": 52720,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 52720,
+        "uniqueTexelBytesWithMips": 0
+      },
+      "lodPolicy": {
+        "levels": [
+          0,
+          1
+        ],
+        "recommendedDistanceM": [
+          35,
+          110
+        ],
+        "mode": "proposal, sample-measure before activation",
+        "farFallback": "existing architecture descriptor boxes; no all-city residency",
+        "nearInstanceCaps": {
+          "High": 24,
+          "Ultra": 48
+        },
+        "pilotCellCap": 2
+      },
+      "clearance": {
+        "frameId": "asset-root",
+        "footprintPolygonXZ": [
+          [
+            -1.335,
+            -1.025
+          ],
+          [
+            1.335,
+            -1.025
+          ],
+          [
+            1.335,
+            1.025
+          ],
+          [
+            -1.335,
+            1.025
+          ]
+        ],
+        "roofExclusionMarginM": 1,
+        "interUnitRadiusM": 2.4831072455431946,
+        "serviceFace": "+Z",
+        "serviceAccessM": 1,
+        "reason": "existing roofBoxFits width/depth +2 m and radius +0.8 m rules retained, not safety-code certification"
+      },
+      "collision": {
+        "kind": "box-primitives",
+        "frameId": "asset-root",
+        "primitives": [
+          {
+            "type": "box",
+            "centreM": [
+              0,
+              0.675,
+              0
+            ],
+            "sizeM": [
+              2.67,
+              1.35,
+              2.05
+            ]
+          }
+        ],
+        "use": "optional conservative decorative envelope; no new navigation roof surface"
+      },
+      "anchors": [
+        {
+          "id": "roof-contact",
+          "frameId": "asset-root",
+          "positionM": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "service-face",
+          "frameId": "asset-root",
+          "positionM": [
+            0,
+            0.6615,
+            1.025
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "profiles": [
+          "heritage-brick",
+          "lowrise-masonry",
+          "midrise-grid",
+          "balcony-slab",
+          "curtain-wall"
+        ],
+        "roofTypes": [
+          "flat exposed roof"
+        ],
+        "reject": [
+          "domestic-cladding",
+          "roofEaveHeight defined",
+          "part.roof false",
+          "polygon holes",
+          "higher source parts exclusions"
+        ],
+        "legacyNominalFootprintRangeM": {
+          "width": [
+            2.2,
+            3.61
+          ],
+          "depth": [
+            1.65,
+            2.45
+          ]
+        },
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "selection": "choose fitting fixed-size variant by source seed, do not nonuniformly stretch to descriptor",
+        "datumTransform": "translation.y = ground + part.height; do not reuse legacy box-centre offset",
+        "fitTest": "roofBoxFits(polygon,x,z,fullWidth+2,fullDepth+2,yaw,part.roofExclusions)",
+        "sourceStatus": "representative placement, no measured per-building HVAC data"
+      },
+      "intendedConsumer": [
+        "lib/city/architecture-plan.ts",
+        "lib/city/architecture-details.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/blender-audit.json",
+          "qa/source-roundtrip.json",
+          "qa/preview-index.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "No WebGL city integration performed; asset-only package"
+      }
+    },
+    {
+      "id": "hvac-wide-twin",
+      "taskId": "B01",
+      "variant": "wide-twin-fan",
+      "kind": "rooftop-hvac",
+      "source": "source/hvac-wide-twin.lod0.blend",
+      "sourceSha256": "0ac275fdf872c65f4db850ee8fda8f925ff43e07636deadfdfe86ce507b5c139",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/hvac-wide-twin.lod0.glb",
+          "sha256": "fd044bd6994fb81c4cadb28c9a150f4c41b7d8ee05ef2949b531b7f0e42085da",
+          "source": "source/hvac-wide-twin.lod0.blend",
+          "sourceSha256": "0ac275fdf872c65f4db850ee8fda8f925ff43e07636deadfdfe86ce507b5c139",
+          "boundsM": {
+            "min": [
+              -1.8049999475479126,
+              0.0,
+              -1.225000023841858
+            ],
+            "max": [
+              1.8049999475479126,
+              1.399999976158142,
+              1.225000023841858
+            ],
+            "size": [
+              3.609999895095825,
+              1.399999976158142,
+              2.450000047683716
+            ]
+          },
+          "triangles": 388,
+          "vertices": 730,
+          "primitives": 2,
+          "bytes": 40736,
+          "geometryBytes": 40736,
+          "embeddedImageBytes": 0,
+          "triangleCap": 480
+        },
+        {
+          "level": 1,
+          "file": "exports/hvac-wide-twin.lod1.glb",
+          "sha256": "95dff8624674ff8bdb3f59549de2471ff87e85e1910ca6c759bb5b3dde0a3c25",
+          "source": "source/hvac-wide-twin.lod1.blend",
+          "sourceSha256": "00f8297e95e8263b8055f406aa6ec4531ca46dbfa8f27d5adcfb0f6488926bf8",
+          "boundsM": {
+            "min": [
+              -1.8049999475479126,
+              0.0,
+              -1.225000023841858
+            ],
+            "max": [
+              1.8049999475479126,
+              1.399999976158142,
+              1.225000023841858
+            ],
+            "size": [
+              3.609999895095825,
+              1.399999976158142,
+              2.450000047683716
+            ]
+          },
+          "triangles": 92,
+          "vertices": 176,
+          "primitives": 2,
+          "bytes": 11976,
+          "geometryBytes": 11976,
+          "embeddedImageBytes": 0,
+          "triangleCap": 96
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -1.8049999475479126,
+          0.0,
+          -1.225000023841858
+        ],
+        "max": [
+          1.8049999475479126,
+          1.399999976158142,
+          1.225000023841858
+        ],
+        "size": [
+          3.609999895095825,
+          1.399999976158142,
+          2.450000047683716
+        ]
+      },
+      "expectedDimensionsM": [
+        3.61,
+        1.4,
+        2.45
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Representative original HVAC designs; existing architecture-plan.ts nominal footprint range, not manufacturer measurements. Heights include base and fan guard.",
+      "pivot": {
+        "frameId": "asset-root",
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "centre of roof-contact curb"
+      },
+      "attachmentDatum": {
+        "kind": "roof-contact",
+        "axis": "+Y",
+        "planeY": 0,
+        "minimumY": 0
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "shared-metal-housing",
+          "role": "shared-metal",
+          "surfaceId": "painted-metal",
+          "maps": [],
+          "primitiveMatch": "material index resolved by material name",
+          "physicalTileMeters": [
+            0.8,
+            0.8
+          ]
+        },
+        {
+          "material": "shared-metal-detail",
+          "role": "shared-metal-grille",
+          "surfaceId": "painted-metal",
+          "maps": [],
+          "primitiveMatch": "material index resolved by material name",
+          "physicalTileMeters": [
+            0.8,
+            0.8
+          ]
+        }
+      ],
+      "textureMode": "shared",
+      "textureCost": {
+        "geometryBytes": 52712,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 52712,
+        "uniqueTexelBytesWithMips": 0
+      },
+      "lodPolicy": {
+        "levels": [
+          0,
+          1
+        ],
+        "recommendedDistanceM": [
+          35,
+          110
+        ],
+        "mode": "proposal, sample-measure before activation",
+        "farFallback": "existing architecture descriptor boxes; no all-city residency",
+        "nearInstanceCaps": {
+          "High": 24,
+          "Ultra": 48
+        },
+        "pilotCellCap": 2
+      },
+      "clearance": {
+        "frameId": "asset-root",
+        "footprintPolygonXZ": [
+          [
+            -1.805,
+            -1.225
+          ],
+          [
+            1.805,
+            -1.225
+          ],
+          [
+            1.805,
+            1.225
+          ],
+          [
+            -1.805,
+            1.225
+          ]
+        ],
+        "roofExclusionMarginM": 1,
+        "interUnitRadiusM": 2.9814330152447956,
+        "serviceFace": "+Z",
+        "serviceAccessM": 1,
+        "reason": "existing roofBoxFits width/depth +2 m and radius +0.8 m rules retained, not safety-code certification"
+      },
+      "collision": {
+        "kind": "box-primitives",
+        "frameId": "asset-root",
+        "primitives": [
+          {
+            "type": "box",
+            "centreM": [
+              0,
+              0.7,
+              0
+            ],
+            "sizeM": [
+              3.61,
+              1.4,
+              2.45
+            ]
+          }
+        ],
+        "use": "optional conservative decorative envelope; no new navigation roof surface"
+      },
+      "anchors": [
+        {
+          "id": "roof-contact",
+          "frameId": "asset-root",
+          "positionM": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "service-face",
+          "frameId": "asset-root",
+          "positionM": [
+            0,
+            0.6859999999999999,
+            1.225
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "profiles": [
+          "heritage-brick",
+          "lowrise-masonry",
+          "midrise-grid",
+          "balcony-slab",
+          "curtain-wall"
+        ],
+        "roofTypes": [
+          "flat exposed roof"
+        ],
+        "reject": [
+          "domestic-cladding",
+          "roofEaveHeight defined",
+          "part.roof false",
+          "polygon holes",
+          "higher source parts exclusions"
+        ],
+        "legacyNominalFootprintRangeM": {
+          "width": [
+            2.2,
+            3.61
+          ],
+          "depth": [
+            1.65,
+            2.45
+          ]
+        },
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "selection": "choose fitting fixed-size variant by source seed, do not nonuniformly stretch to descriptor",
+        "datumTransform": "translation.y = ground + part.height; do not reuse legacy box-centre offset",
+        "fitTest": "roofBoxFits(polygon,x,z,fullWidth+2,fullDepth+2,yaw,part.roofExclusions)",
+        "sourceStatus": "representative placement, no measured per-building HVAC data"
+      },
+      "intendedConsumer": [
+        "lib/city/architecture-plan.ts",
+        "lib/city/architecture-details.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/blender-audit.json",
+          "qa/source-roundtrip.json",
+          "qa/preview-index.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "No WebGL city integration performed; asset-only package"
+      }
+    }
+  ],
+  "textures": [],
+  "materialNotes": "Texture-free role placeholders, no copied image maps. Future consumer may bind existing shared painted-metal once; current role tint is intentional and contains no baked illumination."
+}

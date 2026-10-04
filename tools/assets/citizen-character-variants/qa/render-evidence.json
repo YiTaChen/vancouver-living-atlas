@@ -1,0 +1,1192 @@
+[
+  {
+    "file": "qa/previews/citizen-front.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      640,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/citizen.lod0.glb",
+        "sha256": "14733b2a44621b91ff620821faa9a361fd6369458c1a50cb737df9b18453d38f"
+      }
+    ],
+    "clip": "idle",
+    "phase": 0,
+    "lighting": "sunny",
+    "scaleReferencesM": [
+      1,
+      1.75,
+      1.81
+    ]
+  },
+  {
+    "file": "qa/previews/citizen-back.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      640,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/citizen.lod0.glb",
+        "sha256": "14733b2a44621b91ff620821faa9a361fd6369458c1a50cb737df9b18453d38f"
+      }
+    ],
+    "clip": "idle",
+    "phase": 0,
+    "lighting": "sunny",
+    "scaleReferencesM": [
+      1,
+      1.75,
+      1.81
+    ]
+  },
+  {
+    "file": "qa/previews/citizen-side.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      640,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/citizen.lod0.glb",
+        "sha256": "14733b2a44621b91ff620821faa9a361fd6369458c1a50cb737df9b18453d38f"
+      }
+    ],
+    "clip": "idle",
+    "phase": 0,
+    "lighting": "sunny",
+    "scaleReferencesM": [
+      1,
+      1.75,
+      1.81
+    ]
+  },
+  {
+    "file": "qa/previews/police-front.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      640,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/police.lod0.glb",
+        "sha256": "0d312d3fda05662c3612f0aa29bcf26f2870f23dde8cbcbc6c260d2c9fdcedb0"
+      }
+    ],
+    "clip": "idle",
+    "phase": 0,
+    "lighting": "sunny",
+    "scaleReferencesM": [
+      1,
+      1.75,
+      1.81
+    ]
+  },
+  {
+    "file": "qa/previews/police-back.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      640,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/police.lod0.glb",
+        "sha256": "0d312d3fda05662c3612f0aa29bcf26f2870f23dde8cbcbc6c260d2c9fdcedb0"
+      }
+    ],
+    "clip": "idle",
+    "phase": 0,
+    "lighting": "sunny",
+    "scaleReferencesM": [
+      1,
+      1.75,
+      1.81
+    ]
+  },
+  {
+    "file": "qa/previews/police-side.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      640,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/police.lod0.glb",
+        "sha256": "0d312d3fda05662c3612f0aa29bcf26f2870f23dde8cbcbc6c260d2c9fdcedb0"
+      }
+    ],
+    "clip": "idle",
+    "phase": 0,
+    "lighting": "sunny",
+    "scaleReferencesM": [
+      1,
+      1.75,
+      1.81
+    ]
+  },
+  {
+    "file": "qa/previews/driver-front.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      640,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver.lod0.glb",
+        "sha256": "221f61dd1513ae63974234e6ec3458891cb8a0d6f1f703b2844e8e4b115759c9"
+      }
+    ],
+    "clip": "driver-seated",
+    "phase": 0,
+    "lighting": "sunny",
+    "scaleReferencesM": [
+      1,
+      1.75,
+      1.81
+    ]
+  },
+  {
+    "file": "qa/previews/driver-back.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      640,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver.lod0.glb",
+        "sha256": "221f61dd1513ae63974234e6ec3458891cb8a0d6f1f703b2844e8e4b115759c9"
+      }
+    ],
+    "clip": "driver-seated",
+    "phase": 0,
+    "lighting": "sunny",
+    "scaleReferencesM": [
+      1,
+      1.75,
+      1.81
+    ]
+  },
+  {
+    "file": "qa/previews/driver-side.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      640,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver.lod0.glb",
+        "sha256": "221f61dd1513ae63974234e6ec3458891cb8a0d6f1f703b2844e8e4b115759c9"
+      }
+    ],
+    "clip": "driver-seated",
+    "phase": 0,
+    "lighting": "sunny",
+    "scaleReferencesM": [
+      1,
+      1.75,
+      1.81
+    ]
+  },
+  {
+    "file": "qa/previews/citizen-lods-sunny.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      960,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/citizen.lod0.glb",
+        "sha256": "14733b2a44621b91ff620821faa9a361fd6369458c1a50cb737df9b18453d38f"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/citizen.lod1.glb",
+        "sha256": "5cad4fcfc1782d6b5dfa7663f19dca84142b4d4b75c3cffc08e107fc6ef8ef6d"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/citizen.lod2.glb",
+        "sha256": "2741325b8dd5b26756d0fa67ed809361013326c9ed21c6dca30bf4d70f425a33"
+      }
+    ],
+    "lighting": "sunny",
+    "sameViewLods": [
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "file": "qa/previews/citizen-lods-overcast.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      960,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/citizen.lod0.glb",
+        "sha256": "14733b2a44621b91ff620821faa9a361fd6369458c1a50cb737df9b18453d38f"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/citizen.lod1.glb",
+        "sha256": "5cad4fcfc1782d6b5dfa7663f19dca84142b4d4b75c3cffc08e107fc6ef8ef6d"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/citizen.lod2.glb",
+        "sha256": "2741325b8dd5b26756d0fa67ed809361013326c9ed21c6dca30bf4d70f425a33"
+      }
+    ],
+    "lighting": "overcast",
+    "sameViewLods": [
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "file": "qa/previews/citizen-lods-dusk.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      960,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/citizen.lod0.glb",
+        "sha256": "14733b2a44621b91ff620821faa9a361fd6369458c1a50cb737df9b18453d38f"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/citizen.lod1.glb",
+        "sha256": "5cad4fcfc1782d6b5dfa7663f19dca84142b4d4b75c3cffc08e107fc6ef8ef6d"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/citizen.lod2.glb",
+        "sha256": "2741325b8dd5b26756d0fa67ed809361013326c9ed21c6dca30bf4d70f425a33"
+      }
+    ],
+    "lighting": "dusk",
+    "sameViewLods": [
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "file": "qa/previews/citizen-lods-night.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      960,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/citizen.lod0.glb",
+        "sha256": "14733b2a44621b91ff620821faa9a361fd6369458c1a50cb737df9b18453d38f"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/citizen.lod1.glb",
+        "sha256": "5cad4fcfc1782d6b5dfa7663f19dca84142b4d4b75c3cffc08e107fc6ef8ef6d"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/citizen.lod2.glb",
+        "sha256": "2741325b8dd5b26756d0fa67ed809361013326c9ed21c6dca30bf4d70f425a33"
+      }
+    ],
+    "lighting": "night",
+    "sameViewLods": [
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "file": "qa/previews/police-lods-sunny.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      960,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/police.lod0.glb",
+        "sha256": "0d312d3fda05662c3612f0aa29bcf26f2870f23dde8cbcbc6c260d2c9fdcedb0"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/police.lod1.glb",
+        "sha256": "325a1912d33c8f923954ed308883ff27577d6e200d3d40e31864e4ea1350411c"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/police.lod2.glb",
+        "sha256": "bb6ca6b0b780b4c1abd774ad3a790da10d86008988ac82a9f738e6cc6e8b001d"
+      }
+    ],
+    "lighting": "sunny",
+    "sameViewLods": [
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "file": "qa/previews/police-lods-overcast.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      960,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/police.lod0.glb",
+        "sha256": "0d312d3fda05662c3612f0aa29bcf26f2870f23dde8cbcbc6c260d2c9fdcedb0"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/police.lod1.glb",
+        "sha256": "325a1912d33c8f923954ed308883ff27577d6e200d3d40e31864e4ea1350411c"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/police.lod2.glb",
+        "sha256": "bb6ca6b0b780b4c1abd774ad3a790da10d86008988ac82a9f738e6cc6e8b001d"
+      }
+    ],
+    "lighting": "overcast",
+    "sameViewLods": [
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "file": "qa/previews/police-lods-dusk.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      960,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/police.lod0.glb",
+        "sha256": "0d312d3fda05662c3612f0aa29bcf26f2870f23dde8cbcbc6c260d2c9fdcedb0"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/police.lod1.glb",
+        "sha256": "325a1912d33c8f923954ed308883ff27577d6e200d3d40e31864e4ea1350411c"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/police.lod2.glb",
+        "sha256": "bb6ca6b0b780b4c1abd774ad3a790da10d86008988ac82a9f738e6cc6e8b001d"
+      }
+    ],
+    "lighting": "dusk",
+    "sameViewLods": [
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "file": "qa/previews/police-lods-night.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      960,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/police.lod0.glb",
+        "sha256": "0d312d3fda05662c3612f0aa29bcf26f2870f23dde8cbcbc6c260d2c9fdcedb0"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/police.lod1.glb",
+        "sha256": "325a1912d33c8f923954ed308883ff27577d6e200d3d40e31864e4ea1350411c"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/police.lod2.glb",
+        "sha256": "bb6ca6b0b780b4c1abd774ad3a790da10d86008988ac82a9f738e6cc6e8b001d"
+      }
+    ],
+    "lighting": "night",
+    "sameViewLods": [
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "file": "qa/previews/driver-lods-sunny.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      960,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver.lod0.glb",
+        "sha256": "221f61dd1513ae63974234e6ec3458891cb8a0d6f1f703b2844e8e4b115759c9"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver.lod1.glb",
+        "sha256": "1e2c1079c6cecc0406da5438b3e7d67c8c2700807fbd56270c29f7c2451e7e11"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver.lod2.glb",
+        "sha256": "2ac3f0b8e0834f0261662b3be987ed8739064a4d63e29ce8abb6d06184af7884"
+      }
+    ],
+    "lighting": "sunny",
+    "sameViewLods": [
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "file": "qa/previews/driver-lods-overcast.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      960,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver.lod0.glb",
+        "sha256": "221f61dd1513ae63974234e6ec3458891cb8a0d6f1f703b2844e8e4b115759c9"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver.lod1.glb",
+        "sha256": "1e2c1079c6cecc0406da5438b3e7d67c8c2700807fbd56270c29f7c2451e7e11"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver.lod2.glb",
+        "sha256": "2ac3f0b8e0834f0261662b3be987ed8739064a4d63e29ce8abb6d06184af7884"
+      }
+    ],
+    "lighting": "overcast",
+    "sameViewLods": [
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "file": "qa/previews/driver-lods-dusk.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      960,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver.lod0.glb",
+        "sha256": "221f61dd1513ae63974234e6ec3458891cb8a0d6f1f703b2844e8e4b115759c9"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver.lod1.glb",
+        "sha256": "1e2c1079c6cecc0406da5438b3e7d67c8c2700807fbd56270c29f7c2451e7e11"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver.lod2.glb",
+        "sha256": "2ac3f0b8e0834f0261662b3be987ed8739064a4d63e29ce8abb6d06184af7884"
+      }
+    ],
+    "lighting": "dusk",
+    "sameViewLods": [
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "file": "qa/previews/driver-lods-night.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      960,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver.lod0.glb",
+        "sha256": "221f61dd1513ae63974234e6ec3458891cb8a0d6f1f703b2844e8e4b115759c9"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver.lod1.glb",
+        "sha256": "1e2c1079c6cecc0406da5438b3e7d67c8c2700807fbd56270c29f7c2451e7e11"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver.lod2.glb",
+        "sha256": "2ac3f0b8e0834f0261662b3be987ed8739064a4d63e29ce8abb6d06184af7884"
+      }
+    ],
+    "lighting": "night",
+    "sameViewLods": [
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "file": "qa/previews/run-back-phase-0.7.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      1280,
+      600
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen/optimization/glb/citizen-lod2.glb",
+        "sha256": "51c7c5b1f7f0f17e399c00b04334072abf0e92f0731ccce8b04262cf85c788f2"
+      },
+      {
+        "file": "public/models/citizen/vancouver-citizen.glb",
+        "sha256": "14d66fabe097abf82ef36800561c06ee7263c0acfd6b5ea1265a40ed35841ff8"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/citizen.lod1.glb",
+        "sha256": "5cad4fcfc1782d6b5dfa7663f19dca84142b4d4b75c3cffc08e107fc6ef8ef6d"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/citizen.lod2.glb",
+        "sha256": "2741325b8dd5b26756d0fa67ed809361013326c9ed21c6dca30bf4d70f425a33"
+      }
+    ],
+    "clip": "run",
+    "phase": 0.7,
+    "leftToRight": [
+      "OLD LOD2",
+      "BASELINE",
+      "NEW LOD1",
+      "NEW LOD2"
+    ]
+  },
+  {
+    "file": "qa/previews/run-back-phase-0.775858.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      1280,
+      600
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen/optimization/glb/citizen-lod2.glb",
+        "sha256": "51c7c5b1f7f0f17e399c00b04334072abf0e92f0731ccce8b04262cf85c788f2"
+      },
+      {
+        "file": "public/models/citizen/vancouver-citizen.glb",
+        "sha256": "14d66fabe097abf82ef36800561c06ee7263c0acfd6b5ea1265a40ed35841ff8"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/citizen.lod1.glb",
+        "sha256": "5cad4fcfc1782d6b5dfa7663f19dca84142b4d4b75c3cffc08e107fc6ef8ef6d"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/citizen.lod2.glb",
+        "sha256": "2741325b8dd5b26756d0fa67ed809361013326c9ed21c6dca30bf4d70f425a33"
+      }
+    ],
+    "clip": "run",
+    "phase": 0.775858,
+    "leftToRight": [
+      "OLD LOD2",
+      "BASELINE",
+      "NEW LOD1",
+      "NEW LOD2"
+    ]
+  },
+  {
+    "file": "qa/previews/run-back-phase-0.85.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      1280,
+      600
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen/optimization/glb/citizen-lod2.glb",
+        "sha256": "51c7c5b1f7f0f17e399c00b04334072abf0e92f0731ccce8b04262cf85c788f2"
+      },
+      {
+        "file": "public/models/citizen/vancouver-citizen.glb",
+        "sha256": "14d66fabe097abf82ef36800561c06ee7263c0acfd6b5ea1265a40ed35841ff8"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/citizen.lod1.glb",
+        "sha256": "5cad4fcfc1782d6b5dfa7663f19dca84142b4d4b75c3cffc08e107fc6ef8ef6d"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/citizen.lod2.glb",
+        "sha256": "2741325b8dd5b26756d0fa67ed809361013326c9ed21c6dca30bf4d70f425a33"
+      }
+    ],
+    "clip": "run",
+    "phase": 0.85,
+    "leftToRight": [
+      "OLD LOD2",
+      "BASELINE",
+      "NEW LOD1",
+      "NEW LOD2"
+    ]
+  },
+  {
+    "file": "qa/previews/citizen-lod0-critical-waist.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      512,
+      512
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/citizen.lod0.glb",
+        "sha256": "14733b2a44621b91ff620821faa9a361fd6369458c1a50cb737df9b18453d38f"
+      }
+    ],
+    "clip": "run",
+    "phase": 0.775858,
+    "lighting": "sunny",
+    "camera": "identical posterior waist crop"
+  },
+  {
+    "file": "qa/previews/citizen-lod1-critical-waist.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      512,
+      512
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/citizen.lod1.glb",
+        "sha256": "5cad4fcfc1782d6b5dfa7663f19dca84142b4d4b75c3cffc08e107fc6ef8ef6d"
+      }
+    ],
+    "clip": "run",
+    "phase": 0.775858,
+    "lighting": "sunny",
+    "camera": "identical posterior waist crop"
+  },
+  {
+    "file": "qa/previews/citizen-lod2-critical-waist.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      512,
+      512
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/citizen.lod2.glb",
+        "sha256": "2741325b8dd5b26756d0fa67ed809361013326c9ed21c6dca30bf4d70f425a33"
+      }
+    ],
+    "clip": "run",
+    "phase": 0.775858,
+    "lighting": "sunny",
+    "camera": "identical posterior waist crop"
+  },
+  {
+    "file": "qa/previews/driver-roadster-side.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      900,
+      600
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/material-consumer-candidates/qa/roadster.candidate.inspection.glb",
+        "sha256": "86ac22f2d9e231702e3eac2f303dcee14bc099160d1d5066632c34fde06afc02"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver.lod0.glb",
+        "sha256": "221f61dd1513ae63974234e6ec3458891cb8a0d6f1f703b2844e8e4b115759c9"
+      }
+    ],
+    "clip": "driver-seated",
+    "roadsterScale": [
+      1,
+      1,
+      1
+    ],
+    "removedOnly": [
+      "roadster/driver-skin",
+      "roadster/driver-clothing"
+    ],
+    "candidateRootTranslationGltf": [
+      0.44,
+      0,
+      -0.06
+    ]
+  },
+  {
+    "file": "qa/previews/driver-roadster-front.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      900,
+      600
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/material-consumer-candidates/qa/roadster.candidate.inspection.glb",
+        "sha256": "86ac22f2d9e231702e3eac2f303dcee14bc099160d1d5066632c34fde06afc02"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver.lod0.glb",
+        "sha256": "221f61dd1513ae63974234e6ec3458891cb8a0d6f1f703b2844e8e4b115759c9"
+      }
+    ],
+    "clip": "driver-seated",
+    "roadsterScale": [
+      1,
+      1,
+      1
+    ],
+    "removedOnly": [
+      "roadster/driver-skin",
+      "roadster/driver-clothing"
+    ],
+    "candidateRootTranslationGltf": [
+      0.44,
+      0,
+      -0.06
+    ]
+  },
+  {
+    "file": "qa/previews/driver-roadster-hands.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      900,
+      600
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/material-consumer-candidates/qa/roadster.candidate.inspection.glb",
+        "sha256": "86ac22f2d9e231702e3eac2f303dcee14bc099160d1d5066632c34fde06afc02"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver.lod0.glb",
+        "sha256": "221f61dd1513ae63974234e6ec3458891cb8a0d6f1f703b2844e8e4b115759c9"
+      }
+    ],
+    "clip": "driver-seated",
+    "roadsterScale": [
+      1,
+      1,
+      1
+    ],
+    "removedOnly": [
+      "roadster/driver-skin",
+      "roadster/driver-clothing"
+    ],
+    "candidateRootTranslationGltf": [
+      0.44,
+      0,
+      -0.06
+    ]
+  },
+  {
+    "file": "qa/previews/driver-roadster-cutaway.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      900,
+      600
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/material-consumer-candidates/qa/roadster.candidate.inspection.glb",
+        "sha256": "86ac22f2d9e231702e3eac2f303dcee14bc099160d1d5066632c34fde06afc02"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver.lod0.glb",
+        "sha256": "221f61dd1513ae63974234e6ec3458891cb8a0d6f1f703b2844e8e4b115759c9"
+      }
+    ],
+    "clip": "driver-seated",
+    "roadsterScale": [
+      1,
+      1,
+      1
+    ],
+    "removedOnly": [
+      "roadster/driver-skin",
+      "roadster/driver-clothing",
+      "paint-role surfaces",
+      "glass"
+    ],
+    "candidateRootTranslationGltf": [
+      0.44,
+      0,
+      -0.06
+    ]
+  },
+  {
+    "file": "qa/previews/driver-roadster-fit-front.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      640,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod0.glb",
+        "sha256": "a6e21e8d1d97f8be38e49a716ee8a6ac9cca54fd31b84b13617c705b665c97fc"
+      }
+    ],
+    "clip": "driver-seated",
+    "phase": 0,
+    "lighting": "sunny",
+    "scaleReferencesM": [
+      1,
+      1.75,
+      1.81
+    ],
+    "morphState": [
+      {
+        "mesh": "Tailored torso.001",
+        "DriverGrip": 1.0
+      }
+    ]
+  },
+  {
+    "file": "qa/previews/driver-roadster-fit-back.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      640,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod0.glb",
+        "sha256": "a6e21e8d1d97f8be38e49a716ee8a6ac9cca54fd31b84b13617c705b665c97fc"
+      }
+    ],
+    "clip": "driver-seated",
+    "phase": 0,
+    "lighting": "sunny",
+    "scaleReferencesM": [
+      1,
+      1.75,
+      1.81
+    ],
+    "morphState": [
+      {
+        "mesh": "Tailored torso.001",
+        "DriverGrip": 1.0
+      }
+    ]
+  },
+  {
+    "file": "qa/previews/driver-roadster-fit-side.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      640,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod0.glb",
+        "sha256": "a6e21e8d1d97f8be38e49a716ee8a6ac9cca54fd31b84b13617c705b665c97fc"
+      }
+    ],
+    "clip": "driver-seated",
+    "phase": 0,
+    "lighting": "sunny",
+    "scaleReferencesM": [
+      1,
+      1.75,
+      1.81
+    ],
+    "morphState": [
+      {
+        "mesh": "Tailored torso.001",
+        "DriverGrip": 1.0
+      }
+    ]
+  },
+  {
+    "file": "qa/previews/driver-roadster-fit-lods-sunny.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      960,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod0.glb",
+        "sha256": "a6e21e8d1d97f8be38e49a716ee8a6ac9cca54fd31b84b13617c705b665c97fc"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod1.glb",
+        "sha256": "1cb79599d359175c39ce0d466173f5293d7bbcb16a8f08450bd851c09ce0a0c0"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod2.glb",
+        "sha256": "1198d8433e27e9b60c17d054548162315584e49e644d16426828005e846833ac"
+      }
+    ],
+    "lighting": "sunny",
+    "sameViewLods": [
+      0,
+      1,
+      2
+    ],
+    "morphState": [
+      {
+        "mesh": "Tailored torso.001",
+        "DriverGrip": 1.0
+      },
+      {
+        "mesh": "Tailored torso.003",
+        "DriverGrip": 1.0
+      },
+      {
+        "mesh": "Tailored torso.005",
+        "DriverGrip": 1.0
+      }
+    ]
+  },
+  {
+    "file": "qa/previews/driver-roadster-fit-lods-overcast.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      960,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod0.glb",
+        "sha256": "a6e21e8d1d97f8be38e49a716ee8a6ac9cca54fd31b84b13617c705b665c97fc"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod1.glb",
+        "sha256": "1cb79599d359175c39ce0d466173f5293d7bbcb16a8f08450bd851c09ce0a0c0"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod2.glb",
+        "sha256": "1198d8433e27e9b60c17d054548162315584e49e644d16426828005e846833ac"
+      }
+    ],
+    "lighting": "overcast",
+    "sameViewLods": [
+      0,
+      1,
+      2
+    ],
+    "morphState": [
+      {
+        "mesh": "Tailored torso.001",
+        "DriverGrip": 1.0
+      },
+      {
+        "mesh": "Tailored torso.003",
+        "DriverGrip": 1.0
+      },
+      {
+        "mesh": "Tailored torso.005",
+        "DriverGrip": 1.0
+      }
+    ]
+  },
+  {
+    "file": "qa/previews/driver-roadster-fit-lods-dusk.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      960,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod0.glb",
+        "sha256": "a6e21e8d1d97f8be38e49a716ee8a6ac9cca54fd31b84b13617c705b665c97fc"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod1.glb",
+        "sha256": "1cb79599d359175c39ce0d466173f5293d7bbcb16a8f08450bd851c09ce0a0c0"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod2.glb",
+        "sha256": "1198d8433e27e9b60c17d054548162315584e49e644d16426828005e846833ac"
+      }
+    ],
+    "lighting": "dusk",
+    "sameViewLods": [
+      0,
+      1,
+      2
+    ],
+    "morphState": [
+      {
+        "mesh": "Tailored torso.001",
+        "DriverGrip": 1.0
+      },
+      {
+        "mesh": "Tailored torso.003",
+        "DriverGrip": 1.0
+      },
+      {
+        "mesh": "Tailored torso.005",
+        "DriverGrip": 1.0
+      }
+    ]
+  },
+  {
+    "file": "qa/previews/driver-roadster-fit-lods-night.png",
+    "renderer": "Cycles",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 32,
+    "resolution": [
+      960,
+      640
+    ],
+    "inputs": [
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod0.glb",
+        "sha256": "a6e21e8d1d97f8be38e49a716ee8a6ac9cca54fd31b84b13617c705b665c97fc"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod1.glb",
+        "sha256": "1cb79599d359175c39ce0d466173f5293d7bbcb16a8f08450bd851c09ce0a0c0"
+      },
+      {
+        "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod2.glb",
+        "sha256": "1198d8433e27e9b60c17d054548162315584e49e644d16426828005e846833ac"
+      }
+    ],
+    "lighting": "night",
+    "sameViewLods": [
+      0,
+      1,
+      2
+    ],
+    "morphState": [
+      {
+        "mesh": "Tailored torso.001",
+        "DriverGrip": 1.0
+      },
+      {
+        "mesh": "Tailored torso.003",
+        "DriverGrip": 1.0
+      },
+      {
+        "mesh": "Tailored torso.005",
+        "DriverGrip": 1.0
+      }
+    ]
+  }
+]

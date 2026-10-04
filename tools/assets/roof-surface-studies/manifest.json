@@ -1,0 +1,835 @@
+{
+  "schemaVersion": 1,
+  "packageId": "roof-surface-studies",
+  "version": "1.0.0",
+  "baseRevision": "5574d55719f10d1575127d8b92cbd23ff71e446f",
+  "status": "offline_complete",
+  "units": "metres",
+  "coordinateSystem": {
+    "source": "Blender Z-up",
+    "export": "glTF Y-up",
+    "conversion": "Blender (x,y,z) -> glTF (x,z,-y), applied by standard glTF exporter once"
+  },
+  "provenance": {
+    "type": "original-procedural-material-study",
+    "basis": [
+      "docs/AI_AGENT_DEVELOPMENT_BACKLOG.md#b02",
+      "lib/city/building-surface-palette.ts",
+      "docs/CITY_READABILITY_2026_10.md",
+      "docs/MATERIAL_PIPELINE.md"
+    ],
+    "credit": "Based on Vancouver Living Atlas by YiTaChen",
+    "source": "https://github.com/YiTaChen/vancouver-living-atlas",
+    "license": "Vancouver Living Atlas Noncommercial Research and Attribution 1.0; repository LICENSE",
+    "surveyed": false,
+    "externalImagesOrModels": false
+  },
+  "reexportCommand": "blender -b -t 2 --factory-startup --python-exit-code 1 --python tools/assets/roof-surface-studies/build.py -- --from-source tools/assets/roof-surface-studies/source --output /tmp/roof-surface-reexport --render",
+  "validationCommand": "python3 tools/assets/roof-surface-studies/validate.py",
+  "assets": [
+    {
+      "id": "roof-mineral-grain-coupon-2m",
+      "taskId": "B02",
+      "variant": "2m-surface-study",
+      "kind": "inspection-material-coupon",
+      "source": "source/roof-mineral-grain.lod0.blend",
+      "sourceSha256": "d44c8ddcb4e42906e7518c297834a7e4cef0013f81377cb85b9506de9773524d",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/roof-mineral-grain-2m.inspection.glb",
+          "sha256": "468242c4df4a55fd426cdf7529c915aef80ec054fb6bcb73bd0e06b939aa2783",
+          "source": "source/roof-mineral-grain.lod0.blend",
+          "sourceSha256": "d44c8ddcb4e42906e7518c297834a7e4cef0013f81377cb85b9506de9773524d",
+          "triangles": 2,
+          "vertices": 4,
+          "primitives": 1,
+          "bytes": 202740,
+          "boundsM": {
+            "min": [
+              -1.0,
+              0.0,
+              -1.0
+            ],
+            "max": [
+              1.0,
+              0.0,
+              1.0
+            ],
+            "size": [
+              2.0,
+              0.0,
+              2.0
+            ]
+          }
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -1.0,
+          0.0,
+          -1.0
+        ],
+        "max": [
+          1.0,
+          0.0,
+          1.0
+        ],
+        "size": [
+          2.0,
+          0.0,
+          2.0
+        ]
+      },
+      "expectedDimensionsM": [
+        2,
+        0,
+        2
+      ],
+      "dimensionToleranceM": 0.0001,
+      "dimensionBasis": "Representative B02 study coupon, exact authored target; not surveyed building geometry.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "description": "Center of horizontal coupon at roof attachment plane."
+      },
+      "attachmentDatum": {
+        "kind": "roof-surface",
+        "plane": "local Y=0",
+        "normal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "frontAxis": "+Z (no frontage semantics for a horizontal surface)",
+      "materialBindings": [
+        {
+          "materialName": "roof-mineral-grain-baked-inspection",
+          "primitive": 0,
+          "semanticRole": "flat-roof-mineral",
+          "surfaceId": "roof-mineral-grain",
+          "maps": {
+            "color": "exports/textures/roof-mineral-grain-color.png",
+            "normal": "exports/textures/roof-mineral-grain-normal.png",
+            "orm": "exports/textures/roof-mineral-grain-orm.png"
+          },
+          "channels": {
+            "color": "sRGB",
+            "normal": "Non-Color OpenGL +Y",
+            "orm": "Non-Color R1 Groughness Bmetallic"
+          },
+          "physicalRepeatMeters": [
+            2,
+            2
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true,
+          "sidePolicy": "Inspection plane is visible from both sides. Future GIS consumer retains its roof-side policy."
+        }
+      ],
+      "textureMode": "embedded-inspection; shared external candidate maps",
+      "textureCost": {
+        "geometryBytes": 2405,
+        "embeddedImageBytes": 200335,
+        "glbTotalBytes": 202740,
+        "uniqueTexelBytesWithMips": 1048576.0,
+        "countingNote": "One material per inspection GLB. Two coupon sizes duplicate embedded images. Runtime surface loader must bind six shared package maps once, without loading coupon GLBs."
+      },
+      "lodPolicy": {
+        "levels": [
+          0
+        ],
+        "reason": "Two-triangle material study plane; 2m and 10m are distinct physical coupons, not LODs. Runtime surface LOD/filter/fade remains unimplemented."
+      },
+      "clearance": [],
+      "collision": {
+        "enabled": false,
+        "reason": "Study plane is not a world patch, collision floor, or roof replacement."
+      },
+      "anchors": [],
+      "placementCompatibility": {
+        "roofTypes": [
+          "source-supported flat roof only"
+        ],
+        "exclude": [
+          "pitched/shingle roofs",
+          "glass",
+          "landmark dedicated membrane shaders"
+        ],
+        "worldPlacement": false,
+        "uvContract": "Source UVs in metres; inspection UV=metres/2. Future GIS consumer must sample roof-local metres/2 without stretching to bounds. Preserve footprint, holes, height, stable roof seed and finish mix."
+      },
+      "intendedConsumer": [
+        "lib/city/building-surface-palette.ts",
+        "lib/city/building-bodies.ts",
+        "lib/city/city-surface-material.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/export-report.json",
+          "qa/source-edit-test.json",
+          "qa/render-evidence.json",
+          "qa/visual-review.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "Offline asset task. No browser acceptance, source-selected placement, deduplication, GPU residency or FPS measurement."
+      }
+    },
+    {
+      "id": "roof-mineral-grain-coupon-10m",
+      "taskId": "B02",
+      "variant": "10m-surface-study",
+      "kind": "inspection-material-coupon",
+      "source": "source/roof-mineral-grain.lod0.blend",
+      "sourceSha256": "d44c8ddcb4e42906e7518c297834a7e4cef0013f81377cb85b9506de9773524d",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/roof-mineral-grain-10m.inspection.glb",
+          "sha256": "e0cca52f6aee60a90f3992364704ecdf63eecdbc9d4f83c766911a9f581d5424",
+          "source": "source/roof-mineral-grain.lod0.blend",
+          "sourceSha256": "d44c8ddcb4e42906e7518c297834a7e4cef0013f81377cb85b9506de9773524d",
+          "triangles": 2,
+          "vertices": 4,
+          "primitives": 1,
+          "bytes": 202740,
+          "boundsM": {
+            "min": [
+              -5.0,
+              0.0,
+              -5.0
+            ],
+            "max": [
+              5.0,
+              0.0,
+              5.0
+            ],
+            "size": [
+              10.0,
+              0.0,
+              10.0
+            ]
+          }
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -5.0,
+          0.0,
+          -5.0
+        ],
+        "max": [
+          5.0,
+          0.0,
+          5.0
+        ],
+        "size": [
+          10.0,
+          0.0,
+          10.0
+        ]
+      },
+      "expectedDimensionsM": [
+        10,
+        0,
+        10
+      ],
+      "dimensionToleranceM": 0.0001,
+      "dimensionBasis": "Representative B02 study coupon, exact authored target; not surveyed building geometry.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "description": "Center of horizontal coupon at roof attachment plane."
+      },
+      "attachmentDatum": {
+        "kind": "roof-surface",
+        "plane": "local Y=0",
+        "normal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "frontAxis": "+Z (no frontage semantics for a horizontal surface)",
+      "materialBindings": [
+        {
+          "materialName": "roof-mineral-grain-baked-inspection",
+          "primitive": 0,
+          "semanticRole": "flat-roof-mineral",
+          "surfaceId": "roof-mineral-grain",
+          "maps": {
+            "color": "exports/textures/roof-mineral-grain-color.png",
+            "normal": "exports/textures/roof-mineral-grain-normal.png",
+            "orm": "exports/textures/roof-mineral-grain-orm.png"
+          },
+          "channels": {
+            "color": "sRGB",
+            "normal": "Non-Color OpenGL +Y",
+            "orm": "Non-Color R1 Groughness Bmetallic"
+          },
+          "physicalRepeatMeters": [
+            2,
+            2
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true,
+          "sidePolicy": "Inspection plane is visible from both sides. Future GIS consumer retains its roof-side policy."
+        }
+      ],
+      "textureMode": "embedded-inspection; shared external candidate maps",
+      "textureCost": {
+        "geometryBytes": 2405,
+        "embeddedImageBytes": 200335,
+        "glbTotalBytes": 202740,
+        "uniqueTexelBytesWithMips": 1048576.0,
+        "countingNote": "One material per inspection GLB. Two coupon sizes duplicate embedded images. Runtime surface loader must bind six shared package maps once, without loading coupon GLBs."
+      },
+      "lodPolicy": {
+        "levels": [
+          0
+        ],
+        "reason": "Two-triangle material study plane; 2m and 10m are distinct physical coupons, not LODs. Runtime surface LOD/filter/fade remains unimplemented."
+      },
+      "clearance": [],
+      "collision": {
+        "enabled": false,
+        "reason": "Study plane is not a world patch, collision floor, or roof replacement."
+      },
+      "anchors": [],
+      "placementCompatibility": {
+        "roofTypes": [
+          "source-supported flat roof only"
+        ],
+        "exclude": [
+          "pitched/shingle roofs",
+          "glass",
+          "landmark dedicated membrane shaders"
+        ],
+        "worldPlacement": false,
+        "uvContract": "Source UVs in metres; inspection UV=metres/2. Future GIS consumer must sample roof-local metres/2 without stretching to bounds. Preserve footprint, holes, height, stable roof seed and finish mix."
+      },
+      "intendedConsumer": [
+        "lib/city/building-surface-palette.ts",
+        "lib/city/building-bodies.ts",
+        "lib/city/city-surface-material.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/export-report.json",
+          "qa/source-edit-test.json",
+          "qa/render-evidence.json",
+          "qa/visual-review.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "Offline asset task. No browser acceptance, source-selected placement, deduplication, GPU residency or FPS measurement."
+      }
+    },
+    {
+      "id": "roof-membrane-seams-coupon-2m",
+      "taskId": "B02",
+      "variant": "2m-surface-study",
+      "kind": "inspection-material-coupon",
+      "source": "source/roof-membrane-seams.lod0.blend",
+      "sourceSha256": "f6acf44f16887d75a76b2fef79c755027598dedcae3fcc116c77ab76b4a23baf",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/roof-membrane-seams-2m.inspection.glb",
+          "sha256": "27510bc3eca07603ec0b46f291bd61984ae5aa789d6c8130287a31bdd2fab378",
+          "source": "source/roof-membrane-seams.lod0.blend",
+          "sourceSha256": "f6acf44f16887d75a76b2fef79c755027598dedcae3fcc116c77ab76b4a23baf",
+          "triangles": 2,
+          "vertices": 4,
+          "primitives": 1,
+          "bytes": 43296,
+          "boundsM": {
+            "min": [
+              -1.0,
+              0.0,
+              -1.0
+            ],
+            "max": [
+              1.0,
+              0.0,
+              1.0
+            ],
+            "size": [
+              2.0,
+              0.0,
+              2.0
+            ]
+          }
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -1.0,
+          0.0,
+          -1.0
+        ],
+        "max": [
+          1.0,
+          0.0,
+          1.0
+        ],
+        "size": [
+          2.0,
+          0.0,
+          2.0
+        ]
+      },
+      "expectedDimensionsM": [
+        2,
+        0,
+        2
+      ],
+      "dimensionToleranceM": 0.0001,
+      "dimensionBasis": "Representative B02 study coupon, exact authored target; not surveyed building geometry.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "description": "Center of horizontal coupon at roof attachment plane."
+      },
+      "attachmentDatum": {
+        "kind": "roof-surface",
+        "plane": "local Y=0",
+        "normal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "frontAxis": "+Z (no frontage semantics for a horizontal surface)",
+      "materialBindings": [
+        {
+          "materialName": "roof-membrane-seams-baked-inspection",
+          "primitive": 0,
+          "semanticRole": "flat-roof-coated-membrane",
+          "surfaceId": "roof-membrane-seams",
+          "maps": {
+            "color": "exports/textures/roof-membrane-seams-color.png",
+            "normal": "exports/textures/roof-membrane-seams-normal.png",
+            "orm": "exports/textures/roof-membrane-seams-orm.png"
+          },
+          "channels": {
+            "color": "sRGB",
+            "normal": "Non-Color OpenGL +Y",
+            "orm": "Non-Color R1 Groughness Bmetallic"
+          },
+          "physicalRepeatMeters": [
+            2,
+            2
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true,
+          "sidePolicy": "Inspection plane is visible from both sides. Future GIS consumer retains its roof-side policy."
+        }
+      ],
+      "textureMode": "embedded-inspection; shared external candidate maps",
+      "textureCost": {
+        "geometryBytes": 2408,
+        "embeddedImageBytes": 40888,
+        "glbTotalBytes": 43296,
+        "uniqueTexelBytesWithMips": 1048576.0,
+        "countingNote": "One material per inspection GLB. Two coupon sizes duplicate embedded images. Runtime surface loader must bind six shared package maps once, without loading coupon GLBs."
+      },
+      "lodPolicy": {
+        "levels": [
+          0
+        ],
+        "reason": "Two-triangle material study plane; 2m and 10m are distinct physical coupons, not LODs. Runtime surface LOD/filter/fade remains unimplemented."
+      },
+      "clearance": [],
+      "collision": {
+        "enabled": false,
+        "reason": "Study plane is not a world patch, collision floor, or roof replacement."
+      },
+      "anchors": [],
+      "placementCompatibility": {
+        "roofTypes": [
+          "source-supported flat roof only"
+        ],
+        "exclude": [
+          "pitched/shingle roofs",
+          "glass",
+          "landmark dedicated membrane shaders"
+        ],
+        "worldPlacement": false,
+        "uvContract": "Source UVs in metres; inspection UV=metres/2. Future GIS consumer must sample roof-local metres/2 without stretching to bounds. Preserve footprint, holes, height, stable roof seed and finish mix."
+      },
+      "intendedConsumer": [
+        "lib/city/building-surface-palette.ts",
+        "lib/city/building-bodies.ts",
+        "lib/city/city-surface-material.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/export-report.json",
+          "qa/source-edit-test.json",
+          "qa/render-evidence.json",
+          "qa/visual-review.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "Offline asset task. No browser acceptance, source-selected placement, deduplication, GPU residency or FPS measurement."
+      }
+    },
+    {
+      "id": "roof-membrane-seams-coupon-10m",
+      "taskId": "B02",
+      "variant": "10m-surface-study",
+      "kind": "inspection-material-coupon",
+      "source": "source/roof-membrane-seams.lod0.blend",
+      "sourceSha256": "f6acf44f16887d75a76b2fef79c755027598dedcae3fcc116c77ab76b4a23baf",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/roof-membrane-seams-10m.inspection.glb",
+          "sha256": "e690ca5cec39a142fbb73e87e6d0243842e51593cca6aff772759198e0cf041b",
+          "source": "source/roof-membrane-seams.lod0.blend",
+          "sourceSha256": "f6acf44f16887d75a76b2fef79c755027598dedcae3fcc116c77ab76b4a23baf",
+          "triangles": 2,
+          "vertices": 4,
+          "primitives": 1,
+          "bytes": 43300,
+          "boundsM": {
+            "min": [
+              -5.0,
+              0.0,
+              -5.0
+            ],
+            "max": [
+              5.0,
+              0.0,
+              5.0
+            ],
+            "size": [
+              10.0,
+              0.0,
+              10.0
+            ]
+          }
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -5.0,
+          0.0,
+          -5.0
+        ],
+        "max": [
+          5.0,
+          0.0,
+          5.0
+        ],
+        "size": [
+          10.0,
+          0.0,
+          10.0
+        ]
+      },
+      "expectedDimensionsM": [
+        10,
+        0,
+        10
+      ],
+      "dimensionToleranceM": 0.0001,
+      "dimensionBasis": "Representative B02 study coupon, exact authored target; not surveyed building geometry.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "description": "Center of horizontal coupon at roof attachment plane."
+      },
+      "attachmentDatum": {
+        "kind": "roof-surface",
+        "plane": "local Y=0",
+        "normal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "frontAxis": "+Z (no frontage semantics for a horizontal surface)",
+      "materialBindings": [
+        {
+          "materialName": "roof-membrane-seams-baked-inspection",
+          "primitive": 0,
+          "semanticRole": "flat-roof-coated-membrane",
+          "surfaceId": "roof-membrane-seams",
+          "maps": {
+            "color": "exports/textures/roof-membrane-seams-color.png",
+            "normal": "exports/textures/roof-membrane-seams-normal.png",
+            "orm": "exports/textures/roof-membrane-seams-orm.png"
+          },
+          "channels": {
+            "color": "sRGB",
+            "normal": "Non-Color OpenGL +Y",
+            "orm": "Non-Color R1 Groughness Bmetallic"
+          },
+          "physicalRepeatMeters": [
+            2,
+            2
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true,
+          "sidePolicy": "Inspection plane is visible from both sides. Future GIS consumer retains its roof-side policy."
+        }
+      ],
+      "textureMode": "embedded-inspection; shared external candidate maps",
+      "textureCost": {
+        "geometryBytes": 2412,
+        "embeddedImageBytes": 40888,
+        "glbTotalBytes": 43300,
+        "uniqueTexelBytesWithMips": 1048576.0,
+        "countingNote": "One material per inspection GLB. Two coupon sizes duplicate embedded images. Runtime surface loader must bind six shared package maps once, without loading coupon GLBs."
+      },
+      "lodPolicy": {
+        "levels": [
+          0
+        ],
+        "reason": "Two-triangle material study plane; 2m and 10m are distinct physical coupons, not LODs. Runtime surface LOD/filter/fade remains unimplemented."
+      },
+      "clearance": [],
+      "collision": {
+        "enabled": false,
+        "reason": "Study plane is not a world patch, collision floor, or roof replacement."
+      },
+      "anchors": [],
+      "placementCompatibility": {
+        "roofTypes": [
+          "source-supported flat roof only"
+        ],
+        "exclude": [
+          "pitched/shingle roofs",
+          "glass",
+          "landmark dedicated membrane shaders"
+        ],
+        "worldPlacement": false,
+        "uvContract": "Source UVs in metres; inspection UV=metres/2. Future GIS consumer must sample roof-local metres/2 without stretching to bounds. Preserve footprint, holes, height, stable roof seed and finish mix."
+      },
+      "intendedConsumer": [
+        "lib/city/building-surface-palette.ts",
+        "lib/city/building-bodies.ts",
+        "lib/city/city-surface-material.ts"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/export-report.json",
+          "qa/source-edit-test.json",
+          "qa/render-evidence.json",
+          "qa/visual-review.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "Offline asset task. No browser acceptance, source-selected placement, deduplication, GPU residency or FPS measurement."
+      }
+    }
+  ],
+  "textures": [
+    {
+      "id": "roof-mineral-grain-color",
+      "surfaceId": "roof-mineral-grain",
+      "channel": "color",
+      "file": "exports/textures/roof-mineral-grain-color.png",
+      "sha256": "232bdea457187c564ef92f38591c025dd37c11ede3bc533d5974d0a11a2e88e8",
+      "bytes": 33023,
+      "width": 256,
+      "height": 256,
+      "colorSpace": "sRGB",
+      "channels": "RGB base color; opaque",
+      "repeatMeters": [
+        2,
+        2
+      ],
+      "wrap": [
+        "REPEAT",
+        "REPEAT"
+      ],
+      "uniqueTexelBytesWithMips": 349525.3333333333,
+      "residencyBasis": "Conservative RGBA8 full-mip estimate, not GPU measurement",
+      "sourceBake": "source/textures/roof-mineral-grain-color.png",
+      "sourceBakeResolution": [
+        512,
+        512
+      ],
+      "runtimeUse": "candidate_shared_surface_maps; not activated"
+    },
+    {
+      "id": "roof-mineral-grain-normal",
+      "surfaceId": "roof-mineral-grain",
+      "channel": "normal",
+      "file": "exports/textures/roof-mineral-grain-normal.png",
+      "sha256": "4184dfa45d8bb506f11e1a591407342994965b54405addb62d2b2f7133bedb26",
+      "bytes": 133237,
+      "width": 256,
+      "height": 256,
+      "colorSpace": "Non-Color",
+      "channels": "tangent OpenGL +Y",
+      "repeatMeters": [
+        2,
+        2
+      ],
+      "wrap": [
+        "REPEAT",
+        "REPEAT"
+      ],
+      "uniqueTexelBytesWithMips": 349525.3333333333,
+      "residencyBasis": "Conservative RGBA8 full-mip estimate, not GPU measurement",
+      "sourceBake": "source/textures/roof-mineral-grain-normal.png",
+      "sourceBakeResolution": [
+        512,
+        512
+      ],
+      "runtimeUse": "candidate_shared_surface_maps; not activated"
+    },
+    {
+      "id": "roof-mineral-grain-orm",
+      "surfaceId": "roof-mineral-grain",
+      "channel": "orm",
+      "file": "exports/textures/roof-mineral-grain-orm.png",
+      "sha256": "726b7f196228fb839912cbe1931bb2cf85b9c876ffc8a89c07ae46fdd279e0be",
+      "bytes": 34075,
+      "width": 256,
+      "height": 256,
+      "colorSpace": "Non-Color",
+      "channels": "R=1, G=roughness, B=metallic",
+      "repeatMeters": [
+        2,
+        2
+      ],
+      "wrap": [
+        "REPEAT",
+        "REPEAT"
+      ],
+      "uniqueTexelBytesWithMips": 349525.3333333333,
+      "residencyBasis": "Conservative RGBA8 full-mip estimate, not GPU measurement",
+      "sourceBake": "source/textures/roof-mineral-grain-orm.png",
+      "sourceBakeResolution": [
+        512,
+        512
+      ],
+      "runtimeUse": "candidate_shared_surface_maps; not activated"
+    },
+    {
+      "id": "roof-membrane-seams-color",
+      "surfaceId": "roof-membrane-seams",
+      "channel": "color",
+      "file": "exports/textures/roof-membrane-seams-color.png",
+      "sha256": "6879c85b02523bce0c8bedb1e55e51938d005cbf479d1f0d71f22f58493447c2",
+      "bytes": 601,
+      "width": 256,
+      "height": 256,
+      "colorSpace": "sRGB",
+      "channels": "RGB base color; opaque",
+      "repeatMeters": [
+        2,
+        2
+      ],
+      "wrap": [
+        "REPEAT",
+        "REPEAT"
+      ],
+      "uniqueTexelBytesWithMips": 349525.3333333333,
+      "residencyBasis": "Conservative RGBA8 full-mip estimate, not GPU measurement",
+      "sourceBake": "source/textures/roof-membrane-seams-color.png",
+      "sourceBakeResolution": [
+        512,
+        512
+      ],
+      "runtimeUse": "candidate_shared_surface_maps; not activated"
+    },
+    {
+      "id": "roof-membrane-seams-normal",
+      "surfaceId": "roof-membrane-seams",
+      "channel": "normal",
+      "file": "exports/textures/roof-membrane-seams-normal.png",
+      "sha256": "9893c52af0d3b43ed71ff695f4b4a6135d7a40faa0df104f546008001a2bba46",
+      "bytes": 27834,
+      "width": 256,
+      "height": 256,
+      "colorSpace": "Non-Color",
+      "channels": "tangent OpenGL +Y",
+      "repeatMeters": [
+        2,
+        2
+      ],
+      "wrap": [
+        "REPEAT",
+        "REPEAT"
+      ],
+      "uniqueTexelBytesWithMips": 349525.3333333333,
+      "residencyBasis": "Conservative RGBA8 full-mip estimate, not GPU measurement",
+      "sourceBake": "source/textures/roof-membrane-seams-normal.png",
+      "sourceBakeResolution": [
+        512,
+        512
+      ],
+      "runtimeUse": "candidate_shared_surface_maps; not activated"
+    },
+    {
+      "id": "roof-membrane-seams-orm",
+      "surfaceId": "roof-membrane-seams",
+      "channel": "orm",
+      "file": "exports/textures/roof-membrane-seams-orm.png",
+      "sha256": "9c9fcb794e5d0c4738430556dbc5dab201ba30fc980ce10f5854b05194b5df86",
+      "bytes": 12453,
+      "width": 256,
+      "height": 256,
+      "colorSpace": "Non-Color",
+      "channels": "R=1, G=roughness, B=metallic",
+      "repeatMeters": [
+        2,
+        2
+      ],
+      "wrap": [
+        "REPEAT",
+        "REPEAT"
+      ],
+      "uniqueTexelBytesWithMips": 349525.3333333333,
+      "residencyBasis": "Conservative RGBA8 full-mip estimate, not GPU measurement",
+      "sourceBake": "source/textures/roof-membrane-seams-orm.png",
+      "sourceBakeResolution": [
+        512,
+        512
+      ],
+      "runtimeUse": "candidate_shared_surface_maps; not activated"
+    }
+  ],
+  "textureBudget": {
+    "capBytes": 4194304,
+    "uniqueRuntimeMaps": 6,
+    "uniqueTexelBytesWithMips": 2097152.0,
+    "basis": "RGBA8 x full-mip 4/3 conservative estimate. No GPU residency measured.",
+    "tradeoff": "Both surfaces were actually baked at 512px (source/textures, 8MiB if ever all resident), then area-filtered in linear color/data to 256px; normal vectors renormalized. Six 512px runtime maps would be 8MiB and exceed the cap. Six 256px candidates total 2MiB; fine mineral grain is reduced, so inspect WebGL minification before any activation.",
+    "source512BakeExcludedFromRuntime": true,
+    "inspectionGlbsExcludedFromRuntime": true,
+    "alternativeForSceneEvaluation": "Alternative for scene comparison: load only one chosen 512px three-map surface (4MiB) and leave the other roof role on its existing fallback, versus both 256px surface sets (2MiB). One 512px set plus the other 256px set would be 5MiB and exceeds the cap. Higher source bake resolution is not a claim of improved WebGL appearance."
+  }
+}

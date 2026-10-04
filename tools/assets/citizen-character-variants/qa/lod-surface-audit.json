@@ -1,0 +1,228 @@
+{
+  "method": "Blender BVHTree nearest reference triangle, centroid barycentric UV and normal interpolation",
+  "baselineSha256": "14d66fabe097abf82ef36800561c06ee7263c0acfd6b5ea1265a40ed35841ff8",
+  "baselineTriangles": 37799,
+  "baselineDegenerateTrianglesAt1e12M2": 64,
+  "assets": [
+    {
+      "asset": "old-lod1",
+      "triangles": 30825,
+      "surfaceCentroidDistanceM": {
+        "count": 30825,
+        "max": 0.0002328082628082484,
+        "p95": 7.267107139341533e-05,
+        "mean": 1.1851690543771547e-05
+      },
+      "uvDeltaAtNearestSourceSurface": {
+        "count": 30825,
+        "max": 1.1939621821665238,
+        "p95": 0.00016873071670014657,
+        "mean": 0.006463013095449211
+      },
+      "normalAngleDegAtNearestSourceSurface": {
+        "count": 30825,
+        "max": 97.24338036088406,
+        "p95": 1.5290672515845423,
+        "mean": 0.29689815976216555
+      },
+      "posteriorWaist": {
+        "distanceM": {
+          "count": 1663,
+          "max": 0.00019455241272225976,
+          "p95": 8.624175825389102e-05,
+          "mean": 1.8352091639333783e-05
+        },
+        "uvDelta": {
+          "count": 1663,
+          "max": 1.1645146458295672,
+          "p95": 0.42436506779816796,
+          "mean": 0.0502892954269016
+        },
+        "normalAngleDeg": {
+          "count": 1663,
+          "max": 10.765885359764019,
+          "p95": 2.7352399055134105,
+          "mean": 0.601475600904332
+        }
+      },
+      "degenerateTriangles": 0,
+      "note": "Closest-surface correspondence can choose adjacent overlapping cloth triangles; UV maximum is diagnostic, not texture-pixel proof."
+    },
+    {
+      "asset": "old-lod2",
+      "triangles": 27531,
+      "surfaceCentroidDistanceM": {
+        "count": 27531,
+        "max": 0.0004623515415005386,
+        "p95": 0.00012944200716447085,
+        "mean": 2.098090329740345e-05
+      },
+      "uvDeltaAtNearestSourceSurface": {
+        "count": 27531,
+        "max": 1.1939621821665238,
+        "p95": 0.00023474819434226812,
+        "mean": 0.007812966283099364
+      },
+      "normalAngleDegAtNearestSourceSurface": {
+        "count": 27531,
+        "max": 160.7144340734683,
+        "p95": 2.6308175944373096,
+        "mean": 0.5154901459573699
+      },
+      "posteriorWaist": {
+        "distanceM": {
+          "count": 1335,
+          "max": 0.0003674074250739068,
+          "p95": 0.00017783255316317081,
+          "mean": 4.523823772461203e-05
+        },
+        "uvDelta": {
+          "count": 1335,
+          "max": 1.1645146458295672,
+          "p95": 0.4840663399773289,
+          "mean": 0.06249272265754028
+        },
+        "normalAngleDeg": {
+          "count": 1335,
+          "max": 75.82089636571405,
+          "p95": 4.5622320851777864,
+          "mean": 1.1692762745844465
+        }
+      },
+      "degenerateTriangles": 0,
+      "note": "Closest-surface correspondence can choose adjacent overlapping cloth triangles; UV maximum is diagnostic, not texture-pixel proof."
+    },
+    {
+      "asset": "citizen.lod0",
+      "triangles": 37735,
+      "surfaceCentroidDistanceM": {
+        "count": 37735,
+        "max": 4.790416369360173e-06,
+        "p95": 2.1194955479586497e-07,
+        "mean": 6.269902425798366e-08
+      },
+      "uvDeltaAtNearestSourceSurface": {
+        "count": 37735,
+        "max": 1.1939621821665238,
+        "p95": 1.244849454807099e-07,
+        "mean": 0.009400213354310363
+      },
+      "normalAngleDegAtNearestSourceSurface": {
+        "count": 37735,
+        "max": 0.0461293493515303,
+        "p95": 0.025217635811709393,
+        "mean": 0.008166899291951807
+      },
+      "posteriorWaist": {
+        "distanceM": {
+          "count": 2619,
+          "max": 1.4175697060636594e-07,
+          "p95": 6.828570064953965e-08,
+          "mean": 2.3111633068838977e-08
+        },
+        "uvDelta": {
+          "count": 2619,
+          "max": 1.1645146458295672,
+          "p95": 0.42436515549170806,
+          "mean": 0.058580888408240765
+        },
+        "normalAngleDeg": {
+          "count": 2619,
+          "max": 0.034970569093279974,
+          "p95": 0.024727926355896986,
+          "mean": 0.008355056963704487
+        }
+      },
+      "degenerateTriangles": 0,
+      "note": "Closest-surface correspondence can choose adjacent overlapping cloth triangles; UV maximum is diagnostic, not texture-pixel proof."
+    },
+    {
+      "asset": "citizen.lod1",
+      "triangles": 31767,
+      "surfaceCentroidDistanceM": {
+        "count": 31767,
+        "max": 0.0009804272558540106,
+        "p95": 0.00019123632228001952,
+        "mean": 2.310486343587012e-05
+      },
+      "uvDeltaAtNearestSourceSurface": {
+        "count": 31767,
+        "max": 1.1939621821665238,
+        "p95": 4.255875985551917e-05,
+        "mean": 0.011604705380518008
+      },
+      "normalAngleDegAtNearestSourceSurface": {
+        "count": 31767,
+        "max": 114.25094495034621,
+        "p95": 1.2654844408570225,
+        "mean": 0.20365756461176193
+      },
+      "posteriorWaist": {
+        "distanceM": {
+          "count": 2619,
+          "max": 1.4175697060636594e-07,
+          "p95": 6.828570064953965e-08,
+          "mean": 2.3111633068838977e-08
+        },
+        "uvDelta": {
+          "count": 2619,
+          "max": 1.1645146458295672,
+          "p95": 0.42436515549170806,
+          "mean": 0.058580888408240765
+        },
+        "normalAngleDeg": {
+          "count": 2619,
+          "max": 0.034970569093279974,
+          "p95": 0.024727926355896986,
+          "mean": 0.008355056963704487
+        }
+      },
+      "degenerateTriangles": 0,
+      "note": "Closest-surface correspondence can choose adjacent overlapping cloth triangles; UV maximum is diagnostic, not texture-pixel proof."
+    },
+    {
+      "asset": "citizen.lod2",
+      "triangles": 29931,
+      "surfaceCentroidDistanceM": {
+        "count": 29931,
+        "max": 0.0021870529744774103,
+        "p95": 0.00026436953339725733,
+        "mean": 3.434468077399268e-05
+      },
+      "uvDeltaAtNearestSourceSurface": {
+        "count": 29931,
+        "max": 1.1939621821665238,
+        "p95": 8.167048459166978e-05,
+        "mean": 0.012506653414700957
+      },
+      "normalAngleDegAtNearestSourceSurface": {
+        "count": 29931,
+        "max": 142.4427456925591,
+        "p95": 1.515595763674935,
+        "mean": 0.2659123833805072
+      },
+      "posteriorWaist": {
+        "distanceM": {
+          "count": 2619,
+          "max": 1.4175697060636594e-07,
+          "p95": 6.828570064953965e-08,
+          "mean": 2.3111633068838977e-08
+        },
+        "uvDelta": {
+          "count": 2619,
+          "max": 1.1645146458295672,
+          "p95": 0.42436515549170806,
+          "mean": 0.058580888408240765
+        },
+        "normalAngleDeg": {
+          "count": 2619,
+          "max": 0.034970569093279974,
+          "p95": 0.024727926355896986,
+          "mean": 0.008355056963704487
+        }
+      },
+      "degenerateTriangles": 0,
+      "note": "Closest-surface correspondence can choose adjacent overlapping cloth triangles; UV maximum is diagnostic, not texture-pixel proof."
+    }
+  ]
+}

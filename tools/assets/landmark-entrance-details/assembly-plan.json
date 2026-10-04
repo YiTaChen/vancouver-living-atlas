@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "packageId": "landmark-entrance-details",
+  "units": "metres",
+  "worldCoordinateOverrides": false,
+  "integrationStatus": "runtime_pending_webgl",
+  "scalePolicy": "Use [1,1,1]. Choose named component; never scale a single-column preview to fill a porch.",
+  "assemblies": [
+    {
+      "id": "waterfront-portico",
+      "source": "lib/city/interiors.ts, Waterfront heritage shell branch",
+      "frame": "existing envelope group station-local frame; f is existing floor datum",
+      "instances": [
+        {
+          "assetId": "waterfront-column",
+          "count": 6,
+          "repeatX": [
+            -12,
+            -8,
+            -4,
+            4,
+            8,
+            12
+          ],
+          "translationM": [
+            "repeatX",
+            "f",
+            19
+          ],
+          "replaces": "only six envelope.cylinder(0.6,8,[x,f+4,19])"
+        },
+        {
+          "assetId": "waterfront-capital",
+          "count": 6,
+          "repeatX": [
+            -12,
+            -8,
+            -4,
+            4,
+            8,
+            12
+          ],
+          "translationM": [
+            "repeatX",
+            "f+7.825",
+            19
+          ],
+          "replaces": "only six capital boxes centered at [x,f+8,19]; source bottom 0, top .35"
+        },
+        {
+          "assetId": "waterfront-pediment-moulding",
+          "count": 1,
+          "translationM": [
+            0,
+            "f+8.9",
+            20.95
+          ],
+          "replaces": "none; additive moulding within existing triangular front silhouette; retain original .45 m shell extrusion"
+        }
+      ],
+      "retain": [
+        "brick shell and roof",
+        "all collision and obstacles",
+        "entrance jambs/open door leaves",
+        "29 x .6 x 6 m entablature",
+        "existing triangular pediment infill"
+      ],
+      "budgetId": "B-HERO",
+      "budgetScope": "One 28 m portico assembly, six columns plus six capitals plus one pediment; instance-counted, not one template only"
+    },
+    {
+      "id": "waterfront-upper-window-patch",
+      "source": "lib/city/interiors.ts: upper window loop x=-48..48 step8",
+      "frame": "existing envelope group",
+      "instances": [
+        {
+          "assetId": "waterfront-window-recess",
+          "count": 1,
+          "translationM": [
+            "sourceWindowX",
+            "f+9.34",
+            16.25
+          ],
+          "replaces": "none; reveal frame surrounds existing 3 x 5 m glass plane; source aperture inner minY .16 -> f+9.5"
+        }
+      ],
+      "eligibleSourceWindowX": [
+        -48,
+        -40,
+        -32,
+        -24,
+        -16,
+        -8,
+        0,
+        8,
+        16,
+        24,
+        32,
+        40,
+        48
+      ],
+      "pilot": "one source upper window first, aggregate facade residency must be measured before expansion",
+      "reject": [
+        "lower 2.8 x 4 m glazing",
+        "central entrance",
+        "nonuniform scaling"
+      ],
+      "retain": [
+        "existing glazing material and night behavior",
+        "solid wall behind window; this is shallow architectural reveal framing, not a new interior"
+      ],
+      "budgetId": "B-HERO"
+    },
+    {
+      "id": "marine-entry-decoration",
+      "source": "lib/city/assets/marine-entry.ts MARINE_ENTRY_CONTRACT",
+      "frame": {
+        "facadeEdge": [
+          4,
+          5
+        ],
+        "origin": "C=(MARINE_GROUND[4]+MARINE_GROUND[5])/2",
+        "tangent": "U=(A-B)/length",
+        "outwardNormal": "N=(-U.z,U.x)",
+        "transform": "buildingLocal=C + U*(asset.x+centerShiftM) + Up*(asset.y+thresholdY-.16) + N*asset.z",
+        "threshold": "existing resolved rendered-sidewalk thresholdY; apply lift exactly once",
+        "centerShiftM": "existing approved entrance option, default 0"
+      },
+      "instances": [
+        {
+          "assetId": "marine-archivolt-relief",
+          "count": 1,
+          "translationM": [
+            0,
+            0,
+            0
+          ],
+          "replaces": "entire original terracotta decoration batch: four archivolts, ceramic jambs/caps and abstract relief; retain granite, copper door wall, lobby, glass and night batches"
+        },
+        {
+          "assetId": "marine-copper-grille",
+          "count": 1,
+          "translationM": [
+            0,
+            0,
+            0
+          ],
+          "replaces": "existing transom verticals/fan/horizontal bars above y3.15 only; do not remove door frames, handles, revolving drum or lights"
+        }
+      ],
+      "aperture": {
+        "halfWidthM": 2.55,
+        "springY": 3.7,
+        "riseM": 2.82,
+        "bottomY": 0.16,
+        "topY": 6.52,
+        "maximumOutwardProjectionM": 0.24
+      },
+      "retain": [
+        "closed solidFootprints collision",
+        "existing original building placement",
+        "all shell and ground prism logic",
+        "granite jamb bases and lobby reveals",
+        "existing recessed glazing and door wall",
+        "night materials and light controls"
+      ],
+      "navigation": "exterior viewing recess only; no enter trigger, floor, portal or collision opening added",
+      "budgetId": "B-HERO"
+    }
+  ]
+}

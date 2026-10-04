@@ -1,0 +1,26 @@
+{
+  "status": "pass",
+  "testCounts": {
+    "nodeSourceAndAssemblyFit": 49,
+    "pythonGeometryAndNegative": 25,
+    "nativeBlenderSources": 8,
+    "actualArtistEditProofs": 8,
+    "actualGlbPreviews": 48
+  },
+  "runtimeStatus": "runtime_pending_webgl",
+  "optionalNewPairedSillAssemblyStatus": "pass-with-explicit-old-sill-suppression",
+  "unsafeOldSillPlusNewFrameStatus": "rejected",
+  "evidenceSha256": {
+    "qa/fit-tests.log": "71c6d564f3eae4af980aa316722fd727709d45bb27a800333ab9a62946ce8fea",
+    "qa/tests.log": "7e73a1a0c25b4a9c76bb243b4b663e16fdcca04ce0407f5be6c1d2e50810220e",
+    "qa/validation.json": "229dfd512ed0aa0903cab372eefa2c6d60119787e344c41265a1a4fbd40be120",
+    "qa/common-validation.json": "bd468c931a72102cb66b1fbec4d63c73489720df07a6e0e8948400c9ac9275d1",
+    "qa/blender-audit.json": "63da62f372684c772ada7858023eb484c6199dfbfb0e378fb081b24520c38d31",
+    "qa/source-edit-preservation.json": "8702219f921cdf4d01ab0195cd0c67c8ebcbdc9158427a12506c4138aa58ebdf",
+    "qa/preview-index.json": "ab2787daca26535c59ee53959f0f87d6c58e2d1691dec09514041754d66c6f20",
+    "qa/assembly-preview-index.json": "845d49d631ca3f1dd6d53e2262fa619f4d45f4cd722d6a95130745f6dfe1f16e",
+    "qa/source-fixtures.json": "e6acd834d46c3d7255d103bdf5b7e70e69d845f242f23152fa7a51d69ae9079e",
+    "qa/positive-assembly-fixtures.json": "dfbe035aa16ae082d8704043160c45b058f377818dc9698c5983d3fae66b0b50",
+    "qa/existing-sill-coexistence.json": "ebb6bd85ea1b8fec5b613d23718a0ff94c87b48ea6fb0307ad024c19e8907cf0"
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "status": "pass",
+  "sourceSha256": "e3e25bba28d32df58cbd1b26c66fb5b7657eb04bd4ab9688156d770eb58436f0",
+  "driftRejected": true,
+  "unmodifiedConstructorAndInstrumentedBaselineTriangleParity": true,
+  "sourceHashes": {
+    "lib/city/assets/roadster.ts": "e3e25bba28d32df58cbd1b26c66fb5b7657eb04bd4ab9688156d770eb58436f0",
+    "lib/city/navigation.ts": "b55276e47e939028f50a3629149dfd6bba97527211deb46dce369c9d9fa4247e",
+    "lib/city/driver-camera.ts": "911765020382258030d2dc8f386cfc7dc1f720aab5d88bbf4c04ef93beb903d0",
+    "lib/city/assets/cockpits.ts": "b8aed3f6379dfdc9a5a1115382e36af3b17e7183a29dd1e7458a10ac4d2465fc",
+    "tools/assets/material-consumer-candidates/adapters/source-patches.mjs": "267980021b0ccf78873568a04aee613042b2219ff52f0298ec0e86c621d91f26"
+  },
+  "exactSuppressionCounts": {
+    "dashboard": 1,
+    "steering-rim": 1,
+    "steering-spoke-horizontal": 1,
+    "steering-spoke-lower": 1,
+    "legacy-driver-torso": 1,
+    "legacy-driver-head": 1,
+    "legacy-driver-arm": 2,
+    "driver-seat-cushion": 1,
+    "driver-seat-back": 1,
+    "driver-seat-headrest": 1,
+    "driver-seat-bolster": 2,
+    "driver-seat-seam": 3
+  },
+  "rigidSeatProof": [
+    {
+      "sourcePart": "driver-seat-cushion/039",
+      "replacementNode": "driver-seat-cushion-039",
+      "translationM": [
+        0,
+        0,
+        0.265
+      ],
+      "triangleCoordinatesPreservedWithinM": 0.000001,
+      "measuredMaxVertexDeltaM": 1.4305114759416426e-8
+    },
+    {
+      "sourcePart": "driver-seat-back/040",
+      "replacementNode": "driver-seat-back-040",
+      "translationM": [
+        0,
+        0,
+        0.265
+      ],
+      "triangleCoordinatesPreservedWithinM": 0.000001,
+      "measuredMaxVertexDeltaM": 1.4305114759416426e-8
+    },
+    {
+      "sourcePart": "driver-seat-headrest/041",
+      "replacementNode": "driver-seat-headrest-041",
+      "translationM": [
+        0,
+        0,
+        0.265
+      ],
+      "triangleCoordinatesPreservedWithinM": 0.000001,
+      "measuredMaxVertexDeltaM": 1.4305114759416426e-8
+    },
+    {
+      "sourcePart": "driver-seat-bolster/042",
+      "replacementNode": "driver-seat-bolster-042",
+      "translationM": [
+        0,
+        0,
+        0.265
+      ],
+      "triangleCoordinatesPreservedWithinM": 0.000001,
+      "measuredMaxVertexDeltaM": 1.4305114759416426e-8
+    },
+    {
+      "sourcePart": "driver-seat-bolster/043",
+      "replacementNode": "driver-seat-bolster-043",
+      "translationM": [
+        0,
+        0,
+        0.265
+      ],
+      "triangleCoordinatesPreservedWithinM": 0.000001,
+      "measuredMaxVertexDeltaM": 1.4305114759416426e-8
+    },
+    {
+      "sourcePart": "driver-seat-seam/044",
+      "replacementNode": "driver-seat-seam-044",
+      "translationM": [
+        0,
+        0,
+        0.265
+      ],
+      "triangleCoordinatesPreservedWithinM": 0.000001,
+      "measuredMaxVertexDeltaM": 1.4305114759416426e-8
+    },
+    {
+      "sourcePart": "driver-seat-seam/045",
+      "replacementNode": "driver-seat-seam-045",
+      "translationM": [
+        0,
+        0,
+        0.265
+      ],
+      "triangleCoordinatesPreservedWithinM": 0.000001,
+      "measuredMaxVertexDeltaM": 1.4305114759416426e-8
+    },
+    {
+      "sourcePart": "driver-seat-seam/046",
+      "replacementNode": "driver-seat-seam-046",
+      "translationM": [
+        0,
+        0,
+        0.265
+      ],
+      "triangleCoordinatesPreservedWithinM": 0.000001,
+      "measuredMaxVertexDeltaM": 1.4305114759416426e-8
+    }
+  ],
+  "changedGeometry": "Only suppressed callsites plus explicit replacement GLB; preserved world triangles compared as oriented multisets with 1um coordinate tolerance",
+  "results": [
+    {
+      "lod": 0,
+      "materialCandidate": false,
+      "preservedAllNonSuppressedTriangles": true,
+      "wheelGeometryAndThreeUpdateSamplesIdentical": true,
+      "rootIdentity": true,
+      "preservedSourceParts": 71,
+      "suppressedParts": 16
+    },
+    {
+      "lod": 1,
+      "materialCandidate": false,
+      "preservedAllNonSuppressedTriangles": true,
+      "wheelGeometryAndThreeUpdateSamplesIdentical": true,
+      "rootIdentity": true,
+      "preservedSourceParts": 71,
+      "suppressedParts": 16
+    },
+    {
+      "lod": 2,
+      "materialCandidate": false,
+      "preservedAllNonSuppressedTriangles": true,
+      "wheelGeometryAndThreeUpdateSamplesIdentical": true,
+      "rootIdentity": true,
+      "preservedSourceParts": 71,
+      "suppressedParts": 16
+    },
+    {
+      "lod": 0,
+      "materialCandidate": true,
+      "preservedAllNonSuppressedTriangles": true,
+      "wheelGeometryAndThreeUpdateSamplesIdentical": true,
+      "rootIdentity": true,
+      "preservedSourceParts": 71,
+      "suppressedParts": 16
+    },
+    {
+      "lod": 1,
+      "materialCandidate": true,
+      "preservedAllNonSuppressedTriangles": true,
+      "wheelGeometryAndThreeUpdateSamplesIdentical": true,
+      "rootIdentity": true,
+      "preservedSourceParts": 71,
+      "suppressedParts": 16
+    },
+    {
+      "lod": 2,
+      "materialCandidate": true,
+      "preservedAllNonSuppressedTriangles": true,
+      "wheelGeometryAndThreeUpdateSamplesIdentical": true,
+      "rootIdentity": true,
+      "preservedSourceParts": 71,
+      "suppressedParts": 16
+    }
+  ]
+}

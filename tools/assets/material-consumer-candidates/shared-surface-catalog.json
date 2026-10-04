@@ -1,0 +1,256 @@
+{
+  "schemaVersion": 1,
+  "source": "../role-materials/exports/manifest.json",
+  "newMaps": 0,
+  "uniqueTexelBytesWithMips": 8388608,
+  "surfaces": [
+    {
+      "id": "landmark-brushed-aluminum",
+      "tile_metres": 1,
+      "map_resolution": [
+        256,
+        256
+      ],
+      "maps": {
+        "basecolor": {
+          "path": "../role-materials/exports/textures/landmark-brushed-aluminum-basecolor.png",
+          "sha256": "c79321473f294833cb1190df24a385c6c3363680f585bbf65296b4098a7b0346",
+          "bytes": 2507,
+          "colorSpace": "sRGB",
+          "channel": "RGB"
+        },
+        "orm": {
+          "path": "../role-materials/exports/textures/landmark-brushed-aluminum-orm.png",
+          "sha256": "ebd7bb06ce9a962c140052761fa26e8f8cba0110f99ba866b2b250d4db365c33",
+          "bytes": 51582,
+          "colorSpace": "Non-Color",
+          "channel": "R=1,G=roughness,B=metallic"
+        },
+        "normal": {
+          "path": "../role-materials/exports/textures/landmark-brushed-aluminum-normal.png",
+          "sha256": "fbe1d21d69b781fddd36e0f183a0f5cbbca91d4c9ed8899ac622b7924a6404ea",
+          "bytes": 5952,
+          "colorSpace": "Non-Color",
+          "channel": "OpenGL +Y tangent-space"
+        }
+      }
+    },
+    {
+      "id": "landmark-pale-panel",
+      "tile_metres": 1,
+      "map_resolution": [
+        256,
+        256
+      ],
+      "maps": {
+        "basecolor": {
+          "path": "../role-materials/exports/textures/landmark-pale-panel-basecolor.png",
+          "sha256": "63397614d943ae917ebdb8a8dce0a917a21eb12f00879c47693427c61b18d05c",
+          "bytes": 86245,
+          "colorSpace": "sRGB",
+          "channel": "RGB"
+        },
+        "orm": {
+          "path": "../role-materials/exports/textures/landmark-pale-panel-orm.png",
+          "sha256": "96d05b5a97411a3666c03d83b01becdfe9b1d3a67b387d8ab8feaa0d239ce0ff",
+          "bytes": 51381,
+          "colorSpace": "Non-Color",
+          "channel": "R=1,G=roughness,B=metallic"
+        },
+        "normal": {
+          "path": "../role-materials/exports/textures/landmark-pale-panel-normal.png",
+          "sha256": "38a6a499200f260a2ac5b7e6472b63af025ed967a4b3e55ef8c53b5098d09366",
+          "bytes": 1779,
+          "colorSpace": "Non-Color",
+          "channel": "OpenGL +Y tangent-space"
+        }
+      }
+    },
+    {
+      "id": "vehicle-red-paint",
+      "tile_metres": 0.5,
+      "map_resolution": [
+        256,
+        256
+      ],
+      "maps": {
+        "basecolor": {
+          "path": "../role-materials/exports/textures/vehicle-red-paint-basecolor.png",
+          "sha256": "a731a29781f4531e9694e4941196d20f4fc5a126687c73fd0c3604d52f5bfcd6",
+          "bytes": 65073,
+          "colorSpace": "sRGB",
+          "channel": "RGB"
+        },
+        "orm": {
+          "path": "../role-materials/exports/textures/vehicle-red-paint-orm.png",
+          "sha256": "d4b63ec0e155e2993592798466be0a4b6bcf293feb4fc9c5555286b1c13d0785",
+          "bytes": 51558,
+          "colorSpace": "Non-Color",
+          "channel": "R=1,G=roughness,B=metallic"
+        },
+        "normal": {
+          "path": "../role-materials/exports/textures/vehicle-red-paint-normal.png",
+          "sha256": "38a6a499200f260a2ac5b7e6472b63af025ed967a4b3e55ef8c53b5098d09366",
+          "bytes": 1779,
+          "colorSpace": "Non-Color",
+          "channel": "OpenGL +Y tangent-space"
+        }
+      }
+    },
+    {
+      "id": "vehicle-tire-rubber",
+      "tile_metres": 0.5,
+      "map_resolution": [
+        256,
+        256
+      ],
+      "maps": {
+        "basecolor": {
+          "path": "../role-materials/exports/textures/vehicle-tire-rubber-basecolor.png",
+          "sha256": "e22b9b13a7e63042ba84c20e3b94405ea8c16a0b61e35185f0e5f402154bab7a",
+          "bytes": 5559,
+          "colorSpace": "sRGB",
+          "channel": "RGB"
+        },
+        "orm": {
+          "path": "../role-materials/exports/textures/vehicle-tire-rubber-orm.png",
+          "sha256": "70bf49cfed533563e935661c7627f316d1a95ceffdc73ba8cd5fe2511ce35caf",
+          "bytes": 51376,
+          "colorSpace": "Non-Color",
+          "channel": "R=1,G=roughness,B=metallic"
+        },
+        "normal": {
+          "path": "../role-materials/exports/textures/vehicle-tire-rubber-normal.png",
+          "sha256": "496eac92438d967c5f092a3ac9b700adea6d1683d94f95295ff1b2d7c67086f5",
+          "bytes": 33838,
+          "colorSpace": "Non-Color",
+          "channel": "OpenGL +Y tangent-space"
+        }
+      }
+    },
+    {
+      "id": "vehicle-seat-leather",
+      "tile_metres": 0.5,
+      "map_resolution": [
+        256,
+        256
+      ],
+      "maps": {
+        "basecolor": {
+          "path": "../role-materials/exports/textures/vehicle-seat-leather-basecolor.png",
+          "sha256": "17ff618888f430363d681e0f94b6c7ec505a3d9970438344dcae03f687b7b1a1",
+          "bytes": 60392,
+          "colorSpace": "sRGB",
+          "channel": "RGB"
+        },
+        "orm": {
+          "path": "../role-materials/exports/textures/vehicle-seat-leather-orm.png",
+          "sha256": "437155a0c763e73f6da2d0db3d3cf2c1fca959d1f2d6eb157d2027cb45137bb8",
+          "bytes": 51399,
+          "colorSpace": "Non-Color",
+          "channel": "R=1,G=roughness,B=metallic"
+        },
+        "normal": {
+          "path": "../role-materials/exports/textures/vehicle-seat-leather-normal.png",
+          "sha256": "1625b4f3704f13b8cbcbb9b5ba421b481aec853e5c72f67cffd2349f90be0525",
+          "bytes": 77866,
+          "colorSpace": "Non-Color",
+          "channel": "OpenGL +Y tangent-space"
+        }
+      }
+    },
+    {
+      "id": "interior-terrazzo",
+      "tile_metres": 1,
+      "map_resolution": [
+        256,
+        256
+      ],
+      "maps": {
+        "basecolor": {
+          "path": "../role-materials/exports/textures/interior-terrazzo-basecolor.png",
+          "sha256": "6cd5973cb1c479aa6ccf8d859320a21542b7d517eeb78bb91a11565e6c92d805",
+          "bytes": 90872,
+          "colorSpace": "sRGB",
+          "channel": "RGB"
+        },
+        "orm": {
+          "path": "../role-materials/exports/textures/interior-terrazzo-orm.png",
+          "sha256": "c7ae0c5f2a6246cf8830ed19c239b22a78cdafbeec1af4d80ee464180041bc6c",
+          "bytes": 51574,
+          "colorSpace": "Non-Color",
+          "channel": "R=1,G=roughness,B=metallic"
+        },
+        "normal": {
+          "path": "../role-materials/exports/textures/interior-terrazzo-normal.png",
+          "sha256": "38a6a499200f260a2ac5b7e6472b63af025ed967a4b3e55ef8c53b5098d09366",
+          "bytes": 1779,
+          "colorSpace": "Non-Color",
+          "channel": "OpenGL +Y tangent-space"
+        }
+      }
+    },
+    {
+      "id": "interior-oak-veneer",
+      "tile_metres": 1,
+      "map_resolution": [
+        256,
+        256
+      ],
+      "maps": {
+        "basecolor": {
+          "path": "../role-materials/exports/textures/interior-oak-veneer-basecolor.png",
+          "sha256": "531aa7357eddef8bc41d25e874fdfd2e06ee1b86220804b40f04762ab388b0f0",
+          "bytes": 59267,
+          "colorSpace": "sRGB",
+          "channel": "RGB"
+        },
+        "orm": {
+          "path": "../role-materials/exports/textures/interior-oak-veneer-orm.png",
+          "sha256": "96d05b5a97411a3666c03d83b01becdfe9b1d3a67b387d8ab8feaa0d239ce0ff",
+          "bytes": 51381,
+          "colorSpace": "Non-Color",
+          "channel": "R=1,G=roughness,B=metallic"
+        },
+        "normal": {
+          "path": "../role-materials/exports/textures/interior-oak-veneer-normal.png",
+          "sha256": "8ddac1b202278320007981a0599b31f0e3a45c6c30bf6b194a80ae2f3b457eb3",
+          "bytes": 11344,
+          "colorSpace": "Non-Color",
+          "channel": "OpenGL +Y tangent-space"
+        }
+      }
+    },
+    {
+      "id": "interior-matte-plaster",
+      "tile_metres": 1,
+      "map_resolution": [
+        256,
+        256
+      ],
+      "maps": {
+        "basecolor": {
+          "path": "../role-materials/exports/textures/interior-matte-plaster-basecolor.png",
+          "sha256": "a8848b358d92e8825be100e8cc96a8a5d7fb8524dfb19b6ff2aaebe9dd5afe36",
+          "bytes": 75983,
+          "colorSpace": "sRGB",
+          "channel": "RGB"
+        },
+        "orm": {
+          "path": "../role-materials/exports/textures/interior-matte-plaster-orm.png",
+          "sha256": "4b68bfe6e93546479009d96053c09ae2dc835e39dc15f117f29c3c5fc8d2fa53",
+          "bytes": 51372,
+          "colorSpace": "Non-Color",
+          "channel": "R=1,G=roughness,B=metallic"
+        },
+        "normal": {
+          "path": "../role-materials/exports/textures/interior-matte-plaster-normal.png",
+          "sha256": "ff1bd31b4fc10ddbce682058e6f8e7cec4ce14ec0dcd788f72d71a1f1b654cc4",
+          "bytes": 46370,
+          "colorSpace": "Non-Color",
+          "channel": "OpenGL +Y tangent-space"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "status": "pass",
+  "scope": "offline CPU packaging, geometry dimensions/budgets, source-derived local frame/alignment/clearance and negative controls",
+  "commonContract": "pass",
+  "assetLodCount": 10,
+  "deployedThresholdDecks": 16,
+  "thresholdTopRiseM": 0.015,
+  "thresholdTaperGrade": 0.075,
+  "storedContactChecks": 32,
+  "maximumStoredContactErrorM": 0.0,
+  "layoutChecks": [
+    {
+      "stopId": "research-bus-a",
+      "status": "pass",
+      "doorAlignmentCount": 2,
+      "doorSweepEdgeClearanceM": 0.08299999999999996,
+      "floorHeightM": 0.36,
+      "thresholdGapM": 0.25
+    },
+    {
+      "stopId": "research-bus-b",
+      "status": "pass",
+      "doorAlignmentCount": 2,
+      "doorSweepEdgeClearanceM": 0.08299999999999996,
+      "floorHeightM": 0.36,
+      "thresholdGapM": 0.25
+    },
+    {
+      "stopId": "research-metro-platform",
+      "status": "pass",
+      "doorAlignmentCount": 12,
+      "wholeConsistLengthM": 71.5,
+      "platformLengthM": 74,
+      "endMarginM": 1.25,
+      "doorSweepEdgeClearanceM": 0.04149999999999987,
+      "floorHeightM": 0.95,
+      "thresholdGapM": 0.22
+    }
+  ],
+  "negativeControls": [
+    {
+      "case": "short-platform",
+      "status": "rejected-as-expected",
+      "reason": "whole consist plus stopping tolerance"
+    },
+    {
+      "case": "wrong-floor",
+      "status": "rejected-as-expected",
+      "reason": "stored deck must contact research floor: threshold-car-01-boarding-right-rear"
+    },
+    {
+      "case": "shift-door",
+      "status": "rejected-as-expected",
+      "reason": "metro composed anchor current"
+    },
+    {
+      "case": "false-world-placement",
+      "status": "rejected-as-expected",
+      "reason": "no fabricated world placement"
+    },
+    {
+      "case": "undersize-corridor",
+      "status": "rejected-as-expected",
+      "reason": "through corridor 1.8m"
+    },
+    {
+      "case": "nonunit-frame",
+      "status": "rejected-as-expected",
+      "reason": "unit frame scale"
+    },
+    {
+      "case": "old-hovering-bus-storage",
+      "status": "rejected-as-expected",
+      "reason": "stored deck must contact research floor: threshold-boarding-front"
+    },
+    {
+      "case": "old-hovering-metro-storage",
+      "status": "rejected-as-expected",
+      "reason": "stored deck must contact research floor: threshold-car-01-boarding-right-rear"
+    },
+    {
+      "case": "sunken-stored-deck",
+      "status": "rejected-as-expected",
+      "reason": "stored deck must contact research floor: threshold-boarding-front"
+    }
+  ],
+  "runtimeChecks": "not_run",
+  "remaining": "real stop IDs, geographic/walk/rail attachment, threshold deployment motion/state gating and WebGL acceptance pending"
+}

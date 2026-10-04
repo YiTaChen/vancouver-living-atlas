@@ -1,0 +1,760 @@
+{
+  "status": "pass",
+  "optionalPairedAssemblies": [
+    {
+      "status": "pass",
+      "assetId": "modern-source-window-surround",
+      "sillAssetId": "modern-source-window-paired-sill",
+      "lod": 0,
+      "frameGlbSha256": "38da7234e7987342cd2d23216806dc7079ea2e8add1c6e3348ae0a6d7f119e55",
+      "sillGlbSha256": "cbe860dbc72dd1daf85f04b728ffd0db8ab81b79b4ec543cdbaaffbc8ad3813e",
+      "sharedRootTranslationM": [
+        0,
+        0,
+        0
+      ],
+      "actualVerticalSeparationM": 0.006000000052154064,
+      "nonOverlapMethod": "strict separating Y plane over all transformed vertices of both actual GLBs",
+      "opening": {
+        "triangleClipObstructions": 0,
+        "openVolumeRays": 75,
+        "rayObstructions": 0,
+        "apertureEdgeRays": 4,
+        "measuredClearApertureM": [
+          2.6684017277138934,
+          2.2445000000000004
+        ],
+        "glassStopRearM": 0.06,
+        "glassStopThicknessM": 0.015,
+        "fourSidedStopProbes": [
+          {
+            "side": "right",
+            "intersectionsZ": [
+              0.06,
+              0.075
+            ]
+          },
+          {
+            "side": "left",
+            "intersectionsZ": [
+              0.06,
+              0.075
+            ]
+          },
+          {
+            "side": "bottom",
+            "intersectionsZ": [
+              0.06,
+              0.075
+            ]
+          },
+          {
+            "side": "top",
+            "intersectionsZ": [
+              0.06,
+              0.075
+            ]
+          }
+        ],
+        "solidFrameProbes": 4
+      },
+      "combinedTriangles": 128,
+      "combinedPrimitives": 2,
+      "existingSillMustBeSuppressed": true
+    },
+    {
+      "status": "pass",
+      "assetId": "modern-source-window-surround",
+      "sillAssetId": "modern-source-window-paired-sill",
+      "lod": 1,
+      "frameGlbSha256": "c81bf83db1087e1ad029e642fa655d8310b75bb702939fa6ab52f24324fa3c95",
+      "sillGlbSha256": "f44f570ac007b54e794a4d5c8f0c08afeeb6fbf116bd1730845d76ca38df75b2",
+      "sharedRootTranslationM": [
+        0,
+        0,
+        0
+      ],
+      "actualVerticalSeparationM": 0.006000000052154064,
+      "nonOverlapMethod": "strict separating Y plane over all transformed vertices of both actual GLBs",
+      "opening": {
+        "triangleClipObstructions": 0,
+        "openVolumeRays": 75,
+        "rayObstructions": 0,
+        "apertureEdgeRays": 4,
+        "measuredClearApertureM": [
+          2.6684017277138934,
+          2.2445000000000004
+        ],
+        "glassStopRearM": 0.06,
+        "glassStopThicknessM": 0.015,
+        "fourSidedStopProbes": [
+          {
+            "side": "right",
+            "intersectionsZ": [
+              0.06,
+              0.075
+            ]
+          },
+          {
+            "side": "left",
+            "intersectionsZ": [
+              0.06,
+              0.075
+            ]
+          },
+          {
+            "side": "bottom",
+            "intersectionsZ": [
+              0.06,
+              0.075
+            ]
+          },
+          {
+            "side": "top",
+            "intersectionsZ": [
+              0.06,
+              0.075
+            ]
+          }
+        ],
+        "solidFrameProbes": 4
+      },
+      "combinedTriangles": 100,
+      "combinedPrimitives": 2,
+      "existingSillMustBeSuppressed": true
+    },
+    {
+      "status": "pass",
+      "assetId": "cedar-source-window-surround",
+      "sillAssetId": "cedar-source-window-paired-sill",
+      "lod": 0,
+      "frameGlbSha256": "a0a793735de865e0c4d1e89c523de863216d8d22dc14ef2510dedfc89b0e690e",
+      "sillGlbSha256": "f52e54c33843775ec39d238ca21f2c8b3f6716c1169c9dd036fa286ac7686f94",
+      "sharedRootTranslationM": [
+        0,
+        0,
+        0
+      ],
+      "actualVerticalSeparationM": 0.006000000052154064,
+      "nonOverlapMethod": "strict separating Y plane over all transformed vertices of both actual GLBs",
+      "opening": {
+        "triangleClipObstructions": 0,
+        "openVolumeRays": 75,
+        "rayObstructions": 0,
+        "apertureEdgeRays": 4,
+        "measuredClearApertureM": [
+          1.3585170585149247,
+          1.5105000000000004
+        ],
+        "glassStopRearM": 0.05,
+        "glassStopThicknessM": 0.015,
+        "fourSidedStopProbes": [
+          {
+            "side": "right",
+            "intersectionsZ": [
+              0.05,
+              0.065
+            ]
+          },
+          {
+            "side": "left",
+            "intersectionsZ": [
+              0.05,
+              0.065
+            ]
+          },
+          {
+            "side": "bottom",
+            "intersectionsZ": [
+              0.05,
+              0.065
+            ]
+          },
+          {
+            "side": "top",
+            "intersectionsZ": [
+              0.05,
+              0.065
+            ]
+          }
+        ],
+        "solidFrameProbes": 4
+      },
+      "combinedTriangles": 124,
+      "combinedPrimitives": 2,
+      "existingSillMustBeSuppressed": true
+    },
+    {
+      "status": "pass",
+      "assetId": "cedar-source-window-surround",
+      "sillAssetId": "cedar-source-window-paired-sill",
+      "lod": 1,
+      "frameGlbSha256": "0c5bb9c7b68e760698bb09fbb59328c29e4444427ac7c9358e7ca08e8d123cef",
+      "sillGlbSha256": "63d9c379bee7bb3d01eb293969e223d0d7df905aa153d96ed080e3caa7638a88",
+      "sharedRootTranslationM": [
+        0,
+        0,
+        0
+      ],
+      "actualVerticalSeparationM": 0.006000000052154064,
+      "nonOverlapMethod": "strict separating Y plane over all transformed vertices of both actual GLBs",
+      "opening": {
+        "triangleClipObstructions": 0,
+        "openVolumeRays": 75,
+        "rayObstructions": 0,
+        "apertureEdgeRays": 4,
+        "measuredClearApertureM": [
+          1.3585170585149247,
+          1.5105000000000004
+        ],
+        "glassStopRearM": 0.05,
+        "glassStopThicknessM": 0.015,
+        "fourSidedStopProbes": [
+          {
+            "side": "right",
+            "intersectionsZ": [
+              0.05,
+              0.065
+            ]
+          },
+          {
+            "side": "left",
+            "intersectionsZ": [
+              0.05,
+              0.065
+            ]
+          },
+          {
+            "side": "bottom",
+            "intersectionsZ": [
+              0.05,
+              0.065
+            ]
+          },
+          {
+            "side": "top",
+            "intersectionsZ": [
+              0.05,
+              0.065
+            ]
+          }
+        ],
+        "solidFrameProbes": 4
+      },
+      "combinedTriangles": 92,
+      "combinedPrimitives": 2,
+      "existingSillMustBeSuppressed": true
+    }
+  ],
+  "commonContract": "pass",
+  "results": [
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 0,
+      "status": "pass",
+      "boundsM": {
+        "min": [
+          -1.4342008829116821,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          1.4342008829116821,
+          2.444499969482422,
+          0.25999999046325684
+        ],
+        "size": [
+          2.8684017658233643,
+          2.444499969482422,
+          0.23999999091029167
+        ]
+      },
+      "triangles": 88,
+      "vertices": 136,
+      "primitives": 1,
+      "bytes": 10248,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 10248,
+      "images": [],
+      "nodeNames": [
+        "window-frame"
+      ],
+      "materialNames": [
+        "painted-metal"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0,
+      "opening": {
+        "triangleClipObstructions": 0,
+        "openVolumeRays": 75,
+        "rayObstructions": 0,
+        "apertureEdgeRays": 4,
+        "measuredClearApertureM": [
+          2.6684017277138934,
+          2.2445000000000004
+        ],
+        "glassStopRearM": 0.06,
+        "glassStopThicknessM": 0.015,
+        "fourSidedStopProbes": [
+          {
+            "side": "right",
+            "intersectionsZ": [
+              0.06,
+              0.075
+            ]
+          },
+          {
+            "side": "left",
+            "intersectionsZ": [
+              0.06,
+              0.075
+            ]
+          },
+          {
+            "side": "bottom",
+            "intersectionsZ": [
+              0.06,
+              0.075
+            ]
+          },
+          {
+            "side": "top",
+            "intersectionsZ": [
+              0.06,
+              0.075
+            ]
+          }
+        ],
+        "solidFrameProbes": 4
+      },
+      "metricUV": "pass",
+      "outwardNormalsTangents": "pass"
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 1,
+      "status": "pass",
+      "boundsM": {
+        "min": [
+          -1.4342008829116821,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          1.4342008829116821,
+          2.444499969482422,
+          0.25999999046325684
+        ],
+        "size": [
+          2.8684017658233643,
+          2.444499969482422,
+          0.23999999091029167
+        ]
+      },
+      "triangles": 72,
+      "vertices": 112,
+      "primitives": 1,
+      "bytes": 9004,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 9004,
+      "images": [],
+      "nodeNames": [
+        "window-frame"
+      ],
+      "materialNames": [
+        "painted-metal"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0,
+      "opening": {
+        "triangleClipObstructions": 0,
+        "openVolumeRays": 75,
+        "rayObstructions": 0,
+        "apertureEdgeRays": 4,
+        "measuredClearApertureM": [
+          2.6684017277138934,
+          2.2445000000000004
+        ],
+        "glassStopRearM": 0.06,
+        "glassStopThicknessM": 0.015,
+        "fourSidedStopProbes": [
+          {
+            "side": "right",
+            "intersectionsZ": [
+              0.06,
+              0.075
+            ]
+          },
+          {
+            "side": "left",
+            "intersectionsZ": [
+              0.06,
+              0.075
+            ]
+          },
+          {
+            "side": "bottom",
+            "intersectionsZ": [
+              0.06,
+              0.075
+            ]
+          },
+          {
+            "side": "top",
+            "intersectionsZ": [
+              0.06,
+              0.075
+            ]
+          }
+        ],
+        "solidFrameProbes": 4
+      },
+      "metricUV": "pass",
+      "outwardNormalsTangents": "pass"
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 0,
+      "status": "pass",
+      "boundsM": {
+        "min": [
+          -0.7492585182189941,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          0.7492585182189941,
+          1.6505000591278076,
+          0.18000000715255737
+        ],
+        "size": [
+          1.4985170364379883,
+          1.6505000591278076,
+          0.1600000075995922
+        ]
+      },
+      "triangles": 88,
+      "vertices": 136,
+      "primitives": 1,
+      "bytes": 10188,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 10188,
+      "images": [],
+      "nodeNames": [
+        "window-frame"
+      ],
+      "materialNames": [
+        "cedar"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0,
+      "opening": {
+        "triangleClipObstructions": 0,
+        "openVolumeRays": 75,
+        "rayObstructions": 0,
+        "apertureEdgeRays": 4,
+        "measuredClearApertureM": [
+          1.3585170585149247,
+          1.5105000000000004
+        ],
+        "glassStopRearM": 0.05,
+        "glassStopThicknessM": 0.015,
+        "fourSidedStopProbes": [
+          {
+            "side": "right",
+            "intersectionsZ": [
+              0.05,
+              0.065
+            ]
+          },
+          {
+            "side": "left",
+            "intersectionsZ": [
+              0.05,
+              0.065
+            ]
+          },
+          {
+            "side": "bottom",
+            "intersectionsZ": [
+              0.05,
+              0.065
+            ]
+          },
+          {
+            "side": "top",
+            "intersectionsZ": [
+              0.05,
+              0.065
+            ]
+          }
+        ],
+        "solidFrameProbes": 4
+      },
+      "metricUV": "pass",
+      "outwardNormalsTangents": "pass"
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 1,
+      "status": "pass",
+      "boundsM": {
+        "min": [
+          -0.7492585182189941,
+          0.0,
+          0.019999999552965164
+        ],
+        "max": [
+          0.7492585182189941,
+          1.6505000591278076,
+          0.18000000715255737
+        ],
+        "size": [
+          1.4985170364379883,
+          1.6505000591278076,
+          0.1600000075995922
+        ]
+      },
+      "triangles": 72,
+      "vertices": 112,
+      "primitives": 1,
+      "bytes": 8940,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 8940,
+      "images": [],
+      "nodeNames": [
+        "window-frame"
+      ],
+      "materialNames": [
+        "cedar"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0,
+      "opening": {
+        "triangleClipObstructions": 0,
+        "openVolumeRays": 75,
+        "rayObstructions": 0,
+        "apertureEdgeRays": 4,
+        "measuredClearApertureM": [
+          1.3585170585149247,
+          1.5105000000000004
+        ],
+        "glassStopRearM": 0.05,
+        "glassStopThicknessM": 0.015,
+        "fourSidedStopProbes": [
+          {
+            "side": "right",
+            "intersectionsZ": [
+              0.05,
+              0.065
+            ]
+          },
+          {
+            "side": "left",
+            "intersectionsZ": [
+              0.05,
+              0.065
+            ]
+          },
+          {
+            "side": "bottom",
+            "intersectionsZ": [
+              0.05,
+              0.065
+            ]
+          },
+          {
+            "side": "top",
+            "intersectionsZ": [
+              0.05,
+              0.065
+            ]
+          }
+        ],
+        "solidFrameProbes": 4
+      },
+      "metricUV": "pass",
+      "outwardNormalsTangents": "pass"
+    },
+    {
+      "assetId": "modern-source-window-paired-sill",
+      "lod": 0,
+      "status": "pass",
+      "boundsM": {
+        "min": [
+          -1.50420081615448,
+          -0.12999999523162842,
+          0.019999999552965164
+        ],
+        "max": [
+          1.50420081615448,
+          -0.006000000052154064,
+          0.3199999928474426
+        ],
+        "size": [
+          3.00840163230896,
+          0.12399999517947435,
+          0.29999999329447746
+        ]
+      },
+      "triangles": 40,
+      "vertices": 66,
+      "primitives": 1,
+      "bytes": 7512,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 7512,
+      "images": [],
+      "nodeNames": [
+        "window-sill"
+      ],
+      "materialNames": [
+        "painted-metal"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0,
+      "sharedRoot": true,
+      "maximumYBelowFrameM": -0.006000000052154064,
+      "slopedTopRayY": -0.052181800000000056,
+      "physicalNoseProbe": "pass",
+      "metricUV": "pass",
+      "outwardNormalsTangents": "pass"
+    },
+    {
+      "assetId": "modern-source-window-paired-sill",
+      "lod": 1,
+      "status": "pass",
+      "boundsM": {
+        "min": [
+          -1.50420081615448,
+          -0.12999999523162842,
+          0.019999999552965164
+        ],
+        "max": [
+          1.50420081615448,
+          -0.006000000052154064,
+          0.3199999928474426
+        ],
+        "size": [
+          3.00840163230896,
+          0.12399999517947435,
+          0.29999999329447746
+        ]
+      },
+      "triangles": 28,
+      "vertices": 48,
+      "primitives": 1,
+      "bytes": 6576,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 6576,
+      "images": [],
+      "nodeNames": [
+        "window-sill"
+      ],
+      "materialNames": [
+        "painted-metal"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0,
+      "sharedRoot": true,
+      "maximumYBelowFrameM": -0.006000000052154064,
+      "slopedTopRayY": -0.052181800000000056,
+      "physicalNoseProbe": "pass",
+      "metricUV": "pass",
+      "outwardNormalsTangents": "pass"
+    },
+    {
+      "assetId": "cedar-source-window-paired-sill",
+      "lod": 0,
+      "status": "pass",
+      "boundsM": {
+        "min": [
+          -0.8192585110664368,
+          -0.12999999523162842,
+          0.019999999552965164
+        ],
+        "max": [
+          0.8192585110664368,
+          -0.006000000052154064,
+          0.3100000023841858
+        ],
+        "size": [
+          1.6385170221328735,
+          0.12399999517947435,
+          0.2900000028312206
+        ]
+      },
+      "triangles": 36,
+      "vertices": 60,
+      "primitives": 1,
+      "bytes": 7024,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 7024,
+      "images": [],
+      "nodeNames": [
+        "window-sill"
+      ],
+      "materialNames": [
+        "cedar"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0,
+      "sharedRoot": true,
+      "maximumYBelowFrameM": -0.006000000052154064,
+      "slopedTopRayY": -0.028259999999999952,
+      "physicalNoseProbe": "pass",
+      "metricUV": "pass",
+      "outwardNormalsTangents": "pass"
+    },
+    {
+      "assetId": "cedar-source-window-paired-sill",
+      "lod": 1,
+      "status": "pass",
+      "boundsM": {
+        "min": [
+          -0.8192585110664368,
+          -0.12999999523162842,
+          0.019999999552965164
+        ],
+        "max": [
+          0.8192585110664368,
+          -0.006000000052154064,
+          0.3100000023841858
+        ],
+        "size": [
+          1.6385170221328735,
+          0.12399999517947435,
+          0.2900000028312206
+        ]
+      },
+      "triangles": 20,
+      "vertices": 36,
+      "primitives": 1,
+      "bytes": 5772,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 5772,
+      "images": [],
+      "nodeNames": [
+        "window-sill"
+      ],
+      "materialNames": [
+        "cedar"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0,
+      "sharedRoot": true,
+      "maximumYBelowFrameM": -0.006000000052154064,
+      "slopedTopRayY": -0.028259999999999952,
+      "physicalNoseProbe": "pass",
+      "metricUV": "pass",
+      "outwardNormalsTangents": "pass"
+    }
+  ],
+  "sourceFixtures": 2,
+  "positiveLodFits": 4,
+  "positiveAssemblyLodFits": 4,
+  "sourceEditPreservation": "pass",
+  "previews": 48,
+  "protectedSourceAndLegacyHashes": "pass",
+  "runtimeStatus": "runtime_pending_webgl",
+  "runtimeChecks": "not_run"
+}

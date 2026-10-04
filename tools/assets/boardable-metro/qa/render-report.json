@@ -1,0 +1,3868 @@
+{
+  "status": "pass",
+  "renderer": "Cycles CPU",
+  "blenderVersion": "4.3.2",
+  "samples": 8,
+  "threads": 2,
+  "renders": [
+    {
+      "file": "previews/lead-lod0-front.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        2.0,
+        22
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 6.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "0800117a05497c5e7e08fd588ec7c63849ea361d2d1a365062ec3824c17218a3",
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3"
+      }
+    },
+    {
+      "file": "previews/lead-lod0-side.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        -22,
+        5,
+        0
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 19.5,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "cf3fe9c1acc1d7f1d0d7f1599de797235b6050d93a27d175ae9398e742cdc9ae",
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3"
+      }
+    },
+    {
+      "file": "previews/lead-lod0-rear.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        2.0,
+        -22
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 6.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "4777391de4325942fb37f74b6617b4c37797b76c016d22fc0e3aa6373ee2f6f4",
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3"
+      }
+    },
+    {
+      "file": "previews/lead-lod0-top.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        25,
+        0.001
+      ],
+      "targetGlTFM": [
+        0,
+        0,
+        0
+      ],
+      "orthoScale": 30.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "0a84208ef22802a57dc9e4d31a61ac37b1cc13a2cb3a4ec6f246b598eda1e93a",
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3"
+      }
+    },
+    {
+      "file": "previews/lead-lod1-front.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod1.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        2.0,
+        22
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 6.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "ed2ba76bbefe2f64af0b4e641878e5f87df74ebb06e4f1455fea88b318bcd235",
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod1.glb": "04601a4b007e4c37b8ca25f0ffc0de1b12b3bb6dec4bc34b540b31458e17a502"
+      }
+    },
+    {
+      "file": "previews/lead-lod1-side.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod1.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        -22,
+        5,
+        0
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 19.5,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "92a4e786d7cb5d2213caf0352e21cdd29f9322d316d585ad97670fea247222e2",
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod1.glb": "04601a4b007e4c37b8ca25f0ffc0de1b12b3bb6dec4bc34b540b31458e17a502"
+      }
+    },
+    {
+      "file": "previews/lead-lod1-rear.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod1.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        2.0,
+        -22
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 6.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "5b10da53362e0991d1041330ce4ef5cc6d23ffe17dc59a70b08a427ca98cf655",
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod1.glb": "04601a4b007e4c37b8ca25f0ffc0de1b12b3bb6dec4bc34b540b31458e17a502"
+      }
+    },
+    {
+      "file": "previews/lead-lod1-top.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod1.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        25,
+        0.001
+      ],
+      "targetGlTFM": [
+        0,
+        0,
+        0
+      ],
+      "orthoScale": 30.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "e17c5da6d9c2f10c3e75077ce2fbda93e339a761283c578b1510c38f7dbe975b",
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod1.glb": "04601a4b007e4c37b8ca25f0ffc0de1b12b3bb6dec4bc34b540b31458e17a502"
+      }
+    },
+    {
+      "file": "previews/lead-lod2-front.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod2.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        2.0,
+        22
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 6.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "a440f8703d6df122aa46b6bcb000eb4c0d6ae0ba8c818a136d536ff7e85c216d",
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod2.glb": "6bc8efd804f341250845b5ab122bc2215a1e5bbbbfd65953add8d222a48a6fd6"
+      }
+    },
+    {
+      "file": "previews/lead-lod2-side.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod2.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        -22,
+        5,
+        0
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 19.5,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "a747856b2af2d790e0ef3986f4298576a947be06301e1162c17129fe5b4bad62",
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod2.glb": "6bc8efd804f341250845b5ab122bc2215a1e5bbbbfd65953add8d222a48a6fd6"
+      }
+    },
+    {
+      "file": "previews/lead-lod2-rear.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod2.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        2.0,
+        -22
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 6.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "ebdf63aedca604e1e7db54c70f37e71c82477460b4ffa47a2c705cbd21834d95",
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod2.glb": "6bc8efd804f341250845b5ab122bc2215a1e5bbbbfd65953add8d222a48a6fd6"
+      }
+    },
+    {
+      "file": "previews/lead-lod2-top.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod2.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        25,
+        0.001
+      ],
+      "targetGlTFM": [
+        0,
+        0,
+        0
+      ],
+      "orthoScale": 30.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "b343f4cb12a474b0cefa7da7ba9f652b4d6200497c0c18966c9036bd9fe5229a",
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod2.glb": "6bc8efd804f341250845b5ab122bc2215a1e5bbbbfd65953add8d222a48a6fd6"
+      }
+    },
+    {
+      "file": "previews/middle-lod0-front.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        2.0,
+        22
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 6.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "1c7f1af98d4be03738f828de4b0094f702833823098cc20421f466ee28b464a6",
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498"
+      }
+    },
+    {
+      "file": "previews/middle-lod0-side.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        -22,
+        5,
+        0
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 19.5,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "243faf13f168039c3d99d562e502d59bd5c88010c7aee88df69917877a95604a",
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498"
+      }
+    },
+    {
+      "file": "previews/middle-lod0-rear.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        2.0,
+        -22
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 6.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "57a7df376db5aecd7a1564e65f9f1731038bb59d051e868f443dce059f179a82",
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498"
+      }
+    },
+    {
+      "file": "previews/middle-lod0-top.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        25,
+        0.001
+      ],
+      "targetGlTFM": [
+        0,
+        0,
+        0
+      ],
+      "orthoScale": 30.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "6b561450dea3cf2e49144e979943e2b7200a35b7819ae4fa0b9c86df764056de",
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498"
+      }
+    },
+    {
+      "file": "previews/middle-lod1-front.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod1.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        2.0,
+        22
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 6.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "29aaea80c42a3c52413164e63ea6a5514a7878ddda03da6437987ee6fdd55ec4",
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod1.glb": "72024af0b12eff31f3070f38b97cf0de23205b630f9f1bf2d3abfd9098cd82fc"
+      }
+    },
+    {
+      "file": "previews/middle-lod1-side.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod1.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        -22,
+        5,
+        0
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 19.5,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "7141af00ae48659dfca38427e9ad1165a5e0d1e51dab9b2f182319dcfed37722",
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod1.glb": "72024af0b12eff31f3070f38b97cf0de23205b630f9f1bf2d3abfd9098cd82fc"
+      }
+    },
+    {
+      "file": "previews/middle-lod1-rear.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod1.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        2.0,
+        -22
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 6.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "8f65214d7adff8ee7976d81a4a0c8ef222ca942d66cd699f669a15ea484a15ba",
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod1.glb": "72024af0b12eff31f3070f38b97cf0de23205b630f9f1bf2d3abfd9098cd82fc"
+      }
+    },
+    {
+      "file": "previews/middle-lod1-top.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod1.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        25,
+        0.001
+      ],
+      "targetGlTFM": [
+        0,
+        0,
+        0
+      ],
+      "orthoScale": 30.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "b2ac8688b70e733ba67091bcb77725f6e2182f2b9c5e14590708b52d266be5bf",
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod1.glb": "72024af0b12eff31f3070f38b97cf0de23205b630f9f1bf2d3abfd9098cd82fc"
+      }
+    },
+    {
+      "file": "previews/middle-lod2-front.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod2.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        2.0,
+        22
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 6.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "f5de6579bcabb1205f615c047949024fe9b415536c8adbde96b7116c282547df",
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod2.glb": "bf2a04515b8c9478a982d3875b47dafac50884dd66a3103c9ae8fd4a182ed92c"
+      }
+    },
+    {
+      "file": "previews/middle-lod2-side.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod2.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        -22,
+        5,
+        0
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 19.5,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "aa78b92a8d9c9d2fd2418a6a7e3e5acf6daf153427a7f5349ca02eef8ddf229f",
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod2.glb": "bf2a04515b8c9478a982d3875b47dafac50884dd66a3103c9ae8fd4a182ed92c"
+      }
+    },
+    {
+      "file": "previews/middle-lod2-rear.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod2.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        2.0,
+        -22
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 6.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "76ad7fdba61cc8749ca89eaf8167417730f4804cf2e22ad5fd0398163044382f",
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod2.glb": "bf2a04515b8c9478a982d3875b47dafac50884dd66a3103c9ae8fd4a182ed92c"
+      }
+    },
+    {
+      "file": "previews/middle-lod2-top.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod2.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        25,
+        0.001
+      ],
+      "targetGlTFM": [
+        0,
+        0,
+        0
+      ],
+      "orthoScale": 30.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "758ff2bb52958d0b9e1b7daa7dec8ad350af20eefc5056a03c3a3872cf2e02ea",
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod2.glb": "bf2a04515b8c9478a982d3875b47dafac50884dd66a3103c9ae8fd4a182ed92c"
+      }
+    },
+    {
+      "file": "previews/tail-lod0-front.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        2.0,
+        22
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 6.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "9364ba9b06ba05fe5f6819711751672054c7325e3eccd1116b5945b73213abcf",
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95"
+      }
+    },
+    {
+      "file": "previews/tail-lod0-side.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        -22,
+        5,
+        0
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 19.5,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "fe8eb6f68546d933ac46dfa4538018e1b10cf94065b979593fbf0b201e37e73f",
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95"
+      }
+    },
+    {
+      "file": "previews/tail-lod0-rear.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        2.0,
+        -22
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 6.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "3188d149de17e896900448d4a6a8d43d68bea46b6a666504453d7ec646d9a61e",
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95"
+      }
+    },
+    {
+      "file": "previews/tail-lod0-top.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        25,
+        0.001
+      ],
+      "targetGlTFM": [
+        0,
+        0,
+        0
+      ],
+      "orthoScale": 30.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "909b37e20bbc5a2da0a0d79031acd8fa533c81df4295c1bc0026021e6c9af406",
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95"
+      }
+    },
+    {
+      "file": "previews/tail-lod1-front.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod1.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        2.0,
+        22
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 6.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "72f1bda94ef4d6301f95559c63e762ef5ff2babb63772d77774bc561ead0d116",
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod1.glb": "71697569e0d0e85a96de0f11f4ab97750c4b39678977eeefe7eebcfb51cccc1e"
+      }
+    },
+    {
+      "file": "previews/tail-lod1-side.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod1.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        -22,
+        5,
+        0
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 19.5,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "1c3ee5343bbeb67c94234c53f1ff29b00240b063f8b1d1697adbdc794c16fe36",
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod1.glb": "71697569e0d0e85a96de0f11f4ab97750c4b39678977eeefe7eebcfb51cccc1e"
+      }
+    },
+    {
+      "file": "previews/tail-lod1-rear.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod1.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        2.0,
+        -22
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 6.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "987058e73a44e8fc4904bf00a4c4346eda2d9fab871d5adfbd266f507d6db635",
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod1.glb": "71697569e0d0e85a96de0f11f4ab97750c4b39678977eeefe7eebcfb51cccc1e"
+      }
+    },
+    {
+      "file": "previews/tail-lod1-top.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod1.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        25,
+        0.001
+      ],
+      "targetGlTFM": [
+        0,
+        0,
+        0
+      ],
+      "orthoScale": 30.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "f0b23b6c678b97e5d8b9d4c272d6cc5c8d57faeaa98ad93d2f704b036e167b1f",
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod1.glb": "71697569e0d0e85a96de0f11f4ab97750c4b39678977eeefe7eebcfb51cccc1e"
+      }
+    },
+    {
+      "file": "previews/tail-lod2-front.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod2.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        2.0,
+        22
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 6.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "e0e7682c0ceb6033e7cde29625ad977f8c755f3f1e17c978918e544956808235",
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod2.glb": "27517d3ddd0195b3c18d1444f93b64a9e55b10c206f010d3a17397c47d370f82"
+      }
+    },
+    {
+      "file": "previews/tail-lod2-side.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod2.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        -22,
+        5,
+        0
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 19.5,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "d3ecf0d4e6be2b0aac9b9a3ea669382c0130d2da46850afab4dd7fbb5e1db475",
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod2.glb": "27517d3ddd0195b3c18d1444f93b64a9e55b10c206f010d3a17397c47d370f82"
+      }
+    },
+    {
+      "file": "previews/tail-lod2-rear.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod2.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        2.0,
+        -22
+      ],
+      "targetGlTFM": [
+        0,
+        1.65,
+        0
+      ],
+      "orthoScale": 6.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "fa8533f1168623cf2f29ff529e22d0335016e191e885e1fd63051d93369aa99f",
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod2.glb": "27517d3ddd0195b3c18d1444f93b64a9e55b10c206f010d3a17397c47d370f82"
+      }
+    },
+    {
+      "file": "previews/tail-lod2-top.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod2.glb"
+      ],
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        25,
+        0.001
+      ],
+      "targetGlTFM": [
+        0,
+        0,
+        0
+      ],
+      "orthoScale": 30.4,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "31bc0434ae796e5df16122b0a940ccd021df2f521ccd8ca14cf61570b78653f8",
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod2.glb": "27517d3ddd0195b3c18d1444f93b64a9e55b10c206f010d3a17397c47d370f82"
+      }
+    },
+    {
+      "file": "previews/lead-clear.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -14,
+        8,
+        15
+      ],
+      "targetGlTFM": [
+        0,
+        1.7,
+        0
+      ],
+      "orthoScale": 20,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "55b30077341e419602a3538502e8ad17e0ea8c6e080500a12831c830ce3e9f12"
+    },
+    {
+      "file": "previews/lead-overcast.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "overcast",
+      "cameraGlTFM": [
+        -14,
+        8,
+        15
+      ],
+      "targetGlTFM": [
+        0,
+        1.7,
+        0
+      ],
+      "orthoScale": 20,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "3866a61350e2dd50412f78552fd46d6ee6216a5589c0c886dc7a39304ed83a9a"
+    },
+    {
+      "file": "previews/lead-dusk.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "dusk",
+      "cameraGlTFM": [
+        -14,
+        8,
+        15
+      ],
+      "targetGlTFM": [
+        0,
+        1.7,
+        0
+      ],
+      "orthoScale": 20,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "e7eed3bbec4e277145ca109e655e601cdd979c429e9f3b487548bf6af309eee5"
+    },
+    {
+      "file": "previews/lead-night.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "night",
+      "cameraGlTFM": [
+        -14,
+        8,
+        15
+      ],
+      "targetGlTFM": [
+        0,
+        1.7,
+        0
+      ],
+      "orthoScale": 20,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "4947ad5ebc33363d306f1ec76544b24e30afc6318b0c081d0d9e31f824fac22e"
+    },
+    {
+      "file": "previews/lead-doors-closed.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -5.2,
+        2.4,
+        -5.5
+      ],
+      "targetGlTFM": [
+        0,
+        1.8,
+        -5.5
+      ],
+      "orthoScale": 5.2,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Paired door local transforms applied from manifest; static train.",
+      "sha256": "213388c0c254a41e1751c7e2e04b64625768e3dd103eb0537f3f983a3aad9563"
+    },
+    {
+      "file": "previews/lead-doors-open.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -5.2,
+        2.4,
+        -5.5
+      ],
+      "targetGlTFM": [
+        0,
+        1.8,
+        -5.5
+      ],
+      "orthoScale": 5.2,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Paired door local transforms applied from manifest; static train.",
+      "sha256": "69d383e0a8a42bfdf0e57048471e37101ab3b8a004f848ef253a2f5dd10522e4"
+    },
+    {
+      "file": "previews/lead-aisle.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        2.5,
+        -8.0
+      ],
+      "targetGlTFM": [
+        0,
+        2.1,
+        8.0
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "b077287988c2741d9f5f081a005bd3468564c12a5d178fe80fa811cd64fa2b0a"
+    },
+    {
+      "file": "previews/lead-section.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -11,
+        7,
+        10
+      ],
+      "targetGlTFM": [
+        0,
+        1.6,
+        0
+      ],
+      "orthoScale": 19,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Longitudinal bisection of reimported GLB at X=0; no authored substitute mesh.",
+      "sha256": "8190c19f640bac95eb82e52c988485df217372d9e2458c112c3d9d7d3197a17f"
+    },
+    {
+      "file": "previews/lead-entry-right-rear.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -2.2,
+        2.55,
+        -5.5
+      ],
+      "targetGlTFM": [
+        0,
+        2.0,
+        -5.5
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "5d16e30eaf3e63b7280be7d5d4a4d0fee33f7b1c75b74e7e23de16cd7133dfb8"
+    },
+    {
+      "file": "previews/lead-entry-right-center.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -2.2,
+        2.55,
+        0
+      ],
+      "targetGlTFM": [
+        0,
+        2.0,
+        0
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "27b0989c2f10a5b925bbbe32c6c410a452b6ec7860d3607583dca85829c9c5ee"
+    },
+    {
+      "file": "previews/lead-entry-right-front.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -2.2,
+        2.55,
+        5.5
+      ],
+      "targetGlTFM": [
+        0,
+        2.0,
+        5.5
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "bac5a223b6b564a90a8ad05da078ec9b497c0098a273b627379458b7b749be05"
+    },
+    {
+      "file": "previews/lead-entry-left-rear.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        2.2,
+        2.55,
+        -5.5
+      ],
+      "targetGlTFM": [
+        0,
+        2.0,
+        -5.5
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "23fb276d31d7e822fc12806241f6874f1ca324a36f713af1f19a9600a4627ef9"
+    },
+    {
+      "file": "previews/lead-entry-left-center.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        2.2,
+        2.55,
+        0
+      ],
+      "targetGlTFM": [
+        0,
+        2.0,
+        0
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "682248b3d50beb2db69aec2fd9f09f98577774f746dcfa2f184769abd6ebc0d9"
+    },
+    {
+      "file": "previews/lead-entry-left-front.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        2.2,
+        2.55,
+        5.5
+      ],
+      "targetGlTFM": [
+        0,
+        2.0,
+        5.5
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "63117d9ceb021b08c40965bce057de2ad51603d3a6a56f29f53af90a0abf13b6"
+    },
+    {
+      "file": "previews/lead-seat-right-01-eye.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -0.96,
+        2.05,
+        -7.1
+      ],
+      "targetGlTFM": [
+        0.96,
+        1.9,
+        -6.949999999999999
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "f3a041facc020e09c054e673fcd84caaa3506cd4e383b2acbfe0638f7e019533"
+    },
+    {
+      "file": "previews/lead-seat-right-02-eye.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -0.96,
+        2.05,
+        -3
+      ],
+      "targetGlTFM": [
+        0.96,
+        1.9,
+        -2.85
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "92fbd2e8b88e43ef8b8353d201182e9277094306eed9deffeb3b6a145b70de20"
+    },
+    {
+      "file": "previews/lead-seat-right-03-eye.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -0.96,
+        2.05,
+        -2.3
+      ],
+      "targetGlTFM": [
+        0.96,
+        1.9,
+        -2.15
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "f393d332d509cd6a234ac5893b6d99796bb8b190276dee3b0da6cb433b0f549e"
+    },
+    {
+      "file": "previews/lead-seat-right-04-eye.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -0.96,
+        2.05,
+        2.3
+      ],
+      "targetGlTFM": [
+        0.96,
+        1.9,
+        2.4499999999999997
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "984efcd2af0c5a6f8ebf61dfe3efa3a2ae04fbe9172876050b2acbd17008a674"
+    },
+    {
+      "file": "previews/lead-seat-right-05-eye.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -0.96,
+        2.05,
+        3
+      ],
+      "targetGlTFM": [
+        0.96,
+        1.9,
+        3.15
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "671d182c7f4ebf640ff4f3d280433b97a508734b0505dc5a9b4018f55593f041"
+    },
+    {
+      "file": "previews/lead-seat-right-06-eye.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -0.96,
+        2.05,
+        7.1
+      ],
+      "targetGlTFM": [
+        0.96,
+        1.9,
+        7.25
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "808644748e323602e881326771b45a6da9ba66e58f5f8610ebe825a061fe96c7"
+    },
+    {
+      "file": "previews/lead-seat-left-01-eye.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        0.96,
+        2.05,
+        -7.1
+      ],
+      "targetGlTFM": [
+        -0.96,
+        1.9,
+        -6.949999999999999
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "88e15561d0de2354e32a6ef872fd623a74913f0a0edce11e635d9f93c6b95f48"
+    },
+    {
+      "file": "previews/lead-seat-left-02-eye.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        0.96,
+        2.05,
+        -3
+      ],
+      "targetGlTFM": [
+        -0.96,
+        1.9,
+        -2.85
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "35a80f5b2f380388c1d6be68c10fde3f769691ca0db0b2d3bc905950720b934f"
+    },
+    {
+      "file": "previews/lead-seat-left-03-eye.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        0.96,
+        2.05,
+        -2.3
+      ],
+      "targetGlTFM": [
+        -0.96,
+        1.9,
+        -2.15
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "73bc16b2c3f6071a332a6c3e1c16fbfb4eb3d48f4b2a97adacdd925aaee06494"
+    },
+    {
+      "file": "previews/lead-seat-left-04-eye.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        0.96,
+        2.05,
+        2.3
+      ],
+      "targetGlTFM": [
+        -0.96,
+        1.9,
+        2.4499999999999997
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "a7ece28a45faa18bb625a224675b32b700590dbc1d77a9cdfabcd240f6ac2ab0"
+    },
+    {
+      "file": "previews/lead-seat-left-05-eye.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        0.96,
+        2.05,
+        3
+      ],
+      "targetGlTFM": [
+        -0.96,
+        1.9,
+        3.15
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "9a5e51ebe7c8f6b6b04857c0f6b2e0c61067a13ebddb9307c6a8ece938a94381"
+    },
+    {
+      "file": "previews/lead-seat-left-06-eye.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        0.96,
+        2.05,
+        7.1
+      ],
+      "targetGlTFM": [
+        -0.96,
+        1.9,
+        7.25
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "916fbb7ca93d0930f26997df5a291e2cca492dbc43c612df9e2ad41c27b1605e"
+    },
+    {
+      "file": "previews/lead-scale-reference.png",
+      "inputs": [
+        "exports/expo-metro-lead-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -8,
+        4.5,
+        -2.8
+      ],
+      "targetGlTFM": [
+        -1.6,
+        1.75,
+        -5.5
+      ],
+      "orthoScale": 6,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "QA-only 1m ruler and 1.75m/1.81m figures stand on reference platform Y=.95.",
+      "sha256": "b848a66eb2e87ad7d12d8d7c02b4970c74ab5b05e8ef08a4269ba9e9c4c5b204"
+    },
+    {
+      "file": "previews/middle-clear.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -14,
+        8,
+        15
+      ],
+      "targetGlTFM": [
+        0,
+        1.7,
+        0
+      ],
+      "orthoScale": 20,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "51e92d49558fd46ec20e5caede092b21a3abbe83a1726bf4310a9f2e0e591dbd"
+    },
+    {
+      "file": "previews/middle-overcast.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "overcast",
+      "cameraGlTFM": [
+        -14,
+        8,
+        15
+      ],
+      "targetGlTFM": [
+        0,
+        1.7,
+        0
+      ],
+      "orthoScale": 20,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "f8ef9197228834b852c484da3255d10f8ed64dd81ba22a973120beb951c9377a"
+    },
+    {
+      "file": "previews/middle-dusk.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "dusk",
+      "cameraGlTFM": [
+        -14,
+        8,
+        15
+      ],
+      "targetGlTFM": [
+        0,
+        1.7,
+        0
+      ],
+      "orthoScale": 20,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "1eff1ed6b887de658b458155edd0974208d8c6dc4727cbad09a44b3cbe26f6e6"
+    },
+    {
+      "file": "previews/middle-night.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "night",
+      "cameraGlTFM": [
+        -14,
+        8,
+        15
+      ],
+      "targetGlTFM": [
+        0,
+        1.7,
+        0
+      ],
+      "orthoScale": 20,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "d2b1a56a144c8354aa54fe2a467a79219daaaaf27f12fed5ed3cd6b007eb6f4a"
+    },
+    {
+      "file": "previews/middle-doors-closed.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -5.2,
+        2.4,
+        -5.5
+      ],
+      "targetGlTFM": [
+        0,
+        1.8,
+        -5.5
+      ],
+      "orthoScale": 5.2,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Paired door local transforms applied from manifest; static train.",
+      "sha256": "bcc4afe422fe48d2d9b1e78d35437a9374cda898f67e70f370f27c9194979975"
+    },
+    {
+      "file": "previews/middle-doors-open.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -5.2,
+        2.4,
+        -5.5
+      ],
+      "targetGlTFM": [
+        0,
+        1.8,
+        -5.5
+      ],
+      "orthoScale": 5.2,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Paired door local transforms applied from manifest; static train.",
+      "sha256": "86ccd0270e46280dbfacbe5b4c7f1ccef9825959f4a520c51596878241553a3a"
+    },
+    {
+      "file": "previews/middle-aisle.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        2.5,
+        -8.0
+      ],
+      "targetGlTFM": [
+        0,
+        2.1,
+        8.0
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "a8735b4ccfa7e180a79e31736de4068c2447c3d507a80f03f048e6f3637cedaf"
+    },
+    {
+      "file": "previews/middle-section.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -11,
+        7,
+        10
+      ],
+      "targetGlTFM": [
+        0,
+        1.6,
+        0
+      ],
+      "orthoScale": 19,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Longitudinal bisection of reimported GLB at X=0; no authored substitute mesh.",
+      "sha256": "cca9d12ba04a8da3edeba7a564146e4c28b848f2b21453621dfb9ad1bca5fa4c"
+    },
+    {
+      "file": "previews/middle-entry-right-rear.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -2.2,
+        2.55,
+        -5.5
+      ],
+      "targetGlTFM": [
+        0,
+        2.0,
+        -5.5
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "eb4f3fc055364c16af704f18eb4f1f330d0c249a15b462e22e5de8e62dc424e0"
+    },
+    {
+      "file": "previews/middle-entry-right-center.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -2.2,
+        2.55,
+        0
+      ],
+      "targetGlTFM": [
+        0,
+        2.0,
+        0
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "65107c9e6e2b7d58c7b61f8d34a6cdf1a66ac005660338eeb87d75325df3090a"
+    },
+    {
+      "file": "previews/middle-entry-right-front.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -2.2,
+        2.55,
+        5.5
+      ],
+      "targetGlTFM": [
+        0,
+        2.0,
+        5.5
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "ec08a054882e8eb0852dfeefaddfccda8fda419e547fc15d627956713fc7c981"
+    },
+    {
+      "file": "previews/middle-entry-left-rear.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        2.2,
+        2.55,
+        -5.5
+      ],
+      "targetGlTFM": [
+        0,
+        2.0,
+        -5.5
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "084a31e0258c2e84a43e9ce61e49fb3fe818b9d14d2892d215f7823b2bfbf6ab"
+    },
+    {
+      "file": "previews/middle-entry-left-center.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        2.2,
+        2.55,
+        0
+      ],
+      "targetGlTFM": [
+        0,
+        2.0,
+        0
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "3ade458c9e71c56050ddf92c702c7c6d4e0ccb136fe3a1a0c10913108292c5b7"
+    },
+    {
+      "file": "previews/middle-entry-left-front.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        2.2,
+        2.55,
+        5.5
+      ],
+      "targetGlTFM": [
+        0,
+        2.0,
+        5.5
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "0f206d9ba01a04684c6376ee6a31528c66ff5d7a0c07947abb6f446884231852"
+    },
+    {
+      "file": "previews/middle-seat-right-01-eye.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -0.96,
+        2.05,
+        -7.1
+      ],
+      "targetGlTFM": [
+        0.96,
+        1.9,
+        -6.949999999999999
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "ae49fd1e264425bedac03eaecb117986ab0f38d5bbe4941ed13fd2b3af237997"
+    },
+    {
+      "file": "previews/middle-seat-right-02-eye.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -0.96,
+        2.05,
+        -3
+      ],
+      "targetGlTFM": [
+        0.96,
+        1.9,
+        -2.85
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "8b01b973337f5c9beeae6dc5c1084a538ed7728f0a5dd09eb510656381dfb1b9"
+    },
+    {
+      "file": "previews/middle-seat-right-03-eye.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -0.96,
+        2.05,
+        -2.3
+      ],
+      "targetGlTFM": [
+        0.96,
+        1.9,
+        -2.15
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "40d7b1e483eb4d1b35b10264802f0c8d81dac799369d5c8a04d7e807ca7c2b21"
+    },
+    {
+      "file": "previews/middle-seat-right-04-eye.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -0.96,
+        2.05,
+        2.3
+      ],
+      "targetGlTFM": [
+        0.96,
+        1.9,
+        2.4499999999999997
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "d547ed88b7856028cfc4f000712d06920acaaff25300b1f49033107564b34f2e"
+    },
+    {
+      "file": "previews/middle-seat-right-05-eye.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -0.96,
+        2.05,
+        3
+      ],
+      "targetGlTFM": [
+        0.96,
+        1.9,
+        3.15
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "ee5cb20121c325e6af438a2a481f1fb946c20588627bddbfbb42bb6746db7d57"
+    },
+    {
+      "file": "previews/middle-seat-right-06-eye.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -0.96,
+        2.05,
+        7.1
+      ],
+      "targetGlTFM": [
+        0.96,
+        1.9,
+        7.25
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "949935f89126d3f1b8dc055c0b8d89b6868b5bd4b43df9312abb95ec13ea8708"
+    },
+    {
+      "file": "previews/middle-seat-left-01-eye.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        0.96,
+        2.05,
+        -7.1
+      ],
+      "targetGlTFM": [
+        -0.96,
+        1.9,
+        -6.949999999999999
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "a5d4e3213a5dcb1c053d03e333c6f7e60d9d4f034d17b86bb505a788e11f0c18"
+    },
+    {
+      "file": "previews/middle-seat-left-02-eye.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        0.96,
+        2.05,
+        -3
+      ],
+      "targetGlTFM": [
+        -0.96,
+        1.9,
+        -2.85
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "538b31b5cc994c6b131249dbdabb05630e2adfe3346ef4a345617eb3f47c2d6c"
+    },
+    {
+      "file": "previews/middle-seat-left-03-eye.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        0.96,
+        2.05,
+        -2.3
+      ],
+      "targetGlTFM": [
+        -0.96,
+        1.9,
+        -2.15
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "0d9f30da586d72cc25a498eb9b2bb0c3b8546e69b41b84ffd0a781f2b46f218b"
+    },
+    {
+      "file": "previews/middle-seat-left-04-eye.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        0.96,
+        2.05,
+        2.3
+      ],
+      "targetGlTFM": [
+        -0.96,
+        1.9,
+        2.4499999999999997
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "6b7f930ec6fa0ae241e77a86bff02bc4d4ff82a64e83e92998bb2c134db987ba"
+    },
+    {
+      "file": "previews/middle-seat-left-05-eye.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        0.96,
+        2.05,
+        3
+      ],
+      "targetGlTFM": [
+        -0.96,
+        1.9,
+        3.15
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "811ec04bbafecdcf7feb616ae4fefc7ecc669693756bca98c92fa942478e6dae"
+    },
+    {
+      "file": "previews/middle-seat-left-06-eye.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        0.96,
+        2.05,
+        7.1
+      ],
+      "targetGlTFM": [
+        -0.96,
+        1.9,
+        7.25
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "ccf0fc5a95f7b7ea53d908562d9d29bcd2a63b84cc245fc3804d07763139f593"
+    },
+    {
+      "file": "previews/middle-scale-reference.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -8,
+        4.5,
+        -2.8
+      ],
+      "targetGlTFM": [
+        -1.6,
+        1.75,
+        -5.5
+      ],
+      "orthoScale": 6,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "QA-only 1m ruler and 1.75m/1.81m figures stand on reference platform Y=.95.",
+      "sha256": "6588a7fdaacdda97fe47c4c63bbadd3e702f0696afb26d25d8999755cedd18b6"
+    },
+    {
+      "file": "previews/tail-clear.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -14,
+        8,
+        15
+      ],
+      "targetGlTFM": [
+        0,
+        1.7,
+        0
+      ],
+      "orthoScale": 20,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "4b8633d74b4326764c76dc79ec60619c8b3614bd1dd6597cb8ddba26843cca2f"
+    },
+    {
+      "file": "previews/tail-overcast.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "overcast",
+      "cameraGlTFM": [
+        -14,
+        8,
+        15
+      ],
+      "targetGlTFM": [
+        0,
+        1.7,
+        0
+      ],
+      "orthoScale": 20,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "fe60b5e740758cff1f46c1784f0468b95b71ed1c4766bbaae20e4eceab707a4f"
+    },
+    {
+      "file": "previews/tail-dusk.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "dusk",
+      "cameraGlTFM": [
+        -14,
+        8,
+        15
+      ],
+      "targetGlTFM": [
+        0,
+        1.7,
+        0
+      ],
+      "orthoScale": 20,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "778b4f37087c4cd2ab6bcd49604e384ef1df6cf3324e05e473a3228f66295c17"
+    },
+    {
+      "file": "previews/tail-night.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "night",
+      "cameraGlTFM": [
+        -14,
+        8,
+        15
+      ],
+      "targetGlTFM": [
+        0,
+        1.7,
+        0
+      ],
+      "orthoScale": 20,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "0d3e6841741a33c4cca188a88c45795b7acc9d44ca0a5266faaacb27b50860fe"
+    },
+    {
+      "file": "previews/tail-doors-closed.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -5.2,
+        2.4,
+        -5.5
+      ],
+      "targetGlTFM": [
+        0,
+        1.8,
+        -5.5
+      ],
+      "orthoScale": 5.2,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Paired door local transforms applied from manifest; static train.",
+      "sha256": "ceb1ceb039cd7295aa2d075f319a86718cfa09a5554d0a8bdc330c9471e67e92"
+    },
+    {
+      "file": "previews/tail-doors-open.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -5.2,
+        2.4,
+        -5.5
+      ],
+      "targetGlTFM": [
+        0,
+        1.8,
+        -5.5
+      ],
+      "orthoScale": 5.2,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Paired door local transforms applied from manifest; static train.",
+      "sha256": "3d65515f0b1811879aeb3b2525ed4447b35610f6ca5e5e30544c1dc351243969"
+    },
+    {
+      "file": "previews/tail-aisle.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        2.5,
+        -8.0
+      ],
+      "targetGlTFM": [
+        0,
+        2.1,
+        8.0
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "032d7a5de4cbb6c3a2e225a618c07121db0beb5f305266e13840dae6f7dddeb6"
+    },
+    {
+      "file": "previews/tail-section.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -11,
+        7,
+        10
+      ],
+      "targetGlTFM": [
+        0,
+        1.6,
+        0
+      ],
+      "orthoScale": 19,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Longitudinal bisection of reimported GLB at X=0; no authored substitute mesh.",
+      "sha256": "1e4585c42ffcfd4579b03a5d594963dbd5e61ef16e4a487584030c201c4a8928"
+    },
+    {
+      "file": "previews/tail-entry-right-rear.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -2.2,
+        2.55,
+        -5.5
+      ],
+      "targetGlTFM": [
+        0,
+        2.0,
+        -5.5
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "6b70e82c57fd191123b3e8ffb79381e515e49c669d461fe62b3c67dc3f2dda7e"
+    },
+    {
+      "file": "previews/tail-entry-right-center.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -2.2,
+        2.55,
+        0
+      ],
+      "targetGlTFM": [
+        0,
+        2.0,
+        0
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "1a66cf3e1aedcf05401fca4c86d24f2ad869cde6ad36bdec9ce40b3b14aa1b83"
+    },
+    {
+      "file": "previews/tail-entry-right-front.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -2.2,
+        2.55,
+        5.5
+      ],
+      "targetGlTFM": [
+        0,
+        2.0,
+        5.5
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "e567f7d29c8b8c119b79ff606125668741b94f036f5cd41a77be9a755a2235c7"
+    },
+    {
+      "file": "previews/tail-entry-left-rear.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        2.2,
+        2.55,
+        -5.5
+      ],
+      "targetGlTFM": [
+        0,
+        2.0,
+        -5.5
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "9c4d8e9e9c3dd2a36ac44a0de2a398cd62bc6a9dbfc8b075df639a9589aaa0fc"
+    },
+    {
+      "file": "previews/tail-entry-left-center.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        2.2,
+        2.55,
+        0
+      ],
+      "targetGlTFM": [
+        0,
+        2.0,
+        0
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "2005c6d91151592b44fe06cf7949a3ff345c259b7c2417b29633fc7660c06c4f"
+    },
+    {
+      "file": "previews/tail-entry-left-front.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        2.2,
+        2.55,
+        5.5
+      ],
+      "targetGlTFM": [
+        0,
+        2.0,
+        5.5
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "4d43f6dca8c5c06eb438bf3dc7855e0f567eea780a7af829b903ce80da734f09"
+    },
+    {
+      "file": "previews/tail-seat-right-01-eye.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -0.96,
+        2.05,
+        -7.1
+      ],
+      "targetGlTFM": [
+        0.96,
+        1.9,
+        -6.949999999999999
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "8b03a641f7ef69db084cfa60b8e4a86fd3bdfdaa6132d4e334809382f3b1ad72"
+    },
+    {
+      "file": "previews/tail-seat-right-02-eye.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -0.96,
+        2.05,
+        -3
+      ],
+      "targetGlTFM": [
+        0.96,
+        1.9,
+        -2.85
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "eea9e438281c6cac5cdfa3116cf40d2ebca5cb33538c661fe8239b44a1deab0c"
+    },
+    {
+      "file": "previews/tail-seat-right-03-eye.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -0.96,
+        2.05,
+        -2.3
+      ],
+      "targetGlTFM": [
+        0.96,
+        1.9,
+        -2.15
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "5ab993b8307cf48315863cca9726ced0b7b6b1ab7a0656734cfdc6d45427d8ae"
+    },
+    {
+      "file": "previews/tail-seat-right-04-eye.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -0.96,
+        2.05,
+        2.3
+      ],
+      "targetGlTFM": [
+        0.96,
+        1.9,
+        2.4499999999999997
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "8adf714d58f660a26d920f25f4d9bfadc3dfe3fb97fe3b83f8c888df0bdb7715"
+    },
+    {
+      "file": "previews/tail-seat-right-05-eye.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -0.96,
+        2.05,
+        3
+      ],
+      "targetGlTFM": [
+        0.96,
+        1.9,
+        3.15
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "1f5ebb53b6399067c8f8f7d8d0510fd4b3ef2a4609d37dd4bbd27723a46351b4"
+    },
+    {
+      "file": "previews/tail-seat-right-06-eye.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -0.96,
+        2.05,
+        7.1
+      ],
+      "targetGlTFM": [
+        0.96,
+        1.9,
+        7.25
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "0d917301c0f2c717e17074e50581cd4e34e6412578ee5b707bbbba74f1920f1f"
+    },
+    {
+      "file": "previews/tail-seat-left-01-eye.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        0.96,
+        2.05,
+        -7.1
+      ],
+      "targetGlTFM": [
+        -0.96,
+        1.9,
+        -6.949999999999999
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "54396d302599dd14d67ffb2a33ace81b8dbabbc5a86987a8602b5bed49b4b764"
+    },
+    {
+      "file": "previews/tail-seat-left-02-eye.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        0.96,
+        2.05,
+        -3
+      ],
+      "targetGlTFM": [
+        -0.96,
+        1.9,
+        -2.85
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "8e569fe73f3c8c69c6d150d90732c6357bb426e8a4461a1262cee3e25858c53a"
+    },
+    {
+      "file": "previews/tail-seat-left-03-eye.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        0.96,
+        2.05,
+        -2.3
+      ],
+      "targetGlTFM": [
+        -0.96,
+        1.9,
+        -2.15
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "7df6085072bda1acaa3c5ce34fea64540d407e7c1d0b4debc74de9dab29df0f1"
+    },
+    {
+      "file": "previews/tail-seat-left-04-eye.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        0.96,
+        2.05,
+        2.3
+      ],
+      "targetGlTFM": [
+        -0.96,
+        1.9,
+        2.4499999999999997
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "7ef285d3fedb5a860b725f88285f3bdbc042d5b35b052dcf05f6fc3e5d79dfc4"
+    },
+    {
+      "file": "previews/tail-seat-left-05-eye.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        0.96,
+        2.05,
+        3
+      ],
+      "targetGlTFM": [
+        -0.96,
+        1.9,
+        3.15
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "a6d87092b57b05f2c6f80ce9a8ef58edcaef4836f572a099c051d11d1bdaaddf"
+    },
+    {
+      "file": "previews/tail-seat-left-06-eye.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        0.96,
+        2.05,
+        7.1
+      ],
+      "targetGlTFM": [
+        -0.96,
+        1.9,
+        7.25
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "Camera exactly at metadata seat eye; pelvis is a separate anchor.",
+      "sha256": "e7a510d82ef3c13eec8d3d044c7d426da8398d71f3faaf225e1cfd9a66316ce9"
+    },
+    {
+      "file": "previews/tail-scale-reference.png",
+      "inputs": [
+        "exports/expo-metro-tail-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-tail-exterior.lod0.glb": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        -8,
+        4.5,
+        -2.8
+      ],
+      "targetGlTFM": [
+        -1.6,
+        1.75,
+        -5.5
+      ],
+      "orthoScale": 6,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "QA-only 1m ruler and 1.75m/1.81m figures stand on reference platform Y=.95.",
+      "sha256": "edcbcf94bb36ab04089b4dce5c0777aea554ada5b86364ba8df4454d8f1b01a1"
+    },
+    {
+      "file": "previews/interior-lod0-aisle.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod0.glb",
+        "exports/expo-metro-shared-interior.lod0.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod0.glb": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498",
+        "exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        2.5,
+        -8
+      ],
+      "targetGlTFM": [
+        0,
+        2.1,
+        8
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "598218a0e8d202971e0e67bf08835deff4b29e0a31be00b3c75e5b5ec24e7e6a"
+    },
+    {
+      "file": "previews/interior-lod1-aisle.png",
+      "inputs": [
+        "exports/expo-metro-middle-exterior.lod1.glb",
+        "exports/expo-metro-shared-interior.lod1.glb"
+      ],
+      "sourceGlbSha256": {
+        "exports/expo-metro-middle-exterior.lod1.glb": "72024af0b12eff31f3070f38b97cf0de23205b630f9f1bf2d3abfd9098cd82fc",
+        "exports/expo-metro-shared-interior.lod1.glb": "79cc69b436c7c40dcc21feee9218e4bf3156af1a18494080983a17183167e52e"
+      },
+      "condition": "clear",
+      "cameraGlTFM": [
+        0,
+        2.5,
+        -8
+      ],
+      "targetGlTFM": [
+        0,
+        2.1,
+        8
+      ],
+      "orthoScale": null,
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 8,
+      "resolution": [
+        640,
+        400
+      ],
+      "threads": 2,
+      "note": "",
+      "sha256": "f7b3c11dfbece3b05c6c776f368c9da51d07c47a26e84238dfc7dde4af1e34f6"
+    }
+  ],
+  "runtimeWeatherMatch": false,
+  "visualReview": "See qa/visual-review.json; all expected frames rendered from real GLBs.",
+  "denoising": false,
+  "denoisingReason": "Installed Blender build lacks OpenImageDenoise; 8-sample CPU noise retained."
+}

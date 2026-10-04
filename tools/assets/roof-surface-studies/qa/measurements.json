@@ -1,0 +1,254 @@
+{
+  "status": "pass",
+  "source": "actual glTF accessors and node transforms, not nominal dimensions",
+  "boundsAxes": "W=X, H=Y, D=Z",
+  "assets": [
+    {
+      "assetId": "roof-mineral-grain-coupon-2m",
+      "file": "exports/roof-mineral-grain-2m.inspection.glb",
+      "boundsM": {
+        "min": [
+          -1.0,
+          0.0,
+          -1.0
+        ],
+        "max": [
+          1.0,
+          0.0,
+          1.0
+        ],
+        "size": [
+          2.0,
+          0.0,
+          2.0
+        ]
+      },
+      "triangles": 2,
+      "vertices": 4,
+      "primitives": 1,
+      "bytes": 202740,
+      "embeddedImageBytes": 200335,
+      "geometryBytes": 2405,
+      "images": [
+        {
+          "sha256": "4184dfa45d8bb506f11e1a591407342994965b54405addb62d2b2f7133bedb26",
+          "width": 256,
+          "height": 256,
+          "bytes": 133237,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "726b7f196228fb839912cbe1931bb2cf85b9c876ffc8a89c07ae46fdd279e0be",
+          "width": 256,
+          "height": 256,
+          "bytes": 34075,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "232bdea457187c564ef92f38591c025dd37c11ede3bc533d5974d0a11a2e88e8",
+          "width": 256,
+          "height": 256,
+          "bytes": 33023,
+          "texelBytesWithMips": 349525.3333333333
+        }
+      ],
+      "nodeNames": [
+        "roof-mineral-grain-coupon-2m-inspection"
+      ],
+      "materialNames": [
+        "roof-mineral-grain-baked-inspection"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "roof-mineral-grain-coupon-10m",
+      "file": "exports/roof-mineral-grain-10m.inspection.glb",
+      "boundsM": {
+        "min": [
+          -5.0,
+          0.0,
+          -5.0
+        ],
+        "max": [
+          5.0,
+          0.0,
+          5.0
+        ],
+        "size": [
+          10.0,
+          0.0,
+          10.0
+        ]
+      },
+      "triangles": 2,
+      "vertices": 4,
+      "primitives": 1,
+      "bytes": 202740,
+      "embeddedImageBytes": 200335,
+      "geometryBytes": 2405,
+      "images": [
+        {
+          "sha256": "4184dfa45d8bb506f11e1a591407342994965b54405addb62d2b2f7133bedb26",
+          "width": 256,
+          "height": 256,
+          "bytes": 133237,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "726b7f196228fb839912cbe1931bb2cf85b9c876ffc8a89c07ae46fdd279e0be",
+          "width": 256,
+          "height": 256,
+          "bytes": 34075,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "232bdea457187c564ef92f38591c025dd37c11ede3bc533d5974d0a11a2e88e8",
+          "width": 256,
+          "height": 256,
+          "bytes": 33023,
+          "texelBytesWithMips": 349525.3333333333
+        }
+      ],
+      "nodeNames": [
+        "roof-mineral-grain-coupon-10m-inspection"
+      ],
+      "materialNames": [
+        "roof-mineral-grain-baked-inspection"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "roof-membrane-seams-coupon-2m",
+      "file": "exports/roof-membrane-seams-2m.inspection.glb",
+      "boundsM": {
+        "min": [
+          -1.0,
+          0.0,
+          -1.0
+        ],
+        "max": [
+          1.0,
+          0.0,
+          1.0
+        ],
+        "size": [
+          2.0,
+          0.0,
+          2.0
+        ]
+      },
+      "triangles": 2,
+      "vertices": 4,
+      "primitives": 1,
+      "bytes": 43296,
+      "embeddedImageBytes": 40888,
+      "geometryBytes": 2408,
+      "images": [
+        {
+          "sha256": "9893c52af0d3b43ed71ff695f4b4a6135d7a40faa0df104f546008001a2bba46",
+          "width": 256,
+          "height": 256,
+          "bytes": 27834,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "9c9fcb794e5d0c4738430556dbc5dab201ba30fc980ce10f5854b05194b5df86",
+          "width": 256,
+          "height": 256,
+          "bytes": 12453,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "6879c85b02523bce0c8bedb1e55e51938d005cbf479d1f0d71f22f58493447c2",
+          "width": 256,
+          "height": 256,
+          "bytes": 601,
+          "texelBytesWithMips": 349525.3333333333
+        }
+      ],
+      "nodeNames": [
+        "roof-membrane-seams-coupon-2m-inspection"
+      ],
+      "materialNames": [
+        "roof-membrane-seams-baked-inspection"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "roof-membrane-seams-coupon-10m",
+      "file": "exports/roof-membrane-seams-10m.inspection.glb",
+      "boundsM": {
+        "min": [
+          -5.0,
+          0.0,
+          -5.0
+        ],
+        "max": [
+          5.0,
+          0.0,
+          5.0
+        ],
+        "size": [
+          10.0,
+          0.0,
+          10.0
+        ]
+      },
+      "triangles": 2,
+      "vertices": 4,
+      "primitives": 1,
+      "bytes": 43300,
+      "embeddedImageBytes": 40888,
+      "geometryBytes": 2412,
+      "images": [
+        {
+          "sha256": "9893c52af0d3b43ed71ff695f4b4a6135d7a40faa0df104f546008001a2bba46",
+          "width": 256,
+          "height": 256,
+          "bytes": 27834,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "9c9fcb794e5d0c4738430556dbc5dab201ba30fc980ce10f5854b05194b5df86",
+          "width": 256,
+          "height": 256,
+          "bytes": 12453,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "6879c85b02523bce0c8bedb1e55e51938d005cbf479d1f0d71f22f58493447c2",
+          "width": 256,
+          "height": 256,
+          "bytes": 601,
+          "texelBytesWithMips": 349525.3333333333
+        }
+      ],
+      "nodeNames": [
+        "roof-membrane-seams-coupon-10m-inspection"
+      ],
+      "materialNames": [
+        "roof-membrane-seams-baked-inspection"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    }
+  ],
+  "textureBudget": {
+    "capBytes": 4194304,
+    "uniqueRuntimeMaps": 6,
+    "uniqueTexelBytesWithMips": 2097152.0,
+    "basis": "RGBA8 x full-mip 4/3 conservative estimate. No GPU residency measured.",
+    "tradeoff": "Both surfaces were actually baked at 512px (source/textures, 8MiB if ever all resident), then area-filtered in linear color/data to 256px; normal vectors renormalized. Six 512px runtime maps would be 8MiB and exceed the cap. Six 256px candidates total 2MiB; fine mineral grain is reduced, so inspect WebGL minification before any activation.",
+    "source512BakeExcludedFromRuntime": true,
+    "inspectionGlbsExcludedFromRuntime": true,
+    "alternativeForSceneEvaluation": "Alternative for scene comparison: load only one chosen 512px three-map surface (4MiB) and leave the other roof role on its existing fallback, versus both 256px surface sets (2MiB). One 512px set plus the other 256px set would be 5MiB and exceeds the cap. Higher source bake resolution is not a claim of improved WebGL appearance."
+  },
+  "environment": {
+    "blender": "4.3.2",
+    "renderer": "Cycles CPU",
+    "threads": 2
+  }
+}

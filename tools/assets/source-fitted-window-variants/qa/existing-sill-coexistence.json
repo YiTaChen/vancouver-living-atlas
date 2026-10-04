@@ -1,0 +1,277 @@
+{
+  "status": "diagnostic_complete",
+  "scope": "actual current source-selected upper sill against new frame geometry; finite point-in-solid diagnostic, not comprehensive mesh Boolean proof",
+  "results": [
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 0,
+      "existingSillId": "modern-sill-drip",
+      "existingSlotId": "modern-sills:existing-planner-sill:7",
+      "existingSillGLBSha256": "4ffbc27581ec89f38fbc1e939868ea228ab779ff822c4238a2233382771d9b15",
+      "frameGLBSha256": "38da7234e7987342cd2d23216806dc7079ea2e8add1c6e3348ae0a6d7f119e55",
+      "sillToFrameRoot": {
+        "translationM": [
+          5.10702591327572e-15,
+          -0.014999998211861154,
+          -0.08499999620025955
+        ],
+        "scale": [
+          1.3311512125702392,
+          1,
+          1
+        ]
+      },
+      "interiorSampleCount": 112,
+      "jointInteriorWitnessCount": 40,
+      "jointInteriorWitnessesM": [
+        [
+          0,
+          0.0071428571428571435,
+          0.2075
+        ],
+        [
+          0,
+          0.021428571428571432,
+          0.2075
+        ],
+        [
+          0,
+          0.021428571428571432,
+          0.22249999999999998
+        ],
+        [
+          0,
+          0.03571428571428571,
+          0.1775
+        ],
+        [
+          0,
+          0.03571428571428571,
+          0.19249999999999998
+        ],
+        [
+          0,
+          0.03571428571428571,
+          0.2075
+        ],
+        [
+          0,
+          0.03571428571428571,
+          0.22249999999999998
+        ],
+        [
+          0,
+          0.05,
+          0.08750000000000001
+        ]
+      ],
+      "assemblyAccepted": false,
+      "finding": "sampled solid intersection exists",
+      "requiredAction": "Keep runtime fallback. Do not simply add closed lower frame rail over retained sill. Consumer/next geometry revision must resolve lower-rail coexistence without changing source aperture or removing the protected sill."
+    },
+    {
+      "assetId": "modern-source-window-surround",
+      "lod": 1,
+      "existingSillId": "modern-sill-drip",
+      "existingSlotId": "modern-sills:existing-planner-sill:7",
+      "existingSillGLBSha256": "4ffbc27581ec89f38fbc1e939868ea228ab779ff822c4238a2233382771d9b15",
+      "frameGLBSha256": "c81bf83db1087e1ad029e642fa655d8310b75bb702939fa6ab52f24324fa3c95",
+      "sillToFrameRoot": {
+        "translationM": [
+          5.10702591327572e-15,
+          -0.014999998211861154,
+          -0.08499999620025955
+        ],
+        "scale": [
+          1.3311512125702392,
+          1,
+          1
+        ]
+      },
+      "interiorSampleCount": 112,
+      "jointInteriorWitnessCount": 40,
+      "jointInteriorWitnessesM": [
+        [
+          0,
+          0.0071428571428571435,
+          0.2075
+        ],
+        [
+          0,
+          0.021428571428571432,
+          0.2075
+        ],
+        [
+          0,
+          0.021428571428571432,
+          0.22249999999999998
+        ],
+        [
+          0,
+          0.03571428571428571,
+          0.1775
+        ],
+        [
+          0,
+          0.03571428571428571,
+          0.19249999999999998
+        ],
+        [
+          0,
+          0.03571428571428571,
+          0.2075
+        ],
+        [
+          0,
+          0.03571428571428571,
+          0.22249999999999998
+        ],
+        [
+          0,
+          0.05,
+          0.08750000000000001
+        ]
+      ],
+      "assemblyAccepted": false,
+      "finding": "sampled solid intersection exists",
+      "requiredAction": "Keep runtime fallback. Do not simply add closed lower frame rail over retained sill. Consumer/next geometry revision must resolve lower-rail coexistence without changing source aperture or removing the protected sill."
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 0,
+      "existingSillId": "residential-cedar-sill",
+      "existingSlotId": "cedar-sills:existing-planner-sill:7",
+      "existingSillGLBSha256": "9799bf34eb174dadc3fae00ee717749f43417f45e1022e426e01596b51eee278",
+      "frameGLBSha256": "a0a793735de865e0c4d1e89c523de863216d8d22dc14ef2510dedfc89b0e690e",
+      "sillToFrameRoot": {
+        "translationM": [
+          -6.661338147750939e-15,
+          -0.029999997615814067,
+          -0.08000000096855464
+        ],
+        "scale": [
+          1.0484673169848413,
+          1,
+          1
+        ]
+      },
+      "interiorSampleCount": 112,
+      "jointInteriorWitnessCount": 82,
+      "jointInteriorWitnessesM": [
+        [
+          0,
+          0.005,
+          0.025
+        ],
+        [
+          0,
+          0.005,
+          0.035
+        ],
+        [
+          0,
+          0.005,
+          0.045
+        ],
+        [
+          0,
+          0.005,
+          0.05500000000000001
+        ],
+        [
+          0,
+          0.005,
+          0.065
+        ],
+        [
+          0,
+          0.005,
+          0.075
+        ],
+        [
+          0,
+          0.005,
+          0.085
+        ],
+        [
+          0,
+          0.005,
+          0.095
+        ]
+      ],
+      "assemblyAccepted": false,
+      "finding": "sampled solid intersection exists",
+      "requiredAction": "Keep runtime fallback. Do not simply add closed lower frame rail over retained sill. Consumer/next geometry revision must resolve lower-rail coexistence without changing source aperture or removing the protected sill."
+    },
+    {
+      "assetId": "cedar-source-window-surround",
+      "lod": 1,
+      "existingSillId": "residential-cedar-sill",
+      "existingSlotId": "cedar-sills:existing-planner-sill:7",
+      "existingSillGLBSha256": "9799bf34eb174dadc3fae00ee717749f43417f45e1022e426e01596b51eee278",
+      "frameGLBSha256": "0c5bb9c7b68e760698bb09fbb59328c29e4444427ac7c9358e7ca08e8d123cef",
+      "sillToFrameRoot": {
+        "translationM": [
+          -6.661338147750939e-15,
+          -0.029999997615814067,
+          -0.08000000096855464
+        ],
+        "scale": [
+          1.0484673169848413,
+          1,
+          1
+        ]
+      },
+      "interiorSampleCount": 112,
+      "jointInteriorWitnessCount": 82,
+      "jointInteriorWitnessesM": [
+        [
+          0,
+          0.005,
+          0.025
+        ],
+        [
+          0,
+          0.005,
+          0.035
+        ],
+        [
+          0,
+          0.005,
+          0.045
+        ],
+        [
+          0,
+          0.005,
+          0.05500000000000001
+        ],
+        [
+          0,
+          0.005,
+          0.065
+        ],
+        [
+          0,
+          0.005,
+          0.075
+        ],
+        [
+          0,
+          0.005,
+          0.085
+        ],
+        [
+          0,
+          0.005,
+          0.095
+        ]
+      ],
+      "assemblyAccepted": false,
+      "finding": "sampled solid intersection exists",
+      "requiredAction": "Keep runtime fallback. Do not simply add closed lower frame rail over retained sill. Consumer/next geometry revision must resolve lower-rail coexistence without changing source aperture or removing the protected sill."
+    }
+  ],
+  "assetOnlyFitStillValid": true,
+  "runtimeAssemblyStatus": "blocked-on-sill-frame-coexistence",
+  "oldFilesModified": false
+}

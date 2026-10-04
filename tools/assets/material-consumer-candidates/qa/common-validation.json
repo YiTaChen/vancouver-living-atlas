@@ -1,0 +1,192 @@
+{
+  "status": "pass",
+  "scope": "common packaging, source hashes, rest-pose transformed GLB geometry and costs only; package-specific Blender, semantic and runtime checks required",
+  "results": [
+    {
+      "assetId": "lecture-chair-module",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.3100000023841858,
+          0.0,
+          -0.3075000047683716
+        ],
+        "max": [
+          0.3100000023841858,
+          1.0075000524520874,
+          0.30000001192092896
+        ],
+        "size": [
+          0.6200000047683716,
+          1.0075000524520874,
+          0.6075000166893005
+        ]
+      },
+      "triangles": 440,
+      "vertices": 960,
+      "primitives": 2,
+      "bytes": 54868,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 54868,
+      "images": [],
+      "nodeNames": [
+        "seat",
+        "leg--0.265--0.25",
+        "leg--0.265-0.25",
+        "leg-0.265--0.25",
+        "leg-0.265-0.25",
+        "back-upright--0.27",
+        "back-upright-0.27",
+        "back-slat-00",
+        "back-slat-01",
+        "back-slat-02",
+        "furniture-module-root",
+        "furniture-batch-EXPORT_interior-oak-veneer-0",
+        "furniture-batch-EXPORT_landmark-brushed-aluminum-1"
+      ],
+      "materialNames": [
+        "EXPORT_interior-oak-veneer",
+        "EXPORT_landmark-brushed-aluminum"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "lecture-chair-module",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.3100000023841858,
+          0.0,
+          -0.3075000047683716
+        ],
+        "max": [
+          0.3100000023841858,
+          1.0,
+          0.30000001192092896
+        ],
+        "size": [
+          0.6200000047683716,
+          1.0,
+          0.6075000166893005
+        ]
+      },
+      "triangles": 96,
+      "vertices": 192,
+      "primitives": 2,
+      "bytes": 18520,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 18520,
+      "images": [],
+      "nodeNames": [
+        "seat",
+        "leg--0.265--0.25",
+        "leg--0.265-0.25",
+        "leg-0.265--0.25",
+        "leg-0.265-0.25",
+        "back-upright--0.27",
+        "back-upright-0.27",
+        "back-simplified",
+        "furniture-module-root",
+        "furniture-batch-EXPORT_interior-oak-veneer-0",
+        "furniture-batch-EXPORT_landmark-brushed-aluminum-1"
+      ],
+      "materialNames": [
+        "EXPORT_interior-oak-veneer",
+        "EXPORT_landmark-brushed-aluminum"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "admissions-counter-module",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.75,
+          0.0,
+          -0.75
+        ],
+        "max": [
+          0.75,
+          1.0999999046325684,
+          0.75
+        ],
+        "size": [
+          1.5,
+          1.0999999046325684,
+          1.5
+        ]
+      },
+      "triangles": 308,
+      "vertices": 672,
+      "primitives": 2,
+      "bytes": 39300,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 39300,
+      "images": [],
+      "nodeNames": [
+        "counter-top",
+        "counter-front",
+        "counter-side--0.68",
+        "counter-side-0.68",
+        "recessed-plinth",
+        "working-shelf",
+        "front-inset-rail",
+        "furniture-module-root",
+        "furniture-batch-EXPORT_interior-oak-veneer-0",
+        "furniture-batch-EXPORT_interior-matte-plaster-1"
+      ],
+      "materialNames": [
+        "EXPORT_interior-oak-veneer",
+        "EXPORT_interior-matte-plaster"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "admissions-counter-module",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.75,
+          0.0,
+          -0.75
+        ],
+        "max": [
+          0.75,
+          1.0999999046325684,
+          0.75
+        ],
+        "size": [
+          1.5,
+          1.0999999046325684,
+          1.5
+        ]
+      },
+      "triangles": 60,
+      "vertices": 120,
+      "primitives": 2,
+      "bytes": 12764,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 12764,
+      "images": [],
+      "nodeNames": [
+        "counter-top",
+        "counter-front",
+        "counter-side--0.68",
+        "counter-side-0.68",
+        "recessed-plinth",
+        "furniture-module-root",
+        "furniture-batch-EXPORT_interior-oak-veneer-0",
+        "furniture-batch-EXPORT_interior-matte-plaster-1"
+      ],
+      "materialNames": [
+        "EXPORT_interior-oak-veneer",
+        "EXPORT_interior-matte-plaster"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    }
+  ]
+}

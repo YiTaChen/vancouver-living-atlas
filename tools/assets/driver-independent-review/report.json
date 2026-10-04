@@ -1,0 +1,1161 @@
+{
+  "schemaVersion": 1,
+  "status": "pass",
+  "command": "node tools/assets/driver-independent-review/audit.mjs",
+  "checkedAt": "2026-10-04T01:26:55.370Z",
+  "environment": {
+    "node": "v24.19.0",
+    "three": "185",
+    "webgl": false
+  },
+  "scope": "Offline final character and optional Roadster cockpit static fit; read-only source/evidence review",
+  "checks": [
+    {
+      "name": "original runtime source bytes",
+      "status": "pass",
+      "details": {
+        "baseline": "aef5e31d4eb8d5d3f832d0931373bf6583227033",
+        "files": [
+          "lib/city/assets/roadster.ts",
+          "lib/city/navigation.ts",
+          "lib/city/driver-camera.ts",
+          "lib/city/assets/cockpits.ts",
+          "lib/city/citizen.ts",
+          "public/models/citizen/vancouver-citizen.glb"
+        ],
+        "unchangedTrackedTrees": [
+          "public",
+          "lib/city",
+          "tools/assets/citizen/optimization"
+        ]
+      }
+    },
+    {
+      "name": "current source-preserving export chain",
+      "status": "pass",
+      "details": {
+        "sourceCount": 12,
+        "baselineCount": 9,
+        "naturalCount": 3,
+        "currentCanonicalOutputs": true,
+        "cleanup": [
+          {
+            "file": "citizen.lod0.glb",
+            "declaredRemovedTriangles": 64,
+            "currentTriangles": 37735,
+            "zeroAreaTriangles": 0
+          },
+          {
+            "file": "citizen.lod1.glb",
+            "declaredRemovedTriangles": 64,
+            "currentTriangles": 31767,
+            "zeroAreaTriangles": 0
+          },
+          {
+            "file": "citizen.lod2.glb",
+            "declaredRemovedTriangles": 64,
+            "currentTriangles": 29931,
+            "zeroAreaTriangles": 0
+          },
+          {
+            "file": "driver-roadster-fit.lod0.glb",
+            "declaredRemovedTriangles": 64,
+            "currentTriangles": 36417,
+            "zeroAreaTriangles": 0
+          },
+          {
+            "file": "driver-roadster-fit.lod1.glb",
+            "declaredRemovedTriangles": 64,
+            "currentTriangles": 30449,
+            "zeroAreaTriangles": 0
+          },
+          {
+            "file": "driver-roadster-fit.lod2.glb",
+            "declaredRemovedTriangles": 64,
+            "currentTriangles": 28613,
+            "zeroAreaTriangles": 0
+          },
+          {
+            "file": "driver.lod0.glb",
+            "declaredRemovedTriangles": 64,
+            "currentTriangles": 37735,
+            "zeroAreaTriangles": 0
+          },
+          {
+            "file": "driver.lod1.glb",
+            "declaredRemovedTriangles": 64,
+            "currentTriangles": 31767,
+            "zeroAreaTriangles": 0
+          },
+          {
+            "file": "driver.lod2.glb",
+            "declaredRemovedTriangles": 64,
+            "currentTriangles": 29931,
+            "zeroAreaTriangles": 0
+          },
+          {
+            "file": "police.lod0.glb",
+            "declaredRemovedTriangles": 64,
+            "currentTriangles": 38483,
+            "zeroAreaTriangles": 0
+          },
+          {
+            "file": "police.lod1.glb",
+            "declaredRemovedTriangles": 64,
+            "currentTriangles": 32515,
+            "zeroAreaTriangles": 0
+          },
+          {
+            "file": "police.lod2.glb",
+            "declaredRemovedTriangles": 64,
+            "currentTriangles": 30679,
+            "zeroAreaTriangles": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "citizen-character-variants manifest source/output hashes",
+      "status": "pass",
+      "details": {
+        "assets": 4
+      }
+    },
+    {
+      "name": "roadster-driver-fit manifest source/output hashes",
+      "status": "pass",
+      "details": {
+        "assets": 1
+      }
+    },
+    {
+      "name": "actual morph then skin then world and gait reset",
+      "status": "pass",
+      "details": [
+        {
+          "lod": 0,
+          "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod0.glb",
+          "sha256": "a6e21e8d1d97f8be38e49a716ee8a6ac9cca54fd31b84b13617c705b665c97fc",
+          "triangleCornersCompared": 109251,
+          "maxVertexDifferenceM": 0,
+          "transitions": [
+            {
+              "to": "idle",
+              "mode": "stop seated then play",
+              "grip": 0
+            },
+            {
+              "to": "idle",
+              "mode": "0.2 second crossfade",
+              "midpointGrip": 0.5000000596046448,
+              "endGrip": 0
+            },
+            {
+              "to": "walk",
+              "mode": "stop seated then play",
+              "grip": 0
+            },
+            {
+              "to": "walk",
+              "mode": "0.2 second crossfade",
+              "midpointGrip": 0.4999998211860657,
+              "endGrip": 0
+            },
+            {
+              "to": "run",
+              "mode": "stop seated then play",
+              "grip": 0
+            },
+            {
+              "to": "run",
+              "mode": "0.2 second crossfade",
+              "midpointGrip": 0.5000000596046448,
+              "endGrip": 0
+            }
+          ]
+        },
+        {
+          "lod": 1,
+          "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod1.glb",
+          "sha256": "1cb79599d359175c39ce0d466173f5293d7bbcb16a8f08450bd851c09ce0a0c0",
+          "triangleCornersCompared": 91347,
+          "maxVertexDifferenceM": 0,
+          "transitions": [
+            {
+              "to": "idle",
+              "mode": "stop seated then play",
+              "grip": 0
+            },
+            {
+              "to": "idle",
+              "mode": "0.2 second crossfade",
+              "midpointGrip": 0.5000000596046448,
+              "endGrip": 0
+            },
+            {
+              "to": "walk",
+              "mode": "stop seated then play",
+              "grip": 0
+            },
+            {
+              "to": "walk",
+              "mode": "0.2 second crossfade",
+              "midpointGrip": 0.4999998211860657,
+              "endGrip": 0
+            },
+            {
+              "to": "run",
+              "mode": "stop seated then play",
+              "grip": 0
+            },
+            {
+              "to": "run",
+              "mode": "0.2 second crossfade",
+              "midpointGrip": 0.5000000596046448,
+              "endGrip": 0
+            }
+          ]
+        },
+        {
+          "lod": 2,
+          "file": "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod2.glb",
+          "sha256": "1198d8433e27e9b60c17d054548162315584e49e644d16426828005e846833ac",
+          "triangleCornersCompared": 85839,
+          "maxVertexDifferenceM": 0,
+          "transitions": [
+            {
+              "to": "idle",
+              "mode": "stop seated then play",
+              "grip": 0
+            },
+            {
+              "to": "idle",
+              "mode": "0.2 second crossfade",
+              "midpointGrip": 0.5000000596046448,
+              "endGrip": 0
+            },
+            {
+              "to": "walk",
+              "mode": "stop seated then play",
+              "grip": 0
+            },
+            {
+              "to": "walk",
+              "mode": "0.2 second crossfade",
+              "midpointGrip": 0.4999998211860657,
+              "endGrip": 0
+            },
+            {
+              "to": "run",
+              "mode": "stop seated then play",
+              "grip": 0
+            },
+            {
+              "to": "run",
+              "mode": "0.2 second crossfade",
+              "midpointGrip": 0.5000000596046448,
+              "endGrip": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "current CPU/contact/preservation reports independently reproduced",
+      "status": "pass",
+      "details": [
+        {
+          "file": "tools/assets/citizen-character-variants/qa/cpu-tests.json",
+          "sha256": "76e1d5bb8f9704aee99cf320584e5b49fe2294769b5b86399416888c5769b553",
+          "status": "pass"
+        },
+        {
+          "file": "tools/assets/roadster-driver-fit/qa/contact-kernel-tests.json",
+          "sha256": "6b0a775e32a1fb771bd58677f98a961694d8e700eee40f72edf5b75ea1aa146a",
+          "status": "pass"
+        },
+        {
+          "file": "tools/assets/roadster-driver-fit/qa/material-composition.json",
+          "sha256": "3f44a91208bf1e676b0c1d496abcf3d3132a091f40d616aad57022076856080f",
+          "status": "pass"
+        },
+        {
+          "file": "tools/assets/roadster-driver-fit/qa/adapter-preservation.json",
+          "sha256": "cea91be95ceb66b7f8f8c90f985e3b797da75487eccde6c1d40db6f6920b6acb",
+          "status": "pass"
+        },
+        {
+          "file": "tools/assets/roadster-driver-fit/qa/human-proportions.json",
+          "sha256": "bf696bd62c411ae1f5dce76783f3107c5cc13ddb3b79cf99017ff969fa797f2e",
+          "status": "pass"
+        },
+        {
+          "file": "tools/assets/roadster-driver-fit/qa/cabin-envelope.json",
+          "sha256": "31b4c342cb21a4747eb1678cc9e32e228d898fbeefb25fdc66a5bd743139b7fb",
+          "status": "pass"
+        },
+        {
+          "file": "tools/assets/roadster-driver-fit/qa/driver-fit-lod0.json",
+          "sha256": "0b77dcafdee4e225e6d008cd40882b255325c0101376c0f7e687a363cd9d5074",
+          "status": "measured"
+        },
+        {
+          "file": "tools/assets/roadster-driver-fit/qa/driver-fit-lod1.json",
+          "sha256": "7776ac9ac86c9a345c0860857515bdea4bc35d4f7f7a3029e000394c3a535011",
+          "status": "measured"
+        },
+        {
+          "file": "tools/assets/roadster-driver-fit/qa/driver-fit-lod2.json",
+          "sha256": "87fb48b531027557f8f68faf1c72c79f538f62869f6fa5d9ce1200ae82573a39",
+          "status": "measured"
+        },
+        {
+          "file": "tools/assets/roadster-driver-fit/qa/driver-fit-summary.json",
+          "sha256": "64921dd0ed655bb06b19a20c16eb734332fd1c8b71cc21a79b88305c55c8f460",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "name": "all LODs include active hands in overall acceptance",
+      "status": "pass",
+      "details": [
+        {
+          "lod": 0,
+          "humanSha256": "a6e21e8d1d97f8be38e49a716ee8a6ac9cca54fd31b84b13617c705b665c97fc",
+          "cockpitSha256": "706d649ab14e3cc38c6693cbc9a8a7c69c5731d7ad9c3ad758234f33408c74c6",
+          "maximumSampledHandPenetrationM": 0.002745540983018883,
+          "leftRimSeparationM": 0,
+          "rightRimSeparationM": 0,
+          "nonHandGeometry": "pass",
+          "overall": "pass",
+          "camera": {
+            "measuredEyeBandMeanRoadsterM": [
+              0.4397796792198029,
+              1.4720983817429911,
+              -0.058997586349904124
+            ],
+            "sampledFaceVertices": 1093,
+            "originalNavigationEyeM": [
+              0.45,
+              1.2,
+              0
+            ],
+            "unchangedRuntime": true,
+            "migration": "Explicit future integration required"
+          }
+        },
+        {
+          "lod": 1,
+          "humanSha256": "1cb79599d359175c39ce0d466173f5293d7bbcb16a8f08450bd851c09ce0a0c0",
+          "cockpitSha256": "a6b86d69660a113c2b5c24daa6cdcdfa8dfd8b50f6bfe4f3db50d0d62c989556",
+          "maximumSampledHandPenetrationM": 0.0022839122428431383,
+          "leftRimSeparationM": 0,
+          "rightRimSeparationM": 0,
+          "nonHandGeometry": "pass",
+          "overall": "pass",
+          "camera": {
+            "measuredEyeBandMeanRoadsterM": [
+              0.4397796792198029,
+              1.4720983817429911,
+              -0.058997586349904124
+            ],
+            "sampledFaceVertices": 1093,
+            "originalNavigationEyeM": [
+              0.45,
+              1.2,
+              0
+            ],
+            "unchangedRuntime": true,
+            "migration": "Explicit future integration required"
+          }
+        },
+        {
+          "lod": 2,
+          "humanSha256": "1198d8433e27e9b60c17d054548162315584e49e644d16426828005e846833ac",
+          "cockpitSha256": "b6ed43359b1832adcbc644746993b0bfe59ed8db2371772806d3c2e232bfee14",
+          "maximumSampledHandPenetrationM": 0.0022951859665829963,
+          "leftRimSeparationM": 0,
+          "rightRimSeparationM": 0,
+          "nonHandGeometry": "pass",
+          "overall": "pass",
+          "camera": {
+            "measuredEyeBandMeanRoadsterM": [
+              0.4397796792198029,
+              1.4720983817429911,
+              -0.058997586349904124
+            ],
+            "sampledFaceVertices": 1093,
+            "originalNavigationEyeM": [
+              0.45,
+              1.2,
+              0
+            ],
+            "unchangedRuntime": true,
+            "migration": "Explicit future integration required"
+          }
+        }
+      ]
+    },
+    {
+      "name": "render evidence input hashes",
+      "status": "pass",
+      "details": [
+        {
+          "package": "tools/assets/citizen-character-variants",
+          "frames": 38,
+          "allInputHashesCurrent": true
+        },
+        {
+          "package": "tools/assets/roadster-driver-fit",
+          "frames": 9,
+          "allInputHashesCurrent": true
+        }
+      ]
+    },
+    {
+      "name": "Blender evidence hash bindings",
+      "status": "pass",
+      "details": {
+        "characterGlbs": 12,
+        "cockpitSources": 3,
+        "reranBlender": false
+      }
+    }
+  ],
+  "inputs": {
+    "lib/city/assets/cockpits.ts": {
+      "sha256": "b8aed3f6379dfdc9a5a1115382e36af3b17e7183a29dd1e7458a10ac4d2465fc",
+      "bytes": 21892
+    },
+    "lib/city/assets/roadster.ts": {
+      "sha256": "e3e25bba28d32df58cbd1b26c66fb5b7657eb04bd4ab9688156d770eb58436f0",
+      "bytes": 13761
+    },
+    "lib/city/citizen.ts": {
+      "sha256": "e16100c4a6ad929065425588351d832fbfdc51e8b104aae75a5af7e362a10d65",
+      "bytes": 10748
+    },
+    "lib/city/driver-camera.ts": {
+      "sha256": "911765020382258030d2dc8f386cfc7dc1f720aab5d88bbf4c04ef93beb903d0",
+      "bytes": 1318
+    },
+    "lib/city/navigation.ts": {
+      "sha256": "b55276e47e939028f50a3629149dfd6bba97527211deb46dce369c9d9fa4247e",
+      "bytes": 41338
+    },
+    "package-lock.json": {
+      "sha256": "e5b0db1f23c9f3ec208a4f5d19db1d7c3889129d8491d15deae4cadafacbe6e7",
+      "bytes": 357654
+    },
+    "package.json": {
+      "sha256": "690832ba7fd87b19f7c747a121f4914cb94917c36166622e8d84f0165a9d9bc7",
+      "bytes": 1933
+    },
+    "public/models/citizen/vancouver-citizen.glb": {
+      "sha256": "14d66fabe097abf82ef36800561c06ee7263c0acfd6b5ea1265a40ed35841ff8",
+      "bytes": 3498312
+    },
+    "tools/assets/citizen-character-variants/audit_blender.py": {
+      "sha256": "464beb74b645fb59cd2e4fa3c7a704edd211bb08b50b66d89db652ba129dbded",
+      "bytes": 5089
+    },
+    "tools/assets/citizen-character-variants/build.py": {
+      "sha256": "7459fc7233bce3bec08fa04519778d532e92ca8259d56a5cdcd8e4040d54d7ad",
+      "bytes": 17020
+    },
+    "tools/assets/citizen-character-variants/check_driver_fit.mjs": {
+      "sha256": "6990a3a12e81d1ed1e482951829a57858ce2d5b1f338ca2acd79a644902bc34b",
+      "bytes": 7484
+    },
+    "tools/assets/citizen-character-variants/export.py": {
+      "sha256": "ba39179882c2250fc78709e9e326e42217d704b5256984f044fc0c59c092fa32",
+      "bytes": 1334
+    },
+    "tools/assets/citizen-character-variants/exports/citizen.lod0.glb": {
+      "sha256": "14733b2a44621b91ff620821faa9a361fd6369458c1a50cb737df9b18453d38f",
+      "bytes": 2280072
+    },
+    "tools/assets/citizen-character-variants/exports/citizen.lod1.glb": {
+      "sha256": "5cad4fcfc1782d6b5dfa7663f19dca84142b4d4b75c3cffc08e107fc6ef8ef6d",
+      "bytes": 2032440
+    },
+    "tools/assets/citizen-character-variants/exports/citizen.lod2.glb": {
+      "sha256": "2741325b8dd5b26756d0fa67ed809361013326c9ed21c6dca30bf4d70f425a33",
+      "bytes": 1941592
+    },
+    "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod0.glb": {
+      "sha256": "a6e21e8d1d97f8be38e49a716ee8a6ac9cca54fd31b84b13617c705b665c97fc",
+      "bytes": 2264664
+    },
+    "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod1.glb": {
+      "sha256": "1cb79599d359175c39ce0d466173f5293d7bbcb16a8f08450bd851c09ce0a0c0",
+      "bytes": 2017036
+    },
+    "tools/assets/citizen-character-variants/exports/driver-roadster-fit.lod2.glb": {
+      "sha256": "1198d8433e27e9b60c17d054548162315584e49e644d16426828005e846833ac",
+      "bytes": 1926188
+    },
+    "tools/assets/citizen-character-variants/exports/driver.lod0.glb": {
+      "sha256": "221f61dd1513ae63974234e6ec3458891cb8a0d6f1f703b2844e8e4b115759c9",
+      "bytes": 2296116
+    },
+    "tools/assets/citizen-character-variants/exports/driver.lod1.glb": {
+      "sha256": "1e2c1079c6cecc0406da5438b3e7d67c8c2700807fbd56270c29f7c2451e7e11",
+      "bytes": 2048488
+    },
+    "tools/assets/citizen-character-variants/exports/driver.lod2.glb": {
+      "sha256": "2ac3f0b8e0834f0261662b3be987ed8739064a4d63e29ce8abb6d06184af7884",
+      "bytes": 1957640
+    },
+    "tools/assets/citizen-character-variants/exports/police.lod0.glb": {
+      "sha256": "0d312d3fda05662c3612f0aa29bcf26f2870f23dde8cbcbc6c260d2c9fdcedb0",
+      "bytes": 2334200
+    },
+    "tools/assets/citizen-character-variants/exports/police.lod1.glb": {
+      "sha256": "325a1912d33c8f923954ed308883ff27577d6e200d3d40e31864e4ea1350411c",
+      "bytes": 2086564
+    },
+    "tools/assets/citizen-character-variants/exports/police.lod2.glb": {
+      "sha256": "bb6ca6b0b780b4c1abd774ad3a790da10d86008988ac82a9f738e6cc6e8b001d",
+      "bytes": 1995712
+    },
+    "tools/assets/citizen-character-variants/exports/textures/citizen-53e23506fc52ad56.png": {
+      "sha256": "53e23506fc52ad56d58c54a26ddf13b7c29fea2ed9fec6b2820ccfd1aa9b836f",
+      "bytes": 696823
+    },
+    "tools/assets/citizen-character-variants/exports/textures/citizen-97cbd4395750f8b9.png": {
+      "sha256": "97cbd4395750f8b9121182d3367b002351b3b066f31c55915c8c0e7fe176739e",
+      "bytes": 309221
+    },
+    "tools/assets/citizen-character-variants/exports/textures/citizen-d750e70a2bafbdb5.png": {
+      "sha256": "d750e70a2bafbdb58b0c7eddb68823389a19323aa6222be24c098e3afe9922ab",
+      "bytes": 679771
+    },
+    "tools/assets/citizen-character-variants/finalize.py": {
+      "sha256": "68b4eb32c1b765d9cd6cdc3c7c86e9a4391fd2beb740aa60cba87baa272d7351",
+      "bytes": 19546
+    },
+    "tools/assets/citizen-character-variants/glb_io.py": {
+      "sha256": "68e89130782013a809a61fb4917aa171e122ab4223b28a269729437ab4fb6909",
+      "bytes": 5245
+    },
+    "tools/assets/citizen-character-variants/inspect_source.py": {
+      "sha256": "1bd730fb8e4d78d099e3948aa4d6abdd84a485f19fc157ca3af0aea69509ecf5",
+      "bytes": 1580
+    },
+    "tools/assets/citizen-character-variants/manifest.json": {
+      "sha256": "8a30fb843dce7ece3ea4fadcd849ee39cf73cb3378d7915e867f67a24829b91b",
+      "bytes": 50999
+    },
+    "tools/assets/citizen-character-variants/probe_driver_fit.py": {
+      "sha256": "6927ba41667112e133301ab922b6100c9d04e6491d95348c758d36d80284839c",
+      "bytes": 1740
+    },
+    "tools/assets/citizen-character-variants/probe_grip.mjs": {
+      "sha256": "3d2ab4eb86da72d903836c9b880cc324d67f0a8f7f2d04eed49ff94edc686aeb",
+      "bytes": 1944
+    },
+    "tools/assets/citizen-character-variants/prove_editability.py": {
+      "sha256": "fb64ab9d87900a0d2ed839f745835c99a4e29cc69424704d1a12d1e883eb8d12",
+      "bytes": 3460
+    },
+    "tools/assets/citizen-character-variants/qa/artist-edit-proof.json": {
+      "sha256": "9ad0ce2ea0e91b27ca1728d43cf959ca5000bf1752212f1f92ea67d35f0e4f8c",
+      "bytes": 1105
+    },
+    "tools/assets/citizen-character-variants/qa/blender-reimport.json": {
+      "sha256": "57159551887805e48310e6dc4d83b5378cf6c7736528eca4c4f8d441ce14b9e4",
+      "bytes": 18330
+    },
+    "tools/assets/citizen-character-variants/qa/build.json": {
+      "sha256": "71915cde6725a4bf96d9d1860acddd1efba90cd00d67901d400578b749b4a55c",
+      "bytes": 21043
+    },
+    "tools/assets/citizen-character-variants/qa/common-validation.json": {
+      "sha256": "b2297ea2b1bad8a4b2c4841669abeb99738700b62d012dc83aec2512cd4ee48d",
+      "bytes": 24542
+    },
+    "tools/assets/citizen-character-variants/qa/cpu-tests.json": {
+      "sha256": "76e1d5bb8f9704aee99cf320584e5b49fe2294769b5b86399416888c5769b553",
+      "bytes": 50910
+    },
+    "tools/assets/citizen-character-variants/qa/driver-fit-iterations.json": {
+      "sha256": "f5f6d5869b0e043fd128b0cd3a6e0a0ec914594828e5c70713b043e0032313a1",
+      "bytes": 15853
+    },
+    "tools/assets/citizen-character-variants/qa/driver-fit-lod1.json": {
+      "sha256": "2f62a17b789a24bf49a9f7b63f10ab5ebbe0335ef06413ebd782e314d1773e80",
+      "bytes": 6153
+    },
+    "tools/assets/citizen-character-variants/qa/driver-fit-lod2.json": {
+      "sha256": "dae8a85412adf7387a7a36de39089ff830da2b76637e2a5af4c7f29847acbfc8",
+      "bytes": 6151
+    },
+    "tools/assets/citizen-character-variants/qa/driver-fit.json": {
+      "sha256": "61c3e0875ecfdd17fef3b0f85ae73208549daea305ad8d17080d55db9c17263c",
+      "bytes": 6153
+    },
+    "tools/assets/citizen-character-variants/qa/driver-natural-reference.json": {
+      "sha256": "66ffee24ce21ed108eb2cc03772a0427a8052034e494a9a17b6a9801ff2f19cf",
+      "bytes": 6239
+    },
+    "tools/assets/citizen-character-variants/qa/driver-roadster-fit-removed-components.lod0.json": {
+      "sha256": "6d72faaa3ea9edda8669d82d109235aceea5300854d2c2bb86621b32bc74b742",
+      "bytes": 872018
+    },
+    "tools/assets/citizen-character-variants/qa/driver-roadster-fit-removed-components.lod1.json": {
+      "sha256": "6d72faaa3ea9edda8669d82d109235aceea5300854d2c2bb86621b32bc74b742",
+      "bytes": 872018
+    },
+    "tools/assets/citizen-character-variants/qa/driver-roadster-fit-removed-components.lod2.json": {
+      "sha256": "6d72faaa3ea9edda8669d82d109235aceea5300854d2c2bb86621b32bc74b742",
+      "bytes": 872018
+    },
+    "tools/assets/citizen-character-variants/qa/grip-probe.json": {
+      "sha256": "474e7c52437f3894c685bd6e64acde466a58ef984b02dc2ff33b05668355fc2c",
+      "bytes": 14284
+    },
+    "tools/assets/citizen-character-variants/qa/handoff.json": {
+      "sha256": "cef076329b21c00efaa2da49e94d1823295332c372b2c76cd6e3cf0072d1df02",
+      "bytes": 7372
+    },
+    "tools/assets/citizen-character-variants/qa/lod-surface-audit.json": {
+      "sha256": "e61a4e67869d71a40caa900d0e5724d24e13ccc0d34a88800eb9c17df58e9802",
+      "bytes": 7119
+    },
+    "tools/assets/citizen-character-variants/qa/measurements.json": {
+      "sha256": "dfecf7ffbfd838ea5d2e2a91a76b0e0a374d8a26c1e5e6024499bd6e18a8b8fa",
+      "bytes": 17376
+    },
+    "tools/assets/citizen-character-variants/qa/previews/citizen-back.png": {
+      "sha256": "0bdbf8ffe26490b7b7919da976a61d74c679a204eef95accb4861b8d296dfa8d",
+      "bytes": 567475
+    },
+    "tools/assets/citizen-character-variants/qa/previews/citizen-front.png": {
+      "sha256": "3a1127d0d13bb2f1b10eea89d3d13153b813ca69b7b9848d7722b2168ed78996",
+      "bytes": 548069
+    },
+    "tools/assets/citizen-character-variants/qa/previews/citizen-lod0-critical-waist.png": {
+      "sha256": "2a9745fef0294ec6ea7a816aecd57e1d2daa7c52e0321559caf630e28f9732c1",
+      "bytes": 394419
+    },
+    "tools/assets/citizen-character-variants/qa/previews/citizen-lod1-critical-waist.png": {
+      "sha256": "c61c32f83345135de428041c62334071fbaa442d3cc69242c103a28fab33fc97",
+      "bytes": 394039
+    },
+    "tools/assets/citizen-character-variants/qa/previews/citizen-lod2-critical-waist.png": {
+      "sha256": "957a08a56837f74a77c9efdf2399097cc6b755afff25be144ec2b6ca785bb202",
+      "bytes": 394050
+    },
+    "tools/assets/citizen-character-variants/qa/previews/citizen-lods-dusk.png": {
+      "sha256": "df25e79c5691688211cd0dc57a093defd6df4319c2e15dfc1cb91bd221fd4dbf",
+      "bytes": 845598
+    },
+    "tools/assets/citizen-character-variants/qa/previews/citizen-lods-night.png": {
+      "sha256": "62e730956abd696749810c2053d2179c40e8af92f0f3802a85a554c0d1589f71",
+      "bytes": 750886
+    },
+    "tools/assets/citizen-character-variants/qa/previews/citizen-lods-overcast.png": {
+      "sha256": "0a0c4c65ad4be096c9a8e50ea5875879dde79f6abf9bb6777718bc9a68743fd7",
+      "bytes": 837542
+    },
+    "tools/assets/citizen-character-variants/qa/previews/citizen-lods-sunny.png": {
+      "sha256": "1fa1ff1e9b147a6a236575c4704a59f0e8d3717f7c9eef82b9a9786104df141c",
+      "bytes": 838507
+    },
+    "tools/assets/citizen-character-variants/qa/previews/citizen-side.png": {
+      "sha256": "8a90c589ad77717031314a1bfbd00cb412b4b58ebd2926e3a35dde41e76788ae",
+      "bytes": 545390
+    },
+    "tools/assets/citizen-character-variants/qa/previews/driver-back.png": {
+      "sha256": "f46860df1732eeeb0eab8e89f499c7174ff4e402ac21dfcf63b505f9773319eb",
+      "bytes": 560929
+    },
+    "tools/assets/citizen-character-variants/qa/previews/driver-front.png": {
+      "sha256": "6a74acac2788fc78aa178ba7763a540b77b3fefa9e962cce7c262d11d54f1a89",
+      "bytes": 544798
+    },
+    "tools/assets/citizen-character-variants/qa/previews/driver-lods-dusk.png": {
+      "sha256": "71dc4cead58abd9052332f81b1d5668d7622c463db3264d1dfe0508b580eb21c",
+      "bytes": 821716
+    },
+    "tools/assets/citizen-character-variants/qa/previews/driver-lods-night.png": {
+      "sha256": "3445dfa8ea81f32437cc4eb2758c714eec494d0d1b2a2bd1c17ca3f5a55938f1",
+      "bytes": 717247
+    },
+    "tools/assets/citizen-character-variants/qa/previews/driver-lods-overcast.png": {
+      "sha256": "20188ed0156da1583a58b5cab29be1e344c39b06862cfd789eff7a966a4671e0",
+      "bytes": 826691
+    },
+    "tools/assets/citizen-character-variants/qa/previews/driver-lods-sunny.png": {
+      "sha256": "32636e4d4153cc38a2ad471d3c0ac0824ac1a41a82c4a93e7423705d523bf1ec",
+      "bytes": 814094
+    },
+    "tools/assets/citizen-character-variants/qa/previews/driver-roadster-cutaway.png": {
+      "sha256": "68041e12307eaf778d2ab88ad758769242fe4fb2c9cb673feafa039f863fff66",
+      "bytes": 795101
+    },
+    "tools/assets/citizen-character-variants/qa/previews/driver-roadster-fit-back.png": {
+      "sha256": "3407da0e6d9479b7fa1f7292879e6c78e81c56422a458f2a143128fdedd3b4bc",
+      "bytes": 558521
+    },
+    "tools/assets/citizen-character-variants/qa/previews/driver-roadster-fit-front.png": {
+      "sha256": "99dec74b682603f21c1a5f846fa215f71d32e55c0e8b0145f2a1911f7fc92437",
+      "bytes": 544767
+    },
+    "tools/assets/citizen-character-variants/qa/previews/driver-roadster-fit-lods-dusk.png": {
+      "sha256": "3d1d46edc1f41781f67808d38c558f04bdceb2fe28241ca91892cc12d230cd36",
+      "bytes": 822375
+    },
+    "tools/assets/citizen-character-variants/qa/previews/driver-roadster-fit-lods-night.png": {
+      "sha256": "c942191ddfd6cd2622449168bf71eee4cb0e5ed0207b1332e0d34bb0526a9525",
+      "bytes": 716551
+    },
+    "tools/assets/citizen-character-variants/qa/previews/driver-roadster-fit-lods-overcast.png": {
+      "sha256": "070067487dba2c35e17445e5da29795b300322be5436d0c3d0a7ead65b935614",
+      "bytes": 823416
+    },
+    "tools/assets/citizen-character-variants/qa/previews/driver-roadster-fit-lods-sunny.png": {
+      "sha256": "bd9d6bfabf7ea1a2193ab65daca7940be4b592585041963708376fa992a2eeeb",
+      "bytes": 810497
+    },
+    "tools/assets/citizen-character-variants/qa/previews/driver-roadster-fit-side.png": {
+      "sha256": "bb886f355dd051fd010fffb6cddf41ddf3bb60bfc799b88b0ead13bd6045e990",
+      "bytes": 543934
+    },
+    "tools/assets/citizen-character-variants/qa/previews/driver-roadster-front.png": {
+      "sha256": "41cd031bbd670f332a1e4c3a3a8c57688f20dcb92b1fce04feb69ba6bc0c7488",
+      "bytes": 809820
+    },
+    "tools/assets/citizen-character-variants/qa/previews/driver-roadster-hands.png": {
+      "sha256": "3a9dc9c39d2e87510ceac8122b51b8ee8c4e3beee6c03c9898909d80526286f2",
+      "bytes": 848112
+    },
+    "tools/assets/citizen-character-variants/qa/previews/driver-roadster-side.png": {
+      "sha256": "1dbab696eb510caef4bb08a21382ea4c78648ec18e837a27d7b6ded3f1f8f855",
+      "bytes": 788485
+    },
+    "tools/assets/citizen-character-variants/qa/previews/driver-side.png": {
+      "sha256": "0e352a5f1e686bb5938dfd5579e32f0f02c01af1f74c3647a1aa6e0cbb3207ab",
+      "bytes": 544066
+    },
+    "tools/assets/citizen-character-variants/qa/previews/police-back.png": {
+      "sha256": "9ccad390c415f7fda2106d68c3e65a70fc2084802b62d588b5fa40f39b9f0d24",
+      "bytes": 567563
+    },
+    "tools/assets/citizen-character-variants/qa/previews/police-front.png": {
+      "sha256": "8cd1ba33d857e07fa4977e28bd6d0e4e34d177c63a0e7b314acc1cd98c52b500",
+      "bytes": 550145
+    },
+    "tools/assets/citizen-character-variants/qa/previews/police-lods-dusk.png": {
+      "sha256": "f19517ad1cfc857e1fcb6211675b70c74002a9dcd7ed29b05d16bbd9ed7f096d",
+      "bytes": 846499
+    },
+    "tools/assets/citizen-character-variants/qa/previews/police-lods-night.png": {
+      "sha256": "02367696497788b0fd8c1154c8e151e27e55f0b33cce1a8a42fc2034489ad3ea",
+      "bytes": 755127
+    },
+    "tools/assets/citizen-character-variants/qa/previews/police-lods-overcast.png": {
+      "sha256": "cbc448185092d8062358d920f56addb27c8e03c831d5417291b91e685310fbee",
+      "bytes": 843263
+    },
+    "tools/assets/citizen-character-variants/qa/previews/police-lods-sunny.png": {
+      "sha256": "8cd1d0f5a03969554948523502617d17d577b4c612c32eb5fedd05127dc400a8",
+      "bytes": 844631
+    },
+    "tools/assets/citizen-character-variants/qa/previews/police-side.png": {
+      "sha256": "afaf1caf8a3d5c32b6587841bfaf38e5ccba5bbf12e7b53773e5964349d34208",
+      "bytes": 547820
+    },
+    "tools/assets/citizen-character-variants/qa/previews/run-back-phase-0.7.png": {
+      "sha256": "78010affc7e731f83c104d60848904e8a644a18036a34376b77b13032bc9d94e",
+      "bytes": 1111025
+    },
+    "tools/assets/citizen-character-variants/qa/previews/run-back-phase-0.775858.png": {
+      "sha256": "8d8a9aff1658e3d82effeee0a12fb4c9483417f9c503146c062c8703b927c78f",
+      "bytes": 1109982
+    },
+    "tools/assets/citizen-character-variants/qa/previews/run-back-phase-0.85.png": {
+      "sha256": "6af836d1ec616f17b5ead1ef400afb3c9cb994a0225cccf70f4af879519cd101",
+      "bytes": 1112608
+    },
+    "tools/assets/citizen-character-variants/qa/render-evidence.json": {
+      "sha256": "152f1ecd904a5033febbadc213c81f494793a53f4db6bece4653168d516dd861",
+      "bytes": 29734
+    },
+    "tools/assets/citizen-character-variants/qa/resolved-defects.json": {
+      "sha256": "36c9f34e9db89b36b5d8bbb64cd56912c5c9b4e1d989aee42b99917ef205976d",
+      "bytes": 1246
+    },
+    "tools/assets/citizen-character-variants/qa/simplification.json": {
+      "sha256": "5b1be43e37de3d9e0262a76823da02d3db4366884dec65b21f2f4d03e2d24bf6",
+      "bytes": 1295
+    },
+    "tools/assets/citizen-character-variants/qa/source-inspection.json": {
+      "sha256": "aa7f21399623a683758e2b937b5437bbb841f0c273a92469a1d689a8d9a4fec1",
+      "bytes": 44311
+    },
+    "tools/assets/citizen-character-variants/qa/source-preserving-export-baseline.json": {
+      "sha256": "ca9560e81a061d9a83d65c096dd08fc993c9f9d927074449d43ae7845ba5c499",
+      "bytes": 3168
+    },
+    "tools/assets/citizen-character-variants/qa/source-preserving-export-natural-driver.json": {
+      "sha256": "4b2a20e9f988c7514c6f5de43e127e4a3eb876e7113e40aea3829999e22f0c60",
+      "bytes": 1134
+    },
+    "tools/assets/citizen-character-variants/qa/source-preserving-export.json": {
+      "sha256": "170e845f9f0dc814383198b5f860309d55a9047df6308ba9a7b98a1d98c9c281",
+      "bytes": 4299
+    },
+    "tools/assets/citizen-character-variants/qa/validation.json": {
+      "sha256": "3bcd9014724b57578f3934bef5891b07d85bcf6a380e3281fdcd86a06bb3fcb2",
+      "bytes": 12357
+    },
+    "tools/assets/citizen-character-variants/qa/visual-review.json": {
+      "sha256": "666febc6a8ae962dfe228ce699ad8a9de70679aa1de8dc66b50b0a23942aa442",
+      "bytes": 2468
+    },
+    "tools/assets/citizen-character-variants/README.zh-TW.md": {
+      "sha256": "26d69520390fcee697a72222b115757111c1abf4c642ecabd23465331f03d744",
+      "bytes": 12307
+    },
+    "tools/assets/citizen-character-variants/render.py": {
+      "sha256": "b39cddbd8354ea9baaf17f5d3eeed45e6a66349f09479a865669256b3f2286f3",
+      "bytes": 10170
+    },
+    "tools/assets/citizen-character-variants/simplify.mjs": {
+      "sha256": "f3d984d5d46c6279b0cbf4873835f5d5381af394ef2cbee42a6294ec6216ced5",
+      "bytes": 5721
+    },
+    "tools/assets/citizen-character-variants/source/citizen.lod0.blend": {
+      "sha256": "aa0d574ac0303e0deddbc7d4fcf9074928f48bc225ed40853b632c18002130f4",
+      "bytes": 3481281
+    },
+    "tools/assets/citizen-character-variants/source/citizen.lod1.blend": {
+      "sha256": "c872f2f08cec97dbd6b7f31b8c00ca48b7be51e948e8f9a883e8607cc44e99ab",
+      "bytes": 3260574
+    },
+    "tools/assets/citizen-character-variants/source/citizen.lod2.blend": {
+      "sha256": "f86beb80eb92d0e489b14f1e0eb43bd4d6bd9c6145f80fb3ada5acb5b1312912",
+      "bytes": 3181567
+    },
+    "tools/assets/citizen-character-variants/source/driver-roadster-fit.lod0.blend": {
+      "sha256": "ab824b64b42d00121e6281b4ecdb0f7ac0435c4747570cffb72d38743d55bd78",
+      "bytes": 3687964
+    },
+    "tools/assets/citizen-character-variants/source/driver-roadster-fit.lod1.blend": {
+      "sha256": "84b5aa6f6a5e931398fa2fcf4d6b7ec628d111d34b95db72f9dd16f537a45d83",
+      "bytes": 3466260
+    },
+    "tools/assets/citizen-character-variants/source/driver-roadster-fit.lod2.blend": {
+      "sha256": "628e42366d2bc527420d2b6867f54c96229177b2fa163fe2856242371d89a718",
+      "bytes": 3328433
+    },
+    "tools/assets/citizen-character-variants/source/driver.lod0.blend": {
+      "sha256": "3f6760f92b52ab9e8ce2c1883a9bd3d3320e690a89078ec62f843e6718168568",
+      "bytes": 3489254
+    },
+    "tools/assets/citizen-character-variants/source/driver.lod1.blend": {
+      "sha256": "5f2a34af7b61bb1d4029e58d3ac58dd4df25641e5efb46f820e6ed14626ebfb9",
+      "bytes": 3267940
+    },
+    "tools/assets/citizen-character-variants/source/driver.lod2.blend": {
+      "sha256": "dff45af670dc8f0b087067da07303b501d3e0ed1d6948f64a63a0cf641063027",
+      "bytes": 3190453
+    },
+    "tools/assets/citizen-character-variants/source/police.lod0.blend": {
+      "sha256": "1b7d963e58269e5d01ce30098ef5172ce7e8e828ed532626ca79e3c2ed4b688c",
+      "bytes": 3502945
+    },
+    "tools/assets/citizen-character-variants/source/police.lod1.blend": {
+      "sha256": "e8e649f7dda79844c764642e7353ccac47f940ef96e6ef56e708066ad487b2cb",
+      "bytes": 3279316
+    },
+    "tools/assets/citizen-character-variants/source/police.lod2.blend": {
+      "sha256": "eab7e82e52bd94085886ecf12375d5dada1bc6030e87bff2cda74184d95d4767",
+      "bytes": 3199864
+    },
+    "tools/assets/citizen-character-variants/validate_cpu.mjs": {
+      "sha256": "bee768175e78b9b1a2eaf6588cd07134c2ec9d3b16e392efa82f63308f083d77",
+      "bytes": 13115
+    },
+    "tools/assets/citizen-character-variants/validate.py": {
+      "sha256": "cfa357e7ac00693d65562f1f255f47b7daf9f98fbe1ace4bc9a27ed1b6409c7d",
+      "bytes": 9363
+    },
+    "tools/assets/driver-independent-review/audit.mjs": {
+      "sha256": "d86e82c2b50a3c9216ff234f6def7e5fb8a31721f1ada592905ca7d69e39d74a",
+      "bytes": 16453
+    },
+    "tools/assets/material-consumer-candidates/adapters/consumer-candidates.mjs": {
+      "sha256": "2661983c731926d1654e60c40d71b404c865a3dd9cfc75095097df41870aaf8a",
+      "bytes": 1442
+    },
+    "tools/assets/material-consumer-candidates/adapters/furniture-plan.mjs": {
+      "sha256": "9cc87ef9d55ecb9007cee5e406c4a2a12b42db583d03f3bb3fec7255907c685b",
+      "bytes": 2740
+    },
+    "tools/assets/material-consumer-candidates/adapters/harness.mjs": {
+      "sha256": "3fe0535228e1b74c9c163f7da8f53312be058100565a158db7dcb336dbe57d80",
+      "bytes": 1935
+    },
+    "tools/assets/material-consumer-candidates/adapters/metre-uv.mjs": {
+      "sha256": "bdf14f200d5186ea569d98f0b8e76579a78c1c09a334bf8543f39f5a5cb51a3d",
+      "bytes": 2474
+    },
+    "tools/assets/material-consumer-candidates/adapters/shared-surfaces.mjs": {
+      "sha256": "017216f2201b4308b3bdb412d9c32d9f844e5c626598961ced8aea1781dfb6a7",
+      "bytes": 2451
+    },
+    "tools/assets/material-consumer-candidates/adapters/source-patches.mjs": {
+      "sha256": "267980021b0ccf78873568a04aee613042b2219ff52f0298ec0e86c621d91f26",
+      "bytes": 5440
+    },
+    "tools/assets/roadster-driver-fit/adapters/cockpit-candidate.mjs": {
+      "sha256": "e3b291acb7eb94c1a1354fac900f98b7aac618d25758011385e3e60fdc8be525",
+      "bytes": 9632
+    },
+    "tools/assets/roadster-driver-fit/audit-adapter.mjs": {
+      "sha256": "00e0177f2e63b0cf7eafe495652c09b35fc34c0080afbb5f7809d2ca3cb9a31f",
+      "bytes": 7474
+    },
+    "tools/assets/roadster-driver-fit/audit-blender.py": {
+      "sha256": "131e8b091c94336d7070cb3447d2e709522f76cec3de92ea86ebdad56bfc6a6f",
+      "bytes": 4206
+    },
+    "tools/assets/roadster-driver-fit/audit-envelope.mjs": {
+      "sha256": "172577f715c3efd0df1729becc8cba09d6faa125659de231070ae5da3ed8ea98",
+      "bytes": 4047
+    },
+    "tools/assets/roadster-driver-fit/audit-human-contract.mjs": {
+      "sha256": "8e5f3bd6fa43dadc87df58e0427d9356d1ba935b4c96954dbd4ba881d72a7ed0",
+      "bytes": 3565
+    },
+    "tools/assets/roadster-driver-fit/audit-materials.mjs": {
+      "sha256": "eba5f2cbbd604309b076913f5e188a2910b08704aa1eded85fc0612a01fa4502",
+      "bytes": 3927
+    },
+    "tools/assets/roadster-driver-fit/build.py": {
+      "sha256": "eb816b926c3842639be1bc4b223a2fb046fe984fd64bf043840a4d541b4dc3e9",
+      "bytes": 4424
+    },
+    "tools/assets/roadster-driver-fit/check-fit.mjs": {
+      "sha256": "b40ab582913f91dfb471ae9aedc4e964a39e6d7909558feda6ac0e83d7de8104",
+      "bytes": 7464
+    },
+    "tools/assets/roadster-driver-fit/contact-kernel.mjs": {
+      "sha256": "7a898be12c9848d514bc30443550d19f6194bb7d24f4ba650cf8ca7afca5efd8",
+      "bytes": 8895
+    },
+    "tools/assets/roadster-driver-fit/export.py": {
+      "sha256": "9cfd801dd6ea359bc15048b9907bc2b79de238db98c91444ba9d3a1a92ba2c3e",
+      "bytes": 2645
+    },
+    "tools/assets/roadster-driver-fit/exports/roadster-cockpit-local.lod0.glb": {
+      "sha256": "706d649ab14e3cc38c6693cbc9a8a7c69c5731d7ad9c3ad758234f33408c74c6",
+      "bytes": 125864
+    },
+    "tools/assets/roadster-driver-fit/exports/roadster-cockpit-local.lod1.glb": {
+      "sha256": "a6b86d69660a113c2b5c24daa6cdcdfa8dfd8b50f6bfe4f3db50d0d62c989556",
+      "bytes": 123752
+    },
+    "tools/assets/roadster-driver-fit/exports/roadster-cockpit-local.lod2.glb": {
+      "sha256": "b6ed43359b1832adcbc644746993b0bfe59ed8db2371772806d3c2e232bfee14",
+      "bytes": 119268
+    },
+    "tools/assets/roadster-driver-fit/extract-source-seats.mjs": {
+      "sha256": "4292cc91766d842cc50551591114817ba4995958fde2334a6fb1dc887800a46c",
+      "bytes": 985
+    },
+    "tools/assets/roadster-driver-fit/finalize.py": {
+      "sha256": "e31fb267a5958b0c27d2bf13e407fc0f52a8a2937ea9eb22d4e3d1bdbd060d41",
+      "bytes": 7233
+    },
+    "tools/assets/roadster-driver-fit/manifest.json": {
+      "sha256": "dcc2ddda5252af354c826f22880f7d49f1bb4da806e8ed34a061f4bee1cc8d80",
+      "bytes": 19993
+    },
+    "tools/assets/roadster-driver-fit/measure-support.mjs": {
+      "sha256": "2ff08b99a63dd7b3ce34f6ad522bbb946d8ae7cf97f2acb038c9d3de4b51f08f",
+      "bytes": 4922
+    },
+    "tools/assets/roadster-driver-fit/qa/adapter-preservation.json": {
+      "sha256": "cea91be95ceb66b7f8f8c90f985e3b797da75487eccde6c1d40db6f6920b6acb",
+      "bytes": 5242
+    },
+    "tools/assets/roadster-driver-fit/qa/blender-audit.json": {
+      "sha256": "43a98b4e97c0034de7aa1183e165fc3f2ff439b91fa959e59ff2c0895a1e6067",
+      "bytes": 1638
+    },
+    "tools/assets/roadster-driver-fit/qa/cabin-envelope.json": {
+      "sha256": "31b4c342cb21a4747eb1678cc9e32e228d898fbeefb25fdc66a5bd743139b7fb",
+      "bytes": 5243
+    },
+    "tools/assets/roadster-driver-fit/qa/candidate-seat-support.json": {
+      "sha256": "dc6152464ef3eb6e5b26dd621b54dbcb1ef7c4d632b999a7019b511e2cf8ce92",
+      "bytes": 2954
+    },
+    "tools/assets/roadster-driver-fit/qa/candidate.inspection.glb": {
+      "sha256": "5d972f61a4ef67ebd5c43d86f7285ca31193ea682a67d34059ba6ed5e5f23bb7",
+      "bytes": 1003900
+    },
+    "tools/assets/roadster-driver-fit/qa/candidate.semantic-inspection.glb": {
+      "sha256": "cd52bb37f443bc397a3e09babbcd7bcfb56fb3210f128c7fb85ade2f063c635b",
+      "bytes": 581104
+    },
+    "tools/assets/roadster-driver-fit/qa/common-validation.json": {
+      "sha256": "f90f65078c6cf84dca3dea9d5c727274b9ded7bc0290a6ea2cb3455fe07861e5",
+      "bytes": 4313
+    },
+    "tools/assets/roadster-driver-fit/qa/contact-kernel-tests.json": {
+      "sha256": "6b0a775e32a1fb771bd58677f98a961694d8e700eee40f72edf5b75ea1aa146a",
+      "bytes": 1229
+    },
+    "tools/assets/roadster-driver-fit/qa/cost-report.json": {
+      "sha256": "7f3cdbb756e00030ad3fef870651e1b9c84ef69e0949fd1d2886f6fc7db8f0fa",
+      "bytes": 749
+    },
+    "tools/assets/roadster-driver-fit/qa/diagnostic-supported-lod0.json": {
+      "sha256": "c1785637d40b7e13497f8cb26fcdf8ba5a673797c9c40600d2975728b6ce8061",
+      "bytes": 27875
+    },
+    "tools/assets/roadster-driver-fit/qa/driver-fit-lod0.json": {
+      "sha256": "0b77dcafdee4e225e6d008cd40882b255325c0101376c0f7e687a363cd9d5074",
+      "bytes": 40963
+    },
+    "tools/assets/roadster-driver-fit/qa/driver-fit-lod1.json": {
+      "sha256": "7776ac9ac86c9a345c0860857515bdea4bc35d4f7f7a3029e000394c3a535011",
+      "bytes": 40941
+    },
+    "tools/assets/roadster-driver-fit/qa/driver-fit-lod2.json": {
+      "sha256": "87fb48b531027557f8f68faf1c72c79f538f62869f6fa5d9ce1200ae82573a39",
+      "bytes": 40911
+    },
+    "tools/assets/roadster-driver-fit/qa/driver-fit-summary.json": {
+      "sha256": "64921dd0ed655bb06b19a20c16eb734332fd1c8b71cc21a79b88305c55c8f460",
+      "bytes": 1570
+    },
+    "tools/assets/roadster-driver-fit/qa/driver-seat-sweep.json": {
+      "sha256": "1eef1e32f6ba11d592822649f15d19dd8fce87107e79dd02d5d9f0fdfbb0a48b",
+      "bytes": 58301
+    },
+    "tools/assets/roadster-driver-fit/qa/handoff.json": {
+      "sha256": "29cf2c9e547121f51b0dc4b9d4cb2bef9b183ecd0c0dd00630d9643b366a3b71",
+      "bytes": 7565
+    },
+    "tools/assets/roadster-driver-fit/qa/human-proportions.json": {
+      "sha256": "bf696bd62c411ae1f5dce76783f3107c5cc13ddb3b79cf99017ff969fa797f2e",
+      "bytes": 8403
+    },
+    "tools/assets/roadster-driver-fit/qa/material-composition.json": {
+      "sha256": "3f44a91208bf1e676b0c1d496abcf3d3132a091f40d616aad57022076856080f",
+      "bytes": 1866
+    },
+    "tools/assets/roadster-driver-fit/qa/original-driver-seat-geometry.json": {
+      "sha256": "f0916b0b94d972a8ba4b74c37fa55ca094e741e48261e5678e533347b43c71f4",
+      "bytes": 93106
+    },
+    "tools/assets/roadster-driver-fit/qa/original-seatback-gap.json": {
+      "sha256": "57463b711c31e61da9625a4c6ff2abd78eeb7bc7ba83427e93980c8bdd913ae4",
+      "bytes": 6104
+    },
+    "tools/assets/roadster-driver-fit/qa/previews/driver-footwell.png": {
+      "sha256": "5436d6e4852b5b4df95f6d789f678973850fe83d81dbcc0421df652fcd8ea93e",
+      "bytes": 597449
+    },
+    "tools/assets/roadster-driver-fit/qa/previews/driver-full.png": {
+      "sha256": "632513b88c77b5f12b9b39854757d182e540a02dd3429ede9a86de9a6a68f42f",
+      "bytes": 502161
+    },
+    "tools/assets/roadster-driver-fit/qa/previews/driver-hands.png": {
+      "sha256": "b960b8adfe9100eb339fcce7cf563a9ac86a8cca5066967e5fe987f8e2272ee4",
+      "bytes": 626813
+    },
+    "tools/assets/roadster-driver-fit/qa/previews/driver-side.png": {
+      "sha256": "d0b9e7a15b7f427d8f552216950cba1a35e8b5b883dc5d3da8b41f1c048aa84e",
+      "bytes": 482475
+    },
+    "tools/assets/roadster-driver-fit/qa/previews/driver-support.png": {
+      "sha256": "edbca4e501497589d9dd87b047f4b40aa6c26b88a4ce64c5ed5e12b8fd666613",
+      "bytes": 540906
+    },
+    "tools/assets/roadster-driver-fit/qa/previews/module-lods-dusk.png": {
+      "sha256": "becc3d5fe59e32efe815648a046f701c9ee106c6fe412ce49515ba8377a34b23",
+      "bytes": 438695
+    },
+    "tools/assets/roadster-driver-fit/qa/previews/module-lods-night.png": {
+      "sha256": "cc0bb7f9437695e57208550cf190c785285abba1fcc8842602cf9da9d15a1e5c",
+      "bytes": 356225
+    },
+    "tools/assets/roadster-driver-fit/qa/previews/module-lods-overcast.png": {
+      "sha256": "7384138654f63ed2635b614a9a5a0d18fdb2e24a2ba48611ff5aeef16207b421",
+      "bytes": 427896
+    },
+    "tools/assets/roadster-driver-fit/qa/previews/module-lods-sunny.png": {
+      "sha256": "a3906916e77d9c4ab93110d1dd3c5be2d2627c315605b0a4642b9fc09ea781ac",
+      "bytes": 435927
+    },
+    "tools/assets/roadster-driver-fit/qa/render-evidence.json": {
+      "sha256": "f7d85b9757c164e4c28fd567e3d3e3a9a7129469be0383e792e0ac0a5f0eb128",
+      "bytes": 20608
+    },
+    "tools/assets/roadster-driver-fit/qa/source-edit-proof.json": {
+      "sha256": "6538fe5db6a267abb51d0e47c67f5ae00ec3f42bafb6925a8237bf4f5c23385b",
+      "bytes": 274
+    },
+    "tools/assets/roadster-driver-fit/qa/validation.json": {
+      "sha256": "823a20ba3ed8749a6e339e5cbd2897b2b45c030e65a3caecee4ff40bff7ae5a9",
+      "bytes": 5124
+    },
+    "tools/assets/roadster-driver-fit/qa/visual-review.json": {
+      "sha256": "5e0512f45c12cdca5dd45348297d26e513adf5707228e5199bd895974701efa7",
+      "bytes": 2637
+    },
+    "tools/assets/roadster-driver-fit/README.zh-TW.md": {
+      "sha256": "bff55c2d3befa8a12501793becfdbd7cb026f330c145ef4fe6981b3f8539f763",
+      "bytes": 6403
+    },
+    "tools/assets/roadster-driver-fit/render.py": {
+      "sha256": "3dfbd04153c076286a569ba21ce0a127ffb95bcfa72ae7b17c37c314c9f51596",
+      "bytes": 7490
+    },
+    "tools/assets/roadster-driver-fit/source/roadster-cockpit-local.lod0.blend": {
+      "sha256": "ebe186a9369f299bd526c732ddce9720c30d35076250354d70fd40fb62f02130",
+      "bytes": 110460
+    },
+    "tools/assets/roadster-driver-fit/source/roadster-cockpit-local.lod1.blend": {
+      "sha256": "3d896fead9aa932c32d4c062f43a8164a552860bcb79ffc0928923eb8e478805",
+      "bytes": 109468
+    },
+    "tools/assets/roadster-driver-fit/source/roadster-cockpit-local.lod2.blend": {
+      "sha256": "8ffaff5cfe457952fbedaa6510d36d3e2af16371193bac754988083525699d1f",
+      "bytes": 108317
+    },
+    "tools/assets/roadster-driver-fit/specs.json": {
+      "sha256": "a2b413a67933f24e5d0dc1f7c7175a0a5834ef2173c31d6f52ebd92ffa569052",
+      "bytes": 2405
+    },
+    "tools/assets/roadster-driver-fit/sweep-seat.mjs": {
+      "sha256": "551366222fb4701585b233f954cdb7c166ed542d8ad83f9073ec4b940d6cb38a",
+      "bytes": 1532
+    },
+    "tools/assets/roadster-driver-fit/test-contact.mjs": {
+      "sha256": "7e574ba7e6153b05baecdd515fcc58475080e3833654d45a278387a582e93b33",
+      "bytes": 4105
+    },
+    "tools/assets/roadster-driver-fit/validate.py": {
+      "sha256": "d3d06558a800256fb31a85bdec274f654bce0b1e3bfa078eac5f42ea65bb136d",
+      "bytes": 2250
+    }
+  },
+  "limitations": [
+    "The posed-vertex/transition test independently compares with Three.js. Contact and source-adapter regressions are reproduced using their reviewed package algorithms, not an independently implemented collision solver.",
+    "Hand depth is finite vertex/edge-midpoint/centroid sampling, not a continuous penetration maximum; allowed approximation is 3 mm.",
+    "The original open shell is checked as surfaces. Eight inherited seat/door-shoulder source-triangle joins remain; no new joins in the LOD0 moved-part envelope audit.",
+    "Seat support remains rigid visual approximation: cushion gap about 4.95 mm; sampled coat/backrest normal gap minimum about 22.5 mm and median about 42.9 mm. No soft cushion contact or comfort certification.",
+    "Standing rest pose requires driver-seated activation for fit. Exit consumers must stop or fade that action to restore DriverGrip 0.",
+    "No runtime/camera migration, dynamic steering, pedals, belts, entry/exit, gameplay, WebGL, GPU performance or ergonomic acceptance.",
+    "Blender source edit and reimport evidence is hash-verified; this command does not rerun Blender."
+  ]
+}

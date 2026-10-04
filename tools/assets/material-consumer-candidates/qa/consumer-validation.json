@@ -1,0 +1,485 @@
+{
+  "status": "pass",
+  "environment": {
+    "node": "v24.19.0",
+    "three": "185",
+    "mode": "CPU; no WebGL or browser"
+  },
+  "checks": [
+    {
+      "name": "E02 geometry positions/normals/winding and root bounds unchanged",
+      "status": "pass",
+      "baseline": {
+        "hash": "5f44a21d9d79368721dfd7c41844eafa39faaf8d31fc317f6caaa6617515760b",
+        "triangles": 14662,
+        "vertices": 43986,
+        "meshes": 19,
+        "boundsM": {
+          "min": [
+            -1.159999966621399,
+            -0.05800001323223114,
+            -2.2899999618530273
+          ],
+          "max": [
+            1.159999966621399,
+            1.3849999904632568,
+            2.2925000190734863
+          ],
+          "size": [
+            2.319999933242798,
+            1.443000003695488,
+            4.582499980926514
+          ]
+        }
+      },
+      "candidate": {
+        "hash": "5f44a21d9d79368721dfd7c41844eafa39faaf8d31fc317f6caaa6617515760b",
+        "triangles": 14662,
+        "vertices": 43986,
+        "meshes": 21,
+        "boundsM": {
+          "min": [
+            -1.159999966621399,
+            -0.05800001323223114,
+            -2.2899999618530273
+          ],
+          "max": [
+            1.159999966621399,
+            1.3849999904632568,
+            2.2925000190734863
+          ],
+          "size": [
+            2.319999933242798,
+            1.443000003695488,
+            4.582499980926514
+          ]
+        }
+      }
+    },
+    {
+      "name": "E02 independent wheel/spin transformations unchanged for four movement samples",
+      "status": "pass",
+      "wheelAnchors": [
+        {
+          "position": [
+            -0.94,
+            0.36,
+            -1.4
+          ],
+          "front": false,
+          "steering": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ],
+          "spin": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        {
+          "position": [
+            -0.94,
+            0.36,
+            1.38
+          ],
+          "front": true,
+          "steering": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ],
+          "spin": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        {
+          "position": [
+            0.94,
+            0.36,
+            -1.4
+          ],
+          "front": false,
+          "steering": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ],
+          "spin": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        },
+        {
+          "position": [
+            0.94,
+            0.36,
+            1.38
+          ],
+          "front": true,
+          "steering": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ],
+          "spin": [
+            0,
+            0,
+            0,
+            "XYZ"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "E02 semantic callsites separate seats, skin, clothing, trim and tyres",
+      "status": "pass",
+      "headBoundsM": {
+        "min": [
+          0.32499998807907104,
+          1.1549999713897705,
+          -0.45500001311302185
+        ],
+        "max": [
+          0.5550000071525574,
+          1.3849999904632568,
+          -0.22499999403953552
+        ],
+        "size": [
+          0.23000001907348633,
+          0.23000001907348633,
+          0.23000001907348633
+        ]
+      },
+      "seatBoundsM": {
+        "min": [
+          -0.7225000262260437,
+          0.4449999928474426,
+          -0.7049999833106995
+        ],
+        "max": [
+          0.7225000262260437,
+          1.2799999713897705,
+          0.10999999195337296
+        ],
+        "size": [
+          1.4450000524520874,
+          0.8349999785423279,
+          0.8149999752640724
+        ]
+      },
+      "driverClothingBoundsM": {
+        "min": [
+          0.203000009059906,
+          0.7011157274246216,
+          -0.5114637613296509
+        ],
+        "max": [
+          0.6769999861717224,
+          1.1588842868804932,
+          0.30393075942993164
+        ],
+        "size": [
+          0.4739999771118164,
+          0.4577685594558716,
+          0.8153945207595825
+        ]
+      }
+    },
+    {
+      "name": "E02 metre UV survives merged body/seat/skin batches and tyres",
+      "status": "pass",
+      "maxAbsoluteEdgeErrorM": 2.204520212212291e-7,
+      "measuredEdges": 38082,
+      "meshes": 13,
+      "chartLimitation": "Per-triangle exact metric charts; visible seams require WebGL review."
+    },
+    {
+      "name": "E02 cabin opening, actual driver view and source collision method retained",
+      "status": "pass",
+      "eyeHeightM": 1.2,
+      "driverLeftOffsetM": 0.45,
+      "cockpit": {
+        "hash": "52ec13bb3ac39a0e432288fc66321d377f90eeee165fd73b4365211e259ea163",
+        "triangles": 6158,
+        "vertices": 18474,
+        "meshes": 17,
+        "boundsM": {
+          "min": [
+            -0.7741015553474426,
+            -0.7350000143051147,
+            -1.343000054359436
+          ],
+          "max": [
+            1.3580000400543213,
+            0.5808016657829285,
+            1.100000023841858
+          ],
+          "size": [
+            2.132101595401764,
+            1.3158016800880432,
+            2.443000078201294
+          ]
+        }
+      },
+      "collisionQueries": [
+        {
+          "xz": [
+            -20,
+            0
+          ],
+          "clear": false
+        },
+        {
+          "xz": [
+            0,
+            0
+          ],
+          "clear": true
+        },
+        {
+          "xz": [
+            2,
+            2
+          ],
+          "clear": false
+        },
+        {
+          "xz": [
+            6,
+            6
+          ],
+          "clear": false
+        }
+      ],
+      "scope": "CPU fixtures of existing method; no gameplay acceptance"
+    },
+    {
+      "name": "E04 current floor, doors, furniture collision, entry and circulation anchors unchanged",
+      "status": "pass",
+      "queries": 16422,
+      "sites": [
+        {
+          "id": "science",
+          "obstacles": 20,
+          "doorAnchors": 2,
+          "geometry": {
+            "baseline": {
+              "hash": "24d5d6b033e5a664eac77a3b52e7658f3b775dedf78994dcc6b63ac7d710d3c4",
+              "triangles": 3012,
+              "vertices": 9036,
+              "meshes": 4,
+              "boundsM": {
+                "min": [
+                  1717.4265740618955,
+                  2.7347378373146056,
+                  1347.2091320002098
+                ],
+                "max": [
+                  1814.126574824835,
+                  13.59997787475586,
+                  1439.9091327631493
+                ],
+                "size": [
+                  96.70000076293945,
+                  10.865240037441254,
+                  92.70000076293945
+                ]
+              }
+            },
+            "candidate": {
+              "hash": "24d5d6b033e5a664eac77a3b52e7658f3b775dedf78994dcc6b63ac7d710d3c4",
+              "triangles": 3012,
+              "vertices": 9036,
+              "meshes": 6,
+              "boundsM": {
+                "min": [
+                  1717.4265740618955,
+                  2.7347378373146056,
+                  1347.2091320002098
+                ],
+                "max": [
+                  1814.126574824835,
+                  13.59997787475586,
+                  1439.9091327631493
+                ],
+                "size": [
+                  96.70000076293945,
+                  10.865240037441254,
+                  92.70000076293945
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "canada",
+          "obstacles": 100,
+          "doorAnchors": 2,
+          "geometry": {
+            "baseline": {
+              "hash": "a41061ce273ca5d951830a008d8e6ddd614f575e4fe0f7c9e5442dae613aa605",
+              "triangles": 15128,
+              "vertices": 45384,
+              "meshes": 3,
+              "boundsM": {
+                "min": [
+                  1107.290588761109,
+                  3.2715116292238235,
+                  -377.2017081317376
+                ],
+                "max": [
+                  1306.0319257204355,
+                  16.899999618530273,
+                  -216.56928453954998
+                ],
+                "size": [
+                  198.74133695932665,
+                  13.62848798930645,
+                  160.6324235921876
+                ]
+              }
+            },
+            "candidate": {
+              "hash": "a41061ce273ca5d951830a008d8e6ddd614f575e4fe0f7c9e5442dae613aa605",
+              "triangles": 15128,
+              "vertices": 45384,
+              "meshes": 6,
+              "boundsM": {
+                "min": [
+                  1107.290588761109,
+                  3.2715116292238235,
+                  -377.2017081317376
+                ],
+                "max": [
+                  1306.0319257204355,
+                  16.899999618530273,
+                  -216.56928453954998
+                ],
+                "size": [
+                  198.74133695932665,
+                  13.62848798930645,
+                  160.6324235921876
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "waterfront",
+          "obstacles": 44,
+          "doorAnchors": 8,
+          "geometry": {
+            "baseline": {
+              "hash": "54f6025dd824153bf8f2aad2c6fef5f34d65b62f0cd64dddd4886d6099f770e4",
+              "triangles": 16854,
+              "vertices": 50562,
+              "meshes": 3,
+              "boundsM": {
+                "min": [
+                  1115.1708361002281,
+                  3.346286804241822,
+                  -184.74261942668159
+                ],
+                "max": [
+                  1398.4788170019683,
+                  11.795620592137562,
+                  101.80990069161305
+                ],
+                "size": [
+                  283.30798090174017,
+                  8.449333787895739,
+                  286.55252011829464
+                ]
+              }
+            },
+            "candidate": {
+              "hash": "54f6025dd824153bf8f2aad2c6fef5f34d65b62f0cd64dddd4886d6099f770e4",
+              "triangles": 16854,
+              "vertices": 50562,
+              "meshes": 6,
+              "boundsM": {
+                "min": [
+                  1115.1708361002281,
+                  3.346286804241822,
+                  -184.74261942668159
+                ],
+                "max": [
+                  1398.4788170019683,
+                  11.795620592137562,
+                  101.80990069161305
+                ],
+                "size": [
+                  283.30798090174017,
+                  8.449333787895739,
+                  286.55252011829464
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "E04 floor/wood/plaster UV retained with original normals and colour fallback",
+      "status": "pass",
+      "maxAbsoluteEdgeErrorM": 0.000015182675898728348,
+      "measuredEdges": 155766
+    },
+    {
+      "name": "E04 light-lab output and cutaway clipping retained",
+      "status": "pass",
+      "headlessCanvasWayfinding": "not_run; document undefined skips sign canvas in both fixtures",
+      "floorWalkSurfacePreserved": true
+    },
+    {
+      "name": "F05 eight shared IDs and channel/repeat contract; opt-in binding excludes skin/glass/light",
+      "status": "pass",
+      "surfaceCount": 8,
+      "roadsterBoundMaterials": 3,
+      "duplicateMapsAdded": 0
+    },
+    {
+      "name": "E03 specialised inventory and exact dynamics/control interfaces measured",
+      "status": "pass",
+      "harbourVariants": 49,
+      "playerAircraft": 2,
+      "newParts": 0
+    },
+    {
+      "name": "Current-source regression fixtures checked",
+      "status": "pass",
+      "recorded": false
+    }
+  ],
+  "sourceHashes": {
+    "lib/city/assets/roadster.ts": "e3e25bba28d32df58cbd1b26c66fb5b7657eb04bd4ab9688156d770eb58436f0",
+    "lib/city/interiors.ts": "62f813f8798eaeaf79463b3200d2fea65bcf91da631e925bfbb55a166fdac93c",
+    "lib/city/seabus-layout.ts": "d40906fbb9b508633d77414b3461547165f2907f55469ed7eec3c2c4b0ffb2c1",
+    "lib/city/navigation.ts": "b55276e47e939028f50a3629149dfd6bba97527211deb46dce369c9d9fa4247e",
+    "lib/city/driver-camera.ts": "911765020382258030d2dc8f386cfc7dc1f720aab5d88bbf4c04ef93beb903d0",
+    "lib/city/assets/cockpits.ts": "b8aed3f6379dfdc9a5a1115382e36af3b17e7183a29dd1e7458a10ac4d2465fc",
+    "lib/city/harbour-models.ts": "3d494df8a5b214327dcdfb4facb1fe79aca27d22a410bf39a8ce11d91e26a68d",
+    "lib/city/harbour.ts": "b5c18dd4208a88be3a206a8e1b3a78df6e734b90be97e38adea895698428c1ab",
+    "lib/city/harbour-path.ts": "c1c9135952bb65177544b9dd166838d8b139e0ce3092e8eaa038ba3ed99a6ff2",
+    "lib/city/boat-controller.ts": "e64b57cee7ca233ede9fcdfc277d46aff3a98269d88b68052365e2ba0aff4d33",
+    "lib/city/boat-physics.ts": "6ce2413d9e082e1d17f0d40e1bc67ef48056b3240adb99b1b6fe25a62b6f2954",
+    "lib/city/water-world.ts": "d816c253b44be7825eb5f1f2c6e714214da9cc228e5da30f70350fbde6023cc5",
+    "lib/city/assets/aircraft-models.ts": "037549b49b722250eba675217aeaed6416fc648cc88b395b77cc595e58eae308",
+    "lib/city/flight-controller.ts": "b370862d99e7d03ed673f721ccf1b1789464a9987dcf704b9b778e92e0cd4d1f",
+    "lib/city/flight-state.ts": "fc29f6da8200dddded4daa570001f6e510075db1ea58a17ee7f4ef37f6fa2818",
+    "lib/city/flight-geometry.ts": "6eb749ed990d2190368fce5196e0824a4235953dc94c5fd9764d1cb494128750"
+  },
+  "scope": "Offline candidate integration logic only. Runtime/public remain unchanged; no GPU/gameplay/PBR rollout claim."
+}

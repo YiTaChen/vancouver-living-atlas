@@ -1,0 +1,394 @@
+{
+  "status": "pass",
+  "scope": "two real fixtures, both LODs; no browser or geographic activation",
+  "results": [
+    {
+      "fixture": "modern-source-window-surround",
+      "lod": 0,
+      "input": {
+        "source": {
+          "structureId": "145639",
+          "featureId": "133049",
+          "edgeKey": "-326.275,445.400|-336.041,435.450",
+          "edgeLengthM": 13.942008638569467
+        },
+        "profile": {
+          "kind": "midrise-grid",
+          "styleIndex": 2,
+          "targetBayM": 3.4,
+          "storeyM": 3.35,
+          "groundStoreyM": 4.25,
+          "edgeMarginM": 0.3,
+          "pane": [
+            0.1,
+            0.9,
+            0.19,
+            0.86
+          ],
+          "wallRoughness": 0.78,
+          "glassRoughness": 0.28,
+          "brickNormalScale": 0,
+          "brickTileM": 1.728,
+          "frameWidthM": 0.1,
+          "frameDepthM": 0.1,
+          "balconies": false,
+          "wallColor": 11908005,
+          "seed": 3611
+        },
+        "heightM": 24.74,
+        "minHeightM": 0,
+        "wallTopM": 24.74,
+        "bay": 0,
+        "row": 1,
+        "entryExclusions": [],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "result": {
+        "compatible": true,
+        "reason": null,
+        "status": "offline-aperture-compatible-only",
+        "assemblyAccepted": false,
+        "assemblyStatus": "requires-retained-sill-coexistence-check",
+        "runtimeStatus": "runtime_pending_webgl",
+        "assetId": "modern-source-window-surround",
+        "lod": 0,
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "source": {
+          "structureId": "145639",
+          "featureId": "133049",
+          "edgeKey": "-326.275,445.400|-336.041,435.450",
+          "edgeLengthM": 13.942008638569467
+        },
+        "opening": {
+          "bay": 0,
+          "row": 1,
+          "left": 0.6335502159642368,
+          "right": 3.30195194367813,
+          "bottom": 8.2365,
+          "top": 10.481
+        },
+        "clearApertureM": {
+          "width": 2.6684017277138934,
+          "height": 2.2445000000000004
+        },
+        "attachment": {
+          "frame": "source-edge-foundation-local",
+          "alongM": 1.9677510798211835,
+          "rootYAboveFoundationM": 8.1365,
+          "wallNormalOffsetM": 0,
+          "wallPlaneZ": 0,
+          "localOpeningBottomM": 0.1,
+          "rule": "rootY=actual windowBounds.bottom-chosen sectionM; never use sill slot Y or recenter bounds"
+        },
+        "preserveExisting": [
+          "source-footprint-height-foundation",
+          "GIS-wall-and-collision",
+          "cedar-sill",
+          "ground-datum-entry-canopy",
+          "shader-glazing"
+        ],
+        "noNewWorldPlacement": true,
+        "createsPassableOpening": false
+      }
+    },
+    {
+      "fixture": "modern-source-window-surround",
+      "lod": 1,
+      "input": {
+        "source": {
+          "structureId": "145639",
+          "featureId": "133049",
+          "edgeKey": "-326.275,445.400|-336.041,435.450",
+          "edgeLengthM": 13.942008638569467
+        },
+        "profile": {
+          "kind": "midrise-grid",
+          "styleIndex": 2,
+          "targetBayM": 3.4,
+          "storeyM": 3.35,
+          "groundStoreyM": 4.25,
+          "edgeMarginM": 0.3,
+          "pane": [
+            0.1,
+            0.9,
+            0.19,
+            0.86
+          ],
+          "wallRoughness": 0.78,
+          "glassRoughness": 0.28,
+          "brickNormalScale": 0,
+          "brickTileM": 1.728,
+          "frameWidthM": 0.1,
+          "frameDepthM": 0.1,
+          "balconies": false,
+          "wallColor": 11908005,
+          "seed": 3611
+        },
+        "heightM": 24.74,
+        "minHeightM": 0,
+        "wallTopM": 24.74,
+        "bay": 0,
+        "row": 1,
+        "entryExclusions": [],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "result": {
+        "compatible": true,
+        "reason": null,
+        "status": "offline-aperture-compatible-only",
+        "assemblyAccepted": false,
+        "assemblyStatus": "requires-retained-sill-coexistence-check",
+        "runtimeStatus": "runtime_pending_webgl",
+        "assetId": "modern-source-window-surround",
+        "lod": 1,
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "source": {
+          "structureId": "145639",
+          "featureId": "133049",
+          "edgeKey": "-326.275,445.400|-336.041,435.450",
+          "edgeLengthM": 13.942008638569467
+        },
+        "opening": {
+          "bay": 0,
+          "row": 1,
+          "left": 0.6335502159642368,
+          "right": 3.30195194367813,
+          "bottom": 8.2365,
+          "top": 10.481
+        },
+        "clearApertureM": {
+          "width": 2.6684017277138934,
+          "height": 2.2445000000000004
+        },
+        "attachment": {
+          "frame": "source-edge-foundation-local",
+          "alongM": 1.9677510798211835,
+          "rootYAboveFoundationM": 8.1365,
+          "wallNormalOffsetM": 0,
+          "wallPlaneZ": 0,
+          "localOpeningBottomM": 0.1,
+          "rule": "rootY=actual windowBounds.bottom-chosen sectionM; never use sill slot Y or recenter bounds"
+        },
+        "preserveExisting": [
+          "source-footprint-height-foundation",
+          "GIS-wall-and-collision",
+          "cedar-sill",
+          "ground-datum-entry-canopy",
+          "shader-glazing"
+        ],
+        "noNewWorldPlacement": true,
+        "createsPassableOpening": false
+      }
+    },
+    {
+      "fixture": "cedar-source-window-surround",
+      "lod": 0,
+      "input": {
+        "source": {
+          "structureId": "145755",
+          "featureId": "105546",
+          "edgeKey": "-229.513,444.825|-239.811,434.495",
+          "edgeLengthM": 14.58517058514925
+        },
+        "profile": {
+          "kind": "domestic-cladding",
+          "styleIndex": 5,
+          "targetBayM": 2.65,
+          "storeyM": 2.85,
+          "groundStoreyM": 1.35,
+          "edgeMarginM": 0.5,
+          "pane": [
+            0.25,
+            0.75,
+            0.26,
+            0.79
+          ],
+          "wallRoughness": 0.88,
+          "glassRoughness": 0.31,
+          "brickNormalScale": 0,
+          "brickTileM": 1.728,
+          "frameWidthM": 0.07,
+          "frameDepthM": 0.055,
+          "balconies": false,
+          "wallColor": 12104358,
+          "seed": 1326
+        },
+        "heightM": 8.92,
+        "minHeightM": 0,
+        "wallTopM": 8.92,
+        "bay": 0,
+        "row": 1,
+        "entryExclusions": [],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "result": {
+        "compatible": true,
+        "reason": null,
+        "status": "offline-aperture-compatible-only",
+        "assemblyAccepted": false,
+        "assemblyStatus": "requires-retained-sill-coexistence-check",
+        "runtimeStatus": "runtime_pending_webgl",
+        "assetId": "cedar-source-window-surround",
+        "lod": 0,
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "source": {
+          "structureId": "145755",
+          "featureId": "105546",
+          "edgeKey": "-229.513,444.825|-239.811,434.495",
+          "edgeLengthM": 14.58517058514925
+        },
+        "opening": {
+          "bay": 0,
+          "row": 1,
+          "left": 1.1792585292574624,
+          "right": 2.537775587772387,
+          "bottom": 4.941000000000001,
+          "top": 6.451500000000001
+        },
+        "clearApertureM": {
+          "width": 1.3585170585149247,
+          "height": 1.5105000000000004
+        },
+        "attachment": {
+          "frame": "source-edge-foundation-local",
+          "alongM": 1.8585170585149249,
+          "rootYAboveFoundationM": 4.871,
+          "wallNormalOffsetM": 0,
+          "wallPlaneZ": 0,
+          "localOpeningBottomM": 0.07,
+          "rule": "rootY=actual windowBounds.bottom-chosen sectionM; never use sill slot Y or recenter bounds"
+        },
+        "preserveExisting": [
+          "source-footprint-height-foundation",
+          "GIS-wall-and-collision",
+          "cedar-sill",
+          "ground-datum-entry-canopy",
+          "shader-glazing"
+        ],
+        "noNewWorldPlacement": true,
+        "createsPassableOpening": false
+      }
+    },
+    {
+      "fixture": "cedar-source-window-surround",
+      "lod": 1,
+      "input": {
+        "source": {
+          "structureId": "145755",
+          "featureId": "105546",
+          "edgeKey": "-229.513,444.825|-239.811,434.495",
+          "edgeLengthM": 14.58517058514925
+        },
+        "profile": {
+          "kind": "domestic-cladding",
+          "styleIndex": 5,
+          "targetBayM": 2.65,
+          "storeyM": 2.85,
+          "groundStoreyM": 1.35,
+          "edgeMarginM": 0.5,
+          "pane": [
+            0.25,
+            0.75,
+            0.26,
+            0.79
+          ],
+          "wallRoughness": 0.88,
+          "glassRoughness": 0.31,
+          "brickNormalScale": 0,
+          "brickTileM": 1.728,
+          "frameWidthM": 0.07,
+          "frameDepthM": 0.055,
+          "balconies": false,
+          "wallColor": 12104358,
+          "seed": 1326
+        },
+        "heightM": 8.92,
+        "minHeightM": 0,
+        "wallTopM": 8.92,
+        "bay": 0,
+        "row": 1,
+        "entryExclusions": [],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "result": {
+        "compatible": true,
+        "reason": null,
+        "status": "offline-aperture-compatible-only",
+        "assemblyAccepted": false,
+        "assemblyStatus": "requires-retained-sill-coexistence-check",
+        "runtimeStatus": "runtime_pending_webgl",
+        "assetId": "cedar-source-window-surround",
+        "lod": 1,
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "source": {
+          "structureId": "145755",
+          "featureId": "105546",
+          "edgeKey": "-229.513,444.825|-239.811,434.495",
+          "edgeLengthM": 14.58517058514925
+        },
+        "opening": {
+          "bay": 0,
+          "row": 1,
+          "left": 1.1792585292574624,
+          "right": 2.537775587772387,
+          "bottom": 4.941000000000001,
+          "top": 6.451500000000001
+        },
+        "clearApertureM": {
+          "width": 1.3585170585149247,
+          "height": 1.5105000000000004
+        },
+        "attachment": {
+          "frame": "source-edge-foundation-local",
+          "alongM": 1.8585170585149249,
+          "rootYAboveFoundationM": 4.871,
+          "wallNormalOffsetM": 0,
+          "wallPlaneZ": 0,
+          "localOpeningBottomM": 0.07,
+          "rule": "rootY=actual windowBounds.bottom-chosen sectionM; never use sill slot Y or recenter bounds"
+        },
+        "preserveExisting": [
+          "source-footprint-height-foundation",
+          "GIS-wall-and-collision",
+          "cedar-sill",
+          "ground-datum-entry-canopy",
+          "shader-glazing"
+        ],
+        "noNewWorldPlacement": true,
+        "createsPassableOpening": false
+      }
+    }
+  ]
+}

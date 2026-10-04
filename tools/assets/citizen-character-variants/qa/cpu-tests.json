@@ -1,0 +1,1953 @@
+{
+  "schemaVersion": 1,
+  "status": "pass",
+  "checksPassed": 57,
+  "checksFailed": 0,
+  "environment": {
+    "node": "v24.19.0",
+    "three": "185",
+    "webgl": false
+  },
+  "checks": [
+    {
+      "name": "citizen.lod0: geometry, units, skin, roles",
+      "status": "pass",
+      "details": {
+        "triangles": 37735,
+        "vertices": 29092,
+        "primitives": 1,
+        "boundsM": {
+          "min": [
+            -0.36451148986816406,
+            0.0029903140384703875,
+            -0.24799999594688416
+          ],
+          "max": [
+            0.36437079310417175,
+            1.8052752017974854,
+            0.1780000627040863
+          ],
+          "size": [
+            0.7288822829723358,
+            1.802284887759015,
+            0.42600005865097046
+          ]
+        },
+        "materials": [
+          "citizen-atlas-protected"
+        ]
+      }
+    },
+    {
+      "name": "citizen.lod0: exact inverse binds",
+      "status": "pass",
+      "details": {
+        "boneCount": 22,
+        "bitExactFloat32": true
+      }
+    },
+    {
+      "name": "citizen.lod0: original clips, root motion and 120 sampled bone poses",
+      "status": "pass",
+      "details": {
+        "samples": 120,
+        "maxBoneMatrixDifference": 7.351965205515398e-7,
+        "minSoleY": 0.0012306810318573834,
+        "durations": {
+          "idle": 2,
+          "walk": 1,
+          "run": 0.8
+        },
+        "strideM": {
+          "idle": 0,
+          "walk": 1,
+          "run": 1.9
+        }
+      }
+    },
+    {
+      "name": "citizen.lod0: protected pelvis UV, normals, skin and silhouette vertices",
+      "status": "pass",
+      "details": {
+        "protectedVertices": 18020,
+        "authorizedRemovedBackpackVertices": 0,
+        "maxNormalL1Difference": 0.00045943818986415863,
+        "maxJointWeightDifference": 5.960464477539063e-8,
+        "coordinatesUvTolerance": 0.00001,
+        "normalL1Tolerance": 0.001,
+        "normalNote": "Blender custom split-normal storage round-trip quantization; identical bound across baseline and all LODs"
+      }
+    },
+    {
+      "name": "citizen.lod1: geometry, units, skin, roles",
+      "status": "pass",
+      "details": {
+        "triangles": 31767,
+        "vertices": 25977,
+        "primitives": 1,
+        "boundsM": {
+          "min": [
+            -0.36451148986816406,
+            0.0029903140384703875,
+            -0.24799999594688416
+          ],
+          "max": [
+            0.36437079310417175,
+            1.8052752017974854,
+            0.1780000627040863
+          ],
+          "size": [
+            0.7288822829723358,
+            1.802284887759015,
+            0.42600005865097046
+          ]
+        },
+        "materials": [
+          "citizen-atlas-protected"
+        ]
+      }
+    },
+    {
+      "name": "citizen.lod1: exact inverse binds",
+      "status": "pass",
+      "details": {
+        "boneCount": 22,
+        "bitExactFloat32": true
+      }
+    },
+    {
+      "name": "citizen.lod1: original clips, root motion and 120 sampled bone poses",
+      "status": "pass",
+      "details": {
+        "samples": 120,
+        "maxBoneMatrixDifference": 7.351965205515398e-7,
+        "minSoleY": 0.0012306810318573834,
+        "durations": {
+          "idle": 2,
+          "walk": 1,
+          "run": 0.8
+        },
+        "strideM": {
+          "idle": 0,
+          "walk": 1,
+          "run": 1.9
+        }
+      }
+    },
+    {
+      "name": "citizen.lod1: protected pelvis UV, normals, skin and silhouette vertices",
+      "status": "pass",
+      "details": {
+        "protectedVertices": 18020,
+        "authorizedRemovedBackpackVertices": 0,
+        "maxNormalL1Difference": 0.00045943818986415863,
+        "maxJointWeightDifference": 5.960464477539063e-8,
+        "coordinatesUvTolerance": 0.00001,
+        "normalL1Tolerance": 0.001,
+        "normalNote": "Blender custom split-normal storage round-trip quantization; identical bound across baseline and all LODs"
+      }
+    },
+    {
+      "name": "citizen.lod2: geometry, units, skin, roles",
+      "status": "pass",
+      "details": {
+        "triangles": 29931,
+        "vertices": 24803,
+        "primitives": 1,
+        "boundsM": {
+          "min": [
+            -0.36451148986816406,
+            0.0029903140384703875,
+            -0.24799999594688416
+          ],
+          "max": [
+            0.36437079310417175,
+            1.8052752017974854,
+            0.1780000627040863
+          ],
+          "size": [
+            0.7288822829723358,
+            1.802284887759015,
+            0.42600005865097046
+          ]
+        },
+        "materials": [
+          "citizen-atlas-protected"
+        ]
+      }
+    },
+    {
+      "name": "citizen.lod2: exact inverse binds",
+      "status": "pass",
+      "details": {
+        "boneCount": 22,
+        "bitExactFloat32": true
+      }
+    },
+    {
+      "name": "citizen.lod2: original clips, root motion and 120 sampled bone poses",
+      "status": "pass",
+      "details": {
+        "samples": 120,
+        "maxBoneMatrixDifference": 7.351965205515398e-7,
+        "minSoleY": 0.0012306810318573834,
+        "durations": {
+          "idle": 2,
+          "walk": 1,
+          "run": 0.8
+        },
+        "strideM": {
+          "idle": 0,
+          "walk": 1,
+          "run": 1.9
+        }
+      }
+    },
+    {
+      "name": "citizen.lod2: protected pelvis UV, normals, skin and silhouette vertices",
+      "status": "pass",
+      "details": {
+        "protectedVertices": 18020,
+        "authorizedRemovedBackpackVertices": 0,
+        "maxNormalL1Difference": 0.00045943818986415863,
+        "maxJointWeightDifference": 5.960464477539063e-8,
+        "coordinatesUvTolerance": 0.00001,
+        "normalL1Tolerance": 0.001,
+        "normalNote": "Blender custom split-normal storage round-trip quantization; identical bound across baseline and all LODs"
+      }
+    },
+    {
+      "name": "police.lod0: geometry, units, skin, roles",
+      "status": "pass",
+      "details": {
+        "triangles": 38483,
+        "vertices": 29734,
+        "primitives": 5,
+        "boundsM": {
+          "min": [
+            -0.36451148986816406,
+            0.0029903140384703875,
+            -0.24799999594688416
+          ],
+          "max": [
+            0.36437079310417175,
+            1.8579999208450317,
+            0.1780000627040863
+          ],
+          "size": [
+            0.7288822829723358,
+            1.8550096068065614,
+            0.42600005865097046
+          ]
+        },
+        "materials": [
+          "citizen-atlas-protected",
+          "police-uniform-clothing-only",
+          "police-hat-fabric",
+          "police-peak-leather",
+          "police-original-badge-brass"
+        ]
+      }
+    },
+    {
+      "name": "police.lod0: exact inverse binds",
+      "status": "pass",
+      "details": {
+        "boneCount": 22,
+        "bitExactFloat32": true
+      }
+    },
+    {
+      "name": "police.lod0: original clips, root motion and 120 sampled bone poses",
+      "status": "pass",
+      "details": {
+        "samples": 120,
+        "maxBoneMatrixDifference": 7.351965205515398e-7,
+        "minSoleY": 0.0012306810318573834,
+        "durations": {
+          "idle": 2,
+          "walk": 1,
+          "run": 0.8
+        },
+        "strideM": {
+          "idle": 0,
+          "walk": 1,
+          "run": 1.9
+        }
+      }
+    },
+    {
+      "name": "police.lod0: protected pelvis UV, normals, skin and silhouette vertices",
+      "status": "pass",
+      "details": {
+        "protectedVertices": 18020,
+        "authorizedRemovedBackpackVertices": 0,
+        "maxNormalL1Difference": 0.00045943818986415863,
+        "maxJointWeightDifference": 5.960464477539063e-8,
+        "coordinatesUvTolerance": 0.00001,
+        "normalL1Tolerance": 0.001,
+        "normalNote": "Blender custom split-normal storage round-trip quantization; identical bound across baseline and all LODs"
+      }
+    },
+    {
+      "name": "police.lod0: uniform cannot tint skin",
+      "status": "pass",
+      "details": {
+        "protectedSkinUsesUnchangedSharedAtlas": true,
+        "uniformSeparateMaterial": true
+      }
+    },
+    {
+      "name": "police.lod1: geometry, units, skin, roles",
+      "status": "pass",
+      "details": {
+        "triangles": 32515,
+        "vertices": 26619,
+        "primitives": 5,
+        "boundsM": {
+          "min": [
+            -0.36451148986816406,
+            0.0029903140384703875,
+            -0.24799999594688416
+          ],
+          "max": [
+            0.36437079310417175,
+            1.8579999208450317,
+            0.1780000627040863
+          ],
+          "size": [
+            0.7288822829723358,
+            1.8550096068065614,
+            0.42600005865097046
+          ]
+        },
+        "materials": [
+          "citizen-atlas-protected",
+          "police-uniform-clothing-only",
+          "police-hat-fabric",
+          "police-peak-leather",
+          "police-original-badge-brass"
+        ]
+      }
+    },
+    {
+      "name": "police.lod1: exact inverse binds",
+      "status": "pass",
+      "details": {
+        "boneCount": 22,
+        "bitExactFloat32": true
+      }
+    },
+    {
+      "name": "police.lod1: original clips, root motion and 120 sampled bone poses",
+      "status": "pass",
+      "details": {
+        "samples": 120,
+        "maxBoneMatrixDifference": 7.351965205515398e-7,
+        "minSoleY": 0.0012306810318573834,
+        "durations": {
+          "idle": 2,
+          "walk": 1,
+          "run": 0.8
+        },
+        "strideM": {
+          "idle": 0,
+          "walk": 1,
+          "run": 1.9
+        }
+      }
+    },
+    {
+      "name": "police.lod1: protected pelvis UV, normals, skin and silhouette vertices",
+      "status": "pass",
+      "details": {
+        "protectedVertices": 18020,
+        "authorizedRemovedBackpackVertices": 0,
+        "maxNormalL1Difference": 0.00045943818986415863,
+        "maxJointWeightDifference": 5.960464477539063e-8,
+        "coordinatesUvTolerance": 0.00001,
+        "normalL1Tolerance": 0.001,
+        "normalNote": "Blender custom split-normal storage round-trip quantization; identical bound across baseline and all LODs"
+      }
+    },
+    {
+      "name": "police.lod1: uniform cannot tint skin",
+      "status": "pass",
+      "details": {
+        "protectedSkinUsesUnchangedSharedAtlas": true,
+        "uniformSeparateMaterial": true
+      }
+    },
+    {
+      "name": "police.lod2: geometry, units, skin, roles",
+      "status": "pass",
+      "details": {
+        "triangles": 30679,
+        "vertices": 25445,
+        "primitives": 5,
+        "boundsM": {
+          "min": [
+            -0.36451148986816406,
+            0.0029903140384703875,
+            -0.24799999594688416
+          ],
+          "max": [
+            0.36437079310417175,
+            1.8579999208450317,
+            0.1780000627040863
+          ],
+          "size": [
+            0.7288822829723358,
+            1.8550096068065614,
+            0.42600005865097046
+          ]
+        },
+        "materials": [
+          "citizen-atlas-protected",
+          "police-uniform-clothing-only",
+          "police-hat-fabric",
+          "police-peak-leather",
+          "police-original-badge-brass"
+        ]
+      }
+    },
+    {
+      "name": "police.lod2: exact inverse binds",
+      "status": "pass",
+      "details": {
+        "boneCount": 22,
+        "bitExactFloat32": true
+      }
+    },
+    {
+      "name": "police.lod2: original clips, root motion and 120 sampled bone poses",
+      "status": "pass",
+      "details": {
+        "samples": 120,
+        "maxBoneMatrixDifference": 7.351965205515398e-7,
+        "minSoleY": 0.0012306810318573834,
+        "durations": {
+          "idle": 2,
+          "walk": 1,
+          "run": 0.8
+        },
+        "strideM": {
+          "idle": 0,
+          "walk": 1,
+          "run": 1.9
+        }
+      }
+    },
+    {
+      "name": "police.lod2: protected pelvis UV, normals, skin and silhouette vertices",
+      "status": "pass",
+      "details": {
+        "protectedVertices": 18020,
+        "authorizedRemovedBackpackVertices": 0,
+        "maxNormalL1Difference": 0.00045943818986415863,
+        "maxJointWeightDifference": 5.960464477539063e-8,
+        "coordinatesUvTolerance": 0.00001,
+        "normalL1Tolerance": 0.001,
+        "normalNote": "Blender custom split-normal storage round-trip quantization; identical bound across baseline and all LODs"
+      }
+    },
+    {
+      "name": "police.lod2: uniform cannot tint skin",
+      "status": "pass",
+      "details": {
+        "protectedSkinUsesUnchangedSharedAtlas": true,
+        "uniformSeparateMaterial": true
+      }
+    },
+    {
+      "name": "driver.lod0: geometry, units, skin, roles",
+      "status": "pass",
+      "details": {
+        "triangles": 37735,
+        "vertices": 29092,
+        "primitives": 1,
+        "boundsM": {
+          "min": [
+            -0.36451148986816406,
+            0.0029903140384703875,
+            -0.24799999594688416
+          ],
+          "max": [
+            0.36437079310417175,
+            1.8052752017974854,
+            0.1780000627040863
+          ],
+          "size": [
+            0.7288822829723358,
+            1.802284887759015,
+            0.42600005865097046
+          ]
+        },
+        "materials": [
+          "citizen-atlas-protected"
+        ]
+      }
+    },
+    {
+      "name": "driver.lod0: exact inverse binds",
+      "status": "pass",
+      "details": {
+        "boneCount": 22,
+        "bitExactFloat32": true
+      }
+    },
+    {
+      "name": "driver.lod0: original clips, root motion and 120 sampled bone poses",
+      "status": "pass",
+      "details": {
+        "samples": 120,
+        "maxBoneMatrixDifference": 7.351965205515398e-7,
+        "minSoleY": 0.0012306810318573834,
+        "durations": {
+          "idle": 2,
+          "walk": 1,
+          "run": 0.8
+        },
+        "strideM": {
+          "idle": 0,
+          "walk": 1,
+          "run": 1.9
+        }
+      }
+    },
+    {
+      "name": "driver.lod0: protected pelvis UV, normals, skin and silhouette vertices",
+      "status": "pass",
+      "details": {
+        "protectedVertices": 18020,
+        "authorizedRemovedBackpackVertices": 0,
+        "maxNormalL1Difference": 0.00045943818986415863,
+        "maxJointWeightDifference": 5.960464477539063e-8,
+        "coordinatesUvTolerance": 0.00001,
+        "normalL1Tolerance": 0.001,
+        "normalNote": "Blender custom split-normal storage round-trip quantization; identical bound across baseline and all LODs"
+      }
+    },
+    {
+      "name": "driver.lod0: seated clip dimensions and same-rig fit",
+      "status": "pass",
+      "details": {
+        "boundsCharacterLocalM": {
+          "min": [
+            -0.30786729314006345,
+            0.478990483330277,
+            -0.24056282697736223
+          ],
+          "max": [
+            0.3076988092721806,
+            1.5860225871518137,
+            0.6959998868958363
+          ],
+          "size": [
+            0.6155661024122441,
+            1.1070321038215367,
+            0.9365627138731984
+          ]
+        },
+        "roadsterPlacementM": [
+          0.44,
+          0,
+          -0.06
+        ],
+        "anchorsRoadsterM": {
+          "hips": [
+            0.4400000000000003,
+            0.7200000286102298,
+            -0.05999998767772374
+          ],
+          "head": [
+            0.4399999999999967,
+            1.3192924178852496,
+            0.04187674611207093
+          ],
+          "handL": [
+            0.5819998339901933,
+            0.8802384538903142,
+            0.3501868964816434
+          ],
+          "handR": [
+            0.2980001238410796,
+            0.8802384636354201,
+            0.35018715617621277
+          ],
+          "footL": [
+            0.5699998779562017,
+            0.6060001837261202,
+            0.43999989344854284
+          ],
+          "footR": [
+            0.3100000682386578,
+            0.6059999826959561,
+            0.43999984752462856
+          ]
+        }
+      }
+    },
+    {
+      "name": "driver.lod1: geometry, units, skin, roles",
+      "status": "pass",
+      "details": {
+        "triangles": 31767,
+        "vertices": 25977,
+        "primitives": 1,
+        "boundsM": {
+          "min": [
+            -0.36451148986816406,
+            0.0029903140384703875,
+            -0.24799999594688416
+          ],
+          "max": [
+            0.36437079310417175,
+            1.8052752017974854,
+            0.1780000627040863
+          ],
+          "size": [
+            0.7288822829723358,
+            1.802284887759015,
+            0.42600005865097046
+          ]
+        },
+        "materials": [
+          "citizen-atlas-protected"
+        ]
+      }
+    },
+    {
+      "name": "driver.lod1: exact inverse binds",
+      "status": "pass",
+      "details": {
+        "boneCount": 22,
+        "bitExactFloat32": true
+      }
+    },
+    {
+      "name": "driver.lod1: original clips, root motion and 120 sampled bone poses",
+      "status": "pass",
+      "details": {
+        "samples": 120,
+        "maxBoneMatrixDifference": 7.351965205515398e-7,
+        "minSoleY": 0.0012306810318573834,
+        "durations": {
+          "idle": 2,
+          "walk": 1,
+          "run": 0.8
+        },
+        "strideM": {
+          "idle": 0,
+          "walk": 1,
+          "run": 1.9
+        }
+      }
+    },
+    {
+      "name": "driver.lod1: protected pelvis UV, normals, skin and silhouette vertices",
+      "status": "pass",
+      "details": {
+        "protectedVertices": 18020,
+        "authorizedRemovedBackpackVertices": 0,
+        "maxNormalL1Difference": 0.00045943818986415863,
+        "maxJointWeightDifference": 5.960464477539063e-8,
+        "coordinatesUvTolerance": 0.00001,
+        "normalL1Tolerance": 0.001,
+        "normalNote": "Blender custom split-normal storage round-trip quantization; identical bound across baseline and all LODs"
+      }
+    },
+    {
+      "name": "driver.lod1: seated clip dimensions and same-rig fit",
+      "status": "pass",
+      "details": {
+        "boundsCharacterLocalM": {
+          "min": [
+            -0.3076988724476014,
+            0.478990483330277,
+            -0.24056282697736223
+          ],
+          "max": [
+            0.3076988092721806,
+            1.5860225871518137,
+            0.6959998868958363
+          ],
+          "size": [
+            0.6153976817197819,
+            1.1070321038215367,
+            0.9365627138731984
+          ]
+        },
+        "roadsterPlacementM": [
+          0.44,
+          0,
+          -0.06
+        ],
+        "anchorsRoadsterM": {
+          "hips": [
+            0.4400000000000003,
+            0.7200000286102298,
+            -0.05999998767772374
+          ],
+          "head": [
+            0.4399999999999967,
+            1.3192924178852496,
+            0.04187674611207093
+          ],
+          "handL": [
+            0.5819998339901933,
+            0.8802384538903142,
+            0.3501868964816434
+          ],
+          "handR": [
+            0.2980001238410796,
+            0.8802384636354201,
+            0.35018715617621277
+          ],
+          "footL": [
+            0.5699998779562017,
+            0.6060001837261202,
+            0.43999989344854284
+          ],
+          "footR": [
+            0.3100000682386578,
+            0.6059999826959561,
+            0.43999984752462856
+          ]
+        }
+      }
+    },
+    {
+      "name": "driver.lod2: geometry, units, skin, roles",
+      "status": "pass",
+      "details": {
+        "triangles": 29931,
+        "vertices": 24803,
+        "primitives": 1,
+        "boundsM": {
+          "min": [
+            -0.36451148986816406,
+            0.0029903140384703875,
+            -0.24799999594688416
+          ],
+          "max": [
+            0.36437079310417175,
+            1.8052752017974854,
+            0.1780000627040863
+          ],
+          "size": [
+            0.7288822829723358,
+            1.802284887759015,
+            0.42600005865097046
+          ]
+        },
+        "materials": [
+          "citizen-atlas-protected"
+        ]
+      }
+    },
+    {
+      "name": "driver.lod2: exact inverse binds",
+      "status": "pass",
+      "details": {
+        "boneCount": 22,
+        "bitExactFloat32": true
+      }
+    },
+    {
+      "name": "driver.lod2: original clips, root motion and 120 sampled bone poses",
+      "status": "pass",
+      "details": {
+        "samples": 120,
+        "maxBoneMatrixDifference": 7.351965205515398e-7,
+        "minSoleY": 0.0012306810318573834,
+        "durations": {
+          "idle": 2,
+          "walk": 1,
+          "run": 0.8
+        },
+        "strideM": {
+          "idle": 0,
+          "walk": 1,
+          "run": 1.9
+        }
+      }
+    },
+    {
+      "name": "driver.lod2: protected pelvis UV, normals, skin and silhouette vertices",
+      "status": "pass",
+      "details": {
+        "protectedVertices": 18020,
+        "authorizedRemovedBackpackVertices": 0,
+        "maxNormalL1Difference": 0.00045943818986415863,
+        "maxJointWeightDifference": 5.960464477539063e-8,
+        "coordinatesUvTolerance": 0.00001,
+        "normalL1Tolerance": 0.001,
+        "normalNote": "Blender custom split-normal storage round-trip quantization; identical bound across baseline and all LODs"
+      }
+    },
+    {
+      "name": "driver.lod2: seated clip dimensions and same-rig fit",
+      "status": "pass",
+      "details": {
+        "boundsCharacterLocalM": {
+          "min": [
+            -0.3076988724476014,
+            0.478990483330277,
+            -0.24056282697736223
+          ],
+          "max": [
+            0.3076988092721806,
+            1.5860225871518137,
+            0.6959998868958363
+          ],
+          "size": [
+            0.6153976817197819,
+            1.1070321038215367,
+            0.9365627138731984
+          ]
+        },
+        "roadsterPlacementM": [
+          0.44,
+          0,
+          -0.06
+        ],
+        "anchorsRoadsterM": {
+          "hips": [
+            0.4400000000000003,
+            0.7200000286102298,
+            -0.05999998767772374
+          ],
+          "head": [
+            0.4399999999999967,
+            1.3192924178852496,
+            0.04187674611207093
+          ],
+          "handL": [
+            0.5819998339901933,
+            0.8802384538903142,
+            0.3501868964816434
+          ],
+          "handR": [
+            0.2980001238410796,
+            0.8802384636354201,
+            0.35018715617621277
+          ],
+          "footL": [
+            0.5699998779562017,
+            0.6060001837261202,
+            0.43999989344854284
+          ],
+          "footR": [
+            0.3100000682386578,
+            0.6059999826959561,
+            0.43999984752462856
+          ]
+        }
+      }
+    },
+    {
+      "name": "driver-roadster-fit.lod0: geometry, units, skin, roles",
+      "status": "pass",
+      "details": {
+        "triangles": 36417,
+        "vertices": 27826,
+        "primitives": 2,
+        "boundsM": {
+          "min": [
+            -0.36451148986816406,
+            0.0029903140384703875,
+            -0.14308057725429535
+          ],
+          "max": [
+            0.36437079310417175,
+            1.8052752017974854,
+            0.1780000627040863
+          ],
+          "size": [
+            0.7288822829723358,
+            1.802284887759015,
+            0.32108063995838165
+          ]
+        },
+        "materials": [
+          "citizen-atlas-protected"
+        ]
+      }
+    },
+    {
+      "name": "driver-roadster-fit.lod0: exact inverse binds",
+      "status": "pass",
+      "details": {
+        "boneCount": 22,
+        "bitExactFloat32": true
+      }
+    },
+    {
+      "name": "driver-roadster-fit.lod0: original clips, root motion and 120 sampled bone poses",
+      "status": "pass",
+      "details": {
+        "samples": 120,
+        "maxBoneMatrixDifference": 7.351965205515398e-7,
+        "minSoleY": 0.0012306810318573834,
+        "durations": {
+          "idle": 2,
+          "walk": 1,
+          "run": 0.8
+        },
+        "strideM": {
+          "idle": 0,
+          "walk": 1,
+          "run": 1.9
+        }
+      }
+    },
+    {
+      "name": "driver-roadster-fit.lod0: protected pelvis UV, normals, skin and silhouette vertices",
+      "status": "pass",
+      "details": {
+        "protectedVertices": 17801,
+        "authorizedRemovedBackpackVertices": 1266,
+        "maxNormalL1Difference": 0.0005001908866688609,
+        "maxJointWeightDifference": 5.960464477539063e-8,
+        "coordinatesUvTolerance": 0.00001,
+        "normalL1Tolerance": 0.001,
+        "normalNote": "Blender custom split-normal storage round-trip quantization; identical bound across baseline and all LODs"
+      }
+    },
+    {
+      "name": "driver-roadster-fit.lod0: seated clip dimensions and same-rig fit",
+      "status": "pass",
+      "details": {
+        "boundsCharacterLocalM": {
+          "min": [
+            -0.30655678717570767,
+            0.4789906359952818,
+            -0.19170211113288121
+          ],
+          "max": [
+            0.30725888336866325,
+            1.589301580520836,
+            0.9160001938887365
+          ],
+          "size": [
+            0.6138156705443709,
+            1.1103109445255541,
+            1.1077023050216177
+          ]
+        },
+        "roadsterPlacementM": [
+          0.44,
+          0,
+          -0.06
+        ],
+        "anchorsRoadsterM": {
+          "hips": [
+            0.4400000000000003,
+            0.7200000286102298,
+            -0.05999998767772374
+          ],
+          "head": [
+            0.44000000000000006,
+            1.3252313308565253,
+            -0.12819475290559001
+          ],
+          "handL": [
+            0.5999999194848831,
+            1.0599998404656001,
+            0.2719999903952705
+          ],
+          "handR": [
+            0.28000015028754416,
+            1.059999903096428,
+            0.27200003873236084
+          ],
+          "footL": [
+            0.5699999626536949,
+            0.6060003521947155,
+            0.6600001493654921
+          ],
+          "footR": [
+            0.310000063000641,
+            0.6060001772061744,
+            0.6600000556294563
+          ]
+        }
+      }
+    },
+    {
+      "name": "driver-roadster-fit.lod1: geometry, units, skin, roles",
+      "status": "pass",
+      "details": {
+        "triangles": 30449,
+        "vertices": 24711,
+        "primitives": 2,
+        "boundsM": {
+          "min": [
+            -0.36451148986816406,
+            0.0029903140384703875,
+            -0.14308057725429535
+          ],
+          "max": [
+            0.36437079310417175,
+            1.8052752017974854,
+            0.1780000627040863
+          ],
+          "size": [
+            0.7288822829723358,
+            1.802284887759015,
+            0.32108063995838165
+          ]
+        },
+        "materials": [
+          "citizen-atlas-protected"
+        ]
+      }
+    },
+    {
+      "name": "driver-roadster-fit.lod1: exact inverse binds",
+      "status": "pass",
+      "details": {
+        "boneCount": 22,
+        "bitExactFloat32": true
+      }
+    },
+    {
+      "name": "driver-roadster-fit.lod1: original clips, root motion and 120 sampled bone poses",
+      "status": "pass",
+      "details": {
+        "samples": 120,
+        "maxBoneMatrixDifference": 7.351965205515398e-7,
+        "minSoleY": 0.0012306810318573834,
+        "durations": {
+          "idle": 2,
+          "walk": 1,
+          "run": 0.8
+        },
+        "strideM": {
+          "idle": 0,
+          "walk": 1,
+          "run": 1.9
+        }
+      }
+    },
+    {
+      "name": "driver-roadster-fit.lod1: protected pelvis UV, normals, skin and silhouette vertices",
+      "status": "pass",
+      "details": {
+        "protectedVertices": 17801,
+        "authorizedRemovedBackpackVertices": 1266,
+        "maxNormalL1Difference": 0.0005001908866688609,
+        "maxJointWeightDifference": 5.960464477539063e-8,
+        "coordinatesUvTolerance": 0.00001,
+        "normalL1Tolerance": 0.001,
+        "normalNote": "Blender custom split-normal storage round-trip quantization; identical bound across baseline and all LODs"
+      }
+    },
+    {
+      "name": "driver-roadster-fit.lod1: seated clip dimensions and same-rig fit",
+      "status": "pass",
+      "details": {
+        "boundsCharacterLocalM": {
+          "min": [
+            -0.30652355878794,
+            0.4789906359952818,
+            -0.19170211113288121
+          ],
+          "max": [
+            0.30725888336866325,
+            1.589301580520836,
+            0.9160001938887365
+          ],
+          "size": [
+            0.6137824421566033,
+            1.1103109445255541,
+            1.1077023050216177
+          ]
+        },
+        "roadsterPlacementM": [
+          0.44,
+          0,
+          -0.06
+        ],
+        "anchorsRoadsterM": {
+          "hips": [
+            0.4400000000000003,
+            0.7200000286102298,
+            -0.05999998767772374
+          ],
+          "head": [
+            0.44000000000000006,
+            1.3252313308565253,
+            -0.12819475290559001
+          ],
+          "handL": [
+            0.5999999194848831,
+            1.0599998404656001,
+            0.2719999903952705
+          ],
+          "handR": [
+            0.28000015028754416,
+            1.059999903096428,
+            0.27200003873236084
+          ],
+          "footL": [
+            0.5699999626536949,
+            0.6060003521947155,
+            0.6600001493654921
+          ],
+          "footR": [
+            0.310000063000641,
+            0.6060001772061744,
+            0.6600000556294563
+          ]
+        }
+      }
+    },
+    {
+      "name": "driver-roadster-fit.lod2: geometry, units, skin, roles",
+      "status": "pass",
+      "details": {
+        "triangles": 28613,
+        "vertices": 23537,
+        "primitives": 2,
+        "boundsM": {
+          "min": [
+            -0.36451148986816406,
+            0.0029903140384703875,
+            -0.14308057725429535
+          ],
+          "max": [
+            0.36437079310417175,
+            1.8052752017974854,
+            0.1780000627040863
+          ],
+          "size": [
+            0.7288822829723358,
+            1.802284887759015,
+            0.32108063995838165
+          ]
+        },
+        "materials": [
+          "citizen-atlas-protected"
+        ]
+      }
+    },
+    {
+      "name": "driver-roadster-fit.lod2: exact inverse binds",
+      "status": "pass",
+      "details": {
+        "boneCount": 22,
+        "bitExactFloat32": true
+      }
+    },
+    {
+      "name": "driver-roadster-fit.lod2: original clips, root motion and 120 sampled bone poses",
+      "status": "pass",
+      "details": {
+        "samples": 120,
+        "maxBoneMatrixDifference": 7.351965205515398e-7,
+        "minSoleY": 0.0012306810318573834,
+        "durations": {
+          "idle": 2,
+          "walk": 1,
+          "run": 0.8
+        },
+        "strideM": {
+          "idle": 0,
+          "walk": 1,
+          "run": 1.9
+        }
+      }
+    },
+    {
+      "name": "driver-roadster-fit.lod2: protected pelvis UV, normals, skin and silhouette vertices",
+      "status": "pass",
+      "details": {
+        "protectedVertices": 17801,
+        "authorizedRemovedBackpackVertices": 1266,
+        "maxNormalL1Difference": 0.0005001908866688609,
+        "maxJointWeightDifference": 5.960464477539063e-8,
+        "coordinatesUvTolerance": 0.00001,
+        "normalL1Tolerance": 0.001,
+        "normalNote": "Blender custom split-normal storage round-trip quantization; identical bound across baseline and all LODs"
+      }
+    },
+    {
+      "name": "driver-roadster-fit.lod2: seated clip dimensions and same-rig fit",
+      "status": "pass",
+      "details": {
+        "boundsCharacterLocalM": {
+          "min": [
+            -0.30652355878794,
+            0.4789906359952818,
+            -0.19170211113288121
+          ],
+          "max": [
+            0.30725888336866325,
+            1.589301580520836,
+            0.9160001938887365
+          ],
+          "size": [
+            0.6137824421566033,
+            1.1103109445255541,
+            1.1077023050216177
+          ]
+        },
+        "roadsterPlacementM": [
+          0.44,
+          0,
+          -0.06
+        ],
+        "anchorsRoadsterM": {
+          "hips": [
+            0.4400000000000003,
+            0.7200000286102298,
+            -0.05999998767772374
+          ],
+          "head": [
+            0.44000000000000006,
+            1.3252313308565253,
+            -0.12819475290559001
+          ],
+          "handL": [
+            0.5999999194848831,
+            1.0599998404656001,
+            0.2719999903952705
+          ],
+          "handR": [
+            0.28000015028754416,
+            1.059999903096428,
+            0.27200003873236084
+          ],
+          "footL": [
+            0.5699999626536949,
+            0.6060003521947155,
+            0.6600001493654921
+          ],
+          "footR": [
+            0.310000063000641,
+            0.6060001772061744,
+            0.6600000556294563
+          ]
+        }
+      }
+    }
+  ],
+  "assets": [
+    {
+      "id": "citizen.lod0",
+      "bytes": 2280072,
+      "sha256": "14733b2a44621b91ff620821faa9a361fd6369458c1a50cb737df9b18453d38f",
+      "triangles": 37735,
+      "vertices": 29092,
+      "primitives": 1,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.42600005865097046
+        ]
+      },
+      "materials": [
+        "citizen-atlas-protected"
+      ],
+      "maxBoneMatrixDifference": 7.351965205515398e-7
+    },
+    {
+      "id": "citizen.lod1",
+      "bytes": 2032440,
+      "sha256": "5cad4fcfc1782d6b5dfa7663f19dca84142b4d4b75c3cffc08e107fc6ef8ef6d",
+      "triangles": 31767,
+      "vertices": 25977,
+      "primitives": 1,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.42600005865097046
+        ]
+      },
+      "materials": [
+        "citizen-atlas-protected"
+      ],
+      "maxBoneMatrixDifference": 7.351965205515398e-7
+    },
+    {
+      "id": "citizen.lod2",
+      "bytes": 1941592,
+      "sha256": "2741325b8dd5b26756d0fa67ed809361013326c9ed21c6dca30bf4d70f425a33",
+      "triangles": 29931,
+      "vertices": 24803,
+      "primitives": 1,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.42600005865097046
+        ]
+      },
+      "materials": [
+        "citizen-atlas-protected"
+      ],
+      "maxBoneMatrixDifference": 7.351965205515398e-7
+    },
+    {
+      "id": "police.lod0",
+      "bytes": 2334200,
+      "sha256": "0d312d3fda05662c3612f0aa29bcf26f2870f23dde8cbcbc6c260d2c9fdcedb0",
+      "triangles": 38483,
+      "vertices": 29734,
+      "primitives": 5,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8579999208450317,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.8550096068065614,
+          0.42600005865097046
+        ]
+      },
+      "materials": [
+        "citizen-atlas-protected",
+        "police-uniform-clothing-only",
+        "police-hat-fabric",
+        "police-peak-leather",
+        "police-original-badge-brass"
+      ],
+      "maxBoneMatrixDifference": 7.351965205515398e-7
+    },
+    {
+      "id": "police.lod1",
+      "bytes": 2086564,
+      "sha256": "325a1912d33c8f923954ed308883ff27577d6e200d3d40e31864e4ea1350411c",
+      "triangles": 32515,
+      "vertices": 26619,
+      "primitives": 5,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8579999208450317,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.8550096068065614,
+          0.42600005865097046
+        ]
+      },
+      "materials": [
+        "citizen-atlas-protected",
+        "police-uniform-clothing-only",
+        "police-hat-fabric",
+        "police-peak-leather",
+        "police-original-badge-brass"
+      ],
+      "maxBoneMatrixDifference": 7.351965205515398e-7
+    },
+    {
+      "id": "police.lod2",
+      "bytes": 1995712,
+      "sha256": "bb6ca6b0b780b4c1abd774ad3a790da10d86008988ac82a9f738e6cc6e8b001d",
+      "triangles": 30679,
+      "vertices": 25445,
+      "primitives": 5,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8579999208450317,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.8550096068065614,
+          0.42600005865097046
+        ]
+      },
+      "materials": [
+        "citizen-atlas-protected",
+        "police-uniform-clothing-only",
+        "police-hat-fabric",
+        "police-peak-leather",
+        "police-original-badge-brass"
+      ],
+      "maxBoneMatrixDifference": 7.351965205515398e-7
+    },
+    {
+      "id": "driver.lod0",
+      "bytes": 2296116,
+      "sha256": "221f61dd1513ae63974234e6ec3458891cb8a0d6f1f703b2844e8e4b115759c9",
+      "triangles": 37735,
+      "vertices": 29092,
+      "primitives": 1,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.42600005865097046
+        ]
+      },
+      "materials": [
+        "citizen-atlas-protected"
+      ],
+      "maxBoneMatrixDifference": 7.351965205515398e-7,
+      "seated": {
+        "boundsCharacterLocalM": {
+          "min": [
+            -0.30786729314006345,
+            0.478990483330277,
+            -0.24056282697736223
+          ],
+          "max": [
+            0.3076988092721806,
+            1.5860225871518137,
+            0.6959998868958363
+          ],
+          "size": [
+            0.6155661024122441,
+            1.1070321038215367,
+            0.9365627138731984
+          ]
+        },
+        "roadsterPlacementM": [
+          0.44,
+          0,
+          -0.06
+        ],
+        "anchorsRoadsterM": {
+          "hips": [
+            0.4400000000000003,
+            0.7200000286102298,
+            -0.05999998767772374
+          ],
+          "head": [
+            0.4399999999999967,
+            1.3192924178852496,
+            0.04187674611207093
+          ],
+          "handL": [
+            0.5819998339901933,
+            0.8802384538903142,
+            0.3501868964816434
+          ],
+          "handR": [
+            0.2980001238410796,
+            0.8802384636354201,
+            0.35018715617621277
+          ],
+          "footL": [
+            0.5699998779562017,
+            0.6060001837261202,
+            0.43999989344854284
+          ],
+          "footR": [
+            0.3100000682386578,
+            0.6059999826959561,
+            0.43999984752462856
+          ]
+        }
+      }
+    },
+    {
+      "id": "driver.lod1",
+      "bytes": 2048488,
+      "sha256": "1e2c1079c6cecc0406da5438b3e7d67c8c2700807fbd56270c29f7c2451e7e11",
+      "triangles": 31767,
+      "vertices": 25977,
+      "primitives": 1,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.42600005865097046
+        ]
+      },
+      "materials": [
+        "citizen-atlas-protected"
+      ],
+      "maxBoneMatrixDifference": 7.351965205515398e-7,
+      "seated": {
+        "boundsCharacterLocalM": {
+          "min": [
+            -0.3076988724476014,
+            0.478990483330277,
+            -0.24056282697736223
+          ],
+          "max": [
+            0.3076988092721806,
+            1.5860225871518137,
+            0.6959998868958363
+          ],
+          "size": [
+            0.6153976817197819,
+            1.1070321038215367,
+            0.9365627138731984
+          ]
+        },
+        "roadsterPlacementM": [
+          0.44,
+          0,
+          -0.06
+        ],
+        "anchorsRoadsterM": {
+          "hips": [
+            0.4400000000000003,
+            0.7200000286102298,
+            -0.05999998767772374
+          ],
+          "head": [
+            0.4399999999999967,
+            1.3192924178852496,
+            0.04187674611207093
+          ],
+          "handL": [
+            0.5819998339901933,
+            0.8802384538903142,
+            0.3501868964816434
+          ],
+          "handR": [
+            0.2980001238410796,
+            0.8802384636354201,
+            0.35018715617621277
+          ],
+          "footL": [
+            0.5699998779562017,
+            0.6060001837261202,
+            0.43999989344854284
+          ],
+          "footR": [
+            0.3100000682386578,
+            0.6059999826959561,
+            0.43999984752462856
+          ]
+        }
+      }
+    },
+    {
+      "id": "driver.lod2",
+      "bytes": 1957640,
+      "sha256": "2ac3f0b8e0834f0261662b3be987ed8739064a4d63e29ce8abb6d06184af7884",
+      "triangles": 29931,
+      "vertices": 24803,
+      "primitives": 1,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.24799999594688416
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.42600005865097046
+        ]
+      },
+      "materials": [
+        "citizen-atlas-protected"
+      ],
+      "maxBoneMatrixDifference": 7.351965205515398e-7,
+      "seated": {
+        "boundsCharacterLocalM": {
+          "min": [
+            -0.3076988724476014,
+            0.478990483330277,
+            -0.24056282697736223
+          ],
+          "max": [
+            0.3076988092721806,
+            1.5860225871518137,
+            0.6959998868958363
+          ],
+          "size": [
+            0.6153976817197819,
+            1.1070321038215367,
+            0.9365627138731984
+          ]
+        },
+        "roadsterPlacementM": [
+          0.44,
+          0,
+          -0.06
+        ],
+        "anchorsRoadsterM": {
+          "hips": [
+            0.4400000000000003,
+            0.7200000286102298,
+            -0.05999998767772374
+          ],
+          "head": [
+            0.4399999999999967,
+            1.3192924178852496,
+            0.04187674611207093
+          ],
+          "handL": [
+            0.5819998339901933,
+            0.8802384538903142,
+            0.3501868964816434
+          ],
+          "handR": [
+            0.2980001238410796,
+            0.8802384636354201,
+            0.35018715617621277
+          ],
+          "footL": [
+            0.5699998779562017,
+            0.6060001837261202,
+            0.43999989344854284
+          ],
+          "footR": [
+            0.3100000682386578,
+            0.6059999826959561,
+            0.43999984752462856
+          ]
+        }
+      }
+    },
+    {
+      "id": "driver-roadster-fit.lod0",
+      "bytes": 2264664,
+      "sha256": "a6e21e8d1d97f8be38e49a716ee8a6ac9cca54fd31b84b13617c705b665c97fc",
+      "triangles": 36417,
+      "vertices": 27826,
+      "primitives": 2,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.14308057725429535
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.32108063995838165
+        ]
+      },
+      "materials": [
+        "citizen-atlas-protected"
+      ],
+      "maxBoneMatrixDifference": 7.351965205515398e-7,
+      "gripMorphControl": {
+        "defaultWeight": 0,
+        "seatedWeight": 1,
+        "maxRelativeDeltaM": 0.03863242517139033,
+        "sampledPosedDeltaM": 0.03863243337307892
+      },
+      "seated": {
+        "boundsCharacterLocalM": {
+          "min": [
+            -0.30655678717570767,
+            0.4789906359952818,
+            -0.19170211113288121
+          ],
+          "max": [
+            0.30725888336866325,
+            1.589301580520836,
+            0.9160001938887365
+          ],
+          "size": [
+            0.6138156705443709,
+            1.1103109445255541,
+            1.1077023050216177
+          ]
+        },
+        "roadsterPlacementM": [
+          0.44,
+          0,
+          -0.06
+        ],
+        "anchorsRoadsterM": {
+          "hips": [
+            0.4400000000000003,
+            0.7200000286102298,
+            -0.05999998767772374
+          ],
+          "head": [
+            0.44000000000000006,
+            1.3252313308565253,
+            -0.12819475290559001
+          ],
+          "handL": [
+            0.5999999194848831,
+            1.0599998404656001,
+            0.2719999903952705
+          ],
+          "handR": [
+            0.28000015028754416,
+            1.059999903096428,
+            0.27200003873236084
+          ],
+          "footL": [
+            0.5699999626536949,
+            0.6060003521947155,
+            0.6600001493654921
+          ],
+          "footR": [
+            0.310000063000641,
+            0.6060001772061744,
+            0.6600000556294563
+          ]
+        }
+      }
+    },
+    {
+      "id": "driver-roadster-fit.lod1",
+      "bytes": 2017036,
+      "sha256": "1cb79599d359175c39ce0d466173f5293d7bbcb16a8f08450bd851c09ce0a0c0",
+      "triangles": 30449,
+      "vertices": 24711,
+      "primitives": 2,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.14308057725429535
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.32108063995838165
+        ]
+      },
+      "materials": [
+        "citizen-atlas-protected"
+      ],
+      "maxBoneMatrixDifference": 7.351965205515398e-7,
+      "gripMorphControl": {
+        "defaultWeight": 0,
+        "seatedWeight": 1,
+        "maxRelativeDeltaM": 0.03863242517139033,
+        "sampledPosedDeltaM": 0.03863243337307892
+      },
+      "seated": {
+        "boundsCharacterLocalM": {
+          "min": [
+            -0.30652355878794,
+            0.4789906359952818,
+            -0.19170211113288121
+          ],
+          "max": [
+            0.30725888336866325,
+            1.589301580520836,
+            0.9160001938887365
+          ],
+          "size": [
+            0.6137824421566033,
+            1.1103109445255541,
+            1.1077023050216177
+          ]
+        },
+        "roadsterPlacementM": [
+          0.44,
+          0,
+          -0.06
+        ],
+        "anchorsRoadsterM": {
+          "hips": [
+            0.4400000000000003,
+            0.7200000286102298,
+            -0.05999998767772374
+          ],
+          "head": [
+            0.44000000000000006,
+            1.3252313308565253,
+            -0.12819475290559001
+          ],
+          "handL": [
+            0.5999999194848831,
+            1.0599998404656001,
+            0.2719999903952705
+          ],
+          "handR": [
+            0.28000015028754416,
+            1.059999903096428,
+            0.27200003873236084
+          ],
+          "footL": [
+            0.5699999626536949,
+            0.6060003521947155,
+            0.6600001493654921
+          ],
+          "footR": [
+            0.310000063000641,
+            0.6060001772061744,
+            0.6600000556294563
+          ]
+        }
+      }
+    },
+    {
+      "id": "driver-roadster-fit.lod2",
+      "bytes": 1926188,
+      "sha256": "1198d8433e27e9b60c17d054548162315584e49e644d16426828005e846833ac",
+      "triangles": 28613,
+      "vertices": 23537,
+      "primitives": 2,
+      "boundsM": {
+        "min": [
+          -0.36451148986816406,
+          0.0029903140384703875,
+          -0.14308057725429535
+        ],
+        "max": [
+          0.36437079310417175,
+          1.8052752017974854,
+          0.1780000627040863
+        ],
+        "size": [
+          0.7288822829723358,
+          1.802284887759015,
+          0.32108063995838165
+        ]
+      },
+      "materials": [
+        "citizen-atlas-protected"
+      ],
+      "maxBoneMatrixDifference": 7.351965205515398e-7,
+      "gripMorphControl": {
+        "defaultWeight": 0,
+        "seatedWeight": 1,
+        "maxRelativeDeltaM": 0.03863242517139033,
+        "sampledPosedDeltaM": 0.03863243337307892
+      },
+      "seated": {
+        "boundsCharacterLocalM": {
+          "min": [
+            -0.30652355878794,
+            0.4789906359952818,
+            -0.19170211113288121
+          ],
+          "max": [
+            0.30725888336866325,
+            1.589301580520836,
+            0.9160001938887365
+          ],
+          "size": [
+            0.6137824421566033,
+            1.1103109445255541,
+            1.1077023050216177
+          ]
+        },
+        "roadsterPlacementM": [
+          0.44,
+          0,
+          -0.06
+        ],
+        "anchorsRoadsterM": {
+          "hips": [
+            0.4400000000000003,
+            0.7200000286102298,
+            -0.05999998767772374
+          ],
+          "head": [
+            0.44000000000000006,
+            1.3252313308565253,
+            -0.12819475290559001
+          ],
+          "handL": [
+            0.5999999194848831,
+            1.0599998404656001,
+            0.2719999903952705
+          ],
+          "handR": [
+            0.28000015028754416,
+            1.059999903096428,
+            0.27200003873236084
+          ],
+          "footL": [
+            0.5699999626536949,
+            0.6060003521947155,
+            0.6600001493654921
+          ],
+          "footR": [
+            0.310000063000641,
+            0.6060001772061744,
+            0.6600000556294563
+          ]
+        }
+      }
+    }
+  ]
+}

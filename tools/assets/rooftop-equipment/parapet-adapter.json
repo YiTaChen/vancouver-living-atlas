@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "taskId": "B01",
+  "status": "offline_adapter_only",
+  "assetId": "modern-parapet-cap",
+  "sourcePackage": "../architecture-expansion",
+  "sourceManifestSha256": "9f2d8f7df96dc17b31107b613b3a7230656f2d776184509e69c622c7f2117f8b",
+  "sourceAsset": {
+    "id": "modern-parapet-cap",
+    "labelZh": "\u73fe\u4ee3\u5973\u5152\u7246\u58d3\u9802",
+    "role": "parapet",
+    "profiles": [
+      "midrise-grid",
+      "balcony-slab",
+      "curtain-wall"
+    ],
+    "clearance": {
+      "min": [
+        -1.2,
+        0,
+        0.056
+      ],
+      "max": [
+        1.2,
+        0.105,
+        0.444
+      ]
+    },
+    "purposeZh": "\u4e2d\u7a7a\u5012 U \u5f62\u58d3\u9802\u3001\u6392\u6c34\u659c\u5ea6\u8207\u96d9\u5074\u6298\u908a\uff1b\u5167\u90e8\u4fdd\u7559\u5973\u5152\u7246\u63d2\u5165\u7a7a\u9593\uff0c\u4e0d\u66ff\u63db\u5c4b\u9802\u6216\u65b0\u589e\u9ad8\u5ea6\u8cc7\u6599\u3002",
+    "lods": [
+      {
+        "level": 0,
+        "file": "assets/modern-parapet-cap.lod0.glb",
+        "source": "source/modern-parapet-cap.lod0.blend",
+        "triangles": 60,
+        "triangleCap": 64,
+        "materials": 1,
+        "primitives": 1,
+        "bounds": {
+          "min": [
+            -1.2,
+            0.0,
+            0.02
+          ],
+          "max": [
+            1.2,
+            0.19,
+            0.48
+          ]
+        },
+        "bytes": 164340,
+        "sha256": "99e7eba42f085a31fa5839504ae1f555041c41911644373e616d16e9e5a0e13a",
+        "sourceSha256": "55ccd38932aaf3e2f5f7d89500731a22317b1daddea2611d25aab960bf10b0b8",
+        "surface": "painted-metal",
+        "tileMeters": [
+          0.8,
+          0.8
+        ]
+      },
+      {
+        "level": 1,
+        "file": "assets/modern-parapet-cap.lod1.glb",
+        "source": "source/modern-parapet-cap.lod1.blend",
+        "triangles": 28,
+        "triangleCap": 32,
+        "materials": 1,
+        "primitives": 1,
+        "bounds": {
+          "min": [
+            -1.2,
+            0.0,
+            0.02
+          ],
+          "max": [
+            1.2,
+            0.19,
+            0.48
+          ]
+        },
+        "bytes": 161840,
+        "sha256": "dbb39173177b8c0c6b5e26e8876678063b507bcbb91959a2287bf93b09d2da8d",
+        "sourceSha256": "62f0b673475f4c46c58b1fda328893c9b207aa060743e8bf69e0bb5f854e6b92",
+        "surface": "painted-metal",
+        "tileMeters": [
+          0.8,
+          0.8
+        ]
+      }
+    ],
+    "maximumMaterials": 1,
+    "integrationStatus": "not-integrated"
+  },
+  "axisMapping": {
+    "localX": "along roof edge",
+    "localY": "up",
+    "localZ": "toward roof interior; rotate from source edge outward normal, not a world XYZ override"
+  },
+  "localOriginShiftM": [
+    0,
+    0,
+    -0.25
+  ],
+  "wallThicknessM": {
+    "existing": 0.24,
+    "maximumWithoutEditing": 0.368,
+    "insertionClearanceM": 0.388,
+    "minimumSideClearanceM": 0.01
+  },
+  "roofAttachment": {
+    "capDatumY": "ground + part.height + parapetHeight - 0.105",
+    "parapetHeightM": "existing 0.48 below 36 m, otherwise 0.68",
+    "wallCentreZ": "cap local Z = 0.25 before origin shift",
+    "originalYDatumPreserved": true
+  },
+  "drainage": {
+    "fallDirectionLocal": "+Z roof interior",
+    "topHeightAtOutboardM": 0.19,
+    "topHeightAtInboardM": 0.16,
+    "fallAcrossM": 0.46,
+    "fallM": 0.03,
+    "slope": 0.06521739130434782,
+    "method": "read existing source profile; no re-sculpt or new maps"
+  },
+  "lengthPolicy": {
+    "segmentLengthM": 2.4,
+    "allowScale": [
+      1,
+      1,
+      1
+    ],
+    "repeatAlongSourceEdge": true,
+    "remainderPolicy": "author a separate shortened source segment before acceptance; do not stretch cross-section or overlap folded skirts"
+  },
+  "placementChecks": [
+    "source roof perimeter and stable source edge ID",
+    "exclude domestic/sloped roofs and higher source parts",
+    "rotate low side toward roof interior",
+    "suppress replaced coping descriptor rather than stacking",
+    "check corner seams/end closures and actual wall thickness in WebGL sample"
+  ],
+  "runtimeChecks": {
+    "status": "not_run",
+    "reason": "adapter contract only; legacy asset unchanged"
+  },
+  "limitations": [
+    "Does not yet supply new corner/end/remainder geometry. Existing cap is an offline candidate and retains its original embedded-map costs.",
+    "Original architecture-expansion manifest and validation evidence are preserved."
+  ]
+}

@@ -1,0 +1,30 @@
+test_absent_frame_cannot_pass_open_rays (test_validate.Tests.test_absent_frame_cannot_pass_open_rays) ... ok
+test_absent_physical_stop (test_validate.Tests.test_absent_physical_stop) ... ok
+test_accessor_overflow (test_validate.Tests.test_accessor_overflow) ... ok
+test_actual_sill_shift_into_frame_rejected (test_validate.Tests.test_actual_sill_shift_into_frame_rejected) ... ok
+test_all_four_combined_glb_pairs (test_validate.Tests.test_all_four_combined_glb_pairs) ... ok
+test_bad_normals (test_validate.Tests.test_bad_normals) ... ok
+test_claimed_wrong_stop_depth (test_validate.Tests.test_claimed_wrong_stop_depth) ... ok
+test_four_actual_geometry_fixtures (test_validate.Tests.test_four_actual_geometry_fixtures) ... ok
+test_full_package (test_validate.Tests.test_full_package) ... ok
+test_lod_budget (test_validate.Tests.test_lod_budget) ... ok
+test_missing_tangent (test_validate.Tests.test_missing_tangent) ... ok
+test_missing_uv (test_validate.Tests.test_missing_uv) ... ok
+test_nonuniform_stretch (test_validate.Tests.test_nonuniform_stretch) ... ok
+test_old_sill_intersection_evidence_retained (test_validate.Tests.test_old_sill_intersection_evidence_retained) ... ok
+test_qa_leak (test_validate.Tests.test_qa_leak) ... ok
+test_sill_datum_metadata_cannot_hide_gap (test_validate.Tests.test_sill_datum_metadata_cannot_hide_gap) ... ok
+test_sill_uv_corruption_rejected (test_validate.Tests.test_sill_uv_corruption_rejected) ... ok
+test_tiny_between_ray_obstruction (test_validate.Tests.test_tiny_between_ray_obstruction) ... ok
+test_truncated_container (test_validate.Tests.test_truncated_container) ... ok
+test_uv_scale_corruption (test_validate.Tests.test_uv_scale_corruption) ... ok
+test_visible_aperture_panel (test_validate.Tests.test_visible_aperture_panel) ... ok
+test_wrong_manifest_hash (test_validate.Tests.test_wrong_manifest_hash) ... ok
+test_wrong_paired_identity_rejected (test_validate.Tests.test_wrong_paired_identity_rejected) ... ok
+test_wrong_root_datum (test_validate.Tests.test_wrong_root_datum) ... ok
+test_wrong_semantic_role (test_validate.Tests.test_wrong_semantic_role) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 0.506s
+
+OK

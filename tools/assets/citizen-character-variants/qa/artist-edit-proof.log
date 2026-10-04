@@ -1,0 +1,49 @@
+Info: Saved "police-artist-edit.blend"
+ERROR Draco mesh compression is not available because library could not be found at /usr/bin/4.3/python/lib/python3.13/site-packages/libextern_draco.so
+17:59:37 | INFO: Starting glTF 2.0 export
+17:59:37 | INFO: Extracting primitive: Tailored torso
+17:59:37 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+17:59:37 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+17:59:37 | INFO: Primitives created: 5
+17:59:37 | INFO: Finished glTF 2.0 export in 0.47104597091674805 s
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:59:38 | INFO: Data are loaded, start creating Blender stuff
+17:59:38 | INFO: Blender create Mesh node Tailored torso
+17:59:38 | INFO: glTF import finished in 0.13s
+{
+  "status": "pass",
+  "method": "Edited saved mesh vertices and Principled material input; saved/reopened .blend; called source-preserving exporter; reimported actual output and measured edit",
+  "source": "source/police.lod0.blend",
+  "sourceSha256Before": "1b7d963e58269e5d01ce30098ef5172ce7e8e828ed532626ca79e3c2ed4b688c",
+  "sourceSha256After": "1b7d963e58269e5d01ce30098ef5172ce7e8e828ed532626ca79e3c2ed4b688c",
+  "modifiedSourceSha256": "5f428ca56d3897499ed2d3c97bcf8d0f96fd5742cbd6dc193547e0218f8edc56",
+  "outputSha256": "edcb188897292b06b6a813a80e0c111e8fbb89119224e0de8b31ee07503afe25",
+  "geometryEdit": {
+    "chestBadgeVertices": 14,
+    "deltaZBlenderM": 0.008,
+    "reimportMinZ": 1.325350046157837,
+    "expectedMinZ": 1.3253500299453735
+  },
+  "materialEdit": {
+    "before": [
+      0.017999999225139618,
+      0.03099999949336052,
+      0.06199999898672104,
+      1.0
+    ],
+    "after": [
+      0.03500000014901161,
+      0.04500000178813934,
+      0.07999999821186066,
+      1
+    ]
+  },
+  "scope": "Temporary proof files outside package, canonical sources and outputs untouched"
+}
+Blender 4.3.2
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/citizen-character-variants/source/police.lod0.blend"
+Read blend: "/tmp/atlas-citizen-artist-edit/police-artist-edit.blend"
+Read blend: "/tmp/atlas-citizen-artist-edit/police-artist-edit.blend"
+
+Blender quit

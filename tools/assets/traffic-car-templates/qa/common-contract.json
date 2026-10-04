@@ -1,0 +1,270 @@
+{
+  "status": "pass",
+  "scope": "common packaging, source hashes, rest-pose transformed GLB geometry and costs only; package-specific Blender, semantic and runtime checks required",
+  "results": [
+    {
+      "assetId": "traffic-sedan",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.9300000071525574,
+          0.0,
+          -2.2019999027252197
+        ],
+        "max": [
+          0.9300000071525574,
+          1.4800000190734863,
+          2.306999921798706
+        ],
+        "size": [
+          1.8600000143051147,
+          1.4800000190734863,
+          4.508999824523926
+        ]
+      },
+      "triangles": 1252,
+      "vertices": 2438,
+      "primitives": 11,
+      "bytes": 136820,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 136820,
+      "images": [],
+      "nodeNames": [
+        "body-shell",
+        "glass",
+        "wheel-front-right",
+        "wheel-rear-right",
+        "wheel-front-left",
+        "wheel-rear-left",
+        "trim"
+      ],
+      "materialNames": [
+        "paint",
+        "glass",
+        "rubber"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "traffic-sedan",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.9300000071525574,
+          0.0,
+          -2.2019999027252197
+        ],
+        "max": [
+          0.9300000071525574,
+          1.4800000190734863,
+          2.306999921798706
+        ],
+        "size": [
+          1.8600000143051147,
+          1.4800000190734863,
+          4.508999824523926
+        ]
+      },
+      "triangles": 564,
+      "vertices": 1190,
+      "primitives": 7,
+      "bytes": 70956,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 70956,
+      "images": [],
+      "nodeNames": [
+        "body-shell",
+        "glass",
+        "wheel-front-right",
+        "wheel-rear-right",
+        "wheel-front-left",
+        "wheel-rear-left",
+        "trim"
+      ],
+      "materialNames": [
+        "paint",
+        "glass",
+        "rubber"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "traffic-sedan",
+      "lod": 2,
+      "boundsM": {
+        "min": [
+          -0.9300000071525574,
+          0.0,
+          -2.2019999027252197
+        ],
+        "max": [
+          0.9300000071525574,
+          1.4800000190734863,
+          2.302000045776367
+        ],
+        "size": [
+          1.8600000143051147,
+          1.4800000190734863,
+          4.503999948501587
+        ]
+      },
+      "triangles": 116,
+      "vertices": 224,
+      "primitives": 3,
+      "bytes": 18484,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 18484,
+      "images": [],
+      "nodeNames": [
+        "wheel-front-right",
+        "wheel-rear-right",
+        "wheel-front-left",
+        "wheel-rear-left",
+        "body-shell",
+        "glass",
+        "trim"
+      ],
+      "materialNames": [
+        "paint",
+        "glass",
+        "rubber"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "traffic-suv",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.9599999785423279,
+          0.0,
+          -2.2769999504089355
+        ],
+        "max": [
+          0.9599999785423279,
+          1.7599999904632568,
+          2.381999969482422
+        ],
+        "size": [
+          1.9199999570846558,
+          1.7599999904632568,
+          4.658999919891357
+        ]
+      },
+      "triangles": 1252,
+      "vertices": 2446,
+      "primitives": 11,
+      "bytes": 137192,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 137192,
+      "images": [],
+      "nodeNames": [
+        "body-shell",
+        "glass",
+        "wheel-front-right",
+        "wheel-rear-right",
+        "wheel-front-left",
+        "wheel-rear-left",
+        "trim"
+      ],
+      "materialNames": [
+        "paint",
+        "glass",
+        "rubber"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "traffic-suv",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.9599999785423279,
+          0.0,
+          -2.2769999504089355
+        ],
+        "max": [
+          0.9599999785423279,
+          1.7599999904632568,
+          2.381999969482422
+        ],
+        "size": [
+          1.9199999570846558,
+          1.7599999904632568,
+          4.658999919891357
+        ]
+      },
+      "triangles": 564,
+      "vertices": 1198,
+      "primitives": 7,
+      "bytes": 71324,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 71324,
+      "images": [],
+      "nodeNames": [
+        "body-shell",
+        "glass",
+        "wheel-front-right",
+        "wheel-rear-right",
+        "wheel-front-left",
+        "wheel-rear-left",
+        "trim"
+      ],
+      "materialNames": [
+        "paint",
+        "glass",
+        "rubber"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "traffic-suv",
+      "lod": 2,
+      "boundsM": {
+        "min": [
+          -0.9599999785423279,
+          0.0,
+          -2.2769999504089355
+        ],
+        "max": [
+          0.9599999785423279,
+          1.7599999904632568,
+          2.377000093460083
+        ],
+        "size": [
+          1.9199999570846558,
+          1.7599999904632568,
+          4.6540000438690186
+        ]
+      },
+      "triangles": 116,
+      "vertices": 224,
+      "primitives": 3,
+      "bytes": 18468,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 18468,
+      "images": [],
+      "nodeNames": [
+        "wheel-front-right",
+        "wheel-rear-right",
+        "wheel-front-left",
+        "wheel-rear-left",
+        "body-shell",
+        "glass",
+        "trim"
+      ],
+      "materialNames": [
+        "paint",
+        "glass",
+        "rubber"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "status": "pass",
+  "reviewMethod": "Visual inspection of two final 24-panel contact sheets plus full-resolution compact LOD0 clear scale render, after collar-contact correction. CPU geometry/ray checks independently verify dimensions and recesses.",
+  "reviewedGlbHashes": {
+    "exports/hvac-compact-single.lod0.glb": "696673e0add593d237c41ff1809c4b6f29f0bdc8b1c41fc9b4596e1248fe26ac",
+    "exports/hvac-compact-single.lod1.glb": "57dc05e148844919da0f08f403b8ca838b97fb690daffbeb780a144df62c0b81",
+    "exports/hvac-medium-twin.lod0.glb": "9f421db8b33722dffa78afd2f4dbc899c3b50640f3eaeaeec2f9795d02e56b60",
+    "exports/hvac-medium-twin.lod1.glb": "98869e938071237953d8c5fd0305cb2216f6b623d797fc81699ae44fca0c6aa9",
+    "exports/hvac-wide-twin.lod0.glb": "fd044bd6994fb81c4cadb28c9a150f4c41b7d8ee05ef2949b531b7f0e42085da",
+    "exports/hvac-wide-twin.lod1.glb": "95dff8624674ff8bdb3f59549de2471ff87e85e1910ca6c759bb5b3dde0a3c25"
+  },
+  "evidence": [
+    "previews/lod-views.png",
+    "previews/four-light-scale.png",
+    "previews/hvac-compact-single.lod0.scale.clear.png"
+  ],
+  "checks": {
+    "threeVariantFootprintsAndMetreReferences": "pass",
+    "lodMatchedCameraAndMajorSilhouette": "pass",
+    "fanGuardsAndCollarsAttachedToHousing": "pass",
+    "fiveActualLouvresAndRecess": "pass",
+    "servicePipeIncludedInsideFootprint": "pass",
+    "bevelAndMaterialRoleReadability": "pass",
+    "clearOvercastDuskNight": "pass",
+    "noReferenceObjectsInGlb": "pass via CPU/Blender node audit"
+  },
+  "limitations": [
+    "12-sample Monte Carlo grain is visible.",
+    "Night is intentionally dark without artificial equipment emission.",
+    "Small frame-bottom ground-stage bands in orthographic views belong to the QA stage, not exported geometry.",
+    "LOD1 simplifies ventilation detail and uses opaque fan caps; intended for distance only.",
+    "No WebGL material, weather, performance or runtime placement acceptance."
+  ]
+}

@@ -1,0 +1,305 @@
+{
+  "schemaVersion": 1,
+  "files": [
+    {
+      "file": ".gitignore",
+      "bytes": 31,
+      "sha256": "38ef86b219a19f29e4c664a1a5c709ff465839e563fc2fffae15be466a6904b9"
+    },
+    {
+      "file": "README.zh-TW.md",
+      "bytes": 8194,
+      "sha256": "c015e5b73c360cf521f8880a51f77c783048f503a7e4c2458d076988569e7dd0"
+    },
+    {
+      "file": "batch_static.py",
+      "bytes": 7162,
+      "sha256": "a745cf589a3ed058ad939a48c36fa8e77a557b7626d7870098161e19b52ee5df"
+    },
+    {
+      "file": "build.py",
+      "bytes": 15260,
+      "sha256": "ece727b57e4d1a609b8a330a044e5d2f9b91b4908983873272c564c4aa7c1d4d"
+    },
+    {
+      "file": "export.py",
+      "bytes": 1265,
+      "sha256": "9c42d217bba22327a5ff91fc7b654df39bdaa4079c75fa00d0d952fe3a38c4cd"
+    },
+    {
+      "file": "exports/city-bus-12m-exterior.lod0.glb",
+      "bytes": 173088,
+      "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+    },
+    {
+      "file": "exports/city-bus-12m-exterior.lod1.glb",
+      "bytes": 137088,
+      "sha256": "a4ccbb6a4b2f032a4d950ee0883c51ebe1ecd314734b539c60aa5fd6c605b3f0"
+    },
+    {
+      "file": "exports/city-bus-12m-exterior.lod2.glb",
+      "bytes": 22556,
+      "sha256": "36a7f8cfa1b3b53b8e212618e80523a7be3f7fd8e86bef98cf9c93f83bcfd948"
+    },
+    {
+      "file": "exports/city-bus-12m-interior.lod0.glb",
+      "bytes": 342612,
+      "sha256": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+    },
+    {
+      "file": "exports/city-bus-12m-interior.lod1.glb",
+      "bytes": 122468,
+      "sha256": "6ac509bee7a8eed10b04ae8c6de1b776087bb6a822c75846b5c4e258045819d5"
+    },
+    {
+      "file": "finalize.py",
+      "bytes": 8386,
+      "sha256": "e3c685519b194a1066c7fc1554bc7f85abb6c4a09e68bf5fee146c67d2230b3a"
+    },
+    {
+      "file": "manifest.json",
+      "bytes": 331287,
+      "sha256": "32a35e7fdaa0f82600f8d161212b952177fae8515ca8095b2d55be118503076e"
+    },
+    {
+      "file": "metadata.py",
+      "bytes": 14620,
+      "sha256": "5a923a2c482bc877c48ec375e7b533f844c7d85e0668d92b0f4a48375df98f8e"
+    },
+    {
+      "file": "qa/batching-review.json",
+      "bytes": 994,
+      "sha256": "ada61798ce4e495cd45a55118a8ea73f7f5e6b401d2df0e260ced9d9ede68f78"
+    },
+    {
+      "file": "qa/blender-validation.json",
+      "bytes": 7767,
+      "sha256": "70977c7b7e38d1453ecd198357a6e248819914a052b736ef43a3df757bb7ecbf"
+    },
+    {
+      "file": "qa/common-validation.json",
+      "bytes": 12574,
+      "sha256": "c6ed6f00401288ce1e2bb47c9e26b832dc388789343a5490c6f42c926a9f3037"
+    },
+    {
+      "file": "qa/handoff.json",
+      "bytes": 6210,
+      "sha256": "5e4a0c96bb0815d24e59834522abb0a3eb58a7cac4db37a5ef65c522057c87b5"
+    },
+    {
+      "file": "qa/measurements.json",
+      "bytes": 12845,
+      "sha256": "0f32e1f87da08bfaaff927766c276eac485884a034284103782b99099e2d5f96"
+    },
+    {
+      "file": "qa/previews/contact-exterior.png",
+      "bytes": 975105,
+      "sha256": "01a60b82b36aab495e17b440055a505484fb7e011c2f20d6af47140af3dbf315"
+    },
+    {
+      "file": "qa/previews/contact-passenger.png",
+      "bytes": 1363175,
+      "sha256": "79603b500ffb499688a55720b59efeb7f09d46f386c3eb4209f95f226b0a46dc"
+    },
+    {
+      "file": "qa/previews/doors-open.png",
+      "bytes": 401559,
+      "sha256": "581beed858bfd8a003664afdd5187a255b4f753ee18018491c664f6777d70dae"
+    },
+    {
+      "file": "qa/previews/driver-view.png",
+      "bytes": 495412,
+      "sha256": "9ccde7d9fe4f6b2cc25f744fa9514be917de9c9c87c72773ac634c5ae967179f"
+    },
+    {
+      "file": "qa/previews/entry-front.png",
+      "bytes": 603303,
+      "sha256": "275bda740272a60f5e2344463cb2ec36949ea3d7a794ab6e96679fc273a50394"
+    },
+    {
+      "file": "qa/previews/entry-rear.png",
+      "bytes": 606938,
+      "sha256": "b9be480d3c10b8ca417e9e3b58b54eddc7fd317b3a501e68db8d94329672bf66"
+    },
+    {
+      "file": "qa/previews/exterior-front.png",
+      "bytes": 408666,
+      "sha256": "ae91f490b478bcde7d712271b30174af89e04e90b5d1292e76e9bb85efe8bd3e"
+    },
+    {
+      "file": "qa/previews/exterior-rear.png",
+      "bytes": 419846,
+      "sha256": "a23a334c2ab734d14ef06789f437ea704ff427d2021b1d3f5c7d17463e6ecc80"
+    },
+    {
+      "file": "qa/previews/exterior-right-side.png",
+      "bytes": 399385,
+      "sha256": "15cd5dfc90f42f9997ac332b361e07cdba4cfc46dd8747880019aa1f0eed03b6"
+    },
+    {
+      "file": "qa/previews/exterior-top.png",
+      "bytes": 414799,
+      "sha256": "dd1bc4f1a739b77735cbbe6f238aae114e20bc1e7afedfab049d83400e3cf6f4"
+    },
+    {
+      "file": "qa/previews/index.json",
+      "bytes": 25208,
+      "sha256": "a2b0aa24caddfc285ba34de452be4fba75e1ff01350042bf6345117465c8b953"
+    },
+    {
+      "file": "qa/previews/interior-aisle.png",
+      "bytes": 649672,
+      "sha256": "baa75aa42e4d83609338454e53b587841aff6ae2475b18ae3506513f85186e2c"
+    },
+    {
+      "file": "qa/previews/light-clear.png",
+      "bytes": 421740,
+      "sha256": "1d98a5b8a9e7dfb9d61c324d70783532ce7085ed92367baa8874984c765b1e8c"
+    },
+    {
+      "file": "qa/previews/light-dusk.png",
+      "bytes": 469358,
+      "sha256": "fc006568029fae54fb0dab9a1619e19ca4309a2227359661aaa51f1d8a29fb3a"
+    },
+    {
+      "file": "qa/previews/light-night.png",
+      "bytes": 487219,
+      "sha256": "e7dd928a96ba8b65732ac37d78e7dc234ae77986f9714e594ec3631f50aa6b66"
+    },
+    {
+      "file": "qa/previews/light-overcast.png",
+      "bytes": 440410,
+      "sha256": "4256250eaa521f9cc4a705a8b821244a5e2fbdde881fe48914a4c96497eba6eb"
+    },
+    {
+      "file": "qa/previews/lod-0.png",
+      "bytes": 421740,
+      "sha256": "62380af9790207c0c2fafa8d0c40ffc52e1a7baeaec552bbe402bd9609bb05ad"
+    },
+    {
+      "file": "qa/previews/lod-1.png",
+      "bytes": 420092,
+      "sha256": "4cbb59653ddf58d149436a31e3d5ad7de67ee117d289f3e865ce37b91c1e4ef8"
+    },
+    {
+      "file": "qa/previews/lod-2-rear.png",
+      "bytes": 389453,
+      "sha256": "de3d84e6350db1d1dcbb612ae59280c20dc243c35db29aff8a9dfc6db6e01ee6"
+    },
+    {
+      "file": "qa/previews/lod-2.png",
+      "bytes": 391604,
+      "sha256": "55c28cfdcd11015bc0ce19edf563eed236f9cd4c156148399889c896e362dc18"
+    },
+    {
+      "file": "qa/previews/longitudinal-section.png",
+      "bytes": 409346,
+      "sha256": "852089a859f0194c0a7e196c81303bf0aadbb39a71926fcaaefbc3e7c9ed371f"
+    },
+    {
+      "file": "qa/previews/seat-01-view.png",
+      "bytes": 650054,
+      "sha256": "fb345d75e3b8b9ddb053c4850488666e19a6f9514131bc8d17d8b61c23375509"
+    },
+    {
+      "file": "qa/previews/seat-02-view.png",
+      "bytes": 654669,
+      "sha256": "1de854ee10ccf8562453329a45a8ad329832083aec46ffc648a1ec1b2f27fdb6"
+    },
+    {
+      "file": "qa/previews/seat-03-view.png",
+      "bytes": 644245,
+      "sha256": "4198d861f8ff2082d92c72afb7d758aa8e350d088cad64921b568dada433ac22"
+    },
+    {
+      "file": "qa/previews/seat-04-view.png",
+      "bytes": 644380,
+      "sha256": "d8b65d7f74c2f4ed5bab0a741406a32cd85113df823010d9d5eea8cd5038141e"
+    },
+    {
+      "file": "qa/previews/seat-05-view.png",
+      "bytes": 624420,
+      "sha256": "5aec5acb1278b65854a8894196fc9732735971fa6d2defbd7ec480c38148106c"
+    },
+    {
+      "file": "qa/previews/seat-06-view.png",
+      "bytes": 646674,
+      "sha256": "a7617208cba83f8e391ead877c2cb1acd8a26f8373d561299e9b978d040ebaa1"
+    },
+    {
+      "file": "qa/previews/seat-07-view.png",
+      "bytes": 632410,
+      "sha256": "30a255a75414d43e3ddd142a42be4c38d9ebe170fecf9678b86c9b256ccf80bd"
+    },
+    {
+      "file": "qa/previews/seat-08-view.png",
+      "bytes": 607884,
+      "sha256": "a176a90b3e54250a7d5acb6aa8550f6ce8d73d9e2df60e9301ec24076ed6ebfa"
+    },
+    {
+      "file": "qa/previews/seat-09-view.png",
+      "bytes": 612701,
+      "sha256": "c7f9c419a75b6193ee504ac7367546fa7353439a167b3975938902e14fcf39eb"
+    },
+    {
+      "file": "qa/previews/seat-10-view.png",
+      "bytes": 596868,
+      "sha256": "6feaaab46d8f3a4196b13383f0558ba0d01336b2debd3e655cf6acb224b253d7"
+    },
+    {
+      "file": "qa/regression-tests.txt",
+      "bytes": 109,
+      "sha256": "d299626c823f3572b6848c51e25da0364a42c18113409b1607aec89e4d447346"
+    },
+    {
+      "file": "qa/validation.json",
+      "bytes": 4523,
+      "sha256": "5a46c93be499eb5648cd2a93c5dded2573fc7afb00cd415b7ee2efa23c777c1d"
+    },
+    {
+      "file": "qa/visual-review.json",
+      "bytes": 1507,
+      "sha256": "f4ddccc4269bbca8cb10b4125c37cc52e2e81c3b962ccb05c1a09f3f511ee4a2"
+    },
+    {
+      "file": "qa_blender.py",
+      "bytes": 16821,
+      "sha256": "77533622549dcc5456b58ff2e757c499d13a5af5cc9902664d24c55276f65e24"
+    },
+    {
+      "file": "source/city-bus-12m-exterior.lod0.blend",
+      "bytes": 117046,
+      "sha256": "facb19080148b5839d835af2ce994cc50facbd2e1d414ce6428a6e4d13576d27"
+    },
+    {
+      "file": "source/city-bus-12m-exterior.lod1.blend",
+      "bytes": 112707,
+      "sha256": "d9858acf335c4068831f4cd6b45d0464a51d85c22750ec57c1f29f2619b54ee9"
+    },
+    {
+      "file": "source/city-bus-12m-exterior.lod2.blend",
+      "bytes": 93019,
+      "sha256": "2cb3c1433a2837172c27efa833b41b09cabe3e34ef790f8a9577867f56bec6a4"
+    },
+    {
+      "file": "source/city-bus-12m-interior.lod0.blend",
+      "bytes": 117464,
+      "sha256": "8ad2cac5b11f479beac3ca19b16fc409e08c24f1ced5ee0a1b3e87120b130f1e"
+    },
+    {
+      "file": "source/city-bus-12m-interior.lod1.blend",
+      "bytes": 112392,
+      "sha256": "f62a7aac9d42d63e0350a0b0fbd42f6c20603ac512ffc6477ba3ab7d9a2eb5fb"
+    },
+    {
+      "file": "test_contract.py",
+      "bytes": 3796,
+      "sha256": "54dbedf80e00d32bb727df6c2c24705611a31182a60a3c9f1abf2545f32bbf75"
+    },
+    {
+      "file": "validate.py",
+      "bytes": 19267,
+      "sha256": "73dc048bde6008ecd8eae0708c9ea6397e577cbb9aaa0a2499e3942c1bf0f55e"
+    }
+  ]
+}

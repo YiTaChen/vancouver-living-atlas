@@ -1,0 +1,1638 @@
+{
+  "status": "pass",
+  "referenceObjectsExported": false,
+  "renders": [
+    {
+      "file": "qa/previews/surface-2-oblique-clear.png",
+      "sha256": "74d3a8efe4bd2d8c33aa1b5369b8177fa34833dd42fad6d4c2b6b8067e11cd19",
+      "condition": "clear",
+      "view": "oblique",
+      "kind": "surface",
+      "couponSizeM": 2,
+      "lod": null,
+      "imports": [
+        {
+          "file": "exports/surface-soil-2m.lod0.inspection.glb",
+          "sha256": "2c10b9dcfb44aaa2c47c3034a66066772b5287584b0f71b73b826eecf997c98f"
+        },
+        {
+          "file": "exports/surface-grass-2m.lod0.inspection.glb",
+          "sha256": "9913b1441bee1355e3a2f0121c833087ff51108cd822bb3f91ace1f1e70904d3"
+        },
+        {
+          "file": "exports/surface-sand-2m.lod0.inspection.glb",
+          "sha256": "86c5690a01c81f7723aa2835a4758e65dc9f063fdc49a8242a841efde0b90645"
+        },
+        {
+          "file": "exports/surface-concrete-2m.lod0.inspection.glb",
+          "sha256": "de2b2b09b2b7a346b478edbdb8eb828839d4edecc2bc77c3d69a42cbbdfaa402"
+        },
+        {
+          "file": "exports/surface-asphalt-2m.lod0.inspection.glb",
+          "sha256": "d6972dd81da1dcb82d2669911f805a8e9b216331c5119c469200018fe83d89bb"
+        },
+        {
+          "file": "exports/surface-street-brick-2m.lod0.inspection.glb",
+          "sha256": "45a785d2447ad13bc89171615390cc650317c4f5e7ffebff2e048820ed2f4b5c"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/surface-2-oblique-overcast.png",
+      "sha256": "e73f5881b45146a93723bdec581b3d74fc682f5f66f174d7597b6eecbfe27a2c",
+      "condition": "overcast",
+      "view": "oblique",
+      "kind": "surface",
+      "couponSizeM": 2,
+      "lod": null,
+      "imports": [
+        {
+          "file": "exports/surface-soil-2m.lod0.inspection.glb",
+          "sha256": "2c10b9dcfb44aaa2c47c3034a66066772b5287584b0f71b73b826eecf997c98f"
+        },
+        {
+          "file": "exports/surface-grass-2m.lod0.inspection.glb",
+          "sha256": "9913b1441bee1355e3a2f0121c833087ff51108cd822bb3f91ace1f1e70904d3"
+        },
+        {
+          "file": "exports/surface-sand-2m.lod0.inspection.glb",
+          "sha256": "86c5690a01c81f7723aa2835a4758e65dc9f063fdc49a8242a841efde0b90645"
+        },
+        {
+          "file": "exports/surface-concrete-2m.lod0.inspection.glb",
+          "sha256": "de2b2b09b2b7a346b478edbdb8eb828839d4edecc2bc77c3d69a42cbbdfaa402"
+        },
+        {
+          "file": "exports/surface-asphalt-2m.lod0.inspection.glb",
+          "sha256": "d6972dd81da1dcb82d2669911f805a8e9b216331c5119c469200018fe83d89bb"
+        },
+        {
+          "file": "exports/surface-street-brick-2m.lod0.inspection.glb",
+          "sha256": "45a785d2447ad13bc89171615390cc650317c4f5e7ffebff2e048820ed2f4b5c"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/surface-2-oblique-dusk.png",
+      "sha256": "49b1540f921cd6fbca23d30f6bcfc7c9ad767dc7001cb09e9c4945f34f6fc765",
+      "condition": "dusk",
+      "view": "oblique",
+      "kind": "surface",
+      "couponSizeM": 2,
+      "lod": null,
+      "imports": [
+        {
+          "file": "exports/surface-soil-2m.lod0.inspection.glb",
+          "sha256": "2c10b9dcfb44aaa2c47c3034a66066772b5287584b0f71b73b826eecf997c98f"
+        },
+        {
+          "file": "exports/surface-grass-2m.lod0.inspection.glb",
+          "sha256": "9913b1441bee1355e3a2f0121c833087ff51108cd822bb3f91ace1f1e70904d3"
+        },
+        {
+          "file": "exports/surface-sand-2m.lod0.inspection.glb",
+          "sha256": "86c5690a01c81f7723aa2835a4758e65dc9f063fdc49a8242a841efde0b90645"
+        },
+        {
+          "file": "exports/surface-concrete-2m.lod0.inspection.glb",
+          "sha256": "de2b2b09b2b7a346b478edbdb8eb828839d4edecc2bc77c3d69a42cbbdfaa402"
+        },
+        {
+          "file": "exports/surface-asphalt-2m.lod0.inspection.glb",
+          "sha256": "d6972dd81da1dcb82d2669911f805a8e9b216331c5119c469200018fe83d89bb"
+        },
+        {
+          "file": "exports/surface-street-brick-2m.lod0.inspection.glb",
+          "sha256": "45a785d2447ad13bc89171615390cc650317c4f5e7ffebff2e048820ed2f4b5c"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/surface-2-oblique-night.png",
+      "sha256": "8723d4ab944d708d940090963108909f297d00ec43a85cd2c15e1ca122664753",
+      "condition": "night",
+      "view": "oblique",
+      "kind": "surface",
+      "couponSizeM": 2,
+      "lod": null,
+      "imports": [
+        {
+          "file": "exports/surface-soil-2m.lod0.inspection.glb",
+          "sha256": "2c10b9dcfb44aaa2c47c3034a66066772b5287584b0f71b73b826eecf997c98f"
+        },
+        {
+          "file": "exports/surface-grass-2m.lod0.inspection.glb",
+          "sha256": "9913b1441bee1355e3a2f0121c833087ff51108cd822bb3f91ace1f1e70904d3"
+        },
+        {
+          "file": "exports/surface-sand-2m.lod0.inspection.glb",
+          "sha256": "86c5690a01c81f7723aa2835a4758e65dc9f063fdc49a8242a841efde0b90645"
+        },
+        {
+          "file": "exports/surface-concrete-2m.lod0.inspection.glb",
+          "sha256": "de2b2b09b2b7a346b478edbdb8eb828839d4edecc2bc77c3d69a42cbbdfaa402"
+        },
+        {
+          "file": "exports/surface-asphalt-2m.lod0.inspection.glb",
+          "sha256": "d6972dd81da1dcb82d2669911f805a8e9b216331c5119c469200018fe83d89bb"
+        },
+        {
+          "file": "exports/surface-street-brick-2m.lod0.inspection.glb",
+          "sha256": "45a785d2447ad13bc89171615390cc650317c4f5e7ffebff2e048820ed2f4b5c"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/surface-2-grazing-clear.png",
+      "sha256": "61c5ad2d3044dccd96d0d2a59812435bb3c4de3881454d89f0ba7f6139105d2e",
+      "condition": "clear",
+      "view": "grazing",
+      "kind": "surface",
+      "couponSizeM": 2,
+      "lod": null,
+      "imports": [
+        {
+          "file": "exports/surface-soil-2m.lod0.inspection.glb",
+          "sha256": "2c10b9dcfb44aaa2c47c3034a66066772b5287584b0f71b73b826eecf997c98f"
+        },
+        {
+          "file": "exports/surface-grass-2m.lod0.inspection.glb",
+          "sha256": "9913b1441bee1355e3a2f0121c833087ff51108cd822bb3f91ace1f1e70904d3"
+        },
+        {
+          "file": "exports/surface-sand-2m.lod0.inspection.glb",
+          "sha256": "86c5690a01c81f7723aa2835a4758e65dc9f063fdc49a8242a841efde0b90645"
+        },
+        {
+          "file": "exports/surface-concrete-2m.lod0.inspection.glb",
+          "sha256": "de2b2b09b2b7a346b478edbdb8eb828839d4edecc2bc77c3d69a42cbbdfaa402"
+        },
+        {
+          "file": "exports/surface-asphalt-2m.lod0.inspection.glb",
+          "sha256": "d6972dd81da1dcb82d2669911f805a8e9b216331c5119c469200018fe83d89bb"
+        },
+        {
+          "file": "exports/surface-street-brick-2m.lod0.inspection.glb",
+          "sha256": "45a785d2447ad13bc89171615390cc650317c4f5e7ffebff2e048820ed2f4b5c"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/surface-2-grazing-overcast.png",
+      "sha256": "7ff68c76f73d2a75f906b82b6b5209da4ea59ccdb947fe42412103fc31470493",
+      "condition": "overcast",
+      "view": "grazing",
+      "kind": "surface",
+      "couponSizeM": 2,
+      "lod": null,
+      "imports": [
+        {
+          "file": "exports/surface-soil-2m.lod0.inspection.glb",
+          "sha256": "2c10b9dcfb44aaa2c47c3034a66066772b5287584b0f71b73b826eecf997c98f"
+        },
+        {
+          "file": "exports/surface-grass-2m.lod0.inspection.glb",
+          "sha256": "9913b1441bee1355e3a2f0121c833087ff51108cd822bb3f91ace1f1e70904d3"
+        },
+        {
+          "file": "exports/surface-sand-2m.lod0.inspection.glb",
+          "sha256": "86c5690a01c81f7723aa2835a4758e65dc9f063fdc49a8242a841efde0b90645"
+        },
+        {
+          "file": "exports/surface-concrete-2m.lod0.inspection.glb",
+          "sha256": "de2b2b09b2b7a346b478edbdb8eb828839d4edecc2bc77c3d69a42cbbdfaa402"
+        },
+        {
+          "file": "exports/surface-asphalt-2m.lod0.inspection.glb",
+          "sha256": "d6972dd81da1dcb82d2669911f805a8e9b216331c5119c469200018fe83d89bb"
+        },
+        {
+          "file": "exports/surface-street-brick-2m.lod0.inspection.glb",
+          "sha256": "45a785d2447ad13bc89171615390cc650317c4f5e7ffebff2e048820ed2f4b5c"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/surface-2-grazing-dusk.png",
+      "sha256": "9bc6bc35f093b7210553f73969a11f913a604ad3a7c620af11caee93004f4df8",
+      "condition": "dusk",
+      "view": "grazing",
+      "kind": "surface",
+      "couponSizeM": 2,
+      "lod": null,
+      "imports": [
+        {
+          "file": "exports/surface-soil-2m.lod0.inspection.glb",
+          "sha256": "2c10b9dcfb44aaa2c47c3034a66066772b5287584b0f71b73b826eecf997c98f"
+        },
+        {
+          "file": "exports/surface-grass-2m.lod0.inspection.glb",
+          "sha256": "9913b1441bee1355e3a2f0121c833087ff51108cd822bb3f91ace1f1e70904d3"
+        },
+        {
+          "file": "exports/surface-sand-2m.lod0.inspection.glb",
+          "sha256": "86c5690a01c81f7723aa2835a4758e65dc9f063fdc49a8242a841efde0b90645"
+        },
+        {
+          "file": "exports/surface-concrete-2m.lod0.inspection.glb",
+          "sha256": "de2b2b09b2b7a346b478edbdb8eb828839d4edecc2bc77c3d69a42cbbdfaa402"
+        },
+        {
+          "file": "exports/surface-asphalt-2m.lod0.inspection.glb",
+          "sha256": "d6972dd81da1dcb82d2669911f805a8e9b216331c5119c469200018fe83d89bb"
+        },
+        {
+          "file": "exports/surface-street-brick-2m.lod0.inspection.glb",
+          "sha256": "45a785d2447ad13bc89171615390cc650317c4f5e7ffebff2e048820ed2f4b5c"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/surface-2-grazing-night.png",
+      "sha256": "6afe255874646223f487e79b7d459b8e87d2894c99d4082d60d6781738d432e5",
+      "condition": "night",
+      "view": "grazing",
+      "kind": "surface",
+      "couponSizeM": 2,
+      "lod": null,
+      "imports": [
+        {
+          "file": "exports/surface-soil-2m.lod0.inspection.glb",
+          "sha256": "2c10b9dcfb44aaa2c47c3034a66066772b5287584b0f71b73b826eecf997c98f"
+        },
+        {
+          "file": "exports/surface-grass-2m.lod0.inspection.glb",
+          "sha256": "9913b1441bee1355e3a2f0121c833087ff51108cd822bb3f91ace1f1e70904d3"
+        },
+        {
+          "file": "exports/surface-sand-2m.lod0.inspection.glb",
+          "sha256": "86c5690a01c81f7723aa2835a4758e65dc9f063fdc49a8242a841efde0b90645"
+        },
+        {
+          "file": "exports/surface-concrete-2m.lod0.inspection.glb",
+          "sha256": "de2b2b09b2b7a346b478edbdb8eb828839d4edecc2bc77c3d69a42cbbdfaa402"
+        },
+        {
+          "file": "exports/surface-asphalt-2m.lod0.inspection.glb",
+          "sha256": "d6972dd81da1dcb82d2669911f805a8e9b216331c5119c469200018fe83d89bb"
+        },
+        {
+          "file": "exports/surface-street-brick-2m.lod0.inspection.glb",
+          "sha256": "45a785d2447ad13bc89171615390cc650317c4f5e7ffebff2e048820ed2f4b5c"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/surface-10-oblique-clear.png",
+      "sha256": "92f18eae785ca5ead214c450d639a8936c24c621a4fb646c88f9c5aab1b760dd",
+      "condition": "clear",
+      "view": "oblique",
+      "kind": "surface",
+      "couponSizeM": 10,
+      "lod": null,
+      "imports": [
+        {
+          "file": "exports/surface-soil-10m.lod0.inspection.glb",
+          "sha256": "0ad83a45b6a645c6d437f6663a0045bcc8a0c3aab5f27a19dbdf8354b70614aa"
+        },
+        {
+          "file": "exports/surface-grass-10m.lod0.inspection.glb",
+          "sha256": "b6d652213da165afda7d1fabb4ac1c2282a58fb73c8e3d3a5e768831b9bf9d6a"
+        },
+        {
+          "file": "exports/surface-sand-10m.lod0.inspection.glb",
+          "sha256": "a0f30e4f438b82ab745f7d6376c9125958d94b671c9efc0c60c53e935e3e7284"
+        },
+        {
+          "file": "exports/surface-concrete-10m.lod0.inspection.glb",
+          "sha256": "3df21f17f27a3e3ee1e16f83f9df027d886d5df42b3bb674d7210417eac6307d"
+        },
+        {
+          "file": "exports/surface-asphalt-10m.lod0.inspection.glb",
+          "sha256": "f31bb0fc04d90710d4b3cc46aea4cd4122e8d6187903c63b2ff9055dbd66cc28"
+        },
+        {
+          "file": "exports/surface-street-brick-10m.lod0.inspection.glb",
+          "sha256": "5ddd7b304c06a5fff50dd197cc5ea5b391fc4b3f2dd3589f8ed8b410bea33a40"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/surface-10-oblique-overcast.png",
+      "sha256": "2bf35b920c68517b4d955dd92ccd17cae2881742c47c25985be8240b6cb51c73",
+      "condition": "overcast",
+      "view": "oblique",
+      "kind": "surface",
+      "couponSizeM": 10,
+      "lod": null,
+      "imports": [
+        {
+          "file": "exports/surface-soil-10m.lod0.inspection.glb",
+          "sha256": "0ad83a45b6a645c6d437f6663a0045bcc8a0c3aab5f27a19dbdf8354b70614aa"
+        },
+        {
+          "file": "exports/surface-grass-10m.lod0.inspection.glb",
+          "sha256": "b6d652213da165afda7d1fabb4ac1c2282a58fb73c8e3d3a5e768831b9bf9d6a"
+        },
+        {
+          "file": "exports/surface-sand-10m.lod0.inspection.glb",
+          "sha256": "a0f30e4f438b82ab745f7d6376c9125958d94b671c9efc0c60c53e935e3e7284"
+        },
+        {
+          "file": "exports/surface-concrete-10m.lod0.inspection.glb",
+          "sha256": "3df21f17f27a3e3ee1e16f83f9df027d886d5df42b3bb674d7210417eac6307d"
+        },
+        {
+          "file": "exports/surface-asphalt-10m.lod0.inspection.glb",
+          "sha256": "f31bb0fc04d90710d4b3cc46aea4cd4122e8d6187903c63b2ff9055dbd66cc28"
+        },
+        {
+          "file": "exports/surface-street-brick-10m.lod0.inspection.glb",
+          "sha256": "5ddd7b304c06a5fff50dd197cc5ea5b391fc4b3f2dd3589f8ed8b410bea33a40"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/surface-10-oblique-dusk.png",
+      "sha256": "8501ce99239b00e74c2f3a609282e9fc0164f0633b026bbf4891b0a088b9062e",
+      "condition": "dusk",
+      "view": "oblique",
+      "kind": "surface",
+      "couponSizeM": 10,
+      "lod": null,
+      "imports": [
+        {
+          "file": "exports/surface-soil-10m.lod0.inspection.glb",
+          "sha256": "0ad83a45b6a645c6d437f6663a0045bcc8a0c3aab5f27a19dbdf8354b70614aa"
+        },
+        {
+          "file": "exports/surface-grass-10m.lod0.inspection.glb",
+          "sha256": "b6d652213da165afda7d1fabb4ac1c2282a58fb73c8e3d3a5e768831b9bf9d6a"
+        },
+        {
+          "file": "exports/surface-sand-10m.lod0.inspection.glb",
+          "sha256": "a0f30e4f438b82ab745f7d6376c9125958d94b671c9efc0c60c53e935e3e7284"
+        },
+        {
+          "file": "exports/surface-concrete-10m.lod0.inspection.glb",
+          "sha256": "3df21f17f27a3e3ee1e16f83f9df027d886d5df42b3bb674d7210417eac6307d"
+        },
+        {
+          "file": "exports/surface-asphalt-10m.lod0.inspection.glb",
+          "sha256": "f31bb0fc04d90710d4b3cc46aea4cd4122e8d6187903c63b2ff9055dbd66cc28"
+        },
+        {
+          "file": "exports/surface-street-brick-10m.lod0.inspection.glb",
+          "sha256": "5ddd7b304c06a5fff50dd197cc5ea5b391fc4b3f2dd3589f8ed8b410bea33a40"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/surface-10-oblique-night.png",
+      "sha256": "9e7e877cf7c72f62264320f5977b5eb48a9f4d467f3552cde272660005559ac1",
+      "condition": "night",
+      "view": "oblique",
+      "kind": "surface",
+      "couponSizeM": 10,
+      "lod": null,
+      "imports": [
+        {
+          "file": "exports/surface-soil-10m.lod0.inspection.glb",
+          "sha256": "0ad83a45b6a645c6d437f6663a0045bcc8a0c3aab5f27a19dbdf8354b70614aa"
+        },
+        {
+          "file": "exports/surface-grass-10m.lod0.inspection.glb",
+          "sha256": "b6d652213da165afda7d1fabb4ac1c2282a58fb73c8e3d3a5e768831b9bf9d6a"
+        },
+        {
+          "file": "exports/surface-sand-10m.lod0.inspection.glb",
+          "sha256": "a0f30e4f438b82ab745f7d6376c9125958d94b671c9efc0c60c53e935e3e7284"
+        },
+        {
+          "file": "exports/surface-concrete-10m.lod0.inspection.glb",
+          "sha256": "3df21f17f27a3e3ee1e16f83f9df027d886d5df42b3bb674d7210417eac6307d"
+        },
+        {
+          "file": "exports/surface-asphalt-10m.lod0.inspection.glb",
+          "sha256": "f31bb0fc04d90710d4b3cc46aea4cd4122e8d6187903c63b2ff9055dbd66cc28"
+        },
+        {
+          "file": "exports/surface-street-brick-10m.lod0.inspection.glb",
+          "sha256": "5ddd7b304c06a5fff50dd197cc5ea5b391fc4b3f2dd3589f8ed8b410bea33a40"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/surface-10-grazing-clear.png",
+      "sha256": "eaa0ac0381117192f09713becb6df6ecd284a0378819a24aff944e3a1c7fed73",
+      "condition": "clear",
+      "view": "grazing",
+      "kind": "surface",
+      "couponSizeM": 10,
+      "lod": null,
+      "imports": [
+        {
+          "file": "exports/surface-soil-10m.lod0.inspection.glb",
+          "sha256": "0ad83a45b6a645c6d437f6663a0045bcc8a0c3aab5f27a19dbdf8354b70614aa"
+        },
+        {
+          "file": "exports/surface-grass-10m.lod0.inspection.glb",
+          "sha256": "b6d652213da165afda7d1fabb4ac1c2282a58fb73c8e3d3a5e768831b9bf9d6a"
+        },
+        {
+          "file": "exports/surface-sand-10m.lod0.inspection.glb",
+          "sha256": "a0f30e4f438b82ab745f7d6376c9125958d94b671c9efc0c60c53e935e3e7284"
+        },
+        {
+          "file": "exports/surface-concrete-10m.lod0.inspection.glb",
+          "sha256": "3df21f17f27a3e3ee1e16f83f9df027d886d5df42b3bb674d7210417eac6307d"
+        },
+        {
+          "file": "exports/surface-asphalt-10m.lod0.inspection.glb",
+          "sha256": "f31bb0fc04d90710d4b3cc46aea4cd4122e8d6187903c63b2ff9055dbd66cc28"
+        },
+        {
+          "file": "exports/surface-street-brick-10m.lod0.inspection.glb",
+          "sha256": "5ddd7b304c06a5fff50dd197cc5ea5b391fc4b3f2dd3589f8ed8b410bea33a40"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/surface-10-grazing-overcast.png",
+      "sha256": "5d16e2ae68b0adcdc26d6ac8c6bb5ef94fecba95028f674dcd375474a6c3ea8f",
+      "condition": "overcast",
+      "view": "grazing",
+      "kind": "surface",
+      "couponSizeM": 10,
+      "lod": null,
+      "imports": [
+        {
+          "file": "exports/surface-soil-10m.lod0.inspection.glb",
+          "sha256": "0ad83a45b6a645c6d437f6663a0045bcc8a0c3aab5f27a19dbdf8354b70614aa"
+        },
+        {
+          "file": "exports/surface-grass-10m.lod0.inspection.glb",
+          "sha256": "b6d652213da165afda7d1fabb4ac1c2282a58fb73c8e3d3a5e768831b9bf9d6a"
+        },
+        {
+          "file": "exports/surface-sand-10m.lod0.inspection.glb",
+          "sha256": "a0f30e4f438b82ab745f7d6376c9125958d94b671c9efc0c60c53e935e3e7284"
+        },
+        {
+          "file": "exports/surface-concrete-10m.lod0.inspection.glb",
+          "sha256": "3df21f17f27a3e3ee1e16f83f9df027d886d5df42b3bb674d7210417eac6307d"
+        },
+        {
+          "file": "exports/surface-asphalt-10m.lod0.inspection.glb",
+          "sha256": "f31bb0fc04d90710d4b3cc46aea4cd4122e8d6187903c63b2ff9055dbd66cc28"
+        },
+        {
+          "file": "exports/surface-street-brick-10m.lod0.inspection.glb",
+          "sha256": "5ddd7b304c06a5fff50dd197cc5ea5b391fc4b3f2dd3589f8ed8b410bea33a40"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/surface-10-grazing-dusk.png",
+      "sha256": "8607d7029ed0f4504838e7e7f80ed3bdbc68663d52de808014af541457e26853",
+      "condition": "dusk",
+      "view": "grazing",
+      "kind": "surface",
+      "couponSizeM": 10,
+      "lod": null,
+      "imports": [
+        {
+          "file": "exports/surface-soil-10m.lod0.inspection.glb",
+          "sha256": "0ad83a45b6a645c6d437f6663a0045bcc8a0c3aab5f27a19dbdf8354b70614aa"
+        },
+        {
+          "file": "exports/surface-grass-10m.lod0.inspection.glb",
+          "sha256": "b6d652213da165afda7d1fabb4ac1c2282a58fb73c8e3d3a5e768831b9bf9d6a"
+        },
+        {
+          "file": "exports/surface-sand-10m.lod0.inspection.glb",
+          "sha256": "a0f30e4f438b82ab745f7d6376c9125958d94b671c9efc0c60c53e935e3e7284"
+        },
+        {
+          "file": "exports/surface-concrete-10m.lod0.inspection.glb",
+          "sha256": "3df21f17f27a3e3ee1e16f83f9df027d886d5df42b3bb674d7210417eac6307d"
+        },
+        {
+          "file": "exports/surface-asphalt-10m.lod0.inspection.glb",
+          "sha256": "f31bb0fc04d90710d4b3cc46aea4cd4122e8d6187903c63b2ff9055dbd66cc28"
+        },
+        {
+          "file": "exports/surface-street-brick-10m.lod0.inspection.glb",
+          "sha256": "5ddd7b304c06a5fff50dd197cc5ea5b391fc4b3f2dd3589f8ed8b410bea33a40"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/surface-10-grazing-night.png",
+      "sha256": "842cb23d972c25ef786335a79e46736508046b4eaeb0bee7e7ca06cf0ed26920",
+      "condition": "night",
+      "view": "grazing",
+      "kind": "surface",
+      "couponSizeM": 10,
+      "lod": null,
+      "imports": [
+        {
+          "file": "exports/surface-soil-10m.lod0.inspection.glb",
+          "sha256": "0ad83a45b6a645c6d437f6663a0045bcc8a0c3aab5f27a19dbdf8354b70614aa"
+        },
+        {
+          "file": "exports/surface-grass-10m.lod0.inspection.glb",
+          "sha256": "b6d652213da165afda7d1fabb4ac1c2282a58fb73c8e3d3a5e768831b9bf9d6a"
+        },
+        {
+          "file": "exports/surface-sand-10m.lod0.inspection.glb",
+          "sha256": "a0f30e4f438b82ab745f7d6376c9125958d94b671c9efc0c60c53e935e3e7284"
+        },
+        {
+          "file": "exports/surface-concrete-10m.lod0.inspection.glb",
+          "sha256": "3df21f17f27a3e3ee1e16f83f9df027d886d5df42b3bb674d7210417eac6307d"
+        },
+        {
+          "file": "exports/surface-asphalt-10m.lod0.inspection.glb",
+          "sha256": "f31bb0fc04d90710d4b3cc46aea4cd4122e8d6187903c63b2ff9055dbd66cc28"
+        },
+        {
+          "file": "exports/surface-street-brick-10m.lod0.inspection.glb",
+          "sha256": "5ddd7b304c06a5fff50dd197cc5ea5b391fc4b3f2dd3589f8ed8b410bea33a40"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/props-0-oblique-clear.png",
+      "sha256": "91f01b68dfb6701fc917c22c21bec38346f8e2d6f30df5b0f9d97e7cb833590f",
+      "condition": "clear",
+      "view": "oblique",
+      "kind": "props",
+      "couponSizeM": null,
+      "lod": 0,
+      "imports": [
+        {
+          "file": "exports/curb-straight-1m.lod0.inspection.glb",
+          "sha256": "e625906c7904b1da1fec21d9526a7efc4fb99bf047b566c94f701132c2eb044d"
+        },
+        {
+          "file": "exports/soil-grass-edge-1m.lod0.inspection.glb",
+          "sha256": "816b2fe25ddd657767a3068f8e7a4869902a2e81729e0f888670fd35c19e1f18"
+        },
+        {
+          "file": "exports/planter-trough.lod0.inspection.glb",
+          "sha256": "483b16b9a38690d571761776c0a305582f93bf96e38304518bb396b16c32dcf0"
+        },
+        {
+          "file": "exports/planter-round.lod0.inspection.glb",
+          "sha256": "43bcf64d6892a7120ea40af115eccbf1900dda20e93cf5fc1d4c5eefaf8b100a"
+        },
+        {
+          "file": "exports/perennial-rosette.lod0.inspection.glb",
+          "sha256": "9f70ee0db01cbf55fcb4b52b1a30a5211993d12ec4c99d7e410b19cdab5e47ed"
+        },
+        {
+          "file": "exports/perennial-tuft.lod0.inspection.glb",
+          "sha256": "0dccd154931a409b420d20f56c57f85904381d70d2fe4493a662f85dbaf5831a"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/props-0-oblique-overcast.png",
+      "sha256": "a27eccf6fd44c7606aa80a794ed222cad3e35d2d8e24d3604349f1dc202c69d5",
+      "condition": "overcast",
+      "view": "oblique",
+      "kind": "props",
+      "couponSizeM": null,
+      "lod": 0,
+      "imports": [
+        {
+          "file": "exports/curb-straight-1m.lod0.inspection.glb",
+          "sha256": "e625906c7904b1da1fec21d9526a7efc4fb99bf047b566c94f701132c2eb044d"
+        },
+        {
+          "file": "exports/soil-grass-edge-1m.lod0.inspection.glb",
+          "sha256": "816b2fe25ddd657767a3068f8e7a4869902a2e81729e0f888670fd35c19e1f18"
+        },
+        {
+          "file": "exports/planter-trough.lod0.inspection.glb",
+          "sha256": "483b16b9a38690d571761776c0a305582f93bf96e38304518bb396b16c32dcf0"
+        },
+        {
+          "file": "exports/planter-round.lod0.inspection.glb",
+          "sha256": "43bcf64d6892a7120ea40af115eccbf1900dda20e93cf5fc1d4c5eefaf8b100a"
+        },
+        {
+          "file": "exports/perennial-rosette.lod0.inspection.glb",
+          "sha256": "9f70ee0db01cbf55fcb4b52b1a30a5211993d12ec4c99d7e410b19cdab5e47ed"
+        },
+        {
+          "file": "exports/perennial-tuft.lod0.inspection.glb",
+          "sha256": "0dccd154931a409b420d20f56c57f85904381d70d2fe4493a662f85dbaf5831a"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/props-0-oblique-dusk.png",
+      "sha256": "47b7287cbd05ba2e356b12d338e3f4594631464123dd761a504d915673d6bf72",
+      "condition": "dusk",
+      "view": "oblique",
+      "kind": "props",
+      "couponSizeM": null,
+      "lod": 0,
+      "imports": [
+        {
+          "file": "exports/curb-straight-1m.lod0.inspection.glb",
+          "sha256": "e625906c7904b1da1fec21d9526a7efc4fb99bf047b566c94f701132c2eb044d"
+        },
+        {
+          "file": "exports/soil-grass-edge-1m.lod0.inspection.glb",
+          "sha256": "816b2fe25ddd657767a3068f8e7a4869902a2e81729e0f888670fd35c19e1f18"
+        },
+        {
+          "file": "exports/planter-trough.lod0.inspection.glb",
+          "sha256": "483b16b9a38690d571761776c0a305582f93bf96e38304518bb396b16c32dcf0"
+        },
+        {
+          "file": "exports/planter-round.lod0.inspection.glb",
+          "sha256": "43bcf64d6892a7120ea40af115eccbf1900dda20e93cf5fc1d4c5eefaf8b100a"
+        },
+        {
+          "file": "exports/perennial-rosette.lod0.inspection.glb",
+          "sha256": "9f70ee0db01cbf55fcb4b52b1a30a5211993d12ec4c99d7e410b19cdab5e47ed"
+        },
+        {
+          "file": "exports/perennial-tuft.lod0.inspection.glb",
+          "sha256": "0dccd154931a409b420d20f56c57f85904381d70d2fe4493a662f85dbaf5831a"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/props-0-oblique-night.png",
+      "sha256": "1b8930a57261b2925b25c433dcde1546bee71aab0259278fbef06115b9ebd91c",
+      "condition": "night",
+      "view": "oblique",
+      "kind": "props",
+      "couponSizeM": null,
+      "lod": 0,
+      "imports": [
+        {
+          "file": "exports/curb-straight-1m.lod0.inspection.glb",
+          "sha256": "e625906c7904b1da1fec21d9526a7efc4fb99bf047b566c94f701132c2eb044d"
+        },
+        {
+          "file": "exports/soil-grass-edge-1m.lod0.inspection.glb",
+          "sha256": "816b2fe25ddd657767a3068f8e7a4869902a2e81729e0f888670fd35c19e1f18"
+        },
+        {
+          "file": "exports/planter-trough.lod0.inspection.glb",
+          "sha256": "483b16b9a38690d571761776c0a305582f93bf96e38304518bb396b16c32dcf0"
+        },
+        {
+          "file": "exports/planter-round.lod0.inspection.glb",
+          "sha256": "43bcf64d6892a7120ea40af115eccbf1900dda20e93cf5fc1d4c5eefaf8b100a"
+        },
+        {
+          "file": "exports/perennial-rosette.lod0.inspection.glb",
+          "sha256": "9f70ee0db01cbf55fcb4b52b1a30a5211993d12ec4c99d7e410b19cdab5e47ed"
+        },
+        {
+          "file": "exports/perennial-tuft.lod0.inspection.glb",
+          "sha256": "0dccd154931a409b420d20f56c57f85904381d70d2fe4493a662f85dbaf5831a"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/props-0-grazing-clear.png",
+      "sha256": "383111a5e94584c96cdf0c4691ba062d589858f16c948aec7973291780a3269e",
+      "condition": "clear",
+      "view": "grazing",
+      "kind": "props",
+      "couponSizeM": null,
+      "lod": 0,
+      "imports": [
+        {
+          "file": "exports/curb-straight-1m.lod0.inspection.glb",
+          "sha256": "e625906c7904b1da1fec21d9526a7efc4fb99bf047b566c94f701132c2eb044d"
+        },
+        {
+          "file": "exports/soil-grass-edge-1m.lod0.inspection.glb",
+          "sha256": "816b2fe25ddd657767a3068f8e7a4869902a2e81729e0f888670fd35c19e1f18"
+        },
+        {
+          "file": "exports/planter-trough.lod0.inspection.glb",
+          "sha256": "483b16b9a38690d571761776c0a305582f93bf96e38304518bb396b16c32dcf0"
+        },
+        {
+          "file": "exports/planter-round.lod0.inspection.glb",
+          "sha256": "43bcf64d6892a7120ea40af115eccbf1900dda20e93cf5fc1d4c5eefaf8b100a"
+        },
+        {
+          "file": "exports/perennial-rosette.lod0.inspection.glb",
+          "sha256": "9f70ee0db01cbf55fcb4b52b1a30a5211993d12ec4c99d7e410b19cdab5e47ed"
+        },
+        {
+          "file": "exports/perennial-tuft.lod0.inspection.glb",
+          "sha256": "0dccd154931a409b420d20f56c57f85904381d70d2fe4493a662f85dbaf5831a"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/props-0-grazing-overcast.png",
+      "sha256": "79e49a5b513ceff2cc15a8157d1aa1d183dc66e20bf9d7f6bd9e003e0af2bcba",
+      "condition": "overcast",
+      "view": "grazing",
+      "kind": "props",
+      "couponSizeM": null,
+      "lod": 0,
+      "imports": [
+        {
+          "file": "exports/curb-straight-1m.lod0.inspection.glb",
+          "sha256": "e625906c7904b1da1fec21d9526a7efc4fb99bf047b566c94f701132c2eb044d"
+        },
+        {
+          "file": "exports/soil-grass-edge-1m.lod0.inspection.glb",
+          "sha256": "816b2fe25ddd657767a3068f8e7a4869902a2e81729e0f888670fd35c19e1f18"
+        },
+        {
+          "file": "exports/planter-trough.lod0.inspection.glb",
+          "sha256": "483b16b9a38690d571761776c0a305582f93bf96e38304518bb396b16c32dcf0"
+        },
+        {
+          "file": "exports/planter-round.lod0.inspection.glb",
+          "sha256": "43bcf64d6892a7120ea40af115eccbf1900dda20e93cf5fc1d4c5eefaf8b100a"
+        },
+        {
+          "file": "exports/perennial-rosette.lod0.inspection.glb",
+          "sha256": "9f70ee0db01cbf55fcb4b52b1a30a5211993d12ec4c99d7e410b19cdab5e47ed"
+        },
+        {
+          "file": "exports/perennial-tuft.lod0.inspection.glb",
+          "sha256": "0dccd154931a409b420d20f56c57f85904381d70d2fe4493a662f85dbaf5831a"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/props-0-grazing-dusk.png",
+      "sha256": "6772e5a357888bcd3d8dfb7c29320bcb43fe734e108190b4a7da1736882ac664",
+      "condition": "dusk",
+      "view": "grazing",
+      "kind": "props",
+      "couponSizeM": null,
+      "lod": 0,
+      "imports": [
+        {
+          "file": "exports/curb-straight-1m.lod0.inspection.glb",
+          "sha256": "e625906c7904b1da1fec21d9526a7efc4fb99bf047b566c94f701132c2eb044d"
+        },
+        {
+          "file": "exports/soil-grass-edge-1m.lod0.inspection.glb",
+          "sha256": "816b2fe25ddd657767a3068f8e7a4869902a2e81729e0f888670fd35c19e1f18"
+        },
+        {
+          "file": "exports/planter-trough.lod0.inspection.glb",
+          "sha256": "483b16b9a38690d571761776c0a305582f93bf96e38304518bb396b16c32dcf0"
+        },
+        {
+          "file": "exports/planter-round.lod0.inspection.glb",
+          "sha256": "43bcf64d6892a7120ea40af115eccbf1900dda20e93cf5fc1d4c5eefaf8b100a"
+        },
+        {
+          "file": "exports/perennial-rosette.lod0.inspection.glb",
+          "sha256": "9f70ee0db01cbf55fcb4b52b1a30a5211993d12ec4c99d7e410b19cdab5e47ed"
+        },
+        {
+          "file": "exports/perennial-tuft.lod0.inspection.glb",
+          "sha256": "0dccd154931a409b420d20f56c57f85904381d70d2fe4493a662f85dbaf5831a"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/props-0-grazing-night.png",
+      "sha256": "e5259c4febbd0270de856b0a07efadf9e018ee8b52150732752973b2f96d39fd",
+      "condition": "night",
+      "view": "grazing",
+      "kind": "props",
+      "couponSizeM": null,
+      "lod": 0,
+      "imports": [
+        {
+          "file": "exports/curb-straight-1m.lod0.inspection.glb",
+          "sha256": "e625906c7904b1da1fec21d9526a7efc4fb99bf047b566c94f701132c2eb044d"
+        },
+        {
+          "file": "exports/soil-grass-edge-1m.lod0.inspection.glb",
+          "sha256": "816b2fe25ddd657767a3068f8e7a4869902a2e81729e0f888670fd35c19e1f18"
+        },
+        {
+          "file": "exports/planter-trough.lod0.inspection.glb",
+          "sha256": "483b16b9a38690d571761776c0a305582f93bf96e38304518bb396b16c32dcf0"
+        },
+        {
+          "file": "exports/planter-round.lod0.inspection.glb",
+          "sha256": "43bcf64d6892a7120ea40af115eccbf1900dda20e93cf5fc1d4c5eefaf8b100a"
+        },
+        {
+          "file": "exports/perennial-rosette.lod0.inspection.glb",
+          "sha256": "9f70ee0db01cbf55fcb4b52b1a30a5211993d12ec4c99d7e410b19cdab5e47ed"
+        },
+        {
+          "file": "exports/perennial-tuft.lod0.inspection.glb",
+          "sha256": "0dccd154931a409b420d20f56c57f85904381d70d2fe4493a662f85dbaf5831a"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/props-1-oblique-clear.png",
+      "sha256": "5fc58de405253e299df79241f4715fd46ddb7fb6660f4089a0f9d52eed9afd41",
+      "condition": "clear",
+      "view": "oblique",
+      "kind": "props",
+      "couponSizeM": null,
+      "lod": 1,
+      "imports": [
+        {
+          "file": "exports/curb-straight-1m.lod1.inspection.glb",
+          "sha256": "3abacedac941755d685a8b150afee03bfa87e78099ba284309b935a6d528d364"
+        },
+        {
+          "file": "exports/soil-grass-edge-1m.lod1.inspection.glb",
+          "sha256": "0e38207757547a1c8a58b80b42ddd21bf1ed4c1ca0ecb483b6e0e1570bfe342b"
+        },
+        {
+          "file": "exports/planter-trough.lod1.inspection.glb",
+          "sha256": "4de4808a4c8e752103507279ad8ab05fa07951591a37166ef286938efa99e559"
+        },
+        {
+          "file": "exports/planter-round.lod1.inspection.glb",
+          "sha256": "e6901dcb7a7c83400dc60d6c3be90af896d3b389d90d2f8fa2b539a80669b260"
+        },
+        {
+          "file": "exports/perennial-rosette.lod1.inspection.glb",
+          "sha256": "1ad6abaaa6c2e7a65a0864d1560cb87a6bf676140c948e01b0746580ca5d4f22"
+        },
+        {
+          "file": "exports/perennial-tuft.lod1.inspection.glb",
+          "sha256": "6dba849f8822d894cea99182e626596a33c68913f4a1046385ee992774c36445"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/props-1-oblique-overcast.png",
+      "sha256": "901032607444312731d65f597bb1bb2f324796cd8ee16c54a46166a48354c3ec",
+      "condition": "overcast",
+      "view": "oblique",
+      "kind": "props",
+      "couponSizeM": null,
+      "lod": 1,
+      "imports": [
+        {
+          "file": "exports/curb-straight-1m.lod1.inspection.glb",
+          "sha256": "3abacedac941755d685a8b150afee03bfa87e78099ba284309b935a6d528d364"
+        },
+        {
+          "file": "exports/soil-grass-edge-1m.lod1.inspection.glb",
+          "sha256": "0e38207757547a1c8a58b80b42ddd21bf1ed4c1ca0ecb483b6e0e1570bfe342b"
+        },
+        {
+          "file": "exports/planter-trough.lod1.inspection.glb",
+          "sha256": "4de4808a4c8e752103507279ad8ab05fa07951591a37166ef286938efa99e559"
+        },
+        {
+          "file": "exports/planter-round.lod1.inspection.glb",
+          "sha256": "e6901dcb7a7c83400dc60d6c3be90af896d3b389d90d2f8fa2b539a80669b260"
+        },
+        {
+          "file": "exports/perennial-rosette.lod1.inspection.glb",
+          "sha256": "1ad6abaaa6c2e7a65a0864d1560cb87a6bf676140c948e01b0746580ca5d4f22"
+        },
+        {
+          "file": "exports/perennial-tuft.lod1.inspection.glb",
+          "sha256": "6dba849f8822d894cea99182e626596a33c68913f4a1046385ee992774c36445"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/props-1-oblique-dusk.png",
+      "sha256": "1eaea4cbc84da24e6510cf4a0267d78e73e36980d3d8165cad4046c30f608013",
+      "condition": "dusk",
+      "view": "oblique",
+      "kind": "props",
+      "couponSizeM": null,
+      "lod": 1,
+      "imports": [
+        {
+          "file": "exports/curb-straight-1m.lod1.inspection.glb",
+          "sha256": "3abacedac941755d685a8b150afee03bfa87e78099ba284309b935a6d528d364"
+        },
+        {
+          "file": "exports/soil-grass-edge-1m.lod1.inspection.glb",
+          "sha256": "0e38207757547a1c8a58b80b42ddd21bf1ed4c1ca0ecb483b6e0e1570bfe342b"
+        },
+        {
+          "file": "exports/planter-trough.lod1.inspection.glb",
+          "sha256": "4de4808a4c8e752103507279ad8ab05fa07951591a37166ef286938efa99e559"
+        },
+        {
+          "file": "exports/planter-round.lod1.inspection.glb",
+          "sha256": "e6901dcb7a7c83400dc60d6c3be90af896d3b389d90d2f8fa2b539a80669b260"
+        },
+        {
+          "file": "exports/perennial-rosette.lod1.inspection.glb",
+          "sha256": "1ad6abaaa6c2e7a65a0864d1560cb87a6bf676140c948e01b0746580ca5d4f22"
+        },
+        {
+          "file": "exports/perennial-tuft.lod1.inspection.glb",
+          "sha256": "6dba849f8822d894cea99182e626596a33c68913f4a1046385ee992774c36445"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/props-1-oblique-night.png",
+      "sha256": "540e28a21f5c490f0c6a5a7f1e66116aa539ac9c7cf0be4f0dfacb3a54014ace",
+      "condition": "night",
+      "view": "oblique",
+      "kind": "props",
+      "couponSizeM": null,
+      "lod": 1,
+      "imports": [
+        {
+          "file": "exports/curb-straight-1m.lod1.inspection.glb",
+          "sha256": "3abacedac941755d685a8b150afee03bfa87e78099ba284309b935a6d528d364"
+        },
+        {
+          "file": "exports/soil-grass-edge-1m.lod1.inspection.glb",
+          "sha256": "0e38207757547a1c8a58b80b42ddd21bf1ed4c1ca0ecb483b6e0e1570bfe342b"
+        },
+        {
+          "file": "exports/planter-trough.lod1.inspection.glb",
+          "sha256": "4de4808a4c8e752103507279ad8ab05fa07951591a37166ef286938efa99e559"
+        },
+        {
+          "file": "exports/planter-round.lod1.inspection.glb",
+          "sha256": "e6901dcb7a7c83400dc60d6c3be90af896d3b389d90d2f8fa2b539a80669b260"
+        },
+        {
+          "file": "exports/perennial-rosette.lod1.inspection.glb",
+          "sha256": "1ad6abaaa6c2e7a65a0864d1560cb87a6bf676140c948e01b0746580ca5d4f22"
+        },
+        {
+          "file": "exports/perennial-tuft.lod1.inspection.glb",
+          "sha256": "6dba849f8822d894cea99182e626596a33c68913f4a1046385ee992774c36445"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/props-1-grazing-clear.png",
+      "sha256": "ada18084480afcc80871c1b00806c7458cb34d3a004bf6b1cec53a29f084e60f",
+      "condition": "clear",
+      "view": "grazing",
+      "kind": "props",
+      "couponSizeM": null,
+      "lod": 1,
+      "imports": [
+        {
+          "file": "exports/curb-straight-1m.lod1.inspection.glb",
+          "sha256": "3abacedac941755d685a8b150afee03bfa87e78099ba284309b935a6d528d364"
+        },
+        {
+          "file": "exports/soil-grass-edge-1m.lod1.inspection.glb",
+          "sha256": "0e38207757547a1c8a58b80b42ddd21bf1ed4c1ca0ecb483b6e0e1570bfe342b"
+        },
+        {
+          "file": "exports/planter-trough.lod1.inspection.glb",
+          "sha256": "4de4808a4c8e752103507279ad8ab05fa07951591a37166ef286938efa99e559"
+        },
+        {
+          "file": "exports/planter-round.lod1.inspection.glb",
+          "sha256": "e6901dcb7a7c83400dc60d6c3be90af896d3b389d90d2f8fa2b539a80669b260"
+        },
+        {
+          "file": "exports/perennial-rosette.lod1.inspection.glb",
+          "sha256": "1ad6abaaa6c2e7a65a0864d1560cb87a6bf676140c948e01b0746580ca5d4f22"
+        },
+        {
+          "file": "exports/perennial-tuft.lod1.inspection.glb",
+          "sha256": "6dba849f8822d894cea99182e626596a33c68913f4a1046385ee992774c36445"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/props-1-grazing-overcast.png",
+      "sha256": "f2ecf74b39f8e82f844972690989282dd2820e2729ac6cc3025d97c34775bf44",
+      "condition": "overcast",
+      "view": "grazing",
+      "kind": "props",
+      "couponSizeM": null,
+      "lod": 1,
+      "imports": [
+        {
+          "file": "exports/curb-straight-1m.lod1.inspection.glb",
+          "sha256": "3abacedac941755d685a8b150afee03bfa87e78099ba284309b935a6d528d364"
+        },
+        {
+          "file": "exports/soil-grass-edge-1m.lod1.inspection.glb",
+          "sha256": "0e38207757547a1c8a58b80b42ddd21bf1ed4c1ca0ecb483b6e0e1570bfe342b"
+        },
+        {
+          "file": "exports/planter-trough.lod1.inspection.glb",
+          "sha256": "4de4808a4c8e752103507279ad8ab05fa07951591a37166ef286938efa99e559"
+        },
+        {
+          "file": "exports/planter-round.lod1.inspection.glb",
+          "sha256": "e6901dcb7a7c83400dc60d6c3be90af896d3b389d90d2f8fa2b539a80669b260"
+        },
+        {
+          "file": "exports/perennial-rosette.lod1.inspection.glb",
+          "sha256": "1ad6abaaa6c2e7a65a0864d1560cb87a6bf676140c948e01b0746580ca5d4f22"
+        },
+        {
+          "file": "exports/perennial-tuft.lod1.inspection.glb",
+          "sha256": "6dba849f8822d894cea99182e626596a33c68913f4a1046385ee992774c36445"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/props-1-grazing-dusk.png",
+      "sha256": "06536049d0e8f6b530efcbbef5599932121ce6cfee5cf9f1933e11ed798a92b2",
+      "condition": "dusk",
+      "view": "grazing",
+      "kind": "props",
+      "couponSizeM": null,
+      "lod": 1,
+      "imports": [
+        {
+          "file": "exports/curb-straight-1m.lod1.inspection.glb",
+          "sha256": "3abacedac941755d685a8b150afee03bfa87e78099ba284309b935a6d528d364"
+        },
+        {
+          "file": "exports/soil-grass-edge-1m.lod1.inspection.glb",
+          "sha256": "0e38207757547a1c8a58b80b42ddd21bf1ed4c1ca0ecb483b6e0e1570bfe342b"
+        },
+        {
+          "file": "exports/planter-trough.lod1.inspection.glb",
+          "sha256": "4de4808a4c8e752103507279ad8ab05fa07951591a37166ef286938efa99e559"
+        },
+        {
+          "file": "exports/planter-round.lod1.inspection.glb",
+          "sha256": "e6901dcb7a7c83400dc60d6c3be90af896d3b389d90d2f8fa2b539a80669b260"
+        },
+        {
+          "file": "exports/perennial-rosette.lod1.inspection.glb",
+          "sha256": "1ad6abaaa6c2e7a65a0864d1560cb87a6bf676140c948e01b0746580ca5d4f22"
+        },
+        {
+          "file": "exports/perennial-tuft.lod1.inspection.glb",
+          "sha256": "6dba849f8822d894cea99182e626596a33c68913f4a1046385ee992774c36445"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    },
+    {
+      "file": "qa/previews/props-1-grazing-night.png",
+      "sha256": "f458afaa82d5d2382d584f5fe76c6e7c289070a7cdf7c5697132776179a4568f",
+      "condition": "night",
+      "view": "grazing",
+      "kind": "props",
+      "couponSizeM": null,
+      "lod": 1,
+      "imports": [
+        {
+          "file": "exports/curb-straight-1m.lod1.inspection.glb",
+          "sha256": "3abacedac941755d685a8b150afee03bfa87e78099ba284309b935a6d528d364"
+        },
+        {
+          "file": "exports/soil-grass-edge-1m.lod1.inspection.glb",
+          "sha256": "0e38207757547a1c8a58b80b42ddd21bf1ed4c1ca0ecb483b6e0e1570bfe342b"
+        },
+        {
+          "file": "exports/planter-trough.lod1.inspection.glb",
+          "sha256": "4de4808a4c8e752103507279ad8ab05fa07951591a37166ef286938efa99e559"
+        },
+        {
+          "file": "exports/planter-round.lod1.inspection.glb",
+          "sha256": "e6901dcb7a7c83400dc60d6c3be90af896d3b389d90d2f8fa2b539a80669b260"
+        },
+        {
+          "file": "exports/perennial-rosette.lod1.inspection.glb",
+          "sha256": "1ad6abaaa6c2e7a65a0864d1560cb87a6bf676140c948e01b0746580ca5d4f22"
+        },
+        {
+          "file": "exports/perennial-tuft.lod1.inspection.glb",
+          "sha256": "6dba849f8822d894cea99182e626596a33c68913f4a1046385ee992774c36445"
+        }
+      ],
+      "device": "Cycles CPU",
+      "samples": 16,
+      "threads": 2,
+      "resolution": [
+        720,
+        480
+      ],
+      "exposure": 0,
+      "qaReferences": {
+        "metreRuler": 1,
+        "humanHeightsM": [
+          1.75,
+          1.81
+        ]
+      },
+      "note": "Offline research lighting; no city shader/placement/navigation/frame-time acceptance."
+    }
+  ]
+}

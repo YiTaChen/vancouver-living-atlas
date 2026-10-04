@@ -1,0 +1,43 @@
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:22:01 | INFO: Data are loaded, start creating Blender stuff
+17:22:01 | INFO: Blender create Mesh node Tailored torso
+17:22:01 | INFO: glTF import finished in 0.12s
+Info: Saved "driver-roadster-fit.lod0.blend"
+ERROR Draco mesh compression is not available because library could not be found at /usr/bin/4.3/python/lib/python3.13/site-packages/libextern_draco.so
+17:22:01 | INFO: Starting glTF 2.0 export
+17:22:01 | INFO: Extracting primitive: Tailored torso
+17:22:02 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+17:22:02 | INFO: Primitives created: 1
+17:22:02 | INFO: Finished glTF 2.0 export in 0.5689454078674316 s
+
+BUILT driver-roadster-fit 0
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:22:02 | INFO: Data are loaded, start creating Blender stuff
+17:22:02 | INFO: Blender create Mesh node Tailored torso
+17:22:02 | INFO: glTF import finished in 0.11s
+Info: Saved "driver-roadster-fit.lod1.blend"
+17:22:02 | INFO: Starting glTF 2.0 export
+17:22:02 | INFO: Extracting primitive: Tailored torso
+17:22:02 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+17:22:02 | INFO: Primitives created: 1
+17:22:03 | INFO: Finished glTF 2.0 export in 0.515831708908081 s
+
+BUILT driver-roadster-fit 1
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:22:03 | INFO: Data are loaded, start creating Blender stuff
+17:22:03 | INFO: Blender create Mesh node Tailored torso
+17:22:03 | INFO: glTF import finished in 0.10s
+Info: Saved "driver-roadster-fit.lod2.blend"
+17:22:03 | INFO: Starting glTF 2.0 export
+17:22:03 | INFO: Extracting primitive: Tailored torso
+17:22:03 | WARNING: More than one shader node tex image used for a texture. The resulting glTF sampler will behave like the first shader node tex image.
+17:22:03 | INFO: Primitives created: 1
+17:22:04 | INFO: Finished glTF 2.0 export in 0.5391335487365723 s
+
+BUILT driver-roadster-fit 2
+Blender 4.3.2
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/citizen-character-variants/source/driver-roadster-fit.lod0.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/citizen-character-variants/source/driver-roadster-fit.lod1.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/citizen-character-variants/source/driver-roadster-fit.lod2.blend"
+
+Blender quit

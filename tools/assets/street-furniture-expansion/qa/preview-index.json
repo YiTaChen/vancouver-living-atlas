@@ -1,0 +1,858 @@
+{
+  "status": "pass",
+  "renderer": "Cycles",
+  "device": "CPU",
+  "threads": 2,
+  "resolution": [
+    256,
+    256
+  ],
+  "samples": 16,
+  "qaReferences": {
+    "rulerM": 1,
+    "humanHeightsM": [
+      1.75,
+      1.81
+    ],
+    "onlyInQa": true
+  },
+  "renderCount": 88,
+  "contactSheetCount": 16,
+  "sheets": [
+    {
+      "file": "qa/previews/cedar-bench.lod-views.png",
+      "sha256": "201b7b3c54c21fe06fc69b0fc642e58c1d35dfc86e70543ec36a94eac19c7a6c",
+      "width": 1024,
+      "height": 624,
+      "assetId": "cedar-bench",
+      "kind": "lod-views",
+      "renders": [
+        {
+          "assetId": "cedar-bench",
+          "lod": 0,
+          "view": "front",
+          "lighting": "sunny",
+          "glbSha256": "a60d4179fe27780919a53e581b93a4c9be02be9806c0de6ff5b95b676dffa248"
+        },
+        {
+          "assetId": "cedar-bench",
+          "lod": 0,
+          "view": "side",
+          "lighting": "sunny",
+          "glbSha256": "a60d4179fe27780919a53e581b93a4c9be02be9806c0de6ff5b95b676dffa248"
+        },
+        {
+          "assetId": "cedar-bench",
+          "lod": 0,
+          "view": "rear",
+          "lighting": "sunny",
+          "glbSha256": "a60d4179fe27780919a53e581b93a4c9be02be9806c0de6ff5b95b676dffa248"
+        },
+        {
+          "assetId": "cedar-bench",
+          "lod": 0,
+          "view": "top",
+          "lighting": "sunny",
+          "glbSha256": "a60d4179fe27780919a53e581b93a4c9be02be9806c0de6ff5b95b676dffa248"
+        },
+        {
+          "assetId": "cedar-bench",
+          "lod": 1,
+          "view": "front",
+          "lighting": "sunny",
+          "glbSha256": "52e6ad93074c5d0d9384ffe7d7c6745b0d201c08ba836dfdb6bc04fd2cb6bfb1"
+        },
+        {
+          "assetId": "cedar-bench",
+          "lod": 1,
+          "view": "side",
+          "lighting": "sunny",
+          "glbSha256": "52e6ad93074c5d0d9384ffe7d7c6745b0d201c08ba836dfdb6bc04fd2cb6bfb1"
+        },
+        {
+          "assetId": "cedar-bench",
+          "lod": 1,
+          "view": "rear",
+          "lighting": "sunny",
+          "glbSha256": "52e6ad93074c5d0d9384ffe7d7c6745b0d201c08ba836dfdb6bc04fd2cb6bfb1"
+        },
+        {
+          "assetId": "cedar-bench",
+          "lod": 1,
+          "view": "top",
+          "lighting": "sunny",
+          "glbSha256": "52e6ad93074c5d0d9384ffe7d7c6745b0d201c08ba836dfdb6bc04fd2cb6bfb1"
+        }
+      ]
+    },
+    {
+      "file": "qa/previews/cedar-bench.four-light.png",
+      "sha256": "f1c172efdcfc32fef380ada63a4bcb9562457ecb0fa46593bc1ec8a6e1314b1e",
+      "width": 1024,
+      "height": 332,
+      "assetId": "cedar-bench",
+      "kind": "four-light",
+      "renders": [
+        {
+          "assetId": "cedar-bench",
+          "lod": 0,
+          "view": "front",
+          "lighting": "sunny",
+          "glbSha256": "a60d4179fe27780919a53e581b93a4c9be02be9806c0de6ff5b95b676dffa248"
+        },
+        {
+          "assetId": "cedar-bench",
+          "lod": 0,
+          "view": "front",
+          "lighting": "overcast",
+          "glbSha256": "a60d4179fe27780919a53e581b93a4c9be02be9806c0de6ff5b95b676dffa248"
+        },
+        {
+          "assetId": "cedar-bench",
+          "lod": 0,
+          "view": "front",
+          "lighting": "dusk",
+          "glbSha256": "a60d4179fe27780919a53e581b93a4c9be02be9806c0de6ff5b95b676dffa248"
+        },
+        {
+          "assetId": "cedar-bench",
+          "lod": 0,
+          "view": "front",
+          "lighting": "night",
+          "glbSha256": "a60d4179fe27780919a53e581b93a4c9be02be9806c0de6ff5b95b676dffa248"
+        }
+      ]
+    },
+    {
+      "file": "qa/previews/heritage-lamp.lod-views.png",
+      "sha256": "67b1c35199a68a88e58ff356639fe36cf79e4c83346bbc9216eb083900e94ab0",
+      "width": 1024,
+      "height": 624,
+      "assetId": "heritage-lamp",
+      "kind": "lod-views",
+      "renders": [
+        {
+          "assetId": "heritage-lamp",
+          "lod": 0,
+          "view": "front",
+          "lighting": "sunny",
+          "glbSha256": "5ed3170132b884f7e3dc4f996981ff44cf128e4de03063c07939b93d074ecb42"
+        },
+        {
+          "assetId": "heritage-lamp",
+          "lod": 0,
+          "view": "side",
+          "lighting": "sunny",
+          "glbSha256": "5ed3170132b884f7e3dc4f996981ff44cf128e4de03063c07939b93d074ecb42"
+        },
+        {
+          "assetId": "heritage-lamp",
+          "lod": 0,
+          "view": "rear",
+          "lighting": "sunny",
+          "glbSha256": "5ed3170132b884f7e3dc4f996981ff44cf128e4de03063c07939b93d074ecb42"
+        },
+        {
+          "assetId": "heritage-lamp",
+          "lod": 0,
+          "view": "top",
+          "lighting": "sunny",
+          "glbSha256": "5ed3170132b884f7e3dc4f996981ff44cf128e4de03063c07939b93d074ecb42"
+        },
+        {
+          "assetId": "heritage-lamp",
+          "lod": 1,
+          "view": "front",
+          "lighting": "sunny",
+          "glbSha256": "9877a18d4a82dc3c6ec776d5184dc310f357276fa36acdbeb343008ed5f1e92e"
+        },
+        {
+          "assetId": "heritage-lamp",
+          "lod": 1,
+          "view": "side",
+          "lighting": "sunny",
+          "glbSha256": "9877a18d4a82dc3c6ec776d5184dc310f357276fa36acdbeb343008ed5f1e92e"
+        },
+        {
+          "assetId": "heritage-lamp",
+          "lod": 1,
+          "view": "rear",
+          "lighting": "sunny",
+          "glbSha256": "9877a18d4a82dc3c6ec776d5184dc310f357276fa36acdbeb343008ed5f1e92e"
+        },
+        {
+          "assetId": "heritage-lamp",
+          "lod": 1,
+          "view": "top",
+          "lighting": "sunny",
+          "glbSha256": "9877a18d4a82dc3c6ec776d5184dc310f357276fa36acdbeb343008ed5f1e92e"
+        }
+      ]
+    },
+    {
+      "file": "qa/previews/heritage-lamp.four-light.png",
+      "sha256": "6bf396ef634318908aafc0aac5c6290a26b22937d3336c7cc5895a3e23d49e33",
+      "width": 1024,
+      "height": 332,
+      "assetId": "heritage-lamp",
+      "kind": "four-light",
+      "renders": [
+        {
+          "assetId": "heritage-lamp",
+          "lod": 0,
+          "view": "front",
+          "lighting": "sunny",
+          "glbSha256": "5ed3170132b884f7e3dc4f996981ff44cf128e4de03063c07939b93d074ecb42"
+        },
+        {
+          "assetId": "heritage-lamp",
+          "lod": 0,
+          "view": "front",
+          "lighting": "overcast",
+          "glbSha256": "5ed3170132b884f7e3dc4f996981ff44cf128e4de03063c07939b93d074ecb42"
+        },
+        {
+          "assetId": "heritage-lamp",
+          "lod": 0,
+          "view": "front",
+          "lighting": "dusk",
+          "glbSha256": "5ed3170132b884f7e3dc4f996981ff44cf128e4de03063c07939b93d074ecb42"
+        },
+        {
+          "assetId": "heritage-lamp",
+          "lod": 0,
+          "view": "front",
+          "lighting": "night",
+          "glbSha256": "5ed3170132b884f7e3dc4f996981ff44cf128e4de03063c07939b93d074ecb42"
+        }
+      ]
+    },
+    {
+      "file": "qa/previews/transit-shelter.lod-views.png",
+      "sha256": "1b4bd43a7fc90748517a18c35dbb18c2133e2007be7cea7b2d653ededa5f9aa2",
+      "width": 1024,
+      "height": 624,
+      "assetId": "transit-shelter",
+      "kind": "lod-views",
+      "renders": [
+        {
+          "assetId": "transit-shelter",
+          "lod": 0,
+          "view": "front",
+          "lighting": "sunny",
+          "glbSha256": "6647785c496a016ee153feba97993705a10373854d20938f136a5abb43d8123c"
+        },
+        {
+          "assetId": "transit-shelter",
+          "lod": 0,
+          "view": "side",
+          "lighting": "sunny",
+          "glbSha256": "6647785c496a016ee153feba97993705a10373854d20938f136a5abb43d8123c"
+        },
+        {
+          "assetId": "transit-shelter",
+          "lod": 0,
+          "view": "rear",
+          "lighting": "sunny",
+          "glbSha256": "6647785c496a016ee153feba97993705a10373854d20938f136a5abb43d8123c"
+        },
+        {
+          "assetId": "transit-shelter",
+          "lod": 0,
+          "view": "top",
+          "lighting": "sunny",
+          "glbSha256": "6647785c496a016ee153feba97993705a10373854d20938f136a5abb43d8123c"
+        },
+        {
+          "assetId": "transit-shelter",
+          "lod": 1,
+          "view": "front",
+          "lighting": "sunny",
+          "glbSha256": "a43328e71a7fa7380c335d4daa73e8562d1de7f33e1698e37ce2289ea676dd02"
+        },
+        {
+          "assetId": "transit-shelter",
+          "lod": 1,
+          "view": "side",
+          "lighting": "sunny",
+          "glbSha256": "a43328e71a7fa7380c335d4daa73e8562d1de7f33e1698e37ce2289ea676dd02"
+        },
+        {
+          "assetId": "transit-shelter",
+          "lod": 1,
+          "view": "rear",
+          "lighting": "sunny",
+          "glbSha256": "a43328e71a7fa7380c335d4daa73e8562d1de7f33e1698e37ce2289ea676dd02"
+        },
+        {
+          "assetId": "transit-shelter",
+          "lod": 1,
+          "view": "top",
+          "lighting": "sunny",
+          "glbSha256": "a43328e71a7fa7380c335d4daa73e8562d1de7f33e1698e37ce2289ea676dd02"
+        }
+      ]
+    },
+    {
+      "file": "qa/previews/transit-shelter.four-light.png",
+      "sha256": "a4fd0d85a6f1f1b2d04c55f3c430753a07b125b76f09d27c923a890fd3071f2b",
+      "width": 1024,
+      "height": 332,
+      "assetId": "transit-shelter",
+      "kind": "four-light",
+      "renders": [
+        {
+          "assetId": "transit-shelter",
+          "lod": 0,
+          "view": "front",
+          "lighting": "sunny",
+          "glbSha256": "6647785c496a016ee153feba97993705a10373854d20938f136a5abb43d8123c"
+        },
+        {
+          "assetId": "transit-shelter",
+          "lod": 0,
+          "view": "front",
+          "lighting": "overcast",
+          "glbSha256": "6647785c496a016ee153feba97993705a10373854d20938f136a5abb43d8123c"
+        },
+        {
+          "assetId": "transit-shelter",
+          "lod": 0,
+          "view": "front",
+          "lighting": "dusk",
+          "glbSha256": "6647785c496a016ee153feba97993705a10373854d20938f136a5abb43d8123c"
+        },
+        {
+          "assetId": "transit-shelter",
+          "lod": 0,
+          "view": "front",
+          "lighting": "night",
+          "glbSha256": "6647785c496a016ee153feba97993705a10373854d20938f136a5abb43d8123c"
+        }
+      ]
+    },
+    {
+      "file": "qa/previews/arterial-lamp-8m.lod-views.png",
+      "sha256": "67e6a05c0cbfb907ddd33977cb9126d0186a9b3290464ca903b6dff942c3686c",
+      "width": 1024,
+      "height": 624,
+      "assetId": "arterial-lamp-8m",
+      "kind": "lod-views",
+      "renders": [
+        {
+          "assetId": "arterial-lamp-8m",
+          "lod": 0,
+          "view": "front",
+          "lighting": "sunny",
+          "glbSha256": "2b80e20de1fa435e107d91467728317565ced114f9ef228dfeb297edaf5672a7"
+        },
+        {
+          "assetId": "arterial-lamp-8m",
+          "lod": 0,
+          "view": "side",
+          "lighting": "sunny",
+          "glbSha256": "2b80e20de1fa435e107d91467728317565ced114f9ef228dfeb297edaf5672a7"
+        },
+        {
+          "assetId": "arterial-lamp-8m",
+          "lod": 0,
+          "view": "rear",
+          "lighting": "sunny",
+          "glbSha256": "2b80e20de1fa435e107d91467728317565ced114f9ef228dfeb297edaf5672a7"
+        },
+        {
+          "assetId": "arterial-lamp-8m",
+          "lod": 0,
+          "view": "top",
+          "lighting": "sunny",
+          "glbSha256": "2b80e20de1fa435e107d91467728317565ced114f9ef228dfeb297edaf5672a7"
+        },
+        {
+          "assetId": "arterial-lamp-8m",
+          "lod": 1,
+          "view": "front",
+          "lighting": "sunny",
+          "glbSha256": "97c1b741d54f65e3da6c4ce6e8b761b83e31ec54d56e85122959d9581091996b"
+        },
+        {
+          "assetId": "arterial-lamp-8m",
+          "lod": 1,
+          "view": "side",
+          "lighting": "sunny",
+          "glbSha256": "97c1b741d54f65e3da6c4ce6e8b761b83e31ec54d56e85122959d9581091996b"
+        },
+        {
+          "assetId": "arterial-lamp-8m",
+          "lod": 1,
+          "view": "rear",
+          "lighting": "sunny",
+          "glbSha256": "97c1b741d54f65e3da6c4ce6e8b761b83e31ec54d56e85122959d9581091996b"
+        },
+        {
+          "assetId": "arterial-lamp-8m",
+          "lod": 1,
+          "view": "top",
+          "lighting": "sunny",
+          "glbSha256": "97c1b741d54f65e3da6c4ce6e8b761b83e31ec54d56e85122959d9581091996b"
+        }
+      ]
+    },
+    {
+      "file": "qa/previews/arterial-lamp-8m.four-light.png",
+      "sha256": "042a58ffa89eda66a3921946a9314b2f1ce4b84d798b0bf5aeffe8dd1832a2bb",
+      "width": 1024,
+      "height": 332,
+      "assetId": "arterial-lamp-8m",
+      "kind": "four-light",
+      "renders": [
+        {
+          "assetId": "arterial-lamp-8m",
+          "lod": 0,
+          "view": "front",
+          "lighting": "sunny",
+          "glbSha256": "2b80e20de1fa435e107d91467728317565ced114f9ef228dfeb297edaf5672a7"
+        },
+        {
+          "assetId": "arterial-lamp-8m",
+          "lod": 0,
+          "view": "front",
+          "lighting": "overcast",
+          "glbSha256": "2b80e20de1fa435e107d91467728317565ced114f9ef228dfeb297edaf5672a7"
+        },
+        {
+          "assetId": "arterial-lamp-8m",
+          "lod": 0,
+          "view": "front",
+          "lighting": "dusk",
+          "glbSha256": "2b80e20de1fa435e107d91467728317565ced114f9ef228dfeb297edaf5672a7"
+        },
+        {
+          "assetId": "arterial-lamp-8m",
+          "lod": 0,
+          "view": "front",
+          "lighting": "night",
+          "glbSha256": "2b80e20de1fa435e107d91467728317565ced114f9ef228dfeb297edaf5672a7"
+        }
+      ]
+    },
+    {
+      "file": "qa/previews/garbage-bin.lod-views.png",
+      "sha256": "baabaa0739fc8b77ab31d30c0483a801f977e44981b1c8f256dea69cca2b844b",
+      "width": 1024,
+      "height": 624,
+      "assetId": "garbage-bin",
+      "kind": "lod-views",
+      "renders": [
+        {
+          "assetId": "garbage-bin",
+          "lod": 0,
+          "view": "front",
+          "lighting": "sunny",
+          "glbSha256": "17ba1925f7bd79ab7d8a4f5da1956dd4e65e9b775e4bf379c2f8ac7ad358dedb"
+        },
+        {
+          "assetId": "garbage-bin",
+          "lod": 0,
+          "view": "side",
+          "lighting": "sunny",
+          "glbSha256": "17ba1925f7bd79ab7d8a4f5da1956dd4e65e9b775e4bf379c2f8ac7ad358dedb"
+        },
+        {
+          "assetId": "garbage-bin",
+          "lod": 0,
+          "view": "rear",
+          "lighting": "sunny",
+          "glbSha256": "17ba1925f7bd79ab7d8a4f5da1956dd4e65e9b775e4bf379c2f8ac7ad358dedb"
+        },
+        {
+          "assetId": "garbage-bin",
+          "lod": 0,
+          "view": "top",
+          "lighting": "sunny",
+          "glbSha256": "17ba1925f7bd79ab7d8a4f5da1956dd4e65e9b775e4bf379c2f8ac7ad358dedb"
+        },
+        {
+          "assetId": "garbage-bin",
+          "lod": 1,
+          "view": "front",
+          "lighting": "sunny",
+          "glbSha256": "1974f04cff170307e4239da84a53e91f797ec9fa37146782abf1e529446d8896"
+        },
+        {
+          "assetId": "garbage-bin",
+          "lod": 1,
+          "view": "side",
+          "lighting": "sunny",
+          "glbSha256": "1974f04cff170307e4239da84a53e91f797ec9fa37146782abf1e529446d8896"
+        },
+        {
+          "assetId": "garbage-bin",
+          "lod": 1,
+          "view": "rear",
+          "lighting": "sunny",
+          "glbSha256": "1974f04cff170307e4239da84a53e91f797ec9fa37146782abf1e529446d8896"
+        },
+        {
+          "assetId": "garbage-bin",
+          "lod": 1,
+          "view": "top",
+          "lighting": "sunny",
+          "glbSha256": "1974f04cff170307e4239da84a53e91f797ec9fa37146782abf1e529446d8896"
+        }
+      ]
+    },
+    {
+      "file": "qa/previews/garbage-bin.four-light.png",
+      "sha256": "acae24a9dca3565ec7dde660194ad33510c29555dd10aa96fc8588dd4e4e1624",
+      "width": 1024,
+      "height": 332,
+      "assetId": "garbage-bin",
+      "kind": "four-light",
+      "renders": [
+        {
+          "assetId": "garbage-bin",
+          "lod": 0,
+          "view": "front",
+          "lighting": "sunny",
+          "glbSha256": "17ba1925f7bd79ab7d8a4f5da1956dd4e65e9b775e4bf379c2f8ac7ad358dedb"
+        },
+        {
+          "assetId": "garbage-bin",
+          "lod": 0,
+          "view": "front",
+          "lighting": "overcast",
+          "glbSha256": "17ba1925f7bd79ab7d8a4f5da1956dd4e65e9b775e4bf379c2f8ac7ad358dedb"
+        },
+        {
+          "assetId": "garbage-bin",
+          "lod": 0,
+          "view": "front",
+          "lighting": "dusk",
+          "glbSha256": "17ba1925f7bd79ab7d8a4f5da1956dd4e65e9b775e4bf379c2f8ac7ad358dedb"
+        },
+        {
+          "assetId": "garbage-bin",
+          "lod": 0,
+          "view": "front",
+          "lighting": "night",
+          "glbSha256": "17ba1925f7bd79ab7d8a4f5da1956dd4e65e9b775e4bf379c2f8ac7ad358dedb"
+        }
+      ]
+    },
+    {
+      "file": "qa/previews/fire-hydrant.lod-views.png",
+      "sha256": "cccd8ff51e8b621cb2cedb685f34a6500e1ac2508a2d15dd9ae48cf1ea85500f",
+      "width": 1024,
+      "height": 624,
+      "assetId": "fire-hydrant",
+      "kind": "lod-views",
+      "renders": [
+        {
+          "assetId": "fire-hydrant",
+          "lod": 0,
+          "view": "front",
+          "lighting": "sunny",
+          "glbSha256": "7707dd6eee3472bc2c96b46052be75b71b6b974f4d8099ac5ed50dfab7ac811d"
+        },
+        {
+          "assetId": "fire-hydrant",
+          "lod": 0,
+          "view": "side",
+          "lighting": "sunny",
+          "glbSha256": "7707dd6eee3472bc2c96b46052be75b71b6b974f4d8099ac5ed50dfab7ac811d"
+        },
+        {
+          "assetId": "fire-hydrant",
+          "lod": 0,
+          "view": "rear",
+          "lighting": "sunny",
+          "glbSha256": "7707dd6eee3472bc2c96b46052be75b71b6b974f4d8099ac5ed50dfab7ac811d"
+        },
+        {
+          "assetId": "fire-hydrant",
+          "lod": 0,
+          "view": "top",
+          "lighting": "sunny",
+          "glbSha256": "7707dd6eee3472bc2c96b46052be75b71b6b974f4d8099ac5ed50dfab7ac811d"
+        },
+        {
+          "assetId": "fire-hydrant",
+          "lod": 1,
+          "view": "front",
+          "lighting": "sunny",
+          "glbSha256": "db9f89295e73768e6288389e4cfc70740c626ca1466a9cfba3a6d27ada9bfbef"
+        },
+        {
+          "assetId": "fire-hydrant",
+          "lod": 1,
+          "view": "side",
+          "lighting": "sunny",
+          "glbSha256": "db9f89295e73768e6288389e4cfc70740c626ca1466a9cfba3a6d27ada9bfbef"
+        },
+        {
+          "assetId": "fire-hydrant",
+          "lod": 1,
+          "view": "rear",
+          "lighting": "sunny",
+          "glbSha256": "db9f89295e73768e6288389e4cfc70740c626ca1466a9cfba3a6d27ada9bfbef"
+        },
+        {
+          "assetId": "fire-hydrant",
+          "lod": 1,
+          "view": "top",
+          "lighting": "sunny",
+          "glbSha256": "db9f89295e73768e6288389e4cfc70740c626ca1466a9cfba3a6d27ada9bfbef"
+        }
+      ]
+    },
+    {
+      "file": "qa/previews/fire-hydrant.four-light.png",
+      "sha256": "de9969698048ff34a63a457faf1ef6c11ab95c2c92081773caca5a12c766a5ca",
+      "width": 1024,
+      "height": 332,
+      "assetId": "fire-hydrant",
+      "kind": "four-light",
+      "renders": [
+        {
+          "assetId": "fire-hydrant",
+          "lod": 0,
+          "view": "front",
+          "lighting": "sunny",
+          "glbSha256": "7707dd6eee3472bc2c96b46052be75b71b6b974f4d8099ac5ed50dfab7ac811d"
+        },
+        {
+          "assetId": "fire-hydrant",
+          "lod": 0,
+          "view": "front",
+          "lighting": "overcast",
+          "glbSha256": "7707dd6eee3472bc2c96b46052be75b71b6b974f4d8099ac5ed50dfab7ac811d"
+        },
+        {
+          "assetId": "fire-hydrant",
+          "lod": 0,
+          "view": "front",
+          "lighting": "dusk",
+          "glbSha256": "7707dd6eee3472bc2c96b46052be75b71b6b974f4d8099ac5ed50dfab7ac811d"
+        },
+        {
+          "assetId": "fire-hydrant",
+          "lod": 0,
+          "view": "front",
+          "lighting": "night",
+          "glbSha256": "7707dd6eee3472bc2c96b46052be75b71b6b974f4d8099ac5ed50dfab7ac811d"
+        }
+      ]
+    },
+    {
+      "file": "qa/previews/bicycle-rack.lod-views.png",
+      "sha256": "d10b2fada5308d42a90583c24ab11ca041f81801dfe1f0a35b99597f0aa95207",
+      "width": 1024,
+      "height": 624,
+      "assetId": "bicycle-rack",
+      "kind": "lod-views",
+      "renders": [
+        {
+          "assetId": "bicycle-rack",
+          "lod": 0,
+          "view": "front",
+          "lighting": "sunny",
+          "glbSha256": "0b67e0cff1ff41599e0c5d79d17a084969995be156051b87b525c4f90df9f71a"
+        },
+        {
+          "assetId": "bicycle-rack",
+          "lod": 0,
+          "view": "side",
+          "lighting": "sunny",
+          "glbSha256": "0b67e0cff1ff41599e0c5d79d17a084969995be156051b87b525c4f90df9f71a"
+        },
+        {
+          "assetId": "bicycle-rack",
+          "lod": 0,
+          "view": "rear",
+          "lighting": "sunny",
+          "glbSha256": "0b67e0cff1ff41599e0c5d79d17a084969995be156051b87b525c4f90df9f71a"
+        },
+        {
+          "assetId": "bicycle-rack",
+          "lod": 0,
+          "view": "top",
+          "lighting": "sunny",
+          "glbSha256": "0b67e0cff1ff41599e0c5d79d17a084969995be156051b87b525c4f90df9f71a"
+        },
+        {
+          "assetId": "bicycle-rack",
+          "lod": 1,
+          "view": "front",
+          "lighting": "sunny",
+          "glbSha256": "c34b0f4dffbd22fec0ffc874edb54870e8cd2dc388d9a5316df0f4b1e65e68d8"
+        },
+        {
+          "assetId": "bicycle-rack",
+          "lod": 1,
+          "view": "side",
+          "lighting": "sunny",
+          "glbSha256": "c34b0f4dffbd22fec0ffc874edb54870e8cd2dc388d9a5316df0f4b1e65e68d8"
+        },
+        {
+          "assetId": "bicycle-rack",
+          "lod": 1,
+          "view": "rear",
+          "lighting": "sunny",
+          "glbSha256": "c34b0f4dffbd22fec0ffc874edb54870e8cd2dc388d9a5316df0f4b1e65e68d8"
+        },
+        {
+          "assetId": "bicycle-rack",
+          "lod": 1,
+          "view": "top",
+          "lighting": "sunny",
+          "glbSha256": "c34b0f4dffbd22fec0ffc874edb54870e8cd2dc388d9a5316df0f4b1e65e68d8"
+        }
+      ]
+    },
+    {
+      "file": "qa/previews/bicycle-rack.four-light.png",
+      "sha256": "8aa3f587015d0fb0b066a8658e4a5da98db000c85577faf10fb8fd67228726fe",
+      "width": 1024,
+      "height": 332,
+      "assetId": "bicycle-rack",
+      "kind": "four-light",
+      "renders": [
+        {
+          "assetId": "bicycle-rack",
+          "lod": 0,
+          "view": "front",
+          "lighting": "sunny",
+          "glbSha256": "0b67e0cff1ff41599e0c5d79d17a084969995be156051b87b525c4f90df9f71a"
+        },
+        {
+          "assetId": "bicycle-rack",
+          "lod": 0,
+          "view": "front",
+          "lighting": "overcast",
+          "glbSha256": "0b67e0cff1ff41599e0c5d79d17a084969995be156051b87b525c4f90df9f71a"
+        },
+        {
+          "assetId": "bicycle-rack",
+          "lod": 0,
+          "view": "front",
+          "lighting": "dusk",
+          "glbSha256": "0b67e0cff1ff41599e0c5d79d17a084969995be156051b87b525c4f90df9f71a"
+        },
+        {
+          "assetId": "bicycle-rack",
+          "lod": 0,
+          "view": "front",
+          "lighting": "night",
+          "glbSha256": "0b67e0cff1ff41599e0c5d79d17a084969995be156051b87b525c4f90df9f71a"
+        }
+      ]
+    },
+    {
+      "file": "qa/previews/bollard.lod-views.png",
+      "sha256": "965b652a6f068f471132334f56197da953ec6adf36c236baca9734ffd1b08d5b",
+      "width": 1024,
+      "height": 624,
+      "assetId": "bollard",
+      "kind": "lod-views",
+      "renders": [
+        {
+          "assetId": "bollard",
+          "lod": 0,
+          "view": "front",
+          "lighting": "sunny",
+          "glbSha256": "3d1eca13b4e656d37cc16fe49d8c1ae5aff4f9c4266e3c7119d864f232dbf3f8"
+        },
+        {
+          "assetId": "bollard",
+          "lod": 0,
+          "view": "side",
+          "lighting": "sunny",
+          "glbSha256": "3d1eca13b4e656d37cc16fe49d8c1ae5aff4f9c4266e3c7119d864f232dbf3f8"
+        },
+        {
+          "assetId": "bollard",
+          "lod": 0,
+          "view": "rear",
+          "lighting": "sunny",
+          "glbSha256": "3d1eca13b4e656d37cc16fe49d8c1ae5aff4f9c4266e3c7119d864f232dbf3f8"
+        },
+        {
+          "assetId": "bollard",
+          "lod": 0,
+          "view": "top",
+          "lighting": "sunny",
+          "glbSha256": "3d1eca13b4e656d37cc16fe49d8c1ae5aff4f9c4266e3c7119d864f232dbf3f8"
+        },
+        {
+          "assetId": "bollard",
+          "lod": 1,
+          "view": "front",
+          "lighting": "sunny",
+          "glbSha256": "f763e6f92d01beb50d7fd4734d3db39256bde6f5c34d7d7c9dabffc8fe74ae69"
+        },
+        {
+          "assetId": "bollard",
+          "lod": 1,
+          "view": "side",
+          "lighting": "sunny",
+          "glbSha256": "f763e6f92d01beb50d7fd4734d3db39256bde6f5c34d7d7c9dabffc8fe74ae69"
+        },
+        {
+          "assetId": "bollard",
+          "lod": 1,
+          "view": "rear",
+          "lighting": "sunny",
+          "glbSha256": "f763e6f92d01beb50d7fd4734d3db39256bde6f5c34d7d7c9dabffc8fe74ae69"
+        },
+        {
+          "assetId": "bollard",
+          "lod": 1,
+          "view": "top",
+          "lighting": "sunny",
+          "glbSha256": "f763e6f92d01beb50d7fd4734d3db39256bde6f5c34d7d7c9dabffc8fe74ae69"
+        }
+      ]
+    },
+    {
+      "file": "qa/previews/bollard.four-light.png",
+      "sha256": "e21bea9e2e5544e42391febc8eae958ed66ec41cb9725d69e2f7de0ac2f58172",
+      "width": 1024,
+      "height": 332,
+      "assetId": "bollard",
+      "kind": "four-light",
+      "renders": [
+        {
+          "assetId": "bollard",
+          "lod": 0,
+          "view": "front",
+          "lighting": "sunny",
+          "glbSha256": "3d1eca13b4e656d37cc16fe49d8c1ae5aff4f9c4266e3c7119d864f232dbf3f8"
+        },
+        {
+          "assetId": "bollard",
+          "lod": 0,
+          "view": "front",
+          "lighting": "overcast",
+          "glbSha256": "3d1eca13b4e656d37cc16fe49d8c1ae5aff4f9c4266e3c7119d864f232dbf3f8"
+        },
+        {
+          "assetId": "bollard",
+          "lod": 0,
+          "view": "front",
+          "lighting": "dusk",
+          "glbSha256": "3d1eca13b4e656d37cc16fe49d8c1ae5aff4f9c4266e3c7119d864f232dbf3f8"
+        },
+        {
+          "assetId": "bollard",
+          "lod": 0,
+          "view": "front",
+          "lighting": "night",
+          "glbSha256": "3d1eca13b4e656d37cc16fe49d8c1ae5aff4f9c4266e3c7119d864f232dbf3f8"
+        }
+      ]
+    }
+  ],
+  "denoising": false,
+  "environmentNote": "First render attempt detected unavailable OpenImageDenoise. Final 88 renders use Cycles CPU, 16 samples, no denoising. No WebGL or GPU evidence.",
+  "lighting": "Offline sunny/overcast/dusk/night rigs, exposure 0, AgX, fixed geometry and views; not asserted equivalent to city weather."
+}

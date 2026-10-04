@@ -1,0 +1,30 @@
+{
+  "status": "pass",
+  "packageId": "street-furniture-expansion",
+  "assetCount": 8,
+  "lodCount": 16,
+  "checks": {
+    "commonContract": "pass",
+    "sourceHashAndReopen": "pass",
+    "sourcePreservingReexport": "pass",
+    "actualArtistEdits": "pass",
+    "dimensionAndGroundDatum": "pass",
+    "lodEnvelope": "pass",
+    "triangleAndByteBudgets": "pass",
+    "semanticRoleAndUvTangents": "pass",
+    "glassAndDiffuserSemantics": "pass",
+    "geometryClearanceRays": "pass",
+    "exactDuplicateTriangleTest": "pass",
+    "placementFixtures": "pass (13 tests)",
+    "cyclesCpuActualGlb88Renders": "pass",
+    "visualReview": "pass"
+  },
+  "runtime": "not_run",
+  "integrationStatus": "runtime_pending_webgl",
+  "limitations": [
+    "Clearance sampled using CPU rays and simple conservative proxies; not legal accessibility certification.",
+    "Not a city WebGL placement/performance/render validation.",
+    "No source-selected props enabled; proposed F02 slots remain empty.",
+    "Only untextured Principled semantic role materials accepted by exporter."
+  ]
+}

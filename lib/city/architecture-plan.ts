@@ -21,7 +21,20 @@ export type ArchitecturePart = {
   roofEaveHeight?: number;
   roofExclusions?: number[][][][];
 };
+/** One original HVAC assembly; all emitted boxes share this source-owned datum. */
+export type ArchitectureRoofUnit = {
+  sourceKey: string;
+  x: number;
+  y: number;
+  z: number;
+  width: number;
+  height: number;
+  depth: number;
+  yaw: number;
+  boxCount: number;
+};
 export type ArchitectureBox = {
+  roofUnit?: ArchitectureRoofUnit;
   x: number;
   y: number;
   z: number;
@@ -295,6 +308,17 @@ export function* architectureWork(
         accepted.push({ x, z, radius });
         const bh =
           placed === 0 && h > 50 ? 2.5 : 0.9 + ((seed >>> placed) % 3) * 0.25;
+        const roofUnit: ArchitectureRoofUnit = {
+          sourceKey: part.key,
+          x,
+          y: ground + h,
+          z,
+          width,
+          height: bh,
+          depth,
+          yaw,
+          boxCount: placed === 0 ? 7 : 6,
+        };
         const unit = (
           w: number,
           hh: number,
@@ -306,6 +330,7 @@ export function* architectureWork(
           color: number,
           surface: ArchitectureBox['surface'] = 'metal',
         ): ArchitectureBox => ({
+          roofUnit,
           x: xx,
           y: ground + h + yy,
           z: zz,

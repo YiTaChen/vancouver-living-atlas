@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-03",
+  "historicalConsumerRevision": "5574d55719f10d1575127d8b92cbd23ff71e446f",
+  "oldInputFingerprint": "0e7975b89e6b884487facd70e5065cf8b9609d5478ce1d8ec710ff81221fea37",
+  "newInputFingerprint": "ed27fcdeb0a62275c2b76addc1c51e5ee2d115aa90b92b396eefc5b70b0207c2",
+  "changedInputs": [
+    {
+      "file": "tools/assets/city-scale-audit/audit.mjs",
+      "before": {
+        "file": "tools/assets/city-scale-audit/audit.mjs",
+        "bytes": 39630,
+        "sha256": "e14241bde133e3c21378995cf9b548f4ff3fc88a520f13085091108b1bd7e17b"
+      },
+      "after": {
+        "file": "tools/assets/city-scale-audit/audit.mjs",
+        "bytes": 41579,
+        "sha256": "164e368551b56f1ade5e037742e003a8d56b6785ef5c7e24cdc1fa689d789785"
+      }
+    }
+  ],
+  "unchangedBuildingLedgerSha256": "0d1ca0c75cb8b56d0117856615d07980773e9d02dcaf6bb49adc72fef9cb5a51",
+  "unchangedNumericalEvidence": true,
+  "currentGisModelsConfigsAndDocumentsRemainStrict": true,
+  "currentConsumerGeometryReevaluated": true,
+  "immutableConsumerScope": "lib/city/*.ts and *.js only; geographic/config JSON remains current",
+  "missingHistoricalRevision": "fail closed; fetch repository history; no current-source fallback",
+  "webgl": "not_run"
+}

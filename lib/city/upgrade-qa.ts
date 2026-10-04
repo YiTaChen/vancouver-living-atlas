@@ -5,6 +5,7 @@ import { QACPUProfile } from './qa-cpu-profile';
 import { installArchitectureModuleCandidateQA } from './architecture-module-candidate-qa';
 import { installOfflineMaterialStudyQA } from './offline-material-study-qa';
 import { installOfflineAssetValidationQA } from './offline-asset-validation-qa';
+import { installBlenderDeliveryQA } from './blender-delivery-qa';
 import { project } from './geo';
 import { sampleAtmosphere, type AtmosphereMode } from './atmosphere';
 import {
@@ -166,6 +167,7 @@ export function installUpgradeQA(
     () => busy || lease?.isRunning() === true,
   );
   installOfflineMaterialStudyQA(e, section, assetLease);
+  installBlenderDeliveryQA(e, section, assetLease);
   installOfflineAssetValidationQA(
     e,
     section,

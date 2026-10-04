@@ -1,0 +1,408 @@
+{
+  "status": "pass",
+  "environment": {
+    "blender": "4.3.2",
+    "device": "CPU",
+    "threads": 2,
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41"
+  },
+  "scope": "Actual source reopen, GLB reimport, grid rays, exact duplicate triangles, UV/tangent integrity; no WebGL claim.",
+  "results": [
+    {
+      "assetId": "cedar-bench",
+      "lod": 0,
+      "authoringBoundsM": {
+        "min": [
+          -1.0099999904632568,
+          -0.30000001192092896,
+          -2.319546510420878e-08
+        ],
+        "max": [
+          1.0099999904632568,
+          0.39957860112190247,
+          0.9853602647781372
+        ]
+      },
+      "checks": {
+        "groundDatum": true,
+        "noQaObjects": true,
+        "uvs": true,
+        "finiteVertexCoordinates": true,
+        "seatTopM": 0.5090000033378601,
+        "tangents": true,
+        "exactDuplicateTriangles": 0
+      }
+    },
+    {
+      "assetId": "cedar-bench",
+      "lod": 1,
+      "authoringBoundsM": {
+        "min": [
+          -1.0099999904632568,
+          -0.30000001192092896,
+          0.0
+        ],
+        "max": [
+          1.0099999904632568,
+          0.40095970034599304,
+          0.9849350452423096
+        ]
+      },
+      "checks": {
+        "groundDatum": true,
+        "noQaObjects": true,
+        "uvs": true,
+        "finiteVertexCoordinates": true,
+        "seatTopM": 0.5090000629425049,
+        "tangents": true,
+        "exactDuplicateTriangles": 0
+      }
+    },
+    {
+      "assetId": "heritage-lamp",
+      "lod": 0,
+      "authoringBoundsM": {
+        "min": [
+          -1.0649999380111694,
+          -0.23499999940395355,
+          0.0
+        ],
+        "max": [
+          1.0649999380111694,
+          0.23499999940395355,
+          4.489999771118164
+        ]
+      },
+      "checks": {
+        "groundDatum": true,
+        "noQaObjects": true,
+        "uvs": true,
+        "finiteVertexCoordinates": true,
+        "tangents": true,
+        "exactDuplicateTriangles": 0
+      }
+    },
+    {
+      "assetId": "heritage-lamp",
+      "lod": 1,
+      "authoringBoundsM": {
+        "min": [
+          -1.059809684753418,
+          -0.2298096865415573,
+          0.0
+        ],
+        "max": [
+          1.059809684753418,
+          0.2298096865415573,
+          4.489999771118164
+        ]
+      },
+      "checks": {
+        "groundDatum": true,
+        "noQaObjects": true,
+        "uvs": true,
+        "finiteVertexCoordinates": true,
+        "tangents": true,
+        "exactDuplicateTriangles": 0
+      }
+    },
+    {
+      "assetId": "transit-shelter",
+      "lod": 0,
+      "authoringBoundsM": {
+        "min": [
+          -2.2799999713897705,
+          -0.3400000035762787,
+          0.0
+        ],
+        "max": [
+          2.2799997329711914,
+          1.5199999809265137,
+          2.819999933242798
+        ]
+      },
+      "checks": {
+        "groundDatum": true,
+        "noQaObjects": true,
+        "uvs": true,
+        "finiteVertexCoordinates": true,
+        "headroomMinimumSampledM": 2.590217113494873,
+        "standingPrismGridClear": true,
+        "frontEntryGridClear": true,
+        "tangents": true,
+        "exactDuplicateTriangles": 0
+      }
+    },
+    {
+      "assetId": "transit-shelter",
+      "lod": 1,
+      "authoringBoundsM": {
+        "min": [
+          -2.2799999713897705,
+          -0.3400000035762787,
+          0.0
+        ],
+        "max": [
+          2.2799997329711914,
+          1.5199999809265137,
+          2.819999933242798
+        ]
+      },
+      "checks": {
+        "groundDatum": true,
+        "noQaObjects": true,
+        "uvs": true,
+        "finiteVertexCoordinates": true,
+        "headroomMinimumSampledM": 2.590217113494873,
+        "standingPrismGridClear": true,
+        "frontEntryGridClear": true,
+        "tangents": true,
+        "exactDuplicateTriangles": 0
+      }
+    },
+    {
+      "assetId": "arterial-lamp-8m",
+      "lod": 0,
+      "authoringBoundsM": {
+        "min": [
+          -0.15000000596046448,
+          -0.17000000178813934,
+          0.0
+        ],
+        "max": [
+          1.7599999904632568,
+          0.17000000178813934,
+          8.0
+        ]
+      },
+      "checks": {
+        "groundDatum": true,
+        "noQaObjects": true,
+        "uvs": true,
+        "finiteVertexCoordinates": true,
+        "tangents": true,
+        "exactDuplicateTriangles": 0
+      }
+    },
+    {
+      "assetId": "arterial-lamp-8m",
+      "lod": 1,
+      "authoringBoundsM": {
+        "min": [
+          -0.15000000596046448,
+          -0.17000000178813934,
+          0.0
+        ],
+        "max": [
+          1.7599999904632568,
+          0.17000000178813934,
+          8.0
+        ]
+      },
+      "checks": {
+        "groundDatum": true,
+        "noQaObjects": true,
+        "uvs": true,
+        "finiteVertexCoordinates": true,
+        "tangents": true,
+        "exactDuplicateTriangles": 0
+      }
+    },
+    {
+      "assetId": "garbage-bin",
+      "lod": 0,
+      "authoringBoundsM": {
+        "min": [
+          -0.28999999165534973,
+          -0.28999996185302734,
+          0.0
+        ],
+        "max": [
+          0.28999999165534973,
+          0.28999999165534973,
+          0.9700000286102295
+        ]
+      },
+      "checks": {
+        "groundDatum": true,
+        "noQaObjects": true,
+        "uvs": true,
+        "finiteVertexCoordinates": true,
+        "wasteMouthOpen": true,
+        "tangents": true,
+        "exactDuplicateTriangles": 0
+      }
+    },
+    {
+      "assetId": "garbage-bin",
+      "lod": 1,
+      "authoringBoundsM": {
+        "min": [
+          -0.28999999165534973,
+          -0.28999996185302734,
+          0.0
+        ],
+        "max": [
+          0.28999999165534973,
+          0.28999999165534973,
+          0.9700000286102295
+        ]
+      },
+      "checks": {
+        "groundDatum": true,
+        "noQaObjects": true,
+        "uvs": true,
+        "finiteVertexCoordinates": true,
+        "wasteMouthOpen": true,
+        "tangents": true,
+        "exactDuplicateTriangles": 0
+      }
+    },
+    {
+      "assetId": "fire-hydrant",
+      "lod": 0,
+      "authoringBoundsM": {
+        "min": [
+          -0.2750000059604645,
+          -0.23000001907348633,
+          0.0
+        ],
+        "max": [
+          0.2750000059604645,
+          0.18000000715255737,
+          0.8540000319480896
+        ]
+      },
+      "checks": {
+        "groundDatum": true,
+        "noQaObjects": true,
+        "uvs": true,
+        "finiteVertexCoordinates": true,
+        "tangents": true,
+        "exactDuplicateTriangles": 0
+      }
+    },
+    {
+      "assetId": "fire-hydrant",
+      "lod": 1,
+      "authoringBoundsM": {
+        "min": [
+          -0.2750000059604645,
+          -0.23000001907348633,
+          0.0
+        ],
+        "max": [
+          0.2750000059604645,
+          0.18000000715255737,
+          0.8540000319480896
+        ]
+      },
+      "checks": {
+        "groundDatum": true,
+        "noQaObjects": true,
+        "uvs": true,
+        "finiteVertexCoordinates": true,
+        "tangents": true,
+        "exactDuplicateTriangles": 0
+      }
+    },
+    {
+      "assetId": "bicycle-rack",
+      "lod": 0,
+      "authoringBoundsM": {
+        "min": [
+          -0.48500001430511475,
+          -0.08500000089406967,
+          0.0
+        ],
+        "max": [
+          0.48500004410743713,
+          0.08500000834465027,
+          0.8400000333786011
+        ]
+      },
+      "checks": {
+        "groundDatum": true,
+        "noQaObjects": true,
+        "uvs": true,
+        "finiteVertexCoordinates": true,
+        "rackCenterOpen": true,
+        "tangents": true,
+        "exactDuplicateTriangles": 0
+      }
+    },
+    {
+      "assetId": "bicycle-rack",
+      "lod": 1,
+      "authoringBoundsM": {
+        "min": [
+          -0.48500001430511475,
+          -0.08500000089406967,
+          0.0
+        ],
+        "max": [
+          0.48500004410743713,
+          0.08500000089406967,
+          0.8400000333786011
+        ]
+      },
+      "checks": {
+        "groundDatum": true,
+        "noQaObjects": true,
+        "uvs": true,
+        "finiteVertexCoordinates": true,
+        "rackCenterOpen": true,
+        "tangents": true,
+        "exactDuplicateTriangles": 0
+      }
+    },
+    {
+      "assetId": "bollard",
+      "lod": 0,
+      "authoringBoundsM": {
+        "min": [
+          -0.0949999988079071,
+          -0.0949999988079071,
+          0.0
+        ],
+        "max": [
+          0.0949999988079071,
+          0.0949999988079071,
+          0.8999999761581421
+        ]
+      },
+      "checks": {
+        "groundDatum": true,
+        "noQaObjects": true,
+        "uvs": true,
+        "finiteVertexCoordinates": true,
+        "tangents": true,
+        "exactDuplicateTriangles": 0
+      }
+    },
+    {
+      "assetId": "bollard",
+      "lod": 1,
+      "authoringBoundsM": {
+        "min": [
+          -0.0949999988079071,
+          -0.0949999988079071,
+          0.0
+        ],
+        "max": [
+          0.0949999988079071,
+          0.0949999988079071,
+          0.8999999761581421
+        ]
+      },
+      "checks": {
+        "groundDatum": true,
+        "noQaObjects": true,
+        "uvs": true,
+        "finiteVertexCoordinates": true,
+        "tangents": true,
+        "exactDuplicateTriangles": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "status": "pass",
+  "method": "Copy original .blend in temporary directory; change one sign-frame mesh vertex +.04m X and sign-face Principled base color; save; source-preserving export; inspect actual GLB accessor bounds and material factor. Production source/export unchanged.",
+  "assetId": "bus-stop-pole",
+  "sourceHashUnchanged": true,
+  "vertexXBefore": 0.28999999165534973,
+  "vertexXAfter": 0.3299999916553497,
+  "baselineMaxX": 0.28999999165534973,
+  "editedMaxX": 0.32703202962875366,
+  "editedMaterialFactor": [
+    0.11500000208616257,
+    0.47999998927116394,
+    0.6200000047683716,
+    1
+  ],
+  "generatorInvoked": false
+}

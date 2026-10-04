@@ -1,0 +1,16 @@
+✔ doorway subtraction opens a real hole while preserving adjacent wall and attributes (5.526563ms)
+✔ all entrances connect to their public floors, walls and furniture block walking, cars stay outside (130.218613ms)
+✔ cutaway is close orbit only and restores the intact exterior in walk and distant views (93.248259ms)
+✔ Science World and Canada Place have passable ground-level holes in their original envelopes (426.002951ms)
+✔ the station rear doorway and entire SkyWalk connect to the lower SeaBus lounge (1152.147088ms)
+✔ roadster fits the existing car footprint with finite open-cabin geometry and bounded draws (58.550189ms)
+✔ roadster cockpit preserves left-hand driving controls and independent resources (34.23917ms)
+✔ car switching keeps driving pose speed zoom and bookmark and reuses model resources (1.321587ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2394.416935

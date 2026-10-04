@@ -1,0 +1,96 @@
+{
+  "status": "pass_with_documented_limits",
+  "reviewedImages": [
+    "qa/previews/furniture-reimport.png",
+    "qa/previews/roadster-reimport.png",
+    "qa/previews/edited-chair-reimport.png",
+    "qa/previews/furniture-views-lods.png",
+    "qa/previews/furniture-four-light.png"
+  ],
+  "observations": [
+    "Chair/counter forms, independent LODs and human scale are readable.",
+    "Source-edit preview matches measured +10 mm seat-top change.",
+    "Roadster driver skin remains original untextured colour; only seats receive leather.",
+    "Front/side/back/top show chair legs/slats and counter rear cavity consistently in both LODs.",
+    "Clear/overcast/dusk/night contact sheet preserves same geometry/camera and scale reference.",
+    "Fresh batched GLB reimports preserve chair legs/slats, counter rear cavity, LOD silhouette and shared material role assignment.",
+    "Edited seat +10 mm is measured on actual batched vertices and the imported surface ray; the named seat is an Empty anchor.",
+    "All four furniture previews reviewed after static batching; studio four-light render coverage remains offline, not city runtime."
+  ],
+  "limits": [
+    "20-sample standalone and12-sample coverage CPU noise, OIDN unavailable.",
+    "Roadster caption partly outside frame; geometry/human reference remain visible.",
+    "Per-triangle curve UV charts require actual shader seam/normal review.",
+    "No runtime screen/canvas/lighting/gameplay/GPU acceptance.",
+    "Static named part anchors do not carry geometry or animate batched components; query exact ranges.",
+    "Edited-chair text crosses the backrest and reference figures are partially cropped in some coverage tiles; furniture silhouettes remain visible."
+  ],
+  "staticBatchingPreviewHashes": [
+    {
+      "file": "qa/previews/furniture-reimport.png",
+      "sha256": "84247c4ad1ea3e2ea59d2a32162000e9b023fb12f51b6d710de824cae11caa28",
+      "rgbPixelSha256": "ea015cce1f15ce50f946f94d18c519c0f4a11c825dca2a89328e295068247c86",
+      "reviewed": true
+    },
+    {
+      "file": "qa/previews/edited-chair-reimport.png",
+      "sha256": "feff18a461f7318f7ae0a61864349151c7e93468354bac4e3cf6a991b4eea2ed",
+      "rgbPixelSha256": "e1883a18fbf4dc6b66521fecdab2f4685810ff7aefd60157bcbabd45b1fd657a",
+      "reviewed": true
+    },
+    {
+      "file": "qa/previews/furniture-views-lods.png",
+      "sha256": "eb7c348b38a4c62a8963c11e9b190640c3a7749b119a829ebd12adf7f6167709",
+      "rgbPixelSha256": "9042b1ae4dd43cc4e186f102c131dee4f5fb49a1187ac21d86be5dee2aa47fa8",
+      "reviewed": true
+    },
+    {
+      "file": "qa/previews/furniture-four-light.png",
+      "sha256": "526e4ed170d0872c390bf02caf607b1487b793cc885046bc919b9fb6163b1e64",
+      "rgbPixelSha256": "a0c952ce9cace11d862b16c06573c565ad1701ac854db27fdc15cabbdc16cc82",
+      "reviewed": true
+    }
+  ],
+  "preBatchPixelComparison": [
+    {
+      "file": "qa/previews/furniture-reimport.png",
+      "previousRGBPixelSha256": "c31a527dc5f4f38a860ce80631ef3308706747f5660ef40384e6ac561b45fabb",
+      "currentRGBPixelSha256": "ea015cce1f15ce50f946f94d18c519c0f4a11c825dca2a89328e295068247c86",
+      "maxRGB8ChannelDifference": 1,
+      "meanAbsoluteRGB8ChannelDifference": 1.7361111111111112e-06,
+      "changedPixels": 3,
+      "totalPixels": 576000,
+      "sameRenderSettings": true
+    },
+    {
+      "file": "qa/previews/edited-chair-reimport.png",
+      "previousRGBPixelSha256": "99d208494a9db8717f38fbd4115a650674a1e7adfa7b95be69755fdeab3c8c3b",
+      "currentRGBPixelSha256": "e1883a18fbf4dc6b66521fecdab2f4685810ff7aefd60157bcbabd45b1fd657a",
+      "maxRGB8ChannelDifference": 1,
+      "meanAbsoluteRGB8ChannelDifference": 5.787037037037037e-07,
+      "changedPixels": 1,
+      "totalPixels": 576000,
+      "sameRenderSettings": true
+    },
+    {
+      "file": "qa/previews/furniture-views-lods.png",
+      "previousRGBPixelSha256": "d5a1e7bbeb44e1dc9e3894554dca74904bd1deb1ff2b0ea12920b570ae6bb97d",
+      "currentRGBPixelSha256": "9042b1ae4dd43cc4e186f102c131dee4f5fb49a1187ac21d86be5dee2aa47fa8",
+      "maxRGB8ChannelDifference": 6,
+      "meanAbsoluteRGB8ChannelDifference": 4.172164106430434e-06,
+      "changedPixels": 3,
+      "totalPixels": 1358208,
+      "sameRenderSettings": true
+    },
+    {
+      "file": "qa/previews/furniture-four-light.png",
+      "previousRGBPixelSha256": "0b75e04d5f293539d98e5962eea2d8300cf7c4ade9c21b01ff861ff54791ad89",
+      "currentRGBPixelSha256": "a0c952ce9cace11d862b16c06573c565ad1701ac854db27fdc15cabbdc16cc82",
+      "maxRGB8ChannelDifference": 5,
+      "meanAbsoluteRGB8ChannelDifference": 8.103758618585636e-06,
+      "changedPixels": 5,
+      "totalPixels": 699264,
+      "sameRenderSettings": true
+    }
+  ]
+}

@@ -1,0 +1,988 @@
+{
+  "status": "pass",
+  "blender": "4.3.2",
+  "device": "CPU",
+  "sourcePreserved": true,
+  "sources": [
+    {
+      "assetId": "curb-straight-1m",
+      "lod": 0,
+      "source": "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/ground-planting-details/source/curb-straight-1m.lod0.blend",
+      "sourceSha256": "ebced11db92525b618a35dc9b9ee4912afd674cc81926b79a88fa4b6e09e3ef1",
+      "sourceSha256After": "ebced11db92525b618a35dc9b9ee4912afd674cc81926b79a88fa4b6e09e3ef1",
+      "sourceReopened": true,
+      "objects": [
+        "curb-body"
+      ],
+      "exports": [
+        {
+          "file": "exports/curb-straight-1m.lod0.glb",
+          "sha256": "87e62d3ab2c1c9ab6a314bf1e3d5b0ab9f2eb9436caf675db3b9f631d0025bfd",
+          "inspection": false,
+          "maps": []
+        },
+        {
+          "file": "exports/curb-straight-1m.lod0.inspection.glb",
+          "sha256": "e625906c7904b1da1fec21d9526a7efc4fb99bf047b566c94f701132c2eb044d",
+          "inspection": true,
+          "maps": [
+            {
+              "file": "exports/textures/80d9b75c08564460d2d3.png",
+              "sha256": "80d9b75c08564460d2d3f43e3e886ac203ef4f81a3c69497d677240b18abf3dd",
+              "bytes": 16012,
+              "imageName": "concrete-normal"
+            },
+            {
+              "file": "exports/textures/9f51a3eccf7196241f07.png",
+              "sha256": "9f51a3eccf7196241f07df33cf28b8d7f65583c84103f8738d25ceceb7fe7192",
+              "bytes": 42856,
+              "imageName": "concrete-color"
+            },
+            {
+              "file": "exports/textures/0388a0c62cd21deb1e4b.png",
+              "sha256": "0388a0c62cd21deb1e4b603de00965e1578a38cc54e83b90cffbf30f98a5bc1e",
+              "bytes": 13891,
+              "imageName": "concrete-orm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "assetId": "curb-straight-1m",
+      "lod": 1,
+      "source": "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/ground-planting-details/source/curb-straight-1m.lod1.blend",
+      "sourceSha256": "003684cea8cb21afc70a51541528af019a2b9dd58ed44f2e0f3c2c98751fe7e5",
+      "sourceSha256After": "003684cea8cb21afc70a51541528af019a2b9dd58ed44f2e0f3c2c98751fe7e5",
+      "sourceReopened": true,
+      "objects": [
+        "curb-body"
+      ],
+      "exports": [
+        {
+          "file": "exports/curb-straight-1m.lod1.glb",
+          "sha256": "122dc2cb9fee517c23e1a2e5ee4ffc5049a34b98d87b32830900c7d81fa06b7c",
+          "inspection": false,
+          "maps": []
+        },
+        {
+          "file": "exports/curb-straight-1m.lod1.inspection.glb",
+          "sha256": "3abacedac941755d685a8b150afee03bfa87e78099ba284309b935a6d528d364",
+          "inspection": true,
+          "maps": [
+            {
+              "file": "exports/textures/80d9b75c08564460d2d3.png",
+              "sha256": "80d9b75c08564460d2d3f43e3e886ac203ef4f81a3c69497d677240b18abf3dd",
+              "bytes": 16012,
+              "imageName": "concrete-normal"
+            },
+            {
+              "file": "exports/textures/9f51a3eccf7196241f07.png",
+              "sha256": "9f51a3eccf7196241f07df33cf28b8d7f65583c84103f8738d25ceceb7fe7192",
+              "bytes": 42856,
+              "imageName": "concrete-color"
+            },
+            {
+              "file": "exports/textures/0388a0c62cd21deb1e4b.png",
+              "sha256": "0388a0c62cd21deb1e4b603de00965e1578a38cc54e83b90cffbf30f98a5bc1e",
+              "bytes": 13891,
+              "imageName": "concrete-orm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "assetId": "perennial-rosette",
+      "lod": 0,
+      "source": "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/ground-planting-details/source/perennial-rosette.lod0.blend",
+      "sourceSha256": "f1f80313e9f6bbbb7b9ed1531354567b39a41266722d2cb155903d1bd9fb4a1b",
+      "sourceSha256After": "f1f80313e9f6bbbb7b9ed1531354567b39a41266722d2cb155903d1bd9fb4a1b",
+      "sourceReopened": true,
+      "objects": [
+        "perennial-rosette-leaves"
+      ],
+      "exports": [
+        {
+          "file": "exports/perennial-rosette.lod0.glb",
+          "sha256": "9f70ee0db01cbf55fcb4b52b1a30a5211993d12ec4c99d7e410b19cdab5e47ed",
+          "inspection": false,
+          "maps": []
+        },
+        {
+          "file": "exports/perennial-rosette.lod0.inspection.glb",
+          "sha256": "9f70ee0db01cbf55fcb4b52b1a30a5211993d12ec4c99d7e410b19cdab5e47ed",
+          "inspection": true,
+          "maps": []
+        }
+      ]
+    },
+    {
+      "assetId": "perennial-rosette",
+      "lod": 1,
+      "source": "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/ground-planting-details/source/perennial-rosette.lod1.blend",
+      "sourceSha256": "21d1418e507b184136b58733e79b60e69747da5a1e1c7096363ee4ccb2328481",
+      "sourceSha256After": "21d1418e507b184136b58733e79b60e69747da5a1e1c7096363ee4ccb2328481",
+      "sourceReopened": true,
+      "objects": [
+        "perennial-rosette-leaves"
+      ],
+      "exports": [
+        {
+          "file": "exports/perennial-rosette.lod1.glb",
+          "sha256": "1ad6abaaa6c2e7a65a0864d1560cb87a6bf676140c948e01b0746580ca5d4f22",
+          "inspection": false,
+          "maps": []
+        },
+        {
+          "file": "exports/perennial-rosette.lod1.inspection.glb",
+          "sha256": "1ad6abaaa6c2e7a65a0864d1560cb87a6bf676140c948e01b0746580ca5d4f22",
+          "inspection": true,
+          "maps": []
+        }
+      ]
+    },
+    {
+      "assetId": "perennial-tuft",
+      "lod": 0,
+      "source": "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/ground-planting-details/source/perennial-tuft.lod0.blend",
+      "sourceSha256": "ab6390852e21f38cd653e08f560dc06b20a5db11e49ea0bc8b1496dc921fdddb",
+      "sourceSha256After": "ab6390852e21f38cd653e08f560dc06b20a5db11e49ea0bc8b1496dc921fdddb",
+      "sourceReopened": true,
+      "objects": [
+        "perennial-tuft-leaves"
+      ],
+      "exports": [
+        {
+          "file": "exports/perennial-tuft.lod0.glb",
+          "sha256": "0dccd154931a409b420d20f56c57f85904381d70d2fe4493a662f85dbaf5831a",
+          "inspection": false,
+          "maps": []
+        },
+        {
+          "file": "exports/perennial-tuft.lod0.inspection.glb",
+          "sha256": "0dccd154931a409b420d20f56c57f85904381d70d2fe4493a662f85dbaf5831a",
+          "inspection": true,
+          "maps": []
+        }
+      ]
+    },
+    {
+      "assetId": "perennial-tuft",
+      "lod": 1,
+      "source": "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/ground-planting-details/source/perennial-tuft.lod1.blend",
+      "sourceSha256": "e5d80c6db6bd122969b378267a337f7da9e16c34b2d33bf1d3e4d287c6faa3f6",
+      "sourceSha256After": "e5d80c6db6bd122969b378267a337f7da9e16c34b2d33bf1d3e4d287c6faa3f6",
+      "sourceReopened": true,
+      "objects": [
+        "perennial-tuft-leaves"
+      ],
+      "exports": [
+        {
+          "file": "exports/perennial-tuft.lod1.glb",
+          "sha256": "6dba849f8822d894cea99182e626596a33c68913f4a1046385ee992774c36445",
+          "inspection": false,
+          "maps": []
+        },
+        {
+          "file": "exports/perennial-tuft.lod1.inspection.glb",
+          "sha256": "6dba849f8822d894cea99182e626596a33c68913f4a1046385ee992774c36445",
+          "inspection": true,
+          "maps": []
+        }
+      ]
+    },
+    {
+      "assetId": "planter-round",
+      "lod": 0,
+      "source": "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/ground-planting-details/source/planter-round.lod0.blend",
+      "sourceSha256": "c37435b5f274a7528f897b809c1e701b71c16654c516c6431a0cbf4af1a931bb",
+      "sourceSha256After": "c37435b5f274a7528f897b809c1e701b71c16654c516c6431a0cbf4af1a931bb",
+      "sourceReopened": true,
+      "objects": [
+        "planter-round-shell-and-soil"
+      ],
+      "exports": [
+        {
+          "file": "exports/planter-round.lod0.glb",
+          "sha256": "f1de699b1d4a7e2da441d2e3b12f31f051d290738af4518fe47167672f5df6da",
+          "inspection": false,
+          "maps": []
+        },
+        {
+          "file": "exports/planter-round.lod0.inspection.glb",
+          "sha256": "43bcf64d6892a7120ea40af115eccbf1900dda20e93cf5fc1d4c5eefaf8b100a",
+          "inspection": true,
+          "maps": [
+            {
+              "file": "exports/textures/80d9b75c08564460d2d3.png",
+              "sha256": "80d9b75c08564460d2d3f43e3e886ac203ef4f81a3c69497d677240b18abf3dd",
+              "bytes": 16012,
+              "imageName": "concrete-normal"
+            },
+            {
+              "file": "exports/textures/9f51a3eccf7196241f07.png",
+              "sha256": "9f51a3eccf7196241f07df33cf28b8d7f65583c84103f8738d25ceceb7fe7192",
+              "bytes": 42856,
+              "imageName": "concrete-color"
+            },
+            {
+              "file": "exports/textures/0388a0c62cd21deb1e4b.png",
+              "sha256": "0388a0c62cd21deb1e4b603de00965e1578a38cc54e83b90cffbf30f98a5bc1e",
+              "bytes": 13891,
+              "imageName": "concrete-orm"
+            },
+            {
+              "file": "exports/textures/a962cb174883009121d6.png",
+              "sha256": "a962cb174883009121d67edd4ede35196a38abe64eab0e9e45d9a46453aa0cd6",
+              "bytes": 475469,
+              "imageName": "soil_normal"
+            },
+            {
+              "file": "exports/textures/ff47ea60cd6fa7586e0d.png",
+              "sha256": "ff47ea60cd6fa7586e0df74178fe1fd7d4bab01f0eaf3a4d8cd0ebce77bc2c1f",
+              "bytes": 207860,
+              "imageName": "soil_basecolor"
+            },
+            {
+              "file": "exports/textures/b4d807a765c80a11fbe5.png",
+              "sha256": "b4d807a765c80a11fbe5adfaefc2aecf5bab61840a475469f3b9c4bd42132c37",
+              "bytes": 47536,
+              "imageName": "soil_orm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "assetId": "planter-round",
+      "lod": 1,
+      "source": "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/ground-planting-details/source/planter-round.lod1.blend",
+      "sourceSha256": "36da0a78ac8085327797a91dbab7bf9f211a52816482f2317e2e77a8c7bdcf49",
+      "sourceSha256After": "36da0a78ac8085327797a91dbab7bf9f211a52816482f2317e2e77a8c7bdcf49",
+      "sourceReopened": true,
+      "objects": [
+        "planter-round-shell-and-soil"
+      ],
+      "exports": [
+        {
+          "file": "exports/planter-round.lod1.glb",
+          "sha256": "b312831ef1fb39e8100e33ef87a006fb9152f50c5a9d5694f8b1e25dcca7ad97",
+          "inspection": false,
+          "maps": []
+        },
+        {
+          "file": "exports/planter-round.lod1.inspection.glb",
+          "sha256": "e6901dcb7a7c83400dc60d6c3be90af896d3b389d90d2f8fa2b539a80669b260",
+          "inspection": true,
+          "maps": [
+            {
+              "file": "exports/textures/80d9b75c08564460d2d3.png",
+              "sha256": "80d9b75c08564460d2d3f43e3e886ac203ef4f81a3c69497d677240b18abf3dd",
+              "bytes": 16012,
+              "imageName": "concrete-normal"
+            },
+            {
+              "file": "exports/textures/9f51a3eccf7196241f07.png",
+              "sha256": "9f51a3eccf7196241f07df33cf28b8d7f65583c84103f8738d25ceceb7fe7192",
+              "bytes": 42856,
+              "imageName": "concrete-color"
+            },
+            {
+              "file": "exports/textures/0388a0c62cd21deb1e4b.png",
+              "sha256": "0388a0c62cd21deb1e4b603de00965e1578a38cc54e83b90cffbf30f98a5bc1e",
+              "bytes": 13891,
+              "imageName": "concrete-orm"
+            },
+            {
+              "file": "exports/textures/a962cb174883009121d6.png",
+              "sha256": "a962cb174883009121d67edd4ede35196a38abe64eab0e9e45d9a46453aa0cd6",
+              "bytes": 475469,
+              "imageName": "soil_normal"
+            },
+            {
+              "file": "exports/textures/ff47ea60cd6fa7586e0d.png",
+              "sha256": "ff47ea60cd6fa7586e0df74178fe1fd7d4bab01f0eaf3a4d8cd0ebce77bc2c1f",
+              "bytes": 207860,
+              "imageName": "soil_basecolor"
+            },
+            {
+              "file": "exports/textures/b4d807a765c80a11fbe5.png",
+              "sha256": "b4d807a765c80a11fbe5adfaefc2aecf5bab61840a475469f3b9c4bd42132c37",
+              "bytes": 47536,
+              "imageName": "soil_orm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "assetId": "planter-trough",
+      "lod": 0,
+      "source": "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/ground-planting-details/source/planter-trough.lod0.blend",
+      "sourceSha256": "02a478a7a1dfb59d8f0deca8ce4d7e4c31fcc9917b2bdcd88a47db9f97ffbc86",
+      "sourceSha256After": "02a478a7a1dfb59d8f0deca8ce4d7e4c31fcc9917b2bdcd88a47db9f97ffbc86",
+      "sourceReopened": true,
+      "objects": [
+        "planter-trough-shell-and-soil"
+      ],
+      "exports": [
+        {
+          "file": "exports/planter-trough.lod0.glb",
+          "sha256": "d60d013ae1a01e9c822833f294bdbe8d2daab5437eb6aa802d64f7664c627771",
+          "inspection": false,
+          "maps": []
+        },
+        {
+          "file": "exports/planter-trough.lod0.inspection.glb",
+          "sha256": "483b16b9a38690d571761776c0a305582f93bf96e38304518bb396b16c32dcf0",
+          "inspection": true,
+          "maps": [
+            {
+              "file": "exports/textures/80d9b75c08564460d2d3.png",
+              "sha256": "80d9b75c08564460d2d3f43e3e886ac203ef4f81a3c69497d677240b18abf3dd",
+              "bytes": 16012,
+              "imageName": "concrete-normal"
+            },
+            {
+              "file": "exports/textures/9f51a3eccf7196241f07.png",
+              "sha256": "9f51a3eccf7196241f07df33cf28b8d7f65583c84103f8738d25ceceb7fe7192",
+              "bytes": 42856,
+              "imageName": "concrete-color"
+            },
+            {
+              "file": "exports/textures/0388a0c62cd21deb1e4b.png",
+              "sha256": "0388a0c62cd21deb1e4b603de00965e1578a38cc54e83b90cffbf30f98a5bc1e",
+              "bytes": 13891,
+              "imageName": "concrete-orm"
+            },
+            {
+              "file": "exports/textures/a962cb174883009121d6.png",
+              "sha256": "a962cb174883009121d67edd4ede35196a38abe64eab0e9e45d9a46453aa0cd6",
+              "bytes": 475469,
+              "imageName": "soil_normal"
+            },
+            {
+              "file": "exports/textures/ff47ea60cd6fa7586e0d.png",
+              "sha256": "ff47ea60cd6fa7586e0df74178fe1fd7d4bab01f0eaf3a4d8cd0ebce77bc2c1f",
+              "bytes": 207860,
+              "imageName": "soil_basecolor"
+            },
+            {
+              "file": "exports/textures/b4d807a765c80a11fbe5.png",
+              "sha256": "b4d807a765c80a11fbe5adfaefc2aecf5bab61840a475469f3b9c4bd42132c37",
+              "bytes": 47536,
+              "imageName": "soil_orm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "assetId": "planter-trough",
+      "lod": 1,
+      "source": "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/ground-planting-details/source/planter-trough.lod1.blend",
+      "sourceSha256": "7e43b77083772803115f0c61b4379c426ce4e99acbc4c526c494d57bccc48e12",
+      "sourceSha256After": "7e43b77083772803115f0c61b4379c426ce4e99acbc4c526c494d57bccc48e12",
+      "sourceReopened": true,
+      "objects": [
+        "planter-trough-shell-and-soil"
+      ],
+      "exports": [
+        {
+          "file": "exports/planter-trough.lod1.glb",
+          "sha256": "741d51d33f29c463ef447ae3ad308fa9a7d53eacef0b356cc51cde33db975e6f",
+          "inspection": false,
+          "maps": []
+        },
+        {
+          "file": "exports/planter-trough.lod1.inspection.glb",
+          "sha256": "4de4808a4c8e752103507279ad8ab05fa07951591a37166ef286938efa99e559",
+          "inspection": true,
+          "maps": [
+            {
+              "file": "exports/textures/80d9b75c08564460d2d3.png",
+              "sha256": "80d9b75c08564460d2d3f43e3e886ac203ef4f81a3c69497d677240b18abf3dd",
+              "bytes": 16012,
+              "imageName": "concrete-normal"
+            },
+            {
+              "file": "exports/textures/9f51a3eccf7196241f07.png",
+              "sha256": "9f51a3eccf7196241f07df33cf28b8d7f65583c84103f8738d25ceceb7fe7192",
+              "bytes": 42856,
+              "imageName": "concrete-color"
+            },
+            {
+              "file": "exports/textures/0388a0c62cd21deb1e4b.png",
+              "sha256": "0388a0c62cd21deb1e4b603de00965e1578a38cc54e83b90cffbf30f98a5bc1e",
+              "bytes": 13891,
+              "imageName": "concrete-orm"
+            },
+            {
+              "file": "exports/textures/a962cb174883009121d6.png",
+              "sha256": "a962cb174883009121d67edd4ede35196a38abe64eab0e9e45d9a46453aa0cd6",
+              "bytes": 475469,
+              "imageName": "soil_normal"
+            },
+            {
+              "file": "exports/textures/ff47ea60cd6fa7586e0d.png",
+              "sha256": "ff47ea60cd6fa7586e0df74178fe1fd7d4bab01f0eaf3a4d8cd0ebce77bc2c1f",
+              "bytes": 207860,
+              "imageName": "soil_basecolor"
+            },
+            {
+              "file": "exports/textures/b4d807a765c80a11fbe5.png",
+              "sha256": "b4d807a765c80a11fbe5adfaefc2aecf5bab61840a475469f3b9c4bd42132c37",
+              "bytes": 47536,
+              "imageName": "soil_orm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "assetId": "soil-grass-edge-1m",
+      "lod": 0,
+      "source": "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/ground-planting-details/source/soil-grass-edge-1m.lod0.blend",
+      "sourceSha256": "8aa2a69d36600771ace0bbd3f8f277b12b81a6e908a8d5ad610545a7a9683d6d",
+      "sourceSha256After": "8aa2a69d36600771ace0bbd3f8f277b12b81a6e908a8d5ad610545a7a9683d6d",
+      "sourceReopened": true,
+      "objects": [
+        "soil-grass-edge-surface"
+      ],
+      "exports": [
+        {
+          "file": "exports/soil-grass-edge-1m.lod0.glb",
+          "sha256": "b6d14ca04fe97503ab01c6a612cf9081ec129717dc830b230df682d9b5d08a78",
+          "inspection": false,
+          "maps": []
+        },
+        {
+          "file": "exports/soil-grass-edge-1m.lod0.inspection.glb",
+          "sha256": "816b2fe25ddd657767a3068f8e7a4869902a2e81729e0f888670fd35c19e1f18",
+          "inspection": true,
+          "maps": [
+            {
+              "file": "exports/textures/0d2a72a2bdd993986ca7.png",
+              "sha256": "0d2a72a2bdd993986ca7b2211d7f73c46af5fcf116616b05ce73ccba8c0fb85b",
+              "bytes": 570431,
+              "imageName": "soil_grass_edge_normal"
+            },
+            {
+              "file": "exports/textures/5c32552aed44c98857d7.png",
+              "sha256": "5c32552aed44c98857d762f2ae4f40dfa6bb6074037d02d9f6189a8146291087",
+              "bytes": 308056,
+              "imageName": "soil_grass_edge_basecolor"
+            },
+            {
+              "file": "exports/textures/b4d807a765c80a11fbe5.png",
+              "sha256": "b4d807a765c80a11fbe5adfaefc2aecf5bab61840a475469f3b9c4bd42132c37",
+              "bytes": 47536,
+              "imageName": "soil_grass_edge_orm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "assetId": "soil-grass-edge-1m",
+      "lod": 1,
+      "source": "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/ground-planting-details/source/soil-grass-edge-1m.lod1.blend",
+      "sourceSha256": "2413a15b96bf864791a768146f95e1013c4da78fb3e87976d5c5288dcb4c6aaa",
+      "sourceSha256After": "2413a15b96bf864791a768146f95e1013c4da78fb3e87976d5c5288dcb4c6aaa",
+      "sourceReopened": true,
+      "objects": [
+        "soil-grass-edge-surface"
+      ],
+      "exports": [
+        {
+          "file": "exports/soil-grass-edge-1m.lod1.glb",
+          "sha256": "4f1028446bbc5fa994b029b09e9e3fdda4c4c305df692b972da225909409a5f0",
+          "inspection": false,
+          "maps": []
+        },
+        {
+          "file": "exports/soil-grass-edge-1m.lod1.inspection.glb",
+          "sha256": "0e38207757547a1c8a58b80b42ddd21bf1ed4c1ca0ecb483b6e0e1570bfe342b",
+          "inspection": true,
+          "maps": [
+            {
+              "file": "exports/textures/0d2a72a2bdd993986ca7.png",
+              "sha256": "0d2a72a2bdd993986ca7b2211d7f73c46af5fcf116616b05ce73ccba8c0fb85b",
+              "bytes": 570431,
+              "imageName": "soil_grass_edge_normal"
+            },
+            {
+              "file": "exports/textures/5c32552aed44c98857d7.png",
+              "sha256": "5c32552aed44c98857d762f2ae4f40dfa6bb6074037d02d9f6189a8146291087",
+              "bytes": 308056,
+              "imageName": "soil_grass_edge_basecolor"
+            },
+            {
+              "file": "exports/textures/b4d807a765c80a11fbe5.png",
+              "sha256": "b4d807a765c80a11fbe5adfaefc2aecf5bab61840a475469f3b9c4bd42132c37",
+              "bytes": 47536,
+              "imageName": "soil_grass_edge_orm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "assetId": "surface-asphalt-10m",
+      "lod": 0,
+      "source": "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/ground-planting-details/source/surface-asphalt-10m.lod0.blend",
+      "sourceSha256": "25f4af5f042c2d6b75e4875c6765f24dd5879e4eebcd468144eee34ba92246f6",
+      "sourceSha256After": "25f4af5f042c2d6b75e4875c6765f24dd5879e4eebcd468144eee34ba92246f6",
+      "sourceReopened": true,
+      "objects": [
+        "asphalt-study-10m"
+      ],
+      "exports": [
+        {
+          "file": "exports/surface-asphalt-10m.lod0.inspection.glb",
+          "sha256": "f31bb0fc04d90710d4b3cc46aea4cd4122e8d6187903c63b2ff9055dbd66cc28",
+          "inspection": true,
+          "maps": [
+            {
+              "file": "exports/textures/272d02f372c58ffa1256.png",
+              "sha256": "272d02f372c58ffa12561e12ddb5b6d1d067c2d2a797511a9b8989a4e9d11291",
+              "bytes": 27573,
+              "imageName": "asphalt-normal"
+            },
+            {
+              "file": "exports/textures/d1d20428b115ad1f2d95.png",
+              "sha256": "d1d20428b115ad1f2d95e194e2b005bbcc65f55c31400d479d27a451b8fd838b",
+              "bytes": 44431,
+              "imageName": "asphalt-color"
+            },
+            {
+              "file": "exports/textures/14f69cd2a64eb57580b2.png",
+              "sha256": "14f69cd2a64eb57580b2218116394da9d7a2193a1346f09bba08f4aa7df6528d",
+              "bytes": 13899,
+              "imageName": "asphalt-orm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "assetId": "surface-asphalt-2m",
+      "lod": 0,
+      "source": "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/ground-planting-details/source/surface-asphalt-2m.lod0.blend",
+      "sourceSha256": "e58c305139666a6c8a6f2ecadd65a4c249b0d1fa5589644efcbada6277f8a200",
+      "sourceSha256After": "e58c305139666a6c8a6f2ecadd65a4c249b0d1fa5589644efcbada6277f8a200",
+      "sourceReopened": true,
+      "objects": [
+        "asphalt-study-2m"
+      ],
+      "exports": [
+        {
+          "file": "exports/surface-asphalt-2m.lod0.inspection.glb",
+          "sha256": "d6972dd81da1dcb82d2669911f805a8e9b216331c5119c469200018fe83d89bb",
+          "inspection": true,
+          "maps": [
+            {
+              "file": "exports/textures/272d02f372c58ffa1256.png",
+              "sha256": "272d02f372c58ffa12561e12ddb5b6d1d067c2d2a797511a9b8989a4e9d11291",
+              "bytes": 27573,
+              "imageName": "asphalt-normal"
+            },
+            {
+              "file": "exports/textures/d1d20428b115ad1f2d95.png",
+              "sha256": "d1d20428b115ad1f2d95e194e2b005bbcc65f55c31400d479d27a451b8fd838b",
+              "bytes": 44431,
+              "imageName": "asphalt-color"
+            },
+            {
+              "file": "exports/textures/14f69cd2a64eb57580b2.png",
+              "sha256": "14f69cd2a64eb57580b2218116394da9d7a2193a1346f09bba08f4aa7df6528d",
+              "bytes": 13899,
+              "imageName": "asphalt-orm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "assetId": "surface-concrete-10m",
+      "lod": 0,
+      "source": "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/ground-planting-details/source/surface-concrete-10m.lod0.blend",
+      "sourceSha256": "2f9e3a0fccdebd08efefcf8d484fafd4caec9d4825b5e5e6ef08914f084b5550",
+      "sourceSha256After": "2f9e3a0fccdebd08efefcf8d484fafd4caec9d4825b5e5e6ef08914f084b5550",
+      "sourceReopened": true,
+      "objects": [
+        "concrete-study-10m"
+      ],
+      "exports": [
+        {
+          "file": "exports/surface-concrete-10m.lod0.inspection.glb",
+          "sha256": "3df21f17f27a3e3ee1e16f83f9df027d886d5df42b3bb674d7210417eac6307d",
+          "inspection": true,
+          "maps": [
+            {
+              "file": "exports/textures/80d9b75c08564460d2d3.png",
+              "sha256": "80d9b75c08564460d2d3f43e3e886ac203ef4f81a3c69497d677240b18abf3dd",
+              "bytes": 16012,
+              "imageName": "concrete-normal"
+            },
+            {
+              "file": "exports/textures/9f51a3eccf7196241f07.png",
+              "sha256": "9f51a3eccf7196241f07df33cf28b8d7f65583c84103f8738d25ceceb7fe7192",
+              "bytes": 42856,
+              "imageName": "concrete-color"
+            },
+            {
+              "file": "exports/textures/0388a0c62cd21deb1e4b.png",
+              "sha256": "0388a0c62cd21deb1e4b603de00965e1578a38cc54e83b90cffbf30f98a5bc1e",
+              "bytes": 13891,
+              "imageName": "concrete-orm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "assetId": "surface-concrete-2m",
+      "lod": 0,
+      "source": "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/ground-planting-details/source/surface-concrete-2m.lod0.blend",
+      "sourceSha256": "3aba8898991fab6429a306f17c545d326a279d2541c91d2e991a948055204c0d",
+      "sourceSha256After": "3aba8898991fab6429a306f17c545d326a279d2541c91d2e991a948055204c0d",
+      "sourceReopened": true,
+      "objects": [
+        "concrete-study-2m"
+      ],
+      "exports": [
+        {
+          "file": "exports/surface-concrete-2m.lod0.inspection.glb",
+          "sha256": "de2b2b09b2b7a346b478edbdb8eb828839d4edecc2bc77c3d69a42cbbdfaa402",
+          "inspection": true,
+          "maps": [
+            {
+              "file": "exports/textures/80d9b75c08564460d2d3.png",
+              "sha256": "80d9b75c08564460d2d3f43e3e886ac203ef4f81a3c69497d677240b18abf3dd",
+              "bytes": 16012,
+              "imageName": "concrete-normal"
+            },
+            {
+              "file": "exports/textures/9f51a3eccf7196241f07.png",
+              "sha256": "9f51a3eccf7196241f07df33cf28b8d7f65583c84103f8738d25ceceb7fe7192",
+              "bytes": 42856,
+              "imageName": "concrete-color"
+            },
+            {
+              "file": "exports/textures/0388a0c62cd21deb1e4b.png",
+              "sha256": "0388a0c62cd21deb1e4b603de00965e1578a38cc54e83b90cffbf30f98a5bc1e",
+              "bytes": 13891,
+              "imageName": "concrete-orm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "assetId": "surface-grass-10m",
+      "lod": 0,
+      "source": "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/ground-planting-details/source/surface-grass-10m.lod0.blend",
+      "sourceSha256": "c00d1843b84f7cef3ae8a74fb12154ec7a4661d8a8f15b02f956fea60b6555e4",
+      "sourceSha256After": "c00d1843b84f7cef3ae8a74fb12154ec7a4661d8a8f15b02f956fea60b6555e4",
+      "sourceReopened": true,
+      "objects": [
+        "grass-study-10m"
+      ],
+      "exports": [
+        {
+          "file": "exports/surface-grass-10m.lod0.inspection.glb",
+          "sha256": "b6d652213da165afda7d1fabb4ac1c2282a58fb73c8e3d3a5e768831b9bf9d6a",
+          "inspection": true,
+          "maps": [
+            {
+              "file": "exports/textures/74cb6b02204c37026f6b.png",
+              "sha256": "74cb6b02204c37026f6beebdc99001929bd331d5edc884feeef3c2ba830b90ac",
+              "bytes": 581991,
+              "imageName": "grass_normal"
+            },
+            {
+              "file": "exports/textures/678d283e62d543ba04e3.png",
+              "sha256": "678d283e62d543ba04e3dec2ec4847c47fdd878bc91ead9c82a2b694dea58a5f",
+              "bytes": 252788,
+              "imageName": "grass_basecolor"
+            },
+            {
+              "file": "exports/textures/18fd14b3329257af888a.png",
+              "sha256": "18fd14b3329257af888ab8d6ca1f038d4d7643aee47b3c32393fbe8f0d7643ce",
+              "bytes": 52412,
+              "imageName": "grass_orm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "assetId": "surface-grass-2m",
+      "lod": 0,
+      "source": "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/ground-planting-details/source/surface-grass-2m.lod0.blend",
+      "sourceSha256": "a6179e5bfc63280b51fed6db8715762eab49216597601a4bae84f8917403a1e1",
+      "sourceSha256After": "a6179e5bfc63280b51fed6db8715762eab49216597601a4bae84f8917403a1e1",
+      "sourceReopened": true,
+      "objects": [
+        "grass-study-2m"
+      ],
+      "exports": [
+        {
+          "file": "exports/surface-grass-2m.lod0.inspection.glb",
+          "sha256": "9913b1441bee1355e3a2f0121c833087ff51108cd822bb3f91ace1f1e70904d3",
+          "inspection": true,
+          "maps": [
+            {
+              "file": "exports/textures/74cb6b02204c37026f6b.png",
+              "sha256": "74cb6b02204c37026f6beebdc99001929bd331d5edc884feeef3c2ba830b90ac",
+              "bytes": 581991,
+              "imageName": "grass_normal"
+            },
+            {
+              "file": "exports/textures/678d283e62d543ba04e3.png",
+              "sha256": "678d283e62d543ba04e3dec2ec4847c47fdd878bc91ead9c82a2b694dea58a5f",
+              "bytes": 252788,
+              "imageName": "grass_basecolor"
+            },
+            {
+              "file": "exports/textures/18fd14b3329257af888a.png",
+              "sha256": "18fd14b3329257af888ab8d6ca1f038d4d7643aee47b3c32393fbe8f0d7643ce",
+              "bytes": 52412,
+              "imageName": "grass_orm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "assetId": "surface-sand-10m",
+      "lod": 0,
+      "source": "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/ground-planting-details/source/surface-sand-10m.lod0.blend",
+      "sourceSha256": "f9f79fc4a501555eb6081e9980248fa788b1b2db3a27f29978a8793f5d2f4a50",
+      "sourceSha256After": "f9f79fc4a501555eb6081e9980248fa788b1b2db3a27f29978a8793f5d2f4a50",
+      "sourceReopened": true,
+      "objects": [
+        "sand-study-10m"
+      ],
+      "exports": [
+        {
+          "file": "exports/surface-sand-10m.lod0.inspection.glb",
+          "sha256": "a0f30e4f438b82ab745f7d6376c9125958d94b671c9efc0c60c53e935e3e7284",
+          "inspection": true,
+          "maps": [
+            {
+              "file": "exports/textures/676a17e361f8123018ca.png",
+              "sha256": "676a17e361f8123018ca79f88ae9545eaecce6a8af639ddec6afcdd923a3989b",
+              "bytes": 113689,
+              "imageName": "sand-normal"
+            },
+            {
+              "file": "exports/textures/0608c5de401693cba16c.png",
+              "sha256": "0608c5de401693cba16cc617de77ca4c5be2d85117c426a2752fa118a6fb21b0",
+              "bytes": 83783,
+              "imageName": "sand-color"
+            },
+            {
+              "file": "exports/textures/f50ec60eb426f74b5ded.png",
+              "sha256": "f50ec60eb426f74b5dedf2d8f4406a16cc6234c1b1e998ca0efd6827fafd5aff",
+              "bytes": 77858,
+              "imageName": "sand-orm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "assetId": "surface-sand-2m",
+      "lod": 0,
+      "source": "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/ground-planting-details/source/surface-sand-2m.lod0.blend",
+      "sourceSha256": "9b6948c6f9d7ec80c1f4a3b054ae450e8dbe3c6eba901d4778cc2d1f715a4684",
+      "sourceSha256After": "9b6948c6f9d7ec80c1f4a3b054ae450e8dbe3c6eba901d4778cc2d1f715a4684",
+      "sourceReopened": true,
+      "objects": [
+        "sand-study-2m"
+      ],
+      "exports": [
+        {
+          "file": "exports/surface-sand-2m.lod0.inspection.glb",
+          "sha256": "86c5690a01c81f7723aa2835a4758e65dc9f063fdc49a8242a841efde0b90645",
+          "inspection": true,
+          "maps": [
+            {
+              "file": "exports/textures/676a17e361f8123018ca.png",
+              "sha256": "676a17e361f8123018ca79f88ae9545eaecce6a8af639ddec6afcdd923a3989b",
+              "bytes": 113689,
+              "imageName": "sand-normal"
+            },
+            {
+              "file": "exports/textures/0608c5de401693cba16c.png",
+              "sha256": "0608c5de401693cba16cc617de77ca4c5be2d85117c426a2752fa118a6fb21b0",
+              "bytes": 83783,
+              "imageName": "sand-color"
+            },
+            {
+              "file": "exports/textures/f50ec60eb426f74b5ded.png",
+              "sha256": "f50ec60eb426f74b5dedf2d8f4406a16cc6234c1b1e998ca0efd6827fafd5aff",
+              "bytes": 77858,
+              "imageName": "sand-orm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "assetId": "surface-soil-10m",
+      "lod": 0,
+      "source": "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/ground-planting-details/source/surface-soil-10m.lod0.blend",
+      "sourceSha256": "a4e788d8cb5cf842a558b8bb3512de0beba910318bf3e8ec74c02e6b4736d734",
+      "sourceSha256After": "a4e788d8cb5cf842a558b8bb3512de0beba910318bf3e8ec74c02e6b4736d734",
+      "sourceReopened": true,
+      "objects": [
+        "soil-study-10m"
+      ],
+      "exports": [
+        {
+          "file": "exports/surface-soil-10m.lod0.inspection.glb",
+          "sha256": "0ad83a45b6a645c6d437f6663a0045bcc8a0c3aab5f27a19dbdf8354b70614aa",
+          "inspection": true,
+          "maps": [
+            {
+              "file": "exports/textures/a962cb174883009121d6.png",
+              "sha256": "a962cb174883009121d67edd4ede35196a38abe64eab0e9e45d9a46453aa0cd6",
+              "bytes": 475469,
+              "imageName": "soil_normal"
+            },
+            {
+              "file": "exports/textures/ff47ea60cd6fa7586e0d.png",
+              "sha256": "ff47ea60cd6fa7586e0df74178fe1fd7d4bab01f0eaf3a4d8cd0ebce77bc2c1f",
+              "bytes": 207860,
+              "imageName": "soil_basecolor"
+            },
+            {
+              "file": "exports/textures/b4d807a765c80a11fbe5.png",
+              "sha256": "b4d807a765c80a11fbe5adfaefc2aecf5bab61840a475469f3b9c4bd42132c37",
+              "bytes": 47536,
+              "imageName": "soil_orm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "assetId": "surface-soil-2m",
+      "lod": 0,
+      "source": "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/ground-planting-details/source/surface-soil-2m.lod0.blend",
+      "sourceSha256": "e2f5dba2ec7abed189fef155d8dee104945924d801c47a703f4c726b5e0e2275",
+      "sourceSha256After": "e2f5dba2ec7abed189fef155d8dee104945924d801c47a703f4c726b5e0e2275",
+      "sourceReopened": true,
+      "objects": [
+        "soil-study-2m"
+      ],
+      "exports": [
+        {
+          "file": "exports/surface-soil-2m.lod0.inspection.glb",
+          "sha256": "2c10b9dcfb44aaa2c47c3034a66066772b5287584b0f71b73b826eecf997c98f",
+          "inspection": true,
+          "maps": [
+            {
+              "file": "exports/textures/a962cb174883009121d6.png",
+              "sha256": "a962cb174883009121d67edd4ede35196a38abe64eab0e9e45d9a46453aa0cd6",
+              "bytes": 475469,
+              "imageName": "soil_normal"
+            },
+            {
+              "file": "exports/textures/ff47ea60cd6fa7586e0d.png",
+              "sha256": "ff47ea60cd6fa7586e0df74178fe1fd7d4bab01f0eaf3a4d8cd0ebce77bc2c1f",
+              "bytes": 207860,
+              "imageName": "soil_basecolor"
+            },
+            {
+              "file": "exports/textures/b4d807a765c80a11fbe5.png",
+              "sha256": "b4d807a765c80a11fbe5adfaefc2aecf5bab61840a475469f3b9c4bd42132c37",
+              "bytes": 47536,
+              "imageName": "soil_orm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "assetId": "surface-street-brick-10m",
+      "lod": 0,
+      "source": "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/ground-planting-details/source/surface-street-brick-10m.lod0.blend",
+      "sourceSha256": "132fd558858ea4ed9dd29348e035832448028d281327f42114271d3a60f75d75",
+      "sourceSha256After": "132fd558858ea4ed9dd29348e035832448028d281327f42114271d3a60f75d75",
+      "sourceReopened": true,
+      "objects": [
+        "street-brick-study-10m"
+      ],
+      "exports": [
+        {
+          "file": "exports/surface-street-brick-10m.lod0.inspection.glb",
+          "sha256": "5ddd7b304c06a5fff50dd197cc5ea5b391fc4b3f2dd3589f8ed8b410bea33a40",
+          "inspection": true,
+          "maps": [
+            {
+              "file": "exports/textures/d0d6289a7a8977771533.png",
+              "sha256": "d0d6289a7a8977771533afc1131fb65a88d51c8eb8491644296b1c654dcc8b5e",
+              "bytes": 26756,
+              "imageName": "street-brick-normal"
+            },
+            {
+              "file": "exports/textures/7e69abf9441b1bab7d71.png",
+              "sha256": "7e69abf9441b1bab7d7177d2cd91f830a97845e24dcfe133b4f661370c795661",
+              "bytes": 58900,
+              "imageName": "street-brick-color"
+            },
+            {
+              "file": "exports/textures/fd144f4f51261606a566.png",
+              "sha256": "fd144f4f51261606a5665341d0677b008e30c7c0df542f025c9df56a017bc7c2",
+              "bytes": 22259,
+              "imageName": "street-brick-orm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "assetId": "surface-street-brick-2m",
+      "lod": 0,
+      "source": "/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/ground-planting-details/source/surface-street-brick-2m.lod0.blend",
+      "sourceSha256": "544e5e66f0be801d1b77ebb4e07f3b6f556341c28f3c4ee9cfda1152a641d3f2",
+      "sourceSha256After": "544e5e66f0be801d1b77ebb4e07f3b6f556341c28f3c4ee9cfda1152a641d3f2",
+      "sourceReopened": true,
+      "objects": [
+        "street-brick-study-2m"
+      ],
+      "exports": [
+        {
+          "file": "exports/surface-street-brick-2m.lod0.inspection.glb",
+          "sha256": "45a785d2447ad13bc89171615390cc650317c4f5e7ffebff2e048820ed2f4b5c",
+          "inspection": true,
+          "maps": [
+            {
+              "file": "exports/textures/d0d6289a7a8977771533.png",
+              "sha256": "d0d6289a7a8977771533afc1131fb65a88d51c8eb8491644296b1c654dcc8b5e",
+              "bytes": 26756,
+              "imageName": "street-brick-normal"
+            },
+            {
+              "file": "exports/textures/7e69abf9441b1bab7d71.png",
+              "sha256": "7e69abf9441b1bab7d7177d2cd91f830a97845e24dcfe133b4f661370c795661",
+              "bytes": 58900,
+              "imageName": "street-brick-color"
+            },
+            {
+              "file": "exports/textures/fd144f4f51261606a566.png",
+              "sha256": "fd144f4f51261606a5665341d0677b008e30c7c0df542f025c9df56a017bc7c2",
+              "bytes": 22259,
+              "imageName": "street-brick-orm"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

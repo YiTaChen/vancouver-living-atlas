@@ -1,0 +1,174 @@
+{
+  "status": "pass",
+  "method": "native source loaded; selected original mesh, UV and supported material factors exported unchanged",
+  "results": [
+    {
+      "source": "cedar-source-window-paired-sill.lod0.blend",
+      "sourceSha256": "5a122b4689ff33afc8ab8af3ddb3baa419d50c8e71461ce432703786c1dffdfe",
+      "sourceUnchanged": true,
+      "output": "cedar-source-window-paired-sill.lod0.glb",
+      "glbSha256": "f52e54c33843775ec39d238ca21f2c8b3f6716c1169c9dd036fa286ac7686f94",
+      "meshVertices": 20,
+      "uvLoops": 88,
+      "materialRole": "cedar",
+      "pbr": {
+        "baseColor": [
+          0.27383843064308167,
+          0.2632734179496765,
+          0.1873166710138321,
+          1.0
+        ],
+        "roughness": 0.7699999809265137,
+        "metallic": 0.0
+      },
+      "exportPolygonFaces": 26
+    },
+    {
+      "source": "cedar-source-window-paired-sill.lod1.blend",
+      "sourceSha256": "31549694398247c6c28eaf7f2f3bc1b41850a4aa27473ddfe2ecd1bd627e7402",
+      "sourceUnchanged": true,
+      "output": "cedar-source-window-paired-sill.lod1.glb",
+      "glbSha256": "63d9c379bee7bb3d01eb293969e223d0d7df905aa153d96ed080e3caa7638a88",
+      "meshVertices": 12,
+      "uvLoops": 48,
+      "materialRole": "cedar",
+      "pbr": {
+        "baseColor": [
+          0.27383843064308167,
+          0.2632734179496765,
+          0.1873166710138321,
+          1.0
+        ],
+        "roughness": 0.7699999809265137,
+        "metallic": 0.0
+      },
+      "exportPolygonFaces": 14
+    },
+    {
+      "source": "cedar-source-window-surround.lod0.blend",
+      "sourceSha256": "39bc6b5677336fefc5fc9e5c7e537346932e5412c66609f775c7725cf6399501",
+      "sourceUnchanged": true,
+      "output": "cedar-source-window-surround.lod0.glb",
+      "glbSha256": "a0a793735de865e0c4d1e89c523de863216d8d22dc14ef2510dedfc89b0e690e",
+      "meshVertices": 44,
+      "uvLoops": 176,
+      "materialRole": "cedar",
+      "pbr": {
+        "baseColor": [
+          0.27383843064308167,
+          0.2632734179496765,
+          0.1873166710138321,
+          1.0
+        ],
+        "roughness": 0.7699999809265137,
+        "metallic": 0.0
+      },
+      "exportPolygonFaces": 44
+    },
+    {
+      "source": "cedar-source-window-surround.lod1.blend",
+      "sourceSha256": "fa13a308fefa98ab65be3d163d964fd4423a9e7a4f7c7e791b5129b3dfad0451",
+      "sourceUnchanged": true,
+      "output": "cedar-source-window-surround.lod1.glb",
+      "glbSha256": "0c5bb9c7b68e760698bb09fbb59328c29e4444427ac7c9358e7ca08e8d123cef",
+      "meshVertices": 36,
+      "uvLoops": 144,
+      "materialRole": "cedar",
+      "pbr": {
+        "baseColor": [
+          0.27383843064308167,
+          0.2632734179496765,
+          0.1873166710138321,
+          1.0
+        ],
+        "roughness": 0.7699999809265137,
+        "metallic": 0.0
+      },
+      "exportPolygonFaces": 36
+    },
+    {
+      "source": "modern-source-window-paired-sill.lod0.blend",
+      "sourceSha256": "2699734258abbb9369bcd448847f790bfc9a799db8b7b1f0682ab4d87c04d7c6",
+      "sourceUnchanged": true,
+      "output": "modern-source-window-paired-sill.lod0.glb",
+      "glbSha256": "cbe860dbc72dd1daf85f04b728ffd0db8ab81b79b4ec543cdbaaffbc8ad3813e",
+      "meshVertices": 22,
+      "uvLoops": 98,
+      "materialRole": "painted-metal",
+      "pbr": {
+        "baseColor": [
+          0.06372379511594772,
+          0.0889815241098404,
+          0.07828831672668457,
+          1.0
+        ],
+        "roughness": 0.38999998569488525,
+        "metallic": 0.11999999731779099
+      },
+      "exportPolygonFaces": 29
+    },
+    {
+      "source": "modern-source-window-paired-sill.lod1.blend",
+      "sourceSha256": "4d0224f58e55670715114a4abe66bd13b9c205134b72e6d0575fe8c01befc870",
+      "sourceUnchanged": true,
+      "output": "modern-source-window-paired-sill.lod1.glb",
+      "glbSha256": "f44f570ac007b54e794a4d5c8f0c08afeeb6fbf116bd1730845d76ca38df75b2",
+      "meshVertices": 16,
+      "uvLoops": 68,
+      "materialRole": "painted-metal",
+      "pbr": {
+        "baseColor": [
+          0.06372379511594772,
+          0.0889815241098404,
+          0.07828831672668457,
+          1.0
+        ],
+        "roughness": 0.38999998569488525,
+        "metallic": 0.11999999731779099
+      },
+      "exportPolygonFaces": 20
+    },
+    {
+      "source": "modern-source-window-surround.lod0.blend",
+      "sourceSha256": "f4eae28d460dc4dee32db729f2a3de57f1b7d45fb547080173025ddfcbf7637a",
+      "sourceUnchanged": true,
+      "output": "modern-source-window-surround.lod0.glb",
+      "glbSha256": "38da7234e7987342cd2d23216806dc7079ea2e8add1c6e3348ae0a6d7f119e55",
+      "meshVertices": 44,
+      "uvLoops": 176,
+      "materialRole": "painted-metal",
+      "pbr": {
+        "baseColor": [
+          0.06372379511594772,
+          0.0889815241098404,
+          0.07828831672668457,
+          1.0
+        ],
+        "roughness": 0.38999998569488525,
+        "metallic": 0.11999999731779099
+      },
+      "exportPolygonFaces": 44
+    },
+    {
+      "source": "modern-source-window-surround.lod1.blend",
+      "sourceSha256": "ecafb5b06c7cffda7da7582889a86148d343a956fbfb05de249c2044853f6ae0",
+      "sourceUnchanged": true,
+      "output": "modern-source-window-surround.lod1.glb",
+      "glbSha256": "c81bf83db1087e1ad029e642fa655d8310b75bb702939fa6ab52f24324fa3c95",
+      "meshVertices": 36,
+      "uvLoops": 144,
+      "materialRole": "painted-metal",
+      "pbr": {
+        "baseColor": [
+          0.06372379511594772,
+          0.0889815241098404,
+          0.07828831672668457,
+          1.0
+        ],
+        "roughness": 0.38999998569488525,
+        "metallic": 0.11999999731779099
+      },
+      "exportPolygonFaces": 36
+    }
+  ]
+}

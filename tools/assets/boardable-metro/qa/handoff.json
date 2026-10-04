@@ -1,0 +1,1070 @@
+{
+  "schemaVersion": 1,
+  "packageId": "boardable-metro",
+  "baseRevision": "8b95f013297597845d542463d6ce635105a95c4f",
+  "taskIds": [
+    "D04",
+    "D05"
+  ],
+  "assetStatus": "offline_complete",
+  "integrationStatus": "runtime_pending_webgl",
+  "webglAvailable": false,
+  "manifest": "../manifest.json",
+  "sourceEditsPreserved": true,
+  "offlineEvidence": [
+    "validation.json",
+    "common-validation.json",
+    "measurements.json",
+    "source-roundtrip.json",
+    "static-batching.json",
+    "render-report.json",
+    "visual-review.json"
+  ],
+  "runtimeChecks": {
+    "status": "not_run",
+    "D06": "not_implemented",
+    "reason": "Offline package; no WebGL/runtime changes or acceptance."
+  },
+  "intendedConsumers": [
+    "lib/city/railway.ts"
+  ],
+  "replaces": [
+    "future replacement for legacy decorative metro body/window/wheel geometry only after adapter and runtime QA"
+  ],
+  "materialReuse": "Shared semantic roles; no images and no per-car maps. Bind explicitly, preserve glass and lights.",
+  "entryFiles": [
+    "../exports/expo-metro-lead-exterior.lod0.glb",
+    "../exports/expo-metro-middle-exterior.lod0.glb",
+    "../exports/expo-metro-tail-exterior.lod0.glb",
+    "../exports/expo-metro-shared-interior.lod0.glb"
+  ],
+  "datum": "Rail-contact Y=0; bogie midpoint Z=0; +Z forward; floor/sill Y=.95; identical car root for all resources",
+  "knownLimitations": [
+    "Representative four-car 17m profile, not Mark V or exact Mark II/III.",
+    "Moving inter-car traversal disabled; 0.30m bridge gap and curve/telescope collision need runtime resolution.",
+    "LOD2 closed empty nonboardable display only.",
+    "CPU sampled collision tests are not a continuous certified physics solver.",
+    "8-sample previews retain noise; installed Blender has no OpenImageDenoise.",
+    "Low-poly research geometry and no runtime screen content or service state."
+  ],
+  "nextIntegrationSteps": [
+    "Load new profile only in isolated QA consumer; preserve source paths and +Z/-X datum.",
+    "Bind shared material roles, lazy interior and LOD capability lock; keep wheels/doors dynamic.",
+    "Align platform to .95m and full 71.5m consist plus stopping margin.",
+    "Implement D06 fixed-seat single-car state transitions and collision before moving inter-car traversal.",
+    "Run four-lighting WebGL, transparency, dynamic passenger/camera and cache/dispose tests."
+  ],
+  "commit": "Not committed by package worker; parent owns review and commit.",
+  "publicRuntimeChanged": false,
+  "staticInteriorBatching": {
+    "levels": [
+      0,
+      1
+    ],
+    "primitivesPerLevel": 6,
+    "editableSourcesPreserved": true,
+    "namedZeroDrawAnchorsPreserved": true,
+    "componentProvenance": "Actual GLB batch node extras.componentRanges stores source node/primitive, local-to-vehicle matrix and exact vertex/index ranges; CPU validators recover each physical component from these ranges.",
+    "evidence": "static-batching.json"
+  },
+  "statePrimitiveCosts": [
+    {
+      "assetId": "expo-metro-lead-exterior",
+      "level": 0,
+      "closedExterior": 39,
+      "openExterior": 39,
+      "exteriorPlusInterior": 45,
+      "runtimeDrawCalls": "not_measured"
+    },
+    {
+      "assetId": "expo-metro-lead-exterior",
+      "level": 1,
+      "closedExterior": 39,
+      "openExterior": 39,
+      "exteriorPlusInterior": 45,
+      "runtimeDrawCalls": "not_measured"
+    },
+    {
+      "assetId": "expo-metro-lead-exterior",
+      "level": 2,
+      "closedExterior": 13,
+      "openExterior": null,
+      "exteriorPlusInterior": null,
+      "runtimeDrawCalls": "not_measured"
+    },
+    {
+      "assetId": "expo-metro-middle-exterior",
+      "level": 0,
+      "closedExterior": 38,
+      "openExterior": 38,
+      "exteriorPlusInterior": 44,
+      "runtimeDrawCalls": "not_measured"
+    },
+    {
+      "assetId": "expo-metro-middle-exterior",
+      "level": 1,
+      "closedExterior": 38,
+      "openExterior": 38,
+      "exteriorPlusInterior": 44,
+      "runtimeDrawCalls": "not_measured"
+    },
+    {
+      "assetId": "expo-metro-middle-exterior",
+      "level": 2,
+      "closedExterior": 13,
+      "openExterior": null,
+      "exteriorPlusInterior": null,
+      "runtimeDrawCalls": "not_measured"
+    },
+    {
+      "assetId": "expo-metro-tail-exterior",
+      "level": 0,
+      "closedExterior": 39,
+      "openExterior": 39,
+      "exteriorPlusInterior": 45,
+      "runtimeDrawCalls": "not_measured"
+    },
+    {
+      "assetId": "expo-metro-tail-exterior",
+      "level": 1,
+      "closedExterior": 39,
+      "openExterior": 39,
+      "exteriorPlusInterior": 45,
+      "runtimeDrawCalls": "not_measured"
+    },
+    {
+      "assetId": "expo-metro-tail-exterior",
+      "level": 2,
+      "closedExterior": 13,
+      "openExterior": null,
+      "exteriorPlusInterior": null,
+      "runtimeDrawCalls": "not_measured"
+    }
+  ],
+  "consistPrimitiveCosts": [
+    {
+      "level": 0,
+      "closedExterior": 154,
+      "openExterior": 154,
+      "exteriorPlusInterior": 178,
+      "runtimeDrawCalls": "not_measured"
+    },
+    {
+      "level": 1,
+      "closedExterior": 154,
+      "openExterior": 154,
+      "exteriorPlusInterior": 178,
+      "runtimeDrawCalls": "not_measured"
+    },
+    {
+      "level": 2,
+      "closedExterior": 52,
+      "openExterior": null,
+      "exteriorPlusInterior": null,
+      "runtimeDrawCalls": "not_measured"
+    }
+  ],
+  "materialBudgetException": "Four primary paint/steel-metal/glass/lights roles plus one secondary gangway-bellows rubber role; no tire-rubber rail wheels.",
+  "files": [
+    {
+      "file": "README.zh-TW.md",
+      "bytes": 9583,
+      "sha256": "94806d59316a53dcd55a8c2b4abdc3e8a082740e726c920469e887741db4a1b3"
+    },
+    {
+      "file": "audit_batch.py",
+      "bytes": 2819,
+      "sha256": "a0c70cf5a7cde954abe08221fc2661fe041e14e6932bd2c4fc1ec73e49189023"
+    },
+    {
+      "file": "audit_blender.py",
+      "bytes": 5392,
+      "sha256": "ec25483787ac7137a467360c6f1221111a8bd7881b5f993791690b9b1b1c8c97"
+    },
+    {
+      "file": "batch_static.py",
+      "bytes": 7243,
+      "sha256": "90ae879dc0f2d580f68a36e2dc623194031626916074ee30e6fd17675648cd13"
+    },
+    {
+      "file": "build.py",
+      "bytes": 10928,
+      "sha256": "fd627c4d060877e1197a84553e93efda3540593979e888d8e4343a7abd094249"
+    },
+    {
+      "file": "contract.py",
+      "bytes": 16463,
+      "sha256": "cd9dcd000790ac78037e679faef95ba34de2cabe84f12903496c011b59c2eec1"
+    },
+    {
+      "file": "export.py",
+      "bytes": 1813,
+      "sha256": "ed805e81824bbc3c622488fd5ba0fd54ba57fc43c8aabb913088d39b02d05db6"
+    },
+    {
+      "file": "exports/expo-metro-lead-exterior.lod0.glb",
+      "bytes": 231308,
+      "sha256": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3"
+    },
+    {
+      "file": "exports/expo-metro-lead-exterior.lod1.glb",
+      "bytes": 200740,
+      "sha256": "04601a4b007e4c37b8ca25f0ffc0de1b12b3bb6dec4bc34b540b31458e17a502"
+    },
+    {
+      "file": "exports/expo-metro-lead-exterior.lod2.glb",
+      "bytes": 37084,
+      "sha256": "6bc8efd804f341250845b5ab122bc2215a1e5bbbbfd65953add8d222a48a6fd6"
+    },
+    {
+      "file": "exports/expo-metro-middle-exterior.lod0.glb",
+      "bytes": 231288,
+      "sha256": "535836c5f55dd0f3fb00b6e70222e2fa45f6ff771798bd0fb39c12080e321498"
+    },
+    {
+      "file": "exports/expo-metro-middle-exterior.lod1.glb",
+      "bytes": 200716,
+      "sha256": "72024af0b12eff31f3070f38b97cf0de23205b630f9f1bf2d3abfd9098cd82fc"
+    },
+    {
+      "file": "exports/expo-metro-middle-exterior.lod2.glb",
+      "bytes": 37152,
+      "sha256": "bf2a04515b8c9478a982d3875b47dafac50884dd66a3103c9ae8fd4a182ed92c"
+    },
+    {
+      "file": "exports/expo-metro-shared-interior.lod0.glb",
+      "bytes": 106616,
+      "sha256": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+    },
+    {
+      "file": "exports/expo-metro-shared-interior.lod1.glb",
+      "bytes": 77956,
+      "sha256": "79cc69b436c7c40dcc21feee9218e4bf3156af1a18494080983a17183167e52e"
+    },
+    {
+      "file": "exports/expo-metro-tail-exterior.lod0.glb",
+      "bytes": 231308,
+      "sha256": "89cc151d44214ae86381a95a6aabfff928ae55bcde7892d3704d8f8d9fb9fd95"
+    },
+    {
+      "file": "exports/expo-metro-tail-exterior.lod1.glb",
+      "bytes": 200736,
+      "sha256": "71697569e0d0e85a96de0f11f4ab97750c4b39678977eeefe7eebcfb51cccc1e"
+    },
+    {
+      "file": "exports/expo-metro-tail-exterior.lod2.glb",
+      "bytes": 37084,
+      "sha256": "27517d3ddd0195b3c18d1444f93b64a9e55b10c206f010d3a17397c47d370f82"
+    },
+    {
+      "file": "finalize.py",
+      "bytes": 8768,
+      "sha256": "c887c8fa85c1a2c65753d15ab3f9b49fd909aafa0eebd180ddf558aad85ccf62"
+    },
+    {
+      "file": "manifest.json",
+      "bytes": 349072,
+      "sha256": "85ae667daea268564b2dc4e2ee8e671b4d67c3fc865dd9178d38add5b4751f79"
+    },
+    {
+      "file": "qa/build.log",
+      "bytes": 32224,
+      "sha256": "5cc97b1c22da82d6a886d7c745070fcf25584e7f3b1658ad4bf4a8b6f72cd00f"
+    },
+    {
+      "file": "qa/common-validation.json",
+      "bytes": 21716,
+      "sha256": "34c6dd036c0ff7b1d6890406d40a8c5b6518cfb24ed184bccc1d45ebe5e32be4"
+    },
+    {
+      "file": "qa/measurements.json",
+      "bytes": 23919,
+      "sha256": "3c10717531b1c434989b98f6b55374811d447b503df367d827e2d53223389fe4"
+    },
+    {
+      "file": "qa/previews/contact-boarding.png",
+      "bytes": 1430747,
+      "sha256": "6e5c2c01cc1f336bf5ec2f86267661ccc000c4a6acf6a5bb69f1c4a1e9ea1221"
+    },
+    {
+      "file": "qa/previews/contact-interior-lods.png",
+      "bytes": 222970,
+      "sha256": "4a919c0191dee09bf069984e83485833df0c44db1c0b0dc6e9fe48991385e188"
+    },
+    {
+      "file": "qa/previews/contact-lead-entries.png",
+      "bytes": 646805,
+      "sha256": "8b490fe61cf6c337ee839e2c3eea27e3834771806a7c3fa0e46b2014aa4e4b94"
+    },
+    {
+      "file": "qa/previews/contact-lead-lods.png",
+      "bytes": 676235,
+      "sha256": "04b13db87ed78ae51d6c50dfdf8cb530338165de8500f28585491e7e1818f6f5"
+    },
+    {
+      "file": "qa/previews/contact-lead-seats.png",
+      "bytes": 1283428,
+      "sha256": "5cca3ff6365f9574e669f1e44c3ca6c5d912bcd037d5f14ddf195606d16bbdfc"
+    },
+    {
+      "file": "qa/previews/contact-lighting.png",
+      "bytes": 888892,
+      "sha256": "74084d5150339f00142c74bb1869fb4ca8373f47ca25046085c739cadd08d550"
+    },
+    {
+      "file": "qa/previews/contact-middle-entries.png",
+      "bytes": 644794,
+      "sha256": "384c928e55f4881e8b000d6e4944eea03afebe139ddb114622e3d9ac59abf94d"
+    },
+    {
+      "file": "qa/previews/contact-middle-lods.png",
+      "bytes": 650430,
+      "sha256": "85f7953468719ba81fae91429b35815b628542fa14c25a7cd747c242dbb6b8c4"
+    },
+    {
+      "file": "qa/previews/contact-middle-seats.png",
+      "bytes": 1281354,
+      "sha256": "26ebc9317a561d6df622c39f0fa7589e3fb5e14c3aa83ee0c4bc856c9253fb3a"
+    },
+    {
+      "file": "qa/previews/contact-overview.png",
+      "bytes": 799838,
+      "sha256": "64f1f7fcccb6ebb62dbfbe8be687c4c7f45b5b70c5e49cb564b897bdc3804413"
+    },
+    {
+      "file": "qa/previews/contact-tail-entries.png",
+      "bytes": 646318,
+      "sha256": "71b4e19c64227e7316931117910614305a78e21e85cb3d8bfdeeccd95924a81f"
+    },
+    {
+      "file": "qa/previews/contact-tail-lods.png",
+      "bytes": 675596,
+      "sha256": "2bb4d015239a64e11777a762c2511a55eb3867257adeda78099aa612556eadae"
+    },
+    {
+      "file": "qa/previews/contact-tail-seats.png",
+      "bytes": 1283903,
+      "sha256": "5f35d67c396a5a8159bc063f5322c931ef436523a3e20a4fd23ebafd1d71a0d9"
+    },
+    {
+      "file": "qa/previews/interior-lod0-aisle.png",
+      "bytes": 614572,
+      "sha256": "598218a0e8d202971e0e67bf08835deff4b29e0a31be00b3c75e5b5ec24e7e6a"
+    },
+    {
+      "file": "qa/previews/interior-lod1-aisle.png",
+      "bytes": 613515,
+      "sha256": "f7b3c11dfbece3b05c6c776f368c9da51d07c47a26e84238dfc7dde4af1e34f6"
+    },
+    {
+      "file": "qa/previews/lead-aisle.png",
+      "bytes": 616450,
+      "sha256": "b077287988c2741d9f5f081a005bd3468564c12a5d178fe80fa811cd64fa2b0a"
+    },
+    {
+      "file": "qa/previews/lead-clear.png",
+      "bytes": 408850,
+      "sha256": "55b30077341e419602a3538502e8ad17e0ea8c6e080500a12831c830ce3e9f12"
+    },
+    {
+      "file": "qa/previews/lead-doors-closed.png",
+      "bytes": 499849,
+      "sha256": "213388c0c254a41e1751c7e2e04b64625768e3dd103eb0537f3f983a3aad9563"
+    },
+    {
+      "file": "qa/previews/lead-doors-open.png",
+      "bytes": 494208,
+      "sha256": "69d383e0a8a42bfdf0e57048471e37101ab3b8a004f848ef253a2f5dd10522e4"
+    },
+    {
+      "file": "qa/previews/lead-dusk.png",
+      "bytes": 458776,
+      "sha256": "e7eed3bbec4e277145ca109e655e601cdd979c429e9f3b487548bf6af309eee5"
+    },
+    {
+      "file": "qa/previews/lead-entry-left-center.png",
+      "bytes": 593365,
+      "sha256": "682248b3d50beb2db69aec2fd9f09f98577774f746dcfa2f184769abd6ebc0d9"
+    },
+    {
+      "file": "qa/previews/lead-entry-left-front.png",
+      "bytes": 603107,
+      "sha256": "63117d9ceb021b08c40965bce057de2ad51603d3a6a56f29f53af90a0abf13b6"
+    },
+    {
+      "file": "qa/previews/lead-entry-left-rear.png",
+      "bytes": 604648,
+      "sha256": "23fb276d31d7e822fc12806241f6874f1ca324a36f713af1f19a9600a4627ef9"
+    },
+    {
+      "file": "qa/previews/lead-entry-right-center.png",
+      "bytes": 583071,
+      "sha256": "27b0989c2f10a5b925bbbe32c6c410a452b6ec7860d3607583dca85829c9c5ee"
+    },
+    {
+      "file": "qa/previews/lead-entry-right-front.png",
+      "bytes": 599355,
+      "sha256": "bac5a223b6b564a90a8ad05da078ec9b497c0098a273b627379458b7b749be05"
+    },
+    {
+      "file": "qa/previews/lead-entry-right-rear.png",
+      "bytes": 595683,
+      "sha256": "5d16e30eaf3e63b7280be7d5d4a4d0fee33f7b1c75b74e7e23de16cd7133dfb8"
+    },
+    {
+      "file": "qa/previews/lead-lod0-front.png",
+      "bytes": 374964,
+      "sha256": "0800117a05497c5e7e08fd588ec7c63849ea361d2d1a365062ec3824c17218a3"
+    },
+    {
+      "file": "qa/previews/lead-lod0-rear.png",
+      "bytes": 376234,
+      "sha256": "4777391de4325942fb37f74b6617b4c37797b76c016d22fc0e3aa6373ee2f6f4"
+    },
+    {
+      "file": "qa/previews/lead-lod0-side.png",
+      "bytes": 333533,
+      "sha256": "cf3fe9c1acc1d7f1d0d7f1599de797235b6050d93a27d175ae9398e742cdc9ae"
+    },
+    {
+      "file": "qa/previews/lead-lod0-top.png",
+      "bytes": 361948,
+      "sha256": "0a84208ef22802a57dc9e4d31a61ac37b1cc13a2cb3a4ec6f246b598eda1e93a"
+    },
+    {
+      "file": "qa/previews/lead-lod1-front.png",
+      "bytes": 374158,
+      "sha256": "ed2ba76bbefe2f64af0b4e641878e5f87df74ebb06e4f1455fea88b318bcd235"
+    },
+    {
+      "file": "qa/previews/lead-lod1-rear.png",
+      "bytes": 375195,
+      "sha256": "5b10da53362e0991d1041330ce4ef5cc6d23ffe17dc59a70b08a427ca98cf655"
+    },
+    {
+      "file": "qa/previews/lead-lod1-side.png",
+      "bytes": 328323,
+      "sha256": "92a4e786d7cb5d2213caf0352e21cdd29f9322d316d585ad97670fea247222e2"
+    },
+    {
+      "file": "qa/previews/lead-lod1-top.png",
+      "bytes": 356383,
+      "sha256": "e17c5da6d9c2f10c3e75077ce2fbda93e339a761283c578b1510c38f7dbe975b"
+    },
+    {
+      "file": "qa/previews/lead-lod2-front.png",
+      "bytes": 359397,
+      "sha256": "a440f8703d6df122aa46b6bcb000eb4c0d6ae0ba8c818a136d536ff7e85c216d"
+    },
+    {
+      "file": "qa/previews/lead-lod2-rear.png",
+      "bytes": 362053,
+      "sha256": "ebdf63aedca604e1e7db54c70f37e71c82477460b4ffa47a2c705cbd21834d95"
+    },
+    {
+      "file": "qa/previews/lead-lod2-side.png",
+      "bytes": 319662,
+      "sha256": "a747856b2af2d790e0ef3986f4298576a947be06301e1162c17129fe5b4bad62"
+    },
+    {
+      "file": "qa/previews/lead-lod2-top.png",
+      "bytes": 348696,
+      "sha256": "b343f4cb12a474b0cefa7da7ba9f652b4d6200497c0c18966c9036bd9fe5229a"
+    },
+    {
+      "file": "qa/previews/lead-night.png",
+      "bytes": 410320,
+      "sha256": "4947ad5ebc33363d306f1ec76544b24e30afc6318b0c081d0d9e31f824fac22e"
+    },
+    {
+      "file": "qa/previews/lead-overcast.png",
+      "bytes": 426729,
+      "sha256": "3866a61350e2dd50412f78552fd46d6ee6216a5589c0c886dc7a39304ed83a9a"
+    },
+    {
+      "file": "qa/previews/lead-scale-reference.png",
+      "bytes": 564507,
+      "sha256": "b848a66eb2e87ad7d12d8d7c02b4970c74ab5b05e8ef08a4269ba9e9c4c5b204"
+    },
+    {
+      "file": "qa/previews/lead-seat-left-01-eye.png",
+      "bytes": 559618,
+      "sha256": "88e15561d0de2354e32a6ef872fd623a74913f0a0edce11e635d9f93c6b95f48"
+    },
+    {
+      "file": "qa/previews/lead-seat-left-02-eye.png",
+      "bytes": 612675,
+      "sha256": "35a80f5b2f380388c1d6be68c10fde3f769691ca0db0b2d3bc905950720b934f"
+    },
+    {
+      "file": "qa/previews/lead-seat-left-03-eye.png",
+      "bytes": 583837,
+      "sha256": "73bc16b2c3f6071a332a6c3e1c16fbfb4eb3d48f4b2a97adacdd925aaee06494"
+    },
+    {
+      "file": "qa/previews/lead-seat-left-04-eye.png",
+      "bytes": 601054,
+      "sha256": "a7ece28a45faa18bb625a224675b32b700590dbc1d77a9cdfabcd240f6ac2ab0"
+    },
+    {
+      "file": "qa/previews/lead-seat-left-05-eye.png",
+      "bytes": 601151,
+      "sha256": "9a5e51ebe7c8f6b6b04857c0f6b2e0c61067a13ebddb9307c6a8ece938a94381"
+    },
+    {
+      "file": "qa/previews/lead-seat-left-06-eye.png",
+      "bytes": 553437,
+      "sha256": "916fbb7ca93d0930f26997df5a291e2cca492dbc43c612df9e2ad41c27b1605e"
+    },
+    {
+      "file": "qa/previews/lead-seat-right-01-eye.png",
+      "bytes": 582867,
+      "sha256": "f3a041facc020e09c054e673fcd84caaa3506cd4e383b2acbfe0638f7e019533"
+    },
+    {
+      "file": "qa/previews/lead-seat-right-02-eye.png",
+      "bytes": 619213,
+      "sha256": "92fbd2e8b88e43ef8b8353d201182e9277094306eed9deffeb3b6a145b70de20"
+    },
+    {
+      "file": "qa/previews/lead-seat-right-03-eye.png",
+      "bytes": 594370,
+      "sha256": "f393d332d509cd6a234ac5893b6d99796bb8b190276dee3b0da6cb433b0f549e"
+    },
+    {
+      "file": "qa/previews/lead-seat-right-04-eye.png",
+      "bytes": 619794,
+      "sha256": "984efcd2af0c5a6f8ebf61dfe3efa3a2ae04fbe9172876050b2acbd17008a674"
+    },
+    {
+      "file": "qa/previews/lead-seat-right-05-eye.png",
+      "bytes": 617835,
+      "sha256": "671d182c7f4ebf640ff4f3d280433b97a508734b0505dc5a9b4018f55593f041"
+    },
+    {
+      "file": "qa/previews/lead-seat-right-06-eye.png",
+      "bytes": 571165,
+      "sha256": "808644748e323602e881326771b45a6da9ba66e58f5f8610ebe825a061fe96c7"
+    },
+    {
+      "file": "qa/previews/lead-section.png",
+      "bytes": 424227,
+      "sha256": "8190c19f640bac95eb82e52c988485df217372d9e2458c112c3d9d7d3197a17f"
+    },
+    {
+      "file": "qa/previews/middle-aisle.png",
+      "bytes": 614572,
+      "sha256": "a8735b4ccfa7e180a79e31736de4068c2447c3d507a80f03f048e6f3637cedaf"
+    },
+    {
+      "file": "qa/previews/middle-clear.png",
+      "bytes": 405087,
+      "sha256": "51e92d49558fd46ec20e5caede092b21a3abbe83a1726bf4310a9f2e0e591dbd"
+    },
+    {
+      "file": "qa/previews/middle-doors-closed.png",
+      "bytes": 498893,
+      "sha256": "bcc4afe422fe48d2d9b1e78d35437a9374cda898f67e70f370f27c9194979975"
+    },
+    {
+      "file": "qa/previews/middle-doors-open.png",
+      "bytes": 492561,
+      "sha256": "86ccd0270e46280dbfacbe5b4c7f1ccef9825959f4a520c51596878241553a3a"
+    },
+    {
+      "file": "qa/previews/middle-dusk.png",
+      "bytes": 462366,
+      "sha256": "1eff1ed6b887de658b458155edd0974208d8c6dc4727cbad09a44b3cbe26f6e6"
+    },
+    {
+      "file": "qa/previews/middle-entry-left-center.png",
+      "bytes": 591160,
+      "sha256": "3ade458c9e71c56050ddf92c702c7c6d4e0ccb136fe3a1a0c10913108292c5b7"
+    },
+    {
+      "file": "qa/previews/middle-entry-left-front.png",
+      "bytes": 600314,
+      "sha256": "0f206d9ba01a04684c6376ee6a31528c66ff5d7a0c07947abb6f446884231852"
+    },
+    {
+      "file": "qa/previews/middle-entry-left-rear.png",
+      "bytes": 602798,
+      "sha256": "084a31e0258c2e84a43e9ce61e49fb3fe818b9d14d2892d215f7823b2bfbf6ab"
+    },
+    {
+      "file": "qa/previews/middle-entry-right-center.png",
+      "bytes": 580736,
+      "sha256": "65107c9e6e2b7d58c7b61f8d34a6cdf1a66ac005660338eeb87d75325df3090a"
+    },
+    {
+      "file": "qa/previews/middle-entry-right-front.png",
+      "bytes": 597544,
+      "sha256": "ec08a054882e8eb0852dfeefaddfccda8fda419e547fc15d627956713fc7c981"
+    },
+    {
+      "file": "qa/previews/middle-entry-right-rear.png",
+      "bytes": 594168,
+      "sha256": "eb4f3fc055364c16af704f18eb4f1f330d0c249a15b462e22e5de8e62dc424e0"
+    },
+    {
+      "file": "qa/previews/middle-lod0-front.png",
+      "bytes": 344248,
+      "sha256": "1c7f1af98d4be03738f828de4b0094f702833823098cc20421f466ee28b464a6"
+    },
+    {
+      "file": "qa/previews/middle-lod0-rear.png",
+      "bytes": 345247,
+      "sha256": "57a7df376db5aecd7a1564e65f9f1731038bb59d051e868f443dce059f179a82"
+    },
+    {
+      "file": "qa/previews/middle-lod0-side.png",
+      "bytes": 334071,
+      "sha256": "243faf13f168039c3d99d562e502d59bd5c88010c7aee88df69917877a95604a"
+    },
+    {
+      "file": "qa/previews/middle-lod0-top.png",
+      "bytes": 361034,
+      "sha256": "6b561450dea3cf2e49144e979943e2b7200a35b7819ae4fa0b9c86df764056de"
+    },
+    {
+      "file": "qa/previews/middle-lod1-front.png",
+      "bytes": 343454,
+      "sha256": "29aaea80c42a3c52413164e63ea6a5514a7878ddda03da6437987ee6fdd55ec4"
+    },
+    {
+      "file": "qa/previews/middle-lod1-rear.png",
+      "bytes": 344548,
+      "sha256": "8f65214d7adff8ee7976d81a4a0c8ef222ca942d66cd699f669a15ea484a15ba"
+    },
+    {
+      "file": "qa/previews/middle-lod1-side.png",
+      "bytes": 328953,
+      "sha256": "7141af00ae48659dfca38427e9ad1165a5e0d1e51dab9b2f182319dcfed37722"
+    },
+    {
+      "file": "qa/previews/middle-lod1-top.png",
+      "bytes": 355918,
+      "sha256": "b2ac8688b70e733ba67091bcb77725f6e2182f2b9c5e14590708b52d266be5bf"
+    },
+    {
+      "file": "qa/previews/middle-lod2-front.png",
+      "bytes": 359397,
+      "sha256": "f5de6579bcabb1205f615c047949024fe9b415536c8adbde96b7116c282547df"
+    },
+    {
+      "file": "qa/previews/middle-lod2-rear.png",
+      "bytes": 362053,
+      "sha256": "76ad7fdba61cc8749ca89eaf8167417730f4804cf2e22ad5fd0398163044382f"
+    },
+    {
+      "file": "qa/previews/middle-lod2-side.png",
+      "bytes": 319662,
+      "sha256": "aa78b92a8d9c9d2fd2418a6a7e3e5acf6daf153427a7f5349ca02eef8ddf229f"
+    },
+    {
+      "file": "qa/previews/middle-lod2-top.png",
+      "bytes": 348696,
+      "sha256": "758ff2bb52958d0b9e1b7daa7dec8ad350af20eefc5056a03c3a3872cf2e02ea"
+    },
+    {
+      "file": "qa/previews/middle-night.png",
+      "bytes": 405903,
+      "sha256": "d2b1a56a144c8354aa54fe2a467a79219daaaaf27f12fed5ed3cd6b007eb6f4a"
+    },
+    {
+      "file": "qa/previews/middle-overcast.png",
+      "bytes": 426735,
+      "sha256": "f8ef9197228834b852c484da3255d10f8ed64dd81ba22a973120beb951c9377a"
+    },
+    {
+      "file": "qa/previews/middle-scale-reference.png",
+      "bytes": 563818,
+      "sha256": "6588a7fdaacdda97fe47c4c63bbadd3e702f0696afb26d25d8999755cedd18b6"
+    },
+    {
+      "file": "qa/previews/middle-seat-left-01-eye.png",
+      "bytes": 559085,
+      "sha256": "a5d4e3213a5dcb1c053d03e333c6f7e60d9d4f034d17b86bb505a788e11f0c18"
+    },
+    {
+      "file": "qa/previews/middle-seat-left-02-eye.png",
+      "bytes": 610744,
+      "sha256": "538b31b5cc994c6b131249dbdabb05630e2adfe3346ef4a345617eb3f47c2d6c"
+    },
+    {
+      "file": "qa/previews/middle-seat-left-03-eye.png",
+      "bytes": 582192,
+      "sha256": "0d9f30da586d72cc25a498eb9b2bb0c3b8546e69b41b84ffd0a781f2b46f218b"
+    },
+    {
+      "file": "qa/previews/middle-seat-left-04-eye.png",
+      "bytes": 598991,
+      "sha256": "6b7f930ec6fa0ae241e77a86bff02bc4d4ff82a64e83e92998bb2c134db987ba"
+    },
+    {
+      "file": "qa/previews/middle-seat-left-05-eye.png",
+      "bytes": 598993,
+      "sha256": "811ec04bbafecdcf7feb616ae4fefc7ecc669693756bca98c92fa942478e6dae"
+    },
+    {
+      "file": "qa/previews/middle-seat-left-06-eye.png",
+      "bytes": 552348,
+      "sha256": "ccf0fc5a95f7b7ea53d908562d9d29bcd2a63b84cc245fc3804d07763139f593"
+    },
+    {
+      "file": "qa/previews/middle-seat-right-01-eye.png",
+      "bytes": 580485,
+      "sha256": "ae49fd1e264425bedac03eaecb117986ab0f38d5bbe4941ed13fd2b3af237997"
+    },
+    {
+      "file": "qa/previews/middle-seat-right-02-eye.png",
+      "bytes": 617668,
+      "sha256": "8b01b973337f5c9beeae6dc5c1084a538ed7728f0a5dd09eb510656381dfb1b9"
+    },
+    {
+      "file": "qa/previews/middle-seat-right-03-eye.png",
+      "bytes": 593453,
+      "sha256": "40d7b1e483eb4d1b35b10264802f0c8d81dac799369d5c8a04d7e807ca7c2b21"
+    },
+    {
+      "file": "qa/previews/middle-seat-right-04-eye.png",
+      "bytes": 617772,
+      "sha256": "d547ed88b7856028cfc4f000712d06920acaaff25300b1f49033107564b34f2e"
+    },
+    {
+      "file": "qa/previews/middle-seat-right-05-eye.png",
+      "bytes": 615728,
+      "sha256": "ee5cb20121c325e6af438a2a481f1fb946c20588627bddbfbb42bb6746db7d57"
+    },
+    {
+      "file": "qa/previews/middle-seat-right-06-eye.png",
+      "bytes": 571661,
+      "sha256": "949935f89126d3f1b8dc055c0b8d89b6868b5bd4b43df9312abb95ec13ea8708"
+    },
+    {
+      "file": "qa/previews/middle-section.png",
+      "bytes": 413517,
+      "sha256": "cca9d12ba04a8da3edeba7a564146e4c28b848f2b21453621dfb9ad1bca5fa4c"
+    },
+    {
+      "file": "qa/previews/tail-aisle.png",
+      "bytes": 615949,
+      "sha256": "032d7a5de4cbb6c3a2e225a618c07121db0beb5f305266e13840dae6f7dddeb6"
+    },
+    {
+      "file": "qa/previews/tail-clear.png",
+      "bytes": 409791,
+      "sha256": "4b8633d74b4326764c76dc79ec60619c8b3614bd1dd6597cb8ddba26843cca2f"
+    },
+    {
+      "file": "qa/previews/tail-doors-closed.png",
+      "bytes": 499221,
+      "sha256": "ceb1ceb039cd7295aa2d075f319a86718cfa09a5554d0a8bdc330c9471e67e92"
+    },
+    {
+      "file": "qa/previews/tail-doors-open.png",
+      "bytes": 494178,
+      "sha256": "3d65515f0b1811879aeb3b2525ed4447b35610f6ca5e5e30544c1dc351243969"
+    },
+    {
+      "file": "qa/previews/tail-dusk.png",
+      "bytes": 458330,
+      "sha256": "778b4f37087c4cd2ab6bcd49604e384ef1df6cf3324e05e473a3228f66295c17"
+    },
+    {
+      "file": "qa/previews/tail-entry-left-center.png",
+      "bytes": 593096,
+      "sha256": "2005c6d91151592b44fe06cf7949a3ff345c259b7c2417b29633fc7660c06c4f"
+    },
+    {
+      "file": "qa/previews/tail-entry-left-front.png",
+      "bytes": 601747,
+      "sha256": "4d43f6dca8c5c06eb438bf3dc7855e0f567eea780a7af829b903ce80da734f09"
+    },
+    {
+      "file": "qa/previews/tail-entry-left-rear.png",
+      "bytes": 604159,
+      "sha256": "9c4d8e9e9c3dd2a36ac44a0de2a398cd62bc6a9dbfc8b075df639a9589aaa0fc"
+    },
+    {
+      "file": "qa/previews/tail-entry-right-center.png",
+      "bytes": 582461,
+      "sha256": "1a66cf3e1aedcf05401fca4c86d24f2ad869cde6ad36bdec9ce40b3b14aa1b83"
+    },
+    {
+      "file": "qa/previews/tail-entry-right-front.png",
+      "bytes": 598881,
+      "sha256": "e567f7d29c8b8c119b79ff606125668741b94f036f5cd41a77be9a755a2235c7"
+    },
+    {
+      "file": "qa/previews/tail-entry-right-rear.png",
+      "bytes": 595600,
+      "sha256": "6b70e82c57fd191123b3e8ffb79381e515e49c669d461fe62b3c67dc3f2dda7e"
+    },
+    {
+      "file": "qa/previews/tail-lod0-front.png",
+      "bytes": 374623,
+      "sha256": "9364ba9b06ba05fe5f6819711751672054c7325e3eccd1116b5945b73213abcf"
+    },
+    {
+      "file": "qa/previews/tail-lod0-rear.png",
+      "bytes": 376232,
+      "sha256": "3188d149de17e896900448d4a6a8d43d68bea46b6a666504453d7ec646d9a61e"
+    },
+    {
+      "file": "qa/previews/tail-lod0-side.png",
+      "bytes": 333457,
+      "sha256": "fe8eb6f68546d933ac46dfa4538018e1b10cf94065b979593fbf0b201e37e73f"
+    },
+    {
+      "file": "qa/previews/tail-lod0-top.png",
+      "bytes": 361439,
+      "sha256": "909b37e20bbc5a2da0a0d79031acd8fa533c81df4295c1bc0026021e6c9af406"
+    },
+    {
+      "file": "qa/previews/tail-lod1-front.png",
+      "bytes": 373812,
+      "sha256": "72f1bda94ef4d6301f95559c63e762ef5ff2babb63772d77774bc561ead0d116"
+    },
+    {
+      "file": "qa/previews/tail-lod1-rear.png",
+      "bytes": 375389,
+      "sha256": "987058e73a44e8fc4904bf00a4c4346eda2d9fab871d5adfbd266f507d6db635"
+    },
+    {
+      "file": "qa/previews/tail-lod1-side.png",
+      "bytes": 328545,
+      "sha256": "1c3ee5343bbeb67c94234c53f1ff29b00240b063f8b1d1697adbdc794c16fe36"
+    },
+    {
+      "file": "qa/previews/tail-lod1-top.png",
+      "bytes": 356337,
+      "sha256": "f0b23b6c678b97e5d8b9d4c272d6cc5c8d57faeaa98ad93d2f704b036e167b1f"
+    },
+    {
+      "file": "qa/previews/tail-lod2-front.png",
+      "bytes": 359397,
+      "sha256": "e0e7682c0ceb6033e7cde29625ad977f8c755f3f1e17c978918e544956808235"
+    },
+    {
+      "file": "qa/previews/tail-lod2-rear.png",
+      "bytes": 362053,
+      "sha256": "fa8533f1168623cf2f29ff529e22d0335016e191e885e1fd63051d93369aa99f"
+    },
+    {
+      "file": "qa/previews/tail-lod2-side.png",
+      "bytes": 319662,
+      "sha256": "d3ecf0d4e6be2b0aac9b9a3ea669382c0130d2da46850afab4dd7fbb5e1db475"
+    },
+    {
+      "file": "qa/previews/tail-lod2-top.png",
+      "bytes": 348696,
+      "sha256": "31bc0434ae796e5df16122b0a940ccd021df2f521ccd8ca14cf61570b78653f8"
+    },
+    {
+      "file": "qa/previews/tail-night.png",
+      "bytes": 407838,
+      "sha256": "0d3e6841741a33c4cca188a88c45795b7acc9d44ca0a5266faaacb27b50860fe"
+    },
+    {
+      "file": "qa/previews/tail-overcast.png",
+      "bytes": 426833,
+      "sha256": "fe60b5e740758cff1f46c1784f0468b95b71ed1c4766bbaae20e4eceab707a4f"
+    },
+    {
+      "file": "qa/previews/tail-scale-reference.png",
+      "bytes": 561314,
+      "sha256": "edcbcf94bb36ab04089b4dce5c0777aea554ada5b86364ba8df4454d8f1b01a1"
+    },
+    {
+      "file": "qa/previews/tail-seat-left-01-eye.png",
+      "bytes": 560965,
+      "sha256": "54396d302599dd14d67ffb2a33ace81b8dbabbc5a86987a8602b5bed49b4b764"
+    },
+    {
+      "file": "qa/previews/tail-seat-left-02-eye.png",
+      "bytes": 612737,
+      "sha256": "8e569fe73f3c8c69c6d150d90732c6357bb426e8a4461a1262cee3e25858c53a"
+    },
+    {
+      "file": "qa/previews/tail-seat-left-03-eye.png",
+      "bytes": 583632,
+      "sha256": "7df6085072bda1acaa3c5ce34fea64540d407e7c1d0b4debc74de9dab29df0f1"
+    },
+    {
+      "file": "qa/previews/tail-seat-left-04-eye.png",
+      "bytes": 600353,
+      "sha256": "7ef285d3fedb5a860b725f88285f3bdbc042d5b35b052dcf05f6fc3e5d79dfc4"
+    },
+    {
+      "file": "qa/previews/tail-seat-left-05-eye.png",
+      "bytes": 600484,
+      "sha256": "a6d87092b57b05f2c6f80ce9a8ef58edcaef4836f572a099c051d11d1bdaaddf"
+    },
+    {
+      "file": "qa/previews/tail-seat-left-06-eye.png",
+      "bytes": 554268,
+      "sha256": "e7a510d82ef3c13eec8d3d044c7d426da8398d71f3faaf225e1cfd9a66316ce9"
+    },
+    {
+      "file": "qa/previews/tail-seat-right-01-eye.png",
+      "bytes": 582344,
+      "sha256": "8b03a641f7ef69db084cfa60b8e4a86fd3bdfdaa6132d4e334809382f3b1ad72"
+    },
+    {
+      "file": "qa/previews/tail-seat-right-02-eye.png",
+      "bytes": 619109,
+      "sha256": "eea9e438281c6cac5cdfa3116cf40d2ebca5cb33538c661fe8239b44a1deab0c"
+    },
+    {
+      "file": "qa/previews/tail-seat-right-03-eye.png",
+      "bytes": 594503,
+      "sha256": "5ab993b8307cf48315863cca9726ced0b7b6b1ab7a0656734cfdc6d45427d8ae"
+    },
+    {
+      "file": "qa/previews/tail-seat-right-04-eye.png",
+      "bytes": 619629,
+      "sha256": "8adf714d58f660a26d920f25f4d9bfadc3dfe3fb97fe3b83f8c888df0bdb7715"
+    },
+    {
+      "file": "qa/previews/tail-seat-right-05-eye.png",
+      "bytes": 617645,
+      "sha256": "1f5ebb53b6399067c8f8f7d8d0510fd4b3ef2a4609d37dd4bbd27723a46351b4"
+    },
+    {
+      "file": "qa/previews/tail-seat-right-06-eye.png",
+      "bytes": 573148,
+      "sha256": "0d917301c0f2c717e17074e50581cd4e34e6412578ee5b707bbbba74f1920f1f"
+    },
+    {
+      "file": "qa/previews/tail-section.png",
+      "bytes": 422470,
+      "sha256": "1e4585c42ffcfd4579b03a5d594963dbd5e61ef16e4a487584030c201c4a8928"
+    },
+    {
+      "file": "qa/render-batched-interior.log",
+      "bytes": 838660,
+      "sha256": "af36fcdd1049ceb1e3834993f1c0bb44e42cf27cf24ea667a1af64b1dc3d276b"
+    },
+    {
+      "file": "qa/render-report.json",
+      "bytes": 106369,
+      "sha256": "1c3c02753ae9ff1fb3a65211396e27a998e4552f21eaab3a8c9fca8d81be80b0"
+    },
+    {
+      "file": "qa/render.log",
+      "bytes": 1278502,
+      "sha256": "c3f1b28dfede5f28778e4b9995e96d30894edb8234f9dc140291f552c0c5ba83"
+    },
+    {
+      "file": "qa/source-audit.log",
+      "bytes": 54973,
+      "sha256": "ae9c70cd3771be8f370fa3eb545c492a05d78d54ec567309b973b3ab38d9ad03"
+    },
+    {
+      "file": "qa/source-roundtrip.json",
+      "bytes": 32620,
+      "sha256": "4772d20ac4160ffd55678cb32fc51e7fe003a30b64c5237c7ad7a1bfbbdba8c1"
+    },
+    {
+      "file": "qa/static-batch-export.log",
+      "bytes": 32080,
+      "sha256": "6f1f56c2c4f31a5946b8490d3f99e030919733a23c878b3670070485bbd77f1f"
+    },
+    {
+      "file": "qa/static-batching.json",
+      "bytes": 21293,
+      "sha256": "8f666a6c987e01499872e458662b472c0e02766f4c98cc3efb1ae23221eb4d8a"
+    },
+    {
+      "file": "qa/test-results.log",
+      "bytes": 106,
+      "sha256": "a148566629911f25580680ce59b3d39419eb6f56b0e8c62ee4eab89f811ccba6"
+    },
+    {
+      "file": "qa/validate.log",
+      "bytes": 60,
+      "sha256": "0e0c3a971c7b690bbc51d231b41ad62bce9b50156be8cd78e0d13391fe0e9102"
+    },
+    {
+      "file": "qa/validation.json",
+      "bytes": 4780,
+      "sha256": "474c171e10393bf9d476576ba0a67d357b048f5a4e4525c2d3c47dcef014b7bf"
+    },
+    {
+      "file": "qa/visual-review.json",
+      "bytes": 4818,
+      "sha256": "437cd286b178ee95ef868c54671698bef29974ced6c126b10bcc22e5dc9a8be1"
+    },
+    {
+      "file": "render_previews.py",
+      "bytes": 7290,
+      "sha256": "6cb8aabf3730340c1748b5f274c5babee366c592db76ff8f63ba30dea7186fb7"
+    },
+    {
+      "file": "source/expo-metro-lead-exterior.lod0.blend",
+      "bytes": 110884,
+      "sha256": "4b1ac6d4f63b3d4a5139093ce08fe9c987082616849a2e2a5318f609539443fc"
+    },
+    {
+      "file": "source/expo-metro-lead-exterior.lod1.blend",
+      "bytes": 108568,
+      "sha256": "f435bee45eea53bf38ed61c8ba137e216ab4f7db1fc02b65dc7668feb77a15fa"
+    },
+    {
+      "file": "source/expo-metro-lead-exterior.lod2.blend",
+      "bytes": 94162,
+      "sha256": "8e3f6592905025062a355165863827da12b331d54549d53a8ec5ecf9b36b4f9e"
+    },
+    {
+      "file": "source/expo-metro-middle-exterior.lod0.blend",
+      "bytes": 109923,
+      "sha256": "dde3c76999a1ad55f6212aff3d4eda3a370853469c2bcfcd55efaccfd0b66b7c"
+    },
+    {
+      "file": "source/expo-metro-middle-exterior.lod1.blend",
+      "bytes": 107413,
+      "sha256": "96e7913920801d302405f16333d32de4378c4927a4a645769eae4665ceb55d8d"
+    },
+    {
+      "file": "source/expo-metro-middle-exterior.lod2.blend",
+      "bytes": 94121,
+      "sha256": "05a5ea69054f45197e36506b2abf14e8ec506472fb44701e05b44078c79aba11"
+    },
+    {
+      "file": "source/expo-metro-shared-interior.lod0.blend",
+      "bytes": 103151,
+      "sha256": "b856fb70b0b53cb09666e19cad1a2c3387d7a93b36c3c817e84c33d0e70142af"
+    },
+    {
+      "file": "source/expo-metro-shared-interior.lod1.blend",
+      "bytes": 100674,
+      "sha256": "c23acc00c53aeeedfa88051c9042db57cd62c9f766079f26eb83bedf963e18c1"
+    },
+    {
+      "file": "source/expo-metro-tail-exterior.lod0.blend",
+      "bytes": 112037,
+      "sha256": "00060b4aa01dbda74228b65d69e049d5efce85a705f58f968c4f0c893415ebcd"
+    },
+    {
+      "file": "source/expo-metro-tail-exterior.lod1.blend",
+      "bytes": 108354,
+      "sha256": "d4a0f18cc6a0e9a33b677e02a377f1ba0bdfab0f04d3ada0f234de2317c1b06b"
+    },
+    {
+      "file": "source/expo-metro-tail-exterior.lod2.blend",
+      "bytes": 94237,
+      "sha256": "85863f52190f58558d66d2aade90e15a97357b7943be8a5a41a55126c0b929b3"
+    },
+    {
+      "file": "test_validate.py",
+      "bytes": 2896,
+      "sha256": "9e43c612a0f5f14a851b3443e5a0e233be8d8cd9c3d6a54306c6ce982b714ecc"
+    },
+    {
+      "file": "validate.py",
+      "bytes": 21462,
+      "sha256": "b414d12c872bf30d440f2001c5ddc58692edbe40b676ce6e9ef0af024e22a637"
+    }
+  ]
+}

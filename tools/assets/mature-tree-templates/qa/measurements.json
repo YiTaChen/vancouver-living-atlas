@@ -1,0 +1,809 @@
+{
+  "assets": [
+    {
+      "assetId": "mature-maple",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -2.4195356369018555,
+          0.0,
+          -2.3496997356414795
+        ],
+        "max": [
+          2.360464334487915,
+          10.0,
+          2.232037305831909
+        ],
+        "size": [
+          4.7799999713897705,
+          10.0,
+          4.581737041473389
+        ]
+      },
+      "triangles": 7696,
+      "vertices": 14770,
+      "primitives": 4,
+      "bytes": 779568,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 779568,
+      "images": [
+        {
+          "sha256": "974ff6c09687297a5c06112e0f64dd9ad1f8f77b624947193ff8e3382933e5bd",
+          "width": 256,
+          "height": 256,
+          "bytes": 127592,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "05921c188fa1c9b0768459790bba2515d36cca3efe9ba743670d6c664e6cd628",
+          "width": 256,
+          "height": 256,
+          "bytes": 77181,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "a736df0665f087929f44f505740767b859630b16261eabfcf15bf1a1fb485a14",
+          "width": 256,
+          "height": 256,
+          "bytes": 22782,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "2eff86a192a7fbd791abb2a55ec414a3b5bc778b59f3101ff79b8512524ef50f",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 274504,
+          "texelBytesWithMips": 5592405.333333333
+        }
+      ],
+      "nodeNames": [
+        "trunk",
+        "branches",
+        "foliage-core",
+        "foliage-cards"
+      ],
+      "materialNames": [
+        "bark-opaque",
+        "foliage-straight-alpha"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "mature-maple",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -2.4141902923583984,
+          0.0,
+          -2.3836309909820557
+        ],
+        "max": [
+          2.365809679031372,
+          10.0,
+          2.132826328277588
+        ],
+        "size": [
+          4.7799999713897705,
+          10.0,
+          4.5164573192596436
+        ]
+      },
+      "triangles": 1284,
+      "vertices": 1430,
+      "primitives": 4,
+      "bytes": 87700,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 87700,
+      "images": [
+        {
+          "sha256": "974ff6c09687297a5c06112e0f64dd9ad1f8f77b624947193ff8e3382933e5bd",
+          "width": 256,
+          "height": 256,
+          "bytes": 127592,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "05921c188fa1c9b0768459790bba2515d36cca3efe9ba743670d6c664e6cd628",
+          "width": 256,
+          "height": 256,
+          "bytes": 77181,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "a736df0665f087929f44f505740767b859630b16261eabfcf15bf1a1fb485a14",
+          "width": 256,
+          "height": 256,
+          "bytes": 22782,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "2eff86a192a7fbd791abb2a55ec414a3b5bc778b59f3101ff79b8512524ef50f",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 274504,
+          "texelBytesWithMips": 5592405.333333333
+        }
+      ],
+      "nodeNames": [
+        "trunk",
+        "branches",
+        "foliage-core",
+        "foliage-cards"
+      ],
+      "materialNames": [
+        "bark-opaque",
+        "foliage-solid-interior",
+        "foliage-straight-alpha"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "mature-maple",
+      "lod": 2,
+      "boundsM": {
+        "min": [
+          -2.385688543319702,
+          0.0,
+          -2.309751510620117
+        ],
+        "max": [
+          2.3943114280700684,
+          10.0,
+          2.1362366676330566
+        ],
+        "size": [
+          4.7799999713897705,
+          10.0,
+          4.445988178253174
+        ]
+      },
+      "triangles": 222,
+      "vertices": 156,
+      "primitives": 3,
+      "bytes": 15392,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 15392,
+      "images": [
+        {
+          "sha256": "974ff6c09687297a5c06112e0f64dd9ad1f8f77b624947193ff8e3382933e5bd",
+          "width": 256,
+          "height": 256,
+          "bytes": 127592,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "05921c188fa1c9b0768459790bba2515d36cca3efe9ba743670d6c664e6cd628",
+          "width": 256,
+          "height": 256,
+          "bytes": 77181,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "a736df0665f087929f44f505740767b859630b16261eabfcf15bf1a1fb485a14",
+          "width": 256,
+          "height": 256,
+          "bytes": 22782,
+          "texelBytesWithMips": 349525.3333333333
+        }
+      ],
+      "nodeNames": [
+        "trunk",
+        "branches",
+        "foliage-core"
+      ],
+      "materialNames": [
+        "bark-opaque",
+        "foliage-solid-interior"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "mature-alder",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -2.3485870361328125,
+          0.0,
+          -2.2963156700134277
+        ],
+        "max": [
+          2.3214128017425537,
+          10.0,
+          2.0775091648101807
+        ],
+        "size": [
+          4.669999837875366,
+          10.0,
+          4.373824834823608
+        ]
+      },
+      "triangles": 7680,
+      "vertices": 14738,
+      "primitives": 4,
+      "bytes": 777996,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 777996,
+      "images": [
+        {
+          "sha256": "974ff6c09687297a5c06112e0f64dd9ad1f8f77b624947193ff8e3382933e5bd",
+          "width": 256,
+          "height": 256,
+          "bytes": 127592,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "05921c188fa1c9b0768459790bba2515d36cca3efe9ba743670d6c664e6cd628",
+          "width": 256,
+          "height": 256,
+          "bytes": 77181,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "a736df0665f087929f44f505740767b859630b16261eabfcf15bf1a1fb485a14",
+          "width": 256,
+          "height": 256,
+          "bytes": 22782,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "2eff86a192a7fbd791abb2a55ec414a3b5bc778b59f3101ff79b8512524ef50f",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 274504,
+          "texelBytesWithMips": 5592405.333333333
+        }
+      ],
+      "nodeNames": [
+        "trunk",
+        "branches",
+        "foliage-core",
+        "foliage-cards"
+      ],
+      "materialNames": [
+        "bark-opaque",
+        "foliage-straight-alpha"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "mature-alder",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -2.4024956226348877,
+          0.0,
+          -2.287274122238159
+        ],
+        "max": [
+          2.2675042152404785,
+          10.0,
+          2.0085811614990234
+        ],
+        "size": [
+          4.669999837875366,
+          10.0,
+          4.295855283737183
+        ]
+      },
+      "triangles": 1284,
+      "vertices": 1430,
+      "primitives": 4,
+      "bytes": 87724,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 87724,
+      "images": [
+        {
+          "sha256": "974ff6c09687297a5c06112e0f64dd9ad1f8f77b624947193ff8e3382933e5bd",
+          "width": 256,
+          "height": 256,
+          "bytes": 127592,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "05921c188fa1c9b0768459790bba2515d36cca3efe9ba743670d6c664e6cd628",
+          "width": 256,
+          "height": 256,
+          "bytes": 77181,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "a736df0665f087929f44f505740767b859630b16261eabfcf15bf1a1fb485a14",
+          "width": 256,
+          "height": 256,
+          "bytes": 22782,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "2eff86a192a7fbd791abb2a55ec414a3b5bc778b59f3101ff79b8512524ef50f",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 274504,
+          "texelBytesWithMips": 5592405.333333333
+        }
+      ],
+      "nodeNames": [
+        "trunk",
+        "branches",
+        "foliage-core",
+        "foliage-cards"
+      ],
+      "materialNames": [
+        "bark-opaque",
+        "foliage-solid-interior",
+        "foliage-straight-alpha"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "mature-alder",
+      "lod": 2,
+      "boundsM": {
+        "min": [
+          -2.32312273979187,
+          0.0,
+          -2.22430682182312
+        ],
+        "max": [
+          2.346877098083496,
+          10.0,
+          2.0587732791900635
+        ],
+        "size": [
+          4.669999837875366,
+          10.0,
+          4.283080101013184
+        ]
+      },
+      "triangles": 222,
+      "vertices": 156,
+      "primitives": 3,
+      "bytes": 15396,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 15396,
+      "images": [
+        {
+          "sha256": "974ff6c09687297a5c06112e0f64dd9ad1f8f77b624947193ff8e3382933e5bd",
+          "width": 256,
+          "height": 256,
+          "bytes": 127592,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "05921c188fa1c9b0768459790bba2515d36cca3efe9ba743670d6c664e6cd628",
+          "width": 256,
+          "height": 256,
+          "bytes": 77181,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "a736df0665f087929f44f505740767b859630b16261eabfcf15bf1a1fb485a14",
+          "width": 256,
+          "height": 256,
+          "bytes": 22782,
+          "texelBytesWithMips": 349525.3333333333
+        }
+      ],
+      "nodeNames": [
+        "trunk",
+        "branches",
+        "foliage-core"
+      ],
+      "materialNames": [
+        "bark-opaque",
+        "foliage-solid-interior"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "mature-douglas-fir",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -2.246401071548462,
+          0.0,
+          -2.292567491531372
+        ],
+        "max": [
+          2.453598976135254,
+          10.0,
+          2.2243361473083496
+        ],
+        "size": [
+          4.700000047683716,
+          10.0,
+          4.516903638839722
+        ]
+      },
+      "triangles": 7634,
+      "vertices": 9425,
+      "primitives": 4,
+      "bytes": 540908,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 540908,
+      "images": [
+        {
+          "sha256": "974ff6c09687297a5c06112e0f64dd9ad1f8f77b624947193ff8e3382933e5bd",
+          "width": 256,
+          "height": 256,
+          "bytes": 127592,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "05921c188fa1c9b0768459790bba2515d36cca3efe9ba743670d6c664e6cd628",
+          "width": 256,
+          "height": 256,
+          "bytes": 77181,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "a736df0665f087929f44f505740767b859630b16261eabfcf15bf1a1fb485a14",
+          "width": 256,
+          "height": 256,
+          "bytes": 22782,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "2eff86a192a7fbd791abb2a55ec414a3b5bc778b59f3101ff79b8512524ef50f",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 274504,
+          "texelBytesWithMips": 5592405.333333333
+        }
+      ],
+      "nodeNames": [
+        "trunk",
+        "branches",
+        "foliage-core",
+        "foliage-cards"
+      ],
+      "materialNames": [
+        "bark-opaque",
+        "foliage-solid-interior",
+        "foliage-straight-alpha"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "mature-douglas-fir",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -2.1973800659179688,
+          0.0,
+          -2.3297626972198486
+        ],
+        "max": [
+          2.502619981765747,
+          10.0,
+          2.1638195514678955
+        ],
+        "size": [
+          4.700000047683716,
+          10.0,
+          4.493582248687744
+        ]
+      },
+      "triangles": 1680,
+      "vertices": 1815,
+      "primitives": 4,
+      "bytes": 117612,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 117612,
+      "images": [
+        {
+          "sha256": "974ff6c09687297a5c06112e0f64dd9ad1f8f77b624947193ff8e3382933e5bd",
+          "width": 256,
+          "height": 256,
+          "bytes": 127592,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "05921c188fa1c9b0768459790bba2515d36cca3efe9ba743670d6c664e6cd628",
+          "width": 256,
+          "height": 256,
+          "bytes": 77181,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "a736df0665f087929f44f505740767b859630b16261eabfcf15bf1a1fb485a14",
+          "width": 256,
+          "height": 256,
+          "bytes": 22782,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "2eff86a192a7fbd791abb2a55ec414a3b5bc778b59f3101ff79b8512524ef50f",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 274504,
+          "texelBytesWithMips": 5592405.333333333
+        }
+      ],
+      "nodeNames": [
+        "trunk",
+        "branches",
+        "foliage-core",
+        "foliage-cards"
+      ],
+      "materialNames": [
+        "bark-opaque",
+        "foliage-solid-interior",
+        "foliage-straight-alpha"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "mature-douglas-fir",
+      "lod": 2,
+      "boundsM": {
+        "min": [
+          -2.455057144165039,
+          0.0,
+          -2.1504712104797363
+        ],
+        "max": [
+          2.2449426651000977,
+          10.0,
+          2.1243104934692383
+        ],
+        "size": [
+          4.699999809265137,
+          10.0,
+          4.274781703948975
+        ]
+      },
+      "triangles": 188,
+      "vertices": 140,
+      "primitives": 3,
+      "bytes": 14620,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 14620,
+      "images": [
+        {
+          "sha256": "974ff6c09687297a5c06112e0f64dd9ad1f8f77b624947193ff8e3382933e5bd",
+          "width": 256,
+          "height": 256,
+          "bytes": 127592,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "05921c188fa1c9b0768459790bba2515d36cca3efe9ba743670d6c664e6cd628",
+          "width": 256,
+          "height": 256,
+          "bytes": 77181,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "a736df0665f087929f44f505740767b859630b16261eabfcf15bf1a1fb485a14",
+          "width": 256,
+          "height": 256,
+          "bytes": 22782,
+          "texelBytesWithMips": 349525.3333333333
+        }
+      ],
+      "nodeNames": [
+        "trunk",
+        "branches",
+        "foliage-core"
+      ],
+      "materialNames": [
+        "bark-opaque",
+        "foliage-solid-interior"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "mature-western-redcedar",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -2.393444299697876,
+          0.0,
+          -2.3959128856658936
+        ],
+        "max": [
+          2.366555690765381,
+          10.0,
+          2.187472343444824
+        ],
+        "size": [
+          4.759999990463257,
+          10.0,
+          4.583385229110718
+        ]
+      },
+      "triangles": 7634,
+      "vertices": 9425,
+      "primitives": 4,
+      "bytes": 540904,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 540904,
+      "images": [
+        {
+          "sha256": "974ff6c09687297a5c06112e0f64dd9ad1f8f77b624947193ff8e3382933e5bd",
+          "width": 256,
+          "height": 256,
+          "bytes": 127592,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "05921c188fa1c9b0768459790bba2515d36cca3efe9ba743670d6c664e6cd628",
+          "width": 256,
+          "height": 256,
+          "bytes": 77181,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "a736df0665f087929f44f505740767b859630b16261eabfcf15bf1a1fb485a14",
+          "width": 256,
+          "height": 256,
+          "bytes": 22782,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "2eff86a192a7fbd791abb2a55ec414a3b5bc778b59f3101ff79b8512524ef50f",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 274504,
+          "texelBytesWithMips": 5592405.333333333
+        }
+      ],
+      "nodeNames": [
+        "trunk",
+        "branches",
+        "foliage-core",
+        "foliage-cards"
+      ],
+      "materialNames": [
+        "bark-opaque",
+        "foliage-solid-interior",
+        "foliage-straight-alpha"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "mature-western-redcedar",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -2.3472115993499756,
+          0.0,
+          -2.296102523803711
+        ],
+        "max": [
+          2.4127883911132812,
+          10.0,
+          2.2098820209503174
+        ],
+        "size": [
+          4.759999990463257,
+          10.0,
+          4.505984544754028
+        ]
+      },
+      "triangles": 1680,
+      "vertices": 1815,
+      "primitives": 4,
+      "bytes": 117636,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 117636,
+      "images": [
+        {
+          "sha256": "974ff6c09687297a5c06112e0f64dd9ad1f8f77b624947193ff8e3382933e5bd",
+          "width": 256,
+          "height": 256,
+          "bytes": 127592,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "05921c188fa1c9b0768459790bba2515d36cca3efe9ba743670d6c664e6cd628",
+          "width": 256,
+          "height": 256,
+          "bytes": 77181,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "a736df0665f087929f44f505740767b859630b16261eabfcf15bf1a1fb485a14",
+          "width": 256,
+          "height": 256,
+          "bytes": 22782,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "2eff86a192a7fbd791abb2a55ec414a3b5bc778b59f3101ff79b8512524ef50f",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 274504,
+          "texelBytesWithMips": 5592405.333333333
+        }
+      ],
+      "nodeNames": [
+        "trunk",
+        "branches",
+        "foliage-core",
+        "foliage-cards"
+      ],
+      "materialNames": [
+        "bark-opaque",
+        "foliage-solid-interior",
+        "foliage-straight-alpha"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "mature-western-redcedar",
+      "lod": 2,
+      "boundsM": {
+        "min": [
+          -2.3815596103668213,
+          0.0,
+          -2.4135007858276367
+        ],
+        "max": [
+          2.3784403800964355,
+          10.0,
+          2.20986270904541
+        ],
+        "size": [
+          4.759999990463257,
+          10.0,
+          4.623363494873047
+        ]
+      },
+      "triangles": 188,
+      "vertices": 140,
+      "primitives": 3,
+      "bytes": 14652,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 14652,
+      "images": [
+        {
+          "sha256": "974ff6c09687297a5c06112e0f64dd9ad1f8f77b624947193ff8e3382933e5bd",
+          "width": 256,
+          "height": 256,
+          "bytes": 127592,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "05921c188fa1c9b0768459790bba2515d36cca3efe9ba743670d6c664e6cd628",
+          "width": 256,
+          "height": 256,
+          "bytes": 77181,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "a736df0665f087929f44f505740767b859630b16261eabfcf15bf1a1fb485a14",
+          "width": 256,
+          "height": 256,
+          "bytes": 22782,
+          "texelBytesWithMips": 349525.3333333333
+        }
+      ],
+      "nodeNames": [
+        "trunk",
+        "branches",
+        "foliage-core"
+      ],
+      "materialNames": [
+        "bark-opaque",
+        "foliage-solid-interior"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    }
+  ],
+  "candidateUniqueRgba8FullMipsBytes": 6640981.333333333,
+  "textureDownloadBytes": 502059,
+  "allSourceBytes": 8360640
+}

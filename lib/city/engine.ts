@@ -1646,6 +1646,7 @@ export class CityEngine {
     this.landmarkWarmup?.dispose();
     this.landmarkWorker?.dispose();
     this.detailedTrees?.dispose();
+    this.traffic?.vehicleAssets?.dispose();
     this.facadeDetails?.dispose();
     this.architecturalDetails?.dispose();
     this.streetscapeKit?.dispose();

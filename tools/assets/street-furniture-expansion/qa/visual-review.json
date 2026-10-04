@@ -1,0 +1,96 @@
+{
+  "status": "pass",
+  "reviewer": "asset worker visual inspection of all 16 actual GLB contact sheets",
+  "assetsReviewed": [
+    "cedar-bench",
+    "heritage-lamp",
+    "transit-shelter",
+    "arterial-lamp-8m",
+    "garbage-bin",
+    "fire-hydrant",
+    "bicycle-rack",
+    "bollard"
+  ],
+  "reviewedSheets": [
+    {
+      "file": "qa/previews/cedar-bench.lod-views.png",
+      "sha256": "201b7b3c54c21fe06fc69b0fc642e58c1d35dfc86e70543ec36a94eac19c7a6c"
+    },
+    {
+      "file": "qa/previews/cedar-bench.four-light.png",
+      "sha256": "f1c172efdcfc32fef380ada63a4bcb9562457ecb0fa46593bc1ec8a6e1314b1e"
+    },
+    {
+      "file": "qa/previews/heritage-lamp.lod-views.png",
+      "sha256": "67b1c35199a68a88e58ff356639fe36cf79e4c83346bbc9216eb083900e94ab0"
+    },
+    {
+      "file": "qa/previews/heritage-lamp.four-light.png",
+      "sha256": "6bf396ef634318908aafc0aac5c6290a26b22937d3336c7cc5895a3e23d49e33"
+    },
+    {
+      "file": "qa/previews/transit-shelter.lod-views.png",
+      "sha256": "1b4bd43a7fc90748517a18c35dbb18c2133e2007be7cea7b2d653ededa5f9aa2"
+    },
+    {
+      "file": "qa/previews/transit-shelter.four-light.png",
+      "sha256": "a4fd0d85a6f1f1b2d04c55f3c430753a07b125b76f09d27c923a890fd3071f2b"
+    },
+    {
+      "file": "qa/previews/arterial-lamp-8m.lod-views.png",
+      "sha256": "67e6a05c0cbfb907ddd33977cb9126d0186a9b3290464ca903b6dff942c3686c"
+    },
+    {
+      "file": "qa/previews/arterial-lamp-8m.four-light.png",
+      "sha256": "042a58ffa89eda66a3921946a9314b2f1ce4b84d798b0bf5aeffe8dd1832a2bb"
+    },
+    {
+      "file": "qa/previews/garbage-bin.lod-views.png",
+      "sha256": "baabaa0739fc8b77ab31d30c0483a801f977e44981b1c8f256dea69cca2b844b"
+    },
+    {
+      "file": "qa/previews/garbage-bin.four-light.png",
+      "sha256": "acae24a9dca3565ec7dde660194ad33510c29555dd10aa96fc8588dd4e4e1624"
+    },
+    {
+      "file": "qa/previews/fire-hydrant.lod-views.png",
+      "sha256": "cccd8ff51e8b621cb2cedb685f34a6500e1ac2508a2d15dd9ae48cf1ea85500f"
+    },
+    {
+      "file": "qa/previews/fire-hydrant.four-light.png",
+      "sha256": "de9969698048ff34a63a457faf1ef6c11ab95c2c92081773caca5a12c766a5ca"
+    },
+    {
+      "file": "qa/previews/bicycle-rack.lod-views.png",
+      "sha256": "d10b2fada5308d42a90583c24ab11ca041f81801dfe1f0a35b99597f0aa95207"
+    },
+    {
+      "file": "qa/previews/bicycle-rack.four-light.png",
+      "sha256": "8aa3f587015d0fb0b066a8658e4a5da98db000c85577faf10fb8fd67228726fe"
+    },
+    {
+      "file": "qa/previews/bollard.lod-views.png",
+      "sha256": "965b652a6f068f471132334f56197da953ec6adf36c236baca9734ffd1b08d5b"
+    },
+    {
+      "file": "qa/previews/bollard.four-light.png",
+      "sha256": "e21bea9e2e5544e42391febc8eae958ed66ec41cb9725d69e2f7de0ac2f58172"
+    }
+  ],
+  "checks": [
+    "Both LOD front/side/rear/top silhouettes remain coherent at unit scale",
+    "1 m ruler and 1.75/1.81 m QA figures present; reference geometry is not in GLBs",
+    "Bench width/seat silhouette retained; low back retains visible gap between two slats",
+    "Shelter front standing space and curved roof remain open; LOD1 simplifies framing/frit",
+    "Separate 8 m arterial silhouette; heritage remains 4.49 m",
+    "Bin mouth and bicycle rack centre remain visibly open",
+    "Bicycle tube foot ends overlap ground baseplates after visual-review correction",
+    "All four light conditions rendered at exposure 0; diffuser visual glow does not imply point lights"
+  ],
+  "knownLimitations": [
+    "16-sample CPU glass/metal renders have noise; no denoiser available",
+    "LOD1 intentionally removes slat count, ornamental struts and small bevels",
+    "No close-up texture finish: semantic role placeholders have no maps",
+    "Night visibility does not establish city lighting, shadow or glass acceptance"
+  ]
+}

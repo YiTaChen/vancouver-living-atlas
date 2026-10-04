@@ -1,0 +1,1009 @@
+{
+  "status": "pass",
+  "blender": "4.3.2",
+  "renderCount": 24,
+  "renders": [
+    {
+      "assetId": "lecture-chair-module",
+      "lod": 0,
+      "view": "front",
+      "lighting": "overcast",
+      "sourceGLB": "exports/lecture-chair-module.lod0.glb",
+      "sourceGLBSha256": "3633495198af224eed3fe06b71c4a4ab80045078c01fb9b04f4414610ea44466",
+      "rawFile": "00-lecture-chair-module-lod0-front-overcast.png",
+      "rawPngSha256": "1977f5c02b79fa00d9654b22dc6f68aed1ef731a78c0dc9307f54d9ccf804591",
+      "width": 288,
+      "height": 256,
+      "camera": {
+        "location": [
+          0.0,
+          -5.992514133453369,
+          0.8496257066726685
+        ],
+        "quaternionXYZW": [
+          0.6892250776290894,
+          0.0,
+          0.0,
+          0.724547266960144
+        ],
+        "orthographicScale": 2.9
+      },
+      "referencesM": [
+        1,
+        1.81
+      ],
+      "engine": "Cycles CPU",
+      "samples": 12,
+      "threads": 2,
+      "sheet": "qa/previews/furniture-views-lods.png",
+      "pixelRectangle": [
+        0,
+        35,
+        288,
+        256
+      ],
+      "rgbPixelSha256": "ebd38e0bc6daece219f97dbd7b155728e749abc7b923fbb30b75972103b2fea5"
+    },
+    {
+      "assetId": "lecture-chair-module",
+      "lod": 0,
+      "view": "side",
+      "lighting": "overcast",
+      "sourceGLB": "exports/lecture-chair-module.lod0.glb",
+      "sourceGLBSha256": "3633495198af224eed3fe06b71c4a4ab80045078c01fb9b04f4414610ea44466",
+      "rawFile": "01-lecture-chair-module-lod0-side-overcast.png",
+      "rawPngSha256": "3ce63164f836fdd54a66cd96708d802dbbaa2e89787e49efcae8dd33e0a45a9a",
+      "width": 288,
+      "height": 256,
+      "camera": {
+        "location": [
+          5.992514133453369,
+          0.0,
+          0.8496257066726685
+        ],
+        "quaternionXYZW": [
+          0.48735570907592773,
+          0.48735570907592773,
+          0.5123323202133179,
+          0.5123323202133179
+        ],
+        "orthographicScale": 2.9
+      },
+      "referencesM": [
+        1,
+        1.81
+      ],
+      "engine": "Cycles CPU",
+      "samples": 12,
+      "threads": 2,
+      "sheet": "qa/previews/furniture-views-lods.png",
+      "pixelRectangle": [
+        288,
+        35,
+        288,
+        256
+      ],
+      "rgbPixelSha256": "058518d40eab289fd3849da487e08157a64fb811191d37409d471e12c8d97044"
+    },
+    {
+      "assetId": "lecture-chair-module",
+      "lod": 0,
+      "view": "back",
+      "lighting": "overcast",
+      "sourceGLB": "exports/lecture-chair-module.lod0.glb",
+      "sourceGLBSha256": "3633495198af224eed3fe06b71c4a4ab80045078c01fb9b04f4414610ea44466",
+      "rawFile": "02-lecture-chair-module-lod0-back-overcast.png",
+      "rawPngSha256": "12fefe28ef812370a32d32aa6de6ef0a9f3d702f79daf4d19963315e82ce8b59",
+      "width": 288,
+      "height": 256,
+      "camera": {
+        "location": [
+          0.0,
+          5.992514133453369,
+          0.8496257066726685
+        ],
+        "quaternionXYZW": [
+          -6.175843481059928e-08,
+          0.6892250776290894,
+          0.724547266960144,
+          -1.5815740939117973e-09
+        ],
+        "orthographicScale": 2.9
+      },
+      "referencesM": [
+        1,
+        1.81
+      ],
+      "engine": "Cycles CPU",
+      "samples": 12,
+      "threads": 2,
+      "sheet": "qa/previews/furniture-views-lods.png",
+      "pixelRectangle": [
+        576,
+        35,
+        288,
+        256
+      ],
+      "rgbPixelSha256": "331c139c29e066660840a1bdd856cf786f7c71e1cc31107db6afdfa5db46aa89"
+    },
+    {
+      "assetId": "lecture-chair-module",
+      "lod": 0,
+      "view": "top",
+      "lighting": "overcast",
+      "sourceGLB": "exports/lecture-chair-module.lod0.glb",
+      "sourceGLBSha256": "3633495198af224eed3fe06b71c4a4ab80045078c01fb9b04f4414610ea44466",
+      "rawFile": "03-lecture-chair-module-lod0-top-overcast.png",
+      "rawPngSha256": "5b84d65a1542a386284f3e73dacea3331158c54570ab860a4ae92ec085b0ac18",
+      "width": 288,
+      "height": 256,
+      "camera": {
+        "location": [
+          0.0,
+          0.0,
+          6.550000190734863
+        ],
+        "quaternionXYZW": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "orthographicScale": 2.9
+      },
+      "referencesM": [
+        1,
+        1.81
+      ],
+      "engine": "Cycles CPU",
+      "samples": 12,
+      "threads": 2,
+      "sheet": "qa/previews/furniture-views-lods.png",
+      "pixelRectangle": [
+        864,
+        35,
+        288,
+        256
+      ],
+      "rgbPixelSha256": "ede31173bc8ac655b9ae3e0694a11dbd3be5803375a64cd688042accc998f82e"
+    },
+    {
+      "assetId": "lecture-chair-module",
+      "lod": 1,
+      "view": "front",
+      "lighting": "overcast",
+      "sourceGLB": "exports/lecture-chair-module.lod1.glb",
+      "sourceGLBSha256": "10c37c52ef6d429c75a0284be7eee3bb37130a5250742baf93e74335f1f55ebb",
+      "rawFile": "04-lecture-chair-module-lod1-front-overcast.png",
+      "rawPngSha256": "591eba673b7abeecfcffa66c877d9821df51b566175a31b7f78027f9a5249b24",
+      "width": 288,
+      "height": 256,
+      "camera": {
+        "location": [
+          0.0,
+          -5.992514133453369,
+          0.8496257066726685
+        ],
+        "quaternionXYZW": [
+          0.6892250776290894,
+          0.0,
+          0.0,
+          0.724547266960144
+        ],
+        "orthographicScale": 2.9
+      },
+      "referencesM": [
+        1,
+        1.81
+      ],
+      "engine": "Cycles CPU",
+      "samples": 12,
+      "threads": 2,
+      "sheet": "qa/previews/furniture-views-lods.png",
+      "pixelRectangle": [
+        0,
+        321,
+        288,
+        256
+      ],
+      "rgbPixelSha256": "0cda56095d6c05d35560345abc116d349d7022ddbcaed0229c1f607dc41fed5e"
+    },
+    {
+      "assetId": "lecture-chair-module",
+      "lod": 1,
+      "view": "side",
+      "lighting": "overcast",
+      "sourceGLB": "exports/lecture-chair-module.lod1.glb",
+      "sourceGLBSha256": "10c37c52ef6d429c75a0284be7eee3bb37130a5250742baf93e74335f1f55ebb",
+      "rawFile": "05-lecture-chair-module-lod1-side-overcast.png",
+      "rawPngSha256": "76bdc77e51235f65112d58476581edbdea70a14e7124393f6ff41ed653ab113d",
+      "width": 288,
+      "height": 256,
+      "camera": {
+        "location": [
+          5.992514133453369,
+          0.0,
+          0.8496257066726685
+        ],
+        "quaternionXYZW": [
+          0.48735570907592773,
+          0.48735570907592773,
+          0.5123323202133179,
+          0.5123323202133179
+        ],
+        "orthographicScale": 2.9
+      },
+      "referencesM": [
+        1,
+        1.81
+      ],
+      "engine": "Cycles CPU",
+      "samples": 12,
+      "threads": 2,
+      "sheet": "qa/previews/furniture-views-lods.png",
+      "pixelRectangle": [
+        288,
+        321,
+        288,
+        256
+      ],
+      "rgbPixelSha256": "6751d845599111c539d3ce259586be9212e25de92393518e020cf0cdf60d9068"
+    },
+    {
+      "assetId": "lecture-chair-module",
+      "lod": 1,
+      "view": "back",
+      "lighting": "overcast",
+      "sourceGLB": "exports/lecture-chair-module.lod1.glb",
+      "sourceGLBSha256": "10c37c52ef6d429c75a0284be7eee3bb37130a5250742baf93e74335f1f55ebb",
+      "rawFile": "06-lecture-chair-module-lod1-back-overcast.png",
+      "rawPngSha256": "e7b70a5c14b7e5f3f2f4a3ab869e93e9d03a0a2ecf75d9810e9d59e529e3165b",
+      "width": 288,
+      "height": 256,
+      "camera": {
+        "location": [
+          0.0,
+          5.992514133453369,
+          0.8496257066726685
+        ],
+        "quaternionXYZW": [
+          -6.175843481059928e-08,
+          0.6892250776290894,
+          0.724547266960144,
+          -1.5815740939117973e-09
+        ],
+        "orthographicScale": 2.9
+      },
+      "referencesM": [
+        1,
+        1.81
+      ],
+      "engine": "Cycles CPU",
+      "samples": 12,
+      "threads": 2,
+      "sheet": "qa/previews/furniture-views-lods.png",
+      "pixelRectangle": [
+        576,
+        321,
+        288,
+        256
+      ],
+      "rgbPixelSha256": "b26690890183700f967363ea684424c12670719f840d8336a340fe359bdd67db"
+    },
+    {
+      "assetId": "lecture-chair-module",
+      "lod": 1,
+      "view": "top",
+      "lighting": "overcast",
+      "sourceGLB": "exports/lecture-chair-module.lod1.glb",
+      "sourceGLBSha256": "10c37c52ef6d429c75a0284be7eee3bb37130a5250742baf93e74335f1f55ebb",
+      "rawFile": "07-lecture-chair-module-lod1-top-overcast.png",
+      "rawPngSha256": "f3ac40d12e06cc2413ce8aedab321dec61815ae749c7094062689dc502d6d9f1",
+      "width": 288,
+      "height": 256,
+      "camera": {
+        "location": [
+          0.0,
+          0.0,
+          6.550000190734863
+        ],
+        "quaternionXYZW": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "orthographicScale": 2.9
+      },
+      "referencesM": [
+        1,
+        1.81
+      ],
+      "engine": "Cycles CPU",
+      "samples": 12,
+      "threads": 2,
+      "sheet": "qa/previews/furniture-views-lods.png",
+      "pixelRectangle": [
+        864,
+        321,
+        288,
+        256
+      ],
+      "rgbPixelSha256": "415fc9fa6b29503f46baeb134f76ae16e3db5ec86e24e22970957c3767043185"
+    },
+    {
+      "assetId": "admissions-counter-module",
+      "lod": 0,
+      "view": "front",
+      "lighting": "overcast",
+      "sourceGLB": "exports/admissions-counter-module.lod0.glb",
+      "sourceGLBSha256": "2574c655ae72fd1dee2e6fa167209df460322baab19af8cdccca2eec046ae59d",
+      "rawFile": "08-admissions-counter-module-lod0-front-overcast.png",
+      "rawPngSha256": "c748c31700ee3f7e6f2f52394bf3caf3032d04849ab7eaa14955b99ea3a72da1",
+      "width": 288,
+      "height": 256,
+      "camera": {
+        "location": [
+          0.0,
+          -5.992514133453369,
+          0.8496257066726685
+        ],
+        "quaternionXYZW": [
+          0.6892250776290894,
+          0.0,
+          0.0,
+          0.724547266960144
+        ],
+        "orthographicScale": 2.9
+      },
+      "referencesM": [
+        1,
+        1.81
+      ],
+      "engine": "Cycles CPU",
+      "samples": 12,
+      "threads": 2,
+      "sheet": "qa/previews/furniture-views-lods.png",
+      "pixelRectangle": [
+        0,
+        607,
+        288,
+        256
+      ],
+      "rgbPixelSha256": "db7b08cd657cc169ef91f72eff3acfb81572b5e4758f44c839f8de406da8333d"
+    },
+    {
+      "assetId": "admissions-counter-module",
+      "lod": 0,
+      "view": "side",
+      "lighting": "overcast",
+      "sourceGLB": "exports/admissions-counter-module.lod0.glb",
+      "sourceGLBSha256": "2574c655ae72fd1dee2e6fa167209df460322baab19af8cdccca2eec046ae59d",
+      "rawFile": "09-admissions-counter-module-lod0-side-overcast.png",
+      "rawPngSha256": "1eeda3b3f9c4cf55b21d74d626111f923d7077d9abba632c323a01b244a4a0db",
+      "width": 288,
+      "height": 256,
+      "camera": {
+        "location": [
+          5.992514133453369,
+          0.0,
+          0.8496257066726685
+        ],
+        "quaternionXYZW": [
+          0.48735570907592773,
+          0.48735570907592773,
+          0.5123323202133179,
+          0.5123323202133179
+        ],
+        "orthographicScale": 2.9
+      },
+      "referencesM": [
+        1,
+        1.81
+      ],
+      "engine": "Cycles CPU",
+      "samples": 12,
+      "threads": 2,
+      "sheet": "qa/previews/furniture-views-lods.png",
+      "pixelRectangle": [
+        288,
+        607,
+        288,
+        256
+      ],
+      "rgbPixelSha256": "9fe97b81d7c54ef2d8e68f708d241065314fac16ae1ddbde30f7b12f285cf07b"
+    },
+    {
+      "assetId": "admissions-counter-module",
+      "lod": 0,
+      "view": "back",
+      "lighting": "overcast",
+      "sourceGLB": "exports/admissions-counter-module.lod0.glb",
+      "sourceGLBSha256": "2574c655ae72fd1dee2e6fa167209df460322baab19af8cdccca2eec046ae59d",
+      "rawFile": "10-admissions-counter-module-lod0-back-overcast.png",
+      "rawPngSha256": "01a0638d34f672bf8dba454653787641928d5f861a21b0e2d9dbcb6684c7f493",
+      "width": 288,
+      "height": 256,
+      "camera": {
+        "location": [
+          0.0,
+          5.992514133453369,
+          0.8496257066726685
+        ],
+        "quaternionXYZW": [
+          -6.175843481059928e-08,
+          0.6892250776290894,
+          0.724547266960144,
+          -1.5815740939117973e-09
+        ],
+        "orthographicScale": 2.9
+      },
+      "referencesM": [
+        1,
+        1.81
+      ],
+      "engine": "Cycles CPU",
+      "samples": 12,
+      "threads": 2,
+      "sheet": "qa/previews/furniture-views-lods.png",
+      "pixelRectangle": [
+        576,
+        607,
+        288,
+        256
+      ],
+      "rgbPixelSha256": "138b0133c9a6dd091a09e38d620805100fea94b0a3af98a8f47edba0c01ebd27"
+    },
+    {
+      "assetId": "admissions-counter-module",
+      "lod": 0,
+      "view": "top",
+      "lighting": "overcast",
+      "sourceGLB": "exports/admissions-counter-module.lod0.glb",
+      "sourceGLBSha256": "2574c655ae72fd1dee2e6fa167209df460322baab19af8cdccca2eec046ae59d",
+      "rawFile": "11-admissions-counter-module-lod0-top-overcast.png",
+      "rawPngSha256": "31c318907799adc6e4fc06218b7cb22c8f005168a5b41e941e82548732d24278",
+      "width": 288,
+      "height": 256,
+      "camera": {
+        "location": [
+          0.0,
+          0.0,
+          6.550000190734863
+        ],
+        "quaternionXYZW": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "orthographicScale": 2.9
+      },
+      "referencesM": [
+        1,
+        1.81
+      ],
+      "engine": "Cycles CPU",
+      "samples": 12,
+      "threads": 2,
+      "sheet": "qa/previews/furniture-views-lods.png",
+      "pixelRectangle": [
+        864,
+        607,
+        288,
+        256
+      ],
+      "rgbPixelSha256": "6b7d20e21024fe5da10f61b4d3a73ebc22433159821d692b40af3fc425cfa1dd"
+    },
+    {
+      "assetId": "admissions-counter-module",
+      "lod": 1,
+      "view": "front",
+      "lighting": "overcast",
+      "sourceGLB": "exports/admissions-counter-module.lod1.glb",
+      "sourceGLBSha256": "b8f5c416b7731b9f21754ac1ea4af955445ba9b4302bb38da495c29d63044474",
+      "rawFile": "12-admissions-counter-module-lod1-front-overcast.png",
+      "rawPngSha256": "ceff4c68e9d968e0bae41cc42816f3e498161656c71cc5d043b9d3ed9e0ee34a",
+      "width": 288,
+      "height": 256,
+      "camera": {
+        "location": [
+          0.0,
+          -5.992514133453369,
+          0.8496257066726685
+        ],
+        "quaternionXYZW": [
+          0.6892250776290894,
+          0.0,
+          0.0,
+          0.724547266960144
+        ],
+        "orthographicScale": 2.9
+      },
+      "referencesM": [
+        1,
+        1.81
+      ],
+      "engine": "Cycles CPU",
+      "samples": 12,
+      "threads": 2,
+      "sheet": "qa/previews/furniture-views-lods.png",
+      "pixelRectangle": [
+        0,
+        893,
+        288,
+        256
+      ],
+      "rgbPixelSha256": "d750df2dcbbb45bafe6b87d077c099ff815913273a1dec62cb0ba371426047fc"
+    },
+    {
+      "assetId": "admissions-counter-module",
+      "lod": 1,
+      "view": "side",
+      "lighting": "overcast",
+      "sourceGLB": "exports/admissions-counter-module.lod1.glb",
+      "sourceGLBSha256": "b8f5c416b7731b9f21754ac1ea4af955445ba9b4302bb38da495c29d63044474",
+      "rawFile": "13-admissions-counter-module-lod1-side-overcast.png",
+      "rawPngSha256": "95e3567cd86819898ab4cfa4dd81e4ed8e872b45fc82c2c7288843e0c1982d5f",
+      "width": 288,
+      "height": 256,
+      "camera": {
+        "location": [
+          5.992514133453369,
+          0.0,
+          0.8496257066726685
+        ],
+        "quaternionXYZW": [
+          0.48735570907592773,
+          0.48735570907592773,
+          0.5123323202133179,
+          0.5123323202133179
+        ],
+        "orthographicScale": 2.9
+      },
+      "referencesM": [
+        1,
+        1.81
+      ],
+      "engine": "Cycles CPU",
+      "samples": 12,
+      "threads": 2,
+      "sheet": "qa/previews/furniture-views-lods.png",
+      "pixelRectangle": [
+        288,
+        893,
+        288,
+        256
+      ],
+      "rgbPixelSha256": "e48e8818ba9c767cfeb96b884f59db8571209718480ee86603ca0f0d68f6b67b"
+    },
+    {
+      "assetId": "admissions-counter-module",
+      "lod": 1,
+      "view": "back",
+      "lighting": "overcast",
+      "sourceGLB": "exports/admissions-counter-module.lod1.glb",
+      "sourceGLBSha256": "b8f5c416b7731b9f21754ac1ea4af955445ba9b4302bb38da495c29d63044474",
+      "rawFile": "14-admissions-counter-module-lod1-back-overcast.png",
+      "rawPngSha256": "e5e3c9ca5d053ba63f1665fe82974783ba6c2062ddb0f718328503c96ca9b747",
+      "width": 288,
+      "height": 256,
+      "camera": {
+        "location": [
+          0.0,
+          5.992514133453369,
+          0.8496257066726685
+        ],
+        "quaternionXYZW": [
+          -6.175843481059928e-08,
+          0.6892250776290894,
+          0.724547266960144,
+          -1.5815740939117973e-09
+        ],
+        "orthographicScale": 2.9
+      },
+      "referencesM": [
+        1,
+        1.81
+      ],
+      "engine": "Cycles CPU",
+      "samples": 12,
+      "threads": 2,
+      "sheet": "qa/previews/furniture-views-lods.png",
+      "pixelRectangle": [
+        576,
+        893,
+        288,
+        256
+      ],
+      "rgbPixelSha256": "42f273cb8c805e48415da9f4f9e339149f8e3e0c5bc413a6c5afb67ebd62e4f2"
+    },
+    {
+      "assetId": "admissions-counter-module",
+      "lod": 1,
+      "view": "top",
+      "lighting": "overcast",
+      "sourceGLB": "exports/admissions-counter-module.lod1.glb",
+      "sourceGLBSha256": "b8f5c416b7731b9f21754ac1ea4af955445ba9b4302bb38da495c29d63044474",
+      "rawFile": "15-admissions-counter-module-lod1-top-overcast.png",
+      "rawPngSha256": "45976db43c7816d50ed7ee826229db848b5f8f64fd215a71d49013d75e0b04ce",
+      "width": 288,
+      "height": 256,
+      "camera": {
+        "location": [
+          0.0,
+          0.0,
+          6.550000190734863
+        ],
+        "quaternionXYZW": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "orthographicScale": 2.9
+      },
+      "referencesM": [
+        1,
+        1.81
+      ],
+      "engine": "Cycles CPU",
+      "samples": 12,
+      "threads": 2,
+      "sheet": "qa/previews/furniture-views-lods.png",
+      "pixelRectangle": [
+        864,
+        893,
+        288,
+        256
+      ],
+      "rgbPixelSha256": "a92f36250e96d769d4187125f1481fa36fe4e9ebeb57788f98428fa6e9f4bd0c"
+    },
+    {
+      "assetId": "lecture-chair-module",
+      "lod": 0,
+      "view": "perspective",
+      "lighting": "clear",
+      "sourceGLB": "exports/lecture-chair-module.lod0.glb",
+      "sourceGLBSha256": "3633495198af224eed3fe06b71c4a4ab80045078c01fb9b04f4414610ea44466",
+      "rawFile": "16-lecture-chair-module-lod0-perspective-clear.png",
+      "rawPngSha256": "90d9e2b84d01a48bc6cdc8284353198d64f362a3f544164ae56c52acf1189f1f",
+      "width": 288,
+      "height": 256,
+      "camera": {
+        "location": [
+          3.8023457527160645,
+          -3.8023457527160645,
+          3.211641788482666
+        ],
+        "quaternionXYZW": [
+          0.48729416728019714,
+          0.20184390246868134,
+          0.3251241445541382,
+          0.7849189639091492
+        ],
+        "orthographicScale": 2.9
+      },
+      "referencesM": [
+        1,
+        1.81
+      ],
+      "engine": "Cycles CPU",
+      "samples": 12,
+      "threads": 2,
+      "sheet": "qa/previews/furniture-four-light.png",
+      "pixelRectangle": [
+        0,
+        35,
+        288,
+        256
+      ],
+      "rgbPixelSha256": "2cd7f3dbee66d32e7f4e96935eedf317286ced9a28d87830a8cbf3957d9e3da2"
+    },
+    {
+      "assetId": "lecture-chair-module",
+      "lod": 0,
+      "view": "perspective",
+      "lighting": "overcast",
+      "sourceGLB": "exports/lecture-chair-module.lod0.glb",
+      "sourceGLBSha256": "3633495198af224eed3fe06b71c4a4ab80045078c01fb9b04f4414610ea44466",
+      "rawFile": "17-lecture-chair-module-lod0-perspective-overcast.png",
+      "rawPngSha256": "6a6aed433cf81562759aea10a2ba70b1a1825b82e070d7255ac3341e6148f395",
+      "width": 288,
+      "height": 256,
+      "camera": {
+        "location": [
+          3.8023457527160645,
+          -3.8023457527160645,
+          3.211641788482666
+        ],
+        "quaternionXYZW": [
+          0.48729416728019714,
+          0.20184390246868134,
+          0.3251241445541382,
+          0.7849189639091492
+        ],
+        "orthographicScale": 2.9
+      },
+      "referencesM": [
+        1,
+        1.81
+      ],
+      "engine": "Cycles CPU",
+      "samples": 12,
+      "threads": 2,
+      "sheet": "qa/previews/furniture-four-light.png",
+      "pixelRectangle": [
+        288,
+        35,
+        288,
+        256
+      ],
+      "rgbPixelSha256": "26afd4592bf02437b66b0e1bc3c85302557b228c3fac1957fd8ed2d25a7cbb31"
+    },
+    {
+      "assetId": "lecture-chair-module",
+      "lod": 0,
+      "view": "perspective",
+      "lighting": "dusk",
+      "sourceGLB": "exports/lecture-chair-module.lod0.glb",
+      "sourceGLBSha256": "3633495198af224eed3fe06b71c4a4ab80045078c01fb9b04f4414610ea44466",
+      "rawFile": "18-lecture-chair-module-lod0-perspective-dusk.png",
+      "rawPngSha256": "46eea8056f22d2d60a68049f5d2881c4f7cf1c9417472ae02605122543137dbd",
+      "width": 288,
+      "height": 256,
+      "camera": {
+        "location": [
+          3.8023457527160645,
+          -3.8023457527160645,
+          3.211641788482666
+        ],
+        "quaternionXYZW": [
+          0.48729416728019714,
+          0.20184390246868134,
+          0.3251241445541382,
+          0.7849189639091492
+        ],
+        "orthographicScale": 2.9
+      },
+      "referencesM": [
+        1,
+        1.81
+      ],
+      "engine": "Cycles CPU",
+      "samples": 12,
+      "threads": 2,
+      "sheet": "qa/previews/furniture-four-light.png",
+      "pixelRectangle": [
+        576,
+        35,
+        288,
+        256
+      ],
+      "rgbPixelSha256": "cb57346cf838bdeb9945d376bffd000a2bef94ce1e6380ab7982302db7d818b4"
+    },
+    {
+      "assetId": "lecture-chair-module",
+      "lod": 0,
+      "view": "perspective",
+      "lighting": "night",
+      "sourceGLB": "exports/lecture-chair-module.lod0.glb",
+      "sourceGLBSha256": "3633495198af224eed3fe06b71c4a4ab80045078c01fb9b04f4414610ea44466",
+      "rawFile": "19-lecture-chair-module-lod0-perspective-night.png",
+      "rawPngSha256": "1f31d15e45d1fa46b0429a09d1904aefa629385aed84867f221035e69a665f09",
+      "width": 288,
+      "height": 256,
+      "camera": {
+        "location": [
+          3.8023457527160645,
+          -3.8023457527160645,
+          3.211641788482666
+        ],
+        "quaternionXYZW": [
+          0.48729416728019714,
+          0.20184390246868134,
+          0.3251241445541382,
+          0.7849189639091492
+        ],
+        "orthographicScale": 2.9
+      },
+      "referencesM": [
+        1,
+        1.81
+      ],
+      "engine": "Cycles CPU",
+      "samples": 12,
+      "threads": 2,
+      "sheet": "qa/previews/furniture-four-light.png",
+      "pixelRectangle": [
+        864,
+        35,
+        288,
+        256
+      ],
+      "rgbPixelSha256": "96b28b93a74d4c4ceeabf3c935b5c7d14df16c489a05b4a2519ac7c5abe0ce06"
+    },
+    {
+      "assetId": "admissions-counter-module",
+      "lod": 0,
+      "view": "perspective",
+      "lighting": "clear",
+      "sourceGLB": "exports/admissions-counter-module.lod0.glb",
+      "sourceGLBSha256": "2574c655ae72fd1dee2e6fa167209df460322baab19af8cdccca2eec046ae59d",
+      "rawFile": "20-admissions-counter-module-lod0-perspective-clear.png",
+      "rawPngSha256": "8fe9b56926ea2edca96edc51fdf2ca4c6316c5ed8e26cff6a08511db35f41070",
+      "width": 288,
+      "height": 256,
+      "camera": {
+        "location": [
+          3.8023457527160645,
+          -3.8023457527160645,
+          3.211641788482666
+        ],
+        "quaternionXYZW": [
+          0.48729416728019714,
+          0.20184390246868134,
+          0.3251241445541382,
+          0.7849189639091492
+        ],
+        "orthographicScale": 2.9
+      },
+      "referencesM": [
+        1,
+        1.81
+      ],
+      "engine": "Cycles CPU",
+      "samples": 12,
+      "threads": 2,
+      "sheet": "qa/previews/furniture-four-light.png",
+      "pixelRectangle": [
+        0,
+        321,
+        288,
+        256
+      ],
+      "rgbPixelSha256": "0a5b7b309576ef148058a25d94ad5c8e2786c6c85dbaf684760d7a74985991d4"
+    },
+    {
+      "assetId": "admissions-counter-module",
+      "lod": 0,
+      "view": "perspective",
+      "lighting": "overcast",
+      "sourceGLB": "exports/admissions-counter-module.lod0.glb",
+      "sourceGLBSha256": "2574c655ae72fd1dee2e6fa167209df460322baab19af8cdccca2eec046ae59d",
+      "rawFile": "21-admissions-counter-module-lod0-perspective-overcast.png",
+      "rawPngSha256": "ecf544dc65f21960a159494721a472f74e8ed77c73a35cf93b86c49602a95a71",
+      "width": 288,
+      "height": 256,
+      "camera": {
+        "location": [
+          3.8023457527160645,
+          -3.8023457527160645,
+          3.211641788482666
+        ],
+        "quaternionXYZW": [
+          0.48729416728019714,
+          0.20184390246868134,
+          0.3251241445541382,
+          0.7849189639091492
+        ],
+        "orthographicScale": 2.9
+      },
+      "referencesM": [
+        1,
+        1.81
+      ],
+      "engine": "Cycles CPU",
+      "samples": 12,
+      "threads": 2,
+      "sheet": "qa/previews/furniture-four-light.png",
+      "pixelRectangle": [
+        288,
+        321,
+        288,
+        256
+      ],
+      "rgbPixelSha256": "1e92774c86a0e94795ec234c5440a57196a9eb27cf2c835902cf7a3b5d51846e"
+    },
+    {
+      "assetId": "admissions-counter-module",
+      "lod": 0,
+      "view": "perspective",
+      "lighting": "dusk",
+      "sourceGLB": "exports/admissions-counter-module.lod0.glb",
+      "sourceGLBSha256": "2574c655ae72fd1dee2e6fa167209df460322baab19af8cdccca2eec046ae59d",
+      "rawFile": "22-admissions-counter-module-lod0-perspective-dusk.png",
+      "rawPngSha256": "80ee31204feab5fbf7cf155faac7e119ea015052b8a8072eb5eaeb3934f226dc",
+      "width": 288,
+      "height": 256,
+      "camera": {
+        "location": [
+          3.8023457527160645,
+          -3.8023457527160645,
+          3.211641788482666
+        ],
+        "quaternionXYZW": [
+          0.48729416728019714,
+          0.20184390246868134,
+          0.3251241445541382,
+          0.7849189639091492
+        ],
+        "orthographicScale": 2.9
+      },
+      "referencesM": [
+        1,
+        1.81
+      ],
+      "engine": "Cycles CPU",
+      "samples": 12,
+      "threads": 2,
+      "sheet": "qa/previews/furniture-four-light.png",
+      "pixelRectangle": [
+        576,
+        321,
+        288,
+        256
+      ],
+      "rgbPixelSha256": "cfdd089dd1d01479b3b49f903c14aa7510c22e523e1c37bb4673556fdb58ab58"
+    },
+    {
+      "assetId": "admissions-counter-module",
+      "lod": 0,
+      "view": "perspective",
+      "lighting": "night",
+      "sourceGLB": "exports/admissions-counter-module.lod0.glb",
+      "sourceGLBSha256": "2574c655ae72fd1dee2e6fa167209df460322baab19af8cdccca2eec046ae59d",
+      "rawFile": "23-admissions-counter-module-lod0-perspective-night.png",
+      "rawPngSha256": "e0f934baa72389bf1c35da6ab90cad07605d8aee160ab4c71d29e1d7fad07bfc",
+      "width": 288,
+      "height": 256,
+      "camera": {
+        "location": [
+          3.8023457527160645,
+          -3.8023457527160645,
+          3.211641788482666
+        ],
+        "quaternionXYZW": [
+          0.48729416728019714,
+          0.20184390246868134,
+          0.3251241445541382,
+          0.7849189639091492
+        ],
+        "orthographicScale": 2.9
+      },
+      "referencesM": [
+        1,
+        1.81
+      ],
+      "engine": "Cycles CPU",
+      "samples": 12,
+      "threads": 2,
+      "sheet": "qa/previews/furniture-four-light.png",
+      "pixelRectangle": [
+        864,
+        321,
+        288,
+        256
+      ],
+      "rgbPixelSha256": "06c64c7624fa3a9e9b9125d54f8138af4f16947739d3b70995fdddff9687088b"
+    }
+  ],
+  "scope": "Actual delivered GLB reimports; geometrical views/LOD and studio light coverage; no WebGL city claim.",
+  "contactSheets": [
+    {
+      "file": "qa/previews/furniture-views-lods.png",
+      "sha256": "eb7c348b38a4c62a8963c11e9b190640c3a7749b119a829ebd12adf7f6167709",
+      "width": 1152,
+      "height": 1179,
+      "rawPixelsUnchanged": true
+    },
+    {
+      "file": "qa/previews/furniture-four-light.png",
+      "sha256": "526e4ed170d0872c390bf02caf607b1487b793cc885046bc919b9fb6163b1e64",
+      "width": 1152,
+      "height": 607,
+      "rawPixelsUnchanged": true
+    }
+  ],
+  "rawRenderStorage": "Individual render files removed after lossless placement in sheet; pixel rectangles and RGB hashes verify the original rendered pixels."
+}

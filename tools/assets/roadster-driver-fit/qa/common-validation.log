@@ -1,0 +1,159 @@
+{
+  "status": "pass",
+  "scope": "common packaging, source hashes, rest-pose transformed GLB geometry and costs only; package-specific Blender, semantic and runtime checks required",
+  "results": [
+    {
+      "assetId": "roadster-cockpit-local",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.7849999964237213,
+          0.38500000536441803,
+          -0.4399999976158142
+        ],
+        "max": [
+          0.7850000150501728,
+          1.2799999713897705,
+          0.8899999856948853
+        ],
+        "size": [
+          1.5700000114738941,
+          0.8949999660253525,
+          1.3299999833106995
+        ]
+      },
+      "triangles": 1348,
+      "vertices": 2147,
+      "primitives": 15,
+      "bytes": 125864,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 125864,
+      "images": [],
+      "nodeNames": [
+        "dashboard-preserved-passenger-and-center",
+        "dashboard-driver-clearance-header",
+        "dashboard-preserved-outboard",
+        "driver-floor-extension",
+        "steering-rim",
+        "steering-spoke-horizontal",
+        "steering-spoke-lower",
+        "driver-seat-cushion-039",
+        "driver-seat-back-040",
+        "driver-seat-headrest-041",
+        "driver-seat-bolster-042",
+        "driver-seat-bolster-043",
+        "driver-seat-seam-044",
+        "driver-seat-seam-045",
+        "driver-seat-seam-046"
+      ],
+      "materialNames": [
+        "cockpit-dark",
+        "cockpit-metal"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "roadster-cockpit-local",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.7849999964237213,
+          0.38500000536441803,
+          -0.4399999976158142
+        ],
+        "max": [
+          0.7850000150501728,
+          1.2799999713897705,
+          0.8899999856948853
+        ],
+        "size": [
+          1.5700000114738941,
+          0.8949999660253525,
+          1.3299999833106995
+        ]
+      },
+      "triangles": 1284,
+      "vertices": 2111,
+      "primitives": 15,
+      "bytes": 123752,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 123752,
+      "images": [],
+      "nodeNames": [
+        "dashboard-preserved-passenger-and-center",
+        "dashboard-driver-clearance-header",
+        "dashboard-preserved-outboard",
+        "driver-floor-extension",
+        "steering-rim",
+        "steering-spoke-horizontal",
+        "steering-spoke-lower",
+        "driver-seat-cushion-039",
+        "driver-seat-back-040",
+        "driver-seat-headrest-041",
+        "driver-seat-bolster-042",
+        "driver-seat-bolster-043",
+        "driver-seat-seam-044",
+        "driver-seat-seam-045",
+        "driver-seat-seam-046"
+      ],
+      "materialNames": [
+        "cockpit-dark",
+        "cockpit-metal"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "roadster-cockpit-local",
+      "lod": 2,
+      "boundsM": {
+        "min": [
+          -0.7849999964237213,
+          0.38500000536441803,
+          -0.4399999976158142
+        ],
+        "max": [
+          0.7850000150501728,
+          1.2799999713897705,
+          0.8899999856948853
+        ],
+        "size": [
+          1.5700000114738941,
+          0.8949999660253525,
+          1.3299999833106995
+        ]
+      },
+      "triangles": 1156,
+      "vertices": 2025,
+      "primitives": 15,
+      "bytes": 119268,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 119268,
+      "images": [],
+      "nodeNames": [
+        "dashboard-preserved-passenger-and-center",
+        "dashboard-driver-clearance-header",
+        "dashboard-preserved-outboard",
+        "driver-floor-extension",
+        "steering-rim",
+        "steering-spoke-horizontal",
+        "steering-spoke-lower",
+        "driver-seat-cushion-039",
+        "driver-seat-back-040",
+        "driver-seat-headrest-041",
+        "driver-seat-bolster-042",
+        "driver-seat-bolster-043",
+        "driver-seat-seam-044",
+        "driver-seat-seam-045",
+        "driver-seat-seam-046"
+      ],
+      "materialNames": [
+        "cockpit-dark",
+        "cockpit-metal"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    }
+  ]
+}

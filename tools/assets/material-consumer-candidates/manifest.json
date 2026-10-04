@@ -1,0 +1,2021 @@
+{
+  "schemaVersion": 1,
+  "packageId": "material-consumer-candidates",
+  "version": "1.1.0",
+  "baseRevision": "67860e17929901e22ab26cbcd9767d94ed9deade",
+  "status": "offline_complete; runtime_pending_webgl",
+  "units": "m",
+  "coordinateSystem": {
+    "authoring": "Blender Z-up",
+    "exports": "glTF Y-up",
+    "conversion": "(x,y,z) -> (x,z,-y), once at export",
+    "consumerGeometry": "Original Three Y-up, Roadster +Z and unmodified root; source patches do not axis-convert"
+  },
+  "provenance": {
+    "author": "Original procedural modules and consumer adapters based on this repository",
+    "source": "https://github.com/YiTaChen/vancouver-living-atlas",
+    "license": "Repository LICENSE, Vancouver Living Atlas Noncommercial Research and Attribution 1.0",
+    "sharedTextures": "Existing role-materials only; no duplicated/new PNGs",
+    "reviewedSourceHashes": "qa/current-source-fixtures.json"
+  },
+  "reexportCommand": "blender -b --factory-startup -t 2 --python-exit-code 1 --python tools/assets/material-consumer-candidates/build.py -- --from-source tools/assets/material-consumer-candidates/source/lecture-chair-module.lod0.blend --output tools/assets/material-consumer-candidates/exports/lecture-chair-module.lod0.glb",
+  "validationCommand": "python tools/assets/material-consumer-candidates/validate.py",
+  "assets": [
+    {
+      "id": "lecture-chair-module",
+      "taskId": "E04",
+      "variant": "representative-shared-oak",
+      "kind": "interior-furniture-module",
+      "source": "source/lecture-chair-module.lod0.blend",
+      "sourceSha256": "92277ea9c86bff64e2f137fa2947a34269884f1da5cd27478d2eda36f9ac13c5",
+      "lods": [
+        {
+          "staticBatching": {
+            "schemaVersion": 1,
+            "method": "material-and-attribute signature batching, actual GLB binary geometry preserved",
+            "unbatchedGLBSha256": "9e26304e593f3ca51ad472550fbf47a97ca3a93b49e635f6da09cab7ddedf533",
+            "sourceMeshNodeCount": 10,
+            "renderPrimitiveCount": 2,
+            "componentRanges": "Each batch node extras.componentRanges addresses its single primitive indices and vertices; all source nodes remain zero-draw anchors.",
+            "actorRoot": "furniture-module-root",
+            "batches": [
+              {
+                "nodeId": "furniture-batch-EXPORT_interior-oak-veneer-0",
+                "material": "EXPORT_interior-oak-veneer",
+                "componentRanges": [
+                  {
+                    "componentId": "seat",
+                    "sourceNodeId": "seat",
+                    "sourceNodeIndex": 0,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 0,
+                    "vertexCount": 96,
+                    "indexStart": 0,
+                    "indexCount": 132,
+                    "triangleCount": 44,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0.0,
+                      0.41499999165534973,
+                      0.0,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -0.3100000023841858,
+                        0.3799999915063381,
+                        -0.30000001192092896
+                      ],
+                      "max": [
+                        0.3100000023841858,
+                        0.44999999180436134,
+                        0.30000001192092896
+                      ],
+                      "size": [
+                        0.6200000047683716,
+                        0.07000000029802322,
+                        0.6000000238418579
+                      ]
+                    }
+                  },
+                  {
+                    "componentId": "back-slat-00",
+                    "sourceNodeId": "back-slat-00",
+                    "sourceNodeIndex": 7,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 96,
+                    "vertexCount": 96,
+                    "indexStart": 132,
+                    "indexCount": 132,
+                    "triangleCount": 44,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0.0,
+                      0.6000000238418579,
+                      -0.2800000011920929,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -0.30000001192092896,
+                        0.5325000211596489,
+                        -0.3075000010430813
+                      ],
+                      "max": [
+                        0.30000001192092896,
+                        0.6675000265240669,
+                        -0.2525000013411045
+                      ],
+                      "size": [
+                        0.6000000238418579,
+                        0.13500000536441803,
+                        0.054999999701976776
+                      ]
+                    }
+                  },
+                  {
+                    "componentId": "back-slat-01",
+                    "sourceNodeId": "back-slat-01",
+                    "sourceNodeIndex": 8,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 192,
+                    "vertexCount": 96,
+                    "indexStart": 264,
+                    "indexCount": 132,
+                    "triangleCount": 44,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0.0,
+                      0.7699999809265137,
+                      -0.2800000011920929,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -0.30000001192092896,
+                        0.7024999782443047,
+                        -0.3075000010430813
+                      ],
+                      "max": [
+                        0.30000001192092896,
+                        0.8374999836087227,
+                        -0.2525000013411045
+                      ],
+                      "size": [
+                        0.6000000238418579,
+                        0.13500000536441803,
+                        0.054999999701976776
+                      ]
+                    }
+                  },
+                  {
+                    "componentId": "back-slat-02",
+                    "sourceNodeId": "back-slat-02",
+                    "sourceNodeIndex": 9,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 288,
+                    "vertexCount": 96,
+                    "indexStart": 396,
+                    "indexCount": 132,
+                    "triangleCount": 44,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0.0,
+                      0.9399999976158142,
+                      -0.2800000011920929,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -0.30000001192092896,
+                        0.8724999949336052,
+                        -0.3075000010430813
+                      ],
+                      "max": [
+                        0.30000001192092896,
+                        1.0075000002980232,
+                        -0.2525000013411045
+                      ],
+                      "size": [
+                        0.6000000238418579,
+                        0.13500000536441803,
+                        0.054999999701976776
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeId": "furniture-batch-EXPORT_landmark-brushed-aluminum-1",
+                "material": "EXPORT_landmark-brushed-aluminum",
+                "componentRanges": [
+                  {
+                    "componentId": "leg--0.265--0.25",
+                    "sourceNodeId": "leg--0.265--0.25",
+                    "sourceNodeIndex": 1,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 0,
+                    "vertexCount": 96,
+                    "indexStart": 0,
+                    "indexCount": 132,
+                    "triangleCount": 44,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      -0.26499998569488525,
+                      0.1899999976158142,
+                      0.25,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -0.2874999865889549,
+                        0.0,
+                        0.22749999910593033
+                      ],
+                      "max": [
+                        -0.24249998480081558,
+                        0.3799999952316284,
+                        0.27250000089406967
+                      ],
+                      "size": [
+                        0.04500000178813934,
+                        0.3799999952316284,
+                        0.04500000178813934
+                      ]
+                    }
+                  },
+                  {
+                    "componentId": "leg--0.265-0.25",
+                    "sourceNodeId": "leg--0.265-0.25",
+                    "sourceNodeIndex": 2,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 96,
+                    "vertexCount": 96,
+                    "indexStart": 132,
+                    "indexCount": 132,
+                    "triangleCount": 44,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      -0.26499998569488525,
+                      0.1899999976158142,
+                      -0.25,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -0.2874999865889549,
+                        0.0,
+                        -0.27250000089406967
+                      ],
+                      "max": [
+                        -0.24249998480081558,
+                        0.3799999952316284,
+                        -0.22749999910593033
+                      ],
+                      "size": [
+                        0.04500000178813934,
+                        0.3799999952316284,
+                        0.04500000178813934
+                      ]
+                    }
+                  },
+                  {
+                    "componentId": "leg-0.265--0.25",
+                    "sourceNodeId": "leg-0.265--0.25",
+                    "sourceNodeIndex": 3,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 192,
+                    "vertexCount": 96,
+                    "indexStart": 264,
+                    "indexCount": 132,
+                    "triangleCount": 44,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0.26499998569488525,
+                      0.1899999976158142,
+                      0.25,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        0.24249998480081558,
+                        0.0,
+                        0.22749999910593033
+                      ],
+                      "max": [
+                        0.2874999865889549,
+                        0.3799999952316284,
+                        0.27250000089406967
+                      ],
+                      "size": [
+                        0.04500000178813934,
+                        0.3799999952316284,
+                        0.04500000178813934
+                      ]
+                    }
+                  },
+                  {
+                    "componentId": "leg-0.265-0.25",
+                    "sourceNodeId": "leg-0.265-0.25",
+                    "sourceNodeIndex": 4,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 288,
+                    "vertexCount": 96,
+                    "indexStart": 396,
+                    "indexCount": 132,
+                    "triangleCount": 44,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0.26499998569488525,
+                      0.1899999976158142,
+                      -0.25,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        0.24249998480081558,
+                        0.0,
+                        -0.27250000089406967
+                      ],
+                      "max": [
+                        0.2874999865889549,
+                        0.3799999952316284,
+                        -0.22749999910593033
+                      ],
+                      "size": [
+                        0.04500000178813934,
+                        0.3799999952316284,
+                        0.04500000178813934
+                      ]
+                    }
+                  },
+                  {
+                    "componentId": "back-upright--0.27",
+                    "sourceNodeId": "back-upright--0.27",
+                    "sourceNodeIndex": 5,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 384,
+                    "vertexCount": 96,
+                    "indexStart": 528,
+                    "indexCount": 132,
+                    "triangleCount": 44,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      -0.27000001072883606,
+                      0.6949999928474426,
+                      -0.2800000011920929,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -0.2900000102818012,
+                        0.38999998569488525,
+                        -0.30000000074505806
+                      ],
+                      "max": [
+                        -0.2500000111758709,
+                        1.0,
+                        -0.26000000163912773
+                      ],
+                      "size": [
+                        0.03999999910593033,
+                        0.6100000143051147,
+                        0.03999999910593033
+                      ]
+                    }
+                  },
+                  {
+                    "componentId": "back-upright-0.27",
+                    "sourceNodeId": "back-upright-0.27",
+                    "sourceNodeIndex": 6,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 480,
+                    "vertexCount": 96,
+                    "indexStart": 660,
+                    "indexCount": 132,
+                    "triangleCount": 44,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0.27000001072883606,
+                      0.6949999928474426,
+                      -0.2800000011920929,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        0.2500000111758709,
+                        0.38999998569488525,
+                        -0.30000000074505806
+                      ],
+                      "max": [
+                        0.2900000102818012,
+                        1.0,
+                        -0.26000000163912773
+                      ],
+                      "size": [
+                        0.03999999910593033,
+                        0.6100000143051147,
+                        0.03999999910593033
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "level": 0,
+          "file": "exports/lecture-chair-module.lod0.glb",
+          "sha256": "3633495198af224eed3fe06b71c4a4ab80045078c01fb9b04f4414610ea44466",
+          "source": "source/lecture-chair-module.lod0.blend",
+          "sourceSha256": "92277ea9c86bff64e2f137fa2947a34269884f1da5cd27478d2eda36f9ac13c5",
+          "boundsM": {
+            "min": [
+              -0.3100000023841858,
+              0.0,
+              -0.3075000047683716
+            ],
+            "max": [
+              0.3100000023841858,
+              1.0075000524520874,
+              0.30000001192092896
+            ],
+            "size": [
+              0.6200000047683716,
+              1.0075000524520874,
+              0.6075000166893005
+            ]
+          },
+          "triangles": 440,
+          "vertices": 960,
+          "primitives": 2,
+          "bytes": 54868,
+          "embeddedImageBytes": 0,
+          "geometryBytes": 54868,
+          "images": [],
+          "nodeNames": [
+            "seat",
+            "leg--0.265--0.25",
+            "leg--0.265-0.25",
+            "leg-0.265--0.25",
+            "leg-0.265-0.25",
+            "back-upright--0.27",
+            "back-upright-0.27",
+            "back-slat-00",
+            "back-slat-01",
+            "back-slat-02",
+            "furniture-module-root",
+            "furniture-batch-EXPORT_interior-oak-veneer-0",
+            "furniture-batch-EXPORT_landmark-brushed-aluminum-1"
+          ],
+          "materialNames": [
+            "EXPORT_interior-oak-veneer",
+            "EXPORT_landmark-brushed-aluminum"
+          ],
+          "boundsScope": "rest-pose scene node transforms; no skin deformation",
+          "skins": 0
+        },
+        {
+          "staticBatching": {
+            "schemaVersion": 1,
+            "method": "material-and-attribute signature batching, actual GLB binary geometry preserved",
+            "unbatchedGLBSha256": "ecc86cd97c0ffd46ac853db497d110d93b72b85516341b66faa2a7341a5d31b5",
+            "sourceMeshNodeCount": 8,
+            "renderPrimitiveCount": 2,
+            "componentRanges": "Each batch node extras.componentRanges addresses its single primitive indices and vertices; all source nodes remain zero-draw anchors.",
+            "actorRoot": "furniture-module-root",
+            "batches": [
+              {
+                "nodeId": "furniture-batch-EXPORT_interior-oak-veneer-0",
+                "material": "EXPORT_interior-oak-veneer",
+                "componentRanges": [
+                  {
+                    "componentId": "seat",
+                    "sourceNodeId": "seat",
+                    "sourceNodeIndex": 0,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 0,
+                    "vertexCount": 24,
+                    "indexStart": 0,
+                    "indexCount": 36,
+                    "triangleCount": 12,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0.0,
+                      0.41499999165534973,
+                      0.0,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -0.3100000023841858,
+                        0.3799999915063381,
+                        -0.30000001192092896
+                      ],
+                      "max": [
+                        0.3100000023841858,
+                        0.44999999180436134,
+                        0.30000001192092896
+                      ],
+                      "size": [
+                        0.6200000047683716,
+                        0.07000000029802322,
+                        0.6000000238418579
+                      ]
+                    }
+                  },
+                  {
+                    "componentId": "back-simplified",
+                    "sourceNodeId": "back-simplified",
+                    "sourceNodeIndex": 7,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 24,
+                    "vertexCount": 24,
+                    "indexStart": 36,
+                    "indexCount": 36,
+                    "triangleCount": 12,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0.0,
+                      0.7549999952316284,
+                      -0.2800000011920929,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -0.30000001192092896,
+                        0.5150000005960464,
+                        -0.3075000010430813
+                      ],
+                      "max": [
+                        0.30000001192092896,
+                        0.9949999898672104,
+                        -0.2525000013411045
+                      ],
+                      "size": [
+                        0.6000000238418579,
+                        0.47999998927116394,
+                        0.054999999701976776
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeId": "furniture-batch-EXPORT_landmark-brushed-aluminum-1",
+                "material": "EXPORT_landmark-brushed-aluminum",
+                "componentRanges": [
+                  {
+                    "componentId": "leg--0.265--0.25",
+                    "sourceNodeId": "leg--0.265--0.25",
+                    "sourceNodeIndex": 1,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 0,
+                    "vertexCount": 24,
+                    "indexStart": 0,
+                    "indexCount": 36,
+                    "triangleCount": 12,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      -0.26499998569488525,
+                      0.1899999976158142,
+                      0.25,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -0.2874999865889549,
+                        0.0,
+                        0.22749999910593033
+                      ],
+                      "max": [
+                        -0.24249998480081558,
+                        0.3799999952316284,
+                        0.27250000089406967
+                      ],
+                      "size": [
+                        0.04500000178813934,
+                        0.3799999952316284,
+                        0.04500000178813934
+                      ]
+                    }
+                  },
+                  {
+                    "componentId": "leg--0.265-0.25",
+                    "sourceNodeId": "leg--0.265-0.25",
+                    "sourceNodeIndex": 2,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 24,
+                    "vertexCount": 24,
+                    "indexStart": 36,
+                    "indexCount": 36,
+                    "triangleCount": 12,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      -0.26499998569488525,
+                      0.1899999976158142,
+                      -0.25,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -0.2874999865889549,
+                        0.0,
+                        -0.27250000089406967
+                      ],
+                      "max": [
+                        -0.24249998480081558,
+                        0.3799999952316284,
+                        -0.22749999910593033
+                      ],
+                      "size": [
+                        0.04500000178813934,
+                        0.3799999952316284,
+                        0.04500000178813934
+                      ]
+                    }
+                  },
+                  {
+                    "componentId": "leg-0.265--0.25",
+                    "sourceNodeId": "leg-0.265--0.25",
+                    "sourceNodeIndex": 3,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 48,
+                    "vertexCount": 24,
+                    "indexStart": 72,
+                    "indexCount": 36,
+                    "triangleCount": 12,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0.26499998569488525,
+                      0.1899999976158142,
+                      0.25,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        0.24249998480081558,
+                        0.0,
+                        0.22749999910593033
+                      ],
+                      "max": [
+                        0.2874999865889549,
+                        0.3799999952316284,
+                        0.27250000089406967
+                      ],
+                      "size": [
+                        0.04500000178813934,
+                        0.3799999952316284,
+                        0.04500000178813934
+                      ]
+                    }
+                  },
+                  {
+                    "componentId": "leg-0.265-0.25",
+                    "sourceNodeId": "leg-0.265-0.25",
+                    "sourceNodeIndex": 4,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 72,
+                    "vertexCount": 24,
+                    "indexStart": 108,
+                    "indexCount": 36,
+                    "triangleCount": 12,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0.26499998569488525,
+                      0.1899999976158142,
+                      -0.25,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        0.24249998480081558,
+                        0.0,
+                        -0.27250000089406967
+                      ],
+                      "max": [
+                        0.2874999865889549,
+                        0.3799999952316284,
+                        -0.22749999910593033
+                      ],
+                      "size": [
+                        0.04500000178813934,
+                        0.3799999952316284,
+                        0.04500000178813934
+                      ]
+                    }
+                  },
+                  {
+                    "componentId": "back-upright--0.27",
+                    "sourceNodeId": "back-upright--0.27",
+                    "sourceNodeIndex": 5,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 96,
+                    "vertexCount": 24,
+                    "indexStart": 144,
+                    "indexCount": 36,
+                    "triangleCount": 12,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      -0.27000001072883606,
+                      0.6949999928474426,
+                      -0.2800000011920929,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -0.2900000102818012,
+                        0.38999998569488525,
+                        -0.30000000074505806
+                      ],
+                      "max": [
+                        -0.2500000111758709,
+                        1.0,
+                        -0.26000000163912773
+                      ],
+                      "size": [
+                        0.03999999910593033,
+                        0.6100000143051147,
+                        0.03999999910593033
+                      ]
+                    }
+                  },
+                  {
+                    "componentId": "back-upright-0.27",
+                    "sourceNodeId": "back-upright-0.27",
+                    "sourceNodeIndex": 6,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 120,
+                    "vertexCount": 24,
+                    "indexStart": 180,
+                    "indexCount": 36,
+                    "triangleCount": 12,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0.27000001072883606,
+                      0.6949999928474426,
+                      -0.2800000011920929,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        0.2500000111758709,
+                        0.38999998569488525,
+                        -0.30000000074505806
+                      ],
+                      "max": [
+                        0.2900000102818012,
+                        1.0,
+                        -0.26000000163912773
+                      ],
+                      "size": [
+                        0.03999999910593033,
+                        0.6100000143051147,
+                        0.03999999910593033
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "level": 1,
+          "file": "exports/lecture-chair-module.lod1.glb",
+          "sha256": "10c37c52ef6d429c75a0284be7eee3bb37130a5250742baf93e74335f1f55ebb",
+          "source": "source/lecture-chair-module.lod1.blend",
+          "sourceSha256": "2198c38825db36f3efaf60ea745c6ce178b18d268f87282f3a650bf7858b0b51",
+          "boundsM": {
+            "min": [
+              -0.3100000023841858,
+              0.0,
+              -0.3075000047683716
+            ],
+            "max": [
+              0.3100000023841858,
+              1.0,
+              0.30000001192092896
+            ],
+            "size": [
+              0.6200000047683716,
+              1.0,
+              0.6075000166893005
+            ]
+          },
+          "triangles": 96,
+          "vertices": 192,
+          "primitives": 2,
+          "bytes": 18520,
+          "embeddedImageBytes": 0,
+          "geometryBytes": 18520,
+          "images": [],
+          "nodeNames": [
+            "seat",
+            "leg--0.265--0.25",
+            "leg--0.265-0.25",
+            "leg-0.265--0.25",
+            "leg-0.265-0.25",
+            "back-upright--0.27",
+            "back-upright-0.27",
+            "back-simplified",
+            "furniture-module-root",
+            "furniture-batch-EXPORT_interior-oak-veneer-0",
+            "furniture-batch-EXPORT_landmark-brushed-aluminum-1"
+          ],
+          "materialNames": [
+            "EXPORT_interior-oak-veneer",
+            "EXPORT_landmark-brushed-aluminum"
+          ],
+          "boundsScope": "rest-pose scene node transforms; no skin deformation",
+          "skins": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.3100000023841858,
+          0.0,
+          -0.3075000047683716
+        ],
+        "max": [
+          0.3100000023841858,
+          1.0075000524520874,
+          0.30000001192092896
+        ],
+        "size": [
+          0.6200000047683716,
+          1.0075000524520874,
+          0.6075000166893005
+        ]
+      },
+      "expectedDimensionsM": [
+        0.62,
+        1.0075,
+        0.6075
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Current source furniture use/footprint; human-scale representative redesign inside old collision. Seat top .45; admissions counter top1.1. Not a measured real building furnishing.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "description": "Ground contact centre, no rescale/recentre at integration"
+      },
+      "attachmentDatum": {
+        "kind": "existing-site-floor",
+        "yM": 0
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "glbMaterial": "EXPORT_interior-oak-veneer",
+          "semanticRole": "interior-oak-veneer",
+          "surfaceId": "interior-oak-veneer",
+          "mapsCatalog": "shared-surface-catalog.json",
+          "uvUnit": "metres",
+          "repeatPerMetre": 1
+        },
+        {
+          "glbMaterial": "EXPORT_landmark-brushed-aluminum",
+          "semanticRole": "landmark-brushed-aluminum",
+          "surfaceId": "landmark-brushed-aluminum",
+          "mapsCatalog": "shared-surface-catalog.json",
+          "uvUnit": "metres",
+          "repeatPerMetre": 1
+        }
+      ],
+      "textureMode": "named-role-placeholders; bind existing shared maps externally",
+      "textureCost": {
+        "geometryBytes": 73388,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 73388,
+        "newUniqueTexelBytesWithMips": 0,
+        "referencedSharedTexelBytesWithMips": 2097152
+      },
+      "lodPolicy": {
+        "proposalSwitchM": [
+          0,
+          25
+        ],
+        "hysteresisM": 3,
+        "note": "Candidate only. Select near seated/interaction view at LOD0; CPU cost measured, runtime distance not accepted."
+      },
+      "clearance": {
+        "rule": "All measured LOD bounds must remain inside existing blocked footprint. No new route/door obstruction."
+      },
+      "collision": {
+        "mode": "retain-source-rectangle",
+        "sizeM": [
+          0.65,
+          1.05,
+          0.7
+        ]
+      },
+      "anchors": {
+        "seatTopM": [
+          0,
+          0.45,
+          0
+        ]
+      },
+      "placementCompatibility": {
+        "plan": "adapters/furniture-plan.mjs",
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "usage": "Canada lecture chair 54 source instances",
+        "exclusions": [
+          "No blanket hall replacement",
+          "No table use invented",
+          "Keep current signs/screens/obstacles/doors/floors"
+        ]
+      },
+      "intendedConsumer": "lib/city/interiors.ts source-callsite replacement, not active",
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/blender-validation.json",
+          "qa/common-validation.json",
+          "qa/consumer-validation.json",
+          "qa/furniture-fit.json",
+          "qa/static-batching.json"
+        ]
+      },
+      "staticBatching": {
+        "scope": "export-only, two role primitives per LOD; source objects/modifiers are never merged",
+        "nodeContract": "Original named parts are zero-draw anchors. Geometry is in furniture-batch-* nodes; componentRanges address exact vertex/index slices.",
+        "costEvidence": "qa/static-batching.json"
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "WebGL integration, shader appearance, normal seams, draw/frame/memory, actual gameplay and rollout pending"
+      }
+    },
+    {
+      "id": "admissions-counter-module",
+      "taskId": "E04",
+      "variant": "representative-shared-oak",
+      "kind": "interior-furniture-module",
+      "source": "source/admissions-counter-module.lod0.blend",
+      "sourceSha256": "72b57e402f349f5e331a7c9074435bd5f144d113878d671ed991fab264987a34",
+      "lods": [
+        {
+          "staticBatching": {
+            "schemaVersion": 1,
+            "method": "material-and-attribute signature batching, actual GLB binary geometry preserved",
+            "unbatchedGLBSha256": "d05fd5b6fbcdfc2d9453842416453c1be2b5f52a46d58928a1ba55b03d5db34f",
+            "sourceMeshNodeCount": 7,
+            "renderPrimitiveCount": 2,
+            "componentRanges": "Each batch node extras.componentRanges addresses its single primitive indices and vertices; all source nodes remain zero-draw anchors.",
+            "actorRoot": "furniture-module-root",
+            "batches": [
+              {
+                "nodeId": "furniture-batch-EXPORT_interior-oak-veneer-0",
+                "material": "EXPORT_interior-oak-veneer",
+                "componentRanges": [
+                  {
+                    "componentId": "counter-top",
+                    "sourceNodeId": "counter-top",
+                    "sourceNodeIndex": 0,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 0,
+                    "vertexCount": 96,
+                    "indexStart": 0,
+                    "indexCount": 132,
+                    "triangleCount": 44,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0.0,
+                      1.059999942779541,
+                      0.0,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -0.75,
+                        1.0199999436736107,
+                        -0.75
+                      ],
+                      "max": [
+                        0.75,
+                        1.0999999418854713,
+                        0.75
+                      ],
+                      "size": [
+                        1.5,
+                        0.07999999821186066,
+                        1.5
+                      ]
+                    }
+                  },
+                  {
+                    "componentId": "counter-front",
+                    "sourceNodeId": "counter-front",
+                    "sourceNodeIndex": 1,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 96,
+                    "vertexCount": 96,
+                    "indexStart": 132,
+                    "indexCount": 132,
+                    "triangleCount": 44,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0.0,
+                      0.5649999976158142,
+                      0.6800000071525574,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -0.7300000190734863,
+                        0.12999999523162842,
+                        0.6475000083446503
+                      ],
+                      "max": [
+                        0.7300000190734863,
+                        1.0,
+                        0.7125000059604645
+                      ],
+                      "size": [
+                        1.4600000381469727,
+                        0.8700000047683716,
+                        0.06499999761581421
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeId": "furniture-batch-EXPORT_interior-matte-plaster-1",
+                "material": "EXPORT_interior-matte-plaster",
+                "componentRanges": [
+                  {
+                    "componentId": "counter-side--0.68",
+                    "sourceNodeId": "counter-side--0.68",
+                    "sourceNodeIndex": 2,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 0,
+                    "vertexCount": 96,
+                    "indexStart": 0,
+                    "indexCount": 132,
+                    "triangleCount": 44,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      -0.6800000071525574,
+                      0.5400000214576721,
+                      0.0,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -0.7125000059604645,
+                        0.08000001311302185,
+                        -0.675000011920929
+                      ],
+                      "max": [
+                        -0.6475000083446503,
+                        1.0000000298023224,
+                        0.675000011920929
+                      ],
+                      "size": [
+                        0.06499999761581421,
+                        0.9200000166893005,
+                        1.350000023841858
+                      ]
+                    }
+                  },
+                  {
+                    "componentId": "counter-side-0.68",
+                    "sourceNodeId": "counter-side-0.68",
+                    "sourceNodeIndex": 3,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 96,
+                    "vertexCount": 96,
+                    "indexStart": 132,
+                    "indexCount": 132,
+                    "triangleCount": 44,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0.6800000071525574,
+                      0.5400000214576721,
+                      0.0,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        0.6475000083446503,
+                        0.08000001311302185,
+                        -0.675000011920929
+                      ],
+                      "max": [
+                        0.7125000059604645,
+                        1.0000000298023224,
+                        0.675000011920929
+                      ],
+                      "size": [
+                        0.06499999761581421,
+                        0.9200000166893005,
+                        1.350000023841858
+                      ]
+                    }
+                  },
+                  {
+                    "componentId": "recessed-plinth",
+                    "sourceNodeId": "recessed-plinth",
+                    "sourceNodeIndex": 4,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 192,
+                    "vertexCount": 96,
+                    "indexStart": 264,
+                    "indexCount": 132,
+                    "triangleCount": 44,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0.0,
+                      0.07000000029802322,
+                      0.0,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -0.6600000262260437,
+                        0.0,
+                        -0.6349999904632568
+                      ],
+                      "max": [
+                        0.6600000262260437,
+                        0.14000000059604645,
+                        0.6349999904632568
+                      ],
+                      "size": [
+                        1.3200000524520874,
+                        0.14000000059604645,
+                        1.2699999809265137
+                      ]
+                    }
+                  },
+                  {
+                    "componentId": "working-shelf",
+                    "sourceNodeId": "working-shelf",
+                    "sourceNodeIndex": 5,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 288,
+                    "vertexCount": 96,
+                    "indexStart": 396,
+                    "indexCount": 132,
+                    "triangleCount": 44,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0.0,
+                      0.5400000214576721,
+                      0.0,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -0.6399999856948853,
+                        0.5175000205636024,
+                        -0.6150000095367432
+                      ],
+                      "max": [
+                        0.6399999856948853,
+                        0.5625000223517418,
+                        0.6150000095367432
+                      ],
+                      "size": [
+                        1.2799999713897705,
+                        0.04500000178813934,
+                        1.2300000190734863
+                      ]
+                    }
+                  },
+                  {
+                    "componentId": "front-inset-rail",
+                    "sourceNodeId": "front-inset-rail",
+                    "sourceNodeIndex": 6,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 384,
+                    "vertexCount": 96,
+                    "indexStart": 528,
+                    "indexCount": 132,
+                    "triangleCount": 44,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0.0,
+                      0.7799999713897705,
+                      0.7200000286102295,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -0.6850000023841858,
+                        0.7549999710172415,
+                        0.707500028423965
+                      ],
+                      "max": [
+                        0.6850000023841858,
+                        0.8049999717622995,
+                        0.732500028796494
+                      ],
+                      "size": [
+                        1.3700000047683716,
+                        0.05000000074505806,
+                        0.02500000037252903
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "level": 0,
+          "file": "exports/admissions-counter-module.lod0.glb",
+          "sha256": "2574c655ae72fd1dee2e6fa167209df460322baab19af8cdccca2eec046ae59d",
+          "source": "source/admissions-counter-module.lod0.blend",
+          "sourceSha256": "72b57e402f349f5e331a7c9074435bd5f144d113878d671ed991fab264987a34",
+          "boundsM": {
+            "min": [
+              -0.75,
+              0.0,
+              -0.75
+            ],
+            "max": [
+              0.75,
+              1.0999999046325684,
+              0.75
+            ],
+            "size": [
+              1.5,
+              1.0999999046325684,
+              1.5
+            ]
+          },
+          "triangles": 308,
+          "vertices": 672,
+          "primitives": 2,
+          "bytes": 39300,
+          "embeddedImageBytes": 0,
+          "geometryBytes": 39300,
+          "images": [],
+          "nodeNames": [
+            "counter-top",
+            "counter-front",
+            "counter-side--0.68",
+            "counter-side-0.68",
+            "recessed-plinth",
+            "working-shelf",
+            "front-inset-rail",
+            "furniture-module-root",
+            "furniture-batch-EXPORT_interior-oak-veneer-0",
+            "furniture-batch-EXPORT_interior-matte-plaster-1"
+          ],
+          "materialNames": [
+            "EXPORT_interior-oak-veneer",
+            "EXPORT_interior-matte-plaster"
+          ],
+          "boundsScope": "rest-pose scene node transforms; no skin deformation",
+          "skins": 0
+        },
+        {
+          "staticBatching": {
+            "schemaVersion": 1,
+            "method": "material-and-attribute signature batching, actual GLB binary geometry preserved",
+            "unbatchedGLBSha256": "9b81839b42f384bbe0634275bd96c09bd20a8498389b026e6de33cab715f30fc",
+            "sourceMeshNodeCount": 5,
+            "renderPrimitiveCount": 2,
+            "componentRanges": "Each batch node extras.componentRanges addresses its single primitive indices and vertices; all source nodes remain zero-draw anchors.",
+            "actorRoot": "furniture-module-root",
+            "batches": [
+              {
+                "nodeId": "furniture-batch-EXPORT_interior-oak-veneer-0",
+                "material": "EXPORT_interior-oak-veneer",
+                "componentRanges": [
+                  {
+                    "componentId": "counter-top",
+                    "sourceNodeId": "counter-top",
+                    "sourceNodeIndex": 0,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 0,
+                    "vertexCount": 24,
+                    "indexStart": 0,
+                    "indexCount": 36,
+                    "triangleCount": 12,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0.0,
+                      1.059999942779541,
+                      0.0,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -0.75,
+                        1.0199999436736107,
+                        -0.75
+                      ],
+                      "max": [
+                        0.75,
+                        1.0999999418854713,
+                        0.75
+                      ],
+                      "size": [
+                        1.5,
+                        0.07999999821186066,
+                        1.5
+                      ]
+                    }
+                  },
+                  {
+                    "componentId": "counter-front",
+                    "sourceNodeId": "counter-front",
+                    "sourceNodeIndex": 1,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 24,
+                    "vertexCount": 24,
+                    "indexStart": 36,
+                    "indexCount": 36,
+                    "triangleCount": 12,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0.0,
+                      0.5649999976158142,
+                      0.6800000071525574,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -0.7300000190734863,
+                        0.12999999523162842,
+                        0.6475000083446503
+                      ],
+                      "max": [
+                        0.7300000190734863,
+                        1.0,
+                        0.7125000059604645
+                      ],
+                      "size": [
+                        1.4600000381469727,
+                        0.8700000047683716,
+                        0.06499999761581421
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeId": "furniture-batch-EXPORT_interior-matte-plaster-1",
+                "material": "EXPORT_interior-matte-plaster",
+                "componentRanges": [
+                  {
+                    "componentId": "counter-side--0.68",
+                    "sourceNodeId": "counter-side--0.68",
+                    "sourceNodeIndex": 2,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 0,
+                    "vertexCount": 24,
+                    "indexStart": 0,
+                    "indexCount": 36,
+                    "triangleCount": 12,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      -0.6800000071525574,
+                      0.5400000214576721,
+                      0.0,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -0.7125000059604645,
+                        0.08000001311302185,
+                        -0.675000011920929
+                      ],
+                      "max": [
+                        -0.6475000083446503,
+                        1.0000000298023224,
+                        0.675000011920929
+                      ],
+                      "size": [
+                        0.06499999761581421,
+                        0.9200000166893005,
+                        1.350000023841858
+                      ]
+                    }
+                  },
+                  {
+                    "componentId": "counter-side-0.68",
+                    "sourceNodeId": "counter-side-0.68",
+                    "sourceNodeIndex": 3,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 24,
+                    "vertexCount": 24,
+                    "indexStart": 36,
+                    "indexCount": 36,
+                    "triangleCount": 12,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0.6800000071525574,
+                      0.5400000214576721,
+                      0.0,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        0.6475000083446503,
+                        0.08000001311302185,
+                        -0.675000011920929
+                      ],
+                      "max": [
+                        0.7125000059604645,
+                        1.0000000298023224,
+                        0.675000011920929
+                      ],
+                      "size": [
+                        0.06499999761581421,
+                        0.9200000166893005,
+                        1.350000023841858
+                      ]
+                    }
+                  },
+                  {
+                    "componentId": "recessed-plinth",
+                    "sourceNodeId": "recessed-plinth",
+                    "sourceNodeIndex": 4,
+                    "sourcePrimitive": 0,
+                    "frameId": "module",
+                    "vertexStart": 48,
+                    "vertexCount": 24,
+                    "indexStart": 72,
+                    "indexCount": 36,
+                    "triangleCount": 12,
+                    "sourceLocalToModuleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0.0,
+                      0.07000000029802322,
+                      0.0,
+                      1.0
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -0.6600000262260437,
+                        0.0,
+                        -0.6349999904632568
+                      ],
+                      "max": [
+                        0.6600000262260437,
+                        0.14000000059604645,
+                        0.6349999904632568
+                      ],
+                      "size": [
+                        1.3200000524520874,
+                        0.14000000059604645,
+                        1.2699999809265137
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "level": 1,
+          "file": "exports/admissions-counter-module.lod1.glb",
+          "sha256": "b8f5c416b7731b9f21754ac1ea4af955445ba9b4302bb38da495c29d63044474",
+          "source": "source/admissions-counter-module.lod1.blend",
+          "sourceSha256": "881ec66107abeffdfbcf83de7e3fccfc13f4ac1c3c416f59ab6fa1ea9bb77554",
+          "boundsM": {
+            "min": [
+              -0.75,
+              0.0,
+              -0.75
+            ],
+            "max": [
+              0.75,
+              1.0999999046325684,
+              0.75
+            ],
+            "size": [
+              1.5,
+              1.0999999046325684,
+              1.5
+            ]
+          },
+          "triangles": 60,
+          "vertices": 120,
+          "primitives": 2,
+          "bytes": 12764,
+          "embeddedImageBytes": 0,
+          "geometryBytes": 12764,
+          "images": [],
+          "nodeNames": [
+            "counter-top",
+            "counter-front",
+            "counter-side--0.68",
+            "counter-side-0.68",
+            "recessed-plinth",
+            "furniture-module-root",
+            "furniture-batch-EXPORT_interior-oak-veneer-0",
+            "furniture-batch-EXPORT_interior-matte-plaster-1"
+          ],
+          "materialNames": [
+            "EXPORT_interior-oak-veneer",
+            "EXPORT_interior-matte-plaster"
+          ],
+          "boundsScope": "rest-pose scene node transforms; no skin deformation",
+          "skins": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.75,
+          0.0,
+          -0.75
+        ],
+        "max": [
+          0.75,
+          1.0999999046325684,
+          0.75
+        ],
+        "size": [
+          1.5,
+          1.0999999046325684,
+          1.5
+        ]
+      },
+      "expectedDimensionsM": [
+        1.5,
+        1.1,
+        1.5
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Current source furniture use/footprint; human-scale representative redesign inside old collision. Seat top .45; admissions counter top1.1. Not a measured real building furnishing.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "description": "Ground contact centre, no rescale/recentre at integration"
+      },
+      "attachmentDatum": {
+        "kind": "existing-site-floor",
+        "yM": 0
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "glbMaterial": "EXPORT_interior-oak-veneer",
+          "semanticRole": "interior-oak-veneer",
+          "surfaceId": "interior-oak-veneer",
+          "mapsCatalog": "shared-surface-catalog.json",
+          "uvUnit": "metres",
+          "repeatPerMetre": 1
+        },
+        {
+          "glbMaterial": "EXPORT_interior-matte-plaster",
+          "semanticRole": "interior-matte-plaster",
+          "surfaceId": "interior-matte-plaster",
+          "mapsCatalog": "shared-surface-catalog.json",
+          "uvUnit": "metres",
+          "repeatPerMetre": 1
+        }
+      ],
+      "textureMode": "named-role-placeholders; bind existing shared maps externally",
+      "textureCost": {
+        "geometryBytes": 52064,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 52064,
+        "newUniqueTexelBytesWithMips": 0,
+        "referencedSharedTexelBytesWithMips": 2097152
+      },
+      "lodPolicy": {
+        "proposalSwitchM": [
+          0,
+          25
+        ],
+        "hysteresisM": 3,
+        "note": "Candidate only. Select near seated/interaction view at LOD0; CPU cost measured, runtime distance not accepted."
+      },
+      "clearance": {
+        "rule": "All measured LOD bounds must remain inside existing blocked footprint. No new route/door obstruction."
+      },
+      "collision": {
+        "mode": "retain-source-rectangle",
+        "sizeM": [
+          1.5,
+          1.1,
+          1.5
+        ]
+      },
+      "anchors": {
+        "worktopM": [
+          0,
+          1.1,
+          0
+        ]
+      },
+      "placementCompatibility": {
+        "plan": "adapters/furniture-plan.mjs",
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "usage": "Science admissions four modules within existing single6m counter",
+        "exclusions": [
+          "No blanket hall replacement",
+          "No table use invented",
+          "Keep current signs/screens/obstacles/doors/floors"
+        ]
+      },
+      "intendedConsumer": "lib/city/interiors.ts source-callsite replacement, not active",
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/blender-validation.json",
+          "qa/common-validation.json",
+          "qa/consumer-validation.json",
+          "qa/furniture-fit.json",
+          "qa/static-batching.json"
+        ]
+      },
+      "staticBatching": {
+        "scope": "export-only, two role primitives per LOD; source objects/modifiers are never merged",
+        "nodeContract": "Original named parts are zero-draw anchors. Geometry is in furniture-batch-* nodes; componentRanges address exact vertex/index slices.",
+        "costEvidence": "qa/static-batching.json"
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "WebGL integration, shader appearance, normal seams, draw/frame/memory, actual gameplay and rollout pending"
+      }
+    }
+  ],
+  "textures": {
+    "new": [],
+    "sharedCatalog": "shared-surface-catalog.json",
+    "surfaceCount": 8,
+    "mapCount": 24,
+    "uniqueRGBA8FullMipEstimateBytes": 8388608,
+    "note": "Referenced cost across all eight IDs; existing maps unchanged. Per-asset shared costs cannot be summed as unique."
+  },
+  "consumerCandidates": {
+    "E02": {
+      "entry": "adapters/consumer-candidates.mjs:makeRoadsterCandidate",
+      "status": "offline_complete",
+      "runtime": "not_integrated"
+    },
+    "E04": {
+      "entry": "adapters/consumer-candidates.mjs:makeInteriorsCandidate",
+      "status": "offline_complete",
+      "runtime": "not_integrated"
+    },
+    "E03": {
+      "entry": "qa/harbour-aircraft-gap-audit.json",
+      "status": "offline_audit_complete_no_verified_asset_gap",
+      "runtime": "unchanged"
+    },
+    "F05": {
+      "entry": "adapters/shared-surfaces.mjs",
+      "status": "offline_complete",
+      "runtime": "not_integrated"
+    }
+  }
+}

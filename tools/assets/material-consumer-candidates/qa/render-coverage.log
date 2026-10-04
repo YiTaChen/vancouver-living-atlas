@@ -1,0 +1,1492 @@
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:34:28 | INFO: Data are loaded, start creating Blender stuff
+17:34:28 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-oak-veneer-0
+17:34:28 | INFO: Blender create Mesh node furniture-batch-EXPORT_landmark-brushed-aluminum-1
+17:34:28 | INFO: glTF import finished in 0.01s
+Blender 4.3.2
+Fra:1 Mem:12.46M (Peak 12.48M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-oak-veneer-0
+Fra:1 Mem:12.46M (Peak 12.48M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Text
+Fra:1 Mem:14.62M (Peak 14.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-ground
+Fra:1 Mem:14.62M (Peak 14.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-ruler
+Fra:1 Mem:14.62M (Peak 14.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sphere
+Fra:1 Mem:14.63M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg.001
+Fra:1 Mem:14.64M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg
+Fra:1 Mem:14.64M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-body
+Fra:1 Mem:14.64M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_landmark-brushed-aluminum-1
+Fra:1 Mem:14.75M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:13.63M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:13.63M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:13.63M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:13.63M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:13.75M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.07M, Peak:0.07M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.07M, Peak:0.07M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.13M, Peak:0.13M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.21M, Peak:0.27M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.21M, Peak:0.27M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:13.94M (Peak 14.75M) | Time:00:00.00 | Mem:0.21M, Peak:0.27M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:13.94M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:13.94M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:13.94M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:13.94M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-normal.png
+Fra:1 Mem:14.19M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-basecolor.png
+Fra:1 Mem:14.46M (Peak 14.75M) | Time:00:00.00 | Mem:0.58M, Peak:0.58M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-normal.png
+Fra:1 Mem:14.71M (Peak 14.75M) | Time:00:00.00 | Mem:0.83M, Peak:0.83M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-basecolor.png
+Fra:1 Mem:14.96M (Peak 14.96M) | Time:00:00.00 | Mem:1.08M, Peak:1.08M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-orm.png
+Fra:1 Mem:15.21M (Peak 15.21M) | Time:00:00.00 | Mem:1.33M, Peak:1.33M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-orm.png
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.83M, Peak:1.83M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.83M, Peak:1.83M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.84M, Peak:1.92M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Sample 0/12
+Fra:1 Mem:18.00M (Peak 18.00M) | Time:00:00.06 | Remaining:00:00.65 | Mem:4.46M, Peak:4.46M | Scene, ViewLayer | Sample 1/12
+Fra:1 Mem:19.13M (Peak 21.38M) | Time:00:00.57 | Mem:4.46M, Peak:4.46M | Scene, ViewLayer | Sample 12/12
+Fra:1 Mem:19.13M (Peak 21.38M) | Time:00:00.57 | Mem:4.46M, Peak:4.46M | Scene, ViewLayer | Finished
+Saved: '/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/material-consumer-candidates/qa/.coverage-work/00-lecture-chair-module-lod0-front-overcast.png'
+Time: 00:00.69 (Saving: 00:00.11)
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:34:29 | INFO: Data are loaded, start creating Blender stuff
+17:34:29 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-oak-veneer-0
+17:34:29 | INFO: Blender create Mesh node furniture-batch-EXPORT_landmark-brushed-aluminum-1
+17:34:29 | INFO: glTF import finished in 0.00s
+Fra:1 Mem:14.46M (Peak 14.46M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-oak-veneer-0
+Fra:1 Mem:14.46M (Peak 14.46M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Text
+Fra:1 Mem:14.70M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-ground
+Fra:1 Mem:14.70M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-ruler
+Fra:1 Mem:14.70M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sphere
+Fra:1 Mem:14.68M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg.001
+Fra:1 Mem:14.68M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg
+Fra:1 Mem:14.68M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_landmark-brushed-aluminum-1
+Fra:1 Mem:14.68M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-body
+Fra:1 Mem:14.75M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:13.63M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:13.63M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:13.63M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:13.63M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:13.75M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.07M, Peak:0.07M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.07M, Peak:0.07M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.13M, Peak:0.13M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.21M, Peak:0.27M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.21M, Peak:0.27M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:13.94M (Peak 14.75M) | Time:00:00.00 | Mem:0.21M, Peak:0.27M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:13.94M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:13.94M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:13.94M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:13.94M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-basecolor.png
+Fra:1 Mem:14.46M (Peak 14.75M) | Time:00:00.00 | Mem:0.58M, Peak:0.58M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-orm.png
+Fra:1 Mem:14.71M (Peak 14.75M) | Time:00:00.00 | Mem:0.83M, Peak:0.83M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-basecolor.png
+Fra:1 Mem:14.96M (Peak 14.96M) | Time:00:00.00 | Mem:1.08M, Peak:1.08M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-normal.png
+Fra:1 Mem:15.21M (Peak 15.21M) | Time:00:00.00 | Mem:1.33M, Peak:1.33M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-orm.png
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.83M, Peak:1.83M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.83M, Peak:1.83M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.84M, Peak:1.92M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Sample 0/12
+Fra:1 Mem:18.00M (Peak 18.00M) | Time:00:00.05 | Remaining:00:00.50 | Mem:4.46M, Peak:4.46M | Scene, ViewLayer | Sample 1/12
+Fra:1 Mem:19.13M (Peak 21.38M) | Time:00:00.50 | Mem:4.46M, Peak:4.46M | Scene, ViewLayer | Sample 12/12
+Fra:1 Mem:19.13M (Peak 21.38M) | Time:00:00.50 | Mem:4.46M, Peak:4.46M | Scene, ViewLayer | Finished
+Saved: '/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/material-consumer-candidates/qa/.coverage-work/01-lecture-chair-module-lod0-side-overcast.png'
+Time: 00:00.51 (Saving: 00:00.00)
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:34:30 | INFO: Data are loaded, start creating Blender stuff
+17:34:30 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-oak-veneer-0
+17:34:30 | INFO: Blender create Mesh node furniture-batch-EXPORT_landmark-brushed-aluminum-1
+17:34:30 | INFO: glTF import finished in 0.00s
+Fra:1 Mem:14.46M (Peak 14.46M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-oak-veneer-0
+Fra:1 Mem:14.46M (Peak 14.46M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Text
+Fra:1 Mem:14.70M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-ground
+Fra:1 Mem:14.70M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-ruler
+Fra:1 Mem:14.70M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sphere
+Fra:1 Mem:14.68M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg.001
+Fra:1 Mem:14.68M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_landmark-brushed-aluminum-1
+Fra:1 Mem:14.68M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg
+Fra:1 Mem:14.69M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-body
+Fra:1 Mem:14.75M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:13.63M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:13.63M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:13.63M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:13.63M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:13.75M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.07M, Peak:0.07M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.07M, Peak:0.07M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.13M, Peak:0.13M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.21M, Peak:0.27M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.21M, Peak:0.27M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:13.94M (Peak 14.75M) | Time:00:00.00 | Mem:0.21M, Peak:0.27M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:13.94M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:13.94M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:13.94M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:13.94M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-normal.png
+Fra:1 Mem:14.19M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-basecolor.png
+Fra:1 Mem:14.46M (Peak 14.75M) | Time:00:00.00 | Mem:0.58M, Peak:0.58M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-normal.png
+Fra:1 Mem:14.71M (Peak 14.75M) | Time:00:00.00 | Mem:0.83M, Peak:0.83M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-orm.png
+Fra:1 Mem:14.96M (Peak 14.96M) | Time:00:00.00 | Mem:1.08M, Peak:1.08M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-basecolor.png
+Fra:1 Mem:15.21M (Peak 15.21M) | Time:00:00.00 | Mem:1.33M, Peak:1.33M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-orm.png
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.83M, Peak:1.83M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.83M, Peak:1.83M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.84M, Peak:1.92M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Sample 0/12
+Fra:1 Mem:18.00M (Peak 18.00M) | Time:00:00.05 | Remaining:00:00.51 | Mem:4.46M, Peak:4.46M | Scene, ViewLayer | Sample 1/12
+Fra:1 Mem:19.13M (Peak 21.38M) | Time:00:00.48 | Mem:4.46M, Peak:4.46M | Scene, ViewLayer | Sample 12/12
+Fra:1 Mem:19.13M (Peak 21.38M) | Time:00:00.48 | Mem:4.46M, Peak:4.46M | Scene, ViewLayer | Finished
+Saved: '/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/material-consumer-candidates/qa/.coverage-work/02-lecture-chair-module-lod0-back-overcast.png'
+Time: 00:00.49 (Saving: 00:00.01)
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:34:30 | INFO: Data are loaded, start creating Blender stuff
+17:34:30 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-oak-veneer-0
+17:34:30 | INFO: Blender create Mesh node furniture-batch-EXPORT_landmark-brushed-aluminum-1
+17:34:30 | INFO: glTF import finished in 0.00s
+Fra:1 Mem:14.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-oak-veneer-0
+Fra:1 Mem:14.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Text
+Fra:1 Mem:14.73M (Peak 14.73M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_landmark-brushed-aluminum-1
+Fra:1 Mem:14.79M (Peak 14.79M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-ground
+Fra:1 Mem:14.84M (Peak 14.84M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-plan-ruler
+Fra:1 Mem:14.84M (Peak 14.84M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-ruler
+Fra:1 Mem:14.84M (Peak 14.84M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sphere
+Fra:1 Mem:14.86M (Peak 14.86M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg.001
+Fra:1 Mem:14.87M (Peak 14.87M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg
+Fra:1 Mem:14.87M (Peak 14.87M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-body
+Fra:1 Mem:14.82M (Peak 14.87M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:13.67M (Peak 14.87M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:13.67M (Peak 14.87M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:13.67M (Peak 14.87M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:13.67M (Peak 14.87M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:13.76M (Peak 14.87M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:13.76M (Peak 14.87M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:13.76M (Peak 14.87M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:13.76M (Peak 14.87M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:13.76M (Peak 14.87M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:13.76M (Peak 14.87M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:13.76M (Peak 14.87M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:13.76M (Peak 14.87M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:13.76M (Peak 14.87M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:13.76M (Peak 14.87M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:13.79M (Peak 14.87M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:13.86M (Peak 14.87M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:13.86M (Peak 14.87M) | Time:00:00.00 | Mem:0.07M, Peak:0.07M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:13.86M (Peak 14.87M) | Time:00:00.00 | Mem:0.07M, Peak:0.07M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:13.86M (Peak 14.87M) | Time:00:00.00 | Mem:0.13M, Peak:0.13M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:13.86M (Peak 14.87M) | Time:00:00.00 | Mem:0.21M, Peak:0.27M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:13.86M (Peak 14.87M) | Time:00:00.00 | Mem:0.21M, Peak:0.27M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:13.99M (Peak 14.87M) | Time:00:00.00 | Mem:0.21M, Peak:0.27M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:13.99M (Peak 14.87M) | Time:00:00.00 | Mem:0.34M, Peak:0.34M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:13.99M (Peak 14.87M) | Time:00:00.00 | Mem:0.34M, Peak:0.34M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:13.99M (Peak 14.87M) | Time:00:00.00 | Mem:0.34M, Peak:0.34M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:13.99M (Peak 14.87M) | Time:00:00.00 | Mem:0.34M, Peak:0.34M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-basecolor.png
+Fra:1 Mem:14.24M (Peak 14.87M) | Time:00:00.00 | Mem:0.34M, Peak:0.34M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-normal.png
+Fra:1 Mem:14.50M (Peak 14.87M) | Time:00:00.00 | Mem:0.59M, Peak:0.59M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-normal.png
+Fra:1 Mem:14.75M (Peak 14.87M) | Time:00:00.00 | Mem:0.84M, Peak:0.84M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-orm.png
+Fra:1 Mem:15.00M (Peak 15.00M) | Time:00:00.00 | Mem:1.09M, Peak:1.09M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-basecolor.png
+Fra:1 Mem:15.25M (Peak 15.25M) | Time:00:00.00 | Mem:1.34M, Peak:1.34M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-orm.png
+Fra:1 Mem:15.50M (Peak 15.50M) | Time:00:00.00 | Mem:1.84M, Peak:1.84M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:15.50M (Peak 15.50M) | Time:00:00.00 | Mem:1.84M, Peak:1.84M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.50M (Peak 15.50M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:15.50M (Peak 15.50M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:15.50M (Peak 15.50M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:15.50M (Peak 15.50M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:15.50M (Peak 15.50M) | Time:00:00.00 | Mem:1.84M, Peak:1.92M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.50M (Peak 15.50M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:15.50M (Peak 15.50M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:15.50M (Peak 15.50M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Sample 0/12
+Fra:1 Mem:18.04M (Peak 18.04M) | Time:00:00.06 | Remaining:00:00.62 | Mem:4.46M, Peak:4.46M | Scene, ViewLayer | Sample 1/12
+Fra:1 Mem:19.17M (Peak 21.42M) | Time:00:00.67 | Mem:4.46M, Peak:4.46M | Scene, ViewLayer | Sample 12/12
+Fra:1 Mem:19.17M (Peak 21.42M) | Time:00:00.67 | Mem:4.46M, Peak:4.46M | Scene, ViewLayer | Finished
+Saved: '/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/material-consumer-candidates/qa/.coverage-work/03-lecture-chair-module-lod0-top-overcast.png'
+Time: 00:00.69 (Saving: 00:00.00)
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:34:31 | INFO: Data are loaded, start creating Blender stuff
+17:34:31 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-oak-veneer-0
+17:34:31 | INFO: Blender create Mesh node furniture-batch-EXPORT_landmark-brushed-aluminum-1
+17:34:31 | INFO: glTF import finished in 0.00s
+Fra:1 Mem:14.33M (Peak 14.33M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-oak-veneer-0
+Fra:1 Mem:14.33M (Peak 14.33M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Text
+Fra:1 Mem:14.46M (Peak 14.46M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_landmark-brushed-aluminum-1
+Fra:1 Mem:14.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-ground
+Fra:1 Mem:14.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-ruler
+Fra:1 Mem:14.51M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sphere
+Fra:1 Mem:14.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg.001
+Fra:1 Mem:14.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg
+Fra:1 Mem:14.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-body
+Fra:1 Mem:14.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:13.44M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:13.44M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:13.44M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:13.44M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:13.55M (Peak 14.53M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:13.58M (Peak 14.53M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:13.58M (Peak 14.53M) | Time:00:00.00 | Mem:0.04M, Peak:0.04M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:13.58M (Peak 14.53M) | Time:00:00.00 | Mem:0.04M, Peak:0.04M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:13.58M (Peak 14.53M) | Time:00:00.00 | Mem:0.09M, Peak:0.09M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:13.58M (Peak 14.53M) | Time:00:00.00 | Mem:0.15M, Peak:0.20M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:13.58M (Peak 14.53M) | Time:00:00.00 | Mem:0.15M, Peak:0.20M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:13.67M (Peak 14.53M) | Time:00:00.00 | Mem:0.15M, Peak:0.20M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:13.67M (Peak 14.53M) | Time:00:00.00 | Mem:0.24M, Peak:0.24M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:13.67M (Peak 14.53M) | Time:00:00.00 | Mem:0.24M, Peak:0.24M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:13.67M (Peak 14.53M) | Time:00:00.00 | Mem:0.24M, Peak:0.24M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:13.67M (Peak 14.53M) | Time:00:00.00 | Mem:0.24M, Peak:0.24M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-normal.png
+Fra:1 Mem:13.92M (Peak 14.53M) | Time:00:00.00 | Mem:0.24M, Peak:0.24M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-basecolor.png
+Fra:1 Mem:14.18M (Peak 14.53M) | Time:00:00.00 | Mem:0.49M, Peak:0.49M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-basecolor.png
+Fra:1 Mem:14.43M (Peak 14.53M) | Time:00:00.00 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-orm.png
+Fra:1 Mem:14.68M (Peak 14.68M) | Time:00:00.00 | Mem:0.99M, Peak:0.99M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-orm.png
+Fra:1 Mem:14.93M (Peak 14.93M) | Time:00:00.00 | Mem:1.24M, Peak:1.24M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-normal.png
+Fra:1 Mem:15.18M (Peak 15.18M) | Time:00:00.00 | Mem:1.74M, Peak:1.74M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:15.18M (Peak 15.18M) | Time:00:00.00 | Mem:1.74M, Peak:1.74M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.18M (Peak 15.18M) | Time:00:00.00 | Mem:1.82M, Peak:1.82M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:15.18M (Peak 15.18M) | Time:00:00.00 | Mem:1.82M, Peak:1.82M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:15.18M (Peak 15.18M) | Time:00:00.00 | Mem:1.82M, Peak:1.82M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:15.18M (Peak 15.18M) | Time:00:00.00 | Mem:1.82M, Peak:1.82M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:15.19M (Peak 15.19M) | Time:00:00.00 | Mem:1.74M, Peak:1.82M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.19M (Peak 15.19M) | Time:00:00.00 | Mem:1.82M, Peak:1.82M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:15.19M (Peak 15.19M) | Time:00:00.00 | Mem:1.82M, Peak:1.82M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:15.19M (Peak 15.19M) | Time:00:00.00 | Mem:1.82M, Peak:1.82M | Scene, ViewLayer | Sample 0/12
+Fra:1 Mem:17.73M (Peak 17.73M) | Time:00:00.05 | Remaining:00:00.54 | Mem:4.37M, Peak:4.37M | Scene, ViewLayer | Sample 1/12
+Fra:1 Mem:18.85M (Peak 21.10M) | Time:00:00.57 | Mem:4.37M, Peak:4.37M | Scene, ViewLayer | Sample 12/12
+Fra:1 Mem:18.85M (Peak 21.10M) | Time:00:00.57 | Mem:4.37M, Peak:4.37M | Scene, ViewLayer | Finished
+Saved: '/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/material-consumer-candidates/qa/.coverage-work/04-lecture-chair-module-lod1-front-overcast.png'
+Time: 00:00.58 (Saving: 00:00.00)
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:34:32 | INFO: Data are loaded, start creating Blender stuff
+17:34:32 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-oak-veneer-0
+17:34:32 | INFO: Blender create Mesh node furniture-batch-EXPORT_landmark-brushed-aluminum-1
+17:34:32 | INFO: glTF import finished in 0.00s
+Fra:1 Mem:14.33M (Peak 14.33M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-oak-veneer-0
+Fra:1 Mem:14.33M (Peak 14.33M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Text
+Fra:1 Mem:14.46M (Peak 14.46M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_landmark-brushed-aluminum-1
+Fra:1 Mem:14.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-ground
+Fra:1 Mem:14.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-ruler
+Fra:1 Mem:14.51M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-body
+Fra:1 Mem:14.51M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sphere
+Fra:1 Mem:14.51M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg
+Fra:1 Mem:14.52M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg.001
+Fra:1 Mem:14.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:13.44M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:13.44M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:13.44M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:13.44M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:13.56M (Peak 14.53M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:13.59M (Peak 14.53M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:13.58M (Peak 14.53M) | Time:00:00.00 | Mem:0.04M, Peak:0.04M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:13.58M (Peak 14.53M) | Time:00:00.00 | Mem:0.04M, Peak:0.04M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:13.58M (Peak 14.53M) | Time:00:00.00 | Mem:0.09M, Peak:0.09M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:13.58M (Peak 14.53M) | Time:00:00.00 | Mem:0.15M, Peak:0.20M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:13.58M (Peak 14.53M) | Time:00:00.00 | Mem:0.15M, Peak:0.20M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:13.67M (Peak 14.53M) | Time:00:00.00 | Mem:0.15M, Peak:0.20M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:13.67M (Peak 14.53M) | Time:00:00.00 | Mem:0.24M, Peak:0.24M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:13.67M (Peak 14.53M) | Time:00:00.00 | Mem:0.24M, Peak:0.24M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:13.67M (Peak 14.53M) | Time:00:00.00 | Mem:0.24M, Peak:0.24M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:13.67M (Peak 14.53M) | Time:00:00.00 | Mem:0.24M, Peak:0.24M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-normal.png
+Fra:1 Mem:13.92M (Peak 14.53M) | Time:00:00.00 | Mem:0.24M, Peak:0.24M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-basecolor.png
+Fra:1 Mem:14.18M (Peak 14.53M) | Time:00:00.00 | Mem:0.49M, Peak:0.49M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-normal.png
+Fra:1 Mem:14.43M (Peak 14.53M) | Time:00:00.00 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-orm.png
+Fra:1 Mem:14.68M (Peak 14.68M) | Time:00:00.00 | Mem:0.99M, Peak:0.99M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-basecolor.png
+Fra:1 Mem:14.93M (Peak 14.93M) | Time:00:00.00 | Mem:1.24M, Peak:1.24M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-orm.png
+Fra:1 Mem:15.18M (Peak 15.18M) | Time:00:00.00 | Mem:1.74M, Peak:1.74M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:15.18M (Peak 15.18M) | Time:00:00.00 | Mem:1.74M, Peak:1.74M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.18M (Peak 15.18M) | Time:00:00.00 | Mem:1.82M, Peak:1.82M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:15.18M (Peak 15.18M) | Time:00:00.00 | Mem:1.82M, Peak:1.82M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:15.19M (Peak 15.19M) | Time:00:00.00 | Mem:1.82M, Peak:1.82M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:15.19M (Peak 15.19M) | Time:00:00.00 | Mem:1.82M, Peak:1.82M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:15.19M (Peak 15.19M) | Time:00:00.00 | Mem:1.74M, Peak:1.82M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.19M (Peak 15.19M) | Time:00:00.00 | Mem:1.82M, Peak:1.82M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:15.19M (Peak 15.19M) | Time:00:00.00 | Mem:1.82M, Peak:1.82M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:15.19M (Peak 15.19M) | Time:00:00.00 | Mem:1.82M, Peak:1.82M | Scene, ViewLayer | Sample 0/12
+Fra:1 Mem:17.73M (Peak 17.73M) | Time:00:00.04 | Remaining:00:00.45 | Mem:4.37M, Peak:4.37M | Scene, ViewLayer | Sample 1/12
+Fra:1 Mem:18.85M (Peak 21.11M) | Time:00:00.46 | Mem:4.37M, Peak:4.37M | Scene, ViewLayer | Sample 12/12
+Fra:1 Mem:18.85M (Peak 21.11M) | Time:00:00.46 | Mem:4.37M, Peak:4.37M | Scene, ViewLayer | Finished
+Saved: '/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/material-consumer-candidates/qa/.coverage-work/05-lecture-chair-module-lod1-side-overcast.png'
+Time: 00:00.47 (Saving: 00:00.00)
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:34:32 | INFO: Data are loaded, start creating Blender stuff
+17:34:32 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-oak-veneer-0
+17:34:32 | INFO: Blender create Mesh node furniture-batch-EXPORT_landmark-brushed-aluminum-1
+17:34:32 | INFO: glTF import finished in 0.00s
+Fra:1 Mem:14.33M (Peak 14.33M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-oak-veneer-0
+Fra:1 Mem:14.33M (Peak 14.33M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Text
+Fra:1 Mem:14.46M (Peak 14.46M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_landmark-brushed-aluminum-1
+Fra:1 Mem:14.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-ground
+Fra:1 Mem:14.51M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-ruler
+Fra:1 Mem:14.51M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-body
+Fra:1 Mem:14.51M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sphere
+Fra:1 Mem:14.52M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg
+Fra:1 Mem:14.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg.001
+Fra:1 Mem:14.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:13.44M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:13.44M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:13.44M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:13.44M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:13.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:13.56M (Peak 14.53M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:13.59M (Peak 14.53M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:13.58M (Peak 14.53M) | Time:00:00.00 | Mem:0.04M, Peak:0.04M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:13.58M (Peak 14.53M) | Time:00:00.00 | Mem:0.04M, Peak:0.04M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:13.58M (Peak 14.53M) | Time:00:00.00 | Mem:0.09M, Peak:0.09M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:13.58M (Peak 14.53M) | Time:00:00.00 | Mem:0.15M, Peak:0.20M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:13.58M (Peak 14.53M) | Time:00:00.00 | Mem:0.15M, Peak:0.20M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:13.67M (Peak 14.53M) | Time:00:00.00 | Mem:0.15M, Peak:0.20M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:13.67M (Peak 14.53M) | Time:00:00.00 | Mem:0.24M, Peak:0.24M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:13.67M (Peak 14.53M) | Time:00:00.00 | Mem:0.24M, Peak:0.24M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:13.67M (Peak 14.53M) | Time:00:00.00 | Mem:0.24M, Peak:0.24M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:13.67M (Peak 14.53M) | Time:00:00.00 | Mem:0.24M, Peak:0.24M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-normal.png
+Fra:1 Mem:13.92M (Peak 14.53M) | Time:00:00.00 | Mem:0.24M, Peak:0.24M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-basecolor.png
+Fra:1 Mem:14.18M (Peak 14.53M) | Time:00:00.00 | Mem:0.49M, Peak:0.49M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-normal.png
+Fra:1 Mem:14.43M (Peak 14.53M) | Time:00:00.00 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-orm.png
+Fra:1 Mem:14.68M (Peak 14.68M) | Time:00:00.00 | Mem:0.99M, Peak:0.99M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-basecolor.png
+Fra:1 Mem:14.93M (Peak 14.93M) | Time:00:00.00 | Mem:1.24M, Peak:1.24M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-orm.png
+Fra:1 Mem:15.18M (Peak 15.18M) | Time:00:00.00 | Mem:1.74M, Peak:1.74M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:15.18M (Peak 15.18M) | Time:00:00.00 | Mem:1.74M, Peak:1.74M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.18M (Peak 15.18M) | Time:00:00.00 | Mem:1.82M, Peak:1.82M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:15.18M (Peak 15.18M) | Time:00:00.00 | Mem:1.82M, Peak:1.82M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:15.19M (Peak 15.19M) | Time:00:00.00 | Mem:1.82M, Peak:1.82M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:15.19M (Peak 15.19M) | Time:00:00.00 | Mem:1.82M, Peak:1.82M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:15.19M (Peak 15.19M) | Time:00:00.00 | Mem:1.74M, Peak:1.82M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.19M (Peak 15.19M) | Time:00:00.00 | Mem:1.82M, Peak:1.82M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:15.19M (Peak 15.19M) | Time:00:00.00 | Mem:1.82M, Peak:1.82M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:15.19M (Peak 15.19M) | Time:00:00.00 | Mem:1.82M, Peak:1.82M | Scene, ViewLayer | Sample 0/12
+Fra:1 Mem:17.73M (Peak 17.73M) | Time:00:00.04 | Remaining:00:00.44 | Mem:4.37M, Peak:4.37M | Scene, ViewLayer | Sample 1/12
+Fra:1 Mem:18.85M (Peak 21.11M) | Time:00:00.45 | Mem:4.37M, Peak:4.37M | Scene, ViewLayer | Sample 12/12
+Fra:1 Mem:18.85M (Peak 21.11M) | Time:00:00.45 | Mem:4.37M, Peak:4.37M | Scene, ViewLayer | Finished
+Saved: '/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/material-consumer-candidates/qa/.coverage-work/06-lecture-chair-module-lod1-back-overcast.png'
+Time: 00:00.46 (Saving: 00:00.00)
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:34:33 | INFO: Data are loaded, start creating Blender stuff
+17:34:33 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-oak-veneer-0
+17:34:33 | INFO: Blender create Mesh node furniture-batch-EXPORT_landmark-brushed-aluminum-1
+17:34:33 | INFO: glTF import finished in 0.00s
+Fra:1 Mem:14.39M (Peak 14.39M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-oak-veneer-0
+Fra:1 Mem:14.40M (Peak 14.40M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Text
+Fra:1 Mem:14.53M (Peak 14.53M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_landmark-brushed-aluminum-1
+Fra:1 Mem:14.58M (Peak 14.58M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-body
+Fra:1 Mem:14.58M (Peak 14.58M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-ground
+Fra:1 Mem:14.58M (Peak 14.58M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg
+Fra:1 Mem:14.58M (Peak 14.58M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg.001
+Fra:1 Mem:14.58M (Peak 14.58M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-plan-ruler
+Fra:1 Mem:14.58M (Peak 14.58M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sphere
+Fra:1 Mem:14.59M (Peak 14.59M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-ruler
+Fra:1 Mem:14.60M (Peak 14.60M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:13.48M (Peak 14.60M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:13.48M (Peak 14.60M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:13.48M (Peak 14.60M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:13.48M (Peak 14.60M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:13.57M (Peak 14.60M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:13.57M (Peak 14.60M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:13.57M (Peak 14.60M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:13.57M (Peak 14.60M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:13.57M (Peak 14.60M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:13.57M (Peak 14.60M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:13.57M (Peak 14.60M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:13.57M (Peak 14.60M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:13.57M (Peak 14.60M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:13.57M (Peak 14.60M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:13.59M (Peak 14.60M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:13.63M (Peak 14.60M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:13.62M (Peak 14.60M) | Time:00:00.00 | Mem:0.04M, Peak:0.04M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:13.62M (Peak 14.60M) | Time:00:00.00 | Mem:0.04M, Peak:0.04M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:13.62M (Peak 14.60M) | Time:00:00.00 | Mem:0.09M, Peak:0.09M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:13.62M (Peak 14.60M) | Time:00:00.00 | Mem:0.15M, Peak:0.20M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:13.62M (Peak 14.60M) | Time:00:00.00 | Mem:0.15M, Peak:0.20M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:13.71M (Peak 14.60M) | Time:00:00.00 | Mem:0.15M, Peak:0.20M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:13.71M (Peak 14.60M) | Time:00:00.00 | Mem:0.24M, Peak:0.24M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:13.71M (Peak 14.60M) | Time:00:00.00 | Mem:0.24M, Peak:0.24M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:13.71M (Peak 14.60M) | Time:00:00.00 | Mem:0.24M, Peak:0.24M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:13.71M (Peak 14.60M) | Time:00:00.00 | Mem:0.24M, Peak:0.24M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-normal.png
+Fra:1 Mem:13.96M (Peak 14.60M) | Time:00:00.00 | Mem:0.24M, Peak:0.24M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-basecolor.png
+Fra:1 Mem:14.23M (Peak 14.60M) | Time:00:00.00 | Mem:0.49M, Peak:0.49M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-normal.png
+Fra:1 Mem:14.48M (Peak 14.60M) | Time:00:00.00 | Mem:0.74M, Peak:0.74M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-orm.png
+Fra:1 Mem:14.73M (Peak 14.73M) | Time:00:00.00 | Mem:0.99M, Peak:0.99M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-basecolor.png
+Fra:1 Mem:14.98M (Peak 14.98M) | Time:00:00.00 | Mem:1.24M, Peak:1.24M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-orm.png
+Fra:1 Mem:15.23M (Peak 15.23M) | Time:00:00.00 | Mem:1.74M, Peak:1.74M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:15.23M (Peak 15.23M) | Time:00:00.00 | Mem:1.74M, Peak:1.74M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.23M (Peak 15.23M) | Time:00:00.00 | Mem:1.82M, Peak:1.82M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:15.23M (Peak 15.23M) | Time:00:00.00 | Mem:1.82M, Peak:1.82M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:15.23M (Peak 15.23M) | Time:00:00.00 | Mem:1.82M, Peak:1.82M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:15.23M (Peak 15.23M) | Time:00:00.00 | Mem:1.82M, Peak:1.82M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:15.23M (Peak 15.23M) | Time:00:00.00 | Mem:1.74M, Peak:1.82M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.23M (Peak 15.23M) | Time:00:00.00 | Mem:1.83M, Peak:1.83M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:15.23M (Peak 15.23M) | Time:00:00.00 | Mem:1.83M, Peak:1.83M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:15.23M (Peak 15.23M) | Time:00:00.00 | Mem:1.83M, Peak:1.83M | Scene, ViewLayer | Sample 0/12
+Fra:1 Mem:17.77M (Peak 17.77M) | Time:00:00.08 | Remaining:00:00.82 | Mem:4.37M, Peak:4.37M | Scene, ViewLayer | Sample 1/12
+Fra:1 Mem:18.90M (Peak 21.15M) | Time:00:00.68 | Mem:4.37M, Peak:4.37M | Scene, ViewLayer | Sample 12/12
+Fra:1 Mem:18.90M (Peak 21.15M) | Time:00:00.68 | Mem:4.37M, Peak:4.37M | Scene, ViewLayer | Finished
+Saved: '/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/material-consumer-candidates/qa/.coverage-work/07-lecture-chair-module-lod1-top-overcast.png'
+Time: 00:00.69 (Saving: 00:00.00)
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:34:34 | INFO: Data are loaded, start creating Blender stuff
+17:34:34 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-oak-veneer-0
+17:34:34 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-matte-plaster-1
+17:34:34 | INFO: glTF import finished in 0.00s
+Fra:1 Mem:14.33M (Peak 14.33M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-oak-veneer-0
+Fra:1 Mem:14.34M (Peak 14.34M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Text
+Fra:1 Mem:14.49M (Peak 14.49M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-matte-plaster-1
+Fra:1 Mem:14.57M (Peak 14.57M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-ground
+Fra:1 Mem:14.61M (Peak 14.61M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-ruler
+Fra:1 Mem:14.61M (Peak 14.61M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sphere
+Fra:1 Mem:14.63M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg.001
+Fra:1 Mem:14.64M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg
+Fra:1 Mem:14.64M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-body
+Fra:1 Mem:14.59M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:13.52M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:13.52M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:13.52M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:13.52M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:13.61M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:13.61M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:13.61M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:13.61M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:13.61M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:13.61M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:13.61M (Peak 14.64M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:13.61M (Peak 14.64M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:13.61M (Peak 14.64M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:13.61M (Peak 14.64M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:13.64M (Peak 14.64M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:13.69M (Peak 14.64M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:13.69M (Peak 14.64M) | Time:00:00.00 | Mem:0.06M, Peak:0.06M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:13.69M (Peak 14.64M) | Time:00:00.00 | Mem:0.06M, Peak:0.06M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:13.69M (Peak 14.64M) | Time:00:00.00 | Mem:0.12M, Peak:0.12M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:13.69M (Peak 14.64M) | Time:00:00.00 | Mem:0.18M, Peak:0.24M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:13.69M (Peak 14.64M) | Time:00:00.00 | Mem:0.18M, Peak:0.24M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:13.80M (Peak 14.64M) | Time:00:00.00 | Mem:0.18M, Peak:0.24M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:13.80M (Peak 14.64M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:13.80M (Peak 14.64M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:13.80M (Peak 14.64M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:13.80M (Peak 14.64M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-normal.png
+Fra:1 Mem:14.05M (Peak 14.64M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-basecolor.png
+Fra:1 Mem:14.31M (Peak 14.64M) | Time:00:00.00 | Mem:0.55M, Peak:0.55M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-normal.png
+Fra:1 Mem:14.56M (Peak 14.64M) | Time:00:00.00 | Mem:0.80M, Peak:0.80M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-basecolor.png
+Fra:1 Mem:14.81M (Peak 14.81M) | Time:00:00.00 | Mem:1.05M, Peak:1.05M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-orm.png
+Fra:1 Mem:15.06M (Peak 15.06M) | Time:00:00.00 | Mem:1.30M, Peak:1.30M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-orm.png
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.80M, Peak:1.80M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.80M, Peak:1.80M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.80M, Peak:1.88M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Sample 0/12
+Fra:1 Mem:17.86M (Peak 17.86M) | Time:00:00.06 | Remaining:00:00.64 | Mem:4.43M, Peak:4.43M | Scene, ViewLayer | Sample 1/12
+Fra:1 Mem:18.98M (Peak 21.23M) | Time:00:00.66 | Mem:4.43M, Peak:4.43M | Scene, ViewLayer | Sample 12/12
+Fra:1 Mem:18.98M (Peak 21.23M) | Time:00:00.66 | Mem:4.43M, Peak:4.43M | Scene, ViewLayer | Finished
+Saved: '/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/material-consumer-candidates/qa/.coverage-work/08-admissions-counter-module-lod0-front-overcast.png'
+Time: 00:00.66 (Saving: 00:00.00)
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:34:34 | INFO: Data are loaded, start creating Blender stuff
+17:34:34 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-oak-veneer-0
+17:34:34 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-matte-plaster-1
+17:34:34 | INFO: glTF import finished in 0.00s
+Fra:1 Mem:14.34M (Peak 14.34M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-oak-veneer-0
+Fra:1 Mem:14.34M (Peak 14.34M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Text
+Fra:1 Mem:14.52M (Peak 14.52M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-matte-plaster-1
+Fra:1 Mem:14.62M (Peak 14.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-ground
+Fra:1 Mem:14.63M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-ruler
+Fra:1 Mem:14.64M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sphere
+Fra:1 Mem:14.58M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg.001
+Fra:1 Mem:14.59M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg
+Fra:1 Mem:14.63M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-body
+Fra:1 Mem:14.59M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:13.52M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:13.52M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:13.52M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:13.52M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:13.61M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:13.61M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:13.61M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:13.61M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:13.61M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:13.61M (Peak 14.64M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:13.61M (Peak 14.64M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:13.61M (Peak 14.64M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:13.61M (Peak 14.64M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:13.61M (Peak 14.64M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:13.64M (Peak 14.64M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:13.69M (Peak 14.64M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:13.69M (Peak 14.64M) | Time:00:00.00 | Mem:0.06M, Peak:0.06M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:13.69M (Peak 14.64M) | Time:00:00.00 | Mem:0.06M, Peak:0.06M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:13.69M (Peak 14.64M) | Time:00:00.00 | Mem:0.12M, Peak:0.12M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:13.69M (Peak 14.64M) | Time:00:00.00 | Mem:0.18M, Peak:0.24M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:13.69M (Peak 14.64M) | Time:00:00.00 | Mem:0.18M, Peak:0.24M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:13.80M (Peak 14.64M) | Time:00:00.00 | Mem:0.18M, Peak:0.24M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:13.80M (Peak 14.64M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:13.80M (Peak 14.64M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:13.80M (Peak 14.64M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:13.80M (Peak 14.64M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-normal.png
+Fra:1 Mem:14.05M (Peak 14.64M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-basecolor.png
+Fra:1 Mem:14.31M (Peak 14.64M) | Time:00:00.00 | Mem:0.55M, Peak:0.55M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-orm.png
+Fra:1 Mem:14.56M (Peak 14.64M) | Time:00:00.00 | Mem:0.80M, Peak:0.80M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-basecolor.png
+Fra:1 Mem:14.81M (Peak 14.81M) | Time:00:00.00 | Mem:1.05M, Peak:1.05M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-normal.png
+Fra:1 Mem:15.06M (Peak 15.06M) | Time:00:00.00 | Mem:1.30M, Peak:1.30M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-orm.png
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.80M, Peak:1.80M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.80M, Peak:1.80M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.80M, Peak:1.88M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Sample 0/12
+Fra:1 Mem:17.86M (Peak 17.86M) | Time:00:00.05 | Remaining:00:00.53 | Mem:4.43M, Peak:4.43M | Scene, ViewLayer | Sample 1/12
+Fra:1 Mem:18.98M (Peak 21.23M) | Time:00:00.55 | Mem:4.43M, Peak:4.43M | Scene, ViewLayer | Sample 12/12
+Fra:1 Mem:18.98M (Peak 21.23M) | Time:00:00.55 | Mem:4.43M, Peak:4.43M | Scene, ViewLayer | Finished
+Saved: '/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/material-consumer-candidates/qa/.coverage-work/09-admissions-counter-module-lod0-side-overcast.png'
+Time: 00:00.56 (Saving: 00:00.00)
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:34:35 | INFO: Data are loaded, start creating Blender stuff
+17:34:35 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-oak-veneer-0
+17:34:35 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-matte-plaster-1
+17:34:35 | INFO: glTF import finished in 0.00s
+Fra:1 Mem:14.34M (Peak 14.34M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-oak-veneer-0
+Fra:1 Mem:14.34M (Peak 14.34M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Text
+Fra:1 Mem:14.54M (Peak 14.54M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-matte-plaster-1
+Fra:1 Mem:14.62M (Peak 14.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-ground
+Fra:1 Mem:14.62M (Peak 14.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-ruler
+Fra:1 Mem:14.63M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sphere
+Fra:1 Mem:14.57M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg.001
+Fra:1 Mem:14.59M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg
+Fra:1 Mem:14.59M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-body
+Fra:1 Mem:14.59M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:13.52M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:13.52M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:13.52M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:13.52M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:13.64M (Peak 14.63M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:13.69M (Peak 14.63M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:13.69M (Peak 14.63M) | Time:00:00.00 | Mem:0.06M, Peak:0.06M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:13.69M (Peak 14.63M) | Time:00:00.00 | Mem:0.06M, Peak:0.06M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:13.69M (Peak 14.63M) | Time:00:00.00 | Mem:0.12M, Peak:0.12M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:13.69M (Peak 14.63M) | Time:00:00.00 | Mem:0.18M, Peak:0.24M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:13.69M (Peak 14.63M) | Time:00:00.00 | Mem:0.18M, Peak:0.24M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:13.80M (Peak 14.63M) | Time:00:00.00 | Mem:0.18M, Peak:0.24M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:13.80M (Peak 14.63M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:13.80M (Peak 14.63M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:13.80M (Peak 14.63M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:13.80M (Peak 14.63M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-normal.png
+Fra:1 Mem:14.05M (Peak 14.63M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-basecolor.png
+Fra:1 Mem:14.31M (Peak 14.63M) | Time:00:00.00 | Mem:0.55M, Peak:0.55M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-normal.png
+Fra:1 Mem:14.56M (Peak 14.63M) | Time:00:00.00 | Mem:0.80M, Peak:0.80M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-basecolor.png
+Fra:1 Mem:14.81M (Peak 14.81M) | Time:00:00.00 | Mem:1.05M, Peak:1.05M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-orm.png
+Fra:1 Mem:15.06M (Peak 15.06M) | Time:00:00.00 | Mem:1.30M, Peak:1.30M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-orm.png
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.80M, Peak:1.80M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.80M, Peak:1.80M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.80M, Peak:1.88M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Sample 0/12
+Fra:1 Mem:17.86M (Peak 17.86M) | Time:00:00.05 | Remaining:00:00.57 | Mem:4.43M, Peak:4.43M | Scene, ViewLayer | Sample 1/12
+Fra:1 Mem:18.98M (Peak 21.23M) | Time:00:00.59 | Mem:4.43M, Peak:4.43M | Scene, ViewLayer | Sample 12/12
+Fra:1 Mem:18.98M (Peak 21.23M) | Time:00:00.59 | Mem:4.43M, Peak:4.43M | Scene, ViewLayer | Finished
+Saved: '/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/material-consumer-candidates/qa/.coverage-work/10-admissions-counter-module-lod0-back-overcast.png'
+Time: 00:00.60 (Saving: 00:00.00)
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:34:36 | INFO: Data are loaded, start creating Blender stuff
+17:34:36 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-oak-veneer-0
+17:34:36 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-matte-plaster-1
+17:34:36 | INFO: glTF import finished in 0.00s
+Fra:1 Mem:14.40M (Peak 14.40M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-oak-veneer-0
+Fra:1 Mem:14.41M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Text
+Fra:1 Mem:14.58M (Peak 14.58M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-matte-plaster-1
+Fra:1 Mem:14.70M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-ground
+Fra:1 Mem:14.70M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-plan-ruler
+Fra:1 Mem:14.62M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-ruler
+Fra:1 Mem:14.63M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sphere
+Fra:1 Mem:14.66M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg.001
+Fra:1 Mem:14.69M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg
+Fra:1 Mem:14.70M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-body
+Fra:1 Mem:14.66M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:13.56M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:13.56M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:13.56M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:13.56M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:13.65M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:13.65M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:13.65M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:13.65M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:13.65M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:13.65M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:13.65M (Peak 14.70M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:13.65M (Peak 14.70M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:13.65M (Peak 14.70M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:13.65M (Peak 14.70M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:13.68M (Peak 14.70M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:13.73M (Peak 14.70M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:13.73M (Peak 14.70M) | Time:00:00.00 | Mem:0.06M, Peak:0.06M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:13.73M (Peak 14.70M) | Time:00:00.00 | Mem:0.06M, Peak:0.06M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:13.73M (Peak 14.70M) | Time:00:00.00 | Mem:0.12M, Peak:0.12M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:13.73M (Peak 14.70M) | Time:00:00.00 | Mem:0.19M, Peak:0.25M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:13.73M (Peak 14.70M) | Time:00:00.00 | Mem:0.19M, Peak:0.25M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:13.84M (Peak 14.70M) | Time:00:00.00 | Mem:0.19M, Peak:0.25M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:13.84M (Peak 14.70M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:13.84M (Peak 14.70M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:13.84M (Peak 14.70M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:13.84M (Peak 14.70M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-normal.png
+Fra:1 Mem:14.09M (Peak 14.70M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-basecolor.png
+Fra:1 Mem:14.35M (Peak 14.70M) | Time:00:00.00 | Mem:0.55M, Peak:0.55M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-basecolor.png
+Fra:1 Mem:14.60M (Peak 14.70M) | Time:00:00.00 | Mem:0.80M, Peak:0.80M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-orm.png
+Fra:1 Mem:14.85M (Peak 14.85M) | Time:00:00.00 | Mem:1.05M, Peak:1.05M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-normal.png
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.30M, Peak:1.30M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-orm.png
+Fra:1 Mem:15.35M (Peak 15.35M) | Time:00:00.00 | Mem:1.80M, Peak:1.80M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:15.35M (Peak 15.35M) | Time:00:00.00 | Mem:1.80M, Peak:1.80M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.35M (Peak 15.35M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:15.35M (Peak 15.35M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:15.35M (Peak 15.35M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:15.35M (Peak 15.35M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:15.36M (Peak 15.36M) | Time:00:00.00 | Mem:1.80M, Peak:1.88M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.36M (Peak 15.36M) | Time:00:00.00 | Mem:1.89M, Peak:1.89M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:15.36M (Peak 15.36M) | Time:00:00.00 | Mem:1.89M, Peak:1.89M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:15.36M (Peak 15.36M) | Time:00:00.00 | Mem:1.89M, Peak:1.89M | Scene, ViewLayer | Sample 0/12
+Fra:1 Mem:17.90M (Peak 17.90M) | Time:00:00.08 | Remaining:00:00.81 | Mem:4.43M, Peak:4.43M | Scene, ViewLayer | Sample 1/12
+Fra:1 Mem:19.02M (Peak 21.27M) | Time:00:00.79 | Mem:4.43M, Peak:4.43M | Scene, ViewLayer | Sample 12/12
+Fra:1 Mem:19.02M (Peak 21.27M) | Time:00:00.79 | Mem:4.43M, Peak:4.43M | Scene, ViewLayer | Finished
+Saved: '/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/material-consumer-candidates/qa/.coverage-work/11-admissions-counter-module-lod0-top-overcast.png'
+Time: 00:00.80 (Saving: 00:00.00)
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:34:36 | INFO: Data are loaded, start creating Blender stuff
+17:34:36 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-oak-veneer-0
+17:34:36 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-matte-plaster-1
+17:34:36 | INFO: glTF import finished in 0.00s
+Fra:1 Mem:14.21M (Peak 14.21M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-oak-veneer-0
+Fra:1 Mem:14.22M (Peak 14.22M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Text
+Fra:1 Mem:14.35M (Peak 14.35M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-matte-plaster-1
+Fra:1 Mem:14.39M (Peak 14.39M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-body
+Fra:1 Mem:14.39M (Peak 14.39M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg
+Fra:1 Mem:14.39M (Peak 14.39M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg.001
+Fra:1 Mem:14.39M (Peak 14.39M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-ground
+Fra:1 Mem:14.39M (Peak 14.39M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sphere
+Fra:1 Mem:14.39M (Peak 14.39M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-ruler
+Fra:1 Mem:14.41M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:13.36M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:13.36M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:13.36M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:13.36M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:13.48M (Peak 14.41M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:13.50M (Peak 14.41M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:13.50M (Peak 14.41M) | Time:00:00.00 | Mem:0.03M, Peak:0.03M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:13.50M (Peak 14.41M) | Time:00:00.00 | Mem:0.03M, Peak:0.03M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:13.50M (Peak 14.41M) | Time:00:00.00 | Mem:0.08M, Peak:0.08M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:13.50M (Peak 14.41M) | Time:00:00.00 | Mem:0.14M, Peak:0.19M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:13.50M (Peak 14.41M) | Time:00:00.00 | Mem:0.14M, Peak:0.19M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:13.59M (Peak 14.41M) | Time:00:00.00 | Mem:0.14M, Peak:0.19M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:13.59M (Peak 14.41M) | Time:00:00.00 | Mem:0.22M, Peak:0.22M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:13.59M (Peak 14.41M) | Time:00:00.00 | Mem:0.22M, Peak:0.22M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:13.59M (Peak 14.41M) | Time:00:00.00 | Mem:0.22M, Peak:0.22M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:13.59M (Peak 14.41M) | Time:00:00.00 | Mem:0.22M, Peak:0.22M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-normal.png
+Fra:1 Mem:13.84M (Peak 14.41M) | Time:00:00.00 | Mem:0.22M, Peak:0.22M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-basecolor.png
+Fra:1 Mem:14.10M (Peak 14.41M) | Time:00:00.00 | Mem:0.47M, Peak:0.47M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-orm.png
+Fra:1 Mem:14.35M (Peak 14.41M) | Time:00:00.00 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-orm.png
+Fra:1 Mem:14.60M (Peak 14.60M) | Time:00:00.00 | Mem:0.97M, Peak:0.97M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-normal.png
+Fra:1 Mem:14.85M (Peak 14.85M) | Time:00:00.00 | Mem:1.22M, Peak:1.22M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-basecolor.png
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.72M, Peak:1.72M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.72M, Peak:1.72M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.80M, Peak:1.80M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.80M, Peak:1.80M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.81M, Peak:1.81M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.81M, Peak:1.81M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.72M, Peak:1.81M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.81M, Peak:1.81M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.81M, Peak:1.81M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.81M, Peak:1.81M | Scene, ViewLayer | Sample 0/12
+Fra:1 Mem:17.64M (Peak 17.64M) | Time:00:00.06 | Remaining:00:00.62 | Mem:4.35M, Peak:4.35M | Scene, ViewLayer | Sample 1/12
+Fra:1 Mem:18.77M (Peak 21.02M) | Time:00:00.64 | Mem:4.35M, Peak:4.35M | Scene, ViewLayer | Sample 12/12
+Fra:1 Mem:18.77M (Peak 21.02M) | Time:00:00.64 | Mem:4.35M, Peak:4.35M | Scene, ViewLayer | Finished
+Saved: '/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/material-consumer-candidates/qa/.coverage-work/12-admissions-counter-module-lod1-front-overcast.png'
+Time: 00:00.65 (Saving: 00:00.00)
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:34:37 | INFO: Data are loaded, start creating Blender stuff
+17:34:37 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-oak-veneer-0
+17:34:37 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-matte-plaster-1
+17:34:37 | INFO: glTF import finished in 0.00s
+Fra:1 Mem:14.21M (Peak 14.21M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-oak-veneer-0
+Fra:1 Mem:14.22M (Peak 14.22M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Text
+Fra:1 Mem:14.35M (Peak 14.35M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-matte-plaster-1
+Fra:1 Mem:14.39M (Peak 14.39M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-body
+Fra:1 Mem:14.41M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg
+Fra:1 Mem:14.39M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg.001
+Fra:1 Mem:14.39M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sphere
+Fra:1 Mem:14.40M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-ground
+Fra:1 Mem:14.41M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-ruler
+Fra:1 Mem:14.41M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:13.36M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:13.36M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:13.36M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:13.36M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:13.48M (Peak 14.41M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:13.50M (Peak 14.41M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:13.50M (Peak 14.41M) | Time:00:00.00 | Mem:0.03M, Peak:0.03M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:13.50M (Peak 14.41M) | Time:00:00.00 | Mem:0.03M, Peak:0.03M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:13.50M (Peak 14.41M) | Time:00:00.00 | Mem:0.08M, Peak:0.08M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:13.50M (Peak 14.41M) | Time:00:00.00 | Mem:0.14M, Peak:0.20M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:13.50M (Peak 14.41M) | Time:00:00.00 | Mem:0.14M, Peak:0.20M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:13.59M (Peak 14.41M) | Time:00:00.00 | Mem:0.14M, Peak:0.20M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:13.59M (Peak 14.41M) | Time:00:00.00 | Mem:0.23M, Peak:0.23M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:13.59M (Peak 14.41M) | Time:00:00.00 | Mem:0.23M, Peak:0.23M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:13.59M (Peak 14.41M) | Time:00:00.00 | Mem:0.23M, Peak:0.23M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:13.59M (Peak 14.41M) | Time:00:00.00 | Mem:0.23M, Peak:0.23M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-normal.png
+Fra:1 Mem:13.84M (Peak 14.41M) | Time:00:00.00 | Mem:0.23M, Peak:0.23M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-basecolor.png
+Fra:1 Mem:14.10M (Peak 14.41M) | Time:00:00.00 | Mem:0.48M, Peak:0.48M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-normal.png
+Fra:1 Mem:14.35M (Peak 14.41M) | Time:00:00.00 | Mem:0.73M, Peak:0.73M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-basecolor.png
+Fra:1 Mem:14.60M (Peak 14.60M) | Time:00:00.00 | Mem:0.98M, Peak:0.98M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-orm.png
+Fra:1 Mem:14.85M (Peak 14.85M) | Time:00:00.00 | Mem:1.23M, Peak:1.23M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-orm.png
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.73M, Peak:1.73M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.73M, Peak:1.73M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.81M, Peak:1.81M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.81M, Peak:1.81M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.81M, Peak:1.81M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.81M, Peak:1.81M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.73M, Peak:1.81M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.81M, Peak:1.81M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.81M, Peak:1.81M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.81M, Peak:1.81M | Scene, ViewLayer | Sample 0/12
+Fra:1 Mem:17.64M (Peak 17.64M) | Time:00:00.05 | Remaining:00:00.52 | Mem:4.36M, Peak:4.36M | Scene, ViewLayer | Sample 1/12
+Fra:1 Mem:18.77M (Peak 21.02M) | Time:00:00.53 | Mem:4.36M, Peak:4.36M | Scene, ViewLayer | Sample 12/12
+Fra:1 Mem:18.77M (Peak 21.02M) | Time:00:00.53 | Mem:4.36M, Peak:4.36M | Scene, ViewLayer | Finished
+Saved: '/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/material-consumer-candidates/qa/.coverage-work/13-admissions-counter-module-lod1-side-overcast.png'
+Time: 00:00.54 (Saving: 00:00.00)
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:34:38 | INFO: Data are loaded, start creating Blender stuff
+17:34:38 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-oak-veneer-0
+17:34:38 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-matte-plaster-1
+17:34:38 | INFO: glTF import finished in 0.00s
+Fra:1 Mem:14.21M (Peak 14.21M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-oak-veneer-0
+Fra:1 Mem:14.22M (Peak 14.22M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Text
+Fra:1 Mem:14.35M (Peak 14.35M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-matte-plaster-1
+Fra:1 Mem:14.41M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-body
+Fra:1 Mem:14.39M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg
+Fra:1 Mem:14.39M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg.001
+Fra:1 Mem:14.39M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sphere
+Fra:1 Mem:14.39M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-ground
+Fra:1 Mem:14.40M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-ruler
+Fra:1 Mem:14.41M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:13.36M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:13.36M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:13.36M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:13.36M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:13.45M (Peak 14.41M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:13.48M (Peak 14.41M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:13.50M (Peak 14.41M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:13.50M (Peak 14.41M) | Time:00:00.00 | Mem:0.03M, Peak:0.03M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:13.50M (Peak 14.41M) | Time:00:00.00 | Mem:0.03M, Peak:0.03M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:13.50M (Peak 14.41M) | Time:00:00.00 | Mem:0.08M, Peak:0.08M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:13.50M (Peak 14.41M) | Time:00:00.00 | Mem:0.14M, Peak:0.19M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:13.50M (Peak 14.41M) | Time:00:00.00 | Mem:0.14M, Peak:0.19M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:13.59M (Peak 14.41M) | Time:00:00.00 | Mem:0.14M, Peak:0.19M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:13.59M (Peak 14.41M) | Time:00:00.00 | Mem:0.22M, Peak:0.22M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:13.59M (Peak 14.41M) | Time:00:00.00 | Mem:0.22M, Peak:0.22M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:13.59M (Peak 14.41M) | Time:00:00.00 | Mem:0.22M, Peak:0.22M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:13.59M (Peak 14.41M) | Time:00:00.00 | Mem:0.22M, Peak:0.22M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-normal.png
+Fra:1 Mem:13.84M (Peak 14.41M) | Time:00:00.00 | Mem:0.22M, Peak:0.22M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-basecolor.png
+Fra:1 Mem:14.10M (Peak 14.41M) | Time:00:00.00 | Mem:0.47M, Peak:0.47M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-normal.png
+Fra:1 Mem:14.35M (Peak 14.41M) | Time:00:00.00 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-basecolor.png
+Fra:1 Mem:14.60M (Peak 14.60M) | Time:00:00.00 | Mem:0.97M, Peak:0.97M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-orm.png
+Fra:1 Mem:14.85M (Peak 14.85M) | Time:00:00.00 | Mem:1.22M, Peak:1.22M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-orm.png
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.72M, Peak:1.72M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.72M, Peak:1.72M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.80M, Peak:1.80M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.80M, Peak:1.80M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.81M, Peak:1.81M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.81M, Peak:1.81M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.72M, Peak:1.81M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.81M, Peak:1.81M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.81M, Peak:1.81M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:15.10M (Peak 15.10M) | Time:00:00.00 | Mem:1.81M, Peak:1.81M | Scene, ViewLayer | Sample 0/12
+Fra:1 Mem:17.64M (Peak 17.64M) | Time:00:00.06 | Remaining:00:00.59 | Mem:4.35M, Peak:4.35M | Scene, ViewLayer | Sample 1/12
+Fra:1 Mem:18.77M (Peak 21.02M) | Time:00:00.60 | Mem:4.35M, Peak:4.35M | Scene, ViewLayer | Sample 12/12
+Fra:1 Mem:18.77M (Peak 21.02M) | Time:00:00.60 | Mem:4.35M, Peak:4.35M | Scene, ViewLayer | Finished
+Saved: '/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/material-consumer-candidates/qa/.coverage-work/14-admissions-counter-module-lod1-back-overcast.png'
+Time: 00:00.61 (Saving: 00:00.00)
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:34:38 | INFO: Data are loaded, start creating Blender stuff
+17:34:38 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-oak-veneer-0
+17:34:38 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-matte-plaster-1
+17:34:38 | INFO: glTF import finished in 0.00s
+Fra:1 Mem:14.29M (Peak 14.29M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-oak-veneer-0
+Fra:1 Mem:14.29M (Peak 14.29M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Text
+Fra:1 Mem:14.43M (Peak 14.43M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-matte-plaster-1
+Fra:1 Mem:14.48M (Peak 14.48M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-body
+Fra:1 Mem:14.46M (Peak 14.48M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg
+Fra:1 Mem:14.46M (Peak 14.48M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg.001
+Fra:1 Mem:14.46M (Peak 14.48M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-ground
+Fra:1 Mem:14.47M (Peak 14.48M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-plan-ruler
+Fra:1 Mem:14.47M (Peak 14.48M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-ruler
+Fra:1 Mem:14.47M (Peak 14.48M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sphere
+Fra:1 Mem:14.48M (Peak 14.48M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:13.41M (Peak 14.48M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:13.41M (Peak 14.48M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:13.41M (Peak 14.48M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:13.41M (Peak 14.48M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:13.49M (Peak 14.48M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:13.49M (Peak 14.48M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:13.49M (Peak 14.48M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:13.49M (Peak 14.48M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:13.49M (Peak 14.48M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:13.49M (Peak 14.48M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:13.50M (Peak 14.48M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:13.50M (Peak 14.48M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:13.50M (Peak 14.48M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:13.50M (Peak 14.48M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:13.52M (Peak 14.48M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:13.55M (Peak 14.48M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:13.55M (Peak 14.48M) | Time:00:00.00 | Mem:0.03M, Peak:0.03M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:13.55M (Peak 14.48M) | Time:00:00.00 | Mem:0.03M, Peak:0.03M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:13.55M (Peak 14.48M) | Time:00:00.00 | Mem:0.08M, Peak:0.08M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:13.55M (Peak 14.48M) | Time:00:00.00 | Mem:0.14M, Peak:0.19M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:13.55M (Peak 14.48M) | Time:00:00.00 | Mem:0.14M, Peak:0.19M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:13.63M (Peak 14.48M) | Time:00:00.00 | Mem:0.14M, Peak:0.19M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:13.63M (Peak 14.48M) | Time:00:00.00 | Mem:0.22M, Peak:0.22M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:13.63M (Peak 14.48M) | Time:00:00.00 | Mem:0.22M, Peak:0.22M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:13.63M (Peak 14.48M) | Time:00:00.00 | Mem:0.22M, Peak:0.22M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:13.63M (Peak 14.48M) | Time:00:00.00 | Mem:0.22M, Peak:0.22M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-basecolor.png
+Fra:1 Mem:14.15M (Peak 14.48M) | Time:00:00.00 | Mem:0.47M, Peak:0.47M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-normal.png
+Fra:1 Mem:14.40M (Peak 14.48M) | Time:00:00.00 | Mem:0.72M, Peak:0.72M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-basecolor.png
+Fra:1 Mem:14.65M (Peak 14.65M) | Time:00:00.00 | Mem:0.97M, Peak:0.97M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-orm.png
+Fra:1 Mem:14.90M (Peak 14.90M) | Time:00:00.00 | Mem:1.22M, Peak:1.22M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-orm.png
+Fra:1 Mem:15.15M (Peak 15.15M) | Time:00:00.00 | Mem:1.72M, Peak:1.72M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:15.15M (Peak 15.15M) | Time:00:00.00 | Mem:1.72M, Peak:1.72M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.15M (Peak 15.15M) | Time:00:00.00 | Mem:1.81M, Peak:1.81M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:15.15M (Peak 15.15M) | Time:00:00.00 | Mem:1.81M, Peak:1.81M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:15.15M (Peak 15.15M) | Time:00:00.00 | Mem:1.81M, Peak:1.81M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:15.15M (Peak 15.15M) | Time:00:00.00 | Mem:1.81M, Peak:1.81M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:15.15M (Peak 15.15M) | Time:00:00.00 | Mem:1.72M, Peak:1.81M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.15M (Peak 15.15M) | Time:00:00.00 | Mem:1.81M, Peak:1.81M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:15.15M (Peak 15.15M) | Time:00:00.00 | Mem:1.81M, Peak:1.81M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:15.15M (Peak 15.15M) | Time:00:00.00 | Mem:1.81M, Peak:1.81M | Scene, ViewLayer | Sample 0/12
+Fra:1 Mem:17.69M (Peak 17.69M) | Time:00:00.07 | Remaining:00:00.73 | Mem:4.35M, Peak:4.35M | Scene, ViewLayer | Sample 1/12
+Fra:1 Mem:18.82M (Peak 21.07M) | Time:00:00.77 | Mem:4.35M, Peak:4.35M | Scene, ViewLayer | Sample 12/12
+Fra:1 Mem:18.82M (Peak 21.07M) | Time:00:00.77 | Mem:4.35M, Peak:4.35M | Scene, ViewLayer | Finished
+Saved: '/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/material-consumer-candidates/qa/.coverage-work/15-admissions-counter-module-lod1-top-overcast.png'
+Time: 00:00.78 (Saving: 00:00.01)
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:34:39 | INFO: Data are loaded, start creating Blender stuff
+17:34:39 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-oak-veneer-0
+17:34:39 | INFO: Blender create Mesh node furniture-batch-EXPORT_landmark-brushed-aluminum-1
+17:34:39 | INFO: glTF import finished in 0.00s
+Fra:1 Mem:14.46M (Peak 14.46M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-oak-veneer-0
+Fra:1 Mem:14.46M (Peak 14.46M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Text
+Fra:1 Mem:14.70M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-ground
+Fra:1 Mem:14.70M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-ruler
+Fra:1 Mem:14.70M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sphere
+Fra:1 Mem:14.69M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg.001
+Fra:1 Mem:14.68M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_landmark-brushed-aluminum-1
+Fra:1 Mem:14.68M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg
+Fra:1 Mem:14.68M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-body
+Fra:1 Mem:14.75M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:13.63M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:13.64M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:13.64M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:13.64M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:13.76M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.07M, Peak:0.07M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.07M, Peak:0.07M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.13M, Peak:0.13M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.21M, Peak:0.27M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.21M, Peak:0.27M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:13.95M (Peak 14.75M) | Time:00:00.00 | Mem:0.21M, Peak:0.27M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:13.95M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:13.95M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:13.95M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:13.95M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-normal.png
+Fra:1 Mem:14.20M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-basecolor.png
+Fra:1 Mem:14.46M (Peak 14.75M) | Time:00:00.00 | Mem:0.58M, Peak:0.58M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-normal.png
+Fra:1 Mem:14.71M (Peak 14.75M) | Time:00:00.00 | Mem:0.83M, Peak:0.83M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-orm.png
+Fra:1 Mem:14.96M (Peak 14.96M) | Time:00:00.00 | Mem:1.08M, Peak:1.08M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-basecolor.png
+Fra:1 Mem:15.21M (Peak 15.21M) | Time:00:00.00 | Mem:1.33M, Peak:1.33M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-orm.png
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.83M, Peak:1.83M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.83M, Peak:1.83M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.84M, Peak:1.92M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Sample 0/12
+Fra:1 Mem:18.00M (Peak 18.00M) | Time:00:00.06 | Remaining:00:00.62 | Mem:4.46M, Peak:4.46M | Scene, ViewLayer | Sample 1/12
+Fra:1 Mem:19.13M (Peak 21.38M) | Time:00:00.65 | Mem:4.46M, Peak:4.46M | Scene, ViewLayer | Sample 12/12
+Fra:1 Mem:19.13M (Peak 21.38M) | Time:00:00.65 | Mem:4.46M, Peak:4.46M | Scene, ViewLayer | Finished
+Saved: '/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/material-consumer-candidates/qa/.coverage-work/16-lecture-chair-module-lod0-perspective-clear.png'
+Time: 00:00.66 (Saving: 00:00.01)
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:34:40 | INFO: Data are loaded, start creating Blender stuff
+17:34:40 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-oak-veneer-0
+17:34:40 | INFO: Blender create Mesh node furniture-batch-EXPORT_landmark-brushed-aluminum-1
+17:34:40 | INFO: glTF import finished in 0.00s
+Fra:1 Mem:14.46M (Peak 14.46M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-oak-veneer-0
+Fra:1 Mem:14.46M (Peak 14.46M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Text
+Fra:1 Mem:14.70M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-ground
+Fra:1 Mem:14.70M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-ruler
+Fra:1 Mem:14.70M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sphere
+Fra:1 Mem:14.72M (Peak 14.72M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg.001
+Fra:1 Mem:14.72M (Peak 14.72M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg
+Fra:1 Mem:14.69M (Peak 14.72M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-body
+Fra:1 Mem:14.68M (Peak 14.72M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_landmark-brushed-aluminum-1
+Fra:1 Mem:14.75M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:13.63M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:13.64M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:13.64M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:13.64M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:13.76M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.07M, Peak:0.07M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.07M, Peak:0.07M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.13M, Peak:0.13M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.21M, Peak:0.27M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.21M, Peak:0.27M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:13.95M (Peak 14.75M) | Time:00:00.00 | Mem:0.21M, Peak:0.27M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:13.95M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:13.95M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:13.95M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:13.95M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-basecolor.png
+Fra:1 Mem:14.46M (Peak 14.75M) | Time:00:00.00 | Mem:0.58M, Peak:0.58M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-normal.png
+Fra:1 Mem:14.71M (Peak 14.75M) | Time:00:00.00 | Mem:0.83M, Peak:0.83M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-basecolor.png
+Fra:1 Mem:14.96M (Peak 14.96M) | Time:00:00.00 | Mem:1.08M, Peak:1.08M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-orm.png
+Fra:1 Mem:15.21M (Peak 15.21M) | Time:00:00.00 | Mem:1.33M, Peak:1.33M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-orm.png
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.83M, Peak:1.83M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.83M, Peak:1.83M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.84M, Peak:1.92M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Sample 0/12
+Fra:1 Mem:18.00M (Peak 18.00M) | Time:00:00.07 | Remaining:00:00.71 | Mem:4.46M, Peak:4.46M | Scene, ViewLayer | Sample 1/12
+Fra:1 Mem:19.13M (Peak 21.38M) | Time:00:00.75 | Mem:4.46M, Peak:4.46M | Scene, ViewLayer | Sample 12/12
+Fra:1 Mem:19.13M (Peak 21.38M) | Time:00:00.75 | Mem:4.46M, Peak:4.46M | Scene, ViewLayer | Finished
+Saved: '/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/material-consumer-candidates/qa/.coverage-work/17-lecture-chair-module-lod0-perspective-overcast.png'
+Time: 00:00.76 (Saving: 00:00.00)
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:34:41 | INFO: Data are loaded, start creating Blender stuff
+17:34:41 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-oak-veneer-0
+17:34:41 | INFO: Blender create Mesh node furniture-batch-EXPORT_landmark-brushed-aluminum-1
+17:34:41 | INFO: glTF import finished in 0.00s
+Fra:1 Mem:14.46M (Peak 14.46M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-oak-veneer-0
+Fra:1 Mem:14.46M (Peak 14.46M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Text
+Fra:1 Mem:14.70M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-ground
+Fra:1 Mem:14.66M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-ruler
+Fra:1 Mem:14.67M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sphere
+Fra:1 Mem:14.67M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_landmark-brushed-aluminum-1
+Fra:1 Mem:14.69M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg.001
+Fra:1 Mem:14.69M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg
+Fra:1 Mem:14.80M (Peak 14.80M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-body
+Fra:1 Mem:14.75M (Peak 14.80M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:13.63M (Peak 14.80M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:13.64M (Peak 14.80M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:13.64M (Peak 14.80M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:13.64M (Peak 14.80M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:13.72M (Peak 14.80M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:13.72M (Peak 14.80M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:13.72M (Peak 14.80M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:13.72M (Peak 14.80M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:13.72M (Peak 14.80M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:13.72M (Peak 14.80M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:13.72M (Peak 14.80M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:13.72M (Peak 14.80M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:13.72M (Peak 14.80M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:13.72M (Peak 14.80M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:13.76M (Peak 14.80M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:13.82M (Peak 14.80M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:13.82M (Peak 14.80M) | Time:00:00.00 | Mem:0.07M, Peak:0.07M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:13.82M (Peak 14.80M) | Time:00:00.00 | Mem:0.07M, Peak:0.07M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:13.82M (Peak 14.80M) | Time:00:00.00 | Mem:0.13M, Peak:0.13M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:13.82M (Peak 14.80M) | Time:00:00.00 | Mem:0.21M, Peak:0.27M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:13.82M (Peak 14.80M) | Time:00:00.00 | Mem:0.21M, Peak:0.27M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:13.95M (Peak 14.80M) | Time:00:00.00 | Mem:0.21M, Peak:0.27M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:13.95M (Peak 14.80M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:13.95M (Peak 14.80M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:13.95M (Peak 14.80M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:13.95M (Peak 14.80M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-normal.png
+Fra:1 Mem:14.20M (Peak 14.80M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-basecolor.png
+Fra:1 Mem:14.46M (Peak 14.80M) | Time:00:00.00 | Mem:0.58M, Peak:0.58M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-orm.png
+Fra:1 Mem:14.71M (Peak 14.80M) | Time:00:00.00 | Mem:0.83M, Peak:0.83M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-basecolor.png
+Fra:1 Mem:14.96M (Peak 14.96M) | Time:00:00.00 | Mem:1.08M, Peak:1.08M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-normal.png
+Fra:1 Mem:15.21M (Peak 15.21M) | Time:00:00.00 | Mem:1.33M, Peak:1.33M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-orm.png
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.83M, Peak:1.83M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.83M, Peak:1.83M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.84M, Peak:1.92M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Sample 0/12
+Fra:1 Mem:18.00M (Peak 18.00M) | Time:00:00.06 | Remaining:00:00.65 | Mem:4.46M, Peak:4.46M | Scene, ViewLayer | Sample 1/12
+Fra:1 Mem:19.13M (Peak 21.38M) | Time:00:00.65 | Mem:4.46M, Peak:4.46M | Scene, ViewLayer | Sample 12/12
+Fra:1 Mem:19.13M (Peak 21.38M) | Time:00:00.65 | Mem:4.46M, Peak:4.46M | Scene, ViewLayer | Finished
+Saved: '/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/material-consumer-candidates/qa/.coverage-work/18-lecture-chair-module-lod0-perspective-dusk.png'
+Time: 00:00.67 (Saving: 00:00.00)
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:34:42 | INFO: Data are loaded, start creating Blender stuff
+17:34:42 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-oak-veneer-0
+17:34:42 | INFO: Blender create Mesh node furniture-batch-EXPORT_landmark-brushed-aluminum-1
+17:34:42 | INFO: glTF import finished in 0.00s
+Fra:1 Mem:14.46M (Peak 14.46M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-oak-veneer-0
+Fra:1 Mem:14.46M (Peak 14.46M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Text
+Fra:1 Mem:14.70M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-ground
+Fra:1 Mem:14.70M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-ruler
+Fra:1 Mem:14.70M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sphere
+Fra:1 Mem:14.68M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_landmark-brushed-aluminum-1
+Fra:1 Mem:14.68M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg.001
+Fra:1 Mem:14.69M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg
+Fra:1 Mem:14.70M (Peak 14.70M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-body
+Fra:1 Mem:14.75M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:13.63M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:13.64M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:13.64M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:13.64M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:13.72M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:13.76M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.07M, Peak:0.07M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.07M, Peak:0.07M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.13M, Peak:0.13M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.21M, Peak:0.27M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:13.82M (Peak 14.75M) | Time:00:00.00 | Mem:0.21M, Peak:0.27M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:13.95M (Peak 14.75M) | Time:00:00.00 | Mem:0.21M, Peak:0.27M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:13.95M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:13.95M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:13.95M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:13.95M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-normal.png
+Fra:1 Mem:14.20M (Peak 14.75M) | Time:00:00.00 | Mem:0.33M, Peak:0.33M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-basecolor.png
+Fra:1 Mem:14.46M (Peak 14.75M) | Time:00:00.00 | Mem:0.58M, Peak:0.58M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-normal.png
+Fra:1 Mem:14.71M (Peak 14.75M) | Time:00:00.00 | Mem:0.83M, Peak:0.83M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-basecolor.png
+Fra:1 Mem:14.96M (Peak 14.96M) | Time:00:00.00 | Mem:1.08M, Peak:1.08M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-orm.png
+Fra:1 Mem:15.21M (Peak 15.21M) | Time:00:00.00 | Mem:1.33M, Peak:1.33M | Scene, ViewLayer | Updating Images | Loading landmark-brushed-aluminum-orm.png
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.83M, Peak:1.83M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.83M, Peak:1.83M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.84M, Peak:1.92M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:15.46M (Peak 15.46M) | Time:00:00.00 | Mem:1.92M, Peak:1.92M | Scene, ViewLayer | Sample 0/12
+Fra:1 Mem:18.00M (Peak 18.00M) | Time:00:00.06 | Remaining:00:00.62 | Mem:4.46M, Peak:4.46M | Scene, ViewLayer | Sample 1/12
+Fra:1 Mem:19.13M (Peak 21.38M) | Time:00:00.64 | Mem:4.46M, Peak:4.46M | Scene, ViewLayer | Sample 12/12
+Fra:1 Mem:19.13M (Peak 21.38M) | Time:00:00.64 | Mem:4.46M, Peak:4.46M | Scene, ViewLayer | Finished
+Saved: '/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/material-consumer-candidates/qa/.coverage-work/19-lecture-chair-module-lod0-perspective-night.png'
+Time: 00:00.65 (Saving: 00:00.00)
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:34:42 | INFO: Data are loaded, start creating Blender stuff
+17:34:42 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-oak-veneer-0
+17:34:42 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-matte-plaster-1
+17:34:42 | INFO: glTF import finished in 0.01s
+Fra:1 Mem:14.34M (Peak 14.34M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-oak-veneer-0
+Fra:1 Mem:14.34M (Peak 14.34M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Text
+Fra:1 Mem:14.54M (Peak 14.54M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-matte-plaster-1
+Fra:1 Mem:14.62M (Peak 14.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-ground
+Fra:1 Mem:14.63M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-ruler
+Fra:1 Mem:14.63M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sphere
+Fra:1 Mem:14.58M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg.001
+Fra:1 Mem:14.59M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg
+Fra:1 Mem:14.63M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-body
+Fra:1 Mem:14.59M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:13.52M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:13.52M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:13.52M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:13.52M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:13.64M (Peak 14.63M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:13.69M (Peak 14.63M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:13.69M (Peak 14.63M) | Time:00:00.00 | Mem:0.06M, Peak:0.06M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:13.69M (Peak 14.63M) | Time:00:00.00 | Mem:0.06M, Peak:0.06M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:13.69M (Peak 14.63M) | Time:00:00.00 | Mem:0.12M, Peak:0.12M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:13.69M (Peak 14.63M) | Time:00:00.00 | Mem:0.18M, Peak:0.24M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:13.69M (Peak 14.63M) | Time:00:00.00 | Mem:0.18M, Peak:0.24M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:13.80M (Peak 14.63M) | Time:00:00.00 | Mem:0.18M, Peak:0.24M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:13.80M (Peak 14.63M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:13.80M (Peak 14.63M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:13.80M (Peak 14.63M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:13.80M (Peak 14.63M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-normal.png
+Fra:1 Mem:14.05M (Peak 14.63M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-basecolor.png
+Fra:1 Mem:14.31M (Peak 14.63M) | Time:00:00.00 | Mem:0.55M, Peak:0.55M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-normal.png
+Fra:1 Mem:14.56M (Peak 14.63M) | Time:00:00.00 | Mem:0.80M, Peak:0.80M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-basecolor.png
+Fra:1 Mem:14.81M (Peak 14.81M) | Time:00:00.00 | Mem:1.05M, Peak:1.05M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-orm.png
+Fra:1 Mem:15.06M (Peak 15.06M) | Time:00:00.00 | Mem:1.30M, Peak:1.30M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-orm.png
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.80M, Peak:1.80M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.80M, Peak:1.80M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.80M, Peak:1.88M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Sample 0/12
+Fra:1 Mem:17.86M (Peak 17.86M) | Time:00:00.07 | Remaining:00:00.73 | Mem:4.43M, Peak:4.43M | Scene, ViewLayer | Sample 1/12
+Fra:1 Mem:18.98M (Peak 21.23M) | Time:00:00.80 | Mem:4.43M, Peak:4.43M | Scene, ViewLayer | Sample 12/12
+Fra:1 Mem:18.98M (Peak 21.23M) | Time:00:00.80 | Mem:4.43M, Peak:4.43M | Scene, ViewLayer | Finished
+Saved: '/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/material-consumer-candidates/qa/.coverage-work/20-admissions-counter-module-lod0-perspective-clear.png'
+Time: 00:00.81 (Saving: 00:00.00)
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:34:43 | INFO: Data are loaded, start creating Blender stuff
+17:34:43 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-oak-veneer-0
+17:34:43 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-matte-plaster-1
+17:34:43 | INFO: glTF import finished in 0.00s
+Fra:1 Mem:14.34M (Peak 14.34M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-oak-veneer-0
+Fra:1 Mem:14.34M (Peak 14.34M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Text
+Fra:1 Mem:14.48M (Peak 14.48M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-matte-plaster-1
+Fra:1 Mem:14.62M (Peak 14.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-ground
+Fra:1 Mem:14.58M (Peak 14.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-body
+Fra:1 Mem:14.58M (Peak 14.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg
+Fra:1 Mem:14.58M (Peak 14.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-ruler
+Fra:1 Mem:14.58M (Peak 14.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg.001
+Fra:1 Mem:14.58M (Peak 14.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sphere
+Fra:1 Mem:14.59M (Peak 14.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:13.52M (Peak 14.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:13.52M (Peak 14.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:13.52M (Peak 14.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:13.52M (Peak 14.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:13.61M (Peak 14.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:13.61M (Peak 14.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:13.61M (Peak 14.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:13.61M (Peak 14.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:13.61M (Peak 14.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:13.61M (Peak 14.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:13.61M (Peak 14.62M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:13.61M (Peak 14.62M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:13.61M (Peak 14.62M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:13.61M (Peak 14.62M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:13.64M (Peak 14.62M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:13.69M (Peak 14.62M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:13.69M (Peak 14.62M) | Time:00:00.00 | Mem:0.06M, Peak:0.06M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:13.69M (Peak 14.62M) | Time:00:00.00 | Mem:0.06M, Peak:0.06M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:13.69M (Peak 14.62M) | Time:00:00.00 | Mem:0.12M, Peak:0.12M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:13.69M (Peak 14.62M) | Time:00:00.00 | Mem:0.18M, Peak:0.24M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:13.69M (Peak 14.62M) | Time:00:00.00 | Mem:0.18M, Peak:0.24M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:13.80M (Peak 14.62M) | Time:00:00.00 | Mem:0.18M, Peak:0.24M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:13.80M (Peak 14.62M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:13.80M (Peak 14.62M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:13.80M (Peak 14.62M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:13.80M (Peak 14.62M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-normal.png
+Fra:1 Mem:14.05M (Peak 14.62M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-basecolor.png
+Fra:1 Mem:14.31M (Peak 14.62M) | Time:00:00.00 | Mem:0.55M, Peak:0.55M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-normal.png
+Fra:1 Mem:14.56M (Peak 14.62M) | Time:00:00.00 | Mem:0.80M, Peak:0.80M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-basecolor.png
+Fra:1 Mem:14.81M (Peak 14.81M) | Time:00:00.00 | Mem:1.05M, Peak:1.05M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-orm.png
+Fra:1 Mem:15.06M (Peak 15.06M) | Time:00:00.00 | Mem:1.30M, Peak:1.30M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-orm.png
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.80M, Peak:1.80M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.80M, Peak:1.80M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.80M, Peak:1.88M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Sample 0/12
+Fra:1 Mem:17.86M (Peak 17.86M) | Time:00:00.07 | Remaining:00:00.76 | Mem:4.43M, Peak:4.43M | Scene, ViewLayer | Sample 1/12
+Fra:1 Mem:18.98M (Peak 21.23M) | Time:00:00.82 | Mem:4.43M, Peak:4.43M | Scene, ViewLayer | Sample 12/12
+Fra:1 Mem:18.98M (Peak 21.23M) | Time:00:00.82 | Mem:4.43M, Peak:4.43M | Scene, ViewLayer | Finished
+Saved: '/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/material-consumer-candidates/qa/.coverage-work/21-admissions-counter-module-lod0-perspective-overcast.png'
+Time: 00:00.83 (Saving: 00:00.00)
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:34:44 | INFO: Data are loaded, start creating Blender stuff
+17:34:44 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-oak-veneer-0
+17:34:44 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-matte-plaster-1
+17:34:44 | INFO: glTF import finished in 0.00s
+Fra:1 Mem:14.34M (Peak 14.34M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-oak-veneer-0
+Fra:1 Mem:14.34M (Peak 14.34M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Text
+Fra:1 Mem:14.54M (Peak 14.54M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-matte-plaster-1
+Fra:1 Mem:14.53M (Peak 14.54M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-ground
+Fra:1 Mem:14.62M (Peak 14.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-ruler
+Fra:1 Mem:14.63M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sphere
+Fra:1 Mem:14.57M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg.001
+Fra:1 Mem:14.59M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg
+Fra:1 Mem:14.63M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-body
+Fra:1 Mem:14.59M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:13.52M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:13.52M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:13.52M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:13.52M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:13.64M (Peak 14.63M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:13.69M (Peak 14.63M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:13.69M (Peak 14.63M) | Time:00:00.00 | Mem:0.06M, Peak:0.06M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:13.69M (Peak 14.63M) | Time:00:00.00 | Mem:0.06M, Peak:0.06M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:13.69M (Peak 14.63M) | Time:00:00.00 | Mem:0.12M, Peak:0.12M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:13.69M (Peak 14.63M) | Time:00:00.00 | Mem:0.18M, Peak:0.24M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:13.69M (Peak 14.63M) | Time:00:00.00 | Mem:0.18M, Peak:0.24M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:13.80M (Peak 14.63M) | Time:00:00.00 | Mem:0.18M, Peak:0.24M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:13.80M (Peak 14.63M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:13.80M (Peak 14.63M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:13.80M (Peak 14.63M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:13.80M (Peak 14.63M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-basecolor.png
+Fra:1 Mem:14.05M (Peak 14.63M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-normal.png
+Fra:1 Mem:14.31M (Peak 14.63M) | Time:00:00.00 | Mem:0.55M, Peak:0.55M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-orm.png
+Fra:1 Mem:14.56M (Peak 14.63M) | Time:00:00.00 | Mem:0.80M, Peak:0.80M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-basecolor.png
+Fra:1 Mem:14.81M (Peak 14.81M) | Time:00:00.00 | Mem:1.05M, Peak:1.05M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-normal.png
+Fra:1 Mem:15.06M (Peak 15.06M) | Time:00:00.00 | Mem:1.30M, Peak:1.30M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-orm.png
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.80M, Peak:1.80M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.80M, Peak:1.80M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.80M, Peak:1.88M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Sample 0/12
+Fra:1 Mem:17.86M (Peak 17.86M) | Time:00:00.08 | Remaining:00:00.79 | Mem:4.43M, Peak:4.43M | Scene, ViewLayer | Sample 1/12
+Fra:1 Mem:18.98M (Peak 21.23M) | Time:00:00.83 | Mem:4.43M, Peak:4.43M | Scene, ViewLayer | Sample 12/12
+Fra:1 Mem:18.98M (Peak 21.23M) | Time:00:00.83 | Mem:4.43M, Peak:4.43M | Scene, ViewLayer | Finished
+Saved: '/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/material-consumer-candidates/qa/.coverage-work/22-admissions-counter-module-lod0-perspective-dusk.png'
+Time: 00:00.84 (Saving: 00:00.00)
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+17:34:45 | INFO: Data are loaded, start creating Blender stuff
+17:34:45 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-oak-veneer-0
+17:34:45 | INFO: Blender create Mesh node furniture-batch-EXPORT_interior-matte-plaster-1
+17:34:45 | INFO: glTF import finished in 0.00s
+Fra:1 Mem:14.34M (Peak 14.34M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-oak-veneer-0
+Fra:1 Mem:14.34M (Peak 14.34M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Text
+Fra:1 Mem:14.52M (Peak 14.52M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | furniture-batch-EXPORT_interior-matte-plaster-1
+Fra:1 Mem:14.62M (Peak 14.62M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-ground
+Fra:1 Mem:14.63M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-one-metre-ruler
+Fra:1 Mem:14.63M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Sphere
+Fra:1 Mem:14.58M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg.001
+Fra:1 Mem:14.58M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-leg
+Fra:1 Mem:14.59M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | qa-height-body
+Fra:1 Mem:14.59M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:13.52M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:13.52M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:13.52M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:13.52M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:13.61M (Peak 14.63M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:13.64M (Peak 14.63M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:13.69M (Peak 14.63M) | Time:00:00.00 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:13.69M (Peak 14.63M) | Time:00:00.00 | Mem:0.06M, Peak:0.06M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:13.69M (Peak 14.63M) | Time:00:00.00 | Mem:0.06M, Peak:0.06M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:13.69M (Peak 14.63M) | Time:00:00.00 | Mem:0.12M, Peak:0.12M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:13.69M (Peak 14.63M) | Time:00:00.00 | Mem:0.18M, Peak:0.24M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:13.69M (Peak 14.63M) | Time:00:00.00 | Mem:0.18M, Peak:0.24M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:13.80M (Peak 14.63M) | Time:00:00.00 | Mem:0.18M, Peak:0.24M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:13.80M (Peak 14.63M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:13.80M (Peak 14.63M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:13.80M (Peak 14.63M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:13.80M (Peak 14.63M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-normal.png
+Fra:1 Mem:14.05M (Peak 14.63M) | Time:00:00.00 | Mem:0.30M, Peak:0.30M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-basecolor.png
+Fra:1 Mem:14.31M (Peak 14.63M) | Time:00:00.00 | Mem:0.55M, Peak:0.55M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-normal.png
+Fra:1 Mem:14.56M (Peak 14.63M) | Time:00:00.00 | Mem:0.80M, Peak:0.80M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-basecolor.png
+Fra:1 Mem:14.81M (Peak 14.81M) | Time:00:00.00 | Mem:1.05M, Peak:1.05M | Scene, ViewLayer | Updating Images | Loading interior-matte-plaster-orm.png
+Fra:1 Mem:15.06M (Peak 15.06M) | Time:00:00.00 | Mem:1.30M, Peak:1.30M | Scene, ViewLayer | Updating Images | Loading interior-oak-veneer-orm.png
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.80M, Peak:1.80M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.80M, Peak:1.80M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:15.31M (Peak 15.31M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.80M, Peak:1.88M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:15.32M (Peak 15.32M) | Time:00:00.00 | Mem:1.88M, Peak:1.88M | Scene, ViewLayer | Sample 0/12
+Fra:1 Mem:17.86M (Peak 17.86M) | Time:00:00.07 | Remaining:00:00.73 | Mem:4.43M, Peak:4.43M | Scene, ViewLayer | Sample 1/12
+Fra:1 Mem:18.98M (Peak 21.23M) | Time:00:00.78 | Mem:4.43M, Peak:4.43M | Scene, ViewLayer | Sample 12/12
+Fra:1 Mem:18.98M (Peak 21.23M) | Time:00:00.78 | Mem:4.43M, Peak:4.43M | Scene, ViewLayer | Finished
+Saved: '/workspace/scratch/7c20b5ba4165/atlas-backlog-oct3/tools/assets/material-consumer-candidates/qa/.coverage-work/23-admissions-counter-module-lod0-perspective-night.png'
+Time: 00:00.79 (Saving: 00:00.00)
+
+
+Blender quit

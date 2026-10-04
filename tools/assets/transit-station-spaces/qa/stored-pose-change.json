@@ -1,0 +1,19 @@
+{
+  "status": "pass",
+  "change": "Stored root height now derived from actual exported bounds after stored rotation, grounding portable plates without adding hidden holders",
+  "deployedTransformsAndGatesUnchanged": true,
+  "deployedStateCount": 14,
+  "newStoredTranslationsY": {
+    "bus": 0.86,
+    "metro": 1.429999989271164
+  },
+  "groundFloorsY": {
+    "bus": 0.36,
+    "metro": 0.95
+  },
+  "existingDeployedPreviewsAffected": false,
+  "newStoredPreview": "previews/stored-deck-contact.png",
+  "storedRegressionEvidence": "stored-contact-validation.json",
+  "geometryExportsChangedByStoredPoseFix": false,
+  "subsequentExportOptimization": "Later static batching preserves geometry/poses while changing GLB hashes; see static-batching.json"
+}

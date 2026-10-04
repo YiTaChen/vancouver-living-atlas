@@ -1,0 +1,342 @@
+{
+  "status": "pass",
+  "environment": {
+    "Blender": "4.3.2",
+    "device": "CPU",
+    "threads": 2
+  },
+  "sourceRoundtrip": [
+    {
+      "assetId": "bus-stop-pole",
+      "lod": 0,
+      "status": "pass",
+      "editableMeshObjects": 11,
+      "editableModifiers": 6,
+      "uvMeshes": 11,
+      "sourceUnchanged": true,
+      "sourceSha256": "b5ece54480b613a6a04dfdc6fa45717e69bf614cdd7f4491ef46333975e55f06",
+      "exportSha256": "a6de3fcb597ef01aad772ed81693e5d0ffb94f565090052db09db8b8a103226c",
+      "reexportGeometryMatches": true,
+      "actualGlbReimported": true,
+      "surfaceRays": []
+    },
+    {
+      "assetId": "bus-stop-pole",
+      "lod": 1,
+      "status": "pass",
+      "editableMeshObjects": 9,
+      "editableModifiers": 0,
+      "uvMeshes": 9,
+      "sourceUnchanged": true,
+      "sourceSha256": "9763adc9823c69a6d7dc0906db1fce1081cb3a7de65c415a1baea089d78100b5",
+      "exportSha256": "bccd02414db637a63aebdd00e1903c47e2453d4170d0a0d96f57218ab369bf02",
+      "reexportGeometryMatches": true,
+      "actualGlbReimported": true,
+      "surfaceRays": []
+    },
+    {
+      "assetId": "platform-edge-2m",
+      "lod": 0,
+      "status": "pass",
+      "editableMeshObjects": 32,
+      "editableModifiers": 0,
+      "uvMeshes": 32,
+      "sourceUnchanged": true,
+      "sourceSha256": "fd946ac2dc4a1c6145bd989ecc0e7e78e34a7c4f71fbddf0bfbaf1e7e581beca",
+      "exportSha256": "db3cd3905ee077b05883a6f74d1b1aae81c04d986742874251943b8dee9f13e8",
+      "reexportGeometryMatches": true,
+      "actualGlbReimported": true,
+      "surfaceRays": [
+        {
+          "x": -1.9,
+          "z": 0,
+          "measuredTopY": 0.9499993324279785,
+          "nominalFloorY": 0.95
+        },
+        {
+          "x": 0,
+          "z": 0,
+          "measuredTopY": 0.9499998092651367,
+          "nominalFloorY": 0.95
+        },
+        {
+          "x": 1.1,
+          "z": 0.8,
+          "measuredTopY": 0.9499993324279785,
+          "nominalFloorY": 0.95
+        },
+        {
+          "x": 1.65,
+          "z": 0.3,
+          "measuredTopY": 0.9520001411437988,
+          "nominalFloorY": 0.95
+        },
+        {
+          "x": 1.95,
+          "z": -0.8,
+          "measuredTopY": 0.9499993324279785,
+          "nominalFloorY": 0.95
+        }
+      ]
+    },
+    {
+      "assetId": "platform-edge-2m",
+      "lod": 1,
+      "status": "pass",
+      "editableMeshObjects": 4,
+      "editableModifiers": 0,
+      "uvMeshes": 4,
+      "sourceUnchanged": true,
+      "sourceSha256": "f49a309e2317cf39cc38fa0e15981b03644cd062d811fa94c092d7d7844b7f49",
+      "exportSha256": "345e1a8443a68f008ec7d4aa648e25c086d718e22c25f708e8e762d66d566818",
+      "reexportGeometryMatches": true,
+      "actualGlbReimported": true,
+      "surfaceRays": [
+        {
+          "x": -1.9,
+          "z": 0,
+          "measuredTopY": 0.9499993324279785,
+          "nominalFloorY": 0.95
+        },
+        {
+          "x": 0,
+          "z": 0,
+          "measuredTopY": 0.9499998092651367,
+          "nominalFloorY": 0.95
+        },
+        {
+          "x": 1.1,
+          "z": 0.8,
+          "measuredTopY": 0.9499993324279785,
+          "nominalFloorY": 0.95
+        },
+        {
+          "x": 1.65,
+          "z": 0.3,
+          "measuredTopY": 0.9520001411437988,
+          "nominalFloorY": 0.95
+        },
+        {
+          "x": 1.95,
+          "z": -0.8,
+          "measuredTopY": 0.9499993324279785,
+          "nominalFloorY": 0.95
+        }
+      ]
+    },
+    {
+      "assetId": "station-guidance-sign",
+      "lod": 0,
+      "status": "pass",
+      "editableMeshObjects": 9,
+      "editableModifiers": 12,
+      "uvMeshes": 9,
+      "sourceUnchanged": true,
+      "sourceSha256": "d2dcba508f6a7e67bec7b988b27ccf773b11d115e9e97844bcfb085dcf109faf",
+      "exportSha256": "03d2a972361986246a15283e64925f2a0a6e80aeb9df22e1df03f50d17ee3ef9",
+      "reexportGeometryMatches": true,
+      "actualGlbReimported": true,
+      "surfaceRays": []
+    },
+    {
+      "assetId": "station-guidance-sign",
+      "lod": 1,
+      "status": "pass",
+      "editableMeshObjects": 9,
+      "editableModifiers": 0,
+      "uvMeshes": 9,
+      "sourceUnchanged": true,
+      "sourceSha256": "108a81651eb901d9dd8b041f9ba98f9290c4c220554f630b747d9550046bc898",
+      "exportSha256": "1a2032a474ba1eacbf6b7df64cca0d52b76e724e3b2d2c9e7f60b8f0ac1ae93b",
+      "reexportGeometryMatches": true,
+      "actualGlbReimported": true,
+      "surfaceRays": []
+    },
+    {
+      "assetId": "bus-threshold-deck",
+      "lod": 0,
+      "status": "pass",
+      "editableMeshObjects": 4,
+      "editableModifiers": 0,
+      "uvMeshes": 4,
+      "sourceUnchanged": true,
+      "sourceSha256": "23e8e5e2b3d19ee6792b8b53186b43aa91de02a09e3c783349678f8eb0fd190c",
+      "exportSha256": "0d4394f81ad7c417e90fb0ddda2a3b5199f71055ef09b07bd3602a9590af5d2e",
+      "reexportGeometryMatches": true,
+      "actualGlbReimported": true,
+      "surfaceRays": [
+        {
+          "x": -0.499,
+          "z": 0,
+          "measuredTopY": 7.534027099609375e-05,
+          "expectedY": 7.5e-05
+        },
+        {
+          "x": -0.4,
+          "z": 0,
+          "measuredTopY": 0.007500171661376953,
+          "expectedY": 0.0075
+        },
+        {
+          "x": 0,
+          "z": 0,
+          "measuredTopY": 0.014999866485595703,
+          "expectedY": 0.015
+        },
+        {
+          "x": 0.35,
+          "z": 0,
+          "measuredTopY": 0.007500171661376953,
+          "expectedY": 0.0075
+        },
+        {
+          "x": 0.449,
+          "z": 0,
+          "measuredTopY": 7.534027099609375e-05,
+          "expectedY": 7.5e-05
+        }
+      ]
+    },
+    {
+      "assetId": "bus-threshold-deck",
+      "lod": 1,
+      "status": "pass",
+      "editableMeshObjects": 1,
+      "editableModifiers": 0,
+      "uvMeshes": 1,
+      "sourceUnchanged": true,
+      "sourceSha256": "a179cfb53ea735e816503a0e27f738ccf264fd5ba0821983be53b528961f812d",
+      "exportSha256": "f8c29798b4bed7e1c9e67ae1beeb554692e6f762fb8971e9786758492f0f13ba",
+      "reexportGeometryMatches": true,
+      "actualGlbReimported": true,
+      "surfaceRays": [
+        {
+          "x": -0.499,
+          "z": 0,
+          "measuredTopY": 7.534027099609375e-05,
+          "expectedY": 7.5e-05
+        },
+        {
+          "x": -0.4,
+          "z": 0,
+          "measuredTopY": 0.007500171661376953,
+          "expectedY": 0.0075
+        },
+        {
+          "x": 0,
+          "z": 0,
+          "measuredTopY": 0.014999866485595703,
+          "expectedY": 0.015
+        },
+        {
+          "x": 0.35,
+          "z": 0,
+          "measuredTopY": 0.007500171661376953,
+          "expectedY": 0.0075
+        },
+        {
+          "x": 0.449,
+          "z": 0,
+          "measuredTopY": 7.534027099609375e-05,
+          "expectedY": 7.5e-05
+        }
+      ]
+    },
+    {
+      "assetId": "metro-threshold-deck",
+      "lod": 0,
+      "status": "pass",
+      "editableMeshObjects": 4,
+      "editableModifiers": 0,
+      "uvMeshes": 4,
+      "sourceUnchanged": true,
+      "sourceSha256": "5d1884605c1cabe464d7f0161fdfd033672d71bfe74e1530a24f90d319d62650",
+      "exportSha256": "075ceb2ec81ad96c0df75134797c7c9d42119d58cdab65c7d4fafb77532c9767",
+      "reexportGeometryMatches": true,
+      "actualGlbReimported": true,
+      "surfaceRays": [
+        {
+          "x": -0.479,
+          "z": 0,
+          "measuredTopY": 7.534027099609375e-05,
+          "expectedY": 7.5e-05
+        },
+        {
+          "x": -0.38,
+          "z": 0,
+          "measuredTopY": 0.00749969482421875,
+          "expectedY": 0.0075
+        },
+        {
+          "x": 0,
+          "z": 0,
+          "measuredTopY": 0.014999866485595703,
+          "expectedY": 0.015
+        },
+        {
+          "x": 0.31999999999999995,
+          "z": 0,
+          "measuredTopY": 0.00749969482421875,
+          "expectedY": 0.0075
+        },
+        {
+          "x": 0.419,
+          "z": 0,
+          "measuredTopY": 7.534027099609375e-05,
+          "expectedY": 7.5e-05
+        }
+      ]
+    },
+    {
+      "assetId": "metro-threshold-deck",
+      "lod": 1,
+      "status": "pass",
+      "editableMeshObjects": 1,
+      "editableModifiers": 0,
+      "uvMeshes": 1,
+      "sourceUnchanged": true,
+      "sourceSha256": "ca6470ef6eaeb335f1b54a8cf0c25041f44a9873f4c3ad4670309af4e386febc",
+      "exportSha256": "c461a0a4863c1619161775e95828a5cd1897ce21af8fd649ae24aed6fc04cce2",
+      "reexportGeometryMatches": true,
+      "actualGlbReimported": true,
+      "surfaceRays": [
+        {
+          "x": -0.479,
+          "z": 0,
+          "measuredTopY": 7.534027099609375e-05,
+          "expectedY": 7.5e-05
+        },
+        {
+          "x": -0.38,
+          "z": 0,
+          "measuredTopY": 0.00749969482421875,
+          "expectedY": 0.0075
+        },
+        {
+          "x": 0,
+          "z": 0,
+          "measuredTopY": 0.014999866485595703,
+          "expectedY": 0.015
+        },
+        {
+          "x": 0.31999999999999995,
+          "z": 0,
+          "measuredTopY": 0.00749969482421875,
+          "expectedY": 0.0075
+        },
+        {
+          "x": 0.419,
+          "z": 0,
+          "measuredTopY": 7.534027099609375e-05,
+          "expectedY": 7.5e-05
+        }
+      ]
+    }
+  ],
+  "humanCapsuleHeightsM": [
+    1.75,
+    1.81
+  ],
+  "scaleReferenceM": 1,
+  "runtimeChecks": "not_run"
+}

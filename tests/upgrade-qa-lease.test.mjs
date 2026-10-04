@@ -14,6 +14,16 @@ class Element extends EventTarget {
   style = {};
   textContent = '';
   disabled = false;
+  _value;
+  get options() {
+    return this.children.filter((child) => child.tagName === 'OPTION');
+  }
+  get value() {
+    return this._value ?? (this.tagName === 'SELECT' ? this.options[0]?.value ?? '' : '');
+  }
+  set value(value) {
+    this._value = String(value);
+  }
   setAttribute() {}
   appendChild(child) {
     this.children.push(child);

@@ -1,0 +1,2122 @@
+{
+  "schemaVersion": 1,
+  "packageId": "street-furniture-expansion",
+  "version": "1.0.0",
+  "baseRevision": "8d07c4cdd81d991a4ee54214126b42e4b40f3f1c",
+  "status": "offline_complete",
+  "runtimeStatus": "runtime_pending_webgl",
+  "units": "metres",
+  "coordinateSystem": {
+    "authoringUp": "+Z",
+    "gltfUp": "+Y",
+    "frontAxis": "+Z",
+    "conversion": "Blender (x,y,z) -> glTF (x,z,-y) exactly once; no loader rotation"
+  },
+  "provenance": {
+    "credit": "Based on Vancouver Living Atlas by YiTaChen",
+    "source": "https://github.com/YiTaChen/vancouver-living-atlas",
+    "license": "Vancouver Living Atlas Noncommercial Research and Attribution 1.0",
+    "legacyGenerator": "tools/assets/streetscape/generate_streetscape.py",
+    "legacyGeneratorSha256": "1f6f0a909906310428d1a4449ab45196b55bfab29e21fcb10a6acce121fe58f2",
+    "derivation": "AST imports only legacy bench/lamp/shelter functions. Lower tessellation, role placeholders, generic sign, ground shoes and handcrafted simplified LOD1. Five new props are original representative geometry. No downloaded meshes/images.",
+    "blenderVersion": "4.3.2",
+    "buildSha256": "5595b6456b614dee862bb6a8ca872aa0c364edb9f2ad66925713f035c6f038e8",
+    "exporterSha256": "dd64d047423f80b75f61aaac0110bf64f161b801f89711ff9633a9c0295629cd"
+  },
+  "reexportCommand": "blender -b -t 2 --python-exit-code 1 --python tools/assets/street-furniture-expansion/export.py -- --source tools/assets/street-furniture-expansion/source --output /tmp/street-furniture-reexport",
+  "validationCommand": "python3 tools/assets/street-furniture-expansion/validate.py",
+  "assets": [
+    {
+      "id": "cedar-bench",
+      "taskId": "F01",
+      "variant": "cedar-bench",
+      "kind": "street-furniture",
+      "source": "source/cedar-bench.lod0.blend",
+      "sourceSha256": "4b58593e851aab7812f112616b5b60a7b9c0bc14df3f79532b0e22cd2e67ea3f",
+      "lods": [
+        {
+          "level": 0,
+          "source": "source/cedar-bench.lod0.blend",
+          "sourceSha256": "4b58593e851aab7812f112616b5b60a7b9c0bc14df3f79532b0e22cd2e67ea3f",
+          "file": "exports/cedar-bench.lod0.glb",
+          "sha256": "a60d4179fe27780919a53e581b93a4c9be02be9806c0de6ff5b95b676dffa248",
+          "boundsM": {
+            "min": [
+              -1.0099999904632568,
+              -1.966970300526505e-08,
+              -0.3995785852887267
+            ],
+            "max": [
+              1.0099999904632568,
+              0.9853602945804596,
+              0.30000000300346763
+            ],
+            "size": [
+              2.0199999809265137,
+              0.9853603142501626,
+              0.6995785882921943
+            ]
+          },
+          "triangles": 756,
+          "vertices": 1390,
+          "primitives": 2,
+          "bytes": 74304,
+          "geometryBytes": 74304,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 1,
+          "source": "source/cedar-bench.lod1.blend",
+          "sourceSha256": "8a465c1790c0cd7b07ff85802296731ccd1c707a0572e95e212ac7c2c04b13c0",
+          "file": "exports/cedar-bench.lod1.glb",
+          "sha256": "52e6ad93074c5d0d9384ffe7d7c6745b0d201c08ba836dfdb6bc04fd2cb6bfb1",
+          "boundsM": {
+            "min": [
+              -1.0099999904632568,
+              0.0,
+              -0.40095970034599304
+            ],
+            "max": [
+              1.0099999904632568,
+              0.984935075044632,
+              0.30000001192092896
+            ],
+            "size": [
+              2.0199999809265137,
+              0.984935075044632,
+              0.700959712266922
+            ]
+          },
+          "triangles": 200,
+          "vertices": 384,
+          "primitives": 2,
+          "bytes": 22512,
+          "geometryBytes": 22512,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -1.0099999904632568,
+          -1.966970300526505e-08,
+          -0.3995785852887267
+        ],
+        "max": [
+          1.0099999904632568,
+          0.9853602945804596,
+          0.30000000300346763
+        ],
+        "size": [
+          2.0199999809265137,
+          0.9853603142501626,
+          0.6995785882921943
+        ]
+      },
+      "expectedDimensionsM": {
+        "width": 2.02,
+        "height": 0.9854,
+        "depth": 0.7,
+        "seatCenterHeight": 0.48
+      },
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Existing streetscape generator contract; source dimensions preserved with added bench ground-contact shoes.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "Original front-post frame retained for shelter; center ground frame for other props."
+      },
+      "attachmentDatum": {
+        "kind": "ground",
+        "planeY": 0,
+        "minimumGroundSamplePoints": 3,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "metal",
+          "node": "metal",
+          "role": "metal",
+          "surfaceId": "painted-metal",
+          "maps": {},
+          "bindingMode": "Untextured semantic PBR placeholder; future consumer may bind shared library after UV and color review",
+          "uvUnits": "one repeat per authored metre; not auto-scaled to current catalog period",
+          "alphaMode": "OPAQUE",
+          "doubleSided": false,
+          "pointLight": false
+        },
+        {
+          "material": "wood",
+          "node": "wood",
+          "role": "wood",
+          "surfaceId": "cedar",
+          "maps": {},
+          "bindingMode": "Untextured semantic PBR placeholder; future consumer may bind shared library after UV and color review",
+          "uvUnits": "one repeat per authored metre; not auto-scaled to current catalog period",
+          "alphaMode": "OPAQUE",
+          "doubleSided": false,
+          "pointLight": false
+        }
+      ],
+      "textureMode": "role-placeholders-no-maps",
+      "textureCost": {
+        "geometryBytes": 96816,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 96816,
+        "uniqueTexelBytesWithMips": 0,
+        "gpuResidency": "not measured"
+      },
+      "lodPolicy": {
+        "levels": [
+          0,
+          1
+        ],
+        "triangleCaps": [
+          1000,
+          200
+        ],
+        "geometryByteCaps": [
+          196608,
+          49152
+        ],
+        "suggestedDistanceM": [
+          30,
+          100
+        ],
+        "activation": "Source-selected near-view replacement only, projected-size tuning pending",
+        "keepScale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "clearance": {
+        "pedestrianPassageOutsideFootprintM": 1.8,
+        "doorwayApproachExclusionM": 1.5,
+        "parkedCarDoorSweepExclusionM": 0.9,
+        "thresholdSlopeMaxM": 0.14,
+        "datumSampleCountMinimum": 3,
+        "certification": "Representative game-clearance goals, not a legal accessibility certification.",
+        "seatCenterHeightM": 0.48,
+        "seatTopHeightM": 0.509,
+        "frontSeatApproachDepthM": 0.9
+      },
+      "collision": {
+        "kind": "individual-component-aabb",
+        "file": "qa/collision-proxies.json",
+        "assetId": "cedar-bench",
+        "note": "Per-component source-derived boxes, never a shelter/rack full solid bounding box; candidate broadphase only."
+      },
+      "anchors": [
+        {
+          "id": "ground-datum",
+          "positionM": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "seat-center",
+          "positionM": [
+            0,
+            0.509,
+            0
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "footprintPolygonXZ": [
+          [
+            -1.0099999904632568,
+            -0.3995785852887267
+          ],
+          [
+            1.0099999904632568,
+            -0.3995785852887267
+          ],
+          [
+            1.0099999904632568,
+            0.30000000300346763
+          ],
+          [
+            -1.0099999904632568,
+            0.30000000300346763
+          ]
+        ],
+        "sourceSelection": "placement-proposal.json",
+        "noRandomPopulationIncrease": true,
+        "noWorldXyzExceptions": true,
+        "sourceMeasuredFurnitureLocation": false,
+        "nonuniformScaleAllowed": false,
+        "rejectionRules": [
+          "doorway polygon or approach intersection",
+          "pedestrian corridor narrower than 1.8 m",
+          "car-door sweep overlap",
+          "road/rail surface overlap",
+          "terrain samples differ by >0.14 m",
+          "missing stable source key or permission to add population"
+        ]
+      },
+      "intendedConsumer": [
+        "lib/city/environment.ts:roadDecorations / lamps (proposed only)",
+        "future source-selected furniture placement adapter"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/blender-audit.json",
+          "qa/source-roundtrip.json",
+          "qa/artist-edit.json",
+          "qa/preview-index.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "state": "runtime_pending_webgl",
+        "required": [
+          "source population and authoritative placement",
+          "terrain datum and sidewalk collision",
+          "shared role material binding",
+          "glass sorting",
+          "LOD silhouette/pop",
+          "four city lighting conditions",
+          "cache/dispose/instancing/draw calls",
+          "GPU frame time and residency"
+        ]
+      }
+    },
+    {
+      "id": "heritage-lamp",
+      "taskId": "F01",
+      "variant": "heritage-lamp",
+      "kind": "street-furniture",
+      "source": "source/heritage-lamp.lod0.blend",
+      "sourceSha256": "5e30b97aec0784c97f00c0e328d7bfcf5da4f9516ad0f26aab131fb992caf3c6",
+      "lods": [
+        {
+          "level": 0,
+          "source": "source/heritage-lamp.lod0.blend",
+          "sourceSha256": "5e30b97aec0784c97f00c0e328d7bfcf5da4f9516ad0f26aab131fb992caf3c6",
+          "file": "exports/heritage-lamp.lod0.glb",
+          "sha256": "5ed3170132b884f7e3dc4f996981ff44cf128e4de03063c07939b93d074ecb42",
+          "boundsM": {
+            "min": [
+              -1.0649999380111694,
+              0.0,
+              -0.23499999940395355
+            ],
+            "max": [
+              1.0649999380111694,
+              4.489999771118164,
+              0.23499999940395355
+            ],
+            "size": [
+              2.129999876022339,
+              4.489999771118164,
+              0.4699999988079071
+            ]
+          },
+          "triangles": 1292,
+          "vertices": 2479,
+          "primitives": 2,
+          "bytes": 129672,
+          "geometryBytes": 129672,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 1,
+          "source": "source/heritage-lamp.lod1.blend",
+          "sourceSha256": "a7b7a26693ddaa269eaf8b66547fd949319dd93e4bc80cb11d32c852be57531c",
+          "file": "exports/heritage-lamp.lod1.glb",
+          "sha256": "9877a18d4a82dc3c6ec776d5184dc310f357276fa36acdbeb343008ed5f1e92e",
+          "boundsM": {
+            "min": [
+              -1.059809684753418,
+              0.0,
+              -0.2298096865415573
+            ],
+            "max": [
+              1.059809684753418,
+              4.489999771118164,
+              0.2298096865415573
+            ],
+            "size": [
+              2.119619369506836,
+              4.489999771118164,
+              0.4596193730831146
+            ]
+          },
+          "triangles": 228,
+          "vertices": 460,
+          "primitives": 2,
+          "bytes": 26336,
+          "geometryBytes": 26336,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -1.0649999380111694,
+          0.0,
+          -0.23499999940395355
+        ],
+        "max": [
+          1.0649999380111694,
+          4.489999771118164,
+          0.23499999940395355
+        ],
+        "size": [
+          2.129999876022339,
+          4.489999771118164,
+          0.4699999988079071
+        ]
+      },
+      "expectedDimensionsM": {
+        "width": 2.13,
+        "height": 4.49,
+        "depth": 0.47
+      },
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Existing streetscape generator contract; source dimensions preserved with added bench ground-contact shoes.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "Original front-post frame retained for shelter; center ground frame for other props."
+      },
+      "attachmentDatum": {
+        "kind": "ground",
+        "planeY": 0,
+        "minimumGroundSamplePoints": 3,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "metal",
+          "node": "metal",
+          "role": "metal",
+          "surfaceId": "painted-metal",
+          "maps": {},
+          "bindingMode": "Untextured semantic PBR placeholder; future consumer may bind shared library after UV and color review",
+          "uvUnits": "one repeat per authored metre; not auto-scaled to current catalog period",
+          "alphaMode": "OPAQUE",
+          "doubleSided": false,
+          "pointLight": false
+        },
+        {
+          "material": "diffuser",
+          "node": "diffuser",
+          "role": "diffuser",
+          "surfaceId": "visual-diffuser",
+          "maps": {},
+          "bindingMode": "Untextured semantic PBR placeholder; future consumer may bind shared library after UV and color review",
+          "uvUnits": "one repeat per authored metre; not auto-scaled to current catalog period",
+          "alphaMode": "OPAQUE",
+          "doubleSided": false,
+          "pointLight": false
+        }
+      ],
+      "textureMode": "role-placeholders-no-maps",
+      "textureCost": {
+        "geometryBytes": 156008,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 156008,
+        "uniqueTexelBytesWithMips": 0,
+        "gpuResidency": "not measured"
+      },
+      "lodPolicy": {
+        "levels": [
+          0,
+          1
+        ],
+        "triangleCaps": [
+          1500,
+          300
+        ],
+        "geometryByteCaps": [
+          262144,
+          65536
+        ],
+        "suggestedDistanceM": [
+          30,
+          100
+        ],
+        "activation": "Source-selected near-view replacement only, projected-size tuning pending",
+        "keepScale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "clearance": {
+        "pedestrianPassageOutsideFootprintM": 1.8,
+        "doorwayApproachExclusionM": 1.5,
+        "parkedCarDoorSweepExclusionM": 0.9,
+        "thresholdSlopeMaxM": 0.14,
+        "datumSampleCountMinimum": 3,
+        "certification": "Representative game-clearance goals, not a legal accessibility certification."
+      },
+      "collision": {
+        "kind": "individual-component-aabb",
+        "file": "qa/collision-proxies.json",
+        "assetId": "heritage-lamp",
+        "note": "Per-component source-derived boxes, never a shelter/rack full solid bounding box; candidate broadphase only."
+      },
+      "anchors": [
+        {
+          "id": "ground-datum",
+          "positionM": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "footprintPolygonXZ": [
+          [
+            -1.0649999380111694,
+            -0.23499999940395355
+          ],
+          [
+            1.0649999380111694,
+            -0.23499999940395355
+          ],
+          [
+            1.0649999380111694,
+            0.23499999940395355
+          ],
+          [
+            -1.0649999380111694,
+            0.23499999940395355
+          ]
+        ],
+        "sourceSelection": "placement-proposal.json",
+        "noRandomPopulationIncrease": true,
+        "noWorldXyzExceptions": true,
+        "sourceMeasuredFurnitureLocation": false,
+        "nonuniformScaleAllowed": false,
+        "rejectionRules": [
+          "doorway polygon or approach intersection",
+          "pedestrian corridor narrower than 1.8 m",
+          "car-door sweep overlap",
+          "road/rail surface overlap",
+          "terrain samples differ by >0.14 m",
+          "missing stable source key or permission to add population"
+        ]
+      },
+      "intendedConsumer": [
+        "lib/city/environment.ts:roadDecorations / lamps (proposed only)",
+        "future source-selected furniture placement adapter"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/blender-audit.json",
+          "qa/source-roundtrip.json",
+          "qa/artist-edit.json",
+          "qa/preview-index.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "state": "runtime_pending_webgl",
+        "required": [
+          "source population and authoritative placement",
+          "terrain datum and sidewalk collision",
+          "shared role material binding",
+          "glass sorting",
+          "LOD silhouette/pop",
+          "four city lighting conditions",
+          "cache/dispose/instancing/draw calls",
+          "GPU frame time and residency"
+        ]
+      }
+    },
+    {
+      "id": "transit-shelter",
+      "taskId": "F01",
+      "variant": "transit-shelter",
+      "kind": "street-furniture",
+      "source": "source/transit-shelter.lod0.blend",
+      "sourceSha256": "c78d1cd15d9d04076eff2488bb51d09307d7c901a37b30c43a249634812f87fc",
+      "lods": [
+        {
+          "level": 0,
+          "source": "source/transit-shelter.lod0.blend",
+          "sourceSha256": "c78d1cd15d9d04076eff2488bb51d09307d7c901a37b30c43a249634812f87fc",
+          "file": "exports/transit-shelter.lod0.glb",
+          "sha256": "6647785c496a016ee153feba97993705a10373854d20938f136a5abb43d8123c",
+          "boundsM": {
+            "min": [
+              -2.2799999713897705,
+              0.0,
+              -1.5199999529868364
+            ],
+            "max": [
+              2.2799997329711914,
+              2.819999847561121,
+              0.34000000171363354
+            ],
+            "size": [
+              4.559999704360962,
+              2.819999847561121,
+              1.85999995470047
+            ]
+          },
+          "triangles": 2164,
+          "vertices": 4370,
+          "primitives": 4,
+          "bytes": 228404,
+          "geometryBytes": 228404,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 1,
+          "source": "source/transit-shelter.lod1.blend",
+          "sourceSha256": "02d6f6e27c7429c6346cee11a3a16d89a6d0e1dbc9332d056a3636f89025a6b4",
+          "file": "exports/transit-shelter.lod1.glb",
+          "sha256": "a43328e71a7fa7380c335d4daa73e8562d1de7f33e1698e37ce2289ea676dd02",
+          "boundsM": {
+            "min": [
+              -2.2799999713897705,
+              0.0,
+              -1.5199999529868364
+            ],
+            "max": [
+              2.2799997329711914,
+              2.819999847561121,
+              0.34000000171363354
+            ],
+            "size": [
+              4.559999704360962,
+              2.819999847561121,
+              1.85999995470047
+            ]
+          },
+          "triangles": 584,
+          "vertices": 1140,
+          "primitives": 4,
+          "bytes": 63844,
+          "geometryBytes": 63844,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -2.2799999713897705,
+          0.0,
+          -1.5199999529868364
+        ],
+        "max": [
+          2.2799997329711914,
+          2.819999847561121,
+          0.34000000171363354
+        ],
+        "size": [
+          4.559999704360962,
+          2.819999847561121,
+          1.85999995470047
+        ]
+      },
+      "expectedDimensionsM": {
+        "width": 4.56,
+        "height": 2.82,
+        "depth": 1.86
+      },
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Existing streetscape generator contract; source dimensions preserved with added bench ground-contact shoes.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "Original front-post frame retained for shelter; center ground frame for other props."
+      },
+      "attachmentDatum": {
+        "kind": "ground",
+        "planeY": 0,
+        "minimumGroundSamplePoints": 3,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "metal",
+          "node": "metal",
+          "role": "metal",
+          "surfaceId": "painted-metal",
+          "maps": {},
+          "bindingMode": "Untextured semantic PBR placeholder; future consumer may bind shared library after UV and color review",
+          "uvUnits": "one repeat per authored metre; not auto-scaled to current catalog period",
+          "alphaMode": "OPAQUE",
+          "doubleSided": false,
+          "pointLight": false
+        },
+        {
+          "material": "glass",
+          "node": "glass",
+          "role": "glass",
+          "surfaceId": "dedicated-glass",
+          "maps": {},
+          "bindingMode": "Untextured semantic PBR placeholder; future consumer may bind shared library after UV and color review",
+          "uvUnits": "one repeat per authored metre; not auto-scaled to current catalog period",
+          "alphaMode": "BLEND",
+          "doubleSided": true,
+          "pointLight": false
+        },
+        {
+          "material": "diffuser",
+          "node": "diffuser",
+          "role": "diffuser",
+          "surfaceId": "visual-diffuser",
+          "maps": {},
+          "bindingMode": "Untextured semantic PBR placeholder; future consumer may bind shared library after UV and color review",
+          "uvUnits": "one repeat per authored metre; not auto-scaled to current catalog period",
+          "alphaMode": "OPAQUE",
+          "doubleSided": false,
+          "pointLight": false
+        },
+        {
+          "material": "wood",
+          "node": "wood",
+          "role": "wood",
+          "surfaceId": "cedar",
+          "maps": {},
+          "bindingMode": "Untextured semantic PBR placeholder; future consumer may bind shared library after UV and color review",
+          "uvUnits": "one repeat per authored metre; not auto-scaled to current catalog period",
+          "alphaMode": "OPAQUE",
+          "doubleSided": false,
+          "pointLight": false
+        }
+      ],
+      "textureMode": "role-placeholders-no-maps",
+      "textureCost": {
+        "geometryBytes": 292248,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 292248,
+        "uniqueTexelBytesWithMips": 0,
+        "gpuResidency": "not measured"
+      },
+      "lodPolicy": {
+        "levels": [
+          0,
+          1
+        ],
+        "triangleCaps": [
+          3000,
+          600
+        ],
+        "geometryByteCaps": [
+          524288,
+          131072
+        ],
+        "suggestedDistanceM": [
+          30,
+          100
+        ],
+        "activation": "Source-selected near-view replacement only, projected-size tuning pending",
+        "keepScale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "clearance": {
+        "pedestrianPassageOutsideFootprintM": 1.8,
+        "doorwayApproachExclusionM": 1.5,
+        "parkedCarDoorSweepExclusionM": 0.9,
+        "thresholdSlopeMaxM": 0.14,
+        "datumSampleCountMinimum": 3,
+        "certification": "Representative game-clearance goals, not a legal accessibility certification.",
+        "minimumHeadroomM": 2.59,
+        "entryWidthM": 4.095,
+        "standingBoxM": {
+          "min": [
+            -1.15,
+            0,
+            -0.18
+          ],
+          "max": [
+            1.15,
+            2.45,
+            0.22
+          ]
+        },
+        "pedestrianRoute": "Retain 1.8 m external front corridor; shelter bench/timetable zone is not a through corridor."
+      },
+      "collision": {
+        "kind": "individual-component-aabb",
+        "file": "qa/collision-proxies.json",
+        "assetId": "transit-shelter",
+        "note": "Per-component source-derived boxes, never a shelter/rack full solid bounding box; candidate broadphase only."
+      },
+      "anchors": [
+        {
+          "id": "ground-datum",
+          "positionM": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "entry-center",
+          "positionM": [
+            0,
+            0,
+            0.34
+          ]
+        },
+        {
+          "id": "shelter-seat",
+          "positionM": [
+            0.25,
+            0.509,
+            -0.69
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "footprintPolygonXZ": [
+          [
+            -2.2799999713897705,
+            -1.5199999529868364
+          ],
+          [
+            2.2799997329711914,
+            -1.5199999529868364
+          ],
+          [
+            2.2799997329711914,
+            0.34000000171363354
+          ],
+          [
+            -2.2799999713897705,
+            0.34000000171363354
+          ]
+        ],
+        "sourceSelection": "placement-proposal.json",
+        "noRandomPopulationIncrease": true,
+        "noWorldXyzExceptions": true,
+        "sourceMeasuredFurnitureLocation": false,
+        "nonuniformScaleAllowed": false,
+        "rejectionRules": [
+          "doorway polygon or approach intersection",
+          "pedestrian corridor narrower than 1.8 m",
+          "car-door sweep overlap",
+          "road/rail surface overlap",
+          "terrain samples differ by >0.14 m",
+          "missing stable source key or permission to add population"
+        ]
+      },
+      "intendedConsumer": [
+        "lib/city/environment.ts:roadDecorations / lamps (proposed only)",
+        "future source-selected furniture placement adapter"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/blender-audit.json",
+          "qa/source-roundtrip.json",
+          "qa/artist-edit.json",
+          "qa/preview-index.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "state": "runtime_pending_webgl",
+        "required": [
+          "source population and authoritative placement",
+          "terrain datum and sidewalk collision",
+          "shared role material binding",
+          "glass sorting",
+          "LOD silhouette/pop",
+          "four city lighting conditions",
+          "cache/dispose/instancing/draw calls",
+          "GPU frame time and residency"
+        ]
+      }
+    },
+    {
+      "id": "arterial-lamp-8m",
+      "taskId": "F01",
+      "variant": "arterial-lamp-8m",
+      "kind": "street-furniture",
+      "source": "source/arterial-lamp-8m.lod0.blend",
+      "sourceSha256": "62e0128dfe83affd7ce2237d6f7c4fc500634a8c450d3d192713775609bab0c3",
+      "lods": [
+        {
+          "level": 0,
+          "source": "source/arterial-lamp-8m.lod0.blend",
+          "sourceSha256": "62e0128dfe83affd7ce2237d6f7c4fc500634a8c450d3d192713775609bab0c3",
+          "file": "exports/arterial-lamp-8m.lod0.glb",
+          "sha256": "2b80e20de1fa435e107d91467728317565ced114f9ef228dfeb297edaf5672a7",
+          "boundsM": {
+            "min": [
+              -0.15000000596046448,
+              0.0,
+              -0.17000000178813934
+            ],
+            "max": [
+              1.7599999904632568,
+              8.0,
+              0.17000000178813934
+            ],
+            "size": [
+              1.9099999964237213,
+              8.0,
+              0.3400000035762787
+            ]
+          },
+          "triangles": 252,
+          "vertices": 514,
+          "primitives": 2,
+          "bytes": 29144,
+          "geometryBytes": 29144,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 1,
+          "source": "source/arterial-lamp-8m.lod1.blend",
+          "sourceSha256": "7e40853ff651dcbe0566f2a76afc4498e10d6cefe0c09afba362d9ea2047dedf",
+          "file": "exports/arterial-lamp-8m.lod1.glb",
+          "sha256": "97c1b741d54f65e3da6c4ce6e8b761b83e31ec54d56e85122959d9581091996b",
+          "boundsM": {
+            "min": [
+              -0.15000000596046448,
+              0.0,
+              -0.17000000178813934
+            ],
+            "max": [
+              1.7599999904632568,
+              8.0,
+              0.17000000178813934
+            ],
+            "size": [
+              1.9099999964237213,
+              8.0,
+              0.3400000035762787
+            ]
+          },
+          "triangles": 108,
+          "vertices": 208,
+          "primitives": 2,
+          "bytes": 13576,
+          "geometryBytes": 13576,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.15000000596046448,
+          0.0,
+          -0.17000000178813934
+        ],
+        "max": [
+          1.7599999904632568,
+          8.0,
+          0.17000000178813934
+        ],
+        "size": [
+          1.9099999964237213,
+          8.0,
+          0.3400000035762787
+        ]
+      },
+      "expectedDimensionsM": {
+        "width": 1.91,
+        "height": 8.0,
+        "depth": 0.34
+      },
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "New original representative design target, not a measured or official manufactured model.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "Original front-post frame retained for shelter; center ground frame for other props."
+      },
+      "attachmentDatum": {
+        "kind": "ground",
+        "planeY": 0,
+        "minimumGroundSamplePoints": 3,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "metal",
+          "node": "metal",
+          "role": "metal",
+          "surfaceId": "painted-metal",
+          "maps": {},
+          "bindingMode": "Untextured semantic PBR placeholder; future consumer may bind shared library after UV and color review",
+          "uvUnits": "one repeat per authored metre; not auto-scaled to current catalog period",
+          "alphaMode": "OPAQUE",
+          "doubleSided": false,
+          "pointLight": false
+        },
+        {
+          "material": "diffuser",
+          "node": "diffuser",
+          "role": "diffuser",
+          "surfaceId": "visual-diffuser",
+          "maps": {},
+          "bindingMode": "Untextured semantic PBR placeholder; future consumer may bind shared library after UV and color review",
+          "uvUnits": "one repeat per authored metre; not auto-scaled to current catalog period",
+          "alphaMode": "OPAQUE",
+          "doubleSided": false,
+          "pointLight": false
+        }
+      ],
+      "textureMode": "role-placeholders-no-maps",
+      "textureCost": {
+        "geometryBytes": 42720,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 42720,
+        "uniqueTexelBytesWithMips": 0,
+        "gpuResidency": "not measured"
+      },
+      "lodPolicy": {
+        "levels": [
+          0,
+          1
+        ],
+        "triangleCaps": [
+          1500,
+          300
+        ],
+        "geometryByteCaps": [
+          262144,
+          65536
+        ],
+        "suggestedDistanceM": [
+          30,
+          100
+        ],
+        "activation": "Source-selected near-view replacement only, projected-size tuning pending",
+        "keepScale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "clearance": {
+        "pedestrianPassageOutsideFootprintM": 1.8,
+        "doorwayApproachExclusionM": 1.5,
+        "parkedCarDoorSweepExclusionM": 0.9,
+        "thresholdSlopeMaxM": 0.14,
+        "datumSampleCountMinimum": 3,
+        "certification": "Representative game-clearance goals, not a legal accessibility certification."
+      },
+      "collision": {
+        "kind": "individual-component-aabb",
+        "file": "qa/collision-proxies.json",
+        "assetId": "arterial-lamp-8m",
+        "note": "Per-component source-derived boxes, never a shelter/rack full solid bounding box; candidate broadphase only."
+      },
+      "anchors": [
+        {
+          "id": "ground-datum",
+          "positionM": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "footprintPolygonXZ": [
+          [
+            -0.15000000596046448,
+            -0.17000000178813934
+          ],
+          [
+            1.7599999904632568,
+            -0.17000000178813934
+          ],
+          [
+            1.7599999904632568,
+            0.17000000178813934
+          ],
+          [
+            -0.15000000596046448,
+            0.17000000178813934
+          ]
+        ],
+        "sourceSelection": "placement-proposal.json",
+        "noRandomPopulationIncrease": true,
+        "noWorldXyzExceptions": true,
+        "sourceMeasuredFurnitureLocation": false,
+        "nonuniformScaleAllowed": false,
+        "rejectionRules": [
+          "doorway polygon or approach intersection",
+          "pedestrian corridor narrower than 1.8 m",
+          "car-door sweep overlap",
+          "road/rail surface overlap",
+          "terrain samples differ by >0.14 m",
+          "missing stable source key or permission to add population"
+        ]
+      },
+      "intendedConsumer": [
+        "lib/city/environment.ts:roadDecorations / lamps (proposed only)",
+        "future source-selected furniture placement adapter"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/blender-audit.json",
+          "qa/source-roundtrip.json",
+          "qa/artist-edit.json",
+          "qa/preview-index.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "state": "runtime_pending_webgl",
+        "required": [
+          "source population and authoritative placement",
+          "terrain datum and sidewalk collision",
+          "shared role material binding",
+          "glass sorting",
+          "LOD silhouette/pop",
+          "four city lighting conditions",
+          "cache/dispose/instancing/draw calls",
+          "GPU frame time and residency"
+        ]
+      }
+    },
+    {
+      "id": "garbage-bin",
+      "taskId": "F02",
+      "variant": "garbage-bin",
+      "kind": "street-furniture",
+      "source": "source/garbage-bin.lod0.blend",
+      "sourceSha256": "7a77083d074a9e296ef3f86693643bf222d95f7db27194cac3811f803aacb778",
+      "lods": [
+        {
+          "level": 0,
+          "source": "source/garbage-bin.lod0.blend",
+          "sourceSha256": "7a77083d074a9e296ef3f86693643bf222d95f7db27194cac3811f803aacb778",
+          "file": "exports/garbage-bin.lod0.glb",
+          "sha256": "17ba1925f7bd79ab7d8a4f5da1956dd4e65e9b775e4bf379c2f8ac7ad358dedb",
+          "boundsM": {
+            "min": [
+              -0.28999999165534973,
+              0.0,
+              -0.28999999165534973
+            ],
+            "max": [
+              0.28999999165534973,
+              0.9700000286102295,
+              0.28999996185302734
+            ],
+            "size": [
+              0.5799999833106995,
+              0.9700000286102295,
+              0.5799999535083771
+            ]
+          },
+          "triangles": 528,
+          "vertices": 1152,
+          "primitives": 1,
+          "bytes": 60184,
+          "geometryBytes": 60184,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 1,
+          "source": "source/garbage-bin.lod1.blend",
+          "sourceSha256": "123e5c627636be6eb853e5a639ce6fade03f6ccda79bbf3d73e21b4b1c692005",
+          "file": "exports/garbage-bin.lod1.glb",
+          "sha256": "1974f04cff170307e4239da84a53e91f797ec9fa37146782abf1e529446d8896",
+          "boundsM": {
+            "min": [
+              -0.28999999165534973,
+              0.0,
+              -0.28999999165534973
+            ],
+            "max": [
+              0.28999999165534973,
+              0.9700000286102295,
+              0.28999996185302734
+            ],
+            "size": [
+              0.5799999833106995,
+              0.9700000286102295,
+              0.5799999535083771
+            ]
+          },
+          "triangles": 96,
+          "vertices": 192,
+          "primitives": 1,
+          "bytes": 11500,
+          "geometryBytes": 11500,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.28999999165534973,
+          0.0,
+          -0.28999999165534973
+        ],
+        "max": [
+          0.28999999165534973,
+          0.9700000286102295,
+          0.28999996185302734
+        ],
+        "size": [
+          0.5799999833106995,
+          0.9700000286102295,
+          0.5799999535083771
+        ]
+      },
+      "expectedDimensionsM": {
+        "width": 0.58,
+        "height": 0.97,
+        "depth": 0.58
+      },
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "New original representative design target, not a measured or official manufactured model.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "Original front-post frame retained for shelter; center ground frame for other props."
+      },
+      "attachmentDatum": {
+        "kind": "ground",
+        "planeY": 0,
+        "minimumGroundSamplePoints": 3,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "metal",
+          "node": "metal",
+          "role": "metal",
+          "surfaceId": "painted-metal",
+          "maps": {},
+          "bindingMode": "Untextured semantic PBR placeholder; future consumer may bind shared library after UV and color review",
+          "uvUnits": "one repeat per authored metre; not auto-scaled to current catalog period",
+          "alphaMode": "OPAQUE",
+          "doubleSided": false,
+          "pointLight": false
+        }
+      ],
+      "textureMode": "role-placeholders-no-maps",
+      "textureCost": {
+        "geometryBytes": 71684,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 71684,
+        "uniqueTexelBytesWithMips": 0,
+        "gpuResidency": "not measured"
+      },
+      "lodPolicy": {
+        "levels": [
+          0,
+          1
+        ],
+        "triangleCaps": [
+          1000,
+          200
+        ],
+        "geometryByteCaps": [
+          196608,
+          49152
+        ],
+        "suggestedDistanceM": [
+          30,
+          100
+        ],
+        "activation": "Source-selected near-view replacement only, projected-size tuning pending",
+        "keepScale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "clearance": {
+        "pedestrianPassageOutsideFootprintM": 1.8,
+        "doorwayApproachExclusionM": 1.5,
+        "parkedCarDoorSweepExclusionM": 0.9,
+        "thresholdSlopeMaxM": 0.14,
+        "datumSampleCountMinimum": 3,
+        "certification": "Representative game-clearance goals, not a legal accessibility certification."
+      },
+      "collision": {
+        "kind": "individual-component-aabb",
+        "file": "qa/collision-proxies.json",
+        "assetId": "garbage-bin",
+        "note": "Per-component source-derived boxes, never a shelter/rack full solid bounding box; candidate broadphase only."
+      },
+      "anchors": [
+        {
+          "id": "ground-datum",
+          "positionM": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "footprintPolygonXZ": [
+          [
+            -0.28999999165534973,
+            -0.28999999165534973
+          ],
+          [
+            0.28999999165534973,
+            -0.28999999165534973
+          ],
+          [
+            0.28999999165534973,
+            0.28999996185302734
+          ],
+          [
+            -0.28999999165534973,
+            0.28999996185302734
+          ]
+        ],
+        "sourceSelection": "placement-proposal.json",
+        "noRandomPopulationIncrease": true,
+        "noWorldXyzExceptions": true,
+        "sourceMeasuredFurnitureLocation": false,
+        "nonuniformScaleAllowed": false,
+        "rejectionRules": [
+          "doorway polygon or approach intersection",
+          "pedestrian corridor narrower than 1.8 m",
+          "car-door sweep overlap",
+          "road/rail surface overlap",
+          "terrain samples differ by >0.14 m",
+          "missing stable source key or permission to add population"
+        ]
+      },
+      "intendedConsumer": [
+        "lib/city/environment.ts:roadDecorations / lamps (proposed only)",
+        "future source-selected furniture placement adapter"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/blender-audit.json",
+          "qa/source-roundtrip.json",
+          "qa/artist-edit.json",
+          "qa/preview-index.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "state": "runtime_pending_webgl",
+        "required": [
+          "source population and authoritative placement",
+          "terrain datum and sidewalk collision",
+          "shared role material binding",
+          "glass sorting",
+          "LOD silhouette/pop",
+          "four city lighting conditions",
+          "cache/dispose/instancing/draw calls",
+          "GPU frame time and residency"
+        ]
+      }
+    },
+    {
+      "id": "fire-hydrant",
+      "taskId": "F02",
+      "variant": "fire-hydrant",
+      "kind": "street-furniture",
+      "source": "source/fire-hydrant.lod0.blend",
+      "sourceSha256": "be74d05f7d48050640655d1081372b2d2ff896f23242144c7e09f07da4e86825",
+      "lods": [
+        {
+          "level": 0,
+          "source": "source/fire-hydrant.lod0.blend",
+          "sourceSha256": "be74d05f7d48050640655d1081372b2d2ff896f23242144c7e09f07da4e86825",
+          "file": "exports/fire-hydrant.lod0.glb",
+          "sha256": "7707dd6eee3472bc2c96b46052be75b71b6b974f4d8099ac5ed50dfab7ac811d",
+          "boundsM": {
+            "min": [
+              -0.2750000059604645,
+              0.0,
+              -0.18000000715255737
+            ],
+            "max": [
+              0.2750000059604645,
+              0.8540000319480896,
+              0.23000001907348633
+            ],
+            "size": [
+              0.550000011920929,
+              0.8540000319480896,
+              0.4100000262260437
+            ]
+          },
+          "triangles": 320,
+          "vertices": 665,
+          "primitives": 1,
+          "bytes": 35484,
+          "geometryBytes": 35484,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 1,
+          "source": "source/fire-hydrant.lod1.blend",
+          "sourceSha256": "6e6c9142339efe47ec100e8ec6e8c7e450fb7fff97492de8b01f189cffa1e23d",
+          "file": "exports/fire-hydrant.lod1.glb",
+          "sha256": "db9f89295e73768e6288389e4cfc70740c626ca1466a9cfba3a6d27ada9bfbef",
+          "boundsM": {
+            "min": [
+              -0.2750000059604645,
+              0.0,
+              -0.18000000715255737
+            ],
+            "max": [
+              0.2750000059604645,
+              0.8540000319480896,
+              0.23000001907348633
+            ],
+            "size": [
+              0.550000011920929,
+              0.8540000319480896,
+              0.4100000262260437
+            ]
+          },
+          "triangles": 192,
+          "vertices": 390,
+          "primitives": 1,
+          "bytes": 21516,
+          "geometryBytes": 21516,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.2750000059604645,
+          0.0,
+          -0.18000000715255737
+        ],
+        "max": [
+          0.2750000059604645,
+          0.8540000319480896,
+          0.23000001907348633
+        ],
+        "size": [
+          0.550000011920929,
+          0.8540000319480896,
+          0.4100000262260437
+        ]
+      },
+      "expectedDimensionsM": {
+        "width": 0.55,
+        "height": 0.854,
+        "depth": 0.41
+      },
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "New original representative design target, not a measured or official manufactured model.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "Original front-post frame retained for shelter; center ground frame for other props."
+      },
+      "attachmentDatum": {
+        "kind": "ground",
+        "planeY": 0,
+        "minimumGroundSamplePoints": 3,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "metal",
+          "node": "metal",
+          "role": "metal",
+          "surfaceId": "painted-metal",
+          "maps": {},
+          "bindingMode": "Untextured semantic PBR placeholder; future consumer may bind shared library after UV and color review",
+          "uvUnits": "one repeat per authored metre; not auto-scaled to current catalog period",
+          "alphaMode": "OPAQUE",
+          "doubleSided": false,
+          "pointLight": false
+        }
+      ],
+      "textureMode": "role-placeholders-no-maps",
+      "textureCost": {
+        "geometryBytes": 57000,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 57000,
+        "uniqueTexelBytesWithMips": 0,
+        "gpuResidency": "not measured"
+      },
+      "lodPolicy": {
+        "levels": [
+          0,
+          1
+        ],
+        "triangleCaps": [
+          1000,
+          200
+        ],
+        "geometryByteCaps": [
+          196608,
+          49152
+        ],
+        "suggestedDistanceM": [
+          30,
+          100
+        ],
+        "activation": "Source-selected near-view replacement only, projected-size tuning pending",
+        "keepScale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "clearance": {
+        "pedestrianPassageOutsideFootprintM": 1.8,
+        "doorwayApproachExclusionM": 1.5,
+        "parkedCarDoorSweepExclusionM": 0.9,
+        "thresholdSlopeMaxM": 0.14,
+        "datumSampleCountMinimum": 3,
+        "certification": "Representative game-clearance goals, not a legal accessibility certification."
+      },
+      "collision": {
+        "kind": "individual-component-aabb",
+        "file": "qa/collision-proxies.json",
+        "assetId": "fire-hydrant",
+        "note": "Per-component source-derived boxes, never a shelter/rack full solid bounding box; candidate broadphase only."
+      },
+      "anchors": [
+        {
+          "id": "ground-datum",
+          "positionM": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "footprintPolygonXZ": [
+          [
+            -0.2750000059604645,
+            -0.18000000715255737
+          ],
+          [
+            0.2750000059604645,
+            -0.18000000715255737
+          ],
+          [
+            0.2750000059604645,
+            0.23000001907348633
+          ],
+          [
+            -0.2750000059604645,
+            0.23000001907348633
+          ]
+        ],
+        "sourceSelection": "placement-proposal.json",
+        "noRandomPopulationIncrease": true,
+        "noWorldXyzExceptions": true,
+        "sourceMeasuredFurnitureLocation": false,
+        "nonuniformScaleAllowed": false,
+        "rejectionRules": [
+          "doorway polygon or approach intersection",
+          "pedestrian corridor narrower than 1.8 m",
+          "car-door sweep overlap",
+          "road/rail surface overlap",
+          "terrain samples differ by >0.14 m",
+          "missing stable source key or permission to add population"
+        ]
+      },
+      "intendedConsumer": [
+        "lib/city/environment.ts:roadDecorations / lamps (proposed only)",
+        "future source-selected furniture placement adapter"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/blender-audit.json",
+          "qa/source-roundtrip.json",
+          "qa/artist-edit.json",
+          "qa/preview-index.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "state": "runtime_pending_webgl",
+        "required": [
+          "source population and authoritative placement",
+          "terrain datum and sidewalk collision",
+          "shared role material binding",
+          "glass sorting",
+          "LOD silhouette/pop",
+          "four city lighting conditions",
+          "cache/dispose/instancing/draw calls",
+          "GPU frame time and residency"
+        ]
+      }
+    },
+    {
+      "id": "bicycle-rack",
+      "taskId": "F02",
+      "variant": "bicycle-rack",
+      "kind": "street-furniture",
+      "source": "source/bicycle-rack.lod0.blend",
+      "sourceSha256": "77b3dfdf6ea38378ed248cc081b12f75e7706a574fa22df488e9b7deb20f990a",
+      "lods": [
+        {
+          "level": 0,
+          "source": "source/bicycle-rack.lod0.blend",
+          "sourceSha256": "77b3dfdf6ea38378ed248cc081b12f75e7706a574fa22df488e9b7deb20f990a",
+          "file": "exports/bicycle-rack.lod0.glb",
+          "sha256": "0b67e0cff1ff41599e0c5d79d17a084969995be156051b87b525c4f90df9f71a",
+          "boundsM": {
+            "min": [
+              -0.4850000098270286,
+              0.0,
+              -0.08500000545391731
+            ],
+            "max": [
+              0.4850000321787884,
+              0.8400000333786011,
+              0.08500000386656417
+            ],
+            "size": [
+              0.970000042005817,
+              0.8400000333786011,
+              0.17000000932048148
+            ]
+          },
+          "triangles": 228,
+          "vertices": 432,
+          "primitives": 1,
+          "bytes": 23864,
+          "geometryBytes": 23864,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 1,
+          "source": "source/bicycle-rack.lod1.blend",
+          "sourceSha256": "f470294628e5a11a71938992fe9a4e6b7168b4edea536db3a3e8bf38066db931",
+          "file": "exports/bicycle-rack.lod1.glb",
+          "sha256": "c34b0f4dffbd22fec0ffc874edb54870e8cd2dc388d9a5316df0f4b1e65e68d8",
+          "boundsM": {
+            "min": [
+              -0.4850000089210542,
+              0.0,
+              -0.08500000454794517
+            ],
+            "max": [
+              0.485000031272814,
+              0.8400000333786011,
+              0.08500000296058977
+            ],
+            "size": [
+              0.9700000401938682,
+              0.8400000333786011,
+              0.17000000750853494
+            ]
+          },
+          "triangles": 84,
+          "vertices": 172,
+          "primitives": 1,
+          "bytes": 10516,
+          "geometryBytes": 10516,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.4850000098270286,
+          0.0,
+          -0.08500000545391731
+        ],
+        "max": [
+          0.4850000321787884,
+          0.8400000333786011,
+          0.08500000386656417
+        ],
+        "size": [
+          0.970000042005817,
+          0.8400000333786011,
+          0.17000000932048148
+        ]
+      },
+      "expectedDimensionsM": {
+        "width": 0.97,
+        "height": 0.84,
+        "depth": 0.17
+      },
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "New original representative design target, not a measured or official manufactured model.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "Original front-post frame retained for shelter; center ground frame for other props."
+      },
+      "attachmentDatum": {
+        "kind": "ground",
+        "planeY": 0,
+        "minimumGroundSamplePoints": 3,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "metal",
+          "node": "metal",
+          "role": "metal",
+          "surfaceId": "painted-metal",
+          "maps": {},
+          "bindingMode": "Untextured semantic PBR placeholder; future consumer may bind shared library after UV and color review",
+          "uvUnits": "one repeat per authored metre; not auto-scaled to current catalog period",
+          "alphaMode": "OPAQUE",
+          "doubleSided": false,
+          "pointLight": false
+        }
+      ],
+      "textureMode": "role-placeholders-no-maps",
+      "textureCost": {
+        "geometryBytes": 34380,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 34380,
+        "uniqueTexelBytesWithMips": 0,
+        "gpuResidency": "not measured"
+      },
+      "lodPolicy": {
+        "levels": [
+          0,
+          1
+        ],
+        "triangleCaps": [
+          1000,
+          200
+        ],
+        "geometryByteCaps": [
+          196608,
+          49152
+        ],
+        "suggestedDistanceM": [
+          30,
+          100
+        ],
+        "activation": "Source-selected near-view replacement only, projected-size tuning pending",
+        "keepScale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "clearance": {
+        "pedestrianPassageOutsideFootprintM": 1.8,
+        "doorwayApproachExclusionM": 1.5,
+        "parkedCarDoorSweepExclusionM": 0.9,
+        "thresholdSlopeMaxM": 0.14,
+        "datumSampleCountMinimum": 3,
+        "certification": "Representative game-clearance goals, not a legal accessibility certification.",
+        "bicycleParkingEnvelopeM": {
+          "min": [
+            -1.1,
+            0,
+            -0.7
+          ],
+          "max": [
+            1.1,
+            1.2,
+            0.7
+          ]
+        }
+      },
+      "collision": {
+        "kind": "individual-component-aabb",
+        "file": "qa/collision-proxies.json",
+        "assetId": "bicycle-rack",
+        "note": "Per-component source-derived boxes, never a shelter/rack full solid bounding box; candidate broadphase only."
+      },
+      "anchors": [
+        {
+          "id": "ground-datum",
+          "positionM": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "footprintPolygonXZ": [
+          [
+            -0.4850000098270286,
+            -0.08500000545391731
+          ],
+          [
+            0.4850000321787884,
+            -0.08500000545391731
+          ],
+          [
+            0.4850000321787884,
+            0.08500000386656417
+          ],
+          [
+            -0.4850000098270286,
+            0.08500000386656417
+          ]
+        ],
+        "sourceSelection": "placement-proposal.json",
+        "noRandomPopulationIncrease": true,
+        "noWorldXyzExceptions": true,
+        "sourceMeasuredFurnitureLocation": false,
+        "nonuniformScaleAllowed": false,
+        "rejectionRules": [
+          "doorway polygon or approach intersection",
+          "pedestrian corridor narrower than 1.8 m",
+          "car-door sweep overlap",
+          "road/rail surface overlap",
+          "terrain samples differ by >0.14 m",
+          "missing stable source key or permission to add population"
+        ]
+      },
+      "intendedConsumer": [
+        "lib/city/environment.ts:roadDecorations / lamps (proposed only)",
+        "future source-selected furniture placement adapter"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/blender-audit.json",
+          "qa/source-roundtrip.json",
+          "qa/artist-edit.json",
+          "qa/preview-index.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "state": "runtime_pending_webgl",
+        "required": [
+          "source population and authoritative placement",
+          "terrain datum and sidewalk collision",
+          "shared role material binding",
+          "glass sorting",
+          "LOD silhouette/pop",
+          "four city lighting conditions",
+          "cache/dispose/instancing/draw calls",
+          "GPU frame time and residency"
+        ]
+      }
+    },
+    {
+      "id": "bollard",
+      "taskId": "F02",
+      "variant": "bollard",
+      "kind": "street-furniture",
+      "source": "source/bollard.lod0.blend",
+      "sourceSha256": "6741699ffd67b8405853ee2b68fda398529cc61eefb70e6d9451602b8c6e281e",
+      "lods": [
+        {
+          "level": 0,
+          "source": "source/bollard.lod0.blend",
+          "sourceSha256": "6741699ffd67b8405853ee2b68fda398529cc61eefb70e6d9451602b8c6e281e",
+          "file": "exports/bollard.lod0.glb",
+          "sha256": "3d1eca13b4e656d37cc16fe49d8c1ae5aff4f9c4266e3c7119d864f232dbf3f8",
+          "boundsM": {
+            "min": [
+              -0.0949999988079071,
+              0.0,
+              -0.0949999988079071
+            ],
+            "max": [
+              0.0949999988079071,
+              0.8999999761581421,
+              0.0949999988079071
+            ],
+            "size": [
+              0.1899999976158142,
+              0.8999999761581421,
+              0.1899999976158142
+            ]
+          },
+          "triangles": 160,
+          "vertices": 288,
+          "primitives": 2,
+          "bytes": 17676,
+          "geometryBytes": 17676,
+          "embeddedImageBytes": 0
+        },
+        {
+          "level": 1,
+          "source": "source/bollard.lod1.blend",
+          "sourceSha256": "1bcd8a1907ebc91a3675f29acb9ac40a698461cc4c32df3a75c7e56884e7f984",
+          "file": "exports/bollard.lod1.glb",
+          "sha256": "f763e6f92d01beb50d7fd4734d3db39256bde6f5c34d7d7c9dabffc8fe74ae69",
+          "boundsM": {
+            "min": [
+              -0.0949999988079071,
+              0.0,
+              -0.0949999988079071
+            ],
+            "max": [
+              0.0949999988079071,
+              0.8999999761581421,
+              0.0949999988079071
+            ],
+            "size": [
+              0.1899999976158142,
+              0.8999999761581421,
+              0.1899999976158142
+            ]
+          },
+          "triangles": 104,
+          "vertices": 192,
+          "primitives": 2,
+          "bytes": 12724,
+          "geometryBytes": 12724,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.0949999988079071,
+          0.0,
+          -0.0949999988079071
+        ],
+        "max": [
+          0.0949999988079071,
+          0.8999999761581421,
+          0.0949999988079071
+        ],
+        "size": [
+          0.1899999976158142,
+          0.8999999761581421,
+          0.1899999976158142
+        ]
+      },
+      "expectedDimensionsM": {
+        "width": 0.19,
+        "height": 0.9,
+        "depth": 0.19
+      },
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "New original representative design target, not a measured or official manufactured model.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "Original front-post frame retained for shelter; center ground frame for other props."
+      },
+      "attachmentDatum": {
+        "kind": "ground",
+        "planeY": 0,
+        "minimumGroundSamplePoints": 3,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "metal",
+          "node": "metal",
+          "role": "metal",
+          "surfaceId": "painted-metal",
+          "maps": {},
+          "bindingMode": "Untextured semantic PBR placeholder; future consumer may bind shared library after UV and color review",
+          "uvUnits": "one repeat per authored metre; not auto-scaled to current catalog period",
+          "alphaMode": "OPAQUE",
+          "doubleSided": false,
+          "pointLight": false
+        },
+        {
+          "material": "diffuser",
+          "node": "diffuser",
+          "role": "diffuser",
+          "surfaceId": "visual-diffuser",
+          "maps": {},
+          "bindingMode": "Untextured semantic PBR placeholder; future consumer may bind shared library after UV and color review",
+          "uvUnits": "one repeat per authored metre; not auto-scaled to current catalog period",
+          "alphaMode": "OPAQUE",
+          "doubleSided": false,
+          "pointLight": false
+        }
+      ],
+      "textureMode": "role-placeholders-no-maps",
+      "textureCost": {
+        "geometryBytes": 30400,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 30400,
+        "uniqueTexelBytesWithMips": 0,
+        "gpuResidency": "not measured"
+      },
+      "lodPolicy": {
+        "levels": [
+          0,
+          1
+        ],
+        "triangleCaps": [
+          1000,
+          200
+        ],
+        "geometryByteCaps": [
+          196608,
+          49152
+        ],
+        "suggestedDistanceM": [
+          30,
+          100
+        ],
+        "activation": "Source-selected near-view replacement only, projected-size tuning pending",
+        "keepScale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "clearance": {
+        "pedestrianPassageOutsideFootprintM": 1.8,
+        "doorwayApproachExclusionM": 1.5,
+        "parkedCarDoorSweepExclusionM": 0.9,
+        "thresholdSlopeMaxM": 0.14,
+        "datumSampleCountMinimum": 3,
+        "certification": "Representative game-clearance goals, not a legal accessibility certification."
+      },
+      "collision": {
+        "kind": "individual-component-aabb",
+        "file": "qa/collision-proxies.json",
+        "assetId": "bollard",
+        "note": "Per-component source-derived boxes, never a shelter/rack full solid bounding box; candidate broadphase only."
+      },
+      "anchors": [
+        {
+          "id": "ground-datum",
+          "positionM": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "footprintPolygonXZ": [
+          [
+            -0.0949999988079071,
+            -0.0949999988079071
+          ],
+          [
+            0.0949999988079071,
+            -0.0949999988079071
+          ],
+          [
+            0.0949999988079071,
+            0.0949999988079071
+          ],
+          [
+            -0.0949999988079071,
+            0.0949999988079071
+          ]
+        ],
+        "sourceSelection": "placement-proposal.json",
+        "noRandomPopulationIncrease": true,
+        "noWorldXyzExceptions": true,
+        "sourceMeasuredFurnitureLocation": false,
+        "nonuniformScaleAllowed": false,
+        "rejectionRules": [
+          "doorway polygon or approach intersection",
+          "pedestrian corridor narrower than 1.8 m",
+          "car-door sweep overlap",
+          "road/rail surface overlap",
+          "terrain samples differ by >0.14 m",
+          "missing stable source key or permission to add population"
+        ]
+      },
+      "intendedConsumer": [
+        "lib/city/environment.ts:roadDecorations / lamps (proposed only)",
+        "future source-selected furniture placement adapter"
+      ],
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/blender-audit.json",
+          "qa/source-roundtrip.json",
+          "qa/artist-edit.json",
+          "qa/preview-index.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "state": "runtime_pending_webgl",
+        "required": [
+          "source population and authoritative placement",
+          "terrain datum and sidewalk collision",
+          "shared role material binding",
+          "glass sorting",
+          "LOD silhouette/pop",
+          "four city lighting conditions",
+          "cache/dispose/instancing/draw calls",
+          "GPU frame time and residency"
+        ]
+      }
+    }
+  ],
+  "textures": []
+}
