@@ -4,8 +4,13 @@ import * as THREE from 'three';
 import { cityModule } from './helpers/city-modules.mjs';
 const { buildRoadGraph } = await import(cityModule('road-graph'));
 const { GroundSurfaceIndex } = await import(cityModule('ground-surface'));
-const { validatedSidewalkRoute, sampleSidewalkRoute, TrunkClearanceIndex } =
-  await import(cityModule('city-life/sidewalk-route'));
+const {
+  validatedSidewalkRoute,
+  sampleSidewalkRoute,
+  sidewalkStationWindow,
+  SIDEWALK_MAX_WINDOWS_PER_EDGE,
+  TrunkClearanceIndex,
+} = await import(cityModule('city-life/sidewalk-route'));
 const { CityPedestrians, nearbySidewalkMeshes } = await import(
   cityModule('city-life/city-pedestrians')
 );
@@ -294,7 +299,9 @@ test('city consumer preserves visible identities across quality changes and adds
   for (const side of [-1, 1])
     for (const seed of [0, 1])
       assert.ok(
-        city.renderer.actorSlot(`footway:${graph.edges[0].id}:${side}:${seed}`),
+        city.renderer.actorSlot(
+          `footway:${graph.edges[0].id}:${side}:run0:${seed}`,
+        ),
       );
   const beforeFarQueries = floorQueries(),
     beforeFarLoads = loads;
@@ -347,7 +354,7 @@ test('fixed-step background movement interpolates small visible steps and discar
   const city = new CityPedestrians(engine);
   city.renderer.load = async () => {};
   city.update(0.2);
-  const id = `footway:${graph.edges[0].id}:-1:0`;
+  const id = `footway:${graph.edges[0].id}:-1:run0:0`;
   const position = () => {
     const slot = city.renderer.actorSlot(id);
     assert.ok(slot);
@@ -512,4 +519,259 @@ test('city route validation uses existing world tree data once and leaves blocke
   );
   city.dispose();
   disposePaving([mesh]);
+});
+
+test('fixed source windows cover long-edge interiors and preserve junction trims and floor/tree proofs', () => {
+  const graph = graphFor({
+      points: [
+        [0, 0],
+        [2000, 0],
+      ],
+    }),
+    edge = graph.edges[0],
+    mesh = paving(900, 1100);
+  const first = sidewalkStationWindow(graph, edge, 0),
+    middle = sidewalkStationWindow(graph, edge, 12),
+    last = sidewalkStationWindow(graph, edge, 24);
+  assert.equal(first.startM, 10);
+  assert.equal(first.endM, 90);
+  assert.equal(middle.startM, 970);
+  assert.equal(middle.endM, 1050);
+  assert.equal(last.endM, 1990);
+  assert.equal(sidewalkStationWindow(graph, edge, 25), null);
+  for (const index of [-1, 0.5, NaN, Infinity, SIDEWALK_MAX_WINDOWS_PER_EDGE])
+    assert.equal(sidewalkStationWindow(graph, edge, index), null);
+  const route = validatedSidewalkRoute(graph, edge, 1, floorProbe([mesh]), {
+    windowIndex: 12,
+  });
+  assert.ok(route);
+  assert.equal(route.routeId, `footway:${edge.id}:1:run12`);
+  assert.equal(route.sourceStartM, 970);
+  assert.equal(route.sourceEndM, 1050);
+  assert.equal(route.points[0][0], 970);
+  assert.equal(route.points.at(-1)[0], 1050);
+  assert.equal(
+    validatedSidewalkRoute(graph, edge, 1, floorProbe([mesh])),
+    null,
+    'missing source-end floor does not prevent proving a separate middle window',
+  );
+  const trees = new TrunkClearanceIndex([{ x: 1000.375, z: 5 }]);
+  assert.equal(
+    validatedSidewalkRoute(graph, edge, 1, floorProbe([mesh]), {
+      windowIndex: 12,
+      clearSegment: (a, b) => trees.clearSegment(a, b),
+    }),
+    null,
+    'middle windows still reject a trunk between physical floor samples',
+  );
+  const gap = [paving(900, 1000), paving(1001, 1100)];
+  assert.equal(
+    validatedSidewalkRoute(graph, edge, 1, floorProbe(gap), {
+      windowIndex: 12,
+    }),
+    null,
+    'middle windows retain clipped-floor refusal',
+  );
+  const oversized = graphFor({
+    points: [
+      [0, 0],
+      [1e9, 0],
+    ],
+  });
+  assert.equal(sidewalkStationWindow(oversized, oversized.edges[0], 0), null);
+  disposePaving([mesh, ...gap]);
+});
+
+test('cold long-edge midpoint selects its fixed nearest segment window before a closer source-node distractor', () => {
+  const graph = buildRoadGraph(
+    [
+      {
+        id: 'distractor',
+        name: 'Other Street',
+        roadClass: 'local',
+        width: 8,
+        corridorWidth: 12,
+        level: 'ground',
+        points: [
+          [980, 125],
+          [1060, 125],
+        ],
+      },
+      {
+        id: 'long',
+        name: 'Long Street',
+        roadClass: 'local',
+        width: 8,
+        corridorWidth: 12,
+        level: 'ground',
+        points: [
+          [0, 0],
+          [2000, 0],
+        ],
+      },
+    ],
+    { nodeIntersections: false },
+  );
+  const edge = graph.edges.find((e) => e.sourceIds.includes('long')),
+    mesh = paving(900, 1100),
+    { engine } = fakeEngine(graph, [mesh]);
+  engine.compatibleGraphics = true;
+  engine.camera.position.x = 1000;
+  engine.camera.lookAt(1000, 6, 50);
+  const city = new CityPedestrians(engine);
+  let loads = 0;
+  city.renderer.load = async () => {
+    loads++;
+  };
+  city.update(0.2);
+  const stats = city.stats(),
+    observed = city.debugPoses();
+  assert.equal(
+    stats.attemptedRoutes,
+    2,
+    'cold selection stays at two validations',
+  );
+  assert.equal(stats.routes, 2);
+  assert.equal(stats.selected, 4);
+  assert.equal(stats.nearbyCandidates, 4);
+  assert.equal(stats.safeNearbyCandidates, 4);
+  assert.ok(stats.closestCandidateM < 60);
+  assert.ok(loads > 0, 'nearby safe actors can request shared model resources');
+  assert.ok(observed.every((p) => p.routeId.startsWith(`footway:${edge.id}:`)));
+  assert.ok(
+    observed.every((p) => p.sourceWindow === 12 && p.sourceStartM === 970),
+  );
+  assert.ok(
+    observed.every((p) => p.position[0] >= 970 && p.position[0] <= 1050),
+  );
+  city.dispose();
+  disposePaving([mesh]);
+});
+
+test('camera travel changes source windows without moving existing route identities or exceeding the union budget', () => {
+  const graph = graphFor({
+      points: [
+        [0, 0],
+        [2000, 0],
+      ],
+    }),
+    mesh = paving(0, 2000),
+    { engine } = fakeEngine(graph, [mesh]);
+  engine.camera.position.x = 1000;
+  engine.camera.lookAt(1000, 6, 50);
+  const city = new CityPedestrians(engine);
+  city.renderer.load = async () => {};
+  city.update(0.2);
+  const initial = city.debugPoses();
+  assert.equal(initial.length, 4);
+  engine.camera.position.x = 1010;
+  engine.camera.lookAt(1010, 6, 50);
+  city.update(0.2);
+  for (const before of initial) {
+    const after = city.debugPoses().find((p) => p.actorId === before.actorId);
+    assert.ok(after, 'nearby identities remain selected as the camera moves');
+    assert.equal(after.sourceWindow, before.sourceWindow);
+    assert.equal(after.sourceStartM, before.sourceStartM);
+    assert.equal(after.sourceEndM, before.sourceEndM);
+    assert.ok(
+      new THREE.Vector3(...after.position).distanceTo(
+        new THREE.Vector3(...before.position),
+      ) < 0.4,
+      'camera displacement is not applied to a fixed actor route',
+    );
+  }
+  for (let x = 1200; x <= 1800; x += 100) {
+    engine.camera.position.x = x;
+    engine.camera.lookAt(x, 6, 50);
+    city.update(0.2);
+    const stats = city.stats();
+    assert.ok(stats.nearbyCandidates > 0 && stats.closestCandidateM < 60);
+    assert.ok(stats.selected <= 32 && stats.rendered <= 32);
+    assert.ok(stats.routes <= 64 && stats.actorStates <= 128);
+    assert.ok(stats.attemptedRoutes <= 256);
+    assert.ok(
+      city
+        .debugPoses()
+        .every((p) => p.sourceStartM >= 10 && p.sourceEndM <= 1990),
+    );
+  }
+  const latestRendered = city.debugPoses().filter((p) => p.rendered);
+  assert.ok(latestRendered.length > 0);
+  assert.ok(latestRendered.every((p) => p.sourceWindow > 12));
+  city.dispose();
+  disposePaving([mesh]);
+});
+
+test('diagonal source-segment cell coverage finds a midpoint far from both source nodes', () => {
+  const graph = graphFor({
+      points: [
+        [0, 0],
+        [2000, 2000],
+      ],
+    }),
+    mesh = paving(0, Math.hypot(2000, 2000)),
+    { engine } = fakeEngine(graph, [mesh]);
+  mesh.rotation.y = -Math.PI / 4;
+  const normal = 1 / Math.sqrt(2);
+  engine.camera.position.set(1000 - 25 * normal, 6, 1000 + 25 * normal);
+  engine.camera.lookAt(
+    engine.camera.position.x - 100,
+    6,
+    engine.camera.position.z + 100,
+  );
+  const city = new CityPedestrians(engine);
+  city.renderer.load = async () => {};
+  city.update(0.2);
+  assert.equal(city.stats().attemptedRoutes, 2);
+  assert.equal(city.stats().routes, 2);
+  assert.ok(city.stats().nearbyCandidates > 0);
+  assert.ok(city.stats().safeNearbyCandidates > 0);
+  assert.ok(city.stats().selected > 0);
+  assert.ok(city.stats().closestCandidateM < 60);
+  assert.ok(city.debugPoses().every((p) => p.sourceWindow === 17));
+  city.dispose();
+  disposePaving([mesh]);
+});
+
+test('crossing a floor-index cell retries an incomplete window proof and preserves already proven identities', () => {
+  const graph = graphFor({
+      points: [
+        [690, 0],
+        [930, 0],
+      ],
+    }),
+    edge = graph.edges[0],
+    meshes = Array.from({ length: 24 }, (_, i) =>
+      paving(690 + i * 10, 700 + i * 10),
+    ),
+    { engine } = fakeEngine(graph, meshes);
+  engine.camera.position.x = 599;
+  engine.camera.lookAt(599, 6, 50);
+  const city = new CityPedestrians(engine);
+  city.renderer.load = async () => {};
+  for (let i = 0; i < 3; i++) city.update(0.2);
+  assert.equal(city.stats().routes, 2);
+  assert.equal(city.stats().attemptedRoutes, 4);
+  assert.ok(city.stats().floorIndexedMeshes < meshes.length);
+  const validId = `footway:${edge.id}:-1:run0`,
+    partialId = `footway:${edge.id}:-1:run1`,
+    provenRoute = city.routes.get(validId),
+    provenActor = city.walkers.get(`${validId}:0`).actor;
+  assert.ok(provenRoute);
+  assert.equal(city.routes.has(partialId), false);
+  engine.camera.position.x = 820;
+  engine.camera.lookAt(820, 6, 50);
+  city.update(0.2);
+  const stats = city.stats();
+  assert.equal(stats.floorIndexedMeshes, meshes.length);
+  assert.equal(stats.routes, 4);
+  assert.equal(city.routes.get(validId), provenRoute);
+  assert.equal(city.walkers.get(`${validId}:0`).actor, provenActor);
+  assert.ok(city.routes.has(partialId));
+  assert.ok(city.routes.has(`footway:${edge.id}:1:run1`));
+  assert.ok(stats.closestCandidateM < 40);
+  assert.ok(stats.nearbyCandidates > 0 && stats.selected > 0);
+  assert.ok(city.debugPoses().some((p) => p.sourceWindow === 1 && p.rendered));
+  city.dispose();
+  disposePaving(meshes);
 });

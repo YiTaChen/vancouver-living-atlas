@@ -19,9 +19,11 @@ import {
 import {
   validatedSidewalkRoute,
   sampleSidewalkRoute,
-  sidewalkEdgeEligible,
+  sidewalkStationWindow,
+  SIDEWALK_MAX_WINDOWS_PER_EDGE,
   TrunkClearanceIndex,
   type SidewalkRoute,
+  type SidewalkStationWindow,
 } from './sidewalk-route';
 
 /** Only source-authored, visible ground footways in a bounded coarse neighborhood.
@@ -81,6 +83,20 @@ interface Walker {
   delta: number;
   yaw: number;
 }
+interface SourceWindow {
+  edge: RoadEdge;
+  window: SidewalkStationWindow;
+}
+function windowDistance2(window: SidewalkStationWindow, x: number, z: number) {
+  const dx = window.b[0] - window.a[0],
+    dz = window.b[1] - window.a[1];
+  const t = THREE.MathUtils.clamp(
+    ((x - window.a[0]) * dx + (z - window.a[1]) * dz) / (dx * dx + dz * dz),
+    0,
+    1,
+  );
+  return (x - window.a[0] - dx * t) ** 2 + (z - window.a[1] - dz * t) ** 2;
+}
 /** One bounded city-wide background population. No player/vehicle collision
  * controller or near-distance passenger skeleton is claimed by this consumer.
  * Sidewalk meshes are queried only while validating a new local route.
@@ -92,7 +108,7 @@ export class CityPedestrians {
   private quality: string;
   private reselectingQuality = false;
   private graph: RoadGraph;
-  private edgeCells = new Map<string, RoadEdge[]>();
+  private edgeCells = new Map<string, SourceWindow[]>();
   private routes = new Map<string, SidewalkRoute>();
   private walkers = new Map<string, Walker>();
   private attempted = new Map<string, boolean>();
@@ -123,16 +139,34 @@ export class CityPedestrians {
     this.e.scene.add(this.renderer.group);
     this.graph = e.data.roadGraph;
     if (!this.graph) return;
-    for (const edge of this.graph.edges) {
-      const a = this.graph.nodes[edge.a];
-      if (!sidewalkEdgeEligible(this.graph, edge) || edge.length < 28) continue;
-      // The <=110m route begins at the source node; long edges do not expand
-      // a city-sized cell grid or silently create crossings along their centreline.
-      const key = `${Math.floor(a.point[0] / 100)},${Math.floor(a.point[1] / 100)}`;
-      const bucket = this.edgeCells.get(key) ?? [];
-      bucket.push(edge);
-      this.edgeCells.set(key, bucket);
-    }
+    for (const edge of this.graph.edges)
+      for (
+        let windowIndex = 0;
+        windowIndex < SIDEWALK_MAX_WINDOWS_PER_EDGE;
+        windowIndex++
+      ) {
+        const window = sidewalkStationWindow(this.graph, edge, windowIndex);
+        if (!window) break;
+        const source = { edge, window };
+        // An <=80m window touches at most four 100m cells, even on a diagonal.
+        // This covers long-edge interiors with linear storage, instead of using
+        // only node a or expanding the entire long segment's bounding rectangle.
+        for (
+          let x = Math.floor(Math.min(window.a[0], window.b[0]) / 100);
+          x <= Math.floor(Math.max(window.a[0], window.b[0]) / 100);
+          x++
+        )
+          for (
+            let z = Math.floor(Math.min(window.a[1], window.b[1]) / 100);
+            z <= Math.floor(Math.max(window.a[1], window.b[1]) / 100);
+            z++
+          ) {
+            const key = `${x},${z}`;
+            const bucket = this.edgeCells.get(key) ?? [];
+            bucket.push(source);
+            this.edgeCells.set(key, bucket);
+          }
+      }
   }
   private makeSelector() {
     return new PopulationSelector(
@@ -179,25 +213,30 @@ export class CityPedestrians {
       this.floor = new GroundSurfaceIndex(meshes);
       this.floorCell = floorCell;
       this.floorMeshes = meshes.length;
+      // A failed run may extend beyond the previous local floor index. Retry
+      // failures against the new geometry neighborhood, preserving proven
+      // routes and their existing actor identities.
+      for (const [key, valid] of this.attempted)
+        if (!valid) this.attempted.delete(key);
     }
     const cx = Math.floor(this.center.x / 100),
       cz = Math.floor(this.center.z / 100);
-    const edges: RoadEdge[] = [];
+    const nearby = new Map<string, SourceWindow>();
     for (let x = cx - 2; x <= cx + 2; x++)
       for (let z = cz - 2; z <= cz + 2; z++)
-        edges.push(...(this.edgeCells.get(`${x},${z}`) ?? []));
-    edges.sort((a, b) => {
-      const p = this.graph.nodes[a.a].point,
-        q = this.graph.nodes[b.a].point;
-      return (
-        Math.hypot(p[0] - this.center.x, p[1] - this.center.z) -
-        Math.hypot(q[0] - this.center.x, q[1] - this.center.z)
-      );
-    });
+        for (const source of this.edgeCells.get(`${x},${z}`) ?? [])
+          nearby.set(`${source.edge.id}:${source.window.windowIndex}`, source);
+    const windows = [...nearby.values()].sort(
+      (a, b) =>
+        windowDistance2(a.window, this.center.x, this.center.z) -
+          windowDistance2(b.window, this.center.x, this.center.z) ||
+        a.edge.id - b.edge.id ||
+        a.window.windowIndex - b.window.windowIndex,
+    );
     let probes = 0;
-    for (const edge of edges)
+    for (const { edge, window } of windows)
       for (const side of [-1, 1] as const) {
-        const key = `footway:${edge.id}:${side}`;
+        const key = `footway:${edge.id}:${side}:run${window.windowIndex}`;
         if (this.routes.has(key) || this.attempted.has(key) || probes >= 2)
           continue;
         if (this.routes.size >= 64) {
@@ -229,6 +268,7 @@ export class CityPedestrians {
         for (const offsetFromCurbM of [1, 0.55, 1.45]) {
           route = validatedSidewalkRoute(this.graph, edge, side, probe, {
             offsetFromCurbM,
+            windowIndex: window.windowIndex,
             clearSegment: (a, b) => this.trunks!.clearSegment(a, b),
           });
           if (route) break;
@@ -248,7 +288,7 @@ export class CityPedestrians {
           this.walkers.set(id, {
             actor: new PathActor(id, route, station, seed * 0.4),
             route,
-            seed: edge.id * 2 + seed,
+            seed: edge.id * 2 + window.windowIndex * 7 + seed,
             previous: station,
             current: station,
             movementAt: this.clock.time,
@@ -461,6 +501,9 @@ export class CityPedestrians {
         actorId: selected.actorId,
         routeId: w.route.routeId,
         offsetFromCurbM: w.route.offsetFromCurbM,
+        sourceWindow: w.route.sourceWindow,
+        sourceStartM: w.route.sourceStartM,
+        sourceEndM: w.route.sourceEndM,
         surfaceId: w.route.surfaceId,
         layer: w.route.layer,
         position: [...pose.position] as [number, number, number],

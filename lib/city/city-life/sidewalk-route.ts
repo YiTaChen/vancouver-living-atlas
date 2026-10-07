@@ -10,6 +10,9 @@ export interface SidewalkRoute {
   /** An out-and-back on one footway; never a fabricated intersection crossing. */
   lengthM: number;
   offsetFromCurbM: number;
+  sourceWindow: number;
+  sourceStartM: number;
+  sourceEndM: number;
   points: Point3[];
   cumulative: number[];
 }
@@ -102,7 +105,60 @@ export class TrunkClearanceIndex {
 
 export interface SidewalkRouteOptions {
   offsetFromCurbM?: number;
+  /** Fixed source station window; never a camera-relative moving route. */
+  windowIndex?: number;
   clearSegment?: (a: Point3, b: Point3) => boolean;
+}
+
+export const SIDEWALK_WINDOW_M = 80;
+export const SIDEWALK_MAX_WINDOWS_PER_EDGE = 512;
+export interface SidewalkStationWindow {
+  windowIndex: number;
+  startM: number;
+  endM: number;
+  a: readonly [number, number];
+  b: readonly [number, number];
+}
+
+/** Cover the actual source segment with stable, bounded station runs. Only the
+ * source junctions receive a 10m trim; interior windows are not fake junctions.
+ * Invalid/unreasonably large sources fail closed instead of expanding a grid. */
+export function sidewalkStationWindow(
+  graph: RoadGraph,
+  edge: RoadEdge,
+  windowIndex: number,
+): SidewalkStationWindow | null {
+  if (
+    !sidewalkEdgeEligible(graph, edge) ||
+    !Number.isSafeInteger(windowIndex) ||
+    windowIndex < 0 ||
+    windowIndex >= SIDEWALK_MAX_WINDOWS_PER_EDGE
+  )
+    return null;
+  const a = graph.nodes[edge.a].point,
+    b = graph.nodes[edge.b].point,
+    dx = b[0] - a[0],
+    dz = b[1] - a[1],
+    length = Math.hypot(dx, dz);
+  if (
+    !Number.isFinite(length) ||
+    length < 28 ||
+    length > SIDEWALK_WINDOW_M * SIDEWALK_MAX_WINDOWS_PER_EDGE + 20 ||
+    ![...a, ...b].every((v) => Number.isSafeInteger(Math.floor(v / 100)))
+  )
+    return null;
+  const startM = 10 + windowIndex * SIDEWALK_WINDOW_M,
+    endM = Math.min(length - 10, startM + SIDEWALK_WINDOW_M);
+  // Preserve the minimum useful run from the original 28m edge requirement.
+  // A final shorter fragment remains empty rather than fabricating a tiny loop.
+  if (endM - startM < 8) return null;
+  return {
+    windowIndex,
+    startM,
+    endM,
+    a: [a[0] + (dx / length) * startM, a[1] + (dz / length) * startM],
+    b: [a[0] + (dx / length) * endM, a[1] + (dz / length) * endM],
+  };
 }
 
 /** The source graph's ground tag does not grant protected route access. */
@@ -140,15 +196,14 @@ export function validatedSidewalkRoute(
 ): SidewalkRoute | null {
   const a = graph.nodes[edge.a],
     b = graph.nodes[edge.b];
-  if (!sidewalkEdgeEligible(graph, edge) || (side !== -1 && side !== 1))
-    return null;
+  const windowIndex = options.windowIndex ?? 0;
+  const window = sidewalkStationWindow(graph, edge, windowIndex);
+  if (!window || (side !== -1 && side !== 1)) return null;
   const dx = b.point[0] - a.point[0],
     dz = b.point[1] - a.point[1];
   const length = Math.hypot(dx, dz);
-  if (!Number.isFinite(length) || length < 28) return null;
-  // Keep 10m clear of junctions; avoid building routes of unbounded length.
-  const start = 10,
-    end = Math.min(length - 10, 110);
+  const start = window.startM,
+    end = window.endM;
   const offsetFromCurbM = options.offsetFromCurbM ?? 1;
   if (
     !Number.isFinite(offsetFromCurbM) ||
@@ -208,13 +263,16 @@ export function validatedSidewalkRoute(
     points.push(point);
   }
   return {
-    routeId: `footway:${edge.id}:${side}`,
+    routeId: `footway:${edge.id}:${side}:run${windowIndex}`,
     surfaceId: 'ground',
     layer: 0,
     validated: true,
     loop: true,
     lengthM: cumulative.at(-1)! * 2,
     offsetFromCurbM,
+    sourceWindow: windowIndex,
+    sourceStartM: start,
+    sourceEndM: end,
     points,
     cumulative,
   };
