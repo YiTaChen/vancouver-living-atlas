@@ -157,6 +157,12 @@ export async function verifyFirebaseBuild(
     'Instrumented QA builds must never be deployed',
   );
   assert(
+    !scripts.includes('Auto: use automatic quality') &&
+      !scripts.includes('Auto travel QA ready') &&
+      !scripts.includes('auto-quality-travel'),
+    'Auto quality diagnostics must not ship in the public build',
+  );
+  assert(
     !scripts.includes('cpu-submission-profile-v1') &&
       !scripts.includes('Record CPU method timings (instrumented)'),
     'CPU profiling controls must not ship in the public build',

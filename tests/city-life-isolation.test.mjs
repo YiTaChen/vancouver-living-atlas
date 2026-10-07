@@ -248,6 +248,18 @@ test('Firebase verifier invokes mandatory pedestrian isolation on supplied outpu
     const result = await verifyFirebaseBuild(f.output, options);
     assert.equal(result.status, 'pass');
     assert.equal(result.cityLife.adoptedFiles, 8);
+    for (const marker of [
+      'Auto: use automatic quality',
+      'Auto travel QA ready',
+      'auto-quality-travel',
+    ]) {
+      await f.put(f.output, 'assets/auto-qa.js', JSON.stringify(marker));
+      await assert.rejects(
+        verifyFirebaseBuild(f.output, options),
+        /Auto quality diagnostics/,
+      );
+    }
+    await f.put(f.output, 'assets/auto-qa.js', '');
     await f.put(f.output, prefix + 'extra.txt', 'unexpected');
     await assert.rejects(
       verifyFirebaseBuild(f.output, options),
