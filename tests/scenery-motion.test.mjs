@@ -340,14 +340,12 @@ function buildingHost(positions = [0], height = 18) {
         type: 'Polygon',
         coordinates: [
           [
-            ...[
-              [x, 0],
-              [x + 30, 0],
-              [x + 30, 20],
-              [x, 20],
-              [x, 0],
-            ].map(([xx, z]) => unproject(xx, z)),
-          ],
+            [x, 0],
+            [x + 30, 0],
+            [x + 30, 20],
+            [x, 20],
+            [x, 0],
+          ].map(([xx, z]) => unproject(xx, z)),
         ],
       },
     };

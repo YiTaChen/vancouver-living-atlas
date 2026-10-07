@@ -200,6 +200,66 @@ test('recovery restores resolution gradually before attempting High', () => {
   assert.ok(changes[2].nowMs - changes[1].nowMs >= 24_000);
 });
 
+test('17.9–18 ms travel headroom recovers resolution in steps without promoting High', () => {
+  for (const frameMs of [17.9, 18]) {
+    const h = harness();
+    h.run(25_000, 60, { mode: 'drive', speedMps: 40, moving: true });
+    assert.equal(h.policy.snapshot().resolutionScale, 0.65);
+    const first = h.events.length;
+    h.run(11_000, frameMs);
+    assert.equal(h.policy.snapshot().resolutionScale, 0.65);
+    h.run(65_000, frameMs);
+    const changes = h.events.slice(first);
+    assert.deepEqual(
+      changes.map((s) => [s.quality, s.resolutionScale]),
+      [
+        ['balanced', 0.8],
+        ['balanced', 1],
+      ],
+    );
+    assert.ok(changes[1].nowMs - changes[0].nowMs >= 12_000);
+    assert.equal(h.policy.snapshot().highPromotions, 0);
+    assert.equal(h.policy.snapshot().p95Ms, frameMs);
+    // Stronger headroom starts a fresh High dwell, rather than inheriting the
+    // weaker resolution-recovery streak accumulated above.
+    h.run(23_000, frame60);
+    assert.equal(h.policy.snapshot().quality, 'balanced');
+    h.run(10_000, frame60);
+    assert.equal(h.policy.snapshot().quality, 'high');
+  }
+});
+
+test('18 ms flight recovers drawing resolution but preserves the Balanced cap', () => {
+  const h = harness();
+  h.run(25_000, 60, {
+    mode: 'flight',
+    speedMps: 40,
+    altitudeM: 180,
+    moving: true,
+  });
+  assert.equal(h.policy.snapshot().resolutionScale, 0.65);
+  const first = h.events.length;
+  h.run(80_000, 18);
+  assert.deepEqual(
+    h.events.slice(first).map((s) => s.resolutionScale),
+    [0.8, 1],
+  );
+  assert.equal(h.policy.snapshot().quality, 'balanced');
+  assert.equal(h.policy.snapshot().capQuality, 'balanced');
+  assert.equal(h.policy.snapshot().highPromotions, 0);
+});
+
+test('travel p95 above 20 ms cannot recover resolution under the 45 FPS policy', () => {
+  const h = harness();
+  h.run(25_000, 60, { mode: 'drive', speedMps: 20, moving: true });
+  const changes = h.policy.snapshot().changes;
+  h.run(90_000, 20.1);
+  assert.equal(h.policy.snapshot().p95Ms, 20.1);
+  assert.equal(h.policy.snapshot().resolutionScale, 0.65);
+  assert.equal(h.policy.snapshot().quality, 'balanced');
+  assert.equal(h.policy.snapshot().changes, changes);
+});
+
 test('hidden, load transitions and discontinuous clocks clear measurements, never quality or scale', () => {
   const h = harness();
   h.run(12_000, 60);

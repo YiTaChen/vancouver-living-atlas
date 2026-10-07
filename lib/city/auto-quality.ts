@@ -96,6 +96,7 @@ export class AutoQualityController {
   private nextEvaluationMs = 0;
   private slowSince: number | null = null;
   private headroomSince: number | null = null;
+  private highHeadroomSince: number | null = null;
   private frames: FrameSample[] = [];
   private median: number | null = null;
   private p95: number | null = null;
@@ -236,6 +237,7 @@ export class AutoQualityController {
     this.nextEvaluationMs = this.foregroundMs;
     this.slowSince = null;
     this.headroomSince = null;
+    this.highHeadroomSince = null;
     this.frames = [];
     this.median = null;
     this.p95 = null;
@@ -263,9 +265,13 @@ export class AutoQualityController {
     const slow =
       this.median > targetMs * 1.18 ||
       (this.p95 > targetMs * 1.65 && slowFraction > 0.3);
-    const headroom = this.p95 <= targetMs * 0.8;
+    // Resolution recovery needs a 10% time margin. Raising the feature tier is
+    // more expensive and retains its separate 20% margin and longer dwell.
+    const resolutionHeadroom = this.p95 <= targetMs * 0.9;
+    const highHeadroom = this.p95 <= targetMs * 0.8;
     if (slow) {
       this.headroomSince = null;
+      this.highHeadroomSince = null;
       this.slowSince ??= this.foregroundMs;
       this.reason = 'sustained-load';
       if (
@@ -274,15 +280,19 @@ export class AutoQualityController {
       ) {
         this.lower();
       }
-    } else if (headroom) {
+    } else if (resolutionHeadroom) {
       this.slowSince = null;
       this.headroomSince ??= this.foregroundMs;
+      this.highHeadroomSince = highHeadroom
+        ? (this.highHeadroomSince ?? this.foregroundMs)
+        : null;
       this.reason =
         this.foregroundMs < this.retryAt ? 'high-retry-backoff' : 'headroom';
       if (this.foregroundMs >= this.nextChangeAt) this.raise();
     } else {
       this.slowSince = null;
       this.headroomSince = null;
+      this.highHeadroomSince = null;
       this.reason = 'stable';
     }
   }
@@ -320,7 +330,9 @@ export class AutoQualityController {
     } else if (
       this.quality === 'balanced' &&
       this.cap() === 'high' &&
-      stableMs >= (this.moving ? 24_000 : 18_000) &&
+      this.highHeadroomSince !== null &&
+      this.foregroundMs - this.highHeadroomSince >=
+        (this.moving ? 24_000 : 18_000) &&
       this.foregroundMs >= this.retryAt
     ) {
       this.promotions++;
