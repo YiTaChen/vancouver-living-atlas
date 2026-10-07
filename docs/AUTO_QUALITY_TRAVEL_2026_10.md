@@ -64,9 +64,15 @@
 
 另外在起飛期間故意並行跑完整 Node 測試，形成外部 CPU 壓力。Auto 起始倍率為 0.65，起飛 trace 約 47.34 秒升到 0.8，後續 checkpoint 回到 1；新錄的正常巡航全程倍率 1，沒有反覆 tier 切換。壓力 trace 的 5–25 秒 p95 約 136.6 ms，因此沒有把壓力測試假稱為流暢。正常巡航高速／高處的新近景 admission 為 0；手動 Ultra 相同交通方式下仍允許細節，始終保持 Ultra 與全解析度。
 
-執行碼 revision `323161d` 的完整值以 JSON 記錄為準，source fingerprint 為 `2c68691eaba415d720a0756ae201b535ed40c256461831d4277a4a7fa2bb92b5`。後續提交只整理測試時鐘、報告與證據。QA 截圖與 JSON 存於 [auto-quality/qa/](auto-quality/qa/)；triangles / calls 是 Three 的幀內提交統計，可能含多 pass，geometry count 不等於 GPU VRAM。
+執行碼 revision `323161d` 的完整值以 JSON 記錄為準，source fingerprint 為 `2c68691eaba415d720a0756ae201b535ed40c256461831d4277a4a7fa2bb92b5`。本節證據整理階段的後續提交只整理測試時鐘、報告與證據；其後追加的警停行為變更另見下節，未重新錄製這些 GPU 觀測。QA 截圖與 JSON 存於 [auto-quality/qa/](auto-quality/qa/)；triangles / calls 是 Three 的幀內提交統計，可能含多 pass，geometry count 不等於 GPU VRAM。
 
 ![Auto Robson 開車實際畫面](auto-quality/qa/auto-drive-auto-balanced.png)
+
+## 追加：警車攔停的遞增門檻
+
+Downtown 地面駕駛仍須連續五秒超過速度門檻才觸發警停。每個門檻只觸發一次，依序為 **100 → 200 → 400 → 800 km/h**，之後逐次加倍。事件開始即消耗該門檻；對話結束、取消、障礙導致中止或切換交通模式都保留下一門檻。未觸發前的短暫超速不消耗門檻；重新載入場景回到 100 km/h，不新增跨載入儲存。
+
+目前 Roadster 極速 259.2 km/h，因此正常駕駛最多觸發兩次。八項警停回歸涵蓋連續五秒／門檻邊界、完整事件後不重複、各階段取消、連續倍增、目前車速上限，以及實際警停物件的模式／地面限制。Auto 策略、車輛物理與警停動畫不變。
 
 ## 已知限制與下一步
 
