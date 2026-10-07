@@ -45,6 +45,7 @@ const code = ts.transpileModule(
   import {installSSAOVisibility} from '${cityModule('ssao-visibility')}';
   import {trackSSAOResources} from '${cityModule('ssao-resources')}';
   import {installSSAOBlur4} from '${cityModule('ssao-blur4')}';
+  import {installPedestrianOverrideMaterial} from '${cityModule('city-life/pedestrian-renderer')}';
   import {sampleAtmosphere, applyAtmosphereSky, normalizeAtmosphere} from '${cityModule('atmosphere')}';
   export class EngineMethods {${methods.join('\n')}}
 `,

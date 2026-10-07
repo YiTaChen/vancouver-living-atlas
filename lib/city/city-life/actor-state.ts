@@ -101,7 +101,11 @@ export class PathActor {
       return this.snapshot();
     }
     this.state.activity = 'walk';
-    const movement = Math.min(speedMps * dt, safeDistanceM),
+    const movement = Math.min(
+        speedMps * dt,
+        safeDistanceM,
+        this.route.loop ? Infinity : this.route.lengthM - this.state.stationM,
+      ),
       next = this.state.stationM + movement;
     this.state.stationM = this.route.loop
       ? next % this.route.lengthM

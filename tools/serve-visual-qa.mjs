@@ -20,6 +20,7 @@ const deliveryPackages = [
   'source-fitted-window-variants', 'citizen-character-variants',
 ];
 function isOfflineAssetPath(relative) {
+  if (relative === 'boardable-bus/manifest.json') return true;
   if (/^(?:(?:role-materials\/exports|vegetation_ground\/exports|architecture-expansion\/assets|citizen\/runtime-reference)\/[a-z0-9_.-]+\.glb|vegetation_ground\/maps\/leaf_mip_[0-4]_(?:1024|512|256|128|64)\.png)$/.test(relative)) return true;
   const match = /^([a-z0-9-]+)\/exports\/(?:textures\/)?([a-z0-9][a-z0-9_.-]*\.(?:glb|png))$/.exec(relative);
   return !!match && deliveryPackages.includes(match[1]);

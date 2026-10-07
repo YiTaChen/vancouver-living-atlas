@@ -1,5 +1,5 @@
 'use client';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import {
   ArrowUpRight,
   Compass,
@@ -109,7 +109,26 @@ import {
   type ClockState,
 } from '@/lib/city/clock';
 
-export default function Home() {
+const TransitQA = process.env.VANCOUVER_VISUAL_QA === '1'
+  ? lazy(() => import('@/components/city-life-transit-qa')) : null;
+
+function LocalQARouter() {
+  const transit = useSyncExternalStore<boolean | null>(
+    () => () => {},
+    () => new URLSearchParams(location.search).get('cityLifeTransitQa') === '1',
+    () => null,
+  );
+  if (transit === null) return null;
+  if (transit && TransitQA) return <Suspense fallback={<p>Loading local transit QA…</p>}><TransitQA onClose={() => location.assign('/')} /></Suspense>;
+  return <Home />;
+}
+
+export default function Page() {
+  if (process.env.VANCOUVER_VISUAL_QA === '1') return <LocalQARouter />;
+  return <Home />;
+}
+
+function Home() {
   const host = useRef<HTMLDivElement>(null),
     labelHost = useRef<HTMLDivElement>(null),
     minimap = useRef<HTMLCanvasElement>(null),

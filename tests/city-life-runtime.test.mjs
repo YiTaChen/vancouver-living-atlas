@@ -870,3 +870,241 @@ test('analytic cubic derivative validation rejects an internal cusp missed by re
   for (const subdivisions of [8, 64, 128])
     assert.throws(() => new ContinuousPath([cusp], subdivisions), /cusp/);
 });
+
+const { resolveSurfaceStep, forwardGate } = await import(
+  cityModule('surface-reachability')
+);
+test('walking to a bus stop synchronizes real verified floors without recycling passenger identity', () => {
+  const p = new PassengerTransfers();
+  p.register('player', floor);
+  const lookup = (x, z) =>
+    x >= 0 && x <= 12 && Math.abs(z) <= 1
+      ? [
+          {
+            surfaceId: floor.surfaceId,
+            layer: floor.layer,
+            y: 0,
+            allowedModes: ['walk'],
+          },
+        ]
+      : [];
+  // Walk ten normal navigation steps from registration to the boarding point.
+  for (let x = 1; x <= 10; x++) {
+    const current = p.state('player').floor;
+    const step = resolveSurfaceStep({
+      current,
+      to: [x, 0],
+      mode: 'walk',
+      lookup,
+      connections: [],
+    });
+    assert.equal(p.updateWalkingFloor('player', { ...floor, x }, step), true);
+  }
+  const atStop = proof({ floorPointM: [10, 0, 0] });
+  const token = p.beginBoard('player', anchor(), atStop, 1);
+  assert.ok(token);
+  const next = { ...floor, x: 11 };
+  const step = resolveSurfaceStep({
+    current: p.state('player').floor,
+    to: [11, 0],
+    mode: 'walk',
+    lookup,
+    connections: [],
+  });
+  assert.equal(
+    p.updateWalkingFloor('player', next, step),
+    false,
+    'reserved source must remain pinned',
+  );
+  assert.deepEqual(p.state('player').floor, { ...floor, x: 10 });
+  p.markPreloaded(token, 1);
+  assert.equal(p.commit(token, atStop, 1), true);
+  assert.equal(
+    p.updateWalkingFloor('player', next, step),
+    false,
+    'a rider cannot become walking through pose synchronization',
+  );
+  assert.equal(p.occupantsFor('bus-1'), 1);
+});
+test('walking floor synchronization rejects missing geometry and stacked floors, but accepts an explicit verified seam', () => {
+  const p = new PassengerTransfers();
+  p.register('player', floor);
+  const target = { ...floor, x: 1.5, surfaceId: 'bridge', layer: 1 };
+  const hit = { surfaceId: 'bridge', layer: 1, y: 0, allowedModes: ['walk'] };
+  assert.equal(
+    p.updateWalkingFloor('player', target, {
+      ok: false,
+      reason: 'surface-ended',
+    }),
+    false,
+  );
+  assert.equal(
+    p.updateWalkingFloor('player', target, { ok: true, hit }),
+    false,
+    'same height never authorizes a different floor',
+  );
+  assert.equal(
+    p.updateWalkingFloor('player', { ...floor, y: NaN }, { ok: true, hit }),
+    false,
+  );
+  assert.equal(
+    p.updateWalkingFloor('player', floor, {
+      ok: true,
+      hit: {
+        ...hit,
+        surfaceId: floor.surfaceId,
+        layer: 0,
+        allowedModes: ['drive'],
+      },
+    }),
+    false,
+  );
+  assert.equal(
+    p.updateWalkingFloor(
+      'player',
+      { ...floor, y: 1 },
+      { ok: true, hit: { ...hit, surfaceId: floor.surfaceId, layer: 0 } },
+    ),
+    false,
+  );
+  const lookup = (x) => [
+    ...(x <= 1.25 ? [{ ...hit, surfaceId: floor.surfaceId, layer: 0 }] : []),
+    ...(x >= 1.25 ? [hit] : []),
+  ];
+  const step = resolveSurfaceStep({
+    current: floor,
+    to: [target.x, target.z],
+    mode: 'walk',
+    lookup,
+    connections: [
+      {
+        id: 'verified-ramp',
+        from: floor,
+        to: target,
+        allowedModes: ['walk'],
+        geometry: forwardGate([1.25, 0], [1, 0], 2),
+      },
+    ],
+  });
+  assert.equal(step.ok, true);
+  assert.equal(step.connectionId, 'verified-ramp');
+  assert.equal(p.updateWalkingFloor('player', target, step), true);
+  target.x = 100;
+  assert.equal(
+    p.state('player').floor.x,
+    1.5,
+    'caller mutation must not alter registry floor',
+  );
+});
+test('a non-loop actor advances its gait only by the actual final distance and freezes it at the endpoint', () => {
+  const actor = new PathActor(
+    'walker',
+    {
+      routeId: 'sidewalk',
+      surfaceId: 'road',
+      layer: 0,
+      lengthM: 10,
+      loop: false,
+      validated: true,
+    },
+    9.9,
+  );
+  const arrived = actor.update(1, 3, Infinity);
+  assert.equal(arrived.stationM, 10);
+  assert.equal(arrived.activity, 'wait');
+  assert.ok(Math.abs(arrived.animationPhase - 0.1 / 1.4) < 1e-12);
+  for (let i = 0; i < 20; i++)
+    assert.deepEqual(actor.update(1, 3, Infinity), arrived);
+  const loop = new PathActor(
+    'loop',
+    {
+      routeId: 'loop',
+      surfaceId: 'road',
+      layer: 0,
+      lengthM: 10,
+      loop: true,
+      validated: true,
+    },
+    9.9,
+  );
+  const continued = loop.update(1, 3, Infinity);
+  assert.ok(Math.abs(continued.stationM - 2.9) < 1e-12);
+  assert.ok(Math.abs(continued.animationPhase - ((3 / 1.4) % 1)) < 1e-12);
+});
+test('repeated representation load callbacks never release a staged or installed ownership twice', () => {
+  let oldReleased = 0,
+    loadedReleased = 0,
+    extraLeaseReleased = 0;
+  const swap = new RepresentationTransaction(
+    'bus-1',
+    'old',
+    () => oldReleased++,
+  );
+  const token = swap.reserve('detail', 0);
+  const release = () => loadedReleased++;
+  assert.equal(swap.preload(token, 'new', capable, release, 1), true);
+  assert.equal(swap.preload(token, 'new', capable, release, 1), false);
+  assert.equal(loadedReleased, 0);
+  // A separate lease of the same shared handle must still release its own ref.
+  assert.equal(
+    swap.preload(token, 'new', capable, () => extraLeaseReleased++, 1),
+    false,
+  );
+  assert.equal(extraLeaseReleased, 1);
+  const result = swap.commit(token, authority(), 2);
+  assert.ok(result);
+  result.releaseOld();
+  assert.equal(oldReleased, 1);
+  assert.equal(swap.preload(token, 'new', capable, release, 3), false);
+  assert.equal(
+    loadedReleased,
+    0,
+    'late duplicate must not dispose the current representation',
+  );
+  const next = swap.reserve('instance', 4);
+  const releaseNext = () => loadedReleased++;
+  swap.preload(next, 'candidate', capable, releaseNext, 5);
+  swap.cancel(next);
+  swap.preload(next, 'candidate', capable, releaseNext, 6);
+  assert.equal(loadedReleased, 1, 'cancelled ownership is disposed only once');
+});
+test('representation observations cannot travel backwards or invalidate a newer pending swap', () => {
+  let released = 0;
+  const swap = new RepresentationTransaction('bus-1', 'old', () => {});
+  const token = swap.reserve('detail', 10);
+  assert.equal(
+    swap.preload(token, 'premature', capable, () => released++, 9),
+    false,
+  );
+  assert.equal(released, 1);
+  assert.equal(swap.snapshot().pending, true);
+  assert.equal(
+    swap.preload(token, 'new', capable, () => released++, 11),
+    true,
+  );
+  assert.equal(swap.commit(token, authority(), 10), null);
+  swap.expire(12);
+  assert.equal(swap.commit(token, authority(), 11), null);
+  const result = swap.commit(token, authority(), 12);
+  assert.ok(result);
+  result.rollback();
+  assert.equal(released, 2);
+  assert.equal(swap.snapshot().handle, 'old');
+});
+test('passenger commit cannot use an earlier observation after preload or timeout polling', () => {
+  const p = new PassengerTransfers();
+  p.register('player', floor);
+  const token = p.beginBoard('player', anchor(), proof(), 10);
+  assert.equal(p.markPreloaded(token, 12), true);
+  assert.equal(p.commit(token, proof(), 11), false);
+  assert.equal(p.pendingFor('bus-1'), 1);
+  assert.equal(p.state('player').mode, 'walking');
+  p.expire(14);
+  assert.equal(p.commit(token, proof(), 13), false);
+  assert.equal(p.commit(token, proof(), 14), true);
+  const alight = p.beginAlight('player', floor, proof(), 14);
+  assert.equal(p.markPreloaded(alight, 15), true);
+  assert.equal(p.commit(alight, proof(), 14), false);
+  assert.equal(p.occupantsFor('bus-1'), 1);
+  assert.equal(p.commit(alight, proof(), 15), true);
+});

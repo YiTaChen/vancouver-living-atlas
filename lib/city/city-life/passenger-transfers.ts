@@ -1,4 +1,8 @@
-import { sameSurface, type SurfaceState } from '../surface-reachability';
+import {
+  sameSurface,
+  type StepResult,
+  type SurfaceState,
+} from '../surface-reachability';
 import { TRANSIT_PARAMETERS, type DoorSide } from './transit-service';
 
 export type LocalTransform = {
@@ -46,7 +50,7 @@ interface Pending {
   kind: 'board' | 'alight';
   phase: 'reserved' | 'preloaded';
   deadline: number;
-  createdAt: number;
+  observedAt: number;
   original: PassengerState;
   anchor: RideAnchor;
   targetFloor?: SurfaceState;
@@ -144,6 +148,31 @@ export class PassengerTransfers {
     });
     return true;
   }
+  /** Synchronize actual walking navigation before beginning a transfer. The caller
+   * supplies the fresh resolveSurfaceStep result from the passenger's current floor;
+   * finite coordinates alone do not authorize a floor or a stacked-layer change.
+   * A reserved transfer pins its source until commit/cancel, so movement must wait. */
+  updateWalkingFloor(
+    passengerId: string,
+    floor: SurfaceState,
+    step: StepResult,
+  ) {
+    const state = this.passengers.get(passengerId);
+    if (
+      !state ||
+      state.mode !== 'walking' ||
+      this.pending.has(passengerId) ||
+      !finiteFloor(floor) ||
+      !step.ok ||
+      !sameSurface(step.hit, floor) ||
+      step.hit.y !== floor.y ||
+      !step.hit.allowedModes.includes('walk') ||
+      (!sameSurface(state.floor, floor) && !step.connectionId)
+    )
+      return false;
+    state.floor = structuredClone(floor);
+    return true;
+  }
   state(passengerId: string) {
     const state = this.passengers.get(passengerId);
     return state ? structuredClone(state) : undefined;
@@ -177,7 +206,7 @@ export class PassengerTransfers {
       kind: 'board',
       phase: 'reserved',
       deadline: now + TRANSIT_PARAMETERS.transferTimeoutSeconds,
-      createdAt: now,
+      observedAt: now,
       original: structuredClone(state),
       anchor: structuredClone(anchor),
       proof: structuredClone(proof),
@@ -226,7 +255,7 @@ export class PassengerTransfers {
       kind: 'alight',
       phase: 'reserved',
       deadline: now + TRANSIT_PARAMETERS.transferTimeoutSeconds,
-      createdAt: now,
+      observedAt: now,
       original: structuredClone(state),
       anchor: structuredClone(state.anchor),
       targetFloor: structuredClone(targetFloor),
@@ -294,8 +323,11 @@ export class PassengerTransfers {
   }
   expire(now: number) {
     if (!Number.isFinite(now)) return;
-    for (const p of this.pending.values())
+    for (const p of this.pending.values()) {
+      if (now < p.observedAt) continue;
+      p.observedAt = now;
       if (now >= p.deadline) this.cancel(p.token);
+    }
   }
   /** Mode changes may remove only a walking passenger. Riding must safely alight first. */
   unregister(passengerId: string) {
@@ -356,13 +388,14 @@ export class PassengerTransfers {
       !p ||
       p.token.generation !== token.generation ||
       !Number.isFinite(now) ||
-      now < p.createdAt
+      now < p.observedAt
     )
       return null;
     if (now >= p.deadline) {
       this.cancel(token);
       return null;
     }
+    p.observedAt = now;
     return p;
   }
   private exitKey(f: SurfaceState) {

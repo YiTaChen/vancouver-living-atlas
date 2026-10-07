@@ -1,4 +1,5 @@
 import { sunAngle } from './clock';
+import * as THREE from 'three';
 /** Opt-in local QA build only. Stripped from normal Firebase builds. */
 import type { CityEngine } from './engine';
 import type { VisualQuality } from './quality';
@@ -538,6 +539,35 @@ export function installVisualQA(e: CityEngine) {
       e.navigation?.keys.clear();
     }
   }
+  button('Focus nearby pedestrians', () => {
+    const poses = e.pedestrians?.debugPoses().filter((p) => p.rendered) ?? [];
+    const pose = poses.sort((a,b) => e.camera.position.distanceTo(new THREE.Vector3(...a.position)) -
+      e.camera.position.distanceTo(new THREE.Vector3(...b.position)))[0];
+    if (!pose) { status.textContent = 'No safely spawned nearby pedestrian; turn street view first'; return; }
+    e.applySettings({...e.settings,mode:'orbit',autoRotate:false});
+    e.transition = null;
+    const [x,y,z] = pose.position, forwardX=Math.sin(pose.yawRadians),forwardZ=Math.cos(pose.yawRadians);
+    e.camera.position.set(x-forwardX*7+forwardZ*4,y+4,z-forwardZ*7-forwardX*4);
+    e.controls.target.set(x,y+1,z);
+    e.camera.lookAt(e.controls.target); e.controls.update();
+    status.textContent = `Observing ${pose.actorId} on ${pose.surfaceId}/${pose.layer}`;
+  });
+  button('Save pedestrian checkpoint', () => {
+    const stats=e.pedestrians?.stats();
+    const stage=stats?.streetVisible?'near':'far';
+    const name=`pedestrians-${e.compatibleGraphics?'compatible':e.settings.quality}-${stage}`;
+    const row={kind:'city-life-pedestrian-webgl-v1',stage,quality:e.settings.quality,
+      graphics:e.compatibleGraphics?'compatible':'desktop',valid:!document.hidden&&!e.disposed,
+      viewport:[innerWidth,innerHeight],render:[e.renderer.domElement.width,e.renderer.domElement.height],
+      camera:e.camera.position.toArray(),target:e.controls.target.toArray(),
+      calls:e.renderer.info.render.calls,triangles:e.renderer.info.render.triangles,
+      geometries:e.renderer.info.memory.geometries, textures:e.renderer.info.memory.textures,
+      pedestrians:stats,actors:e.pedestrians?.debugPoses()};
+    void fetch('/__visual-qa',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({name,row,screenshot:e.screenshot()})}).then((response)=> {
+        status.textContent=response.ok?`Saved ${name}`:`Capture failed ${response.status}`;
+      }).catch((error)=>{status.textContent=String(error);});
+  });
   button('Drive speeding test', () => {
     if(!e.navigation)return;
     e.applySettings({...e.settings,mode:'drive',autoRotate:false});
@@ -819,6 +849,7 @@ export function installVisualQA(e: CityEngine) {
       target: e.controls.target.toArray(),
       mode: e.navigation!.mode,
       position: e.navigation!.position.toArray(),
+      pedestrians: e.pedestrians?.stats(),
     };
     void fetch('/__visual-qa', {
       method: 'POST',

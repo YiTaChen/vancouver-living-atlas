@@ -23,6 +23,8 @@ import {
 } from './shadow-policy';
 import { LandmarkGpuWarmup } from './gpu-landmark-warmup';
 import { warmComposer } from './warm-composer';
+import { CityPedestrians } from './city-life/city-pedestrians';
+import { installPedestrianOverrideMaterial } from './city-life/pedestrian-renderer';
 import type { LandmarkWorkerClient } from './landmark-worker-client';
 import { createStartupQA } from './startup-qa';
 import { BeachGround, type BeachCoastData } from './beach-ground';
@@ -95,6 +97,7 @@ export class CityEngine {
   visibilityChange = () => {
     if (this.disposed) return;
     if (document.hidden) this.clearHeldInput();
+    this.pedestrians?.setHidden(document.hidden || this.pageSuspended);
     this.clock.setVisible(
       !document.hidden && !this.pageSuspended,
       performance.now(),
@@ -108,6 +111,7 @@ export class CityEngine {
   extraTextures = new Set<THREE.Texture>();
   contextLost = false;
   compatibleGraphics = false;
+  pedestrians: CityPedestrians | null = null;
   lastShadowCamera = new THREE.Vector3(Infinity, Infinity, Infinity);
   sky = new Sky();
   skyEffects!: SkyEffects;
@@ -399,6 +403,7 @@ export class CityEngine {
     this.pageSuspended = true;
     this.suspendedAt = performance.now();
     this.clock.setVisible(false, this.suspendedAt);
+    this.pedestrians?.setHidden(true);
     cancelAnimationFrame(this.raf);
     this.raf = 0;
     this.clearHeldInput();
@@ -412,6 +417,7 @@ export class CityEngine {
     this.clearHeldInput();
     this.clock.resetTimebase(now);
     this.clock.setVisible(!document.hidden, now);
+    this.pedestrians?.setHidden(document.hidden);
     this.lastTime = this.fpsAt = now;
     this.frames = 0;
     if (this.renderReady) this.raf = requestAnimationFrame(this.animate);
@@ -585,6 +591,8 @@ export class CityEngine {
       this.startupQA?.phase('controller.navigation');
     }
     this.navigation = new StreetNavigation(this);
+    this.pedestrians = new CityPedestrians(this);
+    this.pedestrians.setHidden(document.hidden || this.pageSuspended);
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('geometry.sailing-waves');
     }
@@ -785,6 +793,8 @@ export class CityEngine {
     this.ssao.maxDistance = 0.005;
     // Match the two-sided road/deck surfaces used in the beauty pass.
     this.ssao.normalMaterial.side = THREE.DoubleSide;
+    const restorePedestrianNormals = installPedestrianOverrideMaterial(this.ssao.normalMaterial);
+    trackSSAOResources(this.ssao).restores.add(restorePedestrianNormals);
     const exclusions = new SSAOExclusions(this.scene);
     this.aoExclusions = exclusions;
     const visibility = installSSAOVisibility(this.ssao, exclusions);
@@ -1432,6 +1442,7 @@ export class CityEngine {
       if (!this.transition) this.controls.update();
     } else if (this.settings.mode !== 'flight') this.navigation?.update((time - this.lastTime) / 1000);
     this.flight?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
+    this.pedestrians?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
     this.travelReturn?.update();
     this.sailingWaves?.update();
     this.discoveryMarker?.update(time, !!this.discoveryTarget && this.settings.mode === 'walk');
@@ -1470,6 +1481,7 @@ export class CityEngine {
       this.renderer.domElement.dataset.geometries = String(
         this.renderer.info.memory.geometries,
       );
+      this.renderer.domElement.dataset.pedestrians = JSON.stringify(this.pedestrians?.stats() ?? null);
       this.stats.renderWidth = this.renderer.domElement.width;
       this.stats.renderHeight = this.renderer.domElement.height;
       this.stats.fps = Math.round((this.frames * 1000) / (time - this.fpsAt));
@@ -1637,6 +1649,8 @@ export class CityEngine {
     this.aoExclusions?.dispose();
     this.aoExclusions = null;
     this.travelReturn?.destroy();
+    this.pedestrians?.dispose();
+    this.pedestrians = null;
     this.flight?.destroy();
     this.navigation?.destroy();
     this.placement?.destroy();
@@ -1675,7 +1689,7 @@ export class CityEngine {
       this.graphicsContextLost,
     );
     this.renderer?.dispose();
-
+    this.renderer?.forceContextLoss?.();
     this.renderer?.domElement.remove();
   }
 }

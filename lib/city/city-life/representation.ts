@@ -29,8 +29,17 @@ interface Staged<T> {
 export class RepresentationTransaction<T> {
   private generation = 0;
   private installing = false;
+  // An ownership callback can arrive twice, including after commit/cancel. Do not
+  // release the same staged/current lease or disposed candidate a second time.
+  // Different leases of shared geometry have different release callbacks and
+  // retain their independent reference counts; weak keys do not grow a history.
+  private callbacks = new WeakMap<
+    () => void,
+    { generation: number; target: RepresentationToken['target']; handle: T }
+  >();
   private pending: {
     token: RepresentationToken;
+    observedAt: number;
     deadline: number;
     staged?: Staged<T>;
   } | null = null;
@@ -58,7 +67,7 @@ export class RepresentationTransaction<T> {
     )
       return null;
     const token = { generation: ++this.generation, target };
-    this.pending = { token, deadline: now + timeoutSeconds };
+    this.pending = { token, observedAt: now, deadline: now + timeoutSeconds };
     return { ...token };
   }
   preload(
@@ -68,15 +77,24 @@ export class RepresentationTransaction<T> {
     release: () => void,
     now: number,
   ) {
+    const callback = this.callbacks.get(release);
+    if (
+      callback?.generation === token.generation &&
+      callback.target === token.target &&
+      Object.is(callback.handle, handle)
+    )
+      return false;
+    this.callbacks.set(release, { ...token, handle });
     const p = this.pending;
     if (
       !p ||
       !this.matches(token) ||
       !Number.isFinite(now) ||
+      now < p.observedAt ||
       now >= p.deadline
     ) {
       release();
-      if (p && this.matches(token)) this.cancel(token);
+      if (p && this.matches(token) && now >= p.deadline) this.cancel(token);
       return false;
     }
     // Duplicate load callbacks never replace an already-staged candidate.
@@ -84,12 +102,14 @@ export class RepresentationTransaction<T> {
       release();
       return false;
     }
+    p.observedAt = now;
     p.staged = { handle, capabilities: { ...capabilities }, release };
     return true;
   }
   commit(token: RepresentationToken, authority: VehicleAuthority, now: number) {
     const p = this.pending;
     if (!p || !this.matches(token)) return null;
+    if (!Number.isFinite(now) || now < p.observedAt) return null;
     const c = p.staged?.capabilities;
     const finite = [
       ...authority.positionM,
@@ -167,8 +187,10 @@ export class RepresentationTransaction<T> {
     return true;
   }
   expire(now: number) {
-    if (this.pending && Number.isFinite(now) && now >= this.pending.deadline)
-      this.cancel(this.pending.token);
+    const p = this.pending;
+    if (!p || !Number.isFinite(now) || now < p.observedAt) return;
+    p.observedAt = now;
+    if (now >= p.deadline) this.cancel(p.token);
   }
   snapshot() {
     return {

@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "contract": "rigid-limb-v1",
+  "scope": "background pedestrians; no skeletons or passenger capability",
+  "files": [
+    {
+      "path": "pedestrian-commuter.lod0.glb",
+      "source": "tools/assets/city-life-pedestrians/exports/pedestrian-commuter.lod0.glb",
+      "bytes": 58692,
+      "sha256": "dc135c2b628529b746451a9b2d7cc4a577ec86d7e9736aacdbd5591c542f2a35"
+    },
+    {
+      "path": "pedestrian-commuter.lod1.glb",
+      "source": "tools/assets/city-life-pedestrians/exports/pedestrian-commuter.lod1.glb",
+      "bytes": 25588,
+      "sha256": "b611d5e75c44e933939318a489658162ee70f41a4ba041287d448937e3e966a1"
+    },
+    {
+      "path": "pedestrian-raincoat.lod0.glb",
+      "source": "tools/assets/city-life-pedestrians/exports/pedestrian-raincoat.lod0.glb",
+      "bytes": 59696,
+      "sha256": "8a70843727c8667fc7b8da5b0ae29625d86e86620bd9c5c5ff2ea3ea9d304387"
+    },
+    {
+      "path": "pedestrian-raincoat.lod1.glb",
+      "source": "tools/assets/city-life-pedestrians/exports/pedestrian-raincoat.lod1.glb",
+      "bytes": 29312,
+      "sha256": "9b6a971168fb20f42b9cf29bbd87a7070c37fdb5e74fdc7e782724c6c73a3a85"
+    },
+    {
+      "path": "pedestrian-runner.lod0.glb",
+      "source": "tools/assets/city-life-pedestrians/exports/pedestrian-runner.lod0.glb",
+      "bytes": 59720,
+      "sha256": "f9cbca74b48e11a17653a20cfaf73b211d22c22f556c8d1c9320188eb9ce4d32"
+    },
+    {
+      "path": "pedestrian-runner.lod1.glb",
+      "source": "tools/assets/city-life-pedestrians/exports/pedestrian-runner.lod1.glb",
+      "bytes": 31176,
+      "sha256": "74d82a524b6481f1a9ea6292378beef1a1b67843d82a0009f53782984032843e"
+    },
+    {
+      "path": "pedestrian-tote.lod0.glb",
+      "source": "tools/assets/city-life-pedestrians/exports/pedestrian-tote.lod0.glb",
+      "bytes": 64368,
+      "sha256": "66411c5f5996f44d104c735e0ba93ef27f32b396927eafd77d30a2ef99ab0508"
+    },
+    {
+      "path": "pedestrian-tote.lod1.glb",
+      "source": "tools/assets/city-life-pedestrians/exports/pedestrian-tote.lod1.glb",
+      "bytes": 26968,
+      "sha256": "fb9d38860e4eaa558c4e55f6bf3e2208cb80c2ee49aa571dd2c55c2d8517c865"
+    }
+  ]
+}
