@@ -19,7 +19,10 @@ class Element extends EventTarget {
     return this.children.filter((child) => child.tagName === 'OPTION');
   }
   get value() {
-    return this._value ?? (this.tagName === 'SELECT' ? this.options[0]?.value ?? '' : '');
+    return (
+      this._value ??
+      (this.tagName === 'SELECT' ? (this.options[0]?.value ?? '') : '')
+    );
   }
   set value(value) {
     this._value = String(value);
@@ -189,6 +192,7 @@ test('the integrated panel shares its legacy lease with upgrade and endurance ac
         }),
       },
       screenshot: () => 'data:image/png;base64,',
+      renderScene() {}, // Auto QA observes rendering but must share this lease.
       setClock: () => clockChanges++,
       applySettings: () => setupCalls++,
     };
@@ -200,6 +204,13 @@ test('the integrated panel shares its legacy lease with upgrade and endurance ac
       ...actions,
       'Upgrade route endurance 10m',
       'Upgrade Robson corridor 8 blocks',
+      'Auto: use automatic quality',
+      'Auto: force ultra',
+      'Auto: walk Robson',
+      'Auto: drive Robson',
+      'Auto: helicopter cruise',
+      'Auto: stop travel',
+      'Auto: save checkpoint',
       '14:00',
     ])
       await click(panel, action);

@@ -49,6 +49,9 @@ export class DetailedTrees {
   private spatial: TreeSelection<ForestTree & { y: number; variant: number }>;
   private assetBarrier = new TreeAssetBarrier();
   private refresh = false;
+  private selectionAt = -Infinity;
+  private motionPolicy = '';
+  private lods = new Map<ForestTree, number>();
   private disposed = false;
   private wantedPools = 0;
   private leafCandidate: TreeLeafCandidate | null = null;
@@ -299,118 +302,207 @@ export class DetailedTrees {
       : 'balanced';
     const camera = this.e.camera.position;
     if (this.disposed || this.e.disposed) return;
+    const motion = this.e.sceneryMotion,
+      budget = this.e.detailWorkBudget;
+    const policy = motion
+      ? `${motion.auto}:${motion.allowNewDetails}:${motion.fast}:${motion.mode}`
+      : '';
+    const retainFlight =
+      !!motion?.auto &&
+      motion.mode === 'flight' &&
+      quality === 'balanced' &&
+      this.e.settings.trees;
+    // Auto flight keeps bounded existing medium trees, never an Ultra/mature
+    // population. Every omitted replacement restores its original far slot.
+    const detailQuality = retainFlight ? 'high' : quality;
     const changed =
       force ||
       quality !== this.quality ||
-      this.last.distanceToSquared(camera) >= 18 * 18;
+      policy !== this.motionPolicy ||
+      (this.last.distanceToSquared(camera) >= 18 * 18 &&
+        (!motion ||
+          motion.nowMs - this.selectionAt >= motion.selectionIntervalMs));
     if (changed) {
       this.quality = quality;
+      this.motionPolicy = policy;
+      this.selectionAt = motion?.nowMs ?? -Infinity;
       this.last.copy(camera);
-      this.selection =
-        quality === 'balanced'
-          ? []
-          : this.spatial.nearest(
-              camera.x,
-              camera.y,
-              camera.z,
-              QUALITY[quality].treeDistance,
-              quality === 'ultra' ? 1080 : 450,
-            );
+      if (!motion)
+        this.selection =
+          detailQuality === 'balanced'
+            ? []
+            : this.spatial.nearest(
+                camera.x,
+                camera.y,
+                camera.z,
+                QUALITY[detailQuality].treeDistance,
+                detailQuality === 'ultra' ? 1080 : 450,
+              );
+      else {
+        const range = QUALITY[detailQuality].treeDistance,
+          limit = detailQuality === 'ultra' ? 1080 : 450;
+        const actual = (candidate: (typeof this.selection)[number]) => ({
+          ...candidate,
+          d:
+            (candidate.t.x - camera.x) ** 2 +
+            (candidate.t.y + candidate.t.h * 0.55 - camera.y) ** 2 +
+            (candidate.t.z - camera.z) ** 2,
+        });
+        const retained = range
+          ? this.selection.map(actual).filter(({ d }) => d < (range + 36) ** 2)
+          : [];
+        const known = new Set(retained.map(({ t }) => t));
+        const ahead = motion.lookAheadXYZ;
+        const proposed =
+          range && !retainFlight && motion.allowNewDetails
+            ? this.spatial.nearest(...ahead, range, limit).map(actual)
+            : [];
+        const admissionLimit =
+          motion.auto && motion.fast ? 16 : motion.moving ? 48 : limit;
+        this.selection = retained
+          .concat(
+            proposed
+              .filter(({ t, d }) => !known.has(t) && d < (range + 60) ** 2)
+              .slice(0, admissionLimit),
+          )
+          .slice(0, limit)
+          .sort((a, b) => a.d - b.d || a.ordinal - b.ordinal);
+      }
       this.e.data.treeSelection = { ...this.spatial.stats };
     }
     this.wantedPools = this.selection.length
-      ? quality === 'ultra' && this.selection[0].d < 220 * 220
+      ? detailQuality === 'ultra' &&
+        this.selection[0].d < (motion ? 240 * 240 : 220 * 220)
         ? 12
         : 6
       : 0;
-    if (this.selection.length) this.initialize();
+    const allowNew = (motion?.allowNewDetails ?? true) && !retainFlight;
+    if (this.selection.length && !this.ready && allowNew) {
+      if (budget) budget.run(() => this.initialize(), { admission: true });
+      else this.initialize();
+    }
     // Browser comparisons rejected the mature broadleaf cost in High. Only
     // Ultra pays for this package, once an eligible close source tree exists.
     const useMatureTrees =
-      quality === 'ultra' && this.geometryCandidate === 'blender';
+      detailQuality === 'ultra' && this.geometryCandidate === 'blender';
     if (
       useMatureTrees &&
+      allowNew &&
       this.matureTrees.status === 'idle' &&
-      this.selection.some(({ t, d }) => !t.conifer && d < 45 * 45)
-    )
-      void this.matureTrees.load().then(() => {
-        if (!this.disposed && !this.e.disposed) this.refresh = true;
-      });
-    const built = this.buildNextPool();
+      this.selection.some(
+        ({ t, d }) => !t.conifer && d < (motion ? 40 * 40 : 45 * 45),
+      )
+    ) {
+      const load = () => {
+        void this.matureTrees.load().then(() => {
+          if (!this.disposed && !this.e.disposed) this.refresh = true;
+        });
+      };
+      if (budget) budget.run(load, { admission: true });
+      else load();
+    }
+    let built = false;
+    if (allowNew && this.assetsReady && this.pools.length < this.wantedPools) {
+      const build = () => {
+        built = this.buildNextPool();
+      };
+      if (budget) budget.run(build, { admission: true });
+      else build();
+    }
     if (!changed && !built && !this.refresh) return;
     this.refresh = false;
-    const selected =
-      this.assetsReady ||
-      (useMatureTrees && this.matureTrees.status === 'ready')
-        ? this.selection
-        : [];
-    this.matureTrees.reset();
-    for (const p of this.pools) p.count = 0;
-    const next = new Set<ForestTree>(),
-      dirty = new Set<THREE.InstancedMesh>();
-    const dummy = new THREE.Object3D(),
-      color = new THREE.Color(),
-      zero = new THREE.Matrix4().makeScale(0, 0, 0);
-    for (let i = 0; i < selected.length; i++) {
-      const { t, d } = selected[i];
-      if (
-        useMatureTrees &&
-        !t.conifer &&
-        d < 45 * 45 &&
-        this.matureTrees.count < 8 &&
-        this.matureTrees.add(t)
-      ) {
+    const rebuild = () => {
+      const selected =
+        this.assetsReady ||
+        (useMatureTrees && this.matureTrees.status === 'ready')
+          ? this.selection
+          : [];
+      this.matureTrees.reset();
+      for (const p of this.pools) p.count = 0;
+      const next = new Set<ForestTree>(),
+        dirty = new Set<THREE.InstancedMesh>(),
+        nextLods = new Map<ForestTree, number>();
+      const dummy = new THREE.Object3D(),
+        color = new THREE.Color(),
+        zero = new THREE.Matrix4().makeScale(0, 0, 0);
+      for (let i = 0; i < selected.length; i++) {
+        const { t, d } = selected[i];
+        if (
+          useMatureTrees &&
+          !t.conifer &&
+          d <
+            (motion ? (this.lods.get(t) === 2 ? 58 * 58 : 40 * 40) : 45 * 45) &&
+          this.matureTrees.count < 8 &&
+          this.matureTrees.add(t)
+        ) {
+          next.add(t);
+          nextLods.set(t, 2);
+          if (!this.hidden.has(t))
+            for (const slot of t.slots || []) {
+              slot.mesh.setMatrixAt(slot.index, zero);
+              dirty.add(slot.mesh);
+            }
+          continue;
+        }
+        const detail =
+          detailQuality === 'ultra' &&
+          d <
+            (motion
+              ? this.lods.get(t) === 1
+                ? 240 * 240
+                : 200 * 200
+              : 220 * 220) &&
+          i < 480
+            ? 1
+            : 0;
+        const slot = (t.conifer ? 3 : 0) + t.variant;
+        const pool = this.pools[detail * 6 + slot] || this.pools[slot];
+        if (!pool) continue;
+        if (pool.count >= 240) continue; // The original instance remains visible.
         next.add(t);
+        nextLods.set(t, detail);
+        dummy.position.set(t.x, t.y, t.z);
+        dummy.rotation.set(0, hash(t.seed) * Math.PI, 0);
+        dummy.scale.setScalar(t.h);
+        dummy.updateMatrix();
+        pool.trunk.setMatrixAt(pool.count, dummy.matrix);
+        pool.foliage.setMatrixAt(pool.count, dummy.matrix);
+        color.setHSL(
+          0.24 + hash(t.seed + 8) * 0.035,
+          0.12,
+          0.74 + hash(t.seed + 3) * 0.16,
+        );
+        pool.foliage.setColorAt(pool.count, color);
+        pool.count++;
         if (!this.hidden.has(t))
           for (const slot of t.slots || []) {
             slot.mesh.setMatrixAt(slot.index, zero);
             dirty.add(slot.mesh);
           }
-        continue;
       }
-      const detail = quality === 'ultra' && d < 220 * 220 && i < 480 ? 1 : 0;
-      const slot = (t.conifer ? 3 : 0) + t.variant;
-      const pool = this.pools[detail * 6 + slot] || this.pools[slot];
-      if (!pool) continue;
-      if (pool.count >= 240) continue; // The original instance remains visible.
-      next.add(t);
-      dummy.position.set(t.x, t.y, t.z);
-      dummy.rotation.set(0, hash(t.seed) * Math.PI, 0);
-      dummy.scale.setScalar(t.h);
-      dummy.updateMatrix();
-      pool.trunk.setMatrixAt(pool.count, dummy.matrix);
-      pool.foliage.setMatrixAt(pool.count, dummy.matrix);
-      color.setHSL(
-        0.24 + hash(t.seed + 8) * 0.035,
-        0.12,
-        0.74 + hash(t.seed + 3) * 0.16,
-      );
-      pool.foliage.setColorAt(pool.count, color);
-      pool.count++;
-      if (!this.hidden.has(t))
-        for (const slot of t.slots || []) {
-          slot.mesh.setMatrixAt(slot.index, zero);
-          dirty.add(slot.mesh);
-        }
-    }
-    for (const t of this.hidden)
-      if (!next.has(t))
-        for (const slot of t.slots || []) {
-          slot.mesh.setMatrixAt(slot.index, slot.matrix);
-          dirty.add(slot.mesh);
-        }
-    this.hidden = next;
-    this.matureTrees.finish();
-    for (const mesh of dirty) mesh.instanceMatrix.needsUpdate = true;
-    for (const p of this.pools) {
-      p.trunk.count = p.foliage.count = p.count;
-      p.trunk.instanceMatrix.needsUpdate =
-        p.foliage.instanceMatrix.needsUpdate = true;
-      if (p.foliage.instanceColor) p.foliage.instanceColor.needsUpdate = true;
-    }
-    this.group.visible = quality !== 'balanced';
-    this.e.renderer.shadowMap.needsUpdate = true;
-    this.e.data.detailedTreeCount = next.size;
-    this.e.data.matureTreeAssets = this.getGeometryCandidateState();
+      for (const t of this.hidden)
+        if (!next.has(t))
+          for (const slot of t.slots || []) {
+            slot.mesh.setMatrixAt(slot.index, slot.matrix);
+            dirty.add(slot.mesh);
+          }
+      this.hidden = next;
+      this.lods = nextLods;
+      this.matureTrees.finish();
+      for (const mesh of dirty) mesh.instanceMatrix.needsUpdate = true;
+      for (const p of this.pools) {
+        p.trunk.count = p.foliage.count = p.count;
+        p.trunk.instanceMatrix.needsUpdate =
+          p.foliage.instanceMatrix.needsUpdate = true;
+        if (p.foliage.instanceColor) p.foliage.instanceColor.needsUpdate = true;
+      }
+      this.group.visible = next.size > 0;
+      this.e.renderer.shadowMap.needsUpdate = true;
+      this.e.data.detailedTreeCount = next.size;
+      this.e.data.matureTreeAssets = this.getGeometryCandidateState();
+    };
+    if (budget) {
+      if (!budget.run(rebuild)) this.refresh = true;
+    } else rebuild();
   }
 }

@@ -1707,10 +1707,22 @@ function Home() {
           <label className="quality-label">{tr('quality')}</label>
           <RadioGroup
             aria-label={tr('quality')}
-            value={settings.quality}
-            onValueChange={(q) => change({ quality: q as Settings['quality'] })}
+            value={settings.qualityMode === 'auto' ? 'auto' : settings.quality}
+            onValueChange={(quality) => {
+              if (quality === 'auto') change({ qualityMode: 'auto' });
+              else if (
+                quality === 'balanced' ||
+                quality === 'high' ||
+                quality === 'ultra'
+              )
+                change({ qualityMode: 'manual', quality });
+            }}
             className="quality-options"
           >
+            <label>
+              <RadioGroupItem value="auto" />
+              {tr('autoQuality')}
+            </label>
             <label>
               <RadioGroupItem value="ultra" />
               {tr('ultraQuality')}
@@ -1727,13 +1739,27 @@ function Home() {
           </RadioGroup>
           <p className="quality-description">
             {tr(
-              settings.quality === 'ultra'
-                ? 'ultraQualityDescription'
-                : settings.quality === 'high'
-                  ? 'highQualityDescription'
-                  : 'balancedQualityDescription',
+              settings.qualityMode === 'auto'
+                ? 'autoQualityDescription'
+                : settings.quality === 'ultra'
+                  ? 'ultraQualityDescription'
+                  : settings.quality === 'high'
+                    ? 'highQualityDescription'
+                    : 'balancedQualityDescription',
             )}
           </p>
+          <div className="quality-performance">
+            <span>{tr('effectiveQuality')}</span>
+            <span>
+              {tr(
+                (stats.effectiveQuality ?? settings.quality) === 'ultra'
+                  ? 'ultraQuality'
+                  : (stats.effectiveQuality ?? settings.quality) === 'high'
+                    ? 'highQuality'
+                    : 'balancedQuality',
+              )}
+            </span>
+          </div>
           {engine.current?.compatibleGraphics && (
             <p className="quality-description">
               {tr('compatibleGraphicsNote')}

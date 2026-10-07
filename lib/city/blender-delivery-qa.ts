@@ -230,7 +230,7 @@ export function installBlenderDeliveryQA(e: CityEngine, parent: HTMLElement, lea
     const evidence = preview.snapshot().evidence;
     if (!evidence) return;
     e.navigation?.keys.clear(); e.navigation?.setMode('orbit'); e.transition = null;
-    e.applySettings({ ...e.settings, mode: 'orbit', quality: 'high', labels: false, autoRotate: false });
+    e.applySettings({ ...e.settings, mode: 'orbit', qualityMode: 'manual', quality: 'high', labels: false, autoRotate: false });
     clearQAOrbitMomentum(e.controls);
     updateInteriorOption(evidence.model);
     framedView = view.value;

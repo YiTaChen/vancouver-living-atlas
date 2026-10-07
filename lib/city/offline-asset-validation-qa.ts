@@ -155,7 +155,7 @@ export function installOfflineAssetValidationQA(
       e.navigation?.keys.clear();
       e.navigation?.setMode('orbit');
       e.transition = null;
-      e.applySettings({ ...e.settings, mode: 'orbit', quality: 'high', traffic: true, labels: false, autoRotate: false });
+      e.applySettings({ ...e.settings, mode: 'orbit', qualityMode: 'manual', quality: 'high', traffic: true, labels: false, autoRotate: false });
       clearQAOrbitMomentum(e.controls);
       e.controls.enabled = false;
       // Keep the live elapsed-time traffic and city clock running. This is an
@@ -232,7 +232,7 @@ export function installOfflineAssetValidationQA(
   for (const quality of ['high', 'ultra'] as const)
     button(`Asset comparison ${quality}`, () => {
       if (lease.isRunning()) return;
-      e.applySettings({ ...e.settings, quality });
+      e.applySettings({ ...e.settings, qualityMode: 'manual', quality });
       e.detailedTrees?.update(true);
       status.textContent = `Comparison quality: ${quality}`;
     });
@@ -262,6 +262,7 @@ export function installOfflineAssetValidationQA(
           e.applySettings({
             ...e.settings,
             mode: 'orbit',
+            qualityMode: 'manual',
             quality: e.settings.quality === 'ultra' ? 'ultra' : 'high',
             labels: false,
             autoRotate: false,

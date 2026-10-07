@@ -198,6 +198,7 @@ export function installUpgradeQA(
     e.transition = null;
     e.applySettings({
       ...e.settings,
+      qualityMode: 'manual',
       quality,
       mode: 'orbit',
       labels: false,
@@ -615,7 +616,7 @@ export function installUpgradeQA(
       for (const view of views) {
         restoreModernBayQA(e);
         e.setAtmosphere('clear');
-        e.applySettings({ ...e.settings, quality: 'high' });
+        e.applySettings({ ...e.settings, qualityMode: 'manual', quality: 'high' });
         const modern =
           view.id === 'west-end-modern-bay' ||
           view.id === 'yaletown-modern-bay';

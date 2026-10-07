@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import streetKitManifest from '../../public/models/streetscape/manifest.json';
+import type { DetailWorkBudget, SceneryMotionState } from './scenery-motion';
 import type {
   StreetBayAsset,
   StreetBayPlacement,
@@ -27,6 +28,8 @@ type Host = {
   settings: { buildings: boolean; quality: string };
   renderer: { shadowMap: { needsUpdate: boolean } };
   disposed: boolean;
+  sceneryMotion?: SceneryMotionState | null;
+  detailWorkBudget?: DetailWorkBudget | null;
 };
 type Template = {
   geometry: THREE.BufferGeometry;
@@ -126,6 +129,16 @@ export class StreetscapeKit {
   private failed = false;
   private disposed = false;
   private stamp = 0;
+  private selectionAt = -Infinity;
+  private motionPolicy = '';
+  private failedVersions = new Map<
+    string,
+    { version: string; retryAt: number }
+  >();
+  private updates = 0;
+  private buildFailures = 0;
+  private swaps = 0;
+  private lastBuildError: string | null = null;
   private readonly loader: StreetBayLoader;
   readonly group = new THREE.Group();
 
@@ -187,6 +200,12 @@ export class StreetscapeKit {
   }
 
   private select(quality: string) {
+    const motion = this.e.sceneryMotion,
+      previous = new Map(
+        [...this.active.values()].flat().map((s) => [s.source.id, s.lod]),
+      ),
+      previousCells = new Set(this.active.keys()),
+      ahead = motion ? new THREE.Vector3(...motion.lookAheadXYZ) : this.last;
     this.active.clear();
     if (quality !== 'high' && quality !== 'ultra') return;
     const ultra = quality === 'ultra',
@@ -195,9 +214,22 @@ export class StreetscapeKit {
       .map((cell) => ({
         cell,
         distance: cell.bounds.distanceToPoint(this.last),
+        lead: cell.bounds.distanceToPoint(ahead),
       }))
-      .filter(({ distance }) => distance < range)
-      .sort((a, b) => a.distance - b.distance)
+      .filter(({ cell, distance, lead }) =>
+        motion
+          ? previousCells.has(cell.id)
+            ? distance < range + 40
+            : motion.allowNewDetails && lead < range && distance < range + 90
+          : distance < range,
+      )
+      .sort(
+        (a, b) =>
+          (motion
+            ? Number(previousCells.has(b.cell.id)) -
+              Number(previousCells.has(a.cell.id))
+            : 0) || a.lead - b.lead,
+      )
       .slice(0, ultra ? 6 : 4)
       .flatMap(({ cell }) =>
         cell.sources.map((source) => {
@@ -210,16 +242,37 @@ export class StreetscapeKit {
               this.last.y - p.y - 2,
               this.last.z - p.z,
             ),
+            lead: Math.hypot(ahead.x - p.x, ahead.y - p.y - 2, ahead.z - p.z),
           };
         }),
       )
-      .filter(({ distance }) => distance < range)
-      .sort((a, b) => a.distance - b.distance || a.source.id - b.source.id)
+      .filter(({ source, distance, lead }) =>
+        motion
+          ? previous.has(source.id)
+            ? distance < range + 24
+            : motion.allowNewDetails && lead < range && distance < range + 90
+          : distance < range,
+      )
+      .sort(
+        (a, b) =>
+          (motion
+            ? Number(previous.has(b.source.id)) -
+              Number(previous.has(a.source.id))
+            : 0) ||
+          a.lead - b.lead ||
+          a.source.id - b.source.id,
+      )
       .slice(0, ultra ? 36 : 24);
     let detailed = 0;
     for (const { cell, source, distance } of candidates) {
       const lod: 0 | 1 =
-        distance < (ultra ? 50 : 38) && detailed < (ultra ? 10 : 6) ? 0 : 1;
+        distance <
+          (ultra ? 50 : 38) +
+            (motion ? (previous.get(source.id) === 0 ? 12 : -6) : 0) &&
+        !(motion?.auto && motion.fast && previous.get(source.id) !== 0) &&
+        detailed < (ultra ? 10 : 6)
+          ? 0
+          : 1;
       if (lod === 0) detailed++;
       if (!this.active.has(cell.id)) this.active.set(cell.id, []);
       this.active.get(cell.id)!.push({ source, lod });
@@ -243,62 +296,75 @@ export class StreetscapeKit {
   private build(selections: Selection[]): Page {
     const group = new THREE.Group(),
       batches = new Map<Key, StreetBaySource[]>();
-    for (const { source, lod } of selections) {
-      const key: Key = `${source.placement.asset}:${lod}`;
-      if (!batches.has(key)) batches.set(key, []);
-      batches.get(key)!.push(source);
-    }
-    const transform = new THREE.Object3D();
-    const identityPanels: ShopPanel[] = [];
-    if (this.identityMaterial)
-      for (const { source } of selections) {
-        const p = source.placement;
-        if (p.asset !== 'heritage-shop-bay') continue;
-        transform.position.set(p.x, p.y, p.z);
-        transform.rotation.set(0, p.yaw, 0);
-        transform.updateMatrix();
-        identityPanels.push(
-          ...detailedShopPanels(
-            source.identity ?? shopIdentityFor(`${p.x}:${p.z}:${p.yaw}`),
-            transform.matrix,
-          ),
-        );
+    try {
+      for (const { source, lod } of selections) {
+        const key: Key = `${source.placement.asset}:${lod}`;
+        if (!batches.has(key)) batches.set(key, []);
+        batches.get(key)!.push(source);
       }
-    for (const [key, sources] of batches) {
-      for (const part of this.templates.get(key)!) {
-        const mesh = new THREE.InstancedMesh(
-          part.geometry,
-          part.material,
-          sources.length,
-        );
-        sources.forEach((source, index) => {
+      const transform = new THREE.Object3D();
+      const identityPanels: ShopPanel[] = [];
+      if (this.identityMaterial)
+        for (const { source } of selections) {
           const p = source.placement;
+          if (p.asset !== 'heritage-shop-bay') continue;
           transform.position.set(p.x, p.y, p.z);
           transform.rotation.set(0, p.yaw, 0);
           transform.updateMatrix();
-          mesh.setMatrixAt(index, transform.matrix);
-        });
-        const materials = Array.isArray(part.material)
-          ? part.material
-          : [part.material];
-        // Conventional alpha glass must not produce an opaque canopy/window
-        // shadow in the engine's depth pass.
-        mesh.castShadow = !materials.every((material) => material.transparent);
-        mesh.receiveShadow = true;
-        mesh.computeBoundingSphere();
-        group.add(mesh);
+          identityPanels.push(
+            ...detailedShopPanels(
+              source.identity ?? shopIdentityFor(`${p.x}:${p.z}:${p.yaw}`),
+              transform.matrix,
+            ),
+          );
+        }
+      for (const [key, sources] of batches) {
+        for (const part of this.templates.get(key)!) {
+          const mesh = new THREE.InstancedMesh(
+            part.geometry,
+            part.material,
+            sources.length,
+          );
+          sources.forEach((source, index) => {
+            const p = source.placement;
+            transform.position.set(p.x, p.y, p.z);
+            transform.rotation.set(0, p.yaw, 0);
+            transform.updateMatrix();
+            mesh.setMatrixAt(index, transform.matrix);
+          });
+          const materials = Array.isArray(part.material)
+            ? part.material
+            : [part.material];
+          // Conventional alpha glass must not produce an opaque canopy/window
+          // shadow in the engine's depth pass.
+          mesh.castShadow = !materials.every(
+            (material) => material.transparent,
+          );
+          mesh.receiveShadow = true;
+          mesh.computeBoundingSphere();
+          group.add(mesh);
+        }
       }
+      if (identityPanels.length)
+        group.add(createShopPanelBatch(identityPanels, this.identityMaterial!));
+      group.visible = false;
+      this.group.add(group);
+      return {
+        group,
+        selections,
+        version: this.version(selections),
+        stamp: ++this.stamp,
+      };
+    } catch (error) {
+      group.removeFromParent();
+      group.traverse((object) => {
+        if (object instanceof THREE.InstancedMesh) {
+          if (object.userData.streetIdentity) object.geometry.dispose();
+          object.dispose();
+        }
+      });
+      throw error;
     }
-    if (identityPanels.length)
-      group.add(createShopPanelBatch(identityPanels, this.identityMaterial!));
-    group.visible = false;
-    this.group.add(group);
-    return {
-      group,
-      selections,
-      version: this.version(selections),
-      stamp: ++this.stamp,
-    };
   }
 
   private release(page: Page) {
@@ -316,40 +382,82 @@ export class StreetscapeKit {
 
   update() {
     if (this.disposed || this.e.disposed) return;
+    this.updates++;
     const quality = this.e.settings.buildings
       ? this.e.settings.quality
       : 'balanced';
+    const motion = this.e.sceneryMotion,
+      budget = this.e.detailWorkBudget,
+      policy = motion
+        ? `${motion.auto}:${motion.allowNewDetails}:${motion.fast}`
+        : '';
     if (
       quality !== this.quality ||
-      this.last.distanceToSquared(this.e.camera.position) > 12 * 12
+      policy !== this.motionPolicy ||
+      (this.last.distanceToSquared(this.e.camera.position) > 12 * 12 &&
+        (!motion ||
+          motion.nowMs - this.selectionAt >= motion.selectionIntervalMs))
     ) {
       this.quality = quality;
+      this.motionPolicy = policy;
+      this.selectionAt = motion?.nowMs ?? -Infinity;
       this.last.copy(this.e.camera.position);
       this.select(quality);
     }
     for (const [id, page] of this.pages) {
       const selections = this.active.get(id);
-      if (!selections || page.version !== this.version(selections))
-        this.show(page, false);
+      if (!selections) this.show(page, false);
     }
     if (!this.active.size) return;
     if (!this.loaded) {
-      void this.load();
+      if (!this.loading && !this.failed && (motion?.allowNewDetails ?? true)) {
+        const work = () => {
+          void this.load();
+        };
+        if (budget) budget.run(work, { admission: true });
+        else work();
+      }
       return;
     }
     // At most one cell's bounded geometry allocation on a frame.
     for (const [id, selections] of this.active) {
-      let page = this.pages.get(id);
+      const page = this.pages.get(id);
       const version = this.version(selections);
       if (page?.version === version) {
         page.stamp = ++this.stamp;
         this.show(page, true);
         continue;
       }
-      if (page) this.release(page);
-      page = this.build(selections);
-      this.pages.set(id, page);
-      this.show(page, true);
+      const failure = this.failedVersions.get(id),
+        nowMs = motion?.nowMs ?? this.updates * (1000 / 60);
+      if (
+        !(motion?.allowNewDetails ?? true) ||
+        (failure?.version === version && nowMs < failure.retryAt)
+      )
+        continue;
+      const work = () => {
+        try {
+          const replacement = this.build(selections);
+          // Allocation/validation completes before releasing the live page.
+          // Source fallback toggles and publication are one synchronous swap.
+          if (page) {
+            this.release(page);
+            this.swaps++;
+          }
+          this.pages.set(id, replacement);
+          this.show(replacement, true);
+        } catch (error) {
+          this.buildFailures++;
+          this.lastBuildError = String(error);
+          this.failedVersions.set(id, { version, retryAt: nowMs + 2000 });
+          if (this.failedVersions.size > 32)
+            this.failedVersions.delete(
+              this.failedVersions.keys().next().value!,
+            );
+        }
+      };
+      if (budget) budget.run(work, { admission: true });
+      else work();
       break;
     }
     while (this.pages.size > 12) {
@@ -374,6 +482,9 @@ export class StreetscapeKit {
       loaded: this.loaded,
       loading: this.loading,
       failed: this.failed,
+      buildFailures: this.buildFailures,
+      lastBuildError: this.lastBuildError,
+      swaps: this.swaps,
       candidatesByAsset,
       candidateBays: Object.values(candidatesByAsset).reduce(
         (sum, count) => sum + count,
@@ -421,6 +532,7 @@ export class StreetscapeKit {
     this.pages.forEach((page) => this.release(page));
     this.pages.clear();
     this.active.clear();
+    this.failedVersions.clear();
     this.group.removeFromParent();
     this.disposeTemplates(this.templates.values());
     this.templates.clear();

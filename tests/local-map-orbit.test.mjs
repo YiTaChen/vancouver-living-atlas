@@ -83,6 +83,7 @@ function fixture({ mode = 'walk', ground = false, yaw = 0, lookYaw = 0 } = {}) {
     contextLost: false,
     uniforms: { time: { value: 0 } },
     tickClock() {},
+    updateAutoQuality() {}, // Independently exercised by auto-quality-engine.
     clock: { hour: 16, calendarDay: 0 },
     skyEffects: { update() {} },
     updateLabels() {},

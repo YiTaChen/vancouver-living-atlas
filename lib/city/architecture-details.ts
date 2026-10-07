@@ -101,6 +101,8 @@ export class ArchitecturalDetails {
   private last = new THREE.Vector3(Infinity, Infinity, Infinity);
   private quality = '';
   private tick = 0;
+  private selectionAt = -Infinity;
+  private motionPolicy = '';
   private disposed = false;
   private qaAdapter: ArchitectureQAAdapter | null = null;
   private matrix = new THREE.Matrix4();
@@ -116,7 +118,14 @@ export class ArchitecturalDetails {
       'data' | 'buildings' | 'camera' | 'settings' | 'renderer'
     > &
       Partial<
-        Pick<CityEngine, 'extraTextures' | 'disposed' | 'compatibleGraphics'>
+        Pick<
+          CityEngine,
+          | 'extraTextures'
+          | 'disposed'
+          | 'compatibleGraphics'
+          | 'sceneryMotion'
+          | 'detailWorkBudget'
+        >
       >,
     rooftopEquipment?: RooftopEquipment,
   ) {
@@ -251,17 +260,30 @@ export class ArchitecturalDetails {
       this.invalidateQAStreetCells(this.qaAdapter.affectedCells);
     this.tick++;
     const q = this.e.settings.buildings ? this.e.settings.quality : 'off';
+    const motion = this.e.sceneryMotion,
+      policy = motion
+        ? `${motion.auto}:${motion.allowNewDetails}:${motion.fast}`
+        : '';
     if (
       force ||
       q !== this.quality ||
-      this.last.distanceToSquared(this.e.camera.position) > 30 * 30
+      policy !== this.motionPolicy ||
+      (this.last.distanceToSquared(this.e.camera.position) > 30 * 30 &&
+        (!motion ||
+          motion.nowMs - this.selectionAt >= motion.selectionIntervalMs))
     ) {
       this.quality = q;
+      this.motionPolicy = policy;
+      this.selectionAt = motion?.nowMs ?? -Infinity;
       this.last.copy(this.e.camera.position);
+      const ahead = motion
+        ? new THREE.Vector3(...motion.lookAheadXYZ)
+        : this.last;
       const distances = this.cells
         .map((cell) => ({
           cell,
           distance: cell.bounds.distanceToPoint(this.last),
+          lead: cell.bounds.distanceToPoint(ahead),
         }))
         .sort(
           (a, b) =>
@@ -282,17 +304,40 @@ export class ArchitecturalDetails {
         if (!range) continue;
         selected.push(
           ...distances
-            .filter((p) => p.distance < range)
+            .filter((p) =>
+              motion
+                ? this.selected.has(`${p.cell.id}/${tier}`)
+                  ? p.distance < range + (tier === 'roof' ? 80 : 50)
+                  : motion.allowNewDetails &&
+                    p.lead < range &&
+                    p.distance < range + 90
+                : p.distance < range,
+            )
+            .sort(
+              (a, b) =>
+                (motion
+                  ? Number(this.selected.has(`${b.cell.id}/${tier}`)) -
+                    Number(this.selected.has(`${a.cell.id}/${tier}`))
+                  : 0) ||
+                a.lead - b.lead ||
+                a.cell.id.localeCompare(b.cell.id),
+            )
             .slice(0, limit)
             .map((p) => ({ ...p, tier })),
         );
       }
-      this.rooftopEquipment.configure(
-        selected
-          .filter((p) => p.tier === 'roof')
-          .map((p) => ({ id: p.cell.id, distance: p.distance })),
-        this.rooftopEnabled && !this.e.compatibleGraphics ? q : 'off',
-      );
+      if (
+        !motion ||
+        motion.allowNewDetails ||
+        q === 'off' ||
+        !this.rooftopEnabled
+      )
+        this.rooftopEquipment.configure(
+          selected
+            .filter((p) => p.tier === 'roof')
+            .map((p) => ({ id: p.cell.id, distance: p.distance })),
+          this.rooftopEnabled && !this.e.compatibleGraphics ? q : 'off',
+        );
       this.invalidateRoofCells(this.rooftopEquipment.takeInvalidated());
       // Nearby street architecture is ready before more distant rooftop decoration.
       selected.sort(
@@ -351,6 +396,26 @@ export class ArchitecturalDetails {
       }
   }
   private pump() {
+    const motion = this.e.sceneryMotion,
+      budget = this.e.detailWorkBudget;
+    if (motion && !motion.allowNewDetails) return;
+    if (!this.build && !this.pending.length) return;
+    const allowance = Math.min(
+      ARCHITECTURE_BUDGET.buildMs,
+      motion?.preparationBudgetMs ?? ARCHITECTURE_BUDGET.buildMs,
+      budget?.remainingMs() ?? ARCHITECTURE_BUDGET.buildMs,
+    );
+    if (allowance <= 0) return;
+    const steps = motion?.fast
+      ? 8
+      : motion?.moving
+        ? 32
+        : ARCHITECTURE_BUDGET.maxStepsPerFrame;
+    const work = () => this.pumpWork(allowance, steps);
+    if (budget) budget.run(work, { admission: !this.build });
+    else work();
+  }
+  private pumpWork(budgetMs: number, steps: number) {
     if (!this.build) {
       const record = this.pending.shift();
       if (!record) return;
@@ -382,7 +447,7 @@ export class ArchitecturalDetails {
         ? ARCHITECTURE_BUDGET.roofInstancesPerCell
         : ARCHITECTURE_BUDGET.streetInstancesPerCell;
     let complete = false;
-    for (let step = 0; step < ARCHITECTURE_BUDGET.maxStepsPerFrame; step++) {
+    for (let step = 0; step < steps; step++) {
       const value = build.work.next();
       if (value.done) {
         complete = true;
@@ -395,7 +460,7 @@ export class ArchitecturalDetails {
         complete = true;
         break;
       }
-      if (performance.now() - start >= ARCHITECTURE_BUDGET.buildMs) break;
+      if (performance.now() - start >= budgetMs) break;
     }
     this.stats.maxPlanMs = Math.max(
       this.stats.maxPlanMs,

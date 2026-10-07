@@ -7,6 +7,7 @@ import { project } from './geo';
 import { auditCausewayTravel } from './causeway-qa';
 import { installReleaseQAControls } from './release-qa-controls';
 import { installUpgradeQA } from './upgrade-qa';
+import { installAutoQualityQA } from './auto-quality-qa';
 import { installUpgradeEnduranceQA } from './upgrade-endurance-qa';
 
 const cases = [
@@ -278,6 +279,7 @@ export function installVisualQA(e: CityEngine) {
     },
   };
   installUpgradeQA(e, panel, runLease);
+  installAutoQualityQA(e, panel, runLease);
   const button = (name: string, fn: () => void) => {
     const b = document.createElement('button');
     b.textContent = name;
@@ -299,6 +301,7 @@ export function installVisualQA(e: CityEngine) {
     e.applySettings({
       ...e.settings,
       mode: 'orbit',
+      qualityMode: 'manual',
       quality,
       labels: false,
       autoRotate: false,

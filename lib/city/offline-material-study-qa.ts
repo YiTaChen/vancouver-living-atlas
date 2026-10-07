@@ -161,6 +161,7 @@ export function installOfflineMaterialStudyQA(
     e.applySettings({
       ...e.settings,
       mode: 'orbit',
+      qualityMode: 'manual',
       quality: 'high',
       labels: false,
       autoRotate: false,

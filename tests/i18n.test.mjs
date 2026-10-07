@@ -79,6 +79,35 @@ test('every locale distinguishes unavailable graphics, interrupted graphics and 
   }
 });
 
+test('every locale explains automatic quality and names the actual current detail without internal diagnostics', () => {
+  for (const locale of locales) {
+    for (const key of [
+      'autoQuality',
+      'autoQualityDescription',
+      'effectiveQuality',
+    ]) {
+      const message = i18n.translate(locale, key);
+      assert.ok(message.trim(), `${locale}/${key}`);
+      if (locale !== 'en')
+        assert.notEqual(message, catalogs.en[key], `${locale}/${key}`);
+      assert.doesNotMatch(
+        message,
+        /resolutionScale|targetFps|frameMs|p95Ms|qualityMode|\b60\s*fps\b/i,
+      );
+    }
+    assert.notEqual(
+      i18n.translate(locale, 'autoQuality'),
+      i18n.translate(locale, 'highQuality'),
+    );
+    assert.notEqual(
+      i18n.translate(locale, 'autoQualityDescription'),
+      i18n.translate(locale, 'highQualityDescription'),
+    );
+    const quality = i18n.translate(locale, 'effectiveQuality');
+    assert.doesNotMatch(quality, /[{}]/);
+  }
+});
+
 test('localized map labels and numeric messages resolve without placeholders', () => {
   for (const locale of locales) {
     assert(
