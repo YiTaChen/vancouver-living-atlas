@@ -1,0 +1,294 @@
+{
+  "status": "pass",
+  "scope": "common packaging, source hashes, rest-pose transformed GLB geometry and costs only; package-specific Blender, semantic and runtime checks required",
+  "results": [
+    {
+      "assetId": "pedestrian-commuter",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.35619956254959106,
+          0.0,
+          -0.27238789200782776
+        ],
+        "max": [
+          0.35619956254959106,
+          1.7799999713897705,
+          0.16014014184474945
+        ],
+        "size": [
+          0.7123991250991821,
+          1.7799999713897705,
+          0.4325280338525772
+        ]
+      },
+      "triangles": 420,
+      "vertices": 964,
+      "primitives": 1,
+      "bytes": 58692,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 58692,
+      "images": [],
+      "nodeNames": [
+        "pedestrian-body"
+      ],
+      "materialNames": [
+        "pedestrian-vertex-color-opaque"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "pedestrian-commuter",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.35619956254959106,
+          0.0,
+          -0.27238789200782776
+        ],
+        "max": [
+          0.35619956254959106,
+          1.7799999713897705,
+          0.16014014184474945
+        ],
+        "size": [
+          0.7123991250991821,
+          1.7799999713897705,
+          0.4325280338525772
+        ]
+      },
+      "triangles": 168,
+      "vertices": 400,
+      "primitives": 1,
+      "bytes": 25588,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 25588,
+      "images": [],
+      "nodeNames": [
+        "pedestrian-body"
+      ],
+      "materialNames": [
+        "pedestrian-vertex-color-opaque"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "pedestrian-raincoat",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.3427211046218872,
+          0.0,
+          -0.12524999678134918
+        ],
+        "max": [
+          0.3427211046218872,
+          1.6699999570846558,
+          0.148908331990242
+        ],
+        "size": [
+          0.6854422092437744,
+          1.6699999570846558,
+          0.2741583287715912
+        ]
+      },
+      "triangles": 420,
+      "vertices": 982,
+      "primitives": 1,
+      "bytes": 59696,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 59696,
+      "images": [],
+      "nodeNames": [
+        "pedestrian-body"
+      ],
+      "materialNames": [
+        "pedestrian-vertex-color-opaque"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "pedestrian-raincoat",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.3427211046218872,
+          0.0,
+          -0.12524999678134918
+        ],
+        "max": [
+          0.3427211046218872,
+          1.6699999570846558,
+          0.148908331990242
+        ],
+        "size": [
+          0.6854422092437744,
+          1.6699999570846558,
+          0.2741583287715912
+        ]
+      },
+      "triangles": 192,
+      "vertices": 464,
+      "primitives": 1,
+      "bytes": 29312,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 29312,
+      "images": [],
+      "nodeNames": [
+        "pedestrian-body"
+      ],
+      "materialNames": [
+        "pedestrian-vertex-color-opaque"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "pedestrian-runner",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.33874860405921936,
+          0.0,
+          -0.14027932286262512
+        ],
+        "max": [
+          0.33874860405921936,
+          1.8600000143051147,
+          0.19743016362190247
+        ],
+        "size": [
+          0.6774972081184387,
+          1.8600000143051147,
+          0.3377094864845276
+        ]
+      },
+      "triangles": 424,
+      "vertices": 982,
+      "primitives": 1,
+      "bytes": 59720,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 59720,
+      "images": [],
+      "nodeNames": [
+        "pedestrian-body"
+      ],
+      "materialNames": [
+        "pedestrian-vertex-color-opaque"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "pedestrian-runner",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.33874860405921936,
+          0.0,
+          -0.14027932286262512
+        ],
+        "max": [
+          0.33874860405921936,
+          1.8600000143051147,
+          0.19743016362190247
+        ],
+        "size": [
+          0.6774972081184387,
+          1.8600000143051147,
+          0.3377094864845276
+        ]
+      },
+      "triangles": 204,
+      "vertices": 496,
+      "primitives": 1,
+      "bytes": 31176,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 31176,
+      "images": [],
+      "nodeNames": [
+        "pedestrian-body"
+      ],
+      "materialNames": [
+        "pedestrian-vertex-color-opaque"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "pedestrian-tote",
+      "lod": 0,
+      "boundsM": {
+        "min": [
+          -0.40972617268562317,
+          0.0,
+          -0.15772180259227753
+        ],
+        "max": [
+          0.3454107344150543,
+          1.600000023841858,
+          0.14063526690006256
+        ],
+        "size": [
+          0.7551369071006775,
+          1.600000023841858,
+          0.2983570694923401
+        ]
+      },
+      "triangles": 452,
+      "vertices": 1062,
+      "primitives": 1,
+      "bytes": 64368,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 64368,
+      "images": [],
+      "nodeNames": [
+        "pedestrian-body"
+      ],
+      "materialNames": [
+        "pedestrian-vertex-color-opaque"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    },
+    {
+      "assetId": "pedestrian-tote",
+      "lod": 1,
+      "boundsM": {
+        "min": [
+          -0.40972617268562317,
+          0.0,
+          -0.1279298961162567
+        ],
+        "max": [
+          0.3454107344150543,
+          1.600000023841858,
+          0.14063526690006256
+        ],
+        "size": [
+          0.7551369071006775,
+          1.600000023841858,
+          0.2685651630163193
+        ]
+      },
+      "triangles": 176,
+      "vertices": 424,
+      "primitives": 1,
+      "bytes": 26968,
+      "embeddedImageBytes": 0,
+      "geometryBytes": 26968,
+      "images": [],
+      "nodeNames": [
+        "pedestrian-body"
+      ],
+      "materialNames": [
+        "pedestrian-vertex-color-opaque"
+      ],
+      "boundsScope": "rest-pose scene node transforms; no skin deformation",
+      "skins": 0
+    }
+  ]
+}

@@ -1,0 +1,258 @@
+{
+  "status": "pass",
+  "renderer": "Blender Cycles CPU",
+  "blenderVersion": "4.3.2",
+  "samples": 24,
+  "source": "actual GLB reimport",
+  "runtimeAcceptance": "not_run",
+  "referenceObjectsExcludedFromRuntime": true,
+  "glbSha256References": {
+    "exports/pedestrian-commuter.lod0.glb": "dc135c2b628529b746451a9b2d7cc4a577ec86d7e9736aacdbd5591c542f2a35",
+    "exports/pedestrian-raincoat.lod0.glb": "8a70843727c8667fc7b8da5b0ae29625d86e86620bd9c5c5ff2ea3ea9d304387",
+    "exports/pedestrian-runner.lod0.glb": "f9cbca74b48e11a17653a20cfaf73b211d22c22f556c8d1c9320188eb9ce4d32",
+    "exports/pedestrian-tote.lod0.glb": "66411c5f5996f44d104c735e0ba93ef27f32b396927eafd77d30a2ef99ab0508",
+    "exports/pedestrian-commuter.lod1.glb": "b611d5e75c44e933939318a489658162ee70f41a4ba041287d448937e3e966a1",
+    "exports/pedestrian-raincoat.lod1.glb": "9b6a971168fb20f42b9cf29bbd87a7070c37fdb5e74fdc7e782724c6c73a3a85",
+    "exports/pedestrian-runner.lod1.glb": "74d82a524b6481f1a9ea6292378beef1a1b67843d82a0009f53782984032843e",
+    "exports/pedestrian-tote.lod1.glb": "fb9d38860e4eaa558c4e55f6bf3e2208cb80c2ee49aa571dd2c55c2d8517c865"
+  },
+  "reimportMeasurements": [
+    {
+      "file": "exports/pedestrian-commuter.lod0.glb",
+      "blenderBoundsZUp": {
+        "min": [
+          -0.35619956254959106,
+          -0.16014014184474945,
+          0.0
+        ],
+        "max": [
+          0.35619956254959106,
+          0.27238789200782776,
+          1.7799999713897705
+        ]
+      },
+      "triangles": 420
+    },
+    {
+      "file": "exports/pedestrian-raincoat.lod0.glb",
+      "blenderBoundsZUp": {
+        "min": [
+          -0.3427211046218872,
+          -0.148908331990242,
+          0.0
+        ],
+        "max": [
+          0.3427211046218872,
+          0.12524999678134918,
+          1.6699999570846558
+        ]
+      },
+      "triangles": 420
+    },
+    {
+      "file": "exports/pedestrian-runner.lod0.glb",
+      "blenderBoundsZUp": {
+        "min": [
+          -0.33874860405921936,
+          -0.19743016362190247,
+          0.0
+        ],
+        "max": [
+          0.33874860405921936,
+          0.14027932286262512,
+          1.8600000143051147
+        ]
+      },
+      "triangles": 424
+    },
+    {
+      "file": "exports/pedestrian-tote.lod0.glb",
+      "blenderBoundsZUp": {
+        "min": [
+          -0.40972617268562317,
+          -0.14063526690006256,
+          0.0
+        ],
+        "max": [
+          0.3454107344150543,
+          0.15772180259227753,
+          1.600000023841858
+        ]
+      },
+      "triangles": 452
+    },
+    {
+      "file": "exports/pedestrian-commuter.lod1.glb",
+      "blenderBoundsZUp": {
+        "min": [
+          -0.35619956254959106,
+          -0.16014014184474945,
+          0.0
+        ],
+        "max": [
+          0.35619956254959106,
+          0.27238789200782776,
+          1.7799999713897705
+        ]
+      },
+      "triangles": 168
+    },
+    {
+      "file": "exports/pedestrian-raincoat.lod1.glb",
+      "blenderBoundsZUp": {
+        "min": [
+          -0.3427211046218872,
+          -0.148908331990242,
+          0.0
+        ],
+        "max": [
+          0.3427211046218872,
+          0.12524999678134918,
+          1.6699999570846558
+        ]
+      },
+      "triangles": 192
+    },
+    {
+      "file": "exports/pedestrian-runner.lod1.glb",
+      "blenderBoundsZUp": {
+        "min": [
+          -0.33874860405921936,
+          -0.19743016362190247,
+          0.0
+        ],
+        "max": [
+          0.33874860405921936,
+          0.14027932286262512,
+          1.8600000143051147
+        ]
+      },
+      "triangles": 204
+    },
+    {
+      "file": "exports/pedestrian-tote.lod1.glb",
+      "blenderBoundsZUp": {
+        "min": [
+          -0.40972617268562317,
+          -0.14063526690006256,
+          0.0
+        ],
+        "max": [
+          0.3454107344150543,
+          0.1279298961162567,
+          1.600000023841858
+        ]
+      },
+      "triangles": 176
+    },
+    {
+      "file": "exports/pedestrian-commuter.lod0.glb",
+      "blenderBoundsZUp": {
+        "min": [
+          -0.35619956254959106,
+          -0.16014014184474945,
+          0.0
+        ],
+        "max": [
+          0.35619956254959106,
+          0.27238789200782776,
+          1.7799999713897705
+        ]
+      },
+      "triangles": 420
+    },
+    {
+      "file": "exports/pedestrian-raincoat.lod0.glb",
+      "blenderBoundsZUp": {
+        "min": [
+          -0.3427211046218872,
+          -0.148908331990242,
+          0.0
+        ],
+        "max": [
+          0.3427211046218872,
+          0.12524999678134918,
+          1.6699999570846558
+        ]
+      },
+      "triangles": 420
+    },
+    {
+      "file": "exports/pedestrian-runner.lod0.glb",
+      "blenderBoundsZUp": {
+        "min": [
+          -0.33874860405921936,
+          -0.19743016362190247,
+          0.0
+        ],
+        "max": [
+          0.33874860405921936,
+          0.14027932286262512,
+          1.8600000143051147
+        ]
+      },
+      "triangles": 424
+    },
+    {
+      "file": "exports/pedestrian-tote.lod0.glb",
+      "blenderBoundsZUp": {
+        "min": [
+          -0.40972617268562317,
+          -0.14063526690006256,
+          0.0
+        ],
+        "max": [
+          0.3454107344150543,
+          0.15772180259227753,
+          1.600000023841858
+        ]
+      },
+      "triangles": 452
+    }
+  ],
+  "previews": [
+    {
+      "file": "qa/previews/background-lod0-front.png",
+      "view": "front",
+      "lod": 0,
+      "glbs": [
+        "exports/pedestrian-commuter.lod0.glb",
+        "exports/pedestrian-raincoat.lod0.glb",
+        "exports/pedestrian-runner.lod0.glb",
+        "exports/pedestrian-tote.lod0.glb"
+      ],
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ]
+    },
+    {
+      "file": "qa/previews/background-lod1-front.png",
+      "view": "front",
+      "lod": 1,
+      "glbs": [
+        "exports/pedestrian-commuter.lod1.glb",
+        "exports/pedestrian-raincoat.lod1.glb",
+        "exports/pedestrian-runner.lod1.glb",
+        "exports/pedestrian-tote.lod1.glb"
+      ],
+      "referenceHeightsM": [
+        1,
+        1.75,
+        1.81
+      ]
+    },
+    {
+      "file": "qa/previews/background-lod0-rear.png",
+      "view": "rear",
+      "lod": 0,
+      "glbs": [
+        "exports/pedestrian-commuter.lod0.glb",
+        "exports/pedestrian-raincoat.lod0.glb",
+        "exports/pedestrian-runner.lod0.glb",
+        "exports/pedestrian-tote.lod0.glb"
+      ]
+    }
+  ]
+}

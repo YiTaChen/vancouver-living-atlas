@@ -1,0 +1,1480 @@
+{
+  "schemaVersion": 1,
+  "packageId": "city-life-pedestrians",
+  "version": "1.0.0",
+  "baseRevision": "401569193ccda73e8f6a6fd96e4bdb144ef5a4c6",
+  "status": "offline_complete",
+  "integrationStatus": "runtime_pending_webgl",
+  "units": "metres",
+  "coordinateSystem": {
+    "authoring": "Blender +Z up, -Y front",
+    "runtime": "glTF +Y up, +Z front, -X right",
+    "conversion": "Mesh only: Blender (x,y,z) -> glTF (x,z,-y), once. Custom scalar pivots are authored directly in runtime coordinates.",
+    "datum": "foot soles at root-local Y=0"
+  },
+  "provenance": {
+    "attribution": "Based on Vancouver Living Atlas by YiTaChen",
+    "sourceUrl": "https://github.com/YiTaChen/vancouver-living-atlas",
+    "license": "Vancouver Living Atlas Noncommercial Research and Attribution 1.0; repository LICENSE",
+    "sourceDate": "2026-10-07",
+    "sourceNature": "Four original procedural silhouettes and palettes, created from empty Blender scenes; no imported citizen, Taipei mesh, photos, brands, or downloaded artwork",
+    "specification": "docs/CITY_LIFE_TRANSIT_SPEC.md / Low-cost pedestrian asset delivery; docs/AI_AGENT_DEVELOPMENT_BACKLOG.md section 2 common contract",
+    "generatorSha256": "76a2ba2916c8dd1a1f08a599a8f93dbf308d3cd7b70169739a7d7e8541ec0ec3",
+    "exporterSha256": "28372455756a8ce2cc7196f178ba67bfe1400f394afac887addb8a4d9578ebd1",
+    "nearSkeleton": "not_implemented; this package is background-only"
+  },
+  "rebuildCommand": "blender -b -t 2 --python-exit-code 1 --python tools/assets/city-life-pedestrians/build.py -- --out /tmp/city-life-pedestrians-fresh",
+  "reexportCommand": "blender -b -t 2 --python-exit-code 1 --python tools/assets/city-life-pedestrians/export.py -- --out /tmp/city-life-pedestrians-reexport-NEW",
+  "validationCommand": "python3 tools/assets/city-life-pedestrians/validate.py && node --test tests/city-life-pedestrian-assets.test.mjs",
+  "assets": [
+    {
+      "id": "pedestrian-commuter",
+      "taskId": "CITY-LIFE-BACKGROUND-PEDESTRIANS",
+      "variant": "jacket-backpack",
+      "kind": "original-low-cost-background-pedestrian",
+      "source": "source/pedestrian-commuter.lod0.blend",
+      "sourceSha256": "2c33b363b19aa7aa8ee0221b0d96f9df658dac212bed1c7bcf55679ca856666f",
+      "lods": [
+        {
+          "level": 0,
+          "label": "medium-background",
+          "file": "exports/pedestrian-commuter.lod0.glb",
+          "sha256": "dc135c2b628529b746451a9b2d7cc4a577ec86d7e9736aacdbd5591c542f2a35",
+          "source": "source/pedestrian-commuter.lod0.blend",
+          "sourceSha256": "2c33b363b19aa7aa8ee0221b0d96f9df658dac212bed1c7bcf55679ca856666f",
+          "sourceBytes": 94343,
+          "triangles": 420,
+          "vertices": 964,
+          "primitives": 1,
+          "bytes": 58692,
+          "geometryBytes": 58692,
+          "embeddedImageBytes": 0,
+          "boundsM": {
+            "min": [
+              -0.35619956254959106,
+              0.0,
+              -0.27238789200782776
+            ],
+            "max": [
+              0.35619956254959106,
+              1.7799999713897705,
+              0.16014014184474945
+            ],
+            "size": [
+              0.7123991250991821,
+              1.7799999713897705,
+              0.4325280338525772
+            ]
+          },
+          "animatedBoundsM": {
+            "min": [
+              -0.35819956254959107,
+              -0.015864049002758063,
+              -0.45328151713161263
+            ],
+            "max": [
+              0.35819956254959107,
+              1.8329999713897704,
+              0.5225206887764415
+            ],
+            "size": [
+              0.7163991250991821,
+              1.8488640203925284,
+              0.9758022059080542
+            ],
+            "method": "analytic interval extrema per exported vertex; limb X +/-0.42 rad, head Y +/-0.75 rad, root lift 0..0.051 m, plus 0.002 m padding",
+            "scope": "local rigid-limb-v1 envelope only; consumer must transform once and expand for any added animation"
+          },
+          "customAttributes": [
+            "_LIMB",
+            "_PIVOT_X",
+            "_PIVOT_Y",
+            "_PIVOT_Z",
+            "_PALETTE",
+            "POSITION",
+            "NORMAL",
+            "COLOR_0"
+          ],
+          "capabilities": {
+            "mergedOpaque": true,
+            "vertexColor": true,
+            "rigidLimbShader": true,
+            "skeleton": false,
+            "sitting": false,
+            "dynamicShadow": false
+          }
+        },
+        {
+          "level": 1,
+          "label": "far-background",
+          "file": "exports/pedestrian-commuter.lod1.glb",
+          "sha256": "b611d5e75c44e933939318a489658162ee70f41a4ba041287d448937e3e966a1",
+          "source": "source/pedestrian-commuter.lod1.blend",
+          "sourceSha256": "f2bcc4b031365d54301d3a2b45c05807b7f410f5a8699369bdbc970b516784ad",
+          "sourceBytes": 89711,
+          "triangles": 168,
+          "vertices": 400,
+          "primitives": 1,
+          "bytes": 25588,
+          "geometryBytes": 25588,
+          "embeddedImageBytes": 0,
+          "boundsM": {
+            "min": [
+              -0.35619956254959106,
+              0.0,
+              -0.27238789200782776
+            ],
+            "max": [
+              0.35619956254959106,
+              1.7799999713897705,
+              0.16014014184474945
+            ],
+            "size": [
+              0.7123991250991821,
+              1.7799999713897705,
+              0.4325280338525772
+            ]
+          },
+          "animatedBoundsM": {
+            "min": [
+              -0.35819956254959107,
+              -0.015864049002758063,
+              -0.45328151713161263
+            ],
+            "max": [
+              0.35819956254959107,
+              1.8329999713897704,
+              0.5225206887764415
+            ],
+            "size": [
+              0.7163991250991821,
+              1.8488640203925284,
+              0.9758022059080542
+            ],
+            "method": "analytic interval extrema per exported vertex; limb X +/-0.42 rad, head Y +/-0.75 rad, root lift 0..0.051 m, plus 0.002 m padding",
+            "scope": "local rigid-limb-v1 envelope only; consumer must transform once and expand for any added animation"
+          },
+          "customAttributes": [
+            "_LIMB",
+            "_PIVOT_X",
+            "_PIVOT_Y",
+            "_PIVOT_Z",
+            "_PALETTE",
+            "POSITION",
+            "NORMAL",
+            "COLOR_0"
+          ],
+          "capabilities": {
+            "mergedOpaque": true,
+            "vertexColor": true,
+            "rigidLimbShader": true,
+            "skeleton": false,
+            "sitting": false,
+            "dynamicShadow": false
+          }
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.35619956254959106,
+          0.0,
+          -0.27238789200782776
+        ],
+        "max": [
+          0.35619956254959106,
+          1.7799999713897705,
+          0.16014014184474945
+        ],
+        "size": [
+          0.7123991250991821,
+          1.7799999713897705,
+          0.4325280338525772
+        ]
+      },
+      "expectedDimensionsM": {
+        "dressedHeight": 1.78
+      },
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Original representative authored dressed height; not a measured person or a replica. LOD silhouettes can simplify width/depth, with a shared foot datum and pivots.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "midpoint between grounded soles"
+      },
+      "attachmentDatum": {
+        "type": "walk-surface",
+        "footY": 0
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "pedestrian-vertex-color-opaque",
+          "primitive": 0,
+          "role": "background-pedestrian",
+          "surfaceId": "original-pedestrian-vertex-colors",
+          "channel": "COLOR_0",
+          "alphaMode": "OPAQUE",
+          "paletteRoleAttribute": "_PALETTE",
+          "paletteRoles": {
+            "0": "unassigned",
+            "1": "skin",
+            "2": "upper-garment",
+            "3": "lower-garment",
+            "4": "footwear",
+            "5": "hair",
+            "6": "accessory"
+          },
+          "maps": []
+        }
+      ],
+      "textureMode": "vertex-color-no-textures",
+      "textureCost": {
+        "geometryBytes": 84280,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 84280,
+        "uniqueTexelBytesWithMips": 0,
+        "textureDownloadBytes": 0,
+        "vatBytes": 0
+      },
+      "lodPolicy": {
+        "medium": "LOD0 near/mid background",
+        "far": "LOD1 starting around 40 m, return to LOD0 below 30 m; runtime tuning pending",
+        "backgroundMaxVisibleDistanceM": {
+          "compatible": 80,
+          "balanced": 110,
+          "high": 120
+        },
+        "hysteresisRequired": true,
+        "castDynamicShadow": false,
+        "contactShadowGeometry": false,
+        "contactShadowDraws": 0
+      },
+      "clearance": {
+        "minDoorHeightM": 2,
+        "maximumDressedHeightM": 1.78,
+        "notes": "Passage validation uses actual local bounds and runtime capsule; never nonuniformly shrink to a doorway."
+      },
+      "collision": {
+        "type": "capsule",
+        "coordinateFrame": "asset-root",
+        "radiusM": 0.24,
+        "segmentStartM": [
+          0,
+          0.24,
+          0
+        ],
+        "segmentEndM": [
+          0,
+          1.54,
+          0
+        ],
+        "scope": "simple torso collision proxy; arms and bags are visual appendages, not exact collision",
+        "nearOnly": true
+      },
+      "anchors": [
+        {
+          "id": "pelvis",
+          "positionM": [
+            0,
+            0.9179372197309419,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "purpose": "future seated alignment datum; seated clip NOT provided"
+        },
+        {
+          "id": "head-look-pivot",
+          "positionM": [
+            0,
+            1.4766816143497759,
+            0
+          ]
+        },
+        {
+          "id": "foot-left",
+          "positionM": [
+            0.10276905829596412,
+            0,
+            0.03791479820627803
+          ]
+        },
+        {
+          "id": "foot-right",
+          "positionM": [
+            -0.10276905829596412,
+            0,
+            0.03791479820627803
+          ]
+        }
+      ],
+      "animation": {
+        "contract": "rigid-limb-v1",
+        "states": [
+          "walk",
+          "idle",
+          "look",
+          "yield"
+        ],
+        "referenceCpu": "motion.mjs",
+        "referenceShader": "rigid-limb.glsl",
+        "bakedClips": false,
+        "idle": "neutral stance; phase/identity retained",
+        "walk": "opposed hip/shoulder rigid rotations with a bounded root lift",
+        "look": "head yaw about exported neck pivot",
+        "yield": "both arms tilt slightly forward plus bounded head look; path displacement remains controller-owned",
+        "attributeFrame": "_PIVOT_X/Y/Z scalar values are already glTF +Y-up metres; do not apply Blender conversion again",
+        "normalRule": "rotate NORMAL with the exact same rigid rotation as POSITION; normalize after world normalMatrix; all color/AO/normal/depth passes must share it",
+        "paletteVariation": "_PALETTE 2/3/6 may be tinted per instance without replacing geometry/material",
+        "limitations": [
+          "no elbow/knee articulation",
+          "no facial animation",
+          "no pointing or seated clips",
+          "CPU reference is not a runtime renderer or WebGL parity acceptance"
+        ]
+      },
+      "placementCompatibility": {
+        "surfaces": [
+          "validated-sidewalk",
+          "plaza",
+          "station-floor",
+          "waiting-zone"
+        ],
+        "levelAware": true,
+        "uniformScaleOnly": true,
+        "heightRangeM": [
+          1.55,
+          1.95
+        ],
+        "rotation": "heading about +Y; +Z forward"
+      },
+      "intendedConsumer": {
+        "status": "runtime_pending_webgl",
+        "entry": "future city-life InstancedMesh population consumer",
+        "ownership": "one shared geometry per silhouette/LOD and one shared compatible material; per-instance actorId/palette/phase",
+        "productionEnabled": false
+      },
+      "offlineChecks": {
+        "geometry": "pass",
+        "vertexAttributes": "pass",
+        "editableSourceReexport": "pass",
+        "cpuPreviews": "pass",
+        "animatedEnvelope": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/source-audit.json",
+          "qa/preview-index.json",
+          "qa/measurements.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "offline asset task; no actual WebGL runtime integration or visual acceptance",
+        "normalAoDepthParity": "not_run",
+        "populationAndResourceLifecycle": "not_run",
+        "doorwayFit": "not_run",
+        "performance": "not_run"
+      }
+    },
+    {
+      "id": "pedestrian-raincoat",
+      "taskId": "CITY-LIFE-BACKGROUND-PEDESTRIANS",
+      "variant": "long-raincoat-knit-hat",
+      "kind": "original-low-cost-background-pedestrian",
+      "source": "source/pedestrian-raincoat.lod0.blend",
+      "sourceSha256": "a75061533b5f1628035f3bc84c5bf9cfd35c60d21713360d07ee81bd0b528a4e",
+      "lods": [
+        {
+          "level": 0,
+          "label": "medium-background",
+          "file": "exports/pedestrian-raincoat.lod0.glb",
+          "sha256": "8a70843727c8667fc7b8da5b0ae29625d86e86620bd9c5c5ff2ea3ea9d304387",
+          "source": "source/pedestrian-raincoat.lod0.blend",
+          "sourceSha256": "a75061533b5f1628035f3bc84c5bf9cfd35c60d21713360d07ee81bd0b528a4e",
+          "sourceBytes": 94465,
+          "triangles": 420,
+          "vertices": 982,
+          "primitives": 1,
+          "bytes": 59696,
+          "geometryBytes": 59696,
+          "embeddedImageBytes": 0,
+          "boundsM": {
+            "min": [
+              -0.3427211046218872,
+              0.0,
+              -0.12524999678134918
+            ],
+            "max": [
+              0.3427211046218872,
+              1.6699999570846558,
+              0.148908331990242
+            ],
+            "size": [
+              0.6854422092437744,
+              1.6699999570846558,
+              0.2741583287715912
+            ]
+          },
+          "animatedBoundsM": {
+            "min": [
+              -0.3447211046218872,
+              -0.014891660169897068,
+              -0.421629838137346
+            ],
+            "max": [
+              0.3447211046218872,
+              1.7229999570846557,
+              0.4860127529634275
+            ],
+            "size": [
+              0.6894422092437744,
+              1.7378916172545527,
+              0.9076425911007735
+            ],
+            "method": "analytic interval extrema per exported vertex; limb X +/-0.42 rad, head Y +/-0.75 rad, root lift 0..0.051 m, plus 0.002 m padding",
+            "scope": "local rigid-limb-v1 envelope only; consumer must transform once and expand for any added animation"
+          },
+          "customAttributes": [
+            "_LIMB",
+            "_PIVOT_X",
+            "_PIVOT_Y",
+            "_PIVOT_Z",
+            "_PALETTE",
+            "POSITION",
+            "NORMAL",
+            "COLOR_0"
+          ],
+          "capabilities": {
+            "mergedOpaque": true,
+            "vertexColor": true,
+            "rigidLimbShader": true,
+            "skeleton": false,
+            "sitting": false,
+            "dynamicShadow": false
+          }
+        },
+        {
+          "level": 1,
+          "label": "far-background",
+          "file": "exports/pedestrian-raincoat.lod1.glb",
+          "sha256": "9b6a971168fb20f42b9cf29bbd87a7070c37fdb5e74fdc7e782724c6c73a3a85",
+          "source": "source/pedestrian-raincoat.lod1.blend",
+          "sourceSha256": "8392cccf4632f458fc3edcef91af226aa9b416a816896f0f5f3c59ed54e6f15f",
+          "sourceBytes": 90567,
+          "triangles": 192,
+          "vertices": 464,
+          "primitives": 1,
+          "bytes": 29312,
+          "geometryBytes": 29312,
+          "embeddedImageBytes": 0,
+          "boundsM": {
+            "min": [
+              -0.3427211046218872,
+              0.0,
+              -0.12524999678134918
+            ],
+            "max": [
+              0.3427211046218872,
+              1.6699999570846558,
+              0.148908331990242
+            ],
+            "size": [
+              0.6854422092437744,
+              1.6699999570846558,
+              0.2741583287715912
+            ]
+          },
+          "animatedBoundsM": {
+            "min": [
+              -0.3447211046218872,
+              -0.014891660169897068,
+              -0.421629838137346
+            ],
+            "max": [
+              0.3447211046218872,
+              1.7229999570846557,
+              0.4860127529634275
+            ],
+            "size": [
+              0.6894422092437744,
+              1.7378916172545527,
+              0.9076425911007735
+            ],
+            "method": "analytic interval extrema per exported vertex; limb X +/-0.42 rad, head Y +/-0.75 rad, root lift 0..0.051 m, plus 0.002 m padding",
+            "scope": "local rigid-limb-v1 envelope only; consumer must transform once and expand for any added animation"
+          },
+          "customAttributes": [
+            "_LIMB",
+            "_PIVOT_X",
+            "_PIVOT_Y",
+            "_PIVOT_Z",
+            "_PALETTE",
+            "POSITION",
+            "NORMAL",
+            "COLOR_0"
+          ],
+          "capabilities": {
+            "mergedOpaque": true,
+            "vertexColor": true,
+            "rigidLimbShader": true,
+            "skeleton": false,
+            "sitting": false,
+            "dynamicShadow": false
+          }
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.3427211046218872,
+          0.0,
+          -0.12524999678134918
+        ],
+        "max": [
+          0.3427211046218872,
+          1.6699999570846558,
+          0.148908331990242
+        ],
+        "size": [
+          0.6854422092437744,
+          1.6699999570846558,
+          0.2741583287715912
+        ]
+      },
+      "expectedDimensionsM": {
+        "dressedHeight": 1.67
+      },
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Original representative authored dressed height; not a measured person or a replica. LOD silhouettes can simplify width/depth, with a shared foot datum and pivots.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "midpoint between grounded soles"
+      },
+      "attachmentDatum": {
+        "type": "walk-surface",
+        "footY": 0
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "pedestrian-vertex-color-opaque",
+          "primitive": 0,
+          "role": "background-pedestrian",
+          "surfaceId": "original-pedestrian-vertex-colors",
+          "channel": "COLOR_0",
+          "alphaMode": "OPAQUE",
+          "paletteRoleAttribute": "_PALETTE",
+          "paletteRoles": {
+            "0": "unassigned",
+            "1": "skin",
+            "2": "upper-garment",
+            "3": "lower-garment",
+            "4": "footwear",
+            "5": "hair",
+            "6": "accessory"
+          },
+          "maps": []
+        }
+      ],
+      "textureMode": "vertex-color-no-textures",
+      "textureCost": {
+        "geometryBytes": 89008,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 89008,
+        "uniqueTexelBytesWithMips": 0,
+        "textureDownloadBytes": 0,
+        "vatBytes": 0
+      },
+      "lodPolicy": {
+        "medium": "LOD0 near/mid background",
+        "far": "LOD1 starting around 40 m, return to LOD0 below 30 m; runtime tuning pending",
+        "backgroundMaxVisibleDistanceM": {
+          "compatible": 80,
+          "balanced": 110,
+          "high": 120
+        },
+        "hysteresisRequired": true,
+        "castDynamicShadow": false,
+        "contactShadowGeometry": false,
+        "contactShadowDraws": 0
+      },
+      "clearance": {
+        "minDoorHeightM": 2,
+        "maximumDressedHeightM": 1.67,
+        "notes": "Passage validation uses actual local bounds and runtime capsule; never nonuniformly shrink to a doorway."
+      },
+      "collision": {
+        "type": "capsule",
+        "coordinateFrame": "asset-root",
+        "radiusM": 0.24,
+        "segmentStartM": [
+          0,
+          0.24,
+          0
+        ],
+        "segmentEndM": [
+          0,
+          1.43,
+          0
+        ],
+        "scope": "simple torso collision proxy; arms and bags are visual appendages, not exact collision",
+        "nearOnly": true
+      },
+      "anchors": [
+        {
+          "id": "pelvis",
+          "positionM": [
+            0,
+            0.8535555555555555,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "purpose": "future seated alignment datum; seated clip NOT provided"
+        },
+        {
+          "id": "head-look-pivot",
+          "positionM": [
+            0,
+            1.373111111111111,
+            0
+          ]
+        },
+        {
+          "id": "foot-left",
+          "positionM": [
+            0.09938355555555554,
+            0,
+            0.035255555555555554
+          ]
+        },
+        {
+          "id": "foot-right",
+          "positionM": [
+            -0.09938355555555554,
+            0,
+            0.035255555555555554
+          ]
+        }
+      ],
+      "animation": {
+        "contract": "rigid-limb-v1",
+        "states": [
+          "walk",
+          "idle",
+          "look",
+          "yield"
+        ],
+        "referenceCpu": "motion.mjs",
+        "referenceShader": "rigid-limb.glsl",
+        "bakedClips": false,
+        "idle": "neutral stance; phase/identity retained",
+        "walk": "opposed hip/shoulder rigid rotations with a bounded root lift",
+        "look": "head yaw about exported neck pivot",
+        "yield": "both arms tilt slightly forward plus bounded head look; path displacement remains controller-owned",
+        "attributeFrame": "_PIVOT_X/Y/Z scalar values are already glTF +Y-up metres; do not apply Blender conversion again",
+        "normalRule": "rotate NORMAL with the exact same rigid rotation as POSITION; normalize after world normalMatrix; all color/AO/normal/depth passes must share it",
+        "paletteVariation": "_PALETTE 2/3/6 may be tinted per instance without replacing geometry/material",
+        "limitations": [
+          "no elbow/knee articulation",
+          "no facial animation",
+          "no pointing or seated clips",
+          "CPU reference is not a runtime renderer or WebGL parity acceptance"
+        ]
+      },
+      "placementCompatibility": {
+        "surfaces": [
+          "validated-sidewalk",
+          "plaza",
+          "station-floor",
+          "waiting-zone"
+        ],
+        "levelAware": true,
+        "uniformScaleOnly": true,
+        "heightRangeM": [
+          1.55,
+          1.95
+        ],
+        "rotation": "heading about +Y; +Z forward"
+      },
+      "intendedConsumer": {
+        "status": "runtime_pending_webgl",
+        "entry": "future city-life InstancedMesh population consumer",
+        "ownership": "one shared geometry per silhouette/LOD and one shared compatible material; per-instance actorId/palette/phase",
+        "productionEnabled": false
+      },
+      "offlineChecks": {
+        "geometry": "pass",
+        "vertexAttributes": "pass",
+        "editableSourceReexport": "pass",
+        "cpuPreviews": "pass",
+        "animatedEnvelope": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/source-audit.json",
+          "qa/preview-index.json",
+          "qa/measurements.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "offline asset task; no actual WebGL runtime integration or visual acceptance",
+        "normalAoDepthParity": "not_run",
+        "populationAndResourceLifecycle": "not_run",
+        "doorwayFit": "not_run",
+        "performance": "not_run"
+      }
+    },
+    {
+      "id": "pedestrian-runner",
+      "taskId": "CITY-LIFE-BACKGROUND-PEDESTRIANS",
+      "variant": "short-sleeve-cap",
+      "kind": "original-low-cost-background-pedestrian",
+      "source": "source/pedestrian-runner.lod0.blend",
+      "sourceSha256": "5c4a91e5254c08aaa511a2861ad1c2a13d78f7d65abb6ebeaad93b897bd6a73d",
+      "lods": [
+        {
+          "level": 0,
+          "label": "medium-background",
+          "file": "exports/pedestrian-runner.lod0.glb",
+          "sha256": "f9cbca74b48e11a17653a20cfaf73b211d22c22f556c8d1c9320188eb9ce4d32",
+          "source": "source/pedestrian-runner.lod0.blend",
+          "sourceSha256": "5c4a91e5254c08aaa511a2861ad1c2a13d78f7d65abb6ebeaad93b897bd6a73d",
+          "sourceBytes": 94642,
+          "triangles": 424,
+          "vertices": 982,
+          "primitives": 1,
+          "bytes": 59720,
+          "geometryBytes": 59720,
+          "embeddedImageBytes": 0,
+          "boundsM": {
+            "min": [
+              -0.33874860405921936,
+              0.0,
+              -0.14027932286262512
+            ],
+            "max": [
+              0.33874860405921936,
+              1.8600000143051147,
+              0.19743016362190247
+            ],
+            "size": [
+              0.6774972081184387,
+              1.8600000143051147,
+              0.3377094864845276
+            ]
+          },
+          "animatedBoundsM": {
+            "min": [
+              -0.34074860405921936,
+              -0.01643859062802988,
+              -0.47198317847638444
+            ],
+            "max": [
+              0.34074860405921936,
+              1.9130000143051147,
+              0.5440917034737021
+            ],
+            "size": [
+              0.6814972081184387,
+              1.9294386049331447,
+              1.0160748819500864
+            ],
+            "method": "analytic interval extrema per exported vertex; limb X +/-0.42 rad, head Y +/-0.75 rad, root lift 0..0.051 m, plus 0.002 m padding",
+            "scope": "local rigid-limb-v1 envelope only; consumer must transform once and expand for any added animation"
+          },
+          "customAttributes": [
+            "_LIMB",
+            "_PIVOT_X",
+            "_PIVOT_Y",
+            "_PIVOT_Z",
+            "_PALETTE",
+            "POSITION",
+            "NORMAL",
+            "COLOR_0"
+          ],
+          "capabilities": {
+            "mergedOpaque": true,
+            "vertexColor": true,
+            "rigidLimbShader": true,
+            "skeleton": false,
+            "sitting": false,
+            "dynamicShadow": false
+          }
+        },
+        {
+          "level": 1,
+          "label": "far-background",
+          "file": "exports/pedestrian-runner.lod1.glb",
+          "sha256": "74d82a524b6481f1a9ea6292378beef1a1b67843d82a0009f53782984032843e",
+          "source": "source/pedestrian-runner.lod1.blend",
+          "sourceSha256": "9a75a8531215c6737eb72b3c15db2735c95cc62f553e6f2eaf08a6bc75e1fc5d",
+          "sourceBytes": 90925,
+          "triangles": 204,
+          "vertices": 496,
+          "primitives": 1,
+          "bytes": 31176,
+          "geometryBytes": 31176,
+          "embeddedImageBytes": 0,
+          "boundsM": {
+            "min": [
+              -0.33874860405921936,
+              0.0,
+              -0.14027932286262512
+            ],
+            "max": [
+              0.33874860405921936,
+              1.8600000143051147,
+              0.19743016362190247
+            ],
+            "size": [
+              0.6774972081184387,
+              1.8600000143051147,
+              0.3377094864845276
+            ]
+          },
+          "animatedBoundsM": {
+            "min": [
+              -0.34074860405921936,
+              -0.01643859062802988,
+              -0.47198317847638444
+            ],
+            "max": [
+              0.34074860405921936,
+              1.9130000143051147,
+              0.5440917034737021
+            ],
+            "size": [
+              0.6814972081184387,
+              1.9294386049331447,
+              1.0160748819500864
+            ],
+            "method": "analytic interval extrema per exported vertex; limb X +/-0.42 rad, head Y +/-0.75 rad, root lift 0..0.051 m, plus 0.002 m padding",
+            "scope": "local rigid-limb-v1 envelope only; consumer must transform once and expand for any added animation"
+          },
+          "customAttributes": [
+            "_LIMB",
+            "_PIVOT_X",
+            "_PIVOT_Y",
+            "_PIVOT_Z",
+            "_PALETTE",
+            "POSITION",
+            "NORMAL",
+            "COLOR_0"
+          ],
+          "capabilities": {
+            "mergedOpaque": true,
+            "vertexColor": true,
+            "rigidLimbShader": true,
+            "skeleton": false,
+            "sitting": false,
+            "dynamicShadow": false
+          }
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.33874860405921936,
+          0.0,
+          -0.14027932286262512
+        ],
+        "max": [
+          0.33874860405921936,
+          1.8600000143051147,
+          0.19743016362190247
+        ],
+        "size": [
+          0.6774972081184387,
+          1.8600000143051147,
+          0.3377094864845276
+        ]
+      },
+      "expectedDimensionsM": {
+        "dressedHeight": 1.86
+      },
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Original representative authored dressed height; not a measured person or a replica. LOD silhouettes can simplify width/depth, with a shared foot datum and pivots.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "midpoint between grounded soles"
+      },
+      "attachmentDatum": {
+        "type": "walk-surface",
+        "footY": 0
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "pedestrian-vertex-color-opaque",
+          "primitive": 0,
+          "role": "background-pedestrian",
+          "surfaceId": "original-pedestrian-vertex-colors",
+          "channel": "COLOR_0",
+          "alphaMode": "OPAQUE",
+          "paletteRoleAttribute": "_PALETTE",
+          "paletteRoles": {
+            "0": "unassigned",
+            "1": "skin",
+            "2": "upper-garment",
+            "3": "lower-garment",
+            "4": "footwear",
+            "5": "hair",
+            "6": "accessory"
+          },
+          "maps": []
+        }
+      ],
+      "textureMode": "vertex-color-no-textures",
+      "textureCost": {
+        "geometryBytes": 90896,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 90896,
+        "uniqueTexelBytesWithMips": 0,
+        "textureDownloadBytes": 0,
+        "vatBytes": 0
+      },
+      "lodPolicy": {
+        "medium": "LOD0 near/mid background",
+        "far": "LOD1 starting around 40 m, return to LOD0 below 30 m; runtime tuning pending",
+        "backgroundMaxVisibleDistanceM": {
+          "compatible": 80,
+          "balanced": 110,
+          "high": 120
+        },
+        "hysteresisRequired": true,
+        "castDynamicShadow": false,
+        "contactShadowGeometry": false,
+        "contactShadowDraws": 0
+      },
+      "clearance": {
+        "minDoorHeightM": 2,
+        "maximumDressedHeightM": 1.86,
+        "notes": "Passage validation uses actual local bounds and runtime capsule; never nonuniformly shrink to a doorway."
+      },
+      "collision": {
+        "type": "capsule",
+        "coordinateFrame": "asset-root",
+        "radiusM": 0.24,
+        "segmentStartM": [
+          0,
+          0.24,
+          0
+        ],
+        "segmentEndM": [
+          0,
+          1.62,
+          0
+        ],
+        "scope": "simple torso collision proxy; arms and bags are visual appendages, not exact collision",
+        "nearOnly": true
+      },
+      "anchors": [
+        {
+          "id": "pelvis",
+          "positionM": [
+            0,
+            0.9559776536312851,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "purpose": "future seated alignment datum; seated clip NOT provided"
+        },
+        {
+          "id": "head-look-pivot",
+          "positionM": [
+            0,
+            1.5378770949720673,
+            0
+          ]
+        },
+        {
+          "id": "foot-left",
+          "positionM": [
+            0.09632513966480447,
+            0,
+            0.03948603351955308
+          ]
+        },
+        {
+          "id": "foot-right",
+          "positionM": [
+            -0.09632513966480447,
+            0,
+            0.03948603351955308
+          ]
+        }
+      ],
+      "animation": {
+        "contract": "rigid-limb-v1",
+        "states": [
+          "walk",
+          "idle",
+          "look",
+          "yield"
+        ],
+        "referenceCpu": "motion.mjs",
+        "referenceShader": "rigid-limb.glsl",
+        "bakedClips": false,
+        "idle": "neutral stance; phase/identity retained",
+        "walk": "opposed hip/shoulder rigid rotations with a bounded root lift",
+        "look": "head yaw about exported neck pivot",
+        "yield": "both arms tilt slightly forward plus bounded head look; path displacement remains controller-owned",
+        "attributeFrame": "_PIVOT_X/Y/Z scalar values are already glTF +Y-up metres; do not apply Blender conversion again",
+        "normalRule": "rotate NORMAL with the exact same rigid rotation as POSITION; normalize after world normalMatrix; all color/AO/normal/depth passes must share it",
+        "paletteVariation": "_PALETTE 2/3/6 may be tinted per instance without replacing geometry/material",
+        "limitations": [
+          "no elbow/knee articulation",
+          "no facial animation",
+          "no pointing or seated clips",
+          "CPU reference is not a runtime renderer or WebGL parity acceptance"
+        ]
+      },
+      "placementCompatibility": {
+        "surfaces": [
+          "validated-sidewalk",
+          "plaza",
+          "station-floor",
+          "waiting-zone"
+        ],
+        "levelAware": true,
+        "uniformScaleOnly": true,
+        "heightRangeM": [
+          1.55,
+          1.95
+        ],
+        "rotation": "heading about +Y; +Z forward"
+      },
+      "intendedConsumer": {
+        "status": "runtime_pending_webgl",
+        "entry": "future city-life InstancedMesh population consumer",
+        "ownership": "one shared geometry per silhouette/LOD and one shared compatible material; per-instance actorId/palette/phase",
+        "productionEnabled": false
+      },
+      "offlineChecks": {
+        "geometry": "pass",
+        "vertexAttributes": "pass",
+        "editableSourceReexport": "pass",
+        "cpuPreviews": "pass",
+        "animatedEnvelope": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/source-audit.json",
+          "qa/preview-index.json",
+          "qa/measurements.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "offline asset task; no actual WebGL runtime integration or visual acceptance",
+        "normalAoDepthParity": "not_run",
+        "populationAndResourceLifecycle": "not_run",
+        "doorwayFit": "not_run",
+        "performance": "not_run"
+      }
+    },
+    {
+      "id": "pedestrian-tote",
+      "taskId": "CITY-LIFE-BACKGROUND-PEDESTRIANS",
+      "variant": "hoodie-tote-curly-hair",
+      "kind": "original-low-cost-background-pedestrian",
+      "source": "source/pedestrian-tote.lod0.blend",
+      "sourceSha256": "7a165c9ebb2ec859e7bff859f12828b457c40da030752e333ac53a8f68a0665b",
+      "lods": [
+        {
+          "level": 0,
+          "label": "medium-background",
+          "file": "exports/pedestrian-tote.lod0.glb",
+          "sha256": "66411c5f5996f44d104c735e0ba93ef27f32b396927eafd77d30a2ef99ab0508",
+          "source": "source/pedestrian-tote.lod0.blend",
+          "sourceSha256": "7a165c9ebb2ec859e7bff859f12828b457c40da030752e333ac53a8f68a0665b",
+          "sourceBytes": 95190,
+          "triangles": 452,
+          "vertices": 1062,
+          "primitives": 1,
+          "bytes": 64368,
+          "geometryBytes": 64368,
+          "embeddedImageBytes": 0,
+          "boundsM": {
+            "min": [
+              -0.40972617268562317,
+              0.0,
+              -0.15772180259227753
+            ],
+            "max": [
+              0.3454107344150543,
+              1.600000023841858,
+              0.14063526690006256
+            ],
+            "size": [
+              0.7551369071006775,
+              1.600000023841858,
+              0.2983570694923401
+            ]
+          },
+          "animatedBoundsM": {
+            "min": [
+              -0.41172617268562317,
+              -0.014175423942562436,
+              -0.413577967023537
+            ],
+            "max": [
+              0.3474107344150543,
+              1.6530000238418578,
+              0.45912192015992626
+            ],
+            "size": [
+              0.7591369071006775,
+              1.6671754477844203,
+              0.8726998871834633
+            ],
+            "method": "analytic interval extrema per exported vertex; limb X +/-0.42 rad, head Y +/-0.75 rad, root lift 0..0.051 m, plus 0.002 m padding",
+            "scope": "local rigid-limb-v1 envelope only; consumer must transform once and expand for any added animation"
+          },
+          "customAttributes": [
+            "_LIMB",
+            "_PIVOT_X",
+            "_PIVOT_Y",
+            "_PIVOT_Z",
+            "_PALETTE",
+            "POSITION",
+            "NORMAL",
+            "COLOR_0"
+          ],
+          "capabilities": {
+            "mergedOpaque": true,
+            "vertexColor": true,
+            "rigidLimbShader": true,
+            "skeleton": false,
+            "sitting": false,
+            "dynamicShadow": false
+          }
+        },
+        {
+          "level": 1,
+          "label": "far-background",
+          "file": "exports/pedestrian-tote.lod1.glb",
+          "sha256": "fb9d38860e4eaa558c4e55f6bf3e2208cb80c2ee49aa571dd2c55c2d8517c865",
+          "source": "source/pedestrian-tote.lod1.blend",
+          "sourceSha256": "7dbd2153eebb983f8f71d6d3765a29d4bcd876e958f4e0544b48befe15fe3d82",
+          "sourceBytes": 90352,
+          "triangles": 176,
+          "vertices": 424,
+          "primitives": 1,
+          "bytes": 26968,
+          "geometryBytes": 26968,
+          "embeddedImageBytes": 0,
+          "boundsM": {
+            "min": [
+              -0.40972617268562317,
+              0.0,
+              -0.1279298961162567
+            ],
+            "max": [
+              0.3454107344150543,
+              1.600000023841858,
+              0.14063526690006256
+            ],
+            "size": [
+              0.7551369071006775,
+              1.600000023841858,
+              0.2685651630163193
+            ]
+          },
+          "animatedBoundsM": {
+            "min": [
+              -0.41172617268562317,
+              -0.014175423942562436,
+              -0.413577967023537
+            ],
+            "max": [
+              0.3474107344150543,
+              1.6530000238418578,
+              0.45912192015992626
+            ],
+            "size": [
+              0.7591369071006775,
+              1.6671754477844203,
+              0.8726998871834633
+            ],
+            "method": "analytic interval extrema per exported vertex; limb X +/-0.42 rad, head Y +/-0.75 rad, root lift 0..0.051 m, plus 0.002 m padding",
+            "scope": "local rigid-limb-v1 envelope only; consumer must transform once and expand for any added animation"
+          },
+          "customAttributes": [
+            "_LIMB",
+            "_PIVOT_X",
+            "_PIVOT_Y",
+            "_PIVOT_Z",
+            "_PALETTE",
+            "POSITION",
+            "NORMAL",
+            "COLOR_0"
+          ],
+          "capabilities": {
+            "mergedOpaque": true,
+            "vertexColor": true,
+            "rigidLimbShader": true,
+            "skeleton": false,
+            "sitting": false,
+            "dynamicShadow": false
+          }
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.40972617268562317,
+          0.0,
+          -0.15772180259227753
+        ],
+        "max": [
+          0.3454107344150543,
+          1.600000023841858,
+          0.14063526690006256
+        ],
+        "size": [
+          0.7551369071006775,
+          1.600000023841858,
+          0.2983570694923401
+        ]
+      },
+      "expectedDimensionsM": {
+        "dressedHeight": 1.6
+      },
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Original representative authored dressed height; not a measured person or a replica. LOD silhouettes can simplify width/depth, with a shared foot datum and pivots.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "midpoint between grounded soles"
+      },
+      "attachmentDatum": {
+        "type": "walk-surface",
+        "footY": 0
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "pedestrian-vertex-color-opaque",
+          "primitive": 0,
+          "role": "background-pedestrian",
+          "surfaceId": "original-pedestrian-vertex-colors",
+          "channel": "COLOR_0",
+          "alphaMode": "OPAQUE",
+          "paletteRoleAttribute": "_PALETTE",
+          "paletteRoles": {
+            "0": "unassigned",
+            "1": "skin",
+            "2": "upper-garment",
+            "3": "lower-garment",
+            "4": "footwear",
+            "5": "hair",
+            "6": "accessory"
+          },
+          "maps": []
+        }
+      ],
+      "textureMode": "vertex-color-no-textures",
+      "textureCost": {
+        "geometryBytes": 91336,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 91336,
+        "uniqueTexelBytesWithMips": 0,
+        "textureDownloadBytes": 0,
+        "vatBytes": 0
+      },
+      "lodPolicy": {
+        "medium": "LOD0 near/mid background",
+        "far": "LOD1 starting around 40 m, return to LOD0 below 30 m; runtime tuning pending",
+        "backgroundMaxVisibleDistanceM": {
+          "compatible": 80,
+          "balanced": 110,
+          "high": 120
+        },
+        "hysteresisRequired": true,
+        "castDynamicShadow": false,
+        "contactShadowGeometry": false,
+        "contactShadowDraws": 0
+      },
+      "clearance": {
+        "minDoorHeightM": 2,
+        "maximumDressedHeightM": 1.6,
+        "notes": "Passage validation uses actual local bounds and runtime capsule; never nonuniformly shrink to a doorway."
+      },
+      "collision": {
+        "type": "capsule",
+        "coordinateFrame": "asset-root",
+        "radiusM": 0.24,
+        "segmentStartM": [
+          0,
+          0.24,
+          0
+        ],
+        "segmentEndM": [
+          0,
+          1.36,
+          0
+        ],
+        "scope": "simple torso collision proxy; arms and bags are visual appendages, not exact collision",
+        "nearOnly": true
+      },
+      "anchors": [
+        {
+          "id": "pelvis",
+          "positionM": [
+            0,
+            0.8061336254107341,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "purpose": "future seated alignment datum; seated clip NOT provided"
+        },
+        {
+          "id": "head-look-pivot",
+          "positionM": [
+            0,
+            1.2968236582694417,
+            0
+          ]
+        },
+        {
+          "id": "foot-left",
+          "positionM": [
+            0.10108214676889378,
+            0,
+            0.03329682365826945
+          ]
+        },
+        {
+          "id": "foot-right",
+          "positionM": [
+            -0.10108214676889378,
+            0,
+            0.03329682365826945
+          ]
+        }
+      ],
+      "animation": {
+        "contract": "rigid-limb-v1",
+        "states": [
+          "walk",
+          "idle",
+          "look",
+          "yield"
+        ],
+        "referenceCpu": "motion.mjs",
+        "referenceShader": "rigid-limb.glsl",
+        "bakedClips": false,
+        "idle": "neutral stance; phase/identity retained",
+        "walk": "opposed hip/shoulder rigid rotations with a bounded root lift",
+        "look": "head yaw about exported neck pivot",
+        "yield": "both arms tilt slightly forward plus bounded head look; path displacement remains controller-owned",
+        "attributeFrame": "_PIVOT_X/Y/Z scalar values are already glTF +Y-up metres; do not apply Blender conversion again",
+        "normalRule": "rotate NORMAL with the exact same rigid rotation as POSITION; normalize after world normalMatrix; all color/AO/normal/depth passes must share it",
+        "paletteVariation": "_PALETTE 2/3/6 may be tinted per instance without replacing geometry/material",
+        "limitations": [
+          "no elbow/knee articulation",
+          "no facial animation",
+          "no pointing or seated clips",
+          "CPU reference is not a runtime renderer or WebGL parity acceptance"
+        ]
+      },
+      "placementCompatibility": {
+        "surfaces": [
+          "validated-sidewalk",
+          "plaza",
+          "station-floor",
+          "waiting-zone"
+        ],
+        "levelAware": true,
+        "uniformScaleOnly": true,
+        "heightRangeM": [
+          1.55,
+          1.95
+        ],
+        "rotation": "heading about +Y; +Z forward"
+      },
+      "intendedConsumer": {
+        "status": "runtime_pending_webgl",
+        "entry": "future city-life InstancedMesh population consumer",
+        "ownership": "one shared geometry per silhouette/LOD and one shared compatible material; per-instance actorId/palette/phase",
+        "productionEnabled": false
+      },
+      "offlineChecks": {
+        "geometry": "pass",
+        "vertexAttributes": "pass",
+        "editableSourceReexport": "pass",
+        "cpuPreviews": "pass",
+        "animatedEnvelope": "pass",
+        "evidence": [
+          "qa/validation.json",
+          "qa/source-audit.json",
+          "qa/preview-index.json",
+          "qa/measurements.json"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "reason": "offline asset task; no actual WebGL runtime integration or visual acceptance",
+        "normalAoDepthParity": "not_run",
+        "populationAndResourceLifecycle": "not_run",
+        "doorwayFit": "not_run",
+        "performance": "not_run"
+      }
+    }
+  ],
+  "textures": [],
+  "costSummary": {
+    "sharedBackgroundGeometries": 8,
+    "mainPassSubmissionTarget": 8,
+    "mainPassSubmissionMeasuredWebgl": null,
+    "maxMediumTrianglesPerActor": 452,
+    "worst32MediumActorTriangles": 14464,
+    "glbTotalBytes": 355520,
+    "sourceBlendTotalBytes": 740195,
+    "textureDownloadBytes": 0,
+    "uniqueTexelBytesWithMips": 0,
+    "vatBytes": 0,
+    "animationMixers": 0,
+    "backgroundDynamicShadows": false,
+    "contactShadowSubmissions": 0
+  },
+  "compatibility": {
+    "contract": "tools/assets/package-contract/validate.py schemaVersion 1",
+    "existingManifestsUnmodified": true,
+    "productionConsumersUnmodified": true
+  },
+  "runtimeChecks": {
+    "status": "not_run",
+    "integrationStatus": "runtime_pending_webgl"
+  }
+}

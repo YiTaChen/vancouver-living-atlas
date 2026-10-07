@@ -1,111 +1,130 @@
-# City Life & Transit：暫時交接／復原紀錄（2026-10-07）
+# City Life & Transit：離線實作交接（2026-10-07）
 
-> **PROVISIONAL / PUBLICATION BLOCKED — 不是最終交付。**
->
-> 目前這個 GitHub 分支只新增本交接文件。下列程式、GTFS 資料、Blender 來源及 GLB 已在製作環境完成或部分完成，但**尚未上傳到此分支**。不要以本文件的路徑存在於文字中，推定相應檔案已可從 GitHub 取得。雲端執行環境在最後驗證／上傳前發生連線故障；恢復後將更新同一份交接文件並發布實際檔案。
+## 狀態與接手入口
 
-## 目前可確認的版本及範圍
+本交付是可重用的 **離線 TypeScript 狀態／安全模組、原創低成本行人來源包、官方靜態交通資料與測試**。沒有接入正式 scene、Engine、Navigation、city-buses 或 railway；沒有合併 main 或部署。`runtime_pending_webgl`，V01–V12 的實際瀏覽器驗收全部 `not_run`。CPU 正反例不是可搭乘或畫面驗收。
 
-- Repository：`YiTaChen/vancouver-living-atlas`
-- 專用分支：`codex/city-life-transit-offline-20261007`
-- 製作基準：`401569193ccda73e8f6a6fd96e4bdb144ef5a4c6`
-- 這是 [PR #5](https://github.com/YiTaChen/vancouver-living-atlas/pull/5) 已於 2026-10-04 合併的 main；PR5 最終 head 為 `ebbb9eed94ab6abccb20826f8da9fe6978a512a8`。原規格的 `5574d557` 盤點不是當前基準。
-- 使用者提供的 City Life & Transit spec 1.0 已完整讀取；原件為 **45,686 bytes**，SHA-256 `f897546640c93c443ced9ea8b205e4bdf89e7018068e4e79ca90a72cd5a220bc`。工作環境已保留逐 byte 相同副本，預定路徑 `docs/CITY_LIFE_TRANSIT_SPEC.md`，但尚未發布到分支。
-- 本輪不改正式 scene、Engine、Navigation、city-buses、railway、城市 far plane 或日夜曝光；不 merge main、不部署。夜景一律 deferred。
-- 本交接不聲稱已完成可搭乘旅程、七站站體、Canada Line 車型或 WebGL 驗收。
+- 原始需求：[CITY_LIFE_TRANSIT_SPEC.md](CITY_LIFE_TRANSIT_SPEC.md)，完整保留使用者提供的 45,686 bytes，沒有改寫 planned/deferred 狀態。
+- 本輪 baseRevision：`401569193ccda73e8f6a6fd96e4bdb144ef5a4c6`。它是 [PR #5](https://github.com/YiTaChen/vancouver-living-atlas/pull/5) 已於 2026-10-04 合併的結果；不是規格盤點時的 `5574d557`。PR5 的最終 head 為 `ebbb9eed94ab6abccb20826f8da9fe6978a512a8`。
+- PR5 已把屋頂設備、普通車與有限 Ultra 闊葉樹 consumer 整合；公車／metro 內裝與研究站體保留為來源。本輪不重做或覆蓋這些來源，也不沿用 PR5 的 WebGL 數字冒充本輪結果。
+- 所有既有檔案保持不變。原本嘗試在主 backlog 加入本規格連結，但該文件是既有 ground/city-scale 資產的鎖定來源；回歸正確拒絕 hash 漂移後已撤回連結，沒有修改舊 manifest 或放寬 validator。請由本交接／draft PR 進入新規格。新增模組未被正式 app 匯入；不改城市範圍、far plane、天空、日夜、曝光或既有模式。
 
-## 已寫入製作環境、但尚未發布的程式
+## 檔案與責任
 
-以下皆為獨立離線模組，尚無 production import：
-
-| 預定路徑 | 實作內容與限制 |
-| --- | --- |
-| `lib/city/city-life/simulation-clock.ts` | 真實秒、預設 20 Hz、最多補 4 步；隱藏清掉時間債。整合者仍須接 visibility lifecycle。 |
-| `lib/city/city-life/population.ts` | compatible/Balanced/High 的 12/24/32 聯集 cap、近骨架及互動子上限、三秒離開遲滯、同 surface/layer 事件格。遮蔽、淡入與 renderer 尚未接線。 |
-| `lib/city/city-life/actor-state.ts` | 穩定 actorId、station、phase，walk/wait/look/yield/resume；需要已驗證的人行道 route 與安全下一段。 |
-| `lib/city/city-life/continuous-path.ts` | 3D cubic chain、顯式 surface 連接、接縫位置/切線驗證、內部 cusp/垂直切線解析拒絕、各車独立取樣及 car-local rider transform。測試路徑為 synthetic，不是假裝已落地的市區車道。 |
-| `lib/city/city-life/traffic-occupancy.ts` | 公車／汽車共用站距佔用、同層跟車距離、原子路口衝突區保留；實際 source topology、障礙及 swept volume 仍需接線。 |
-| `lib/city/city-life/transit-service.ts` | moving/approaching/stopped/opening/dwell/closing/departing/terminal、全站停靠、0.5 秒停妥、10 秒 dwell、交接門互鎖、終點 hold。無虛構 U-turn/crossover 或載客重生；合法回程未接入。 |
-| `lib/city/city-life/passenger-transfers.ts` | reserve/preload/validate/commit、generation token、timeout/cancel、唯一座位、先保留出口再釋放座位、固定 local anchor、停妥服務更名。實際門／地板 proof 必須每次現場重驗。 |
-| `lib/city/city-life/representation.ts` | 詳模載入前保留舊 handle、stale callback 釋放、載客／開門／交接 LOD 能力閘門、安裝失敗 rollback；adapter 仍需原子安裝唯一 collider/controller。 |
-| `lib/city/city-life/resource-cache.ts` | entries/pending cap、共享 promise/refcount lease、延後回收，不能逐人 dispose 共用資源。 |
-| `lib/city/city-life/vehicle-profile-adapter.ts` | 從現有 D02–D05 manifest 綁定 live vehicle/car ID，保留 pelvis/feet datum；拒絕非 passenger LOD、Expo/Canada 混用、未解析 nested frame。 |
-| `tests/city-life-runtime.test.mjs` | 31 項 focused tests，包括 20 次取消／過期、10 次上下車、cache 重用、兩次轉向、終點持續、原 manifest 適配與 cusp 反例。 |
-| `tools/verify-city-life-isolation.mjs` | 新資產 hash／路徑不得漏入 production dist 的獨立驗證器；最終執行尚未完成。 |
-
-### 既有來源必須沿用
-
-原有 `tools/assets/boardable-bus/manifest.json`、`boardable-metro/manifest.json`、`transit-station-spaces/station-layout.json` 及 `transit-independent-review/report.json` 保持不變。12 m bus 與 17 m Expo 車型已有離線來源，不重建複製。研究月台不是七個真實車站，SeaBus 通道也不是 SkyTrain 地下入口。
-
-仍沿用 `surface-reachability.ts` 的 `{surfaceId, layer}`；XZ 或 Y 接近不代表可以換樓層。seat pelvis 不等於角色腳底，stand anchor 才以 feet 表示。Orbit 不修改 passenger identity。drive/boat/fly 或重新放置需要先安全下車，不能留下幽靈佔用。
-
-## 官方交通資料：已製作、尚未發布
-
-預定目錄：`tools/transit/city-life-sources/`，含 importer、兩份精簡 JSON、README、validation report；測試為 `tests/city-life-transit-sources.test.mjs`。
-
-已核對：
-- 官方 [GTFS ZIP](https://gtfs-static.translink.ca/gtfs/google_transit.zip)，下載時間 2026-10-07 17:48:16 UTC，16,145,585 bytes。
-- Feed `26SEP_20261002`，有效日期 2026-09-07 至 2027-01-03；不把下載／更新日期當生效日。
-- ZIP SHA-256：`67fe970456c4640e030f7c991012e720f0b0e7d7af58a7ca3457b4ecd0650682`。
-- 8 個方向服務、55 個公車 stop occurrences、7 個 station entities、8 個 station×line entities、16 個 rail directional platform records、416 個保留 shape points。
-- `sourceStopId` 與 `stopCode` 分欄；Burrard Bay 1 為 8535 / 50043。Waterfront Canada P5/P4 使用 11303/11302，不混成 Expo P1/P2。
-- 四個真實 block-backed transitions 組成兩個 5/6 來源循環。**完整 shape 尾巴的 endpoints 有 151–180 m gap**；按 shared scheduled-stop projection interval 裁切後，平面接點為 0 m / 0°。不可直接串完整 endpoints，也不可把平面連續性當成車道／高程／停靠驗收。
-- 模擬 boarding 與 continuation 都 disabled。source-only schema **永遠不能宣告 rideReady**，即使有人把所有 status flags 改為 passed；將來需另外驗證真正 runtime geometry/profile/frame/connector package。
-- 六項 Python 測試、十一項 Node source 測試通過；兩份 fixture 曾用相同 ZIP byte-for-byte 重製一致。完整 ZIP 不納入 Git。
-
-資料使用受 [TransLink GTFS 條款](https://www.translink.ca/about-us/doing-business-with-translink/app-developer-resources/gtfs/gtfs-data) 約束。未來消費器須依官方要求呈現 prominent legend；資料使用不授予官方商標權，repository license 不重新授權來源 feed。
-
-City GIS API 的可選讀取遇到未完成的 network approval，未重試；GIS 核驗保持 `not_run`。官方站圖 URL 有保留，但 PDF layout 尚未查閱。GTFS 不提供門口高程、地下深度、軌道折返、合法月台或站體施工圖。
-
-## 原創背景行人資產：部分驗證，尚未發布
-
-預定目錄：`tools/assets/city-life-pedestrians/`。
-
-製作環境已有：
-- commuter、raincoat、runner、tote 四種原創輪廓，各兩個背景 LOD。
-- 八份可編輯壓縮 `.blend`、八份普通 GLB、生成／保留來源匯出工具。
-- 每 GLB 一個 opaque primitive、vertex color、零 image textures。
-- 當時實測：medium 420–452 triangles、far 148–184 triangles，身高 1.60/1.67/1.78/1.86 m，腳底 Y=0、+Z 前進。
-- `_LIMB`、三個 scalar pivot attributes、`_PALETTE` 與 COLOR_0 保留，另有 CPU rigid-limb motion 與 GLSL 參考。
-- 初次實際來源編輯 +0.01 m／再匯出 proof 通過，重匯入 Cycles 預覽已生成並查看。
-- 後來改善 far-LOD neck/coat，再跑 build/source audit/render；最後 finalize 曾成功，但**最後這輪的 audit/render 結果尚無法重新讀取核對**。
-
-**必須補完：**
-1. 檢查最後 audit/render session 結果與實際檔案 hash。
-2. 寫入並執行 `validate.py`、`tests/city-life-pedestrian-assets.test.mjs`；故障前這兩檔尚未成功寫入。
-3. 完成 README、最終 visual-review evidence 和 package tests。
-4. 確保 manifest/handoff 的 offline 狀態由最後證據決定。生成器曾提早寫 `offline_complete`，不能把該字串當完成證據；若驗證無法完成，必須降為 `offline_validation_pending`。
-5. 近景 8–16 骨架角色尚未製作；背景 shader 與 normal/depth/AO pass 接線、GPU draw cost、animated culling、觸控／WebGL 全部未驗收。
-
-## 已確認的檢查，及不可混用的版本邊界
-
-| 檢查 | 已知結果 | 邊界 |
+| 路徑 | 實際交付／API | 明確邊界 |
 | --- | --- | --- |
-| 完整 `npm test` checkpoint | 745/745，0 skip | 當時為原 718 加新 27；晚於此檢查又新增及修改 focused tests，**不是最終整包全測通過**。 |
-| 最後獨立 CPU focused 複查 | 42/42（31 runtime＋11 source） | 另六個 adversarial ownership/timeout/downgrade/pause/path checks 通過。 |
-| `npm run check` checkpoint | pass | 最終資產／全部檔案合併後仍需重跑。 |
-| 新 TypeScript／測試範圍 oxlint | pass at checked checkpoint | 最終 asset tests 尚未寫入。 |
-| 全庫 `npm run lint` | fail，211 diagnostics，檢查時皆在新碼以外 | 不把既有 lint debt 說成 pass。 |
-| `npm run build:firebase` checkpoint | pass | static build、landmark worker、既有 Blender isolation 通過；19 adopted、176 protected hashes。不是本輪最終新資產 isolation。 |
-| 既有 architecture GLB validator | pass，`--skip-blender` | 只涵蓋該既有包。 |
-| Blender 新行人最終 package validator | pending | 檔案／測試尚未寫完。 |
-| Browser/WebGL、V01–V12、touch、frame-time | `not_run` | 不沿用 PR5 的畫面／GPU 數字。 |
+| `lib/city/city-life/simulation-clock.ts` | `SimulationClock`，預設 20 Hz，最多補 4 步，隱藏清掉未完成步長與時間債 | 由整合者接 `visibilitychange`；不使用 300× sky clock |
+| `lib/city/city-life/population.ts` | `populationProfile`、單一 `PopulationSelector`、同 surface/layer `ActorEventGrid` | 無實際 renderer、遮蔽測試或街區生成；`spawnSafe` 必須來自真實可見性檢查 |
+| `lib/city/city-life/actor-state.ts` | `PathActor` 的 walk/wait/look/yield/resume、穩定站距與 phase | route 必須已經驗證人行道／淨空／閉環；不能以汽車中線當路徑 |
+| `lib/city/city-life/continuous-path.ts` | `ContinuousPath`，有來源 ID 的 3D cubic chain、G1 接縫檢查、各車獨立取樣；`riderWorldTransform` | 目前測試曲線是 synthetic fixture，不是真實車道／鐵路；不自動把 GTFS 平面線升成可走 path |
+| `lib/city/city-life/traffic-occupancy.ts` | `TrafficOccupancy`，車／停站公車共享站距佔用、同層跟車距離、原子路口衝突區保留 | 拓撲、煞停線、跨 lane 的 swept volume 與實際障礙由 adapter 提供 |
+| `lib/city/city-life/transit-service.ts` | `TransitService`，全站停靠、停妥 0.5 秒、正側開門、10 秒 dwell、交接互鎖、終點停妥不重生 | 純控制器；門動畫／碰撞／正確平台是外部觀測，無 UI、觸控、音效或接入正式模型 |
+| `lib/city/city-life/passenger-transfers.ts` | `PassengerTransfers`，reserve/preload/validate/commit、唯一座位、出口保留、token/timeout/rollback、固定 car-local anchor、停妥服務更名 | 對實際門／合法地板的 proof 必須每次現場重驗，不可把 JSON 的 `true` 當成驗收 |
+| `lib/city/city-life/vehicle-profile-adapter.ts` | 窄版 `passengerContractFromManifest`，直接讀 D02–D05 原 manifest 的 fixed anchors、frame、LOD 與 assetRefs | 僅 root-local 及 identity root；nested frame/Canada profile mismatch/展示 LOD 明確拒絕；不取代原 package GLB validator |
+| `lib/city/city-life/representation.ts` | `RepresentationTransaction`，保留舊 handle、stale callback 釋放、能力閘門、安裝失敗 rollback | adapter 需原子安裝唯一 collider/controller binding；完成後才 `releaseOld()` |
+| `lib/city/city-life/resource-cache.ts` | 有上限 pending/entries、共享 promise、refcount lease、延後回收 `SharedResourceCache` | 正在搭乘的 interior 與必要 floor 必須持有 lease，拉遠相機不 release |
+| `tests/city-life-runtime.test.mjs` | CPU 正／反例，包含 20 次失敗／取消、10 次上下車、10 次 cache 重用、兩次轉向、600 秒終點持續 | 不等同 10 次實際旅程或 10 分鐘瀏覽器循環 |
+| `tools/assets/city-life-pedestrians/` | 四種輪廓 × 兩背景 LOD、可編輯來源、GLB、gait metadata、重匯入 CPU 預覽、成本與尺寸驗證 | 不是近景 8–16 骨架互動角色；InstancedMesh/shader/pass 整合與 GPU 成本未驗證 |
+| `tools/transit/city-life-sources/` | 官方 GTFS 精簡 source-only 資料、重製 importer、source validator 與 ride-ready 拒絕閘門 | 無地下深度、站體施工圖、合法月台或 Canada Line 可乘坐 profile |
 
-獨立檢查曾找到兩個安全問題，已修正並再驗證：cubic 內部 cusp 導致朝向翻轉；source readiness 只靠 flags 可被錯誤升級。修正後的 focused 結果是 42/42。最後另有對 cloned service plans、path metadata、actor routes 的凍結，仍應納入最終 typecheck/full-suite。
+## 既有資產不可重建或誤用
 
-驗證環境：Linux x86_64、Node 24.19.0、npm 11.9.0、Python 3.12.14、Blender 4.3.2。沒有本輪 WebGL 裝置量測。
+先讀以下現有來源，使用其正式 manifest 的 frame、datum、capability、door、floor、seat 欄位；不要從顏色猜角色，也不要把 research world XYZ 搬進城市：
 
-## 恢復後的執行順序
+1. `tools/assets/boardable-bus/manifest.json`：12 m 代表性低地板車，外內裝同一 root，−X 右門、+Z 前進。
+2. `tools/assets/boardable-metro/manifest.json`：`expo-metro-17m`，四節整體含連接件約 71.5 m；不是 Canada Line 或 Mark V 模型。
+3. `tools/assets/transit-station-spaces/station-layout.json`：74×4 m 研究月台、跨隙板及候車件。現有 layout 明確不是 source-backed 真站。不可把它換站名就算完成七站。
+4. `tools/assets/transit-independent-review/report.json`：原有靜態門洞／地板／人尺度審核；仍不代表 moving collision 或站台整合。
+5. `lib/city/surface-reachability.ts`、`travel-surfaces.ts`：沿用 `{surfaceId, layer}` 身份與明確連接，不能用 Y 或 XZ 最近點偷偷換樓層。
 
-1. 只讀核對製作 checkout 是否仍在、branch/base、未提交 diff、最後 Blender session 及所有檔案 hash；不可盲目重建覆蓋可編輯來源。
-2. 完成行人 validator/tests/README，修正任何提早的 completion status。
-3. 再跑 focused tests、完整 npm test、typecheck、新碼 lint、source validator、預期失敗的 source ride-ready gate、Blender/package CPU checks、Firebase build、`verify-city-life-isolation.mjs`。
-4. 寫入 `docs/city-life-transit/validation.json`，清楚列 final pass/fail/not_run；目前該證據檔尚未建立。
-5. 將實際 modules/tests/source fixtures/.blend/GLB/previews、原規格與完整 handoff 上傳同一專用 branch。每個 binary blob 要核對 Git blob SHA；只更新自己的 branch，保留 main/PR5。
-6. 更新**本同一份** handoff，去除已解決 blocker，補 exact commit／draft PR／CI links；不把未驗收項變成 accepted。
-7. 可以開明確標示 offline-only 的 draft PR；不得 merge/deploy。驗證 exact commit 的 remote CI。
-8. 整合者再接真實街區路徑、七站及 Canada 車型、門／地板／碰撞／UI／觸控、合法 return/service continuity、Waterfront 實際步行轉乘，完成 V01–V12 與資源/畫面量測。
+## 接口契約及安全接線順序
 
-## 目前阻擋原因
+### 1. 一份時間、一份身份、一份 authority
 
-2026-10-07 約 18:04 UTC 起，雲端 exec transport 無法建立程序；恢復嘗試先逾時，之後持續回報 Noise handshake failure。GitHub connector 仍可讀寫，因此先保存這份**文件限定的暫時交接**。尚不能讀取製作環境中的 binary bytes，沒有宣稱它們已上傳或最後驗證完成。
+在獨立驗證 route 或 feature flag 下建立單一人口 selector、服務 registry、passenger registry 與 cache。不要直接替換正式展示交通。城市遠景保留原 consumer。`vehicleId` 不取自 instance slot；service controller 與 renderer 分開。`PassengerTransfers` 本身不受相機變更影響，Orbit 只是看向另一位置。
+
+每個可見幀只作插值與必要矩陣更新。用 real elapsed 秒喂 `SimulationClock`；隱藏時先 `setHidden(true)`，返回 `setHidden(false)`，不补算 30 秒。服務 tick 的額外 dt 上限為 0.2 秒。遠行人 1–2 Hz 與近 20/5 Hz 由 selector 的頻率輸出分層排程；不要對所有 actor 每幀建 Navigator/mixer。
+
+### 2. 先把來源線做成合法空間
+
+資料包的 `sourceStopId` 是 GTFS stop_id，`stopCode` 是站牌碼，`stopId` 為 Atlas 服務身份。固定資料版本與 hash，保留 TransLink legend。官方 GTFS 包含 routes/trips/stop_times/shapes，不含地下高程、門側、路緣高程或合法軌道折返。
+
+Route 5/6 的 block 配對是服務連續性證據，不是幾何接縫驗收。完整 shape 尾巴超出首末 scheduled stop；不能把完整 endpoints 直接相接。按照資料包的站點投影 interval 作 trimming，再驗證車道側別、地面、轉彎切線、路口衝突與實際車身 swept bounds。本 source-only schema 的 readiness gate 一律拒絕「可搭乘」，即使手動填入 status/空字串也不能升級；將來需要獨立 runtime package validator 核對真實 geometry/profile/frame/connector 才能授權。
+
+`ContinuousPath` 接受四個 XYZ 控制點的 cubic segments，檢查位置接縫 ≤0.00001 m、切線約 1° 以內及顯式 surface connection。它不建立街圖、不猜地下高程，也不把相交 XZ 自動連起來。每節車沿自己的 offset 取樣；超出有效 path 的編組會被拒絕，不把尾車 clamp 到同一位置。
+
+### 3. 先停妥與開門，再開始交易
+
+`TransitService.update(dt, input)` 的 `doorsClosed`／`platformDoorsOpen` 必須反映真實動態門與碰撞狀態。`alignmentValid` 同時包含本車本節、本服務站點、停車位置與正確側月台；未知時 false。`clearDistanceM` 是同一路徑前方合法最大位移，來自 `TrafficOccupancy` 加停線／障礙檢查，不能永遠 Infinity。`pendingTransfers` 必須使用 `PassengerTransfers.pendingFor(vehicleId)`。
+
+公車及列車現在都服務所選每站。終點只有 `hold-for-alighting`，停妥供下車，不創造 U-turn、crossover 或載客 modulo 重生。回程在真實合法調度/連接建立後另接；可留車等待，但這不是已完成連續雙向服務。空車、不可見、無交接才可回收。轉換 5/6 service ID 的 `rebindService` 只更新乘客服務資訊，仍需外部提供停妥且合法連續的新服務控制器。
+
+### 4. 固定座／站錨點和安全上下車
+
+`RideAnchor`：`vehicleId/carId/anchorId/kind/frameId/translationM/rotationQuaternionXYZW`，`translationM` 按 metadata 對 seat 表示 pelvis，standing 表示 feet。不要把 seat pelvis 直接當 citizen 腳底；adapter 必須用角色身體契約換算。可先用 `passengerContractFromManifest` 從原 bus/metro manifest 綁定獨立 live vehicle/car ID，不複製資產。它保留 pelvis/feet 與相機 datum；每個 standing region 首版只有一個固定 slot。座位及站位都屬一個 car-local frame，`riderWorldTransform` 用 car root 的 yaw/pitch/translation 合成世界姿態。
+
+`BoardingProof` 包含 exact vehicle/service/car/stop/platform/door/side、`surfaceId/layer/floorPointM`、實際速度與持續停妥時間、2 m 互動距離、正側、門開、對位、淨空、視線、模型能力與地板查詢。`floorPointM` 登乘時是原 walking floor；下車時是已保留出口地板。preload 後 commit 前重新作同一目標的全部檢查。證明目標改變、失敗、逾時或取消均不改原有效位置。下車前 seat 保持佔用，相近出口保留不能重疊。
+
+外部載入完成只呼叫對應 token 的 `markPreloaded`，過期 callback 不能覆盖新交易。20 次連點/取消與超時案例已有單測。載入失敗呼叫 `cancel(token)`；呼叫端仍須顯示可理解錯誤。registry 的乘客 state 保留原 source 到 commit，`pendingFor` 負責門互鎖。實際走入/走出動畫、座位到門的可達動線及交易中的暫態 render pose 仍由 adapter 實作；不能為通過 2 m 門口條件而捏造距離。drive/boat/fly/重新放置不可直接刪 rider：`unregister` 會拒絕 riding 或 pending，先在合法站點下車。步行活動／手帳 gate 必須確定真正 walking，不能因 Navigation 舊 mode 字串仍是 walk 而發奖励。
+
+### 5. 表示、內裝與 cache
+
+先 `RepresentationTransaction.reserve`，preload 新 representation；失敗保留舊 handle。`commit` 接收同一 authoritative snapshot，回傳新舊 handle 及 snapshot，座標、速度、path station、door/occupancy 不另產生第二份 authority。adapter 安裝成功後 `releaseOld()`；安裝失敗 `rollback()`。未 settle 時禁止下一個 swap。載客、門開或交接期間，不接受缺 passenger/door/opening capability 的降級。該協議不代替實際 renderer/collider 原子接線，V11/V12 仍要觀測。
+
+使用 `SharedResourceCache(maxEntries,maxPending,idleSeconds,dispose)` 的明確上限。`acquire` 回 lease，同 key 只 load 一次；資源引用都 `release` 才能在延時後 `collect`。持有中的車廂、current station floor 不因相機拉遠 release；next station 預取也使用上限。載入器自己清理失敗前建立的部分資源。不要逐人 dispose 共享 geometry/material；骨架更新若日後加入，每人自己的 pose/mixer。
+
+## 需求覆盖／尚未完成
+
+| Spec phase | 本輪完成的離線部分 | 接手仍需完成 |
+| --- | --- | --- |
+| A 來源與契約 | HEAD/PR5 核對、完整原規格、穩定身份型別、GTFS 來源包與 readiness 拒絕 | 官方站圖/GIS 地理核驗、車道／地下 profile、Canada Line 車型、車站實際 layout |
+| B 活街／普通交通 | 四背景輪廓、兩 LOD、人口額度／遲滯、局部事件、簡單反應、連續曲線及佔用控制器 | Robson/Waterfront 2–3 街區安全路徑、同 pass shader/normal/depth 綁定、淡入、遮蔽、少量互動骨架、活動與視覺驗收 |
+| C 公車旅程 | 可重用停靠/乘客交易/按鈴狀態、固定 local transform、既有車型與 source route 綁定說明 | 真實 3 站以上空間、門/座位/UI/觸控、合法回程、完整遊戲旅程 |
+| D Expo 兩站 | 獨立 car 取樣、既有 Expo 資產兼容契約、方向 stop source | Stadium/Main Street 站體、地面入口、月台/車門對位、連續高架/地下 path |
+| E 區域擴展 | Expo 5 站、Canada 3 站各方向來源，Waterfront 分線身份 | 七站真實 layout/GLB、Canada 車型、所有合法路徑與 Waterfront 真步行轉乘 |
+| F 整合 | 單測、type/lint/build 及資產 CPU 證據（具體結果見下） | 所有 V01–V12 WebGL/桌面/compatible觸控、資源與 frame-time、原模式回歸 |
+
+沒有完整站體可交付，沒有把 GTFS 平面 geometry 或 74 m 研究月台稱為七站完成。近景骨架角色與自由車內走動也不在已完成欄。夜景全部 deferred，未製作照明池、未調曝光，沒有用縮短視距掩蓋成本。
+
+## 驗證結果
+
+見 `docs/city-life-transit/validation.json`，保留確切命令、環境、pass/fail/not_run、限制與測試數。數字為本輪實際最後執行結果，不沿用 PR5。離線模型圖是 Blender CPU 重匯入預覽，不是瀏覽器截圖。
+
+
+### 獨立安全審查與復原
+
+離線獨立審查發現並修正兩個問題：
+
+- 單一 cubic 內部 cusp 可以避過固定間隔採樣而產生 180° 朝向翻轉。現在用導數二次式解析找候選零點，拒絕 cusp／垂直 tangent，並保留 8/64/128 subdivisions 的回歸。
+- 原 source gate 只檢查部分 flag/non-null，偽造 passed status 可錯誤宣告 rideReady。現在 source-only schema 永遠不授予 ride readiness；另有全旗標偽造、空 ID、錯誤門側、非數字高程的反例測試。
+
+修正後 42/42 runtime＋source focused tests 通過；另以六個獨立案例核對下車逾時保留座位、open-door/pending 降級拒絕、stale callback 不取消新版、失敗舊 cache lease 不釋放新版、隱藏清掉殘餘 tick、cusp/垂直 tangent。這份審查不是正式場景／WebGL 驗收。
+
+製作環境曾在最後打包前中斷，先以 commit `e7237bdec288159f96cbc67d0962454b4a96d2e1` 保存文件限定的 provisional recovery handoff。環境恢復後已確認原始 checkout、程式、來源資料與 binary assets 仍在，採用原始持久檔案而非從對話重建來源；重新執行 final checks 後，以本文件取代暫時交接。原 provisional commit 仍可供追溯，不能以其當時 unpublished 狀態代表本次最終分支。
+
+### 最終離線結果
+
+- TypeScript、49 個新 focused tests、完整 **768/768 npm tests**（0 skip）、新碼 oxlint、Firebase static build、原有與新增資產 isolation 通過。
+- 全库 lint 保留 211 個既有診斷，未改規則；這一項是 fail，不是全綠。
+- 4 種行人 × 2 LOD：medium 420–452、far 168–204 triangles；8 GLB 合計 355,520 bytes，8 個壓縮可編輯來源 740,195 bytes，零 image textures。每 GLB 一個 opaque primitive；8 批是預期最大背景主 pass 提交，不是實測 GPU draw 或性能保證。
+- `qa/source-audit.json` 的來源保留、相同 GLB 重匯出，以及暫時 +0.01 m 真正手動來源編輯 proof 通過。三張最終 GLB 重匯入 CPU 預覽已目視檢查；動畫視覺、動態自碰撞及車門實際 fit 仍 not_run。
+- 新 19 個 .blend／GLB／preview payload 的 hash 均未出現在 92 個 production dist files；不是瀏覽器 network 觀察。
+- 全部既有 tracked files 未改動；只有新增交付檔案與替換本 branch 上的 provisional handoff。完整 GTFS ZIP、Python caches、Blender backup、工作暫存不提交。
+
+#### 快速接手命令
+
+```sh
+npm ci
+npm run check
+node --test tests/city-life-runtime.test.mjs tests/city-life-transit-sources.test.mjs tests/city-life-pedestrian-assets.test.mjs
+npm test
+python3 tools/assets/city-life-pedestrians/validate.py
+python3 tools/transit/city-life-sources/import_gtfs.py --self-test
+python3 tools/transit/city-life-sources/import_gtfs.py --validate tools/transit/city-life-sources/transit-source-snapshot.json
+# 預期 exit 1，source-only 不可變成可搭乘：
+python3 tools/transit/city-life-sources/import_gtfs.py --validate tools/transit/city-life-sources/transit-source-snapshot.json --require-ride-ready
+npm run build:firebase
+node tools/verify-city-life-isolation.mjs
+```
+
+Blender 重製及保留來源匯出請依 [人物包 README](../tools/assets/city-life-pedestrians/README.zh-TW.md)，GTFS 重製依 [來源包 README](../tools/transit/city-life-sources/README.md)。優先閱讀 [實際匯出預覽](../tools/assets/city-life-pedestrians/qa/previews/background-lod0-front.png) 與 [量測](../tools/assets/city-life-pedestrians/qa/measurements.json)，再做場景 consumer。遠近人物 shader 必須同時接 position 與 normal；AO/normal/depth pass parity 在 WebGL 驗收前不可標為通過。

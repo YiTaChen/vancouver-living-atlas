@@ -1,0 +1,27 @@
+{
+  "status": "offline_complete",
+  "integrationStatus": "runtime_pending_webgl",
+  "complete": [
+    "4 original silhouettes x 2 merged opaque LODs",
+    "editable compressed .blend sources and source-preserving export",
+    "actual exported triangle/bounds/bytes/hash and custom-attribute audits",
+    "analytic animated bounds and CPU normal deformation tests",
+    "actual GLB reimport Cycles CPU front/rear previews"
+  ],
+  "notImplemented": [
+    "near skeleton actors",
+    "interactive pointing/seated clips",
+    "production InstancedMesh renderer",
+    "normal/AO/depth GPU pass integration",
+    "WebGL visuals, runtime actor budgets, resource lifecycle and frame time acceptance"
+  ],
+  "nextEntry": "Load manifest, retain _LIMB/_PIVOT_* and COLOR_0, remap one shared material, instantiate at valid same-level walk surfaces, preserve actor ID/palette/phase across LOD, use animated bounds, apply shared deformation to every pass; then run V02/V03/V10 plus resource acceptance.",
+  "resourceOwnership": "Cache and reference-count 8 immutable geometry templates and one shared opaque material; no per-actor disposal. Zero textures/VAT.",
+  "limitations": [
+    "Rigid-limb blocky stylization is intentionally background-only; near actors remain unimplemented.",
+    "Idle uses neutral rest pose; yield is only visual response plus controller-owned motion.",
+    "Runtime must enforce walking speed/phase and root-foot contact on sloped surfaces; preview is flat-floor offline evidence only.",
+    "No dynamic shadows or contact-shadow planes are included.",
+    "No runtime completion or performance gain claimed."
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "baseRevision": "401569193ccda73e8f6a6fd96e4bdb144ef5a4c6",
+  "verificationDateUtc": "2026-10-07",
+  "status": "offline_gtfs_source_validation_passed_runtime_pending",
+  "checks": {
+    "node --test tests/city-life-transit-sources.test.mjs": {
+      "status": "passed",
+      "tests": 11
+    },
+    "python3 tools/transit/city-life-sources/import_gtfs.py --self-test": {
+      "status": "passed",
+      "tests": 6
+    },
+    "sourceSnapshotValidator": {
+      "status": "passed",
+      "rideReady": false,
+      "rideReadinessChecked": false
+    },
+    "requireRideReadyValidator": {
+      "status": "expected_rejection",
+      "exitCode": 1,
+      "reason": "Source-only schema categorically rejects runtime authorization; status flags never substitute for physical geometry/profile/frame validation"
+    },
+    "sameZipReplayByteComparison": {
+      "status": "passed",
+      "files": [
+        "transit-source-snapshot.json",
+        "gtfs-selection-evidence.json"
+      ]
+    },
+    "pythonSyntaxCompile": {
+      "status": "passed"
+    },
+    "stationGisPointVerification": {
+      "status": "not_run"
+    },
+    "stationMapInspection": {
+      "status": "not_run"
+    },
+    "webglAndSceneIntegration": {
+      "status": "not_run"
+    },
+    "forgedAllFlagsReadinessBypass": {
+      "status": "passed",
+      "outcome": "rejected"
+    }
+  },
+  "fixtureSha256": {
+    "transit-source-snapshot.json": "4e40f326c64146cda8dd6ece93ebab29e4ab58271311116029e819e0c1585301",
+    "gtfs-selection-evidence.json": "af4f4a567d6bbebbe7cb9c9356d0e12c5b029c7204a49332e7a1f53361d5540d"
+  }
+}

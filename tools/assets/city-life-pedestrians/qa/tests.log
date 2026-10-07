@@ -1,0 +1,15 @@
+✔ background package follows common schema and actual-file CPU validator (710.384704ms)
+✔ four original silhouettes use one opaque merged mesh per LOD and no textures (12.204717ms)
+✔ every exported triangle retains a single rigid limb and pivot, including bags and caps (40.947695ms)
+✔ walk, idle, look and yield positions stay inside measured analytic animated bounds (3516.410396ms)
+✔ deformed normals match actual deformed triangle normals, not the undeformed stance (62.73187ms)
+✔ state input limits remain bounded and arbitrary state names cannot silently render (2.261456ms)
+✔ validator rejects tampered triangle metadata rather than trusting manifest claims (121.037963ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4873.548622
