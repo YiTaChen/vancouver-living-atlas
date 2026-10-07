@@ -1,5 +1,7 @@
 # City Life & Transit：離線實作交接（2026-10-07）
 
+> 後續審查與整合已在同一 PR 接續：請讀 [CITY_LIFE_TRANSIT_INTEGRATION_2026_10.md](CITY_LIFE_TRANSIT_INTEGRATION_2026_10.md)。以下保留原 `21007a0` 離線交付的歷史狀態；不能把下列 `not_run` 當成目前分支所有功能的最新總結。
+
 ## 狀態與接手入口
 
 本交付是可重用的 **離線 TypeScript 狀態／安全模組、原創低成本行人來源包、官方靜態交通資料與測試**。沒有接入正式 scene、Engine、Navigation、city-buses 或 railway；沒有合併 main 或部署。`runtime_pending_webgl`，V01–V12 的實際瀏覽器驗收全部 `not_run`。CPU 正反例不是可搭乘或畫面驗收。

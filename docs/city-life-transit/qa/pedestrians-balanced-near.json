@@ -1,0 +1,326 @@
+{
+  "revision": "61b035e49d6c29dc4451b58b09d311d6783e2ecd",
+  "sourceFingerprint": "1eb39093c81147be8a7514b17924f968e76f440af9e64b137e221c09d1e57a20",
+  "kind": "city-life-pedestrian-webgl-v1",
+  "stage": "near",
+  "quality": "balanced",
+  "graphics": "desktop",
+  "valid": true,
+  "viewport": [
+    1280,
+    720
+  ],
+  "render": [
+    1280,
+    720
+  ],
+  "camera": [
+    332.78484878164795,
+    44.071996688439924,
+    266.41772278985576
+  ],
+  "target": [
+    325.8268473863764,
+    34.30719503395911,
+    241.11486000257315
+  ],
+  "calls": 473,
+  "triangles": 2574140,
+  "geometries": 786,
+  "textures": 41,
+  "pedestrians": {
+    "time": 115.44999999999558,
+    "streetVisible": true,
+    "selected": 13,
+    "rendered": 13,
+    "routes": 64,
+    "actorStates": 128,
+    "attemptedRoutes": 119,
+    "floorIndexedMeshes": 9,
+    "indexedTreeTrunks": 36041,
+    "closestCandidateM": 22.6866200825727,
+    "nearbyCandidates": 13,
+    "safeNearbyCandidates": 13,
+    "renderedIds": [
+      "footway:3789:-1:run1:0",
+      "footway:3789:-1:run1:1",
+      "footway:3789:-1:run2:1",
+      "footway:3789:-1:run2:0",
+      "footway:3672:-1:run0:0",
+      "footway:3147:-1:run0:0",
+      "footway:3672:-1:run0:1",
+      "footway:3147:-1:run0:1",
+      "footway:3944:1:run0:1",
+      "footway:3944:-1:run0:1",
+      "footway:3774:-1:run1:0",
+      "footway:3774:-1:run1:1",
+      "footway:3774:1:run1:0"
+    ],
+    "budget": 24,
+    "renderer": {
+      "activeActors": 13,
+      "visibleActors": 13,
+      "capacity": 32,
+      "rejectedInputs": 0,
+      "allocatedBatches": 8,
+      "populatedBatches": 7,
+      "triangles": 3328,
+      "geometryBytes": 361632,
+      "textures": 0,
+      "loadedTemplates": 8,
+      "failedTemplates": 0,
+      "loading": false,
+      "loadErrors": [],
+      "disposed": false
+    }
+  },
+  "actors": [
+    {
+      "actorId": "footway:3789:-1:run1:0",
+      "routeId": "footway:3789:-1:run1",
+      "offsetFromCurbM": 0.55,
+      "sourceWindow": 1,
+      "sourceStartM": 90,
+      "sourceEndM": 170,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        331.54062497406835,
+        33.19897561052439,
+        246.80464835122336
+      ],
+      "yawRadians": 3.929094475070004,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3789:-1:run1:1",
+      "routeId": "footway:3789:-1:run1",
+      "offsetFromCurbM": 0.55,
+      "sourceWindow": 1,
+      "sourceStartM": 90,
+      "sourceEndM": 170,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        328.76643870624827,
+        33.25151892951019,
+        244.04210947718155
+      ],
+      "yawRadians": 0.7875018214802111,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3789:-1:run2:1",
+      "routeId": "footway:3789:-1:run2",
+      "offsetFromCurbM": 1,
+      "sourceWindow": 2,
+      "sourceStartM": 170,
+      "sourceEndM": 196.08512882086944,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        358.3740295799374,
+        32.79307839838154,
+        272.8903316147288
+      ],
+      "yawRadians": 3.929094475070058,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3789:-1:run2:0",
+      "routeId": "footway:3789:-1:run2",
+      "offsetFromCurbM": 1,
+      "sourceWindow": 2,
+      "sourceStartM": 170,
+      "sourceEndM": 196.08512882086944,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        367.3006712260136,
+        32.66417467362469,
+        281.7794948435931
+      ],
+      "yawRadians": 0.7875018214802353,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3672:-1:run0:0",
+      "routeId": "footway:3672:-1:run0",
+      "offsetFromCurbM": 0.55,
+      "sourceWindow": 0,
+      "sourceStartM": 10,
+      "sourceEndM": 44.28708937957986,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        361.67975291603915,
+        32.61762891364989,
+        302.91211655249657
+      ],
+      "yawRadians": 8.646268836459942,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3147:-1:run0:0",
+      "routeId": "footway:3147:-1:run0",
+      "offsetFromCurbM": 0.55,
+      "sourceWindow": 0,
+      "sourceStartM": 10,
+      "sourceEndM": 45.68365158580818,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        381.9082059919046,
+        32.501716946391596,
+        282.3983866233484
+      ],
+      "yawRadians": -0.7783152070435,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3672:-1:run0:1",
+      "routeId": "footway:3672:-1:run0",
+      "offsetFromCurbM": 0.55,
+      "sourceWindow": 0,
+      "sourceStartM": 10,
+      "sourceEndM": 44.28708937957986,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        341.2099655204337,
+        32.70418571892608,
+        323.6658992263687
+      ],
+      "yawRadians": 14.929454143639528,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3147:-1:run0:1",
+      "routeId": "footway:3147:-1:run0",
+      "offsetFromCurbM": 0.55,
+      "sourceWindow": 0,
+      "sourceStartM": 10,
+      "sourceEndM": 45.68365158580818,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        396.4619782804545,
+        32.32677956988072,
+        267.6369726778425
+      ],
+      "yawRadians": -0.7783152070434999,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3944:1:run0:1",
+      "routeId": "footway:3944:1:run0",
+      "offsetFromCurbM": 1,
+      "sourceWindow": 0,
+      "sourceStartM": 10,
+      "sourceEndM": 44.67511111190153,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        379.1963972048683,
+        32.41246633158807,
+        317.40661700280606
+      ],
+      "yawRadians": -2.354188545828614,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3944:-1:run0:1",
+      "routeId": "footway:3944:-1:run0",
+      "offsetFromCurbM": 1,
+      "sourceWindow": 0,
+      "sourceStartM": 10,
+      "sourceEndM": 44.67511111190153,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        393.30944111045494,
+        32.314092169339304,
+        303.23544934869125
+      ],
+      "yawRadians": 3.928996761350864,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3774:-1:run1:0",
+      "routeId": "footway:3774:-1:run1",
+      "offsetFromCurbM": 1,
+      "sourceWindow": 1,
+      "sourceStartM": 90,
+      "sourceEndM": 100.65089859632117,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        323.97528050245757,
+        32.80228901092492,
+        340.50151929588026
+      ],
+      "yawRadians": -0.7783399494551873,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3774:-1:run1:1",
+      "routeId": "footway:3774:-1:run1",
+      "offsetFromCurbM": 1,
+      "sourceWindow": 1,
+      "sourceStartM": 90,
+      "sourceEndM": 100.65089859632117,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        321.66564841557744,
+        32.813422618498,
+        342.8439874468015
+      ],
+      "yawRadians": -3.919932603044867,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3774:1:run1:0",
+      "routeId": "footway:3774:1:run1",
+      "offsetFromCurbM": 1,
+      "sourceWindow": 1,
+      "sourceStartM": 90,
+      "sourceEndM": 100.65089859632117,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        338.2166390235432,
+        32.62201661319317,
+        354.54373093055267
+      ],
+      "yawRadians": -0.7783399494551873,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    }
+  ]
+}

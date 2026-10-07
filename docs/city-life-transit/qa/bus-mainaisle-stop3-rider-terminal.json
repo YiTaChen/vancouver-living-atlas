@@ -1,0 +1,164 @@
+{
+  "revision": "efaf99accd32f0dd8ecc3a2e690255e01baef35f",
+  "sourceFingerprint": "3356d0dcef4668b8832c184165a8b42e2d085e900157645449aa8ed23968d060",
+  "scene": "city-life-transit-qa",
+  "capturedAt": "2026-10-07T19:32:29.710Z",
+  "snapshot": {
+    "scope": "Representative research layout; not a geographic bus route or the seven-station network.",
+    "sourceDescription": "Original three-stop curved test lane; 0.36 m level boarding islands are engineering proposals, not surveyed curbs.",
+    "service": {
+      "vehicleId": "research-bus-instance",
+      "serviceId": "research-bus-service",
+      "pathId": "research-continuous-path",
+      "phase": "terminal",
+      "pathStationM": 85.49645577503198,
+      "speedMps": 0,
+      "stopIndex": 2,
+      "stopId": "research-stop-3",
+      "doorSide": "right",
+      "bellRequested": false
+    },
+    "currentStopLabel": "研究站 C",
+    "passenger": {
+      "mode": "riding",
+      "anchor": {
+        "vehicleId": "research-bus-instance",
+        "carId": "research-bus-car",
+        "anchorId": "main-aisle",
+        "kind": "standing",
+        "frameId": "vehicle",
+        "translationM": [
+          0,
+          0.36,
+          0
+        ],
+        "rotationQuaternionXYZW": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "serviceId": "research-bus-service",
+      "stopId": "research-stop-1"
+    },
+    "paused": false,
+    "doorsOpen": true,
+    "doorProgress": 1,
+    "canBoard": false,
+    "canAlight": true,
+    "anchors": [
+      {
+        "id": "seat-01",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-02",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-03",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-04",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-05",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-06",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-07",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-08",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-09",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-10",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "main-aisle",
+        "kind": "standing",
+        "datum": "feet"
+      },
+      {
+        "id": "wheelchair-stroller",
+        "kind": "standing",
+        "datum": "feet"
+      }
+    ],
+    "passengerCount": 1,
+    "pendingTransfers": 0,
+    "anchorErrorM": 0,
+    "elapsedSeconds": 53.79999999999908,
+    "lastAction": "驗證步進完成：研究站 C 門已實際開啟",
+    "events": [
+      "24.7s 研究站 B: dwell",
+      "34.7s 研究站 B: closing",
+      "35.7s 研究站 C: departing",
+      "35.7s 研究站 C: moving",
+      "44.5s 服務暫停；保留車、乘客與門狀態",
+      "44.5s 服務恢復；不補算隱藏時間",
+      "47.9s 研究站 C: approaching",
+      "52.2s 研究站 C: stopped",
+      "52.7s 研究站 C: opening",
+      "53.7s 研究站 C: dwell",
+      "53.8s 研究站 C: terminal",
+      "53.8s 驗證步進完成：研究站 C 門已實際開啟"
+    ]
+  },
+  "ui": {
+    "view": "rider",
+    "stepMode": true,
+    "manualPause": false
+  },
+  "gpu": {
+    "calls": 32,
+    "triangles": 6340,
+    "geometries": 48,
+    "textures": 1
+  },
+  "viewport": {
+    "cssWidth": 1200,
+    "cssHeight": 468,
+    "pixelWidth": 1800,
+    "pixelHeight": 702,
+    "rendererPixelRatio": 1.5,
+    "devicePixelRatio": 2
+  },
+  "camera": {
+    "position": [
+      43,
+      1.98,
+      52
+    ],
+    "quaternion": [
+      0,
+      0.7071067811865476,
+      0,
+      -0.7071067811865475
+    ]
+  }
+}

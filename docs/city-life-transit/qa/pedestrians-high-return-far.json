@@ -1,0 +1,64 @@
+{
+  "revision": "61b035e49d6c29dc4451b58b09d311d6783e2ecd",
+  "sourceFingerprint": "1eb39093c81147be8a7514b17924f968e76f440af9e64b137e221c09d1e57a20",
+  "kind": "city-life-pedestrian-webgl-v1",
+  "stage": "far",
+  "quality": "high",
+  "graphics": "desktop",
+  "valid": true,
+  "viewport": [
+    1280,
+    720
+  ],
+  "render": [
+    1600,
+    900
+  ],
+  "camera": [
+    3546.6829513814514,
+    6445.302928656692,
+    4287.155322326366
+  ],
+  "target": [
+    -145.22442772272677,
+    25.300000000016276,
+    -278.29999999974683
+  ],
+  "calls": 796,
+  "triangles": 3920361,
+  "geometries": 796,
+  "textures": 45,
+  "pedestrians": {
+    "time": 144.24999999999855,
+    "streetVisible": false,
+    "selected": 0,
+    "rendered": 0,
+    "routes": 64,
+    "actorStates": 128,
+    "attemptedRoutes": 119,
+    "floorIndexedMeshes": 9,
+    "indexedTreeTrunks": 36041,
+    "closestCandidateM": null,
+    "nearbyCandidates": 0,
+    "safeNearbyCandidates": 0,
+    "renderedIds": [],
+    "budget": 32,
+    "renderer": {
+      "activeActors": 0,
+      "visibleActors": 0,
+      "capacity": 32,
+      "rejectedInputs": 0,
+      "allocatedBatches": 8,
+      "populatedBatches": 0,
+      "triangles": 0,
+      "geometryBytes": 361632,
+      "textures": 0,
+      "loadedTemplates": 8,
+      "failedTemplates": 0,
+      "loading": false,
+      "loadErrors": [],
+      "disposed": false
+    }
+  },
+  "actors": []
+}

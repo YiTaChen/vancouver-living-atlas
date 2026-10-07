@@ -1,0 +1,465 @@
+{
+  "revision": "61b035e49d6c29dc4451b58b09d311d6783e2ecd",
+  "sourceFingerprint": "1eb39093c81147be8a7514b17924f968e76f440af9e64b137e221c09d1e57a20",
+  "kind": "city-life-pedestrian-webgl-v1",
+  "stage": "near",
+  "quality": "high",
+  "graphics": "desktop",
+  "valid": true,
+  "viewport": [
+    1280,
+    720
+  ],
+  "render": [
+    1600,
+    900
+  ],
+  "camera": [
+    332.78484878164795,
+    44.071996688439924,
+    266.41772278985576
+  ],
+  "target": [
+    325.8268473863764,
+    34.30719503395911,
+    241.11486000257315
+  ],
+  "calls": 1001,
+  "triangles": 5474489,
+  "geometries": 785,
+  "textures": 45,
+  "pedestrians": {
+    "time": 48.1999999999994,
+    "streetVisible": true,
+    "selected": 20,
+    "rendered": 19,
+    "routes": 64,
+    "actorStates": 128,
+    "attemptedRoutes": 118,
+    "floorIndexedMeshes": 9,
+    "indexedTreeTrunks": 36041,
+    "closestCandidateM": 26.128336352053847,
+    "nearbyCandidates": 19,
+    "safeNearbyCandidates": 19,
+    "renderedIds": [
+      "footway:3789:-1:run1:0",
+      "footway:3789:-1:run1:1",
+      "footway:3789:-1:run2:1",
+      "footway:3789:-1:run2:0",
+      "footway:3672:-1:run0:0",
+      "footway:3672:-1:run0:1",
+      "footway:3147:-1:run0:1",
+      "footway:3147:-1:run0:0",
+      "footway:3944:1:run0:0",
+      "footway:3944:-1:run0:0",
+      "footway:3774:-1:run1:1",
+      "footway:3774:-1:run1:0",
+      "footway:3774:1:run1:1",
+      "footway:3774:-1:run0:1",
+      "footway:3774:1:run1:0",
+      "footway:3944:1:run0:1",
+      "footway:218:-1:run1:1",
+      "footway:3944:-1:run0:1",
+      "footway:218:-1:run1:0"
+    ],
+    "budget": 32,
+    "renderer": {
+      "activeActors": 19,
+      "visibleActors": 19,
+      "capacity": 32,
+      "rejectedInputs": 0,
+      "allocatedBatches": 8,
+      "populatedBatches": 6,
+      "triangles": 3888,
+      "geometryBytes": 361632,
+      "textures": 0,
+      "loadedTemplates": 8,
+      "failedTemplates": 0,
+      "loading": false,
+      "loadErrors": [],
+      "disposed": false
+    }
+  },
+  "actors": [
+    {
+      "actorId": "footway:3789:-1:run1:0",
+      "routeId": "footway:3789:-1:run1",
+      "offsetFromCurbM": 0.55,
+      "sourceWindow": 1,
+      "sourceStartM": 90,
+      "sourceEndM": 170,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        327.8627318978012,
+        33.26863521173561,
+        243.1421968728873
+      ],
+      "yawRadians": 0.7875018214802375,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3789:-1:run1:1",
+      "routeId": "footway:3789:-1:run1",
+      "offsetFromCurbM": 0.55,
+      "sourceWindow": 1,
+      "sourceStartM": 90,
+      "sourceEndM": 170,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        325.78504418010573,
+        33.30798679016784,
+        241.07323230665318
+      ],
+      "yawRadians": 3.9290944750700576,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3789:-1:run2:1",
+      "routeId": "footway:3789:-1:run2",
+      "offsetFromCurbM": 1,
+      "sourceWindow": 2,
+      "sourceStartM": 170,
+      "sourceEndM": 196.08512882086944,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        364.0962433812861,
+        32.712708980276936,
+        278.58852075767567
+      ],
+      "yawRadians": 0.7875018214802112,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3789:-1:run2:0",
+      "routeId": "footway:3789:-1:run2",
+      "offsetFromCurbM": 1,
+      "sourceWindow": 2,
+      "sourceStartM": 170,
+      "sourceEndM": 196.08512882086944,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        368.18801604657546,
+        32.65073493719927,
+        282.6631141556474
+      ],
+      "yawRadians": 3.929094475070102,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3672:-1:run0:0",
+      "routeId": "footway:3672:-1:run0",
+      "offsetFromCurbM": 0.55,
+      "sourceWindow": 0,
+      "sourceStartM": 10,
+      "sourceEndM": 44.28708937957986,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        342.8911025992229,
+        32.690778454440554,
+        321.96143826134323
+      ],
+      "yawRadians": 2.3630835292802486,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3672:-1:run0:1",
+      "routeId": "footway:3672:-1:run0",
+      "offsetFromCurbM": 0.55,
+      "sourceWindow": 0,
+      "sourceStartM": 10,
+      "sourceEndM": 44.28708937957986,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        340.67244656385174,
+        32.70833007357123,
+        324.21087565393935
+      ],
+      "yawRadians": 5.504676182870096,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3147:-1:run0:1",
+      "routeId": "footway:3147:-1:run0",
+      "offsetFromCurbM": 0.55,
+      "sourceWindow": 0,
+      "sourceStartM": 10,
+      "sourceEndM": 45.68365158580818,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        398.2018934127089,
+        32.307153901240895,
+        265.8722338192125
+      ],
+      "yawRadians": 5.504870100136031,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3147:-1:run0:0",
+      "routeId": "footway:3147:-1:run0",
+      "offsetFromCurbM": 0.55,
+      "sourceWindow": 0,
+      "sourceStartM": 10,
+      "sourceEndM": 45.68365158580818,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        398.8618815642142,
+        32.30108375529202,
+        265.20282948126203
+      ],
+      "yawRadians": -0.7783152070435001,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3944:1:run0:0",
+      "routeId": "footway:3944:1:run0",
+      "offsetFromCurbM": 1,
+      "sourceWindow": 0,
+      "sourceStartM": 10,
+      "sourceEndM": 44.67511111190153,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        380.89651719065654,
+        32.39534060459233,
+        319.09992994181505
+      ],
+      "yawRadians": 0.7874041077612338,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3944:-1:run0:0",
+      "routeId": "footway:3944:-1:run0",
+      "offsetFromCurbM": 1,
+      "sourceWindow": 0,
+      "sourceStartM": 10,
+      "sourceEndM": 44.67511111190153,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        395.010193989193,
+        32.29504306571749,
+        304.9293926466337
+      ],
+      "yawRadians": 0.7874041077611251,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3774:-1:run1:1",
+      "routeId": "footway:3774:-1:run1",
+      "offsetFromCurbM": 1,
+      "sourceWindow": 1,
+      "sourceStartM": 90,
+      "sourceEndM": 100.65089859632117,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        323.47758904232256,
+        32.80452519838836,
+        341.0062864408183
+      ],
+      "yawRadians": 5.504845357724456,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3774:-1:run1:0",
+      "routeId": "footway:3774:-1:run1",
+      "offsetFromCurbM": 1,
+      "sourceWindow": 1,
+      "sourceStartM": 90,
+      "sourceEndM": 100.65089859632117,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        318.3925659791138,
+        32.82949514761398,
+        346.163603331214
+      ],
+      "yawRadians": 2.363252704134719,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3774:1:run1:1",
+      "routeId": "footway:3774:1:run1",
+      "offsetFromCurbM": 1,
+      "sourceWindow": 1,
+      "sourceStartM": 90,
+      "sourceEndM": 100.65089859632117,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        337.7191909888073,
+        32.62195413818111,
+        355.04825118931007
+      ],
+      "yawRadians": 5.504845357724456,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3774:-1:run0:1",
+      "routeId": "footway:3774:-1:run0",
+      "offsetFromCurbM": 1,
+      "sourceWindow": 0,
+      "sourceStartM": 10,
+      "sourceEndM": 90,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        308.2092294819102,
+        32.87949686482785,
+        356.49171643213475
+      ],
+      "yawRadians": 5.504845357724464,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3774:1:run1:0",
+      "routeId": "footway:3774:1:run1",
+      "offsetFromCurbM": 1,
+      "sourceWindow": 1,
+      "sourceStartM": 90,
+      "sourceEndM": 100.65089859632117,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        332.63416804954886,
+        32.63106501953112,
+        360.2055679539933
+      ],
+      "yawRadians": 2.363252704134719,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3944:1:run0:1",
+      "routeId": "footway:3944:1:run0",
+      "offsetFromCurbM": 1,
+      "sourceWindow": 0,
+      "sourceStartM": 10,
+      "sourceEndM": 44.67511111190153,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        397.6027998210453,
+        32.23287613882611,
+        335.73932291246086
+      ],
+      "yawRadians": 3.928996761350972,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:218:-1:run1:1",
+      "routeId": "footway:218:-1:run1",
+      "offsetFromCurbM": 1,
+      "sourceWindow": 1,
+      "sourceStartM": 90,
+      "sourceEndM": 112.15287443591723,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        251.26489300396483,
+        34.10950909773209,
+        316.16416876241124
+      ],
+      "yawRadians": 3.931000494910408,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3944:-1:run0:1",
+      "routeId": "footway:3944:-1:run0",
+      "offsetFromCurbM": 1,
+      "sourceWindow": 0,
+      "sourceStartM": 10,
+      "sourceEndM": 44.67511111190153,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        411.71656521951155,
+        32.20443285418735,
+        321.5688738624673
+      ],
+      "yawRadians": 3.928996761350972,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:218:-1:run1:0",
+      "routeId": "footway:218:-1:run1",
+      "offsetFromCurbM": 1,
+      "sourceWindow": 1,
+      "sourceStartM": 90,
+      "sourceEndM": 112.15287443591723,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        244.66719685743868,
+        34.174994901367796,
+        309.6191708684496
+      ],
+      "yawRadians": 3.931000494910457,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:218:-1:run0:1",
+      "routeId": "footway:218:-1:run0",
+      "offsetFromCurbM": 1,
+      "sourceWindow": 0,
+      "sourceStartM": 10,
+      "sourceEndM": 90,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        207.79968365500343,
+        35.04591053348257,
+        273.04613220364377
+      ],
+      "yawRadians": 3.9310004949104074,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": false
+    }
+  ]
+}
