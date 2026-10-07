@@ -88,7 +88,7 @@ PR 與本輪都沒有修改 `package.json` 或 lock。唯讀 audit 報告 24 個
 
 資源上限、shared buffer 與 late-load 清理有回歸；有限瀏覽器 checkpoint 不代表跨裝置效能基準或十分鐘無洩漏認證。公車研究場景與主城 compatible／High 均未記錄 WebGL error／warning。下列是固定時刻觀測，主城 render counts 包含既有多 pass，不能用作人物單獨 GPU 成本或不同畫質的公平 FPS 比較。
 
-| 主城 checkpoint | 實體 render size | 顯示角色／模板 | 人物非空批／主 pass triangles | 全幀 calls／triangles |
+| 主城 checkpoint | 實體 render size | 提交角色／模板 | 人物非空批／主 pass triangles | 全幀 calls／triangles |
 | --- | --- | --- | --- | --- |
 | compatible 冷遠景 | 1280×720 | 0／0 | 0／0 | 779／3,915,219 |
 | compatible 近景 | 1280×720 | 2／8 | 2／624 | 207／1,521,851 |
@@ -96,6 +96,8 @@ PR 與本輪都沒有修改 `package.json` 或 lock。唯讀 audit 報告 24 個
 | High 近景 | 1600×900 | 19／8 | 6／3,888 | 1,001／5,474,489 |
 | High→Balanced 近景 | 1280×720 | 13／8 | 7／3,328 | 473／2,574,140 |
 | High 返回遠景 | 1600×900 | 0／8 | 0／0 | 796／3,920,361 |
+
+表內「提交角色」為 renderer 啟用的 instances，包含視口外角色，不代表截圖中每個人都可見；High 近景圖可直接看到兩名行人。
 
 High→Balanced 留下的十三個 ID 均屬切換前既有角色，沒有重置身份。測試期間 route≤64、actor state≤128；compatible 與 High 返回遠景後，背景 draw batches／triangles 均歸零，八個模型模板保留。人物進入不同 LOD／變體時，非空批次數可增加，即使人口減少。
 
