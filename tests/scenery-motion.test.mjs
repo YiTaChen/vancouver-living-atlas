@@ -61,7 +61,10 @@ const { DetailedTrees } = await import(
 
 function observer(e) {
   const tracker = new SceneryMotionTracker();
-  e.detailWorkBudget = new DetailWorkBudget();
+  // This fixture verifies admission/retention, not worker scheduling or GC.
+  // Zero still denies work; positive allowances keep their real token caps.
+  // Callback elapsed-time accounting is covered by scenery-motion-policy.
+  e.detailWorkBudget = new DetailWorkBudget(() => 0);
   return (time, mode = 'drive', speed = 0, auto = false, allowance) => {
     e.sceneryMotion = tracker.update(
       time,
@@ -363,7 +366,10 @@ function buildingHost(positions = [0], height = 18) {
   return { e, coarse, observe: observer(e), foundations };
 }
 
-test('architectural consumers block fast Auto admissions, keep manual Ultra ranges and gradually complete after stopping', () => {
+test('architectural consumers block fast Auto admissions, keep manual Ultra ranges and gradually complete after stopping', (t) => {
+  // Isolate the generator's soft wall deadline too. Its fixed max-step and
+  // per-cell instance bounds remain active under this deterministic clock.
+  t.mock.method(performance, 'now', () => 0);
   const { e, coarse, observe } = buildingHost([0, 2000]);
   const roof = {
     configureCalls: 0,
@@ -404,7 +410,10 @@ test('architectural consumers block fast Auto admissions, keep manual Ultra rang
   system.dispose();
 });
 
-test('facade selection resumes on a stationary policy change and completion still pumps outside camera movement', async () => {
+test('facade selection resumes on a stationary policy change and completion still pumps outside camera movement', async (t) => {
+  // Queue planning and preparation use performance.now internally; unrelated
+  // concurrent test workers must not consume this fixture's planning deadline.
+  t.mock.method(performance, 'now', () => 0);
   const { e, coarse, observe, foundations } = buildingHost([0], 60);
   e.landmarkWarmup = { prepare: async () => {} };
   const details = new FacadeDetails(e, foundations);
