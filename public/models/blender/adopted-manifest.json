@@ -134,6 +134,60 @@
       "bytes": 18468,
       "sourcePackage": "traffic-car-templates",
       "sourcePath": "tools/assets/traffic-car-templates/exports/traffic-suv.lod2.glb"
+    },
+    {
+      "path": "bus/city-bus-12m-exterior.lod0.glb",
+      "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+      "bytes": 173088,
+      "sourcePackage": "boardable-bus",
+      "sourcePath": "tools/assets/boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+      "sourceRevision": "c9d184a4a176aefecf2aaf2b8341ba4f406f4ee9",
+      "sourceManifestSha256": "32a35e7fdaa0f82600f8d161212b952177fae8515ca8095b2d55be118503076e"
+    },
+    {
+      "path": "bus/city-bus-12m-exterior.lod1.glb",
+      "sha256": "a4ccbb6a4b2f032a4d950ee0883c51ebe1ecd314734b539c60aa5fd6c605b3f0",
+      "bytes": 137088,
+      "sourcePackage": "boardable-bus",
+      "sourcePath": "tools/assets/boardable-bus/exports/city-bus-12m-exterior.lod1.glb",
+      "sourceRevision": "c9d184a4a176aefecf2aaf2b8341ba4f406f4ee9",
+      "sourceManifestSha256": "32a35e7fdaa0f82600f8d161212b952177fae8515ca8095b2d55be118503076e"
+    },
+    {
+      "path": "bus/city-bus-12m-exterior.lod2.glb",
+      "sha256": "36a7f8cfa1b3b53b8e212618e80523a7be3f7fd8e86bef98cf9c93f83bcfd948",
+      "bytes": 22556,
+      "sourcePackage": "boardable-bus",
+      "sourcePath": "tools/assets/boardable-bus/exports/city-bus-12m-exterior.lod2.glb",
+      "sourceRevision": "c9d184a4a176aefecf2aaf2b8341ba4f406f4ee9",
+      "sourceManifestSha256": "32a35e7fdaa0f82600f8d161212b952177fae8515ca8095b2d55be118503076e"
+    },
+    {
+      "path": "bus/city-bus-12m-interior.lod0.glb",
+      "sha256": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d",
+      "bytes": 342612,
+      "sourcePackage": "boardable-bus",
+      "sourcePath": "tools/assets/boardable-bus/exports/city-bus-12m-interior.lod0.glb",
+      "sourceRevision": "c9d184a4a176aefecf2aaf2b8341ba4f406f4ee9",
+      "sourceManifestSha256": "32a35e7fdaa0f82600f8d161212b952177fae8515ca8095b2d55be118503076e"
+    },
+    {
+      "path": "bus/city-bus-12m-interior.lod1.glb",
+      "sha256": "6ac509bee7a8eed10b04ae8c6de1b776087bb6a822c75846b5c4e258045819d5",
+      "bytes": 122468,
+      "sourcePackage": "boardable-bus",
+      "sourcePath": "tools/assets/boardable-bus/exports/city-bus-12m-interior.lod1.glb",
+      "sourceRevision": "c9d184a4a176aefecf2aaf2b8341ba4f406f4ee9",
+      "sourceManifestSha256": "32a35e7fdaa0f82600f8d161212b952177fae8515ca8095b2d55be118503076e"
+    },
+    {
+      "path": "bus/manifest.json",
+      "sha256": "1f5d437f3cd61921f399d0aeff2c57f841c8bce274788f36082b1115eb7450ef",
+      "bytes": 107555,
+      "sourcePackage": "boardable-bus",
+      "sourcePath": "canonical projection of tools/assets/boardable-bus/manifest.json",
+      "sourceRevision": "c9d184a4a176aefecf2aaf2b8341ba4f406f4ee9",
+      "sourceManifestSha256": "32a35e7fdaa0f82600f8d161212b952177fae8515ca8095b2d55be118503076e"
     }
   ]
 }

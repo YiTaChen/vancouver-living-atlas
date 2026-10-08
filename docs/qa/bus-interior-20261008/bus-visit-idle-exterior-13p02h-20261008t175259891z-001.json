@@ -1,0 +1,105 @@
+{
+  "revision": "6f1e463f32d5fc85abad49e455efedf60192c2c8",
+  "sourceFingerprint": "54ce5ba3e7323d3cb11daa4b68c59a8164f60348cc62aab94675f2518959b050",
+  "kind": "integrated-bus-checkpoint-v1",
+  "id": "bus-visit-idle-exterior-13p02h-20261008t175259891z-001",
+  "capturedAt": "2026-10-08T17:52:59.891Z",
+  "valid": true,
+  "snapshot": {
+    "phase": "idle",
+    "status": "idle",
+    "loading": false,
+    "error": null,
+    "aboard": false,
+    "doorsOpen": false,
+    "canBoard": false,
+    "canAlight": false,
+    "anchors": [],
+    "viewAnchor": null,
+    "previewAnchor": null,
+    "passengerAnchor": null,
+    "routeIndex": null
+  },
+  "busAssets": {
+    "status": "idle",
+    "nearActors": 0,
+    "routeActors": 26,
+    "nearCapacity": 4,
+    "allocatedBatches": 0,
+    "populatedBatches": 0,
+    "triangles": 0,
+    "textures": 0,
+    "materials": 0,
+    "loadedTemplates": 0,
+    "assetBytes": 0,
+    "boardableStatus": "idle",
+    "boardableOwners": 0,
+    "updates": 1591,
+    "errors": [],
+    "disposed": false
+  },
+  "fps": 47,
+  "settings": {
+    "trees": true,
+    "buildings": true,
+    "labels": true,
+    "traffic": true,
+    "trains": true,
+    "harbour": true,
+    "terrain": true,
+    "autoRotate": false,
+    "quality": "balanced",
+    "qualityMode": "auto",
+    "mode": "orbit"
+  },
+  "hour": 13.017091666667582,
+  "night": 0,
+  "viewport": [
+    1280,
+    720
+  ],
+  "render": [
+    1280,
+    720
+  ],
+  "pixelRatio": 1,
+  "camera": {
+    "position": [
+      3546.6829513814514,
+      6428.002928656675,
+      4287.155322326365
+    ],
+    "quaternion": [
+      -0.3801091879650987,
+      0.3051794806923564,
+      0.13445863746476006,
+      0.8627301806474472
+    ],
+    "target": [
+      -145.22442772272677,
+      8,
+      -278.2999999997469
+    ],
+    "near": 2,
+    "fov": 42
+  },
+  "navigation": {
+    "mode": "orbit",
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "speedMps": 0,
+    "surface": "ground"
+  },
+  "renderer": {
+    "calls": 775,
+    "triangles": 3913165,
+    "points": 0,
+    "lines": 0,
+    "geometries": 636,
+    "textures": 40
+  },
+  "workerErrors": {}
+}

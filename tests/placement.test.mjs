@@ -824,7 +824,7 @@ test('direct street switching never takes over Boat, orbit, or a requested water
   nav.destroy();
 });
 
-test('pointer and keyboard mode selection share in-place switching while Boat and active placement still select a location', () => {
+test('pointer and keyboard mode selection share in-place switching and reject blocked bus exits', () => {
   const source = readFileSync(
     new URL('../app/page.tsx', import.meta.url),
     'utf8',
@@ -839,7 +839,7 @@ test('pointer and keyboard mode selection share in-place switching while Boat an
   const home = ast.statements.find(
     (n) => ts.isFunctionDeclaration(n) && n.name?.text === 'Home',
   );
-  const names = ['switchInScene', 'switchMode', 'dragFigure'];
+  const names = ['finishBusVisit', 'switchInScene', 'switchMode', 'dragFigure'];
   const actions = home.body.statements
     .filter(
       (n) =>
@@ -857,7 +857,7 @@ test('pointer and keyboard mode selection share in-place switching while Boat an
     },
   }).outputText;
   for (const entry of ['pointer', 'keyboard'])
-    for (const [from, to, placing, expected] of [
+    for (const [from, to, placing, expected, exitAllowed = true] of [
       ['walk', 'drive', null, 'switch'],
       ['drive', 'walk', null, 'switch'],
       ['drive', 'drive', null, 'switch'],
@@ -866,6 +866,7 @@ test('pointer and keyboard mode selection share in-place switching while Boat an
       ['orbit', 'walk', null, 'place'],
       ['walk', 'boat', null, 'place'],
       ['walk', 'drive', 'walk', 'place'],
+      ['walk', 'drive', null, 'blocked', false],
     ]) {
       const calls = [],
         nav = {
@@ -885,6 +886,7 @@ test('pointer and keyboard mode selection share in-place switching while Boat an
         ready: true,
         engine: {
           current: {
+            closeBusVisit: () => exitAllowed,
             navigation: nav,
             renderer: { domElement: { focus: () => calls.push('focus') } },
             placement: {
@@ -896,7 +898,7 @@ test('pointer and keyboard mode selection share in-place switching while Boat an
         },
         setTour() {},
         setPanel() {},
-        setNotice() {},
+        setNotice(key) { if (key) calls.push(key); },
         change: (patch) => calls.push(patch.mode),
         go() {},
         view: 'canada',
@@ -919,6 +921,12 @@ test('pointer and keyboard mode selection share in-place switching while Boat an
           },
           to,
         );
+      if (expected === 'blocked') {
+        assert.equal(nav.mode, from);
+        assert(calls.length > 0, 'Blocked exit must explain why switching stopped');
+        assert(calls.every((call) => call === 'busVisitExitBlocked'));
+        continue;
+      }
       assert.equal(
         calls[0],
         expected,

@@ -484,6 +484,7 @@ export class StreetNavigation {
     if (this.dragging && remaining) this.last = [...remaining];
   };
   blocked(x: number, z: number) {
+    if (this.e.busVisit?.blocksGround(x, z)) return true;
     const index = this.e.data.travelSurfaces as TravelSurfaceIndex | undefined;
     if (
       index &&

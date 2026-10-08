@@ -94,6 +94,23 @@ export interface BusRoute {
   speed: number;
   phase: number;
 }
+/** Geographic route pose with a caller-selected ground-contact datum.
+ * It adds no model-specific vertical compensation or Blender-axis conversion. */
+export function busRoutePose(
+  route: BusRoute,
+  time: number,
+  ground: (x: number, z: number) => number,
+) {
+  const t = (route.phase + (time * route.speed) / route.length) % 1,
+    x = route.a[0] + (route.b[0] - route.a[0]) * t,
+    z = route.a[1] + (route.b[1] - route.a[1]) * t;
+  return {
+    x,
+    y: ground(x, z),
+    z,
+    yaw: Math.atan2(route.b[0] - route.a[0], route.b[1] - route.a[1]),
+  };
+}
 export function createBuses(count: number) {
   const mesh = new THREE.InstancedMesh(
     busGeometry(),
@@ -117,9 +134,12 @@ export function updateBuses(
   time: number,
   ground: (x: number, z: number) => number,
   camera: THREE.Vector3,
+  excluded?: ReadonlySet<number>,
 ) {
   let visible = 0;
-  for (const r of routes) {
+  for (let i = 0; i < routes.length; i++) {
+    if (excluded?.has(i)) continue;
+    const r = routes[i];
     const t = (r.phase + (time * r.speed) / r.length) % 1;
     const x = r.a[0] + (r.b[0] - r.a[0]) * t,
       z = r.a[1] + (r.b[1] - r.a[1]) * t;

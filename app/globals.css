@@ -2568,3 +2568,28 @@ a {
   .atlas.touch-ui .flight-power-track {grid-column:1;grid-row:2/span 2;height:92px;padding:8px 4px;}
   .atlas.touch-ui.flight-mode .mobile-zoom {right:132px;}
 }
+.bus-visit-launcher {
+  position: absolute; z-index: 35; right: 94px; top: 190px;
+  display: flex; align-items: center; gap: 8px; padding: 10px 14px;
+  border-radius: 14px; color: #e8f1ed; font-size: 13px;
+}
+.bus-visit-panel {
+  position: absolute; z-index: 42; left: 50%; top: 164px; transform: translateX(-50%);
+  width: 290px; padding: 16px; border-radius: 16px; color: #e8f1ed;
+}
+.bus-visit-heading,.bus-visit-heading strong {display:flex;align-items:center;gap:8px;}
+.bus-visit-heading {justify-content:space-between;}
+.bus-visit-heading button {padding:5px;}
+.bus-visit-panel p {font-size:12px;line-height:1.5;color:#bacfc9;margin:10px 0;}
+.bus-visit-viewpoint {display:grid;gap:6px;font-size:12px;}
+.bus-visit-viewpoint select {width:100%;padding:9px;border:1px solid #617e75;border-radius:8px;background:#1d3530;color:#e8f1ed;}
+.bus-visit-primary {width:100%;padding:10px;margin-top:4px;border-radius:8px;background:#d0e6d9;color:#173a30;font-weight:600;}
+.bus-visit-panel button:disabled,.bus-visit-launcher:disabled {opacity:.55;cursor:wait;}
+@media(max-width:900px) {
+  .bus-visit-launcher {top:154px;right:64px;max-width:calc(100% - 76px);}
+  .bus-visit-panel {top:154px;width:min(290px,calc(100% - 24px));padding:12px;}
+}
+@media(max-height:500px) {
+  .bus-visit-launcher,.bus-visit-panel {top:106px;}
+  .bus-visit-panel {max-height:calc(100% - 118px);overflow:auto;}
+}

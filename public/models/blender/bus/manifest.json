@@ -1,0 +1,4285 @@
+{
+  "schemaVersion": 1,
+  "contract": "boardable-bus-runtime-v1",
+  "packageId": "boardable-bus",
+  "version": "1.0.0",
+  "units": "m",
+  "coordinateSystem": {
+    "runtime": "glTF +Y up, +Z front, -X vehicle right"
+  },
+  "provenance": {
+    "authoring": "Original parametric editable geometry built for Vancouver Living Atlas. No downloaded meshes, photography, logos or artwork.",
+    "project": "Vancouver Living Atlas by YiTaChen",
+    "source": "https://github.com/YiTaChen/vancouver-living-atlas",
+    "license": "Vancouver Living Atlas Noncommercial Research and Attribution 1.0"
+  },
+  "source": {
+    "packagePath": "tools/assets/boardable-bus",
+    "manifestPath": "tools/assets/boardable-bus/manifest.json",
+    "manifestSha256": "32a35e7fdaa0f82600f8d161212b952177fae8515ca8095b2d55be118503076e",
+    "assetRevision": "c9d184a4a176aefecf2aaf2b8341ba4f406f4ee9"
+  },
+  "assets": [
+    {
+      "id": "city-bus-12m-exterior",
+      "kind": "transit-exterior",
+      "boundsM": {
+        "min": [
+          -1.5199999809265137,
+          0,
+          -5.818999767303467
+        ],
+        "max": [
+          1.5199999809265137,
+          3.069999933242798,
+          6.215000152587891
+        ],
+        "size": [
+          3.0399999618530273,
+          3.069999933242798,
+          12.033999919891357
+        ]
+      },
+      "pivot": {
+        "frameId": "vehicle",
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "Tyre-contact datum at midpoint of front/rear axle centres"
+      },
+      "attachmentDatum": {
+        "frameId": "vehicle",
+        "kind": "tyre-contact-plane",
+        "heightM": 0
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "glass",
+          "semanticRole": "glass",
+          "sharedSurfaceId": "transit-glass",
+          "primitiveSelection": {
+            "materialName": "glass"
+          },
+          "maps": []
+        },
+        {
+          "material": "lights",
+          "semanticRole": "lights",
+          "sharedSurfaceId": "transit-lights",
+          "primitiveSelection": {
+            "materialName": "lights"
+          },
+          "maps": []
+        },
+        {
+          "material": "paint",
+          "semanticRole": "paint",
+          "sharedSurfaceId": "automotive-paint",
+          "primitiveSelection": {
+            "materialName": "paint"
+          },
+          "maps": []
+        },
+        {
+          "material": "rubber",
+          "semanticRole": "rubber",
+          "sharedSurfaceId": "rubber",
+          "primitiveSelection": {
+            "materialName": "rubber"
+          },
+          "maps": []
+        }
+      ],
+      "lodPolicy": {
+        "distanceProposalM": [
+          0,
+          35,
+          120
+        ],
+        "stateRule": "Keep exterior LOD0/1 and interior LOD0/1 loaded for any occupant, open door or boarding. LOD2 only closed, empty, nonboarding display.",
+        "residentRule": "Lazy-load interior for occupied or inspected buses only.",
+        "capabilities": [
+          {
+            "level": 0,
+            "doorsAnimated": true,
+            "passengerCapable": true,
+            "openingsPreserved": true
+          },
+          {
+            "level": 1,
+            "doorsAnimated": true,
+            "passengerCapable": true,
+            "openingsPreserved": true
+          },
+          {
+            "level": 2,
+            "doorsAnimated": false,
+            "passengerCapable": false,
+            "openingsPreserved": false
+          }
+        ]
+      },
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
+          "sourceSha256": "facb19080148b5839d835af2ce994cc50facbd2e1d414ce6428a6e4d13576d27",
+          "bytes": 173088,
+          "triangles": 2310,
+          "primitives": 21,
+          "boundsM": {
+            "min": [
+              -1.5199999809265137,
+              0,
+              -5.818999767303467
+            ],
+            "max": [
+              1.5199999809265137,
+              3.069999933242798,
+              6.215000152587891
+            ],
+            "size": [
+              3.0399999618530273,
+              3.069999933242798,
+              12.033999919891357
+            ]
+          },
+          "capabilities": {
+            "level": 0,
+            "doorsAnimated": true,
+            "passengerCapable": true,
+            "openingsPreserved": true
+          },
+          "file": "city-bus-12m-exterior.lod0.glb",
+          "url": "/models/blender/bus/city-bus-12m-exterior.lod0.glb"
+        },
+        {
+          "level": 1,
+          "sha256": "a4ccbb6a4b2f032a4d950ee0883c51ebe1ecd314734b539c60aa5fd6c605b3f0",
+          "sourceSha256": "d9858acf335c4068831f4cd6b45d0464a51d85c22750ec57c1f29f2619b54ee9",
+          "bytes": 137088,
+          "triangles": 1730,
+          "primitives": 21,
+          "boundsM": {
+            "min": [
+              -1.5199999809265137,
+              0,
+              -5.811999797821045
+            ],
+            "max": [
+              1.5199999809265137,
+              3.069999933242798,
+              6.215000152587891
+            ],
+            "size": [
+              3.0399999618530273,
+              3.069999933242798,
+              12.026999950408936
+            ]
+          },
+          "capabilities": {
+            "level": 1,
+            "doorsAnimated": true,
+            "passengerCapable": true,
+            "openingsPreserved": true
+          },
+          "file": "city-bus-12m-exterior.lod1.glb",
+          "url": "/models/blender/bus/city-bus-12m-exterior.lod1.glb"
+        },
+        {
+          "level": 2,
+          "sha256": "36a7f8cfa1b3b53b8e212618e80523a7be3f7fd8e86bef98cf9c93f83bcfd948",
+          "sourceSha256": "2cb3c1433a2837172c27efa833b41b09cabe3e34ef790f8a9577867f56bec6a4",
+          "bytes": 22556,
+          "triangles": 208,
+          "primitives": 8,
+          "boundsM": {
+            "min": [
+              -1.5199999809265137,
+              0,
+              -5.800000190734863
+            ],
+            "max": [
+              1.5199999809265137,
+              3.069999933242798,
+              6.210000038146973
+            ],
+            "size": [
+              3.0399999618530273,
+              3.069999933242798,
+              12.010000228881836
+            ]
+          },
+          "capabilities": {
+            "level": 2,
+            "doorsAnimated": false,
+            "passengerCapable": false,
+            "openingsPreserved": false
+          },
+          "file": "city-bus-12m-exterior.lod2.glb",
+          "url": "/models/blender/bus/city-bus-12m-exterior.lod2.glb"
+        }
+      ]
+    },
+    {
+      "id": "city-bus-12m-interior",
+      "kind": "transit-interior",
+      "boundsM": {
+        "min": [
+          -1.1775000095367432,
+          0.25999999046325684,
+          -5.679999828338623
+        ],
+        "max": [
+          1.1775000095367432,
+          2.700000047683716,
+          5.75
+        ],
+        "size": [
+          2.3550000190734863,
+          2.440000057220459,
+          11.429999828338623
+        ]
+      },
+      "pivot": {
+        "frameId": "vehicle",
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "Tyre-contact datum at midpoint of front/rear axle centres"
+      },
+      "attachmentDatum": {
+        "frameId": "vehicle",
+        "kind": "tyre-contact-plane",
+        "heightM": 0
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "floor",
+          "semanticRole": "floor",
+          "sharedSurfaceId": "transit-floor",
+          "primitiveSelection": {
+            "materialName": "floor"
+          },
+          "maps": []
+        },
+        {
+          "material": "glass",
+          "semanticRole": "glass",
+          "sharedSurfaceId": "transit-glass",
+          "primitiveSelection": {
+            "materialName": "glass"
+          },
+          "maps": []
+        },
+        {
+          "material": "lights",
+          "semanticRole": "lights",
+          "sharedSurfaceId": "transit-lights",
+          "primitiveSelection": {
+            "materialName": "lights"
+          },
+          "maps": []
+        },
+        {
+          "material": "panel",
+          "semanticRole": "panel",
+          "sharedSurfaceId": "pale-panel",
+          "primitiveSelection": {
+            "materialName": "panel"
+          },
+          "maps": []
+        },
+        {
+          "material": "rail",
+          "semanticRole": "rail",
+          "sharedSurfaceId": "brushed-aluminum",
+          "primitiveSelection": {
+            "materialName": "rail"
+          },
+          "maps": []
+        },
+        {
+          "material": "rubber",
+          "semanticRole": "rubber",
+          "sharedSurfaceId": "rubber",
+          "primitiveSelection": {
+            "materialName": "rubber"
+          },
+          "maps": []
+        },
+        {
+          "material": "seat",
+          "semanticRole": "seat",
+          "sharedSurfaceId": "transit-seat",
+          "primitiveSelection": {
+            "materialName": "seat"
+          },
+          "maps": []
+        }
+      ],
+      "lodPolicy": {
+        "distanceProposalM": [
+          0,
+          18
+        ],
+        "stateRule": "Keep exterior LOD0/1 and interior LOD0/1 loaded for any occupant, open door or boarding. LOD2 only closed, empty, nonboarding display.",
+        "residentRule": "Lazy-load interior for occupied or inspected buses only.",
+        "capabilities": [
+          {
+            "level": 0,
+            "doorsAnimated": true,
+            "passengerCapable": true,
+            "openingsPreserved": true
+          },
+          {
+            "level": 1,
+            "doorsAnimated": true,
+            "passengerCapable": true,
+            "openingsPreserved": true
+          }
+        ]
+      },
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d",
+          "sourceSha256": "8ad2cac5b11f479beac3ca19b16fc409e08c24f1ced5ee0a1b3e87120b130f1e",
+          "bytes": 342612,
+          "triangles": 3760,
+          "primitives": 7,
+          "boundsM": {
+            "min": [
+              -1.1775000095367432,
+              0.25999999046325684,
+              -5.679999828338623
+            ],
+            "max": [
+              1.1775000095367432,
+              2.700000047683716,
+              5.75
+            ],
+            "size": [
+              2.3550000190734863,
+              2.440000057220459,
+              11.429999828338623
+            ]
+          },
+          "capabilities": {
+            "level": 0,
+            "doorsAnimated": true,
+            "passengerCapable": true,
+            "openingsPreserved": true
+          },
+          "file": "city-bus-12m-interior.lod0.glb",
+          "url": "/models/blender/bus/city-bus-12m-interior.lod0.glb"
+        },
+        {
+          "level": 1,
+          "sha256": "6ac509bee7a8eed10b04ae8c6de1b776087bb6a822c75846b5c4e258045819d5",
+          "sourceSha256": "f62a7aac9d42d63e0350a0b0fbd42f6c20603ac512ffc6477ba3ab7d9a2eb5fb",
+          "bytes": 122468,
+          "triangles": 888,
+          "primitives": 7,
+          "boundsM": {
+            "min": [
+              -1.1775000095367432,
+              0.25999999046325684,
+              -5.679999828338623
+            ],
+            "max": [
+              1.1775000095367432,
+              2.700000047683716,
+              5.75
+            ],
+            "size": [
+              2.3550000190734863,
+              2.440000057220459,
+              11.429999828338623
+            ]
+          },
+          "capabilities": {
+            "level": 1,
+            "doorsAnimated": true,
+            "passengerCapable": true,
+            "openingsPreserved": true
+          },
+          "file": "city-bus-12m-interior.lod1.glb",
+          "url": "/models/blender/bus/city-bus-12m-interior.lod1.glb"
+        }
+      ]
+    }
+  ],
+  "vehicles": [
+    {
+      "vehicleId": "city-bus-12m",
+      "profileId": "low-floor-bus-12m",
+      "frameId": "vehicle",
+      "assetRefs": {
+        "exterior": "city-bus-12m-exterior",
+        "interior": "city-bus-12m-interior",
+        "collision": null
+      },
+      "frames": [
+        {
+          "frameId": "vehicle",
+          "parentFrameId": null,
+          "units": "m",
+          "upAxis": "+Y",
+          "frontAxis": "+Z",
+          "translationM": [
+            0,
+            0,
+            0
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "frameId": "door-right-front-a",
+          "parentFrameId": "vehicle",
+          "translationM": [
+            -1.25,
+            0.36,
+            3.9875
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "frameId": "door-right-front-b",
+          "parentFrameId": "vehicle",
+          "translationM": [
+            -1.25,
+            0.36,
+            4.5625
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "frameId": "door-right-rear-a",
+          "parentFrameId": "vehicle",
+          "translationM": [
+            -1.25,
+            0.36,
+            -0.9125
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "frameId": "door-right-rear-b",
+          "parentFrameId": "vehicle",
+          "translationM": [
+            -1.25,
+            0.36,
+            -0.33749999999999997
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "nominalLengthM": 12,
+      "bodyBoundsM": {
+        "min": [
+          -1.25,
+          0.26,
+          -5.8
+        ],
+        "max": [
+          1.25,
+          2.82,
+          6.2
+        ],
+        "size": [
+          2.5,
+          2.5599999999999996,
+          12
+        ]
+      },
+      "fullBoundsM": {
+        "min": [
+          -1.5199999809265137,
+          0,
+          -5.818999767303467
+        ],
+        "max": [
+          1.5199999809265137,
+          3.069999933242798,
+          6.215000152587891
+        ],
+        "size": [
+          3.0399999618530273,
+          3.069999933242798,
+          12.033999919891357
+        ]
+      },
+      "dimensionBasis": "Representative project modelling target, not a specific New Flyer survey or accessibility certification",
+      "contactDatum": {
+        "frameId": "vehicle",
+        "kind": "tyre-ground-contact",
+        "pointM": [
+          0,
+          0,
+          0
+        ],
+        "normal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "legacyToVehicleRoot": {
+        "translationM": [
+          0,
+          -0.01,
+          0.025
+        ],
+        "rotationQuaternionXYZW": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "note": "Datum conversion only from old local contact Y=.01 and axle midpoint Z=-.025. This newly proportioned model is not a vertexwise legacy mapping. Remove old runtime ground+1.08 offset."
+      },
+      "wheelbaseM": 6.2,
+      "axles": [
+        {
+          "axleId": "rear",
+          "frameId": "vehicle",
+          "centerM": [
+            0,
+            0.49,
+            -3.1
+          ]
+        },
+        {
+          "axleId": "front",
+          "frameId": "vehicle",
+          "centerM": [
+            0,
+            0.49,
+            3.1
+          ]
+        }
+      ],
+      "wheels": [
+        {
+          "wheelId": "wheel-rear-right",
+          "nodeId": "wheel-rear-right",
+          "frameId": "vehicle",
+          "axleId": "rear",
+          "centerM": [
+            -1.13,
+            0.49,
+            -3.1
+          ],
+          "radiusM": 0.49,
+          "spinAxis": [
+            1,
+            0,
+            0
+          ],
+          "steered": false
+        },
+        {
+          "wheelId": "wheel-rear-left",
+          "nodeId": "wheel-rear-left",
+          "frameId": "vehicle",
+          "axleId": "rear",
+          "centerM": [
+            1.13,
+            0.49,
+            -3.1
+          ],
+          "radiusM": 0.49,
+          "spinAxis": [
+            1,
+            0,
+            0
+          ],
+          "steered": false
+        },
+        {
+          "wheelId": "wheel-front-right",
+          "nodeId": "wheel-front-right",
+          "frameId": "vehicle",
+          "axleId": "front",
+          "centerM": [
+            -1.13,
+            0.49,
+            3.1
+          ],
+          "radiusM": 0.49,
+          "spinAxis": [
+            1,
+            0,
+            0
+          ],
+          "steered": true
+        },
+        {
+          "wheelId": "wheel-front-left",
+          "nodeId": "wheel-front-left",
+          "frameId": "vehicle",
+          "axleId": "front",
+          "centerM": [
+            1.13,
+            0.49,
+            3.1
+          ],
+          "radiusM": 0.49,
+          "spinAxis": [
+            1,
+            0,
+            0
+          ],
+          "steered": true
+        }
+      ],
+      "floorSurfaces": [
+        {
+          "surfaceId": "main-center",
+          "frameId": "vehicle",
+          "verticesM": [
+            [
+              -0.78,
+              0.36,
+              -5.68
+            ],
+            [
+              0.78,
+              0.36,
+              -5.68
+            ],
+            [
+              0.78,
+              0.36,
+              5.75
+            ],
+            [
+              -0.78,
+              0.36,
+              5.75
+            ]
+          ],
+          "indices": [
+            0,
+            2,
+            1,
+            0,
+            3,
+            2
+          ]
+        },
+        {
+          "surfaceId": "side--1-0",
+          "frameId": "vehicle",
+          "verticesM": [
+            [
+              -1.15,
+              0.36,
+              -5.68
+            ],
+            [
+              -0.78,
+              0.36,
+              -5.68
+            ],
+            [
+              -0.78,
+              0.36,
+              -3.75
+            ],
+            [
+              -1.15,
+              0.36,
+              -3.75
+            ]
+          ],
+          "indices": [
+            0,
+            2,
+            1,
+            0,
+            3,
+            2
+          ]
+        },
+        {
+          "surfaceId": "side--1-1",
+          "frameId": "vehicle",
+          "verticesM": [
+            [
+              -1.15,
+              0.36,
+              -2.45
+            ],
+            [
+              -0.78,
+              0.36,
+              -2.45
+            ],
+            [
+              -0.78,
+              0.36,
+              2.45
+            ],
+            [
+              -1.15,
+              0.36,
+              2.45
+            ]
+          ],
+          "indices": [
+            0,
+            2,
+            1,
+            0,
+            3,
+            2
+          ]
+        },
+        {
+          "surfaceId": "side--1-2",
+          "frameId": "vehicle",
+          "verticesM": [
+            [
+              -1.15,
+              0.36,
+              3.75
+            ],
+            [
+              -0.78,
+              0.36,
+              3.75
+            ],
+            [
+              -0.78,
+              0.36,
+              5.75
+            ],
+            [
+              -1.15,
+              0.36,
+              5.75
+            ]
+          ],
+          "indices": [
+            0,
+            2,
+            1,
+            0,
+            3,
+            2
+          ]
+        },
+        {
+          "surfaceId": "side-1-0",
+          "frameId": "vehicle",
+          "verticesM": [
+            [
+              0.78,
+              0.36,
+              -5.68
+            ],
+            [
+              1.15,
+              0.36,
+              -5.68
+            ],
+            [
+              1.15,
+              0.36,
+              -3.75
+            ],
+            [
+              0.78,
+              0.36,
+              -3.75
+            ]
+          ],
+          "indices": [
+            0,
+            2,
+            1,
+            0,
+            3,
+            2
+          ]
+        },
+        {
+          "surfaceId": "side-1-1",
+          "frameId": "vehicle",
+          "verticesM": [
+            [
+              0.78,
+              0.36,
+              -2.45
+            ],
+            [
+              1.15,
+              0.36,
+              -2.45
+            ],
+            [
+              1.15,
+              0.36,
+              2.45
+            ],
+            [
+              0.78,
+              0.36,
+              2.45
+            ]
+          ],
+          "indices": [
+            0,
+            2,
+            1,
+            0,
+            3,
+            2
+          ]
+        },
+        {
+          "surfaceId": "side-1-2",
+          "frameId": "vehicle",
+          "verticesM": [
+            [
+              0.78,
+              0.36,
+              3.75
+            ],
+            [
+              1.15,
+              0.36,
+              3.75
+            ],
+            [
+              1.15,
+              0.36,
+              5.75
+            ],
+            [
+              0.78,
+              0.36,
+              5.75
+            ]
+          ],
+          "indices": [
+            0,
+            2,
+            1,
+            0,
+            3,
+            2
+          ]
+        }
+      ],
+      "floorSegments": [
+        {
+          "segmentId": "continuous-low-floor",
+          "frameId": "vehicle",
+          "heightM": 0.36,
+          "raised": false,
+          "stepHeightM": 0,
+          "note": "Representative all-low-floor proposal; wheel-wells are explicit excluded obstacles."
+        }
+      ],
+      "walkableFloor": {
+        "frameId": "vehicle",
+        "surfaceRefs": [
+          "main-center",
+          "side--1-0",
+          "side--1-1",
+          "side--1-2",
+          "side-1-0",
+          "side-1-1",
+          "side-1-2"
+        ],
+        "obstacleCollisionRefs": [
+          "wheel-well--1--3.1",
+          "wheel-well--1-3.1",
+          "wheel-well-1--3.1",
+          "wheel-well-1-3.1",
+          "seat-01-cushion",
+          "seat-01-back",
+          "seat-02-cushion",
+          "seat-02-back",
+          "seat-03-cushion",
+          "seat-03-back",
+          "seat-04-cushion",
+          "seat-04-back",
+          "seat-05-cushion",
+          "seat-05-back",
+          "seat-06-cushion",
+          "seat-06-back",
+          "seat-07-cushion",
+          "seat-07-back",
+          "seat-08-cushion",
+          "seat-08-back",
+          "seat-09-cushion",
+          "seat-09-back",
+          "seat-10-cushion",
+          "seat-10-back",
+          "driver-partition",
+          "display-screen",
+          "driver-console",
+          "driver-partition-glass",
+          "driver-seat",
+          "driver-seat-back",
+          "entry-rail-front",
+          "entry-rail-rear",
+          "longitudinal-rail--1",
+          "longitudinal-rail-1",
+          "passenger-display",
+          "seat-01-handle",
+          "seat-01-pedestal",
+          "seat-02-handle",
+          "seat-02-pedestal",
+          "seat-03-handle",
+          "seat-03-pedestal",
+          "seat-04-handle",
+          "seat-04-pedestal",
+          "seat-05-handle",
+          "seat-05-pedestal",
+          "seat-06-handle",
+          "seat-06-pedestal",
+          "seat-07-handle",
+          "seat-07-pedestal",
+          "seat-08-handle",
+          "seat-08-pedestal",
+          "seat-09-handle",
+          "seat-09-pedestal",
+          "seat-10-handle",
+          "seat-10-pedestal",
+          "steering-column",
+          "steering-wheel",
+          "stop-bell",
+          "upright-rail",
+          "upright-rail.001",
+          "upright-rail.002",
+          "upright-rail.003",
+          "upright-rail.004",
+          "upright-rail.005",
+          "upright-rail.006",
+          "upright-rail.007"
+        ]
+      },
+      "ceiling": {
+        "frameId": "vehicle",
+        "undersideHeightM": 2.6,
+        "minimumStandingHeadroomM": 2.24
+      },
+      "doors": [
+        {
+          "doorId": "right-front-a",
+          "doorGroupId": "front",
+          "nodeId": "door-right-front-a",
+          "frameId": "vehicle",
+          "doorFrameId": "door-right-front-a",
+          "side": "right",
+          "carId": "city-bus-12m",
+          "openingPolygonM": [
+            [
+              -1.25,
+              0.36,
+              3.7
+            ],
+            [
+              -1.25,
+              0.36,
+              4.85
+            ],
+            [
+              -1.25,
+              2.46,
+              4.85
+            ],
+            [
+              -1.25,
+              2.46,
+              3.7
+            ]
+          ],
+          "outwardNormal": [
+            -1,
+            0,
+            0
+          ],
+          "closedTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.25,
+              0.36,
+              3.9875
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "openTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.39,
+              0.36,
+              3.3674999999999997
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "motion": {
+            "type": "plug-then-slide",
+            "durationS": 1,
+            "keyframes": [
+              {
+                "timeS": 0,
+                "transform": {
+                  "parentFrameId": "vehicle",
+                  "translationM": [
+                    -1.25,
+                    0.36,
+                    3.9875
+                  ],
+                  "rotationQuaternionXYZW": [
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  "scale": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "timeS": 0.25,
+                "transform": {
+                  "parentFrameId": "vehicle",
+                  "translationM": [
+                    -1.39,
+                    0.36,
+                    3.9875
+                  ],
+                  "rotationQuaternionXYZW": [
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  "scale": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "timeS": 1,
+                "transform": {
+                  "parentFrameId": "vehicle",
+                  "translationM": [
+                    -1.39,
+                    0.36,
+                    3.3674999999999997
+                  ],
+                  "rotationQuaternionXYZW": [
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  "scale": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              }
+            ],
+            "translationTravelM": 0.76
+          },
+          "animationClip": "door-right-front-a-open",
+          "animationNodeId": "door-right-front-a",
+          "sweptBoundsM": {
+            "frameId": "vehicle",
+            "min": [
+              -1.417,
+              0.36,
+              3.0874999999999995
+            ],
+            "max": [
+              -1.223,
+              2.44,
+              4.2675
+            ],
+            "size": [
+              0.19399999999999995,
+              2.08,
+              1.1800000000000006
+            ]
+          },
+          "boardingPointM": [
+            -1.7,
+            0.36,
+            4.275
+          ],
+          "doorLocalToVehicleTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.25,
+              0.36,
+              3.9875
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "doorWidthM": 1.15,
+          "doorHeightM": 2.1,
+          "sillHeightM": 0.36
+        },
+        {
+          "doorId": "right-front-b",
+          "doorGroupId": "front",
+          "nodeId": "door-right-front-b",
+          "frameId": "vehicle",
+          "doorFrameId": "door-right-front-b",
+          "side": "right",
+          "carId": "city-bus-12m",
+          "openingPolygonM": [
+            [
+              -1.25,
+              0.36,
+              3.7
+            ],
+            [
+              -1.25,
+              0.36,
+              4.85
+            ],
+            [
+              -1.25,
+              2.46,
+              4.85
+            ],
+            [
+              -1.25,
+              2.46,
+              3.7
+            ]
+          ],
+          "outwardNormal": [
+            -1,
+            0,
+            0
+          ],
+          "closedTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.25,
+              0.36,
+              4.5625
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "openTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.39,
+              0.36,
+              5.1825
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "motion": {
+            "type": "plug-then-slide",
+            "durationS": 1,
+            "keyframes": [
+              {
+                "timeS": 0,
+                "transform": {
+                  "parentFrameId": "vehicle",
+                  "translationM": [
+                    -1.25,
+                    0.36,
+                    4.5625
+                  ],
+                  "rotationQuaternionXYZW": [
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  "scale": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "timeS": 0.25,
+                "transform": {
+                  "parentFrameId": "vehicle",
+                  "translationM": [
+                    -1.39,
+                    0.36,
+                    4.5625
+                  ],
+                  "rotationQuaternionXYZW": [
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  "scale": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "timeS": 1,
+                "transform": {
+                  "parentFrameId": "vehicle",
+                  "translationM": [
+                    -1.39,
+                    0.36,
+                    5.1825
+                  ],
+                  "rotationQuaternionXYZW": [
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  "scale": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              }
+            ],
+            "translationTravelM": 0.76
+          },
+          "animationClip": "door-right-front-b-open",
+          "animationNodeId": "door-right-front-b",
+          "sweptBoundsM": {
+            "frameId": "vehicle",
+            "min": [
+              -1.417,
+              0.36,
+              4.2825
+            ],
+            "max": [
+              -1.223,
+              2.44,
+              5.4625
+            ],
+            "size": [
+              0.19399999999999995,
+              2.08,
+              1.1800000000000006
+            ]
+          },
+          "boardingPointM": [
+            -1.7,
+            0.36,
+            4.275
+          ],
+          "doorLocalToVehicleTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.25,
+              0.36,
+              4.5625
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "doorWidthM": 1.15,
+          "doorHeightM": 2.1,
+          "sillHeightM": 0.36
+        },
+        {
+          "doorId": "right-rear-a",
+          "doorGroupId": "rear",
+          "nodeId": "door-right-rear-a",
+          "frameId": "vehicle",
+          "doorFrameId": "door-right-rear-a",
+          "side": "right",
+          "carId": "city-bus-12m",
+          "openingPolygonM": [
+            [
+              -1.25,
+              0.36,
+              -1.2
+            ],
+            [
+              -1.25,
+              0.36,
+              -0.05
+            ],
+            [
+              -1.25,
+              2.46,
+              -0.05
+            ],
+            [
+              -1.25,
+              2.46,
+              -1.2
+            ]
+          ],
+          "outwardNormal": [
+            -1,
+            0,
+            0
+          ],
+          "closedTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.25,
+              0.36,
+              -0.9125
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "openTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.39,
+              0.36,
+              -1.5325
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "motion": {
+            "type": "plug-then-slide",
+            "durationS": 1,
+            "keyframes": [
+              {
+                "timeS": 0,
+                "transform": {
+                  "parentFrameId": "vehicle",
+                  "translationM": [
+                    -1.25,
+                    0.36,
+                    -0.9125
+                  ],
+                  "rotationQuaternionXYZW": [
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  "scale": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "timeS": 0.25,
+                "transform": {
+                  "parentFrameId": "vehicle",
+                  "translationM": [
+                    -1.39,
+                    0.36,
+                    -0.9125
+                  ],
+                  "rotationQuaternionXYZW": [
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  "scale": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "timeS": 1,
+                "transform": {
+                  "parentFrameId": "vehicle",
+                  "translationM": [
+                    -1.39,
+                    0.36,
+                    -1.5325
+                  ],
+                  "rotationQuaternionXYZW": [
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  "scale": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              }
+            ],
+            "translationTravelM": 0.76
+          },
+          "animationClip": "door-right-rear-a-open",
+          "animationNodeId": "door-right-rear-a",
+          "sweptBoundsM": {
+            "frameId": "vehicle",
+            "min": [
+              -1.417,
+              0.36,
+              -1.8125
+            ],
+            "max": [
+              -1.223,
+              2.44,
+              -0.6325
+            ],
+            "size": [
+              0.19399999999999995,
+              2.08,
+              1.1800000000000002
+            ]
+          },
+          "boardingPointM": [
+            -1.7,
+            0.36,
+            -0.625
+          ],
+          "doorLocalToVehicleTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.25,
+              0.36,
+              -0.9125
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "doorWidthM": 1.15,
+          "doorHeightM": 2.1,
+          "sillHeightM": 0.36
+        },
+        {
+          "doorId": "right-rear-b",
+          "doorGroupId": "rear",
+          "nodeId": "door-right-rear-b",
+          "frameId": "vehicle",
+          "doorFrameId": "door-right-rear-b",
+          "side": "right",
+          "carId": "city-bus-12m",
+          "openingPolygonM": [
+            [
+              -1.25,
+              0.36,
+              -1.2
+            ],
+            [
+              -1.25,
+              0.36,
+              -0.05
+            ],
+            [
+              -1.25,
+              2.46,
+              -0.05
+            ],
+            [
+              -1.25,
+              2.46,
+              -1.2
+            ]
+          ],
+          "outwardNormal": [
+            -1,
+            0,
+            0
+          ],
+          "closedTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.25,
+              0.36,
+              -0.33749999999999997
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "openTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.39,
+              0.36,
+              0.28250000000000003
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "motion": {
+            "type": "plug-then-slide",
+            "durationS": 1,
+            "keyframes": [
+              {
+                "timeS": 0,
+                "transform": {
+                  "parentFrameId": "vehicle",
+                  "translationM": [
+                    -1.25,
+                    0.36,
+                    -0.33749999999999997
+                  ],
+                  "rotationQuaternionXYZW": [
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  "scale": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "timeS": 0.25,
+                "transform": {
+                  "parentFrameId": "vehicle",
+                  "translationM": [
+                    -1.39,
+                    0.36,
+                    -0.33749999999999997
+                  ],
+                  "rotationQuaternionXYZW": [
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  "scale": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "timeS": 1,
+                "transform": {
+                  "parentFrameId": "vehicle",
+                  "translationM": [
+                    -1.39,
+                    0.36,
+                    0.28250000000000003
+                  ],
+                  "rotationQuaternionXYZW": [
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  "scale": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              }
+            ],
+            "translationTravelM": 0.76
+          },
+          "animationClip": "door-right-rear-b-open",
+          "animationNodeId": "door-right-rear-b",
+          "sweptBoundsM": {
+            "frameId": "vehicle",
+            "min": [
+              -1.417,
+              0.36,
+              -0.6174999999999999
+            ],
+            "max": [
+              -1.223,
+              2.44,
+              0.5625
+            ],
+            "size": [
+              0.19399999999999995,
+              2.08,
+              1.18
+            ]
+          },
+          "boardingPointM": [
+            -1.7,
+            0.36,
+            -0.625
+          ],
+          "doorLocalToVehicleTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.25,
+              0.36,
+              -0.33749999999999997
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "doorWidthM": 1.15,
+          "doorHeightM": 2.1,
+          "sillHeightM": 0.36
+        }
+      ],
+      "seats": [
+        {
+          "seatId": "seat-01",
+          "nodeId": "seat-01",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            -0.83,
+            0.88,
+            -4.85
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "cameraEyePointM": [
+            -0.83,
+            1.47,
+            -4.824999999999999
+          ],
+          "pelvisAnchorNodeId": "seat-01-pelvis",
+          "cameraAnchorNodeId": "seat-01-camera",
+          "humanReference": "pelvis, not feet/root",
+          "seatWidthM": 0.46,
+          "seatDepthM": 0.44,
+          "seatSurfaceHeightM": 0.81,
+          "localFloorHeightM": 0.36,
+          "seatAboveFloorM": 0.45
+        },
+        {
+          "seatId": "seat-02",
+          "nodeId": "seat-02",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            0.83,
+            0.88,
+            -4.85
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "cameraEyePointM": [
+            0.83,
+            1.47,
+            -4.824999999999999
+          ],
+          "pelvisAnchorNodeId": "seat-02-pelvis",
+          "cameraAnchorNodeId": "seat-02-camera",
+          "humanReference": "pelvis, not feet/root",
+          "seatWidthM": 0.46,
+          "seatDepthM": 0.44,
+          "seatSurfaceHeightM": 0.81,
+          "localFloorHeightM": 0.36,
+          "seatAboveFloorM": 0.45
+        },
+        {
+          "seatId": "seat-03",
+          "nodeId": "seat-03",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            -0.83,
+            0.88,
+            -4.05
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "cameraEyePointM": [
+            -0.83,
+            1.47,
+            -4.0249999999999995
+          ],
+          "pelvisAnchorNodeId": "seat-03-pelvis",
+          "cameraAnchorNodeId": "seat-03-camera",
+          "humanReference": "pelvis, not feet/root",
+          "seatWidthM": 0.46,
+          "seatDepthM": 0.44,
+          "seatSurfaceHeightM": 0.81,
+          "localFloorHeightM": 0.36,
+          "seatAboveFloorM": 0.45
+        },
+        {
+          "seatId": "seat-04",
+          "nodeId": "seat-04",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            0.83,
+            0.88,
+            -4.05
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "cameraEyePointM": [
+            0.83,
+            1.47,
+            -4.0249999999999995
+          ],
+          "pelvisAnchorNodeId": "seat-04-pelvis",
+          "cameraAnchorNodeId": "seat-04-camera",
+          "humanReference": "pelvis, not feet/root",
+          "seatWidthM": 0.46,
+          "seatDepthM": 0.44,
+          "seatSurfaceHeightM": 0.81,
+          "localFloorHeightM": 0.36,
+          "seatAboveFloorM": 0.45
+        },
+        {
+          "seatId": "seat-05",
+          "nodeId": "seat-05",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            -0.83,
+            0.88,
+            -1.85
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "cameraEyePointM": [
+            -0.83,
+            1.47,
+            -1.8250000000000002
+          ],
+          "pelvisAnchorNodeId": "seat-05-pelvis",
+          "cameraAnchorNodeId": "seat-05-camera",
+          "humanReference": "pelvis, not feet/root",
+          "seatWidthM": 0.46,
+          "seatDepthM": 0.44,
+          "seatSurfaceHeightM": 0.81,
+          "localFloorHeightM": 0.36,
+          "seatAboveFloorM": 0.45
+        },
+        {
+          "seatId": "seat-06",
+          "nodeId": "seat-06",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            0.83,
+            0.88,
+            -1.85
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "cameraEyePointM": [
+            0.83,
+            1.47,
+            -1.8250000000000002
+          ],
+          "pelvisAnchorNodeId": "seat-06-pelvis",
+          "cameraAnchorNodeId": "seat-06-camera",
+          "humanReference": "pelvis, not feet/root",
+          "seatWidthM": 0.46,
+          "seatDepthM": 0.44,
+          "seatSurfaceHeightM": 0.81,
+          "localFloorHeightM": 0.36,
+          "seatAboveFloorM": 0.45
+        },
+        {
+          "seatId": "seat-07",
+          "nodeId": "seat-07",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            0.83,
+            0.88,
+            0.5
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "cameraEyePointM": [
+            0.83,
+            1.47,
+            0.525
+          ],
+          "pelvisAnchorNodeId": "seat-07-pelvis",
+          "cameraAnchorNodeId": "seat-07-camera",
+          "humanReference": "pelvis, not feet/root",
+          "seatWidthM": 0.46,
+          "seatDepthM": 0.44,
+          "seatSurfaceHeightM": 0.81,
+          "localFloorHeightM": 0.36,
+          "seatAboveFloorM": 0.45
+        },
+        {
+          "seatId": "seat-08",
+          "nodeId": "seat-08",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            0.83,
+            0.88,
+            1.3
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "cameraEyePointM": [
+            0.83,
+            1.47,
+            1.325
+          ],
+          "pelvisAnchorNodeId": "seat-08-pelvis",
+          "cameraAnchorNodeId": "seat-08-camera",
+          "humanReference": "pelvis, not feet/root",
+          "seatWidthM": 0.46,
+          "seatDepthM": 0.44,
+          "seatSurfaceHeightM": 0.81,
+          "localFloorHeightM": 0.36,
+          "seatAboveFloorM": 0.45
+        },
+        {
+          "seatId": "seat-09",
+          "nodeId": "seat-09",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            -0.83,
+            0.88,
+            2.1
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "cameraEyePointM": [
+            -0.83,
+            1.47,
+            2.125
+          ],
+          "pelvisAnchorNodeId": "seat-09-pelvis",
+          "cameraAnchorNodeId": "seat-09-camera",
+          "humanReference": "pelvis, not feet/root",
+          "seatWidthM": 0.46,
+          "seatDepthM": 0.44,
+          "seatSurfaceHeightM": 0.81,
+          "localFloorHeightM": 0.36,
+          "seatAboveFloorM": 0.45
+        },
+        {
+          "seatId": "seat-10",
+          "nodeId": "seat-10",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            0.83,
+            0.88,
+            2.1
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "cameraEyePointM": [
+            0.83,
+            1.47,
+            2.125
+          ],
+          "pelvisAnchorNodeId": "seat-10-pelvis",
+          "cameraAnchorNodeId": "seat-10-camera",
+          "humanReference": "pelvis, not feet/root",
+          "seatWidthM": 0.46,
+          "seatDepthM": 0.44,
+          "seatSurfaceHeightM": 0.81,
+          "localFloorHeightM": 0.36,
+          "seatAboveFloorM": 0.45
+        }
+      ],
+      "driver": {
+        "frameId": "vehicle",
+        "pelvisPointM": [
+          0.77,
+          0.91,
+          4.85
+        ],
+        "cameraEyePointM": [
+          0.77,
+          1.51,
+          4.9
+        ],
+        "pelvisAnchorNodeId": "driver-pelvis",
+        "cameraAnchorNodeId": "driver-camera"
+      },
+      "standingRegions": [
+        {
+          "regionId": "main-aisle",
+          "frameId": "vehicle",
+          "polygonM": [
+            [
+              -0.45,
+              0.36,
+              -5.35
+            ],
+            [
+              0.45,
+              0.36,
+              -5.35
+            ],
+            [
+              0.45,
+              0.36,
+              3.65
+            ],
+            [
+              -0.45,
+              0.36,
+              3.65
+            ]
+          ],
+          "feetPointM": [
+            0,
+            0.36,
+            0
+          ],
+          "headClearanceM": 2.24,
+          "shoulderClearanceM": 0.9,
+          "characterCentreInsetM": 0.25
+        },
+        {
+          "regionId": "wheelchair-stroller",
+          "frameId": "vehicle",
+          "polygonM": [
+            [
+              -1.12,
+              0.36,
+              0.15
+            ],
+            [
+              -0.4,
+              0.36,
+              0.15
+            ],
+            [
+              -0.4,
+              0.36,
+              1.7
+            ],
+            [
+              -1.12,
+              0.36,
+              1.7
+            ]
+          ],
+          "feetPointM": [
+            -0.76,
+            0.36,
+            0.9
+          ],
+          "headClearanceM": 2.24,
+          "reservedClearSpace": true,
+          "note": "0.72 x 1.55 m representative free region, not regulatory certification"
+        }
+      ],
+      "cameraAnchors": [
+        {
+          "cameraId": "driver",
+          "nodeId": "driver-camera",
+          "frameId": "vehicle",
+          "eyePointM": [
+            0.77,
+            1.51,
+            4.9
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "cameraId": "aisle",
+          "nodeId": "camera-aisle",
+          "frameId": "vehicle",
+          "eyePointM": [
+            0,
+            1.99,
+            -4.8
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "anchorId": "boarding-front",
+          "nodeId": "boarding-front",
+          "frameId": "vehicle",
+          "pointM": [
+            -1.7,
+            0.36,
+            4.275
+          ]
+        },
+        {
+          "anchorId": "doorway-front",
+          "nodeId": "doorway-front",
+          "frameId": "vehicle",
+          "pointM": [
+            -1.25,
+            0.36,
+            4.275
+          ]
+        },
+        {
+          "anchorId": "boarding-rear",
+          "nodeId": "boarding-rear",
+          "frameId": "vehicle",
+          "pointM": [
+            -1.7,
+            0.36,
+            -0.625
+          ]
+        },
+        {
+          "anchorId": "doorway-rear",
+          "nodeId": "doorway-rear",
+          "frameId": "vehicle",
+          "pointM": [
+            -1.25,
+            0.36,
+            -0.625
+          ]
+        },
+        {
+          "anchorId": "axle-front",
+          "nodeId": "axle-front",
+          "frameId": "vehicle",
+          "pointM": [
+            0,
+            0.49,
+            3.1
+          ]
+        },
+        {
+          "anchorId": "axle-rear",
+          "nodeId": "axle-rear",
+          "frameId": "vehicle",
+          "pointM": [
+            0,
+            0.49,
+            -3.1
+          ]
+        }
+      ],
+      "collision": {
+        "frameId": "vehicle",
+        "mode": "primitives",
+        "primitives": [
+          {
+            "collisionId": "floor",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.15,
+                0.26,
+                -5.68
+              ],
+              "max": [
+                1.15,
+                0.36,
+                5.75
+              ],
+              "size": [
+                2.3,
+                0.09999999999999998,
+                11.43
+              ]
+            },
+            "role": "walkable-floor"
+          },
+          {
+            "collisionId": "ceiling",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.135,
+                2.6,
+                -5.64
+              ],
+              "max": [
+                1.135,
+                2.7,
+                5.74
+              ],
+              "size": [
+                2.27,
+                0.10000000000000009,
+                11.379999999999999
+              ]
+            },
+            "role": "ceiling"
+          },
+          {
+            "collisionId": "wheel-well--1--3.1",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.14,
+                0.36,
+                -3.69
+              ],
+              "max": [
+                -0.79,
+                1.01,
+                -2.5100000000000002
+              ],
+              "size": [
+                0.34999999999999987,
+                0.65,
+                1.1799999999999997
+              ]
+            },
+            "role": "obstacle"
+          },
+          {
+            "collisionId": "wheel-well--1-3.1",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.14,
+                0.36,
+                2.5100000000000002
+              ],
+              "max": [
+                -0.79,
+                1.01,
+                3.69
+              ],
+              "size": [
+                0.34999999999999987,
+                0.65,
+                1.1799999999999997
+              ]
+            },
+            "role": "obstacle"
+          },
+          {
+            "collisionId": "wheel-well-1--3.1",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.79,
+                0.36,
+                -3.69
+              ],
+              "max": [
+                1.14,
+                1.01,
+                -2.5100000000000002
+              ],
+              "size": [
+                0.34999999999999987,
+                0.65,
+                1.1799999999999997
+              ]
+            },
+            "role": "obstacle"
+          },
+          {
+            "collisionId": "wheel-well-1-3.1",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.79,
+                0.36,
+                2.5100000000000002
+              ],
+              "max": [
+                1.14,
+                1.01,
+                3.69
+              ],
+              "size": [
+                0.34999999999999987,
+                0.65,
+                1.1799999999999997
+              ]
+            },
+            "role": "obstacle"
+          },
+          {
+            "collisionId": "seat-01-cushion",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.06,
+                0.74,
+                -5.069999999999999
+              ],
+              "max": [
+                -0.6,
+                0.81,
+                -4.63
+              ],
+              "size": [
+                0.4600000000000001,
+                0.07000000000000006,
+                0.4399999999999995
+              ]
+            },
+            "role": "obstacle"
+          },
+          {
+            "collisionId": "seat-01-back",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.06,
+                0.775,
+                -5.0874999999999995
+              ],
+              "max": [
+                -0.6,
+                1.345,
+                -5.0225
+              ],
+              "size": [
+                0.4600000000000001,
+                0.57,
+                0.0649999999999995
+              ]
+            },
+            "role": "obstacle"
+          },
+          {
+            "collisionId": "seat-02-cushion",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.6,
+                0.74,
+                -5.069999999999999
+              ],
+              "max": [
+                1.06,
+                0.81,
+                -4.63
+              ],
+              "size": [
+                0.4600000000000001,
+                0.07000000000000006,
+                0.4399999999999995
+              ]
+            },
+            "role": "obstacle"
+          },
+          {
+            "collisionId": "seat-02-back",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.6,
+                0.775,
+                -5.0874999999999995
+              ],
+              "max": [
+                1.06,
+                1.345,
+                -5.0225
+              ],
+              "size": [
+                0.4600000000000001,
+                0.57,
+                0.0649999999999995
+              ]
+            },
+            "role": "obstacle"
+          },
+          {
+            "collisionId": "seat-03-cushion",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.06,
+                0.74,
+                -4.27
+              ],
+              "max": [
+                -0.6,
+                0.81,
+                -3.8299999999999996
+              ],
+              "size": [
+                0.4600000000000001,
+                0.07000000000000006,
+                0.43999999999999995
+              ]
+            },
+            "role": "obstacle"
+          },
+          {
+            "collisionId": "seat-03-back",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.06,
+                0.775,
+                -4.2875
+              ],
+              "max": [
+                -0.6,
+                1.345,
+                -4.2225
+              ],
+              "size": [
+                0.4600000000000001,
+                0.57,
+                0.0649999999999995
+              ]
+            },
+            "role": "obstacle"
+          },
+          {
+            "collisionId": "seat-04-cushion",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.6,
+                0.74,
+                -4.27
+              ],
+              "max": [
+                1.06,
+                0.81,
+                -3.8299999999999996
+              ],
+              "size": [
+                0.4600000000000001,
+                0.07000000000000006,
+                0.43999999999999995
+              ]
+            },
+            "role": "obstacle"
+          },
+          {
+            "collisionId": "seat-04-back",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.6,
+                0.775,
+                -4.2875
+              ],
+              "max": [
+                1.06,
+                1.345,
+                -4.2225
+              ],
+              "size": [
+                0.4600000000000001,
+                0.57,
+                0.0649999999999995
+              ]
+            },
+            "role": "obstacle"
+          },
+          {
+            "collisionId": "seat-05-cushion",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.06,
+                0.74,
+                -2.0700000000000003
+              ],
+              "max": [
+                -0.6,
+                0.81,
+                -1.6300000000000001
+              ],
+              "size": [
+                0.4600000000000001,
+                0.07000000000000006,
+                0.44000000000000017
+              ]
+            },
+            "role": "obstacle"
+          },
+          {
+            "collisionId": "seat-05-back",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.06,
+                0.775,
+                -2.0875
+              ],
+              "max": [
+                -0.6,
+                1.345,
+                -2.0225
+              ],
+              "size": [
+                0.4600000000000001,
+                0.57,
+                0.06499999999999995
+              ]
+            },
+            "role": "obstacle"
+          },
+          {
+            "collisionId": "seat-06-cushion",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.6,
+                0.74,
+                -2.0700000000000003
+              ],
+              "max": [
+                1.06,
+                0.81,
+                -1.6300000000000001
+              ],
+              "size": [
+                0.4600000000000001,
+                0.07000000000000006,
+                0.44000000000000017
+              ]
+            },
+            "role": "obstacle"
+          },
+          {
+            "collisionId": "seat-06-back",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.6,
+                0.775,
+                -2.0875
+              ],
+              "max": [
+                1.06,
+                1.345,
+                -2.0225
+              ],
+              "size": [
+                0.4600000000000001,
+                0.57,
+                0.06499999999999995
+              ]
+            },
+            "role": "obstacle"
+          },
+          {
+            "collisionId": "seat-07-cushion",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.6,
+                0.74,
+                0.28
+              ],
+              "max": [
+                1.06,
+                0.81,
+                0.72
+              ],
+              "size": [
+                0.4600000000000001,
+                0.07000000000000006,
+                0.43999999999999995
+              ]
+            },
+            "role": "obstacle"
+          },
+          {
+            "collisionId": "seat-07-back",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.6,
+                0.775,
+                0.2625
+              ],
+              "max": [
+                1.06,
+                1.345,
+                0.3275
+              ],
+              "size": [
+                0.4600000000000001,
+                0.57,
+                0.065
+              ]
+            },
+            "role": "obstacle"
+          },
+          {
+            "collisionId": "seat-08-cushion",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.6,
+                0.74,
+                1.08
+              ],
+              "max": [
+                1.06,
+                0.81,
+                1.52
+              ],
+              "size": [
+                0.4600000000000001,
+                0.07000000000000006,
+                0.43999999999999995
+              ]
+            },
+            "role": "obstacle"
+          },
+          {
+            "collisionId": "seat-08-back",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.6,
+                0.775,
+                1.0625
+              ],
+              "max": [
+                1.06,
+                1.345,
+                1.1275
+              ],
+              "size": [
+                0.4600000000000001,
+                0.57,
+                0.06499999999999995
+              ]
+            },
+            "role": "obstacle"
+          },
+          {
+            "collisionId": "seat-09-cushion",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.06,
+                0.74,
+                1.8800000000000001
+              ],
+              "max": [
+                -0.6,
+                0.81,
+                2.3200000000000003
+              ],
+              "size": [
+                0.4600000000000001,
+                0.07000000000000006,
+                0.44000000000000017
+              ]
+            },
+            "role": "obstacle"
+          },
+          {
+            "collisionId": "seat-09-back",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.06,
+                0.775,
+                1.8625
+              ],
+              "max": [
+                -0.6,
+                1.345,
+                1.9275000000000002
+              ],
+              "size": [
+                0.4600000000000001,
+                0.57,
+                0.06500000000000017
+              ]
+            },
+            "role": "obstacle"
+          },
+          {
+            "collisionId": "seat-10-cushion",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.6,
+                0.74,
+                1.8800000000000001
+              ],
+              "max": [
+                1.06,
+                0.81,
+                2.3200000000000003
+              ],
+              "size": [
+                0.4600000000000001,
+                0.07000000000000006,
+                0.44000000000000017
+              ]
+            },
+            "role": "obstacle"
+          },
+          {
+            "collisionId": "seat-10-back",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.6,
+                0.775,
+                1.8625
+              ],
+              "max": [
+                1.06,
+                1.345,
+                1.9275000000000002
+              ],
+              "size": [
+                0.4600000000000001,
+                0.57,
+                0.06500000000000017
+              ]
+            },
+            "role": "obstacle"
+          },
+          {
+            "collisionId": "driver-partition",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.37,
+                0.36,
+                4.1425
+              ],
+              "max": [
+                1.17,
+                2.215,
+                4.1975
+              ],
+              "size": [
+                0.7999999999999999,
+                1.855,
+                0.054999999999999716
+              ]
+            },
+            "role": "obstacle"
+          },
+          {
+            "collisionId": "right-front-a",
+            "frameId": "door-right-front-a",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -0.027,
+                0,
+                -0.28
+              ],
+              "max": [
+                0.027,
+                2.08,
+                0.28
+              ],
+              "size": [
+                0.054,
+                2.08,
+                0.56
+              ]
+            },
+            "role": "animated-door-leaf"
+          },
+          {
+            "collisionId": "right-front-b",
+            "frameId": "door-right-front-b",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -0.027,
+                0,
+                -0.28
+              ],
+              "max": [
+                0.027,
+                2.08,
+                0.28
+              ],
+              "size": [
+                0.054,
+                2.08,
+                0.56
+              ]
+            },
+            "role": "animated-door-leaf"
+          },
+          {
+            "collisionId": "right-rear-a",
+            "frameId": "door-right-rear-a",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -0.027,
+                0,
+                -0.28
+              ],
+              "max": [
+                0.027,
+                2.08,
+                0.28
+              ],
+              "size": [
+                0.054,
+                2.08,
+                0.56
+              ]
+            },
+            "role": "animated-door-leaf"
+          },
+          {
+            "collisionId": "right-rear-b",
+            "frameId": "door-right-rear-b",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -0.027,
+                0,
+                -0.28
+              ],
+              "max": [
+                0.027,
+                2.08,
+                0.28
+              ],
+              "size": [
+                0.054,
+                2.08,
+                0.56
+              ]
+            },
+            "role": "animated-door-leaf"
+          },
+          {
+            "collisionId": "side-wall--1-0",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.25,
+                0.36,
+                -5.68
+              ],
+              "max": [
+                -1.1800000000000002,
+                2.6,
+                -1.2
+              ],
+              "size": [
+                0.06999999999999984,
+                2.24,
+                4.4799999999999995
+              ]
+            },
+            "role": "shell"
+          },
+          {
+            "collisionId": "side-wall--1-1",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.25,
+                0.36,
+                -0.05
+              ],
+              "max": [
+                -1.1800000000000002,
+                2.6,
+                3.7
+              ],
+              "size": [
+                0.06999999999999984,
+                2.24,
+                3.75
+              ]
+            },
+            "role": "shell"
+          },
+          {
+            "collisionId": "side-wall--1-2",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.25,
+                0.36,
+                4.85
+              ],
+              "max": [
+                -1.1800000000000002,
+                2.6,
+                5.75
+              ],
+              "size": [
+                0.06999999999999984,
+                2.24,
+                0.9000000000000004
+              ]
+            },
+            "role": "shell"
+          },
+          {
+            "collisionId": "side-wall-1-0",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                1.1800000000000002,
+                0.36,
+                -5.68
+              ],
+              "max": [
+                1.25,
+                2.6,
+                5.75
+              ],
+              "size": [
+                0.06999999999999984,
+                2.24,
+                11.43
+              ]
+            },
+            "role": "shell"
+          },
+          {
+            "collisionId": "rear-wall",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.25,
+                0.36,
+                -5.8
+              ],
+              "max": [
+                1.25,
+                2.7,
+                -5.73
+              ],
+              "size": [
+                2.5,
+                2.3400000000000003,
+                0.0699999999999994
+              ]
+            },
+            "role": "shell"
+          },
+          {
+            "collisionId": "front-wall",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.1,
+                0.36,
+                5.89
+              ],
+              "max": [
+                1.1,
+                2.6,
+                6.2
+              ],
+              "size": [
+                2.2,
+                2.24,
+                0.3100000000000005
+              ]
+            },
+            "role": "shell"
+          },
+          {
+            "collisionId": "display-screen",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -0.29499998688697815,
+                2.2799999713897705,
+                3.867000102996826
+              ],
+              "max": [
+                0.29499998688697815,
+                2.440000057220459,
+                3.877000093460083
+              ],
+              "size": [
+                0.5899999737739563,
+                0.16000008583068848,
+                0.009999990463256836
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "display-screen"
+          },
+          {
+            "collisionId": "driver-console",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.12999999523162842,
+                0.949999988079071,
+                5.199999809265137
+              ],
+              "max": [
+                1.1699999570846558,
+                1.190000057220459,
+                5.659999847412109
+              ],
+              "size": [
+                1.0399999618530273,
+                0.24000006914138794,
+                0.46000003814697266
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "driver-console"
+          },
+          {
+            "collisionId": "driver-partition-glass",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.3700000047683716,
+                1.6449999809265137,
+                4.15749979019165
+              ],
+              "max": [
+                1.1699999570846558,
+                2.2149999141693115,
+                4.182499885559082
+              ],
+              "size": [
+                0.7999999523162842,
+                0.5699999332427979,
+                0.02500009536743164
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "driver-partition-glass"
+          },
+          {
+            "collisionId": "driver-seat",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.5299999713897705,
+                0.7450000047683716,
+                4.619999885559082
+              ],
+              "max": [
+                1.0099999904632568,
+                0.875,
+                5.079999923706055
+              ],
+              "size": [
+                0.48000001907348633,
+                0.12999999523162842,
+                0.46000003814697266
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "driver-seat"
+          },
+          {
+            "collisionId": "driver-seat-back",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.5299999713897705,
+                0.8399999737739563,
+                4.59499979019165
+              ],
+              "max": [
+                1.0099999904632568,
+                1.4600000381469727,
+                4.684999942779541
+              ],
+              "size": [
+                0.48000001907348633,
+                0.6200000643730164,
+                0.09000015258789062
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "driver-seat-back"
+          },
+          {
+            "collisionId": "entry-rail-front",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -0.985678493976593,
+                0.800000011920929,
+                4.922999858856201
+              ],
+              "max": [
+                -0.9343214631080627,
+                2.309999942779541,
+                4.976999759674072
+              ],
+              "size": [
+                0.05135703086853027,
+                1.509999930858612,
+                0.053999900817871094
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "entry-rail-front"
+          },
+          {
+            "collisionId": "entry-rail-rear",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -0.985678493976593,
+                0.800000011920929,
+                0.023000000044703484
+              ],
+              "max": [
+                -0.9343214631080627,
+                2.309999942779541,
+                0.07699999958276749
+              ],
+              "size": [
+                0.05135703086853027,
+                1.509999930858612,
+                0.053999999538064
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "entry-rail-rear"
+          },
+          {
+            "collisionId": "liner--1-0",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.1775000095367432,
+                0.8349999785423279,
+                -5.650000095367432
+              ],
+              "max": [
+                -1.152500033378601,
+                1.1349999904632568,
+                -1.2000000476837158
+              ],
+              "size": [
+                0.02499997615814209,
+                0.30000001192092896,
+                4.450000047683716
+              ]
+            },
+            "role": "shell",
+            "visibleNodeId": "liner--1-0"
+          },
+          {
+            "collisionId": "liner--1-1",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.1775000095367432,
+                0.8349999785423279,
+                -0.05000000074505806
+              ],
+              "max": [
+                -1.152500033378601,
+                1.1349999904632568,
+                3.700000047683716
+              ],
+              "size": [
+                0.02499997615814209,
+                0.30000001192092896,
+                3.750000048428774
+              ]
+            },
+            "role": "shell",
+            "visibleNodeId": "liner--1-1"
+          },
+          {
+            "collisionId": "liner--1-2",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.1775000095367432,
+                0.8349999785423279,
+                4.849999904632568
+              ],
+              "max": [
+                -1.152500033378601,
+                1.1349999904632568,
+                5.71999979019165
+              ],
+              "size": [
+                0.02499997615814209,
+                0.30000001192092896,
+                0.869999885559082
+              ]
+            },
+            "role": "shell",
+            "visibleNodeId": "liner--1-2"
+          },
+          {
+            "collisionId": "liner-1-0",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                1.152500033378601,
+                0.8349999785423279,
+                -5.650000095367432
+              ],
+              "max": [
+                1.1775000095367432,
+                1.1349999904632568,
+                5.71999979019165
+              ],
+              "size": [
+                0.02499997615814209,
+                0.30000001192092896,
+                11.369999885559082
+              ]
+            },
+            "role": "shell",
+            "visibleNodeId": "liner-1-0"
+          },
+          {
+            "collisionId": "longitudinal-rail--1",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -0.5130000114440918,
+                2.278125762939453,
+                -5
+              ],
+              "max": [
+                -0.46700000762939453,
+                2.3218741416931152,
+                3.5
+              ],
+              "size": [
+                0.046000003814697266,
+                0.04374837875366211,
+                8.5
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "longitudinal-rail--1"
+          },
+          {
+            "collisionId": "longitudinal-rail-1",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.46700000762939453,
+                2.278125762939453,
+                -5
+              ],
+              "max": [
+                0.5130000114440918,
+                2.3218741416931152,
+                3.5
+              ],
+              "size": [
+                0.046000003814697266,
+                0.04374837875366211,
+                8.5
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "longitudinal-rail-1"
+          },
+          {
+            "collisionId": "passenger-display",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -0.33000001311302185,
+                2.244999885559082,
+                3.877500057220459
+              ],
+              "max": [
+                0.33000001311302185,
+                2.4749999046325684,
+                3.922499895095825
+              ],
+              "size": [
+                0.6600000262260437,
+                0.23000001907348633,
+                0.04499983787536621
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "passenger-display"
+          },
+          {
+            "collisionId": "seat-01-handle",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.0199999809265137,
+                1.312999963760376,
+                -5.086999893188477
+              ],
+              "max": [
+                -0.6399999856948853,
+                1.3470001220703125,
+                -5.052999973297119
+              ],
+              "size": [
+                0.3799999952316284,
+                0.03400015830993652,
+                0.03399991989135742
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "seat-01-handle"
+          },
+          {
+            "collisionId": "seat-01-pedestal",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -0.8799999952316284,
+                0.375,
+                -4.909999847412109
+              ],
+              "max": [
+                -0.7799999713897705,
+                0.7450000047683716,
+                -4.789999961853027
+              ],
+              "size": [
+                0.10000002384185791,
+                0.3700000047683716,
+                0.11999988555908203
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "seat-01-pedestal"
+          },
+          {
+            "collisionId": "seat-02-handle",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.6399999856948853,
+                1.312999963760376,
+                -5.086999893188477
+              ],
+              "max": [
+                1.0199999809265137,
+                1.3470001220703125,
+                -5.052999973297119
+              ],
+              "size": [
+                0.3799999952316284,
+                0.03400015830993652,
+                0.03399991989135742
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "seat-02-handle"
+          },
+          {
+            "collisionId": "seat-02-pedestal",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.7799999713897705,
+                0.375,
+                -4.909999847412109
+              ],
+              "max": [
+                0.8799999952316284,
+                0.7450000047683716,
+                -4.789999961853027
+              ],
+              "size": [
+                0.10000002384185791,
+                0.3700000047683716,
+                0.11999988555908203
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "seat-02-pedestal"
+          },
+          {
+            "collisionId": "seat-03-handle",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.0199999809265137,
+                1.312999963760376,
+                -4.2870001792907715
+              ],
+              "max": [
+                -0.6399999856948853,
+                1.3470001220703125,
+                -4.253000259399414
+              ],
+              "size": [
+                0.3799999952316284,
+                0.03400015830993652,
+                0.03399991989135742
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "seat-03-handle"
+          },
+          {
+            "collisionId": "seat-03-pedestal",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -0.8799999952316284,
+                0.375,
+                -4.110000133514404
+              ],
+              "max": [
+                -0.7799999713897705,
+                0.7450000047683716,
+                -3.9900002479553223
+              ],
+              "size": [
+                0.10000002384185791,
+                0.3700000047683716,
+                0.11999988555908203
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "seat-03-pedestal"
+          },
+          {
+            "collisionId": "seat-04-handle",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.6399999856948853,
+                1.312999963760376,
+                -4.2870001792907715
+              ],
+              "max": [
+                1.0199999809265137,
+                1.3470001220703125,
+                -4.253000259399414
+              ],
+              "size": [
+                0.3799999952316284,
+                0.03400015830993652,
+                0.03399991989135742
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "seat-04-handle"
+          },
+          {
+            "collisionId": "seat-04-pedestal",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.7799999713897705,
+                0.375,
+                -4.110000133514404
+              ],
+              "max": [
+                0.8799999952316284,
+                0.7450000047683716,
+                -3.9900002479553223
+              ],
+              "size": [
+                0.10000002384185791,
+                0.3700000047683716,
+                0.11999988555908203
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "seat-04-pedestal"
+          },
+          {
+            "collisionId": "seat-05-handle",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.0199999809265137,
+                1.312999963760376,
+                -2.0870001316070557
+              ],
+              "max": [
+                -0.6399999856948853,
+                1.3470001220703125,
+                -2.052999973297119
+              ],
+              "size": [
+                0.3799999952316284,
+                0.03400015830993652,
+                0.03400015830993652
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "seat-05-handle"
+          },
+          {
+            "collisionId": "seat-05-pedestal",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -0.8799999952316284,
+                0.375,
+                -1.909999966621399
+              ],
+              "max": [
+                -0.7799999713897705,
+                0.7450000047683716,
+                -1.790000081062317
+              ],
+              "size": [
+                0.10000002384185791,
+                0.3700000047683716,
+                0.11999988555908203
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "seat-05-pedestal"
+          },
+          {
+            "collisionId": "seat-06-handle",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.6399999856948853,
+                1.312999963760376,
+                -2.0870001316070557
+              ],
+              "max": [
+                1.0199999809265137,
+                1.3470001220703125,
+                -2.052999973297119
+              ],
+              "size": [
+                0.3799999952316284,
+                0.03400015830993652,
+                0.03400015830993652
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "seat-06-handle"
+          },
+          {
+            "collisionId": "seat-06-pedestal",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.7799999713897705,
+                0.375,
+                -1.909999966621399
+              ],
+              "max": [
+                0.8799999952316284,
+                0.7450000047683716,
+                -1.790000081062317
+              ],
+              "size": [
+                0.10000002384185791,
+                0.3700000047683716,
+                0.11999988555908203
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "seat-06-pedestal"
+          },
+          {
+            "collisionId": "seat-07-handle",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.6399999856948853,
+                1.312999963760376,
+                0.2630000114440918
+              ],
+              "max": [
+                1.0199999809265137,
+                1.3470001220703125,
+                0.296999990940094
+              ],
+              "size": [
+                0.3799999952316284,
+                0.03400015830993652,
+                0.0339999794960022
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "seat-07-handle"
+          },
+          {
+            "collisionId": "seat-07-pedestal",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.7799999713897705,
+                0.375,
+                0.4399999976158142
+              ],
+              "max": [
+                0.8799999952316284,
+                0.7450000047683716,
+                0.5600000023841858
+              ],
+              "size": [
+                0.10000002384185791,
+                0.3700000047683716,
+                0.12000000476837158
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "seat-07-pedestal"
+          },
+          {
+            "collisionId": "seat-08-handle",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.6399999856948853,
+                1.312999963760376,
+                1.062999963760376
+              ],
+              "max": [
+                1.0199999809265137,
+                1.3470001220703125,
+                1.097000002861023
+              ],
+              "size": [
+                0.3799999952316284,
+                0.03400015830993652,
+                0.03400003910064697
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "seat-08-handle"
+          },
+          {
+            "collisionId": "seat-08-pedestal",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.7799999713897705,
+                0.375,
+                1.2400000095367432
+              ],
+              "max": [
+                0.8799999952316284,
+                0.7450000047683716,
+                1.3599998950958252
+              ],
+              "size": [
+                0.10000002384185791,
+                0.3700000047683716,
+                0.11999988555908203
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "seat-08-pedestal"
+          },
+          {
+            "collisionId": "seat-09-handle",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.0199999809265137,
+                1.312999963760376,
+                1.8629999160766602
+              ],
+              "max": [
+                -0.6399999856948853,
+                1.3470001220703125,
+                1.8969999551773071
+              ],
+              "size": [
+                0.3799999952316284,
+                0.03400015830993652,
+                0.03400003910064697
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "seat-09-handle"
+          },
+          {
+            "collisionId": "seat-09-pedestal",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -0.8799999952316284,
+                0.375,
+                2.0399999618530273
+              ],
+              "max": [
+                -0.7799999713897705,
+                0.7450000047683716,
+                2.1599998474121094
+              ],
+              "size": [
+                0.10000002384185791,
+                0.3700000047683716,
+                0.11999988555908203
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "seat-09-pedestal"
+          },
+          {
+            "collisionId": "seat-10-handle",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.6399999856948853,
+                1.312999963760376,
+                1.8629999160766602
+              ],
+              "max": [
+                1.0199999809265137,
+                1.3470001220703125,
+                1.8969999551773071
+              ],
+              "size": [
+                0.3799999952316284,
+                0.03400015830993652,
+                0.03400003910064697
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "seat-10-handle"
+          },
+          {
+            "collisionId": "seat-10-pedestal",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.7799999713897705,
+                0.375,
+                2.0399999618530273
+              ],
+              "max": [
+                0.8799999952316284,
+                0.7450000047683716,
+                2.1599998474121094
+              ],
+              "size": [
+                0.10000002384185791,
+                0.3700000047683716,
+                0.11999988555908203
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "seat-10-pedestal"
+          },
+          {
+            "collisionId": "steering-column",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.6649999618530273,
+                0.8830024600028992,
+                5.069404602050781
+              ],
+              "max": [
+                0.7350000143051147,
+                1.186997413635254,
+                5.280595302581787
+              ],
+              "size": [
+                0.0700000524520874,
+                0.30399495363235474,
+                0.21119070053100586
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "steering-column"
+          },
+          {
+            "collisionId": "steering-wheel",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.5199999809265137,
+                1.1699999570846558,
+                5.070000171661377
+              ],
+              "max": [
+                0.8799999952316284,
+                1.2000000476837158,
+                5.429999828338623
+              ],
+              "size": [
+                0.36000001430511475,
+                0.03000009059906006,
+                0.3599996566772461
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "steering-wheel"
+          },
+          {
+            "collisionId": "stop-bell",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -0.5379999876022339,
+                1.25,
+                1.899999976158142
+              ],
+              "max": [
+                -0.492000013589859,
+                1.350000023841858,
+                2
+              ],
+              "size": [
+                0.04599997401237488,
+                0.10000002384185791,
+                0.10000002384185791
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "stop-bell"
+          },
+          {
+            "collisionId": "upright-rail",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -0.5428253412246704,
+                0.36000001430511475,
+                -4.52400016784668
+              ],
+              "max": [
+                -0.49717462062835693,
+                2.299999952316284,
+                -4.47599983215332
+              ],
+              "size": [
+                0.04565072059631348,
+                1.9399999380111694,
+                0.048000335693359375
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "upright-rail"
+          },
+          {
+            "collisionId": "upright-rail.001",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.49717462062835693,
+                0.36000001430511475,
+                -4.52400016784668
+              ],
+              "max": [
+                0.5428253412246704,
+                2.299999952316284,
+                -4.47599983215332
+              ],
+              "size": [
+                0.04565072059631348,
+                1.9399999380111694,
+                0.048000335693359375
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "upright-rail.001"
+          },
+          {
+            "collisionId": "upright-rail.002",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -0.5428253412246704,
+                0.36000001430511475,
+                -2.1740000247955322
+              ],
+              "max": [
+                -0.49717462062835693,
+                2.299999952316284,
+                -2.126000165939331
+              ],
+              "size": [
+                0.04565072059631348,
+                1.9399999380111694,
+                0.04799985885620117
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "upright-rail.002"
+          },
+          {
+            "collisionId": "upright-rail.003",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.49717462062835693,
+                0.36000001430511475,
+                -2.1740000247955322
+              ],
+              "max": [
+                0.5428253412246704,
+                2.299999952316284,
+                -2.126000165939331
+              ],
+              "size": [
+                0.04565072059631348,
+                1.9399999380111694,
+                0.04799985885620117
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "upright-rail.003"
+          },
+          {
+            "collisionId": "upright-rail.004",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -0.5428253412246704,
+                0.36000001430511475,
+                1.9259999990463257
+              ],
+              "max": [
+                -0.49717462062835693,
+                2.299999952316284,
+                1.974000096321106
+              ],
+              "size": [
+                0.04565072059631348,
+                1.9399999380111694,
+                0.04800009727478027
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "upright-rail.004"
+          },
+          {
+            "collisionId": "upright-rail.005",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.49717462062835693,
+                0.36000001430511475,
+                1.9259999990463257
+              ],
+              "max": [
+                0.5428253412246704,
+                2.299999952316284,
+                1.974000096321106
+              ],
+              "size": [
+                0.04565072059631348,
+                1.9399999380111694,
+                0.04800009727478027
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "upright-rail.005"
+          },
+          {
+            "collisionId": "upright-rail.006",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -0.5428253412246704,
+                0.36000001430511475,
+                3.4760000705718994
+              ],
+              "max": [
+                -0.49717462062835693,
+                2.299999952316284,
+                3.5239999294281006
+              ],
+              "size": [
+                0.04565072059631348,
+                1.9399999380111694,
+                0.04799985885620117
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "upright-rail.006"
+          },
+          {
+            "collisionId": "upright-rail.007",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.49717462062835693,
+                0.36000001430511475,
+                3.4760000705718994
+              ],
+              "max": [
+                0.5428253412246704,
+                2.299999952316284,
+                3.5239999294281006
+              ],
+              "size": [
+                0.04565072059631348,
+                1.9399999380111694,
+                0.04799985885620117
+              ]
+            },
+            "role": "obstacle",
+            "visibleNodeId": "upright-rail.007"
+          }
+        ],
+        "dynamicRule": "Transform each animated-door-leaf proxy by its frame keyframes; floor metadata remains vehicle-local."
+      },
+      "lodCapabilities": [
+        {
+          "level": 0,
+          "doorsAnimated": true,
+          "passengerCapable": true,
+          "openingsPreserved": true
+        },
+        {
+          "level": 1,
+          "doorsAnimated": true,
+          "passengerCapable": true,
+          "openingsPreserved": true
+        },
+        {
+          "level": 2,
+          "doorsAnimated": false,
+          "passengerCapable": false,
+          "openingsPreserved": false
+        }
+      ],
+      "composition": {
+        "frameId": "vehicle",
+        "exteriorFiles": [
+          "city-bus-12m-exterior.lod0.glb",
+          "city-bus-12m-exterior.lod1.glb",
+          "city-bus-12m-exterior.lod2.glb"
+        ],
+        "interiorFiles": [
+          "city-bus-12m-interior.lod0.glb",
+          "city-bus-12m-interior.lod1.glb"
+        ],
+        "collisionFiles": [],
+        "sharedTextureKey": null,
+        "sharedMaterialRoles": [
+          "floor",
+          "glass",
+          "lights",
+          "paint",
+          "panel",
+          "rail",
+          "rubber",
+          "seat"
+        ],
+        "lodMapping": [
+          {
+            "exterior": 0,
+            "interior": 0,
+            "boardingAllowed": true
+          },
+          {
+            "exterior": 1,
+            "interior": 1,
+            "boardingAllowed": true
+          },
+          {
+            "exterior": 2,
+            "interior": null,
+            "boardingAllowed": false
+          }
+        ]
+      }
+    }
+  ]
+}

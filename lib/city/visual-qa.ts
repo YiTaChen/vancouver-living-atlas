@@ -571,6 +571,76 @@ export function installVisualQA(e: CityEngine) {
         status.textContent=response.ok?`Saved ${name}`:`Capture failed ${response.status}`;
       }).catch((error)=>{status.textContent=String(error);});
   });
+  let busCheckpointSequence = 0;
+  button('Save integrated bus checkpoint', () => {
+    if (!runLease.begin()) return;
+    void (async () => {
+      try {
+        // screenshot() submits the real current render. Read renderer.info
+        // afterwards so the JSON and PNG describe that same submitted frame.
+        const screenshot = e.screenshot();
+        const snapshot = e.busVisit?.snapshot() ?? null;
+        const capturedAt = new Date().toISOString();
+        const stamp = capturedAt.toLowerCase().replace(/[^a-z0-9]/g, '');
+        const phase = snapshot?.phase ?? 'idle';
+        const view = (snapshot?.viewAnchor ?? 'exterior').replace(/[^a-z0-9-]/g, '-');
+        const hour = e.clock.hour.toFixed(2).replace('.', 'p');
+        const sequence = String(++busCheckpointSequence).padStart(3, '0');
+        const name = `bus-visit-${phase}-${view}-${hour}h-${stamp}-${sequence}`;
+        const row = {
+          kind: 'integrated-bus-checkpoint-v1',
+          id: name,
+          capturedAt,
+          valid: !document.hidden && !e.disposed && !e.pageSuspended && !e.contextLost,
+          snapshot,
+          busAssets: e.traffic?.busAssets.stats() ?? null,
+          fps: e.stats.fps,
+          settings: { ...e.settings },
+          hour: e.clock.hour,
+          night: e.uniforms.night.value,
+          viewport: [innerWidth, innerHeight],
+          render: [e.renderer.domElement.width, e.renderer.domElement.height],
+          pixelRatio: e.renderer.getPixelRatio(),
+          camera: {
+            position: e.camera.position.toArray(),
+            quaternion: e.camera.quaternion.toArray(),
+            target: e.controls.target.toArray(),
+            near: e.camera.near,
+            fov: e.camera.fov,
+          },
+          navigation: e.navigation ? {
+            mode: e.navigation.mode,
+            position: e.navigation.position.toArray(),
+            speedMps: e.navigation.speed,
+            surface: e.navigation.surface,
+            surfaceId: e.navigation.surfaceId,
+            layer: e.navigation.surfaceLayer,
+          } : null,
+          renderer: {
+            calls: e.renderer.info.render.calls,
+            triangles: e.renderer.info.render.triangles,
+            points: e.renderer.info.render.points,
+            lines: e.renderer.info.render.lines,
+            geometries: e.renderer.info.memory.geometries,
+            textures: e.renderer.info.memory.textures,
+          },
+          workerErrors: e.data.landmarkWorkerErrors ?? {},
+        };
+        output.value = JSON.stringify(row, null, 2);
+        const response = await fetch('/__visual-qa', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, row, screenshot }),
+        });
+        if (!response.ok) throw new Error(`Integrated bus save failed: ${response.status}`);
+        status.textContent = `Saved ${name}`;
+      } catch (error) {
+        status.textContent = String(error);
+      } finally {
+        runLease.end();
+      }
+    })();
+  });
   button('Drive speeding test', () => {
     if(!e.navigation)return;
     e.applySettings({...e.settings,mode:'drive',autoRotate:false});

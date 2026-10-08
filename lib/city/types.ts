@@ -1,5 +1,6 @@
 import type { VisualQuality } from './quality';
 import type { ClockState } from './clock';
+import type { BusVisitSnapshot } from './bus-visit';
 export type Coord = [number, number];
 export interface Feature {
   type?: string;
@@ -13,6 +14,7 @@ export interface TerrainData {
   [key: string]: any;
 }
 export interface SceneStats {
+  busVisit?: BusVisitSnapshot;
   effectiveQuality?: VisualQuality;
   autoQuality?: {
     resolutionScale: number;

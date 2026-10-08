@@ -5,6 +5,7 @@ import { createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 import { verifyLandmarkWorker } from './verify-landmark-worker.mjs';
 import { verifyCityLifeIsolation } from './verify-city-life-isolation.mjs';
+import { verifyBusAdoption } from './verify-bus-adoption.mjs';
 
 /** Adopted payloads are an explicit path/hash inventory, not a directory exemption. */
 export async function verifyBlenderDeliveryIsolation(
@@ -238,7 +239,8 @@ export async function verifyFirebaseBuild(
     options.assetRoot,
   );
   const cityLife = await verifyCityLifeIsolation(root, options.cityLifeSource);
-  return { status: 'pass', blenderDelivery, cityLife };
+  const busAdoption = await verifyBusAdoption(root, options.busSource);
+  return { status: 'pass', blenderDelivery, cityLife, busAdoption };
 }
 
 if (
@@ -251,4 +253,5 @@ if (
   );
   console.log('Blender delivery isolation verified:', result.blenderDelivery);
   console.log('City-life runtime adoption verified:', result.cityLife);
+  console.log('Bus runtime adoption verified:', result.busAdoption);
 }

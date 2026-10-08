@@ -79,6 +79,7 @@ import { createHarbour, updateHarbour, type Harbour } from './harbour';
 import { addSailingWaves } from './water-waves';
 import type { HarbourKind } from './harbour-path';
 import landmarkFootprints from './landmark-footprints.json';
+import { BusCabinVisit } from './bus-visit';
 import {
   createNature,
   createStreetDetails,
@@ -183,6 +184,7 @@ export class CityEngine {
   harbour: Harbour | null = null;
   sailingWaves: ReturnType<typeof addSailingWaves> | null = null;
   navigation: StreetNavigation | null = null;
+  busVisit: BusCabinVisit | null = null;
   flight: FlightController | null = null;
   onFlightMode: (mode: 'orbit' | 'flight') => void = () => {};
   placement: MapPlacement | null = null;
@@ -625,6 +627,12 @@ export class CityEngine {
       this.startupQA?.phase('controller.navigation');
     }
     this.navigation = new StreetNavigation(this);
+    this.busVisit = new BusCabinVisit(
+      this,
+      this.traffic.busAssets,
+      this.traffic.busRoutes,
+    );
+    this.busVisit.onChange = () => this.publishBusVisit();
     this.pedestrians = new CityPedestrians(this);
     this.pedestrians.setHidden(document.hidden || this.pageSuspended);
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
@@ -1277,6 +1285,7 @@ export class CityEngine {
     createRoadSurfaces(this);
   }
   flyTo(id: string, animate = true) {
+    if (!this.closeBusVisit()) return;
     if (this.flight?.attached) this.flight.detach();
     this.placement?.cancel();
     const v = VIEWS.find((p) => p.id === id) || VIEWS[0];
@@ -1322,6 +1331,7 @@ export class CityEngine {
     finishLocalMapTransition(this);
   }
   leaveTravelAtLocation(remember = false) {
+    if (!this.closeBusVisit()) return;
     if (this.flight?.attached) {
       this.flight.detach();
       return;
@@ -1330,6 +1340,7 @@ export class CityEngine {
     this.onLocalOrbit();
   }
   zoom(f: number) {
+    if (this.busVisit?.aboard) return;
     if (this.flight?.attached) {
       this.flight.zoom(f);
       return;
@@ -1349,6 +1360,7 @@ export class CityEngine {
     this.travelReturn?.update();
   }
   focusTrain(kind: TrainKind) {
+    if (!this.closeBusVisit()) return;
     if (this.flight?.attached) this.flight.detach();
     this.travelReturn?.invalidate(true);
     this.completeLocalMapTransition();
@@ -1391,6 +1403,7 @@ export class CityEngine {
     };
   }
   focusHarbour(kind: HarbourKind) {
+    if (!this.closeBusVisit()) return;
     if (this.flight?.attached) this.flight.detach();
     this.travelReturn?.invalidate(true);
     this.completeLocalMapTransition();
@@ -1416,7 +1429,44 @@ export class CityEngine {
       toTarget: target,
     };
   }
+  async visitBusInterior() {
+    if (!this.busVisit || this.disposed) return false;
+    if (!this.closeBusVisit()) return false;
+    this.placement?.cancel();
+    this.flight?.clear();
+    const prepared = await this.busVisit.prepare();
+    if (this.disposed) return false;
+    if (prepared) {
+      this.settings = {
+        ...this.settings,
+        mode: 'walk',
+        traffic: true,
+        autoRotate: false,
+      };
+      this.trafficGroup.visible = true;
+      this.controls.autoRotate = false;
+      this.onTravelResume('walk');
+    }
+    this.publishBusVisit();
+    return prepared;
+  }
+  publishBusVisit() {
+    if (this.disposed) return;
+    this.stats.busVisit = this.busVisit?.snapshot();
+    this.onStats({ ...this.stats });
+  }
+  closeBusVisit() {
+    const closed = this.busVisit?.close() ?? true;
+    this.publishBusVisit();
+    return closed;
+  }
   applySettings(settings: Settings) {
+    if (
+      this.busVisit &&
+      (settings.mode !== 'walk' || !settings.traffic) &&
+      !this.closeBusVisit()
+    )
+      return;
     const automatic = settings.qualityMode === 'auto';
     const preferenceChanged =
       automatic !== (this.settings.qualityMode === 'auto');
@@ -1587,8 +1637,9 @@ export class CityEngine {
       );
     if (this.settings.mode === 'orbit') {
       if (!this.transition) this.controls.update();
-    } else if (this.settings.mode !== 'flight')
+    } else if (this.settings.mode !== 'flight' && !this.busVisit?.aboard)
       this.navigation?.update((time - this.lastTime) / 1000);
+    this.busVisit?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
     this.flight?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
     this.updateAutoQuality(time, this.lastTime ? time - this.lastTime : 0);
     this.pedestrians?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
@@ -1656,6 +1707,13 @@ export class CityEngine {
       this.stats.renderHeight = this.renderer.domElement.height;
       this.stats.fps = Math.round((this.frames * 1000) / (time - this.fpsAt));
       this.stats.trafficStop = this.navigation?.trafficStop?.caption || '';
+      this.stats.busVisit = this.busVisit?.snapshot();
+      this.renderer.domElement.dataset.busVisit = JSON.stringify(
+        this.stats.busVisit ?? null,
+      );
+      this.renderer.domElement.dataset.busAssets = JSON.stringify(
+        this.traffic?.busAssets.stats() ?? null,
+      );
       this.stats.speed = Math.round(
         (this.flight?.attached
           ? this.flight.state?.speed || 0
@@ -1837,6 +1895,8 @@ export class CityEngine {
     this.pedestrians?.dispose();
     this.pedestrians = null;
     this.flight?.destroy();
+    this.busVisit?.dispose();
+    this.busVisit = null;
     this.navigation?.destroy();
     this.placement?.destroy();
     this.controls?.dispose();
@@ -1846,6 +1906,7 @@ export class CityEngine {
     this.landmarkWorker?.dispose();
     this.detailedTrees?.dispose();
     this.traffic?.vehicleAssets?.dispose();
+    this.traffic?.busAssets?.dispose();
     this.facadeDetails?.dispose();
     this.architecturalDetails?.dispose();
     this.streetscapeKit?.dispose();

@@ -1,0 +1,66 @@
+{
+  "date": "2026-10-08",
+  "parentRevision": "6f1e463f32d5fc85abad49e455efedf60192c2c8",
+  "sourceFingerprint": "54ce5ba3e7323d3cb11daa4b68c59a8164f60348cc62aab94675f2518959b050",
+  "captureCount": 11,
+  "automatedTests": {
+    "total": 943,
+    "pass": 943,
+    "fail": 0
+  },
+  "checks": {
+    "coldOverviewNoBusRequests": true,
+    "actualDoorsAndBoarding": true,
+    "previewPreservesPassengerAnchor": true,
+    "rearAlightingRestoresGround": true,
+    "publicUltraAndAutoWhileAboard": true,
+    "publicDriveClosesOccupiedVisit": true,
+    "nearFleetRendered": true,
+    "threePublicVisitCycles": true,
+    "webglWarningsOrErrors": []
+  },
+  "responsive": {
+    "physicalDeviceTest": false,
+    "portrait": {
+      "width": 390,
+      "height": 844,
+      "boarded": true,
+      "joystickHiddenAboard": true
+    },
+    "landscape": {
+      "width": 844,
+      "height": 390,
+      "panelBounds": [
+        277,
+        106,
+        567,
+        344.5
+      ],
+      "primaryBounds": [
+        290,
+        287.5,
+        554,
+        331.5
+      ],
+      "horizontalOverflow": false,
+      "alighted": true
+    }
+  },
+  "limits": {
+    "performanceBenchmark": false,
+    "movingBusService": false,
+    "dynamicTrafficCollisionAcceptance": false,
+    "longSessionAcceptance": false
+  },
+  "screenshots": {
+    "day-cabin.png": "bus-visit-aboard-main-aisle-14p00h-20261008t175309662z-002.png",
+    "night-seat.png": "bus-visit-aboard-seat-09-23p00h-20261008t175328749z-004.png",
+    "near-fleet.png": "bus-visit-idle-exterior-14p00h-20261008t175519364z-011.png"
+  },
+  "productionSmoke": {
+    "build": "npm run build:firebase",
+    "publicPrepareBoardAlightClose": true,
+    "qaPanelCount": 0,
+    "consoleWarningsOrErrors": []
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "revision": "6f1e463f32d5fc85abad49e455efedf60192c2c8",
+  "sourceFingerprint": "54ce5ba3e7323d3cb11daa4b68c59a8164f60348cc62aab94675f2518959b050",
+  "kind": "integrated-bus-checkpoint-v1",
+  "id": "bus-visit-idle-exterior-14p00h-20261008t175459432z-010",
+  "capturedAt": "2026-10-08T17:54:59.432Z",
+  "valid": true,
+  "snapshot": {
+    "phase": "idle",
+    "status": "idle",
+    "loading": false,
+    "error": null,
+    "aboard": false,
+    "doorsOpen": false,
+    "canBoard": false,
+    "canAlight": false,
+    "anchors": [],
+    "viewAnchor": null,
+    "previewAnchor": null,
+    "passengerAnchor": null,
+    "routeIndex": null
+  },
+  "busAssets": {
+    "status": "ready",
+    "nearActors": 1,
+    "routeActors": 26,
+    "nearCapacity": 4,
+    "allocatedBatches": 8,
+    "populatedBatches": 8,
+    "triangles": 2618,
+    "textures": 0,
+    "materials": 8,
+    "loadedTemplates": 4,
+    "assetBytes": 775256,
+    "boardableStatus": "idle",
+    "boardableOwners": 0,
+    "updates": 6774,
+    "errors": [],
+    "disposed": false
+  },
+  "fps": 48,
+  "settings": {
+    "trees": true,
+    "buildings": true,
+    "labels": true,
+    "traffic": true,
+    "trains": true,
+    "harbour": true,
+    "terrain": true,
+    "autoRotate": false,
+    "quality": "balanced",
+    "qualityMode": "auto",
+    "mode": "drive"
+  },
+  "hour": 14,
+  "night": 0,
+  "viewport": [
+    1280,
+    720
+  ],
+  "render": [
+    1280,
+    720
+  ],
+  "pixelRatio": 1,
+  "camera": {
+    "position": [
+      526.9336891607574,
+      41.44786358060547,
+      191.3705458793014
+    ],
+    "quaternion": [
+      -0.13190314446646453,
+      0.3787631306150662,
+      0.05463607135766719,
+      0.9144150868577865
+    ],
+    "target": [
+      502.9336891607574,
+      31.44786358060547,
+      167.3705458793014
+    ],
+    "near": 2,
+    "fov": 42
+  },
+  "navigation": {
+    "mode": "orbit",
+    "position": [
+      19.19848951111548,
+      12.875032187940217,
+      -406.97146642367346
+    ],
+    "speedMps": 0,
+    "surface": "ground",
+    "surfaceId": "ground",
+    "layer": 0
+  },
+  "renderer": {
+    "calls": 498,
+    "triangles": 2744762,
+    "points": 0,
+    "lines": 0,
+    "geometries": 861,
+    "textures": 44
+  },
+  "workerErrors": {}
+}
