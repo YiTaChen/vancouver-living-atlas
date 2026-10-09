@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "scope": "Only runtime-candidate files. Excludes this self-referential inventory, Python caches and Blender backups. Detailed master has a separate inventory.",
+  "fileCount": 35,
+  "totalBytes": 6562032,
+  "files": [
+    {
+      "file": "README.zh-TW.md",
+      "bytes": 7486,
+      "sha256": "688b36d266140cc7cb86b6ad2a3132e9a2ce30bc7eca3637fd2f99c36f233c3f"
+    },
+    {
+      "file": "adapter.test.mjs",
+      "bytes": 3406,
+      "sha256": "c7c00c45d2576531311643e13a6bca9dabe87fbdd13e9b569df9e301ccc91c3d"
+    },
+    {
+      "file": "compose.mjs",
+      "bytes": 2884,
+      "sha256": "09e18d45adee7ab89cb30dfe077513fff173e6a4873907a366b3aa07eec9f076"
+    },
+    {
+      "file": "derive.py",
+      "bytes": 4320,
+      "sha256": "be5ab59320571fc15dd21ca80db1b82b1802498357a4ab186c381083fd6727d0"
+    },
+    {
+      "file": "export.py",
+      "bytes": 4232,
+      "sha256": "16b6b7c0213d95c7ad0e890a68dc74a41cac40235730783c9256cd7d65908ece"
+    },
+    {
+      "file": "exports/city-bus-12m-interior-v2-runtime.lod0.components.json",
+      "bytes": 367912,
+      "sha256": "fc063772f14f8b21f08f76eb098038ab03ffbe25a4eed29876b8108cd30fb783"
+    },
+    {
+      "file": "exports/city-bus-12m-interior-v2-runtime.lod0.glb",
+      "bytes": 736884,
+      "sha256": "76302cf2d45d5c027a412c6087231b65605d982b3ec2634942b6910ab002c096"
+    },
+    {
+      "file": "exports/city-bus-12m-interior-v2-runtime.lod1.components.json",
+      "bytes": 200909,
+      "sha256": "fd656101f5c81f6b25051a5e592f2f12888cda369a88875b3c8c1fc383133bcd"
+    },
+    {
+      "file": "exports/city-bus-12m-interior-v2-runtime.lod1.glb",
+      "bytes": 202492,
+      "sha256": "6d5ab5aa5d7074d7c844a48d88dbc4a4e2fd5c3f07b24b0aa6f0f4fcce0ba587"
+    },
+    {
+      "file": "finalize.py",
+      "bytes": 4812,
+      "sha256": "8de87f1f0fa2813838a0fc105e979af564224290e4b8cae32ab36eacdbb127d1"
+    },
+    {
+      "file": "geometry.py",
+      "bytes": 3629,
+      "sha256": "a90a091163f43c5a96fe654db35ce1ca4e364b6607d5d8b156c5b6ab718ed44d"
+    },
+    {
+      "file": "manifest.json",
+      "bytes": 498034,
+      "sha256": "84c358c33e2a76dd2274bb41cb9443c3c4e0f3d923f59b0038595ae6d6a1a413"
+    },
+    {
+      "file": "qa/adapter-tests.txt",
+      "bytes": 722,
+      "sha256": "46af8aefbda519774cc0607771f043805df5dbcbf3de1e3e24a48f7c9299bddb"
+    },
+    {
+      "file": "qa/blender-validation.json",
+      "bytes": 2521,
+      "sha256": "7b3eec0b20822f31ae4b61fc153bceed2cb4ac3c06a60f7bee36a4e42d7ee08f"
+    },
+    {
+      "file": "qa/common-validation.json",
+      "bytes": 6789,
+      "sha256": "faa476cec3e872b54f82eef9872b817ce6b1069fec91be8b7cb3523f1cff9287"
+    },
+    {
+      "file": "qa/derivation-lod0.json",
+      "bytes": 63638,
+      "sha256": "59b7526520dfc5b382583ddca56b7333341a6ac6b0fecbf5cefe9d4be70d6759"
+    },
+    {
+      "file": "qa/derivation-lod1.json",
+      "bytes": 42168,
+      "sha256": "a34d2340a6a751b9566745d9e564bd302ad1d321b67db14c99a2200dbae7cfd2"
+    },
+    {
+      "file": "qa/handoff.json",
+      "bytes": 2564,
+      "sha256": "74a1387eab8700d4864b9c1056438697c94b0beb6d604f3ec4a8317432a81417"
+    },
+    {
+      "file": "qa/js-lint.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "qa/measurements.json",
+      "bytes": 6335,
+      "sha256": "56ca68cb0a78d0edbbb0b377b86bd3448d63c6e03dad0c0fb7d06fdc6f0576a7"
+    },
+    {
+      "file": "qa/previews/cutaway-layout-lod0.png",
+      "bytes": 684203,
+      "sha256": "6ca164f04614957314bb8379902cfa7b49735fa08946232d556207050c043005"
+    },
+    {
+      "file": "qa/previews/cutaway-layout-lod1.png",
+      "bytes": 672307,
+      "sha256": "6a003b1df09d17f7c5a1ba71d3c48be6750612d781fd6e6740bd1179164c42bc"
+    },
+    {
+      "file": "qa/previews/front-lowfloor-looking-front-lod0.png",
+      "bytes": 1272637,
+      "sha256": "525fa73f70f24e67a8313e2e9685cbbc41d80927adf5c32e7a82e964e3a970c2"
+    },
+    {
+      "file": "qa/previews/front-priority-overview-lod1.png",
+      "bytes": 1248196,
+      "sha256": "b5cda44ff61d5c81c4105002124d62e9b6a7c0ee2d36e4b37470608f4bed938f"
+    },
+    {
+      "file": "qa/previews/index.json",
+      "bytes": 3538,
+      "sha256": "9423f911918b0a71bc2273b0862145d6178dc15a3cc1055d3e9666e2ce1fe8be"
+    },
+    {
+      "file": "qa/provenance.json",
+      "bytes": 3160,
+      "sha256": "1f7e218b5cf503091fb730c1c7b00470047099e956428b6649f721505b92399f"
+    },
+    {
+      "file": "qa/regression-tests.txt",
+      "bytes": 4079,
+      "sha256": "b26921afc3908013cedce543a836ac5474f599d61bcca8b2e68bc6932dfa1ecc"
+    },
+    {
+      "file": "qa/validation.json",
+      "bytes": 9405,
+      "sha256": "de3779ca6cbee69cce72b247e29537d4a49c24074f63ce25c9705a33304d9f5f"
+    },
+    {
+      "file": "qa/visual-review.json",
+      "bytes": 4400,
+      "sha256": "005cd18f93f3b53362e57d658ed2b64aa435666b24163ee18655f6646827704c"
+    },
+    {
+      "file": "qa_blender.py",
+      "bytes": 7052,
+      "sha256": "255f12f9210a23c3e87f0ad809a08d5f4e305fd06799733d9d37e08ba7818357"
+    },
+    {
+      "file": "source/city-bus-12m-interior-v2-runtime.lod0.blend",
+      "bytes": 268481,
+      "sha256": "14380cb79039bc76c8e4ebcf97c48f084e8e71c9ced844fa56888ae869828a5d"
+    },
+    {
+      "file": "source/city-bus-12m-interior-v2-runtime.lod1.blend",
+      "bytes": 195925,
+      "sha256": "e0d1696f685b04c591e5421437b1bf487a428263156aa9e622a3611e8559b640"
+    },
+    {
+      "file": "test_candidate.py",
+      "bytes": 10253,
+      "sha256": "d9c2379a81ddea7ffbd210da71a5266823d58d6e1d1b5e7d2f596200c6ef22d5"
+    },
+    {
+      "file": "threshold_support.py",
+      "bytes": 2456,
+      "sha256": "054acd1a11c68f27fb32a73598249d3600be70f7cb46da23700b7cf4f0c50223"
+    },
+    {
+      "file": "validate.py",
+      "bytes": 14203,
+      "sha256": "c61202c27ab644f4cd530f6dd140cb09df13d5344eaf7a4f8a0440d71d6be63c"
+    }
+  ]
+}

@@ -1,0 +1,383 @@
+{
+  "coordinateSystem": "glTF metres +Y up +Z observation end; floor Y=0",
+  "bodyModuleLengthM": 15.6,
+  "interiorWallWidthM": 2.49,
+  "centerCeilingHeightM": 2.265,
+  "doorCentersZ": [
+    -4.9,
+    0,
+    4.9
+  ],
+  "doorWidthM": 1.52,
+  "doorHeightM": 2.09,
+  "gangwayWidthM": 1.4,
+  "gangwayEndZ": -8.52,
+  "seats": [
+    {
+      "id": "seat-long-left-1",
+      "originXZ": [
+        1.105,
+        -3.56
+      ],
+      "facingXZ": [
+        -1,
+        0
+      ],
+      "pelvisM": [
+        0.945,
+        0.55,
+        -3.56
+      ]
+    },
+    {
+      "id": "seat-long-left-2",
+      "originXZ": [
+        1.105,
+        -3.08
+      ],
+      "facingXZ": [
+        -1,
+        0
+      ],
+      "pelvisM": [
+        0.945,
+        0.55,
+        -3.08
+      ]
+    },
+    {
+      "id": "seat-long-left-3",
+      "originXZ": [
+        1.105,
+        -2.6
+      ],
+      "facingXZ": [
+        -1,
+        0
+      ],
+      "pelvisM": [
+        0.945,
+        0.55,
+        -2.6
+      ]
+    },
+    {
+      "id": "seat-long-left-4",
+      "originXZ": [
+        1.105,
+        -2.12
+      ],
+      "facingXZ": [
+        -1,
+        0
+      ],
+      "pelvisM": [
+        0.945,
+        0.55,
+        -2.12
+      ]
+    },
+    {
+      "id": "seat-long-left-5",
+      "originXZ": [
+        1.105,
+        -1.6400000000000001
+      ],
+      "facingXZ": [
+        -1,
+        0
+      ],
+      "pelvisM": [
+        0.945,
+        0.55,
+        -1.6400000000000001
+      ]
+    },
+    {
+      "id": "seat-single-right-1",
+      "originXZ": [
+        -0.91,
+        1.31
+      ],
+      "facingXZ": [
+        0,
+        1
+      ],
+      "pelvisM": [
+        -0.91,
+        0.55,
+        1.47
+      ]
+    },
+    {
+      "id": "seat-single-right-2",
+      "originXZ": [
+        -0.91,
+        2.22
+      ],
+      "facingXZ": [
+        0,
+        1
+      ],
+      "pelvisM": [
+        -0.91,
+        0.55,
+        2.3800000000000003
+      ]
+    },
+    {
+      "id": "seat-single-right-3",
+      "originXZ": [
+        -0.91,
+        3.13
+      ],
+      "facingXZ": [
+        0,
+        1
+      ],
+      "pelvisM": [
+        -0.91,
+        0.55,
+        3.29
+      ]
+    },
+    {
+      "id": "seat-single-rear-left-1",
+      "originXZ": [
+        0.91,
+        -7.02
+      ],
+      "facingXZ": [
+        0,
+        1
+      ],
+      "pelvisM": [
+        0.91,
+        0.55,
+        -6.859999999999999
+      ]
+    },
+    {
+      "id": "seat-single-rear-left-2",
+      "originXZ": [
+        0.91,
+        -6.289999999999999
+      ],
+      "facingXZ": [
+        0,
+        1
+      ],
+      "pelvisM": [
+        0.91,
+        0.55,
+        -6.129999999999999
+      ]
+    },
+    {
+      "id": "seat-single-rear-left-3",
+      "originXZ": [
+        0.91,
+        -5.56
+      ],
+      "facingXZ": [
+        0,
+        1
+      ],
+      "pelvisM": [
+        0.91,
+        0.55,
+        -5.3999999999999995
+      ]
+    },
+    {
+      "id": "seat-paired-rear-0-0",
+      "originXZ": [
+        -0.96,
+        -6.95
+      ],
+      "facingXZ": [
+        0,
+        1
+      ],
+      "pelvisM": [
+        -0.96,
+        0.55,
+        -6.79
+      ]
+    },
+    {
+      "id": "seat-paired-rear-0-1",
+      "originXZ": [
+        -0.49,
+        -6.95
+      ],
+      "facingXZ": [
+        0,
+        1
+      ],
+      "pelvisM": [
+        -0.49,
+        0.55,
+        -6.79
+      ]
+    },
+    {
+      "id": "seat-paired-rear-1-0",
+      "originXZ": [
+        -0.96,
+        -6.1
+      ],
+      "facingXZ": [
+        0,
+        1
+      ],
+      "pelvisM": [
+        -0.96,
+        0.55,
+        -5.9399999999999995
+      ]
+    },
+    {
+      "id": "seat-paired-rear-1-1",
+      "originXZ": [
+        -0.49,
+        -6.1
+      ],
+      "facingXZ": [
+        0,
+        1
+      ],
+      "pelvisM": [
+        -0.49,
+        0.55,
+        -5.9399999999999995
+      ]
+    },
+    {
+      "id": "seat-front-left-0",
+      "originXZ": [
+        1.105,
+        6.44
+      ],
+      "facingXZ": [
+        -1,
+        0
+      ],
+      "pelvisM": [
+        0.945,
+        0.55,
+        6.44
+      ]
+    },
+    {
+      "id": "seat-front-left-1",
+      "originXZ": [
+        1.105,
+        6.92
+      ],
+      "facingXZ": [
+        -1,
+        0
+      ],
+      "pelvisM": [
+        0.945,
+        0.55,
+        6.92
+      ]
+    },
+    {
+      "id": "seat-front-left-transverse",
+      "originXZ": [
+        0.85,
+        5.91
+      ],
+      "facingXZ": [
+        0,
+        -1
+      ],
+      "pelvisM": [
+        0.85,
+        0.55,
+        5.75
+      ]
+    },
+    {
+      "id": "seat-front-right",
+      "originXZ": [
+        -1.105,
+        6.92
+      ],
+      "facingXZ": [
+        1,
+        0
+      ],
+      "pelvisM": [
+        -0.945,
+        0.55,
+        6.92
+      ]
+    },
+    {
+      "id": "seat-front-pair-0",
+      "originXZ": [
+        -0.95,
+        5.91
+      ],
+      "facingXZ": [
+        0,
+        -1
+      ],
+      "pelvisM": [
+        -0.95,
+        0.55,
+        5.75
+      ]
+    },
+    {
+      "id": "seat-front-pair-1",
+      "originXZ": [
+        -0.48,
+        5.91
+      ],
+      "facingXZ": [
+        0,
+        -1
+      ],
+      "pelvisM": [
+        -0.48,
+        0.55,
+        5.75
+      ]
+    },
+    {
+      "id": "seat-observation",
+      "originXZ": [
+        0,
+        6.37
+      ],
+      "facingXZ": [
+        0,
+        1
+      ],
+      "pelvisM": [
+        0.0,
+        0.55,
+        6.53
+      ]
+    }
+  ],
+  "seatCount": 22,
+  "surveyed": false,
+  "officialFacts": {
+    "model": "Alstom Mark V",
+    "lineAtIntroduction": "Expo",
+    "serviceIntroduction": "2025-07-10",
+    "trainLengthM": 84.8,
+    "cars": 5
+  },
+  "runtimeBinding": "none",
+  "note": "A-car visual study. Individual car dimensions, seat coordinates and gangway dimensions are authoring assumptions, not full engineering survey. Two flex bays based on end-car diagram. No existing vehicle profile reused.",
+  "layoutReconciliation": "22 seats match official A-car regional counts (7 front / 3 singles / 5 longitudinal / 7 rear). Precise orientation and placement are approximate; not measured or full train capacity.",
+  "gangwayHeaderUndersideM": 2.075,
+  "gangwayHeightBasis": "Representative header raised 60 mm to exceed 2.05 m target; no surveyed constraint"
+}

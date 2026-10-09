@@ -1,0 +1,38 @@
+{
+  "status": "pass",
+  "scope": "offline sampled static corridor only",
+  "lods": [
+    {
+      "lod": 0,
+      "status": "pass",
+      "capsuleHeightM": 1.95,
+      "radiusM": 0.25,
+      "aislePath": {
+        "xM": 0.33,
+        "zMinM": -7.4,
+        "zMaxM": 5.35,
+        "samples": 257
+      },
+      "gangwayCentralSamples": 3,
+      "gangwayTestHeightM": 2.05,
+      "method": "Conservative component AABBs plus barycentric support-height intersections on actual floor/bridge triangles, independently from GLB binary ranges",
+      "limits": "No door traversal, seated ingress, moving collision, platform binding, accessibility certification or front-salon free-walk validation"
+    },
+    {
+      "lod": 1,
+      "status": "pass",
+      "capsuleHeightM": 1.95,
+      "radiusM": 0.25,
+      "aislePath": {
+        "xM": 0.33,
+        "zMinM": -7.4,
+        "zMaxM": 5.35,
+        "samples": 257
+      },
+      "gangwayCentralSamples": 3,
+      "gangwayTestHeightM": 2.05,
+      "method": "Conservative component AABBs plus barycentric support-height intersections on actual floor/bridge triangles, independently from GLB binary ranges",
+      "limits": "No door traversal, seated ingress, moving collision, platform binding, accessibility certification or front-salon free-walk validation"
+    }
+  ]
+}

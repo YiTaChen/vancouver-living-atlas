@@ -15,11 +15,11 @@ const bind = (manifest, lod) =>
     lod,
   );
 
-test('bus-v2: composed LOD0 and LOD1 bind the actual 23 seats and one safe standing anchor', () => {
+test('bus-v2: composed LOD0 and LOD1 bind the actual 24 seats and one safe standing anchor', () => {
   for (const lod of [0, 1]) {
     const m = composeBusV2();
     const c = bind(m, lod);
-    assert.equal(c.anchors.filter((a) => a.datum === 'pelvis').length, 23);
+    assert.equal(c.anchors.filter((a) => a.datum === 'pelvis').length, 24);
     assert.equal(c.anchors.filter((a) => a.datum === 'feet').length, 1);
     assert.equal(c.assetRefs.exterior, 'city-bus-12m-exterior');
     assert.equal(c.assetRefs.interior, 'city-bus-12m-interior-v2');
@@ -45,4 +45,31 @@ test('bus-v2: adapter rejects unresolved dependency asset IDs', () => {
   const m = composeBusV2();
   m.assets = m.assets.filter((a) => a.id !== 'city-bus-12m-exterior');
   assert.throws(() => bind(m, 0), /asset reference missing/);
+});
+
+test('bus-v2: actual adapter preserves inward priority-seat yaw and camera anchors', () => {
+  for (const lod of [0, 1]) {
+    const m = composeBusV2();
+    const c = bind(m, lod);
+    const priority = m.vehicles[0].seats.filter(
+      (s) => s.group === 'low-floor-priority-left',
+    );
+    assert.equal(priority.length, 3);
+    for (const s of priority) {
+      const a = c.anchors.find((a) => a.anchor.anchorId === s.seatId);
+      assert.deepEqual(a.anchor.rotationQuaternionXYZW, s.facingQuaternionXYZW);
+      assert.ok(a.anchor.rotationQuaternionXYZW[1] < -0.7);
+      assert.deepEqual(a.cameraEyePointM, s.cameraEyePointM);
+      assert.ok(a.cameraEyePointM[0] < a.anchor.translationM[0]);
+    }
+    assert.equal(
+      c.anchors.filter((a) => a.anchor.anchorId.includes('stowed')).length,
+      0,
+    );
+  }
+});
+test('bus-v2: adapter rejects a non-unit priority-seat rotation', () => {
+  const m = composeBusV2();
+  m.vehicles[0].seats.at(-1).facingQuaternionXYZW = [0, -1, 0, 1];
+  assert.throws(() => bind(m, 0), /Invalid metadata rotation/);
 });

@@ -23,6 +23,17 @@ class BusV2Tests(unittest.TestCase):
  def test_lod2_boarding_rejected(self):self.reject(lambda m:m['vehicles'][0]['composition']['lodMapping'][2].__setitem__('boardingAllowed',True),'LOD2 capability')
  def test_fake_triangle_count_rejected(self):self.reject(lambda m:m['assets'][0]['lods'][0].__setitem__('triangles',1),'measured triangles')
  def test_missing_collision_rejected(self):self.reject(lambda m:m['vehicles'][0]['collision']['primitives'].pop(0),'collision coverage')
+ def test_sideways_seat_identity_rotation_rejected(self):self.reject(lambda m:m['vehicles'][0]['seats'][-1].__setitem__('facingQuaternionXYZW',[0,0,0,1]),'orientation geometry')
+ def test_sideways_camera_in_wrong_direction_rejected(self):self.reject(lambda m:m['vehicles'][0]['seats'][-1]['cameraEyePointM'].__setitem__(2,2.2),'seat anchor')
+ def test_stowed_seats_counted_as_active_rejected(self):self.reject(lambda m:m['vehicles'][0]['interiorLayout'].__setitem__('stowedPlacesArePassengerAnchors',True),'active versus stowed')
+ def test_bright_blue_material_claim_rejected(self):self.reject(lambda m:m['assets'][0]['appearance'].__setitem__('baseColorLinearRGBA',[.018,.14,.40,1]),'navy upholstery')
+ def test_wrong_front_topology_rejected(self):self.reject(lambda m:m['vehicles'][0]['seats'][-1].__setitem__('group','low-floor-forward'),'priority seat topology')
+ def test_duplicate_glb_identity_rejected(self):
+  doc,_=V.C.read_glb(HERE/self.manifest['assets'][0]['lods'][0]['file']);doc['nodes'].append(copy.deepcopy(next(n for n in doc['nodes'] if n['name']=='seat-22')))
+  with self.assertRaisesRegex(AssertionError,'GLB node identity'):V.validate_node_identities(doc)
+ def test_nonidentity_export_root_rejected(self):
+  scenes=copy.deepcopy(self.scenes);scenes[0]['vehicle']['matrix'][12]=.01
+  with self.assertRaisesRegex(AssertionError,'GLB vehicle root'):V.validate_contract(self.manifest,scenes=scenes)
  def test_corrupt_glb_rejected(self):
   with tempfile.TemporaryDirectory() as td:
    p=Path(td)/'bad.glb';p.write_bytes(b'glTF'+b'\0'*30)

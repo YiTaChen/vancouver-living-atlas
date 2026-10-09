@@ -1,0 +1,134 @@
+{
+  "status": "rendered_and_visually_reviewed",
+  "scope": "actual reduced GLB reimport, CPU offline only",
+  "renders": [
+    {
+      "file": "front-lowfloor-looking-front-lod0.png",
+      "sha256": "525fa73f70f24e67a8313e2e9685cbbc41d80927adf5c32e7a82e964e3a970c2",
+      "renderer": "Cycles CPU",
+      "samples": 32,
+      "resolution": [
+        896,
+        598
+      ],
+      "lod": 0,
+      "actualGLBInputs": [
+        {
+          "file": "exports/city-bus-12m-interior-v2-runtime.lod0.glb",
+          "sha256": "76302cf2d45d5c027a412c6087231b65605d982b3ec2634942b6910ab002c096"
+        },
+        {
+          "file": "../../boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        }
+      ],
+      "eyeVehicleM": [
+        0,
+        1.8,
+        0.15
+      ],
+      "targetVehicleM": [
+        0.1,
+        1.4,
+        4.9
+      ],
+      "qaOnlyCeilingCut": false,
+      "lighting": "daytime QA only, unchanged linear PBR and AgX exposure",
+      "WebGL": "not_run"
+    },
+    {
+      "file": "front-priority-overview-lod1.png",
+      "sha256": "b5cda44ff61d5c81c4105002124d62e9b6a7c0ee2d36e4b37470608f4bed938f",
+      "renderer": "Cycles CPU",
+      "samples": 32,
+      "resolution": [
+        896,
+        598
+      ],
+      "lod": 1,
+      "actualGLBInputs": [
+        {
+          "file": "exports/city-bus-12m-interior-v2-runtime.lod1.glb",
+          "sha256": "6d5ab5aa5d7074d7c844a48d88dbc4a4e2fd5c3f07b24b0aa6f0f4fcce0ba587"
+        },
+        {
+          "file": "../../boardable-bus/exports/city-bus-12m-exterior.lod1.glb",
+          "sha256": "a4ccbb6a4b2f032a4d950ee0883c51ebe1ecd314734b539c60aa5fd6c605b3f0"
+        }
+      ],
+      "eyeVehicleM": [
+        0,
+        1.87,
+        4.12
+      ],
+      "targetVehicleM": [
+        0,
+        1.03,
+        0.65
+      ],
+      "qaOnlyCeilingCut": false,
+      "lighting": "daytime QA only, unchanged linear PBR and AgX exposure",
+      "WebGL": "not_run"
+    },
+    {
+      "file": "cutaway-layout-lod0.png",
+      "sha256": "6ca164f04614957314bb8379902cfa7b49735fa08946232d556207050c043005",
+      "renderer": "Cycles CPU",
+      "samples": 32,
+      "resolution": [
+        896,
+        598
+      ],
+      "lod": 0,
+      "actualGLBInputs": [
+        {
+          "file": "exports/city-bus-12m-interior-v2-runtime.lod0.glb",
+          "sha256": "76302cf2d45d5c027a412c6087231b65605d982b3ec2634942b6910ab002c096"
+        }
+      ],
+      "eyeVehicleM": [
+        8.2,
+        8.8,
+        11.0
+      ],
+      "targetVehicleM": [
+        0,
+        1.0,
+        0.1
+      ],
+      "qaOnlyCeilingCut": true,
+      "lighting": "daytime QA only, unchanged linear PBR and AgX exposure",
+      "WebGL": "not_run"
+    },
+    {
+      "file": "cutaway-layout-lod1.png",
+      "sha256": "6a003b1df09d17f7c5a1ba71d3c48be6750612d781fd6e6740bd1179164c42bc",
+      "renderer": "Cycles CPU",
+      "samples": 32,
+      "resolution": [
+        896,
+        598
+      ],
+      "lod": 1,
+      "actualGLBInputs": [
+        {
+          "file": "exports/city-bus-12m-interior-v2-runtime.lod1.glb",
+          "sha256": "6d5ab5aa5d7074d7c844a48d88dbc4a4e2fd5c3f07b24b0aa6f0f4fcce0ba587"
+        }
+      ],
+      "eyeVehicleM": [
+        8.2,
+        8.8,
+        11.0
+      ],
+      "targetVehicleM": [
+        0,
+        1.0,
+        0.1
+      ],
+      "qaOnlyCeilingCut": true,
+      "lighting": "daytime QA only, unchanged linear PBR and AgX exposure",
+      "WebGL": "not_run"
+    }
+  ]
+}

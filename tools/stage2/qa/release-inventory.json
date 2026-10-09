@@ -1,17 +1,25 @@
 {
-  "scope": "All supplement release files except this self-referential inventory; base PR6 unchanged",
+  "scope": "All supplement release files including source-backed transit interior refinement, except this self-referential inventory; base PR6 unchanged",
+  "baseRevision": "9efce79601deac6a0648cf8e158f3935cbb46f51",
+  "revisionParent": "a965982a58b5d15996af68899de021fa30f9267c",
   "files": [
     {
       "path": "docs/city-life-transit/STAGE2_HANDOFF.md",
-      "bytes": 6360,
-      "gitBlobSha": "102e576f0537b9ff4401e1d112976ec97f2ba725",
-      "sha256": "af8df12e529493d82c7d07a783713fd96d2572081134cd69f5c788bec04b4b86"
+      "bytes": 7255,
+      "gitBlobSha": "8ab4301e92ea15d2b8e8e8cb00631d646fd50d13",
+      "sha256": "7e78455722167fd9bede610d76997911a319a244bf80014ccd72a73ce89f7e10"
     },
     {
       "path": "docs/city-life-transit/STAGE2_RECOVERY_CHECKPOINT.md",
       "bytes": 715,
       "gitBlobSha": "c76772c652574b6ef7bd93bbba3e6e951a670a63",
       "sha256": "376f79c21f1ea40d2363a4c5dd6825591b329724ff2f3a200083b4e6267d01ff"
+    },
+    {
+      "path": "docs/city-life-transit/TRANSIT_INTERIOR_REFINEMENT.md",
+      "bytes": 4548,
+      "gitBlobSha": "2503834501c26d09c2cce7f75222f34bf2e7c979",
+      "sha256": "8a3c69f7af320479524c4741798762aa77d98ecc3db40291e1edf9d9d1ebf1db"
     },
     {
       "path": "lib/city/city-life/interactive-renderer-candidate.ts",
@@ -21,9 +29,9 @@
     },
     {
       "path": "tests/bus-v2.test.mjs",
-      "bytes": 2000,
-      "gitBlobSha": "a0852e8b4654067bab1d91db3e8d82e346ef632d",
-      "sha256": "8e94813e777de418b9b1c39ccff7e2d2b4f596eb4275789c262bc97f8e0be257"
+      "bytes": 3061,
+      "gitBlobSha": "26153537b81ff007c1aa241cd62114000c84eaf9",
+      "sha256": "0a70c8f2dae22651a6aa2fbbfc7f13f960ee099e7db94ca8bbc29bf19470657c"
     },
     {
       "path": "tests/city-life-interactive-skin-stage2.test.mjs",
@@ -38,28 +46,34 @@
       "sha256": "91246cd25a7c30af7bcd15be96f5194b01fccb5cfd35b917cd6921fa4e8e7005"
     },
     {
+      "path": "tests/transit-interior-refinement.test.mjs",
+      "bytes": 1226,
+      "gitBlobSha": "016491344baae6e408d66bff2d62bfc728ec6584",
+      "sha256": "118e9e93c20f5483f3f58275d4b552a2157befbffc37b18d31bb0552d44142d8"
+    },
+    {
       "path": "tools/assets/boardable-bus-v2/.gitignore",
-      "bytes": 31,
-      "gitBlobSha": "8856cf8b712734fe70e146d879344824996ecbc0",
-      "sha256": "38ef86b219a19f29e4c664a1a5c709ff465839e563fc2fffae15be466a6904b9"
+      "bytes": 115,
+      "gitBlobSha": "2043a6f5a5988de47094101e558ca9af85f04828",
+      "sha256": "1facac2d2f6e7393773a842558ad12e8daa4c7a0e6581509a6847eab715b1405"
     },
     {
       "path": "tools/assets/boardable-bus-v2/README.zh-TW.md",
-      "bytes": 5283,
-      "gitBlobSha": "e157ed9d91947f9efeab9222e0728bef3a1e56f6",
-      "sha256": "e15fafd0ec3d333955baebd8ef994f7ca47b7c5ee28ad74c2a74508780da61e6"
+      "bytes": 7877,
+      "gitBlobSha": "a32e2eb629cf30865fed9c30447876221d0727f8",
+      "sha256": "0898bba702235fd3088b0af405c9a2d59fdfa08d808360f93c0c545849c74458"
     },
     {
       "path": "tools/assets/boardable-bus-v2/REFERENCES.md",
-      "bytes": 4921,
-      "gitBlobSha": "c4eb1b9ae845d1e5c70b6e9afd0857a45e8d99a7",
-      "sha256": "68d079063c76e4d2622ba4a2c1f8e64ec1750d6534057898113312a0a3d662e7"
+      "bytes": 8386,
+      "gitBlobSha": "8285f2d62ae7f493ac7c6d5f01ab03d8d7cd5e85",
+      "sha256": "a7d0355e064cadda3ae5c7296dfc795c7dff08af93cc102db2b065fa277e87b3"
     },
     {
       "path": "tools/assets/boardable-bus-v2/build.py",
-      "bytes": 9310,
-      "gitBlobSha": "7acef6fa7d852a1e0401c8799b614cb66ad8de3f",
-      "sha256": "5ac758bea38f57e77b7b8c62bfca5d320f5b0f8ca6cc3ef7c015d1657190238e"
+      "bytes": 9484,
+      "gitBlobSha": "8e547d8536a62a9d1d2e1fece00c6d497c1bed57",
+      "sha256": "3fb0f50c1c57f64362d7441f71bb852a00c06eb1becd2783355551c5f9f3bb90"
     },
     {
       "path": "tools/assets/boardable-bus-v2/compose.mjs",
@@ -75,171 +89,429 @@
     },
     {
       "path": "tools/assets/boardable-bus-v2/exports/city-bus-12m-interior-v2.lod0.glb",
-      "bytes": 2193844,
-      "gitBlobSha": "185d92c8d502639a8d3ea698f077119166668f92",
-      "sha256": "4470f0d829433993161ebbc7f759b3ca4fb7a1b59d733fc8e947e267bc9594d1"
+      "bytes": 2634280,
+      "gitBlobSha": "b9e7f8e67c3457889650f8217729821049a2b596",
+      "sha256": "bc49cb015a4d02e1d7d68c5812a459d5b49eee822a8aff8d6795709d04fac80e"
     },
     {
       "path": "tools/assets/boardable-bus-v2/exports/city-bus-12m-interior-v2.lod1.glb",
-      "bytes": 1104464,
-      "gitBlobSha": "85f1cc94db6ea9338e133f3ca44abb67e0e05f56",
-      "sha256": "5522a1177b60494de3be7b0fbf5c7f0eaa53401930e02ba119f06d5b81955cda"
+      "bytes": 1449360,
+      "gitBlobSha": "d21ba5e4bedc1200cd5434e97e6ade1df45c76cb",
+      "sha256": "c86bdf4737f28af73cd9a6f8d638b09f939ff90cd6e5a5df51e9839ec509624a"
     },
     {
       "path": "tools/assets/boardable-bus-v2/finalize.py",
-      "bytes": 3219,
-      "gitBlobSha": "8af8dbd1a9527217406b5a0513bde0e5dff0fe55",
-      "sha256": "90cef868eda0419f43e1137c24b5a2da7b0e22b1304ddc090cbb8f28dd335cb9"
+      "bytes": 3464,
+      "gitBlobSha": "e52f2fc7f0d7f948000190e61d765874aa6bf2c2",
+      "sha256": "f746e5fb068dfe65073c7a434b1191e3f296d067a30a74ca042f8a6ac5ef966c"
     },
     {
       "path": "tools/assets/boardable-bus-v2/layout.py",
-      "bytes": 947,
-      "gitBlobSha": "8087d2481074299b8254432c0ccda99842373c1f",
-      "sha256": "24abb4705872c3fe22cdef7a9334916a7212518f41f9d1f6205f92fe8cd888ca"
+      "bytes": 1356,
+      "gitBlobSha": "795a40ff3151f4337cfa6b43b877b2e1f9f22572",
+      "sha256": "b4e9e2cafd8e28cab5c5d769b8f192caebc9cdb6d12314135beb341bdfa1b524"
     },
     {
       "path": "tools/assets/boardable-bus-v2/manifest.json",
-      "bytes": 529235,
-      "gitBlobSha": "e7969736f3d009cfe28290eb02c1f4a379b76f6f",
-      "sha256": "3632c38edb7100ddbab620f453d81e1df627e7e51c60349df2d8ddd636201742"
+      "bytes": 601505,
+      "gitBlobSha": "91a83e79d004d605f79b9790faf36b5a648e56df",
+      "sha256": "b01497649a45589a23072da1522dffc9857eab704c8446caff929ea8849da842"
     },
     {
       "path": "tools/assets/boardable-bus-v2/metadata.py",
-      "bytes": 11077,
-      "gitBlobSha": "894b227929a467719ea173493326ed74db264c47",
-      "sha256": "f461c2ad841f9b88fd9ae85cf1b8d411283929319f7ce8a10d72979d9275e1bd"
+      "bytes": 12100,
+      "gitBlobSha": "848cabcbac310c8c9f86befc74a635b2d06922b7",
+      "sha256": "c1d9c24fb02492e9f71693f452d2d5c2179d3be05da6300b43400130ac05ddeb"
     },
     {
       "path": "tools/assets/boardable-bus-v2/qa/blender-validation.json",
       "bytes": 2010,
-      "gitBlobSha": "32f56529b6b8cab4a0f3963b27b10a60ffc51486",
-      "sha256": "aa8e622dc7c745e9534fbba84aea7905532b498c713a5af8c595977309725e59"
+      "gitBlobSha": "19f1fdf187092f5d38e85b1eb553f347f8c4e700",
+      "sha256": "9df1c4c26c6432260cf2d7756341ef4b16c9036972774ed2d6ad848eda5d5537"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/budget-review.json",
+      "bytes": 734,
+      "gitBlobSha": "b8fd439474e0dd3d6ab77ada2f310df1b9315020",
+      "sha256": "88389dc4cff1798effceeb9d6857c67f218a2362bce34e757aef5cd68ae5a726"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/builder-smoke.json",
+      "bytes": 3496,
+      "gitBlobSha": "f3f823a4d84e811a1be901c4252acc98af465196",
+      "sha256": "aa98257509001cb63e9d9c5eec3b28f32f0471a9ad9180579712d144e24935df"
     },
     {
       "path": "tools/assets/boardable-bus-v2/qa/bus-v2-adapter-tests.txt",
-      "bytes": 461,
-      "gitBlobSha": "19f385bfd58416febec71e6b0c5e945ccad80f7d",
-      "sha256": "5741dd222546d41640aff3c74a8124635c97f2fbe6f90fa556f83f7900f3c859"
+      "bytes": 633,
+      "gitBlobSha": "f43cf56ac9b27c5a8af6f0711bb864427147d9d6",
+      "sha256": "377938e4e2f963898d1e7edb43d930354d62ebed4bf37e46d2f7a85d3c10393a"
     },
     {
       "path": "tools/assets/boardable-bus-v2/qa/bus-v2-regression-tests.txt",
-      "bytes": 1556,
-      "gitBlobSha": "4bd01b4f926a53eeb00c32028fae2d4b6aa4e966",
-      "sha256": "2acc65c8d31de3d4821731f5e802dd39d1f1fbdd0e67c1cfdb5d23c24f520f84"
+      "bytes": 2341,
+      "gitBlobSha": "7908694ddf47b4cfbde2f2b6794291a45eb2cb0f",
+      "sha256": "09b89e61d3b1993fadb7e01a49866a2a840b1fcfeaf895dab10bb6e14d56f548"
     },
     {
       "path": "tools/assets/boardable-bus-v2/qa/common-validation.json",
-      "bytes": 32781,
-      "gitBlobSha": "09c913d04fae827ebf80b53164f45384f3cc4497",
-      "sha256": "f5f19f12207b86a55ce04c27e6ada46fd7b952ff00d63f1919047c7a2ad3dd16"
+      "bytes": 38127,
+      "gitBlobSha": "f4364f8f267c559d0824f1cbde54afb5b520a45f",
+      "sha256": "806b592b19e34930c26a214c72aecb6ad3caf2d864f6ba01b8fb8c7b2f8571fc"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/front-correction-before.json",
+      "bytes": 51995,
+      "gitBlobSha": "f1055dd0e64d55e90f68aea8f87da6a211e6fe60",
+      "sha256": "e04f02c34d227269d7eafff2fc93e754390f20347b038ca1b8dfefa2843e7cc0"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/front-correction-provenance.json",
+      "bytes": 2122,
+      "gitBlobSha": "f5b7b6dba538a476729bff21313902652fb70084",
+      "sha256": "216899d2b0764691eaa99961cf26840ed6420c09f9e17cd4790bbe14cb5549be"
     },
     {
       "path": "tools/assets/boardable-bus-v2/qa/handoff.json",
-      "bytes": 1676,
-      "gitBlobSha": "081b4a3afe7e378e6a8ec0e49351ad4f6d598657",
-      "sha256": "233cc652558ecf8617c5adb5c293cfe1b4cdc133a1c4c06affca7fa798e7e901"
+      "bytes": 2393,
+      "gitBlobSha": "94ef8f860903c793057162fb176b7a3f6607a940",
+      "sha256": "d909a17582cd5f43959b13ec210ada699d8edb0575386fedaae63d77f7b8da34"
     },
     {
       "path": "tools/assets/boardable-bus-v2/qa/inventory.json",
-      "bytes": 5550,
-      "gitBlobSha": "20912bff272405c96c4e61a6edfc27be1dfddc50",
-      "sha256": "83c37ed88e7c5365c664d1cbd58ce667c1a0d2b9ac24ce1702fa6b6bdec9bcdb"
+      "bytes": 6710,
+      "gitBlobSha": "39b2da04405feafe8c41740f6fff96a75aaf8d04",
+      "sha256": "0ae7ae1b91e458ffa30e2dd0d611b2183837261df9f5a737bafaa70416bacc71"
     },
     {
       "path": "tools/assets/boardable-bus-v2/qa/measurements.json",
-      "bytes": 32851,
-      "gitBlobSha": "348f73ae28e57af9f971f5043ead3be9cfd9c88e",
-      "sha256": "63510fbcdd4b568cf8e6e1441e21fb72cd13953aa4d6a6ff927bdcb4e7856bfa"
+      "bytes": 38197,
+      "gitBlobSha": "13ed2e2d459562596999960af89911b173488f27",
+      "sha256": "e425bda9e620d38278940a0626edc9fb6ed2579457c8e25e19097c6efd7c009c"
     },
     {
       "path": "tools/assets/boardable-bus-v2/qa/previews/cutaway-layout.png",
-      "bytes": 787584,
-      "gitBlobSha": "3660020836d27ed06ce1785476defdf59be066df",
-      "sha256": "34e36b027858a59ecdd9278ee1aaa4c4832b6442bb776a29e406eff2737594be"
+      "bytes": 879726,
+      "gitBlobSha": "25a4615fbb4a9db7e15dbb1b7d425420a1d3242b",
+      "sha256": "1e9bebbbd4452af2e6564a20e5b06584b56b6301be7d48ad9878eebca8bab47b"
     },
     {
       "path": "tools/assets/boardable-bus-v2/qa/previews/front-door-driver.png",
-      "bytes": 1351731,
-      "gitBlobSha": "67ba3735ef6e1660ad6d2afafaf6a96cf04c57ca",
-      "sha256": "523962aa0653944559774c20fe624003c2302ab941431bc90791be9c703d3b0e"
+      "bytes": 1409105,
+      "gitBlobSha": "88574a15a22eb47bb8ad8f97da3450c00141ba8e",
+      "sha256": "b8b35f7228755a2a09171897c56acec70f6e42d827e7b1e13743fd056c1c42a1"
     },
     {
       "path": "tools/assets/boardable-bus-v2/qa/previews/front-looking-rear-lod0.png",
-      "bytes": 1536568,
-      "gitBlobSha": "ca0046fc25f395a566c31709a735802ea1507289",
-      "sha256": "0bd552d6d36ad8f6fa0ce91dffb6e187eb3dea88317b880234edcd923515967f"
+      "bytes": 1613433,
+      "gitBlobSha": "0b074044f8b98ef9ef1df772f63e7f89be4d50e4",
+      "sha256": "66a1edd67e833fee1d196a8dd8c42186fa45fabb63fa12dbe6c8afe24a8d1004"
     },
     {
       "path": "tools/assets/boardable-bus-v2/qa/previews/front-looking-rear-lod1.png",
-      "bytes": 1532987,
-      "gitBlobSha": "d019c65f7b734604bf500093246143f178756bb0",
-      "sha256": "3c2486d3aa4b0c35c8d38af3f4d9f2dd3578b3249cf4b02f6fa7833a9e28d4e2"
+      "bytes": 1605498,
+      "gitBlobSha": "cda25609439dd25ea71939d76bb50c36a7ea04ad",
+      "sha256": "a4530e9c561f721970fee3b726ce9e5b1cb6784e132630e4262ab6fda43e4666"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/previews/front-lowfloor-looking-front.png",
+      "bytes": 1581824,
+      "gitBlobSha": "1a5e3f124f57f69bbff3383dc2d0f592ad21631e",
+      "sha256": "c179757c86c14b809ffbb8321143f16734ac347dd95c3fe8552838439df40129"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/previews/front-priority-overview.png",
+      "bytes": 1580436,
+      "gitBlobSha": "4c791a01b16f5d49d31dcc23de176ee94d3cd523",
+      "sha256": "7830961ef7b501db47dd738803f2fdad720abf03b069c5e388e56cc84fe404bf"
     },
     {
       "path": "tools/assets/boardable-bus-v2/qa/previews/index.json",
-      "bytes": 6282,
-      "gitBlobSha": "e5f4301657fbbf8ac8506b3daf527756faaaf88c",
-      "sha256": "457de460278b92a4a5110cd7b72c355105530cd853ffed3b14e59cd206e04c6f"
+      "bytes": 9344,
+      "gitBlobSha": "bdf0b3bd00b2f8645714e93d65f864940dc576e8",
+      "sha256": "aed1aff1bba1108907a9322781679788acad9f6c3e373e5cfa7ea959b379cd17"
     },
     {
       "path": "tools/assets/boardable-bus-v2/qa/previews/rear-looking-front-lod0.png",
-      "bytes": 1614280,
-      "gitBlobSha": "f342fdc578c1b54f79264979fbd35860cfdfb477",
-      "sha256": "3aa3acc1d0290dd3416100394440a694abfc14729c5dca5b4746e80f1adc1357"
+      "bytes": 1649096,
+      "gitBlobSha": "c73142638b6704982450dde1d6d235a0178dd160",
+      "sha256": "17a85e809f91c9a252744d3174911e126f4a5d0446ffcc213c529904bce8b312"
     },
     {
       "path": "tools/assets/boardable-bus-v2/qa/previews/rear-steps-detail.png",
-      "bytes": 1492436,
-      "gitBlobSha": "5e23345c19d30b6090e3cb6463b3a0ffdd845ca5",
-      "sha256": "10acf2cf283e5d3b0dce680aca085713faa19863f9c3d329699a9303230b71d4"
+      "bytes": 1503767,
+      "gitBlobSha": "6673236cecd2ecaa89c9fe58cbf02cd026bd868c",
+      "sha256": "2108c328c55dd8d809c2c7eea47357676a00d2f55929f70c09dd7cc23b580aea"
     },
     {
       "path": "tools/assets/boardable-bus-v2/qa/previews/wheelchair-and-rear-door.png",
-      "bytes": 1464990,
-      "gitBlobSha": "b39f6cc5e102cee0ce4a0641d19ca7aaae99509e",
-      "sha256": "7236f88619981ffd7f56f561b35a0797f5c9898932d9c9b8cfd1cc11468473d6"
+      "bytes": 1549215,
+      "gitBlobSha": "6d82ef154addd4542667dd5dfd406b73371b9e76",
+      "sha256": "a4f266e702b67b73fe6d80526c4b2d0ea45738393acbaefc372fc5138d95075b"
     },
     {
       "path": "tools/assets/boardable-bus-v2/qa/validation.json",
-      "bytes": 2026,
-      "gitBlobSha": "4d22b0ebcbb9ac7ccda1b23b2ffee5763e4ded60",
-      "sha256": "430a1a986027511b057905d796d78473c20043aef37c7ed73f588b58be4aef0b"
+      "bytes": 2885,
+      "gitBlobSha": "eba5fe0bbc8cb1f29a1039d6c86a18fd750e625a",
+      "sha256": "a44eb672fda4769a63a34d9d21b38a7a7b62bce974104c10c341047ac73222a9"
     },
     {
       "path": "tools/assets/boardable-bus-v2/qa/visual-review.json",
-      "bytes": 3515,
-      "gitBlobSha": "e75b7fbfffb0fd4c71765884282893fea11e2757",
-      "sha256": "3cb495a2547383590740967bda39a73942deeb764354d34ddbf39bdae0b6e112"
+      "bytes": 4886,
+      "gitBlobSha": "f1039a3106a87a69301d851a86d419270131cdc8",
+      "sha256": "885e1209356d338d9c5a9870f90ffaed33434c089bd44839513aa6ecabf0584a"
     },
     {
       "path": "tools/assets/boardable-bus-v2/qa_blender.py",
-      "bytes": 7405,
-      "gitBlobSha": "a8ea7269fd6da648022cc379e682b8ae072d6c34",
-      "sha256": "69f95ede5e723ae73c4b6fa6023c226688b681d228703e545d8b3f03617a0f16"
+      "bytes": 7856,
+      "gitBlobSha": "a03b5c67f2e9e7461a2c62dfb4920f6a6defe76b",
+      "sha256": "8fb4c4b23aab6828525f6e27fb533868d4c6146d885f896f3ea319f2eb53f0fe"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/revise_front.py",
+      "bytes": 8526,
+      "gitBlobSha": "1574d2e7a9c54eedda1bf8a8873549e633c92713",
+      "sha256": "62f10af5c35c517dcab41626ed8086d6a2d91fb8a3d59e0ba31f2e0c75b544ac"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/README.zh-TW.md",
+      "bytes": 7486,
+      "gitBlobSha": "3a2f51dbe28d5b2a909f327cb871be5c4d5375e8",
+      "sha256": "688b36d266140cc7cb86b6ad2a3132e9a2ce30bc7eca3637fd2f99c36f233c3f"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/adapter.test.mjs",
+      "bytes": 3406,
+      "gitBlobSha": "e303eb214744a206f7fdd70d30d5ba107f0fed37",
+      "sha256": "c7c00c45d2576531311643e13a6bca9dabe87fbdd13e9b569df9e301ccc91c3d"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/compose.mjs",
+      "bytes": 2884,
+      "gitBlobSha": "612cd80cdbc15d08eec6c9b468ff6062f1868e55",
+      "sha256": "09e18d45adee7ab89cb30dfe077513fff173e6a4873907a366b3aa07eec9f076"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/derive.py",
+      "bytes": 4320,
+      "gitBlobSha": "9dd2b5954dc844776ddd176d5cb41bf0f360334f",
+      "sha256": "be5ab59320571fc15dd21ca80db1b82b1802498357a4ab186c381083fd6727d0"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/export.py",
+      "bytes": 4232,
+      "gitBlobSha": "926067ce8ecfe26e8899506a77f8f333a59f926e",
+      "sha256": "16b6b7c0213d95c7ad0e890a68dc74a41cac40235730783c9256cd7d65908ece"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/exports/city-bus-12m-interior-v2-runtime.lod0.components.json",
+      "bytes": 367912,
+      "gitBlobSha": "addcfad0f30a63316b877ad223fe1fdd78ced3b7",
+      "sha256": "fc063772f14f8b21f08f76eb098038ab03ffbe25a4eed29876b8108cd30fb783"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/exports/city-bus-12m-interior-v2-runtime.lod0.glb",
+      "bytes": 736884,
+      "gitBlobSha": "2581cfad0a11c8169e49d699930e07ce147e134f",
+      "sha256": "76302cf2d45d5c027a412c6087231b65605d982b3ec2634942b6910ab002c096"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/exports/city-bus-12m-interior-v2-runtime.lod1.components.json",
+      "bytes": 200909,
+      "gitBlobSha": "debddf5ce07c68a15f0bf060569482d942709d0e",
+      "sha256": "fd656101f5c81f6b25051a5e592f2f12888cda369a88875b3c8c1fc383133bcd"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/exports/city-bus-12m-interior-v2-runtime.lod1.glb",
+      "bytes": 202492,
+      "gitBlobSha": "c63862f8f8f44a5ccec7df92857f17685b8bbe56",
+      "sha256": "6d5ab5aa5d7074d7c844a48d88dbc4a4e2fd5c3f07b24b0aa6f0f4fcce0ba587"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/finalize.py",
+      "bytes": 4812,
+      "gitBlobSha": "fcb467653b603362d96118d09056f96ae1d9928f",
+      "sha256": "8de87f1f0fa2813838a0fc105e979af564224290e4b8cae32ab36eacdbb127d1"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/geometry.py",
+      "bytes": 3629,
+      "gitBlobSha": "6d8ca37a079af1e94cccbe3df8f1e42a8d3104ce",
+      "sha256": "a90a091163f43c5a96fe654db35ce1ca4e364b6607d5d8b156c5b6ab718ed44d"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/manifest.json",
+      "bytes": 498034,
+      "gitBlobSha": "e2ca0d9ef37ae05b2c1ba4c7a15dbfb3e6a29629",
+      "sha256": "84c358c33e2a76dd2274bb41cb9443c3c4e0f3d923f59b0038595ae6d6a1a413"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/adapter-tests.txt",
+      "bytes": 722,
+      "gitBlobSha": "7af4c6021c28400197eb33f01cc0f815942206c6",
+      "sha256": "46af8aefbda519774cc0607771f043805df5dbcbf3de1e3e24a48f7c9299bddb"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/blender-validation.json",
+      "bytes": 2521,
+      "gitBlobSha": "2c6ec0e18f4186c95368214dec97fc80d9483dd3",
+      "sha256": "7b3eec0b20822f31ae4b61fc153bceed2cb4ac3c06a60f7bee36a4e42d7ee08f"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/common-validation.json",
+      "bytes": 6789,
+      "gitBlobSha": "97a010fdfa1f83f7b9f13c81408f6795196c2060",
+      "sha256": "faa476cec3e872b54f82eef9872b817ce6b1069fec91be8b7cb3523f1cff9287"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/derivation-lod0.json",
+      "bytes": 63638,
+      "gitBlobSha": "c67594e4a667b4344456479bd3f8130cb2420425",
+      "sha256": "59b7526520dfc5b382583ddca56b7333341a6ac6b0fecbf5cefe9d4be70d6759"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/derivation-lod1.json",
+      "bytes": 42168,
+      "gitBlobSha": "3d3c4639bb7d53ae2675af17e0bc7404f1e14042",
+      "sha256": "a34d2340a6a751b9566745d9e564bd302ad1d321b67db14c99a2200dbae7cfd2"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/handoff.json",
+      "bytes": 2564,
+      "gitBlobSha": "01dbf896cb75d82debf4d4f55d0db6335aba93ff",
+      "sha256": "74a1387eab8700d4864b9c1056438697c94b0beb6d604f3ec4a8317432a81417"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/hash-inventory.json",
+      "bytes": 5905,
+      "gitBlobSha": "f135758d5c2a249248953c8ee2a50b313b606b97",
+      "sha256": "44d5f0a97bdd38cace623f5b4c8809555c6196ac25419bb549ebf534214fc83b"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/js-lint.txt",
+      "bytes": 0,
+      "gitBlobSha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/measurements.json",
+      "bytes": 6335,
+      "gitBlobSha": "ccb8c8aaed84521ec4e004bbf3a751d6843b24b3",
+      "sha256": "56ca68cb0a78d0edbbb0b377b86bd3448d63c6e03dad0c0fb7d06fdc6f0576a7"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/previews/cutaway-layout-lod0.png",
+      "bytes": 684203,
+      "gitBlobSha": "097d2fc9db65b8dda926ef31761416dedc24f1fe",
+      "sha256": "6ca164f04614957314bb8379902cfa7b49735fa08946232d556207050c043005"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/previews/cutaway-layout-lod1.png",
+      "bytes": 672307,
+      "gitBlobSha": "88d93f4a342d45e54816d5efdd36c7cd71787c2c",
+      "sha256": "6a003b1df09d17f7c5a1ba71d3c48be6750612d781fd6e6740bd1179164c42bc"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/previews/front-lowfloor-looking-front-lod0.png",
+      "bytes": 1272637,
+      "gitBlobSha": "303295833436963fefe19fd33dc2186944880736",
+      "sha256": "525fa73f70f24e67a8313e2e9685cbbc41d80927adf5c32e7a82e964e3a970c2"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/previews/front-priority-overview-lod1.png",
+      "bytes": 1248196,
+      "gitBlobSha": "3258b8f95ad0097ca545b4a4ea75197b713c754c",
+      "sha256": "b5cda44ff61d5c81c4105002124d62e9b6a7c0ee2d36e4b37470608f4bed938f"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/previews/index.json",
+      "bytes": 3538,
+      "gitBlobSha": "7b4d673b909c50c1b73860ebac415a9bdefb22f5",
+      "sha256": "9423f911918b0a71bc2273b0862145d6178dc15a3cc1055d3e9666e2ce1fe8be"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/provenance.json",
+      "bytes": 3160,
+      "gitBlobSha": "eeab760427f9a45d341d72f236b6b784a694ed60",
+      "sha256": "1f7e218b5cf503091fb730c1c7b00470047099e956428b6649f721505b92399f"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/regression-tests.txt",
+      "bytes": 4079,
+      "gitBlobSha": "03e05a8f01fc0eb4b429784aa53015eb427fda67",
+      "sha256": "b26921afc3908013cedce543a836ac5474f599d61bcca8b2e68bc6932dfa1ecc"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/validation.json",
+      "bytes": 9405,
+      "gitBlobSha": "7760972d8f70f56fd5d87aa1767dc494c9d78902",
+      "sha256": "de3779ca6cbee69cce72b247e29537d4a49c24074f63ce25c9705a33304d9f5f"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/visual-review.json",
+      "bytes": 4400,
+      "gitBlobSha": "302db93bb987af4d2a62f6842f6fff6b4b3408b4",
+      "sha256": "005cd18f93f3b53362e57d658ed2b64aa435666b24163ee18655f6646827704c"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa_blender.py",
+      "bytes": 7052,
+      "gitBlobSha": "1782f5029b3f7567dd83a0ffb0f169ed6d3de983",
+      "sha256": "255f12f9210a23c3e87f0ad809a08d5f4e305fd06799733d9d37e08ba7818357"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/source/city-bus-12m-interior-v2-runtime.lod0.blend",
+      "bytes": 268481,
+      "gitBlobSha": "ea1fc2bcde0c7c273a75e03e34b94a8e6b82b6c2",
+      "sha256": "14380cb79039bc76c8e4ebcf97c48f084e8e71c9ced844fa56888ae869828a5d"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/source/city-bus-12m-interior-v2-runtime.lod1.blend",
+      "bytes": 195925,
+      "gitBlobSha": "a3334f0e4f3309367e7195ed5d5f717614f83f4d",
+      "sha256": "e0d1696f685b04c591e5421437b1bf487a428263156aa9e622a3611e8559b640"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/test_candidate.py",
+      "bytes": 10253,
+      "gitBlobSha": "140ec1a7650187d22f56c64395196158fe24347c",
+      "sha256": "d9c2379a81ddea7ffbd210da71a5266823d58d6e1d1b5e7d2f596200c6ef22d5"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/threshold_support.py",
+      "bytes": 2456,
+      "gitBlobSha": "6701675fe067a6cc9b0e5219460480d0c33690d5",
+      "sha256": "054acd1a11c68f27fb32a73598249d3600be70f7cb46da23700b7cf4f0c50223"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/validate.py",
+      "bytes": 14203,
+      "gitBlobSha": "bf8e49260815a3620d832be84ec6a6ed7d4e7433",
+      "sha256": "c61202c27ab644f4cd530f6dd140cb09df13d5344eaf7a4f8a0440d71d6be63c"
     },
     {
       "path": "tools/assets/boardable-bus-v2/source/city-bus-12m-interior-v2.lod0.blend",
-      "bytes": 259370,
-      "gitBlobSha": "7fa81621d328c3ef0a60590b748a0f39f32dd0c3",
-      "sha256": "0bc5c3a1fa4f728e6085facc43cb5e2cfbbc92206c17cb392bdaefe03a385fdc"
+      "bytes": 298301,
+      "gitBlobSha": "7011f8fdbfaf83ae72978d788040908d7ca3d40d",
+      "sha256": "f9fb01939c1e65c0c308c8bc2cdca72f26d9d6b728e489df6743bfb6849dc673"
     },
     {
       "path": "tools/assets/boardable-bus-v2/source/city-bus-12m-interior-v2.lod1.blend",
-      "bytes": 207539,
-      "gitBlobSha": "394822e1038182242df6bc51713fd69c87585243",
-      "sha256": "e9dae30551eacc80b73b82cf7488da65014e25c0a0d93184961b270ce6d28d7e"
+      "bytes": 240150,
+      "gitBlobSha": "67b5e971abeb3304723c4964f216e256ba123b54",
+      "sha256": "574de58747175d91c67c76bde05c950bf44ba9542188a37303db6bb600408cd3"
     },
     {
       "path": "tools/assets/boardable-bus-v2/test_bus-v2.py",
-      "bytes": 3488,
-      "gitBlobSha": "7a39d61d81db7adef017dde004cf81a44a7f5623",
-      "sha256": "cafb2afaa61be12b68be1fac6ce3fdf99d33b5e51c62578db4a928e6f8469be7"
+      "bytes": 4904,
+      "gitBlobSha": "397acc7df5f3f5dd544505d5b3afc3a4e7959e72",
+      "sha256": "1b4d0399245c4a660b284ee765aa2ba4105831307d779386fa93a18f267de98a"
     },
     {
       "path": "tools/assets/boardable-bus-v2/validate.py",
-      "bytes": 9005,
-      "gitBlobSha": "fd93dd648d77a4dfbbc723f9bcf3e3439d8030ba",
-      "sha256": "2be8fc6b318c1aa8e630482e9a7d0fdc5ed7e824378586d01a7bec504a92321d"
+      "bytes": 12208,
+      "gitBlobSha": "5bad8633d2c84d4820ee35b7757f38150baeae39",
+      "sha256": "42c0ce46a30dac76427be40a2d74ff2052737c564ca2046ae7a8a4df4ca225f7"
     },
     {
       "path": "tools/assets/canada-line-stage2/README.zh-TW.md",
@@ -678,6 +950,318 @@
       "bytes": 3816,
       "gitBlobSha": "5cce3cb65b0c786eba8a33d1d67337f679b3a344",
       "sha256": "cf7dc8aa5ff57be46569a7f84db13e4d671e6acf79765138eadced9ef0e5c85b"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/.gitignore",
+      "bytes": 31,
+      "gitBlobSha": "41fe1f1a20386134ac5ef38db24f598dfc04f3d9",
+      "sha256": "5d452eae899437b34d8fcd68f32216c9d03b5f1830543fc27a277a21d766a961"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/README.md",
+      "bytes": 7581,
+      "gitBlobSha": "2b25935d167df9f57e1fa5d53af55146161d2bdb",
+      "sha256": "0c8047efa19845965b797e4601115cfdcad966bb85750d5cd6110ba49e0ae5a8"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/REFERENCES.md",
+      "bytes": 4024,
+      "gitBlobSha": "887c8c6042f3e4265e6b5839fd4acb41d78daf2f",
+      "sha256": "e5ad49f2c23a4a400a536940dfda393bee36fd014919f1ae614dc052c26e9ec1"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/build.py",
+      "bytes": 20172,
+      "gitBlobSha": "13f1d87f9d9910e5a84cfe31aa9856f06ed8cc99",
+      "sha256": "61a7fba3c5c1936942b0baf12ac4be39b102a93df48334cdb545656c7b2030df"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/export.py",
+      "bytes": 3451,
+      "gitBlobSha": "8fcde9893f575f2f62f7b70c05b4490ba3e5c330",
+      "sha256": "a68722657d198feb06a59c4558bbb705eb79c66bcf0e24c75a32c79ea58c1dc3"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/exports/mark-v-a-car-interior.lod0.components.json",
+      "bytes": 261223,
+      "gitBlobSha": "e8bac5cdfd1b14fb8cc337069f04894cdf3e531f",
+      "sha256": "a88bb94629f5a64592e75e2824bf14ec4e8aad264dfa98e5eb5c1066994d0eae"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/exports/mark-v-a-car-interior.lod0.glb",
+      "bytes": 1177176,
+      "gitBlobSha": "4474de8767cb1bac70c42b0eccc57d488fe6c957",
+      "sha256": "e68542ad516bef61e9c32f051cd062995265213f2f8d0e732e4b29e87d23643e"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/exports/mark-v-a-car-interior.lod1.components.json",
+      "bytes": 117130,
+      "gitBlobSha": "671b613c9cccd9596e94e0bc1e49934f0e951702",
+      "sha256": "c39c906ea82727578ec84052ba1352a0cf5a04d26b76b8a3580419190fa22847"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/exports/mark-v-a-car-interior.lod1.glb",
+      "bytes": 305404,
+      "gitBlobSha": "1c470ae046fc5e776bd96e90659ccb1609843d7c",
+      "sha256": "6f840b8d7a679d5a0e5f1a7df21ab4d73c3273f916cbd122498fe20ce85f40da"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/exports/mark-v-a-car-study.components.json",
+      "bytes": 499916,
+      "gitBlobSha": "f06efcf47b440fb70af588f43d5e517363a36533",
+      "sha256": "3b1e16e1e007b471286d45bb150dea8cf7a74d4b4c1e3b21c457b1243089579a"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/exports/mark-v-a-car-study.glb",
+      "bytes": 8516908,
+      "gitBlobSha": "288939c4309eef99fadea946274c88e79d0f3a9c",
+      "sha256": "c27e3aaddf680888ce56f72db1448311d269dde8d47469c5730b778ce9b20c1d"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/finalize_lods.py",
+      "bytes": 2068,
+      "gitBlobSha": "960e9ed5833a1ab6a9cc8a0b8f9ce1cc8739e1e7",
+      "sha256": "d640fa77066cd212734b189acccedaa6c58635194ad9647c1567012eb0b06157"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/layout-assumptions.json",
+      "bytes": 6220,
+      "gitBlobSha": "ec84a0dafb338aed316cb89b7b9de84740be0206",
+      "sha256": "47fad299001c1a14b9d1c3fcd9e90a002c63496c67356e696db1133269b677c8"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/make_textures.py",
+      "bytes": 3019,
+      "gitBlobSha": "470497e761120e643ab08ef72954d3c30dc8ffee",
+      "sha256": "1b40f438f800dd983f77f5195019be5dfa059100334ae6ebdf348d757f75e0db"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/manifest.json",
+      "bytes": 20389,
+      "gitBlobSha": "a9de7c460741d1d86de3d9066a038d38c4ccc053",
+      "sha256": "2909fac045a0aa859e624b07da29ee61176e6cb70804074048f7ee07961e74af"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/metadata.py",
+      "bytes": 5505,
+      "gitBlobSha": "122393502933b88af99f69d5be35f4f730d44afe",
+      "sha256": "b69700a3d6792cf852504023c02d73f663455df0233d897f5f7f1eeb87940b8f"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/optimize_sources.py",
+      "bytes": 3809,
+      "gitBlobSha": "bfd6224a5970474955533958ffc95a9e5d296bf8",
+      "sha256": "ca13961755f3c746f72143de0c203d9d66f5784f5304e4c315ab9d8432bc043e"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/preserve_lod1_floors.py",
+      "bytes": 641,
+      "gitBlobSha": "441c5767ec963d8210c9de930bb380dfa91a2ed7",
+      "sha256": "684aab3034d61f7af5f3859a0a00d8696ff65ead85cffad9be9af03b4741d438"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/clearance-validation.json",
+      "bytes": 1312,
+      "gitBlobSha": "e5e55d1cc52171858702d6357ca9ee07f80812cc",
+      "sha256": "eb8a7eeecd7c0d98f0d26c4ab7c879f8be03532f17ec81b8332f096efc781763"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/common-validation.json",
+      "bytes": 12114,
+      "gitBlobSha": "c3d44cf7e7047c4f20033d5964e6eaed98859355",
+      "sha256": "08f10e12b546be4ff438c8785fdb63f7754fb1e1e6a00321ce724ef2e5e26348"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/exported-material-inventory.json",
+      "bytes": 18009,
+      "gitBlobSha": "00c3700c666eb6905ed79117f558af6709c5b700",
+      "sha256": "bc3a746d4d1ad50d1208c08ab0e59c0eae7dba8959b485ca5813786cec7a3dfe"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/handoff.json",
+      "bytes": 2496,
+      "gitBlobSha": "71758b84a4e04d68add0822b4c9708c7e69fc8a6",
+      "sha256": "80937c8c5750a1d601dd01257832c0d80a49bdfb6fef1231a466ae988922ead8"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/lod0-omitted-components.json",
+      "bytes": 11846,
+      "gitBlobSha": "bd02e7dc52f147753c2a066b655dcb7795bff413",
+      "sha256": "2f268a5a1ef1efbe2ff7aee22058a6f594a262e4f140ea3f959b02fbe7bd404a"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/lod1-omitted-components.json",
+      "bytes": 21849,
+      "gitBlobSha": "0653167d9028a7739b5651f1edcbc1f26ee6f4f3",
+      "sha256": "ed037ee6ed3a9530bfa43157a2970c45c11edb1b5ff37f01192d3ed6ead5ffe3"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/measurements.json",
+      "bytes": 6952,
+      "gitBlobSha": "f004051ce37ccc96ced1b1d6dfaf5e96f74789cb",
+      "sha256": "0d6a686cc46c220e1b7f112b8b1af44e6451b563c5cb255667d64de7e3f69d92"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/preview-integrity.json",
+      "bytes": 1403,
+      "gitBlobSha": "e5698a353ebc998eb89098409073ccc55b5a4f4d",
+      "sha256": "d4867987da3b7725fa54e41f9de749412305f589e97492450ad73787c70437ba"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/previews/01-aisle-toward-gangway.png",
+      "bytes": 1445666,
+      "gitBlobSha": "ff6f0d7545d44d9d5fa25ffee54e4f89f26c6827",
+      "sha256": "885e2868a08be97e2b05a9ff04365e2eed4ea020d8082236f745abcd3823ce56"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/previews/02-seats-door-detail.png",
+      "bytes": 1373962,
+      "gitBlobSha": "e22263a99c61f5307ffff2b571c8dc4f17e8cc1f",
+      "sha256": "dc005f5365320c43c25ecca93350a431091b2edb636ac4bf99f01257a905eec3"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/previews/04-gangway-return.png",
+      "bytes": 1303110,
+      "gitBlobSha": "8cab60e1e0ca46416ce163fa03822d8a58f1b3cb",
+      "sha256": "0a44403813446cd0d1619b88da1dcca3d55ad146bff7254b02e9a5a208925672"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/previews/05-aisle-lod1.png",
+      "bytes": 1345939,
+      "gitBlobSha": "2956502b034063654f96e1a8599e03925e4451b5",
+      "sha256": "cf466923ad722b1147b2465ea9b320495cf6ddcba0304a09f3f74daffe6b2007"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/previews/index.json",
+      "bytes": 3499,
+      "gitBlobSha": "c8dbc1b17da502516635e68983f2bfc1ffbc9dc0",
+      "sha256": "b0dbd32ebff1a3e166b27e1845246913d22e49c13fad1c11a6b7f3917bf5ddc3"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/regression-tests.txt",
+      "bytes": 2651,
+      "gitBlobSha": "d553accf149ffd975a49c180638673ff5c9f43cf",
+      "sha256": "8ddc06e32204d2c375efa55639ca6ee375d0113a8e20ee1241c8cd542ac0e9a2"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/source-reexport-validation.json",
+      "bytes": 1143,
+      "gitBlobSha": "99b4a7c9b82a2d2174d9a0c9928c652c01e73d35",
+      "sha256": "2da2e745b13f869d208f35ebca517fcd944cc2ccb25cc9a74454c03501564a77"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/validation-console.txt",
+      "bytes": 466,
+      "gitBlobSha": "a737762ae2aa4a7a2636706c10217bcee827ae76",
+      "sha256": "c6d8b8a1d7d8eef54bb95c209af12ffaa24d00393e2a692a7fde15c0d7b46a28"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/validation.json",
+      "bytes": 798,
+      "gitBlobSha": "e1274a2852e8c4a2b103c79688629e1af710fc34",
+      "sha256": "78c231fa53645862399e4d538746986719950bd32fe109e2e665e5055a117b89"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/visual-review.json",
+      "bytes": 3581,
+      "gitBlobSha": "e22ed842102049d1db11b4e3d2fb70c0840570c6",
+      "sha256": "db010dbf2df3bb9469f5767663823ce33de20ac1d270bb6352ee49722b4d6c79"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa_blender.py",
+      "bytes": 5996,
+      "gitBlobSha": "69cfc442a957372b3dd5d7101958a78ae60d9cdd",
+      "sha256": "7be4e16e6385c35ea8806f272516f222d8d749885beb3190f9d67df30e71ae33"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/raise_gangway_header.py",
+      "bytes": 789,
+      "gitBlobSha": "5790288051d56617a274a1157416b29da77fe5b5",
+      "sha256": "5286369f9d46d5c3a684f84144d06f938c5d7a21cb075d03c5dc4a8a715fcbbc"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/reconcile_a_car.py",
+      "bytes": 1610,
+      "gitBlobSha": "7e4df882a56aa5d9586f87a280f71bfdc88c1474",
+      "sha256": "85eaa8f30c71370e70e3cf89090d017e24305a1fc66f752dcb8ae16ff0a74af3"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/refine_sources.py",
+      "bytes": 390,
+      "gitBlobSha": "669f7951c72be90fab7c073dd1eb148ce7eb9979",
+      "sha256": "fe7169ec4569a569377fb4d39f78c677844564521312c1b056fadec661eb8b03"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/source/mark-v-a-car-interior.lod0.blend",
+      "bytes": 1078312,
+      "gitBlobSha": "1215caf511fd785d7811ca7a088cca5dcbe4060e",
+      "sha256": "7f6d0182366b79d50245a86e429bc97d15975adf5be7fe3053704bf8fd42d4f7"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/source/mark-v-a-car-interior.lod1.blend",
+      "bytes": 418249,
+      "gitBlobSha": "9862ce9e5778c8e7606504285ebfe0a30d76be91",
+      "sha256": "bdae4395f1e004947f27c837c88e024ffe22711a4e3b91277573412132dca1e2"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/source/mark-v-a-car-study.blend",
+      "bytes": 1220091,
+      "gitBlobSha": "50aa22bbd94338399ac7a00eb57f3d58144ac43e",
+      "sha256": "9f444f9502ceda608a9ccd3ee1db1b669b4a030a112a6884f40390a086337f9e"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/test_package.py",
+      "bytes": 7102,
+      "gitBlobSha": "9bd2e6dfe7a85593fdceed071102645d81baecc3",
+      "sha256": "b77dd3327eec884436fa94bce5835b20d0f4a0b5b949803c55ae8d199277d89e"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/textures/lod1-original-blue-fabric.png",
+      "bytes": 2366,
+      "gitBlobSha": "139f5f2f23eb6bc2957933d7e5d4d9545ef3ef7f",
+      "sha256": "d242b7a05e09a47eda3c253a246317e402c5f53c4e509973ae2a8b7612da4f60"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/textures/lod1-original-information-atlas.png",
+      "bytes": 37535,
+      "gitBlobSha": "8ecbc7fa42d87d8ed9cb9a2d3738a6406aff7083",
+      "sha256": "12f18f6d8fbf33eb42f55f250366134f38f9ae9415dbec3b7e1f40df82ca1b92"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/textures/lod1-original-rubber-floor.png",
+      "bytes": 2511,
+      "gitBlobSha": "d467a0298125283be691b5467105dfcbfc8e1da8",
+      "sha256": "ae7bc6346470572e001e13a0cd6d81a74a30fedbd43c7b2d84764923597c4ee3"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/textures/original-blue-fabric.png",
+      "bytes": 43963,
+      "gitBlobSha": "f6590914ba6b6752690325576c910f8ae8287270",
+      "sha256": "e0b728ccb83a7263e29bb3e00643905a56fb0480ca8f73086ee5620069e52f76"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/textures/original-information-atlas.png",
+      "bytes": 71466,
+      "gitBlobSha": "dbd352d3256dbcdb1bec9ff7f2746b3556ea69c7",
+      "sha256": "f815d2855711698883c2e6714222a402ffa4f96ae8311ebda00614d09f313060"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/textures/original-rubber-floor.png",
+      "bytes": 298754,
+      "gitBlobSha": "bcb12755795f41313a36f336a2005e4513d1b063",
+      "sha256": "4556125a0517d16bf4e39d4a315af53ed471bbc19a14045b862453f4eb0b6aa8"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/validate.py",
+      "bytes": 10587,
+      "gitBlobSha": "aad6adfb1bba7abd5e99ca0da6a15cae75b3d69d",
+      "sha256": "c21c112a8a3dee9f4d6c975e8c7b4111ce6b8a2b18edf14343d138edfe60f78d"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/verify_previews.py",
+      "bytes": 1689,
+      "gitBlobSha": "e81e1b094bfb2bbde807b636c19b837abc744f12",
+      "sha256": "ca8eb73f5de10c3b2e5cb6a19d0a3cf35786c3f144b7954a120bfe5f19c8691e"
     },
     {
       "path": "tools/assets/skytrain-stations-stage2/.gitignore",
@@ -1155,15 +1739,15 @@
     },
     {
       "path": "tools/stage2/qa/build-firebase.log",
-      "bytes": 4777,
-      "gitBlobSha": "85e2c373a1a0eff5ee7de2540ba855fbed9928fe",
-      "sha256": "4b09a81db0397273b53a434f2fb37fa82f5b27996293d1e9ad63a828faef9c84"
+      "bytes": 3761,
+      "gitBlobSha": "d7f6f04a2310bfc45336c59c1d466930ef276ad1",
+      "sha256": "21ad932e29faf0bac6ae63044fe2edd6f86479f27021e90935821045707bc176"
     },
     {
       "path": "tools/stage2/qa/full-lint.log",
       "bytes": 55668,
-      "gitBlobSha": "86549f0d1f2dbceef525eb313e87d0b8fa043cf9",
-      "sha256": "b9faa467b1daa38274d10c65fdf1d0d490733829e6210446773952b468b077bd"
+      "gitBlobSha": "927450076d8dd71bcb869e878478ce78e408ffe5",
+      "sha256": "dbb10acdb9405efd45ef7bd9a05ae33348e9001f9273b688b76a18bd0b12cc79"
     },
     {
       "path": "tools/stage2/qa/isolation-negative-fixtures.json",
@@ -1173,15 +1757,15 @@
     },
     {
       "path": "tools/stage2/qa/isolation.json",
-      "bytes": 173,
-      "gitBlobSha": "9ef77a2b447f30ac8d9da4c29534cb04b47da119",
-      "sha256": "86c7d6567d775ad23bb3746adffb28d1aa395d044ad61aced40ec591940b3563"
+      "bytes": 174,
+      "gitBlobSha": "eed77ab60dad0978338f950959d42f8a30ad99f3",
+      "sha256": "773350950f63bac454186ece614262de804e7b3e945398a1961aac375ddeb4eb"
     },
     {
       "path": "tools/stage2/qa/npm-test.log",
-      "bytes": 87561,
-      "gitBlobSha": "d7119cfbbf4360e7a48fc64a769d01f864f7194d",
-      "sha256": "075c1c8ab4e0071840dac517710f35ed588683e84f0df2a5341227ae8b646d67"
+      "bytes": 88004,
+      "gitBlobSha": "b58f3a15ffcfa7272ea9bc468669e63acffebdd9",
+      "sha256": "6e5a3e0fb2fbe3594e0615022bc71a59ae497589fd09a37e57513ee1a6716f79"
     },
     {
       "path": "tools/stage2/qa/scoped-lint.log",
@@ -1197,17 +1781,15 @@
     },
     {
       "path": "tools/stage2/qa/validation-summary.json",
-      "bytes": 1127,
-      "gitBlobSha": "a806cd959f00f8d4b08fbb688fe03c1f7e8e343c",
-      "sha256": "27d1b9dc07084981ac09254c658c17a7e41cc6608cc0b5652ba637f9f926a848"
+      "bytes": 1946,
+      "gitBlobSha": "d5674200cf24293ddfa58ef6c0f77f76da57473d",
+      "sha256": "01c146eb1ff36540e7bbd835f2875d483b02eac8da9446c89da4eb8328092def"
     },
     {
       "path": "tools/stage2/verify_isolation.py",
-      "bytes": 1634,
-      "gitBlobSha": "e536d639b3f71b0c40bd4b749d75b9bc78ac1b2b",
-      "sha256": "5d89d992d8b3db2130a39b08d0f64a3ca11cc1cbf564e6f826c8f51ec720d88c"
+      "bytes": 1748,
+      "gitBlobSha": "d14333b171fb0dd279e0e655339c33f09b083e26",
+      "sha256": "23ee5236ec98ca03263078b31ce92f5194b52fa68616479a9eb54eb156aaf3ac"
     }
-  ],
-  "fileCount": 201,
-  "totalBytes": 50988146
+  ]
 }

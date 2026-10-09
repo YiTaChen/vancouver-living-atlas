@@ -1,0 +1,47 @@
+{
+  "status": "pass",
+  "baseRevision": "a965982",
+  "diagnosis": "No literal mirror transform in original source. Incorrect repetition of forward-paired seating and evenly spaced rail rhythm into front lowfloor bay, insufficiently distinct cab and front wheelhousing topology. Supplied user image was earlier assistant preview, not a real bus photograph.",
+  "rearGeometry": [
+    {
+      "level": 0,
+      "beforeGLBSha256": "4470f0d829433993161ebbc7f759b3ca4fb7a1b59d733fc8e947e267bc9594d1",
+      "afterGLBSha256": "bc49cb015a4d02e1d7d68c5812a459d5b49eee822a8aff8d6795709d04fac80e",
+      "preservedRearComponents": 309,
+      "changedRearComponents": [],
+      "comparison": "Exact ordered world-space float vertex data, component by component; all original components wholly aft of Z=-1.45 m.",
+      "beforeSourceSha256": "0bc5c3a1fa4f728e6085facc43cb5e2cfbbc92206c17cb392bdaefe03a385fdc",
+      "afterSourceSha256": "f9fb01939c1e65c0c308c8bc2cdca72f26d9d6b728e489df6743bfb6849dc673"
+    },
+    {
+      "level": 1,
+      "beforeGLBSha256": "5522a1177b60494de3be7b0fbf5c7f0eaa53401930e02ba119f06d5b81955cda",
+      "afterGLBSha256": "c86bdf4737f28af73cd9a6f8d638b09f939ff90cd6e5a5df51e9839ec509624a",
+      "preservedRearComponents": 217,
+      "changedRearComponents": [],
+      "comparison": "Exact ordered world-space float vertex data, component by component; all original components wholly aft of Z=-1.45 m.",
+      "beforeSourceSha256": "e9dae30551eacc80b73b82cf7488da65014e25c0a0d93184961b270ce6d28d7e",
+      "afterSourceSha256": "574de58747175d91c67c76bde05c950bf44ba9542188a37303db6bb600408cd3"
+    }
+  ],
+  "materialChange": {
+    "seatBeforeLinearRGBA": [
+      0.018,
+      0.14,
+      0.4,
+      1
+    ],
+    "seatAfterLinearRGBA": [
+      0.01,
+      0.033,
+      0.073,
+      1
+    ],
+    "roughnessBefore": 0.52,
+    "roughnessAfter": 0.78,
+    "rearGeometryPreservedButUpholsteryColorChanged": true
+  },
+  "originalExteriorChanged": false,
+  "sourcePhotoPixelsBundled": false,
+  "reproduction": "Reopen saved source and export via export.py; do not rerun generator for artist edit preservation."
+}

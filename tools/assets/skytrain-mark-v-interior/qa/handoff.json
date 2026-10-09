@@ -1,0 +1,75 @@
+{
+  "status": "offline_candidate_complete",
+  "baseRevision": "a965982a58b5d15996af68899de021fa30f9267c",
+  "modelIdentity": "Alstom Mark V, Expo Line, representative A end-car plus short gangway",
+  "officialFullConsist": {
+    "cars": 5,
+    "lengthM": 84.8,
+    "modeledFullConsist": false
+  },
+  "sources": [
+    "source/mark-v-a-car-interior.lod0.blend",
+    "source/mark-v-a-car-interior.lod1.blend",
+    "source/mark-v-a-car-study.blend"
+  ],
+  "assets": [
+    {
+      "id": "mark-v-a-car-interior",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/mark-v-a-car-interior.lod0.glb",
+          "sha256": "e68542ad516bef61e9c32f051cd062995265213f2f8d0e732e4b29e87d23643e",
+          "triangles": 10992,
+          "bytes": 1177176,
+          "primitives": 10
+        },
+        {
+          "level": 1,
+          "file": "exports/mark-v-a-car-interior.lod1.glb",
+          "sha256": "6f840b8d7a679d5a0e5f1a7df21ab4d73c3273f916cbd122498fe20ce85f40da",
+          "triangles": 2964,
+          "bytes": 305404,
+          "primitives": 10
+        }
+      ]
+    },
+    {
+      "id": "mark-v-a-car-study",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/mark-v-a-car-study.glb",
+          "sha256": "c27e3aaddf680888ce56f72db1448311d269dde8d47469c5730b778ce9b20c1d",
+          "triangles": 135166,
+          "bytes": 8516908,
+          "primitives": 10
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "commonPackage": "pass",
+    "geometryAndBudgets": "pass",
+    "completeSidecarCoverageAndHashes": "pass",
+    "bakedFrameTransformGuard": "pass",
+    "exactReferenceAnchorSetsAndPositions": "pass",
+    "actualTextureInventoryAndBudget": "pass",
+    "staticAisleAndGangwayClearance": "pass",
+    "actualTriangleFloorSupport": "pass",
+    "sourceReopenAndByteIdenticalReexport": "pass",
+    "savedCopyEditPreservation": "pass",
+    "regressionTests": 23,
+    "finalPreviewIntegrity": "pass",
+    "visualReview": "pass_with_documented_limits",
+    "runtimeWebGL": "not_run",
+    "placementCompatibility": "not_assumed"
+  },
+  "scopeRestrictions": [
+    "No existing Canada Line or bus assets edited by this task.",
+    "No commits or pushes performed.",
+    "No runtime/public/application files changed.",
+    "Do not load the high-detail study as a B-CAB-budget runtime model."
+  ],
+  "nextStep": "Review visual candidate; design independent Mark V exterior/profile, doors/platform interfaces and lifecycle integration before runtime acceptance."
+}

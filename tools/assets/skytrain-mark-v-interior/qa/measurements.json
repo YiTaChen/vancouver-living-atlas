@@ -1,0 +1,202 @@
+{
+  "scope": "actual final GLB transformed geometry and embedded images",
+  "runtimeMeasured": false,
+  "assets": [
+    {
+      "id": "mark-v-a-car-interior",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/mark-v-a-car-interior.lod0.glb",
+          "source": "source/mark-v-a-car-interior.lod0.blend",
+          "sha256": "e68542ad516bef61e9c32f051cd062995265213f2f8d0e732e4b29e87d23643e",
+          "sourceSha256": "7f6d0182366b79d50245a86e429bc97d15975adf5be7fe3053704bf8fd42d4f7",
+          "componentsFile": "exports/mark-v-a-car-interior.lod0.components.json",
+          "componentsSha256": "a88bb94629f5a64592e75e2824bf14ec4e8aad264dfa98e5eb5c1066994d0eae",
+          "boundsM": {
+            "min": [
+              -1.3804128170013428,
+              -0.09000000357627869,
+              -8.53499984741211
+            ],
+            "max": [
+              1.3804128170013428,
+              2.329038619995117,
+              7.800000190734863
+            ],
+            "size": [
+              2.7608256340026855,
+              2.419038623571396,
+              16.335000038146973
+            ]
+          },
+          "triangles": 10992,
+          "vertices": 18983,
+          "primitives": 10,
+          "bytes": 1177176,
+          "embeddedImageBytes": 414183,
+          "geometryBytes": 762993,
+          "images": [
+            {
+              "sha256": "f815d2855711698883c2e6714222a402ffa4f96ae8311ebda00614d09f313060",
+              "width": 1024,
+              "height": 1024,
+              "bytes": 71466,
+              "texelBytesWithMips": 5592405.333333333
+            },
+            {
+              "sha256": "e0b728ccb83a7263e29bb3e00643905a56fb0480ca8f73086ee5620069e52f76",
+              "width": 256,
+              "height": 256,
+              "bytes": 43963,
+              "texelBytesWithMips": 349525.3333333333
+            },
+            {
+              "sha256": "4556125a0517d16bf4e39d4a315af53ed471bbc19a14045b862453f4eb0b6aa8",
+              "width": 512,
+              "height": 512,
+              "bytes": 298754,
+              "texelBytesWithMips": 1398101.3333333333
+            }
+          ],
+          "boundsScope": "rest-pose scene node transforms; no skin deformation",
+          "skins": 0,
+          "capabilities": {
+            "passengerCapable": false,
+            "doorsAnimated": false,
+            "runtimeReady": false
+          }
+        },
+        {
+          "level": 1,
+          "file": "exports/mark-v-a-car-interior.lod1.glb",
+          "source": "source/mark-v-a-car-interior.lod1.blend",
+          "sha256": "6f840b8d7a679d5a0e5f1a7df21ab4d73c3273f916cbd122498fe20ce85f40da",
+          "sourceSha256": "bdae4395f1e004947f27c837c88e024ffe22711a4e3b91277573412132dca1e2",
+          "componentsFile": "exports/mark-v-a-car-interior.lod1.components.json",
+          "componentsSha256": "c39c906ea82727578ec84052ba1352a0cf5a04d26b76b8a3580419190fa22847",
+          "boundsM": {
+            "min": [
+              -1.3804128170013428,
+              -0.1848284751176834,
+              -8.53499984741211
+            ],
+            "max": [
+              1.3804128170013428,
+              2.329038381576538,
+              7.800000190734863
+            ],
+            "size": [
+              2.7608256340026855,
+              2.5138668566942215,
+              16.335000038146973
+            ]
+          },
+          "triangles": 2964,
+          "vertices": 6370,
+          "primitives": 10,
+          "bytes": 305404,
+          "embeddedImageBytes": 42412,
+          "geometryBytes": 262992,
+          "images": [
+            {
+              "sha256": "d242b7a05e09a47eda3c253a246317e402c5f53c4e509973ae2a8b7612da4f60",
+              "width": 64,
+              "height": 64,
+              "bytes": 2366,
+              "texelBytesWithMips": 21845.333333333332
+            },
+            {
+              "sha256": "ae7bc6346470572e001e13a0cd6d81a74a30fedbd43c7b2d84764923597c4ee3",
+              "width": 64,
+              "height": 64,
+              "bytes": 2511,
+              "texelBytesWithMips": 21845.333333333332
+            },
+            {
+              "sha256": "12f18f6d8fbf33eb42f55f250366134f38f9ae9415dbec3b7e1f40df82ca1b92",
+              "width": 256,
+              "height": 256,
+              "bytes": 37535,
+              "texelBytesWithMips": 349525.3333333333
+            }
+          ],
+          "boundsScope": "rest-pose scene node transforms; no skin deformation",
+          "skins": 0,
+          "capabilities": {
+            "passengerCapable": false,
+            "doorsAnimated": false,
+            "runtimeReady": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "mark-v-a-car-study",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/mark-v-a-car-study.glb",
+          "source": "source/mark-v-a-car-study.blend",
+          "sha256": "c27e3aaddf680888ce56f72db1448311d269dde8d47469c5730b778ce9b20c1d",
+          "sourceSha256": "9f444f9502ceda608a9ccd3ee1db1b669b4a030a112a6884f40390a086337f9e",
+          "componentsFile": "exports/mark-v-a-car-study.components.json",
+          "componentsSha256": "3b1e16e1e007b471286d45bb150dea8cf7a74d4b4c1e3b21c457b1243089579a",
+          "boundsM": {
+            "min": [
+              -1.2790000438690186,
+              -0.09000000357627869,
+              -8.53499984741211
+            ],
+            "max": [
+              1.2790000438690186,
+              2.3324999809265137,
+              7.800000190734863
+            ],
+            "size": [
+              2.558000087738037,
+              2.4224999845027924,
+              16.335000038146973
+            ]
+          },
+          "triangles": 135166,
+          "vertices": 201788,
+          "primitives": 10,
+          "bytes": 8516908,
+          "embeddedImageBytes": 414183,
+          "geometryBytes": 8102725,
+          "images": [
+            {
+              "sha256": "f815d2855711698883c2e6714222a402ffa4f96ae8311ebda00614d09f313060",
+              "width": 1024,
+              "height": 1024,
+              "bytes": 71466,
+              "texelBytesWithMips": 5592405.333333333
+            },
+            {
+              "sha256": "e0b728ccb83a7263e29bb3e00643905a56fb0480ca8f73086ee5620069e52f76",
+              "width": 256,
+              "height": 256,
+              "bytes": 43963,
+              "texelBytesWithMips": 349525.3333333333
+            },
+            {
+              "sha256": "4556125a0517d16bf4e39d4a315af53ed471bbc19a14045b862453f4eb0b6aa8",
+              "width": 512,
+              "height": 512,
+              "bytes": 298754,
+              "texelBytesWithMips": 1398101.3333333333
+            }
+          ],
+          "boundsScope": "rest-pose scene node transforms; no skin deformation",
+          "skins": 0,
+          "capabilities": {
+            "passengerCapable": false,
+            "doorsAnimated": false,
+            "runtimeReady": false
+          }
+        }
+      ]
+    }
+  ]
+}

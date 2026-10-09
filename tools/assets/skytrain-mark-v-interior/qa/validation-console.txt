@@ -1,0 +1,25 @@
+{
+  "status": "pass",
+  "budgetChecks": [
+    {
+      "lod": 0,
+      "triangles": 10992,
+      "triangleCap": 12000,
+      "bytes": 1177176,
+      "byteCap": 1572864,
+      "materialPrimitives": 10,
+      "status": "pass"
+    },
+    {
+      "lod": 1,
+      "triangles": 2964,
+      "triangleCap": 3000,
+      "bytes": 305404,
+      "byteCap": 393216,
+      "materialPrimitives": 10,
+      "status": "pass"
+    }
+  ],
+  "clearance": "pass",
+  "runtime": "not_run"
+}

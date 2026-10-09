@@ -11,7 +11,7 @@ spec=importlib.util.spec_from_file_location('legacy_bus_builder',HERE.parent/'bo
 def materials():
  colors={
  'floor':((.17,.19,.21,1),.92,0), 'panel':((.68,.70,.70,1),.56,.05),
- 'seat':((.018,.14,.40,1),.52,.03), 'seat-shell':((.09,.22,.38,1),.48,.08),
+ 'seat':((.010,.033,.073,1),.78,.03), 'seat-shell':((.028,.065,.105,1),.60,.08),
  'rail':((.96,.60,.025,1),.30,.14), 'metal':((.48,.53,.57,1),.30,.70),
  'rubber':((.023,.030,.039,1),.85,0), 'glass':((.29,.40,.46,.22),.18,0),
  'marking':((.96,.70,.055,1),.65,0), 'fixture':((.88,.91,.92,1),.5,0),
@@ -52,7 +52,8 @@ def seat(i,x,z,floor,group,fine):
  if fine:
   for yy in [.66,.85]:
    for xx in [-.10,.10]:B.cylinder(n+'-upholstery-button',(xx,yy,-.201),(xx,yy,-.196),.013,'seat-shell',8,node)
- B.empty(n+'-pelvis',(x,floor+.52,z+.025));B.empty(n+'-camera',(x,floor+1.11,z+.075))
+ yaw=seat_yaw(group);node.rotation_euler.z=yaw
+ B.empty(n+'-pelvis',(.025*math.sin(yaw)+x,floor+.52,.025*math.cos(yaw)+z));B.empty(n+'-camera',(.075*math.sin(yaw)+x,floor+1.11,.075*math.cos(yaw)+z))
 
 def make(lod):
  B.ROOT=B.clean();B.M.clear();materials();fine=lod==0
@@ -129,6 +130,8 @@ def make(lod):
   box('roof-hatch-insert',(0,2.579,z),(.57,.018,.63),'panel',.003 if fine else 0)
  B.empty('driver-pelvis',(.77,.91,4.9));B.empty('driver-camera',(.77,1.51,4.95));B.empty('camera-aisle',(0,1.99,.0));B.empty('standing-center',(0,.36,0));B.empty('wheelchair-reference',(-.76,.36,.8))
  s=bpy.context.scene;s['package']='boardable-bus-v2';s['asset']='city-bus-12m-interior-v2';s['lod']=lod;s['runtime_status']='pending';s['lighting']='daytime only; all fixtures non-emissive'
+ from revise_front import apply_front
+ apply_front(lod)
 
 def main():
  ap=argparse.ArgumentParser();ap.add_argument('--output',type=Path,default=HERE);a=ap.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else []);(a.output/'source').mkdir(parents=True,exist_ok=True)

@@ -54,8 +54,8 @@ def setup(lod=0,cut=False,exterior=True):
    bm=bmesh.new();bm.from_mesh(o.data)
    fs=[f for f in bm.faces if all((o.matrix_world@v.co).z>2.22 for v in f.verts)]
    bmesh.ops.delete(bm,geom=fs,context='FACES');bm.to_mesh(o.data);bm.free()
- s=bpy.context.scene;s.render.engine='CYCLES';s.cycles.device='CPU';s.cycles.samples=24;s.cycles.use_denoising=False;s.render.threads_mode='FIXED';s.render.threads=2
- s.render.resolution_x=960;s.render.resolution_y=640;s.render.resolution_percentage=100;s.render.image_settings.file_format='PNG';s.render.film_transparent=False;s.view_settings.view_transform='AgX'
+ s=bpy.context.scene;s.render.engine='CYCLES';s.cycles.device='CPU';s.cycles.samples=48;s.cycles.use_denoising=False;s.cycles.use_adaptive_sampling=True;s.cycles.adaptive_threshold=.03;s.render.threads_mode='FIXED';s.render.threads=8;s.cycles.max_bounces=4;s.cycles.diffuse_bounces=2;s.cycles.glossy_bounces=2;s.cycles.sample_clamp_indirect=3
+ s.render.resolution_x=1024;s.render.resolution_y=683;s.render.resolution_percentage=100;s.render.image_settings.file_format='PNG';s.render.film_transparent=False;s.view_settings.view_transform='AgX';s.view_settings.exposure=0
  s.world=bpy.data.worlds.new('Daytime QA world');s.world.use_nodes=True;s.world.node_tree.nodes['Background'].inputs[0].default_value=(.74,.82,1,1);s.world.node_tree.nodes['Background'].inputs[1].default_value=.85
  for side in [-1,1]:
   for z in [-4,0,4]:
@@ -68,9 +68,11 @@ def render(name,eye,target,lens=22,ortho=None,lod=0,cut=False,exterior=True):
  paths=setup(lod,cut,exterior);s=bpy.context.scene;d=bpy.data.cameras.new('QA camera');o=bpy.data.objects.new(d.name,d);s.collection.objects.link(o);o.location=cv(eye);o.rotation_euler=(Vector(cv(target))-o.location).to_track_quat('-Z','Y').to_euler();d.lens=lens;d.clip_start=.03;d.clip_end=60
  if ortho:d.type='ORTHO';d.ortho_scale=ortho
  s.camera=o;s.render.filepath=str(HERE/'qa/previews'/(name+'.png'));bpy.ops.render.render(write_still=True)
- RENDERS.append({'file':name+'.png','sha256':sha(Path(s.render.filepath)),'renderer':'Cycles CPU','samples':24,'resolution':[960,640],'lighting':'daytime QA only','actualGLBInputs':[{'file':str(p.relative_to(HERE.parent)),'sha256':sha(p)} for p in paths],'eyeVehicleM':eye,'targetVehicleM':target,'qaOnlyCeilingCut':cut,'runtimeOrWebGL':False})
+ RENDERS.append({'file':name+'.png','sha256':sha(Path(s.render.filepath)),'renderer':'Cycles CPU','samples':48,'resolution':[1024,683],'lighting':'daytime QA only','colorManagement':'AgX','exposure':0,'denoising':False,'maximumBounces':4,'adaptiveThreshold':.03,'actualGLBInputs':[{'file':str(p.relative_to(HERE.parent)),'sha256':sha(p)} for p in paths],'eyeVehicleM':eye,'targetVehicleM':target,'qaOnlyCeilingCut':cut,'runtimeOrWebGL':False})
  print('BUS_V2_RENDER_DONE',name,flush=True)
 def previews(quick=False):
+ render('front-lowfloor-looking-front',[0,1.80,.15],[.10,1.40,4.90],lens=18)
+ render('front-priority-overview',[0,1.87,4.12],[0,1.03,.65],lens=20)
  render('front-looking-rear-lod0',[0,1.87,4.40],[0,1.53,-4.65],lens=20)
  render('rear-looking-front-lod0',[0,2.03,-4.77],[0,1.52,4.8],lens=20)
  if not quick:

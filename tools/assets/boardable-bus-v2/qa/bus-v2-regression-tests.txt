@@ -1,7 +1,9 @@
 test_bad_pelvis_anchor_rejected (__main__.BusV2Tests.test_bad_pelvis_anchor_rejected) ... ok
+test_bright_blue_material_claim_rejected (__main__.BusV2Tests.test_bright_blue_material_claim_rejected) ... ok
 test_corrupt_glb_rejected (__main__.BusV2Tests.test_corrupt_glb_rejected) ... ok
 test_dependency_drift_rejected (__main__.BusV2Tests.test_dependency_drift_rejected) ... ok
 test_door_frame_drift_rejected (__main__.BusV2Tests.test_door_frame_drift_rejected) ... ok
+test_duplicate_glb_identity_rejected (__main__.BusV2Tests.test_duplicate_glb_identity_rejected) ... ok
 test_duplicate_seat_rejected (__main__.BusV2Tests.test_duplicate_seat_rejected) ... ok
 test_fake_triangle_count_rejected (__main__.BusV2Tests.test_fake_triangle_count_rejected) ... ok
 test_honest_rear_height_limit (__main__.BusV2Tests.test_honest_rear_height_limit) ... ok
@@ -9,13 +11,18 @@ test_lod2_boarding_rejected (__main__.BusV2Tests.test_lod2_boarding_rejected) ..
 test_missing_collision_rejected (__main__.BusV2Tests.test_missing_collision_rejected) ... ok
 test_night_scope_change_rejected (__main__.BusV2Tests.test_night_scope_change_rejected) ... ok
 test_no_new_lights_or_emission (__main__.BusV2Tests.test_no_new_lights_or_emission) ... ok
+test_nonidentity_export_root_rejected (__main__.BusV2Tests.test_nonidentity_export_root_rejected) ... ok
 test_phantom_seat_rejected (__main__.BusV2Tests.test_phantom_seat_rejected) ... ok
+test_sideways_camera_in_wrong_direction_rejected (__main__.BusV2Tests.test_sideways_camera_in_wrong_direction_rejected) ... ok
+test_sideways_seat_identity_rotation_rejected (__main__.BusV2Tests.test_sideways_seat_identity_rotation_rejected) ... ok
+test_stowed_seats_counted_as_active_rejected (__main__.BusV2Tests.test_stowed_seats_counted_as_active_rejected) ... ok
 test_tall_rear_standing_rejected (__main__.BusV2Tests.test_tall_rear_standing_rejected) ... ok
 test_unchecked_runtime_claim_rejected (__main__.BusV2Tests.test_unchecked_runtime_claim_rejected) ... ok
 test_valid_delivered_package (__main__.BusV2Tests.test_valid_delivered_package) ... ok
 test_wrong_floor_datum_rejected (__main__.BusV2Tests.test_wrong_floor_datum_rejected) ... ok
+test_wrong_front_topology_rejected (__main__.BusV2Tests.test_wrong_front_topology_rejected) ... ok
 
 ----------------------------------------------------------------------
-Ran 16 tests in 10.891s
+Ran 23 tests in 66.497s
 
 OK

@@ -2,7 +2,7 @@
   "date": "2026-10-09",
   "baseRevision": "9efce79601deac6a0648cf8e158f3935cbb46f51",
   "npmTests": {
-    "pass": 831,
+    "pass": 836,
     "fail": 0,
     "skipped": 0
   },
@@ -17,8 +17,10 @@
   },
   "pythonTests": {
     "interactiveNegative": 11,
-    "bus": 16,
-    "canada": 19
+    "bus": 23,
+    "canada": 19,
+    "busRuntimeCandidate": 39,
+    "markV": 23
   },
   "station": {
     "stations": 7,
@@ -28,20 +30,49 @@
     "collisionPredicateFixtures": 3
   },
   "editableSourceReexports": {
-    "byteIdentical": 20,
-    "total": 20
+    "byteIdentical": 25,
+    "total": 25
   },
   "independentReview": {
-    "findings": 3,
-    "fixedAndRechecked": 3
+    "initialFindingsFixedAndRechecked": 3,
+    "transitRefinement": "Complete sidecar coverage/hashes, identity transforms, exact unique anchors, actual support triangles reviewed; final checks pass",
+    "markVFloorSamplesPerExport": 4426,
+    "busThresholdSamples": 143220,
+    "busRearUnchangedComponents": 526,
+    "runtimeWebGL": "not_run"
   },
   "productionIsolation": {
     "status": "pass",
-    "protectedDistinctPayloads": 82,
+    "protectedDistinctPayloads": 102,
     "productionFiles": 101,
     "scope": "static production artifact hashes/references, not browser/GPU verification"
   },
   "hostedCI": "not_run: draft PR targets PR6 branch; workflow only main",
   "runtimeWebGL": "not_run",
-  "deployment": "not_requested_not_run"
+  "deployment": "not_requested_not_run",
+  "revisionParent": "a965982a58b5d15996af68899de021fa30f9267c",
+  "busCandidate": {
+    "triangles": [
+      11704,
+      2824
+    ],
+    "bytes": [
+      736884,
+      202492
+    ],
+    "candidateOnlyThresholdStrips": 2,
+    "masterInheritedGapM": 0.1
+  },
+  "markV": {
+    "triangles": [
+      10992,
+      2964
+    ],
+    "bytes": [
+      1177176,
+      305404
+    ],
+    "referenceSeats": 22,
+    "profile": "representative A end-car, not full five-car consist"
+  }
 }

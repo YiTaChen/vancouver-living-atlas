@@ -12,7 +12,8 @@
 |---|---|---|
 | 近距離互動人物 | `tools/assets/city-life-interactive/` | 4 個原創輪廓，各 14 骨、6 clips；可編輯 `.blend`、GLB、CPU 重匯入預覽及驗證。依既有背景輪廓重建，非高精度玩家角色替換。 |
 | 近景人物 consumer 候選 | `lib/city/city-life/interactive-renderer-candidate.ts` | 未掛入 scene。使用 caller 選好的穩定 actor ID、phase、全域 0–4 名額；獨立骨架／mixer，共享 geometry/material/clips。 |
-| 公車內裝 v2 | `tools/assets/boardable-bus-v2/` | 藍色成型座椅、黃色扶手、階梯後甲板、司機／收費區；依真實照片觀察原創建模，外殼與車門仍引用既有公車。 |
+| 公車內裝 v2 | `tools/assets/boardable-bus-v2/` | 深海軍藍坐墊、修正側向優先座與前段輪拱／駕駛配置；詳細 master 與獨立 budget derivative 並存。外殼與車門仍引用既有公車。 |
+| Mark V 端車 | `tools/assets/skytrain-mark-v-interior/` | 依 2025 年投入服務的 Alstom Mark V 照片與座位圖建模；22 座 A 車、短貫通段、兩個預算內 LOD，非完整五節編組。 |
 | Canada Line | `tools/assets/canada-line-stage2/` | 獨立兩節 profile、外殼 3 LOD、內裝 2 LOD，非 Expo 四節模板。請先讀 `qa/handoff.json`。 |
 | 7 站代表性站體 | `tools/assets/skytrain-stations-stage2/` | 各站獨立 layout／來源／入口與平台，Waterfront 分 Expo 與 Canada；幾何及高度近似需依 metadata 使用。 |
 | 新包 production 隔離檢查 | `tools/stage2/verify_isolation.py` | 完成既有 Firebase build 後，核對新來源／GLB／預覽雜湊與未掛載程式未漏進 production。是靜態輸出檢查，非 browser network 驗收。 |
@@ -35,21 +36,24 @@
 5. 人物無 IK 與完整腳掌接觸求解；雨衣下襬、提袋、坐姿、真車門／座椅 fit 仍需近景檢查。
 6. 不建立 GTFS 即時班次、不宣稱可搭乘、不改夜景、不移除遠景或縮 far plane。舊整合結果屬 PR #6，不能擴張到本包。
 
+最新前段／顏色修正、Mark V 來源及量測見 [TRANSIT_INTERIOR_REFINEMENT.md](TRANSIT_INTERIOR_REFINEMENT.md)。公車詳細 master 超出 B-CAB 預算，且保留原始門口 10 cm 支撐缺口；整合應評估獨立 runtime-candidate，其中新增兩塊與車門齊平的支撐板。
+
 ## 驗證狀態
 
 本次封存後重新執行：
 
-- `npm test`：831／831 通過，0 skipped。
+- `npm test`：836／836 通過，0 skipped。
 - `npm run check`：通過。
 - `npm run build:firebase`：通過；未部署。
 - 新增 TypeScript／JavaScript 檔案 scoped lint：通過。
 - `npm run lint`：未通過，211 項既有錯誤分布於 83 個檔案；這些檔案逐一與 PR #6 基準比對，內容完全相同。未擴大範圍修正原有 lint。
 - 人物：7 個 Node 測試、11 個 Python 負例通過；獨立複查確認無 skin binding、多一個動畫、Infinity／重複 clip 三類輸入均拒絕。
-- 公車：16 個 Python 測試、4 個實際 adapter Node 測試通過。
+- 公車詳細 master：23 個 Python 測試、6 個實際 adapter Node 測試通過；獨立 budget derivative：39 個 Python 測試、6 個實際 adapter Node 測試通過；新增兩個門檻支撐板後再次封存。
+- Mark V：23 個回歸／負例測試通過；LOD0 10,992 triangles／1,177,176 bytes，LOD1 2,964 triangles／305,404 bytes。實際支撐三角形、完整 sidecar 覆蓋、transform 與精確 anchor 集均已驗證。
 - Canada Line：19 個 Python 測試通過。
 - 車站：7 站、16 stops、167 surfaces、156 門介面、184 anchors 通過，10 個負例拒絕；門檻橋板 9,828 個支撐樣本、5,616 個動作姿勢樣本及 3 個碰撞判定 fixtures 通過。這不是連續時間碰撞證明。
-- 20 個可編輯 Blender 來源均有逐包重開與 byte-identical reexport 證據。
-- `python3 tools/stage2/verify_isolation.py`：82 個新離線 payload 與 101 個 production 輸出隔離檢查通過。
+- 25 個可編輯 Blender 來源均有逐包重開與 byte-identical reexport 證據。
+- `python3 tools/stage2/verify_isolation.py`：102 個新離線 payload 與 101 個 production 輸出隔離檢查通過。
 
 本輪原始命令輸出與機器可讀摘要位於 `tools/stage2/qa/`；各包 `qa/` 另有實際尺寸、三角面數、GLB 雜湊、來源重開及預覽證據。
 

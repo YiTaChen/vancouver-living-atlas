@@ -5,18 +5,18 @@
   "sourceChecks": [
     {
       "source": "source/city-bus-12m-interior-v2.lod0.blend",
-      "sourceSha256": "0bc5c3a1fa4f728e6085facc43cb5e2cfbbc92206c17cb392bdaefe03a385fdc",
-      "editableMeshObjects": 524,
-      "editableModifiers": 114,
+      "sourceSha256": "f9fb01939c1e65c0c308c8bc2cdca72f26d9d6b728e489df6743bfb6849dc673",
+      "editableMeshObjects": 604,
+      "editableModifiers": 148,
       "geometryEquivalent": true,
       "binaryIdentical": true,
       "sourceUnchanged": true
     },
     {
       "source": "source/city-bus-12m-interior-v2.lod1.blend",
-      "sourceSha256": "e9dae30551eacc80b73b82cf7488da65014e25c0a0d93184961b270ce6d28d7e",
-      "editableMeshObjects": 380,
-      "editableModifiers": 46,
+      "sourceSha256": "574de58747175d91c67c76bde05c950bf44ba9542188a37303db6bb600408cd3",
+      "editableMeshObjects": 448,
+      "editableModifiers": 74,
       "geometryEquivalent": true,
       "binaryIdentical": true,
       "sourceUnchanged": true
@@ -25,7 +25,7 @@
   "reimports": [
     {
       "file": "exports/city-bus-12m-interior-v2.lod0.glb",
-      "sha256": "4470f0d829433993161ebbc7f759b3ca4fb7a1b59d733fc8e947e267bc9594d1",
+      "sha256": "bc49cb015a4d02e1d7d68c5812a459d5b49eee822a8aff8d6795709d04fac80e",
       "boundsM": {
         "min": [
           -1.1775000095367432,
@@ -35,7 +35,7 @@
         "max": [
           1.1775000095367432,
           2.700000047683716,
-          5.739999771118164
+          5.744999885559082
         ]
       },
       "status": "pass",
@@ -43,7 +43,7 @@
     },
     {
       "file": "exports/city-bus-12m-interior-v2.lod1.glb",
-      "sha256": "5522a1177b60494de3be7b0fbf5c7f0eaa53401930e02ba119f06d5b81955cda",
+      "sha256": "c86bdf4737f28af73cd9a6f8d638b09f939ff90cd6e5a5df51e9839ec509624a",
       "boundsM": {
         "min": [
           -1.1775000095367432,
@@ -53,7 +53,7 @@
         "max": [
           1.1775000095367432,
           2.700000047683716,
-          5.739999771118164
+          5.744999885559082
         ]
       },
       "status": "pass",

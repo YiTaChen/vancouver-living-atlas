@@ -1,0 +1,54 @@
+{
+  "status": "offline_complete",
+  "runtimeStatus": "runtime_pending_webgl",
+  "WebGL": "not_run",
+  "scope": "Separately delivered B-CAB-compliant bus interior derivative. Not integrated, not a byte-identical rear geometry proof.",
+  "measuredLods": [
+    {
+      "level": 0,
+      "file": "exports/city-bus-12m-interior-v2-runtime.lod0.glb",
+      "sha256": "76302cf2d45d5c027a412c6087231b65605d982b3ec2634942b6910ab002c096",
+      "triangles": 11704,
+      "bytes": 736884,
+      "primitives": 11,
+      "offlineSidecarBytes": 367912,
+      "sidecarRuntimeRequired": false
+    },
+    {
+      "level": 1,
+      "file": "exports/city-bus-12m-interior-v2-runtime.lod1.glb",
+      "sha256": "6d5ab5aa5d7074d7c844a48d88dbc4a4e2fd5c3f07b24b0aa6f0f4fcce0ba587",
+      "triangles": 2824,
+      "bytes": 202492,
+      "primitives": 11,
+      "offlineSidecarBytes": 200909,
+      "sidecarRuntimeRequired": false
+    }
+  ],
+  "validation": {
+    "actualGLBGeometry": "pass",
+    "B-CABBudget": "pass",
+    "negativeAndPositivePythonTests": 39,
+    "actualTriangleSupport": "coplanar complete floor rectangles, continuous portal joins, 3306 vertical rays and negative real-GLB sloped-face fixture",
+    "actualPassengerAdapterTests": 6,
+    "sourceReopenReexport": "binary identical GLBs and sidecars",
+    "editableCopyProbe": "pass",
+    "actualReducedGLBCPUPreviews": 4,
+    "visualReview": "pass"
+  },
+  "preservedContract": [
+    "24 active pelvis anchors and camera positions, 1 lowfloor standing feet anchor",
+    "3 inward navy seats; 3 opposite stowed places not counted active; 4 forward lowfloor seats; 17 rear seats",
+    "left driver/cabinet, right unseated wheelhouse/guardrail",
+    "metre vehicle frame, doors, seat yaw and original four floor/step planes; two explicit flush portal support extensions added"
+  ],
+  "integrationNotes": [
+    "Choose either detailed master or this derivative; never load both interiors.",
+    "Keep original hash-pinned exterior and its door animation.",
+    "Component sidecars are offline evidence; runtime does not need them. Loading them requires accounting for additional bytes.",
+    "Proxy metadata is LOD0 measured; continuous LOD switching collisions and game navigation remain untested.",
+    "1.95 m standing reference restricted to lowfloor; rear seated-only with 1.92 m headroom.",
+    "No production scripts, runtime assets or consumer code changed."
+  ],
+  "nextStep": "Parent integrate this directory as a separate offline candidate with its own inventory; later consumer/WebGL verification is separate."
+}
