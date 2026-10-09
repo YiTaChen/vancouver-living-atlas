@@ -105,3 +105,31 @@ test('four actual exported skins and six clips satisfy offline contract', () => 
   );
   assert.equal(JSON.parse(out).status, 'pass');
 });
+
+test('interactive rejects nonfinite, zero-duration and duplicate clips', () => {
+  const f = fixture(),
+    good = f.templates.get('commuter');
+  for (const duration of [0, -1, Infinity, NaN]) {
+    const clips = good.clips.map(
+      (c) =>
+        new THREE.AnimationClip(c.name, c.name === 'walk' ? duration : 1, []),
+    );
+    // AnimationClip normalizes negative duration, so force adversarial metadata.
+    clips.find((c) => c.name === 'walk').duration = duration;
+    assert.throws(
+      () =>
+        new InteractiveRendererCandidate(
+          new Map([['bad', { root: f.root, clips }]]),
+          2,
+        ),
+    );
+  }
+  const clips = [new THREE.AnimationClip('walk', 0, []), ...good.clips];
+  assert.throws(
+    () =>
+      new InteractiveRendererCandidate(
+        new Map([['bad', { root: f.root, clips }]]),
+        2,
+      ),
+  );
+});

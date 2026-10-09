@@ -12,15 +12,15 @@ Four original silhouettes (commuter, raincoat, runner, tote), each one opaque ve
 - exports/*.glb are skin/animation payloads, outside public/ and not adopted by production.
 - preview.py renders actual GLB reimports using Blender Cycles CPU.
 - validate.py independently checks actual GLB accessors, nondegenerate triangles, skin joints/weights, actual limb influences, six clips, normalized quaternions, finite data, dimensions and hashes.
-- test_contract.py rejects eight deliberately damaged fixtures.
+- test_contract.py rejects eleven deliberately damaged fixtures.
 - qa/source-roundtrip.json records actual source-preserving re-export hashes.
 - qa/previews/*.png show rest, walk, guide and representative seated pose. CPU images are not WebGL acceptance.
 
 Commands from repository root:
 
-    blender -b -t 2 --python tools/assets/city-life-interactive/build.py
-    blender -b -t 2 --python tools/assets/city-life-interactive/export.py -- --output /tmp/interactive-reexport
-    blender -b -t 2 --python tools/assets/city-life-interactive/preview.py
+    blender -b -t 2 --python-exit-code 1 --python tools/assets/city-life-interactive/build.py
+    blender -b -t 2 --python-exit-code 1 --python tools/assets/city-life-interactive/export.py -- --output /tmp/interactive-reexport
+    blender -b -t 2 --python-exit-code 1 --python tools/assets/city-life-interactive/preview.py
     python3 tools/assets/city-life-interactive/finalize.py
     python3 tools/assets/city-life-interactive/validate.py
     python3 tools/assets/city-life-interactive/test_contract.py
@@ -30,7 +30,7 @@ Commands from repository root:
 
 1 unit = 1 metre. Blender +Z up, -Y forward exports once to glTF +Y up, +Z forward. Rest foot-sole datum y=0. Skeleton includes pelvis, spine, neck, head, two upper arms/forearms, two thighs/shins/feet. Sit is a simplified seated pose; consumers must align the actual pelvis bone with the vehicle's pelvis anchor, not place the root at the seat height. Do not nonuniformly resize characters to pass door clearance.
 
-lib/city/city-life/interactive-renderer-candidate.ts is deliberately unmounted. It accepts an already-selected bounded set of stable actor IDs and caller-owned phase. It clones skeletons with SkeletonUtils, rejects silhouette changes and invalid inputs before mutations, disposes only clone-owned skeleton state, and leaves shared geometries/materials/textures to the template lease owner. It does not independently create population or run AI. It is not a completed city consumer.
+lib/city/city-life/interactive-renderer-candidate.ts is deliberately unmounted. It accepts an already-selected bounded set of stable actor IDs and caller-owned phase. It clones skeletons with SkeletonUtils, rejects silhouette changes and invalid inputs before mutations, disposes only clone-owned skeleton state, and leaves shared geometries/materials/textures to the template lease owner. It does not independently create population or run AI. The at-most-four selected skins disable frustum culling until an animated-envelope integration is validated, avoiding stale rest-sphere clipping. It is not a completed city consumer.
 
 ## Limits
 

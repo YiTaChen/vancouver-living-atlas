@@ -3,18 +3,57 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { cityModule } from './helpers/city-modules.mjs';
-const {InteractiveRendererCandidate}=await import(cityModule('city-life/interactive-renderer-candidate'));
-test('actual GLB skin clones retain independent poses and shared geometry', async()=>{
- const bytes=readFileSync('tools/assets/city-life-interactive/exports/pedestrian-commuter.glb');
- const gltf=await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');
- const renderer=new InteractiveRendererCandidate(new Map([['commuter',{root:gltf.scene,clips:gltf.animations}]]),2);
- const pose=(id,phase)=>({actorId:id,appearanceId:'commuter',motion:'walk',phase,position:[0,0,0],quaternion:[0,0,0,1]});
- renderer.sync([pose('a',.25),pose('b',.75)]);
- const skins=renderer.root.children.map(root=>{let result;root.traverse(o=>{if(o.isSkinnedMesh)result=o;});return result;});
- assert.notEqual(skins[0].skeleton,skins[1].skeleton);assert.notEqual(skins[0].skeleton.bones[0],skins[1].skeleton.bones[0]);assert.equal(skins[0].geometry,skins[1].geometry);
- const bone=(s)=>s.skeleton.bones.find(b=>b.name==='left-thigh');
- assert.notDeepEqual(bone(skins[0]).quaternion.toArray(),bone(skins[1]).quaternion.toArray());
- const source=[];gltf.scene.traverse(o=>{if(o.isBone)source.push(o.quaternion.toArray());});
- const before=JSON.stringify(source);renderer.sync([pose('a',.5)]);renderer.dispose();
- const after=[];gltf.scene.traverse(o=>{if(o.isBone)after.push(o.quaternion.toArray());});assert.equal(JSON.stringify(after),before);
+const { InteractiveRendererCandidate } = await import(
+  cityModule('city-life/interactive-renderer-candidate')
+);
+test('actual GLB skin clones retain independent poses and shared geometry', async () => {
+  const bytes = readFileSync(
+    'tools/assets/city-life-interactive/exports/pedestrian-commuter.glb',
+  );
+  const gltf = await new GLTFLoader().parseAsync(
+    bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength),
+    '',
+  );
+  const renderer = new InteractiveRendererCandidate(
+    new Map([['commuter', { root: gltf.scene, clips: gltf.animations }]]),
+    2,
+  );
+  const pose = (id, phase) => ({
+    actorId: id,
+    appearanceId: 'commuter',
+    motion: 'walk',
+    phase,
+    position: [0, 0, 0],
+    quaternion: [0, 0, 0, 1],
+  });
+  renderer.sync([pose('a', 0.25), pose('b', 0.75)]);
+  const skins = renderer.root.children.map((root) => {
+    let result;
+    root.traverse((o) => {
+      if (o.isSkinnedMesh) result = o;
+    });
+    return result;
+  });
+  assert.equal(skins[0].frustumCulled, false);
+  assert.equal(skins[0].castShadow, false);
+  assert.notEqual(skins[0].skeleton, skins[1].skeleton);
+  assert.notEqual(skins[0].skeleton.bones[0], skins[1].skeleton.bones[0]);
+  assert.equal(skins[0].geometry, skins[1].geometry);
+  const bone = (s) => s.skeleton.bones.find((b) => b.name === 'left-thigh');
+  assert.notDeepEqual(
+    bone(skins[0]).quaternion.toArray(),
+    bone(skins[1]).quaternion.toArray(),
+  );
+  const source = [];
+  gltf.scene.traverse((o) => {
+    if (o.isBone) source.push(o.quaternion.toArray());
+  });
+  const before = JSON.stringify(source);
+  renderer.sync([pose('a', 0.5)]);
+  renderer.dispose();
+  const after = [];
+  gltf.scene.traverse((o) => {
+    if (o.isBone) after.push(o.quaternion.toArray());
+  });
+  assert.equal(JSON.stringify(after), before);
 });

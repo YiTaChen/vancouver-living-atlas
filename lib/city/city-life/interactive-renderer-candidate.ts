@@ -53,11 +53,13 @@ export class InteractiveRendererCandidate {
       throw new Error('Only four shared silhouettes are supported');
     for (const template of templates.values()) {
       if (
+        template.clips.length !== motions.length ||
+        template.clips.some(
+          (clip) => !Number.isFinite(clip.duration) || clip.duration <= 0,
+        ) ||
         motions.some(
           (name) =>
-            template.clips.filter(
-              (clip) => clip.name === name && clip.duration > 0,
-            ).length !== 1,
+            template.clips.filter((clip) => clip.name === name).length !== 1,
         )
       )
         throw new Error('Missing or ambiguous animation clip');
@@ -101,6 +103,9 @@ export class InteractiveRendererCandidate {
         root.name = `interactive-${pose.actorId}`;
         root.traverse((object) => {
           object.castShadow = false;
+          // At most four selected skins. Until pose-envelope WebGL acceptance,
+          // never cull animated limbs against a stale rest-pose sphere.
+          if (object instanceof THREE.SkinnedMesh) object.frustumCulled = false;
         });
         const mixer = new THREE.AnimationMixer(root);
         const action = mixer.clipAction(

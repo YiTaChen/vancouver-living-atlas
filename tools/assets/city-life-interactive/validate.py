@@ -7,6 +7,8 @@ CLIPS={'walk','idle','look','yield','guide','sit'}
 def audit(file):
  d,b=c.read_glb(file);measure=c.measure_glb(file)
  assert len(d.get('skins',[]))==1 and len(d['skins'][0]['joints'])==14,'14-bone skin required'
+ mesh_nodes=[n for n in d['nodes'] if 'mesh' in n]
+ assert len(mesh_nodes)==1 and mesh_nodes[0].get('skin')==0,'actual mesh must bind the one validated skin'
  assert len(d['meshes'])==1 and len(d['meshes'][0]['primitives'])==1,'one opaque primitive'
  assert not d.get('images') and not d.get('textures'),'no texture cost'
  assert len(d['materials'])==1 and d['materials'][0].get('alphaMode','OPAQUE')=='OPAQUE'
@@ -20,6 +22,7 @@ def audit(file):
   assert all(0<=j<14 for j in js),'joint range';assert all(0<=w<=1 for w in ws) and abs(sum(ws)-1)<1e-5,'normalized weights'
   influenced.update(j for j,w in zip(js,ws) if w>0)
  assert len(influenced)>=12,'skin must actually influence limbs, head and body'
+ assert len(d.get('animations',[]))==6,'exactly six unique animations'
  assert {a['name'] for a in d.get('animations',[])}==CLIPS,'six actions'
  for a in d['animations']:
   assert a['channels'],'empty animation'
@@ -36,6 +39,8 @@ def audit(file):
 def validate():
  c.validate(ROOT)
  m=json.loads((ROOT/'manifest.json').read_text());assert m['runtimeChecks']['status']=='not_run'
+ assert m['provenance']['generatorSha256']==c.digest(ROOT/'build.py'),'generator hash'
+ assert m['provenance']['baseGeneratorSha256']==c.digest(ROOT.parent/'city-life-pedestrians/build.py'),'base silhouette changed'
  for a in m['assets']:
   measure=audit(ROOT/a['file']);assert measure==a['measurements']
   assert c.digest(ROOT/a['file'])==a['sha256'] and c.digest(ROOT/a['source'])==a['sourceSha256']
