@@ -1,0 +1,52 @@
+{
+  "status": "offline_asset_reconstruction_complete",
+  "date": "2026-10-09",
+  "baseRevision": "9efce79601deac6a0648cf8e158f3935cbb46f51",
+  "runtimeIntegration": "pending",
+  "WebGL": "not_run",
+  "nightLighting": "deferred_not_implemented",
+  "seatCount": 24,
+  "standingAnchorCount": 1,
+  "compositionHelper": "compose.mjs",
+  "adapterTests": "../../../tests/bus-v2.test.mjs",
+  "lods": [
+    {
+      "level": 0,
+      "triangles": 30200,
+      "vertices": 56636,
+      "primitives": 11,
+      "bytes": 2634280,
+      "sourceBytes": 298301,
+      "sha256": "bc49cb015a4d02e1d7d68c5812a459d5b49eee822a8aff8d6795709d04fac80e",
+      "sourceSha256": "f9fb01939c1e65c0c308c8bc2cdca72f26d9d6b728e489df6743bfb6849dc673"
+    },
+    {
+      "level": 1,
+      "triangles": 14984,
+      "vertices": 28940,
+      "primitives": 11,
+      "bytes": 1449360,
+      "sourceBytes": 240150,
+      "sha256": "c86bdf4737f28af73cd9a6f8d638b09f939ff90cd6e5a5df51e9839ec509624a",
+      "sourceSha256": "574de58747175d91c67c76bde05c950bf44ba9542188a37303db6bb600408cd3"
+    }
+  ],
+  "limitations": [
+    "Not a fleet-identical or survey-derived TransLink replica.",
+    "Both detailed interior LODs exceed the original B-CAB triangle and byte budgets; optimization is pending.",
+    "Three right-side folding places are static stowed geometry, not active seats or deployed seat animation.",
+    "Rear deck has 1.92 m headroom and is seated-only; no rear standing anchor is exposed.",
+    "These samples do not establish continuous runtime navigation, accessibility certification, GPU performance or boarding behavior.",
+    "Inherited detailed-master limitation: interior floor ends at X=-1.15 m, exterior portal frame is X=-1.25 m, and the 0.10 m strip has no open-door support triangles at either portal. Door checks above establish clearance, not continuous threshold support. A separately validated derivative may add flush strips."
+  ],
+  "budgetStatus": "over_B-CAB_limits_optimization_pending",
+  "budgetEvidence": "qa/budget-review.json",
+  "rearPreservationEvidence": "qa/front-correction-provenance.json",
+  "thirdPartyPhotoBinariesIncluded": false,
+  "existingAssetsModified": false,
+  "cpuRendersReviewed": 9,
+  "pythonTestsPassed": 23,
+  "realAdapterTestsPassed": 6,
+  "sourceReexportsBinaryIdentical": true,
+  "gitPublication": "Parent task owns commit/push; this worker did not commit or push."
+}

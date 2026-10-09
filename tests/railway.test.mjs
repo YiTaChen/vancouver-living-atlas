@@ -54,6 +54,8 @@ const methods = engineClass.members
         'rawElevation',
         'focusTrain',
         'completeLocalMapTransition',
+        'closeBusVisit',
+        'publishBusVisit',
       ].includes(n.name.getText(ast)),
   )
   .map((n) => n.getText(ast));
@@ -72,6 +74,9 @@ const engine = Object.assign(new EngineMethods(), {
   data: { elevation: terrain, railways: data },
   scene: new THREE.Scene(),
   settings: { quality: 'high', trains: true, mode: 'orbit' },
+  busVisit: null,
+  stats: {},
+  onStats: () => {},
 });
 const railway = createRailway(engine);
 engine.railway = railway;

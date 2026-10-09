@@ -15,6 +15,7 @@ export class LandmarkDetail {
   holder = new THREE.Group();
   bounds: THREE.Box3;
   loadState: LandmarkLoadState<THREE.Group>;
+  private wanted = false;
   constructor(
     private e: CityEngine,
     private create: (detail: boolean) => THREE.Group,
@@ -124,21 +125,32 @@ export class LandmarkDetail {
   }
   update() {
     const range = QUALITY[this.e.settings.quality].landmarkDistance;
+    const distance = this.bounds.distanceToPoint(this.e.camera.position);
     const active =
       this.e.settings.buildings &&
       range > 0 &&
-      this.bounds.distanceToPoint(this.e.camera.position) < range;
-    if (active) this.loadState.start();
+      distance < range * (this.wanted ? 1.12 : 1);
+    this.wanted = active;
+    const admitted = this.e.sceneryMotion?.allowNewDetails ?? true;
+    if (active && admitted) this.loadState.start();
     else if (
+      !active &&
       ['loading', 'preparing', 'prepared'].includes(this.loadState.status)
     )
       this.loadState.cancel();
     if (
       active &&
+      admitted &&
       this.loadState.status === 'prepared' &&
-      this.e.landmarkWorker?.admitGroup()
-    )
-      this.loadState.commit();
+      this.e.landmarkWorker
+    ) {
+      const commit = () => {
+        if (this.e.landmarkWorker?.admitGroup()) this.loadState.commit();
+      };
+      if (this.e.detailWorkBudget)
+        this.e.detailWorkBudget.run(commit, { admission: true });
+      else commit();
+    }
     const showUltra =
       active && this.loadState.status === 'ready' && !!this.ultra;
     if (this.medium.visible === showUltra)

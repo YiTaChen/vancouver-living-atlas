@@ -1,0 +1,239 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-07",
+  "reviewedDeliveryRevision": "21007a07dd0715562511f202427c4a1cc55893ed",
+  "runtimeRevision": "61b035e49d6c29dc4451b58b09d311d6783e2ecd",
+  "baseRevision": "401569193ccda73e8f6a6fd96e4bdb144ef5a4c6",
+  "pullRequest": "https://github.com/YiTaChen/vancouver-living-atlas/pull/6",
+  "localTools": {
+    "node": "26.0.0",
+    "npm": "11.12.1"
+  },
+  "checks": {
+    "typecheck": "pass",
+    "fullTests": {
+      "passed": 816,
+      "failed": 0,
+      "skipped": 0,
+      "durationMs": 78172.353902
+    },
+    "productionFirebaseBuild": "pass",
+    "pedestrianSourceGlbValidation": {
+      "passed": 8
+    },
+    "transitImporterSelfTest": {
+      "passed": 6
+    },
+    "sourceOnlyTransitValidation": "pass",
+    "requireRideReady": {
+      "expectedExitCode": 1,
+      "reason": "physical city service/source placements pending"
+    },
+    "focusedLint": "pass",
+    "repositoryLint": {
+      "status": "existing_diagnostics",
+      "count": 211
+    },
+    "ciRuntime": {
+      "status": "pass",
+      "node": "24",
+      "platform": "ubuntu-24.04",
+      "url": "https://github.com/YiTaChen/vancouver-living-atlas/actions/runs/37677424665"
+    }
+  },
+  "browser": {
+    "renderer": "ANGLE Metal / AMD Radeon Pro 560X",
+    "engine": "Three r185",
+    "surface": "Codex in-app Chromium",
+    "compatibleNearRendered": 2,
+    "highNearRendered": 19,
+    "highToBalanced": {
+      "beforeRendered": 18,
+      "afterRendered": 13,
+      "retainedIds": 13,
+      "newIds": 0,
+      "budgetAfter": 24
+    },
+    "consoleErrorsAndWarnings": {
+      "mainCompatible": 0,
+      "mainHigh": 0,
+      "researchBus": 0
+    },
+    "farAfterNear": {
+      "rendered": 0,
+      "loadedTemplates": 8,
+      "populatedBatches": 0,
+      "pedestrianTriangles": 0
+    },
+    "busJourneys": [
+      "seat-09",
+      "main-aisle"
+    ],
+    "busLocalAnchorErrorM": 0,
+    "actualHiddenTab": "not_validly_observed_document_remained_visible",
+    "manualPausedBus": "simulation time, path station and local anchor unchanged",
+    "gpuPerformanceBenchmark": "not_run"
+  },
+  "implementedScope": [
+    "production bounded background pedestrian consumer",
+    "research bus consumer and real-GLB browser journeys",
+    "time/transaction/resource bug fixes",
+    "exact pedestrian adoption and production isolation gate"
+  ],
+  "pending": [
+    "production shared lane and intersection authority",
+    "source-backed bus 5/6 boarding and alighting in main city",
+    "boardable Expo multi-car consumer",
+    "seven actual SkyTrain station structures/interiors/platforms",
+    "Canada vehicle profile and Waterfront transfer",
+    "near skeleton/local-event consumer",
+    "mobile/touch, actual visibility/BFCache and long-run benchmark"
+  ],
+  "deferred": [
+    "night shop/window/street-light changes"
+  ],
+  "evidenceNotes": [
+    "Bus checkpoints captured at efaf99a; subsequent 61b035e changes only pedestrian window/cache code and tests.",
+    "Checkpoints are finite observations, not a ten-minute memory or cross-device performance certification.",
+    "WebGLRenderer.info totals include existing multiple passes; pedestrian renderer statistics are geometry/CPU-buffer counts, not GPU VRAM."
+  ],
+  "checkpointRecords": [
+    {
+      "file": "bus-mainaisle-stop1-rider-dwell.json",
+      "revision": "efaf99accd32f0dd8ecc3a2e690255e01baef35f",
+      "sourceFingerprint": "3356d0dcef4668b8832c184165a8b42e2d085e900157645449aa8ed23968d060",
+      "sha256": "9746149176dd4d87f039768db28520bb21990e0e1b0090e59c0f2ab3b691b865"
+    },
+    {
+      "file": "bus-mainaisle-stop3-rider-moving.json",
+      "revision": "efaf99accd32f0dd8ecc3a2e690255e01baef35f",
+      "sourceFingerprint": "3356d0dcef4668b8832c184165a8b42e2d085e900157645449aa8ed23968d060",
+      "sha256": "12b0bf60e7a2f3dcb3f514283522a9288d451dc369db6938f52284366051ce7d"
+    },
+    {
+      "file": "bus-mainaisle-stop3-rider-terminal.json",
+      "revision": "efaf99accd32f0dd8ecc3a2e690255e01baef35f",
+      "sourceFingerprint": "3356d0dcef4668b8832c184165a8b42e2d085e900157645449aa8ed23968d060",
+      "sha256": "32ab54ab4e93032cce1a77690da7ba136e91e7622dcbf1004f5865b95ae4d6d0"
+    },
+    {
+      "file": "bus-seat09-stop1-orbit-dwell.json",
+      "revision": "efaf99accd32f0dd8ecc3a2e690255e01baef35f",
+      "sourceFingerprint": "3356d0dcef4668b8832c184165a8b42e2d085e900157645449aa8ed23968d060",
+      "sha256": "389842a1e407f7f215ea196ca86a065271fd6f88a63d99f334c965d585f28d73"
+    },
+    {
+      "file": "bus-seat09-stop2-rider-dwell.json",
+      "revision": "efaf99accd32f0dd8ecc3a2e690255e01baef35f",
+      "sourceFingerprint": "3356d0dcef4668b8832c184165a8b42e2d085e900157645449aa8ed23968d060",
+      "sha256": "2de6ec36d09ca521b8246a6d0baab32adf0f7bcb91d101377452841dae2048cd"
+    },
+    {
+      "file": "bus-seat09-stop3-rider-terminal.json",
+      "revision": "efaf99accd32f0dd8ecc3a2e690255e01baef35f",
+      "sourceFingerprint": "3356d0dcef4668b8832c184165a8b42e2d085e900157645449aa8ed23968d060",
+      "sha256": "2692bc18b1a230b776bff0705548025c9ae52c1020de5302982bf6b48c7cfe46"
+    },
+    {
+      "file": "bus-walking-stop1-orbit-dwell.json",
+      "revision": "efaf99accd32f0dd8ecc3a2e690255e01baef35f",
+      "sourceFingerprint": "3356d0dcef4668b8832c184165a8b42e2d085e900157645449aa8ed23968d060",
+      "sha256": "36b62538e416e9bb056baf19522c85da9586630ff8f7103b586b40327b8938b7"
+    },
+    {
+      "file": "bus-walking-stop3-orbit-terminal.json",
+      "revision": "efaf99accd32f0dd8ecc3a2e690255e01baef35f",
+      "sourceFingerprint": "3356d0dcef4668b8832c184165a8b42e2d085e900157645449aa8ed23968d060",
+      "sha256": "9eba73d850ad3f4a3973e273f4fba29a10617a089c0ede37d62c8298ef92daf5"
+    },
+    {
+      "file": "pedestrians-balanced-near.json",
+      "revision": "61b035e49d6c29dc4451b58b09d311d6783e2ecd",
+      "sourceFingerprint": "1eb39093c81147be8a7514b17924f968e76f440af9e64b137e221c09d1e57a20",
+      "sha256": "e7f39a5e41aac24d88a013753d9a10740c4f598cfb3560ab4517602d904e406b"
+    },
+    {
+      "file": "pedestrians-compatible-cold-far.json",
+      "revision": "61b035e49d6c29dc4451b58b09d311d6783e2ecd",
+      "sourceFingerprint": "1eb39093c81147be8a7514b17924f968e76f440af9e64b137e221c09d1e57a20",
+      "sha256": "cbf828d1a3b970b93efa32e9e06876c7d165667ddd1688e7ca1dc0a662a17b4c"
+    },
+    {
+      "file": "pedestrians-compatible-near.json",
+      "revision": "61b035e49d6c29dc4451b58b09d311d6783e2ecd",
+      "sourceFingerprint": "1eb39093c81147be8a7514b17924f968e76f440af9e64b137e221c09d1e57a20",
+      "sha256": "4d445a18a167d9c8dd5c866e633faddca4b40023bceb2a0d063dacfd072dbae1"
+    },
+    {
+      "file": "pedestrians-compatible-return-far.json",
+      "revision": "61b035e49d6c29dc4451b58b09d311d6783e2ecd",
+      "sourceFingerprint": "1eb39093c81147be8a7514b17924f968e76f440af9e64b137e221c09d1e57a20",
+      "sha256": "1d6617c56a51a909628b281ed954c2c041ed093421831092edb539efc817c101"
+    },
+    {
+      "file": "pedestrians-high-cold-far.json",
+      "revision": "61b035e49d6c29dc4451b58b09d311d6783e2ecd",
+      "sourceFingerprint": "1eb39093c81147be8a7514b17924f968e76f440af9e64b137e221c09d1e57a20",
+      "sha256": "f52863c592bba2b6b5503f119ce37bd964c2e80ace2cc29e2b0d21c0c468ca29"
+    },
+    {
+      "file": "pedestrians-high-near.json",
+      "revision": "61b035e49d6c29dc4451b58b09d311d6783e2ecd",
+      "sourceFingerprint": "1eb39093c81147be8a7514b17924f968e76f440af9e64b137e221c09d1e57a20",
+      "sha256": "d1f666acac13b28f59597a9c7ca87f525ef2b07173a4f45c1b0b16807e8acc3b"
+    },
+    {
+      "file": "pedestrians-high-return-far.json",
+      "revision": "61b035e49d6c29dc4451b58b09d311d6783e2ecd",
+      "sourceFingerprint": "1eb39093c81147be8a7514b17924f968e76f440af9e64b137e221c09d1e57a20",
+      "sha256": "356e1d72c26d02490e753434ecbed551c686598a7938484592dd5be7e16d4afe"
+    }
+  ],
+  "images": [
+    {
+      "file": "bus-mainaisle-stop3-rider-terminal.png",
+      "bytes": 105722,
+      "sha256": "2a14faed719775ef30089f7a2858171d1b7ccdf846f4e9e0f6303b68baea364b"
+    },
+    {
+      "file": "bus-seat09-stop3-rider-terminal.png",
+      "bytes": 80194,
+      "sha256": "acce362a803086578c95ef5a2b38d58289dc78ca59a53089e740deec3b9fce93"
+    },
+    {
+      "file": "pedestrians-balanced-near.png",
+      "bytes": 1091429,
+      "sha256": "cf5aebf3295b80887f8e12eb9f41ea456d0149ae1698ef67091bc85ae38f6b0b"
+    },
+    {
+      "file": "pedestrians-compatible-cold-far.png",
+      "bytes": 1101571,
+      "sha256": "6a40c5cdf46f36546e1a8ff5618a86a4339feb154ac806f226b3686d5d9d22a4"
+    },
+    {
+      "file": "pedestrians-compatible-near.png",
+      "bytes": 968877,
+      "sha256": "e4ca01c03681d394ebba8f4da0755ba9faefca0acc13b19ec4623eb5273f5b01"
+    },
+    {
+      "file": "pedestrians-compatible-return-far.png",
+      "bytes": 1221041,
+      "sha256": "72097569af317956070a1740adb9b3d89253004b3b7f01a997e636cf991aa92d"
+    },
+    {
+      "file": "pedestrians-high-cold-far.png",
+      "bytes": 1695306,
+      "sha256": "6663dfa9109f431e1119b624b47483b226e2cd6562c91ffca21ade0a024fb242"
+    },
+    {
+      "file": "pedestrians-high-near.png",
+      "bytes": 2419362,
+      "sha256": "d0f5c03e75634ec690c4cdeece4637f59347bacc28371ffab8a2f07dca1694bf"
+    },
+    {
+      "file": "pedestrians-high-return-far.png",
+      "bytes": 1702473,
+      "sha256": "ab777b4075e293cc6ed0f8efab7076ee0f194d63887a46b3a9f720c0b685eae7"
+    }
+  ]
+}

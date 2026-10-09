@@ -1,0 +1,31 @@
+{
+  "status": "offline_complete",
+  "baseRevision": "9efce79601deac6a0648cf8e158f3935cbb46f51",
+  "packageId": "canada-line-stage2",
+  "profileId": "canada-line-2car-representative-v1",
+  "deliveredSources": 5,
+  "deliveredGLBs": 5,
+  "actualConsistLengthM": 41.51200032234192,
+  "referenceReview": "references/source-review.json",
+  "sourceReexportsByteIdentical": 5,
+  "negativeAndPositiveTests": 19,
+  "previewCount": 11,
+  "renderer": "Cycles CPU, 32 samples, no denoise (this build lacks OpenImageDenoise)",
+  "runtimeChecks": {
+    "status": "not_run",
+    "integrationStatus": "runtime_pending_webgl",
+    "D06": "not_implemented",
+    "movingIntercarTraversal": "not_run",
+    "terrainAndPlatformIntegration": "not_run"
+  },
+  "hostedCI": "not_run",
+  "integrationNotes": [
+    "Use own Canada profile and stop alignment; do not map Expo doors.",
+    "Car02 local left/right becomes opposite consist side after yaw pi.",
+    "LOD2 cannot board or carry passengers.",
+    "Interior and exterior share car root rail datum; floor1.10m.",
+    "No free intercar traversal until seam/moving collision validation.",
+    "Station terrain openings, all runtime journeys, compatible/desktop/touch, lifecycle/performance remain not_run."
+  ],
+  "scope": "No app, workflow, package manager, old assets, merge or deployment changes."
+}

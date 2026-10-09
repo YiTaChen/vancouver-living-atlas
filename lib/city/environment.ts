@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { prepareParkPaths } from './park-paths';
 import { createBuses, updateBuses, type BusRoute } from './city-buses';
+import { CityBusAssets } from './bus-assets';
 import { DetailedTrees, registerTree, type ForestTree } from './detailed-trees';
 import { createCanopyGeometry } from './assets/tree-canopy';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
@@ -25,6 +26,7 @@ export interface Traffic {
   boats: THREE.Group[];
   buses: THREE.InstancedMesh;
   busRoutes: BusRoute[];
+  busAssets: CityBusAssets;
   vehicleAssets: TrafficVehicleAssets;
 }
 export function createNature(e: CityEngine) {
@@ -467,6 +469,7 @@ export function createStreetDetails(e: CityEngine): Traffic {
   buses.count = 0;
   e.trafficGroup.add(buses);
   const vehicleAssets = new TrafficVehicleAssets(routes, e.trafficGroup);
+  const busAssets = new CityBusAssets(busRoutes, e.trafficGroup, { interiorVersion: 'v2' });
   return {
     mesh: body,
     cabins,
@@ -475,17 +478,36 @@ export function createStreetDetails(e: CityEngine): Traffic {
     boats,
     buses,
     busRoutes,
+    busAssets,
     vehicleAssets,
   };
 }
 const dummy = new THREE.Object3D();
 export function updateTraffic(e: CityEngine, traffic: Traffic, time: number) {
+  const parkedRoute = e.busVisit?.routeIndex;
+  const parked = new Set<number>(parkedRoute == null ? [] : [parkedRoute]);
+  traffic.busAssets.setExcludedRoutes(parked);
+  const replaced = traffic.busAssets.update(
+    time,
+    e.camera.position,
+    (x, z) => {
+      const fallback = (e.data.roadRelief?.(x, z) ?? e.elevation(x, z)) + 1.05;
+      return e.data.roadSurface?.sample(x, z, fallback) ?? fallback;
+    },
+    {
+      quality: e.settings.quality,
+      compatible: e.compatibleGraphics,
+      allowNew: e.sceneryMotion?.allowNewDetails !== false,
+    },
+  );
+  for (const route of parked) replaced.add(route);
   updateBuses(
     traffic.buses,
     traffic.busRoutes,
     time,
     (x, z) => e.data.roadRelief?.(x, z) ?? e.elevation(x, z),
     e.camera.position,
+    replaced,
   );
   const loaded = traffic.vehicleAssets.update(
     time,

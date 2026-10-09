@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 1,
+  "runtimeRevision": "323161d2e9647ea15cb1e528f7ca16fc5adf579b",
+  "sourceFingerprint": "2c68691eaba415d720a0756ae201b535ed40c256461831d4277a4a7fa2bb92b5",
+  "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+  "limits": "Single AMD 560X device, instrumented local QA. Render-completion trace differs from controller RAF samples. Traffic and caches differ; driving pairs are smoke observations, not universal performance claims. Takeoff stress overlapped full Node regression workload; normal cruise and walking/driving did not.",
+  "results": [
+    {
+      "file": "auto-drive-auto-balanced.json",
+      "name": "drive-auto-balanced",
+      "runtimeRevision": "323161d2e9647ea15cb1e528f7ca16fc5adf579b",
+      "sourceFingerprint": "2c68691eaba415d720a0756ae201b535ed40c256461831d4277a4a7fa2bb92b5",
+      "sampleWindow": "5 < seconds < 25 and speedMps > 1.2; render-completion intervals",
+      "stress": false,
+      "frames": 2400,
+      "durationSeconds": 45.873,
+      "movingWindowFrames": 400,
+      "medianMs": 18.6,
+      "p95Ms": 24.3,
+      "maxMs": 80.6,
+      "trianglesMedian": 2651649.0,
+      "drawCallsMedian": 405.0,
+      "sequence": [
+        {
+          "atSeconds": 0.115,
+          "value": [
+            "balanced",
+            1
+          ]
+        }
+      ],
+      "checkpointScale": 1,
+      "checkpointRender": [
+        1280,
+        720
+      ],
+      "checkpointSpeedMps": 0,
+      "checkpointMode": "drive",
+      "qualityMode": "auto",
+      "checkpointQuality": "balanced"
+    },
+    {
+      "file": "auto-drive-manual-high.json",
+      "name": "drive-manual-high",
+      "runtimeRevision": "323161d2e9647ea15cb1e528f7ca16fc5adf579b",
+      "sourceFingerprint": "2c68691eaba415d720a0756ae201b535ed40c256461831d4277a4a7fa2bb92b5",
+      "sampleWindow": "5 < seconds < 25 and speedMps > 1.2; render-completion intervals",
+      "stress": false,
+      "frames": 1912,
+      "durationSeconds": 60.014,
+      "movingWindowFrames": 248,
+      "medianMs": 31.35,
+      "p95Ms": 38.8,
+      "maxMs": 87,
+      "trianglesMedian": 5634993.0,
+      "drawCallsMedian": 822.0,
+      "sequence": [
+        {
+          "atSeconds": 0.021,
+          "value": [
+            "high",
+            1
+          ]
+        }
+      ],
+      "checkpointScale": 1,
+      "checkpointRender": [
+        1600,
+        900
+      ],
+      "checkpointSpeedMps": 0,
+      "checkpointMode": "drive",
+      "qualityMode": "manual",
+      "checkpointQuality": "high"
+    },
+    {
+      "file": "auto-flight-auto-balanced-cruise.json",
+      "name": "flight-auto-balanced-cruise",
+      "runtimeRevision": "323161d2e9647ea15cb1e528f7ca16fc5adf579b",
+      "sourceFingerprint": "2c68691eaba415d720a0756ae201b535ed40c256461831d4277a4a7fa2bb92b5",
+      "sampleWindow": "5 < seconds < 25 and speedMps > 1.2; render-completion intervals",
+      "stress": false,
+      "frames": 2400,
+      "durationSeconds": 40.015,
+      "movingWindowFrames": 1200,
+      "medianMs": 16.8,
+      "p95Ms": 18.7,
+      "maxMs": 24.4,
+      "trianglesMedian": 889531.0,
+      "drawCallsMedian": 134.0,
+      "sequence": [
+        {
+          "atSeconds": 0.016,
+          "value": [
+            "balanced",
+            1
+          ]
+        }
+      ],
+      "checkpointScale": 1,
+      "checkpointRender": [
+        1280,
+        720
+      ],
+      "checkpointSpeedMps": 39.987127210543726,
+      "checkpointMode": "flight",
+      "qualityMode": "auto",
+      "checkpointQuality": "balanced"
+    },
+    {
+      "file": "auto-flight-auto-balanced.json",
+      "name": "flight-auto-balanced",
+      "runtimeRevision": "323161d2e9647ea15cb1e528f7ca16fc5adf579b",
+      "sourceFingerprint": "2c68691eaba415d720a0756ae201b535ed40c256461831d4277a4a7fa2bb92b5",
+      "sampleWindow": "5 < seconds < 25 and speedMps > 1.2; render-completion intervals",
+      "stress": true,
+      "frames": 2400,
+      "durationSeconds": 58.569,
+      "movingWindowFrames": 464,
+      "medianMs": 27.85,
+      "p95Ms": 136.6,
+      "maxMs": 183.1,
+      "trianglesMedian": 2639683.0,
+      "drawCallsMedian": 274.0,
+      "sequence": [
+        {
+          "atSeconds": 0.118,
+          "value": [
+            "balanced",
+            0.65
+          ]
+        },
+        {
+          "atSeconds": 47.344,
+          "value": [
+            "balanced",
+            0.8
+          ]
+        }
+      ],
+      "checkpointScale": 1,
+      "checkpointRender": [
+        1280,
+        720
+      ],
+      "checkpointSpeedMps": 39.91851301605379,
+      "checkpointMode": "flight",
+      "qualityMode": "auto",
+      "checkpointQuality": "balanced"
+    },
+    {
+      "file": "auto-flight-manual-ultra-cruise.json",
+      "name": "flight-manual-ultra-cruise",
+      "runtimeRevision": "323161d2e9647ea15cb1e528f7ca16fc5adf579b",
+      "sourceFingerprint": "2c68691eaba415d720a0756ae201b535ed40c256461831d4277a4a7fa2bb92b5",
+      "sampleWindow": "5 < seconds < 25 and speedMps > 1.2; render-completion intervals",
+      "stress": false,
+      "frames": 2260,
+      "durationSeconds": 60.022,
+      "movingWindowFrames": 689,
+      "medianMs": 28.7,
+      "p95Ms": 32.9,
+      "maxMs": 123.3,
+      "trianglesMedian": 1772519,
+      "drawCallsMedian": 225,
+      "sequence": [
+        {
+          "atSeconds": 0.105,
+          "value": [
+            "ultra",
+            1
+          ]
+        }
+      ],
+      "checkpointScale": 1,
+      "checkpointRender": [
+        2560,
+        1440
+      ],
+      "checkpointSpeedMps": 39.99087247721783,
+      "checkpointMode": "flight",
+      "qualityMode": "manual",
+      "checkpointQuality": "ultra"
+    },
+    {
+      "file": "auto-walk-auto-balanced.json",
+      "name": "walk-auto-balanced",
+      "runtimeRevision": "323161d2e9647ea15cb1e528f7ca16fc5adf579b",
+      "sourceFingerprint": "2c68691eaba415d720a0756ae201b535ed40c256461831d4277a4a7fa2bb92b5",
+      "sampleWindow": "5 < seconds < 25 and speedMps > 1.2; render-completion intervals",
+      "stress": false,
+      "frames": 2400,
+      "durationSeconds": 46.074,
+      "movingWindowFrames": 1039,
+      "medianMs": 18.6,
+      "p95Ms": 25.8,
+      "maxMs": 82.2,
+      "trianglesMedian": 2701579,
+      "drawCallsMedian": 476,
+      "sequence": [
+        {
+          "atSeconds": 0.183,
+          "value": [
+            "balanced",
+            1
+          ]
+        }
+      ],
+      "checkpointScale": 1,
+      "checkpointRender": [
+        1280,
+        720
+      ],
+      "checkpointSpeedMps": 4.00090428413621,
+      "checkpointMode": "walk",
+      "qualityMode": "auto",
+      "checkpointQuality": "balanced"
+    }
+  ]
+}

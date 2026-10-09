@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "project": "Vancouver Living Atlas by YiTaChen",
+  "source": "https://github.com/YiTaChen/vancouver-living-atlas",
+  "license": "Vancouver Living Atlas Noncommercial Research and Attribution 1.0",
+  "scope": "Separate geometry-simplified derivative of corrected detailed master; offline candidate, runtime/WebGL not_run. No commit or push by this worker.",
+  "referencesFile": "../REFERENCES.md",
+  "masterInputs": [
+    {
+      "file": "../source/city-bus-12m-interior-v2.lod0.blend",
+      "bytes": 298301,
+      "sha256": "f9fb01939c1e65c0c308c8bc2cdca72f26d9d6b728e489df6743bfb6849dc673"
+    },
+    {
+      "file": "../source/city-bus-12m-interior-v2.lod1.blend",
+      "bytes": 240150,
+      "sha256": "574de58747175d91c67c76bde05c950bf44ba9542188a37303db6bb600408cd3"
+    },
+    {
+      "file": "../exports/city-bus-12m-interior-v2.lod0.glb",
+      "bytes": 2634280,
+      "sha256": "bc49cb015a4d02e1d7d68c5812a459d5b49eee822a8aff8d6795709d04fac80e"
+    },
+    {
+      "file": "../exports/city-bus-12m-interior-v2.lod1.glb",
+      "bytes": 1449360,
+      "sha256": "c86bdf4737f28af73cd9a6f8d638b09f939ff90cd6e5a5df51e9839ec509624a"
+    }
+  ],
+  "method": [
+    "Copy hash-pinned LOD0 .blend independently for both candidate LODs.",
+    "Preserve editable mesh objects and non-destructive reduction modifiers; omit recorded decorative fittings.",
+    "Export ordinary GLB, batch by material, keep important semantic anchors.",
+    "Move verbose actual component ranges to final-GLB-hash-bound offline sidecars; bind sidecar SHA in manifest.",
+    "Use uint16 indices per material batch; no decoder compression or image payload.",
+    "Add exactly two candidate-only flush portal support strips; verify actual top triangles and continuous join support independently of AABBs."
+  ],
+  "preserved": [
+    "24 active seats: rear17, low-floor forward4, inward priority3",
+    "3 visibly stowed opposite places with no passenger anchors",
+    "Driver-left cabinet, right unseated wheelhouse and guardrail",
+    "Vehicle frame, portals, exterior dependency, floor levels, all seat and driver anchors"
+  ],
+  "deliberatelyNotClaimed": [
+    "byte-identical rear geometry",
+    "exact fleet replica",
+    "runtime integration",
+    "WebGL/GPU validation",
+    "continuous navigation or accessibility certification"
+  ],
+  "detailedMasterModified": false,
+  "otherRuntimeFilesModified": false,
+  "candidatePortalSupportCorrection": {
+    "reason": "Detailed master and original exterior leave an inherited 0.10 m unsupported strip between interior floor edge and each portal frame.",
+    "components": [
+      "door-front-threshold-slab",
+      "door-rear-threshold-slab"
+    ],
+    "xRangeM": [
+      -1.25,
+      -1.15
+    ],
+    "zRangesM": [
+      [
+        3.7,
+        4.85
+      ],
+      [
+        -1.2,
+        -0.05
+      ]
+    ],
+    "topM": 0.36,
+    "bottomM": 0.26,
+    "trianglesAddedPerLod": 24,
+    "onlyBoundsDeparture": {
+      "axis": "min-X",
+      "masterM": -1.1775000095367432,
+      "candidateM": -1.25
+    },
+    "originalFourFloorSlabsAndMetadataUnchanged": true,
+    "framesDoorsAndAnchorsUnchanged": true
+  }
+}

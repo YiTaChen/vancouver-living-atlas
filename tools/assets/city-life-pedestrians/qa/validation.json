@@ -1,0 +1,159 @@
+{
+  "status": "pass",
+  "scope": "actual GLB accessor/material/triangle/bounds/hash audit, analytic gait envelope, source-preserving reexport and reimport-preview evidence; runtime tests not run",
+  "results": [
+    {
+      "assetId": "pedestrian-commuter",
+      "lod": 0,
+      "triangles": 420,
+      "vertices": 964,
+      "bytes": 58692,
+      "retainedAttributes": [
+        "_LIMB",
+        "_PIVOT_X",
+        "_PIVOT_Y",
+        "_PIVOT_Z",
+        "_PALETTE",
+        "POSITION",
+        "NORMAL",
+        "COLOR_0"
+      ],
+      "analyticEnvelopeVerified": true,
+      "sourceReexportIdentical": true
+    },
+    {
+      "assetId": "pedestrian-commuter",
+      "lod": 1,
+      "triangles": 168,
+      "vertices": 400,
+      "bytes": 25588,
+      "retainedAttributes": [
+        "_LIMB",
+        "_PIVOT_X",
+        "_PIVOT_Y",
+        "_PIVOT_Z",
+        "_PALETTE",
+        "POSITION",
+        "NORMAL",
+        "COLOR_0"
+      ],
+      "analyticEnvelopeVerified": true,
+      "sourceReexportIdentical": true
+    },
+    {
+      "assetId": "pedestrian-raincoat",
+      "lod": 0,
+      "triangles": 420,
+      "vertices": 982,
+      "bytes": 59696,
+      "retainedAttributes": [
+        "_LIMB",
+        "_PIVOT_X",
+        "_PIVOT_Y",
+        "_PIVOT_Z",
+        "_PALETTE",
+        "POSITION",
+        "NORMAL",
+        "COLOR_0"
+      ],
+      "analyticEnvelopeVerified": true,
+      "sourceReexportIdentical": true
+    },
+    {
+      "assetId": "pedestrian-raincoat",
+      "lod": 1,
+      "triangles": 192,
+      "vertices": 464,
+      "bytes": 29312,
+      "retainedAttributes": [
+        "_LIMB",
+        "_PIVOT_X",
+        "_PIVOT_Y",
+        "_PIVOT_Z",
+        "_PALETTE",
+        "POSITION",
+        "NORMAL",
+        "COLOR_0"
+      ],
+      "analyticEnvelopeVerified": true,
+      "sourceReexportIdentical": true
+    },
+    {
+      "assetId": "pedestrian-runner",
+      "lod": 0,
+      "triangles": 424,
+      "vertices": 982,
+      "bytes": 59720,
+      "retainedAttributes": [
+        "_LIMB",
+        "_PIVOT_X",
+        "_PIVOT_Y",
+        "_PIVOT_Z",
+        "_PALETTE",
+        "POSITION",
+        "NORMAL",
+        "COLOR_0"
+      ],
+      "analyticEnvelopeVerified": true,
+      "sourceReexportIdentical": true
+    },
+    {
+      "assetId": "pedestrian-runner",
+      "lod": 1,
+      "triangles": 204,
+      "vertices": 496,
+      "bytes": 31176,
+      "retainedAttributes": [
+        "_LIMB",
+        "_PIVOT_X",
+        "_PIVOT_Y",
+        "_PIVOT_Z",
+        "_PALETTE",
+        "POSITION",
+        "NORMAL",
+        "COLOR_0"
+      ],
+      "analyticEnvelopeVerified": true,
+      "sourceReexportIdentical": true
+    },
+    {
+      "assetId": "pedestrian-tote",
+      "lod": 0,
+      "triangles": 452,
+      "vertices": 1062,
+      "bytes": 64368,
+      "retainedAttributes": [
+        "_LIMB",
+        "_PIVOT_X",
+        "_PIVOT_Y",
+        "_PIVOT_Z",
+        "_PALETTE",
+        "POSITION",
+        "NORMAL",
+        "COLOR_0"
+      ],
+      "analyticEnvelopeVerified": true,
+      "sourceReexportIdentical": true
+    },
+    {
+      "assetId": "pedestrian-tote",
+      "lod": 1,
+      "triangles": 176,
+      "vertices": 424,
+      "bytes": 26968,
+      "retainedAttributes": [
+        "_LIMB",
+        "_PIVOT_X",
+        "_PIVOT_Y",
+        "_PIVOT_Z",
+        "_PALETTE",
+        "POSITION",
+        "NORMAL",
+        "COLOR_0"
+      ],
+      "analyticEnvelopeVerified": true,
+      "sourceReexportIdentical": true
+    }
+  ],
+  "runtimeAcceptance": "not_run"
+}

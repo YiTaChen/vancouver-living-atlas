@@ -1,0 +1,67 @@
+{
+  "status": "pass",
+  "checks": {
+    "stations": 7,
+    "platformStops": 16,
+    "surfaces": 167,
+    "doorAlignments": 156,
+    "stairs": 40,
+    "elevators": 40,
+    "anchors": 184
+  },
+  "negativeFixtures": [
+    {
+      "case": "missing station",
+      "status": "rejected",
+      "reason": "exact seven stations required"
+    },
+    {
+      "case": "false runtime ready",
+      "status": "rejected",
+      "reason": "offline only"
+    },
+    {
+      "case": "bad winding",
+      "status": "rejected",
+      "reason": "floor winding"
+    },
+    {
+      "case": "short platform",
+      "status": "rejected",
+      "reason": "platform too short"
+    },
+    {
+      "case": "wrong profile",
+      "status": "rejected",
+      "reason": "wrong line profile"
+    },
+    {
+      "case": "door vertical mismatch",
+      "status": "rejected",
+      "reason": "door vertical mismatch"
+    },
+    {
+      "case": "missing edge",
+      "status": "rejected",
+      "reason": "disconnected platform"
+    },
+    {
+      "case": "walk off floor",
+      "status": "rejected",
+      "reason": "connection start not on floor waterfront-expo--waterfront-expo-landing-walk"
+    },
+    {
+      "case": "excessive stair rise",
+      "status": "rejected",
+      "reason": "stair step target"
+    },
+    {
+      "case": "missing glb anchor",
+      "status": "rejected",
+      "reason": "anchor node missing"
+    }
+  ],
+  "runtimeAcceptance": "not_run",
+  "sourceClaim": "representative geometry, actual map pixels and GIS inspected; not surveyed",
+  "commonPackageValidation": "pass"
+}

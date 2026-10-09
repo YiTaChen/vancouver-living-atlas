@@ -172,6 +172,7 @@ export function installArchitectureModuleCandidateQA(
     e.applySettings({
       ...e.settings,
       mode: 'orbit',
+      qualityMode: 'manual',
       quality: e.settings.quality === 'ultra' ? 'ultra' : 'high',
       autoRotate: false,
       labels: false,

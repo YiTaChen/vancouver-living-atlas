@@ -37,6 +37,8 @@ const methods = cls.members
         'rawElevation',
         'focusHarbour',
         'completeLocalMapTransition',
+        'closeBusVisit',
+        'publishBusVisit',
       ].includes(n.name.getText(ast)),
   )
   .map((n) => n.getText(ast));
@@ -78,6 +80,9 @@ const e = Object.assign(new Methods(), {
   settings: { harbour: true, mode: 'orbit' },
   uniforms: { time: { value: 0 }, night: { value: 0 } },
   landmarkDetails: [],
+  busVisit: null,
+  stats: {},
+  onStats: () => {},
 });
 e.camera.position.set(600, 650, 1500);
 e.landmarks = new THREE.Group();

@@ -1,0 +1,35 @@
+{
+  "status": "pass",
+  "scope": "offline visual review of actual GLB reimport Cycles CPU still images only",
+  "reviewedOn": "2026-10-07",
+  "images": [
+    {
+      "file": "qa/previews/background-lod0-front.png",
+      "sha256": "506f3e1accb47d15a50511b0a86a1a56a0e11a076fc56c6e732552b57bb65f73"
+    },
+    {
+      "file": "qa/previews/background-lod1-front.png",
+      "sha256": "b477af2b55c3b891d49c478399bdc1e9b97f0e30c8a4ca5afc07519e3398a760"
+    },
+    {
+      "file": "qa/previews/background-lod0-rear.png",
+      "sha256": "0570c702fbaa1453c8625b6b13dbf74b73cd80791675a2b8d762be8c1c851f95"
+    }
+  ],
+  "observations": [
+    "Four dressed silhouettes remain distinguishable at both LODs through stature, coat length, cap, backpack and tote.",
+    "Front LOD0 and LOD1 previews show soles on the QA ground plane and scale comparisons with 1.75 m/1.81 m reference humans plus 1 m ruler.",
+    "Far LOD includes neck connectors and a continuous raincoat outline; the initial disconnected neck/coat simplification was corrected before final export.",
+    "Rear preview verifies the merged backpack and tote, coat/cap silhouette, and opaque surfaces.",
+    "Low-poly faceting and minimal facial detail are appropriate to the background-only package; near interaction characters are not provided."
+  ],
+  "notClaimed": [
+    "walk-cycle visual acceptance",
+    "dynamic self-intersection-free motion",
+    "actual doorway fit",
+    "WebGL color/AO/normal/depth parity",
+    "frame time or GPU-memory improvement",
+    "runtime placement or population lifecycle"
+  ],
+  "runtimeAcceptance": "not_run"
+}

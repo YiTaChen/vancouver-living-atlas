@@ -33,6 +33,9 @@ export class FacadeDetails {
   });
   last = new THREE.Vector3(Infinity, Infinity, Infinity);
   quality = '';
+  private selected = new Set<string>();
+  private selectionAt = -Infinity;
+  private motionPolicy = '';
   readonly preparationMetrics = createFacadePreparationMetrics();
   queue: IncrementalFacadeQueue;
   constructor(
@@ -92,32 +95,78 @@ export class FacadeDetails {
   }
   update() {
     const q = this.e.settings.buildings ? this.e.settings.quality : 'balanced';
+    const motion = this.e.sceneryMotion,
+      budget = this.e.detailWorkBudget;
+    const policy = motion
+      ? `${motion.auto}:${motion.allowNewDetails}:${motion.fast}`
+      : '';
+    const changed =
+      q !== this.quality ||
+      this.last.distanceToSquared(this.e.camera.position) >= 20 * 20;
     if (
       q !== this.quality ||
-      this.last.distanceToSquared(this.e.camera.position) >= 20 * 20
+      policy !== this.motionPolicy ||
+      (changed &&
+        (!motion ||
+          motion.nowMs - this.selectionAt >= motion.selectionIntervalMs))
     ) {
       this.quality = q;
+      this.motionPolicy = policy;
       this.last.copy(this.e.camera.position);
+      this.selectionAt = motion?.nowMs ?? -Infinity;
+      const ahead = motion
+        ? new THREE.Vector3(...motion.lookAheadXYZ)
+        : this.last;
       const range = q === 'ultra' ? 550 : q === 'high' ? 160 : 0;
       const selected = range
         ? this.cells
-            .map((c) => ({ c, d: c.bounds.distanceToPoint(this.last) }))
-            .filter((p) => p.d < range)
-            .sort((a, b) => a.d - b.d)
+            .map((c) => ({
+              c,
+              d: c.bounds.distanceToPoint(this.last),
+              lead: c.bounds.distanceToPoint(ahead),
+            }))
+            .filter((p) =>
+              motion
+                ? this.selected.has(p.c.id)
+                  ? p.d < range + 40
+                  : motion.allowNewDetails && p.lead < range && p.d < range + 90
+                : p.d < range,
+            )
+            .sort(
+              (a, b) =>
+                (motion
+                  ? Number(this.selected.has(b.c.id)) -
+                    Number(this.selected.has(a.c.id))
+                  : 0) || a.lead - b.lead,
+            )
             .slice(0, 24)
         : [];
+      this.selected = new Set(selected.map(({ c }) => c.id));
       // Geometry is identical at High/Ultra. Only selection distance changes.
       this.queue.select(
         selected.map(({ c, d }) => ({
           id: c.id,
           items: c.items,
           version: 'facade-v1',
-          priority: d,
+          priority: motion ? c.bounds.distanceToPoint(ahead) : d,
         })),
       );
     }
     // Pump stays OUTSIDE the camera threshold guard, including stationary frames.
-    this.queue.pump();
+    if (!motion && !budget) this.queue.pump();
+    else if (this.queue.needsWork && (motion?.allowNewDetails ?? true)) {
+      const work = () =>
+        this.queue.pump({
+          budgetMs: Math.min(
+            motion?.preparationBudgetMs ?? 1.25,
+            budget?.remainingMs() ?? 1.25,
+          ),
+          allowNewJob: motion?.allowNewDetails ?? true,
+        });
+      if (budget)
+        budget.run(work, { admission: this.queue.pendingToken === undefined });
+      else work();
+    }
   }
   dispose() {
     this.queue.dispose();

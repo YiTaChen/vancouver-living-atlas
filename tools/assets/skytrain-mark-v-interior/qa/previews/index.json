@@ -1,0 +1,176 @@
+{
+  "status": "rendered_and_pixel_reviewed_with_documented_limits",
+  "renders": [
+    {
+      "file": "06-open-gangway-continuity.png",
+      "sha256": "d30d5c96a364ed147f04e4927b38cabd56d5ffb1b5b6aceb44e92939f9e1518b",
+      "inputGLB": "exports/mark-v-a-car-interior.lod0.glb",
+      "inputSha256": "280aa59559444ac15d6c2d712c61e87b846076632d8127f116e20424a086c984",
+      "renderer": "Cycles CPU",
+      "blender": "4.3.2",
+      "samples": 96,
+      "denoising": "unavailable in installed Blender build; high-sample adaptive CPU rendering",
+      "resolution": [
+        960,
+        640
+      ],
+      "eyeM": [
+        0.0,
+        1.65,
+        -6.2
+      ],
+      "targetM": [
+        0.0,
+        1.25,
+        -13.0
+      ],
+      "lensMm": 24,
+      "lighting": "QA-only neutral daylight and interior bounce; no emitted asset light",
+      "geometryRemoved": false,
+      "materialOverrides": false,
+      "runtimeWebGL": false,
+      "qaContext": {
+        "kind": "exact duplicated A-car GLB joined rear-to-rear for open-passage visualization",
+        "notCcarReconstruction": true,
+        "notFullConsist": true,
+        "sourceGLB": "exports/mark-v-a-car-interior.lod0.glb",
+        "sourceSha256": "280aa59559444ac15d6c2d712c61e87b846076632d8127f116e20424a086c984",
+        "glTFTransform": {
+          "rotationYRadians": 3.141592653589793,
+          "translationM": [
+            0,
+            0,
+            -17.07
+          ]
+        },
+        "bridgeJoinZM": -8.535,
+        "geometryEdited": false
+      },
+      "sceneScope": "QA continuity: two exact A-car instances, not a C-car or full consist"
+    },
+    {
+      "file": "04-gangway-return.png",
+      "sha256": "66078aac9012a7d8b06b1653041388e3c924f53fb323a8e3d9e96ab390041f09",
+      "inputGLB": "exports/mark-v-a-car-interior.lod0.glb",
+      "inputSha256": "280aa59559444ac15d6c2d712c61e87b846076632d8127f116e20424a086c984",
+      "renderer": "Cycles CPU",
+      "blender": "4.3.2",
+      "samples": 96,
+      "denoising": "unavailable in installed Blender build; high-sample adaptive CPU rendering",
+      "resolution": [
+        960,
+        640
+      ],
+      "eyeM": [
+        0.0,
+        1.65,
+        -9.2
+      ],
+      "targetM": [
+        0.0,
+        1.1,
+        -7.3
+      ],
+      "lensMm": 18,
+      "lighting": "QA-only neutral daylight and interior bounce; no emitted asset light",
+      "geometryRemoved": false,
+      "materialOverrides": false,
+      "runtimeWebGL": false,
+      "sceneScope": "Isolated A-car: no adjacent cabin; neutral world beyond the open gangway is QA background, not geometry"
+    },
+    {
+      "file": "02-seats-door-detail.png",
+      "sha256": "ce2a5c24a6b681a88805248ae4cf826c4e218a1fe9bc0b36fdce7b512e0bdd5f",
+      "inputGLB": "exports/mark-v-a-car-interior.lod0.glb",
+      "inputSha256": "280aa59559444ac15d6c2d712c61e87b846076632d8127f116e20424a086c984",
+      "renderer": "Cycles CPU",
+      "blender": "4.3.2",
+      "samples": 96,
+      "denoising": "unavailable in installed Blender build; high-sample adaptive CPU rendering",
+      "resolution": [
+        960,
+        640
+      ],
+      "eyeM": [
+        -0.15,
+        1.57,
+        -0.36
+      ],
+      "targetM": [
+        0.93,
+        0.95,
+        -2.5
+      ],
+      "lensMm": 25,
+      "lighting": "QA-only neutral daylight and interior bounce; no emitted asset light",
+      "geometryRemoved": false,
+      "materialOverrides": false,
+      "runtimeWebGL": false,
+      "sceneScope": "Isolated A-car: no adjacent cabin; neutral world beyond the open gangway is QA background, not geometry"
+    },
+    {
+      "file": "01-aisle-toward-gangway.png",
+      "sha256": "597c6af9248f5ec5df3ffbd66947b8145458d1a0451cecdef5d8929a3dcf8baa",
+      "inputGLB": "exports/mark-v-a-car-interior.lod0.glb",
+      "inputSha256": "280aa59559444ac15d6c2d712c61e87b846076632d8127f116e20424a086c984",
+      "renderer": "Cycles CPU",
+      "blender": "4.3.2",
+      "samples": 96,
+      "denoising": "unavailable in installed Blender build; high-sample adaptive CPU rendering",
+      "resolution": [
+        960,
+        640
+      ],
+      "eyeM": [
+        0.25,
+        1.65,
+        4.03
+      ],
+      "targetM": [
+        0.0,
+        1.2,
+        -7.8
+      ],
+      "lensMm": 22,
+      "lighting": "QA-only neutral daylight and interior bounce; no emitted asset light",
+      "geometryRemoved": false,
+      "materialOverrides": false,
+      "runtimeWebGL": false,
+      "sceneScope": "Isolated A-car: no adjacent cabin; neutral world beyond the open gangway is QA background, not geometry"
+    },
+    {
+      "file": "05-aisle-lod1.png",
+      "sha256": "420b818d7b1b32a7fbd51649896e48523513506de9a823208209f4334fc0c988",
+      "inputGLB": "exports/mark-v-a-car-interior.lod1.glb",
+      "inputSha256": "25b45a2fd670a818b8ef10bc3dd92fbc427b941231063d8f9927706ddafe9e8d",
+      "renderer": "Cycles CPU",
+      "blender": "4.3.2",
+      "samples": 96,
+      "denoising": "unavailable in installed Blender build; high-sample adaptive CPU rendering",
+      "resolution": [
+        960,
+        640
+      ],
+      "eyeM": [
+        0.25,
+        1.65,
+        4.03
+      ],
+      "targetM": [
+        0.0,
+        1.2,
+        -7.8
+      ],
+      "lensMm": 22,
+      "lighting": "QA-only neutral daylight and interior bounce; no emitted asset light",
+      "geometryRemoved": false,
+      "materialOverrides": false,
+      "runtimeWebGL": false,
+      "sceneScope": "Isolated A-car: no adjacent cabin; neutral world beyond the open gangway is QA background, not geometry"
+    }
+  ],
+  "recommendedCorrectionViews": [
+    "06-open-gangway-continuity.png",
+    "04-gangway-return.png"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "kind": "manual-browser-acceptance-v1",
+  "capturedAt": "2026-10-09T18:11:25Z",
+  "parentRevision": "c3b66985d7ac1612b4cf54aeb6574214ea113f3b",
+  "sourceFingerprint": "f27b3f38ad3e44e45208c715e311558a48f02d37a59492429ec31903e441200c",
+  "renderer": "ANGLE Metal AMD Radeon Pro 560X",
+  "desktopViewport": [
+    1280,
+    720
+  ],
+  "responsiveViewport": [
+    375,
+    812
+  ],
+  "responsiveCanvas": [
+    327,
+    365
+  ],
+  "responsiveDialogBounds": {
+    "x": 12,
+    "y": 53.234375,
+    "width": 351,
+    "height": 705.53125
+  },
+  "responsiveDocumentScrollWidth": 375,
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "verified": [
+    "first default bus boarding resolves low-floor-aisle and succeeds without selecting an option",
+    "24 bus seats available; rear seat preview and alighting return to ready",
+    "bus front seat at 23:00; close returns to idle and releases visit",
+    "Mark V LOD0 and LOD1:22 seats, authored model hashes",
+    "Canada Line LOD0 and LOD1:20 seats, paired interior/exterior hashes",
+    "seated ArrowRight look and Reset view",
+    "close removes cabin canvas and returns focus to SkyTrain launcher",
+    "responsive dialog fits viewport; Escape closes and restores launcher focus",
+    "reopened Canada Line uses same resource counts as first display"
+  ],
+  "unitTestOnly": [
+    "constructor failure rollback",
+    "network/late parse cancellation and paired load failure",
+    "context loss disposal and retry renderer remount",
+    "hidden RAF behavior and city BFCache lifecycle"
+  ],
+  "limitations": [
+    "responsive viewport is desktop emulation, not an actual phone or touch-GPU test",
+    "snapshot FPS/draw counts include view culling and are not comparative performance benchmarks",
+    "source parentRevision is the precommit integration parent; sourceFingerprint identifies actual frozen visual files",
+    "SkyTrain exhibit is not a station, service, boarding, or intercar traversal implementation"
+  ]
+}

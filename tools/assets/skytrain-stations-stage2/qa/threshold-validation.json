@@ -1,0 +1,1292 @@
+{
+  "status": "pass",
+  "instanceCount": 156,
+  "supportRayCount": 9828,
+  "sourceHashes": {
+    "boardable-metro/exports/expo-metro-lead-exterior.lod0.glb": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3",
+    "boardable-metro/exports/expo-metro-shared-interior.lod0.glb": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775",
+    "exports/threshold-bridge-expo.glb": "855b9e349b6ef01bbebd723f1edea3bbb8e5d79b60b3a2c5d794d38f39b1ba6c",
+    "canada-line-stage2/exports/canada-line-endcar-exterior.lod0.glb": "6d6443eb4ef23b0b0a8b08caf00e4b426b83c0485afed6a3baddfaed3a5624dc",
+    "canada-line-stage2/exports/canada-line-shared-interior.lod0.glb": "aeb8e0a8ea43ec894c62d0dc721f67f2232a401e3ede57f180a8d05b177b770b",
+    "exports/threshold-bridge-canada.glb": "8ff5cbe5586ae6e6496fc39e50ffe3104653999cfd4305d06e292533a307ba4e",
+    "exports/waterfront.glb": "d2833eea065e684f989e7242cdb8b4d339b530f63e4bd7507ae7f0df6042a881",
+    "exports/burrard.glb": "e3f9fe3e1be45f861254c53a5c3276ee092e39f315193fdfd9416d6c7e224264",
+    "exports/granville.glb": "1da39eb31cf64ab22144d3bfe96ea853616f4ae47d09b2e9c1ba5352353637b7",
+    "exports/stadium-chinatown.glb": "4ac05ec2618bef2d27745699eb85594fa859721b83f6f50547c74dc9e2664638",
+    "exports/main-street-science-world.glb": "fff6328a70e15612e9344687c1f72f7a2b40009833e0e82a610181814adc29f8",
+    "exports/vancouver-city-centre.glb": "e7aa69e97a495fac4fbe0c243aca0575beabc62ea568615153e992b355ab834a",
+    "exports/yaletown-roundhouse.glb": "3710b640dcfd9512ccdeead84a4392392f559dc7a16219af0e1c61338e62c98e"
+  },
+  "instances": [
+    {
+      "instanceId": "bridge-waterfront-expo-westbound-car1-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-expo-westbound-car1-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-expo-westbound-car1-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-expo-westbound-car2-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-expo-westbound-car2-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-expo-westbound-car2-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-expo-westbound-car3-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-expo-westbound-car3-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-expo-westbound-car3-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-expo-westbound-car4-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-expo-westbound-car4-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-expo-westbound-car4-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-expo-eastbound-car1-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-expo-eastbound-car1-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-expo-eastbound-car1-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-expo-eastbound-car2-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-expo-eastbound-car2-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-expo-eastbound-car2-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-expo-eastbound-car3-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-expo-eastbound-car3-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-expo-eastbound-car3-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-expo-eastbound-car4-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-expo-eastbound-car4-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-expo-eastbound-car4-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-canada-northbound-car1-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-canada-northbound-car1-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-canada-northbound-car1-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-canada-northbound-car2-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-canada-northbound-car2-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-canada-northbound-car2-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-canada-southbound-car1-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-canada-southbound-car1-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-canada-southbound-car1-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-canada-southbound-car2-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-canada-southbound-car2-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-waterfront-canada-southbound-car2-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-burrard-upper-westbound-car1-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-burrard-upper-westbound-car1-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-burrard-upper-westbound-car1-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-burrard-upper-westbound-car2-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-burrard-upper-westbound-car2-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-burrard-upper-westbound-car2-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-burrard-upper-westbound-car3-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-burrard-upper-westbound-car3-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-burrard-upper-westbound-car3-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-burrard-upper-westbound-car4-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-burrard-upper-westbound-car4-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-burrard-upper-westbound-car4-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-burrard-lower-eastbound-car1-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-burrard-lower-eastbound-car1-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-burrard-lower-eastbound-car1-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-burrard-lower-eastbound-car2-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-burrard-lower-eastbound-car2-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-burrard-lower-eastbound-car2-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-burrard-lower-eastbound-car3-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-burrard-lower-eastbound-car3-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-burrard-lower-eastbound-car3-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-burrard-lower-eastbound-car4-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-burrard-lower-eastbound-car4-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-burrard-lower-eastbound-car4-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-granville-upper-westbound-car1-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-granville-upper-westbound-car1-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-granville-upper-westbound-car1-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-granville-upper-westbound-car2-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-granville-upper-westbound-car2-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-granville-upper-westbound-car2-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-granville-upper-westbound-car3-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-granville-upper-westbound-car3-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-granville-upper-westbound-car3-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-granville-upper-westbound-car4-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-granville-upper-westbound-car4-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-granville-upper-westbound-car4-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-granville-lower-eastbound-car1-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-granville-lower-eastbound-car1-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-granville-lower-eastbound-car1-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-granville-lower-eastbound-car2-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-granville-lower-eastbound-car2-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-granville-lower-eastbound-car2-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-granville-lower-eastbound-car3-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-granville-lower-eastbound-car3-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-granville-lower-eastbound-car3-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-granville-lower-eastbound-car4-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-granville-lower-eastbound-car4-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-granville-lower-eastbound-car4-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-stadium-expo-westbound-car1-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-stadium-expo-westbound-car1-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-stadium-expo-westbound-car1-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-stadium-expo-westbound-car2-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-stadium-expo-westbound-car2-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-stadium-expo-westbound-car2-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-stadium-expo-westbound-car3-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-stadium-expo-westbound-car3-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-stadium-expo-westbound-car3-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-stadium-expo-westbound-car4-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-stadium-expo-westbound-car4-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-stadium-expo-westbound-car4-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-stadium-expo-eastbound-car1-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-stadium-expo-eastbound-car1-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-stadium-expo-eastbound-car1-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-stadium-expo-eastbound-car2-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-stadium-expo-eastbound-car2-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-stadium-expo-eastbound-car2-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-stadium-expo-eastbound-car3-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-stadium-expo-eastbound-car3-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-stadium-expo-eastbound-car3-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-stadium-expo-eastbound-car4-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-stadium-expo-eastbound-car4-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-stadium-expo-eastbound-car4-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-main-expo-westbound-car1-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-main-expo-westbound-car1-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-main-expo-westbound-car1-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-main-expo-westbound-car2-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-main-expo-westbound-car2-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-main-expo-westbound-car2-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-main-expo-westbound-car3-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-main-expo-westbound-car3-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-main-expo-westbound-car3-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-main-expo-westbound-car4-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-main-expo-westbound-car4-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-main-expo-westbound-car4-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-main-expo-eastbound-car1-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-main-expo-eastbound-car1-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-main-expo-eastbound-car1-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-main-expo-eastbound-car2-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-main-expo-eastbound-car2-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-main-expo-eastbound-car2-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-main-expo-eastbound-car3-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-main-expo-eastbound-car3-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-main-expo-eastbound-car3-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-main-expo-eastbound-car4-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-main-expo-eastbound-car4-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-main-expo-eastbound-car4-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-vcc-canada-northbound-car1-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-vcc-canada-northbound-car1-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-vcc-canada-northbound-car1-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-vcc-canada-northbound-car2-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-vcc-canada-northbound-car2-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-vcc-canada-northbound-car2-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-vcc-canada-southbound-car1-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-vcc-canada-southbound-car1-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-vcc-canada-southbound-car1-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-vcc-canada-southbound-car2-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-vcc-canada-southbound-car2-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-vcc-canada-southbound-car2-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-yaletown-canada-northbound-car1-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-yaletown-canada-northbound-car1-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-yaletown-canada-northbound-car1-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-yaletown-canada-northbound-car2-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-yaletown-canada-northbound-car2-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-yaletown-canada-northbound-car2-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-yaletown-canada-southbound-car1-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-yaletown-canada-southbound-car1-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-yaletown-canada-southbound-car1-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-yaletown-canada-southbound-car2-door1",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-yaletown-canada-southbound-car2-door2",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    },
+    {
+      "instanceId": "bridge-yaletown-canada-southbound-car2-door3",
+      "supportRays": 63,
+      "support": "actual station + bridge + vehicle GLB vertical support; maximum rise15mm",
+      "storedClearance": "inside gap, below sill by >=0.02m, outside complete vehicle X envelope",
+      "fullyOpenLeaves": "clear",
+      "runtimeMotion": "not_run"
+    }
+  ],
+  "activation": "disabled until D06 stopped-door-deployed transaction and dynamic collision acceptance",
+  "motionPath": "explicit representative raised-rotate-translate-lower sequence, not swept-motion certified",
+  "bridgeDoorHeadClearance": {
+    "expo": {
+      "sourceMinimumOpeningHeightM": 2.05,
+      "measuredBridgeRiseM": 0.015,
+      "remainingDoorClearanceM": 2.035,
+      "referenceHumanHeightM": 1.95,
+      "referenceHeadMarginM": 0.085,
+      "doorMinimum2mPass": true,
+      "basis": "source door contract with source-package geometry verification; actual GLB bridge measured15mm; cabin headroom is separate"
+    },
+    "canada": {
+      "sourceMinimumOpeningHeightM": 2.13,
+      "measuredBridgeRiseM": 0.015,
+      "remainingDoorClearanceM": 2.115,
+      "referenceHumanHeightM": 1.95,
+      "referenceHeadMarginM": 0.165,
+      "doorMinimum2mPass": true,
+      "basis": "source door contract with source-package geometry verification; actual GLB bridge measured15mm; cabin headroom is separate"
+    }
+  }
+}

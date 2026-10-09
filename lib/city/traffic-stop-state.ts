@@ -42,6 +42,8 @@ export class TrafficStopState {
   phase: StopPhase = 'idle';
   elapsed = 0;
   speeding = 0;
+  /** Each tier is consumed on activation and retained across cancellation/mode changes. */
+  nextTriggerSpeedKmh = 100;
   get active() {
     return this.phase !== 'idle';
   }
@@ -53,10 +55,15 @@ export class TrafficStopState {
   update(dt: number, speed: number, eligible: boolean) {
     const h = Number.isFinite(dt) ? Math.max(0, Math.min(0.1, dt)) : 0;
     if (this.phase === 'idle') {
-      this.speeding = eligible && speed * 3.6 > 100 ? this.speeding + h : 0;
+      this.speeding =
+        eligible && speed * 3.6 > this.nextTriggerSpeedKmh
+          ? this.speeding + h
+          : 0;
       if (this.speeding >= 5 - 1e-8) {
         this.phase = 'braking';
         this.elapsed = 0;
+        this.speeding = 0;
+        this.nextTriggerSpeedKmh *= 2;
       }
     } else if (this.phase === 'braking') {
       if (Math.abs(speed) < 0.1) {

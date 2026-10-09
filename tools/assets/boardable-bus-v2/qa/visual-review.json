@@ -1,0 +1,66 @@
+{
+  "status": "pass_with_documented_limitations",
+  "date": "2026-10-09",
+  "method": "All nine final actual-GLB Cycles CPU render PNGs opened and inspected as pixels after corrected export. Fresh matched-model real reference photos inspected before geometry correction.",
+  "scope": "Detailed offline master visual QA; not runtime, WebGL, surveyed fleet identity or accessibility acceptance",
+  "reviewedRenders": [
+    {
+      "file": "front-lowfloor-looking-front.png",
+      "sha256": "c179757c86c14b809ffbb8321143f16734ac347dd95c3fe8552838439df40129",
+      "observation": "Looking toward +Z front: dark navy inward-facing left priority bench, raised right folding places, open bay, bare metal right wheelhouse/guardrail, distinct tall left cabinet and separate cab/fare entrance. No front copy of the rear seat rows."
+    },
+    {
+      "file": "front-priority-overview.png",
+      "sha256": "7830961ef7b501db47dd738803f2fdad720abf03b069c5e388e56cc84fe404bf",
+      "observation": "Front entrance looking aft: right wheelhouse in foreground on image left, tall driver-side cabinet on image right, side-facing bench and clear mobility bay, farther-aft low-floor pairs, then unchanged yellow-edged rear steps and rear rows."
+    },
+    {
+      "file": "front-looking-rear-lod0.png",
+      "sha256": "66a1edd67e833fee1d196a8dd8c42186fa45fabb63fa12dbe6c8afe24a8d1004",
+      "observation": "Long front-to-rear view retains open low-floor foreground, inward priority seating and dark navy upholstery, separate rear step/paired-row structure and yellow rails."
+    },
+    {
+      "file": "rear-looking-front-lod0.png",
+      "sha256": "17a85e809f91c9a252744d3174911e126f4a5d0446ffcc213c529904bce8b312",
+      "observation": "Rear foreground geometry and seat-back rhythm retained. Ahead, the asymmetric front bay, driver cabinet and entry are visibly distinct; dark navy extends consistently through cabin."
+    },
+    {
+      "file": "wheelchair-and-rear-door.png",
+      "sha256": "a4f266e702b67b73fe6d80526c4b2d0ea45738393acbaefc372fc5138d95075b",
+      "observation": "Camera is in the mobility area looking aft toward the right-side rear doorway, low-floor forward pair and unchanged rear steps. The wheelchair bay itself is established by the two dedicated front views; the legacy filename is retained."
+    },
+    {
+      "file": "front-door-driver.png",
+      "sha256": "b8b35f7228755a2a09171897c56acec70f6e42d827e7b1e13743fd056c1c42a1",
+      "observation": "Open front portal and fare reader remain clear. Through the simplified cab shield, the black driver chair, tilted open steering ring and low dash are visible. Cabinet and low gate separate this zone; exact controls remain representative."
+    },
+    {
+      "file": "rear-steps-detail.png",
+      "sha256": "2108c328c55dd8d809c2c7eea47357676a00d2f55929f70c09dd7cc23b580aea",
+      "observation": "Two risers and yellow nosings, rear forward pairs, silver seat grabs, stop button and rear bench are unchanged in shape and retain the deeper navy upholstery."
+    },
+    {
+      "file": "cutaway-layout.png",
+      "sha256": "1e9bebbbd4452af2e6564a20e5b06584b56b6301be7d48ad9878eebca8bab47b",
+      "observation": "QA-only cutaway exposes 17 rear active seats plus 4 low-floor forward and 3 inward priority seats, 3 uncounted stowed places, front wheelboxes, separate driver station and clear front entry. Upper vent/strap remnants float only because roof/exterior are omitted for this diagnostic view."
+    },
+    {
+      "file": "front-looking-rear-lod1.png",
+      "sha256": "a4530e9c561f721970fee3b726ce9e5b1cb6784e132630e4262ab6fda43e4666",
+      "observation": "Detailed master LOD1 preserves the corrected asymmetric front layout and navy palette, while omitting straps/buttons and reducing rounded edges. This master LOD remains over budget; separate runtime-candidate previews are required for reduced outputs."
+    }
+  ],
+  "limitations": [
+    "Cycles CPU 48-sample images retain visible Monte Carlo grain; installed Blender has no OpenImageDenoise support. No retouching or generated-image replacement was used.",
+    "Neutral daylight environment has no city scenery; all render lighting is QA-only.",
+    "Blank advertisements and unbranded simplified cab/fare equipment remain deliberate.",
+    "Rear raised deck remains seated-only for 1.95 m characters; free walking and seat ingress require runtime verification.",
+    "The 0.58 x 1.50 x 1.50 m conservative wheelchair envelope is a modelling sample, not accessibility certification.",
+    "Both detailed master LODs exceed B-CAB triangle and byte targets; separate reduced derivatives have separate evidence."
+  ],
+  "referenceDocumentation": "../REFERENCES.md",
+  "geometryProvenance": "front-correction-provenance.json",
+  "photoPixelsDistributed": false,
+  "upholsteryIsActualMaterialChange": true,
+  "runtimeCandidateIncludedInThisReview": false
+}

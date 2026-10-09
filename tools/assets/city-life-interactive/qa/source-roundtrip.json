@@ -1,0 +1,30 @@
+{
+  "status": "pass",
+  "mode": "actual Blender source reopen and export; no generator used",
+  "files": [
+    {
+      "file": "exports/pedestrian-commuter.glb",
+      "sourceHash": "e1372d1e659d10741af6e7349a017df6df9122fbafd98f931efd87e8c370537d",
+      "exportHash": "18bf4802fda0586fab40989cc8a607f5cb72e0b6290cf2f3d7679f212233a740",
+      "roundtripHash": "18bf4802fda0586fab40989cc8a607f5cb72e0b6290cf2f3d7679f212233a740"
+    },
+    {
+      "file": "exports/pedestrian-raincoat.glb",
+      "sourceHash": "28309d4e8510534f0140852572c7accd456d5ebbf750123bc4984beacba57a2e",
+      "exportHash": "97887cbae7ae59b71da76e4c57bf14cc97e9aceca88534a63fcb5fb9ae87edc2",
+      "roundtripHash": "97887cbae7ae59b71da76e4c57bf14cc97e9aceca88534a63fcb5fb9ae87edc2"
+    },
+    {
+      "file": "exports/pedestrian-runner.glb",
+      "sourceHash": "9a35dccb7685b2bbbb8ccd831594d70d6db3807f352dce2bbee4179070062a0d",
+      "exportHash": "0a8f0531ed4c2d9b52d44ae06516c6785ef827318a5518b5106b646353c26019",
+      "roundtripHash": "0a8f0531ed4c2d9b52d44ae06516c6785ef827318a5518b5106b646353c26019"
+    },
+    {
+      "file": "exports/pedestrian-tote.glb",
+      "sourceHash": "8bb1e0673f6d3c76d0edeac1f44800d99b1bf2fd150675d14dde99abbffd1ffc",
+      "exportHash": "fb02862aa443810824ba0c17decb13e7f6f1fc511b49a26a72ed23fb82d595df",
+      "roundtripHash": "fb02862aa443810824ba0c17decb13e7f6f1fc511b49a26a72ed23fb82d595df"
+    }
+  ]
+}

@@ -1,5 +1,13 @@
 'use client';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import {
+  lazy,
+  Suspense,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from 'react';
 import {
   ArrowUpRight,
   Compass,
@@ -40,6 +48,8 @@ import {
 import { FlightControls, flightText } from '@/components/flight-controls';
 import { EMPTY_FLIGHT, type FlightSnapshot } from '@/lib/city/flight-snapshot';
 import { TravelJoystick } from '@/components/travel-joystick';
+import { BusVisitPanel } from '@/components/bus-visit-panel';
+import { SkyTrainCabinPanel } from '@/components/skytrain-cabin-panel';
 import {
   DiscoveryPanel,
   type DiscoveryTarget,
@@ -109,7 +119,33 @@ import {
   type ClockState,
 } from '@/lib/city/clock';
 
-export default function Home() {
+const TransitQA =
+  process.env.VANCOUVER_VISUAL_QA === '1'
+    ? lazy(() => import('@/components/city-life-transit-qa'))
+    : null;
+
+function LocalQARouter() {
+  const transit = useSyncExternalStore<boolean | null>(
+    () => () => {},
+    () => new URLSearchParams(location.search).get('cityLifeTransitQa') === '1',
+    () => null,
+  );
+  if (transit === null) return null;
+  if (transit && TransitQA)
+    return (
+      <Suspense fallback={<p>Loading local transit QA…</p>}>
+        <TransitQA onClose={() => location.assign('/')} />
+      </Suspense>
+    );
+  return <Home />;
+}
+
+export default function Page() {
+  if (process.env.VANCOUVER_VISUAL_QA === '1') return <LocalQARouter />;
+  return <Home />;
+}
+
+function Home() {
   const host = useRef<HTMLDivElement>(null),
     labelHost = useRef<HTMLDivElement>(null),
     minimap = useRef<HTMLCanvasElement>(null),
@@ -163,6 +199,10 @@ export default function Home() {
     }
   }, []);
   const [loadProgress, setLoadProgress] = useState(0);
+  const [skyTrainCabinRequest, setSkyTrainCabinRequest] = useState(0);
+  const cabinActiveChange = useCallback((active: boolean) => {
+    engine.current?.setCabinDisplayActive(active);
+  }, []);
   const [ready, setReady] = useState(false),
     [error, setError] = useState<ReturnType<
       typeof startupErrorMessageKey
@@ -214,6 +254,7 @@ export default function Home() {
     settingsRef = useRef(settings);
   settingsRef.current = settings;
   const go = useCallback((id: string) => {
+    if (engine.current && !engine.current.closeBusVisit()) return;
     setLocalOrbit(false);
     setView(id);
     setSettings((s) => ({ ...s, mode: 'orbit' }));
@@ -472,8 +513,36 @@ export default function Home() {
     });
     return () => life.abort();
   }, [ready, go]);
-  const change = (patch: Partial<Settings>) =>
+  const change = (patch: Partial<Settings>) => {
+    if (
+      (patch.mode !== undefined || patch.traffic === false) &&
+      engine.current &&
+      !engine.current.closeBusVisit()
+    ) {
+      setNotice('busVisitExitBlocked');
+      return;
+    }
     setSettings((s) => ({ ...s, ...patch }));
+  };
+  const finishBusVisit = () => {
+    if (engine.current && !engine.current.closeBusVisit()) {
+      setNotice('busVisitExitBlocked');
+      return false;
+    }
+    return true;
+  };
+  const visitBus = async () => {
+    const city = engine.current;
+    if (!ready || !city) return;
+    setTour(false);
+    setPanel(null);
+    setPlacing(null);
+    setMobilePanel(null);
+    setLocalOrbit(false);
+    setClean(false);
+    await city.visitBusInterior();
+    if (!city.disposed) setSettings({ ...city.settings });
+  };
   const selectView = (id: string) => {
     setTour(false);
     go(id);
@@ -507,6 +576,7 @@ export default function Home() {
     setNotice('savedImage');
   };
   const beginPlacement = (mode: TravelMode) => {
+    if (!finishBusVisit()) return;
     engine.current?.flight?.clear();
     if (!ready || !engine.current?.placement) {
       setNotice('placementUnavailable');
@@ -522,6 +592,7 @@ export default function Home() {
     engine.current.placement.begin(mode);
   };
   const switchInScene = (mode: TravelMode) => {
+    if (!finishBusVisit()) return false;
     const city = engine.current;
     if (
       !ready ||
@@ -536,6 +607,7 @@ export default function Home() {
     return true;
   };
   const beginFlight = () => {
+    if (!finishBusVisit()) return;
     if (!ready) return;
     setTour(false);
     setPanel(null);
@@ -545,6 +617,7 @@ export default function Home() {
     engine.current?.flight?.beginPlacement();
   };
   const switchMode = (mode: string) => {
+    if (!finishBusVisit()) return;
     if (mode === 'flight') {
       beginFlight();
       return;
@@ -561,6 +634,7 @@ export default function Home() {
   };
   const dragAircraft = (event: React.PointerEvent<HTMLElement>) => {
     if (event.button !== 0 || !ready) return;
+    if (!finishBusVisit()) return;
     event.preventDefault();
     event.stopPropagation();
     setTour(false);
@@ -576,6 +650,7 @@ export default function Home() {
     mode: TravelMode,
   ) => {
     if (event.button !== 0 || !ready) return;
+    if (!finishBusVisit()) return;
     event.preventDefault();
     event.stopPropagation();
     if (switchInScene(mode)) {
@@ -621,6 +696,7 @@ export default function Home() {
   });
   const beginDiscovery = useCallback((route: DiscoveryRoute, next: number) => {
     const city = engine.current;
+    if (city && !city.closeBusVisit()) return false;
     if (!city || !placeDiscoveryStart(city, route, next)) return false;
     setTour(false);
     setPanel(null);
@@ -635,6 +711,7 @@ export default function Home() {
   }, []);
   const beginLightLab = useCallback(() => {
     const city = engine.current;
+    if (city && !city.closeBusVisit()) return false;
     if (!city || !placeLightLabStart(city)) return false;
     setTour(false);
     setPanel(null);
@@ -657,6 +734,41 @@ export default function Home() {
         </div>
       )}
       <div className="scene" ref={host} />
+      <BusVisitPanel
+        city={engine.current}
+        snapshot={stats.busVisit ?? null}
+        locale={locale}
+        visible={
+          ready &&
+          !clean &&
+          !about &&
+          !placing &&
+          !flight.placing &&
+          !panel &&
+          !mobilePanel &&
+          !(touchUI && mobileHudHidden)
+        }
+        onPrepare={visitBus}
+      />
+      {ready && !clean && !about && !placing && !flight.placing && !panel && !mobilePanel &&
+        !(touchUI && mobileHudHidden) && (!stats.busVisit || stats.busVisit.phase === 'idle') && (
+        <button className="skytrain-cabin-launcher glass ui-chrome" onClick={() => {
+          if (!finishBusVisit()) return;
+          setTour(false);
+          setSkyTrainCabinRequest((request) => request + 1);
+        }}>
+          <TrainFront size={17} /> {tr('skyTrainCabinDisplay')}
+        </button>
+      )}
+      <SkyTrainCabinPanel
+        locale={locale}
+        visible={ready && !clean && !about}
+        request={skyTrainCabinRequest}
+        quality={stats.effectiveQuality ?? settings.quality}
+        compatible={engine.current?.compatibleGraphics ?? false}
+        pixelRatio={engine.current?.renderer.getPixelRatio() ?? 1}
+        onActiveChange={cabinActiveChange}
+      />
       <DiscoveryPanel
         city={engine.current}
         locale={locale}
@@ -666,6 +778,7 @@ export default function Home() {
           !about &&
           !placing &&
           !flight.placing &&
+          (!stats.busVisit || stats.busVisit.phase === 'idle') &&
           !(touchUI && mobileHudHidden) &&
           !panel &&
           !mobilePanel
@@ -791,6 +904,7 @@ export default function Home() {
           </div>
           {settings.mode !== 'orbit' &&
             settings.mode !== 'flight' &&
+            !stats.busVisit?.aboard &&
             !placing &&
             !about &&
             !panel &&
@@ -882,70 +996,75 @@ export default function Home() {
         </>
       )}
 
-      {ready && settings.mode !== 'orbit' && settings.mode !== 'flight' && (
-        <aside
-          className="travel-camera-card glass ui-chrome"
-          aria-label={tr('travelCamera')}
-          data-perspective={travelView.perspective}
-        >
-          <div>
-            <Camera size={15} />
-            <strong>
-              {tr(
-                travelView.perspective === 'first'
-                  ? 'firstPersonView'
-                  : 'thirdPersonView',
-              )}
-            </strong>
-          </div>
-          {settings.mode === 'drive' && (
-            <div
-              className="car-options"
-              role="group"
-              aria-label={tr('carModel')}
-            >
-              {(['classic', 'roadster'] as const).map((model) => (
-                <button
-                  key={model}
-                  aria-pressed={carModel === model}
-                  onClick={() => {
-                    engine.current?.navigation?.setCarModel(model);
-                    setCarModel(model);
-                  }}
-                >
-                  {tr(model === 'classic' ? 'classicCar' : 'roadsterCar')}
-                </button>
-              ))}
+      {ready &&
+        !stats.busVisit?.aboard &&
+        settings.mode !== 'orbit' &&
+        settings.mode !== 'flight' && (
+          <aside
+            className="travel-camera-card glass ui-chrome"
+            aria-label={tr('travelCamera')}
+            data-perspective={travelView.perspective}
+          >
+            <div>
+              <Camera size={15} />
+              <strong>
+                {tr(
+                  travelView.perspective === 'first'
+                    ? 'firstPersonView'
+                    : 'thirdPersonView',
+                )}
+              </strong>
             </div>
-          )}
-          {(settings.mode === 'drive' || settings.mode === 'boat') &&
-          travelView.perspective === 'first' ? (
-            <div
-              className="interior-options"
-              role="group"
-              aria-label={tr('vehicleView')}
-            >
-              {(['interior', 'clear'] as const).map((style) => (
-                <button
-                  key={style}
-                  aria-pressed={travelView.interior === style}
-                  onClick={() => engine.current?.navigation?.setInterior(style)}
-                >
-                  {tr(style === 'interior' ? 'interiorView' : 'clearView')}
-                </button>
-              ))}
-            </div>
-          ) : (
-            <p>
-              {tr(
-                settings.mode === 'walk'
-                  ? 'walkCameraHint'
-                  : 'vehicleCameraHint',
-              )}
-            </p>
-          )}
-        </aside>
-      )}
+            {settings.mode === 'drive' && (
+              <div
+                className="car-options"
+                role="group"
+                aria-label={tr('carModel')}
+              >
+                {(['classic', 'roadster'] as const).map((model) => (
+                  <button
+                    key={model}
+                    aria-pressed={carModel === model}
+                    onClick={() => {
+                      engine.current?.navigation?.setCarModel(model);
+                      setCarModel(model);
+                    }}
+                  >
+                    {tr(model === 'classic' ? 'classicCar' : 'roadsterCar')}
+                  </button>
+                ))}
+              </div>
+            )}
+            {(settings.mode === 'drive' || settings.mode === 'boat') &&
+            travelView.perspective === 'first' ? (
+              <div
+                className="interior-options"
+                role="group"
+                aria-label={tr('vehicleView')}
+              >
+                {(['interior', 'clear'] as const).map((style) => (
+                  <button
+                    key={style}
+                    aria-pressed={travelView.interior === style}
+                    onClick={() =>
+                      engine.current?.navigation?.setInterior(style)
+                    }
+                  >
+                    {tr(style === 'interior' ? 'interiorView' : 'clearView')}
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <p>
+                {tr(
+                  settings.mode === 'walk'
+                    ? 'walkCameraHint'
+                    : 'vehicleCameraHint',
+                )}
+              </p>
+            )}
+          </aside>
+        )}
       {ready && settings.mode === 'orbit' && returnMode && (
         <aside
           className="travel-camera-card glass ui-chrome"
@@ -1543,7 +1662,11 @@ export default function Home() {
               aria-label={tr('atmosphereTitle')}
             >
               <SelectValue>
-                {tr(atmosphere === 'clear' ? 'atmosphereClear' : 'atmosphereOvercast')}
+                {tr(
+                  atmosphere === 'clear'
+                    ? 'atmosphereClear'
+                    : 'atmosphereOvercast',
+                )}
               </SelectValue>
             </SelectTrigger>
             <SelectContent>
@@ -1621,6 +1744,7 @@ export default function Home() {
                 onClick={() => {
                   const e = engine.current;
                   if (!e?.interiors) return;
+                  if (!finishBusVisit()) return;
                   e.placement?.cancel();
                   e.applySettings({
                     ...e.settings,
@@ -1688,10 +1812,22 @@ export default function Home() {
           <label className="quality-label">{tr('quality')}</label>
           <RadioGroup
             aria-label={tr('quality')}
-            value={settings.quality}
-            onValueChange={(q) => change({ quality: q as Settings['quality'] })}
+            value={settings.qualityMode === 'auto' ? 'auto' : settings.quality}
+            onValueChange={(quality) => {
+              if (quality === 'auto') change({ qualityMode: 'auto' });
+              else if (
+                quality === 'balanced' ||
+                quality === 'high' ||
+                quality === 'ultra'
+              )
+                change({ qualityMode: 'manual', quality });
+            }}
             className="quality-options"
           >
+            <label>
+              <RadioGroupItem value="auto" />
+              {tr('autoQuality')}
+            </label>
             <label>
               <RadioGroupItem value="ultra" />
               {tr('ultraQuality')}
@@ -1708,13 +1844,27 @@ export default function Home() {
           </RadioGroup>
           <p className="quality-description">
             {tr(
-              settings.quality === 'ultra'
-                ? 'ultraQualityDescription'
-                : settings.quality === 'high'
-                  ? 'highQualityDescription'
-                  : 'balancedQualityDescription',
+              settings.qualityMode === 'auto'
+                ? 'autoQualityDescription'
+                : settings.quality === 'ultra'
+                  ? 'ultraQualityDescription'
+                  : settings.quality === 'high'
+                    ? 'highQualityDescription'
+                    : 'balancedQualityDescription',
             )}
           </p>
+          <div className="quality-performance">
+            <span>{tr('effectiveQuality')}</span>
+            <span>
+              {tr(
+                (stats.effectiveQuality ?? settings.quality) === 'ultra'
+                  ? 'ultraQuality'
+                  : (stats.effectiveQuality ?? settings.quality) === 'high'
+                    ? 'highQuality'
+                    : 'balancedQuality',
+              )}
+            </span>
+          </div>
           {engine.current?.compatibleGraphics && (
             <p className="quality-description">
               {tr('compatibleGraphicsNote')}
@@ -1826,101 +1976,110 @@ export default function Home() {
           )}
         </div>
       </section>
-      {settings.mode !== 'orbit' && settings.mode !== 'flight' && (
-        <div className="street-controls glass ui-chrome">
-          <div className="street-title">
-            <span>
-              {settings.mode === 'drive'
-                ? tr('streetDrive')
-                : settings.mode === 'boat'
-                  ? tr('streetBoat')
-                  : tr('streetWalk')}
-            </span>
-            {(settings.mode === 'drive' || settings.mode === 'boat') && (
-              <b>
-                {settings.mode === 'boat'
-                  ? (Math.abs(stats.speed || 0) / 1.852).toFixed(1)
-                  : Math.abs(stats.speed || 0)}{' '}
-                <small>{settings.mode === 'boat' ? 'kn' : 'km/h'}</small>
-              </b>
-            )}
-          </div>
-          <button
-            className="choose-start"
-            onClick={() => beginPlacement(settings.mode as TravelMode)}
-          >
-            <MapPin size={16} />
-            {tr('placementChange')}
-          </button>
-          <div className="street-shortcuts">
-            {(settings.mode === 'boat'
-              ? [
-                  [tr('coalHarbour'), 'coal-harbour'],
-                  [tr('falseCreek'), 'false-creek'],
-                  [tr('lostLagoon'), 'lost-lagoon'],
-                ]
-              : [
-                  ['Gastown', 'WATER ST'],
-                  ['Robson', 'ROBSON ST'],
-                  ['Beach Ave', 'BEACH AV'],
-                ]
-            ).map(([label, id]) => (
-              <button
-                key={id}
-                onClick={() =>
-                  settings.mode !== 'flight' &&
-                  engine.current?.navigation?.setMode(settings.mode, id)
-                }
-              >
-                {label}
-              </button>
-            ))}
-            {settings.mode !== 'boat' && (
-              <button
-                onClick={() =>
-                  engine.current?.navigation?.startBridge('burrard')
-                }
-              >
-                Burrard
-              </button>
-            )}
-          </div>
-          <p>
-            {tr(settings.mode === 'boat' ? 'boatMovementHelp' : 'movementHelp')}
-            <br />
-            {settings.mode === 'boat'
-              ? tr('boatNeutralHelp')
-              : settings.mode === 'drive'
-                ? tr('brakeHelp')
-                : tr('speedHelp')}{' '}
-            · {tr('lookHelp')}
-            <br />
-            {tr('travelZoomHelp')}
-          </p>
-          {settings.mode === 'boat' && (
-            <button className="boat-neutral" {...helmControl('neutral')}>
-              {tr('boatNeutral')}
-            </button>
-          )}
-          <div className="dpad">
-            <button aria-label={tr('turnLeft')} {...helmControl('left')}>
-              <ChevronLeft />
-            </button>
-            <button aria-label={tr('moveForward')} {...helmControl('forward')}>
-              <ChevronsUp />
-            </button>
+      {!stats.busVisit?.aboard &&
+        settings.mode !== 'orbit' &&
+        settings.mode !== 'flight' && (
+          <div className="street-controls glass ui-chrome">
+            <div className="street-title">
+              <span>
+                {settings.mode === 'drive'
+                  ? tr('streetDrive')
+                  : settings.mode === 'boat'
+                    ? tr('streetBoat')
+                    : tr('streetWalk')}
+              </span>
+              {(settings.mode === 'drive' || settings.mode === 'boat') && (
+                <b>
+                  {settings.mode === 'boat'
+                    ? (Math.abs(stats.speed || 0) / 1.852).toFixed(1)
+                    : Math.abs(stats.speed || 0)}{' '}
+                  <small>{settings.mode === 'boat' ? 'kn' : 'km/h'}</small>
+                </b>
+              )}
+            </div>
             <button
-              aria-label={tr('moveBackward')}
-              {...helmControl('backward')}
+              className="choose-start"
+              onClick={() => beginPlacement(settings.mode as TravelMode)}
             >
-              <ChevronDown />
+              <MapPin size={16} />
+              {tr('placementChange')}
             </button>
-            <button aria-label={tr('turnRight')} {...helmControl('right')}>
-              <ChevronRight />
-            </button>
+            <div className="street-shortcuts">
+              {(settings.mode === 'boat'
+                ? [
+                    [tr('coalHarbour'), 'coal-harbour'],
+                    [tr('falseCreek'), 'false-creek'],
+                    [tr('lostLagoon'), 'lost-lagoon'],
+                  ]
+                : [
+                    ['Gastown', 'WATER ST'],
+                    ['Robson', 'ROBSON ST'],
+                    ['Beach Ave', 'BEACH AV'],
+                  ]
+              ).map(([label, id]) => (
+                <button
+                  key={id}
+                  onClick={() => {
+                    if (!finishBusVisit()) return;
+                    if (settings.mode !== 'flight')
+                      engine.current?.navigation?.setMode(settings.mode, id);
+                  }}
+                >
+                  {label}
+                </button>
+              ))}
+              {settings.mode !== 'boat' && (
+                <button
+                  onClick={() => {
+                    if (finishBusVisit())
+                      engine.current?.navigation?.startBridge('burrard');
+                  }}
+                >
+                  Burrard
+                </button>
+              )}
+            </div>
+            <p>
+              {tr(
+                settings.mode === 'boat' ? 'boatMovementHelp' : 'movementHelp',
+              )}
+              <br />
+              {settings.mode === 'boat'
+                ? tr('boatNeutralHelp')
+                : settings.mode === 'drive'
+                  ? tr('brakeHelp')
+                  : tr('speedHelp')}{' '}
+              · {tr('lookHelp')}
+              <br />
+              {tr('travelZoomHelp')}
+            </p>
+            {settings.mode === 'boat' && (
+              <button className="boat-neutral" {...helmControl('neutral')}>
+                {tr('boatNeutral')}
+              </button>
+            )}
+            <div className="dpad">
+              <button aria-label={tr('turnLeft')} {...helmControl('left')}>
+                <ChevronLeft />
+              </button>
+              <button
+                aria-label={tr('moveForward')}
+                {...helmControl('forward')}
+              >
+                <ChevronsUp />
+              </button>
+              <button
+                aria-label={tr('moveBackward')}
+                {...helmControl('backward')}
+              >
+                <ChevronDown />
+              </button>
+              <button aria-label={tr('turnRight')} {...helmControl('right')}>
+                <ChevronRight />
+              </button>
+            </div>
           </div>
-        </div>
-      )}
+        )}
       <div className="view-caption ui-chrome">
         <span>
           {localOrbit

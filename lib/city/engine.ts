@@ -7,8 +7,12 @@ import { PublicInteriors } from './interiors';
 import { isMobileGraphics, supportsHDRTarget } from './graphics-profile';
 import { SkyEffects } from './sky-effects';
 import {
-  AtmosphereEnvironment, applyAtmosphereSky, installAtmosphereSky,
-  normalizeAtmosphere, sampleAtmosphere, type AtmosphereMode,
+  AtmosphereEnvironment,
+  applyAtmosphereSky,
+  installAtmosphereSky,
+  normalizeAtmosphere,
+  sampleAtmosphere,
+  type AtmosphereMode,
 } from './atmosphere';
 import { createBeachAmenities } from './beach-amenities';
 import { createResidentialGround } from './residential-ground';
@@ -23,6 +27,8 @@ import {
 } from './shadow-policy';
 import { LandmarkGpuWarmup } from './gpu-landmark-warmup';
 import { warmComposer } from './warm-composer';
+import { CityPedestrians } from './city-life/city-pedestrians';
+import { installPedestrianOverrideMaterial } from './city-life/pedestrian-renderer';
 import type { LandmarkWorkerClient } from './landmark-worker-client';
 import { createStartupQA } from './startup-qa';
 import { BeachGround, type BeachCoastData } from './beach-ground';
@@ -41,6 +47,12 @@ import { ArchitecturalDetails } from './architecture-details';
 import { createBuildingBodies } from './building-bodies';
 import type { DetailedTrees } from './detailed-trees';
 import { QUALITY, qualityPixelRatio } from './quality';
+import { AutoQualityController } from './auto-quality';
+import {
+  SceneryMotionTracker,
+  DetailWorkBudget,
+  type SceneryMotionState,
+} from './scenery-motion';
 import { DEFAULT_LOCALE, translate, viewText, type Locale } from '../i18n';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { Sky } from 'three/addons/objects/Sky.js';
@@ -67,6 +79,7 @@ import { createHarbour, updateHarbour, type Harbour } from './harbour';
 import { addSailingWaves } from './water-waves';
 import type { HarbourKind } from './harbour-path';
 import landmarkFootprints from './landmark-footprints.json';
+import { BusCabinVisit } from './bus-visit';
 import {
   createNature,
   createStreetDetails,
@@ -95,8 +108,12 @@ export class CityEngine {
   visibilityChange = () => {
     if (this.disposed) return;
     if (document.hidden) this.clearHeldInput();
+    this.pedestrians?.setHidden(document.hidden || this.pageSuspended || this.cabinDisplayActive);
+    this.autoQuality?.resetTiming();
+    this.autoTimingNeedsAnchor = true;
+    this.sceneryMotionTracker?.reset();
     this.clock.setVisible(
-      !document.hidden && !this.pageSuspended,
+      !document.hidden && !this.pageSuspended && !this.cabinDisplayActive,
       performance.now(),
     );
   };
@@ -108,6 +125,7 @@ export class CityEngine {
   extraTextures = new Set<THREE.Texture>();
   contextLost = false;
   compatibleGraphics = false;
+  pedestrians: CityPedestrians | null = null;
   lastShadowCamera = new THREE.Vector3(Infinity, Infinity, Infinity);
   sky = new Sky();
   skyEffects!: SkyEffects;
@@ -117,6 +135,8 @@ export class CityEngine {
   // A BFCache entry retains this exact document and React tree. Disposing its
   // canvas on persisted pagehide would leave a dead city when Back restores it.
   pageSuspended = false;
+  /** A separate cabin display owns the foreground canvas while the city rests. */
+  cabinDisplayActive = false;
   private suspendedAt = 0;
   private renderReady = false;
   private loadAbort = new AbortController();
@@ -166,11 +186,18 @@ export class CityEngine {
   harbour: Harbour | null = null;
   sailingWaves: ReturnType<typeof addSailingWaves> | null = null;
   navigation: StreetNavigation | null = null;
+  busVisit: BusCabinVisit | null = null;
   flight: FlightController | null = null;
   onFlightMode: (mode: 'orbit' | 'flight') => void = () => {};
   placement: MapPlacement | null = null;
   travelReturn: TravelReturn;
   settings = { ...DEFAULT_SETTINGS };
+  readonly autoQuality = new AutoQualityController();
+  private autoTimingNeedsAnchor = true;
+  private readonly sceneryMotionTracker = new SceneryMotionTracker();
+  sceneryMotion: SceneryMotionState | null = null;
+  detailWorkBudget: DetailWorkBudget | null = null;
+  private lastAppliedPixelRatio = 0;
   stats: SceneStats = {
     buildings: 0,
     trees: 0,
@@ -189,7 +216,8 @@ export class CityEngine {
   water!: THREE.Mesh;
   waterWorld!: WaterWorld;
   uniforms = {
-    night: { value: 0 }, time: { value: 0 },
+    night: { value: 0 },
+    time: { value: 0 },
     skyHorizon: { value: new THREE.Color() },
     skyZenith: { value: new THREE.Color() },
   };
@@ -302,7 +330,10 @@ export class CityEngine {
       });
       this.sky.scale.setScalar(35000);
       installAtmosphereSky(this.sky);
-      applyAtmosphereSky(this.sky, sampleAtmosphere(this.clock.hour, this.atmosphere));
+      applyAtmosphereSky(
+        this.sky,
+        sampleAtmosphere(this.clock.hour, this.atmosphere),
+      );
       this.scene.add(this.sky);
       this.skyEffects = new SkyEffects(this.scene);
       if (process.env.VANCOUVER_VISUAL_QA === '1') {
@@ -310,9 +341,14 @@ export class CityEngine {
         this.startupQA?.begin('constructor.environment-pmrem');
       }
       if (!this.compatibleGraphics) {
-        this.environmentCache = new AtmosphereEnvironment(this.renderer, this.sky);
-        this.environmentTarget = this.environmentCache.get(this.atmosphere,
-          sampleAtmosphere(this.clock.hour, this.atmosphere).environmentPhase);
+        this.environmentCache = new AtmosphereEnvironment(
+          this.renderer,
+          this.sky,
+        );
+        this.environmentTarget = this.environmentCache.get(
+          this.atmosphere,
+          sampleAtmosphere(this.clock.hour, this.atmosphere).environmentPhase,
+        );
         this.scene.environment = this.environmentTarget.texture;
       }
       if (process.env.VANCOUVER_VISUAL_QA === '1') {
@@ -399,6 +435,10 @@ export class CityEngine {
     this.pageSuspended = true;
     this.suspendedAt = performance.now();
     this.clock.setVisible(false, this.suspendedAt);
+    this.pedestrians?.setHidden(true);
+    this.autoQuality?.resetTiming();
+    this.autoTimingNeedsAnchor = true;
+    this.sceneryMotionTracker?.reset();
     cancelAnimationFrame(this.raf);
     this.raf = 0;
     this.clearHeldInput();
@@ -411,10 +451,35 @@ export class CityEngine {
     this.pageSuspended = false;
     this.clearHeldInput();
     this.clock.resetTimebase(now);
-    this.clock.setVisible(!document.hidden, now);
+    this.clock.setVisible(!document.hidden && !this.cabinDisplayActive, now);
+    this.pedestrians?.setHidden(document.hidden || this.cabinDisplayActive);
+    this.autoQuality?.resetTiming();
+    this.autoTimingNeedsAnchor = true;
+    this.sceneryMotionTracker?.reset();
     this.lastTime = this.fpsAt = now;
     this.frames = 0;
-    if (this.renderReady) this.raf = requestAnimationFrame(this.animate);
+    if (this.renderReady && !this.cabinDisplayActive) this.raf = requestAnimationFrame(this.animate);
+  }
+  setCabinDisplayActive(active: boolean) {
+    if (this.disposed || active === this.cabinDisplayActive) return;
+    this.cabinDisplayActive = active;
+    this.clearHeldInput();
+    const now = performance.now();
+    this.autoQuality?.resetTiming();
+    this.autoTimingNeedsAnchor = true;
+    this.sceneryMotionTracker?.reset();
+    this.clock.resetTimebase(now);
+    this.clock.setVisible(!active && !document.hidden && !this.pageSuspended, now);
+    this.pedestrians?.setHidden(active || document.hidden || this.pageSuspended);
+    if (active) {
+      cancelAnimationFrame(this.raf);
+      this.raf = 0;
+      this.transition = null;
+    } else if (this.renderReady && !this.contextLost && !this.pageSuspended) {
+      this.lastTime = this.fpsAt = now;
+      this.frames = 0;
+      this.raf = requestAnimationFrame(this.animate);
+    }
   }
   async load() {
     const advance = (percent: number) =>
@@ -585,6 +650,14 @@ export class CityEngine {
       this.startupQA?.phase('controller.navigation');
     }
     this.navigation = new StreetNavigation(this);
+    this.busVisit = new BusCabinVisit(
+      this,
+      this.traffic.busAssets,
+      this.traffic.busRoutes,
+    );
+    this.busVisit.onChange = () => this.publishBusVisit();
+    this.pedestrians = new CityPedestrians(this);
+    this.pedestrians.setHidden(document.hidden || this.pageSuspended);
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('geometry.sailing-waves');
     }
@@ -674,7 +747,7 @@ export class CityEngine {
 
     this.renderReady = true;
     this.fpsAt = performance.now();
-    this.clock.setVisible(!document.hidden && !this.pageSuspended, this.fpsAt);
+    this.clock.setVisible(!document.hidden && !this.pageSuspended && !this.cabinDisplayActive, this.fpsAt);
     this.clock.resetTimebase(this.fpsAt);
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.begin('render.first-city-frame');
@@ -699,13 +772,25 @@ export class CityEngine {
       h,
       window.devicePixelRatio,
     );
-    return this.compatibleGraphics
+    const bounded = this.compatibleGraphics
       ? Math.min(ratio, 1, Math.sqrt(1_000_000 / (w * h)))
       : ratio;
+    return (
+      bounded *
+      (this.settings.qualityMode === 'auto'
+        ? this.autoQuality.snapshot().resolutionScale
+        : 1)
+    );
   }
   resizeQuality() {
     const ratio = this.pixelRatio();
-    this.renderer.setPixelRatio(ratio);
+    // Changing layers or travel mode must not reallocate full-screen buffers
+    // when the selected physical resolution is unchanged.
+    if (Math.abs(ratio - this.lastAppliedPixelRatio) > 0.0001) {
+      this.renderer.setPixelRatio(ratio);
+      this.composer?.setPixelRatio(ratio);
+      this.lastAppliedPixelRatio = ratio;
+    }
     const shadowSize = QUALITY[this.settings.quality].shadowSize;
     if (this.sun.shadow.mapSize.x !== shadowSize) {
       this.sun.shadow.mapSize.set(shadowSize, shadowSize);
@@ -713,11 +798,62 @@ export class CityEngine {
       this.sun.shadow.map = null;
       this.renderer.shadowMap.needsUpdate = true;
     }
-    this.composer?.setPixelRatio(ratio);
     this.fxaa?.uniforms.resolution.value.set(
       1 / (this.container.clientWidth * ratio),
       1 / (this.container.clientHeight * ratio),
     );
+  }
+  updateAutoQuality(time: number, frameMs: number) {
+    const mode = this.flight?.attached ? 'flight' : this.settings.mode;
+    const speed = this.flight?.attached
+      ? Math.hypot(this.flight.state?.speed ?? 0, this.flight.state?.vy ?? 0)
+      : mode === 'drive' || mode === 'boat'
+        ? Math.abs(this.navigation?.speed ?? 0)
+        : undefined;
+    const altitude = Math.max(
+      0,
+      this.camera.position.y -
+        this.elevation(this.camera.position.x, this.camera.position.z),
+    );
+    const automatic = this.settings.qualityMode === 'auto';
+    this.sceneryMotion = this.sceneryMotionTracker.update(
+      time,
+      this.camera.position.toArray(),
+      mode,
+      altitude,
+      speed,
+      automatic,
+    );
+    this.detailWorkBudget ??= new DetailWorkBudget();
+    this.detailWorkBudget.reset(
+      this.sceneryMotion.preparationBudgetMs,
+      this.sceneryMotion.admissionsPerFrame,
+    );
+    if (!automatic) return;
+    const foreground =
+      !document.hidden && !this.pageSuspended && !this.transition;
+    const sampledFrameMs = this.autoTimingNeedsAnchor ? 0 : frameMs;
+    this.autoTimingNeedsAnchor = !foreground || frameMs <= 0;
+    const previous = this.autoQuality.snapshot();
+    const decision = this.autoQuality.observe({
+      nowMs: time,
+      frameMs: sampledFrameMs,
+      mode,
+      maxQuality: this.compatibleGraphics ? 'balanced' : 'high',
+      speedMps: this.sceneryMotion.speedMps,
+      altitudeM: altitude,
+      moving: this.sceneryMotion.moving,
+      visible: !document.hidden && !this.pageSuspended,
+      transitioning: !!this.transition,
+    });
+    const quality = this.compatibleGraphics ? 'balanced' : decision.quality;
+    if (
+      quality !== this.settings.quality ||
+      decision.resolutionScale !== previous.resolutionScale
+    ) {
+      this.settings.quality = quality;
+      this.resizeQuality();
+    }
   }
   updateShadowFrustum() {
     if (this.compatibleGraphics || this.settings.quality === 'balanced') return;
@@ -785,6 +921,10 @@ export class CityEngine {
     this.ssao.maxDistance = 0.005;
     // Match the two-sided road/deck surfaces used in the beauty pass.
     this.ssao.normalMaterial.side = THREE.DoubleSide;
+    const restorePedestrianNormals = installPedestrianOverrideMaterial(
+      this.ssao.normalMaterial,
+    );
+    trackSSAOResources(this.ssao).restores.add(restorePedestrianNormals);
     const exclusions = new SSAOExclusions(this.scene);
     this.aoExclusions = exclusions;
     const visibility = installSSAOVisibility(this.ssao, exclusions);
@@ -839,14 +979,31 @@ export class CityEngine {
     if (this.renderPass) this.renderPass.enabled = true;
     if (this.composer) this.composer.render();
     else this.renderer.render(this.scene, this.camera);
-    this.landmarkWarmup?.tick();
-    this.sceneryPreparation.pump(
-      this.settings.quality === 'balanced'
+    const preparationBudget =
+      this.sceneryMotion?.preparationBudgetMs ??
+      (this.settings.quality === 'balanced'
         ? 0
         : this.transition || this.settings.mode !== 'orbit'
           ? 0.5
-          : 1.5,
-    );
+          : 1.5);
+    const prepare = () =>
+      this.sceneryPreparation.pump(
+        Math.min(
+          preparationBudget,
+          this.detailWorkBudget?.remainingMs() ?? preparationBudget,
+        ),
+      );
+    const warm = () => this.landmarkWarmup?.tick();
+    if (this.detailWorkBudget) {
+      // CPU scenery, facade pages and actual GPU upload share one allowance.
+      // A synchronous driver call can overrun one unit; no later unit may run.
+      if (this.sceneryMotion?.allowNewDetails)
+        this.detailWorkBudget.run(warm, { admission: true });
+      this.detailWorkBudget.run(prepare);
+    } else {
+      warm();
+      prepare();
+    }
   }
   elevation(x: number, z: number): number {
     return this.beachGround?.height(x, z) ?? this.rawElevation(x, z);
@@ -1151,6 +1308,7 @@ export class CityEngine {
     createRoadSurfaces(this);
   }
   flyTo(id: string, animate = true) {
+    if (!this.closeBusVisit()) return;
     if (this.flight?.attached) this.flight.detach();
     this.placement?.cancel();
     const v = VIEWS.find((p) => p.id === id) || VIEWS[0];
@@ -1196,12 +1354,20 @@ export class CityEngine {
     finishLocalMapTransition(this);
   }
   leaveTravelAtLocation(remember = false) {
-    if (this.flight?.attached) { this.flight.detach(); return; }
+    if (!this.closeBusVisit()) return;
+    if (this.flight?.attached) {
+      this.flight.detach();
+      return;
+    }
     if (!enterLocalMap(this, remember)) return;
     this.onLocalOrbit();
   }
   zoom(f: number) {
-    if (this.flight?.attached) { this.flight.zoom(f); return; }
+    if (this.busVisit?.aboard) return;
+    if (this.flight?.attached) {
+      this.flight.zoom(f);
+      return;
+    }
     if (this.navigation && this.navigation.mode !== 'orbit') {
       this.navigation.zoom(f);
       return;
@@ -1217,7 +1383,8 @@ export class CityEngine {
     this.travelReturn?.update();
   }
   focusTrain(kind: TrainKind) {
-    if(this.flight?.attached) this.flight.detach();
+    if (!this.closeBusVisit()) return;
+    if (this.flight?.attached) this.flight.detach();
     this.travelReturn?.invalidate(true);
     this.completeLocalMapTransition();
     const train = this.railway?.trains.find((t) => t.kind === kind);
@@ -1259,7 +1426,8 @@ export class CityEngine {
     };
   }
   focusHarbour(kind: HarbourKind) {
-    if(this.flight?.attached) this.flight.detach();
+    if (!this.closeBusVisit()) return;
+    if (this.flight?.attached) this.flight.detach();
     this.travelReturn?.invalidate(true);
     this.completeLocalMapTransition();
     const actor = this.harbour?.actors.find((a) => a.kind === kind);
@@ -1284,13 +1452,74 @@ export class CityEngine {
       toTarget: target,
     };
   }
+  async visitBusInterior() {
+    if (!this.busVisit || this.disposed) return false;
+    if (!this.closeBusVisit()) return false;
+    this.placement?.cancel();
+    this.flight?.clear();
+    const prepared = await this.busVisit.prepare();
+    if (this.disposed) return false;
+    if (prepared) {
+      this.settings = {
+        ...this.settings,
+        mode: 'walk',
+        traffic: true,
+        autoRotate: false,
+      };
+      this.trafficGroup.visible = true;
+      this.controls.autoRotate = false;
+      this.onTravelResume('walk');
+    }
+    this.publishBusVisit();
+    return prepared;
+  }
+  publishBusVisit() {
+    if (this.disposed) return;
+    this.stats.busVisit = this.busVisit?.snapshot();
+    this.onStats({ ...this.stats });
+  }
+  closeBusVisit() {
+    const closed = this.busVisit?.close() ?? true;
+    this.publishBusVisit();
+    return closed;
+  }
   applySettings(settings: Settings) {
-    if (settings.mode !== this.settings.mode) {
-      if (settings.mode === 'walk' || settings.mode === 'drive' || settings.mode === 'boat') this.flight?.clear();
-      if (settings.mode === 'orbit' && this.flight?.attached) this.flight.detach();
+    if (
+      this.busVisit &&
+      (settings.mode !== 'walk' || !settings.traffic) &&
+      !this.closeBusVisit()
+    )
+      return;
+    const automatic = settings.qualityMode === 'auto';
+    const preferenceChanged =
+      automatic !== (this.settings.qualityMode === 'auto');
+    const modeChanged = settings.mode !== this.settings.mode;
+    if (preferenceChanged) {
+      this.autoQuality?.resetTiming('preference-change');
+      this.autoTimingNeedsAnchor = true;
+    }
+    if (modeChanged) {
+      if (
+        settings.mode === 'walk' ||
+        settings.mode === 'drive' ||
+        settings.mode === 'boat'
+      )
+        this.flight?.clear();
+      if (settings.mode === 'orbit' && this.flight?.attached)
+        this.flight.detach();
       if (settings.mode !== 'flight') this.navigation?.setMode(settings.mode);
     }
-    this.settings = { ...settings };
+    this.settings = {
+      ...settings,
+      quality: automatic
+        ? this.compatibleGraphics
+          ? 'balanced'
+          : this.autoQuality.snapshot().quality
+        : settings.quality,
+    };
+    // Resolve the travel cap before forcing any optional detail refresh.
+    if (automatic && (preferenceChanged || modeChanged))
+      this.updateAutoQuality(performance.now(), 0);
     this.scheduleScenery?.();
     this.buildings.visible = settings.buildings;
     this.vegetation.visible = settings.trees;
@@ -1298,7 +1527,7 @@ export class CityEngine {
     this.resizeQuality();
     this.renderer.shadowMap.enabled =
       !this.compatibleGraphics &&
-      settings.quality !== 'balanced' &&
+      this.settings.quality !== 'balanced' &&
       this.camera.position.distanceTo(this.controls.target) < 4500;
     this.controls.autoRotateSpeed = 0.5;
     this.trafficGroup.visible = settings.traffic;
@@ -1343,16 +1572,13 @@ export class CityEngine {
       (
         this.traffic.lamps.material as THREE.MeshStandardMaterial
       ).emissiveIntensity = 0.05 + night * 1.7;
-    this.sun.position.set(
-      Math.cos(a) * 4500,
-      Math.sin(a) * 5000,
-      1400,
-    );
+    this.sun.position.set(Math.cos(a) * 4500, Math.sin(a) * 5000, 1400);
     applyAtmosphereSky(this.sky, lighting);
     this.sky.visible = true;
     this.uniforms.skyHorizon.value.copy(lighting.horizon);
     this.uniforms.skyZenith.value.copy(lighting.zenith);
-    if (this.skyEffects) this.skyEffects.atmosphereVisibility = lighting.celestialVisibility;
+    if (this.skyEffects)
+      this.skyEffects.atmosphereVisibility = lighting.celestialVisibility;
     this.sun.position.add(this.sun.target.position);
     this.sun.intensity = lighting.sunIntensity;
     this.sun.color.copy(lighting.sunColor);
@@ -1360,14 +1586,18 @@ export class CityEngine {
     this.ambient.color.copy(lighting.hemisphereSky);
     this.ambient.groundColor.copy(lighting.hemisphereGround);
     if (this.environmentCache) {
-      this.environmentTarget = this.environmentCache.get(this.atmosphere, lighting.environmentPhase);
+      this.environmentTarget = this.environmentCache.get(
+        this.atmosphere,
+        lighting.environmentPhase,
+      );
       this.scene.environment = this.environmentTarget.texture;
     }
     this.scene.environmentIntensity = lighting.environmentIntensity;
     this.scene.background = lighting.horizon;
     if (this.scene.fog) {
       this.scene.fog.color.copy(lighting.horizon);
-      if (this.scene.fog instanceof THREE.FogExp2) this.scene.fog.density = lighting.fogDensity;
+      if (this.scene.fog instanceof THREE.FogExp2)
+        this.scene.fog.density = lighting.fogDensity;
     }
     this.renderer.toneMappingExposure = lighting.exposure;
     const hourDelta = Math.abs(hour - this.lastShadowHour);
@@ -1379,7 +1609,7 @@ export class CityEngine {
     }
   }
   animate = (time: number) => {
-    if (this.disposed || this.contextLost || this.pageSuspended) return;
+    if (this.disposed || this.contextLost || this.pageSuspended || this.cabinDisplayActive) return;
     this.raf = requestAnimationFrame(this.animate);
     this.uniforms.time.value = time / 1000;
     this.tickClock(time);
@@ -1430,11 +1660,18 @@ export class CityEngine {
       );
     if (this.settings.mode === 'orbit') {
       if (!this.transition) this.controls.update();
-    } else if (this.settings.mode !== 'flight') this.navigation?.update((time - this.lastTime) / 1000);
+    } else if (this.settings.mode !== 'flight' && !this.busVisit?.aboard)
+      this.navigation?.update((time - this.lastTime) / 1000);
+    this.busVisit?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
     this.flight?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
+    this.updateAutoQuality(time, this.lastTime ? time - this.lastTime : 0);
+    this.pedestrians?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
     this.travelReturn?.update();
     this.sailingWaves?.update();
-    this.discoveryMarker?.update(time, !!this.discoveryTarget && this.settings.mode === 'walk');
+    this.discoveryMarker?.update(
+      time,
+      !!this.discoveryTarget && this.settings.mode === 'walk',
+    );
     this.minimap?.draw(time);
     if (
       this.settings.mode === 'orbit' &&
@@ -1470,14 +1707,45 @@ export class CityEngine {
       this.renderer.domElement.dataset.geometries = String(
         this.renderer.info.memory.geometries,
       );
+      this.renderer.domElement.dataset.pedestrians = JSON.stringify(
+        this.pedestrians?.stats() ?? null,
+      );
+      const adaptive =
+        this.settings.qualityMode === 'auto'
+          ? this.autoQuality.snapshot()
+          : null;
+      this.renderer.domElement.dataset.quality = this.settings.quality;
+      this.renderer.domElement.dataset.qualityMode =
+        this.settings.qualityMode ?? 'manual';
+      this.renderer.domElement.dataset.autoQuality = JSON.stringify(adaptive);
+      this.renderer.domElement.dataset.sceneryMotion = JSON.stringify(
+        this.sceneryMotion,
+      );
+      this.renderer.domElement.dataset.detailWork = JSON.stringify(
+        this.detailWorkBudget?.stats ?? null,
+      );
+      this.stats.effectiveQuality = this.settings.quality;
+      this.stats.autoQuality = adaptive ?? undefined;
       this.stats.renderWidth = this.renderer.domElement.width;
       this.stats.renderHeight = this.renderer.domElement.height;
       this.stats.fps = Math.round((this.frames * 1000) / (time - this.fpsAt));
       this.stats.trafficStop = this.navigation?.trafficStop?.caption || '';
-      this.stats.speed = Math.round((this.flight?.attached ? this.flight.state?.speed || 0 : this.navigation?.speed || 0) * 3.6);
+      this.stats.busVisit = this.busVisit?.snapshot();
+      this.renderer.domElement.dataset.busVisit = JSON.stringify(
+        this.stats.busVisit ?? null,
+      );
+      this.renderer.domElement.dataset.busAssets = JSON.stringify(
+        this.traffic?.busAssets.stats() ?? null,
+      );
+      this.stats.speed = Math.round(
+        (this.flight?.attached
+          ? this.flight.state?.speed || 0
+          : this.navigation?.speed || 0) * 3.6,
+      );
       this.stats.clock = this.clock.snapshot();
       this.stats.heading = this.controls.getAzimuthalAngle();
-      const location = this.flight?.pose || minimapPose(this.navigation, this.controls.target);
+      const location =
+        this.flight?.pose || minimapPose(this.navigation, this.controls.target);
       [this.stats.lon, this.stats.lat] = unproject(location.x, location.z);
       this.stats.distance = Math.round(
         this.camera.position.distanceTo(this.controls.target),
@@ -1485,7 +1753,9 @@ export class CityEngine {
       this.stats.elevation = Math.round(
         this.settings.mode === 'orbit'
           ? this.elevation(this.controls.target.x, this.controls.target.z)
-          : this.flight?.attached ? this.flight.state!.y : this.navigation?.position.y || 0,
+          : this.flight?.attached
+            ? this.flight.state!.y
+            : this.navigation?.position.y || 0,
       );
       this.onStats({ ...this.stats });
       this.fpsAt = time;
@@ -1571,14 +1841,22 @@ export class CityEngine {
   }
   setDiscoveryTarget(target: DiscoveryTarget | null) {
     if (this.disposed) return;
-    this.discoveryTarget = target && Number.isFinite(target.x) && Number.isFinite(target.z)
-      ? { ...target } : null;
+    this.discoveryTarget =
+      target && Number.isFinite(target.x) && Number.isFinite(target.z)
+        ? { ...target }
+        : null;
     if (this.discoveryTarget) {
       this.discoveryMarker ??= new DiscoveryMarker(this.scene);
       const { x, z } = this.discoveryTarget;
-      this.discoveryMarker.place(this.discoveryTarget, this.navigation?.groundHeight(x, z) ?? this.elevation(x, z));
+      this.discoveryMarker.place(
+        this.discoveryTarget,
+        this.navigation?.groundHeight(x, z) ?? this.elevation(x, z),
+      );
     }
-    this.discoveryMarker?.update(performance.now(), !!this.discoveryTarget && this.settings.mode === 'walk');
+    this.discoveryMarker?.update(
+      performance.now(),
+      !!this.discoveryTarget && this.settings.mode === 'walk',
+    );
     this.minimap?.draw(performance.now(), true);
   }
   drawMinimap(canvas: HTMLCanvasElement) {
@@ -1637,7 +1915,11 @@ export class CityEngine {
     this.aoExclusions?.dispose();
     this.aoExclusions = null;
     this.travelReturn?.destroy();
+    this.pedestrians?.dispose();
+    this.pedestrians = null;
     this.flight?.destroy();
+    this.busVisit?.dispose();
+    this.busVisit = null;
     this.navigation?.destroy();
     this.placement?.destroy();
     this.controls?.dispose();
@@ -1647,6 +1929,7 @@ export class CityEngine {
     this.landmarkWorker?.dispose();
     this.detailedTrees?.dispose();
     this.traffic?.vehicleAssets?.dispose();
+    this.traffic?.busAssets?.dispose();
     this.facadeDetails?.dispose();
     this.architecturalDetails?.dispose();
     this.streetscapeKit?.dispose();
@@ -1675,7 +1958,7 @@ export class CityEngine {
       this.graphicsContextLost,
     );
     this.renderer?.dispose();
-
+    this.renderer?.forceContextLoss?.();
     this.renderer?.domElement.remove();
   }
 }

@@ -1,0 +1,106 @@
+{
+  "revision": "61b035e49d6c29dc4451b58b09d311d6783e2ecd",
+  "sourceFingerprint": "1eb39093c81147be8a7514b17924f968e76f440af9e64b137e221c09d1e57a20",
+  "kind": "city-life-pedestrian-webgl-v1",
+  "stage": "near",
+  "quality": "balanced",
+  "graphics": "compatible",
+  "valid": true,
+  "viewport": [
+    1280,
+    720
+  ],
+  "render": [
+    1280,
+    720
+  ],
+  "camera": [
+    317.37215671041673,
+    44.10473293100046,
+    214.3215917698366
+  ],
+  "target": [
+    324.33015810568827,
+    34.33993127651965,
+    239.62445455711915
+  ],
+  "calls": 207,
+  "triangles": 1521851,
+  "geometries": 714,
+  "textures": 7,
+  "pedestrians": {
+    "time": 46.499999999999496,
+    "streetVisible": true,
+    "selected": 2,
+    "rendered": 2,
+    "routes": 64,
+    "actorStates": 128,
+    "attemptedRoutes": 118,
+    "floorIndexedMeshes": 9,
+    "indexedTreeTrunks": 36041,
+    "closestCandidateM": 28.482697381174063,
+    "nearbyCandidates": 2,
+    "safeNearbyCandidates": 2,
+    "renderedIds": [
+      "footway:3789:-1:run1:0",
+      "footway:3789:-1:run1:1"
+    ],
+    "budget": 12,
+    "renderer": {
+      "activeActors": 2,
+      "visibleActors": 2,
+      "capacity": 12,
+      "rejectedInputs": 0,
+      "allocatedBatches": 8,
+      "populatedBatches": 2,
+      "triangles": 624,
+      "geometryBytes": 346912,
+      "textures": 0,
+      "loadedTemplates": 8,
+      "failedTemplates": 0,
+      "loading": false,
+      "loadErrors": [],
+      "disposed": false
+    }
+  },
+  "actors": [
+    {
+      "actorId": "footway:3789:-1:run1:0",
+      "routeId": "footway:3789:-1:run1",
+      "offsetFromCurbM": 0.55,
+      "sourceWindow": 1,
+      "sourceStartM": 90,
+      "sourceEndM": 170,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        324.43348918800075,
+        33.336771620268415,
+        239.72735180489823
+      ],
+      "yawRadians": 0.7875018214802645,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    },
+    {
+      "actorId": "footway:3789:-1:run1:1",
+      "routeId": "footway:3789:-1:run1",
+      "offsetFromCurbM": 0.55,
+      "sourceWindow": 1,
+      "sourceStartM": 90,
+      "sourceEndM": 170,
+      "surfaceId": "ground",
+      "layer": 0,
+      "position": [
+        329.46372633191834,
+        33.23831224380007,
+        244.73646954760878
+      ],
+      "yawRadians": 3.929094475070004,
+      "movementHz": 2,
+      "decisionHz": 1,
+      "rendered": true
+    }
+  ]
+}

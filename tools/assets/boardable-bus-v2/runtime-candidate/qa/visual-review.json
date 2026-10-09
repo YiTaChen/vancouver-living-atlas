@@ -1,0 +1,87 @@
+{
+  "status": "pass",
+  "scope": "Human-visible pixel inspection of actual reduced GLB CPU previews, not WebGL or surveyed accuracy",
+  "images": [
+    {
+      "file": "qa/previews/front-lowfloor-looking-front-lod0.png",
+      "sha256": "525fa73f70f24e67a8313e2e9685cbbc41d80927adf5c32e7a82e964e3a970c2",
+      "actualGLBInputs": [
+        {
+          "file": "exports/city-bus-12m-interior-v2-runtime.lod0.glb",
+          "sha256": "76302cf2d45d5c027a412c6087231b65605d982b3ec2634942b6910ab002c096"
+        },
+        {
+          "file": "../../boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        }
+      ],
+      "observations": [
+        "Driver-side high equipment cabinet and cockpit remain distinct from front right metal wheelhouse.",
+        "Three inward navy priority cushions, stowed opposite seats, open bay and yellow rails remain readable.",
+        "Seat cushion bevels and shaped backs survived; no repeated forward seat rows in the front bay.",
+        "Final GLB includes the two flush portal support strips; no visible material or silhouette regression after this bounded correction."
+      ]
+    },
+    {
+      "file": "qa/previews/front-priority-overview-lod1.png",
+      "sha256": "b5cda44ff61d5c81c4105002124d62e9b6a7c0ee2d36e4b37470608f4bed938f",
+      "actualGLBInputs": [
+        {
+          "file": "exports/city-bus-12m-interior-v2-runtime.lod1.glb",
+          "sha256": "6d5ab5aa5d7074d7c844a48d88dbc4a4e2fd5c3f07b24b0aa6f0f4fcce0ba587"
+        },
+        {
+          "file": "../../boardable-bus/exports/city-bus-12m-exterior.lod1.glb",
+          "sha256": "a4ccbb6a4b2f032a4d950ee0883c51ebe1ecd314734b539c60aa5fd6c605b3f0"
+        }
+      ],
+      "observations": [
+        "Looking rearwards: right-of-image inward bench and left-of-image stowed seats/open bay preserve corrected vehicle-side topology.",
+        "All primary rails, forward lowfloor seating and stepped rear transition remain visible.",
+        "LOD1 visibly loses rounded cushion edges and small grips; intended mid-distance tradeoff.",
+        "Final GLB includes the two flush portal support strips; no visible material or silhouette regression after this bounded correction."
+      ]
+    },
+    {
+      "file": "qa/previews/cutaway-layout-lod0.png",
+      "sha256": "6ca164f04614957314bb8379902cfa7b49735fa08946232d556207050c043005",
+      "actualGLBInputs": [
+        {
+          "file": "exports/city-bus-12m-interior-v2-runtime.lod0.glb",
+          "sha256": "76302cf2d45d5c027a412c6087231b65605d982b3ec2634942b6910ab002c096"
+        }
+      ],
+      "observations": [
+        "Full car has distinct driver/front wheelbox/priority region and 17-seat raised rear topology.",
+        "Seatbacks/cushions retain shaped boundaries, grey floor and yellow poles.",
+        "Ceiling removal is QA-only.",
+        "Final GLB includes the two flush portal support strips; no visible material or silhouette regression after this bounded correction."
+      ]
+    },
+    {
+      "file": "qa/previews/cutaway-layout-lod1.png",
+      "sha256": "6a003b1df09d17f7c5a1ba71d3c48be6750612d781fd6e6740bd1179164c42bc",
+      "actualGLBInputs": [
+        {
+          "file": "exports/city-bus-12m-interior-v2-runtime.lod1.glb",
+          "sha256": "6d5ab5aa5d7074d7c844a48d88dbc4a4e2fd5c3f07b24b0aa6f0f4fcce0ba587"
+        }
+      ],
+      "observations": [
+        "Overall silhouette, floor steps, forward seat rows, rear seat group and asymmetric front spaces remain.",
+        "Simpler rectangular cushions and fewer seat fittings are visible, as expected for the 2800-triangle LOD.",
+        "Ceiling removal is QA-only.",
+        "Final GLB includes the two flush portal support strips; no visible material or silhouette regression after this bounded correction."
+      ]
+    }
+  ],
+  "materialChangesDuringReview": false,
+  "exposureChanged": false,
+  "knownTradeoffs": [
+    "32-sample un-denoised CPU render noise is visible.",
+    "LOD1 is more angular, lacks tiny upholstery buttons, small grips and some secondary fittings.",
+    "No continuous gameplay or GPU performance evidence."
+  ],
+  "WebGL": "not_run",
+  "supportGeometryEvidence": "qa/validation.json: exact upward support triangles and 3306 vertical rays, including both new portal strips and joins; support is not inferred from these images."
+}

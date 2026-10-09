@@ -1,0 +1,105 @@
+{
+  "status": "offline_candidate_complete",
+  "baseRevision": "4f19f06b271944e9bb16e8495cb72d628847bd7f",
+  "modelIdentity": "Alstom Mark V, Expo Line, representative A end-car plus short gangway",
+  "officialFullConsist": {
+    "cars": 5,
+    "lengthM": 84.8,
+    "modeledFullConsist": false
+  },
+  "sources": [
+    "source/mark-v-a-car-interior.lod0.blend",
+    "source/mark-v-a-car-interior.lod1.blend",
+    "source/mark-v-a-car-study.blend"
+  ],
+  "assets": [
+    {
+      "id": "mark-v-a-car-interior",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/mark-v-a-car-interior.lod0.glb",
+          "sha256": "280aa59559444ac15d6c2d712c61e87b846076632d8127f116e20424a086c984",
+          "triangles": 11016,
+          "bytes": 1179164,
+          "primitives": 10
+        },
+        {
+          "level": 1,
+          "file": "exports/mark-v-a-car-interior.lod1.glb",
+          "sha256": "25b45a2fd670a818b8ef10bc3dd92fbc427b941231063d8f9927706ddafe9e8d",
+          "triangles": 2976,
+          "bytes": 306220,
+          "primitives": 10
+        }
+      ]
+    },
+    {
+      "id": "mark-v-a-car-study",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/mark-v-a-car-study.glb",
+          "sha256": "c31086665fc793ab29ebd9948bc2d716a5cb570142f2dd7d1411c86fc590f6a0",
+          "triangles": 131102,
+          "bytes": 8108192,
+          "primitives": 10
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "commonPackage": "pass",
+    "geometryAndBudgets": "pass",
+    "completeSidecarCoverageAndHashes": "pass",
+    "bakedFrameTransformGuard": "pass",
+    "exactReferenceAnchorSetsAndPositions": "pass",
+    "actualTextureInventoryAndBudget": "pass",
+    "staticAisleAndGangwayClearance": "pass",
+    "actualTriangleFloorSupport": "pass",
+    "sourceReopenAndByteIdenticalReexport": "pass",
+    "savedCopyEditPreservation": "pass",
+    "regressionTests": 30,
+    "finalPreviewIntegrity": "pass",
+    "visualReview": "pass_with_documented_limits",
+    "runtimeWebGL": "not_run",
+    "placementCompatibility": "not_assumed",
+    "fullVolumeOpenGangway": "pass_all_three_variants",
+    "actualGLBClosingPanelNegativeTest": "pass",
+    "sourceReopenAndByteIdenticalSidecarReexport": "pass",
+    "actualComposedSceneOpenPrismAnd387FloorProbes": "pass",
+    "negativeIgnoredQuaternionRotationRejected": "pass",
+    "unchangedNonGangwayComponentGeometryAndAttributes": {
+      "lod0": 513,
+      "lod1": 231,
+      "study": 958,
+      "exactUnchangedReferenceNodesPerVariant": 56
+    }
+  },
+  "scopeRestrictions": [
+    "No existing Canada Line or bus assets edited by this task.",
+    "No runtime/public/application files changed.",
+    "Do not load the high-detail study as a B-CAB-budget runtime model.",
+    "No merge or deployment is part of this offline correction."
+  ],
+  "nextStep": "Review visual candidate; design independent Mark V exterior/profile, doors/platform interfaces and lifecycle integration before runtime acceptance.",
+  "openGangwayCorrection": {
+    "baselineDiagnosis": "No actual blocking door existed; optimized flat black bellows looked door-like and single-car forward view ended against neutral world.",
+    "geometry": "Replace only two flat side blocks with gray folded flexible surfaces; remove redundant study pleat strips; reuse existing shell material for sides and connector ceiling.",
+    "unchanged": "Bridge, shoulders, header, boarding doors, cabin, seats, anchors and shared cabin material values.",
+    "qaAdjacency": "Exact second instance of the delivered A-car LOD0, rotated 180 degrees about up and translated Z=-17.07 m; bridge edges meet at Z=-8.535 m. No C-car or full five-car geometry claim.",
+    "runtime": "not_run"
+  },
+  "previewPresentation": {
+    "recommendedCorrectionViews": [
+      "06-open-gangway-continuity.png",
+      "04-gangway-return.png"
+    ],
+    "isolatedViews": [
+      "01-aisle-toward-gangway.png",
+      "05-aisle-lod1.png"
+    ],
+    "isolatedViewLimit": "No adjoining cabin; gray beyond the short open gangway is neutral QA background, not door/endwall geometry.",
+    "continuityContext": "Two exact same A-car instances, not a C-car/full-consist reconstruction."
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "reviewDate": "2026-10-09",
+  "method": "Downloaded official sources; viewed actual JPG pixels and Poppler-rendered PDF page 2 at 1800px, not text-only inference.",
+  "sources": [
+    {
+      "id": "translink-canada-photo-2024",
+      "url": "https://buzzer.translink.ca/2024/08/skytrains-canada-line-marks-15th-anniversary/",
+      "mediaUrl": "https://buzzer.translink.ca/wp-content/uploads/2024/08/Canada-Line.jpg",
+      "sourceSha256": "c86c68f790706dd5b8153d2fe64ba0d2abcb5cb2732a0aae2e6a9c04a0646ff1",
+      "pixelDimensions": [
+        1024,
+        683
+      ],
+      "pixelInspection": "Completed: two connected cars, broad blue front surround, dark observation windshield, silver side body, repeated paired side doors, exposed rail bogies and rooftop equipment.",
+      "supportedUse": "Visual type reference only; no source pixels used in texture, no mesh extraction."
+    },
+    {
+      "id": "translink-buzzer-2008",
+      "url": "https://www.translink.ca/-/media/translink/documents/rider-guide/buzzer-archives/2000s/2008/buzzer_2008_09_12.pdf",
+      "sourceSha256": "52bd8c0e22bfed3a4e6007f8b13c369f3ec32429f8d2505cb11acb9fed50cd50",
+      "inspectedPages": [
+        2
+      ],
+      "pageRasterSha256": "76c812b84e748031b602655f3af5c0a7ed31783736ad7dcc3bd4142863462f8a",
+      "pixelInspection": "Completed: actual train exterior photo and route/station illustrations on page 2. Text supports paired train layout, wider vehicles and cantilever seats without floor posts.",
+      "supportedUse": "Broad design and station relationship evidence; historical publication, not present operating timetable or surveyed vehicle drawing."
+    }
+  ],
+  "dimensionBasis": {
+    "status": "representative",
+    "carBodyLengthM": 20.5,
+    "bodyWidthM": 3,
+    "carCenterPitchM": 21,
+    "floorAboveRailM": 1.1,
+    "doorOpeningM": [
+      1.5,
+      2.13
+    ],
+    "doorCentersZPerCarM": [
+      -6.4,
+      0,
+      6.4
+    ],
+    "ceilingAboveRailM": 3.45,
+    "note": "These are explicitly authored engineering targets, not dimensions measured from photographs or claimed exact manufacturer specifications. No Expo length, door spacing, floor or consist template was reused."
+  },
+  "approximationList": [
+    "Box-based low-poly shell and fascia rather than full Rotem surface reproduction",
+    "20 seats per reusable car for simplified gameplay; not a claim of official fleet seat count",
+    "Front observation glazing; no invented fixed driver cabin",
+    "Two car transforms with rear car yaw pi; static gangway only",
+    "Door transforms are authored plug+slide endpoints; not manufacturer kinematics",
+    "No branding textures copied from source photo",
+    "No materials claim physical laboratory calibration"
+  ],
+  "rights": "Reference media remains copyright of its publisher/photographer and is not licensed by the Atlas repository license. Downloaded bytes are local review inputs, excluded from the release. Sources can be reviewed at verified publisher links.",
+  "referenceMediaIncludedInRuntime": false
+}

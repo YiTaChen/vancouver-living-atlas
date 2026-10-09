@@ -50,6 +50,11 @@ export interface FacadeQueueOptions {
     ack: (error?: unknown) => void;
   }) => void;
 }
+export interface FacadePumpOptions {
+  /** Zero pauses planning/publication; asynchronous acknowledgements still clean up. */
+  budgetMs?: number;
+  allowNewJob?: boolean;
+}
 /** Single active builder + bounded completed cache. Call pump EVERY frame,
  * even when the 20 m camera selection threshold did not change. */
 export class IncrementalFacadeQueue {
@@ -145,6 +150,19 @@ export class IncrementalFacadeQueue {
   }
   get pendingId() {
     return this.job?.request.id;
+  }
+  get needsWork() {
+    return (
+      !this.disposed &&
+      (!!this.job ||
+        this.requests.some((request) => {
+          const record = this.records.get(request.id);
+          return (
+            record?.ready?.version !== request.version &&
+            record?.failedVersion !== request.version
+          );
+        }))
+    );
   }
   select(requests: readonly FacadeRequest[]) {
     if (this.disposed) return;
@@ -277,17 +295,24 @@ export class IncrementalFacadeQueue {
     this.metrics.completed++;
     this.options.onShadowDirty?.();
   }
-  pump() {
+  pump(options: FacadePumpOptions = {}) {
     if (this.disposed) return;
     this.metrics.pumps++;
+    const budgetMs = options.budgetMs ?? this.options.budgetMs;
+    if (!Number.isFinite(budgetMs) || budgetMs < 0 || budgetMs > 2)
+      throw new Error('Invalid facade pump budget');
+    if (budgetMs === 0) return;
     const now = this.options.now,
       start = now();
     let stepCount = 0,
       preparedThisPump = false;
     // Time is a soft deadline checked between bounded operations. A hard wall-
     // clock guarantee is impossible during GC/OS pauses; record any overshoot.
-    while (now() - start < this.options.budgetMs && stepCount < 256) {
-      if (!this.job) this.next();
+    while (
+      now() - start < Math.min(budgetMs, this.options.budgetMs) &&
+      stepCount < 256
+    ) {
+      if (!this.job && options.allowNewJob !== false) this.next();
       const job = this.job;
       if (!job) break;
       if (!job.builder.done) {
@@ -366,7 +391,8 @@ export class IncrementalFacadeQueue {
     }
     const elapsed = now() - start;
     this.metrics.maxPumpMs = Math.max(this.metrics.maxPumpMs, elapsed);
-    if (elapsed > this.options.budgetMs) this.metrics.budgetOverruns++;
+    if (elapsed > Math.min(budgetMs, this.options.budgetMs))
+      this.metrics.budgetOverruns++;
   }
   dispose() {
     if (this.disposed) return;

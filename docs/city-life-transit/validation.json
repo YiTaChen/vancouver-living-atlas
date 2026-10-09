@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 1,
+  "dateUtc": "2026-10-07",
+  "baseRevision": "401569193ccda73e8f6a6fd96e4bdb144ef5a4c6",
+  "branch": "codex/city-life-transit-offline-20261007",
+  "scope": "offline reusable modules, source data and pedestrian asset delivery; full specification remains partially implemented",
+  "environment": {
+    "os": "Linux x86_64",
+    "node": "24.19.0",
+    "npm": "11.9.0",
+    "python": "3.12.14",
+    "blender": "4.3.2",
+    "renderer": "Cycles CPU reimport previews only"
+  },
+  "checks": {
+    "npm run check": {
+      "status": "pass"
+    },
+    "node --test tests/city-life-runtime.test.mjs tests/city-life-transit-sources.test.mjs": {
+      "status": "pass",
+      "tests": 42
+    },
+    "node --test tests/city-life-pedestrian-assets.test.mjs": {
+      "status": "pass",
+      "tests": 7
+    },
+    "npm test": {
+      "status": "pass",
+      "tests": 768,
+      "fail": 0,
+      "skipped": 0
+    },
+    "scoped oxlint": {
+      "status": "pass",
+      "scope": [
+        "lib/city/city-life",
+        "tests/city-life-*.test.mjs",
+        "tools/verify-city-life-isolation.mjs",
+        "tools/assets/city-life-pedestrians/motion.mjs"
+      ]
+    },
+    "npm run lint": {
+      "status": "fail",
+      "diagnostics": 211,
+      "classification": "existing diagnostics outside new files; no lint rules relaxed"
+    },
+    "npm run build:firebase": {
+      "status": "pass",
+      "deployment": "not_run",
+      "existingAssetIsolation": {
+        "adoptedFiles": 19,
+        "protectedCandidateHashes": 176
+      }
+    },
+    "node tools/verify-city-life-isolation.mjs": {
+      "status": "pass",
+      "candidateFiles": 19,
+      "uniquePayloadHashes": 19,
+      "emittedFiles": 92,
+      "browserNetwork": "not_run"
+    },
+    "python3 tools/assets/city-life-pedestrians/validate.py": {
+      "status": "pass",
+      "evidence": "../../tools/assets/city-life-pedestrians/qa/validation.json"
+    },
+    "common asset validator": {
+      "status": "pass",
+      "evidence": "../../tools/assets/city-life-pedestrians/qa/common-validation.json"
+    },
+    "Blender source preserve/reexport/edit proof": {
+      "status": "pass",
+      "evidence": "../../tools/assets/city-life-pedestrians/qa/source-audit.json"
+    },
+    "GLB reimport CPU visual review": {
+      "status": "pass",
+      "images": 3,
+      "evidence": "../../tools/assets/city-life-pedestrians/qa/visual-review.json"
+    },
+    "python3 tools/transit/city-life-sources/import_gtfs.py --self-test": {
+      "status": "pass",
+      "tests": 6
+    },
+    "GTFS source validation": {
+      "status": "pass",
+      "rideReady": false
+    },
+    "GTFS --require-ride-ready": {
+      "status": "expected_rejection",
+      "exitCode": 1,
+      "reason": "Source-only schema always rejects runtime authorization, including forged status flags"
+    },
+    "same ZIP source fixture replay": {
+      "status": "pass",
+      "evidence": "../../tools/transit/city-life-sources/validation-report.json"
+    },
+    "git diff --exit-code": {
+      "status": "pass",
+      "meaning": "all previously tracked files are byte-preserved; delivery is additive"
+    }
+  },
+  "sourceSpec": {
+    "path": "../CITY_LIFE_TRANSIT_SPEC.md",
+    "bytes": 45686,
+    "sha256": "f897546640c93c443ced9ea8b205e4bdf89e7018068e4e79ca90a72cd5a220bc",
+    "unchanged": true
+  },
+  "independentReview": {
+    "status": "pass_after_fixes",
+    "focusedTests": 42,
+    "additionalAdversarialChecks": 6,
+    "fixedFindings": [
+      "analytic internal cubic cusp/vertical tangent rejection",
+      "source-only readiness cannot be promoted through status flags"
+    ],
+    "productionImports": "none"
+  },
+  "recoveredFailures": [
+    {
+      "issue": "npm cache path unavailable",
+      "resolution": "npm ci --ignore-scripts --cache /tmp/city-life-npm-cache succeeded; lockfile unchanged"
+    },
+    {
+      "issue": "cloud execution transport failed before final packaging",
+      "resolution": "original persisted files verified after recovery; no reconstructed code or invented binary used"
+    },
+    {
+      "issue": "new spec backlink changed a pinned source document hash and failed two regressions",
+      "resolution": "reverted original backlog document; preserved all old manifests and validators; 25 preservation tests and final768-test suite passed"
+    },
+    {
+      "issue": "pedestrian validator initially required COLOR_0 VEC4",
+      "resolution": "accept valid glTF opaque RGB VEC3 with implicit alpha1; final seven asset tests passed"
+    }
+  ],
+  "runtimeChecks": {
+    "V01": "not_run",
+    "V02": "not_run",
+    "V03": "not_run",
+    "V04": "not_run",
+    "V05": "not_run",
+    "V06": "not_run",
+    "V07": "not_run",
+    "V08": "not_run",
+    "V09": "not_run",
+    "V10": "not_run",
+    "V11": "not_run",
+    "V12": "not_run"
+  },
+  "unverified": [
+    "browser/WebGL and touch input",
+    "geographic station maps and City GIS re-verification",
+    "source-backed physical streets/lanes/platforms/underground levels",
+    "Canada Line vehicle profile and station geometry",
+    "legal continuous return paths and full Waterfront walking transfer",
+    "actual renderer passes, performance, GPU memory, moving collision and human scale in vehicles"
+  ],
+  "nightLighting": "deferred_not_implemented",
+  "mainMerge": "not_run",
+  "deployment": "not_run"
+}

@@ -1,0 +1,656 @@
+{
+  "scope": "actual exported PBR properties, not source shader assumptions",
+  "assets": [
+    {
+      "file": "exports/mark-v-a-car-interior.lod0.glb",
+      "sha256": "280aa59559444ac15d6c2d712c61e87b846076632d8127f116e20424a086c984",
+      "materials": [
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "information",
+            "shared_surface_id": "mark-v-information"
+          },
+          "name": "information",
+          "pbrMetallicRoughness": {
+            "baseColorTexture": {
+              "index": 0
+            },
+            "metallicFactor": 0,
+            "roughnessFactor": 0.47999998927116394
+          }
+        },
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "rail",
+            "shared_surface_id": "mark-v-rail"
+          },
+          "name": "rail",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.9800000190734863,
+              0.6899999976158142,
+              0.013000000268220901,
+              1
+            ],
+            "metallicFactor": 0.11999999731779099,
+            "roughnessFactor": 0.23999999463558197
+          }
+        },
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "seat",
+            "shared_surface_id": "mark-v-seat"
+          },
+          "name": "seat",
+          "pbrMetallicRoughness": {
+            "baseColorTexture": {
+              "index": 1
+            },
+            "metallicFactor": 0,
+            "roughnessFactor": 0.5199999809265137
+          }
+        },
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "rubber",
+            "shared_surface_id": "mark-v-rubber"
+          },
+          "name": "rubber",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.02199999988079071,
+              0.027000000700354576,
+              0.029999999329447746,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.6700000166893005
+          }
+        },
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "panel",
+            "shared_surface_id": "mark-v-panel"
+          },
+          "name": "panel",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.7900000214576721,
+              0.7900000214576721,
+              0.7549999952316284,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.4300000071525574
+          }
+        },
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "shell",
+            "shared_surface_id": "mark-v-shell"
+          },
+          "name": "shell",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.3700000047683716,
+              0.4000000059604645,
+              0.39500001072883606,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.36000001430511475
+          }
+        },
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "metal",
+            "shared_surface_id": "mark-v-metal"
+          },
+          "name": "metal",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.47999998927116394,
+              0.5299999713897705,
+              0.5600000023841858,
+              1
+            ],
+            "metallicFactor": 0.75,
+            "roughnessFactor": 0.28999999165534973
+          }
+        },
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "diffuser",
+            "shared_surface_id": "mark-v-diffuser"
+          },
+          "name": "diffuser",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.9599999785423279,
+              0.9700000286102295,
+              0.9399999976158142,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.3199999928474426
+          }
+        },
+        {
+          "alphaMode": "BLEND",
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "glass",
+            "shared_surface_id": "mark-v-glass"
+          },
+          "name": "glass",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.3199999928474426,
+              0.5,
+              0.5600000023841858,
+              0.15000000596046448
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.1599999964237213
+          }
+        },
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "floor",
+            "shared_surface_id": "mark-v-floor"
+          },
+          "name": "floor",
+          "pbrMetallicRoughness": {
+            "baseColorTexture": {
+              "index": 2
+            },
+            "metallicFactor": 0,
+            "roughnessFactor": 0.5600000023841858
+          }
+        }
+      ],
+      "textures": [
+        {
+          "sampler": 0,
+          "source": 0
+        },
+        {
+          "sampler": 0,
+          "source": 1
+        },
+        {
+          "sampler": 0,
+          "source": 2
+        }
+      ],
+      "images": [
+        {
+          "sha256": "f815d2855711698883c2e6714222a402ffa4f96ae8311ebda00614d09f313060",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 71466,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "e0b728ccb83a7263e29bb3e00643905a56fb0480ca8f73086ee5620069e52f76",
+          "width": 256,
+          "height": 256,
+          "bytes": 43963,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "4556125a0517d16bf4e39d4a315af53ed471bbc19a14045b862453f4eb0b6aa8",
+          "width": 512,
+          "height": 512,
+          "bytes": 298754,
+          "texelBytesWithMips": 1398101.3333333333
+        }
+      ],
+      "lights": 0,
+      "primitiveCount": 10
+    },
+    {
+      "file": "exports/mark-v-a-car-interior.lod1.glb",
+      "sha256": "25b45a2fd670a818b8ef10bc3dd92fbc427b941231063d8f9927706ddafe9e8d",
+      "materials": [
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "seat",
+            "shared_surface_id": "mark-v-seat"
+          },
+          "name": "seat",
+          "pbrMetallicRoughness": {
+            "baseColorTexture": {
+              "index": 0
+            },
+            "metallicFactor": 0,
+            "roughnessFactor": 0.5199999809265137
+          }
+        },
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "panel",
+            "shared_surface_id": "mark-v-panel"
+          },
+          "name": "panel",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.7900000214576721,
+              0.7900000214576721,
+              0.7549999952316284,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.4300000071525574
+          }
+        },
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "rail",
+            "shared_surface_id": "mark-v-rail"
+          },
+          "name": "rail",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.9800000190734863,
+              0.6899999976158142,
+              0.013000000268220901,
+              1
+            ],
+            "metallicFactor": 0.11999999731779099,
+            "roughnessFactor": 0.23999999463558197
+          }
+        },
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "shell",
+            "shared_surface_id": "mark-v-shell"
+          },
+          "name": "shell",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.3700000047683716,
+              0.4000000059604645,
+              0.39500001072883606,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.36000001430511475
+          }
+        },
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "diffuser",
+            "shared_surface_id": "mark-v-diffuser"
+          },
+          "name": "diffuser",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.9599999785423279,
+              0.9700000286102295,
+              0.9399999976158142,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.3199999928474426
+          }
+        },
+        {
+          "alphaMode": "BLEND",
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "glass",
+            "shared_surface_id": "mark-v-glass"
+          },
+          "name": "glass",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.3199999928474426,
+              0.5,
+              0.5600000023841858,
+              0.15000000596046448
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.1599999964237213
+          }
+        },
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "rubber",
+            "shared_surface_id": "mark-v-rubber"
+          },
+          "name": "rubber",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.02199999988079071,
+              0.027000000700354576,
+              0.029999999329447746,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.6700000166893005
+          }
+        },
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "metal",
+            "shared_surface_id": "mark-v-metal"
+          },
+          "name": "metal",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.47999998927116394,
+              0.5299999713897705,
+              0.5600000023841858,
+              1
+            ],
+            "metallicFactor": 0.75,
+            "roughnessFactor": 0.28999999165534973
+          }
+        },
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "floor",
+            "shared_surface_id": "mark-v-floor"
+          },
+          "name": "floor",
+          "pbrMetallicRoughness": {
+            "baseColorTexture": {
+              "index": 1
+            },
+            "metallicFactor": 0,
+            "roughnessFactor": 0.5600000023841858
+          }
+        },
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "information",
+            "shared_surface_id": "mark-v-information"
+          },
+          "name": "information",
+          "pbrMetallicRoughness": {
+            "baseColorTexture": {
+              "index": 2
+            },
+            "metallicFactor": 0,
+            "roughnessFactor": 0.47999998927116394
+          }
+        }
+      ],
+      "textures": [
+        {
+          "sampler": 0,
+          "source": 0
+        },
+        {
+          "sampler": 0,
+          "source": 1
+        },
+        {
+          "sampler": 0,
+          "source": 2
+        }
+      ],
+      "images": [
+        {
+          "sha256": "d242b7a05e09a47eda3c253a246317e402c5f53c4e509973ae2a8b7612da4f60",
+          "width": 64,
+          "height": 64,
+          "bytes": 2366,
+          "texelBytesWithMips": 21845.333333333332
+        },
+        {
+          "sha256": "ae7bc6346470572e001e13a0cd6d81a74a30fedbd43c7b2d84764923597c4ee3",
+          "width": 64,
+          "height": 64,
+          "bytes": 2511,
+          "texelBytesWithMips": 21845.333333333332
+        },
+        {
+          "sha256": "12f18f6d8fbf33eb42f55f250366134f38f9ae9415dbec3b7e1f40df82ca1b92",
+          "width": 256,
+          "height": 256,
+          "bytes": 37535,
+          "texelBytesWithMips": 349525.3333333333
+        }
+      ],
+      "lights": 0,
+      "primitiveCount": 10
+    },
+    {
+      "file": "exports/mark-v-a-car-study.glb",
+      "sha256": "c31086665fc793ab29ebd9948bc2d716a5cb570142f2dd7d1411c86fc590f6a0",
+      "materials": [
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "information",
+            "shared_surface_id": "mark-v-information"
+          },
+          "name": "information",
+          "pbrMetallicRoughness": {
+            "baseColorTexture": {
+              "index": 0
+            },
+            "metallicFactor": 0,
+            "roughnessFactor": 0.47999998927116394
+          }
+        },
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "rail",
+            "shared_surface_id": "mark-v-rail"
+          },
+          "name": "rail",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.9800000190734863,
+              0.6899999976158142,
+              0.013000000268220901,
+              1
+            ],
+            "metallicFactor": 0.11999999731779099,
+            "roughnessFactor": 0.23999999463558197
+          }
+        },
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "seat",
+            "shared_surface_id": "mark-v-seat"
+          },
+          "name": "seat",
+          "pbrMetallicRoughness": {
+            "baseColorTexture": {
+              "index": 1
+            },
+            "metallicFactor": 0,
+            "roughnessFactor": 0.5199999809265137
+          }
+        },
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "rubber",
+            "shared_surface_id": "mark-v-rubber"
+          },
+          "name": "rubber",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.02199999988079071,
+              0.027000000700354576,
+              0.029999999329447746,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.6700000166893005
+          }
+        },
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "panel",
+            "shared_surface_id": "mark-v-panel"
+          },
+          "name": "panel",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.7900000214576721,
+              0.7900000214576721,
+              0.7549999952316284,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.4300000071525574
+          }
+        },
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "metal",
+            "shared_surface_id": "mark-v-metal"
+          },
+          "name": "metal",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.47999998927116394,
+              0.5299999713897705,
+              0.5600000023841858,
+              1
+            ],
+            "metallicFactor": 0.75,
+            "roughnessFactor": 0.28999999165534973
+          }
+        },
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "shell",
+            "shared_surface_id": "mark-v-shell"
+          },
+          "name": "shell",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.3700000047683716,
+              0.4000000059604645,
+              0.39500001072883606,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.36000001430511475
+          }
+        },
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "diffuser",
+            "shared_surface_id": "mark-v-diffuser"
+          },
+          "name": "diffuser",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.9599999785423279,
+              0.9700000286102295,
+              0.9399999976158142,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.3199999928474426
+          }
+        },
+        {
+          "alphaMode": "BLEND",
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "glass",
+            "shared_surface_id": "mark-v-glass"
+          },
+          "name": "glass",
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              0.3199999928474426,
+              0.5,
+              0.5600000023841858,
+              0.15000000596046448
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.1599999964237213
+          }
+        },
+        {
+          "doubleSided": true,
+          "extras": {
+            "semantic_role": "floor",
+            "shared_surface_id": "mark-v-floor"
+          },
+          "name": "floor",
+          "pbrMetallicRoughness": {
+            "baseColorTexture": {
+              "index": 2
+            },
+            "metallicFactor": 0,
+            "roughnessFactor": 0.5600000023841858
+          }
+        }
+      ],
+      "textures": [
+        {
+          "sampler": 0,
+          "source": 0
+        },
+        {
+          "sampler": 0,
+          "source": 1
+        },
+        {
+          "sampler": 0,
+          "source": 2
+        }
+      ],
+      "images": [
+        {
+          "sha256": "f815d2855711698883c2e6714222a402ffa4f96ae8311ebda00614d09f313060",
+          "width": 1024,
+          "height": 1024,
+          "bytes": 71466,
+          "texelBytesWithMips": 5592405.333333333
+        },
+        {
+          "sha256": "e0b728ccb83a7263e29bb3e00643905a56fb0480ca8f73086ee5620069e52f76",
+          "width": 256,
+          "height": 256,
+          "bytes": 43963,
+          "texelBytesWithMips": 349525.3333333333
+        },
+        {
+          "sha256": "4556125a0517d16bf4e39d4a315af53ed471bbc19a14045b862453f4eb0b6aa8",
+          "width": 512,
+          "height": 512,
+          "bytes": 298754,
+          "texelBytesWithMips": 1398101.3333333333
+        }
+      ],
+      "lights": 0,
+      "primitiveCount": 10
+    }
+  ]
+}

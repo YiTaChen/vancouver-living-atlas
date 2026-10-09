@@ -1,5 +1,6 @@
 import type { VisualQuality } from './quality';
 import type { ClockState } from './clock';
+import type { BusVisitSnapshot } from './bus-visit';
 export type Coord = [number, number];
 export interface Feature {
   type?: string;
@@ -13,6 +14,16 @@ export interface TerrainData {
   [key: string]: any;
 }
 export interface SceneStats {
+  busVisit?: BusVisitSnapshot;
+  effectiveQuality?: VisualQuality;
+  autoQuality?: {
+    resolutionScale: number;
+    targetFps: number;
+    reason: string;
+    frameMs: number | null;
+    p95Ms: number | null;
+    changes: number;
+  };
   clock?: ClockState;
   renderWidth?: number;
   renderHeight?: number;
@@ -38,6 +49,9 @@ export interface Settings {
   terrain: boolean;
   autoRotate: boolean;
   quality: VisualQuality;
+  /** User preference is independent of the renderer's effective quality tier.
+   * Older callers without this field keep their selected manual preset. */
+  qualityMode?: 'auto' | 'manual';
   mode: 'orbit' | 'walk' | 'drive' | 'boat' | 'flight';
 }
 export interface Viewpoint {
@@ -233,6 +247,7 @@ export const DEFAULT_SETTINGS: Settings = {
   harbour: true,
   terrain: true,
   autoRotate: false,
-  quality: 'high',
+  quality: 'balanced',
+  qualityMode: 'auto',
   mode: 'orbit',
 };

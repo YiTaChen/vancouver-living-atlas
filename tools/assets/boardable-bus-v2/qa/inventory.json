@@ -1,0 +1,211 @@
+{
+  "date": "2026-10-09",
+  "scope": "This reconstructed package only; no third-party photos or temporary logs",
+  "files": [
+    {
+      "file": ".gitignore",
+      "bytes": 115,
+      "sha256": "1facac2d2f6e7393773a842558ad12e8daa4c7a0e6581509a6847eab715b1405"
+    },
+    {
+      "file": "README.zh-TW.md",
+      "bytes": 7877,
+      "sha256": "0898bba702235fd3088b0af405c9a2d59fdfa08d808360f93c0c545849c74458"
+    },
+    {
+      "file": "REFERENCES.md",
+      "bytes": 8386,
+      "sha256": "a7d0355e064cadda3ae5c7296dfc795c7dff08af93cc102db2b065fa277e87b3"
+    },
+    {
+      "file": "build.py",
+      "bytes": 9484,
+      "sha256": "3fb0f50c1c57f64362d7441f71bb852a00c06eb1becd2783355551c5f9f3bb90"
+    },
+    {
+      "file": "compose.mjs",
+      "bytes": 2511,
+      "sha256": "9425a59550b578d80667ede400a2e1d05cb68a88e4b2580ef2e4145821da5da7"
+    },
+    {
+      "file": "export.py",
+      "bytes": 1096,
+      "sha256": "345c5237473f790e6dbf77b2961dfa335ea136dd427c469c2755c71a98405b5a"
+    },
+    {
+      "file": "exports/city-bus-12m-interior-v2.lod0.glb",
+      "bytes": 2634280,
+      "sha256": "bc49cb015a4d02e1d7d68c5812a459d5b49eee822a8aff8d6795709d04fac80e"
+    },
+    {
+      "file": "exports/city-bus-12m-interior-v2.lod1.glb",
+      "bytes": 1449360,
+      "sha256": "c86bdf4737f28af73cd9a6f8d638b09f939ff90cd6e5a5df51e9839ec509624a"
+    },
+    {
+      "file": "finalize.py",
+      "bytes": 3464,
+      "sha256": "f746e5fb068dfe65073c7a434b1191e3f296d067a30a74ca042f8a6ac5ef966c"
+    },
+    {
+      "file": "layout.py",
+      "bytes": 1356,
+      "sha256": "b4e9e2cafd8e28cab5c5d769b8f192caebc9cdb6d12314135beb341bdfa1b524"
+    },
+    {
+      "file": "manifest.json",
+      "bytes": 601505,
+      "sha256": "b01497649a45589a23072da1522dffc9857eab704c8446caff929ea8849da842"
+    },
+    {
+      "file": "metadata.py",
+      "bytes": 12100,
+      "sha256": "c1d9c24fb02492e9f71693f452d2d5c2179d3be05da6300b43400130ac05ddeb"
+    },
+    {
+      "file": "qa/blender-validation.json",
+      "bytes": 2010,
+      "sha256": "9df1c4c26c6432260cf2d7756341ef4b16c9036972774ed2d6ad848eda5d5537"
+    },
+    {
+      "file": "qa/budget-review.json",
+      "bytes": 734,
+      "sha256": "88389dc4cff1798effceeb9d6857c67f218a2362bce34e757aef5cd68ae5a726"
+    },
+    {
+      "file": "qa/builder-smoke.json",
+      "bytes": 3496,
+      "sha256": "aa98257509001cb63e9d9c5eec3b28f32f0471a9ad9180579712d144e24935df"
+    },
+    {
+      "file": "qa/bus-v2-adapter-tests.txt",
+      "bytes": 633,
+      "sha256": "377938e4e2f963898d1e7edb43d930354d62ebed4bf37e46d2f7a85d3c10393a"
+    },
+    {
+      "file": "qa/bus-v2-regression-tests.txt",
+      "bytes": 2341,
+      "sha256": "09b89e61d3b1993fadb7e01a49866a2a840b1fcfeaf895dab10bb6e14d56f548"
+    },
+    {
+      "file": "qa/common-validation.json",
+      "bytes": 38127,
+      "sha256": "806b592b19e34930c26a214c72aecb6ad3caf2d864f6ba01b8fb8c7b2f8571fc"
+    },
+    {
+      "file": "qa/front-correction-before.json",
+      "bytes": 51995,
+      "sha256": "e04f02c34d227269d7eafff2fc93e754390f20347b038ca1b8dfefa2843e7cc0"
+    },
+    {
+      "file": "qa/front-correction-provenance.json",
+      "bytes": 2122,
+      "sha256": "216899d2b0764691eaa99961cf26840ed6420c09f9e17cd4790bbe14cb5549be"
+    },
+    {
+      "file": "qa/handoff.json",
+      "bytes": 2393,
+      "sha256": "d909a17582cd5f43959b13ec210ada699d8edb0575386fedaae63d77f7b8da34"
+    },
+    {
+      "file": "qa/measurements.json",
+      "bytes": 38197,
+      "sha256": "e425bda9e620d38278940a0626edc9fb6ed2579457c8e25e19097c6efd7c009c"
+    },
+    {
+      "file": "qa/previews/cutaway-layout.png",
+      "bytes": 879726,
+      "sha256": "1e9bebbbd4452af2e6564a20e5b06584b56b6301be7d48ad9878eebca8bab47b"
+    },
+    {
+      "file": "qa/previews/front-door-driver.png",
+      "bytes": 1409105,
+      "sha256": "b8b35f7228755a2a09171897c56acec70f6e42d827e7b1e13743fd056c1c42a1"
+    },
+    {
+      "file": "qa/previews/front-looking-rear-lod0.png",
+      "bytes": 1613433,
+      "sha256": "66a1edd67e833fee1d196a8dd8c42186fa45fabb63fa12dbe6c8afe24a8d1004"
+    },
+    {
+      "file": "qa/previews/front-looking-rear-lod1.png",
+      "bytes": 1605498,
+      "sha256": "a4530e9c561f721970fee3b726ce9e5b1cb6784e132630e4262ab6fda43e4666"
+    },
+    {
+      "file": "qa/previews/front-lowfloor-looking-front.png",
+      "bytes": 1581824,
+      "sha256": "c179757c86c14b809ffbb8321143f16734ac347dd95c3fe8552838439df40129"
+    },
+    {
+      "file": "qa/previews/front-priority-overview.png",
+      "bytes": 1580436,
+      "sha256": "7830961ef7b501db47dd738803f2fdad720abf03b069c5e388e56cc84fe404bf"
+    },
+    {
+      "file": "qa/previews/index.json",
+      "bytes": 9344,
+      "sha256": "aed1aff1bba1108907a9322781679788acad9f6c3e373e5cfa7ea959b379cd17"
+    },
+    {
+      "file": "qa/previews/rear-looking-front-lod0.png",
+      "bytes": 1649096,
+      "sha256": "17a85e809f91c9a252744d3174911e126f4a5d0446ffcc213c529904bce8b312"
+    },
+    {
+      "file": "qa/previews/rear-steps-detail.png",
+      "bytes": 1503767,
+      "sha256": "2108c328c55dd8d809c2c7eea47357676a00d2f55929f70c09dd7cc23b580aea"
+    },
+    {
+      "file": "qa/previews/wheelchair-and-rear-door.png",
+      "bytes": 1549215,
+      "sha256": "a4f266e702b67b73fe6d80526c4b2d0ea45738393acbaefc372fc5138d95075b"
+    },
+    {
+      "file": "qa/validation.json",
+      "bytes": 2885,
+      "sha256": "a44eb672fda4769a63a34d9d21b38a7a7b62bce974104c10c341047ac73222a9"
+    },
+    {
+      "file": "qa/visual-review.json",
+      "bytes": 4886,
+      "sha256": "885e1209356d338d9c5a9870f90ffaed33434c089bd44839513aa6ecabf0584a"
+    },
+    {
+      "file": "qa_blender.py",
+      "bytes": 7856,
+      "sha256": "8fb4c4b23aab6828525f6e27fb533868d4c6146d885f896f3ea319f2eb53f0fe"
+    },
+    {
+      "file": "revise_front.py",
+      "bytes": 8526,
+      "sha256": "62f10af5c35c517dcab41626ed8086d6a2d91fb8a3d59e0ba31f2e0c75b544ac"
+    },
+    {
+      "file": "source/city-bus-12m-interior-v2.lod0.blend",
+      "bytes": 298301,
+      "sha256": "f9fb01939c1e65c0c308c8bc2cdca72f26d9d6b728e489df6743bfb6849dc673"
+    },
+    {
+      "file": "source/city-bus-12m-interior-v2.lod1.blend",
+      "bytes": 240150,
+      "sha256": "574de58747175d91c67c76bde05c950bf44ba9542188a37303db6bb600408cd3"
+    },
+    {
+      "file": "test_bus-v2.py",
+      "bytes": 4904,
+      "sha256": "1b4d0399245c4a660b284ee765aa2ba4105831307d779386fa93a18f267de98a"
+    },
+    {
+      "file": "validate.py",
+      "bytes": 12208,
+      "sha256": "42c0ce46a30dac76427be40a2d74ff2052737c564ca2046ae7a8a4df4ca225f7"
+    }
+  ],
+  "externalTest": {
+    "file": "tests/bus-v2.test.mjs",
+    "bytes": 3061,
+    "sha256": "0a70c8f2dae22651a6aa2fbbfc7f13f960ee099e7db94ca8bbc29bf19470657c"
+  }
+}
