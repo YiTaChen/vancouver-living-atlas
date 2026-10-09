@@ -1,0 +1,29 @@
+{
+  "status": "not_met",
+  "source": "docs/AI_AGENT_DEVELOPMENT_BACKLOG.md B-CAB row",
+  "scope": "offline detailed art supplement; not a compliant runtime LOD delivery",
+  "lods": [
+    {
+      "level": 0,
+      "triangles": 30200,
+      "triangleBudget": 12000,
+      "triangleBudgetPassed": false,
+      "bytes": 2634280,
+      "byteBudget": 1572864,
+      "byteBudgetPassed": false,
+      "status": "over_budget"
+    },
+    {
+      "level": 1,
+      "triangles": 14984,
+      "triangleBudget": 3000,
+      "triangleBudgetPassed": false,
+      "bytes": 1449360,
+      "byteBudget": 393216,
+      "byteBudgetPassed": false,
+      "status": "over_budget"
+    }
+  ],
+  "runtimePerformance": "not_run",
+  "optimizationPending": true
+}

@@ -1,0 +1,462 @@
+ERROR Draco mesh compression is not available because library could not be found at /usr/bin/4.3/python/lib/python3.13/site-packages/libextern_draco.so
+08:11:59 | INFO: Starting glTF 2.0 export
+08:11:59 | INFO: Extracting primitive: Cube.030
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cube
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cube.142
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cube.141
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cube.143
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cube.144
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cube.140
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cube.075
+08:11:59 | INFO: Primitives created: 2
+08:11:59 | INFO: Extracting primitive: Cube.080
+08:11:59 | INFO: Primitives created: 2
+08:11:59 | INFO: Extracting primitive: Cube.085
+08:11:59 | INFO: Primitives created: 2
+08:11:59 | INFO: Extracting primitive: Cube.090
+08:11:59 | INFO: Primitives created: 2
+08:11:59 | INFO: Extracting primitive: Cube.095
+08:11:59 | INFO: Primitives created: 2
+08:11:59 | INFO: Extracting primitive: Cube.100
+08:11:59 | INFO: Primitives created: 2
+08:11:59 | INFO: Extracting primitive: Cube.105
+08:11:59 | INFO: Primitives created: 2
+08:11:59 | INFO: Extracting primitive: Cube.110
+08:11:59 | INFO: Primitives created: 2
+08:11:59 | INFO: Extracting primitive: Cube.115
+08:11:59 | INFO: Primitives created: 2
+08:11:59 | INFO: Extracting primitive: Cube.120
+08:11:59 | INFO: Primitives created: 2
+08:11:59 | INFO: Extracting primitive: Cube.125
+08:11:59 | INFO: Primitives created: 2
+08:11:59 | INFO: Extracting primitive: Cube.130
+08:11:59 | INFO: Primitives created: 2
+08:11:59 | INFO: Extracting primitive: Cube.138
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cube.139
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cube.069
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cube.002
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cylinder.007
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cylinder.006
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cylinder.005
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cylinder.004
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cylinder.003
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cylinder.002
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cylinder.001
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cylinder
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Finished glTF 2.0 export in 0.08455562591552734 s
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+08:11:59 | INFO: Data are loaded, start creating Blender stuff
+08:11:59 | INFO: Blender create Mesh node Cube.030
+08:11:59 | INFO: Blender create Mesh node Cube
+08:11:59 | INFO: Blender create Mesh node Cube.142
+08:11:59 | INFO: Blender create Mesh node Cube.141
+08:11:59 | INFO: Blender create Mesh node Cube.143
+08:11:59 | INFO: Blender create Mesh node Cube.144
+08:11:59 | INFO: Blender create Mesh node Cube.140
+08:11:59 | INFO: Blender create Mesh node Cube.075
+08:11:59 | INFO: Blender create Mesh node Cube.080
+08:11:59 | INFO: Blender create Mesh node Cube.085
+08:11:59 | INFO: Blender create Mesh node Cube.090
+08:11:59 | INFO: Blender create Mesh node Cube.095
+08:11:59 | INFO: Blender create Mesh node Cube.100
+08:11:59 | INFO: Blender create Mesh node Cube.105
+08:11:59 | INFO: Blender create Mesh node Cube.110
+08:11:59 | INFO: Blender create Mesh node Cube.115
+08:11:59 | INFO: Blender create Mesh node Cube.120
+08:11:59 | INFO: Blender create Mesh node Cube.125
+08:11:59 | INFO: Blender create Mesh node Cube.130
+08:11:59 | INFO: Blender create Mesh node Cube.138
+08:11:59 | INFO: Blender create Mesh node Cube.139
+08:11:59 | INFO: Blender create Mesh node Cube.069
+08:11:59 | INFO: Blender create Mesh node Cube.002
+08:11:59 | INFO: Blender create Mesh node Cylinder.007
+08:11:59 | INFO: Blender create Mesh node Cylinder.006
+08:11:59 | INFO: Blender create Mesh node Cylinder.005
+08:11:59 | INFO: Blender create Mesh node Cylinder.004
+08:11:59 | INFO: Blender create Mesh node Cylinder.003
+08:11:59 | INFO: Blender create Mesh node Cylinder.002
+08:11:59 | INFO: Blender create Mesh node Cylinder.001
+08:11:59 | INFO: Blender create Mesh node Cylinder
+08:11:59 | INFO: glTF import finished in 0.05s
+08:11:59 | INFO: Starting glTF 2.0 export
+08:11:59 | INFO: Extracting primitive: Cube.030
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cube
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cube.142
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cube.141
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cube.143
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cube.144
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cube.140
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cube.075
+08:11:59 | INFO: Primitives created: 2
+08:11:59 | INFO: Extracting primitive: Cube.080
+08:11:59 | INFO: Primitives created: 2
+08:11:59 | INFO: Extracting primitive: Cube.085
+08:11:59 | INFO: Primitives created: 2
+08:11:59 | INFO: Extracting primitive: Cube.090
+08:11:59 | INFO: Primitives created: 2
+08:11:59 | INFO: Extracting primitive: Cube.095
+08:11:59 | INFO: Primitives created: 2
+08:11:59 | INFO: Extracting primitive: Cube.100
+08:11:59 | INFO: Primitives created: 2
+08:11:59 | INFO: Extracting primitive: Cube.105
+08:11:59 | INFO: Primitives created: 2
+08:11:59 | INFO: Extracting primitive: Cube.110
+08:11:59 | INFO: Primitives created: 2
+08:11:59 | INFO: Extracting primitive: Cube.115
+08:11:59 | INFO: Primitives created: 2
+08:11:59 | INFO: Extracting primitive: Cube.120
+08:11:59 | INFO: Primitives created: 2
+08:11:59 | INFO: Extracting primitive: Cube.125
+08:11:59 | INFO: Primitives created: 2
+08:11:59 | INFO: Extracting primitive: Cube.130
+08:11:59 | INFO: Primitives created: 2
+08:11:59 | INFO: Extracting primitive: Cube.138
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cube.139
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cube.069
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cube.002
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cylinder.007
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cylinder.006
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cylinder.005
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cylinder.004
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cylinder.003
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cylinder.002
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cylinder.001
+08:11:59 | INFO: Primitives created: 1
+08:11:59 | INFO: Extracting primitive: Cylinder
+08:11:59 | INFO: Primitives created: 1
+08:12:00 | INFO: Finished glTF 2.0 export in 0.10270810127258301 s
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+08:12:00 | INFO: Data are loaded, start creating Blender stuff
+08:12:00 | INFO: Blender create Mesh node Cube.030
+08:12:00 | INFO: Blender create Mesh node Cube
+08:12:00 | INFO: Blender create Mesh node Cube.142
+08:12:00 | INFO: Blender create Mesh node Cube.141
+08:12:00 | INFO: Blender create Mesh node Cube.143
+08:12:00 | INFO: Blender create Mesh node Cube.144
+08:12:00 | INFO: Blender create Mesh node Cube.140
+08:12:00 | INFO: Blender create Mesh node Cube.075
+08:12:00 | INFO: Blender create Mesh node Cube.080
+08:12:00 | INFO: Blender create Mesh node Cube.085
+08:12:00 | INFO: Blender create Mesh node Cube.090
+08:12:00 | INFO: Blender create Mesh node Cube.095
+08:12:00 | INFO: Blender create Mesh node Cube.100
+08:12:00 | INFO: Blender create Mesh node Cube.105
+08:12:00 | INFO: Blender create Mesh node Cube.110
+08:12:00 | INFO: Blender create Mesh node Cube.115
+08:12:00 | INFO: Blender create Mesh node Cube.120
+08:12:00 | INFO: Blender create Mesh node Cube.125
+08:12:00 | INFO: Blender create Mesh node Cube.130
+08:12:00 | INFO: Blender create Mesh node Cube.138
+08:12:00 | INFO: Blender create Mesh node Cube.139
+08:12:00 | INFO: Blender create Mesh node Cube.069
+08:12:00 | INFO: Blender create Mesh node Cube.002
+08:12:00 | INFO: Blender create Mesh node Cylinder.007
+08:12:00 | INFO: Blender create Mesh node Cylinder.006
+08:12:00 | INFO: Blender create Mesh node Cylinder.005
+08:12:00 | INFO: Blender create Mesh node Cylinder.004
+08:12:00 | INFO: Blender create Mesh node Cylinder.003
+08:12:00 | INFO: Blender create Mesh node Cylinder.002
+08:12:00 | INFO: Blender create Mesh node Cylinder.001
+08:12:00 | INFO: Blender create Mesh node Cylinder
+08:12:00 | INFO: glTF import finished in 0.04s
+08:12:00 | INFO: Starting glTF 2.0 export
+08:12:00 | INFO: Extracting primitive: Cube.003
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.014
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.013
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.015
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.016
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.001
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cylinder.007
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cylinder.006
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cylinder.005
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cylinder.004
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cylinder.003
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cylinder.002
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cylinder.001
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cylinder
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Finished glTF 2.0 export in 0.0417790412902832 s
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+08:12:00 | INFO: Data are loaded, start creating Blender stuff
+08:12:00 | INFO: Blender create Mesh node Cube.003
+08:12:00 | INFO: Blender create Mesh node Cube
+08:12:00 | INFO: Blender create Mesh node Cube.014
+08:12:00 | INFO: Blender create Mesh node Cube.013
+08:12:00 | INFO: Blender create Mesh node Cube.015
+08:12:00 | INFO: Blender create Mesh node Cube.016
+08:12:00 | INFO: Blender create Mesh node Cube.001
+08:12:00 | INFO: Blender create Mesh node Cylinder.007
+08:12:00 | INFO: Blender create Mesh node Cylinder.006
+08:12:00 | INFO: Blender create Mesh node Cylinder.005
+08:12:00 | INFO: Blender create Mesh node Cylinder.004
+08:12:00 | INFO: Blender create Mesh node Cylinder.003
+08:12:00 | INFO: Blender create Mesh node Cylinder.002
+08:12:00 | INFO: Blender create Mesh node Cylinder.001
+08:12:00 | INFO: Blender create Mesh node Cylinder
+08:12:00 | INFO: glTF import finished in 0.02s
+08:12:00 | INFO: Starting glTF 2.0 export
+08:12:00 | INFO: Extracting primitive: Cube.001
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cylinder
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.002
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.078
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.079
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.080
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.081
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.018
+08:12:00 | INFO: Primitives created: 2
+08:12:00 | INFO: Extracting primitive: Cube.021
+08:12:00 | INFO: Primitives created: 2
+08:12:00 | INFO: Extracting primitive: Cube.024
+08:12:00 | INFO: Primitives created: 2
+08:12:00 | INFO: Extracting primitive: Cube.027
+08:12:00 | INFO: Primitives created: 2
+08:12:00 | INFO: Extracting primitive: Cube.030
+08:12:00 | INFO: Primitives created: 2
+08:12:00 | INFO: Extracting primitive: Cube.033
+08:12:00 | INFO: Primitives created: 2
+08:12:00 | INFO: Extracting primitive: Cube.036
+08:12:00 | INFO: Primitives created: 2
+08:12:00 | INFO: Extracting primitive: Cube.039
+08:12:00 | INFO: Primitives created: 2
+08:12:00 | INFO: Extracting primitive: Cube.042
+08:12:00 | INFO: Primitives created: 2
+08:12:00 | INFO: Extracting primitive: Cube.045
+08:12:00 | INFO: Primitives created: 2
+08:12:00 | INFO: Extracting primitive: Cube.048
+08:12:00 | INFO: Primitives created: 2
+08:12:00 | INFO: Extracting primitive: Cube.051
+08:12:00 | INFO: Primitives created: 2
+08:12:00 | INFO: Extracting primitive: Cube.054
+08:12:00 | INFO: Primitives created: 2
+08:12:00 | INFO: Extracting primitive: Cube.057
+08:12:00 | INFO: Primitives created: 2
+08:12:00 | INFO: Extracting primitive: Cube.060
+08:12:00 | INFO: Primitives created: 2
+08:12:00 | INFO: Extracting primitive: Cube.063
+08:12:00 | INFO: Primitives created: 2
+08:12:00 | INFO: Extracting primitive: Cube.066
+08:12:00 | INFO: Primitives created: 2
+08:12:00 | INFO: Extracting primitive: Cube.069
+08:12:00 | INFO: Primitives created: 2
+08:12:00 | INFO: Extracting primitive: Cube.072
+08:12:00 | INFO: Primitives created: 2
+08:12:00 | INFO: Extracting primitive: Cube.075
+08:12:00 | INFO: Primitives created: 2
+08:12:00 | INFO: Finished glTF 2.0 export in 0.08085203170776367 s
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+08:12:00 | INFO: Data are loaded, start creating Blender stuff
+08:12:00 | INFO: Blender create Mesh node interior-batch-canada-wall
+08:12:00 | INFO: Blender create Mesh node interior-batch-canada-floor
+08:12:00 | INFO: Blender create Mesh node interior-batch-canada-rail
+08:12:00 | INFO: Blender create Mesh node interior-batch-canada-sign
+08:12:00 | INFO: Blender create Mesh node interior-batch-canada-seat
+08:12:00 | INFO: Blender create Mesh node interior-batch-canada-priority
+08:12:00 | INFO: glTF import finished in 0.02s
+08:12:00 | INFO: Starting glTF 2.0 export
+08:12:00 | INFO: Extracting primitive: Cube.001
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cylinder
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.002
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.058
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.059
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.060
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.061
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.018
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.020
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.022
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.024
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.026
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.028
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.030
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.032
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.034
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.036
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.038
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.040
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.042
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.044
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.046
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.048
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.050
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.052
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.054
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Extracting primitive: Cube.056
+08:12:00 | INFO: Primitives created: 1
+08:12:00 | INFO: Finished glTF 2.0 export in 0.06708192825317383 s
+
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender').
+08:12:00 | INFO: Data are loaded, start creating Blender stuff
+08:12:00 | INFO: Blender create Mesh node interior-batch-canada-wall
+08:12:00 | INFO: Blender create Mesh node interior-batch-canada-floor
+08:12:00 | INFO: Blender create Mesh node interior-batch-canada-rail
+08:12:00 | INFO: Blender create Mesh node interior-batch-canada-sign
+08:12:00 | INFO: Blender create Mesh node interior-batch-canada-seat
+08:12:00 | INFO: Blender create Mesh node interior-batch-canada-priority
+08:12:00 | INFO: glTF import finished in 0.02s
+Info: Saved "edited.blend"
+08:12:01 | INFO: Starting glTF 2.0 export
+08:12:01 | INFO: Extracting primitive: Cube.030
+08:12:01 | INFO: Primitives created: 1
+08:12:01 | INFO: Extracting primitive: Cube
+08:12:01 | INFO: Primitives created: 1
+08:12:01 | INFO: Extracting primitive: Cube.142
+08:12:01 | INFO: Primitives created: 1
+08:12:01 | INFO: Extracting primitive: Cube.141
+08:12:01 | INFO: Primitives created: 1
+08:12:01 | INFO: Extracting primitive: Cube.143
+08:12:01 | INFO: Primitives created: 1
+08:12:01 | INFO: Extracting primitive: Cube.144
+08:12:01 | INFO: Primitives created: 1
+08:12:01 | INFO: Extracting primitive: Cube.140
+08:12:01 | INFO: Primitives created: 1
+08:12:01 | INFO: Extracting primitive: Cube.075
+08:12:01 | INFO: Primitives created: 2
+08:12:01 | INFO: Extracting primitive: Cube.080
+08:12:01 | INFO: Primitives created: 2
+08:12:01 | INFO: Extracting primitive: Cube.085
+08:12:01 | INFO: Primitives created: 2
+08:12:01 | INFO: Extracting primitive: Cube.090
+08:12:01 | INFO: Primitives created: 2
+08:12:01 | INFO: Extracting primitive: Cube.095
+08:12:01 | INFO: Primitives created: 2
+08:12:01 | INFO: Extracting primitive: Cube.100
+08:12:01 | INFO: Primitives created: 2
+08:12:01 | INFO: Extracting primitive: Cube.105
+08:12:01 | INFO: Primitives created: 2
+08:12:01 | INFO: Extracting primitive: Cube.110
+08:12:01 | INFO: Primitives created: 2
+08:12:01 | INFO: Extracting primitive: Cube.115
+08:12:01 | INFO: Primitives created: 2
+08:12:01 | INFO: Extracting primitive: Cube.120
+08:12:01 | INFO: Primitives created: 2
+08:12:01 | INFO: Extracting primitive: Cube.125
+08:12:01 | INFO: Primitives created: 2
+08:12:01 | INFO: Extracting primitive: Cube.130
+08:12:01 | INFO: Primitives created: 2
+08:12:01 | INFO: Extracting primitive: Cube.138
+08:12:01 | INFO: Primitives created: 1
+08:12:01 | INFO: Extracting primitive: Cube.139
+08:12:01 | INFO: Primitives created: 1
+08:12:01 | INFO: Extracting primitive: Cube.069
+08:12:01 | INFO: Primitives created: 1
+08:12:01 | INFO: Extracting primitive: Cube.002
+08:12:01 | INFO: Primitives created: 1
+08:12:01 | INFO: Extracting primitive: Cylinder.007
+08:12:01 | INFO: Primitives created: 1
+08:12:01 | INFO: Extracting primitive: Cylinder.006
+08:12:01 | INFO: Primitives created: 1
+08:12:01 | INFO: Extracting primitive: Cylinder.005
+08:12:01 | INFO: Primitives created: 1
+08:12:01 | INFO: Extracting primitive: Cylinder.004
+08:12:01 | INFO: Primitives created: 1
+08:12:01 | INFO: Extracting primitive: Cylinder.003
+08:12:01 | INFO: Primitives created: 1
+08:12:01 | INFO: Extracting primitive: Cylinder.002
+08:12:01 | INFO: Primitives created: 1
+08:12:01 | INFO: Extracting primitive: Cylinder.001
+08:12:01 | INFO: Primitives created: 1
+08:12:01 | INFO: Extracting primitive: Cylinder
+08:12:01 | INFO: Primitives created: 1
+08:12:01 | INFO: Finished glTF 2.0 export in 0.08671951293945312 s
+
+Blender 4.3.2
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-stage2-recovery/tools/assets/canada-line-stage2/source/canada-line-endcar-exterior.lod0.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-stage2-recovery/tools/assets/canada-line-stage2/source/canada-line-endcar-exterior.lod1.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-stage2-recovery/tools/assets/canada-line-stage2/source/canada-line-endcar-exterior.lod2.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-stage2-recovery/tools/assets/canada-line-stage2/source/canada-line-shared-interior.lod0.blend"
+Read blend: "/workspace/scratch/7c20b5ba4165/atlas-stage2-recovery/tools/assets/canada-line-stage2/source/canada-line-shared-interior.lod1.blend"
+Read blend: "/tmp/canada-source-audit-q19g9fwf/edited.blend"
+Read blend: "/tmp/canada-source-audit-q19g9fwf/edited.blend"
+
+Blender quit

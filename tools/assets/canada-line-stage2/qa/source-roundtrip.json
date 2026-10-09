@@ -1,0 +1,125 @@
+{
+  "status": "pass",
+  "blenderVersion": "4.3.2",
+  "device": "CPU",
+  "sources": [
+    {
+      "source": "canada-line-endcar-exterior.lod0.blend",
+      "sourceSha256": "362f5cda79b84f41ed410bcf8687682b30a250d2263d474f3370bbd81e6a18a8",
+      "output": "canada-line-endcar-exterior.lod0.glb",
+      "outputSha256": "6d6443eb4ef23b0b0a8b08caf00e4b426b83c0485afed6a3baddfaed3a5624dc",
+      "sourceUnchanged": true,
+      "deliveredSha256": "6d6443eb4ef23b0b0a8b08caf00e4b426b83c0485afed6a3baddfaed3a5624dc",
+      "byteIdentical": true,
+      "reimportBoundsM": {
+        "min": [
+          -1.524999976158142,
+          0.0,
+          -10.5
+        ],
+        "max": [
+          1.524999976158142,
+          3.7049999237060547,
+          10.256000518798828
+        ]
+      },
+      "status": "pass"
+    },
+    {
+      "source": "canada-line-endcar-exterior.lod1.blend",
+      "sourceSha256": "9747338ae584c6eda58d54c118442198b01852126a7c1949eb248648c6d25c63",
+      "output": "canada-line-endcar-exterior.lod1.glb",
+      "outputSha256": "49f9ce83161e76361aa5b40ececdac6b7ea1b37c98af015a5590004b6614631a",
+      "sourceUnchanged": true,
+      "deliveredSha256": "49f9ce83161e76361aa5b40ececdac6b7ea1b37c98af015a5590004b6614631a",
+      "byteIdentical": true,
+      "reimportBoundsM": {
+        "min": [
+          -1.524999976158142,
+          0.0,
+          -10.5
+        ],
+        "max": [
+          1.524999976158142,
+          3.7049999237060547,
+          10.256000518798828
+        ]
+      },
+      "status": "pass"
+    },
+    {
+      "source": "canada-line-endcar-exterior.lod2.blend",
+      "sourceSha256": "1e7cfaa24c9e279a901aac131a5413961ce2d7e7ea266697c60f0bdb19eb258c",
+      "output": "canada-line-endcar-exterior.lod2.glb",
+      "outputSha256": "c1a86c1db90b90db1766273254b1672595a9668aec19dea0c73fc4b53e8a018d",
+      "sourceUnchanged": true,
+      "deliveredSha256": "c1a86c1db90b90db1766273254b1672595a9668aec19dea0c73fc4b53e8a018d",
+      "byteIdentical": true,
+      "reimportBoundsM": {
+        "min": [
+          -1.5260000228881836,
+          0.05225008726119995,
+          -10.5
+        ],
+        "max": [
+          1.5260000228881836,
+          3.7049999237060547,
+          10.25
+        ]
+      },
+      "status": "pass"
+    },
+    {
+      "source": "canada-line-shared-interior.lod0.blend",
+      "sourceSha256": "ab19810fe4e325bbe0923544598bf162d7c2a1e86ca568876a219e3684af994f",
+      "output": "canada-line-shared-interior.lod0.glb",
+      "outputSha256": "aeb8e0a8ea43ec894c62d0dc721f67f2232a401e3ede57f180a8d05b177b770b",
+      "sourceUnchanged": true,
+      "deliveredSha256": "aeb8e0a8ea43ec894c62d0dc721f67f2232a401e3ede57f180a8d05b177b770b",
+      "byteIdentical": true,
+      "reimportBoundsM": {
+        "min": [
+          -1.4205000400543213,
+          1.0199999809265137,
+          -10.25
+        ],
+        "max": [
+          1.4205000400543213,
+          3.509999990463257,
+          10.15999984741211
+        ]
+      },
+      "status": "pass"
+    },
+    {
+      "source": "canada-line-shared-interior.lod1.blend",
+      "sourceSha256": "9128fb4289d521d85f864ce71f7b6bd420741ec43627d81358f5b9725d7db00d",
+      "output": "canada-line-shared-interior.lod1.glb",
+      "outputSha256": "7abbc2da2a83a7d5a7459d5be763cd1c7196a62eafe3584646d25ac3472dd724",
+      "sourceUnchanged": true,
+      "deliveredSha256": "7abbc2da2a83a7d5a7459d5be763cd1c7196a62eafe3584646d25ac3472dd724",
+      "byteIdentical": true,
+      "reimportBoundsM": {
+        "min": [
+          -1.4205000400543213,
+          1.0199999809265137,
+          -10.25
+        ],
+        "max": [
+          1.4205000400543213,
+          3.509999990463257,
+          10.15999984741211
+        ]
+      },
+      "status": "pass"
+    }
+  ],
+  "editProof": {
+    "status": "pass",
+    "operation": "Temporary copy of source; scale body-shell X1.03; save source; exporter opens edited blend without generation",
+    "originalWidthM": 3.0500000081956387,
+    "editedWidthM": 3.113650043627615,
+    "canonicalSourceUnchanged": true,
+    "canonicalSourceSha256": "362f5cda79b84f41ed410bcf8687682b30a250d2263d474f3370bbd81e6a18a8"
+  }
+}

@@ -1,0 +1,290 @@
+{
+  "status": "rendered",
+  "blenderVersion": "4.3.2",
+  "runtimeWebGL": "not_run",
+  "renders": [
+    {
+      "file": "previews/exterior-lod0.png",
+      "sourceGlbSha256": {
+        "exports/canada-line-endcar-exterior.lod0.glb": "6d6443eb4ef23b0b0a8b08caf00e4b426b83c0485afed6a3baddfaed3a5624dc"
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 32,
+      "resolution": [
+        800,
+        480
+      ],
+      "cameraGlTFM": [
+        -19,
+        8,
+        19
+      ],
+      "targetGlTFM": [
+        0,
+        1.8,
+        0
+      ],
+      "orthoScale": 24,
+      "note": ""
+    },
+    {
+      "file": "previews/exterior-lod1.png",
+      "sourceGlbSha256": {
+        "exports/canada-line-endcar-exterior.lod1.glb": "49f9ce83161e76361aa5b40ececdac6b7ea1b37c98af015a5590004b6614631a"
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 32,
+      "resolution": [
+        800,
+        480
+      ],
+      "cameraGlTFM": [
+        -19,
+        8,
+        19
+      ],
+      "targetGlTFM": [
+        0,
+        1.8,
+        0
+      ],
+      "orthoScale": 24,
+      "note": ""
+    },
+    {
+      "file": "previews/exterior-lod2.png",
+      "sourceGlbSha256": {
+        "exports/canada-line-endcar-exterior.lod2.glb": "c1a86c1db90b90db1766273254b1672595a9668aec19dea0c73fc4b53e8a018d"
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 32,
+      "resolution": [
+        800,
+        480
+      ],
+      "cameraGlTFM": [
+        -19,
+        8,
+        19
+      ],
+      "targetGlTFM": [
+        0,
+        1.8,
+        0
+      ],
+      "orthoScale": 24,
+      "note": ""
+    },
+    {
+      "file": "previews/observation-front.png",
+      "sourceGlbSha256": {
+        "exports/canada-line-endcar-exterior.lod0.glb": "6d6443eb4ef23b0b0a8b08caf00e4b426b83c0485afed6a3baddfaed3a5624dc",
+        "exports/canada-line-shared-interior.lod0.glb": "aeb8e0a8ea43ec894c62d0dc721f67f2232a401e3ede57f180a8d05b177b770b"
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 32,
+      "resolution": [
+        800,
+        480
+      ],
+      "cameraGlTFM": [
+        0,
+        2.4,
+        16
+      ],
+      "targetGlTFM": [
+        0,
+        2.1,
+        9.4
+      ],
+      "orthoScale": 4.7,
+      "note": ""
+    },
+    {
+      "file": "previews/interior-aisle.png",
+      "sourceGlbSha256": {
+        "exports/canada-line-endcar-exterior.lod0.glb": "6d6443eb4ef23b0b0a8b08caf00e4b426b83c0485afed6a3baddfaed3a5624dc",
+        "exports/canada-line-shared-interior.lod0.glb": "aeb8e0a8ea43ec894c62d0dc721f67f2232a401e3ede57f180a8d05b177b770b"
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 32,
+      "resolution": [
+        800,
+        480
+      ],
+      "cameraGlTFM": [
+        0,
+        2.72,
+        -9.7
+      ],
+      "targetGlTFM": [
+        0,
+        2.3,
+        8.5
+      ],
+      "orthoScale": null,
+      "note": "Camera in actual car-local aisle; ceiling and cantilevered seats visible."
+    },
+    {
+      "file": "previews/longitudinal-section.png",
+      "sourceGlbSha256": {
+        "exports/canada-line-endcar-exterior.lod0.glb": "6d6443eb4ef23b0b0a8b08caf00e4b426b83c0485afed6a3baddfaed3a5624dc",
+        "exports/canada-line-shared-interior.lod0.glb": "aeb8e0a8ea43ec894c62d0dc721f67f2232a401e3ede57f180a8d05b177b770b"
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 32,
+      "resolution": [
+        800,
+        480
+      ],
+      "cameraGlTFM": [
+        -17,
+        8,
+        17
+      ],
+      "targetGlTFM": [
+        0,
+        2,
+        0
+      ],
+      "orthoScale": 24,
+      "note": "CPU bisect of actual GLB at x=0 for inspection only."
+    },
+    {
+      "file": "previews/door-closed.png",
+      "sourceGlbSha256": {
+        "exports/canada-line-endcar-exterior.lod0.glb": "6d6443eb4ef23b0b0a8b08caf00e4b426b83c0485afed6a3baddfaed3a5624dc",
+        "exports/canada-line-shared-interior.lod0.glb": "aeb8e0a8ea43ec894c62d0dc721f67f2232a401e3ede57f180a8d05b177b770b"
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 32,
+      "resolution": [
+        800,
+        480
+      ],
+      "cameraGlTFM": [
+        -4.6,
+        2.6,
+        0
+      ],
+      "targetGlTFM": [
+        0,
+        2.1,
+        0
+      ],
+      "orthoScale": 4.5,
+      "note": "Delivered closed rest pose"
+    },
+    {
+      "file": "previews/door-open.png",
+      "sourceGlbSha256": {
+        "exports/canada-line-endcar-exterior.lod0.glb": "6d6443eb4ef23b0b0a8b08caf00e4b426b83c0485afed6a3baddfaed3a5624dc",
+        "exports/canada-line-shared-interior.lod0.glb": "aeb8e0a8ea43ec894c62d0dc721f67f2232a401e3ede57f180a8d05b177b770b"
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 32,
+      "resolution": [
+        800,
+        480
+      ],
+      "cameraGlTFM": [
+        -4.6,
+        2.6,
+        0
+      ],
+      "targetGlTFM": [
+        0,
+        2.1,
+        0
+      ],
+      "orthoScale": 4.5,
+      "note": "Actual manifest leaf endpoints applied"
+    },
+    {
+      "file": "previews/boarding-human-scale.png",
+      "sourceGlbSha256": {
+        "exports/canada-line-endcar-exterior.lod0.glb": "6d6443eb4ef23b0b0a8b08caf00e4b426b83c0485afed6a3baddfaed3a5624dc",
+        "exports/canada-line-shared-interior.lod0.glb": "aeb8e0a8ea43ec894c62d0dc721f67f2232a401e3ede57f180a8d05b177b770b"
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 32,
+      "resolution": [
+        800,
+        480
+      ],
+      "cameraGlTFM": [
+        -6.5,
+        3.6,
+        4.3
+      ],
+      "targetGlTFM": [
+        -1,
+        2.0,
+        0
+      ],
+      "orthoScale": 6.2,
+      "note": "QA-only 1.80m person standing on floor/platform Y1.10"
+    },
+    {
+      "file": "previews/gangway.png",
+      "sourceGlbSha256": {
+        "exports/canada-line-endcar-exterior.lod0.glb": "6d6443eb4ef23b0b0a8b08caf00e4b426b83c0485afed6a3baddfaed3a5624dc",
+        "exports/canada-line-shared-interior.lod0.glb": "aeb8e0a8ea43ec894c62d0dc721f67f2232a401e3ede57f180a8d05b177b770b"
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 32,
+      "resolution": [
+        800,
+        480
+      ],
+      "cameraGlTFM": [
+        0,
+        2.6,
+        -11.4
+      ],
+      "targetGlTFM": [
+        0,
+        2.0,
+        -7.5
+      ],
+      "orthoScale": null,
+      "note": "Rear opening is real; moving intercar traversal remains disabled."
+    },
+    {
+      "file": "previews/two-car-consist.png",
+      "sourceGlbSha256": {
+        "exports/canada-line-endcar-exterior.lod0.glb": "6d6443eb4ef23b0b0a8b08caf00e4b426b83c0485afed6a3baddfaed3a5624dc",
+        "exports/canada-line-shared-interior.lod0.glb": "aeb8e0a8ea43ec894c62d0dc721f67f2232a401e3ede57f180a8d05b177b770b"
+      },
+      "renderer": "Cycles",
+      "device": "CPU",
+      "samples": 32,
+      "resolution": [
+        800,
+        480
+      ],
+      "cameraGlTFM": [
+        -30,
+        12,
+        37
+      ],
+      "targetGlTFM": [
+        0,
+        1.8,
+        0
+      ],
+      "orthoScale": 48,
+      "note": "Two independent car transforms; car02 yaw pi. Runtime articulation not implemented."
+    }
+  ]
+}

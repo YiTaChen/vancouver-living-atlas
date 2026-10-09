@@ -1,0 +1,21 @@
+{
+  "status": "inspected",
+  "source": "actual exported GLB reimport CPU previews",
+  "views": [
+    "idle",
+    "walk",
+    "sit",
+    "guide"
+  ],
+  "observations": [
+    "four distinct opaque silhouettes, intact clothing colors",
+    "walk bends legs and swings arms after skin-influence correction",
+    "guide raises arm; seated pose bends thighs and shins",
+    "no runtime/GPU acceptance inferred"
+  ],
+  "limitations": [
+    "simple no-IK gait",
+    "raincoat hem and tote need dynamic collision review",
+    "seat and door geometry fit remains integration acceptance"
+  ]
+}

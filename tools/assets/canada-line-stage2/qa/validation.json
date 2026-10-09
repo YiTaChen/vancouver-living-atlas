@@ -1,0 +1,30 @@
+{
+  "status": "pass",
+  "scope": "CPU GLB semantic geometry only; no runtime/GPU acceptance",
+  "results": [
+    {
+      "lod": 0,
+      "floorRaySamples": 16,
+      "openDoorRaySamples": 108,
+      "aisleHeadroomSamples": 93,
+      "freeZoneSamples": 50,
+      "doorMotionSamplesPerLeaf": 21,
+      "actualLeafSurfaceSweepRays": 384,
+      "humanCapsuleSphereTriangleTests": 150,
+      "status": "pass"
+    },
+    {
+      "lod": 1,
+      "floorRaySamples": 16,
+      "openDoorRaySamples": 108,
+      "aisleHeadroomSamples": 93,
+      "freeZoneSamples": 50,
+      "doorMotionSamplesPerLeaf": 21,
+      "actualLeafSurfaceSweepRays": 384,
+      "humanCapsuleSphereTriangleTests": 150,
+      "status": "pass"
+    }
+  ],
+  "measuredConsistLengthM": 41.51200032234192,
+  "runtimeStatus": "runtime_pending_webgl"
+}

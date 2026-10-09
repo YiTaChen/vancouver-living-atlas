@@ -1,0 +1,145 @@
+{
+  "status": "inspected",
+  "references": [
+    {
+      "id": "waterfront-official-map",
+      "url": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/waterfront_station.pdf",
+      "retrievedAtUtc": "2026-10-09T15:04:00Z",
+      "sha256": "9082c0b747d5d81dbde589b7492ccf3fa59ae752d07a5b8036e1b869adf833bb",
+      "bytes": 1180569,
+      "pageInspected": 1,
+      "inspection": "actual raster pixels rendered with pdftoppm and viewed",
+      "observed": "Separate Expo and Canada alignments visible, plus Cordova building and distinct SeaBus/WCE routes. Model transfer via lobby, never through SeaBus.",
+      "scopeLimit": "vicinity/entrance geography, not measured internal plan",
+      "publicationDateVisible": "July 2026",
+      "redistributed": false
+    },
+    {
+      "id": "burrard-official-map",
+      "url": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/burrard_station.pdf",
+      "retrievedAtUtc": "2026-10-09T15:04:00Z",
+      "sha256": "dc13d2b175e6fda0e6be720f244e94fcee4e44080b2ee1957d4473c8dcf0acb8",
+      "bytes": 885330,
+      "pageInspected": 1,
+      "inspection": "actual raster pixels rendered with pdftoppm and viewed",
+      "observed": "Station near Burrard/Dunsmuir and Melville; surrounding bus bay positions visible. Map does not provide underground depth or platform section.",
+      "scopeLimit": "vicinity/entrance geography, not measured internal plan",
+      "publicationDateVisible": "July 2026",
+      "redistributed": false
+    },
+    {
+      "id": "granville-official-map",
+      "url": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/granville_vancouver_city_centre_station.pdf",
+      "retrievedAtUtc": "2026-10-09T15:04:00Z",
+      "sha256": "a895d1cff11748621c35f10e9a314dc07fd2c72e700bdc202869031ee35fa7cd",
+      "bytes": 1567723,
+      "pageInspected": 1,
+      "inspection": "actual raster pixels rendered with pdftoppm and viewed",
+      "observed": "Granville station is separate from Vancouver City Centre, with several street entrances. Map does not establish a shared platform or tunnel link.",
+      "scopeLimit": "vicinity/entrance geography, not measured internal plan",
+      "publicationDateVisible": "July 2026",
+      "redistributed": false
+    },
+    {
+      "id": "stadium-chinatown-official-map",
+      "url": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/stadium_chinatown_station.pdf",
+      "retrievedAtUtc": "2026-10-09T15:04:00Z",
+      "sha256": "b95d4c00eaca42327584d21627b194f73efa9776bc5169d91b483547f14546bb",
+      "bytes": 938874,
+      "pageInspected": 1,
+      "inspection": "actual raster pixels rendered with pdftoppm and viewed",
+      "observed": "Long station footprint between Beatty and Expo/Pacific vicinity, with entrances at both ends. Upper/lower street distinction additionally confirmed by TransLink station description.",
+      "scopeLimit": "vicinity/entrance geography, not measured internal plan",
+      "publicationDateVisible": "July 2026",
+      "redistributed": false
+    },
+    {
+      "id": "main-street-science-world-official-map",
+      "url": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/main_street_station.pdf",
+      "retrievedAtUtc": "2026-10-09T15:04:00Z",
+      "sha256": "ed70a65af35f3ec623c34d37466a97de964dfd6054397b6e8b8f56cdbf0a76d8",
+      "bytes": 1019937,
+      "pageInspected": 1,
+      "inspection": "actual raster pixels rendered with pdftoppm and viewed",
+      "observed": "Station straddles Main Street near Terminal Avenue; multiple stationhouse access arrows visible. Official 2014 upgrade rendering shows elevated structure and glazed enclosure.",
+      "scopeLimit": "vicinity/entrance geography, not measured internal plan",
+      "publicationDateVisible": "July 2026",
+      "redistributed": false
+    },
+    {
+      "id": "vancouver-city-centre-official-map",
+      "url": "https://www.translink.ca/-/media/translink/documents/schedules-and-maps/skytrain-accessible-entrance-maps/vancouver_city_centre_station_elevator_map.pdf",
+      "retrievedAtUtc": "2026-10-09T15:04:00Z",
+      "sha256": "7b6ecdd7ece892044d2bce51d5187c8ea55696527fc5b8b12d1d4b9979978cb1",
+      "bytes": 424989,
+      "pageInspected": 1,
+      "inspection": "actual raster pixels rendered with pdftoppm and viewed",
+      "observed": "Granville/Georgia entrance and accessible entry are indicated beside Pacific Centre. Granville Station is separately marked; no same-platform connection shown.",
+      "scopeLimit": "vicinity/entrance geography, not measured internal plan",
+      "publicationDateVisible": "not visible on map",
+      "redistributed": false
+    },
+    {
+      "id": "yaletown-roundhouse-official-map",
+      "url": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/yaletown_roundhouse_station.pdf",
+      "retrievedAtUtc": "2026-10-09T15:04:00Z",
+      "sha256": "406d77862f567b3e6e354e5d50ddc5b8b1b0a367530516011e8e4bce41a8ea91",
+      "bytes": 841161,
+      "pageInspected": 1,
+      "inspection": "actual raster pixels rendered with pdftoppm and viewed",
+      "observed": "Davie/Mainland street location and Canada Line alignment shown. Station interior dimensions not supplied by map.",
+      "scopeLimit": "vicinity/entrance geography, not measured internal plan",
+      "publicationDateVisible": "July 2026",
+      "redistributed": false
+    },
+    {
+      "id": "canada-line-official-2008.pdf",
+      "url": "https://www.translink.ca/-/media/translink/documents/rider-guide/buzzer-archives/2000s/2008/buzzer_2008_09_12.pdf",
+      "sha256": "52bd8c0e22bfed3a4e6007f8b13c369f3ec32429f8d2505cb11acb9fed50cd50",
+      "bytes": 237815,
+      "inspection": "actual pixels inspected",
+      "observed": "Page 2: Waterfront Canada passage goes to the station lobby before Expo; VCC relates to two malls; Yaletown depth approximately 15 m. Historical 40 m platform statement is not used as dimensional authority over the measured 41.512 m model plus stopping tolerance.",
+      "redistributed": false
+    },
+    {
+      "id": "main-official-upgrade.jpg",
+      "url": "https://buzzer.translink.ca/wp-content/uploads/2013/01/Main-Street-Station-Upgrade-West_sm2.jpg",
+      "sha256": "fddb55cffe258b42ff3461eede2423451afe5473a9bfde2ae80e33f9ac4c1238",
+      "bytes": 163488,
+      "inspection": "actual pixels inspected",
+      "observed": "Official historical concept rendering: long elevated glazed enclosure, concrete piers and lower street frontage. Used for architectural rhythm only; not an as-built survey.",
+      "redistributed": false
+    },
+    {
+      "id": "city-station-gis",
+      "url": "https://opendata.vancouver.ca/api/explore/v2.1/catalog/datasets/rapid-transit-stations/records?limit=100",
+      "sha256": "28b15d51fe2b34e6b21efb2510a296c158c71c38ec0c203bb0fd5918dcbe2b71",
+      "bytes": 6036,
+      "retrievedAtUtc": "2026-10-09T15:04:00Z",
+      "records": 22,
+      "observed": "All seven named stations fall within core bounds. Two Waterfront records are retained without pretending that the City assigns line IDs. City vs GTFS anchor discrepancy is recorded per station; points are not entrances or platform centres. Olympic Village south of core and VCC-Clark east/south are excluded.",
+      "attribution": "Contains information licensed under the Open Government Licence - Vancouver; City of Vancouver. See dataset portal for current terms.",
+      "portal": "https://opendata.vancouver.ca/explore/dataset/rapid-transit-stations/information/"
+    }
+  ],
+  "primaryTopologyTextSource": "https://www.translink.ca/schedules-and-maps/skytrain",
+  "observedText": "Stadium upper Beatty/lower Pacific exits; Granville entries; Waterfront dedicated Canada entrance.",
+  "scope": "Source-backed location and broad distinctions; original representative interior geometry; no surveyed depths/widths/stair counts.",
+  "unverifiedInteriorDetails": [
+    "exact Burrard and Granville depths",
+    "exact tunnel sections",
+    "operational third track at Stadium excluded",
+    "true entry offsets and concourse dimensions",
+    "elevator cabin mechanics and door openings",
+    "mall continuation outside VCC stub"
+  ],
+  "worldAnchorCaveat": "City anchor and map-inspired yaw are proposals. Absolute terrain/rail elevation and exterior sidewalk connections remain unresolved.",
+  "nightWork": "excluded",
+  "cityLicenceVerification": {
+    "metadataRef": "references/city-dataset-metadata.json",
+    "sha256": "24e9f588b7f4d526e2ffa2d80178ea0778fd9aede25adce2f4a5f13a7d72fa7c",
+    "license": "Open Government Licence - Vancouver",
+    "licenseUrl": "https://opendata.vancouver.ca/pages/licence/",
+    "verifiedFrom": "City API dataset metadata metas.default.license and license_url"
+  }
+}

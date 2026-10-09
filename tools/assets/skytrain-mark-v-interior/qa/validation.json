@@ -1,0 +1,29 @@
+{
+  "status": "pass",
+  "scope": "packaging, actual geometry, budgets, texture inventory and conservative static clearance; not runtime",
+  "budgetChecks": [
+    {
+      "lod": 0,
+      "triangles": 11016,
+      "triangleCap": 12000,
+      "bytes": 1179164,
+      "byteCap": 1572864,
+      "materialPrimitives": 10,
+      "status": "pass"
+    },
+    {
+      "lod": 1,
+      "triangles": 2976,
+      "triangleCap": 3000,
+      "bytes": 306220,
+      "byteCap": 393216,
+      "materialPrimitives": 10,
+      "status": "pass"
+    }
+  ],
+  "authoringStudyBudget": "intentionally over budget; never runtime-enabled",
+  "seatCount": 22,
+  "anchorValidation": "exact unique pelvis/camera ID sets and transformed positions match layout",
+  "runtime": "not_run",
+  "placementCompatibility": "not_assumed"
+}

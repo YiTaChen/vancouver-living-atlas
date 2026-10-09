@@ -1,0 +1,14 @@
+✔ bus-runtime-candidate: composed LOD0 and LOD1 bind the actual 24 seats and one safe standing anchor (36.172577ms)
+✔ bus-runtime-candidate: the real adapter still rejects display-only exterior LOD2 (11.411657ms)
+✔ bus-runtime-candidate: accidentally exposing raised rear as standing fails closed (13.057175ms)
+✔ bus-runtime-candidate: adapter rejects unresolved dependency asset IDs (11.773262ms)
+✔ bus-runtime-candidate: actual adapter preserves inward priority-seat yaw and camera anchors (31.240619ms)
+✔ bus-runtime-candidate: adapter rejects a non-unit priority-seat rotation (13.894717ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 712.058377

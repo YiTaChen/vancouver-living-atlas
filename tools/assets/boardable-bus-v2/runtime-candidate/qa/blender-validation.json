@@ -1,0 +1,67 @@
+{
+  "status": "pass",
+  "blenderVersion": "4.3.2",
+  "scope": "Offline source reopen/reexport and actual reduced GLB import",
+  "sourceChecks": [
+    {
+      "source": "source/city-bus-12m-interior-v2-runtime.lod0.blend",
+      "sha256": "14380cb79039bc76c8e4ebcf97c48f084e8e71c9ced844fa56888ae869828a5d",
+      "editableMeshObjects": 500,
+      "editableModifiers": 359,
+      "sourceUnchanged": true,
+      "reexportBinaryIdentical": true,
+      "sidecarBinaryIdentical": true,
+      "deliveredGLBReimport": "pass",
+      "boundsM": {
+        "min": [
+          -1.25,
+          0.25999999046325684,
+          -5.650000095367432
+        ],
+        "max": [
+          1.1775000095367432,
+          2.700000047683716,
+          5.744999885559082
+        ]
+      },
+      "sourceBytes": 268481
+    },
+    {
+      "source": "source/city-bus-12m-interior-v2-runtime.lod1.blend",
+      "sha256": "e0d1696f685b04c591e5421437b1bf487a428263156aa9e622a3611e8559b640",
+      "editableMeshObjects": 273,
+      "editableModifiers": 157,
+      "sourceUnchanged": true,
+      "reexportBinaryIdentical": true,
+      "sidecarBinaryIdentical": true,
+      "deliveredGLBReimport": "pass",
+      "boundsM": {
+        "min": [
+          -1.25,
+          0.25999999046325684,
+          -5.650000095367432
+        ],
+        "max": [
+          1.1775000095367432,
+          2.700000047683716,
+          5.744999885559082
+        ]
+      },
+      "sourceBytes": 195925
+    }
+  ],
+  "artistEditProbe": {
+    "status": "pass",
+    "component": "seat-01-cushion",
+    "offsetM": 0.012,
+    "savedCopyReopened": true,
+    "masterAndCandidateSourcesUnchanged": true
+  },
+  "detailedMasterHashes": {
+    "/workspace/scratch/7c20b5ba4165/atlas-skytrain-refinement/tools/assets/boardable-bus-v2/source/city-bus-12m-interior-v2.lod1.blend": "574de58747175d91c67c76bde05c950bf44ba9542188a37303db6bb600408cd3",
+    "/workspace/scratch/7c20b5ba4165/atlas-skytrain-refinement/tools/assets/boardable-bus-v2/source/city-bus-12m-interior-v2.lod0.blend": "f9fb01939c1e65c0c308c8bc2cdca72f26d9d6b728e489df6743bfb6849dc673",
+    "/workspace/scratch/7c20b5ba4165/atlas-skytrain-refinement/tools/assets/boardable-bus-v2/exports/city-bus-12m-interior-v2.lod0.glb": "bc49cb015a4d02e1d7d68c5812a459d5b49eee822a8aff8d6795709d04fac80e",
+    "/workspace/scratch/7c20b5ba4165/atlas-skytrain-refinement/tools/assets/boardable-bus-v2/exports/city-bus-12m-interior-v2.lod1.glb": "c86bdf4737f28af73cd9a6f8d638b09f939ff90cd6e5a5df51e9839ec509624a"
+  },
+  "WebGL": "not_run"
+}

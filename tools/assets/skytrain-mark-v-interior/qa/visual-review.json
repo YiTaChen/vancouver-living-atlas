@@ -1,0 +1,51 @@
+{
+  "status": "pass_with_documented_limits",
+  "date": "2026-10-09",
+  "method": "All five final images opened and inspected as actual pixels after reimporting their exact delivered GLBs. Official operator photos and seating diagram inspected. Raw Cycles CPU, no image-generation substitutes or postfiltered raster variants.",
+  "scope": "Offline visual candidate and two bounded interior LODs; no runtime acceptance",
+  "views": [
+    {
+      "file": "06-open-gangway-continuity.png",
+      "imageSha256": "d30d5c96a364ed147f04e4927b38cabd56d5ffb1b5b6aceb44e92939f9e1518b",
+      "inputGLBSha256": "280aa59559444ac15d6c2d712c61e87b846076632d8127f116e20424a086c984",
+      "observation": "Final LOD0 at 1.65 m. Gray folded flexible sides, high overhead lining and silver bridge lead into a visibly lit adjoining cabin without a door leaf or cross-passage panel. Both cabins are exact instances of the same A-car GLB, joined rear-to-rear solely as QA context. This is not a C-car layout or full-consist reconstruction. Actual combined-scene triangle and floor checks pass."
+    },
+    {
+      "file": "04-gangway-return.png",
+      "imageSha256": "66078aac9012a7d8b06b1653041388e3c924f53fb323a8e3d9e96ab390041f09",
+      "inputGLBSha256": "280aa59559444ac15d6c2d712c61e87b846076632d8127f116e20424a086c984",
+      "observation": "Final LOD0 at 1.65 m, seen from beyond the isolated connector. The former broad flat black side appearance is replaced by distinct gray accordion folds. Handrails, bridge and open view into the original cabin are retained. This view has no adjoining cabin and is not a passenger camera contract."
+    },
+    {
+      "file": "02-seats-door-detail.png",
+      "imageSha256": "ce2a5c24a6b681a88805248ae4cf826c4e218a1fe9bc0b36fdce7b512e0bdd5f",
+      "inputGLBSha256": "280aa59559444ac15d6c2d712c61e87b846076632d8127f116e20424a086c984",
+      "observation": "Final LOD0 at 1.57 m. Blue waterfall/lumbar upholstery, gray shells/open grips, silver supports and exterior boarding-door details retain their geometry and material appearance. No unrelated cabin material was recolored. The neutral background beyond the distant isolated connector is not a closing panel."
+    },
+    {
+      "file": "01-aisle-toward-gangway.png",
+      "imageSha256": "597c6af9248f5ec5df3ffbd66947b8145458d1a0451cecdef5d8929a3dcf8baa",
+      "inputGLBSha256": "280aa59559444ac15d6c2d712c61e87b846076632d8127f116e20424a086c984",
+      "observation": "Final isolated A-car LOD0 at 1.65 m. Seat, rail, bay and side-door arrangement is retained. There is no adjacent cabin in this view: the uniform gray beyond the short open rear connector is the QA world background, not a door or endwall. Use view 06 to inspect adjoining-cabin continuity."
+    },
+    {
+      "file": "05-aisle-lod1.png",
+      "imageSha256": "420b818d7b1b32a7fbd51649896e48523513506de9a823208209f4334fc0c988",
+      "inputGLBSha256": "25b45a2fd670a818b8ef10bc3dd92fbc427b941231063d8f9927706ddafe9e8d",
+      "observation": "Final isolated A-car LOD1 at 1.65 m. Main cabin layout and continuous supported floor remain at 2,976 triangles; folded gangway sides are preserved despite the distance LOD. Small fittings and seat details remain intentionally coarser. There is no adjacent cabin; gray beyond the connector is QA world background, not an endwall. Use view 06 for the through-view."
+    }
+  ],
+  "limitations": [
+    "Raw Cycles CPU images retain Monte Carlo grain; the installed Blender build has no denoiser. These are geometry/material inspection renders, not noise-free marketing images.",
+    "Exact vehicle dimensions, seat positions/facing and mounting details are representative; full five-car engineering and exterior compatibility are not established.",
+    "The high-detail master exceeds the runtime budget and is kept separate. The reduced LOD1 intentionally loses small physical details.",
+    "The front observation-salon region is modeled but was not given a dedicated final preview; no claim of a surveyed cockpit or exact seat-facing plan.",
+    "Exterior boarding doors are closed static geometry; inter-car gangway has no closing panels. No platform alignment, boarding, moving gangway or accessibility acceptance.",
+    "Actual operator divider artwork is deliberately omitted; no reference photographic pixels appear in delivered textures.",
+    "Continuity view 06 is a two-instance A-car adjacency mock-up, not a C-car/full-consist design. Isolated views 01/05 end against neutral QA background beyond the open connector."
+  ],
+  "runtime": "not_run",
+  "photoPixelsDistributed": false,
+  "composedSceneCheck": "qa/adjacent-context-validation.json",
+  "composedSceneNegativeTest": "qa/context-regression-tests.txt"
+}

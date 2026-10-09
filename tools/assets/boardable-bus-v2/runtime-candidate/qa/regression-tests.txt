@@ -1,0 +1,44 @@
+test_active_stowed_capacity_rejected (__main__.CandidateTests.test_active_stowed_capacity_rejected) ... ok
+test_actual_budget_and_geometry (__main__.CandidateTests.test_actual_budget_and_geometry) ... ok
+test_ancestor_transform_rejected (__main__.CandidateTests.test_ancestor_transform_rejected) ... ok
+test_batch_transform_rejected (__main__.CandidateTests.test_batch_transform_rejected) ... ok
+test_byte_budget_fails_closed (__main__.CandidateTests.test_byte_budget_fails_closed) ... ok
+test_camera_facing_offset_required (__main__.CandidateTests.test_camera_facing_offset_required) ... ok
+test_door_entry_clearance_required (__main__.CandidateTests.test_door_entry_clearance_required) ... ok
+test_driver_side_cabinet_required (__main__.CandidateTests.test_driver_side_cabinet_required) ... ok
+test_duplicate_batch_rejected (__main__.CandidateTests.test_duplicate_batch_rejected) ... ok
+test_duplicate_seat_anchor_rejected (__main__.CandidateTests.test_duplicate_seat_anchor_rejected) ... ok
+test_escaped_component_indices_rejected (__main__.CandidateTests.test_escaped_component_indices_rejected) ... ok
+test_extra_batch_rejected (__main__.CandidateTests.test_extra_batch_rejected) ... ok
+test_extra_seat_anchor_rejected (__main__.CandidateTests.test_extra_seat_anchor_rejected) ... ok
+test_floor_height_geometry_required (__main__.CandidateTests.test_floor_height_geometry_required) ... ok
+test_inward_seat_orientation_required (__main__.CandidateTests.test_inward_seat_orientation_required) ... ok
+test_manifest_sidecar_digest_rejected (__main__.CandidateTests.test_manifest_sidecar_digest_rejected) ... ok
+test_missing_batch_rejected (__main__.CandidateTests.test_missing_batch_rejected) ... ok
+test_missing_floor_triangle_support_rejected (__main__.CandidateTests.test_missing_floor_triangle_support_rejected) ... ok
+test_missing_portal_strip_rejected (__main__.CandidateTests.test_missing_portal_strip_rejected) ... ok
+test_missing_seat_anchor_rejected (__main__.CandidateTests.test_missing_seat_anchor_rejected) ... ok
+test_pelvis_anchor_required (__main__.CandidateTests.test_pelvis_anchor_required) ... ok
+test_portal_join_gap_rejected (__main__.CandidateTests.test_portal_join_gap_rejected) ... ok
+test_portal_strip_height_drift_rejected (__main__.CandidateTests.test_portal_strip_height_drift_rejected) ... ok
+test_portal_surface_metadata_omission_rejected (__main__.CandidateTests.test_portal_surface_metadata_omission_rejected) ... ok
+test_range_gaps_rejected (__main__.CandidateTests.test_range_gaps_rejected) ... ok
+test_range_overlap_rejected (__main__.CandidateTests.test_range_overlap_rejected) ... ok
+test_range_truncation_rejected (__main__.CandidateTests.test_range_truncation_rejected) ... ok
+test_recorded_bounds_not_trusted (__main__.CandidateTests.test_recorded_bounds_not_trusted) ... ok
+test_seat_capacity_geometry_required (__main__.CandidateTests.test_seat_capacity_geometry_required) ... ok
+test_sidecar_hash_binding (__main__.CandidateTests.test_sidecar_hash_binding) ... ok
+test_sloped_floor_preserving_bounds_rejected (__main__.CandidateTests.test_sloped_floor_preserving_bounds_rejected) ... ok
+test_stale_collision_refs_rejected (__main__.CandidateTests.test_stale_collision_refs_rejected) ... ok
+test_standing_clearance_required (__main__.CandidateTests.test_standing_clearance_required) ... ok
+test_stowed_places_not_deleted (__main__.CandidateTests.test_stowed_places_not_deleted) ... ok
+test_triangle_budget_fails_closed (__main__.CandidateTests.test_triangle_budget_fails_closed) ... ok
+test_unseated_right_wheelhouse_shape_required (__main__.CandidateTests.test_unseated_right_wheelhouse_shape_required) ... ok
+test_wheelchair_bay_clearance_required (__main__.CandidateTests.test_wheelchair_bay_clearance_required) ... ok
+test_wrong_actual_anchor_position_rejected (__main__.CandidateTests.test_wrong_actual_anchor_position_rejected) ... ok
+test_wrong_actual_yaw_rejected (__main__.CandidateTests.test_wrong_actual_yaw_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 39 tests in 14.389s
+
+OK

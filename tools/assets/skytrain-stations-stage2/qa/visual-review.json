@@ -1,0 +1,114 @@
+{
+  "status": "reviewed",
+  "reviewedAtUtc": "2026-10-09T15:38:00Z",
+  "method": "actual rendered pixels inspected individually and in labelled contact sheets; no image-generation substitute",
+  "images": [
+    {
+      "file": "qa/previews/waterfront-cutaway.png",
+      "sha256": "f5b97924dddd297790e1f963643ee0dc37a78a7c31f6422691fbb7b5dbde9b18",
+      "observation": "Distinct level/access composition or platform scale visible in an explicitly roof/back-wall-hidden cutaway."
+    },
+    {
+      "file": "qa/previews/waterfront-platform.png",
+      "sha256": "368ab0303574c170a36d0dd16dd7112730df06421acdea6cff29283801543321",
+      "observation": "Distinct level/access composition or platform scale visible in an explicitly roof/back-wall-hidden cutaway."
+    },
+    {
+      "file": "qa/previews/burrard-cutaway.png",
+      "sha256": "5a1fcf632a9d1fa0aaedbae05c8c96e51110f313c59b2901347bdda3e892739f",
+      "observation": "Distinct level/access composition or platform scale visible in an explicitly roof/back-wall-hidden cutaway."
+    },
+    {
+      "file": "qa/previews/burrard-platform.png",
+      "sha256": "97c929f036433aba9686530d972f8bb64035ab6c00e6ec72fe8bff0779b3b014",
+      "observation": "Distinct level/access composition or platform scale visible in an explicitly roof/back-wall-hidden cutaway."
+    },
+    {
+      "file": "qa/previews/granville-cutaway.png",
+      "sha256": "9e866adc647dd6974be86737c6a9318e66c390740eb7a2c9b9a17023add00613",
+      "observation": "Distinct level/access composition or platform scale visible in an explicitly roof/back-wall-hidden cutaway."
+    },
+    {
+      "file": "qa/previews/granville-platform.png",
+      "sha256": "ada770fb3c36cfe26ed228fff6a4a4c4d4f1386fccd1727519d7dcc5b1adc16a",
+      "observation": "Distinct level/access composition or platform scale visible in an explicitly roof/back-wall-hidden cutaway."
+    },
+    {
+      "file": "qa/previews/stadium-chinatown-cutaway.png",
+      "sha256": "ead45b0561493dabbc5f7cfb622159afb6bd659f3bb62bd85e96b870c2c806fe",
+      "observation": "Distinct level/access composition or platform scale visible in an explicitly roof/back-wall-hidden cutaway."
+    },
+    {
+      "file": "qa/previews/stadium-chinatown-platform.png",
+      "sha256": "6d3fb1ca7f0d0b2ef74105ef125a9ef61e738224479fe65a7fccfe76ea3affc0",
+      "observation": "Distinct level/access composition or platform scale visible in an explicitly roof/back-wall-hidden cutaway."
+    },
+    {
+      "file": "qa/previews/main-street-science-world-cutaway.png",
+      "sha256": "d75a2453d6e616dd1fb106871c7e88746399e27dc05681e56865038814228d89",
+      "observation": "Distinct level/access composition or platform scale visible in an explicitly roof/back-wall-hidden cutaway."
+    },
+    {
+      "file": "qa/previews/main-street-science-world-platform.png",
+      "sha256": "212a9814e8c2c141852d1ee51cd2d3e3482dd465b971711b7724f9349719f82e",
+      "observation": "Distinct level/access composition or platform scale visible in an explicitly roof/back-wall-hidden cutaway."
+    },
+    {
+      "file": "qa/previews/vancouver-city-centre-cutaway.png",
+      "sha256": "7881ebda3859297b170d5212b9b7f6764c067cc459ae7399fefecd23e3e28a58",
+      "observation": "Distinct level/access composition or platform scale visible in an explicitly roof/back-wall-hidden cutaway."
+    },
+    {
+      "file": "qa/previews/vancouver-city-centre-platform.png",
+      "sha256": "5148dd7f66172e39e0a35377159c626b95549109cac286d38c83f8123a98aad7",
+      "observation": "Distinct level/access composition or platform scale visible in an explicitly roof/back-wall-hidden cutaway."
+    },
+    {
+      "file": "qa/previews/yaletown-roundhouse-cutaway.png",
+      "sha256": "93edda9f4ade70bcdaa0339f6a204ac0016a097d1a50016ca311b6c715380a0b",
+      "observation": "Distinct level/access composition or platform scale visible in an explicitly roof/back-wall-hidden cutaway."
+    },
+    {
+      "file": "qa/previews/yaletown-roundhouse-platform.png",
+      "sha256": "d5d9de1572cf81f4a443ad9058cb9052ea9147ba0bad1840f0efddbf2b09562f",
+      "observation": "Distinct level/access composition or platform scale visible in an explicitly roof/back-wall-hidden cutaway."
+    },
+    {
+      "file": "qa/previews/canada-bridge-stored.png",
+      "sha256": "f0470af950fec1b72cef6755b892453ada43fc4ad50d47cfec89a78d8fe5355a",
+      "observation": "Tapered bridge clearly closes visible gap when deployed; stored view shows open gap. Stored hardware lies below platform edge, so exact stored clearance is established by actual-vertex collision audit, not inferred from pixels."
+    },
+    {
+      "file": "qa/previews/canada-bridge-deployed.png",
+      "sha256": "9242a6be456a5875117d101c29ba896bfee5509bedb2cc51dfe46c3c41af79e4",
+      "observation": "Tapered bridge clearly closes visible gap when deployed; stored view shows open gap. Stored hardware lies below platform edge, so exact stored clearance is established by actual-vertex collision audit, not inferred from pixels."
+    },
+    {
+      "file": "qa/previews/expo-bridge-stored.png",
+      "sha256": "0f83e29e39ac95de4223013026792e647c093dd3ea58d1e2a1acb34e3922951a",
+      "observation": "Tapered bridge clearly closes visible gap when deployed; stored view shows open gap. Stored hardware lies below platform edge, so exact stored clearance is established by actual-vertex collision audit, not inferred from pixels."
+    },
+    {
+      "file": "qa/previews/expo-bridge-deployed.png",
+      "sha256": "8c0638e082fe5c67ef8fdea0afe4883709937f4fe920652a25db89d384254db2",
+      "observation": "Tapered bridge clearly closes visible gap when deployed; stored view shows open gap. Stored hardware lies below platform edge, so exact stored clearance is established by actual-vertex collision audit, not inferred from pixels."
+    }
+  ],
+  "contactSheets": [
+    {
+      "file": "qa/previews/contact-sheet-cutaway.png",
+      "sha256": "bb360021c44691b9330a2c973a8a56b0771a9cc69a27a4afa270f4b11bbd2154"
+    },
+    {
+      "file": "qa/previews/contact-sheet-platform.png",
+      "sha256": "b53e169d994e7b2255644618ffa86c00bd8c6e66c4bc2bc4b39a345d217c8977"
+    }
+  ],
+  "limitations": [
+    "geometry is representative research coupon rather than finished real-station architecture",
+    "CPU Cycles noise remains in close views",
+    "some stored hardware is occluded below the platform edge",
+    "all preview-only cameras, people and lighting are absent from exports"
+  ],
+  "notRuntimeWebglAcceptance": true
+}

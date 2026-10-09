@@ -1,0 +1,1825 @@
+{
+  "scope": "All supplement release files including source-backed transit interior refinement, except this self-referential inventory; base PR6 unchanged",
+  "baseRevision": "9efce79601deac6a0648cf8e158f3935cbb46f51",
+  "revisionParent": "4f19f06b271944e9bb16e8495cb72d628847bd7f",
+  "files": [
+    {
+      "path": "docs/city-life-transit/STAGE2_HANDOFF.md",
+      "bytes": 7255,
+      "gitBlobSha": "f1cdd0b981ffcbb0cd037ace6d25998f8f6088f6",
+      "sha256": "6aa4de71805b11224cd336ef9f4d8a136a8d18e8620cbe44a993b98b640525f6"
+    },
+    {
+      "path": "docs/city-life-transit/STAGE2_RECOVERY_CHECKPOINT.md",
+      "bytes": 715,
+      "gitBlobSha": "c76772c652574b6ef7bd93bbba3e6e951a670a63",
+      "sha256": "376f79c21f1ea40d2363a4c5dd6825591b329724ff2f3a200083b4e6267d01ff"
+    },
+    {
+      "path": "docs/city-life-transit/TRANSIT_INTERIOR_REFINEMENT.md",
+      "bytes": 5467,
+      "gitBlobSha": "51ec53bc47a828d394606dea74fceab6b00a10b4",
+      "sha256": "3024a0f7ca408d2c25108419e94e30fc49490b327b9eef5d0646d0c7d50eed6d"
+    },
+    {
+      "path": "lib/city/city-life/interactive-renderer-candidate.ts",
+      "bytes": 6176,
+      "gitBlobSha": "873def5c2c3e0a1de7ed1e5bcfe4dfb5627609c8",
+      "sha256": "d5c4e8e92c1a3739ea9b372031cedcadb8e7a541f659b7b03f6aa4d4fb992611"
+    },
+    {
+      "path": "tests/bus-v2.test.mjs",
+      "bytes": 3061,
+      "gitBlobSha": "26153537b81ff007c1aa241cd62114000c84eaf9",
+      "sha256": "0a70c8f2dae22651a6aa2fbbfc7f13f960ee099e7db94ca8bbc29bf19470657c"
+    },
+    {
+      "path": "tests/city-life-interactive-skin-stage2.test.mjs",
+      "bytes": 2061,
+      "gitBlobSha": "863816aa88630deb737c9a7ddb637f084ea7b89d",
+      "sha256": "c6421803a609e001bc7ab6ed1188fa71ce8907391331575a0dc7273a143960f9"
+    },
+    {
+      "path": "tests/city-life-interactive-stage2.test.mjs",
+      "bytes": 4375,
+      "gitBlobSha": "e669df72a2badec44f67eb1e76efe44dcb85299e",
+      "sha256": "91246cd25a7c30af7bcd15be96f5194b01fccb5cfd35b917cd6921fa4e8e7005"
+    },
+    {
+      "path": "tests/transit-interior-refinement.test.mjs",
+      "bytes": 1226,
+      "gitBlobSha": "016491344baae6e408d66bff2d62bfc728ec6584",
+      "sha256": "118e9e93c20f5483f3f58275d4b552a2157befbffc37b18d31bb0552d44142d8"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/.gitignore",
+      "bytes": 115,
+      "gitBlobSha": "2043a6f5a5988de47094101e558ca9af85f04828",
+      "sha256": "1facac2d2f6e7393773a842558ad12e8daa4c7a0e6581509a6847eab715b1405"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/README.zh-TW.md",
+      "bytes": 7877,
+      "gitBlobSha": "a32e2eb629cf30865fed9c30447876221d0727f8",
+      "sha256": "0898bba702235fd3088b0af405c9a2d59fdfa08d808360f93c0c545849c74458"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/REFERENCES.md",
+      "bytes": 8386,
+      "gitBlobSha": "8285f2d62ae7f493ac7c6d5f01ab03d8d7cd5e85",
+      "sha256": "a7d0355e064cadda3ae5c7296dfc795c7dff08af93cc102db2b065fa277e87b3"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/build.py",
+      "bytes": 9484,
+      "gitBlobSha": "8e547d8536a62a9d1d2e1fece00c6d497c1bed57",
+      "sha256": "3fb0f50c1c57f64362d7441f71bb852a00c06eb1becd2783355551c5f9f3bb90"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/compose.mjs",
+      "bytes": 2511,
+      "gitBlobSha": "bb661c05ba3fc4bad194d1399ca4764ee05816a5",
+      "sha256": "9425a59550b578d80667ede400a2e1d05cb68a88e4b2580ef2e4145821da5da7"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/export.py",
+      "bytes": 1096,
+      "gitBlobSha": "4d99fc5c3206616b02e82e212e78a797b5a0d86d",
+      "sha256": "345c5237473f790e6dbf77b2961dfa335ea136dd427c469c2755c71a98405b5a"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/exports/city-bus-12m-interior-v2.lod0.glb",
+      "bytes": 2634280,
+      "gitBlobSha": "b9e7f8e67c3457889650f8217729821049a2b596",
+      "sha256": "bc49cb015a4d02e1d7d68c5812a459d5b49eee822a8aff8d6795709d04fac80e"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/exports/city-bus-12m-interior-v2.lod1.glb",
+      "bytes": 1449360,
+      "gitBlobSha": "d21ba5e4bedc1200cd5434e97e6ade1df45c76cb",
+      "sha256": "c86bdf4737f28af73cd9a6f8d638b09f939ff90cd6e5a5df51e9839ec509624a"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/finalize.py",
+      "bytes": 3464,
+      "gitBlobSha": "e52f2fc7f0d7f948000190e61d765874aa6bf2c2",
+      "sha256": "f746e5fb068dfe65073c7a434b1191e3f296d067a30a74ca042f8a6ac5ef966c"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/layout.py",
+      "bytes": 1356,
+      "gitBlobSha": "795a40ff3151f4337cfa6b43b877b2e1f9f22572",
+      "sha256": "b4e9e2cafd8e28cab5c5d769b8f192caebc9cdb6d12314135beb341bdfa1b524"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/manifest.json",
+      "bytes": 601505,
+      "gitBlobSha": "91a83e79d004d605f79b9790faf36b5a648e56df",
+      "sha256": "b01497649a45589a23072da1522dffc9857eab704c8446caff929ea8849da842"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/metadata.py",
+      "bytes": 12100,
+      "gitBlobSha": "848cabcbac310c8c9f86befc74a635b2d06922b7",
+      "sha256": "c1d9c24fb02492e9f71693f452d2d5c2179d3be05da6300b43400130ac05ddeb"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/blender-validation.json",
+      "bytes": 2010,
+      "gitBlobSha": "19f1fdf187092f5d38e85b1eb553f347f8c4e700",
+      "sha256": "9df1c4c26c6432260cf2d7756341ef4b16c9036972774ed2d6ad848eda5d5537"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/budget-review.json",
+      "bytes": 734,
+      "gitBlobSha": "b8fd439474e0dd3d6ab77ada2f310df1b9315020",
+      "sha256": "88389dc4cff1798effceeb9d6857c67f218a2362bce34e757aef5cd68ae5a726"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/builder-smoke.json",
+      "bytes": 3496,
+      "gitBlobSha": "f3f823a4d84e811a1be901c4252acc98af465196",
+      "sha256": "aa98257509001cb63e9d9c5eec3b28f32f0471a9ad9180579712d144e24935df"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/bus-v2-adapter-tests.txt",
+      "bytes": 633,
+      "gitBlobSha": "f43cf56ac9b27c5a8af6f0711bb864427147d9d6",
+      "sha256": "377938e4e2f963898d1e7edb43d930354d62ebed4bf37e46d2f7a85d3c10393a"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/bus-v2-regression-tests.txt",
+      "bytes": 2341,
+      "gitBlobSha": "7908694ddf47b4cfbde2f2b6794291a45eb2cb0f",
+      "sha256": "09b89e61d3b1993fadb7e01a49866a2a840b1fcfeaf895dab10bb6e14d56f548"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/common-validation.json",
+      "bytes": 38127,
+      "gitBlobSha": "f4364f8f267c559d0824f1cbde54afb5b520a45f",
+      "sha256": "806b592b19e34930c26a214c72aecb6ad3caf2d864f6ba01b8fb8c7b2f8571fc"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/front-correction-before.json",
+      "bytes": 51995,
+      "gitBlobSha": "f1055dd0e64d55e90f68aea8f87da6a211e6fe60",
+      "sha256": "e04f02c34d227269d7eafff2fc93e754390f20347b038ca1b8dfefa2843e7cc0"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/front-correction-provenance.json",
+      "bytes": 2122,
+      "gitBlobSha": "f5b7b6dba538a476729bff21313902652fb70084",
+      "sha256": "216899d2b0764691eaa99961cf26840ed6420c09f9e17cd4790bbe14cb5549be"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/handoff.json",
+      "bytes": 2393,
+      "gitBlobSha": "94ef8f860903c793057162fb176b7a3f6607a940",
+      "sha256": "d909a17582cd5f43959b13ec210ada699d8edb0575386fedaae63d77f7b8da34"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/inventory.json",
+      "bytes": 6710,
+      "gitBlobSha": "39b2da04405feafe8c41740f6fff96a75aaf8d04",
+      "sha256": "0ae7ae1b91e458ffa30e2dd0d611b2183837261df9f5a737bafaa70416bacc71"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/measurements.json",
+      "bytes": 38197,
+      "gitBlobSha": "13ed2e2d459562596999960af89911b173488f27",
+      "sha256": "e425bda9e620d38278940a0626edc9fb6ed2579457c8e25e19097c6efd7c009c"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/previews/cutaway-layout.png",
+      "bytes": 879726,
+      "gitBlobSha": "25a4615fbb4a9db7e15dbb1b7d425420a1d3242b",
+      "sha256": "1e9bebbbd4452af2e6564a20e5b06584b56b6301be7d48ad9878eebca8bab47b"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/previews/front-door-driver.png",
+      "bytes": 1409105,
+      "gitBlobSha": "88574a15a22eb47bb8ad8f97da3450c00141ba8e",
+      "sha256": "b8b35f7228755a2a09171897c56acec70f6e42d827e7b1e13743fd056c1c42a1"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/previews/front-looking-rear-lod0.png",
+      "bytes": 1613433,
+      "gitBlobSha": "0b074044f8b98ef9ef1df772f63e7f89be4d50e4",
+      "sha256": "66a1edd67e833fee1d196a8dd8c42186fa45fabb63fa12dbe6c8afe24a8d1004"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/previews/front-looking-rear-lod1.png",
+      "bytes": 1605498,
+      "gitBlobSha": "cda25609439dd25ea71939d76bb50c36a7ea04ad",
+      "sha256": "a4530e9c561f721970fee3b726ce9e5b1cb6784e132630e4262ab6fda43e4666"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/previews/front-lowfloor-looking-front.png",
+      "bytes": 1581824,
+      "gitBlobSha": "1a5e3f124f57f69bbff3383dc2d0f592ad21631e",
+      "sha256": "c179757c86c14b809ffbb8321143f16734ac347dd95c3fe8552838439df40129"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/previews/front-priority-overview.png",
+      "bytes": 1580436,
+      "gitBlobSha": "4c791a01b16f5d49d31dcc23de176ee94d3cd523",
+      "sha256": "7830961ef7b501db47dd738803f2fdad720abf03b069c5e388e56cc84fe404bf"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/previews/index.json",
+      "bytes": 9344,
+      "gitBlobSha": "bdf0b3bd00b2f8645714e93d65f864940dc576e8",
+      "sha256": "aed1aff1bba1108907a9322781679788acad9f6c3e373e5cfa7ea959b379cd17"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/previews/rear-looking-front-lod0.png",
+      "bytes": 1649096,
+      "gitBlobSha": "c73142638b6704982450dde1d6d235a0178dd160",
+      "sha256": "17a85e809f91c9a252744d3174911e126f4a5d0446ffcc213c529904bce8b312"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/previews/rear-steps-detail.png",
+      "bytes": 1503767,
+      "gitBlobSha": "6673236cecd2ecaa89c9fe58cbf02cd026bd868c",
+      "sha256": "2108c328c55dd8d809c2c7eea47357676a00d2f55929f70c09dd7cc23b580aea"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/previews/wheelchair-and-rear-door.png",
+      "bytes": 1549215,
+      "gitBlobSha": "6d82ef154addd4542667dd5dfd406b73371b9e76",
+      "sha256": "a4f266e702b67b73fe6d80526c4b2d0ea45738393acbaefc372fc5138d95075b"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/validation.json",
+      "bytes": 2885,
+      "gitBlobSha": "eba5fe0bbc8cb1f29a1039d6c86a18fd750e625a",
+      "sha256": "a44eb672fda4769a63a34d9d21b38a7a7b62bce974104c10c341047ac73222a9"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa/visual-review.json",
+      "bytes": 4886,
+      "gitBlobSha": "f1039a3106a87a69301d851a86d419270131cdc8",
+      "sha256": "885e1209356d338d9c5a9870f90ffaed33434c089bd44839513aa6ecabf0584a"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/qa_blender.py",
+      "bytes": 7856,
+      "gitBlobSha": "a03b5c67f2e9e7461a2c62dfb4920f6a6defe76b",
+      "sha256": "8fb4c4b23aab6828525f6e27fb533868d4c6146d885f896f3ea319f2eb53f0fe"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/revise_front.py",
+      "bytes": 8526,
+      "gitBlobSha": "1574d2e7a9c54eedda1bf8a8873549e633c92713",
+      "sha256": "62f10af5c35c517dcab41626ed8086d6a2d91fb8a3d59e0ba31f2e0c75b544ac"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/README.zh-TW.md",
+      "bytes": 7486,
+      "gitBlobSha": "3a2f51dbe28d5b2a909f327cb871be5c4d5375e8",
+      "sha256": "688b36d266140cc7cb86b6ad2a3132e9a2ce30bc7eca3637fd2f99c36f233c3f"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/adapter.test.mjs",
+      "bytes": 3406,
+      "gitBlobSha": "e303eb214744a206f7fdd70d30d5ba107f0fed37",
+      "sha256": "c7c00c45d2576531311643e13a6bca9dabe87fbdd13e9b569df9e301ccc91c3d"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/compose.mjs",
+      "bytes": 2884,
+      "gitBlobSha": "612cd80cdbc15d08eec6c9b468ff6062f1868e55",
+      "sha256": "09e18d45adee7ab89cb30dfe077513fff173e6a4873907a366b3aa07eec9f076"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/derive.py",
+      "bytes": 4320,
+      "gitBlobSha": "9dd2b5954dc844776ddd176d5cb41bf0f360334f",
+      "sha256": "be5ab59320571fc15dd21ca80db1b82b1802498357a4ab186c381083fd6727d0"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/export.py",
+      "bytes": 4232,
+      "gitBlobSha": "926067ce8ecfe26e8899506a77f8f333a59f926e",
+      "sha256": "16b6b7c0213d95c7ad0e890a68dc74a41cac40235730783c9256cd7d65908ece"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/exports/city-bus-12m-interior-v2-runtime.lod0.components.json",
+      "bytes": 367912,
+      "gitBlobSha": "addcfad0f30a63316b877ad223fe1fdd78ced3b7",
+      "sha256": "fc063772f14f8b21f08f76eb098038ab03ffbe25a4eed29876b8108cd30fb783"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/exports/city-bus-12m-interior-v2-runtime.lod0.glb",
+      "bytes": 736884,
+      "gitBlobSha": "2581cfad0a11c8169e49d699930e07ce147e134f",
+      "sha256": "76302cf2d45d5c027a412c6087231b65605d982b3ec2634942b6910ab002c096"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/exports/city-bus-12m-interior-v2-runtime.lod1.components.json",
+      "bytes": 200909,
+      "gitBlobSha": "debddf5ce07c68a15f0bf060569482d942709d0e",
+      "sha256": "fd656101f5c81f6b25051a5e592f2f12888cda369a88875b3c8c1fc383133bcd"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/exports/city-bus-12m-interior-v2-runtime.lod1.glb",
+      "bytes": 202492,
+      "gitBlobSha": "c63862f8f8f44a5ccec7df92857f17685b8bbe56",
+      "sha256": "6d5ab5aa5d7074d7c844a48d88dbc4a4e2fd5c3f07b24b0aa6f0f4fcce0ba587"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/finalize.py",
+      "bytes": 4812,
+      "gitBlobSha": "fcb467653b603362d96118d09056f96ae1d9928f",
+      "sha256": "8de87f1f0fa2813838a0fc105e979af564224290e4b8cae32ab36eacdbb127d1"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/geometry.py",
+      "bytes": 3629,
+      "gitBlobSha": "6d8ca37a079af1e94cccbe3df8f1e42a8d3104ce",
+      "sha256": "a90a091163f43c5a96fe654db35ce1ca4e364b6607d5d8b156c5b6ab718ed44d"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/manifest.json",
+      "bytes": 498034,
+      "gitBlobSha": "e2ca0d9ef37ae05b2c1ba4c7a15dbfb3e6a29629",
+      "sha256": "84c358c33e2a76dd2274bb41cb9443c3c4e0f3d923f59b0038595ae6d6a1a413"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/adapter-tests.txt",
+      "bytes": 722,
+      "gitBlobSha": "7af4c6021c28400197eb33f01cc0f815942206c6",
+      "sha256": "46af8aefbda519774cc0607771f043805df5dbcbf3de1e3e24a48f7c9299bddb"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/blender-validation.json",
+      "bytes": 2521,
+      "gitBlobSha": "2c6ec0e18f4186c95368214dec97fc80d9483dd3",
+      "sha256": "7b3eec0b20822f31ae4b61fc153bceed2cb4ac3c06a60f7bee36a4e42d7ee08f"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/common-validation.json",
+      "bytes": 6789,
+      "gitBlobSha": "97a010fdfa1f83f7b9f13c81408f6795196c2060",
+      "sha256": "faa476cec3e872b54f82eef9872b817ce6b1069fec91be8b7cb3523f1cff9287"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/derivation-lod0.json",
+      "bytes": 63638,
+      "gitBlobSha": "c67594e4a667b4344456479bd3f8130cb2420425",
+      "sha256": "59b7526520dfc5b382583ddca56b7333341a6ac6b0fecbf5cefe9d4be70d6759"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/derivation-lod1.json",
+      "bytes": 42168,
+      "gitBlobSha": "3d3c4639bb7d53ae2675af17e0bc7404f1e14042",
+      "sha256": "a34d2340a6a751b9566745d9e564bd302ad1d321b67db14c99a2200dbae7cfd2"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/handoff.json",
+      "bytes": 2564,
+      "gitBlobSha": "01dbf896cb75d82debf4d4f55d0db6335aba93ff",
+      "sha256": "74a1387eab8700d4864b9c1056438697c94b0beb6d604f3ec4a8317432a81417"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/hash-inventory.json",
+      "bytes": 5905,
+      "gitBlobSha": "f135758d5c2a249248953c8ee2a50b313b606b97",
+      "sha256": "44d5f0a97bdd38cace623f5b4c8809555c6196ac25419bb549ebf534214fc83b"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/js-lint.txt",
+      "bytes": 0,
+      "gitBlobSha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/measurements.json",
+      "bytes": 6335,
+      "gitBlobSha": "ccb8c8aaed84521ec4e004bbf3a751d6843b24b3",
+      "sha256": "56ca68cb0a78d0edbbb0b377b86bd3448d63c6e03dad0c0fb7d06fdc6f0576a7"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/previews/cutaway-layout-lod0.png",
+      "bytes": 684203,
+      "gitBlobSha": "097d2fc9db65b8dda926ef31761416dedc24f1fe",
+      "sha256": "6ca164f04614957314bb8379902cfa7b49735fa08946232d556207050c043005"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/previews/cutaway-layout-lod1.png",
+      "bytes": 672307,
+      "gitBlobSha": "88d93f4a342d45e54816d5efdd36c7cd71787c2c",
+      "sha256": "6a003b1df09d17f7c5a1ba71d3c48be6750612d781fd6e6740bd1179164c42bc"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/previews/front-lowfloor-looking-front-lod0.png",
+      "bytes": 1272637,
+      "gitBlobSha": "303295833436963fefe19fd33dc2186944880736",
+      "sha256": "525fa73f70f24e67a8313e2e9685cbbc41d80927adf5c32e7a82e964e3a970c2"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/previews/front-priority-overview-lod1.png",
+      "bytes": 1248196,
+      "gitBlobSha": "3258b8f95ad0097ca545b4a4ea75197b713c754c",
+      "sha256": "b5cda44ff61d5c81c4105002124d62e9b6a7c0ee2d36e4b37470608f4bed938f"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/previews/index.json",
+      "bytes": 3538,
+      "gitBlobSha": "7b4d673b909c50c1b73860ebac415a9bdefb22f5",
+      "sha256": "9423f911918b0a71bc2273b0862145d6178dc15a3cc1055d3e9666e2ce1fe8be"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/provenance.json",
+      "bytes": 3160,
+      "gitBlobSha": "eeab760427f9a45d341d72f236b6b784a694ed60",
+      "sha256": "1f7e218b5cf503091fb730c1c7b00470047099e956428b6649f721505b92399f"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/regression-tests.txt",
+      "bytes": 4079,
+      "gitBlobSha": "03e05a8f01fc0eb4b429784aa53015eb427fda67",
+      "sha256": "b26921afc3908013cedce543a836ac5474f599d61bcca8b2e68bc6932dfa1ecc"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/validation.json",
+      "bytes": 9405,
+      "gitBlobSha": "7760972d8f70f56fd5d87aa1767dc494c9d78902",
+      "sha256": "de3779ca6cbee69cce72b247e29537d4a49c24074f63ce25c9705a33304d9f5f"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa/visual-review.json",
+      "bytes": 4400,
+      "gitBlobSha": "302db93bb987af4d2a62f6842f6fff6b4b3408b4",
+      "sha256": "005cd18f93f3b53362e57d658ed2b64aa435666b24163ee18655f6646827704c"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/qa_blender.py",
+      "bytes": 7052,
+      "gitBlobSha": "1782f5029b3f7567dd83a0ffb0f169ed6d3de983",
+      "sha256": "255f12f9210a23c3e87f0ad809a08d5f4e305fd06799733d9d37e08ba7818357"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/source/city-bus-12m-interior-v2-runtime.lod0.blend",
+      "bytes": 268481,
+      "gitBlobSha": "ea1fc2bcde0c7c273a75e03e34b94a8e6b82b6c2",
+      "sha256": "14380cb79039bc76c8e4ebcf97c48f084e8e71c9ced844fa56888ae869828a5d"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/source/city-bus-12m-interior-v2-runtime.lod1.blend",
+      "bytes": 195925,
+      "gitBlobSha": "a3334f0e4f3309367e7195ed5d5f717614f83f4d",
+      "sha256": "e0d1696f685b04c591e5421437b1bf487a428263156aa9e622a3611e8559b640"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/test_candidate.py",
+      "bytes": 10253,
+      "gitBlobSha": "140ec1a7650187d22f56c64395196158fe24347c",
+      "sha256": "d9c2379a81ddea7ffbd210da71a5266823d58d6e1d1b5e7d2f596200c6ef22d5"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/threshold_support.py",
+      "bytes": 2456,
+      "gitBlobSha": "6701675fe067a6cc9b0e5219460480d0c33690d5",
+      "sha256": "054acd1a11c68f27fb32a73598249d3600be70f7cb46da23700b7cf4f0c50223"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/runtime-candidate/validate.py",
+      "bytes": 14203,
+      "gitBlobSha": "bf8e49260815a3620d832be84ec6a6ed7d4e7433",
+      "sha256": "c61202c27ab644f4cd530f6dd140cb09df13d5344eaf7a4f8a0440d71d6be63c"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/source/city-bus-12m-interior-v2.lod0.blend",
+      "bytes": 298301,
+      "gitBlobSha": "7011f8fdbfaf83ae72978d788040908d7ca3d40d",
+      "sha256": "f9fb01939c1e65c0c308c8bc2cdca72f26d9d6b728e489df6743bfb6849dc673"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/source/city-bus-12m-interior-v2.lod1.blend",
+      "bytes": 240150,
+      "gitBlobSha": "67b5e971abeb3304723c4964f216e256ba123b54",
+      "sha256": "574de58747175d91c67c76bde05c950bf44ba9542188a37303db6bb600408cd3"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/test_bus-v2.py",
+      "bytes": 4904,
+      "gitBlobSha": "397acc7df5f3f5dd544505d5b3afc3a4e7959e72",
+      "sha256": "1b4d0399245c4a660b284ee765aa2ba4105831307d779386fa93a18f267de98a"
+    },
+    {
+      "path": "tools/assets/boardable-bus-v2/validate.py",
+      "bytes": 12208,
+      "gitBlobSha": "5bad8633d2c84d4820ee35b7757f38150baeae39",
+      "sha256": "42c0ce46a30dac76427be40a2d74ff2052737c564ca2046ae7a8a4df4ca225f7"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/README.zh-TW.md",
+      "bytes": 4782,
+      "gitBlobSha": "eb24d192278c60ae6e4b241525e9dbbea3f6f06c",
+      "sha256": "2ae5960cf97b1f9511e719d7553a6edbcad8e657ababfa74e5bd4648bdd3e87f"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/audit_source.py",
+      "bytes": 2610,
+      "gitBlobSha": "8f4949f192ea2f249dcf6d8d622523260258d558",
+      "sha256": "e043d7c6aeae67707fd7662178b9f8f74845df8b3d2c8eecf40c188944a3de12"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/build.py",
+      "bytes": 8448,
+      "gitBlobSha": "c0458948e414b11c507f20c9b31323501ae1eeaf",
+      "sha256": "c76a072a0e6e10f5620234171ed08d7c17cd283b92173d1274c56940cfe5aad9"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/contract.py",
+      "bytes": 13064,
+      "gitBlobSha": "b64bb4b3cf376049aabd3885a1015abd333d9fa6",
+      "sha256": "4808d5d87bb08dc5dd929338defae7884d7de49be028d4250af16ce3ccd407d1"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/export.py",
+      "bytes": 1143,
+      "gitBlobSha": "aad9c3ba974ec9c4b651fbeb681a39afa0219a22",
+      "sha256": "f481081f2d373f6a1024b78ffbae407aef6c5720495acf32437cc9d41bb74885"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/exports/canada-line-endcar-exterior.lod0.glb",
+      "bytes": 177352,
+      "gitBlobSha": "ff321ef4c5191ff65705617c586c2c9bb12bdd91",
+      "sha256": "6d6443eb4ef23b0b0a8b08caf00e4b426b83c0485afed6a3baddfaed3a5624dc"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/exports/canada-line-endcar-exterior.lod1.glb",
+      "bytes": 164856,
+      "gitBlobSha": "441c028f15d7119af8ad654832e84a4961611871",
+      "sha256": "49f9ce83161e76361aa5b40ececdac6b7ea1b37c98af015a5590004b6614631a"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/exports/canada-line-endcar-exterior.lod2.glb",
+      "bytes": 37544,
+      "gitBlobSha": "fb1e78b7e2d0b55b477471b3762869d324ad085f",
+      "sha256": "c1a86c1db90b90db1766273254b1672595a9668aec19dea0c73fc4b53e8a018d"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/exports/canada-line-shared-interior.lod0.glb",
+      "bytes": 138444,
+      "gitBlobSha": "0390fde42b00f713748d33974ff7469249aad815",
+      "sha256": "aeb8e0a8ea43ec894c62d0dc721f67f2232a401e3ede57f180a8d05b177b770b"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/exports/canada-line-shared-interior.lod1.glb",
+      "bytes": 103712,
+      "gitBlobSha": "ec64539f86046cdc9ffa1eb405836aada1cd922a",
+      "sha256": "7abbc2da2a83a7d5a7459d5be763cd1c7196a62eafe3584646d25ac3472dd724"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/finalize.py",
+      "bytes": 3427,
+      "gitBlobSha": "8038c6cce6c950cc18d5bef7cc88811d33bbab6b",
+      "sha256": "ad7f1d50dd1bcdace4dc2e0dd656c898092c5ece8f138609212842e437773102"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/manifest.json",
+      "bytes": 118051,
+      "gitBlobSha": "ce388a25fadda7afbdc3b508a827412f57817e4d",
+      "sha256": "7522ab7691beb92c1066f4684c86d1298a06f9f39cb1cd17a7d1fd33cb6f36aa"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/qa/artifact-hashes.json",
+      "bytes": 2629,
+      "gitBlobSha": "9158f6b7243ddeba1812484969a5f4b93ed9b9c1",
+      "sha256": "59fc5a8455f874f8eaf2832c227636c244d047f9394ba69232b64ee818e6e0fa"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/qa/build.log",
+      "bytes": 13129,
+      "gitBlobSha": "a7d6f96af2347dbfebb181b95d3bb81c0ff1f7a2",
+      "sha256": "810493224cb8606f538c28e1573bede5daa084972a222b338b3b1a380730466a"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/qa/common-validation.json",
+      "bytes": 11276,
+      "gitBlobSha": "5d03efd5bc9a3dd63aecd188a297dce877848902",
+      "sha256": "839326f3597ffd48dad8b4c7903ba9f5f0b7b7081e21b81b2d73d9a49b72aa74"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/qa/handoff.json",
+      "bytes": 1331,
+      "gitBlobSha": "5aaa6482b76cbe3df40e09fcc81cf2c2e39a3614",
+      "sha256": "ba797ffbd8b26ff8ad90443fa5afa381656047d1e11169eebd781ef359dd0e0f"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/qa/measurements.json",
+      "bytes": 11252,
+      "gitBlobSha": "4653b506a51b90cd3521412c9949f3d0243d538e",
+      "sha256": "53f9669830ebd9f0bbef7b266e79153125a8d5cedc4ee0ea9d7c8a1247040e0c"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/qa/previews/boarding-human-scale.png",
+      "bytes": 752106,
+      "gitBlobSha": "945304a663d7ff27b8a15a4573a84293e618ee56",
+      "sha256": "69e4a82c344149182776e094f08d39a27d42a28e0dc7166a8d80611bb35c0965"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/qa/previews/door-closed.png",
+      "bytes": 653899,
+      "gitBlobSha": "3d8ccd824a7c252cce77794a628215f871e571d6",
+      "sha256": "01ec5e490b8ea8c5b726451b432ccc0bafce0f37212e0906eecc123aa7052264"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/qa/previews/door-open.png",
+      "bytes": 643737,
+      "gitBlobSha": "3e6612b2aac75e79af843b36719c53abfcd9578e",
+      "sha256": "746bdb98957013c72f8fa438ee4b9ddd95d71fdc036ffc1c4d513c1a548f9c12"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/qa/previews/exterior-lod0.png",
+      "bytes": 491134,
+      "gitBlobSha": "754d4f903ae7e657e7a80eda78b84d07a74ca49e",
+      "sha256": "94d3bca527c9dcea572debeafc9a3df35c443faa6ed29169fe48209773b653dd"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/qa/previews/exterior-lod1.png",
+      "bytes": 491258,
+      "gitBlobSha": "6f1aaba831f90effb74cfc72fe6e268d4ef7eede",
+      "sha256": "5359cab9c293d833127126c3f19106a43fbbe7b1d6df8a444514e8d57391b798"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/qa/previews/exterior-lod2.png",
+      "bytes": 480112,
+      "gitBlobSha": "2c2dc200b5b8e3f5423c6259215db218923b4bfc",
+      "sha256": "06f50a41c17feb54863f96ba65a540fbfbcfa4e19ab40fcec6e37e2a44a03775"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/qa/previews/gangway.png",
+      "bytes": 807706,
+      "gitBlobSha": "176a95d1c0b056d8702b548d552f3c440bcd930c",
+      "sha256": "622abf1072ba19464ab87c9414f48ed2df512137699936963118c2ba8a39ea11"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/qa/previews/interior-aisle.png",
+      "bytes": 845926,
+      "gitBlobSha": "f11c6968efb7fb03c0cc88e08f98916a04828f3d",
+      "sha256": "1f89ab03c8079fec46e66d87ae9f7fa547eb200d29ae831481801e2a71fc1dfe"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/qa/previews/longitudinal-section.png",
+      "bytes": 533364,
+      "gitBlobSha": "88674d5ad3df7194c93f988cdd0f19dab3e88e23",
+      "sha256": "6026c0b1c60cd3904c163847b87c7c4ce39c877b3a0b96325bb598bfb9432bef"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/qa/previews/observation-front.png",
+      "bytes": 634531,
+      "gitBlobSha": "427beb606133e48f94abcdd1dca3dcd8af6ddc0d",
+      "sha256": "3a79586a3a2a7c91e7f5f78354a3905a405ead17499bcf7f348a0c6127bf4eaa"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/qa/previews/two-car-consist.png",
+      "bytes": 462226,
+      "gitBlobSha": "eded1e5f9378cdc624c5af337a2ac0c06bd84bc6",
+      "sha256": "9e90ed3d53622fe29564de8d3a9fd741c3134015bd003f3d0edc4d0d1f723cfb"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/qa/render-consist-correction.log",
+      "bytes": 19563,
+      "gitBlobSha": "37f8f814dce51d51ab952cb456faeb066e5c2d17",
+      "sha256": "cafe2a309f6f7a7fe55bb0aa4f8cf52fbd611fe2791f63da66fecf68dcadd0f6"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/qa/render-report.json",
+      "bytes": 7222,
+      "gitBlobSha": "59c471c4ed9e8f71cb0c30beb1b3fdb5d3c56d5c",
+      "sha256": "89d16c612218f0d0c1df8fe7466557581df2b8cc34b71c9c409639cbce7eb450"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/qa/render.log",
+      "bytes": 135948,
+      "gitBlobSha": "ef35c7868bd29ff466ae7a52b9973a71ff445d67",
+      "sha256": "3bd762dc164713b71bcacb10bc30afe6f26379679035949f18b61a2c9843294f"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/qa/source-audit.log",
+      "bytes": 21961,
+      "gitBlobSha": "73cfcb0a4210ad86016013a4244599b1d92722e1",
+      "sha256": "ce1ad7ab15eaf56e797414ff428aa442fed13faae9a10361c7445a66900a3ed8"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/qa/source-roundtrip.json",
+      "bytes": 4131,
+      "gitBlobSha": "a3a716caacf1ae0def4e8e95569ebc98609c3169",
+      "sha256": "839268b9c940b3a5a9671c3ae3ff671b8be9c89280227f709d38a64b57cfc351"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/qa/tests.log",
+      "bytes": 1907,
+      "gitBlobSha": "348e2b688132d4c8153574a31530808c14550af7",
+      "sha256": "8550ce7a41903935c4541d68ac8588daa6b5f5a97ab95b0464379d8ad36becb0"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/qa/validate.log",
+      "bytes": 809,
+      "gitBlobSha": "a168c8155fe9c0995ff7abdfd38298f888a65032",
+      "sha256": "e0895e7218803e62eb5ab52ef980b91ef04dc081a945f913fff04a0557e9be23"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/qa/validation.json",
+      "bytes": 809,
+      "gitBlobSha": "a168c8155fe9c0995ff7abdfd38298f888a65032",
+      "sha256": "e0895e7218803e62eb5ab52ef980b91ef04dc081a945f913fff04a0557e9be23"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/qa/visual-review.json",
+      "bytes": 3145,
+      "gitBlobSha": "131b3cbe756d13231e99bcea206336b50b99a299",
+      "sha256": "bfab8a709252a1de7d7b048e3f31429046f0d4ecf75a51e66e4ae18776ac18d4"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/references/.gitignore",
+      "bytes": 187,
+      "gitBlobSha": "58bc052ae424f19477964832bc0e4821a5788654",
+      "sha256": "cb28cb43b8e932b4e73f038ed7aa999768ce684d5a386ce29ea5348e9fd2438f"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/references/source-review.json",
+      "bytes": 3040,
+      "gitBlobSha": "9278a433905848bebde999eee13c052d1554b2fc",
+      "sha256": "bb2ad1a38c5b4a2bbdb71ec36ad320fe7797eb6f748ac5de1e2fe2c597d866ac"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/render_previews.py",
+      "bytes": 5967,
+      "gitBlobSha": "cda8427f38ec7cab34ec8c096558e5d578efa331",
+      "sha256": "5684d2071975363bb08f26b6bfaaa9c45b9b89dbbf58e53b7ff8646bd869f3f1"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/source/canada-line-endcar-exterior.lod0.blend",
+      "bytes": 110478,
+      "gitBlobSha": "56e3a00e7f925997c8f3c936434a8d365045c488",
+      "sha256": "362f5cda79b84f41ed410bcf8687682b30a250d2263d474f3370bbd81e6a18a8"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/source/canada-line-endcar-exterior.lod1.blend",
+      "bytes": 111072,
+      "gitBlobSha": "95963d33ce0cd886154fbd10679e8dcdc5f95096",
+      "sha256": "9747338ae584c6eda58d54c118442198b01852126a7c1949eb248648c6d25c63"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/source/canada-line-endcar-exterior.lod2.blend",
+      "bytes": 95328,
+      "gitBlobSha": "c4ef4becb3688ed0874410401e0f79adc88ea0be",
+      "sha256": "1e7cfaa24c9e279a901aac131a5413961ce2d7e7ea266697c60f0bdb19eb258c"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/source/canada-line-shared-interior.lod0.blend",
+      "bytes": 104895,
+      "gitBlobSha": "2c71b5054394f20232a8bddb087ef9422fa69b70",
+      "sha256": "ab19810fe4e325bbe0923544598bf162d7c2a1e86ca568876a219e3684af994f"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/source/canada-line-shared-interior.lod1.blend",
+      "bytes": 103328,
+      "gitBlobSha": "a0566e475bb45ca407512de2e06199237f42921c",
+      "sha256": "9128fb4289d521d85f864ce71f7b6bd420741ec43627d81358f5b9725d7db00d"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/test_validate.py",
+      "bytes": 3076,
+      "gitBlobSha": "6c07485370c57ee5004a17773309776afd0bd271",
+      "sha256": "dbc08d2a77b3a43f77688e8046652764e6d650e30a43f853de7727691343bb78"
+    },
+    {
+      "path": "tools/assets/canada-line-stage2/validate.py",
+      "bytes": 10486,
+      "gitBlobSha": "17268f180e1110168539c1e9ad896a79006014fa",
+      "sha256": "996c42982a6e529e5469692778e4245bb16e5ffbf64786bb8186f8df182dde27"
+    },
+    {
+      "path": "tools/assets/city-life-interactive/.gitignore",
+      "bytes": 22,
+      "gitBlobSha": "b2b84bd06f6133be9be3eb5e55575fb0c7f11b2b",
+      "sha256": "e9377f7afe22fe574eb065f57e80617538d092aeee369d91c702fbb5e779d238"
+    },
+    {
+      "path": "tools/assets/city-life-interactive/README.md",
+      "bytes": 3951,
+      "gitBlobSha": "29c20b67e74cbe039720220f9a46988618d1c0e1",
+      "sha256": "ba235d9e11e12c0085d21705726edf62acd13fad135b84a113336daae73b4ade"
+    },
+    {
+      "path": "tools/assets/city-life-interactive/audit_saved_edit.py",
+      "bytes": 1035,
+      "gitBlobSha": "bb8160e9aa94bba477d601eb9041d592419f6588",
+      "sha256": "ce176b8cea0390ead7c2aea40f16c8d70fc92dbc2c8eb039b13114ca5e7a26b4"
+    },
+    {
+      "path": "tools/assets/city-life-interactive/build.py",
+      "bytes": 5783,
+      "gitBlobSha": "03bd5315a425a59762df56e5276a8e906a4efe29",
+      "sha256": "3dc8185484767eb521325d2b33bef04ed8a7c17dabc7ea4c0b7a313d00ae7de9"
+    },
+    {
+      "path": "tools/assets/city-life-interactive/export.py",
+      "bytes": 976,
+      "gitBlobSha": "e3dac54d5eac138aeeeb07076af5458d4acdc771",
+      "sha256": "af8dcafe196863c5777e73f1d708653e6c111f34108e55be2b4d6dff0e23d720"
+    },
+    {
+      "path": "tools/assets/city-life-interactive/exports/pedestrian-commuter.glb",
+      "bytes": 226428,
+      "gitBlobSha": "64a765f01368efe25d24e5b1d511e29eabd95fca",
+      "sha256": "18bf4802fda0586fab40989cc8a607f5cb72e0b6290cf2f3d7679f212233a740"
+    },
+    {
+      "path": "tools/assets/city-life-interactive/exports/pedestrian-raincoat.glb",
+      "bytes": 228124,
+      "gitBlobSha": "db179e699d2050dac4993a204582c6c2aa60ac14",
+      "sha256": "97887cbae7ae59b71da76e4c57bf14cc97e9aceca88534a63fcb5fb9ae87edc2"
+    },
+    {
+      "path": "tools/assets/city-life-interactive/exports/pedestrian-runner.glb",
+      "bytes": 228612,
+      "gitBlobSha": "8efe6004742777cdcb0009bdbefc8dc4eb687013",
+      "sha256": "0a8f0531ed4c2d9b52d44ae06516c6785ef827318a5518b5106b646353c26019"
+    },
+    {
+      "path": "tools/assets/city-life-interactive/exports/pedestrian-tote.glb",
+      "bytes": 240740,
+      "gitBlobSha": "02258f8c8bc97853deea5aa7cfbc7ed880907ebb",
+      "sha256": "fb02862aa443810824ba0c17decb13e7f6f1fc511b49a26a72ed23fb82d595df"
+    },
+    {
+      "path": "tools/assets/city-life-interactive/finalize.py",
+      "bytes": 3723,
+      "gitBlobSha": "699afafcdcf27298ef2cd98e638fd88002f8228a",
+      "sha256": "438a3b9139cedf84dd246badb4b4c0d465a9e985be97a8b65d59630c63c98e84"
+    },
+    {
+      "path": "tools/assets/city-life-interactive/manifest.json",
+      "bytes": 24686,
+      "gitBlobSha": "b30bdf213ca7fa52272a05507963003ad9f785b9",
+      "sha256": "128678ee99f6ae739395a57aea010a7172fca4c8b00fa8458f93a03345c375f7"
+    },
+    {
+      "path": "tools/assets/city-life-interactive/preview.py",
+      "bytes": 2152,
+      "gitBlobSha": "21163a6d76bf1ec25178305e28005471cdf86073",
+      "sha256": "71352a9efbbaab54e3aeb7b20aa55cb908d4040fa7dbfcd0f294b9fbb009a463"
+    },
+    {
+      "path": "tools/assets/city-life-interactive/qa/preview-evidence.json",
+      "bytes": 7100,
+      "gitBlobSha": "75f0dd3d8258c673c65aedfa2419ccdbc70229b9",
+      "sha256": "91c25287cbab17c74d9f6447f61f0ed0d121b59a02e4a46b86f17b83537e70e5"
+    },
+    {
+      "path": "tools/assets/city-life-interactive/qa/previews/guide.png",
+      "bytes": 1032373,
+      "gitBlobSha": "7b9b2034149878c87bf922ff651c375a02184b51",
+      "sha256": "08478d456c521349a994bd9e507ccc9cdfec45859c912ca1e2adbf4607dcc141"
+    },
+    {
+      "path": "tools/assets/city-life-interactive/qa/previews/idle.png",
+      "bytes": 1035013,
+      "gitBlobSha": "066743454c230d72933cd9d3ff5bc5a5e132efd0",
+      "sha256": "5844c7c78721ad20c786737f7c02afa5351e8a22dc26f3fc6daed8fa15c19f94"
+    },
+    {
+      "path": "tools/assets/city-life-interactive/qa/previews/sit.png",
+      "bytes": 1010464,
+      "gitBlobSha": "51a2dae4db3db017444121c8e19f38efadd7b40b",
+      "sha256": "203aa3aa96853ed5fe173173aa0841604c548500f176b772de1b89d1be1ba2cd"
+    },
+    {
+      "path": "tools/assets/city-life-interactive/qa/previews/walk.png",
+      "bytes": 1039722,
+      "gitBlobSha": "5ef4d3c44956f003f9d7b937032c825c34a55647",
+      "sha256": "59f263a3499537dca0d664678af4543168cb8760f6197510671268b297a666b8"
+    },
+    {
+      "path": "tools/assets/city-life-interactive/qa/saved-edit-proof.json",
+      "bytes": 303,
+      "gitBlobSha": "0676d1ea1574c76f2a95fccc9d1644495b70ab74",
+      "sha256": "7a07ca9382804a95bc941903c1bf90349bf863379b626dcee264f6cfbf57563d"
+    },
+    {
+      "path": "tools/assets/city-life-interactive/qa/source-roundtrip.json",
+      "bytes": 1418,
+      "gitBlobSha": "9d51586e0a9f8d3dab99e0b8b42a2dac4356bda7",
+      "sha256": "1abb315083de200679c9275a07d5f15b5533e746e7eb20e2685efb2a33683d76"
+    },
+    {
+      "path": "tools/assets/city-life-interactive/qa/visual-review.json",
+      "bytes": 583,
+      "gitBlobSha": "791bc07247672c4d0e30487144b893894dcf7897",
+      "sha256": "3382f4cb6297ea447ab77455ab43bb28f2c32b4ad540706ce0ced1b59fcbc80e"
+    },
+    {
+      "path": "tools/assets/city-life-interactive/source/pedestrian-commuter.blend",
+      "bytes": 141400,
+      "gitBlobSha": "2fbb3fbea74e561a22c8fb2159b8b2180045d73a",
+      "sha256": "e1372d1e659d10741af6e7349a017df6df9122fbafd98f931efd87e8c370537d"
+    },
+    {
+      "path": "tools/assets/city-life-interactive/source/pedestrian-raincoat.blend",
+      "bytes": 141715,
+      "gitBlobSha": "b41ea1326de9d4ca4008a48c9329d1f7be1ee0ba",
+      "sha256": "28309d4e8510534f0140852572c7accd456d5ebbf750123bc4984beacba57a2e"
+    },
+    {
+      "path": "tools/assets/city-life-interactive/source/pedestrian-runner.blend",
+      "bytes": 142330,
+      "gitBlobSha": "f98cd4145ab384b9e4a538558a4c979d90ef2579",
+      "sha256": "9a35dccb7685b2bbbb8ccd831594d70d6db3807f352dce2bbee4179070062a0d"
+    },
+    {
+      "path": "tools/assets/city-life-interactive/source/pedestrian-tote.blend",
+      "bytes": 144419,
+      "gitBlobSha": "cb21b92760a74e7455399e259de4f386104f16c5",
+      "sha256": "8bb1e0673f6d3c76d0edeac1f44800d99b1bf2fd150675d14dde99abbffd1ffc"
+    },
+    {
+      "path": "tools/assets/city-life-interactive/test_contract.py",
+      "bytes": 1779,
+      "gitBlobSha": "9462e6bfe529410659e5abfe44eabeb0c58ebec6",
+      "sha256": "6c6a3db35296acd22d8e75494ef5530f4863f4c561e2cea6c949f0f1960a9796"
+    },
+    {
+      "path": "tools/assets/city-life-interactive/validate.py",
+      "bytes": 3816,
+      "gitBlobSha": "5cce3cb65b0c786eba8a33d1d67337f679b3a344",
+      "sha256": "cf7dc8aa5ff57be46569a7f84db13e4d671e6acf79765138eadced9ef0e5c85b"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/.gitignore",
+      "bytes": 31,
+      "gitBlobSha": "41fe1f1a20386134ac5ef38db24f598dfc04f3d9",
+      "sha256": "5d452eae899437b34d8fcd68f32216c9d03b5f1830543fc27a277a21d766a961"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/README.md",
+      "bytes": 9666,
+      "gitBlobSha": "d085ac1686b30d23b9ddc973eba522cd39353772",
+      "sha256": "47ab61e48327e7e8e700e0696af42cecd8a9243d5f23c4e04780d54d282c4190"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/REFERENCES.md",
+      "bytes": 4955,
+      "gitBlobSha": "a5cbe34c1ea5db38ca45b9dbe03f1e513befe2a2",
+      "sha256": "3b3fd8d426afc7bec559646d1ca99da27a2f6d48f87c0c3bbbbfcdd9b25da2c5"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/build.py",
+      "bytes": 20172,
+      "gitBlobSha": "13f1d87f9d9910e5a84cfe31aa9856f06ed8cc99",
+      "sha256": "61a7fba3c5c1936942b0baf12ac4be39b102a93df48334cdb545656c7b2030df"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/export.py",
+      "bytes": 3451,
+      "gitBlobSha": "8fcde9893f575f2f62f7b70c05b4490ba3e5c330",
+      "sha256": "a68722657d198feb06a59c4558bbb705eb79c66bcf0e24c75a32c79ea58c1dc3"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/exports/mark-v-a-car-interior.lod0.components.json",
+      "bytes": 261221,
+      "gitBlobSha": "81d6b60f8fdeaac042f28bffa58a76f79be67206",
+      "sha256": "324f9e7d4bff1d9d12ef152a6895ec756f1fc2476e23c0901641cab371d95cc7"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/exports/mark-v-a-car-interior.lod0.glb",
+      "bytes": 1179164,
+      "gitBlobSha": "a86f89ab564229ab98767076ce183ec050496001",
+      "sha256": "280aa59559444ac15d6c2d712c61e87b846076632d8127f116e20424a086c984"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/exports/mark-v-a-car-interior.lod1.components.json",
+      "bytes": 117130,
+      "gitBlobSha": "45e9bc59cd5b5da76d76069e907dd577565a9003",
+      "sha256": "d62dc5fbf129aa1d5e1f8d14bf7cf19619ffc546769249468e333b9aeec14075"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/exports/mark-v-a-car-interior.lod1.glb",
+      "bytes": 306220,
+      "gitBlobSha": "44827db0929a5e84911b84380ff6b9c5b27db7d9",
+      "sha256": "25b45a2fd670a818b8ef10bc3dd92fbc427b941231063d8f9927706ddafe9e8d"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/exports/mark-v-a-car-study.components.json",
+      "bytes": 489242,
+      "gitBlobSha": "8a48ac2904371ad45e2be0eb151b7662bd5d6a9c",
+      "sha256": "7e7e78b9b5891ab43ea399e4a64037023480b43696caff748ff9ff444202c1c5"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/exports/mark-v-a-car-study.glb",
+      "bytes": 8108192,
+      "gitBlobSha": "b638ab6e6ab6df8de56b2eb056629153b584fb98",
+      "sha256": "c31086665fc793ab29ebd9948bc2d716a5cb570142f2dd7d1411c86fc590f6a0"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/finalize_lods.py",
+      "bytes": 2068,
+      "gitBlobSha": "960e9ed5833a1ab6a9cc8a0b8f9ce1cc8739e1e7",
+      "sha256": "d640fa77066cd212734b189acccedaa6c58635194ad9647c1567012eb0b06157"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/layout-assumptions.json",
+      "bytes": 6590,
+      "gitBlobSha": "b763afe1829a32f7eadd74143e050d7d46472010",
+      "sha256": "72273c99052fb68be38c436b76ab4663795dad452c07608826e39927b11b4538"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/make_textures.py",
+      "bytes": 3019,
+      "gitBlobSha": "470497e761120e643ab08ef72954d3c30dc8ffee",
+      "sha256": "1b40f438f800dd983f77f5195019be5dfa059100334ae6ebdf348d757f75e0db"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/manifest.json",
+      "bytes": 20525,
+      "gitBlobSha": "7285a4ee14f1d7014fdc668d481a8d6ab1711347",
+      "sha256": "cce42ba145cd6b8385eb2e3aeb8cd6fe39fa8b7a56cf0a53c096b478d42c9cb5"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/metadata.py",
+      "bytes": 5573,
+      "gitBlobSha": "705573e94ef3d728bcc34b8792a0dd3f99326781",
+      "sha256": "380b678f7836397061836107b6de5616d80296e30c45a6e652c91ea73488041e"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/open_gangway.py",
+      "bytes": 2352,
+      "gitBlobSha": "42866568ad32282c9ea80edec8bbbf7b66e94c94",
+      "sha256": "052371f0c7fa455c685542af2e3bdaca67c36bf06cdf052acdb60cfa424fd017"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/optimize_sources.py",
+      "bytes": 3809,
+      "gitBlobSha": "bfd6224a5970474955533958ffc95a9e5d296bf8",
+      "sha256": "ca13961755f3c746f72143de0c203d9d66f5784f5304e4c315ab9d8432bc043e"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/preserve_lod1_floors.py",
+      "bytes": 641,
+      "gitBlobSha": "441c5767ec963d8210c9de930bb380dfa91a2ed7",
+      "sha256": "684aab3034d61f7af5f3859a0a00d8696ff65ead85cffad9be9af03b4741d438"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/adjacent-context-validation.json",
+      "bytes": 1646,
+      "gitBlobSha": "1de2bece73dede80528fed8c4e792e29e6fada78",
+      "sha256": "88084cf9403de5cfd0d245184f0a16e1e6a9d2deb85b5cf8d56c7b5259fcfcdd"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/clearance-validation.json",
+      "bytes": 2482,
+      "gitBlobSha": "b9d350852c63fd55e6e07bf580988b702b00f5a0",
+      "sha256": "b186bb0ce03d2af5e5398b1e752eb03cc057a916c542048d471d75e6fe164339"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/common-validation.json",
+      "bytes": 12114,
+      "gitBlobSha": "ff879a4aae1f2e62a5d824085a47257897147283",
+      "sha256": "8ab0d8a5dd0d9aa3da6a10c3c409566894cc7935b987b2f3b65402633e26d315"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/context-regression-tests.txt",
+      "bytes": 1705,
+      "gitBlobSha": "b002f71afeb4c789737187b649570128a3245ec3",
+      "sha256": "c43db27550def9e0cbece567c6217bc05fbc2bb56d478f34ef1412cc88083f2d"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/exported-material-inventory.json",
+      "bytes": 18009,
+      "gitBlobSha": "22714a9a7ba2afcd584bbb08ce07c1e14a28d692",
+      "sha256": "ade3035d62892b9aea9346525aa220d66d9cff533a01780247fcf0fcb072cfdf"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/handoff.json",
+      "bytes": 4189,
+      "gitBlobSha": "7ffad917a929c8874c7a9ed16b267d46cf5a5105",
+      "sha256": "1f9c73dec42a669f5d763961d14120fa104651516b6e0edfa03560930b2a52fa"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/lod0-omitted-components.json",
+      "bytes": 11846,
+      "gitBlobSha": "bd02e7dc52f147753c2a066b655dcb7795bff413",
+      "sha256": "2f268a5a1ef1efbe2ff7aee22058a6f594a262e4f140ea3f959b02fbe7bd404a"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/lod1-omitted-components.json",
+      "bytes": 21849,
+      "gitBlobSha": "0653167d9028a7739b5651f1edcbc1f26ee6f4f3",
+      "sha256": "ed037ee6ed3a9530bfa43157a2970c45c11edb1b5ff37f01192d3ed6ead5ffe3"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/measurements.json",
+      "bytes": 6952,
+      "gitBlobSha": "aef591528738fe78f6142ee60cf420d83a8d261b",
+      "sha256": "a7729bd14ee18864f6b75b18f17341c07ed91eebe9050c881bcb6e21bb75ddd6"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/preview-integrity.json",
+      "bytes": 1722,
+      "gitBlobSha": "411b3a14b4befa38286377b199a836052812a621",
+      "sha256": "8c7ceeb418653021b41d5571d8be80b190f7eaa800c313e8a65cfc68da7acb82"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/previews/01-aisle-toward-gangway.png",
+      "bytes": 1445862,
+      "gitBlobSha": "86a0775ac3679c66a3994d8240c51a0fc74f6876",
+      "sha256": "597c6af9248f5ec5df3ffbd66947b8145458d1a0451cecdef5d8929a3dcf8baa"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/previews/02-seats-door-detail.png",
+      "bytes": 1374172,
+      "gitBlobSha": "3062f323a4aa2c70141dc9507f807c7fd3ffdc62",
+      "sha256": "ce2a5c24a6b681a88805248ae4cf826c4e218a1fe9bc0b36fdce7b512e0bdd5f"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/previews/04-gangway-return.png",
+      "bytes": 1291619,
+      "gitBlobSha": "641cd8f584118f8f495525f284b51c9da278b9cf",
+      "sha256": "66078aac9012a7d8b06b1653041388e3c924f53fb323a8e3d9e96ab390041f09"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/previews/05-aisle-lod1.png",
+      "bytes": 1345688,
+      "gitBlobSha": "31479299c8993f441f21db5936642786d3d3ae5c",
+      "sha256": "420b818d7b1b32a7fbd51649896e48523513506de9a823208209f4334fc0c988"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/previews/06-open-gangway-continuity.png",
+      "bytes": 1420639,
+      "gitBlobSha": "852d975c59d58f72b68658b47d67398f1023db81",
+      "sha256": "d30d5c96a364ed147f04e4927b38cabd56d5ffb1b5b6aceb44e92939f9e1518b"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/previews/index.json",
+      "bytes": 5675,
+      "gitBlobSha": "d5d8043053f5d4056ef499bb50692bcfa60b16de",
+      "sha256": "9a83a179658534c7006015e4cbf784d4bfbf4b17d9ae6b1ec8ca6fe6c3fd2896"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/regression-tests.txt",
+      "bytes": 3499,
+      "gitBlobSha": "7077ec399d00a8d649f3b9d090f104fc947f9f93",
+      "sha256": "b066b68be32d1f8de546ddb0ee2f534b7f126d738bdfe588e958b0d00be36613"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/source-reexport-validation.json",
+      "bytes": 1257,
+      "gitBlobSha": "0599b73787a3c18d9857120df98e4d71436d7789",
+      "sha256": "a92bb0d94f4434e371f7f3ea91fceaaccb29ac2ca785e0da1b017110c04ba9b0"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/validation-console.txt",
+      "bytes": 466,
+      "gitBlobSha": "11a5bbefde15c6ef90bfc123d8023df4ec00863f",
+      "sha256": "60f35be44f010b461988f7084d32d541fdf492b9047279f57af1231df704f88a"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/validation.json",
+      "bytes": 798,
+      "gitBlobSha": "581685e8462c585174beb980a8e2030cb39e1ecc",
+      "sha256": "8f10ef62acd261588b57094f22b9c60a352947398963028fc6aecc115b298274"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/visual-review.json",
+      "bytes": 4715,
+      "gitBlobSha": "3288d2518a59b1ddf7c1f7d61c038ecb887231c7",
+      "sha256": "7bf180206f450f711b43b16eb411a86090e94f1dd0ec0aa4c85343aad4b48aed"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa_blender.py",
+      "bytes": 7908,
+      "gitBlobSha": "cb316784f94a1616b8436dcf2166b23e5535ddc8",
+      "sha256": "6ab2ed6b530f3943f70bbf849ea47a436642aecadd078c9849797c9db62f62ab"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/raise_gangway_header.py",
+      "bytes": 789,
+      "gitBlobSha": "5790288051d56617a274a1157416b29da77fe5b5",
+      "sha256": "5286369f9d46d5c3a684f84144d06f938c5d7a21cb075d03c5dc4a8a715fcbbc"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/reconcile_a_car.py",
+      "bytes": 1610,
+      "gitBlobSha": "7e4df882a56aa5d9586f87a280f71bfdc88c1474",
+      "sha256": "85eaa8f30c71370e70e3cf89090d017e24305a1fc66f752dcb8ae16ff0a74af3"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/refine_sources.py",
+      "bytes": 390,
+      "gitBlobSha": "669f7951c72be90fab7c073dd1eb148ce7eb9979",
+      "sha256": "fe7169ec4569a569377fb4d39f78c677844564521312c1b056fadec661eb8b03"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/source/mark-v-a-car-interior.lod0.blend",
+      "bytes": 1078810,
+      "gitBlobSha": "f97533f54f5c9729edb2815bba382cf851e4ceaf",
+      "sha256": "dae4e192c91d2475665ca930fcfcd02bc0fd42ca8f05aec291de2bf526f49bba"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/source/mark-v-a-car-interior.lod1.blend",
+      "bytes": 420154,
+      "gitBlobSha": "df65b1973ccfd826ef8e607edaf30c3cc83a1ba4",
+      "sha256": "712ca521f16b9fc2f40f770e61bea8fa9b56f6edd13c34df92f10b851748928c"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/source/mark-v-a-car-study.blend",
+      "bytes": 1211592,
+      "gitBlobSha": "95de25e75baad4fcd36aa3d63bd726cb9c5b6432",
+      "sha256": "47924974440e9fbe2ef25b44b1abdfda1469944dfe67d0b6e3c7b3f5c7084826"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/test_package.py",
+      "bytes": 10544,
+      "gitBlobSha": "fec18140b1aceba0b7442f9a70716f5fc2319f18",
+      "sha256": "dd83ca21231f8c396a0dd5a906a5795ff254f7f1a49585b5de7c39cd763f0771"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/textures/lod1-original-blue-fabric.png",
+      "bytes": 2366,
+      "gitBlobSha": "139f5f2f23eb6bc2957933d7e5d4d9545ef3ef7f",
+      "sha256": "d242b7a05e09a47eda3c253a246317e402c5f53c4e509973ae2a8b7612da4f60"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/textures/lod1-original-information-atlas.png",
+      "bytes": 37535,
+      "gitBlobSha": "8ecbc7fa42d87d8ed9cb9a2d3738a6406aff7083",
+      "sha256": "12f18f6d8fbf33eb42f55f250366134f38f9ae9415dbec3b7e1f40df82ca1b92"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/textures/lod1-original-rubber-floor.png",
+      "bytes": 2511,
+      "gitBlobSha": "d467a0298125283be691b5467105dfcbfc8e1da8",
+      "sha256": "ae7bc6346470572e001e13a0cd6d81a74a30fedbd43c7b2d84764923597c4ee3"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/textures/original-blue-fabric.png",
+      "bytes": 43963,
+      "gitBlobSha": "f6590914ba6b6752690325576c910f8ae8287270",
+      "sha256": "e0b728ccb83a7263e29bb3e00643905a56fb0480ca8f73086ee5620069e52f76"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/textures/original-information-atlas.png",
+      "bytes": 71466,
+      "gitBlobSha": "dbd352d3256dbcdb1bec9ff7f2746b3556ea69c7",
+      "sha256": "f815d2855711698883c2e6714222a402ffa4f96ae8311ebda00614d09f313060"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/textures/original-rubber-floor.png",
+      "bytes": 298754,
+      "gitBlobSha": "bcb12755795f41313a36f336a2005e4513d1b063",
+      "sha256": "4556125a0517d16bf4e39d4a315af53ed471bbc19a14045b862453f4eb0b6aa8"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/validate.py",
+      "bytes": 12469,
+      "gitBlobSha": "80532550db92ad738b0dc216cd2178873b28fe42",
+      "sha256": "72229f1ad3b0bbe9e83b8997fa8303838671bdab5deb015bdbd871fb754354da"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/verify_context.py",
+      "bytes": 2901,
+      "gitBlobSha": "6809122ee914271001d2ed6e7d5d66217cb4dfa0",
+      "sha256": "3fe5f4f2d53bfe26b65bb289b36efdc46bf8879e216af42f44722ba7b0f44a52"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/verify_previews.py",
+      "bytes": 2522,
+      "gitBlobSha": "5eb4e82374f6b47ddfb42939468398bca644e2d1",
+      "sha256": "a0f668df0e97098115e1f52d78a75e15f735cddce31933308e6f172faa842346"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/.gitignore",
+      "bytes": 42,
+      "gitBlobSha": "b89f70c1338233919e92ab7582def0b73a9cc992",
+      "sha256": "7d2003dadaf82e83f15b7829522141960112cd24a39a18149282c9e263711009"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/README.md",
+      "bytes": 9213,
+      "gitBlobSha": "52d985119ff610df138031f55a65e91df4447185",
+      "sha256": "6e0071502711bfd0fd9efd087543df59396d140f084b979efaedc9aece7ab050"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/audit_sweeps.py",
+      "bytes": 5356,
+      "gitBlobSha": "bb2f698e1b956887ac24d9e1feaab1a0356855c9",
+      "sha256": "01591690594fce462250c3c13b9a693a7d2a1846af55c055bf5258d7cc31d04a"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/audit_thresholds.py",
+      "bytes": 6080,
+      "gitBlobSha": "a28d123e538d5d91f595eb992dd98652271e90e9",
+      "sha256": "07ed6111e4a6051b337516146f5568577e4675cddfd257484595bebecbebd2f4"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/build.py",
+      "bytes": 3504,
+      "gitBlobSha": "ec6f3225b0946ee1203bb18fc4115eabe8233e92",
+      "sha256": "d06cf749370bdadda1fd4f117b3eb04a87ddf5af841b684bfa04198908e2fd21"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/export.py",
+      "bytes": 1740,
+      "gitBlobSha": "45b39618d3fb3dd3bf6eefc5192543788dc9ce52",
+      "sha256": "59f9a17cbc312a0cd646f87c819c31268207b65c89a7091b847632266ab92236"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/exports/burrard.glb",
+      "bytes": 287932,
+      "gitBlobSha": "78ff1a95da6d6614145094fcc5f81b29dec09594",
+      "sha256": "e3f9fe3e1be45f861254c53a5c3276ee092e39f315193fdfd9416d6c7e224264"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/exports/granville.glb",
+      "bytes": 428392,
+      "gitBlobSha": "491634357c3644f1c8c5978468769176c0bb4743",
+      "sha256": "1da39eb31cf64ab22144d3bfe96ea853616f4ae47d09b2e9c1ba5352353637b7"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/exports/main-street-science-world.glb",
+      "bytes": 205536,
+      "gitBlobSha": "b1c1b2e0bffcc76a79454040164d07dab2f26a97",
+      "sha256": "fff6328a70e15612e9344687c1f72f7a2b40009833e0e82a610181814adc29f8"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/exports/stadium-chinatown.glb",
+      "bytes": 156876,
+      "gitBlobSha": "a8684573058f276353562969babfe3f1bcf76776",
+      "sha256": "4ac05ec2618bef2d27745699eb85594fa859721b83f6f50547c74dc9e2664638"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/exports/threshold-bridge-canada.glb",
+      "bytes": 1840,
+      "gitBlobSha": "f367769b10ceda65772a128861d0a113a7707e3b",
+      "sha256": "8ff5cbe5586ae6e6496fc39e50ffe3104653999cfd4305d06e292533a307ba4e"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/exports/threshold-bridge-expo.glb",
+      "bytes": 1836,
+      "gitBlobSha": "43bb72da4b0c88584737f0461eb966b0106c53c1",
+      "sha256": "855b9e349b6ef01bbebd723f1edea3bbb8e5d79b60b3a2c5d794d38f39b1ba6c"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/exports/vancouver-city-centre.glb",
+      "bytes": 134684,
+      "gitBlobSha": "ebb25430876acb5455ac95117f40d2a236412b13",
+      "sha256": "e7aa69e97a495fac4fbe0c243aca0575beabc62ea568615153e992b355ab834a"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/exports/waterfront.glb",
+      "bytes": 300208,
+      "gitBlobSha": "906b8ead517af35d825acd4e13d5a5c765202c53",
+      "sha256": "d2833eea065e684f989e7242cdb8b4d339b530f63e4bd7507ae7f0df6042a881"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/exports/yaletown-roundhouse.glb",
+      "bytes": 171752,
+      "gitBlobSha": "7ffc12ed6b74329488e8c3d7582d423a0a26c4d2",
+      "sha256": "3710b640dcfd9512ccdeead84a4392392f559dc7a16219af0e1c61338e62c98e"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/finalize.py",
+      "bytes": 6340,
+      "gitBlobSha": "5fee8f5d857072eb492f032437c65a40f12d8102",
+      "sha256": "5cc951fc3ebfd802edef6fc75fa3de5afae366f37ca82e8991a04f1f37633e8c"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/layout.py",
+      "bytes": 25742,
+      "gitBlobSha": "5861a7e3ab2354184c86756596fce212dbd9e8f5",
+      "sha256": "688a3737008f0b651640dd78c80ab260c45725c781a7d811093439f14c8da8e5"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/manifest.json",
+      "bytes": 115496,
+      "gitBlobSha": "c7966343b139d33e372b683a3122c4b82363d31f",
+      "sha256": "dc40605110fa3be0bba46f06a3d67e6168f693d6b02238f4dcb056cbaee330c1"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/bridge-instancing.json",
+      "bytes": 1189,
+      "gitBlobSha": "dc35be1742f6d7ea850cfc6eca517b5c3c419c82",
+      "sha256": "b3b534f57677a5e6533dd25bd5ca51151565382fb7e5873d57756cb7dcb61109"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/build.log",
+      "bytes": 1269,
+      "gitBlobSha": "cef12f6427e43d87a738c8a8fbfe985f1822897f",
+      "sha256": "e10bc7371bba38209f2a69aeb2d0ad15e0a06c22f88004dbff1bd49dce6e5d08"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/common-validation.json",
+      "bytes": 35491,
+      "gitBlobSha": "3db152191f06bc58070fbcec312bda0a84ec8351",
+      "sha256": "3be5765a1e93ae6e4f155adc4793cd0a87d62b2516813371bd856e0fdb00eca8"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/common-validation.log",
+      "bytes": 35491,
+      "gitBlobSha": "3db152191f06bc58070fbcec312bda0a84ec8351",
+      "sha256": "3be5765a1e93ae6e4f155adc4793cd0a87d62b2516813371bd856e0fdb00eca8"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/export-batching.json",
+      "bytes": 1668,
+      "gitBlobSha": "8b2a59dc3bdda922d8139e02a46f0464233af246",
+      "sha256": "e41537b6eb18c8f427f4dcbaf31cdaf2f6b12e4f4da2c099b9e7b942f45fdf48"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/export.log",
+      "bytes": 24839,
+      "gitBlobSha": "f01f6311e828c68dbe7c97879771cb8260a7a21b",
+      "sha256": "df5dc2c12a1de7ddd3069070806f7917f8775b5813bf879b05091badb2bb45c4"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/file-inventory.json",
+      "bytes": 12524,
+      "gitBlobSha": "7955ae25619de5d85fe3d690d1afa77746a6df84",
+      "sha256": "4d5d715a205523c9d47adf16a292529d1768a0aa44dc95bc6ac5de6835ff8686"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/handoff.json",
+      "bytes": 2332,
+      "gitBlobSha": "759651c0cd19344a9e97be8dc8136c56d7deaa25",
+      "sha256": "3d4babc7cb55de789c477207602d29475cea833834775b027ab261a71d2dc09a"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/measurements.json",
+      "bytes": 35337,
+      "gitBlobSha": "d6dc32cdd4002b631646e814b6298bc150629338",
+      "sha256": "1ea3e5dd839e1dbdbe5940c8c284ebdb813bcf2671a168638df1fc0ca2353b03"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/previews/burrard-cutaway.png",
+      "bytes": 820482,
+      "gitBlobSha": "808ce2cd6582e9ceb889150abc5905584ae8f6b0",
+      "sha256": "5a1fcf632a9d1fa0aaedbae05c8c96e51110f313c59b2901347bdda3e892739f"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/previews/burrard-platform.png",
+      "bytes": 757406,
+      "gitBlobSha": "6accc5c65c65e50053459e115b83e752a7b2d0e5",
+      "sha256": "97c929f036433aba9686530d972f8bb64035ab6c00e6ec72fe8bff0779b3b014"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/previews/canada-bridge-deployed.png",
+      "bytes": 898663,
+      "gitBlobSha": "29c60e2b25d1bf99b1aa6af4fea24390c2d386e2",
+      "sha256": "9242a6be456a5875117d101c29ba896bfee5509bedb2cc51dfe46c3c41af79e4"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/previews/canada-bridge-stored.png",
+      "bytes": 906047,
+      "gitBlobSha": "22a80368d818b6b9de1e65b6dbc737559516b339",
+      "sha256": "f0470af950fec1b72cef6755b892453ada43fc4ad50d47cfec89a78d8fe5355a"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/previews/contact-sheet-cutaway.png",
+      "bytes": 576955,
+      "gitBlobSha": "e85ff3e4816a01d466667e6891bd794ff27e30cf",
+      "sha256": "bb360021c44691b9330a2c973a8a56b0771a9cc69a27a4afa270f4b11bbd2154"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/previews/contact-sheet-platform.png",
+      "bytes": 920604,
+      "gitBlobSha": "9d6b29f9e81312f54029346ab92fd32b879eb165",
+      "sha256": "b53e169d994e7b2255644618ffa86c00bd8c6e66c4bc2bc4b39a345d217c8977"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/previews/expo-bridge-deployed.png",
+      "bytes": 968278,
+      "gitBlobSha": "f43f0a45f62f9842aa57b4f546bd83a60bdc866a",
+      "sha256": "8c0638e082fe5c67ef8fdea0afe4883709937f4fe920652a25db89d384254db2"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/previews/expo-bridge-stored.png",
+      "bytes": 970449,
+      "gitBlobSha": "24bbcba2ae6956a62a7719da784bd9abaf7e566f",
+      "sha256": "0f83e29e39ac95de4223013026792e647c093dd3ea58d1e2a1acb34e3922951a"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/previews/granville-cutaway.png",
+      "bytes": 810422,
+      "gitBlobSha": "ca861d2ac0bf8fd8483cc8705fc95a67cd24b10b",
+      "sha256": "9e866adc647dd6974be86737c6a9318e66c390740eb7a2c9b9a17023add00613"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/previews/granville-platform.png",
+      "bytes": 722283,
+      "gitBlobSha": "9d9ca299ce8370b603f37c4e5e612dc00d3d552a",
+      "sha256": "ada770fb3c36cfe26ed228fff6a4a4c4d4f1386fccd1727519d7dcc5b1adc16a"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/previews/index.json",
+      "bytes": 7654,
+      "gitBlobSha": "05ad4d9ad8f97a3b12ae1878b78dbd30e9df534f",
+      "sha256": "272011802050a9a061ccc5563a3f63f74505ae145fa7b8b8b155ee10f75c6c65"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/previews/main-street-science-world-cutaway.png",
+      "bytes": 808479,
+      "gitBlobSha": "39f58681e553c29b242d1ab31bbe42b01d41b285",
+      "sha256": "d75a2453d6e616dd1fb106871c7e88746399e27dc05681e56865038814228d89"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/previews/main-street-science-world-platform.png",
+      "bytes": 698240,
+      "gitBlobSha": "ae94edb4de84fc4bc2186e8283f93a1a0f56c983",
+      "sha256": "212a9814e8c2c141852d1ee51cd2d3e3482dd465b971711b7724f9349719f82e"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/previews/stadium-chinatown-cutaway.png",
+      "bytes": 812030,
+      "gitBlobSha": "9a9dca140d8964742cb4d0477601acff8a83e4f8",
+      "sha256": "ead45b0561493dabbc5f7cfb622159afb6bd659f3bb62bd85e96b870c2c806fe"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/previews/stadium-chinatown-platform.png",
+      "bytes": 699543,
+      "gitBlobSha": "721beff1986dc7fb8fd12d16d5e281ca1ae5c0d4",
+      "sha256": "6d3fb1ca7f0d0b2ef74105ef125a9ef61e738224479fe65a7fccfe76ea3affc0"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/previews/threshold-index.json",
+      "bytes": 4041,
+      "gitBlobSha": "048de54d17cc723d1dc386cd6ea850d07dad1ec1",
+      "sha256": "add50b138c49d1d35768f2d97b43ac8a180f0304e73a12f85b53fe9b282bb9ac"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/previews/vancouver-city-centre-cutaway.png",
+      "bytes": 822891,
+      "gitBlobSha": "969ad11204a124e8af750b38226b32e60de3fd33",
+      "sha256": "7881ebda3859297b170d5212b9b7f6764c067cc459ae7399fefecd23e3e28a58"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/previews/vancouver-city-centre-platform.png",
+      "bytes": 699337,
+      "gitBlobSha": "479342c96a4a986170ee2eb042196069c9bf583a",
+      "sha256": "5148dd7f66172e39e0a35377159c626b95549109cac286d38c83f8123a98aad7"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/previews/waterfront-cutaway.png",
+      "bytes": 864649,
+      "gitBlobSha": "e7e53e795229b194cf0a75b9c1f97e841d351e07",
+      "sha256": "f5b97924dddd297790e1f963643ee0dc37a78a7c31f6422691fbb7b5dbde9b18"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/previews/waterfront-platform.png",
+      "bytes": 820290,
+      "gitBlobSha": "911cb21fd6c0cd5a1e3a6bbc95928b79dc171a70",
+      "sha256": "368ab0303574c170a36d0dd16dd7112730df06421acdea6cff29283801543321"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/previews/yaletown-roundhouse-cutaway.png",
+      "bytes": 813029,
+      "gitBlobSha": "9f74036ba12388862935ab269839b910c7817ec1",
+      "sha256": "93edda9f4ade70bcdaa0339f6a204ac0016a097d1a50016ca311b6c715380a0b"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/previews/yaletown-roundhouse-platform.png",
+      "bytes": 704170,
+      "gitBlobSha": "d3136eb4a7885bf76aba1c0e7f6d1388e0eb5563",
+      "sha256": "d5d9de1572cf81f4a443ad9058cb9052ea9147ba0bad1840f0efddbf2b09562f"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/rebuild-canada.log",
+      "bytes": 441,
+      "gitBlobSha": "84cf46bfb1aff0d7b1ac5698afb9aababf95ac29",
+      "sha256": "2b677b7a0dc0fec6dcb2dfd6d1604b5bf45d2da27880754243108849686790e0"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/reexport.log",
+      "bytes": 24840,
+      "gitBlobSha": "1880e5d9bb9b9335fde07e34c6933a464cb6740c",
+      "sha256": "6ed46d060365036288e3fe1e7946213ec72cf61105cf17ad4d91401891067bf3"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/render-thresholds.log",
+      "bytes": 59673,
+      "gitBlobSha": "08212232872ec0a686ece325f5a6504920d91a79",
+      "sha256": "55661240287050f0ecde60b8b7d30a9944b3684ec4108f6bff0d009ee6bb9744"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/render.log",
+      "bytes": 160254,
+      "gitBlobSha": "00ef491adf921dbb7987005105d8186796a8b570",
+      "sha256": "b5580c3ef9f027f6d10ba23c4e2c5b78550bbc3c1b667713d3b50e1d8df116b3"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/source-audit.json",
+      "bytes": 8734,
+      "gitBlobSha": "68e906a25e692a38d4ebac795541cd1fb6ff3c9b",
+      "sha256": "bc165f1d4a13ceb47cd27b3d403bf84b42e59f3f068db7851cfa3350a005281d"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/source-roundtrip.json",
+      "bytes": 3239,
+      "gitBlobSha": "f7d0622debfb775ccdb34af108576e2b8d668d17",
+      "sha256": "9dc3182a024b21be58d9e21f5fd335edb302d9056eb872f61edda031eb8ff528"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/tests.log",
+      "bytes": 1568,
+      "gitBlobSha": "f30ad16905ae3219c4a0c7c78923bd1250452418",
+      "sha256": "dea5ea5b883c841945120812da80bcd682096061952e784139177cf874792ea8"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/threshold-sweep-validation.json",
+      "bytes": 66207,
+      "gitBlobSha": "4dbf471f4678e5e9a5f071981fbb6b40be2b4545",
+      "sha256": "2837625a3ccd363edcdad7a215483573e4c48f5ea57cb1be066a663d360bc4d0"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/threshold-tests.log",
+      "bytes": 34,
+      "gitBlobSha": "431a1bc08e3c259fed1c613765f11e4007292ea1",
+      "sha256": "f6d44bf234094f81e8d3a76968c6a3de9897ad737f25d7f2b81fbc7182106158"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/threshold-validation.json",
+      "bytes": 59155,
+      "gitBlobSha": "6214184fd2ec340ff80edcf90ebd29e1b5c95e3e",
+      "sha256": "41a9507519dd930a16112653cc4e9e1c525ef35ec7f34175b19ee4ff6d254d48"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/validation.json",
+      "bytes": 1568,
+      "gitBlobSha": "f30ad16905ae3219c4a0c7c78923bd1250452418",
+      "sha256": "dea5ea5b883c841945120812da80bcd682096061952e784139177cf874792ea8"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/qa/visual-review.json",
+      "bytes": 6496,
+      "gitBlobSha": "380cd839896eb7af0c7e22972a0680ac5f59e2e0",
+      "sha256": "b8f27a9eccec19c3e45a01309932b054303a44e79f9986d41a5d2e3c835db3e4"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/references/.gitignore",
+      "bytes": 110,
+      "gitBlobSha": "dd304a3ce5cd6dd3983cdff73a59b3c3f293dea2",
+      "sha256": "ab0e64eac3f79c49f3ac3fa360b3f63831bec31c12be453025b9ea63a4b3aa88"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/references/city-dataset-metadata.json",
+      "bytes": 4536,
+      "gitBlobSha": "9b3c1ad4356aa5c845d47908221fe6890c12f220",
+      "sha256": "24e9f588b7f4d526e2ffa2d80178ea0778fd9aede25adce2f4a5f13a7d72fa7c"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/references/city-rapid-transit-stations.json",
+      "bytes": 6036,
+      "gitBlobSha": "89b4e9f47d52caf7fea8762aa73403e5ff17a773",
+      "sha256": "28b15d51fe2b34e6b21efb2510a296c158c71c38ec0c203bb0fd5918dcbe2b71"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/render_previews.py",
+      "bytes": 4085,
+      "gitBlobSha": "91bdf50f6a64a4e1d96814338f5d1b48a3465f7e",
+      "sha256": "6a55c7ae28b27cf16289c6b2563bf4d3ca30a9ad0d081c1b719e4b0a39f8466d"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/render_thresholds.py",
+      "bytes": 4082,
+      "gitBlobSha": "0417cb31a93cc1d9d954725808e1946d364bc3b0",
+      "sha256": "af292d1310b1b5f34e2d3efd8c5019eee1df90eec216cf5e5bdaab354e62053c"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/source/burrard.blend",
+      "bytes": 166706,
+      "gitBlobSha": "0a5336dea4d1b78c73edd62c004af7833a28ead9",
+      "sha256": "3f257ae2a98ad13aa152bcaf0618f107da96bae4345e28d4ff4885f906b5718b"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/source/granville.blend",
+      "bytes": 198769,
+      "gitBlobSha": "a194a1ae6b34896d6f8906a1319f299672926cbb",
+      "sha256": "eba0620898ee08f658589991779f0ef20f2a97ec267e6ca37be306407e7e763f"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/source/main-street-science-world.blend",
+      "bytes": 145865,
+      "gitBlobSha": "b8ff0e316fe88f9b99ddfffdc7894940574aff9f",
+      "sha256": "85f0d32688990e9dec1e7fcc9c7729a3b515e28b97f7a78b9426dc85c33d4d74"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/source/stadium-chinatown.blend",
+      "bytes": 134033,
+      "gitBlobSha": "726cbd6e556c855105776a8feaff07ee043c1d04",
+      "sha256": "b4ceab130cb65c2ebda58d3e2717a9bbc1c1b395a3eb8e861116fea13ac54e7b"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/source/threshold-bridge-canada.blend",
+      "bytes": 86164,
+      "gitBlobSha": "2aa4e37c43e5c205e0cf3aee602c1770b4827cb2",
+      "sha256": "7c9ae04fde444ec2e175476546b96325106d8205cb107ef5851fff1d04d45836"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/source/threshold-bridge-expo.blend",
+      "bytes": 85688,
+      "gitBlobSha": "2575d953f19a510cee20b1d566760865884468e2",
+      "sha256": "4a8b9587bfbae5a6c74342f016bc2546cf9643c7a90a6c32b9b5c4be2b466345"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/source/vancouver-city-centre.blend",
+      "bytes": 127289,
+      "gitBlobSha": "20e58196d926ee2f2dcb1b358a90db55e7b175fc",
+      "sha256": "e3665f756f08511ec845ef75e46de6ccbdd1bcc73a8c06405cce04fe9cfc65e3"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/source/waterfront.blend",
+      "bytes": 169988,
+      "gitBlobSha": "5aaf2f96e4538c135575e0d2fde781d3c87a9ec9",
+      "sha256": "de1c36f5680de86d19b359f92c8b86fe8043d15277e5adbaaa27b32b2f64a67b"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/source/yaletown-roundhouse.blend",
+      "bytes": 134869,
+      "gitBlobSha": "275d7e8d4190779170407f4a35dbade9b08709e8",
+      "sha256": "cd0270d672c7eba287d101d6f69ada75bd38f123fb30c583a57ce2aed7ec281d"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/station-layout.json",
+      "bytes": 2783624,
+      "gitBlobSha": "f72be7e607f0aa6c117613e8ee5fca46ea61ced1",
+      "sha256": "9a99a1b75e2a7ad6d3a72d7bff253e2c92a7ffa984aa4a9c8481adbbc47ac962"
+    },
+    {
+      "path": "tools/assets/skytrain-stations-stage2/validate.py",
+      "bytes": 8298,
+      "gitBlobSha": "5257731abe1712f7e4e2a50a187adebc06d26c61",
+      "sha256": "01d6163e52f5e76b9902ebe5b24c700e71ec607338da36585ef6667f1263244a"
+    },
+    {
+      "path": "tools/stage2/.gitignore",
+      "bytes": 19,
+      "gitBlobSha": "7a60b85e148f80966a550e5ab6a762a907c69ca6",
+      "sha256": "862263fa1f46c20f0d1e4dac5ffcc75abd55c08211b2c3864c5f8764b9d87793"
+    },
+    {
+      "path": "tools/stage2/README.md",
+      "bytes": 498,
+      "gitBlobSha": "eb8f705106800b187073bc0456dce64b75eaeb1c",
+      "sha256": "67af031fd637a00ff86c7de68725a6e7ec789c107fc482cf4e64aa9c323e5a6c"
+    },
+    {
+      "path": "tools/stage2/qa/build-firebase.log",
+      "bytes": 4462,
+      "gitBlobSha": "6ccbaf279225d085808895a202d3fab07ce1dc0e",
+      "sha256": "662711ad193999084dc6172e3b5a2fbbd9586b03cc2e38ba39c3641b145e9cf0"
+    },
+    {
+      "path": "tools/stage2/qa/full-lint.log",
+      "bytes": 55668,
+      "gitBlobSha": "6c46df9ce2eb7d5a4da3da0fe28bb3b88c7cb039",
+      "sha256": "30e66f0e5d0478a9e35f15108da44ece4cc373de68489e7bddce395acdc562a0"
+    },
+    {
+      "path": "tools/stage2/qa/isolation-negative-fixtures.json",
+      "bytes": 423,
+      "gitBlobSha": "f74d3bacf41c927d634fea768eb87a38f2387d68",
+      "sha256": "31d32ee2c351c9a81d7f681fa2cb6acb051db5e1c47ee589e29cf2c04b5b5f7a"
+    },
+    {
+      "path": "tools/stage2/qa/isolation.json",
+      "bytes": 174,
+      "gitBlobSha": "38f70e1627240035e03fd07a813aedfd6c21c9bb",
+      "sha256": "e4bb8877949db3478a1b74dd6b7d086236a72be735ba8547ffc762763c1d677d"
+    },
+    {
+      "path": "tools/stage2/qa/npm-test.log",
+      "bytes": 88195,
+      "gitBlobSha": "e44212a15e90c2c3709d89b35942f1b2d8b02d7e",
+      "sha256": "809064b8d64798286c1b4b5866167a7464dad05730881d44014949c705c35b52"
+    },
+    {
+      "path": "tools/stage2/qa/scoped-lint.log",
+      "bytes": 99,
+      "gitBlobSha": "83b5f9d4df0d01aa0059b4e2ce67617225986b34",
+      "sha256": "7125f194612fcff2f454c05d848e7cb71facc1967b4d5017e25b34fdee3ba74f"
+    },
+    {
+      "path": "tools/stage2/qa/typecheck.log",
+      "bytes": 381,
+      "gitBlobSha": "8368b203692567a178bbcfd982107a93ea665c92",
+      "sha256": "001a92f0f28e1b91b4f16a791be880ee254b4746b98dcea482156391e6022365"
+    },
+    {
+      "path": "tools/stage2/qa/validation-summary.json",
+      "bytes": 2579,
+      "gitBlobSha": "2cfd95704c2ec69a4497e5aa5a8b446721318e83",
+      "sha256": "38c65408681149ab979e87f157caeccfeccf04e8cc8e1b6e2efd4df3845967ed"
+    },
+    {
+      "path": "tools/stage2/verify_isolation.py",
+      "bytes": 1748,
+      "gitBlobSha": "d14333b171fb0dd279e0e655339c33f09b083e26",
+      "sha256": "23ee5236ec98ca03263078b31ce92f5194b52fa68616479a9eb54eb156aaf3ac"
+    }
+  ]
+}

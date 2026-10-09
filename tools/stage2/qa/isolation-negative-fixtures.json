@@ -1,0 +1,17 @@
+[
+  {
+    "case": "offline-source",
+    "status": "rejected",
+    "reason": "authoring source leaked: <fixture>/leaked.blend"
+  },
+  {
+    "case": "candidate-code",
+    "status": "rejected",
+    "reason": "candidate code/reference leaked: InteractiveRendererCandidate in <fixture>/leaked.js"
+  },
+  {
+    "case": "offline-payload",
+    "status": "rejected",
+    "reason": "offline asset leaked: <fixture>/leaked.bin"
+  }
+]

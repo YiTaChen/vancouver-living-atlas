@@ -1,0 +1,2625 @@
+{
+  "lod": 0,
+  "masterSource": "../source/city-bus-12m-interior-v2.lod0.blend",
+  "masterSha256": "f9fb01939c1e65c0c308c8bc2cdca72f26d9d6b728e489df6743bfb6849dc673",
+  "masterUnchanged": true,
+  "retainedMeshObjects": 500,
+  "trianglesEvaluated": 11704,
+  "omittedComponents": [
+    "seat-01-upholstery-button",
+    "seat-01-upholstery-button.001",
+    "seat-01-upholstery-button.002",
+    "seat-01-upholstery-button.003",
+    "seat-02-upholstery-button",
+    "seat-02-upholstery-button.001",
+    "seat-02-upholstery-button.002",
+    "seat-02-upholstery-button.003",
+    "seat-03-upholstery-button",
+    "seat-03-upholstery-button.001",
+    "seat-03-upholstery-button.002",
+    "seat-03-upholstery-button.003",
+    "seat-04-upholstery-button",
+    "seat-04-upholstery-button.001",
+    "seat-04-upholstery-button.002",
+    "seat-04-upholstery-button.003",
+    "seat-05-upholstery-button",
+    "seat-05-upholstery-button.001",
+    "seat-05-upholstery-button.002",
+    "seat-05-upholstery-button.003",
+    "seat-06-upholstery-button",
+    "seat-06-upholstery-button.001",
+    "seat-06-upholstery-button.002",
+    "seat-06-upholstery-button.003",
+    "seat-07-upholstery-button",
+    "seat-07-upholstery-button.001",
+    "seat-07-upholstery-button.002",
+    "seat-07-upholstery-button.003",
+    "seat-08-upholstery-button",
+    "seat-08-upholstery-button.001",
+    "seat-08-upholstery-button.002",
+    "seat-08-upholstery-button.003",
+    "seat-09-upholstery-button",
+    "seat-09-upholstery-button.001",
+    "seat-09-upholstery-button.002",
+    "seat-09-upholstery-button.003",
+    "seat-10-upholstery-button",
+    "seat-10-upholstery-button.001",
+    "seat-10-upholstery-button.002",
+    "seat-10-upholstery-button.003",
+    "seat-11-upholstery-button",
+    "seat-11-upholstery-button.001",
+    "seat-11-upholstery-button.002",
+    "seat-11-upholstery-button.003",
+    "seat-12-upholstery-button",
+    "seat-12-upholstery-button.001",
+    "seat-12-upholstery-button.002",
+    "seat-12-upholstery-button.003",
+    "seat-13-upholstery-button",
+    "seat-13-upholstery-button.001",
+    "seat-13-upholstery-button.002",
+    "seat-13-upholstery-button.003",
+    "seat-14-upholstery-button",
+    "seat-14-upholstery-button.001",
+    "seat-14-upholstery-button.002",
+    "seat-14-upholstery-button.003",
+    "seat-15-upholstery-button",
+    "seat-15-upholstery-button.001",
+    "seat-15-upholstery-button.002",
+    "seat-15-upholstery-button.003",
+    "seat-16-upholstery-button",
+    "seat-16-upholstery-button.001",
+    "seat-16-upholstery-button.002",
+    "seat-16-upholstery-button.003",
+    "seat-17-upholstery-button",
+    "seat-17-upholstery-button.001",
+    "seat-17-upholstery-button.002",
+    "seat-17-upholstery-button.003",
+    "driver-pedal-tread",
+    "driver-pedal-tread.001",
+    "driver-pedal-tread.002",
+    "driver-pedal-tread.003",
+    "driver-pedal-tread.004",
+    "driver-pedal-tread.005",
+    "driver-pedal-tread.006",
+    "driver-pedal-tread.007",
+    "seat-18-upholstery-button",
+    "seat-18-upholstery-button.001",
+    "seat-18-upholstery-button.002",
+    "seat-18-upholstery-button.003",
+    "seat-19-upholstery-button",
+    "seat-19-upholstery-button.001",
+    "seat-19-upholstery-button.002",
+    "seat-19-upholstery-button.003",
+    "seat-20-upholstery-button",
+    "seat-20-upholstery-button.001",
+    "seat-20-upholstery-button.002",
+    "seat-20-upholstery-button.003",
+    "seat-21-upholstery-button",
+    "seat-21-upholstery-button.001",
+    "seat-21-upholstery-button.002",
+    "seat-21-upholstery-button.003",
+    "seat-22-upholstery-button",
+    "seat-22-upholstery-button.001",
+    "seat-22-upholstery-button.002",
+    "seat-22-upholstery-button.003",
+    "seat-23-upholstery-button",
+    "seat-23-upholstery-button.001",
+    "seat-23-upholstery-button.002",
+    "seat-23-upholstery-button.003",
+    "seat-24-upholstery-button",
+    "seat-24-upholstery-button.001",
+    "seat-24-upholstery-button.002",
+    "seat-24-upholstery-button.003",
+    "front-equipment-cabinet-fastener",
+    "front-equipment-cabinet-fastener.001"
+  ],
+  "reductions": [
+    {
+      "component": "low-floor-slab",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "rear-step-1-slab",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "rear-step-2-slab",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "raised-rear-slab",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "step-side-plinth--1",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "step-side-plinth-1",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "rear-step-1-yellow-nosing",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "rear-step-2-yellow-nosing",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ceiling",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "liner--1-0",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "window-sill--1-0",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "liner--1-1",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "window-sill--1-1",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "liner--1-2",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "window-sill--1-2",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "roof-shoulder--1",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ceiling-fixture--1",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ceiling-seam--1",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ad-frame--1-0",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ad-blank--1-0",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ad-frame--1-1",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ad-blank--1-1",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ad-frame--1-2",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ad-blank--1-2",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ad-frame--1-3",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ad-blank--1-3",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ad-frame--1-4",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ad-blank--1-4",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ad-frame--1-5",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ad-blank--1-5",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "liner-1-0",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "window-sill-1-0",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "roof-shoulder-1",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ceiling-fixture-1",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ceiling-seam-1",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ad-frame-1-0",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ad-blank-1-0",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ad-frame-1-1",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ad-blank-1-1",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ad-frame-1-2",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ad-blank-1-2",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ad-frame-1-3",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ad-blank-1-3",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ad-frame-1-4",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ad-blank-1-4",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ad-frame-1-5",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "ad-blank-1-5",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "wheel-well--1--3.1",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "wheel-well-1--3.1",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "seat-01-back-shell",
+      "preReductionTriangles": 76,
+      "evaluatedTriangles": 76
+    },
+    {
+      "component": "seat-01-back-pad",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-01-cushion",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-01-pan",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "seat-01-leg-left",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-01-leg-right",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-01-foot",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-01-grab-side",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-01-grab-side.001",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-01-grab-top",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-02-back-shell",
+      "preReductionTriangles": 76,
+      "evaluatedTriangles": 76
+    },
+    {
+      "component": "seat-02-back-pad",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-02-cushion",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-02-pan",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "seat-02-leg-left",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-02-leg-right",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-02-foot",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-02-grab-side",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-02-grab-side.001",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-02-grab-top",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-03-back-shell",
+      "preReductionTriangles": 76,
+      "evaluatedTriangles": 76
+    },
+    {
+      "component": "seat-03-back-pad",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-03-cushion",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-03-pan",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "seat-03-leg-left",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-03-leg-right",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-03-foot",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-03-grab-side",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-03-grab-side.001",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-03-grab-top",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-04-back-shell",
+      "preReductionTriangles": 76,
+      "evaluatedTriangles": 76
+    },
+    {
+      "component": "seat-04-back-pad",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-04-cushion",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-04-pan",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "seat-04-leg-left",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-04-leg-right",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-04-foot",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-04-grab-side",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-04-grab-side.001",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-04-grab-top",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-05-back-shell",
+      "preReductionTriangles": 76,
+      "evaluatedTriangles": 76
+    },
+    {
+      "component": "seat-05-back-pad",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-05-cushion",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-05-pan",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "seat-05-leg-left",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-05-leg-right",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-05-foot",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-05-grab-side",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-05-grab-side.001",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-05-grab-top",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-06-back-shell",
+      "preReductionTriangles": 76,
+      "evaluatedTriangles": 76
+    },
+    {
+      "component": "seat-06-back-pad",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-06-cushion",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-06-pan",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "seat-06-leg-left",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-06-leg-right",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-06-foot",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-06-grab-side",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-06-grab-side.001",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-06-grab-top",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-07-back-shell",
+      "preReductionTriangles": 76,
+      "evaluatedTriangles": 76
+    },
+    {
+      "component": "seat-07-back-pad",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-07-cushion",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-07-pan",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "seat-07-leg-left",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-07-leg-right",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-07-foot",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-07-grab-side",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-07-grab-side.001",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-07-grab-top",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-08-back-shell",
+      "preReductionTriangles": 76,
+      "evaluatedTriangles": 76
+    },
+    {
+      "component": "seat-08-back-pad",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-08-cushion",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-08-pan",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "seat-08-leg-left",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-08-leg-right",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-08-foot",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-08-grab-side",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-08-grab-side.001",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-08-grab-top",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-09-back-shell",
+      "preReductionTriangles": 76,
+      "evaluatedTriangles": 76
+    },
+    {
+      "component": "seat-09-back-pad",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-09-cushion",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-09-pan",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "seat-09-leg-left",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-09-leg-right",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-09-foot",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-09-grab-side",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-09-grab-side.001",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-09-grab-top",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-10-back-shell",
+      "preReductionTriangles": 76,
+      "evaluatedTriangles": 76
+    },
+    {
+      "component": "seat-10-back-pad",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-10-cushion",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-10-pan",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "seat-10-leg-left",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-10-leg-right",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-10-foot",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-10-grab-side",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-10-grab-side.001",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-10-grab-top",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-11-back-shell",
+      "preReductionTriangles": 76,
+      "evaluatedTriangles": 76
+    },
+    {
+      "component": "seat-11-back-pad",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-11-cushion",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-11-pan",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "seat-11-leg-left",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-11-leg-right",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-11-foot",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-11-grab-side",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-11-grab-side.001",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-11-grab-top",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-12-back-shell",
+      "preReductionTriangles": 76,
+      "evaluatedTriangles": 76
+    },
+    {
+      "component": "seat-12-back-pad",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-12-cushion",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-12-pan",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "seat-12-leg-left",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-12-leg-right",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-12-foot",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-12-grab-side",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-12-grab-side.001",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-12-grab-top",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-13-back-shell",
+      "preReductionTriangles": 76,
+      "evaluatedTriangles": 76
+    },
+    {
+      "component": "seat-13-back-pad",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-13-cushion",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-13-pan",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "seat-13-leg-left",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-13-leg-right",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-13-foot",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-13-grab-side",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-13-grab-side.001",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-13-grab-top",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-14-back-shell",
+      "preReductionTriangles": 76,
+      "evaluatedTriangles": 76
+    },
+    {
+      "component": "seat-14-back-pad",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-14-cushion",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-14-pan",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "seat-14-leg-left",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-14-leg-right",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-14-foot",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-14-grab-side",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-14-grab-side.001",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-14-grab-top",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-15-back-shell",
+      "preReductionTriangles": 76,
+      "evaluatedTriangles": 76
+    },
+    {
+      "component": "seat-15-back-pad",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-15-cushion",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-15-pan",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "seat-15-leg-left",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-15-leg-right",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-15-foot",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-15-grab-side",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-15-grab-side.001",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-15-grab-top",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-16-back-shell",
+      "preReductionTriangles": 76,
+      "evaluatedTriangles": 76
+    },
+    {
+      "component": "seat-16-back-pad",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-16-cushion",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-16-pan",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "seat-16-leg-left",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-16-leg-right",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-16-foot",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-16-grab-side",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-16-grab-side.001",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-16-grab-top",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-17-back-shell",
+      "preReductionTriangles": 76,
+      "evaluatedTriangles": 76
+    },
+    {
+      "component": "seat-17-back-pad",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-17-cushion",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-17-pan",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "seat-17-leg-left",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-17-leg-right",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-17-foot",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-17-grab-side",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-17-grab-side.001",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-17-grab-top",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "front-entry-edge",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "front-entry-stanchion",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "front-entry-stanchion.001",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "rear-entry-edge",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "rear-entry-stanchion",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "rear-entry-stanchion.001",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "overhead-rail--1",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stanchion--1-0-0",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stanchion--1-0-1",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stanchion--1-0-2",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stanchion--1-1-0",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stanchion--1-1-1",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stanchion--1-1-2",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stanchion--1-2-0",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stanchion--1-2-1",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stanchion--1-2-2",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stanchion--1-3-0",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stanchion--1-3-1",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stanchion--1-3-2",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-stem",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-0",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-1",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-2",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-stem.001",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-0.001",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-1.001",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-2.001",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-stem.002",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-0.002",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-1.002",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-2.002",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-stem.004",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-0.004",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-1.004",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-2.004",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-stem.005",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-0.005",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-1.005",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-2.005",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-stem.006",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-0.006",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-1.006",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-2.006",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "overhead-rail-1",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stanchion-1-0-0",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stanchion-1-0-1",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stanchion-1-0-2",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stanchion-1-1-0",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stanchion-1-1-1",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stanchion-1-1-2",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stanchion-1-2-0",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stanchion-1-2-1",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stanchion-1-2-2",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stanchion-1-3-0",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stanchion-1-3-1",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stanchion-1-3-2",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-stem.007",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-0.007",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-1.007",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-2.007",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-stem.008",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-0.008",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-1.008",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-2.008",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-stem.009",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-0.009",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-1.009",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-2.009",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-stem.010",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-0.010",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-1.010",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-2.010",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-stem.011",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-0.011",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-1.011",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-2.011",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-stem.012",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-0.012",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-1.012",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-2.012",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-stem.013",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-0.013",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-1.013",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "strap-loop-2.013",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stop-cord-1",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stop-button",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "stop-button.001",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "rear-vent-slat",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "rear-vent-slat.001",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "rear-vent-slat.002",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "passenger-display",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "display-neutral-screen",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "roof-hatch",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "roof-hatch-insert",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "roof-hatch.001",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "roof-hatch-insert.001",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "roof-hatch.002",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "roof-hatch-insert.002",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "stop-cord--1-0",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "stop-cord--1-1",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "driver-platform",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "driver-partition",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "driver-partition-glass",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "driver-partition-top",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "driver-side-gate",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "driver-side-shield",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "driver-gate-handle",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "driver-pedestal",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "driver-cushion",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "driver-back",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "driver-headrest",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "driver-arm-support",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 36
+    },
+    {
+      "component": "driver-armrest",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "driver-arm-support.001",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 36
+    },
+    {
+      "component": "driver-armrest.001",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "driver-dashboard",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 28
+    },
+    {
+      "component": "driver-console-side",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "driver-console-instrument",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "driver-console-screen",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "driver-gauge",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 36
+    },
+    {
+      "component": "driver-gauge.001",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 36
+    },
+    {
+      "component": "driver-console-switch",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "driver-console-switch.001",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "driver-console-switch.002",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "driver-console-switch.003",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "driver-console-switch.004",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "driver-column",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 36
+    },
+    {
+      "component": "steering-ring-0",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-ring-1",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-ring-2",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-ring-3",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-ring-4",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-ring-5",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-ring-6",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-ring-7",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-ring-8",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-ring-9",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-ring-10",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-ring-11",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-ring-12",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-ring-13",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-ring-14",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-ring-15",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-ring-16",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-ring-17",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-ring-18",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-ring-19",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-ring-20",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-ring-21",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-ring-22",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-ring-23",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-spoke",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-spoke.001",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-spoke.002",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "steering-hub",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "driver-pedal",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "driver-pedal.001",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "fare-pedestal",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "fare-reader",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "fare-reader-screen",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "front-entry-assist",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "front-entry-assist-bend-0",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "front-entry-assist-bend-1",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "front-ramp-cassette",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "front-ramp-edge",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "front-ramp-edge.001",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "seat-18-back-shell",
+      "preReductionTriangles": 76,
+      "evaluatedTriangles": 76
+    },
+    {
+      "component": "seat-18-back-pad",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-18-cushion",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-18-pan",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "seat-18-leg-left",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-18-leg-right",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-18-foot",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-18-grab-side",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-18-grab-side.001",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-18-grab-top",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-19-back-shell",
+      "preReductionTriangles": 76,
+      "evaluatedTriangles": 76
+    },
+    {
+      "component": "seat-19-back-pad",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-19-cushion",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-19-pan",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "seat-19-leg-left",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-19-leg-right",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-19-foot",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-19-grab-side",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-19-grab-side.001",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-19-grab-top",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-20-back-shell",
+      "preReductionTriangles": 76,
+      "evaluatedTriangles": 76
+    },
+    {
+      "component": "seat-20-back-pad",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-20-cushion",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-20-pan",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "seat-20-leg-left",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-20-leg-right",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-20-foot",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-20-grab-side",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-20-grab-side.001",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-20-grab-top",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-21-back-shell",
+      "preReductionTriangles": 76,
+      "evaluatedTriangles": 76
+    },
+    {
+      "component": "seat-21-back-pad",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-21-cushion",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-21-pan",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "seat-21-leg-left",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-21-leg-right",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-21-foot",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-21-grab-side",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-21-grab-side.001",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-21-grab-top",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-22-back-shell",
+      "preReductionTriangles": 76,
+      "evaluatedTriangles": 76
+    },
+    {
+      "component": "seat-22-back-pad",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-22-cushion",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-22-pan",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "seat-22-leg-left",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-22-leg-right",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-22-foot",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-22-grab-side",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-22-grab-side.001",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-22-grab-top",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-23-back-shell",
+      "preReductionTriangles": 76,
+      "evaluatedTriangles": 76
+    },
+    {
+      "component": "seat-23-back-pad",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-23-cushion",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-23-pan",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "seat-23-leg-left",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-23-leg-right",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-23-foot",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-23-grab-side",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-23-grab-side.001",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-23-grab-top",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-24-back-shell",
+      "preReductionTriangles": 76,
+      "evaluatedTriangles": 76
+    },
+    {
+      "component": "seat-24-back-pad",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-24-cushion",
+      "preReductionTriangles": 44,
+      "evaluatedTriangles": 44
+    },
+    {
+      "component": "seat-24-pan",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "seat-24-leg-left",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-24-leg-right",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-24-foot",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-24-grab-side",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-24-grab-side.001",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "seat-24-grab-top",
+      "preReductionTriangles": 28,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "front-wheel-arch--1",
+      "preReductionTriangles": 72,
+      "evaluatedTriangles": 48
+    },
+    {
+      "component": "front-wheel-cap--1",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "front-wheel-arch-1",
+      "preReductionTriangles": 72,
+      "evaluatedTriangles": 48
+    },
+    {
+      "component": "front-wheel-cap-1",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "front-wheel-guard-0",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "front-wheel-guard-1",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "front-wheel-guard-2",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "front-wheel-guard-cross",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "front-wheel-guard-cross.001",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "front-equipment-cabinet",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "front-equipment-lower",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "front-equipment-backrest",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "front-priority-stowed-back-0",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "front-priority-stowed-pan-0",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "front-priority-stowed-pad-0",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "front-priority-hinge-0",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 36
+    },
+    {
+      "component": "front-priority-grab-0",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "front-priority-stowed-back-1",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "front-priority-stowed-pan-1",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "front-priority-stowed-pad-1",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "front-priority-hinge-1",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 36
+    },
+    {
+      "component": "front-priority-grab-1",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "front-priority-stowed-back-2",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "front-priority-stowed-pan-2",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "front-priority-stowed-pad-2",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "front-priority-hinge-2",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 36
+    },
+    {
+      "component": "front-priority-grab-2",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "front-priority-bay-end--1-0",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "front-priority-bay-end--1-1",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "front-priority-bay-end--1-2",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "front-priority-pair-rail--1-0",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "front-priority-pair-rail--1-1",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "front-priority-pair-rail--1-2",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "front-priority-bay-end-1-0",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "front-priority-bay-end-1-1",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "front-priority-bay-end-1-2",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "front-priority-pair-rail-1-0",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "front-priority-pair-rail-1-1",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "front-priority-pair-rail-1-2",
+      "preReductionTriangles": 36,
+      "evaluatedTriangles": 20
+    },
+    {
+      "component": "wheelchair-restraint",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "wheelchair-priority-panel",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "front-priority-bay-outline",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "front-priority-bay-outline.001",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12
+    },
+    {
+      "component": "door-front-threshold-slab",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12,
+      "newCandidateOnlySupport": true
+    },
+    {
+      "component": "door-rear-threshold-slab",
+      "preReductionTriangles": 12,
+      "evaluatedTriangles": 12,
+      "newCandidateOnlySupport": true
+    }
+  ],
+  "scope": "Derivative simplification; rear is NOT byte-identical to master.",
+  "addedPortalSupportComponents": [
+    "door-front-threshold-slab",
+    "door-rear-threshold-slab"
+  ]
+}

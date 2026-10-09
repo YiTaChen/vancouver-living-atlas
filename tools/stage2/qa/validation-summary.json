@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-09",
+  "baseRevision": "9efce79601deac6a0648cf8e158f3935cbb46f51",
+  "npmTests": {
+    "pass": 836,
+    "fail": 0,
+    "skipped": 0
+  },
+  "typecheck": "pass",
+  "firebaseBuild": "pass",
+  "scopedLint": "pass",
+  "fullLint": {
+    "status": "fail",
+    "errors": 211,
+    "errorFiles": 83,
+    "errorFilesChangedFromBase": 0
+  },
+  "pythonTests": {
+    "interactiveNegative": 11,
+    "bus": 23,
+    "canada": 19,
+    "busRuntimeCandidate": 39,
+    "markV": 30
+  },
+  "station": {
+    "stations": 7,
+    "negativeFixturesRejected": 10,
+    "thresholdSupportSamples": 9828,
+    "thresholdPoseSamples": 5616,
+    "collisionPredicateFixtures": 3
+  },
+  "editableSourceReexports": {
+    "byteIdentical": 25,
+    "total": 25
+  },
+  "independentReview": {
+    "initialFindingsFixedAndRechecked": 3,
+    "transitRefinement": "Complete sidecar coverage/hashes, identity transforms, exact unique anchors, actual support triangles reviewed; final checks pass",
+    "busThresholdSamples": 143220,
+    "busRearUnchangedComponents": 526,
+    "runtimeWebGL": "not_run",
+    "markVFloorSupport": "Actual triangles form exact overlapping support rectangles; composed connection also independently checked"
+  },
+  "productionIsolation": {
+    "status": "pass",
+    "protectedDistinctPayloads": 103,
+    "productionFiles": 101,
+    "scope": "static production artifact hashes/references, not browser/GPU verification"
+  },
+  "hostedCI": "not_run: draft PR targets PR6 branch; workflow only main",
+  "runtimeWebGL": "not_run",
+  "deployment": "not_requested_not_run",
+  "revisionParent": "4f19f06b271944e9bb16e8495cb72d628847bd7f",
+  "busCandidate": {
+    "triangles": [
+      11704,
+      2824
+    ],
+    "bytes": [
+      736884,
+      202492
+    ],
+    "candidateOnlyThresholdStrips": 2,
+    "masterInheritedGapM": 0.1
+  },
+  "markV": {
+    "triangles": [
+      11016,
+      2976
+    ],
+    "bytes": [
+      1179164,
+      306220
+    ],
+    "referenceSeats": 22,
+    "profile": "representative A end-car, not full five-car consist"
+  },
+  "markVGangwayCorrection": {
+    "allThreeSourcesAndExports": "updated_and_byte_identical_reexport_verified",
+    "unchangedReferenceNodesPerVariant": 56,
+    "unchangedNonGangwayComponents": [
+      513,
+      231,
+      958
+    ],
+    "actualComposedTriangles": 22032,
+    "composedFloorProbes": 387,
+    "identityQuaternionRegression": "rejected_12_blocking_triangles",
+    "fiveFinalViews": "pixel_and_hash_verified",
+    "qaAdjacentContext": "two_exact_A_car_instances_not_C_car_or_full_consist",
+    "runtimeWebGL": "not_run"
+  }
+}

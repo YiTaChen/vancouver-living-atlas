@@ -1,0 +1,221 @@
+{
+  "status": "rendered",
+  "actualGLBReimport": true,
+  "runtimeWebgl": "not_run",
+  "images": [
+    {
+      "stationId": "waterfront",
+      "file": "qa/previews/waterfront-cutaway.png",
+      "sourceGlb": "exports/waterfront.glb",
+      "sourceSha256": "d2833eea065e684f989e7242cdb8b4d339b530f63e4bd7507ae7f0df6042a881",
+      "renderer": "Blender Cycles CPU",
+      "samples": 20,
+      "view": "orthographic daylight cutaway",
+      "hiddenOnlyInPreview": [
+        "batch-removable-roof-glass",
+        "batch-removable-roof-steel"
+      ],
+      "humanHeightM": 1.81,
+      "runtimeAcceptance": false
+    },
+    {
+      "stationId": "waterfront",
+      "file": "qa/previews/waterfront-platform.png",
+      "sourceGlb": "exports/waterfront.glb",
+      "sourceSha256": "d2833eea065e684f989e7242cdb8b4d339b530f63e4bd7507ae7f0df6042a881",
+      "renderer": "Blender Cycles CPU",
+      "samples": 20,
+      "view": "platform eye-height 1.65m",
+      "hiddenOnlyInPreview": [
+        "batch-removable-roof-glass",
+        "batch-removable-roof-steel"
+      ],
+      "humanHeightM": 1.81,
+      "runtimeAcceptance": false
+    },
+    {
+      "stationId": "burrard",
+      "file": "qa/previews/burrard-cutaway.png",
+      "sourceGlb": "exports/burrard.glb",
+      "sourceSha256": "e3f9fe3e1be45f861254c53a5c3276ee092e39f315193fdfd9416d6c7e224264",
+      "renderer": "Blender Cycles CPU",
+      "samples": 20,
+      "view": "orthographic daylight cutaway",
+      "hiddenOnlyInPreview": [
+        "batch-removable-roof-glass",
+        "batch-removable-roof-steel",
+        "batch-wall-wall"
+      ],
+      "humanHeightM": 1.81,
+      "runtimeAcceptance": false
+    },
+    {
+      "stationId": "burrard",
+      "file": "qa/previews/burrard-platform.png",
+      "sourceGlb": "exports/burrard.glb",
+      "sourceSha256": "e3f9fe3e1be45f861254c53a5c3276ee092e39f315193fdfd9416d6c7e224264",
+      "renderer": "Blender Cycles CPU",
+      "samples": 20,
+      "view": "platform eye-height 1.65m",
+      "hiddenOnlyInPreview": [
+        "batch-removable-roof-glass",
+        "batch-removable-roof-steel",
+        "batch-wall-wall"
+      ],
+      "humanHeightM": 1.81,
+      "runtimeAcceptance": false
+    },
+    {
+      "stationId": "granville",
+      "file": "qa/previews/granville-cutaway.png",
+      "sourceGlb": "exports/granville.glb",
+      "sourceSha256": "1da39eb31cf64ab22144d3bfe96ea853616f4ae47d09b2e9c1ba5352353637b7",
+      "renderer": "Blender Cycles CPU",
+      "samples": 20,
+      "view": "orthographic daylight cutaway",
+      "hiddenOnlyInPreview": [
+        "batch-removable-roof-glass",
+        "batch-removable-roof-steel",
+        "batch-wall-wall"
+      ],
+      "humanHeightM": 1.81,
+      "runtimeAcceptance": false
+    },
+    {
+      "stationId": "granville",
+      "file": "qa/previews/granville-platform.png",
+      "sourceGlb": "exports/granville.glb",
+      "sourceSha256": "1da39eb31cf64ab22144d3bfe96ea853616f4ae47d09b2e9c1ba5352353637b7",
+      "renderer": "Blender Cycles CPU",
+      "samples": 20,
+      "view": "platform eye-height 1.65m",
+      "hiddenOnlyInPreview": [
+        "batch-removable-roof-glass",
+        "batch-removable-roof-steel",
+        "batch-wall-wall"
+      ],
+      "humanHeightM": 1.81,
+      "runtimeAcceptance": false
+    },
+    {
+      "stationId": "stadium-chinatown",
+      "file": "qa/previews/stadium-chinatown-cutaway.png",
+      "sourceGlb": "exports/stadium-chinatown.glb",
+      "sourceSha256": "4ac05ec2618bef2d27745699eb85594fa859721b83f6f50547c74dc9e2664638",
+      "renderer": "Blender Cycles CPU",
+      "samples": 20,
+      "view": "orthographic daylight cutaway",
+      "hiddenOnlyInPreview": [
+        "batch-removable-roof-glass",
+        "batch-removable-roof-steel"
+      ],
+      "humanHeightM": 1.81,
+      "runtimeAcceptance": false
+    },
+    {
+      "stationId": "stadium-chinatown",
+      "file": "qa/previews/stadium-chinatown-platform.png",
+      "sourceGlb": "exports/stadium-chinatown.glb",
+      "sourceSha256": "4ac05ec2618bef2d27745699eb85594fa859721b83f6f50547c74dc9e2664638",
+      "renderer": "Blender Cycles CPU",
+      "samples": 20,
+      "view": "platform eye-height 1.65m",
+      "hiddenOnlyInPreview": [
+        "batch-removable-roof-glass",
+        "batch-removable-roof-steel"
+      ],
+      "humanHeightM": 1.81,
+      "runtimeAcceptance": false
+    },
+    {
+      "stationId": "main-street-science-world",
+      "file": "qa/previews/main-street-science-world-cutaway.png",
+      "sourceGlb": "exports/main-street-science-world.glb",
+      "sourceSha256": "fff6328a70e15612e9344687c1f72f7a2b40009833e0e82a610181814adc29f8",
+      "renderer": "Blender Cycles CPU",
+      "samples": 20,
+      "view": "orthographic daylight cutaway",
+      "hiddenOnlyInPreview": [
+        "batch-removable-roof-glass",
+        "batch-removable-roof-steel"
+      ],
+      "humanHeightM": 1.81,
+      "runtimeAcceptance": false
+    },
+    {
+      "stationId": "main-street-science-world",
+      "file": "qa/previews/main-street-science-world-platform.png",
+      "sourceGlb": "exports/main-street-science-world.glb",
+      "sourceSha256": "fff6328a70e15612e9344687c1f72f7a2b40009833e0e82a610181814adc29f8",
+      "renderer": "Blender Cycles CPU",
+      "samples": 20,
+      "view": "platform eye-height 1.65m",
+      "hiddenOnlyInPreview": [
+        "batch-removable-roof-glass",
+        "batch-removable-roof-steel"
+      ],
+      "humanHeightM": 1.81,
+      "runtimeAcceptance": false
+    },
+    {
+      "stationId": "vancouver-city-centre",
+      "file": "qa/previews/vancouver-city-centre-cutaway.png",
+      "sourceGlb": "exports/vancouver-city-centre.glb",
+      "sourceSha256": "e7aa69e97a495fac4fbe0c243aca0575beabc62ea568615153e992b355ab834a",
+      "renderer": "Blender Cycles CPU",
+      "samples": 20,
+      "view": "orthographic daylight cutaway",
+      "hiddenOnlyInPreview": [
+        "batch-removable-roof-glass",
+        "batch-removable-roof-steel"
+      ],
+      "humanHeightM": 1.81,
+      "runtimeAcceptance": false
+    },
+    {
+      "stationId": "vancouver-city-centre",
+      "file": "qa/previews/vancouver-city-centre-platform.png",
+      "sourceGlb": "exports/vancouver-city-centre.glb",
+      "sourceSha256": "e7aa69e97a495fac4fbe0c243aca0575beabc62ea568615153e992b355ab834a",
+      "renderer": "Blender Cycles CPU",
+      "samples": 20,
+      "view": "platform eye-height 1.65m",
+      "hiddenOnlyInPreview": [
+        "batch-removable-roof-glass",
+        "batch-removable-roof-steel"
+      ],
+      "humanHeightM": 1.81,
+      "runtimeAcceptance": false
+    },
+    {
+      "stationId": "yaletown-roundhouse",
+      "file": "qa/previews/yaletown-roundhouse-cutaway.png",
+      "sourceGlb": "exports/yaletown-roundhouse.glb",
+      "sourceSha256": "3710b640dcfd9512ccdeead84a4392392f559dc7a16219af0e1c61338e62c98e",
+      "renderer": "Blender Cycles CPU",
+      "samples": 20,
+      "view": "orthographic daylight cutaway",
+      "hiddenOnlyInPreview": [
+        "batch-removable-roof-steel",
+        "batch-removable-roof-wood"
+      ],
+      "humanHeightM": 1.81,
+      "runtimeAcceptance": false
+    },
+    {
+      "stationId": "yaletown-roundhouse",
+      "file": "qa/previews/yaletown-roundhouse-platform.png",
+      "sourceGlb": "exports/yaletown-roundhouse.glb",
+      "sourceSha256": "3710b640dcfd9512ccdeead84a4392392f559dc7a16219af0e1c61338e62c98e",
+      "renderer": "Blender Cycles CPU",
+      "samples": 20,
+      "view": "platform eye-height 1.65m",
+      "hiddenOnlyInPreview": [
+        "batch-removable-roof-steel",
+        "batch-removable-roof-wood"
+      ],
+      "humanHeightM": 1.81,
+      "runtimeAcceptance": false
+    }
+  ]
+}

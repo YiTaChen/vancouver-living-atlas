@@ -1,0 +1,101 @@
+{
+  "status": "rendered",
+  "images": [
+    {
+      "line": "canada",
+      "pose": "stored",
+      "file": "qa/previews/canada-bridge-stored.png",
+      "actualGlbSources": [
+        {
+          "path": "skytrain-stations-stage2/exports/vancouver-city-centre.glb",
+          "sha256": "e7aa69e97a495fac4fbe0c243aca0575beabc62ea568615153e992b355ab834a"
+        },
+        {
+          "path": "canada-line-stage2/exports/canada-line-endcar-exterior.lod0.glb",
+          "sha256": "6d6443eb4ef23b0b0a8b08caf00e4b426b83c0485afed6a3baddfaed3a5624dc"
+        },
+        {
+          "path": "canada-line-stage2/exports/canada-line-shared-interior.lod0.glb",
+          "sha256": "aeb8e0a8ea43ec894c62d0dc721f67f2232a401e3ede57f180a8d05b177b770b"
+        }
+      ],
+      "stationBridgeInstance": "bridge-vcc-canada-northbound-car1-door1",
+      "doors": "paired side fully open for both evidence views",
+      "renderer": "Blender Cycles CPU",
+      "qaOnlyLighting": "650W 3m doorway softbox; not in export",
+      "runtimeAcceptance": false
+    },
+    {
+      "line": "canada",
+      "pose": "deployed",
+      "file": "qa/previews/canada-bridge-deployed.png",
+      "actualGlbSources": [
+        {
+          "path": "skytrain-stations-stage2/exports/vancouver-city-centre.glb",
+          "sha256": "e7aa69e97a495fac4fbe0c243aca0575beabc62ea568615153e992b355ab834a"
+        },
+        {
+          "path": "canada-line-stage2/exports/canada-line-endcar-exterior.lod0.glb",
+          "sha256": "6d6443eb4ef23b0b0a8b08caf00e4b426b83c0485afed6a3baddfaed3a5624dc"
+        },
+        {
+          "path": "canada-line-stage2/exports/canada-line-shared-interior.lod0.glb",
+          "sha256": "aeb8e0a8ea43ec894c62d0dc721f67f2232a401e3ede57f180a8d05b177b770b"
+        }
+      ],
+      "stationBridgeInstance": "bridge-vcc-canada-northbound-car1-door1",
+      "doors": "paired side fully open for both evidence views",
+      "renderer": "Blender Cycles CPU",
+      "qaOnlyLighting": "650W 3m doorway softbox; not in export",
+      "runtimeAcceptance": false
+    },
+    {
+      "line": "expo",
+      "pose": "stored",
+      "file": "qa/previews/expo-bridge-stored.png",
+      "actualGlbSources": [
+        {
+          "path": "skytrain-stations-stage2/exports/main-street-science-world.glb",
+          "sha256": "fff6328a70e15612e9344687c1f72f7a2b40009833e0e82a610181814adc29f8"
+        },
+        {
+          "path": "boardable-metro/exports/expo-metro-lead-exterior.lod0.glb",
+          "sha256": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3"
+        },
+        {
+          "path": "boardable-metro/exports/expo-metro-shared-interior.lod0.glb",
+          "sha256": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+        }
+      ],
+      "stationBridgeInstance": "bridge-main-expo-westbound-car1-door1",
+      "doors": "paired side fully open for both evidence views",
+      "renderer": "Blender Cycles CPU",
+      "qaOnlyLighting": "650W 3m doorway softbox; not in export",
+      "runtimeAcceptance": false
+    },
+    {
+      "line": "expo",
+      "pose": "deployed",
+      "file": "qa/previews/expo-bridge-deployed.png",
+      "actualGlbSources": [
+        {
+          "path": "skytrain-stations-stage2/exports/main-street-science-world.glb",
+          "sha256": "fff6328a70e15612e9344687c1f72f7a2b40009833e0e82a610181814adc29f8"
+        },
+        {
+          "path": "boardable-metro/exports/expo-metro-lead-exterior.lod0.glb",
+          "sha256": "583d58754786c98dff1e4c8540f7228a1522acc3036febf7e2948ea511427cc3"
+        },
+        {
+          "path": "boardable-metro/exports/expo-metro-shared-interior.lod0.glb",
+          "sha256": "7799929d846e6c362b14e7bcf6058d56e2310f71fe7f899ce2f11aaf1a187775"
+        }
+      ],
+      "stationBridgeInstance": "bridge-main-expo-westbound-car1-door1",
+      "doors": "paired side fully open for both evidence views",
+      "renderer": "Blender Cycles CPU",
+      "qaOnlyLighting": "650W 3m doorway softbox; not in export",
+      "runtimeAcceptance": false
+    }
+  ]
+}

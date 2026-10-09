@@ -1,0 +1,158 @@
+{
+  "visibility": "domain",
+  "fields": [
+    {
+      "name": "station",
+      "description": null,
+      "annotations": {
+        "sortable": true
+      },
+      "label": "STATION",
+      "type": "text"
+    },
+    {
+      "name": "geom",
+      "description": "Spatial representation of feature",
+      "annotations": {},
+      "label": "Geom",
+      "type": "geo_shape"
+    },
+    {
+      "name": "geo_local_area",
+      "description": "The local area where the feature is found, derived from the feature's coordinates or address in the source system. The City has 22 local areas (also known as local planning areas).\nFor more details, see the Local area boundary data set.",
+      "annotations": {
+        "facet": true
+      },
+      "label": "Geo Local Area",
+      "type": "text"
+    },
+    {
+      "name": "geo_point_2d",
+      "description": null,
+      "annotations": {},
+      "label": "geo_point_2d",
+      "type": "geo_point_2d"
+    }
+  ],
+  "dataset_id": "rapid-transit-stations",
+  "dataset_uid": "da_vljeyi",
+  "has_records": true,
+  "features": [
+    "geo",
+    "analyze"
+  ],
+  "attachments": [],
+  "alternative_exports": [
+    {
+      "id": "rapid_transit_stationsdwg",
+      "title": "rapid_transit_stations.dwg",
+      "description": "",
+      "mimetype": "application/octet-stream",
+      "url": "https://opendata.vancouver.ca/api/explore/v2.1/catalog/datasets/rapid-transit-stations/alternative_exports/rapid_transit_stationsdwg"
+    }
+  ],
+  "data_visible": true,
+  "metas": {
+    "dcat": {
+      "created": null,
+      "issued": null,
+      "creator": null,
+      "contributor": null,
+      "contact_name": null,
+      "contact_email": null,
+      "accrualperiodicity": null,
+      "spatial": null,
+      "temporal": null,
+      "granularity": null,
+      "dataquality": null,
+      "publisher_type": null,
+      "conforms_to": null,
+      "temporal_coverage_start": null,
+      "temporal_coverage_end": null,
+      "accessRights": null,
+      "relation": null
+    },
+    "default": {
+      "title": "Rapid transit stations",
+      "description": "<div><p>This dataset contains the stations of the three rapid transit lines.  Only those portions within the boundaries of the City of Vancouver are shown.</p></div> <h3>Data currency</h3><div><p>This data in City systems is updated as required in the normal course of business.  The extract on this website is updated weekly.  This dataset rarely if ever changes.</p></div>  ",
+      "theme": [
+        "Streets and transportation"
+      ],
+      "keyword": [
+        "rapid transit"
+      ],
+      "license": "Open Government Licence - Vancouver",
+      "license_url": "https://opendata.vancouver.ca/pages/licence/",
+      "language": "en",
+      "metadata_languages": [
+        "en"
+      ],
+      "timezone": null,
+      "modified": "2023-02-22T13:22:23+00:00",
+      "modified_updates_on_metadata_change": false,
+      "modified_updates_on_data_change": true,
+      "data_processed": "2023-02-22T13:22:23+00:00",
+      "metadata_processed": "2026-10-09T13:47:17.988000+00:00",
+      "geographic_reference": null,
+      "geographic_reference_auto": null,
+      "territory": null,
+      "geometry_types": [
+        "Point"
+      ],
+      "bbox": {
+        "type": "Feature",
+        "geometry": {
+          "coordinates": [
+            [
+              [
+                -123.03180676884949,
+                49.286075457930565
+              ],
+              [
+                -123.1218904349953,
+                49.286075457930565
+              ],
+              [
+                -123.1218904349953,
+                49.209547843784094
+              ],
+              [
+                -123.03180676884949,
+                49.209547843784094
+              ],
+              [
+                -123.03180676884949,
+                49.286075457930565
+              ]
+            ]
+          ],
+          "type": "Polygon"
+        },
+        "properties": {}
+      },
+      "publisher": "City of Vancouver",
+      "references": null,
+      "records_count": 22,
+      "attributions": null,
+      "source_domain": null,
+      "source_domain_title": null,
+      "source_domain_address": null,
+      "source_dataset": null,
+      "shared_catalog": null,
+      "federated": false,
+      "parent_domain": null,
+      "update_frequency": null
+    },
+    "custom": {
+      "note": null,
+      "data-owner": [
+        "City of Vancouver"
+      ],
+      "data-team": [
+        "Engineering Services"
+      ],
+      "search-term": "skytrain",
+      "change-log": null
+    }
+  }
+}

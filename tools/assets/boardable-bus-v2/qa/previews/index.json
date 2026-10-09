@@ -1,0 +1,345 @@
+{
+  "status": "rendered_and_pixels_reviewed",
+  "scope": "actual GLB CPU daylight renders, not runtime acceptance",
+  "renders": [
+    {
+      "file": "front-lowfloor-looking-front.png",
+      "sha256": "c179757c86c14b809ffbb8321143f16734ac347dd95c3fe8552838439df40129",
+      "renderer": "Cycles CPU",
+      "samples": 48,
+      "resolution": [
+        1024,
+        683
+      ],
+      "lighting": "daytime QA only",
+      "actualGLBInputs": [
+        {
+          "file": "boardable-bus-v2/exports/city-bus-12m-interior-v2.lod0.glb",
+          "sha256": "bc49cb015a4d02e1d7d68c5812a459d5b49eee822a8aff8d6795709d04fac80e"
+        },
+        {
+          "file": "boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        }
+      ],
+      "eyeVehicleM": [
+        0,
+        1.8,
+        0.15
+      ],
+      "targetVehicleM": [
+        0.1,
+        1.4,
+        4.9
+      ],
+      "qaOnlyCeilingCut": false,
+      "runtimeOrWebGL": false,
+      "colorManagement": "AgX",
+      "exposure": 0,
+      "denoising": false,
+      "maximumBounces": 4,
+      "adaptiveThreshold": 0.03
+    },
+    {
+      "file": "front-priority-overview.png",
+      "sha256": "7830961ef7b501db47dd738803f2fdad720abf03b069c5e388e56cc84fe404bf",
+      "renderer": "Cycles CPU",
+      "samples": 48,
+      "resolution": [
+        1024,
+        683
+      ],
+      "lighting": "daytime QA only",
+      "actualGLBInputs": [
+        {
+          "file": "boardable-bus-v2/exports/city-bus-12m-interior-v2.lod0.glb",
+          "sha256": "bc49cb015a4d02e1d7d68c5812a459d5b49eee822a8aff8d6795709d04fac80e"
+        },
+        {
+          "file": "boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        }
+      ],
+      "eyeVehicleM": [
+        0,
+        1.87,
+        4.12
+      ],
+      "targetVehicleM": [
+        0,
+        1.03,
+        0.65
+      ],
+      "qaOnlyCeilingCut": false,
+      "runtimeOrWebGL": false,
+      "colorManagement": "AgX",
+      "exposure": 0,
+      "denoising": false,
+      "maximumBounces": 4,
+      "adaptiveThreshold": 0.03
+    },
+    {
+      "file": "front-looking-rear-lod0.png",
+      "sha256": "66a1edd67e833fee1d196a8dd8c42186fa45fabb63fa12dbe6c8afe24a8d1004",
+      "renderer": "Cycles CPU",
+      "samples": 48,
+      "resolution": [
+        1024,
+        683
+      ],
+      "lighting": "daytime QA only",
+      "actualGLBInputs": [
+        {
+          "file": "boardable-bus-v2/exports/city-bus-12m-interior-v2.lod0.glb",
+          "sha256": "bc49cb015a4d02e1d7d68c5812a459d5b49eee822a8aff8d6795709d04fac80e"
+        },
+        {
+          "file": "boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        }
+      ],
+      "eyeVehicleM": [
+        0,
+        1.87,
+        4.4
+      ],
+      "targetVehicleM": [
+        0,
+        1.53,
+        -4.65
+      ],
+      "qaOnlyCeilingCut": false,
+      "runtimeOrWebGL": false,
+      "colorManagement": "AgX",
+      "exposure": 0,
+      "denoising": false,
+      "maximumBounces": 4,
+      "adaptiveThreshold": 0.03
+    },
+    {
+      "file": "rear-looking-front-lod0.png",
+      "sha256": "17a85e809f91c9a252744d3174911e126f4a5d0446ffcc213c529904bce8b312",
+      "renderer": "Cycles CPU",
+      "samples": 48,
+      "resolution": [
+        1024,
+        683
+      ],
+      "lighting": "daytime QA only",
+      "actualGLBInputs": [
+        {
+          "file": "boardable-bus-v2/exports/city-bus-12m-interior-v2.lod0.glb",
+          "sha256": "bc49cb015a4d02e1d7d68c5812a459d5b49eee822a8aff8d6795709d04fac80e"
+        },
+        {
+          "file": "boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        }
+      ],
+      "eyeVehicleM": [
+        0,
+        2.03,
+        -4.77
+      ],
+      "targetVehicleM": [
+        0,
+        1.52,
+        4.8
+      ],
+      "qaOnlyCeilingCut": false,
+      "runtimeOrWebGL": false,
+      "colorManagement": "AgX",
+      "exposure": 0,
+      "denoising": false,
+      "maximumBounces": 4,
+      "adaptiveThreshold": 0.03
+    },
+    {
+      "file": "wheelchair-and-rear-door.png",
+      "sha256": "a4f266e702b67b73fe6d80526c4b2d0ea45738393acbaefc372fc5138d95075b",
+      "renderer": "Cycles CPU",
+      "samples": 48,
+      "resolution": [
+        1024,
+        683
+      ],
+      "lighting": "daytime QA only",
+      "actualGLBInputs": [
+        {
+          "file": "boardable-bus-v2/exports/city-bus-12m-interior-v2.lod0.glb",
+          "sha256": "bc49cb015a4d02e1d7d68c5812a459d5b49eee822a8aff8d6795709d04fac80e"
+        },
+        {
+          "file": "boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        }
+      ],
+      "eyeVehicleM": [
+        -0.04,
+        1.72,
+        1.1
+      ],
+      "targetVehicleM": [
+        -0.85,
+        1.15,
+        -0.7
+      ],
+      "qaOnlyCeilingCut": false,
+      "runtimeOrWebGL": false,
+      "colorManagement": "AgX",
+      "exposure": 0,
+      "denoising": false,
+      "maximumBounces": 4,
+      "adaptiveThreshold": 0.03
+    },
+    {
+      "file": "front-door-driver.png",
+      "sha256": "b8b35f7228755a2a09171897c56acec70f6e42d827e7b1e13743fd056c1c42a1",
+      "renderer": "Cycles CPU",
+      "samples": 48,
+      "resolution": [
+        1024,
+        683
+      ],
+      "lighting": "daytime QA only",
+      "actualGLBInputs": [
+        {
+          "file": "boardable-bus-v2/exports/city-bus-12m-interior-v2.lod0.glb",
+          "sha256": "bc49cb015a4d02e1d7d68c5812a459d5b49eee822a8aff8d6795709d04fac80e"
+        },
+        {
+          "file": "boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        }
+      ],
+      "eyeVehicleM": [
+        -2.0,
+        1.65,
+        4.275
+      ],
+      "targetVehicleM": [
+        0.5,
+        1.35,
+        4.85
+      ],
+      "qaOnlyCeilingCut": false,
+      "runtimeOrWebGL": false,
+      "colorManagement": "AgX",
+      "exposure": 0,
+      "denoising": false,
+      "maximumBounces": 4,
+      "adaptiveThreshold": 0.03
+    },
+    {
+      "file": "rear-steps-detail.png",
+      "sha256": "2108c328c55dd8d809c2c7eea47357676a00d2f55929f70c09dd7cc23b580aea",
+      "renderer": "Cycles CPU",
+      "samples": 48,
+      "resolution": [
+        1024,
+        683
+      ],
+      "lighting": "daytime QA only",
+      "actualGLBInputs": [
+        {
+          "file": "boardable-bus-v2/exports/city-bus-12m-interior-v2.lod0.glb",
+          "sha256": "bc49cb015a4d02e1d7d68c5812a459d5b49eee822a8aff8d6795709d04fac80e"
+        },
+        {
+          "file": "boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        }
+      ],
+      "eyeVehicleM": [
+        0,
+        1.48,
+        -0.55
+      ],
+      "targetVehicleM": [
+        0,
+        1.03,
+        -3.7
+      ],
+      "qaOnlyCeilingCut": false,
+      "runtimeOrWebGL": false,
+      "colorManagement": "AgX",
+      "exposure": 0,
+      "denoising": false,
+      "maximumBounces": 4,
+      "adaptiveThreshold": 0.03
+    },
+    {
+      "file": "cutaway-layout.png",
+      "sha256": "1e9bebbbd4452af2e6564a20e5b06584b56b6301be7d48ad9878eebca8bab47b",
+      "renderer": "Cycles CPU",
+      "samples": 48,
+      "resolution": [
+        1024,
+        683
+      ],
+      "lighting": "daytime QA only",
+      "actualGLBInputs": [
+        {
+          "file": "boardable-bus-v2/exports/city-bus-12m-interior-v2.lod0.glb",
+          "sha256": "bc49cb015a4d02e1d7d68c5812a459d5b49eee822a8aff8d6795709d04fac80e"
+        }
+      ],
+      "eyeVehicleM": [
+        8.2,
+        8.8,
+        11.0
+      ],
+      "targetVehicleM": [
+        0,
+        1.0,
+        0.1
+      ],
+      "qaOnlyCeilingCut": true,
+      "runtimeOrWebGL": false,
+      "colorManagement": "AgX",
+      "exposure": 0,
+      "denoising": false,
+      "maximumBounces": 4,
+      "adaptiveThreshold": 0.03
+    },
+    {
+      "file": "front-looking-rear-lod1.png",
+      "sha256": "a4530e9c561f721970fee3b726ce9e5b1cb6784e132630e4262ab6fda43e4666",
+      "renderer": "Cycles CPU",
+      "samples": 48,
+      "resolution": [
+        1024,
+        683
+      ],
+      "lighting": "daytime QA only",
+      "actualGLBInputs": [
+        {
+          "file": "boardable-bus-v2/exports/city-bus-12m-interior-v2.lod1.glb",
+          "sha256": "c86bdf4737f28af73cd9a6f8d638b09f939ff90cd6e5a5df51e9839ec509624a"
+        },
+        {
+          "file": "boardable-bus/exports/city-bus-12m-exterior.lod1.glb",
+          "sha256": "a4ccbb6a4b2f032a4d950ee0883c51ebe1ecd314734b539c60aa5fd6c605b3f0"
+        }
+      ],
+      "eyeVehicleM": [
+        0,
+        1.87,
+        4.4
+      ],
+      "targetVehicleM": [
+        0,
+        1.53,
+        -4.65
+      ],
+      "qaOnlyCeilingCut": false,
+      "runtimeOrWebGL": false,
+      "colorManagement": "AgX",
+      "exposure": 0,
+      "denoising": false,
+      "maximumBounces": 4,
+      "adaptiveThreshold": 0.03
+    }
+  ],
+  "visualReview": "../visual-review.json"
+}

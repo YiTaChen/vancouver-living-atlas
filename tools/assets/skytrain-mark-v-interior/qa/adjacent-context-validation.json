@@ -1,0 +1,92 @@
+{
+  "status": "pass",
+  "scope": "Actual world-space triangles from both GLB instances in continuity-render setup; QA context only",
+  "rendererScriptSha256": "6ab2ed6b530f3943f70bbf849ea47a436642aecadd078c9849797c9db62f62ab",
+  "sourceGLB": "exports/mark-v-a-car-interior.lod0.glb",
+  "sourceSha256": "280aa59559444ac15d6c2d712c61e87b846076632d8127f116e20424a086c984",
+  "instances": 2,
+  "triangles": 22032,
+  "openPrismM": {
+    "min": [
+      -0.6,
+      0.035,
+      -9.47
+    ],
+    "max": [
+      0.6,
+      2.05,
+      -7.6
+    ]
+  },
+  "blockingTriangles": 0,
+  "floorSupportProbes": 387,
+  "floorHeightRangeM": [
+    0.0,
+    0.002499999944120646
+  ],
+  "bridgeJoinZM": -8.535,
+  "transformsBlender": [
+    {
+      "name": "vehicle",
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "vehicle.001",
+      "matrix": [
+        [
+          -1.0,
+          8.742277657347586e-08,
+          0.0,
+          0.0
+        ],
+        [
+          -8.742277657347586e-08,
+          -1.0,
+          0.0,
+          17.06999969482422
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  ],
+  "blender": "4.3.2",
+  "runtime": "not_run",
+  "notCcarReconstruction": true,
+  "notFullConsist": true
+}

@@ -1,0 +1,60 @@
+{
+  "status": "offline_handoff_ready",
+  "scope": "only tools/assets/skytrain-stations-stage2; no app/workflow/dependency/old-package modifications; no commit/push",
+  "editableBlendSources": 9,
+  "glbFiles": 9,
+  "stationLayouts": 7,
+  "directionalPlatformStops": 16,
+  "floorSurfaces": 167,
+  "doorAndThresholdInterfaces": 156,
+  "stationAnchorChecks": 184,
+  "glbTriangles": 21360,
+  "glbBytes": 1689056,
+  "cpuGlbReimportPreviews": 18,
+  "commonPackageValidation": "pass",
+  "topologyPositiveValidation": "pass",
+  "rejectedNegativeFixtures": 10,
+  "bridgeSupportRays": 9828,
+  "sampledBridgeMotionPoses": 5616,
+  "bridgeCollisionPredicateFixtures": 3,
+  "editableSourceRoundtrip": "9/9 byte-identical reexports",
+  "thresholdGeometry": "original representative Atlas gameplay aid, not real station equipment; 15mm maximum rise and tapered ends",
+  "runtimeStatus": "not_run; rideReady=false",
+  "sourcePixels": "seven official maps, official Main Street upgrade rendering, official 2008 Canada source page inspected; full publisher bytes excluded",
+  "publicationExcludes": [
+    "references/*.pdf",
+    "references/*.png",
+    "references/*.jpg",
+    "source/*.blend1",
+    "__pycache__",
+    "qa/reexport"
+  ],
+  "remaining": [
+    "world terrain/rail survey placement",
+    "runtime rail routes/boarding/door interlocks",
+    "working elevator cabins/doors",
+    "continuous collision and passenger testing",
+    "WebGL/lifecycle/performance QA",
+    "faithful station architecture and Stadium third track"
+  ],
+  "bridgeDoorHeadClearance": {
+    "expo": {
+      "sourceMinimumOpeningHeightM": 2.05,
+      "measuredBridgeRiseM": 0.015,
+      "remainingDoorClearanceM": 2.035,
+      "referenceHumanHeightM": 1.95,
+      "referenceHeadMarginM": 0.085,
+      "doorMinimum2mPass": true,
+      "basis": "source door contract with source-package geometry verification; actual GLB bridge measured15mm; cabin headroom is separate"
+    },
+    "canada": {
+      "sourceMinimumOpeningHeightM": 2.13,
+      "measuredBridgeRiseM": 0.015,
+      "remainingDoorClearanceM": 2.115,
+      "referenceHumanHeightM": 1.95,
+      "referenceHeadMarginM": 0.165,
+      "doorMinimum2mPass": true,
+      "basis": "source door contract with source-package geometry verification; actual GLB bridge measured15mm; cabin headroom is separate"
+    }
+  }
+}
