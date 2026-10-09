@@ -1,0 +1,870 @@
+{
+  "schemaVersion": 1,
+  "packageId": "city-life-interactive",
+  "units": "m",
+  "baseRevision": "9efce79601deac6a0648cf8e158f3935cbb46f51",
+  "status": "offline_candidate",
+  "integrationStatus": "runtime_pending_webgl",
+  "coordinateSystem": {
+    "authoring": "Blender +Z up -Y front",
+    "runtime": "glTF +Y up +Z front"
+  },
+  "provenance": {
+    "description": "Original project silhouette refinement with authored 14-bone skin and six clips; reconstructed 2026-10-09, not byte recovery of old unpublished files",
+    "baseGenerator": "tools/assets/city-life-pedestrians/build.py",
+    "baseGeneratorSha256": "76a2ba2916c8dd1a1f08a599a8f93dbf308d3cd7b70169739a7d7e8541ec0ec3",
+    "generatorSha256": "3dc8185484767eb521325d2b33bef04ed8a7c17dabc7ea4c0b7a313d00ae7de9",
+    "license": "Vancouver Living Atlas Noncommercial Research and Attribution 1.0"
+  },
+  "assets": [
+    {
+      "id": "pedestrian-commuter",
+      "file": "exports/pedestrian-commuter.glb",
+      "source": "source/pedestrian-commuter.blend",
+      "sha256": "18bf4802fda0586fab40989cc8a607f5cb72e0b6290cf2f3d7679f212233a740",
+      "sourceSha256": "e1372d1e659d10741af6e7349a017df6df9122fbafd98f931efd87e8c370537d",
+      "measurements": {
+        "boundsM": {
+          "min": [
+            -0.35619956254959106,
+            0.0,
+            -0.27238789200782776
+          ],
+          "max": [
+            0.35619956254959106,
+            1.7799999713897705,
+            0.16014015674591064
+          ],
+          "size": [
+            0.7123991250991821,
+            1.7799999713897705,
+            0.4325280487537384
+          ]
+        },
+        "triangles": 2520,
+        "vertices": 2505,
+        "primitives": 1,
+        "bytes": 226428,
+        "embeddedImageBytes": 0,
+        "geometryBytes": 226428,
+        "images": [],
+        "nodeNames": [
+          "head",
+          "neck",
+          "left-forearm",
+          "left-upper-arm",
+          "right-forearm",
+          "right-upper-arm",
+          "spine",
+          "left-foot",
+          "left-shin",
+          "left-thigh",
+          "right-foot",
+          "right-shin",
+          "right-thigh",
+          "pelvis",
+          "interactive-body",
+          "interactive-rig"
+        ],
+        "materialNames": [
+          "pedestrian-vertex-color-opaque"
+        ],
+        "boundsScope": "rest-pose scene node transforms; no skin deformation",
+        "skins": 1
+      },
+      "skeletonBones": 14,
+      "animationClips": [
+        "guide",
+        "idle",
+        "look",
+        "sit",
+        "walk",
+        "yield"
+      ],
+      "datum": "standing foot sole y=0; sit animation is representative seated pose, align pelvis bone explicitly",
+      "collision": {
+        "kind": "capsule",
+        "radiusM": 0.29,
+        "heightM": 1.7799999713897705
+      },
+      "productionEnabled": false,
+      "taskId": "CITY-LIFE-NEAR",
+      "variant": "commuter",
+      "kind": "near-interactive-character",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/pedestrian-commuter.glb",
+          "source": "source/pedestrian-commuter.blend",
+          "sha256": "18bf4802fda0586fab40989cc8a607f5cb72e0b6290cf2f3d7679f212233a740",
+          "sourceSha256": "e1372d1e659d10741af6e7349a017df6df9122fbafd98f931efd87e8c370537d",
+          "boundsM": {
+            "min": [
+              -0.35619956254959106,
+              0.0,
+              -0.27238789200782776
+            ],
+            "max": [
+              0.35619956254959106,
+              1.7799999713897705,
+              0.16014015674591064
+            ],
+            "size": [
+              0.7123991250991821,
+              1.7799999713897705,
+              0.4325280487537384
+            ]
+          },
+          "triangles": 2520,
+          "vertices": 2505,
+          "primitives": 1,
+          "bytes": 226428,
+          "embeddedImageBytes": 0,
+          "geometryBytes": 226428,
+          "images": [],
+          "nodeNames": [
+            "head",
+            "neck",
+            "left-forearm",
+            "left-upper-arm",
+            "right-forearm",
+            "right-upper-arm",
+            "spine",
+            "left-foot",
+            "left-shin",
+            "left-thigh",
+            "right-foot",
+            "right-shin",
+            "right-thigh",
+            "pelvis",
+            "interactive-body",
+            "interactive-rig"
+          ],
+          "materialNames": [
+            "pedestrian-vertex-color-opaque"
+          ],
+          "boundsScope": "rest-pose scene node transforms; no skin deformation",
+          "skins": 1
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.35619956254959106,
+          0.0,
+          -0.27238789200782776
+        ],
+        "max": [
+          0.35619956254959106,
+          1.7799999713897705,
+          0.16014015674591064
+        ],
+        "size": [
+          0.7123991250991821,
+          1.7799999713897705,
+          0.4325280487537384
+        ]
+      },
+      "expectedDimensionsM": {
+        "dressedHeight": 1.7799999713897705
+      },
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "original modeled geometry, actual rest-pose accessor measurement",
+      "pivot": {
+        "translationM": [
+          0,
+          0,
+          0
+        ],
+        "datum": "foot-sole"
+      },
+      "attachmentDatum": "feet at standing root; seated pelvis bone must be aligned",
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "pedestrian-vertex-color-opaque",
+          "role": "opaque-vertex-color"
+        }
+      ],
+      "textureMode": "vertex-color",
+      "textureCost": {
+        "downloadBytes": 0,
+        "gpuBytesWithMips": 0
+      },
+      "lodPolicy": {
+        "nearOnly": true,
+        "fallback": "original matching rigid-limb-v1 background silhouette",
+        "maximumSharedNearSkeletons": 4
+      },
+      "clearance": {
+        "runtimeDoorAndSeatFit": "not_run",
+        "measuredRestHeightM": 1.7799999713897705
+      },
+      "anchors": {
+        "standingFeetM": [
+          0,
+          0,
+          0
+        ],
+        "seatedPelvisBone": "pelvis"
+      },
+      "placementCompatibility": {
+        "requiresSameSurfaceIdentity": true,
+        "uniformScaleOnly": true
+      },
+      "intendedConsumer": {
+        "module": "lib/city/city-life/interactive-renderer-candidate.ts",
+        "productionEnabled": false
+      },
+      "offlineChecks": {
+        "geometryAndSkin": "pass",
+        "sourceReexport": "qa/source-roundtrip.json",
+        "CPUPreviews": "qa/preview-evidence.json"
+      },
+      "runtimeChecks": {
+        "status": "not_run"
+      }
+    },
+    {
+      "id": "pedestrian-raincoat",
+      "file": "exports/pedestrian-raincoat.glb",
+      "source": "source/pedestrian-raincoat.blend",
+      "sha256": "97887cbae7ae59b71da76e4c57bf14cc97e9aceca88534a63fcb5fb9ae87edc2",
+      "sourceSha256": "28309d4e8510534f0140852572c7accd456d5ebbf750123bc4984beacba57a2e",
+      "measurements": {
+        "boundsM": {
+          "min": [
+            -0.3427211046218872,
+            0.0,
+            -0.12524999678134918
+          ],
+          "max": [
+            0.3427211046218872,
+            1.6700000762939453,
+            0.148908331990242
+          ],
+          "size": [
+            0.6854422092437744,
+            1.6700000762939453,
+            0.2741583287715912
+          ]
+        },
+        "triangles": 2520,
+        "vertices": 2539,
+        "primitives": 1,
+        "bytes": 228124,
+        "embeddedImageBytes": 0,
+        "geometryBytes": 228124,
+        "images": [],
+        "nodeNames": [
+          "head",
+          "neck",
+          "left-forearm",
+          "left-upper-arm",
+          "right-forearm",
+          "right-upper-arm",
+          "spine",
+          "left-foot",
+          "left-shin",
+          "left-thigh",
+          "right-foot",
+          "right-shin",
+          "right-thigh",
+          "pelvis",
+          "interactive-body",
+          "interactive-rig"
+        ],
+        "materialNames": [
+          "pedestrian-vertex-color-opaque"
+        ],
+        "boundsScope": "rest-pose scene node transforms; no skin deformation",
+        "skins": 1
+      },
+      "skeletonBones": 14,
+      "animationClips": [
+        "guide",
+        "idle",
+        "look",
+        "sit",
+        "walk",
+        "yield"
+      ],
+      "datum": "standing foot sole y=0; sit animation is representative seated pose, align pelvis bone explicitly",
+      "collision": {
+        "kind": "capsule",
+        "radiusM": 0.29,
+        "heightM": 1.6700000762939453
+      },
+      "productionEnabled": false,
+      "taskId": "CITY-LIFE-NEAR",
+      "variant": "raincoat",
+      "kind": "near-interactive-character",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/pedestrian-raincoat.glb",
+          "source": "source/pedestrian-raincoat.blend",
+          "sha256": "97887cbae7ae59b71da76e4c57bf14cc97e9aceca88534a63fcb5fb9ae87edc2",
+          "sourceSha256": "28309d4e8510534f0140852572c7accd456d5ebbf750123bc4984beacba57a2e",
+          "boundsM": {
+            "min": [
+              -0.3427211046218872,
+              0.0,
+              -0.12524999678134918
+            ],
+            "max": [
+              0.3427211046218872,
+              1.6700000762939453,
+              0.148908331990242
+            ],
+            "size": [
+              0.6854422092437744,
+              1.6700000762939453,
+              0.2741583287715912
+            ]
+          },
+          "triangles": 2520,
+          "vertices": 2539,
+          "primitives": 1,
+          "bytes": 228124,
+          "embeddedImageBytes": 0,
+          "geometryBytes": 228124,
+          "images": [],
+          "nodeNames": [
+            "head",
+            "neck",
+            "left-forearm",
+            "left-upper-arm",
+            "right-forearm",
+            "right-upper-arm",
+            "spine",
+            "left-foot",
+            "left-shin",
+            "left-thigh",
+            "right-foot",
+            "right-shin",
+            "right-thigh",
+            "pelvis",
+            "interactive-body",
+            "interactive-rig"
+          ],
+          "materialNames": [
+            "pedestrian-vertex-color-opaque"
+          ],
+          "boundsScope": "rest-pose scene node transforms; no skin deformation",
+          "skins": 1
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.3427211046218872,
+          0.0,
+          -0.12524999678134918
+        ],
+        "max": [
+          0.3427211046218872,
+          1.6700000762939453,
+          0.148908331990242
+        ],
+        "size": [
+          0.6854422092437744,
+          1.6700000762939453,
+          0.2741583287715912
+        ]
+      },
+      "expectedDimensionsM": {
+        "dressedHeight": 1.6700000762939453
+      },
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "original modeled geometry, actual rest-pose accessor measurement",
+      "pivot": {
+        "translationM": [
+          0,
+          0,
+          0
+        ],
+        "datum": "foot-sole"
+      },
+      "attachmentDatum": "feet at standing root; seated pelvis bone must be aligned",
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "pedestrian-vertex-color-opaque",
+          "role": "opaque-vertex-color"
+        }
+      ],
+      "textureMode": "vertex-color",
+      "textureCost": {
+        "downloadBytes": 0,
+        "gpuBytesWithMips": 0
+      },
+      "lodPolicy": {
+        "nearOnly": true,
+        "fallback": "original matching rigid-limb-v1 background silhouette",
+        "maximumSharedNearSkeletons": 4
+      },
+      "clearance": {
+        "runtimeDoorAndSeatFit": "not_run",
+        "measuredRestHeightM": 1.6700000762939453
+      },
+      "anchors": {
+        "standingFeetM": [
+          0,
+          0,
+          0
+        ],
+        "seatedPelvisBone": "pelvis"
+      },
+      "placementCompatibility": {
+        "requiresSameSurfaceIdentity": true,
+        "uniformScaleOnly": true
+      },
+      "intendedConsumer": {
+        "module": "lib/city/city-life/interactive-renderer-candidate.ts",
+        "productionEnabled": false
+      },
+      "offlineChecks": {
+        "geometryAndSkin": "pass",
+        "sourceReexport": "qa/source-roundtrip.json",
+        "CPUPreviews": "qa/preview-evidence.json"
+      },
+      "runtimeChecks": {
+        "status": "not_run"
+      }
+    },
+    {
+      "id": "pedestrian-runner",
+      "file": "exports/pedestrian-runner.glb",
+      "source": "source/pedestrian-runner.blend",
+      "sha256": "0a8f0531ed4c2d9b52d44ae06516c6785ef827318a5518b5106b646353c26019",
+      "sourceSha256": "9a35dccb7685b2bbbb8ccd831594d70d6db3807f352dce2bbee4179070062a0d",
+      "measurements": {
+        "boundsM": {
+          "min": [
+            -0.33874860405921936,
+            0.0,
+            -0.14027932286262512
+          ],
+          "max": [
+            0.33874860405921936,
+            1.8600000143051147,
+            0.19743016362190247
+          ],
+          "size": [
+            0.6774972081184387,
+            1.8600000143051147,
+            0.3377094864845276
+          ]
+        },
+        "triangles": 2544,
+        "vertices": 2546,
+        "primitives": 1,
+        "bytes": 228612,
+        "embeddedImageBytes": 0,
+        "geometryBytes": 228612,
+        "images": [],
+        "nodeNames": [
+          "head",
+          "neck",
+          "left-forearm",
+          "left-upper-arm",
+          "right-forearm",
+          "right-upper-arm",
+          "spine",
+          "left-foot",
+          "left-shin",
+          "left-thigh",
+          "right-foot",
+          "right-shin",
+          "right-thigh",
+          "pelvis",
+          "interactive-body",
+          "interactive-rig"
+        ],
+        "materialNames": [
+          "pedestrian-vertex-color-opaque"
+        ],
+        "boundsScope": "rest-pose scene node transforms; no skin deformation",
+        "skins": 1
+      },
+      "skeletonBones": 14,
+      "animationClips": [
+        "guide",
+        "idle",
+        "look",
+        "sit",
+        "walk",
+        "yield"
+      ],
+      "datum": "standing foot sole y=0; sit animation is representative seated pose, align pelvis bone explicitly",
+      "collision": {
+        "kind": "capsule",
+        "radiusM": 0.29,
+        "heightM": 1.8600000143051147
+      },
+      "productionEnabled": false,
+      "taskId": "CITY-LIFE-NEAR",
+      "variant": "runner",
+      "kind": "near-interactive-character",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/pedestrian-runner.glb",
+          "source": "source/pedestrian-runner.blend",
+          "sha256": "0a8f0531ed4c2d9b52d44ae06516c6785ef827318a5518b5106b646353c26019",
+          "sourceSha256": "9a35dccb7685b2bbbb8ccd831594d70d6db3807f352dce2bbee4179070062a0d",
+          "boundsM": {
+            "min": [
+              -0.33874860405921936,
+              0.0,
+              -0.14027932286262512
+            ],
+            "max": [
+              0.33874860405921936,
+              1.8600000143051147,
+              0.19743016362190247
+            ],
+            "size": [
+              0.6774972081184387,
+              1.8600000143051147,
+              0.3377094864845276
+            ]
+          },
+          "triangles": 2544,
+          "vertices": 2546,
+          "primitives": 1,
+          "bytes": 228612,
+          "embeddedImageBytes": 0,
+          "geometryBytes": 228612,
+          "images": [],
+          "nodeNames": [
+            "head",
+            "neck",
+            "left-forearm",
+            "left-upper-arm",
+            "right-forearm",
+            "right-upper-arm",
+            "spine",
+            "left-foot",
+            "left-shin",
+            "left-thigh",
+            "right-foot",
+            "right-shin",
+            "right-thigh",
+            "pelvis",
+            "interactive-body",
+            "interactive-rig"
+          ],
+          "materialNames": [
+            "pedestrian-vertex-color-opaque"
+          ],
+          "boundsScope": "rest-pose scene node transforms; no skin deformation",
+          "skins": 1
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.33874860405921936,
+          0.0,
+          -0.14027932286262512
+        ],
+        "max": [
+          0.33874860405921936,
+          1.8600000143051147,
+          0.19743016362190247
+        ],
+        "size": [
+          0.6774972081184387,
+          1.8600000143051147,
+          0.3377094864845276
+        ]
+      },
+      "expectedDimensionsM": {
+        "dressedHeight": 1.8600000143051147
+      },
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "original modeled geometry, actual rest-pose accessor measurement",
+      "pivot": {
+        "translationM": [
+          0,
+          0,
+          0
+        ],
+        "datum": "foot-sole"
+      },
+      "attachmentDatum": "feet at standing root; seated pelvis bone must be aligned",
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "pedestrian-vertex-color-opaque",
+          "role": "opaque-vertex-color"
+        }
+      ],
+      "textureMode": "vertex-color",
+      "textureCost": {
+        "downloadBytes": 0,
+        "gpuBytesWithMips": 0
+      },
+      "lodPolicy": {
+        "nearOnly": true,
+        "fallback": "original matching rigid-limb-v1 background silhouette",
+        "maximumSharedNearSkeletons": 4
+      },
+      "clearance": {
+        "runtimeDoorAndSeatFit": "not_run",
+        "measuredRestHeightM": 1.8600000143051147
+      },
+      "anchors": {
+        "standingFeetM": [
+          0,
+          0,
+          0
+        ],
+        "seatedPelvisBone": "pelvis"
+      },
+      "placementCompatibility": {
+        "requiresSameSurfaceIdentity": true,
+        "uniformScaleOnly": true
+      },
+      "intendedConsumer": {
+        "module": "lib/city/city-life/interactive-renderer-candidate.ts",
+        "productionEnabled": false
+      },
+      "offlineChecks": {
+        "geometryAndSkin": "pass",
+        "sourceReexport": "qa/source-roundtrip.json",
+        "CPUPreviews": "qa/preview-evidence.json"
+      },
+      "runtimeChecks": {
+        "status": "not_run"
+      }
+    },
+    {
+      "id": "pedestrian-tote",
+      "file": "exports/pedestrian-tote.glb",
+      "source": "source/pedestrian-tote.blend",
+      "sha256": "fb02862aa443810824ba0c17decb13e7f6f1fc511b49a26a72ed23fb82d595df",
+      "sourceSha256": "8bb1e0673f6d3c76d0edeac1f44800d99b1bf2fd150675d14dde99abbffd1ffc",
+      "measurements": {
+        "boundsM": {
+          "min": [
+            -0.40972620248794556,
+            0.0,
+            -0.15772180259227753
+          ],
+          "max": [
+            0.3454107344150543,
+            1.600000023841858,
+            0.14063526690006256
+          ],
+          "size": [
+            0.7551369369029999,
+            1.600000023841858,
+            0.2983570694923401
+          ]
+        },
+        "triangles": 2712,
+        "vertices": 2744,
+        "primitives": 1,
+        "bytes": 240740,
+        "embeddedImageBytes": 0,
+        "geometryBytes": 240740,
+        "images": [],
+        "nodeNames": [
+          "head",
+          "neck",
+          "left-forearm",
+          "left-upper-arm",
+          "right-forearm",
+          "right-upper-arm",
+          "spine",
+          "left-foot",
+          "left-shin",
+          "left-thigh",
+          "right-foot",
+          "right-shin",
+          "right-thigh",
+          "pelvis",
+          "interactive-body",
+          "interactive-rig"
+        ],
+        "materialNames": [
+          "pedestrian-vertex-color-opaque"
+        ],
+        "boundsScope": "rest-pose scene node transforms; no skin deformation",
+        "skins": 1
+      },
+      "skeletonBones": 14,
+      "animationClips": [
+        "guide",
+        "idle",
+        "look",
+        "sit",
+        "walk",
+        "yield"
+      ],
+      "datum": "standing foot sole y=0; sit animation is representative seated pose, align pelvis bone explicitly",
+      "collision": {
+        "kind": "capsule",
+        "radiusM": 0.29,
+        "heightM": 1.600000023841858
+      },
+      "productionEnabled": false,
+      "taskId": "CITY-LIFE-NEAR",
+      "variant": "tote",
+      "kind": "near-interactive-character",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/pedestrian-tote.glb",
+          "source": "source/pedestrian-tote.blend",
+          "sha256": "fb02862aa443810824ba0c17decb13e7f6f1fc511b49a26a72ed23fb82d595df",
+          "sourceSha256": "8bb1e0673f6d3c76d0edeac1f44800d99b1bf2fd150675d14dde99abbffd1ffc",
+          "boundsM": {
+            "min": [
+              -0.40972620248794556,
+              0.0,
+              -0.15772180259227753
+            ],
+            "max": [
+              0.3454107344150543,
+              1.600000023841858,
+              0.14063526690006256
+            ],
+            "size": [
+              0.7551369369029999,
+              1.600000023841858,
+              0.2983570694923401
+            ]
+          },
+          "triangles": 2712,
+          "vertices": 2744,
+          "primitives": 1,
+          "bytes": 240740,
+          "embeddedImageBytes": 0,
+          "geometryBytes": 240740,
+          "images": [],
+          "nodeNames": [
+            "head",
+            "neck",
+            "left-forearm",
+            "left-upper-arm",
+            "right-forearm",
+            "right-upper-arm",
+            "spine",
+            "left-foot",
+            "left-shin",
+            "left-thigh",
+            "right-foot",
+            "right-shin",
+            "right-thigh",
+            "pelvis",
+            "interactive-body",
+            "interactive-rig"
+          ],
+          "materialNames": [
+            "pedestrian-vertex-color-opaque"
+          ],
+          "boundsScope": "rest-pose scene node transforms; no skin deformation",
+          "skins": 1
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.40972620248794556,
+          0.0,
+          -0.15772180259227753
+        ],
+        "max": [
+          0.3454107344150543,
+          1.600000023841858,
+          0.14063526690006256
+        ],
+        "size": [
+          0.7551369369029999,
+          1.600000023841858,
+          0.2983570694923401
+        ]
+      },
+      "expectedDimensionsM": {
+        "dressedHeight": 1.600000023841858
+      },
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "original modeled geometry, actual rest-pose accessor measurement",
+      "pivot": {
+        "translationM": [
+          0,
+          0,
+          0
+        ],
+        "datum": "foot-sole"
+      },
+      "attachmentDatum": "feet at standing root; seated pelvis bone must be aligned",
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "pedestrian-vertex-color-opaque",
+          "role": "opaque-vertex-color"
+        }
+      ],
+      "textureMode": "vertex-color",
+      "textureCost": {
+        "downloadBytes": 0,
+        "gpuBytesWithMips": 0
+      },
+      "lodPolicy": {
+        "nearOnly": true,
+        "fallback": "original matching rigid-limb-v1 background silhouette",
+        "maximumSharedNearSkeletons": 4
+      },
+      "clearance": {
+        "runtimeDoorAndSeatFit": "not_run",
+        "measuredRestHeightM": 1.600000023841858
+      },
+      "anchors": {
+        "standingFeetM": [
+          0,
+          0,
+          0
+        ],
+        "seatedPelvisBone": "pelvis"
+      },
+      "placementCompatibility": {
+        "requiresSameSurfaceIdentity": true,
+        "uniformScaleOnly": true
+      },
+      "intendedConsumer": {
+        "module": "lib/city/city-life/interactive-renderer-candidate.ts",
+        "productionEnabled": false
+      },
+      "offlineChecks": {
+        "geometryAndSkin": "pass",
+        "sourceReexport": "qa/source-roundtrip.json",
+        "CPUPreviews": "qa/preview-evidence.json"
+      },
+      "runtimeChecks": {
+        "status": "not_run"
+      }
+    }
+  ],
+  "textures": [],
+  "runtimeChecks": {
+    "status": "not_run",
+    "required": [
+      "skin/normal and depth pass rendering",
+      "foot slide and self intersection",
+      "seat pelvis/door clearance on actual vehicle",
+      "upgrade/downgrade identity and phase",
+      "bounded mixers and shared resource lifetime",
+      "touch and hidden-tab behavior"
+    ]
+  },
+  "cost": {
+    "geometryBytes": 923904,
+    "textureBytes": 0,
+    "maximumNearSkeletons": 4,
+    "notMeasured": "GPU draw/frame/performance"
+  },
+  "version": "1.0.0",
+  "reexportCommand": "blender -b -t 2 --python-exit-code 1 --python tools/assets/city-life-interactive/export.py -- --output /tmp/interactive-reexport",
+  "validationCommand": "python3 tools/assets/city-life-interactive/validate.py"
+}

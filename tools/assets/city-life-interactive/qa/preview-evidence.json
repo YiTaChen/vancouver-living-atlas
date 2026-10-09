@@ -1,0 +1,295 @@
+{
+  "renderer": "Blender Cycles CPU",
+  "source": "actual exported GLB reimport",
+  "runtimeWebGL": "not_run",
+  "samples": [
+    {
+      "file": "exports/pedestrian-commuter.glb",
+      "sha256": "18bf4802fda0586fab40989cc8a607f5cb72e0b6290cf2f3d7679f212233a740",
+      "pose": "idle",
+      "frame": 1,
+      "blenderZUpBounds": {
+        "min": [
+          -0.9510578513145447,
+          -0.9999999403953552,
+          -1.0
+        ],
+        "max": [
+          0.9510578513145447,
+          0.9999999403953552,
+          1.0
+        ]
+      }
+    },
+    {
+      "file": "exports/pedestrian-raincoat.glb",
+      "sha256": "97887cbae7ae59b71da76e4c57bf14cc97e9aceca88534a63fcb5fb9ae87edc2",
+      "pose": "idle",
+      "frame": 1,
+      "blenderZUpBounds": {
+        "min": [
+          -0.3427208662033081,
+          -0.148908331990242,
+          -3.565553896578422e-08
+        ],
+        "max": [
+          0.34272080659866333,
+          0.12524999678134918,
+          1.6700000762939453
+        ]
+      }
+    },
+    {
+      "file": "exports/pedestrian-runner.glb",
+      "sha256": "0a8f0531ed4c2d9b52d44ae06516c6785ef827318a5518b5106b646353c26019",
+      "pose": "idle",
+      "frame": 1,
+      "blenderZUpBounds": {
+        "min": [
+          -0.9510578513145447,
+          -0.9999999403953552,
+          -1.0
+        ],
+        "max": [
+          0.9510578513145447,
+          0.9999999403953552,
+          1.0
+        ]
+      }
+    },
+    {
+      "file": "exports/pedestrian-tote.glb",
+      "sha256": "fb02862aa443810824ba0c17decb13e7f6f1fc511b49a26a72ed23fb82d595df",
+      "pose": "idle",
+      "frame": 1,
+      "blenderZUpBounds": {
+        "min": [
+          -0.40972650051116943,
+          -0.14063528180122375,
+          -3.1167814995569643e-09
+        ],
+        "max": [
+          0.34541091322898865,
+          0.15772180259227753,
+          1.6000001430511475
+        ]
+      }
+    },
+    {
+      "file": "exports/pedestrian-commuter.glb",
+      "sha256": "18bf4802fda0586fab40989cc8a607f5cb72e0b6290cf2f3d7679f212233a740",
+      "pose": "walk",
+      "frame": 7,
+      "blenderZUpBounds": {
+        "min": [
+          -0.9510578513145447,
+          -0.9999999403953552,
+          -1.0
+        ],
+        "max": [
+          0.9510578513145447,
+          0.9999999403953552,
+          1.0
+        ]
+      }
+    },
+    {
+      "file": "exports/pedestrian-raincoat.glb",
+      "sha256": "97887cbae7ae59b71da76e4c57bf14cc97e9aceca88534a63fcb5fb9ae87edc2",
+      "pose": "walk",
+      "frame": 7,
+      "blenderZUpBounds": {
+        "min": [
+          -0.36449089646339417,
+          -0.2825241684913635,
+          0.000688411295413971
+        ],
+        "max": [
+          0.3146863281726837,
+          0.36632663011550903,
+          1.6700000762939453
+        ]
+      }
+    },
+    {
+      "file": "exports/pedestrian-runner.glb",
+      "sha256": "0a8f0531ed4c2d9b52d44ae06516c6785ef827318a5518b5106b646353c26019",
+      "pose": "walk",
+      "frame": 7,
+      "blenderZUpBounds": {
+        "min": [
+          -0.35999026894569397,
+          -0.3164255619049072,
+          0.00077100470662117
+        ],
+        "max": [
+          0.3114355206489563,
+          0.41028380393981934,
+          1.8599998950958252
+        ]
+      }
+    },
+    {
+      "file": "exports/pedestrian-tote.glb",
+      "sha256": "fb02862aa443810824ba0c17decb13e7f6f1fc511b49a26a72ed23fb82d595df",
+      "pose": "walk",
+      "frame": 7,
+      "blenderZUpBounds": {
+        "min": [
+          -0.9510578513145447,
+          -0.9999999403953552,
+          -1.0
+        ],
+        "max": [
+          0.9510578513145447,
+          0.9999999403953552,
+          1.0
+        ]
+      }
+    },
+    {
+      "file": "exports/pedestrian-commuter.glb",
+      "sha256": "18bf4802fda0586fab40989cc8a607f5cb72e0b6290cf2f3d7679f212233a740",
+      "pose": "sit",
+      "frame": 13,
+      "blenderZUpBounds": {
+        "min": [
+          -0.9510578513145447,
+          -0.9999999403953552,
+          -1.0
+        ],
+        "max": [
+          0.9510578513145447,
+          0.9999999403953552,
+          1.0
+        ]
+      }
+    },
+    {
+      "file": "exports/pedestrian-raincoat.glb",
+      "sha256": "97887cbae7ae59b71da76e4c57bf14cc97e9aceca88534a63fcb5fb9ae87edc2",
+      "pose": "sit",
+      "frame": 13,
+      "blenderZUpBounds": {
+        "min": [
+          -0.9510578513145447,
+          -0.9999999403953552,
+          -1.0
+        ],
+        "max": [
+          0.9510578513145447,
+          0.9999999403953552,
+          1.0
+        ]
+      }
+    },
+    {
+      "file": "exports/pedestrian-runner.glb",
+      "sha256": "0a8f0531ed4c2d9b52d44ae06516c6785ef827318a5518b5106b646353c26019",
+      "pose": "sit",
+      "frame": 13,
+      "blenderZUpBounds": {
+        "min": [
+          -0.9510578513145447,
+          -0.9999999403953552,
+          -1.0
+        ],
+        "max": [
+          0.9510578513145447,
+          0.9999999403953552,
+          1.0
+        ]
+      }
+    },
+    {
+      "file": "exports/pedestrian-tote.glb",
+      "sha256": "fb02862aa443810824ba0c17decb13e7f6f1fc511b49a26a72ed23fb82d595df",
+      "pose": "sit",
+      "frame": 13,
+      "blenderZUpBounds": {
+        "min": [
+          -0.9510578513145447,
+          -0.9999999403953552,
+          -1.0
+        ],
+        "max": [
+          0.9510578513145447,
+          0.9999999403953552,
+          1.0
+        ]
+      }
+    },
+    {
+      "file": "exports/pedestrian-commuter.glb",
+      "sha256": "18bf4802fda0586fab40989cc8a607f5cb72e0b6290cf2f3d7679f212233a740",
+      "pose": "guide",
+      "frame": 13,
+      "blenderZUpBounds": {
+        "min": [
+          -0.9510578513145447,
+          -0.9999999403953552,
+          -1.0
+        ],
+        "max": [
+          0.9510578513145447,
+          0.9999999403953552,
+          1.0
+        ]
+      }
+    },
+    {
+      "file": "exports/pedestrian-raincoat.glb",
+      "sha256": "97887cbae7ae59b71da76e4c57bf14cc97e9aceca88534a63fcb5fb9ae87edc2",
+      "pose": "guide",
+      "frame": 13,
+      "blenderZUpBounds": {
+        "min": [
+          -0.9510578513145447,
+          -0.9999999403953552,
+          -1.0
+        ],
+        "max": [
+          0.9510578513145447,
+          0.9999999403953552,
+          1.0
+        ]
+      }
+    },
+    {
+      "file": "exports/pedestrian-runner.glb",
+      "sha256": "0a8f0531ed4c2d9b52d44ae06516c6785ef827318a5518b5106b646353c26019",
+      "pose": "guide",
+      "frame": 13,
+      "blenderZUpBounds": {
+        "min": [
+          -0.9510578513145447,
+          -0.9999999403953552,
+          -1.0
+        ],
+        "max": [
+          0.9510578513145447,
+          0.9999999403953552,
+          1.0
+        ]
+      }
+    },
+    {
+      "file": "exports/pedestrian-tote.glb",
+      "sha256": "fb02862aa443810824ba0c17decb13e7f6f1fc511b49a26a72ed23fb82d595df",
+      "pose": "guide",
+      "frame": 13,
+      "blenderZUpBounds": {
+        "min": [
+          -0.9510578513145447,
+          -0.9999999403953552,
+          -1.0
+        ],
+        "max": [
+          0.9510578513145447,
+          0.9999999403953552,
+          1.0
+        ]
+      }
+    }
+  ]
+}
