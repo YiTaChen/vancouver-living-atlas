@@ -80,6 +80,7 @@ import { addSailingWaves } from './water-waves';
 import type { HarbourKind } from './harbour-path';
 import landmarkFootprints from './landmark-footprints.json';
 import { BusCabinVisit } from './bus-visit';
+import type { BusVisitDetail } from './bus-visit-policy';
 import {
   createNature,
   createStreetDetails,
@@ -108,7 +109,9 @@ export class CityEngine {
   visibilityChange = () => {
     if (this.disposed) return;
     if (document.hidden) this.clearHeldInput();
-    this.pedestrians?.setHidden(document.hidden || this.pageSuspended || this.cabinDisplayActive);
+    this.pedestrians?.setHidden(
+      document.hidden || this.pageSuspended || this.cabinDisplayActive,
+    );
     this.autoQuality?.resetTiming();
     this.autoTimingNeedsAnchor = true;
     this.sceneryMotionTracker?.reset();
@@ -187,6 +190,7 @@ export class CityEngine {
   sailingWaves: ReturnType<typeof addSailingWaves> | null = null;
   navigation: StreetNavigation | null = null;
   busVisit: BusCabinVisit | null = null;
+  busVisitDetail: BusVisitDetail = 'auto';
   flight: FlightController | null = null;
   onFlightMode: (mode: 'orbit' | 'flight') => void = () => {};
   placement: MapPlacement | null = null;
@@ -458,7 +462,8 @@ export class CityEngine {
     this.sceneryMotionTracker?.reset();
     this.lastTime = this.fpsAt = now;
     this.frames = 0;
-    if (this.renderReady && !this.cabinDisplayActive) this.raf = requestAnimationFrame(this.animate);
+    if (this.renderReady && !this.cabinDisplayActive)
+      this.raf = requestAnimationFrame(this.animate);
   }
   setCabinDisplayActive(active: boolean) {
     if (this.disposed || active === this.cabinDisplayActive) return;
@@ -469,8 +474,13 @@ export class CityEngine {
     this.autoTimingNeedsAnchor = true;
     this.sceneryMotionTracker?.reset();
     this.clock.resetTimebase(now);
-    this.clock.setVisible(!active && !document.hidden && !this.pageSuspended, now);
-    this.pedestrians?.setHidden(active || document.hidden || this.pageSuspended);
+    this.clock.setVisible(
+      !active && !document.hidden && !this.pageSuspended,
+      now,
+    );
+    this.pedestrians?.setHidden(
+      active || document.hidden || this.pageSuspended,
+    );
     if (active) {
       cancelAnimationFrame(this.raf);
       this.raf = 0;
@@ -747,7 +757,10 @@ export class CityEngine {
 
     this.renderReady = true;
     this.fpsAt = performance.now();
-    this.clock.setVisible(!document.hidden && !this.pageSuspended && !this.cabinDisplayActive, this.fpsAt);
+    this.clock.setVisible(
+      !document.hidden && !this.pageSuspended && !this.cabinDisplayActive,
+      this.fpsAt,
+    );
     this.clock.resetTimebase(this.fpsAt);
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.begin('render.first-city-frame');
@@ -1457,7 +1470,13 @@ export class CityEngine {
     if (!this.closeBusVisit()) return false;
     this.placement?.cancel();
     this.flight?.clear();
-    const prepared = await this.busVisit.prepare();
+    // settings.quality is the live effective quality: the auto controller
+    // updates it before resize/render, while manual mode uses the chosen level.
+    const prepared = await this.busVisit.prepare({
+      detail: this.busVisitDetail ?? 'auto',
+      quality: this.settings.quality,
+      compatible: this.compatibleGraphics,
+    });
     if (this.disposed) return false;
     if (prepared) {
       this.settings = {
@@ -1477,6 +1496,12 @@ export class CityEngine {
     if (this.disposed) return;
     this.stats.busVisit = this.busVisit?.snapshot();
     this.onStats({ ...this.stats });
+  }
+  setBusVisitDetail(detail: BusVisitDetail) {
+    if (this.disposed || !['auto', 'light', 'detailed'].includes(detail))
+      return;
+    this.busVisitDetail = detail;
+    this.publishBusVisit();
   }
   closeBusVisit() {
     const closed = this.busVisit?.close() ?? true;
@@ -1609,7 +1634,13 @@ export class CityEngine {
     }
   }
   animate = (time: number) => {
-    if (this.disposed || this.contextLost || this.pageSuspended || this.cabinDisplayActive) return;
+    if (
+      this.disposed ||
+      this.contextLost ||
+      this.pageSuspended ||
+      this.cabinDisplayActive
+    )
+      return;
     this.raf = requestAnimationFrame(this.animate);
     this.uniforms.time.value = time / 1000;
     this.tickClock(time);

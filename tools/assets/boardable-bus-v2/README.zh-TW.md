@@ -1,5 +1,7 @@
 # 公車內裝 v2：離線補件
 
+目前建議的近距離設計與可編輯來源請看 [closeup-quality：依舊圖重建座椅、黑內框／藍外框與完整車廂層次](closeup-quality/README.zh-TW.md)。它保留本詳細版和原預算版作為獨立歷史／成本層級；原 runtime-candidate 已在主分支採用，新品質版尚未接入 runtime。以下內容描述本目錄原詳細 master 的既有驗證。
+
 **新重建的離線資產；尚未整合 runtime、尚未 WebGL 驗收。** 不把原先遺失補件的口頭描述當成已找回的檔案或量測。本包不修改 `boardable-bus`、`public`、應用程式、package scripts 或 workflows。
 
 ## 內容

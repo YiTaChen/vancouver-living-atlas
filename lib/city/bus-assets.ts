@@ -4,9 +4,11 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { busRoutePose, type BusRoute } from './city-buses';
 import type { VisualQuality } from './quality';
 import { BusCabinSurfaces } from './bus-cabin-surfaces';
+import type { BusVisitProfile } from './bus-visit-policy';
 
 const MANIFEST_URL = '/models/blender/bus/manifest.json';
 const V2_MANIFEST_URL = '/models/blender/bus-v2/manifest.json';
+const REFERENCE_MANIFEST_URL = '/models/blender/bus-closeup/manifest.json';
 const ROLES = [
   'paint',
   'rubber',
@@ -19,7 +21,10 @@ const ROLES = [
 ] as const;
 type Role = (typeof ROLES)[number];
 type BusGLTF = Pick<GLTF, 'scene' | 'animations'>;
-export type BusAssetLoader = (url: string) => Promise<BusGLTF>;
+export type BusAssetLoader = (
+  url: string,
+  signal?: AbortSignal,
+) => Promise<BusGLTF>;
 interface BusLod {
   level: number;
   file: string;
@@ -31,7 +36,10 @@ interface BusLod {
 }
 export interface BusRuntimeManifest {
   schemaVersion: 1;
-  packageId: 'boardable-bus' | 'boardable-bus-v2-runtime-candidate';
+  packageId:
+    | 'boardable-bus'
+    | 'boardable-bus-v2-runtime-candidate'
+    | 'boardable-bus-v2-closeup-quality';
   version: '1.0.0';
   units: 'm';
   vehicles: Record<string, unknown>[];
@@ -50,6 +58,9 @@ export interface BoardableBusOwner {
   vehicle: Record<string, unknown>;
   /** Actual v2 rendered slab support; absent for the preserved v1 test contract. */
   cabinSurfaces?: BusCabinSurfaces;
+  profile?: BusVisitProfile;
+  requestedProfile?: BusVisitProfile;
+  fallback?: boolean;
   /** Detach and release the visit. Shared template buffers belong to CityBusAssets. */
   dispose(): void;
 }
@@ -58,6 +69,7 @@ export interface BusAssetsOptions {
   interiorVersion?: 'v1' | 'v2';
   load?: BusAssetLoader;
   fetchManifest?: () => Promise<unknown>;
+  fetchReferenceManifest?: () => Promise<unknown>;
 }
 export interface BusRenderPolicy {
   quality: VisualQuality;
@@ -79,19 +91,30 @@ function record(value: unknown): Record<string, unknown> {
 /** Validate the production projection; never import the offline authoring package. */
 function manifestContract(
   value: unknown,
-  version: 'v1' | 'v2',
+  version: 'v1' | 'v2' | 'reference',
 ): BusRuntimeManifest {
   const m = record(value);
-  const v2 = version === 'v2',
-    interiorId = v2
-      ? 'city-bus-12m-interior-v2-runtime'
-      : 'city-bus-12m-interior';
+  const reference = version === 'reference',
+    v2 = version !== 'v1',
+    interiorId = reference
+      ? 'city-bus-12m-interior-v2-closeup'
+      : v2
+        ? 'city-bus-12m-interior-v2-runtime'
+        : 'city-bus-12m-interior';
   if (
     m.contract !==
-      (v2 ? 'boardable-bus-runtime-v2' : 'boardable-bus-runtime-v1') ||
+      (reference
+        ? 'boardable-bus-closeup-runtime-v1'
+        : v2
+          ? 'boardable-bus-runtime-v2'
+          : 'boardable-bus-runtime-v1') ||
     m.schemaVersion !== 1 ||
     m.packageId !==
-      (v2 ? 'boardable-bus-v2-runtime-candidate' : 'boardable-bus') ||
+      (reference
+        ? 'boardable-bus-v2-closeup-quality'
+        : v2
+          ? 'boardable-bus-v2-runtime-candidate'
+          : 'boardable-bus') ||
     m.version !== '1.0.0' ||
     m.units !== 'm' ||
     !Array.isArray(m.assets) ||
@@ -119,24 +142,36 @@ function manifestContract(
         lod.level !== levels[index] ||
         lod.file !== expected ||
         lod.url !==
-          `/models/blender/${v2 && interior ? 'bus-v2' : 'bus'}/${expected}` ||
+          `/models/blender/${reference && interior ? 'bus-closeup' : v2 && interior ? 'bus-v2' : 'bus'}/${expected}` ||
         typeof lod.sha256 !== 'string' ||
         !/^[a-f0-9]{64}$/.test(lod.sha256) ||
         !Number.isSafeInteger(lod.bytes) ||
         Number(lod.bytes) <= 0 ||
         Number(lod.bytes) >
-          (v2 && interior
+          (reference && interior
             ? levels[index] === 0
-              ? 1_572_864
-              : 393_216
-            : 1_000_000) ||
+              ? 9_000_000
+              : 3_100_000
+            : v2 && interior
+              ? levels[index] === 0
+                ? 1_572_864
+                : 393_216
+              : 1_000_000) ||
         !Number.isSafeInteger(lod.triangles) ||
         Number(lod.triangles) <= 0 ||
         Number(lod.triangles) >
-          (v2 && interior ? (levels[index] === 0 ? 12_000 : 3_000) : 10_000) ||
+          (reference && interior
+            ? levels[index] === 0
+              ? 300_000
+              : 100_000
+            : v2 && interior
+              ? levels[index] === 0
+                ? 12_000
+                : 3_000
+              : 10_000) ||
         !Number.isSafeInteger(lod.primitives) ||
         Number(lod.primitives) <= 0 ||
-        (v2 && interior && lod.primitives !== 11)
+        (v2 && interior && lod.primitives !== (reference ? 13 : 11))
       )
         throw new Error('Invalid bus LOD descriptor');
     }
@@ -147,6 +182,20 @@ function manifestContract(
     record(m.vehicles[0]).vehicleId !== 'city-bus-12m'
   )
     throw new Error('Incomplete bus vehicle contract');
+  if (reference) {
+    const textures = m.textures;
+    if (!Array.isArray(textures) || textures.length !== 1)
+      throw new Error('Invalid reference bus texture inventory');
+    const texture = record(textures[0]);
+    if (
+      texture.textureId !== 'floor-speckle' ||
+      texture.width !== 256 ||
+      texture.height !== 256 ||
+      texture.colorSpace !== 'sRGB' ||
+      texture.semantic !== 'baseColor'
+    )
+      throw new Error('Unsupported reference bus texture');
+  }
   return value as BusRuntimeManifest;
 }
 
@@ -154,7 +203,8 @@ function manifestContract(
 function disposeSource(scene: THREE.Object3D) {
   const geometries = new Set<THREE.BufferGeometry>(),
     materials = new Set<THREE.Material>(),
-    textures = new Set<THREE.Texture>();
+    textures = new Set<THREE.Texture>(),
+    bitmaps = new Set<ImageBitmap>();
   scene.traverse((object) => {
     if (!(object instanceof THREE.Mesh)) return;
     geometries.add(object.geometry);
@@ -163,22 +213,63 @@ function disposeSource(scene: THREE.Object3D) {
       : [object.material]) {
       materials.add(material);
       for (const value of Object.values(material))
-        if (value instanceof THREE.Texture) textures.add(value);
+        if (value instanceof THREE.Texture) {
+          textures.add(value);
+          if (
+            typeof ImageBitmap !== 'undefined' &&
+            value.source?.data instanceof ImageBitmap
+          )
+            bitmaps.add(value.source.data);
+        }
     }
   });
   geometries.forEach((g) => g.dispose());
   materials.forEach((m) => m.dispose());
   textures.forEach((t) => t.dispose());
+  bitmaps.forEach((bitmap) => bitmap.close());
 }
 
-function roleOf(material: THREE.Material): Role {
+function textureDimensions(texture: THREE.Texture) {
+  const image = texture.image as
+    | { width?: number; height?: number }
+    | undefined;
+  return [image?.width, image?.height];
+}
+
+function roleOf(material: THREE.Material, reference = false): Role {
   const role = material.userData.semantic_role ?? material.name;
   if (
     !ROLES.includes(role as Role) ||
-    !(material instanceof THREE.MeshStandardMaterial) ||
-    Object.values(material).some((v) => v instanceof THREE.Texture)
+    !(material instanceof THREE.MeshStandardMaterial)
   )
     throw new Error('Unsupported bus semantic material');
+  const textures = Object.values(material).filter(
+    (v) => v instanceof THREE.Texture,
+  );
+  const floor = material.userData.shared_surface_id === 'bus-v2-floor';
+  if (
+    textures.length &&
+    (!reference ||
+      !floor ||
+      textures.length !== 1 ||
+      textures[0] !== material.map)
+  )
+    throw new Error('Unsupported bus semantic texture');
+  if (reference && floor) {
+    const map = material.map;
+    if (
+      !map ||
+      map.colorSpace !== THREE.SRGBColorSpace ||
+      textureDimensions(map).some((size) => size !== 256) ||
+      map.flipY !== false ||
+      map.channel !== 0 ||
+      map.wrapS !== THREE.RepeatWrapping ||
+      map.wrapT !== THREE.RepeatWrapping ||
+      map.magFilter !== THREE.LinearFilter ||
+      map.minFilter !== THREE.LinearMipmapLinearFilter
+    )
+      throw new Error('Invalid reference bus floor texture');
+  }
   return role as Role;
 }
 
@@ -221,12 +312,17 @@ export class CityBusAssets {
   private excluded = new Set<number>();
   private meshes: THREE.InstancedMesh[] = [];
   private materials = new Map<string, THREE.MeshStandardMaterial>();
+  private referenceMaterials = new Map<string, THREE.MeshStandardMaterial>();
   private templates = new Map<string, Promise<BusGLTF>>();
+  private templateSignals = new Map<string, AbortSignal>();
   private sourceScenes = new Set<THREE.Object3D>();
   private manifest: Promise<BusRuntimeManifest> | null = null;
+  private referenceManifest: Promise<BusRuntimeManifest> | null = null;
   private resolveReady!: () => void;
   private boardableOwner: BoardableBusOwner | null = null;
   private boardablePending: Promise<BoardableBusOwner> | null = null;
+  private boardableSignal: AbortSignal | null = null;
+  private boardableGeneration = 0;
   private boardableState = 'idle';
   private errors: string[] = [];
   private assetBytes = 0;
@@ -290,6 +386,29 @@ export class CityBusAssets {
     return tracked;
   }
 
+  private loadReferenceManifest(): Promise<BusRuntimeManifest> {
+    if (this.referenceManifest) return this.referenceManifest;
+    const requested = Promise.resolve()
+      .then(async () => {
+        if (this.disposed) throw new Error('Bus assets disposed');
+        if (this.options.fetchReferenceManifest)
+          return this.options.fetchReferenceManifest();
+        const response = await fetch(REFERENCE_MANIFEST_URL);
+        if (!response.ok)
+          throw new Error(
+            `Bus reference manifest load failed (${response.status})`,
+          );
+        return response.json();
+      })
+      .then((value) => manifestContract(value, 'reference'));
+    const tracked = requested.catch((error) => {
+      if (this.referenceManifest === tracked) this.referenceManifest = null;
+      throw error;
+    });
+    this.referenceManifest = tracked;
+    return tracked;
+  }
+
   private requestNear() {
     if (this.nearState !== 'idle' || this.disposed) return;
     this.nearState = 'loading';
@@ -326,28 +445,55 @@ export class CityBusAssets {
       .find(
         (a) =>
           a.id ===
-          (kind === 'interior' && this.options.interiorVersion === 'v2'
-            ? 'city-bus-12m-interior-v2-runtime'
-            : `city-bus-12m-${kind}`),
+          (kind === 'interior' &&
+          manifest.packageId === 'boardable-bus-v2-closeup-quality'
+            ? 'city-bus-12m-interior-v2-closeup'
+            : kind === 'interior' && this.options.interiorVersion === 'v2'
+              ? 'city-bus-12m-interior-v2-runtime'
+              : `city-bus-12m-${kind}`),
       )
       ?.lods.find((l) => l.level === level);
     if (!descriptor) throw new Error('Bus LOD unavailable');
     return descriptor;
   }
 
-  private template(descriptor: BusLod): Promise<BusGLTF> {
+  private template(descriptor: BusLod, signal?: AbortSignal): Promise<BusGLTF> {
+    const reference = descriptor.file.startsWith(
+      'city-bus-12m-interior-v2-closeup.',
+    );
+    if (this.templateSignals.get(descriptor.file)?.aborted) {
+      this.templates.delete(descriptor.file);
+      this.templateSignals.delete(descriptor.file);
+    }
     let promise = this.templates.get(descriptor.file);
     if (!promise) {
+      if (reference && signal)
+        this.templateSignals.set(descriptor.file, signal);
       promise = Promise.resolve()
         .then(() =>
-          (this.options.load ?? ((url) => new GLTFLoader().loadAsync(url)))(
+          (
+            this.options.load ??
+            (async (url, activeSignal) => {
+              if (!activeSignal) return new GLTFLoader().loadAsync(url);
+              const response = await fetch(url, { signal: activeSignal });
+              if (!response.ok)
+                throw new Error('Bus reference GLB request failed');
+              const bytes = await response.arrayBuffer();
+              activeSignal.throwIfAborted();
+              return new GLTFLoader().parseAsync(
+                bytes,
+                url.slice(0, url.lastIndexOf('/') + 1),
+              );
+            })
+          )(
             `${descriptor.url}?v=${descriptor.sha256.slice(0, 12)}`,
+            reference ? signal : undefined,
           ),
         )
         .then((gltf) => {
-          if (this.disposed) {
+          if (this.disposed || (reference && signal?.aborted)) {
             disposeSource(gltf.scene);
-            throw new Error('Bus assets disposed');
+            throw signal?.reason ?? new Error('Bus assets disposed');
           }
           let triangles = 0,
             primitives = 0;
@@ -360,7 +506,7 @@ export class CityBusAssets {
               for (const material of Array.isArray(object.material)
                 ? object.material
                 : [object.material])
-                roleOf(material);
+                roleOf(material, reference);
               triangles +=
                 (object.geometry.index?.count ??
                   object.geometry.getAttribute('position').count) / 3;
@@ -389,6 +535,11 @@ export class CityBusAssets {
                 );
             this.sourceScenes.add(gltf.scene);
             this.assetBytes += descriptor.bytes;
+            if (
+              reference &&
+              this.templateSignals.get(descriptor.file) === signal
+            )
+              this.templateSignals.delete(descriptor.file);
             return gltf;
           } catch (error) {
             disposeSource(gltf.scene);
@@ -397,8 +548,10 @@ export class CityBusAssets {
         });
       const requested = promise;
       promise = requested.catch((error) => {
-        if (this.templates.get(descriptor.file) === promise)
+        if (this.templates.get(descriptor.file) === promise) {
           this.templates.delete(descriptor.file);
+          this.templateSignals.delete(descriptor.file);
+        }
         throw error;
       });
       this.templates.set(descriptor.file, promise);
@@ -406,28 +559,33 @@ export class CityBusAssets {
     return promise;
   }
 
-  private surfaceKey(source: THREE.Material): string {
-    const role = roleOf(source);
+  private surfaceKey(source: THREE.Material, reference = false): string {
+    const role = roleOf(source, reference);
     return this.options.interiorVersion === 'v2'
       ? `${role}:${String(source.userData.shared_surface_id ?? source.name)}`
       : role;
   }
 
-  private material(source: THREE.Material): THREE.MeshStandardMaterial {
-    const role = roleOf(source);
-    const key = this.surfaceKey(source);
-    let shared = this.materials.get(key);
+  private material(
+    source: THREE.Material,
+    reference = false,
+  ): THREE.MeshStandardMaterial {
+    const role = roleOf(source, reference);
+    const key = this.surfaceKey(source, reference),
+      pool = reference ? this.referenceMaterials : this.materials;
+    let shared = pool.get(key);
     if (!shared) {
       if (
-        this.materials.size >= (this.options.interiorVersion === 'v2' ? 15 : 8)
+        pool.size >=
+        (reference ? 13 : this.options.interiorVersion === 'v2' ? 15 : 8)
       )
         throw new Error('Bus shared material cache budget exceeded');
       shared = (source as THREE.MeshStandardMaterial).clone();
-      shared.name = `Bus shared ${key}`;
+      shared.name = `Bus shared ${reference ? 'reference ' : ''}${key}`;
       // The source's linear PBR factors, opacity, emissive intensity and side
       // remain intact. COLOR_0, if present, multiplies those source factors.
       shared.vertexColors = true;
-      this.materials.set(key, shared);
+      pool.set(key, shared);
     } else {
       const signature = (m: THREE.MeshStandardMaterial) =>
         JSON.stringify([
@@ -442,6 +600,22 @@ export class CityBusAssets {
           m.blending,
           ...m.emissive.toArray(),
           m.emissiveIntensity,
+          m.map
+            ? [
+                m.map.name,
+                m.map.colorSpace,
+                m.map.wrapS,
+                m.map.wrapT,
+                m.map.minFilter,
+                m.map.magFilter,
+                m.map.flipY,
+                m.map.channel,
+                ...m.map.repeat.toArray(),
+                ...m.map.offset.toArray(),
+                m.map.rotation,
+                ...textureDimensions(m.map),
+              ]
+            : null,
         ]);
       if (signature(shared) !== signature(source as THREE.MeshStandardMaterial))
         throw new Error(`Bus role ${role} has inconsistent material factors`);
@@ -635,7 +809,7 @@ export class CityBusAssets {
 
   /** One live parked visit, coalesced loads, and a bounded reusable template cache. */
   loadBoardable(
-    options: { signal?: AbortSignal } = {},
+    options: { signal?: AbortSignal; profile?: BusVisitProfile } = {},
   ): Promise<BoardableBusOwner> {
     if (this.disposed) return Promise.reject(new Error('Bus assets disposed'));
     if (options.signal?.aborted)
@@ -643,11 +817,21 @@ export class CityBusAssets {
         options.signal.reason ?? new Error('Bus visit aborted'),
       );
     if (this.boardableOwner) return Promise.resolve(this.boardableOwner);
-    if (this.boardablePending) return this.boardablePending;
+    if (this.boardablePending && !this.boardableSignal?.aborted)
+      return this.boardablePending;
+    const generation = ++this.boardableGeneration;
+    this.boardableSignal = options.signal ?? null;
     this.boardableState = 'loading';
-    this.boardablePending = this.createBoardable(options.signal)
+    const pending = this.createBoardable(
+      options.signal,
+      options.profile ?? 'budget',
+    )
       .then((owner) => {
-        if (this.disposed || options.signal?.aborted) {
+        if (
+          this.disposed ||
+          options.signal?.aborted ||
+          generation !== this.boardableGeneration
+        ) {
           owner.dispose();
           throw options.signal?.reason ?? new Error('Bus assets disposed');
         }
@@ -656,26 +840,72 @@ export class CityBusAssets {
         return owner;
       })
       .catch((error) => {
-        if (!this.disposed) {
+        if (!this.disposed && generation === this.boardableGeneration) {
           this.boardableState = 'error';
           this.report(error);
         }
         throw error;
       })
       .finally(() => {
-        this.boardablePending = null;
+        if (this.boardablePending === pending) {
+          this.boardablePending = null;
+          this.boardableSignal = null;
+        }
       });
+    this.boardablePending = pending;
     return this.boardablePending;
   }
 
   private async createBoardable(
     signal?: AbortSignal,
+    requestedProfile: BusVisitProfile = 'budget',
   ): Promise<BoardableBusOwner> {
+    if (
+      requestedProfile !== 'budget' &&
+      this.options.interiorVersion === 'v2'
+    ) {
+      try {
+        const manifest = await this.loadReferenceManifest();
+        signal?.throwIfAborted();
+        if (this.disposed) throw new Error('Bus assets disposed');
+        return await this.createBoardableFrom(
+          manifest,
+          requestedProfile,
+          requestedProfile,
+          signal,
+        );
+      } catch (error) {
+        if (this.disposed || signal?.aborted) throw error;
+        this.report(error);
+        // A parked visit remains available when the optional detail download
+        // fails. The traffic pool's budget manifest and caps stay independent.
+      }
+    }
     const manifest = await this.loadManifest();
+    return this.createBoardableFrom(
+      manifest,
+      'budget',
+      requestedProfile,
+      signal,
+    );
+  }
+
+  private async createBoardableFrom(
+    manifest: BusRuntimeManifest,
+    profile: BusVisitProfile,
+    requestedProfile: BusVisitProfile,
+    signal?: AbortSignal,
+  ): Promise<BoardableBusOwner> {
+    const reference = profile !== 'budget';
     const results = await Promise.allSettled(
       ['exterior', 'interior'].map((kind) =>
         this.template(
-          this.descriptor(manifest, kind as 'exterior' | 'interior', 0),
+          this.descriptor(
+            manifest,
+            kind as 'exterior' | 'interior',
+            kind === 'interior' && profile === 'reference-lod1' ? 1 : 0,
+          ),
+          reference && kind === 'interior' ? signal : undefined,
         ),
       ),
     );
@@ -706,11 +936,20 @@ export class CityBusAssets {
         throw new Error('Boardable bus door node/clip unavailable');
     }
     group.name = 'Parked boardable bus';
-    group.userData.provenance = { ...this.group.userData.provenance };
+    group.userData.provenance = {
+      ...this.group.userData.provenance,
+      packageId: manifest.packageId,
+      assetSource: manifest.source,
+      profile,
+      requestedProfile,
+      fallback: profile !== requestedProfile,
+    };
     for (const scene of [exteriorRoot, interiorRoot])
       scene.traverse((object) => {
         if (!(object instanceof THREE.Mesh)) return;
-        const replace = (material: THREE.Material) => this.material(material);
+        const referenceMaterial = reference && scene === interiorRoot;
+        const replace = (material: THREE.Material) =>
+          this.material(material, referenceMaterial);
         object.material = Array.isArray(object.material)
           ? object.material.map(replace)
           : replace(object.material);
@@ -719,6 +958,7 @@ export class CityBusAssets {
             Array.isArray(object.material)
               ? object.material[0]
               : object.material,
+            referenceMaterial,
           ) === 'glass'
         )
           object.userData.excludeFromSSAO = true;
@@ -743,6 +983,9 @@ export class CityBusAssets {
       manifest,
       vehicle: manifest.vehicles[0],
       cabinSurfaces,
+      profile,
+      requestedProfile,
+      fallback: profile !== requestedProfile,
       dispose: () => {
         if (released) return;
         released = true;
@@ -761,6 +1004,16 @@ export class CityBusAssets {
 
   stats() {
     const count = this.meshes[0]?.count ?? 0;
+    const textures = new Set<THREE.Texture>();
+    for (const scene of this.sourceScenes)
+      scene.traverse((object) => {
+        if (!(object instanceof THREE.Mesh)) return;
+        for (const material of Array.isArray(object.material)
+          ? object.material
+          : [object.material])
+          for (const value of Object.values(material))
+            if (value instanceof THREE.Texture) textures.add(value);
+      });
     return {
       status: this.nearState,
       nearActors: count,
@@ -771,8 +1024,13 @@ export class CityBusAssets {
       /** Main beauty primitive estimate. Double-sided glass may submit twice. */
       populatedBatches: count ? this.meshes.length : 0,
       triangles: count * this.nearTriangles,
-      textures: 0,
-      materials: this.materials.size,
+      textures: textures.size,
+      materials: this.materials.size + this.referenceMaterials.size,
+      referenceMaterials: this.referenceMaterials.size,
+      templateCapacity: 6,
+      boardableProfile: this.boardableOwner?.profile ?? null,
+      boardableRequestedProfile: this.boardableOwner?.requestedProfile ?? null,
+      boardableFallback: this.boardableOwner?.fallback ?? false,
       loadedTemplates: this.sourceScenes.size,
       assetBytes: this.assetBytes,
       boardableStatus: this.boardableState,
@@ -800,9 +1058,13 @@ export class CityBusAssets {
     this.group.clear();
     this.materials.forEach((material) => material.dispose());
     this.materials.clear();
+    this.referenceMaterials.forEach((material) => material.dispose());
+    this.referenceMaterials.clear();
     this.sourceScenes.forEach(disposeSource);
     this.sourceScenes.clear();
     this.templates.clear();
+    this.templateSignals.clear();
+    this.manifest = this.referenceManifest = null;
     this.nearIds.clear();
     this.excluded.clear();
   }

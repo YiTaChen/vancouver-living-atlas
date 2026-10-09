@@ -5,14 +5,16 @@ import os from 'node:os';
 import path from 'node:path';
 import { loadBusV2Projection } from '../tools/project-bus-v2-runtime.mjs';
 import { loadMetroProjection } from '../tools/metro-projection.mjs';
+import { loadBusCloseupProjection } from '../tools/project-bus-closeup-runtime.mjs';
 import { verifyStage2TransitAdoption } from '../tools/verify-stage2-transit-adoption.mjs';
 
 async function fixture(fn) {
   const root = await mkdtemp(path.join(os.tmpdir(), 'stage2-adoption-'));
   try {
     const bus = await loadBusV2Projection(),
-      metro = await loadMetroProjection();
-    const entries = [...bus.entries, ...metro.entries];
+      metro = await loadMetroProjection(),
+      closeup = await loadBusCloseupProjection();
+    const entries = [...bus.entries, ...metro.entries, ...closeup.entries];
     const put = async (name, data) => {
       const file = path.join(root, name);
       await mkdir(path.dirname(file), { recursive: true });
@@ -36,8 +38,8 @@ test('production Stage 2 inventory matches canonical sources, geometry and camer
   fixture(async ({ root }) => {
     const result = await verifyStage2TransitAdoption(root);
     assert.equal(result.status, 'pass');
-    assert.equal(result.adoptedFiles, 10);
-    assert.equal(result.geometryBytes, 3009124);
+    assert.equal(result.adoptedFiles, 13);
+    assert.equal(result.geometryBytes, 14473216);
   }));
 test('changed GLB and invented provenance cannot pass the Stage 2 gate', () =>
   fixture(async ({ root, put, entries }) => {

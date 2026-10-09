@@ -245,15 +245,27 @@ test('Firebase verifier invokes mandatory pedestrian isolation on supplied outpu
       assetRoot: path.dirname(f.source),
       cityLifeSource: f.source,
     };
-    const blenderManifest = JSON.parse(await readFile('public/models/blender/adopted-manifest.json', 'utf8'));
-    const busFiles = blenderManifest.files.filter((item) => /^(bus|bus-v2|metro)\//.test(item.path));
+    const blenderManifest = JSON.parse(
+      await readFile('public/models/blender/adopted-manifest.json', 'utf8'),
+    );
+    const busFiles = blenderManifest.files.filter((item) =>
+      /^(bus|bus-v2|metro|bus-closeup)\//.test(item.path),
+    );
     for (const item of busFiles)
-      await f.put(f.output, 'models/blender/' + item.path, await readFile('public/models/blender/' + item.path));
-    await f.put(f.output, 'models/blender/adopted-manifest.json', JSON.stringify({
-      version: 1,
-      sourceRevision: blenderManifest.sourceRevision,
-      files: busFiles,
-    }));
+      await f.put(
+        f.output,
+        'models/blender/' + item.path,
+        await readFile('public/models/blender/' + item.path),
+      );
+    await f.put(
+      f.output,
+      'models/blender/adopted-manifest.json',
+      JSON.stringify({
+        version: 1,
+        sourceRevision: blenderManifest.sourceRevision,
+        files: busFiles,
+      }),
+    );
     options.busSource = path.resolve('tools/assets/boardable-bus');
     const result = await verifyFirebaseBuild(f.output, options);
     assert.equal(result.status, 'pass');

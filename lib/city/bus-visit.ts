@@ -18,6 +18,11 @@ import {
   type VehiclePassengerContract,
 } from './city-life/vehicle-profile-adapter';
 import { riderWorldTransform } from './city-life/continuous-path';
+import {
+  busVisitProfile,
+  type BusVisitPolicy,
+  type BusVisitProfile,
+} from './bus-visit-policy';
 
 const VISITOR = 'city-bus-visitor';
 const VEHICLE = 'parked-city-bus';
@@ -55,6 +60,9 @@ export interface BusVisitSnapshot {
   previewAnchor: string | null;
   passengerAnchor: string | null;
   routeIndex: number | null;
+  profile: BusVisitProfile | null;
+  requestedProfile: BusVisitProfile | null;
+  fallback: boolean;
 }
 export interface BusVisitPlacement {
   routeIndex: number;
@@ -255,14 +263,20 @@ export class BusCabinVisit {
   private hidden() {
     return document.hidden || this.city.pageSuspended || this.city.contextLost;
   }
-  prepare(): Promise<boolean> {
+  prepare(policy?: BusVisitPolicy): Promise<boolean> {
     if (this.disposed || this.hidden()) return Promise.resolve(false);
     if (this.aboard) return Promise.resolve(true);
     if (this.pending) return this.pending;
+    const profile = policy ? busVisitProfile(policy) : 'budget';
     if (this.owner && this.placement) {
-      const floor = this.freshOutside('front');
-      if (!floor) return Promise.resolve(this.reject('No safe bus entrance'));
-      return Promise.resolve(this.placeWalker(floor));
+      if ((this.owner.requestedProfile ?? 'budget') === profile) {
+        const floor = this.freshOutside('front');
+        if (!floor) return Promise.resolve(this.reject('No safe bus entrance'));
+        return Promise.resolve(this.placeWalker(floor));
+      }
+      // A different preboarding choice starts a fresh visit. Riders keep their
+      // existing owner, camera and reservations via the early aboard return.
+      this.release();
     }
     const generation = ++this.generation;
     this.abort = new AbortController();
@@ -274,6 +288,7 @@ export class BusCabinVisit {
       try {
         owner = await this.busAssets.loadBoardable({
           signal: this.abort!.signal,
+          profile,
         });
         if (this.disposed || generation !== this.generation || this.hidden()) {
           owner.dispose();
@@ -609,6 +624,9 @@ export class BusCabinVisit {
       passengerAnchor:
         passenger?.mode === 'riding' ? passenger.anchor.anchorId : null,
       routeIndex: this.routeIndex,
+      profile: this.owner?.profile ?? null,
+      requestedProfile: this.owner?.requestedProfile ?? null,
+      fallback: this.owner?.fallback ?? false,
     };
   }
   /** Static body collision for the host navigation; the doors are approached outside it. */

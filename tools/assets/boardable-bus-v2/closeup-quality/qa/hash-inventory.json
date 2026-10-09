@@ -1,0 +1,259 @@
+{
+  "scope": "Independent close-up-quality deliverable; no inherited assets rewritten",
+  "files": [
+    {
+      "file": ".gitignore",
+      "bytes": 37,
+      "sha256": "cfb8f3d6f12a033f77a58122e34f6bf59877efe2148ee3e55e68619741d612f4"
+    },
+    {
+      "file": "README.zh-TW.md",
+      "bytes": 7311,
+      "sha256": "88ae248c51078611b2d5e99cfa2d76a79693358bd5038227c6684690b333d395"
+    },
+    {
+      "file": "adapter.test.mjs",
+      "bytes": 3380,
+      "sha256": "6bb74b899573a612fca79939458a17690593296a14adf888ee6520fb636cb183"
+    },
+    {
+      "file": "compose.mjs",
+      "bytes": 2874,
+      "sha256": "1e9829a6554f7695a3bb65cfbdd27134dd5058fd4b444f88328cd4fde78dc7d1"
+    },
+    {
+      "file": "contract.py",
+      "bytes": 12505,
+      "sha256": "1fca99f1c4fcd182f5e0a04a1bc54dbe80a8310b5110b9682af7f025cd630d45"
+    },
+    {
+      "file": "export.py",
+      "bytes": 5139,
+      "sha256": "2f23545d7c16d48b7afe18ffedcd3edc52913349d35ad7114ea6ac0b92afd5c9"
+    },
+    {
+      "file": "exports/city-bus-12m-interior-v2-closeup.lod0.components.json",
+      "bytes": 614633,
+      "sha256": "94c772fe84b98c55f259d9a1e54abd8f0aab929b4462e47730179ffb9c8e219e"
+    },
+    {
+      "file": "exports/city-bus-12m-interior-v2-closeup.lod0.glb",
+      "bytes": 8508968,
+      "sha256": "8174cf56646eec303ad1891222cbd056d8ddea1e593c9a1e7ce70bc77a524a6d"
+    },
+    {
+      "file": "exports/city-bus-12m-interior-v2-closeup.lod1.components.json",
+      "bytes": 613151,
+      "sha256": "46d33d4da015a767ed45054c27f26b152557239b0281b3faf610fe6457794786"
+    },
+    {
+      "file": "exports/city-bus-12m-interior-v2-closeup.lod1.glb",
+      "bytes": 2955124,
+      "sha256": "7ab9103a047a7acd48f78433e3b982a475592e2f6a747e1c7533685b4053de45"
+    },
+    {
+      "file": "finalize.py",
+      "bytes": 3232,
+      "sha256": "f58a02980ac8064a8bcade6299bfedb5c410b3ff991a57e1e4b2b62f540d71a1"
+    },
+    {
+      "file": "manifest.json",
+      "bytes": 775185,
+      "sha256": "2d3a1abbbc35ddc161a154c0a262b42493fe2601c368dde05cd6b3a81b699726"
+    },
+    {
+      "file": "qa/adapter-tests.txt",
+      "bytes": 710,
+      "sha256": "1ae97ebed77fd9a3353671e31a1fa4bda842c561cd19f235266c8e154e2f7153"
+    },
+    {
+      "file": "qa/blender-validation.json",
+      "bytes": 2200,
+      "sha256": "bb744232ae7bc63dfac51b167d88e7eeea55e1cca3aa29e1ee2ddcea2e31e1c9"
+    },
+    {
+      "file": "qa/common-validation.json",
+      "bytes": 7553,
+      "sha256": "bad45412b0150f27a14d0424d57cfc583da4f35131b0aec3f2aff510c81cea71"
+    },
+    {
+      "file": "qa/component-costs.json",
+      "bytes": 1111,
+      "sha256": "16a39e82a808cf7a22613bcb207f5c35eafe124ba830217b67dcfb9ab499bffb"
+    },
+    {
+      "file": "qa/default-tests.txt",
+      "bytes": 943,
+      "sha256": "8b05703d96c49b6989e8e2711c72df258858eef6e4088931fd1117e6fbb9a818"
+    },
+    {
+      "file": "qa/derivation-lod0.json",
+      "bytes": 19404,
+      "sha256": "e53a7b5c624aa613c3876cd8065096a61888c0245491548b0734a38cb57b3463"
+    },
+    {
+      "file": "qa/derivation-lod1.json",
+      "bytes": 19277,
+      "sha256": "ef154df7861560a1272914534d080744f4ae5f9ab475f0b817fb03d5a6ca57c3"
+    },
+    {
+      "file": "qa/handoff.json",
+      "bytes": 2642,
+      "sha256": "a46e4ee4e77063d207f76a27fe31d9027f0747cf73eadf06abab0614bf3e0421"
+    },
+    {
+      "file": "qa/measurements.json",
+      "bytes": 7170,
+      "sha256": "95e7d3d9fd7dbc7990c02454998e4c2777cbce67d96a2f43ef6b740c501c0d6f"
+    },
+    {
+      "file": "qa/previews/cabin-baseline-master.png",
+      "bytes": 2033148,
+      "sha256": "aa65707d7b08b734250b083c2a269ced7ccd07b7f1acf4952454fc273698b893"
+    },
+    {
+      "file": "qa/previews/cabin-budget-candidate.png",
+      "bytes": 2034088,
+      "sha256": "ae815502221298271284676da28ed048d4af4b8af32489e660f0ce77c54de0d7"
+    },
+    {
+      "file": "qa/previews/cabin-quality-lod0.png",
+      "bytes": 1800357,
+      "sha256": "1af25ff3fce3c40139ff85500eaebb5f03e86969e64591becd21a1f1972aaecd"
+    },
+    {
+      "file": "qa/previews/cabin-quality-lod1.png",
+      "bytes": 1801865,
+      "sha256": "e7c0fd03706abf425e1626e63056b88bd32fc6e80efe9dba859dc73d5ca8f869"
+    },
+    {
+      "file": "qa/previews/front-quality-lod0.png",
+      "bytes": 1777604,
+      "sha256": "b51f8ca889ea1c8c8ec2dbed6e54c4e4e23111e4be033eed5838962477e9112e"
+    },
+    {
+      "file": "qa/previews/front-quality-lod1.png",
+      "bytes": 1777650,
+      "sha256": "c05d30014286beba237c9c7c0b3163c66b15a34dea142852b9a06ae4aa4c6be5"
+    },
+    {
+      "file": "qa/previews/index.json",
+      "bytes": 18656,
+      "sha256": "96c6d5cacb16d99c658611b658edff3fc6b264416a54749c42472f20df2a8109"
+    },
+    {
+      "file": "qa/previews/rear-quality-lod0.png",
+      "bytes": 1844503,
+      "sha256": "a98baf76485bcae44edf2d5a9e293dcf697cd019f35b8df07fdf7a3802caf537"
+    },
+    {
+      "file": "qa/previews/rear-quality-lod1.png",
+      "bytes": 1844063,
+      "sha256": "5f235850a87022ace350b75579a95c7a5234a2c443db6d786f44cc3d91c85b33"
+    },
+    {
+      "file": "qa/previews/roof-rail-baseline-master.png",
+      "bytes": 2083729,
+      "sha256": "e103e173f2fca23583b914256897abd60b898295b94aa620d78d9770dc0f4cc9"
+    },
+    {
+      "file": "qa/previews/roof-rail-budget-candidate.png",
+      "bytes": 2086746,
+      "sha256": "5af04d51b372c0a729d29f2105dc9f9e13b575b0b58fa1e5ac11ac9f747fa75c"
+    },
+    {
+      "file": "qa/previews/roof-rail-quality-lod0.png",
+      "bytes": 1838168,
+      "sha256": "6506ba36d3c75af9e8876aa67031fbfd9373bed603e8122f9e47dedbd96248ed"
+    },
+    {
+      "file": "qa/previews/roof-rail-quality-lod1.png",
+      "bytes": 1837938,
+      "sha256": "fb5c26f92340986be184ec579fb7a2eaad90c8d3f672d764dabff7bbbd903737"
+    },
+    {
+      "file": "qa/previews/seat-baseline-master.png",
+      "bytes": 1863912,
+      "sha256": "8327476208e2673a5b92f242dd9eb5d75d481852dd5d8bf919adb35b41f40780"
+    },
+    {
+      "file": "qa/previews/seat-budget-candidate.png",
+      "bytes": 1861597,
+      "sha256": "19dee53db9ee9b44d0acda1dd921daa28d91a6c4c2c8c9c266f3ea07139f51d7"
+    },
+    {
+      "file": "qa/previews/seat-quality-lod0.png",
+      "bytes": 1730854,
+      "sha256": "6567a3c1212336b00b8bcc719ce9c8adc301f88f7fe9185443dc7d256f181707"
+    },
+    {
+      "file": "qa/previews/seat-quality-lod1.png",
+      "bytes": 1731724,
+      "sha256": "7ddc23089d95491a43b59c609f49674252c29d96c4d6a781ef189a6f0162eb70"
+    },
+    {
+      "file": "qa/provenance.json",
+      "bytes": 4503,
+      "sha256": "740594fda51e1c09d6a6e815b584907c383cd76e04ecebf0fd8c1f2654493f83"
+    },
+    {
+      "file": "qa/regression-tests.txt",
+      "bytes": 4222,
+      "sha256": "fac0c5fe924b33abbe22d5a03990e9157c31be947e7d269e708d4d86ca4e809e"
+    },
+    {
+      "file": "qa/validation.json",
+      "bytes": 10550,
+      "sha256": "9afa110010e2757ebe5499b8a253d5a028d228e6ecf129e94d2e081ae00dad03"
+    },
+    {
+      "file": "qa/visual-review.json",
+      "bytes": 9449,
+      "sha256": "c34495dcbbb14ea1165eb942d6c9be7982e079c087615f465b01b368131c0135"
+    },
+    {
+      "file": "qa_blender.py",
+      "bytes": 3388,
+      "sha256": "4d2f89a0ce2887ac26f3cad8e715f7f65ede1120e74e8e8328f881f3990e230a"
+    },
+    {
+      "file": "qa_sources.py",
+      "bytes": 3473,
+      "sha256": "3c4c2398531bf02af2f10caf2ae155b063ccdffa1d4128deb80323a304d84b54"
+    },
+    {
+      "file": "refine.py",
+      "bytes": 20656,
+      "sha256": "6b660ad218f1fee766693af6b448987fde61fa194564239917b3f10423787ff1"
+    },
+    {
+      "file": "source/city-bus-12m-interior-v2-closeup.lod0.blend",
+      "bytes": 1351069,
+      "sha256": "a66a2606157c27b59163587fda84f6b17f5e9d8d6e02e8f70220a4d22ff99073"
+    },
+    {
+      "file": "source/city-bus-12m-interior-v2-closeup.lod1.blend",
+      "bytes": 633013,
+      "sha256": "f78fc08fa5ea5c7e3dcd98b527a6d9570dca9eedd4dfdd46d59da648c6c732b3"
+    },
+    {
+      "file": "source/floor-speckle.png",
+      "bytes": 98020,
+      "sha256": "9d5c9bbe86766050cc56e345218b47ddca5e7f8b3aebcd45d9967f86f49b2bb2"
+    },
+    {
+      "file": "test_quality.py",
+      "bytes": 10997,
+      "sha256": "b53c9df64d566460e15d6bf587929a952f9283c50bf9a3d9ded26420c3c1681a"
+    },
+    {
+      "file": "validate.py",
+      "bytes": 20283,
+      "sha256": "44b2956ed9c53d931f9c6f971d5bf1dffa94614e018345147f3809a2e32982c7"
+    }
+  ],
+  "defaultTest": {
+    "file": "tests/bus-closeup-quality.test.mjs",
+    "sha256": "aac80898fa0dbb5194f05f88d24fc9d502b9f3295250ecc241f8d073fdaea22e"
+  }
+}
