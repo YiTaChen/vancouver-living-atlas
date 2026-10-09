@@ -29,14 +29,22 @@
 
 ## 驗證與交付狀態
 
-- Mark V LOD0：10,992 triangles、1,177,176 bytes；LOD1：2,964 triangles、305,404 bytes。兩者各 10 material primitives，保留 22 座與精確 pelvis／camera 錨點。詳細 study 另存，超預算，不可當作 runtime 模型。
+- Mark V LOD0：11,016 triangles、1,179,164 bytes；LOD1：2,976 triangles、306,220 bytes。兩者各 10 material primitives，保留 22 座與精確 pelvis／camera 錨點。詳細 study 另存，超預算，不可當作 runtime 模型。
 - 公車詳細 master：30,200／14,984 triangles，2,634,280／1,449,360 bytes。此版本超 B-CAB 預算，保留可編輯細節；LOD0 309 個與 LOD1 217 個後段 component 的 world vertices、triangle indices、material assignments 均與修訂前逐一相同，坐墊材質色值則刻意更新。
 - 公車 budget derivative：LOD0 11,704 triangles／736,884 bytes；LOD1 2,824 triangles／202,492 bytes。詳細量測見本包 runtime-candidate/qa/measurements.json。保留 24 個啟用座位及原有 driver／door／pelvis／camera 契約，後段保持 17 座；減面模型不聲稱逐頂點等同詳細 master。
 - 支撐檢查發現原有公車內地板在 X=-1.15 結束，而外部門框在 X=-1.25，兩門均有 10 cm 缺口。詳細 master 保留並揭露此繼承限制；derivative 增加兩個 flush threshold slabs，僅延伸門口支撐至外框，不更動門或錨點。
-- Mark V 23 項 regression tests；詳細公車 23 項 Python 與 6 項實際 adapter tests；derivative 39 項 Python 與 6 項 adapter tests 通過；另外獨立 143,220 個 portal／join／aisle 實際三角形支撐樣本均無缺口或高度漂移。
+- Mark V 30 項 regression tests；詳細公車 23 項 Python 與 6 項實際 adapter tests；derivative 39 項 Python 與 6 項 adapter tests 通過；另外獨立 143,220 個 portal／join／aisle 實際三角形支撐樣本均無缺口或高度漂移。
 - 重新執行 npm test（836／836，0 skipped）、typecheck、Firebase build、scoped lint 與 production 隔離負例。完整 lint 仍有 211 個既有錯誤，83 個出錯檔案與 PR #6 完全相同。
 - 全部來源均有重開、edit-copy 及 byte-identical re-export 證據。預覽由最終 GLB 重匯入產生，索引保存精確 GLB 與 PNG 雜湊。
 
 機器可讀總結與完整命令輸出見 tools/stage2/qa/。Hosted CI 因 draft 依賴 PR #6 分支而未執行；不能把沒有 workflow runs 當成 CI 通過。
 
 實際 WebGL、乘客進出、運行中跨車廂、動態車門互鎖、平台與地形匹配、GPU 效能：尚未執行。CPU 預覽是實際 GLB 重匯入渲染，保留取樣雜訊，不以生成圖片替代模型證據。
+
+## Mark V 開放式貫通段修正
+
+使用者指出車廂連接沒有門後，重新核對官方照片、來源與實際 GLB：原模型並沒有貫通段門片或封住通道的端牆。造成誤讀的是減面後成為平整黑色板狀的風琴罩側面，以及單節模型末端沒有相鄰車廂的取景。
+
+本輪只修正貫通段表現：灰色可辨識的摺疊風琴罩、頂部內襯、原有平接橋板與持續開放的中央通道。車側上下車門、座椅、錨點與其餘車廂配置保留。三個可編輯版本與對應 GLB 同步更新。
+
+貫通視角使用明確標註的相鄰模組 QA 佈置，讓光線與車廂在連接處連續；它是以實際匯出資產重組的視覺檢查，不是宣稱已完成 C 中間車或正式五節編組。官方對開放式貫通設計的描述見 [TransLink 原文](https://buzzer.translink.ca/2025/07/translinks-mark-v-skytrain-enters-service/)。

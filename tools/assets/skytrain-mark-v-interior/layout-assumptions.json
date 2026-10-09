@@ -379,5 +379,17 @@
   "note": "A-car visual study. Individual car dimensions, seat coordinates and gangway dimensions are authoring assumptions, not full engineering survey. Two flex bays based on end-car diagram. No existing vehicle profile reused.",
   "layoutReconciliation": "22 seats match official A-car regional counts (7 front / 3 singles / 5 longitudinal / 7 rear). Precise orientation and placement are approximate; not measured or full train capacity.",
   "gangwayHeaderUndersideM": 2.075,
-  "gangwayHeightBasis": "Representative header raised 60 mm to exceed 2.05 m target; no surveyed constraint"
+  "gangwayHeightBasis": "Representative header raised 60 mm to exceed 2.05 m target; no surveyed constraint",
+  "gangwayConnection": {
+    "kind": "open walkthrough",
+    "doorLeaves": false,
+    "grayFoldedFlexibleSides": true,
+    "floorBridgePreserved": true,
+    "verifiedStaticClearWidthM": 1.2,
+    "verifiedStaticClearHeightRangeM": [
+      0.035,
+      2.05
+    ],
+    "qaAdjacency": "Second exact A-car GLB instance only; not a C-car or full-consist reconstruction"
+  }
 }

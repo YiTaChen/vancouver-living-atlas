@@ -80,6 +80,43 @@ class MarkVPackageTests(unittest.TestCase):
    for z in [-8.38,-8.1,-7.82]:self.assertAlmostEqual(.0025,A.support_height(rows,0,z),places=5)
  def test_negative_missing_floor_not_valid(self):
   doc,rows=A.component_rows(HERE/self.asset['lods'][0]['file']);rows=[r for r in rows if r['name']!='floor-slab'];self.assertIsNone(A.support_height(rows,.33,0))
+ def test_positive_open_folded_gangway_all_variants(self):
+  for asset in self.m['assets']:
+   for lod in asset['lods']:
+    doc,rows=A.component_rows(HERE/lod['file'],lod['componentsSha256']);self.assertEqual('pass',A.validate_open_gangway(rows)['status'])
+ def block_gangway(self,low,high):
+  doc,rows=A.component_rows(HERE/self.asset['lods'][1]['file']);rows.append({'name':'arbitrary-new-panel','min':low,'max':high})
+  with self.assertRaisesRegex(ValueError,'open gangway blocked'):A.validate_open_gangway(rows)
+ def test_negative_cross_passage_door_rejected(self):
+  self.block_gangway([-.7,.01,-8.12],[.7,2.08,-8.10])
+ def test_negative_off_center_gangway_leaf_rejected(self):
+  self.block_gangway([.50,.10,-8.00],[.59,1.95,-7.99])
+ def test_negative_distal_endwall_rejected(self):
+  self.block_gangway([-.6,.10,-8.534],[.6,2.0,-8.532])
+ def test_negative_gangway_transom_rejected(self):
+  self.block_gangway([-.6,1.98,-7.67],[.6,2.1,-7.65])
+ def test_negative_actual_glb_blocking_panel_rejected(self):
+  # Mutate real exported triangles, then refresh the matching provenance. The
+  # extraction must succeed and the spatial rule, rather than a hash, must fail.
+  src=HERE/self.asset['lods'][1]['file'];doc,raw=A.C.read_glb(src);raw=bytearray(raw);side=json.loads(src.with_suffix('.components.json').read_text())
+  batch=next(b for b in side['batches'] if any(r['componentId']=='gangway-ceiling' for r in b['ranges']));r=next(r for r in batch['ranges'] if r['componentId']=='gangway-ceiling')
+  node=next(n for n in doc['nodes'] if n.get('name')==batch['batch']);pr=doc['meshes'][node['mesh']]['primitives'][0];acc=doc['accessors'][pr['attributes']['POSITION']];bv=doc['bufferViews'][acc['bufferView']]
+  self.assertEqual(5126,acc['componentType']);stride=bv.get('byteStride',12);start=bv.get('byteOffset',0)+acc.get('byteOffset',0)
+  for i in range(r['vertexStart'],r['vertexStart']+r['vertexCount']):
+   x,y,z=struct.unpack_from('<3f',raw,start+i*stride)
+   struct.pack_into('<3f',raw,start+i*stride,x,.10+(z+8.51)*2.4,-8.10+(y-2.15))
+  positions=A.C.accessor(doc,raw,pr['attributes']['POSITION']);indices=[v[0] for v in A.C.accessor(doc,raw,pr['indices'])][r['indexStart']:r['indexStart']+r['indexCount']];points=[positions[i] for i in indices]
+  r['boundsM']={k:[f(p[j] for p in points) for j in range(3)] for k,f in [('min',min),('max',max)]};r['boundsM']['size']=[b-a for a,b in zip(r['boundsM']['min'],r['boundsM']['max'])]
+  for k,f in [('min',min),('max',max)]:acc[k]=[f(p[j] for p in positions) for j in range(3)]
+  payload=json.dumps(doc,separators=(',',':')).encode();payload+=b' '*((-len(payload))%4)
+  with tempfile.TemporaryDirectory() as td:
+   p=Path(td)/src.name;p.write_bytes(struct.pack('<4sII',b'glTF',2,12+8+len(payload)+8+len(raw))+struct.pack('<I4s',len(payload),b'JSON')+payload+struct.pack('<I4s',len(raw),b'BIN\0')+raw)
+   side['glbSha256']=A.C.digest(p);p.with_suffix('.components.json').write_text(json.dumps(side));d,rows=A.component_rows(p)
+   with self.assertRaisesRegex(ValueError,'open gangway blocked by gangway-ceiling'):A.validate_open_gangway(rows)
+ def test_negative_flat_bellows_rejected(self):
+  doc,rows=A.component_rows(HERE/self.asset['lods'][1]['file'])
+  next(r for r in rows if r['name'].startswith('gangway-side-bellows'))['foldProfileXZ']=[(.7,z) for z in [-8.52,-8.4,-8.3,-8.2,-8.1,-7.9,-7.72]]
+  with self.assertRaisesRegex(ValueError,'accordion folds'):A.validate_open_gangway(rows)
  def test_negative_truncated_glb_rejected(self):
   with tempfile.TemporaryDirectory() as td:
    p=Path(td)/'bad.glb';p.write_bytes(b'glTF')

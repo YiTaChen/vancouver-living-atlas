@@ -49,11 +49,11 @@
 - `npm run lint`：未通過，211 項既有錯誤分布於 83 個檔案；這些檔案逐一與 PR #6 基準比對，內容完全相同。未擴大範圍修正原有 lint。
 - 人物：7 個 Node 測試、11 個 Python 負例通過；獨立複查確認無 skin binding、多一個動畫、Infinity／重複 clip 三類輸入均拒絕。
 - 公車詳細 master：23 個 Python 測試、6 個實際 adapter Node 測試通過；獨立 budget derivative：39 個 Python 測試、6 個實際 adapter Node 測試通過；新增兩個門檻支撐板後再次封存。
-- Mark V：23 個回歸／負例測試通過；LOD0 10,992 triangles／1,177,176 bytes，LOD1 2,964 triangles／305,404 bytes。實際支撐三角形、完整 sidecar 覆蓋、transform 與精確 anchor 集均已驗證。
+- Mark V：30 個回歸／負例測試通過；LOD0 11,016 triangles／1,179,164 bytes，LOD1 2,976 triangles／306,220 bytes。實際支撐三角形、完整 sidecar 覆蓋、transform 與精確 anchor 集均已驗證。
 - Canada Line：19 個 Python 測試通過。
 - 車站：7 站、16 stops、167 surfaces、156 門介面、184 anchors 通過，10 個負例拒絕；門檻橋板 9,828 個支撐樣本、5,616 個動作姿勢樣本及 3 個碰撞判定 fixtures 通過。這不是連續時間碰撞證明。
 - 25 個可編輯 Blender 來源均有逐包重開與 byte-identical reexport 證據。
-- `python3 tools/stage2/verify_isolation.py`：102 個新離線 payload 與 101 個 production 輸出隔離檢查通過。
+- `python3 tools/stage2/verify_isolation.py`：103 個新離線 payload 與 101 個 production 輸出隔離檢查通過。
 
 本輪原始命令輸出與機器可讀摘要位於 `tools/stage2/qa/`；各包 `qa/` 另有實際尺寸、三角面數、GLB 雜湊、來源重開及預覽證據。
 

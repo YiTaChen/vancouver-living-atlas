@@ -4,7 +4,7 @@ Reference review: 2026-10-09. The actual pixels of the four official photographs
 
 ## Operator sources
 
-- [TransLink: Mark V enters service, July 10, 2025](https://buzzer.translink.ca/2025/07/translinks-mark-v-skytrain-enters-service/). Establishes Mark V, Alstom, Expo Line introduction and five-car identity. The article's interior gallery supplied the front observation salon, bicycle bay, over-door LCD and long aisle views.
+- [TransLink: Mark V enters service, July 10, 2025](https://buzzer.translink.ca/2025/07/translinks-mark-v-skytrain-enters-service/). Establishes Mark V, Alstom, Expo Line introduction and five-car identity. The article explicitly describes a five-car open gangway with end-to-end passage; no inter-car door is modeled. Its long-aisle image, Mark_V_Art_20250707_001.jpg, shows the continued neighboring cabin through the gray connection. The article's interior gallery supplied the front observation salon, bicycle bay, over-door LCD and long aisle views.
 - [Official five-car seating diagram](https://buzzer.translink.ca/wp-content/uploads/2024/05/Mark-V-Seating-Layout-scaled.jpg). Pixel review supports A–C–C–C–B topology, three door pairs per car, mixed seating, wide open connections and end-car flex bays. The A-car regional seat counts were reconciled to 7 front salon + 3 transverse singles + 5 longitudinal + 7 near the gangway = 22. This count describes this diagram/car, not total train capacity.
 
 ## Observations translated into original geometry
@@ -12,7 +12,7 @@ Reference review: 2026-10-09. The actual pixels of the four official photographs
 - Front salon photo: continuous waterfall/lumbar upholstery, gray molded wraparound shells and integral open top grips, exposed silver supports, yellow grab rails, blue speckled floor, deep white window surrounds, top-opening window inset and a sloped observation windscreen. A new sculpted section mesh is used for the seats; existing Canada Line geometry is not relabeled.
 - Flex-bay photo: two separate padded leaning rests on a yellow rail, hanging bicycle strap, brushed kickplates, tall glass dividers on silver clamps and tall narrow door windows. The model follows the two-pad configuration, with representative mount positions.
 - LCD close-up: wide, shallow black over-door bezel, end indicator strips and blue route graphic. The delivered atlas is original redrawn text/line work with an illustrative Expo Line station sequence, not a screenshot or a live-service display.
-- Aisle photo: curved yellow divider rails, center/side overhead rails with silver mounting hardware, continuous ceiling diffusers with adjacent dark vent channels, ceiling seams and mixed seating. The model uses actual rail sweeps and rounded opening rings, not painted silhouettes.
+- Aisle photo: curved yellow divider rails, center/side overhead rails with silver mounting hardware, continuous ceiling diffusers with adjacent dark vent channels, ceiling seams and mixed seating. The gray inter-car frame surrounds an open through-passage; there are no gangway door leaves. The model uses actual rail sweeps and rounded opening rings, not painted silhouettes.
 
 ## Intentional limitations
 
@@ -25,3 +25,7 @@ Official glass-divider artwork is intentionally omitted; clear glass is used ins
 The high-detail study is a visual authoring reference. The two reduced LODs are independent optimization candidates. Offline visual/geometry checks do not establish rideability, accessibility compliance, game-frame performance, night lighting or platform compatibility.
 
 Based on Vancouver Living Atlas by YiTaChen. Project license: Vancouver Living Atlas Noncommercial Research and Attribution 1.0. Operator reference photographs retain their own rights.
+
+## Open-gangway correction, 2026-10-09
+
+The previous GLB had no blocking door leaf, but its optimized bellows were flat black cuboids and the forward view ended against the neutral QA world. These read as door-like panels. All three variants now use gray folded flexible sides, keep the bridge and clear passage, and retain the rest of the cabin. A new continuity preview uses two exact instances of the same A-car GLB joined rear-to-rear, solely to demonstrate an unobstructed view into a lit adjacent cabin. It does not establish a C-car layout, five-car profile, moving coupling or runtime walkability.

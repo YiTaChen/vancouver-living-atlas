@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "packageId": "skytrain-mark-v-interior",
-  "version": "0.1.0",
-  "baseRevision": "a965982a58b5d15996af68899de021fa30f9267c",
+  "version": "0.1.1",
+  "baseRevision": "4f19f06b271944e9bb16e8495cb72d628847bd7f",
   "status": "offline_visual_candidate_runtime_not_run",
   "units": "m",
   "coordinateSystem": {
@@ -30,16 +30,16 @@
       "variant": "Mark-V-A-car-budget-candidate",
       "kind": "transit-interior",
       "source": "source/mark-v-a-car-interior.lod0.blend",
-      "sourceSha256": "7f6d0182366b79d50245a86e429bc97d15975adf5be7fe3053704bf8fd42d4f7",
+      "sourceSha256": "dae4e192c91d2475665ca930fcfcd02bc0fd42ca8f05aec291de2bf526f49bba",
       "lods": [
         {
           "level": 0,
           "file": "exports/mark-v-a-car-interior.lod0.glb",
           "source": "source/mark-v-a-car-interior.lod0.blend",
-          "sha256": "e68542ad516bef61e9c32f051cd062995265213f2f8d0e732e4b29e87d23643e",
-          "sourceSha256": "7f6d0182366b79d50245a86e429bc97d15975adf5be7fe3053704bf8fd42d4f7",
+          "sha256": "280aa59559444ac15d6c2d712c61e87b846076632d8127f116e20424a086c984",
+          "sourceSha256": "dae4e192c91d2475665ca930fcfcd02bc0fd42ca8f05aec291de2bf526f49bba",
           "componentsFile": "exports/mark-v-a-car-interior.lod0.components.json",
-          "componentsSha256": "a88bb94629f5a64592e75e2824bf14ec4e8aad264dfa98e5eb5c1066994d0eae",
+          "componentsSha256": "324f9e7d4bff1d9d12ef152a6895ec756f1fc2476e23c0901641cab371d95cc7",
           "boundsM": {
             "min": [
               -1.3804128170013428,
@@ -57,12 +57,12 @@
               16.335000038146973
             ]
           },
-          "triangles": 10992,
-          "vertices": 18983,
+          "triangles": 11016,
+          "vertices": 19031,
           "primitives": 10,
-          "bytes": 1177176,
+          "bytes": 1179164,
           "embeddedImageBytes": 414183,
-          "geometryBytes": 762993,
+          "geometryBytes": 764981,
           "images": [
             {
               "sha256": "f815d2855711698883c2e6714222a402ffa4f96ae8311ebda00614d09f313060",
@@ -98,10 +98,10 @@
           "level": 1,
           "file": "exports/mark-v-a-car-interior.lod1.glb",
           "source": "source/mark-v-a-car-interior.lod1.blend",
-          "sha256": "6f840b8d7a679d5a0e5f1a7df21ab4d73c3273f916cbd122498fe20ce85f40da",
-          "sourceSha256": "bdae4395f1e004947f27c837c88e024ffe22711a4e3b91277573412132dca1e2",
+          "sha256": "25b45a2fd670a818b8ef10bc3dd92fbc427b941231063d8f9927706ddafe9e8d",
+          "sourceSha256": "712ca521f16b9fc2f40f770e61bea8fa9b56f6edd13c34df92f10b851748928c",
           "componentsFile": "exports/mark-v-a-car-interior.lod1.components.json",
-          "componentsSha256": "c39c906ea82727578ec84052ba1352a0cf5a04d26b76b8a3580419190fa22847",
+          "componentsSha256": "d62dc5fbf129aa1d5e1f8d14bf7cf19619ffc546769249468e333b9aeec14075",
           "boundsM": {
             "min": [
               -1.3804128170013428,
@@ -119,12 +119,12 @@
               16.335000038146973
             ]
           },
-          "triangles": 2964,
-          "vertices": 6370,
+          "triangles": 2976,
+          "vertices": 6386,
           "primitives": 10,
-          "bytes": 305404,
+          "bytes": 306220,
           "embeddedImageBytes": 42412,
-          "geometryBytes": 262992,
+          "geometryBytes": 263808,
           "images": [
             {
               "sha256": "d242b7a05e09a47eda3c253a246317e402c5f53c4e509973ae2a8b7612da4f60",
@@ -303,7 +303,7 @@
         "standingHeightM": 1.95,
         "capsuleRadiusM": 0.25,
         "referencePath": "qa/clearance-validation.json",
-        "doorState": "closed; no boardability claimed"
+        "doorState": "exterior boarding doors closed; inter-car gangway open without door leaves; no boardability claimed"
       },
       "collision": {
         "kind": "not runtime supplied",
@@ -341,16 +341,16 @@
       "variant": "Mark-V-A-car-representative-study",
       "kind": "transit-interior",
       "source": "source/mark-v-a-car-study.blend",
-      "sourceSha256": "9f444f9502ceda608a9ccd3ee1db1b669b4a030a112a6884f40390a086337f9e",
+      "sourceSha256": "47924974440e9fbe2ef25b44b1abdfda1469944dfe67d0b6e3c7b3f5c7084826",
       "lods": [
         {
           "level": 0,
           "file": "exports/mark-v-a-car-study.glb",
           "source": "source/mark-v-a-car-study.blend",
-          "sha256": "c27e3aaddf680888ce56f72db1448311d269dde8d47469c5730b778ce9b20c1d",
-          "sourceSha256": "9f444f9502ceda608a9ccd3ee1db1b669b4a030a112a6884f40390a086337f9e",
+          "sha256": "c31086665fc793ab29ebd9948bc2d716a5cb570142f2dd7d1411c86fc590f6a0",
+          "sourceSha256": "47924974440e9fbe2ef25b44b1abdfda1469944dfe67d0b6e3c7b3f5c7084826",
           "componentsFile": "exports/mark-v-a-car-study.components.json",
-          "componentsSha256": "3b1e16e1e007b471286d45bb150dea8cf7a74d4b4c1e3b21c457b1243089579a",
+          "componentsSha256": "7e7e78b9b5891ab43ea399e4a64037023480b43696caff748ff9ff444202c1c5",
           "boundsM": {
             "min": [
               -1.2790000438690186,
@@ -368,12 +368,12 @@
               16.335000038146973
             ]
           },
-          "triangles": 135166,
-          "vertices": 201788,
+          "triangles": 131102,
+          "vertices": 190534,
           "primitives": 10,
-          "bytes": 8516908,
+          "bytes": 8108192,
           "embeddedImageBytes": 414183,
-          "geometryBytes": 8102725,
+          "geometryBytes": 7694009,
           "images": [
             {
               "sha256": "f815d2855711698883c2e6714222a402ffa4f96ae8311ebda00614d09f313060",
@@ -552,7 +552,7 @@
         "standingHeightM": 1.95,
         "capsuleRadiusM": 0.25,
         "referencePath": "qa/clearance-validation.json",
-        "doorState": "closed; no boardability claimed"
+        "doorState": "exterior boarding doors closed; inter-car gangway open without door leaves; no boardability claimed"
       },
       "collision": {
         "kind": "not runtime supplied",

@@ -1,15 +1,21 @@
 test_actual_binary_matches_measured_counts (__main__.MarkVPackageTests.test_actual_binary_matches_measured_counts) ... ok
 test_master_separate_and_not_budget_claimed (__main__.MarkVPackageTests.test_master_separate_and_not_budget_claimed) ... ok
+test_negative_actual_glb_blocking_panel_rejected (__main__.MarkVPackageTests.test_negative_actual_glb_blocking_panel_rejected) ... ok
 test_negative_component_bounds_rejected (__main__.MarkVPackageTests.test_negative_component_bounds_rejected) ... ok
+test_negative_cross_passage_door_rejected (__main__.MarkVPackageTests.test_negative_cross_passage_door_rejected) ... ok
 test_negative_displaced_camera_rejected (__main__.MarkVPackageTests.test_negative_displaced_camera_rejected) ... ok
 test_negative_displaced_pelvis_rejected (__main__.MarkVPackageTests.test_negative_displaced_pelvis_rejected) ... ok
+test_negative_distal_endwall_rejected (__main__.MarkVPackageTests.test_negative_distal_endwall_rejected) ... ok
 test_negative_duplicate_anchor_rejected (__main__.MarkVPackageTests.test_negative_duplicate_anchor_rejected) ... ok
 test_negative_duplicate_overlap_rejected (__main__.MarkVPackageTests.test_negative_duplicate_overlap_rejected) ... ok
 test_negative_empty_batches_rejected (__main__.MarkVPackageTests.test_negative_empty_batches_rejected) ... ok
+test_negative_flat_bellows_rejected (__main__.MarkVPackageTests.test_negative_flat_bellows_rejected) ... ok
+test_negative_gangway_transom_rejected (__main__.MarkVPackageTests.test_negative_gangway_transom_rejected) ... ok
 test_negative_manifest_sidecar_hash_rejected (__main__.MarkVPackageTests.test_negative_manifest_sidecar_hash_rejected) ... ok
 test_negative_missing_batch_rejected (__main__.MarkVPackageTests.test_negative_missing_batch_rejected) ... ok
 test_negative_missing_floor_not_valid (__main__.MarkVPackageTests.test_negative_missing_floor_not_valid) ... ok
 test_negative_missing_obstacle_range_rejected (__main__.MarkVPackageTests.test_negative_missing_obstacle_range_rejected) ... ok
+test_negative_off_center_gangway_leaf_rejected (__main__.MarkVPackageTests.test_negative_off_center_gangway_leaf_rejected) ... ok
 test_negative_out_of_bounds_rejected (__main__.MarkVPackageTests.test_negative_out_of_bounds_rejected) ... ok
 test_negative_sidecar_hash_rejected (__main__.MarkVPackageTests.test_negative_sidecar_hash_rejected) ... ok
 test_negative_translated_ancestor_rejected (__main__.MarkVPackageTests.test_negative_translated_ancestor_rejected) ... ok
@@ -18,11 +24,12 @@ test_negative_truncated_glb_rejected (__main__.MarkVPackageTests.test_negative_t
 test_no_runtime_claim (__main__.MarkVPackageTests.test_no_runtime_claim) ... ok
 test_packed_original_images_and_no_lights (__main__.MarkVPackageTests.test_packed_original_images_and_no_lights) ... ok
 test_positive_floor_support_both_lods (__main__.MarkVPackageTests.test_positive_floor_support_both_lods) ... ok
+test_positive_open_folded_gangway_all_variants (__main__.MarkVPackageTests.test_positive_open_folded_gangway_all_variants) ... ok
 test_seat_and_door_anchors_retained (__main__.MarkVPackageTests.test_seat_and_door_anchors_retained) ... ok
 test_source_hashes (__main__.MarkVPackageTests.test_source_hashes) ... ok
 test_two_budget_lods (__main__.MarkVPackageTests.test_two_budget_lods) ... ok
 
 ----------------------------------------------------------------------
-Ran 23 tests in 0.416s
+Ran 30 tests in 1.580s
 
 OK

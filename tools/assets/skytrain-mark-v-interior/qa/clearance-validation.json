@@ -13,6 +13,26 @@
         "zMaxM": 5.35,
         "samples": 257
       },
+      "openGangway": {
+        "status": "pass",
+        "doorLeafPresent": false,
+        "openVolumeM": {
+          "min": [
+            -0.6,
+            0.035,
+            -8.535
+          ],
+          "max": [
+            0.6,
+            2.05,
+            -7.6
+          ]
+        },
+        "method": "full-volume conservative component bounds from exact complete GLB ranges, plus 99 triangle-based support probes",
+        "foldedSides": 2,
+        "supportProbes": 99,
+        "scope": "static A-car connector only, no moving coupling or accessibility certification"
+      },
       "gangwayCentralSamples": 3,
       "gangwayTestHeightM": 2.05,
       "method": "Conservative component AABBs plus barycentric support-height intersections on actual floor/bridge triangles, independently from GLB binary ranges",
@@ -28,6 +48,26 @@
         "zMinM": -7.4,
         "zMaxM": 5.35,
         "samples": 257
+      },
+      "openGangway": {
+        "status": "pass",
+        "doorLeafPresent": false,
+        "openVolumeM": {
+          "min": [
+            -0.6,
+            0.035,
+            -8.535
+          ],
+          "max": [
+            0.6,
+            2.05,
+            -7.6
+          ]
+        },
+        "method": "full-volume conservative component bounds from exact complete GLB ranges, plus 99 triangle-based support probes",
+        "foldedSides": 2,
+        "supportProbes": 99,
+        "scope": "static A-car connector only, no moving coupling or accessibility certification"
       },
       "gangwayCentralSamples": 3,
       "gangwayTestHeightM": 2.05,

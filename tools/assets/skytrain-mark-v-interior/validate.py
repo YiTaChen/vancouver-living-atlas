@@ -37,7 +37,7 @@ def component_rows(path, expected_hash=None):
    check(all(vstart<=i<vstart+vcount for i in ids),'indices escape component vertex range')
    pts=[ps[i] for i in ids];bounds={s:[f(p[k] for p in pts) for k in range(3)] for s,f in [('min',min),('max',max)]}
    check(all(abs(bounds[s][k]-r['boundsM'][s][k])<1e-5 for s in ['min','max'] for k in range(3)),'component bounds do not match actual binary')
-   out.append({'name':r['componentId'],**bounds,**({'supportTrianglesM':[[ps[i] for i in ids[j:j+3]] for j in range(0,len(ids),3)]} if r['componentId'] in ['floor-slab','gangway-bridge'] else {})})
+   out.append({**({'foldProfileXZ':sorted(set((round(p[0],6),round(p[2],6)) for p in pts),key=lambda p:p[1])} if r['componentId'].startswith('gangway-side-bellows') else {}),'name':r['componentId'],**bounds,**({'supportTrianglesM':[[ps[i] for i in ids[j:j+3]] for j in range(0,len(ids),3)]} if r['componentId'] in ['floor-slab','gangway-bridge'] else {})})
   for intervals,total,label in [(index_intervals,len(ix),'index'),(vertex_intervals,len(ps),'vertex')]:
    cursor=0
    for start,end in sorted(intervals):check(start==cursor,'component '+label+' coverage gap/overlap');cursor=end
@@ -53,6 +53,29 @@ def support_height(rows,x,z):
    u=((b[2]-c[2])*(x-c[0])+(c[0]-b[0])*(z-c[2]))/den;v=((c[2]-a[2])*(x-c[0])+(a[0]-c[0])*(z-c[2]))/den;w=1-u-v
    if min(u,v,w)>=-1e-6:heights.append(u*a[1]+v*b[1]+w*c[1])
  return max(heights) if heights else None
+
+def validate_open_gangway(rows):
+ """Conservative full-volume exclusion, independent of component naming.
+ A 1.2 m wide x 2.015 m high open prism spans the entire connection and
+ thresholds. This rejects any closure panel, including transparent glazing,
+ narrow off-center leaves and obstacles between the older three samples.
+ """
+ low=[-.60,.035,-8.535];high=[.60,2.05,-7.60]
+ for r in rows:
+  overlap=all(r['max'][i]>low[i]+1e-6 and r['min'][i]<high[i]-1e-6 for i in range(3))
+  check(not overlap,'open gangway blocked by '+r['name'])
+ sides=[r for r in rows if r['name'].startswith('gangway-side-bellows')]
+ check(len(sides)==2,'two flexible gangway sides required')
+ for r in sides:
+  profile=r.get('foldProfileXZ',[])
+  check(len(profile)>=7,'gangway bellows must retain visible folds')
+  differences=[profile[i+1][0]-profile[i][0] for i in range(len(profile)-1)]
+  check(all(abs(d)>.025 for d in differences) and all(a*b<0 for a,b in zip(differences,differences[1:])),'gangway bellows must be accordion folds, not flat door-like slabs')
+ for x in [-.55,0,.55]:
+  for j in range(33):
+   z=-8.53+j*(.93/32);h=support_height(rows,x,z)
+   check(h is not None and -.001<=h<=.0035,'continuous gangway floor support missing')
+ return {'status':'pass','doorLeafPresent':False,'openVolumeM':{'min':low,'max':high},'method':'full-volume conservative component bounds from exact complete GLB ranges, plus 99 triangle-based support probes','foldedSides':2,'supportProbes':99,'scope':'static A-car connector only, no moving coupling or accessibility certification'}
 
 def validate_anchors(doc,layout):
  nodes=doc['nodes'];names=[n.get('name','') for n in nodes];check(len(names)==len(set(names)),'duplicate node/anchor IDs')
@@ -72,7 +95,7 @@ def main():
  layout=json.loads((HERE/'layout-assumptions.json').read_text());unique_images={}
  for asset in m['assets']:
   for lod in asset['lods']:
-   check(lod['componentsFile']==str(Path(lod['file']).with_suffix('.components.json')),'sidecar path mismatch');doc,unused=component_rows(HERE/lod['file'],lod['componentsSha256']);validate_anchors(doc,layout)
+   check(lod['componentsFile']==str(Path(lod['file']).with_suffix('.components.json')),'sidecar path mismatch');doc,unused=component_rows(HERE/lod['file'],lod['componentsSha256']);validate_anchors(doc,layout);validate_open_gangway(unused)
    actual=C.measure_glb(HERE/lod['file']);check(lod['images']==actual['images'],'manifest embedded image inventory mismatch');check(lod['embeddedImageBytes']==actual['embeddedImageBytes'],'manifest embedded image bytes mismatch')
    for im in actual['images']:unique_images[im['sha256']]=im['texelBytesWithMips']
  check(sum(unique_images.values())<=16*1024*1024,'deduplicated shared texture budget exceeded')
@@ -84,6 +107,7 @@ def main():
   d,rows=component_rows(HERE/lod['file'],lod['componentsSha256']);check(len([n for n in d['nodes'] if n.get('name','').endswith('-pelvis')])==22,'seat anchor count')
   check(not d.get('animations'),'unexpected runtime animation');check(not d.get('skins'),'unexpected skin')
   check(all(not x.get('emissiveFactor') or not any(x['emissiveFactor']) for x in d['materials']),'night/emissive scope change')
+  open_gangway=validate_open_gangway(rows)
   samples=[];hits=[]
   # Conservative component AABBs tested against 1.95 m standing capsules in a
   # central route offset around the deliberately centered stanchions. Not navigation.
@@ -96,14 +120,15 @@ def main():
     if dx*dx+dz*dz<.25**2:hit.append(r['name'])
    if hit:hits.append({'pointM':[x,0,z],'components':hit})
   check(not hits,'conservative corridor conflicts: '+str(hits[:2]))
-  # Independent central gangway corridor. Door panels intentionally stay closed.
+  # Independent central gangway corridor. Exterior boarding doors stay closed;
+  # the inter-car gangway has no door leaves or closing panels.
   for z in [-8.38,-8.1,-7.82]:
    h=support_height(rows,0,z);check(h is not None and abs(h-.0025)<.001,'gangway support surface missing or off datum')
    for r in rows:
     if r['max'][1]<=.035 or r['min'][1]>=2.05:continue
     dx=max(r['min'][0],0,-r['max'][0]);dz=max(r['min'][2]-z,0,z-r['max'][2]);check(dx*dx+dz*dz>=.25**2,'gangway standing corridor conflict')
   budgets.append({'lod':level,'triangles':lod['triangles'],'triangleCap':triCap,'bytes':lod['bytes'],'byteCap':byteCap,'materialPrimitives':lod['primitives'],'status':'pass'})
-  clear.append({'lod':level,'status':'pass','capsuleHeightM':1.95,'radiusM':.25,'aislePath':{'xM':.33,'zMinM':-7.4,'zMaxM':5.35,'samples':257},'gangwayCentralSamples':3,'gangwayTestHeightM':2.05,'method':'Conservative component AABBs plus barycentric support-height intersections on actual floor/bridge triangles, independently from GLB binary ranges','limits':'No door traversal, seated ingress, moving collision, platform binding, accessibility certification or front-salon free-walk validation'})
+  clear.append({'lod':level,'status':'pass','capsuleHeightM':1.95,'radiusM':.25,'aislePath':{'xM':.33,'zMinM':-7.4,'zMaxM':5.35,'samples':257},'openGangway':open_gangway,'gangwayCentralSamples':3,'gangwayTestHeightM':2.05,'method':'Conservative component AABBs plus barycentric support-height intersections on actual floor/bridge triangles, independently from GLB binary ranges','limits':'No door traversal, seated ingress, moving collision, platform binding, accessibility certification or front-salon free-walk validation'})
  write(HERE/'qa/clearance-validation.json',{'status':'pass','scope':'offline sampled static corridor only','lods':clear})
  write(HERE/'qa/validation.json',{'status':'pass','scope':'packaging, actual geometry, budgets, texture inventory and conservative static clearance; not runtime','budgetChecks':budgets,'authoringStudyBudget':'intentionally over budget; never runtime-enabled','seatCount':22,'anchorValidation':'exact unique pelvis/camera ID sets and transformed positions match layout','runtime':'not_run','placementCompatibility':'not_assumed'})
  print(json.dumps({'status':'pass','budgetChecks':budgets,'clearance':'pass','runtime':'not_run'},indent=2))

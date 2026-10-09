@@ -20,7 +20,7 @@
     "bus": 23,
     "canada": 19,
     "busRuntimeCandidate": 39,
-    "markV": 23
+    "markV": 30
   },
   "station": {
     "stations": 7,
@@ -36,21 +36,21 @@
   "independentReview": {
     "initialFindingsFixedAndRechecked": 3,
     "transitRefinement": "Complete sidecar coverage/hashes, identity transforms, exact unique anchors, actual support triangles reviewed; final checks pass",
-    "markVFloorSamplesPerExport": 4426,
     "busThresholdSamples": 143220,
     "busRearUnchangedComponents": 526,
-    "runtimeWebGL": "not_run"
+    "runtimeWebGL": "not_run",
+    "markVFloorSupport": "Actual triangles form exact overlapping support rectangles; composed connection also independently checked"
   },
   "productionIsolation": {
     "status": "pass",
-    "protectedDistinctPayloads": 102,
+    "protectedDistinctPayloads": 103,
     "productionFiles": 101,
     "scope": "static production artifact hashes/references, not browser/GPU verification"
   },
   "hostedCI": "not_run: draft PR targets PR6 branch; workflow only main",
   "runtimeWebGL": "not_run",
   "deployment": "not_requested_not_run",
-  "revisionParent": "a965982a58b5d15996af68899de021fa30f9267c",
+  "revisionParent": "4f19f06b271944e9bb16e8495cb72d628847bd7f",
   "busCandidate": {
     "triangles": [
       11704,
@@ -65,14 +65,29 @@
   },
   "markV": {
     "triangles": [
-      10992,
-      2964
+      11016,
+      2976
     ],
     "bytes": [
-      1177176,
-      305404
+      1179164,
+      306220
     ],
     "referenceSeats": 22,
     "profile": "representative A end-car, not full five-car consist"
+  },
+  "markVGangwayCorrection": {
+    "allThreeSourcesAndExports": "updated_and_byte_identical_reexport_verified",
+    "unchangedReferenceNodesPerVariant": 56,
+    "unchangedNonGangwayComponents": [
+      513,
+      231,
+      958
+    ],
+    "actualComposedTriangles": 22032,
+    "composedFloorProbes": 387,
+    "identityQuaternionRegression": "rejected_12_blocking_triangles",
+    "fiveFinalViews": "pixel_and_hash_verified",
+    "qaAdjacentContext": "two_exact_A_car_instances_not_C_car_or_full_consist",
+    "runtimeWebGL": "not_run"
   }
 }

@@ -3,29 +3,9 @@
   "scope": "image integrity and exact final GLB provenance; human visual review is separate",
   "views": [
     {
-      "file": "02-seats-door-detail.png",
-      "imageSha256": "dc005f5365320c43c25ecca93350a431091b2edb636ac4bf99f01257a905eec3",
-      "inputSha256": "e68542ad516bef61e9c32f051cd062995265213f2f8d0e732e4b29e87d23643e",
-      "pixelSize": [
-        960,
-        640
-      ],
-      "eyeHeightM": 1.57
-    },
-    {
-      "file": "01-aisle-toward-gangway.png",
-      "imageSha256": "885e2868a08be97e2b05a9ff04365e2eed4ea020d8082236f745abcd3823ce56",
-      "inputSha256": "e68542ad516bef61e9c32f051cd062995265213f2f8d0e732e4b29e87d23643e",
-      "pixelSize": [
-        960,
-        640
-      ],
-      "eyeHeightM": 1.65
-    },
-    {
-      "file": "05-aisle-lod1.png",
-      "imageSha256": "cf466923ad722b1147b2465ea9b320495cf6ddcba0304a09f3f74daffe6b2007",
-      "inputSha256": "6f840b8d7a679d5a0e5f1a7df21ab4d73c3273f916cbd122498fe20ce85f40da",
+      "file": "06-open-gangway-continuity.png",
+      "imageSha256": "d30d5c96a364ed147f04e4927b38cabd56d5ffb1b5b6aceb44e92939f9e1518b",
+      "inputSha256": "280aa59559444ac15d6c2d712c61e87b846076632d8127f116e20424a086c984",
       "pixelSize": [
         960,
         640
@@ -34,8 +14,38 @@
     },
     {
       "file": "04-gangway-return.png",
-      "imageSha256": "0a44403813446cd0d1619b88da1dcca3d55ad146bff7254b02e9a5a208925672",
-      "inputSha256": "e68542ad516bef61e9c32f051cd062995265213f2f8d0e732e4b29e87d23643e",
+      "imageSha256": "66078aac9012a7d8b06b1653041388e3c924f53fb323a8e3d9e96ab390041f09",
+      "inputSha256": "280aa59559444ac15d6c2d712c61e87b846076632d8127f116e20424a086c984",
+      "pixelSize": [
+        960,
+        640
+      ],
+      "eyeHeightM": 1.65
+    },
+    {
+      "file": "02-seats-door-detail.png",
+      "imageSha256": "ce2a5c24a6b681a88805248ae4cf826c4e218a1fe9bc0b36fdce7b512e0bdd5f",
+      "inputSha256": "280aa59559444ac15d6c2d712c61e87b846076632d8127f116e20424a086c984",
+      "pixelSize": [
+        960,
+        640
+      ],
+      "eyeHeightM": 1.57
+    },
+    {
+      "file": "01-aisle-toward-gangway.png",
+      "imageSha256": "597c6af9248f5ec5df3ffbd66947b8145458d1a0451cecdef5d8929a3dcf8baa",
+      "inputSha256": "280aa59559444ac15d6c2d712c61e87b846076632d8127f116e20424a086c984",
+      "pixelSize": [
+        960,
+        640
+      ],
+      "eyeHeightM": 1.65
+    },
+    {
+      "file": "05-aisle-lod1.png",
+      "imageSha256": "420b818d7b1b32a7fbd51649896e48523513506de9a823208209f4334fc0c988",
+      "inputSha256": "25b45a2fd670a818b8ef10bc3dd92fbc427b941231063d8f9927706ddafe9e8d",
       "pixelSize": [
         960,
         640

@@ -13,11 +13,11 @@ npm warn Unknown env config "http-proxy". This will stop working in the next maj
 transforming...
 ✓ 239 modules transformed.
 rendering chunks...
-✓ built in 1m 14s
-[33m[PLUGIN_TIMINGS] [0mPlugin hooks ran for 73.4s of this 73.6s build (100%).
+✓ built in 29.20s
+[33m[PLUGIN_TIMINGS] [0mPlugin hooks ran for 29.1s of this 29.2s build (100%).
 The slowest hooks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
-  - vinext:google-fonts transform (90%, 66.1s, 2 calls)
-  - vite:css transform (9%, 6.6s, 1 call)
+  - vinext:google-fonts transform (88%, 25.7s, 2 calls)
+  - vite:css transform (11%, 3.2s, 1 call)
 Additional hook time came from the hooks below and from hooks under 1s.
 6 hooks are listed without a time. Their calls overlapped, so the time inside one call includes work from other calls. To find their cost, profile the build with `node --cpu-prof`:
   - rsc:virtual-client-package resolveId (792 calls)
@@ -30,13 +30,22 @@ See https://rolldown.rs/reference/InputOptions.checks#plugintimings for more det
 transforming...
 ✓ 671 modules transformed.
 rendering chunks...
-✓ built in 11.92s
+✓ built in 4.05s
+[33m[PLUGIN_TIMINGS] [0mPlugin hooks ran for 3.9s of this 4.0s build (96%).
+The slowest hooks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
+  - vinext:ignore-dynamic-requests transform (26%, 1.0s, 81 calls)
+Additional hook time came from the hooks below and from hooks under 1s.
+2 hooks are listed without a time. Their calls overlapped, so the time inside one call includes work from other calls. To find their cost, profile the build with `node --cpu-prof`:
+  - vinext:og-inline-fetch-assets resolveId (2017 calls)
+  - alias resolveId (2381 calls)
+See https://rolldown.rs/reference/InputOptions.checks#plugintimings for more details.
+
 [3/5] build rsc environment...
 transforming...
 ✓ 230 modules transformed.
 rendering chunks...
 computing gzip size...
-✓ built in 8.45s
+✓ built in 2.94s
 [4/5] build client environment...
 transforming...
 ✓ 2404 modules transformed.
@@ -47,21 +56,21 @@ computing gzip size...
 - Using dynamic import() to code-split the application
 - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
-✓ built in 10.80s
+✓ built in 4.77s
+[33m[PLUGIN_TIMINGS] [0mPlugin hooks ran for 3.6s of this 4.8s build (75%).
+2 hooks are listed without a time. Their calls overlapped, so the time inside one call includes work from other calls. To find their cost, profile the build with `node --cpu-prof`:
+  - vinext:og-inline-fetch-assets resolveId (7281 calls)
+  - alias resolveId (7643 calls)
+See https://rolldown.rs/reference/InputOptions.checks#plugintimings for more details.
+
 [5/5] build ssr environment...
 transforming...
 ✓ 636 modules transformed.
 rendering chunks...
 computing gzip size...
-✓ built in 4.31s
-[33m[PLUGIN_TIMINGS] [0mPlugin hooks ran for 2.8s of this 4.3s build (67%).
-2 hooks are listed without a time. Their calls overlapped, so the time inside one call includes work from other calls. To find their cost, profile the build with `node --cpu-prof`:
-  - vinext:og-inline-fetch-assets resolveId (1941 calls)
-  - alias resolveId (2291 calls)
-See https://rolldown.rs/reference/InputOptions.checks#plugintimings for more details.
-
+✓ built in 2.25s
 [0m  Pre-rendering all routes (output: 'export')...
-[vinext] Production server for prerendering running at http://127.0.0.1:45199
+[vinext] Production server for prerendering running at http://127.0.0.1:37077
   Prerendered 2 routes (0 skipped).
   Discovered 1 CDN warmup path(s).
 [0m

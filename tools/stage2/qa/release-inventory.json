@@ -1,13 +1,13 @@
 {
   "scope": "All supplement release files including source-backed transit interior refinement, except this self-referential inventory; base PR6 unchanged",
   "baseRevision": "9efce79601deac6a0648cf8e158f3935cbb46f51",
-  "revisionParent": "a965982a58b5d15996af68899de021fa30f9267c",
+  "revisionParent": "4f19f06b271944e9bb16e8495cb72d628847bd7f",
   "files": [
     {
       "path": "docs/city-life-transit/STAGE2_HANDOFF.md",
       "bytes": 7255,
-      "gitBlobSha": "8ab4301e92ea15d2b8e8e8cb00631d646fd50d13",
-      "sha256": "7e78455722167fd9bede610d76997911a319a244bf80014ccd72a73ce89f7e10"
+      "gitBlobSha": "f1cdd0b981ffcbb0cd037ace6d25998f8f6088f6",
+      "sha256": "6aa4de71805b11224cd336ef9f4d8a136a8d18e8620cbe44a993b98b640525f6"
     },
     {
       "path": "docs/city-life-transit/STAGE2_RECOVERY_CHECKPOINT.md",
@@ -17,9 +17,9 @@
     },
     {
       "path": "docs/city-life-transit/TRANSIT_INTERIOR_REFINEMENT.md",
-      "bytes": 4548,
-      "gitBlobSha": "2503834501c26d09c2cce7f75222f34bf2e7c979",
-      "sha256": "8a3c69f7af320479524c4741798762aa77d98ecc3db40291e1edf9d9d1ebf1db"
+      "bytes": 5467,
+      "gitBlobSha": "51ec53bc47a828d394606dea74fceab6b00a10b4",
+      "sha256": "3024a0f7ca408d2c25108419e94e30fc49490b327b9eef5d0646d0c7d50eed6d"
     },
     {
       "path": "lib/city/city-life/interactive-renderer-candidate.ts",
@@ -959,15 +959,15 @@
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/README.md",
-      "bytes": 7581,
-      "gitBlobSha": "2b25935d167df9f57e1fa5d53af55146161d2bdb",
-      "sha256": "0c8047efa19845965b797e4601115cfdcad966bb85750d5cd6110ba49e0ae5a8"
+      "bytes": 9666,
+      "gitBlobSha": "d085ac1686b30d23b9ddc973eba522cd39353772",
+      "sha256": "47ab61e48327e7e8e700e0696af42cecd8a9243d5f23c4e04780d54d282c4190"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/REFERENCES.md",
-      "bytes": 4024,
-      "gitBlobSha": "887c8c6042f3e4265e6b5839fd4acb41d78daf2f",
-      "sha256": "e5ad49f2c23a4a400a536940dfda393bee36fd014919f1ae614dc052c26e9ec1"
+      "bytes": 4955,
+      "gitBlobSha": "a5cbe34c1ea5db38ca45b9dbe03f1e513befe2a2",
+      "sha256": "3b3fd8d426afc7bec559646d1ca99da27a2f6d48f87c0c3bbbbfcdd9b25da2c5"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/build.py",
@@ -983,39 +983,39 @@
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/exports/mark-v-a-car-interior.lod0.components.json",
-      "bytes": 261223,
-      "gitBlobSha": "e8bac5cdfd1b14fb8cc337069f04894cdf3e531f",
-      "sha256": "a88bb94629f5a64592e75e2824bf14ec4e8aad264dfa98e5eb5c1066994d0eae"
+      "bytes": 261221,
+      "gitBlobSha": "81d6b60f8fdeaac042f28bffa58a76f79be67206",
+      "sha256": "324f9e7d4bff1d9d12ef152a6895ec756f1fc2476e23c0901641cab371d95cc7"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/exports/mark-v-a-car-interior.lod0.glb",
-      "bytes": 1177176,
-      "gitBlobSha": "4474de8767cb1bac70c42b0eccc57d488fe6c957",
-      "sha256": "e68542ad516bef61e9c32f051cd062995265213f2f8d0e732e4b29e87d23643e"
+      "bytes": 1179164,
+      "gitBlobSha": "a86f89ab564229ab98767076ce183ec050496001",
+      "sha256": "280aa59559444ac15d6c2d712c61e87b846076632d8127f116e20424a086c984"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/exports/mark-v-a-car-interior.lod1.components.json",
       "bytes": 117130,
-      "gitBlobSha": "671b613c9cccd9596e94e0bc1e49934f0e951702",
-      "sha256": "c39c906ea82727578ec84052ba1352a0cf5a04d26b76b8a3580419190fa22847"
+      "gitBlobSha": "45e9bc59cd5b5da76d76069e907dd577565a9003",
+      "sha256": "d62dc5fbf129aa1d5e1f8d14bf7cf19619ffc546769249468e333b9aeec14075"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/exports/mark-v-a-car-interior.lod1.glb",
-      "bytes": 305404,
-      "gitBlobSha": "1c470ae046fc5e776bd96e90659ccb1609843d7c",
-      "sha256": "6f840b8d7a679d5a0e5f1a7df21ab4d73c3273f916cbd122498fe20ce85f40da"
+      "bytes": 306220,
+      "gitBlobSha": "44827db0929a5e84911b84380ff6b9c5b27db7d9",
+      "sha256": "25b45a2fd670a818b8ef10bc3dd92fbc427b941231063d8f9927706ddafe9e8d"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/exports/mark-v-a-car-study.components.json",
-      "bytes": 499916,
-      "gitBlobSha": "f06efcf47b440fb70af588f43d5e517363a36533",
-      "sha256": "3b1e16e1e007b471286d45bb150dea8cf7a74d4b4c1e3b21c457b1243089579a"
+      "bytes": 489242,
+      "gitBlobSha": "8a48ac2904371ad45e2be0eb151b7662bd5d6a9c",
+      "sha256": "7e7e78b9b5891ab43ea399e4a64037023480b43696caff748ff9ff444202c1c5"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/exports/mark-v-a-car-study.glb",
-      "bytes": 8516908,
-      "gitBlobSha": "288939c4309eef99fadea946274c88e79d0f3a9c",
-      "sha256": "c27e3aaddf680888ce56f72db1448311d269dde8d47469c5730b778ce9b20c1d"
+      "bytes": 8108192,
+      "gitBlobSha": "b638ab6e6ab6df8de56b2eb056629153b584fb98",
+      "sha256": "c31086665fc793ab29ebd9948bc2d716a5cb570142f2dd7d1411c86fc590f6a0"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/finalize_lods.py",
@@ -1025,9 +1025,9 @@
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/layout-assumptions.json",
-      "bytes": 6220,
-      "gitBlobSha": "ec84a0dafb338aed316cb89b7b9de84740be0206",
-      "sha256": "47fad299001c1a14b9d1c3fcd9e90a002c63496c67356e696db1133269b677c8"
+      "bytes": 6590,
+      "gitBlobSha": "b763afe1829a32f7eadd74143e050d7d46472010",
+      "sha256": "72273c99052fb68be38c436b76ab4663795dad452c07608826e39927b11b4538"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/make_textures.py",
@@ -1037,15 +1037,21 @@
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/manifest.json",
-      "bytes": 20389,
-      "gitBlobSha": "a9de7c460741d1d86de3d9066a038d38c4ccc053",
-      "sha256": "2909fac045a0aa859e624b07da29ee61176e6cb70804074048f7ee07961e74af"
+      "bytes": 20525,
+      "gitBlobSha": "7285a4ee14f1d7014fdc668d481a8d6ab1711347",
+      "sha256": "cce42ba145cd6b8385eb2e3aeb8cd6fe39fa8b7a56cf0a53c096b478d42c9cb5"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/metadata.py",
-      "bytes": 5505,
-      "gitBlobSha": "122393502933b88af99f69d5be35f4f730d44afe",
-      "sha256": "b69700a3d6792cf852504023c02d73f663455df0233d897f5f7f1eeb87940b8f"
+      "bytes": 5573,
+      "gitBlobSha": "705573e94ef3d728bcc34b8792a0dd3f99326781",
+      "sha256": "380b678f7836397061836107b6de5616d80296e30c45a6e652c91ea73488041e"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/open_gangway.py",
+      "bytes": 2352,
+      "gitBlobSha": "42866568ad32282c9ea80edec8bbbf7b66e94c94",
+      "sha256": "052371f0c7fa455c685542af2e3bdaca67c36bf06cdf052acdb60cfa424fd017"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/optimize_sources.py",
@@ -1060,28 +1066,40 @@
       "sha256": "684aab3034d61f7af5f3859a0a00d8696ff65ead85cffad9be9af03b4741d438"
     },
     {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/adjacent-context-validation.json",
+      "bytes": 1646,
+      "gitBlobSha": "1de2bece73dede80528fed8c4e792e29e6fada78",
+      "sha256": "88084cf9403de5cfd0d245184f0a16e1e6a9d2deb85b5cf8d56c7b5259fcfcdd"
+    },
+    {
       "path": "tools/assets/skytrain-mark-v-interior/qa/clearance-validation.json",
-      "bytes": 1312,
-      "gitBlobSha": "e5e55d1cc52171858702d6357ca9ee07f80812cc",
-      "sha256": "eb8a7eeecd7c0d98f0d26c4ab7c879f8be03532f17ec81b8332f096efc781763"
+      "bytes": 2482,
+      "gitBlobSha": "b9d350852c63fd55e6e07bf580988b702b00f5a0",
+      "sha256": "b186bb0ce03d2af5e5398b1e752eb03cc057a916c542048d471d75e6fe164339"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/qa/common-validation.json",
       "bytes": 12114,
-      "gitBlobSha": "c3d44cf7e7047c4f20033d5964e6eaed98859355",
-      "sha256": "08f10e12b546be4ff438c8785fdb63f7754fb1e1e6a00321ce724ef2e5e26348"
+      "gitBlobSha": "ff879a4aae1f2e62a5d824085a47257897147283",
+      "sha256": "8ab0d8a5dd0d9aa3da6a10c3c409566894cc7935b987b2f3b65402633e26d315"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/context-regression-tests.txt",
+      "bytes": 1705,
+      "gitBlobSha": "b002f71afeb4c789737187b649570128a3245ec3",
+      "sha256": "c43db27550def9e0cbece567c6217bc05fbc2bb56d478f34ef1412cc88083f2d"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/qa/exported-material-inventory.json",
       "bytes": 18009,
-      "gitBlobSha": "00c3700c666eb6905ed79117f558af6709c5b700",
-      "sha256": "bc3a746d4d1ad50d1208c08ab0e59c0eae7dba8959b485ca5813786cec7a3dfe"
+      "gitBlobSha": "22714a9a7ba2afcd584bbb08ce07c1e14a28d692",
+      "sha256": "ade3035d62892b9aea9346525aa220d66d9cff533a01780247fcf0fcb072cfdf"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/qa/handoff.json",
-      "bytes": 2496,
-      "gitBlobSha": "71758b84a4e04d68add0822b4c9708c7e69fc8a6",
-      "sha256": "80937c8c5750a1d601dd01257832c0d80a49bdfb6fef1231a466ae988922ead8"
+      "bytes": 4189,
+      "gitBlobSha": "7ffad917a929c8874c7a9ed16b267d46cf5a5105",
+      "sha256": "1f9c73dec42a669f5d763961d14120fa104651516b6e0edfa03560930b2a52fa"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/qa/lod0-omitted-components.json",
@@ -1098,80 +1116,86 @@
     {
       "path": "tools/assets/skytrain-mark-v-interior/qa/measurements.json",
       "bytes": 6952,
-      "gitBlobSha": "f004051ce37ccc96ced1b1d6dfaf5e96f74789cb",
-      "sha256": "0d6a686cc46c220e1b7f112b8b1af44e6451b563c5cb255667d64de7e3f69d92"
+      "gitBlobSha": "aef591528738fe78f6142ee60cf420d83a8d261b",
+      "sha256": "a7729bd14ee18864f6b75b18f17341c07ed91eebe9050c881bcb6e21bb75ddd6"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/qa/preview-integrity.json",
-      "bytes": 1403,
-      "gitBlobSha": "e5698a353ebc998eb89098409073ccc55b5a4f4d",
-      "sha256": "d4867987da3b7725fa54e41f9de749412305f589e97492450ad73787c70437ba"
+      "bytes": 1722,
+      "gitBlobSha": "411b3a14b4befa38286377b199a836052812a621",
+      "sha256": "8c7ceeb418653021b41d5571d8be80b190f7eaa800c313e8a65cfc68da7acb82"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/qa/previews/01-aisle-toward-gangway.png",
-      "bytes": 1445666,
-      "gitBlobSha": "ff6f0d7545d44d9d5fa25ffee54e4f89f26c6827",
-      "sha256": "885e2868a08be97e2b05a9ff04365e2eed4ea020d8082236f745abcd3823ce56"
+      "bytes": 1445862,
+      "gitBlobSha": "86a0775ac3679c66a3994d8240c51a0fc74f6876",
+      "sha256": "597c6af9248f5ec5df3ffbd66947b8145458d1a0451cecdef5d8929a3dcf8baa"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/qa/previews/02-seats-door-detail.png",
-      "bytes": 1373962,
-      "gitBlobSha": "e22263a99c61f5307ffff2b571c8dc4f17e8cc1f",
-      "sha256": "dc005f5365320c43c25ecca93350a431091b2edb636ac4bf99f01257a905eec3"
+      "bytes": 1374172,
+      "gitBlobSha": "3062f323a4aa2c70141dc9507f807c7fd3ffdc62",
+      "sha256": "ce2a5c24a6b681a88805248ae4cf826c4e218a1fe9bc0b36fdce7b512e0bdd5f"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/qa/previews/04-gangway-return.png",
-      "bytes": 1303110,
-      "gitBlobSha": "8cab60e1e0ca46416ce163fa03822d8a58f1b3cb",
-      "sha256": "0a44403813446cd0d1619b88da1dcca3d55ad146bff7254b02e9a5a208925672"
+      "bytes": 1291619,
+      "gitBlobSha": "641cd8f584118f8f495525f284b51c9da278b9cf",
+      "sha256": "66078aac9012a7d8b06b1653041388e3c924f53fb323a8e3d9e96ab390041f09"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/qa/previews/05-aisle-lod1.png",
-      "bytes": 1345939,
-      "gitBlobSha": "2956502b034063654f96e1a8599e03925e4451b5",
-      "sha256": "cf466923ad722b1147b2465ea9b320495cf6ddcba0304a09f3f74daffe6b2007"
+      "bytes": 1345688,
+      "gitBlobSha": "31479299c8993f441f21db5936642786d3d3ae5c",
+      "sha256": "420b818d7b1b32a7fbd51649896e48523513506de9a823208209f4334fc0c988"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/qa/previews/06-open-gangway-continuity.png",
+      "bytes": 1420639,
+      "gitBlobSha": "852d975c59d58f72b68658b47d67398f1023db81",
+      "sha256": "d30d5c96a364ed147f04e4927b38cabd56d5ffb1b5b6aceb44e92939f9e1518b"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/qa/previews/index.json",
-      "bytes": 3499,
-      "gitBlobSha": "c8dbc1b17da502516635e68983f2bfc1ffbc9dc0",
-      "sha256": "b0dbd32ebff1a3e166b27e1845246913d22e49c13fad1c11a6b7f3917bf5ddc3"
+      "bytes": 5675,
+      "gitBlobSha": "d5d8043053f5d4056ef499bb50692bcfa60b16de",
+      "sha256": "9a83a179658534c7006015e4cbf784d4bfbf4b17d9ae6b1ec8ca6fe6c3fd2896"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/qa/regression-tests.txt",
-      "bytes": 2651,
-      "gitBlobSha": "d553accf149ffd975a49c180638673ff5c9f43cf",
-      "sha256": "8ddc06e32204d2c375efa55639ca6ee375d0113a8e20ee1241c8cd542ac0e9a2"
+      "bytes": 3499,
+      "gitBlobSha": "7077ec399d00a8d649f3b9d090f104fc947f9f93",
+      "sha256": "b066b68be32d1f8de546ddb0ee2f534b7f126d738bdfe588e958b0d00be36613"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/qa/source-reexport-validation.json",
-      "bytes": 1143,
-      "gitBlobSha": "99b4a7c9b82a2d2174d9a0c9928c652c01e73d35",
-      "sha256": "2da2e745b13f869d208f35ebca517fcd944cc2ccb25cc9a74454c03501564a77"
+      "bytes": 1257,
+      "gitBlobSha": "0599b73787a3c18d9857120df98e4d71436d7789",
+      "sha256": "a92bb0d94f4434e371f7f3ea91fceaaccb29ac2ca785e0da1b017110c04ba9b0"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/qa/validation-console.txt",
       "bytes": 466,
-      "gitBlobSha": "a737762ae2aa4a7a2636706c10217bcee827ae76",
-      "sha256": "c6d8b8a1d7d8eef54bb95c209af12ffaa24d00393e2a692a7fde15c0d7b46a28"
+      "gitBlobSha": "11a5bbefde15c6ef90bfc123d8023df4ec00863f",
+      "sha256": "60f35be44f010b461988f7084d32d541fdf492b9047279f57af1231df704f88a"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/qa/validation.json",
       "bytes": 798,
-      "gitBlobSha": "e1274a2852e8c4a2b103c79688629e1af710fc34",
-      "sha256": "78c231fa53645862399e4d538746986719950bd32fe109e2e665e5055a117b89"
+      "gitBlobSha": "581685e8462c585174beb980a8e2030cb39e1ecc",
+      "sha256": "8f10ef62acd261588b57094f22b9c60a352947398963028fc6aecc115b298274"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/qa/visual-review.json",
-      "bytes": 3581,
-      "gitBlobSha": "e22ed842102049d1db11b4e3d2fb70c0840570c6",
-      "sha256": "db010dbf2df3bb9469f5767663823ce33de20ac1d270bb6352ee49722b4d6c79"
+      "bytes": 4715,
+      "gitBlobSha": "3288d2518a59b1ddf7c1f7d61c038ecb887231c7",
+      "sha256": "7bf180206f450f711b43b16eb411a86090e94f1dd0ec0aa4c85343aad4b48aed"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/qa_blender.py",
-      "bytes": 5996,
-      "gitBlobSha": "69cfc442a957372b3dd5d7101958a78ae60d9cdd",
-      "sha256": "7be4e16e6385c35ea8806f272516f222d8d749885beb3190f9d67df30e71ae33"
+      "bytes": 7908,
+      "gitBlobSha": "cb316784f94a1616b8436dcf2166b23e5535ddc8",
+      "sha256": "6ab2ed6b530f3943f70bbf849ea47a436642aecadd078c9849797c9db62f62ab"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/raise_gangway_header.py",
@@ -1193,27 +1217,27 @@
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/source/mark-v-a-car-interior.lod0.blend",
-      "bytes": 1078312,
-      "gitBlobSha": "1215caf511fd785d7811ca7a088cca5dcbe4060e",
-      "sha256": "7f6d0182366b79d50245a86e429bc97d15975adf5be7fe3053704bf8fd42d4f7"
+      "bytes": 1078810,
+      "gitBlobSha": "f97533f54f5c9729edb2815bba382cf851e4ceaf",
+      "sha256": "dae4e192c91d2475665ca930fcfcd02bc0fd42ca8f05aec291de2bf526f49bba"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/source/mark-v-a-car-interior.lod1.blend",
-      "bytes": 418249,
-      "gitBlobSha": "9862ce9e5778c8e7606504285ebfe0a30d76be91",
-      "sha256": "bdae4395f1e004947f27c837c88e024ffe22711a4e3b91277573412132dca1e2"
+      "bytes": 420154,
+      "gitBlobSha": "df65b1973ccfd826ef8e607edaf30c3cc83a1ba4",
+      "sha256": "712ca521f16b9fc2f40f770e61bea8fa9b56f6edd13c34df92f10b851748928c"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/source/mark-v-a-car-study.blend",
-      "bytes": 1220091,
-      "gitBlobSha": "50aa22bbd94338399ac7a00eb57f3d58144ac43e",
-      "sha256": "9f444f9502ceda608a9ccd3ee1db1b669b4a030a112a6884f40390a086337f9e"
+      "bytes": 1211592,
+      "gitBlobSha": "95de25e75baad4fcd36aa3d63bd726cb9c5b6432",
+      "sha256": "47924974440e9fbe2ef25b44b1abdfda1469944dfe67d0b6e3c7b3f5c7084826"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/test_package.py",
-      "bytes": 7102,
-      "gitBlobSha": "9bd2e6dfe7a85593fdceed071102645d81baecc3",
-      "sha256": "b77dd3327eec884436fa94bce5835b20d0f4a0b5b949803c55ae8d199277d89e"
+      "bytes": 10544,
+      "gitBlobSha": "fec18140b1aceba0b7442f9a70716f5fc2319f18",
+      "sha256": "dd83ca21231f8c396a0dd5a906a5795ff254f7f1a49585b5de7c39cd763f0771"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/textures/lod1-original-blue-fabric.png",
@@ -1253,15 +1277,21 @@
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/validate.py",
-      "bytes": 10587,
-      "gitBlobSha": "aad6adfb1bba7abd5e99ca0da6a15cae75b3d69d",
-      "sha256": "c21c112a8a3dee9f4d6c975e8c7b4111ce6b8a2b18edf14343d138edfe60f78d"
+      "bytes": 12469,
+      "gitBlobSha": "80532550db92ad738b0dc216cd2178873b28fe42",
+      "sha256": "72229f1ad3b0bbe9e83b8997fa8303838671bdab5deb015bdbd871fb754354da"
+    },
+    {
+      "path": "tools/assets/skytrain-mark-v-interior/verify_context.py",
+      "bytes": 2901,
+      "gitBlobSha": "6809122ee914271001d2ed6e7d5d66217cb4dfa0",
+      "sha256": "3fe5f4f2d53bfe26b65bb289b36efdc46bf8879e216af42f44722ba7b0f44a52"
     },
     {
       "path": "tools/assets/skytrain-mark-v-interior/verify_previews.py",
-      "bytes": 1689,
-      "gitBlobSha": "e81e1b094bfb2bbde807b636c19b837abc744f12",
-      "sha256": "ca8eb73f5de10c3b2e5cb6a19d0a3cf35786c3f144b7954a120bfe5f19c8691e"
+      "bytes": 2522,
+      "gitBlobSha": "5eb4e82374f6b47ddfb42939468398bca644e2d1",
+      "sha256": "a0f668df0e97098115e1f52d78a75e15f735cddce31933308e6f172faa842346"
     },
     {
       "path": "tools/assets/skytrain-stations-stage2/.gitignore",
@@ -1739,15 +1769,15 @@
     },
     {
       "path": "tools/stage2/qa/build-firebase.log",
-      "bytes": 3761,
-      "gitBlobSha": "d7f6f04a2310bfc45336c59c1d466930ef276ad1",
-      "sha256": "21ad932e29faf0bac6ae63044fe2edd6f86479f27021e90935821045707bc176"
+      "bytes": 4462,
+      "gitBlobSha": "6ccbaf279225d085808895a202d3fab07ce1dc0e",
+      "sha256": "662711ad193999084dc6172e3b5a2fbbd9586b03cc2e38ba39c3641b145e9cf0"
     },
     {
       "path": "tools/stage2/qa/full-lint.log",
       "bytes": 55668,
-      "gitBlobSha": "927450076d8dd71bcb869e878478ce78e408ffe5",
-      "sha256": "dbb10acdb9405efd45ef7bd9a05ae33348e9001f9273b688b76a18bd0b12cc79"
+      "gitBlobSha": "6c46df9ce2eb7d5a4da3da0fe28bb3b88c7cb039",
+      "sha256": "30e66f0e5d0478a9e35f15108da44ece4cc373de68489e7bddce395acdc562a0"
     },
     {
       "path": "tools/stage2/qa/isolation-negative-fixtures.json",
@@ -1758,14 +1788,14 @@
     {
       "path": "tools/stage2/qa/isolation.json",
       "bytes": 174,
-      "gitBlobSha": "eed77ab60dad0978338f950959d42f8a30ad99f3",
-      "sha256": "773350950f63bac454186ece614262de804e7b3e945398a1961aac375ddeb4eb"
+      "gitBlobSha": "38f70e1627240035e03fd07a813aedfd6c21c9bb",
+      "sha256": "e4bb8877949db3478a1b74dd6b7d086236a72be735ba8547ffc762763c1d677d"
     },
     {
       "path": "tools/stage2/qa/npm-test.log",
-      "bytes": 88004,
-      "gitBlobSha": "b58f3a15ffcfa7272ea9bc468669e63acffebdd9",
-      "sha256": "6e5a3e0fb2fbe3594e0615022bc71a59ae497589fd09a37e57513ee1a6716f79"
+      "bytes": 88195,
+      "gitBlobSha": "e44212a15e90c2c3709d89b35942f1b2d8b02d7e",
+      "sha256": "809064b8d64798286c1b4b5866167a7464dad05730881d44014949c705c35b52"
     },
     {
       "path": "tools/stage2/qa/scoped-lint.log",
@@ -1781,9 +1811,9 @@
     },
     {
       "path": "tools/stage2/qa/validation-summary.json",
-      "bytes": 1946,
-      "gitBlobSha": "d5674200cf24293ddfa58ef6c0f77f76da57473d",
-      "sha256": "01c146eb1ff36540e7bbd835f2875d483b02eac8da9446c89da4eb8328092def"
+      "bytes": 2579,
+      "gitBlobSha": "2cfd95704c2ec69a4497e5aa5a8b446721318e83",
+      "sha256": "38c65408681149ab979e87f157caeccfeccf04e8cc8e1b6e2efd4df3845967ed"
     },
     {
       "path": "tools/stage2/verify_isolation.py",
