@@ -1,0 +1,52 @@
+{
+  "status": "pass_with_documented_limitations",
+  "date": "2026-10-09",
+  "method": "Each of the seven final CPU reimport render images was opened and inspected as pixels after export. Two real bus reference photos were inspected as pixels before modelling.",
+  "scope": "Offline asset visual QA; not runtime, WebGL, photographic identity or accessibility acceptance",
+  "reviewedRenders": [
+    {
+      "file": "front-looking-rear-lod0.png",
+      "sha256": "0bd552d6d36ad8f6fa0ce91dffb6e187eb3dea88317b880234edcd923515967f",
+      "observation": "Blue shaped paired seats, yellow bent poles, open longitudinal aisle, yellow-edged rear steps, rear bench and overhead fittings are visible; recognizably matches the reviewed Vancouver low-floor visual vocabulary."
+    },
+    {
+      "file": "rear-looking-front-lod0.png",
+      "sha256": "3aa3acc1d0290dd3416100394440a694abfc14729c5dca5b4746e80f1adc1357",
+      "observation": "Seatbacks, silver grab handles, hanging straps and forward driver/fare area are visible. Continuous central aisle and change of rear floor height remain legible."
+    },
+    {
+      "file": "wheelchair-and-rear-door.png",
+      "sha256": "7236f88619981ffd7f56f561b35a0797f5c9898932d9c9b8cfd1cc11468473d6",
+      "observation": "Rear doorway remains visually open beside the low-floor area; two risers, nosings, wheel housings and adjacent seats are visible. Stop cord does not cross the open portal."
+    },
+    {
+      "file": "front-door-driver.png",
+      "sha256": "523962aa0653944559774c20fe624003c2302ab941431bc90791be9c703d3b0e",
+      "observation": "Open front entry, driver chair, partition, open steering ring, dashboard and simplified fare reader remain distinct. Details are representative, not a surveyed cockpit."
+    },
+    {
+      "file": "rear-steps-detail.png",
+      "sha256": "10acf2cf283e5d3b0dce680aca085713faa19863f9c3d329699a9303230b71d4",
+      "observation": "Two raised steps, aisle, forward-facing rear seats, stop button and five-place rear bench are legible. Seat support and wheel-housing approximations are retained."
+    },
+    {
+      "file": "cutaway-layout.png",
+      "sha256": "34e36b027858a59ecdd9278ee1aaa4c4832b6442bb776a29e406eff2737594be",
+      "observation": "QA-only upper-surface removal exposes six low-floor seats, twelve paired rear seats, five rear-bench places, driver area, open bay and stepped aisle. The stripped upper vent appears detached only because the exterior/ceiling are omitted in this cutaway."
+    },
+    {
+      "file": "front-looking-rear-lod1.png",
+      "sha256": "3c2486d3aa4b0c35c8d38af3f4d9f2dd3578b3249cf4b02f6fa7833a9e28d4e2",
+      "observation": "The same composition preserves seating, raised rear, aisle and rail silhouette while removing straps and upholstery buttons and reducing rounded-edge/cylinder detail."
+    }
+  ],
+  "limitations": [
+    "Cycles CPU 24-sample images retain visible Monte Carlo grain; they are inspection renders, not noise-free marketing images.",
+    "Neutral daylight environment has no city scenery beyond glazing. No night feature or new emissive material is included.",
+    "Blank ad panels and unbranded simplified fare/driver equipment are deliberate.",
+    "Rear raised deck is seated-only in the existing adapter; full rear free-walk and seat ingress remain pending.",
+    "The conservative wheelchair envelope is only 0.60 x 1.50 x 1.40 m and is not accessibility certification."
+  ],
+  "referenceDocumentation": "../REFERENCES.md",
+  "photoPixelsDistributed": false
+}

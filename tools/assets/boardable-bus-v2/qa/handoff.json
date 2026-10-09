@@ -1,0 +1,46 @@
+{
+  "status": "offline_asset_reconstruction_complete",
+  "date": "2026-10-09",
+  "baseRevision": "9efce79601deac6a0648cf8e158f3935cbb46f51",
+  "runtimeIntegration": "pending",
+  "WebGL": "not_run",
+  "nightLighting": "deferred_not_implemented",
+  "seatCount": 23,
+  "standingAnchorCount": 1,
+  "compositionHelper": "compose.mjs",
+  "adapterTests": "../../../tests/bus-v2.test.mjs",
+  "lods": [
+    {
+      "level": 0,
+      "triangles": 25016,
+      "vertices": 46692,
+      "primitives": 11,
+      "bytes": 2193844,
+      "sourceBytes": 259370,
+      "sha256": "4470f0d829433993161ebbc7f759b3ca4fb7a1b59d733fc8e947e267bc9594d1",
+      "sourceSha256": "0bc5c3a1fa4f728e6085facc43cb5e2cfbbc92206c17cb392bdaefe03a385fdc"
+    },
+    {
+      "level": 1,
+      "triangles": 11032,
+      "vertices": 21220,
+      "primitives": 11,
+      "bytes": 1104464,
+      "sourceBytes": 207539,
+      "sha256": "5522a1177b60494de3be7b0fbf5c7f0eaa53401930e02ba119f06d5b81955cda",
+      "sourceSha256": "e9dae30551eacc80b73b82cf7488da65014e25c0a0d93184961b270ce6d28d7e"
+    }
+  ],
+  "limitations": [
+    "Not a fleet-identical or survey-derived TransLink replica.",
+    "Rear deck has 1.92 m headroom and is seated-only; no rear standing anchor is exposed.",
+    "These samples do not establish continuous runtime navigation, accessibility certification, GPU performance or boarding behavior."
+  ],
+  "thirdPartyPhotoBinariesIncluded": false,
+  "existingAssetsModified": false,
+  "cpuRendersReviewed": 7,
+  "pythonTestsPassed": 16,
+  "realAdapterTestsPassed": 4,
+  "sourceReexportsBinaryIdentical": true,
+  "gitPublication": "Parent task owns commit/push; this worker did not commit or push."
+}

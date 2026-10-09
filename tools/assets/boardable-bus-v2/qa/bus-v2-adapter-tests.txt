@@ -1,0 +1,12 @@
+✔ bus-v2: composed LOD0 and LOD1 bind the actual 23 seats and one safe standing anchor (35.765559ms)
+✔ bus-v2: the real adapter still rejects display-only exterior LOD2 (12.406698ms)
+✔ bus-v2: accidentally exposing raised rear as standing fails closed (16.287854ms)
+✔ bus-v2: adapter rejects unresolved dependency asset IDs (11.714438ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 687.690495

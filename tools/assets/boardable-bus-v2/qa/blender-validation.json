@@ -1,0 +1,71 @@
+{
+  "status": "pass",
+  "blenderVersion": "4.3.2",
+  "scope": "editable-source reopening, geometry-preserving reexport, delivered GLB reimport; no WebGL",
+  "sourceChecks": [
+    {
+      "source": "source/city-bus-12m-interior-v2.lod0.blend",
+      "sourceSha256": "0bc5c3a1fa4f728e6085facc43cb5e2cfbbc92206c17cb392bdaefe03a385fdc",
+      "editableMeshObjects": 524,
+      "editableModifiers": 114,
+      "geometryEquivalent": true,
+      "binaryIdentical": true,
+      "sourceUnchanged": true
+    },
+    {
+      "source": "source/city-bus-12m-interior-v2.lod1.blend",
+      "sourceSha256": "e9dae30551eacc80b73b82cf7488da65014e25c0a0d93184961b270ce6d28d7e",
+      "editableMeshObjects": 380,
+      "editableModifiers": 46,
+      "geometryEquivalent": true,
+      "binaryIdentical": true,
+      "sourceUnchanged": true
+    }
+  ],
+  "reimports": [
+    {
+      "file": "exports/city-bus-12m-interior-v2.lod0.glb",
+      "sha256": "4470f0d829433993161ebbc7f759b3ca4fb7a1b59d733fc8e947e267bc9594d1",
+      "boundsM": {
+        "min": [
+          -1.1775000095367432,
+          0.25999999046325684,
+          -5.650000095367432
+        ],
+        "max": [
+          1.1775000095367432,
+          2.700000047683716,
+          5.739999771118164
+        ]
+      },
+      "status": "pass",
+      "exportedCamerasAndLights": 0
+    },
+    {
+      "file": "exports/city-bus-12m-interior-v2.lod1.glb",
+      "sha256": "5522a1177b60494de3be7b0fbf5c7f0eaa53401930e02ba119f06d5b81955cda",
+      "boundsM": {
+        "min": [
+          -1.1775000095367432,
+          0.25999999046325684,
+          -5.650000095367432
+        ],
+        "max": [
+          1.1775000095367432,
+          2.700000047683716,
+          5.739999771118164
+        ]
+      },
+      "status": "pass",
+      "exportedCamerasAndLights": 0
+    }
+  ],
+  "editPreservationProbe": {
+    "status": "pass",
+    "component": "seat-01-cushion",
+    "deltaM": 0.012,
+    "originalsUnchanged": true,
+    "savedCopyReopened": true,
+    "extrasPreserved": true
+  }
+}
