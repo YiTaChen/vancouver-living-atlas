@@ -1,0 +1,5123 @@
+{
+  "schemaVersion": 1,
+  "packageId": "canada-line-stage2",
+  "version": "1.0.0",
+  "baseRevision": "9efce79601deac6a0648cf8e158f3935cbb46f51",
+  "status": "offline_complete",
+  "units": "m",
+  "coordinateSystem": {
+    "runtime": "glTF +Y up, +Z front, -X right",
+    "authoring": "Blender +Z up, -Y front",
+    "conversion": "(x,y,z) Blender -> (x,z,-y) glTF exactly once"
+  },
+  "provenance": {
+    "author": "Original representative geometry for Vancouver Living Atlas by YiTaChen",
+    "source": "https://github.com/YiTaChen/vancouver-living-atlas",
+    "license": "Vancouver Living Atlas Noncommercial Research and Attribution 1.0",
+    "references": "references/source-review.json",
+    "copiedImagesOrMeshes": false,
+    "referenceMediaUse": "Reference review only; not texture or model source",
+    "modelIdentity": "Canada Line-inspired two-car representative, not exact Hyundai Rotem replica"
+  },
+  "reexportCommand": "blender -b -t 2 --python tools/assets/canada-line-stage2/export.py -- --output /tmp/canada-line-reexport",
+  "validationCommand": "python tools/assets/canada-line-stage2/validate.py",
+  "assets": [
+    {
+      "id": "canada-line-endcar-exterior",
+      "taskId": "D04",
+      "variant": "endcar",
+      "kind": "exterior",
+      "source": "source/canada-line-endcar-exterior.lod0.blend",
+      "sourceSha256": "362f5cda79b84f41ed410bcf8687682b30a250d2263d474f3370bbd81e6a18a8",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/canada-line-endcar-exterior.lod0.glb",
+          "sha256": "6d6443eb4ef23b0b0a8b08caf00e4b426b83c0485afed6a3baddfaed3a5624dc",
+          "source": "source/canada-line-endcar-exterior.lod0.blend",
+          "sourceSha256": "362f5cda79b84f41ed410bcf8687682b30a250d2263d474f3370bbd81e6a18a8",
+          "triangles": 2220,
+          "vertices": 4248,
+          "primitives": 43,
+          "bytes": 177352,
+          "boundsM": {
+            "min": [
+              -1.5250000040978193,
+              0.0,
+              -10.500000387430191
+            ],
+            "max": [
+              1.5250000040978193,
+              3.7049999237060547,
+              10.25600016117096
+            ],
+            "size": [
+              3.0500000081956387,
+              3.7049999237060547,
+              20.75600054860115
+            ]
+          },
+          "geometryBytes": 177352,
+          "embeddedImageBytes": 0,
+          "doorsAnimated": true,
+          "passengerCapable": true,
+          "openingsPreserved": true
+        },
+        {
+          "level": 1,
+          "file": "exports/canada-line-endcar-exterior.lod1.glb",
+          "sha256": "49f9ce83161e76361aa5b40ececdac6b7ea1b37c98af015a5590004b6614631a",
+          "source": "source/canada-line-endcar-exterior.lod1.blend",
+          "sourceSha256": "9747338ae584c6eda58d54c118442198b01852126a7c1949eb248648c6d25c63",
+          "triangles": 1964,
+          "vertices": 3864,
+          "primitives": 43,
+          "bytes": 164856,
+          "boundsM": {
+            "min": [
+              -1.5250000040978193,
+              0.0,
+              -10.500000387430191
+            ],
+            "max": [
+              1.5250000040978193,
+              3.7049999237060547,
+              10.25600016117096
+            ],
+            "size": [
+              3.0500000081956387,
+              3.7049999237060547,
+              20.75600054860115
+            ]
+          },
+          "geometryBytes": 164856,
+          "embeddedImageBytes": 0,
+          "doorsAnimated": true,
+          "passengerCapable": true,
+          "openingsPreserved": true
+        },
+        {
+          "level": 2,
+          "file": "exports/canada-line-endcar-exterior.lod2.glb",
+          "sha256": "c1a86c1db90b90db1766273254b1672595a9668aec19dea0c73fc4b53e8a018d",
+          "source": "source/canada-line-endcar-exterior.lod2.blend",
+          "sourceSha256": "1e7cfaa24c9e279a901aac131a5413961ce2d7e7ea266697c60f0bdb19eb258c",
+          "triangles": 364,
+          "vertices": 696,
+          "primitives": 15,
+          "bytes": 37544,
+          "boundsM": {
+            "min": [
+              -1.5260000536218286,
+              0.05225008726119995,
+              -10.500000387430191
+            ],
+            "max": [
+              1.5260000228881836,
+              3.7049999237060547,
+              10.25
+            ],
+            "size": [
+              3.052000076510012,
+              3.6527498364448547,
+              20.75000038743019
+            ]
+          },
+          "geometryBytes": 37544,
+          "embeddedImageBytes": 0,
+          "doorsAnimated": false,
+          "passengerCapable": false,
+          "openingsPreserved": false
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -1.5250000040978193,
+          0.0,
+          -10.500000387430191
+        ],
+        "max": [
+          1.5250000040978193,
+          3.7049999237060547,
+          10.25600016117096
+        ],
+        "size": [
+          3.0500000081956387,
+          3.7049999237060547,
+          20.75600054860115
+        ]
+      },
+      "expectedDimensionsM": {
+        "bodyLength": 20.5,
+        "bodyWidth": 3,
+        "floorY": 1.1,
+        "ceilingUndersideY": 3.45
+      },
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Independent representative Canada Line two-car profile; source-backed visual/type identity, unsurveyed dimension proposal. See references/source-review.json.",
+      "pivot": {
+        "frameId": "vehicle",
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "Mid-bogie midpoint on rail datum"
+      },
+      "attachmentDatum": {
+        "frameId": "vehicle",
+        "type": "rail-contact",
+        "planeY": 0
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "canada-blue",
+          "semanticRole": "blue",
+          "surfaceId": "shared-canada-blue",
+          "maps": []
+        },
+        {
+          "material": "canada-glass",
+          "semanticRole": "glass",
+          "surfaceId": "shared-canada-glass",
+          "maps": []
+        },
+        {
+          "material": "canada-lamp",
+          "semanticRole": "lamp",
+          "surfaceId": "shared-canada-lamp",
+          "maps": []
+        },
+        {
+          "material": "canada-rubber",
+          "semanticRole": "rubber",
+          "surfaceId": "shared-canada-rubber",
+          "maps": []
+        },
+        {
+          "material": "canada-shell",
+          "semanticRole": "shell",
+          "surfaceId": "shared-canada-shell",
+          "maps": []
+        },
+        {
+          "material": "canada-sign",
+          "semanticRole": "sign",
+          "surfaceId": "shared-canada-sign",
+          "maps": []
+        },
+        {
+          "material": "canada-steel",
+          "semanticRole": "steel",
+          "surfaceId": "shared-canada-steel",
+          "maps": []
+        }
+      ],
+      "textureMode": "shared-role-no-images",
+      "textureCost": {
+        "geometryBytes": 379752,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 379752,
+        "uniqueTexelBytesWithMips": 0
+      },
+      "lodPolicy": {
+        "suggestedDistancesM": [
+          45,
+          130
+        ],
+        "hysteresisM": 8,
+        "lazyLoad": false,
+        "passengerLock": "LOD0/1 exterior + interior; LOD2 closed, empty, no boarding"
+      },
+      "clearance": {
+        "floorY": 1.1,
+        "headroomM": 2.35,
+        "doorWidthM": 1.5,
+        "doorHeightM": 2.13,
+        "aisleWidthM": 1.35
+      },
+      "collision": {
+        "type": "JSON-primitives",
+        "source": "vehicles[].collision"
+      },
+      "anchors": {
+        "source": "vehicles[].anchors",
+        "frameId": "vehicle"
+      },
+      "placementCompatibility": {
+        "profiles": [
+          "canada-line-2car-representative-v1"
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "requires": "Independent Canada Line station alignment; no Expo scaling/relabeling"
+      },
+      "intendedConsumer": "Future explicit Canada Line vehicle adapter. No runtime consumer enabled.",
+      "offlineChecks": {
+        "status": "passed",
+        "evidence": "qa/validation.json",
+        "sourceAndRenderEvidence": "qa/source-roundtrip.json; qa/render-report.json"
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "integrationStatus": "runtime_pending_webgl"
+      }
+    },
+    {
+      "id": "canada-line-shared-interior",
+      "taskId": "D05",
+      "variant": "shared",
+      "kind": "interior",
+      "source": "source/canada-line-shared-interior.lod0.blend",
+      "sourceSha256": "ab19810fe4e325bbe0923544598bf162d7c2a1e86ca568876a219e3684af994f",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/canada-line-shared-interior.lod0.glb",
+          "sha256": "aeb8e0a8ea43ec894c62d0dc721f67f2232a401e3ede57f180a8d05b177b770b",
+          "source": "source/canada-line-shared-interior.lod0.blend",
+          "sourceSha256": "ab19810fe4e325bbe0923544598bf162d7c2a1e86ca568876a219e3684af994f",
+          "triangles": 1320,
+          "vertices": 2544,
+          "primitives": 6,
+          "bytes": 138444,
+          "boundsM": {
+            "min": [
+              -1.4205000400543213,
+              1.0199999809265137,
+              -10.25
+            ],
+            "max": [
+              1.4205000400543213,
+              3.509999990463257,
+              10.15999984741211
+            ],
+            "size": [
+              2.8410000801086426,
+              2.490000009536743,
+              20.40999984741211
+            ]
+          },
+          "geometryBytes": 138444,
+          "embeddedImageBytes": 0,
+          "doorsAnimated": false,
+          "passengerCapable": true,
+          "openingsPreserved": true
+        },
+        {
+          "level": 1,
+          "file": "exports/canada-line-shared-interior.lod1.glb",
+          "sha256": "7abbc2da2a83a7d5a7459d5be763cd1c7196a62eafe3584646d25ac3472dd724",
+          "source": "source/canada-line-shared-interior.lod1.blend",
+          "sourceSha256": "9128fb4289d521d85f864ce71f7b6bd420741ec43627d81358f5b9725d7db00d",
+          "triangles": 984,
+          "vertices": 1920,
+          "primitives": 6,
+          "bytes": 103712,
+          "boundsM": {
+            "min": [
+              -1.4205000400543213,
+              1.0199999809265137,
+              -10.25
+            ],
+            "max": [
+              1.4205000400543213,
+              3.509999990463257,
+              10.15999984741211
+            ],
+            "size": [
+              2.8410000801086426,
+              2.490000009536743,
+              20.40999984741211
+            ]
+          },
+          "geometryBytes": 103712,
+          "embeddedImageBytes": 0,
+          "doorsAnimated": false,
+          "passengerCapable": true,
+          "openingsPreserved": true
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -1.4205000400543213,
+          1.0199999809265137,
+          -10.25
+        ],
+        "max": [
+          1.4205000400543213,
+          3.509999990463257,
+          10.15999984741211
+        ],
+        "size": [
+          2.8410000801086426,
+          2.490000009536743,
+          20.40999984741211
+        ]
+      },
+      "expectedDimensionsM": {
+        "bodyLength": 20.5,
+        "bodyWidth": 3,
+        "floorY": 1.1,
+        "ceilingUndersideY": 3.45
+      },
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Independent representative Canada Line two-car profile; source-backed visual/type identity, unsurveyed dimension proposal. See references/source-review.json.",
+      "pivot": {
+        "frameId": "vehicle",
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "Mid-bogie midpoint on rail datum"
+      },
+      "attachmentDatum": {
+        "frameId": "vehicle",
+        "type": "rail-contact",
+        "planeY": 0
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "canada-floor",
+          "semanticRole": "floor",
+          "surfaceId": "shared-canada-floor",
+          "maps": []
+        },
+        {
+          "material": "canada-priority",
+          "semanticRole": "priority",
+          "surfaceId": "shared-canada-priority",
+          "maps": []
+        },
+        {
+          "material": "canada-rail",
+          "semanticRole": "rail",
+          "surfaceId": "shared-canada-rail",
+          "maps": []
+        },
+        {
+          "material": "canada-seat",
+          "semanticRole": "seat",
+          "surfaceId": "shared-canada-seat",
+          "maps": []
+        },
+        {
+          "material": "canada-sign",
+          "semanticRole": "sign",
+          "surfaceId": "shared-canada-sign",
+          "maps": []
+        },
+        {
+          "material": "canada-wall",
+          "semanticRole": "wall",
+          "surfaceId": "shared-canada-wall",
+          "maps": []
+        }
+      ],
+      "textureMode": "shared-role-no-images",
+      "textureCost": {
+        "geometryBytes": 242156,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 242156,
+        "uniqueTexelBytesWithMips": 0
+      },
+      "lodPolicy": {
+        "suggestedDistancesM": [
+          25
+        ],
+        "hysteresisM": 8,
+        "lazyLoad": true,
+        "passengerLock": "LOD0/1 exterior + interior; LOD2 closed, empty, no boarding"
+      },
+      "clearance": {
+        "floorY": 1.1,
+        "headroomM": 2.35,
+        "doorWidthM": 1.5,
+        "doorHeightM": 2.13,
+        "aisleWidthM": 1.35
+      },
+      "collision": {
+        "type": "JSON-primitives",
+        "source": "vehicles[].collision"
+      },
+      "anchors": {
+        "source": "vehicles[].anchors",
+        "frameId": "vehicle"
+      },
+      "placementCompatibility": {
+        "profiles": [
+          "canada-line-2car-representative-v1"
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "requires": "Independent Canada Line station alignment; no Expo scaling/relabeling"
+      },
+      "intendedConsumer": "Future explicit Canada Line vehicle adapter. No runtime consumer enabled.",
+      "offlineChecks": {
+        "status": "passed",
+        "evidence": "qa/validation.json",
+        "sourceAndRenderEvidence": "qa/source-roundtrip.json; qa/render-report.json"
+      },
+      "runtimeChecks": {
+        "status": "not_run",
+        "integrationStatus": "runtime_pending_webgl"
+      }
+    }
+  ],
+  "textures": [],
+  "vehicles": [
+    {
+      "vehicleId": "canada-line-endcar",
+      "profileId": "canada-line-2car-representative-v1",
+      "variant": "reversible-endcar",
+      "frameId": "vehicle",
+      "units": "m",
+      "assetRefs": {
+        "exterior": "canada-line-endcar-exterior",
+        "interior": "canada-line-shared-interior",
+        "collision": null
+      },
+      "bodyBoundsM": {
+        "min": [
+          -1.5,
+          1,
+          -10.25
+        ],
+        "max": [
+          1.5,
+          3.65,
+          10.25
+        ],
+        "size": [
+          3.0,
+          2.65,
+          20.5
+        ]
+      },
+      "nominalLengthM": 20.5,
+      "nominalBodyWidthM": 3,
+      "railContactDatum": {
+        "frameId": "vehicle",
+        "planeY": 0,
+        "nodeIds": [
+          "wheel-rear-rear-right",
+          "wheel-rear-rear-left",
+          "wheel-rear-front-right",
+          "wheel-rear-front-left",
+          "wheel-front-rear-right",
+          "wheel-front-rear-left",
+          "wheel-front-front-right",
+          "wheel-front-front-left"
+        ]
+      },
+      "floorHeightM": 1.1,
+      "doorSillHeightM": 1.1,
+      "ceilingUndersideM": 3.45,
+      "headroomM": 2.35,
+      "clearAisleWidthM": 1.35,
+      "guidanceWheelbaseM": 13.5,
+      "frames": [
+        {
+          "frameId": "vehicle",
+          "parentFrameId": null,
+          "units": "m",
+          "upAxis": "+Y",
+          "frontAxis": "+Z",
+          "translationM": [
+            0,
+            0,
+            0
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "frameId": "door-left-1-a",
+          "parentFrameId": "vehicle",
+          "translationM": [
+            1.495,
+            1.1,
+            -6.775
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "frameId": "door-left-1-b",
+          "parentFrameId": "vehicle",
+          "translationM": [
+            1.495,
+            1.1,
+            -6.025
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "frameId": "door-left-2-a",
+          "parentFrameId": "vehicle",
+          "translationM": [
+            1.495,
+            1.1,
+            -0.375
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "frameId": "door-left-2-b",
+          "parentFrameId": "vehicle",
+          "translationM": [
+            1.495,
+            1.1,
+            0.375
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "frameId": "door-left-3-a",
+          "parentFrameId": "vehicle",
+          "translationM": [
+            1.495,
+            1.1,
+            6.025
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "frameId": "door-left-3-b",
+          "parentFrameId": "vehicle",
+          "translationM": [
+            1.495,
+            1.1,
+            6.775
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "frameId": "door-right-1-a",
+          "parentFrameId": "vehicle",
+          "translationM": [
+            -1.495,
+            1.1,
+            -6.775
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "frameId": "door-right-1-b",
+          "parentFrameId": "vehicle",
+          "translationM": [
+            -1.495,
+            1.1,
+            -6.025
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "frameId": "door-right-2-a",
+          "parentFrameId": "vehicle",
+          "translationM": [
+            -1.495,
+            1.1,
+            -0.375
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "frameId": "door-right-2-b",
+          "parentFrameId": "vehicle",
+          "translationM": [
+            -1.495,
+            1.1,
+            0.375
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "frameId": "door-right-3-a",
+          "parentFrameId": "vehicle",
+          "translationM": [
+            -1.495,
+            1.1,
+            6.025
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "frameId": "door-right-3-b",
+          "parentFrameId": "vehicle",
+          "translationM": [
+            -1.495,
+            1.1,
+            6.775
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "frameId": "bogie-rear",
+          "parentFrameId": "vehicle",
+          "translationM": [
+            0,
+            0.39,
+            -6.75
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "frameId": "bogie-front",
+          "parentFrameId": "vehicle",
+          "translationM": [
+            0,
+            0.39,
+            6.75
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "frameId": "gangway-rear",
+          "parentFrameId": "vehicle",
+          "translationM": [
+            0,
+            1.1,
+            -10.25
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "floorSurfaces": [
+        {
+          "surfaceId": "cabin-floor",
+          "nodeId": "floor",
+          "frameId": "vehicle",
+          "resource": "interior",
+          "verticesM": [
+            [
+              -1.4,
+              1.1,
+              -10.25
+            ],
+            [
+              1.4,
+              1.1,
+              -10.25
+            ],
+            [
+              1.4,
+              1.1,
+              10.16
+            ],
+            [
+              -1.4,
+              1.1,
+              10.16
+            ]
+          ],
+          "indices": [
+            0,
+            2,
+            1,
+            0,
+            3,
+            2
+          ]
+        },
+        {
+          "surfaceId": "threshold-left-1",
+          "nodeId": "body-shell",
+          "frameId": "vehicle",
+          "resource": "exterior",
+          "verticesM": [
+            [
+              1.4,
+              1.1,
+              -7.15
+            ],
+            [
+              1.5,
+              1.1,
+              -7.15
+            ],
+            [
+              1.5,
+              1.1,
+              -5.65
+            ],
+            [
+              1.4,
+              1.1,
+              -5.65
+            ]
+          ],
+          "indices": [
+            0,
+            2,
+            1,
+            0,
+            3,
+            2
+          ]
+        },
+        {
+          "surfaceId": "threshold-left-2",
+          "nodeId": "body-shell",
+          "frameId": "vehicle",
+          "resource": "exterior",
+          "verticesM": [
+            [
+              1.4,
+              1.1,
+              -0.75
+            ],
+            [
+              1.5,
+              1.1,
+              -0.75
+            ],
+            [
+              1.5,
+              1.1,
+              0.75
+            ],
+            [
+              1.4,
+              1.1,
+              0.75
+            ]
+          ],
+          "indices": [
+            0,
+            2,
+            1,
+            0,
+            3,
+            2
+          ]
+        },
+        {
+          "surfaceId": "threshold-left-3",
+          "nodeId": "body-shell",
+          "frameId": "vehicle",
+          "resource": "exterior",
+          "verticesM": [
+            [
+              1.4,
+              1.1,
+              5.65
+            ],
+            [
+              1.5,
+              1.1,
+              5.65
+            ],
+            [
+              1.5,
+              1.1,
+              7.15
+            ],
+            [
+              1.4,
+              1.1,
+              7.15
+            ]
+          ],
+          "indices": [
+            0,
+            2,
+            1,
+            0,
+            3,
+            2
+          ]
+        },
+        {
+          "surfaceId": "threshold-right-1",
+          "nodeId": "body-shell",
+          "frameId": "vehicle",
+          "resource": "exterior",
+          "verticesM": [
+            [
+              -1.5,
+              1.1,
+              -7.15
+            ],
+            [
+              -1.4,
+              1.1,
+              -7.15
+            ],
+            [
+              -1.4,
+              1.1,
+              -5.65
+            ],
+            [
+              -1.5,
+              1.1,
+              -5.65
+            ]
+          ],
+          "indices": [
+            0,
+            2,
+            1,
+            0,
+            3,
+            2
+          ]
+        },
+        {
+          "surfaceId": "threshold-right-2",
+          "nodeId": "body-shell",
+          "frameId": "vehicle",
+          "resource": "exterior",
+          "verticesM": [
+            [
+              -1.5,
+              1.1,
+              -0.75
+            ],
+            [
+              -1.4,
+              1.1,
+              -0.75
+            ],
+            [
+              -1.4,
+              1.1,
+              0.75
+            ],
+            [
+              -1.5,
+              1.1,
+              0.75
+            ]
+          ],
+          "indices": [
+            0,
+            2,
+            1,
+            0,
+            3,
+            2
+          ]
+        },
+        {
+          "surfaceId": "threshold-right-3",
+          "nodeId": "body-shell",
+          "frameId": "vehicle",
+          "resource": "exterior",
+          "verticesM": [
+            [
+              -1.5,
+              1.1,
+              5.65
+            ],
+            [
+              -1.4,
+              1.1,
+              5.65
+            ],
+            [
+              -1.4,
+              1.1,
+              7.15
+            ],
+            [
+              -1.5,
+              1.1,
+              7.15
+            ]
+          ],
+          "indices": [
+            0,
+            2,
+            1,
+            0,
+            3,
+            2
+          ]
+        },
+        {
+          "surfaceId": "gangway-floor",
+          "nodeId": "body-shell",
+          "frameId": "vehicle",
+          "resource": "exterior",
+          "verticesM": [
+            [
+              -0.65,
+              1.1,
+              -10.5
+            ],
+            [
+              0.65,
+              1.1,
+              -10.5
+            ],
+            [
+              0.65,
+              1.1,
+              -10.15
+            ],
+            [
+              -0.65,
+              1.1,
+              -10.15
+            ]
+          ],
+          "indices": [
+            0,
+            2,
+            1,
+            0,
+            3,
+            2
+          ]
+        }
+      ],
+      "doors": [
+        {
+          "doorId": "door-left-1-a",
+          "nodeId": "door-left-1-a",
+          "frameId": "vehicle",
+          "doorFrameId": "door-left-1-a",
+          "parentFrameId": "vehicle",
+          "carId": "canada-line-endcar",
+          "side": "left",
+          "openingId": "left-1",
+          "openingPolygonM": [
+            [
+              1.46,
+              1.1,
+              -7.15
+            ],
+            [
+              1.46,
+              1.1,
+              -5.65
+            ],
+            [
+              1.46,
+              3.23,
+              -5.65
+            ],
+            [
+              1.46,
+              3.23,
+              -7.15
+            ]
+          ],
+          "openingWidthM": 1.5,
+          "openingHeightM": 2.13,
+          "outwardNormal": [
+            1,
+            0,
+            0
+          ],
+          "closedTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              1.495,
+              1.1,
+              -6.775
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "openTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              1.625,
+              1.1,
+              -7.565
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "animation": {
+            "type": "transform-endpoints",
+            "nodeId": "door-left-1-a",
+            "durationS": 1.4,
+            "interpolation": "two-stage-plug-then-slide",
+            "plugTravelM": 0.13,
+            "slideTravelM": 0.79
+          },
+          "sweptBoundsM": {
+            "frameId": "vehicle",
+            "min": [
+              1.465,
+              1.1,
+              -7.934
+            ],
+            "max": [
+              1.655,
+              3.23,
+              -6.406000000000001
+            ],
+            "size": [
+              0.18999999999999995,
+              2.13,
+              1.5279999999999996
+            ]
+          },
+          "boardingPointM": [
+            1.7,
+            1.1,
+            -6.4
+          ],
+          "boardingAnchorNodeId": "boarding-left-1",
+          "doorLocalToVehicle": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              1.495,
+              1.1,
+              -6.775
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "leafBoundsLocalM": {
+            "min": [
+              -0.03,
+              0,
+              -0.369
+            ],
+            "max": [
+              0.03,
+              2.13,
+              0.369
+            ],
+            "size": [
+              0.06,
+              2.13,
+              0.738
+            ]
+          }
+        },
+        {
+          "doorId": "door-left-1-b",
+          "nodeId": "door-left-1-b",
+          "frameId": "vehicle",
+          "doorFrameId": "door-left-1-b",
+          "parentFrameId": "vehicle",
+          "carId": "canada-line-endcar",
+          "side": "left",
+          "openingId": "left-1",
+          "openingPolygonM": [
+            [
+              1.46,
+              1.1,
+              -7.15
+            ],
+            [
+              1.46,
+              1.1,
+              -5.65
+            ],
+            [
+              1.46,
+              3.23,
+              -5.65
+            ],
+            [
+              1.46,
+              3.23,
+              -7.15
+            ]
+          ],
+          "openingWidthM": 1.5,
+          "openingHeightM": 2.13,
+          "outwardNormal": [
+            1,
+            0,
+            0
+          ],
+          "closedTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              1.495,
+              1.1,
+              -6.025
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "openTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              1.625,
+              1.1,
+              -5.235
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "animation": {
+            "type": "transform-endpoints",
+            "nodeId": "door-left-1-b",
+            "durationS": 1.4,
+            "interpolation": "two-stage-plug-then-slide",
+            "plugTravelM": 0.13,
+            "slideTravelM": 0.79
+          },
+          "sweptBoundsM": {
+            "frameId": "vehicle",
+            "min": [
+              1.465,
+              1.1,
+              -6.394
+            ],
+            "max": [
+              1.655,
+              3.23,
+              -4.8660000000000005
+            ],
+            "size": [
+              0.18999999999999995,
+              2.13,
+              1.5279999999999996
+            ]
+          },
+          "boardingPointM": [
+            1.7,
+            1.1,
+            -6.4
+          ],
+          "boardingAnchorNodeId": "boarding-left-1",
+          "doorLocalToVehicle": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              1.495,
+              1.1,
+              -6.025
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "leafBoundsLocalM": {
+            "min": [
+              -0.03,
+              0,
+              -0.369
+            ],
+            "max": [
+              0.03,
+              2.13,
+              0.369
+            ],
+            "size": [
+              0.06,
+              2.13,
+              0.738
+            ]
+          }
+        },
+        {
+          "doorId": "door-left-2-a",
+          "nodeId": "door-left-2-a",
+          "frameId": "vehicle",
+          "doorFrameId": "door-left-2-a",
+          "parentFrameId": "vehicle",
+          "carId": "canada-line-endcar",
+          "side": "left",
+          "openingId": "left-2",
+          "openingPolygonM": [
+            [
+              1.46,
+              1.1,
+              -0.75
+            ],
+            [
+              1.46,
+              1.1,
+              0.75
+            ],
+            [
+              1.46,
+              3.23,
+              0.75
+            ],
+            [
+              1.46,
+              3.23,
+              -0.75
+            ]
+          ],
+          "openingWidthM": 1.5,
+          "openingHeightM": 2.13,
+          "outwardNormal": [
+            1,
+            0,
+            0
+          ],
+          "closedTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              1.495,
+              1.1,
+              -0.375
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "openTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              1.625,
+              1.1,
+              -1.165
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "animation": {
+            "type": "transform-endpoints",
+            "nodeId": "door-left-2-a",
+            "durationS": 1.4,
+            "interpolation": "two-stage-plug-then-slide",
+            "plugTravelM": 0.13,
+            "slideTravelM": 0.79
+          },
+          "sweptBoundsM": {
+            "frameId": "vehicle",
+            "min": [
+              1.465,
+              1.1,
+              -1.534
+            ],
+            "max": [
+              1.655,
+              3.23,
+              -0.006000000000000005
+            ],
+            "size": [
+              0.18999999999999995,
+              2.13,
+              1.528
+            ]
+          },
+          "boardingPointM": [
+            1.7,
+            1.1,
+            0
+          ],
+          "boardingAnchorNodeId": "boarding-left-2",
+          "doorLocalToVehicle": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              1.495,
+              1.1,
+              -0.375
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "leafBoundsLocalM": {
+            "min": [
+              -0.03,
+              0,
+              -0.369
+            ],
+            "max": [
+              0.03,
+              2.13,
+              0.369
+            ],
+            "size": [
+              0.06,
+              2.13,
+              0.738
+            ]
+          }
+        },
+        {
+          "doorId": "door-left-2-b",
+          "nodeId": "door-left-2-b",
+          "frameId": "vehicle",
+          "doorFrameId": "door-left-2-b",
+          "parentFrameId": "vehicle",
+          "carId": "canada-line-endcar",
+          "side": "left",
+          "openingId": "left-2",
+          "openingPolygonM": [
+            [
+              1.46,
+              1.1,
+              -0.75
+            ],
+            [
+              1.46,
+              1.1,
+              0.75
+            ],
+            [
+              1.46,
+              3.23,
+              0.75
+            ],
+            [
+              1.46,
+              3.23,
+              -0.75
+            ]
+          ],
+          "openingWidthM": 1.5,
+          "openingHeightM": 2.13,
+          "outwardNormal": [
+            1,
+            0,
+            0
+          ],
+          "closedTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              1.495,
+              1.1,
+              0.375
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "openTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              1.625,
+              1.1,
+              1.165
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "animation": {
+            "type": "transform-endpoints",
+            "nodeId": "door-left-2-b",
+            "durationS": 1.4,
+            "interpolation": "two-stage-plug-then-slide",
+            "plugTravelM": 0.13,
+            "slideTravelM": 0.79
+          },
+          "sweptBoundsM": {
+            "frameId": "vehicle",
+            "min": [
+              1.465,
+              1.1,
+              0.006000000000000005
+            ],
+            "max": [
+              1.655,
+              3.23,
+              1.534
+            ],
+            "size": [
+              0.18999999999999995,
+              2.13,
+              1.528
+            ]
+          },
+          "boardingPointM": [
+            1.7,
+            1.1,
+            0
+          ],
+          "boardingAnchorNodeId": "boarding-left-2",
+          "doorLocalToVehicle": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              1.495,
+              1.1,
+              0.375
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "leafBoundsLocalM": {
+            "min": [
+              -0.03,
+              0,
+              -0.369
+            ],
+            "max": [
+              0.03,
+              2.13,
+              0.369
+            ],
+            "size": [
+              0.06,
+              2.13,
+              0.738
+            ]
+          }
+        },
+        {
+          "doorId": "door-left-3-a",
+          "nodeId": "door-left-3-a",
+          "frameId": "vehicle",
+          "doorFrameId": "door-left-3-a",
+          "parentFrameId": "vehicle",
+          "carId": "canada-line-endcar",
+          "side": "left",
+          "openingId": "left-3",
+          "openingPolygonM": [
+            [
+              1.46,
+              1.1,
+              5.65
+            ],
+            [
+              1.46,
+              1.1,
+              7.15
+            ],
+            [
+              1.46,
+              3.23,
+              7.15
+            ],
+            [
+              1.46,
+              3.23,
+              5.65
+            ]
+          ],
+          "openingWidthM": 1.5,
+          "openingHeightM": 2.13,
+          "outwardNormal": [
+            1,
+            0,
+            0
+          ],
+          "closedTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              1.495,
+              1.1,
+              6.025
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "openTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              1.625,
+              1.1,
+              5.235
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "animation": {
+            "type": "transform-endpoints",
+            "nodeId": "door-left-3-a",
+            "durationS": 1.4,
+            "interpolation": "two-stage-plug-then-slide",
+            "plugTravelM": 0.13,
+            "slideTravelM": 0.79
+          },
+          "sweptBoundsM": {
+            "frameId": "vehicle",
+            "min": [
+              1.465,
+              1.1,
+              4.8660000000000005
+            ],
+            "max": [
+              1.655,
+              3.23,
+              6.394
+            ],
+            "size": [
+              0.18999999999999995,
+              2.13,
+              1.5279999999999996
+            ]
+          },
+          "boardingPointM": [
+            1.7,
+            1.1,
+            6.4
+          ],
+          "boardingAnchorNodeId": "boarding-left-3",
+          "doorLocalToVehicle": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              1.495,
+              1.1,
+              6.025
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "leafBoundsLocalM": {
+            "min": [
+              -0.03,
+              0,
+              -0.369
+            ],
+            "max": [
+              0.03,
+              2.13,
+              0.369
+            ],
+            "size": [
+              0.06,
+              2.13,
+              0.738
+            ]
+          }
+        },
+        {
+          "doorId": "door-left-3-b",
+          "nodeId": "door-left-3-b",
+          "frameId": "vehicle",
+          "doorFrameId": "door-left-3-b",
+          "parentFrameId": "vehicle",
+          "carId": "canada-line-endcar",
+          "side": "left",
+          "openingId": "left-3",
+          "openingPolygonM": [
+            [
+              1.46,
+              1.1,
+              5.65
+            ],
+            [
+              1.46,
+              1.1,
+              7.15
+            ],
+            [
+              1.46,
+              3.23,
+              7.15
+            ],
+            [
+              1.46,
+              3.23,
+              5.65
+            ]
+          ],
+          "openingWidthM": 1.5,
+          "openingHeightM": 2.13,
+          "outwardNormal": [
+            1,
+            0,
+            0
+          ],
+          "closedTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              1.495,
+              1.1,
+              6.775
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "openTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              1.625,
+              1.1,
+              7.565
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "animation": {
+            "type": "transform-endpoints",
+            "nodeId": "door-left-3-b",
+            "durationS": 1.4,
+            "interpolation": "two-stage-plug-then-slide",
+            "plugTravelM": 0.13,
+            "slideTravelM": 0.79
+          },
+          "sweptBoundsM": {
+            "frameId": "vehicle",
+            "min": [
+              1.465,
+              1.1,
+              6.406000000000001
+            ],
+            "max": [
+              1.655,
+              3.23,
+              7.934
+            ],
+            "size": [
+              0.18999999999999995,
+              2.13,
+              1.5279999999999996
+            ]
+          },
+          "boardingPointM": [
+            1.7,
+            1.1,
+            6.4
+          ],
+          "boardingAnchorNodeId": "boarding-left-3",
+          "doorLocalToVehicle": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              1.495,
+              1.1,
+              6.775
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "leafBoundsLocalM": {
+            "min": [
+              -0.03,
+              0,
+              -0.369
+            ],
+            "max": [
+              0.03,
+              2.13,
+              0.369
+            ],
+            "size": [
+              0.06,
+              2.13,
+              0.738
+            ]
+          }
+        },
+        {
+          "doorId": "door-right-1-a",
+          "nodeId": "door-right-1-a",
+          "frameId": "vehicle",
+          "doorFrameId": "door-right-1-a",
+          "parentFrameId": "vehicle",
+          "carId": "canada-line-endcar",
+          "side": "right",
+          "openingId": "right-1",
+          "openingPolygonM": [
+            [
+              -1.46,
+              1.1,
+              -7.15
+            ],
+            [
+              -1.46,
+              1.1,
+              -5.65
+            ],
+            [
+              -1.46,
+              3.23,
+              -5.65
+            ],
+            [
+              -1.46,
+              3.23,
+              -7.15
+            ]
+          ],
+          "openingWidthM": 1.5,
+          "openingHeightM": 2.13,
+          "outwardNormal": [
+            -1,
+            0,
+            0
+          ],
+          "closedTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.495,
+              1.1,
+              -6.775
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "openTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.625,
+              1.1,
+              -7.565
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "animation": {
+            "type": "transform-endpoints",
+            "nodeId": "door-right-1-a",
+            "durationS": 1.4,
+            "interpolation": "two-stage-plug-then-slide",
+            "plugTravelM": 0.13,
+            "slideTravelM": 0.79
+          },
+          "sweptBoundsM": {
+            "frameId": "vehicle",
+            "min": [
+              -1.655,
+              1.1,
+              -7.934
+            ],
+            "max": [
+              -1.465,
+              3.23,
+              -6.406000000000001
+            ],
+            "size": [
+              0.18999999999999995,
+              2.13,
+              1.5279999999999996
+            ]
+          },
+          "boardingPointM": [
+            -1.7,
+            1.1,
+            -6.4
+          ],
+          "boardingAnchorNodeId": "boarding-right-1",
+          "doorLocalToVehicle": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.495,
+              1.1,
+              -6.775
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "leafBoundsLocalM": {
+            "min": [
+              -0.03,
+              0,
+              -0.369
+            ],
+            "max": [
+              0.03,
+              2.13,
+              0.369
+            ],
+            "size": [
+              0.06,
+              2.13,
+              0.738
+            ]
+          }
+        },
+        {
+          "doorId": "door-right-1-b",
+          "nodeId": "door-right-1-b",
+          "frameId": "vehicle",
+          "doorFrameId": "door-right-1-b",
+          "parentFrameId": "vehicle",
+          "carId": "canada-line-endcar",
+          "side": "right",
+          "openingId": "right-1",
+          "openingPolygonM": [
+            [
+              -1.46,
+              1.1,
+              -7.15
+            ],
+            [
+              -1.46,
+              1.1,
+              -5.65
+            ],
+            [
+              -1.46,
+              3.23,
+              -5.65
+            ],
+            [
+              -1.46,
+              3.23,
+              -7.15
+            ]
+          ],
+          "openingWidthM": 1.5,
+          "openingHeightM": 2.13,
+          "outwardNormal": [
+            -1,
+            0,
+            0
+          ],
+          "closedTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.495,
+              1.1,
+              -6.025
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "openTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.625,
+              1.1,
+              -5.235
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "animation": {
+            "type": "transform-endpoints",
+            "nodeId": "door-right-1-b",
+            "durationS": 1.4,
+            "interpolation": "two-stage-plug-then-slide",
+            "plugTravelM": 0.13,
+            "slideTravelM": 0.79
+          },
+          "sweptBoundsM": {
+            "frameId": "vehicle",
+            "min": [
+              -1.655,
+              1.1,
+              -6.394
+            ],
+            "max": [
+              -1.465,
+              3.23,
+              -4.8660000000000005
+            ],
+            "size": [
+              0.18999999999999995,
+              2.13,
+              1.5279999999999996
+            ]
+          },
+          "boardingPointM": [
+            -1.7,
+            1.1,
+            -6.4
+          ],
+          "boardingAnchorNodeId": "boarding-right-1",
+          "doorLocalToVehicle": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.495,
+              1.1,
+              -6.025
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "leafBoundsLocalM": {
+            "min": [
+              -0.03,
+              0,
+              -0.369
+            ],
+            "max": [
+              0.03,
+              2.13,
+              0.369
+            ],
+            "size": [
+              0.06,
+              2.13,
+              0.738
+            ]
+          }
+        },
+        {
+          "doorId": "door-right-2-a",
+          "nodeId": "door-right-2-a",
+          "frameId": "vehicle",
+          "doorFrameId": "door-right-2-a",
+          "parentFrameId": "vehicle",
+          "carId": "canada-line-endcar",
+          "side": "right",
+          "openingId": "right-2",
+          "openingPolygonM": [
+            [
+              -1.46,
+              1.1,
+              -0.75
+            ],
+            [
+              -1.46,
+              1.1,
+              0.75
+            ],
+            [
+              -1.46,
+              3.23,
+              0.75
+            ],
+            [
+              -1.46,
+              3.23,
+              -0.75
+            ]
+          ],
+          "openingWidthM": 1.5,
+          "openingHeightM": 2.13,
+          "outwardNormal": [
+            -1,
+            0,
+            0
+          ],
+          "closedTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.495,
+              1.1,
+              -0.375
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "openTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.625,
+              1.1,
+              -1.165
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "animation": {
+            "type": "transform-endpoints",
+            "nodeId": "door-right-2-a",
+            "durationS": 1.4,
+            "interpolation": "two-stage-plug-then-slide",
+            "plugTravelM": 0.13,
+            "slideTravelM": 0.79
+          },
+          "sweptBoundsM": {
+            "frameId": "vehicle",
+            "min": [
+              -1.655,
+              1.1,
+              -1.534
+            ],
+            "max": [
+              -1.465,
+              3.23,
+              -0.006000000000000005
+            ],
+            "size": [
+              0.18999999999999995,
+              2.13,
+              1.528
+            ]
+          },
+          "boardingPointM": [
+            -1.7,
+            1.1,
+            0
+          ],
+          "boardingAnchorNodeId": "boarding-right-2",
+          "doorLocalToVehicle": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.495,
+              1.1,
+              -0.375
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "leafBoundsLocalM": {
+            "min": [
+              -0.03,
+              0,
+              -0.369
+            ],
+            "max": [
+              0.03,
+              2.13,
+              0.369
+            ],
+            "size": [
+              0.06,
+              2.13,
+              0.738
+            ]
+          }
+        },
+        {
+          "doorId": "door-right-2-b",
+          "nodeId": "door-right-2-b",
+          "frameId": "vehicle",
+          "doorFrameId": "door-right-2-b",
+          "parentFrameId": "vehicle",
+          "carId": "canada-line-endcar",
+          "side": "right",
+          "openingId": "right-2",
+          "openingPolygonM": [
+            [
+              -1.46,
+              1.1,
+              -0.75
+            ],
+            [
+              -1.46,
+              1.1,
+              0.75
+            ],
+            [
+              -1.46,
+              3.23,
+              0.75
+            ],
+            [
+              -1.46,
+              3.23,
+              -0.75
+            ]
+          ],
+          "openingWidthM": 1.5,
+          "openingHeightM": 2.13,
+          "outwardNormal": [
+            -1,
+            0,
+            0
+          ],
+          "closedTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.495,
+              1.1,
+              0.375
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "openTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.625,
+              1.1,
+              1.165
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "animation": {
+            "type": "transform-endpoints",
+            "nodeId": "door-right-2-b",
+            "durationS": 1.4,
+            "interpolation": "two-stage-plug-then-slide",
+            "plugTravelM": 0.13,
+            "slideTravelM": 0.79
+          },
+          "sweptBoundsM": {
+            "frameId": "vehicle",
+            "min": [
+              -1.655,
+              1.1,
+              0.006000000000000005
+            ],
+            "max": [
+              -1.465,
+              3.23,
+              1.534
+            ],
+            "size": [
+              0.18999999999999995,
+              2.13,
+              1.528
+            ]
+          },
+          "boardingPointM": [
+            -1.7,
+            1.1,
+            0
+          ],
+          "boardingAnchorNodeId": "boarding-right-2",
+          "doorLocalToVehicle": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.495,
+              1.1,
+              0.375
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "leafBoundsLocalM": {
+            "min": [
+              -0.03,
+              0,
+              -0.369
+            ],
+            "max": [
+              0.03,
+              2.13,
+              0.369
+            ],
+            "size": [
+              0.06,
+              2.13,
+              0.738
+            ]
+          }
+        },
+        {
+          "doorId": "door-right-3-a",
+          "nodeId": "door-right-3-a",
+          "frameId": "vehicle",
+          "doorFrameId": "door-right-3-a",
+          "parentFrameId": "vehicle",
+          "carId": "canada-line-endcar",
+          "side": "right",
+          "openingId": "right-3",
+          "openingPolygonM": [
+            [
+              -1.46,
+              1.1,
+              5.65
+            ],
+            [
+              -1.46,
+              1.1,
+              7.15
+            ],
+            [
+              -1.46,
+              3.23,
+              7.15
+            ],
+            [
+              -1.46,
+              3.23,
+              5.65
+            ]
+          ],
+          "openingWidthM": 1.5,
+          "openingHeightM": 2.13,
+          "outwardNormal": [
+            -1,
+            0,
+            0
+          ],
+          "closedTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.495,
+              1.1,
+              6.025
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "openTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.625,
+              1.1,
+              5.235
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "animation": {
+            "type": "transform-endpoints",
+            "nodeId": "door-right-3-a",
+            "durationS": 1.4,
+            "interpolation": "two-stage-plug-then-slide",
+            "plugTravelM": 0.13,
+            "slideTravelM": 0.79
+          },
+          "sweptBoundsM": {
+            "frameId": "vehicle",
+            "min": [
+              -1.655,
+              1.1,
+              4.8660000000000005
+            ],
+            "max": [
+              -1.465,
+              3.23,
+              6.394
+            ],
+            "size": [
+              0.18999999999999995,
+              2.13,
+              1.5279999999999996
+            ]
+          },
+          "boardingPointM": [
+            -1.7,
+            1.1,
+            6.4
+          ],
+          "boardingAnchorNodeId": "boarding-right-3",
+          "doorLocalToVehicle": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.495,
+              1.1,
+              6.025
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "leafBoundsLocalM": {
+            "min": [
+              -0.03,
+              0,
+              -0.369
+            ],
+            "max": [
+              0.03,
+              2.13,
+              0.369
+            ],
+            "size": [
+              0.06,
+              2.13,
+              0.738
+            ]
+          }
+        },
+        {
+          "doorId": "door-right-3-b",
+          "nodeId": "door-right-3-b",
+          "frameId": "vehicle",
+          "doorFrameId": "door-right-3-b",
+          "parentFrameId": "vehicle",
+          "carId": "canada-line-endcar",
+          "side": "right",
+          "openingId": "right-3",
+          "openingPolygonM": [
+            [
+              -1.46,
+              1.1,
+              5.65
+            ],
+            [
+              -1.46,
+              1.1,
+              7.15
+            ],
+            [
+              -1.46,
+              3.23,
+              7.15
+            ],
+            [
+              -1.46,
+              3.23,
+              5.65
+            ]
+          ],
+          "openingWidthM": 1.5,
+          "openingHeightM": 2.13,
+          "outwardNormal": [
+            -1,
+            0,
+            0
+          ],
+          "closedTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.495,
+              1.1,
+              6.775
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "openTransform": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.625,
+              1.1,
+              7.565
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "animation": {
+            "type": "transform-endpoints",
+            "nodeId": "door-right-3-b",
+            "durationS": 1.4,
+            "interpolation": "two-stage-plug-then-slide",
+            "plugTravelM": 0.13,
+            "slideTravelM": 0.79
+          },
+          "sweptBoundsM": {
+            "frameId": "vehicle",
+            "min": [
+              -1.655,
+              1.1,
+              6.406000000000001
+            ],
+            "max": [
+              -1.465,
+              3.23,
+              7.934
+            ],
+            "size": [
+              0.18999999999999995,
+              2.13,
+              1.5279999999999996
+            ]
+          },
+          "boardingPointM": [
+            -1.7,
+            1.1,
+            6.4
+          ],
+          "boardingAnchorNodeId": "boarding-right-3",
+          "doorLocalToVehicle": {
+            "parentFrameId": "vehicle",
+            "translationM": [
+              -1.495,
+              1.1,
+              6.775
+            ],
+            "rotationQuaternionXYZW": [
+              0,
+              0,
+              0,
+              1
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ]
+          },
+          "leafBoundsLocalM": {
+            "min": [
+              -0.03,
+              0,
+              -0.369
+            ],
+            "max": [
+              0.03,
+              2.13,
+              0.369
+            ],
+            "size": [
+              0.06,
+              2.13,
+              0.738
+            ]
+          }
+        }
+      ],
+      "bogies": [
+        {
+          "bogieId": "bogie-rear",
+          "nodeId": "bogie-rear",
+          "frameId": "vehicle",
+          "centerM": [
+            0,
+            0.39,
+            -6.75
+          ],
+          "axleWheelbaseM": 2.15,
+          "semanticRole": "steel-bogie-frame",
+          "material": "canada-steel"
+        },
+        {
+          "bogieId": "bogie-front",
+          "nodeId": "bogie-front",
+          "frameId": "vehicle",
+          "centerM": [
+            0,
+            0.39,
+            6.75
+          ],
+          "axleWheelbaseM": 2.15,
+          "semanticRole": "steel-bogie-frame",
+          "material": "canada-steel"
+        }
+      ],
+      "wheels": [
+        {
+          "nodeId": "wheel-rear-rear-right",
+          "frameId": "vehicle",
+          "bogieId": "bogie-rear",
+          "axleId": "rear-rear",
+          "centerM": [
+            -0.775,
+            0.39,
+            -7.825
+          ],
+          "radiusM": 0.39,
+          "widthM": 0.14,
+          "spinAxis": [
+            1,
+            0,
+            0
+          ],
+          "semanticRole": "steel-rail-wheel",
+          "material": "canada-steel"
+        },
+        {
+          "nodeId": "wheel-rear-rear-left",
+          "frameId": "vehicle",
+          "bogieId": "bogie-rear",
+          "axleId": "rear-rear",
+          "centerM": [
+            0.775,
+            0.39,
+            -7.825
+          ],
+          "radiusM": 0.39,
+          "widthM": 0.14,
+          "spinAxis": [
+            1,
+            0,
+            0
+          ],
+          "semanticRole": "steel-rail-wheel",
+          "material": "canada-steel"
+        },
+        {
+          "nodeId": "wheel-rear-front-right",
+          "frameId": "vehicle",
+          "bogieId": "bogie-rear",
+          "axleId": "rear-front",
+          "centerM": [
+            -0.775,
+            0.39,
+            -5.675
+          ],
+          "radiusM": 0.39,
+          "widthM": 0.14,
+          "spinAxis": [
+            1,
+            0,
+            0
+          ],
+          "semanticRole": "steel-rail-wheel",
+          "material": "canada-steel"
+        },
+        {
+          "nodeId": "wheel-rear-front-left",
+          "frameId": "vehicle",
+          "bogieId": "bogie-rear",
+          "axleId": "rear-front",
+          "centerM": [
+            0.775,
+            0.39,
+            -5.675
+          ],
+          "radiusM": 0.39,
+          "widthM": 0.14,
+          "spinAxis": [
+            1,
+            0,
+            0
+          ],
+          "semanticRole": "steel-rail-wheel",
+          "material": "canada-steel"
+        },
+        {
+          "nodeId": "wheel-front-rear-right",
+          "frameId": "vehicle",
+          "bogieId": "bogie-front",
+          "axleId": "front-rear",
+          "centerM": [
+            -0.775,
+            0.39,
+            5.675
+          ],
+          "radiusM": 0.39,
+          "widthM": 0.14,
+          "spinAxis": [
+            1,
+            0,
+            0
+          ],
+          "semanticRole": "steel-rail-wheel",
+          "material": "canada-steel"
+        },
+        {
+          "nodeId": "wheel-front-rear-left",
+          "frameId": "vehicle",
+          "bogieId": "bogie-front",
+          "axleId": "front-rear",
+          "centerM": [
+            0.775,
+            0.39,
+            5.675
+          ],
+          "radiusM": 0.39,
+          "widthM": 0.14,
+          "spinAxis": [
+            1,
+            0,
+            0
+          ],
+          "semanticRole": "steel-rail-wheel",
+          "material": "canada-steel"
+        },
+        {
+          "nodeId": "wheel-front-front-right",
+          "frameId": "vehicle",
+          "bogieId": "bogie-front",
+          "axleId": "front-front",
+          "centerM": [
+            -0.775,
+            0.39,
+            7.825
+          ],
+          "radiusM": 0.39,
+          "widthM": 0.14,
+          "spinAxis": [
+            1,
+            0,
+            0
+          ],
+          "semanticRole": "steel-rail-wheel",
+          "material": "canada-steel"
+        },
+        {
+          "nodeId": "wheel-front-front-left",
+          "frameId": "vehicle",
+          "bogieId": "bogie-front",
+          "axleId": "front-front",
+          "centerM": [
+            0.775,
+            0.39,
+            7.825
+          ],
+          "radiusM": 0.39,
+          "widthM": 0.14,
+          "spinAxis": [
+            1,
+            0,
+            0
+          ],
+          "semanticRole": "steel-rail-wheel",
+          "material": "canada-steel"
+        }
+      ],
+      "seats": [
+        {
+          "seatId": "seat-left-01",
+          "nodeId": "seat-left-01",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            1.1,
+            1.61,
+            -8.7
+          ],
+          "cameraEyePointM": [
+            1.08,
+            2.37,
+            -8.7
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            -0.7071067811865475,
+            0,
+            0.7071067811865476
+          ],
+          "humanDatum": "pelvis, not feet",
+          "priority": false,
+          "anchorNodeId": "seat-left-01-pelvis"
+        },
+        {
+          "seatId": "seat-left-02",
+          "nodeId": "seat-left-02",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            1.1,
+            1.61,
+            -7.95
+          ],
+          "cameraEyePointM": [
+            1.08,
+            2.37,
+            -7.95
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            -0.7071067811865475,
+            0,
+            0.7071067811865476
+          ],
+          "humanDatum": "pelvis, not feet",
+          "priority": false,
+          "anchorNodeId": "seat-left-02-pelvis"
+        },
+        {
+          "seatId": "seat-left-03",
+          "nodeId": "seat-left-03",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            1.1,
+            1.61,
+            -4.6
+          ],
+          "cameraEyePointM": [
+            1.08,
+            2.37,
+            -4.6
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            -0.7071067811865475,
+            0,
+            0.7071067811865476
+          ],
+          "humanDatum": "pelvis, not feet",
+          "priority": true,
+          "anchorNodeId": "seat-left-03-pelvis"
+        },
+        {
+          "seatId": "seat-left-04",
+          "nodeId": "seat-left-04",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            1.1,
+            1.61,
+            -3.85
+          ],
+          "cameraEyePointM": [
+            1.08,
+            2.37,
+            -3.85
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            -0.7071067811865475,
+            0,
+            0.7071067811865476
+          ],
+          "humanDatum": "pelvis, not feet",
+          "priority": false,
+          "anchorNodeId": "seat-left-04-pelvis"
+        },
+        {
+          "seatId": "seat-left-05",
+          "nodeId": "seat-left-05",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            1.1,
+            1.61,
+            -3.1
+          ],
+          "cameraEyePointM": [
+            1.08,
+            2.37,
+            -3.1
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            -0.7071067811865475,
+            0,
+            0.7071067811865476
+          ],
+          "humanDatum": "pelvis, not feet",
+          "priority": false,
+          "anchorNodeId": "seat-left-05-pelvis"
+        },
+        {
+          "seatId": "seat-left-06",
+          "nodeId": "seat-left-06",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            1.1,
+            1.61,
+            2.65
+          ],
+          "cameraEyePointM": [
+            1.08,
+            2.37,
+            2.65
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            -0.7071067811865475,
+            0,
+            0.7071067811865476
+          ],
+          "humanDatum": "pelvis, not feet",
+          "priority": true,
+          "anchorNodeId": "seat-left-06-pelvis"
+        },
+        {
+          "seatId": "seat-left-07",
+          "nodeId": "seat-left-07",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            1.1,
+            1.61,
+            3.4
+          ],
+          "cameraEyePointM": [
+            1.08,
+            2.37,
+            3.4
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            -0.7071067811865475,
+            0,
+            0.7071067811865476
+          ],
+          "humanDatum": "pelvis, not feet",
+          "priority": false,
+          "anchorNodeId": "seat-left-07-pelvis"
+        },
+        {
+          "seatId": "seat-left-08",
+          "nodeId": "seat-left-08",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            1.1,
+            1.61,
+            4.15
+          ],
+          "cameraEyePointM": [
+            1.08,
+            2.37,
+            4.15
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            -0.7071067811865475,
+            0,
+            0.7071067811865476
+          ],
+          "humanDatum": "pelvis, not feet",
+          "priority": false,
+          "anchorNodeId": "seat-left-08-pelvis"
+        },
+        {
+          "seatId": "seat-left-09",
+          "nodeId": "seat-left-09",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            1.1,
+            1.61,
+            8.05
+          ],
+          "cameraEyePointM": [
+            1.08,
+            2.37,
+            8.05
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            -0.7071067811865475,
+            0,
+            0.7071067811865476
+          ],
+          "humanDatum": "pelvis, not feet",
+          "priority": false,
+          "anchorNodeId": "seat-left-09-pelvis"
+        },
+        {
+          "seatId": "seat-left-10",
+          "nodeId": "seat-left-10",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            1.1,
+            1.61,
+            8.8
+          ],
+          "cameraEyePointM": [
+            1.08,
+            2.37,
+            8.8
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            -0.7071067811865475,
+            0,
+            0.7071067811865476
+          ],
+          "humanDatum": "pelvis, not feet",
+          "priority": false,
+          "anchorNodeId": "seat-left-10-pelvis"
+        },
+        {
+          "seatId": "seat-right-01",
+          "nodeId": "seat-right-01",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            -1.1,
+            1.61,
+            -8.7
+          ],
+          "cameraEyePointM": [
+            -1.08,
+            2.37,
+            -8.7
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            0.7071067811865475,
+            0,
+            0.7071067811865476
+          ],
+          "humanDatum": "pelvis, not feet",
+          "priority": false,
+          "anchorNodeId": "seat-right-01-pelvis"
+        },
+        {
+          "seatId": "seat-right-02",
+          "nodeId": "seat-right-02",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            -1.1,
+            1.61,
+            -7.95
+          ],
+          "cameraEyePointM": [
+            -1.08,
+            2.37,
+            -7.95
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            0.7071067811865475,
+            0,
+            0.7071067811865476
+          ],
+          "humanDatum": "pelvis, not feet",
+          "priority": false,
+          "anchorNodeId": "seat-right-02-pelvis"
+        },
+        {
+          "seatId": "seat-right-03",
+          "nodeId": "seat-right-03",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            -1.1,
+            1.61,
+            -4.6
+          ],
+          "cameraEyePointM": [
+            -1.08,
+            2.37,
+            -4.6
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            0.7071067811865475,
+            0,
+            0.7071067811865476
+          ],
+          "humanDatum": "pelvis, not feet",
+          "priority": true,
+          "anchorNodeId": "seat-right-03-pelvis"
+        },
+        {
+          "seatId": "seat-right-04",
+          "nodeId": "seat-right-04",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            -1.1,
+            1.61,
+            -3.85
+          ],
+          "cameraEyePointM": [
+            -1.08,
+            2.37,
+            -3.85
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            0.7071067811865475,
+            0,
+            0.7071067811865476
+          ],
+          "humanDatum": "pelvis, not feet",
+          "priority": false,
+          "anchorNodeId": "seat-right-04-pelvis"
+        },
+        {
+          "seatId": "seat-right-05",
+          "nodeId": "seat-right-05",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            -1.1,
+            1.61,
+            -3.1
+          ],
+          "cameraEyePointM": [
+            -1.08,
+            2.37,
+            -3.1
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            0.7071067811865475,
+            0,
+            0.7071067811865476
+          ],
+          "humanDatum": "pelvis, not feet",
+          "priority": false,
+          "anchorNodeId": "seat-right-05-pelvis"
+        },
+        {
+          "seatId": "seat-right-06",
+          "nodeId": "seat-right-06",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            -1.1,
+            1.61,
+            2.65
+          ],
+          "cameraEyePointM": [
+            -1.08,
+            2.37,
+            2.65
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            0.7071067811865475,
+            0,
+            0.7071067811865476
+          ],
+          "humanDatum": "pelvis, not feet",
+          "priority": true,
+          "anchorNodeId": "seat-right-06-pelvis"
+        },
+        {
+          "seatId": "seat-right-07",
+          "nodeId": "seat-right-07",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            -1.1,
+            1.61,
+            3.4
+          ],
+          "cameraEyePointM": [
+            -1.08,
+            2.37,
+            3.4
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            0.7071067811865475,
+            0,
+            0.7071067811865476
+          ],
+          "humanDatum": "pelvis, not feet",
+          "priority": false,
+          "anchorNodeId": "seat-right-07-pelvis"
+        },
+        {
+          "seatId": "seat-right-08",
+          "nodeId": "seat-right-08",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            -1.1,
+            1.61,
+            4.15
+          ],
+          "cameraEyePointM": [
+            -1.08,
+            2.37,
+            4.15
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            0.7071067811865475,
+            0,
+            0.7071067811865476
+          ],
+          "humanDatum": "pelvis, not feet",
+          "priority": false,
+          "anchorNodeId": "seat-right-08-pelvis"
+        },
+        {
+          "seatId": "seat-right-09",
+          "nodeId": "seat-right-09",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            -1.1,
+            1.61,
+            8.05
+          ],
+          "cameraEyePointM": [
+            -1.08,
+            2.37,
+            8.05
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            0.7071067811865475,
+            0,
+            0.7071067811865476
+          ],
+          "humanDatum": "pelvis, not feet",
+          "priority": false,
+          "anchorNodeId": "seat-right-09-pelvis"
+        },
+        {
+          "seatId": "seat-right-10",
+          "nodeId": "seat-right-10",
+          "frameId": "vehicle",
+          "pelvisPointM": [
+            -1.1,
+            1.61,
+            8.8
+          ],
+          "cameraEyePointM": [
+            -1.08,
+            2.37,
+            8.8
+          ],
+          "facingQuaternionXYZW": [
+            0,
+            0.7071067811865475,
+            0,
+            0.7071067811865476
+          ],
+          "humanDatum": "pelvis, not feet",
+          "priority": false,
+          "anchorNodeId": "seat-right-10-pelvis"
+        }
+      ],
+      "standingRegions": [
+        {
+          "regionId": "vestibule-0",
+          "frameId": "vehicle",
+          "polygonM": [
+            [
+              -0.66,
+              1.1,
+              -7.08
+            ],
+            [
+              0.66,
+              1.1,
+              -7.08
+            ],
+            [
+              0.66,
+              1.1,
+              -5.720000000000001
+            ],
+            [
+              -0.66,
+              1.1,
+              -5.720000000000001
+            ]
+          ],
+          "feetPointM": [
+            0,
+            1.1,
+            -6.4
+          ],
+          "headClearanceM": 2.35,
+          "anchorNodeId": "standing-0"
+        },
+        {
+          "regionId": "vestibule-1",
+          "frameId": "vehicle",
+          "polygonM": [
+            [
+              -0.66,
+              1.1,
+              -0.68
+            ],
+            [
+              0.66,
+              1.1,
+              -0.68
+            ],
+            [
+              0.66,
+              1.1,
+              0.68
+            ],
+            [
+              -0.66,
+              1.1,
+              0.68
+            ]
+          ],
+          "feetPointM": [
+            0,
+            1.1,
+            0
+          ],
+          "headClearanceM": 2.35,
+          "anchorNodeId": "standing-1"
+        },
+        {
+          "regionId": "vestibule-2",
+          "frameId": "vehicle",
+          "polygonM": [
+            [
+              -0.66,
+              1.1,
+              5.720000000000001
+            ],
+            [
+              0.66,
+              1.1,
+              5.720000000000001
+            ],
+            [
+              0.66,
+              1.1,
+              7.08
+            ],
+            [
+              -0.66,
+              1.1,
+              7.08
+            ]
+          ],
+          "feetPointM": [
+            0,
+            1.1,
+            6.4
+          ],
+          "headClearanceM": 2.35,
+          "anchorNodeId": "standing-2"
+        }
+      ],
+      "cameraAnchors": [
+        {
+          "cameraId": "aisle-eye",
+          "frameId": "vehicle",
+          "positionM": [
+            0,
+            2.7,
+            -9.6
+          ],
+          "nodeId": "aisle-eye"
+        },
+        {
+          "cameraId": "observation-front",
+          "frameId": "vehicle",
+          "positionM": [
+            0,
+            2.7,
+            9.65
+          ],
+          "nodeId": "observation-front"
+        },
+        {
+          "cameraId": "standing-eye",
+          "frameId": "vehicle",
+          "positionM": [
+            0,
+            2.72,
+            0
+          ],
+          "nodeId": "standing-eye"
+        }
+      ],
+      "gangways": [
+        {
+          "gangwayId": "rear",
+          "frameId": "vehicle",
+          "gangwayFrameId": "gangway-rear",
+          "parentFrameId": "vehicle",
+          "positionM": [
+            0,
+            1.1,
+            -10.25
+          ],
+          "anchorNodeId": "gangway-rear",
+          "outwardNormal": [
+            0,
+            0,
+            -1
+          ],
+          "walkablePolygonM": [
+            [
+              -0.65,
+              1.1,
+              -10.5
+            ],
+            [
+              0.65,
+              1.1,
+              -10.5
+            ],
+            [
+              0.65,
+              1.1,
+              -10.15
+            ],
+            [
+              -0.65,
+              1.1,
+              -10.15
+            ]
+          ],
+          "clearWidthM": 1.3,
+          "clearHeightM": 2.13,
+          "telescopingRangeM": [
+            0.15,
+            0.4
+          ],
+          "curveSweep": {
+            "frameId": "vehicle",
+            "yawRangeRadians": [
+              -0.1,
+              0.1
+            ],
+            "sweptBoundsM": {
+              "min": [
+                -0.9,
+                1.0,
+                -10.7
+              ],
+              "max": [
+                0.9,
+                3.4,
+                -10.1
+              ],
+              "size": [
+                1.8,
+                2.4,
+                0.5999999999999996
+              ]
+            },
+            "status": "representative envelope, not dynamic-collision acceptance"
+          },
+          "intercarTraversalEnabled": false
+        }
+      ],
+      "couplers": [
+        {
+          "couplerId": "front",
+          "frameId": "vehicle",
+          "positionM": [
+            0,
+            0.68,
+            10.22
+          ],
+          "outwardNormal": [
+            0,
+            0,
+            1
+          ],
+          "anchorNodeId": "coupler-front"
+        },
+        {
+          "couplerId": "rear",
+          "frameId": "vehicle",
+          "positionM": [
+            0,
+            0.68,
+            -10.5
+          ],
+          "outwardNormal": [
+            0,
+            0,
+            -1
+          ],
+          "anchorNodeId": "coupler-rear"
+        }
+      ],
+      "anchors": [
+        {
+          "nodeId": "boarding-left-1",
+          "frameId": "vehicle",
+          "positionM": [
+            1.7,
+            1.1,
+            -6.4
+          ],
+          "resource": "exterior"
+        },
+        {
+          "nodeId": "boarding-left-2",
+          "frameId": "vehicle",
+          "positionM": [
+            1.7,
+            1.1,
+            0
+          ],
+          "resource": "exterior"
+        },
+        {
+          "nodeId": "boarding-left-3",
+          "frameId": "vehicle",
+          "positionM": [
+            1.7,
+            1.1,
+            6.4
+          ],
+          "resource": "exterior"
+        },
+        {
+          "nodeId": "boarding-right-1",
+          "frameId": "vehicle",
+          "positionM": [
+            -1.7,
+            1.1,
+            -6.4
+          ],
+          "resource": "exterior"
+        },
+        {
+          "nodeId": "boarding-right-2",
+          "frameId": "vehicle",
+          "positionM": [
+            -1.7,
+            1.1,
+            0
+          ],
+          "resource": "exterior"
+        },
+        {
+          "nodeId": "boarding-right-3",
+          "frameId": "vehicle",
+          "positionM": [
+            -1.7,
+            1.1,
+            6.4
+          ],
+          "resource": "exterior"
+        },
+        {
+          "nodeId": "seat-left-01-pelvis",
+          "frameId": "vehicle",
+          "positionM": [
+            1.1,
+            1.61,
+            -8.7
+          ],
+          "resource": "interior"
+        },
+        {
+          "nodeId": "seat-left-02-pelvis",
+          "frameId": "vehicle",
+          "positionM": [
+            1.1,
+            1.61,
+            -7.95
+          ],
+          "resource": "interior"
+        },
+        {
+          "nodeId": "seat-left-03-pelvis",
+          "frameId": "vehicle",
+          "positionM": [
+            1.1,
+            1.61,
+            -4.6
+          ],
+          "resource": "interior"
+        },
+        {
+          "nodeId": "seat-left-04-pelvis",
+          "frameId": "vehicle",
+          "positionM": [
+            1.1,
+            1.61,
+            -3.85
+          ],
+          "resource": "interior"
+        },
+        {
+          "nodeId": "seat-left-05-pelvis",
+          "frameId": "vehicle",
+          "positionM": [
+            1.1,
+            1.61,
+            -3.1
+          ],
+          "resource": "interior"
+        },
+        {
+          "nodeId": "seat-left-06-pelvis",
+          "frameId": "vehicle",
+          "positionM": [
+            1.1,
+            1.61,
+            2.65
+          ],
+          "resource": "interior"
+        },
+        {
+          "nodeId": "seat-left-07-pelvis",
+          "frameId": "vehicle",
+          "positionM": [
+            1.1,
+            1.61,
+            3.4
+          ],
+          "resource": "interior"
+        },
+        {
+          "nodeId": "seat-left-08-pelvis",
+          "frameId": "vehicle",
+          "positionM": [
+            1.1,
+            1.61,
+            4.15
+          ],
+          "resource": "interior"
+        },
+        {
+          "nodeId": "seat-left-09-pelvis",
+          "frameId": "vehicle",
+          "positionM": [
+            1.1,
+            1.61,
+            8.05
+          ],
+          "resource": "interior"
+        },
+        {
+          "nodeId": "seat-left-10-pelvis",
+          "frameId": "vehicle",
+          "positionM": [
+            1.1,
+            1.61,
+            8.8
+          ],
+          "resource": "interior"
+        },
+        {
+          "nodeId": "seat-right-01-pelvis",
+          "frameId": "vehicle",
+          "positionM": [
+            -1.1,
+            1.61,
+            -8.7
+          ],
+          "resource": "interior"
+        },
+        {
+          "nodeId": "seat-right-02-pelvis",
+          "frameId": "vehicle",
+          "positionM": [
+            -1.1,
+            1.61,
+            -7.95
+          ],
+          "resource": "interior"
+        },
+        {
+          "nodeId": "seat-right-03-pelvis",
+          "frameId": "vehicle",
+          "positionM": [
+            -1.1,
+            1.61,
+            -4.6
+          ],
+          "resource": "interior"
+        },
+        {
+          "nodeId": "seat-right-04-pelvis",
+          "frameId": "vehicle",
+          "positionM": [
+            -1.1,
+            1.61,
+            -3.85
+          ],
+          "resource": "interior"
+        },
+        {
+          "nodeId": "seat-right-05-pelvis",
+          "frameId": "vehicle",
+          "positionM": [
+            -1.1,
+            1.61,
+            -3.1
+          ],
+          "resource": "interior"
+        },
+        {
+          "nodeId": "seat-right-06-pelvis",
+          "frameId": "vehicle",
+          "positionM": [
+            -1.1,
+            1.61,
+            2.65
+          ],
+          "resource": "interior"
+        },
+        {
+          "nodeId": "seat-right-07-pelvis",
+          "frameId": "vehicle",
+          "positionM": [
+            -1.1,
+            1.61,
+            3.4
+          ],
+          "resource": "interior"
+        },
+        {
+          "nodeId": "seat-right-08-pelvis",
+          "frameId": "vehicle",
+          "positionM": [
+            -1.1,
+            1.61,
+            4.15
+          ],
+          "resource": "interior"
+        },
+        {
+          "nodeId": "seat-right-09-pelvis",
+          "frameId": "vehicle",
+          "positionM": [
+            -1.1,
+            1.61,
+            8.05
+          ],
+          "resource": "interior"
+        },
+        {
+          "nodeId": "seat-right-10-pelvis",
+          "frameId": "vehicle",
+          "positionM": [
+            -1.1,
+            1.61,
+            8.8
+          ],
+          "resource": "interior"
+        },
+        {
+          "nodeId": "standing-0",
+          "frameId": "vehicle",
+          "positionM": [
+            0,
+            1.1,
+            -6.4
+          ],
+          "resource": "interior"
+        },
+        {
+          "nodeId": "standing-1",
+          "frameId": "vehicle",
+          "positionM": [
+            0,
+            1.1,
+            0
+          ],
+          "resource": "interior"
+        },
+        {
+          "nodeId": "standing-2",
+          "frameId": "vehicle",
+          "positionM": [
+            0,
+            1.1,
+            6.4
+          ],
+          "resource": "interior"
+        },
+        {
+          "nodeId": "aisle-eye",
+          "frameId": "vehicle",
+          "positionM": [
+            0,
+            2.7,
+            -9.6
+          ],
+          "resource": "interior"
+        },
+        {
+          "nodeId": "observation-front",
+          "frameId": "vehicle",
+          "positionM": [
+            0,
+            2.7,
+            9.65
+          ],
+          "resource": "interior"
+        },
+        {
+          "nodeId": "standing-eye",
+          "frameId": "vehicle",
+          "positionM": [
+            0,
+            2.72,
+            0
+          ],
+          "resource": "interior"
+        },
+        {
+          "nodeId": "coupler-front",
+          "frameId": "vehicle",
+          "positionM": [
+            0,
+            0.68,
+            10.22
+          ],
+          "resource": "exterior"
+        },
+        {
+          "nodeId": "coupler-rear",
+          "frameId": "vehicle",
+          "positionM": [
+            0,
+            0.68,
+            -10.5
+          ],
+          "resource": "exterior"
+        },
+        {
+          "nodeId": "gangway-rear",
+          "frameId": "vehicle",
+          "positionM": [
+            0,
+            1.1,
+            -10.25
+          ],
+          "resource": "exterior"
+        }
+      ],
+      "freeZones": [
+        {
+          "zoneId": "wheelchair",
+          "frameId": "vehicle",
+          "polygonM": [
+            [
+              0.35,
+              1.1,
+              0.85
+            ],
+            [
+              1.35,
+              1.1,
+              0.85
+            ],
+            [
+              1.35,
+              1.1,
+              2.05
+            ],
+            [
+              0.35,
+              1.1,
+              2.05
+            ]
+          ],
+          "emptyRequired": true,
+          "note": "Representative clearance, not accessibility certification"
+        },
+        {
+          "zoneId": "bicycle-luggage",
+          "frameId": "vehicle",
+          "polygonM": [
+            [
+              -1.35,
+              1.1,
+              -2.1
+            ],
+            [
+              -0.35,
+              1.1,
+              -2.1
+            ],
+            [
+              -0.35,
+              1.1,
+              -0.85
+            ],
+            [
+              -1.35,
+              1.1,
+              -0.85
+            ]
+          ],
+          "emptyRequired": true,
+          "note": "Representative clearance, not accessibility certification"
+        }
+      ],
+      "collision": {
+        "frameId": "vehicle",
+        "type": "primitives",
+        "precision": "Representative gameplay proxies, sampled against actual GLB; not certification.",
+        "primitives": [
+          {
+            "id": "wall-left-0",
+            "nodeId": "body-shell",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                1.4,
+                1.1,
+                -10.25
+              ],
+              "max": [
+                1.53,
+                3.45,
+                -7.15
+              ],
+              "size": [
+                0.13000000000000012,
+                2.35,
+                3.0999999999999996
+              ]
+            }
+          },
+          {
+            "id": "wall-left-1",
+            "nodeId": "body-shell",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                1.4,
+                1.1,
+                -5.65
+              ],
+              "max": [
+                1.53,
+                3.45,
+                -0.75
+              ],
+              "size": [
+                0.13000000000000012,
+                2.35,
+                4.9
+              ]
+            }
+          },
+          {
+            "id": "wall-left-2",
+            "nodeId": "body-shell",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                1.4,
+                1.1,
+                0.75
+              ],
+              "max": [
+                1.53,
+                3.45,
+                5.65
+              ],
+              "size": [
+                0.13000000000000012,
+                2.35,
+                4.9
+              ]
+            }
+          },
+          {
+            "id": "wall-left-3",
+            "nodeId": "body-shell",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                1.4,
+                1.1,
+                7.15
+              ],
+              "max": [
+                1.53,
+                3.45,
+                10.25
+              ],
+              "size": [
+                0.13000000000000012,
+                2.35,
+                3.0999999999999996
+              ]
+            }
+          },
+          {
+            "id": "wall-right-0",
+            "nodeId": "body-shell",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.53,
+                1.1,
+                -10.25
+              ],
+              "max": [
+                -1.4,
+                3.45,
+                -7.15
+              ],
+              "size": [
+                0.13000000000000012,
+                2.35,
+                3.0999999999999996
+              ]
+            }
+          },
+          {
+            "id": "wall-right-1",
+            "nodeId": "body-shell",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.53,
+                1.1,
+                -5.65
+              ],
+              "max": [
+                -1.4,
+                3.45,
+                -0.75
+              ],
+              "size": [
+                0.13000000000000012,
+                2.35,
+                4.9
+              ]
+            }
+          },
+          {
+            "id": "wall-right-2",
+            "nodeId": "body-shell",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.53,
+                1.1,
+                0.75
+              ],
+              "max": [
+                -1.4,
+                3.45,
+                5.65
+              ],
+              "size": [
+                0.13000000000000012,
+                2.35,
+                4.9
+              ]
+            }
+          },
+          {
+            "id": "wall-right-3",
+            "nodeId": "body-shell",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.53,
+                1.1,
+                7.15
+              ],
+              "max": [
+                -1.4,
+                3.45,
+                10.25
+              ],
+              "size": [
+                0.13000000000000012,
+                2.35,
+                3.0999999999999996
+              ]
+            }
+          },
+          {
+            "id": "seat-left-01",
+            "frameId": "vehicle",
+            "nodeId": "seat-left-01",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.81,
+                1.47,
+                -8.989999999999998
+              ],
+              "max": [
+                1.43,
+                2.2,
+                -8.41
+              ],
+              "size": [
+                0.6199999999999999,
+                0.7300000000000002,
+                0.5799999999999983
+              ]
+            }
+          },
+          {
+            "id": "seat-left-02",
+            "frameId": "vehicle",
+            "nodeId": "seat-left-02",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.81,
+                1.47,
+                -8.24
+              ],
+              "max": [
+                1.43,
+                2.2,
+                -7.66
+              ],
+              "size": [
+                0.6199999999999999,
+                0.7300000000000002,
+                0.5800000000000001
+              ]
+            }
+          },
+          {
+            "id": "seat-left-03",
+            "frameId": "vehicle",
+            "nodeId": "seat-left-03",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.81,
+                1.47,
+                -4.89
+              ],
+              "max": [
+                1.43,
+                2.2,
+                -4.31
+              ],
+              "size": [
+                0.6199999999999999,
+                0.7300000000000002,
+                0.5800000000000001
+              ]
+            }
+          },
+          {
+            "id": "seat-left-04",
+            "frameId": "vehicle",
+            "nodeId": "seat-left-04",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.81,
+                1.47,
+                -4.14
+              ],
+              "max": [
+                1.43,
+                2.2,
+                -3.56
+              ],
+              "size": [
+                0.6199999999999999,
+                0.7300000000000002,
+                0.5799999999999996
+              ]
+            }
+          },
+          {
+            "id": "seat-left-05",
+            "frameId": "vehicle",
+            "nodeId": "seat-left-05",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.81,
+                1.47,
+                -3.39
+              ],
+              "max": [
+                1.43,
+                2.2,
+                -2.81
+              ],
+              "size": [
+                0.6199999999999999,
+                0.7300000000000002,
+                0.5800000000000001
+              ]
+            }
+          },
+          {
+            "id": "seat-left-06",
+            "frameId": "vehicle",
+            "nodeId": "seat-left-06",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.81,
+                1.47,
+                2.36
+              ],
+              "max": [
+                1.43,
+                2.2,
+                2.94
+              ],
+              "size": [
+                0.6199999999999999,
+                0.7300000000000002,
+                0.5800000000000001
+              ]
+            }
+          },
+          {
+            "id": "seat-left-07",
+            "frameId": "vehicle",
+            "nodeId": "seat-left-07",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.81,
+                1.47,
+                3.11
+              ],
+              "max": [
+                1.43,
+                2.2,
+                3.69
+              ],
+              "size": [
+                0.6199999999999999,
+                0.7300000000000002,
+                0.5800000000000001
+              ]
+            }
+          },
+          {
+            "id": "seat-left-08",
+            "frameId": "vehicle",
+            "nodeId": "seat-left-08",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.81,
+                1.47,
+                3.8600000000000003
+              ],
+              "max": [
+                1.43,
+                2.2,
+                4.44
+              ],
+              "size": [
+                0.6199999999999999,
+                0.7300000000000002,
+                0.5800000000000001
+              ]
+            }
+          },
+          {
+            "id": "seat-left-09",
+            "frameId": "vehicle",
+            "nodeId": "seat-left-09",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.81,
+                1.47,
+                7.760000000000001
+              ],
+              "max": [
+                1.43,
+                2.2,
+                8.34
+              ],
+              "size": [
+                0.6199999999999999,
+                0.7300000000000002,
+                0.5799999999999992
+              ]
+            }
+          },
+          {
+            "id": "seat-left-10",
+            "frameId": "vehicle",
+            "nodeId": "seat-left-10",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.81,
+                1.47,
+                8.510000000000002
+              ],
+              "max": [
+                1.43,
+                2.2,
+                9.09
+              ],
+              "size": [
+                0.6199999999999999,
+                0.7300000000000002,
+                0.5799999999999983
+              ]
+            }
+          },
+          {
+            "id": "seat-right-01",
+            "frameId": "vehicle",
+            "nodeId": "seat-right-01",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.43,
+                1.47,
+                -8.989999999999998
+              ],
+              "max": [
+                -0.81,
+                2.2,
+                -8.41
+              ],
+              "size": [
+                0.6199999999999999,
+                0.7300000000000002,
+                0.5799999999999983
+              ]
+            }
+          },
+          {
+            "id": "seat-right-02",
+            "frameId": "vehicle",
+            "nodeId": "seat-right-02",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.43,
+                1.47,
+                -8.24
+              ],
+              "max": [
+                -0.81,
+                2.2,
+                -7.66
+              ],
+              "size": [
+                0.6199999999999999,
+                0.7300000000000002,
+                0.5800000000000001
+              ]
+            }
+          },
+          {
+            "id": "seat-right-03",
+            "frameId": "vehicle",
+            "nodeId": "seat-right-03",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.43,
+                1.47,
+                -4.89
+              ],
+              "max": [
+                -0.81,
+                2.2,
+                -4.31
+              ],
+              "size": [
+                0.6199999999999999,
+                0.7300000000000002,
+                0.5800000000000001
+              ]
+            }
+          },
+          {
+            "id": "seat-right-04",
+            "frameId": "vehicle",
+            "nodeId": "seat-right-04",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.43,
+                1.47,
+                -4.14
+              ],
+              "max": [
+                -0.81,
+                2.2,
+                -3.56
+              ],
+              "size": [
+                0.6199999999999999,
+                0.7300000000000002,
+                0.5799999999999996
+              ]
+            }
+          },
+          {
+            "id": "seat-right-05",
+            "frameId": "vehicle",
+            "nodeId": "seat-right-05",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.43,
+                1.47,
+                -3.39
+              ],
+              "max": [
+                -0.81,
+                2.2,
+                -2.81
+              ],
+              "size": [
+                0.6199999999999999,
+                0.7300000000000002,
+                0.5800000000000001
+              ]
+            }
+          },
+          {
+            "id": "seat-right-06",
+            "frameId": "vehicle",
+            "nodeId": "seat-right-06",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.43,
+                1.47,
+                2.36
+              ],
+              "max": [
+                -0.81,
+                2.2,
+                2.94
+              ],
+              "size": [
+                0.6199999999999999,
+                0.7300000000000002,
+                0.5800000000000001
+              ]
+            }
+          },
+          {
+            "id": "seat-right-07",
+            "frameId": "vehicle",
+            "nodeId": "seat-right-07",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.43,
+                1.47,
+                3.11
+              ],
+              "max": [
+                -0.81,
+                2.2,
+                3.69
+              ],
+              "size": [
+                0.6199999999999999,
+                0.7300000000000002,
+                0.5800000000000001
+              ]
+            }
+          },
+          {
+            "id": "seat-right-08",
+            "frameId": "vehicle",
+            "nodeId": "seat-right-08",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.43,
+                1.47,
+                3.8600000000000003
+              ],
+              "max": [
+                -0.81,
+                2.2,
+                4.44
+              ],
+              "size": [
+                0.6199999999999999,
+                0.7300000000000002,
+                0.5800000000000001
+              ]
+            }
+          },
+          {
+            "id": "seat-right-09",
+            "frameId": "vehicle",
+            "nodeId": "seat-right-09",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.43,
+                1.47,
+                7.760000000000001
+              ],
+              "max": [
+                -0.81,
+                2.2,
+                8.34
+              ],
+              "size": [
+                0.6199999999999999,
+                0.7300000000000002,
+                0.5799999999999992
+              ]
+            }
+          },
+          {
+            "id": "seat-right-10",
+            "frameId": "vehicle",
+            "nodeId": "seat-right-10",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.43,
+                1.47,
+                8.510000000000002
+              ],
+              "max": [
+                -0.81,
+                2.2,
+                9.09
+              ],
+              "size": [
+                0.6199999999999999,
+                0.7300000000000002,
+                0.5799999999999983
+              ]
+            }
+          },
+          {
+            "id": "floor",
+            "frameId": "vehicle",
+            "nodeId": "floor",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.4,
+                1.02,
+                -10.25
+              ],
+              "max": [
+                1.4,
+                1.1,
+                10.16
+              ],
+              "size": [
+                2.8,
+                0.08000000000000007,
+                20.41
+              ]
+            }
+          },
+          {
+            "id": "ceiling",
+            "frameId": "vehicle",
+            "nodeId": "ceiling",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.4,
+                3.45,
+                -10.25
+              ],
+              "max": [
+                1.4,
+                3.51,
+                10.16
+              ],
+              "size": [
+                2.8,
+                0.05999999999999961,
+                20.41
+              ]
+            }
+          },
+          {
+            "id": "observation-wall",
+            "frameId": "vehicle",
+            "nodeId": "body-shell",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.5,
+                1.1,
+                10.16
+              ],
+              "max": [
+                1.5,
+                3.45,
+                10.25
+              ],
+              "size": [
+                3.0,
+                2.35,
+                0.08999999999999986
+              ]
+            }
+          },
+          {
+            "id": "gangway-floor",
+            "frameId": "vehicle",
+            "nodeId": "body-shell",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -0.65,
+                1.02,
+                -10.5
+              ],
+              "max": [
+                0.65,
+                1.1,
+                -10.15
+              ],
+              "size": [
+                1.3,
+                0.08000000000000007,
+                0.34999999999999964
+              ]
+            }
+          },
+          {
+            "id": "gangway-jamb-left",
+            "frameId": "vehicle",
+            "nodeId": "body-shell",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                0.65,
+                1.1,
+                -10.25
+              ],
+              "max": [
+                1.5,
+                3.23,
+                -10.16
+              ],
+              "size": [
+                0.85,
+                2.13,
+                0.08999999999999986
+              ]
+            }
+          },
+          {
+            "id": "gangway-jamb-right",
+            "frameId": "vehicle",
+            "nodeId": "body-shell",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.5,
+                1.1,
+                -10.25
+              ],
+              "max": [
+                -0.65,
+                3.23,
+                -10.16
+              ],
+              "size": [
+                0.85,
+                2.13,
+                0.08999999999999986
+              ]
+            }
+          },
+          {
+            "id": "gangway-header",
+            "frameId": "vehicle",
+            "nodeId": "body-shell",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -0.8,
+                3.23,
+                -10.5
+              ],
+              "max": [
+                0.8,
+                3.45,
+                -10.16
+              ],
+              "size": [
+                1.6,
+                0.2200000000000002,
+                0.33999999999999986
+              ]
+            }
+          }
+        ],
+        "dynamicDoorPolicy": "leafBoundsLocalM transformed by current door node pose; never retain closed collision when opening"
+      },
+      "lodCapabilities": [
+        {
+          "level": 0,
+          "doorsAnimated": true,
+          "passengerCapable": true,
+          "openingsPreserved": true,
+          "interiorLevel": 0,
+          "stateRestriction": "Load interior and validate station before boarding"
+        },
+        {
+          "level": 1,
+          "doorsAnimated": true,
+          "passengerCapable": true,
+          "openingsPreserved": true,
+          "interiorLevel": 1,
+          "stateRestriction": "Load interior and validate station before boarding"
+        },
+        {
+          "level": 2,
+          "doorsAnimated": false,
+          "passengerCapable": false,
+          "openingsPreserved": false,
+          "interiorLevel": null,
+          "stateRestriction": "Closed empty display only"
+        }
+      ],
+      "completeBoundsM": {
+        "min": [
+          -1.5250000040978193,
+          0.0,
+          -10.500000387430191
+        ],
+        "max": [
+          1.5250000040978193,
+          3.7049999237060547,
+          10.25600016117096
+        ],
+        "size": [
+          3.0500000081956387,
+          3.7049999237060547,
+          20.75600054860115
+        ]
+      }
+    }
+  ],
+  "composition": {
+    "profileId": "canada-line-2car-representative-v1",
+    "frameId": "consist",
+    "cars": [
+      {
+        "carId": "canada-car-01",
+        "vehicleId": "canada-line-endcar",
+        "translationM": [
+          0,
+          0,
+          10.5
+        ],
+        "rotationQuaternionXYZW": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "carId": "canada-car-02",
+        "vehicleId": "canada-line-endcar",
+        "translationM": [
+          0,
+          0,
+          -10.5
+        ],
+        "rotationQuaternionXYZW": [
+          0,
+          1,
+          0,
+          0
+        ]
+      }
+    ],
+    "nominalBodyLengthM": 41,
+    "actualLengthM": 41.512,
+    "representativeNominalConsistLengthM": 41.5,
+    "carPitchM": 21,
+    "betweenCarBodyGapM": 0.5,
+    "requiredPlatformLengthM": 43.512,
+    "stoppingToleranceEachEndM": 1,
+    "movingIntercarTraversal": "not_supported_pending_seam_and_moving_collision_validation",
+    "directionMapping": "Car02 yaw=pi: car-left maps to consist-right. Preserve door IDs and transform normals."
+  },
+  "runtimeChecks": {
+    "status": "not_run",
+    "integrationStatus": "runtime_pending_webgl",
+    "D06": "not_implemented",
+    "movingIntercarTraversal": "not_run",
+    "terrainAndPlatformIntegration": "not_run"
+  },
+  "offlineChecks": {
+    "status": "passed",
+    "validation": "qa/validation.json",
+    "commonPackaging": "qa/common-validation.json",
+    "sourceRoundtrip": "qa/source-roundtrip.json",
+    "visualReview": "qa/visual-review.json",
+    "tests": "qa/tests.log"
+  }
+}
