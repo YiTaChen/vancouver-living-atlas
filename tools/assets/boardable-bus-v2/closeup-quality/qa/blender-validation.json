@@ -1,0 +1,68 @@
+{
+  "status": "pass",
+  "blenderVersion": "4.3.2",
+  "scope": "Offline source reopen/reexport and actual quality GLB import",
+  "sourceChecks": [
+    {
+      "source": "source/city-bus-12m-interior-v2-closeup.lod0.blend",
+      "sha256": "a66a2606157c27b59163587fda84f6b17f5e9d8d6e02e8f70220a4d22ff99073",
+      "editableMeshObjects": 810,
+      "editableModifiers": 439,
+      "sourceUnchanged": true,
+      "reexportBinaryIdentical": true,
+      "sidecarBinaryIdentical": true,
+      "deliveredGLBReimport": "pass",
+      "boundsM": {
+        "min": [
+          -1.25,
+          0.25999999046325684,
+          -5.755000114440918
+        ],
+        "max": [
+          1.2300000190734863,
+          2.700000047683716,
+          5.775000095367432
+        ]
+      },
+      "sourceBytes": 1351069
+    },
+    {
+      "source": "source/city-bus-12m-interior-v2-closeup.lod1.blend",
+      "sha256": "f78fc08fa5ea5c7e3dcd98b527a6d9570dca9eedd4dfdd46d59da648c6c732b3",
+      "editableMeshObjects": 810,
+      "editableModifiers": 439,
+      "sourceUnchanged": true,
+      "reexportBinaryIdentical": true,
+      "sidecarBinaryIdentical": true,
+      "deliveredGLBReimport": "pass",
+      "boundsM": {
+        "min": [
+          -1.25,
+          0.25999999046325684,
+          -5.755000114440918
+        ],
+        "max": [
+          1.2300000190734863,
+          2.700000047683716,
+          5.775000095367432
+        ]
+      },
+      "sourceBytes": 633013
+    }
+  ],
+  "artistEditProbe": {
+    "status": "pass",
+    "component": "seat-01-cushion",
+    "offsetM": 0.012,
+    "savedCopyReopened": true,
+    "masterAndCandidateSourcesUnchanged": true
+  },
+  "detailedMasterHashes": {
+    "source/city-bus-12m-interior-v2.lod1.blend": "574de58747175d91c67c76bde05c950bf44ba9542188a37303db6bb600408cd3",
+    "source/city-bus-12m-interior-v2.lod0.blend": "f9fb01939c1e65c0c308c8bc2cdca72f26d9d6b728e489df6743bfb6849dc673",
+    "exports/city-bus-12m-interior-v2.lod0.glb": "bc49cb015a4d02e1d7d68c5812a459d5b49eee822a8aff8d6795709d04fac80e",
+    "exports/city-bus-12m-interior-v2.lod1.glb": "c86bdf4737f28af73cd9a6f8d638b09f939ff90cd6e5a5df51e9839ec509624a"
+  },
+  "WebGL": "not_run",
+  "originalMasterRoot": ".."
+}

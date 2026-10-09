@@ -1,0 +1,16 @@
+✔ bus-closeup-quality: composed LOD0 and LOD1 bind the actual 24 seats and one safe standing anchor (49.013427ms)
+✔ bus-closeup-quality: the real adapter still rejects display-only exterior LOD2 (38.092866ms)
+✔ bus-closeup-quality: accidentally exposing raised rear as standing fails closed (38.410782ms)
+✔ bus-closeup-quality: adapter rejects unresolved dependency asset IDs (50.850794ms)
+✔ bus-closeup-quality: actual adapter preserves inward priority-seat yaw and camera anchors (58.232342ms)
+✔ bus-closeup-quality: adapter rejects a non-unit priority-seat rotation (32.271241ms)
+✔ close-up bus actual GLBs preserve anchors, clearances, round tubes and black-inner / blue-outer frames (24077.561485ms)
+✔ quality profile stays separate from integrated budget assets and truthful measured costs (30.625495ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 24950.748274

@@ -1,0 +1,646 @@
+{
+  "status": "all_16_images_rendered_and_pixels_reviewed",
+  "renders": [
+    {
+      "file": "seat-baseline-master.png",
+      "sha256": "8327476208e2673a5b92f242dd9eb5d75d481852dd5d8bf919adb35b41f40780",
+      "profile": "baseline-master",
+      "view": "seat",
+      "eyeVehicleM": [
+        -0.05,
+        1.28,
+        2.0
+      ],
+      "targetVehicleM": [
+        0.85,
+        1.12,
+        1.33
+      ],
+      "lensMm": 30,
+      "actualGLBInputs": [
+        {
+          "file": "boardable-bus-v2/exports/city-bus-12m-interior-v2.lod0.glb",
+          "sha256": "bc49cb015a4d02e1d7d68c5812a459d5b49eee822a8aff8d6795709d04fac80e"
+        },
+        {
+          "file": "boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        }
+      ],
+      "renderer": "Cycles CPU",
+      "samples": 48,
+      "resolution": [
+        1152,
+        768
+      ],
+      "colorManagement": "AgX",
+      "exposure": 0,
+      "denoising": false,
+      "lighting": "identical baseline daytime area lamps and world; never exported",
+      "runtimeOrWebGL": false,
+      "adaptiveThreshold": 0.025,
+      "maximumBounces": 4
+    },
+    {
+      "file": "roof-rail-baseline-master.png",
+      "sha256": "e103e173f2fca23583b914256897abd60b898295b94aa620d78d9770dc0f4cc9",
+      "profile": "baseline-master",
+      "view": "roof-rail",
+      "eyeVehicleM": [
+        0.08,
+        2.06,
+        1.78
+      ],
+      "targetVehicleM": [
+        0.45,
+        2.48,
+        -0.75
+      ],
+      "lensMm": 24,
+      "actualGLBInputs": [
+        {
+          "file": "boardable-bus-v2/exports/city-bus-12m-interior-v2.lod0.glb",
+          "sha256": "bc49cb015a4d02e1d7d68c5812a459d5b49eee822a8aff8d6795709d04fac80e"
+        },
+        {
+          "file": "boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        }
+      ],
+      "renderer": "Cycles CPU",
+      "samples": 48,
+      "resolution": [
+        1152,
+        768
+      ],
+      "colorManagement": "AgX",
+      "exposure": 0,
+      "denoising": false,
+      "lighting": "identical baseline daytime area lamps and world; never exported",
+      "runtimeOrWebGL": false,
+      "adaptiveThreshold": 0.025,
+      "maximumBounces": 4
+    },
+    {
+      "file": "cabin-baseline-master.png",
+      "sha256": "aa65707d7b08b734250b083c2a269ced7ccd07b7f1acf4952454fc273698b893",
+      "profile": "baseline-master",
+      "view": "cabin",
+      "eyeVehicleM": [
+        0,
+        1.87,
+        4.4
+      ],
+      "targetVehicleM": [
+        0,
+        1.53,
+        -4.65
+      ],
+      "lensMm": 20,
+      "actualGLBInputs": [
+        {
+          "file": "boardable-bus-v2/exports/city-bus-12m-interior-v2.lod0.glb",
+          "sha256": "bc49cb015a4d02e1d7d68c5812a459d5b49eee822a8aff8d6795709d04fac80e"
+        },
+        {
+          "file": "boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        }
+      ],
+      "renderer": "Cycles CPU",
+      "samples": 48,
+      "resolution": [
+        1152,
+        768
+      ],
+      "colorManagement": "AgX",
+      "exposure": 0,
+      "denoising": false,
+      "lighting": "identical baseline daytime area lamps and world; never exported",
+      "runtimeOrWebGL": false,
+      "adaptiveThreshold": 0.025,
+      "maximumBounces": 4
+    },
+    {
+      "file": "seat-budget-candidate.png",
+      "sha256": "19dee53db9ee9b44d0acda1dd921daa28d91a6c4c2c8c9c266f3ea07139f51d7",
+      "profile": "budget-candidate",
+      "view": "seat",
+      "eyeVehicleM": [
+        -0.05,
+        1.28,
+        2.0
+      ],
+      "targetVehicleM": [
+        0.85,
+        1.12,
+        1.33
+      ],
+      "lensMm": 30,
+      "actualGLBInputs": [
+        {
+          "file": "boardable-bus-v2/runtime-candidate/exports/city-bus-12m-interior-v2-runtime.lod0.glb",
+          "sha256": "76302cf2d45d5c027a412c6087231b65605d982b3ec2634942b6910ab002c096"
+        },
+        {
+          "file": "boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        }
+      ],
+      "renderer": "Cycles CPU",
+      "samples": 48,
+      "resolution": [
+        1152,
+        768
+      ],
+      "colorManagement": "AgX",
+      "exposure": 0,
+      "denoising": false,
+      "lighting": "identical baseline daytime area lamps and world; never exported",
+      "runtimeOrWebGL": false,
+      "adaptiveThreshold": 0.025,
+      "maximumBounces": 4
+    },
+    {
+      "file": "roof-rail-budget-candidate.png",
+      "sha256": "5af04d51b372c0a729d29f2105dc9f9e13b575b0b58fa1e5ac11ac9f747fa75c",
+      "profile": "budget-candidate",
+      "view": "roof-rail",
+      "eyeVehicleM": [
+        0.08,
+        2.06,
+        1.78
+      ],
+      "targetVehicleM": [
+        0.45,
+        2.48,
+        -0.75
+      ],
+      "lensMm": 24,
+      "actualGLBInputs": [
+        {
+          "file": "boardable-bus-v2/runtime-candidate/exports/city-bus-12m-interior-v2-runtime.lod0.glb",
+          "sha256": "76302cf2d45d5c027a412c6087231b65605d982b3ec2634942b6910ab002c096"
+        },
+        {
+          "file": "boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        }
+      ],
+      "renderer": "Cycles CPU",
+      "samples": 48,
+      "resolution": [
+        1152,
+        768
+      ],
+      "colorManagement": "AgX",
+      "exposure": 0,
+      "denoising": false,
+      "lighting": "identical baseline daytime area lamps and world; never exported",
+      "runtimeOrWebGL": false,
+      "adaptiveThreshold": 0.025,
+      "maximumBounces": 4
+    },
+    {
+      "file": "cabin-budget-candidate.png",
+      "sha256": "ae815502221298271284676da28ed048d4af4b8af32489e660f0ce77c54de0d7",
+      "profile": "budget-candidate",
+      "view": "cabin",
+      "eyeVehicleM": [
+        0,
+        1.87,
+        4.4
+      ],
+      "targetVehicleM": [
+        0,
+        1.53,
+        -4.65
+      ],
+      "lensMm": 20,
+      "actualGLBInputs": [
+        {
+          "file": "boardable-bus-v2/runtime-candidate/exports/city-bus-12m-interior-v2-runtime.lod0.glb",
+          "sha256": "76302cf2d45d5c027a412c6087231b65605d982b3ec2634942b6910ab002c096"
+        },
+        {
+          "file": "boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        }
+      ],
+      "renderer": "Cycles CPU",
+      "samples": 48,
+      "resolution": [
+        1152,
+        768
+      ],
+      "colorManagement": "AgX",
+      "exposure": 0,
+      "denoising": false,
+      "lighting": "identical baseline daytime area lamps and world; never exported",
+      "runtimeOrWebGL": false,
+      "adaptiveThreshold": 0.025,
+      "maximumBounces": 4
+    },
+    {
+      "file": "cabin-quality-lod0.png",
+      "sha256": "1af25ff3fce3c40139ff85500eaebb5f03e86969e64591becd21a1f1972aaecd",
+      "profile": "quality-lod0",
+      "view": "cabin",
+      "eyeVehicleM": [
+        0,
+        1.87,
+        4.4
+      ],
+      "targetVehicleM": [
+        0,
+        1.53,
+        -4.65
+      ],
+      "lensMm": 20,
+      "actualGLBInputs": [
+        {
+          "file": "boardable-bus-v2/closeup-quality/exports/city-bus-12m-interior-v2-closeup.lod0.glb",
+          "sha256": "8174cf56646eec303ad1891222cbd056d8ddea1e593c9a1e7ce70bc77a524a6d"
+        },
+        {
+          "file": "boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        }
+      ],
+      "renderer": "Cycles CPU",
+      "samples": 96,
+      "resolution": [
+        1152,
+        768
+      ],
+      "colorManagement": "AgX",
+      "exposure": 0,
+      "denoising": false,
+      "lighting": "identical baseline daytime area lamps and world; never exported",
+      "runtimeOrWebGL": false,
+      "adaptiveThreshold": 0.02,
+      "maximumBounces": 4
+    },
+    {
+      "file": "seat-quality-lod0.png",
+      "sha256": "6567a3c1212336b00b8bcc719ce9c8adc301f88f7fe9185443dc7d256f181707",
+      "profile": "quality-lod0",
+      "view": "seat",
+      "eyeVehicleM": [
+        -0.05,
+        1.28,
+        2.0
+      ],
+      "targetVehicleM": [
+        0.85,
+        1.12,
+        1.33
+      ],
+      "lensMm": 30,
+      "actualGLBInputs": [
+        {
+          "file": "boardable-bus-v2/closeup-quality/exports/city-bus-12m-interior-v2-closeup.lod0.glb",
+          "sha256": "8174cf56646eec303ad1891222cbd056d8ddea1e593c9a1e7ce70bc77a524a6d"
+        },
+        {
+          "file": "boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        }
+      ],
+      "renderer": "Cycles CPU",
+      "samples": 96,
+      "resolution": [
+        1152,
+        768
+      ],
+      "colorManagement": "AgX",
+      "exposure": 0,
+      "denoising": false,
+      "lighting": "identical baseline daytime area lamps and world; never exported",
+      "runtimeOrWebGL": false,
+      "adaptiveThreshold": 0.02,
+      "maximumBounces": 4
+    },
+    {
+      "file": "roof-rail-quality-lod0.png",
+      "sha256": "6506ba36d3c75af9e8876aa67031fbfd9373bed603e8122f9e47dedbd96248ed",
+      "profile": "quality-lod0",
+      "view": "roof-rail",
+      "eyeVehicleM": [
+        0.08,
+        2.06,
+        1.78
+      ],
+      "targetVehicleM": [
+        0.45,
+        2.48,
+        -0.75
+      ],
+      "lensMm": 24,
+      "actualGLBInputs": [
+        {
+          "file": "boardable-bus-v2/closeup-quality/exports/city-bus-12m-interior-v2-closeup.lod0.glb",
+          "sha256": "8174cf56646eec303ad1891222cbd056d8ddea1e593c9a1e7ce70bc77a524a6d"
+        },
+        {
+          "file": "boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        }
+      ],
+      "renderer": "Cycles CPU",
+      "samples": 96,
+      "resolution": [
+        1152,
+        768
+      ],
+      "colorManagement": "AgX",
+      "exposure": 0,
+      "denoising": false,
+      "lighting": "identical baseline daytime area lamps and world; never exported",
+      "runtimeOrWebGL": false,
+      "adaptiveThreshold": 0.02,
+      "maximumBounces": 4
+    },
+    {
+      "file": "front-quality-lod0.png",
+      "sha256": "b51f8ca889ea1c8c8ec2dbed6e54c4e4e23111e4be033eed5838962477e9112e",
+      "profile": "quality-lod0",
+      "view": "front",
+      "eyeVehicleM": [
+        0,
+        1.8,
+        0.15
+      ],
+      "targetVehicleM": [
+        0.1,
+        1.4,
+        4.9
+      ],
+      "lensMm": 18,
+      "actualGLBInputs": [
+        {
+          "file": "boardable-bus-v2/closeup-quality/exports/city-bus-12m-interior-v2-closeup.lod0.glb",
+          "sha256": "8174cf56646eec303ad1891222cbd056d8ddea1e593c9a1e7ce70bc77a524a6d"
+        },
+        {
+          "file": "boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        }
+      ],
+      "renderer": "Cycles CPU",
+      "samples": 96,
+      "resolution": [
+        1152,
+        768
+      ],
+      "colorManagement": "AgX",
+      "exposure": 0,
+      "denoising": false,
+      "lighting": "identical baseline daytime area lamps and world; never exported",
+      "runtimeOrWebGL": false,
+      "adaptiveThreshold": 0.02,
+      "maximumBounces": 4
+    },
+    {
+      "file": "rear-quality-lod0.png",
+      "sha256": "a98baf76485bcae44edf2d5a9e293dcf697cd019f35b8df07fdf7a3802caf537",
+      "profile": "quality-lod0",
+      "view": "rear",
+      "eyeVehicleM": [
+        0,
+        2.03,
+        -4.77
+      ],
+      "targetVehicleM": [
+        0,
+        1.52,
+        4.8
+      ],
+      "lensMm": 20,
+      "actualGLBInputs": [
+        {
+          "file": "boardable-bus-v2/closeup-quality/exports/city-bus-12m-interior-v2-closeup.lod0.glb",
+          "sha256": "8174cf56646eec303ad1891222cbd056d8ddea1e593c9a1e7ce70bc77a524a6d"
+        },
+        {
+          "file": "boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        }
+      ],
+      "renderer": "Cycles CPU",
+      "samples": 96,
+      "resolution": [
+        1152,
+        768
+      ],
+      "colorManagement": "AgX",
+      "exposure": 0,
+      "denoising": false,
+      "lighting": "identical baseline daytime area lamps and world; never exported",
+      "runtimeOrWebGL": false,
+      "adaptiveThreshold": 0.02,
+      "maximumBounces": 4
+    },
+    {
+      "file": "cabin-quality-lod1.png",
+      "sha256": "e7c0fd03706abf425e1626e63056b88bd32fc6e80efe9dba859dc73d5ca8f869",
+      "profile": "quality-lod1",
+      "view": "cabin",
+      "eyeVehicleM": [
+        0,
+        1.87,
+        4.4
+      ],
+      "targetVehicleM": [
+        0,
+        1.53,
+        -4.65
+      ],
+      "lensMm": 20,
+      "actualGLBInputs": [
+        {
+          "file": "boardable-bus-v2/closeup-quality/exports/city-bus-12m-interior-v2-closeup.lod1.glb",
+          "sha256": "7ab9103a047a7acd48f78433e3b982a475592e2f6a747e1c7533685b4053de45"
+        },
+        {
+          "file": "boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        }
+      ],
+      "renderer": "Cycles CPU",
+      "samples": 96,
+      "resolution": [
+        1152,
+        768
+      ],
+      "colorManagement": "AgX",
+      "exposure": 0,
+      "denoising": false,
+      "lighting": "identical baseline daytime area lamps and world; never exported",
+      "runtimeOrWebGL": false,
+      "adaptiveThreshold": 0.02,
+      "maximumBounces": 4
+    },
+    {
+      "file": "seat-quality-lod1.png",
+      "sha256": "7ddc23089d95491a43b59c609f49674252c29d96c4d6a781ef189a6f0162eb70",
+      "profile": "quality-lod1",
+      "view": "seat",
+      "eyeVehicleM": [
+        -0.05,
+        1.28,
+        2.0
+      ],
+      "targetVehicleM": [
+        0.85,
+        1.12,
+        1.33
+      ],
+      "lensMm": 30,
+      "actualGLBInputs": [
+        {
+          "file": "boardable-bus-v2/closeup-quality/exports/city-bus-12m-interior-v2-closeup.lod1.glb",
+          "sha256": "7ab9103a047a7acd48f78433e3b982a475592e2f6a747e1c7533685b4053de45"
+        },
+        {
+          "file": "boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        }
+      ],
+      "renderer": "Cycles CPU",
+      "samples": 96,
+      "resolution": [
+        1152,
+        768
+      ],
+      "colorManagement": "AgX",
+      "exposure": 0,
+      "denoising": false,
+      "lighting": "identical baseline daytime area lamps and world; never exported",
+      "runtimeOrWebGL": false,
+      "adaptiveThreshold": 0.02,
+      "maximumBounces": 4
+    },
+    {
+      "file": "roof-rail-quality-lod1.png",
+      "sha256": "fb5c26f92340986be184ec579fb7a2eaad90c8d3f672d764dabff7bbbd903737",
+      "profile": "quality-lod1",
+      "view": "roof-rail",
+      "eyeVehicleM": [
+        0.08,
+        2.06,
+        1.78
+      ],
+      "targetVehicleM": [
+        0.45,
+        2.48,
+        -0.75
+      ],
+      "lensMm": 24,
+      "actualGLBInputs": [
+        {
+          "file": "boardable-bus-v2/closeup-quality/exports/city-bus-12m-interior-v2-closeup.lod1.glb",
+          "sha256": "7ab9103a047a7acd48f78433e3b982a475592e2f6a747e1c7533685b4053de45"
+        },
+        {
+          "file": "boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        }
+      ],
+      "renderer": "Cycles CPU",
+      "samples": 96,
+      "resolution": [
+        1152,
+        768
+      ],
+      "colorManagement": "AgX",
+      "exposure": 0,
+      "denoising": false,
+      "lighting": "identical baseline daytime area lamps and world; never exported",
+      "runtimeOrWebGL": false,
+      "adaptiveThreshold": 0.02,
+      "maximumBounces": 4
+    },
+    {
+      "file": "front-quality-lod1.png",
+      "sha256": "c05d30014286beba237c9c7c0b3163c66b15a34dea142852b9a06ae4aa4c6be5",
+      "profile": "quality-lod1",
+      "view": "front",
+      "eyeVehicleM": [
+        0,
+        1.8,
+        0.15
+      ],
+      "targetVehicleM": [
+        0.1,
+        1.4,
+        4.9
+      ],
+      "lensMm": 18,
+      "actualGLBInputs": [
+        {
+          "file": "boardable-bus-v2/closeup-quality/exports/city-bus-12m-interior-v2-closeup.lod1.glb",
+          "sha256": "7ab9103a047a7acd48f78433e3b982a475592e2f6a747e1c7533685b4053de45"
+        },
+        {
+          "file": "boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        }
+      ],
+      "renderer": "Cycles CPU",
+      "samples": 96,
+      "resolution": [
+        1152,
+        768
+      ],
+      "colorManagement": "AgX",
+      "exposure": 0,
+      "denoising": false,
+      "lighting": "identical baseline daytime area lamps and world; never exported",
+      "runtimeOrWebGL": false,
+      "adaptiveThreshold": 0.02,
+      "maximumBounces": 4
+    },
+    {
+      "file": "rear-quality-lod1.png",
+      "sha256": "5f235850a87022ace350b75579a95c7a5234a2c443db6d786f44cc3d91c85b33",
+      "profile": "quality-lod1",
+      "view": "rear",
+      "eyeVehicleM": [
+        0,
+        2.03,
+        -4.77
+      ],
+      "targetVehicleM": [
+        0,
+        1.52,
+        4.8
+      ],
+      "lensMm": 20,
+      "actualGLBInputs": [
+        {
+          "file": "boardable-bus-v2/closeup-quality/exports/city-bus-12m-interior-v2-closeup.lod1.glb",
+          "sha256": "7ab9103a047a7acd48f78433e3b982a475592e2f6a747e1c7533685b4053de45"
+        },
+        {
+          "file": "boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
+          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+        }
+      ],
+      "renderer": "Cycles CPU",
+      "samples": 96,
+      "resolution": [
+        1152,
+        768
+      ],
+      "colorManagement": "AgX",
+      "exposure": 0,
+      "denoising": false,
+      "lighting": "identical baseline daytime area lamps and world; never exported",
+      "runtimeOrWebGL": false,
+      "adaptiveThreshold": 0.02,
+      "maximumBounces": 4
+    }
+  ],
+  "comparisonRule": "Exact camera/daylight/exposure match; original profiles 48 samples, final quality profiles 96 samples; no denoising."
+}

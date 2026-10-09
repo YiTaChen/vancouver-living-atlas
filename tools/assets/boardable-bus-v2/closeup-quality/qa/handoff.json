@@ -1,0 +1,65 @@
+{
+  "status": "complete_offline_quality_package_ready_for_authorized_publication",
+  "baseRevision": "15bc912bfbf29228448aa713566ebda50e07a0bd",
+  "localBranch": "codex/bus-closeup-quality-local",
+  "entryPoint": "tools/assets/boardable-bus-v2/closeup-quality/README.zh-TW.md",
+  "geometryFrozen": true,
+  "visualGate": "pass_with_documented_limitations",
+  "lods": [
+    {
+      "level": 0,
+      "file": "exports/city-bus-12m-interior-v2-closeup.lod0.glb",
+      "source": "source/city-bus-12m-interior-v2-closeup.lod0.blend",
+      "triangles": 277040,
+      "vertices": 246564,
+      "bytes": 8508968,
+      "primitives": 13,
+      "embeddedImageBytes": 98020,
+      "sha256": "8174cf56646eec303ad1891222cbd056d8ddea1e593c9a1e7ce70bc77a524a6d",
+      "sourceSha256": "a66a2606157c27b59163587fda84f6b17f5e9d8d6e02e8f70220a4d22ff99073"
+    },
+    {
+      "level": 1,
+      "file": "exports/city-bus-12m-interior-v2-closeup.lod1.glb",
+      "source": "source/city-bus-12m-interior-v2-closeup.lod1.blend",
+      "triangles": 91504,
+      "vertices": 95110,
+      "bytes": 2955124,
+      "primitives": 13,
+      "embeddedImageBytes": 98020,
+      "sha256": "7ab9103a047a7acd48f78433e3b982a475592e2f6a747e1c7533685b4053de45",
+      "sourceSha256": "f78fc08fa5ea5c7e3dcd98b527a6d9570dca9eedd4dfdd46d59da648c6c732b3"
+    }
+  ],
+  "tests": {
+    "pythonRegression": 41,
+    "realPassengerAdapter": 6,
+    "defaultNpmEntry": 8,
+    "commonPackageValidation": "pass",
+    "blenderRoundtrip": "both GLBs and sidecars binary-identical",
+    "sourceEditProbe": "12 mm cushion edit saved, reopened and exported; originals unchanged",
+    "fullRepositoryAndHostedCI": "parent task owns final checks and publication"
+  },
+  "previews": {
+    "total": 16,
+    "historicalComparisons": 6,
+    "finalQualityViews": 10,
+    "recommendedAttachments": [
+      "qa/previews/cabin-quality-lod0.png",
+      "qa/previews/seat-quality-lod0.png",
+      "qa/previews/roof-rail-quality-lod0.png"
+    ]
+  },
+  "scope": {
+    "newQualityProfileRuntimeIntegration": "not_run",
+    "WebGLGPUPerformance": "not_run",
+    "priorBudgetProfile": "already integrated on base main; untouched",
+    "oldDetailedAndExteriorAssets": "preserved byte-identically",
+    "publication": "not performed by this worker; parent owns new draft PR; no merge or deployment"
+  },
+  "additionalChangedFiles": [
+    "tools/assets/boardable-bus-v2/README.zh-TW.md",
+    "tests/bus-closeup-quality.test.mjs"
+  ],
+  "unrelatedTestGeneratedChanges": "Three QA JSON changes under material-consumer-candidates and roadster-driver-fit are parent-owned test outputs and not part of this asset change."
+}
