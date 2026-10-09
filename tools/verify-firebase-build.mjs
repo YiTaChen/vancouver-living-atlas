@@ -39,7 +39,7 @@ export async function verifyBlenderDeliveryIsolation(
     for (const item of manifest.files) {
       assert(
         typeof item.path === 'string' &&
-          /^(?:mature-trees|rooftop-equipment|traffic-cars|bus|bus-v2|metro)\/(?:textures\/)?[a-z0-9][a-z0-9_.-]*\.(?:glb|png|json)$/.test(
+          /^(?:mature-trees|rooftop-equipment|traffic-cars|bus|bus-v2|metro|bus-closeup)\/(?:textures\/)?[a-z0-9][a-z0-9_.-]*\.(?:glb|png|json)$/.test(
             item.path,
           ),
         'Invalid adopted Blender payload path',
@@ -158,7 +158,10 @@ export async function verifyFirebaseBuild(
     !scripts.includes('LOCAL VISUAL QA'),
     'Instrumented QA builds must never be deployed',
   );
-  assert(!scripts.includes('Save SkyTrain cabin checkpoint'), 'SkyTrain capture controls must not ship in production');
+  assert(
+    !scripts.includes('Save SkyTrain cabin checkpoint'),
+    'SkyTrain capture controls must not ship in production',
+  );
   assert(
     !scripts.includes('Auto: use automatic quality') &&
       !scripts.includes('Auto travel QA ready') &&
@@ -243,7 +246,13 @@ export async function verifyFirebaseBuild(
   const cityLife = await verifyCityLifeIsolation(root, options.cityLifeSource);
   const busAdoption = await verifyBusAdoption(root, options.busSource);
   const stage2Transit = await verifyStage2TransitAdoption(root);
-  return { status: 'pass', blenderDelivery, cityLife, busAdoption, stage2Transit };
+  return {
+    status: 'pass',
+    blenderDelivery,
+    cityLife,
+    busAdoption,
+    stage2Transit,
+  };
 }
 
 if (
@@ -257,5 +266,8 @@ if (
   console.log('Blender delivery isolation verified:', result.blenderDelivery);
   console.log('City-life runtime adoption verified:', result.cityLife);
   console.log('Bus runtime adoption verified:', result.busAdoption);
-  console.log('Stage 2 transit runtime adoption verified:', result.stage2Transit);
+  console.log(
+    'Stage 2 transit runtime adoption verified:',
+    result.stage2Transit,
+  );
 }

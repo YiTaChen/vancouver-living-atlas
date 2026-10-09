@@ -290,6 +290,33 @@
           "manifestSha256": "7522ab7691beb92c1066f4684c86d1298a06f9f39cb1cd17a7d1fd33cb6f36aa"
         }
       ]
+    },
+    {
+      "path": "bus-closeup/city-bus-12m-interior-v2-closeup.lod0.glb",
+      "sha256": "8174cf56646eec303ad1891222cbd056d8ddea1e593c9a1e7ce70bc77a524a6d",
+      "bytes": 8508968,
+      "sourcePackage": "boardable-bus-v2-closeup-quality",
+      "sourceRevision": "78790023c4cf6e5f12aaf2666ea74dd47336dbd8",
+      "sourceManifestSha256": "2d3a1abbbc35ddc161a154c0a262b42493fe2601c368dde05cd6b3a81b699726",
+      "sourcePath": "tools/assets/boardable-bus-v2/closeup-quality/exports/city-bus-12m-interior-v2-closeup.lod0.glb"
+    },
+    {
+      "path": "bus-closeup/city-bus-12m-interior-v2-closeup.lod1.glb",
+      "sha256": "7ab9103a047a7acd48f78433e3b982a475592e2f6a747e1c7533685b4053de45",
+      "bytes": 2955124,
+      "sourcePackage": "boardable-bus-v2-closeup-quality",
+      "sourceRevision": "78790023c4cf6e5f12aaf2666ea74dd47336dbd8",
+      "sourceManifestSha256": "2d3a1abbbc35ddc161a154c0a262b42493fe2601c368dde05cd6b3a81b699726",
+      "sourcePath": "tools/assets/boardable-bus-v2/closeup-quality/exports/city-bus-12m-interior-v2-closeup.lod1.glb"
+    },
+    {
+      "path": "bus-closeup/manifest.json",
+      "sha256": "5783e85c796f9b2627109d71f4f4d5ef242991bb8ecd0fc0ef44f44d27278293",
+      "bytes": 778733,
+      "sourcePackage": "boardable-bus-v2-closeup-quality",
+      "sourceRevision": "78790023c4cf6e5f12aaf2666ea74dd47336dbd8",
+      "sourceManifestSha256": "2d3a1abbbc35ddc161a154c0a262b42493fe2601c368dde05cd6b3a81b699726",
+      "sourcePath": "canonical projection of tools/assets/boardable-bus-v2/closeup-quality/manifest.json"
     }
   ]
 }

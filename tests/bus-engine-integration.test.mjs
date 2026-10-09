@@ -30,6 +30,7 @@ const names = [
   'visitBusInterior',
   'publishBusVisit',
   'closeBusVisit',
+  'setBusVisitDetail',
   'flyTo',
   'leaveTravelAtLocation',
   'zoom',
@@ -66,14 +67,17 @@ function fixture() {
     snapshot() {
       return { aboard: this.aboard };
     },
-    async prepare() {
+    async prepare(policy) {
       calls.prepare++;
+      calls.policy = policy;
       return true;
     },
   };
   const e = Object.assign(new Harness(), {
     disposed: false,
     busVisit: visit,
+    busVisitDetail: 'auto',
+    compatibleGraphics: false,
     settings: {
       mode: 'orbit',
       traffic: true,
@@ -115,6 +119,32 @@ test('public visit preparation changes to walking only after successful model an
   assert.equal(e.settings.autoRotate, false);
   assert.equal(e.trafficGroup.visible, true);
   assert.deepEqual(calls.resume, ['walk']);
+});
+
+test('public detail preferences pass the live effective Auto/manual quality into the next prepared visit', async () => {
+  const { e, calls } = fixture();
+  e.settings.qualityMode = 'auto';
+  e.settings.quality = 'high';
+  e.stats.effectiveQuality = 'balanced'; // Previous reporting sample may lag the renderer.
+  e.setBusVisitDetail('detailed');
+  assert.equal(await e.visitBusInterior(), true);
+  assert.deepEqual(calls.policy, {
+    quality: 'high',
+    compatible: false,
+    detail: 'detailed',
+  });
+  e.settings.qualityMode = 'manual';
+  e.settings.quality = 'ultra';
+  e.compatibleGraphics = true;
+  e.setBusVisitDetail('light');
+  await e.visitBusInterior();
+  assert.deepEqual(calls.policy, {
+    quality: 'ultra',
+    compatible: true,
+    detail: 'light',
+  });
+  e.setBusVisitDetail('unknown');
+  assert.equal(e.busVisitDetail, 'light');
 });
 test('failed alighting blocks mode changes, traffic hiding and distant focus before changing the scene', async () => {
   const { e, visit, calls } = fixture();

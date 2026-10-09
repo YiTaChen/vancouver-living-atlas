@@ -20,12 +20,14 @@ export function BusVisitPanel({
   onPrepare: () => Promise<void>;
 }) {
   const [anchor, setAnchor] = useState<string | null>(null);
+  const [detail, setDetail] = useState<'auto' | 'light' | 'detailed'>('auto');
   const [busy, setBusy] = useState(false);
   const tr = (key: Parameters<typeof translate>[1]) => translate(locale, key);
   if (!visible || !city) return null;
   const phase = snapshot?.phase ?? 'idle';
-  const prepare = async () => {
+  const prepare = async (requested = detail) => {
     if (busy) return;
+    city.setBusVisitDetail(requested);
     setBusy(true);
     try {
       await onPrepare();
@@ -33,16 +35,35 @@ export function BusVisitPanel({
       setBusy(false);
     }
   };
+  const chooseDetail = async (value: 'auto' | 'light' | 'detailed') => {
+    if (busy || phase === 'loading' || snapshot?.aboard) return;
+    setDetail(value);
+    city.setBusVisitDetail(value);
+    if (phase !== 'idle') await prepare(value);
+  };
+  const qualitySelect = (
+    <select
+      aria-label={tr('busVisitDetail')}
+      value={detail}
+      disabled={busy || phase === 'loading' || snapshot?.aboard}
+      onChange={(event) => {
+        void chooseDetail(event.target.value as 'auto' | 'light' | 'detailed');
+      }}
+    >
+      <option value="auto">{tr('busVisitDetailAuto')}</option>
+      <option value="light">{tr('busVisitDetailLight')}</option>
+      <option value="detailed">{tr('busVisitDetailDetailed')}</option>
+    </select>
+  );
   if (phase === 'idle')
     return (
-      <button
-        className="bus-visit-launcher glass ui-chrome"
-        onClick={prepare}
-        disabled={busy}
-      >
-        <BusFront size={17} />
-        {busy ? tr('busVisitLoading') : tr('busVisitEnter')}
-      </button>
+      <div className="bus-visit-launcher glass ui-chrome">
+        <button onClick={() => void prepare()} disabled={busy}>
+          <BusFront size={17} />
+          {busy ? tr('busVisitLoading') : tr('busVisitEnter')}
+        </button>
+        {qualitySelect}
+      </div>
     );
   const selected = busVisitSelectedAnchor(snapshot, anchor);
   const choose = (id: string) => {
@@ -75,13 +96,34 @@ export function BusVisitPanel({
         </button>
       </div>
       <p>{tr('busVisitDescription')}</p>
+      <div className="bus-visit-viewpoint bus-visit-quality">
+        <span>{tr('busVisitDetail')}</span>
+        {qualitySelect}
+      </div>
+      {snapshot?.profile && (
+        <p>
+          {tr(
+            snapshot.profile === 'budget'
+              ? 'busVisitProfileBudget'
+              : snapshot.profile === 'reference-lod0'
+                ? 'busVisitProfileReference0'
+                : 'busVisitProfileReference1',
+          )}
+        </p>
+      )}
+      {snapshot?.fallback && (
+        <output className="bus-visit-quality-note">
+          {tr('busVisitQualityFallback')}
+        </output>
+      )}
+      {snapshot?.aboard && <p>{tr('busVisitQualityLocked')}</p>}
       {(phase === 'loading' || busy) && (
         <output>{tr('busVisitLoading')}</output>
       )}
       {phase === 'error' && (
         <>
           <p role="alert">{tr('busVisitLoadError')}</p>
-          <button onClick={prepare} disabled={busy}>
+          <button onClick={() => void prepare()} disabled={busy}>
             {tr('busVisitRetry')}
           </button>
         </>

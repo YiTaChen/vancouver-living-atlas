@@ -2573,6 +2573,11 @@ a {
   display: flex; align-items: center; gap: 8px; padding: 10px 14px;
   border-radius: 14px; color: #e8f1ed; font-size: 13px;
 }
+.bus-visit-launcher button {display:flex;align-items:center;gap:8px;text-align:left;}
+.bus-visit-launcher select {min-width:0;max-width:105px;padding:4px 6px;border:1px solid #617e75;border-radius:7px;background:#1d3530;color:#e8f1ed;font-size:12px;}
+.bus-visit-launcher button:disabled,.bus-visit-launcher select:disabled {opacity:.55;cursor:wait;}
+.bus-visit-quality {margin-bottom:10px;}
+.bus-visit-quality-note {display:block;margin:10px 0;font-size:12px;line-height:1.5;color:#bacfc9;}
 .skytrain-cabin-launcher {
   position:absolute;z-index:35;right:94px;top:238px;display:flex;align-items:center;gap:8px;
   padding:10px 14px;border-radius:14px;color:#e8f1ed;font-size:13px;
@@ -2582,6 +2587,7 @@ a {
 .bus-visit-panel {
   position: absolute; z-index: 42; left: 50%; top: 164px; transform: translateX(-50%);
   width: 290px; padding: 16px; border-radius: 16px; color: #e8f1ed;
+  max-height:calc(100% - 176px);overflow:auto;
 }
 .bus-visit-heading,.bus-visit-heading strong {display:flex;align-items:center;gap:8px;}
 .bus-visit-heading {justify-content:space-between;}
@@ -2592,8 +2598,9 @@ a {
 .bus-visit-primary {width:100%;padding:10px;margin-top:4px;border-radius:8px;background:#d0e6d9;color:#173a30;font-weight:600;}
 .bus-visit-panel button:disabled,.bus-visit-launcher:disabled {opacity:.55;cursor:wait;}
 @media(max-width:900px) {
-  .bus-visit-launcher {top:154px;right:64px;max-width:calc(100% - 76px);}
-  .bus-visit-panel {top:154px;width:min(290px,calc(100% - 24px));padding:12px;}
+  .bus-visit-launcher {top:154px;right:64px;max-width:calc(100% - 76px);padding:8px 10px;font-size:12px;}
+  .bus-visit-launcher select {max-width:90px;}
+  .bus-visit-panel {top:154px;width:min(290px,calc(100% - 24px));padding:12px;max-height:calc(100% - 166px);}
 }
 @media(max-height:500px) {
   .bus-visit-launcher,.bus-visit-panel {top:106px;}

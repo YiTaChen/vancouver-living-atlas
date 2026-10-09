@@ -5,6 +5,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { loadBusV2Projection } from './project-bus-v2-runtime.mjs';
 import { loadMetroProjection } from './metro-projection.mjs';
+import { loadBusCloseupProjection } from './project-bus-closeup-runtime.mjs';
 
 const packages = [
   'boardable-bus-v2',
@@ -31,11 +32,12 @@ async function files(root) {
 export async function verifyStage2TransitAdoption(
   output = path.resolve('dist/client'),
 ) {
-  const [bus, metro] = await Promise.all([
+  const [bus, metro, closeup] = await Promise.all([
     loadBusV2Projection(),
     loadMetroProjection(),
+    loadBusCloseupProjection(),
   ]);
-  const expected = [...bus.entries, ...metro.entries];
+  const expected = [...bus.entries, ...metro.entries, ...closeup.entries];
   const inventory = JSON.parse(
     await readFile(
       path.join(output, 'models/blender/adopted-manifest.json'),
@@ -44,7 +46,9 @@ export async function verifyStage2TransitAdoption(
   );
   assert.equal(inventory.version, 1);
   assert.deepEqual(
-    inventory.files.filter((item) => /^(bus-v2|metro)\//.test(item.path)),
+    inventory.files.filter((item) =>
+      /^(bus-v2|metro|bus-closeup)\//.test(item.path),
+    ),
     expected,
     'Exact Stage 2 runtime inventory and provenance required',
   );
@@ -72,6 +76,14 @@ export async function verifyStage2TransitAdoption(
     ).equals(metro.metadataBytes),
     'Metro metadata differs from canonical projection',
   );
+  assert(
+    (
+      await readFile(
+        path.join(output, 'models/blender/bus-closeup/manifest.json'),
+      )
+    ).equals(closeup.metadataBytes),
+    'Bus closeup metadata differs from canonical projection',
+  );
   const protectedHashes = new Map();
   for (const name of packages)
     for (const file of await files(path.resolve('tools/assets', name)))
@@ -83,7 +95,7 @@ export async function verifyStage2TransitAdoption(
       !/\.blend(?:\d+)?$/i.test(name),
       'Stage 2 editable sources must not ship',
     );
-    if (/^models\/blender\/(bus-v2|metro)\//.test(name))
+    if (/^models\/blender\/(bus-v2|metro|bus-closeup)\//.test(name))
       assert(approved.has(name), `Unlisted Stage 2 runtime payload: ${name}`);
     const data = await readFile(file),
       digest = hash(data);
@@ -108,7 +120,8 @@ export async function verifyStage2TransitAdoption(
       .filter((item) => item.path.endsWith('.glb'))
       .reduce((n, item) => n + item.bytes, 0),
     protectedSourceHashes: protectedHashes.size,
-    runtimeScope: 'bus cabin and bounded fleet; single SkyTrain cabin display',
+    runtimeScope:
+      'budget bus cabin and bounded fleet; closeup bus visit only; single SkyTrain cabin display',
   };
 }
 

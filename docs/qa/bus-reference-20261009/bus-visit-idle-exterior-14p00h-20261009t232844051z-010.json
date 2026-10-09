@@ -1,0 +1,116 @@
+{
+  "revision": "78790023c4cf6e5f12aaf2666ea74dd47336dbd8",
+  "sourceFingerprint": "3957231f6e59b82037c40556d63b18cc9805c87d8f30e2d74a9e06c03dfd118e",
+  "kind": "integrated-bus-checkpoint-v1",
+  "id": "bus-visit-idle-exterior-14p00h-20261009t232844051z-010",
+  "capturedAt": "2026-10-09T23:28:44.051Z",
+  "valid": true,
+  "snapshot": {
+    "phase": "idle",
+    "status": "idle",
+    "loading": false,
+    "error": null,
+    "aboard": false,
+    "doorsOpen": false,
+    "canBoard": false,
+    "canAlight": false,
+    "anchors": [],
+    "viewAnchor": null,
+    "previewAnchor": null,
+    "passengerAnchor": null,
+    "routeIndex": null,
+    "profile": null,
+    "requestedProfile": null,
+    "fallback": false
+  },
+  "busAssets": {
+    "status": "ready",
+    "nearActors": 1,
+    "routeActors": 26,
+    "nearCapacity": 4,
+    "interiorVersion": "v2",
+    "allocatedBatches": 15,
+    "populatedBatches": 15,
+    "triangles": 4554,
+    "textures": 2,
+    "materials": 28,
+    "referenceMaterials": 13,
+    "templateCapacity": 6,
+    "boardableProfile": null,
+    "boardableRequestedProfile": null,
+    "boardableFallback": false,
+    "loadedTemplates": 6,
+    "assetBytes": 12713644,
+    "boardableStatus": "idle",
+    "boardableOwners": 0,
+    "updates": 9275,
+    "errors": [],
+    "disposed": false
+  },
+  "fps": 7,
+  "settings": {
+    "trees": true,
+    "buildings": true,
+    "labels": false,
+    "traffic": true,
+    "trains": true,
+    "harbour": true,
+    "terrain": true,
+    "autoRotate": false,
+    "quality": "balanced",
+    "qualityMode": "manual",
+    "mode": "walk"
+  },
+  "hour": 14,
+  "night": 0,
+  "viewport": [
+    1280,
+    720
+  ],
+  "render": [
+    1280,
+    720
+  ],
+  "pixelRatio": 1,
+  "camera": {
+    "position": [
+      19.19848951111548,
+      14.575032187940216,
+      -406.97146642367346
+    ],
+    "quaternion": [
+      -0.004149470303384574,
+      0.9780188088878242,
+      0.019552558280353422,
+      0.2075564714060642
+    ],
+    "target": [
+      9.044726226042561,
+      12.875032187940217,
+      -384.1263117699902
+    ],
+    "near": 0.08,
+    "fov": 58
+  },
+  "navigation": {
+    "mode": "walk",
+    "position": [
+      19.19848951111548,
+      12.875032187940217,
+      -406.97146642367346
+    ],
+    "speedMps": 0,
+    "surface": "ground",
+    "surfaceId": "ground",
+    "layer": 0
+  },
+  "renderer": {
+    "calls": 319,
+    "triangles": 2121328,
+    "points": 0,
+    "lines": 0,
+    "geometries": 879,
+    "textures": 44
+  },
+  "workerErrors": {}
+}

@@ -1,0 +1,114 @@
+{
+  "revision": "78790023c4cf6e5f12aaf2666ea74dd47336dbd8",
+  "sourceFingerprint": "3957231f6e59b82037c40556d63b18cc9805c87d8f30e2d74a9e06c03dfd118e",
+  "kind": "integrated-bus-checkpoint-v1",
+  "id": "bus-visit-idle-exterior-14p00h-20261009t232405319z-001",
+  "capturedAt": "2026-10-09T23:24:05.319Z",
+  "valid": true,
+  "snapshot": {
+    "phase": "idle",
+    "status": "idle",
+    "loading": false,
+    "error": null,
+    "aboard": false,
+    "doorsOpen": false,
+    "canBoard": false,
+    "canAlight": false,
+    "anchors": [],
+    "viewAnchor": null,
+    "previewAnchor": null,
+    "passengerAnchor": null,
+    "routeIndex": null,
+    "profile": null,
+    "requestedProfile": null,
+    "fallback": false
+  },
+  "busAssets": {
+    "status": "idle",
+    "nearActors": 0,
+    "routeActors": 26,
+    "nearCapacity": 4,
+    "interiorVersion": "v2",
+    "allocatedBatches": 0,
+    "populatedBatches": 0,
+    "triangles": 0,
+    "textures": 0,
+    "materials": 0,
+    "referenceMaterials": 0,
+    "templateCapacity": 6,
+    "boardableProfile": null,
+    "boardableRequestedProfile": null,
+    "boardableFallback": false,
+    "loadedTemplates": 0,
+    "assetBytes": 0,
+    "boardableStatus": "idle",
+    "boardableOwners": 0,
+    "updates": 602,
+    "errors": [],
+    "disposed": false
+  },
+  "fps": 44,
+  "settings": {
+    "trees": true,
+    "buildings": true,
+    "labels": false,
+    "traffic": true,
+    "trains": true,
+    "harbour": true,
+    "terrain": true,
+    "autoRotate": false,
+    "quality": "balanced",
+    "qualityMode": "manual",
+    "mode": "orbit"
+  },
+  "hour": 14,
+  "night": 0,
+  "viewport": [
+    1280,
+    720
+  ],
+  "render": [
+    1280,
+    720
+  ],
+  "pixelRatio": 1,
+  "camera": {
+    "position": [
+      3546.6829513814514,
+      6428.002928656675,
+      4287.155322326365
+    ],
+    "quaternion": [
+      -0.3801091879650987,
+      0.3051794806923564,
+      0.13445863746476006,
+      0.8627301806474472
+    ],
+    "target": [
+      -145.22442772272677,
+      8,
+      -278.2999999997469
+    ],
+    "near": 2,
+    "fov": 42
+  },
+  "navigation": {
+    "mode": "orbit",
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "speedMps": 0,
+    "surface": "ground"
+  },
+  "renderer": {
+    "calls": 796,
+    "triangles": 3920361,
+    "points": 0,
+    "lines": 0,
+    "geometries": 636,
+    "textures": 40
+  },
+  "workerErrors": {}
+}

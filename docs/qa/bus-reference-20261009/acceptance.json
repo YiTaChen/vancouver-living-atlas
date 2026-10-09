@@ -1,0 +1,215 @@
+{
+  "schema": 1,
+  "kind": "bus-reference-integration-acceptance",
+  "sourceRevision": "78790023c4cf6e5f12aaf2666ea74dd47336dbd8",
+  "sourceFingerprint": "3957231f6e59b82037c40556d63b18cc9805c87d8f30e2d74a9e06c03dfd118e",
+  "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+  "automatedChecks": {
+    "fullTests": 1017,
+    "failed": 0,
+    "skipped": 0,
+    "typecheck": "pass",
+    "scopedLint": "pass",
+    "architectureGlbAudit": "pass",
+    "productionFirebaseBuild": "pass",
+    "stage2AdoptedFiles": 13,
+    "stage2GeometryBytes": 14473216,
+    "protectedSourceHashes": 223,
+    "publicAdoptedInventory": 38,
+    "finalVisualFingerprintMatchesCaptures": true,
+    "fingerprintedVisualFiles": 625
+  },
+  "browserChecks": {
+    "coldOverviewReferenceLoads": 0,
+    "lightProfile": "budget",
+    "balancedAutoProfile": "reference-lod1",
+    "highAutoProfile": "reference-lod0",
+    "detailedProfile": "reference-lod0",
+    "aboardProfileFrozenAfterBalancedSwitch": true,
+    "qualitySelectDisabledAboard": true,
+    "defaultStandingBoarding": true,
+    "rearSeat24PreviewPreservesPassengerAnchor": true,
+    "doorAlightingAndClose": true,
+    "profilesReusedMaxTemplates": 6,
+    "profilesReusedMaxTextures": 2,
+    "ownerCountAfterClose": 0,
+    "day14AndNight23": true,
+    "responsiveViewports": [
+      [
+        375,
+        812
+      ],
+      [
+        375,
+        400
+      ]
+    ],
+    "shortViewportPanel": {
+      "top": 106,
+      "width": 290,
+      "height": 282,
+      "clientHeight": 280,
+      "scrollHeight": 364
+    },
+    "responsiveBoardAlightAndLightSelection": "pass",
+    "consoleErrors": []
+  },
+  "timingLimitations": [
+    "Foreground samples from one Radeon Pro 560X at 1280x720, manual Balanced, scale1; traffic/train/pedestrian simulation not controlled.",
+    "Reference LOD1 full sample includes first shader warmup; a later 139.2ms hitch also remains.",
+    "These observations are not a general hardware benchmark, a controlled improvement claim, or evidence for hitch-free travel.",
+    "The LOD0 sample faces rear and is not camera-matched to the budget/LOD1 pair."
+  ],
+  "timingObservations": [
+    {
+      "file": "bus-budget-foreground-frames.json",
+      "window": "full",
+      "valid": true,
+      "frames": 552,
+      "durationMs": 14481.300000011921,
+      "meanMs": 26.234239130456377,
+      "p50Ms": 24.5,
+      "p95Ms": 41.6350000053644,
+      "p99Ms": 49.5960000088811,
+      "maxMs": 53.69999998807907,
+      "effectiveFps": 38.1181247539617,
+      "over50Ms": 4,
+      "over100Ms": 0,
+      "viewport": [
+        1280,
+        720
+      ],
+      "render": [
+        1280,
+        720
+      ],
+      "quality": "balanced",
+      "qualityMode": "manual"
+    },
+    {
+      "file": "bus-budget-foreground-frames.json",
+      "window": "last8s",
+      "valid": true,
+      "frames": 283,
+      "durationMs": 8002.200000017881,
+      "meanMs": 28.27632508840241,
+      "p50Ms": 25.900000005960464,
+      "p95Ms": 43.569999995827665,
+      "p99Ms": 50.707999992966656,
+      "maxMs": 53.69999998807907,
+      "effectiveFps": 35.365274549419865,
+      "over50Ms": 4,
+      "over100Ms": 0,
+      "viewport": [
+        1280,
+        720
+      ],
+      "render": [
+        1280,
+        720
+      ],
+      "quality": "balanced",
+      "qualityMode": "manual"
+    },
+    {
+      "file": "bus-reference-lod1-foreground-frames.json",
+      "window": "full",
+      "valid": true,
+      "frames": 910,
+      "durationMs": 27618.100000023842,
+      "meanMs": 30.34956043958664,
+      "p50Ms": 25.0,
+      "p95Ms": 58.69500000327803,
+      "p99Ms": 102.49199999511238,
+      "maxMs": 145.30000001192093,
+      "effectiveFps": 32.949406367534856,
+      "over50Ms": 58,
+      "over100Ms": 12,
+      "viewport": [
+        1280,
+        720
+      ],
+      "render": [
+        1280,
+        720
+      ],
+      "quality": "balanced",
+      "qualityMode": "manual"
+    },
+    {
+      "file": "bus-reference-lod1-foreground-frames.json",
+      "window": "last8s",
+      "valid": true,
+      "frames": 288,
+      "durationMs": 8011.100000023842,
+      "meanMs": 27.816319444527227,
+      "p50Ms": 22.80000001192093,
+      "p95Ms": 48.085000003874285,
+      "p99Ms": 85.72599999040365,
+      "maxMs": 139.2000000178814,
+      "effectiveFps": 35.95011920948969,
+      "over50Ms": 14,
+      "over100Ms": 1,
+      "viewport": [
+        1280,
+        720
+      ],
+      "render": [
+        1280,
+        720
+      ],
+      "quality": "balanced",
+      "qualityMode": "manual"
+    },
+    {
+      "file": "bus-reference-lod0-foreground-frames.json",
+      "window": "full",
+      "valid": true,
+      "frames": 911,
+      "durationMs": 27911.5,
+      "meanMs": 30.638309549945117,
+      "p50Ms": 22.5,
+      "p95Ms": 41.95000000298023,
+      "p99Ms": 193.24000001251696,
+      "maxMs": 209.2999999821186,
+      "effectiveFps": 32.6388764487756,
+      "over50Ms": 37,
+      "over100Ms": 34,
+      "viewport": [
+        1280,
+        720
+      ],
+      "render": [
+        1280,
+        720
+      ],
+      "quality": "balanced",
+      "qualityMode": "manual"
+    },
+    {
+      "file": "bus-reference-lod0-foreground-frames.json",
+      "window": "last8s",
+      "valid": true,
+      "frames": 253,
+      "durationMs": 8023.299999982119,
+      "meanMs": 31.712648221273195,
+      "p50Ms": 23.0,
+      "p95Ms": 46.43999999165531,
+      "p99Ms": 194.98000001192088,
+      "maxMs": 209.2999999821186,
+      "effectiveFps": 31.533159672524256,
+      "over50Ms": 11,
+      "over100Ms": 10,
+      "viewport": [
+        1280,
+        720
+      ],
+      "render": [
+        1280,
+        720
+      ],
+      "quality": "balanced",
+      "qualityMode": "manual"
+    }
+  ]
+}
