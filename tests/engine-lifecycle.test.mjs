@@ -28,6 +28,7 @@ const engine = ast.statements.find(
 const names = new Set([
   'visibilityChange',
   'pageSuspended',
+  'cabinDisplayActive',
   'suspendedAt',
   'renderReady',
   'loadAbort',
@@ -38,6 +39,7 @@ const names = new Set([
   'clearHeldInput',
   'suspendPage',
   'resumePage',
+  'setCabinDisplayActive',
   'destroy',
 ]);
 const members = engine.members
@@ -396,6 +398,175 @@ test('an unfinished cached startup does not start rendering; normal departure di
     assert.equal(f.scheduled.length, 0);
     assert.equal(f.rendererDisposals, 1);
     assert.equal(f.window.count('pageshow'), 0);
+  } finally {
+    e?.destroy();
+    f.close();
+  }
+});
+
+test('a cabin display pauses city owners and closes with one fresh frame without clock catch-up', () => {
+  const f = setup();
+  let e;
+  try {
+    e = f.create();
+    e.renderReady = true;
+    let clears = 0,
+      qualityResets = 0,
+      sceneryResets = 0;
+    const hidden = [];
+    e.navigation = { blur: () => clears++, destroy() {} };
+    e.flight = { clearInput: () => clears++, destroy() {} };
+    e.travelReturn.clearGesture = () => clears++;
+    e.placement = { cancel: () => clears++, destroy() {} };
+    e.pedestrians = { setHidden: (value) => hidden.push(value), dispose() {} };
+    e.autoQuality = { resetTiming: () => qualityResets++ };
+    e.sceneryMotionTracker = { reset: () => sceneryResets++ };
+    e.autoTimingNeedsAnchor = false;
+    e.transition = { start: 850 };
+    e.lastTime = e.fpsAt = 100;
+    e.frames = 17;
+    e.clock.resetTimebase(f.now);
+    const hour = e.clock.hour;
+
+    e.setCabinDisplayActive(true);
+    assert.equal(e.cabinDisplayActive, true);
+    assert.equal(e.raf, 0);
+    assert.deepEqual(f.cancelled, [99]);
+    assert.equal(clears, 4);
+    assert.equal(e.transition, null, 'a paused city cannot retain a camera flight');
+    assert.deepEqual(hidden, [true]);
+    assert.equal(qualityResets, 1);
+    assert.equal(sceneryResets, 1);
+    assert.equal(e.autoTimingNeedsAnchor, true);
+    assert.equal(f.scheduled.length, 0);
+    e.setCabinDisplayActive(true);
+    assert.equal(clears, 4, 'repeated activation is idempotent');
+    assert.deepEqual(f.cancelled, [99]);
+
+    f.now += 60_000;
+    assert.equal(e.clock.tick(f.now), false);
+    f.document.dispatchEvent(new Event('visibilitychange'));
+    assert.equal(e.clock.hour, hour);
+    assert.equal(hidden.at(-1), true, 'a visible document keeps the cabin pause');
+    e.setCabinDisplayActive(false);
+    assert.equal(e.cabinDisplayActive, false);
+    assert.equal(e.clock.hour, hour);
+    assert.equal(e.lastTime, f.now);
+    assert.equal(e.fpsAt, f.now);
+    assert.equal(e.frames, 0);
+    assert.equal(clears, 8);
+    assert.equal(hidden.at(-1), false);
+    assert.equal(qualityResets, 3);
+    assert.equal(sceneryResets, 3);
+    assert.equal(f.scheduled.length, 1);
+    assert.equal(f.scheduled[0], e.animate);
+    e.setCabinDisplayActive(false);
+    assert.equal(f.scheduled.length, 1, 'repeated closure cannot add a frame loop');
+    f.now += 1000;
+    assert.equal(e.clock.tick(f.now), true);
+    assert(Math.abs(e.clock.hour - hour - 300 / 3600) < 1e-10);
+  } finally {
+    e?.destroy();
+    f.close();
+  }
+});
+
+test('BFCache restoration leaves an active cabin display paused until it closes', () => {
+  const f = setup();
+  let e;
+  try {
+    e = f.create();
+    e.renderReady = true;
+    const hidden = [];
+    e.pedestrians = { setHidden: (value) => hidden.push(value), dispose() {} };
+    e.clock.resetTimebase(f.now);
+    e.setCabinDisplayActive(true);
+    const hour = e.clock.hour;
+    f.window.dispatchEvent(pageEvent('pagehide', true));
+    assert.equal(e.pageSuspended, true);
+    f.now += 60_000;
+    f.document.dispatchEvent(new Event('visibilitychange'));
+    f.window.dispatchEvent(pageEvent('pageshow', true));
+    assert.equal(e.pageSuspended, false);
+    assert.equal(e.cabinDisplayActive, true);
+    assert.equal(e.clock.hour, hour);
+    assert.equal(hidden.at(-1), true);
+    assert.equal(f.scheduled.length, 0);
+    assert.equal(f.rendererDisposals, 0);
+    assert.equal(f.canvasRemovals, 0);
+    f.now += 1000;
+    assert.equal(e.clock.tick(f.now), false);
+    f.window.dispatchEvent(pageEvent('pageshow', true));
+    assert.equal(f.scheduled.length, 0);
+    e.setCabinDisplayActive(false);
+    assert.equal(e.clock.hour, hour);
+    assert.equal(f.scheduled.length, 1);
+    assert.equal(hidden.at(-1), false);
+  } finally {
+    e?.destroy();
+    f.close();
+  }
+});
+
+test('closing a cabin on a cached page resumes only after pageshow', () => {
+  const f = setup();
+  let e;
+  try {
+    e = f.create();
+    e.renderReady = true;
+    const hidden = [];
+    e.pedestrians = { setHidden: (value) => hidden.push(value), dispose() {} };
+    e.clock.resetTimebase(f.now);
+    e.setCabinDisplayActive(true);
+    const hour = e.clock.hour;
+    f.window.dispatchEvent(pageEvent('pagehide', true));
+    f.now += 5000;
+    e.setCabinDisplayActive(false);
+    assert.equal(e.pageSuspended, true);
+    assert.equal(e.cabinDisplayActive, false);
+    assert.equal(f.scheduled.length, 0);
+    assert.equal(hidden.at(-1), true);
+    f.now += 5000;
+    assert.equal(e.clock.tick(f.now), false);
+    f.window.dispatchEvent(pageEvent('pageshow', true));
+    assert.equal(e.pageSuspended, false);
+    assert.equal(e.clock.hour, hour);
+    assert.equal(e.lastTime, f.now);
+    assert.equal(e.fpsAt, f.now);
+    assert.equal(e.frames, 0);
+    assert.equal(hidden.at(-1), false);
+    assert.equal(f.scheduled.length, 1);
+    f.window.dispatchEvent(pageEvent('pageshow', true));
+    assert.equal(f.scheduled.length, 1);
+  } finally {
+    e?.destroy();
+    f.close();
+  }
+});
+
+test('idle startup and disposed engines cannot schedule a frame when cabin state changes', () => {
+  const f = setup();
+  let e;
+  try {
+    e = f.create();
+    assert.equal(e.renderReady, false);
+    e.setCabinDisplayActive(true);
+    e.setCabinDisplayActive(false);
+    assert.equal(f.scheduled.length, 0, 'unfinished startup cannot begin rendering');
+    e.renderReady = true;
+    e.setCabinDisplayActive(true);
+    e.destroy();
+    const cancellations = f.cancelled.length;
+    e.setCabinDisplayActive(false);
+    e.setCabinDisplayActive(true);
+    e.resumePage();
+    f.window.dispatchEvent(pageEvent('pageshow', true));
+    assert.equal(e.disposed, true);
+    assert.equal(e.cabinDisplayActive, true, 'disposed state cannot acquire a new owner');
+    assert.equal(f.scheduled.length, 0);
+    assert.equal(f.cancelled.length, cancellations);
+    assert.equal(f.rendererDisposals, 1);
+    assert.equal(f.frames, 0);
   } finally {
     e?.destroy();
     f.close();

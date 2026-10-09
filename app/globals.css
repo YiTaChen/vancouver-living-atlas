@@ -2573,6 +2573,12 @@ a {
   display: flex; align-items: center; gap: 8px; padding: 10px 14px;
   border-radius: 14px; color: #e8f1ed; font-size: 13px;
 }
+.skytrain-cabin-launcher {
+  position:absolute;z-index:35;right:94px;top:238px;display:flex;align-items:center;gap:8px;
+  padding:10px 14px;border-radius:14px;color:#e8f1ed;font-size:13px;
+}
+@media(max-width:900px){.skytrain-cabin-launcher{top:202px;right:64px;max-width:calc(100% - 76px);}}
+@media(max-height:500px){.skytrain-cabin-launcher{top:154px;}}
 .bus-visit-panel {
   position: absolute; z-index: 42; left: 50%; top: 164px; transform: translateX(-50%);
   width: 290px; padding: 16px; border-radius: 16px; color: #e8f1ed;

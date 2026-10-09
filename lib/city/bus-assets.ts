@@ -3,8 +3,10 @@ import { GLTFLoader, type GLTF } from 'three/addons/loaders/GLTFLoader.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { busRoutePose, type BusRoute } from './city-buses';
 import type { VisualQuality } from './quality';
+import { BusCabinSurfaces } from './bus-cabin-surfaces';
 
 const MANIFEST_URL = '/models/blender/bus/manifest.json';
+const V2_MANIFEST_URL = '/models/blender/bus-v2/manifest.json';
 const ROLES = [
   'paint',
   'rubber',
@@ -29,7 +31,7 @@ interface BusLod {
 }
 export interface BusRuntimeManifest {
   schemaVersion: 1;
-  packageId: 'boardable-bus';
+  packageId: 'boardable-bus' | 'boardable-bus-v2-runtime-candidate';
   version: '1.0.0';
   units: 'm';
   vehicles: Record<string, unknown>[];
@@ -46,10 +48,14 @@ export interface BoardableBusOwner {
   manifest: BusRuntimeManifest;
   /** Manifest vehicle contract, not a scene object. Seat points are pelvis datums. */
   vehicle: Record<string, unknown>;
+  /** Actual v2 rendered slab support; absent for the preserved v1 test contract. */
+  cabinSurfaces?: BusCabinSurfaces;
   /** Detach and release the visit. Shared template buffers belong to CityBusAssets. */
   dispose(): void;
 }
 export interface BusAssetsOptions {
+  /** Production stage 2 keeps the pinned exterior and replaces only the cabin. */
+  interiorVersion?: 'v1' | 'v2';
   load?: BusAssetLoader;
   fetchManifest?: () => Promise<unknown>;
 }
@@ -71,12 +77,21 @@ function record(value: unknown): Record<string, unknown> {
 }
 
 /** Validate the production projection; never import the offline authoring package. */
-function manifestContract(value: unknown): BusRuntimeManifest {
+function manifestContract(
+  value: unknown,
+  version: 'v1' | 'v2',
+): BusRuntimeManifest {
   const m = record(value);
+  const v2 = version === 'v2',
+    interiorId = v2
+      ? 'city-bus-12m-interior-v2-runtime'
+      : 'city-bus-12m-interior';
   if (
-    m.contract !== 'boardable-bus-runtime-v1' ||
+    m.contract !==
+      (v2 ? 'boardable-bus-runtime-v2' : 'boardable-bus-runtime-v1') ||
     m.schemaVersion !== 1 ||
-    m.packageId !== 'boardable-bus' ||
+    m.packageId !==
+      (v2 ? 'boardable-bus-v2-runtime-candidate' : 'boardable-bus') ||
     m.version !== '1.0.0' ||
     m.units !== 'm' ||
     !Array.isArray(m.assets) ||
@@ -87,15 +102,13 @@ function manifestContract(value: unknown): BusRuntimeManifest {
   for (const assetValue of m.assets) {
     const asset = record(assetValue);
     if (
-      !['city-bus-12m-exterior', 'city-bus-12m-interior'].includes(
-        String(asset.id),
-      ) ||
+      !['city-bus-12m-exterior', interiorId].includes(String(asset.id)) ||
       seen.has(String(asset.id)) ||
       !Array.isArray(asset.lods)
     )
       throw new Error('Unexpected bus asset');
     seen.add(String(asset.id));
-    const interior = asset.id === 'city-bus-12m-interior';
+    const interior = asset.id === interiorId;
     const levels = interior ? [0, 1] : [0, 1, 2];
     if (asset.lods.length !== levels.length)
       throw new Error('Incomplete bus LOD inventory');
@@ -105,17 +118,25 @@ function manifestContract(value: unknown): BusRuntimeManifest {
       if (
         lod.level !== levels[index] ||
         lod.file !== expected ||
-        lod.url !== `/models/blender/bus/${expected}` ||
+        lod.url !==
+          `/models/blender/${v2 && interior ? 'bus-v2' : 'bus'}/${expected}` ||
         typeof lod.sha256 !== 'string' ||
         !/^[a-f0-9]{64}$/.test(lod.sha256) ||
         !Number.isSafeInteger(lod.bytes) ||
         Number(lod.bytes) <= 0 ||
-        Number(lod.bytes) > 1_000_000 ||
+        Number(lod.bytes) >
+          (v2 && interior
+            ? levels[index] === 0
+              ? 1_572_864
+              : 393_216
+            : 1_000_000) ||
         !Number.isSafeInteger(lod.triangles) ||
         Number(lod.triangles) <= 0 ||
-        Number(lod.triangles) > 10_000 ||
+        Number(lod.triangles) >
+          (v2 && interior ? (levels[index] === 0 ? 12_000 : 3_000) : 10_000) ||
         !Number.isSafeInteger(lod.primitives) ||
-        Number(lod.primitives) <= 0
+        Number(lod.primitives) <= 0 ||
+        (v2 && interior && lod.primitives !== 11)
       )
         throw new Error('Invalid bus LOD descriptor');
     }
@@ -186,7 +207,7 @@ function checkGeometry(geometry: THREE.BufferGeometry) {
 }
 
 /**
- * Fixed four-bus near pool. Exterior1 and interior1 become eight shared role
+ * Fixed four-bus near pool. Exterior1 and interior1 become shared material
  * batches; doors stay closed and wheels static. Every unrepresented route stays
  * with the legacy/far renderer, including during failures and pool overflow.
  */
@@ -199,7 +220,7 @@ export class CityBusAssets {
   private nearIds = new Set<number>();
   private excluded = new Set<number>();
   private meshes: THREE.InstancedMesh[] = [];
-  private materials = new Map<Role, THREE.MeshStandardMaterial>();
+  private materials = new Map<string, THREE.MeshStandardMaterial>();
   private templates = new Map<string, Promise<BusGLTF>>();
   private sourceScenes = new Set<THREE.Object3D>();
   private manifest: Promise<BusRuntimeManifest> | null = null;
@@ -224,7 +245,10 @@ export class CityBusAssets {
   ) {
     this.group.name = 'Source boardable buses: bounded near fleet';
     this.group.userData.provenance = {
-      packageId: 'boardable-bus',
+      packageId:
+        options.interiorVersion === 'v2'
+          ? 'boardable-bus-v2-runtime-candidate'
+          : 'boardable-bus',
       version: '1.0.0',
       project: 'Vancouver Living Atlas by YiTaChen',
       source: 'https://github.com/YiTaChen/vancouver-living-atlas',
@@ -246,12 +270,18 @@ export class CityBusAssets {
       .then(async () => {
         if (this.disposed) throw new Error('Bus assets disposed');
         if (this.options.fetchManifest) return this.options.fetchManifest();
-        const response = await fetch(MANIFEST_URL);
+        const response = await fetch(
+          this.options.interiorVersion === 'v2'
+            ? V2_MANIFEST_URL
+            : MANIFEST_URL,
+        );
         if (!response.ok)
           throw new Error(`Bus manifest load failed (${response.status})`);
         return response.json();
       })
-      .then(manifestContract);
+      .then((value) =>
+        manifestContract(value, this.options.interiorVersion ?? 'v1'),
+      );
     const tracked: Promise<BusRuntimeManifest> = requested.catch((error) => {
       if (this.manifest === tracked) this.manifest = null;
       throw error;
@@ -293,7 +323,13 @@ export class CityBusAssets {
     level: number,
   ): BusLod {
     const descriptor = manifest.assets
-      .find((a) => a.id === `city-bus-12m-${kind}`)
+      .find(
+        (a) =>
+          a.id ===
+          (kind === 'interior' && this.options.interiorVersion === 'v2'
+            ? 'city-bus-12m-interior-v2-runtime'
+            : `city-bus-12m-${kind}`),
+      )
       ?.lods.find((l) => l.level === level);
     if (!descriptor) throw new Error('Bus LOD unavailable');
     return descriptor;
@@ -370,16 +406,28 @@ export class CityBusAssets {
     return promise;
   }
 
+  private surfaceKey(source: THREE.Material): string {
+    const role = roleOf(source);
+    return this.options.interiorVersion === 'v2'
+      ? `${role}:${String(source.userData.shared_surface_id ?? source.name)}`
+      : role;
+  }
+
   private material(source: THREE.Material): THREE.MeshStandardMaterial {
     const role = roleOf(source);
-    let shared = this.materials.get(role);
+    const key = this.surfaceKey(source);
+    let shared = this.materials.get(key);
     if (!shared) {
+      if (
+        this.materials.size >= (this.options.interiorVersion === 'v2' ? 15 : 8)
+      )
+        throw new Error('Bus shared material cache budget exceeded');
       shared = (source as THREE.MeshStandardMaterial).clone();
-      shared.name = `Bus shared ${role}`;
+      shared.name = `Bus shared ${key}`;
       // The source's linear PBR factors, opacity, emissive intensity and side
       // remain intact. COLOR_0, if present, multiplies those source factors.
       shared.vertexColors = true;
-      this.materials.set(role, shared);
+      this.materials.set(key, shared);
     } else {
       const signature = (m: THREE.MeshStandardMaterial) =>
         JSON.stringify([
@@ -416,7 +464,7 @@ export class CityBusAssets {
     const scenes = results.map(
       (r) => (r as PromiseFulfilledResult<BusGLTF>).value.scene,
     );
-    const pieces = new Map<Role, THREE.BufferGeometry[]>();
+    const pieces = new Map<string, THREE.BufferGeometry[]>();
     const merged: THREE.BufferGeometry[] = [];
     try {
       for (const scene of scenes) {
@@ -425,15 +473,15 @@ export class CityBusAssets {
           if (!(object instanceof THREE.Mesh)) return;
           if (Array.isArray(object.material))
             throw new Error('Expected GLTF primitive meshes');
-          const role = roleOf(object.material),
+          const key = this.surfaceKey(object.material),
             source = object.geometry;
           this.material(object.material);
           const geometry = source.index
             ? source.toNonIndexed()
             : source.clone();
-          const list = pieces.get(role) ?? [];
+          const list = pieces.get(key) ?? [];
           list.push(geometry);
-          pieces.set(role, list);
+          pieces.set(key, list);
           geometry.applyMatrix4(object.matrixWorld);
           const count = geometry.getAttribute('position').count;
           for (const key of Object.keys(geometry.attributes))
@@ -458,28 +506,36 @@ export class CityBusAssets {
           geometry.clearGroups();
         });
       }
-      for (const role of ROLES) {
-        const list = pieces.get(role);
-        if (!list?.length) throw new Error(`Missing bus role ${role}`);
+      for (const role of ROLES)
+        if (
+          ![...pieces.keys()].some(
+            (key) => key === role || key.startsWith(`${role}:`),
+          )
+        )
+          throw new Error(`Missing bus role ${role}`);
+      if (pieces.size > (this.options.interiorVersion === 'v2' ? 15 : 8))
+        throw new Error('Bus shared material batch budget exceeded');
+      for (const [key, list] of pieces) {
         const geometry = mergeGeometries(list);
-        if (!geometry) throw new Error(`Could not merge bus ${role}`);
+        if (!geometry) throw new Error(`Could not merge bus ${key}`);
         merged.push(geometry);
         geometry.computeBoundingBox();
         geometry.computeBoundingSphere();
         this.nearTriangles += geometry.getAttribute('position').count / 3;
         const mesh = new THREE.InstancedMesh(
           geometry,
-          this.materials.get(role)!,
+          this.materials.get(key)!,
           4,
         );
-        mesh.name = `Near bus shared ${role}`;
+        mesh.name = `Near bus shared ${key}`;
         mesh.count = 0;
         mesh.visible = false;
         mesh.frustumCulled = false;
         mesh.castShadow = false;
         mesh.receiveShadow = true;
         mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
-        if (role === 'glass') mesh.userData.excludeFromSSAO = true;
+        if (roleOf(mesh.material) === 'glass')
+          mesh.userData.excludeFromSSAO = true;
         this.meshes.push(mesh);
       }
       this.group.add(...this.meshes);
@@ -670,6 +726,11 @@ export class CityBusAssets {
         object.receiveShadow = true;
       });
     group.add(exteriorRoot, interiorRoot);
+    let cabinSurfaces: BusCabinSurfaces | undefined;
+    if (this.options.interiorVersion === 'v2') {
+      cabinSurfaces = new BusCabinSurfaces(interiorRoot, manifest.vehicles[0]);
+      cabinSurfaces.validate();
+    }
     const animations = exterior.animations,
       mixer = new THREE.AnimationMixer(group);
     let released = false;
@@ -681,6 +742,7 @@ export class CityBusAssets {
       mixer,
       manifest,
       vehicle: manifest.vehicles[0],
+      cabinSurfaces,
       dispose: () => {
         if (released) return;
         released = true;
@@ -704,6 +766,7 @@ export class CityBusAssets {
       nearActors: count,
       routeActors: this.routes.length,
       nearCapacity: 4,
+      interiorVersion: this.options.interiorVersion ?? 'v1',
       allocatedBatches: this.meshes.length,
       /** Main beauty primitive estimate. Double-sided glass may submit twice. */
       populatedBatches: count ? this.meshes.length : 0,

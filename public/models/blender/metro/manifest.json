@@ -1,0 +1,1026 @@
+{
+  "schemaVersion": 1,
+  "contract": "skytrain-cabin-display-v1",
+  "units": "m",
+  "scope": "single-cabin-display",
+  "boardingEnabled": false,
+  "serviceEnabled": false,
+  "intercarTraversalEnabled": false,
+  "coordinateSystem": {
+    "upAxis": "+Y",
+    "frontAxis": "+Z",
+    "cameras": "Exported metre anchors; no scene scaling or floor datum conversion"
+  },
+  "provenance": {
+    "project": "Vancouver Living Atlas by YiTaChen",
+    "source": "https://github.com/YiTaChen/vancouver-living-atlas",
+    "license": "Vancouver Living Atlas Noncommercial Research and Attribution 1.0",
+    "referencePixelsDistributed": false,
+    "layoutSha256": "72273c99052fb68be38c436b76ab4663795dad452c07608826e39927b11b4538"
+  },
+  "sources": [
+    {
+      "packageId": "skytrain-mark-v-interior",
+      "packagePath": "tools/assets/skytrain-mark-v-interior",
+      "revision": "28a23c86821a7502faa7425da6e430d625d97ac1",
+      "manifestSha256": "cce42ba145cd6b8385eb2e3aeb8cd6fe39fa8b7a56cf0a53c096b478d42c9cb5"
+    },
+    {
+      "packageId": "canada-line-stage2",
+      "packagePath": "tools/assets/canada-line-stage2",
+      "revision": "b18c6b591adce8f5114daab5e19e60090b80bc23",
+      "manifestSha256": "7522ab7691beb92c1066f4684c86d1298a06f9f39cb1cd17a7d1fd33cb6f36aa"
+    }
+  ],
+  "assets": [
+    {
+      "id": "mark-v-a-car-interior",
+      "lods": [
+        {
+          "level": 0,
+          "file": "mark-v-a-car-interior.lod0.glb",
+          "url": "/models/blender/metro/mark-v-a-car-interior.lod0.glb",
+          "sha256": "280aa59559444ac15d6c2d712c61e87b846076632d8127f116e20424a086c984",
+          "sourceSha256": "dae4e192c91d2475665ca930fcfcd02bc0fd42ca8f05aec291de2bf526f49bba",
+          "bytes": 1179164,
+          "triangles": 11016,
+          "primitives": 10,
+          "materialNames": [
+            "information",
+            "rail",
+            "seat",
+            "rubber",
+            "panel",
+            "shell",
+            "metal",
+            "diffuser",
+            "glass",
+            "floor"
+          ]
+        },
+        {
+          "level": 1,
+          "file": "mark-v-a-car-interior.lod1.glb",
+          "url": "/models/blender/metro/mark-v-a-car-interior.lod1.glb",
+          "sha256": "25b45a2fd670a818b8ef10bc3dd92fbc427b941231063d8f9927706ddafe9e8d",
+          "sourceSha256": "712ca521f16b9fc2f40f770e61bea8fa9b56f6edd13c34df92f10b851748928c",
+          "bytes": 306220,
+          "triangles": 2976,
+          "primitives": 10,
+          "materialNames": [
+            "seat",
+            "panel",
+            "rail",
+            "shell",
+            "diffuser",
+            "glass",
+            "rubber",
+            "metal",
+            "floor",
+            "information"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "canada-line-shared-interior",
+      "lods": [
+        {
+          "level": 0,
+          "file": "canada-line-shared-interior.lod0.glb",
+          "url": "/models/blender/metro/canada-line-shared-interior.lod0.glb",
+          "sha256": "aeb8e0a8ea43ec894c62d0dc721f67f2232a401e3ede57f180a8d05b177b770b",
+          "sourceSha256": "ab19810fe4e325bbe0923544598bf162d7c2a1e86ca568876a219e3684af994f",
+          "bytes": 138444,
+          "triangles": 1320,
+          "primitives": 6,
+          "materialNames": [
+            "canada-wall",
+            "canada-floor",
+            "canada-rail",
+            "canada-sign",
+            "canada-seat",
+            "canada-priority"
+          ]
+        },
+        {
+          "level": 1,
+          "file": "canada-line-shared-interior.lod1.glb",
+          "url": "/models/blender/metro/canada-line-shared-interior.lod1.glb",
+          "sha256": "7abbc2da2a83a7d5a7459d5be763cd1c7196a62eafe3584646d25ac3472dd724",
+          "sourceSha256": "9128fb4289d521d85f864ce71f7b6bd420741ec43627d81358f5b9725d7db00d",
+          "bytes": 103712,
+          "triangles": 984,
+          "primitives": 6,
+          "materialNames": [
+            "canada-wall",
+            "canada-floor",
+            "canada-rail",
+            "canada-sign",
+            "canada-seat",
+            "canada-priority"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "canada-line-endcar-exterior",
+      "lods": [
+        {
+          "level": 0,
+          "file": "canada-line-endcar-exterior.lod0.glb",
+          "url": "/models/blender/metro/canada-line-endcar-exterior.lod0.glb",
+          "sha256": "6d6443eb4ef23b0b0a8b08caf00e4b426b83c0485afed6a3baddfaed3a5624dc",
+          "sourceSha256": "362f5cda79b84f41ed410bcf8687682b30a250d2263d474f3370bbd81e6a18a8",
+          "bytes": 177352,
+          "triangles": 2220,
+          "primitives": 43,
+          "materialNames": [
+            "canada-blue",
+            "canada-shell",
+            "canada-steel",
+            "canada-sign",
+            "canada-glass",
+            "canada-lamp",
+            "canada-rubber"
+          ]
+        },
+        {
+          "level": 1,
+          "file": "canada-line-endcar-exterior.lod1.glb",
+          "url": "/models/blender/metro/canada-line-endcar-exterior.lod1.glb",
+          "sha256": "49f9ce83161e76361aa5b40ececdac6b7ea1b37c98af015a5590004b6614631a",
+          "sourceSha256": "9747338ae584c6eda58d54c118442198b01852126a7c1949eb248648c6d25c63",
+          "bytes": 164856,
+          "triangles": 1964,
+          "primitives": 43,
+          "materialNames": [
+            "canada-blue",
+            "canada-shell",
+            "canada-steel",
+            "canada-sign",
+            "canada-glass",
+            "canada-lamp",
+            "canada-rubber"
+          ]
+        }
+      ]
+    }
+  ],
+  "cabins": [
+    {
+      "id": "mark-v",
+      "interiorId": "mark-v-a-car-interior",
+      "exteriorId": null,
+      "seatCount": 22,
+      "defaultViewpoint": "standing",
+      "viewpoints": [
+        {
+          "id": "standing",
+          "kind": "standing",
+          "nodeId": "camera-aisle",
+          "offsetM": [
+            0,
+            0,
+            0
+          ],
+          "positionM": [
+            0,
+            1.649999976158142,
+            3.9000000953674316
+          ],
+          "facingXZ": [
+            0,
+            -1
+          ]
+        },
+        {
+          "id": "seat-long-left-1",
+          "kind": "seat",
+          "nodeId": "seat-long-left-1-camera",
+          "offsetM": [
+            0,
+            0,
+            0
+          ],
+          "positionM": [
+            0.9150000214576721,
+            1.1399999856948853,
+            -3.559999942779541
+          ],
+          "facingXZ": [
+            -1,
+            0
+          ]
+        },
+        {
+          "id": "seat-long-left-2",
+          "kind": "seat",
+          "nodeId": "seat-long-left-2-camera",
+          "offsetM": [
+            0,
+            0,
+            0
+          ],
+          "positionM": [
+            0.9150000214576721,
+            1.1399999856948853,
+            -3.0799999237060547
+          ],
+          "facingXZ": [
+            -1,
+            0
+          ]
+        },
+        {
+          "id": "seat-long-left-3",
+          "kind": "seat",
+          "nodeId": "seat-long-left-3-camera",
+          "offsetM": [
+            0,
+            0,
+            0
+          ],
+          "positionM": [
+            0.9150000214576721,
+            1.1399999856948853,
+            -2.5999999046325684
+          ],
+          "facingXZ": [
+            -1,
+            0
+          ]
+        },
+        {
+          "id": "seat-long-left-4",
+          "kind": "seat",
+          "nodeId": "seat-long-left-4-camera",
+          "offsetM": [
+            0,
+            0,
+            0
+          ],
+          "positionM": [
+            0.9150000214576721,
+            1.1399999856948853,
+            -2.119999885559082
+          ],
+          "facingXZ": [
+            -1,
+            0
+          ]
+        },
+        {
+          "id": "seat-long-left-5",
+          "kind": "seat",
+          "nodeId": "seat-long-left-5-camera",
+          "offsetM": [
+            0,
+            0,
+            0
+          ],
+          "positionM": [
+            0.9150000214576721,
+            1.1399999856948853,
+            -1.6399999856948853
+          ],
+          "facingXZ": [
+            -1,
+            0
+          ]
+        },
+        {
+          "id": "seat-single-right-1",
+          "kind": "seat",
+          "nodeId": "seat-single-right-1-camera",
+          "offsetM": [
+            0,
+            0,
+            0
+          ],
+          "positionM": [
+            -0.9100000262260437,
+            1.1399999856948853,
+            1.5
+          ],
+          "facingXZ": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "seat-single-right-2",
+          "kind": "seat",
+          "nodeId": "seat-single-right-2-camera",
+          "offsetM": [
+            0,
+            0,
+            0
+          ],
+          "positionM": [
+            -0.9100000262260437,
+            1.1399999856948853,
+            2.4100000858306885
+          ],
+          "facingXZ": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "seat-single-right-3",
+          "kind": "seat",
+          "nodeId": "seat-single-right-3-camera",
+          "offsetM": [
+            0,
+            0,
+            0
+          ],
+          "positionM": [
+            -0.9100000262260437,
+            1.1399999856948853,
+            3.319999933242798
+          ],
+          "facingXZ": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "seat-single-rear-left-1",
+          "kind": "seat",
+          "nodeId": "seat-single-rear-left-1-camera",
+          "offsetM": [
+            0,
+            0,
+            0
+          ],
+          "positionM": [
+            0.9100000262260437,
+            1.1399999856948853,
+            -6.829999923706055
+          ],
+          "facingXZ": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "seat-single-rear-left-2",
+          "kind": "seat",
+          "nodeId": "seat-single-rear-left-2-camera",
+          "offsetM": [
+            0,
+            0,
+            0
+          ],
+          "positionM": [
+            0.9100000262260437,
+            1.1399999856948853,
+            -6.099999904632568
+          ],
+          "facingXZ": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "seat-single-rear-left-3",
+          "kind": "seat",
+          "nodeId": "seat-single-rear-left-3-camera",
+          "offsetM": [
+            0,
+            0,
+            0
+          ],
+          "positionM": [
+            0.9100000262260437,
+            1.1399999856948853,
+            -5.369999885559082
+          ],
+          "facingXZ": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "seat-paired-rear-0-0",
+          "kind": "seat",
+          "nodeId": "seat-paired-rear-0-0-camera",
+          "offsetM": [
+            0,
+            0,
+            0
+          ],
+          "positionM": [
+            -0.9599999785423279,
+            1.1399999856948853,
+            -6.760000228881836
+          ],
+          "facingXZ": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "seat-paired-rear-0-1",
+          "kind": "seat",
+          "nodeId": "seat-paired-rear-0-1-camera",
+          "offsetM": [
+            0,
+            0,
+            0
+          ],
+          "positionM": [
+            -0.49000000953674316,
+            1.1399999856948853,
+            -6.760000228881836
+          ],
+          "facingXZ": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "seat-paired-rear-1-0",
+          "kind": "seat",
+          "nodeId": "seat-paired-rear-1-0-camera",
+          "offsetM": [
+            0,
+            0,
+            0
+          ],
+          "positionM": [
+            -0.9599999785423279,
+            1.1399999856948853,
+            -5.909999847412109
+          ],
+          "facingXZ": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "seat-paired-rear-1-1",
+          "kind": "seat",
+          "nodeId": "seat-paired-rear-1-1-camera",
+          "offsetM": [
+            0,
+            0,
+            0
+          ],
+          "positionM": [
+            -0.49000000953674316,
+            1.1399999856948853,
+            -5.909999847412109
+          ],
+          "facingXZ": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "seat-front-left-0",
+          "kind": "seat",
+          "nodeId": "seat-front-left-0-camera",
+          "offsetM": [
+            0,
+            0,
+            0
+          ],
+          "positionM": [
+            0.9150000214576721,
+            1.1399999856948853,
+            6.440000057220459
+          ],
+          "facingXZ": [
+            -1,
+            0
+          ]
+        },
+        {
+          "id": "seat-front-left-1",
+          "kind": "seat",
+          "nodeId": "seat-front-left-1-camera",
+          "offsetM": [
+            0,
+            0,
+            0
+          ],
+          "positionM": [
+            0.9150000214576721,
+            1.1399999856948853,
+            6.920000076293945
+          ],
+          "facingXZ": [
+            -1,
+            0
+          ]
+        },
+        {
+          "id": "seat-front-left-transverse",
+          "kind": "seat",
+          "nodeId": "seat-front-left-transverse-camera",
+          "offsetM": [
+            0,
+            0,
+            0
+          ],
+          "positionM": [
+            0.8500000238418579,
+            1.1399999856948853,
+            5.71999979019165
+          ],
+          "facingXZ": [
+            0,
+            -1
+          ]
+        },
+        {
+          "id": "seat-front-right",
+          "kind": "seat",
+          "nodeId": "seat-front-right-camera",
+          "offsetM": [
+            0,
+            0,
+            0
+          ],
+          "positionM": [
+            -0.9150000214576721,
+            1.1399999856948853,
+            6.920000076293945
+          ],
+          "facingXZ": [
+            1,
+            0
+          ]
+        },
+        {
+          "id": "seat-front-pair-0",
+          "kind": "seat",
+          "nodeId": "seat-front-pair-0-camera",
+          "offsetM": [
+            0,
+            0,
+            0
+          ],
+          "positionM": [
+            -0.949999988079071,
+            1.1399999856948853,
+            5.71999979019165
+          ],
+          "facingXZ": [
+            0,
+            -1
+          ]
+        },
+        {
+          "id": "seat-front-pair-1",
+          "kind": "seat",
+          "nodeId": "seat-front-pair-1-camera",
+          "offsetM": [
+            0,
+            0,
+            0
+          ],
+          "positionM": [
+            -0.47999998927116394,
+            1.1399999856948853,
+            5.71999979019165
+          ],
+          "facingXZ": [
+            0,
+            -1
+          ]
+        },
+        {
+          "id": "seat-observation",
+          "kind": "seat",
+          "nodeId": "seat-observation-camera",
+          "offsetM": [
+            0,
+            0,
+            0
+          ],
+          "positionM": [
+            0,
+            1.1399999856948853,
+            6.559999942779541
+          ],
+          "facingXZ": [
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "id": "canada-line",
+      "interiorId": "canada-line-shared-interior",
+      "exteriorId": "canada-line-endcar-exterior",
+      "seatCount": 20,
+      "defaultViewpoint": "standing",
+      "viewpoints": [
+        {
+          "id": "standing",
+          "kind": "standing",
+          "nodeId": "aisle-eye",
+          "offsetM": [
+            0,
+            0,
+            0
+          ],
+          "positionM": [
+            0,
+            2.700000047683716,
+            -9.600000381469727
+          ],
+          "facingXZ": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "seat-left-01",
+          "kind": "seat",
+          "nodeId": "seat-left-01-pelvis",
+          "offsetM": [
+            0,
+            0.59,
+            0
+          ],
+          "positionM": [
+            1.100000023841858,
+            2.2000000143051146,
+            -8.699999809265137
+          ],
+          "facingXZ": [
+            -1,
+            0
+          ]
+        },
+        {
+          "id": "seat-left-02",
+          "kind": "seat",
+          "nodeId": "seat-left-02-pelvis",
+          "offsetM": [
+            0,
+            0.59,
+            0
+          ],
+          "positionM": [
+            1.100000023841858,
+            2.2000000143051146,
+            -7.949999809265137
+          ],
+          "facingXZ": [
+            -1,
+            0
+          ]
+        },
+        {
+          "id": "seat-left-03",
+          "kind": "seat",
+          "nodeId": "seat-left-03-pelvis",
+          "offsetM": [
+            0,
+            0.59,
+            0
+          ],
+          "positionM": [
+            1.100000023841858,
+            2.2000000143051146,
+            -4.599999904632568
+          ],
+          "facingXZ": [
+            -1,
+            0
+          ]
+        },
+        {
+          "id": "seat-left-04",
+          "kind": "seat",
+          "nodeId": "seat-left-04-pelvis",
+          "offsetM": [
+            0,
+            0.59,
+            0
+          ],
+          "positionM": [
+            1.100000023841858,
+            2.2000000143051146,
+            -3.8499999046325684
+          ],
+          "facingXZ": [
+            -1,
+            0
+          ]
+        },
+        {
+          "id": "seat-left-05",
+          "kind": "seat",
+          "nodeId": "seat-left-05-pelvis",
+          "offsetM": [
+            0,
+            0.59,
+            0
+          ],
+          "positionM": [
+            1.100000023841858,
+            2.2000000143051146,
+            -3.0999999046325684
+          ],
+          "facingXZ": [
+            -1,
+            0
+          ]
+        },
+        {
+          "id": "seat-left-06",
+          "kind": "seat",
+          "nodeId": "seat-left-06-pelvis",
+          "offsetM": [
+            0,
+            0.59,
+            0
+          ],
+          "positionM": [
+            1.100000023841858,
+            2.2000000143051146,
+            2.6500000953674316
+          ],
+          "facingXZ": [
+            -1,
+            0
+          ]
+        },
+        {
+          "id": "seat-left-07",
+          "kind": "seat",
+          "nodeId": "seat-left-07-pelvis",
+          "offsetM": [
+            0,
+            0.59,
+            0
+          ],
+          "positionM": [
+            1.100000023841858,
+            2.2000000143051146,
+            3.4000000953674316
+          ],
+          "facingXZ": [
+            -1,
+            0
+          ]
+        },
+        {
+          "id": "seat-left-08",
+          "kind": "seat",
+          "nodeId": "seat-left-08-pelvis",
+          "offsetM": [
+            0,
+            0.59,
+            0
+          ],
+          "positionM": [
+            1.100000023841858,
+            2.2000000143051146,
+            4.150000095367432
+          ],
+          "facingXZ": [
+            -1,
+            0
+          ]
+        },
+        {
+          "id": "seat-left-09",
+          "kind": "seat",
+          "nodeId": "seat-left-09-pelvis",
+          "offsetM": [
+            0,
+            0.59,
+            0
+          ],
+          "positionM": [
+            1.100000023841858,
+            2.2000000143051146,
+            8.050000190734863
+          ],
+          "facingXZ": [
+            -1,
+            0
+          ]
+        },
+        {
+          "id": "seat-left-10",
+          "kind": "seat",
+          "nodeId": "seat-left-10-pelvis",
+          "offsetM": [
+            0,
+            0.59,
+            0
+          ],
+          "positionM": [
+            1.100000023841858,
+            2.2000000143051146,
+            8.800000190734863
+          ],
+          "facingXZ": [
+            -1,
+            0
+          ]
+        },
+        {
+          "id": "seat-right-01",
+          "kind": "seat",
+          "nodeId": "seat-right-01-pelvis",
+          "offsetM": [
+            0,
+            0.59,
+            0
+          ],
+          "positionM": [
+            -1.100000023841858,
+            2.2000000143051146,
+            -8.699999809265137
+          ],
+          "facingXZ": [
+            1,
+            0
+          ]
+        },
+        {
+          "id": "seat-right-02",
+          "kind": "seat",
+          "nodeId": "seat-right-02-pelvis",
+          "offsetM": [
+            0,
+            0.59,
+            0
+          ],
+          "positionM": [
+            -1.100000023841858,
+            2.2000000143051146,
+            -7.949999809265137
+          ],
+          "facingXZ": [
+            1,
+            0
+          ]
+        },
+        {
+          "id": "seat-right-03",
+          "kind": "seat",
+          "nodeId": "seat-right-03-pelvis",
+          "offsetM": [
+            0,
+            0.59,
+            0
+          ],
+          "positionM": [
+            -1.100000023841858,
+            2.2000000143051146,
+            -4.599999904632568
+          ],
+          "facingXZ": [
+            1,
+            0
+          ]
+        },
+        {
+          "id": "seat-right-04",
+          "kind": "seat",
+          "nodeId": "seat-right-04-pelvis",
+          "offsetM": [
+            0,
+            0.59,
+            0
+          ],
+          "positionM": [
+            -1.100000023841858,
+            2.2000000143051146,
+            -3.8499999046325684
+          ],
+          "facingXZ": [
+            1,
+            0
+          ]
+        },
+        {
+          "id": "seat-right-05",
+          "kind": "seat",
+          "nodeId": "seat-right-05-pelvis",
+          "offsetM": [
+            0,
+            0.59,
+            0
+          ],
+          "positionM": [
+            -1.100000023841858,
+            2.2000000143051146,
+            -3.0999999046325684
+          ],
+          "facingXZ": [
+            1,
+            0
+          ]
+        },
+        {
+          "id": "seat-right-06",
+          "kind": "seat",
+          "nodeId": "seat-right-06-pelvis",
+          "offsetM": [
+            0,
+            0.59,
+            0
+          ],
+          "positionM": [
+            -1.100000023841858,
+            2.2000000143051146,
+            2.6500000953674316
+          ],
+          "facingXZ": [
+            1,
+            0
+          ]
+        },
+        {
+          "id": "seat-right-07",
+          "kind": "seat",
+          "nodeId": "seat-right-07-pelvis",
+          "offsetM": [
+            0,
+            0.59,
+            0
+          ],
+          "positionM": [
+            -1.100000023841858,
+            2.2000000143051146,
+            3.4000000953674316
+          ],
+          "facingXZ": [
+            1,
+            0
+          ]
+        },
+        {
+          "id": "seat-right-08",
+          "kind": "seat",
+          "nodeId": "seat-right-08-pelvis",
+          "offsetM": [
+            0,
+            0.59,
+            0
+          ],
+          "positionM": [
+            -1.100000023841858,
+            2.2000000143051146,
+            4.150000095367432
+          ],
+          "facingXZ": [
+            1,
+            0
+          ]
+        },
+        {
+          "id": "seat-right-09",
+          "kind": "seat",
+          "nodeId": "seat-right-09-pelvis",
+          "offsetM": [
+            0,
+            0.59,
+            0
+          ],
+          "positionM": [
+            -1.100000023841858,
+            2.2000000143051146,
+            8.050000190734863
+          ],
+          "facingXZ": [
+            1,
+            0
+          ]
+        },
+        {
+          "id": "seat-right-10",
+          "kind": "seat",
+          "nodeId": "seat-right-10-pelvis",
+          "offsetM": [
+            0,
+            0.59,
+            0
+          ],
+          "positionM": [
+            -1.100000023841858,
+            2.2000000143051146,
+            8.800000190734863
+          ],
+          "facingXZ": [
+            1,
+            0
+          ]
+        }
+      ]
+    }
+  ]
+}

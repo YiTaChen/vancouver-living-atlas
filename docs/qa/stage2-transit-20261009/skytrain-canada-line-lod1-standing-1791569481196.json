@@ -1,0 +1,55 @@
+{
+  "revision": "c3b66985d7ac1612b4cf54aeb6574214ea113f3b",
+  "sourceFingerprint": "f27b3f38ad3e44e45208c715e311558a48f02d37a59492429ec31903e441200c",
+  "kind": "skytrain-cabin-display-checkpoint-v1",
+  "capturedAt": "2026-10-09T18:11:21.196Z",
+  "valid": true,
+  "model": "canada-line",
+  "lod": 1,
+  "seatCount": 20,
+  "viewpoint": "standing",
+  "resources": [
+    {
+      "file": "canada-line-shared-interior.lod1.glb",
+      "sha256": "7abbc2da2a83a7d5a7459d5be763cd1c7196a62eafe3584646d25ac3472dd724",
+      "bytes": 103712
+    },
+    {
+      "file": "canada-line-endcar-exterior.lod1.glb",
+      "sha256": "49f9ce83161e76361aa5b40ececdac6b7ea1b37c98af015a5590004b6614631a",
+      "bytes": 164856
+    }
+  ],
+  "policy": {
+    "quality": "balanced",
+    "compatible": false,
+    "pixelRatio": 1,
+    "displayQuality": "light"
+  },
+  "render": [
+    327,
+    365
+  ],
+  "pixelRatio": 1,
+  "camera": {
+    "position": [
+      0,
+      2.700000047683716,
+      -9.600000381469727
+    ],
+    "quaternion": [
+      0,
+      -1,
+      0,
+      6.123233995736766e-17
+    ],
+    "near": 0.025,
+    "fov": 68
+  },
+  "renderer": {
+    "calls": 46,
+    "triangles": 2880,
+    "geometries": 46,
+    "textures": 2
+  }
+}

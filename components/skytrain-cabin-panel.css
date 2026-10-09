@@ -1,0 +1,140 @@
+.skytrain-cabin-dialog {
+  width: min(1040px, calc(100vw - 24px));
+  max-width: min(1040px, calc(100vw - 24px));
+  max-height: calc(100dvh - 24px);
+  overflow: auto;
+  padding: 18px;
+  gap: 14px;
+  background: #101d29;
+  color: #f2f6fa;
+}
+.skytrain-cabin-heading {
+  position: relative;
+  padding-right: 35px;
+}
+.skytrain-cabin-heading [data-slot='dialog-title'] {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.skytrain-cabin-heading [data-slot='dialog-description'] {
+  color: #bacbd9;
+  line-height: 1.5;
+}
+.skytrain-cabin-close {
+  position: absolute;
+  right: 0;
+  top: -7px;
+  font-size: 28px;
+  width: 32px;
+  height: 32px;
+}
+.skytrain-cabin-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+.skytrain-cabin-controls label {
+  display: grid;
+  gap: 5px;
+  color: #c2d2df;
+  font-size: 12px;
+}
+.skytrain-cabin-controls select {
+  min-width: 0;
+  width: 100%;
+  background: #233646;
+  color: #f2f6fa;
+  border: 1px solid #5c7385;
+  border-radius: 8px;
+  padding: 9px;
+  font-size: 13px;
+}
+.skytrain-cabin-viewport {
+  position: relative;
+  height: min(60dvh, 570px);
+  min-height: 230px;
+  background: #aeb9c3;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.skytrain-cabin-viewport canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+  cursor: grab;
+}
+.skytrain-cabin-viewport canvas:active {
+  cursor: grabbing;
+}
+.skytrain-cabin-viewport canvas:focus-visible {
+  outline: 3px solid #73cef2;
+  outline-offset: -3px;
+}
+.skytrain-cabin-status {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  background: #142535ed;
+}
+.skytrain-cabin-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.skytrain-cabin-footer p {
+  color: #b7cbd9;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.skytrain-cabin-footer button,
+.skytrain-cabin-status button,
+.skytrain-cabin-qa button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-shrink: 0;
+  padding: 8px 10px;
+  border: 1px solid #5c7385;
+  border-radius: 8px;
+  background: #233646;
+  font-size: 12px;
+}
+.skytrain-cabin-dialog button:disabled,
+.skytrain-cabin-dialog select:disabled {
+  opacity: 0.55;
+}
+.skytrain-cabin-qa {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 11px;
+}
+@media (max-width: 620px) {
+  .skytrain-cabin-dialog {
+    padding: 12px;
+    gap: 10px;
+  }
+  .skytrain-cabin-controls {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .skytrain-cabin-controls label:last-child {
+    grid-column: 1 / -1;
+  }
+  .skytrain-cabin-viewport {
+    height: 45dvh;
+    min-height: 210px;
+  }
+  .skytrain-cabin-footer {
+    align-items: flex-start;
+  }
+}

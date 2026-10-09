@@ -469,7 +469,7 @@ export function createStreetDetails(e: CityEngine): Traffic {
   buses.count = 0;
   e.trafficGroup.add(buses);
   const vehicleAssets = new TrafficVehicleAssets(routes, e.trafficGroup);
-  const busAssets = new CityBusAssets(busRoutes, e.trafficGroup);
+  const busAssets = new CityBusAssets(busRoutes, e.trafficGroup, { interiorVersion: 'v2' });
   return {
     mesh: body,
     cabins,

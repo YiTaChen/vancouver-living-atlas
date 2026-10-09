@@ -49,6 +49,7 @@ import { FlightControls, flightText } from '@/components/flight-controls';
 import { EMPTY_FLIGHT, type FlightSnapshot } from '@/lib/city/flight-snapshot';
 import { TravelJoystick } from '@/components/travel-joystick';
 import { BusVisitPanel } from '@/components/bus-visit-panel';
+import { SkyTrainCabinPanel } from '@/components/skytrain-cabin-panel';
 import {
   DiscoveryPanel,
   type DiscoveryTarget,
@@ -198,6 +199,10 @@ function Home() {
     }
   }, []);
   const [loadProgress, setLoadProgress] = useState(0);
+  const [skyTrainCabinRequest, setSkyTrainCabinRequest] = useState(0);
+  const cabinActiveChange = useCallback((active: boolean) => {
+    engine.current?.setCabinDisplayActive(active);
+  }, []);
   const [ready, setReady] = useState(false),
     [error, setError] = useState<ReturnType<
       typeof startupErrorMessageKey
@@ -744,6 +749,25 @@ function Home() {
           !(touchUI && mobileHudHidden)
         }
         onPrepare={visitBus}
+      />
+      {ready && !clean && !about && !placing && !flight.placing && !panel && !mobilePanel &&
+        !(touchUI && mobileHudHidden) && (!stats.busVisit || stats.busVisit.phase === 'idle') && (
+        <button className="skytrain-cabin-launcher glass ui-chrome" onClick={() => {
+          if (!finishBusVisit()) return;
+          setTour(false);
+          setSkyTrainCabinRequest((request) => request + 1);
+        }}>
+          <TrainFront size={17} /> {tr('skyTrainCabinDisplay')}
+        </button>
+      )}
+      <SkyTrainCabinPanel
+        locale={locale}
+        visible={ready && !clean && !about}
+        request={skyTrainCabinRequest}
+        quality={stats.effectiveQuality ?? settings.quality}
+        compatible={engine.current?.compatibleGraphics ?? false}
+        pixelRatio={engine.current?.renderer.getPixelRatio() ?? 1}
+        onActiveChange={cabinActiveChange}
       />
       <DiscoveryPanel
         city={engine.current}

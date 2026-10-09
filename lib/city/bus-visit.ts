@@ -292,6 +292,42 @@ export class BusCabinVisit {
           0,
         );
         const vehicle = record(owner.vehicle);
+        if (owner.cabinSurfaces) {
+          const aisleCamera = Array.isArray(vehicle.cameraAnchors)
+            ? vehicle.cameraAnchors
+                .map(record)
+                .find((camera) => camera.cameraId === 'camera-aisle')
+            : undefined;
+          if (!aisleCamera || aisleCamera.frameId !== 'vehicle')
+            throw new Error('Missing bus standing camera anchor');
+          const eye = point(aisleCamera.eyePointM),
+            cameraNode = owner.interiorRoot.getObjectByName(
+              text(aisleCamera.nodeId),
+            );
+          if (
+            !cameraNode ||
+            cameraNode
+              .getWorldPosition(new THREE.Vector3())
+              .distanceTo(new THREE.Vector3(...eye)) > 1e-4
+          )
+            throw new Error('Bus standing camera differs from actual GLB');
+          for (const anchor of contract.anchors) {
+            if (anchor.datum !== 'feet') continue;
+            const [x, y, z] = anchor.anchor.translationM,
+              floor = owner.cabinSurfaces.floorAt(x, z);
+            if (
+              !floor ||
+              Math.abs(floor.heightM - y) > 0.003 ||
+              !owner.cabinSurfaces.canStand(x, z)
+            )
+              throw new Error(
+                'Bus standing anchor lacks actual floor or clearance',
+              );
+            // Preserve the authored aisle camera's explicit eye datum; the
+            // generic adapter's feet-to-eye fallback is only for legacy visits.
+            anchor.cameraEyePointM = [...eye];
+          }
+        }
         if (!Array.isArray(vehicle.doors)) throw new Error('Missing bus doors');
         const doors: Door[] = vehicle.doors.map((value) => {
           const d = record(value),

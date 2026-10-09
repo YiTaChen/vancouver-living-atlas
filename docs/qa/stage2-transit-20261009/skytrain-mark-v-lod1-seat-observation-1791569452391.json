@@ -1,0 +1,50 @@
+{
+  "revision": "c3b66985d7ac1612b4cf54aeb6574214ea113f3b",
+  "sourceFingerprint": "f27b3f38ad3e44e45208c715e311558a48f02d37a59492429ec31903e441200c",
+  "kind": "skytrain-cabin-display-checkpoint-v1",
+  "capturedAt": "2026-10-09T18:10:52.391Z",
+  "valid": true,
+  "model": "mark-v",
+  "lod": 1,
+  "seatCount": 22,
+  "viewpoint": "seat-observation",
+  "resources": [
+    {
+      "file": "mark-v-a-car-interior.lod1.glb",
+      "sha256": "25b45a2fd670a818b8ef10bc3dd92fbc427b941231063d8f9927706ddafe9e8d",
+      "bytes": 306220
+    }
+  ],
+  "policy": {
+    "quality": "balanced",
+    "compatible": false,
+    "pixelRatio": 1,
+    "displayQuality": "light"
+  },
+  "render": [
+    989,
+    432
+  ],
+  "pixelRatio": 1,
+  "camera": {
+    "position": [
+      0,
+      1.1399999856948853,
+      6.559999942779541
+    ],
+    "quaternion": [
+      0,
+      -0.9989876708478425,
+      0,
+      -0.0449848140376601
+    ],
+    "near": 0.025,
+    "fov": 68
+  },
+  "renderer": {
+    "calls": 10,
+    "triangles": 3134,
+    "geometries": 10,
+    "textures": 5
+  }
+}

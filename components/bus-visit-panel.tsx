@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { BusFront, X } from 'lucide-react';
 import type { CityEngine } from '@/lib/city/engine';
 import type { BusVisitSnapshot } from '@/lib/city/bus-visit';
+import { busVisitSelectedAnchor } from '@/lib/city/bus-visit-selection';
 import { translate, type Locale } from '@/lib/i18n';
 
 export function BusVisitPanel({
@@ -18,7 +19,7 @@ export function BusVisitPanel({
   visible: boolean;
   onPrepare: () => Promise<void>;
 }) {
-  const [anchor, setAnchor] = useState('main-aisle');
+  const [anchor, setAnchor] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const tr = (key: Parameters<typeof translate>[1]) => translate(locale, key);
   if (!visible || !city) return null;
@@ -43,8 +44,9 @@ export function BusVisitPanel({
         {busy ? tr('busVisitLoading') : tr('busVisitEnter')}
       </button>
     );
-  const selected = snapshot?.aboard ? (snapshot.viewAnchor ?? anchor) : anchor;
+  const selected = busVisitSelectedAnchor(snapshot, anchor);
   const choose = (id: string) => {
+    if (!snapshot?.anchors.some((option) => option.id === id)) return;
     setAnchor(id);
     if (snapshot?.aboard) city.busVisit?.preview(id);
     city.publishBusVisit();
@@ -95,7 +97,8 @@ export function BusVisitPanel({
               )}
             </span>
             <select
-              value={selected}
+              value={selected ?? ''}
+              disabled={!selected}
               onChange={(event) => choose(event.target.value)}
             >
               {snapshot?.anchors.map((option) => (
@@ -125,9 +128,9 @@ export function BusVisitPanel({
           ) : (
             <button
               className="bus-visit-primary"
-              disabled={!snapshot?.canBoard}
+              disabled={!snapshot?.canBoard || !selected}
               onClick={() => {
-                city.busVisit?.board(anchor);
+                if (selected) city.busVisit?.board(selected);
                 city.publishBusVisit();
               }}
             >

@@ -1,0 +1,234 @@
+{
+  "revision": "c3b66985d7ac1612b4cf54aeb6574214ea113f3b",
+  "sourceFingerprint": "f27b3f38ad3e44e45208c715e311558a48f02d37a59492429ec31903e441200c",
+  "kind": "integrated-bus-checkpoint-v1",
+  "id": "bus-visit-aboard-seat-01-23p00h-20261009t181027430z-003",
+  "capturedAt": "2026-10-09T18:10:27.430Z",
+  "valid": true,
+  "snapshot": {
+    "phase": "aboard",
+    "status": "aboard",
+    "loading": false,
+    "error": null,
+    "aboard": true,
+    "doorsOpen": true,
+    "canBoard": false,
+    "canAlight": true,
+    "anchors": [
+      {
+        "id": "seat-01",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-02",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-03",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-04",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-05",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-06",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-07",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-08",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-09",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-10",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-11",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-12",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-13",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-14",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-15",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-16",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-17",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-18",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-19",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-20",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-21",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-22",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-23",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "seat-24",
+        "kind": "seat",
+        "datum": "pelvis"
+      },
+      {
+        "id": "low-floor-aisle",
+        "kind": "standing",
+        "datum": "feet"
+      }
+    ],
+    "viewAnchor": "seat-01",
+    "previewAnchor": null,
+    "passengerAnchor": "seat-01",
+    "routeIndex": 23
+  },
+  "busAssets": {
+    "status": "ready",
+    "nearActors": 0,
+    "routeActors": 26,
+    "nearCapacity": 4,
+    "interiorVersion": "v2",
+    "allocatedBatches": 15,
+    "populatedBatches": 0,
+    "triangles": 0,
+    "textures": 0,
+    "materials": 15,
+    "loadedTemplates": 4,
+    "assetBytes": 1249552,
+    "boardableStatus": "ready",
+    "boardableOwners": 1,
+    "updates": 1529,
+    "errors": [],
+    "disposed": false
+  },
+  "fps": 39,
+  "settings": {
+    "trees": true,
+    "buildings": true,
+    "labels": true,
+    "traffic": true,
+    "trains": true,
+    "harbour": true,
+    "terrain": true,
+    "autoRotate": false,
+    "quality": "balanced",
+    "qualityMode": "auto",
+    "mode": "walk"
+  },
+  "hour": 23,
+  "night": 1,
+  "viewport": [
+    1280,
+    720
+  ],
+  "render": [
+    1280,
+    720
+  ],
+  "pixelRatio": 1,
+  "camera": {
+    "position": [
+      20.6260469471082,
+      14.744396536883798,
+      -405.50528767162376
+    ],
+    "quaternion": [
+      0,
+      0.5449080053536942,
+      0,
+      0.8384958352320292
+    ],
+    "target": [
+      19.71224076096087,
+      14.744396536883798,
+      -405.9114382030267
+    ],
+    "near": 0.05,
+    "fov": 65
+  },
+  "navigation": {
+    "mode": "walk",
+    "position": [
+      14.720839198993563,
+      12.846549626424899,
+      -408.96160402754776
+    ],
+    "speedMps": 0,
+    "surface": "ground",
+    "surfaceId": "ground",
+    "layer": 0
+  },
+  "renderer": {
+    "calls": 385,
+    "triangles": 2462109,
+    "points": 1440,
+    "lines": 0,
+    "geometries": 813,
+    "textures": 41
+  },
+  "workerErrors": {}
+}

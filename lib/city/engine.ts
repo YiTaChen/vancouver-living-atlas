@@ -108,12 +108,12 @@ export class CityEngine {
   visibilityChange = () => {
     if (this.disposed) return;
     if (document.hidden) this.clearHeldInput();
-    this.pedestrians?.setHidden(document.hidden || this.pageSuspended);
+    this.pedestrians?.setHidden(document.hidden || this.pageSuspended || this.cabinDisplayActive);
     this.autoQuality?.resetTiming();
     this.autoTimingNeedsAnchor = true;
     this.sceneryMotionTracker?.reset();
     this.clock.setVisible(
-      !document.hidden && !this.pageSuspended,
+      !document.hidden && !this.pageSuspended && !this.cabinDisplayActive,
       performance.now(),
     );
   };
@@ -135,6 +135,8 @@ export class CityEngine {
   // A BFCache entry retains this exact document and React tree. Disposing its
   // canvas on persisted pagehide would leave a dead city when Back restores it.
   pageSuspended = false;
+  /** A separate cabin display owns the foreground canvas while the city rests. */
+  cabinDisplayActive = false;
   private suspendedAt = 0;
   private renderReady = false;
   private loadAbort = new AbortController();
@@ -449,14 +451,35 @@ export class CityEngine {
     this.pageSuspended = false;
     this.clearHeldInput();
     this.clock.resetTimebase(now);
-    this.clock.setVisible(!document.hidden, now);
-    this.pedestrians?.setHidden(document.hidden);
+    this.clock.setVisible(!document.hidden && !this.cabinDisplayActive, now);
+    this.pedestrians?.setHidden(document.hidden || this.cabinDisplayActive);
     this.autoQuality?.resetTiming();
     this.autoTimingNeedsAnchor = true;
     this.sceneryMotionTracker?.reset();
     this.lastTime = this.fpsAt = now;
     this.frames = 0;
-    if (this.renderReady) this.raf = requestAnimationFrame(this.animate);
+    if (this.renderReady && !this.cabinDisplayActive) this.raf = requestAnimationFrame(this.animate);
+  }
+  setCabinDisplayActive(active: boolean) {
+    if (this.disposed || active === this.cabinDisplayActive) return;
+    this.cabinDisplayActive = active;
+    this.clearHeldInput();
+    const now = performance.now();
+    this.autoQuality?.resetTiming();
+    this.autoTimingNeedsAnchor = true;
+    this.sceneryMotionTracker?.reset();
+    this.clock.resetTimebase(now);
+    this.clock.setVisible(!active && !document.hidden && !this.pageSuspended, now);
+    this.pedestrians?.setHidden(active || document.hidden || this.pageSuspended);
+    if (active) {
+      cancelAnimationFrame(this.raf);
+      this.raf = 0;
+      this.transition = null;
+    } else if (this.renderReady && !this.contextLost && !this.pageSuspended) {
+      this.lastTime = this.fpsAt = now;
+      this.frames = 0;
+      this.raf = requestAnimationFrame(this.animate);
+    }
   }
   async load() {
     const advance = (percent: number) =>
@@ -724,7 +747,7 @@ export class CityEngine {
 
     this.renderReady = true;
     this.fpsAt = performance.now();
-    this.clock.setVisible(!document.hidden && !this.pageSuspended, this.fpsAt);
+    this.clock.setVisible(!document.hidden && !this.pageSuspended && !this.cabinDisplayActive, this.fpsAt);
     this.clock.resetTimebase(this.fpsAt);
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.begin('render.first-city-frame');
@@ -1586,7 +1609,7 @@ export class CityEngine {
     }
   }
   animate = (time: number) => {
-    if (this.disposed || this.contextLost || this.pageSuspended) return;
+    if (this.disposed || this.contextLost || this.pageSuspended || this.cabinDisplayActive) return;
     this.raf = requestAnimationFrame(this.animate);
     this.uniforms.time.value = time / 1000;
     this.tickClock(time);

@@ -72,7 +72,7 @@ async function usingFixture(run, options) {
 test('reviewed bus exports and canonical full boarding metadata are adopted without replacing the previous inventory', async () => {
   const inventory = JSON.parse(await readFile('public/models/blender/adopted-manifest.json', 'utf8'));
   assert.equal(inventory.sourceRevision, 'dc6e6b5dd14ed83b1909e677d611d8c2eba3b559');
-  assert.equal(inventory.files.filter((entry) => !entry.path.startsWith('bus/')).length, 19);
+  assert.equal(inventory.files.filter((entry) => !/^(bus|bus-v2|metro)\//.test(entry.path)).length, 19);
   const bus = inventory.files.filter((entry) => entry.path.startsWith('bus/'));
   assert.equal(bus.length, 6);
   assert(bus.every((entry) => entry.sourceRevision === BUS_SOURCE_REVISION));

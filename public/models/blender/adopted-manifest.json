@@ -188,6 +188,108 @@
       "sourcePath": "canonical projection of tools/assets/boardable-bus/manifest.json",
       "sourceRevision": "c9d184a4a176aefecf2aaf2b8341ba4f406f4ee9",
       "sourceManifestSha256": "32a35e7fdaa0f82600f8d161212b952177fae8515ca8095b2d55be118503076e"
+    },
+    {
+      "path": "bus-v2/city-bus-12m-interior-v2-runtime.lod0.glb",
+      "sha256": "76302cf2d45d5c027a412c6087231b65605d982b3ec2634942b6910ab002c096",
+      "bytes": 736884,
+      "sourcePackage": "boardable-bus-v2-runtime-candidate",
+      "sourceRevision": "28a23c86821a7502faa7425da6e430d625d97ac1",
+      "sourceManifestSha256": "84c358c33e2a76dd2274bb41cb9443c3c4e0f3d923f59b0038595ae6d6a1a413",
+      "sourcePath": "tools/assets/boardable-bus-v2/runtime-candidate/exports/city-bus-12m-interior-v2-runtime.lod0.glb"
+    },
+    {
+      "path": "bus-v2/city-bus-12m-interior-v2-runtime.lod1.glb",
+      "sha256": "6d5ab5aa5d7074d7c844a48d88dbc4a4e2fd5c3f07b24b0aa6f0f4fcce0ba587",
+      "bytes": 202492,
+      "sourcePackage": "boardable-bus-v2-runtime-candidate",
+      "sourceRevision": "28a23c86821a7502faa7425da6e430d625d97ac1",
+      "sourceManifestSha256": "84c358c33e2a76dd2274bb41cb9443c3c4e0f3d923f59b0038595ae6d6a1a413",
+      "sourcePath": "tools/assets/boardable-bus-v2/runtime-candidate/exports/city-bus-12m-interior-v2-runtime.lod1.glb"
+    },
+    {
+      "path": "bus-v2/manifest.json",
+      "sha256": "31158b24e3eef090edb127484f771c2021bf10edd2250e0e4a18ffd308938356",
+      "bytes": 495627,
+      "sourcePackage": "boardable-bus-v2-runtime-candidate",
+      "sourceRevision": "28a23c86821a7502faa7425da6e430d625d97ac1",
+      "sourceManifestSha256": "84c358c33e2a76dd2274bb41cb9443c3c4e0f3d923f59b0038595ae6d6a1a413",
+      "sourcePath": "canonical projection of tools/assets/boardable-bus-v2/runtime-candidate/manifest.json"
+    },
+    {
+      "path": "metro/mark-v-a-car-interior.lod0.glb",
+      "sha256": "280aa59559444ac15d6c2d712c61e87b846076632d8127f116e20424a086c984",
+      "bytes": 1179164,
+      "sourcePackage": "skytrain-mark-v-interior",
+      "sourcePath": "tools/assets/skytrain-mark-v-interior/exports/mark-v-a-car-interior.lod0.glb",
+      "sourceRevision": "28a23c86821a7502faa7425da6e430d625d97ac1",
+      "sourceManifestSha256": "cce42ba145cd6b8385eb2e3aeb8cd6fe39fa8b7a56cf0a53c096b478d42c9cb5"
+    },
+    {
+      "path": "metro/mark-v-a-car-interior.lod1.glb",
+      "sha256": "25b45a2fd670a818b8ef10bc3dd92fbc427b941231063d8f9927706ddafe9e8d",
+      "bytes": 306220,
+      "sourcePackage": "skytrain-mark-v-interior",
+      "sourcePath": "tools/assets/skytrain-mark-v-interior/exports/mark-v-a-car-interior.lod1.glb",
+      "sourceRevision": "28a23c86821a7502faa7425da6e430d625d97ac1",
+      "sourceManifestSha256": "cce42ba145cd6b8385eb2e3aeb8cd6fe39fa8b7a56cf0a53c096b478d42c9cb5"
+    },
+    {
+      "path": "metro/canada-line-shared-interior.lod0.glb",
+      "sha256": "aeb8e0a8ea43ec894c62d0dc721f67f2232a401e3ede57f180a8d05b177b770b",
+      "bytes": 138444,
+      "sourcePackage": "canada-line-stage2",
+      "sourcePath": "tools/assets/canada-line-stage2/exports/canada-line-shared-interior.lod0.glb",
+      "sourceRevision": "b18c6b591adce8f5114daab5e19e60090b80bc23",
+      "sourceManifestSha256": "7522ab7691beb92c1066f4684c86d1298a06f9f39cb1cd17a7d1fd33cb6f36aa"
+    },
+    {
+      "path": "metro/canada-line-shared-interior.lod1.glb",
+      "sha256": "7abbc2da2a83a7d5a7459d5be763cd1c7196a62eafe3584646d25ac3472dd724",
+      "bytes": 103712,
+      "sourcePackage": "canada-line-stage2",
+      "sourcePath": "tools/assets/canada-line-stage2/exports/canada-line-shared-interior.lod1.glb",
+      "sourceRevision": "b18c6b591adce8f5114daab5e19e60090b80bc23",
+      "sourceManifestSha256": "7522ab7691beb92c1066f4684c86d1298a06f9f39cb1cd17a7d1fd33cb6f36aa"
+    },
+    {
+      "path": "metro/canada-line-endcar-exterior.lod0.glb",
+      "sha256": "6d6443eb4ef23b0b0a8b08caf00e4b426b83c0485afed6a3baddfaed3a5624dc",
+      "bytes": 177352,
+      "sourcePackage": "canada-line-stage2",
+      "sourcePath": "tools/assets/canada-line-stage2/exports/canada-line-endcar-exterior.lod0.glb",
+      "sourceRevision": "b18c6b591adce8f5114daab5e19e60090b80bc23",
+      "sourceManifestSha256": "7522ab7691beb92c1066f4684c86d1298a06f9f39cb1cd17a7d1fd33cb6f36aa"
+    },
+    {
+      "path": "metro/canada-line-endcar-exterior.lod1.glb",
+      "sha256": "49f9ce83161e76361aa5b40ececdac6b7ea1b37c98af015a5590004b6614631a",
+      "bytes": 164856,
+      "sourcePackage": "canada-line-stage2",
+      "sourcePath": "tools/assets/canada-line-stage2/exports/canada-line-endcar-exterior.lod1.glb",
+      "sourceRevision": "b18c6b591adce8f5114daab5e19e60090b80bc23",
+      "sourceManifestSha256": "7522ab7691beb92c1066f4684c86d1298a06f9f39cb1cd17a7d1fd33cb6f36aa"
+    },
+    {
+      "path": "metro/manifest.json",
+      "sha256": "6cdea396c16ef19e68b3718a02196f072fa89545237ff0c8785450c07afd7512",
+      "bytes": 23928,
+      "sourcePackage": "skytrain-cabin-display",
+      "sourcePath": "canonical projection of tools/assets/skytrain-mark-v-interior/manifest.json + tools/assets/canada-line-stage2/manifest.json",
+      "sourceRevision": "28a23c86821a7502faa7425da6e430d625d97ac1",
+      "sourceManifestSha256": "2e08614c464c96ea9316f65d1f2bbcba4455ce5f08975bb14a37e637e1f80462",
+      "sourceManifests": [
+        {
+          "packageId": "skytrain-mark-v-interior",
+          "revision": "28a23c86821a7502faa7425da6e430d625d97ac1",
+          "manifestSha256": "cce42ba145cd6b8385eb2e3aeb8cd6fe39fa8b7a56cf0a53c096b478d42c9cb5"
+        },
+        {
+          "packageId": "canada-line-stage2",
+          "revision": "b18c6b591adce8f5114daab5e19e60090b80bc23",
+          "manifestSha256": "7522ab7691beb92c1066f4684c86d1298a06f9f39cb1cd17a7d1fd33cb6f36aa"
+        }
+      ]
     }
   ]
 }
