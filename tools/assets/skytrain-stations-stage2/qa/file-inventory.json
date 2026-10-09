@@ -1,0 +1,386 @@
+{
+  "status": "sealed",
+  "excluded": "ignored publisher reference bytes, caches, duplicate reexports and .blend1 backups",
+  "files": [
+    {
+      "file": ".gitignore",
+      "bytes": 42,
+      "sha256": "7d2003dadaf82e83f15b7829522141960112cd24a39a18149282c9e263711009"
+    },
+    {
+      "file": "README.md",
+      "bytes": 9213,
+      "sha256": "6e0071502711bfd0fd9efd087543df59396d140f084b979efaedc9aece7ab050"
+    },
+    {
+      "file": "audit_sweeps.py",
+      "bytes": 5356,
+      "sha256": "01591690594fce462250c3c13b9a693a7d2a1846af55c055bf5258d7cc31d04a"
+    },
+    {
+      "file": "audit_thresholds.py",
+      "bytes": 6080,
+      "sha256": "07ed6111e4a6051b337516146f5568577e4675cddfd257484595bebecbebd2f4"
+    },
+    {
+      "file": "build.py",
+      "bytes": 3504,
+      "sha256": "d06cf749370bdadda1fd4f117b3eb04a87ddf5af841b684bfa04198908e2fd21"
+    },
+    {
+      "file": "export.py",
+      "bytes": 1740,
+      "sha256": "59f9a17cbc312a0cd646f87c819c31268207b65c89a7091b847632266ab92236"
+    },
+    {
+      "file": "exports/burrard.glb",
+      "bytes": 287932,
+      "sha256": "e3f9fe3e1be45f861254c53a5c3276ee092e39f315193fdfd9416d6c7e224264"
+    },
+    {
+      "file": "exports/granville.glb",
+      "bytes": 428392,
+      "sha256": "1da39eb31cf64ab22144d3bfe96ea853616f4ae47d09b2e9c1ba5352353637b7"
+    },
+    {
+      "file": "exports/main-street-science-world.glb",
+      "bytes": 205536,
+      "sha256": "fff6328a70e15612e9344687c1f72f7a2b40009833e0e82a610181814adc29f8"
+    },
+    {
+      "file": "exports/stadium-chinatown.glb",
+      "bytes": 156876,
+      "sha256": "4ac05ec2618bef2d27745699eb85594fa859721b83f6f50547c74dc9e2664638"
+    },
+    {
+      "file": "exports/threshold-bridge-canada.glb",
+      "bytes": 1840,
+      "sha256": "8ff5cbe5586ae6e6496fc39e50ffe3104653999cfd4305d06e292533a307ba4e"
+    },
+    {
+      "file": "exports/threshold-bridge-expo.glb",
+      "bytes": 1836,
+      "sha256": "855b9e349b6ef01bbebd723f1edea3bbb8e5d79b60b3a2c5d794d38f39b1ba6c"
+    },
+    {
+      "file": "exports/vancouver-city-centre.glb",
+      "bytes": 134684,
+      "sha256": "e7aa69e97a495fac4fbe0c243aca0575beabc62ea568615153e992b355ab834a"
+    },
+    {
+      "file": "exports/waterfront.glb",
+      "bytes": 300208,
+      "sha256": "d2833eea065e684f989e7242cdb8b4d339b530f63e4bd7507ae7f0df6042a881"
+    },
+    {
+      "file": "exports/yaletown-roundhouse.glb",
+      "bytes": 171752,
+      "sha256": "3710b640dcfd9512ccdeead84a4392392f559dc7a16219af0e1c61338e62c98e"
+    },
+    {
+      "file": "finalize.py",
+      "bytes": 6340,
+      "sha256": "5cc951fc3ebfd802edef6fc75fa3de5afae366f37ca82e8991a04f1f37633e8c"
+    },
+    {
+      "file": "layout.py",
+      "bytes": 25742,
+      "sha256": "688a3737008f0b651640dd78c80ab260c45725c781a7d811093439f14c8da8e5"
+    },
+    {
+      "file": "manifest.json",
+      "bytes": 115496,
+      "sha256": "dc40605110fa3be0bba46f06a3d67e6168f693d6b02238f4dcb056cbaee330c1"
+    },
+    {
+      "file": "qa/bridge-instancing.json",
+      "bytes": 1189,
+      "sha256": "b3b534f57677a5e6533dd25bd5ca51151565382fb7e5873d57756cb7dcb61109"
+    },
+    {
+      "file": "qa/build.log",
+      "bytes": 1269,
+      "sha256": "e10bc7371bba38209f2a69aeb2d0ad15e0a06c22f88004dbff1bd49dce6e5d08"
+    },
+    {
+      "file": "qa/common-validation.json",
+      "bytes": 35491,
+      "sha256": "3be5765a1e93ae6e4f155adc4793cd0a87d62b2516813371bd856e0fdb00eca8"
+    },
+    {
+      "file": "qa/common-validation.log",
+      "bytes": 35491,
+      "sha256": "3be5765a1e93ae6e4f155adc4793cd0a87d62b2516813371bd856e0fdb00eca8"
+    },
+    {
+      "file": "qa/export-batching.json",
+      "bytes": 1668,
+      "sha256": "e41537b6eb18c8f427f4dcbaf31cdaf2f6b12e4f4da2c099b9e7b942f45fdf48"
+    },
+    {
+      "file": "qa/export.log",
+      "bytes": 24839,
+      "sha256": "df5dc2c12a1de7ddd3069070806f7917f8775b5813bf879b05091badb2bb45c4"
+    },
+    {
+      "file": "qa/handoff.json",
+      "bytes": 2332,
+      "sha256": "3d4babc7cb55de789c477207602d29475cea833834775b027ab261a71d2dc09a"
+    },
+    {
+      "file": "qa/measurements.json",
+      "bytes": 35337,
+      "sha256": "1ea3e5dd839e1dbdbe5940c8c284ebdb813bcf2671a168638df1fc0ca2353b03"
+    },
+    {
+      "file": "qa/previews/burrard-cutaway.png",
+      "bytes": 820482,
+      "sha256": "5a1fcf632a9d1fa0aaedbae05c8c96e51110f313c59b2901347bdda3e892739f"
+    },
+    {
+      "file": "qa/previews/burrard-platform.png",
+      "bytes": 757406,
+      "sha256": "97c929f036433aba9686530d972f8bb64035ab6c00e6ec72fe8bff0779b3b014"
+    },
+    {
+      "file": "qa/previews/canada-bridge-deployed.png",
+      "bytes": 898663,
+      "sha256": "9242a6be456a5875117d101c29ba896bfee5509bedb2cc51dfe46c3c41af79e4"
+    },
+    {
+      "file": "qa/previews/canada-bridge-stored.png",
+      "bytes": 906047,
+      "sha256": "f0470af950fec1b72cef6755b892453ada43fc4ad50d47cfec89a78d8fe5355a"
+    },
+    {
+      "file": "qa/previews/contact-sheet-cutaway.png",
+      "bytes": 576955,
+      "sha256": "bb360021c44691b9330a2c973a8a56b0771a9cc69a27a4afa270f4b11bbd2154"
+    },
+    {
+      "file": "qa/previews/contact-sheet-platform.png",
+      "bytes": 920604,
+      "sha256": "b53e169d994e7b2255644618ffa86c00bd8c6e66c4bc2bc4b39a345d217c8977"
+    },
+    {
+      "file": "qa/previews/expo-bridge-deployed.png",
+      "bytes": 968278,
+      "sha256": "8c0638e082fe5c67ef8fdea0afe4883709937f4fe920652a25db89d384254db2"
+    },
+    {
+      "file": "qa/previews/expo-bridge-stored.png",
+      "bytes": 970449,
+      "sha256": "0f83e29e39ac95de4223013026792e647c093dd3ea58d1e2a1acb34e3922951a"
+    },
+    {
+      "file": "qa/previews/granville-cutaway.png",
+      "bytes": 810422,
+      "sha256": "9e866adc647dd6974be86737c6a9318e66c390740eb7a2c9b9a17023add00613"
+    },
+    {
+      "file": "qa/previews/granville-platform.png",
+      "bytes": 722283,
+      "sha256": "ada770fb3c36cfe26ed228fff6a4a4c4d4f1386fccd1727519d7dcc5b1adc16a"
+    },
+    {
+      "file": "qa/previews/index.json",
+      "bytes": 7654,
+      "sha256": "272011802050a9a061ccc5563a3f63f74505ae145fa7b8b8b155ee10f75c6c65"
+    },
+    {
+      "file": "qa/previews/main-street-science-world-cutaway.png",
+      "bytes": 808479,
+      "sha256": "d75a2453d6e616dd1fb106871c7e88746399e27dc05681e56865038814228d89"
+    },
+    {
+      "file": "qa/previews/main-street-science-world-platform.png",
+      "bytes": 698240,
+      "sha256": "212a9814e8c2c141852d1ee51cd2d3e3482dd465b971711b7724f9349719f82e"
+    },
+    {
+      "file": "qa/previews/stadium-chinatown-cutaway.png",
+      "bytes": 812030,
+      "sha256": "ead45b0561493dabbc5f7cfb622159afb6bd659f3bb62bd85e96b870c2c806fe"
+    },
+    {
+      "file": "qa/previews/stadium-chinatown-platform.png",
+      "bytes": 699543,
+      "sha256": "6d3fb1ca7f0d0b2ef74105ef125a9ef61e738224479fe65a7fccfe76ea3affc0"
+    },
+    {
+      "file": "qa/previews/threshold-index.json",
+      "bytes": 4041,
+      "sha256": "add50b138c49d1d35768f2d97b43ac8a180f0304e73a12f85b53fe9b282bb9ac"
+    },
+    {
+      "file": "qa/previews/vancouver-city-centre-cutaway.png",
+      "bytes": 822891,
+      "sha256": "7881ebda3859297b170d5212b9b7f6764c067cc459ae7399fefecd23e3e28a58"
+    },
+    {
+      "file": "qa/previews/vancouver-city-centre-platform.png",
+      "bytes": 699337,
+      "sha256": "5148dd7f66172e39e0a35377159c626b95549109cac286d38c83f8123a98aad7"
+    },
+    {
+      "file": "qa/previews/waterfront-cutaway.png",
+      "bytes": 864649,
+      "sha256": "f5b97924dddd297790e1f963643ee0dc37a78a7c31f6422691fbb7b5dbde9b18"
+    },
+    {
+      "file": "qa/previews/waterfront-platform.png",
+      "bytes": 820290,
+      "sha256": "368ab0303574c170a36d0dd16dd7112730df06421acdea6cff29283801543321"
+    },
+    {
+      "file": "qa/previews/yaletown-roundhouse-cutaway.png",
+      "bytes": 813029,
+      "sha256": "93edda9f4ade70bcdaa0339f6a204ac0016a097d1a50016ca311b6c715380a0b"
+    },
+    {
+      "file": "qa/previews/yaletown-roundhouse-platform.png",
+      "bytes": 704170,
+      "sha256": "d5d9de1572cf81f4a443ad9058cb9052ea9147ba0bad1840f0efddbf2b09562f"
+    },
+    {
+      "file": "qa/rebuild-canada.log",
+      "bytes": 441,
+      "sha256": "2b677b7a0dc0fec6dcb2dfd6d1604b5bf45d2da27880754243108849686790e0"
+    },
+    {
+      "file": "qa/reexport.log",
+      "bytes": 24840,
+      "sha256": "6ed46d060365036288e3fe1e7946213ec72cf61105cf17ad4d91401891067bf3"
+    },
+    {
+      "file": "qa/render-thresholds.log",
+      "bytes": 59673,
+      "sha256": "55661240287050f0ecde60b8b7d30a9944b3684ec4108f6bff0d009ee6bb9744"
+    },
+    {
+      "file": "qa/render.log",
+      "bytes": 160254,
+      "sha256": "b5580c3ef9f027f6d10ba23c4e2c5b78550bbc3c1b667713d3b50e1d8df116b3"
+    },
+    {
+      "file": "qa/source-audit.json",
+      "bytes": 8734,
+      "sha256": "bc165f1d4a13ceb47cd27b3d403bf84b42e59f3f068db7851cfa3350a005281d"
+    },
+    {
+      "file": "qa/source-roundtrip.json",
+      "bytes": 3239,
+      "sha256": "9dc3182a024b21be58d9e21f5fd335edb302d9056eb872f61edda031eb8ff528"
+    },
+    {
+      "file": "qa/tests.log",
+      "bytes": 1568,
+      "sha256": "dea5ea5b883c841945120812da80bcd682096061952e784139177cf874792ea8"
+    },
+    {
+      "file": "qa/threshold-sweep-validation.json",
+      "bytes": 66207,
+      "sha256": "2837625a3ccd363edcdad7a215483573e4c48f5ea57cb1be066a663d360bc4d0"
+    },
+    {
+      "file": "qa/threshold-tests.log",
+      "bytes": 34,
+      "sha256": "f6d44bf234094f81e8d3a76968c6a3de9897ad737f25d7f2b81fbc7182106158"
+    },
+    {
+      "file": "qa/threshold-validation.json",
+      "bytes": 59155,
+      "sha256": "41a9507519dd930a16112653cc4e9e1c525ef35ec7f34175b19ee4ff6d254d48"
+    },
+    {
+      "file": "qa/validation.json",
+      "bytes": 1568,
+      "sha256": "dea5ea5b883c841945120812da80bcd682096061952e784139177cf874792ea8"
+    },
+    {
+      "file": "qa/visual-review.json",
+      "bytes": 6496,
+      "sha256": "b8f27a9eccec19c3e45a01309932b054303a44e79f9986d41a5d2e3c835db3e4"
+    },
+    {
+      "file": "references/.gitignore",
+      "bytes": 110,
+      "sha256": "ab0e64eac3f79c49f3ac3fa360b3f63831bec31c12be453025b9ea63a4b3aa88"
+    },
+    {
+      "file": "references/city-dataset-metadata.json",
+      "bytes": 4536,
+      "sha256": "24e9f588b7f4d526e2ffa2d80178ea0778fd9aede25adce2f4a5f13a7d72fa7c"
+    },
+    {
+      "file": "references/city-rapid-transit-stations.json",
+      "bytes": 6036,
+      "sha256": "28b15d51fe2b34e6b21efb2510a296c158c71c38ec0c203bb0fd5918dcbe2b71"
+    },
+    {
+      "file": "render_previews.py",
+      "bytes": 4085,
+      "sha256": "6a55c7ae28b27cf16289c6b2563bf4d3ca30a9ad0d081c1b719e4b0a39f8466d"
+    },
+    {
+      "file": "render_thresholds.py",
+      "bytes": 4082,
+      "sha256": "af292d1310b1b5f34e2d3efd8c5019eee1df90eec216cf5e5bdaab354e62053c"
+    },
+    {
+      "file": "source/burrard.blend",
+      "bytes": 166706,
+      "sha256": "3f257ae2a98ad13aa152bcaf0618f107da96bae4345e28d4ff4885f906b5718b"
+    },
+    {
+      "file": "source/granville.blend",
+      "bytes": 198769,
+      "sha256": "eba0620898ee08f658589991779f0ef20f2a97ec267e6ca37be306407e7e763f"
+    },
+    {
+      "file": "source/main-street-science-world.blend",
+      "bytes": 145865,
+      "sha256": "85f0d32688990e9dec1e7fcc9c7729a3b515e28b97f7a78b9426dc85c33d4d74"
+    },
+    {
+      "file": "source/stadium-chinatown.blend",
+      "bytes": 134033,
+      "sha256": "b4ceab130cb65c2ebda58d3e2717a9bbc1c1b395a3eb8e861116fea13ac54e7b"
+    },
+    {
+      "file": "source/threshold-bridge-canada.blend",
+      "bytes": 86164,
+      "sha256": "7c9ae04fde444ec2e175476546b96325106d8205cb107ef5851fff1d04d45836"
+    },
+    {
+      "file": "source/threshold-bridge-expo.blend",
+      "bytes": 85688,
+      "sha256": "4a8b9587bfbae5a6c74342f016bc2546cf9643c7a90a6c32b9b5c4be2b466345"
+    },
+    {
+      "file": "source/vancouver-city-centre.blend",
+      "bytes": 127289,
+      "sha256": "e3665f756f08511ec845ef75e46de6ccbdd1bcc73a8c06405cce04fe9cfc65e3"
+    },
+    {
+      "file": "source/waterfront.blend",
+      "bytes": 169988,
+      "sha256": "de1c36f5680de86d19b359f92c8b86fe8043d15277e5adbaaa27b32b2f64a67b"
+    },
+    {
+      "file": "source/yaletown-roundhouse.blend",
+      "bytes": 134869,
+      "sha256": "cd0270d672c7eba287d101d6f69ada75bd38f123fb30c583a57ce2aed7ec281d"
+    },
+    {
+      "file": "station-layout.json",
+      "bytes": 2783624,
+      "sha256": "9a99a1b75e2a7ad6d3a72d7bff253e2c92a7ffa984aa4a9c8481adbbc47ac962"
+    },
+    {
+      "file": "validate.py",
+      "bytes": 8298,
+      "sha256": "01d6163e52f5e76b9902ebe5b24c700e71ec607338da36585ef6667f1263244a"
+    }
+  ]
+}

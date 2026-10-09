@@ -1,0 +1,4026 @@
+{
+  "schemaVersion": 1,
+  "packageId": "skytrain-stations-stage2",
+  "version": "1.0.0",
+  "baseRevision": "9efce79601deac6a0648cf8e158f3935cbb46f51",
+  "status": "offline_representative_supplement",
+  "units": "m",
+  "coordinateSystem": {
+    "runtime": "glTF Y-up +Z representative track direction",
+    "authoring": "Blender Z-up -Y track direction",
+    "conversion": "(x,y,z) Blender -> (x,z,-y) glTF exactly once"
+  },
+  "provenance": {
+    "project": "Vancouver Living Atlas by YiTaChen",
+    "source": "https://github.com/YiTaChen/vancouver-living-atlas",
+    "license": "Vancouver Living Atlas Noncommercial Research and Attribution 1.0; repository LICENSE applies",
+    "authoring": "Original procedural meshes; no copied photo pixels, logos, artwork or third-party meshes",
+    "sourceAudit": "qa/source-audit.json",
+    "notSurveyed": true
+  },
+  "reexportCommand": "blender -b -t 2 --python tools/assets/skytrain-stations-stage2/export.py",
+  "validationCommand": "python tools/assets/skytrain-stations-stage2/validate.py",
+  "layoutRef": "station-layout.json",
+  "textures": [],
+  "assets": [
+    {
+      "id": "waterfront",
+      "taskId": "D01",
+      "variant": "two-line-independent-perpendicular-platforms",
+      "kind": "station-layout",
+      "source": "source/waterfront.blend",
+      "sourceSha256": "de1c36f5680de86d19b359f92c8b86fe8043d15277e5adbaaa27b32b2f64a67b",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/waterfront.glb",
+          "sha256": "d2833eea065e684f989e7242cdb8b4d339b530f63e4bd7507ae7f0df6042a881",
+          "source": "source/waterfront.blend",
+          "sourceSha256": "de1c36f5680de86d19b359f92c8b86fe8043d15277e5adbaaa27b32b2f64a67b",
+          "sourceBytes": 169988,
+          "triangles": 3840,
+          "vertices": 7680,
+          "primitives": 75,
+          "bytes": 300208,
+          "boundsM": {
+            "min": [
+              -32.000000953674316,
+              -14.569999694824219,
+              -61.59999918937683
+            ],
+            "max": [
+              60.0,
+              3.600000001490116,
+              43.0
+            ],
+            "size": [
+              92.00000095367432,
+              18.169999696314335,
+              104.59999918937683
+            ]
+          },
+          "geometryBytes": 300208,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -32.000000953674316,
+          -14.569999694824219,
+          -61.59999918937683
+        ],
+        "max": [
+          60.0,
+          3.600000001490116,
+          43.0
+        ],
+        "size": [
+          92.00000095367432,
+          18.169999696314335,
+          104.59999918937683
+        ]
+      },
+      "expectedDimensionsM": [
+        92.00000095367432,
+        18.169999696314335,
+        104.59999918937683
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Bounds measured from actual GLB, not independent survey targets. Platform lengths 74 m Expo / 44 m Canada; all other dimensions illustrative.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "local street datum; never recenter by bounds"
+      },
+      "attachmentDatum": {
+        "type": "station-local-street",
+        "planeY": 0,
+        "worldYUnresolved": true
+      },
+      "frontAxis": "+Z representative track axis",
+      "materialBindings": [
+        {
+          "material": "steel",
+          "semanticRole": "steel",
+          "sharedSurfaceId": "skytrain-stage2-steel",
+          "primitiveSelection": {
+            "materialName": "steel"
+          },
+          "maps": []
+        },
+        {
+          "material": "glass",
+          "semanticRole": "glass",
+          "sharedSurfaceId": "skytrain-stage2-glass",
+          "primitiveSelection": {
+            "materialName": "glass"
+          },
+          "maps": []
+        },
+        {
+          "material": "canada",
+          "semanticRole": "canada",
+          "sharedSurfaceId": "skytrain-stage2-canada",
+          "primitiveSelection": {
+            "materialName": "canada"
+          },
+          "maps": []
+        },
+        {
+          "material": "expo",
+          "semanticRole": "expo",
+          "sharedSurfaceId": "skytrain-stage2-expo",
+          "primitiveSelection": {
+            "materialName": "expo"
+          },
+          "maps": []
+        },
+        {
+          "material": "concrete",
+          "semanticRole": "concrete",
+          "sharedSurfaceId": "skytrain-stage2-concrete",
+          "primitiveSelection": {
+            "materialName": "concrete"
+          },
+          "maps": []
+        },
+        {
+          "material": "wood",
+          "semanticRole": "wood",
+          "sharedSurfaceId": "skytrain-stage2-wood",
+          "primitiveSelection": {
+            "materialName": "wood"
+          },
+          "maps": []
+        },
+        {
+          "material": "yellow",
+          "semanticRole": "yellow",
+          "sharedSurfaceId": "skytrain-stage2-yellow",
+          "primitiveSelection": {
+            "materialName": "yellow"
+          },
+          "maps": []
+        },
+        {
+          "material": "floor",
+          "semanticRole": "floor",
+          "sharedSurfaceId": "skytrain-stage2-floor",
+          "primitiveSelection": {
+            "materialName": "floor"
+          },
+          "maps": []
+        }
+      ],
+      "textureMode": "shared-role-placeholder",
+      "textureCost": {
+        "geometryBytes": 300208,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 300208,
+        "uniqueTexelBytesWithMips": 0
+      },
+      "lodPolicy": {
+        "singleNearDetailLOD": true,
+        "globalResident": false,
+        "distanceProposalM": 80,
+        "runtimeBudgetValidation": "not_run",
+        "sharedGeometry": "batched by role/material; individual walk surfaces retained",
+        "terrainCutoutRequired": true
+      },
+      "clearance": {
+        "stationLayoutRef": "station-layout.json",
+        "humanReferenceM": 1.81,
+        "platformRoofClearanceM": 3.55,
+        "certification": false
+      },
+      "collision": {
+        "type": "layout-surfaces-plus-oriented-obstacles-and-track-exclusion",
+        "layoutRef": "station-layout.json",
+        "dynamicElevatorAndBoarding": "not_implemented"
+      },
+      "anchors": [
+        {
+          "id": "waterfront-expo-westbound-stop",
+          "nodeId": "anchor-waterfront-expo-westbound-stop",
+          "frameId": "waterfront",
+          "pointM": [
+            -28.5,
+            -7.95,
+            0.0
+          ],
+          "kind": "vehicle-root-stop"
+        },
+        {
+          "id": "waterfront-expo-westbound-car1-door1",
+          "nodeId": "anchor-waterfront-expo-westbound-car1-door1",
+          "frameId": "waterfront",
+          "pointM": [
+            -27.0,
+            -7,
+            21.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-expo-westbound-car1-door2",
+          "nodeId": "anchor-waterfront-expo-westbound-car1-door2",
+          "frameId": "waterfront",
+          "pointM": [
+            -27.0,
+            -7,
+            26.85
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-expo-westbound-car1-door3",
+          "nodeId": "anchor-waterfront-expo-westbound-car1-door3",
+          "frameId": "waterfront",
+          "pointM": [
+            -27.0,
+            -7,
+            32.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-expo-westbound-car2-door1",
+          "nodeId": "anchor-waterfront-expo-westbound-car2-door1",
+          "frameId": "waterfront",
+          "pointM": [
+            -27.0,
+            -7,
+            3.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-expo-westbound-car2-door2",
+          "nodeId": "anchor-waterfront-expo-westbound-car2-door2",
+          "frameId": "waterfront",
+          "pointM": [
+            -27.0,
+            -7,
+            8.95
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-expo-westbound-car2-door3",
+          "nodeId": "anchor-waterfront-expo-westbound-car2-door3",
+          "frameId": "waterfront",
+          "pointM": [
+            -27.0,
+            -7,
+            14.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-expo-westbound-car3-door1",
+          "nodeId": "anchor-waterfront-expo-westbound-car3-door1",
+          "frameId": "waterfront",
+          "pointM": [
+            -27.0,
+            -7,
+            -14.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-expo-westbound-car3-door2",
+          "nodeId": "anchor-waterfront-expo-westbound-car3-door2",
+          "frameId": "waterfront",
+          "pointM": [
+            -27.0,
+            -7,
+            -8.95
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-expo-westbound-car3-door3",
+          "nodeId": "anchor-waterfront-expo-westbound-car3-door3",
+          "frameId": "waterfront",
+          "pointM": [
+            -27.0,
+            -7,
+            -3.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-expo-westbound-car4-door1",
+          "nodeId": "anchor-waterfront-expo-westbound-car4-door1",
+          "frameId": "waterfront",
+          "pointM": [
+            -27.0,
+            -7,
+            -32.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-expo-westbound-car4-door2",
+          "nodeId": "anchor-waterfront-expo-westbound-car4-door2",
+          "frameId": "waterfront",
+          "pointM": [
+            -27.0,
+            -7,
+            -26.85
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-expo-westbound-car4-door3",
+          "nodeId": "anchor-waterfront-expo-westbound-car4-door3",
+          "frameId": "waterfront",
+          "pointM": [
+            -27.0,
+            -7,
+            -21.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-expo-eastbound-stop",
+          "nodeId": "anchor-waterfront-expo-eastbound-stop",
+          "frameId": "waterfront",
+          "pointM": [
+            -19.5,
+            -7.95,
+            0.0
+          ],
+          "kind": "vehicle-root-stop"
+        },
+        {
+          "id": "waterfront-expo-eastbound-car1-door1",
+          "nodeId": "anchor-waterfront-expo-eastbound-car1-door1",
+          "frameId": "waterfront",
+          "pointM": [
+            -21.0,
+            -7,
+            21.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-expo-eastbound-car1-door2",
+          "nodeId": "anchor-waterfront-expo-eastbound-car1-door2",
+          "frameId": "waterfront",
+          "pointM": [
+            -21.0,
+            -7,
+            26.85
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-expo-eastbound-car1-door3",
+          "nodeId": "anchor-waterfront-expo-eastbound-car1-door3",
+          "frameId": "waterfront",
+          "pointM": [
+            -21.0,
+            -7,
+            32.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-expo-eastbound-car2-door1",
+          "nodeId": "anchor-waterfront-expo-eastbound-car2-door1",
+          "frameId": "waterfront",
+          "pointM": [
+            -21.0,
+            -7,
+            3.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-expo-eastbound-car2-door2",
+          "nodeId": "anchor-waterfront-expo-eastbound-car2-door2",
+          "frameId": "waterfront",
+          "pointM": [
+            -21.0,
+            -7,
+            8.95
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-expo-eastbound-car2-door3",
+          "nodeId": "anchor-waterfront-expo-eastbound-car2-door3",
+          "frameId": "waterfront",
+          "pointM": [
+            -21.0,
+            -7,
+            14.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-expo-eastbound-car3-door1",
+          "nodeId": "anchor-waterfront-expo-eastbound-car3-door1",
+          "frameId": "waterfront",
+          "pointM": [
+            -21.0,
+            -7,
+            -14.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-expo-eastbound-car3-door2",
+          "nodeId": "anchor-waterfront-expo-eastbound-car3-door2",
+          "frameId": "waterfront",
+          "pointM": [
+            -21.0,
+            -7,
+            -8.95
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-expo-eastbound-car3-door3",
+          "nodeId": "anchor-waterfront-expo-eastbound-car3-door3",
+          "frameId": "waterfront",
+          "pointM": [
+            -21.0,
+            -7,
+            -3.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-expo-eastbound-car4-door1",
+          "nodeId": "anchor-waterfront-expo-eastbound-car4-door1",
+          "frameId": "waterfront",
+          "pointM": [
+            -21.0,
+            -7,
+            -32.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-expo-eastbound-car4-door2",
+          "nodeId": "anchor-waterfront-expo-eastbound-car4-door2",
+          "frameId": "waterfront",
+          "pointM": [
+            -21.0,
+            -7,
+            -26.85
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-expo-eastbound-car4-door3",
+          "nodeId": "anchor-waterfront-expo-eastbound-car4-door3",
+          "frameId": "waterfront",
+          "pointM": [
+            -21.0,
+            -7,
+            -21.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-expo-entrance",
+          "nodeId": "anchor-waterfront-expo-entrance",
+          "frameId": "waterfront",
+          "pointM": [
+            -24.0,
+            0,
+            -58.8
+          ],
+          "kind": "entrance-exit"
+        },
+        {
+          "id": "waterfront-canada-northbound-stop",
+          "nodeId": "anchor-waterfront-canada-northbound-stop",
+          "frameId": "waterfront",
+          "pointM": [
+            32.0,
+            -14.1,
+            12.7
+          ],
+          "kind": "vehicle-root-stop"
+        },
+        {
+          "id": "waterfront-canada-northbound-car1-door1",
+          "nodeId": "anchor-waterfront-canada-northbound-car1-door1",
+          "frameId": "waterfront",
+          "pointM": [
+            36.1,
+            -13,
+            11.0
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-canada-northbound-car1-door2",
+          "nodeId": "anchor-waterfront-canada-northbound-car1-door2",
+          "frameId": "waterfront",
+          "pointM": [
+            42.5,
+            -13,
+            11.0
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-canada-northbound-car1-door3",
+          "nodeId": "anchor-waterfront-canada-northbound-car1-door3",
+          "frameId": "waterfront",
+          "pointM": [
+            48.9,
+            -13,
+            11.0
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-canada-northbound-car2-door1",
+          "nodeId": "anchor-waterfront-canada-northbound-car2-door1",
+          "frameId": "waterfront",
+          "pointM": [
+            27.9,
+            -13,
+            11.0
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-canada-northbound-car2-door2",
+          "nodeId": "anchor-waterfront-canada-northbound-car2-door2",
+          "frameId": "waterfront",
+          "pointM": [
+            21.5,
+            -13,
+            11.0
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-canada-northbound-car2-door3",
+          "nodeId": "anchor-waterfront-canada-northbound-car2-door3",
+          "frameId": "waterfront",
+          "pointM": [
+            15.1,
+            -13,
+            11.0
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-canada-southbound-stop",
+          "nodeId": "anchor-waterfront-canada-southbound-stop",
+          "frameId": "waterfront",
+          "pointM": [
+            32.0,
+            -14.1,
+            3.3
+          ],
+          "kind": "vehicle-root-stop"
+        },
+        {
+          "id": "waterfront-canada-southbound-car1-door1",
+          "nodeId": "anchor-waterfront-canada-southbound-car1-door1",
+          "frameId": "waterfront",
+          "pointM": [
+            36.1,
+            -13,
+            5.0
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-canada-southbound-car1-door2",
+          "nodeId": "anchor-waterfront-canada-southbound-car1-door2",
+          "frameId": "waterfront",
+          "pointM": [
+            42.5,
+            -13,
+            5.0
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-canada-southbound-car1-door3",
+          "nodeId": "anchor-waterfront-canada-southbound-car1-door3",
+          "frameId": "waterfront",
+          "pointM": [
+            48.9,
+            -13,
+            5.0
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-canada-southbound-car2-door1",
+          "nodeId": "anchor-waterfront-canada-southbound-car2-door1",
+          "frameId": "waterfront",
+          "pointM": [
+            27.9,
+            -13,
+            5.0
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-canada-southbound-car2-door2",
+          "nodeId": "anchor-waterfront-canada-southbound-car2-door2",
+          "frameId": "waterfront",
+          "pointM": [
+            21.5,
+            -13,
+            5.0
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-canada-southbound-car2-door3",
+          "nodeId": "anchor-waterfront-canada-southbound-car2-door3",
+          "frameId": "waterfront",
+          "pointM": [
+            15.1,
+            -13,
+            5.0
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "waterfront-canada-entrance",
+          "nodeId": "anchor-waterfront-canada-entrance",
+          "frameId": "waterfront",
+          "pointM": [
+            -29.2,
+            0,
+            8.0
+          ],
+          "kind": "entrance-exit"
+        }
+      ],
+      "placementCompatibility": {
+        "frameId": "waterfront",
+        "localToWorld": {
+          "frameId": "waterfront",
+          "parentFrameId": "atlas-world",
+          "translationM": [
+            1180.808563,
+            0,
+            -8.402926
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            -0.4617486132350339,
+            0,
+            0.8870108331782217
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "horizontalProjection": "lib/city/geo.ts ORIGIN [-123.128,49.286], MX=111320*cos(49.286deg), world +Z south",
+          "headingBasis": "representative map-aligned heading, not surveyed track tangent",
+          "verticalDatum": "local street=0; world Y=0 placeholder MUST be replaced after terrain/track survey",
+          "worldPlacementReady": false
+        },
+        "sourceGeographicAnchor": {
+          "provider": "City of Vancouver rapid-transit-stations",
+          "coordinatesLonLat": [
+            -123.11173815504947,
+            49.286075484422376
+          ],
+          "allMatchingCityPointsLonLat": [
+            [
+              -123.11173815504947,
+              49.286075484422376
+            ],
+            [
+              -123.1133392689008,
+              49.28566576739238
+            ]
+          ],
+          "gtfsParentLonLat": [
+            -123.111773,
+            49.285687
+          ],
+          "meaning": "station selection/initial anchor only, not a surveyed entrance/platform centre",
+          "cityPointMinusGtfsDistanceM": 43.32
+        },
+        "ready": false
+      },
+      "intendedConsumer": "D06 integration agent; offline geometry and interface validation only",
+      "offlineChecks": {
+        "commonGLBMeasured": true,
+        "editableSourceExists": true,
+        "sourceMapPixelsInspected": true,
+        "topology": "qa/validation.json",
+        "actualGlbCpuPreview": "qa/previews/index.json"
+      },
+      "runtimeChecks": {
+        "worldPlacement": "not_run",
+        "terrainAttachment": "not_run",
+        "walkAndElevatorRuntime": "not_run",
+        "doorBoardingAndMovingCollision": "not_run",
+        "webglDrawCallsAndLifecycle": "not_run",
+        "readyForBoarding": false
+      }
+    },
+    {
+      "id": "burrard",
+      "taskId": "D01",
+      "variant": "stacked-underground",
+      "kind": "station-layout",
+      "source": "source/burrard.blend",
+      "sourceSha256": "3f257ae2a98ad13aa152bcaf0618f107da96bae4345e28d4ff4885f906b5718b",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/burrard.glb",
+          "sha256": "e3f9fe3e1be45f861254c53a5c3276ee092e39f315193fdfd9416d6c7e224264",
+          "source": "source/burrard.blend",
+          "sourceSha256": "3f257ae2a98ad13aa152bcaf0618f107da96bae4345e28d4ff4885f906b5718b",
+          "sourceBytes": 166706,
+          "triangles": 3636,
+          "vertices": 7272,
+          "primitives": 66,
+          "bytes": 287932,
+          "boundsM": {
+            "min": [
+              -5.75,
+              -16.41999912261963,
+              -68.39999842643738
+            ],
+            "max": [
+              5.75,
+              3.600000001490116,
+              82.80001068115234
+            ],
+            "size": [
+              11.5,
+              20.019999124109745,
+              151.20000910758972
+            ]
+          },
+          "geometryBytes": 287932,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -5.75,
+          -16.41999912261963,
+          -68.39999842643738
+        ],
+        "max": [
+          5.75,
+          3.600000001490116,
+          82.80001068115234
+        ],
+        "size": [
+          11.5,
+          20.019999124109745,
+          151.20000910758972
+        ]
+      },
+      "expectedDimensionsM": [
+        11.5,
+        20.019999124109745,
+        151.20000910758972
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Bounds measured from actual GLB, not independent survey targets. Platform lengths 74 m Expo / 44 m Canada; all other dimensions illustrative.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "local street datum; never recenter by bounds"
+      },
+      "attachmentDatum": {
+        "type": "station-local-street",
+        "planeY": 0,
+        "worldYUnresolved": true
+      },
+      "frontAxis": "+Z representative track axis",
+      "materialBindings": [
+        {
+          "material": "steel",
+          "semanticRole": "steel",
+          "sharedSurfaceId": "skytrain-stage2-steel",
+          "primitiveSelection": {
+            "materialName": "steel"
+          },
+          "maps": []
+        },
+        {
+          "material": "glass",
+          "semanticRole": "glass",
+          "sharedSurfaceId": "skytrain-stage2-glass",
+          "primitiveSelection": {
+            "materialName": "glass"
+          },
+          "maps": []
+        },
+        {
+          "material": "expo",
+          "semanticRole": "expo",
+          "sharedSurfaceId": "skytrain-stage2-expo",
+          "primitiveSelection": {
+            "materialName": "expo"
+          },
+          "maps": []
+        },
+        {
+          "material": "concrete",
+          "semanticRole": "concrete",
+          "sharedSurfaceId": "skytrain-stage2-concrete",
+          "primitiveSelection": {
+            "materialName": "concrete"
+          },
+          "maps": []
+        },
+        {
+          "material": "wood",
+          "semanticRole": "wood",
+          "sharedSurfaceId": "skytrain-stage2-wood",
+          "primitiveSelection": {
+            "materialName": "wood"
+          },
+          "maps": []
+        },
+        {
+          "material": "yellow",
+          "semanticRole": "yellow",
+          "sharedSurfaceId": "skytrain-stage2-yellow",
+          "primitiveSelection": {
+            "materialName": "yellow"
+          },
+          "maps": []
+        },
+        {
+          "material": "wall",
+          "semanticRole": "wall",
+          "sharedSurfaceId": "skytrain-stage2-wall",
+          "primitiveSelection": {
+            "materialName": "wall"
+          },
+          "maps": []
+        },
+        {
+          "material": "floor",
+          "semanticRole": "floor",
+          "sharedSurfaceId": "skytrain-stage2-floor",
+          "primitiveSelection": {
+            "materialName": "floor"
+          },
+          "maps": []
+        }
+      ],
+      "textureMode": "shared-role-placeholder",
+      "textureCost": {
+        "geometryBytes": 287932,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 287932,
+        "uniqueTexelBytesWithMips": 0
+      },
+      "lodPolicy": {
+        "singleNearDetailLOD": true,
+        "globalResident": false,
+        "distanceProposalM": 80,
+        "runtimeBudgetValidation": "not_run",
+        "sharedGeometry": "batched by role/material; individual walk surfaces retained",
+        "terrainCutoutRequired": true
+      },
+      "clearance": {
+        "stationLayoutRef": "station-layout.json",
+        "humanReferenceM": 1.81,
+        "platformRoofClearanceM": 3.55,
+        "certification": false
+      },
+      "collision": {
+        "type": "layout-surfaces-plus-oriented-obstacles-and-track-exclusion",
+        "layoutRef": "station-layout.json",
+        "dynamicElevatorAndBoarding": "not_implemented"
+      },
+      "anchors": [
+        {
+          "id": "burrard-upper-westbound-stop",
+          "nodeId": "anchor-burrard-upper-westbound-stop",
+          "frameId": "burrard",
+          "pointM": [
+            3.75,
+            -9.95,
+            0.0
+          ],
+          "kind": "vehicle-root-stop"
+        },
+        {
+          "id": "burrard-upper-westbound-car1-door1",
+          "nodeId": "anchor-burrard-upper-westbound-car1-door1",
+          "frameId": "burrard",
+          "pointM": [
+            2.25,
+            -9,
+            21.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "burrard-upper-westbound-car1-door2",
+          "nodeId": "anchor-burrard-upper-westbound-car1-door2",
+          "frameId": "burrard",
+          "pointM": [
+            2.25,
+            -9,
+            26.85
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "burrard-upper-westbound-car1-door3",
+          "nodeId": "anchor-burrard-upper-westbound-car1-door3",
+          "frameId": "burrard",
+          "pointM": [
+            2.25,
+            -9,
+            32.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "burrard-upper-westbound-car2-door1",
+          "nodeId": "anchor-burrard-upper-westbound-car2-door1",
+          "frameId": "burrard",
+          "pointM": [
+            2.25,
+            -9,
+            3.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "burrard-upper-westbound-car2-door2",
+          "nodeId": "anchor-burrard-upper-westbound-car2-door2",
+          "frameId": "burrard",
+          "pointM": [
+            2.25,
+            -9,
+            8.95
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "burrard-upper-westbound-car2-door3",
+          "nodeId": "anchor-burrard-upper-westbound-car2-door3",
+          "frameId": "burrard",
+          "pointM": [
+            2.25,
+            -9,
+            14.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "burrard-upper-westbound-car3-door1",
+          "nodeId": "anchor-burrard-upper-westbound-car3-door1",
+          "frameId": "burrard",
+          "pointM": [
+            2.25,
+            -9,
+            -14.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "burrard-upper-westbound-car3-door2",
+          "nodeId": "anchor-burrard-upper-westbound-car3-door2",
+          "frameId": "burrard",
+          "pointM": [
+            2.25,
+            -9,
+            -8.95
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "burrard-upper-westbound-car3-door3",
+          "nodeId": "anchor-burrard-upper-westbound-car3-door3",
+          "frameId": "burrard",
+          "pointM": [
+            2.25,
+            -9,
+            -3.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "burrard-upper-westbound-car4-door1",
+          "nodeId": "anchor-burrard-upper-westbound-car4-door1",
+          "frameId": "burrard",
+          "pointM": [
+            2.25,
+            -9,
+            -32.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "burrard-upper-westbound-car4-door2",
+          "nodeId": "anchor-burrard-upper-westbound-car4-door2",
+          "frameId": "burrard",
+          "pointM": [
+            2.25,
+            -9,
+            -26.85
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "burrard-upper-westbound-car4-door3",
+          "nodeId": "anchor-burrard-upper-westbound-car4-door3",
+          "frameId": "burrard",
+          "pointM": [
+            2.25,
+            -9,
+            -21.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "burrard-upper-entrance",
+          "nodeId": "anchor-burrard-upper-entrance",
+          "frameId": "burrard",
+          "pointM": [
+            0.0,
+            0,
+            -65.6
+          ],
+          "kind": "entrance-exit"
+        },
+        {
+          "id": "burrard-lower-eastbound-stop",
+          "nodeId": "anchor-burrard-lower-eastbound-stop",
+          "frameId": "burrard",
+          "pointM": [
+            3.75,
+            -15.95,
+            0.0
+          ],
+          "kind": "vehicle-root-stop"
+        },
+        {
+          "id": "burrard-lower-eastbound-car1-door1",
+          "nodeId": "anchor-burrard-lower-eastbound-car1-door1",
+          "frameId": "burrard",
+          "pointM": [
+            2.25,
+            -15,
+            21.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "burrard-lower-eastbound-car1-door2",
+          "nodeId": "anchor-burrard-lower-eastbound-car1-door2",
+          "frameId": "burrard",
+          "pointM": [
+            2.25,
+            -15,
+            26.85
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "burrard-lower-eastbound-car1-door3",
+          "nodeId": "anchor-burrard-lower-eastbound-car1-door3",
+          "frameId": "burrard",
+          "pointM": [
+            2.25,
+            -15,
+            32.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "burrard-lower-eastbound-car2-door1",
+          "nodeId": "anchor-burrard-lower-eastbound-car2-door1",
+          "frameId": "burrard",
+          "pointM": [
+            2.25,
+            -15,
+            3.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "burrard-lower-eastbound-car2-door2",
+          "nodeId": "anchor-burrard-lower-eastbound-car2-door2",
+          "frameId": "burrard",
+          "pointM": [
+            2.25,
+            -15,
+            8.95
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "burrard-lower-eastbound-car2-door3",
+          "nodeId": "anchor-burrard-lower-eastbound-car2-door3",
+          "frameId": "burrard",
+          "pointM": [
+            2.25,
+            -15,
+            14.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "burrard-lower-eastbound-car3-door1",
+          "nodeId": "anchor-burrard-lower-eastbound-car3-door1",
+          "frameId": "burrard",
+          "pointM": [
+            2.25,
+            -15,
+            -14.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "burrard-lower-eastbound-car3-door2",
+          "nodeId": "anchor-burrard-lower-eastbound-car3-door2",
+          "frameId": "burrard",
+          "pointM": [
+            2.25,
+            -15,
+            -8.95
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "burrard-lower-eastbound-car3-door3",
+          "nodeId": "anchor-burrard-lower-eastbound-car3-door3",
+          "frameId": "burrard",
+          "pointM": [
+            2.25,
+            -15,
+            -3.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "burrard-lower-eastbound-car4-door1",
+          "nodeId": "anchor-burrard-lower-eastbound-car4-door1",
+          "frameId": "burrard",
+          "pointM": [
+            2.25,
+            -15,
+            -32.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "burrard-lower-eastbound-car4-door2",
+          "nodeId": "anchor-burrard-lower-eastbound-car4-door2",
+          "frameId": "burrard",
+          "pointM": [
+            2.25,
+            -15,
+            -26.85
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "burrard-lower-eastbound-car4-door3",
+          "nodeId": "anchor-burrard-lower-eastbound-car4-door3",
+          "frameId": "burrard",
+          "pointM": [
+            2.25,
+            -15,
+            -21.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "burrard-lower-entrance",
+          "nodeId": "anchor-burrard-lower-entrance",
+          "frameId": "burrard",
+          "pointM": [
+            0.0,
+            0,
+            80.0
+          ],
+          "kind": "entrance-exit"
+        }
+      ],
+      "placementCompatibility": {
+        "frameId": "burrard",
+        "localToWorld": {
+          "frameId": "burrard",
+          "parentFrameId": "atlas-world",
+          "translationM": [
+            582.906423,
+            0,
+            15.568194
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            -0.9238795325112867,
+            0,
+            0.38268343236508984
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "horizontalProjection": "lib/city/geo.ts ORIGIN [-123.128,49.286], MX=111320*cos(49.286deg), world +Z south",
+          "headingBasis": "representative map-aligned heading, not surveyed track tangent",
+          "verticalDatum": "local street=0; world Y=0 placeholder MUST be replaced after terrain/track survey",
+          "worldPlacementReady": false
+        },
+        "sourceGeographicAnchor": {
+          "provider": "City of Vancouver rapid-transit-stations",
+          "coordinatesLonLat": [
+            -123.11997233644202,
+            49.28586014917365
+          ],
+          "allMatchingCityPointsLonLat": [
+            [
+              -123.11997233644202,
+              49.28586014917365
+            ]
+          ],
+          "gtfsParentLonLat": [
+            -123.119557,
+            49.285614
+          ],
+          "meaning": "station selection/initial anchor only, not a surveyed entrance/platform centre",
+          "cityPointMinusGtfsDistanceM": 40.748
+        },
+        "ready": false
+      },
+      "intendedConsumer": "D06 integration agent; offline geometry and interface validation only",
+      "offlineChecks": {
+        "commonGLBMeasured": true,
+        "editableSourceExists": true,
+        "sourceMapPixelsInspected": true,
+        "topology": "qa/validation.json",
+        "actualGlbCpuPreview": "qa/previews/index.json"
+      },
+      "runtimeChecks": {
+        "worldPlacement": "not_run",
+        "terrainAttachment": "not_run",
+        "walkAndElevatorRuntime": "not_run",
+        "doorBoardingAndMovingCollision": "not_run",
+        "webglDrawCallsAndLifecycle": "not_run",
+        "readyForBoarding": false
+      }
+    },
+    {
+      "id": "granville",
+      "taskId": "D01",
+      "variant": "deep-stacked-underground-multiflight",
+      "kind": "station-layout",
+      "source": "source/granville.blend",
+      "sourceSha256": "eba0620898ee08f658589991779f0ef20f2a97ec267e6ca37be306407e7e763f",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/granville.glb",
+          "sha256": "1da39eb31cf64ab22144d3bfe96ea853616f4ae47d09b2e9c1ba5352353637b7",
+          "source": "source/granville.blend",
+          "sourceSha256": "eba0620898ee08f658589991779f0ef20f2a97ec267e6ca37be306407e7e763f",
+          "sourceBytes": 198769,
+          "triangles": 5388,
+          "vertices": 10776,
+          "primitives": 84,
+          "bytes": 428392,
+          "boundsM": {
+            "min": [
+              -5.75,
+              -27.41999912261963,
+              -98.29999995231628
+            ],
+            "max": [
+              5.75,
+              3.600000001490116,
+              112.69999694824219
+            ],
+            "size": [
+              11.5,
+              31.019999124109745,
+              210.99999690055847
+            ]
+          },
+          "geometryBytes": 428392,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -5.75,
+          -27.41999912261963,
+          -98.29999995231628
+        ],
+        "max": [
+          5.75,
+          3.600000001490116,
+          112.69999694824219
+        ],
+        "size": [
+          11.5,
+          31.019999124109745,
+          210.99999690055847
+        ]
+      },
+      "expectedDimensionsM": [
+        11.5,
+        31.019999124109745,
+        210.99999690055847
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Bounds measured from actual GLB, not independent survey targets. Platform lengths 74 m Expo / 44 m Canada; all other dimensions illustrative.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "local street datum; never recenter by bounds"
+      },
+      "attachmentDatum": {
+        "type": "station-local-street",
+        "planeY": 0,
+        "worldYUnresolved": true
+      },
+      "frontAxis": "+Z representative track axis",
+      "materialBindings": [
+        {
+          "material": "steel",
+          "semanticRole": "steel",
+          "sharedSurfaceId": "skytrain-stage2-steel",
+          "primitiveSelection": {
+            "materialName": "steel"
+          },
+          "maps": []
+        },
+        {
+          "material": "glass",
+          "semanticRole": "glass",
+          "sharedSurfaceId": "skytrain-stage2-glass",
+          "primitiveSelection": {
+            "materialName": "glass"
+          },
+          "maps": []
+        },
+        {
+          "material": "expo",
+          "semanticRole": "expo",
+          "sharedSurfaceId": "skytrain-stage2-expo",
+          "primitiveSelection": {
+            "materialName": "expo"
+          },
+          "maps": []
+        },
+        {
+          "material": "concrete",
+          "semanticRole": "concrete",
+          "sharedSurfaceId": "skytrain-stage2-concrete",
+          "primitiveSelection": {
+            "materialName": "concrete"
+          },
+          "maps": []
+        },
+        {
+          "material": "wood",
+          "semanticRole": "wood",
+          "sharedSurfaceId": "skytrain-stage2-wood",
+          "primitiveSelection": {
+            "materialName": "wood"
+          },
+          "maps": []
+        },
+        {
+          "material": "yellow",
+          "semanticRole": "yellow",
+          "sharedSurfaceId": "skytrain-stage2-yellow",
+          "primitiveSelection": {
+            "materialName": "yellow"
+          },
+          "maps": []
+        },
+        {
+          "material": "wall",
+          "semanticRole": "wall",
+          "sharedSurfaceId": "skytrain-stage2-wall",
+          "primitiveSelection": {
+            "materialName": "wall"
+          },
+          "maps": []
+        },
+        {
+          "material": "floor",
+          "semanticRole": "floor",
+          "sharedSurfaceId": "skytrain-stage2-floor",
+          "primitiveSelection": {
+            "materialName": "floor"
+          },
+          "maps": []
+        }
+      ],
+      "textureMode": "shared-role-placeholder",
+      "textureCost": {
+        "geometryBytes": 428392,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 428392,
+        "uniqueTexelBytesWithMips": 0
+      },
+      "lodPolicy": {
+        "singleNearDetailLOD": true,
+        "globalResident": false,
+        "distanceProposalM": 80,
+        "runtimeBudgetValidation": "not_run",
+        "sharedGeometry": "batched by role/material; individual walk surfaces retained",
+        "terrainCutoutRequired": true
+      },
+      "clearance": {
+        "stationLayoutRef": "station-layout.json",
+        "humanReferenceM": 1.81,
+        "platformRoofClearanceM": 3.55,
+        "certification": false
+      },
+      "collision": {
+        "type": "layout-surfaces-plus-oriented-obstacles-and-track-exclusion",
+        "layoutRef": "station-layout.json",
+        "dynamicElevatorAndBoarding": "not_implemented"
+      },
+      "anchors": [
+        {
+          "id": "granville-upper-westbound-stop",
+          "nodeId": "anchor-granville-upper-westbound-stop",
+          "frameId": "granville",
+          "pointM": [
+            3.75,
+            -20.95,
+            0.0
+          ],
+          "kind": "vehicle-root-stop"
+        },
+        {
+          "id": "granville-upper-westbound-car1-door1",
+          "nodeId": "anchor-granville-upper-westbound-car1-door1",
+          "frameId": "granville",
+          "pointM": [
+            2.25,
+            -20,
+            21.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "granville-upper-westbound-car1-door2",
+          "nodeId": "anchor-granville-upper-westbound-car1-door2",
+          "frameId": "granville",
+          "pointM": [
+            2.25,
+            -20,
+            26.85
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "granville-upper-westbound-car1-door3",
+          "nodeId": "anchor-granville-upper-westbound-car1-door3",
+          "frameId": "granville",
+          "pointM": [
+            2.25,
+            -20,
+            32.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "granville-upper-westbound-car2-door1",
+          "nodeId": "anchor-granville-upper-westbound-car2-door1",
+          "frameId": "granville",
+          "pointM": [
+            2.25,
+            -20,
+            3.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "granville-upper-westbound-car2-door2",
+          "nodeId": "anchor-granville-upper-westbound-car2-door2",
+          "frameId": "granville",
+          "pointM": [
+            2.25,
+            -20,
+            8.95
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "granville-upper-westbound-car2-door3",
+          "nodeId": "anchor-granville-upper-westbound-car2-door3",
+          "frameId": "granville",
+          "pointM": [
+            2.25,
+            -20,
+            14.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "granville-upper-westbound-car3-door1",
+          "nodeId": "anchor-granville-upper-westbound-car3-door1",
+          "frameId": "granville",
+          "pointM": [
+            2.25,
+            -20,
+            -14.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "granville-upper-westbound-car3-door2",
+          "nodeId": "anchor-granville-upper-westbound-car3-door2",
+          "frameId": "granville",
+          "pointM": [
+            2.25,
+            -20,
+            -8.95
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "granville-upper-westbound-car3-door3",
+          "nodeId": "anchor-granville-upper-westbound-car3-door3",
+          "frameId": "granville",
+          "pointM": [
+            2.25,
+            -20,
+            -3.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "granville-upper-westbound-car4-door1",
+          "nodeId": "anchor-granville-upper-westbound-car4-door1",
+          "frameId": "granville",
+          "pointM": [
+            2.25,
+            -20,
+            -32.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "granville-upper-westbound-car4-door2",
+          "nodeId": "anchor-granville-upper-westbound-car4-door2",
+          "frameId": "granville",
+          "pointM": [
+            2.25,
+            -20,
+            -26.85
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "granville-upper-westbound-car4-door3",
+          "nodeId": "anchor-granville-upper-westbound-car4-door3",
+          "frameId": "granville",
+          "pointM": [
+            2.25,
+            -20,
+            -21.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "granville-upper-entrance",
+          "nodeId": "anchor-granville-upper-entrance",
+          "frameId": "granville",
+          "pointM": [
+            0.0,
+            0,
+            -95.5
+          ],
+          "kind": "entrance-exit"
+        },
+        {
+          "id": "granville-lower-eastbound-stop",
+          "nodeId": "anchor-granville-lower-eastbound-stop",
+          "frameId": "granville",
+          "pointM": [
+            3.75,
+            -26.95,
+            0.0
+          ],
+          "kind": "vehicle-root-stop"
+        },
+        {
+          "id": "granville-lower-eastbound-car1-door1",
+          "nodeId": "anchor-granville-lower-eastbound-car1-door1",
+          "frameId": "granville",
+          "pointM": [
+            2.25,
+            -26,
+            21.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "granville-lower-eastbound-car1-door2",
+          "nodeId": "anchor-granville-lower-eastbound-car1-door2",
+          "frameId": "granville",
+          "pointM": [
+            2.25,
+            -26,
+            26.85
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "granville-lower-eastbound-car1-door3",
+          "nodeId": "anchor-granville-lower-eastbound-car1-door3",
+          "frameId": "granville",
+          "pointM": [
+            2.25,
+            -26,
+            32.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "granville-lower-eastbound-car2-door1",
+          "nodeId": "anchor-granville-lower-eastbound-car2-door1",
+          "frameId": "granville",
+          "pointM": [
+            2.25,
+            -26,
+            3.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "granville-lower-eastbound-car2-door2",
+          "nodeId": "anchor-granville-lower-eastbound-car2-door2",
+          "frameId": "granville",
+          "pointM": [
+            2.25,
+            -26,
+            8.95
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "granville-lower-eastbound-car2-door3",
+          "nodeId": "anchor-granville-lower-eastbound-car2-door3",
+          "frameId": "granville",
+          "pointM": [
+            2.25,
+            -26,
+            14.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "granville-lower-eastbound-car3-door1",
+          "nodeId": "anchor-granville-lower-eastbound-car3-door1",
+          "frameId": "granville",
+          "pointM": [
+            2.25,
+            -26,
+            -14.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "granville-lower-eastbound-car3-door2",
+          "nodeId": "anchor-granville-lower-eastbound-car3-door2",
+          "frameId": "granville",
+          "pointM": [
+            2.25,
+            -26,
+            -8.95
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "granville-lower-eastbound-car3-door3",
+          "nodeId": "anchor-granville-lower-eastbound-car3-door3",
+          "frameId": "granville",
+          "pointM": [
+            2.25,
+            -26,
+            -3.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "granville-lower-eastbound-car4-door1",
+          "nodeId": "anchor-granville-lower-eastbound-car4-door1",
+          "frameId": "granville",
+          "pointM": [
+            2.25,
+            -26,
+            -32.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "granville-lower-eastbound-car4-door2",
+          "nodeId": "anchor-granville-lower-eastbound-car4-door2",
+          "frameId": "granville",
+          "pointM": [
+            2.25,
+            -26,
+            -26.85
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "granville-lower-eastbound-car4-door3",
+          "nodeId": "anchor-granville-lower-eastbound-car4-door3",
+          "frameId": "granville",
+          "pointM": [
+            2.25,
+            -26,
+            -21.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "granville-lower-entrance",
+          "nodeId": "anchor-granville-lower-entrance",
+          "frameId": "granville",
+          "pointM": [
+            0.0,
+            0,
+            109.9
+          ],
+          "kind": "entrance-exit"
+        }
+      ],
+      "placementCompatibility": {
+        "frameId": "granville",
+        "localToWorld": {
+          "frameId": "granville",
+          "parentFrameId": "atlas-world",
+          "translationM": [
+            842.009257,
+            0,
+            262.972705
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            -0.9238795325112867,
+            0,
+            0.38268343236508984
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "horizontalProjection": "lib/city/geo.ts ORIGIN [-123.128,49.286], MX=111320*cos(49.286deg), world +Z south",
+          "headingBasis": "representative map-aligned heading, not surveyed track tangent",
+          "verticalDatum": "local street=0; world Y=0 placeholder MUST be replaced after terrain/track survey",
+          "worldPlacementReady": false
+        },
+        "sourceGeographicAnchor": {
+          "provider": "City of Vancouver rapid-transit-stations",
+          "coordinatesLonLat": [
+            -123.11640402719512,
+            49.28363768680059
+          ],
+          "allMatchingCityPointsLonLat": [
+            [
+              -123.11640402719512,
+              49.28363768680059
+            ]
+          ],
+          "gtfsParentLonLat": [
+            -123.115721,
+            49.283173
+          ],
+          "meaning": "station selection/initial anchor only, not a surveyed entrance/platform centre",
+          "cityPointMinusGtfsDistanceM": 71.664
+        },
+        "ready": false
+      },
+      "intendedConsumer": "D06 integration agent; offline geometry and interface validation only",
+      "offlineChecks": {
+        "commonGLBMeasured": true,
+        "editableSourceExists": true,
+        "sourceMapPixelsInspected": true,
+        "topology": "qa/validation.json",
+        "actualGlbCpuPreview": "qa/previews/index.json"
+      },
+      "runtimeChecks": {
+        "worldPlacement": "not_run",
+        "terrainAttachment": "not_run",
+        "walkAndElevatorRuntime": "not_run",
+        "doorBoardingAndMovingCollision": "not_run",
+        "webglDrawCallsAndLifecycle": "not_run",
+        "readyForBoarding": false
+      }
+    },
+    {
+      "id": "stadium-chinatown",
+      "taskId": "D01",
+      "variant": "upper-beatty-lower-pacific",
+      "kind": "station-layout",
+      "source": "source/stadium-chinatown.blend",
+      "sourceSha256": "b4ceab130cb65c2ebda58d3e2717a9bbc1c1b395a3eb8e861116fea13ac54e7b",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/stadium-chinatown.glb",
+          "sha256": "4ac05ec2618bef2d27745699eb85594fa859721b83f6f50547c74dc9e2664638",
+          "source": "source/stadium-chinatown.blend",
+          "sourceSha256": "b4ceab130cb65c2ebda58d3e2717a9bbc1c1b395a3eb8e861116fea13ac54e7b",
+          "sourceBytes": 134033,
+          "triangles": 2076,
+          "vertices": 4152,
+          "primitives": 47,
+          "bytes": 156876,
+          "boundsM": {
+            "min": [
+              -7.0,
+              -9.299999624490738,
+              -57.799999952316284
+            ],
+            "max": [
+              7.0,
+              3.600000001490116,
+              50.0
+            ],
+            "size": [
+              14.0,
+              12.899999625980854,
+              107.79999995231628
+            ]
+          },
+          "geometryBytes": 156876,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -7.0,
+          -9.299999624490738,
+          -57.799999952316284
+        ],
+        "max": [
+          7.0,
+          3.600000001490116,
+          50.0
+        ],
+        "size": [
+          14.0,
+          12.899999625980854,
+          107.79999995231628
+        ]
+      },
+      "expectedDimensionsM": [
+        14.0,
+        12.899999625980854,
+        107.79999995231628
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Bounds measured from actual GLB, not independent survey targets. Platform lengths 74 m Expo / 44 m Canada; all other dimensions illustrative.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "local street datum; never recenter by bounds"
+      },
+      "attachmentDatum": {
+        "type": "station-local-street",
+        "planeY": 0,
+        "worldYUnresolved": true
+      },
+      "frontAxis": "+Z representative track axis",
+      "materialBindings": [
+        {
+          "material": "steel",
+          "semanticRole": "steel",
+          "sharedSurfaceId": "skytrain-stage2-steel",
+          "primitiveSelection": {
+            "materialName": "steel"
+          },
+          "maps": []
+        },
+        {
+          "material": "glass",
+          "semanticRole": "glass",
+          "sharedSurfaceId": "skytrain-stage2-glass",
+          "primitiveSelection": {
+            "materialName": "glass"
+          },
+          "maps": []
+        },
+        {
+          "material": "expo",
+          "semanticRole": "expo",
+          "sharedSurfaceId": "skytrain-stage2-expo",
+          "primitiveSelection": {
+            "materialName": "expo"
+          },
+          "maps": []
+        },
+        {
+          "material": "concrete",
+          "semanticRole": "concrete",
+          "sharedSurfaceId": "skytrain-stage2-concrete",
+          "primitiveSelection": {
+            "materialName": "concrete"
+          },
+          "maps": []
+        },
+        {
+          "material": "wood",
+          "semanticRole": "wood",
+          "sharedSurfaceId": "skytrain-stage2-wood",
+          "primitiveSelection": {
+            "materialName": "wood"
+          },
+          "maps": []
+        },
+        {
+          "material": "yellow",
+          "semanticRole": "yellow",
+          "sharedSurfaceId": "skytrain-stage2-yellow",
+          "primitiveSelection": {
+            "materialName": "yellow"
+          },
+          "maps": []
+        },
+        {
+          "material": "floor",
+          "semanticRole": "floor",
+          "sharedSurfaceId": "skytrain-stage2-floor",
+          "primitiveSelection": {
+            "materialName": "floor"
+          },
+          "maps": []
+        }
+      ],
+      "textureMode": "shared-role-placeholder",
+      "textureCost": {
+        "geometryBytes": 156876,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 156876,
+        "uniqueTexelBytesWithMips": 0
+      },
+      "lodPolicy": {
+        "singleNearDetailLOD": true,
+        "globalResident": false,
+        "distanceProposalM": 80,
+        "runtimeBudgetValidation": "not_run",
+        "sharedGeometry": "batched by role/material; individual walk surfaces retained",
+        "terrainCutoutRequired": true
+      },
+      "clearance": {
+        "stationLayoutRef": "station-layout.json",
+        "humanReferenceM": 1.81,
+        "platformRoofClearanceM": 3.55,
+        "certification": false
+      },
+      "collision": {
+        "type": "layout-surfaces-plus-oriented-obstacles-and-track-exclusion",
+        "layoutRef": "station-layout.json",
+        "dynamicElevatorAndBoarding": "not_implemented"
+      },
+      "anchors": [
+        {
+          "id": "stadium-expo-westbound-stop",
+          "nodeId": "anchor-stadium-expo-westbound-stop",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            -5.0,
+            -5.95,
+            0.0
+          ],
+          "kind": "vehicle-root-stop"
+        },
+        {
+          "id": "stadium-expo-westbound-car1-door1",
+          "nodeId": "anchor-stadium-expo-westbound-car1-door1",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            -3.5,
+            -5,
+            21.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "stadium-expo-westbound-car1-door2",
+          "nodeId": "anchor-stadium-expo-westbound-car1-door2",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            -3.5,
+            -5,
+            26.85
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "stadium-expo-westbound-car1-door3",
+          "nodeId": "anchor-stadium-expo-westbound-car1-door3",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            -3.5,
+            -5,
+            32.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "stadium-expo-westbound-car2-door1",
+          "nodeId": "anchor-stadium-expo-westbound-car2-door1",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            -3.5,
+            -5,
+            3.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "stadium-expo-westbound-car2-door2",
+          "nodeId": "anchor-stadium-expo-westbound-car2-door2",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            -3.5,
+            -5,
+            8.95
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "stadium-expo-westbound-car2-door3",
+          "nodeId": "anchor-stadium-expo-westbound-car2-door3",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            -3.5,
+            -5,
+            14.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "stadium-expo-westbound-car3-door1",
+          "nodeId": "anchor-stadium-expo-westbound-car3-door1",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            -3.5,
+            -5,
+            -14.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "stadium-expo-westbound-car3-door2",
+          "nodeId": "anchor-stadium-expo-westbound-car3-door2",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            -3.5,
+            -5,
+            -8.95
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "stadium-expo-westbound-car3-door3",
+          "nodeId": "anchor-stadium-expo-westbound-car3-door3",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            -3.5,
+            -5,
+            -3.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "stadium-expo-westbound-car4-door1",
+          "nodeId": "anchor-stadium-expo-westbound-car4-door1",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            -3.5,
+            -5,
+            -32.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "stadium-expo-westbound-car4-door2",
+          "nodeId": "anchor-stadium-expo-westbound-car4-door2",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            -3.5,
+            -5,
+            -26.85
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "stadium-expo-westbound-car4-door3",
+          "nodeId": "anchor-stadium-expo-westbound-car4-door3",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            -3.5,
+            -5,
+            -21.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "stadium-expo-eastbound-stop",
+          "nodeId": "anchor-stadium-expo-eastbound-stop",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            5.0,
+            -5.95,
+            0.0
+          ],
+          "kind": "vehicle-root-stop"
+        },
+        {
+          "id": "stadium-expo-eastbound-car1-door1",
+          "nodeId": "anchor-stadium-expo-eastbound-car1-door1",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            3.5,
+            -5,
+            21.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "stadium-expo-eastbound-car1-door2",
+          "nodeId": "anchor-stadium-expo-eastbound-car1-door2",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            3.5,
+            -5,
+            26.85
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "stadium-expo-eastbound-car1-door3",
+          "nodeId": "anchor-stadium-expo-eastbound-car1-door3",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            3.5,
+            -5,
+            32.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "stadium-expo-eastbound-car2-door1",
+          "nodeId": "anchor-stadium-expo-eastbound-car2-door1",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            3.5,
+            -5,
+            3.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "stadium-expo-eastbound-car2-door2",
+          "nodeId": "anchor-stadium-expo-eastbound-car2-door2",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            3.5,
+            -5,
+            8.95
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "stadium-expo-eastbound-car2-door3",
+          "nodeId": "anchor-stadium-expo-eastbound-car2-door3",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            3.5,
+            -5,
+            14.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "stadium-expo-eastbound-car3-door1",
+          "nodeId": "anchor-stadium-expo-eastbound-car3-door1",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            3.5,
+            -5,
+            -14.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "stadium-expo-eastbound-car3-door2",
+          "nodeId": "anchor-stadium-expo-eastbound-car3-door2",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            3.5,
+            -5,
+            -8.95
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "stadium-expo-eastbound-car3-door3",
+          "nodeId": "anchor-stadium-expo-eastbound-car3-door3",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            3.5,
+            -5,
+            -3.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "stadium-expo-eastbound-car4-door1",
+          "nodeId": "anchor-stadium-expo-eastbound-car4-door1",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            3.5,
+            -5,
+            -32.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "stadium-expo-eastbound-car4-door2",
+          "nodeId": "anchor-stadium-expo-eastbound-car4-door2",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            3.5,
+            -5,
+            -26.85
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "stadium-expo-eastbound-car4-door3",
+          "nodeId": "anchor-stadium-expo-eastbound-car4-door3",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            3.5,
+            -5,
+            -21.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "stadium-expo-entrance",
+          "nodeId": "anchor-stadium-expo-entrance",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            0.0,
+            0,
+            -55.0
+          ],
+          "kind": "entrance-exit"
+        },
+        {
+          "id": "pacific-entry",
+          "nodeId": "anchor-pacific-entry",
+          "frameId": "stadium-chinatown",
+          "pointM": [
+            0.0,
+            -9,
+            48.0
+          ],
+          "kind": "entrance-exit"
+        }
+      ],
+      "placementCompatibility": {
+        "frameId": "stadium-chinatown",
+        "localToWorld": {
+          "frameId": "stadium-chinatown",
+          "parentFrameId": "atlas-world",
+          "translationM": [
+            1338.620953,
+            0,
+            730.07086
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            -0.9238795325112867,
+            0,
+            0.38268343236508984
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "horizontalProjection": "lib/city/geo.ts ORIGIN [-123.128,49.286], MX=111320*cos(49.286deg), world +Z south",
+          "headingBasis": "representative map-aligned heading, not surveyed track tangent",
+          "verticalDatum": "local street=0; world Y=0 placeholder MUST be replaced after terrain/track survey",
+          "worldPlacementReady": false
+        },
+        "sourceGeographicAnchor": {
+          "provider": "City of Vancouver rapid-transit-stations",
+          "coordinatesLonLat": [
+            -123.10956479630316,
+            49.279441691877636
+          ],
+          "allMatchingCityPointsLonLat": [
+            [
+              -123.10956479630316,
+              49.279441691877636
+            ]
+          ],
+          "gtfsParentLonLat": [
+            -123.109181,
+            49.279223
+          ],
+          "meaning": "station selection/initial anchor only, not a surveyed entrance/platform centre",
+          "cityPointMinusGtfsDistanceM": 37.004
+        },
+        "ready": false
+      },
+      "intendedConsumer": "D06 integration agent; offline geometry and interface validation only",
+      "offlineChecks": {
+        "commonGLBMeasured": true,
+        "editableSourceExists": true,
+        "sourceMapPixelsInspected": true,
+        "topology": "qa/validation.json",
+        "actualGlbCpuPreview": "qa/previews/index.json"
+      },
+      "runtimeChecks": {
+        "worldPlacement": "not_run",
+        "terrainAttachment": "not_run",
+        "walkAndElevatorRuntime": "not_run",
+        "doorBoardingAndMovingCollision": "not_run",
+        "webglDrawCallsAndLifecycle": "not_run",
+        "readyForBoarding": false
+      }
+    },
+    {
+      "id": "main-street-science-world",
+      "taskId": "D01",
+      "variant": "elevated-island-twin-stationhouses",
+      "kind": "station-layout",
+      "source": "source/main-street-science-world.blend",
+      "sourceSha256": "85f0d32688990e9dec1e7fcc9c7729a3b515e28b97f7a78b9426dc85c33d4d74",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/main-street-science-world.glb",
+          "sha256": "fff6328a70e15612e9344687c1f72f7a2b40009833e0e82a610181814adc29f8",
+          "source": "source/main-street-science-world.blend",
+          "sourceSha256": "85f0d32688990e9dec1e7fcc9c7729a3b515e28b97f7a78b9426dc85c33d4d74",
+          "sourceBytes": 145865,
+          "triangles": 2664,
+          "vertices": 5328,
+          "primitives": 51,
+          "bytes": 205536,
+          "boundsM": {
+            "min": [
+              -7.0,
+              -0.30000001192092896,
+              -66.50000071525574
+            ],
+            "max": [
+              7.0,
+              11.74999962002039,
+              63.0
+            ],
+            "size": [
+              14.0,
+              12.049999631941319,
+              129.50000071525574
+            ]
+          },
+          "geometryBytes": 205536,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -7.0,
+          -0.30000001192092896,
+          -66.50000071525574
+        ],
+        "max": [
+          7.0,
+          11.74999962002039,
+          63.0
+        ],
+        "size": [
+          14.0,
+          12.049999631941319,
+          129.50000071525574
+        ]
+      },
+      "expectedDimensionsM": [
+        14.0,
+        12.049999631941319,
+        129.50000071525574
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Bounds measured from actual GLB, not independent survey targets. Platform lengths 74 m Expo / 44 m Canada; all other dimensions illustrative.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "local street datum; never recenter by bounds"
+      },
+      "attachmentDatum": {
+        "type": "station-local-street",
+        "planeY": 0,
+        "worldYUnresolved": true
+      },
+      "frontAxis": "+Z representative track axis",
+      "materialBindings": [
+        {
+          "material": "steel",
+          "semanticRole": "steel",
+          "sharedSurfaceId": "skytrain-stage2-steel",
+          "primitiveSelection": {
+            "materialName": "steel"
+          },
+          "maps": []
+        },
+        {
+          "material": "glass",
+          "semanticRole": "glass",
+          "sharedSurfaceId": "skytrain-stage2-glass",
+          "primitiveSelection": {
+            "materialName": "glass"
+          },
+          "maps": []
+        },
+        {
+          "material": "expo",
+          "semanticRole": "expo",
+          "sharedSurfaceId": "skytrain-stage2-expo",
+          "primitiveSelection": {
+            "materialName": "expo"
+          },
+          "maps": []
+        },
+        {
+          "material": "concrete",
+          "semanticRole": "concrete",
+          "sharedSurfaceId": "skytrain-stage2-concrete",
+          "primitiveSelection": {
+            "materialName": "concrete"
+          },
+          "maps": []
+        },
+        {
+          "material": "wood",
+          "semanticRole": "wood",
+          "sharedSurfaceId": "skytrain-stage2-wood",
+          "primitiveSelection": {
+            "materialName": "wood"
+          },
+          "maps": []
+        },
+        {
+          "material": "yellow",
+          "semanticRole": "yellow",
+          "sharedSurfaceId": "skytrain-stage2-yellow",
+          "primitiveSelection": {
+            "materialName": "yellow"
+          },
+          "maps": []
+        },
+        {
+          "material": "floor",
+          "semanticRole": "floor",
+          "sharedSurfaceId": "skytrain-stage2-floor",
+          "primitiveSelection": {
+            "materialName": "floor"
+          },
+          "maps": []
+        }
+      ],
+      "textureMode": "shared-role-placeholder",
+      "textureCost": {
+        "geometryBytes": 205536,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 205536,
+        "uniqueTexelBytesWithMips": 0
+      },
+      "lodPolicy": {
+        "singleNearDetailLOD": true,
+        "globalResident": false,
+        "distanceProposalM": 80,
+        "runtimeBudgetValidation": "not_run",
+        "sharedGeometry": "batched by role/material; individual walk surfaces retained",
+        "terrainCutoutRequired": true
+      },
+      "clearance": {
+        "stationLayoutRef": "station-layout.json",
+        "humanReferenceM": 1.81,
+        "platformRoofClearanceM": 3.55,
+        "certification": false
+      },
+      "collision": {
+        "type": "layout-surfaces-plus-oriented-obstacles-and-track-exclusion",
+        "layoutRef": "station-layout.json",
+        "dynamicElevatorAndBoarding": "not_implemented"
+      },
+      "anchors": [
+        {
+          "id": "main-expo-westbound-stop",
+          "nodeId": "anchor-main-expo-westbound-stop",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            -5.0,
+            7.05,
+            0.0
+          ],
+          "kind": "vehicle-root-stop"
+        },
+        {
+          "id": "main-expo-westbound-car1-door1",
+          "nodeId": "anchor-main-expo-westbound-car1-door1",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            -3.5,
+            8,
+            21.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "main-expo-westbound-car1-door2",
+          "nodeId": "anchor-main-expo-westbound-car1-door2",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            -3.5,
+            8,
+            26.85
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "main-expo-westbound-car1-door3",
+          "nodeId": "anchor-main-expo-westbound-car1-door3",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            -3.5,
+            8,
+            32.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "main-expo-westbound-car2-door1",
+          "nodeId": "anchor-main-expo-westbound-car2-door1",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            -3.5,
+            8,
+            3.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "main-expo-westbound-car2-door2",
+          "nodeId": "anchor-main-expo-westbound-car2-door2",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            -3.5,
+            8,
+            8.95
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "main-expo-westbound-car2-door3",
+          "nodeId": "anchor-main-expo-westbound-car2-door3",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            -3.5,
+            8,
+            14.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "main-expo-westbound-car3-door1",
+          "nodeId": "anchor-main-expo-westbound-car3-door1",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            -3.5,
+            8,
+            -14.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "main-expo-westbound-car3-door2",
+          "nodeId": "anchor-main-expo-westbound-car3-door2",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            -3.5,
+            8,
+            -8.95
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "main-expo-westbound-car3-door3",
+          "nodeId": "anchor-main-expo-westbound-car3-door3",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            -3.5,
+            8,
+            -3.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "main-expo-westbound-car4-door1",
+          "nodeId": "anchor-main-expo-westbound-car4-door1",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            -3.5,
+            8,
+            -32.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "main-expo-westbound-car4-door2",
+          "nodeId": "anchor-main-expo-westbound-car4-door2",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            -3.5,
+            8,
+            -26.85
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "main-expo-westbound-car4-door3",
+          "nodeId": "anchor-main-expo-westbound-car4-door3",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            -3.5,
+            8,
+            -21.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "main-expo-eastbound-stop",
+          "nodeId": "anchor-main-expo-eastbound-stop",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            5.0,
+            7.05,
+            0.0
+          ],
+          "kind": "vehicle-root-stop"
+        },
+        {
+          "id": "main-expo-eastbound-car1-door1",
+          "nodeId": "anchor-main-expo-eastbound-car1-door1",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            3.5,
+            8,
+            21.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "main-expo-eastbound-car1-door2",
+          "nodeId": "anchor-main-expo-eastbound-car1-door2",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            3.5,
+            8,
+            26.85
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "main-expo-eastbound-car1-door3",
+          "nodeId": "anchor-main-expo-eastbound-car1-door3",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            3.5,
+            8,
+            32.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "main-expo-eastbound-car2-door1",
+          "nodeId": "anchor-main-expo-eastbound-car2-door1",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            3.5,
+            8,
+            3.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "main-expo-eastbound-car2-door2",
+          "nodeId": "anchor-main-expo-eastbound-car2-door2",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            3.5,
+            8,
+            8.95
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "main-expo-eastbound-car2-door3",
+          "nodeId": "anchor-main-expo-eastbound-car2-door3",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            3.5,
+            8,
+            14.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "main-expo-eastbound-car3-door1",
+          "nodeId": "anchor-main-expo-eastbound-car3-door1",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            3.5,
+            8,
+            -14.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "main-expo-eastbound-car3-door2",
+          "nodeId": "anchor-main-expo-eastbound-car3-door2",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            3.5,
+            8,
+            -8.95
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "main-expo-eastbound-car3-door3",
+          "nodeId": "anchor-main-expo-eastbound-car3-door3",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            3.5,
+            8,
+            -3.45
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "main-expo-eastbound-car4-door1",
+          "nodeId": "anchor-main-expo-eastbound-car4-door1",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            3.5,
+            8,
+            -32.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "main-expo-eastbound-car4-door2",
+          "nodeId": "anchor-main-expo-eastbound-car4-door2",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            3.5,
+            8,
+            -26.85
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "main-expo-eastbound-car4-door3",
+          "nodeId": "anchor-main-expo-eastbound-car4-door3",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            3.5,
+            8,
+            -21.35
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "main-expo-entrance",
+          "nodeId": "anchor-main-expo-entrance",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            0.0,
+            0,
+            -63.7
+          ],
+          "kind": "entrance-exit"
+        },
+        {
+          "id": "main-east",
+          "nodeId": "anchor-main-east",
+          "frameId": "main-street-science-world",
+          "pointM": [
+            0.0,
+            0,
+            59.0
+          ],
+          "kind": "entrance-exit"
+        }
+      ],
+      "placementCompatibility": {
+        "frameId": "main-street-science-world",
+        "localToWorld": {
+          "frameId": "main-street-science-world",
+          "parentFrameId": "atlas-world",
+          "translationM": [
+            1989.073077,
+            0,
+            1427.35485
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            -0.7933533402912352,
+            0,
+            0.6087614290087207
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "horizontalProjection": "lib/city/geo.ts ORIGIN [-123.128,49.286], MX=111320*cos(49.286deg), world +Z south",
+          "headingBasis": "representative map-aligned heading, not surveyed track tangent",
+          "verticalDatum": "local street=0; world Y=0 placeholder MUST be replaced after terrain/track survey",
+          "worldPlacementReady": false
+        },
+        "sourceGeographicAnchor": {
+          "provider": "City of Vancouver rapid-transit-stations",
+          "coordinatesLonLat": [
+            -123.10060690768856,
+            49.27317791187965
+          ],
+          "allMatchingCityPointsLonLat": [
+            [
+              -123.10060690768856,
+              49.27317791187965
+            ]
+          ],
+          "gtfsParentLonLat": [
+            -123.100392,
+            49.273137
+          ],
+          "meaning": "station selection/initial anchor only, not a surveyed entrance/platform centre",
+          "cityPointMinusGtfsDistanceM": 16.256
+        },
+        "ready": false
+      },
+      "intendedConsumer": "D06 integration agent; offline geometry and interface validation only",
+      "offlineChecks": {
+        "commonGLBMeasured": true,
+        "editableSourceExists": true,
+        "sourceMapPixelsInspected": true,
+        "topology": "qa/validation.json",
+        "actualGlbCpuPreview": "qa/previews/index.json"
+      },
+      "runtimeChecks": {
+        "worldPlacement": "not_run",
+        "terrainAttachment": "not_run",
+        "walkAndElevatorRuntime": "not_run",
+        "doorBoardingAndMovingCollision": "not_run",
+        "webglDrawCallsAndLifecycle": "not_run",
+        "readyForBoarding": false
+      }
+    },
+    {
+      "id": "vancouver-city-centre",
+      "taskId": "D01",
+      "variant": "underground-island-mall-spur",
+      "kind": "station-layout",
+      "source": "source/vancouver-city-centre.blend",
+      "sourceSha256": "e3665f756f08511ec845ef75e46de6ccbdd1bcc73a8c06405cce04fe9cfc65e3",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/vancouver-city-centre.glb",
+          "sha256": "e7aa69e97a495fac4fbe0c243aca0575beabc62ea568615153e992b355ab834a",
+          "source": "source/vancouver-city-centre.blend",
+          "sourceSha256": "e3665f756f08511ec845ef75e46de6ccbdd1bcc73a8c06405cce04fe9cfc65e3",
+          "sourceBytes": 127289,
+          "triangles": 1620,
+          "vertices": 3240,
+          "primitives": 37,
+          "bytes": 134684,
+          "boundsM": {
+            "min": [
+              -7.0,
+              -10.569999888539314,
+              -53.39999842643738
+            ],
+            "max": [
+              30.150000005960464,
+              3.600000001490116,
+              28.0
+            ],
+            "size": [
+              37.150000005960464,
+              14.16999989002943,
+              81.39999842643738
+            ]
+          },
+          "geometryBytes": 134684,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -7.0,
+          -10.569999888539314,
+          -53.39999842643738
+        ],
+        "max": [
+          30.150000005960464,
+          3.600000001490116,
+          28.0
+        ],
+        "size": [
+          37.150000005960464,
+          14.16999989002943,
+          81.39999842643738
+        ]
+      },
+      "expectedDimensionsM": [
+        37.150000005960464,
+        14.16999989002943,
+        81.39999842643738
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Bounds measured from actual GLB, not independent survey targets. Platform lengths 74 m Expo / 44 m Canada; all other dimensions illustrative.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "local street datum; never recenter by bounds"
+      },
+      "attachmentDatum": {
+        "type": "station-local-street",
+        "planeY": 0,
+        "worldYUnresolved": true
+      },
+      "frontAxis": "+Z representative track axis",
+      "materialBindings": [
+        {
+          "material": "steel",
+          "semanticRole": "steel",
+          "sharedSurfaceId": "skytrain-stage2-steel",
+          "primitiveSelection": {
+            "materialName": "steel"
+          },
+          "maps": []
+        },
+        {
+          "material": "glass",
+          "semanticRole": "glass",
+          "sharedSurfaceId": "skytrain-stage2-glass",
+          "primitiveSelection": {
+            "materialName": "glass"
+          },
+          "maps": []
+        },
+        {
+          "material": "canada",
+          "semanticRole": "canada",
+          "sharedSurfaceId": "skytrain-stage2-canada",
+          "primitiveSelection": {
+            "materialName": "canada"
+          },
+          "maps": []
+        },
+        {
+          "material": "concrete",
+          "semanticRole": "concrete",
+          "sharedSurfaceId": "skytrain-stage2-concrete",
+          "primitiveSelection": {
+            "materialName": "concrete"
+          },
+          "maps": []
+        },
+        {
+          "material": "wall",
+          "semanticRole": "wall",
+          "sharedSurfaceId": "skytrain-stage2-wall",
+          "primitiveSelection": {
+            "materialName": "wall"
+          },
+          "maps": []
+        },
+        {
+          "material": "wood",
+          "semanticRole": "wood",
+          "sharedSurfaceId": "skytrain-stage2-wood",
+          "primitiveSelection": {
+            "materialName": "wood"
+          },
+          "maps": []
+        },
+        {
+          "material": "yellow",
+          "semanticRole": "yellow",
+          "sharedSurfaceId": "skytrain-stage2-yellow",
+          "primitiveSelection": {
+            "materialName": "yellow"
+          },
+          "maps": []
+        },
+        {
+          "material": "floor",
+          "semanticRole": "floor",
+          "sharedSurfaceId": "skytrain-stage2-floor",
+          "primitiveSelection": {
+            "materialName": "floor"
+          },
+          "maps": []
+        }
+      ],
+      "textureMode": "shared-role-placeholder",
+      "textureCost": {
+        "geometryBytes": 134684,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 134684,
+        "uniqueTexelBytesWithMips": 0
+      },
+      "lodPolicy": {
+        "singleNearDetailLOD": true,
+        "globalResident": false,
+        "distanceProposalM": 80,
+        "runtimeBudgetValidation": "not_run",
+        "sharedGeometry": "batched by role/material; individual walk surfaces retained",
+        "terrainCutoutRequired": true
+      },
+      "clearance": {
+        "stationLayoutRef": "station-layout.json",
+        "humanReferenceM": 1.81,
+        "platformRoofClearanceM": 3.55,
+        "certification": false
+      },
+      "collision": {
+        "type": "layout-surfaces-plus-oriented-obstacles-and-track-exclusion",
+        "layoutRef": "station-layout.json",
+        "dynamicElevatorAndBoarding": "not_implemented"
+      },
+      "anchors": [
+        {
+          "id": "vcc-canada-northbound-stop",
+          "nodeId": "anchor-vcc-canada-northbound-stop",
+          "frameId": "vancouver-city-centre",
+          "pointM": [
+            -5.2,
+            -10.1,
+            0.0
+          ],
+          "kind": "vehicle-root-stop"
+        },
+        {
+          "id": "vcc-canada-northbound-car1-door1",
+          "nodeId": "anchor-vcc-canada-northbound-car1-door1",
+          "frameId": "vancouver-city-centre",
+          "pointM": [
+            -3.5,
+            -9,
+            4.1
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "vcc-canada-northbound-car1-door2",
+          "nodeId": "anchor-vcc-canada-northbound-car1-door2",
+          "frameId": "vancouver-city-centre",
+          "pointM": [
+            -3.5,
+            -9,
+            10.5
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "vcc-canada-northbound-car1-door3",
+          "nodeId": "anchor-vcc-canada-northbound-car1-door3",
+          "frameId": "vancouver-city-centre",
+          "pointM": [
+            -3.5,
+            -9,
+            16.9
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "vcc-canada-northbound-car2-door1",
+          "nodeId": "anchor-vcc-canada-northbound-car2-door1",
+          "frameId": "vancouver-city-centre",
+          "pointM": [
+            -3.5,
+            -9,
+            -4.1
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "vcc-canada-northbound-car2-door2",
+          "nodeId": "anchor-vcc-canada-northbound-car2-door2",
+          "frameId": "vancouver-city-centre",
+          "pointM": [
+            -3.5,
+            -9,
+            -10.5
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "vcc-canada-northbound-car2-door3",
+          "nodeId": "anchor-vcc-canada-northbound-car2-door3",
+          "frameId": "vancouver-city-centre",
+          "pointM": [
+            -3.5,
+            -9,
+            -16.9
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "vcc-canada-southbound-stop",
+          "nodeId": "anchor-vcc-canada-southbound-stop",
+          "frameId": "vancouver-city-centre",
+          "pointM": [
+            5.2,
+            -10.1,
+            0.0
+          ],
+          "kind": "vehicle-root-stop"
+        },
+        {
+          "id": "vcc-canada-southbound-car1-door1",
+          "nodeId": "anchor-vcc-canada-southbound-car1-door1",
+          "frameId": "vancouver-city-centre",
+          "pointM": [
+            3.5,
+            -9,
+            4.1
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "vcc-canada-southbound-car1-door2",
+          "nodeId": "anchor-vcc-canada-southbound-car1-door2",
+          "frameId": "vancouver-city-centre",
+          "pointM": [
+            3.5,
+            -9,
+            10.5
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "vcc-canada-southbound-car1-door3",
+          "nodeId": "anchor-vcc-canada-southbound-car1-door3",
+          "frameId": "vancouver-city-centre",
+          "pointM": [
+            3.5,
+            -9,
+            16.9
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "vcc-canada-southbound-car2-door1",
+          "nodeId": "anchor-vcc-canada-southbound-car2-door1",
+          "frameId": "vancouver-city-centre",
+          "pointM": [
+            3.5,
+            -9,
+            -4.1
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "vcc-canada-southbound-car2-door2",
+          "nodeId": "anchor-vcc-canada-southbound-car2-door2",
+          "frameId": "vancouver-city-centre",
+          "pointM": [
+            3.5,
+            -9,
+            -10.5
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "vcc-canada-southbound-car2-door3",
+          "nodeId": "anchor-vcc-canada-southbound-car2-door3",
+          "frameId": "vancouver-city-centre",
+          "pointM": [
+            3.5,
+            -9,
+            -16.9
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "vcc-canada-entrance",
+          "nodeId": "anchor-vcc-canada-entrance",
+          "frameId": "vancouver-city-centre",
+          "pointM": [
+            0.0,
+            0,
+            -50.6
+          ],
+          "kind": "entrance-exit"
+        }
+      ],
+      "placementCompatibility": {
+        "frameId": "vancouver-city-centre",
+        "localToWorld": {
+          "frameId": "vancouver-city-centre",
+          "parentFrameId": "atlas-world",
+          "translationM": [
+            632.881578,
+            0,
+            474.812366
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            -0.3826834323650898,
+            0,
+            0.9238795325112867
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "horizontalProjection": "lib/city/geo.ts ORIGIN [-123.128,49.286], MX=111320*cos(49.286deg), world +Z south",
+          "headingBasis": "representative map-aligned heading, not surveyed track tangent",
+          "verticalDatum": "local street=0; world Y=0 placeholder MUST be replaced after terrain/track survey",
+          "worldPlacementReady": false
+        },
+        "sourceGeographicAnchor": {
+          "provider": "City of Vancouver rapid-transit-stations",
+          "coordinatesLonLat": [
+            -123.11928408921445,
+            49.28173470745285
+          ],
+          "allMatchingCityPointsLonLat": [
+            [
+              -123.11928408921445,
+              49.28173470745285
+            ]
+          ],
+          "gtfsParentLonLat": [
+            -123.118227,
+            49.282415
+          ],
+          "meaning": "station selection/initial anchor only, not a surveyed entrance/platform centre",
+          "cityPointMinusGtfsDistanceM": 107.828
+        },
+        "ready": false
+      },
+      "intendedConsumer": "D06 integration agent; offline geometry and interface validation only",
+      "offlineChecks": {
+        "commonGLBMeasured": true,
+        "editableSourceExists": true,
+        "sourceMapPixelsInspected": true,
+        "topology": "qa/validation.json",
+        "actualGlbCpuPreview": "qa/previews/index.json"
+      },
+      "runtimeChecks": {
+        "worldPlacement": "not_run",
+        "terrainAttachment": "not_run",
+        "walkAndElevatorRuntime": "not_run",
+        "doorBoardingAndMovingCollision": "not_run",
+        "webglDrawCallsAndLifecycle": "not_run",
+        "readyForBoarding": false
+      }
+    },
+    {
+      "id": "yaletown-roundhouse",
+      "taskId": "D01",
+      "variant": "deep-underground-brick-pavilion",
+      "kind": "station-layout",
+      "source": "source/yaletown-roundhouse.blend",
+      "sourceSha256": "cd0270d672c7eba287d101d6f69ada75bd38f123fb30c583a57ce2aed7ec281d",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/yaletown-roundhouse.glb",
+          "sha256": "3710b640dcfd9512ccdeead84a4392392f559dc7a16219af0e1c61338e62c98e",
+          "source": "source/yaletown-roundhouse.blend",
+          "sourceSha256": "cd0270d672c7eba287d101d6f69ada75bd38f123fb30c583a57ce2aed7ec281d",
+          "sourceBytes": 134869,
+          "triangles": 2112,
+          "vertices": 4224,
+          "primitives": 39,
+          "bytes": 171752,
+          "boundsM": {
+            "min": [
+              -6.5,
+              -16.57000084221363,
+              -68.5
+            ],
+            "max": [
+              6.5,
+              3.600000001490116,
+              28.0
+            ],
+            "size": [
+              13.0,
+              20.170000843703747,
+              96.5
+            ]
+          },
+          "geometryBytes": 171752,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -6.5,
+          -16.57000084221363,
+          -68.5
+        ],
+        "max": [
+          6.5,
+          3.600000001490116,
+          28.0
+        ],
+        "size": [
+          13.0,
+          20.170000843703747,
+          96.5
+        ]
+      },
+      "expectedDimensionsM": [
+        13.0,
+        20.170000843703747,
+        96.5
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Bounds measured from actual GLB, not independent survey targets. Platform lengths 74 m Expo / 44 m Canada; all other dimensions illustrative.",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "local street datum; never recenter by bounds"
+      },
+      "attachmentDatum": {
+        "type": "station-local-street",
+        "planeY": 0,
+        "worldYUnresolved": true
+      },
+      "frontAxis": "+Z representative track axis",
+      "materialBindings": [
+        {
+          "material": "steel",
+          "semanticRole": "steel",
+          "sharedSurfaceId": "skytrain-stage2-steel",
+          "primitiveSelection": {
+            "materialName": "steel"
+          },
+          "maps": []
+        },
+        {
+          "material": "wood",
+          "semanticRole": "wood",
+          "sharedSurfaceId": "skytrain-stage2-wood",
+          "primitiveSelection": {
+            "materialName": "wood"
+          },
+          "maps": []
+        },
+        {
+          "material": "canada",
+          "semanticRole": "canada",
+          "sharedSurfaceId": "skytrain-stage2-canada",
+          "primitiveSelection": {
+            "materialName": "canada"
+          },
+          "maps": []
+        },
+        {
+          "material": "concrete",
+          "semanticRole": "concrete",
+          "sharedSurfaceId": "skytrain-stage2-concrete",
+          "primitiveSelection": {
+            "materialName": "concrete"
+          },
+          "maps": []
+        },
+        {
+          "material": "brick",
+          "semanticRole": "brick",
+          "sharedSurfaceId": "skytrain-stage2-brick",
+          "primitiveSelection": {
+            "materialName": "brick"
+          },
+          "maps": []
+        },
+        {
+          "material": "yellow",
+          "semanticRole": "yellow",
+          "sharedSurfaceId": "skytrain-stage2-yellow",
+          "primitiveSelection": {
+            "materialName": "yellow"
+          },
+          "maps": []
+        },
+        {
+          "material": "floor",
+          "semanticRole": "floor",
+          "sharedSurfaceId": "skytrain-stage2-floor",
+          "primitiveSelection": {
+            "materialName": "floor"
+          },
+          "maps": []
+        }
+      ],
+      "textureMode": "shared-role-placeholder",
+      "textureCost": {
+        "geometryBytes": 171752,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 171752,
+        "uniqueTexelBytesWithMips": 0
+      },
+      "lodPolicy": {
+        "singleNearDetailLOD": true,
+        "globalResident": false,
+        "distanceProposalM": 80,
+        "runtimeBudgetValidation": "not_run",
+        "sharedGeometry": "batched by role/material; individual walk surfaces retained",
+        "terrainCutoutRequired": true
+      },
+      "clearance": {
+        "stationLayoutRef": "station-layout.json",
+        "humanReferenceM": 1.81,
+        "platformRoofClearanceM": 3.55,
+        "certification": false
+      },
+      "collision": {
+        "type": "layout-surfaces-plus-oriented-obstacles-and-track-exclusion",
+        "layoutRef": "station-layout.json",
+        "dynamicElevatorAndBoarding": "not_implemented"
+      },
+      "anchors": [
+        {
+          "id": "yaletown-canada-northbound-stop",
+          "nodeId": "anchor-yaletown-canada-northbound-stop",
+          "frameId": "yaletown-roundhouse",
+          "pointM": [
+            -4.7,
+            -16.1,
+            0.0
+          ],
+          "kind": "vehicle-root-stop"
+        },
+        {
+          "id": "yaletown-canada-northbound-car1-door1",
+          "nodeId": "anchor-yaletown-canada-northbound-car1-door1",
+          "frameId": "yaletown-roundhouse",
+          "pointM": [
+            -3.0,
+            -15,
+            4.1
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "yaletown-canada-northbound-car1-door2",
+          "nodeId": "anchor-yaletown-canada-northbound-car1-door2",
+          "frameId": "yaletown-roundhouse",
+          "pointM": [
+            -3.0,
+            -15,
+            10.5
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "yaletown-canada-northbound-car1-door3",
+          "nodeId": "anchor-yaletown-canada-northbound-car1-door3",
+          "frameId": "yaletown-roundhouse",
+          "pointM": [
+            -3.0,
+            -15,
+            16.9
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "yaletown-canada-northbound-car2-door1",
+          "nodeId": "anchor-yaletown-canada-northbound-car2-door1",
+          "frameId": "yaletown-roundhouse",
+          "pointM": [
+            -3.0,
+            -15,
+            -4.1
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "yaletown-canada-northbound-car2-door2",
+          "nodeId": "anchor-yaletown-canada-northbound-car2-door2",
+          "frameId": "yaletown-roundhouse",
+          "pointM": [
+            -3.0,
+            -15,
+            -10.5
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "yaletown-canada-northbound-car2-door3",
+          "nodeId": "anchor-yaletown-canada-northbound-car2-door3",
+          "frameId": "yaletown-roundhouse",
+          "pointM": [
+            -3.0,
+            -15,
+            -16.9
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "yaletown-canada-southbound-stop",
+          "nodeId": "anchor-yaletown-canada-southbound-stop",
+          "frameId": "yaletown-roundhouse",
+          "pointM": [
+            4.7,
+            -16.1,
+            0.0
+          ],
+          "kind": "vehicle-root-stop"
+        },
+        {
+          "id": "yaletown-canada-southbound-car1-door1",
+          "nodeId": "anchor-yaletown-canada-southbound-car1-door1",
+          "frameId": "yaletown-roundhouse",
+          "pointM": [
+            3.0,
+            -15,
+            4.1
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "yaletown-canada-southbound-car1-door2",
+          "nodeId": "anchor-yaletown-canada-southbound-car1-door2",
+          "frameId": "yaletown-roundhouse",
+          "pointM": [
+            3.0,
+            -15,
+            10.5
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "yaletown-canada-southbound-car1-door3",
+          "nodeId": "anchor-yaletown-canada-southbound-car1-door3",
+          "frameId": "yaletown-roundhouse",
+          "pointM": [
+            3.0,
+            -15,
+            16.9
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "yaletown-canada-southbound-car2-door1",
+          "nodeId": "anchor-yaletown-canada-southbound-car2-door1",
+          "frameId": "yaletown-roundhouse",
+          "pointM": [
+            3.0,
+            -15,
+            -4.1
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "yaletown-canada-southbound-car2-door2",
+          "nodeId": "anchor-yaletown-canada-southbound-car2-door2",
+          "frameId": "yaletown-roundhouse",
+          "pointM": [
+            3.0,
+            -15,
+            -10.5
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "yaletown-canada-southbound-car2-door3",
+          "nodeId": "anchor-yaletown-canada-southbound-car2-door3",
+          "frameId": "yaletown-roundhouse",
+          "pointM": [
+            3.0,
+            -15,
+            -16.9
+          ],
+          "kind": "platform-door"
+        },
+        {
+          "id": "yaletown-canada-entrance",
+          "nodeId": "anchor-yaletown-canada-entrance",
+          "frameId": "yaletown-roundhouse",
+          "pointM": [
+            0.0,
+            0,
+            -65.0
+          ],
+          "kind": "entrance-exit"
+        }
+      ],
+      "placementCompatibility": {
+        "frameId": "yaletown-roundhouse",
+        "localToWorld": {
+          "frameId": "yaletown-roundhouse",
+          "parentFrameId": "atlas-world",
+          "translationM": [
+            443.633194,
+            0,
+            1295.513791
+          ],
+          "rotationQuaternionXYZW": [
+            0,
+            -0.9238795325112867,
+            0,
+            0.38268343236508984
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "horizontalProjection": "lib/city/geo.ts ORIGIN [-123.128,49.286], MX=111320*cos(49.286deg), world +Z south",
+          "headingBasis": "representative map-aligned heading, not surveyed track tangent",
+          "verticalDatum": "local street=0; world Y=0 placeholder MUST be replaced after terrain/track survey",
+          "worldPlacementReady": false
+        },
+        "sourceGeographicAnchor": {
+          "provider": "City of Vancouver rapid-transit-stations",
+          "coordinatesLonLat": [
+            -123.1218903777964,
+            49.2743622548375
+          ],
+          "allMatchingCityPointsLonLat": [
+            [
+              -123.1218903777964,
+              49.2743622548375
+            ]
+          ],
+          "gtfsParentLonLat": [
+            -123.122079,
+            49.274492
+          ],
+          "meaning": "station selection/initial anchor only, not a surveyed entrance/platform centre",
+          "cityPointMinusGtfsDistanceM": 19.905
+        },
+        "ready": false
+      },
+      "intendedConsumer": "D06 integration agent; offline geometry and interface validation only",
+      "offlineChecks": {
+        "commonGLBMeasured": true,
+        "editableSourceExists": true,
+        "sourceMapPixelsInspected": true,
+        "topology": "qa/validation.json",
+        "actualGlbCpuPreview": "qa/previews/index.json"
+      },
+      "runtimeChecks": {
+        "worldPlacement": "not_run",
+        "terrainAttachment": "not_run",
+        "walkAndElevatorRuntime": "not_run",
+        "doorBoardingAndMovingCollision": "not_run",
+        "webglDrawCallsAndLifecycle": "not_run",
+        "readyForBoarding": false
+      }
+    },
+    {
+      "id": "threshold-bridge-expo",
+      "taskId": "D01",
+      "variant": "representative-deployable-threshold",
+      "kind": "station-module",
+      "source": "source/threshold-bridge-expo.blend",
+      "sourceSha256": "4a8b9587bfbae5a6c74342f016bc2546cf9643c7a90a6c32b9b5c4be2b466345",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/threshold-bridge-expo.glb",
+          "sha256": "855b9e349b6ef01bbebd723f1edea3bbb8e5d79b60b3a2c5d794d38f39b1ba6c",
+          "source": "source/threshold-bridge-expo.blend",
+          "sourceSha256": "4a8b9587bfbae5a6c74342f016bc2546cf9643c7a90a6c32b9b5c4be2b466345",
+          "sourceBytes": 85688,
+          "triangles": 12,
+          "vertices": 24,
+          "primitives": 1,
+          "bytes": 1836,
+          "boundsM": {
+            "min": [
+              -0.10999999940395355,
+              -0.014999999664723873,
+              -0.6499999761581421
+            ],
+            "max": [
+              0.10999999940395355,
+              0.0,
+              0.6499999761581421
+            ],
+            "size": [
+              0.2199999988079071,
+              0.014999999664723873,
+              1.2999999523162842
+            ]
+          },
+          "geometryBytes": 1836,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.10999999940395355,
+          -0.014999999664723873,
+          -0.6499999761581421
+        ],
+        "max": [
+          0.10999999940395355,
+          0.0,
+          0.6499999761581421
+        ],
+        "size": [
+          0.2199999988079071,
+          0.014999999664723873,
+          1.2999999523162842
+        ]
+      },
+      "expectedDimensionsM": [
+        0.22,
+        0.015,
+        1.3
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Original portable bridge; root on upper face, deployed bottom rests on vehicle sill and platform; top rises15mm",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "upper-face centre"
+      },
+      "attachmentDatum": {
+        "type": "conditional-boarding-surface",
+        "planeY": 0
+      },
+      "frontAxis": "+Z representative track axis",
+      "materialBindings": [
+        {
+          "material": "steel",
+          "semanticRole": "threshold-bridge",
+          "sharedSurfaceId": "skytrain-stage2-steel",
+          "primitiveSelection": {
+            "materialName": "steel"
+          },
+          "maps": []
+        }
+      ],
+      "textureMode": "shared-role-placeholder",
+      "textureCost": {
+        "geometryBytes": 1836,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 1836,
+        "uniqueTexelBytesWithMips": 0
+      },
+      "lodPolicy": {
+        "singleNearDetailLOD": true,
+        "globalResident": false,
+        "distanceProposalM": 80,
+        "runtimeBudgetValidation": "not_run",
+        "sharedGeometry": "batched by role/material; individual walk surfaces retained",
+        "terrainCutoutRequired": true
+      },
+      "clearance": {
+        "stationLayoutRef": "station-layout.json",
+        "humanReferenceM": 1.81,
+        "platformRoofClearanceM": 3.55,
+        "certification": false
+      },
+      "collision": {
+        "type": "layout-surfaces-plus-oriented-obstacles-and-track-exclusion",
+        "layoutRef": "station-layout.json",
+        "dynamicElevatorAndBoarding": "not_implemented"
+      },
+      "anchors": [
+        {
+          "id": "top-centre",
+          "pointM": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "layoutRef": "station-layout.json",
+        "line": "expo",
+        "useOnlyPairedDoorInstancePoses": true
+      },
+      "intendedConsumer": "D06 integration agent; offline geometry and interface validation only",
+      "offlineChecks": {
+        "commonGLBMeasured": true,
+        "editableSourceExists": true,
+        "sourceMapPixelsInspected": true,
+        "topology": "qa/validation.json",
+        "actualGlbCpuPreview": "qa/previews/index.json"
+      },
+      "runtimeChecks": {
+        "deploymentAndCollision": "not_run",
+        "readyForBoarding": false
+      }
+    },
+    {
+      "id": "threshold-bridge-canada",
+      "taskId": "D01",
+      "variant": "representative-deployable-threshold",
+      "kind": "station-module",
+      "source": "source/threshold-bridge-canada.blend",
+      "sourceSha256": "7c9ae04fde444ec2e175476546b96325106d8205cb107ef5851fff1d04d45836",
+      "lods": [
+        {
+          "level": 0,
+          "file": "exports/threshold-bridge-canada.glb",
+          "sha256": "8ff5cbe5586ae6e6496fc39e50ffe3104653999cfd4305d06e292533a307ba4e",
+          "source": "source/threshold-bridge-canada.blend",
+          "sourceSha256": "7c9ae04fde444ec2e175476546b96325106d8205cb107ef5851fff1d04d45836",
+          "sourceBytes": 86164,
+          "triangles": 12,
+          "vertices": 24,
+          "primitives": 1,
+          "bytes": 1840,
+          "boundsM": {
+            "min": [
+              -0.11999999731779099,
+              -0.014999999664723873,
+              -0.6499999761581421
+            ],
+            "max": [
+              0.11999999731779099,
+              0.0,
+              0.6499999761581421
+            ],
+            "size": [
+              0.23999999463558197,
+              0.014999999664723873,
+              1.2999999523162842
+            ]
+          },
+          "geometryBytes": 1840,
+          "embeddedImageBytes": 0
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -0.11999999731779099,
+          -0.014999999664723873,
+          -0.6499999761581421
+        ],
+        "max": [
+          0.11999999731779099,
+          0.0,
+          0.6499999761581421
+        ],
+        "size": [
+          0.23999999463558197,
+          0.014999999664723873,
+          1.2999999523162842
+        ]
+      },
+      "expectedDimensionsM": [
+        0.24,
+        0.015,
+        1.3
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Original portable bridge; root on upper face, deployed bottom rests on vehicle sill and platform; top rises15mm",
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "upper-face centre"
+      },
+      "attachmentDatum": {
+        "type": "conditional-boarding-surface",
+        "planeY": 0
+      },
+      "frontAxis": "+Z representative track axis",
+      "materialBindings": [
+        {
+          "material": "steel",
+          "semanticRole": "threshold-bridge",
+          "sharedSurfaceId": "skytrain-stage2-steel",
+          "primitiveSelection": {
+            "materialName": "steel"
+          },
+          "maps": []
+        }
+      ],
+      "textureMode": "shared-role-placeholder",
+      "textureCost": {
+        "geometryBytes": 1840,
+        "embeddedImageBytes": 0,
+        "glbTotalBytes": 1840,
+        "uniqueTexelBytesWithMips": 0
+      },
+      "lodPolicy": {
+        "singleNearDetailLOD": true,
+        "globalResident": false,
+        "distanceProposalM": 80,
+        "runtimeBudgetValidation": "not_run",
+        "sharedGeometry": "batched by role/material; individual walk surfaces retained",
+        "terrainCutoutRequired": true
+      },
+      "clearance": {
+        "stationLayoutRef": "station-layout.json",
+        "humanReferenceM": 1.81,
+        "platformRoofClearanceM": 3.55,
+        "certification": false
+      },
+      "collision": {
+        "type": "layout-surfaces-plus-oriented-obstacles-and-track-exclusion",
+        "layoutRef": "station-layout.json",
+        "dynamicElevatorAndBoarding": "not_implemented"
+      },
+      "anchors": [
+        {
+          "id": "top-centre",
+          "pointM": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "placementCompatibility": {
+        "layoutRef": "station-layout.json",
+        "line": "canada",
+        "useOnlyPairedDoorInstancePoses": true
+      },
+      "intendedConsumer": "D06 integration agent; offline geometry and interface validation only",
+      "offlineChecks": {
+        "commonGLBMeasured": true,
+        "editableSourceExists": true,
+        "sourceMapPixelsInspected": true,
+        "topology": "qa/validation.json",
+        "actualGlbCpuPreview": "qa/previews/index.json"
+      },
+      "runtimeChecks": {
+        "deploymentAndCollision": "not_run",
+        "readyForBoarding": false
+      }
+    }
+  ],
+  "runtimeChecks": {
+    "webgl": "not_run",
+    "terrainAndTrackPlacement": "not_run",
+    "boarding": "not_run",
+    "nightLighting": "excluded"
+  }
+}

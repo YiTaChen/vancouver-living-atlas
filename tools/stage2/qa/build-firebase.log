@@ -1,0 +1,106 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> vancouver-living-atlas@0.1.0 build:firebase
+> VANCOUVER_STATIC_EXPORT=1 vinext build && node tools/verify-firebase-build.mjs
+
+
+  vinext build  (Vite 8.2.2)
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mProxy environment variables detected. We'll use your proxy for fetch requests.[0m
+
+
+[1/5] analyze client references...
+transforming...
+✓ 239 modules transformed.
+rendering chunks...
+✓ built in 10.78s
+[33m[PLUGIN_TIMINGS] [0mPlugin hooks ran for 10.5s of this 10.7s build (98%).
+The slowest hooks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
+  - vite:css transform (75%, 8.0s, 1 call)
+Additional hook time came from the hooks below and from hooks under 1s.
+5 hooks are listed without a time. Their calls overlapped, so the time inside one call includes work from other calls. To find their cost, profile the build with `node --cpu-prof`:
+  - rsc:virtual-client-package resolveId (792 calls)
+  - vinext:og-inline-fetch-assets resolveId (824 calls)
+  - alias resolveId (892 calls)
+  … and 2 more
+See https://rolldown.rs/reference/InputOptions.checks#plugintimings for more details.
+
+[2/5] analyze server references...
+transforming...
+✓ 671 modules transformed.
+rendering chunks...
+✓ built in 8.28s
+[33m[PLUGIN_TIMINGS] [0mPlugin hooks ran for 7.9s of this 8.2s build (97%).
+The slowest hooks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
+  - vinext:ignore-dynamic-requests transform (28%, 2.3s, 81 calls)
+  - vinext:typeof-window-scan transform (17%, 1.4s, 18 calls)
+Additional hook time came from the hooks below and from hooks under 1s.
+2 hooks are listed without a time. Their calls overlapped, so the time inside one call includes work from other calls. To find their cost, profile the build with `node --cpu-prof`:
+  - vinext:og-inline-fetch-assets resolveId (2017 calls)
+  - alias resolveId (2381 calls)
+See https://rolldown.rs/reference/InputOptions.checks#plugintimings for more details.
+
+[3/5] build rsc environment...
+transforming...
+✓ 230 modules transformed.
+rendering chunks...
+computing gzip size...
+✓ built in 6.82s
+[33m[PLUGIN_TIMINGS] [0mPlugin hooks ran for 6.3s of this 6.8s build (92%).
+The slowest hooks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
+  - vite:css transform (64%, 4.3s, 1 call)
+Additional hook time came from the hooks below and from hooks under 1s.
+5 hooks are listed without a time. Their calls overlapped, so the time inside one call includes work from other calls. To find their cost, profile the build with `node --cpu-prof`:
+  - rsc:virtual-client-package resolveId (736 calls)
+  - vinext:og-inline-fetch-assets resolveId (771 calls)
+  - alias resolveId (849 calls)
+  … and 2 more
+See https://rolldown.rs/reference/InputOptions.checks#plugintimings for more details.
+
+[4/5] build client environment...
+transforming...
+✓ 2404 modules transformed.
+rendering chunks...
+computing gzip size...
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 9.62s
+[5/5] build ssr environment...
+transforming...
+✓ 636 modules transformed.
+rendering chunks...
+computing gzip size...
+✓ built in 2.52s
+[0m  Pre-rendering all routes (output: 'export')...
+[vinext] Production server for prerendering running at http://127.0.0.1:39537
+  Prerendered 2 routes (0 skipped).
+  Discovered 1 CDN warmup path(s).
+[0m
+  Route (app)
+  ─ ○ /
+
+  ○ Static
+
+  ○ Routes marked static were confirmed by speculative prerender (attempted render
+    succeeded without dynamic API usage).
+
+  Build complete. Run `vinext start` to start the production server.
+
+Emitted landmark worker verified: initializes without Window/DOM and handles protocol messages.
+Firebase static build verified: English HTML, ten-language UI and geographic assets.
+Blender delivery isolation verified: { adoptedFiles: 19, protectedCandidateHashes: 176 }
+City-life runtime adoption verified: {
+  status: 'pass',
+  adoptedFiles: 8,
+  protectedSourceHashes: 44,
+  emittedFiles: 101,
+  browserNetwork: 'separate WebGL acceptance required'
+}
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
