@@ -81,7 +81,7 @@ test('production bus v2 projection deploys exactly the budget candidate and reus
   );
   assert.deepEqual(
     manifest.assets[1].lods.map((lod) => lod.bytes),
-    [736884, 202492],
+    [737440, 202792],
   );
   assert.ok(
     manifest.assets[0].lods.every((lod) =>
@@ -184,17 +184,17 @@ test('v2 parked LOD0 preserves actual PBR/geometry, neutral COLOR_0, 24 cameras,
     const support = owner.cabinSurfaces;
     for (const [x, z, height, id] of [
       [0, 0, 0.36, 'low-floor'],
-      [0, -1.58, 0.52, 'rear-step-1'],
-      [0, -1.82, 0.68, 'rear-step-2'],
+      [0, -2.62, 0.52, 'rear-step-1'],
+      [0, -2.86, 0.68, 'rear-step-2'],
       [0, -3.1, 0.68, 'raised-rear'],
-      [-1.2, 4.275, 0.36, 'front-door-threshold-extension'],
-      [-1.2, -0.625, 0.36, 'rear-door-threshold-extension'],
+      [-1.2, 4.6, 0.36, 'front-door-threshold-extension'],
+      [-1.2, -1.85, 0.36, 'rear-door-threshold-extension'],
     ]) {
       const floor = support.floorAt(x, z);
       assert.equal(floor.surfaceId, id);
       assert.ok(Math.abs(floor.heightM - height) < 1e-5);
     }
-    assert.equal(support.floorAt(-1.4, 4.275), null);
+    assert.equal(support.floorAt(-1.4, 4.6), null);
     assert.equal(support.canStand(0, 0), true);
     assert.equal(
       support.canStand(0, -3.1),
@@ -202,7 +202,7 @@ test('v2 parked LOD0 preserves actual PBR/geometry, neutral COLOR_0, 24 cameras,
       'rear headroom is seated-only',
     );
     assert.equal(
-      support.canStand(0, -1.58),
+      support.canStand(0, -2.62),
       false,
       'steps do not offer standing anchors',
     );
@@ -236,7 +236,7 @@ test('v2 parked LOD0 preserves actual PBR/geometry, neutral COLOR_0, 24 cameras,
     owner.group.position.set(20, 7, 40);
     owner.group.rotation.y = 0.4;
     assert.ok(
-      Math.abs(support.floorAt(0, -1.58).heightM - 0.52) < 1e-5,
+      Math.abs(support.floorAt(0, -2.62).heightM - 0.52) < 1e-5,
       'support remains vehicle-local after world placement',
     );
     owner.dispose();

@@ -79,8 +79,8 @@ test('reviewed bus exports and canonical full boarding metadata are adopted with
   assert(bus.every((entry) => entry.sourceManifestSha256 === BUS_SOURCE_MANIFEST_SHA256));
   const result = await verifyBusAdoption(path.resolve('public'));
   assert.equal(result.adoptedFiles, 6);
-  assert.equal(result.geometryBytes, 797812);
-  assert.equal(result.metadataBytes, 107555);
+  assert.equal(result.geometryBytes, 809844);
+  assert.equal(result.metadataBytes, 110674);
 });
 
 test('production metadata preserves complete frames, floor, doors, passenger and collision contracts', async () => {

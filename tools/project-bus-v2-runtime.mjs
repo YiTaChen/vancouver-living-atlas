@@ -6,9 +6,9 @@ import { pathToFileURL } from 'node:url';
 import { composeRuntimeCandidate } from './assets/boardable-bus-v2/runtime-candidate/compose.mjs';
 
 export const BUS_V2_SOURCE_REVISION =
-  '28a23c86821a7502faa7425da6e430d625d97ac1';
+  '5fe7734ea1b2edfc02069128cb676509e6ac63af';
 export const BUS_V2_SOURCE_MANIFEST_SHA256 =
-  '84c358c33e2a76dd2274bb41cb9443c3c4e0f3d923f59b0038595ae6d6a1a413';
+  'cfa0825957b9a3e906c16b88976bc36883c41f5910027a70eaf498f7161b89d2';
 export const BUS_V2_SOURCE_PATH =
   'tools/assets/boardable-bus-v2/runtime-candidate';
 export const BUS_V2_PUBLIC_PREFIX = 'models/blender/bus-v2/';
@@ -24,7 +24,7 @@ const select = (object, keys) =>
 export function projectBusV2RuntimeMetadata(composed) {
   assert.equal(composed.packageId, 'boardable-bus-v2-runtime-candidate');
   assert.equal(composed.schemaVersion, 1);
-  assert.equal(composed.version, '1.0.0');
+  assert.equal(composed.version, '1.1.0');
   assert.equal(composed.units, 'm');
   const assets = composed.assets.map((asset) => ({
     ...clone(

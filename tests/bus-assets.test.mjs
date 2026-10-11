@@ -136,10 +136,10 @@ test('actual near exterior/interior pair uses eight shared roles and bounded com
     assert.equal(s.allocatedBatches, 8);
     assert.equal(s.populatedBatches, 8);
     assert.equal(s.nearActors, 4);
-    assert.equal(s.triangles, 4 * 2_618);
+    assert.equal(s.triangles, 4 * 2_694);
     assert.equal(s.materials, 8);
     assert.equal(s.textures, 0);
-    assert.equal(s.assetBytes, 137_088 + 122_468);
+    assert.equal(s.assetBytes, 140_484 + 125_620);
     assert.equal(s.loadedTemplates, 2);
     assert.equal(f.calls.length, 2);
     assert.ok(f.calls.every((url) => /\.lod1\.glb\?v=[a-f0-9]{12}$/.test(url)));
@@ -376,7 +376,10 @@ test('parked source meshes have neutral vertex colors without changing original 
   });
   try {
     const owner = await assets.loadBoardable();
-    assert.ok(missingColors > 0, 'actual LOD0 payload exercises absent COLOR_0');
+    assert.ok(
+      missingColors > 0,
+      'actual LOD0 payload exercises absent COLOR_0',
+    );
     let meshes = 0;
     const colors = new Map();
     owner.group.traverse((object) => {
@@ -404,7 +407,10 @@ test('parked source meshes have neutral vertex colors without changing original 
       assert.equal(object.material.metalness, original.metalness);
       assert.equal(object.material.opacity, original.opacity);
       assert.ok(object.material.emissive.equals(original.emissive));
-      assert.equal(object.material.emissiveIntensity, original.emissiveIntensity);
+      assert.equal(
+        object.material.emissiveIntensity,
+        original.emissiveIntensity,
+      );
     });
     assert.equal(meshes, 28);
     owner.dispose();
@@ -709,5 +715,111 @@ test('a failed metadata request is retried on the next parked demand rather than
     assert.ok(owner.group);
   } finally {
     assets.dispose();
+  }
+});
+
+test('mutable manifests revalidate cache and retry stale 1.0 assets into actual 1.1 budget and reference visits', async () => {
+  const savedFetch = globalThis.fetch,
+    savedSelf = globalThis.self,
+    requests = [];
+  let servedVersion = '1.0.0';
+  globalThis.self = globalThis;
+  globalThis.fetch = async (url, options) => {
+    if (typeof url !== 'string')
+      throw new Error('Expected a bus manifest path');
+    requests.push({ url, cache: options?.cache });
+    assert.match(
+      url,
+      /^\/models\/blender\/(bus|bus-v2|bus-closeup)\/manifest\.json$/,
+    );
+    const served = JSON.parse(readFileSync(`public${url}`, 'utf8'));
+    served.version = servedVersion;
+    return { ok: true, json: async () => served };
+  };
+  try {
+    for (const [interiorVersion, profile] of [
+      ['v1', 'budget'],
+      ['v2', 'budget'],
+      ['v2', 'reference-lod1'],
+    ]) {
+      const loads = [];
+      const assets = new CityBusAssets([route()], new THREE.Group(), {
+        interiorVersion,
+        load: async (url) => {
+          loads.push(url);
+          const bytes = readFileSync(`public${url.split('?')[0]}`),
+            loader = new GLTFLoader();
+          // Decode only the embedded bitmap; retain actual GLB geometry,
+          // texture bindings and sampler validation for a real reference owner.
+          loader.register((parser) => ({
+            name: 'metadata-cache-test-texture-decoder',
+            beforeRoot() {
+              parser.textureLoader = {
+                load(_url, ok) {
+                  queueMicrotask(() =>
+                    ok(new THREE.Texture({ width: 256, height: 256 })),
+                  );
+                },
+              };
+            },
+          }));
+          return loader.parseAsync(
+            bytes.buffer.slice(
+              bytes.byteOffset,
+              bytes.byteOffset + bytes.byteLength,
+            ),
+            '',
+          );
+        },
+      });
+      try {
+        servedVersion = '1.0.0';
+        await assert.rejects(
+          assets.loadBoardable({ profile }),
+          /Unsupported bus manifest/,
+        );
+        assert.equal(
+          loads.length,
+          0,
+          'stale metadata cannot request old door geometry',
+        );
+        assert.equal(assets.stats().boardableOwners, 0);
+
+        servedVersion = '1.1.0';
+        const owner = await assets.loadBoardable({ profile });
+        assert.equal(owner.manifest.version, '1.1.0');
+        assert.equal(owner.profile, profile);
+        assert.equal(owner.fallback, false);
+        assert.equal(loads.length, 2);
+        for (const url of loads) {
+          const descriptor = owner.manifest.assets
+            .flatMap((asset) => asset.lods)
+            .find((lod) => url.startsWith(`${lod.url}?`));
+          assert.ok(descriptor);
+          assert.equal(
+            url,
+            `${descriptor.url}?v=${descriptor.sha256.slice(0, 12)}`,
+          );
+        }
+        owner.dispose();
+      } finally {
+        assets.dispose();
+      }
+    }
+    assert.deepEqual(
+      [...new Set(requests.map(({ url }) => url))].sort((a, b) =>
+        a < b ? -1 : a > b ? 1 : 0,
+      ),
+      [
+        '/models/blender/bus-closeup/manifest.json',
+        '/models/blender/bus-v2/manifest.json',
+        '/models/blender/bus/manifest.json',
+      ],
+    );
+    assert.ok(requests.every(({ cache }) => cache === 'no-cache'));
+  } finally {
+    globalThis.fetch = savedFetch;
+    if (savedSelf === undefined) delete globalThis.self;
+    else globalThis.self = savedSelf;
   }
 });

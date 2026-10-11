@@ -5,9 +5,9 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 export const BUS_CLOSEUP_SOURCE_REVISION =
-  '78790023c4cf6e5f12aaf2666ea74dd47336dbd8';
+  '5fe7734ea1b2edfc02069128cb676509e6ac63af';
 export const BUS_CLOSEUP_SOURCE_MANIFEST_SHA256 =
-  '2d3a1abbbc35ddc161a154c0a262b42493fe2601c368dde05cd6b3a81b699726';
+  '912d1ebee982273a9b9e255bf184f4366589b2fe00849b6e2b2a4fd960474c75';
 export const BUS_CLOSEUP_SOURCE_PATH =
   'tools/assets/boardable-bus-v2/closeup-quality';
 export const BUS_CLOSEUP_PUBLIC_PREFIX = 'models/blender/bus-closeup/';
@@ -15,21 +15,21 @@ export const BUS_CLOSEUP_RUNTIME_CONTRACT = 'boardable-bus-closeup-runtime-v1';
 export const BUS_CLOSEUP_REVIEWED_LODS = [
   {
     level: 0,
-    triangles: 277040,
-    bytes: 8508968,
+    triangles: 278528,
+    bytes: 8617716,
     primitives: 13,
-    sha256: '8174cf56646eec303ad1891222cbd056d8ddea1e593c9a1e7ce70bc77a524a6d',
+    sha256: 'ac680d0a5f6f9543f21b8310bd33ff578f8ac255a447963d7b0903fb724a594e',
   },
   {
     level: 1,
-    triangles: 91504,
-    bytes: 2955124,
+    triangles: 92096,
+    bytes: 2989520,
     primitives: 13,
-    sha256: '7ab9103a047a7acd48f78433e3b982a475592e2f6a747e1c7533685b4053de45',
+    sha256: 'c7073c7c52abfc044146bd2fc999671700a18ebcf9e258ef5b8c64cd573261ae',
   },
 ];
 const EXTERIOR_MANIFEST_SHA256 =
-  '32a35e7fdaa0f82600f8d161212b952177fae8515ca8095b2d55be118503076e';
+  '6e7ae8d6f0457dc11d4d76729adb307d694edabc42da923e8ec842f078bea041';
 const hash = (bytes) => createHash('sha256').update(bytes).digest('hex');
 const clone = (value) => structuredClone(value);
 const select = (object, keys) =>
@@ -400,7 +400,7 @@ export async function loadBusCloseupProjection(root = path.resolve('.')) {
     manifest = JSON.parse(source);
   assert.equal(manifest.packageId, 'boardable-bus-v2-closeup-quality');
   assert.equal(manifest.schemaVersion, 1);
-  assert.equal(manifest.version, '1.0.0');
+  assert.equal(manifest.version, '1.1.0');
   assert.equal(manifest.units, 'm');
   assert.equal(manifest.assets.length, 1);
   assert.equal(manifest.assets[0].id, 'city-bus-12m-interior-v2-closeup');

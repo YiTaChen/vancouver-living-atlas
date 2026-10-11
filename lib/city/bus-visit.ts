@@ -29,6 +29,10 @@ const VEHICLE = 'parked-city-bus';
 const CAR = 'parked-city-bus-car';
 const SERVICE = 'parked-interior-visit';
 type Point = [number, number, number];
+interface BusBounds {
+  min: Point;
+  max: Point;
+}
 type Owner = Awaited<ReturnType<CityBusAssets['loadBoardable']>>;
 type Phase = 'idle' | 'loading' | 'ready' | 'aboard' | 'error';
 interface Door {
@@ -91,6 +95,13 @@ const text = (value: unknown) => {
     throw new Error('Missing bus identity');
   return value;
 };
+const bounds = (value: unknown): BusBounds => {
+  const data = record(value),
+    min = point(data.min),
+    max = point(data.max);
+  if (min.some((v, i) => v >= max[i])) throw new Error('Invalid bus bounds');
+  return { min, max };
+};
 /** Exact ground identity only: protected bridge/deck/interior floors are never
  * inferred from a nearby height or accepted as a parking/exit surface. */
 function groundFloor(
@@ -137,9 +148,16 @@ const worldPoint = (
 export function findBusVisitPlacement(
   city: CityEngine,
   routes: readonly BusRoute[],
-  front: Point = [-1.7, 0.36, 4.275],
-  rear: Point = [-1.7, 0.36, -0.625],
+  front: Point = [-1.7, 0.36, 4.6],
+  rear: Point = [-1.7, 0.36, -1.85],
+  fullBounds: BusBounds = {
+    min: [-1.52, 0, -6.3],
+    max: [1.52, 3.2, 6.1],
+  },
 ): BusVisitPlacement | null {
+  const rearEdge = fullBounds.min[2] - 0.03,
+    frontEdge = fullBounds.max[2] + 0.03,
+    intervals = Math.ceil((frontEdge - rearEdge) / 1.5);
   const origin =
     city.navigation?.mode === 'walk'
       ? city.navigation.position
@@ -172,9 +190,18 @@ export function findBusVisitPlacement(
       if (!contact) continue;
       const position = new THREE.Vector3(x, contact.y, z);
       let clear = true;
-      for (const longitudinal of [-6, -4.5, -3, -1.5, 0, 1.5, 3, 4.5, 6.3]) {
+      for (let i = 0; i <= intervals; i++) {
         if (!clear) break;
-        for (const lateral of [-1.55, 0, 1.55]) {
+        const longitudinal = THREE.MathUtils.lerp(
+          rearEdge,
+          frontEdge,
+          i / intervals,
+        );
+        for (const lateral of [
+          fullBounds.min[0] - 0.03,
+          (fullBounds.min[0] + fullBounds.max[0]) / 2,
+          fullBounds.max[0] + 0.03,
+        ]) {
           const sample = worldPoint(position, rotation, [
             lateral,
             0,
@@ -222,6 +249,7 @@ export class BusCabinVisit {
   private owner: Owner | null = null;
   private contract: VehiclePassengerContract | null = null;
   private placement: BusVisitPlacement | null = null;
+  private bodyBounds: BusBounds | null = null;
   private transfers = new PassengerTransfers(1);
   private doors: Door[] = [];
   private elapsed = 0;
@@ -403,8 +431,10 @@ export class BusCabinVisit {
           this.routes,
           doors.find((d) => d.group === 'front')!.point,
           doors.find((d) => d.group === 'rear')!.point,
+          bounds(vehicle.fullBoundsM),
         );
         if (!placement) throw new Error('No safe flat bus parking and exit');
+        const bodyBounds = bounds(vehicle.bodyBoundsM);
         const transfers = new PassengerTransfers(1);
         if (!transfers.register(VISITOR, placement.frontFloor))
           throw new Error('Invalid entrance floor');
@@ -421,6 +451,7 @@ export class BusCabinVisit {
         this.contract = contract;
         this.doors = doors;
         this.placement = placement;
+        this.bodyBounds = bodyBounds;
         this.transfers = transfers;
         this.elapsed = 0;
         this.doorProgress = 0;
@@ -440,6 +471,7 @@ export class BusCabinVisit {
           this.owner = null;
           this.contract = null;
           this.placement = null;
+          this.bodyBounds = null;
           this.doors = [];
           this.busAssets.setExcludedRoutes(new Set());
           this.phase = 'error';
@@ -631,11 +663,17 @@ export class BusCabinVisit {
   }
   /** Static body collision for the host navigation; the doors are approached outside it. */
   blocksGround(x: number, z: number) {
-    if (!this.owner) return false;
+    if (!this.owner || !this.bodyBounds) return false;
     const local = this.owner.group.worldToLocal(
       new THREE.Vector3(x, this.owner.group.position.y, z),
     );
-    return Math.abs(local.x) < 1.5 && local.z > -5.85 && local.z < 6.25;
+    const { min, max } = this.bodyBounds;
+    return (
+      local.x > min[0] - 0.25 &&
+      local.x < max[0] + 0.25 &&
+      local.z > min[2] - 0.05 &&
+      local.z < max[2] + 0.05
+    );
   }
   dispose() {
     if (this.disposed) return;
@@ -659,6 +697,7 @@ export class BusCabinVisit {
     this.owner = null;
     this.contract = null;
     this.placement = null;
+    this.bodyBounds = null;
     this.doors = [];
     this.drag = null;
     this.viewAnchor = this.previewAnchor = null;

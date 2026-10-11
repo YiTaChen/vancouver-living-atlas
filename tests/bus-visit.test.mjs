@@ -13,6 +13,9 @@ const manifest = JSON.parse(
     'utf8',
   ),
 );
+const doorPoint = (group) =>
+  manifest.vehicles[0].doors.find((door) => door.doorGroupId === group)
+    .boardingPointM;
 const loader = new GLTFLoader();
 const routes = [
   { a: [0, -100], b: [0, 100], length: 200, speed: 8, phase: 0.25 },
@@ -172,7 +175,7 @@ test('parking checks front/rear clearance, entire footprint and exact ground ide
   assert.equal(
     findBusVisitPlacement(city, routes),
     null,
-    'front full body edge at 6.3 must fit',
+    'new rear body edge at -6.3 must fit',
   );
   city.navigation.clearGround = () => true;
   city.data.travelSurfaces.lookup = () => [
@@ -204,6 +207,60 @@ test('parking checks front/rear clearance, entire footprint and exact ground ide
   );
 });
 
+test('parking follows the actual asymmetric bounds and rotates both corrected door exits', () => {
+  const { city } = cityFixture();
+  const route = [
+    { a: [-100, 0], b: [100, 0], length: 200, speed: 8, phase: 0.25 },
+  ];
+  const placement = findBusVisitPlacement(city, route);
+  assert.ok(placement);
+  assert.ok(Math.abs(placement.frontFloor.x - 4.6) < 1e-7);
+  assert.ok(Math.abs(placement.frontFloor.z - 1.7) < 1e-7);
+  assert.ok(Math.abs(placement.rearFloor.x + 1.85) < 1e-7);
+  assert.ok(Math.abs(placement.rearFloor.z - 1.7) < 1e-7);
+  assert.ok(
+    Math.abs(placement.frontFloor.x - placement.rearFloor.x - 6.45) < 1e-7,
+  );
+
+  city.navigation.clearGround = (_x, z) => z >= -6.05 && z <= 6.4;
+  const shorter = { min: [-1.52, 0, -6], max: [1.52, 3.2, 6.1] };
+  const longer = { min: [-1.52, 0, -6.3], max: [1.52, 3.2, 6.1] };
+  const front = [-1.7, 0.36, 4.6],
+    rear = [-1.7, 0.36, -1.85];
+  assert.ok(findBusVisitPlacement(city, routes, front, rear, shorter));
+  assert.equal(
+    findBusVisitPlacement(city, routes, front, rear, longer),
+    null,
+    'supported old tail cannot hide unsupported newly extended rear bumper',
+  );
+});
+
+test('prepare checks metadata full bounds before placing a visitor and blocks the extended body', async () => {
+  const f = await fixture();
+  try {
+    f.owner.vehicle = structuredClone(f.owner.vehicle);
+    f.owner.vehicle.fullBoundsM.min[2] = -6.35;
+    f.city.navigation.clearGround = (_x, z) => z >= -6.05 && z <= 6.5;
+    assert.equal(await f.visit.prepare(), false);
+    assert.match(f.visit.snapshot().error, /No safe flat bus parking/);
+    assert.equal(f.calls.placements.length, 0);
+    assert.equal(f.calls.disposals, 1);
+  } finally {
+    f.visit.dispose();
+  }
+
+  const placed = await fixture();
+  try {
+    placed.owner.vehicle = structuredClone(placed.owner.vehicle);
+    placed.owner.vehicle.bodyBoundsM.min[2] = -6.3;
+    assert.equal(await placed.visit.prepare(), true);
+    assert.equal(placed.visit.blocksGround(0, -6.2), true);
+    assert.equal(placed.visit.blocksGround(0, -6.4), false);
+  } finally {
+    placed.visit.dispose();
+  }
+});
+
 test('prepare coalesces actual LOD0 loading, parks at contact height, opens actual clips and faces the bus', async () => {
   const f = await fixture();
   try {
@@ -233,7 +290,10 @@ test('prepare coalesces actual LOD0 loading, parks at contact height, opens actu
     assert.equal(lights.length, 1);
     assert.equal(lights[0].castShadow, false);
     assert.equal(f.visit.blocksGround(0, 0), true);
-    assert.equal(f.visit.blocksGround(-1.7, 4.275), false);
+    assert.equal(
+      f.visit.blocksGround(doorPoint('front')[0], doorPoint('front')[2]),
+      false,
+    );
   } finally {
     f.visit.dispose();
   }
@@ -314,7 +374,7 @@ test('boarding rejects remote, boat, protected floors and actual doorway blocker
       new THREE.BoxGeometry(0.08, 2, 1.2),
       new THREE.MeshBasicMaterial(),
     );
-    blocker.position.set(-0.9, 1.5, 4.275);
+    blocker.position.set(-0.9, 1.5, doorPoint('front')[2]);
     f.owner.group.add(blocker);
     assert.equal(f.visit.snapshot().canBoard, false);
     assert.equal(f.visit.board('seat-09'), false);
@@ -352,7 +412,8 @@ test('invalid fresh rear ground retains rider/camera; successful alighting retur
     open(f.visit);
     f.visit.board('seat-09');
     const camera = f.city.camera.position.clone();
-    f.city.navigation.clearGround = (x, z) => Math.abs(z + 0.625) > 0.4;
+    f.city.navigation.clearGround = (x, z) =>
+      Math.abs(z - doorPoint('rear')[2]) > 0.4;
     assert.equal(f.visit.snapshot().canAlight, false);
     assert.equal(f.visit.alight(), false);
     assert.equal(f.visit.close(), false);
@@ -363,7 +424,7 @@ test('invalid fresh rear ground retains rider/camera; successful alighting retur
     assert.equal(f.visit.alight(), true);
     assert.equal(f.city.navigation.mode, 'walk');
     assert.equal(f.city.navigation.position.x, -1.7);
-    assert.equal(f.city.navigation.position.z, -0.625);
+    assert.equal(f.city.navigation.position.z, doorPoint('rear')[2]);
     assert.equal(f.city.navigation.position.y, 7);
     assert.equal(f.visit.snapshot().passengerAnchor, null);
     assert.equal(f.visit.snapshot().previewAnchor, null);
