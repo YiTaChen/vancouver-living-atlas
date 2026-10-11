@@ -904,12 +904,47 @@ export function installVisualQA(e: CityEngine) {
     selectedCase = 'buses';
     status.textContent = `Buses: ${e.traffic.busRoutes.length} routes / ${e.traffic.buses.count} nearby instances`;
   });
+  button('Focus nearest traffic vehicle', () => {
+    if (running || !e.traffic) return;
+    const pose = new THREE.Matrix4(), chosen = new THREE.Matrix4();
+    const position = new THREE.Vector3();
+    let closest = Infinity;
+    e.traffic.vehicleAssets.group.traverse((object) => {
+      if (!(object instanceof THREE.InstancedMesh) || !object.visible) return;
+      for (let i = 0; i < object.count; i++) {
+        object.getMatrixAt(i, pose);
+        position.setFromMatrixPosition(pose);
+        const distance = position.distanceToSquared(e.camera.position);
+        if (distance < closest) { closest = distance; chosen.copy(pose); }
+      }
+    });
+    if (!Number.isFinite(closest)) { status.textContent = 'Traffic fleet not loaded'; return; }
+    e.navigation?.setMode('orbit');
+    e.applySettings({...e.settings, mode:'orbit', autoRotate:false});
+    e.transition = null;
+    e.camera.position.copy(new THREE.Vector3(8, 4, 16).applyMatrix4(chosen));
+    e.controls.target.copy(new THREE.Vector3(0, 1, 2).applyMatrix4(chosen));
+    e.camera.lookAt(e.controls.target); e.controls.update();
+    selectedCase = 'traffic-lights';
+    status.textContent = 'Observing a real fleet vehicle and sampled road footprint';
+  });
   button('Save current view', () => {
     if (running) return;
     running = true;
     const id = `${selectedCase}-${e.clock.hour.toFixed(2).replace('.', 'p')}h${selectedCase.startsWith('sky-') ? '-' + e.skyEffects.settings.moonPhase.toLowerCase() : ''}`;
     const row = {
       kind: 'visual-check',
+      cityNight: {
+        field: e.traffic?.streetLighting?.stats(),
+        vehicles: e.traffic?.nightLights?.stats,
+        cameraField: e.traffic?.streetLighting?.sample(e.camera.position.x, e.camera.position.z),
+      },
+      calls: e.renderer.info.render.calls,
+      triangles: e.renderer.info.render.triangles,
+      geometries: e.renderer.info.memory.geometries,
+      textures: e.renderer.info.memory.textures,
+      qualityMode: e.settings.qualityMode,
+      compatible: e.compatibleGraphics,
       skySettings: { ...e.skyEffects.settings },
       skyPreviewTime: e.skyEffects.qaTime,
       id,
@@ -951,6 +986,9 @@ export function installVisualQA(e: CityEngine) {
   button('14:00', () => e.setClock({ hour: 14, running: false }));
   button('19:00', () => e.setClock({ hour: 19, running: false }));
   button('23:00', () => e.setClock({ hour: 23, running: false }));
+  button('21:00', () => e.setClock({ hour: 21, running: false }));
+  button('00:00', () => e.setClock({ hour: 0, running: false }));
+  button('03:00', () => e.setClock({ hour: 3, running: false }));
   button('Hide QA panel', () => {
     panel.style.display = 'none';
   });

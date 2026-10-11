@@ -1,0 +1,483 @@
+[
+  {
+    "revision": "45e17b04ebe066978e2438783bbc1487a8e16ed8",
+    "sourceFingerprint": "f33a023cdfa5551ac5b4d7c85349581163f4eb59fa8a10d863746f6b87925348",
+    "kind": "auto-quality-travel",
+    "name": "drive-auto-balanced",
+    "valid": true,
+    "settings": {
+      "trees": true,
+      "buildings": true,
+      "labels": true,
+      "traffic": true,
+      "trains": true,
+      "harbour": true,
+      "terrain": true,
+      "autoRotate": false,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "mode": "drive"
+    },
+    "auto": {
+      "quality": "balanced",
+      "resolutionScale": 1,
+      "targetFps": 45,
+      "reason": "stable",
+      "frameMs": 17.20000000001164,
+      "p95Ms": 34,
+      "changes": 0,
+      "mode": "drive",
+      "capQuality": "high",
+      "sampleCount": 240,
+      "samples": 9271,
+      "excludedSamples": 7,
+      "timingResets": 11,
+      "decisions": 371,
+      "lastFrameMs": 16,
+      "maxFrameMs": 35.20000000001164,
+      "hitches": 4,
+      "highPromotions": 0,
+      "failedHighUpgrades": 0,
+      "highRetryMs": 0
+    },
+    "motion": {
+      "nowMs": 427779,
+      "mode": "drive",
+      "auto": true,
+      "positionXYZ": [
+        -71.5632660535055,
+        43.34857328063984,
+        -145.57482836536084
+      ],
+      "lookAheadXYZ": [
+        -71.5632660535055,
+        43.34857328063984,
+        -145.57482836536084
+      ],
+      "speedMps": 0,
+      "altitudeM": 5.496221278041013,
+      "moving": false,
+      "fast": false,
+      "stationaryForMs": 61380.70000000001,
+      "allowNewDetails": true,
+      "preparationBudgetMs": 1.25,
+      "admissionsPerFrame": 2,
+      "selectionIntervalMs": 120
+    },
+    "detailWork": {
+      "frames": 16515,
+      "attempts": 34102,
+      "skipped": 540,
+      "admissions": 16385,
+      "usedMs": 0.10000002384185791,
+      "overruns": 314,
+      "maxWorkMs": 450.19999998807907
+    },
+    "viewport": [
+      1280,
+      720
+    ],
+    "render": [
+      1280,
+      720
+    ],
+    "pixelRatio": 1,
+    "flight": null,
+    "navigation": {
+      "mode": "drive",
+      "speed": 0,
+      "position": [
+        -78.64919331729018,
+        38.64857328063984,
+        -152.63100543317546
+      ]
+    },
+    "totalFrames": 2400,
+    "settledFrames": 2145,
+    "durationMs": 52109,
+    "excludedWarmupMs": 5000,
+    "fps": 45.52120184458217,
+    "p50Ms": 21.899999976158142,
+    "p95Ms": 25.5,
+    "callsRange": [
+      371,
+      430
+    ],
+    "geometriesRange": [
+      998,
+      1055
+    ],
+    "qualities": [
+      "balanced"
+    ],
+    "frameGapsOver100ms": 0,
+    "frameGapsOver250ms": 0
+  },
+  {
+    "revision": "45e17b04ebe066978e2438783bbc1487a8e16ed8",
+    "sourceFingerprint": "f33a023cdfa5551ac5b4d7c85349581163f4eb59fa8a10d863746f6b87925348",
+    "kind": "auto-quality-travel",
+    "name": "flight-auto-balanced",
+    "valid": true,
+    "settings": {
+      "trees": true,
+      "buildings": true,
+      "labels": true,
+      "traffic": true,
+      "trains": true,
+      "harbour": true,
+      "terrain": true,
+      "autoRotate": false,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "mode": "flight"
+    },
+    "auto": {
+      "quality": "balanced",
+      "resolutionScale": 1,
+      "targetFps": 45,
+      "reason": "stable",
+      "frameMs": 16.800000000046566,
+      "p95Ms": 33.300000000046566,
+      "changes": 0,
+      "mode": "flight",
+      "capQuality": "balanced",
+      "sampleCount": 240,
+      "samples": 13085,
+      "excludedSamples": 7,
+      "timingResets": 12,
+      "decisions": 512,
+      "lastFrameMs": 15.400000000023283,
+      "maxFrameMs": 34.29999999998836,
+      "hitches": 6,
+      "highPromotions": 0,
+      "failedHighUpgrades": 0,
+      "highRetryMs": 0
+    },
+    "motion": {
+      "nowMs": 502076,
+      "mode": "flight",
+      "auto": true,
+      "positionXYZ": [
+        1410.5343049041376,
+        419.29794658996605,
+        752.3378208891381
+      ],
+      "lookAheadXYZ": [
+        1418.0626030106657,
+        419.29794658996605,
+        783.3957703800457
+      ],
+      "speedMps": 39.946673417517715,
+      "altitudeM": 414.24527917544236,
+      "moving": true,
+      "fast": true,
+      "stationaryForMs": 0,
+      "allowNewDetails": false,
+      "preparationBudgetMs": 0.2,
+      "admissionsPerFrame": 0,
+      "selectionIntervalMs": 350
+    },
+    "detailWork": {
+      "frames": 20329,
+      "attempts": 38602,
+      "skipped": 544,
+      "admissions": 16913,
+      "usedMs": 0,
+      "overruns": 316,
+      "maxWorkMs": 450.19999998807907
+    },
+    "viewport": [
+      1280,
+      720
+    ],
+    "render": [
+      1280,
+      720
+    ],
+    "pixelRatio": 1,
+    "flight": {
+      "kind": "helicopter",
+      "x": 1414.394273026539,
+      "y": 410.00123682774625,
+      "z": 775.632432526023,
+      "yaw": 2.9773825341353537,
+      "vx": 8.632891771324312,
+      "vy": -0.0005061519009150901,
+      "vz": 39.00269088837625,
+      "pitch": -0.1299999999999996,
+      "roll": 0.017831882255430684,
+      "speed": 39.94667341431107,
+      "power": 0.68,
+      "phase": "airborne",
+      "cruise": true,
+      "hover": false,
+      "hoverHeight": 20.29566846417915,
+      "attached": true,
+      "stalled": false,
+      "climbYaw": 2.3523091412859483,
+      "climbing": false,
+      "impact": 0,
+      "crashAge": 0,
+      "age": 73.63333333333044,
+      "join": true
+    },
+    "navigation": {
+      "mode": "orbit",
+      "speed": 0,
+      "position": [
+        -78.64919331729018,
+        38.64857328063984,
+        -152.63100543317546
+      ]
+    },
+    "totalFrames": 2400,
+    "settledFrames": 2184,
+    "durationMs": 46722,
+    "excludedWarmupMs": 5000,
+    "fps": 52.32942619726929,
+    "p50Ms": 18.69999998807907,
+    "p95Ms": 22.5,
+    "callsRange": [
+      232,
+      285
+    ],
+    "geometriesRange": [
+      1075,
+      1075
+    ],
+    "qualities": [
+      "balanced"
+    ],
+    "frameGapsOver100ms": 0,
+    "frameGapsOver250ms": 0
+  },
+  {
+    "revision": "45e17b04ebe066978e2438783bbc1487a8e16ed8",
+    "sourceFingerprint": "f33a023cdfa5551ac5b4d7c85349581163f4eb59fa8a10d863746f6b87925348",
+    "kind": "auto-quality-travel",
+    "name": "walk-auto-balanced",
+    "valid": true,
+    "settings": {
+      "trees": true,
+      "buildings": true,
+      "labels": true,
+      "traffic": true,
+      "trains": true,
+      "harbour": true,
+      "terrain": true,
+      "autoRotate": false,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "mode": "walk"
+    },
+    "auto": {
+      "quality": "balanced",
+      "resolutionScale": 1,
+      "targetFps": 35,
+      "reason": "stable",
+      "frameMs": 16.800000000046566,
+      "p95Ms": 33.29999999998836,
+      "changes": 0,
+      "mode": "walk",
+      "capQuality": "high",
+      "sampleCount": 240,
+      "samples": 5871,
+      "excludedSamples": 5,
+      "timingResets": 8,
+      "decisions": 230,
+      "lastFrameMs": 16.600000000034925,
+      "maxFrameMs": 35.29999999998836,
+      "hitches": 3,
+      "highPromotions": 0,
+      "failedHighUpgrades": 0,
+      "highRetryMs": 0
+    },
+    "motion": {
+      "nowMs": 353213.4,
+      "mode": "walk",
+      "auto": true,
+      "positionXYZ": [
+        134.6228100452527,
+        38.83378155689369,
+        59.74557751948165
+      ],
+      "lookAheadXYZ": [
+        132.78010665851656,
+        38.83378155689369,
+        57.910610704803474
+      ],
+      "speedMps": 4.000786603857668,
+      "altitudeM": 2.754845469813958,
+      "moving": true,
+      "fast": false,
+      "stationaryForMs": 0,
+      "allowNewDetails": true,
+      "preparationBudgetMs": 0.65,
+      "admissionsPerFrame": 2,
+      "selectionIntervalMs": 220
+    },
+    "detailWork": {
+      "frames": 13113,
+      "attempts": 27281,
+      "skipped": 540,
+      "admissions": 12997,
+      "usedMs": 0,
+      "overruns": 314,
+      "maxWorkMs": 450.19999998807907
+    },
+    "viewport": [
+      1280,
+      720
+    ],
+    "render": [
+      1280,
+      720
+    ],
+    "pixelRatio": 1,
+    "flight": null,
+    "navigation": {
+      "mode": "walk",
+      "speed": 0,
+      "position": [
+        134.6228100452527,
+        37.33378155689369,
+        59.74557751948165
+      ]
+    },
+    "totalFrames": 2400,
+    "settledFrames": 2148,
+    "durationMs": 46813.40000003576,
+    "excludedWarmupMs": 5000,
+    "fps": 51.35807192042846,
+    "p50Ms": 18.899999976158142,
+    "p95Ms": 24.600000023841858,
+    "callsRange": [
+      427,
+      482
+    ],
+    "geometriesRange": [
+      992,
+      996
+    ],
+    "qualities": [
+      "balanced"
+    ],
+    "frameGapsOver100ms": 0,
+    "frameGapsOver250ms": 0
+  },
+  {
+    "revision": "45e17b04ebe066978e2438783bbc1487a8e16ed8",
+    "sourceFingerprint": "f33a023cdfa5551ac5b4d7c85349581163f4eb59fa8a10d863746f6b87925348",
+    "kind": "auto-quality-travel",
+    "name": "walk-manual-balanced-cruise",
+    "valid": true,
+    "settings": {
+      "trees": true,
+      "buildings": true,
+      "labels": false,
+      "traffic": true,
+      "trains": true,
+      "harbour": true,
+      "terrain": true,
+      "autoRotate": false,
+      "quality": "balanced",
+      "qualityMode": "manual",
+      "mode": "walk"
+    },
+    "auto": {
+      "quality": "balanced",
+      "resolutionScale": 1,
+      "targetFps": 35,
+      "reason": "preference-change",
+      "frameMs": null,
+      "p95Ms": null,
+      "changes": 0,
+      "mode": "orbit",
+      "capQuality": "high",
+      "sampleCount": 0,
+      "samples": 2789,
+      "excludedSamples": 3,
+      "timingResets": 4,
+      "decisions": 116,
+      "lastFrameMs": null,
+      "maxFrameMs": null,
+      "hitches": 3,
+      "highPromotions": 0,
+      "failedHighUpgrades": 0,
+      "highRetryMs": 0
+    },
+    "motion": {
+      "nowMs": 292782,
+      "mode": "walk",
+      "auto": false,
+      "positionXYZ": [
+        303.92205172832195,
+        35.56083199646445,
+        228.33401800037095
+      ],
+      "lookAheadXYZ": [
+        303.92205172832195,
+        35.56083199646445,
+        228.33401800037095
+      ],
+      "speedMps": 0,
+      "altitudeM": 2.739157311668528,
+      "moving": false,
+      "fast": false,
+      "stationaryForMs": 57148.20000000001,
+      "allowNewDetails": true,
+      "preparationBudgetMs": 1.25,
+      "admissionsPerFrame": 2,
+      "selectionIntervalMs": 120
+    },
+    "detailWork": {
+      "frames": 10013,
+      "attempts": 21076,
+      "skipped": 540,
+      "admissions": 9910,
+      "usedMs": 0,
+      "overruns": 314,
+      "maxWorkMs": 450.19999998807907
+    },
+    "viewport": [
+      1280,
+      720
+    ],
+    "render": [
+      1280,
+      720
+    ],
+    "pixelRatio": 1,
+    "flight": null,
+    "navigation": {
+      "mode": "walk",
+      "speed": 0,
+      "position": [
+        303.92205172832195,
+        34.06083199646445,
+        228.33401800037095
+      ]
+    },
+    "totalFrames": 2400,
+    "settledFrames": 2140,
+    "durationMs": 46569.10000002384,
+    "excludedWarmupMs": 5000,
+    "fps": 51.47348874797681,
+    "p50Ms": 18.400000035762787,
+    "p95Ms": 28.80000001192093,
+    "callsRange": [
+      469,
+      480
+    ],
+    "geometriesRange": [
+      992,
+      992
+    ],
+    "qualities": [
+      "balanced"
+    ],
+    "frameGapsOver100ms": 0,
+    "frameGapsOver250ms": 0
+  }
+]

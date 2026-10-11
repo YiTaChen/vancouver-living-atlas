@@ -12,6 +12,16 @@ import { lakeSurfaces } from './water-world';
 import { roadDecorations } from './road-decorations';
 import { trimRoad } from './road-trim';
 import { TrafficVehicleAssets } from './traffic-vehicles';
+import {
+  NightStreetLighting,
+  type NightStreetRoad,
+} from './night-street-lighting';
+import { TrafficNightLights } from './traffic-night-lights';
+import {
+  createDowntownNightPolicy,
+  DOWNTOWN_NIGHT_BOUNDS,
+  streetLampHead,
+} from './downtown-night-policy';
 export interface Traffic {
   mesh: THREE.InstancedMesh;
   cabins: THREE.InstancedMesh;
@@ -28,6 +38,10 @@ export interface Traffic {
   busRoutes: BusRoute[];
   busAssets: CityBusAssets;
   vehicleAssets: TrafficVehicleAssets;
+  streetLighting: NightStreetLighting;
+  nightLights: TrafficNightLights;
+  downtownAt: (x: number, z: number) => boolean;
+  nightReceiversReady: boolean;
 }
 export function createNature(e: CityEngine) {
   const woodPolys = e.data.context.features
@@ -409,7 +423,7 @@ export function createStreetDetails(e: CityEngine): Traffic {
   }
   const lampGeo = mergeGeometries([
     new THREE.CylinderGeometry(0.07, 0.13, 8, 6).translate(0, 4, 0),
-    new THREE.BoxGeometry(1.9, 0.12, 0.12).translate(0.8, 7.9, 0),
+    new THREE.BoxGeometry(1.9, 0.12, 0.12).translate(-0.8, 7.9, 0),
   ])!;
   const lamps = new THREE.InstancedMesh(
     lampGeo,
@@ -425,15 +439,37 @@ export function createStreetDetails(e: CityEngine): Traffic {
     }),
     lampPoints.length,
   );
+  const excluded = [
+    ...e.parkPolys.map((p) => p.poly),
+    ...e.data.context.features
+      .filter((f: Feature) => f.properties.class === 'wood')
+      .flatMap((f: Feature) =>
+        rings(f).map((p) => p.map((r) => r.map(project))),
+      ),
+    ...(e.data.waterPolys || []),
+  ];
+  const downtownAt = createDowntownNightPolicy(excluded, (x, z) =>
+    e.onLand(x, z),
+  );
+  const lightSources = [];
   for (let i = 0; i < lampPoints.length; i++) {
     const [x, z, yaw] = lampPoints[i];
     dummy.position.set(x, e.elevation(x, z) + 1, z);
     dummy.rotation.set(0, yaw, 0);
     dummy.updateMatrix();
     lamps.setMatrixAt(i, dummy.matrix);
-    dummy.position.y += 7.85;
+    const head = streetLampHead(x, z, yaw, dummy.position.y);
+    dummy.position.set(head.x, head.y, head.z);
     dummy.updateMatrix();
     lightCaps.setMatrixAt(i, dummy.matrix);
+    if (downtownAt(head.x, head.z))
+      lightSources.push({
+        ...head,
+        groundY:
+          nightAsphaltHeight(e, head.x, head.z) ??
+          (e.data.roadRelief?.(head.x, head.z) ?? e.elevation(head.x, head.z)) +
+            1.05,
+      });
   }
   e.roads.add(lamps, lightCaps);
   const body = new THREE.InstancedMesh(
@@ -469,7 +505,61 @@ export function createStreetDetails(e: CityEngine): Traffic {
   buses.count = 0;
   e.trafficGroup.add(buses);
   const vehicleAssets = new TrafficVehicleAssets(routes, e.trafficGroup);
-  const busAssets = new CityBusAssets(busRoutes, e.trafficGroup, { interiorVersion: 'v2' });
+  const busAssets = new CityBusAssets(busRoutes, e.trafficGroup, {
+    interiorVersion: 'v2',
+  });
+  const streetRoads: NightStreetRoad[] = [];
+  for (const edge of e.data.roadGraph.edges) {
+    const na = e.data.roadGraph.nodes[edge.a],
+      nb = e.data.roadGraph.nodes[edge.b];
+    if (
+      na.level !== 'ground' ||
+      nb.level !== 'ground' ||
+      edge.classes.some((c: string) =>
+        /bikeway|lane|private|non.city/i.test(c),
+      ) ||
+      edge.names.some((n: string) => /bridge|causeway/i.test(n))
+    )
+      continue;
+    const [ax, az] = na.point,
+      [bx, bz] = nb.point;
+    if (
+      !downtownAt(ax, az) &&
+      !downtownAt(bx, bz) &&
+      !downtownAt((ax + bx) / 2, (az + bz) / 2)
+    )
+      continue;
+    const ground = (x: number, z: number) =>
+      nightAsphaltHeight(e, x, z) ??
+      (e.data.roadRelief?.(x, z) ?? e.elevation(x, z)) + 1.05;
+    streetRoads.push({
+      a: [ax, ground(ax, az), az],
+      b: [bx, ground(bx, bz), bz],
+      width: Math.min(50, edge.corridorWidth || edge.width + 6),
+    });
+  }
+  const streetLighting = new NightStreetLighting({
+    lamps: lightSources,
+    roads: streetRoads,
+    allowed: downtownAt,
+    bounds: DOWNTOWN_NIGHT_BOUNDS,
+  });
+  streetLighting.update(e.clock.hour, e.uniforms.night.value);
+  // Wrap shared receivers once before warmup; terrain/water/sky and interiors
+  // keep their existing shaders. The mask retains darkness in parks and woods.
+  for (const group of [
+    e.roads,
+    e.buildings,
+    e.vegetation,
+    e.trafficGroup,
+    e.landmarks,
+  ])
+    wrapNightStreetMaterials(group, streetLighting);
+  void vehicleAssets.ready.then(() => {
+    if (!e.disposed)
+      wrapNightStreetMaterials(vehicleAssets.group, streetLighting);
+  });
+  const nightLights = new TrafficNightLights(e.trafficGroup);
   return {
     mesh: body,
     cabins,
@@ -480,10 +570,45 @@ export function createStreetDetails(e: CityEngine): Traffic {
     busRoutes,
     busAssets,
     vehicleAssets,
+    streetLighting,
+    nightLights,
+    downtownAt,
+    nightReceiversReady: false,
   };
 }
+/** Use the same finite local road datum as the vehicle renderer. Undefined
+ * means no accepted asphalt; a light footprint must not spill onto a park. */
+export function nightAsphaltHeight(e: CityEngine, x: number, z: number) {
+  const anchor = (e.data.roadRelief?.(x, z) ?? e.elevation(x, z)) + 1.05;
+  return e.data.roadSurface?.sample(x, z, anchor);
+}
+export function wrapNightStreetMaterials(
+  group: THREE.Object3D,
+  lighting: NightStreetLighting,
+) {
+  group.traverse((object) => {
+    if (!(object instanceof THREE.Mesh)) return;
+    for (const material of Array.isArray(object.material)
+      ? object.material
+      : [object.material])
+      if (material instanceof THREE.MeshStandardMaterial)
+        lighting.wrapMaterial(material, {
+          facade: material
+            .customProgramCacheKey()
+            .includes('atlas-city-bodies-pbr-v2'),
+        });
+  });
+}
 const dummy = new THREE.Object3D();
+const nightPose = new THREE.Matrix4();
 export function updateTraffic(e: CityEngine, traffic: Traffic, time: number) {
+  traffic.nightLights.beginFrame(e.camera.position, {
+    nightAmount: e.uniforms.night.value,
+    quality: e.settings.quality,
+    compatible: e.compatibleGraphics,
+    downtownAt: (x, z) => (traffic.downtownAt(x, z) ? 1 : 0),
+    roadHeight: (x, z) => nightAsphaltHeight(e, x, z),
+  });
   const parkedRoute = e.busVisit?.routeIndex;
   const parked = new Set<number>(parkedRoute == null ? [] : [parkedRoute]);
   traffic.busAssets.setExcludedRoutes(parked);
@@ -509,6 +634,26 @@ export function updateTraffic(e: CityEngine, traffic: Traffic, time: number) {
     e.camera.position,
     replaced,
   );
+  if (!traffic.nightReceiversReady && traffic.busAssets.group.children.length) {
+    wrapNightStreetMaterials(traffic.busAssets.group, traffic.streetLighting);
+    traffic.nightReceiversReady = true;
+  }
+  // Each imported bus has several material batches sharing one root matrix.
+  // Submit just one batch so its lamps are counted once.
+  const nearBuses = traffic.busAssets.group.children.find(
+    (child): child is THREE.InstancedMesh =>
+      child instanceof THREE.InstancedMesh,
+  );
+  if (nearBuses?.visible && traffic.busAssets.group.visible)
+    for (let i = 0; i < nearBuses.count; i++) {
+      nearBuses.getMatrixAt(i, nightPose);
+      traffic.nightLights.addVehicle('bus', nightPose);
+    }
+  if (traffic.buses.visible)
+    for (let i = 0; i < traffic.buses.count; i++) {
+      traffic.buses.getMatrixAt(i, nightPose);
+      traffic.nightLights.addVehicle('bus-fallback', nightPose);
+    }
   const loaded = traffic.vehicleAssets.update(
     time,
     e.camera.position,
@@ -516,9 +661,13 @@ export function updateTraffic(e: CityEngine, traffic: Traffic, time: number) {
       const fallback = (e.data.roadRelief?.(x, z) ?? e.elevation(x, z)) + 1.05;
       return e.data.roadSurface?.sample(x, z, fallback) ?? fallback;
     },
+    (model, matrix) => traffic.nightLights.addVehicle(model, matrix),
   );
   traffic.mesh.visible = traffic.cabins.visible = !loaded;
-  if (loaded) return;
+  if (loaded) {
+    traffic.nightLights.endFrame();
+    return;
+  }
   traffic.routes.forEach((r, i) => {
     const t = (r.phase + (time * r.speed) / r.length) % 1,
       x = THREE.MathUtils.lerp(r.a[0], r.b[0], t),
@@ -534,7 +683,11 @@ export function updateTraffic(e: CityEngine, traffic: Traffic, time: number) {
     dummy.position.y += 0.65;
     dummy.updateMatrix();
     traffic.cabins.setMatrixAt(i, dummy.matrix);
+    dummy.position.y -= 1.4; // Convert body/cabin pivot to tyre contact.
+    dummy.updateMatrix();
+    traffic.nightLights.addVehicle('sedan-fallback', dummy.matrix);
   });
+  traffic.nightLights.endFrame();
   traffic.mesh.instanceMatrix.needsUpdate = true;
   traffic.cabins.instanceMatrix.needsUpdate = true;
 }

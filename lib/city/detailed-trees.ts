@@ -198,6 +198,7 @@ export class DetailedTrees {
       for (const pool of this.pools) {
         pool.foliage.material = materials.leaf;
         pool.foliage.customDepthMaterial = materials.depth;
+        this.e.prepareNightReceivers?.(pool.foliage);
       }
     this.e.renderer.shadowMap.needsUpdate = true;
     return true;
@@ -263,6 +264,9 @@ export class DetailedTrees {
       m.receiveShadow = true;
       m.frustumCulled = false;
       m.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+      // Pools are admitted after the initial city material pass. Wrap before
+      // their first render; shared material preparation remains idempotent.
+      this.e.prepareNightReceivers?.(m);
       this.group.add(m);
     }
     foliage.customDepthMaterial =

@@ -57,9 +57,14 @@ export class LandmarkDetail {
       },
       prepare: (group, signal) => {
         this.prepareNightGeometry(group);
+        // The warmup must compile the final night receiver shader. Cancelled
+        // groups release their materials and the lighting owner drops them.
+        this.e.prepareNightReceivers?.(group);
         return this.e.prepareLandmark?.(group, signal, this.holder);
       },
       attach: (group) => {
+        // Also covers groups prepared before the traffic/lighting owner existed.
+        this.e.prepareNightReceivers?.(group);
         this.holder.add(group);
         this.registerNight(group);
         this.ultra = group;

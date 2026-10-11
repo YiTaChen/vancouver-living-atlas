@@ -1,0 +1,84 @@
+{
+  "revision": "45e17b04ebe066978e2438783bbc1487a8e16ed8",
+  "sourceFingerprint": "d12e6a9bb07343c6a81944a61ddf61ecbee206b2e2f565e8c889b1231ef29b7c",
+  "kind": "visual-check",
+  "skySettings": {
+    "sun": true,
+    "moon": true,
+    "stars": true,
+    "aurora": true,
+    "meteors": true,
+    "moonPhase": "auto",
+    "auroraMode": "auto",
+    "starDensity": 0.45,
+    "auroraIntensity": 0.45,
+    "auroraDensity": 0.45,
+    "meteorFrequency": 0.3
+  },
+  "skyPreviewTime": null,
+  "id": "robson-walk-23p00h",
+  "quality": "balanced",
+  "hour": 23,
+  "valid": true,
+  "viewport": [
+    1280,
+    720
+  ],
+  "render": [
+    1280,
+    720
+  ],
+  "camera": [
+    303.92205172832195,
+    35.56083199646445,
+    228.33401800037095
+  ],
+  "target": [
+    286.20723356886026,
+    34.06083199646445,
+    210.6935753308344
+  ],
+  "mode": "walk",
+  "position": [
+    303.92205172832195,
+    34.06083199646445,
+    228.33401800037095
+  ],
+  "pedestrians": {
+    "time": 28.100000000000264,
+    "streetVisible": true,
+    "selected": 4,
+    "rendered": 4,
+    "routes": 15,
+    "actorStates": 30,
+    "attemptedRoutes": 24,
+    "floorIndexedMeshes": 9,
+    "indexedTreeTrunks": 36041,
+    "closestCandidateM": 6.743898946707665,
+    "nearbyCandidates": 4,
+    "safeNearbyCandidates": 4,
+    "renderedIds": [
+      "footway:3789:-1:run1:0",
+      "footway:3789:-1:run1:1",
+      "footway:3789:-1:run2:0",
+      "footway:3789:-1:run2:1"
+    ],
+    "budget": 24,
+    "renderer": {
+      "activeActors": 4,
+      "visibleActors": 4,
+      "capacity": 32,
+      "rejectedInputs": 0,
+      "allocatedBatches": 8,
+      "populatedBatches": 4,
+      "triangles": 984,
+      "geometryBytes": 361632,
+      "textures": 0,
+      "loadedTemplates": 8,
+      "failedTemplates": 0,
+      "loading": false,
+      "loadErrors": [],
+      "disposed": false
+    }
+  }
+}
