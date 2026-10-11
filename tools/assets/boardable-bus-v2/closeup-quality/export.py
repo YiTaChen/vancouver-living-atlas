@@ -24,6 +24,13 @@ def export_loaded(path):
     axis=max(range(3),key=lambda i:abs(poly.normal[i]));ij=[i for i in range(3) if i!=axis]
     for k in poly.loop_indices:
      v=me.vertices[me.loops[k].vertex_index].co;uv.data[k].uv=(v[ij[0]],v[ij[1]])
+  if uses_texture:
+   # Merged coincident floor vertices can select UVs differing by a few float
+   # ULPs across Blender processes. Canonical texcoords retain the tiled finish
+   # and make source reopen/re-export byte reproducible.
+   for layer in me.uv_layers:
+    for item in layer.data:
+     item.uv=(round(item.uv.x,4),round(item.uv.y,4))
  bpy.context.view_layer.update()
  bpy.ops.export_scene.gltf(filepath=str(path),export_format='GLB',export_yup=True,export_apply=True,export_texcoords=True,export_normals=True,export_materials='EXPORT',export_extras=True,export_animations=False,export_lights=False,export_cameras=False)
  B.batch(path);doc,raw=B.C.read_glb(path);side=[];component_nodes={}

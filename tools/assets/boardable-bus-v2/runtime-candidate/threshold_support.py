@@ -3,7 +3,11 @@ Defines narrow support geometry; never changes the detailed master or door frame
 Importing this module is read-only. apply_to_loaded_candidate must be called by
 an authorized derivation/update on the separate candidate source.
 """
-PORTALS=[('front',3.70,4.85),('rear',-1.20,-.05)]
+import sys
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parent.parent))
+from layout import DOORS
+PORTALS=DOORS
 X0,X1=-1.25,-1.15
 TOP,BOTTOM=.36,.26
 

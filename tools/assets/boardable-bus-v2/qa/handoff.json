@@ -48,5 +48,9 @@
   "pythonTestsPassed": 23,
   "realAdapterTestsPassed": 6,
   "sourceReexportsBinaryIdentical": true,
-  "gitPublication": "Parent task owns commit/push; this worker did not commit or push."
+  "gitPublication": "Parent task owns commit/push; this worker did not commit or push.",
+  "evidenceRevision": "historical_before_nova_door_correction",
+  "historicalSourceCommit": "22a5acc67b8ef96d2f87137125e3fef39cd43350",
+  "validForCurrentAssets": false,
+  "supersededBy": "nova-door-correction.json"
 }

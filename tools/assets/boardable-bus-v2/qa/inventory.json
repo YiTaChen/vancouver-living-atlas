@@ -1,6 +1,10 @@
 {
-  "date": "2026-10-09",
-  "scope": "This reconstructed package only; no third-party photos or temporary logs",
+  "schemaVersion": 1,
+  "date": "2026-10-11",
+  "revision": "nova-typical-door-layout-20261011",
+  "scope": "This source package only, including explicitly historical evidence; excludes nested independently inventoried derivatives, Python caches, Blender backups and this self-referential inventory.",
+  "fileCount": 45,
+  "totalBytes": 18878709,
   "files": [
     {
       "file": ".gitignore",
@@ -9,18 +13,18 @@
     },
     {
       "file": "README.zh-TW.md",
-      "bytes": 7877,
-      "sha256": "0898bba702235fd3088b0af405c9a2d59fdfa08d808360f93c0c545849c74458"
+      "bytes": 9006,
+      "sha256": "08b90d9204da2086269de201ea69c94adcdd3321e7a18856013191bd01db998f"
     },
     {
       "file": "REFERENCES.md",
-      "bytes": 8386,
-      "sha256": "a7d0355e064cadda3ae5c7296dfc795c7dff08af93cc102db2b065fa277e87b3"
+      "bytes": 9861,
+      "sha256": "9c67ffa25550383e08e2e3904c52a0d528439351aa3fac08f04d5c8a15af563f"
     },
     {
       "file": "build.py",
-      "bytes": 9484,
-      "sha256": "3fb0f50c1c57f64362d7441f71bb852a00c06eb1becd2783355551c5f9f3bb90"
+      "bytes": 9515,
+      "sha256": "a10c76fca3e2bfeb38177df3812224a811cea6ba9a308c310ce495e9a2d0ffa9"
     },
     {
       "file": "compose.mjs",
@@ -34,13 +38,13 @@
     },
     {
       "file": "exports/city-bus-12m-interior-v2.lod0.glb",
-      "bytes": 2634280,
-      "sha256": "bc49cb015a4d02e1d7d68c5812a459d5b49eee822a8aff8d6795709d04fac80e"
+      "bytes": 2635208,
+      "sha256": "c160a957444d61e7e00433c9819972ed08ef75af266c62ed97ddd4da292924da"
     },
     {
       "file": "exports/city-bus-12m-interior-v2.lod1.glb",
-      "bytes": 1449360,
-      "sha256": "c86bdf4737f28af73cd9a6f8d638b09f939ff90cd6e5a5df51e9839ec509624a"
+      "bytes": 1450504,
+      "sha256": "f3e3cb1268ade8caeb0b376d3ce92c12d0de65fc8ed4c217ad409159c3abc589"
     },
     {
       "file": "finalize.py",
@@ -49,33 +53,33 @@
     },
     {
       "file": "layout.py",
-      "bytes": 1356,
-      "sha256": "b4e9e2cafd8e28cab5c5d769b8f192caebc9cdb6d12314135beb341bdfa1b524"
+      "bytes": 1490,
+      "sha256": "51e95a042891ae7e1c09353b060a58b5f1a05b73c71c1d432bac5f4fd91d4478"
     },
     {
       "file": "manifest.json",
-      "bytes": 601505,
-      "sha256": "b01497649a45589a23072da1522dffc9857eab704c8446caff929ea8849da842"
+      "bytes": 602530,
+      "sha256": "e55c2e67922114f3431fd323adfda7d84c1a6f0a02672b3789a943a576d7f5f0"
     },
     {
       "file": "metadata.py",
-      "bytes": 12100,
-      "sha256": "c1d9c24fb02492e9f71693f452d2d5c2179d3be05da6300b43400130ac05ddeb"
+      "bytes": 12624,
+      "sha256": "6db88c65ec757c56b4e25fc46bbc3de90bff132e81524659755367547175397a"
     },
     {
       "file": "qa/blender-validation.json",
-      "bytes": 2010,
-      "sha256": "9df1c4c26c6432260cf2d7756341ef4b16c9036972774ed2d6ad848eda5d5537"
+      "bytes": 2017,
+      "sha256": "7daf082edab6e37bc75c0945d0ca4a39c93375c5c8899f2818102bf2c669922e"
     },
     {
       "file": "qa/budget-review.json",
-      "bytes": 734,
-      "sha256": "88389dc4cff1798effceeb9d6857c67f218a2362bce34e757aef5cd68ae5a726"
+      "bytes": 951,
+      "sha256": "3906cf5543955099a9de386ded84a5f4244fff0f090b13dc42397f439bb99f5b"
     },
     {
       "file": "qa/builder-smoke.json",
-      "bytes": 3496,
-      "sha256": "aa98257509001cb63e9d9c5eec3b28f32f0471a9ad9180579712d144e24935df"
+      "bytes": 3713,
+      "sha256": "171d157242e9518896a0ff9b4677695155627e0f12a26ab06a075707b4941a56"
     },
     {
       "file": "qa/bus-v2-adapter-tests.txt",
@@ -85,32 +89,47 @@
     {
       "file": "qa/bus-v2-regression-tests.txt",
       "bytes": 2341,
-      "sha256": "09b89e61d3b1993fadb7e01a49866a2a840b1fcfeaf895dab10bb6e14d56f548"
+      "sha256": "a522e5f4527ed6d2d8b772f19dd6028c73821001ba204679c9a73be0e867a2d5"
     },
     {
       "file": "qa/common-validation.json",
       "bytes": 38127,
-      "sha256": "806b592b19e34930c26a214c72aecb6ad3caf2d864f6ba01b8fb8c7b2f8571fc"
+      "sha256": "d3c5fe638c7372efa21201707f192dd2fbb4a55bd147e9b15d968e1753cf4a79"
     },
     {
       "file": "qa/front-correction-before.json",
-      "bytes": 51995,
-      "sha256": "e04f02c34d227269d7eafff2fc93e754390f20347b038ca1b8dfefa2843e7cc0"
+      "bytes": 52212,
+      "sha256": "9a6a12609aa76d52564b03e25aea68d72c914779b3e3018a7607533f85f6fbe4"
     },
     {
       "file": "qa/front-correction-provenance.json",
-      "bytes": 2122,
-      "sha256": "216899d2b0764691eaa99961cf26840ed6420c09f9e17cd4790bbe14cb5549be"
+      "bytes": 2339,
+      "sha256": "0b691e1f27a8bc69e24a3130028163963f1bbbea7854ac1270a6eb68b66e258a"
     },
     {
       "file": "qa/handoff.json",
-      "bytes": 2393,
-      "sha256": "d909a17582cd5f43959b13ec210ada699d8edb0575386fedaae63d77f7b8da34"
+      "bytes": 2610,
+      "sha256": "1f98b3cf33d9897a3d0ecf5655ab3fc389a50ffbc78939090960847ae6ef1b80"
     },
     {
       "file": "qa/measurements.json",
-      "bytes": 38197,
-      "sha256": "e425bda9e620d38278940a0626edc9fb6ed2579457c8e25e19097c6efd7c009c"
+      "bytes": 38201,
+      "sha256": "fa5ea32230ccb681c1061e78a85e596337e7666d7aba30f8517058dba3ff403f"
+    },
+    {
+      "file": "qa/nova-door-correction.json",
+      "bytes": 3044,
+      "sha256": "3d0f8abe3e7267d13f5fa2c089d55f75ff3af433e62ed5c0afd77ccb00c584a2"
+    },
+    {
+      "file": "qa/nova-door-regression-tests.txt",
+      "bytes": 102,
+      "sha256": "c7a8e5bb52b19a15b1bc991489cb3bd40694de173fb726d08f59f4a7bc279375"
+    },
+    {
+      "file": "qa/nova-door-source-migration.json",
+      "bytes": 6669,
+      "sha256": "17dca8a8bd9310a75cd1f59160ab2d47b9005f6b7e001f81071d7baaabe0bff8"
     },
     {
       "file": "qa/previews/cutaway-layout.png",
@@ -144,8 +163,8 @@
     },
     {
       "file": "qa/previews/index.json",
-      "bytes": 9344,
-      "sha256": "aed1aff1bba1108907a9322781679788acad9f6c3e373e5cfa7ea959b379cd17"
+      "bytes": 9564,
+      "sha256": "a03cf0733edc8f32fee8a766cccb07a3597641b62822c6bc717a225d4eed7aaa"
     },
     {
       "file": "qa/previews/rear-looking-front-lod0.png",
@@ -165,12 +184,12 @@
     {
       "file": "qa/validation.json",
       "bytes": 2885,
-      "sha256": "a44eb672fda4769a63a34d9d21b38a7a7b62bce974104c10c341047ac73222a9"
+      "sha256": "23cae37cd260a26d7da4e1e0c7609296a3fa145133c99d9c0a4f474b42ccf4fc"
     },
     {
       "file": "qa/visual-review.json",
-      "bytes": 4886,
-      "sha256": "885e1209356d338d9c5a9870f90ffaed33434c089bd44839513aa6ecabf0584a"
+      "bytes": 5103,
+      "sha256": "dd77aa74ccc273c5ce9c7d8c9b618c3f3d9f2732c54d1555f3e6b91c644eb682"
     },
     {
       "file": "qa_blender.py",
@@ -179,18 +198,23 @@
     },
     {
       "file": "revise_front.py",
-      "bytes": 8526,
-      "sha256": "62f10af5c35c517dcab41626ed8086d6a2d91fb8a3d59e0ba31f2e0c75b544ac"
+      "bytes": 8527,
+      "sha256": "489dd1b6374b7966ce8938cca3d753d533efd8563052c0672863b22f854aae4f"
+    },
+    {
+      "file": "revise_nova_doors.py",
+      "bytes": 6892,
+      "sha256": "446aa8048d550c33d4a00d63688c40076d418b21f1d0edd3d0b09929e4ebb414"
     },
     {
       "file": "source/city-bus-12m-interior-v2.lod0.blend",
-      "bytes": 298301,
-      "sha256": "f9fb01939c1e65c0c308c8bc2cdca72f26d9d6b728e489df6743bfb6849dc673"
+      "bytes": 306485,
+      "sha256": "5e0896426e709eac7716599cd323402ba940d6ccf10729de8bd51db38a82bab3"
     },
     {
       "file": "source/city-bus-12m-interior-v2.lod1.blend",
-      "bytes": 240150,
-      "sha256": "574de58747175d91c67c76bde05c950bf44ba9542188a37303db6bb600408cd3"
+      "bytes": 247254,
+      "sha256": "2e06db8e899f6ab32fa5eeb077a8d6adfe25630688a6bbd036794d44339f8f59"
     },
     {
       "file": "test_bus-v2.py",
@@ -198,14 +222,14 @@
       "sha256": "1b4d0399245c4a660b284ee765aa2ba4105831307d779386fa93a18f267de98a"
     },
     {
+      "file": "test_nova_doors.py",
+      "bytes": 3961,
+      "sha256": "c103befedd6ce2749b757ac7ac9222d17a173b8e75a4334a23b83bb2c8142ad6"
+    },
+    {
       "file": "validate.py",
-      "bytes": 12208,
-      "sha256": "42c0ce46a30dac76427be40a2d74ff2052737c564ca2046ae7a8a4df4ca225f7"
+      "bytes": 12295,
+      "sha256": "58fff6a3d51f9b34f65e538655d4502da72309c8efc91ca0481b93457711a7e2"
     }
-  ],
-  "externalTest": {
-    "file": "tests/bus-v2.test.mjs",
-    "bytes": 3061,
-    "sha256": "0a70c8f2dae22651a6aa2fbbfc7f13f960ee099e7db94ca8bbc29bf19470657c"
-  }
+  ]
 }

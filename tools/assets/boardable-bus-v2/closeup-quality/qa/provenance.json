@@ -91,5 +91,9 @@
     "Validate source reopening, byte-identical re-export and a saved/reopened 12 mm cushion edit probe"
   ],
   "runtimeIntegration": "This quality profile not integrated or performance-accepted; budget candidate is already integrated on current main.",
-  "thirdPartyMeshesOrPhotoTextures": false
+  "thirdPartyMeshesOrPhotoTextures": false,
+  "evidenceRevision": "historical_before_nova_door_correction",
+  "historicalSourceCommit": "22a5acc67b8ef96d2f87137125e3fef39cd43350",
+  "validForCurrentAssets": false,
+  "supersededBy": "nova-door-correction.json"
 }

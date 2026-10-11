@@ -78,7 +78,7 @@ def validate_contract(m,root=HERE,scenes=None):
    if o['points']:need(not overlap(volume,bounds(o)),f'wheelchair reserved volume blocked by {n}')
   fit_samples+=1
   # Main driver/front/rear entry centre line: 1.95 m standing capsule supported by low floor.
-  for group,za,zb in [('front',3.7,4.85),('rear',-1.2,-.05)]:
+  for group,za,zb in [(d['doorGroupId'],min(p[2] for p in d['openingPolygonM']),max(p[2] for p in d['openingPolygonM'])) for d in ov['doors'][::2]]:
    z=(za+zb)/2;door=next(d for d in ov['doors'] if d['doorGroupId']==group)
    need(door['doorWidthM']>=.50+.10 and door['doorHeightM']>=1.95+.06,'door anthropometric margin')
    for x in [-1.1,-.85,-.6,-.35,0]:

@@ -1,0 +1,72 @@
+{
+  "status": "pass",
+  "revision": "nova-typical-door-layout-20261011",
+  "scope": "Current source and exported-triangle geometry QA. Runtime/GPU acceptance is owned by the parent integration task.",
+  "dimensionSource": "TransLink Bus Infrastructure Design Guidelines 2018.01 Figure 1.2.11, PDF page25",
+  "blenderVersion": "4.5.12 LTS",
+  "manifestSha256": "912d1ebee982273a9b9e255bf184f4366589b2fe00849b6e2b2a4fd960474c75",
+  "exteriorDependencySha256": "6e7ae8d6f0457dc11d4d76729adb307d694edabc42da923e8ec842f078bea041",
+  "correctedDimensionsM": {
+    "nominalLength": 12.4,
+    "frontDoorCentreZ": 4.6,
+    "rearDoorCentreZ": -1.85,
+    "doorCentreSeparation": 6.45,
+    "doorWidths": {
+      "front": 1.2,
+      "rear": 0.9
+    },
+    "lowFloorRearEdge": -2.5,
+    "firstStepRearEdge": -2.74,
+    "raisedDeckFrontEdge": -2.98
+  },
+  "activeSeats": 24,
+  "rearSeats": 17,
+  "rearSeatShiftM": -0.65,
+  "rearStanchionZ": -2.82,
+  "surfacePreservation": "Original seat vertices/contours, PBR materials, rail detail and reference embedded floor texture retained by surgical source migration. Window trim only rebuilt at changed openings.",
+  "lods": [
+    {
+      "level": 0,
+      "file": "exports/city-bus-12m-interior-v2-closeup.lod0.glb",
+      "sha256": "ac680d0a5f6f9543f21b8310bd33ff578f8ac255a447963d7b0903fb724a594e",
+      "source": "source/city-bus-12m-interior-v2-closeup.lod0.blend",
+      "sourceSha256": "242edd164014fe319826532e839d8dde6dc0719231eeb181fe5347723ae7f4b3",
+      "triangles": 278528,
+      "vertices": 250602,
+      "primitives": 13,
+      "bytes": 8617716,
+      "embeddedImageBytes": 98020
+    },
+    {
+      "level": 1,
+      "file": "exports/city-bus-12m-interior-v2-closeup.lod1.glb",
+      "sha256": "c7073c7c52abfc044146bd2fc999671700a18ebcf9e258ef5b8c64cd573261ae",
+      "source": "source/city-bus-12m-interior-v2-closeup.lod1.blend",
+      "sourceSha256": "f7c2c55bcef6341f2e6d77f364f5e78f0675f4e7a44bf2c36cdf9913b2978c4a",
+      "triangles": 92096,
+      "vertices": 96382,
+      "primitives": 13,
+      "bytes": 2989520,
+      "embeddedImageBytes": 98020
+    }
+  ],
+  "checks": {
+    "currentSourceReopenReexport": "pass",
+    "savedCopyArtistEditProbe": "pass",
+    "commonPackaging": "pass",
+    "fullInteriorGeometry": "pass",
+    "officialDoorDimensionsAndActualApertureRegression": "pass",
+    "testCounts": {
+      "master": 23,
+      "budget": 39,
+      "reference": 41,
+      "officialDoorRegression": 3
+    }
+  },
+  "historicalEvidencePolicy": "Historical preview/source derivation/visual-review reports retain original pixels and hashes and explicitly carry validForCurrentAssets=false. They are not this revision visual acceptance.",
+  "limitations": [
+    "Nova-typical layout correction, not factory-identical replica or accessibility certification.",
+    "Rear raised deck remains seated-only; no 1.95m standing anchor there."
+  ],
+  "supportScope": "Both deployed budget/reference LODs have flush actual floor support to X=-1.25; undeployed detailed-source master retains its documented historical outer 0.10m support gap."
+}

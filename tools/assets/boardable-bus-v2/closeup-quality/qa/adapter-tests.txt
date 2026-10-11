@@ -1,9 +1,9 @@
-✔ bus-closeup-quality: composed LOD0 and LOD1 bind the actual 24 seats and one safe standing anchor (87.951939ms)
-✔ bus-closeup-quality: the real adapter still rejects display-only exterior LOD2 (59.474625ms)
-✔ bus-closeup-quality: accidentally exposing raised rear as standing fails closed (40.257103ms)
-✔ bus-closeup-quality: adapter rejects unresolved dependency asset IDs (67.759033ms)
-✔ bus-closeup-quality: actual adapter preserves inward priority-seat yaw and camera anchors (70.279956ms)
-✔ bus-closeup-quality: adapter rejects a non-unit priority-seat rotation (26.385319ms)
+✔ bus-closeup-quality: composed LOD0 and LOD1 bind the actual 24 seats and one safe standing anchor (95.093523ms)
+✔ bus-closeup-quality: the real adapter still rejects display-only exterior LOD2 (44.026517ms)
+✔ bus-closeup-quality: accidentally exposing raised rear as standing fails closed (46.161159ms)
+✔ bus-closeup-quality: adapter rejects unresolved dependency asset IDs (37.212124ms)
+✔ bus-closeup-quality: actual adapter preserves inward priority-seat yaw and camera anchors (78.138182ms)
+✔ bus-closeup-quality: adapter rejects a non-unit priority-seat rotation (43.598698ms)
 ℹ tests 6
 ℹ suites 0
 ℹ pass 6
@@ -11,4 +11,4 @@
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 1420.04036
+ℹ duration_ms 932.106764

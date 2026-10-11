@@ -214,5 +214,9 @@
     "These are offline actual-asset QA images, not browser/runtime screenshots or performance acceptance.",
     "Both quality tiers exceed unchanged B-CAB targets; original cap-compliant integrated fallback is preserved."
   ],
-  "runtimeOrWebGL": false
+  "runtimeOrWebGL": false,
+  "evidenceRevision": "historical_before_nova_door_correction",
+  "historicalSourceCommit": "22a5acc67b8ef96d2f87137125e3fef39cd43350",
+  "validForCurrentAssets": false,
+  "supersededBy": "nova-door-correction.json"
 }

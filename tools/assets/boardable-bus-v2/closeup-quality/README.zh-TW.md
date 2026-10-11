@@ -77,3 +77,10 @@ blender -b -t 2 --python-exit-code 1 --python tools/assets/boardable-bus-v2/clos
 Based on Vancouver Living Atlas by YiTaChen  
 Source: https://github.com/YiTaChen/vancouver-living-atlas  
 License: Vancouver Living Atlas Noncommercial Research and Attribution 1.0
+
+
+## 2026-10-11 門位修正
+
+依 TransLink 官方 Nova 標準車尺寸圖修正前後門位與門寬，前後門中心距為 6.45 m。同步調整內裝門口、窗框、扶手、低地板門檻與後段台階，保留 24 個座位及近景內裝材質/細節。可編輯來源由 `revise_nova_doors.py` 局部修改，不以重新建模取代既有精緻曲面。
+
+目前幾何與來源驗證見 `qa/validation.json`、`qa/blender-validation.json`、`qa/nova-door-correction.json`。舊版預覽與視覺審查保留原有圖片/hash，明確註記 `validForCurrentAssets: false`；它們不代表這次門位修正的畫面驗收。仍是依官方典型配置修正的遊戲模型，並非工廠圖精確重製或無障礙認證。

@@ -9,12 +9,12 @@ sys.path.insert(0,str(HERE));from geometry import C,G,load,bounds,need
 from threshold_support import surfaces as threshold_surfaces
 sp=importlib.util.spec_from_file_location('detailed_bus_validation',MASTER/'validate.py');V=importlib.util.module_from_spec(sp);sp.loader.exec_module(V)
 BUDGETS={0:(12000,1572864),1:(3000,393216)}
-MASTER_GLBS=['bc49cb015a4d02e1d7d68c5812a459d5b49eee822a8aff8d6795709d04fac80e','c86bdf4737f28af73cd9a6f8d638b09f939ff90cd6e5a5df51e9839ec509624a']
+MASTER_GLBS=['c160a957444d61e7e00433c9819972ed08ef75af266c62ed97ddd4da292924da', 'f3e3cb1268ade8caeb0b376d3ce92c12d0de65fc8ed4c217ad409159c3abc589']
 def assert_budget(measured,level):
  t,b=BUDGETS[level];need(measured['triangles']<=t,f'LOD{level} triangle budget');need(measured['bytes']<=b,f'LOD{level} byte budget');need(measured['embeddedImageBytes']==0,'embedded images not expected')
 
 def build_manifest():
- master=json.loads((MASTER/'manifest.json').read_text());m=copy.deepcopy(master);m['packageId']='boardable-bus-v2-runtime-candidate';m['version']='1.0.0';m['status']='offline_qa_pending';m['reexportCommand']='blender -b -t 2 --python tools/assets/boardable-bus-v2/runtime-candidate/export.py -- --output /tmp/bus-runtime-reexport';m['validationCommand']='python tools/assets/boardable-bus-v2/runtime-candidate/validate.py';m['scope']['detailedMasterChanged']=False;m['scope']['runtimeIntegration']='pending';m['scope']['WebGL']='not_run';m['scope']['derivativeRearGeometry']='simplified; not byte-identical to detailed-master rear'
+ master=json.loads((MASTER/'manifest.json').read_text());m=copy.deepcopy(master);m['packageId']='boardable-bus-v2-runtime-candidate';m['version']='1.1.0';m['status']='offline_qa_pending';m['reexportCommand']='blender -b -t 2 --python tools/assets/boardable-bus-v2/runtime-candidate/export.py -- --output /tmp/bus-runtime-reexport';m['validationCommand']='python tools/assets/boardable-bus-v2/runtime-candidate/validate.py';m['scope']['detailedMasterChanged']=False;m['scope']['runtimeIntegration']='pending';m['scope']['WebGL']='not_run';m['scope']['derivativeRearGeometry']='simplified; not byte-identical to detailed-master rear'
  m['provenance']['referencesFile']='../REFERENCES.md';m['provenance']['derivative']='Bounded geometry simplification of the corrected detailed Blender master. No imported third-party mesh. Preserve master independently.';m['provenance']['masterGLBSha256']=MASTER_GLBS
  a=m['assets'][0];a['id']='city-bus-12m-interior-v2-runtime';a['source']='source/city-bus-12m-interior-v2-runtime.lod0.blend';a['sourceSha256']=C.digest(HERE/a['source']);a['lods']=[]
  for level in [0,1]:
@@ -50,7 +50,7 @@ def validate_support_triangles(m,scenes):
    samples.append({'lod':level,'surface':surface['surfaceId'],'component':name,'expectedHeightM':height,'upwardTriangles':len(tops),'verticalRaySamples':len(deviations),'maximumHeightDeviationM':max(deviations)})
   # Actual interior support immediately inside both fixed exterior portals.
   height=.36
-  for group,z0,z1 in [('front',3.7,4.85),('rear',-1.2,-.05)]:
+  for group,z0,z1 in [(d['doorGroupId'],min(p[2] for p in d['openingPolygonM']),max(p[2] for p in d['openingPolygonM'])) for d in m['vehicles'][0]['doors'][::2]]:
    tris=scene['low-floor-slab']['triangles']+scene['door-'+group+'-threshold-slab']['triangles'];count=0;maximum=0
    for x in [-1.249,-1.225,-1.20,-1.175,-1.151,-1.1501,-1.150,-1.1499,-1.149,-1.12,-1.08,-1.0,-.85,-.6,-.35,0]:
     for i in range(9):
@@ -82,7 +82,7 @@ def validate(m):
  for l in m['assets'][0]['lods']:
   p=HERE/l['file'];need(C.digest(p)==l['sha256'],'manifest GLB hash');need(C.digest(HERE/l['source'])==l['sourceSha256'],'manifest source hash');sc=l['componentSidecar'];need(C.digest(HERE/sc['file'])==sc['sha256'],'manifest sidecar hash');scene,doc,_=load(p);actual=C.measure_glb(p);assert_budget(actual,l['level']);need(not doc.get('extensionsRequired'),'unexpected extension');need(not doc.get('animations') and not doc.get('cameras') and not doc.get('skins'),'unexpected runtime payload')
   for k in ['triangles','vertices','primitives','bytes','boundsM']:need(l[k]==actual[k],'manifest metric '+k)
-  need(all(abs(actual['boundsM'][side][i]-(-1.25 if side=='min' and i==0 else master['assets'][0]['lods'][0]['boundsM'][side][i]))<2e-5 for side in ['min','max'] for i in range(3)),'outer bounds changed beyond approved portal-only min-X extension')
+  need(all(actual['boundsM']['min'][i]>=[-1.25,.25999,-6.30][i]-2e-5 and actual['boundsM']['max'][i]<=[1.25,2.701,6.10][i]+2e-5 for i in range(3)),'budget geometry outside Nova-typical exterior envelope')
   ms.append({'lod':l['level'],**actual,'componentSidecarBytes':sc['bytes'],'runtimeRequiredSidecarBytes':0,'budget':{'trianglesMax':BUDGETS[l['level']][0],'bytesMax':BUDGETS[l['level']][1],'pass':True},'namedComponents':sum(bool(o['points']) for o in scene.values())})
  report=validate_geometry(m);report['checks'].append({'check':'sidecar-complete-range-and-hash-binding','status':'pass','samples':len(ms),'detail':'Final GLB SHA bound to sidecar, sidecar SHA bound to manifest, exact batch set, complete nonoverlapping vertex/index coverage, no escaping indices, actual bounds, unique node names, identity baked batch world transforms.'});report['checks'].append({'check':'exact-preserved-anchor-world-transforms','status':'pass','samples':len(m['vehicles'][0]['seats'])*3+9,'detail':'Exact semantic anchor set and full transformed positions/matrices compared to detailed master; no duplicate/missing/extra anchors, yaw drift or camera drift.'});report['checks'].append({'check':'B-CAB-budget-actual-reduced-GLB','status':'pass','samples':2,'detail':'Actual triangle/index counts and complete GLB bytes within 12000/1.5 MiB and 3000/384 KiB; external sidecars separately measured, no compressed decoder.'});report['checks'].append({'check':'master-vehicle-contract-and-exterior-dependency','status':'pass','detail':'Frame, door, original four floor slabs, seat/pelvis/camera and inward orientation contracts preserved; only two declared flush portal support surfaces and min-X extension added. Detailed geometry unchanged. Reduced rear topology remains 17 seats, but vertex bytes differ.'});report['inputHashes']=[{'file':l['file'],'sha256':l['sha256'],'sidecarSha256':l['componentSidecar']['sha256']} for l in m['assets'][0]['lods']]
  return report,ms

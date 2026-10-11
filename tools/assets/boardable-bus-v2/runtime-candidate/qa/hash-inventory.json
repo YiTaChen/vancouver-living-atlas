@@ -1,13 +1,15 @@
 {
   "schemaVersion": 1,
-  "scope": "Only runtime-candidate files. Excludes this self-referential inventory, Python caches and Blender backups. Detailed master has a separate inventory.",
-  "fileCount": 35,
-  "totalBytes": 6562032,
+  "date": "2026-10-11",
+  "revision": "nova-typical-door-layout-20261011",
+  "scope": "This source package only, including explicitly historical evidence; excludes nested independently inventoried derivatives, Python caches, Blender backups and this self-referential inventory.",
+  "fileCount": 36,
+  "totalBytes": 6595657,
   "files": [
     {
       "file": "README.zh-TW.md",
-      "bytes": 7486,
-      "sha256": "688b36d266140cc7cb86b6ad2a3132e9a2ce30bc7eca3637fd2f99c36f233c3f"
+      "bytes": 8221,
+      "sha256": "e88a509fa72d5526517fbc00c058b535e26cdf26b7cd2aadced188ff831b8f25"
     },
     {
       "file": "adapter.test.mjs",
@@ -22,7 +24,7 @@
     {
       "file": "derive.py",
       "bytes": 4320,
-      "sha256": "be5ab59320571fc15dd21ca80db1b82b1802498357a4ab186c381083fd6727d0"
+      "sha256": "64200c09eb3e0c84b8870fb990d3a0e9597c941738325cfdb35389ac3cde4050"
     },
     {
       "file": "export.py",
@@ -31,23 +33,23 @@
     },
     {
       "file": "exports/city-bus-12m-interior-v2-runtime.lod0.components.json",
-      "bytes": 367912,
-      "sha256": "fc063772f14f8b21f08f76eb098038ab03ffbe25a4eed29876b8108cd30fb783"
+      "bytes": 368693,
+      "sha256": "9c7450491a3bc800bcc2787158ef1e31c5532e056389af471f35635973f91073"
     },
     {
       "file": "exports/city-bus-12m-interior-v2-runtime.lod0.glb",
-      "bytes": 736884,
-      "sha256": "76302cf2d45d5c027a412c6087231b65605d982b3ec2634942b6910ab002c096"
+      "bytes": 737440,
+      "sha256": "a404980c38de9d072ba9fb27a034239bb57ab50ceafb0f834290bc9849d08fa9"
     },
     {
       "file": "exports/city-bus-12m-interior-v2-runtime.lod1.components.json",
-      "bytes": 200909,
-      "sha256": "fd656101f5c81f6b25051a5e592f2f12888cda369a88875b3c8c1fc383133bcd"
+      "bytes": 201772,
+      "sha256": "6555e1ea0e2bd2ed39080863bff96fdc3508f787b03017d9d6cb981e9b64859f"
     },
     {
       "file": "exports/city-bus-12m-interior-v2-runtime.lod1.glb",
-      "bytes": 202492,
-      "sha256": "6d5ab5aa5d7074d7c844a48d88dbc4a4e2fd5c3f07b24b0aa6f0f4fcce0ba587"
+      "bytes": 202792,
+      "sha256": "e286475d2f4fd400d768256bb39a633f6a38146179c0414115885d1ab8420e34"
     },
     {
       "file": "finalize.py",
@@ -61,8 +63,8 @@
     },
     {
       "file": "manifest.json",
-      "bytes": 498034,
-      "sha256": "84c358c33e2a76dd2274bb41cb9443c3c4e0f3d923f59b0038595ae6d6a1a413"
+      "bytes": 498933,
+      "sha256": "cfa0825957b9a3e906c16b88976bc36883c41f5910027a70eaf498f7161b89d2"
     },
     {
       "file": "qa/adapter-tests.txt",
@@ -71,28 +73,28 @@
     },
     {
       "file": "qa/blender-validation.json",
-      "bytes": 2521,
-      "sha256": "7b3eec0b20822f31ae4b61fc153bceed2cb4ac3c06a60f7bee36a4e42d7ee08f"
+      "bytes": 2634,
+      "sha256": "bc2e4b8f95cec9bb4d6454581b2015881cc0b1d9fa0b76033a129cbbaef1f24b"
     },
     {
       "file": "qa/common-validation.json",
       "bytes": 6789,
-      "sha256": "faa476cec3e872b54f82eef9872b817ce6b1069fec91be8b7cb3523f1cff9287"
+      "sha256": "5993754b7c4860ec5d2aa1507e89df0974b4a62019b48705d0eb5ebc70b0599e"
     },
     {
       "file": "qa/derivation-lod0.json",
-      "bytes": 63638,
-      "sha256": "59b7526520dfc5b382583ddca56b7333341a6ac6b0fecbf5cefe9d4be70d6759"
+      "bytes": 63855,
+      "sha256": "e4cfeff8fb4fd93ebc90ee123c480cd97d9fb54a4a29fa9e7427f16400e4f7df"
     },
     {
       "file": "qa/derivation-lod1.json",
-      "bytes": 42168,
-      "sha256": "a34d2340a6a751b9566745d9e564bd302ad1d321b67db14c99a2200dbae7cfd2"
+      "bytes": 42385,
+      "sha256": "5aeea48710f7b32192d8062afb4c6393a5355aaa82096536e999c77a3d34ac64"
     },
     {
       "file": "qa/handoff.json",
-      "bytes": 2564,
-      "sha256": "74a1387eab8700d4864b9c1056438697c94b0beb6d604f3ec4a8317432a81417"
+      "bytes": 2781,
+      "sha256": "870b801a50f748e8d4450e21d176244a99fe34ee685daeafdc66689d343e0148"
     },
     {
       "file": "qa/js-lint.txt",
@@ -102,7 +104,12 @@
     {
       "file": "qa/measurements.json",
       "bytes": 6335,
-      "sha256": "56ca68cb0a78d0edbbb0b377b86bd3448d63c6e03dad0c0fb7d06fdc6f0576a7"
+      "sha256": "c69d504380b66336f2c546cd3269ee627174da67f1f08848fa3ce2a8b7318744"
+    },
+    {
+      "file": "qa/nova-door-correction.json",
+      "bytes": 3072,
+      "sha256": "c1ae387a38e05e860b0bb171674094a3afd9902dbfc1e6093a50fdac1c853981"
     },
     {
       "file": "qa/previews/cutaway-layout-lod0.png",
@@ -126,28 +133,28 @@
     },
     {
       "file": "qa/previews/index.json",
-      "bytes": 3538,
-      "sha256": "9423f911918b0a71bc2273b0862145d6178dc15a3cc1055d3e9666e2ce1fe8be"
+      "bytes": 3758,
+      "sha256": "c5718f516612f09c9d805a199331c8b9a059bd6834aaf2170058b1241b551f75"
     },
     {
       "file": "qa/provenance.json",
-      "bytes": 3160,
-      "sha256": "1f7e218b5cf503091fb730c1c7b00470047099e956428b6649f721505b92399f"
+      "bytes": 3377,
+      "sha256": "026a8c72a5012970bed4fe743fe8e83164fa6f2b3838fd4d8233f43b35bd44d0"
     },
     {
       "file": "qa/regression-tests.txt",
       "bytes": 4079,
-      "sha256": "b26921afc3908013cedce543a836ac5474f599d61bcca8b2e68bc6932dfa1ecc"
+      "sha256": "134258fac5f867dc4bd213ee1d8b024fd932adcd67e77efe41bc615364aec9e2"
     },
     {
       "file": "qa/validation.json",
       "bytes": 9405,
-      "sha256": "de3779ca6cbee69cce72b247e29537d4a49c24074f63ce25c9705a33304d9f5f"
+      "sha256": "8f9d83d98ad2befa3d14c3f8ca512adb36140d9cdab8f65c7646d23de00f4ed2"
     },
     {
       "file": "qa/visual-review.json",
-      "bytes": 4400,
-      "sha256": "005cd18f93f3b53362e57d658ed2b64aa435666b24163ee18655f6646827704c"
+      "bytes": 4617,
+      "sha256": "2635e25af41351e6714121a644997ec2f548924049a43d6288991ee979c282f6"
     },
     {
       "file": "qa_blender.py",
@@ -156,13 +163,13 @@
     },
     {
       "file": "source/city-bus-12m-interior-v2-runtime.lod0.blend",
-      "bytes": 268481,
-      "sha256": "14380cb79039bc76c8e4ebcf97c48f084e8e71c9ced844fa56888ae869828a5d"
+      "bytes": 283971,
+      "sha256": "d2f470097afc1544986bfcaf05c6530ba2d65ac39c7e9e30ff8af47557dde145"
     },
     {
       "file": "source/city-bus-12m-interior-v2-runtime.lod1.blend",
-      "bytes": 195925,
-      "sha256": "e0d1696f685b04c591e5421437b1bf487a428263156aa9e622a3611e8559b640"
+      "bytes": 205290,
+      "sha256": "578ba05df1199b34281c6128ad789b01f37b6d0b73b4e5f1d99e2eb50a92cc68"
     },
     {
       "file": "test_candidate.py",
@@ -171,13 +178,13 @@
     },
     {
       "file": "threshold_support.py",
-      "bytes": 2456,
-      "sha256": "054acd1a11c68f27fb32a73598249d3600be70f7cb46da23700b7cf4f0c50223"
+      "bytes": 2544,
+      "sha256": "8cc794a1a07d640e48b947ac29934275855faaeacb1f61fe4ef28b6833f94d60"
     },
     {
       "file": "validate.py",
-      "bytes": 14203,
-      "sha256": "c61202c27ab644f4cd530f6dd140cb09df13d5344eaf7a4f8a0440d71d6be63c"
+      "bytes": 14261,
+      "sha256": "02fc464e50974a851116e522faf293e2014d57ab7822a9ac13bcf22a4c7ea21a"
     }
   ]
 }

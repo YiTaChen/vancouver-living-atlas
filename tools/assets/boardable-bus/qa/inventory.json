@@ -1,5 +1,6 @@
 {
   "schemaVersion": 1,
+  "scope": "Current package inventory after authorized 2026-10-11 door correction; historical visuals are explicitly labelled",
   "files": [
     {
       "file": ".gitignore",
@@ -8,8 +9,8 @@
     },
     {
       "file": "README.zh-TW.md",
-      "bytes": 8194,
-      "sha256": "c015e5b73c360cf521f8880a51f77c783048f503a7e4c2458d076988569e7dd0"
+      "bytes": 10130,
+      "sha256": "9d57cc0a9973d894e487e7268aaddd5fe801e06f9ff5ece5eafbb472c5e2771d"
     },
     {
       "file": "batch_static.py",
@@ -18,8 +19,13 @@
     },
     {
       "file": "build.py",
-      "bytes": 15260,
-      "sha256": "ece727b57e4d1a609b8a330a044e5d2f9b91b4908983873272c564c4aa7c1d4d"
+      "bytes": 15670,
+      "sha256": "9cea2963657db43b45890f7c8977dde9d931baae408660ba50d6ba544932734d"
+    },
+    {
+      "file": "door_layout.py",
+      "bytes": 621,
+      "sha256": "565462693adb0a446ec87f559d2e148cb965df6d3a4f21f4aa88587727265eb4"
     },
     {
       "file": "export.py",
@@ -28,28 +34,28 @@
     },
     {
       "file": "exports/city-bus-12m-exterior.lod0.glb",
-      "bytes": 173088,
-      "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+      "bytes": 175400,
+      "sha256": "f86df4c26e0e528bc6f2299407dd98be5c17d31763ed049c6c1f38fe52a4db45"
     },
     {
       "file": "exports/city-bus-12m-exterior.lod1.glb",
-      "bytes": 137088,
-      "sha256": "a4ccbb6a4b2f032a4d950ee0883c51ebe1ecd314734b539c60aa5fd6c605b3f0"
+      "bytes": 140484,
+      "sha256": "89846477b813d1e41b8f2e234d5a6d888b486a7c267984a75d39cb7f4b27013a"
     },
     {
       "file": "exports/city-bus-12m-exterior.lod2.glb",
-      "bytes": 22556,
-      "sha256": "36a7f8cfa1b3b53b8e212618e80523a7be3f7fd8e86bef98cf9c93f83bcfd948"
+      "bytes": 22576,
+      "sha256": "f274661b47738c519dc539cb03f721ab585bf3a4136e1402fb1163b039698083"
     },
     {
       "file": "exports/city-bus-12m-interior.lod0.glb",
-      "bytes": 342612,
-      "sha256": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      "bytes": 345764,
+      "sha256": "848fa361c19943c08d8792ef9a4bd8c33d237179d790ab78c302f44293bb40d9"
     },
     {
       "file": "exports/city-bus-12m-interior.lod1.glb",
-      "bytes": 122468,
-      "sha256": "6ac509bee7a8eed10b04ae8c6de1b776087bb6a822c75846b5c4e258045819d5"
+      "bytes": 125620,
+      "sha256": "54273d7f7d384d7d292e83c364ffe486dd74a8f82a0eb3ca24235b5ff9987e39"
     },
     {
       "file": "finalize.py",
@@ -58,38 +64,43 @@
     },
     {
       "file": "manifest.json",
-      "bytes": 331287,
-      "sha256": "32a35e7fdaa0f82600f8d161212b952177fae8515ca8095b2d55be118503076e"
+      "bytes": 341005,
+      "sha256": "6e7ae8d6f0457dc11d4d76729adb307d694edabc42da923e8ec842f078bea041"
     },
     {
       "file": "metadata.py",
-      "bytes": 14620,
-      "sha256": "5a923a2c482bc877c48ec375e7b533f844c7d85e0668d92b0f4a48375df98f8e"
+      "bytes": 15174,
+      "sha256": "d55975e3ecf75c74c24ac926d1c6cc6fec6d80aae0b1e75f6da2bc5b2e2d50ac"
     },
     {
       "file": "qa/batching-review.json",
-      "bytes": 994,
-      "sha256": "ada61798ce4e495cd45a55118a8ea73f7f5e6b401d2df0e260ced9d9ede68f78"
+      "bytes": 1244,
+      "sha256": "2939760da47e868f270318375bb8d8651d06e3fad50b24fd1c1eaa607712d95f"
     },
     {
       "file": "qa/blender-validation.json",
-      "bytes": 7767,
-      "sha256": "70977c7b7e38d1453ecd198357a6e248819914a052b736ef43a3df757bb7ecbf"
+      "bytes": 7900,
+      "sha256": "710e08952eb6d1f6b870852e006720b344cb461c589cde1e61b7842af3abcd20"
     },
     {
       "file": "qa/common-validation.json",
-      "bytes": 12574,
-      "sha256": "c6ed6f00401288ce1e2bb47c9e26b832dc388789343a5490c6f42c926a9f3037"
+      "bytes": 12715,
+      "sha256": "f99b5a98f72f56e8593057de9877fac6f81c3c4ea869874a50b86e2ac50d47ac"
+    },
+    {
+      "file": "qa/door-layout-validation-20261011.json",
+      "bytes": 1729,
+      "sha256": "2a595a91194daacabf83eca5b9c3f406557fced48ebf97092f7db3dc47dc3c99"
     },
     {
       "file": "qa/handoff.json",
-      "bytes": 6210,
-      "sha256": "5e4a0c96bb0815d24e59834522abb0a3eb58a7cac4db37a5ef65c522057c87b5"
+      "bytes": 6460,
+      "sha256": "81bb3574c684f0c32279abb292a63e8a1f16a105c83164c61022b8e7cd75f45e"
     },
     {
       "file": "qa/measurements.json",
-      "bytes": 12845,
-      "sha256": "0f32e1f87da08bfaaff927766c276eac485884a034284103782b99099e2d5f96"
+      "bytes": 12966,
+      "sha256": "d905e62648630f66e3ec8dfbd15d3a191f028305ef304c453911bb3466875438"
     },
     {
       "file": "qa/previews/contact-exterior.png",
@@ -143,8 +154,8 @@
     },
     {
       "file": "qa/previews/index.json",
-      "bytes": 25208,
-      "sha256": "a2b0aa24caddfc285ba34de452be4fba75e1ff01350042bf6345117465c8b953"
+      "bytes": 25458,
+      "sha256": "51da8a3e102435bf33c019ca105b5515401f805a85fdc7104838cee05f54c91d"
     },
     {
       "file": "qa/previews/interior-aisle.png",
@@ -248,58 +259,63 @@
     },
     {
       "file": "qa/regression-tests.txt",
-      "bytes": 109,
-      "sha256": "d299626c823f3572b6848c51e25da0364a42c18113409b1607aec89e4d447346"
+      "bytes": 111,
+      "sha256": "504011b1aa04e93944809d4a406f8fd717eca2ac9c68b5e1f4458e0ea134652f"
+    },
+    {
+      "file": "qa/source-migration-20261011.json",
+      "bytes": 2926,
+      "sha256": "56317d3533c55f41cc8040c3b9ebaa22780999b773b98a5117d3906732065072"
     },
     {
       "file": "qa/validation.json",
-      "bytes": 4523,
-      "sha256": "5a46c93be499eb5648cd2a93c5dded2573fc7afb00cd415b7ee2efa23c777c1d"
+      "bytes": 4557,
+      "sha256": "609c6d1be9731bfb5db2b22451546f74f9599e37e0a443608a0b57ac32906890"
     },
     {
       "file": "qa/visual-review.json",
-      "bytes": 1507,
-      "sha256": "f4ddccc4269bbca8cb10b4125c37cc52e2e81c3b962ccb05c1a09f3f511ee4a2"
+      "bytes": 1757,
+      "sha256": "b2ef65014120df868215074fd11a963923fb71f55adedb133b4ca0be91de961c"
     },
     {
       "file": "qa_blender.py",
-      "bytes": 16821,
-      "sha256": "77533622549dcc5456b58ff2e757c499d13a5af5cc9902664d24c55276f65e24"
+      "bytes": 16766,
+      "sha256": "692de3c2a991e4dd1c97b73b5cdb0215831afca2efd050b2e8bf4f31c6204a55"
     },
     {
       "file": "source/city-bus-12m-exterior.lod0.blend",
-      "bytes": 117046,
-      "sha256": "facb19080148b5839d835af2ce994cc50facbd2e1d414ce6428a6e4d13576d27"
+      "bytes": 121004,
+      "sha256": "d66f353390579d60df77e5bc0fa62fc17040f9444e7277bce3380d45bb5c4098"
     },
     {
       "file": "source/city-bus-12m-exterior.lod1.blend",
-      "bytes": 112707,
-      "sha256": "d9858acf335c4068831f4cd6b45d0464a51d85c22750ec57c1f29f2619b54ee9"
+      "bytes": 116953,
+      "sha256": "200f52af6ff6a52d049217d17552d55f266f073e7cad0dcfd9f63cf169c1351e"
     },
     {
       "file": "source/city-bus-12m-exterior.lod2.blend",
-      "bytes": 93019,
-      "sha256": "2cb3c1433a2837172c27efa833b41b09cabe3e34ef790f8a9577867f56bec6a4"
+      "bytes": 94777,
+      "sha256": "ec82653fcaf204ee292b75ebda4e27b865eec767371e356b82e136b33a80fb22"
     },
     {
       "file": "source/city-bus-12m-interior.lod0.blend",
-      "bytes": 117464,
-      "sha256": "8ad2cac5b11f479beac3ca19b16fc409e08c24f1ced5ee0a1b3e87120b130f1e"
+      "bytes": 125640,
+      "sha256": "e6e7af1adb01f767943f78c7df9908662c908583880fe802ba28575a197e4728"
     },
     {
       "file": "source/city-bus-12m-interior.lod1.blend",
-      "bytes": 112392,
-      "sha256": "f62a7aac9d42d63e0350a0b0fbd42f6c20603ac512ffc6477ba3ab7d9a2eb5fb"
+      "bytes": 119842,
+      "sha256": "044fc00a2bb60cabcfc40d3ca594ac913169b754ae731d55687ebfe9b5d7d2f6"
     },
     {
       "file": "test_contract.py",
-      "bytes": 3796,
-      "sha256": "54dbedf80e00d32bb727df6c2c24705611a31182a60a3c9f1abf2545f32bbf75"
+      "bytes": 5524,
+      "sha256": "8b1406b37bf02124205302ddaeb5c50e0904331d9381ae9009b94bc370ba0c80"
     },
     {
       "file": "validate.py",
-      "bytes": 19267,
-      "sha256": "73dc048bde6008ecd8eae0708c9ea6397e577cbb9aaa0a2499e3942c1bf0f55e"
+      "bytes": 19675,
+      "sha256": "58edaf578b32b8d5118cd56a4b2e9cf07a1d332a4175b2c6a8f8264f3f1e7d91"
     }
   ]
 }

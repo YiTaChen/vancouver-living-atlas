@@ -664,5 +664,9 @@
   "finalCorrections": [
     "Door-edge blue pillar offsets keep full original portal aperture; inner metal reveal <=96 mm",
     "Floor tile correctly sRGB-encoded for original linear albedo .17/.19/.21"
-  ]
+  ],
+  "evidenceRevision": "historical_before_nova_door_correction",
+  "historicalSourceCommit": "22a5acc67b8ef96d2f87137125e3fef39cd43350",
+  "validForCurrentAssets": false,
+  "supersededBy": "nova-door-correction.json"
 }

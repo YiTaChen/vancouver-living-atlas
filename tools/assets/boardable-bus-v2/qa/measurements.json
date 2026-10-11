@@ -1,9 +1,9 @@
 {
   "status": "measured",
   "method": "actual transformed GLB accessors and indices",
-  "blenderVersion": "4.3.2",
+  "blenderVersion": "4.5.12 LTS",
   "device": "CPU",
-  "pythonVersion": "3.12.14",
+  "pythonVersion": "3.13.5",
   "seatCount": 24,
   "lods": [
     {
@@ -12,7 +12,7 @@
         "min": [
           -1.1775000095367432,
           0.25999999046325684,
-          -5.650000095367432
+          -6.131667137145996
         ],
         "max": [
           1.1775000095367432,
@@ -22,15 +22,15 @@
         "size": [
           2.3550000190734863,
           2.440000057220459,
-          11.394999980926514
+          11.876667022705078
         ]
       },
       "triangles": 30200,
       "vertices": 56636,
       "primitives": 11,
-      "bytes": 2634280,
+      "bytes": 2635208,
       "embeddedImageBytes": 0,
-      "geometryBytes": 2634280,
+      "geometryBytes": 2635208,
       "images": [],
       "nodeNames": [
         "ad-blank--1-0",
@@ -753,7 +753,7 @@
         "min": [
           -1.1775000095367432,
           0.25999999046325684,
-          -5.650000095367432
+          -6.131999969482422
         ],
         "max": [
           1.1775000095367432,
@@ -763,15 +763,15 @@
         "size": [
           2.3550000190734863,
           2.440000057220459,
-          11.394999980926514
+          11.876999855041504
         ]
       },
       "triangles": 14984,
       "vertices": 28940,
       "primitives": 11,
-      "bytes": 1449360,
+      "bytes": 1450504,
       "embeddedImageBytes": 0,
-      "geometryBytes": 1449360,
+      "geometryBytes": 1450504,
       "images": [],
       "nodeNames": [
         "ad-blank--1-0",

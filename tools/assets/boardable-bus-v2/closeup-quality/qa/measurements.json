@@ -5,7 +5,7 @@
       "min": [
         -1.25,
         0.25999999046325684,
-        -5.755000114440918
+        -6.195000171661377
       ],
       "max": [
         1.2300000190734863,
@@ -15,15 +15,15 @@
       "size": [
         2.4800000190734863,
         2.440000057220459,
-        11.53000020980835
+        11.970000267028809
       ]
     },
-    "triangles": 277040,
-    "vertices": 246564,
+    "triangles": 278528,
+    "vertices": 250602,
     "primitives": 13,
-    "bytes": 8508968,
+    "bytes": 8617716,
     "embeddedImageBytes": 98020,
-    "geometryBytes": 8410948,
+    "geometryBytes": 8519696,
     "images": [
       {
         "sha256": "9d5c9bbe86766050cc56e345218b47ddca5e7f8b3aebcd45d9967f86f49b2bb2",
@@ -147,16 +147,16 @@
     ],
     "boundsScope": "rest-pose scene node transforms; no skin deformation",
     "skins": 0,
-    "componentSidecarBytes": 614633,
+    "componentSidecarBytes": 625332,
     "runtimeRequiredSidecarBytes": 0,
     "budget": {
       "trianglesMax": 12000,
       "bytesMax": 1572864,
-      "trianglesOver": 265040,
-      "bytesOver": 6936104,
+      "trianglesOver": 266528,
+      "bytesOver": 7044852,
       "pass": false
     },
-    "namedComponents": 810
+    "namedComponents": 822
   },
   {
     "lod": 1,
@@ -164,7 +164,7 @@
       "min": [
         -1.25,
         0.25999999046325684,
-        -5.755000114440918
+        -6.195000171661377
       ],
       "max": [
         1.2300000190734863,
@@ -174,15 +174,15 @@
       "size": [
         2.4800000190734863,
         2.440000057220459,
-        11.53000020980835
+        11.970000267028809
       ]
     },
-    "triangles": 91504,
-    "vertices": 95110,
+    "triangles": 92096,
+    "vertices": 96382,
     "primitives": 13,
-    "bytes": 2955124,
+    "bytes": 2989520,
     "embeddedImageBytes": 98020,
-    "geometryBytes": 2857104,
+    "geometryBytes": 2891500,
     "images": [
       {
         "sha256": "9d5c9bbe86766050cc56e345218b47ddca5e7f8b3aebcd45d9967f86f49b2bb2",
@@ -306,15 +306,15 @@
     ],
     "boundsScope": "rest-pose scene node transforms; no skin deformation",
     "skins": 0,
-    "componentSidecarBytes": 613151,
+    "componentSidecarBytes": 623805,
     "runtimeRequiredSidecarBytes": 0,
     "budget": {
       "trianglesMax": 3000,
       "bytesMax": 393216,
-      "trianglesOver": 88504,
-      "bytesOver": 2561908,
+      "trianglesOver": 89096,
+      "bytesOver": 2596304,
       "pass": false
     },
-    "namedComponents": 810
+    "namedComponents": 822
   }
 ]

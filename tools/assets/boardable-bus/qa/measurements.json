@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "environment": {
-    "blender": "4.3.2",
+    "blender": "4.5.12 LTS",
     "device": "CPU",
     "threads": 2,
-    "python": "3.12.14",
-    "cpuModel": "AMD EPYC 9V74 80-Core Processor"
+    "python": "3.13.5",
+    "cpuModel": "unknown"
   },
   "scope": "Actual GLB rest-pose transformed geometry; CPU costs, not GPU measurements",
   "results": [
@@ -16,25 +16,25 @@
         "min": [
           -1.5199999809265137,
           0.0,
-          -5.818999767303467
+          -6.318999767303467
         ],
         "max": [
           1.5199999809265137,
           3.069999933242798,
-          6.215000152587891
+          6.114999771118164
         ],
         "size": [
           3.0399999618530273,
           3.069999933242798,
-          12.033999919891357
+          12.43399953842163
         ]
       },
-      "triangles": 2310,
-      "vertices": 4354,
+      "triangles": 2342,
+      "vertices": 4420,
       "primitives": 21,
-      "bytes": 173088,
+      "bytes": 175400,
       "embeddedImageBytes": 0,
-      "geometryBytes": 173088,
+      "geometryBytes": 175400,
       "images": [],
       "nodeNames": [
         "axle-front",
@@ -86,25 +86,25 @@
         "min": [
           -1.5199999809265137,
           0.0,
-          -5.811999797821045
+          -6.311999797821045
         ],
         "max": [
           1.5199999809265137,
           3.069999933242798,
-          6.215000152587891
+          6.114999771118164
         ],
         "size": [
           3.0399999618530273,
           3.069999933242798,
-          12.026999950408936
+          12.426999568939209
         ]
       },
-      "triangles": 1730,
-      "vertices": 3340,
+      "triangles": 1782,
+      "vertices": 3436,
       "primitives": 21,
-      "bytes": 137088,
+      "bytes": 140484,
       "embeddedImageBytes": 0,
-      "geometryBytes": 137088,
+      "geometryBytes": 140484,
       "images": [],
       "nodeNames": [
         "axle-front",
@@ -156,25 +156,25 @@
         "min": [
           -1.5199999809265137,
           0.0,
-          -5.800000190734863
+          -6.300000190734863
         ],
         "max": [
           1.5199999809265137,
           3.069999933242798,
-          6.210000038146973
+          6.110000133514404
         ],
         "size": [
           3.0399999618530273,
           3.069999933242798,
-          12.010000228881836
+          12.410000324249268
         ]
       },
       "triangles": 208,
       "vertices": 384,
       "primitives": 8,
-      "bytes": 22556,
+      "bytes": 22576,
       "embeddedImageBytes": 0,
-      "geometryBytes": 22556,
+      "geometryBytes": 22576,
       "images": [],
       "nodeNames": [
         "axle-front",
@@ -214,32 +214,34 @@
       "level": 0,
       "boundsM": {
         "min": [
-          -1.1775000095367432,
+          -1.25,
           0.25999999046325684,
-          -5.679999828338623
+          -6.179999828338623
         ],
         "max": [
           1.1775000095367432,
           2.700000047683716,
-          5.75
+          5.659999847412109
         ],
         "size": [
-          2.3550000190734863,
+          2.427500009536743,
           2.440000057220459,
-          11.429999828338623
+          11.839999675750732
         ]
       },
-      "triangles": 3760,
-      "vertices": 7272,
+      "triangles": 3784,
+      "vertices": 7320,
       "primitives": 7,
-      "bytes": 342612,
+      "bytes": 345764,
       "embeddedImageBytes": 0,
-      "geometryBytes": 342612,
+      "geometryBytes": 345764,
       "images": [],
       "nodeNames": [
         "camera-aisle",
         "ceiling",
         "display-screen",
+        "door-front-threshold-slab",
+        "door-rear-threshold-slab",
         "driver-camera",
         "driver-console",
         "driver-partition",
@@ -347,19 +349,19 @@
         "vehicle",
         "interior-batch-panel",
         "interior-batch-lights",
+        "interior-batch-floor",
         "interior-batch-glass",
         "interior-batch-seat",
         "interior-batch-rail",
-        "interior-batch-floor",
         "interior-batch-rubber"
       ],
       "materialNames": [
         "panel",
         "lights",
+        "floor",
         "glass",
         "seat",
         "rail",
-        "floor",
         "rubber"
       ],
       "boundsScope": "rest-pose scene node transforms; no skin deformation",
@@ -370,32 +372,34 @@
       "level": 1,
       "boundsM": {
         "min": [
-          -1.1775000095367432,
+          -1.25,
           0.25999999046325684,
-          -5.679999828338623
+          -6.179999828338623
         ],
         "max": [
           1.1775000095367432,
           2.700000047683716,
-          5.75
+          5.659999847412109
         ],
         "size": [
-          2.3550000190734863,
+          2.427500009536743,
           2.440000057220459,
-          11.429999828338623
+          11.839999675750732
         ]
       },
-      "triangles": 888,
-      "vertices": 1704,
+      "triangles": 912,
+      "vertices": 1752,
       "primitives": 7,
-      "bytes": 122468,
+      "bytes": 125620,
       "embeddedImageBytes": 0,
-      "geometryBytes": 122468,
+      "geometryBytes": 125620,
       "images": [],
       "nodeNames": [
         "camera-aisle",
         "ceiling",
         "display-screen",
+        "door-front-threshold-slab",
+        "door-rear-threshold-slab",
         "driver-camera",
         "driver-console",
         "driver-partition",
@@ -493,19 +497,19 @@
         "vehicle",
         "interior-batch-panel",
         "interior-batch-lights",
+        "interior-batch-floor",
         "interior-batch-glass",
         "interior-batch-seat",
         "interior-batch-rail",
-        "interior-batch-floor",
         "interior-batch-rubber"
       ],
       "materialNames": [
         "panel",
         "lights",
+        "floor",
         "glass",
         "seat",
         "rail",
-        "floor",
         "rubber"
       ],
       "boundsScope": "rest-pose scene node transforms; no skin deformation",

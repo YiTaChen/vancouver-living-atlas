@@ -6,7 +6,7 @@ from pathlib import Path
 import bpy
 HERE=Path(__file__).resolve().parent
 MASTER=HERE.parent
-EXPECTED='f9fb01939c1e65c0c308c8bc2cdca72f26d9d6b728e489df6743bfb6849dc673'
+EXPECTED='5e0896426e709eac7716599cd323402ba940d6ccf10729de8bd51db38a82bab3'
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def triangles(o):
  ev=o.evaluated_get(bpy.context.evaluated_depsgraph_get());me=ev.to_mesh();me.calc_loop_triangles();n=len(me.loop_triangles);ev.to_mesh_clear();return n

@@ -83,5 +83,9 @@
     "No continuous gameplay or GPU performance evidence."
   ],
   "WebGL": "not_run",
-  "supportGeometryEvidence": "qa/validation.json: exact upward support triangles and 3306 vertical rays, including both new portal strips and joins; support is not inferred from these images."
+  "supportGeometryEvidence": "qa/validation.json: exact upward support triangles and 3306 vertical rays, including both new portal strips and joins; support is not inferred from these images.",
+  "evidenceRevision": "historical_before_nova_door_correction",
+  "historicalSourceCommit": "22a5acc67b8ef96d2f87137125e3fef39cd43350",
+  "validForCurrentAssets": false,
+  "supersededBy": "nova-door-correction.json"
 }

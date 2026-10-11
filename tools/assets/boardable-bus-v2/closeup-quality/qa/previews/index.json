@@ -642,5 +642,9 @@
       "maximumBounces": 4
     }
   ],
-  "comparisonRule": "Exact camera/daylight/exposure match; original profiles 48 samples, final quality profiles 96 samples; no denoising."
+  "comparisonRule": "Exact camera/daylight/exposure match; original profiles 48 samples, final quality profiles 96 samples; no denoising.",
+  "evidenceRevision": "historical_before_nova_door_correction",
+  "historicalSourceCommit": "22a5acc67b8ef96d2f87137125e3fef39cd43350",
+  "validForCurrentAssets": false,
+  "supersededBy": "../nova-door-correction.json"
 }

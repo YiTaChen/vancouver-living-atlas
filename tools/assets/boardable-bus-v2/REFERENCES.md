@@ -53,3 +53,26 @@ The authorized project reconstruction reuses the project’s metre-space primiti
 ## Bus upholstery correction
 
 The user requested deeper bus cushion color. The `seat` PBR base color changed from linear RGBA `(0.018, 0.140, 0.400, 1)` to `(0.010, 0.033, 0.073, 1)`, and roughness from 0.52 to 0.78. The shell changed to `(0.028, 0.065, 0.105, 1)`. Fresh #1210 photos show a dark, somewhat desaturated navy upholstery under variable daylight; these chosen PBR values are an artistic match, not calibrated colorimetry. QA uses AgX at exposure 0 with unchanged daylight world/window-light power. No SkyTrain palette is copied or modified.
+
+## 2026-10-11 Nova-typical door correction
+
+The TransLink *Bus Infrastructure Design Guidelines*, revision 2018.01,
+Figure 1.2.11 (PDF page 25), supplies the standard Nova bus dimension basis:
+12.4 m length including bumpers, 3.0 m front overhang, 6.2 m wheelbase,
+3.2 m rear overhang, front/rear door widths 1.20/0.90 m, and 6.45 m door-centre
+separation. Source:
+https://www.translink.ca/-/media/translink/documents/plans-and-projects/managing-the-transit-network/transit-oriented-communities/bus_infrastructure_design_guidelines-sept_2018.pdf#page=25
+
+The existing axle-midpoint frame is retained: wheel centres Z ±3.10 m,
+vehicle nose +6.10 m and rear -6.30 m. Front door spans Z 4.00..5.20 m,
+rear door -2.30..-1.40 m. All six editable interiors were surgically migrated
+with `revise_nova_doors.py`; existing fine seat contours, navy materials,
+rail cross sections and the close-up floor texture were preserved.
+
+The rear low-floor landing now ends at -2.50 m, behind the whole rear opening.
+Rear steps end at -2.98 m; the 17 rear seats are shifted 0.65 m aft, keeping
+all 24 active seat/pelvis/eye identities. This corrects typical door dimensions;
+it does not claim a factory-identical Nova LFS cabin or certified accessibility.
+Earlier photo references still describe the authored appearance. Historical
+preview renders and visual reviews refer to their recorded pre-correction hashes.
+Current geometry/source checks and runtime evidence must use corrected hashes.

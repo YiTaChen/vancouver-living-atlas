@@ -26,7 +26,7 @@ test('bus-closeup-quality: composed LOD0 and LOD1 bind the actual 24 seats and o
     assert.ok(c.anchors.every((a) => a.anchor.vehicleId === 'bus-v2-live'));
     assert.equal(m.pathBase, 'repository-root');
     assert.ok(m.assets[1].lods[lod].file.startsWith('tools/assets/boardable-bus-v2/closeup-quality/exports/'));
-    assert.equal(m.assets[1].lods[lod].triangles, [277040, 91504][lod]);
+    assert.equal(m.assets[1].lods[lod].triangles, [278528, 92096][lod]);
     assert.equal(m.scope.runtimeIntegration, 'pending');
     assert.equal(m.vehicles[0].nonStandingRegions[0].standingAllowed, false);
     assert.equal(

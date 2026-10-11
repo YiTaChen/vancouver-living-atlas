@@ -117,5 +117,9 @@
   ],
   "artistSourceReexportEvidence": "blender-validation.json",
   "geometryEquivalentToSavedArtistSource": false,
-  "differencePolicy": "Generator is an initial modelling baseline. Saved sources retain earlier artist tweaks to overhead rails, ads and straps; those differences are listed and must not be overwritten. Only export.py is the authoritative saved-source reexport path."
+  "differencePolicy": "Generator is an initial modelling baseline. Saved sources retain earlier artist tweaks to overhead rails, ads and straps; those differences are listed and must not be overwritten. Only export.py is the authoritative saved-source reexport path.",
+  "evidenceRevision": "historical_before_nova_door_correction",
+  "historicalSourceCommit": "22a5acc67b8ef96d2f87137125e3fef39cd43350",
+  "validForCurrentAssets": false,
+  "supersededBy": "nova-door-correction.json"
 }
