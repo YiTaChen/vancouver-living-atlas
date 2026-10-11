@@ -10,6 +10,13 @@ export interface TrafficRoute {
   speed: number;
   phase: number;
 }
+/** Invoked with the exact renderer pose. Copy the matrix before retaining it:
+ * one mutable Object3D is reused for all route actors. */
+export type TrafficVehiclePoseVisitor = (
+  model: 'sedan' | 'suv',
+  matrix: THREE.Matrix4,
+  routeIndex: number,
+) => void;
 
 const roles = ['paint', 'glass', 'rubber'] as const;
 type Role = (typeof roles)[number];
@@ -245,7 +252,7 @@ export class TrafficVehicleAssets {
   private disposed = false;
   private batches: Batch[] = [];
   private materials = roles.map(vehicleMaterial);
-  private readonly models: string[];
+  private readonly models: ('sedan' | 'suv')[];
   private readonly lastLod: Uint8Array;
   private readonly dummy = new THREE.Object3D();
   private readonly color = new THREE.Color();
@@ -355,6 +362,7 @@ export class TrafficVehicleAssets {
     time: number,
     camera: THREE.Vector3,
     roadHeight: (x: number, z: number) => number,
+    visitPose?: TrafficVehiclePoseVisitor,
   ) {
     if (this.disposed || !this.stats.enabled || this.stats.status !== 'ready')
       return false;
@@ -412,6 +420,7 @@ export class TrafficVehicleAssets {
       }
       this.dummy.position.set(x, rootY, z);
       this.dummy.updateMatrix();
+      visitPose?.(model, this.dummy.matrix, i);
       this.color.setHex(palette[Math.floor(hash(i) * palette.length)]);
       batch.meshes.forEach((mesh, roleIndex) => {
         mesh.setMatrixAt(slot, this.dummy.matrix);

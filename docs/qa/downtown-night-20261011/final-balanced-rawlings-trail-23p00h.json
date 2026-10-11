@@ -1,0 +1,119 @@
+{
+  "revision": "45e17b04ebe066978e2438783bbc1487a8e16ed8",
+  "sourceFingerprint": "f33a023cdfa5551ac5b4d7c85349581163f4eb59fa8a10d863746f6b87925348",
+  "kind": "visual-check",
+  "cityNight": {
+    "field": {
+      "size": 512,
+      "textureBytes": 1048576,
+      "textures": 1,
+      "activeTexels": 81249,
+      "lampSources": 1530,
+      "roadSources": 1314,
+      "buildMs": 272.89999997615814,
+      "wrappedMaterials": 150,
+      "disposed": false,
+      "nightAmount": 1,
+      "activity": 0.7542084908999245
+    },
+    "vehicles": {
+      "vehicles": 0,
+      "headLamps": 0,
+      "tailLamps": 0,
+      "spills": 0,
+      "drawCalls": 0,
+      "triangles": 0,
+      "textures": 0,
+      "pointLights": 0,
+      "capacity": 64,
+      "nightAmount": 1,
+      "disposed": false
+    },
+    "cameraField": {
+      "street": 0,
+      "warm": 0,
+      "groundY": null,
+      "coverage": 0
+    }
+  },
+  "calls": 52,
+  "triangles": 795586,
+  "geometries": 799,
+  "textures": 42,
+  "qualityMode": "manual",
+  "compatible": false,
+  "skySettings": {
+    "sun": true,
+    "moon": true,
+    "stars": true,
+    "aurora": true,
+    "meteors": true,
+    "moonPhase": "auto",
+    "auroraMode": "auto",
+    "starDensity": 0.45,
+    "auroraIntensity": 0.45,
+    "auroraDensity": 0.45,
+    "meteorFrequency": 0.3
+  },
+  "skyPreviewTime": null,
+  "id": "rawlings-trail-23p00h",
+  "quality": "balanced",
+  "hour": 23,
+  "valid": true,
+  "viewport": [
+    1280,
+    720
+  ],
+  "render": [
+    1280,
+    720
+  ],
+  "camera": [
+    -1690.7971834297807,
+    65.62038269437343,
+    -2531.4390640001347
+  ],
+  "target": [
+    -1715.7971834297807,
+    64.05735916529288,
+    -2531.4390640001347
+  ],
+  "mode": "walk",
+  "position": [
+    -1690.7971834297807,
+    64.05735916529288,
+    -2531.4390640001347
+  ],
+  "pedestrians": {
+    "time": 74.6999999999979,
+    "streetVisible": true,
+    "selected": 0,
+    "rendered": 0,
+    "routes": 41,
+    "actorStates": 82,
+    "attemptedRoutes": 41,
+    "floorIndexedMeshes": 0,
+    "indexedTreeTrunks": 36041,
+    "closestCandidateM": 3240.9707373824035,
+    "nearbyCandidates": 0,
+    "safeNearbyCandidates": 0,
+    "renderedIds": [],
+    "budget": 24,
+    "renderer": {
+      "activeActors": 0,
+      "visibleActors": 0,
+      "capacity": 32,
+      "rejectedInputs": 0,
+      "allocatedBatches": 8,
+      "populatedBatches": 0,
+      "triangles": 0,
+      "geometryBytes": 361632,
+      "textures": 0,
+      "loadedTemplates": 8,
+      "failedTemplates": 0,
+      "loading": false,
+      "loadErrors": [],
+      "disposed": false
+    }
+  }
+}

@@ -11,6 +11,7 @@ type Host = {
   vegetation: THREE.Group;
   disposed?: boolean;
   renderer: THREE.WebGLRenderer;
+  prepareNightReceivers?: (group: THREE.Object3D) => void;
 };
 type Parts = {
   bark: THREE.BufferGeometry;
@@ -293,6 +294,9 @@ export class MatureTrees {
               mesh.customDepthMaterial = depth;
               mesh.userData.alphaFoliage = true;
             }
+            // Async asset admission happens after the initial street-lighting
+            // pass; prepare each shared visible material before its first draw.
+            this.host.prepareNightReceivers?.(mesh);
             this.group.add(mesh);
           });
           return pool;

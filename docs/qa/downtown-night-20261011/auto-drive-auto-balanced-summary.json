@@ -1,0 +1,114 @@
+{
+  "revision": "45e17b04ebe066978e2438783bbc1487a8e16ed8",
+  "sourceFingerprint": "f33a023cdfa5551ac5b4d7c85349581163f4eb59fa8a10d863746f6b87925348",
+  "kind": "auto-quality-travel",
+  "name": "drive-auto-balanced",
+  "valid": true,
+  "settings": {
+    "trees": true,
+    "buildings": true,
+    "labels": true,
+    "traffic": true,
+    "trains": true,
+    "harbour": true,
+    "terrain": true,
+    "autoRotate": false,
+    "quality": "balanced",
+    "qualityMode": "auto",
+    "mode": "drive"
+  },
+  "auto": {
+    "quality": "balanced",
+    "resolutionScale": 1,
+    "targetFps": 45,
+    "reason": "stable",
+    "frameMs": 17.20000000001164,
+    "p95Ms": 34,
+    "changes": 0,
+    "mode": "drive",
+    "capQuality": "high",
+    "sampleCount": 240,
+    "samples": 9271,
+    "excludedSamples": 7,
+    "timingResets": 11,
+    "decisions": 371,
+    "lastFrameMs": 16,
+    "maxFrameMs": 35.20000000001164,
+    "hitches": 4,
+    "highPromotions": 0,
+    "failedHighUpgrades": 0,
+    "highRetryMs": 0
+  },
+  "motion": {
+    "nowMs": 427779,
+    "mode": "drive",
+    "auto": true,
+    "positionXYZ": [
+      -71.5632660535055,
+      43.34857328063984,
+      -145.57482836536084
+    ],
+    "lookAheadXYZ": [
+      -71.5632660535055,
+      43.34857328063984,
+      -145.57482836536084
+    ],
+    "speedMps": 0,
+    "altitudeM": 5.496221278041013,
+    "moving": false,
+    "fast": false,
+    "stationaryForMs": 61380.70000000001,
+    "allowNewDetails": true,
+    "preparationBudgetMs": 1.25,
+    "admissionsPerFrame": 2,
+    "selectionIntervalMs": 120
+  },
+  "detailWork": {
+    "frames": 16515,
+    "attempts": 34102,
+    "skipped": 540,
+    "admissions": 16385,
+    "usedMs": 0.10000002384185791,
+    "overruns": 314,
+    "maxWorkMs": 450.19999998807907
+  },
+  "viewport": [
+    1280,
+    720
+  ],
+  "render": [
+    1280,
+    720
+  ],
+  "pixelRatio": 1,
+  "flight": null,
+  "navigation": {
+    "mode": "drive",
+    "speed": 0,
+    "position": [
+      -78.64919331729018,
+      38.64857328063984,
+      -152.63100543317546
+    ]
+  },
+  "totalFrames": 2400,
+  "settledFrames": 2145,
+  "durationMs": 52109,
+  "excludedWarmupMs": 5000,
+  "fps": 45.52120184458217,
+  "p50Ms": 21.899999976158142,
+  "p95Ms": 25.5,
+  "callsRange": [
+    371,
+    430
+  ],
+  "geometriesRange": [
+    998,
+    1055
+  ],
+  "qualities": [
+    "balanced"
+  ],
+  "frameGapsOver100ms": 0,
+  "frameGapsOver250ms": 0
+}

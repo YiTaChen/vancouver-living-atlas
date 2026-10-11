@@ -185,6 +185,7 @@ test('the integrated panel shares its legacy lease with upgrade and endurance ac
       navigation: { mode: 'orbit', position: new THREE.Vector3() },
       renderer: {
         domElement: { width: 800, height: 600 },
+        info: { render: { calls: 1, triangles: 12 }, memory: { geometries: 2, textures: 1 } },
         getContext: () => ({
           getExtension: () => null,
           getParameter: () => 'test-renderer',
@@ -240,7 +241,8 @@ test('integrated bus checkpoint saves live runtime/render data with a unique nam
       busVisit: { snapshot: () => ({ ...snapshot }) },
       traffic: { busAssets: { stats: () => ({ ...busStats }) } },
       renderer: {
-        domElement: { width: 800, height: 600 }, getPixelRatio: () => 1,
+        domElement: { width: 800, height: 600 },
+        getPixelRatio: () => 1,
         info: { render: { calls: 50, triangles: 2000, points: 0, lines: 0 }, memory: { geometries: 10, textures: 4 } },
         getContext: () => ({ getExtension: () => null, getParameter: () => 'test-renderer', RENDERER: 0 }),
       },

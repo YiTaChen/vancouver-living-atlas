@@ -85,6 +85,7 @@ import {
   createNature,
   createStreetDetails,
   updateTraffic,
+  wrapNightStreetMaterials,
   type Traffic,
 } from './environment';
 import { project, unproject, rings, lines, inPolygon, hash } from './geo';
@@ -1052,6 +1053,10 @@ export class CityEngine {
         (at(i, j + 1) * (1 - a) + at(i + 1, j + 1) * a) * bv,
     );
   }
+  prepareNightReceivers(group: THREE.Object3D) {
+    if (this.traffic && !this.disposed)
+      wrapNightStreetMaterials(group, this.traffic.streetLighting);
+  }
   onLand(x: number, z: number) {
     // On MHWS itself use the explicit beach water convention.
     const sample = this.beachGround?.near(x, z)
@@ -1590,6 +1595,7 @@ export class CityEngine {
     const lighting = sampleAtmosphere(hour, this.atmosphere),
       { angle: a, night } = lighting;
     this.uniforms.night.value = night;
+    this.traffic?.streetLighting.update(hour, night);
     for (const n of this.data.nightMaterials || [])
       n.material.emissiveIntensity = night * n.intensity;
     for (const o of this.data.nightObjects || []) o.visible = night > 0.15;
@@ -1959,6 +1965,8 @@ export class CityEngine {
     this.landmarkWarmup?.dispose();
     this.landmarkWorker?.dispose();
     this.detailedTrees?.dispose();
+    this.traffic?.nightLights?.dispose();
+    this.traffic?.streetLighting?.dispose();
     this.traffic?.vehicleAssets?.dispose();
     this.traffic?.busAssets?.dispose();
     this.facadeDetails?.dispose();

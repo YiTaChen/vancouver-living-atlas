@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import ts from 'typescript';
 import * as THREE from 'three';
+import { cityModule } from './helpers/city-modules.mjs';
+const { GroundSurfaceIndex } = await import(cityModule('ground-surface'));
 
 function ast(name) {
   const source = readFileSync(
@@ -210,27 +212,41 @@ const update = environment.statements.find(
   (node) =>
     ts.isFunctionDeclaration(node) && node.name.text === 'updateTraffic',
 );
+const nightAsphalt = environment.statements.find(
+  (node) =>
+    ts.isFunctionDeclaration(node) && node.name.text === 'nightAsphaltHeight',
+);
 const { updateTraffic, recorded } = await module(`
   export const recorded=[];
   const updateBuses=(...args)=>recorded.push(args);
+  ${nightAsphalt.getText(environment)}
   ${update.getText(environment)}
 `);
 test('main scene excludes parked and replaced buses from fallback and forwards Auto admission and actual tyre-contact road height', () => {
   let policy, exclusions;
+  const lightCalls = [];
+  const renderedPose = new THREE.Matrix4().makeTranslation(7, 2.75, 3);
+  const asphaltMesh = new THREE.Mesh(
+    new THREE.PlaneGeometry(80, 80).rotateX(-Math.PI / 2),
+  );
+  asphaltMesh.position.y = 2.75;
+  const asphalt = new GroundSurfaceIndex([asphaltMesh]);
   const e = {
     camera: new THREE.Vector3(0, 2, 0),
     busVisit: { routeIndex: 1 },
     settings: { quality: 'balanced' },
+    uniforms: { night: { value: 1 } },
     compatibleGraphics: true,
     sceneryMotion: { allowNewDetails: false },
-    data: { roadSurface: { sample: () => 2.75 } },
-    elevation: () => 0,
+    data: { roadSurface: asphalt },
+    elevation: () => 1.7,
   };
   e.camera = { position: e.camera };
   const traffic = {
     buses: {},
     busRoutes: [{}, {}, {}],
     busAssets: {
+      group: new THREE.Group(),
       setExcludedRoutes: (value) => {
         exclusions = value;
       },
@@ -240,11 +256,37 @@ test('main scene excludes parked and replaced buses from fallback and forwards A
         return new Set([2]);
       },
     },
-    vehicleAssets: { update: () => true },
+    nightLights: {
+      beginFrame: (camera, value) => {
+        assert.equal(camera, e.camera.position);
+        assert.equal(value.nightAmount, 1);
+        assert.equal(value.compatible, true);
+        assert.equal(value.roadHeight(0, 0), 2.75);
+        assert.equal(value.roadHeight(200, 200), undefined);
+        assert.equal(value.downtownAt(0, 0), 1);
+        lightCalls.push('begin');
+      },
+      addVehicle: (model, matrix) => {
+        assert.equal(model, 'sedan');
+        assert.equal(matrix, renderedPose);
+        lightCalls.push('vehicle');
+      },
+      endFrame: () => lightCalls.push('end'),
+    },
+    downtownAt: () => true,
+    vehicleAssets: {
+      update: (_time, _camera, _road, visitPose) => {
+        visitPose('sedan', renderedPose);
+        return true;
+      },
+    },
     mesh: {},
     cabins: {},
   };
   updateTraffic(e, traffic, 10);
+  asphaltMesh.geometry.dispose();
+  asphaltMesh.material.dispose();
+  assert.deepEqual(lightCalls, ['begin', 'vehicle', 'end']);
   assert.deepEqual([...exclusions], [1]);
   assert.deepEqual(policy, {
     quality: 'balanced',
