@@ -39,7 +39,7 @@ test('production Stage 2 inventory matches canonical sources, geometry and camer
     const result = await verifyStage2TransitAdoption(root);
     assert.equal(result.status, 'pass');
     assert.equal(result.adoptedFiles, 13);
-    assert.equal(result.geometryBytes, 14473216);
+    assert.equal(result.geometryBytes, 14617216);
   }));
 test('changed GLB and invented provenance cannot pass the Stage 2 gate', () =>
   fixture(async ({ root, put, entries }) => {

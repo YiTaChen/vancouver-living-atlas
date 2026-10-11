@@ -12,7 +12,7 @@
     {
       "check": "actual-nominal-body-section",
       "status": "pass",
-      "samples": 144,
+      "samples": 112,
       "detail": "Actual centre section x=-1.25..+1.25 m, including skin thickness; mirrors and door leaves are separately measured protrusions"
     },
     {
@@ -30,8 +30,8 @@
     {
       "check": "floor-triangulation-winding-and-sill-height",
       "status": "pass",
-      "samples": 7,
-      "detail": "Seven floor polygons, +Y winding, all actual support heights within 2 mm of 0.36 m"
+      "samples": 9,
+      "detail": "Nine floor polygons including two flush doorway strips, +Y winding, all actual support heights within 2 mm of 0.36 m"
     },
     {
       "check": "hollow-body-aisle-and-standing-headroom",
@@ -54,7 +54,7 @@
     {
       "check": "complete-interior-collision-node-coverage",
       "status": "pass",
-      "samples": 72,
+      "samples": 74,
       "detail": "Every editable source component has an exact GLB batch range, zero-draw anchor and named JSON primitive; bounds come from actual delivered triangles"
     },
     {
@@ -70,64 +70,64 @@
       "detail": "No embedded textures; exact GLB cost cross-check; 20 MiB editable-source ceiling; coarse LOD cannot board; all LOD wheel roots unchanged"
     }
   ],
-  "contractSha256": "db4884fa3ea87cda62500e589c372d6bd582799080f8635aa730a41475e00fdc",
+  "contractSha256": "57050c7078139e54c9c55e76614675c7e890466f3c9494a709fd9b59b367ea80",
   "inputGLBs": [
     {
       "file": "exports/city-bus-12m-exterior.lod0.glb",
-      "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+      "sha256": "f86df4c26e0e528bc6f2299407dd98be5c17d31763ed049c6c1f38fe52a4db45"
     },
     {
       "file": "exports/city-bus-12m-exterior.lod1.glb",
-      "sha256": "a4ccbb6a4b2f032a4d950ee0883c51ebe1ecd314734b539c60aa5fd6c605b3f0"
+      "sha256": "89846477b813d1e41b8f2e234d5a6d888b486a7c267984a75d39cb7f4b27013a"
     },
     {
       "file": "exports/city-bus-12m-exterior.lod2.glb",
-      "sha256": "36a7f8cfa1b3b53b8e212618e80523a7be3f7fd8e86bef98cf9c93f83bcfd948"
+      "sha256": "f274661b47738c519dc539cb03f721ab585bf3a4136e1402fb1163b039698083"
     },
     {
       "file": "exports/city-bus-12m-interior.lod0.glb",
-      "sha256": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d"
+      "sha256": "848fa361c19943c08d8792ef9a4bd8c33d237179d790ab78c302f44293bb40d9"
     },
     {
       "file": "exports/city-bus-12m-interior.lod1.glb",
-      "sha256": "6ac509bee7a8eed10b04ae8c6de1b776087bb6a822c75846b5c4e258045819d5"
+      "sha256": "54273d7f7d384d7d292e83c364ffe486dd74a8f82a0eb3ca24235b5ff9987e39"
     }
   ],
   "actualCosts": [
     {
       "assetId": "city-bus-12m-exterior",
       "lod": 0,
-      "triangles": 2310,
+      "triangles": 2342,
       "primitives": 21,
-      "bytes": 173088
+      "bytes": 175400
     },
     {
       "assetId": "city-bus-12m-exterior",
       "lod": 1,
-      "triangles": 1730,
+      "triangles": 1782,
       "primitives": 21,
-      "bytes": 137088
+      "bytes": 140484
     },
     {
       "assetId": "city-bus-12m-exterior",
       "lod": 2,
       "triangles": 208,
       "primitives": 8,
-      "bytes": 22556
+      "bytes": 22576
     },
     {
       "assetId": "city-bus-12m-interior",
       "lod": 0,
-      "triangles": 3760,
+      "triangles": 3784,
       "primitives": 7,
-      "bytes": 342612
+      "bytes": 345764
     },
     {
       "assetId": "city-bus-12m-interior",
       "lod": 1,
-      "triangles": 888,
+      "triangles": 912,
       "primitives": 7,
-      "bytes": 122468
+      "bytes": 125620
     }
   ],
   "blenderEvidenceRequired": "qa/blender-validation.json and qa/previews/index.json"

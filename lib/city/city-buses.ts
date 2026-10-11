@@ -1,7 +1,8 @@
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 
-/** Original low-floor model, inspired by TransLink's blue/yellow fleet photos.
+/** Cheap closed-door Nova LFS silhouette with the same longitudinal envelope
+ * and door locations as the boardable model, in TransLink's blue/yellow colours.
  * +Z is forward; doors are on the vehicle's right (-X). No downloaded model.
  */
 export function busGeometry() {
@@ -27,17 +28,23 @@ export function busGeometry() {
     glass = 0x243b47,
     yellow = 0xe8b82f,
     silver = 0xc5cbd0;
-  box(2.5, 2.55, 12, 0, 1.9, 0, blue);
-  box(2.48, 0.17, 11.8, 0, 3.24, 0, silver);
+  box(2.5, 2.55, 12.4, 0, 1.9, -0.1, blue);
+  box(2.48, 0.17, 12.2, 0, 3.24, -0.1, silver);
   box(1.85, 0.32, 5.8, 0, 3.47, -1.7, silver);
-  box(2.54, 0.13, 11.85, 0, 1.28, 0, yellow);
-  box(2.54, 0.2, 11.7, 0, 0.72, 0, silver);
+  box(2.54, 0.13, 12.25, 0, 1.28, -0.1, yellow);
+  box(2.54, 0.2, 12.1, 0, 0.72, -0.1, silver);
   for (const side of [-1, 1]) {
     for (let j = 0; j < 8; j++) {
       const z = -4.75 + j * 1.3;
+      if (
+        side === -1 &&
+        ((z + 0.585 > 4 && z - 0.585 < 5.2) ||
+          (z + 0.585 > -2.3 && z - 0.585 < -1.4))
+      )
+        continue;
       box(0.035, 1.15, 1.17, side * 1.265, 2.36, z, glass);
     }
-    for (const z of [-3.65, 3.6]) {
+    for (const z of [-3.1, 3.1]) {
       add(
         new THREE.CylinderGeometry(0.51, 0.51, 0.26, 12)
           .rotateZ(Math.PI / 2)
@@ -53,18 +60,21 @@ export function busGeometry() {
     }
     box(0.16, 0.36, 0.26, side * 1.44, 2.7, 5.56, blue);
     box(0.24, 0.08, 0.08, side * 1.32, 2.86, 5.5, silver);
-    box(0.24, 0.16, 0.025, side * 0.87, 0.97, 6.015, 0xffedc6);
-    box(0.23, 0.33, 0.025, side * 0.92, 1.05, -6.015, 0xb92c23);
+    box(0.24, 0.16, 0.025, side * 0.87, 0.97, 6.115, 0xffedc6);
+    box(0.23, 0.33, 0.025, side * 0.92, 1.05, -6.315, 0xb92c23);
   }
   // Full-height front and rear passenger doors; yellow safety edges.
-  for (const z of [4.5, -0.8]) {
-    box(0.045, 2.05, 1.28, -1.286, 1.76, z, glass);
+  for (const [z, width] of [
+    [4.6, 1.2],
+    [-1.85, 0.9],
+  ]) {
+    box(0.045, 2.05, width, -1.286, 1.76, z, glass);
     box(0.05, 2.09, 0.065, -1.313, 1.76, z, silver);
-    box(0.05, 0.07, 1.35, -1.313, 0.73, z, yellow);
+    box(0.05, 0.07, width + 0.07, -1.313, 0.73, z, yellow);
   }
-  box(2.17, 1.34, 0.035, 0, 2.25, 6.02, glass);
-  box(0.055, 1.34, 0.05, 0, 2.25, 6.045, blue);
-  box(1.92, 0.32, 0.045, 0, 3.01, 6.035, 0x111c23);
+  box(2.17, 1.34, 0.035, 0, 2.25, 6.12, glass);
+  box(0.055, 1.34, 0.05, 0, 2.25, 6.145, blue);
+  box(1.92, 0.32, 0.045, 0, 3.01, 6.135, 0x111c23);
   // Amber destination-board pixels, deliberately generic (not live route data).
   for (let row = 0; row < 3; row++)
     for (let col = 0; col < 22; col++)
@@ -75,12 +85,12 @@ export function busGeometry() {
           0.015,
           -0.8 + col * 0.075,
           2.94 + row * 0.065,
-          6.065,
+          6.165,
           0xffba36,
         );
-  box(1.86, 0.82, 0.025, 0, 2.42, -6.02, glass);
+  box(1.86, 0.82, 0.025, 0, 2.42, -6.32, glass);
   for (let j = 0; j < 6; j++)
-    box(1.5, 0.035, 0.025, 0, 1.05 + j * 0.095, -6.025, 0x172c40);
+    box(1.5, 0.035, 0.025, 0, 1.05 + j * 0.095, -6.325, 0x172c40);
   const result = mergeGeometries(parts)!;
   parts.forEach((g) => g.dispose());
   result.computeBoundingBox();
@@ -152,8 +162,8 @@ export function updateBuses(
     const dx = (r.b[0] - r.a[0]) / r.length,
       dz = (r.b[1] - r.a[1]) / r.length;
     const slope = Math.atan2(
-      ground(x + dx * 3.6, z + dz * 3.6) - ground(x - dx * 3.65, z - dz * 3.65),
-      7.25,
+      ground(x + dx * 3.1, z + dz * 3.1) - ground(x - dx * 3.1, z - dz * 3.1),
+      6.2,
     );
     transform.position.set(x, y, z);
     transform.rotation.set(-slope, Math.atan2(dx, dz), 0, 'YXZ');

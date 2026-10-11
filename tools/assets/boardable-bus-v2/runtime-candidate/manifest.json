@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "packageId": "boardable-bus-v2-runtime-candidate",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "baseRevision": "9efce79601deac6a0648cf8e158f3935cbb46f51",
-  "status": "offline_complete",
+  "status": "offline_geometry_validated",
   "units": "m",
   "coordinateSystem": {
     "authoring": "Blender +Z up, -Y front",
@@ -15,15 +15,21 @@
     "project": "Vancouver Living Atlas by YiTaChen",
     "source": "https://github.com/YiTaChen/vancouver-living-atlas",
     "license": "Vancouver Living Atlas Noncommercial Research and Attribution 1.0",
-    "dimensionReference": "docs/AI_AGENT_DEVELOPMENT_BACKLOG.md sections 6.2, 6.4, 6.6",
+    "dimensionReference": "TransLink BIDG2018 Figure 1.2.11 Nova typical bus; authorised 2026-10-11 correction",
     "existingConsumer": "lib/city/city-buses.ts",
     "referencesFile": "../REFERENCES.md",
-    "dimensions": "Project frame preserved, seats and raised rear are representative modelling approximations.",
+    "dimensions": "Axle-midpoint datum preserved; Nova-typical door positions/widths corrected from official dimension guide. Seats and raised rear remain authored modelling approximations.",
     "derivative": "Bounded geometry simplification of the corrected detailed Blender master. No imported third-party mesh. Preserve master independently.",
     "masterGLBSha256": [
-      "bc49cb015a4d02e1d7d68c5812a459d5b49eee822a8aff8d6795709d04fac80e",
-      "c86bdf4737f28af73cd9a6f8d638b09f939ff90cd6e5a5df51e9839ec509624a"
-    ]
+      "c160a957444d61e7e00433c9819972ed08ef75af266c62ed97ddd4da292924da",
+      "f3e3cb1268ade8caeb0b376d3ce92c12d0de65fc8ed4c217ad409159c3abc589"
+    ],
+    "doorCorrection": {
+      "revision": "nova-typical-door-layout-20261011",
+      "dimensionSource": "TransLink 2018.01 Bus Infrastructure Design Guidelines Figure1.2.11",
+      "sourceMethod": "Surgical migration of all existing editable sources; preserve seat contours, materials, packed floor tile and bounded LOD profiles",
+      "fullReplica": false
+    }
   },
   "reexportCommand": "blender -b -t 2 --python tools/assets/boardable-bus-v2/runtime-candidate/export.py -- --output /tmp/bus-runtime-reexport",
   "validationCommand": "python tools/assets/boardable-bus-v2/runtime-candidate/validate.py",
@@ -34,24 +40,24 @@
       "variant": "photo-informed-representative-12m-lowfloor-stepped-rear",
       "kind": "transit-interior",
       "source": "source/city-bus-12m-interior-v2-runtime.lod0.blend",
-      "sourceSha256": "14380cb79039bc76c8e4ebcf97c48f084e8e71c9ced844fa56888ae869828a5d",
+      "sourceSha256": "d2f470097afc1544986bfcaf05c6530ba2d65ac39c7e9e30ff8af47557dde145",
       "lods": [
         {
           "level": 0,
           "file": "exports/city-bus-12m-interior-v2-runtime.lod0.glb",
           "source": "source/city-bus-12m-interior-v2-runtime.lod0.blend",
-          "sourceSha256": "14380cb79039bc76c8e4ebcf97c48f084e8e71c9ced844fa56888ae869828a5d",
-          "sourceBytes": 268481,
-          "sha256": "76302cf2d45d5c027a412c6087231b65605d982b3ec2634942b6910ab002c096",
+          "sourceSha256": "d2f470097afc1544986bfcaf05c6530ba2d65ac39c7e9e30ff8af47557dde145",
+          "sourceBytes": 283971,
+          "sha256": "a404980c38de9d072ba9fb27a034239bb57ab50ceafb0f834290bc9849d08fa9",
           "triangles": 11704,
-          "vertices": 26955,
+          "vertices": 26965,
           "primitives": 11,
-          "bytes": 736884,
+          "bytes": 737440,
           "boundsM": {
             "min": [
               -1.25,
               0.25999999046325684,
-              -5.650000095367432
+              -6.131667137145996
             ],
             "max": [
               1.1775000095367432,
@@ -61,10 +67,10 @@
             "size": [
               2.427500009536743,
               2.440000057220459,
-              11.394999980926514
+              11.876667022705078
             ]
           },
-          "geometryBytes": 736884,
+          "geometryBytes": 737440,
           "embeddedImageBytes": 0,
           "capabilities": {
             "level": 0,
@@ -75,8 +81,8 @@
           "capabilityScope": "Preserved offline frame/topology and exterior dependency; runtime boarding not tested",
           "componentSidecar": {
             "file": "exports/city-bus-12m-interior-v2-runtime.lod0.components.json",
-            "sha256": "fc063772f14f8b21f08f76eb098038ab03ffbe25a4eed29876b8108cd30fb783",
-            "bytes": 367912,
+            "sha256": "9c7450491a3bc800bcc2787158ef1e31c5532e056389af471f35635973f91073",
+            "bytes": 368693,
             "runtimeRequired": false
           }
         },
@@ -84,18 +90,18 @@
           "level": 1,
           "file": "exports/city-bus-12m-interior-v2-runtime.lod1.glb",
           "source": "source/city-bus-12m-interior-v2-runtime.lod1.blend",
-          "sourceSha256": "e0d1696f685b04c591e5421437b1bf487a428263156aa9e622a3611e8559b640",
-          "sourceBytes": 195925,
-          "sha256": "6d5ab5aa5d7074d7c844a48d88dbc4a4e2fd5c3f07b24b0aa6f0f4fcce0ba587",
+          "sourceSha256": "578ba05df1199b34281c6128ad789b01f37b6d0b73b4e5f1d99e2eb50a92cc68",
+          "sourceBytes": 205290,
+          "sha256": "e286475d2f4fd400d768256bb39a633f6a38146179c0414115885d1ab8420e34",
           "triangles": 2824,
           "vertices": 6910,
           "primitives": 11,
-          "bytes": 202492,
+          "bytes": 202792,
           "boundsM": {
             "min": [
               -1.25,
               0.25999999046325684,
-              -5.650000095367432
+              -6.138359546661377
             ],
             "max": [
               1.1775000095367432,
@@ -105,10 +111,10 @@
             "size": [
               2.427500009536743,
               2.440000057220459,
-              11.394999980926514
+              11.883359432220459
             ]
           },
-          "geometryBytes": 202492,
+          "geometryBytes": 202792,
           "embeddedImageBytes": 0,
           "capabilities": {
             "level": 1,
@@ -119,8 +125,8 @@
           "capabilityScope": "Preserved offline frame/topology and exterior dependency; runtime boarding not tested",
           "componentSidecar": {
             "file": "exports/city-bus-12m-interior-v2-runtime.lod1.components.json",
-            "sha256": "fd656101f5c81f6b25051a5e592f2f12888cda369a88875b3c8c1fc383133bcd",
-            "bytes": 200909,
+            "sha256": "6555e1ea0e2bd2ed39080863bff96fdc3508f787b03017d9d6cb981e9b64859f",
+            "bytes": 201772,
             "runtimeRequired": false
           }
         }
@@ -129,7 +135,7 @@
         "min": [
           -1.25,
           0.25999999046325684,
-          -5.650000095367432
+          -6.131667137145996
         ],
         "max": [
           1.1775000095367432,
@@ -139,16 +145,16 @@
         "size": [
           2.427500009536743,
           2.440000057220459,
-          11.394999980926514
+          11.876667022705078
         ]
       },
       "expectedDimensionsM": [
         2.427500009536743,
         2.440000057220459,
-        11.394999980926514
+        11.876667022705078
       ],
       "dimensionToleranceM": 0.02,
-      "dimensionBasis": "Original game-ready approximation within existing project 12 m bus frame. Photos inform visual features, never surveyed dimensions or a fleet-identical seat count.",
+      "dimensionBasis": "Nova-typical 12.4 m game-ready approximation based on TransLink's 2018 standard bus dimension guide. Photos inform visual features, never surveyed dimensions or a fleet-identical seat count.",
       "pivot": {
         "frameId": "vehicle",
         "positionM": [
@@ -267,9 +273,9 @@
       ],
       "textureMode": "shared",
       "textureCost": {
-        "geometryBytes": 939376,
+        "geometryBytes": 940232,
         "embeddedImageBytes": 0,
-        "glbTotalBytes": 939376,
+        "glbTotalBytes": 940232,
         "uniqueTexelBytesWithMips": 0,
         "note": "11 static material batches per LOD; no textures. Component sidecars are offline evidence and not counted as GLB transfer. If loaded, their additional bytes must be accounted for."
       },
@@ -304,7 +310,11 @@
         "ceilingPlaneHeadroomM": 2.24,
         "rearHeadroomM": 1.92,
         "minimumMainAisleM": 0.58,
-        "doorWidthM": 1.15,
+        "doorWidthM": 0.9,
+        "doorWidthsM": {
+          "front": 1.2,
+          "rear": 0.9
+        },
         "doorHeightM": 2.1,
         "rearStandingAllowed": false,
         "note": "1.95 m standing reference is restricted to the low-floor area; rear raised deck is seated-only for the existing fixed-anchor consumer."
@@ -386,14 +396,12 @@
       ],
       "offlineChecks": {
         "status": "pass",
+        "scope": "Current source/geometry checks; historical preview pixels are not current visual acceptance",
         "evidence": [
           "qa/validation.json",
           "qa/common-validation.json",
           "qa/blender-validation.json",
-          "qa/regression-tests.txt",
-          "qa/adapter-tests.txt",
-          "qa/visual-review.json",
-          "qa/previews/index.json"
+          "qa/nova-door-correction.json"
         ]
       },
       "runtimeChecks": {
@@ -454,7 +462,7 @@
           "translationM": [
             -1.25,
             0.36,
-            3.9875
+            4.3
           ],
           "rotationQuaternionXYZW": [
             0,
@@ -474,7 +482,7 @@
           "translationM": [
             -1.25,
             0.36,
-            4.5625
+            4.9
           ],
           "rotationQuaternionXYZW": [
             0,
@@ -494,7 +502,7 @@
           "translationM": [
             -1.25,
             0.36,
-            -0.9125
+            -2.0749999999999997
           ],
           "rotationQuaternionXYZW": [
             0,
@@ -514,7 +522,7 @@
           "translationM": [
             -1.25,
             0.36,
-            -0.33749999999999997
+            -1.625
           ],
           "rotationQuaternionXYZW": [
             0,
@@ -529,42 +537,42 @@
           ]
         }
       ],
-      "nominalLengthM": 12,
+      "nominalLengthM": 12.4,
       "bodyBoundsM": {
         "min": [
           -1.25,
           0.26,
-          -5.8
+          -6.3
         ],
         "max": [
           1.25,
           2.82,
-          6.2
+          6.1
         ],
         "size": [
           2.5,
           2.5599999999999996,
-          12.0
+          12.399999999999999
         ]
       },
       "fullBoundsM": {
         "min": [
           -1.5199999809265137,
           0.0,
-          -5.818999767303467
+          -6.318999767303467
         ],
         "max": [
           1.5199999809265137,
           3.069999933242798,
-          6.215000152587891
+          6.114999771118164
         ],
         "size": [
           3.0399999618530273,
           3.069999933242798,
-          12.033999919891357
+          12.43399953842163
         ]
       },
-      "dimensionBasis": "Representative project modelling target, not a specific New Flyer survey or accessibility certification",
+      "dimensionBasis": "Nova typical 12.4m body, 6.2m wheelbase and asymmetric doors from TransLink BIDG2018 Fig1.2.11; project art and width preserved, not a full brand replica or accessibility certification",
       "contactDatum": {
         "frameId": "vehicle",
         "kind": "tyre-ground-contact",
@@ -701,12 +709,12 @@
             [
               -1.15,
               0.36,
-              -1.46
+              -2.5
             ],
             [
               1.15,
               0.36,
-              -1.46
+              -2.5
             ],
             [
               1.15,
@@ -737,22 +745,22 @@
             [
               -0.325,
               0.52,
-              -1.7
+              -2.74
             ],
             [
               0.325,
               0.52,
-              -1.7
+              -2.74
             ],
             [
               0.325,
               0.52,
-              -1.46
+              -2.5
             ],
             [
               -0.325,
               0.52,
-              -1.46
+              -2.5
             ]
           ],
           "indices": [
@@ -773,22 +781,22 @@
             [
               -0.325,
               0.68,
-              -1.94
+              -2.98
             ],
             [
               0.325,
               0.68,
-              -1.94
+              -2.98
             ],
             [
               0.325,
               0.68,
-              -1.7
+              -2.74
             ],
             [
               -0.325,
               0.68,
-              -1.7
+              -2.74
             ]
           ],
           "indices": [
@@ -809,22 +817,22 @@
             [
               -1.15,
               0.68,
-              -5.65
+              -6.12
             ],
             [
               1.15,
               0.68,
-              -5.65
+              -6.12
             ],
             [
               1.15,
               0.68,
-              -1.94
+              -2.98
             ],
             [
               -1.15,
               0.68,
-              -1.94
+              -2.98
             ]
           ],
           "indices": [
@@ -845,22 +853,22 @@
             [
               -1.25,
               0.36,
-              3.7
+              4.0
             ],
             [
               -1.15,
               0.36,
-              3.7
+              4.0
             ],
             [
               -1.15,
               0.36,
-              4.85
+              5.2
             ],
             [
               -1.25,
               0.36,
-              4.85
+              5.2
             ]
           ],
           "indices": [
@@ -882,22 +890,22 @@
             [
               -1.25,
               0.36,
-              -1.2
+              -2.3
             ],
             [
               -1.15,
               0.36,
-              -1.2
+              -2.3
             ],
             [
               -1.15,
               0.36,
-              -0.05
+              -1.4
             ],
             [
               -1.25,
               0.36,
-              -0.05
+              -1.4
             ]
           ],
           "indices": [
@@ -921,7 +929,7 @@
           "raised": false,
           "stepHeightM": 0,
           "zRangeM": [
-            -1.46,
+            -2.5,
             5.74
           ]
         },
@@ -932,8 +940,8 @@
           "raised": true,
           "stepHeightM": 0.16,
           "zRangeM": [
-            -1.7,
-            -1.46
+            -2.74,
+            -2.5
           ]
         },
         {
@@ -943,8 +951,8 @@
           "raised": true,
           "stepHeightM": 0.16,
           "zRangeM": [
-            -1.94,
-            -1.7
+            -2.98,
+            -2.74
           ]
         },
         {
@@ -954,8 +962,8 @@
           "raised": true,
           "stepHeightM": 0,
           "zRangeM": [
-            -5.65,
-            -1.94
+            -6.12,
+            -2.98
           ]
         }
       ],
@@ -1486,22 +1494,22 @@
             [
               -1.25,
               0.36,
-              3.7
+              4.0
             ],
             [
               -1.25,
               0.36,
-              4.85
+              5.2
             ],
             [
               -1.25,
               2.46,
-              4.85
+              5.2
             ],
             [
               -1.25,
               2.46,
-              3.7
+              4.0
             ]
           ],
           "outwardNormal": [
@@ -1514,7 +1522,7 @@
             "translationM": [
               -1.25,
               0.36,
-              3.9875
+              4.3
             ],
             "rotationQuaternionXYZW": [
               0,
@@ -1533,7 +1541,7 @@
             "translationM": [
               -1.39,
               0.36,
-              3.3674999999999997
+              3.655
             ],
             "rotationQuaternionXYZW": [
               0,
@@ -1558,7 +1566,7 @@
                   "translationM": [
                     -1.25,
                     0.36,
-                    3.9875
+                    4.3
                   ],
                   "rotationQuaternionXYZW": [
                     0,
@@ -1580,7 +1588,7 @@
                   "translationM": [
                     -1.39,
                     0.36,
-                    3.9875
+                    4.3
                   ],
                   "rotationQuaternionXYZW": [
                     0,
@@ -1602,7 +1610,7 @@
                   "translationM": [
                     -1.39,
                     0.36,
-                    3.3674999999999997
+                    3.655
                   ],
                   "rotationQuaternionXYZW": [
                     0,
@@ -1618,7 +1626,7 @@
                 }
               }
             ],
-            "translationTravelM": 0.76
+            "translationTravelM": 0.7850000000000001
           },
           "animationClip": "door-right-front-a-open",
           "animationNodeId": "door-right-front-a",
@@ -1627,30 +1635,30 @@
             "min": [
               -1.417,
               0.36,
-              3.0874999999999995
+              3.3625
             ],
             "max": [
               -1.223,
               2.44,
-              4.2675
+              4.5925
             ],
             "size": [
               0.19399999999999995,
               2.08,
-              1.1800000000000006
+              1.2300000000000004
             ]
           },
           "boardingPointM": [
             -1.7,
             0.36,
-            4.275
+            4.6
           ],
           "doorLocalToVehicleTransform": {
             "parentFrameId": "vehicle",
             "translationM": [
               -1.25,
               0.36,
-              3.9875
+              4.3
             ],
             "rotationQuaternionXYZW": [
               0,
@@ -1664,7 +1672,7 @@
               1
             ]
           },
-          "doorWidthM": 1.15,
+          "doorWidthM": 1.2000000000000002,
           "doorHeightM": 2.1,
           "sillHeightM": 0.36
         },
@@ -1680,22 +1688,22 @@
             [
               -1.25,
               0.36,
-              3.7
+              4.0
             ],
             [
               -1.25,
               0.36,
-              4.85
+              5.2
             ],
             [
               -1.25,
               2.46,
-              4.85
+              5.2
             ],
             [
               -1.25,
               2.46,
-              3.7
+              4.0
             ]
           ],
           "outwardNormal": [
@@ -1708,7 +1716,7 @@
             "translationM": [
               -1.25,
               0.36,
-              4.5625
+              4.9
             ],
             "rotationQuaternionXYZW": [
               0,
@@ -1727,7 +1735,7 @@
             "translationM": [
               -1.39,
               0.36,
-              5.1825
+              5.545000000000001
             ],
             "rotationQuaternionXYZW": [
               0,
@@ -1752,7 +1760,7 @@
                   "translationM": [
                     -1.25,
                     0.36,
-                    4.5625
+                    4.9
                   ],
                   "rotationQuaternionXYZW": [
                     0,
@@ -1774,7 +1782,7 @@
                   "translationM": [
                     -1.39,
                     0.36,
-                    4.5625
+                    4.9
                   ],
                   "rotationQuaternionXYZW": [
                     0,
@@ -1796,7 +1804,7 @@
                   "translationM": [
                     -1.39,
                     0.36,
-                    5.1825
+                    5.545000000000001
                   ],
                   "rotationQuaternionXYZW": [
                     0,
@@ -1812,7 +1820,7 @@
                 }
               }
             ],
-            "translationTravelM": 0.76
+            "translationTravelM": 0.7850000000000001
           },
           "animationClip": "door-right-front-b-open",
           "animationNodeId": "door-right-front-b",
@@ -1821,30 +1829,30 @@
             "min": [
               -1.417,
               0.36,
-              4.2825
+              4.6075
             ],
             "max": [
               -1.223,
               2.44,
-              5.4625
+              5.837500000000001
             ],
             "size": [
               0.19399999999999995,
               2.08,
-              1.1800000000000006
+              1.2300000000000013
             ]
           },
           "boardingPointM": [
             -1.7,
             0.36,
-            4.275
+            4.6
           ],
           "doorLocalToVehicleTransform": {
             "parentFrameId": "vehicle",
             "translationM": [
               -1.25,
               0.36,
-              4.5625
+              4.9
             ],
             "rotationQuaternionXYZW": [
               0,
@@ -1858,7 +1866,7 @@
               1
             ]
           },
-          "doorWidthM": 1.15,
+          "doorWidthM": 1.2000000000000002,
           "doorHeightM": 2.1,
           "sillHeightM": 0.36
         },
@@ -1874,22 +1882,22 @@
             [
               -1.25,
               0.36,
-              -1.2
+              -2.3
             ],
             [
               -1.25,
               0.36,
-              -0.05
+              -1.4
             ],
             [
               -1.25,
               2.46,
-              -0.05
+              -1.4
             ],
             [
               -1.25,
               2.46,
-              -1.2
+              -2.3
             ]
           ],
           "outwardNormal": [
@@ -1902,7 +1910,7 @@
             "translationM": [
               -1.25,
               0.36,
-              -0.9125
+              -2.0749999999999997
             ],
             "rotationQuaternionXYZW": [
               0,
@@ -1921,7 +1929,7 @@
             "translationM": [
               -1.39,
               0.36,
-              -1.5325
+              -2.57
             ],
             "rotationQuaternionXYZW": [
               0,
@@ -1946,7 +1954,7 @@
                   "translationM": [
                     -1.25,
                     0.36,
-                    -0.9125
+                    -2.0749999999999997
                   ],
                   "rotationQuaternionXYZW": [
                     0,
@@ -1968,7 +1976,7 @@
                   "translationM": [
                     -1.39,
                     0.36,
-                    -0.9125
+                    -2.0749999999999997
                   ],
                   "rotationQuaternionXYZW": [
                     0,
@@ -1990,7 +1998,7 @@
                   "translationM": [
                     -1.39,
                     0.36,
-                    -1.5325
+                    -2.57
                   ],
                   "rotationQuaternionXYZW": [
                     0,
@@ -2006,7 +2014,7 @@
                 }
               }
             ],
-            "translationTravelM": 0.76
+            "translationTravelM": 0.635
           },
           "animationClip": "door-right-rear-a-open",
           "animationNodeId": "door-right-rear-a",
@@ -2015,30 +2023,30 @@
             "min": [
               -1.417,
               0.36,
-              -1.8125
+              -2.7874999999999996
             ],
             "max": [
               -1.223,
               2.44,
-              -0.6325
+              -1.8574999999999997
             ],
             "size": [
               0.19399999999999995,
               2.08,
-              1.1800000000000002
+              0.9299999999999999
             ]
           },
           "boardingPointM": [
             -1.7,
             0.36,
-            -0.625
+            -1.8499999999999999
           ],
           "doorLocalToVehicleTransform": {
             "parentFrameId": "vehicle",
             "translationM": [
               -1.25,
               0.36,
-              -0.9125
+              -2.0749999999999997
             ],
             "rotationQuaternionXYZW": [
               0,
@@ -2052,7 +2060,7 @@
               1
             ]
           },
-          "doorWidthM": 1.15,
+          "doorWidthM": 0.8999999999999999,
           "doorHeightM": 2.1,
           "sillHeightM": 0.36
         },
@@ -2068,22 +2076,22 @@
             [
               -1.25,
               0.36,
-              -1.2
+              -2.3
             ],
             [
               -1.25,
               0.36,
-              -0.05
+              -1.4
             ],
             [
               -1.25,
               2.46,
-              -0.05
+              -1.4
             ],
             [
               -1.25,
               2.46,
-              -1.2
+              -2.3
             ]
           ],
           "outwardNormal": [
@@ -2096,7 +2104,7 @@
             "translationM": [
               -1.25,
               0.36,
-              -0.33749999999999997
+              -1.625
             ],
             "rotationQuaternionXYZW": [
               0,
@@ -2115,7 +2123,7 @@
             "translationM": [
               -1.39,
               0.36,
-              0.28250000000000003
+              -1.1300000000000001
             ],
             "rotationQuaternionXYZW": [
               0,
@@ -2140,7 +2148,7 @@
                   "translationM": [
                     -1.25,
                     0.36,
-                    -0.33749999999999997
+                    -1.625
                   ],
                   "rotationQuaternionXYZW": [
                     0,
@@ -2162,7 +2170,7 @@
                   "translationM": [
                     -1.39,
                     0.36,
-                    -0.33749999999999997
+                    -1.625
                   ],
                   "rotationQuaternionXYZW": [
                     0,
@@ -2184,7 +2192,7 @@
                   "translationM": [
                     -1.39,
                     0.36,
-                    0.28250000000000003
+                    -1.1300000000000001
                   ],
                   "rotationQuaternionXYZW": [
                     0,
@@ -2200,7 +2208,7 @@
                 }
               }
             ],
-            "translationTravelM": 0.76
+            "translationTravelM": 0.635
           },
           "animationClip": "door-right-rear-b-open",
           "animationNodeId": "door-right-rear-b",
@@ -2209,30 +2217,30 @@
             "min": [
               -1.417,
               0.36,
-              -0.6174999999999999
+              -1.8425
             ],
             "max": [
               -1.223,
               2.44,
-              0.5625
+              -0.9125000000000001
             ],
             "size": [
               0.19399999999999995,
               2.08,
-              1.18
+              0.9299999999999999
             ]
           },
           "boardingPointM": [
             -1.7,
             0.36,
-            -0.625
+            -1.8499999999999999
           ],
           "doorLocalToVehicleTransform": {
             "parentFrameId": "vehicle",
             "translationM": [
               -1.25,
               0.36,
-              -0.33749999999999997
+              -1.625
             ],
             "rotationQuaternionXYZW": [
               0,
@@ -2246,7 +2254,7 @@
               1
             ]
           },
-          "doorWidthM": 1.15,
+          "doorWidthM": 0.8999999999999999,
           "doorHeightM": 2.1,
           "sillHeightM": 0.36
         }
@@ -2260,7 +2268,7 @@
           "pelvisPointM": [
             -0.9399999976158142,
             1.2000000476837158,
-            -2.575000047683716
+            -3.2250001430511475
           ],
           "facingQuaternionXYZW": [
             0,
@@ -2271,7 +2279,7 @@
           "cameraEyePointM": [
             -0.9399999976158142,
             1.7899999618530273,
-            -2.5250000953674316
+            -3.1750001907348633
           ],
           "pelvisAnchorNodeId": "seat-01-pelvis",
           "cameraAnchorNodeId": "seat-01-camera",
@@ -2292,7 +2300,7 @@
           "pelvisPointM": [
             -0.5,
             1.2000000476837158,
-            -2.575000047683716
+            -3.2250001430511475
           ],
           "facingQuaternionXYZW": [
             0,
@@ -2303,7 +2311,7 @@
           "cameraEyePointM": [
             -0.5,
             1.7899999618530273,
-            -2.5250000953674316
+            -3.1750001907348633
           ],
           "pelvisAnchorNodeId": "seat-02-pelvis",
           "cameraAnchorNodeId": "seat-02-camera",
@@ -2324,7 +2332,7 @@
           "pelvisPointM": [
             0.5,
             1.2000000476837158,
-            -2.575000047683716
+            -3.2250001430511475
           ],
           "facingQuaternionXYZW": [
             0,
@@ -2335,7 +2343,7 @@
           "cameraEyePointM": [
             0.5,
             1.7899999618530273,
-            -2.5250000953674316
+            -3.1750001907348633
           ],
           "pelvisAnchorNodeId": "seat-03-pelvis",
           "cameraAnchorNodeId": "seat-03-camera",
@@ -2356,7 +2364,7 @@
           "pelvisPointM": [
             0.9399999976158142,
             1.2000000476837158,
-            -2.575000047683716
+            -3.2250001430511475
           ],
           "facingQuaternionXYZW": [
             0,
@@ -2367,7 +2375,7 @@
           "cameraEyePointM": [
             0.9399999976158142,
             1.7899999618530273,
-            -2.5250000953674316
+            -3.1750001907348633
           ],
           "pelvisAnchorNodeId": "seat-04-pelvis",
           "cameraAnchorNodeId": "seat-04-camera",
@@ -2388,7 +2396,7 @@
           "pelvisPointM": [
             -0.9399999976158142,
             1.2000000476837158,
-            -3.4149999618530273
+            -4.065000057220459
           ],
           "facingQuaternionXYZW": [
             0,
@@ -2399,7 +2407,7 @@
           "cameraEyePointM": [
             -0.9399999976158142,
             1.7899999618530273,
-            -3.365000009536743
+            -4.014999866485596
           ],
           "pelvisAnchorNodeId": "seat-05-pelvis",
           "cameraAnchorNodeId": "seat-05-camera",
@@ -2420,7 +2428,7 @@
           "pelvisPointM": [
             -0.5,
             1.2000000476837158,
-            -3.4149999618530273
+            -4.065000057220459
           ],
           "facingQuaternionXYZW": [
             0,
@@ -2431,7 +2439,7 @@
           "cameraEyePointM": [
             -0.5,
             1.7899999618530273,
-            -3.365000009536743
+            -4.014999866485596
           ],
           "pelvisAnchorNodeId": "seat-06-pelvis",
           "cameraAnchorNodeId": "seat-06-camera",
@@ -2452,7 +2460,7 @@
           "pelvisPointM": [
             0.5,
             1.2000000476837158,
-            -3.4149999618530273
+            -4.065000057220459
           ],
           "facingQuaternionXYZW": [
             0,
@@ -2463,7 +2471,7 @@
           "cameraEyePointM": [
             0.5,
             1.7899999618530273,
-            -3.365000009536743
+            -4.014999866485596
           ],
           "pelvisAnchorNodeId": "seat-07-pelvis",
           "cameraAnchorNodeId": "seat-07-camera",
@@ -2484,7 +2492,7 @@
           "pelvisPointM": [
             0.9399999976158142,
             1.2000000476837158,
-            -3.4149999618530273
+            -4.065000057220459
           ],
           "facingQuaternionXYZW": [
             0,
@@ -2495,7 +2503,7 @@
           "cameraEyePointM": [
             0.9399999976158142,
             1.7899999618530273,
-            -3.365000009536743
+            -4.014999866485596
           ],
           "pelvisAnchorNodeId": "seat-08-pelvis",
           "cameraAnchorNodeId": "seat-08-camera",
@@ -2516,7 +2524,7 @@
           "pelvisPointM": [
             -0.9399999976158142,
             1.2000000476837158,
-            -4.255000114440918
+            -4.90500020980835
           ],
           "facingQuaternionXYZW": [
             0,
@@ -2527,7 +2535,7 @@
           "cameraEyePointM": [
             -0.9399999976158142,
             1.7899999618530273,
-            -4.204999923706055
+            -4.855000019073486
           ],
           "pelvisAnchorNodeId": "seat-09-pelvis",
           "cameraAnchorNodeId": "seat-09-camera",
@@ -2548,7 +2556,7 @@
           "pelvisPointM": [
             -0.5,
             1.2000000476837158,
-            -4.255000114440918
+            -4.90500020980835
           ],
           "facingQuaternionXYZW": [
             0,
@@ -2559,7 +2567,7 @@
           "cameraEyePointM": [
             -0.5,
             1.7899999618530273,
-            -4.204999923706055
+            -4.855000019073486
           ],
           "pelvisAnchorNodeId": "seat-10-pelvis",
           "cameraAnchorNodeId": "seat-10-camera",
@@ -2580,7 +2588,7 @@
           "pelvisPointM": [
             0.5,
             1.2000000476837158,
-            -4.255000114440918
+            -4.90500020980835
           ],
           "facingQuaternionXYZW": [
             0,
@@ -2591,7 +2599,7 @@
           "cameraEyePointM": [
             0.5,
             1.7899999618530273,
-            -4.204999923706055
+            -4.855000019073486
           ],
           "pelvisAnchorNodeId": "seat-11-pelvis",
           "cameraAnchorNodeId": "seat-11-camera",
@@ -2612,7 +2620,7 @@
           "pelvisPointM": [
             0.9399999976158142,
             1.2000000476837158,
-            -4.255000114440918
+            -4.90500020980835
           ],
           "facingQuaternionXYZW": [
             0,
@@ -2623,7 +2631,7 @@
           "cameraEyePointM": [
             0.9399999976158142,
             1.7899999618530273,
-            -4.204999923706055
+            -4.855000019073486
           ],
           "pelvisAnchorNodeId": "seat-12-pelvis",
           "cameraAnchorNodeId": "seat-12-camera",
@@ -2644,7 +2652,7 @@
           "pelvisPointM": [
             -0.8999999761581421,
             1.2000000476837158,
-            -5.144999980926514
+            -5.795000076293945
           ],
           "facingQuaternionXYZW": [
             0,
@@ -2655,7 +2663,7 @@
           "cameraEyePointM": [
             -0.8999999761581421,
             1.7899999618530273,
-            -5.09499979019165
+            -5.744999885559082
           ],
           "pelvisAnchorNodeId": "seat-13-pelvis",
           "cameraAnchorNodeId": "seat-13-camera",
@@ -2676,7 +2684,7 @@
           "pelvisPointM": [
             -0.44999998807907104,
             1.2000000476837158,
-            -5.144999980926514
+            -5.795000076293945
           ],
           "facingQuaternionXYZW": [
             0,
@@ -2687,7 +2695,7 @@
           "cameraEyePointM": [
             -0.44999998807907104,
             1.7899999618530273,
-            -5.09499979019165
+            -5.744999885559082
           ],
           "pelvisAnchorNodeId": "seat-14-pelvis",
           "cameraAnchorNodeId": "seat-14-camera",
@@ -2708,7 +2716,7 @@
           "pelvisPointM": [
             0.0,
             1.2000000476837158,
-            -5.144999980926514
+            -5.795000076293945
           ],
           "facingQuaternionXYZW": [
             0,
@@ -2719,7 +2727,7 @@
           "cameraEyePointM": [
             0.0,
             1.7899999618530273,
-            -5.09499979019165
+            -5.744999885559082
           ],
           "pelvisAnchorNodeId": "seat-15-pelvis",
           "cameraAnchorNodeId": "seat-15-camera",
@@ -2740,7 +2748,7 @@
           "pelvisPointM": [
             0.44999998807907104,
             1.2000000476837158,
-            -5.144999980926514
+            -5.795000076293945
           ],
           "facingQuaternionXYZW": [
             0,
@@ -2751,7 +2759,7 @@
           "cameraEyePointM": [
             0.44999998807907104,
             1.7899999618530273,
-            -5.09499979019165
+            -5.744999885559082
           ],
           "pelvisAnchorNodeId": "seat-16-pelvis",
           "cameraAnchorNodeId": "seat-16-camera",
@@ -2772,7 +2780,7 @@
           "pelvisPointM": [
             0.8999999761581421,
             1.2000000476837158,
-            -5.144999980926514
+            -5.795000076293945
           ],
           "facingQuaternionXYZW": [
             0,
@@ -2783,7 +2791,7 @@
           "cameraEyePointM": [
             0.8999999761581421,
             1.7899999618530273,
-            -5.09499979019165
+            -5.744999885559082
           ],
           "pelvisAnchorNodeId": "seat-17-pelvis",
           "cameraAnchorNodeId": "seat-17-camera",
@@ -2936,7 +2944,7 @@
           ],
           "facingQuaternionXYZW": [
             0,
-            -0.7071068286895689,
+            -0.7071068286895688,
             0,
             0.7071067336835231
           ],
@@ -2968,7 +2976,7 @@
           ],
           "facingQuaternionXYZW": [
             0,
-            -0.7071068286895689,
+            -0.7071068286895688,
             0,
             0.7071067336835231
           ],
@@ -3000,7 +3008,7 @@
           ],
           "facingQuaternionXYZW": [
             0,
-            -0.7071068286895689,
+            -0.7071068286895688,
             0,
             0.7071067336835231
           ],
@@ -3044,12 +3052,12 @@
             [
               -0.29,
               0.36,
-              -1.18
+              -2.2
             ],
             [
               0.29,
               0.36,
-              -1.18
+              -2.2
             ],
             [
               0.29,
@@ -3115,7 +3123,7 @@
           "pointM": [
             -1.7,
             0.36,
-            4.275
+            4.6
           ]
         },
         {
@@ -3125,7 +3133,7 @@
           "pointM": [
             -1.25,
             0.36,
-            4.275
+            4.6
           ]
         },
         {
@@ -3135,7 +3143,7 @@
           "pointM": [
             -1.7,
             0.36,
-            -0.625
+            -1.8499999999999999
           ]
         },
         {
@@ -3145,7 +3153,7 @@
           "pointM": [
             -1.25,
             0.36,
-            -0.625
+            -1.8499999999999999
           ]
         },
         {
@@ -3482,7 +3490,7 @@
               "min": [
                 -0.8125,
                 2.549999952316284,
-                -5.25
+                -5.71999979019165
               ],
               "max": [
                 -0.7074999809265137,
@@ -3492,7 +3500,7 @@
               "size": [
                 0.10500001907348633,
                 0.032000064849853516,
-                10.699999809265137
+                11.169999599456787
               ]
             },
             "role": "obstacle",
@@ -3507,7 +3515,7 @@
               "min": [
                 0.7074999809265137,
                 2.549999952316284,
-                -5.25
+                -5.71999979019165
               ],
               "max": [
                 0.8125,
@@ -3517,7 +3525,7 @@
               "size": [
                 0.10500001907348633,
                 0.032000064849853516,
-                10.699999809265137
+                11.169999599456787
               ]
             },
             "role": "obstacle",
@@ -3907,7 +3915,7 @@
               "min": [
                 -0.656499981880188,
                 2.5889999866485596,
-                -5.260000228881836
+                -5.730000019073486
               ],
               "max": [
                 -0.6434999704360962,
@@ -3917,7 +3925,7 @@
               "size": [
                 0.013000011444091797,
                 0.009999990463256836,
-                10.720000267028809
+                11.190000057220459
               ]
             },
             "role": "obstacle",
@@ -3932,7 +3940,7 @@
               "min": [
                 0.6434999704360962,
                 2.5889999866485596,
-                -5.260000228881836
+                -5.730000019073486
               ],
               "max": [
                 0.656499981880188,
@@ -3942,7 +3950,7 @@
               "size": [
                 0.013000011444091797,
                 0.009999990463256836,
-                10.720000267028809
+                11.190000057220459
               ]
             },
             "role": "obstacle",
@@ -4457,17 +4465,17 @@
               "min": [
                 -1.0800000429153442,
                 0.36000001430511475,
-                3.819999933242798
+                4.125
               ],
               "max": [
                 -0.46000000834465027,
                 0.36800000071525574,
-                4.730000019073486
+                5.074999809265137
               ],
               "size": [
                 0.620000034570694,
                 0.007999986410140991,
-                0.9100000858306885
+                0.9499998092651367
               ]
             },
             "role": "obstacle",
@@ -4507,12 +4515,12 @@
               "min": [
                 -0.17749999463558197,
                 2.059999942779541,
-                -5.644000053405762
+                -6.113999843597412
               ],
               "max": [
                 -0.12250000238418579,
                 2.380000114440918,
-                -5.616000175476074
+                -6.085999965667725
               ],
               "size": [
                 0.05499999225139618,
@@ -4532,12 +4540,12 @@
               "min": [
                 -0.027499999850988388,
                 2.059999942779541,
-                -5.644000053405762
+                -6.113999843597412
               ],
               "max": [
                 0.027499999850988388,
                 2.380000114440918,
-                -5.616000175476074
+                -6.085999965667725
               ],
               "size": [
                 0.054999999701976776,
@@ -4557,12 +4565,12 @@
               "min": [
                 0.12250000238418579,
                 2.059999942779541,
-                -5.644000053405762
+                -6.113999843597412
               ],
               "max": [
                 0.17749999463558197,
                 2.380000114440918,
-                -5.616000175476074
+                -6.085999965667725
               ],
               "size": [
                 0.05499999225139618,
@@ -6682,17 +6690,17 @@
               "min": [
                 -1.162500023841858,
                 1.1124999523162842,
-                -5.650000095367432
+                -6.119999885559082
               ],
               "max": [
                 -1.1174999475479126,
                 1.1675000190734863,
-                -1.2000000476837158
+                -2.299999952316284
               ],
               "size": [
                 0.04500007629394531,
                 0.05500006675720215,
-                4.450000047683716
+                3.819999933242798
               ]
             },
             "role": "obstacle",
@@ -6707,17 +6715,17 @@
               "min": [
                 -1.162500023841858,
                 1.1124999523162842,
-                -0.05000000074505806
+                -1.399999976158142
               ],
               "max": [
                 -1.1174999475479126,
                 1.1675000190734863,
-                3.700000047683716
+                4.0
               ],
               "size": [
                 0.04500007629394531,
                 0.05500006675720215,
-                3.750000048428774
+                5.399999976158142
               ]
             },
             "role": "obstacle",
@@ -6732,7 +6740,7 @@
               "min": [
                 -1.162500023841858,
                 1.1124999523162842,
-                4.849999904632568
+                5.199999809265137
               ],
               "max": [
                 -1.1174999475479126,
@@ -6742,7 +6750,7 @@
               "size": [
                 0.04500007629394531,
                 0.05500006675720215,
-                0.869999885559082
+                0.5199999809265137
               ]
             },
             "role": "obstacle",
@@ -6757,7 +6765,7 @@
               "min": [
                 1.1174999475479126,
                 1.1124999523162842,
-                -5.650000095367432
+                -6.119999885559082
               ],
               "max": [
                 1.162500023841858,
@@ -6767,7 +6775,7 @@
               "size": [
                 0.04500007629394531,
                 0.05500006675720215,
-                11.369999885559082
+                11.839999675750732
               ]
             },
             "role": "obstacle",
@@ -6782,7 +6790,7 @@
               "min": [
                 -1.1349999904632568,
                 2.5999999046325684,
-                -5.639999866485596
+                -6.109999656677246
               ],
               "max": [
                 1.1349999904632568,
@@ -6792,7 +6800,7 @@
               "size": [
                 2.2699999809265137,
                 0.10000014305114746,
-                11.37999963760376
+                11.84999942779541
               ]
             },
             "role": "ceiling",
@@ -6957,17 +6965,17 @@
               "min": [
                 -1.1775000095367432,
                 0.8199999928474426,
-                -5.650000095367432
+                -6.119999885559082
               ],
               "max": [
                 -1.152500033378601,
                 1.1200000047683716,
-                -1.2000000476837158
+                -2.299999952316284
               ],
               "size": [
                 0.02499997615814209,
                 0.30000001192092896,
-                4.450000047683716
+                3.819999933242798
               ]
             },
             "role": "obstacle",
@@ -6982,17 +6990,17 @@
               "min": [
                 -1.1775000095367432,
                 0.8199999928474426,
-                -0.05000000074505806
+                -1.399999976158142
               ],
               "max": [
                 -1.152500033378601,
                 1.1200000047683716,
-                3.700000047683716
+                4.0
               ],
               "size": [
                 0.02499997615814209,
                 0.30000001192092896,
-                3.750000048428774
+                5.399999976158142
               ]
             },
             "role": "obstacle",
@@ -7007,7 +7015,7 @@
               "min": [
                 -1.1775000095367432,
                 0.8199999928474426,
-                4.849999904632568
+                5.199999809265137
               ],
               "max": [
                 -1.152500033378601,
@@ -7017,7 +7025,7 @@
               "size": [
                 0.02499997615814209,
                 0.30000001192092896,
-                0.869999885559082
+                0.5199999809265137
               ]
             },
             "role": "obstacle",
@@ -7032,7 +7040,7 @@
               "min": [
                 1.152500033378601,
                 0.8199999928474426,
-                -5.650000095367432
+                -6.119999885559082
               ],
               "max": [
                 1.1775000095367432,
@@ -7042,7 +7050,7 @@
               "size": [
                 0.02499997615814209,
                 0.30000001192092896,
-                11.369999885559082
+                11.839999675750732
               ]
             },
             "role": "obstacle",
@@ -7132,7 +7140,7 @@
               "min": [
                 -1.125,
                 2.4149999618530273,
-                -5.559999942779541
+                -6.029999732971191
               ],
               "max": [
                 -0.7950000166893005,
@@ -7142,7 +7150,7 @@
               "size": [
                 0.32999998331069946,
                 0.15000009536743164,
-                11.179999828338623
+                11.649999618530273
               ]
             },
             "role": "obstacle",
@@ -7157,7 +7165,7 @@
               "min": [
                 0.7950000166893005,
                 2.4149999618530273,
-                -5.559999942779541
+                -6.029999732971191
               ],
               "max": [
                 1.125,
@@ -7167,7 +7175,7 @@
               "size": [
                 0.32999998331069946,
                 0.15000009536743164,
-                11.179999828338623
+                11.649999618530273
               ]
             },
             "role": "obstacle",
@@ -7182,12 +7190,12 @@
               "min": [
                 -1.149999976158142,
                 0.25999999046325684,
-                -1.940000057220459
+                -2.9800000190734863
               ],
               "max": [
                 -0.3400000035762787,
                 0.6800000071525574,
-                -1.4600000381469727
+                -2.5
               ],
               "size": [
                 0.8099999725818634,
@@ -7207,12 +7215,12 @@
               "min": [
                 0.3400000035762787,
                 0.25999999046325684,
-                -1.940000057220459
+                -2.9800000190734863
               ],
               "max": [
                 1.149999976158142,
                 0.6800000071525574,
-                -1.4600000381469727
+                -2.5
               ],
               "size": [
                 0.8099999725818634,
@@ -7282,17 +7290,17 @@
               "min": [
                 -1.25,
                 0.25999999046325684,
-                3.700000047683716
+                4.0
               ],
               "max": [
                 -1.149999976158142,
                 0.36000001430511475,
-                4.849999904632568
+                5.199999809265137
               ],
               "size": [
                 0.10000002384185791,
                 0.10000002384185791,
-                1.1499998569488525
+                1.1999998092651367
               ]
             },
             "role": "walkable-floor",
@@ -7307,17 +7315,17 @@
               "min": [
                 -1.25,
                 0.25999999046325684,
-                -1.2000000476837158
+                -2.299999952316284
               ],
               "max": [
                 -1.149999976158142,
                 0.36000001430511475,
-                -0.05000000074505806
+                -1.399999976158142
               ],
               "size": [
                 0.10000002384185791,
                 0.10000002384185791,
-                1.1500000469386578
+                0.8999999761581421
               ]
             },
             "role": "walkable-floor",
@@ -7357,7 +7365,7 @@
               "min": [
                 -1.149999976158142,
                 0.25999999046325684,
-                -1.4600000381469727
+                -2.5
               ],
               "max": [
                 1.149999976158142,
@@ -7367,7 +7375,7 @@
               "size": [
                 2.299999952316284,
                 0.10000002384185791,
-                7.199999809265137
+                8.239999771118164
               ]
             },
             "role": "walkable-floor",
@@ -7382,17 +7390,17 @@
               "min": [
                 -1.149999976158142,
                 0.25999999046325684,
-                -5.650000095367432
+                -6.119999885559082
               ],
               "max": [
                 1.149999976158142,
                 0.6800000071525574,
-                -1.940000057220459
+                -2.9800000190734863
               ],
               "size": [
                 2.299999952316284,
                 0.42000001668930054,
-                3.7100000381469727
+                3.1399998664855957
               ]
             },
             "role": "walkable-floor",
@@ -7407,12 +7415,12 @@
               "min": [
                 -0.32499998807907104,
                 0.25999999046325684,
-                -1.7000000476837158
+                -2.740000009536743
               ],
               "max": [
                 0.32499998807907104,
                 0.5199999809265137,
-                -1.4600000381469727
+                -2.5
               ],
               "size": [
                 0.6499999761581421,
@@ -7432,12 +7440,12 @@
               "min": [
                 -0.32499998807907104,
                 0.25999999046325684,
-                -1.940000057220459
+                -2.9800000190734863
               ],
               "max": [
                 0.32499998807907104,
                 0.6800000071525574,
-                -1.7000000476837158
+                -2.740000009536743
               ],
               "size": [
                 0.6499999761581421,
@@ -7482,12 +7490,12 @@
               "min": [
                 -0.38199999928474426,
                 1.2799999713897705,
-                -2.202500104904175
+                -2.8524999618530273
               ],
               "max": [
                 -0.328000009059906,
                 1.3799999952316284,
-                -2.137500047683716
+                -2.7874999046325684
               ],
               "size": [
                 0.05399999022483826,
@@ -7882,12 +7890,12 @@
               "min": [
                 -1.1150000095367432,
                 0.6840000152587891,
-                -2.572999954223633
+                -3.2230000495910645
               ],
               "max": [
                 -0.7649999856948853,
                 0.7199304103851318,
-                -2.5369999408721924
+                -3.187000036239624
               ],
               "size": [
                 0.3500000238418579,
@@ -7907,12 +7915,12 @@
               "min": [
                 -1.1369999647140503,
                 1.6600000858306885,
-                -2.905142307281494
+                -3.555142402648926
               ],
               "max": [
                 -1.1130000352859497,
                 1.7850000858306885,
-                -2.882857322692871
+                -3.5328574180603027
               ],
               "size": [
                 0.023999929428100586,
@@ -7932,12 +7940,12 @@
               "min": [
                 -0.7669999599456787,
                 1.6600000858306885,
-                -2.905142307281494
+                -3.555142402648926
               ],
               "max": [
                 -0.7430000305175781,
                 1.7850000858306885,
-                -2.882857322692871
+                -3.5328574180603027
               ],
               "size": [
                 0.023999929428100586,
@@ -7957,12 +7965,12 @@
               "min": [
                 -1.125,
                 1.7730464935302734,
-                -2.9059998989105225
+                -3.555999994277954
               ],
               "max": [
                 -0.7549999952316284,
                 1.7969536781311035,
-                -2.881999969482422
+                -3.5320000648498535
               ],
               "size": [
                 0.3700000047683716,
@@ -7982,12 +7990,12 @@
               "min": [
                 -1.0929304361343384,
                 0.6800000071525574,
-                -2.572999954223633
+                -3.2230000495910645
               ],
               "max": [
                 -1.0570000410079956,
                 1.0299999713897705,
-                -2.5369999408721924
+                -3.187000036239624
               ],
               "size": [
                 0.03593039512634277,
@@ -8007,12 +8015,12 @@
               "min": [
                 -0.8217138051986694,
                 0.6800000071525574,
-                -2.572999954223633
+                -3.2230000495910645
               ],
               "max": [
                 -0.7870000004768372,
                 1.0299999713897705,
-                -2.5369999408721924
+                -3.187000036239624
               ],
               "size": [
                 0.034713804721832275,
@@ -8032,12 +8040,12 @@
               "min": [
                 -0.675000011920929,
                 0.6840000152587891,
-                -2.572999954223633
+                -3.2230000495910645
               ],
               "max": [
                 -0.32499998807907104,
                 0.7199304103851318,
-                -2.5369999408721924
+                -3.187000036239624
               ],
               "size": [
                 0.3500000238418579,
@@ -8057,12 +8065,12 @@
               "min": [
                 -0.6970000267028809,
                 1.6600000858306885,
-                -2.905142307281494
+                -3.555142402648926
               ],
               "max": [
                 -0.6729999780654907,
                 1.7850000858306885,
-                -2.882857322692871
+                -3.5328574180603027
               ],
               "size": [
                 0.024000048637390137,
@@ -8082,12 +8090,12 @@
               "min": [
                 -0.3269999921321869,
                 1.6600000858306885,
-                -2.905142307281494
+                -3.555142402648926
               ],
               "max": [
                 -0.30300000309944153,
                 1.7850000858306885,
-                -2.882857322692871
+                -3.5328574180603027
               ],
               "size": [
                 0.02399998903274536,
@@ -8107,12 +8115,12 @@
               "min": [
                 -0.6850000023841858,
                 1.7730464935302734,
-                -2.9059998989105225
+                -3.555999994277954
               ],
               "max": [
                 -0.3149999976158142,
                 1.7969536781311035,
-                -2.881999969482422
+                -3.5320000648498535
               ],
               "size": [
                 0.3700000047683716,
@@ -8132,12 +8140,12 @@
               "min": [
                 -0.6529304385185242,
                 0.6800000071525574,
-                -2.572999954223633
+                -3.2230000495910645
               ],
               "max": [
                 -0.6169999837875366,
                 1.0299999713897705,
-                -2.5369999408721924
+                -3.187000036239624
               ],
               "size": [
                 0.03593045473098755,
@@ -8157,12 +8165,12 @@
               "min": [
                 -0.38171377778053284,
                 0.6800000071525574,
-                -2.572999954223633
+                -3.2230000495910645
               ],
               "max": [
                 -0.34700000286102295,
                 1.0299999713897705,
-                -2.5369999408721924
+                -3.187000036239624
               ],
               "size": [
                 0.03471377491950989,
@@ -8182,12 +8190,12 @@
               "min": [
                 0.32499998807907104,
                 0.6840000152587891,
-                -2.572999954223633
+                -3.2230000495910645
               ],
               "max": [
                 0.675000011920929,
                 0.7199304103851318,
-                -2.5369999408721924
+                -3.187000036239624
               ],
               "size": [
                 0.3500000238418579,
@@ -8207,12 +8215,12 @@
               "min": [
                 0.30300000309944153,
                 1.6600000858306885,
-                -2.905142307281494
+                -3.555142402648926
               ],
               "max": [
                 0.3269999921321869,
                 1.7850000858306885,
-                -2.882857322692871
+                -3.5328574180603027
               ],
               "size": [
                 0.02399998903274536,
@@ -8232,12 +8240,12 @@
               "min": [
                 0.6729999780654907,
                 1.6600000858306885,
-                -2.905142307281494
+                -3.555142402648926
               ],
               "max": [
                 0.6970000267028809,
                 1.7850000858306885,
-                -2.882857322692871
+                -3.5328574180603027
               ],
               "size": [
                 0.024000048637390137,
@@ -8257,12 +8265,12 @@
               "min": [
                 0.3149999976158142,
                 1.7730464935302734,
-                -2.9059998989105225
+                -3.555999994277954
               ],
               "max": [
                 0.6850000023841858,
                 1.7969536781311035,
-                -2.881999969482422
+                -3.5320000648498535
               ],
               "size": [
                 0.3700000047683716,
@@ -8282,12 +8290,12 @@
               "min": [
                 0.34706956148147583,
                 0.6800000071525574,
-                -2.572999954223633
+                -3.2230000495910645
               ],
               "max": [
                 0.382999986410141,
                 1.0299999713897705,
-                -2.5369999408721924
+                -3.187000036239624
               ],
               "size": [
                 0.03593042492866516,
@@ -8307,12 +8315,12 @@
               "min": [
                 0.6182862520217896,
                 0.6800000071525574,
-                -2.572999954223633
+                -3.2230000495910645
               ],
               "max": [
                 0.652999997138977,
                 1.0299999713897705,
-                -2.5369999408721924
+                -3.187000036239624
               ],
               "size": [
                 0.0347137451171875,
@@ -8332,12 +8340,12 @@
               "min": [
                 0.7649999856948853,
                 0.6840000152587891,
-                -2.572999954223633
+                -3.2230000495910645
               ],
               "max": [
                 1.1150000095367432,
                 0.7199304103851318,
-                -2.5369999408721924
+                -3.187000036239624
               ],
               "size": [
                 0.3500000238418579,
@@ -8357,12 +8365,12 @@
               "min": [
                 0.7430000305175781,
                 1.6600000858306885,
-                -2.905142307281494
+                -3.555142402648926
               ],
               "max": [
                 0.7669999599456787,
                 1.7850000858306885,
-                -2.882857322692871
+                -3.5328574180603027
               ],
               "size": [
                 0.023999929428100586,
@@ -8382,12 +8390,12 @@
               "min": [
                 1.1130000352859497,
                 1.6600000858306885,
-                -2.905142307281494
+                -3.555142402648926
               ],
               "max": [
                 1.1369999647140503,
                 1.7850000858306885,
-                -2.882857322692871
+                -3.5328574180603027
               ],
               "size": [
                 0.023999929428100586,
@@ -8407,12 +8415,12 @@
               "min": [
                 0.7549999952316284,
                 1.7730464935302734,
-                -2.9059998989105225
+                -3.555999994277954
               ],
               "max": [
                 1.125,
                 1.7969536781311035,
-                -2.881999969482422
+                -3.5320000648498535
               ],
               "size": [
                 0.3700000047683716,
@@ -8432,12 +8440,12 @@
               "min": [
                 0.78706955909729,
                 0.6800000071525574,
-                -2.572999954223633
+                -3.2230000495910645
               ],
               "max": [
                 0.8230000138282776,
                 1.0299999713897705,
-                -2.5369999408721924
+                -3.187000036239624
               ],
               "size": [
                 0.03593045473098755,
@@ -8457,12 +8465,12 @@
               "min": [
                 1.058286190032959,
                 0.6800000071525574,
-                -2.572999954223633
+                -3.2230000495910645
               ],
               "max": [
                 1.0929999351501465,
                 1.0299999713897705,
-                -2.5369999408721924
+                -3.187000036239624
               ],
               "size": [
                 0.0347137451171875,
@@ -8482,17 +8490,17 @@
               "min": [
                 -1.1150000095367432,
                 0.6840000152587891,
-                -3.4130001068115234
+                -4.063000202178955
               ],
               "max": [
                 -0.7649999856948853,
                 0.7199304103851318,
-                -3.377000093460083
+                -4.0269999504089355
               ],
               "size": [
                 0.3500000238418579,
                 0.03593039512634277,
-                0.03600001335144043
+                0.03600025177001953
               ]
             },
             "role": "obstacle",
@@ -8507,12 +8515,12 @@
               "min": [
                 -1.1369999647140503,
                 1.6600000858306885,
-                -3.7451424598693848
+                -4.395142555236816
               ],
               "max": [
                 -1.1130000352859497,
                 1.7850000858306885,
-                -3.7228574752807617
+                -4.372857570648193
               ],
               "size": [
                 0.023999929428100586,
@@ -8532,12 +8540,12 @@
               "min": [
                 -0.7669999599456787,
                 1.6600000858306885,
-                -3.7451424598693848
+                -4.395142555236816
               ],
               "max": [
                 -0.7430000305175781,
                 1.7850000858306885,
-                -3.7228574752807617
+                -4.372857570648193
               ],
               "size": [
                 0.023999929428100586,
@@ -8557,17 +8565,17 @@
               "min": [
                 -1.125,
                 1.7730464935302734,
-                -3.746000051498413
+                -4.395999908447266
               ],
               "max": [
                 -0.7549999952316284,
                 1.7969536781311035,
-                -3.7220001220703125
+                -4.372000217437744
               ],
               "size": [
                 0.3700000047683716,
                 0.023907184600830078,
-                0.023999929428100586
+                0.023999691009521484
               ]
             },
             "role": "obstacle",
@@ -8582,17 +8590,17 @@
               "min": [
                 -1.0929304361343384,
                 0.6800000071525574,
-                -3.4130001068115234
+                -4.063000202178955
               ],
               "max": [
                 -1.0570000410079956,
                 1.0299999713897705,
-                -3.377000093460083
+                -4.0269999504089355
               ],
               "size": [
                 0.03593039512634277,
                 0.34999996423721313,
-                0.03600001335144043
+                0.03600025177001953
               ]
             },
             "role": "obstacle",
@@ -8607,17 +8615,17 @@
               "min": [
                 -0.8217138051986694,
                 0.6800000071525574,
-                -3.4130001068115234
+                -4.063000202178955
               ],
               "max": [
                 -0.7870000004768372,
                 1.0299999713897705,
-                -3.377000093460083
+                -4.0269999504089355
               ],
               "size": [
                 0.034713804721832275,
                 0.34999996423721313,
-                0.03600001335144043
+                0.03600025177001953
               ]
             },
             "role": "obstacle",
@@ -8632,17 +8640,17 @@
               "min": [
                 -0.675000011920929,
                 0.6840000152587891,
-                -3.4130001068115234
+                -4.063000202178955
               ],
               "max": [
                 -0.32499998807907104,
                 0.7199304103851318,
-                -3.377000093460083
+                -4.0269999504089355
               ],
               "size": [
                 0.3500000238418579,
                 0.03593039512634277,
-                0.03600001335144043
+                0.03600025177001953
               ]
             },
             "role": "obstacle",
@@ -8657,12 +8665,12 @@
               "min": [
                 -0.6970000267028809,
                 1.6600000858306885,
-                -3.7451424598693848
+                -4.395142555236816
               ],
               "max": [
                 -0.6729999780654907,
                 1.7850000858306885,
-                -3.7228574752807617
+                -4.372857570648193
               ],
               "size": [
                 0.024000048637390137,
@@ -8682,12 +8690,12 @@
               "min": [
                 -0.3269999921321869,
                 1.6600000858306885,
-                -3.7451424598693848
+                -4.395142555236816
               ],
               "max": [
                 -0.30300000309944153,
                 1.7850000858306885,
-                -3.7228574752807617
+                -4.372857570648193
               ],
               "size": [
                 0.02399998903274536,
@@ -8707,17 +8715,17 @@
               "min": [
                 -0.6850000023841858,
                 1.7730464935302734,
-                -3.746000051498413
+                -4.395999908447266
               ],
               "max": [
                 -0.3149999976158142,
                 1.7969536781311035,
-                -3.7220001220703125
+                -4.372000217437744
               ],
               "size": [
                 0.3700000047683716,
                 0.023907184600830078,
-                0.023999929428100586
+                0.023999691009521484
               ]
             },
             "role": "obstacle",
@@ -8732,17 +8740,17 @@
               "min": [
                 -0.6529304385185242,
                 0.6800000071525574,
-                -3.4130001068115234
+                -4.063000202178955
               ],
               "max": [
                 -0.6169999837875366,
                 1.0299999713897705,
-                -3.377000093460083
+                -4.0269999504089355
               ],
               "size": [
                 0.03593045473098755,
                 0.34999996423721313,
-                0.03600001335144043
+                0.03600025177001953
               ]
             },
             "role": "obstacle",
@@ -8757,17 +8765,17 @@
               "min": [
                 -0.38171377778053284,
                 0.6800000071525574,
-                -3.4130001068115234
+                -4.063000202178955
               ],
               "max": [
                 -0.34700000286102295,
                 1.0299999713897705,
-                -3.377000093460083
+                -4.0269999504089355
               ],
               "size": [
                 0.03471377491950989,
                 0.34999996423721313,
-                0.03600001335144043
+                0.03600025177001953
               ]
             },
             "role": "obstacle",
@@ -8782,17 +8790,17 @@
               "min": [
                 0.32499998807907104,
                 0.6840000152587891,
-                -3.4130001068115234
+                -4.063000202178955
               ],
               "max": [
                 0.675000011920929,
                 0.7199304103851318,
-                -3.377000093460083
+                -4.0269999504089355
               ],
               "size": [
                 0.3500000238418579,
                 0.03593039512634277,
-                0.03600001335144043
+                0.03600025177001953
               ]
             },
             "role": "obstacle",
@@ -8807,12 +8815,12 @@
               "min": [
                 0.30300000309944153,
                 1.6600000858306885,
-                -3.7451424598693848
+                -4.395142555236816
               ],
               "max": [
                 0.3269999921321869,
                 1.7850000858306885,
-                -3.7228574752807617
+                -4.372857570648193
               ],
               "size": [
                 0.02399998903274536,
@@ -8832,12 +8840,12 @@
               "min": [
                 0.6729999780654907,
                 1.6600000858306885,
-                -3.7451424598693848
+                -4.395142555236816
               ],
               "max": [
                 0.6970000267028809,
                 1.7850000858306885,
-                -3.7228574752807617
+                -4.372857570648193
               ],
               "size": [
                 0.024000048637390137,
@@ -8857,17 +8865,17 @@
               "min": [
                 0.3149999976158142,
                 1.7730464935302734,
-                -3.746000051498413
+                -4.395999908447266
               ],
               "max": [
                 0.6850000023841858,
                 1.7969536781311035,
-                -3.7220001220703125
+                -4.372000217437744
               ],
               "size": [
                 0.3700000047683716,
                 0.023907184600830078,
-                0.023999929428100586
+                0.023999691009521484
               ]
             },
             "role": "obstacle",
@@ -8882,17 +8890,17 @@
               "min": [
                 0.34706956148147583,
                 0.6800000071525574,
-                -3.4130001068115234
+                -4.063000202178955
               ],
               "max": [
                 0.382999986410141,
                 1.0299999713897705,
-                -3.377000093460083
+                -4.0269999504089355
               ],
               "size": [
                 0.03593042492866516,
                 0.34999996423721313,
-                0.03600001335144043
+                0.03600025177001953
               ]
             },
             "role": "obstacle",
@@ -8907,17 +8915,17 @@
               "min": [
                 0.6182862520217896,
                 0.6800000071525574,
-                -3.4130001068115234
+                -4.063000202178955
               ],
               "max": [
                 0.652999997138977,
                 1.0299999713897705,
-                -3.377000093460083
+                -4.0269999504089355
               ],
               "size": [
                 0.0347137451171875,
                 0.34999996423721313,
-                0.03600001335144043
+                0.03600025177001953
               ]
             },
             "role": "obstacle",
@@ -8932,17 +8940,17 @@
               "min": [
                 0.7649999856948853,
                 0.6840000152587891,
-                -3.4130001068115234
+                -4.063000202178955
               ],
               "max": [
                 1.1150000095367432,
                 0.7199304103851318,
-                -3.377000093460083
+                -4.0269999504089355
               ],
               "size": [
                 0.3500000238418579,
                 0.03593039512634277,
-                0.03600001335144043
+                0.03600025177001953
               ]
             },
             "role": "obstacle",
@@ -8957,12 +8965,12 @@
               "min": [
                 0.7430000305175781,
                 1.6600000858306885,
-                -3.7451424598693848
+                -4.395142555236816
               ],
               "max": [
                 0.7669999599456787,
                 1.7850000858306885,
-                -3.7228574752807617
+                -4.372857570648193
               ],
               "size": [
                 0.023999929428100586,
@@ -8982,12 +8990,12 @@
               "min": [
                 1.1130000352859497,
                 1.6600000858306885,
-                -3.7451424598693848
+                -4.395142555236816
               ],
               "max": [
                 1.1369999647140503,
                 1.7850000858306885,
-                -3.7228574752807617
+                -4.372857570648193
               ],
               "size": [
                 0.023999929428100586,
@@ -9007,17 +9015,17 @@
               "min": [
                 0.7549999952316284,
                 1.7730464935302734,
-                -3.746000051498413
+                -4.395999908447266
               ],
               "max": [
                 1.125,
                 1.7969536781311035,
-                -3.7220001220703125
+                -4.372000217437744
               ],
               "size": [
                 0.3700000047683716,
                 0.023907184600830078,
-                0.023999929428100586
+                0.023999691009521484
               ]
             },
             "role": "obstacle",
@@ -9032,17 +9040,17 @@
               "min": [
                 0.78706955909729,
                 0.6800000071525574,
-                -3.4130001068115234
+                -4.063000202178955
               ],
               "max": [
                 0.8230000138282776,
                 1.0299999713897705,
-                -3.377000093460083
+                -4.0269999504089355
               ],
               "size": [
                 0.03593045473098755,
                 0.34999996423721313,
-                0.03600001335144043
+                0.03600025177001953
               ]
             },
             "role": "obstacle",
@@ -9057,17 +9065,17 @@
               "min": [
                 1.058286190032959,
                 0.6800000071525574,
-                -3.4130001068115234
+                -4.063000202178955
               ],
               "max": [
                 1.0929999351501465,
                 1.0299999713897705,
-                -3.377000093460083
+                -4.0269999504089355
               ],
               "size": [
                 0.0347137451171875,
                 0.34999996423721313,
-                0.03600001335144043
+                0.03600025177001953
               ]
             },
             "role": "obstacle",
@@ -9082,12 +9090,12 @@
               "min": [
                 -1.1150000095367432,
                 0.6840000152587891,
-                -4.253000259399414
+                -4.903000354766846
               ],
               "max": [
                 -0.7649999856948853,
                 0.7199304103851318,
-                -4.2170000076293945
+                -4.867000102996826
               ],
               "size": [
                 0.3500000238418579,
@@ -9107,12 +9115,12 @@
               "min": [
                 -1.1369999647140503,
                 1.6600000858306885,
-                -4.585142612457275
+                -5.235142707824707
               ],
               "max": [
                 -1.1130000352859497,
                 1.7850000858306885,
-                -4.562857627868652
+                -5.212857723236084
               ],
               "size": [
                 0.023999929428100586,
@@ -9132,12 +9140,12 @@
               "min": [
                 -0.7669999599456787,
                 1.6600000858306885,
-                -4.585142612457275
+                -5.235142707824707
               ],
               "max": [
                 -0.7430000305175781,
                 1.7850000858306885,
-                -4.562857627868652
+                -5.212857723236084
               ],
               "size": [
                 0.023999929428100586,
@@ -9157,17 +9165,17 @@
               "min": [
                 -1.125,
                 1.7730464935302734,
-                -4.586000442504883
+                -5.236000061035156
               ],
               "max": [
                 -0.7549999952316284,
                 1.7969536781311035,
-                -4.562000274658203
+                -5.212000370025635
               ],
               "size": [
                 0.3700000047683716,
                 0.023907184600830078,
-                0.024000167846679688
+                0.023999691009521484
               ]
             },
             "role": "obstacle",
@@ -9182,12 +9190,12 @@
               "min": [
                 -1.0929304361343384,
                 0.6800000071525574,
-                -4.253000259399414
+                -4.903000354766846
               ],
               "max": [
                 -1.0570000410079956,
                 1.0299999713897705,
-                -4.2170000076293945
+                -4.867000102996826
               ],
               "size": [
                 0.03593039512634277,
@@ -9207,12 +9215,12 @@
               "min": [
                 -0.8217138051986694,
                 0.6800000071525574,
-                -4.253000259399414
+                -4.903000354766846
               ],
               "max": [
                 -0.7870000004768372,
                 1.0299999713897705,
-                -4.2170000076293945
+                -4.867000102996826
               ],
               "size": [
                 0.034713804721832275,
@@ -9232,12 +9240,12 @@
               "min": [
                 -0.675000011920929,
                 0.6840000152587891,
-                -4.253000259399414
+                -4.903000354766846
               ],
               "max": [
                 -0.32499998807907104,
                 0.7199304103851318,
-                -4.2170000076293945
+                -4.867000102996826
               ],
               "size": [
                 0.3500000238418579,
@@ -9257,12 +9265,12 @@
               "min": [
                 -0.6970000267028809,
                 1.6600000858306885,
-                -4.585142612457275
+                -5.235142707824707
               ],
               "max": [
                 -0.6729999780654907,
                 1.7850000858306885,
-                -4.562857627868652
+                -5.212857723236084
               ],
               "size": [
                 0.024000048637390137,
@@ -9282,12 +9290,12 @@
               "min": [
                 -0.3269999921321869,
                 1.6600000858306885,
-                -4.585142612457275
+                -5.235142707824707
               ],
               "max": [
                 -0.30300000309944153,
                 1.7850000858306885,
-                -4.562857627868652
+                -5.212857723236084
               ],
               "size": [
                 0.02399998903274536,
@@ -9307,17 +9315,17 @@
               "min": [
                 -0.6850000023841858,
                 1.7730464935302734,
-                -4.586000442504883
+                -5.236000061035156
               ],
               "max": [
                 -0.3149999976158142,
                 1.7969536781311035,
-                -4.562000274658203
+                -5.212000370025635
               ],
               "size": [
                 0.3700000047683716,
                 0.023907184600830078,
-                0.024000167846679688
+                0.023999691009521484
               ]
             },
             "role": "obstacle",
@@ -9332,12 +9340,12 @@
               "min": [
                 -0.6529304385185242,
                 0.6800000071525574,
-                -4.253000259399414
+                -4.903000354766846
               ],
               "max": [
                 -0.6169999837875366,
                 1.0299999713897705,
-                -4.2170000076293945
+                -4.867000102996826
               ],
               "size": [
                 0.03593045473098755,
@@ -9357,12 +9365,12 @@
               "min": [
                 -0.38171377778053284,
                 0.6800000071525574,
-                -4.253000259399414
+                -4.903000354766846
               ],
               "max": [
                 -0.34700000286102295,
                 1.0299999713897705,
-                -4.2170000076293945
+                -4.867000102996826
               ],
               "size": [
                 0.03471377491950989,
@@ -9382,12 +9390,12 @@
               "min": [
                 0.32499998807907104,
                 0.6840000152587891,
-                -4.253000259399414
+                -4.903000354766846
               ],
               "max": [
                 0.675000011920929,
                 0.7199304103851318,
-                -4.2170000076293945
+                -4.867000102996826
               ],
               "size": [
                 0.3500000238418579,
@@ -9407,12 +9415,12 @@
               "min": [
                 0.30300000309944153,
                 1.6600000858306885,
-                -4.585142612457275
+                -5.235142707824707
               ],
               "max": [
                 0.3269999921321869,
                 1.7850000858306885,
-                -4.562857627868652
+                -5.212857723236084
               ],
               "size": [
                 0.02399998903274536,
@@ -9432,12 +9440,12 @@
               "min": [
                 0.6729999780654907,
                 1.6600000858306885,
-                -4.585142612457275
+                -5.235142707824707
               ],
               "max": [
                 0.6970000267028809,
                 1.7850000858306885,
-                -4.562857627868652
+                -5.212857723236084
               ],
               "size": [
                 0.024000048637390137,
@@ -9457,17 +9465,17 @@
               "min": [
                 0.3149999976158142,
                 1.7730464935302734,
-                -4.586000442504883
+                -5.236000061035156
               ],
               "max": [
                 0.6850000023841858,
                 1.7969536781311035,
-                -4.562000274658203
+                -5.212000370025635
               ],
               "size": [
                 0.3700000047683716,
                 0.023907184600830078,
-                0.024000167846679688
+                0.023999691009521484
               ]
             },
             "role": "obstacle",
@@ -9482,12 +9490,12 @@
               "min": [
                 0.34706956148147583,
                 0.6800000071525574,
-                -4.253000259399414
+                -4.903000354766846
               ],
               "max": [
                 0.382999986410141,
                 1.0299999713897705,
-                -4.2170000076293945
+                -4.867000102996826
               ],
               "size": [
                 0.03593042492866516,
@@ -9507,12 +9515,12 @@
               "min": [
                 0.6182862520217896,
                 0.6800000071525574,
-                -4.253000259399414
+                -4.903000354766846
               ],
               "max": [
                 0.652999997138977,
                 1.0299999713897705,
-                -4.2170000076293945
+                -4.867000102996826
               ],
               "size": [
                 0.0347137451171875,
@@ -9532,12 +9540,12 @@
               "min": [
                 0.7649999856948853,
                 0.6840000152587891,
-                -4.253000259399414
+                -4.903000354766846
               ],
               "max": [
                 1.1150000095367432,
                 0.7199304103851318,
-                -4.2170000076293945
+                -4.867000102996826
               ],
               "size": [
                 0.3500000238418579,
@@ -9557,12 +9565,12 @@
               "min": [
                 0.7430000305175781,
                 1.6600000858306885,
-                -4.585142612457275
+                -5.235142707824707
               ],
               "max": [
                 0.7669999599456787,
                 1.7850000858306885,
-                -4.562857627868652
+                -5.212857723236084
               ],
               "size": [
                 0.023999929428100586,
@@ -9582,12 +9590,12 @@
               "min": [
                 1.1130000352859497,
                 1.6600000858306885,
-                -4.585142612457275
+                -5.235142707824707
               ],
               "max": [
                 1.1369999647140503,
                 1.7850000858306885,
-                -4.562857627868652
+                -5.212857723236084
               ],
               "size": [
                 0.023999929428100586,
@@ -9607,17 +9615,17 @@
               "min": [
                 0.7549999952316284,
                 1.7730464935302734,
-                -4.586000442504883
+                -5.236000061035156
               ],
               "max": [
                 1.125,
                 1.7969536781311035,
-                -4.562000274658203
+                -5.212000370025635
               ],
               "size": [
                 0.3700000047683716,
                 0.023907184600830078,
-                0.024000167846679688
+                0.023999691009521484
               ]
             },
             "role": "obstacle",
@@ -9632,12 +9640,12 @@
               "min": [
                 0.78706955909729,
                 0.6800000071525574,
-                -4.253000259399414
+                -4.903000354766846
               ],
               "max": [
                 0.8230000138282776,
                 1.0299999713897705,
-                -4.2170000076293945
+                -4.867000102996826
               ],
               "size": [
                 0.03593045473098755,
@@ -9657,12 +9665,12 @@
               "min": [
                 1.058286190032959,
                 0.6800000071525574,
-                -4.253000259399414
+                -4.903000354766846
               ],
               "max": [
                 1.0929999351501465,
                 1.0299999713897705,
-                -4.2170000076293945
+                -4.867000102996826
               ],
               "size": [
                 0.0347137451171875,
@@ -9682,12 +9690,12 @@
               "min": [
                 -1.0749999284744263,
                 0.6840000152587891,
-                -5.14300012588501
+                -5.793000221252441
               ],
               "max": [
                 -0.7249999642372131,
                 0.7199304103851318,
-                -5.10699987411499
+                -5.756999969482422
               ],
               "size": [
                 0.34999996423721313,
@@ -9707,12 +9715,12 @@
               "min": [
                 -1.097000002861023,
                 1.6600000858306885,
-                -5.475142478942871
+                -6.125142574310303
               ],
               "max": [
                 -1.0729999542236328,
                 1.7850000858306885,
-                -5.452857494354248
+                -6.10285758972168
               ],
               "size": [
                 0.024000048637390137,
@@ -9732,12 +9740,12 @@
               "min": [
                 -0.7269999980926514,
                 1.6600000858306885,
-                -5.475142478942871
+                -6.125142574310303
               ],
               "max": [
                 -0.7029999494552612,
                 1.7850000858306885,
-                -5.452857494354248
+                -6.10285758972168
               ],
               "size": [
                 0.024000048637390137,
@@ -9757,17 +9765,17 @@
               "min": [
                 -1.0850000381469727,
                 1.7730464935302734,
-                -5.47599983215332
+                -6.12600040435791
               ],
               "max": [
                 -0.7149999737739563,
                 1.7969536781311035,
-                -5.452000141143799
+                -6.1020002365112305
               ],
               "size": [
                 0.37000006437301636,
                 0.023907184600830078,
-                0.023999691009521484
+                0.024000167846679688
               ]
             },
             "role": "obstacle",
@@ -9782,12 +9790,12 @@
               "min": [
                 -1.0529303550720215,
                 0.6800000071525574,
-                -5.14300012588501
+                -5.793000221252441
               ],
               "max": [
                 -1.0169999599456787,
                 1.0299999713897705,
-                -5.10699987411499
+                -5.756999969482422
               ],
               "size": [
                 0.03593039512634277,
@@ -9807,12 +9815,12 @@
               "min": [
                 -0.7817137241363525,
                 0.6800000071525574,
-                -5.14300012588501
+                -5.793000221252441
               ],
               "max": [
                 -0.746999979019165,
                 1.0299999713897705,
-                -5.10699987411499
+                -5.756999969482422
               ],
               "size": [
                 0.0347137451171875,
@@ -9832,12 +9840,12 @@
               "min": [
                 -0.625,
                 0.6840000152587891,
-                -5.14300012588501
+                -5.793000221252441
               ],
               "max": [
                 -0.2749999761581421,
                 0.7199304103851318,
-                -5.10699987411499
+                -5.756999969482422
               ],
               "size": [
                 0.3500000238418579,
@@ -9857,12 +9865,12 @@
               "min": [
                 -0.6469999551773071,
                 1.6600000858306885,
-                -5.475142478942871
+                -6.125142574310303
               ],
               "max": [
                 -0.6230000257492065,
                 1.7850000858306885,
-                -5.452857494354248
+                -6.10285758972168
               ],
               "size": [
                 0.023999929428100586,
@@ -9882,12 +9890,12 @@
               "min": [
                 -0.27699998021125793,
                 1.6600000858306885,
-                -5.475142478942871
+                -6.125142574310303
               ],
               "max": [
                 -0.2529999911785126,
                 1.7850000858306885,
-                -5.452857494354248
+                -6.10285758972168
               ],
               "size": [
                 0.02399998903274536,
@@ -9907,17 +9915,17 @@
               "min": [
                 -0.6349999904632568,
                 1.7730464935302734,
-                -5.47599983215332
+                -6.12600040435791
               ],
               "max": [
                 -0.26499998569488525,
                 1.7969536781311035,
-                -5.452000141143799
+                -6.1020002365112305
               ],
               "size": [
                 0.3700000047683716,
                 0.023907184600830078,
-                0.023999691009521484
+                0.024000167846679688
               ]
             },
             "role": "obstacle",
@@ -9932,12 +9940,12 @@
               "min": [
                 -0.6029304265975952,
                 0.6800000071525574,
-                -5.14300012588501
+                -5.793000221252441
               ],
               "max": [
                 -0.5669999718666077,
                 1.0299999713897705,
-                -5.10699987411499
+                -5.756999969482422
               ],
               "size": [
                 0.03593045473098755,
@@ -9957,12 +9965,12 @@
               "min": [
                 -0.3317137658596039,
                 0.6800000071525574,
-                -5.14300012588501
+                -5.793000221252441
               ],
               "max": [
                 -0.296999990940094,
                 1.0299999713897705,
-                -5.10699987411499
+                -5.756999969482422
               ],
               "size": [
                 0.03471377491950989,
@@ -9982,12 +9990,12 @@
               "min": [
                 -0.17499999701976776,
                 0.6840000152587891,
-                -5.14300012588501
+                -5.793000221252441
               ],
               "max": [
                 0.17499999701976776,
                 0.7199304103851318,
-                -5.10699987411499
+                -5.756999969482422
               ],
               "size": [
                 0.3499999940395355,
@@ -10007,12 +10015,12 @@
               "min": [
                 -0.19699999690055847,
                 1.6600000858306885,
-                -5.475142478942871
+                -6.125142574310303
               ],
               "max": [
                 -0.1730000078678131,
                 1.7850000858306885,
-                -5.452857494354248
+                -6.10285758972168
               ],
               "size": [
                 0.02399998903274536,
@@ -10032,12 +10040,12 @@
               "min": [
                 0.1730000078678131,
                 1.6600000858306885,
-                -5.475142478942871
+                -6.125142574310303
               ],
               "max": [
                 0.19699999690055847,
                 1.7850000858306885,
-                -5.452857494354248
+                -6.10285758972168
               ],
               "size": [
                 0.02399998903274536,
@@ -10057,17 +10065,17 @@
               "min": [
                 -0.1850000023841858,
                 1.7730464935302734,
-                -5.47599983215332
+                -6.12600040435791
               ],
               "max": [
                 0.1850000023841858,
                 1.7969536781311035,
-                -5.452000141143799
+                -6.1020002365112305
               ],
               "size": [
                 0.3700000047683716,
                 0.023907184600830078,
-                0.023999691009521484
+                0.024000167846679688
               ]
             },
             "role": "obstacle",
@@ -10082,12 +10090,12 @@
               "min": [
                 -0.15293042361736298,
                 0.6800000071525574,
-                -5.14300012588501
+                -5.793000221252441
               ],
               "max": [
                 -0.11700000613927841,
                 1.0299999713897705,
-                -5.10699987411499
+                -5.756999969482422
               ],
               "size": [
                 0.035930417478084564,
@@ -10107,12 +10115,12 @@
               "min": [
                 0.11828622221946716,
                 0.6800000071525574,
-                -5.14300012588501
+                -5.793000221252441
               ],
               "max": [
                 0.15299999713897705,
                 1.0299999713897705,
-                -5.10699987411499
+                -5.756999969482422
               ],
               "size": [
                 0.03471377491950989,
@@ -10132,12 +10140,12 @@
               "min": [
                 0.2749999761581421,
                 0.6840000152587891,
-                -5.14300012588501
+                -5.793000221252441
               ],
               "max": [
                 0.625,
                 0.7199304103851318,
-                -5.10699987411499
+                -5.756999969482422
               ],
               "size": [
                 0.3500000238418579,
@@ -10157,12 +10165,12 @@
               "min": [
                 0.2529999911785126,
                 1.6600000858306885,
-                -5.475142478942871
+                -6.125142574310303
               ],
               "max": [
                 0.27699998021125793,
                 1.7850000858306885,
-                -5.452857494354248
+                -6.10285758972168
               ],
               "size": [
                 0.02399998903274536,
@@ -10182,12 +10190,12 @@
               "min": [
                 0.6230000257492065,
                 1.6600000858306885,
-                -5.475142478942871
+                -6.125142574310303
               ],
               "max": [
                 0.6469999551773071,
                 1.7850000858306885,
-                -5.452857494354248
+                -6.10285758972168
               ],
               "size": [
                 0.023999929428100586,
@@ -10207,17 +10215,17 @@
               "min": [
                 0.26499998569488525,
                 1.7730464935302734,
-                -5.47599983215332
+                -6.12600040435791
               ],
               "max": [
                 0.6349999904632568,
                 1.7969536781311035,
-                -5.452000141143799
+                -6.1020002365112305
               ],
               "size": [
                 0.3700000047683716,
                 0.023907184600830078,
-                0.023999691009521484
+                0.024000167846679688
               ]
             },
             "role": "obstacle",
@@ -10232,12 +10240,12 @@
               "min": [
                 0.2970695495605469,
                 0.6800000071525574,
-                -5.14300012588501
+                -5.793000221252441
               ],
               "max": [
                 0.33299997448921204,
                 1.0299999713897705,
-                -5.10699987411499
+                -5.756999969482422
               ],
               "size": [
                 0.03593042492866516,
@@ -10257,12 +10265,12 @@
               "min": [
                 0.5682861804962158,
                 0.6800000071525574,
-                -5.14300012588501
+                -5.793000221252441
               ],
               "max": [
                 0.6029999852180481,
                 1.0299999713897705,
-                -5.10699987411499
+                -5.756999969482422
               ],
               "size": [
                 0.034713804721832275,
@@ -10282,12 +10290,12 @@
               "min": [
                 0.7249999642372131,
                 0.6840000152587891,
-                -5.14300012588501
+                -5.793000221252441
               ],
               "max": [
                 1.0749999284744263,
                 0.7199304103851318,
-                -5.10699987411499
+                -5.756999969482422
               ],
               "size": [
                 0.34999996423721313,
@@ -10307,12 +10315,12 @@
               "min": [
                 0.7029999494552612,
                 1.6600000858306885,
-                -5.475142478942871
+                -6.125142574310303
               ],
               "max": [
                 0.7269999980926514,
                 1.7850000858306885,
-                -5.452857494354248
+                -6.10285758972168
               ],
               "size": [
                 0.024000048637390137,
@@ -10332,12 +10340,12 @@
               "min": [
                 1.0729999542236328,
                 1.6600000858306885,
-                -5.475142478942871
+                -6.125142574310303
               ],
               "max": [
                 1.097000002861023,
                 1.7850000858306885,
-                -5.452857494354248
+                -6.10285758972168
               ],
               "size": [
                 0.024000048637390137,
@@ -10357,17 +10365,17 @@
               "min": [
                 0.7149999737739563,
                 1.7730464935302734,
-                -5.47599983215332
+                -6.12600040435791
               ],
               "max": [
                 1.0850000381469727,
                 1.7969536781311035,
-                -5.452000141143799
+                -6.1020002365112305
               ],
               "size": [
                 0.37000006437301636,
                 0.023907184600830078,
-                0.023999691009521484
+                0.024000167846679688
               ]
             },
             "role": "obstacle",
@@ -10382,12 +10390,12 @@
               "min": [
                 0.7470695376396179,
                 0.6800000071525574,
-                -5.14300012588501
+                -5.793000221252441
               ],
               "max": [
                 0.7829999923706055,
                 1.0299999713897705,
-                -5.10699987411499
+                -5.756999969482422
               ],
               "size": [
                 0.03593045473098755,
@@ -10407,12 +10415,12 @@
               "min": [
                 1.0182862281799316,
                 0.6800000071525574,
-                -5.14300012588501
+                -5.793000221252441
               ],
               "max": [
                 1.0529999732971191,
                 1.0299999713897705,
-                -5.10699987411499
+                -5.756999969482422
               ],
               "size": [
                 0.0347137451171875,
@@ -11732,12 +11740,12 @@
               "min": [
                 -1.1119999885559082,
                 1.2009999752044678,
-                -2.869999885559082
+                -3.5199999809265137
               ],
               "max": [
                 -0.7680000066757202,
                 1.6629999876022339,
-                -2.805999994277954
+                -3.4560000896453857
               ],
               "size": [
                 0.343999981880188,
@@ -11757,12 +11765,12 @@
               "min": [
                 -1.149999976158142,
                 1.059999942779541,
-                -2.8125
+                -3.4625000953674316
               ],
               "max": [
                 -0.7300000190734863,
                 1.1299999952316284,
-                -2.367499828338623
+                -3.0174999237060547
               ],
               "size": [
                 0.41999995708465576,
@@ -11782,12 +11790,12 @@
               "min": [
                 -0.671999990940094,
                 1.2009999752044678,
-                -2.869999885559082
+                -3.5199999809265137
               ],
               "max": [
                 -0.328000009059906,
                 1.6629999876022339,
-                -2.805999994277954
+                -3.4560000896453857
               ],
               "size": [
                 0.343999981880188,
@@ -11807,12 +11815,12 @@
               "min": [
                 -0.7099999785423279,
                 1.059999942779541,
-                -2.8125
+                -3.4625000953674316
               ],
               "max": [
                 -0.2900000214576721,
                 1.1299999952316284,
-                -2.367499828338623
+                -3.0174999237060547
               ],
               "size": [
                 0.41999995708465576,
@@ -11832,12 +11840,12 @@
               "min": [
                 0.328000009059906,
                 1.2009999752044678,
-                -2.869999885559082
+                -3.5199999809265137
               ],
               "max": [
                 0.671999990940094,
                 1.6629999876022339,
-                -2.805999994277954
+                -3.4560000896453857
               ],
               "size": [
                 0.343999981880188,
@@ -11857,12 +11865,12 @@
               "min": [
                 0.2900000214576721,
                 1.059999942779541,
-                -2.8125
+                -3.4625000953674316
               ],
               "max": [
                 0.7099999785423279,
                 1.1299999952316284,
-                -2.367499828338623
+                -3.0174999237060547
               ],
               "size": [
                 0.41999995708465576,
@@ -11882,12 +11890,12 @@
               "min": [
                 0.7680000066757202,
                 1.2009999752044678,
-                -2.869999885559082
+                -3.5199999809265137
               ],
               "max": [
                 1.1119999885559082,
                 1.6629999876022339,
-                -2.805999994277954
+                -3.4560000896453857
               ],
               "size": [
                 0.343999981880188,
@@ -11907,12 +11915,12 @@
               "min": [
                 0.7300000190734863,
                 1.059999942779541,
-                -2.8125
+                -3.4625000953674316
               ],
               "max": [
                 1.149999976158142,
                 1.1299999952316284,
-                -2.367499828338623
+                -3.0174999237060547
               ],
               "size": [
                 0.41999995708465576,
@@ -11932,17 +11940,17 @@
               "min": [
                 -1.1119999885559082,
                 1.2009999752044678,
-                -3.7100000381469727
+                -4.360000133514404
               ],
               "max": [
                 -0.7680000066757202,
                 1.6629999876022339,
-                -3.6460001468658447
+                -4.296000003814697
               ],
               "size": [
                 0.343999981880188,
                 0.4620000123977661,
-                0.06399989128112793
+                0.06400012969970703
               ]
             },
             "role": "obstacle",
@@ -11957,12 +11965,12 @@
               "min": [
                 -1.149999976158142,
                 1.059999942779541,
-                -3.6525001525878906
+                -4.302500247955322
               ],
               "max": [
                 -0.7300000190734863,
                 1.1299999952316284,
-                -3.2074999809265137
+                -3.8575000762939453
               ],
               "size": [
                 0.41999995708465576,
@@ -11982,17 +11990,17 @@
               "min": [
                 -0.671999990940094,
                 1.2009999752044678,
-                -3.7100000381469727
+                -4.360000133514404
               ],
               "max": [
                 -0.328000009059906,
                 1.6629999876022339,
-                -3.6460001468658447
+                -4.296000003814697
               ],
               "size": [
                 0.343999981880188,
                 0.4620000123977661,
-                0.06399989128112793
+                0.06400012969970703
               ]
             },
             "role": "obstacle",
@@ -12007,12 +12015,12 @@
               "min": [
                 -0.7099999785423279,
                 1.059999942779541,
-                -3.6525001525878906
+                -4.302500247955322
               ],
               "max": [
                 -0.2900000214576721,
                 1.1299999952316284,
-                -3.2074999809265137
+                -3.8575000762939453
               ],
               "size": [
                 0.41999995708465576,
@@ -12032,17 +12040,17 @@
               "min": [
                 0.328000009059906,
                 1.2009999752044678,
-                -3.7100000381469727
+                -4.360000133514404
               ],
               "max": [
                 0.671999990940094,
                 1.6629999876022339,
-                -3.6460001468658447
+                -4.296000003814697
               ],
               "size": [
                 0.343999981880188,
                 0.4620000123977661,
-                0.06399989128112793
+                0.06400012969970703
               ]
             },
             "role": "obstacle",
@@ -12057,12 +12065,12 @@
               "min": [
                 0.2900000214576721,
                 1.059999942779541,
-                -3.6525001525878906
+                -4.302500247955322
               ],
               "max": [
                 0.7099999785423279,
                 1.1299999952316284,
-                -3.2074999809265137
+                -3.8575000762939453
               ],
               "size": [
                 0.41999995708465576,
@@ -12082,17 +12090,17 @@
               "min": [
                 0.7680000066757202,
                 1.2009999752044678,
-                -3.7100000381469727
+                -4.360000133514404
               ],
               "max": [
                 1.1119999885559082,
                 1.6629999876022339,
-                -3.6460001468658447
+                -4.296000003814697
               ],
               "size": [
                 0.343999981880188,
                 0.4620000123977661,
-                0.06399989128112793
+                0.06400012969970703
               ]
             },
             "role": "obstacle",
@@ -12107,12 +12115,12 @@
               "min": [
                 0.7300000190734863,
                 1.059999942779541,
-                -3.6525001525878906
+                -4.302500247955322
               ],
               "max": [
                 1.149999976158142,
                 1.1299999952316284,
-                -3.2074999809265137
+                -3.8575000762939453
               ],
               "size": [
                 0.41999995708465576,
@@ -12132,12 +12140,12 @@
               "min": [
                 -1.1119999885559082,
                 1.2009999752044678,
-                -4.550000190734863
+                -5.200000286102295
               ],
               "max": [
                 -0.7680000066757202,
                 1.6629999876022339,
-                -4.486000061035156
+                -5.136000156402588
               ],
               "size": [
                 0.343999981880188,
@@ -12157,12 +12165,12 @@
               "min": [
                 -1.149999976158142,
                 1.059999942779541,
-                -4.492500305175781
+                -5.142500400543213
               ],
               "max": [
                 -0.7300000190734863,
                 1.1299999952316284,
-                -4.047500133514404
+                -4.697500228881836
               ],
               "size": [
                 0.41999995708465576,
@@ -12182,12 +12190,12 @@
               "min": [
                 -0.671999990940094,
                 1.2009999752044678,
-                -4.550000190734863
+                -5.200000286102295
               ],
               "max": [
                 -0.328000009059906,
                 1.6629999876022339,
-                -4.486000061035156
+                -5.136000156402588
               ],
               "size": [
                 0.343999981880188,
@@ -12207,12 +12215,12 @@
               "min": [
                 -0.7099999785423279,
                 1.059999942779541,
-                -4.492500305175781
+                -5.142500400543213
               ],
               "max": [
                 -0.2900000214576721,
                 1.1299999952316284,
-                -4.047500133514404
+                -4.697500228881836
               ],
               "size": [
                 0.41999995708465576,
@@ -12232,12 +12240,12 @@
               "min": [
                 0.328000009059906,
                 1.2009999752044678,
-                -4.550000190734863
+                -5.200000286102295
               ],
               "max": [
                 0.671999990940094,
                 1.6629999876022339,
-                -4.486000061035156
+                -5.136000156402588
               ],
               "size": [
                 0.343999981880188,
@@ -12257,12 +12265,12 @@
               "min": [
                 0.2900000214576721,
                 1.059999942779541,
-                -4.492500305175781
+                -5.142500400543213
               ],
               "max": [
                 0.7099999785423279,
                 1.1299999952316284,
-                -4.047500133514404
+                -4.697500228881836
               ],
               "size": [
                 0.41999995708465576,
@@ -12282,12 +12290,12 @@
               "min": [
                 0.7680000066757202,
                 1.2009999752044678,
-                -4.550000190734863
+                -5.200000286102295
               ],
               "max": [
                 1.1119999885559082,
                 1.6629999876022339,
-                -4.486000061035156
+                -5.136000156402588
               ],
               "size": [
                 0.343999981880188,
@@ -12307,12 +12315,12 @@
               "min": [
                 0.7300000190734863,
                 1.059999942779541,
-                -4.492500305175781
+                -5.142500400543213
               ],
               "max": [
                 1.149999976158142,
                 1.1299999952316284,
-                -4.047500133514404
+                -4.697500228881836
               ],
               "size": [
                 0.41999995708465576,
@@ -12332,12 +12340,12 @@
               "min": [
                 -1.0720000267028809,
                 1.2009999752044678,
-                -5.440000057220459
+                -6.090000152587891
               ],
               "max": [
                 -0.7279999852180481,
                 1.6629999876022339,
-                -5.375999927520752
+                -6.026000022888184
               ],
               "size": [
                 0.34400004148483276,
@@ -12357,12 +12365,12 @@
               "min": [
                 -1.1100000143051147,
                 1.059999942779541,
-                -5.382500171661377
+                -6.032500267028809
               ],
               "max": [
                 -0.6899999976158142,
                 1.1299999952316284,
-                -4.9375
+                -5.587500095367432
               ],
               "size": [
                 0.42000001668930054,
@@ -12382,12 +12390,12 @@
               "min": [
                 -0.621999979019165,
                 1.2009999752044678,
-                -5.440000057220459
+                -6.090000152587891
               ],
               "max": [
                 -0.27799999713897705,
                 1.6629999876022339,
-                -5.375999927520752
+                -6.026000022888184
               ],
               "size": [
                 0.343999981880188,
@@ -12407,12 +12415,12 @@
               "min": [
                 -0.6599999666213989,
                 1.059999942779541,
-                -5.382500171661377
+                -6.032500267028809
               ],
               "max": [
                 -0.23999999463558197,
                 1.1299999952316284,
-                -4.9375
+                -5.587500095367432
               ],
               "size": [
                 0.41999997198581696,
@@ -12432,12 +12440,12 @@
               "min": [
                 -0.1720000058412552,
                 1.2009999752044678,
-                -5.440000057220459
+                -6.090000152587891
               ],
               "max": [
                 0.1720000058412552,
                 1.6629999876022339,
-                -5.375999927520752
+                -6.026000022888184
               ],
               "size": [
                 0.3440000116825104,
@@ -12457,12 +12465,12 @@
               "min": [
                 -0.20999999344348907,
                 1.059999942779541,
-                -5.382500171661377
+                -6.032500267028809
               ],
               "max": [
                 0.20999999344348907,
                 1.1299999952316284,
-                -4.9375
+                -5.587500095367432
               ],
               "size": [
                 0.41999998688697815,
@@ -12482,12 +12490,12 @@
               "min": [
                 0.27799999713897705,
                 1.2009999752044678,
-                -5.440000057220459
+                -6.090000152587891
               ],
               "max": [
                 0.621999979019165,
                 1.6629999876022339,
-                -5.375999927520752
+                -6.026000022888184
               ],
               "size": [
                 0.343999981880188,
@@ -12507,12 +12515,12 @@
               "min": [
                 0.23999999463558197,
                 1.059999942779541,
-                -5.382500171661377
+                -6.032500267028809
               ],
               "max": [
                 0.6599999666213989,
                 1.1299999952316284,
-                -4.9375
+                -5.587500095367432
               ],
               "size": [
                 0.41999997198581696,
@@ -12532,12 +12540,12 @@
               "min": [
                 0.7279999852180481,
                 1.2009999752044678,
-                -5.440000057220459
+                -6.090000152587891
               ],
               "max": [
                 1.0720000267028809,
                 1.6629999876022339,
-                -5.375999927520752
+                -6.026000022888184
               ],
               "size": [
                 0.34400004148483276,
@@ -12557,12 +12565,12 @@
               "min": [
                 0.6899999976158142,
                 1.059999942779541,
-                -5.382500171661377
+                -6.032500267028809
               ],
               "max": [
                 1.1100000143051147,
                 1.1299999952316284,
-                -4.9375
+                -5.587500095367432
               ],
               "size": [
                 0.42000001668930054,
@@ -12957,12 +12965,12 @@
               "min": [
                 -0.5709881782531738,
                 0.41999998688697815,
-                5.115999698638916
+                5.275999546051025
               ],
               "max": [
                 -0.5290117859840393,
                 1.4800000190734863,
-                5.164000034332275
+                5.323999881744385
               ],
               "size": [
                 0.04197639226913452,
@@ -12982,12 +12990,12 @@
               "min": [
                 -0.6675348877906799,
                 1.4643397331237793,
-                5.115903854370117
+                5.275903701782227
               ],
               "max": [
                 -0.5338764786720276,
                 1.6158812046051025,
-                5.164096355438232
+                5.324096202850342
               ],
               "size": [
                 0.13365840911865234,
@@ -13007,12 +13015,12 @@
               "min": [
                 -1.0199999809265137,
                 1.575192928314209,
-                5.115999698638916
+                5.275999546051025
               ],
               "max": [
                 -0.6499999761581421,
                 1.6209882497787476,
-                5.16407585144043
+                5.324075698852539
               ],
               "size": [
                 0.3700000047683716,
@@ -13032,12 +13040,12 @@
               "min": [
                 -1.0437763929367065,
                 0.4000000059604645,
-                3.5749998092651367
+                3.875
               ],
               "max": [
                 -0.9981374740600586,
                 2.309999942779541,
-                3.625079393386841
+                3.925079584121704
               ],
               "size": [
                 0.04563891887664795,
@@ -13057,12 +13065,12 @@
               "min": [
                 -1.0458407402038574,
                 0.4000000059604645,
-                4.924920558929443
+                5.27492094039917
               ],
               "max": [
                 -0.9941592812538147,
                 2.309999942779541,
-                4.975079536437988
+                5.325079917907715
               ],
               "size": [
                 0.051681458950042725,
@@ -13507,7 +13515,7 @@
               "min": [
                 -0.453000009059906,
                 2.3762264251708984,
-                -4.949999809265137
+                -5.599999904632568
               ],
               "max": [
                 -0.4069271683692932,
@@ -13517,7 +13525,7 @@
               "size": [
                 0.04607284069061279,
                 0.04388689994812012,
-                8.529999732971191
+                9.179999828338623
               ]
             },
             "role": "obstacle",
@@ -13530,9 +13538,9 @@
             "type": "box",
             "boundsM": {
               "min": [
-                0.4069271385669708,
+                0.4069271683692932,
                 2.3762264251708984,
-                -4.949999809265137
+                -5.599999904632568
               ],
               "max": [
                 0.453000009059906,
@@ -13540,9 +13548,9 @@
                 3.5799999237060547
               ],
               "size": [
-                0.04607287049293518,
+                0.04607284069061279,
                 0.04388689994812012,
-                8.529999732971191
+                9.179999828338623
               ]
             },
             "role": "obstacle",
@@ -13557,17 +13565,17 @@
               "min": [
                 -1.0437763929367065,
                 0.4000000059604645,
-                -1.3250792026519775
+                -2.425079345703125
               ],
               "max": [
                 -0.9962235689163208,
                 2.309999942779541,
-                -1.274999976158142
+                -2.375
               ],
               "size": [
                 0.04755282402038574,
                 1.9099999368190765,
-                0.05007922649383545
+                0.050079345703125
               ]
             },
             "role": "obstacle",
@@ -13582,17 +13590,17 @@
               "min": [
                 -1.0418626070022583,
                 0.4000000059604645,
-                0.02500000037252903
+                -1.3250000476837158
               ],
               "max": [
                 -0.9981374740600586,
                 2.309999942779541,
-                0.07500000298023224
+                -1.274999976158142
               ],
               "size": [
                 0.04372513294219971,
                 1.9099999368190765,
-                0.05000000260770321
+                0.05000007152557373
               ]
             },
             "role": "obstacle",
@@ -13832,17 +13840,17 @@
               "min": [
                 -0.40273991227149963,
                 0.6800000071525574,
-                -2.1920700073242188
+                -2.8420701026916504
               ],
               "max": [
                 -0.3572601079940796,
                 1.8500001430511475,
-                -2.147930383682251
+                -2.7979302406311035
               ],
               "size": [
                 0.045479804277420044,
                 1.17000013589859,
-                0.04413962364196777
+                0.044139862060546875
               ]
             },
             "role": "obstacle",
@@ -13857,17 +13865,17 @@
               "min": [
                 -0.4522983431816101,
                 1.8455402851104736,
-                -2.1920886039733887
+                -2.8420886993408203
               ],
               "max": [
                 -0.3594830632209778,
                 2.1043975353240967,
-                -2.147911787033081
+                -2.7979116439819336
               ],
               "size": [
                 0.09281527996063232,
                 0.25885725021362305,
-                0.04417681694030762
+                0.04417705535888672
               ]
             },
             "role": "obstacle",
@@ -13882,17 +13890,17 @@
               "min": [
                 -0.452739953994751,
                 2.0999999046325684,
-                -2.1920700073242188
+                -2.8420701026916504
               ],
               "max": [
                 -0.40726011991500854,
                 2.4000000953674316,
-                -2.147930383682251
+                -2.7979302406311035
               ],
               "size": [
                 0.04547983407974243,
                 0.3000001907348633,
-                0.04413962364196777
+                0.044139862060546875
               ]
             },
             "role": "obstacle",
@@ -14132,17 +14140,17 @@
               "min": [
                 0.3572601079940796,
                 0.6800000071525574,
-                -2.1920700073242188
+                -2.8420701026916504
               ],
               "max": [
                 0.40273991227149963,
                 1.8500001430511475,
-                -2.147930383682251
+                -2.7979302406311035
               ],
               "size": [
                 0.045479804277420044,
                 1.17000013589859,
-                0.04413962364196777
+                0.044139862060546875
               ]
             },
             "role": "obstacle",
@@ -14157,17 +14165,17 @@
               "min": [
                 0.35722607374191284,
                 1.8455402851104736,
-                -2.1920886039733887
+                -2.8420886993408203
               ],
               "max": [
                 0.450516939163208,
                 2.1043975353240967,
-                -2.1486737728118896
+                -2.798673629760742
               ],
               "size": [
                 0.09329086542129517,
                 0.25885725021362305,
-                0.04341483116149902
+                0.043415069580078125
               ]
             },
             "role": "obstacle",
@@ -14182,17 +14190,17 @@
               "min": [
                 0.40726011991500854,
                 2.0999999046325684,
-                -2.1920700073242188
+                -2.8420701026916504
               ],
               "max": [
                 0.452739953994751,
                 2.4000000953674316,
-                -2.147930383682251
+                -2.7979302406311035
               ],
               "size": [
                 0.04547983407974243,
                 0.3000001907348633,
-                0.04413962364196777
+                0.044139862060546875
               ]
             },
             "role": "obstacle",
@@ -14207,17 +14215,17 @@
               "min": [
                 -1.1309999227523804,
                 1.426195740699768,
-                -5.0
+                -5.8000006675720215
               ],
               "max": [
                 -1.1231483221054077,
                 1.4341344833374023,
-                -1.2999999523162842
+                -2.4000000953674316
               ],
               "size": [
                 0.007851600646972656,
                 0.007938742637634277,
-                3.700000047683716
+                3.40000057220459
               ]
             },
             "role": "obstacle",
@@ -14232,7 +14240,7 @@
               "min": [
                 -1.1309999227523804,
                 1.426195740699768,
-                0.05000000074505806
+                -1.2999999523162842
               ],
               "max": [
                 -1.1231483221054077,
@@ -14242,7 +14250,7 @@
               "size": [
                 0.007851600646972656,
                 0.007938742637634277,
-                2.390000056475401
+                3.740000009536743
               ]
             },
             "role": "obstacle",
@@ -14282,17 +14290,17 @@
               "min": [
                 -1.1419999599456787,
                 0.36000001430511475,
-                3.700000047683716
+                4.0
               ],
               "max": [
                 -1.0820000171661377,
                 0.36800000071525574,
-                4.849999904632568
+                5.199999809265137
               ],
               "size": [
                 0.059999942779541016,
                 0.007999986410140991,
-                1.1499998569488525
+                1.1999998092651367
               ]
             },
             "role": "obstacle",
@@ -14357,17 +14365,17 @@
               "min": [
                 -1.0700000524520874,
                 0.3675000071525574,
-                3.821000099182129
+                4.125999927520752
               ],
               "max": [
                 -0.4699999988079071,
                 0.37049999833106995,
-                3.8389999866485596
+                4.144000053405762
               ],
               "size": [
                 0.6000000536441803,
                 0.0029999911785125732,
-                0.017999887466430664
+                0.018000125885009766
               ]
             },
             "role": "obstacle",
@@ -14382,12 +14390,12 @@
               "min": [
                 -1.0700000524520874,
                 0.3675000071525574,
-                4.710999965667725
+                5.055999755859375
               ],
               "max": [
                 -0.4699999988079071,
                 0.37049999833106995,
-                4.729000091552734
+                5.073999881744385
               ],
               "size": [
                 0.6000000536441803,
@@ -14407,17 +14415,17 @@
               "min": [
                 -1.1419999599456787,
                 0.36000001430511475,
-                -1.2000000476837158
+                -2.299999952316284
               ],
               "max": [
                 -1.0820000171661377,
                 0.36800000071525574,
-                -0.05000000074505806
+                -1.399999976158142
               ],
               "size": [
                 0.059999942779541016,
                 0.007999986410140991,
-                1.1500000469386578
+                0.8999999761581421
               ]
             },
             "role": "obstacle",
@@ -14432,12 +14440,12 @@
               "min": [
                 -0.32499998807907104,
                 0.5199999809265137,
-                -1.4900000095367432
+                -2.5299999713897705
               ],
               "max": [
                 0.32499998807907104,
                 0.5239999890327454,
-                -1.4600000381469727
+                -2.5
               ],
               "size": [
                 0.6499999761581421,
@@ -14457,12 +14465,12 @@
               "min": [
                 -0.32499998807907104,
                 0.6800000071525574,
-                -1.7300000190734863
+                -2.7699999809265137
               ],
               "max": [
                 0.32499998807907104,
                 0.6840000152587891,
-                -1.7000000476837158
+                -2.740000009536743
               ],
               "size": [
                 0.6499999761581421,
@@ -14482,12 +14490,12 @@
               "min": [
                 -1.149999976158142,
                 1.1100000143051147,
-                -2.9116666316986084
+                -3.56166672706604
               ],
               "max": [
                 -0.7300000190734863,
                 1.7200000286102295,
-                -2.796447992324829
+                -3.4464480876922607
               ],
               "size": [
                 0.41999995708465576,
@@ -14507,12 +14515,12 @@
               "min": [
                 -1.1469999551773071,
                 1.0225000381469727,
-                -2.81499981880188
+                -3.4649999141693115
               ],
               "max": [
                 -0.7329999804496765,
                 1.0674999952316284,
-                -2.372999906539917
+                -3.0230000019073486
               ],
               "size": [
                 0.4139999747276306,
@@ -14532,12 +14540,12 @@
               "min": [
                 -0.7099999785423279,
                 1.1100000143051147,
-                -2.9116666316986084
+                -3.56166672706604
               ],
               "max": [
                 -0.2900000214576721,
                 1.7200000286102295,
-                -2.796447992324829
+                -3.4464480876922607
               ],
               "size": [
                 0.41999995708465576,
@@ -14557,12 +14565,12 @@
               "min": [
                 -0.7070000171661377,
                 1.0225000381469727,
-                -2.81499981880188
+                -3.4649999141693115
               ],
               "max": [
                 -0.2929999828338623,
                 1.0674999952316284,
-                -2.372999906539917
+                -3.0230000019073486
               ],
               "size": [
                 0.4140000343322754,
@@ -14582,12 +14590,12 @@
               "min": [
                 0.2900000214576721,
                 1.1100000143051147,
-                -2.9116666316986084
+                -3.56166672706604
               ],
               "max": [
                 0.7099999785423279,
                 1.7200000286102295,
-                -2.796447992324829
+                -3.4464480876922607
               ],
               "size": [
                 0.41999995708465576,
@@ -14607,12 +14615,12 @@
               "min": [
                 0.2929999828338623,
                 1.0225000381469727,
-                -2.81499981880188
+                -3.4649999141693115
               ],
               "max": [
                 0.7070000171661377,
                 1.0674999952316284,
-                -2.372999906539917
+                -3.0230000019073486
               ],
               "size": [
                 0.4140000343322754,
@@ -14632,12 +14640,12 @@
               "min": [
                 0.7300000190734863,
                 1.1100000143051147,
-                -2.9116666316986084
+                -3.56166672706604
               ],
               "max": [
                 1.149999976158142,
                 1.7200000286102295,
-                -2.796447992324829
+                -3.4464480876922607
               ],
               "size": [
                 0.41999995708465576,
@@ -14657,12 +14665,12 @@
               "min": [
                 0.7329999804496765,
                 1.0225000381469727,
-                -2.81499981880188
+                -3.4649999141693115
               ],
               "max": [
                 1.1469999551773071,
                 1.0674999952316284,
-                -2.372999906539917
+                -3.0230000019073486
               ],
               "size": [
                 0.4139999747276306,
@@ -14682,12 +14690,12 @@
               "min": [
                 -1.149999976158142,
                 1.1100000143051147,
-                -3.751666784286499
+                -4.40166711807251
               ],
               "max": [
                 -0.7300000190734863,
                 1.7200000286102295,
-                -3.6364481449127197
+                -4.2864484786987305
               ],
               "size": [
                 0.41999995708465576,
@@ -14707,17 +14715,17 @@
               "min": [
                 -1.1469999551773071,
                 1.0225000381469727,
-                -3.6549999713897705
+                -4.305000305175781
               ],
               "max": [
                 -0.7329999804496765,
                 1.0674999952316284,
-                -3.2130000591278076
+                -3.8630001544952393
               ],
               "size": [
                 0.4139999747276306,
                 0.04499995708465576,
-                0.4419999122619629
+                0.442000150680542
               ]
             },
             "role": "obstacle",
@@ -14732,12 +14740,12 @@
               "min": [
                 -0.7099999785423279,
                 1.1100000143051147,
-                -3.751666784286499
+                -4.40166711807251
               ],
               "max": [
                 -0.2900000214576721,
                 1.7200000286102295,
-                -3.6364481449127197
+                -4.2864484786987305
               ],
               "size": [
                 0.41999995708465576,
@@ -14757,17 +14765,17 @@
               "min": [
                 -0.7070000171661377,
                 1.0225000381469727,
-                -3.6549999713897705
+                -4.305000305175781
               ],
               "max": [
                 -0.2929999828338623,
                 1.0674999952316284,
-                -3.2130000591278076
+                -3.8630001544952393
               ],
               "size": [
                 0.4140000343322754,
                 0.04499995708465576,
-                0.4419999122619629
+                0.442000150680542
               ]
             },
             "role": "obstacle",
@@ -14782,12 +14790,12 @@
               "min": [
                 0.2900000214576721,
                 1.1100000143051147,
-                -3.751666784286499
+                -4.40166711807251
               ],
               "max": [
                 0.7099999785423279,
                 1.7200000286102295,
-                -3.6364481449127197
+                -4.2864484786987305
               ],
               "size": [
                 0.41999995708465576,
@@ -14807,17 +14815,17 @@
               "min": [
                 0.2929999828338623,
                 1.0225000381469727,
-                -3.6549999713897705
+                -4.305000305175781
               ],
               "max": [
                 0.7070000171661377,
                 1.0674999952316284,
-                -3.2130000591278076
+                -3.8630001544952393
               ],
               "size": [
                 0.4140000343322754,
                 0.04499995708465576,
-                0.4419999122619629
+                0.442000150680542
               ]
             },
             "role": "obstacle",
@@ -14832,12 +14840,12 @@
               "min": [
                 0.7300000190734863,
                 1.1100000143051147,
-                -3.751666784286499
+                -4.40166711807251
               ],
               "max": [
                 1.149999976158142,
                 1.7200000286102295,
-                -3.6364481449127197
+                -4.2864484786987305
               ],
               "size": [
                 0.41999995708465576,
@@ -14857,17 +14865,17 @@
               "min": [
                 0.7329999804496765,
                 1.0225000381469727,
-                -3.6549999713897705
+                -4.305000305175781
               ],
               "max": [
                 1.1469999551773071,
                 1.0674999952316284,
-                -3.2130000591278076
+                -3.8630001544952393
               ],
               "size": [
                 0.4139999747276306,
                 0.04499995708465576,
-                0.4419999122619629
+                0.442000150680542
               ]
             },
             "role": "obstacle",
@@ -14882,12 +14890,12 @@
               "min": [
                 -1.149999976158142,
                 1.1100000143051147,
-                -4.591667175292969
+                -5.2416672706604
               ],
               "max": [
                 -0.7300000190734863,
                 1.7200000286102295,
-                -4.4764485359191895
+                -5.126448631286621
               ],
               "size": [
                 0.41999995708465576,
@@ -14907,17 +14915,17 @@
               "min": [
                 -1.1469999551773071,
                 1.0225000381469727,
-                -4.49500036239624
+                -5.145000457763672
               ],
               "max": [
                 -0.7329999804496765,
                 1.0674999952316284,
-                -4.053000450134277
+                -4.703000068664551
               ],
               "size": [
                 0.4139999747276306,
                 0.04499995708465576,
-                0.4419999122619629
+                0.4420003890991211
               ]
             },
             "role": "obstacle",
@@ -14932,12 +14940,12 @@
               "min": [
                 -0.7099999785423279,
                 1.1100000143051147,
-                -4.591667175292969
+                -5.2416672706604
               ],
               "max": [
                 -0.2900000214576721,
                 1.7200000286102295,
-                -4.4764485359191895
+                -5.126448631286621
               ],
               "size": [
                 0.41999995708465576,
@@ -14957,17 +14965,17 @@
               "min": [
                 -0.7070000171661377,
                 1.0225000381469727,
-                -4.49500036239624
+                -5.145000457763672
               ],
               "max": [
                 -0.2929999828338623,
                 1.0674999952316284,
-                -4.053000450134277
+                -4.703000068664551
               ],
               "size": [
                 0.4140000343322754,
                 0.04499995708465576,
-                0.4419999122619629
+                0.4420003890991211
               ]
             },
             "role": "obstacle",
@@ -14982,12 +14990,12 @@
               "min": [
                 0.2900000214576721,
                 1.1100000143051147,
-                -4.591667175292969
+                -5.2416672706604
               ],
               "max": [
                 0.7099999785423279,
                 1.7200000286102295,
-                -4.4764485359191895
+                -5.126448631286621
               ],
               "size": [
                 0.41999995708465576,
@@ -15007,17 +15015,17 @@
               "min": [
                 0.2929999828338623,
                 1.0225000381469727,
-                -4.49500036239624
+                -5.145000457763672
               ],
               "max": [
                 0.7070000171661377,
                 1.0674999952316284,
-                -4.053000450134277
+                -4.703000068664551
               ],
               "size": [
                 0.4140000343322754,
                 0.04499995708465576,
-                0.4419999122619629
+                0.4420003890991211
               ]
             },
             "role": "obstacle",
@@ -15032,12 +15040,12 @@
               "min": [
                 0.7300000190734863,
                 1.1100000143051147,
-                -4.591667175292969
+                -5.2416672706604
               ],
               "max": [
                 1.149999976158142,
                 1.7200000286102295,
-                -4.4764485359191895
+                -5.126448631286621
               ],
               "size": [
                 0.41999995708465576,
@@ -15057,17 +15065,17 @@
               "min": [
                 0.7329999804496765,
                 1.0225000381469727,
-                -4.49500036239624
+                -5.145000457763672
               ],
               "max": [
                 1.1469999551773071,
                 1.0674999952316284,
-                -4.053000450134277
+                -4.703000068664551
               ],
               "size": [
                 0.4139999747276306,
                 0.04499995708465576,
-                0.4419999122619629
+                0.4420003890991211
               ]
             },
             "role": "obstacle",
@@ -15082,12 +15090,12 @@
               "min": [
                 -1.1100000143051147,
                 1.1100000143051147,
-                -5.4816670417785645
+                -6.131667137145996
               ],
               "max": [
                 -0.6899999976158142,
                 1.7200000286102295,
-                -5.366448402404785
+                -6.016448497772217
               ],
               "size": [
                 0.42000001668930054,
@@ -15107,17 +15115,17 @@
               "min": [
                 -1.1069999933242798,
                 1.0225000381469727,
-                -5.385000228881836
+                -6.035000324249268
               ],
               "max": [
                 -0.6929999589920044,
                 1.0674999952316284,
-                -4.942999839782715
+                -5.593000411987305
               ],
               "size": [
                 0.4140000343322754,
                 0.04499995708465576,
-                0.4420003890991211
+                0.4419999122619629
               ]
             },
             "role": "obstacle",
@@ -15132,12 +15140,12 @@
               "min": [
                 -0.6599999666213989,
                 1.1100000143051147,
-                -5.4816670417785645
+                -6.131667137145996
               ],
               "max": [
                 -0.23999999463558197,
                 1.7200000286102295,
-                -5.366448402404785
+                -6.016448497772217
               ],
               "size": [
                 0.41999997198581696,
@@ -15157,17 +15165,17 @@
               "min": [
                 -0.6570000052452087,
                 1.0225000381469727,
-                -5.385000228881836
+                -6.035000324249268
               ],
               "max": [
                 -0.24299998581409454,
                 1.0674999952316284,
-                -4.942999839782715
+                -5.593000411987305
               ],
               "size": [
                 0.4140000194311142,
                 0.04499995708465576,
-                0.4420003890991211
+                0.4419999122619629
               ]
             },
             "role": "obstacle",
@@ -15182,12 +15190,12 @@
               "min": [
                 -0.20999999344348907,
                 1.1100000143051147,
-                -5.4816670417785645
+                -6.131667137145996
               ],
               "max": [
                 0.20999999344348907,
                 1.7200000286102295,
-                -5.366448402404785
+                -6.016448497772217
               ],
               "size": [
                 0.41999998688697815,
@@ -15207,17 +15215,17 @@
               "min": [
                 -0.2070000022649765,
                 1.0225000381469727,
-                -5.385000228881836
+                -6.035000324249268
               ],
               "max": [
                 0.2070000022649765,
                 1.0674999952316284,
-                -4.942999839782715
+                -5.593000411987305
               ],
               "size": [
                 0.414000004529953,
                 0.04499995708465576,
-                0.4420003890991211
+                0.4419999122619629
               ]
             },
             "role": "obstacle",
@@ -15232,12 +15240,12 @@
               "min": [
                 0.23999999463558197,
                 1.1100000143051147,
-                -5.4816670417785645
+                -6.131667137145996
               ],
               "max": [
                 0.6599999666213989,
                 1.7200000286102295,
-                -5.366448402404785
+                -6.016448497772217
               ],
               "size": [
                 0.41999997198581696,
@@ -15257,17 +15265,17 @@
               "min": [
                 0.24299998581409454,
                 1.0225000381469727,
-                -5.385000228881836
+                -6.035000324249268
               ],
               "max": [
                 0.6570000052452087,
                 1.0674999952316284,
-                -4.942999839782715
+                -5.593000411987305
               ],
               "size": [
                 0.4140000194311142,
                 0.04499995708465576,
-                0.4420003890991211
+                0.4419999122619629
               ]
             },
             "role": "obstacle",
@@ -15282,12 +15290,12 @@
               "min": [
                 0.6899999976158142,
                 1.1100000143051147,
-                -5.4816670417785645
+                -6.131667137145996
               ],
               "max": [
                 1.1100000143051147,
                 1.7200000286102295,
-                -5.366448402404785
+                -6.016448497772217
               ],
               "size": [
                 0.42000001668930054,
@@ -15307,17 +15315,17 @@
               "min": [
                 0.6929999589920044,
                 1.0225000381469727,
-                -5.385000228881836
+                -6.035000324249268
               ],
               "max": [
                 1.1069999933242798,
                 1.0674999952316284,
-                -4.942999839782715
+                -5.593000411987305
               ],
               "size": [
                 0.4140000343322754,
                 0.04499995708465576,
-                0.4420003890991211
+                0.4419999122619629
               ]
             },
             "role": "obstacle",
@@ -15681,17 +15689,17 @@
               "min": [
                 -0.027,
                 0,
-                -0.28
+                -0.29250000000000004
               ],
               "max": [
                 0.027,
                 2.08,
-                0.28
+                0.29250000000000004
               ],
               "size": [
                 0.054,
                 2.08,
-                0.56
+                0.5850000000000001
               ]
             },
             "role": "animated-door-leaf"
@@ -15704,17 +15712,17 @@
               "min": [
                 -0.027,
                 0,
-                -0.28
+                -0.29250000000000004
               ],
               "max": [
                 0.027,
                 2.08,
-                0.28
+                0.29250000000000004
               ],
               "size": [
                 0.054,
                 2.08,
-                0.56
+                0.5850000000000001
               ]
             },
             "role": "animated-door-leaf"
@@ -15727,17 +15735,17 @@
               "min": [
                 -0.027,
                 0,
-                -0.28
+                -0.21749999999999997
               ],
               "max": [
                 0.027,
                 2.08,
-                0.28
+                0.21749999999999997
               ],
               "size": [
                 0.054,
                 2.08,
-                0.56
+                0.43499999999999994
               ]
             },
             "role": "animated-door-leaf"
@@ -15750,17 +15758,17 @@
               "min": [
                 -0.027,
                 0,
-                -0.28
+                -0.21749999999999997
               ],
               "max": [
                 0.027,
                 2.08,
-                0.28
+                0.21749999999999997
               ],
               "size": [
                 0.054,
                 2.08,
-                0.56
+                0.43499999999999994
               ]
             },
             "role": "animated-door-leaf"
@@ -15773,17 +15781,17 @@
               "min": [
                 -1.25,
                 0.36,
-                -5.68
+                -6.3
               ],
               "max": [
                 -1.1800000000000002,
                 2.6,
-                -1.2
+                -2.3
               ],
               "size": [
                 0.06999999999999984,
                 2.24,
-                4.4799999999999995
+                4.0
               ]
             },
             "role": "shell"
@@ -15796,17 +15804,17 @@
               "min": [
                 -1.25,
                 0.36,
-                -0.05
+                -1.4
               ],
               "max": [
                 -1.1800000000000002,
                 2.6,
-                3.7
+                4.0
               ],
               "size": [
                 0.06999999999999984,
                 2.24,
-                3.75
+                5.4
               ]
             },
             "role": "shell"
@@ -15819,17 +15827,17 @@
               "min": [
                 -1.25,
                 0.36,
-                4.85
+                5.2
               ],
               "max": [
                 -1.1800000000000002,
                 2.6,
-                5.75
+                5.65
               ],
               "size": [
                 0.06999999999999984,
                 2.24,
-                0.9000000000000004
+                0.4500000000000002
               ]
             },
             "role": "shell"
@@ -15842,17 +15850,17 @@
               "min": [
                 1.1800000000000002,
                 0.36,
-                -5.68
+                -6.3
               ],
               "max": [
                 1.25,
                 2.6,
-                5.75
+                5.65
               ],
               "size": [
                 0.06999999999999984,
                 2.24,
-                11.43
+                11.95
               ]
             },
             "role": "shell"
@@ -15865,12 +15873,12 @@
               "min": [
                 -1.25,
                 0.36,
-                -5.8
+                -6.3
               ],
               "max": [
                 1.25,
                 2.7,
-                -5.73
+                -6.23
               ],
               "size": [
                 2.5,
@@ -15888,17 +15896,17 @@
               "min": [
                 -1.1,
                 0.36,
-                5.89
+                5.79
               ],
               "max": [
                 1.1,
                 2.6,
-                6.2
+                6.1
               ],
               "size": [
                 2.2,
                 2.24,
-                0.3100000000000005
+                0.3099999999999996
               ]
             },
             "role": "shell"
@@ -15968,14 +15976,14 @@
         "dependencyPolicy": "Resolve exterior only through the hash-pinned dependency. Do not load old interior with this replacement. Metadata namespaces refer to the same vehicle frame."
       },
       "interiorLayout": {
-        "revision": "2.1-front-photo-correction",
+        "revision": "2.2-nova-typical-door-layout",
         "activeSeats": 24,
         "rearSeats": 17,
         "lowFloorForwardSeats": 4,
         "inwardPrioritySeats": 3,
         "stowedPriorityPlaces": 3,
         "stowedPlacesArePassengerAnchors": false,
-        "layoutBasis": "Photographed WVMT 2012 XD40 topology adapted to preserved representative project frame; seat count and dimensions are authored, not fleet capacity."
+        "layoutBasis": "Existing authored 24-seat topology adapted to Nova-typical door locations; seat count and dimensions are authored, not fleet capacity."
       },
       "nonStandingRegions": [
         {
@@ -15985,22 +15993,22 @@
             [
               -0.29,
               0.68,
-              -4.65
+              -5.3
             ],
             [
               0.29,
               0.68,
-              -4.65
+              -5.3
             ],
             [
               0.29,
               0.68,
-              -2.02
+              -3.23
             ],
             [
               -0.29,
               0.68,
-              -2.02
+              -3.23
             ]
           ],
           "feetPointM": [
@@ -16084,20 +16092,20 @@
     {
       "packageId": "boardable-bus",
       "manifest": "../../boardable-bus/manifest.json",
-      "manifestSha256": "32a35e7fdaa0f82600f8d161212b952177fae8515ca8095b2d55be118503076e",
+      "manifestSha256": "6e7ae8d6f0457dc11d4d76729adb307d694edabc42da923e8ec842f078bea041",
       "assetId": "city-bus-12m-exterior",
       "files": [
         {
           "file": "../../boardable-bus/exports/city-bus-12m-exterior.lod0.glb",
-          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45"
+          "sha256": "f86df4c26e0e528bc6f2299407dd98be5c17d31763ed049c6c1f38fe52a4db45"
         },
         {
           "file": "../../boardable-bus/exports/city-bus-12m-exterior.lod1.glb",
-          "sha256": "a4ccbb6a4b2f032a4d950ee0883c51ebe1ecd314734b539c60aa5fd6c605b3f0"
+          "sha256": "89846477b813d1e41b8f2e234d5a6d888b486a7c267984a75d39cb7f4b27013a"
         },
         {
           "file": "../../boardable-bus/exports/city-bus-12m-exterior.lod2.glb",
-          "sha256": "36a7f8cfa1b3b53b8e212618e80523a7be3f7fd8e86bef98cf9c93f83bcfd948"
+          "sha256": "f274661b47738c519dc539cb03f721ab585bf3a4136e1402fb1163b039698083"
         }
       ]
     }
@@ -16106,7 +16114,7 @@
     "runtimeIntegration": "pending",
     "WebGL": "not_run",
     "newNightLighting": "deferred_not_implemented",
-    "originalBusPackageChanged": false,
+    "originalBusPackageChanged": true,
     "recovery": "New reconstruction of missing supplement; not a byte-identical recovery.",
     "detailedMasterChanged": false,
     "derivativeRearGeometry": "simplified; not byte-identical to detailed-master rear"

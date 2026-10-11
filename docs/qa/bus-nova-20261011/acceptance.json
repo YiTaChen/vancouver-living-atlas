@@ -1,0 +1,118 @@
+{
+  "status": "pass",
+  "sourceRevision": "5fe7734ea1b2edfc02069128cb676509e6ac63af",
+  "sourceFingerprint": "81b4cbb66a8fd79ea34eae7d1b37845f8bba989476769cb33335339bacb7e8b0",
+  "browser": "155.0.8059.39",
+  "renderer": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+  "viewport": [
+    1280,
+    720
+  ],
+  "checkpoints": 12,
+  "boardingAlightingCycles": 3,
+  "seatPreviewActions": 72,
+  "all24SeatOptionsPerProfile": true,
+  "captures": "standing and inward-facing priority seat 24; all seat options exercised; exact relocated rear-seat cameras also covered by runtime/geometry tests",
+  "qualityFrozenAboard": true,
+  "profiles": [
+    "budget",
+    "reference-lod1",
+    "reference-lod0"
+  ],
+  "nightAndDayRender": true,
+  "boundedTemplates": 6,
+  "parkedOwnersAfterClose": 0,
+  "fallbacks": 0,
+  "busAssetErrors": [],
+  "workerErrors": {},
+  "consoleExceptions": [],
+  "nonBlockingConsoleResourceFailure": [
+    {
+      "url": "http://localhost:3100/favicon.ico",
+      "status": 404
+    }
+  ],
+  "automatedTests": {
+    "nodeTests": 1023,
+    "nodePass": 1023,
+    "nodeFail": 0,
+    "sourcePythonTests": 118,
+    "typecheck": "pass",
+    "changedFileLint": "pass",
+    "architectureAudit": "pass"
+  },
+  "artifacts": {
+    "browser-actions.json": {
+      "bytes": 1861,
+      "sha256": "d7464b9eff776617f75a3298df20f753f486e97f77e53a6eb06c2abfa97acc20"
+    },
+    "bus-visit-aboard-low-floor-aisle-14p00h-20261011t170510766z-002.json": {
+      "bytes": 4845,
+      "sha256": "311d17a94b7a885ac41ec45ca79bc32167afb9c5c7c25c008eb18a77db8c6776"
+    },
+    "bus-visit-aboard-low-floor-aisle-14p00h-20261011t170510766z-002.png": {
+      "bytes": 740249,
+      "sha256": "f9d52a8818ef20d35f99bf70e4b649a99cae9179480417c64ae94f9c8eb027cb"
+    },
+    "bus-visit-aboard-low-floor-aisle-14p00h-20261011t170624945z-005.json": {
+      "bytes": 4809,
+      "sha256": "18754632685e2b27d1e98c3f976e18debda00ec860190ee9101bd6ca9487edba"
+    },
+    "bus-visit-aboard-low-floor-aisle-14p00h-20261011t170706214z-008.json": {
+      "bytes": 4842,
+      "sha256": "dd400be1e73494a553d79892b8464635a4cc05a1e22c9556fb3b6af77614e2f9"
+    },
+    "bus-visit-aboard-low-floor-aisle-14p00h-20261011t170706214z-008.png": {
+      "bytes": 722547,
+      "sha256": "dd980c696ff8d5f48c51aaf94fdd87ca5528f8902b50125de1f8f4d6918cea35"
+    },
+    "bus-visit-aboard-low-floor-aisle-23p00h-20261011t170707536z-009.json": {
+      "bytes": 4845,
+      "sha256": "88a5632547cefeeeb02c1b1b08b060705d092afad057447523df0620a58cc598"
+    },
+    "bus-visit-aboard-seat-24-14p00h-20261011t170558188z-003.json": {
+      "bytes": 4831,
+      "sha256": "a3fa4a3204007425c50207d43ba77a8d4f1b5e79be8ec0e67f478e332b55e1b1"
+    },
+    "bus-visit-aboard-seat-24-14p00h-20261011t170558188z-003.png": {
+      "bytes": 578407,
+      "sha256": "3276a52ee6a43322ba81ba9d6c70e350bacff1ddaef0e70f29d6624ec5f5e96f"
+    },
+    "bus-visit-aboard-seat-24-14p00h-20261011t170627783z-006.json": {
+      "bytes": 4800,
+      "sha256": "e6270bca20a9ef4c4e3fad1232eb28cbe6da7a0eab4658dd204106b2f7f14aeb"
+    },
+    "bus-visit-aboard-seat-24-14p00h-20261011t170627783z-006.png": {
+      "bytes": 504679,
+      "sha256": "c013d6fb08c77745fa9d3ab62f09820a45fd15694426998c4e4dba9dd9450246"
+    },
+    "bus-visit-aboard-seat-24-23p00h-20261011t170719642z-010.json": {
+      "bytes": 4835,
+      "sha256": "0a6d4b4433f2be3265581ab86408725736dbd1e16b29e12e517bc7ebd39757e0"
+    },
+    "bus-visit-aboard-seat-24-23p00h-20261011t170719642z-010.png": {
+      "bytes": 510890,
+      "sha256": "703b659a1f216b087d75e2d0d786b8789fe58b3fce91522caac3e88587ef1439"
+    },
+    "bus-visit-idle-exterior-23p00h-20261011t170721296z-012.json": {
+      "bytes": 2495,
+      "sha256": "e5d8218f41bba3159e5076182c38271797a78a710b1e579de47cd93e7f1cd73d"
+    },
+    "bus-visit-ready-exterior-14p00h-20261011t170509469z-001.json": {
+      "bytes": 4843,
+      "sha256": "4b386a6242adfbd0b10b8d97c85657e934f849d5e36347b91999fc43380b68a3"
+    },
+    "bus-visit-ready-exterior-14p00h-20261011t170559118z-004.json": {
+      "bytes": 4853,
+      "sha256": "3b7ad6d719d19245d67c4b445ba9c5186fa58b39bdc81ea9401ad5a8b927055e"
+    },
+    "bus-visit-ready-exterior-14p00h-20261011t170628526z-007.json": {
+      "bytes": 4821,
+      "sha256": "0f6004d74b273b2b03b9bfa58c7dc839b667d90ea0ef30340140204d0a49e35a"
+    },
+    "bus-visit-ready-exterior-23p00h-20261011t170720914z-011.json": {
+      "bytes": 4853,
+      "sha256": "bbb079527bbb8707524f1d6e87fcadb8a7b8d9e62e31d771107202766f6b56c7"
+    }
+  }
+}

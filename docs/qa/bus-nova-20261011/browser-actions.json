@@ -1,0 +1,70 @@
+{
+  "browser": "155.0.8059.39",
+  "viewport": [
+    1280,
+    720
+  ],
+  "seatPreviewActions": 72,
+  "boardingPasses": 3,
+  "qualityLockedAboard": true,
+  "modelTemplateCapacity": 6,
+  "errors": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "failedResources": [
+    {
+      "url": "http://localhost:3100/favicon.ico",
+      "status": 404
+    }
+  ],
+  "checkpoints": [
+    {
+      "label": "auto-ready",
+      "id": "bus-visit-ready-exterior-14p00h-20261011t170509469z-001"
+    },
+    {
+      "label": "auto-standing",
+      "id": "bus-visit-aboard-low-floor-aisle-14p00h-20261011t170510766z-002"
+    },
+    {
+      "label": "auto-seat-24",
+      "id": "bus-visit-aboard-seat-24-14p00h-20261011t170558188z-003"
+    },
+    {
+      "label": "auto-alighted",
+      "id": "bus-visit-ready-exterior-14p00h-20261011t170559118z-004"
+    },
+    {
+      "label": "light-standing",
+      "id": "bus-visit-aboard-low-floor-aisle-14p00h-20261011t170624945z-005"
+    },
+    {
+      "label": "light-seat-24",
+      "id": "bus-visit-aboard-seat-24-14p00h-20261011t170627783z-006"
+    },
+    {
+      "label": "light-alighted",
+      "id": "bus-visit-ready-exterior-14p00h-20261011t170628526z-007"
+    },
+    {
+      "label": "detailed-standing-day",
+      "id": "bus-visit-aboard-low-floor-aisle-14p00h-20261011t170706214z-008"
+    },
+    {
+      "label": "detailed-standing-night",
+      "id": "bus-visit-aboard-low-floor-aisle-23p00h-20261011t170707536z-009"
+    },
+    {
+      "label": "detailed-seat-24-night",
+      "id": "bus-visit-aboard-seat-24-23p00h-20261011t170719642z-010"
+    },
+    {
+      "label": "detailed-alighted",
+      "id": "bus-visit-ready-exterior-23p00h-20261011t170720914z-011"
+    },
+    {
+      "label": "closed",
+      "id": "bus-visit-idle-exterior-23p00h-20261011t170721296z-012"
+    }
+  ]
+}

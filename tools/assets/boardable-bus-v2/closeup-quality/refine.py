@@ -9,7 +9,7 @@ from mathutils import Vector
 HERE=Path(__file__).resolve().parent;MASTER=HERE.parent
 sys.path.insert(0,str(MASTER));import build as A
 B=A.B
-EXPECTED='f9fb01939c1e65c0c308c8bc2cdca72f26d9d6b728e489df6743bfb6849dc673'
+EXPECTED='5e0896426e709eac7716599cd323402ba940d6ccf10729de8bd51db38a82bab3'
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def replace_mesh(ob,vs,fs,smooth=True):
  old=ob.data;me=bpy.data.meshes.new(ob.name+' reference-shaped surface');me.from_pydata(vs,[],fs);me.update();bm=bmesh.new();bm.from_mesh(me);bmesh.ops.recalc_face_normals(bm,faces=bm.faces);bm.to_mesh(me);bm.free()
@@ -192,12 +192,12 @@ def fittings(lod,sides):
 def windows(lod):
  # Explicit user hierarchy: BLACK INNER frame, BLUE OUTER structural frame.
  # Exterior blue pillars remain untouched; these inner seals/reveals sit toward the cabin.
- m=bpy.data.materials.new('window-outer-blue');m.use_nodes=True;m.diffuse_color=(.055,.21,.37,1);m.node_tree.nodes['Principled BSDF'].inputs['Base Color'].default_value=(.055,.21,.37,1);m.node_tree.nodes['Principled BSDF'].inputs['Roughness'].default_value=.38;m.node_tree.nodes['Principled BSDF'].inputs['Metallic'].default_value=.18;m['semantic_role']='panel';m['shared_surface_id']='bus-window-outer-blue';B.M['window-outer-blue']=m
- stations=[-5.68,-4.45,-3.25,-2.05,-1.25,0,1.25,2.5,3.65,4.90,5.70]
+ m=bpy.data.materials.get('window-outer-blue') or bpy.data.materials.new('window-outer-blue');m.use_nodes=True;m.diffuse_color=(.055,.21,.37,1);m.node_tree.nodes['Principled BSDF'].inputs['Base Color'].default_value=(.055,.21,.37,1);m.node_tree.nodes['Principled BSDF'].inputs['Roughness'].default_value=.38;m.node_tree.nodes['Principled BSDF'].inputs['Metallic'].default_value=.18;m['semantic_role']='panel';m['shared_surface_id']='bus-window-outer-blue';B.M['window-outer-blue']=m
+ stations=[-6.12,-4.45,-3.25,-2.40,-1.30,0,1.25,2.5,3.90,5.30,5.70]
  for side in [-1,1]:
   st=stations if side>0 else [v for v in stations if not any(a<v<b for _,a,b in A.DOORS)]
   for j,z in enumerate(st):
-   outer_z=z+(-.025 if side<0 and z in [-1.25,3.65] else .025 if side<0 and z in [0,4.90] else 0)
+   outer_z=z
    A.box(f'window-outer-blue-pillar-{side}-{j}',(side*1.213,1.845,outer_z),(.032,1.444,.150),'window-outer-blue',.006)
    A.box(f'window-inner-black-pillar-{side}-{j}',(side*1.179,1.845,z),(.032,1.36,.088),'rubber',.005)
    A.box(f'window-inner-reveal-{side}-{j}',(side*1.199,1.845,z),(.038,1.37,.096),'metal',.004)
@@ -214,7 +214,7 @@ def windows(lod):
     A.box(f'window-reveal-depth-{label}-{side}-{j}',(side*1.20,y,(a+b)/2),(.042,.077,b-a-.026),'metal',.006)
    A.box(f'window-sill-cap-{side}-{j}',(side*1.137,1.158,(a+b)/2),(.094,.024,b-a-.02),'panel',.008)
  for side in [-1,1]:
-  intervals=[(-5.65,5.72)] if side>0 else [(-5.65,-1.20),(-.05,3.70),(4.85,5.72)]
+  intervals=[(A.INTERIOR_REAR,A.INTERIOR_FRONT)] if side>0 else A.WALL_INTERVALS
   for j,(a,b) in enumerate(intervals):
    A.box(f'lower-wall-gray-infill-{side}-{j}',(side*1.162,.592,(a+b)/2),(.022,.465,b-a),'panel',.005)
    A.box(f'lower-wall-skirt-{side}-{j}',(side*1.143,.395,(a+b)/2),(.030,.070,b-a),'rubber',.003)

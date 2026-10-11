@@ -119,3 +119,39 @@ LOD1 包含初次 shader 暖機，但後段仍有139.2ms延遲，不能將所有
 實際 GPU 的光照／tone mapping 與來源 Cycles／AgX CPU 預覽不同；本次保留作者的 PBR 與嵌入貼圖，沒有以材質重新上色去偽造預覽。夜間城市新增店家照明仍在原先延期範圍，本次沒有擴充。
 
 正式 `npm run build:firebase` 已通過：13 檔 Stage 2 guard、38 檔 adopted inventory、來源／metadata／實際 bytes 與 QA 標記隔離均通過。驗收後重新計算625個視覺來源檔案的 fingerprint，與上述 GPU 紀錄完全一致。GitHub exact-head CI 與 main 部署結果由交付 commit／PR 及 Actions run 對照確認。
+
+
+## 2026-10-11：TransLink Nova 門位校正
+
+本節取代上方 2026-10-09 的尺寸、來源 pins 與 payload 數字；上方內容保留為當時的整合紀錄。校正依據是 [TransLink Bus Infrastructure Design Guidelines（2018）圖 1.2.11](https://www.translink.ca/-/media/translink/documents/plans-and-projects/managing-the-transit-network/transit-oriented-communities/bus_infrastructure_design_guidelines-sept_2018.pdf#page=25) 的典型 Nova 巴士尺寸，以及 [Nova LFS 原廠規格](https://us.novabus.com/wp-content/uploads/sites/2/2017/09/LFS_Diesel_brochure_nov2020_EN_US.pdf) 的 244 inch 軸距。這次校正門位與縱向布局，既有車寬、外觀設計與滑門機構保留，不宣稱完整原廠車型複製。
+
+| 項目 | 校正結果（米；車軸中點為原點，+Z 為車頭） |
+| --- | --- |
+| 車身／軸距 | 車尾 Z −6.30、車頭 +6.10；名義長 12.40、軸距 6.20 |
+| 前門 | Z 4.00–5.20；中心 +4.60、寬 1.20 |
+| 後門 | Z −2.30–−1.40；中心 −1.85、寬 0.90 |
+| 前後門中心間距 | 6.45（原為 4.90） |
+| 門檻／低地板 | Y 0.36；兩門完整位於低地板區 |
+| 後台階 | 第一階 Z −2.74–−2.50，Y 0.52；第二階 −2.98–−2.74，Y 0.68 |
+| 後平台 | Z −6.12–−2.98，Y 0.68 |
+
+外殼、原簡易內裝、B-CAB budget 與 reference 品質內裝一起修改；預設廉價車流模型也使用相同門位、軸距與車身長度。24 個 v2 座位 ID 保留，17 個後區座位隨平台後移 0.65 m。前門加寬後另調整右側鏡架，讓開門動畫保持避讓；停車採樣與實體車身碰撞改讀 metadata 的真實邊界，涵蓋延長的車尾。
+
+來源修訂固定為 `5fe7734ea1b2edfc02069128cb676509e6ac63af`。三套部署來源版本皆為 1.1.0；可變 manifest 請求使用 `cache: 'no-cache'` 重新驗證，GLB 仍使用來源 hash URL。canonical projection、source／GLB hash gate 與既有品質上限保持強制檢查。
+
+| 套件 | LOD0：三角形／bytes | LOD1：三角形／bytes | 材質批次 |
+| --- | ---: | ---: | ---: |
+| Exterior | 2,342／175,400 | 1,782／140,484 | 21 |
+| B-CAB budget | 11,704／737,440 | 2,824／202,792 | 11 |
+| Reference | 278,528／8,617,716 | 92,096／2,989,520 | 13 |
+
+B-CAB 三角形數、reference 的 256² 地板 PNG、六模板上限、單台 parked owner 與車流 budget 政策保持一致。public inventory 的 38 筆之中僅更新 12 筆 bus／bus-v2／bus-closeup，其他 26 筆資產逐一與 main 基準 `22a5acc67b8ef96d2f87137125e3fef39cd43350` 比較 byte-identical。
+
+來源驗證：原外殼／簡易內裝 12 個回歸測試、v2 三套 106 個 Python 測試通過；實際門洞、開門掃掠、台階與部署門檻採用 GLB 三角面檢查。11 份 Blender 4.5.12 LTS 來源重新開啟、匯出及編輯探針通過；六份 v2 匯出與 sidecar 位元組一致，五份 v1 中三份位元組一致，另外兩份幾何數量／邊界一致。歷史預覽圖片明確標為非本次資產驗收；原未部署 master 的既有門檻間隙保留紀錄，四份部署 budget/reference LOD 均有連續支撐。
+
+
+整合驗收：`npm test` **1,023／1,023**、型別檢查、修改檔案 scoped lint、architecture GLB audit 均通過。新增獨立 Nova 尺寸、實際外殼開門門洞與完整停車邊界回歸；舊版快取必須拒絕載入 GLB，同一 instance 重試新版可成功，三套可變 manifest 均檢查 `no-cache`。
+
+GPU 驗收使用 Chrome 155.0.8059.39、AMD Radeon Pro 560X（ANGLE Metal）、1280×720／DPR 1 的實際城市 renderer，三種 profile 進行三次上下車及 72 次座位選取；Auto 參觀搭配固定 balanced 城市品質選用 reference LOD1，Light 為 budget，Detailed 為 reference LOD0。12 個整合 checkpoint 全部有效，沒有 bus asset／worker error 或 fallback；上車時鎖定內裝品質，關閉後 owner=0，六模板上限成立。日／夜截圖核對站位與向內的 priority seat 24；完整座位相機與後平台位移另由實際 runtime／幾何測試驗證。唯一 console resource failure 是 localhost 缺少 favicon 的 404，沒有模型或程式例外。即時 FPS 是當下 checkpoint，未作效能改善百分比宣稱。
+
+最新的 [驗收索引](qa/bus-nova-20261011/acceptance.json)、12 個 JSON 及五張實際 renderer PNG 保存在 `docs/qa/bus-nova-20261011/`。正式部署使用另外的無 QA build，保留 production source isolation 與所有 adoption gates。

@@ -31,7 +31,7 @@
     {
       "check": "floor-standing-and-seat-fit",
       "status": "pass",
-      "samples": 128,
+      "samples": 142,
       "detail": "0.50 m square body envelope, 0.15 m centreline samples; 1.95 m low-floor standing and separate conservative 1.50 m seated wheelchair envelope. Raised rear is seated-only and never exposed as a standing anchor."
     },
     {
@@ -49,7 +49,7 @@
     {
       "check": "actual-triangle-floor-step-and-continuous-threshold-support",
       "status": "pass",
-      "samples": 3306,
+      "samples": 3402,
       "detail": "Every upward floor/step triangle is coplanar with its declared datum; dense vertical-ray grids and both continuous portal-to-aisle thresholds agree within 0.02 mm. Decorative ramp/edge overlays are not navigation support surfaces."
     },
     {
@@ -90,7 +90,7 @@
       "component": "low-floor-slab",
       "expectedHeightM": 0.36,
       "upwardTriangles": 2,
-      "verticalRaySamples": 833,
+      "verticalRaySamples": 952,
       "maximumHeightDeviationM": 1.4305114759416426e-08
     },
     {
@@ -117,7 +117,7 @@
       "component": "raised-rear-slab",
       "expectedHeightM": 0.68,
       "upwardTriangles": 2,
-      "verticalRaySamples": 442,
+      "verticalRaySamples": 374,
       "maximumHeightDeviationM": 7.152557324197062e-09
     },
     {
@@ -126,7 +126,7 @@
       "component": "door-front-threshold-slab",
       "expectedHeightM": 0.36,
       "upwardTriangles": 2,
-      "verticalRaySamples": 27,
+      "verticalRaySamples": 30,
       "maximumHeightDeviationM": 1.4305114759416426e-08
     },
     {
@@ -135,7 +135,7 @@
       "component": "door-rear-threshold-slab",
       "expectedHeightM": 0.36,
       "upwardTriangles": 2,
-      "verticalRaySamples": 27,
+      "verticalRaySamples": 21,
       "maximumHeightDeviationM": 1.4305114759416426e-08
     },
     {
@@ -168,7 +168,7 @@
       "component": "low-floor-slab",
       "expectedHeightM": 0.36,
       "upwardTriangles": 2,
-      "verticalRaySamples": 833,
+      "verticalRaySamples": 952,
       "maximumHeightDeviationM": 1.4305114759416426e-08
     },
     {
@@ -195,7 +195,7 @@
       "component": "raised-rear-slab",
       "expectedHeightM": 0.68,
       "upwardTriangles": 2,
-      "verticalRaySamples": 442,
+      "verticalRaySamples": 374,
       "maximumHeightDeviationM": 7.152557324197062e-09
     },
     {
@@ -204,7 +204,7 @@
       "component": "door-front-threshold-slab",
       "expectedHeightM": 0.36,
       "upwardTriangles": 2,
-      "verticalRaySamples": 27,
+      "verticalRaySamples": 30,
       "maximumHeightDeviationM": 1.4305114759416426e-08
     },
     {
@@ -213,7 +213,7 @@
       "component": "door-rear-threshold-slab",
       "expectedHeightM": 0.36,
       "upwardTriangles": 2,
-      "verticalRaySamples": 27,
+      "verticalRaySamples": 21,
       "maximumHeightDeviationM": 1.4305114759416426e-08
     },
     {
@@ -244,13 +244,13 @@
   "inputHashes": [
     {
       "file": "exports/city-bus-12m-interior-v2-runtime.lod0.glb",
-      "sha256": "76302cf2d45d5c027a412c6087231b65605d982b3ec2634942b6910ab002c096",
-      "sidecarSha256": "fc063772f14f8b21f08f76eb098038ab03ffbe25a4eed29876b8108cd30fb783"
+      "sha256": "a404980c38de9d072ba9fb27a034239bb57ab50ceafb0f834290bc9849d08fa9",
+      "sidecarSha256": "9c7450491a3bc800bcc2787158ef1e31c5532e056389af471f35635973f91073"
     },
     {
       "file": "exports/city-bus-12m-interior-v2-runtime.lod1.glb",
-      "sha256": "6d5ab5aa5d7074d7c844a48d88dbc4a4e2fd5c3f07b24b0aa6f0f4fcce0ba587",
-      "sidecarSha256": "fd656101f5c81f6b25051a5e592f2f12888cda369a88875b3c8c1fc383133bcd"
+      "sha256": "e286475d2f4fd400d768256bb39a633f6a38146179c0414115885d1ab8420e34",
+      "sidecarSha256": "6555e1ea0e2bd2ed39080863bff96fdc3508f787b03017d9d6cb981e9b64859f"
     }
   ]
 }

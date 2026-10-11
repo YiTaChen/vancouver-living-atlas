@@ -70,7 +70,7 @@ async function sandbox(run, copySources = false) {
   }
 }
 
-test('closeup adoption adds only three pinned files and preserves all old public adoption entries and payloads', async () => {
+test('Nova door correction replaces only the reviewed bus packages and preserves unrelated public payloads', async () => {
   const inventory = JSON.parse(
     await readFile('public/models/blender/adopted-manifest.json', 'utf8'),
   );
@@ -79,14 +79,15 @@ test('closeup adoption adds only three pinned files and preserves all old public
       'git',
       [
         'show',
-        `${BUS_CLOSEUP_SOURCE_REVISION}:public/models/blender/adopted-manifest.json`,
+        '22a5acc67b8ef96d2f87137125e3fef39cd43350:public/models/blender/adopted-manifest.json',
       ],
       { encoding: 'utf8' },
     ),
   );
+  const unchanged = (entry) => !/^(bus|bus-v2|bus-closeup)\//.test(entry.path);
   assert.deepEqual(
-    inventory.files.filter((entry) => !entry.path.startsWith('bus-closeup/')),
-    baseline.files,
+    inventory.files.filter(unchanged),
+    baseline.files.filter(unchanged),
   );
   assert.deepEqual(
     inventory.files.filter((entry) => entry.path.startsWith('bus-closeup/')),
@@ -99,13 +100,13 @@ test('closeup adoption adds only three pinned files and preserves all old public
     ).length,
     19,
   );
-  for (const entry of baseline.files) {
+  for (const entry of baseline.files.filter(unchanged)) {
     const file = 'public/models/blender/' + entry.path;
     assert(
       (await readFile(file)).equals(
         execFileSync(
           'git',
-          ['show', `${BUS_CLOSEUP_SOURCE_REVISION}:${file}`],
+          ['show', `22a5acc67b8ef96d2f87137125e3fef39cd43350:${file}`],
           { maxBuffer: 20 * 1024 * 1024 },
         ),
       ),
@@ -229,7 +230,7 @@ test('actual source GLBs and their source/sidecar/image dependencies all bind; o
   );
   assert.deepEqual(
     budget.manifest.assets[0].lods.map((lod) => lod.bytes),
-    [736884, 202492],
+    [737440, 202792],
   );
 });
 

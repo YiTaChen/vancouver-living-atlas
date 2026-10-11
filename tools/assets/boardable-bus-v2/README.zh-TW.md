@@ -84,3 +84,10 @@ License: Vancouver Living Atlas Noncommercial Research and Attribution 1.0
 ### 詳細 master 繼承的門檻支撐缺口
 
 加做實際三角面射線時確認：內裝地板只到 X=−1.15 m，原外裝門框位於 X=−1.25 m，兩門各有 0.10 m 寬度缺少開門狀態下的支撐面。原先兩門通道檢查是人體通行淨空，不代表完整門檻支撐已通過。這是既有詳細版／原外裝的缺口，不能直接當作已可連續步行登車。獨立 [runtime-candidate](runtime-candidate/README.zh-TW.md) 的支撐修正與驗證另列，不改写詳細 master 的來源／後區頂點證明。
+
+
+## 2026-10-11 門位修正
+
+依 TransLink 官方 Nova 標準車尺寸圖修正前後門位與門寬，前後門中心距為 6.45 m。同步調整內裝門口、窗框、扶手、低地板門檻與後段台階，保留 24 個座位及近景內裝材質/細節。可編輯來源由 `revise_nova_doors.py` 局部修改，不以重新建模取代既有精緻曲面。
+
+目前幾何與來源驗證見 `qa/validation.json`、`qa/blender-validation.json`、`qa/nova-door-correction.json`。舊版預覽與視覺審查保留原有圖片/hash，明確註記 `validForCurrentAssets: false`；它們不代表這次門位修正的畫面驗收。仍是依官方典型配置修正的遊戲模型，並非工廠圖精確重製或無障礙認證。

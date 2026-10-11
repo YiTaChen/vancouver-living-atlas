@@ -9,6 +9,7 @@ import type { BusVisitProfile } from './bus-visit-policy';
 const MANIFEST_URL = '/models/blender/bus/manifest.json';
 const V2_MANIFEST_URL = '/models/blender/bus-v2/manifest.json';
 const REFERENCE_MANIFEST_URL = '/models/blender/bus-closeup/manifest.json';
+const BUS_ASSET_VERSION = '1.1.0' as const;
 const ROLES = [
   'paint',
   'rubber',
@@ -40,7 +41,7 @@ export interface BusRuntimeManifest {
     | 'boardable-bus'
     | 'boardable-bus-v2-runtime-candidate'
     | 'boardable-bus-v2-closeup-quality';
-  version: '1.0.0';
+  version: typeof BUS_ASSET_VERSION;
   units: 'm';
   vehicles: Record<string, unknown>[];
   assets: { id: string; lods: BusLod[] }[];
@@ -115,7 +116,7 @@ function manifestContract(
         : v2
           ? 'boardable-bus-v2-runtime-candidate'
           : 'boardable-bus') ||
-    m.version !== '1.0.0' ||
+    m.version !== BUS_ASSET_VERSION ||
     m.units !== 'm' ||
     !Array.isArray(m.assets) ||
     !Array.isArray(m.vehicles)
@@ -345,7 +346,7 @@ export class CityBusAssets {
         options.interiorVersion === 'v2'
           ? 'boardable-bus-v2-runtime-candidate'
           : 'boardable-bus',
-      version: '1.0.0',
+      version: BUS_ASSET_VERSION,
       project: 'Vancouver Living Atlas by YiTaChen',
       source: 'https://github.com/YiTaChen/vancouver-living-atlas',
       license:
@@ -370,6 +371,7 @@ export class CityBusAssets {
           this.options.interiorVersion === 'v2'
             ? V2_MANIFEST_URL
             : MANIFEST_URL,
+          { cache: 'no-cache' },
         );
         if (!response.ok)
           throw new Error(`Bus manifest load failed (${response.status})`);
@@ -393,7 +395,9 @@ export class CityBusAssets {
         if (this.disposed) throw new Error('Bus assets disposed');
         if (this.options.fetchReferenceManifest)
           return this.options.fetchReferenceManifest();
-        const response = await fetch(REFERENCE_MANIFEST_URL);
+        const response = await fetch(REFERENCE_MANIFEST_URL, {
+          cache: 'no-cache',
+        });
         if (!response.ok)
           throw new Error(
             `Bus reference manifest load failed (${response.status})`,

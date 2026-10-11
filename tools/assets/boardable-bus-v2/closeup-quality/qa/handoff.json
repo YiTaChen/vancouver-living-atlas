@@ -61,5 +61,9 @@
     "tools/assets/boardable-bus-v2/README.zh-TW.md",
     "tests/bus-closeup-quality.test.mjs"
   ],
-  "unrelatedTestGeneratedChanges": "Three QA JSON changes under material-consumer-candidates and roadster-driver-fit are parent-owned test outputs and not part of this asset change."
+  "unrelatedTestGeneratedChanges": "Three QA JSON changes under material-consumer-candidates and roadster-driver-fit are parent-owned test outputs and not part of this asset change.",
+  "evidenceRevision": "historical_before_nova_door_correction",
+  "historicalSourceCommit": "22a5acc67b8ef96d2f87137125e3fef39cd43350",
+  "validForCurrentAssets": false,
+  "supersededBy": "nova-door-correction.json"
 }

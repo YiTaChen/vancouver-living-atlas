@@ -1,4 +1,5 @@
-"""Original editable D02/D03 representative bus. Never regenerate artist sources.
+"""Editable D02/D03 representative bus with authorized 2026-10-11 door correction.
+The CLI creates a fresh source set and refuses to overwrite existing artist files.
 All construction coordinates below are glTF metres (X right-to-left,Y up,Z front).
 Blender authoring maps these once to (x,-z,y); export maps back to standard glTF.
 """
@@ -7,9 +8,8 @@ from pathlib import Path
 import bpy,bmesh
 from mathutils import Vector
 HERE=Path(__file__).resolve().parent
-BODY=(-5.8,6.2); AXLES=(-3.1,3.1); FLOOR=.36
-DOORS=[('front',3.7,4.85),('rear',-1.2,-.05)]
-SEATS=[(x,z) for z in [-4.85,-4.05,-1.85,.50,1.30,2.10] for x in [-.83,.83] if not (x<0 and z in [.50,1.30])]
+sys.path.insert(0,str(HERE))
+from door_layout import BODY,AXLES,FLOOR,DOORS,SEATS,leaf_dimensions
 BINDINGS={
  'paint':('paint','automotive-paint',(.055,.21,.37,1),.32,.18),
  'rubber':('rubber','rubber',(.025,.035,.045,1),.83,0),
@@ -77,17 +77,18 @@ def merge_static(exclude):
   obs=[o for o in bpy.context.scene.objects if o.type=='MESH' and o.name not in exclude and o.parent==ROOT and o.get('semantic_role')==role]
   join_role(obs,{'paint':'body-shell','rubber':'body-trim','glass':'glass','lights':'lights'}[role])
 
-def door_leaf(group,z,sign,lod):
+def door_leaf(group,z,sign,lod,width):
+ dims=leaf_dimensions(width);leaf=dims['width'];travel=dims['travel']
  name=f'door-right-{group}-{("a" if sign<0 else "b")}'
  node=empty(name,(-1.25,FLOOR,z));node['dynamic']='independent plug-slide door leaf'
- box(name+'-frame',(0,1.04,0),(.054,2.08,.56),'paint',node)
+ box(name+'-frame',(0,1.04,0),(.054,2.08,leaf),'paint',node)
  # Explicit glass window is inset but leaf panel is not behind it: replace broad frame by border strips.
  ob=bpy.data.objects.get(name+'-frame');bpy.data.objects.remove(ob,do_unlink=True)
- for zz in [-.255,.255]:box(name+'-stile',(0,1.04,zz),(.054,2.08,.05),'paint',node)
- for yy in [.025,1.02,2.055]:box(name+'-crossbar',(0,yy,0),(.054,.05,.46),'paint',node)
- for yy,h in [(.515,.93),(1.54,.96)]:box(name+'-glass',(0,yy,0),(.014,h,.46),'glass',node)
+ for zz in [-(leaf/2-.025),leaf/2-.025]:box(name+'-stile',(0,1.04,zz),(.054,2.08,.05),'paint',node)
+ for yy in [.025,1.02,2.055]:box(name+'-crossbar',(0,yy,0),(.054,.05,leaf-.10),'paint',node)
+ for yy,h in [(.515,.93),(1.54,.96)]:box(name+'-glass',(0,yy,0),(.014,h,leaf-.10),'glass',node)
  # 0 -> outward plug -> longitudinal slide. Linear keys prevent hidden overshoot.
- for frame,x,zz in [(1,-1.25,z),(7,-1.39,z),(25,-1.39,z+sign*.62)]:
+ for frame,x,zz in [(1,-1.25,z),(7,-1.39,z),(25,-1.39,z+sign*travel)]:
   node.location=cv((x,FLOOR,zz));node.keyframe_insert(data_path='location',frame=frame)
  action=node.animation_data.action;action.name=name+'-open'
  for fc in action.fcurves:
@@ -103,18 +104,18 @@ def exterior(lod):
  global ROOT;ROOT=clean();mats();exclude=[]
  if lod==2:
   # Deliberately closed nonboarding fallback. Animated node IDs remain as anchors only.
-  box('fallback-body',(0,1.54,.2015),(2.50,2.56,11.997),'paint')
+  box('fallback-body',(0,1.54,-.0985),(2.50,2.56,12.397),'paint')
   # Closed opaque far-view glazing cue; no opening or passenger capability.
   glass=M['glass'];bs=glass.node_tree.nodes.get('Principled BSDF');bs.inputs['Alpha'].default_value=1;bs.inputs['Base Color'].default_value=(.025,.05,.065,1);glass.diffuse_color=(.025,.05,.065,1)
   box('roof-equipment',(0,2.945,-1.45),(1.70,.25,4.5),'paint');exclude.append('roof-equipment')
-  for side in [-1,1]:box('mirror-'+str(side),(side*1.43,2.26,5.70),(.18,.28,.16),'rubber')
-  box('fallback-window-right',(-1.254,1.92,.2),(.01,.94,10.8),'glass')
-  box('fallback-window-left',(1.254,1.92,.2),(.01,.94,10.8),'glass')
-  box('fallback-windscreen',(0,1.90,6.205),(2.12,1.1,.01),'glass')
-  box('fallback-rear-window',(0,1.92,-5.799),(2.12,.94,.002),'glass')
+  for side in [-1,1]:box('mirror-'+str(side),(side*1.43,2.26,5.98),(.18,.28,.16),'rubber')
+  box('fallback-window-right',(-1.254,1.92,-.1),(.01,.94,11.2),'glass')
+  box('fallback-window-left',(1.254,1.92,-.1),(.01,.94,11.2),'glass')
+  box('fallback-windscreen',(0,1.90,6.105),(2.12,1.1,.01),'glass')
+  box('fallback-rear-window',(0,1.92,-6.299),(2.12,.94,.002),'glass')
  else:
   # Side lower panels are real extruded cutout polygons. Wheels do not cover a solid wall.
-  breaks=sorted(set([-5.8,5.9]+[v for z in AXLES for v in [z-.64,z+.64]]+[v for _,a,b in DOORS for v in [a,b]]))
+  breaks=sorted(set([-6.3,5.8]+[v for z in AXLES for v in [z-.64,z+.64]]+[v for _,a,b in DOORS for v in [a,b]]))
   for side in [-1,1]:
    for i,(a,b) in enumerate(zip(breaks,breaks[1:])):
     if side<0 and any(a>=d0-1e-6 and b<=d1+1e-6 for _,d0,d1 in DOORS):continue
@@ -126,8 +127,8 @@ def exterior(lod):
      poly=lower+[(1.16,b),(1.16,a)]
     slab(f'lower-{side}-{i}',poly,0,side*1.215-.035,side*1.215+.035,'paint')
    # Upper rim / separate window mullions stop at door openings, leaving actual clear portals.
-   box(f'cantrail-{side}',(side*1.22,2.63,.05),(.06,.18,11.70),'paint')
-   stations=[-5.68,-4.45,-3.25,-2.05,-1.25,.0,1.25,2.5,3.65,4.90,5.70]
+   box(f'cantrail-{side}',(side*1.22,2.63,-.25),(.06,.18,12.10),'paint')
+   stations=[-6.18,-4.45,-3.25,-2.05,-1.25,.0,1.25,2.5,3.65,4.90,5.60]
    if side<0:stations=[v for v in stations if not any(a<v<b for _,a,b in DOORS)]
    for i,z in enumerate(stations):box(f'pillar-{side}-{i}',(side*1.22,1.82,z),(.06,1.32,.07),'paint')
    windows=[]
@@ -144,32 +145,33 @@ def exterior(lod):
     for z in [a-.025,b+.025]:box('door-jamb',(side*1.22,1.41,z),(.06,2.10,.05),'paint')
     box('door-header',(side*1.22,2.50,(a+b)/2),(.06,.08,b-a+.10),'paint')
   # Rounded/chamfered front wraps around an angled front windshield; no enclosed solid cabin box.
-  frontpoly=[(-1.25,5.88),(-1.10,6.12),(-.95,6.20),(.95,6.20),(1.10,6.12),(1.25,5.88)]
+  frontpoly=[(-1.25,5.78),(-1.10,6.02),(-.95,6.10),(.95,6.10),(1.10,6.02),(1.25,5.78)]
   for i in range(len(frontpoly)-1):
    (x0,z0),(x1,z1)=frontpoly[i:i+2]
    # panel thickness is within front skin, not a solid hull
    mesh('curved-front-'+str(i),[(x0,.30,z0),(x1,.30,z1),(x1,1.12,z1),(x0,1.12,z0),(x0,.30,z0-.055),(x1,.30,z1-.055),(x1,1.12,z1-.055),(x0,1.12,z0-.055)],[(0,1,2,3),(7,6,5,4),(0,4,5,1),(1,5,6,2),(2,6,7,3),(3,7,4,0)],'paint')
-  mesh('front-glass',[(-1.10,1.14,6.10),(1.10,1.14,6.10),(1.10,2.47,5.91),(-1.10,2.47,5.91)],[(0,1,2,3)],'glass')
-  for x in [-1.13,1.13]:cylinder('front-post',(x,1.1,6.1),(x,2.55,5.90),.045,'paint',8)
-  box('front-destination',(0,2.58,5.92),(2.30,.21,.09),'rubber')
+  mesh('front-glass',[(-1.10,1.14,6.00),(1.10,1.14,6.00),(1.10,2.47,5.81),(-1.10,2.47,5.81)],[(0,1,2,3)],'glass')
+  for x in [-1.13,1.13]:cylinder('front-post',(x,1.1,6.0),(x,2.55,5.80),.045,'paint',8)
+  box('front-destination',(0,2.58,5.82),(2.30,.21,.09),'rubber')
   if lod==0:
-   for i in range(11):box('destination-pixel',(i*.12-.6,2.59,5.974),(.065,.065,.012),'lights')
-  box('rear-lower',(0,.72,-5.765),(2.50,.90,.07),'paint')
-  box('rear-header',(0,2.61,-5.765),(2.50,.22,.07),'paint')
-  box('rear-glass',(0,1.86,-5.773),(2.22,1.25,.018),'glass')
-  for x in [-1.2,1.2]:box('rear-post',(x,1.84,-5.765),(.10,1.36,.07),'paint')
+   for i in range(11):box('destination-pixel',(i*.12-.6,2.59,5.874),(.065,.065,.012),'lights')
+  box('rear-lower',(0,.72,-6.265),(2.50,.90,.07),'paint')
+  box('rear-header',(0,2.61,-6.265),(2.50,.22,.07),'paint')
+  box('rear-glass',(0,1.86,-6.273),(2.22,1.25,.018),'glass')
+  for x in [-1.2,1.2]:box('rear-post',(x,1.84,-6.265),(.10,1.36,.07),'paint')
   for group,a,b in DOORS:
-   for sign,z in [(-1,a+(b-a)/4),(1,b-(b-a)/4)]:exclude.append(door_leaf(group,z,sign,lod))
-  box('chassis-left',(.64,.215,.15),(.10,.09,10.8),'rubber');box('chassis-right',(-.64,.215,.15),(.10,.09,10.8),'rubber')
-  box('roof',(0,2.76,.10),(2.50,.12,11.8),'paint')
+   for sign,z in [(-1,a+(b-a)/4),(1,b-(b-a)/4)]:exclude.append(door_leaf(group,z,sign,lod,b-a))
+  box('chassis-left',(.64,.215,-.15),(.10,.09,11.2),'rubber');box('chassis-right',(-.64,.215,-.15),(.10,.09,11.2),'rubber')
+  box('roof',(0,2.76,-.20),(2.50,.12,12.2),'paint')
   box('roof-equipment',(0,2.945,-1.45),(1.70,.25,4.5),'paint',bevel=.035 if lod==0 else 0);exclude.append('roof-equipment')
   for side in [-1,1]:
-   box('mirror-'+str(side),(side*1.43,2.26,5.70),(.18,.28,.16),'rubber')
-   box('mirror-arm-'+str(side),(side*1.31,2.41,5.7),(.28,.04,.04),'paint')
-   box('front-light-'+str(side),(side*.82,.77,6.207),(.23,.14,.016),'lights')
-   box('rear-light-'+str(side),(side*1.02,.77,-5.806),(.14,.26,.012),'lights')
+   box('mirror-'+str(side),(side*1.43,2.26,5.98),(.18,.28,.16),'rubber')
+   box('mirror-arm-'+str(side),(side*1.31,2.41,5.98),(.28,.04,.04),'paint')
+   cylinder('mirror-brace-'+str(side),(side*1.22,2.41,5.60),(side*1.31,2.41,5.98),.022,'paint',8)
+   box('front-light-'+str(side),(side*.82,.77,6.107),(.23,.14,.016),'lights')
+   box('rear-light-'+str(side),(side*1.02,.77,-6.306),(.14,.26,.012),'lights')
   if lod==0:
-   for j in range(5):box('rear-vent',(0,.53+j*.11,-5.809),(1.4,.023,.02),'rubber')
+   for j in range(5):box('rear-vent',(0,.53+j*.11,-6.309),(1.4,.023,.02),'rubber')
  for z,axle in [(-3.1,'rear'),(3.1,'front')]:
   for side,label in [(-1,'right'),(1,'left')]:
    name=f'wheel-{axle}-{label}';node=empty(name,(side*1.13,.49,z));node['spinAxis']='+X glTF';exclude.append(name)
@@ -184,11 +186,12 @@ def exterior(lod):
 
 def interior(lod):
  global ROOT;ROOT=clean();mats();fine=lod==0
- box('floor',(0,.31,.035),(2.30,.10,11.43),'floor')
- box('ceiling',(0,2.65,.05),(2.27,.10,11.38),'panel')
+ box('floor',(0,.31,-.265),(2.30,.10,11.83),'floor')
+ for group,a,b in DOORS:box('door-'+group+'-threshold-slab',(-1.20,.31,(a+b)/2),(.10,.10,b-a),'floor')
+ box('ceiling',(0,2.65,-.25),(2.27,.10,11.78),'panel')
  # Side liners occupy opaque sill bands only; they never close exterior windows or portals.
  for side in [-1,1]:
-  intervals=[(-5.65,5.72)]
+  intervals=[(-6.15,5.62)]
   if side<0:
    for _,a,b in DOORS:intervals=[x for aa,bb in intervals for x in [(aa,min(bb,a)),(max(aa,b),bb)] if x[1]>x[0]]
   for i,(a,b) in enumerate(intervals):box(f'liner-{side}-{i}',(side*1.165,.985,(a+b)/2),(.025,.30,b-a),'panel')
@@ -224,8 +227,8 @@ def interior(lod):
  bpy.context.scene['package']='boardable-bus';bpy.context.scene['asset']='city-bus-12m-interior';bpy.context.scene['lod']=lod
 
 def main():
- ap=argparse.ArgumentParser();ap.add_argument('--output',type=Path,required=True);args=ap.parse_args(sys.argv[sys.argv.index('--')+1:]);out=args.output.resolve();(out/'source').mkdir(parents=True,exist_ok=True)
- for kind,levels in [('exterior',range(3)),('interior',range(2))]:
+ ap=argparse.ArgumentParser();ap.add_argument('--output',type=Path,required=True);ap.add_argument('--exterior-only',action='store_true');args=ap.parse_args(sys.argv[sys.argv.index('--')+1:]);out=args.output.resolve();(out/'source').mkdir(parents=True,exist_ok=True)
+ for kind,levels in ([('exterior',range(3))] if args.exterior_only else [('exterior',range(3)),('interior',range(2))]):
   for lod in levels:
    path=out/'source'/f'city-bus-12m-{kind}.lod{lod}.blend'
    if path.exists():raise RuntimeError('Refusing to overwrite editable source: '+str(path))

@@ -31,7 +31,7 @@
     {
       "check": "floor-standing-and-seat-fit",
       "status": "pass",
-      "samples": 128,
+      "samples": 142,
       "detail": "0.50 m square body envelope, 0.15 m centreline samples; 1.95 m low-floor standing and separate conservative 1.50 m seated wheelchair envelope. Raised rear is seated-only and never exposed as a standing anchor."
     },
     {
@@ -53,7 +53,7 @@
     "Both detailed interior LODs exceed the original B-CAB triangle and byte budgets; optimization is pending.",
     "Three right-side folding places are static stowed geometry, not active seats or deployed seat animation.",
     "Rear deck has 1.92 m headroom and is seated-only; no rear standing anchor is exposed.",
-    "These samples do not establish continuous runtime navigation, accessibility certification, GPU performance or boarding behavior.",
-    "Inherited detailed-master limitation: interior floor ends at X=-1.15 m, exterior portal frame is X=-1.25 m, and the 0.10 m strip has no open-door support triangles at either portal. Door checks above establish clearance, not continuous threshold support. A separately validated derivative may add flush strips."
+    "Inherited detailed-master limitation: interior floor ends at X=-1.15 m, exterior portal frame is X=-1.25 m, and the 0.10 m strip has no open-door support triangles at either portal. Door checks above establish clearance, not continuous threshold support. A separately validated derivative may add flush strips.",
+    "These samples do not establish continuous runtime navigation, accessibility certification, GPU performance or boarding behavior."
   ]
 }

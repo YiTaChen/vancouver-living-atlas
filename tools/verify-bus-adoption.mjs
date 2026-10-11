@@ -5,9 +5,9 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 export const BUS_SOURCE_REVISION =
-  'c9d184a4a176aefecf2aaf2b8341ba4f406f4ee9';
+  '5fe7734ea1b2edfc02069128cb676509e6ac63af';
 export const BUS_SOURCE_MANIFEST_SHA256 =
-  '32a35e7fdaa0f82600f8d161212b952177fae8515ca8095b2d55be118503076e';
+  '6e7ae8d6f0457dc11d4d76729adb307d694edabc42da923e8ec842f078bea041';
 export const BUS_RUNTIME_CONTRACT = 'boardable-bus-runtime-v1';
 export const BUS_PUBLIC_PREFIX = 'models/blender/bus/';
 export const BUS_RUNTIME_METADATA = 'manifest.json';
@@ -34,7 +34,7 @@ export const busMetadataBytes = (metadata) =>
 export function projectBusRuntimeMetadata(manifest) {
   assert.equal(manifest.schemaVersion, 1);
   assert.equal(manifest.packageId, sourcePackage);
-  assert.equal(manifest.version, '1.0.0');
+  assert.equal(manifest.version, '1.1.0');
   assert.equal(manifest.units, 'm');
   const assets = manifest.assets.map((asset) => ({
     ...clone(

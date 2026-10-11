@@ -1,5 +1,10 @@
 {
-  "scope": "Independent close-up-quality deliverable; no inherited assets rewritten",
+  "schemaVersion": 1,
+  "date": "2026-10-11",
+  "revision": "nova-typical-door-layout-20261011",
+  "scope": "This source package only, including explicitly historical evidence; excludes nested independently inventoried derivatives, Python caches, Blender backups and this self-referential inventory.",
+  "fileCount": 51,
+  "totalBytes": 45888476,
   "files": [
     {
       "file": ".gitignore",
@@ -8,13 +13,13 @@
     },
     {
       "file": "README.zh-TW.md",
-      "bytes": 7311,
-      "sha256": "88ae248c51078611b2d5e99cfa2d76a79693358bd5038227c6684690b333d395"
+      "bytes": 8046,
+      "sha256": "4dd25318e2c035583812a59b7adfc79b940975d6e8975befa4091bc5753c18de"
     },
     {
       "file": "adapter.test.mjs",
       "bytes": 3380,
-      "sha256": "6bb74b899573a612fca79939458a17690593296a14adf888ee6520fb636cb183"
+      "sha256": "7ff7dd996f10170c954877714a15ffa25f7444da76d8af4f8009bb57c6f517fb"
     },
     {
       "file": "compose.mjs",
@@ -23,33 +28,33 @@
     },
     {
       "file": "contract.py",
-      "bytes": 12505,
-      "sha256": "1fca99f1c4fcd182f5e0a04a1bc54dbe80a8310b5110b9682af7f025cd630d45"
+      "bytes": 12592,
+      "sha256": "b0c7b88d881f888e7d0e9d01789ce3908e50bbef321c8e11d763bc87bb8826c5"
     },
     {
       "file": "export.py",
-      "bytes": 5139,
-      "sha256": "2f23545d7c16d48b7afe18ffedcd3edc52913349d35ad7114ea6ac0b92afd5c9"
+      "bytes": 5484,
+      "sha256": "65e1ea62d37cb3b69bbc9c77f82e2ff6e2f794e32a2afc97312813960599717d"
     },
     {
       "file": "exports/city-bus-12m-interior-v2-closeup.lod0.components.json",
-      "bytes": 614633,
-      "sha256": "94c772fe84b98c55f259d9a1e54abd8f0aab929b4462e47730179ffb9c8e219e"
+      "bytes": 625332,
+      "sha256": "fb2e8fef5471d5972db9801e110dba9c16b96b6177fbf4f75524a365ac00bc06"
     },
     {
       "file": "exports/city-bus-12m-interior-v2-closeup.lod0.glb",
-      "bytes": 8508968,
-      "sha256": "8174cf56646eec303ad1891222cbd056d8ddea1e593c9a1e7ce70bc77a524a6d"
+      "bytes": 8617716,
+      "sha256": "ac680d0a5f6f9543f21b8310bd33ff578f8ac255a447963d7b0903fb724a594e"
     },
     {
       "file": "exports/city-bus-12m-interior-v2-closeup.lod1.components.json",
-      "bytes": 613151,
-      "sha256": "46d33d4da015a767ed45054c27f26b152557239b0281b3faf610fe6457794786"
+      "bytes": 623805,
+      "sha256": "179e9f803f3ea69d6eaa84a9519075355286382b6f0b3922381098ac6525b988"
     },
     {
       "file": "exports/city-bus-12m-interior-v2-closeup.lod1.glb",
-      "bytes": 2955124,
-      "sha256": "7ab9103a047a7acd48f78433e3b982a475592e2f6a747e1c7533685b4053de45"
+      "bytes": 2989520,
+      "sha256": "c7073c7c52abfc044146bd2fc999671700a18ebcf9e258ef5b8c64cd573261ae"
     },
     {
       "file": "finalize.py",
@@ -58,23 +63,23 @@
     },
     {
       "file": "manifest.json",
-      "bytes": 775185,
-      "sha256": "2d3a1abbbc35ddc161a154c0a262b42493fe2601c368dde05cd6b3a81b699726"
+      "bytes": 786803,
+      "sha256": "912d1ebee982273a9b9e255bf184f4366589b2fe00849b6e2b2a4fd960474c75"
     },
     {
       "file": "qa/adapter-tests.txt",
       "bytes": 710,
-      "sha256": "1ae97ebed77fd9a3353671e31a1fa4bda842c561cd19f235266c8e154e2f7153"
+      "sha256": "f1199ea40f591beb4c7aebd7530ad83a5f1ffe78303640ced80eb6440fffb3c4"
     },
     {
       "file": "qa/blender-validation.json",
-      "bytes": 2200,
-      "sha256": "bb744232ae7bc63dfac51b167d88e7eeea55e1cca3aa29e1ee2ddcea2e31e1c9"
+      "bytes": 2205,
+      "sha256": "82a2b288412368074b085c58d699a8b06e3134e3b793c8507c1904fb9733f713"
     },
     {
       "file": "qa/common-validation.json",
-      "bytes": 7553,
-      "sha256": "bad45412b0150f27a14d0424d57cfc583da4f35131b0aec3f2aff510c81cea71"
+      "bytes": 7555,
+      "sha256": "fba8587bc4a79ca9fd5741ac08a253787c3d313842db7bb9769ceea8914518e9"
     },
     {
       "file": "qa/component-costs.json",
@@ -88,23 +93,28 @@
     },
     {
       "file": "qa/derivation-lod0.json",
-      "bytes": 19404,
-      "sha256": "e53a7b5c624aa613c3876cd8065096a61888c0245491548b0734a38cb57b3463"
+      "bytes": 19621,
+      "sha256": "15f8eb7e43931146bad90c6826690b045be6c0af0ecd803f9183771927996061"
     },
     {
       "file": "qa/derivation-lod1.json",
-      "bytes": 19277,
-      "sha256": "ef154df7861560a1272914534d080744f4ae5f9ab475f0b817fb03d5a6ca57c3"
+      "bytes": 19494,
+      "sha256": "51b0e0490194582d52e950cc2c392b0f9f059ceefccd9f170fe12466e02a6c8d"
     },
     {
       "file": "qa/handoff.json",
-      "bytes": 2642,
-      "sha256": "a46e4ee4e77063d207f76a27fe31d9027f0747cf73eadf06abab0614bf3e0421"
+      "bytes": 2859,
+      "sha256": "1c27e72d420e5dbcd446f1cb12121dcbe31e536138a3e695d9d417b9ded2d1b5"
     },
     {
       "file": "qa/measurements.json",
-      "bytes": 7170,
-      "sha256": "95e7d3d9fd7dbc7990c02454998e4c2777cbce67d96a2f43ef6b740c501c0d6f"
+      "bytes": 7172,
+      "sha256": "01836ce622a7bdabb0634c3e5aacce3ac910aeeba0c7371ac03b6da388ece7df"
+    },
+    {
+      "file": "qa/nova-door-correction.json",
+      "bytes": 3086,
+      "sha256": "a625e46193920cf586a4d24484c9c5ea1ec8c65c5b08e0c99f33c19eec5d3d4d"
     },
     {
       "file": "qa/previews/cabin-baseline-master.png",
@@ -138,8 +148,8 @@
     },
     {
       "file": "qa/previews/index.json",
-      "bytes": 18656,
-      "sha256": "96c6d5cacb16d99c658611b658edff3fc6b264416a54749c42472f20df2a8109"
+      "bytes": 18876,
+      "sha256": "6bc9386516f6dd26131e3f68d260f79ccffd04121724355aa2251615f8d7ec1c"
     },
     {
       "file": "qa/previews/rear-quality-lod0.png",
@@ -193,23 +203,23 @@
     },
     {
       "file": "qa/provenance.json",
-      "bytes": 4503,
-      "sha256": "740594fda51e1c09d6a6e815b584907c383cd76e04ecebf0fd8c1f2654493f83"
+      "bytes": 4720,
+      "sha256": "86ce992bb6e8350a2f75ccc5dc59975200be1337a41a4f5c17e46329e7baf688"
     },
     {
       "file": "qa/regression-tests.txt",
-      "bytes": 4222,
-      "sha256": "fac0c5fe924b33abbe22d5a03990e9157c31be947e7d269e708d4d86ca4e809e"
+      "bytes": 4221,
+      "sha256": "988f54a60012a78a9dcfcd46e7b786ee68bb5c1d3012bbd20953f1d115b72a1d"
     },
     {
       "file": "qa/validation.json",
       "bytes": 10550,
-      "sha256": "9afa110010e2757ebe5499b8a253d5a028d228e6ecf129e94d2e081ae00dad03"
+      "sha256": "811726887e782364cba190c90a30beb9008ef4151318dd53281d5d3d246ab663"
     },
     {
       "file": "qa/visual-review.json",
-      "bytes": 9449,
-      "sha256": "c34495dcbbb14ea1165eb942d6c9be7982e079c087615f465b01b368131c0135"
+      "bytes": 9666,
+      "sha256": "5a7329539c567b9f4896b24e4d613d00aeb55df5a1836329a00cb12cb32a2deb"
     },
     {
       "file": "qa_blender.py",
@@ -223,18 +233,18 @@
     },
     {
       "file": "refine.py",
-      "bytes": 20656,
-      "sha256": "6b660ad218f1fee766693af6b448987fde61fa194564239917b3f10423787ff1"
+      "bytes": 20617,
+      "sha256": "fb337494db1a25dd34469869f70a1ac4e99020a85e9b18b6b1d29da3d4d8f7e4"
     },
     {
       "file": "source/city-bus-12m-interior-v2-closeup.lod0.blend",
-      "bytes": 1351069,
-      "sha256": "a66a2606157c27b59163587fda84f6b17f5e9d8d6e02e8f70220a4d22ff99073"
+      "bytes": 1342063,
+      "sha256": "242edd164014fe319826532e839d8dde6dc0719231eeb181fe5347723ae7f4b3"
     },
     {
       "file": "source/city-bus-12m-interior-v2-closeup.lod1.blend",
-      "bytes": 633013,
-      "sha256": "f78fc08fa5ea5c7e3dcd98b527a6d9570dca9eedd4dfdd46d59da648c6c732b3"
+      "bytes": 649875,
+      "sha256": "f7c2c55bcef6341f2e6d77f364f5e78f0675f4e7a44bf2c36cdf9913b2978c4a"
     },
     {
       "file": "source/floor-speckle.png",
@@ -248,12 +258,8 @@
     },
     {
       "file": "validate.py",
-      "bytes": 20283,
-      "sha256": "44b2956ed9c53d931f9c6f971d5bf1dffa94614e018345147f3809a2e32982c7"
+      "bytes": 20487,
+      "sha256": "78084c5b93405f9af6a668b9bab90451e8ba661dcb939c381f712543094d81a4"
     }
-  ],
-  "defaultTest": {
-    "file": "tests/bus-closeup-quality.test.mjs",
-    "sha256": "aac80898fa0dbb5194f05f88d24fc9d502b9f3295250ecc241f8d073fdaea22e"
-  }
+  ]
 }

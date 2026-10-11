@@ -1,4 +1,4 @@
-# 12 m 代表性低地板公車：可編輯離線交付
+# 12 m 等級代表性低地板公車：可編輯來源
 
 Based on Vancouver Living Atlas by YiTaChen  
 Source: https://github.com/YiTaChen/vancouver-living-atlas  
@@ -6,22 +6,32 @@ License: [Vancouver Living Atlas Noncommercial Research and Attribution 1.0](../
 
 本包完成 D02 外觀、D03 車廂的離線建模與接口；D06、WebGL、正式載入及部署仍為 `runtime_pending_webgl`。現有 `lib/city/city-buses.ts`、`public/` 與舊資產不變。實際完成狀態與數值以 `manifest.json`、`qa/handoff.json` 及驗證紀錄為準。
 
+## 2026-10-11 門位校正
+
+使用者核准按 TransLink BIDG2018 Figure 1.2.11 的 Nova 典型公車尺度校正：body Z=−6.30..6.10（12.4 m），輪軸保持 Z=±3.10。前門中心 Z=4.60，後門中心 Z=−1.85，中心距離 6.45 m；左右方向、2.50 m 車寬與 Y=.36 門檻保留。這是門位／車長校正，其他原創外觀保留，不宣稱完整品牌車款複製。
+
+[door_layout.py](door_layout.py) 是 builder／metadata 的共同尺度來源。前門每葉 .585 m、後門每葉 .435 m，各有獨立 plug-slide clip；前門變寬後，後視鏡移至 Z=5.98 並加支架，實際掃掠確認不碰撞。舊版十席內裝一併調整：seat-05／06 由 Z=−1.85 移至 −.95，避免佔據後門或後輪拱；兩門加入齊平支撐板，floor／ceiling 隨車長延伸，其他座位 ID 與原材質保留。
+
+本次以 **Blender 4.5.12 LTS** 在新 `/tmp` 目錄產生五個可編輯來源，再安裝並從 `.blend` 匯出；原檔可由 Git 歷史恢復。[來源遷移紀錄](qa/source-migration-20261011.json) 記錄前後雜湊；`export.py` 仍只重開來源，不呼叫 builder。當前 geometry validator、12 個回歸測試、五個來源重開／匯入與 mesh／material／custom property 編輯保存檢查通過。同版本重新匯出 3／5 byte-identical；兩檔 LOD0 的重新匯出 bytes 不同，幾何數量、bounds 與編輯保存檢查通過，不宣稱五檔完全一致。
+
+**既有 `qa/previews/`、visual review 與 handoff 是校正前的歷史證據，不能當作新門位的視覺驗收。** 其 index 明確標示 historical；本次實際門位／動畫與支撐證據見 `qa/validation.json`、`qa/blender-validation.json`、`qa/door-layout-validation-20261011.json`。正式 consumer／public projection／GPU 驗收由整合者同步處理。下面的 CPU 預覽描述保留原封存流程，尚未重生全部校正後預覽。
+
 ## 模型與尺度
 
 - 原創、無照片／下載模型／品牌標誌的 12 m 等級研究車型。它是專案代表性提案，不是 New Flyer 的完整實測，也不是無障礙法規認證。
-- 車體約寬 2.50 m、長 12.00 m。含後通風／燈、鏡子及屋頂設備的 LOD0 bounds 約為 3.04 × 3.07 × 12.034 m。**完整寬不等於車廂淨寬。**
+- 車體約寬 2.50 m、長 12.40 m。含後通風／燈、鏡子及屋頂設備的 LOD0 bounds 約為 3.04 × 3.07 × 12.434 m。**完整寬不等於車廂淨寬。**
 - glTF：+Y 向上、+Z 前進、−X 右側門。Blender：(x,y,z) 一次轉為 glTF (x,z,−y)。所有外殼、內裝、collision JSON、門與座位共用 vehicle root。
 - 原點位於輪胎接地面 Y=0、車身中心 X=0、前後輪軸中點 Z=0；軸心 Z=±3.10、Y=.49，輪胎半徑 .49 m。
 - 真實地板頂面 Y=.36；頂棚下緣 Y=2.60，站立淨高 2.24 m。取樣主走道寬 .90 m，超過 .75 m 研究目標。模型為連續低地板方案，沒有未申報台階；wheel-well 是明確障礙。
 - 10 個乘客座位，座寬 .46、深 .44、座面 Y=.81（離地板 .45 m）。每席給 pelvis、facing、camera eye 及相同名稱 Empty。pelvis 不是角色脚底/root。
 - 右側輪椅／嬰兒車空位約 .72 × 1.55 m，沒有座椅或扶手柱佔用；這是代表性留空區。
-- 前門 Z=3.70..4.85、後門 Z=−1.20..−.05，門洞寬 1.15、高 2.10、sill Y=.36；前後各兩片門均有獨立 GLB action。先外移 .14 m，再縱向滑移 .62 m，避免把門掃進殼體。
+- 前門 Z=4.00..5.20、寬 1.20 m；後門 Z=−2.30..−1.40、寬 .90 m；門高 2.10、sill Y=.36；前後各兩片門均有獨立 GLB action。先外移 .14 m，再縱向滑移前門 .645 m／後門 .495 m，避免把門掃進殼體。
 - 外觀有真中空薄殼、曲折圓角車頭、傾斜前窗、獨立窗面、真輪拱、鏡子、屋頂設備、車燈與四獨立輪組；內裝另有 floor、wheel-well、壁／頂板、駕駛隔板／座席、乘客座席、扶手、停車鈴及小屏幕。
 
 ## 檔案與成本
 
 - exterior：三個獨立壓縮 `.blend`／普通 GLB；LOD0/1 可保留洞口與開門，LOD2 為明確封閉的空車展示 fallback。
-- interior：兩個獨立壓縮 `.blend`／普通 GLB，供近景或載客 lazy-load。source 保留 72／62 個可編輯 mesh 物件；匯出時按 semantic material role 批次為每 LOD **7 primitives**，保留原本 3,760／888 triangles。
+- interior：兩個獨立壓縮 `.blend`／普通 GLB，供近景或載客 lazy-load。source 保留 74／64 個可編輯 mesh 物件；匯出時按 semantic material role 批次為每 LOD **7 primitives**，保留原本 3,784／912 triangles。
 - runtime textures：0；semantic material roles 綁 shared surface ID，沒有每車或每座位私有 maps。玻璃有 alpha、雙面語意，opaque roles 保持 backface culling。
 - `qa/measurements.json` 列實際 triangles／vertices／primitives／bytes／bounds。primitives 不是 GPU 實測 draw calls；開門、關門外觀 primitive 數相同，外觀與內裝合用另列。
 - LOD2 以不透明深色側窗／後窗帶提示輪廓，208 triangles；這些是封閉視覺提示，不是可用洞口。LOD2 完整 bounds、datum、門／輪錨點及不可登乘能力不变。

@@ -61,19 +61,19 @@ def make(lod):
   width=2.30 if name in ['low-floor','raised-rear'] else .65
   box(name+'-slab',(0,(.26+y)/2,(a+b)/2),(width,y-.26,b-a),'floor')
  # Close under-seat portions beside stairs; aisle alone is stepped.
- for side in [-1,1]:box('step-side-plinth-'+str(side),(side*.745,.47,-1.7),(.81,.42,.48),'panel')
+ for side in [-1,1]:box('step-side-plinth-'+str(side),(side*.745,.47,-2.74),(.81,.42,.48),'panel')
  for name,a,b,y in FLOOR_ZONES:
   if 'step' in name:box(name+'-yellow-nosing',(0,y+.002,b-.015),(.65,.004,.030),'marking')
- box('ceiling',(0,2.65,.05),(2.27,.10,11.38),'panel')
+ box('ceiling',(0,2.65,-.185),(2.27,.10,11.85),'panel')
  for side in [-1,1]:
-  intervals=[(-5.65,5.72)] if side>0 else [(-5.65,-1.20),(-.05,3.70),(4.85,5.72)]
+  intervals=[(INTERIOR_REAR,INTERIOR_FRONT)] if side>0 else WALL_INTERVALS
   for i,(a,b) in enumerate(intervals):
    box(f'liner-{side}-{i}',(side*1.165,.97,(a+b)/2),(.025,.30,b-a),'panel')
    box(f'window-sill-{side}-{i}',(side*1.14,1.14,(a+b)/2),(.045,.055,b-a),'rubber')
   # Sloped roof shoulder / advertising strips, below existing exterior cantrail.
-  shoulder=box('roof-shoulder-'+str(side),(side*.96,2.49,.03),(.33,.15,11.18),'panel',.035 if fine else 0)
-  box('ceiling-fixture-'+str(side),(side*.76,2.566,.10),(.105,.032,10.70),'fixture')
-  box('ceiling-seam-'+str(side),(side*.65,2.594,.1),(.013,.01,10.72),'rubber')
+  shoulder=box('roof-shoulder-'+str(side),(side*.96,2.49,-.205),(.33,.15,11.65),'panel',.035 if fine else 0)
+  box('ceiling-fixture-'+str(side),(side*.76,2.566,-.135),(.105,.032,11.17),'fixture')
+  box('ceiling-seam-'+str(side),(side*.65,2.594,-.135),(.013,.01,11.19),'rubber')
   for j,z in enumerate([-4.3,-2.6,-.8,.9,2.6,4.3]):
    box(f'ad-frame-{side}-{j}',(side*.99,2.47,z),(.019,.17,1.22),'rubber')
    box(f'ad-blank-{side}-{j}',(side*.978,2.47,z),(.012,.135,1.16),'fixture')
@@ -104,9 +104,9 @@ def make(lod):
   B.empty('doorway-'+group,(-1.25,.36,(a+b)/2));B.empty('boarding-'+group,(-1.70,.36,(a+b)/2))
  # Photo-inspired bent stanchions, grab loops and over-aisle rails.
  for side in [-1,1]:
-  tube('overhead-rail-'+str(side),(side*.43,2.40,-4.95),(side*.43,2.40,3.58),.023,'rail',fine)
-  for j,z in enumerate([-4.72,-3.86,-3.00,-2.17,.16,1.98,3.49]):
-   floor=REAR_FLOOR if z<-1.94 else FLOOR
+  tube('overhead-rail-'+str(side),(side*.43,2.40,-5.60),(side*.43,2.40,3.58),.023,'rail',fine)
+  for j,z in enumerate([-4.72,-3.86,-3.00,-2.82,.16,1.98,3.49]):
+   floor=REAR_FLOOR if z<-2.98 else FLOOR
    curve(f'stanchion-{side}-{j}',[(side*.38,floor,z),(side*.38,1.85,z),(side*.43,2.1,z),(side*.43,2.40,z)],.022,'rail',fine)
   if fine:
    for j,z in enumerate([-4.5,-3.65,-2.8,-.90,.10,1.15,2.4]):
@@ -116,13 +116,13 @@ def make(lod):
     curve('strap-loop',[(side*.43,2.12,z),(side*.43,2.01,z-.055),(side*.43,1.99,z+.055),(side*.43,2.12,z)],.009,'rubber',fine)
   # Yellow stop cord lives against the sidewall, clear of glazing.
   
-  for j,(a,b) in enumerate([(-5.0,2.44)] if side>0 else [(-5.0,-1.30),(.05,2.44)]):
+  for j,(a,b) in enumerate([(INTERIOR_REAR+.32,2.44)] if side>0 else [(INTERIOR_REAR+.32,-2.40),(-1.30,2.44)]):
    tube('stop-cord-'+str(side)+'-'+str(j),(side*1.127,1.43,a),(side*1.127,1.43,b),.004,'rail',fine)
- for z in [-2.17,1.98]:box('stop-button',(-.355,1.33,z),(.054,.10,.065),'button',.012 if fine else 0)
+ for z in [-2.82,1.98]:box('stop-button',(-.355,1.33,z),(.054,.10,.065),'button',.012 if fine else 0)
  # Stowed wheelchair restraint panel, not deployable seats counted as passengers.
  box('wheelchair-restraint',(-1.09,.81,.79),(.10,.76,.50),'rubber',.025 if fine else 0)
  box('wheelchair-priority-panel',(-1.142,1.30,.79),(.014,.18,.30),'seat')
- for x in [-.15,0,.15]:box('rear-vent-slat',(x,2.22,-5.63),(.055,.32,.028),'rubber')
+ for x in [-.15,0,.15]:box('rear-vent-slat',(x,2.22,-6.10),(.055,.32,.028),'rubber')
  box('passenger-display',(0,2.47,3.93),(.70,.18,.07),'rubber',.02 if fine else 0)
  box('display-neutral-screen',(0,2.47,3.888),(.60,.125,.006),'fixture')
  for z in [-3.9,.0,3.5]:

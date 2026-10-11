@@ -133,7 +133,7 @@ def main():
   for j in range(0,len(ii),3):
    a,b,c=[vv[k] for k in ii[j:j+3]];need(cross(sub(b,a),sub(c,a))[1]>0,'floor winding')
   c=[sum(p[k] for p in vv)/len(vv) for k in range(3)];h=hits(intris,[c[0],.42,c[2]],[c[0],.2,c[2]]);need(h and abs(.42-min(h)-c[1])<.002,'floor ray/metadata mismatch')
- check('floor-triangulation-winding-and-sill-height',len(v['floorSurfaces']),'Seven floor polygons, +Y winding, all actual support heights within 2 mm of 0.36 m')
+ check('floor-triangulation-winding-and-sill-height',len(v['floorSurfaces']),'Nine floor polygons including two flush doorway strips, +Y winding, all actual support heights within 2 mm of 0.36 m')
  # Actual continuous aisle & hollow volume: upward rays start just above the real floor, including 1.81 m head envelope.
  count=0
  for x in [-.45,0,.45]:
@@ -156,11 +156,11 @@ def main():
   ani=animations[door['animationClip']];channels=[c for c in ani['channels'] if doc['nodes'][c['target']['node']]['name']==door['nodeId'] and c['target']['path']=='translation'];need(channels,'door clip node')
   ss=ani['samplers'][channels[0]['sampler']];values=C.accessor(doc,bin,ss['output']);need(close(values[0],door['closedTransform']['translationM'],.0001) and close(values[-1],door['openTransform']['translationM'],.0001),'clip endpoints')
   # Every sampled animated leaf vertex lies in declared swept volume.
-  z=door['closedTransform']['translationM'][2];sgn=-1 if door['nodeId'].endswith('-a') else 1
+  z=door['closedTransform']['translationM'][2];slide=door['openTransform']['translationM'][2]-z
   leaf=[p for o in exterior.values() if o['dynamic']==door['nodeId'] for p in o['points']]
   leaftris=[t for o in exterior.values() if o['dynamic']==door['nodeId'] for t in o['triangles']]
   for step in range(21):
-   t=step/20;dx=-.14*min(1,t/.25);dz=sgn*.62*max(0,(t-.25)/.75)
+   t=step/20;dx=-.14*min(1,t/.25);dz=slide*max(0,(t-.25)/.75)
    for p in leaf:need(inside_bounds([p[0]+dx,p[1],p[2]+dz],door['sweptBoundsM']),'swept containment')
    # A conservative spatial broad phase then actual triangle-edge intersection tests.
    moved=[([p[0]+dx,p[1],p[2]+dz] for p in tri) for tri in leaftris]
@@ -168,7 +168,7 @@ def main():
     tri=list(gen);lo=[min(p[k] for p in tri) for k in range(3)];hi=[max(p[k] for p in tri) for k in range(3)]
     candidates=[s for s in static if all(max(p[k] for p in s)>=lo[k]-1e-6 and min(p[k] for p in s)<=hi[k]+1e-6 for k in range(3))]
     for a,b in [(tri[0],tri[1]),(tri[1],tri[2]),(tri[2],tri[0])]:need(not hits(candidates,a,b),'door/static swept intersection')
- for group,a,b in [('front',3.7,4.85),('rear',-1.2,-.05)]:
+ for group,a,b in [(group,min(p[2] for p in next(d for d in v['doors'] if d['doorGroupId']==group)['openingPolygonM']),max(p[2] for p in next(d for d in v['doors'] if d['doorGroupId']==group)['openingPolygonM'])) for group in ['front','rear']]:
   for z in [a+.04,a+.20,(a+b)/2,b-.20,b-.04]:
    for y in [.40,.8,1.2,1.8,2.40]:need(not hits(opentris,[-1.8,y,z],[-.73,y,z]),f'open doorway obstructed {group} {y} {z}')
   need(hits(alltris(exterior),[-1.8,1.30,(a+b)/2-.15],[-.73,1.30,(a+b)/2-.15]),'closed door fails to block')
@@ -195,14 +195,14 @@ def main():
     need(actual_ranges==l['staticBatching']['batches'],'manifest batch provenance mismatch')
    if a['kind']=='transit-exterior' and l['level']==2:
     glass=next(mat for mat in loddoc['materials'] if mat['name']=='glass');need(glass.get('alphaMode','OPAQUE')=='OPAQUE' and glass['pbrMetallicRoughness']['baseColorFactor'][3]==1,'far window band must be closed opaque cue')
-    for aa,bb in [([-2,1.9,0],[-1.20,1.9,0]),([2,1.9,0],[1.20,1.9,0]),([0,1.9,-6],[0,1.9,-5.7])]:need(hits(scene['glass']['triangles'],aa,bb),'missing far side/rear window cue')
+    for aa,bb in [([-2,1.9,0],[-1.20,1.9,0]),([2,1.9,0],[1.20,1.9,0]),([0,1.9,-6.5],[0,1.9,-6.2])]:need(hits(scene['glass']['triangles'],aa,bb),'missing far side/rear window cue')
    for wheel in v['wheels'] if a['kind']=='transit-exterior' else []:need(close(scene[wheel['nodeId']]['point'],wheel['centerM'],.0001),'LOD wheel anchor drift')
  # Independently verify every declared passenger-capable LOD, not just LOD0 metadata.
  for level in [0,1]:
   shell,_,_=load(HERE/m['assets'][0]['lods'][level]['file'],opened)
   cab,_,_=load(HERE/m['assets'][1]['lods'][level]['file'])
   tt=alltris(shell)+alltris(cab)
-  for group,a,b in [('front',3.7,4.85),('rear',-1.2,-.05)]:
+  for group,a,b in [(group,min(p[2] for p in next(d for d in v['doors'] if d['doorGroupId']==group)['openingPolygonM']),max(p[2] for p in next(d for d in v['doors'] if d['doorGroupId']==group)['openingPolygonM'])) for group in ['front','rear']]:
    for z in [a+.04,(a+b)/2,b-.04]:
     for y in [.40,1.40,2.40]:need(not hits(tt,[-1.8,y,z],[-.73,y,z]),'LOD passage ray')
   need(not hits(tt,[0,.38,0],[0,2.59,0]),'LOD hollow cabin')

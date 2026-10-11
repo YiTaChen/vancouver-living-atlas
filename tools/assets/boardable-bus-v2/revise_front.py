@@ -58,11 +58,11 @@ def cockpit(fine):
  box('fare-pedestal',(-.29,.78,5.04),(.23,.84,.24),'rubber',.030 if fine else .01)
  box('fare-reader',(-.29,1.29,5.02),(.28,.25,.20),'seat',.032 if fine else .01)
  box('fare-reader-screen',(-.29,1.32,4.908),(.19,.13,.012),'fixture',.014 if fine else 0)
- tube('front-entry-assist',(-.55,.42,5.14),(-.55,1.48,5.14),.024,'rail',fine)
- curve('front-entry-assist-bend',[(-.55,1.48,5.14),(-.65,1.60,5.14),(-1.02,1.60,5.14)],.024,'rail',fine)
+ tube('front-entry-assist',(-.55,.42,5.30),(-.55,1.48,5.30),.024,'rail',fine)
+ curve('front-entry-assist-bend',[(-.55,1.48,5.30),(-.65,1.60,5.30),(-1.02,1.60,5.30)],.024,'rail',fine)
  # Flush visual ramp cassette; it does not obstruct or move the existing door sill.
- box('front-ramp-cassette',(-.77,.364,4.275),(.62,.008,.91),'rubber',.012 if fine else 0)
- for z in [3.83,4.72]:box('front-ramp-edge',(-.77,.369,z),(.60,.003,.018),'marking')
+ box('front-ramp-cassette',(-.77,.364,4.60),(.62,.008,.95),'rubber',.012 if fine else 0)
+ for z in [4.135,5.065]:box('front-ramp-edge',(-.77,.369,z),(.60,.003,.018),'marking')
  B.empty('driver-pelvis',(.76,1.015,4.91));B.empty('driver-camera',(.76,1.605,4.96))
 
 def priority_layout(fine):

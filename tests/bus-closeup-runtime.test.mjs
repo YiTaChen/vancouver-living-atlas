@@ -175,9 +175,9 @@ test('traffic requests budget assets only; reference visits retain exact real GL
       assert.equal(
         triangles,
         profile === 'reference-lod0'
-          ? 277040
+          ? 278528
           : profile === 'reference-lod1'
-            ? 91504
+            ? 92096
             : 11704,
       );
       assert.equal(meshes, profile === 'budget' ? 11 : 13);
@@ -195,11 +195,11 @@ test('traffic requests budget assets only; reference visits retain exact real GL
       }
       for (const [x, z, height] of [
         [0, 0, 0.36],
-        [0, -1.58, 0.52],
-        [0, -1.82, 0.68],
+        [0, -2.62, 0.52],
+        [0, -2.86, 0.68],
         [0, -3.1, 0.68],
-        [-1.2, 4.275, 0.36],
-        [-1.2, -0.625, 0.36],
+        [-1.2, 4.6, 0.36],
+        [-1.2, -1.85, 0.36],
       ])
         assert.ok(
           Math.abs(owner.cabinSurfaces.floorAt(x, z).heightM - height) < 1e-5,

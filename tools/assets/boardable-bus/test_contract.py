@@ -9,12 +9,12 @@ class ContractTests(unittest.TestCase):
   cls.m=json.loads((HERE/'manifest.json').read_text());cls.vehicle=cls.m['vehicles'][0]
   cls.scene,cls.doc,cls.bin=V.load(HERE/cls.m['assets'][0]['lods'][0]['file'])
  def test_empty_and_blocked_corridor(self):
-  a=[-1.8,1.4,4.275];b=[-.73,1.4,4.275]
+  a=[-1.8,1.4,4.6];b=[-.73,1.4,4.6]
   self.assertFalse(V.hits([],a,b))
-  blocker=([-1.25,.36,3.70],[-1.25,.36,4.85],[-1.25,2.46,4.85])
+  blocker=([-1.25,.36,4.0],[-1.25,.36,5.2],[-1.25,2.46,5.2])
   self.assertTrue(V.hits([blocker],a,b),'Synthetic sealed portal must be detected')
  def test_real_closed_and_open_portal(self):
-  a=[-1.8,1.4,4.125];b=[-.73,1.4,4.125]
+  a=[-1.8,1.4,4.45];b=[-.73,1.4,4.45]
   self.assertTrue(V.hits(V.alltris(self.scene),a,b))
   overrides={d['nodeId']:d['openTransform']['translationM'] for d in self.vehicle['doors']}
   scene,_,_=V.load(HERE/self.m['assets'][0]['lods'][0]['file'],overrides)
@@ -25,6 +25,34 @@ class ContractTests(unittest.TestCase):
   for a in self.doc['animations']:
    self.assertEqual(len(a['channels']),1)
    self.assertEqual(self.doc['nodes'][a['channels'][0]['target']['node']]['name'],a['name'].removesuffix('-open'))
+ def test_asymmetric_corrected_door_panels_and_travel(self):
+  expected={'front':(4.0,5.2,.585,.645),'rear':(-2.3,-1.4,.435,.495)}
+  self.assertEqual(self.vehicle['nominalLengthM'],12.4)
+  self.assertEqual(self.vehicle['bodyBoundsM']['min'][2],-6.3)
+  self.assertEqual(self.vehicle['bodyBoundsM']['max'][2],6.1)
+  for lod in self.m['assets'][0]['lods'][:2]:
+   scene,doc,binary=V.load(HERE/lod['file'])
+   for door in self.vehicle['doors']:
+    a,b,width,travel=expected[door['doorGroupId']]
+    zs=[p[2] for p in door['openingPolygonM']]
+    self.assertEqual((min(zs),max(zs)),(a,b))
+    points=[p for o in scene.values() if o['dynamic']==door['nodeId'] for p in o['points']]
+    self.assertAlmostEqual(max(p[2] for p in points)-min(p[2] for p in points),width,places=5)
+    self.assertAlmostEqual(abs(door['openTransform']['translationM'][2]-door['closedTransform']['translationM'][2]),travel)
+    animation=next(c for c in doc['animations'] if c['name']==door['animationClip'])
+    values=V.C.accessor(doc,binary,animation['samplers'][0]['output'])
+    self.assertTrue(V.close(values[-1],door['openTransform']['translationM'],.00001))
+ def test_actual_threshold_support_and_relocated_seat_pair(self):
+  for lod in self.m['assets'][1]['lods']:
+   scene,_,_=V.load(HERE/lod['file']);triangles=V.alltris(scene)
+   self.assertAlmostEqual(scene['seat-05-pelvis']['point'][2],-.95,places=5)
+   self.assertAlmostEqual(scene['seat-06-pelvis']['point'][2],-.95,places=5)
+   for group,a,b in [('front',4.0,5.2),('rear',-2.3,-1.4)]:
+    for x in [-1.249,-1.20,-1.15,-1.10]:
+     for z in [a+.01,(a+b)/2,b-.01]:
+      hits=V.hits(triangles,[x,.41,z],[x,.31,z])
+      self.assertTrue(hits)
+      self.assertAlmostEqual(.41-min(hits),.36,places=5)
  def test_swept_bounds_reject_escape(self):
   b=self.vehicle['doors'][0]['sweptBoundsM'];self.assertTrue(V.inside_bounds(self.vehicle['doors'][0]['openTransform']['translationM'],b));self.assertFalse(V.inside_bounds([-1.5,.36,4],b))
  def test_coarse_state_lock(self):
@@ -33,7 +61,7 @@ class ContractTests(unittest.TestCase):
  def test_static_batch_draw_and_anchor_contract(self):
   for lod in self.m['assets'][1]['lods']:
    scene,doc,_=V.load(HERE/lod['file']);self.assertEqual(lod['primitives'],7)
-   components=[o for o in scene.values() if o.get('batchComponent')];self.assertEqual(len(components),72 if lod['level']==0 else 62)
+   components=[o for o in scene.values() if o.get('batchComponent')];self.assertEqual(len(components),74 if lod['level']==0 else 64)
    self.assertTrue(all('mesh'not in o['node'] for o in components))
    self.assertEqual(len(V.alltris(scene)),lod['triangles'])
  def test_corrupt_batch_range_rejected(self):

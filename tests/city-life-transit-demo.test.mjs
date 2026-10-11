@@ -58,7 +58,7 @@ test('actual shipped GLTF clips plug outward, slide, and open a collision-clear 
       atPlug.x < -1.3,
       `door must actually plug outward, got ${atPlug.x}`,
     );
-    assert.ok(Math.abs(atPlug.z - 3.9875) < 0.001);
+    assert.ok(Math.abs(atPlug.z - 4.3) < 0.001);
     assert.equal(runtime.advanceToNextOpenStop(), true);
     const open = runtime.snapshot();
     assert.equal(open.doorsOpen, true);
@@ -70,9 +70,7 @@ test('actual shipped GLTF clips plug outward, slide, and open a collision-clear 
     const atOpen = runtime.vehicle.worldToLocal(
       front.getWorldPosition(new THREE.Vector3()),
     );
-    assert.ok(
-      atOpen.distanceTo(new THREE.Vector3(-1.39, 0.36, 3.3675)) < 0.001,
-    );
+    assert.ok(atOpen.distanceTo(new THREE.Vector3(-1.39, 0.36, 3.655)) < 0.001);
   } finally {
     runtime.dispose();
   }

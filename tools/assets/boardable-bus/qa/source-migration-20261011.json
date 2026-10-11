@@ -1,0 +1,64 @@
+{
+  "status": "pass",
+  "authorization": "User requested correct actual bus doors; parent authorized regeneration of simple legacy exterior and cabin while preserving design and ten seat IDs",
+  "method": "Existing parametric builder updated with explicit asymmetric door/frame dimensions; all five editable sources created in a fresh /tmp directory then installed. Original source files remain in Git history and temporary backup. No v2 fine-art sources touched.",
+  "blenderVersion": "4.5.12 LTS",
+  "bodyZRangeM": [
+    -6.3,
+    6.1
+  ],
+  "axleZPositionsM": [
+    -3.1,
+    3.1
+  ],
+  "frontDoorZRangeM": [
+    4.0,
+    5.2
+  ],
+  "rearDoorZRangeM": [
+    -2.3,
+    -1.4
+  ],
+  "legacySeatPairMovedFromToZM": [
+    -1.85,
+    -0.95
+  ],
+  "thresholdSupportAdded": true,
+  "sources": [
+    {
+      "source": "source/city-bus-12m-exterior.lod0.blend",
+      "oldSourceSha256": "facb19080148b5839d835af2ce994cc50facbd2e1d414ce6428a6e4d13576d27",
+      "newSourceSha256": "d66f353390579d60df77e5bc0fa62fc17040f9444e7277bce3380d45bb5c4098",
+      "backup": "/tmp/boardable-bus-before-nova-20261011/city-bus-12m-exterior.lod0.blend"
+    },
+    {
+      "source": "source/city-bus-12m-exterior.lod1.blend",
+      "oldSourceSha256": "d9858acf335c4068831f4cd6b45d0464a51d85c22750ec57c1f29f2619b54ee9",
+      "newSourceSha256": "200f52af6ff6a52d049217d17552d55f266f073e7cad0dcfd9f63cf169c1351e",
+      "backup": "/tmp/boardable-bus-before-nova-20261011/city-bus-12m-exterior.lod1.blend"
+    },
+    {
+      "source": "source/city-bus-12m-exterior.lod2.blend",
+      "oldSourceSha256": "2cb3c1433a2837172c27efa833b41b09cabe3e34ef790f8a9577867f56bec6a4",
+      "newSourceSha256": "ec82653fcaf204ee292b75ebda4e27b865eec767371e356b82e136b33a80fb22",
+      "backup": "/tmp/boardable-bus-before-nova-20261011/city-bus-12m-exterior.lod2.blend"
+    },
+    {
+      "source": "source/city-bus-12m-interior.lod0.blend",
+      "oldSourceSha256": "8ad2cac5b11f479beac3ca19b16fc409e08c24f1ced5ee0a1b3e87120b130f1e",
+      "newSourceSha256": "e6e7af1adb01f767943f78c7df9908662c908583880fe802ba28575a197e4728",
+      "backup": "/tmp/boardable-bus-before-nova-20261011/city-bus-12m-interior.lod0.blend"
+    },
+    {
+      "source": "source/city-bus-12m-interior.lod1.blend",
+      "oldSourceSha256": "f62a7aac9d42d63e0350a0b0fbd42f6c20603ac512ffc6477ba3ab7d9a2eb5fb",
+      "newSourceSha256": "044fc00a2bb60cabcfc40d3ca594ac913169b754ae731d55687ebfe9b5d7d2f6",
+      "backup": "/tmp/boardable-bus-before-nova-20261011/city-bus-12m-interior.lod1.blend"
+    }
+  ],
+  "mirrorCorrection": "Mirror centres moved to Z=5.98 with diagonal braces from the existing side pillars at Z=5.60; actual door sweeps clear.",
+  "geometryQA": "qa/validation.json",
+  "sourceQA": "qa/blender-validation.json",
+  "regressionTests": "qa/regression-tests.txt",
+  "historicalPreviews": "qa/previews/index.json is explicitly historical, not new geometry visual acceptance"
+}

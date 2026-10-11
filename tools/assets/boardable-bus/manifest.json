@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "packageId": "boardable-bus",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "baseRevision": "8b95f013297597845d542463d6ce635105a95c4f",
-  "status": "offline_complete",
+  "status": "offline_validation_pending",
   "units": "m",
   "coordinateSystem": {
     "authoring": "Blender +Z up, -Y front",
@@ -15,7 +15,7 @@
     "project": "Vancouver Living Atlas by YiTaChen",
     "source": "https://github.com/YiTaChen/vancouver-living-atlas",
     "license": "Vancouver Living Atlas Noncommercial Research and Attribution 1.0",
-    "dimensionReference": "docs/AI_AGENT_DEVELOPMENT_BACKLOG.md sections 6.2, 6.4, 6.6",
+    "dimensionReference": "TransLink BIDG2018 Figure 1.2.11 Nova typical bus; authorised 2026-10-11 correction",
     "existingConsumer": "lib/city/city-buses.ts"
   },
   "reexportCommand": "blender -b -t 2 --python tools/assets/boardable-bus/export.py -- --output /tmp/boardable-bus-reexport",
@@ -27,33 +27,33 @@
       "variant": "representative-12m-low-floor",
       "kind": "transit-exterior",
       "source": "source/city-bus-12m-exterior.lod0.blend",
-      "sourceSha256": "facb19080148b5839d835af2ce994cc50facbd2e1d414ce6428a6e4d13576d27",
+      "sourceSha256": "d66f353390579d60df77e5bc0fa62fc17040f9444e7277bce3380d45bb5c4098",
       "lods": [
         {
           "level": 0,
           "file": "exports/city-bus-12m-exterior.lod0.glb",
           "source": "source/city-bus-12m-exterior.lod0.blend",
-          "sha256": "54471e40a5e03cc222f436c3a631c7f683761c2d376dc462fdc4c8268f141b45",
-          "sourceSha256": "facb19080148b5839d835af2ce994cc50facbd2e1d414ce6428a6e4d13576d27",
-          "triangles": 2310,
-          "vertices": 4354,
+          "sha256": "f86df4c26e0e528bc6f2299407dd98be5c17d31763ed049c6c1f38fe52a4db45",
+          "sourceSha256": "d66f353390579d60df77e5bc0fa62fc17040f9444e7277bce3380d45bb5c4098",
+          "triangles": 2342,
+          "vertices": 4420,
           "primitives": 21,
-          "bytes": 173088,
+          "bytes": 175400,
           "boundsM": {
             "min": [
               -1.5199999809265137,
               0.0,
-              -5.818999767303467
+              -6.318999767303467
             ],
             "max": [
               1.5199999809265137,
               3.069999933242798,
-              6.215000152587891
+              6.114999771118164
             ],
             "size": [
               3.0399999618530273,
               3.069999933242798,
-              12.033999919891357
+              12.43399953842163
             ]
           },
           "capabilities": {
@@ -62,35 +62,35 @@
             "passengerCapable": true,
             "openingsPreserved": true
           },
-          "sourceBytes": 117046,
-          "geometryBytes": 173088,
+          "sourceBytes": 121004,
+          "geometryBytes": 175400,
           "embeddedImageBytes": 0
         },
         {
           "level": 1,
           "file": "exports/city-bus-12m-exterior.lod1.glb",
           "source": "source/city-bus-12m-exterior.lod1.blend",
-          "sha256": "a4ccbb6a4b2f032a4d950ee0883c51ebe1ecd314734b539c60aa5fd6c605b3f0",
-          "sourceSha256": "d9858acf335c4068831f4cd6b45d0464a51d85c22750ec57c1f29f2619b54ee9",
-          "triangles": 1730,
-          "vertices": 3340,
+          "sha256": "89846477b813d1e41b8f2e234d5a6d888b486a7c267984a75d39cb7f4b27013a",
+          "sourceSha256": "200f52af6ff6a52d049217d17552d55f266f073e7cad0dcfd9f63cf169c1351e",
+          "triangles": 1782,
+          "vertices": 3436,
           "primitives": 21,
-          "bytes": 137088,
+          "bytes": 140484,
           "boundsM": {
             "min": [
               -1.5199999809265137,
               0.0,
-              -5.811999797821045
+              -6.311999797821045
             ],
             "max": [
               1.5199999809265137,
               3.069999933242798,
-              6.215000152587891
+              6.114999771118164
             ],
             "size": [
               3.0399999618530273,
               3.069999933242798,
-              12.026999950408936
+              12.426999568939209
             ]
           },
           "capabilities": {
@@ -99,35 +99,35 @@
             "passengerCapable": true,
             "openingsPreserved": true
           },
-          "sourceBytes": 112707,
-          "geometryBytes": 137088,
+          "sourceBytes": 116953,
+          "geometryBytes": 140484,
           "embeddedImageBytes": 0
         },
         {
           "level": 2,
           "file": "exports/city-bus-12m-exterior.lod2.glb",
           "source": "source/city-bus-12m-exterior.lod2.blend",
-          "sha256": "36a7f8cfa1b3b53b8e212618e80523a7be3f7fd8e86bef98cf9c93f83bcfd948",
-          "sourceSha256": "2cb3c1433a2837172c27efa833b41b09cabe3e34ef790f8a9577867f56bec6a4",
+          "sha256": "f274661b47738c519dc539cb03f721ab585bf3a4136e1402fb1163b039698083",
+          "sourceSha256": "ec82653fcaf204ee292b75ebda4e27b865eec767371e356b82e136b33a80fb22",
           "triangles": 208,
           "vertices": 384,
           "primitives": 8,
-          "bytes": 22556,
+          "bytes": 22576,
           "boundsM": {
             "min": [
               -1.5199999809265137,
               0.0,
-              -5.800000190734863
+              -6.300000190734863
             ],
             "max": [
               1.5199999809265137,
               3.069999933242798,
-              6.210000038146973
+              6.110000133514404
             ],
             "size": [
               3.0399999618530273,
               3.069999933242798,
-              12.010000228881836
+              12.410000324249268
             ]
           },
           "capabilities": {
@@ -136,8 +136,8 @@
             "passengerCapable": false,
             "openingsPreserved": false
           },
-          "sourceBytes": 93019,
-          "geometryBytes": 22556,
+          "sourceBytes": 94777,
+          "geometryBytes": 22576,
           "embeddedImageBytes": 0
         }
       ],
@@ -145,26 +145,26 @@
         "min": [
           -1.5199999809265137,
           0.0,
-          -5.818999767303467
+          -6.318999767303467
         ],
         "max": [
           1.5199999809265137,
           3.069999933242798,
-          6.215000152587891
+          6.114999771118164
         ],
         "size": [
           3.0399999618530273,
           3.069999933242798,
-          12.033999919891357
+          12.43399953842163
         ]
       },
       "expectedDimensionsM": [
         3.04,
         3.07,
-        12.034
+        12.434
       ],
       "dimensionToleranceM": 0.02,
-      "dimensionBasis": "Representative project proposal; no specific manufacturer measurement claim. Body nominal 12.0 x 2.5 m; full exterior includes mirrors, lamps and roof equipment.",
+      "dimensionBasis": "Representative project proposal; no specific manufacturer measurement claim. Body nominal 12.4 x 2.5 m; Nova typical door positions, not a full brand replica; full exterior includes mirrors, lamps and roof equipment.",
       "pivot": {
         "frameId": "vehicle",
         "positionM": [
@@ -220,9 +220,9 @@
       ],
       "textureMode": "shared",
       "textureCost": {
-        "geometryBytes": 332732,
+        "geometryBytes": 338460,
         "embeddedImageBytes": 0,
-        "glbTotalBytes": 332732,
+        "glbTotalBytes": 338460,
         "uniqueTexelBytesWithMips": 0,
         "note": "Texture-free ordinary GLBs. Role IDs enable later shared material binding; no instance maps."
       },
@@ -261,7 +261,11 @@
         "ceilingUndersideM": 2.6,
         "standingHeadroomM": 2.24,
         "minimumMainAisleM": 0.9,
-        "doorWidthM": 1.15,
+        "doorWidthM": 0.9,
+        "doorWidthsM": {
+          "front": 1.2,
+          "rear": 0.9
+        },
         "doorHeightM": 2.1
       },
       "collision": {
@@ -291,7 +295,7 @@
         "lib/city/city-buses.ts"
       ],
       "offlineChecks": {
-        "status": "pass",
+        "status": "pending",
         "evidence": [
           "qa/validation.json",
           "qa/blender-validation.json",
@@ -310,33 +314,33 @@
       "variant": "representative-12m-low-floor",
       "kind": "transit-interior",
       "source": "source/city-bus-12m-interior.lod0.blend",
-      "sourceSha256": "8ad2cac5b11f479beac3ca19b16fc409e08c24f1ced5ee0a1b3e87120b130f1e",
+      "sourceSha256": "e6e7af1adb01f767943f78c7df9908662c908583880fe802ba28575a197e4728",
       "lods": [
         {
           "level": 0,
           "file": "exports/city-bus-12m-interior.lod0.glb",
           "source": "source/city-bus-12m-interior.lod0.blend",
-          "sha256": "b71c990bfcc276d427565a65ab25b0a8beda4c3ff5015fb0be4985db972e4c1d",
-          "sourceSha256": "8ad2cac5b11f479beac3ca19b16fc409e08c24f1ced5ee0a1b3e87120b130f1e",
-          "triangles": 3760,
-          "vertices": 7272,
+          "sha256": "848fa361c19943c08d8792ef9a4bd8c33d237179d790ab78c302f44293bb40d9",
+          "sourceSha256": "e6e7af1adb01f767943f78c7df9908662c908583880fe802ba28575a197e4728",
+          "triangles": 3784,
+          "vertices": 7320,
           "primitives": 7,
-          "bytes": 342612,
+          "bytes": 345764,
           "boundsM": {
             "min": [
-              -1.1775000095367432,
+              -1.25,
               0.25999999046325684,
-              -5.679999828338623
+              -6.179999828338623
             ],
             "max": [
               1.1775000095367432,
               2.700000047683716,
-              5.75
+              5.659999847412109
             ],
             "size": [
-              2.3550000190734863,
+              2.427500009536743,
               2.440000057220459,
-              11.429999828338623
+              11.839999675750732
             ]
           },
           "capabilities": {
@@ -345,8 +349,8 @@
             "passengerCapable": true,
             "openingsPreserved": true
           },
-          "sourceBytes": 117464,
-          "geometryBytes": 342612,
+          "sourceBytes": 125640,
+          "geometryBytes": 345764,
           "embeddedImageBytes": 0,
           "staticBatching": {
             "schemaVersion": 1,
@@ -390,24 +394,24 @@
                       "min": [
                         -1.1349999904632568,
                         2.5999999046325684,
-                        -5.639999866485596
+                        -6.139999866485596
                       ],
                       "max": [
                         1.1349999904632568,
                         2.700000047683716,
-                        5.739999771118164
+                        5.639999866485596
                       ],
                       "size": [
                         2.2699999809265137,
                         0.10000014305114746,
-                        11.37999963760376
+                        11.779999732971191
                       ]
                     }
                   },
                   {
                     "componentId": "driver-console",
                     "sourceNodeId": "driver-console",
-                    "sourceNodeIndex": 4,
+                    "sourceNodeIndex": 6,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 24,
@@ -454,7 +458,7 @@
                   {
                     "componentId": "driver-partition",
                     "sourceNodeId": "driver-partition",
-                    "sourceNodeIndex": 5,
+                    "sourceNodeIndex": 7,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 48,
@@ -501,7 +505,7 @@
                   {
                     "componentId": "liner--1-0",
                     "sourceNodeId": "liner--1-0",
-                    "sourceNodeIndex": 13,
+                    "sourceNodeIndex": 15,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 72,
@@ -531,24 +535,24 @@
                       "min": [
                         -1.1775000095367432,
                         0.8349999785423279,
-                        -5.650000095367432
+                        -6.150000095367432
                       ],
                       "max": [
                         -1.152500033378601,
                         1.1349999904632568,
-                        -1.2000000476837158
+                        -2.299999952316284
                       ],
                       "size": [
                         0.02499997615814209,
                         0.30000001192092896,
-                        4.450000047683716
+                        3.8500001430511475
                       ]
                     }
                   },
                   {
                     "componentId": "liner--1-1",
                     "sourceNodeId": "liner--1-1",
-                    "sourceNodeIndex": 14,
+                    "sourceNodeIndex": 16,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 96,
@@ -578,24 +582,24 @@
                       "min": [
                         -1.1775000095367432,
                         0.8349999785423279,
-                        -0.05000000074505806
+                        -1.399999976158142
                       ],
                       "max": [
                         -1.152500033378601,
                         1.1349999904632568,
-                        3.700000047683716
+                        4.0
                       ],
                       "size": [
                         0.02499997615814209,
                         0.30000001192092896,
-                        3.750000048428774
+                        5.399999976158142
                       ]
                     }
                   },
                   {
                     "componentId": "liner--1-2",
                     "sourceNodeId": "liner--1-2",
-                    "sourceNodeIndex": 15,
+                    "sourceNodeIndex": 17,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 120,
@@ -625,24 +629,24 @@
                       "min": [
                         -1.1775000095367432,
                         0.8349999785423279,
-                        4.849999904632568
+                        5.199999809265137
                       ],
                       "max": [
                         -1.152500033378601,
                         1.1349999904632568,
-                        5.71999979019165
+                        5.619999885559082
                       ],
                       "size": [
                         0.02499997615814209,
                         0.30000001192092896,
-                        0.869999885559082
+                        0.4200000762939453
                       ]
                     }
                   },
                   {
                     "componentId": "liner-1-0",
                     "sourceNodeId": "liner-1-0",
-                    "sourceNodeIndex": 16,
+                    "sourceNodeIndex": 18,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 144,
@@ -672,24 +676,24 @@
                       "min": [
                         1.152500033378601,
                         0.8349999785423279,
-                        -5.650000095367432
+                        -6.150000095367432
                       ],
                       "max": [
                         1.1775000095367432,
                         1.1349999904632568,
-                        5.71999979019165
+                        5.619999885559082
                       ],
                       "size": [
                         0.02499997615814209,
                         0.30000001192092896,
-                        11.369999885559082
+                        11.769999980926514
                       ]
                     }
                   },
                   {
                     "componentId": "seat-01-pedestal",
                     "sourceNodeId": "seat-01-pedestal",
-                    "sourceNodeIndex": 23,
+                    "sourceNodeIndex": 25,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 168,
@@ -736,7 +740,7 @@
                   {
                     "componentId": "seat-02-pedestal",
                     "sourceNodeId": "seat-02-pedestal",
-                    "sourceNodeIndex": 30,
+                    "sourceNodeIndex": 32,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 192,
@@ -783,7 +787,7 @@
                   {
                     "componentId": "seat-03-pedestal",
                     "sourceNodeId": "seat-03-pedestal",
-                    "sourceNodeIndex": 37,
+                    "sourceNodeIndex": 39,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 216,
@@ -830,7 +834,7 @@
                   {
                     "componentId": "seat-04-pedestal",
                     "sourceNodeId": "seat-04-pedestal",
-                    "sourceNodeIndex": 44,
+                    "sourceNodeIndex": 46,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 240,
@@ -877,7 +881,7 @@
                   {
                     "componentId": "seat-05-pedestal",
                     "sourceNodeId": "seat-05-pedestal",
-                    "sourceNodeIndex": 51,
+                    "sourceNodeIndex": 53,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 264,
@@ -900,19 +904,19 @@
                       0.0,
                       -0.8299999833106995,
                       0.36000001430511475,
-                      -1.850000023841858,
+                      -0.949999988079071,
                       1.0
                     ],
                     "boundsM": {
                       "min": [
                         -0.8799999840557575,
                         0.3750000139698386,
-                        -1.9100000225007534
+                        -1.0099999867379665
                       ],
                       "max": [
                         -0.7799999825656414,
                         0.7450000047683716,
-                        -1.7900000251829624
+                        -0.8899999894201756
                       ],
                       "size": [
                         0.10000000149011612,
@@ -924,7 +928,7 @@
                   {
                     "componentId": "seat-06-pedestal",
                     "sourceNodeId": "seat-06-pedestal",
-                    "sourceNodeIndex": 58,
+                    "sourceNodeIndex": 60,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 288,
@@ -947,19 +951,19 @@
                       0.0,
                       0.8299999833106995,
                       0.36000001430511475,
-                      -1.850000023841858,
+                      -0.949999988079071,
                       1.0
                     ],
                     "boundsM": {
                       "min": [
                         0.7799999825656414,
                         0.3750000139698386,
-                        -1.9100000225007534
+                        -1.0099999867379665
                       ],
                       "max": [
                         0.8799999840557575,
                         0.7450000047683716,
-                        -1.7900000251829624
+                        -0.8899999894201756
                       ],
                       "size": [
                         0.10000000149011612,
@@ -971,7 +975,7 @@
                   {
                     "componentId": "seat-07-pedestal",
                     "sourceNodeId": "seat-07-pedestal",
-                    "sourceNodeIndex": 65,
+                    "sourceNodeIndex": 67,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 312,
@@ -1018,7 +1022,7 @@
                   {
                     "componentId": "seat-08-pedestal",
                     "sourceNodeId": "seat-08-pedestal",
-                    "sourceNodeIndex": 72,
+                    "sourceNodeIndex": 74,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 336,
@@ -1065,7 +1069,7 @@
                   {
                     "componentId": "seat-09-pedestal",
                     "sourceNodeId": "seat-09-pedestal",
-                    "sourceNodeIndex": 79,
+                    "sourceNodeIndex": 81,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 360,
@@ -1112,7 +1116,7 @@
                   {
                     "componentId": "seat-10-pedestal",
                     "sourceNodeId": "seat-10-pedestal",
-                    "sourceNodeIndex": 86,
+                    "sourceNodeIndex": 88,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 384,
@@ -1159,7 +1163,7 @@
                   {
                     "componentId": "wheel-well--1--3.1",
                     "sourceNodeId": "wheel-well--1--3.1",
-                    "sourceNodeIndex": 102,
+                    "sourceNodeIndex": 104,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 408,
@@ -1206,7 +1210,7 @@
                   {
                     "componentId": "wheel-well--1-3.1",
                     "sourceNodeId": "wheel-well--1-3.1",
-                    "sourceNodeIndex": 103,
+                    "sourceNodeIndex": 105,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 624,
@@ -1253,7 +1257,7 @@
                   {
                     "componentId": "wheel-well-1--3.1",
                     "sourceNodeId": "wheel-well-1--3.1",
-                    "sourceNodeIndex": 104,
+                    "sourceNodeIndex": 106,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 840,
@@ -1300,7 +1304,7 @@
                   {
                     "componentId": "wheel-well-1-3.1",
                     "sourceNodeId": "wheel-well-1-3.1",
-                    "sourceNodeIndex": 105,
+                    "sourceNodeIndex": 107,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 1056,
@@ -1400,7 +1404,7 @@
                   {
                     "componentId": "stop-bell",
                     "sourceNodeId": "stop-bell",
-                    "sourceNodeIndex": 93,
+                    "sourceNodeIndex": 95,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 24,
@@ -1447,13 +1451,160 @@
                 ]
               },
               {
+                "nodeId": "interior-batch-floor",
+                "material": "floor",
+                "componentRanges": [
+                  {
+                    "componentId": "door-front-threshold-slab",
+                    "sourceNodeId": "door-front-threshold-slab",
+                    "sourceNodeIndex": 3,
+                    "sourcePrimitive": 0,
+                    "frameId": "vehicle",
+                    "vertexStart": 0,
+                    "vertexCount": 24,
+                    "indexStart": 0,
+                    "indexCount": 36,
+                    "triangleCount": 12,
+                    "sourceLocalToVehicleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -1.25,
+                        0.25999999046325684,
+                        4.0
+                      ],
+                      "max": [
+                        -1.149999976158142,
+                        0.36000001430511475,
+                        5.199999809265137
+                      ],
+                      "size": [
+                        0.10000002384185791,
+                        0.10000002384185791,
+                        1.1999998092651367
+                      ]
+                    }
+                  },
+                  {
+                    "componentId": "door-rear-threshold-slab",
+                    "sourceNodeId": "door-rear-threshold-slab",
+                    "sourceNodeIndex": 4,
+                    "sourcePrimitive": 0,
+                    "frameId": "vehicle",
+                    "vertexStart": 24,
+                    "vertexCount": 24,
+                    "indexStart": 36,
+                    "indexCount": 36,
+                    "triangleCount": 12,
+                    "sourceLocalToVehicleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -1.25,
+                        0.25999999046325684,
+                        -2.299999952316284
+                      ],
+                      "max": [
+                        -1.149999976158142,
+                        0.36000001430511475,
+                        -1.399999976158142
+                      ],
+                      "size": [
+                        0.10000002384185791,
+                        0.10000002384185791,
+                        0.8999999761581421
+                      ]
+                    }
+                  },
+                  {
+                    "componentId": "floor",
+                    "sourceNodeId": "floor",
+                    "sourceNodeIndex": 14,
+                    "sourcePrimitive": 0,
+                    "frameId": "vehicle",
+                    "vertexStart": 48,
+                    "vertexCount": 24,
+                    "indexStart": 72,
+                    "indexCount": 36,
+                    "triangleCount": 12,
+                    "sourceLocalToVehicleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -1.149999976158142,
+                        0.25999999046325684,
+                        -6.179999828338623
+                      ],
+                      "max": [
+                        1.149999976158142,
+                        0.36000001430511475,
+                        5.650000095367432
+                      ],
+                      "size": [
+                        2.299999952316284,
+                        0.10000002384185791,
+                        11.829999923706055
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
                 "nodeId": "interior-batch-glass",
                 "material": "glass",
                 "componentRanges": [
                   {
                     "componentId": "driver-partition-glass",
                     "sourceNodeId": "driver-partition-glass",
-                    "sourceNodeIndex": 6,
+                    "sourceNodeIndex": 8,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 0,
@@ -1506,7 +1657,7 @@
                   {
                     "componentId": "driver-seat",
                     "sourceNodeId": "driver-seat",
-                    "sourceNodeIndex": 8,
+                    "sourceNodeIndex": 10,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 0,
@@ -1553,7 +1704,7 @@
                   {
                     "componentId": "driver-seat-back",
                     "sourceNodeId": "driver-seat-back",
-                    "sourceNodeIndex": 9,
+                    "sourceNodeIndex": 11,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 216,
@@ -1600,7 +1751,7 @@
                   {
                     "componentId": "seat-01-back",
                     "sourceNodeId": "seat-01-back",
-                    "sourceNodeIndex": 20,
+                    "sourceNodeIndex": 22,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 240,
@@ -1647,7 +1798,7 @@
                   {
                     "componentId": "seat-01-cushion",
                     "sourceNodeId": "seat-01-cushion",
-                    "sourceNodeIndex": 21,
+                    "sourceNodeIndex": 23,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 456,
@@ -1694,7 +1845,7 @@
                   {
                     "componentId": "seat-02-back",
                     "sourceNodeId": "seat-02-back",
-                    "sourceNodeIndex": 27,
+                    "sourceNodeIndex": 29,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 672,
@@ -1741,7 +1892,7 @@
                   {
                     "componentId": "seat-02-cushion",
                     "sourceNodeId": "seat-02-cushion",
-                    "sourceNodeIndex": 28,
+                    "sourceNodeIndex": 30,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 888,
@@ -1788,7 +1939,7 @@
                   {
                     "componentId": "seat-03-back",
                     "sourceNodeId": "seat-03-back",
-                    "sourceNodeIndex": 34,
+                    "sourceNodeIndex": 36,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 1104,
@@ -1835,7 +1986,7 @@
                   {
                     "componentId": "seat-03-cushion",
                     "sourceNodeId": "seat-03-cushion",
-                    "sourceNodeIndex": 35,
+                    "sourceNodeIndex": 37,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 1320,
@@ -1882,7 +2033,7 @@
                   {
                     "componentId": "seat-04-back",
                     "sourceNodeId": "seat-04-back",
-                    "sourceNodeIndex": 41,
+                    "sourceNodeIndex": 43,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 1536,
@@ -1929,7 +2080,7 @@
                   {
                     "componentId": "seat-04-cushion",
                     "sourceNodeId": "seat-04-cushion",
-                    "sourceNodeIndex": 42,
+                    "sourceNodeIndex": 44,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 1752,
@@ -1976,7 +2127,7 @@
                   {
                     "componentId": "seat-05-back",
                     "sourceNodeId": "seat-05-back",
-                    "sourceNodeIndex": 48,
+                    "sourceNodeIndex": 50,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 1968,
@@ -1999,19 +2150,19 @@
                       0.0,
                       -0.8299999833106995,
                       0.36000001430511475,
-                      -1.850000023841858,
+                      -0.949999988079071,
                       1.0
                     ],
                     "boundsM": {
                       "min": [
                         -1.0599999874830246,
                         0.7750000059604645,
-                        -2.0875000208616257
+                        -1.1874999850988388
                       ],
                       "max": [
                         -0.5999999791383743,
                         1.3450000286102295,
-                        -2.0225000232458115
+                        -1.1224999874830246
                       ],
                       "size": [
                         0.46000000834465027,
@@ -2023,7 +2174,7 @@
                   {
                     "componentId": "seat-05-cushion",
                     "sourceNodeId": "seat-05-cushion",
-                    "sourceNodeIndex": 49,
+                    "sourceNodeIndex": 51,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 2184,
@@ -2046,19 +2197,19 @@
                       0.0,
                       -0.8299999833106995,
                       0.36000001430511475,
-                      -1.850000023841858,
+                      -0.949999988079071,
                       1.0
                     ],
                     "boundsM": {
                       "min": [
                         -1.0599999874830246,
                         0.7400000095367432,
-                        -2.070000022649765
+                        -1.1699999868869781
                       ],
                       "max": [
                         -0.5999999791383743,
                         0.8100000023841858,
-                        -1.6300000250339508
+                        -0.7299999892711639
                       ],
                       "size": [
                         0.46000000834465027,
@@ -2070,7 +2221,7 @@
                   {
                     "componentId": "seat-06-back",
                     "sourceNodeId": "seat-06-back",
-                    "sourceNodeIndex": 55,
+                    "sourceNodeIndex": 57,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 2400,
@@ -2093,19 +2244,19 @@
                       0.0,
                       0.8299999833106995,
                       0.36000001430511475,
-                      -1.850000023841858,
+                      -0.949999988079071,
                       1.0
                     ],
                     "boundsM": {
                       "min": [
                         0.5999999791383743,
                         0.7750000059604645,
-                        -2.0875000208616257
+                        -1.1874999850988388
                       ],
                       "max": [
                         1.0599999874830246,
                         1.3450000286102295,
-                        -2.0225000232458115
+                        -1.1224999874830246
                       ],
                       "size": [
                         0.46000000834465027,
@@ -2117,7 +2268,7 @@
                   {
                     "componentId": "seat-06-cushion",
                     "sourceNodeId": "seat-06-cushion",
-                    "sourceNodeIndex": 56,
+                    "sourceNodeIndex": 58,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 2616,
@@ -2140,19 +2291,19 @@
                       0.0,
                       0.8299999833106995,
                       0.36000001430511475,
-                      -1.850000023841858,
+                      -0.949999988079071,
                       1.0
                     ],
                     "boundsM": {
                       "min": [
                         0.5999999791383743,
                         0.7400000095367432,
-                        -2.070000022649765
+                        -1.1699999868869781
                       ],
                       "max": [
                         1.0599999874830246,
                         0.8100000023841858,
-                        -1.6300000250339508
+                        -0.7299999892711639
                       ],
                       "size": [
                         0.46000000834465027,
@@ -2164,7 +2315,7 @@
                   {
                     "componentId": "seat-07-back",
                     "sourceNodeId": "seat-07-back",
-                    "sourceNodeIndex": 62,
+                    "sourceNodeIndex": 64,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 2832,
@@ -2211,7 +2362,7 @@
                   {
                     "componentId": "seat-07-cushion",
                     "sourceNodeId": "seat-07-cushion",
-                    "sourceNodeIndex": 63,
+                    "sourceNodeIndex": 65,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 3048,
@@ -2258,7 +2409,7 @@
                   {
                     "componentId": "seat-08-back",
                     "sourceNodeId": "seat-08-back",
-                    "sourceNodeIndex": 69,
+                    "sourceNodeIndex": 71,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 3264,
@@ -2305,7 +2456,7 @@
                   {
                     "componentId": "seat-08-cushion",
                     "sourceNodeId": "seat-08-cushion",
-                    "sourceNodeIndex": 70,
+                    "sourceNodeIndex": 72,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 3480,
@@ -2352,7 +2503,7 @@
                   {
                     "componentId": "seat-09-back",
                     "sourceNodeId": "seat-09-back",
-                    "sourceNodeIndex": 76,
+                    "sourceNodeIndex": 78,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 3696,
@@ -2399,7 +2550,7 @@
                   {
                     "componentId": "seat-09-cushion",
                     "sourceNodeId": "seat-09-cushion",
-                    "sourceNodeIndex": 77,
+                    "sourceNodeIndex": 79,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 3912,
@@ -2446,7 +2597,7 @@
                   {
                     "componentId": "seat-10-back",
                     "sourceNodeId": "seat-10-back",
-                    "sourceNodeIndex": 83,
+                    "sourceNodeIndex": 85,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 4128,
@@ -2493,7 +2644,7 @@
                   {
                     "componentId": "seat-10-cushion",
                     "sourceNodeId": "seat-10-cushion",
-                    "sourceNodeIndex": 84,
+                    "sourceNodeIndex": 86,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 4344,
@@ -2546,7 +2697,7 @@
                   {
                     "componentId": "entry-rail-front",
                     "sourceNodeId": "entry-rail-front",
-                    "sourceNodeIndex": 10,
+                    "sourceNodeIndex": 12,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 0,
@@ -2576,12 +2727,12 @@
                       "min": [
                         -0.985678493976593,
                         0.800000011920929,
-                        4.922999858856201
+                        5.273000240325928
                       ],
                       "max": [
                         -0.9343214631080627,
                         2.309999942779541,
-                        4.976999759674072
+                        5.327000141143799
                       ],
                       "size": [
                         0.05135703086853027,
@@ -2593,7 +2744,7 @@
                   {
                     "componentId": "entry-rail-rear",
                     "sourceNodeId": "entry-rail-rear",
-                    "sourceNodeIndex": 11,
+                    "sourceNodeIndex": 13,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 60,
@@ -2623,24 +2774,24 @@
                       "min": [
                         -0.985678493976593,
                         0.800000011920929,
-                        0.023000000044703484
+                        -1.3269999027252197
                       ],
                       "max": [
                         -0.9343214631080627,
                         2.309999942779541,
-                        0.07699999958276749
+                        -1.2730000019073486
                       ],
                       "size": [
                         0.05135703086853027,
                         1.509999930858612,
-                        0.053999999538064
+                        0.053999900817871094
                       ]
                     }
                   },
                   {
                     "componentId": "longitudinal-rail--1",
                     "sourceNodeId": "longitudinal-rail--1",
-                    "sourceNodeIndex": 17,
+                    "sourceNodeIndex": 19,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 120,
@@ -2687,7 +2838,7 @@
                   {
                     "componentId": "longitudinal-rail-1",
                     "sourceNodeId": "longitudinal-rail-1",
-                    "sourceNodeIndex": 18,
+                    "sourceNodeIndex": 20,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 180,
@@ -2734,7 +2885,7 @@
                   {
                     "componentId": "seat-01-handle",
                     "sourceNodeId": "seat-01-handle",
-                    "sourceNodeIndex": 22,
+                    "sourceNodeIndex": 24,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 240,
@@ -2781,7 +2932,7 @@
                   {
                     "componentId": "seat-02-handle",
                     "sourceNodeId": "seat-02-handle",
-                    "sourceNodeIndex": 29,
+                    "sourceNodeIndex": 31,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 288,
@@ -2828,7 +2979,7 @@
                   {
                     "componentId": "seat-03-handle",
                     "sourceNodeId": "seat-03-handle",
-                    "sourceNodeIndex": 36,
+                    "sourceNodeIndex": 38,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 336,
@@ -2875,7 +3026,7 @@
                   {
                     "componentId": "seat-04-handle",
                     "sourceNodeId": "seat-04-handle",
-                    "sourceNodeIndex": 43,
+                    "sourceNodeIndex": 45,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 384,
@@ -2922,7 +3073,7 @@
                   {
                     "componentId": "seat-05-handle",
                     "sourceNodeId": "seat-05-handle",
-                    "sourceNodeIndex": 50,
+                    "sourceNodeIndex": 52,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 432,
@@ -2945,19 +3096,19 @@
                       0.0,
                       -0.8299999833106995,
                       0.36000001430511475,
-                      -1.850000023841858,
+                      -0.949999988079071,
                       1.0
                     ],
                     "boundsM": {
                       "min": [
                         -1.0199999809265137,
                         1.3130000233650208,
-                        -2.0870000272989273
+                        -1.1869999915361404
                       ],
                       "max": [
                         -0.6399999856948853,
                         1.3470000624656677,
-                        -2.0530000180006027
+                        -1.1529999822378159
                       ],
                       "size": [
                         0.3799999952316284,
@@ -2969,7 +3120,7 @@
                   {
                     "componentId": "seat-06-handle",
                     "sourceNodeId": "seat-06-handle",
-                    "sourceNodeIndex": 57,
+                    "sourceNodeIndex": 59,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 480,
@@ -2992,19 +3143,19 @@
                       0.0,
                       0.8299999833106995,
                       0.36000001430511475,
-                      -1.850000023841858,
+                      -0.949999988079071,
                       1.0
                     ],
                     "boundsM": {
                       "min": [
                         0.6399999856948853,
                         1.3130000233650208,
-                        -2.0870000272989273
+                        -1.1869999915361404
                       ],
                       "max": [
                         1.0199999809265137,
                         1.3470000624656677,
-                        -2.0530000180006027
+                        -1.1529999822378159
                       ],
                       "size": [
                         0.3799999952316284,
@@ -3016,7 +3167,7 @@
                   {
                     "componentId": "seat-07-handle",
                     "sourceNodeId": "seat-07-handle",
-                    "sourceNodeIndex": 64,
+                    "sourceNodeIndex": 66,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 528,
@@ -3063,7 +3214,7 @@
                   {
                     "componentId": "seat-08-handle",
                     "sourceNodeId": "seat-08-handle",
-                    "sourceNodeIndex": 71,
+                    "sourceNodeIndex": 73,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 576,
@@ -3110,7 +3261,7 @@
                   {
                     "componentId": "seat-09-handle",
                     "sourceNodeId": "seat-09-handle",
-                    "sourceNodeIndex": 78,
+                    "sourceNodeIndex": 80,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 624,
@@ -3157,7 +3308,7 @@
                   {
                     "componentId": "seat-10-handle",
                     "sourceNodeId": "seat-10-handle",
-                    "sourceNodeIndex": 85,
+                    "sourceNodeIndex": 87,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 672,
@@ -3204,7 +3355,7 @@
                   {
                     "componentId": "upright-rail",
                     "sourceNodeId": "upright-rail",
-                    "sourceNodeIndex": 94,
+                    "sourceNodeIndex": 96,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 720,
@@ -3251,7 +3402,7 @@
                   {
                     "componentId": "upright-rail.001",
                     "sourceNodeId": "upright-rail.001",
-                    "sourceNodeIndex": 95,
+                    "sourceNodeIndex": 97,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 780,
@@ -3298,7 +3449,7 @@
                   {
                     "componentId": "upright-rail.002",
                     "sourceNodeId": "upright-rail.002",
-                    "sourceNodeIndex": 96,
+                    "sourceNodeIndex": 98,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 840,
@@ -3345,7 +3496,7 @@
                   {
                     "componentId": "upright-rail.003",
                     "sourceNodeId": "upright-rail.003",
-                    "sourceNodeIndex": 97,
+                    "sourceNodeIndex": 99,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 900,
@@ -3392,7 +3543,7 @@
                   {
                     "componentId": "upright-rail.004",
                     "sourceNodeId": "upright-rail.004",
-                    "sourceNodeIndex": 98,
+                    "sourceNodeIndex": 100,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 960,
@@ -3439,7 +3590,7 @@
                   {
                     "componentId": "upright-rail.005",
                     "sourceNodeId": "upright-rail.005",
-                    "sourceNodeIndex": 99,
+                    "sourceNodeIndex": 101,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 1020,
@@ -3486,7 +3637,7 @@
                   {
                     "componentId": "upright-rail.006",
                     "sourceNodeId": "upright-rail.006",
-                    "sourceNodeIndex": 100,
+                    "sourceNodeIndex": 102,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 1080,
@@ -3533,7 +3684,7 @@
                   {
                     "componentId": "upright-rail.007",
                     "sourceNodeId": "upright-rail.007",
-                    "sourceNodeIndex": 101,
+                    "sourceNodeIndex": 103,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 1140,
@@ -3580,66 +3731,13 @@
                 ]
               },
               {
-                "nodeId": "interior-batch-floor",
-                "material": "floor",
-                "componentRanges": [
-                  {
-                    "componentId": "floor",
-                    "sourceNodeId": "floor",
-                    "sourceNodeIndex": 12,
-                    "sourcePrimitive": 0,
-                    "frameId": "vehicle",
-                    "vertexStart": 0,
-                    "vertexCount": 24,
-                    "indexStart": 0,
-                    "indexCount": 36,
-                    "triangleCount": 12,
-                    "sourceLocalToVehicleMatrix": [
-                      1,
-                      0,
-                      0,
-                      0,
-                      0,
-                      1,
-                      0,
-                      0,
-                      0,
-                      0,
-                      1,
-                      0,
-                      0,
-                      0,
-                      0,
-                      1
-                    ],
-                    "boundsM": {
-                      "min": [
-                        -1.149999976158142,
-                        0.25999999046325684,
-                        -5.679999828338623
-                      ],
-                      "max": [
-                        1.149999976158142,
-                        0.36000001430511475,
-                        5.75
-                      ],
-                      "size": [
-                        2.299999952316284,
-                        0.10000002384185791,
-                        11.429999828338623
-                      ]
-                    }
-                  }
-                ]
-              },
-              {
                 "nodeId": "interior-batch-rubber",
                 "material": "rubber",
                 "componentRanges": [
                   {
                     "componentId": "passenger-display",
                     "sourceNodeId": "passenger-display",
-                    "sourceNodeIndex": 19,
+                    "sourceNodeIndex": 21,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 0,
@@ -3686,7 +3784,7 @@
                   {
                     "componentId": "steering-column",
                     "sourceNodeId": "steering-column",
-                    "sourceNodeIndex": 91,
+                    "sourceNodeIndex": 93,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 24,
@@ -3733,7 +3831,7 @@
                   {
                     "componentId": "steering-wheel",
                     "sourceNodeId": "steering-wheel",
-                    "sourceNodeIndex": 92,
+                    "sourceNodeIndex": 94,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 72,
@@ -3786,27 +3884,27 @@
           "level": 1,
           "file": "exports/city-bus-12m-interior.lod1.glb",
           "source": "source/city-bus-12m-interior.lod1.blend",
-          "sha256": "6ac509bee7a8eed10b04ae8c6de1b776087bb6a822c75846b5c4e258045819d5",
-          "sourceSha256": "f62a7aac9d42d63e0350a0b0fbd42f6c20603ac512ffc6477ba3ab7d9a2eb5fb",
-          "triangles": 888,
-          "vertices": 1704,
+          "sha256": "54273d7f7d384d7d292e83c364ffe486dd74a8f82a0eb3ca24235b5ff9987e39",
+          "sourceSha256": "044fc00a2bb60cabcfc40d3ca594ac913169b754ae731d55687ebfe9b5d7d2f6",
+          "triangles": 912,
+          "vertices": 1752,
           "primitives": 7,
-          "bytes": 122468,
+          "bytes": 125620,
           "boundsM": {
             "min": [
-              -1.1775000095367432,
+              -1.25,
               0.25999999046325684,
-              -5.679999828338623
+              -6.179999828338623
             ],
             "max": [
               1.1775000095367432,
               2.700000047683716,
-              5.75
+              5.659999847412109
             ],
             "size": [
-              2.3550000190734863,
+              2.427500009536743,
               2.440000057220459,
-              11.429999828338623
+              11.839999675750732
             ]
           },
           "capabilities": {
@@ -3815,8 +3913,8 @@
             "passengerCapable": true,
             "openingsPreserved": true
           },
-          "sourceBytes": 112392,
-          "geometryBytes": 122468,
+          "sourceBytes": 119842,
+          "geometryBytes": 125620,
           "embeddedImageBytes": 0,
           "staticBatching": {
             "schemaVersion": 1,
@@ -3860,24 +3958,24 @@
                       "min": [
                         -1.1349999904632568,
                         2.5999999046325684,
-                        -5.639999866485596
+                        -6.139999866485596
                       ],
                       "max": [
                         1.1349999904632568,
                         2.700000047683716,
-                        5.739999771118164
+                        5.639999866485596
                       ],
                       "size": [
                         2.2699999809265137,
                         0.10000014305114746,
-                        11.37999963760376
+                        11.779999732971191
                       ]
                     }
                   },
                   {
                     "componentId": "driver-console",
                     "sourceNodeId": "driver-console",
-                    "sourceNodeIndex": 4,
+                    "sourceNodeIndex": 6,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 24,
@@ -3924,7 +4022,7 @@
                   {
                     "componentId": "driver-partition",
                     "sourceNodeId": "driver-partition",
-                    "sourceNodeIndex": 5,
+                    "sourceNodeIndex": 7,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 48,
@@ -3971,7 +4069,7 @@
                   {
                     "componentId": "liner--1-0",
                     "sourceNodeId": "liner--1-0",
-                    "sourceNodeIndex": 13,
+                    "sourceNodeIndex": 15,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 72,
@@ -4001,24 +4099,24 @@
                       "min": [
                         -1.1775000095367432,
                         0.8349999785423279,
-                        -5.650000095367432
+                        -6.150000095367432
                       ],
                       "max": [
                         -1.152500033378601,
                         1.1349999904632568,
-                        -1.2000000476837158
+                        -2.299999952316284
                       ],
                       "size": [
                         0.02499997615814209,
                         0.30000001192092896,
-                        4.450000047683716
+                        3.8500001430511475
                       ]
                     }
                   },
                   {
                     "componentId": "liner--1-1",
                     "sourceNodeId": "liner--1-1",
-                    "sourceNodeIndex": 14,
+                    "sourceNodeIndex": 16,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 96,
@@ -4048,24 +4146,24 @@
                       "min": [
                         -1.1775000095367432,
                         0.8349999785423279,
-                        -0.05000000074505806
+                        -1.399999976158142
                       ],
                       "max": [
                         -1.152500033378601,
                         1.1349999904632568,
-                        3.700000047683716
+                        4.0
                       ],
                       "size": [
                         0.02499997615814209,
                         0.30000001192092896,
-                        3.750000048428774
+                        5.399999976158142
                       ]
                     }
                   },
                   {
                     "componentId": "liner--1-2",
                     "sourceNodeId": "liner--1-2",
-                    "sourceNodeIndex": 15,
+                    "sourceNodeIndex": 17,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 120,
@@ -4095,24 +4193,24 @@
                       "min": [
                         -1.1775000095367432,
                         0.8349999785423279,
-                        4.849999904632568
+                        5.199999809265137
                       ],
                       "max": [
                         -1.152500033378601,
                         1.1349999904632568,
-                        5.71999979019165
+                        5.619999885559082
                       ],
                       "size": [
                         0.02499997615814209,
                         0.30000001192092896,
-                        0.869999885559082
+                        0.4200000762939453
                       ]
                     }
                   },
                   {
                     "componentId": "liner-1-0",
                     "sourceNodeId": "liner-1-0",
-                    "sourceNodeIndex": 16,
+                    "sourceNodeIndex": 18,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 144,
@@ -4142,24 +4240,24 @@
                       "min": [
                         1.152500033378601,
                         0.8349999785423279,
-                        -5.650000095367432
+                        -6.150000095367432
                       ],
                       "max": [
                         1.1775000095367432,
                         1.1349999904632568,
-                        5.71999979019165
+                        5.619999885559082
                       ],
                       "size": [
                         0.02499997615814209,
                         0.30000001192092896,
-                        11.369999885559082
+                        11.769999980926514
                       ]
                     }
                   },
                   {
                     "componentId": "seat-01-pedestal",
                     "sourceNodeId": "seat-01-pedestal",
-                    "sourceNodeIndex": 22,
+                    "sourceNodeIndex": 24,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 168,
@@ -4206,7 +4304,7 @@
                   {
                     "componentId": "seat-02-pedestal",
                     "sourceNodeId": "seat-02-pedestal",
-                    "sourceNodeIndex": 28,
+                    "sourceNodeIndex": 30,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 192,
@@ -4253,7 +4351,7 @@
                   {
                     "componentId": "seat-03-pedestal",
                     "sourceNodeId": "seat-03-pedestal",
-                    "sourceNodeIndex": 34,
+                    "sourceNodeIndex": 36,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 216,
@@ -4300,7 +4398,7 @@
                   {
                     "componentId": "seat-04-pedestal",
                     "sourceNodeId": "seat-04-pedestal",
-                    "sourceNodeIndex": 40,
+                    "sourceNodeIndex": 42,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 240,
@@ -4347,7 +4445,7 @@
                   {
                     "componentId": "seat-05-pedestal",
                     "sourceNodeId": "seat-05-pedestal",
-                    "sourceNodeIndex": 46,
+                    "sourceNodeIndex": 48,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 264,
@@ -4370,19 +4468,19 @@
                       0.0,
                       -0.8299999833106995,
                       0.36000001430511475,
-                      -1.850000023841858,
+                      -0.949999988079071,
                       1.0
                     ],
                     "boundsM": {
                       "min": [
                         -0.8799999840557575,
                         0.3750000139698386,
-                        -1.9100000225007534
+                        -1.0099999867379665
                       ],
                       "max": [
                         -0.7799999825656414,
                         0.7450000047683716,
-                        -1.7900000251829624
+                        -0.8899999894201756
                       ],
                       "size": [
                         0.10000000149011612,
@@ -4394,7 +4492,7 @@
                   {
                     "componentId": "seat-06-pedestal",
                     "sourceNodeId": "seat-06-pedestal",
-                    "sourceNodeIndex": 52,
+                    "sourceNodeIndex": 54,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 288,
@@ -4417,19 +4515,19 @@
                       0.0,
                       0.8299999833106995,
                       0.36000001430511475,
-                      -1.850000023841858,
+                      -0.949999988079071,
                       1.0
                     ],
                     "boundsM": {
                       "min": [
                         0.7799999825656414,
                         0.3750000139698386,
-                        -1.9100000225007534
+                        -1.0099999867379665
                       ],
                       "max": [
                         0.8799999840557575,
                         0.7450000047683716,
-                        -1.7900000251829624
+                        -0.8899999894201756
                       ],
                       "size": [
                         0.10000000149011612,
@@ -4441,7 +4539,7 @@
                   {
                     "componentId": "seat-07-pedestal",
                     "sourceNodeId": "seat-07-pedestal",
-                    "sourceNodeIndex": 58,
+                    "sourceNodeIndex": 60,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 312,
@@ -4488,7 +4586,7 @@
                   {
                     "componentId": "seat-08-pedestal",
                     "sourceNodeId": "seat-08-pedestal",
-                    "sourceNodeIndex": 64,
+                    "sourceNodeIndex": 66,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 336,
@@ -4535,7 +4633,7 @@
                   {
                     "componentId": "seat-09-pedestal",
                     "sourceNodeId": "seat-09-pedestal",
-                    "sourceNodeIndex": 70,
+                    "sourceNodeIndex": 72,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 360,
@@ -4582,7 +4680,7 @@
                   {
                     "componentId": "seat-10-pedestal",
                     "sourceNodeId": "seat-10-pedestal",
-                    "sourceNodeIndex": 76,
+                    "sourceNodeIndex": 78,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 384,
@@ -4629,7 +4727,7 @@
                   {
                     "componentId": "wheel-well--1--3.1",
                     "sourceNodeId": "wheel-well--1--3.1",
-                    "sourceNodeIndex": 92,
+                    "sourceNodeIndex": 94,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 408,
@@ -4676,7 +4774,7 @@
                   {
                     "componentId": "wheel-well--1-3.1",
                     "sourceNodeId": "wheel-well--1-3.1",
-                    "sourceNodeIndex": 93,
+                    "sourceNodeIndex": 95,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 432,
@@ -4723,7 +4821,7 @@
                   {
                     "componentId": "wheel-well-1--3.1",
                     "sourceNodeId": "wheel-well-1--3.1",
-                    "sourceNodeIndex": 94,
+                    "sourceNodeIndex": 96,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 456,
@@ -4770,7 +4868,7 @@
                   {
                     "componentId": "wheel-well-1-3.1",
                     "sourceNodeId": "wheel-well-1-3.1",
-                    "sourceNodeIndex": 95,
+                    "sourceNodeIndex": 97,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 480,
@@ -4870,7 +4968,7 @@
                   {
                     "componentId": "stop-bell",
                     "sourceNodeId": "stop-bell",
-                    "sourceNodeIndex": 83,
+                    "sourceNodeIndex": 85,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 24,
@@ -4917,13 +5015,160 @@
                 ]
               },
               {
+                "nodeId": "interior-batch-floor",
+                "material": "floor",
+                "componentRanges": [
+                  {
+                    "componentId": "door-front-threshold-slab",
+                    "sourceNodeId": "door-front-threshold-slab",
+                    "sourceNodeIndex": 3,
+                    "sourcePrimitive": 0,
+                    "frameId": "vehicle",
+                    "vertexStart": 0,
+                    "vertexCount": 24,
+                    "indexStart": 0,
+                    "indexCount": 36,
+                    "triangleCount": 12,
+                    "sourceLocalToVehicleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -1.25,
+                        0.25999999046325684,
+                        4.0
+                      ],
+                      "max": [
+                        -1.149999976158142,
+                        0.36000001430511475,
+                        5.199999809265137
+                      ],
+                      "size": [
+                        0.10000002384185791,
+                        0.10000002384185791,
+                        1.1999998092651367
+                      ]
+                    }
+                  },
+                  {
+                    "componentId": "door-rear-threshold-slab",
+                    "sourceNodeId": "door-rear-threshold-slab",
+                    "sourceNodeIndex": 4,
+                    "sourcePrimitive": 0,
+                    "frameId": "vehicle",
+                    "vertexStart": 24,
+                    "vertexCount": 24,
+                    "indexStart": 36,
+                    "indexCount": 36,
+                    "triangleCount": 12,
+                    "sourceLocalToVehicleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -1.25,
+                        0.25999999046325684,
+                        -2.299999952316284
+                      ],
+                      "max": [
+                        -1.149999976158142,
+                        0.36000001430511475,
+                        -1.399999976158142
+                      ],
+                      "size": [
+                        0.10000002384185791,
+                        0.10000002384185791,
+                        0.8999999761581421
+                      ]
+                    }
+                  },
+                  {
+                    "componentId": "floor",
+                    "sourceNodeId": "floor",
+                    "sourceNodeIndex": 14,
+                    "sourcePrimitive": 0,
+                    "frameId": "vehicle",
+                    "vertexStart": 48,
+                    "vertexCount": 24,
+                    "indexStart": 72,
+                    "indexCount": 36,
+                    "triangleCount": 12,
+                    "sourceLocalToVehicleMatrix": [
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ],
+                    "boundsM": {
+                      "min": [
+                        -1.149999976158142,
+                        0.25999999046325684,
+                        -6.179999828338623
+                      ],
+                      "max": [
+                        1.149999976158142,
+                        0.36000001430511475,
+                        5.650000095367432
+                      ],
+                      "size": [
+                        2.299999952316284,
+                        0.10000002384185791,
+                        11.829999923706055
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
                 "nodeId": "interior-batch-glass",
                 "material": "glass",
                 "componentRanges": [
                   {
                     "componentId": "driver-partition-glass",
                     "sourceNodeId": "driver-partition-glass",
-                    "sourceNodeIndex": 6,
+                    "sourceNodeIndex": 8,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 0,
@@ -4976,7 +5221,7 @@
                   {
                     "componentId": "driver-seat",
                     "sourceNodeId": "driver-seat",
-                    "sourceNodeIndex": 8,
+                    "sourceNodeIndex": 10,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 0,
@@ -5023,7 +5268,7 @@
                   {
                     "componentId": "driver-seat-back",
                     "sourceNodeId": "driver-seat-back",
-                    "sourceNodeIndex": 9,
+                    "sourceNodeIndex": 11,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 24,
@@ -5070,7 +5315,7 @@
                   {
                     "componentId": "seat-01-back",
                     "sourceNodeId": "seat-01-back",
-                    "sourceNodeIndex": 20,
+                    "sourceNodeIndex": 22,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 48,
@@ -5117,7 +5362,7 @@
                   {
                     "componentId": "seat-01-cushion",
                     "sourceNodeId": "seat-01-cushion",
-                    "sourceNodeIndex": 21,
+                    "sourceNodeIndex": 23,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 72,
@@ -5164,7 +5409,7 @@
                   {
                     "componentId": "seat-02-back",
                     "sourceNodeId": "seat-02-back",
-                    "sourceNodeIndex": 26,
+                    "sourceNodeIndex": 28,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 96,
@@ -5211,7 +5456,7 @@
                   {
                     "componentId": "seat-02-cushion",
                     "sourceNodeId": "seat-02-cushion",
-                    "sourceNodeIndex": 27,
+                    "sourceNodeIndex": 29,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 120,
@@ -5258,7 +5503,7 @@
                   {
                     "componentId": "seat-03-back",
                     "sourceNodeId": "seat-03-back",
-                    "sourceNodeIndex": 32,
+                    "sourceNodeIndex": 34,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 144,
@@ -5305,7 +5550,7 @@
                   {
                     "componentId": "seat-03-cushion",
                     "sourceNodeId": "seat-03-cushion",
-                    "sourceNodeIndex": 33,
+                    "sourceNodeIndex": 35,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 168,
@@ -5352,7 +5597,7 @@
                   {
                     "componentId": "seat-04-back",
                     "sourceNodeId": "seat-04-back",
-                    "sourceNodeIndex": 38,
+                    "sourceNodeIndex": 40,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 192,
@@ -5399,7 +5644,7 @@
                   {
                     "componentId": "seat-04-cushion",
                     "sourceNodeId": "seat-04-cushion",
-                    "sourceNodeIndex": 39,
+                    "sourceNodeIndex": 41,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 216,
@@ -5446,7 +5691,7 @@
                   {
                     "componentId": "seat-05-back",
                     "sourceNodeId": "seat-05-back",
-                    "sourceNodeIndex": 44,
+                    "sourceNodeIndex": 46,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 240,
@@ -5469,19 +5714,19 @@
                       0.0,
                       -0.8299999833106995,
                       0.36000001430511475,
-                      -1.850000023841858,
+                      -0.949999988079071,
                       1.0
                     ],
                     "boundsM": {
                       "min": [
                         -1.0599999874830246,
                         0.7750000059604645,
-                        -2.0875000208616257
+                        -1.1874999850988388
                       ],
                       "max": [
                         -0.5999999791383743,
                         1.3450000286102295,
-                        -2.0225000232458115
+                        -1.1224999874830246
                       ],
                       "size": [
                         0.46000000834465027,
@@ -5493,7 +5738,7 @@
                   {
                     "componentId": "seat-05-cushion",
                     "sourceNodeId": "seat-05-cushion",
-                    "sourceNodeIndex": 45,
+                    "sourceNodeIndex": 47,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 264,
@@ -5516,19 +5761,19 @@
                       0.0,
                       -0.8299999833106995,
                       0.36000001430511475,
-                      -1.850000023841858,
+                      -0.949999988079071,
                       1.0
                     ],
                     "boundsM": {
                       "min": [
                         -1.0599999874830246,
                         0.7400000095367432,
-                        -2.070000022649765
+                        -1.1699999868869781
                       ],
                       "max": [
                         -0.5999999791383743,
                         0.8100000023841858,
-                        -1.6300000250339508
+                        -0.7299999892711639
                       ],
                       "size": [
                         0.46000000834465027,
@@ -5540,7 +5785,7 @@
                   {
                     "componentId": "seat-06-back",
                     "sourceNodeId": "seat-06-back",
-                    "sourceNodeIndex": 50,
+                    "sourceNodeIndex": 52,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 288,
@@ -5563,19 +5808,19 @@
                       0.0,
                       0.8299999833106995,
                       0.36000001430511475,
-                      -1.850000023841858,
+                      -0.949999988079071,
                       1.0
                     ],
                     "boundsM": {
                       "min": [
                         0.5999999791383743,
                         0.7750000059604645,
-                        -2.0875000208616257
+                        -1.1874999850988388
                       ],
                       "max": [
                         1.0599999874830246,
                         1.3450000286102295,
-                        -2.0225000232458115
+                        -1.1224999874830246
                       ],
                       "size": [
                         0.46000000834465027,
@@ -5587,7 +5832,7 @@
                   {
                     "componentId": "seat-06-cushion",
                     "sourceNodeId": "seat-06-cushion",
-                    "sourceNodeIndex": 51,
+                    "sourceNodeIndex": 53,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 312,
@@ -5610,19 +5855,19 @@
                       0.0,
                       0.8299999833106995,
                       0.36000001430511475,
-                      -1.850000023841858,
+                      -0.949999988079071,
                       1.0
                     ],
                     "boundsM": {
                       "min": [
                         0.5999999791383743,
                         0.7400000095367432,
-                        -2.070000022649765
+                        -1.1699999868869781
                       ],
                       "max": [
                         1.0599999874830246,
                         0.8100000023841858,
-                        -1.6300000250339508
+                        -0.7299999892711639
                       ],
                       "size": [
                         0.46000000834465027,
@@ -5634,7 +5879,7 @@
                   {
                     "componentId": "seat-07-back",
                     "sourceNodeId": "seat-07-back",
-                    "sourceNodeIndex": 56,
+                    "sourceNodeIndex": 58,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 336,
@@ -5681,7 +5926,7 @@
                   {
                     "componentId": "seat-07-cushion",
                     "sourceNodeId": "seat-07-cushion",
-                    "sourceNodeIndex": 57,
+                    "sourceNodeIndex": 59,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 360,
@@ -5728,7 +5973,7 @@
                   {
                     "componentId": "seat-08-back",
                     "sourceNodeId": "seat-08-back",
-                    "sourceNodeIndex": 62,
+                    "sourceNodeIndex": 64,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 384,
@@ -5775,7 +6020,7 @@
                   {
                     "componentId": "seat-08-cushion",
                     "sourceNodeId": "seat-08-cushion",
-                    "sourceNodeIndex": 63,
+                    "sourceNodeIndex": 65,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 408,
@@ -5822,7 +6067,7 @@
                   {
                     "componentId": "seat-09-back",
                     "sourceNodeId": "seat-09-back",
-                    "sourceNodeIndex": 68,
+                    "sourceNodeIndex": 70,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 432,
@@ -5869,7 +6114,7 @@
                   {
                     "componentId": "seat-09-cushion",
                     "sourceNodeId": "seat-09-cushion",
-                    "sourceNodeIndex": 69,
+                    "sourceNodeIndex": 71,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 456,
@@ -5916,7 +6161,7 @@
                   {
                     "componentId": "seat-10-back",
                     "sourceNodeId": "seat-10-back",
-                    "sourceNodeIndex": 74,
+                    "sourceNodeIndex": 76,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 480,
@@ -5963,7 +6208,7 @@
                   {
                     "componentId": "seat-10-cushion",
                     "sourceNodeId": "seat-10-cushion",
-                    "sourceNodeIndex": 75,
+                    "sourceNodeIndex": 77,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 504,
@@ -6016,7 +6261,7 @@
                   {
                     "componentId": "entry-rail-front",
                     "sourceNodeId": "entry-rail-front",
-                    "sourceNodeIndex": 10,
+                    "sourceNodeIndex": 12,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 0,
@@ -6046,12 +6291,12 @@
                       "min": [
                         -0.9833826422691345,
                         0.800000011920929,
-                        4.922999858856201
+                        5.273000240325928
                       ],
                       "max": [
                         -0.9366173148155212,
                         2.309999942779541,
-                        4.976999759674072
+                        5.327000141143799
                       ],
                       "size": [
                         0.04676532745361328,
@@ -6063,7 +6308,7 @@
                   {
                     "componentId": "entry-rail-rear",
                     "sourceNodeId": "entry-rail-rear",
-                    "sourceNodeIndex": 11,
+                    "sourceNodeIndex": 13,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 36,
@@ -6093,24 +6338,24 @@
                       "min": [
                         -0.9833826422691345,
                         0.800000011920929,
-                        0.023000000044703484
+                        -1.3269999027252197
                       ],
                       "max": [
                         -0.9366173148155212,
                         2.309999942779541,
-                        0.07699999958276749
+                        -1.2730000019073486
                       ],
                       "size": [
                         0.04676532745361328,
                         1.509999930858612,
-                        0.053999999538064
+                        0.053999900817871094
                       ]
                     }
                   },
                   {
                     "componentId": "longitudinal-rail--1",
                     "sourceNodeId": "longitudinal-rail--1",
-                    "sourceNodeIndex": 17,
+                    "sourceNodeIndex": 19,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 72,
@@ -6157,7 +6402,7 @@
                   {
                     "componentId": "longitudinal-rail-1",
                     "sourceNodeId": "longitudinal-rail-1",
-                    "sourceNodeIndex": 18,
+                    "sourceNodeIndex": 20,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 108,
@@ -6204,7 +6449,7 @@
                   {
                     "componentId": "upright-rail",
                     "sourceNodeId": "upright-rail",
-                    "sourceNodeIndex": 84,
+                    "sourceNodeIndex": 86,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 144,
@@ -6251,7 +6496,7 @@
                   {
                     "componentId": "upright-rail.001",
                     "sourceNodeId": "upright-rail.001",
-                    "sourceNodeIndex": 85,
+                    "sourceNodeIndex": 87,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 180,
@@ -6298,7 +6543,7 @@
                   {
                     "componentId": "upright-rail.002",
                     "sourceNodeId": "upright-rail.002",
-                    "sourceNodeIndex": 86,
+                    "sourceNodeIndex": 88,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 216,
@@ -6345,7 +6590,7 @@
                   {
                     "componentId": "upright-rail.003",
                     "sourceNodeId": "upright-rail.003",
-                    "sourceNodeIndex": 87,
+                    "sourceNodeIndex": 89,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 252,
@@ -6392,7 +6637,7 @@
                   {
                     "componentId": "upright-rail.004",
                     "sourceNodeId": "upright-rail.004",
-                    "sourceNodeIndex": 88,
+                    "sourceNodeIndex": 90,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 288,
@@ -6439,7 +6684,7 @@
                   {
                     "componentId": "upright-rail.005",
                     "sourceNodeId": "upright-rail.005",
-                    "sourceNodeIndex": 89,
+                    "sourceNodeIndex": 91,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 324,
@@ -6486,7 +6731,7 @@
                   {
                     "componentId": "upright-rail.006",
                     "sourceNodeId": "upright-rail.006",
-                    "sourceNodeIndex": 90,
+                    "sourceNodeIndex": 92,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 360,
@@ -6533,7 +6778,7 @@
                   {
                     "componentId": "upright-rail.007",
                     "sourceNodeId": "upright-rail.007",
-                    "sourceNodeIndex": 91,
+                    "sourceNodeIndex": 93,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 396,
@@ -6580,66 +6825,13 @@
                 ]
               },
               {
-                "nodeId": "interior-batch-floor",
-                "material": "floor",
-                "componentRanges": [
-                  {
-                    "componentId": "floor",
-                    "sourceNodeId": "floor",
-                    "sourceNodeIndex": 12,
-                    "sourcePrimitive": 0,
-                    "frameId": "vehicle",
-                    "vertexStart": 0,
-                    "vertexCount": 24,
-                    "indexStart": 0,
-                    "indexCount": 36,
-                    "triangleCount": 12,
-                    "sourceLocalToVehicleMatrix": [
-                      1,
-                      0,
-                      0,
-                      0,
-                      0,
-                      1,
-                      0,
-                      0,
-                      0,
-                      0,
-                      1,
-                      0,
-                      0,
-                      0,
-                      0,
-                      1
-                    ],
-                    "boundsM": {
-                      "min": [
-                        -1.149999976158142,
-                        0.25999999046325684,
-                        -5.679999828338623
-                      ],
-                      "max": [
-                        1.149999976158142,
-                        0.36000001430511475,
-                        5.75
-                      ],
-                      "size": [
-                        2.299999952316284,
-                        0.10000002384185791,
-                        11.429999828338623
-                      ]
-                    }
-                  }
-                ]
-              },
-              {
                 "nodeId": "interior-batch-rubber",
                 "material": "rubber",
                 "componentRanges": [
                   {
                     "componentId": "passenger-display",
                     "sourceNodeId": "passenger-display",
-                    "sourceNodeIndex": 19,
+                    "sourceNodeIndex": 21,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 0,
@@ -6686,7 +6878,7 @@
                   {
                     "componentId": "steering-column",
                     "sourceNodeId": "steering-column",
-                    "sourceNodeIndex": 81,
+                    "sourceNodeIndex": 83,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 24,
@@ -6733,7 +6925,7 @@
                   {
                     "componentId": "steering-wheel",
                     "sourceNodeId": "steering-wheel",
-                    "sourceNodeIndex": 82,
+                    "sourceNodeIndex": 84,
                     "sourcePrimitive": 0,
                     "frameId": "vehicle",
                     "vertexStart": 72,
@@ -6785,28 +6977,28 @@
       ],
       "boundsM": {
         "min": [
-          -1.1775000095367432,
+          -1.25,
           0.25999999046325684,
-          -5.679999828338623
+          -6.179999828338623
         ],
         "max": [
           1.1775000095367432,
           2.700000047683716,
-          5.75
+          5.659999847412109
         ],
         "size": [
-          2.3550000190734863,
+          2.427500009536743,
           2.440000057220459,
-          11.429999828338623
+          11.839999675750732
         ]
       },
       "expectedDimensionsM": [
-        2.355,
+        2.4275,
         2.44,
-        11.43
+        11.83
       ],
       "dimensionToleranceM": 0.02,
-      "dimensionBasis": "Representative project proposal; no specific manufacturer measurement claim. Body nominal 12.0 x 2.5 m; full exterior includes mirrors, lamps and roof equipment.",
+      "dimensionBasis": "Representative project proposal; no specific manufacturer measurement claim. Body nominal 12.4 x 2.5 m; Nova typical door positions, not a full brand replica; full exterior includes mirrors, lamps and roof equipment.",
       "pivot": {
         "frameId": "vehicle",
         "positionM": [
@@ -6889,9 +7081,9 @@
       ],
       "textureMode": "shared",
       "textureCost": {
-        "geometryBytes": 465080,
+        "geometryBytes": 471384,
         "embeddedImageBytes": 0,
-        "glbTotalBytes": 465080,
+        "glbTotalBytes": 471384,
         "uniqueTexelBytesWithMips": 0,
         "note": "Texture-free ordinary GLBs. Role IDs enable later shared material binding; no instance maps."
       },
@@ -6923,7 +7115,11 @@
         "ceilingUndersideM": 2.6,
         "standingHeadroomM": 2.24,
         "minimumMainAisleM": 0.9,
-        "doorWidthM": 1.15,
+        "doorWidthM": 0.9,
+        "doorWidthsM": {
+          "front": 1.2,
+          "rear": 0.9
+        },
         "doorHeightM": 2.1
       },
       "collision": {
@@ -6974,7 +7170,7 @@
         "lib/city/city-buses.ts"
       ],
       "offlineChecks": {
-        "status": "pass",
+        "status": "pending",
         "evidence": [
           "qa/validation.json",
           "qa/blender-validation.json",
@@ -7029,7 +7225,7 @@
           "translationM": [
             -1.25,
             0.36,
-            3.9875
+            4.3
           ],
           "rotationQuaternionXYZW": [
             0,
@@ -7049,7 +7245,7 @@
           "translationM": [
             -1.25,
             0.36,
-            4.5625
+            4.9
           ],
           "rotationQuaternionXYZW": [
             0,
@@ -7069,7 +7265,7 @@
           "translationM": [
             -1.25,
             0.36,
-            -0.9125
+            -2.0749999999999997
           ],
           "rotationQuaternionXYZW": [
             0,
@@ -7089,7 +7285,7 @@
           "translationM": [
             -1.25,
             0.36,
-            -0.33749999999999997
+            -1.625
           ],
           "rotationQuaternionXYZW": [
             0,
@@ -7104,42 +7300,42 @@
           ]
         }
       ],
-      "nominalLengthM": 12,
+      "nominalLengthM": 12.4,
       "bodyBoundsM": {
         "min": [
           -1.25,
           0.26,
-          -5.8
+          -6.3
         ],
         "max": [
           1.25,
           2.82,
-          6.2
+          6.1
         ],
         "size": [
           2.5,
           2.5599999999999996,
-          12.0
+          12.399999999999999
         ]
       },
       "fullBoundsM": {
         "min": [
           -1.5199999809265137,
           0.0,
-          -5.818999767303467
+          -6.318999767303467
         ],
         "max": [
           1.5199999809265137,
           3.069999933242798,
-          6.215000152587891
+          6.114999771118164
         ],
         "size": [
           3.0399999618530273,
           3.069999933242798,
-          12.033999919891357
+          12.43399953842163
         ]
       },
-      "dimensionBasis": "Representative project modelling target, not a specific New Flyer survey or accessibility certification",
+      "dimensionBasis": "Nova typical 12.4m body, 6.2m wheelbase and asymmetric doors from TransLink BIDG2018 Fig1.2.11; project art and width preserved, not a full brand replica or accessibility certification",
       "contactDatum": {
         "frameId": "vehicle",
         "kind": "tyre-ground-contact",
@@ -7276,22 +7472,22 @@
             [
               -0.78,
               0.36,
-              -5.68
+              -6.18
             ],
             [
               0.78,
               0.36,
-              -5.68
+              -6.18
             ],
             [
               0.78,
               0.36,
-              5.75
+              5.65
             ],
             [
               -0.78,
               0.36,
-              5.75
+              5.65
             ]
           ],
           "indices": [
@@ -7304,18 +7500,88 @@
           ]
         },
         {
+          "surfaceId": "front-door-threshold-extension",
+          "frameId": "vehicle",
+          "verticesM": [
+            [
+              -1.25,
+              0.36,
+              4.0
+            ],
+            [
+              -1.15,
+              0.36,
+              4.0
+            ],
+            [
+              -1.15,
+              0.36,
+              5.2
+            ],
+            [
+              -1.25,
+              0.36,
+              5.2
+            ]
+          ],
+          "indices": [
+            0,
+            2,
+            1,
+            0,
+            3,
+            2
+          ],
+          "visibleComponentId": "door-front-threshold-slab"
+        },
+        {
+          "surfaceId": "rear-door-threshold-extension",
+          "frameId": "vehicle",
+          "verticesM": [
+            [
+              -1.25,
+              0.36,
+              -2.3
+            ],
+            [
+              -1.15,
+              0.36,
+              -2.3
+            ],
+            [
+              -1.15,
+              0.36,
+              -1.4
+            ],
+            [
+              -1.25,
+              0.36,
+              -1.4
+            ]
+          ],
+          "indices": [
+            0,
+            2,
+            1,
+            0,
+            3,
+            2
+          ],
+          "visibleComponentId": "door-rear-threshold-slab"
+        },
+        {
           "surfaceId": "side--1-0",
           "frameId": "vehicle",
           "verticesM": [
             [
               -1.15,
               0.36,
-              -5.68
+              -6.18
             ],
             [
               -0.78,
               0.36,
-              -5.68
+              -6.18
             ],
             [
               -0.78,
@@ -7388,12 +7654,12 @@
             [
               -0.78,
               0.36,
-              5.75
+              5.65
             ],
             [
               -1.15,
               0.36,
-              5.75
+              5.65
             ]
           ],
           "indices": [
@@ -7412,12 +7678,12 @@
             [
               0.78,
               0.36,
-              -5.68
+              -6.18
             ],
             [
               1.15,
               0.36,
-              -5.68
+              -6.18
             ],
             [
               1.15,
@@ -7490,12 +7756,12 @@
             [
               1.15,
               0.36,
-              5.75
+              5.65
             ],
             [
               0.78,
               0.36,
-              5.75
+              5.65
             ]
           ],
           "indices": [
@@ -7522,6 +7788,8 @@
         "frameId": "vehicle",
         "surfaceRefs": [
           "main-center",
+          "front-door-threshold-extension",
+          "rear-door-threshold-extension",
           "side--1-0",
           "side--1-1",
           "side--1-2",
@@ -7616,22 +7884,22 @@
             [
               -1.25,
               0.36,
-              3.7
+              4.0
             ],
             [
               -1.25,
               0.36,
-              4.85
+              5.2
             ],
             [
               -1.25,
               2.46,
-              4.85
+              5.2
             ],
             [
               -1.25,
               2.46,
-              3.7
+              4.0
             ]
           ],
           "outwardNormal": [
@@ -7644,7 +7912,7 @@
             "translationM": [
               -1.25,
               0.36,
-              3.9875
+              4.3
             ],
             "rotationQuaternionXYZW": [
               0,
@@ -7663,7 +7931,7 @@
             "translationM": [
               -1.39,
               0.36,
-              3.3674999999999997
+              3.655
             ],
             "rotationQuaternionXYZW": [
               0,
@@ -7688,7 +7956,7 @@
                   "translationM": [
                     -1.25,
                     0.36,
-                    3.9875
+                    4.3
                   ],
                   "rotationQuaternionXYZW": [
                     0,
@@ -7710,7 +7978,7 @@
                   "translationM": [
                     -1.39,
                     0.36,
-                    3.9875
+                    4.3
                   ],
                   "rotationQuaternionXYZW": [
                     0,
@@ -7732,7 +8000,7 @@
                   "translationM": [
                     -1.39,
                     0.36,
-                    3.3674999999999997
+                    3.655
                   ],
                   "rotationQuaternionXYZW": [
                     0,
@@ -7748,7 +8016,7 @@
                 }
               }
             ],
-            "translationTravelM": 0.76
+            "translationTravelM": 0.7850000000000001
           },
           "animationClip": "door-right-front-a-open",
           "animationNodeId": "door-right-front-a",
@@ -7757,30 +8025,30 @@
             "min": [
               -1.417,
               0.36,
-              3.0874999999999995
+              3.3625
             ],
             "max": [
               -1.223,
               2.44,
-              4.2675
+              4.5925
             ],
             "size": [
               0.19399999999999995,
               2.08,
-              1.1800000000000006
+              1.2300000000000004
             ]
           },
           "boardingPointM": [
             -1.7,
             0.36,
-            4.275
+            4.6
           ],
           "doorLocalToVehicleTransform": {
             "parentFrameId": "vehicle",
             "translationM": [
               -1.25,
               0.36,
-              3.9875
+              4.3
             ],
             "rotationQuaternionXYZW": [
               0,
@@ -7794,7 +8062,7 @@
               1
             ]
           },
-          "doorWidthM": 1.15,
+          "doorWidthM": 1.2000000000000002,
           "doorHeightM": 2.1,
           "sillHeightM": 0.36
         },
@@ -7810,22 +8078,22 @@
             [
               -1.25,
               0.36,
-              3.7
+              4.0
             ],
             [
               -1.25,
               0.36,
-              4.85
+              5.2
             ],
             [
               -1.25,
               2.46,
-              4.85
+              5.2
             ],
             [
               -1.25,
               2.46,
-              3.7
+              4.0
             ]
           ],
           "outwardNormal": [
@@ -7838,7 +8106,7 @@
             "translationM": [
               -1.25,
               0.36,
-              4.5625
+              4.9
             ],
             "rotationQuaternionXYZW": [
               0,
@@ -7857,7 +8125,7 @@
             "translationM": [
               -1.39,
               0.36,
-              5.1825
+              5.545000000000001
             ],
             "rotationQuaternionXYZW": [
               0,
@@ -7882,7 +8150,7 @@
                   "translationM": [
                     -1.25,
                     0.36,
-                    4.5625
+                    4.9
                   ],
                   "rotationQuaternionXYZW": [
                     0,
@@ -7904,7 +8172,7 @@
                   "translationM": [
                     -1.39,
                     0.36,
-                    4.5625
+                    4.9
                   ],
                   "rotationQuaternionXYZW": [
                     0,
@@ -7926,7 +8194,7 @@
                   "translationM": [
                     -1.39,
                     0.36,
-                    5.1825
+                    5.545000000000001
                   ],
                   "rotationQuaternionXYZW": [
                     0,
@@ -7942,7 +8210,7 @@
                 }
               }
             ],
-            "translationTravelM": 0.76
+            "translationTravelM": 0.7850000000000001
           },
           "animationClip": "door-right-front-b-open",
           "animationNodeId": "door-right-front-b",
@@ -7951,30 +8219,30 @@
             "min": [
               -1.417,
               0.36,
-              4.2825
+              4.6075
             ],
             "max": [
               -1.223,
               2.44,
-              5.4625
+              5.837500000000001
             ],
             "size": [
               0.19399999999999995,
               2.08,
-              1.1800000000000006
+              1.2300000000000013
             ]
           },
           "boardingPointM": [
             -1.7,
             0.36,
-            4.275
+            4.6
           ],
           "doorLocalToVehicleTransform": {
             "parentFrameId": "vehicle",
             "translationM": [
               -1.25,
               0.36,
-              4.5625
+              4.9
             ],
             "rotationQuaternionXYZW": [
               0,
@@ -7988,7 +8256,7 @@
               1
             ]
           },
-          "doorWidthM": 1.15,
+          "doorWidthM": 1.2000000000000002,
           "doorHeightM": 2.1,
           "sillHeightM": 0.36
         },
@@ -8004,22 +8272,22 @@
             [
               -1.25,
               0.36,
-              -1.2
+              -2.3
             ],
             [
               -1.25,
               0.36,
-              -0.05
+              -1.4
             ],
             [
               -1.25,
               2.46,
-              -0.05
+              -1.4
             ],
             [
               -1.25,
               2.46,
-              -1.2
+              -2.3
             ]
           ],
           "outwardNormal": [
@@ -8032,7 +8300,7 @@
             "translationM": [
               -1.25,
               0.36,
-              -0.9125
+              -2.0749999999999997
             ],
             "rotationQuaternionXYZW": [
               0,
@@ -8051,7 +8319,7 @@
             "translationM": [
               -1.39,
               0.36,
-              -1.5325
+              -2.57
             ],
             "rotationQuaternionXYZW": [
               0,
@@ -8076,7 +8344,7 @@
                   "translationM": [
                     -1.25,
                     0.36,
-                    -0.9125
+                    -2.0749999999999997
                   ],
                   "rotationQuaternionXYZW": [
                     0,
@@ -8098,7 +8366,7 @@
                   "translationM": [
                     -1.39,
                     0.36,
-                    -0.9125
+                    -2.0749999999999997
                   ],
                   "rotationQuaternionXYZW": [
                     0,
@@ -8120,7 +8388,7 @@
                   "translationM": [
                     -1.39,
                     0.36,
-                    -1.5325
+                    -2.57
                   ],
                   "rotationQuaternionXYZW": [
                     0,
@@ -8136,7 +8404,7 @@
                 }
               }
             ],
-            "translationTravelM": 0.76
+            "translationTravelM": 0.635
           },
           "animationClip": "door-right-rear-a-open",
           "animationNodeId": "door-right-rear-a",
@@ -8145,30 +8413,30 @@
             "min": [
               -1.417,
               0.36,
-              -1.8125
+              -2.7874999999999996
             ],
             "max": [
               -1.223,
               2.44,
-              -0.6325
+              -1.8574999999999997
             ],
             "size": [
               0.19399999999999995,
               2.08,
-              1.1800000000000002
+              0.9299999999999999
             ]
           },
           "boardingPointM": [
             -1.7,
             0.36,
-            -0.625
+            -1.8499999999999999
           ],
           "doorLocalToVehicleTransform": {
             "parentFrameId": "vehicle",
             "translationM": [
               -1.25,
               0.36,
-              -0.9125
+              -2.0749999999999997
             ],
             "rotationQuaternionXYZW": [
               0,
@@ -8182,7 +8450,7 @@
               1
             ]
           },
-          "doorWidthM": 1.15,
+          "doorWidthM": 0.8999999999999999,
           "doorHeightM": 2.1,
           "sillHeightM": 0.36
         },
@@ -8198,22 +8466,22 @@
             [
               -1.25,
               0.36,
-              -1.2
+              -2.3
             ],
             [
               -1.25,
               0.36,
-              -0.05
+              -1.4
             ],
             [
               -1.25,
               2.46,
-              -0.05
+              -1.4
             ],
             [
               -1.25,
               2.46,
-              -1.2
+              -2.3
             ]
           ],
           "outwardNormal": [
@@ -8226,7 +8494,7 @@
             "translationM": [
               -1.25,
               0.36,
-              -0.33749999999999997
+              -1.625
             ],
             "rotationQuaternionXYZW": [
               0,
@@ -8245,7 +8513,7 @@
             "translationM": [
               -1.39,
               0.36,
-              0.28250000000000003
+              -1.1300000000000001
             ],
             "rotationQuaternionXYZW": [
               0,
@@ -8270,7 +8538,7 @@
                   "translationM": [
                     -1.25,
                     0.36,
-                    -0.33749999999999997
+                    -1.625
                   ],
                   "rotationQuaternionXYZW": [
                     0,
@@ -8292,7 +8560,7 @@
                   "translationM": [
                     -1.39,
                     0.36,
-                    -0.33749999999999997
+                    -1.625
                   ],
                   "rotationQuaternionXYZW": [
                     0,
@@ -8314,7 +8582,7 @@
                   "translationM": [
                     -1.39,
                     0.36,
-                    0.28250000000000003
+                    -1.1300000000000001
                   ],
                   "rotationQuaternionXYZW": [
                     0,
@@ -8330,7 +8598,7 @@
                 }
               }
             ],
-            "translationTravelM": 0.76
+            "translationTravelM": 0.635
           },
           "animationClip": "door-right-rear-b-open",
           "animationNodeId": "door-right-rear-b",
@@ -8339,30 +8607,30 @@
             "min": [
               -1.417,
               0.36,
-              -0.6174999999999999
+              -1.8425
             ],
             "max": [
               -1.223,
               2.44,
-              0.5625
+              -0.9125000000000001
             ],
             "size": [
               0.19399999999999995,
               2.08,
-              1.18
+              0.9299999999999999
             ]
           },
           "boardingPointM": [
             -1.7,
             0.36,
-            -0.625
+            -1.8499999999999999
           ],
           "doorLocalToVehicleTransform": {
             "parentFrameId": "vehicle",
             "translationM": [
               -1.25,
               0.36,
-              -0.33749999999999997
+              -1.625
             ],
             "rotationQuaternionXYZW": [
               0,
@@ -8376,7 +8644,7 @@
               1
             ]
           },
-          "doorWidthM": 1.15,
+          "doorWidthM": 0.8999999999999999,
           "doorHeightM": 2.1,
           "sillHeightM": 0.36
         }
@@ -8505,7 +8773,7 @@
           "pelvisPointM": [
             -0.83,
             0.88,
-            -1.85
+            -0.95
           ],
           "facingQuaternionXYZW": [
             0,
@@ -8516,7 +8784,7 @@
           "cameraEyePointM": [
             -0.83,
             1.47,
-            -1.8250000000000002
+            -0.9249999999999999
           ],
           "pelvisAnchorNodeId": "seat-05-pelvis",
           "cameraAnchorNodeId": "seat-05-camera",
@@ -8534,7 +8802,7 @@
           "pelvisPointM": [
             0.83,
             0.88,
-            -1.85
+            -0.95
           ],
           "facingQuaternionXYZW": [
             0,
@@ -8545,7 +8813,7 @@
           "cameraEyePointM": [
             0.83,
             1.47,
-            -1.8250000000000002
+            -0.9249999999999999
           ],
           "pelvisAnchorNodeId": "seat-06-pelvis",
           "cameraAnchorNodeId": "seat-06-camera",
@@ -8800,7 +9068,7 @@
           "pointM": [
             -1.7,
             0.36,
-            4.275
+            4.6
           ]
         },
         {
@@ -8810,7 +9078,7 @@
           "pointM": [
             -1.25,
             0.36,
-            4.275
+            4.6
           ]
         },
         {
@@ -8820,7 +9088,7 @@
           "pointM": [
             -1.7,
             0.36,
-            -0.625
+            -1.8499999999999999
           ]
         },
         {
@@ -8830,7 +9098,7 @@
           "pointM": [
             -1.25,
             0.36,
-            -0.625
+            -1.8499999999999999
           ]
         },
         {
@@ -8866,17 +9134,17 @@
               "min": [
                 -1.15,
                 0.26,
-                -5.68
+                -6.18
               ],
               "max": [
                 1.15,
                 0.36,
-                5.75
+                5.65
               ],
               "size": [
                 2.3,
                 0.09999999999999998,
-                11.43
+                11.83
               ]
             },
             "role": "walkable-floor"
@@ -8889,17 +9157,17 @@
               "min": [
                 -1.135,
                 2.6,
-                -5.64
+                -6.14
               ],
               "max": [
                 1.135,
                 2.7,
-                5.74
+                5.64
               ],
               "size": [
                 2.27,
                 0.10000000000000009,
-                11.379999999999999
+                11.78
               ]
             },
             "role": "ceiling"
@@ -9188,17 +9456,17 @@
               "min": [
                 -1.06,
                 0.74,
-                -2.0700000000000003
+                -1.17
               ],
               "max": [
                 -0.6,
                 0.81,
-                -1.6300000000000001
+                -0.73
               ],
               "size": [
                 0.4600000000000001,
                 0.07000000000000006,
-                0.44000000000000017
+                0.43999999999999995
               ]
             },
             "role": "obstacle"
@@ -9211,12 +9479,12 @@
               "min": [
                 -1.06,
                 0.775,
-                -2.0875
+                -1.1875
               ],
               "max": [
                 -0.6,
                 1.345,
-                -2.0225
+                -1.1225
               ],
               "size": [
                 0.4600000000000001,
@@ -9234,17 +9502,17 @@
               "min": [
                 0.6,
                 0.74,
-                -2.0700000000000003
+                -1.17
               ],
               "max": [
                 1.06,
                 0.81,
-                -1.6300000000000001
+                -0.73
               ],
               "size": [
                 0.4600000000000001,
                 0.07000000000000006,
-                0.44000000000000017
+                0.43999999999999995
               ]
             },
             "role": "obstacle"
@@ -9257,12 +9525,12 @@
               "min": [
                 0.6,
                 0.775,
-                -2.0875
+                -1.1875
               ],
               "max": [
                 1.06,
                 1.345,
-                -2.0225
+                -1.1225
               ],
               "size": [
                 0.4600000000000001,
@@ -9487,17 +9755,17 @@
               "min": [
                 -0.027,
                 0,
-                -0.28
+                -0.29250000000000004
               ],
               "max": [
                 0.027,
                 2.08,
-                0.28
+                0.29250000000000004
               ],
               "size": [
                 0.054,
                 2.08,
-                0.56
+                0.5850000000000001
               ]
             },
             "role": "animated-door-leaf"
@@ -9510,17 +9778,17 @@
               "min": [
                 -0.027,
                 0,
-                -0.28
+                -0.29250000000000004
               ],
               "max": [
                 0.027,
                 2.08,
-                0.28
+                0.29250000000000004
               ],
               "size": [
                 0.054,
                 2.08,
-                0.56
+                0.5850000000000001
               ]
             },
             "role": "animated-door-leaf"
@@ -9533,17 +9801,17 @@
               "min": [
                 -0.027,
                 0,
-                -0.28
+                -0.21749999999999997
               ],
               "max": [
                 0.027,
                 2.08,
-                0.28
+                0.21749999999999997
               ],
               "size": [
                 0.054,
                 2.08,
-                0.56
+                0.43499999999999994
               ]
             },
             "role": "animated-door-leaf"
@@ -9556,17 +9824,17 @@
               "min": [
                 -0.027,
                 0,
-                -0.28
+                -0.21749999999999997
               ],
               "max": [
                 0.027,
                 2.08,
-                0.28
+                0.21749999999999997
               ],
               "size": [
                 0.054,
                 2.08,
-                0.56
+                0.43499999999999994
               ]
             },
             "role": "animated-door-leaf"
@@ -9579,17 +9847,17 @@
               "min": [
                 -1.25,
                 0.36,
-                -5.68
+                -6.3
               ],
               "max": [
                 -1.1800000000000002,
                 2.6,
-                -1.2
+                -2.3
               ],
               "size": [
                 0.06999999999999984,
                 2.24,
-                4.4799999999999995
+                4.0
               ]
             },
             "role": "shell"
@@ -9602,17 +9870,17 @@
               "min": [
                 -1.25,
                 0.36,
-                -0.05
+                -1.4
               ],
               "max": [
                 -1.1800000000000002,
                 2.6,
-                3.7
+                4.0
               ],
               "size": [
                 0.06999999999999984,
                 2.24,
-                3.75
+                5.4
               ]
             },
             "role": "shell"
@@ -9625,17 +9893,17 @@
               "min": [
                 -1.25,
                 0.36,
-                4.85
+                5.2
               ],
               "max": [
                 -1.1800000000000002,
                 2.6,
-                5.75
+                5.65
               ],
               "size": [
                 0.06999999999999984,
                 2.24,
-                0.9000000000000004
+                0.4500000000000002
               ]
             },
             "role": "shell"
@@ -9648,17 +9916,17 @@
               "min": [
                 1.1800000000000002,
                 0.36,
-                -5.68
+                -6.3
               ],
               "max": [
                 1.25,
                 2.6,
-                5.75
+                5.65
               ],
               "size": [
                 0.06999999999999984,
                 2.24,
-                11.43
+                11.95
               ]
             },
             "role": "shell"
@@ -9671,12 +9939,12 @@
               "min": [
                 -1.25,
                 0.36,
-                -5.8
+                -6.3
               ],
               "max": [
                 1.25,
                 2.7,
-                -5.73
+                -6.23
               ],
               "size": [
                 2.5,
@@ -9694,17 +9962,17 @@
               "min": [
                 -1.1,
                 0.36,
-                5.89
+                5.79
               ],
               "max": [
                 1.1,
                 2.6,
-                6.2
+                6.1
               ],
               "size": [
                 2.2,
                 2.24,
-                0.3100000000000005
+                0.3099999999999996
               ]
             },
             "role": "shell"
@@ -9732,6 +10000,54 @@
             },
             "role": "obstacle",
             "visibleNodeId": "display-screen"
+          },
+          {
+            "collisionId": "door-front-threshold-slab",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.25,
+                0.25999999046325684,
+                4.0
+              ],
+              "max": [
+                -1.149999976158142,
+                0.36000001430511475,
+                5.199999809265137
+              ],
+              "size": [
+                0.10000002384185791,
+                0.10000002384185791,
+                1.1999998092651367
+              ]
+            },
+            "role": "walkable-floor",
+            "visibleNodeId": "door-front-threshold-slab"
+          },
+          {
+            "collisionId": "door-rear-threshold-slab",
+            "frameId": "vehicle",
+            "type": "box",
+            "boundsM": {
+              "min": [
+                -1.25,
+                0.25999999046325684,
+                -2.299999952316284
+              ],
+              "max": [
+                -1.149999976158142,
+                0.36000001430511475,
+                -1.399999976158142
+              ],
+              "size": [
+                0.10000002384185791,
+                0.10000002384185791,
+                0.8999999761581421
+              ]
+            },
+            "role": "walkable-floor",
+            "visibleNodeId": "door-rear-threshold-slab"
           },
           {
             "collisionId": "driver-console",
@@ -9837,12 +10153,12 @@
               "min": [
                 -0.985678493976593,
                 0.800000011920929,
-                4.922999858856201
+                5.273000240325928
               ],
               "max": [
                 -0.9343214631080627,
                 2.309999942779541,
-                4.976999759674072
+                5.327000141143799
               ],
               "size": [
                 0.05135703086853027,
@@ -9861,17 +10177,17 @@
               "min": [
                 -0.985678493976593,
                 0.800000011920929,
-                0.023000000044703484
+                -1.3269999027252197
               ],
               "max": [
                 -0.9343214631080627,
                 2.309999942779541,
-                0.07699999958276749
+                -1.2730000019073486
               ],
               "size": [
                 0.05135703086853027,
                 1.509999930858612,
-                0.053999999538064
+                0.053999900817871094
               ]
             },
             "role": "obstacle",
@@ -9885,17 +10201,17 @@
               "min": [
                 -1.1775000095367432,
                 0.8349999785423279,
-                -5.650000095367432
+                -6.150000095367432
               ],
               "max": [
                 -1.152500033378601,
                 1.1349999904632568,
-                -1.2000000476837158
+                -2.299999952316284
               ],
               "size": [
                 0.02499997615814209,
                 0.30000001192092896,
-                4.450000047683716
+                3.8500001430511475
               ]
             },
             "role": "shell",
@@ -9909,17 +10225,17 @@
               "min": [
                 -1.1775000095367432,
                 0.8349999785423279,
-                -0.05000000074505806
+                -1.399999976158142
               ],
               "max": [
                 -1.152500033378601,
                 1.1349999904632568,
-                3.700000047683716
+                4.0
               ],
               "size": [
                 0.02499997615814209,
                 0.30000001192092896,
-                3.750000048428774
+                5.399999976158142
               ]
             },
             "role": "shell",
@@ -9933,17 +10249,17 @@
               "min": [
                 -1.1775000095367432,
                 0.8349999785423279,
-                4.849999904632568
+                5.199999809265137
               ],
               "max": [
                 -1.152500033378601,
                 1.1349999904632568,
-                5.71999979019165
+                5.619999885559082
               ],
               "size": [
                 0.02499997615814209,
                 0.30000001192092896,
-                0.869999885559082
+                0.4200000762939453
               ]
             },
             "role": "shell",
@@ -9957,17 +10273,17 @@
               "min": [
                 1.152500033378601,
                 0.8349999785423279,
-                -5.650000095367432
+                -6.150000095367432
               ],
               "max": [
                 1.1775000095367432,
                 1.1349999904632568,
-                5.71999979019165
+                5.619999885559082
               ],
               "size": [
                 0.02499997615814209,
                 0.30000001192092896,
-                11.369999885559082
+                11.769999980926514
               ]
             },
             "role": "shell",
@@ -10245,17 +10561,17 @@
               "min": [
                 -1.0199999809265137,
                 1.312999963760376,
-                -2.0870001316070557
+                -1.187000036239624
               ],
               "max": [
                 -0.6399999856948853,
                 1.3470001220703125,
-                -2.052999973297119
+                -1.152999997138977
               ],
               "size": [
                 0.3799999952316284,
                 0.03400015830993652,
-                0.03400015830993652
+                0.03400003910064697
               ]
             },
             "role": "obstacle",
@@ -10269,17 +10585,17 @@
               "min": [
                 -0.8799999952316284,
                 0.375,
-                -1.909999966621399
+                -1.0099999904632568
               ],
               "max": [
                 -0.7799999713897705,
                 0.7450000047683716,
-                -1.790000081062317
+                -0.8899999856948853
               ],
               "size": [
                 0.10000002384185791,
                 0.3700000047683716,
-                0.11999988555908203
+                0.12000000476837158
               ]
             },
             "role": "obstacle",
@@ -10293,17 +10609,17 @@
               "min": [
                 0.6399999856948853,
                 1.312999963760376,
-                -2.0870001316070557
+                -1.187000036239624
               ],
               "max": [
                 1.0199999809265137,
                 1.3470001220703125,
-                -2.052999973297119
+                -1.152999997138977
               ],
               "size": [
                 0.3799999952316284,
                 0.03400015830993652,
-                0.03400015830993652
+                0.03400003910064697
               ]
             },
             "role": "obstacle",
@@ -10317,17 +10633,17 @@
               "min": [
                 0.7799999713897705,
                 0.375,
-                -1.909999966621399
+                -1.0099999904632568
               ],
               "max": [
                 0.8799999952316284,
                 0.7450000047683716,
-                -1.790000081062317
+                -0.8899999856948853
               ],
               "size": [
                 0.10000002384185791,
                 0.3700000047683716,
-                0.11999988555908203
+                0.12000000476837158
               ]
             },
             "role": "obstacle",
