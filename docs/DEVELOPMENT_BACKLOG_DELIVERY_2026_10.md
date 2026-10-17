@@ -64,6 +64,8 @@ B01/B02 來源已在 PR5 分支，不表示 main 或 Firebase 已採用。B02 in
 
 此批 `offline_complete / runtime_pending_webgl`。原長椅腿距地面約3cm，新增可編輯接地鞋而不移動0.48m座面；保留4.49m歷史燈和4.56×2.82×1.86m亭外框。代表性位置提案未啟用任何世界實例，diffuser角色也沒有自帶point light。來源[精確HEAD CI](https://github.com/YiTaChen/vancouver-living-atlas/actions/runs/37160963678)成功。
 
+2026-10-17 runtime 更新：其中長椅、垃圾桶、自行車架的六個原始 GLB 已正式接入 Robson／Water Street，共 32 個通過實際鋪面、入口排除與 1.8 m 通行帶檢查的位置，完成日夜、High／Ultra、相容模式及移動中的 WebGL 驗證。來源套件維持原樣；其餘五類家具仍未採用。配置、繪製預算與測試證據見[市區街道細節整合報告](DOWNTOWN_STREET_DETAILS_2026_10.md)。
+
 
 ## 交通／窗框／材質後續批次摘要
 
