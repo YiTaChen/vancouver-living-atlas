@@ -258,7 +258,7 @@ export class CityPedestrians {
         }
         probes++;
         const probe = (x: number, z: number) => {
-          if (!this.e.navigation?.clearGround(x, z, 'walk')) return undefined;
+          if (!this.e.navigation?.clearGround(x, z, 'walk', true)) return undefined;
           const y = this.floor!.sample(x, z, this.e.elevation(x, z) + 1.18);
           return y === undefined
             ? undefined

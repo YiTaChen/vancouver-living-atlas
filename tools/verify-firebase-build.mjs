@@ -7,6 +7,7 @@ import { verifyLandmarkWorker } from './verify-landmark-worker.mjs';
 import { verifyCityLifeIsolation } from './verify-city-life-isolation.mjs';
 import { verifyBusAdoption } from './verify-bus-adoption.mjs';
 import { verifyStage2TransitAdoption } from './verify-stage2-transit-adoption.mjs';
+import { verifyStreetFurnitureAdoption } from './verify-street-furniture-adoption.mjs';
 
 /** Adopted payloads are an explicit path/hash inventory, not a directory exemption. */
 export async function verifyBlenderDeliveryIsolation(
@@ -39,7 +40,7 @@ export async function verifyBlenderDeliveryIsolation(
     for (const item of manifest.files) {
       assert(
         typeof item.path === 'string' &&
-          /^(?:mature-trees|rooftop-equipment|traffic-cars|bus|bus-v2|metro|bus-closeup)\/(?:textures\/)?[a-z0-9][a-z0-9_.-]*\.(?:glb|png|json)$/.test(
+          /^(?:mature-trees|rooftop-equipment|traffic-cars|bus|bus-v2|metro|bus-closeup|street-furniture)\/(?:textures\/)?[a-z0-9][a-z0-9_.-]*\.(?:glb|png|json)$/.test(
             item.path,
           ),
         'Invalid adopted Blender payload path',
@@ -169,6 +170,12 @@ export async function verifyFirebaseBuild(
     'Auto quality diagnostics must not ship in the public build',
   );
   assert(
+    !scripts.includes('Furniture: focus') &&
+      !scripts.includes('Street furniture QA ready') &&
+      !scripts.includes('city-street-furniture-webgl-v1'),
+    'Street furniture diagnostics must not ship in the public build',
+  );
+  assert(
     !scripts.includes('cpu-submission-profile-v1') &&
       !scripts.includes('Record CPU method timings (instrumented)'),
     'CPU profiling controls must not ship in the public build',
@@ -246,12 +253,17 @@ export async function verifyFirebaseBuild(
   const cityLife = await verifyCityLifeIsolation(root, options.cityLifeSource);
   const busAdoption = await verifyBusAdoption(root, options.busSource);
   const stage2Transit = await verifyStage2TransitAdoption(root);
+  const streetFurniture = await verifyStreetFurnitureAdoption(
+    root,
+    options.streetFurnitureSource,
+  );
   return {
     status: 'pass',
     blenderDelivery,
     cityLife,
     busAdoption,
     stage2Transit,
+    streetFurniture,
   };
 }
 
@@ -269,5 +281,9 @@ if (
   console.log(
     'Stage 2 transit runtime adoption verified:',
     result.stage2Transit,
+  );
+  console.log(
+    'Street furniture runtime adoption verified:',
+    result.streetFurniture,
   );
 }

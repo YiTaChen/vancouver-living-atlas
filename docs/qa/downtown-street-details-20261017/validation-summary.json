@@ -1,0 +1,374 @@
+{
+  "kind": "downtown-street-details-acceptance-v1",
+  "visualSourceFingerprint": "56c4e0b0ff34aeaf1733eeda78aaf29c45073b9907b900beee6971dbc0930b96",
+  "automated": {
+    "repositoryTests": {
+      "pass": 1115,
+      "fail": 0
+    },
+    "typecheck": "pass",
+    "newModuleLint": "pass",
+    "architectureAudit": {
+      "status": "pass",
+      "records": 16,
+      "blenderSources": "skipped"
+    },
+    "postGateChangeIsolationTests": {
+      "pass": 18,
+      "fail": 0
+    },
+    "firebaseProductionBuild": {
+      "status": "pass",
+      "adoptedFiles": 45,
+      "streetFurnitureFiles": 7,
+      "streetFurnitureGeometryBytes": 202880,
+      "streetFurnitureMetadataBytes": 10747,
+      "streetFurnitureProtectedSourceHashes": 76,
+      "qaMarkers": "absent",
+      "existingBusAndStage2TransitGates": "pass"
+    }
+  },
+  "placementPlan": {
+    "paths": 1837,
+    "candidates": 62,
+    "accepted": 32,
+    "rejected": {
+      "slope": 6,
+      "occupied": 13,
+      "junction-crossing": 2,
+      "clearance": 9
+    },
+    "cap": 256,
+    "byKind": {
+      "cedar-bench": 10,
+      "garbage-bin": 14,
+      "bicycle-rack": 8
+    }
+  },
+  "preparation": {
+    "sidewalkMeshes": 6,
+    "prefilterMeshes": 41,
+    "obstacleSources": 19451,
+    "approachSources": 277,
+    "buildMs": 170.5999999642372,
+    "floorBuildMs": 43.09999996423721,
+    "exclusionsBuildMs": 16.400000035762787,
+    "planningMs": 111.09999996423721
+  },
+  "physical": {
+    "loadedPlayerBlocked": 32,
+    "futureRouteBlocked": 32,
+    "total": 32,
+    "buildingsToggleAndColdFailure": "covered by real world/navigation unit regressions",
+    "clearPassage": "continuous1.8m strip sampled on actual footway in planner; geometric regressions"
+  },
+  "resourceCheckpoints": [
+    {
+      "stage": "after-walk",
+      "camera": [
+        189.89616051077158,
+        37.680005895825246,
+        114.78686336634614
+      ],
+      "renderer": {
+        "status": "ready",
+        "ready": true,
+        "placements": 32,
+        "candidates": 7,
+        "visible": 7,
+        "visibleIds": [
+          "street-furniture:1360:0@74.086,-0.523:230.907,155.625:168:1",
+          "street-furniture:1360:0@74.086,-0.523:230.907,155.625:120:1",
+          "street-furniture:1360:0@74.086,-0.523:230.907,155.625:120:-1",
+          "street-furniture:85:0@230.907,155.625:376.937,301.043:24:1",
+          "street-furniture:85:0@230.907,155.625:376.937,301.043:24:-1",
+          "street-furniture:1360:0@74.086,-0.523:230.907,155.625:72:-1",
+          "street-furniture:1360:0@74.086,-0.523:230.907,155.625:72:1"
+        ],
+        "submittedByLod": [
+          7,
+          7
+        ],
+        "drawCalls": 8,
+        "triangles": 4408,
+        "submittedTriangles": 4408,
+        "batches": 8,
+        "geometries": 8,
+        "materials": 2,
+        "textures": 0,
+        "assetBytes": 202880,
+        "capacity": 64,
+        "pendingLoads": 0,
+        "pendingPreparation": 0,
+        "loadedAssets": 6,
+        "attempts": 6,
+        "failures": 0,
+        "lastError": null,
+        "updates": 7288,
+        "uploads": 19
+      }
+    },
+    {
+      "stage": "after-drive",
+      "camera": [
+        -70.71053836727948,
+        43.40356834798559,
+        -144.72568084794355
+      ],
+      "renderer": {
+        "status": "ready",
+        "ready": true,
+        "placements": 32,
+        "candidates": 2,
+        "visible": 2,
+        "visibleIds": [
+          "street-furniture:214:0@-140.047,-213.078:-40.060,-113.836:120:-1",
+          "street-furniture:214:0@-140.047,-213.078:-40.060,-113.836:120:1"
+        ],
+        "submittedByLod": [
+          2,
+          2
+        ],
+        "drawCalls": 6,
+        "triangles": 1268,
+        "submittedTriangles": 1268,
+        "batches": 8,
+        "geometries": 8,
+        "materials": 2,
+        "textures": 0,
+        "assetBytes": 202880,
+        "capacity": 64,
+        "pendingLoads": 0,
+        "pendingPreparation": 0,
+        "loadedAssets": 6,
+        "attempts": 6,
+        "failures": 0,
+        "lastError": null,
+        "updates": 9636,
+        "uploads": 36
+      }
+    },
+    {
+      "stage": "after-flight",
+      "camera": [
+        1093.6120545737733,
+        306.7140017329142,
+        143.89638105126426
+      ],
+      "renderer": {
+        "status": "ready",
+        "ready": true,
+        "placements": 32,
+        "candidates": 0,
+        "visible": 0,
+        "visibleIds": [],
+        "submittedByLod": [
+          0,
+          0
+        ],
+        "drawCalls": 0,
+        "triangles": 0,
+        "submittedTriangles": 0,
+        "batches": 8,
+        "geometries": 8,
+        "materials": 2,
+        "textures": 0,
+        "assetBytes": 202880,
+        "capacity": 64,
+        "pendingLoads": 0,
+        "pendingPreparation": 0,
+        "loadedAssets": 6,
+        "attempts": 6,
+        "failures": 0,
+        "lastError": null,
+        "updates": 11923,
+        "uploads": 38
+      }
+    }
+  ],
+  "compatible": {
+    "day": {
+      "plan": {
+        "paths": 1837,
+        "candidates": 62,
+        "accepted": 32,
+        "rejected": {
+          "slope": 6,
+          "occupied": 13,
+          "junction-crossing": 2,
+          "clearance": 9
+        },
+        "cap": 256,
+        "byKind": {
+          "cedar-bench": 10,
+          "garbage-bin": 14,
+          "bicycle-rack": 8
+        }
+      },
+      "proof": {
+        "sidewalkMeshes": 6,
+        "prefilterMeshes": 41,
+        "obstacleSources": 19451,
+        "approachSources": 259,
+        "buildMs": 154,
+        "floorBuildMs": 37.39999997615814,
+        "exclusionsBuildMs": 13.300000011920929,
+        "planningMs": 103.30000001192093
+      },
+      "renderer": {
+        "status": "ready",
+        "ready": true,
+        "placements": 32,
+        "candidates": 5,
+        "visible": 5,
+        "visibleIds": [
+          "street-furniture:846:0@1395.796,187.107:1569.636,235.442:24:-1",
+          "street-furniture:846:0@1395.796,187.107:1569.636,235.442:24:1",
+          "street-furniture:846:0@1395.796,187.107:1569.636,235.442:72:1",
+          "street-furniture:673:0@1337.778,170.843:1395.796,187.107:24:1",
+          "street-furniture:1465:0@1237.791,147.176:1337.778,170.843:72:1"
+        ],
+        "submittedByLod": [
+          5,
+          5
+        ],
+        "drawCalls": 8,
+        "triangles": 2828,
+        "submittedTriangles": 2828,
+        "batches": 8,
+        "geometries": 8,
+        "materials": 2,
+        "textures": 0,
+        "assetBytes": 202880,
+        "capacity": 64,
+        "pendingLoads": 0,
+        "pendingPreparation": 0,
+        "loadedAssets": 6,
+        "attempts": 6,
+        "failures": 0,
+        "lastError": null,
+        "updates": 814,
+        "uploads": 1
+      }
+    },
+    "night": {
+      "plan": {
+        "paths": 1837,
+        "candidates": 62,
+        "accepted": 32,
+        "rejected": {
+          "slope": 6,
+          "occupied": 13,
+          "junction-crossing": 2,
+          "clearance": 9
+        },
+        "cap": 256,
+        "byKind": {
+          "cedar-bench": 10,
+          "garbage-bin": 14,
+          "bicycle-rack": 8
+        }
+      },
+      "proof": {
+        "sidewalkMeshes": 6,
+        "prefilterMeshes": 41,
+        "obstacleSources": 19451,
+        "approachSources": 259,
+        "buildMs": 154,
+        "floorBuildMs": 37.39999997615814,
+        "exclusionsBuildMs": 13.300000011920929,
+        "planningMs": 103.30000001192093
+      },
+      "renderer": {
+        "status": "ready",
+        "ready": true,
+        "placements": 32,
+        "candidates": 5,
+        "visible": 5,
+        "visibleIds": [
+          "street-furniture:846:0@1395.796,187.107:1569.636,235.442:24:-1",
+          "street-furniture:846:0@1395.796,187.107:1569.636,235.442:24:1",
+          "street-furniture:846:0@1395.796,187.107:1569.636,235.442:72:1",
+          "street-furniture:673:0@1337.778,170.843:1395.796,187.107:24:1",
+          "street-furniture:1465:0@1237.791,147.176:1337.778,170.843:72:1"
+        ],
+        "submittedByLod": [
+          5,
+          5
+        ],
+        "drawCalls": 8,
+        "triangles": 2828,
+        "submittedTriangles": 2828,
+        "batches": 8,
+        "geometries": 8,
+        "materials": 2,
+        "textures": 0,
+        "assetBytes": 202880,
+        "capacity": 64,
+        "pendingLoads": 0,
+        "pendingPreparation": 0,
+        "loadedAssets": 6,
+        "attempts": 6,
+        "failures": 0,
+        "lastError": null,
+        "updates": 954,
+        "uploads": 1
+      }
+    },
+    "parkNight": {
+      "field": {
+        "street": 0,
+        "warm": 0,
+        "groundY": null,
+        "coverage": 0
+      },
+      "furniture": {
+        "status": "ready",
+        "ready": true,
+        "placements": 32,
+        "candidates": 0,
+        "visible": 0,
+        "visibleIds": [],
+        "submittedByLod": [
+          0,
+          0
+        ],
+        "drawCalls": 0,
+        "triangles": 0,
+        "submittedTriangles": 0,
+        "batches": 8,
+        "geometries": 8,
+        "materials": 2,
+        "textures": 0,
+        "assetBytes": 202880,
+        "capacity": 64,
+        "pendingLoads": 0,
+        "pendingPreparation": 0,
+        "loadedAssets": 6,
+        "attempts": 6,
+        "failures": 0,
+        "lastError": null,
+        "updates": 1107,
+        "uploads": 2
+      }
+    }
+  },
+  "browserErrors": {
+    "browser": "155.0.8059.41",
+    "default": {
+      "page": [],
+      "console": [],
+      "network": []
+    },
+    "compatible": {
+      "page": [],
+      "console": [],
+      "network": []
+    }
+  },
+  "limitations": [
+    "Representative source-road furnishings, not surveyed exact real-world prop locations.",
+    "No sitting, rack occupancy or garbage interaction.",
+    "Travel frame timing is whole-scene and not a controlled before/after benchmark; occasional long flight frames remain."
+  ]
+}

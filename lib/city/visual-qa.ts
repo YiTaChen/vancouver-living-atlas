@@ -1,3 +1,4 @@
+import { installStreetFurnitureQA } from './street-furniture-qa';
 import { sunAngle } from './clock';
 import * as THREE from 'three';
 /** Opt-in local QA build only. Stripped from normal Firebase builds. */
@@ -280,6 +281,7 @@ export function installVisualQA(e: CityEngine) {
   };
   installUpgradeQA(e, panel, runLease);
   installAutoQualityQA(e, panel, runLease);
+  installStreetFurnitureQA(e, panel, runLease);
   const button = (name: string, fn: () => void) => {
     const b = document.createElement('button');
     b.textContent = name;
@@ -934,6 +936,7 @@ export function installVisualQA(e: CityEngine) {
     const id = `${selectedCase}-${e.clock.hour.toFixed(2).replace('.', 'p')}h${selectedCase.startsWith('sky-') ? '-' + e.skyEffects.settings.moonPhase.toLowerCase() : ''}`;
     const row = {
       kind: 'visual-check',
+      streetFurniture: e.streetFurniture?.stats(),
       cityNight: {
         field: e.traffic?.streetLighting?.stats(),
         vehicles: e.traffic?.nightLights?.stats,

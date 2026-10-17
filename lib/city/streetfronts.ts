@@ -38,6 +38,7 @@ export function createStreetfronts(e: CityEngine, loader?: StreetBayLoader) {
     }[];
   };
   const sources: Fallback[] = [];
+  const approaches: { x: number; z: number; yaw: number }[] = [];
   let activeSource: Fallback | undefined;
   const hiddenMatrix = new THREE.Matrix4().makeScale(0, 0, 0);
   const batches = new Map<
@@ -201,6 +202,7 @@ export function createStreetfronts(e: CityEngine, loader?: StreetBayLoader) {
           }) as [number | null, number | null, number | null];
           const entry = fitEntrance(profile, extent, ground, jambs);
           if (!entry) continue;
+          approaches.push({x, z, yaw});
           acceptedOpenings.push({ center: u, threshold: entry.thresholdY });
           const threshold = streetBayThreshold(
             profile,
@@ -524,6 +526,7 @@ export function createStreetfronts(e: CityEngine, loader?: StreetBayLoader) {
         }
         if (!accepted) continue;
         const { x, z, threshold } = accepted;
+        approaches.push({x, z, yaw: Math.atan2(nx, nz)});
         modernLocations.add(location);
         sources.push({
           id: sources.length,
@@ -542,6 +545,9 @@ export function createStreetfronts(e: CityEngine, loader?: StreetBayLoader) {
       }
     }
   }
+  e.data.streetFrontageApproaches = [...new Map(approaches.map((approach) => [
+    `${approach.x.toFixed(2)}:${approach.z.toFixed(2)}:${approach.yaw.toFixed(3)}`, approach,
+  ])).values()];
   // Gastown's steam clock, positioned from its map location. Original clock-face art.
   const [cx, cz] = project([-123.10865, 49.28443]),
     ground = e.elevation(cx, cz) + 1.3,

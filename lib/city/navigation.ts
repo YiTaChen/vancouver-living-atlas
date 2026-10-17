@@ -553,9 +553,11 @@ export class StreetNavigation {
     });
     return result.ok ? result.hit : undefined;
   }
-  clearGround(x: number, z: number, mode: string = this.mode) {
+  clearGround(x: number, z: number, mode: string = this.mode, pendingFurniture = false) {
     const interior = this.e.interiors?.clear(x,z,mode);
     if(interior !== undefined) return interior;
+    if (this.e.streetFurniture?.blocked(x, z, mode === 'drive' ? 1.1 : 0.35, pendingFurniture))
+      return false;
     if (!this.e.onLand(x, z)) return false;
     if (this.e.data.waterPolys?.some((p: number[][][]) => inPolygon([x, z], p)))
       return false;

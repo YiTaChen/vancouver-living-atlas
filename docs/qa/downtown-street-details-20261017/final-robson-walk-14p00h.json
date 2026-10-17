@@ -1,0 +1,189 @@
+{
+  "revision": "32d18d064f202bdb936cd890088d7d8878d00359",
+  "sourceFingerprint": "56c4e0b0ff34aeaf1733eeda78aaf29c45073b9907b900beee6971dbc0930b96",
+  "kind": "visual-check",
+  "streetFurniture": {
+    "plan": {
+      "paths": 1837,
+      "candidates": 62,
+      "accepted": 32,
+      "rejected": {
+        "slope": 6,
+        "occupied": 13,
+        "junction-crossing": 2,
+        "clearance": 9
+      },
+      "cap": 256,
+      "byKind": {
+        "cedar-bench": 10,
+        "garbage-bin": 14,
+        "bicycle-rack": 8
+      }
+    },
+    "proof": {
+      "sidewalkMeshes": 6,
+      "prefilterMeshes": 41,
+      "obstacleSources": 19451,
+      "approachSources": 277,
+      "buildMs": 170.5999999642372,
+      "floorBuildMs": 43.09999996423721,
+      "exclusionsBuildMs": 16.400000035762787,
+      "planningMs": 111.09999996423721
+    },
+    "renderer": {
+      "status": "ready",
+      "ready": true,
+      "placements": 32,
+      "candidates": 6,
+      "visible": 6,
+      "visibleIds": [
+        "street-furniture:85:0@230.907,155.625:376.937,301.043:120:-1",
+        "street-furniture:85:0@230.907,155.625:376.937,301.043:120:1",
+        "street-furniture:85:0@230.907,155.625:376.937,301.043:72:-1",
+        "street-furniture:85:0@230.907,155.625:376.937,301.043:168:-1",
+        "street-furniture:85:0@230.907,155.625:376.937,301.043:24:1",
+        "street-furniture:85:0@230.907,155.625:376.937,301.043:24:-1"
+      ],
+      "submittedByLod": [
+        6,
+        6
+      ],
+      "drawCalls": 8,
+      "triangles": 4428,
+      "submittedTriangles": 4428,
+      "batches": 8,
+      "geometries": 8,
+      "materials": 2,
+      "textures": 0,
+      "assetBytes": 202880,
+      "capacity": 64,
+      "pendingLoads": 0,
+      "pendingPreparation": 0,
+      "loadedAssets": 6,
+      "attempts": 6,
+      "failures": 0,
+      "lastError": null,
+      "updates": 2419,
+      "uploads": 5
+    }
+  },
+  "cityNight": {
+    "field": {
+      "size": 512,
+      "textureBytes": 1048576,
+      "textures": 1,
+      "activeTexels": 81249,
+      "lampSources": 1530,
+      "roadSources": 1314,
+      "buildMs": 284.19999998807907,
+      "wrappedMaterials": 152,
+      "disposed": false,
+      "nightAmount": 0,
+      "activity": 0.43124999999999997
+    },
+    "vehicles": {
+      "vehicles": 0,
+      "headLamps": 0,
+      "tailLamps": 0,
+      "spills": 0,
+      "drawCalls": 0,
+      "triangles": 0,
+      "textures": 0,
+      "pointLights": 0,
+      "capacity": 64,
+      "nightAmount": 0,
+      "disposed": false
+    },
+    "cameraField": {
+      "street": 1,
+      "warm": 0.5286762825000726,
+      "groundY": 33.76447639543778,
+      "coverage": 1
+    }
+  },
+  "calls": 482,
+  "triangles": 2764971,
+  "geometries": 792,
+  "textures": 41,
+  "qualityMode": "manual",
+  "compatible": false,
+  "skySettings": {
+    "sun": true,
+    "moon": true,
+    "stars": true,
+    "aurora": true,
+    "meteors": true,
+    "moonPhase": "auto",
+    "auroraMode": "auto",
+    "starDensity": 0.45,
+    "auroraIntensity": 0.45,
+    "auroraDensity": 0.45,
+    "meteorFrequency": 0.3
+  },
+  "skyPreviewTime": null,
+  "id": "robson-walk-14p00h",
+  "quality": "balanced",
+  "hour": 14,
+  "valid": true,
+  "viewport": [
+    1280,
+    720
+  ],
+  "render": [
+    1280,
+    720
+  ],
+  "camera": [
+    303.92205172832195,
+    35.56083199646445,
+    228.33401800037095
+  ],
+  "target": [
+    286.20723356886026,
+    34.06083199646445,
+    210.6935753308344
+  ],
+  "mode": "walk",
+  "position": [
+    303.92205172832195,
+    34.06083199646445,
+    228.33401800037095
+  ],
+  "pedestrians": {
+    "time": 51.84999999999919,
+    "streetVisible": true,
+    "selected": 9,
+    "rendered": 4,
+    "routes": 63,
+    "actorStates": 126,
+    "attemptedRoutes": 81,
+    "floorIndexedMeshes": 9,
+    "indexedTreeTrunks": 36041,
+    "closestCandidateM": 73.98029340062227,
+    "nearbyCandidates": 2,
+    "safeNearbyCandidates": 2,
+    "renderedIds": [
+      "footway:3789:-1:run2:0",
+      "footway:3789:-1:run2:1",
+      "footway:3672:-1:run0:0",
+      "footway:3672:-1:run0:1"
+    ],
+    "budget": 24,
+    "renderer": {
+      "activeActors": 4,
+      "visibleActors": 4,
+      "capacity": 32,
+      "rejectedInputs": 0,
+      "allocatedBatches": 8,
+      "populatedBatches": 2,
+      "triangles": 720,
+      "geometryBytes": 361632,
+      "textures": 0,
+      "loadedTemplates": 8,
+      "failedTemplates": 0,
+      "loading": false,
+      "loadErrors": [],
+      "disposed": false
+    }
+  }
+}
