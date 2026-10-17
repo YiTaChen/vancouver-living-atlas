@@ -84,7 +84,7 @@ test('Nova door correction replaces only the reviewed bus packages and preserves
       { encoding: 'utf8' },
     ),
   );
-  const unchanged = (entry) => !/^(bus|bus-v2|bus-closeup)\//.test(entry.path);
+  const unchanged = (entry) => !/^(bus|bus-v2|bus-closeup|street-furniture)\//.test(entry.path);
   assert.deepEqual(
     inventory.files.filter(unchanged),
     baseline.files.filter(unchanged),
@@ -93,10 +93,10 @@ test('Nova door correction replaces only the reviewed bus packages and preserves
     inventory.files.filter((entry) => entry.path.startsWith('bus-closeup/')),
     projection.entries,
   );
-  assert.equal(inventory.files.length, 38);
+  assert.equal(inventory.files.filter((entry) => !entry.path.startsWith('street-furniture/')).length, 38);
   assert.equal(
     inventory.files.filter(
-      (entry) => !/^(bus|bus-v2|metro|bus-closeup)\//.test(entry.path),
+      (entry) => !/^(bus|bus-v2|metro|bus-closeup|street-furniture)\//.test(entry.path),
     ).length,
     19,
   );

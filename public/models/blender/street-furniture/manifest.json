@@ -1,0 +1,403 @@
+{
+  "schemaVersion": 1,
+  "contract": "street-furniture-runtime-v1",
+  "packageId": "street-furniture-expansion",
+  "version": "1.0.0",
+  "units": "metres",
+  "coordinateSystem": {
+    "upAxis": "+Y",
+    "frontAxis": "+Z"
+  },
+  "provenance": {
+    "credit": "Based on Vancouver Living Atlas by YiTaChen",
+    "source": "https://github.com/YiTaChen/vancouver-living-atlas",
+    "license": "Vancouver Living Atlas Noncommercial Research and Attribution 1.0"
+  },
+  "source": {
+    "packagePath": "tools/assets/street-furniture-expansion",
+    "manifestPath": "tools/assets/street-furniture-expansion/manifest.json",
+    "manifestSha256": "a047b465f83a6d2604485895a1dfb66ec4d50c192838afed0d92fc2c82cdcacb",
+    "assetRevision": "6d9e05c0e0eafca6e1a2405f32da4570fdb37efd"
+  },
+  "assets": [
+    {
+      "id": "cedar-bench",
+      "kind": "street-furniture",
+      "boundsM": {
+        "min": [
+          -1.0099999904632568,
+          -1.966970300526505e-8,
+          -0.3995785852887267
+        ],
+        "max": [
+          1.0099999904632568,
+          0.9853602945804596,
+          0.30000000300346763
+        ],
+        "size": [
+          2.0199999809265137,
+          0.9853603142501626,
+          0.6995785882921943
+        ]
+      },
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "Original front-post frame retained for shelter; center ground frame for other props."
+      },
+      "attachmentDatum": {
+        "kind": "ground",
+        "planeY": 0,
+        "minimumGroundSamplePoints": 3,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "metal",
+          "node": "metal",
+          "role": "metal",
+          "surfaceId": "painted-metal",
+          "uvUnits": "one repeat per authored metre; not auto-scaled to current catalog period",
+          "alphaMode": "OPAQUE",
+          "doubleSided": false,
+          "pointLight": false
+        },
+        {
+          "material": "wood",
+          "node": "wood",
+          "role": "wood",
+          "surfaceId": "cedar",
+          "uvUnits": "one repeat per authored metre; not auto-scaled to current catalog period",
+          "alphaMode": "OPAQUE",
+          "doubleSided": false,
+          "pointLight": false
+        }
+      ],
+      "lodPolicy": {
+        "levels": [
+          0,
+          1
+        ],
+        "suggestedDistanceM": [
+          30,
+          100
+        ],
+        "keepScale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "a60d4179fe27780919a53e581b93a4c9be02be9806c0de6ff5b95b676dffa248",
+          "sourceSha256": "4b58593e851aab7812f112616b5b60a7b9c0bc14df3f79532b0e22cd2e67ea3f",
+          "bytes": 74304,
+          "triangles": 756,
+          "primitives": 2,
+          "boundsM": {
+            "min": [
+              -1.0099999904632568,
+              -1.966970300526505e-8,
+              -0.3995785852887267
+            ],
+            "max": [
+              1.0099999904632568,
+              0.9853602945804596,
+              0.30000000300346763
+            ],
+            "size": [
+              2.0199999809265137,
+              0.9853603142501626,
+              0.6995785882921943
+            ]
+          },
+          "file": "cedar-bench.lod0.glb",
+          "url": "/models/blender/street-furniture/cedar-bench.lod0.glb"
+        },
+        {
+          "level": 1,
+          "sha256": "52e6ad93074c5d0d9384ffe7d7c6745b0d201c08ba836dfdb6bc04fd2cb6bfb1",
+          "sourceSha256": "8a465c1790c0cd7b07ff85802296731ccd1c707a0572e95e212ac7c2c04b13c0",
+          "bytes": 22512,
+          "triangles": 200,
+          "primitives": 2,
+          "boundsM": {
+            "min": [
+              -1.0099999904632568,
+              0,
+              -0.40095970034599304
+            ],
+            "max": [
+              1.0099999904632568,
+              0.984935075044632,
+              0.30000001192092896
+            ],
+            "size": [
+              2.0199999809265137,
+              0.984935075044632,
+              0.700959712266922
+            ]
+          },
+          "file": "cedar-bench.lod1.glb",
+          "url": "/models/blender/street-furniture/cedar-bench.lod1.glb"
+        }
+      ]
+    },
+    {
+      "id": "garbage-bin",
+      "kind": "street-furniture",
+      "boundsM": {
+        "min": [
+          -0.28999999165534973,
+          0,
+          -0.28999999165534973
+        ],
+        "max": [
+          0.28999999165534973,
+          0.9700000286102295,
+          0.28999996185302734
+        ],
+        "size": [
+          0.5799999833106995,
+          0.9700000286102295,
+          0.5799999535083771
+        ]
+      },
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "Original front-post frame retained for shelter; center ground frame for other props."
+      },
+      "attachmentDatum": {
+        "kind": "ground",
+        "planeY": 0,
+        "minimumGroundSamplePoints": 3,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "metal",
+          "node": "metal",
+          "role": "metal",
+          "surfaceId": "painted-metal",
+          "uvUnits": "one repeat per authored metre; not auto-scaled to current catalog period",
+          "alphaMode": "OPAQUE",
+          "doubleSided": false,
+          "pointLight": false
+        }
+      ],
+      "lodPolicy": {
+        "levels": [
+          0,
+          1
+        ],
+        "suggestedDistanceM": [
+          30,
+          100
+        ],
+        "keepScale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "17ba1925f7bd79ab7d8a4f5da1956dd4e65e9b775e4bf379c2f8ac7ad358dedb",
+          "sourceSha256": "7a77083d074a9e296ef3f86693643bf222d95f7db27194cac3811f803aacb778",
+          "bytes": 60184,
+          "triangles": 528,
+          "primitives": 1,
+          "boundsM": {
+            "min": [
+              -0.28999999165534973,
+              0,
+              -0.28999999165534973
+            ],
+            "max": [
+              0.28999999165534973,
+              0.9700000286102295,
+              0.28999996185302734
+            ],
+            "size": [
+              0.5799999833106995,
+              0.9700000286102295,
+              0.5799999535083771
+            ]
+          },
+          "file": "garbage-bin.lod0.glb",
+          "url": "/models/blender/street-furniture/garbage-bin.lod0.glb"
+        },
+        {
+          "level": 1,
+          "sha256": "1974f04cff170307e4239da84a53e91f797ec9fa37146782abf1e529446d8896",
+          "sourceSha256": "123e5c627636be6eb853e5a639ce6fade03f6ccda79bbf3d73e21b4b1c692005",
+          "bytes": 11500,
+          "triangles": 96,
+          "primitives": 1,
+          "boundsM": {
+            "min": [
+              -0.28999999165534973,
+              0,
+              -0.28999999165534973
+            ],
+            "max": [
+              0.28999999165534973,
+              0.9700000286102295,
+              0.28999996185302734
+            ],
+            "size": [
+              0.5799999833106995,
+              0.9700000286102295,
+              0.5799999535083771
+            ]
+          },
+          "file": "garbage-bin.lod1.glb",
+          "url": "/models/blender/street-furniture/garbage-bin.lod1.glb"
+        }
+      ]
+    },
+    {
+      "id": "bicycle-rack",
+      "kind": "street-furniture",
+      "boundsM": {
+        "min": [
+          -0.4850000098270286,
+          0,
+          -0.08500000545391731
+        ],
+        "max": [
+          0.4850000321787884,
+          0.8400000333786011,
+          0.08500000386656417
+        ],
+        "size": [
+          0.970000042005817,
+          0.8400000333786011,
+          0.17000000932048148
+        ]
+      },
+      "pivot": {
+        "positionM": [
+          0,
+          0,
+          0
+        ],
+        "meaning": "Original front-post frame retained for shelter; center ground frame for other props."
+      },
+      "attachmentDatum": {
+        "kind": "ground",
+        "planeY": 0,
+        "minimumGroundSamplePoints": 3,
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "frontAxis": "+Z",
+      "materialBindings": [
+        {
+          "material": "metal",
+          "node": "metal",
+          "role": "metal",
+          "surfaceId": "painted-metal",
+          "uvUnits": "one repeat per authored metre; not auto-scaled to current catalog period",
+          "alphaMode": "OPAQUE",
+          "doubleSided": false,
+          "pointLight": false
+        }
+      ],
+      "lodPolicy": {
+        "levels": [
+          0,
+          1
+        ],
+        "suggestedDistanceM": [
+          30,
+          100
+        ],
+        "keepScale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "lods": [
+        {
+          "level": 0,
+          "sha256": "0b67e0cff1ff41599e0c5d79d17a084969995be156051b87b525c4f90df9f71a",
+          "sourceSha256": "77b3dfdf6ea38378ed248cc081b12f75e7706a574fa22df488e9b7deb20f990a",
+          "bytes": 23864,
+          "triangles": 228,
+          "primitives": 1,
+          "boundsM": {
+            "min": [
+              -0.4850000098270286,
+              0,
+              -0.08500000545391731
+            ],
+            "max": [
+              0.4850000321787884,
+              0.8400000333786011,
+              0.08500000386656417
+            ],
+            "size": [
+              0.970000042005817,
+              0.8400000333786011,
+              0.17000000932048148
+            ]
+          },
+          "file": "bicycle-rack.lod0.glb",
+          "url": "/models/blender/street-furniture/bicycle-rack.lod0.glb"
+        },
+        {
+          "level": 1,
+          "sha256": "c34b0f4dffbd22fec0ffc874edb54870e8cd2dc388d9a5316df0f4b1e65e68d8",
+          "sourceSha256": "f470294628e5a11a71938992fe9a4e6b7168b4edea536db3a3e8bf38066db931",
+          "bytes": 10516,
+          "triangles": 84,
+          "primitives": 1,
+          "boundsM": {
+            "min": [
+              -0.4850000089210542,
+              0,
+              -0.08500000454794517
+            ],
+            "max": [
+              0.485000031272814,
+              0.8400000333786011,
+              0.08500000296058977
+            ],
+            "size": [
+              0.9700000401938682,
+              0.8400000333786011,
+              0.17000000750853494
+            ]
+          },
+          "file": "bicycle-rack.lod1.glb",
+          "url": "/models/blender/street-furniture/bicycle-rack.lod1.glb"
+        }
+      ]
+    }
+  ]
+}

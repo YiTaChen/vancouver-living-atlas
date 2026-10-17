@@ -114,7 +114,7 @@ function groundFloor(
   if (
     !nav ||
     ![x, z].every(Number.isFinite) ||
-    !nav.clearGround(x, z, mode) ||
+    !nav.clearGround(x, z, mode, true) ||
     city.interiors?.height(x, z) !== undefined ||
     city.data.travelSurfaces
       ?.lookup(x, z)

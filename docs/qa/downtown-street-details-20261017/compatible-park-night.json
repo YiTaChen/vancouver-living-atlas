@@ -1,0 +1,177 @@
+{
+  "revision": "32d18d064f202bdb936cd890088d7d8878d00359",
+  "sourceFingerprint": "56c4e0b0ff34aeaf1733eeda78aaf29c45073b9907b900beee6971dbc0930b96",
+  "kind": "visual-check",
+  "streetFurniture": {
+    "plan": {
+      "paths": 1837,
+      "candidates": 62,
+      "accepted": 32,
+      "rejected": {
+        "slope": 6,
+        "occupied": 13,
+        "junction-crossing": 2,
+        "clearance": 9
+      },
+      "cap": 256,
+      "byKind": {
+        "cedar-bench": 10,
+        "garbage-bin": 14,
+        "bicycle-rack": 8
+      }
+    },
+    "proof": {
+      "sidewalkMeshes": 6,
+      "prefilterMeshes": 41,
+      "obstacleSources": 19451,
+      "approachSources": 259,
+      "buildMs": 154,
+      "floorBuildMs": 37.39999997615814,
+      "exclusionsBuildMs": 13.300000011920929,
+      "planningMs": 103.30000001192093
+    },
+    "renderer": {
+      "status": "ready",
+      "ready": true,
+      "placements": 32,
+      "candidates": 0,
+      "visible": 0,
+      "visibleIds": [],
+      "submittedByLod": [
+        0,
+        0
+      ],
+      "drawCalls": 0,
+      "triangles": 0,
+      "submittedTriangles": 0,
+      "batches": 8,
+      "geometries": 8,
+      "materials": 2,
+      "textures": 0,
+      "assetBytes": 202880,
+      "capacity": 64,
+      "pendingLoads": 0,
+      "pendingPreparation": 0,
+      "loadedAssets": 6,
+      "attempts": 6,
+      "failures": 0,
+      "lastError": null,
+      "updates": 1107,
+      "uploads": 2
+    }
+  },
+  "cityNight": {
+    "field": {
+      "size": 512,
+      "textureBytes": 1048576,
+      "textures": 1,
+      "activeTexels": 81249,
+      "lampSources": 1530,
+      "roadSources": 1314,
+      "buildMs": 238.5999999642372,
+      "wrappedMaterials": 152,
+      "disposed": false,
+      "nightAmount": 1,
+      "activity": 0.7542084908999245
+    },
+    "vehicles": {
+      "vehicles": 0,
+      "headLamps": 0,
+      "tailLamps": 0,
+      "spills": 0,
+      "drawCalls": 0,
+      "triangles": 0,
+      "textures": 0,
+      "pointLights": 0,
+      "capacity": 40,
+      "nightAmount": 1,
+      "disposed": false
+    },
+    "cameraField": {
+      "street": 0,
+      "warm": 0,
+      "groundY": null,
+      "coverage": 0
+    }
+  },
+  "calls": 54,
+  "triangles": 797888,
+  "geometries": 631,
+  "textures": 8,
+  "qualityMode": "manual",
+  "compatible": true,
+  "skySettings": {
+    "sun": true,
+    "moon": true,
+    "stars": true,
+    "aurora": true,
+    "meteors": true,
+    "moonPhase": "auto",
+    "auroraMode": "auto",
+    "starDensity": 0.45,
+    "auroraIntensity": 0.45,
+    "auroraDensity": 0.45,
+    "meteorFrequency": 0.3
+  },
+  "skyPreviewTime": null,
+  "id": "rawlings-trail-23p00h",
+  "quality": "balanced",
+  "hour": 23,
+  "valid": true,
+  "viewport": [
+    1280,
+    720
+  ],
+  "render": [
+    1280,
+    720
+  ],
+  "camera": [
+    -1690.7971834297807,
+    65.62038269437343,
+    -2531.4390640001347
+  ],
+  "target": [
+    -1715.7971834297807,
+    64.05735916529288,
+    -2531.4390640001347
+  ],
+  "mode": "walk",
+  "position": [
+    -1690.7971834297807,
+    64.05735916529288,
+    -2531.4390640001347
+  ],
+  "pedestrians": {
+    "time": 22.75000000000019,
+    "streetVisible": true,
+    "selected": 4,
+    "rendered": 0,
+    "routes": 20,
+    "actorStates": 40,
+    "attemptedRoutes": 20,
+    "floorIndexedMeshes": 0,
+    "indexedTreeTrunks": 36041,
+    "closestCandidateM": 3894.0668974801656,
+    "nearbyCandidates": 0,
+    "safeNearbyCandidates": 0,
+    "renderedIds": [],
+    "budget": 12,
+    "renderer": {
+      "activeActors": 0,
+      "visibleActors": 0,
+      "capacity": 12,
+      "rejectedInputs": 0,
+      "allocatedBatches": 8,
+      "populatedBatches": 0,
+      "triangles": 0,
+      "geometryBytes": 346912,
+      "textures": 0,
+      "loadedTemplates": 8,
+      "failedTemplates": 0,
+      "loading": false,
+      "loadErrors": [],
+      "disposed": false
+    }
+  }
+}

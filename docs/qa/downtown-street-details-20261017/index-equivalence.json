@@ -1,0 +1,25 @@
+{
+  "scope": "before/after mesh-AABB index optimization, full actual-city placement records",
+  "equal": true,
+  "placements": 32,
+  "sha256": "24927887955c05c83a75c921267d675e622152caf9eecbbce030c4f7daacaa15",
+  "beforeSourceFingerprint": "8f9a5c559bd52d2e11e7b2eb376d0fa470f838736c0597b527488ce1a3bcdf98",
+  "afterSourceFingerprint": "56c4e0b0ff34aeaf1733eeda78aaf29c45073b9907b900beee6971dbc0930b96",
+  "beforeProof": {
+    "sidewalkMeshes": 41,
+    "obstacleSources": 19451,
+    "approachSources": 277,
+    "buildMs": 1149.5
+  },
+  "afterProof": {
+    "sidewalkMeshes": 6,
+    "prefilterMeshes": 41,
+    "obstacleSources": 19451,
+    "approachSources": 277,
+    "buildMs": 170.5999999642372,
+    "floorBuildMs": 43.09999996423721,
+    "exclusionsBuildMs": 16.400000035762787,
+    "planningMs": 111.09999996423721
+  },
+  "timingCaveat": "Different startup/system load; these one-off observations are not a controlled scene-startup benchmark."
+}

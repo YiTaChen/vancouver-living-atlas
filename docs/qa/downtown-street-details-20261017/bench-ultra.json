@@ -1,0 +1,709 @@
+{
+  "revision": "32d18d064f202bdb936cd890088d7d8878d00359",
+  "sourceFingerprint": "56c4e0b0ff34aeaf1733eeda78aaf29c45073b9907b900beee6971dbc0930b96",
+  "kind": "city-street-furniture-webgl-v1",
+  "valid": true,
+  "hour": 14,
+  "quality": "ultra",
+  "qualityMode": "manual",
+  "compatible": false,
+  "focused": "street-furniture:1543:0@-512.156,-582.159:-425.587,-496.354:24:-1",
+  "viewport": [
+    1280,
+    720
+  ],
+  "render": [
+    1920,
+    1080
+  ],
+  "camera": [
+    -495.2723031655405,
+    16.468814087856305,
+    -569.9300096944538
+  ],
+  "target": [
+    -489.760053489927,
+    14.01519137977626,
+    -570.6615173934555
+  ],
+  "furniture": {
+    "plan": {
+      "paths": 1837,
+      "candidates": 62,
+      "accepted": 32,
+      "rejected": {
+        "slope": 6,
+        "occupied": 13,
+        "junction-crossing": 2,
+        "clearance": 9
+      },
+      "cap": 256,
+      "byKind": {
+        "cedar-bench": 10,
+        "garbage-bin": 14,
+        "bicycle-rack": 8
+      }
+    },
+    "proof": {
+      "sidewalkMeshes": 6,
+      "prefilterMeshes": 41,
+      "obstacleSources": 19451,
+      "approachSources": 277,
+      "buildMs": 170.5999999642372,
+      "floorBuildMs": 43.09999996423721,
+      "exclusionsBuildMs": 16.400000035762787,
+      "planningMs": 111.09999996423721
+    },
+    "renderer": {
+      "status": "ready",
+      "ready": true,
+      "placements": 32,
+      "candidates": 5,
+      "visible": 5,
+      "visibleIds": [
+        "street-furniture:1543:0@-512.156,-582.159:-425.587,-496.354:24:-1",
+        "street-furniture:1543:0@-512.156,-582.159:-425.587,-496.354:72:-1",
+        "street-furniture:1543:0@-512.156,-582.159:-425.587,-496.354:72:1",
+        "street-furniture:330:0@-425.587,-496.354:-311.434,-383.186:24:-1",
+        "street-furniture:330:0@-425.587,-496.354:-311.434,-383.186:24:1"
+      ],
+      "submittedByLod": [
+        5,
+        5
+      ],
+      "drawCalls": 8,
+      "triangles": 3472,
+      "submittedTriangles": 3472,
+      "batches": 8,
+      "geometries": 8,
+      "materials": 2,
+      "textures": 0,
+      "assetBytes": 202880,
+      "capacity": 64,
+      "pendingLoads": 0,
+      "pendingPreparation": 0,
+      "loadedAssets": 6,
+      "attempts": 6,
+      "failures": 0,
+      "lastError": null,
+      "updates": 4711,
+      "uploads": 11
+    }
+  },
+  "placements": [
+    {
+      "id": "street-furniture:1360:0@74.086,-0.523:230.907,155.625:24:1",
+      "kind": "garbage-bin",
+      "x": 85.8013050377539,
+      "y": 38.56599837703632,
+      "z": 21.725555367704313,
+      "yaw": -0.7832508807721746,
+      "sourceIds": [
+        "1360:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    },
+    {
+      "id": "street-furniture:1360:0@74.086,-0.523:230.907,155.625:72:-1",
+      "kind": "garbage-bin",
+      "x": 130.39903533068573,
+      "y": 37.431689963897945,
+      "z": 44.96436886407096,
+      "yaw": 2.3583417728176186,
+      "sourceIds": [
+        "1360:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    },
+    {
+      "id": "street-furniture:1360:0@74.086,-0.523:230.907,155.625:72:1",
+      "kind": "bicycle-rack",
+      "x": 119.81523341953759,
+      "y": 37.804371137137196,
+      "z": 55.59372148337836,
+      "yaw": -0.7832508807721746,
+      "sourceIds": [
+        "1360:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    },
+    {
+      "id": "street-furniture:1360:0@74.086,-0.523:230.907,155.625:120:-1",
+      "kind": "bicycle-rack",
+      "x": 164.4129637124694,
+      "y": 36.5857029118398,
+      "z": 78.83253497974499,
+      "yaw": 2.3583417728176186,
+      "sourceIds": [
+        "1360:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    },
+    {
+      "id": "street-furniture:1360:0@74.086,-0.523:230.907,155.625:120:1",
+      "kind": "cedar-bench",
+      "x": 153.82916180132125,
+      "y": 36.72858430647025,
+      "z": 89.4618875990524,
+      "yaw": -0.7832508807721746,
+      "sourceIds": [
+        "1360:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    },
+    {
+      "id": "street-furniture:1360:0@74.086,-0.523:230.907,155.625:168:1",
+      "kind": "garbage-bin",
+      "x": 187.8430901831049,
+      "y": 36.04387439900605,
+      "z": 123.33005371472643,
+      "yaw": -0.7832508807721746,
+      "sourceIds": [
+        "1360:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    },
+    {
+      "id": "street-furniture:1465:0@1237.791,147.176:1337.778,170.843:72:1",
+      "kind": "bicycle-rack",
+      "x": 1306.4923325463708,
+      "y": 10.178669317342704,
+      "z": 168.05988134289765,
+      "yaw": -0.2679653027623349,
+      "sourceIds": [
+        "1465:0"
+      ],
+      "streetNames": [
+        "200-300 WATER ST"
+      ]
+    },
+    {
+      "id": "street-furniture:1543:0@-512.156,-582.159:-425.587,-496.354:24:-1",
+      "kind": "cedar-bench",
+      "x": -489.760053489927,
+      "y": 13.535191379776263,
+      "z": -570.6615173934555,
+      "yaw": 2.3606198765489634,
+      "sourceIds": [
+        "1543:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    },
+    {
+      "id": "street-furniture:1543:0@-512.156,-582.159:-425.587,-496.354:72:-1",
+      "kind": "garbage-bin",
+      "x": -455.6690582412441,
+      "y": 13.790501123782121,
+      "z": -536.8709263516539,
+      "yaw": 2.3606198765489634,
+      "sourceIds": [
+        "1543:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    },
+    {
+      "id": "street-furniture:1543:0@-512.156,-582.159:-425.587,-496.354:72:1",
+      "kind": "bicycle-rack",
+      "x": -466.36941207114796,
+      "y": 14.03895667259612,
+      "z": -526.0754445229043,
+      "yaw": -0.7809727770408299,
+      "sourceIds": [
+        "1543:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    },
+    {
+      "id": "street-furniture:214:0@-140.047,-213.078:-40.060,-113.836:120:-1",
+      "kind": "bicycle-rack",
+      "x": -49.52368520328816,
+      "y": 39.98274145926104,
+      "z": -133.93686740098414,
+      "yaw": 2.359935089023103,
+      "sourceIds": [
+        "214:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    },
+    {
+      "id": "street-furniture:214:0@-140.047,-213.078:-40.060,-113.836:120:1",
+      "kind": "cedar-bench",
+      "x": -60.231429135026694,
+      "y": 39.92981132831727,
+      "z": -123.1487155716708,
+      "yaw": -0.7816575645666904,
+      "sourceIds": [
+        "214:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    },
+    {
+      "id": "street-furniture:31:0@6.593,-67.527:74.086,-0.523:24:-1",
+      "kind": "cedar-bench",
+      "x": 28.838918827482075,
+      "y": 39.74314103119229,
+      "z": -55.86963238019414,
+      "yaw": 2.3598343053629423,
+      "sourceIds": [
+        "31:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    },
+    {
+      "id": "street-furniture:31:0@6.593,-67.527:74.086,-0.523:24:1",
+      "kind": "garbage-bin",
+      "x": 18.411899026666774,
+      "y": 40.27865841976211,
+      "z": -45.36643010310714,
+      "yaw": -0.7817583482268509,
+      "sourceIds": [
+        "31:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    },
+    {
+      "id": "street-furniture:31:0@6.593,-67.527:74.086,-0.523:72:-1",
+      "kind": "garbage-bin",
+      "x": 62.90335864506154,
+      "y": 38.89933224081574,
+      "z": -22.0522708640364,
+      "yaw": 2.3598343053629423,
+      "sourceIds": [
+        "31:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    },
+    {
+      "id": "street-furniture:330:0@-425.587,-496.354:-311.434,-383.186:24:-1",
+      "kind": "cedar-bench",
+      "x": -403.2984011323911,
+      "y": 15.087700592089552,
+      "z": -484.7475421901727,
+      "yaw": 2.3605308284404733,
+      "sourceIds": [
+        "330:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    },
+    {
+      "id": "street-furniture:330:0@-425.587,-496.354:-311.434,-383.186:24:1",
+      "kind": "garbage-bin",
+      "x": -413.7885060705658,
+      "y": 15.117507207508558,
+      "z": -474.16606316377545,
+      "yaw": -0.78106182514932,
+      "sourceIds": [
+        "330:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    },
+    {
+      "id": "street-furniture:330:0@-425.587,-496.354:-311.434,-383.186:72:-1",
+      "kind": "garbage-bin",
+      "x": -369.21041500708475,
+      "y": 16.245723144658538,
+      "z": -450.953915543704,
+      "yaw": 2.3605308284404733,
+      "sourceIds": [
+        "330:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    },
+    {
+      "id": "street-furniture:330:0@-425.587,-496.354:-311.434,-383.186:72:1",
+      "kind": "bicycle-rack",
+      "x": -379.70051994525943,
+      "y": 16.35025775525505,
+      "z": -440.37243651730677,
+      "yaw": -0.78106182514932,
+      "sourceIds": [
+        "330:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    },
+    {
+      "id": "street-furniture:330:0@-425.587,-496.354:-311.434,-383.186:120:1",
+      "kind": "cedar-bench",
+      "x": -345.61253381995306,
+      "y": 17.667429211644436,
+      "z": -406.57880987083803,
+      "yaw": -0.78106182514932,
+      "sourceIds": [
+        "330:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    },
+    {
+      "id": "street-furniture:384:0@-311.434,-383.186:-225.548,-297.948:24:1",
+      "kind": "garbage-bin",
+      "x": -299.6470407524123,
+      "y": 19.83273691004622,
+      "z": -360.9916697995981,
+      "yaw": -0.7816114266562916,
+      "sourceIds": [
+        "384:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    },
+    {
+      "id": "street-furniture:384:0@-311.434,-383.186:-225.548,-297.948:72:-1",
+      "kind": "garbage-bin",
+      "x": -255.0817138522704,
+      "y": 22.310840798503857,
+      "z": -337.7550255004853,
+      "yaw": 2.3599812269335017,
+      "sourceIds": [
+        "384:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    },
+    {
+      "id": "street-furniture:673:0@1337.778,170.843:1395.796,187.107:24:1",
+      "kind": "garbage-bin",
+      "x": 1359.3759797048917,
+      "y": 8.676728866806673,
+      "z": 182.71309588863465,
+      "yaw": -0.2733131173221693,
+      "sourceIds": [
+        "673:0"
+      ],
+      "streetNames": [
+        "200-300 WATER ST"
+      ]
+    },
+    {
+      "id": "street-furniture:846:0@1395.796,187.107:1569.636,235.442:24:-1",
+      "kind": "cedar-bench",
+      "x": 1420.3247662240815,
+      "y": 6.97850209398061,
+      "z": 188.47766568557773,
+      "yaw": 2.8704001396030603,
+      "sourceIds": [
+        "846:0"
+      ],
+      "streetNames": [
+        "WATER ST"
+      ]
+    },
+    {
+      "id": "street-furniture:846:0@1395.796,187.107:1569.636,235.442:24:1",
+      "kind": "garbage-bin",
+      "x": 1417.5120203752417,
+      "y": 7.2998569302818375,
+      "z": 198.59391305255298,
+      "yaw": -0.2711925139867328,
+      "sourceIds": [
+        "846:0"
+      ],
+      "streetNames": [
+        "WATER ST"
+      ]
+    },
+    {
+      "id": "street-furniture:846:0@1395.796,187.107:1569.636,235.442:72:1",
+      "kind": "bicycle-rack",
+      "x": 1463.7577226242715,
+      "y": 6.363833028827712,
+      "z": 211.45217979010673,
+      "yaw": -0.2711925139867328,
+      "sourceIds": [
+        "846:0"
+      ],
+      "streetNames": [
+        "WATER ST"
+      ]
+    },
+    {
+      "id": "street-furniture:85:0@230.907,155.625:376.937,301.043:24:-1",
+      "kind": "cedar-bench",
+      "x": 253.02879388695195,
+      "y": 34.8848594754203,
+      "z": 167.4228876967101,
+      "yaw": 2.3582981482751304,
+      "sourceIds": [
+        "85:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    },
+    {
+      "id": "street-furniture:85:0@230.907,155.625:376.937,301.043:24:1",
+      "kind": "garbage-bin",
+      "x": 242.79733713862075,
+      "y": 35.00921337549299,
+      "z": 177.6974822291979,
+      "yaw": -0.7832945053146627,
+      "sourceIds": [
+        "85:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    },
+    {
+      "id": "street-furniture:85:0@230.907,155.625:376.937,301.043:72:-1",
+      "kind": "garbage-bin",
+      "x": 287.0412447531184,
+      "y": 34.2266935338051,
+      "z": 201.29253762222027,
+      "yaw": 2.3582981482751304,
+      "sourceIds": [
+        "85:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    },
+    {
+      "id": "street-furniture:85:0@230.907,155.625:376.937,301.043:120:-1",
+      "kind": "bicycle-rack",
+      "x": 321.0536956192849,
+      "y": 33.51508812285868,
+      "z": 235.16218754773044,
+      "yaw": 2.3582981482751304,
+      "sourceIds": [
+        "85:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    },
+    {
+      "id": "street-furniture:85:0@230.907,155.625:376.937,301.043:120:1",
+      "kind": "cedar-bench",
+      "x": 310.8222388709537,
+      "y": 33.392789306811146,
+      "z": 245.43678208021825,
+      "yaw": -0.7832945053146627,
+      "sourceIds": [
+        "85:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    },
+    {
+      "id": "street-furniture:85:0@230.907,155.625:376.937,301.043:168:-1",
+      "kind": "cedar-bench",
+      "x": 355.0661464854513,
+      "y": 32.844459915974404,
+      "z": 269.03183747324067,
+      "yaw": 2.3582981482751304,
+      "sourceIds": [
+        "85:0"
+      ],
+      "streetNames": [
+        "ROBSON ST"
+      ]
+    }
+  ],
+  "calls": 460,
+  "triangles": 5612549,
+  "geometries": 924,
+  "textures": 51,
+  "physical": [
+    {
+      "id": "street-furniture:1360:0@74.086,-0.523:230.907,155.625:24:1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:1360:0@74.086,-0.523:230.907,155.625:72:-1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:1360:0@74.086,-0.523:230.907,155.625:72:1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:1360:0@74.086,-0.523:230.907,155.625:120:-1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:1360:0@74.086,-0.523:230.907,155.625:120:1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:1360:0@74.086,-0.523:230.907,155.625:168:1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:1465:0@1237.791,147.176:1337.778,170.843:72:1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:1543:0@-512.156,-582.159:-425.587,-496.354:24:-1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:1543:0@-512.156,-582.159:-425.587,-496.354:72:-1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:1543:0@-512.156,-582.159:-425.587,-496.354:72:1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:214:0@-140.047,-213.078:-40.060,-113.836:120:-1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:214:0@-140.047,-213.078:-40.060,-113.836:120:1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:31:0@6.593,-67.527:74.086,-0.523:24:-1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:31:0@6.593,-67.527:74.086,-0.523:24:1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:31:0@6.593,-67.527:74.086,-0.523:72:-1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:330:0@-425.587,-496.354:-311.434,-383.186:24:-1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:330:0@-425.587,-496.354:-311.434,-383.186:24:1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:330:0@-425.587,-496.354:-311.434,-383.186:72:-1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:330:0@-425.587,-496.354:-311.434,-383.186:72:1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:330:0@-425.587,-496.354:-311.434,-383.186:120:1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:384:0@-311.434,-383.186:-225.548,-297.948:24:1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:384:0@-311.434,-383.186:-225.548,-297.948:72:-1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:673:0@1337.778,170.843:1395.796,187.107:24:1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:846:0@1395.796,187.107:1569.636,235.442:24:-1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:846:0@1395.796,187.107:1569.636,235.442:24:1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:846:0@1395.796,187.107:1569.636,235.442:72:1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:85:0@230.907,155.625:376.937,301.043:24:-1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:85:0@230.907,155.625:376.937,301.043:24:1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:85:0@230.907,155.625:376.937,301.043:72:-1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:85:0@230.907,155.625:376.937,301.043:120:-1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:85:0@230.907,155.625:376.937,301.043:120:1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    },
+    {
+      "id": "street-furniture:85:0@230.907,155.625:376.937,301.043:168:-1",
+      "playerBlocked": true,
+      "futureBlocked": true
+    }
+  ]
+}

@@ -245,3 +245,24 @@ test('opaque finishes share a spatial draw while GLB toggles hide only their own
     globalThis.document = prior;
   }
 });
+
+test('all accepted fallback doors reserve an approach even in Compatible graphics or when a taller GLB bay cannot fit', (t) => {
+  t.mock.method(THREE.TextureLoader.prototype, 'load', () => new THREE.Texture());
+  const prior = globalThis.document;
+  globalThis.document = { createElement: canvas };
+  try {
+    for (const compatible of [false,true]) {
+      const host=fixture();host.compatibleGraphics=compatible;
+      const kit=createStreetfronts(host);
+      assert.equal(host.data.streetFrontageApproaches.length,4);
+      if(compatible)assert.equal(kit,null);
+      kit?.dispose();
+    }
+    const host=fixture();
+    host.data.buildingProfiles.set('heritage-fixture',{...profile,groundStoreyM:4.0});
+    const kit=createStreetfronts(host);
+    assert.equal(kit.cells.flatMap(cell=>cell.sources).length,0,'3.2m bay does not fit');
+    assert.equal(host.data.streetFrontageApproaches.length,4,'shorter fallback doors still retain an approach');
+    kit.dispose();
+  }finally{globalThis.document=prior;}
+});

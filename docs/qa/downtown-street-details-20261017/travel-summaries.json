@@ -1,0 +1,191 @@
+{
+  "conditions": "Foreground default-sandbox Chrome155,1280x720 DPR1, AMD RadeonPro560X/ANGLEMetal. No build or test suite ran during travel; not a controlled before/after performance comparison. Each trip recorded40seconds after UI action; first5seconds excluded from timing. These are whole-scene timings, not furniture-only cost.",
+  "runs": [
+    {
+      "name": "drive-auto-balanced",
+      "valid": true,
+      "sourceFingerprint": "56c4e0b0ff34aeaf1733eeda78aaf29c45073b9907b900beee6971dbc0930b96",
+      "totalFrames": 1842,
+      "excludedFirstMs": 5000,
+      "measuredFrames": 1619,
+      "measuredMs": 35203.69999998808,
+      "meanFps": 45.98948405992973,
+      "medianFrameMs": 20.799999952316284,
+      "p95FrameMs": 27.799999952316284,
+      "maxFrameMs": 65.39999997615814,
+      "frameGapsOver50Ms": 3,
+      "frameGapsOver100Ms": 0,
+      "cameraTravelM": 544.9696061509591,
+      "qualities": [
+        "balanced"
+      ],
+      "scaleRange": [
+        1,
+        1
+      ],
+      "geometryRange": [
+        948,
+        1006
+      ],
+      "autoController": {
+        "quality": "balanced",
+        "resolutionScale": 1,
+        "targetFps": 45,
+        "reason": "stable",
+        "frameMs": 16.89999999999418,
+        "p95Ms": 33.80000000001746,
+        "changes": 0,
+        "mode": "drive",
+        "capQuality": "high",
+        "sampleCount": 240,
+        "samples": 4954,
+        "excludedSamples": 9,
+        "timingResets": 13,
+        "decisions": 199,
+        "lastFrameMs": 16.10000000000582,
+        "maxFrameMs": 34.30000000001746,
+        "hitches": 4,
+        "highPromotions": 0,
+        "failedHighUpgrades": 0,
+        "highRetryMs": 0
+      },
+      "settings": {
+        "trees": true,
+        "buildings": true,
+        "labels": true,
+        "traffic": true,
+        "trains": true,
+        "harbour": true,
+        "terrain": true,
+        "autoRotate": false,
+        "quality": "balanced",
+        "qualityMode": "auto",
+        "mode": "drive"
+      }
+    },
+    {
+      "name": "flight-auto-balanced",
+      "valid": true,
+      "sourceFingerprint": "56c4e0b0ff34aeaf1733eeda78aaf29c45073b9907b900beee6971dbc0930b96",
+      "totalFrames": 1705,
+      "excludedFirstMs": 5000,
+      "measuredFrames": 1553,
+      "measuredMs": 35390.59999996424,
+      "meanFps": 43.88170870235513,
+      "medianFrameMs": 21.19999998807907,
+      "p95FrameMs": 30.600000023841858,
+      "maxFrameMs": 215.30000001192093,
+      "frameGapsOver50Ms": 17,
+      "frameGapsOver100Ms": 4,
+      "cameraTravelM": 1445.4398233998352,
+      "qualities": [
+        "balanced"
+      ],
+      "scaleRange": [
+        0.65,
+        0.8
+      ],
+      "geometryRange": [
+        1025,
+        1025
+      ],
+      "autoController": {
+        "quality": "balanced",
+        "resolutionScale": 0.65,
+        "targetFps": 45,
+        "reason": "stable",
+        "frameMs": 16.800000000046566,
+        "p95Ms": 33.79999999998836,
+        "changes": 2,
+        "mode": "flight",
+        "capQuality": "balanced",
+        "sampleCount": 240,
+        "samples": 7241,
+        "excludedSamples": 9,
+        "timingResets": 16,
+        "decisions": 293,
+        "lastFrameMs": 17.20000000001164,
+        "maxFrameMs": 50.40000000002328,
+        "hitches": 14,
+        "highPromotions": 0,
+        "failedHighUpgrades": 0,
+        "highRetryMs": 0
+      },
+      "settings": {
+        "trees": true,
+        "buildings": true,
+        "labels": true,
+        "traffic": true,
+        "trains": true,
+        "harbour": true,
+        "terrain": true,
+        "autoRotate": false,
+        "quality": "balanced",
+        "qualityMode": "auto",
+        "mode": "flight"
+      }
+    },
+    {
+      "name": "walk-auto-balanced",
+      "valid": true,
+      "sourceFingerprint": "56c4e0b0ff34aeaf1733eeda78aaf29c45073b9907b900beee6971dbc0930b96",
+      "totalFrames": 1901,
+      "excludedFirstMs": 5000,
+      "measuredFrames": 1668,
+      "measuredMs": 35247.80000001192,
+      "meanFps": 47.32210237233064,
+      "medianFrameMs": 20.30000001192093,
+      "p95FrameMs": 27,
+      "maxFrameMs": 52.30000001192093,
+      "frameGapsOver50Ms": 2,
+      "frameGapsOver100Ms": 0,
+      "cameraTravelM": 160.73081254386992,
+      "qualities": [
+        "balanced"
+      ],
+      "scaleRange": [
+        1,
+        1
+      ],
+      "geometryRange": [
+        925,
+        927
+      ],
+      "autoController": {
+        "quality": "balanced",
+        "resolutionScale": 1,
+        "targetFps": 35,
+        "reason": "stable",
+        "frameMs": 16.89999999999418,
+        "p95Ms": 33.69999999998254,
+        "changes": 0,
+        "mode": "walk",
+        "capQuality": "high",
+        "sampleCount": 240,
+        "samples": 2611,
+        "excludedSamples": 7,
+        "timingResets": 10,
+        "decisions": 104,
+        "lastFrameMs": 17.300000000017462,
+        "maxFrameMs": 49.79999999998836,
+        "hitches": 1,
+        "highPromotions": 0,
+        "failedHighUpgrades": 0,
+        "highRetryMs": 0
+      },
+      "settings": {
+        "trees": true,
+        "buildings": true,
+        "labels": true,
+        "traffic": true,
+        "trains": true,
+        "harbour": true,
+        "terrain": true,
+        "autoRotate": false,
+        "quality": "balanced",
+        "qualityMode": "auto",
+        "mode": "walk"
+      }
+    }
+  ]
+}

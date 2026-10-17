@@ -371,6 +371,7 @@ export function createStreetDetails(e: CityEngine): Traffic {
   const lampPoints = roadDecorations(e, e.data.roadGraph),
     routes: Traffic['routes'] = [],
     busRoutes: BusRoute[] = [];
+  e.data.streetLampPoints = lampPoints;
   const dummy = new THREE.Object3D();
   for (let k = 0; k < roads.length; k++) {
     const f = roads[k],

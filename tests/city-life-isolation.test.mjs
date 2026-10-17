@@ -13,6 +13,10 @@ import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { verifyCityLifeIsolation } from '../tools/verify-city-life-isolation.mjs';
 import { verifyFirebaseBuild } from '../tools/verify-firebase-build.mjs';
+import {
+  STREET_FURNITURE_IDS,
+  STREET_FURNITURE_SOURCE_PATH,
+} from '../tools/verify-street-furniture-adoption.mjs';
 const digest = (data) => createHash('sha256').update(data).digest('hex');
 const prefix = 'models/city-life-pedestrians/';
 
@@ -248,10 +252,10 @@ test('Firebase verifier invokes mandatory pedestrian isolation on supplied outpu
     const blenderManifest = JSON.parse(
       await readFile('public/models/blender/adopted-manifest.json', 'utf8'),
     );
-    const busFiles = blenderManifest.files.filter((item) =>
-      /^(bus|bus-v2|metro|bus-closeup)\//.test(item.path),
+    const dependencyFiles = blenderManifest.files.filter((item) =>
+      /^(bus|bus-v2|metro|bus-closeup|street-furniture)\//.test(item.path),
     );
-    for (const item of busFiles)
+    for (const item of dependencyFiles)
       await f.put(
         f.output,
         'models/blender/' + item.path,
@@ -263,22 +267,51 @@ test('Firebase verifier invokes mandatory pedestrian isolation on supplied outpu
       JSON.stringify({
         version: 1,
         sourceRevision: blenderManifest.sourceRevision,
-        files: busFiles,
+        files: dependencyFiles,
       }),
     );
     options.busSource = path.resolve('tools/assets/boardable-bus');
+    options.streetFurnitureSource = path.join(
+      options.assetRoot,
+      'street-furniture-expansion',
+    );
+    // The mandatory furniture gate must validate immutable source bytes in the
+    // supplied fixture root, rather than falling back to this checkout's files.
+    const furnitureManifestBytes = await readFile(
+      path.join(STREET_FURNITURE_SOURCE_PATH, 'manifest.json'),
+    );
+    const furnitureManifest = JSON.parse(furnitureManifestBytes);
+    await f.put(
+      options.streetFurnitureSource,
+      'manifest.json',
+      furnitureManifestBytes,
+    );
+    for (const asset of furnitureManifest.assets.filter((asset) =>
+      STREET_FURNITURE_IDS.includes(asset.id),
+    ))
+      for (const lod of asset.lods)
+        for (const file of [lod.file, lod.source])
+          await f.put(
+            options.streetFurnitureSource,
+            file,
+            await readFile(path.join(STREET_FURNITURE_SOURCE_PATH, file)),
+          );
     const result = await verifyFirebaseBuild(f.output, options);
     assert.equal(result.status, 'pass');
     assert.equal(result.cityLife.adoptedFiles, 8);
+    assert.equal(result.streetFurniture.adoptedFiles, 7);
     for (const marker of [
       'Auto: use automatic quality',
       'Auto travel QA ready',
       'auto-quality-travel',
+      'Furniture: focus',
+      'Street furniture QA ready',
+      'city-street-furniture-webgl-v1',
     ]) {
       await f.put(f.output, 'assets/auto-qa.js', JSON.stringify(marker));
       await assert.rejects(
         verifyFirebaseBuild(f.output, options),
-        /Auto quality diagnostics/,
+        /(?:Auto quality|Street furniture) diagnostics/,
       );
     }
     await f.put(f.output, 'assets/auto-qa.js', '');

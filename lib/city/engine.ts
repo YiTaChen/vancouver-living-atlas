@@ -1,3 +1,4 @@
+import { CityStreetFurniture } from './street-furniture-world';
 import { FlightController } from './flight-controller';
 import { clearOrbitGesture } from './orbit-lifecycle';
 import { paintStartupProgress } from './startup-progress';
@@ -172,6 +173,7 @@ export class CityEngine {
   facadeDetails: FacadeDetails | null = null;
   architecturalDetails: ArchitecturalDetails | null = null;
   streetscapeKit: StreetscapeKit | null = null;
+  streetFurniture: CityStreetFurniture | null = null;
   roads = new THREE.Group();
   terrain = new THREE.Group();
   landmarks = new THREE.Group();
@@ -648,6 +650,7 @@ export class CityEngine {
       this.startupQA?.phase('geometry.traffic-and-road-details');
     }
     this.traffic = createStreetDetails(this);
+    this.streetFurniture = new CityStreetFurniture(this);
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('geometry.railway');
     }
@@ -958,6 +961,7 @@ export class CityEngine {
     this.facadeDetails?.update();
     this.architecturalDetails?.update();
     this.streetscapeKit?.update();
+    this.streetFurniture?.update();
     this.landmarkWorker?.beginFrame();
     this.landmarkDetails.forEach((l) => l.update());
     this.interiors?.update();
@@ -1971,6 +1975,7 @@ export class CityEngine {
     this.traffic?.busAssets?.dispose();
     this.facadeDetails?.dispose();
     this.architecturalDetails?.dispose();
+    this.streetFurniture?.dispose();
     this.streetscapeKit?.dispose();
     this.scene.traverse((o) => {
       const m = o as THREE.Mesh;
