@@ -176,6 +176,13 @@ export async function verifyFirebaseBuild(
     'Street furniture diagnostics must not ship in the public build',
   );
   assert(
+    !scripts.includes('Tesla QA: spawn Robson') &&
+      !scripts.includes('Tesla QA ready') &&
+      !scripts.includes('city-tesla-webgl-v1') &&
+      !files.some((name) => /(?:^|\/)tesla-qa[.-]/.test(name)),
+    'Tesla diagnostics must not ship in the public build',
+  );
+  assert(
     !scripts.includes('cpu-submission-profile-v1') &&
       !scripts.includes('Record CPU method timings (instrumented)'),
     'CPU profiling controls must not ship in the public build',

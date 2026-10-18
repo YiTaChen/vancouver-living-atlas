@@ -1,0 +1,1322 @@
+{
+  "revision": "3baf67dac8cec0007c4122ad960eee6edde19f97",
+  "sourceFingerprint": "591b0b2e3c7903e25c4c7af440379c593014bfd2934dde4be2a12cdbfda049b0",
+  "kind": "city-tesla-webgl-v1",
+  "id": "tesla-parked-wall-jump-air-chase-auto-20261018t022538986z-006",
+  "capturedAt": "2026-10-18T02:25:38.986Z",
+  "valid": true,
+  "localOptIn": true,
+  "case": "building-wall",
+  "snapshot": {
+    "active": true,
+    "mode": "air",
+    "transitioning": false,
+    "speedKph": 0,
+    "altitudeM": 60,
+    "parked": false,
+    "adhesion": true,
+    "flightAssist": true,
+    "view": "chase",
+    "quality": "auto",
+    "effectiveQuality": "medium",
+    "warning": ""
+  },
+  "state": {
+    "position": [
+      247.38417498609002,
+      93.60583884428775,
+      145.635411902215
+    ],
+    "quaternion": [
+      -0.0000834208701914883,
+      0.44701403160673386,
+      0.00004168383896583854,
+      0.8945269402595485
+    ],
+    "velocity": [
+      0,
+      0,
+      0
+    ],
+    "heading": 0.9268490135656059,
+    "mode": "air",
+    "contact": null,
+    "flightAssist": true,
+    "adhesionArmed": true,
+    "parked": false,
+    "timeS": 25.68139999999934,
+    "impact": 0,
+    "collisionSurfaceId": "building:2281:wall:0:7",
+    "lastSafePose": {
+      "position": [
+        247.38417498609002,
+        93.60583884428775,
+        145.635411902215
+      ],
+      "quaternion": [
+        -0.0000834208701914883,
+        0.44701403160673386,
+        0.00004168383896583854,
+        0.8945269402595485
+      ]
+    },
+    "detachRemainingS": 0,
+    "departureContact": null,
+    "groundDeparture": null,
+    "held": {
+      "jump": false,
+      "flightToggle": false,
+      "adhesionToggle": false,
+      "park": false
+    },
+    "attachment": null
+  },
+  "steps": {
+    "simulatedS": 0.032,
+    "droppedS": 0,
+    "substeps": 4,
+    "collisions": 0,
+    "transitions": 0,
+    "environmentFailures": 0
+  },
+  "activeLOD": {
+    "quality": "medium",
+    "triangles": 27300,
+    "meshes": 36,
+    "materials": 13,
+    "cachedLevels": 3,
+    "disposed": false
+  },
+  "world": {
+    "sources": 89983,
+    "sourceCells": 16686,
+    "broadSources": 4,
+    "cachedTiles": 48,
+    "loadedTiles": 57,
+    "cachedFaces": 13182,
+    "queries": 197336
+  },
+  "shape": {
+    "halfExtents": [
+      1.14,
+      0.62,
+      2.34
+    ],
+    "clearance": 0.06,
+    "groundSupport": {
+      "wheelContacts": [
+        [
+          -0.896,
+          -0.6799999999999999,
+          1.39
+        ],
+        [
+          0.896,
+          -0.6799999999999999,
+          1.39
+        ],
+        [
+          -0.896,
+          -0.6799999999999999,
+          -1.39
+        ],
+        [
+          0.896,
+          -0.6799999999999999,
+          -1.39
+        ]
+      ],
+      "chassisClearance": 0.08,
+      "suspensionTravel": 0.05,
+      "bodySections": [
+        {
+          "minZ": -2.34,
+          "maxZ": -1.39,
+          "clearance": 0.08
+        },
+        {
+          "minZ": -1.39,
+          "maxZ": 1.39,
+          "clearance": 0.12
+        },
+        {
+          "minZ": 1.39,
+          "maxZ": 2.34,
+          "clearance": 0.15
+        }
+      ]
+    }
+  },
+  "scenario": {
+    "kind": "real-building-wall-approach",
+    "startedAt": "2026-10-18T02:25:13.079Z",
+    "result": "completed",
+    "trace": [
+      {
+        "elapsedMs": 160.69999998807907,
+        "simulatedS": 0,
+        "mode": "ground",
+        "position": [
+          242.4962141988945,
+          35.60116311293118,
+          140.69833459012452
+        ],
+        "quaternion": [
+          0.005711978175491704,
+          0.38032330148517074,
+          -0.008575981696637858,
+          0.9247962003548033
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0,
+          "droppedS": 0,
+          "substeps": 0,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 186.79999995231628,
+        "simulatedS": 0.03229999999998836,
+        "mode": "ground",
+        "position": [
+          242.4962141988945,
+          35.60116311293118,
+          140.69833459012452
+        ],
+        "quaternion": [
+          0.005711978175491704,
+          0.38032330148517074,
+          -0.008575981696637858,
+          0.9247962003548033
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.03229999999998836,
+          "droppedS": 0,
+          "substeps": 0,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 302.69999998807907,
+        "simulatedS": 0.1490999999999767,
+        "mode": "ground",
+        "position": [
+          242.51203178026992,
+          35.59877803083415,
+          140.71431629668095
+        ],
+        "quaternion": [
+          0.005711781908975055,
+          0.3803233033395838,
+          -0.008575917985280778,
+          0.9247962013952051
+        ],
+        "speedMps": 0.3597439999999643,
+        "parked": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.05070000000001164,
+          "droppedS": 0,
+          "substeps": 7,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 423.5999999642372,
+        "simulatedS": 0.2665999999999767,
+        "mode": "ground",
+        "position": [
+          242.55775923256425,
+          35.597667138442496,
+          140.76051822267257
+        ],
+        "quaternion": [
+          0.005711779723589256,
+          0.38032330332891146,
+          -0.00857590177566667,
+          0.9247962015634082
+        ],
+        "speedMps": 0.7216439999999641,
+        "parked": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.0515,
+          "droppedS": 0,
+          "substeps": 7,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 558,
+        "simulatedS": 0.36529999999998863,
+        "mode": "ground",
+        "position": [
+          242.61928758571906,
+          35.59617234838404,
+          140.82268500161192
+        ],
+        "quaternion": [
+          0.0057117808950267815,
+          0.38032330331804953,
+          -0.008575902257423582,
+          0.9247962015561728
+        ],
+        "speedMps": 1.0256399999999997,
+        "parked": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.06529999999998835,
+          "droppedS": 0,
+          "substeps": 8,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 680.5,
+        "simulatedS": 0.5001999999999541,
+        "mode": "ground",
+        "position": [
+          242.73751854642614,
+          35.593300006518724,
+          140.94214274136638
+        ],
+        "quaternion": [
+          0.00571178314602496,
+          0.3803233032971772,
+          -0.008575903183148671,
+          0.9247962015422692
+        ],
+        "speedMps": 1.4411319999998933,
+        "parked": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.06679999999998835,
+          "droppedS": 0,
+          "substeps": 9,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 811.5,
+        "simulatedS": 0.6501999999999536,
+        "mode": "ground",
+        "position": [
+          242.9152582448615,
+          35.5889819397966,
+          141.12172668888482
+        ],
+        "quaternion": [
+          0.005711786530010912,
+          0.3803233032657988,
+          -0.00857590457481389,
+          0.9247962015213679
+        ],
+        "speedMps": 1.9031319999998944,
+        "parked": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.03529999999998836,
+          "droppedS": 0,
+          "substeps": 5,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 935,
+        "simulatedS": 0.7832999999999882,
+        "mode": "ground",
+        "position": [
+          243.11378688494028,
+          35.58415792702089,
+          141.32231528813546
+        ],
+        "quaternion": [
+          0.005712141017534313,
+          0.3803232996693009,
+          -0.008575897359304727,
+          0.9247962008778656
+        ],
+        "speedMps": 2.3130799999999994,
+        "parked": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.033200000000011644,
+          "droppedS": 0,
+          "substeps": 4,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 1035,
+        "simulatedS": 0.8832999999999879,
+        "mode": "ground",
+        "position": [
+          243.28819513828049,
+          35.57992073023928,
+          141.49853322572298
+        ],
+        "quaternion": [
+          0.005712127432361492,
+          0.3803232998489413,
+          -0.008575918321322576,
+          0.9247962006935122
+        ],
+        "speedMps": 2.621079999999998,
+        "parked": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.0335,
+          "droppedS": 0,
+          "substeps": 5,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 1158.8999999761581,
+        "simulatedS": 1.016599999999976,
+        "mode": "ground",
+        "position": [
+          243.55436811454487,
+          35.573454073424514,
+          141.7674680495608
+        ],
+        "quaternion": [
+          0.005712092839834916,
+          0.38032330021027105,
+          -0.008575924153596674,
+          0.9247962007044951
+        ],
+        "speedMps": 3.0316439999999614,
+        "parked": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.033200000000011644,
+          "droppedS": 0,
+          "substeps": 4,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 1290.5,
+        "simulatedS": 1.133299999999987,
+        "mode": "ground",
+        "position": [
+          243.81900516094493,
+          35.567024698877155,
+          142.03485100603774
+        ],
+        "quaternion": [
+          0.005712054466424472,
+          0.380323300566121,
+          -0.008575908372495816,
+          0.9247962009415108
+        ],
+        "speedMps": 3.391079999999995,
+        "parked": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.033,
+          "droppedS": 0,
+          "substeps": 4,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 1406.199999988079,
+        "simulatedS": 1.2500999999999753,
+        "mode": "ground",
+        "position": [
+          244.1134132883027,
+          35.55987202365891,
+          142.33231395167857
+        ],
+        "quaternion": [
+          0.0057120173830021055,
+          0.3803233008974611,
+          -0.008575886913480654,
+          0.9247962012332894
+        ],
+        "speedMps": 3.7508239999999575,
+        "parked": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.01679999999998836,
+          "droppedS": 0,
+          "substeps": 3,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 1514.3999999761581,
+        "simulatedS": 1.3666999999999516,
+        "mode": "ground",
+        "position": [
+          244.4367704895841,
+          35.55248768987013,
+          142.65902534871708
+        ],
+        "quaternion": [
+          0.005455018978561269,
+          0.38032624399381726,
+          -0.00875478415682381,
+          0.9247948662551422
+        ],
+        "speedMps": 4.109951999999885,
+        "parked": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.03509999999997672,
+          "droppedS": 0,
+          "substeps": 5,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 1640.5,
+        "simulatedS": 1.4830999999999748,
+        "mode": "ground",
+        "position": [
+          244.78897907177637,
+          35.54454203479555,
+          143.01488385685252
+        ],
+        "quaternion": [
+          0.005121847294147864,
+          0.3803300044748252,
+          -0.008986694544727862,
+          0.9247930004588243
+        ],
+        "speedMps": 4.468463999999957,
+        "parked": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.0165,
+          "droppedS": 0,
+          "substeps": 2,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 1761.0999999642372,
+        "simulatedS": 1.616599999999974,
+        "mode": "ground",
+        "position": [
+          245.22904960133778,
+          35.534612643296825,
+          143.45950920532167
+        ],
+        "quaternion": [
+          0.004705332204024505,
+          0.38033461735734314,
+          -0.00927619677835104,
+          0.9247904578129159
+        ],
+        "speedMps": 4.879643999999964,
+        "parked": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.03479999999998836,
+          "droppedS": 0,
+          "substeps": 5,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 1883.199999988079,
+        "simulatedS": 1.7332999999999854,
+        "mode": "ground",
+        "position": [
+          245.64539002415356,
+          35.52562588587715,
+          143.88015191472402
+        ],
+        "quaternion": [
+          0.004262605692474921,
+          0.38033922845494433,
+          -0.009284771618458892,
+          0.92479062198262
+        ],
+        "speedMps": 5.239080000000008,
+        "parked": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7940",
+          "kind": "ground",
+          "normal": [
+            0.02020616087404622,
+            0.9997876666252077,
+            0.00404137685135088
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.016600000000034924,
+          "droppedS": 0,
+          "substeps": 2,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 1993.5,
+        "simulatedS": 1.8499999999999968,
+        "mode": "ground",
+        "position": [
+          246.09124050627256,
+          35.51633995739619,
+          144.33059687430406
+        ],
+        "quaternion": [
+          0.0037478334233557076,
+          0.38034433775979626,
+          -0.009073043564904784,
+          0.9247928515938919
+        ],
+        "speedMps": 5.598516000000045,
+        "parked": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7947",
+          "kind": "ground",
+          "normal": [
+            0.020206270461533928,
+            0.9997918511518136,
+            -0.002821525201965476
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.034200000000011645,
+          "droppedS": 0,
+          "substeps": 5,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 2111.5,
+        "simulatedS": 1.9655999999999734,
+        "mode": "ground",
+        "position": [
+          246.56198461677113,
+          35.50730632718192,
+          144.80617999396316
+        ],
+        "quaternion": [
+          0.0032970254229469703,
+          0.38034870944179594,
+          -0.0093529052110134,
+          0.9247899826519721
+        ],
+        "speedMps": 5.954563999999977,
+        "parked": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7947",
+          "kind": "ground",
+          "normal": [
+            0.020206270461533928,
+            0.9997918511518136,
+            -0.002821525201965476
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.033700000000011644,
+          "droppedS": 0,
+          "substeps": 5,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 2238.699999988079,
+        "simulatedS": 2.0833999999999615,
+        "mode": "ground",
+        "position": [
+          247.07146545318363,
+          35.49757827962744,
+          145.32088867752995
+        ],
+        "quaternion": [
+          0.002815114635743473,
+          0.38035325636671985,
+          -0.0096883228483593,
+          0.9247862520070278
+        ],
+        "speedMps": 6.317387999999945,
+        "parked": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7947",
+          "kind": "ground",
+          "normal": [
+            0.020206270461533928,
+            0.9997918511518136,
+            -0.002821525201965476
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.03509999999997672,
+          "droppedS": 0,
+          "substeps": 5,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 2360,
+        "simulatedS": 2.216599999999972,
+        "mode": "ground",
+        "position": [
+          247.68381511444076,
+          35.48644050801156,
+          145.93950993011987
+        ],
+        "quaternion": [
+          0.002538575372398772,
+          0.38035580665406404,
+          -0.009880794731168086,
+          0.9247839671377827
+        ],
+        "speedMps": 6.727643999999989,
+        "parked": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7947",
+          "kind": "ground",
+          "normal": [
+            0.020206270461533928,
+            0.9997918511518136,
+            -0.002821525201965476
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.03329999999998836,
+          "droppedS": 0,
+          "substeps": 4,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 2460.5,
+        "simulatedS": 2.3166999999999485,
+        "mode": "air",
+        "position": [
+          247.8500296266213,
+          36.04590393022219,
+          146.10744053724142
+        ],
+        "quaternion": [
+          0.0025385822925347162,
+          0.380355806567791,
+          -0.00988080632210253,
+          0.9247839670304273
+        ],
+        "speedMps": 12.000000000018717,
+        "parked": false,
+        "contact": null,
+        "attachment": {
+          "index": 1,
+          "count": 4,
+          "surfaceId": "building:2281:wall:0:7"
+        },
+        "step": {
+          "simulatedS": 0.016699999999953433,
+          "droppedS": 0,
+          "substeps": 3,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 2572.5,
+        "simulatedS": 2.4332999999999827,
+        "mode": "air",
+        "position": [
+          247.70206456400675,
+          37.42920946875931,
+          145.9579990192514
+        ],
+        "quaternion": [
+          0.0025385822925347162,
+          0.380355806567791,
+          -0.00988080632210253,
+          0.9247839670304273
+        ],
+        "speedMps": 12.0000000000009,
+        "parked": false,
+        "contact": null,
+        "attachment": {
+          "index": 1,
+          "count": 4,
+          "surfaceId": "building:2281:wall:0:7"
+        },
+        "step": {
+          "simulatedS": 0.017900000000023283,
+          "droppedS": 0,
+          "substeps": 3,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 2674.2999999523163,
+        "simulatedS": 2.533299999999982,
+        "mode": "air",
+        "position": [
+          247.65356751551266,
+          37.88260187504218,
+          145.90901804754813
+        ],
+        "quaternion": [
+          -0.07398771910778167,
+          0.37986921259200607,
+          0.021617775279666237,
+          0.9218231232388974
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "contact": null,
+        "attachment": {
+          "index": 2,
+          "count": 4,
+          "surfaceId": "building:2281:wall:0:7"
+        },
+        "step": {
+          "simulatedS": 0.018400000000023283,
+          "droppedS": 0,
+          "substeps": 3,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 2790.699999988079,
+        "simulatedS": 2.6489999999999934,
+        "mode": "air",
+        "position": [
+          247.65356751551266,
+          37.88260187504218,
+          145.90901804754813
+        ],
+        "quaternion": [
+          -0.22168836564366057,
+          0.37140948599187174,
+          0.08258676354405944,
+          0.89782441977305
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "contact": null,
+        "attachment": {
+          "index": 2,
+          "count": 4,
+          "surfaceId": "building:2281:wall:0:7"
+        },
+        "step": {
+          "simulatedS": 0.016900000000023282,
+          "droppedS": 0,
+          "substeps": 3,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 2914.099999964237,
+        "simulatedS": 2.78209999999997,
+        "mode": "air",
+        "position": [
+          247.65356751551266,
+          37.88260187504218,
+          145.90901804754813
+        ],
+        "quaternion": [
+          -0.3841896614810751,
+          0.3496767498126097,
+          0.14995393534401302,
+          0.8412123940637051
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "contact": null,
+        "attachment": {
+          "index": 2,
+          "count": 4,
+          "surfaceId": "building:2281:wall:0:7"
+        },
+        "step": {
+          "simulatedS": 0.03270000000001164,
+          "droppedS": 0,
+          "substeps": 4,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 3023.899999976158,
+        "simulatedS": 2.882999999999993,
+        "mode": "air",
+        "position": [
+          247.65356751551266,
+          37.88260187504218,
+          145.90901804754813
+        ],
+        "quaternion": [
+          -0.4988012444801817,
+          0.3250778077791077,
+          0.19768313946522448,
+          0.7787445754326152
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "contact": null,
+        "attachment": {
+          "index": 2,
+          "count": 4,
+          "surfaceId": "building:2281:wall:0:7"
+        },
+        "step": {
+          "simulatedS": 0.018100000000034925,
+          "droppedS": 0,
+          "substeps": 3,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 3141.199999988079,
+        "simulatedS": 2.999899999999958,
+        "mode": "air",
+        "position": [
+          247.65356751551266,
+          37.88260187504218,
+          145.90901804754813
+        ],
+        "quaternion": [
+          -0.6190209498790986,
+          0.28851963192244534,
+          0.2479976770366031,
+          0.687071057308168
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "contact": null,
+        "attachment": {
+          "index": 2,
+          "count": 4,
+          "surfaceId": "building:2281:wall:0:7"
+        },
+        "step": {
+          "simulatedS": 0.016599999999976717,
+          "droppedS": 0,
+          "substeps": 2,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 3257.5,
+        "simulatedS": 3.1165999999999694,
+        "mode": "air",
+        "position": [
+          248.2867964689467,
+          37.88260187504218,
+          146.54856561617206
+        ],
+        "quaternion": [
+          -0.6561369130782257,
+          0.2743343223449036,
+          0.26359884539993117,
+          0.6517213204917901
+        ],
+        "speedMps": 12.00000000000176,
+        "parked": false,
+        "contact": null,
+        "attachment": {
+          "index": 3,
+          "count": 4,
+          "surfaceId": "building:2281:wall:0:7"
+        },
+        "step": {
+          "simulatedS": 0.034,
+          "droppedS": 0,
+          "substeps": 5,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 3379.7999999523163,
+        "simulatedS": 3.2327999999999806,
+        "mode": "wall",
+        "position": [
+          249.1218333272553,
+          37.94797704428688,
+          147.3904093027045
+        ],
+        "quaternion": [
+          -0.6561369130782257,
+          0.2743343223449036,
+          0.26359884539993117,
+          0.6517213204917901
+        ],
+        "speedMps": 6.8291906666665465,
+        "parked": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.017900000000023283,
+          "droppedS": 0,
+          "substeps": 3,
+          "collisions": 0,
+          "transitions": 1,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 3397.099999964237,
+        "simulatedS": 3.2648999999999573,
+        "mode": "wall",
+        "position": [
+          249.1218333272553,
+          37.94797704428688,
+          147.3904093027045
+        ],
+        "quaternion": [
+          -0.6561369130782257,
+          0.2743343223449036,
+          0.26359884539993117,
+          0.6517213204917901
+        ],
+        "speedMps": 0,
+        "parked": true,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.03209999999997672,
+          "droppedS": 0,
+          "substeps": 4,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      }
+    ],
+    "target": {
+      "candidate": {
+        "building": 2281,
+        "edge": 7,
+        "midpoint": [
+          249.64696329406138,
+          147.82739400003337
+        ],
+        "normal": [
+          -0.7035877260378928,
+          -0.7106084095821181
+        ],
+        "length": 18.185537248651272,
+        "distance": 62.65211755168241
+      },
+      "spawn": {
+        "pose": {
+          "position": [
+            242.56425940223394,
+            35.59973282506211,
+            140.7119441918321
+          ],
+          "quaternion": [
+            0.005711978175491704,
+            0.38032330148517074,
+            -0.008575981696637858,
+            0.9247962003548033
+          ]
+        },
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "point": [
+            242.5504783186875,
+            34.917877646611906,
+            140.70918786149636
+          ],
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ],
+          "adherable": true
+        },
+        "identity": {
+          "surfaceId": "ground",
+          "layer": 0,
+          "allowedModes": [
+            "walk",
+            "drive"
+          ]
+        }
+      },
+      "surfaceId": "building:2281:wall:0:7",
+      "heading": 0.7804337700633748
+    }
+  },
+  "settings": {
+    "trees": true,
+    "buildings": true,
+    "labels": true,
+    "traffic": true,
+    "trains": true,
+    "harbour": true,
+    "terrain": true,
+    "autoRotate": false,
+    "quality": "balanced",
+    "qualityMode": "auto",
+    "mode": "tesla"
+  },
+  "hour": 14,
+  "night": 0,
+  "compatible": false,
+  "fps": 45,
+  "viewport": [
+    1280,
+    720
+  ],
+  "render": [
+    832,
+    468
+  ],
+  "pixelRatio": 0.65,
+  "camera": {
+    "position": [
+      241.55809808599824,
+      96.3186053949769,
+      141.26179095871936
+    ],
+    "quaternion": [
+      0.0717242862866027,
+      0.8829371369776571,
+      0.14352861752772372,
+      -0.44122236440705964
+    ],
+    "up": [
+      0,
+      1,
+      0
+    ],
+    "target": [
+      247.38417498609002,
+      93.88583884428775,
+      145.635411902215
+    ],
+    "near": 0.18,
+    "far": 45000,
+    "fov": 56
+  },
+  "renderer": {
+    "calls": 384,
+    "triangles": 2185181,
+    "points": 0,
+    "lines": 0,
+    "geometries": 821,
+    "textures": 39
+  },
+  "workerErrors": {}
+}

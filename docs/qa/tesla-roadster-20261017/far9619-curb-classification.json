@@ -1,0 +1,355 @@
+{
+  "kind": "Actual Vancouver road curb collision and safe escape evidence",
+  "worldHash": "b7c06df30a778221a1fde37a67c12580ed3f918518d40b23c004ddc3e80fddca",
+  "stateHash": "f6792cd287fc59b63423a6939ab63d41094492df52e0d32ee35af6246064ec73",
+  "fixture": "tests/fixtures/tesla-stationary-curb.json",
+  "fixtureSha256": "1d52afeae3df4adc1d822527ee2c6a843c7a077a728af9d3ded48557a9243742",
+  "limitations": [
+    "No medium landmark meshes or runtime furniture"
+  ],
+  "classification": "Genuine 13cm raised footway. The straight combined forward/heave path intersects the conservative middle collision slab; retain continuous collision rejection. This proves collision-envelope overlap, not an exact visual-mesh contact. No automatic prelift or enlarged clearance.",
+  "initialPose": {
+    "position": [
+      1024.6900614164538,
+      16.61845006386645,
+      941.0782407982801
+    ],
+    "quaternion": [
+      0.007867600540940914,
+      0.3858296825417785,
+      0.004377894299249751,
+      0.9225260922992603
+    ]
+  },
+  "physicalSources": {
+    "asphalt": {
+      "surfaceId": "ground:asphalt:9:face:9619",
+      "triangleId": "ground:asphalt:9:face:9619",
+      "kind": "ground",
+      "triangle": [
+        [
+          1024.2655029296875,
+          15.951542854309082,
+          940.2655639648438
+        ],
+        [
+          1020,
+          16.019332885742188,
+          936
+        ],
+        [
+          1020,
+          15.960923194885254,
+          939.3189086914062
+        ]
+      ],
+      "normal": [
+        -0.0017064270755858119,
+        0.9998437166923756,
+        0.017596314881595715
+      ],
+      "point": [
+        1024.2655029296875,
+        15.951542854309082,
+        940.2655639648438
+      ],
+      "adherable": true,
+      "supportGroup": "ground:0",
+      "bounds": {
+        "min": [
+          1020,
+          15.951542854309082,
+          936
+        ],
+        "max": [
+          1024.2655029296875,
+          16.019332885742188,
+          940.2655639648438
+        ]
+      }
+    },
+    "footway": {
+      "surfaceId": "ground:footway:68:face:6497",
+      "triangleId": "ground:footway:68:face:6497",
+      "kind": "ground",
+      "triangle": [
+        [
+          1024.2847900390625,
+          16.023839950561523,
+          943.5462036132812
+        ],
+        [
+          1025.939453125,
+          16.054941177368164,
+          941.9393920898438
+        ],
+        [
+          1025.904541015625,
+          16.055496215820312,
+          941.9044799804688
+        ]
+      ],
+      "normal": [
+        -0.0017032187287960284,
+        0.9998436767024135,
+        0.01759889781098584
+      ],
+      "point": [
+        1024.2847900390625,
+        16.023839950561523,
+        943.5462036132812
+      ],
+      "adherable": true,
+      "supportGroup": "ground:0",
+      "bounds": {
+        "min": [
+          1024.2847900390625,
+          16.023839950561523,
+          941.9044799804688
+        ],
+        "max": [
+          1025.939453125,
+          16.055496215820312,
+          943.5462036132812
+        ]
+      }
+    }
+  },
+  "footwayAboveAsphaltPlaneM": 0.12999952182420316,
+  "bodyClearanceM": {
+    "rear": 0.08,
+    "middle": 0.12,
+    "front": 0.15
+  },
+  "firstRejectedSweep": {
+    "q": {
+      "from": {
+        "position": [
+          1024.6907140325072,
+          16.618439854113095,
+          941.0788844331345
+        ],
+        "quaternion": [
+          0.007867601347628617,
+          0.38582968252501476,
+          0.004377896263195473,
+          0.9225260922900718
+        ]
+      },
+      "to": {
+        "position": [
+          1024.6913666485607,
+          16.628508337642934,
+          941.0795280679888
+        ],
+        "quaternion": [
+          0.007867602154316651,
+          0.38582968250825106,
+          0.0043778982271408485,
+          0.9225260922808831
+        ]
+      },
+      "shape": {
+        "halfExtents": [
+          1.14,
+          0.62,
+          2.34
+        ],
+        "clearance": 0.06,
+        "groundSupport": {
+          "wheelContacts": [
+            [
+              -0.896,
+              -0.6799999999999999,
+              1.39
+            ],
+            [
+              0.896,
+              -0.6799999999999999,
+              1.39
+            ],
+            [
+              -0.896,
+              -0.6799999999999999,
+              -1.39
+            ],
+            [
+              0.896,
+              -0.6799999999999999,
+              -1.39
+            ]
+          ],
+          "chassisClearance": 0.08,
+          "suspensionTravel": 0.05,
+          "bodySections": [
+            {
+              "minZ": -2.34,
+              "maxZ": -1.39,
+              "clearance": 0.08
+            },
+            {
+              "minZ": -1.39,
+              "maxZ": 1.39,
+              "clearance": 0.12
+            },
+            {
+              "minZ": 1.39,
+              "maxZ": 2.34,
+              "clearance": 0.15
+            }
+          ]
+        }
+      },
+      "ignoreSurfaceId": "ground:asphalt:9:face:9619"
+    },
+    "result": {
+      "surfaceId": "ground:footway:68:face:6497",
+      "kind": "ground",
+      "point": [
+        1025.7240360643932,
+        16.051968443527286,
+        942.0874335631892
+      ],
+      "normal": [
+        -0.0017032187287960288,
+        0.9998436767024137,
+        0.017598897810985843
+      ],
+      "adherable": true,
+      "fraction": 0.10359032463225633
+    }
+  },
+  "staticSlices": [
+    {
+      "t": 0,
+      "groundSupport": true,
+      "blockingSurfaceId": null
+    },
+    {
+      "t": 0.05,
+      "groundSupport": true,
+      "blockingSurfaceId": null
+    },
+    {
+      "t": 0.10359,
+      "groundSupport": true,
+      "blockingSurfaceId": null
+    },
+    {
+      "t": 0.15,
+      "groundSupport": true,
+      "blockingSurfaceId": "ground:footway:68:face:6497"
+    },
+    {
+      "t": 0.25,
+      "groundSupport": true,
+      "blockingSurfaceId": "ground:footway:68:face:6497"
+    },
+    {
+      "t": 0.5,
+      "groundSupport": true,
+      "blockingSurfaceId": "ground:footway:68:face:6497"
+    },
+    {
+      "t": 0.75,
+      "groundSupport": true,
+      "blockingSurfaceId": "ground:footway:68:face:6497"
+    },
+    {
+      "t": 0.95,
+      "groundSupport": true,
+      "blockingSurfaceId": "ground:footway:68:face:6497"
+    },
+    {
+      "t": 1,
+      "groundSupport": true,
+      "blockingSurfaceId": null
+    }
+  ],
+  "wheelResidualsFromM": [
+    5.8336420458715565e-06,
+    -5.833642040542486e-06,
+    -5.833642042318843e-06,
+    5.8336420458715565e-06
+  ],
+  "minimumAvailableUpwardWheelTravelM": 0.05000227418514386,
+  "controls": {
+    "idle": {
+      "kind": "idle",
+      "position": [
+        1024.6900614164538,
+        16.61845006386645,
+        941.0782407982801
+      ],
+      "mode": "ground",
+      "attachment": false,
+      "groundDeparture": false,
+      "collisions": 0,
+      "substeps": 0,
+      "delta": [
+        0,
+        0,
+        0
+      ]
+    },
+    "reverse": {
+      "kind": "reverse",
+      "position": [
+        1023.1107305666603,
+        16.643157645212913,
+        939.5206444522531
+      ],
+      "mode": "ground",
+      "attachment": false,
+      "groundDeparture": false,
+      "collisions": 0,
+      "substeps": 120,
+      "delta": [
+        -1.5793308497934504,
+        0.024707581346461893,
+        -1.557596346027026
+      ],
+      "horizontalDistanceM": 2.218195733082643
+    },
+    "launch": {
+      "kind": "launch",
+      "position": [
+        1024.6849088097335,
+        33.96291870062057,
+        941.1313733883362
+      ],
+      "mode": "air",
+      "attachment": false,
+      "groundDeparture": false,
+      "collisions": 0,
+      "substeps": 120,
+      "delta": [
+        -0.005152606720230324,
+        17.34446863675412,
+        0.053132590056065965
+      ]
+    }
+  },
+  "movingOptimizationEquivalence": {
+    "frames": 600,
+    "exactPoseQuaternionVelocityContactModesReportsEqual": true,
+    "distanceM": 615.8520667195157,
+    "collisions": 0,
+    "executionHashes": {
+      "lib/city/tesla-world.ts": "b7c06df30a778221a1fde37a67c12580ed3f918518d40b23c004ddc3e80fddca",
+      "lib/city/tesla-state.ts": "f6792cd287fc59b63423a6939ab63d41094492df52e0d32ee35af6246064ec73",
+      "lib/city/tesla-shape.ts": "664f52b90385f08d9a2b648edda9e06badb98777b115bb7cee49bf846a2e0a94",
+      "lib/city/assets/tesla-roadster-contract.ts": "4e557ec531b87e327dd40796ee22ce884ea8b76e8d958902bfc6cfa779b60d59",
+      "tests/fixtures/tesla-robson-route.json": "127e69c514fb870657f9a420d7d5dfa8c00be4a67576a69f820416c135506c76"
+    },
+    "fixture": "tests/fixtures/tesla-robson-route.json",
+    "frameDtS": 0.016666666666666666,
+    "throttle": 1,
+    "baselineExecutionHashes": {
+      "lib/city/tesla-world.ts": "ce9cae8f3c5aa2dec6e8a4715dd6b2229c38e8c8db98aa38b8eaf12567c1fe90",
+      "lib/city/tesla-state.ts": "e77cb9032b30766ccb74c2df8859adaeb4cfb674a394adf5d7ee3cbe87aa3101"
+    },
+    "scope": "Exact equality between fixed-fixture 600-frame replays before and after the geometry/standby optimisations. Not bit-identical equality with the independently reconstructed CPU-world spawn, whose final coordinates differ at approximately 1e-10 m."
+  },
+  "minimumAvailableUpwardWheelTravelScope": "Permitted chassis world-Y heave under the game model 5 cm normal tyre-fit residual; not a real Tesla suspension specification."
+}

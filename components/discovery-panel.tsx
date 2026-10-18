@@ -179,6 +179,7 @@ interface Props {
   onBegin(route: DiscoveryRoute, next: number): boolean;
   onBeginLab(): boolean;
   onTargetChange(target: DiscoveryTarget | null): void;
+  onModalActiveChange?: (active: boolean) => void;
 }
 function DiscoveryMoveButton({
   city,
@@ -244,6 +245,7 @@ export function DiscoveryPanel({
   onBegin,
   onBeginLab,
   onTargetChange,
+  onModalActiveChange,
 }: Props) {
   const text = locale === 'zh-Hant' ? HANT : locale === 'zh-Hans' ? HANS : EN;
   const contentLocale = locale.startsWith('zh') ? locale : 'en';
@@ -266,6 +268,10 @@ export function DiscoveryPanel({
   const leg = useRef<DiscoveryLeg | null>(null);
   const trigger = useRef<HTMLButtonElement>(null);
   const [qaWalking, setQAWalking] = useState(false);
+  useEffect(() => {
+    onModalActiveChange?.(open || labActive);
+    return () => onModalActiveChange?.(false);
+  }, [open, labActive, onModalActiveChange]);
   const qaTimer = useRef<ReturnType<typeof setInterval> | null>(null);
   const stopQA = useCallback(() => {
     if (qaTimer.current !== null) clearInterval(qaTimer.current);

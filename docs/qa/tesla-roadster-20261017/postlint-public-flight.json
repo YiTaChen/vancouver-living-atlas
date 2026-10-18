@@ -1,0 +1,212 @@
+{
+  "revision": "492714af5c544f7489f563cadfa936d813edf669",
+  "sourceFingerprint": "a7eff8ef5530e9c7b348fdfe8a318762cbf41ac8d4f6e68f4e31db3287700ef5",
+  "kind": "city-tesla-webgl-v1",
+  "id": "tesla-postlint-public-flight-air-cockpit-auto-20261018t024253093z-001",
+  "capturedAt": "2026-10-18T02:42:53.093Z",
+  "valid": true,
+  "localOptIn": true,
+  "case": "manual",
+  "snapshot": {
+    "active": true,
+    "mode": "air",
+    "transitioning": false,
+    "speedKph": 0,
+    "altitudeM": 47,
+    "parked": false,
+    "adhesion": true,
+    "flightAssist": true,
+    "view": "cockpit",
+    "quality": "auto",
+    "effectiveQuality": "medium",
+    "warning": ""
+  },
+  "state": {
+    "position": [
+      -100.71193222278568,
+      74.32940431975976,
+      -251.61645456607988
+    ],
+    "quaternion": [
+      -0.0003279213784815095,
+      0.38596857614633245,
+      0.00013682418974926696,
+      0.922511860072424
+    ],
+    "velocity": [
+      0,
+      0,
+      0
+    ],
+    "heading": 0.7925151249300407,
+    "mode": "air",
+    "contact": null,
+    "flightAssist": true,
+    "adhesionArmed": true,
+    "parked": false,
+    "timeS": 6.4498000000001,
+    "impact": 0,
+    "collisionSurfaceId": null,
+    "lastSafePose": {
+      "position": [
+        -100.71193222278568,
+        74.32940431975976,
+        -251.61645456607988
+      ],
+      "quaternion": [
+        -0.0003279213784815095,
+        0.38596857614633245,
+        0.00013682418974926696,
+        0.922511860072424
+      ]
+    },
+    "detachRemainingS": 0,
+    "departureContact": null,
+    "groundDeparture": null,
+    "held": {
+      "jump": false,
+      "flightToggle": false,
+      "adhesionToggle": false,
+      "park": false
+    },
+    "attachment": null
+  },
+  "steps": {
+    "simulatedS": 0.04959999999999855,
+    "droppedS": 0,
+    "substeps": 6,
+    "collisions": 0,
+    "transitions": 0,
+    "environmentFailures": 0
+  },
+  "activeLOD": {
+    "quality": "medium",
+    "triangles": 27300,
+    "meshes": 36,
+    "materials": 13,
+    "cachedLevels": 1,
+    "disposed": false
+  },
+  "world": {
+    "sources": 89983,
+    "sourceCells": 16686,
+    "broadSources": 4,
+    "cachedTiles": 7,
+    "loadedTiles": 7,
+    "cachedFaces": 953,
+    "queries": 3484
+  },
+  "shape": {
+    "halfExtents": [
+      1.14,
+      0.62,
+      2.34
+    ],
+    "clearance": 0.06,
+    "groundSupport": {
+      "wheelContacts": [
+        [
+          -0.896,
+          -0.6799999999999999,
+          1.39
+        ],
+        [
+          0.896,
+          -0.6799999999999999,
+          1.39
+        ],
+        [
+          -0.896,
+          -0.6799999999999999,
+          -1.39
+        ],
+        [
+          0.896,
+          -0.6799999999999999,
+          -1.39
+        ]
+      ],
+      "chassisClearance": 0.08,
+      "suspensionTravel": 0.05,
+      "bodySections": [
+        {
+          "minZ": -2.34,
+          "maxZ": -1.39,
+          "clearance": 0.08
+        },
+        {
+          "minZ": -1.39,
+          "maxZ": 1.39,
+          "clearance": 0.12
+        },
+        {
+          "minZ": 1.39,
+          "maxZ": 2.34,
+          "clearance": 0.15
+        }
+      ]
+    }
+  },
+  "scenario": null,
+  "settings": {
+    "trees": true,
+    "buildings": true,
+    "labels": true,
+    "traffic": true,
+    "trains": true,
+    "harbour": true,
+    "terrain": true,
+    "autoRotate": false,
+    "quality": "balanced",
+    "qualityMode": "auto",
+    "mode": "tesla"
+  },
+  "hour": 11.128675000000037,
+  "night": 0,
+  "compatible": false,
+  "fps": 21,
+  "viewport": [
+    1280,
+    720
+  ],
+  "render": [
+    1024,
+    576
+  ],
+  "pixelRatio": 0.8,
+  "camera": {
+    "position": [
+      -100.75875911039573,
+      74.67408417414671,
+      -252.21027949025918
+    ],
+    "quaternion": [
+      0.00013682418974881566,
+      -0.9225118600724243,
+      0.0003279213784804299,
+      0.3859685761463316
+    ],
+    "up": [
+      -0.0005055785706578988,
+      0.9999997474934212,
+      -0.000499403046241181
+    ],
+    "target": [
+      -100.04663802191037,
+      74.67479481654375,
+      -251.5082231888689
+    ],
+    "near": 0.025,
+    "far": 45000,
+    "fov": 70
+  },
+  "renderer": {
+    "calls": 464,
+    "triangles": 2378896,
+    "points": 0,
+    "lines": 0,
+    "geometries": 700,
+    "textures": 37
+  },
+  "workerErrors": {}
+}

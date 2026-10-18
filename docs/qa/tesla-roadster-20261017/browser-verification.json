@@ -1,0 +1,392 @@
+{
+  "kind": "tesla-final-browser-verification",
+  "sourceFingerprint": "591b0b2e3c7903e25c4c7af440379c593014bfd2934dde4be2a12cdbfda049b0",
+  "captureParentRevision": "3baf67dac8cec0007c4122ad960eee6edde19f97",
+  "method": "Human-directed native browser key/pointer actions and local opt-in QA buttons; actual rendered city. QA wall helper drives public simulation inputs, never writes wall contact or body orientation.",
+  "renderer": "AMD Radeon Pro 560X / Metal, in-app Chromium 155",
+  "travelRecords": {
+    "ground-travel": {
+      "record": "ground-travel.json",
+      "totalFrames": 511,
+      "movingFrames": 385,
+      "movingThresholdMps": 5,
+      "aggregateFps": 34.56883238160508,
+      "p95FrameMs": 44.5,
+      "maxFrameMs": 167,
+      "framesOver100ms": 2,
+      "viewport": [
+        1280,
+        720
+      ],
+      "render": [
+        832,
+        468
+      ],
+      "resolutionScale": 0.65,
+      "labels": false
+    },
+    "flight-travel": {
+      "record": "flight-travel.json",
+      "totalFrames": 1794,
+      "movingFrames": 1648,
+      "movingThresholdMps": 5,
+      "aggregateFps": 53.65089803405656,
+      "p95FrameMs": 26.599999964237213,
+      "maxFrameMs": 73.5,
+      "framesOver100ms": 0,
+      "viewport": [
+        1280,
+        720
+      ],
+      "render": [
+        832,
+        468
+      ],
+      "resolutionScale": 0.65,
+      "labels": false
+    },
+    "compatible-ground-travel": {
+      "record": "compatible-ground-travel.json",
+      "totalFrames": 448,
+      "movingFrames": 336,
+      "movingThresholdMps": 5,
+      "aggregateFps": 30.120211917173087,
+      "p95FrameMs": 57.799999952316284,
+      "maxFrameMs": 163.80000001192093,
+      "framesOver100ms": 3,
+      "viewport": [
+        1280,
+        720
+      ],
+      "render": [
+        832,
+        468
+      ],
+      "resolutionScale": 0.65,
+      "labels": true
+    }
+  },
+  "captures": {
+    "flight-high": {
+      "record": "flight-high.json",
+      "image": "flight-high.png",
+      "snapshot": {
+        "active": true,
+        "mode": "air",
+        "transitioning": false,
+        "speedKph": 0,
+        "altitudeM": 335,
+        "parked": false,
+        "adhesion": true,
+        "flightAssist": true,
+        "view": "chase",
+        "quality": "high",
+        "effectiveQuality": "high",
+        "warning": ""
+      },
+      "cameraUp": [
+        0,
+        1,
+        0
+      ],
+      "near": 0.18,
+      "fov": 56
+    },
+    "wall-chase": {
+      "record": "wall-chase.json",
+      "image": "wall-chase.png",
+      "snapshot": {
+        "active": true,
+        "mode": "wall",
+        "transitioning": false,
+        "speedKph": 0,
+        "altitudeM": 4,
+        "parked": true,
+        "adhesion": true,
+        "flightAssist": false,
+        "view": "chase",
+        "quality": "auto",
+        "effectiveQuality": "medium",
+        "warning": ""
+      },
+      "cameraUp": [
+        0,
+        1,
+        0
+      ],
+      "near": 0.18,
+      "fov": 56
+    },
+    "wall-cockpit": {
+      "record": "wall-cockpit.json",
+      "image": "wall-cockpit.png",
+      "snapshot": {
+        "active": true,
+        "mode": "wall",
+        "transitioning": false,
+        "speedKph": 0,
+        "altitudeM": 4,
+        "parked": true,
+        "adhesion": true,
+        "flightAssist": false,
+        "view": "cockpit",
+        "quality": "auto",
+        "effectiveQuality": "medium",
+        "warning": ""
+      },
+      "cameraUp": [
+        -0.7035877260378929,
+        -2.220446049250313e-16,
+        -0.7106084095821183
+      ],
+      "near": 0.025,
+      "fov": 70
+    },
+    "wall-edge-release": {
+      "record": "wall-edge-release.json",
+      "image": "wall-edge-release.png",
+      "snapshot": {
+        "active": true,
+        "mode": "air",
+        "transitioning": false,
+        "speedKph": 0,
+        "altitudeM": 12,
+        "parked": false,
+        "adhesion": true,
+        "flightAssist": true,
+        "view": "chase",
+        "quality": "auto",
+        "effectiveQuality": "medium",
+        "warning": ""
+      },
+      "cameraUp": [
+        0,
+        1,
+        0
+      ],
+      "near": 0.18,
+      "fov": 56
+    },
+    "wall-jump": {
+      "record": "wall-jump.json",
+      "image": "wall-jump.png",
+      "snapshot": {
+        "active": true,
+        "mode": "air",
+        "transitioning": false,
+        "speedKph": 0,
+        "altitudeM": 60,
+        "parked": false,
+        "adhesion": true,
+        "flightAssist": true,
+        "view": "chase",
+        "quality": "auto",
+        "effectiveQuality": "medium",
+        "warning": ""
+      },
+      "cameraUp": [
+        0,
+        1,
+        0
+      ],
+      "near": 0.18,
+      "fov": 56
+    },
+    "far-curb-standby": {
+      "record": "far-curb-standby.json",
+      "image": "far-curb-standby.png",
+      "snapshot": {
+        "active": true,
+        "mode": "ground",
+        "transitioning": false,
+        "speedKph": 0,
+        "altitudeM": 2,
+        "parked": false,
+        "adhesion": true,
+        "flightAssist": false,
+        "view": "chase",
+        "quality": "auto",
+        "effectiveQuality": "medium",
+        "warning": ""
+      },
+      "cameraUp": [
+        0,
+        1,
+        0
+      ],
+      "near": 0.18,
+      "fov": 56
+    },
+    "compatible-flight": {
+      "record": "compatible-flight.json",
+      "image": "compatible-flight.png",
+      "snapshot": {
+        "active": true,
+        "mode": "air",
+        "transitioning": false,
+        "speedKph": 0,
+        "altitudeM": 57,
+        "parked": false,
+        "adhesion": true,
+        "flightAssist": true,
+        "view": "cockpit",
+        "quality": "auto",
+        "effectiveQuality": "low",
+        "warning": ""
+      },
+      "cameraUp": [
+        -2.47004894912875e-25,
+        1,
+        -2.435425236393062e-25
+      ],
+      "near": 0.025,
+      "fov": 70
+    }
+  },
+  "manualQuality": {
+    "general": [
+      "low",
+      "medium",
+      "high",
+      "auto"
+    ],
+    "compatible": [
+      "high",
+      "auto"
+    ],
+    "forceHighDuringFastFlight": true,
+    "maxCachedLevelsObserved": 3
+  },
+  "wall": {
+    "actualFace": "building:2281:wall:0:7",
+    "parkedSeconds": 8,
+    "exactPosePreserved": true,
+    "edgeWBrakeParkEscape": true,
+    "parkedSpaceBrakeParkEscape": true,
+    "chaseWorldUp": true,
+    "cockpitFollowsBody": true
+  },
+  "modeHandoffs": [
+    "orbit",
+    "walk",
+    "drive",
+    "boat",
+    "flight"
+  ],
+  "modal": {
+    "passportWInputWhileOpen": "pose unchanged, simulatedS 0",
+    "mobileOptions": "simulatedS 0, touch controls hidden"
+  },
+  "responsive": {
+    "viewports": [
+      [
+        390,
+        780
+      ],
+      [
+        320,
+        568
+      ],
+      [
+        844,
+        390
+      ],
+      [
+        390,
+        844
+      ]
+    ],
+    "teslaControls": 8,
+    "modeButtons": 6,
+    "allInsideViewport": true,
+    "minimumTeslaHeightPx": 48,
+    "minimumLandscapeModePillHeightPx": 40,
+    "minimumPortraitModePillHeightPx": 44,
+    "nativePointerActions": [
+      "hold climb",
+      "hold joystick forward",
+      "brake",
+      "options",
+      "camera",
+      "recover",
+      "quality low/high/auto"
+    ]
+  },
+  "recovery": "actual verified asphalt; no arbitrary terrain spawn",
+  "groundStandby": {
+    "location": [
+      1024.6951614967702,
+      16.618553877897803,
+      941.0730840275527
+    ],
+    "substeps": 0,
+    "observedHudFpsApprox": 49,
+    "reverseAndJumpEscape": true
+  },
+  "console": {
+    "completedGeneralWarningsOrErrors": 0,
+    "completedMobileWarningsOrErrors": 0,
+    "successfulCompatibleWarningsOrErrors": 0
+  },
+  "initializationObservation": "First compatible load showed existing map-load failure UI, no captured console error explaining cause; one ordinary reload succeeded.",
+  "limitations": [
+    "Short local recordings, not cross-device guarantees.",
+    "City ground travel still has occasional frame-time spikes; Auto target 45 FPS is not guaranteed.",
+    "Compatible recording has labels enabled unlike general runs, so the timings are not controlled comparative results.",
+    "Responsive browser validation does not measure physical phone GPU performance.",
+    "High-detail still uses manual High city quality, separate from performance recordings.",
+    "Capture revision is the parent checkout; sourceFingerprint identifies executed uncommitted sources and data."
+  ],
+  "localReleaseValidation": {
+    "testsPassed": 1256,
+    "testsFailed": 0,
+    "durationMs": 155493.721842,
+    "typescript": "pass",
+    "newTeslaFilesStrictLint": "pass",
+    "architectureAuditSkipBlender": "pass",
+    "normalFirebaseBuildAndQaIsolation": "pass",
+    "node": "v26.0.0",
+    "three": "185",
+    "ciNodeVersion": "24"
+  },
+  "sourceFingerprintScope": "Extended physics/performance and responsive acceptance before final UI-only lint fixes; see postUiLintSmoke for final UI fingerprint.",
+  "postUiLintSmoke": {
+    "sourceFingerprint": "a7eff8ef5530e9c7b348fdfe8a318762cbf41ac8d4f6e68f4e31db3287700ef5",
+    "captureParentRevision": "492714a",
+    "changes": [
+      "app/page.tsx: ready-synchronised controller state, semantic status output, explicit void event dispatch",
+      "components/discovery-panel.tsx: callback property type (erased from JS)"
+    ],
+    "coreExecutionHashesUnchanged": true,
+    "records": [
+      "postlint-public-flight.json",
+      "postlint-wall-chase.json",
+      "postlint-wall-cockpit.json"
+    ],
+    "nativeDesktop": [
+      "public Tesla radio enter",
+      "drive",
+      "jump/climb",
+      "brake",
+      "C cockpit"
+    ],
+    "nativeMobile320x568": [
+      "hold upward thrust detaches wall and gains altitude",
+      "brake",
+      "options",
+      "force high",
+      "recover to verified asphalt",
+      "Orbit to Tesla ownership return"
+    ],
+    "mobileRecoveryContact": "ground:asphalt:3:face:7946",
+    "warningsOrErrors": 0,
+    "targetedRegressionTestsPassed": 72,
+    "typescript": "pass",
+    "wholeRepositoryLint": {
+      "baseline": 221,
+      "final": 221,
+      "newDiagnostics": 0,
+      "comparison": "file/rule/message multiset, excludes shifted line numbers"
+    }
+  }
+}

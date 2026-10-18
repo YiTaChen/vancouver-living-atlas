@@ -307,11 +307,14 @@ test('Firebase verifier invokes mandatory pedestrian isolation on supplied outpu
       'Furniture: focus',
       'Street furniture QA ready',
       'city-street-furniture-webgl-v1',
+      'Tesla QA: spawn Robson',
+      'Tesla QA ready',
+      'city-tesla-webgl-v1',
     ]) {
       await f.put(f.output, 'assets/auto-qa.js', JSON.stringify(marker));
       await assert.rejects(
         verifyFirebaseBuild(f.output, options),
-        /(?:Auto quality|Street furniture) diagnostics/,
+        /(?:Auto quality|Street furniture|Tesla) diagnostics/,
       );
     }
     await f.put(f.output, 'assets/auto-qa.js', '');

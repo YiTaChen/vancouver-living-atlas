@@ -2606,3 +2606,319 @@ a {
   .bus-visit-launcher,.bus-visit-panel {top:106px;}
   .bus-visit-panel {max-height:calc(100% - 118px);overflow:auto;}
 }
+
+/* Independent Tesla cockpit and two-handed mobile controls. */
+.tesla-preparing {
+  position: absolute;
+  z-index: 45;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border-radius: 14px;
+  white-space: nowrap;
+}
+.tesla-panel {
+  position: absolute;
+  z-index: 33;
+  left: 28px;
+  bottom: 82px;
+  width: 338px;
+  max-height: calc(100dvh - 230px);
+  overflow: auto;
+  padding: 15px;
+  border-radius: 18px;
+  overscroll-behavior: contain;
+}
+.tesla-panel header {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 10px;
+}
+.tesla-panel header strong {
+  flex: 1;
+  font-size: 16px;
+}
+.tesla-panel header small {
+  font-size: 11px;
+  font-weight: 500;
+  color: #c2cfb0;
+  margin-left: 6px;
+  letter-spacing: 1px;
+}
+.tesla-panel header button {
+  min-width: 42px;
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+}
+.tesla-instruments {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 9px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: #bed1cb;
+  font-variant-numeric: tabular-nums;
+}
+.tesla-instruments > span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.tesla-instruments b {
+  font-size: 25px;
+  color: #eff4e4;
+  line-height: 1;
+}
+.tesla-instruments > strong {
+  color: #e1e9aa;
+  font-weight: 500;
+}
+.tesla-infinite {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: #b7d5cb;
+  margin: 9px 0 12px;
+}
+.tesla-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+.tesla-actions button,
+.tesla-touch-controls button,
+.tesla-secondary button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid #4e717780;
+  border-radius: 10px;
+  min-height: 43px;
+  padding: 7px 8px;
+  font-size: 12px;
+  line-height: 1.2;
+  color: #e0e9df;
+  touch-action: none;
+}
+.tesla-actions button span,
+.tesla-secondary button span {
+  flex: 1;
+  text-align: left;
+}
+.tesla-actions button svg,
+.tesla-touch-controls button svg,
+.tesla-secondary button svg {
+  flex-shrink: 0;
+}
+.tesla-actions kbd,
+.tesla-secondary kbd {
+  font:
+    10px ui-monospace,
+    monospace;
+  color: #9db8b4;
+}
+.tesla-actions button[aria-pressed='true'],
+.tesla-touch-controls button[aria-pressed='true'] {
+  background: #dce7a2;
+  color: #17373b;
+  border-color: #dce7a2;
+}
+.tesla-actions button[aria-pressed='true'] kbd {
+  color: #405c51;
+}
+.tesla-actions button:focus-visible,
+.tesla-touch-controls button:focus-visible,
+.tesla-secondary button:focus-visible {
+  outline: 2px solid #dce7a2;
+  outline-offset: 2px;
+}
+.tesla-quality {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  font-size: 12px;
+}
+.tesla-quality select {
+  min-height: 40px;
+  min-width: 104px;
+  border: 1px solid #668b8c;
+  border-radius: 8px;
+  background: #183a40;
+  color: #e4efdf;
+  padding: 5px 9px;
+}
+.tesla-secondary {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+.tesla-secondary button {
+  flex: 1;
+  min-height: 40px;
+}
+.tesla-help {
+  font-size: 12px;
+  line-height: 1.7;
+  color: #b8d0c9;
+  margin: 10px 0 0;
+}
+.tesla-warning {
+  position: absolute;
+  z-index: 39;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 95px;
+  max-width: calc(100vw - 40px);
+  border-radius: 12px;
+  padding: 10px 15px;
+  font-size: 13px;
+  pointer-events: none;
+}
+.tesla-mobile-status {
+  display: none;
+}
+.atlas.touch-ui .tesla-panel.mobile-travel-sheet {
+  left: auto;
+  bottom: auto;
+  top: 116px;
+  right: 64px;
+  width: min(300px, calc(100vw - 88px));
+  max-height: calc(100dvh - 156px);
+  padding: 12px;
+}
+.atlas.touch-ui .tesla-panel .tesla-quality select {
+  min-height: 44px;
+}
+.atlas.touch-ui .tesla-panel .tesla-secondary button {
+  min-height: 44px;
+}
+.atlas.touch-ui .tesla-touch-controls.touch-drive-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  position: absolute;
+  z-index: 34;
+  left: auto;
+  right: max(12px, env(safe-area-inset-right));
+  bottom: max(22px, env(safe-area-inset-bottom));
+  width: 168px;
+}
+.atlas.touch-ui .tesla-touch-controls button {
+  background: #15353be8;
+  backdrop-filter: blur(8px);
+  min-height: 48px;
+  padding: 5px;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+.atlas.touch-ui .tesla-touch-controls button span {
+  max-width: 100%;
+}
+.atlas.touch-ui .tesla-touch-controls button[aria-pressed='true'] {
+  background: #dce7a2;
+  color: #17373b;
+}
+.atlas.touch-ui .tesla-touch-controls button kbd {
+  display: none;
+}
+.atlas.touch-ui.tesla-mode
+  .touch-drive-controls:not(.tesla-touch-controls)
+  .touch-brake {
+  display: none;
+}
+.atlas.touch-ui.tesla-mode .mobile-zoom {
+  display: none;
+}
+.atlas.touch-ui .tesla-mobile-status {
+  position: absolute;
+  z-index: 16;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  top: 174px;
+  left: 12px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  max-width: calc(100vw - 85px);
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+.atlas.touch-ui .tesla-mobile-status b {
+  font-size: 16px;
+}
+.atlas.touch-ui .tesla-warning {
+  bottom: 280px;
+  left: 12px;
+  transform: none;
+  width: calc(100vw - 208px);
+  font-size: 12px;
+}
+@media (max-width: 600px) {
+  .atlas.touch-ui .mode-pill {
+    flex-direction: column;
+    gap: 2px;
+    padding: 4px 1px;
+    min-height: 44px;
+    line-height: 12px;
+    font-size: 10.5px;
+    white-space: normal;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+  .atlas.touch-ui .mode-pill svg {
+    height: 15px;
+    width: 15px;
+  }
+  .atlas.touch-ui .mobile-actions,
+  .atlas.touch-ui .nav-tools,
+  .atlas.touch-ui .mobile-travel-sheet,
+  .atlas.touch-ui .flight-panel.mobile-travel-sheet,
+  .atlas.touch-ui .tesla-panel.mobile-travel-sheet {
+    top: 134px;
+  }
+  .atlas.touch-ui .discovery-launch.glass,
+  .atlas.touch-ui .discovery-hud.glass {
+    top: 134px;
+  }
+  .atlas.touch-ui .tesla-mobile-status {
+    top: 190px;
+  }
+  .atlas.touch-ui.mobile-map-open:not(.placement-mode) .map-inset {
+    top: 134px !important;
+  }
+}
+@media (max-height: 540px) and (orientation: landscape) {
+  .atlas.touch-ui .tesla-touch-controls.touch-drive-controls {
+    width: 304px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 5px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+  }
+  .atlas.touch-ui .tesla-touch-controls button {
+    min-height: 48px;
+  }
+  .atlas.touch-ui .tesla-mobile-status {
+    top: 154px;
+  }
+  .atlas.touch-ui .tesla-warning {
+    bottom: 140px;
+    left: auto;
+    right: 12px;
+    width: 300px;
+  }
+}

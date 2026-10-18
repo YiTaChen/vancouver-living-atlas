@@ -124,6 +124,7 @@ export class MapPlacement {
     e.controls.addEventListener('change', this.queue);
   }
   begin(mode: TravelMode) {
+    this.e.tesla?.deactivate();
     this.e.travelReturn?.invalidate(true);
     this.e.completeLocalMapTransition?.();
     const wasStreet = this.e.navigation!.mode !== 'orbit';
