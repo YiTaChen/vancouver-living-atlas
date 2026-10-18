@@ -10,6 +10,11 @@ export interface TeslaSnapshot {
   altitudeM: number;
   parked: boolean;
   wallHolding: boolean;
+  surfaceHolding: boolean;
+  onRoof: boolean;
+  vortexActive: boolean;
+  vortexProgress: number;
+  vortexAvailable: boolean;
   adhesion: boolean;
   flightAssist: boolean;
   view: TeslaView;
@@ -26,6 +31,11 @@ export const EMPTY_TESLA: TeslaSnapshot = {
   altitudeM: 0,
   parked: false,
   wallHolding: false,
+  surfaceHolding: false,
+  onRoof: false,
+  vortexActive: false,
+  vortexProgress: 0,
+  vortexAvailable: false,
   adhesion: true,
   flightAssist: true,
   view: 'chase',

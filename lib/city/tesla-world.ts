@@ -10,6 +10,8 @@ import type {
   TeslaSweepHit,
   TeslaSweepQuery,
   TeslaVec3,
+  TeslaWallToRoofPlan,
+  TeslaWallToRoofQuery,
   TeslaWorld as TeslaWorldContract,
 } from './tesla-state';
 
@@ -840,6 +842,242 @@ export class TeslaWorld implements TeslaWorldContract {
   }
   sweep(query: TeslaSweepQuery): TeslaSweepHit | null {
     return this.sweepBody(query);
+  }
+  /** A convex-edge route derived only from this facade and its actual roof.
+   * Every chord includes the complete rotating hull; a plan never authorizes
+   * later motion without fresh source/support and partial-sweep revalidation. */
+  planWallToRoof(query: TeslaWallToRoofQuery): TeslaWallToRoofPlan | null {
+    if (
+      this.disposed ||
+      !finitePose(query.pose) ||
+      !validShape(query.shape) ||
+      !query.sourceSurfaceId.includes(':wall:')
+    )
+      return null;
+    const { pose, shape, sourceSurfaceId } = query;
+    const height = shape.halfExtents[1] + shape.clearance,
+      radius = Math.hypot(...shape.halfExtents) + shape.clearance + 0.06,
+      axes = basis(pose),
+      source = this.support(
+        {
+          pose,
+          shape,
+          maxDistance: height + 0.02,
+          preferredSurfaceId: sourceSurfaceId,
+          adhesion: true,
+        },
+        (face) => face.kind === 'wall' && face.surfaceId === sourceSurfaceId,
+      );
+    if (
+      source?.surfaceId !== sourceSurfaceId ||
+      !source.adherable ||
+      Math.abs(source.normal[1]) > 0.01 ||
+      axes[2].y < 0.7 ||
+      axes[1].dot(asVector(source.normal)) < 1 - 1e-8 ||
+      Math.abs(
+        asVector(pose.position)
+          .sub(asVector(source.point))
+          .dot(asVector(source.normal)) - height,
+      ) > 1e-5 ||
+      asVector(pose.position)
+        .sub(asVector(source.point))
+        .dot(asVector(source.normal)) <
+        extent(asVector(source.normal), axes, shape) - EPS ||
+      this.sweep({
+        from: pose,
+        to: pose,
+        shape,
+        ignoreSurfaceId: sourceSurfaceId,
+      })
+    )
+      return null;
+    const center = asVector(pose.position),
+      normal = asVector(source.normal).normalize(),
+      building = sourceSurfaceId.slice(0, sourceSurfaceId.indexOf(':wall:')),
+      nearby = this.nearby(
+        new THREE.Box3()
+          .setFromCenterAndSize(center, new THREE.Vector3(1, 1, 1))
+          .expandByScalar(12),
+      );
+    if (!nearby) return null;
+    const walls = nearby.faces.filter(
+        (face) => face.kind === 'wall' && face.surfaceId === sourceSurfaceId,
+      ),
+      wallTop = Math.max(
+        ...walls.flatMap((face) => face.triangle.map((p) => p[1])),
+      ),
+      distanceToTop = wallTop - center.y;
+    // Ask while the complete wall footprint still exists, just before its
+    // front reaches the top. An unrelated upper plane is never a new roof.
+    if (
+      !Number.isFinite(wallTop) ||
+      distanceToTop < shape.halfExtents[2] + shape.clearance - 0.012 ||
+      distanceToTop > shape.halfExtents[2] + shape.clearance + 1.5
+    )
+      return null;
+    const roofs = nearby.faces.filter(
+      (face) =>
+        face.kind === 'roof' &&
+        face.adherable &&
+        face.normal[1] > 0.92 &&
+        face.surfaceId.startsWith(`${building}:roof`),
+    );
+    const q0 = new THREE.Quaternion(...pose.quaternion).normalize();
+    for (const roof of roofs) {
+      const roofNormal = asVector(roof.normal).normalize(),
+        geometry = faceGeometry(roof),
+        edgePoint = center.clone().addScaledVector(normal, -height);
+      edgePoint.y =
+        geometry.vertices[0].y -
+        (roofNormal.x * (edgePoint.x - geometry.vertices[0].x) +
+          roofNormal.z * (edgePoint.z - geometry.vertices[0].z)) /
+          roofNormal.y;
+      if (Math.abs(edgePoint.y - wallTop) > 0.012) continue;
+      const joinsWall = geometry.vertices.some((a, i) => {
+        const b = geometry.vertices[(i + 1) % 3];
+        if (
+          [a, b].some(
+            (p) =>
+              Math.abs(p.clone().sub(asVector(source.point)).dot(normal)) >
+                1e-5 ||
+              !walls.some(
+                (wall) =>
+                  faceGeometry(wall)
+                    .triangle.closestPointToPoint(p, new THREE.Vector3())
+                    .distanceToSquared(p) < 1e-10,
+              ),
+          )
+        )
+          return false;
+        return (
+          new THREE.Line3(a, b)
+            .closestPointToPoint(edgePoint, true, new THREE.Vector3())
+            .distanceToSquared(edgePoint) < 1e-8
+        );
+      });
+      if (!joinsWall) continue;
+      const inward = normal
+          .clone()
+          .negate()
+          .addScaledVector(roofNormal, normal.dot(roofNormal))
+          .normalize(),
+        // Carry the facade tangent heading through the normal change rather
+        // than flattening a diagonal climb into an unrelated roof heading.
+        transported = axes[2]
+          .clone()
+          .applyQuaternion(
+            new THREE.Quaternion().setFromUnitVectors(normal, roofNormal),
+          )
+          .normalize(),
+        forward = transported
+          .clone()
+          .addScaledVector(roofNormal, -transported.dot(roofNormal))
+          .normalize(),
+        right = roofNormal.clone().cross(forward).normalize(),
+        q1 = new THREE.Quaternion().setFromRotationMatrix(
+          new THREE.Matrix4().makeBasis(right, roofNormal, forward),
+        );
+      const quaternion: TeslaPose['quaternion'] = [q1.x, q1.y, q1.z, q1.w];
+      for (const inset of [
+        shape.halfExtents[2] + shape.clearance + 0.12,
+        shape.halfExtents[2] + shape.clearance + 0.62,
+        shape.halfExtents[2] + shape.clearance + 1.12,
+      ]) {
+        const floorPoint = edgePoint.clone().addScaledVector(inward, inset),
+          target: TeslaPose = {
+            position: tuple(floorPoint.addScaledVector(roofNormal, height)),
+            quaternion,
+          },
+          contact = this.support(
+            {
+              pose: target,
+              shape,
+              maxDistance: height + 0.015,
+              preferredSurfaceId: roof.surfaceId,
+              adhesion: true,
+            },
+            (face) => face.kind === 'roof' && face.surfaceId === roof.surfaceId,
+          );
+        if (
+          contact?.surfaceId !== roof.surfaceId ||
+          this.sweep({
+            from: target,
+            to: target,
+            shape,
+            ignoreSurfaceId: contact.surfaceId,
+          })
+        )
+          continue;
+        const waypoints: TeslaPose[] = [
+          {
+            position: tuple(
+              center.clone().addScaledVector(normal, radius - height),
+            ),
+            quaternion: pose.quaternion,
+          },
+          {
+            position: tuple(edgePoint.clone().addScaledVector(normal, radius)),
+            quaternion: pose.quaternion,
+          },
+        ];
+        // Three conservative arc chords round the actual convex edge. The
+        // rotating SAT proves the entire chord, not just sampled endpoints.
+        for (const fraction of [1 / 3, 2 / 3, 1]) {
+          const angle = (Math.PI / 2) * fraction,
+            position = edgePoint
+              .clone()
+              .addScaledVector(normal, radius * Math.cos(angle))
+              .addScaledVector(roofNormal, radius * Math.sin(angle)),
+            q = q0.clone().slerp(q1, fraction);
+          waypoints.push({
+            position: tuple(position),
+            quaternion: [q.x, q.y, q.z, q.w],
+          });
+        }
+        waypoints.push(
+          {
+            position: tuple(
+              asVector(target.position).addScaledVector(
+                roofNormal,
+                radius - height,
+              ),
+            ),
+            quaternion,
+          },
+          target,
+        );
+        const ignoreSurfaceIds = waypoints.map((_, index) =>
+          index === 0
+            ? sourceSurfaceId
+            : index === waypoints.length - 1
+              ? contact.surfaceId
+              : undefined,
+        );
+        let previous = pose,
+          blocked = false;
+        for (const [index, waypoint] of waypoints.entries()) {
+          if (
+            center.distanceTo(asVector(waypoint.position)) > 16 ||
+            asVector(previous.position).distanceTo(
+              asVector(waypoint.position),
+            ) > 12 ||
+            this.sweep({
+              from: previous,
+              to: waypoint,
+              shape,
+              ignoreSurfaceId: ignoreSurfaceIds[index],
+            })
+          ) {
+            blocked = true;
+            break;
+          }
+          previous = waypoint;
+        }
+        if (!blocked)
+          return { sourceSurfaceId, contact, waypoints, ignoreSurfaceIds };
+      }
+    }
+    return null;
   }
   /** Strict, short normal withdrawal from a freshly proven ordinary-ground
    * driving pose. This never ignores a face: only the authored non-wheel body

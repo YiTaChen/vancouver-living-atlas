@@ -15,9 +15,15 @@ import type {
   TeslaShape,
   TeslaSupportQuery,
   TeslaVec3,
+  TeslaSweepQuery,
+  TeslaGroundDepartureQuery,
 } from './tesla-state';
 import type { TravelSurfaceIndex } from './travel-surfaces';
 import type { WaterSurface, WaterWorld } from './water-world';
+import {
+  TeslaRenderedRoofDetailsWorld,
+  nearestTeslaRoofDetailHit,
+} from './tesla-roof-details-world';
 
 const vector = (p: TeslaVec3) => new THREE.Vector3(...p);
 const triple = (p: THREE.Vector3): [number, number, number] => [p.x, p.y, p.z];
@@ -580,6 +586,7 @@ function waterSource(
 }
 
 export class CityTeslaWorld extends TeslaWorld {
+  private readonly roofDetails: TeslaRenderedRoofDetailsWorld;
   private readonly identities = new Map<
     string,
     {
@@ -771,6 +778,7 @@ export class CityTeslaWorld extends TeslaWorld {
         y >= -15 &&
         y <= 2000,
     });
+    this.roofDetails = new TeslaRenderedRoofDetailsWorld(e);
     for (const [i, surface] of (index?.surfaces ?? []).entries())
       for (let n = 0; n < surface.triangles.length; n += 9)
         this.identities.set(`protected:${i}:face:${n / 9}`, {
@@ -778,6 +786,25 @@ export class CityTeslaWorld extends TeslaWorld {
           layer: surface.layer,
           allowedModes: surface.allowedModes,
         });
+  }
+  override sweep(query: TeslaSweepQuery) {
+    const base = super.sweep(query);
+    return base?.fraction === 0
+      ? base
+      : nearestTeslaRoofDetailHit(base, this.roofDetails.sweep(query));
+  }
+  override sweepGroundDeparture(query: TeslaGroundDepartureQuery) {
+    const base = super.sweepGroundDeparture(query);
+    return base?.fraction === 0
+      ? base
+      : nearestTeslaRoofDetailHit(base, this.roofDetails.sweep(query));
+  }
+  override stats() {
+    return { ...super.stats(), renderedRoofDetails: this.roofDetails.stats() };
+  }
+  override dispose() {
+    this.roofDetails.dispose();
+    super.dispose();
   }
   identity(contact: TeslaContact) {
     return (

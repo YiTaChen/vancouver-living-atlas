@@ -14,6 +14,7 @@ import {
   X,
   HelpCircle,
   Hand,
+  Tornado,
 } from 'lucide-react';
 import { TravelJoystick } from './travel-joystick';
 import type { TeslaController, TeslaButton } from '@/lib/city/tesla-controller';
@@ -132,15 +133,22 @@ export function TeslaControls({
   if (!controller || !state.active) return null;
   const mode = state.parked
     ? 'parked'
-    : state.transitioning
-      ? 'transition'
-      : state.mode === 'wall' && state.wallHolding
-        ? 'wallHolding'
-        : state.mode === 'ground'
-          ? 'ground'
-          : state.mode === 'wall'
-            ? 'wall'
-            : 'air';
+    : state.vortexActive
+      ? 'vortexActive'
+      : state.transitioning
+        ? 'transition'
+        : (state.surfaceHolding || state.wallHolding) &&
+            (state.mode === 'wall' || state.onRoof)
+          ? state.onRoof
+            ? 'roofHolding'
+            : 'wallHolding'
+          : state.onRoof
+            ? 'roof'
+            : state.mode === 'ground'
+              ? 'ground'
+              : state.mode === 'wall'
+                ? 'wall'
+                : 'air';
   const drivingMode = t(state.adhesion ? 'adhesion' : 'freeDrive');
   const quality = (
     <label className="tesla-quality">
@@ -257,6 +265,28 @@ export function TeslaControls({
         <kbd>F</kbd>
       </button>
       {camera}
+      <button
+        type="button"
+        data-tesla-action="vortex"
+        aria-keyshortcuts="V"
+        aria-label={
+          state.vortexActive
+            ? `${t('vortex')} · ${t('vortexActive')}`
+            : t('vortex')
+        }
+        aria-busy={state.vortexActive || undefined}
+        disabled={!enabled || !state.vortexAvailable || state.vortexActive}
+        title={t(state.vortexActive ? 'vortexActive' : 'vortexHint')}
+        onClick={() => controller.command('vortex')}
+      >
+        <Tornado size={19} />
+        <span>{t('vortex')}</span>
+        <kbd>
+          {state.vortexActive
+            ? `${Math.round(state.vortexProgress * 100)}%`
+            : 'V'}
+        </kbd>
+      </button>
     </>
   );
   return (

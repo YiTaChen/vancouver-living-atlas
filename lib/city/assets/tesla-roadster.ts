@@ -143,6 +143,7 @@ export function createTeslaRoadster(
     up = new THREE.Vector3(0, 1, 0),
     direction = new THREE.Vector3(),
     ports = TESLA_ROADSTER_THRUSTERS.map((port) => ({
+      kind: port.kind,
       point: port.position.map(
         (value, axis) => value + port.direction[axis] * 0.07,
       ) as [number, number, number],
@@ -155,6 +156,7 @@ export function createTeslaRoadster(
     spin = 0,
     fanSpin = 0,
     thrust = 0,
+    vortexThrust = 0,
     wing = 0,
     brake = 0,
     night = false;
@@ -222,21 +224,32 @@ export function createTeslaRoadster(
       applyPose();
       const nextThrust =
         state.thrust === undefined ? thrust : normalized(state.thrust);
-      if (nextThrust !== thrust) {
+      const nextVortex =
+        state.vortexThrust === undefined
+          ? vortexThrust
+          : normalized(state.vortexThrust);
+      if (nextThrust !== thrust || nextVortex !== vortexThrust) {
         thrust = nextThrust;
-        jets.visible = thrust > 0.002;
-        jetsMaterial.opacity = 0.08 + thrust * 0.11;
+        vortexThrust = nextVortex;
+        jets.visible = Math.max(thrust, vortexThrust) > 0.002;
+        jetsMaterial.opacity =
+          0.08 + Math.max(thrust, vortexThrust) * 0.11 + vortexThrust * 0.04;
         for (let i = 0; i < ports.length; i++) {
           const port = ports[i];
+          const pulse = Math.max(
+            thrust,
+            vortexThrust *
+              (port.kind === 'lift' ? 1.4 : port.kind === 'rear' ? 1.15 : 0.35),
+          );
           direction.fromArray(port.direction);
           transform.quaternion.setFromUnitVectors(up, direction);
           transform.position
             .fromArray(port.point)
-            .addScaledVector(direction, 0.4 * thrust);
+            .addScaledVector(direction, 0.4 * pulse);
           transform.scale.set(
-            0.55 + thrust * 0.45,
-            Math.max(0.001, thrust),
-            0.55 + thrust * 0.45,
+            0.55 + Math.min(1, pulse) * 0.45,
+            Math.max(0.001, pulse),
+            0.55 + Math.min(1, pulse) * 0.45,
           );
           transform.updateMatrix();
           jets.setMatrixAt(i, transform.matrix);

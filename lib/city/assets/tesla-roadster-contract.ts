@@ -112,6 +112,8 @@ export interface TeslaRoadsterVisualState {
   fanSpinRad?: number;
   /** Cold-gas visual effect only, normalized 0..1. */
   thrust?: number;
+  /** Vortex Jump pulse, visual only; reuses the ten fixed cold-gas instances. */
+  vortexThrust?: number;
   brake?: number;
   night?: boolean;
   wingDeploy?: number;

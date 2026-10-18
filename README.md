@@ -49,7 +49,7 @@ Recorded September 6–7, 2026. The film's **“FLIGHT PREVIEW”** captions des
 
 **Try the roadster:** Drive starts with an original red convertible and a left-hand-drive cockpit. The original Classic car remains selectable without relocating. The roadster can exceed 200 km/h; sustaining more than 100 km/h in Downtown for five seconds triggers a scripted police stop and safety reminder. [Vehicle design and references](docs/vehicles/red-roadster.md).
 
-**Tesla:** A separate reference-based 2026 Roadster Rocket has unlimited game flight, automatic swept transitions onto building walls and automatic hold when stopped on a wall. Wall Grip is enabled by default; Free Drive disables it. Its chase camera stays upright while the cockpit follows the car. Desktop and touch controls include Low / Medium / High / Auto car detail. [Controls, references and validation](docs/TESLA_ROADSTER_2026_10.md).
+**Tesla:** A separate reference-based 2026 Roadster Rocket has unlimited game flight, a jet-assisted **Vortex Jump**, automatic swept transitions from streets to building walls and adjoining roofs, and automatic hold when stopped on a wall or roof. Wall Grip is enabled by default; Free Drive disables wall attachment. Its chase camera stays upright while the cockpit follows the car. Desktop and touch controls include Low / Medium / High / Auto car detail. [Controls, references and validation](docs/TESLA_ROADSTER_2026_10.md).
 
 **Try the sky:** choose Science World for a medium exterior view, disable the interior cutaway in Layers if needed, then change the time. Return to a city panorama for the aurora. Time and sky controls work independently of vehicle movement.
 
@@ -78,7 +78,7 @@ This is assisted sightseeing flight with approximate physics. [Development plan,
 | **Drive** | **W / S** throttle/reverse, **A / D** steer, **Space** brake. | Left stick controls throttle/reverse and steering. |
 | **Boat** | **W / S** throttle/reverse, **A / D** rudder, **Space** neutral. | Left stick controls propulsion and steering. |
 | **Fly** | **W / S** nose down/up, **A / D** bank, **Q / E** yaw, **R / F** power, **C** cruise; helicopter **H** hover, **X** descend. | Flight stick; lower-right throttle/collective lever with +/− buttons and Auto cruise above it. Camera and other flight settings open from the toolbar. |
-| **Tesla** | **W/S**, **A/D** drive/steer; hold **Space** to jump/climb, **Q** descend, **Shift** boost, **B** brake, **E** Wall Grip / Free Drive, optional **P** manual park, **C** camera, **R** recover. Stopping on a wall holds automatically. | Left stick plus independent thrust, boost, brake, wall mode, manual park and camera buttons; quality and recovery in Tesla options. |
+| **Tesla** | **W/S**, **A/D** drive/steer; hold **Space** to jump/climb, **V** Vortex Jump, **Q** descend, **Shift** boost, **B** brake, **E** Wall Grip / Free Drive, optional **P** manual park, **C** camera, **R** recover. Climbing joins a supported roof automatically; stopping on a wall or roof holds automatically. | Left stick plus independent thrust, boost, brake, wall mode, manual park, camera and Vortex Jump buttons; quality and recovery in Tesla options. |
 
 **Choose a starting point.** Select Walk, Drive or Boat, then click a suitable place—or drag its icon onto the map. Zoom in for precision. Roads snap to valid driving positions; boats need room clear of shores and docks. On mobile, tap a valid location to start; placement keeps only the Cancel control over the map.
 

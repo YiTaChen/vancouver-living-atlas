@@ -1,0 +1,193 @@
+{
+  "kind": "tesla-vortex-rooftop-acceptance-v1",
+  "recordedAt": "2026-10-18T04:59:59.009313+00:00",
+  "result": "pass",
+  "parentRevision": "c6e1f49e509cdf6a10b7d9776ecb02c25497806b",
+  "physicsAndNativeControlFingerprint": "644d4be441d455225162b757246f86fb107b7d07c2b239c45d0071cf4a0540be",
+  "finalNarrowUIFingerprint": "a17dbbf4bab6271075d86340e1de9ff8f2f118f0f7b5aeec5548cc64bfff1c77",
+  "sourceHashes": {
+    "lib/city/tesla-vortex.ts": "c60862209635c525a7f9da44116fa1eadd3ec50c22ffcffd16aa687a5838ca7e",
+    "lib/city/tesla-state.ts": "53ffd4e0a6e0c2c424ad3cfd615ca342a6a54ea056442858e0073440911a4788",
+    "lib/city/tesla-world.ts": "948b5a537eb0e00b88471c112952aee81f42f4c51504fd9c9e181d1ed2a10f1d",
+    "lib/city/tesla-city-world.ts": "273a0ad23b201ef84ba60c0c7519c6a88d83f31b33d168bba1eec3dd725dd06b",
+    "lib/city/tesla-roof-details-world.ts": "af37a6f6432b64b57eb112ba7ad0535893f9e07b1fc4b1d7f9237e623391336c",
+    "lib/city/tesla-controller.ts": "f6231d3c17e716910dac4e797dd8806d745a56b462449da3def9ce46fa53dfb5",
+    "lib/city/tesla-snapshot.ts": "33d0efacf3f67b88c56264384f3ccb2565a3a359e46a3418e618997115e23997",
+    "lib/city/assets/tesla-roadster.ts": "1f4e2c3a3a0236118daf609410134d41ed3ec336824d78c8dc88db3de2313e4e",
+    "lib/city/assets/tesla-roadster-contract.ts": "eba3b401315f3a1fb4edea78b17cfb8a34139e62d9f8f5724d9b42916c4cdb17",
+    "lib/city/tesla-camera.ts": "e08f47235cff6fa4b6cd79d262575be596eca8374611718dd505945b935da509",
+    "components/tesla-controls.tsx": "1449926881240cbd7c1a8311fff4de4bd7bc675c3983ac01c02a28076db52342",
+    "lib/i18n/tesla.json": "18ba6c6445b8f95c6c4d5e1c2fbd33dec28dfb5af954aaec46f8ebd0252cc2ce",
+    "lib/city/tesla-qa.ts": "85c75ff032ae4da6412d40d4a9cb97ed615c740b113953a2ee5a0728577665d6",
+    "lib/city/tesla-vortex-vault-qa.ts": "b29044877d898e55b7e71c1c705736a857bfe13c0b5a68d9032855653677b338",
+    "lib/city/visual-qa.ts": "303762cd80b52ebdfbaf20c8931ef4449f78f5ca8fa9fa4cb3abeb233b392820",
+    "app/globals.css": "35b06f25a9342246637dc04ce73f6ca55326f8263f6528a21f441e57c58751ca"
+  },
+  "provenance": "Revision fields identify the parent checkout. Fingerprints identify the executed uncommitted visual sources/data; they do not assert the parent contains this change. The later fingerprint changes only nine CSS lines; listed physics, camera, model and input sources were byte-identical.",
+  "vortex": {
+    "desktopKey": "V",
+    "mobileButton": "旋風飛躍 / Vortex Jump",
+    "nominalDurationS": 1.4,
+    "rollDegrees": 360,
+    "fuelOrStaminaBudget": false,
+    "controlledRoadEdges": [
+      409,
+      3206
+    ],
+    "temporaryPhysicalCars": 5,
+    "preflightDistanceM": 39.30001996487876,
+    "preflightCollisions": 0,
+    "nativeMidrollAndActualGroundLanding": {
+      "desktop": [
+        "desktop-vault-midroll.json",
+        "desktop-vault-landed.json"
+      ],
+      "mobile": [
+        "mobile-vault-midroll.json",
+        "mobile-vault-landed.json"
+      ]
+    },
+    "nativeVHeldDuringActiveMoveDoesNotQueueAnotherMove": true,
+    "nativeBrakeAfterLanding": true,
+    "finalNarrowButtonSmoke": "final-narrow-mobile-vault.json",
+    "fixtureScope": "Explicit static QA proxies with matching rendered/collision triangles; additive to the actual city. They are not ordinary live traffic and are stripped from production."
+  },
+  "roof": {
+    "actualFacade": "building:2281:wall:0:7",
+    "actualRoof": "building:2281:roof",
+    "desktopAutomaticRoute": "desktop-roof-auto-hold.json",
+    "continuousExactHoldMs": 8003.400000035763,
+    "manualParkRequested": false,
+    "brakeRequestedForAutomaticRoute": false,
+    "nativeDesktopResume": {
+      "key": "W",
+      "durationMs": 300,
+      "brakeKey": "B",
+      "brakeDurationMs": 650,
+      "distanceM": 1.5913483544444538,
+      "autoHeldAfterBrake": true
+    },
+    "nativeFreeDriveRetainsRoofHold": true,
+    "nativeMobileRoute": {
+      "before": "mobile-wall-before-native-roof.json",
+      "after": "mobile-native-roof-hold.json",
+      "pointerHold": {
+        "position": [
+          78,
+          432
+        ],
+        "durationMs": 1100
+      },
+      "observedIntermediate": {
+        "mode": "air",
+        "transitioning": true,
+        "position": [
+          247.92311177229553,
+          48.43635656706969,
+          145.88160151458646
+        ]
+      },
+      "releasedJoystickSettlesWithoutBrakeOrP": true,
+      "stationaryEndpointChecks": {
+        "separationMs": 36182,
+        "positionAndQuaternionExactlyEqual": true,
+        "surfaceHolding": true,
+        "parked": false
+      }
+    },
+    "corniceRegression": "tests/fixtures/tesla-roof-cornice.json",
+    "safety": "The actual rendered cornice triggers early route planning. All route sweeps, visible equipment, full roof support and live endpoint permission checks remain active; existing intrusion and a true roof ceiling stay blocked."
+  },
+  "responsive": {
+    "portrait": {
+      "viewport": [
+        320,
+        568
+      ],
+      "buttons": 9,
+      "buttonWidthPx": 66,
+      "buttonHeightPx": 48,
+      "columnX": [
+        170,
+        242
+      ],
+      "rowY": [
+        282,
+        336,
+        390,
+        444,
+        498
+      ],
+      "dockWidthPx": 138,
+      "allInside": true
+    },
+    "landscape": {
+      "viewport": [
+        844,
+        390
+      ],
+      "buttons": 9,
+      "buttonWidthPx": 72.25,
+      "buttonHeightPx": 48,
+      "columnX": [
+        528,
+        605.25,
+        682.5,
+        759.75
+      ],
+      "rowY": [
+        224,
+        277,
+        330
+      ],
+      "allInside": true
+    },
+    "qaPanelHiddenForNativeControls": true,
+    "nativeDesktopQualityOptions": [
+      "low",
+      "medium",
+      "high",
+      "auto"
+    ],
+    "nativeMobileQualityOptions": [
+      "low",
+      "auto"
+    ],
+    "modalCloseRestoresControls": true
+  },
+  "resourceChecks": {
+    "gasInstancesReused": 10,
+    "effectDraws": 1,
+    "effectTriangles": 160,
+    "addedParticlePools": 0,
+    "addedTextures": 0,
+    "materials": 13,
+    "geometryLODChangesDoNotChangePhysics": true,
+    "roofCollisionMaxCachedRecords": 4,
+    "roofCollisionMaxCachedTiles": 16
+  },
+  "consoleWarningsAndErrors": [],
+  "validation": {
+    "fullSuite": {
+      "pass": 1346,
+      "fail": 0,
+      "durationMs": 109662.98139
+    },
+    "typecheck": "pass",
+    "architectureAuditSkipBlender": "pass",
+    "lint": {
+      "baseline": 219,
+      "current": 219,
+      "added": [],
+      "removed": []
+    },
+    "firebaseProductionBuildAndQAIsolation": "pass",
+    "independentFinalStateReview": "pass"
+  },
+  "limitations": [
+    "Responsive Chromium pointer/keyboard checks are not physical-phone GPU benchmarks.",
+    "HUD FPS during QA captures is not a controlled performance benchmark.",
+    "The mobile native-roof capture retains the earlier completed wall preparation trace; native joystick movement and subsequent endpoint equality are recorded separately above.",
+    "Visible roof-equipment collision uses conservative transformed model bounds. New streamed equipment may block an already occupied roof; recovery remains available."
+  ]
+}

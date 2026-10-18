@@ -48,6 +48,15 @@ test('Tesla controls cover all ten locales with complete quality and portable ke
     for (const key of ['auto', 'low', 'medium', 'high'])
       assert.ok(catalog[key]);
     assert.match(catalog.desktopHint, /Q/, locale);
+    assert.match(catalog.desktopHint, /V/, locale);
+    assert.match(catalog.vortexHint, /V/, locale);
+    assert.notEqual(catalog.roof, catalog.ground, locale);
+    assert.notEqual(catalog.roofHolding, catalog.parked, locale);
+    assert.notEqual(catalog.vortexActive, catalog.vortex, locale);
+    assert.ok(
+      catalog.touchHint.includes(catalog.vortex),
+      `${locale} explains the touch stunt`,
+    );
     assert.match(catalog.desktopHint, /E/, locale);
     assert.match(catalog.desktopHint, /P/, locale);
     assert.notEqual(catalog.adhesion, catalog.freeDrive, locale);
@@ -70,6 +79,8 @@ test('Tesla controls cover all ten locales with complete quality and portable ke
 });
 
 test('Tesla names the default wall mode and optional parking explicitly in the requested Chinese and English', () => {
+  assert.equal(teslaCatalogs.en.vortex, 'Vortex Jump');
+  assert.equal(teslaCatalogs['zh-Hant'].vortex, '旋風飛躍');
   assert.equal(teslaCatalogs.en.adhesion, 'Wall Grip');
   assert.equal(teslaCatalogs.en.freeDrive, 'Free Drive');
   assert.equal(teslaCatalogs['zh-Hant'].adhesion, '壁面吸附');
