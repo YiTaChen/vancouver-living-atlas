@@ -1,0 +1,149 @@
+{
+  "provenance": {
+    "capturedAt": "2026-10-18T04:44:02.815Z",
+    "capturedSource": "architecture:1,0/roof:2b407354-0469-4a17-8ad1-bdbd936c6728:149",
+    "canonicalSourcePartIndex": 2281,
+    "key": "148546",
+    "profile": "midrise-grid",
+    "roofY": 47.689328333857986,
+    "foundationFromCapturedActualBody": 31.729328333857985,
+    "method": "Canonical building preparation/profile and architectureWork; masonry boxes cannot be HVAC template replacements; instance matrices round through THREE.InstancedMesh Float32 exactly as production.",
+    "sourceHashes": {
+      "lib/city/architecture-plan.ts": "263df5a62fb4da805e5470725a92730a6c756a49e402096bd99166cf7605f0a4",
+      "lib/city/building-bodies.ts": "dca28bd9340ec34ea531b4397dd1c69fa6946836e37224f12f3f04dbcc2efac1",
+      "lib/city/facade-profile.ts": "86e6e4bae22d24bb7e944d6de44725baa765ab16d4c8556ef55932988a814d19",
+      "public/data/buildings.geojson": "57cf77f2f7afbceeb3ea4b7dcb87c33d7f56a6df57c33306792503f1dba538ec"
+    }
+  },
+  "state": {
+    "position": [249.20266008729993, 44.87592948420358, 147.31038109654205],
+    "quaternion": [
+      -0.6561369131428788, 0.2743343225047516, 0.26359884523900023,
+      0.6517213204245039
+    ],
+    "velocity": [0, 0, 0],
+    "heading": 0.9244384585724055,
+    "mode": "wall",
+    "contact": {
+      "surfaceId": "building:2281:wall:0:7",
+      "kind": "wall",
+      "point": [249.6810997410057, 44.87592948420358, 147.7935948150579],
+      "normal": [-0.7035877260378928, 0, -0.7106084095821181],
+      "adherable": true
+    },
+    "flightAssist": false,
+    "adhesionArmed": true,
+    "parked": false,
+    "wallHolding": false,
+    "surfaceHolding": false,
+    "vortex": null,
+    "vortexPreparing": false,
+    "timeS": 43.14949999999844,
+    "impact": 0,
+    "collisionSurfaceId": "architecture:1,0/roof:2b407354-0469-4a17-8ad1-bdbd936c6728:149",
+    "lastSafePose": {
+      "position": [249.20266008729993, 44.87592948420358, 147.31038109654205],
+      "quaternion": [
+        -0.6561369131428788, 0.2743343225047516, 0.26359884523900023,
+        0.6517213204245039
+      ]
+    },
+    "detachRemainingS": 0,
+    "departureContact": null,
+    "groundDeparture": null,
+    "held": {
+      "jump": false,
+      "flightToggle": false,
+      "adhesionToggle": false,
+      "park": false,
+      "vortex": false
+    },
+    "attachment": null
+  },
+  "shape": {
+    "halfExtents": [1.14, 0.62, 2.34],
+    "clearance": 0.06,
+    "groundSupport": {
+      "wheelContacts": [
+        [-0.896, -0.6799999999999999, 1.39],
+        [0.896, -0.6799999999999999, 1.39],
+        [-0.896, -0.6799999999999999, -1.39],
+        [0.896, -0.6799999999999999, -1.39]
+      ],
+      "chassisClearance": 0.08,
+      "suspensionTravel": 0.05,
+      "bodySections": [
+        {
+          "minZ": -2.34,
+          "maxZ": -1.39,
+          "clearance": 0.08
+        },
+        {
+          "minZ": -1.39,
+          "maxZ": 1.39,
+          "clearance": 0.12
+        },
+        {
+          "minZ": 1.39,
+          "maxZ": 2.34,
+          "clearance": 0.15
+        }
+      ]
+    }
+  },
+  "boxes": [
+    {
+      "x": 249.78064496200858,
+      "z": 147.96240959785396,
+      "y": 47.92932833385798,
+      "width": 17.985537248651273,
+      "height": 0.48,
+      "depth": 0.24,
+      "yaw": 0.7804337700633749,
+      "kind": "parapet",
+      "color": 11908005,
+      "surface": "masonry"
+    },
+    {
+      "x": 249.74546557570667,
+      "z": 147.92687917737487,
+      "y": 48.19932833385799,
+      "width": 18.26553724865127,
+      "height": 0.105,
+      "depth": 0.43,
+      "yaw": 0.7804337700633749,
+      "kind": "coping",
+      "color": 12827304,
+      "surface": "masonry"
+    },
+    {
+      "x": 249.58715833734817,
+      "z": 147.7669922852189,
+      "y": 47.38932833385799,
+      "width": 18.24553724865127,
+      "height": 0.19,
+      "depth": 0.29,
+      "yaw": 0.7804337700633749,
+      "kind": "cornice",
+      "color": 12827304,
+      "surface": "masonry"
+    }
+  ],
+  "instanceMatrices": [
+    [
+      12.78067398071289, 0, -12.654403686523438, 0, 0, 0.47999998927116394, 0,
+      0, 0.16886106133460999, 0, 0.1705460250377655, 0, 249.7806396484375,
+      47.92932891845703, 147.96240234375, 1
+    ],
+    [
+      12.979644775390625, 0, -12.851408004760742, 0, 0, 0.10499999672174454, 0,
+      0, 0.30254271626472473, 0, 0.3055616021156311, 0, 249.74546813964844,
+      48.1993293762207, 147.9268798828125, 1
+    ],
+    [
+      12.965432167053223, 0, -12.837335586547852, 0, 0, 0.1899999976158142, 0,
+      0, 0.20404043793678284, 0, 0.20607644319534302, 0, 249.587158203125,
+      47.38932800292969, 147.76699829101562, 1
+    ]
+  ]
+}

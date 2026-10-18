@@ -310,6 +310,9 @@ test('Firebase verifier invokes mandatory pedestrian isolation on supplied outpu
       'Tesla QA: spawn Robson',
       'Tesla QA ready',
       'city-tesla-webgl-v1',
+      'Controlled five-car vault QA fixture',
+      'controlled-five-car-vault-qa-v1',
+      'qa-vault-car:',
     ]) {
       await f.put(f.output, 'assets/auto-qa.js', JSON.stringify(marker));
       await assert.rejects(
@@ -318,6 +321,18 @@ test('Firebase verifier invokes mandatory pedestrian isolation on supplied outpu
       );
     }
     await f.put(f.output, 'assets/auto-qa.js', '');
+    for (const name of [
+      'assets/tesla-vortex-vault-qa.js',
+      'assets/tesla-vortex-vault-qa-deadbeef.js',
+    ]) {
+      // Even a module stripped of its readable labels must not be deployed.
+      await f.put(f.output, name, 'export const instrumented = true;');
+      await assert.rejects(
+        verifyFirebaseBuild(f.output, options),
+        /Tesla diagnostics/,
+      );
+      await rm(path.join(f.output, name));
+    }
     await f.put(f.output, prefix + 'extra.txt', 'unexpected');
     await assert.rejects(
       verifyFirebaseBuild(f.output, options),

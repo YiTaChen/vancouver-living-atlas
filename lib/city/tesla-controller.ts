@@ -24,9 +24,15 @@ import {
 } from './tesla-quality';
 import { EMPTY_TESLA, type TeslaSnapshot } from './tesla-snapshot';
 import { teslaDot, teslaRotate } from './tesla-math';
+import { canStartTeslaVortex, sampleTeslaVortex } from './tesla-vortex';
 
 export type TeslaButton = 'up' | 'down' | 'boost' | 'brake';
-export type TeslaCommand = 'jump' | 'flightToggle' | 'adhesionToggle' | 'park';
+export type TeslaCommand =
+  | 'jump'
+  | 'flightToggle'
+  | 'adhesionToggle'
+  | 'park'
+  | 'vortex';
 const AXIS_KEYS: Record<string, string> = {
   KeyW: 'w',
   KeyS: 's',
@@ -48,6 +54,7 @@ const AXIS_KEYS: Record<string, string> = {
   KeyR: 'r',
   KeyB: 'b',
   KeyQ: 'down',
+  KeyV: 'vortex',
 };
 const ROBSON = project([-123.12416073213134, 49.2841737758357]);
 const cloneState = (state: TeslaState) => {
@@ -132,6 +139,8 @@ export class TeslaController {
   }
   get snapshot(): TeslaSnapshot {
     const s = this.state;
+    const vortex =
+      this.active && s?.vortex ? sampleTeslaVortex(s.vortex) : null;
     return {
       ...EMPTY_TESLA,
       active: this.active,
@@ -145,6 +154,12 @@ export class TeslaController {
         : 0,
       parked: !!s?.parked,
       wallHolding: !!s?.wallHolding,
+      surfaceHolding: !!s?.surfaceHolding,
+      onRoof: s?.mode === 'ground' && s.contact?.kind === 'roof',
+      vortexActive: !!vortex,
+      vortexProgress: vortex?.progress ?? 0,
+      vortexAvailable:
+        this.active && this.inputEnabled && canStartTeslaVortex(s),
       adhesion: s?.adhesionArmed ?? this.adhesionPreference,
       flightAssist: s?.flightAssist ?? true,
       view: this.view,
@@ -423,7 +438,12 @@ export class TeslaController {
     this.heldPulses.set(button, performance.now() + 220);
   }
   command(command: TeslaCommand) {
-    if (this.active && this.inputEnabled) this.pulses.add(command);
+    if (
+      this.active &&
+      this.inputEnabled &&
+      (command !== 'vortex' || canStartTeslaVortex(this.state))
+    )
+      this.pulses.add(command);
   }
   setView(view: TeslaView) {
     this.view = view;
@@ -503,6 +523,7 @@ export class TeslaController {
       flightToggle: this.pulses.has('flightToggle'),
       adhesionToggle: this.pulses.has('adhesionToggle'),
       park: this.pulses.has('park'),
+      vortex: this.pulses.has('vortex'),
     };
   }
   private selectQuality() {
@@ -535,6 +556,7 @@ export class TeslaController {
     );
     if (dt > 0) this.pulses.clear();
     const s = this.state;
+    const vortex = s.vortex ? sampleTeslaVortex(s.vortex) : null;
     this.adhesionPreference = s.adhesionArmed;
     if (s.position[1] > 1800) {
       s.position = [s.position[0], 1800, s.position[2]];
@@ -573,6 +595,7 @@ export class TeslaController {
           : input.boost
             ? 0.8
             : 0,
+      vortexThrust: vortex?.thrust ?? 0,
       brake: input.brake ? 1 : 0,
       night: this.e.clock.hour < 7 || this.e.clock.hour > 19,
       wingDeploy:
@@ -684,6 +707,7 @@ export class TeslaController {
     if (key === 'f') this.command('flightToggle');
     if (key === 'e') this.command('adhesionToggle');
     if (key === 'p') this.command('park');
+    if (key === 'vortex') this.command('vortex');
     if (key === 'c') this.toggleView();
     if (key === 'r') this.recover();
   };

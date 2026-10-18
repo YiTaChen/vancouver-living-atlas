@@ -994,11 +994,28 @@ export function installVisualQA(e: CityEngine) {
   button('21:00', () => e.setClock({ hour: 21, running: false }));
   button('00:00', () => e.setClock({ hour: 0, running: false }));
   button('03:00', () => e.setClock({ hour: 3, running: false }));
+  const showPanel = document.createElement('button');
+  showPanel.id = 'visual-qa-show';
+  showPanel.type = 'button';
+  showPanel.textContent = 'Show QA panel';
+  showPanel.setAttribute('aria-controls', panel.id);
+  showPanel.style.cssText =
+    'display:none;position:fixed;z-index:10001;top:max(8px,env(safe-area-inset-top));right:max(8px,env(safe-area-inset-right));min-height:48px;padding:8px 12px;background:#102a30ed;color:white;font:12px monospace;border:1px solid #93c9c9;cursor:pointer';
+  showPanel.onclick = () => {
+    panel.style.display = '';
+    showPanel.style.display = 'none';
+  };
   button('Hide QA panel', () => {
     panel.style.display = 'none';
+    showPanel.style.display = '';
   });
   panel.appendChild(output);
-  document.body.appendChild(panel);
+  const wrapper = document.createElement('div');
+  wrapper.id = 'visual-qa-root';
+  wrapper.style.display = 'contents';
+  wrapper.appendChild(panel);
+  wrapper.appendChild(showPanel);
+  document.body.appendChild(wrapper);
   const gl = e.renderer.getContext(),
     ext = gl.getExtension('WEBGL_debug_renderer_info');
   void fetch('/__visual-qa', {

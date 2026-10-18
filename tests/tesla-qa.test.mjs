@@ -146,6 +146,8 @@ function fixture() {
         parked: this.state.parked,
         wallHolding: this.state.wallHolding,
         adhesion: this.state.adhesionArmed,
+        surfaceHolding: this.state.surfaceHolding,
+        vortexAvailable: true,
         quality: this.quality,
         effectiveQuality: this.effectiveQuality,
         view: this.view,
@@ -242,6 +244,7 @@ function wallFixture(frame, behavior = 'hold') {
   let placement,
     axes = [0, 0],
     wallEvent = -1,
+    wallArrivedAt = null,
     releasedAt = null,
     heldAt = null;
   const surfaceId = 'building:0:wall:fixture';
@@ -274,6 +277,9 @@ function wallFixture(frame, behavior = 'hold') {
     identity: { surfaceId: 'ground', layer: 0, allowedModes: ['drive'] },
   });
   t.world.hasLaunchClearance = () => true;
+  t.world.planWallToRoof = () => ({
+    contact: { surfaceId: 'building:0:roof', kind: 'roof' },
+  });
   t.world.sweep = ({ from, to }) => {
     const dx = from.position[0] - to.position[0],
       dz = from.position[2] - to.position[2],
@@ -327,12 +333,30 @@ function wallFixture(frame, behavior = 'hold') {
       t.state.velocity = [0, 1, 0];
       events.push(['physical-wall-arrival']);
       wallEvent = events.length - 1;
+      wallArrivedAt = now;
+    } else if (
+      behavior === 'roof-hold' &&
+      wallEvent >= 0 &&
+      axes[1] > 0 &&
+      now - wallArrivedAt >= 400
+    ) {
+      t.state.mode = 'ground';
+      t.state.contact = {
+        surfaceId: 'building:0:roof',
+        kind: 'roof',
+        point: [0, 30, 0],
+        normal: [0, 1, 0],
+        adherable: true,
+      };
+      t.state.position = [0, 30.682, 3];
+      events.push(['physical-roof-arrival']);
     } else if (wallEvent >= 0 && axes[1] === 0) {
       releasedAt ??= now;
       if (behavior === 'manual-park') t.state.parked = true;
       if (behavior !== 'never-hold' && now - releasedAt >= 200) {
         t.state.velocity = [0, 0, 0];
         t.state.wallHolding = true;
+        t.state.surfaceHolding = true;
         heldAt ??= now;
         if (behavior === 'drift' && now - heldAt > 1000)
           t.state.position[0] += 0.001;
@@ -587,6 +611,108 @@ test('historical facade QA keeps its explicit manual park workflow and does not 
       1,
     );
   });
+});
+
+test('roof QA selects only a proved roof route, then credits public wall arrival and eight seconds of roof auto hold without P', async () => {
+  await dom(async ({ frame }) => {
+    const { e, t, events, held } = wallFixture(frame, 'roof-hold'),
+      panel = new Element(),
+      lock = lease();
+    const plan = t.world.planWallToRoof;
+    t.world.planWallToRoof = (query) => {
+      const frontY =
+        query.pose.position[1] +
+        query.shape.halfExtents[2] +
+        query.shape.clearance;
+      // The shipped midrise cornice begins .395m below its actual roof.
+      // A query inside that visible envelope must not qualify a QA candidate.
+      return frontY > e.data.flightBuildingVolumes[0].maxY - 0.395
+        ? null
+        : plan(query);
+    };
+    installTeslaQA(e, panel, lock);
+    await click(panel, 'Tesla QA: actual wall to roof + auto hold');
+    const report = runReport(panel);
+    assert.equal(report.result, 'completed');
+    assert.equal(report.kind, 'real-building-wall-roof-auto-hold');
+    assert.equal(report.target.roofSurfaceId, 'building:0:roof');
+    assert.ok(report.verifiedHoldMs >= 8000);
+    assert.ok(events.some((event) => event[0] === 'physical-wall-arrival'));
+    assert.ok(events.some((event) => event[0] === 'physical-roof-arrival'));
+    assert.equal(report.trace.at(-1).surfaceHolding, true);
+    assert.equal(t.state.parked, false);
+    assert.equal(
+      events.some((event) => event[0] === 'command' && event[1] === 'park'),
+      false,
+    );
+    assert.equal(held.size, 0);
+    assert.equal(lock.ends, 1);
+  });
+  await dom(async ({ frame }) => {
+    const { e, events } = wallFixture(frame, 'roof-hold'),
+      panel = new Element();
+    e.tesla.world.planWallToRoof = () => null;
+    installTeslaQA(e, panel, lease());
+    await click(panel, 'Tesla QA: actual wall to roof + auto hold');
+    assert.match(
+      runReport(panel).result,
+      /No clear asphalt-to-building approach/,
+    );
+    assert.equal(
+      events.some((event) => event[0] === 'nav-start'),
+      false,
+    );
+  });
+});
+
+test('Vortex QA uses the public command, observes a roll and upright completion, and never credits an actual blocked stunt', async () => {
+  for (const blocked of [false, true])
+    await dom(async ({ frame }) => {
+      const { e, t, events, held } = fixture(),
+        panel = new Element(),
+        lock = lease();
+      let launchedAt = null;
+      frame((now) => {
+        if (
+          !events.some(
+            (event) => event[0] === 'command' && event[1] === 'vortex',
+          )
+        )
+          return;
+        launchedAt ??= now;
+        const elapsedS = (now - launchedAt) / 1000;
+        t.state.vortex =
+          elapsedS < 1.4
+            ? {
+                elapsedS,
+                heading: 0,
+                forwardSpeedMps: 30,
+                restoreFlightAssist: false,
+              }
+            : null;
+        t.state.quaternion =
+          elapsedS > 0.4 && elapsedS < 0.8 ? [0, 0, 1, 0] : [0, 0, 0, 1];
+        t.lastStep.collisions = blocked ? 1 : 0;
+      });
+      installTeslaQA(e, panel, lock);
+      await click(panel, 'Tesla QA: vortex jump');
+      const report = runReport(panel);
+      if (blocked) assert.match(report.result, /actual collision geometry/);
+      else {
+        assert.equal(report.result, 'completed');
+        assert.equal(report.vortexEvidence.sawRoll, true);
+        assert.ok(report.vortexEvidence.maximumProgress > 0.9);
+        assert.equal(report.vortexEvidence.uprightAtEnd, true);
+      }
+      assert.equal(
+        events.filter(
+          (event) => event[0] === 'command' && event[1] === 'vortex',
+        ).length,
+        1,
+      );
+      assert.equal(held.size, 0);
+      assert.equal(lock.ends, 1);
+    });
 });
 
 test('capture saves the submitted frame, real state, wall-camera up, active LOD and unique names; failures release its lease', async () => {

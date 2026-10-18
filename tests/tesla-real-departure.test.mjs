@@ -239,8 +239,14 @@ test('an added physical ceiling still blocks the same actual facade manoeuvre de
   }
 });
 
-test('actual facade top-edge exit clears the real roof before braking, hovering and returning upright', () => {
-  const world = actualWorld(fixture.wall);
+test('without an optional roof planner the actual facade edge still clears safely before braking and returning upright', () => {
+  const actual = actualWorld(fixture.wall);
+  const world = {
+    support: (query) => actual.support(query),
+    sweep: (query) => actual.sweep(query),
+    fitGround: (query) => actual.fitGround(query),
+    sweepGroundDeparture: (query) => actual.sweepGroundDeparture(query),
+  };
   try {
     const state = attachActualFacade(world);
     stepTesla(state, { park: true }, 1 / 60, world, shape);
@@ -277,7 +283,7 @@ test('actual facade top-edge exit clears the real roof before braking, hovering 
     );
     assert.deepEqual(state.velocity, [0, 0, 0]);
   } finally {
-    world.dispose();
+    actual.dispose();
   }
 });
 

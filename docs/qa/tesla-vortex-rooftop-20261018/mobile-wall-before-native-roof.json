@@ -1,0 +1,3570 @@
+{
+  "revision": "c6e1f49e509cdf6a10b7d9776ecb02c25497806b",
+  "sourceFingerprint": "644d4be441d455225162b757246f86fb107b7d07c2b239c45d0071cf4a0540be",
+  "kind": "city-tesla-webgl-v1",
+  "id": "tesla-mobile-wall-before-native-roof-wall-chase-high-20261018t045503138z-003",
+  "capturedAt": "2026-10-18T04:55:03.138Z",
+  "valid": true,
+  "localOptIn": true,
+  "case": "building-wall-auto-hold",
+  "snapshot": {
+    "active": true,
+    "mode": "wall",
+    "transitioning": false,
+    "speedKph": 0,
+    "altitudeM": 5,
+    "parked": false,
+    "wallHolding": true,
+    "surfaceHolding": true,
+    "onRoof": false,
+    "vortexActive": false,
+    "vortexProgress": 0,
+    "vortexAvailable": true,
+    "adhesion": true,
+    "flightAssist": false,
+    "view": "chase",
+    "quality": "high",
+    "effectiveQuality": "high",
+    "warning": ""
+  },
+  "state": {
+    "position": [
+      249.1270973229492,
+      38.39917282714052,
+      147.38519731434326
+    ],
+    "quaternion": [
+      -0.6561369130932929,
+      0.27433432238215566,
+      0.26359884536242684,
+      0.6517213204761092
+    ],
+    "velocity": [
+      0,
+      0,
+      0
+    ],
+    "heading": 0.9275876866677591,
+    "mode": "wall",
+    "contact": {
+      "surfaceId": "building:2281:wall:0:7",
+      "kind": "wall",
+      "point": [
+        249.60553697665497,
+        38.39917282714052,
+        147.86841103285911
+      ],
+      "normal": [
+        -0.7035877260378928,
+        0,
+        -0.7106084095821181
+      ],
+      "adherable": true
+    },
+    "flightAssist": false,
+    "adhesionArmed": true,
+    "parked": false,
+    "wallHolding": true,
+    "surfaceHolding": true,
+    "vortex": null,
+    "vortexPreparing": false,
+    "timeS": 24.514999999999315,
+    "impact": 0,
+    "collisionSurfaceId": "building:2281:wall:0:7",
+    "lastSafePose": {
+      "position": [
+        249.1270973229492,
+        38.39917282714052,
+        147.38519731434326
+      ],
+      "quaternion": [
+        -0.6561369130932929,
+        0.27433432238215566,
+        0.26359884536242684,
+        0.6517213204761092
+      ]
+    },
+    "detachRemainingS": 0,
+    "departureContact": null,
+    "groundDeparture": null,
+    "held": {
+      "jump": false,
+      "flightToggle": false,
+      "adhesionToggle": false,
+      "park": false,
+      "vortex": false
+    },
+    "attachment": null
+  },
+  "steps": {
+    "simulatedS": 0.06490000000002329,
+    "droppedS": 0,
+    "substeps": 8,
+    "collisions": 0,
+    "transitions": 0,
+    "environmentFailures": 0
+  },
+  "activeLOD": {
+    "quality": "high",
+    "triangles": 58922,
+    "meshes": 35,
+    "materials": 13,
+    "cachedLevels": 2,
+    "disposed": false
+  },
+  "world": {
+    "sources": 89983,
+    "sourceCells": 16686,
+    "broadSources": 4,
+    "cachedTiles": 34,
+    "loadedTiles": 34,
+    "cachedFaces": 7062,
+    "queries": 24410,
+    "renderedRoofDetails": {
+      "maxCachedRecords": 4,
+      "cachedRecords": 2,
+      "builtRecords": 2,
+      "instanceSources": 1300,
+      "cachedTiles": 6,
+      "cachedFaces": 1152
+    }
+  },
+  "shape": {
+    "halfExtents": [
+      1.14,
+      0.62,
+      2.34
+    ],
+    "clearance": 0.06,
+    "groundSupport": {
+      "wheelContacts": [
+        [
+          -0.896,
+          -0.6799999999999999,
+          1.39
+        ],
+        [
+          0.896,
+          -0.6799999999999999,
+          1.39
+        ],
+        [
+          -0.896,
+          -0.6799999999999999,
+          -1.39
+        ],
+        [
+          0.896,
+          -0.6799999999999999,
+          -1.39
+        ]
+      ],
+      "chassisClearance": 0.08,
+      "suspensionTravel": 0.05,
+      "bodySections": [
+        {
+          "minZ": -2.34,
+          "maxZ": -1.39,
+          "clearance": 0.08
+        },
+        {
+          "minZ": -1.39,
+          "maxZ": 1.39,
+          "clearance": 0.12
+        },
+        {
+          "minZ": 1.39,
+          "maxZ": 2.34,
+          "clearance": 0.15
+        }
+      ]
+    }
+  },
+  "scenario": {
+    "kind": "real-building-wall-auto-hold",
+    "startedAt": "2026-10-18T04:54:37.730Z",
+    "result": "completed",
+    "trace": [
+      {
+        "elapsedMs": 591,
+        "simulatedS": 0,
+        "mode": "ground",
+        "position": [
+          242.4962141988945,
+          35.60116311293118,
+          140.69833459012452
+        ],
+        "quaternion": [
+          0.005711978175491704,
+          0.38032330148517074,
+          -0.008575981696637858,
+          0.9247962003548033
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0,
+          "droppedS": 0,
+          "substeps": 0,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 700.1000000238419,
+        "simulatedS": 0.117,
+        "mode": "ground",
+        "position": [
+          242.4962141988945,
+          35.60116311293118,
+          140.69833459012452
+        ],
+        "quaternion": [
+          0.005711978175491704,
+          0.38032330148517074,
+          -0.008575981696637858,
+          0.9247962003548033
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.117,
+          "droppedS": 0,
+          "substeps": 0,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 929.6999999880791,
+        "simulatedS": 0.30009999999999143,
+        "mode": "ground",
+        "position": [
+          242.5341781748955,
+          35.59824000837363,
+          140.73669248503757
+        ],
+        "quaternion": [
+          0.0057117812062935,
+          0.3803233033347179,
+          -0.00857591206329617,
+          0.9247962014564628
+        ],
+        "speedMps": 0.5639479999999736,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.18309999999999127,
+          "droppedS": 0,
+          "substeps": 22,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 1031.199999988079,
+        "simulatedS": 0.41750000000000054,
+        "mode": "ground",
+        "position": [
+          242.59672735741114,
+          35.596720433994356,
+          140.79989068559092
+        ],
+        "quaternion": [
+          0.005711780465502755,
+          0.3803233033220311,
+          -0.008575902080780367,
+          0.9247962015588261
+        ],
+        "speedMps": 0.9255400000000003,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.11740000000000873,
+          "droppedS": 0,
+          "substeps": 15,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 1222.3999999761581,
+        "simulatedS": 0.5995999999999918,
+        "mode": "ground",
+        "position": [
+          242.75282167657872,
+          35.59292822723904,
+          140.9576046586881
+        ],
+        "quaternion": [
+          0.005711783437382291,
+          0.38032330329447356,
+          -0.00857590330296752,
+          0.9247962015404704
+        ],
+        "speedMps": 1.4864079999999749,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.18209999999999127,
+          "droppedS": 0,
+          "substeps": 22,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 1324.1000000238419,
+        "simulatedS": 0.7171999999999973,
+        "mode": "ground",
+        "position": [
+          242.8918012489638,
+          35.58955181177387,
+          141.09802630029634
+        ],
+        "quaternion": [
+          0.005711786083412989,
+          0.3803233032699378,
+          -0.00857590439115118,
+          0.9247962015241271
+        ],
+        "speedMps": 1.8486159999999943,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.11760000000000582,
+          "droppedS": 0,
+          "substeps": 15,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 1513.800000011921,
+        "simulatedS": 0.9000999999999909,
+        "mode": "ground",
+        "position": [
+          243.16749180230153,
+          35.58285318864817,
+          141.37657745519783
+        ],
+        "quaternion": [
+          0.005712140465045783,
+          0.3803232996828197,
+          -0.008575901286961065,
+          0.9247962008392964
+        ],
+        "speedMps": 2.4119479999999744,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.18289999999999418,
+          "droppedS": 0,
+          "substeps": 22,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 1629.800000011921,
+        "simulatedS": 1.0163999999999935,
+        "mode": "ground",
+        "position": [
+          243.38048378617347,
+          35.57767859981785,
+          141.5917794734324
+        ],
+        "quaternion": [
+          0.005712117467694061,
+          0.3803232999759513,
+          -0.008575931345637748,
+          0.9247962005820487
+        ],
+        "speedMps": 2.7701519999999804,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.11630000000000291,
+          "droppedS": 0,
+          "substeps": 14,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 1829.3999999761581,
+        "simulatedS": 1.1999999999999986,
+        "mode": "ground",
+        "position": [
+          243.77637184702934,
+          35.5680604780586,
+          141.99177532309778
+        ],
+        "quaternion": [
+          0.005712060648422469,
+          0.38032330050879015,
+          -0.008575910914847225,
+          0.9247962009033287
+        ],
+        "speedMps": 3.3356399999999953,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.18360000000000581,
+          "droppedS": 0,
+          "substeps": 23,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 2128.699999988079,
+        "simulatedS": 1.4998999999999918,
+        "mode": "ground",
+        "position": [
+          244.58009048523044,
+          35.5492545234159,
+          142.80383103314782
+        ],
+        "quaternion": [
+          0.005319450476101289,
+          0.38032778175729226,
+          -0.008849149401314503,
+          0.9247941254274289
+        ],
+        "speedMps": 4.259331999999974,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.1836999999999971,
+          "droppedS": 0,
+          "substeps": 23,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 2231.199999988079,
+        "simulatedS": 1.6498999999999913,
+        "mode": "ground",
+        "position": [
+          245.0551848687853,
+          35.538535335820555,
+          143.2838457107595
+        ],
+        "quaternion": [
+          0.0048697972403227725,
+          0.3803328075290178,
+          -0.009161716977918543,
+          0.9247914919234226
+        ],
+        "speedMps": 4.721331999999981,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.03330000000000291,
+          "droppedS": 0,
+          "substeps": 4,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 2333.600000023842,
+        "simulatedS": 1.7179999999999969,
+        "mode": "ground",
+        "position": [
+          245.28695480305348,
+          35.533306176836014,
+          143.51801325611805
+        ],
+        "quaternion": [
+          0.004650557750542651,
+          0.38033521690822475,
+          -0.009314323727097725,
+          0.9247901050862782
+        ],
+        "speedMps": 4.931079999999997,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.01860000000000582,
+          "droppedS": 0,
+          "substeps": 3,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 2452,
+        "simulatedS": 1.8667999999999847,
+        "mode": "ground",
+        "position": [
+          245.828367148591,
+          35.5218150541018,
+          144.06501629881322
+        ],
+        "quaternion": [
+          0.004051340843196602,
+          0.3803413397022172,
+          -0.009197875632046364,
+          0.9247915716715589
+        ],
+        "speedMps": 5.38938399999997,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7940",
+          "kind": "ground",
+          "normal": [
+            0.02020616087404622,
+            0.9997876666252077,
+            0.00404137685135088
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.03389999999999418,
+          "droppedS": 0,
+          "substeps": 5,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 2554.199999988079,
+        "simulatedS": 1.967499999999996,
+        "mode": "ground",
+        "position": [
+          246.22199069627752,
+          35.51379762811642,
+          144.46269192551586
+        ],
+        "quaternion": [
+          0.0036186196954729405,
+          0.38034560223887326,
+          -0.009129051788032362,
+          0.9247922949843925
+        ],
+        "speedMps": 5.6995400000000105,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7947",
+          "kind": "ground",
+          "normal": [
+            0.020206270461533928,
+            0.9997918511518136,
+            -0.002821525201965476
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.03460000000000582,
+          "droppedS": 0,
+          "substeps": 5,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 2655.199999988079,
+        "simulatedS": 2.065999999999996,
+        "mode": "ground",
+        "position": [
+          246.62827927106036,
+          35.5060405535248,
+          144.87315546392165
+        ],
+        "quaternion": [
+          0.003234318841284456,
+          0.3803493083333744,
+          -0.00939655342421334,
+          0.9247895153037271
+        ],
+        "speedMps": 6.002920000000009,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7947",
+          "kind": "ground",
+          "normal": [
+            0.020206270461533928,
+            0.9997918511518136,
+            -0.002821525201965476
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.016700000000011643,
+          "droppedS": 0,
+          "substeps": 3,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 2790.800000011921,
+        "simulatedS": 2.199499999999995,
+        "mode": "ground",
+        "position": [
+          247.21248955113447,
+          35.49488537688949,
+          145.46335804894355
+        ],
+        "quaternion": [
+          0.002681717495942218,
+          0.380354491930884,
+          -0.009781164750766064,
+          0.9247851629840249
+        ],
+        "speedMps": 6.414100000000018,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7947",
+          "kind": "ground",
+          "normal": [
+            0.020206270461533928,
+            0.9997918511518136,
+            -0.002821525201965476
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.06630000000000291,
+          "droppedS": 0,
+          "substeps": 8,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 2997.699999988079,
+        "simulatedS": 2.3827999999999827,
+        "mode": "air",
+        "position": [
+          247.87325227674341,
+          35.82879851717469,
+          146.13089490711084
+        ],
+        "quaternion": [
+          0.0025385816345375586,
+          0.38035580662773305,
+          -0.009880806051097946,
+          0.9247839670104753
+        ],
+        "speedMps": 11.999999999999943,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": null,
+        "attachment": {
+          "index": 1,
+          "count": 4,
+          "surfaceId": "building:2281:wall:0:7"
+        },
+        "step": {
+          "simulatedS": 0.18329999999998836,
+          "droppedS": 0,
+          "substeps": 22,
+          "collisions": 1,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 3267.199999988079,
+        "simulatedS": 2.6836999999999906,
+        "mode": "air",
+        "position": [
+          247.65356751814724,
+          37.88260187671818,
+          145.90901804493964
+        ],
+        "quaternion": [
+          -0.1594951478039065,
+          0.3762059645362047,
+          0.056885502842202694,
+          0.9109305185582398
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": null,
+        "attachment": {
+          "index": 2,
+          "count": 4,
+          "surfaceId": "building:2281:wall:0:7"
+        },
+        "step": {
+          "simulatedS": 0.18410000000000581,
+          "droppedS": 0,
+          "substeps": 23,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 3386.199999988079,
+        "simulatedS": 2.7992999999999815,
+        "mode": "air",
+        "position": [
+          247.65356751814724,
+          37.88260187671818,
+          145.90901804493964
+        ],
+        "quaternion": [
+          -0.3041975064214178,
+          0.3621218470808919,
+          0.11675148856899696,
+          0.873327392717438
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": null,
+        "attachment": {
+          "index": 2,
+          "count": 4,
+          "surfaceId": "building:2281:wall:0:7"
+        },
+        "step": {
+          "simulatedS": 0.11559999999999127,
+          "droppedS": 0,
+          "substeps": 14,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 3561.800000011921,
+        "simulatedS": 2.9838999999999865,
+        "mode": "air",
+        "position": [
+          247.65356751814724,
+          37.88260187671818,
+          145.90901804493964
+        ],
+        "quaternion": [
+          -0.5173002299644438,
+          0.3202517292558332,
+          0.20540679296984052,
+          0.7665816012592704
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": null,
+        "attachment": {
+          "index": 2,
+          "count": 4,
+          "surfaceId": "building:2281:wall:0:7"
+        },
+        "step": {
+          "simulatedS": 0.18460000000000581,
+          "droppedS": 0,
+          "substeps": 23,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 3677,
+        "simulatedS": 3.099399999999986,
+        "mode": "air",
+        "position": [
+          247.65356751814724,
+          37.88260187671818,
+          145.90901804493964
+        ],
+        "quaternion": [
+          -0.6339724805232035,
+          0.28299842610471976,
+          0.2542778545935512,
+          0.6733004956368358
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": null,
+        "attachment": {
+          "index": 2,
+          "count": 4,
+          "surfaceId": "building:2281:wall:0:7"
+        },
+        "step": {
+          "simulatedS": 0.1155,
+          "droppedS": 0,
+          "substeps": 14,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 3860.300000011921,
+        "simulatedS": 3.2825999999999826,
+        "mode": "air",
+        "position": [
+          248.9892584572575,
+          37.88260187671818,
+          147.25803704969027
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.2743343223821556,
+          0.2635988453624269,
+          0.6517213204761094
+        ],
+        "speedMps": 12.00000000000005,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": null,
+        "attachment": {
+          "index": 3,
+          "count": 4,
+          "surfaceId": "building:2281:wall:0:7"
+        },
+        "step": {
+          "simulatedS": 0.1831999999999971,
+          "droppedS": 0,
+          "substeps": 22,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 3984.199999988079,
+        "simulatedS": 3.400399999999985,
+        "mode": "wall",
+        "position": [
+          249.12345404294442,
+          38.086894191709476,
+          147.38880459939554
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 1.7880999999999818,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.11780000000000292,
+          "droppedS": 0,
+          "substeps": 15,
+          "collisions": 0,
+          "transitions": 1,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 4166.399999976158,
+        "simulatedS": 3.5826999999999876,
+        "mode": "wall",
+        "position": [
+          249.12624328682938,
+          38.32597031902258,
+          147.3860429127395
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0.8765999999999692,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.1823000000000029,
+          "droppedS": 0,
+          "substeps": 22,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 4278.199999988079,
+        "simulatedS": 3.7000999999999813,
+        "mode": "wall",
+        "position": [
+          249.12701346968743,
+          38.39198546242018,
+          147.38528033914986
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0.28959999999999925,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.11739999999999418,
+          "droppedS": 0,
+          "substeps": 15,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 4463,
+        "simulatedS": 3.8826999999999865,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.1826000000000058,
+          "droppedS": 0,
+          "substeps": 22,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 4581.600000023842,
+        "simulatedS": 3.9991999999999863,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.1165,
+          "droppedS": 0,
+          "substeps": 14,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 4770.699999988079,
+        "simulatedS": 4.182699999999995,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.1835,
+          "droppedS": 0,
+          "substeps": 23,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 4876.899999976158,
+        "simulatedS": 4.301299999999992,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.11859999999999127,
+          "droppedS": 0,
+          "substeps": 15,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 5065,
+        "simulatedS": 4.48320000000001,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.18190000000000872,
+          "droppedS": 0,
+          "substeps": 22,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 5183.5,
+        "simulatedS": 4.6012000000000155,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.118,
+          "droppedS": 0,
+          "substeps": 15,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 5368.699999988079,
+        "simulatedS": 4.782600000000018,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.18139999999999418,
+          "droppedS": 0,
+          "substeps": 22,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 5476.800000011921,
+        "simulatedS": 4.90020000000003,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.11760000000000582,
+          "droppedS": 0,
+          "substeps": 15,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 5663.399999976158,
+        "simulatedS": 5.083400000000036,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.1831999999999971,
+          "droppedS": 0,
+          "substeps": 22,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 5781.699999988079,
+        "simulatedS": 5.200000000000047,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.11660000000000582,
+          "droppedS": 0,
+          "substeps": 14,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 5968.199999988079,
+        "simulatedS": 5.383300000000045,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.18329999999998836,
+          "droppedS": 0,
+          "substeps": 22,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 6080,
+        "simulatedS": 5.499700000000058,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.11640000000000873,
+          "droppedS": 0,
+          "substeps": 14,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 6266.899999976158,
+        "simulatedS": 5.682800000000058,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.18309999999999127,
+          "droppedS": 0,
+          "substeps": 22,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 6386.600000023842,
+        "simulatedS": 5.801300000000063,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.1185,
+          "droppedS": 0,
+          "substeps": 15,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 6573.600000023842,
+        "simulatedS": 5.984500000000084,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.18320000000001163,
+          "droppedS": 0,
+          "substeps": 22,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 6683.600000023842,
+        "simulatedS": 6.101300000000078,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.11679999999998836,
+          "droppedS": 0,
+          "substeps": 15,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 6869.100000023842,
+        "simulatedS": 6.283300000000087,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.182,
+          "droppedS": 0,
+          "substeps": 22,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 6987.399999976158,
+        "simulatedS": 6.399600000000095,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.11630000000000291,
+          "droppedS": 0,
+          "substeps": 14,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 7173.5,
+        "simulatedS": 6.583100000000105,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.1835,
+          "droppedS": 0,
+          "substeps": 23,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 7289,
+        "simulatedS": 6.717100000000111,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.134,
+          "droppedS": 0,
+          "substeps": 17,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 7478.899999976158,
+        "simulatedS": 6.899700000000126,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.1826000000000058,
+          "droppedS": 0,
+          "substeps": 22,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 7592.600000023842,
+        "simulatedS": 7.016400000000128,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.016600000000005822,
+          "droppedS": 0,
+          "substeps": 2,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 7709.699999988079,
+        "simulatedS": 7.134300000000127,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.05169999999999709,
+          "droppedS": 0,
+          "substeps": 7,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 7853.300000011921,
+        "simulatedS": 7.283000000000145,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.05030000000000291,
+          "droppedS": 0,
+          "substeps": 7,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 8081.100000023842,
+        "simulatedS": 7.500200000000151,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.13230000000000292,
+          "droppedS": 0,
+          "substeps": 16,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 8328.100000023842,
+        "simulatedS": 7.7335000000001655,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.184,
+          "droppedS": 0,
+          "substeps": 23,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 8446.300000011921,
+        "simulatedS": 7.851200000000168,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.11769999999999708,
+          "droppedS": 0,
+          "substeps": 15,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 8640.399999976158,
+        "simulatedS": 8.051300000000163,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.20009999999999126,
+          "droppedS": 0,
+          "substeps": 25,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 8750.699999988079,
+        "simulatedS": 8.16710000000016,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.11580000000000291,
+          "droppedS": 0,
+          "substeps": 14,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 8936,
+        "simulatedS": 8.349500000000159,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.18240000000000872,
+          "droppedS": 0,
+          "substeps": 22,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 9056.5,
+        "simulatedS": 8.466400000000146,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.11689999999999418,
+          "droppedS": 0,
+          "substeps": 15,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 9239.800000011921,
+        "simulatedS": 8.650700000000139,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.1843000000000029,
+          "droppedS": 0,
+          "substeps": 23,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 9352.199999988079,
+        "simulatedS": 8.767900000000129,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.11719999999999708,
+          "droppedS": 0,
+          "substeps": 15,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 9540.100000023842,
+        "simulatedS": 8.951300000000112,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.18339999999999418,
+          "droppedS": 0,
+          "substeps": 23,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 9659.699999988079,
+        "simulatedS": 9.082600000000108,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.13130000000000291,
+          "droppedS": 0,
+          "substeps": 16,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 9849.600000023842,
+        "simulatedS": 9.266500000000105,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.18390000000000872,
+          "droppedS": 0,
+          "substeps": 23,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 9952.399999976158,
+        "simulatedS": 9.38260000000009,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.11609999999999127,
+          "droppedS": 0,
+          "substeps": 14,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 10142.300000011921,
+        "simulatedS": 9.551200000000087,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.16860000000000583,
+          "droppedS": 0,
+          "substeps": 21,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 10261.600000023842,
+        "simulatedS": 9.682600000000074,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.1313999999999942,
+          "droppedS": 0,
+          "substeps": 16,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 10449.399999976158,
+        "simulatedS": 9.866000000000072,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.18340000000000872,
+          "droppedS": 0,
+          "substeps": 23,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 10556.300000011921,
+        "simulatedS": 9.982700000000063,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.11669999999999708,
+          "droppedS": 0,
+          "substeps": 15,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 10742.399999976158,
+        "simulatedS": 10.167300000000044,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.18459999999999127,
+          "droppedS": 0,
+          "substeps": 23,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 10862.100000023842,
+        "simulatedS": 10.282700000000046,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.11540000000000873,
+          "droppedS": 0,
+          "substeps": 14,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 11047,
+        "simulatedS": 10.465800000000028,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.18309999999999127,
+          "droppedS": 0,
+          "substeps": 22,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 11159.800000011921,
+        "simulatedS": 10.584500000000034,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.11870000000001164,
+          "droppedS": 0,
+          "substeps": 15,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 11348.5,
+        "simulatedS": 10.765800000000013,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.18129999999998836,
+          "droppedS": 0,
+          "substeps": 22,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 11467.300000011921,
+        "simulatedS": 10.883200000000015,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.11740000000000873,
+          "droppedS": 0,
+          "substeps": 15,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 11653.600000023842,
+        "simulatedS": 11.066299999999996,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.18309999999999127,
+          "droppedS": 0,
+          "substeps": 22,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 11763.600000023842,
+        "simulatedS": 11.183000000000002,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.11670000000001164,
+          "droppedS": 0,
+          "substeps": 15,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 11951.399999976158,
+        "simulatedS": 11.366499999999991,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.1835,
+          "droppedS": 0,
+          "substeps": 23,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 12069.5,
+        "simulatedS": 11.48289999999998,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.11639999999999417,
+          "droppedS": 0,
+          "substeps": 14,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 12257,
+        "simulatedS": 11.667699999999972,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.1848000000000029,
+          "droppedS": 0,
+          "substeps": 23,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 12371.899999976158,
+        "simulatedS": 11.800099999999958,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.1323999999999942,
+          "droppedS": 0,
+          "substeps": 16,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 12562.600000023842,
+        "simulatedS": 11.984299999999944,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.1841999999999971,
+          "droppedS": 0,
+          "substeps": 23,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 12562.600000023842,
+        "simulatedS": 11.984299999999944,
+        "mode": "wall",
+        "position": [
+          249.1270973229492,
+          38.39917282714052,
+          147.38519731434326
+        ],
+        "quaternion": [
+          -0.6561369130932929,
+          0.27433432238215566,
+          0.26359884536242684,
+          0.6517213204761092
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": true,
+        "surfaceHolding": true,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "building:2281:wall:0:7",
+          "kind": "wall",
+          "normal": [
+            -0.7035877260378928,
+            0,
+            -0.7106084095821181
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.1841999999999971,
+          "droppedS": 0,
+          "substeps": 23,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      }
+    ],
+    "inputs": {
+      "throttleReleased": true,
+      "brakeRequestedOnWall": false,
+      "parkCommandRequested": false
+    },
+    "target": {
+      "candidate": {
+        "building": 2281,
+        "edge": 7,
+        "midpoint": [
+          249.64696329406138,
+          147.82739400003337
+        ],
+        "normal": [
+          -0.7035877260378928,
+          -0.7106084095821181
+        ],
+        "length": 18.185537248651272,
+        "distance": 62.65211755168241
+      },
+      "spawn": {
+        "pose": {
+          "position": [
+            242.56425940223394,
+            35.59973282506211,
+            140.7119441918321
+          ],
+          "quaternion": [
+            0.005711978175491704,
+            0.38032330148517074,
+            -0.008575981696637858,
+            0.9247962003548033
+          ]
+        },
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:7997",
+          "kind": "ground",
+          "point": [
+            242.5504783186875,
+            34.917877646611906,
+            140.70918786149636
+          ],
+          "normal": [
+            0.020206867370154553,
+            0.9997876516865233,
+            0.004041540081725168
+          ],
+          "adherable": true
+        },
+        "identity": {
+          "surfaceId": "ground",
+          "layer": 0,
+          "allowedModes": [
+            "walk",
+            "drive"
+          ]
+        }
+      },
+      "surfaceId": "building:2281:wall:0:7",
+      "heading": 0.7804337700633748
+    },
+    "verifiedHoldMs": 8099.600000023842
+  },
+  "controlledFixture": null,
+  "settings": {
+    "trees": true,
+    "buildings": true,
+    "labels": true,
+    "traffic": true,
+    "trains": true,
+    "harbour": true,
+    "terrain": true,
+    "autoRotate": false,
+    "quality": "balanced",
+    "qualityMode": "auto",
+    "mode": "tesla"
+  },
+  "hour": 14,
+  "night": 0,
+  "compatible": false,
+  "fps": 44,
+  "viewport": [
+    320,
+    568
+  ],
+  "render": [
+    208,
+    369
+  ],
+  "pixelRatio": 0.65,
+  "camera": {
+    "position": [
+      243.60077096466742,
+      41.11194252534403,
+      142.6384669465082
+    ],
+    "quaternion": [
+      0.06697089720913758,
+      0.8969540972868186,
+      0.14580718850504268,
+      -0.4119812011095245
+    ],
+    "up": [
+      0,
+      1,
+      0
+    ],
+    "target": [
+      249.1270973229492,
+      38.67917282714052,
+      147.38519731434326
+    ],
+    "near": 0.18,
+    "far": 45000,
+    "fov": 56
+  },
+  "renderer": {
+    "calls": 260,
+    "triangles": 1626544,
+    "points": 0,
+    "lines": 0,
+    "geometries": 879,
+    "textures": 37
+  },
+  "workerErrors": {}
+}

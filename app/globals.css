@@ -2902,6 +2902,15 @@ a {
     top: 134px !important;
   }
 }
+@media (max-width: 360px) and (orientation: portrait) {
+  .atlas.touch-ui .tesla-touch-controls.touch-drive-controls {
+    width: 138px;
+  }
+  .atlas.touch-ui .tesla-touch-controls button {
+    min-width: 48px;
+    padding: 4px;
+  }
+}
 @media (max-height: 540px) and (orientation: landscape) {
   .atlas.touch-ui .tesla-touch-controls.touch-drive-controls {
     width: 304px;

@@ -179,7 +179,12 @@ export async function verifyFirebaseBuild(
     !scripts.includes('Tesla QA: spawn Robson') &&
       !scripts.includes('Tesla QA ready') &&
       !scripts.includes('city-tesla-webgl-v1') &&
-      !files.some((name) => /(?:^|\/)tesla-qa[.-]/.test(name)),
+      !scripts.includes('Controlled five-car vault QA fixture') &&
+      !scripts.includes('controlled-five-car-vault-qa-v1') &&
+      !scripts.includes('qa-vault-car:') &&
+      !files.some((name) =>
+        /(?:^|\/)(?:tesla-qa|tesla-vortex-vault-qa)[.-]/.test(name),
+      ),
     'Tesla diagnostics must not ship in the public build',
   );
   assert(

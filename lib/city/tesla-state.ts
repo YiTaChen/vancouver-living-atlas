@@ -20,6 +20,14 @@ import {
   teslaUnit,
 } from './tesla-math';
 import { createTeslaRoadsterShape } from './tesla-shape';
+import {
+  canStartTeslaVortex,
+  createTeslaVortex,
+  sampleTeslaVortex,
+  TESLA_VORTEX_LIMITS,
+  type TeslaVortexMotion,
+} from './tesla-vortex';
+export { canStartTeslaVortex as canStartVortex } from './tesla-vortex';
 
 export type TeslaVec3 = readonly [number, number, number];
 export type TeslaQuaternion = readonly [number, number, number, number];
@@ -91,6 +99,17 @@ export interface TeslaGroundFit {
   /** Actual claimed triangle point/normal; these remain physical surface data. */
   contact: TeslaContact;
 }
+export interface TeslaWallToRoofQuery {
+  pose: TeslaPose;
+  shape: TeslaShape;
+  sourceSurfaceId: string;
+}
+export interface TeslaWallToRoofPlan {
+  contact: TeslaContact;
+  waypoints: TeslaPose[];
+  ignoreSurfaceIds: (string | undefined)[];
+  sourceSurfaceId: string;
+}
 export interface TeslaWorld {
   sweep(query: TeslaSweepQuery): TeslaSweepHit | null;
   /** Must prove the complete footprint against actual same-floor geometry. */
@@ -99,6 +118,8 @@ export interface TeslaWorld {
   fitGround?(query: TeslaGroundFitQuery): TeslaGroundFit | null;
   /** Fixed-orientation, same-XZ upward withdrawal within 35cm of a proved origin. */
   sweepGroundDeparture?(query: TeslaGroundDepartureQuery): TeslaSweepHit | null;
+  /** A proved route from a live facade to its actual adjoining driveable roof. */
+  planWallToRoof?(query: TeslaWallToRoofQuery): TeslaWallToRoofPlan | null;
 }
 
 /** Shared authored-model metadata, including the actual tyre contact datum. */
@@ -118,12 +139,14 @@ export interface TeslaInput {
   flightToggle: boolean;
   adhesionToggle: boolean;
   park: boolean;
+  vortex: boolean;
 }
 interface TeslaButtons {
   jump: boolean;
   flightToggle: boolean;
   adhesionToggle: boolean;
   park: boolean;
+  vortex: boolean;
 }
 export interface TeslaAttachment {
   contact: TeslaContact;
@@ -134,6 +157,8 @@ export interface TeslaAttachment {
   parkOnArrival: boolean;
   /** Only the first fixed-XZ upward leg may use this freshly proved origin. */
   groundDeparture?: { origin: TeslaPose; surfaceId: string };
+  /** Re-prove both physical endpoint surfaces while traversing a roof corner. */
+  roofTransfer?: { origin: TeslaPose; sourceContact: TeslaContact };
 }
 export interface TeslaState extends TeslaPose {
   velocity: TeslaVec3;
@@ -146,6 +171,11 @@ export interface TeslaState extends TeslaPose {
   parked: boolean;
   /** Automatic wall rest, released by driving/steering; distinct from P parking. */
   wallHolding: boolean;
+  /** Automatic wall/roof rest; ordinary streets retain their existing standby. */
+  surfaceHolding: boolean;
+  vortex: TeslaVortexMotion | null;
+  /** Release the existing support and align safely before the stunt clock starts. */
+  vortexPreparing: boolean;
   timeS: number;
   impact: number;
   collisionSurfaceId: string | null;
@@ -191,6 +221,7 @@ const EMPTY_BUTTONS: TeslaButtons = {
   flightToggle: false,
   adhesionToggle: false,
   park: false,
+  vortex: false,
 };
 const EPS = 1e-7;
 const finiteVector = (v: readonly number[], size: number) =>
@@ -208,6 +239,15 @@ const bodyUp = (s: TeslaPose) => teslaRotate(s.quaternion, TESLA_UP);
 const bodyForward = (s: TeslaPose) => teslaRotate(s.quaternion, TESLA_FORWARD);
 const contactHeight = (shape: TeslaShape) =>
   shape.halfExtents[1] + shape.clearance;
+const onContactPlane = (
+  pose: TeslaPose,
+  contact: TeslaContact,
+  shape: TeslaShape,
+) =>
+  Math.abs(
+    teslaDot(teslaSubtract(pose.position, contact.point), contact.normal) -
+      contactHeight(shape),
+  ) <= EPS && teslaDot(bodyUp(pose), contact.normal) > 1 - 1e-10;
 function validShape(shape: TeslaShape) {
   const ground = shape.groundSupport;
   const sections = ground?.bodySections;
@@ -320,6 +360,9 @@ export function createTesla(
     adhesionArmed: true,
     parked: false,
     wallHolding: false,
+    surfaceHolding: false,
+    vortex: null,
+    vortexPreparing: false,
     timeS: 0,
     impact: 0,
     collisionSurfaceId: null,
@@ -565,15 +608,22 @@ function leaveSurface(
   state.departureContact = state.contact
     ? contactCopy(state.contact)
     : state.attachment
-      ? contactCopy(state.attachment.contact)
+      ? contactCopy(
+          state.attachment.roofTransfer?.sourceContact ??
+            state.attachment.contact,
+        )
       : null;
   if (state.mode !== 'air' || state.attachment) {
     if (report) report.transitions++;
   }
-  const normal = state.contact?.normal ?? bodyUp(state);
+  const transferSource = state.attachment?.roofTransfer?.sourceContact;
+  const normal =
+    state.contact?.normal ?? transferSource?.normal ?? bodyUp(state);
   const release =
     impulse > 0 &&
-    (state.mode === 'wall' || state.attachment?.contact.kind === 'wall')
+    (state.mode === 'wall' ||
+      state.attachment?.contact.kind === 'wall' ||
+      transferSource)
       ? Math.max(10, impulse)
       : impulse;
   state.velocity = teslaLimit(
@@ -589,6 +639,7 @@ function leaveSurface(
   state.flightAssist = assisted;
   state.parked = false;
   state.wallHolding = false;
+  state.surfaceHolding = false;
   state.detachRemainingS = 0.4;
 }
 function setContact(
@@ -601,6 +652,8 @@ function setContact(
   state.contact = contact;
   state.mode = contact.kind === 'wall' ? 'wall' : 'ground';
   if (state.mode !== 'wall') state.wallHolding = false;
+  if (contact.kind !== 'wall' && contact.kind !== 'roof')
+    state.surfaceHolding = false;
   state.flightAssist = false;
   state.attachment = null;
   state.departureContact = null;
@@ -703,6 +756,13 @@ function advanceGroundDeparture(
   if (distance <= EPS) {
     state.velocity = [0, 0, 0];
     if (departure.returning) returnToOrigin();
+    else if (state.vortex) {
+      // Reaching the bounded withdrawal cap without full-body clearance is a
+      // rejected stunt, not an indefinitely active preparation animation.
+      cancelVortex(state);
+      departure.returning = true;
+      departure.resumeVelocity = [0, 0, 0];
+    }
     return true;
   }
   const next: TeslaPose = {
@@ -953,6 +1013,193 @@ function requestAttachment(
   state.flightAssist = true;
   state.parked = false;
   state.wallHolding = false;
+  state.surfaceHolding = false;
+  return true;
+}
+
+function roofLegAllowed(
+  from: TeslaPose,
+  to: TeslaPose,
+  ignored: string | undefined,
+  index: number,
+  count: number,
+  source: TeslaContact,
+  roof: TeslaContact,
+  final: TeslaPose,
+  shape: TeslaShape,
+) {
+  if (ignored === undefined) return true;
+  const sourceLeg = index === 0 && ignored === source.surfaceId;
+  const roofLeg = index === count - 1 && ignored === roof.surfaceId;
+  if (!sourceLeg && !roofLeg) return false;
+  const normal = sourceLeg ? source.normal : roof.normal;
+  const delta = teslaSubtract(to.position, from.position);
+  const along = teslaDot(delta, normal);
+  const rotation = Math.abs(
+    from.quaternion.reduce((sum, v, i) => sum + v * to.quaternion[i], 0),
+  );
+  if (
+    rotation < 1 - 1e-10 ||
+    teslaLength(teslaSubtract(delta, teslaScale(normal, along))) > EPS
+  )
+    return false;
+  if (sourceLeg) return along >= -EPS;
+  return (
+    along <= EPS &&
+    Math.abs(
+      to.quaternion.reduce((sum, v, i) => sum + v * final.quaternion[i], 0),
+    ) >
+      1 - 1e-10 &&
+    teslaDot(teslaSubtract(from.position, roof.point), roof.normal) >=
+      contactHeight(shape) - EPS &&
+    teslaDot(teslaSubtract(to.position, roof.point), roof.normal) >=
+      contactHeight(shape) - EPS
+  );
+}
+
+function requestRoofTransfer(
+  state: TeslaState,
+  world: TeslaWorld,
+  shape: TeslaShape,
+  report: TeslaStepReport,
+) {
+  if (
+    !world.planWallToRoof ||
+    !state.adhesionArmed ||
+    state.mode !== 'wall' ||
+    state.contact?.kind !== 'wall' ||
+    state.detachRemainingS > 0
+  )
+    return false;
+  const source = state.contact;
+  let plan: TeslaWallToRoofPlan | null;
+  try {
+    plan = world.planWallToRoof({
+      pose: copyPose(state),
+      shape,
+      sourceSurfaceId: source.surfaceId,
+    });
+    if (!plan) return false;
+    const contact = contactCopy(plan.contact);
+    if (
+      !contact ||
+      contact.kind !== 'roof' ||
+      !contact.adherable ||
+      contact.normal[1] < 0.92 ||
+      plan.sourceSurfaceId !== source.surfaceId ||
+      !Array.isArray(plan.waypoints) ||
+      plan.waypoints.length < 2 ||
+      plan.waypoints.length > 8 ||
+      !Array.isArray(plan.ignoreSurfaceIds) ||
+      plan.ignoreSurfaceIds.length !== plan.waypoints.length
+    )
+      throw new Error('Invalid Tesla roof transfer');
+    const waypoints = plan.waypoints.map((pose, index) => {
+      if (
+        !pose ||
+        !finiteVector(pose.position, 3) ||
+        !finiteVector(pose.quaternion, 4) ||
+        Math.hypot(...pose.quaternion) < EPS ||
+        teslaLength(teslaSubtract(pose.position, state.position)) > 16 ||
+        (plan!.ignoreSurfaceIds[index] !== undefined &&
+          !(
+            index === 0 && plan!.ignoreSurfaceIds[index] === source.surfaceId
+          ) &&
+          !(
+            index === plan!.waypoints.length - 1 &&
+            plan!.ignoreSurfaceIds[index] === contact.surfaceId
+          ))
+      )
+        throw new Error('Invalid Tesla roof waypoint');
+      return {
+        position: [...pose.position] as TeslaVec3,
+        quaternion: teslaNormalizeQuaternion(pose.quaternion),
+      };
+    });
+    plan = {
+      contact,
+      sourceSurfaceId: source.surfaceId,
+      waypoints,
+      ignoreSurfaceIds: [...plan.ignoreSurfaceIds],
+    };
+  } catch {
+    report.environmentFailures++;
+    return false;
+  }
+  const final = plan.waypoints.at(-1)!;
+  const origin = querySupport(
+    world,
+    state,
+    shape,
+    source.surfaceId,
+    true,
+    report,
+  );
+  const destination = querySupport(
+    world,
+    final,
+    shape,
+    plan.contact.surfaceId,
+    true,
+    report,
+  );
+  if (
+    origin?.surfaceId !== source.surfaceId ||
+    origin.kind !== 'wall' ||
+    !admissible(state, origin) ||
+    !onContactPlane(state, origin, shape) ||
+    teslaDot(origin.normal, source.normal) < 0.98 ||
+    destination?.surfaceId !== plan.contact.surfaceId ||
+    destination.kind !== 'roof' ||
+    !admissible(state, destination) ||
+    teslaDot(destination.normal, plan.contact.normal) < 0.98 ||
+    !onContactPlane(final, destination, shape)
+  )
+    return false;
+  let previous = copyPose(state);
+  for (const [index, waypoint] of plan.waypoints.entries()) {
+    if (
+      teslaLength(teslaSubtract(waypoint.position, previous.position)) > 12 ||
+      !roofLegAllowed(
+        previous,
+        waypoint,
+        plan.ignoreSurfaceIds[index],
+        index,
+        plan.waypoints.length,
+        origin,
+        destination,
+        final,
+        shape,
+      ) ||
+      querySweep(
+        world,
+        previous,
+        waypoint,
+        shape,
+        plan.ignoreSurfaceIds[index],
+        report,
+      )
+    )
+      return false;
+    previous = waypoint;
+  }
+  state.attachment = {
+    contact: destination,
+    waypoints: plan.waypoints,
+    ignoreSurfaceIds: plan.ignoreSurfaceIds,
+    index: 0,
+    resumeSpeed: Math.max(
+      0,
+      Math.min(30, teslaDot(state.velocity, bodyForward(state))),
+    ),
+    parkOnArrival: state.parked,
+    roofTransfer: { origin: copyPose(state), sourceContact: origin },
+  };
+  state.contact = null;
+  state.mode = 'air';
+  state.flightAssist = true;
+  state.parked = false;
+  state.wallHolding = state.surfaceHolding = false;
   return true;
 }
 
@@ -965,6 +1212,42 @@ function advanceAttachment(
   report: TeslaStepReport,
 ) {
   const attachment = state.attachment!;
+  if (attachment.roofTransfer) {
+    const origin = querySupport(
+      world,
+      attachment.roofTransfer.origin,
+      shape,
+      attachment.roofTransfer.sourceContact.surfaceId,
+      state.adhesionArmed,
+      report,
+    );
+    const final = attachment.waypoints.at(-1)!;
+    const destination = querySupport(
+      world,
+      final,
+      shape,
+      attachment.contact.surfaceId,
+      state.adhesionArmed,
+      report,
+    );
+    if (
+      !state.adhesionArmed ||
+      origin?.surfaceId !== attachment.roofTransfer.sourceContact.surfaceId ||
+      origin.kind !== 'wall' ||
+      !admissible(state, origin) ||
+      !onContactPlane(attachment.roofTransfer.origin, origin, shape) ||
+      teslaDot(origin.normal, attachment.roofTransfer.sourceContact.normal) <
+        0.98 ||
+      destination?.surfaceId !== attachment.contact.surfaceId ||
+      destination.kind !== 'roof' ||
+      !admissible(state, destination) ||
+      !onContactPlane(final, destination, shape) ||
+      querySweep(world, final, final, shape, destination.surfaceId, report)
+    ) {
+      leaveSurface(state, true, 2, report);
+      return;
+    }
+  }
   const target = attachment.waypoints[attachment.index];
   const difference = teslaSubtract(target.position, state.position);
   const distance = teslaLength(difference);
@@ -985,6 +1268,24 @@ function advanceAttachment(
     quaternion: teslaSlerp(state.quaternion, target.quaternion, fraction),
   };
   if (
+    attachment.roofTransfer &&
+    !roofLegAllowed(
+      state,
+      next,
+      attachment.ignoreSurfaceIds[attachment.index],
+      attachment.index,
+      attachment.waypoints.length,
+      attachment.roofTransfer.sourceContact,
+      attachment.contact,
+      attachment.waypoints.at(-1)!,
+      shape,
+    )
+  ) {
+    report.environmentFailures++;
+    leaveSurface(state, true, 2, report);
+    return;
+  }
+  if (
     attachment.groundDeparture && attachment.index === 0
       ? queryGroundDeparture(
           world,
@@ -1004,6 +1305,10 @@ function advanceAttachment(
           report,
         )
   ) {
+    if (attachment.roofTransfer) {
+      leaveSurface(state, true, 2, report);
+      return;
+    }
     state.attachment = null;
     state.velocity = [0, 0, 0];
     return;
@@ -1017,7 +1322,7 @@ function advanceAttachment(
   remember(state);
   if (input.brake) attachment.resumeSpeed = 0;
   else if (
-    attachment.contact.kind === 'wall' &&
+    (attachment.contact.kind === 'wall' || attachment.roofTransfer) &&
     !input.throttle &&
     !input.boost
   )
@@ -1056,6 +1361,7 @@ function moveSwept(
   world: TeslaWorld,
   shape: TeslaShape,
   report: TeslaStepReport,
+  allowAttachment = true,
 ) {
   let ignoredSupport = state.contact?.surfaceId;
   const departure = state.departureContact;
@@ -1119,6 +1425,19 @@ function moveSwept(
     remember(state);
     return;
   }
+  if (
+    allowAttachment &&
+    state.mode === 'wall' &&
+    state.contact?.kind === 'wall' &&
+    state.adhesionArmed &&
+    next.position[1] > state.position[1] + EPS &&
+    requestRoofTransfer(state, world, shape, report)
+  ) {
+    // A real cornice can obstruct the front before the complete wall footprint
+    // reaches its edge. Try the same fully proved roof route from this still
+    // valid pose; its whole path and every partial step retain all obstacles.
+    return;
+  }
   report.collisions++;
   state.collisionSurfaceId = hit.surfaceId;
   const travel = teslaLength(teslaSubtract(next.position, state.position));
@@ -1134,7 +1453,11 @@ function moveSwept(
   const closing = -teslaDot(state.velocity, hit.normal);
   state.impact = Math.max(state.impact, Math.min(1, closing / 35));
   remember(state);
-  if (closing >= -0.05 && requestAttachment(state, hit, world, shape, report))
+  if (
+    allowAttachment &&
+    closing >= -0.05 &&
+    requestAttachment(state, hit, world, shape, report)
+  )
     return;
   // Sliding only removes velocity into the obstacle. The next substep sweeps
   // the remaining tangent movement instead of teleporting through a corner.
@@ -1143,6 +1466,143 @@ function moveSwept(
       ? teslaAdd(state.velocity, teslaScale(hit.normal, closing))
       : [0, 0, 0];
   if (teslaLength(state.velocity) < 0.04) state.velocity = [0, 0, 0];
+}
+
+function cancelVortex(state: TeslaState) {
+  state.vortex = null;
+  state.vortexPreparing = false;
+  state.flightAssist = true;
+}
+
+function advanceVortex(
+  state: TeslaState,
+  h: number,
+  world: TeslaWorld,
+  shape: TeslaShape,
+  report: TeslaStepReport,
+) {
+  const motion = state.vortex!;
+  let start: ReturnType<typeof sampleTeslaVortex>;
+  try {
+    start = sampleTeslaVortex(motion);
+  } catch {
+    report.environmentFailures++;
+    cancelVortex(state);
+    return;
+  }
+  if (start.phase === 'done') {
+    state.vortex = null;
+    state.vortexPreparing = false;
+    state.flightAssist = motion.restoreFlightAssist;
+    return;
+  }
+  const collisions = report.collisions;
+  if (state.vortexPreparing) {
+    const wallClearance = wallDepartureDistance(state, shape);
+    if (wallClearance > EPS) {
+      state.velocity = teslaScale(
+        state.departureContact!.normal,
+        Math.min(10, wallClearance / h),
+      );
+      moveSwept(
+        state,
+        {
+          position: teslaAdd(state.position, teslaScale(state.velocity, h)),
+          quaternion: state.quaternion,
+        },
+        world,
+        shape,
+        report,
+        false,
+      );
+    } else if (querySweep(world, state, state, shape, undefined, report)) {
+      // A roof/legacy launch may still touch its exact departure face. Move
+      // only outward in the unchanged frame; the ordinary-ground path above
+      // remains governed by its stricter, bounded withdrawal API.
+      state.velocity = teslaScale(
+        state.departureContact?.normal ?? TESLA_UP,
+        10,
+      );
+      moveSwept(
+        state,
+        {
+          position: teslaAdd(state.position, teslaScale(state.velocity, h)),
+          quaternion: state.quaternion,
+        },
+        world,
+        shape,
+        report,
+        false,
+      );
+    } else {
+      state.departureContact = null;
+      const angle =
+        2 *
+        Math.acos(
+          Math.min(
+            1,
+            Math.abs(
+              state.quaternion.reduce(
+                (sum, value, i) => sum + value * start.quaternion[i],
+                0,
+              ),
+            ),
+          ),
+        );
+      const fraction =
+        angle > EPS
+          ? Math.min(1, (TESLA_LIMITS.attachmentRadiansPerS * h) / angle)
+          : 1;
+      state.velocity = [0, 0, 0];
+      moveSwept(
+        state,
+        {
+          position: state.position,
+          quaternion: teslaSlerp(state.quaternion, start.quaternion, fraction),
+        },
+        world,
+        shape,
+        report,
+        false,
+      );
+      if (fraction >= 1 - EPS && report.collisions === collisions) {
+        state.vortexPreparing = false;
+        state.heading = motion.heading;
+      }
+    }
+    if (report.collisions > collisions) cancelVortex(state);
+    return;
+  }
+  const elapsed = Math.min(TESLA_VORTEX_LIMITS.durationS, motion.elapsedS + h);
+  const sample = sampleTeslaVortex(motion, elapsed);
+  const middle = sampleTeslaVortex(motion, (motion.elapsedS + elapsed) / 2);
+  state.velocity = middle.velocity;
+  moveSwept(
+    state,
+    {
+      position: teslaAdd(
+        state.position,
+        teslaScale(middle.velocity, elapsed - motion.elapsedS),
+      ),
+      quaternion: sample.quaternion,
+    },
+    world,
+    shape,
+    report,
+    false,
+  );
+  if (report.collisions > collisions) {
+    cancelVortex(state);
+    return;
+  }
+  state.velocity = sample.velocity;
+  motion.elapsedS = elapsed;
+  state.heading = motion.heading;
+  if (sample.phase === 'done') {
+    state.vortex = null;
+    state.vortexPreparing = false;
+    state.flightAssist = motion.restoreFlightAssist;
+  }
 }
 
 function airOrientation(state: TeslaState, input: TeslaInput, h: number) {
@@ -1183,11 +1643,33 @@ function integrate(
     state.detachRemainingS = Math.max(state.detachRemainingS, h * 2);
   else if (!state.detachRemainingS) state.departureContact = null;
   state.impact = Math.max(0, state.impact - h * 2);
-  if (
-    state.mode === 'air' &&
-    advanceGroundDeparture(state, input, h, world, shape, report)
-  )
+  if (state.mode === 'air' && state.groundDeparture) {
+    const collisions = report.collisions,
+      failures = report.environmentFailures;
+    const departing = advanceGroundDeparture(
+      state,
+      input,
+      h,
+      world,
+      shape,
+      report,
+    );
+    if (
+      state.vortex &&
+      (report.collisions > collisions || report.environmentFailures > failures)
+    ) {
+      cancelVortex(state);
+      if (state.groundDeparture) {
+        state.groundDeparture.returning = true;
+        state.groundDeparture.resumeVelocity = [0, 0, 0];
+      }
+    }
+    if (departing) return;
+  }
+  if (state.vortex) {
+    advanceVortex(state, h, world, shape, report);
     return;
+  }
   if (state.attachment) {
     advanceAttachment(state, h, input, world, shape, report);
     return;
@@ -1198,6 +1680,7 @@ function integrate(
   };
   const fittedCurrent = fitGroundPose(state, world, shape, fitBudget, report);
   state.wallHolding = false;
+  state.surfaceHolding = false;
   if (state.contact) {
     const proof = querySupport(
       world,
@@ -1225,22 +1708,19 @@ function integrate(
         return;
       }
       if (
-        state.mode === 'wall' &&
-        state.adhesionArmed &&
+        ((state.mode === 'wall' && state.adhesionArmed) ||
+          (state.mode === 'ground' && proof.kind === 'roof')) &&
         state.velocity.every((value) => value === 0) &&
         (input.brake || (!input.throttle && !input.steer && !input.boost)) &&
-        Math.abs(
-          teslaDot(teslaSubtract(state.position, proof.point), proof.normal) -
-            contactHeight(shape),
-        ) <= EPS &&
-        teslaDot(bodyUp(state), proof.normal) > 1 - 1e-10 &&
+        onContactPlane(state, proof, shape) &&
         !querySweep(world, state, state, shape, proof.surfaceId, report)
       ) {
         // Revalidate the actual wall and the complete resting body every
         // substep. No historical hold flag grants support after geometry or
         // permissions change, and no surface correction can drift this pose.
         state.velocity = [0, 0, 0];
-        state.wallHolding = true;
+        state.wallHolding = state.mode === 'wall';
+        state.surfaceHolding = true;
         return;
       }
     }
@@ -1279,6 +1759,30 @@ function integrate(
       position: teslaAdd(state.position, teslaScale(state.velocity, h)),
       quaternion,
     };
+    if (
+      state.mode === 'wall' &&
+      state.adhesionArmed &&
+      world.planWallToRoof &&
+      requested.position[1] > state.position[1] + EPS &&
+      bodyForward(state)[1] * Math.sign(speed) > 0.7
+    ) {
+      const nextWall = querySupport(
+        world,
+        requested,
+        shape,
+        state.contact.surfaceId,
+        true,
+        report,
+      );
+      if (
+        (!nextWall ||
+          nextWall.kind !== 'wall' ||
+          !admissible(state, nextWall) ||
+          teslaDot(nextWall.normal, state.contact.normal) < 0.98) &&
+        requestRoofTransfer(state, world, shape, report)
+      )
+        return;
+    }
     // Fit the destination before moving: at motorway speed the front wheels
     // can cross a grade within one substep, outside a source-plane tyre skin.
     const fittedDestination = fitGroundPose(
@@ -1494,22 +1998,39 @@ export function stepTesla(
     flightToggle: raw.flightToggle === true,
     adhesionToggle: raw.adhesionToggle === true,
     park: raw.park === true,
+    vortex: raw.vortex === true,
   };
   const edge = {
     jump: input.jump && !state.held.jump,
     flightToggle: input.flightToggle && !state.held.flightToggle,
     adhesionToggle: input.adhesionToggle && !state.held.adhesionToggle,
     park: input.park && !state.held.park,
+    vortex: input.vortex && !state.held.vortex,
   };
   state.held = {
     jump: input.jump,
     flightToggle: input.flightToggle,
     adhesionToggle: input.adhesionToggle,
     park: input.park,
+    vortex: input.vortex,
   };
+  if (
+    state.vortex &&
+    (input.brake || edge.jump || edge.flightToggle || edge.park)
+  ) {
+    if (
+      state.vortexPreparing &&
+      state.groundDeparture &&
+      (input.brake || edge.park)
+    ) {
+      state.groundDeparture.returning = true;
+      state.groundDeparture.resumeVelocity = [0, 0, 0];
+    }
+    cancelVortex(state);
+  }
   let launchGroundOrigin: { origin: TeslaPose; surfaceId: string } | undefined;
   if (
-    (edge.jump || edge.flightToggle) &&
+    (edge.jump || edge.flightToggle || edge.vortex) &&
     state.mode === 'ground' &&
     state.contact?.kind === 'ground' &&
     shape.groundSupport &&
@@ -1541,7 +2062,9 @@ export function stepTesla(
     state.adhesionArmed = !state.adhesionArmed;
     if (
       !state.adhesionArmed &&
-      (state.mode === 'wall' || state.attachment?.contact.kind === 'wall')
+      (state.mode === 'wall' ||
+        state.attachment?.contact.kind === 'wall' ||
+        state.attachment?.roofTransfer)
     )
       leaveSurface(state, true, 2, report);
   }
@@ -1554,6 +2077,7 @@ export function stepTesla(
     leaveSurface(state, true, 8, report, launchGroundOrigin);
   if (edge.park) {
     state.wallHolding = false;
+    state.surfaceHolding = false;
     if (state.attachment)
       state.attachment.parkOnArrival = !state.attachment.parkOnArrival;
     else if (state.contact) {
@@ -1567,6 +2091,51 @@ export function stepTesla(
   if (state.parked && (Math.abs(input.throttle) > 0.05 || input.boost))
     state.parked = false;
   if (
+    edge.vortex &&
+    !input.brake &&
+    !edge.jump &&
+    !edge.flightToggle &&
+    !edge.park &&
+    !edge.adhesionToggle &&
+    canStartTeslaVortex(state)
+  ) {
+    const contact = state.contact;
+    const proof = contact
+      ? querySupport(
+          world,
+          state,
+          shape,
+          contact.surfaceId,
+          state.adhesionArmed,
+          report,
+        )
+      : null;
+    if (
+      (!contact ||
+        (proof?.surfaceId === contact.surfaceId &&
+          proof.kind === contact.kind &&
+          admissible(state, proof) &&
+          teslaDot(proof.normal, contact.normal) > 0.98)) &&
+      !querySweep(world, state, state, shape, proof?.surfaceId, report)
+    ) {
+      if (proof) state.contact = proof;
+      const restore = state.mode === 'air' && state.flightAssist;
+      const heading =
+        contact?.kind === 'wall'
+          ? Math.atan2(contact.normal[0], contact.normal[2])
+          : state.heading;
+      const speed = teslaDot(state.velocity, [
+        Math.sin(heading),
+        0,
+        Math.cos(heading),
+      ]);
+      const motion = createTeslaVortex(heading, speed, restore);
+      leaveSurface(state, true, 8, report, launchGroundOrigin);
+      state.vortex = motion;
+      state.vortexPreparing = true;
+    }
+  }
+  if (
     state.mode === 'ground' &&
     state.contact?.kind === 'ground' &&
     Math.abs(Math.hypot(...givenQuaternion) - 1) <= 1e-12 &&
@@ -1574,6 +2143,7 @@ export function stepTesla(
     !state.attachment &&
     !state.groundDeparture &&
     !state.departureContact &&
+    !state.vortex &&
     [raw.throttle, raw.steer, raw.lift, raw.pitch, raw.roll].every(
       (value) => value === undefined || value === 0,
     ) &&
@@ -1581,7 +2151,8 @@ export function stepTesla(
     !input.jump &&
     !input.flightToggle &&
     !input.adhesionToggle &&
-    !input.park
+    !input.park &&
+    !input.vortex
   ) {
     // Re-prove this exact stationary pose on every render step. Its wheel and
     // actual-body permission is never carried across frames. No fitting or

@@ -117,7 +117,7 @@ test('desktop and touch expose the current driving mode and a stable accessible 
             /<div class="touch-drive-controls tesla-touch-controls ui-chrome"[^>]*>([\s\S]*?)<\/div>/,
           );
           assert(cluster);
-          assert.equal((cluster[1].match(/<button\b/g) ?? []).length, 8);
+          assert.equal((cluster[1].match(/<button\b/g) ?? []).length, 9);
         }
       }
 });
@@ -195,4 +195,83 @@ test('inactive vehicles and modal-disabled touch controls expose no driving butt
     render({}, { touch: true, controlsEnabled: false, panelVisible: false }),
     '',
   );
+});
+
+test('Vortex Jump is the ninth touch action and exposes its real availability, progress and keyboard shortcut in every locale', () => {
+  for (const [locale, catalog] of Object.entries(catalogs))
+    for (const touch of [false, true]) {
+      const html = render({ vortexAvailable: true }, { locale, touch }),
+        vortex = button(html, 'vortex');
+      assert.match(vortex, /aria-keyshortcuts="V"/);
+      assert(!vortex.includes('disabled=""'));
+      assert(text(vortex).includes(catalog.vortex));
+      assert(!vortex.includes('aria-busy="true"'));
+      const unavailable = button(render({}, { locale, touch }), 'vortex');
+      assert.match(unavailable, /disabled=""/);
+      const active = render(
+        { vortexAvailable: false, vortexActive: true, vortexProgress: 0.5 },
+        { locale, touch },
+      );
+      assert.match(button(active, 'vortex'), /disabled=""/);
+      assert.match(button(active, 'vortex'), /aria-busy="true"/);
+      assert(text(active).includes(catalog.vortexActive));
+      assert(text(button(active, 'vortex')).includes('50%'));
+      if (touch) {
+        const cluster = html.match(
+          /<div class="touch-drive-controls tesla-touch-controls ui-chrome"[^>]*>([\s\S]*?)<\/div>/,
+        )[1];
+        assert(
+          cluster.lastIndexOf('data-tesla-action="vortex"') >
+            cluster.indexOf('data-tesla-action="camera"'),
+        );
+      }
+    }
+  const disabled = button(
+    render({ vortexAvailable: true }, { controlsEnabled: false }),
+    'vortex',
+  );
+  assert.match(disabled, /disabled=""/);
+});
+
+test('roof driving and automatic roof hold stay distinct from the road, wall and manual park status', () => {
+  for (const [locale, catalog] of Object.entries(catalogs))
+    for (const touch of [false, true]) {
+      const roof = render({ mode: 'ground', onRoof: true }, { locale, touch });
+      assert(text(roof).includes(catalog.roof));
+      const held = render(
+        { mode: 'ground', onRoof: true, surfaceHolding: true, parked: false },
+        { locale, touch },
+      );
+      assert(text(held).includes(catalog.roofHolding));
+      assert.match(button(held, 'park'), /aria-pressed="false"/);
+      const manual = render(
+        { mode: 'ground', onRoof: true, surfaceHolding: true, parked: true },
+        { locale, touch },
+      );
+      assert(text(manual).includes(catalog.parked));
+      assert(!text(manual).includes(catalog.roofHolding));
+      assert.match(button(manual, 'park'), /aria-pressed="true"/);
+      const road = render({ mode: 'ground' }, { locale, touch });
+      assert(!text(road).includes(catalog.roofHolding));
+    }
+});
+
+test('all four quality choices and both camera views remain available beside the stunt control', () => {
+  for (const touch of [false, true])
+    for (const quality of ['auto', 'low', 'medium', 'high']) {
+      const html = render(
+        { quality, vortexAvailable: true },
+        { touch, optionsOpen: touch },
+      );
+      assert.equal((html.match(/<option\b/g) ?? []).length, 4);
+      for (const value of ['auto', 'low', 'medium', 'high'])
+        assert(html.includes(`value="${value}"`));
+      assert.match(html, new RegExp(`<option value="${quality}" selected=""`));
+      assert(text(button(html, 'camera')).includes(catalogs.en.cockpit));
+      assert(
+        text(button(render({ view: 'cockpit' }), 'camera')).includes(
+          catalogs.en.chase,
+        ),
+      );
+    }
 });

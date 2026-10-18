@@ -2,6 +2,9 @@
 import type { CityEngine } from './engine';
 import { inPolygon, project } from './geo';
 import type { TeslaStepReport } from './tesla-state';
+import { teslaFrame } from './tesla-math';
+import { TESLA_VORTEX_LIMITS } from './tesla-vortex';
+import { installTeslaVortexVaultQA } from './tesla-vortex-vault-qa';
 
 interface Lease {
   isRunning(): boolean;
@@ -128,6 +131,7 @@ export function installTeslaQA(
   output.style.cssText = 'display:block;width:100%;height:70px';
   panel.appendChild(status);
   panel.appendChild(label);
+  const vault = installTeslaVortexVaultQA(e, panel, lease);
   let sequence = 0,
     caseName = 'manual',
     motion: AbortController | null = null;
@@ -142,6 +146,11 @@ export function installTeslaQA(
       parkCommandRequested: boolean;
     };
     verifiedHoldMs?: number;
+    vortexEvidence?: {
+      sawRoll: boolean;
+      maximumProgress: number;
+      uprightAtEnd: boolean;
+    };
     trace: unknown[];
   } | null = null;
   const step = () => {
@@ -171,7 +180,10 @@ export function installTeslaQA(
       speedMps: t.speedMps,
       parked: s.parked,
       wallHolding: s.wallHolding,
+      surfaceHolding: s.surfaceHolding,
       adhesionArmed: s.adhesionArmed,
+      vortex: s.vortex ? { ...s.vortex } : null,
+      vortexPreparing: s.vortexPreparing,
       contact: s.contact
         ? {
             surfaceId: s.contact.surfaceId,
@@ -276,11 +288,13 @@ export function installTeslaQA(
       sample(started);
     }),
   );
-  const approachWall = (automaticHold: boolean) =>
+  const approachWall = (automaticHold: boolean, roofTransfer = false) =>
     run(
-      automaticHold
-        ? 'real-building-wall-auto-hold'
-        : 'real-building-wall-approach',
+      roofTransfer
+        ? 'real-building-wall-roof-auto-hold'
+        : automaticHold
+          ? 'real-building-wall-auto-hold'
+          : 'real-building-wall-approach',
       async (signal, started) => {
         if (!e.tesla?.active) spawnRobson();
         const t = ensureActive(),
@@ -303,6 +317,7 @@ export function installTeslaQA(
           spawn: NonNullable<ReturnType<typeof world.groundPoseNear>>;
           surfaceId: string;
           heading: number;
+          roofSurfaceId?: string;
         } | null = null;
         for (let index = 0; index < candidates.length && !selected; index++) {
           if (index % 4 === 0) await nextFrame(signal);
@@ -346,7 +361,38 @@ export function installTeslaQA(
               hit.normal[0] * nx + hit.normal[2] * nz < 0.98
             )
               continue;
-            selected = { candidate, spawn, surfaceId: hit.surfaceId, heading };
+            let roofSurfaceId: string | undefined;
+            if (roofTransfer) {
+              const volume = e.data.flightBuildingVolumes[candidate.building],
+                plan = world.planWallToRoof({
+                  pose: {
+                    // Probe before the shipped cornice's lower edge (.395m
+                    // midrise / .47m heritage), inside the planner's early band.
+                    position: [
+                      candidate.midpoint[0] +
+                        nx * (t.shape.halfExtents[1] + t.shape.clearance),
+                      volume.maxY -
+                        t.shape.halfExtents[2] -
+                        t.shape.clearance -
+                        0.5,
+                      candidate.midpoint[1] +
+                        nz * (t.shape.halfExtents[1] + t.shape.clearance),
+                    ],
+                    quaternion: teslaFrame([nx, 0, nz], [0, 1, 0]).quaternion,
+                  },
+                  shape: t.shape,
+                  sourceSurfaceId: hit.surfaceId,
+                });
+              if (!plan) continue;
+              roofSurfaceId = plan.contact.surfaceId;
+            }
+            selected = {
+              candidate,
+              spawn,
+              surfaceId: hit.surfaceId,
+              heading,
+              roofSurfaceId,
+            };
             break;
           }
         }
@@ -392,17 +438,22 @@ export function installTeslaQA(
           );
         t.setView('chase');
         t.clearInput();
-        caseName = automaticHold ? 'building-wall-auto-hold' : 'building-wall';
+        caseName = roofTransfer
+          ? 'building-wall-roof-auto-hold'
+          : automaticHold
+            ? 'building-wall-auto-hold'
+            : 'building-wall';
         sample(started);
         const movingAt = performance.now();
         let lastSample = -Infinity,
           askedPark = false,
           releasedAt: number | null = null,
           heldAt: number | null = null,
+          sawWall = false,
           heldPose: { position: number[]; quaternion: number[] } | null = null;
         while (
           performance.now() - movingAt <
-          (automaticHold ? 35_000 : 20_000)
+          (roofTransfer ? 55_000 : automaticHold ? 35_000 : 20_000)
         ) {
           await nextFrame(signal);
           if (!validFrame() || !t.active)
@@ -412,10 +463,31 @@ export function installTeslaQA(
             sample(started);
             lastSample = performance.now();
           }
-          if (s.mode === 'wall' && !s.attachment) {
-            if (s.contact?.surfaceId !== selected.surfaceId)
+          const atRoof =
+            roofTransfer &&
+            s.mode === 'ground' &&
+            s.contact?.kind === 'roof' &&
+            !s.attachment;
+          if (atRoof || (s.mode === 'wall' && !s.attachment)) {
+            if (
+              !s.contact ||
+              s.contact.surfaceId !==
+                (atRoof ? selected.roofSurfaceId : selected.surfaceId)
+            )
               throw new Error(
-                'A different wall was reached; inspect the real trace',
+                'A different surface was reached; inspect the real trace',
+              );
+            if (roofTransfer && !atRoof) {
+              sawWall = true;
+              t.setAxes(0, 0.14);
+              t.setButton('brake', false);
+              status.textContent =
+                'Tesla QA climbing actual wall toward its proved roof';
+              continue;
+            }
+            if (atRoof && !sawWall)
+              throw new Error(
+                'Rooftop QA did not observe the actual wall approach',
               );
             t.setAxes(0, 0);
             lastRun!.inputs!.throttleReleased = true;
@@ -426,7 +498,9 @@ export function installTeslaQA(
                 throw new Error(
                   'Manual parking cannot qualify as automatic wall hold',
                 );
-              const holding = s.wallHolding && s.velocity.every((v) => v === 0);
+              const holding =
+                (atRoof ? s.surfaceHolding : s.wallHolding) &&
+                s.velocity.every((v) => v === 0);
               if (heldPose) {
                 if (
                   !holding ||
@@ -439,7 +513,7 @@ export function installTeslaQA(
                 lastRun!.verifiedHoldMs = performance.now() - heldAt!;
                 if (lastRun!.verifiedHoldMs >= 8_000) {
                   sample(started);
-                  status.textContent = `Tesla QA automatic hold on ${s.contact.surfaceId}: 8s exact pose, no P or brake`;
+                  status.textContent = `Tesla QA automatic ${atRoof ? 'roof' : 'wall'} hold on ${s.contact!.surfaceId}: 8s exact pose, no P or brake`;
                   return;
                 }
               } else if (holding) {
@@ -471,7 +545,14 @@ export function installTeslaQA(
           } else {
             if (releasedAt !== null)
               throw new Error('Automatic wall hold left the proven wall');
-            if (performance.now() - movingAt >= 20_000)
+            if (roofTransfer && sawWall && s.mode === 'air' && !s.attachment)
+              throw new Error(
+                'Actual wall released without a supported roof transfer',
+              );
+            if (
+              performance.now() - movingAt >=
+              (roofTransfer ? 45_000 : 20_000)
+            )
               throw new Error(
                 'Wall approach timed out; no adhesion pose was forced',
               );
@@ -484,6 +565,63 @@ export function installTeslaQA(
     );
   button('Tesla QA: approach real wall + park', () => approachWall(false));
   button('Tesla QA: approach real wall + auto hold', () => approachWall(true));
+  button('Tesla QA: actual wall to roof + auto hold', () =>
+    approachWall(true, true),
+  );
+  button('Tesla QA: vortex jump', () =>
+    run('public-vortex-jump', async (signal, started) => {
+      if (!e.tesla?.active) spawnRobson();
+      const t = ensureActive();
+      clear();
+      caseName = 'vortex-jump';
+      if (!t.snapshot.vortexAvailable)
+        throw new Error('Vortex is unavailable at this actual pose');
+      t.command('vortex');
+      const launchedAt = performance.now();
+      let lastSample = -Infinity,
+        sawRoll = false,
+        maximumProgress = 0;
+      while (performance.now() - launchedAt < 6_000) {
+        await nextFrame(signal);
+        if (!validFrame() || !t.active)
+          throw new Error('Vortex QA interrupted');
+        const s = t.state!,
+          q = s.quaternion,
+          upY = 1 - 2 * (q[0] * q[0] + q[2] * q[2]);
+        sawRoll ||= upY < -0.5;
+        maximumProgress = Math.max(
+          maximumProgress,
+          s.vortex ? s.vortex.elapsedS / TESLA_VORTEX_LIMITS.durationS : 0,
+        );
+        lastRun!.vortexEvidence = {
+          sawRoll,
+          maximumProgress,
+          uprightAtEnd: upY > 0.99,
+        };
+        if (performance.now() - lastSample >= 100) {
+          sample(started);
+          lastSample = performance.now();
+        }
+        if (step()?.collisions)
+          throw new Error(
+            'Vortex met actual collision geometry; no clear stunt was claimed',
+          );
+        if (
+          sawRoll &&
+          maximumProgress > 0.9 &&
+          !s.vortex &&
+          !s.vortexPreparing &&
+          upY > 0.99
+        ) {
+          sample(started);
+          status.textContent =
+            'Tesla QA public Vortex completed its observed roll upright; actual landing state is recorded';
+          return;
+        }
+      }
+      throw new Error('Public Vortex did not complete a proved observed roll');
+    }),
+  );
   button('Tesla QA: launch fly', () =>
     run('ground-to-flight-input', async (signal, started) => {
       const t = ensureActive();
@@ -566,6 +704,7 @@ export function installTeslaQA(
           world: t?.world?.stats() ?? null,
           shape: t?.shape ? clone(t.shape) : null,
           scenario: lastRun ? clone(lastRun) : null,
+          controlledFixture: vault?.metadata() ?? null,
           settings: { ...e.settings },
           hour: e.clock.hour,
           night: e.uniforms.night.value,
@@ -610,4 +749,8 @@ export function installTeslaQA(
     }
   });
   panel.appendChild(output);
+  return () => {
+    motion?.abort();
+    vault?.dispose();
+  };
 }

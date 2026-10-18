@@ -28,11 +28,16 @@
     "help": "Controls",
     "options": "Tesla options",
     "close": "Close",
-    "desktopHint": "Wall Grip starts on: drive onto walls, then release drive and boost to hold automatically. E: Wall Grip / Free Drive · WASD: drive / steer · Space: jump / hold to rise · Q: descend · Shift: boost · B: brake / hover · P: manual park (optional) · C: view · F: flight · R: safe road",
-    "touchHint": "Wall Grip starts on: drive onto walls, then release drive and boost to hold automatically. Tap the mode button for Free Drive. Steer with the left stick; hold rise, descend or boost. Drag to look; pinch to zoom.",
+    "desktopHint": "Roofs support driving and automatic hold. Wall Grip starts on: drive onto walls, then release drive and boost to hold automatically. E: Wall Grip / Free Drive · WASD: drive / steer · Space: jump / hold to rise · Q: descend · Shift: boost · B: brake / hover · P: manual park (optional) · C: view · F: flight · R: safe road · V: Vortex Jump (B or Space cancels)",
+    "touchHint": "Roofs support driving and automatic hold. Wall Grip starts on: drive onto walls, then release drive and boost to hold automatically. Tap the mode button for Free Drive. Steer with the left stick; hold rise, descend or boost. Drag to look; pinch to zoom. Tap Vortex Jump for a jet barrel roll; brake or rise cancels.",
     "recovered": "Returned to a clear road",
     "boundary": "Map height limit reached",
-    "preparing": "Preparing Tesla…"
+    "preparing": "Preparing Tesla…",
+    "roof": "Roof",
+    "roofHolding": "Roof hold",
+    "vortex": "Vortex Jump",
+    "vortexActive": "Jumping",
+    "vortexHint": "V: jet-powered barrel-roll jump. B or Space cancels."
   },
   "zh-Hant": {
     "ground": "路面",
@@ -63,11 +68,16 @@
     "help": "操作說明",
     "options": "Tesla 選項",
     "close": "關閉",
-    "desktopHint": "預設壁面吸附：直接開上牆面，放開行駛與推進即可自動保持。E 切換壁面吸附／自由行駛 · WASD 行駛／轉向 · Space 飛躍／按住上升 · Q 下降 · Shift 推進 · B 煞車／懸停 · P 手動停車（選用） · C 視角 · F 飛行 · R 安全路面",
-    "touchHint": "預設壁面吸附：直接開上牆面，放開行駛與推進即可自動保持。點模式按鈕可切換自由行駛。左搖桿行駛與轉向，可同時按住上升、下降或推進。拖動畫面環視，雙指縮放。",
+    "desktopHint": "屋頂也可行駛，停止操作會自動保持。 預設壁面吸附：直接開上牆面，放開行駛與推進即可自動保持。E 切換壁面吸附／自由行駛 · WASD 行駛／轉向 · Space 飛躍／按住上升 · Q 下降 · Shift 推進 · B 煞車／懸停 · P 手動停車（選用） · C 視角 · F 飛行 · R 安全路面 · V 旋風飛躍（B 或 Space 中止）",
+    "touchHint": "屋頂也可行駛，停止操作會自動保持。 預設壁面吸附：直接開上牆面，放開行駛與推進即可自動保持。點模式按鈕可切換自由行駛。左搖桿行駛與轉向，可同時按住上升、下降或推進。拖動畫面環視，雙指縮放。 點旋風飛躍可啟動噴流翻滾，煞車或上升可中止。",
     "recovered": "已返回安全路面",
     "boundary": "已達地圖高度上限",
-    "preparing": "正在準備 Tesla…"
+    "preparing": "正在準備 Tesla…",
+    "roof": "屋頂",
+    "roofHolding": "屋頂保持",
+    "vortex": "旋風飛躍",
+    "vortexActive": "旋風飛躍中",
+    "vortexHint": "V 啟動噴流翻滾飛躍，B 或 Space 可中止。"
   },
   "zh-Hans": {
     "ground": "路面",
@@ -98,11 +108,16 @@
     "help": "操作说明",
     "options": "Tesla 选项",
     "close": "关闭",
-    "desktopHint": "默认壁面吸附：直接开上墙面，松开行驶与推进即可自动保持。E 切换壁面吸附／自由行驶 · WASD 行驶／转向 · Space 飞跃／按住上升 · Q 下降 · Shift 推进 · B 刹车／悬停 · P 手动停车（可选） · C 视角 · F 飞行 · R 安全路面",
-    "touchHint": "默认壁面吸附：直接开上墙面，松开行驶与推进即可自动保持。点模式按钮可切换自由行驶。左摇杆行驶与转向，可同时按住上升、下降或推进。拖动画面环视，双指缩放。",
+    "desktopHint": "屋顶也可行驶，停止操作会自动保持。 默认壁面吸附：直接开上墙面，松开行驶与推进即可自动保持。E 切换壁面吸附／自由行驶 · WASD 行驶／转向 · Space 飞跃／按住上升 · Q 下降 · Shift 推进 · B 刹车／悬停 · P 手动停车（可选） · C 视角 · F 飞行 · R 安全路面 · V 旋风飞跃（B 或 Space 中止）",
+    "touchHint": "屋顶也可行驶，停止操作会自动保持。 默认壁面吸附：直接开上墙面，松开行驶与推进即可自动保持。点模式按钮可切换自由行驶。左摇杆行驶与转向，可同时按住上升、下降或推进。拖动画面环视，双指缩放。 点旋风飞跃可启动喷流翻滚，刹车或上升可中止。",
     "recovered": "已返回安全路面",
     "boundary": "已达地图高度上限",
-    "preparing": "正在准备 Tesla…"
+    "preparing": "正在准备 Tesla…",
+    "roof": "屋顶",
+    "roofHolding": "屋顶保持",
+    "vortex": "旋风飞跃",
+    "vortexActive": "旋风飞跃中",
+    "vortexHint": "V 启动喷流翻滚飞跃，B 或 Space 可中止。"
   },
   "fr": {
     "ground": "Route",
@@ -133,11 +148,16 @@
     "help": "Commandes",
     "options": "Options Tesla",
     "close": "Fermer",
-    "desktopHint": "Adhérence murale activée au départ : roulez sur un mur, puis relâchez conduite et boost pour tenir automatiquement. E : adhérence / conduite libre · WASD : conduite · Espace : saut / montée · Q : descente · Maj : boost · B : frein / vol stationnaire · P : parking manuel (facultatif) · C : vue · F : vol · R : route sûre",
-    "touchHint": "Adhérence murale activée au départ : roulez sur un mur, puis relâchez conduite et boost pour tenir automatiquement. Le bouton de mode passe en conduite libre. Pilotez au joystick gauche ; maintenez montée, descente ou boost. Glissez pour regarder, pincez pour zoomer.",
+    "desktopHint": "Les toits permettent aussi de rouler et de tenir automatiquement. Adhérence murale activée au départ : roulez sur un mur, puis relâchez conduite et boost pour tenir automatiquement. E : adhérence / conduite libre · WASD : conduite · Espace : saut / montée · Q : descente · Maj : boost · B : frein / vol stationnaire · P : parking manuel (facultatif) · C : vue · F : vol · R : route sûre · V : Saut Vortex (B ou Espace annule)",
+    "touchHint": "Les toits permettent aussi de rouler et de tenir automatiquement. Adhérence murale activée au départ : roulez sur un mur, puis relâchez conduite et boost pour tenir automatiquement. Le bouton de mode passe en conduite libre. Pilotez au joystick gauche ; maintenez montée, descente ou boost. Glissez pour regarder, pincez pour zoomer. Touchez Saut Vortex pour un tonneau propulsé ; freiner ou monter annule.",
     "recovered": "Retour sur une route dégagée",
     "boundary": "Limite de hauteur atteinte",
-    "preparing": "Préparation de la Tesla…"
+    "preparing": "Préparation de la Tesla…",
+    "roof": "Toit",
+    "roofHolding": "Toit arrêté",
+    "vortex": "Saut Vortex",
+    "vortexActive": "Saut en cours",
+    "vortexHint": "V : saut en tonneau propulsé. B ou Espace annule."
   },
   "es": {
     "ground": "Carretera",
@@ -168,11 +188,16 @@
     "help": "Controles",
     "options": "Opciones Tesla",
     "close": "Cerrar",
-    "desktopHint": "La adherencia al muro empieza activada: conduce sobre las paredes y suelta avance e impulso para sujetarte automáticamente. E: adherencia / conducción libre · WASD: conducir · Espacio: saltar / subir · Q: bajar · Mayús: impulso · B: frenar / flotar · P: aparcar manual (opcional) · C: vista · F: vuelo · R: carretera segura",
-    "touchHint": "La adherencia al muro empieza activada: conduce sobre las paredes y suelta avance e impulso para sujetarte automáticamente. El botón de modo cambia a conducción libre. Dirige con el joystick izquierdo y mantén subir, bajar o impulso. Arrastra para mirar y pellizca para acercar.",
+    "desktopHint": "También puedes conducir y sujetarte automáticamente en los techos. La adherencia al muro empieza activada: conduce sobre las paredes y suelta avance e impulso para sujetarte automáticamente. E: adherencia / conducción libre · WASD: conducir · Espacio: saltar / subir · Q: bajar · Mayús: impulso · B: frenar / flotar · P: aparcar manual (opcional) · C: vista · F: vuelo · R: carretera segura · V: Salto Vórtice (B o Espacio cancela)",
+    "touchHint": "También puedes conducir y sujetarte automáticamente en los techos. La adherencia al muro empieza activada: conduce sobre las paredes y suelta avance e impulso para sujetarte automáticamente. El botón de modo cambia a conducción libre. Dirige con el joystick izquierdo y mantén subir, bajar o impulso. Arrastra para mirar y pellizca para acercar. Toca Salto Vórtice para un giro de tonel; frenar o subir lo cancela.",
     "recovered": "De vuelta en una carretera despejada",
     "boundary": "Límite de altura alcanzado",
-    "preparing": "Preparando Tesla…"
+    "preparing": "Preparando Tesla…",
+    "roof": "Techo",
+    "roofHolding": "Techo fijo",
+    "vortex": "Salto Vórtice",
+    "vortexActive": "Saltando",
+    "vortexHint": "V: salto con giro de tonel propulsado. B o Espacio cancela."
   },
   "de": {
     "ground": "Straße",
@@ -203,11 +228,16 @@
     "help": "Steuerung",
     "options": "Tesla-Optionen",
     "close": "Schließen",
-    "desktopHint": "Wandhaftung ist anfangs aktiv: an Wände fahren, dann Fahrt und Schub loslassen, um automatisch zu halten. E: Wandhaftung / freies Fahren · WASD: fahren · Leertaste: springen / steigen · Q: sinken · Umschalt: Schub · B: bremsen / schweben · P: manuell parken (optional) · C: Ansicht · F: Flug · R: sichere Straße",
-    "touchHint": "Wandhaftung ist anfangs aktiv: an Wände fahren, dann Fahrt und Schub loslassen, um automatisch zu halten. Die Modustaste schaltet auf freies Fahren. Links lenken; Steigen, Sinken oder Schub halten. Ziehen zum Umsehen, mit zwei Fingern zoomen.",
+    "desktopHint": "Auch Dächer erlauben Fahren und automatisches Halten. Wandhaftung ist anfangs aktiv: an Wände fahren, dann Fahrt und Schub loslassen, um automatisch zu halten. E: Wandhaftung / freies Fahren · WASD: fahren · Leertaste: springen / steigen · Q: sinken · Umschalt: Schub · B: bremsen / schweben · P: manuell parken (optional) · C: Ansicht · F: Flug · R: sichere Straße · V: Wirbelsprung (B oder Leertaste bricht ab)",
+    "touchHint": "Auch Dächer erlauben Fahren und automatisches Halten. Wandhaftung ist anfangs aktiv: an Wände fahren, dann Fahrt und Schub loslassen, um automatisch zu halten. Die Modustaste schaltet auf freies Fahren. Links lenken; Steigen, Sinken oder Schub halten. Ziehen zum Umsehen, mit zwei Fingern zoomen. Wirbelsprung antippen für eine Fassrolle; Bremsen oder Steigen bricht ab.",
     "recovered": "Zurück auf einer freien Straße",
     "boundary": "Höhenlimit der Karte erreicht",
-    "preparing": "Tesla wird vorbereitet…"
+    "preparing": "Tesla wird vorbereitet…",
+    "roof": "Dach",
+    "roofHolding": "Dachhalt",
+    "vortex": "Wirbelsprung",
+    "vortexActive": "Wirbelsprung läuft",
+    "vortexHint": "V: düsengetriebener Sprung mit Fassrolle. B oder Leertaste bricht ab."
   },
   "ja": {
     "ground": "道路",
@@ -238,11 +268,16 @@
     "help": "操作方法",
     "options": "Tesla 設定",
     "close": "閉じる",
-    "desktopHint": "壁面吸着は初期状態で有効です。そのまま壁を走行し、アクセルとブーストを離すと自動保持します。E：壁面吸着／自由走行 · WASD：運転 · Space：ジャンプ／長押しで上昇 · Q：下降 · Shift：推進 · B：ブレーキ／静止 · P：手動駐車（任意） · C：視点 · F：飛行 · R：道路へ",
-    "touchHint": "壁面吸着は初期状態で有効です。そのまま壁を走行し、アクセルとブーストを離すと自動保持します。モードボタンで自由走行に切り替えます。左スティックで運転しながら上昇・下降・推進を長押しできます。ドラッグで見回し、ピンチでズーム。",
+    "desktopHint": "屋上でも走行でき、操作を離すと自動保持します。 壁面吸着は初期状態で有効です。そのまま壁を走行し、アクセルとブーストを離すと自動保持します。E：壁面吸着／自由走行 · WASD：運転 · Space：ジャンプ／長押しで上昇 · Q：下降 · Shift：推進 · B：ブレーキ／静止 · P：手動駐車（任意） · C：視点 · F：飛行 · R：道路へ · V：旋風ジャンプ（B または Space で中止）",
+    "touchHint": "屋上でも走行でき、操作を離すと自動保持します。 壁面吸着は初期状態で有効です。そのまま壁を走行し、アクセルとブーストを離すと自動保持します。モードボタンで自由走行に切り替えます。左スティックで運転しながら上昇・下降・推進を長押しできます。ドラッグで見回し、ピンチでズーム。 旋風ジャンプで噴射ロールを開始します。ブレーキまたは上昇で中止できます。",
     "recovered": "安全な道路に戻りました",
     "boundary": "地図の高度上限です",
-    "preparing": "Tesla を準備中…"
+    "preparing": "Tesla を準備中…",
+    "roof": "屋上",
+    "roofHolding": "屋上保持",
+    "vortex": "旋風ジャンプ",
+    "vortexActive": "旋風中",
+    "vortexHint": "V：噴射を使うバレルロールジャンプ。B または Space で中止。"
   },
   "ko": {
     "ground": "도로",
@@ -273,11 +308,16 @@
     "help": "조작법",
     "options": "Tesla 옵션",
     "close": "닫기",
-    "desktopHint": "벽면 흡착이 기본으로 켜져 있습니다. 벽으로 주행한 뒤 가속과 부스트를 놓으면 자동으로 유지됩니다. E: 벽면 흡착 / 자유 주행 · WASD: 운전 · Space: 도약 / 길게 상승 · Q: 하강 · Shift: 추진 · B: 제동 / 정지 · P: 수동 주차(선택) · C: 시점 · F: 비행 · R: 도로 복귀",
-    "touchHint": "벽면 흡착이 기본으로 켜져 있습니다. 벽으로 주행한 뒤 가속과 부스트를 놓으면 자동으로 유지됩니다. 모드 버튼으로 자유 주행을 선택합니다. 왼쪽 스틱으로 조종하며 상승·하강·추진을 동시에 누를 수 있습니다. 드래그로 둘러보고 핀치로 확대합니다.",
+    "desktopHint": "옥상에서도 주행하고 자동으로 위치를 유지할 수 있습니다. 벽면 흡착이 기본으로 켜져 있습니다. 벽으로 주행한 뒤 가속과 부스트를 놓으면 자동으로 유지됩니다. E: 벽면 흡착 / 자유 주행 · WASD: 운전 · Space: 도약 / 길게 상승 · Q: 하강 · Shift: 추진 · B: 제동 / 정지 · P: 수동 주차(선택) · C: 시점 · F: 비행 · R: 도로 복귀 · V: 회오리 도약(B 또는 Space로 취소)",
+    "touchHint": "옥상에서도 주행하고 자동으로 위치를 유지할 수 있습니다. 벽면 흡착이 기본으로 켜져 있습니다. 벽으로 주행한 뒤 가속과 부스트를 놓으면 자동으로 유지됩니다. 모드 버튼으로 자유 주행을 선택합니다. 왼쪽 스틱으로 조종하며 상승·하강·추진을 동시에 누를 수 있습니다. 드래그로 둘러보고 핀치로 확대합니다. 회오리 도약을 누르면 제트 롤을 시작합니다. 제동 또는 상승으로 취소합니다.",
     "recovered": "안전한 도로로 돌아왔습니다",
     "boundary": "지도 고도 제한에 도달했습니다",
-    "preparing": "Tesla 준비 중…"
+    "preparing": "Tesla 준비 중…",
+    "roof": "옥상",
+    "roofHolding": "옥상 유지",
+    "vortex": "회오리 도약",
+    "vortexActive": "도약 중",
+    "vortexHint": "V: 제트 배럴 롤 도약. B 또는 Space로 취소합니다."
   },
   "uk": {
     "ground": "Дорога",
@@ -308,11 +348,16 @@
     "help": "Керування",
     "options": "Параметри Tesla",
     "close": "Закрити",
-    "desktopHint": "Зчеплення зі стіною ввімкнене від початку: їдьте на стіну, потім відпустіть рух і тягу для автоматичного утримання. E: зчеплення / вільний рух · WASD: рух · Space: стрибок / підйом · Q: спуск · Shift: тяга · B: гальмо / зависання · P: ручне паркування (за бажанням) · C: камера · F: політ · R: дорога",
-    "touchHint": "Зчеплення зі стіною ввімкнене від початку: їдьте на стіну, потім відпустіть рух і тягу для автоматичного утримання. Кнопка режиму перемикає на вільний рух. Керуйте лівим джойстиком, утримуйте підйом, спуск або тягу. Перетягуйте для огляду, зводьте пальці для масштабу.",
+    "desktopHint": "На дахах теж можна їхати й автоматично утримуватися. Зчеплення зі стіною ввімкнене від початку: їдьте на стіну, потім відпустіть рух і тягу для автоматичного утримання. E: зчеплення / вільний рух · WASD: рух · Space: стрибок / підйом · Q: спуск · Shift: тяга · B: гальмо / зависання · P: ручне паркування (за бажанням) · C: камера · F: політ · R: дорога · V: вихровий стрибок (B або Space скасовує)",
+    "touchHint": "На дахах теж можна їхати й автоматично утримуватися. Зчеплення зі стіною ввімкнене від початку: їдьте на стіну, потім відпустіть рух і тягу для автоматичного утримання. Кнопка режиму перемикає на вільний рух. Керуйте лівим джойстиком, утримуйте підйом, спуск або тягу. Перетягуйте для огляду, зводьте пальці для масштабу. Натисніть «Вихровий стрибок» для реактивної бочки; гальмо або підйом скасовує.",
     "recovered": "Повернуто на вільну дорогу",
     "boundary": "Досягнуто межі висоти карти",
-    "preparing": "Підготовка Tesla…"
+    "preparing": "Підготовка Tesla…",
+    "roof": "Дах",
+    "roofHolding": "Утримання на даху",
+    "vortex": "Вихровий стрибок",
+    "vortexActive": "Стрибок",
+    "vortexHint": "V: реактивний стрибок із бочкою. B або Space скасовує."
   },
   "ru": {
     "ground": "Дорога",
@@ -343,10 +388,15 @@
     "help": "Управление",
     "options": "Параметры Tesla",
     "close": "Закрыть",
-    "desktopHint": "Сцепление со стеной включено по умолчанию: въезжайте на стену, затем отпустите движение и тягу для автоматического удержания. E: сцепление / свободная езда · WASD: движение · Space: прыжок / подъём · Q: снижение · Shift: тяга · B: тормоз / зависание · P: ручная парковка (по желанию) · C: камера · F: полёт · R: дорога",
-    "touchHint": "Сцепление со стеной включено по умолчанию: въезжайте на стену, затем отпустите движение и тягу для автоматического удержания. Кнопка режима включает режим «Свободная езда». Управляйте левым джойстиком, удерживайте подъём, спуск или тягу. Перетаскивайте для обзора, сводите пальцы для масштаба.",
+    "desktopHint": "На крышах тоже можно ездить и автоматически удерживаться. Сцепление со стеной включено по умолчанию: въезжайте на стену, затем отпустите движение и тягу для автоматического удержания. E: сцепление / свободная езда · WASD: движение · Space: прыжок / подъём · Q: снижение · Shift: тяга · B: тормоз / зависание · P: ручная парковка (по желанию) · C: камера · F: полёт · R: дорога · V: вихревой прыжок (B или Space отменяет)",
+    "touchHint": "На крышах тоже можно ездить и автоматически удерживаться. Сцепление со стеной включено по умолчанию: въезжайте на стену, затем отпустите движение и тягу для автоматического удержания. Кнопка режима включает режим «Свободная езда». Управляйте левым джойстиком, удерживайте подъём, спуск или тягу. Перетаскивайте для обзора, сводите пальцы для масштаба. Нажмите «Вихревой прыжок» для реактивной бочки; тормоз или подъём отменяет.",
     "recovered": "Возврат на свободную дорогу",
     "boundary": "Достигнут предел высоты карты",
-    "preparing": "Подготовка Tesla…"
+    "preparing": "Подготовка Tesla…",
+    "roof": "Крыша",
+    "roofHolding": "Удержание на крыше",
+    "vortex": "Вихревой прыжок",
+    "vortexActive": "Прыжок",
+    "vortexHint": "V: реактивный прыжок с бочкой. B или Space отменяет."
   }
 }

@@ -290,3 +290,56 @@ test('integrated bus checkpoint saves live runtime/render data with a unique nam
     for (let i = 0; i < 6; i++) await Promise.resolve();
   });
 });
+
+test('the local QA panel can hide for native controls and reopen without invoking simulation APIs', async () => {
+  await withDOM(async ({ document }) => {
+    let inputCalls = 0;
+    const e = {
+      data: {},
+      tesla: new Proxy(
+        {},
+        {
+          get() {
+            inputCalls++;
+            throw new Error('panel visibility touched Tesla');
+          },
+        },
+      ),
+      renderScene() {},
+      renderer: {
+        getContext: () => ({
+          getExtension: () => null,
+          getParameter: () => 'test-renderer',
+          RENDERER: 0,
+        }),
+      },
+    };
+    installVisualQA(e);
+    const wrapper = document.body.children[0],
+      panel = wrapper.children.find(
+        (element) => element.id === 'visual-qa-panel',
+      ),
+      show = wrapper.children.find(
+        (element) => element.id === 'visual-qa-show',
+      );
+    assert(panel && show);
+    assert.equal(wrapper.id, 'visual-qa-root');
+    assert.match(show.style.cssText, /display:none/);
+    assert.match(show.style.cssText, /position:fixed/);
+    assert.match(show.style.cssText, /min-height:48px/);
+    for (let repeat = 0; repeat < 3; repeat++) {
+      click(wrapper, 'Hide QA panel');
+      assert.equal(panel.style.display, 'none');
+      assert.equal(show.style.display, '');
+      click(wrapper, 'Show QA panel');
+      assert.equal(panel.style.display, '');
+      assert.equal(show.style.display, 'none');
+    }
+    assert.equal(inputCalls, 0);
+    assert.equal(
+      wrapper.children.length,
+      2,
+      'one removable QA wrapper owns both elements',
+    );
+  });
+});
