@@ -179,7 +179,7 @@ interface Props {
   onBegin(route: DiscoveryRoute, next: number): boolean;
   onBeginLab(): boolean;
   onTargetChange(target: DiscoveryTarget | null): void;
-  onModalActiveChange?(active: boolean): void;
+  onModalActiveChange?: (active: boolean) => void;
 }
 function DiscoveryMoveButton({
   city,

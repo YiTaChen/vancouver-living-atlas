@@ -1,0 +1,31 @@
+{
+  "baselineRevision": "3baf67dac8cec0007c4122ad960eee6edde19f97",
+  "baselineTotal": 221,
+  "beforeFixTotal": 227,
+  "currentTotal": 221,
+  "delta": 0,
+  "added": [],
+  "removed": [],
+  "pageBaseline": 40,
+  "pageCurrent": 40,
+  "discoveryBaseline": 6,
+  "discoveryCurrent": 6,
+  "typecheck": "pass",
+  "tests": {
+    "files": [
+      "tests/tesla-controller.test.mjs",
+      "tests/placement.test.mjs",
+      "tests/i18n.test.mjs"
+    ],
+    "pass": 72,
+    "fail": 0
+  },
+  "runtimeCoreChanged": false,
+  "comparisonMethod": "Diagnostic multiset by file/rule/message; line numbers excluded because additions move unchanged source lines.",
+  "uiFixes": [
+    "Semantic output status element",
+    "Explicit void for async event dispatch",
+    "Callback property type preserves JS output",
+    "TeslaController passed from ready-synchronised React state instead of reading engine ref during render"
+  ]
+}

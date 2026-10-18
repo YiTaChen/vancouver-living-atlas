@@ -50,6 +50,7 @@ import { FlightControls, flightText } from '@/components/flight-controls';
 import { EMPTY_FLIGHT, type FlightSnapshot } from '@/lib/city/flight-snapshot';
 import { TeslaControls, teslaText } from '@/components/tesla-controls';
 import { EMPTY_TESLA, type TeslaSnapshot } from '@/lib/city/tesla-snapshot';
+import type { TeslaController } from '@/lib/city/tesla-controller';
 import { TravelJoystick } from '@/components/travel-joystick';
 import { BusVisitPanel } from '@/components/bus-visit-panel';
 import { SkyTrainCabinPanel } from '@/components/skytrain-cabin-panel';
@@ -155,6 +156,8 @@ function Home() {
     engine = useRef<CityEngine | null>(null);
   const [flight, setFlight] = useState<FlightSnapshot>(EMPTY_FLIGHT);
   const [tesla, setTesla] = useState<TeslaSnapshot>(EMPTY_TESLA);
+  const [teslaController, setTeslaController] =
+    useState<TeslaController | null>(null);
   const [teslaPreparing, setTeslaPreparing] = useState(false);
   const teslaEntering = useRef(false);
   const [touchUI, setTouchUI] = useState(false);
@@ -327,6 +330,7 @@ function Home() {
     };
     if (city.tesla) {
       city.tesla.onChange = setTesla;
+      setTeslaController(city.tesla);
       setTesla(city.tesla.snapshot);
     }
     city.onTeslaMode = (mode) => {
@@ -667,7 +671,7 @@ function Home() {
     if (teslaEntering.current) return;
     if (!finishBusVisit()) return;
     if (mode === 'tesla') {
-      beginTesla();
+      void beginTesla();
       return;
     }
     if (mode === 'flight') {
@@ -786,9 +790,9 @@ function Home() {
       className={`atlas ${clean ? 'clean' : ''} ${settings.mode !== 'orbit' ? 'street-mode' : ''} ${placing || flight.placing ? 'placement-mode' : ''} ${flight.placing ? 'flight-placement-mode' : ''} ${settings.mode === 'flight' ? 'flight-mode' : ''} ${settings.mode === 'tesla' ? 'tesla-mode' : ''} ${touchUI ? 'touch-ui' : ''} ${touchUI && mobileHudHidden ? 'mobile-hud-hidden' : ''} ${mobilePanel ? `mobile-${mobilePanel}-open` : ''}`}
     >
       {teslaPreparing && (
-        <div className="tesla-preparing glass ui-chrome" role="status">
+        <output className="tesla-preparing glass ui-chrome">
           <Rocket size={19} /> {teslaText(locale, 'preparing')}
-        </div>
+        </output>
       )}
       {stats.trafficStop && settings.mode === 'drive' && (
         <div role="status" className="traffic-stop-caption glass">
@@ -880,7 +884,7 @@ function Home() {
         onCloseOptions={() => setMobilePanel(null)}
       />
       <TeslaControls
-        controller={engine.current?.tesla ?? null}
+        controller={teslaController}
         state={tesla}
         locale={locale}
         touch={touchUI}

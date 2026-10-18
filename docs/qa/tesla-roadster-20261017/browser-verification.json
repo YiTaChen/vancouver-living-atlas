@@ -348,5 +348,45 @@
     "node": "v26.0.0",
     "three": "185",
     "ciNodeVersion": "24"
+  },
+  "sourceFingerprintScope": "Extended physics/performance and responsive acceptance before final UI-only lint fixes; see postUiLintSmoke for final UI fingerprint.",
+  "postUiLintSmoke": {
+    "sourceFingerprint": "a7eff8ef5530e9c7b348fdfe8a318762cbf41ac8d4f6e68f4e31db3287700ef5",
+    "captureParentRevision": "492714a",
+    "changes": [
+      "app/page.tsx: ready-synchronised controller state, semantic status output, explicit void event dispatch",
+      "components/discovery-panel.tsx: callback property type (erased from JS)"
+    ],
+    "coreExecutionHashesUnchanged": true,
+    "records": [
+      "postlint-public-flight.json",
+      "postlint-wall-chase.json",
+      "postlint-wall-cockpit.json"
+    ],
+    "nativeDesktop": [
+      "public Tesla radio enter",
+      "drive",
+      "jump/climb",
+      "brake",
+      "C cockpit"
+    ],
+    "nativeMobile320x568": [
+      "hold upward thrust detaches wall and gains altitude",
+      "brake",
+      "options",
+      "force high",
+      "recover to verified asphalt",
+      "Orbit to Tesla ownership return"
+    ],
+    "mobileRecoveryContact": "ground:asphalt:3:face:7946",
+    "warningsOrErrors": 0,
+    "targetedRegressionTestsPassed": 72,
+    "typescript": "pass",
+    "wholeRepositoryLint": {
+      "baseline": 221,
+      "final": 221,
+      "newDiagnostics": 0,
+      "comparison": "file/rule/message multiset, excludes shifted line numbers"
+    }
   }
 }
