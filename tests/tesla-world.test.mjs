@@ -578,8 +578,8 @@ test('minimum ground heave uses only available wheel travel and measured body cl
   const modelShape = createTeslaRoadsterShape();
   for (const [height, ceiling, expectedHeave] of [
     [0, false, 0],
-    [0.1, false, 0.02],
-    [0.12, false, 0.04],
+    [0.1, false, 0.015],
+    [0.12, false, 0.035],
     [0.14, false, null],
     [0.1, true, null],
   ]) {
@@ -913,75 +913,89 @@ test('ordinary departure never ignores material on its exact source and never ac
   }
 });
 
-test('cached source XZ bounds retain wheel height contacts through the full fifty-micrometre edge tolerance and keep permissions live', () => {
-  const modelShape = createTeslaRoadsterShape(),
-    p = pose(0, 0.68, 0),
-    wheel = modelShape.groundSupport.wheelContacts[0];
-  for (const axis of [0, 2])
-    for (const sign of [-1, 1])
-      for (const gap of [0, 49e-6, 49.999e-6, 50e-6, 50.001e-6, 51e-6, 1e-3]) {
-        const floor = ground(),
-          floorFaces = floor.load(
-            new THREE.Box3(
-              new THREE.Vector3(-100, -1, -100),
-              new THREE.Vector3(100, 1, 100),
+test('cached XZ bounds preserve point/lateral seam tolerance and circular longitudinal contact while permissions remain live', () => {
+  for (const circular of [false, true]) {
+    const modelShape = createTeslaRoadsterShape(),
+      p = pose(0, 0.68, 0),
+      wheel = modelShape.groundSupport.wheelContacts[0];
+    if (!circular) delete modelShape.groundSupport.wheelRadius;
+    for (const axis of [0, 2])
+      for (const sign of [-1, 1])
+        for (const gap of [
+          0, 49e-6, 49.999e-6, 50e-6, 50.001e-6, 51e-6, 1e-3,
+        ]) {
+          const floor = ground(),
+            floorFaces = floor.load(
+              new THREE.Box3(
+                new THREE.Vector3(-100, -1, -100),
+                new THREE.Vector3(100, 1, 100),
+              ),
+            );
+          for (const face of floorFaces) face.supportGroup = 'ground:0';
+          const other = axis === 0 ? 2 : 0,
+            a = [wheel[0], 0.06, wheel[2]],
+            b = [...a],
+            c = [...a];
+          a[axis] -= sign * gap;
+          b[axis] -= sign * gap;
+          c[axis] -= sign * (gap + 0.1);
+          a[other] -= 0.1;
+          b[other] += 0.1;
+          const upper = triangleFace(
+              'wheel-adjacent-upper',
+              'wheel-adjacent-upper',
+              'ground',
+              [a, b, c],
+              true,
+              'ground:0',
+              [0, 1, 0],
             ),
-          );
-        for (const face of floorFaces) face.supportGroup = 'ground:0';
-        const other = axis === 0 ? 2 : 0,
-          a = [wheel[0], 0.06, wheel[2]],
-          b = [...a],
-          c = [...a];
-        a[axis] -= sign * gap;
-        b[axis] -= sign * gap;
-        c[axis] -= sign * (gap + 0.1);
-        a[other] -= 0.1;
-        b[other] += 0.1;
-        const upper = triangleFace(
-            'wheel-adjacent-upper',
-            'wheel-adjacent-upper',
-            'ground',
-            [a, b, c],
-            true,
-            'ground:0',
-            [0, 1, 0],
-          ),
-          world = new TeslaWorld({
-            sources: [floor, fixedFacesSource('wheel-adjacent-upper', [upper])],
-          }),
-          query = {
-            pose: p,
-            shape: modelShape,
-            maxDistance: 1,
-            preferredSurfaceId: floorFaces[0].surfaceId,
-            adhesion: false,
-          };
-        const outsideTolerance = Math.abs(wheel[axis] - a[axis]) > 50e-6;
-        try {
-          assert.equal(
-            !!world.support(query),
-            outsideTolerance,
-            `axis ${axis} / sign ${sign} / ${gap}m gap: the actual 6cm upper source is detected through 50µm, exceeding the unchanged 5cm wheel travel`,
-          );
-          assert(
-            world.support(query, (face) => face.surfaceId !== upper.surfaceId),
-            'caller permissions still filter every cached source',
-          );
-          upper.enabled = () => false;
-          assert(
-            world.support(query),
-            'a cached but disabled upper source supplies no wheel height',
-          );
-          upper.enabled = () => true;
-          assert.equal(
-            !!world.support(query),
-            outsideTolerance,
-            'warming geometry does not change source qualification or edge tolerance',
-          );
-        } finally {
-          world.dispose();
+            world = new TeslaWorld({
+              sources: [
+                floor,
+                fixedFacesSource('wheel-adjacent-upper', [upper]),
+              ],
+            }),
+            query = {
+              pose: p,
+              shape: modelShape,
+              maxDistance: 1,
+              preferredSurfaceId: floorFaces[0].surfaceId,
+              adhesion: false,
+            };
+          const outsideTolerance = Math.abs(wheel[axis] - a[axis]) > 50e-6;
+          // All tested longitudinal gaps are below 1mm, inside the real 35cm
+          // tread arc. That contact extends ahead/behind, never laterally.
+          const outsideContact = outsideTolerance && (!circular || axis === 0);
+          try {
+            assert.equal(
+              !!world.support(query),
+              outsideContact,
+              `circular ${circular} / axis ${axis} / sign ${sign} / ${gap}m gap: physical upper tread contact exceeds the unchanged 5cm wheel travel`,
+            );
+            assert(
+              world.support(
+                query,
+                (face) => face.surfaceId !== upper.surfaceId,
+              ),
+              'caller permissions still filter every cached source',
+            );
+            upper.enabled = () => false;
+            assert(
+              world.support(query),
+              'a cached but disabled upper source supplies no wheel height',
+            );
+            upper.enabled = () => true;
+            assert.equal(
+              !!world.support(query),
+              outsideContact,
+              'warming geometry does not change source qualification or edge tolerance',
+            );
+          } finally {
+            world.dispose();
+          }
         }
-      }
+  }
 });
 
 test('a real preferred ground contact just outside collision bounds is re-proved without granting missing, distant, protected, disabled or no-ignore permissions', () => {

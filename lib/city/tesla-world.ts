@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { teslaTyreSupportHeight } from './tesla-tyre-support';
 import type {
   TeslaContact,
   TeslaGroundDepartureQuery,
@@ -104,7 +105,12 @@ function validShape(shape: TeslaShape) {
         ground.chassisClearance < 2 * shape.halfExtents[1] &&
         Number.isFinite(ground.suspensionTravel) &&
         ground.suspensionTravel >= 0 &&
-        ground.suspensionTravel <= 0.05))
+        ground.suspensionTravel <= 0.05 &&
+        (ground.wheelRadius === undefined ||
+          (Number.isFinite(ground.wheelRadius) &&
+            ground.wheelRadius > 0 &&
+            ground.wheelRadius <=
+              Math.min(1, shape.halfExtents[1] + shape.clearance)))))
   );
 }
 function basis(pose: TeslaPose) {
@@ -222,6 +228,37 @@ function groundHeightAt(
       height = y;
   }
   return Number.isFinite(height) ? height : null;
+}
+/** A circular tread may meet a finite curb edge before the axle crosses it.
+ * A real floor directly below the tyre datum remains mandatory; this does not
+ * bridge holes or replace the separate continuous floor/body-route proofs. */
+function tyreHeightAt(
+  faces: readonly TeslaFace[],
+  triangles: readonly TeslaFace['triangle'][],
+  x: number,
+  z: number,
+  forward: THREE.Vector3,
+  shape: TeslaShape,
+  minY: number,
+  maxY: number,
+) {
+  const baseHeight = groundHeightAt(faces, x, z, minY, maxY),
+    radius = shape.groundSupport?.wheelRadius;
+  if (baseHeight === null || radius === undefined) return baseHeight;
+  const horizontal = Math.hypot(forward.x, forward.z);
+  if (horizontal < 0.92) return null;
+  return (
+    teslaTyreSupportHeight({
+      triangles,
+      positionXZ: [x, z],
+      headingXZ: [forward.x / horizontal, forward.z / horizontal],
+      radius,
+      minY,
+      maxY,
+      baseHeight,
+      longitudinalGrade: forward.y / horizontal,
+    }) ?? baseHeight
+  ); // Keep only the already-proved point's existing Float32 seam tolerance.
 }
 function connectedGroundFaces(start: TeslaFace, faces: readonly TeslaFace[]) {
   const owners = new Map<string, { face: TeslaFace; edge: number }[]>();
@@ -1477,16 +1514,20 @@ export class TeslaWorld implements TeslaWorldContract {
           face.normal[1] > 0.92 &&
           accepts?.(face) !== false,
       );
+      const triangles = floors.map((face) => face.triangle);
       return (wheelsProven = ground.wheelContacts.every((wheel) => {
         const p = center
             .clone()
             .addScaledVector(axes[0], wheel[0])
             .addScaledVector(axes[1], wheel[1])
             .addScaledVector(axes[2], wheel[2]),
-          height = groundHeightAt(
+          height = tyreHeightAt(
             floors,
+            triangles,
             p.x,
             p.z,
+            axes[2],
+            query.shape,
             center.y - radius,
             center.y + radius,
           );
@@ -1592,6 +1633,14 @@ export class TeslaWorld implements TeslaWorldContract {
       const tyres = ordinaryGround
         ? query.shape.groundSupport?.wheelContacts
         : undefined;
+      const tyreProjectionDeterminant =
+        axes[0].x * axes[2].z - axes[2].x * axes[0].z;
+      if (
+        tyres &&
+        (!Number.isFinite(tyreProjectionDeterminant) ||
+          tyreProjectionDeterminant <= EPS)
+      )
+        continue;
       const minX = tyres ? Math.min(...tyres.map((p) => p[0])) : 0;
       const maxX = tyres ? Math.max(...tyres.map((p) => p[0])) : 0;
       const minZ = tyres ? Math.min(...tyres.map((p) => p[2])) : 0;
@@ -1696,6 +1745,16 @@ export class TeslaWorld implements TeslaWorldContract {
         const dx = p[0] - footprintPoint.x,
           dy = p[1] - footprintPoint.y,
           dz = p[2] - footprintPoint.z;
+        if (tyres) {
+          // Ordinary floors form a height field. Project its union in XZ onto
+          // the actual tyre parallelogram: a curb's vertical rise is not a
+          // horizontal hole. Wheel heights and the complete body remain
+          // independently proved; true XZ gaps retain their exact intervals.
+          return [
+            (axes[2].z * dx - axes[2].x * dz) / tyreProjectionDeterminant,
+            (axes[0].x * dz - axes[0].z * dx) / tyreProjectionDeterminant,
+          ];
+        }
         return [
           dx * axes[0].x + dy * axes[0].y + dz * axes[0].z,
           dx * axes[2].x + dy * axes[2].y + dz * axes[2].z,
@@ -1775,6 +1834,9 @@ export class TeslaWorld implements TeslaWorldContract {
       !ground ||
       !validShape(query.shape) ||
       !finitePose(query.pose) ||
+      (query.from !== undefined &&
+        (!finitePose(query.from) ||
+          this.positionAllowed?.(query.from.position) === false)) ||
       !Number.isFinite(query.maxAdjustmentM) ||
       query.maxAdjustmentM < 0 ||
       query.maxAdjustmentM > 1
@@ -1800,11 +1862,15 @@ export class TeslaWorld implements TeslaWorldContract {
     );
     const allowedIds = new Set(faces.map((face) => face.surfaceId));
     if (!allowedIds.has(query.preferredSurfaceId)) return null;
-    const sample = (x: number, z: number) => {
-      const height = groundHeightAt(
+    const triangles = faces.map((face) => face.triangle);
+    const sample = (x: number, z: number, forward = initialAxes[2]) => {
+      const height = tyreHeightAt(
         faces,
+        triangles,
         x,
         z,
+        forward,
+        query.shape,
         original.y - radius - query.maxAdjustmentM,
         original.y + query.maxAdjustmentM,
       );
@@ -1845,6 +1911,44 @@ export class TeslaWorld implements TeslaWorldContract {
       }
       return null;
     };
+    let remainingRouteCandidates = 12;
+    const routeFit = (
+      candidate: TeslaPose,
+      contact: TeslaContact,
+      maximumHeave: number,
+    ): TeslaGroundFit | null => {
+      if (!query.from) return { pose: candidate, contact };
+      // A static lowest fit can graze a curb during rotation. Search only the
+      // already-proved wheel-travel interval; each candidate must independently
+      // prove support, the body and the entire unchanged continuous sweep.
+      // These are candidate choices, not sampled collision permission.
+      for (const fraction of [0, 0.1, 0.25, 0.5, 0.75, 1]) {
+        if (remainingRouteCandidates-- <= 0) return null;
+        if (fraction && maximumHeave <= EPS) break;
+        const raised: TeslaPose = {
+          position: [
+            candidate.position[0],
+            candidate.position[1] + Math.max(0, maximumHeave) * fraction,
+            candidate.position[2],
+          ],
+          quaternion: candidate.quaternion,
+        };
+        if (this.positionAllowed?.(raised.position) === false) continue;
+        const proof = fraction ? contactFor(raised) : contact;
+        if (
+          proof &&
+          !bodyCollision(raised) &&
+          !this.sweep({
+            from: query.from,
+            to: raised,
+            shape: query.shape,
+            ignoreSurfaceId: query.preferredSurfaceId,
+          })
+        )
+          return { pose: raised, contact: proof };
+      }
+      return null;
+    };
     const fitOls = (): TeslaGroundFit | null => {
       let fitted: TeslaPose = query.pose,
         axes = initialAxes;
@@ -1857,7 +1961,7 @@ export class TeslaWorld implements TeslaWorldContract {
             .addScaledVector(axes[0], wheel[0])
             .addScaledVector(axes[1], wheel[1])
             .addScaledVector(axes[2], wheel[2]);
-          const hit = sample(p.x, p.z);
+          const hit = sample(p.x, p.z, axes[2]);
           if (!hit) return null;
           points.push(hit);
         }
@@ -1919,7 +2023,7 @@ export class TeslaWorld implements TeslaWorldContract {
             .addScaledVector(axes[0], wheel[0])
             .addScaledVector(axes[1], wheel[1])
             .addScaledVector(axes[2], wheel[2]),
-          actual = sample(p.x, p.z);
+          actual = sample(p.x, p.z, axes[2]);
         if (
           !actual ||
           Math.abs(actual.y - p.y) * axes[1].y >
@@ -1934,7 +2038,7 @@ export class TeslaWorld implements TeslaWorldContract {
       const contact = contactFor(fitted);
       if (!contact) return null;
       const blocked = bodyCollision(fitted);
-      if (!blocked) return { pose: fitted, contact };
+      if (!blocked) return routeFit(fitted, contact, maximumHeave);
       if (
         blocked === 'inside' ||
         blocked.kind !== 'ground' ||
@@ -1978,7 +2082,7 @@ export class TeslaWorld implements TeslaWorldContract {
       if (this.positionAllowed?.(raised.position) === false) return null;
       const raisedContact = contactFor(raised);
       return raisedContact && !bodyCollision(raised)
-        ? { pose: raised, contact: raisedContact }
+        ? routeFit(raised, raisedContact, maximumHeave - heave)
         : null;
     };
     const fitted = fitOls();
@@ -2042,8 +2146,10 @@ export class TeslaWorld implements TeslaWorldContract {
       };
       if (this.positionAllowed?.(candidate.position) === false) continue;
       const contact = contactFor(candidate);
-      if (contact && !bodyCollision(candidate))
-        return { pose: candidate, contact };
+      if (contact && !bodyCollision(candidate)) {
+        const routed = routeFit(candidate, contact, range - height);
+        if (routed) return routed;
+      }
     }
     return null;
   }

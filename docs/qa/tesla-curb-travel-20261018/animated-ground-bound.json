@@ -1,0 +1,53 @@
+{
+  "policy": "Every nonwheel vertex at every LOD; static body exact. Wing/yoke use full-360 degree conservative vertex orbit radii, wing translation minimum .74, yoke pivot .8. Fan rotation around Y preserves Y exactly. Physical model level only, excludes separate cold-gas visual effects.",
+  "rows": [
+    {
+      "quality": "low",
+      "staticMinimumY": 0.08767354488372803,
+      "wingContinuousLowerY": 0.5726004426851965,
+      "yokeContinuousLowerY": 0.6070450383332763,
+      "fanContinuousLowerY": 0.1249999988079071,
+      "staticLowestObject": "body:carbon",
+      "staticLowestPoint": [
+        -0.746999979019165,
+        0.08767354488372803,
+        -2.2532942295074463
+      ],
+      "proposedRearFloor": 0.085,
+      "staticConservativeMargin": 0.0026735448837280212,
+      "allContinuousNonwheelLowerY": 0.08767354488372803
+    },
+    {
+      "quality": "medium",
+      "staticMinimumY": 0.08767354488372803,
+      "wingContinuousLowerY": 0.5726004426851965,
+      "yokeContinuousLowerY": 0.6042101523534842,
+      "fanContinuousLowerY": 0.1249999988079071,
+      "staticLowestObject": "body:carbon",
+      "staticLowestPoint": [
+        -0.746999979019165,
+        0.08767354488372803,
+        -2.2532942295074463
+      ],
+      "proposedRearFloor": 0.085,
+      "staticConservativeMargin": 0.0026735448837280212,
+      "allContinuousNonwheelLowerY": 0.08767354488372803
+    },
+    {
+      "quality": "high",
+      "staticMinimumY": 0.08767354488372803,
+      "wingContinuousLowerY": 0.5726004426851965,
+      "yokeContinuousLowerY": 0.6039193172011282,
+      "fanContinuousLowerY": 0.1249999988079071,
+      "staticLowestObject": "body:carbon",
+      "staticLowestPoint": [
+        -0.746999979019165,
+        0.08767354488372803,
+        -2.2532942295074463
+      ],
+      "proposedRearFloor": 0.085,
+      "staticConservativeMargin": 0.0026735448837280212,
+      "allContinuousNonwheelLowerY": 0.08767354488372803
+    }
+  ]
+}

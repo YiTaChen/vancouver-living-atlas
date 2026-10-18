@@ -45,9 +45,15 @@ function profileFaces() {
 }
 const worldFor = (faces, World = TeslaWorld) =>
   new World({ sources: [fixedFacesSource('physical-ground', faces)] });
-const fit = (world, pose, maxAdjustmentM = 0.35, accepts) =>
+const fit = (
+  world,
+  pose,
+  maxAdjustmentM = 0.35,
+  accepts,
+  fittingShape = shape,
+) =>
   world.fitGround(
-    { pose, shape, preferredSurfaceId: 'road:0', maxAdjustmentM },
+    { pose, shape: fittingShape, preferredSurfaceId: 'road:0', maxAdjustmentM },
     accepts,
   );
 const fallbackPose = {
@@ -55,7 +61,20 @@ const fallbackPose = {
   quaternion: [-0.06813405655623363, 0, 0, 0.997676175087484],
 };
 
-test('a legal requested frame survives a sixteen-percent crease with the nearest feasible height above or below the request', () => {
+test('legacy point-tyre fitting retains the nearest feasible height without changing a legal requested sixteen-percent frame', () => {
+  // This fixture specifically forces the original point-contact OLS fallback.
+  // Circular tread can supply an earlier contact and a legal OLS pitch here;
+  // its current-model continuous travel is covered by ground-travel tests.
+  const pointShape = {
+    ...shape,
+    groundSupport: {
+      ...shape.groundSupport,
+      wheelRadius: undefined,
+      bodySections: shape.groundSupport.bodySections.map((section, i) =>
+        i ? section : { ...section, clearance: 0.08 },
+      ),
+    },
+  };
   const world = worldFor(profileFaces());
   try {
     for (const sign of [-1, 1])
@@ -68,7 +87,7 @@ test('a legal requested frame survives a sixteen-percent crease with the nearest
           ],
           quaternion: fallbackPose.quaternion.map((n) => n * sign),
         };
-        const result = fit(world, requested);
+        const result = fit(world, requested, 0.35, undefined, pointShape);
         assert(result);
         assert(
           Math.abs(
@@ -87,7 +106,7 @@ test('a legal requested frame survives a sixteen-percent crease with the nearest
         assert((result.pose.position[1] - requested.position[1]) * dy < 0);
         const support = world.support({
           pose: result.pose,
-          shape,
+          shape: pointShape,
           maxDistance: 1.03,
           preferredSurfaceId: result.contact.surfaceId,
           adhesion: false,
@@ -97,13 +116,13 @@ test('a legal requested frame survives a sixteen-percent crease with the nearest
           world.sweep({
             from: result.pose,
             to: result.pose,
-            shape,
+            shape: pointShape,
             ignoreSurfaceId: support.surfaceId,
           }),
           null,
         );
         assert.equal(
-          fit(world, requested, 0),
+          fit(world, requested, 0, undefined, pointShape),
           null,
           'a needed correction cannot escape an exhausted adjustment budget',
         );

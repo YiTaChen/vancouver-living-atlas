@@ -25,18 +25,28 @@ interface WallCandidate {
   distance: number;
 }
 const ROBSON = project([-123.12416073213134, 49.2841737758357]);
-const PARK_ENTRIES = [
+const GROUND_ENTRIES = [
   {
     id: 'stanley-park-drive',
     name: 'Stanley Park Drive',
     point: [-879.608384031657, -1453.5787111998163],
     yaw: 0.9887633783623333,
+    maxSpawnOffsetM: 50,
   },
   {
     id: 'stanley-seawall',
     name: 'Stanley Seawall',
     point: [377.2749101711636, -1595.2078075999482],
     yaw: -2.093918646673578,
+    maxSpawnOffsetM: 50,
+  },
+  {
+    id: 'downtown-curb-approach',
+    name: 'Downtown curb approach',
+    // One metre before the source-derived curb failure, on its road approach.
+    point: [1023.97807, 940.37605],
+    yaw: 0.7923266488,
+    maxSpawnOffsetM: 2,
   },
 ] as const;
 const clone = <T>(value: T): T => JSON.parse(JSON.stringify(value));
@@ -154,6 +164,7 @@ export function installTeslaQA(
     name: string;
     seed: readonly [number, number];
     yaw: number;
+    maxSpawnOffsetM: number;
     result: string;
     actualPosition?: number[];
     spawnOffsetM?: number;
@@ -313,7 +324,7 @@ export function installTeslaQA(
       sample(started);
     }),
   );
-  for (const entry of PARK_ENTRIES)
+  for (const entry of GROUND_ENTRIES)
     button(`Tesla QA: enter ${entry.name}`, () =>
       run(`${entry.id}-public-entry`, async (_signal, started) => {
         parkEntry = {
@@ -321,6 +332,7 @@ export function installTeslaQA(
           name: entry.name,
           seed: entry.point,
           yaw: entry.yaw,
+          maxSpawnOffsetM: entry.maxSpawnOffsetM,
           result: 'preparing public navigation entry',
         };
         lastRun!.target = parkEntry;
@@ -328,9 +340,9 @@ export function installTeslaQA(
           nav = e.navigation;
         try {
           if (!validFrame())
-            throw new Error('Park entry requires a live foreground frame');
+            throw new Error('Ground entry requires a live foreground frame');
           if (!t || !nav)
-            throw new Error('Park entry needs Tesla and navigation');
+            throw new Error('Ground entry needs Tesla and navigation');
           clear();
           t.deactivate();
           e.flight?.clear();
@@ -360,11 +372,11 @@ export function installTeslaQA(
               snappedDistance: 0,
             }) === false
           )
-            throw new Error('Park navigation entry was rejected');
+            throw new Error('Ground navigation entry was rejected');
           // Public street entry owns all road/whole-body proofs and forbids the
           // overview's Robson fallback. Never assign a Tesla pose or contact.
           if (!t.enter() || !t.active || !t.state)
-            throw new Error('Park entry has no proved full-vehicle spawn');
+            throw new Error('Ground entry has no proved full-vehicle spawn');
           parkEntry.actualPosition = [...t.state.position];
           parkEntry.spawnOffsetM = Math.hypot(
             t.state.position[0] - x,
@@ -372,13 +384,15 @@ export function installTeslaQA(
           );
           if (
             !Number.isFinite(parkEntry.spawnOffsetM) ||
-            parkEntry.spawnOffsetM > 50
+            parkEntry.spawnOffsetM > entry.maxSpawnOffsetM
           )
-            throw new Error('Park entry selected a different spawn beyond 50m');
+            throw new Error(
+              `Ground entry selected a different spawn beyond ${entry.maxSpawnOffsetM}m`,
+            );
           t.setView('chase');
           t.clearInput();
           caseName = entry.id;
-          parkEntry.result = 'public controller entry proved within 50m';
+          parkEntry.result = `public controller entry proved within ${entry.maxSpawnOffsetM}m`;
           sample(started);
           status.textContent = `Tesla QA ${entry.name}: actual spawn offset ${parkEntry.spawnOffsetM.toFixed(2)}m; native controls are live`;
         } catch (error) {

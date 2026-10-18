@@ -45,6 +45,8 @@ export interface TeslaShape {
     chassisClearance: number;
     /** Bounded game suspension policy, never a vehicle specification. */
     suspensionTravel: number;
+    /** Authored circular tread radius for ordinary-ground edge contact. */
+    wheelRadius?: number;
     /** Model-proved ordinary-ground body envelopes; tyre-plane clearances. */
     bodySections?: readonly {
       minZ: number;
@@ -88,6 +90,8 @@ export interface TeslaSupportQuery {
 export interface TeslaGroundFitQuery {
   pose: TeslaPose;
   shape: TeslaShape;
+  /** Optional retry origin: every proposed ride height must clear its full route. */
+  from?: TeslaPose;
   /** A current physical ordinary-ground face, never a roof/wall permission. */
   preferredSurfaceId: string;
   /** Maximum translation of the proposed pose from the requested pose. */
@@ -295,6 +299,10 @@ function validShape(shape: TeslaShape) {
         Number.isFinite(ground.suspensionTravel) &&
         ground.suspensionTravel >= 0 &&
         ground.suspensionTravel <= 0.05 &&
+        (ground.wheelRadius === undefined ||
+          (Number.isFinite(ground.wheelRadius) &&
+            ground.wheelRadius > 0 &&
+            ground.wheelRadius <= Math.min(1, contactHeight(shape)))) &&
         validSections))
   );
 }
@@ -486,6 +494,7 @@ function fitGroundPose(
   budget: GroundFitBudget,
   report: TeslaStepReport,
   requested: TeslaPose = state,
+  routeAware = false,
 ) {
   if (
     state.mode !== 'ground' ||
@@ -502,6 +511,7 @@ function fitGroundPose(
     proposal = world.fitGround({
       pose: copyPose(requested),
       shape,
+      ...(routeAware ? { from: copyPose(state) } : {}),
       preferredSurfaceId: priorContact.surfaceId,
       maxAdjustmentM: maximum,
     });
@@ -577,14 +587,22 @@ function fitGroundPose(
     state.adhesionArmed,
     report,
   );
-  if (
-    !proof ||
-    proof.kind !== 'ground' ||
-    (proof.surfaceId !== priorContact.surfaceId &&
-      proof.surfaceId !== proposal.contact.surfaceId) ||
-    !admissible(state, proof) ||
-    querySweep(world, state, next, shape, priorContact.surfaceId, report)
-  ) {
+  const supported =
+    proof &&
+    proof.kind === 'ground' &&
+    (proof.surfaceId === priorContact.surfaceId ||
+      proof.surfaceId === proposal.contact.surfaceId) &&
+    admissible(state, proof);
+  const blocked = supported
+    ? querySweep(world, state, next, shape, priorContact.surfaceId, report)
+    : null;
+  if (!supported || blocked) {
+    if (
+      blocked &&
+      !routeAware &&
+      fitGroundPose(state, world, shape, budget, report, requested, true)
+    )
+      return true;
     // The preferred fitted pitch can have a blocked rotation even when the
     // requested driving frame remains legal within the real tyre travel.
     // Keep that frame only after proving this exact pose and its entire route;

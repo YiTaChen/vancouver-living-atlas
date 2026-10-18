@@ -495,7 +495,10 @@ test('the actual default overview enters a verified road with twenty metres of c
     geometries = [],
     material = new THREE.MeshBasicMaterial();
   assert.deepEqual(overview, saved.provenance.center);
-  assert.deepEqual(c.shape, saved.shape);
+  const adaptedShape = structuredClone(saved.shape);
+  adaptedShape.groundSupport.wheelRadius = 0.35;
+  adaptedShape.groundSupport.bodySections[0].clearance = 0.085;
+  assert.deepEqual(c.shape, adaptedShape);
   e.roads = new THREE.Group();
   e.terrain = new THREE.Group();
   for (const source of saved.groundMeshes) {

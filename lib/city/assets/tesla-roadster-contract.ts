@@ -34,7 +34,8 @@ export const TESLA_ROADSTER_GROUND_SUPPORT = Object.freeze({
    * Separate front and rear overhangs: a low rear diffuser cannot lower the
    * front bumper's collision envelope. Every bound rounds down from the mesh. */
   bodySections: Object.freeze([
-    Object.freeze({ minZ: -2.34, maxZ: -1.39, clearance: 0.08 }),
+    // All LODs measure 0.0876735m here; retain over 2.6mm of conservative room.
+    Object.freeze({ minZ: -2.34, maxZ: -1.39, clearance: 0.085 }),
     Object.freeze({ minZ: -1.39, maxZ: 1.39, clearance: 0.12 }),
     Object.freeze({ minZ: 1.39, maxZ: 2.34, clearance: 0.15 }),
   ]),

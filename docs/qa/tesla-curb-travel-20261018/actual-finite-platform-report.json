@@ -1,0 +1,189 @@
+{
+  "kind": "canonical-finite-footway-boundary-explanation-v1",
+  "fixtureSha256": "1d52afeae3df4adc1d822527ee2c6a843c7a077a728af9d3ded48557a9243742",
+  "fixtureFaces": 265,
+  "extractionSource": "work/tesla-diagnostics/far9619-extract.mjs: original world.nearby centered 32x20x32 query",
+  "extractionBox": {
+    "min": [
+      1008.6900614164538,
+      6.618450063866451,
+      925.0782407982801
+    ],
+    "max": [
+      1040.6900614164538,
+      26.61845006386645,
+      957.0782407982801
+    ]
+  },
+  "meshLoading": "lib/city/tesla-city-world.ts teslaMeshSource: all nondegenerate source triangles whose bbox intersects local tiles; source vertices are returned unchanged, not clipped",
+  "canonicalRoadSourcesLastChanged": "5574d55 2026-10-03",
+  "finiteFootway": {
+    "count": 135,
+    "min": [
+      -25.190277875985032,
+      -1.6484879945428341,
+      1.4483299877256957
+    ],
+    "max": [
+      25.710276112826,
+      -0.5439168180642278,
+      3.4541604415885354
+    ]
+  },
+  "frontTyresFrom": [
+    {
+      "wheel": [
+        -0.896,
+        -0.6799999999999999,
+        1.39
+      ],
+      "position": [
+        1026.51837383966,
+        16.01779253334028,
+        944.1285032969256
+      ],
+      "base": {
+        "height": 16.017404230301697,
+        "surfaceId": "ground:footway:68:face:6457"
+      },
+      "arc": 16.01778721571074,
+      "residual": -0.0000053137207989447415,
+      "allowed": 0.05005
+    },
+    {
+      "wheel": [
+        0.896,
+        -0.6799999999999999,
+        1.39
+      ],
+      "position": [
+        1027.7765693615786,
+        16.043165903529037,
+        942.8527430448762
+      ],
+      "base": {
+        "height": 16.042788362007663,
+        "surfaceId": "ground:footway:68:face:6458"
+      },
+      "arc": 16.04317122115857,
+      "residual": 0.000005313720791844538,
+      "allowed": 0.05005
+    }
+  ],
+  "frontTyresTo": [
+    {
+      "wheel": [
+        -0.896,
+        -0.6799999999999999,
+        1.39
+      ],
+      "position": [
+        1026.5305825138105,
+        16.018404081731084,
+        944.1405560444256
+      ],
+      "base": {
+        "height": 14.635407688248216,
+        "surfaceId": "ground:footway:102:face:17599"
+      },
+      "arc": 14.63619657231887,
+      "residual": -1.3811915131765706,
+      "allowed": 0.05005
+    },
+    {
+      "wheel": [
+        0.896,
+        -0.6799999999999999,
+        1.39
+      ],
+      "position": [
+        1027.7887780357291,
+        16.04377745191984,
+        942.8647957923762
+      ],
+      "base": {
+        "height": 14.653802530724487,
+        "surfaceId": "ground:footway:102:face:17599"
+      },
+      "arc": 14.65459141479514,
+      "residual": -1.3881649112990069,
+      "allowed": 0.05005
+    }
+  ],
+  "fromSupport": {
+    "surfaceId": "ground:footway:68:face:6497",
+    "kind": "ground",
+    "point": [
+      1025.7634900712476,
+      16.05163375672716,
+      942.1102664296845
+    ],
+    "normal": [
+      -0.0017032187287960284,
+      0.9998436767024135,
+      0.01759889781098584
+    ],
+    "adherable": true
+  },
+  "toSupport": null,
+  "bodyPlaneSeparations": [
+    [
+      {
+        "section": {
+          "minZ": -2.34,
+          "maxZ": -1.39,
+          "clearance": 0.08
+        },
+        "minimumAbovePlaneM": 0.03569761929379589
+      },
+      {
+        "section": {
+          "minZ": -1.39,
+          "maxZ": 1.39,
+          "clearance": 0.12
+        },
+        "minimumAbovePlaneM": 0.12007543116471497
+      },
+      {
+        "section": {
+          "minZ": 1.39,
+          "maxZ": 2.34,
+          "clearance": 0.15
+        },
+        "minimumAbovePlaneM": 0.2800341512746468
+      }
+    ],
+    [
+      {
+        "section": {
+          "minZ": -2.34,
+          "maxZ": -1.39,
+          "clearance": 0.08
+        },
+        "minimumAbovePlaneM": 0.036500324823790176
+      },
+      {
+        "section": {
+          "minZ": -1.39,
+          "maxZ": 1.39,
+          "clearance": 0.12
+        },
+        "minimumAbovePlaneM": 0.12087813669470915
+      },
+      {
+        "section": {
+          "minZ": 1.39,
+          "maxZ": 2.34,
+          "clearance": 0.15
+        },
+        "minimumAbovePlaneM": 0.280836856804641
+      }
+    ]
+  ],
+  "interpretation": "The first wheel misses the far edge of the 2m-wide canonical sidewalk, not the original 13cm street-side curb. The next physical footway102/terrain lies approximately 1.38m lower. The 2.78m wheelbase cannot place all four wheels on this perpendicular 2m platform. No missing top triangle outside the original extraction crop can explain this wheel position deep inside that box.",
+  "testImplication": "Actual fixture should prove first-edge front-axle climb, stop, reverse back, plus safe refusal at its distinct far-edge drop. Complete front/rear crossing and descent require the separate complete 8m platform scenarios.",
+  "limitations": [
+    "No whole-city rebuild was run for this diagnosis. The proof uses original exact canonical source extraction, source-loading implementation, complete crop containment and existing ground geometry unchanged since 2026-10-03.",
+    "A gameplay failure at the distinct 1.38m drop must not be reclassified as proof that the original small curb remains blocked."
+  ]
+}
