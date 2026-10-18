@@ -1,0 +1,114 @@
+{
+  "kind": "tesla-clear-launch-preference-verification",
+  "sourceFingerprint": "73fcd3882e82ad48288b3539502b8d65d5593e94c7a06ffe60f674f827eebd89",
+  "captureParentRevision": "db1c494a2de572f7b094580d83ce87a75572e0cc",
+  "origin": "Hosted db1c494 smoke found correct canopy collision at prior default spawn; changing initial placement preference avoids that first-use obstruction.",
+  "implementation": {
+    "riseM": 20,
+    "initialDepartureM": 0.35,
+    "ordinaryDeparture": "existing strict source/wheel/body proof",
+    "protectedDeparture": "no-ignore full body at origin and on first leg",
+    "upperCorridor": "no-ignore full-body sweep",
+    "overviewOrder": [
+      "local open within48m",
+      "Robson open within64m",
+      "local verified road",
+      "Robson verified road"
+    ],
+    "streetOrder": [
+      "same-identity/layer local open",
+      "same-identity/layer local verified road"
+    ],
+    "recovery": "current/attachment/departure/entry drive identity retained; entry fallback support/identity/permission/body freshly proved; no safe pose retains current state and warns"
+  },
+  "coreFileHashesUnchangedFromDb1c494": {
+    "lib/city/tesla-world.ts": "b7c06df30a778221a1fde37a67c12580ed3f918518d40b23c004ddc3e80fddca",
+    "lib/city/tesla-state.ts": "f6792cd287fc59b63423a6939ab63d41094492df52e0d32ee35af6246064ec73",
+    "lib/city/tesla-shape.ts": "664f52b90385f08d9a2b648edda9e06badb98777b115bb7cee49bf846a2e0a94",
+    "lib/city/tesla-camera.ts": "e08f47235cff6fa4b6cd79d262575be596eca8374611718dd505945b935da509",
+    "lib/city/tesla-math.ts": "6fdb3a9ec6b1829733fae3d6fdad583c3f9429b78459be0bbd6bcaa7c05f69be",
+    "lib/city/assets/tesla-roadster.ts": "1cb41bbc7091e6f4fbeaeb7109b916ae88195f1ec28fb64a5b9064af0d39f6ca",
+    "lib/city/assets/tesla-roadster-geometry.ts": "bb810bec530363e0929b6e8e23ba6eabc23e7c61ec7dae9d1abbea544ba4fef7"
+  },
+  "executedChangedFiles": {
+    "lib/city/tesla-controller.ts": "eaef8587a8ebdb7ebf340df11afe1f897c3cabbb9c68ab334eff2674144a374b",
+    "lib/city/tesla-city-world.ts": "b1aec23627b7ed265596a99f9ad7c9eeef17a911759587e9a53411baa34e9942",
+    "tests/fixtures/tesla-default-entry-canopy.json": "82ff9139579e01e40cb129a6f532e470593f1d55f0d15e0bff90e235e69cb246"
+  },
+  "desktop": {
+    "entryCapture": "clear-default-entry.json",
+    "flightCapture": "clear-default-flight.json",
+    "nativePublicTeslaRadio": true,
+    "initialPosition": [
+      -157.41511414209359,
+      24.530286913829137,
+      -307.4927885851381
+    ],
+    "initialContact": "ground:asphalt:10:face:3206",
+    "holdSpaceMs": 3000,
+    "holdBrakeMs": 1000,
+    "finalPosition": [
+      -157.45275952011883,
+      89.40968846170384,
+      -307.7461229211175
+    ],
+    "verticalGainM": 64.87940154787469,
+    "finalMode": "air",
+    "finalEnvironmentFailures": 0
+  },
+  "recovery": {
+    "capture": "clear-recovery.json",
+    "position": [
+      -185.8033379406795,
+      22.278076987295933,
+      -335.73529668346123
+    ],
+    "contact": "ground:asphalt:10:face:3198",
+    "mode": "ground"
+  },
+  "mobile": {
+    "viewport": [
+      320,
+      568
+    ],
+    "nativeHoldUpMs": 3000,
+    "nativeHoldBrakeMs": 1000,
+    "position": [
+      -185.75574677303436,
+      91.38588463540214,
+      -335.9470993170155
+    ],
+    "altitudeM": 71,
+    "mode": "air",
+    "environmentFailures": 0,
+    "warningsOrErrorsConsole": 0
+  },
+  "targetedChecks": {
+    "controllerTests": 28,
+    "worldAndLaunchTests": 48,
+    "review": "independent read-only PASS",
+    "typescript": "pass",
+    "productionFirebaseBuild": "pass"
+  },
+  "limits": [
+    "Preference is a bounded fixed-orientation20m corridor, not a promise of unobstructed flight everywhere.",
+    "When no clear road exists, an already-proven covered road may be retained; normal collision remains active.",
+    "Prior long performance recordings predate this placement-only policy; motion, physics, model, math and camera source files remain byte-identical.",
+    "Responsive smoke is a browser check, not a physical-phone GPU benchmark."
+  ],
+  "finalLocalValidation": {
+    "testsPassed": 1270,
+    "testsFailed": 0,
+    "durationMs": 110355.477728,
+    "typescript": "pass",
+    "normalFirebaseBuildAndQaIsolation": "pass",
+    "newTeslaFilesStrictLint": "pass",
+    "repositoryLint": {
+      "parentBaseline": 221,
+      "final": 221,
+      "newDiagnostics": 0,
+      "comparison": "same file/rule/message multiset, excluding shifted line numbers and diagnostic help formatting"
+    },
+    "node": "v26.0.0"
+  }
+}

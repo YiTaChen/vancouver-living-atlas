@@ -1,13 +1,14 @@
 import * as THREE from 'three';
 import type { CityEngine } from './engine';
 import { project } from './geo';
-import { CityTeslaWorld } from './tesla-city-world';
+import { CityTeslaWorld, type TeslaRoadSpawn } from './tesla-city-world';
 import {
   createTesla,
   stepTesla,
   type TeslaInput,
   type TeslaShape,
   type TeslaState,
+  type TeslaVec3,
 } from './tesla-state';
 import {
   createTeslaRoadster,
@@ -183,6 +184,72 @@ export class TeslaController {
     }
     return heading;
   }
+  private roadCandidates(
+    position: TeslaVec3,
+    heading: number,
+    radius: number,
+    identity: { surfaceId: string; layer: number },
+  ) {
+    let verified: TeslaRoadSpawn | null = null;
+    const open = this.world!.groundPoseNear(
+      position,
+      this.shape,
+      heading,
+      radius,
+      identity,
+      (candidate) => {
+        verified ??= candidate;
+        return this.world!.hasLaunchClearance(candidate, this.shape);
+      },
+    );
+    return { open, verified: verified as TeslaRoadSpawn | null };
+  }
+  private roadIdentity(contact: TeslaState['contact']) {
+    const identity = contact ? this.world!.identity(contact) : null;
+    return identity?.allowedModes.includes('drive')
+      ? { surfaceId: identity.surfaceId, layer: identity.layer }
+      : null;
+  }
+  private verifiedEntry(identity: { surfaceId: string; layer: number }) {
+    const entry = this.entryState;
+    if (!entry?.contact) return null;
+    const original = this.roadIdentity(entry.contact);
+    if (
+      original?.surfaceId !== identity.surfaceId ||
+      original.layer !== identity.layer
+    )
+      return null;
+    const proof = this.world!.support({
+      pose: entry,
+      shape: this.shape,
+      preferredSurfaceId: entry.contact.surfaceId,
+      maxDistance: this.shape.halfExtents[1] + this.shape.clearance + 0.12,
+      adhesion: false,
+    });
+    const currentIdentity = proof ? this.world!.identity(proof) : null;
+    if (
+      proof?.surfaceId !== entry.contact.surfaceId ||
+      proof.kind !== 'ground' ||
+      currentIdentity?.surfaceId !== identity.surfaceId ||
+      currentIdentity.layer !== identity.layer ||
+      !currentIdentity.allowedModes.includes('drive') ||
+      this.world!.sweep({
+        from: entry,
+        to: entry,
+        shape: this.shape,
+        ignoreSurfaceId: proof.surfaceId,
+      })
+    )
+      return null;
+    return {
+      pose: {
+        position: [...entry.position] as TeslaVec3,
+        quaternion: [...entry.quaternion] as TeslaState['quaternion'],
+      },
+      contact: proof,
+      identity: currentIdentity,
+    };
+  }
   enter() {
     if (this.disposed) return false;
     if (this.active) return true;
@@ -195,18 +262,27 @@ export class TeslaController {
     const y = fromStreet
       ? nav.position.y
       : (this.e.data.roadRelief?.(x, z) ?? this.e.elevation(x, z)) + 1.05;
-    let heading = fromStreet ? nav.yaw : this.headingNear(x, z);
-    let spawn = this.world.groundPoseNear([x, y, z], this.shape, heading, 48, {
+    const localHeading = fromStreet ? nav.yaw : this.headingNear(x, z);
+    let heading = localHeading;
+    const local = this.roadCandidates([x, y, z], heading, 48, {
       surfaceId: fromStreet ? (nav.surfaceId ?? 'ground') : 'ground',
       layer: fromStreet ? (nav.surfaceLayer ?? 0) : 0,
     });
-    if (!spawn) {
+    let spawn = local.open;
+    if (!spawn && !fromStreet) {
       const [rx, rz] = ROBSON,
         ry =
           (this.e.data.roadRelief?.(rx, rz) ?? this.e.elevation(rx, rz)) + 1.05;
-      heading = this.headingNear(rx, rz);
-      spawn = this.world.groundPoseNear([rx, ry, rz], this.shape, heading, 64);
+      const fallbackHeading = this.headingNear(rx, rz),
+        fallback = this.roadCandidates([rx, ry, rz], fallbackHeading, 64, {
+          surfaceId: 'ground',
+          layer: 0,
+        });
+      spawn = fallback.open ?? local.verified ?? fallback.verified;
+      heading =
+        fallback.open || !local.verified ? fallbackHeading : localHeading;
     }
+    if (!spawn && fromStreet) spawn = local.verified;
     if (!spawn) {
       this.warning = 'no-spawn';
       this.notify();
@@ -284,19 +360,32 @@ export class TeslaController {
     if (!this.active || !this.state || !this.world) return;
     const s = this.state,
       [x, , z] = s.position;
-    const y = (this.e.data.roadRelief?.(x, z) ?? this.e.elevation(x, z)) + 1.05;
-    const spawn = this.world.groundPoseNear(
-      [x, y, z],
-      this.shape,
-      this.headingNear(x, z),
-      48,
-    );
-    this.state = spawn
-      ? createTesla(spawn.pose.position, this.headingNear(x, z), spawn.contact)
-      : this.entryState
-        ? cloneState(this.entryState)
-        : null;
-    if (spawn && this.state) this.state.quaternion = [...spawn.pose.quaternion];
+    const identity = this.roadIdentity(s.contact) ??
+        this.roadIdentity(s.attachment?.contact ?? null) ??
+        this.roadIdentity(s.departureContact) ??
+        this.roadIdentity(this.entryState?.contact ?? null) ?? {
+          surfaceId: 'ground',
+          layer: 0,
+        },
+      ordinaryGround = identity.surfaceId === 'ground' && identity.layer === 0,
+      y = ordinaryGround
+        ? (this.e.data.roadRelief?.(x, z) ?? this.e.elevation(x, z)) + 1.05
+        : s.position[1];
+    let heading = ordinaryGround ? this.headingNear(x, z) : s.heading;
+    const local = this.roadCandidates([x, y, z], heading, 48, identity);
+    let spawn = local.open ?? local.verified;
+    if (!spawn) {
+      spawn = this.verifiedEntry(identity);
+      heading = this.entryState?.heading ?? heading;
+    }
+    if (!spawn) {
+      this.clearInput();
+      this.warning = 'no-spawn';
+      this.notify();
+      return;
+    }
+    this.state = createTesla(spawn.pose.position, heading, spawn.contact);
+    this.state.quaternion = [...spawn.pose.quaternion];
     this.clearInput();
     this.snapCamera = true;
     this.warning = 'recovered';
