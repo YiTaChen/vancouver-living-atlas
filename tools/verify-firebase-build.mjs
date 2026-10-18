@@ -188,6 +188,12 @@ export async function verifyFirebaseBuild(
     'Tesla diagnostics must not ship in the public build',
   );
   assert(
+    !scripts.includes('Orbit QA:') &&
+      !scripts.includes('city-orbit-transition-trace-v1') &&
+      !files.some((name) => /(?:^|\/)orbit-transition-qa[.-]/.test(name)),
+    'Orbit transition diagnostics must not ship in the public build',
+  );
+  assert(
     !scripts.includes('cpu-submission-profile-v1') &&
       !scripts.includes('Record CPU method timings (instrumented)'),
     'CPU profiling controls must not ship in the public build',

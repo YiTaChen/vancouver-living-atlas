@@ -50,6 +50,9 @@ export default defineConfig(async () => {
       'process.env.VANCOUVER_VISUAL_QA': JSON.stringify(
         process.env.VANCOUVER_VISUAL_QA || '0',
       ),
+      'process.env.VANCOUVER_ORBIT_QA': JSON.stringify(
+        process.env.VANCOUVER_ORBIT_QA || '0',
+      ),
     },
     worker: {
       plugins: () => [

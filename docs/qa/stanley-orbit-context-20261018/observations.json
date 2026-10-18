@@ -1,0 +1,92 @@
+{
+  "kind": "stanley-orbit-context-loss-investigation-v1",
+  "recordedAt": "2026-10-18T06:43:00Z",
+  "deployedRevision": "2b30f719ec7c31d0f087ea7d42dd0390b4fad810",
+  "groundFix": "PR19 deployed; exact physics source tree passes1378tests and local native park/mobile operation",
+  "reproductions": [
+    {
+      "parentRevision": "9b7301183a6b88c4b559815d1a100f8f80bd2479",
+      "route": "overview to Stanley Park",
+      "at": "2026-10-18T05:43:07.886Z",
+      "result": "graphics-context-lost; concurrent canonical CPU audit at this older observation"
+    },
+    {
+      "revision": "2b30f719ec7c31d0f087ea7d42dd0390b4fad810",
+      "route": "overview to Stanley Park",
+      "at": "2026-10-18T06:21:40.108Z",
+      "result": "graphics-context-lost; no other browser tabs or local heavy CPU jobs"
+    },
+    {
+      "revision": "2b30f719ec7c31d0f087ea7d42dd0390b4fad810",
+      "route": "Downtown to Stanley Park",
+      "at": "2026-10-18T06:24:05.000Z",
+      "result": "graphics-context-lost; balanced Auto, no quality changes, prior Downtown route and idle successful"
+    }
+  ],
+  "publicTelemetryBeforeDowntown": {
+    "quality": "balanced",
+    "qualityMode": "auto",
+    "resolutionScale": 1,
+    "changes": 0,
+    "graphics": "hdr",
+    "render": [
+      1280,
+      720
+    ],
+    "triangles": 3920361,
+    "drawCalls": 796,
+    "geometries": 636
+  },
+  "publicTelemetryBeforeDowntownToStanley": {
+    "quality": "balanced",
+    "resolutionScale": 1,
+    "changes": 0,
+    "triangles": 2153875,
+    "drawCalls": 366,
+    "geometries": 648
+  },
+  "creationBlocked": [
+    {
+      "at": "2026-10-18T06:24:42.378Z",
+      "origin": "production"
+    },
+    {
+      "at": "2026-10-18T06:25:13.123Z",
+      "origin": "localhost"
+    }
+  ],
+  "blockedReason": "Web page caused context loss and was blocked",
+  "limits": [
+    "The last 8420m HUD sample updates every800ms and is not the exact crash pose.",
+    "Context loss also occurred on the parent revision, before PR19 ground support changes.",
+    "No evidence identifies a specific tree, geometry, shader, or Auto-quality decision as the cause.",
+    "No browser security or graphics block settings were changed.",
+    "Successful instrumented reruns do not establish that the intermittent hosted failure is fixed."
+  ],
+  "status": "unresolved; observation tooling only, no production rendering fix",
+  "subsequentObservations": [
+    {
+      "build": "normal production localhost",
+      "route": "Overview to Stanley with Trees OFF, then Trees ON at fixed park view",
+      "result": "both succeeded; logs empty; restored full forest stable"
+    },
+    {
+      "build": "full VISUAL_QA localhost",
+      "route": "native Overview to Stanley, Trees ON, paused public clock10:00",
+      "result": "succeeded; first manual trace retained only later idle and High promotion, not the transition",
+      "trace": "orbit-manual-20261018t063535227z-001.json"
+    },
+    {
+      "build": "full VISUAL_QA localhost",
+      "route": "native Overview to Stanley, Trees ON, running clock10:01\u201310:19",
+      "result": "succeeded; 69 transition frames, balanced scale1, max transition renderScene CPU8.8ms; logs empty",
+      "trace": "orbit-manual-20261018t063725427z-001.json"
+    },
+    {
+      "build": "ORBIT_QA only localhost; normal startup, no full VisualQA",
+      "route": "native Overview to Stanley after Auto sampleCount240, Trees ON, running evening clock",
+      "result": "succeeded; logs empty; includes a99.7ms renderScene CPU hitch; see standalone trace and summary",
+      "trace": "orbit-manual-20261018t064207408z-001.json"
+    }
+  ]
+}

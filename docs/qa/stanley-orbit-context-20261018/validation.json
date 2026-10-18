@@ -1,0 +1,44 @@
+{
+  "kind": "local-orbit-diagnostics-validation-v1",
+  "parentRevision": "2b30f719ec7c31d0f087ea7d42dd0390b4fad810",
+  "sourceHashes": {
+    "lib/city/engine.ts": "0e5f9699c363b34460534b2e931223c97de69d60eff496d54d355b7fa41d194e",
+    "lib/city/visual-qa.ts": "c223ef82d7d04f56e7c6945a40ddac19e7af517bbf23db525711db30efccd0c3",
+    "lib/city/orbit-transition-qa.ts": "7fd07d2108ab3e6b5019f7edf7c0158ac5e5b8c4be469a276ed3a6a7b04612ba",
+    "tests/orbit-transition-qa.test.mjs": "d46bc8f523ddcabdf2251fe7825b4588bea835cd90503fb87270a8a4ab20af66",
+    "tests/city-life-isolation.test.mjs": "be4672b6b72fdb4fabbda85709ace5143afb1550c7dd1b7778cbb84ca3f1bcb4",
+    "tools/verify-firebase-build.mjs": "6506e26956aa760b61c4e04ef45709087f869e76bc496d9c8bc7273fcf7976dc",
+    "vite.config.ts": "672b54997b2536cf0220b329d199f0b9538800e96cdf8cca3aecedbdf054aec1"
+  },
+  "status": "Observation tooling validated; intermittent hosted context loss unresolved; diagnostic branch not a production fix.",
+  "test": {
+    "command": "npm test",
+    "passed": 1387,
+    "failed": 0,
+    "durationMs": 119487.530237,
+    "newHelperTests": 9
+  },
+  "typecheck": "passed; standalone source build check",
+  "productionBuild": {
+    "command": "npm run build:firebase",
+    "result": "passed",
+    "qaIsolation": "passed; Orbit and full VisualQA excluded"
+  },
+  "lint": {
+    "newHelperTestAndGateFiles": "passed",
+    "repositoryBaseline": 219,
+    "current": 219,
+    "new": 0,
+    "comparison": "lint-comparison.json",
+    "note": "Full repository lint exits nonzero with inherited diagnostics, including the pre-existing visual-qa any at its shifted line393. No claim of a clean global lint."
+  },
+  "independentSourceReview": "passed; production guards, lifecycle ownership, trace claims and evidence reviewed",
+  "browser": {
+    "standaloneTrace": "orbit-manual-20261018t064207408z-001.json",
+    "summary": "standalone-summary.json",
+    "warnOrError": 0,
+    "limits": "Responsive local Chromium, instrumented CPU timing and evening atmosphere; does not prove hosted failure resolved."
+  },
+  "cleanup": "Local QA server stopped, owned browser tab closed and viewport reset. Test-generated Node-version-only JSON change restored.",
+  "productionPhysics": "No Tesla support, collision or movement source changed on this diagnostic branch."
+}

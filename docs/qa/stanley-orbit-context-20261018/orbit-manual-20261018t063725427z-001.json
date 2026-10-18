@@ -1,0 +1,6600 @@
+{
+  "revision": "2b30f719ec7c31d0f087ea7d42dd0390b4fad810",
+  "sourceFingerprint": "5ad52f080c668721aa7435cbf7e04a882503c34e8a8a11f03259bdfb0d6a681a",
+  "kind": "city-orbit-transition-trace-v1",
+  "localOptIn": true,
+  "installedAt": "2026-10-18T06:37:21.886Z",
+  "capturedAt": "2026-10-18T06:37:25.427Z",
+  "reason": "manual",
+  "message": "",
+  "animation": "normal",
+  "lastFly": {
+    "id": "stanley",
+    "requestedAnimate": true,
+    "effectiveAnimate": true,
+    "nowMs": 22609.899999976158
+  },
+  "capacity": 480,
+  "frameCount": 152,
+  "droppedFrames": 0,
+  "latestPreframe": {
+    "index": 151,
+    "nowMs": 25566.69999998808,
+    "camera": [
+      -99.56589226453434,
+      2067.5749198172343,
+      -433.7884094140454
+    ],
+    "quaternion": [
+      -0.3915970565847915,
+      0.31168236261561877,
+      0.14294408414517099,
+      0.8538576221574483
+    ],
+    "up": [
+      0,
+      1,
+      0
+    ],
+    "target": [
+      -1234.4076356457572,
+      21.399999999985816,
+      -1781.1199999998037
+    ],
+    "near": 2,
+    "far": 45000,
+    "quality": "balanced",
+    "qualityMode": "auto",
+    "resolutionScale": 1,
+    "pixelRatio": 1,
+    "render": [
+      1280,
+      720
+    ],
+    "transition": false,
+    "hour": 10.318083333336304,
+    "trees": true,
+    "calls": 298,
+    "triangles": 1989076,
+    "geometries": 636,
+    "textures": 41
+  },
+  "frames": [
+    {
+      "index": 0,
+      "nowMs": 22115,
+      "camera": [
+        3546.6829513814514,
+        6428.002928656675,
+        4287.155322326365
+      ],
+      "quaternion": [
+        -0.3801091879650987,
+        0.3051794806923564,
+        0.13445863746476006,
+        0.8627301806474472
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -145.22442772272677,
+        8,
+        -278.2999999997469
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.023683333336315,
+      "trees": true,
+      "calls": 796,
+      "triangles": 3920361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 7
+    },
+    {
+      "index": 1,
+      "nowMs": 22157.30000001192,
+      "camera": [
+        3546.6829513814514,
+        6428.002928656675,
+        4287.155322326365
+      ],
+      "quaternion": [
+        -0.3801091879650987,
+        0.3051794806923564,
+        0.13445863746476006,
+        0.8627301806474472
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -145.22442772272677,
+        8,
+        -278.2999999997469
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.030666666669646,
+      "trees": true,
+      "calls": 796,
+      "triangles": 3920361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 7.600000023841858
+    },
+    {
+      "index": 2,
+      "nowMs": 22183,
+      "camera": [
+        3546.6829513814514,
+        6428.002928656675,
+        4287.155322326365
+      ],
+      "quaternion": [
+        -0.3801091879650987,
+        0.3051794806923564,
+        0.13445863746476006,
+        0.8627301806474472
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -145.22442772272677,
+        8,
+        -278.2999999997469
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.034783333336314,
+      "trees": true,
+      "calls": 796,
+      "triangles": 3920361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 6.900000035762787
+    },
+    {
+      "index": 3,
+      "nowMs": 22200.30000001192,
+      "camera": [
+        3546.6829513814514,
+        6428.002928656675,
+        4287.155322326365
+      ],
+      "quaternion": [
+        -0.3801091879650987,
+        0.3051794806923564,
+        0.13445863746476006,
+        0.8627301806474472
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -145.22442772272677,
+        8,
+        -278.2999999997469
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.036150000002984,
+      "trees": true,
+      "calls": 796,
+      "triangles": 3920361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 5.800000011920929
+    },
+    {
+      "index": 4,
+      "nowMs": 22229.899999976158,
+      "camera": [
+        3546.6829513814514,
+        6428.002928656675,
+        4287.155322326365
+      ],
+      "quaternion": [
+        -0.3801091879650987,
+        0.3051794806923564,
+        0.13445863746476006,
+        0.8627301806474472
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -145.22442772272677,
+        8,
+        -278.2999999997469
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.038958333336318,
+      "trees": true,
+      "calls": 796,
+      "triangles": 3920361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 7.300000011920929
+    },
+    {
+      "index": 5,
+      "nowMs": 22253.399999976158,
+      "camera": [
+        3546.6829513814514,
+        6428.002928656675,
+        4287.155322326365
+      ],
+      "quaternion": [
+        -0.3801091879650987,
+        0.3051794806923564,
+        0.13445863746476006,
+        0.8627301806474472
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -145.22442772272677,
+        8,
+        -278.2999999997469
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.040391666669649,
+      "trees": true,
+      "calls": 796,
+      "triangles": 3920361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 7.700000047683716
+    },
+    {
+      "index": 6,
+      "nowMs": 22275.19999998808,
+      "camera": [
+        3546.6829513814514,
+        6428.002928656675,
+        4287.155322326365
+      ],
+      "quaternion": [
+        -0.3801091879650987,
+        0.3051794806923564,
+        0.13445863746476006,
+        0.8627301806474472
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -145.22442772272677,
+        8,
+        -278.2999999997469
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.043091666669653,
+      "trees": true,
+      "calls": 796,
+      "triangles": 3920361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 6.699999988079071
+    },
+    {
+      "index": 7,
+      "nowMs": 22303.399999976158,
+      "camera": [
+        3546.6829513814514,
+        6428.002928656675,
+        4287.155322326365
+      ],
+      "quaternion": [
+        -0.3801091879650987,
+        0.3051794806923564,
+        0.13445863746476006,
+        0.8627301806474472
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -145.22442772272677,
+        8,
+        -278.2999999997469
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.044500000002984,
+      "trees": true,
+      "calls": 796,
+      "triangles": 3920361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 6.599999964237213
+    },
+    {
+      "index": 8,
+      "nowMs": 22323.899999976158,
+      "camera": [
+        3546.6829513814514,
+        6428.002928656675,
+        4287.155322326365
+      ],
+      "quaternion": [
+        -0.3801091879650987,
+        0.3051794806923564,
+        0.13445863746476006,
+        0.8627301806474472
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -145.22442772272677,
+        8,
+        -278.2999999997469
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.047275000002983,
+      "trees": true,
+      "calls": 796,
+      "triangles": 3920361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 6.5
+    },
+    {
+      "index": 9,
+      "nowMs": 22345.099999964237,
+      "camera": [
+        3546.6829513814514,
+        6428.002928656675,
+        4287.155322326365
+      ],
+      "quaternion": [
+        -0.3801091879650987,
+        0.3051794806923564,
+        0.13445863746476006,
+        0.8627301806474472
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -145.22442772272677,
+        8,
+        -278.2999999997469
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.04865000000298,
+      "trees": true,
+      "calls": 796,
+      "triangles": 3920361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 6.900000035762787
+    },
+    {
+      "index": 10,
+      "nowMs": 22368.80000001192,
+      "camera": [
+        3546.6829513814514,
+        6428.002928656675,
+        4287.155322326365
+      ],
+      "quaternion": [
+        -0.3801091879650987,
+        0.3051794806923564,
+        0.13445863746476006,
+        0.8627301806474472
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -145.22442772272677,
+        8,
+        -278.2999999997469
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.050041666669642,
+      "trees": true,
+      "calls": 796,
+      "triangles": 3920361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 7.400000035762787
+    },
+    {
+      "index": 11,
+      "nowMs": 22396,
+      "camera": [
+        3546.6829513814514,
+        6428.002928656675,
+        4287.155322326365
+      ],
+      "quaternion": [
+        -0.3801091879650987,
+        0.3051794806923564,
+        0.13445863746476006,
+        0.8627301806474472
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -145.22442772272677,
+        8,
+        -278.2999999997469
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.052816666669642,
+      "trees": true,
+      "calls": 796,
+      "triangles": 3920361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 9
+    },
+    {
+      "index": 12,
+      "nowMs": 22424.399999976158,
+      "camera": [
+        3546.6829513814514,
+        6428.002928656675,
+        4287.155322326365
+      ],
+      "quaternion": [
+        -0.3801091879650987,
+        0.3051794806923564,
+        0.13445863746476006,
+        0.8627301806474472
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -145.22442772272677,
+        8,
+        -278.2999999997469
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.055591666669642,
+      "trees": true,
+      "calls": 796,
+      "triangles": 3920361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 6.399999976158142
+    },
+    {
+      "index": 13,
+      "nowMs": 22446.599999964237,
+      "camera": [
+        3546.6829513814514,
+        6428.002928656675,
+        4287.155322326365
+      ],
+      "quaternion": [
+        -0.3801091879650987,
+        0.3051794806923564,
+        0.13445863746476006,
+        0.8627301806474472
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -145.22442772272677,
+        8,
+        -278.2999999997469
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.057033333336307,
+      "trees": true,
+      "calls": 796,
+      "triangles": 3920361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 7.699999988079071
+    },
+    {
+      "index": 14,
+      "nowMs": 22470,
+      "camera": [
+        3546.6829513814514,
+        6428.002928656675,
+        4287.155322326365
+      ],
+      "quaternion": [
+        -0.3801091879650987,
+        0.3051794806923564,
+        0.13445863746476006,
+        0.8627301806474472
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -145.22442772272677,
+        8,
+        -278.2999999997469
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.058366666669642,
+      "trees": true,
+      "calls": 796,
+      "triangles": 3920361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 7.400000035762787
+    },
+    {
+      "index": 15,
+      "nowMs": 22494.5,
+      "camera": [
+        3546.6829513814514,
+        6428.002928656675,
+        4287.155322326365
+      ],
+      "quaternion": [
+        -0.3801091879650987,
+        0.3051794806923564,
+        0.13445863746476006,
+        0.8627301806474472
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -145.22442772272677,
+        8,
+        -278.2999999997469
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.061150000002975,
+      "trees": true,
+      "calls": 796,
+      "triangles": 3920361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 7
+    },
+    {
+      "index": 16,
+      "nowMs": 22515.099999964237,
+      "camera": [
+        3546.6829513814514,
+        6428.002928656675,
+        4287.155322326365
+      ],
+      "quaternion": [
+        -0.3801091879650987,
+        0.3051794806923564,
+        0.13445863746476006,
+        0.8627301806474472
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -145.22442772272677,
+        8,
+        -278.2999999997469
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.062550000002972,
+      "trees": true,
+      "calls": 796,
+      "triangles": 3920361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 6.399999976158142
+    },
+    {
+      "index": 17,
+      "nowMs": 22538.099999964237,
+      "camera": [
+        3546.6829513814514,
+        6428.002928656675,
+        4287.155322326365
+      ],
+      "quaternion": [
+        -0.3801091879650987,
+        0.3051794806923564,
+        0.13445863746476006,
+        0.8627301806474472
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -145.22442772272677,
+        8,
+        -278.2999999997469
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.063983333336303,
+      "trees": true,
+      "calls": 796,
+      "triangles": 3920361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 6.099999964237213
+    },
+    {
+      "index": 18,
+      "nowMs": 22564,
+      "camera": [
+        3546.6829513814514,
+        6428.002928656675,
+        4287.155322326365
+      ],
+      "quaternion": [
+        -0.3801091879650987,
+        0.3051794806923564,
+        0.13445863746476006,
+        0.8627301806474472
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -145.22442772272677,
+        8,
+        -278.2999999997469
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.066708333336301,
+      "trees": true,
+      "calls": 796,
+      "triangles": 3920361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 7.400000035762787
+    },
+    {
+      "index": 19,
+      "nowMs": 22585.899999976158,
+      "camera": [
+        3546.6829513814514,
+        6428.002928656675,
+        4287.155322326365
+      ],
+      "quaternion": [
+        -0.3801091879650987,
+        0.3051794806923564,
+        0.13445863746476006,
+        0.8627301806474472
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -145.22442772272677,
+        8,
+        -278.2999999997469
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.068166666669633,
+      "trees": true,
+      "calls": 796,
+      "triangles": 3920361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 6.199999988079071
+    },
+    {
+      "index": 20,
+      "nowMs": 22606.19999998808,
+      "camera": [
+        3546.6829513814514,
+        6428.002928656675,
+        4287.155322326365
+      ],
+      "quaternion": [
+        -0.3801091879650987,
+        0.3051794806923564,
+        0.13445863746476006,
+        0.8627301806474472
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -145.22442772272677,
+        8,
+        -278.2999999997469
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.07086666666963,
+      "trees": true,
+      "calls": 796,
+      "triangles": 3920361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 6.199999988079071
+    },
+    {
+      "index": 21,
+      "nowMs": 22635,
+      "camera": [
+        3546.4621062917536,
+        6427.73882734159,
+        4286.869385384976
+      ],
+      "quaternion": [
+        -0.38010940753599176,
+        0.30517959943458806,
+        0.13445879284952647,
+        0.8627300176863153
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -145.29039709935623,
+        8.00081160785477,
+        -278.3910224263369
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.072325000002962,
+      "trees": true,
+      "calls": 796,
+      "triangles": 3920361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 6.800000011920929
+    },
+    {
+      "index": 22,
+      "nowMs": 22674.80000001192,
+      "camera": [
+        3540.1951329110148,
+        6420.244361815014,
+        4278.755285122636
+      ],
+      "quaternion": [
+        -0.38011564595281494,
+        0.3051829732040778,
+        0.13446320772081036,
+        0.8627253875583027
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -147.16242571383117,
+        8.023842796043736,
+        -280.97398736918626
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.07511666666963,
+      "trees": true,
+      "calls": 796,
+      "triangles": 3920361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 8.800000011920929
+    },
+    {
+      "index": 23,
+      "nowMs": 22714.69999998808,
+      "camera": [
+        3522.286571258541,
+        6398.828107144531,
+        4255.56835644522
+      ],
+      "quaternion": [
+        -0.3801335542278092,
+        0.3051926589780488,
+        0.1344758823351664,
+        0.862712095038791
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -152.5119521631627,
+        8.0896569344729,
+        -288.3550921090537
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.079275000002966,
+      "trees": true,
+      "calls": 796,
+      "triangles": 3920361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 7
+    },
+    {
+      "index": 24,
+      "nowMs": 22747.399999976158,
+      "camera": [
+        3501.429558905418,
+        6373.885898111335,
+        4228.56395110879
+      ],
+      "quaternion": [
+        -0.38015456406089354,
+        0.3052040239127584,
+        0.13449075414406156,
+        0.8626964983474165
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -158.74222019932586,
+        8.166306657932829,
+        -296.9514157963803
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.082000000002964,
+      "trees": true,
+      "calls": 796,
+      "triangles": 3920361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 8.200000047683716
+    },
+    {
+      "index": 25,
+      "nowMs": 22805.30000001192,
+      "camera": [
+        3447.5217309539157,
+        6309.419315336808,
+        4158.767337281164
+      ],
+      "quaternion": [
+        -0.38020964386271855,
+        0.305233827012223,
+        0.13452975294805578,
+        0.8626555993749718
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -174.8452080913066,
+        8.364418450496895,
+        -319.16980117708613
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.0861583333363,
+      "trees": true,
+      "calls": 796,
+      "triangles": 3920361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 7.700000047683716
+    },
+    {
+      "index": 26,
+      "nowMs": 22856.69999998808,
+      "camera": [
+        3385.593773404741,
+        6235.3617256859525,
+        4078.586741949408
+      ],
+      "quaternion": [
+        -0.3802743376673673,
+        0.3052688479830589,
+        0.13457557842639242,
+        0.8626075424281561
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -193.3439157648304,
+        8.59200429741575,
+        -344.69372374924785
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.090325000002963,
+      "trees": true,
+      "calls": 795,
+      "triangles": 3920001,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 6.5
+    },
+    {
+      "index": 27,
+      "nowMs": 22894.099999964237,
+      "camera": [
+        3330.721407975658,
+        6169.7416845455355,
+        4007.541302999288
+      ],
+      "quaternion": [
+        -0.3803329713884497,
+        0.30530060321824054,
+        0.13461712955027658,
+        0.8625639692110119
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -209.7350238781789,
+        8.793660774600585,
+        -367.30964815546037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.094466666669632,
+      "trees": true,
+      "calls": 795,
+      "triangles": 3920001,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 7.799999952316284
+    },
+    {
+      "index": 28,
+      "nowMs": 22950.099999964237,
+      "camera": [
+        3238.555174088911,
+        6059.523143534724,
+        3888.21000587622
+      ],
+      "quaternion": [
+        -0.38043434209554783,
+        0.305355537463457,
+        0.13468900751806778,
+        0.8624885960686837
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -237.26630838222093,
+        9.132372581457457,
+        -405.2964300645052
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.098725000002965,
+      "trees": true,
+      "calls": 794,
+      "triangles": 3919701,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 7.399999976158142
+    },
+    {
+      "index": 29,
+      "nowMs": 22998.599999964237,
+      "camera": [
+        3144.445184359277,
+        5946.980129405618,
+        3766.362050577587
+      ],
+      "quaternion": [
+        -0.3805417677436738,
+        0.30541379900332977,
+        0.13476523563468748,
+        0.862408665103268
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -265.3782187061554,
+        9.478227709961185,
+        -444.0843408270831
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.102841666669633,
+      "trees": true,
+      "calls": 793,
+      "triangles": 3913701,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 5.799999952316284
+    },
+    {
+      "index": 30,
+      "nowMs": 23033.5,
+      "camera": [
+        3076.1869342901723,
+        5865.352352970569,
+        3677.9853731698295
+      ],
+      "quaternion": [
+        -0.38062229011557064,
+        0.3054575008593011,
+        0.13482241187400934,
+        0.8623487140898649
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -285.7678692663568,
+        9.729077443522005,
+        -472.21732564725346
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.105600000002966,
+      "trees": true,
+      "calls": 790,
+      "triangles": 3912693,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 8.5
+    },
+    {
+      "index": 31,
+      "nowMs": 23057.19999998808,
+      "camera": [
+        3019.1950504674446,
+        5797.197650109243,
+        3604.1957092630873
+      ],
+      "quaternion": [
+        -0.38069127720661095,
+        0.3054949634214681,
+        0.13487142350947123,
+        0.8622973256965627
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -302.7921058199829,
+        9.938523171438947,
+        -495.70682033594625
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.1084083333363,
+      "trees": true,
+      "calls": 787,
+      "triangles": 3898262,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 5.5
+    },
+    {
+      "index": 32,
+      "nowMs": 23084.399999976158,
+      "camera": [
+        2957.6953933884,
+        5723.652250779519,
+        3524.569651623756
+      ],
+      "quaternion": [
+        -0.38076758344216405,
+        0.3055364234175575,
+        0.13492566321735514,
+        0.8622404576277887
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -321.1628744251615,
+        10.164535009960174,
+        -521.0542166916807
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.109758333336302,
+      "trees": true,
+      "calls": 784,
+      "triangles": 3885882,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 6.099999964237213
+    },
+    {
+      "index": 33,
+      "nowMs": 23117.30000001192,
+      "camera": [
+        2882.4569274758364,
+        5633.677065822257,
+        3427.1554105045157
+      ],
+      "quaternion": [
+        -0.380863675108222,
+        0.3055886677871123,
+        0.13499400894181723,
+        0.8621688028761961
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -343.63760864541587,
+        10.441037104704524,
+        -552.0641329621405
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.112550000002969,
+      "trees": true,
+      "calls": 782,
+      "triangles": 3885698,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 6.600000023841858
+    },
+    {
+      "index": 34,
+      "nowMs": 23148.099999964237,
+      "camera": [
+        2803.589850488507,
+        5539.362545278733,
+        3325.0430619760155
+      ],
+      "quaternion": [
+        -0.38096778892997674,
+        0.3056453168775237,
+        0.13506811366497842,
+        0.8620911139430838
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -367.19625743656024,
+        10.730874380476507,
+        -584.5695997364785
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.115308333336301,
+      "trees": true,
+      "calls": 779,
+      "triangles": 3867151,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 5.799999952316284
+    },
+    {
+      "index": 35,
+      "nowMs": 23183.399999976158,
+      "camera": [
+        2715.0589660889855,
+        5433.491398098061,
+        3210.4185967534395
+      ],
+      "quaternion": [
+        -0.3810890140890413,
+        0.30571133301058406,
+        0.13515446750562038,
+        0.8620005882380861
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -393.641614515951,
+        11.05622624257435,
+        -621.0580538706888
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.118083333336301,
+      "trees": true,
+      "calls": 755,
+      "triangles": 3827651,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 5.699999988079071
+    },
+    {
+      "index": 36,
+      "nowMs": 23209.599999964237,
+      "camera": [
+        2646.144943159231,
+        5351.0794046576375,
+        3121.192864081304
+      ],
+      "quaternion": [
+        -0.3811867358131084,
+        0.305764594225462,
+        0.13522413365304728,
+        0.861927560202172
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -414.22715318435877,
+        11.30948594778261,
+        -649.4613188096062
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.120883333336302,
+      "trees": true,
+      "calls": 740,
+      "triangles": 3779201,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 7
+    },
+    {
+      "index": 37,
+      "nowMs": 23241.899999976158,
+      "camera": [
+        2559.7760605351323,
+        5247.793723664536,
+        3009.3676287432936
+      ],
+      "quaternion": [
+        -0.3813135927366011,
+        0.30583379430315644,
+        0.13531464349916617,
+        0.861832687655286
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -440.02669147017104,
+        11.626892432306699,
+        -685.0586929195326
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.123691666669636,
+      "trees": true,
+      "calls": 729,
+      "triangles": 3758007,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 6.700000047683716
+    },
+    {
+      "index": 38,
+      "nowMs": 23275,
+      "camera": [
+        2467.8597773395863,
+        5137.874090391917,
+        2890.359952744145
+      ],
+      "quaternion": [
+        -0.38145426572270746,
+        0.3059106095483346,
+        0.13541510761299677,
+        0.8617273877264648
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -467.4833123658475,
+        11.964685667939904,
+        -722.9424563803424
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.126425000002968,
+      "trees": true,
+      "calls": 724,
+      "triangles": 3744948,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 5.900000035762787
+    },
+    {
+      "index": 39,
+      "nowMs": 23304.19999998808,
+      "camera": [
+        2385.00426900008,
+        5038.789937131287,
+        2783.083623149364
+      ],
+      "quaternion": [
+        -0.3815863944109379,
+        0.30598283455417313,
+        0.1355095625748182,
+        0.861628392643508
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -492.23335884843436,
+        12.269180467762185,
+        -757.0917754153738
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.127808333336304,
+      "trees": true,
+      "calls": 710,
+      "triangles": 3717530,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 6.399999976158142
+    },
+    {
+      "index": 40,
+      "nowMs": 23328.099999964237,
+      "camera": [
+        2314.03735113946,
+        4953.922954758511,
+        2691.199925573741
+      ],
+      "quaternion": [
+        -0.3817038178553117,
+        0.3060470827552509,
+        0.13559358088553972,
+        0.8615403411299533
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -513.4321246393479,
+        12.529984581828195,
+        -786.3411514378449
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.130633333336306,
+      "trees": true,
+      "calls": 706,
+      "triangles": 3705766,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 6.399999976158142
+    },
+    {
+      "index": 41,
+      "nowMs": 23358.899999976158,
+      "camera": [
+        2227.224440903896,
+        4850.106275877784,
+        2578.799789986473
+      ],
+      "quaternion": [
+        -0.38185311780095693,
+        0.30612885591801176,
+        0.1357005104391447,
+        0.8614282857362957
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -539.3642999005835,
+        12.849022872147437,
+        -822.1215337854633
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.133450000002973,
+      "trees": true,
+      "calls": 697,
+      "triangles": 3647514,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 6.899999976158142
+    },
+    {
+      "index": 42,
+      "nowMs": 23388.80000001192,
+      "camera": [
+        2138.9974901371406,
+        4744.598592843959,
+        2464.5688397542344
+      ],
+      "quaternion": [
+        -0.3820116284020259,
+        0.30621577673996236,
+        0.13581416336032126,
+        0.8613091935373207
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -565.7188679462777,
+        13.17325777518579,
+        -858.4847201276001
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.134758333336308,
+      "trees": true,
+      "calls": 681,
+      "triangles": 3591342,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 5.800000011920929
+    },
+    {
+      "index": 43,
+      "nowMs": 23412.69999998808,
+      "camera": [
+        2066.3055780424957,
+        4657.668747102371,
+        2370.45172337874
+      ],
+      "quaternion": [
+        -0.3821476936427307,
+        0.30629047419124145,
+        0.13591182713862068,
+        0.8612068630167132
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -587.4329125439951,
+        13.440401259856248,
+        -888.4450612942344
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.137525000002974,
+      "trees": true,
+      "calls": 664,
+      "triangles": 3538149,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 6.800000011920929
+    },
+    {
+      "index": 44,
+      "nowMs": 23443.80000001192,
+      "camera": [
+        1973.837300194232,
+        4547.0890017398615,
+        2250.729357898033
+      ],
+      "quaternion": [
+        -0.38232839329420504,
+        0.30638979657026655,
+        0.1360416775824276,
+        0.8610708183414771
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -615.0544216117038,
+        13.780223081212366,
+        -926.5563321577389
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.140308333336307,
+      "trees": true,
+      "calls": 644,
+      "triangles": 3489836,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 6.400000035762787
+    },
+    {
+      "index": 45,
+      "nowMs": 23474.19999998808,
+      "camera": [
+        1879.8725786730174,
+        4434.7197090411755,
+        2129.0694871398046
+      ],
+      "quaternion": [
+        -0.3825213727412681,
+        0.30649602205561666,
+        0.1361805409718196,
+        0.8609253441041456
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -643.1229383824168,
+        14.125544347635834,
+        -965.2843698896111
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.143125000002975,
+      "trees": true,
+      "calls": 625,
+      "triangles": 3405413,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.800000011920929
+    },
+    {
+      "index": 46,
+      "nowMs": 23500.5,
+      "camera": [
+        1798.288015698945,
+        4337.155437172843,
+        2023.438701174549
+      ],
+      "quaternion": [
+        -0.38269714785462006,
+        0.3065929158458109,
+        0.13630719468893004,
+        0.860792672862134
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -667.493336516913,
+        14.425368410866326,
+        -998.9098623302483
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.144491666669644,
+      "trees": true,
+      "calls": 621,
+      "triangles": 3367361,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 5.600000023841858
+    },
+    {
+      "index": 47,
+      "nowMs": 23525.399999976158,
+      "camera": [
+        1722.9508214640766,
+        4247.062186290761,
+        1925.8966325607198
+      ],
+      "quaternion": [
+        -0.38286673497151213,
+        0.3066865240964975,
+        0.13642954390926879,
+        0.8606645215986141
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -689.9975622050874,
+        14.702233333156357,
+        -1029.9604699807232
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.147266666669644,
+      "trees": true,
+      "calls": 602,
+      "triangles": 3340771,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 6
+    },
+    {
+      "index": 48,
+      "nowMs": 23553.899999976158,
+      "camera": [
+        1636.989065842258,
+        4144.263374971129,
+        1814.5985207822505
+      ],
+      "quaternion": [
+        -0.38306937341903985,
+        0.3067985381479564,
+        0.13657593737637733,
+        0.8605112000830583
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -715.6754862200723,
+        15.018143621983313,
+        -1065.3900446266516
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.148650000002974,
+      "trees": true,
+      "calls": 585,
+      "triangles": 3251560,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 5.5
+    },
+    {
+      "index": 49,
+      "nowMs": 23580.099999964237,
+      "camera": [
+        1553.9225250584846,
+        4044.9268550125003,
+        1707.04895906929
+      ],
+      "quaternion": [
+        -0.3832751149156328,
+        0.30691244886736113,
+        0.13672479529181475,
+        0.860355313442684
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -740.4885709110972,
+        15.32341396809287,
+        -1099.6263417565674
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.151425000002973,
+      "trees": true,
+      "calls": 566,
+      "triangles": 3165675,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 5.099999964237213
+    },
+    {
+      "index": 50,
+      "nowMs": 23603.80000001192,
+      "camera": [
+        1485.6379623224652,
+        3963.267612132148,
+        1618.6382136027519
+      ],
+      "quaternion": [
+        -0.3834520824432521,
+        0.30701057536090975,
+        0.1368530148051427,
+        0.860221052651724
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -760.8860814161866,
+        15.574360400960778,
+        -1127.7701714761913
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.152891666669639,
+      "trees": true,
+      "calls": 537,
+      "triangles": 3042835,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 5.300000011920929
+    },
+    {
+      "index": 51,
+      "nowMs": 23629.80000001192,
+      "camera": [
+        1403.2621381108506,
+        3864.7570972040467,
+        1511.9829501704544
+      ],
+      "quaternion": [
+        -0.383675672594666,
+        0.30713474839951,
+        0.13701525315306018,
+        0.8600511874231691
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -785.4928398458702,
+        15.87709235694289,
+        -1161.7217862589928
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.155666666669639,
+      "trees": true,
+      "calls": 524,
+      "triangles": 2999460,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.399999976158142
+    },
+    {
+      "index": 52,
+      "nowMs": 23656.099999964237,
+      "camera": [
+        1327.13118664569,
+        3773.7146183872846,
+        1413.4131724282693
+      ],
+      "quaternion": [
+        -0.38389285274589036,
+        0.307255570656856,
+        0.13717309676248438,
+        0.8598859421083368
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -808.2341714155888,
+        16.156874344782203,
+        -1193.0995449877346
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.158383333336303,
+      "trees": true,
+      "calls": 511,
+      "triangles": 2930342,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.399999976158142
+    },
+    {
+      "index": 53,
+      "nowMs": 23680.19999998808,
+      "camera": [
+        1256.6514992581574,
+        3689.430298770869,
+        1322.1603115690832
+      ],
+      "quaternion": [
+        -0.38410361691221917,
+        0.30737302138831174,
+        0.13732651982078417,
+        0.8597253422759407
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -829.2873949595435,
+        16.41588788211598,
+        -1222.1481064934337
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.159750000002973,
+      "trees": true,
+      "calls": 492,
+      "triangles": 2841555,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.699999988079071
+    },
+    {
+      "index": 54,
+      "nowMs": 23707.30000001192,
+      "camera": [
+        1178.3738485138451,
+        3595.820653514087,
+        1220.811116694274
+      ],
+      "quaternion": [
+        -0.38434946799644215,
+        0.3075102720149267,
+        0.1375057869615925,
+        0.8595377115683935
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -852.6699742629121,
+        16.703559010706268,
+        -1254.4106382448167
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.162550000002973,
+      "trees": true,
+      "calls": 473,
+      "triangles": 2768098,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 5.300000011920929
+    },
+    {
+      "index": 55,
+      "nowMs": 23726.5,
+      "camera": [
+        1118.3488365726962,
+        3524.038733375748,
+        1143.094340900152
+      ],
+      "quaternion": [
+        -0.3845469851737963,
+        0.3076207331519899,
+        0.13765004777213208,
+        0.8593867377828832
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -870.600246678523,
+        16.9241515139887,
+        -1279.1502521092398
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.163941666669643,
+      "trees": true,
+      "calls": 458,
+      "triangles": 2732288,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 5.100000023841858
+    },
+    {
+      "index": 56,
+      "nowMs": 23749.69999998808,
+      "camera": [
+        1053.2755173109258,
+        3446.2197100165395,
+        1058.8413203725645
+      ],
+      "quaternion": [
+        -0.3847705651742406,
+        0.3077459790886951,
+        0.13781360021733555,
+        0.8592155935068756
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -890.0385158869578,
+        17.163296595824335,
+        -1305.9705515036144
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.165350000002974,
+      "trees": true,
+      "calls": 439,
+      "triangles": 2638593,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.5
+    },
+    {
+      "index": 57,
+      "nowMs": 23773.399999976158,
+      "camera": [
+        985.1440840485875,
+        3364.7435895928948,
+        970.628837739946
+      ],
+      "quaternion": [
+        -0.38501592388406,
+        0.3078836819037022,
+        0.13799339836026397,
+        0.8590274726585343
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -910.3902845739422,
+        17.413680276385605,
+        -1334.051268132085
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.168150000002974,
+      "trees": true,
+      "calls": 421,
+      "triangles": 2599501,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.5
+    },
+    {
+      "index": 58,
+      "nowMs": 23794.5,
+      "camera": [
+        928.8709101581603,
+        3297.448368092666,
+        897.7697162331688
+      ],
+      "quaternion": [
+        -0.38522787996411906,
+        0.30800285544638534,
+        0.1381489849289693,
+        0.8588647038377574
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -927.1998328758344,
+        17.620484738304043,
+        -1357.2445428679507
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.16948333333631,
+      "trees": true,
+      "calls": 408,
+      "triangles": 2524060,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 5.5
+    },
+    {
+      "index": 59,
+      "nowMs": 23814,
+      "camera": [
+        872.8784208240122,
+        3230.4888079401203,
+        825.2740082105997
+      ],
+      "quaternion": [
+        -0.38544769835747356,
+        0.3081266633508681,
+        0.13831060412090448,
+        0.8586956433748208
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -943.9255369535578,
+        17.82625768174543,
+        -1380.322132036826
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.17087500000298,
+      "trees": true,
+      "calls": 403,
+      "triangles": 2487485,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.900000035762787
+    },
+    {
+      "index": 60,
+      "nowMs": 23836.69999998808,
+      "camera": [
+        812.9763691570324,
+        3158.853931913813,
+        747.716433985127
+      ],
+      "quaternion": [
+        -0.3856933688122349,
+        0.30826529053486995,
+        0.13849154685471737,
+        0.8585063933107948
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -961.8190794937242,
+        18.046398304823157,
+        -1405.0110671990674
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.172266666669643,
+      "trees": true,
+      "calls": 390,
+      "triangles": 2442192,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.199999988079071
+    },
+    {
+      "index": 61,
+      "nowMs": 23857,
+      "camera": [
+        756.062653536726,
+        3090.792707812126,
+        674.0279775661529
+      ],
+      "quaternion": [
+        -0.38593752664058373,
+        0.30840333596487546,
+        0.1386717074588489,
+        0.8583179862071705
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -978.8199661617223,
+        18.255556763835166,
+        -1428.4683444656916
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.175108333336311,
+      "trees": true,
+      "calls": 386,
+      "triangles": 2415830,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.900000035762787
+    },
+    {
+      "index": 62,
+      "nowMs": 23875.599999964237,
+      "camera": [
+        708.7860281324661,
+        3034.2561601391994,
+        612.8170460223514
+      ],
+      "quaternion": [
+        -0.386148824940996,
+        0.3085230225333979,
+        0.13882788972547364,
+        0.8581546752176533
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -992.9421253246437,
+        18.429298822477257,
+        -1447.9536460006766
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.176416666669645,
+      "trees": true,
+      "calls": 375,
+      "triangles": 2398135,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.300000011920929
+    },
+    {
+      "index": 63,
+      "nowMs": 23894.19999998808,
+      "camera": [
+        661.8790407172601,
+        2978.161650272719,
+        552.0846995182073
+      ],
+      "quaternion": [
+        -0.3863665494883788,
+        0.3086465633714405,
+        0.13898908339598656,
+        0.857986143857922
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1006.9538686854761,
+        18.601682457910815,
+        -1467.2865993590751
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.177816666669642,
+      "trees": true,
+      "calls": 368,
+      "triangles": 2349458,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.600000023841858
+    },
+    {
+      "index": 64,
+      "nowMs": 23913,
+      "camera": [
+        614.6771220266423,
+        2921.7144418798525,
+        490.97049373466234
+      ],
+      "quaternion": [
+        -0.38659424410537885,
+        0.3087759950209939,
+        0.13915794341385607,
+        0.8578096188014052
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1021.0537119556795,
+        18.775149968652936,
+        -1486.7411101421917
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.179200000002979,
+      "trees": true,
+      "calls": 364,
+      "triangles": 2306732,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.199999988079071
+    },
+    {
+      "index": 65,
+      "nowMs": 23933.30000001192,
+      "camera": [
+        566.5882122655885,
+        2864.206510296396,
+        428.7078652532591
+      ],
+      "quaternion": [
+        -0.386835626548454,
+        0.30891346944231374,
+        0.1393372738610011,
+        0.857622172371355
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1035.418511300173,
+        18.951877180214584,
+        -1506.561198804831
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.180666666669644,
+      "trees": true,
+      "calls": 361,
+      "triangles": 2293606,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.399999976158142
+    },
+    {
+      "index": 66,
+      "nowMs": 23952.80000001192,
+      "camera": [
+        518.9851989411613,
+        2807.2796461393586,
+        367.07434625810583
+      ],
+      "quaternion": [
+        -0.3870845030939393,
+        0.3090554956751521,
+        0.1395225176250241,
+        0.8574285714466711
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1049.6381668922081,
+        19.12681871764098,
+        -1526.181022780609
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.182058333336315,
+      "trees": true,
+      "calls": 354,
+      "triangles": 2249862,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4
+    },
+    {
+      "index": 67,
+      "nowMs": 23972.30000001192,
+      "camera": [
+        473.1259168727461,
+        2752.438052334029,
+        307.6985056321223
+      ],
+      "quaternion": [
+        -0.38733419486686715,
+        0.3091982780234975,
+        0.1397087224875641,
+        0.8572339932684848
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1063.336946678828,
+        19.295352025724704,
+        -1545.082159053345
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.184766666669645,
+      "trees": true,
+      "calls": 348,
+      "triangles": 2229313,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.800000011920929
+    },
+    {
+      "index": 68,
+      "nowMs": 23992.19999998808,
+      "camera": [
+        429.02950211074995,
+        2699.704613048151,
+        250.60511958260895
+      ],
+      "quaternion": [
+        -0.38758405058915907,
+        0.30934144724508106,
+        0.13989540646482687,
+        0.8570389419362808
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1076.5091344663049,
+        19.457406779294207,
+        -1563.2567206025676
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.186191666669643,
+      "trees": true,
+      "calls": 342,
+      "triangles": 2196480,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.600000023841858
+    },
+    {
+      "index": 69,
+      "nowMs": 24014.099999964237,
+      "camera": [
+        381.9990249682173,
+        2643.4624259141747,
+        189.71288600570733
+      ],
+      "quaternion": [
+        -0.38786174461846223,
+        0.30950091387301476,
+        0.1401033111344161,
+        0.8568217513476561
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1090.5577658573081,
+        19.630244240677975,
+        -1582.6405708799584
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.187541666669645,
+      "trees": true,
+      "calls": 334,
+      "triangles": 2160501,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4
+    },
+    {
+      "index": 70,
+      "nowMs": 24031.399999976158,
+      "camera": [
+        343.2856682690508,
+        2597.166407154675,
+        139.5891598200833
+      ],
+      "quaternion": [
+        -0.38809954425435933,
+        0.3096377619155996,
+        0.14028170134642756,
+        0.8566354209421932
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1102.121962336258,
+        19.77251620345755,
+        -1598.596477678812
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.188925000002982,
+      "trees": true,
+      "calls": 331,
+      "triangles": 2160479,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.599999964237213
+    },
+    {
+      "index": 71,
+      "nowMs": 24052.80000001192,
+      "camera": [
+        304.0669330288556,
+        2550.266022966522,
+        88.81109989100514
+      ],
+      "quaternion": [
+        -0.3883494394243772,
+        0.3097818613517119,
+        0.14046951864090088,
+        0.8564392714075145
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1113.8371221323423,
+        19.916645437295735,
+        -1614.760678812912
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.190316666669645,
+      "trees": true,
+      "calls": 330,
+      "triangles": 2159339,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4
+    },
+    {
+      "index": 72,
+      "nowMs": 24070.899999976158,
+      "camera": [
+        265.55636094779084,
+        2504.212507603376,
+        38.94992703423213
+      ],
+      "quaternion": [
+        -0.38860412751368956,
+        0.3099290326568405,
+        0.1406613125391348,
+        0.8562389981485818
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1125.3407441386407,
+        20.058172164629497,
+        -1630.6330069003711
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.193100000002978,
+      "trees": true,
+      "calls": 325,
+      "triangles": 2121959,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.599999964237213
+    },
+    {
+      "index": 73,
+      "nowMs": 24089.399999976158,
+      "camera": [
+        230.6577172892703,
+        2462.478377596232,
+        -6.234738108147212
+      ],
+      "quaternion": [
+        -0.3888433363438569,
+        0.3100675439487599,
+        0.14084179541951325,
+        0.8560505631290537
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1135.7654349049849,
+        20.186425019844958,
+        -1645.0166603238872
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.194541666669643,
+      "trees": true,
+      "calls": 323,
+      "triangles": 2101559,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.5
+    },
+    {
+      "index": 74,
+      "nowMs": 24110.599999964237,
+      "camera": [
+        193.54800184723126,
+        2418.100100206989,
+        -54.282166030698136
+      ],
+      "quaternion": [
+        -0.3891069599014602,
+        0.3102205133706587,
+        0.14104108888549807,
+        0.8558425194428478
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1146.8506023314226,
+        20.322803585391668,
+        -1660.3116182250167
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.19594166666964,
+      "trees": true,
+      "calls": 321,
+      "triangles": 2081879,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.399999976158142
+    },
+    {
+      "index": 75,
+      "nowMs": 24127.399999976158,
+      "camera": [
+        165.48267086672467,
+        2384.53770210078,
+        -90.61946884603731
+      ],
+      "quaternion": [
+        -0.38931299565657435,
+        0.31034030256253964,
+        0.14119713299215875,
+        0.8556796466278078
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1155.234091374426,
+        20.425943949986845,
+        -1671.8788870847998
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.197266666669641,
+      "trees": true,
+      "calls": 319,
+      "triangles": 2081528,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.699999988079071
+    },
+    {
+      "index": 76,
+      "nowMs": 24144.80000001192,
+      "camera": [
+        137.03711651068943,
+        2350.520607475665,
+        -127.44906202287711
+      ],
+      "quaternion": [
+        -0.38952796245163773,
+        0.310465505544996,
+        0.14136020950697964,
+        0.8555094549466465
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1163.731158215776,
+        20.530481639188913,
+        -1683.6028669420255
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.19865000000297,
+      "trees": true,
+      "calls": 317,
+      "triangles": 2073690,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.600000023841858
+    },
+    {
+      "index": 77,
+      "nowMs": 24164.19999998808,
+      "camera": [
+        108.6414222075141,
+        2316.5631388333986,
+        -164.21409940166086
+      ],
+      "quaternion": [
+        -0.3897489929924578,
+        0.3105944769000797,
+        0.1415281729532501,
+        0.8553341859419895
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1172.2133311936927,
+        20.634836092211295,
+        -1695.3062967249552
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.200058333336301,
+      "trees": true,
+      "calls": 313,
+      "triangles": 2046195,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.699999988079071
+    },
+    {
+      "index": 78,
+      "nowMs": 24197,
+      "camera": [
+        63.954301130248496,
+        2263.123293464845,
+        -222.07229646543874
+      ],
+      "quaternion": [
+        -0.39011058065727455,
+        0.3108059835746121,
+        0.14180357754469564,
+        0.8550468530022126
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1185.5619708436166,
+        20.799061697240475,
+        -1713.7243208854202
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.202816666669634,
+      "trees": true,
+      "calls": 312,
+      "triangles": 2042175,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 6.199999988079071
+    },
+    {
+      "index": 79,
+      "nowMs": 24219.80000001192,
+      "camera": [
+        34.13177812987669,
+        2227.459527726068,
+        -260.68470583750786
+      ],
+      "quaternion": [
+        -0.3903617707455068,
+        0.31095329670117056,
+        0.14199536034370747,
+        0.8548468008081722
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1194.4703566019025,
+        20.90865975961654,
+        -1726.0158253705079
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.204266666669632,
+      "trees": true,
+      "calls": 310,
+      "triangles": 2028783,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 5.900000035762787
+    },
+    {
+      "index": 80,
+      "nowMs": 24237.099999964237,
+      "camera": [
+        12.02138382584917,
+        2201.018440805253,
+        -289.31191475052674
+      ],
+      "quaternion": [
+        -0.3905533820227104,
+        0.3110658810897999,
+        0.14214191138528434,
+        0.8546939513300579
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1201.0750265597608,
+        20.98991567394887,
+        -1735.1287368016308
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.205600000002967,
+      "trees": true,
+      "calls": 308,
+      "triangles": 2028337,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.799999952316284
+    },
+    {
+      "index": 81,
+      "nowMs": 24260.099999964237,
+      "camera": [
+        -13.469406365383293,
+        2170.5348506051505,
+        -322.3158569746338
+      ],
+      "quaternion": [
+        -0.39078022010977065,
+        0.31119940173381605,
+        0.14231569325986504,
+        0.8545127239447277
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1208.68946589825,
+        21.083594576077942,
+        -1745.634895585046
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.2083583333363,
+      "trees": true,
+      "calls": 306,
+      "triangles": 2003977,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.099999964237213
+    },
+    {
+      "index": 82,
+      "nowMs": 24279,
+      "camera": [
+        -31.67230852769717,
+        2148.7666038852285,
+        -345.8838800437152
+      ],
+      "quaternion": [
+        -0.39094623821506264,
+        0.3112972870394699,
+        0.14244307932995065,
+        0.854379896216173
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1214.1269157873899,
+        21.150490418746443,
+        -1753.1373142625973
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.20975000000297,
+      "trees": true,
+      "calls": 304,
+      "triangles": 1998367,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.400000035762787
+    },
+    {
+      "index": 83,
+      "nowMs": 24301.399999976158,
+      "camera": [
+        -50.66003093043173,
+        2126.059816680282,
+        -370.4680411641011
+      ],
+      "quaternion": [
+        -0.39112312452226294,
+        0.3114017337149437,
+        0.14257899006023833,
+        0.8542381947072326
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1219.798801959888,
+        21.220270483439435,
+        -1760.9632005926005
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.211133333336306,
+      "trees": true,
+      "calls": 303,
+      "triangles": 1995247,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.399999976158142
+    },
+    {
+      "index": 84,
+      "nowMs": 24321.80000001192,
+      "camera": [
+        -65.76732622399186,
+        2107.993503501838,
+        -390.0280586170984
+      ],
+      "quaternion": [
+        -0.391266649797004,
+        0.31148659829173536,
+        0.142689408863407,
+        0.8541230827225565
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1224.3115527502114,
+        21.27578994072669,
+        -1767.1897491598033
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.21394166666964,
+      "trees": true,
+      "calls": 301,
+      "triangles": 1995239,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.600000023841858
+    },
+    {
+      "index": 85,
+      "nowMs": 24341.099999964237,
+      "camera": [
+        -76.70066724278104,
+        2094.918683747942,
+        -404.1838910802553
+      ],
+      "quaternion": [
+        -0.39137210257571886,
+        0.3115490179399069,
+        0.14277061796575036,
+        0.8540384285217021
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1227.5774876753367,
+        21.31597007541687,
+        -1771.6959812504874
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.215300000002976,
+      "trees": true,
+      "calls": 301,
+      "triangles": 1995239,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.299999952316284
+    },
+    {
+      "index": 86,
+      "nowMs": 24357.69999998808,
+      "camera": [
+        -85.04662309152809,
+        2084.9380320689343,
+        -414.9897328203724
+      ],
+      "quaternion": [
+        -0.39145351177293,
+        0.31159724451247,
+        0.14283335800701324,
+        0.8539730307060739
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1230.0705361079372,
+        21.346641544416574,
+        -1775.135809387964
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.216725000002974,
+      "trees": true,
+      "calls": 301,
+      "triangles": 1995239,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.099999964237213
+    },
+    {
+      "index": 87,
+      "nowMs": 24375.899999976158,
+      "camera": [
+        -91.8622939886809,
+        2076.7873973883734,
+        -423.8142536304622
+      ],
+      "quaternion": [
+        -0.3915205887111076,
+        0.31163700615175804,
+        0.14288508327806784,
+        0.8539191167720139
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1232.1064679958126,
+        21.371689201320436,
+        -1777.9449228020164
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.218108333336303,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.699999988079071
+    },
+    {
+      "index": 88,
+      "nowMs": 24393.899999976158,
+      "camera": [
+        -96.46070076478645,
+        2071.288315300899,
+        -429.76799419413146
+      ],
+      "quaternion": [
+        -0.39156614982740456,
+        0.3116640268491352,
+        0.14292023284007296,
+        0.8538824812129966
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1233.4800734897058,
+        21.388588390992346,
+        -1779.8401795350587
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.219475000002973,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.399999976158142
+    },
+    {
+      "index": 89,
+      "nowMs": 24416,
+      "camera": [
+        -99.07380442814065,
+        2068.1633913332034,
+        -433.1512836757038
+      ],
+      "quaternion": [
+        -0.3915921511278546,
+        0.31167945207357267,
+        0.14294029812035508,
+        0.8538615681147858
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.2606424395317,
+        21.39819157239614,
+        -1780.9171834960487
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": true,
+      "hour": 10.22085833333631,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 5.5
+    },
+    {
+      "index": 90,
+      "nowMs": 24444,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.22363333333631,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 5.699999988079071
+    },
+    {
+      "index": 91,
+      "nowMs": 24467.30000001192,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.22506666666964,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 5.100000023841858
+    },
+    {
+      "index": 92,
+      "nowMs": 24494.80000001192,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.227800000002972,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 5.100000023841858
+    },
+    {
+      "index": 93,
+      "nowMs": 24519.80000001192,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.229266666669638,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.600000023841858
+    },
+    {
+      "index": 94,
+      "nowMs": 24547.599999964237,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.231975000002969,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 6.400000035762787
+    },
+    {
+      "index": 95,
+      "nowMs": 24566.899999976158,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.233366666669639,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.300000011920929
+    },
+    {
+      "index": 96,
+      "nowMs": 24591.399999976158,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.234750000002975,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 6.199999988079071
+    },
+    {
+      "index": 97,
+      "nowMs": 24612.80000001192,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.237566666669643,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 5.400000035762787
+    },
+    {
+      "index": 98,
+      "nowMs": 24635.80000001192,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.238916666669645,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 5
+    },
+    {
+      "index": 99,
+      "nowMs": 24656,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.24033333333631,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 7.099999964237213
+    },
+    {
+      "index": 100,
+      "nowMs": 24679,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.243075000002975,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 5.600000023841858
+    },
+    {
+      "index": 101,
+      "nowMs": 24699.599999964237,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.244475000002979,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.699999988079071
+    },
+    {
+      "index": 102,
+      "nowMs": 24716,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.245866666669642,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4
+    },
+    {
+      "index": 103,
+      "nowMs": 24733.099999964237,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.247266666669645,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4
+    },
+    {
+      "index": 104,
+      "nowMs": 24752.399999976158,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.248641666669641,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.800000011920929
+    },
+    {
+      "index": 105,
+      "nowMs": 24769.80000001192,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.250025000002978,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 5.100000023841858
+    },
+    {
+      "index": 106,
+      "nowMs": 24789.399999976158,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.252816666669645,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.800000011920929
+    },
+    {
+      "index": 107,
+      "nowMs": 24806.19999998808,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.254241666669643,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.199999988079071
+    },
+    {
+      "index": 108,
+      "nowMs": 24826.69999998808,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.255583333336311,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4
+    },
+    {
+      "index": 109,
+      "nowMs": 24842.899999976158,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.256983333336308,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.200000047683716
+    },
+    {
+      "index": 110,
+      "nowMs": 24864.5,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.258366666669644,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 6.100000023841858
+    },
+    {
+      "index": 111,
+      "nowMs": 24878.399999976158,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.259791666669642,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3
+    },
+    {
+      "index": 112,
+      "nowMs": 24896.5,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.26113333333631,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.800000011920929
+    },
+    {
+      "index": 113,
+      "nowMs": 24912.599999964237,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.262566666669642,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.599999964237213
+    },
+    {
+      "index": 114,
+      "nowMs": 24930,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.263916666669644,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.300000011920929
+    },
+    {
+      "index": 115,
+      "nowMs": 24946.19999998808,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.265391666669643,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.399999976158142
+    },
+    {
+      "index": 116,
+      "nowMs": 24969.399999976158,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.266691666669644,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.199999988079071
+    },
+    {
+      "index": 117,
+      "nowMs": 24985.399999976158,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.268166666669643,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.800000011920929
+    },
+    {
+      "index": 118,
+      "nowMs": 25001.099999964237,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.269541666669639,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.599999964237213
+    },
+    {
+      "index": 119,
+      "nowMs": 25020.599999964237,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.27086666666964,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.599999964237213
+    },
+    {
+      "index": 120,
+      "nowMs": 25036.69999998808,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.27225000000297,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.399999976158142
+    },
+    {
+      "index": 121,
+      "nowMs": 25055.30000001192,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.27366666666964,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 6.100000023841858
+    },
+    {
+      "index": 122,
+      "nowMs": 25071.899999976158,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.27641666666964,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4
+    },
+    {
+      "index": 123,
+      "nowMs": 25090.399999976158,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.27780000000297,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4
+    },
+    {
+      "index": 124,
+      "nowMs": 25113.399999976158,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.279191666669632,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.600000023841858
+    },
+    {
+      "index": 125,
+      "nowMs": 25128.30000001192,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.280575000002969,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.699999988079071
+    },
+    {
+      "index": 126,
+      "nowMs": 25147.30000001192,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.281975000002973,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 7.200000047683716
+    },
+    {
+      "index": 127,
+      "nowMs": 25162.69999998808,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.28335833333631,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.399999976158142
+    },
+    {
+      "index": 128,
+      "nowMs": 25180.599999964237,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.284750000002973,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.599999964237213
+    },
+    {
+      "index": 129,
+      "nowMs": 25195.30000001192,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.286183333336304,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.300000011920929
+    },
+    {
+      "index": 130,
+      "nowMs": 25209.399999976158,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.287525000002972,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.899999976158142
+    },
+    {
+      "index": 131,
+      "nowMs": 25228.599999964237,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.288916666669635,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.099999964237213
+    },
+    {
+      "index": 132,
+      "nowMs": 25242.099999964237,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.290383333336301,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.799999952316284
+    },
+    {
+      "index": 133,
+      "nowMs": 25257,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.291700000002969,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.400000035762787
+    },
+    {
+      "index": 134,
+      "nowMs": 25273.30000001192,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.293083333336298,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.200000047683716
+    },
+    {
+      "index": 135,
+      "nowMs": 25301.5,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.294508333336296,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4
+    },
+    {
+      "index": 136,
+      "nowMs": 25319.099999964237,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.2959083333363,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.600000023841858
+    },
+    {
+      "index": 137,
+      "nowMs": 25333.30000001192,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.29731666666963,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.900000035762787
+    },
+    {
+      "index": 138,
+      "nowMs": 25347.599999964237,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.298666666669632,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4
+    },
+    {
+      "index": 139,
+      "nowMs": 25361.399999976158,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.300033333336302,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.399999976158142
+    },
+    {
+      "index": 140,
+      "nowMs": 25375.30000001192,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.301416666669638,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.600000023841858
+    },
+    {
+      "index": 141,
+      "nowMs": 25388.599999964237,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.302800000002975,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.699999988079071
+    },
+    {
+      "index": 142,
+      "nowMs": 25403.899999976158,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.304200000002979,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.5
+    },
+    {
+      "index": 143,
+      "nowMs": 25430.5,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.305666666669644,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.699999988079071
+    },
+    {
+      "index": 144,
+      "nowMs": 25451,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.306975000002979,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 5.699999988079071
+    },
+    {
+      "index": 145,
+      "nowMs": 25465.19999998808,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.308366666669642,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.600000023841858
+    },
+    {
+      "index": 146,
+      "nowMs": 25480.80000001192,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.309825000002974,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.199999988079071
+    },
+    {
+      "index": 147,
+      "nowMs": 25505.80000001192,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.312608333336307,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 4.600000023841858
+    },
+    {
+      "index": 148,
+      "nowMs": 25520.5,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.31397500000297,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.600000023841858
+    },
+    {
+      "index": 149,
+      "nowMs": 25539.19999998808,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.315308333336304,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.5
+    },
+    {
+      "index": 150,
+      "nowMs": 25554.5,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.316708333336308,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.300000011920929
+    },
+    {
+      "index": 151,
+      "nowMs": 25570.399999976158,
+      "camera": [
+        -99.56589226453434,
+        2067.5749198172343,
+        -433.7884094140454
+      ],
+      "quaternion": [
+        -0.3915970565847915,
+        0.31168236261561877,
+        0.14294408414517099,
+        0.8538576221574483
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "target": [
+        -1234.4076356457572,
+        21.399999999985816,
+        -1781.1199999998037
+      ],
+      "near": 2,
+      "far": 45000,
+      "quality": "balanced",
+      "qualityMode": "auto",
+      "resolutionScale": 1,
+      "pixelRatio": 1,
+      "render": [
+        1280,
+        720
+      ],
+      "transition": false,
+      "hour": 10.318083333336304,
+      "trees": true,
+      "calls": 298,
+      "triangles": 1989076,
+      "geometries": 636,
+      "textures": 41,
+      "renderSceneCpuMs": 3.699999988079071
+    }
+  ]
+}

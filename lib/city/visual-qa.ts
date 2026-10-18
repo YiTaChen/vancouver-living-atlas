@@ -11,6 +11,7 @@ import { installUpgradeQA } from './upgrade-qa';
 import { installAutoQualityQA } from './auto-quality-qa';
 import { installTeslaQA } from './tesla-qa';
 import { installUpgradeEnduranceQA } from './upgrade-endurance-qa';
+import { installOrbitTransitionQA } from './orbit-transition-qa';
 
 const cases = [
   {id:'station-lobby', interiorSite:'waterfront', interiorAt:[0,5], interiorYaw:Math.PI},
@@ -283,6 +284,7 @@ export function installVisualQA(e: CityEngine) {
   installUpgradeQA(e, panel, runLease);
   installAutoQualityQA(e, panel, runLease);
   installTeslaQA(e, panel, runLease);
+  installOrbitTransitionQA(e, panel);
   installStreetFurnitureQA(e, panel, runLease);
   const button = (name: string, fn: () => void) => {
     const b = document.createElement('button');

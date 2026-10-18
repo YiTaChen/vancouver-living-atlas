@@ -784,6 +784,12 @@ export class CityEngine {
       void import('./visual-qa').then(({ installVisualQA }) =>
         installVisualQA(this),
       );
+    else if (process.env.VANCOUVER_ORBIT_QA === '1')
+      void import('./orbit-transition-qa').then(
+        ({ installStandaloneOrbitTransitionQA }) => {
+          if (!this.disposed) installStandaloneOrbitTransitionQA(this);
+        },
+      );
   }
   pixelRatio() {
     const w = Math.max(1, this.container.clientWidth),

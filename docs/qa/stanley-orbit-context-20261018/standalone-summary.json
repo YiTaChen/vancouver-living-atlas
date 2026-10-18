@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 1,
+  "scenario": "Standalone orbit-only QA; native public Go to Stanley; Normal animation; clock running; Trees on",
+  "trace": {
+    "filename": "work/visual-qa/stanley-orbit-standalone-20261018/orbit-manual-20261018t064207408z-001.json",
+    "sha256": "c47b77e1907ff2d54ea6fc8099f01c9c098bdcb94966356dc5ef0b09188d6bfd",
+    "revision": "2b30f719ec7c31d0f087ea7d42dd0390b4fad810",
+    "sourceFingerprint": "07993804faf81b935bfe4050dfcba4e28bb237267bdf3309e8a82bb7649e893a",
+    "installedAt": "2026-10-18T06:40:17.193Z",
+    "capturedAt": "2026-10-18T06:42:07.408Z",
+    "reason": "manual"
+  },
+  "frames": {
+    "totalSinceInstall": 4905,
+    "saved": 480,
+    "dropped": 4425,
+    "rangeMs": [
+      121094.59999996424,
+      132001.30000001192
+    ],
+    "transitionCount": 67,
+    "transitionRangeMs": [
+      129362.59999996424,
+      131147.80000001192
+    ],
+    "transitionSampleSpanMs": 1785.2000000476837,
+    "firstCompletedFrame": {
+      "index": 4855,
+      "nowMs": 131163.80000001192
+    },
+    "afterGoCount": 117
+  },
+  "go": {
+    "id": "stanley",
+    "requestedAnimate": true,
+    "effectiveAnimate": true,
+    "nowMs": 129339.30000001192
+  },
+  "clock": {
+    "runningObservedByOperator": true,
+    "allSavedHourRange": [
+      18.29829166666748,
+      19.207975000000957
+    ],
+    "transitionHourRange": [
+      18.987216666667656,
+      19.135850000000964
+    ],
+    "note": "This trace covers evening/twilight, not fixed 10:00."
+  },
+  "quality": {
+    "savedTiers": [
+      "balanced"
+    ],
+    "savedModes": [
+      "auto"
+    ],
+    "resolutionScales": [
+      1
+    ],
+    "pixelRatios": [
+      1
+    ],
+    "bufferPixels": [
+      1280,
+      720
+    ],
+    "changesInSavedWindow": 0,
+    "treesOnAllSavedFrames": true,
+    "nearFar": [
+      2,
+      45000
+    ]
+  },
+  "render": {
+    "initialCallsTriangles": [
+      781,
+      3915221
+    ],
+    "finalCallsTriangles": [
+      293,
+      1986196
+    ],
+    "maxCpu": {
+      "ms": 99.69999998807907,
+      "index": 4840,
+      "nowMs": 130886.39999997616,
+      "distanceM": 3334.2377469482617,
+      "hour": 19.106666666667635,
+      "duringTransition": true,
+      "calls": 328,
+      "triangles": 2158355
+    },
+    "maxTransitionTriangles": 3913165,
+    "maxTransitionCalls": 775,
+    "resourceChanges": [
+      {
+        "index": 4425,
+        "nowMs": 121094.59999996424,
+        "hour": 18.29829166666748,
+        "transition": false,
+        "geometries": 636,
+        "textures": 41,
+        "renderSceneCpuMs": 5.199999988079071
+      },
+      {
+        "index": 4776,
+        "nowMs": 129076.09999996424,
+        "hour": 18.949666666667653,
+        "transition": false,
+        "geometries": 636,
+        "textures": 42,
+        "renderSceneCpuMs": 14.599999964237213
+      },
+      {
+        "index": 4840,
+        "nowMs": 130886.39999997616,
+        "hour": 19.106666666667635,
+        "transition": true,
+        "geometries": 639,
+        "textures": 42,
+        "renderSceneCpuMs": 99.69999998807907
+      }
+    ]
+  },
+  "outcome": {
+    "completedNativeTransition": true,
+    "contextLossObserved": false,
+    "operatorReportedLogs": [],
+    "diagnosis": "No reproduced context loss in this trace. This successful evening run cannot identify the cause of earlier intermittent hosted graphics-context loss. No production rendering fix is established."
+  },
+  "limitations": [
+    "renderSceneCpuMs is CPU-side wall-clock time around renderScene, not GPU execution time; it excludes earlier animate work such as tickClock/updateLighting.",
+    "The 99.7 ms renderScene hitch coincides with geometries increasing 636 to 639, but this trace has no per-object upload or shader timing and does not prove a cause.",
+    "Textures increase 41 to 42 before Go; source atmosphere phase changes are plausible but the trace does not identify the texture.",
+    "A local instrumented success does not prove equivalence to the failed hosted run or establish a repair."
+  ],
+  "disposition": "Diagnostic branch only; no speculative production render-policy changes.",
+  "camera": {
+    "startXYZ": [
+      3546.6829513814514,
+      6428.002928656675,
+      4287.155322326365
+    ],
+    "endXYZ": [
+      -99.56589226453434,
+      2067.5749198172343,
+      -433.7884094140454
+    ],
+    "startTargetXYZ": [
+      -145.22442772272677,
+      8,
+      -278.2999999997469
+    ],
+    "endTargetXYZ": [
+      -1234.4076356457572,
+      21.399999999985816,
+      -1781.1199999998037
+    ],
+    "distanceM": [
+      8700,
+      2700.000000000001
+    ]
+  }
+}
