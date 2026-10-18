@@ -142,6 +142,7 @@ export class FlightController {
     this.world ||= new FlightWorld(this.e);
   }
   beginPlacement() {
+    this.e.tesla?.deactivate();
     // Start another aircraft from a useful local map, even from a cockpit.
     if (this.attached) this.detach();
     this.clear();
@@ -307,6 +308,7 @@ export class FlightController {
   }
   attach() {
     if (!this.state || this.state.phase === 'crashed') return false;
+    this.e.tesla?.deactivate();
     this.e.placement?.cancel();
     this.e.completeLocalMapTransition();
     this.e.transition = null;

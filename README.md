@@ -1,6 +1,6 @@
 # Vancouver · Living Atlas
 
-**One city. Five ways to explore: orbit, walk, drive, boat and fly.**
+**One city. Six ways to explore: orbit, walk, drive, boat, fly and Tesla.**
 
 Vancouver Living Atlas is an interactive 3D Vancouver that runs in your browser. Wander the streets, drive a red roadster, cross the harbour by boat, or take off in a floatplane or helicopter. Explore Downtown, Stanley Park, English Bay, Kitsilano Beach and False Creek through Science World as daylight gives way to city lights and aurora.
 
@@ -49,6 +49,8 @@ Recorded September 6–7, 2026. The film's **“FLIGHT PREVIEW”** captions des
 
 **Try the roadster:** Drive starts with an original red convertible and a left-hand-drive cockpit. The original Classic car remains selectable without relocating. The roadster can exceed 200 km/h; sustaining more than 100 km/h in Downtown for five seconds triggers a scripted police stop and safety reminder. [Vehicle design and references](docs/vehicles/red-roadster.md).
 
+**Tesla:** A separate reference-based 2026 Roadster Rocket has unlimited game flight, swept transitions onto building walls and wall parking. Its chase camera stays upright while the cockpit follows the car. Desktop and touch controls include Low / Medium / High / Auto car detail. [Controls, references and validation](docs/TESLA_ROADSTER_2026_10.md).
+
 **Try the sky:** choose Science World for a medium exterior view, disable the interior cutaway in Layers if needed, then change the time. Return to a city panorama for the aurora. Time and sky controls work independently of vehicle movement.
 
 ## Fly above Vancouver
@@ -76,6 +78,7 @@ This is assisted sightseeing flight with approximate physics. [Development plan,
 | **Drive** | **W / S** throttle/reverse, **A / D** steer, **Space** brake. | Left stick controls throttle/reverse and steering. |
 | **Boat** | **W / S** throttle/reverse, **A / D** rudder, **Space** neutral. | Left stick controls propulsion and steering. |
 | **Fly** | **W / S** nose down/up, **A / D** bank, **Q / E** yaw, **R / F** power, **C** cruise; helicopter **H** hover, **X** descend. | Flight stick; lower-right throttle/collective lever with +/− buttons and Auto cruise above it. Camera and other flight settings open from the toolbar. |
+| **Tesla** | **W/S**, **A/D** drive/steer; hold **Space** to jump/climb, **Q** descend, **Shift** boost, **B** brake, **E** wall grip, **P** park, **C** camera, **R** recover. | Left stick plus independent thrust, boost, grip, park and camera buttons; quality and recovery in Tesla options. |
 
 **Choose a starting point.** Select Walk, Drive or Boat, then click a suitable place—or drag its icon onto the map. Zoom in for precision. Roads snap to valid driving positions; boats need room clear of shores and docks. On mobile, tap a valid location to start; placement keeps only the Cancel control over the map.
 

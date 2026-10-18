@@ -25,6 +25,30 @@ const catalogs = Object.fromEntries(
 );
 const placeholders = (value) =>
   [...value.matchAll(/\{(\w+)\}/g)].map((m) => m[1]).sort();
+const teslaCatalogs = JSON.parse(
+  readFileSync(new URL('../lib/i18n/tesla.json', import.meta.url), 'utf8'),
+);
+
+test('Tesla controls cover all ten locales with complete quality and portable keyboard help', () => {
+  assert.deepEqual(Object.keys(teslaCatalogs).sort(), [...locales].sort());
+  const keys = Object.keys(teslaCatalogs.en).sort();
+  for (const locale of locales) {
+    const catalog = teslaCatalogs[locale];
+    assert.deepEqual(Object.keys(catalog).sort(), keys, locale);
+    for (const key of keys) {
+      assert.equal(typeof catalog[key], 'string', `${locale}/${key}`);
+      assert.ok(catalog[key].trim(), `${locale}/${key}`);
+      assert.deepEqual(
+        placeholders(catalog[key]),
+        placeholders(teslaCatalogs.en[key]),
+      );
+    }
+    for (const key of ['auto', 'low', 'medium', 'high'])
+      assert.ok(catalog[key]);
+    assert.match(catalog.desktopHint, /Q/, locale);
+    assert.notEqual(catalog.cockpit, catalog.chase, locale);
+  }
+});
 let source = readFileSync(
   new URL('../lib/i18n/index.ts', import.meta.url),
   'utf8',

@@ -1,5 +1,6 @@
 import { CityStreetFurniture } from './street-furniture-world';
 import { FlightController } from './flight-controller';
+import { TeslaController } from './tesla-controller';
 import { clearOrbitGesture } from './orbit-lifecycle';
 import { paintStartupProgress } from './startup-progress';
 import { GraphicsUnavailableError } from './startup-error';
@@ -195,6 +196,8 @@ export class CityEngine {
   busVisit: BusCabinVisit | null = null;
   busVisitDetail: BusVisitDetail = 'auto';
   flight: FlightController | null = null;
+  tesla: TeslaController | null = null;
+  onTeslaMode: (mode: 'orbit' | 'tesla') => void = () => {};
   onFlightMode: (mode: 'orbit' | 'flight') => void = () => {};
   placement: MapPlacement | null = null;
   travelReturn: TravelReturn;
@@ -434,6 +437,7 @@ export class CityEngine {
     if (this.controls) clearOrbitGesture(this.controls);
     this.navigation?.blur();
     this.flight?.clearInput();
+    this.tesla?.clearInput();
     this.travelReturn?.clearGesture();
     this.placement?.cancel();
   }
@@ -681,6 +685,7 @@ export class CityEngine {
     }
     this.placement = new MapPlacement(this);
     this.flight = new FlightController(this);
+    this.tesla = new TeslaController(this);
     if (!(await advance(92))) return;
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('render.composer-setup');
@@ -821,12 +826,20 @@ export class CityEngine {
     );
   }
   updateAutoQuality(time: number, frameMs: number) {
-    const mode = this.flight?.attached ? 'flight' : this.settings.mode;
-    const speed = this.flight?.attached
-      ? Math.hypot(this.flight.state?.speed ?? 0, this.flight.state?.vy ?? 0)
-      : mode === 'drive' || mode === 'boat'
-        ? Math.abs(this.navigation?.speed ?? 0)
-        : undefined;
+    const mode = this.tesla?.active
+      ? this.tesla.sceneryMode
+      : this.flight?.attached
+        ? 'flight'
+        : this.settings.mode === 'tesla'
+          ? 'drive'
+          : this.settings.mode;
+    const speed = this.tesla?.active
+      ? this.tesla.speedMps
+      : this.flight?.attached
+        ? Math.hypot(this.flight.state?.speed ?? 0, this.flight.state?.vy ?? 0)
+        : mode === 'drive' || mode === 'boat'
+          ? Math.abs(this.navigation?.speed ?? 0)
+          : undefined;
     const altitude = Math.max(
       0,
       this.camera.position.y -
@@ -876,7 +889,11 @@ export class CityEngine {
     if (this.compatibleGraphics || this.settings.quality === 'balanced') return;
     const direction = this.sun.position.clone().sub(this.sun.target.position);
     const coverage = shadowCoverage({
-      mode: this.settings.mode,
+      mode: this.tesla?.active
+        ? this.tesla.sceneryMode
+        : this.settings.mode === 'tesla'
+          ? 'drive'
+          : this.settings.mode,
       quality: this.settings.quality,
       distance: this.camera.position.distanceTo(this.controls.target),
       focus: this.controls.target.toArray(),
@@ -1331,6 +1348,7 @@ export class CityEngine {
   }
   flyTo(id: string, animate = true) {
     if (!this.closeBusVisit()) return;
+    if (this.tesla?.active) this.tesla.deactivate();
     if (this.flight?.attached) this.flight.detach();
     this.placement?.cancel();
     const v = VIEWS.find((p) => p.id === id) || VIEWS[0];
@@ -1377,6 +1395,10 @@ export class CityEngine {
   }
   leaveTravelAtLocation(remember = false) {
     if (!this.closeBusVisit()) return;
+    if (this.tesla?.active) {
+      this.tesla.leaveToOrbit();
+      return;
+    }
     if (this.flight?.attached) {
       this.flight.detach();
       return;
@@ -1386,6 +1408,10 @@ export class CityEngine {
   }
   zoom(f: number) {
     if (this.busVisit?.aboard) return;
+    if (this.tesla?.active) {
+      this.tesla.zoom(f);
+      return;
+    }
     if (this.flight?.attached) {
       this.flight.zoom(f);
       return;
@@ -1406,6 +1432,7 @@ export class CityEngine {
   }
   focusTrain(kind: TrainKind) {
     if (!this.closeBusVisit()) return;
+    this.tesla?.deactivate();
     if (this.flight?.attached) this.flight.detach();
     this.travelReturn?.invalidate(true);
     this.completeLocalMapTransition();
@@ -1449,6 +1476,7 @@ export class CityEngine {
   }
   focusHarbour(kind: HarbourKind) {
     if (!this.closeBusVisit()) return;
+    this.tesla?.deactivate();
     if (this.flight?.attached) this.flight.detach();
     this.travelReturn?.invalidate(true);
     this.completeLocalMapTransition();
@@ -1477,6 +1505,7 @@ export class CityEngine {
   async visitBusInterior() {
     if (!this.busVisit || this.disposed) return false;
     if (!this.closeBusVisit()) return false;
+    this.tesla?.deactivate();
     this.placement?.cancel();
     this.flight?.clear();
     // settings.quality is the live effective quality: the auto controller
@@ -1520,7 +1549,8 @@ export class CityEngine {
   applySettings(settings: Settings) {
     if (
       this.busVisit &&
-      (settings.mode !== 'walk' || !settings.traffic) &&
+      (settings.mode !== this.settings.mode ||
+        (this.settings.traffic && !settings.traffic)) &&
       !this.closeBusVisit()
     )
       return;
@@ -1533,6 +1563,7 @@ export class CityEngine {
       this.autoTimingNeedsAnchor = true;
     }
     if (modeChanged) {
+      if (settings.mode !== 'tesla') this.tesla?.deactivate();
       if (
         settings.mode === 'walk' ||
         settings.mode === 'drive' ||
@@ -1541,7 +1572,8 @@ export class CityEngine {
         this.flight?.clear();
       if (settings.mode === 'orbit' && this.flight?.attached)
         this.flight.detach();
-      if (settings.mode !== 'flight') this.navigation?.setMode(settings.mode);
+      if (settings.mode !== 'flight' && settings.mode !== 'tesla')
+        this.navigation?.setMode(settings.mode);
     }
     this.settings = {
       ...settings,
@@ -1701,10 +1733,15 @@ export class CityEngine {
       );
     if (this.settings.mode === 'orbit') {
       if (!this.transition) this.controls.update();
-    } else if (this.settings.mode !== 'flight' && !this.busVisit?.aboard)
+    } else if (
+      this.settings.mode !== 'flight' &&
+      this.settings.mode !== 'tesla' &&
+      !this.busVisit?.aboard
+    )
       this.navigation?.update((time - this.lastTime) / 1000);
     this.busVisit?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
     this.flight?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
+    this.tesla?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
     this.updateAutoQuality(time, this.lastTime ? time - this.lastTime : 0);
     this.pedestrians?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
     this.travelReturn?.update();
@@ -1779,14 +1816,18 @@ export class CityEngine {
         this.traffic?.busAssets.stats() ?? null,
       );
       this.stats.speed = Math.round(
-        (this.flight?.attached
-          ? this.flight.state?.speed || 0
-          : this.navigation?.speed || 0) * 3.6,
+        (this.tesla?.active
+          ? this.tesla.speedMps
+          : this.flight?.attached
+            ? this.flight.state?.speed || 0
+            : this.navigation?.speed || 0) * 3.6,
       );
       this.stats.clock = this.clock.snapshot();
       this.stats.heading = this.controls.getAzimuthalAngle();
       const location =
-        this.flight?.pose || minimapPose(this.navigation, this.controls.target);
+        this.tesla?.pose ||
+        this.flight?.pose ||
+        minimapPose(this.navigation, this.controls.target);
       [this.stats.lon, this.stats.lat] = unproject(location.x, location.z);
       this.stats.distance = Math.round(
         this.camera.position.distanceTo(this.controls.target),
@@ -1794,9 +1835,11 @@ export class CityEngine {
       this.stats.elevation = Math.round(
         this.settings.mode === 'orbit'
           ? this.elevation(this.controls.target.x, this.controls.target.z)
-          : this.flight?.attached
-            ? this.flight.state!.y
-            : this.navigation?.position.y || 0,
+          : this.tesla?.active
+            ? (this.tesla.state?.position[1] ?? 0)
+            : this.flight?.attached
+              ? this.flight.state!.y
+              : this.navigation?.position.y || 0,
       );
       this.onStats({ ...this.stats });
       this.fpsAt = time;
@@ -1959,6 +2002,7 @@ export class CityEngine {
     this.pedestrians?.dispose();
     this.pedestrians = null;
     this.flight?.destroy();
+    this.tesla?.destroy();
     this.busVisit?.dispose();
     this.busVisit = null;
     this.navigation?.destroy();

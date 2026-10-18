@@ -1,7 +1,7 @@
 {
   "status": "pass",
   "environment": {
-    "node": "v24.19.0",
+    "node": "v26.0.0",
     "three": "185",
     "mode": "CPU; no WebGL or browser"
   },
@@ -467,7 +467,7 @@
     "lib/city/assets/roadster.ts": "e3e25bba28d32df58cbd1b26c66fb5b7657eb04bd4ab9688156d770eb58436f0",
     "lib/city/interiors.ts": "62f813f8798eaeaf79463b3200d2fea65bcf91da631e925bfbb55a166fdac93c",
     "lib/city/seabus-layout.ts": "d40906fbb9b508633d77414b3461547165f2907f55469ed7eec3c2c4b0ffb2c1",
-    "lib/city/navigation.ts": "b55276e47e939028f50a3629149dfd6bba97527211deb46dce369c9d9fa4247e",
+    "lib/city/navigation.ts": "2411a6d59d5bc0b6abc36abc201767da601bb9115ccea57d6162ec78bcac0cad",
     "lib/city/driver-camera.ts": "911765020382258030d2dc8f386cfc7dc1f720aab5d88bbf4c04ef93beb903d0",
     "lib/city/assets/cockpits.ts": "b8aed3f6379dfdc9a5a1115382e36af3b17e7183a29dd1e7458a10ac4d2465fc",
     "lib/city/harbour-models.ts": "3d494df8a5b214327dcdfb4facb1fe79aca27d22a410bf39a8ce11d91e26a68d",
@@ -477,7 +477,7 @@
     "lib/city/boat-physics.ts": "6ce2413d9e082e1d17f0d40e1bc67ef48056b3240adb99b1b6fe25a62b6f2954",
     "lib/city/water-world.ts": "d816c253b44be7825eb5f1f2c6e714214da9cc228e5da30f70350fbde6023cc5",
     "lib/city/assets/aircraft-models.ts": "037549b49b722250eba675217aeaed6416fc648cc88b395b77cc595e58eae308",
-    "lib/city/flight-controller.ts": "b370862d99e7d03ed673f721ccf1b1789464a9987dcf704b9b778e92e0cd4d1f",
+    "lib/city/flight-controller.ts": "581bd9be9a5ae01c95cd1a4f9c22b2fafcb3268a0e296ac379f375964ea402ba",
     "lib/city/flight-state.ts": "fc29f6da8200dddded4daa570001f6e510075db1ea58a17ee7f4ef37f6fa2818",
     "lib/city/flight-geometry.ts": "6eb749ed990d2190368fce5196e0824a4235953dc94c5fd9764d1cb494128750"
   },

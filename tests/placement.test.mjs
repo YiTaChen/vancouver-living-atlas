@@ -824,7 +824,7 @@ test('direct street switching never takes over Boat, orbit, or a requested water
   nav.destroy();
 });
 
-test('pointer and keyboard mode selection share in-place switching and reject blocked bus exits', () => {
+test('pointer and keyboard mode selection share in-place switching and reject blocked bus exits or an in-progress Tesla entry', () => {
   const source = readFileSync(
     new URL('../app/page.tsx', import.meta.url),
     'utf8',
@@ -857,7 +857,7 @@ test('pointer and keyboard mode selection share in-place switching and reject bl
     },
   }).outputText;
   for (const entry of ['pointer', 'keyboard'])
-    for (const [from, to, placing, expected, exitAllowed = true] of [
+    for (const [from, to, placing, expected, exitAllowed = true, teslaBusy = false] of [
       ['walk', 'drive', null, 'switch'],
       ['drive', 'walk', null, 'switch'],
       ['drive', 'drive', null, 'switch'],
@@ -867,7 +867,9 @@ test('pointer and keyboard mode selection share in-place switching and reject bl
       ['walk', 'boat', null, 'place'],
       ['walk', 'drive', 'walk', 'place'],
       ['walk', 'drive', null, 'blocked', false],
+      ['walk', 'drive', null, 'busy', true, true],
     ]) {
+      let busCloseCalls = 0;
       const calls = [],
         nav = {
           mode: from,
@@ -884,9 +886,13 @@ test('pointer and keyboard mode selection share in-place switching and reject bl
         };
       const bindings = {
         ready: true,
+        teslaEntering: { current: teslaBusy },
         engine: {
           current: {
-            closeBusVisit: () => exitAllowed,
+            closeBusVisit: () => {
+              busCloseCalls++;
+              return exitAllowed;
+            },
             navigation: nav,
             renderer: { domElement: { focus: () => calls.push('focus') } },
             placement: {
@@ -921,6 +927,12 @@ test('pointer and keyboard mode selection share in-place switching and reject bl
           },
           to,
         );
+      if (expected === 'busy') {
+        assert.equal(nav.mode, from);
+        assert.deepEqual(calls, []);
+        assert.equal(busCloseCalls, 0, 'busy entry rejects before changing another travel owner');
+        continue;
+      }
       if (expected === 'blocked') {
         assert.equal(nav.mode, from);
         assert(calls.length > 0, 'Blocked exit must explain why switching stopped');

@@ -1,0 +1,254 @@
+{
+  "revision": "3baf67dac8cec0007c4122ad960eee6edde19f97",
+  "sourceFingerprint": "591b0b2e3c7903e25c4c7af440379c593014bfd2934dde4be2a12cdbfda049b0",
+  "kind": "city-tesla-webgl-v1",
+  "id": "tesla-flight-high-showcase-air-chase-high-20261018t022306286z-002",
+  "capturedAt": "2026-10-18T02:23:06.286Z",
+  "valid": true,
+  "localOptIn": true,
+  "case": "robson",
+  "snapshot": {
+    "active": true,
+    "mode": "air",
+    "transitioning": false,
+    "speedKph": 0,
+    "altitudeM": 335,
+    "parked": false,
+    "adhesion": true,
+    "flightAssist": true,
+    "view": "chase",
+    "quality": "high",
+    "effectiveQuality": "high",
+    "warning": ""
+  },
+  "state": {
+    "position": [
+      1133.4775683602563,
+      339.9498946278154,
+      1054.4046645229619
+    ],
+    "quaternion": [
+      -1.1881458661854816e-98,
+      0.3836549838191457,
+      4.9361091603838384e-99,
+      0.9234765039732908
+    ],
+    "velocity": [
+      0,
+      0,
+      0
+    ],
+    "heading": 0.7875018214802338,
+    "mode": "air",
+    "contact": null,
+    "flightAssist": true,
+    "adhesionArmed": true,
+    "parked": false,
+    "timeS": 71.24610000000254,
+    "impact": 0,
+    "collisionSurfaceId": null,
+    "lastSafePose": {
+      "position": [
+        1133.4775683602563,
+        339.9498946278154,
+        1054.4046645229619
+      ],
+      "quaternion": [
+        -1.1881458661854816e-98,
+        0.3836549838191457,
+        4.9361091603838384e-99,
+        0.9234765039732908
+      ]
+    },
+    "detachRemainingS": 0,
+    "departureContact": null,
+    "groundDeparture": null,
+    "held": {
+      "jump": false,
+      "flightToggle": false,
+      "adhesionToggle": false,
+      "park": false
+    },
+    "attachment": null
+  },
+  "steps": {
+    "simulatedS": 0.04929999999998836,
+    "droppedS": 0,
+    "substeps": 6,
+    "collisions": 0,
+    "transitions": 0,
+    "environmentFailures": 0
+  },
+  "activeLOD": {
+    "quality": "high",
+    "triangles": 59082,
+    "meshes": 36,
+    "materials": 13,
+    "cachedLevels": 3,
+    "disposed": false
+  },
+  "world": {
+    "sources": 89983,
+    "sourceCells": 16686,
+    "broadSources": 4,
+    "cachedTiles": 48,
+    "loadedTiles": 48,
+    "cachedFaces": 14274,
+    "queries": 147634
+  },
+  "shape": {
+    "halfExtents": [
+      1.14,
+      0.62,
+      2.34
+    ],
+    "clearance": 0.06,
+    "groundSupport": {
+      "wheelContacts": [
+        [
+          -0.896,
+          -0.6799999999999999,
+          1.39
+        ],
+        [
+          0.896,
+          -0.6799999999999999,
+          1.39
+        ],
+        [
+          -0.896,
+          -0.6799999999999999,
+          -1.39
+        ],
+        [
+          0.896,
+          -0.6799999999999999,
+          -1.39
+        ]
+      ],
+      "chassisClearance": 0.08,
+      "suspensionTravel": 0.05,
+      "bodySections": [
+        {
+          "minZ": -2.34,
+          "maxZ": -1.39,
+          "clearance": 0.08
+        },
+        {
+          "minZ": -1.39,
+          "maxZ": 1.39,
+          "clearance": 0.12
+        },
+        {
+          "minZ": 1.39,
+          "maxZ": 2.34,
+          "clearance": 0.15
+        }
+      ]
+    }
+  },
+  "scenario": {
+    "kind": "robson-ground-spawn",
+    "startedAt": "2026-10-18T02:21:53.965Z",
+    "result": "completed",
+    "trace": [
+      {
+        "elapsedMs": 8.5,
+        "simulatedS": 0,
+        "mode": "ground",
+        "position": [
+          278.762773276611,
+          34.81766563578512,
+          203.28601261224776
+        ],
+        "quaternion": [
+          0.003083506745188318,
+          0.3836492741911759,
+          -0.0022149136946725,
+          0.9234710718566453
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:3:face:11684",
+          "kind": "ground",
+          "normal": [
+            0.0064567876968885385,
+            0.9999711722869551,
+            0.0039955584953981025
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0,
+          "droppedS": 0,
+          "substeps": 0,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      }
+    ]
+  },
+  "settings": {
+    "trees": true,
+    "buildings": true,
+    "labels": false,
+    "traffic": true,
+    "trains": true,
+    "harbour": true,
+    "terrain": true,
+    "autoRotate": false,
+    "quality": "high",
+    "qualityMode": "manual",
+    "mode": "tesla"
+  },
+  "hour": 14,
+  "night": 0,
+  "compatible": false,
+  "fps": 23,
+  "viewport": [
+    1280,
+    720
+  ],
+  "render": [
+    1600,
+    900
+  ],
+  "pixelRatio": 1.25,
+  "camera": {
+    "position": [
+      1140.7562695899592,
+      342.6626643260189,
+      1054.7083759186783
+    ],
+    "quaternion": [
+      -0.11579752487014275,
+      0.6832417921447568,
+      0.11106651397559714,
+      0.7123452927998318
+    ],
+    "up": [
+      0,
+      1,
+      0
+    ],
+    "target": [
+      1133.4775683602563,
+      340.2298946278154,
+      1054.4046645229619
+    ],
+    "near": 0.18,
+    "far": 45000,
+    "fov": 56
+  },
+  "renderer": {
+    "calls": 797,
+    "triangles": 5172527,
+    "points": 0,
+    "lines": 0,
+    "geometries": 821,
+    "textures": 43
+  },
+  "workerErrors": {}
+}
