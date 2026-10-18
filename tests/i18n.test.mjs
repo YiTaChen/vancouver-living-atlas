@@ -24,7 +24,9 @@ const catalogs = Object.fromEntries(
   ]),
 );
 const placeholders = (value) =>
-  [...value.matchAll(/\{(\w+)\}/g)].map((m) => m[1]).sort();
+  [...value.matchAll(/\{(\w+)\}/g)]
+    .map((m) => m[1])
+    .sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
 const teslaCatalogs = JSON.parse(
   readFileSync(new URL('../lib/i18n/tesla.json', import.meta.url), 'utf8'),
 );
@@ -46,8 +48,36 @@ test('Tesla controls cover all ten locales with complete quality and portable ke
     for (const key of ['auto', 'low', 'medium', 'high'])
       assert.ok(catalog[key]);
     assert.match(catalog.desktopHint, /Q/, locale);
+    assert.match(catalog.desktopHint, /E/, locale);
+    assert.match(catalog.desktopHint, /P/, locale);
+    assert.notEqual(catalog.adhesion, catalog.freeDrive, locale);
+    assert.notEqual(catalog.wallHolding, catalog.parked, locale);
+    assert.ok(
+      catalog.desktopHint
+        .toLocaleLowerCase()
+        .includes(catalog.park.toLocaleLowerCase()),
+      `${locale} explains manual parking`,
+    );
+    for (const hint of [catalog.desktopHint, catalog.touchHint])
+      assert.ok(
+        hint
+          .toLocaleLowerCase()
+          .includes(catalog.freeDrive.toLocaleLowerCase()),
+        `${locale} explains the alternative driving mode`,
+      );
     assert.notEqual(catalog.cockpit, catalog.chase, locale);
   }
+});
+
+test('Tesla names the default wall mode and optional parking explicitly in the requested Chinese and English', () => {
+  assert.equal(teslaCatalogs.en.adhesion, 'Wall Grip');
+  assert.equal(teslaCatalogs.en.freeDrive, 'Free Drive');
+  assert.equal(teslaCatalogs['zh-Hant'].adhesion, '壁面吸附');
+  assert.equal(teslaCatalogs['zh-Hant'].freeDrive, '自由行駛');
+  assert.match(teslaCatalogs.en.desktopHint, /starts on.*hold automatically/);
+  assert.match(teslaCatalogs.en.desktopHint, /manual park \(optional\)/);
+  assert.match(teslaCatalogs['zh-Hant'].desktopHint, /預設.*自動保持/);
+  assert.match(teslaCatalogs['zh-Hant'].desktopHint, /手動停車（選用）/);
 });
 let source = readFileSync(
   new URL('../lib/i18n/index.ts', import.meta.url),
@@ -58,14 +88,14 @@ source = source.replace(
   (_, binding, locale) =>
     `const ${binding} = ${JSON.stringify(catalogs[locale])};`,
 );
-const module = ts.transpileModule(source, {
+const compiledI18n = ts.transpileModule(source, {
   compilerOptions: {
     module: ts.ModuleKind.ESNext,
     target: ts.ScriptTarget.ES2022,
   },
 }).outputText;
 const i18n = await import(
-  `data:text/javascript;base64,${Buffer.from(module).toString('base64')}`
+  `data:text/javascript;base64,${Buffer.from(compiledI18n).toString('base64')}`
 );
 
 test('all ten languages cover every visible message and preserve substitutions', () => {

@@ -9,6 +9,7 @@ export interface TeslaSnapshot {
   speedKph: number;
   altitudeM: number;
   parked: boolean;
+  wallHolding: boolean;
   adhesion: boolean;
   flightAssist: boolean;
   view: TeslaView;
@@ -24,6 +25,7 @@ export const EMPTY_TESLA: TeslaSnapshot = {
   speedKph: 0,
   altitudeM: 0,
   parked: false,
+  wallHolding: false,
   adhesion: true,
   flightAssist: true,
   view: 'chase',

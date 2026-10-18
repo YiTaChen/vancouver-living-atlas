@@ -7,6 +7,9 @@ import { cityModule } from './helpers/city-modules.mjs';
 
 const { TeslaController } = await import(cityModule('tesla-controller'));
 const { CityTeslaWorld } = await import(cityModule('tesla-city-world'));
+const { TeslaWorld, triangleFace, fixedFacesSource } = await import(
+  cityModule('tesla-world')
+);
 const { project } = await import(cityModule('geo'));
 const { VIEWS } = await import(cityModule('types'));
 const { FlightController } = await import(cityModule('flight-controller'));
@@ -1025,6 +1028,99 @@ test('command key repeats cannot toggle camera or adhesion repeatedly, and brows
   }
   assert.equal(c.input().throttle, 0);
   assert.equal(c.input().jump, false);
+});
+
+test('Wall Grip defaults on and the explicit Free Drive choice survives R and Orbit re-entry', (t) => {
+  const { c, tick } = setup(t);
+  assert.equal(c.snapshot.adhesion, true);
+  assert.equal(c.enter(), true);
+  assert.equal(c.state.adhesionArmed, true);
+  c.command('adhesionToggle');
+  tick();
+  assert.equal(c.snapshot.adhesion, false);
+  c.recover();
+  assert.equal(c.state.adhesionArmed, false);
+  assert.equal(c.snapshot.adhesion, false);
+  c.leaveToOrbit();
+  assert.equal(c.snapshot.active, false);
+  assert.equal(c.snapshot.adhesion, false);
+  assert.equal(c.enter(), true);
+  assert.equal(c.state.adhesionArmed, false);
+  c.command('adhesionToggle');
+  tick();
+  assert.equal(c.snapshot.adhesion, true);
+  c.recover();
+  assert.equal(c.snapshot.adhesion, true);
+});
+
+test('public keyboard release automatically holds the physical wall while snapshot distinguishes optional P parking', (t) => {
+  const { c, tick } = setup(t);
+  assert.equal(c.enter(), true);
+  const contact = {
+    surfaceId: 'controller-wall',
+    kind: 'wall',
+    point: [0, 20, 30],
+    normal: [0, 0, -1],
+    adherable: true,
+  };
+  c.world = new TeslaWorld({
+    sources: [
+      fixedFacesSource('controller-wall', [
+        triangleFace(
+          contact.surfaceId,
+          'wall:0',
+          'wall',
+          [
+            [-60, 0, 30],
+            [60, 0, 30],
+            [60, 100, 30],
+          ],
+          true,
+          contact.surfaceId,
+          contact.normal,
+        ),
+        triangleFace(
+          contact.surfaceId,
+          'wall:1',
+          'wall',
+          [
+            [-60, 0, 30],
+            [60, 100, 30],
+            [-60, 100, 30],
+          ],
+          true,
+          contact.surfaceId,
+          contact.normal,
+        ),
+      ]),
+    ],
+  });
+  c.state = createTesla([0, 20, 30 - HEIGHT], 0, contact);
+  c.keyDown(key('KeyW'));
+  for (let i = 0; i < 15; i++) tick();
+  c.keyUp(key('KeyW'));
+  for (let i = 0; i < 120 && !c.snapshot.wallHolding; i++) tick();
+  assert.equal(c.snapshot.wallHolding, true);
+  assert.equal(c.snapshot.parked, false);
+  assert.equal(c.snapshot.mode, 'wall');
+  const pose = {
+    position: [...c.state.position],
+    quaternion: [...c.state.quaternion],
+  };
+  for (let i = 0; i < 60; i++) tick();
+  assert.deepEqual(
+    { position: c.state.position, quaternion: c.state.quaternion },
+    pose,
+  );
+  c.command('park');
+  tick();
+  assert.equal(c.snapshot.parked, true);
+  assert.equal(c.snapshot.wallHolding, false);
+  c.keyDown(key('KeyW'));
+  tick();
+  assert.equal(c.snapshot.parked, false);
+  assert.equal(c.snapshot.wallHolding, false);
+  assert(c.state.position[1] > pose.position[1]);
 });
 
 test('disabled input clears all sources and cannot queue joystick, pulses, commands, look or wheel input for re-enable', (t) => {

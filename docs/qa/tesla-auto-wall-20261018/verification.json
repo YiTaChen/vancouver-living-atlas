@@ -1,0 +1,119 @@
+{
+  "recordedAt": "2026-10-18T04:07:28.185073+00:00",
+  "kind": "tesla-auto-wall-acceptance-v1",
+  "result": "pass",
+  "sourceFingerprint": "d62054405755f52dfe83283a935ebd36e0c3c4f6aedfc850405b96d59af540c1",
+  "parentRevision": "ca38e188a6447eaf1c759b1956d89b3f1dbac77e",
+  "sourceHashes": {
+    "lib/city/tesla-state.ts": "50dfd421d14657aa6c1fc09f3faaee66a2e4cdca0ba7efbf46dd0ffd61ac87fe",
+    "lib/city/tesla-controller.ts": "f1e649b20c34cae462640324333a2940c2e2b82ea502a6d69839a0c89d1ed9a6",
+    "lib/city/tesla-snapshot.ts": "e8973743c0079c0952a845dd9ee9ef79388cf092f1507ecf7bfd31f98d23bb1b",
+    "lib/city/tesla-qa.ts": "ad68ec74f2a0df7b34ae55e2b381272b93bc24ca1e1a3704cc7782870bab267e",
+    "components/tesla-controls.tsx": "ba68e17043f8424ae4055bf0b1f5812d14d1345a8a2a64a77f355e0484efb170",
+    "lib/i18n/tesla.json": "5c62e22117a9187880a30f89c840948fa7b43aacedbc78217100ef58791ed608"
+  },
+  "defaultMode": "Wall Grip / 壁面吸附",
+  "alternativeMode": "Free Drive / 自由行駛",
+  "actualFacade": "building:2281:wall:0:7",
+  "automaticHold": {
+    "capture": "auto-hold-chase.json",
+    "verifiedHoldMs": 8024.699999988079,
+    "manualPark": false,
+    "brakeRequested": false,
+    "exactPositionAndOrientation": true
+  },
+  "nativeDesktop": {
+    "resume": {
+      "key": "W",
+      "durationMs": 300,
+      "before": [
+        249.12669283387353,
+        38.36450303946553,
+        147.38559780713948
+      ],
+      "afterBrake": [
+        249.14470334147157,
+        39.90824841938518,
+        147.3677652401239
+      ],
+      "brakeMs": 500,
+      "autoHoldingAfterBrake": true,
+      "manualPark": false
+    },
+    "EAfterMobileReentry": "Free Drive -> Wall Grip"
+  },
+  "camera": {
+    "chaseUp": [
+      0,
+      1,
+      0
+    ],
+    "cockpitUp": [
+      -0.7035877260378928,
+      -1.1102230246251565e-16,
+      -0.7106084095821181
+    ]
+  },
+  "mobile": {
+    "portrait": [
+      320,
+      568
+    ],
+    "landscape": [
+      844,
+      390
+    ],
+    "mainControls": 8,
+    "minimumControlHeightPx": 48,
+    "allControlBoundsInsideViewport": true,
+    "nativeModeToggleBothDirections": true,
+    "nativeBrakeHold": true,
+    "freeDriveSafelyDetaches": true,
+    "recoveryPreservesFreeDrive": true,
+    "orbitReentryPreservesFreeDrive": true,
+    "qaPanelHiddenForUnobstructedNativeChecks": true
+  },
+  "consoleWarningsAndErrors": [],
+  "validation": {
+    "fullSuite": {
+      "pass": 1292,
+      "fail": 0
+    },
+    "focusedPhysicsAndController": {
+      "pass": 121,
+      "fail": 0
+    },
+    "reactSSRAndI18n": {
+      "pass": 13,
+      "fail": 0
+    },
+    "qaHelper": {
+      "pass": 10,
+      "fail": 0
+    },
+    "typecheck": "pass",
+    "architectureAuditSkipBlender": "pass",
+    "lint": {
+      "parent": 221,
+      "current": 219,
+      "added": [],
+      "removed": [
+        [
+          "tests/i18n.test.mjs",
+          "Do not assign to the variable `module`. [Error/next(no-assign-module-variable)]"
+        ],
+        [
+          "tests/i18n.test.mjs",
+          "Require 'compare' argument. [Error/typescript(require-array-sort-compare)]"
+        ]
+      ]
+    },
+    "firebaseProductionBuildAndQAIsolation": "pass"
+  },
+  "limitations": [
+    "Responsive Chromium checks are not physical-phone GPU benchmarks.",
+    "Captures are functional evidence; transient HUD FPS and QA report overhead are not controlled performance results.",
+    "Each capture retains the original completed facade scenario; later cockpit, mobile and Free Drive snapshots follow native/manual UI actions recorded here.",
+    "Earlier Tesla performance recordings retain their original source fingerprints and do not measure this wall-hold state update."
+  ]
+}

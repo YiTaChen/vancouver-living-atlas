@@ -136,6 +136,12 @@ export function installTeslaQA(
     startedAt: string;
     result: string;
     target?: unknown;
+    inputs?: {
+      throttleReleased: boolean;
+      brakeRequestedOnWall: boolean;
+      parkCommandRequested: boolean;
+    };
+    verifiedHoldMs?: number;
     trace: unknown[];
   } | null = null;
   const step = () => {
@@ -164,6 +170,8 @@ export function installTeslaQA(
       quaternion: [...s.quaternion],
       speedMps: t.speedMps,
       parked: s.parked,
+      wallHolding: s.wallHolding,
+      adhesionArmed: s.adhesionArmed,
       contact: s.contact
         ? {
             surfaceId: s.contact.surfaceId,
@@ -268,142 +276,214 @@ export function installTeslaQA(
       sample(started);
     }),
   );
-  button('Tesla QA: approach real wall + park', () =>
-    run('real-building-wall-approach', async (signal, started) => {
-      if (!e.tesla?.active) spawnRobson();
-      const t = ensureActive(),
-        world = t.world!,
-        nav = e.navigation;
-      if (!nav) throw new Error('Navigation unavailable');
-      clear();
-      t.setButton('brake', true);
-      const candidates = teslaQAWallCandidates(
-        e.data.flightBuildingVolumes ?? [],
-      );
-      status.textContent = `Tesla QA checking ${candidates.length} real building faces`;
-      let selected: {
-        candidate: WallCandidate;
-        spawn: NonNullable<ReturnType<typeof world.groundPoseNear>>;
-        surfaceId: string;
-        heading: number;
-      } | null = null;
-      for (let index = 0; index < candidates.length && !selected; index++) {
-        if (index % 4 === 0) await nextFrame(signal);
-        if (!validFrame())
-          throw new Error('Tesla QA requires a live foreground WebGL frame');
-        const candidate = candidates[index],
-          [nx, nz] = candidate.normal,
-          heading = Math.atan2(-nx, -nz);
-        for (const distance of [10, 14, 18]) {
-          const x = candidate.midpoint[0] + nx * distance,
-            z = candidate.midpoint[1] + nz * distance,
-            y = e.data.roadRelief?.(x, z) ?? e.elevation(x, z),
-            spawn = world.groundPoseNear([x, y + 1.05, z], t.shape, heading, 0);
-          if (!spawn) continue;
-          const hit = world.sweep({
-            from: spawn.pose,
-            to: {
-              position: [
-                candidate.midpoint[0],
-                spawn.pose.position[1],
-                candidate.midpoint[1],
-              ],
-              quaternion: spawn.pose.quaternion,
-            },
-            shape: t.shape,
-            ignoreSurfaceId: spawn.contact.surfaceId,
-          });
-          if (
-            hit?.kind !== 'wall' ||
-            !hit.adherable ||
-            !hit.surfaceId.startsWith('building:') ||
-            hit.normal[0] * nx + hit.normal[2] * nz < 0.98
-          )
-            continue;
-          selected = { candidate, spawn, surfaceId: hit.surfaceId, heading };
-          break;
-        }
-      }
-      if (!selected)
-        throw new Error(
-          'No clear asphalt-to-building approach; no wall state was forced',
+  const approachWall = (automaticHold: boolean) =>
+    run(
+      automaticHold
+        ? 'real-building-wall-auto-hold'
+        : 'real-building-wall-approach',
+      async (signal, started) => {
+        if (!e.tesla?.active) spawnRobson();
+        const t = ensureActive(),
+          world = t.world!,
+          nav = e.navigation;
+        if (!nav) throw new Error('Navigation unavailable');
+        clear();
+        if (!automaticHold) t.setButton('brake', true);
+        lastRun!.inputs = {
+          throttleReleased: false,
+          brakeRequestedOnWall: false,
+          parkCommandRequested: false,
+        };
+        const candidates = teslaQAWallCandidates(
+          e.data.flightBuildingVolumes ?? [],
         );
-      lastRun!.target = clone(selected);
-      // This is an initial, proven GROUND spawn. From here onward only ordinary
-      // controller inputs move or rotate the car, including the complete corner.
-      t.deactivate();
-      e.applySettings({
-        ...e.settings,
-        mode: 'drive',
-        buildings: true,
-        labels: false,
-        autoRotate: false,
-      });
-      const { pose, contact } = selected.spawn;
-      const placed = nav.startAt('drive', {
-        x: pose.position[0],
-        z: pose.position[2],
-        y: contact.point[1] + 1.05,
-        yaw: selected.heading,
-        surface: 'ground',
-        surfaceId: 'ground',
-        layer: 0,
-        name: 'Tesla QA actual building approach',
-        snappedDistance: 0,
-      });
-      if (placed === false || !t.enter())
-        throw new Error(
-          'Proven ground approach rejected by the real controller',
-        );
-      if (
-        Math.hypot(
-          t.state!.position[0] - pose.position[0],
-          t.state!.position[2] - pose.position[2],
-        ) > 0.5
-      )
-        throw new Error(
-          'Controller selected a different ground spawn; approach cancelled',
-        );
-      t.setView('chase');
-      t.clearInput();
-      caseName = 'building-wall';
-      sample(started);
-      const movingAt = performance.now();
-      let lastSample = -Infinity,
-        askedPark = false;
-      while (performance.now() - movingAt < 20_000) {
-        await nextFrame(signal);
-        if (!validFrame() || !t.active)
-          throw new Error('Tesla QA interrupted before wall proof');
-        const s = t.state!;
-        if (performance.now() - lastSample >= 100) {
-          sample(started);
-          lastSample = performance.now();
-        }
-        if (s.mode === 'wall' && !s.attachment) {
-          if (s.contact?.surfaceId !== selected.surfaceId)
-            throw new Error(
-              'A different wall was reached; inspect the real trace',
-            );
-          t.setAxes(0, 0);
-          t.setButton('brake', true);
-          if (!s.parked && !askedPark) {
-            t.command('park');
-            askedPark = true;
+        status.textContent = `Tesla QA checking ${candidates.length} real building faces`;
+        let selected: {
+          candidate: WallCandidate;
+          spawn: NonNullable<ReturnType<typeof world.groundPoseNear>>;
+          surfaceId: string;
+          heading: number;
+        } | null = null;
+        for (let index = 0; index < candidates.length && !selected; index++) {
+          if (index % 4 === 0) await nextFrame(signal);
+          if (!validFrame())
+            throw new Error('Tesla QA requires a live foreground WebGL frame');
+          const candidate = candidates[index],
+            [nx, nz] = candidate.normal,
+            heading = Math.atan2(-nx, -nz);
+          for (const distance of [10, 14, 18]) {
+            const x = candidate.midpoint[0] + nx * distance,
+              z = candidate.midpoint[1] + nz * distance,
+              y = e.data.roadRelief?.(x, z) ?? e.elevation(x, z),
+              spawn = world.groundPoseNear(
+                [x, y + 1.05, z],
+                t.shape,
+                heading,
+                0,
+              );
+            if (!spawn) continue;
+            // Public entry prefers a clear launch corridor. Use the same proof so
+            // it will retain this actual road seed instead of relocating the test.
+            if (automaticHold && !world.hasLaunchClearance(spawn, t.shape))
+              continue;
+            const hit = world.sweep({
+              from: spawn.pose,
+              to: {
+                position: [
+                  candidate.midpoint[0],
+                  spawn.pose.position[1],
+                  candidate.midpoint[1],
+                ],
+                quaternion: spawn.pose.quaternion,
+              },
+              shape: t.shape,
+              ignoreSurfaceId: spawn.contact.surfaceId,
+            });
+            if (
+              hit?.kind !== 'wall' ||
+              !hit.adherable ||
+              !hit.surfaceId.startsWith('building:') ||
+              hit.normal[0] * nx + hit.normal[2] * nz < 0.98
+            )
+              continue;
+            selected = { candidate, spawn, surfaceId: hit.surfaceId, heading };
+            break;
           }
-          if (s.parked) {
+        }
+        if (!selected)
+          throw new Error(
+            'No clear asphalt-to-building approach; no wall state was forced',
+          );
+        lastRun!.target = clone(selected);
+        // This is an initial, proven GROUND spawn. From here onward only ordinary
+        // controller inputs move or rotate the car, including the complete corner.
+        t.deactivate();
+        e.applySettings({
+          ...e.settings,
+          mode: 'drive',
+          buildings: true,
+          labels: false,
+          autoRotate: false,
+        });
+        const { pose, contact } = selected.spawn;
+        const placed = nav.startAt('drive', {
+          x: pose.position[0],
+          z: pose.position[2],
+          y: contact.point[1] + 1.05,
+          yaw: selected.heading,
+          surface: 'ground',
+          surfaceId: 'ground',
+          layer: 0,
+          name: 'Tesla QA actual building approach',
+          snappedDistance: 0,
+        });
+        if (placed === false || !t.enter())
+          throw new Error(
+            'Proven ground approach rejected by the real controller',
+          );
+        if (
+          Math.hypot(
+            t.state!.position[0] - pose.position[0],
+            t.state!.position[2] - pose.position[2],
+          ) > 0.5
+        )
+          throw new Error(
+            'Controller selected a different ground spawn; approach cancelled',
+          );
+        t.setView('chase');
+        t.clearInput();
+        caseName = automaticHold ? 'building-wall-auto-hold' : 'building-wall';
+        sample(started);
+        const movingAt = performance.now();
+        let lastSample = -Infinity,
+          askedPark = false,
+          releasedAt: number | null = null,
+          heldAt: number | null = null,
+          heldPose: { position: number[]; quaternion: number[] } | null = null;
+        while (
+          performance.now() - movingAt <
+          (automaticHold ? 35_000 : 20_000)
+        ) {
+          await nextFrame(signal);
+          if (!validFrame() || !t.active)
+            throw new Error('Tesla QA interrupted before wall proof');
+          const s = t.state!;
+          if (performance.now() - lastSample >= 100) {
             sample(started);
-            status.textContent = `Tesla QA parked on ${s.contact.surfaceId} through real simulation`;
-            return;
+            lastSample = performance.now();
           }
-        } else {
-          t.setAxes(0, s.attachment ? 0 : 0.14);
-          status.textContent = `Tesla QA ${s.attachment ? 'sweeping full corner' : 'driving to real wall'}: ${t.speedMps.toFixed(1)} m/s`;
+          if (s.mode === 'wall' && !s.attachment) {
+            if (s.contact?.surfaceId !== selected.surfaceId)
+              throw new Error(
+                'A different wall was reached; inspect the real trace',
+              );
+            t.setAxes(0, 0);
+            lastRun!.inputs!.throttleReleased = true;
+            if (automaticHold) {
+              t.setButton('brake', false);
+              releasedAt ??= performance.now();
+              if (s.parked)
+                throw new Error(
+                  'Manual parking cannot qualify as automatic wall hold',
+                );
+              const holding = s.wallHolding && s.velocity.every((v) => v === 0);
+              if (heldPose) {
+                if (
+                  !holding ||
+                  s.position.some((v, i) => v !== heldPose!.position[i]) ||
+                  s.quaternion.some((v, i) => v !== heldPose!.quaternion[i])
+                )
+                  throw new Error(
+                    'Automatic wall hold lost its exact stationary pose',
+                  );
+                lastRun!.verifiedHoldMs = performance.now() - heldAt!;
+                if (lastRun!.verifiedHoldMs >= 8_000) {
+                  sample(started);
+                  status.textContent = `Tesla QA automatic hold on ${s.contact.surfaceId}: 8s exact pose, no P or brake`;
+                  return;
+                }
+              } else if (holding) {
+                heldAt = performance.now();
+                heldPose = {
+                  position: [...s.position],
+                  quaternion: [...s.quaternion],
+                };
+                lastRun!.verifiedHoldMs = 0;
+              } else if (performance.now() - releasedAt > 5_000)
+                throw new Error(
+                  'Automatic wall hold did not settle after throttle release',
+                );
+              status.textContent = `Tesla QA ${heldPose ? 'verifying 8s automatic wall hold' : 'released throttle; waiting for automatic wall hold'}`;
+              continue;
+            }
+            t.setButton('brake', true);
+            lastRun!.inputs!.brakeRequestedOnWall = true;
+            if (!s.parked && !askedPark) {
+              t.command('park');
+              askedPark = true;
+              lastRun!.inputs!.parkCommandRequested = true;
+            }
+            if (s.parked) {
+              sample(started);
+              status.textContent = `Tesla QA parked on ${s.contact.surfaceId} through real simulation`;
+              return;
+            }
+          } else {
+            if (releasedAt !== null)
+              throw new Error('Automatic wall hold left the proven wall');
+            if (performance.now() - movingAt >= 20_000)
+              throw new Error(
+                'Wall approach timed out; no adhesion pose was forced',
+              );
+            t.setAxes(0, s.attachment ? 0 : 0.14);
+            status.textContent = `Tesla QA ${s.attachment ? 'sweeping full corner' : 'driving to real wall'}: ${t.speedMps.toFixed(1)} m/s`;
+          }
         }
-      }
-      throw new Error('Wall approach timed out; no adhesion pose was forced');
-    }),
-  );
+        throw new Error('Wall approach timed out; no adhesion pose was forced');
+      },
+    );
+  button('Tesla QA: approach real wall + park', () => approachWall(false));
+  button('Tesla QA: approach real wall + auto hold', () => approachWall(true));
   button('Tesla QA: launch fly', () =>
     run('ground-to-flight-input', async (signal, started) => {
       const t = ensureActive();

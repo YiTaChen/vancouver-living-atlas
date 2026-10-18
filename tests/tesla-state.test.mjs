@@ -48,6 +48,7 @@ function world({
   roof = false,
   awning = false,
   ordinaryGround = false,
+  extraFaces = [],
 } = {}) {
   const faces = [];
   if (floor)
@@ -167,7 +168,9 @@ function world({
       ),
     );
   return new TeslaWorld({
-    sources: [fixedFacesSource('test-physical-triangles', faces)],
+    sources: [
+      fixedFacesSource('test-physical-triangles', [...faces, ...extraFaces]),
+    ],
   });
 }
 function run(s, seconds, input = {}, environment = EMPTY_WORLD, dt = 1 / 60) {
@@ -496,6 +499,244 @@ test('wall adhesion is armed state and parking holds exact position and full ori
   run(s, 0.5, { throttle: 1 }, environment);
   assert.equal(s.parked, false);
   assert.ok(s.position[1] > parkedPosition[1]);
+});
+
+test('default Wall Grip coasts into an automatic exact hold and resumes steering or throttle without P', () => {
+  const environment = world({ wall: true }),
+    s = placeTesla({ ...WALL, point: [0, 20, 30] });
+  try {
+    assert.equal(s.adhesionArmed, true);
+    assert.equal(s.wallHolding, false);
+    run(s, 1, { throttle: 1 }, environment);
+    const releasedSpeed = speed(s);
+    let previousY = s.position[1];
+    for (let i = 0; i < 360 && !s.wallHolding; i++) {
+      stepTesla(s, {}, 1 / 60, environment);
+      assert(
+        s.position[1] >= previousY - 1e-9,
+        'coasting never slides downward',
+      );
+      assert(speed(s) <= releasedSpeed + 1e-9);
+      assert.equal(s.mode, 'wall');
+      previousY = s.position[1];
+    }
+    assert.equal(s.wallHolding, true);
+    assert.equal(s.parked, false);
+    assert.deepEqual(s.velocity, [0, 0, 0]);
+    const held = { position: [...s.position], quaternion: [...s.quaternion] };
+    run(s, 8, {}, environment);
+    assert.deepEqual({ position: s.position, quaternion: s.quaternion }, held);
+    assert.equal(s.wallHolding, true);
+    stepTesla(s, { steer: 0.5 }, 1 / 60, environment);
+    assert.equal(
+      s.wallHolding,
+      false,
+      'automatic holding never locks the steering input',
+    );
+    run(s, 0.25, { throttle: 0.5, steer: 0.5 }, environment);
+    assert.equal(s.parked, false);
+    assert.equal(s.wallHolding, false);
+    assert(s.position[1] > held.position[1]);
+    assert(distance(s.quaternion, held.quaternion) > 1e-5);
+  } finally {
+    environment.dispose();
+  }
+});
+
+test('released throttle during the complete wall manoeuvre arrives in automatic hold without P', () => {
+  const environment = world({ wall: true }),
+    s = placeTesla(FLOOR);
+  try {
+    for (let i = 0; i < 240 && !s.attachment; i++)
+      stepTesla(s, { throttle: 1 }, 1 / 60, environment);
+    assert(s.attachment);
+    for (let i = 0; i < 600 && !s.wallHolding; i++)
+      stepTesla(s, {}, 1 / 60, environment);
+    assert.equal(s.mode, 'wall');
+    assert.equal(s.wallHolding, true);
+    assert.equal(s.parked, false);
+    assert.equal(s.attachment, null);
+    const position = [...s.position];
+    run(s, 3, { brake: true }, environment);
+    assert.deepEqual(s.position, position);
+    assert.equal(s.wallHolding, true);
+  } finally {
+    environment.dispose();
+  }
+});
+
+test('wall braking wins over held throttle and enters automatic hold when only the brake remains', () => {
+  const environment = world({ wall: true }),
+    s = placeTesla({ ...WALL, point: [0, 20, 30] });
+  try {
+    s.velocity = [0, 16, 0];
+    run(s, 0.75, { brake: true, throttle: 1 }, environment);
+    assert.equal(speed(s), 0);
+    assert.equal(
+      s.wallHolding,
+      true,
+      'B holds despite a simultaneously held accelerator',
+    );
+    assert.equal(s.parked, false);
+    stepTesla(s, { brake: true }, 1 / 60, environment);
+    assert.equal(s.wallHolding, true);
+    const position = [...s.position];
+    run(s, 2, { brake: true }, environment);
+    assert.deepEqual(s.position, position);
+    run(s, 0.2, { throttle: -0.5 }, environment);
+    assert.equal(s.wallHolding, false);
+    assert(
+      s.position[1] < position[1],
+      'reverse resumes deliberate descent along the wall',
+    );
+  } finally {
+    environment.dispose();
+  }
+});
+
+test('automatic hold rechecks live support and never preserves a disabled wall or a failed support query', () => {
+  for (const failure of ['missing', 'throw']) {
+    const actual = world({ wall: true }),
+      s = placeTesla({ ...WALL, point: [0, 20, 30] });
+    try {
+      stepTesla(s, {}, 1 / 60, actual);
+      assert.equal(s.wallHolding, true);
+      const environment = {
+        support: () => {
+          if (failure === 'throw')
+            throw new Error('unavailable physical source');
+          return null;
+        },
+        sweep: (query) => actual.sweep(query),
+      };
+      const report = stepTesla(s, {}, 1 / 60, environment);
+      assert.equal(s.wallHolding, false);
+      assert.equal(s.mode, 'air');
+      assert.equal(s.contact, null);
+      assert.equal(s.parked, false);
+      if (failure === 'throw') assert(report.environmentFailures > 0);
+      assertFinite(s);
+    } finally {
+      actual.dispose();
+    }
+  }
+});
+
+test('a newly enabled physical body obstacle prevents automatic hold without bypassing its sweep', () => {
+  let enabled = false;
+  const obstacle = triangleFace(
+      'live-wall-obstacle',
+      'live-wall-obstacle:0',
+      'obstacle',
+      [
+        [-10, 10, 29],
+        [10, 10, 29],
+        [0, 40, 29],
+      ],
+      false,
+      'live-wall-obstacle',
+      [0, 0, -1],
+    ),
+    environment = world({ wall: true, extraFaces: [obstacle] }),
+    s = placeTesla({ ...WALL, point: [0, 20, 30] });
+  obstacle.enabled = () => enabled;
+  try {
+    stepTesla(s, {}, 1 / 60, environment);
+    assert.equal(s.wallHolding, true);
+    const position = [...s.position];
+    enabled = true;
+    const report = stepTesla(s, {}, 1 / 60, environment);
+    assert.equal(s.wallHolding, false);
+    assert.equal(s.parked, false);
+    assert(report.collisions > 0);
+    assert.equal(s.collisionSurfaceId, obstacle.surfaceId);
+    assert.deepEqual(s.position, position);
+    enabled = false;
+    stepTesla(s, {}, 1 / 60, environment);
+    assert.equal(s.wallHolding, true, 'a fresh clear proof restores holding');
+  } finally {
+    environment.dispose();
+  }
+});
+
+test('automatic wall holding fails closed on a throwing body query and can recover only with a fresh clear proof', () => {
+  const actual = world({ wall: true }),
+    s = placeTesla({ ...WALL, point: [0, 20, 30] });
+  try {
+    stepTesla(s, {}, 1 / 60, actual);
+    assert.equal(s.wallHolding, true);
+    const position = [...s.position];
+    const report = stepTesla(s, {}, 1 / 60, {
+      support: (query) => actual.support(query),
+      sweep: () => {
+        throw new Error('body geometry unavailable');
+      },
+    });
+    assert(report.environmentFailures > 0);
+    assert.equal(s.wallHolding, false);
+    assert.equal(s.parked, false);
+    assert.deepEqual(s.position, position);
+    stepTesla(s, {}, 1 / 60, actual);
+    assert.equal(s.wallHolding, true);
+  } finally {
+    actual.dispose();
+  }
+});
+
+test('automatic hold retains quaternion normalization for finite nonunit input poses', () => {
+  const environment = world({ wall: true }),
+    s = placeTesla({ ...WALL, point: [0, 20, 30] });
+  try {
+    s.quaternion = s.quaternion.map((value) => value * 0.8);
+    stepTesla(s, {}, 1 / 60, environment);
+    assert.equal(s.wallHolding, true);
+    near(Math.hypot(...s.quaternion), 1);
+    assertFinite(s);
+  } finally {
+    environment.dispose();
+  }
+});
+
+test('a stationary pose within support discovery range settles onto the actual wall before auto holding', () => {
+  const environment = world({ wall: true }),
+    s = placeTesla({ ...WALL, point: [0, 20, 30] });
+  try {
+    s.position[2] -= 0.05;
+    const position = [...s.position];
+    stepTesla(s, {}, 1 / 60, environment);
+    assert.equal(s.wallHolding, true);
+    near(s.position[2], 30 - height);
+    near(distance(s.position, position), 0.05);
+    assert.equal(s.parked, false);
+  } finally {
+    environment.dispose();
+  }
+});
+
+test('Free Drive interrupts a pending wall manoeuvre through the guarded outward departure', () => {
+  const environment = world({ wall: true }),
+    s = placeTesla(FLOOR);
+  try {
+    for (let i = 0; i < 240 && !s.attachment; i++)
+      stepTesla(s, { throttle: 1 }, 1 / 60, environment);
+    assert(s.attachment);
+    stepTesla(s, { adhesionToggle: true }, 1 / 60, environment);
+    assert.equal(s.adhesionArmed, false);
+    assert.equal(s.wallHolding, false);
+    assert.equal(s.attachment, null);
+    assert.equal(s.mode, 'air');
+    run(s, 1, { brake: true }, environment);
+    assert.notEqual(
+      s.mode,
+      'wall',
+      'a safe floor landing may follow departure',
+    );
+    assert.notEqual(s.contact?.kind, 'wall');
+    assert.equal(s.wallHolding, false);
+    assertFinite(s);
+  } finally {
+    environment.dispose();
+  }
 });
 
 test('parking during the swept wall manoeuvre queues a stable arrival instead of dropping the passenger frame', () => {

@@ -22,12 +22,12 @@ const restoreGround = ({ initial }) => {
   state.quaternion = [...initial.quaternion];
   return state;
 };
-const actualWorld = (sample, extra = []) =>
+const actualWorld = (sample, extra = [], enabled = () => true) =>
   new TeslaWorld({
     sources: [
       fixedFacesSource('actual-local-city-patch', [
-        ...sample.faces.map((face) =>
-          triangleFace(
+        ...sample.faces.map((face) => {
+          const physical = triangleFace(
             face.surfaceId,
             face.triangleId,
             face.kind,
@@ -35,8 +35,10 @@ const actualWorld = (sample, extra = []) =>
             face.adherable,
             face.supportGroup,
             face.normal,
-          ),
-        ),
+          );
+          physical.enabled = () => enabled(face);
+          return physical;
+        }),
         ...extra,
       ]),
     ],
@@ -96,6 +98,103 @@ test('actual facade approach sweeps out of road contact, attaches to building 22
       { position: state.position, quaternion: state.quaternion },
       parked,
     );
+  } finally {
+    world.dispose();
+  }
+});
+
+test('actual building 2281 automatically coasts into an eight-second hold, resumes and brakes again without P', () => {
+  const world = actualWorld(fixture.wall);
+  try {
+    const state = attachActualFacade(world);
+    assert.equal(state.adhesionArmed, true);
+    for (let i = 0; i < 180 && !state.wallHolding; i++)
+      stepTesla(state, {}, 1 / 60, world, shape);
+    assert.equal(state.mode, 'wall');
+    assert.equal(state.wallHolding, true);
+    assert.equal(state.parked, false);
+    const held = structuredClone({
+      position: state.position,
+      quaternion: state.quaternion,
+    });
+    for (let i = 0; i < 480; i++) stepTesla(state, {}, 1 / 60, world, shape);
+    assert.deepEqual(
+      { position: state.position, quaternion: state.quaternion },
+      held,
+    );
+    assert.deepEqual(state.velocity, [0, 0, 0]);
+    assert.equal(state.contact.surfaceId, 'building:2281:wall:0:7');
+    for (let i = 0; i < 24; i++)
+      stepTesla(state, { throttle: 0.14 }, 1 / 60, world, shape);
+    assert.equal(state.wallHolding, false);
+    assert(state.position[1] > held.position[1]);
+    for (let i = 0; i < 30 && !state.wallHolding; i++)
+      stepTesla(state, { brake: true }, 1 / 60, world, shape);
+    assert.equal(state.wallHolding, true);
+    assert.equal(state.parked, false);
+    const beforeDetach = [...state.position],
+      normal = [...state.contact.normal];
+    stepTesla(state, { adhesionToggle: true }, 1 / 60, world, shape);
+    for (let i = 0; i < 90; i++)
+      stepTesla(state, { brake: true }, 1 / 60, world, shape);
+    assert.equal(state.adhesionArmed, false);
+    assert.equal(state.wallHolding, false);
+    assert.equal(state.mode, 'air');
+    assert.equal(state.contact, null);
+    assert(
+      state.position.reduce(
+        (sum, value, i) => sum + (value - beforeDetach[i]) * normal[i],
+        0,
+      ) > 2,
+    );
+  } finally {
+    world.dispose();
+  }
+});
+
+test('actual facade auto hold loses ownership when its live source is disabled', () => {
+  let enabled = true;
+  const world = actualWorld(
+    fixture.wall,
+    [],
+    (face) => enabled || face.surfaceId !== 'building:2281:wall:0:7',
+  );
+  try {
+    const state = attachActualFacade(world);
+    for (let i = 0; i < 180 && !state.wallHolding; i++)
+      stepTesla(state, {}, 1 / 60, world, shape);
+    assert.equal(state.wallHolding, true);
+    enabled = false;
+    stepTesla(state, {}, 1 / 60, world, shape);
+    assert.equal(state.wallHolding, false);
+    assert.equal(state.parked, false);
+    assert.equal(state.mode, 'air');
+    assert.equal(state.contact, null);
+  } finally {
+    world.dispose();
+  }
+});
+
+test('Free Drive keeps the actual facade solid without automatically attaching', () => {
+  const world = actualWorld(fixture.wall),
+    state = restoreGround(fixture.wall);
+  state.adhesionArmed = false;
+  let collisions = 0;
+  try {
+    for (let i = 0; i < 240; i++) {
+      collisions += stepTesla(
+        state,
+        { throttle: 0.14 },
+        1 / 60,
+        world,
+        shape,
+      ).collisions;
+      assert.equal(state.mode, 'ground');
+      assert.equal(state.attachment, null);
+      assert.equal(state.wallHolding, false);
+    }
+    assert(collisions > 0);
+    assert.equal(state.parked, false);
   } finally {
     world.dispose();
   }
