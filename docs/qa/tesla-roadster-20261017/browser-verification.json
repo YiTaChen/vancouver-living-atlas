@@ -388,5 +388,14 @@
       "newDiagnostics": 0,
       "comparison": "file/rule/message multiset, excludes shifted line numbers"
     }
+  },
+  "finalLaunchPreference": {
+    "record": "launch-preference.json",
+    "sourceFingerprint": "73fcd3882e82ad48288b3539502b8d65d5593e94c7a06ffe60f674f827eebd89",
+    "testsPassed": 1270,
+    "testsFailed": 0,
+    "typescript": "pass",
+    "normalFirebaseBuildAndQaIsolation": "pass",
+    "newLintDiagnostics": 0
   }
 }

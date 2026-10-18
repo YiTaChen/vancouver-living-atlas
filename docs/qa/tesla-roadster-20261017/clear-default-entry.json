@@ -1,0 +1,226 @@
+{
+  "revision": "db1c494a2de572f7b094580d83ce87a75572e0cc",
+  "sourceFingerprint": "73fcd3882e82ad48288b3539502b8d65d5593e94c7a06ffe60f674f827eebd89",
+  "kind": "city-tesla-webgl-v1",
+  "id": "tesla-clear-default-entry-ground-chase-auto-20261018t030424784z-001",
+  "capturedAt": "2026-10-18T03:04:24.784Z",
+  "valid": true,
+  "localOptIn": true,
+  "case": "manual",
+  "snapshot": {
+    "active": true,
+    "mode": "ground",
+    "transitioning": false,
+    "speedKph": 0,
+    "altitudeM": 2,
+    "parked": false,
+    "adhesion": true,
+    "flightAssist": false,
+    "view": "chase",
+    "quality": "auto",
+    "effectiveQuality": "medium",
+    "warning": ""
+  },
+  "state": {
+    "position": [
+      -157.41511414209359,
+      24.530286913829137,
+      -307.4927885851381
+    ],
+    "quaternion": [
+      -0.03744494276165156,
+      0.38476648503687993,
+      -0.009471413629660282,
+      0.9222054654890075
+    ],
+    "velocity": [
+      0,
+      0,
+      0
+    ],
+    "heading": 0.7890989694020802,
+    "mode": "ground",
+    "contact": {
+      "surfaceId": "ground:asphalt:10:face:3206",
+      "kind": "ground",
+      "point": [
+        -157.40737621156788,
+        23.85032177187861,
+        -307.44071623006005
+      ],
+      "normal": [
+        -0.011345939187256081,
+        0.997016337170865,
+        -0.0763524268006658
+      ],
+      "adherable": true
+    },
+    "flightAssist": false,
+    "adhesionArmed": true,
+    "parked": false,
+    "timeS": 12.00110000000001,
+    "impact": 0,
+    "collisionSurfaceId": null,
+    "lastSafePose": {
+      "position": [
+        -157.41511414209359,
+        24.530286913829137,
+        -307.4927885851381
+      ],
+      "quaternion": [
+        -0.03745172076576189,
+        0.3841054944086608,
+        -0.00944457655222697,
+        0.922480968774159
+      ]
+    },
+    "detachRemainingS": 0,
+    "departureContact": null,
+    "groundDeparture": null,
+    "held": {
+      "jump": false,
+      "flightToggle": false,
+      "adhesionToggle": false,
+      "park": false
+    },
+    "attachment": null
+  },
+  "steps": {
+    "simulatedS": 0.033700000000004365,
+    "droppedS": 0,
+    "substeps": 0,
+    "collisions": 0,
+    "transitions": 0,
+    "environmentFailures": 0
+  },
+  "activeLOD": {
+    "quality": "medium",
+    "triangles": 27140,
+    "meshes": 35,
+    "materials": 13,
+    "cachedLevels": 1,
+    "disposed": false
+  },
+  "world": {
+    "sources": 89983,
+    "sourceCells": 16686,
+    "broadSources": 4,
+    "cachedTiles": 8,
+    "loadedTiles": 8,
+    "cachedFaces": 1231,
+    "queries": 1865
+  },
+  "shape": {
+    "halfExtents": [
+      1.14,
+      0.62,
+      2.34
+    ],
+    "clearance": 0.06,
+    "groundSupport": {
+      "wheelContacts": [
+        [
+          -0.896,
+          -0.6799999999999999,
+          1.39
+        ],
+        [
+          0.896,
+          -0.6799999999999999,
+          1.39
+        ],
+        [
+          -0.896,
+          -0.6799999999999999,
+          -1.39
+        ],
+        [
+          0.896,
+          -0.6799999999999999,
+          -1.39
+        ]
+      ],
+      "chassisClearance": 0.08,
+      "suspensionTravel": 0.05,
+      "bodySections": [
+        {
+          "minZ": -2.34,
+          "maxZ": -1.39,
+          "clearance": 0.08
+        },
+        {
+          "minZ": -1.39,
+          "maxZ": 1.39,
+          "clearance": 0.12
+        },
+        {
+          "minZ": 1.39,
+          "maxZ": 2.34,
+          "clearance": 0.15
+        }
+      ]
+    }
+  },
+  "scenario": null,
+  "settings": {
+    "trees": true,
+    "buildings": true,
+    "labels": true,
+    "traffic": true,
+    "trains": true,
+    "harbour": true,
+    "terrain": true,
+    "autoRotate": false,
+    "quality": "balanced",
+    "qualityMode": "auto",
+    "mode": "tesla"
+  },
+  "hour": 12.524041666665738,
+  "night": 0,
+  "compatible": false,
+  "fps": 42,
+  "viewport": [
+    1280,
+    720
+  ],
+  "render": [
+    1024,
+    576
+  ],
+  "pixelRatio": 0.8,
+  "camera": {
+    "position": [
+      -162.585440291716,
+      27.243056612032646,
+      -312.62498691623347
+    ],
+    "quaternion": [
+      -0.06167650904452579,
+      -0.9112089191944994,
+      -0.14812442582107282,
+      0.37941200335209546
+    ],
+    "up": [
+      0,
+      1,
+      0
+    ],
+    "target": [
+      -157.41511414209359,
+      24.810286913829138,
+      -307.4927885851381
+    ],
+    "near": 0.18,
+    "far": 45000,
+    "fov": 56
+  },
+  "renderer": {
+    "calls": 434,
+    "triangles": 2361658,
+    "points": 0,
+    "lines": 0,
+    "geometries": 709,
+    "textures": 37
+  },
+  "workerErrors": {}
+}

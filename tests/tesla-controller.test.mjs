@@ -6,7 +6,9 @@ import * as THREE from 'three';
 import { cityModule } from './helpers/city-modules.mjs';
 
 const { TeslaController } = await import(cityModule('tesla-controller'));
+const { CityTeslaWorld } = await import(cityModule('tesla-city-world'));
 const { project } = await import(cityModule('geo'));
+const { VIEWS } = await import(cityModule('types'));
 const { FlightController } = await import(cityModule('flight-controller'));
 const { MapPlacement } = await import(cityModule('placement'));
 const { createFlight } = await import(cityModule('flight-state'));
@@ -48,6 +50,27 @@ const transitMembers = engineClass.members.filter(
     transitMethods.includes(node.name.getText(engineSource)),
 );
 assert.equal(transitMembers.length, transitMethods.length);
+const elevationMember = engineClass.members.find(
+  (node) =>
+    ts.isMethodDeclaration(node) &&
+    node.name.getText(engineSource) === 'rawElevation',
+);
+assert.ok(elevationMember);
+const rawElevationCode = ts.transpileModule(
+  `import * as THREE from '${import.meta.resolve('three')}';
+   import { unproject } from '${cityModule('geo')}';
+   export const actualRawElevation = ({${elevationMember.getText(engineSource)}}).rawElevation;`,
+  {
+    compilerOptions: {
+      target: ts.ScriptTarget.ES2022,
+      module: ts.ModuleKind.ESNext,
+    },
+  },
+).outputText;
+const { actualRawElevation } = await import(
+  'data:text/javascript;base64,' +
+    Buffer.from(rawElevationCode).toString('base64')
+);
 const engineCode = ts.transpileModule(
   `export class TransitEngineHarness {${transitMembers.map((node) => node.getText(engineSource)).join('\n')}}`,
   { compilerOptions: { target: ts.ScriptTarget.ES2022 } },
@@ -199,33 +222,74 @@ function setup(t) {
     worldDisposals: 0,
     orbits: 0,
     settings: [],
+    launch: [],
   };
+  const identities = new Map([
+    [
+      FLOOR.surfaceId,
+      { surfaceId: 'ground', layer: 0, allowedModes: ['walk', 'drive'] },
+    ],
+  ]);
   const world = {
-    groundPoseNear(position, shape, heading, radius, identity) {
+    groundPoseNear(
+      position,
+      shape,
+      heading,
+      radius,
+      identity = { surfaceId: 'ground', layer: 0 },
+      acceptsPlacement,
+    ) {
       calls.spawn.push({ position, shape, heading, radius, identity });
+      const ordinary = identity.surfaceId === 'ground' && identity.layer === 0;
+      const surfaceId = ordinary
+        ? FLOOR.surfaceId
+        : `protected:${identity.surfaceId}:${identity.layer}:face:0`;
+      const physicalIdentity = { ...identity, allowedModes: ['walk', 'drive'] };
+      identities.set(surfaceId, physicalIdentity);
+      const floorY = ordinary ? 0 : 8;
       const state = createTesla(
-        [position[0], HEIGHT, position[2]],
+        [position[0], HEIGHT + floorY, position[2]],
         heading,
         FLOOR,
       );
-      return {
+      const candidate = {
         pose: { position: state.position, quaternion: state.quaternion },
-        contact: { ...FLOOR, point: [position[0], 0, position[2]] },
+        contact: {
+          ...FLOOR,
+          surfaceId,
+          point: [position[0], floorY, position[2]],
+        },
+        identity: physicalIdentity,
       };
+      return !acceptsPlacement || acceptsPlacement(candidate)
+        ? candidate
+        : null;
+    },
+    identity: (contact) => identities.get(contact.surfaceId) ?? null,
+    hasLaunchClearance(candidate) {
+      calls.launch.push(candidate);
+      return true;
     },
     support(query) {
+      const surfaceId = query.preferredSurfaceId ?? FLOOR.surfaceId,
+        identity = identities.get(surfaceId),
+        floorY =
+          identity && (identity.surfaceId !== 'ground' || identity.layer !== 0)
+            ? 8
+            : 0;
       const up = new THREE.Vector3(0, 1, 0).applyQuaternion(
         new THREE.Quaternion(...query.pose.quaternion),
       );
       if (
         up.y < 0.98 ||
-        query.pose.position[1] > query.maxDistance ||
-        query.pose.position[1] < 0
+        query.pose.position[1] - floorY > query.maxDistance ||
+        query.pose.position[1] < floorY
       )
         return null;
       return {
         ...FLOOR,
-        point: [query.pose.position[0], 0, query.pose.position[2]],
+        surfaceId,
+        point: [query.pose.position[0], floorY, query.pose.position[2]],
       };
     },
     sweep: () => null,
@@ -337,39 +401,291 @@ test('entry requires a real spawn before taking legacy navigation, aircraft or c
   assert.equal(c.enter(), false);
 });
 
-test('entry preserves a protected street identity and fallback uses the fallback road heading', (t) => {
+test('overview entry uses the fallback road heading when no local road is verified', (t) => {
   const { c, e, world, calls } = setup(t);
-  e.navigation.mode = 'drive';
-  e.navigation.yaw = 0.25;
-  e.navigation.surfaceId = 'bridge-road';
-  e.navigation.surfaceLayer = 1;
   const [rx, rz] = project([-123.12416073213134, 49.2841737758357]);
   e.data.roadGraph = {
     nodes: [
+      { level: 'ground', point: [0, -40] },
+      { level: 'ground', point: [0, 40] },
       { level: 'ground', point: [rx - 40, rz] },
       { level: 'ground', point: [rx + 40, rz] },
     ],
-    edges: [{ a: 0, b: 1, width: 8, classes: [] }],
+    edges: [
+      { a: 0, b: 1, width: 8, classes: [] },
+      { a: 2, b: 3, width: 8, classes: [] },
+    ],
   };
   const original = world.groundPoseNear.bind(world);
   let first = true;
   world.groundPoseNear = (...args) => {
     if (first) {
       first = false;
-      calls.spawn.push({ identity: args[4] });
+      calls.spawn.push({ identity: args[4], heading: args[2] });
       return null;
     }
     return original(...args);
   };
   assert.equal(c.enter(), true);
   assert.deepEqual(calls.spawn[0].identity, {
-    surfaceId: 'bridge-road',
-    layer: 1,
+    surfaceId: 'ground',
+    layer: 0,
   });
+  close(calls.spawn[0].heading, 0);
   close(c.state.heading, Math.PI / 2);
   close(calls.spawn[1].heading, Math.PI / 2);
   assert.equal(e.settings.mode, 'tesla');
   assert.equal(e.navigation.mode, 'orbit');
+});
+
+function offerNearbyOpenCandidate(world) {
+  const original = world.groundPoseNear.bind(world);
+  world.groundPoseNear = (...args) => {
+    const first = original(...args.slice(0, 5));
+    if (!first) return null;
+    const next = structuredClone(first);
+    next.pose.position[0] += 8;
+    next.contact.point[0] += 8;
+    return (
+      [first, next].find((candidate) => !args[5] || args[5](candidate)) ?? null
+    );
+  };
+}
+
+test('overview entry prefers the open Robson road before a locally verified but covered road', (t) => {
+  const { c, e, world, calls } = setup(t),
+    [rx, rz] = project([-123.12416073213134, 49.2841737758357]);
+  e.data.roadGraph = {
+    nodes: [
+      { level: 'ground', point: [0, -40] },
+      { level: 'ground', point: [0, 40] },
+      { level: 'ground', point: [rx - 40, rz] },
+      { level: 'ground', point: [rx + 40, rz] },
+    ],
+    edges: [
+      { a: 0, b: 1, width: 8, classes: [] },
+      { a: 2, b: 3, width: 8, classes: [] },
+    ],
+  };
+  world.hasLaunchClearance = (candidate) =>
+    Math.abs(candidate.pose.position[0] - rx) < 1e-8;
+  assert.equal(c.enter(), true);
+  close(c.state.position[0], rx);
+  close(c.state.position[2], rz);
+  close(c.state.heading, Math.PI / 2);
+  assert.equal(calls.spawn.length, 2);
+  assert.deepEqual(
+    calls.spawn.map((call) => call.radius),
+    [48, 64],
+  );
+});
+
+test('the actual default overview enters a verified road with twenty metres of clearance instead of its covered first road', (t) => {
+  const { c, e } = setup(t),
+    saved = JSON.parse(
+      readFileSync(
+        new URL('./fixtures/tesla-default-entry-canopy.json', import.meta.url),
+        'utf8',
+      ),
+    ),
+    overview = project(VIEWS.find((view) => view.id === 'overview').coord),
+    geometries = [],
+    material = new THREE.MeshBasicMaterial();
+  assert.deepEqual(overview, saved.provenance.center);
+  assert.deepEqual(c.shape, saved.shape);
+  e.roads = new THREE.Group();
+  e.terrain = new THREE.Group();
+  for (const source of saved.groundMeshes) {
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute(
+      'position',
+      new THREE.Float32BufferAttribute(source.vertices, 3),
+    );
+    const mesh = new THREE.Mesh(geometry, material);
+    Object.assign(mesh.userData, {
+      asphaltSurface: source.asphaltSurface,
+      walkSurface: true,
+      surfaceId: 'ground',
+      layer: 0,
+      level: 'ground',
+    });
+    e.roads.add(mesh);
+    geometries.push(geometry);
+  }
+  e.data = {
+    flightBuildingVolumes: saved.flightBuildingVolumes,
+    buildingRoofs: new Map(saved.buildingRoofs),
+    streetLampPoints: saved.streetLampPoints,
+    roadGraph: saved.provenance.headingInfo.graph,
+    roadRelief: () => saved.provenance.input[1] - 1.05,
+    elevation: JSON.parse(
+      readFileSync(
+        new URL('../public/data/terrain.json', import.meta.url),
+        'utf8',
+      ),
+    ),
+  };
+  e.settings.buildings = true;
+  e.landmarkDetails = [];
+  e.detailedTrees = { trees: saved.trees };
+  e.streetFurniture = null;
+  // The fixture is inland, outside the beach replacements. Execute the real
+  // engine DEM sampler for lamp bases and the controller's AGL status.
+  e.elevation = (x, z) => actualRawElevation.call(e, x, z);
+  saved.streetLampPoints.forEach(([x, z], i) =>
+    close(e.elevation(x, z), saved.streetLampElevations[i]),
+  );
+  e.controls.target.set(overview[0], 0, overview[1]);
+  c.world = new CityTeslaWorld(e);
+  t.after(() => {
+    for (const geometry of geometries) geometry.dispose();
+    material.dispose();
+  });
+  const original = c.world.groundPoseNear(
+    saved.provenance.input,
+    c.shape,
+    saved.provenance.heading,
+    48,
+  );
+  assert.ok(original, 'the old first road remains physically driveable');
+  original.pose.position.forEach((value, i) =>
+    close(value, saved.bad.pose.position[i]),
+  );
+  assert.equal(c.world.hasLaunchClearance(original, c.shape), false);
+  const start = {
+      ...original.pose,
+      position: original.pose.position.map(
+        (value, i) => value + (i === 1 ? 0.35 : 0),
+      ),
+    },
+    top = {
+      ...original.pose,
+      position: original.pose.position.map(
+        (value, i) => value + (i === 1 ? 20 : 0),
+      ),
+    };
+  assert.match(
+    c.world.sweep({ from: start, to: top, shape: c.shape })?.surfaceId ?? '',
+    /^tree:\d+:crown/,
+    'the old entry is blocked by real extracted canopy geometry',
+  );
+  assert.equal(c.enter(), true);
+  c.state.position.forEach((value, i) =>
+    close(value, saved.open.pose.position[i]),
+  );
+  c.state.quaternion.forEach((value, i) =>
+    close(value, saved.open.pose.quaternion[i]),
+  );
+  close(c.state.heading, saved.provenance.heading);
+  assert.deepEqual(c.world.identity(c.state.contact), {
+    surfaceId: 'ground',
+    layer: 0,
+    allowedModes: ['walk', 'drive'],
+  });
+  assert.equal(
+    c.world.hasLaunchClearance(
+      { pose: c.state, contact: c.state.contact },
+      c.shape,
+    ),
+    true,
+    'actual Enter selects a newly proved twenty-metre upward vehicle corridor',
+  );
+});
+
+test('a protected street entry prefers a nearby clear candidate on its original physical floor', (t) => {
+  const { c, e, world, calls } = setup(t);
+  e.navigation.mode = 'drive';
+  e.navigation.surfaceId = 'bridge-road';
+  e.navigation.surfaceLayer = 1;
+  e.navigation.yaw = 0.25;
+  offerNearbyOpenCandidate(world);
+  world.hasLaunchClearance = (candidate) => candidate.pose.position[0] >= 8;
+  assert.equal(c.enter(), true);
+  close(c.state.position[0], 8);
+  close(c.state.position[1], HEIGHT + 8);
+  close(c.state.heading, 0.25);
+  assert.equal(calls.spawn.length, 1);
+  assert.deepEqual(calls.spawn[0].identity, {
+    surfaceId: 'bridge-road',
+    layer: 1,
+  });
+  assert.deepEqual(world.identity(c.state.contact), {
+    surfaceId: 'bridge-road',
+    layer: 1,
+    allowedModes: ['walk', 'drive'],
+  });
+});
+
+test('a covered protected street keeps its verified local pose and never falls through to ordinary ground', (t) => {
+  const { c, e, world, calls } = setup(t);
+  e.navigation.mode = 'walk';
+  e.navigation.surfaceId = 'bridge-road';
+  e.navigation.surfaceLayer = 1;
+  world.hasLaunchClearance = () => false;
+  assert.equal(c.enter(), true);
+  close(c.state.position[0], 0);
+  close(c.state.position[1], HEIGHT + 8);
+  assert.equal(calls.spawn.length, 1);
+  assert.deepEqual(calls.spawn[0].identity, {
+    surfaceId: 'bridge-road',
+    layer: 1,
+  });
+  c.recover();
+  close(c.state.position[1], HEIGHT + 8);
+  assert.equal(calls.spawn.length, 2);
+  assert.deepEqual(calls.spawn[1].identity, {
+    surfaceId: 'bridge-road',
+    layer: 1,
+  });
+});
+
+test('an unavailable protected street refuses entry instead of trying an unrelated ground floor', (t) => {
+  const { c, e, world, calls } = setup(t),
+    queries = [];
+  e.navigation.mode = 'drive';
+  e.navigation.surfaceId = 'bridge-road';
+  e.navigation.surfaceLayer = 1;
+  world.groundPoseNear = (...args) => {
+    queries.push(args[4]);
+    return null;
+  };
+  assert.equal(c.enter(), false);
+  assert.deepEqual(queries, [{ surfaceId: 'bridge-road', layer: 1 }]);
+  assert.equal(e.navigation.mode, 'drive');
+  assert.equal(calls.aircraftClears, 0);
+  assert.equal(calls.placementCancels, 0);
+});
+
+test('overview entry retains the original verified road if neither bounded area has launch clearance', (t) => {
+  const { c, world, calls } = setup(t);
+  world.hasLaunchClearance = () => false;
+  assert.equal(c.enter(), true);
+  assert.equal(calls.spawn.length, 2);
+  close(c.state.position[0], 0);
+  close(c.state.position[2], 0);
+});
+
+test('recovery prefers a nearby clear location while retaining a protected floor height and identity', (t) => {
+  const { c, e, world, calls } = setup(t);
+  e.navigation.mode = 'drive';
+  e.navigation.surfaceId = 'bridge-road';
+  e.navigation.surfaceLayer = 1;
+  e.navigation.yaw = 0.25;
+  assert.equal(c.enter(), true);
+  const height = c.state.position[1];
+  e.data.roadRelief = () => -50;
+  offerNearbyOpenCandidate(world);
+  world.hasLaunchClearance = (candidate) => candidate.pose.position[0] >= 8;
+  c.recover();
+  close(c.state.position[0], 8);
+  close(c.state.position[1], height);
+  close(c.state.heading, 0.25);
+  assert.deepEqual(calls.spawn.at(-1).identity, {
+    surfaceId: 'bridge-road',
+    layer: 1,
+  });
+  close(calls.spawn.at(-1).position[1], height);
+  assert.equal(c.warning, 'recovered');
 });
 
 test('recovery fallback retains the exact previously validated sloped spawn orientation', (t) => {
@@ -390,15 +706,32 @@ test('recovery fallback retains the exact previously validated sloped spawn orie
     quaternion: rotation.toArray(),
   };
   const contact = { ...FLOOR, normal: normal.toArray() };
-  world.groundPoseNear = () => ({ pose, contact });
+  world.groundPoseNear = (...args) => {
+    const candidate = { pose, contact, identity: world.identity(contact) };
+    return !args[5] || args[5](candidate) ? candidate : null;
+  };
   assert.equal(c.enter(), true);
   assert.deepEqual(c.state.quaternion, pose.quaternion);
   world.groundPoseNear = () => null;
+  world.support = () => structuredClone(contact);
   c.state.position = [1_000, 100, 1_000];
   c.recover();
   assert.deepEqual(c.state.position, pose.position);
   assert.deepEqual(c.state.quaternion, pose.quaternion);
   assert.deepEqual(c.state.velocity, [0, 0, 0]);
+});
+
+test('recovery refuses an entry fallback whose current floor or body permission no longer exists', (t) => {
+  const { c, world } = setup(t);
+  assert.equal(c.enter(), true);
+  c.state.position = [1_000, 100, 1_000];
+  const current = c.state;
+  world.groundPoseNear = () => null;
+  world.support = () => null;
+  c.recover();
+  assert.equal(c.state, current);
+  assert.deepEqual(c.state.position, [1_000, 100, 1_000]);
+  assert.equal(c.warning, 'no-spawn');
 });
 
 test('desktop right turn and right joystick match the authored +X-left cockpit convention', (t) => {

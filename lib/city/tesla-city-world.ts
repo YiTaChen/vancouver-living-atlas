@@ -35,6 +35,15 @@ export const TESLA_TREE_ENVELOPE = {
   coniferCrownBase: 0.075,
   crownRadius: 0.3,
 } as const;
+export interface TeslaRoadSpawn {
+  pose: TeslaPose;
+  contact: TeslaContact;
+  identity: {
+    surfaceId: string;
+    layer: number;
+    allowedModes: readonly ('walk' | 'drive')[];
+  };
+}
 export interface TeslaPrism {
   id: string;
   polygon: number[][][];
@@ -814,6 +823,90 @@ export class CityTeslaWorld extends TeslaWorld {
       return waterClear;
     });
   }
+  /** Optional placement preference, never a change to simulation collision.
+   * Prove a fixed-orientation vertical corridor from a fresh road contact. The
+   * first 35cm uses the existing departure contract; the remainder has no face
+   * exclusions, so crowns, canopies, ceilings and stacked floors remain solid. */
+  hasLaunchClearance(
+    spawn: Pick<TeslaRoadSpawn, 'pose' | 'contact'>,
+    shape: TeslaShape,
+    upM = 20,
+  ): boolean {
+    if (!Number.isFinite(upM) || upM < 0.35 || upM > 64) return false;
+    try {
+      const { pose, contact } = spawn;
+      const identity = this.identity(contact);
+      if (
+        contact.kind !== 'ground' ||
+        !identity?.allowedModes.includes('drive') ||
+        !(
+          contact.surfaceId.startsWith('ground:asphalt:') ||
+          contact.surfaceId.startsWith('protected:')
+        )
+      )
+        return false;
+      const proof = this.support(
+        {
+          pose,
+          shape,
+          maxDistance: shape.halfExtents[1] + shape.clearance + 0.2,
+          preferredSurfaceId: contact.surfaceId,
+          adhesion: false,
+        },
+        (face) => {
+          const actual = this.identity(face);
+          return (
+            face.kind === 'ground' &&
+            (face.surfaceId.startsWith('ground:asphalt:') ||
+              face.surfaceId.startsWith('protected:')) &&
+            actual?.surfaceId === identity.surfaceId &&
+            actual.layer === identity.layer &&
+            actual.allowedModes.includes('drive')
+          );
+        },
+      );
+      if (
+        proof?.surfaceId !== contact.surfaceId ||
+        this.sweep({
+          from: pose,
+          to: pose,
+          shape,
+          ignoreSurfaceId: proof.surfaceId.startsWith('protected:')
+            ? undefined
+            : proof.surfaceId,
+        })
+      )
+        return false;
+      const clearPose: TeslaPose = {
+        position: [pose.position[0], pose.position[1] + 0.35, pose.position[2]],
+        quaternion: [...pose.quaternion],
+      };
+      const firstHit = proof.surfaceId.startsWith('protected:')
+        ? this.sweep({
+            from: pose,
+            to: clearPose,
+            shape,
+          })
+        : this.sweepGroundDeparture({
+            origin: pose,
+            from: pose,
+            to: clearPose,
+            shape,
+            sourceSurfaceId: proof.surfaceId,
+          });
+      if (firstHit || this.sweep({ from: clearPose, to: clearPose, shape }))
+        return false;
+      const top: TeslaPose = {
+        position: [pose.position[0], pose.position[1] + upM, pose.position[2]],
+        quaternion: [...pose.quaternion],
+      };
+      return !this.sweep({ from: clearPose, to: top, shape });
+    } catch {
+      // Failed placement proof never treats an invalid or unavailable world as
+      // open sky. The caller may still retain its separately verified road.
+      return false;
+    }
+  }
   /** Explicit bounded recovery to an actual driveable road, never a rooftop,
    * terrain estimate, water plane or pedestrian-only deck. */
   groundPoseNear(
@@ -825,7 +918,8 @@ export class CityTeslaWorld extends TeslaWorld {
       surfaceId: 'ground',
       layer: 0,
     },
-  ) {
+    acceptsPlacement?: (candidate: TeslaRoadSpawn) => boolean,
+  ): TeslaRoadSpawn | null {
     const quaternion = new THREE.Quaternion().setFromAxisAngle(
       new THREE.Vector3(0, 1, 0),
       yaw,
@@ -911,8 +1005,15 @@ export class CityTeslaWorld extends TeslaWorld {
             shape,
             ignoreSurfaceId: contact.surfaceId,
           })
-        )
-          return { pose: grounded, contact, identity: this.identity(contact)! };
+        ) {
+          const candidate: TeslaRoadSpawn = {
+            pose: grounded,
+            contact,
+            identity: this.identity(contact)!,
+          };
+          if (!acceptsPlacement || acceptsPlacement(candidate))
+            return candidate;
+        }
       }
     return null;
   }
