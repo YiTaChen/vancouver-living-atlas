@@ -2,6 +2,8 @@
 
 A separate player vehicle and travel button, alongside Orbit / Walk / Drive / Boat / Fly. It does not replace the existing roadster, aircraft, traffic, buses or trains.
 
+The independent Tesla is exempt from police speed enforcement. Entering Tesla clears any pending or active roadster stop, including its patrol/officer and speech. Ordinary Drive retains its existing enforcement thresholds; this exemption does not change either vehicle's physical maximum speed.
+
 ## Reference and scope
 
 The reference is the redesigned white, sharply faceted Roadster revealed in October 2026, including copper/gold glazing, raised fenders, concealed lamps, full-width rear light, yoke cabin, active aero and perimeter thrusters.

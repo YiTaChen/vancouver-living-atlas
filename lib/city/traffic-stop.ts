@@ -122,6 +122,11 @@ export class TrafficStop {
   update(dt: number) {
     const n = this.nav,
       previous = this.state.phase;
+    // Tesla has independent motion and never participates in roadster stops.
+    if (n.e.settings.mode === 'tesla' || n.e.tesla?.active) {
+      this.cancel();
+      return;
+    }
     this.state.update(
       dt,
       n.speed,

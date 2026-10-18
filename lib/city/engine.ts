@@ -1554,6 +1554,8 @@ export class CityEngine {
       !this.closeBusVisit()
     )
       return;
+    // Tesla skips navigation updates, so release a prior stop immediately.
+    if (settings.mode === 'tesla') this.navigation?.trafficStop?.cancel();
     const automatic = settings.qualityMode === 'auto';
     const preferenceChanged =
       automatic !== (this.settings.qualityMode === 'auto');
