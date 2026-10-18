@@ -18,6 +18,7 @@ export function createTeslaRoadsterShape(clearance = 0.06): TeslaShape {
       ) as [TeslaVec3, TeslaVec3, TeslaVec3, TeslaVec3],
       chassisClearance: TESLA_ROADSTER_GROUND_SUPPORT.chassisClearance,
       suspensionTravel: TESLA_ROADSTER_GROUND_SUPPORT.suspensionTravel,
+      wheelRadius: TESLA_ROADSTER_DIMENSIONS.wheelRadius,
       bodySections: TESLA_ROADSTER_GROUND_SUPPORT.bodySections.map(
         (section) => ({ ...section }),
       ),

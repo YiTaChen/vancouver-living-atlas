@@ -476,7 +476,7 @@ test('Robson/view/model-tier controls call public APIs while keeping city qualit
   });
 });
 
-function parkFixture(behavior = 'valid', offset = 1.25) {
+function groundEntryFixture(behavior = 'valid', offset = 1.25) {
   const setup = fixture(),
     { e, t, events } = setup;
   let placement,
@@ -510,7 +510,7 @@ function parkFixture(behavior = 'valid', offset = 1.25) {
     assert.equal(
       e.transition,
       null,
-      'a pending viewpoint animation cannot move the new park camera',
+      'a pending viewpoint animation cannot move the new ground-entry camera',
     );
     events.push(['nav-start', mode, point]);
     placement = point;
@@ -534,23 +534,32 @@ function parkFixture(behavior = 'valid', offset = 1.25) {
   return setup;
 }
 
-test('park setup uses public street entry with source-derived seeds, records actual spawn and leaves native controls live', async () => {
-  for (const { name, seed, yaw, offset } of [
+test('ground setup uses public street entry with source-derived seeds, records actual spawn and leaves native controls live', async () => {
+  for (const { name, seed, yaw, offset, maxSpawnOffsetM } of [
     {
       name: 'Stanley Park Drive',
       seed: [-879.608384031657, -1453.5787111998163],
       yaw: 0.9887633783623333,
       offset: 1.25,
+      maxSpawnOffsetM: 50,
     },
     {
       name: 'Stanley Seawall',
       seed: [377.2749101711636, -1595.2078075999482],
       yaw: -2.093918646673578,
       offset: 50,
+      maxSpawnOffsetM: 50,
+    },
+    {
+      name: 'Downtown curb approach',
+      seed: [1023.97807, 940.37605],
+      yaw: 0.7923266488,
+      offset: 1.5,
+      maxSpawnOffsetM: 2,
     },
   ])
     await dom(async ({ replace }) => {
-      const { e, t, events, held } = parkFixture('valid', offset),
+      const { e, t, events, held } = groundEntryFixture('valid', offset),
         panel = new Element(),
         lock = lease(),
         uploads = [];
@@ -595,7 +604,8 @@ test('park setup uses public street entry with source-derived seeds, records act
       );
       assert.equal(report.result, 'completed');
       assert.deepEqual(report.target.seed, seed);
-      assert.equal(report.target.spawnOffsetM, offset);
+      assert.ok(Math.abs(report.target.spawnOffsetM - offset) < 1e-9);
+      assert.equal(report.target.maxSpawnOffsetM, maxSpawnOffsetM);
       assert.deepEqual(report.target.actualPosition, t.state.position);
       assert.match(report.target.result, /public controller entry proved/);
       assert.equal(t.active, true);
@@ -617,35 +627,75 @@ test('park setup uses public street entry with source-derived seeds, records act
     });
 });
 
-test('park setup rejects navigation, real controller entry and distant-spawn failures without retaining input or accepting Robson fallback', async () => {
-  for (const [behavior, offset, error, enters] of [
-    ['nav-rejected', 0, /navigation entry was rejected/, 0],
-    ['enter-rejected', 0, /no proved full-vehicle spawn/, 1],
-    ['valid', 50.001, /different spawn beyond 50m/, 1],
+test('ground setup rejects navigation, real controller entry and distant-spawn failures without retaining input or accepting Robson fallback', async () => {
+  for (const [name, maxSpawnOffsetM] of [
+    ['Stanley Park Drive', 50],
+    ['Downtown curb approach', 2],
   ])
+    for (const [behavior, offset, error, enters] of [
+      ['nav-rejected', 0, /navigation entry was rejected/, 0],
+      ['enter-rejected', 0, /no proved full-vehicle spawn/, 1],
+      [
+        'valid',
+        maxSpawnOffsetM + 0.001,
+        new RegExp(`different spawn beyond ${maxSpawnOffsetM}m`),
+        1,
+      ],
+    ])
+      await dom(async () => {
+        const { e, t, events, held } = groundEntryFixture(behavior, offset),
+          panel = new Element(),
+          lock = lease();
+        held.add('up');
+        installTeslaQA(e, panel, lock);
+        await click(panel, `Tesla QA: enter ${name}`);
+        const report = runReport(panel);
+        assert.match(report.result, error);
+        assert.match(report.target.result, error);
+        assert.equal(
+          events.filter((event) => event[0] === 'enter').length,
+          enters,
+        );
+        assert.equal(
+          events.some((event) => event[0] === 'view'),
+          false,
+        );
+        assert.equal(t.active, false);
+        assert.equal(held.size, 0);
+        assert.equal(lock.active, false);
+        assert.equal(lock.starts, 1);
+        assert.equal(lock.ends, 1);
+      });
+});
+
+test('Downtown curb approach samples current road height through public navigation and rejects a non-finite runtime height', async () => {
+  for (const height of [16.5, NaN])
     await dom(async () => {
-      const { e, t, events, held } = parkFixture(behavior, offset),
+      const { e, t, events } = groundEntryFixture('valid', 0.25),
         panel = new Element(),
-        lock = lease();
-      held.add('up');
-      installTeslaQA(e, panel, lock);
-      await click(panel, 'Tesla QA: enter Stanley Park Drive');
-      const report = runReport(panel);
-      assert.match(report.result, error);
-      assert.match(report.target.result, error);
-      assert.equal(
-        events.filter((event) => event[0] === 'enter').length,
-        enters,
-      );
-      assert.equal(
-        events.some((event) => event[0] === 'view'),
-        false,
-      );
-      assert.equal(t.active, false);
-      assert.equal(held.size, 0);
-      assert.equal(lock.active, false);
-      assert.equal(lock.starts, 1);
-      assert.equal(lock.ends, 1);
+        sampled = [];
+      e.data.roadRelief = (x, z) => {
+        sampled.push([x, z]);
+        return height;
+      };
+      installTeslaQA(e, panel, lease());
+      await click(panel, 'Tesla QA: enter Downtown curb approach');
+      const report = runReport(panel),
+        placed = events.find((event) => event[0] === 'nav-start');
+      assert.deepEqual(sampled, [[1023.97807, 940.37605]]);
+      if (Number.isFinite(height)) {
+        assert.equal(placed[2].y, height + 1.05);
+        assert.equal(report.result, 'completed');
+        assert.deepEqual(report.target.actualPosition, t.state.position);
+      } else {
+        assert.equal(placed, undefined);
+        assert.equal(
+          events.some((event) => event[0] === 'enter'),
+          false,
+        );
+        assert.match(report.result, /navigation entry was rejected/);
+        assert.equal(t.active, false);
+      }
     });
 });
 

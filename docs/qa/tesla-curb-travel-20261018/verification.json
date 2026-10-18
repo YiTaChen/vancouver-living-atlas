@@ -1,0 +1,189 @@
+{
+  "kind": "tesla-curb-acceptance-v1",
+  "parentRevision": "bbdb985ee600b2943e239d003e9aac39659af285",
+  "sourceHashes": {
+    "lib/city/tesla-state.ts": "121e38da44dd44a8cf6fe0afd610474bc6f012b704a0a2518a2ffc180f15cc75",
+    "lib/city/tesla-world.ts": "f5921af2e506fc24f9d12c29c2900d6d5d9bfcd22ea95f17b9a59e83012bd0dd",
+    "lib/city/tesla-shape.ts": "52afa45d33b586741fc20d314a33c87fc86c2fb1357893e055ea51ac0271c3cb",
+    "lib/city/tesla-tyre-support.ts": "902ede5aae7b9b4940755d0eb8706a62545486c37f1b3d2785de4dbb7d22bb90",
+    "lib/city/tesla-qa.ts": "565706759ae35c971cb4f407a62165f98caeecfe6d90ac9d1985c2dcbbe41ca4",
+    "lib/city/assets/tesla-roadster-contract.ts": "5f1e4111d38b96b1785e2a1e1cbb3833a5419961fc9ada805c5935340cf1aeb7",
+    "tests/tesla-curb-travel.test.mjs": "528790be92a9b3e93e9a912becd0589da4c5099ddd040b5bf59e9228e243d6d4",
+    "tests/tesla-tyre-support.test.mjs": "73037702f4f14916931f892125a44cad0978d2116a9b5d849493f6a844300476",
+    "tests/tesla-world.test.mjs": "4752ac38acc48704866d94722f87f478f9cab596db7452d043ca70a50191c1bf"
+  },
+  "sourceFingerprint": "c9af4b33c6055fd55fc65ac4cf35c80432364be301a2e84f0311f97cf2517bd0",
+  "provenance": "Captures execute the then-uncommitted current sources; revision is their parent. No pose/contact/quaternion is forced. Public navigation and Tesla entry retain actual4.097cm offset.",
+  "physics": {
+    "tyreRadiusM": 0.35,
+    "maximumStepInfluenceM": 0.16,
+    "suspensionTravelM": 0.05,
+    "rearEnvelopeMinimumM": 0.085,
+    "measuredMeshMinimumM": 0.08767354488372803,
+    "sharedRouteCandidateLimit": 12,
+    "retryLimit": 1,
+    "collisionEpsilonChanged": false,
+    "bodyRouteCollisionChecks": "unchanged complete translating/rotating sweeps; every accepted alternative is re-proved",
+    "modelLimits": "Longitudinal circular tread with pure-pitch datum correction and four-wheel ground fitting; not an engineering tyre/suspension or arbitrary rolled tyre rigid-body simulation."
+  },
+  "cpu": {
+    "curbTestsPassed": 28,
+    "tyreHelperTestsPassed": 9,
+    "worldTestsPassed": 42,
+    "coverage": "5/10/13cm full platforms with vertical risers, straight/+25/-25degrees,2/8mps,60/30Hz and67ms render partitions, both axles, descent, braking, park/restart, actual finite street-side edge/reverse; source/hole/layer/high curb/ceiling/origin/route negatives.",
+    "limits": "Frozen actual-city fixture excludes medium landmarks and runtime furniture. The actual2m footway cannot contain the2.78m wheelbase; its front-axle climb/reverse and separate1.38m far-side drop refusal are distinguished from full8m synthetic platform traversal."
+  },
+  "nativeBrowser": {
+    "captures": [
+      {
+        "file": "tesla-desktop-curb-front-axle-ground-chase-auto-20261018t133051227z-001.json",
+        "viewport": [
+          1280,
+          720
+        ],
+        "position": [
+          1025.807218143125,
+          16.66639992435467,
+          942.136321301739
+        ],
+        "horizontalFromEntryM": 2.5641993505604987,
+        "mode": "ground",
+        "speedKph": 0,
+        "warning": "",
+        "contact": "ground:footway:68:face:6497",
+        "lastStep": {
+          "simulatedS": 0.014799999999988359,
+          "droppedS": 0,
+          "substeps": 0,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        },
+        "sourceFingerprint": "c9af4b33c6055fd55fc65ac4cf35c80432364be301a2e84f0311f97cf2517bd0"
+      },
+      {
+        "file": "tesla-desktop-curb-reverse-ground-chase-auto-20261018t133137309z-002.json",
+        "viewport": [
+          1280,
+          720
+        ],
+        "position": [
+          1023.6130970361803,
+          16.636102696951358,
+          939.9714755546063
+        ],
+        "horizontalFromEntryM": 0.5181252109824817,
+        "mode": "ground",
+        "speedKph": 0,
+        "warning": "",
+        "contact": "ground:asphalt:9:face:9619",
+        "lastStep": {
+          "simulatedS": 0.017100000000005822,
+          "droppedS": 0,
+          "substeps": 0,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        },
+        "sourceFingerprint": "c9af4b33c6055fd55fc65ac4cf35c80432364be301a2e84f0311f97cf2517bd0"
+      },
+      {
+        "file": "tesla-mobile-landscape-curb-front-axle-ground-chase-auto-20261018t133258578z-005.json",
+        "viewport": [
+          844,
+          390
+        ],
+        "position": [
+          1026.1678384501533,
+          16.661461825085627,
+          942.4529425488824
+        ],
+        "horizontalFromEntryM": 3.043406056973436,
+        "mode": "ground",
+        "speedKph": 0,
+        "warning": "",
+        "contact": "ground:footway:68:face:6506",
+        "lastStep": {
+          "simulatedS": 0.016600000000005822,
+          "droppedS": 0,
+          "substeps": 0,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        },
+        "sourceFingerprint": "c9af4b33c6055fd55fc65ac4cf35c80432364be301a2e84f0311f97cf2517bd0"
+      },
+      {
+        "file": "tesla-mobile-portrait-curb-front-axle-ground-chase-auto-20261018t133208449z-003.json",
+        "viewport": [
+          320,
+          568
+        ],
+        "position": [
+          1026.1673801674783,
+          16.66146127448965,
+          942.4529189675192
+        ],
+        "horizontalFromEntryM": 3.043060518938139,
+        "mode": "ground",
+        "speedKph": 0,
+        "warning": "",
+        "contact": "ground:footway:68:face:6497",
+        "lastStep": {
+          "simulatedS": 0.016700000000011643,
+          "droppedS": 0,
+          "substeps": 0,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        },
+        "sourceFingerprint": "c9af4b33c6055fd55fc65ac4cf35c80432364be301a2e84f0311f97cf2517bd0"
+      },
+      {
+        "file": "tesla-mobile-portrait-curb-reverse-ground-chase-auto-20261018t133243368z-004.json",
+        "viewport": [
+          320,
+          568
+        ],
+        "position": [
+          1009.8362592464493,
+          16.69456675472085,
+          925.8791466410348
+        ],
+        "horizontalFromEntryM": 20.225779870898446,
+        "mode": "ground",
+        "speedKph": 0,
+        "warning": "",
+        "contact": "ground:asphalt:9:face:8505",
+        "lastStep": {
+          "simulatedS": 0.034,
+          "droppedS": 0,
+          "substeps": 0,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        },
+        "sourceFingerprint": "c9af4b33c6055fd55fc65ac4cf35c80432364be301a2e84f0311f97cf2517bd0"
+      }
+    ],
+    "publicEntryOffsetM": 0.04097181681556558,
+    "desktopQualitySwap": "Native High,Low,Auto changes retained exact position/quaternion on the curb; all3 model tiers cached.",
+    "portraitIdle": "Position and quaternion remained exact after capture/show/hide operations, without holding brake.",
+    "consoleWarnOrError": 0,
+    "cleanup": "Owned tab closed, viewport reset, local QA server stopped.",
+    "limits": "Functional responsive Chromium tests, not physical-phone GPU/FPS or input-timing benchmarks. Pointer/key hold durations are automation inputs and do not establish exact simulation time. Saved snapshots show endpoints and last frame only; they do not prove zero collisions throughout a native action. Mobile approaches reach the separate narrow platform far-edge rejection boundary; they prove front-axle climb and endpoint stability, not full-car passage over that drop. Continuous collision-free full platform traversal is asserted separately by CPU tests."
+  },
+  "releaseValidation": {
+    "tests": 1422,
+    "passed": 1422,
+    "failed": 0,
+    "durationMs": 119397.911677,
+    "typecheck": "passed",
+    "scopedLint": "passed",
+    "productionFirebaseBuild": "passed",
+    "qaIsolation": "passed",
+    "independentSafetyAndBudgetReview": "passed",
+    "sourceFreeze": "matches native capture physics/QA source hashes",
+    "ci": "recorded externally on the eventual pull request and merge revision"
+  }
+}

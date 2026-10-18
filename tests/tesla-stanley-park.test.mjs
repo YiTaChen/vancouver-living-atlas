@@ -12,10 +12,15 @@ const fixture = JSON.parse(
   readFileSync(new URL('./fixtures/tesla-stanley-park.json', import.meta.url)),
 );
 const shape = createTeslaRoadsterShape();
+const adaptedShape = structuredClone(fixture.shape);
+// Preserve the historical capture; current metadata adds circular tread and
+// refines the rear bound against the unchanged, separately measured mesh.
+adaptedShape.groundSupport.wheelRadius = 0.35;
+adaptedShape.groundSupport.bodySections[0].clearance = 0.085;
 assert.deepEqual(
   shape,
-  fixture.shape,
-  'use the same authored tyres and body clearances',
+  adaptedShape,
+  'only explicitly reviewed tread and rear-envelope metadata evolve from the frozen capture',
 );
 function actualWorld(item) {
   return new TeslaWorld({

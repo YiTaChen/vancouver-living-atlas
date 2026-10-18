@@ -48,6 +48,7 @@ test('the runtime shape maps the authored tyre-plane points once and shares cons
     shape.groundSupport.suspensionTravel,
     modelSupport.suspensionTravel,
   );
+  assert.equal(shape.groundSupport.wheelRadius, dimensions.wheelRadius);
   assert.deepEqual(shape.groundSupport.bodySections, modelSupport.bodySections);
   const second = createTeslaRoadsterShape();
   assert.notEqual(shape, second);
@@ -80,6 +81,27 @@ test('invalid body-section metadata cannot leave an unmodelled gap in ordinary-g
     ),
   );
   assert.deepEqual(pose(state), before);
+});
+
+test('an invalid circular tread radius cannot enlarge the authored wheel contact region', () => {
+  for (const wheelRadius of [0, -0.35, 1, Infinity, Number.NaN]) {
+    const state = grounded(),
+      before = structuredClone(state),
+      invalidShape = {
+        ...shape,
+        groundSupport: { ...shape.groundSupport, wheelRadius },
+      };
+    assert.throws(() =>
+      stepTesla(
+        state,
+        {},
+        1 / 60,
+        adapter(() => null),
+        invalidShape,
+      ),
+    );
+    assert.deepEqual(state, before);
+  }
 });
 
 test('a fitted driving attitude remains separate from the actual contact normal and parked poses stay exact', () => {
