@@ -469,6 +469,8 @@ function rotatingProjectionRange(
   frame: SweepFrame,
   shape: TeslaShape,
   normal: THREE.Vector3,
+  fromTime = 0,
+  toTime = 1,
 ) {
   if (!frame.projectionArc) {
     const rotation = frame.rotation!,
@@ -507,7 +509,7 @@ function rotatingProjectionRange(
         normal.y * (axis.z * corner.x - axis.x * corner.z) +
         normal.z * (axis.x * corner.y - axis.y * corner.x),
       radius = Math.hypot(a, b),
-      samples = [0, 1];
+      samples = [fromTime, toTime];
     if (angle > 1e-12 && radius > 1e-12 && Math.abs(speed) < angle * radius) {
       const phase = Math.atan2(a, b),
         critical = Math.acos(
@@ -517,7 +519,8 @@ function rotatingProjectionRange(
         const u =
           (((sign * critical - phase) % (2 * Math.PI)) + 2 * Math.PI) %
           (2 * Math.PI);
-        if (u <= angle + 1e-12) samples.push(Math.min(1, u / angle));
+        const t = Math.min(1, u / angle);
+        if (u <= angle + 1e-12 && t >= fromTime && t <= toTime) samples.push(t);
       }
     }
     for (const t of samples) {
@@ -642,6 +645,72 @@ function triangleSweep(
     })
   )
     return null;
+  if (exactAxes) {
+    // A rotating section may remain separated from a finite triangle by
+    // different axes at different times. Prove every bounded time interval
+    // with the exact corner arc, rather than treating angular padding as a
+    // physical intersection. An unproved interval remains a collision.
+    let remaining = 127;
+    const separated = (from: number, to: number, depth: number): boolean => {
+      if (!remaining--) return false;
+      const middle = (from + to) / 2;
+      if (
+        exactAxes.some(({ axis, low, high }) => {
+          const [minimum, maximum] = rotatingProjectionRange(
+            frame,
+            shape,
+            axis,
+            from,
+            to,
+          );
+          return maximum <= low + EPS || minimum >= high - EPS;
+        })
+      )
+        return true;
+      const orientation = new THREE.Quaternion().slerpQuaternions(
+          new THREE.Quaternion(),
+          rotation!,
+          middle,
+        ),
+        middleAxes = axes.map((axis) =>
+          axis.clone().applyQuaternion(orientation),
+        );
+      for (
+        let index = 0;
+        index < middleAxes.length * (edges.length + 1);
+        index++
+      ) {
+        const raw =
+          index < middleAxes.length
+            ? middleAxes[index]
+            : edges[Math.floor((index - middleAxes.length) / middleAxes.length)]
+                .clone()
+                .cross(
+                  middleAxes[(index - middleAxes.length) % middleAxes.length],
+                );
+        if (raw.lengthSq() < 1e-14) continue;
+        const axis = raw.clone().normalize(),
+          projected = vertices.map((point) => point.dot(axis)),
+          [minimum, maximum] = rotatingProjectionRange(
+            frame,
+            shape,
+            axis,
+            from,
+            to,
+          );
+        if (
+          maximum <= Math.min(...projected) + EPS ||
+          minimum >= Math.max(...projected) - EPS
+        )
+          return true;
+      }
+      if (!depth) return false;
+      return (
+        separated(from, middle, depth - 1) && separated(middle, to, depth - 1)
+      );
+    };
+    if (separated(0, 1, 6)) return null;
+  }
   return enter >= -EPS && enter <= 1 + EPS
     ? Math.min(1, Math.max(0, enter))
     : null;
@@ -1453,10 +1522,18 @@ export class TeslaWorld implements TeslaWorldContract {
       })
       .filter(
         ({ face, gap, distance }) =>
-          gap >=
-            (face.kind === 'ground' && face.supportGroup === 'ground:0'
-              ? -0.16
-              : -0.08) && distance <= query.maxDistance + 1e-5,
+          // A finite ground triangle can end at a crest while its infinite
+          // extension intersects the long OBB. Authored ground uses the actual
+          // tyres/union below; finite-body clearance remains a separate sweep.
+          // The physical claim must still be below the chassis, never a ceiling.
+          (face.kind === 'ground' &&
+          face.supportGroup === 'ground:0' &&
+          query.shape.groundSupport
+            ? distance >= 0
+            : gap >=
+              (face.kind === 'ground' && face.supportGroup === 'ground:0'
+                ? -0.16
+                : -0.08)) && distance <= query.maxDistance + 1e-5,
       )
       .sort(
         (a, b) =>
@@ -1507,6 +1584,29 @@ export class TeslaWorld implements TeslaWorldContract {
         })
       )
         continue;
+      // Ordinary model ground proves the authored tyre support rectangle,
+      // separately from the larger body whose complete sweeps still apply.
+      // Its plane follows the actual wheel frame; the claimed triangle point
+      // and normal remain physical source data. Roof/protected/legacy support
+      // keeps its original full-body footprint and plane.
+      const tyres = ordinaryGround
+        ? query.shape.groundSupport?.wheelContacts
+        : undefined;
+      const minX = tyres ? Math.min(...tyres.map((p) => p[0])) : 0;
+      const maxX = tyres ? Math.max(...tyres.map((p) => p[0])) : 0;
+      const minZ = tyres ? Math.min(...tyres.map((p) => p[2])) : 0;
+      const maxZ = tyres ? Math.max(...tyres.map((p) => p[2])) : 0;
+      const footprintPoint = tyres
+        ? center
+            .clone()
+            .addScaledVector(axes[0], (minX + maxX) / 2)
+            .addScaledVector(
+              axes[1],
+              tyres.reduce((sum, p) => sum + p[1], 0) / 4,
+            )
+            .addScaledVector(axes[2], (minZ + maxZ) / 2)
+        : point;
+      const footprintNormal = tyres ? axes[1] : normal;
       const peers = nearby.faces.filter(
         (other) =>
           other.adherable &&
@@ -1515,11 +1615,14 @@ export class TeslaWorld implements TeslaWorldContract {
           faceGeometry(other).rawNormal.dot(normal) > 0.97 &&
           Math.abs(
             (ordinaryGround
-              ? faceGeometry(other).triangle.closestPointToPoint(point, closest)
+              ? faceGeometry(other).triangle.closestPointToPoint(
+                  footprintPoint,
+                  closest,
+                )
               : closest.copy(faceGeometry(other).vertices[0])
             )
-              .sub(point)
-              .dot(normal),
+              .sub(footprintPoint)
+              .dot(footprintNormal),
           ) <= planeTolerance,
       );
       let connectedGrades: Set<string> | undefined;
@@ -1544,14 +1647,19 @@ export class TeslaWorld implements TeslaWorldContract {
               query.shape.halfExtents[2];
           return distanceSq <= Math.min(0.2, 0.05 + gradeTravel) ** 2;
         });
-      const halfX = query.shape.halfExtents[0] + query.shape.clearance,
-        halfZ = query.shape.halfExtents[2] + query.shape.clearance;
+      const halfX = tyres
+          ? (maxX - minX) / 2
+          : query.shape.halfExtents[0] + query.shape.clearance,
+        halfZ = tyres
+          ? (maxZ - minZ) / 2
+          : query.shape.halfExtents[2] + query.shape.clearance;
+      if (tyres && (halfX <= 0.002 || halfZ <= 0.002)) continue;
       if (
         ![-1, 0, 1].every((x) =>
           [-1, 0, 1].every((z) =>
             covering(
               probe
-                .copy(point)
+                .copy(footprintPoint)
                 .addScaledVector(axes[0], halfX * x)
                 .addScaledVector(axes[2], halfZ * z),
             ),
@@ -1585,9 +1693,9 @@ export class TeslaWorld implements TeslaWorldContract {
             });
         }
       const project = (p: TeslaVec3): [number, number] => {
-        const dx = p[0] - point.x,
-          dy = p[1] - point.y,
-          dz = p[2] - point.z;
+        const dx = p[0] - footprintPoint.x,
+          dy = p[1] - footprintPoint.y,
+          dz = p[2] - footprintPoint.z;
         return [
           dx * axes[0].x + dy * axes[0].y + dz * axes[0].z,
           dx * axes[2].x + dy * axes[2].y + dz * axes[2].z,
@@ -1702,90 +1810,6 @@ export class TeslaWorld implements TeslaWorldContract {
       );
       return height === null ? null : new THREE.Vector3(x, height, z);
     };
-    let fitted: TeslaPose = query.pose,
-      axes = initialAxes;
-    for (let iteration = 0; iteration < 2; iteration++) {
-      const center = asVector(fitted.position),
-        points: THREE.Vector3[] = [];
-      for (const wheel of ground.wheelContacts) {
-        const p = center
-          .clone()
-          .addScaledVector(axes[0], wheel[0])
-          .addScaledVector(axes[1], wheel[1])
-          .addScaledVector(axes[2], wheel[2]);
-        const hit = sample(p.x, p.z);
-        if (!hit) return null;
-        points.push(hit);
-      }
-      const mean = points
-        .reduce((sum, p) => sum.add(p), new THREE.Vector3())
-        .multiplyScalar(0.25);
-      let xx = 0,
-        xz = 0,
-        zz = 0,
-        xy = 0,
-        zy = 0;
-      for (const p of points) {
-        const x = p.x - mean.x,
-          y = p.y - mean.y,
-          z = p.z - mean.z;
-        xx += x * x;
-        xz += x * z;
-        zz += z * z;
-        xy += x * y;
-        zy += z * y;
-      }
-      const determinant = xx * zz - xz * xz;
-      if (determinant < 1e-8) return null;
-      const slopeX = (xy * zz - zy * xz) / determinant,
-        slopeZ = (zy * xx - xy * xz) / determinant,
-        normal = new THREE.Vector3(-slopeX, 1, -slopeZ).normalize();
-      if (normal.y < 0.92) return null;
-      const forward = initialAxes[2]
-          .clone()
-          .addScaledVector(normal, -initialAxes[2].dot(normal))
-          .normalize(),
-        right = normal.clone().cross(forward).normalize(),
-        quaternion = new THREE.Quaternion().setFromRotationMatrix(
-          new THREE.Matrix4().makeBasis(right, normal, forward),
-        );
-      axes = [right, normal, forward];
-      const wheelY = ground.wheelContacts.reduce((sum, p) => sum + p[1], 0) / 4,
-        y =
-          mean.y +
-          slopeX * (original.x - mean.x) +
-          slopeZ * (original.z - mean.z) -
-          wheelY / normal.y;
-      fitted = {
-        position: [original.x, y, original.z],
-        quaternion: [quaternion.x, quaternion.y, quaternion.z, quaternion.w],
-      };
-    }
-    const fittedCenter = asVector(fitted.position);
-    if (
-      fittedCenter.distanceTo(original) > query.maxAdjustmentM + EPS ||
-      this.positionAllowed?.(fitted.position) === false
-    )
-      return null;
-    let maximumHeave = original.y + query.maxAdjustmentM - fittedCenter.y;
-    for (const wheel of ground.wheelContacts) {
-      const p = fittedCenter
-          .clone()
-          .addScaledVector(axes[0], wheel[0])
-          .addScaledVector(axes[1], wheel[1])
-          .addScaledVector(axes[2], wheel[2]),
-        actual = sample(p.x, p.z);
-      if (
-        !actual ||
-        Math.abs(actual.y - p.y) * axes[1].y >
-          ground.suspensionTravel + GROUND_SEAM_EPS
-      )
-        return null;
-      maximumHeave = Math.min(
-        maximumHeave,
-        actual.y - p.y + ground.suspensionTravel / axes[1].y,
-      );
-    }
     const contactFor = (candidate: TeslaPose) =>
       this.support(
         {
@@ -1821,21 +1845,169 @@ export class TeslaWorld implements TeslaWorldContract {
       }
       return null;
     };
-    const contact = contactFor(fitted);
-    if (!contact) return null;
-    const blocked = bodyCollision(fitted);
-    if (!blocked) return { pose: fitted, contact };
-    if (
-      blocked === 'inside' ||
-      blocked.kind !== 'ground' ||
-      blocked.supportGroup !== 'ground:0' ||
-      maximumHeave <= EPS
-    )
-      return null;
-    // At fixed orientation/XZ, every physical triangle excludes an exact world-Y
-    // interval. Pick the first free height inside all four real tyre-travel
-    // intervals, rather than adding clearance or always raising the vehicle.
-    const frame = sweepFrame(fitted, fitted, 0),
+    const fitOls = (): TeslaGroundFit | null => {
+      let fitted: TeslaPose = query.pose,
+        axes = initialAxes;
+      for (let iteration = 0; iteration < 2; iteration++) {
+        const center = asVector(fitted.position),
+          points: THREE.Vector3[] = [];
+        for (const wheel of ground.wheelContacts) {
+          const p = center
+            .clone()
+            .addScaledVector(axes[0], wheel[0])
+            .addScaledVector(axes[1], wheel[1])
+            .addScaledVector(axes[2], wheel[2]);
+          const hit = sample(p.x, p.z);
+          if (!hit) return null;
+          points.push(hit);
+        }
+        const mean = points
+          .reduce((sum, p) => sum.add(p), new THREE.Vector3())
+          .multiplyScalar(0.25);
+        let xx = 0,
+          xz = 0,
+          zz = 0,
+          xy = 0,
+          zy = 0;
+        for (const p of points) {
+          const x = p.x - mean.x,
+            y = p.y - mean.y,
+            z = p.z - mean.z;
+          xx += x * x;
+          xz += x * z;
+          zz += z * z;
+          xy += x * y;
+          zy += z * y;
+        }
+        const determinant = xx * zz - xz * xz;
+        if (determinant < 1e-8) return null;
+        const slopeX = (xy * zz - zy * xz) / determinant,
+          slopeZ = (zy * xx - xy * xz) / determinant,
+          normal = new THREE.Vector3(-slopeX, 1, -slopeZ).normalize();
+        if (normal.y < 0.92) return null;
+        const forward = initialAxes[2]
+            .clone()
+            .addScaledVector(normal, -initialAxes[2].dot(normal))
+            .normalize(),
+          right = normal.clone().cross(forward).normalize(),
+          quaternion = new THREE.Quaternion().setFromRotationMatrix(
+            new THREE.Matrix4().makeBasis(right, normal, forward),
+          );
+        axes = [right, normal, forward];
+        const wheelY =
+            ground.wheelContacts.reduce((sum, p) => sum + p[1], 0) / 4,
+          y =
+            mean.y +
+            slopeX * (original.x - mean.x) +
+            slopeZ * (original.z - mean.z) -
+            wheelY / normal.y;
+        fitted = {
+          position: [original.x, y, original.z],
+          quaternion: [quaternion.x, quaternion.y, quaternion.z, quaternion.w],
+        };
+      }
+      const fittedCenter = asVector(fitted.position);
+      if (
+        fittedCenter.distanceTo(original) > query.maxAdjustmentM + EPS ||
+        this.positionAllowed?.(fitted.position) === false
+      )
+        return null;
+      let maximumHeave = original.y + query.maxAdjustmentM - fittedCenter.y;
+      for (const wheel of ground.wheelContacts) {
+        const p = fittedCenter
+            .clone()
+            .addScaledVector(axes[0], wheel[0])
+            .addScaledVector(axes[1], wheel[1])
+            .addScaledVector(axes[2], wheel[2]),
+          actual = sample(p.x, p.z);
+        if (
+          !actual ||
+          Math.abs(actual.y - p.y) * axes[1].y >
+            ground.suspensionTravel + GROUND_SEAM_EPS
+        )
+          return null;
+        maximumHeave = Math.min(
+          maximumHeave,
+          actual.y - p.y + ground.suspensionTravel / axes[1].y,
+        );
+      }
+      const contact = contactFor(fitted);
+      if (!contact) return null;
+      const blocked = bodyCollision(fitted);
+      if (!blocked) return { pose: fitted, contact };
+      if (
+        blocked === 'inside' ||
+        blocked.kind !== 'ground' ||
+        blocked.supportGroup !== 'ground:0' ||
+        maximumHeave <= EPS
+      )
+        return null;
+      // At fixed orientation/XZ, every physical triangle excludes an exact world-Y
+      // interval. Pick the first free height inside all four real tyre-travel
+      // intervals, rather than adding clearance or always raising the vehicle.
+      const frame = sweepFrame(fitted, fitted, 0),
+        bodies = modelGroundBodies(frame, frame.axes, query.shape),
+        forbidden: [number, number][] = [];
+      for (const face of nearby.faces) {
+        if (face.enabled?.() === false) continue;
+        const targets =
+          face.kind === 'ground' && face.supportGroup === 'ground:0'
+            ? bodies
+            : [{ frame, shape: query.shape }];
+        for (const body of targets) {
+          const interval = verticalCollisionInterval(body, face, maximumHeave);
+          if (interval) forbidden.push(interval);
+        }
+      }
+      forbidden.sort((a, b) => a[0] - b[0]);
+      let heave = 0;
+      for (const [lo, hi] of forbidden) {
+        if (hi < heave - EPS) continue;
+        if (lo > heave + EPS) break;
+        heave = Math.max(heave, hi + EPS);
+      }
+      if (heave > maximumHeave + EPS) return null;
+      const raised: TeslaPose = {
+        position: [
+          fitted.position[0],
+          fitted.position[1] + heave,
+          fitted.position[2],
+        ],
+        quaternion: fitted.quaternion,
+      };
+      if (this.positionAllowed?.(raised.position) === false) return null;
+      const raisedContact = contactFor(raised);
+      return raisedContact && !bodyCollision(raised)
+        ? { pose: raised, contact: raisedContact }
+        : null;
+    };
+    const fitted = fitOls();
+    if (fitted) return fitted;
+
+    // A least-squares pitch is a preference, not the only legal suspension
+    // attitude. Retain the caller's bounded frame when it can traverse a crease
+    // using the existing four-wheel travel; solve height without adding angle.
+    const adjustment = Math.min(query.maxAdjustmentM, 0.35);
+    let lowerY = original.y - adjustment,
+      upperY = original.y + adjustment;
+    for (const wheel of ground.wheelContacts) {
+      const offset = new THREE.Vector3()
+        .addScaledVector(initialAxes[0], wheel[0])
+        .addScaledVector(initialAxes[1], wheel[1])
+        .addScaledVector(initialAxes[2], wheel[2]);
+      const actual = sample(original.x + offset.x, original.z + offset.z);
+      if (!actual) return null;
+      const travelY = ground.suspensionTravel / initialAxes[1].y;
+      lowerY = Math.max(lowerY, actual.y - offset.y - travelY);
+      upperY = Math.min(upperY, actual.y - offset.y + travelY);
+    }
+    if (lowerY > upperY) return null;
+    const base: TeslaPose = {
+      position: [original.x, lowerY, original.z],
+      quaternion: query.pose.quaternion,
+    };
+    const range = upperY - lowerY,
+      frame = sweepFrame(base, base, 0),
       bodies = modelGroundBodies(frame, frame.axes, query.shape),
       forbidden: [number, number][] = [];
     for (const face of nearby.faces) {
@@ -1845,31 +2017,35 @@ export class TeslaWorld implements TeslaWorldContract {
           ? bodies
           : [{ frame, shape: query.shape }];
       for (const body of targets) {
-        const interval = verticalCollisionInterval(body, face, maximumHeave);
+        const interval = verticalCollisionInterval(body, face, range);
         if (interval) forbidden.push(interval);
       }
     }
     forbidden.sort((a, b) => a[0] - b[0]);
-    let heave = 0;
+    const clear: [number, number][] = [];
+    let cursor = 0;
     for (const [lo, hi] of forbidden) {
-      if (hi < heave - EPS) continue;
-      if (lo > heave + EPS) break;
-      heave = Math.max(heave, hi + EPS);
+      if (hi < cursor - EPS) continue;
+      if (lo > cursor + EPS) clear.push([cursor, Math.min(range, lo - EPS)]);
+      cursor = Math.max(cursor, hi + EPS);
+      if (cursor > range) break;
     }
-    if (heave > maximumHeave + EPS) return null;
-    const raised: TeslaPose = {
-      position: [
-        fitted.position[0],
-        fitted.position[1] + heave,
-        fitted.position[2],
-      ],
-      quaternion: fitted.quaternion,
-    };
-    if (this.positionAllowed?.(raised.position) === false) return null;
-    const raisedContact = contactFor(raised);
-    return raisedContact && !bodyCollision(raised)
-      ? { pose: raised, contact: raisedContact }
-      : null;
+    if (cursor <= range) clear.push([cursor, range]);
+    const desired = Math.max(0, Math.min(range, original.y - lowerY));
+    const heights = clear
+      .map(([lo, hi]) => Math.max(lo, Math.min(hi, desired)))
+      .sort((a, b) => Math.abs(a - desired) - Math.abs(b - desired));
+    for (const height of heights) {
+      const candidate: TeslaPose = {
+        position: [original.x, lowerY + height, original.z],
+        quaternion: query.pose.quaternion,
+      };
+      if (this.positionAllowed?.(candidate.position) === false) continue;
+      const contact = contactFor(candidate);
+      if (contact && !bodyCollision(candidate))
+        return { pose: candidate, contact };
+    }
+    return null;
   }
   cameraSweep(from: TeslaVec3, to: TeslaVec3, radius = 0.25) {
     return this.sweep({
