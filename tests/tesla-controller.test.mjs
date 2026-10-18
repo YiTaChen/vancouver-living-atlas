@@ -832,6 +832,59 @@ test('direct deactivation releases the engine mode so another public travel cont
   );
 });
 
+test('applying Tesla settings immediately releases a stale police stop without a navigation frame or changing Tesla motion', async (t) => {
+  const { TrafficStop } = await import(cityModule('traffic-stop'));
+  const { c, e } = setup(t);
+  e.tesla = c;
+  c.active = true;
+  c.state = createTesla([0, HEIGHT, 0], 0, FLOOR);
+  c.state.velocity = [54, 0, 0];
+  const moving = structuredClone(c.state);
+  const axes = [];
+  Object.assign(e.navigation, {
+    e,
+    speed: 35,
+    keys: new Set(['w']),
+    setTouchAxes: (x, y) => axes.push([x, y]),
+  });
+  e.renderer.shadowMap = { enabled: false };
+  e.buildings = new THREE.Group();
+  e.vegetation = new THREE.Group();
+  e.landmarks = new THREE.Group();
+  e.trafficGroup = new THREE.Group();
+  e.resizeQuality = () => {};
+  e.updateLighting = () => {};
+  const stop = new TrafficStop(e.navigation);
+  e.navigation.trafficStop = stop;
+  try {
+    for (const previousMode of ['drive', 'tesla']) {
+      e.settings = { ...e.settings, mode: previousMode };
+      e.navigation.mode = 'drive';
+      e.navigation.speed = 35;
+      e.navigation.keys.add('w');
+      stop.state.phase = 'talk';
+      stop.state.nextTriggerSpeedKmh = 200;
+      stop.group.visible = true;
+      TransitEngineHarness.prototype.applySettings.call(e, {
+        ...e.settings,
+        mode: 'tesla',
+      });
+      assert.equal(stop.active, false);
+      assert.equal(stop.group.visible, false);
+      assert.equal(stop.caption, '');
+      assert.equal(stop.state.nextTriggerSpeedKmh, 200);
+      assert.equal(e.navigation.speed, 0);
+      assert.equal(e.navigation.keys.size, 0);
+      assert.deepEqual(axes.at(-1), [0, 0]);
+      assert.deepEqual(c.state, moving);
+      assert.equal(c.active, true);
+      assert.equal(e.settings.mode, 'tesla');
+    }
+  } finally {
+    stop.destroy();
+  }
+});
+
 test('existing aircraft placement and attachment release Tesla through their actual public entry points', (t) => {
   const { c, e } = setup(t);
   e.tesla = c;

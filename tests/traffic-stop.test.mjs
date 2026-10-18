@@ -141,7 +141,7 @@ test('patrol/officer remain grounded, reach driver side, return and release inpu
   const { TrafficStop } = await import(cityModule('traffic-stop'));
   const [x, z] = project([-123.1258, 49.2831]);
   const n = {
-    e: { scene: new THREE.Scene() },
+    e: { scene: new THREE.Scene(), settings: { mode: 'drive' } },
     position: new THREE.Vector3(x, 1.25, z),
     yaw: 0,
     speed: 32,
@@ -197,3 +197,162 @@ test('patrol/officer remain grounded, reach driver side, return and release inpu
   stop.destroy();
   assert.equal(n.e.scene.children.length, 0);
 });
+
+async function patrolFixture(t) {
+  const THREE = await import('three');
+  const { TrafficStop } = await import(cityModule('traffic-stop'));
+  const [x, z] = project([-123.1258, 49.2831]);
+  const nav = {
+    e: {
+      scene: new THREE.Scene(),
+      settings: { mode: 'drive' },
+      tesla: { active: false, state: { velocity: [90, 3, -4] } },
+    },
+    position: new THREE.Vector3(x, 0, z),
+    yaw: 0,
+    speed: 32,
+    mode: 'drive',
+    surface: 'ground',
+    keys: new Set(['w']),
+    touchX: 0.3,
+    touchY: 0.8,
+    setTouchAxes(x, y) {
+      this.touchX = x;
+      this.touchY = y;
+    },
+    clearGround: () => true,
+    groundHeight: () => 0,
+  };
+  const stop = new TrafficStop(nav);
+  t.after(() => stop.destroy());
+  const advance = (seconds) => {
+    for (let i = 0; i < Math.round(seconds * 100); i++) stop.update(0.01);
+  };
+  return { nav, stop, advance };
+}
+
+for (const ownership of ['settings', 'controller']) {
+  const setTesla = (nav, active) => {
+    nav.e.settings.mode = ownership === 'settings' && active ? 'tesla' : 'drive';
+    nav.e.tesla.active = ownership === 'controller' && active;
+  };
+
+  test(`Tesla ${ownership} ownership cancels partial speeding and cannot start a patrol from stale Drive state`, async (t) => {
+    const { nav, stop, advance } = await patrolFixture(t);
+    advance(4.99);
+    assert.ok(stop.state.speeding > 4.98);
+    const velocity = [...nav.e.tesla.state.velocity];
+    setTesla(nav, true);
+    nav.speed = 300 / 3.6;
+    stop.update(0.01);
+    advance(10);
+    assert.equal(nav.mode, 'drive', 'the legacy mode deliberately remains stale');
+    assert.equal(stop.active, false);
+    assert.equal(stop.state.speeding, 0);
+    assert.equal(stop.state.nextTriggerSpeedKmh, 100);
+    assert.equal(stop.group.visible, false);
+    assert.equal(stop.caption, '');
+    assert.deepEqual(nav.e.tesla.state.velocity, velocity);
+
+    setTesla(nav, false);
+    nav.speed = 100 / 3.6;
+    advance(5);
+    assert.equal(stop.active, false);
+    nav.speed = 101 / 3.6;
+    advance(4.99);
+    assert.equal(stop.active, false, 'Tesla time cannot carry into Drive');
+    stop.update(0.01);
+    assert.equal(stop.state.phase, 'braking');
+    assert.equal(stop.state.nextTriggerSpeedKmh, 200);
+  });
+
+  test(`Tesla ${ownership} ownership immediately releases every existing patrol stage without affecting Tesla velocity`, async (t) => {
+    const descriptors = new Map(
+      ['speechSynthesis', 'SpeechSynthesisUtterance'].map((key) => [
+        key,
+        Object.getOwnPropertyDescriptor(globalThis, key),
+      ]),
+    );
+    let spoken = 0,
+      cancelled = 0;
+    Object.defineProperty(globalThis, 'speechSynthesis', {
+      configurable: true,
+      value: {
+        speak() {
+          spoken++;
+        },
+        cancel() {
+          cancelled++;
+        },
+      },
+    });
+    Object.defineProperty(globalThis, 'SpeechSynthesisUtterance', {
+      configurable: true,
+      value: class {
+        constructor(text) {
+          this.text = text;
+        }
+      },
+    });
+    t.after(() => {
+      for (const [key, descriptor] of descriptors)
+        if (descriptor) Object.defineProperty(globalThis, key, descriptor);
+        else delete globalThis[key];
+    });
+
+    for (const phase of [
+      'braking',
+      'exit',
+      'approach',
+      'talk',
+      'return',
+      'enter',
+      'depart',
+    ]) {
+      const { nav, stop, advance } = await patrolFixture(t);
+      const spokenBefore = spoken,
+        cancelledBefore = cancelled;
+      advance(5);
+      nav.speed = 0;
+      for (let i = 0; stop.state.phase !== phase && i < 2_000; i++)
+        stop.update(0.01);
+      assert.equal(stop.state.phase, phase, 'reach the actual patrol sequence');
+      assert.equal(stop.group.visible, true);
+      assert.notEqual(stop.caption, '');
+      assert.equal(stop.state.nextTriggerSpeedKmh, 200);
+      const velocity = [...nav.e.tesla.state.velocity];
+      nav.speed = 70;
+      setTesla(nav, true);
+      stop.update(0.01);
+      assert.equal(stop.active, false, phase);
+      assert.equal(stop.state.speeding, 0, phase);
+      assert.equal(stop.state.elapsed, 0, phase);
+      assert.equal(stop.state.nextTriggerSpeedKmh, 200, phase);
+      assert.equal(stop.group.visible, false, phase);
+      assert.equal(stop.caption, '', phase);
+      assert.equal(stop.door.rotation.y, 0, phase);
+      assert.equal(nav.speed, 0, phase);
+      assert.equal(nav.keys.size, 0, phase);
+      assert.equal(nav.touchX, 0, phase);
+      assert.equal(nav.touchY, 0, phase);
+      assert.deepEqual(nav.e.tesla.state.velocity, velocity, phase);
+      assert.equal(
+        cancelled - cancelledBefore,
+        spoken - spokenBefore,
+        'an outstanding officer speech is cancelled exactly once',
+      );
+      advance(10);
+      assert.equal(stop.active, false, phase);
+      assert.equal(cancelled - cancelledBefore, spoken - spokenBefore);
+
+      setTesla(nav, false);
+      nav.speed = 200 / 3.6;
+      advance(5);
+      assert.equal(stop.active, false, phase);
+      nav.speed = 201 / 3.6;
+      advance(5);
+      assert.equal(stop.state.phase, 'braking', phase);
+      assert.equal(stop.state.nextTriggerSpeedKmh, 400, phase);
+    }
+  });
+}
