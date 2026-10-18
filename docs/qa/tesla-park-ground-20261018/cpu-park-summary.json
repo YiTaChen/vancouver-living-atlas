@@ -1,0 +1,1219 @@
+{
+  "kind": "canonical-Stanley-Park-Tesla-ground-audit-v1",
+  "provenance": {
+    "executionHashes": {
+      "tools/audit-tesla-park.mjs": "590d1f4b22ad9a901590be989a56ae0970f70867cb45e7c347a5a924b549e186",
+      "lib/city/tesla-state.ts": "a4c2bbfcb359c86649bd2790bbcb4507f9206eba06225a6f357515277e394176",
+      "lib/city/tesla-world.ts": "c8e61ef242c1b5e65f0734a2c50d75ac125fd1fc9be5804192677ff36188da7e",
+      "lib/city/tesla-city-world.ts": "273a0ad23b201ef84ba60c0c7519c6a88d83f31b33d168bba1eec3dd725dd06b",
+      "lib/city/tesla-shape.ts": "664f52b90385f08d9a2b648edda9e06badb98777b115bb7cee49bf846a2e0a94"
+    },
+    "limitations": [
+      "No medium landmark meshes, runtime furniture or architecture details; roads, all draped trails, terrain, source-owned trees, lamps, buildings, protected decks and water are retained.",
+      "Trail/turf seed uses initially clear air and natural descent; no fabricated ground mode/contact."
+    ],
+    "sourceHashes": [
+      {
+        "file": "lib/city/assets/cockpits.ts",
+        "bytes": 21892,
+        "sha256": "b8aed3f6379dfdc9a5a1115382e36af3b17e7183a29dd1e7458a10ac4d2465fc"
+      },
+      {
+        "file": "lib/city/assets/roadster.ts",
+        "bytes": 13761,
+        "sha256": "e3e25bba28d32df58cbd1b26c66fb5b7657eb04bd4ab9688156d770eb58436f0"
+      },
+      {
+        "file": "lib/city/assets/tesla-roadster-contract.ts",
+        "bytes": 5134,
+        "sha256": "eba3b401315f3a1fb4edea78b17cfb8a34139e62d9f8f5724d9b42916c4cdb17"
+      },
+      {
+        "file": "lib/city/assets/walker.ts",
+        "bytes": 17246,
+        "sha256": "b99690de4da8f38fb925685d4af2fce64fb6388d7402381d1dfee4efcc6d48e9"
+      },
+      {
+        "file": "lib/city/beach-ground.ts",
+        "bytes": 6009,
+        "sha256": "bc7184a1b222ce138e3b9bad11263676bd9166dd06773b5bc91ecc9b5e5c48d7"
+      },
+      {
+        "file": "lib/city/beach-surface.ts",
+        "bytes": 9450,
+        "sha256": "bd0f4c31733e1bef970a520f971532e6a53dc655629df54f5b92ffa3eb8d65c7"
+      },
+      {
+        "file": "lib/city/boat-controller.ts",
+        "bytes": 5330,
+        "sha256": "e64b57cee7ca233ede9fcdfc277d46aff3a98269d88b68052365e2ba0aff4d33"
+      },
+      {
+        "file": "lib/city/boat-physics.ts",
+        "bytes": 2590,
+        "sha256": "6ce2413d9e082e1d17f0d40e1bc67ef48056b3240adb99b1b6fe25a62b6f2954"
+      },
+      {
+        "file": "lib/city/bridges.ts",
+        "bytes": 6746,
+        "sha256": "6d78e7f5257551886e5bf467d3f36bee864f3a9171c89967883740d862860d66"
+      },
+      {
+        "file": "lib/city/building-roof.ts",
+        "bytes": 5644,
+        "sha256": "9ff6778b9bb72b7f4959ed45ffd177b9d142d5361cf5dd57d357b3470101b530"
+      },
+      {
+        "file": "lib/city/causeway-city-cuts.json",
+        "bytes": 7119,
+        "sha256": "3c8dc38a1e80a3c8266421b951104d1f3b45300e9757ac1b3ff5f4e9e6f89cc3"
+      },
+      {
+        "file": "lib/city/causeway-geometry.ts",
+        "bytes": 30385,
+        "sha256": "dd9ecd615c299595131676af4260c7c5b95557fbc88162e37b2463f8ca8a431a"
+      },
+      {
+        "file": "lib/city/causeway-meshes.ts",
+        "bytes": 11383,
+        "sha256": "eea643d6ecdc6d6a68c21770366a925ffe6f0523f3e06048fc36c3e13fa3f3e0"
+      },
+      {
+        "file": "lib/city/causeway-no-fill.json",
+        "bytes": 4730,
+        "sha256": "176ee3db09189bc3d820d2e4fbe90bcb0fde7fc091cc9841dc075d5eb9d8b6c1"
+      },
+      {
+        "file": "lib/city/causeway-profile.ts",
+        "bytes": 15997,
+        "sha256": "ed35fd3b9477254b685e3138114da71cf90405df683d0678c391224695759532"
+      },
+      {
+        "file": "lib/city/causeway-walkways.ts",
+        "bytes": 2728,
+        "sha256": "7cdb7b5e65f8acb358c12f762491a16b3050fa7a5ec594559bb0821ba62faa81"
+      },
+      {
+        "file": "lib/city/causeway.ts",
+        "bytes": 4598,
+        "sha256": "0fcae13d72f763fa30a3692431a9303ab25642d1a320e04f1355da840cb2c3a4"
+      },
+      {
+        "file": "lib/city/citizen.ts",
+        "bytes": 10748,
+        "sha256": "e16100c4a6ad929065425588351d832fbfdc51e8b104aae75a5af7e362a10d65"
+      },
+      {
+        "file": "lib/city/city-surface-material.ts",
+        "bytes": 4164,
+        "sha256": "07ea4d8c25926f703efa575e455efa7145bddda8dd8b1270d8e55149262f969e"
+      },
+      {
+        "file": "lib/city/driver-camera.ts",
+        "bytes": 1318,
+        "sha256": "911765020382258030d2dc8f386cfc7dc1f720aab5d88bbf4c04ef93beb903d0"
+      },
+      {
+        "file": "lib/city/driving-steering.ts",
+        "bytes": 345,
+        "sha256": "a58842cdcc28c64421ef53058bd3e6077f5ab7ebea55eb633ffe2616f01dfe8e"
+      },
+      {
+        "file": "lib/city/engine.ts",
+        "bytes": 74116,
+        "sha256": "46bffa728499665e0c46257cd01358ee95fec7b47a82a5927808b2c660bfd374"
+      },
+      {
+        "file": "lib/city/environment.ts",
+        "bytes": 24168,
+        "sha256": "a2ffe228abc31a0ae077498e4ac4286f4c1a4404beea1d9ec18be3bc05b40c6e"
+      },
+      {
+        "file": "lib/city/facade-profile.ts",
+        "bytes": 11959,
+        "sha256": "86e6e4bae22d24bb7e944d6de44725baa765ab16d4c8556ef55932988a814d19"
+      },
+      {
+        "file": "lib/city/geo.ts",
+        "bytes": 2769,
+        "sha256": "60c01edb97732574f980770a2f0499f2eb9021a0d8075eb272ea18785570494e"
+      },
+      {
+        "file": "lib/city/ground-harmonization-scopes.ts",
+        "bytes": 1286,
+        "sha256": "982a4d35aa8dbd0701a40e940de27d37de00572422d8455452bb43905986f4fa"
+      },
+      {
+        "file": "lib/city/ground-surface.ts",
+        "bytes": 6812,
+        "sha256": "d8e05f4511335c984d053029969cb4d1a0d6c0c9a8a856d7530c40b33fb4e0a8"
+      },
+      {
+        "file": "lib/city/ground-visibility-mesh.ts",
+        "bytes": 8203,
+        "sha256": "e5413a0f8830cf15ebb3b2993575df41e408c9ce7810cb372f09182350769e58"
+      },
+      {
+        "file": "lib/city/ground-visibility.ts",
+        "bytes": 16647,
+        "sha256": "4b8a2f55bd0337f67653ae42e2ab6b17871b18fe07fb7790b7ef4d07f679652e"
+      },
+      {
+        "file": "lib/city/harbour-models.ts",
+        "bytes": 36176,
+        "sha256": "3d494df8a5b214327dcdfb4facb1fe79aca27d22a410bf39a8ce11d91e26a68d"
+      },
+      {
+        "file": "lib/city/harmonize-ground.ts",
+        "bytes": 2958,
+        "sha256": "701b95c742111b032512c82d082348fafb8242783e1aa9d3a88d62e1b5d14f50"
+      },
+      {
+        "file": "lib/city/heritage-paving-material.ts",
+        "bytes": 1753,
+        "sha256": "0808cbc463d1718b14c4f85b61debaece6338e7fe4b6830418df2398bb945ce7"
+      },
+      {
+        "file": "lib/city/heritage-paving.ts",
+        "bytes": 10298,
+        "sha256": "23ad05162e4aa83f37c63a4cc64f1c1af44e1b0905ce6b0b4ff53a476ae91cac"
+      },
+      {
+        "file": "lib/city/landmark-footprints.json",
+        "bytes": 5725,
+        "sha256": "cf44d69c0411de2488bc86fa5b21ed48eddadbad4a16fcd3a7a4b06ead01b74b"
+      },
+      {
+        "file": "lib/city/lions-railings.ts",
+        "bytes": 5041,
+        "sha256": "87a94bd5d8f824b874ad9e34456a9cf56abc08815ab8b64f7420584d9af77716"
+      },
+      {
+        "file": "lib/city/main-cross-section-data.json",
+        "bytes": 6809,
+        "sha256": "23be5e7cd2c839f02d804f3a10b9c288d9a4590b2124b88b707628bf1a4c1bd0"
+      },
+      {
+        "file": "lib/city/main-cross-section.ts",
+        "bytes": 4604,
+        "sha256": "5de0e94002db2fe4d1557adbc806e71d9c20004a8ebd7c24d2c30b3502450f5c"
+      },
+      {
+        "file": "lib/city/main-road-geometry.ts",
+        "bytes": 13327,
+        "sha256": "ae985d665a924bdfb0096eaa7c8000bb604531541163422960221ee2e7565e8f"
+      },
+      {
+        "file": "lib/city/material-library.ts",
+        "bytes": 10168,
+        "sha256": "009ea28f25e8d7e315f27ae4dc7965024d15cac92759c3456b0d0d3c035e3768"
+      },
+      {
+        "file": "lib/city/navigation.ts",
+        "bytes": 41538,
+        "sha256": "2411a6d59d5bc0b6abc36abc201767da601bb9115ccea57d6162ec78bcac0cad"
+      },
+      {
+        "file": "lib/city/north-walkways-source.json",
+        "bytes": 31469,
+        "sha256": "7cbfbe023ec94f43611d3b2fc8ca6587e92aae7dd69eb5eb3e3107ad08d22f18"
+      },
+      {
+        "file": "lib/city/numbered-blocks.ts",
+        "bytes": 6195,
+        "sha256": "354b46c50c9d794d4058caa9397273884cb6ef647482fe9d4aa37e8a95596b9c"
+      },
+      {
+        "file": "lib/city/ordered-bounds.ts",
+        "bytes": 2487,
+        "sha256": "e8a850330722f32435ccec33f4059743945bf90fa31ef36b3fa6d1b827a505c6"
+      },
+      {
+        "file": "lib/city/park-paths.ts",
+        "bytes": 1364,
+        "sha256": "b7f24b99b0faa939258bdb9e3e33650309ef8b84d8e44e6a396a56e5001e9311"
+      },
+      {
+        "file": "lib/city/pavement.ts",
+        "bytes": 17334,
+        "sha256": "bda53bbfd8ac68252ae85ff322a5258e10f83af8ec2ab3f513cf5227f55c1e10"
+      },
+      {
+        "file": "lib/city/placement-geometry.ts",
+        "bytes": 4670,
+        "sha256": "54a9cf85a9dc1a1cce8d7bd0ba46da5419550893d345b70fd273d1e6daaa682d"
+      },
+      {
+        "file": "lib/city/region-rules.ts",
+        "bytes": 5085,
+        "sha256": "76ee3956e6f8c2c2f14f3e31f62ab83f1f7d5167fae8b8ba3b0ef465dde83617"
+      },
+      {
+        "file": "lib/city/replaced-buildings.ts",
+        "bytes": 525,
+        "sha256": "c31d842301a73fb870e1e6e0ade7cd3dd81fb8174872ab4f40b4020982e349dc"
+      },
+      {
+        "file": "lib/city/road-decorations.ts",
+        "bytes": 3526,
+        "sha256": "5128506f71c88f9905f1e1671959e9288319279683da467cd8c69209a122a329"
+      },
+      {
+        "file": "lib/city/road-graph.ts",
+        "bytes": 22003,
+        "sha256": "ee710ab807b3be51be0db017e8dc1c0bbe68fdaf9608e5c3115fd2e733205cfa"
+      },
+      {
+        "file": "lib/city/road-lowering.ts",
+        "bytes": 15869,
+        "sha256": "a700aaaad984e77734cd1e5df69142ba7659d13dd7026b0983d239378a0b0b5d"
+      },
+      {
+        "file": "lib/city/road-surfaces.ts",
+        "bytes": 4759,
+        "sha256": "ccd98e61dbcc321d47d5c1e6e0826431f4c5d04fa34c8b434d0984b24e831a4d"
+      },
+      {
+        "file": "lib/city/road-trim.ts",
+        "bytes": 1546,
+        "sha256": "5023111cf6fbcc3798f5e78fcdf7467becd6e7e32a986a8ce625272325cb6671"
+      },
+      {
+        "file": "lib/city/seabus-layout.ts",
+        "bytes": 882,
+        "sha256": "d40906fbb9b508633d77414b3461547165f2907f55469ed7eec3c2c4b0ffb2c1"
+      },
+      {
+        "file": "lib/city/shore-lowering.ts",
+        "bytes": 3604,
+        "sha256": "69ffc92652fc382a0fd5ced83afffd47eeda3ac1a64f26ab50ac8e6ba93a5853"
+      },
+      {
+        "file": "lib/city/south-profile-data.json",
+        "bytes": 81546,
+        "sha256": "d83c5a70096d873cb87049ee1632ef2ce82a44d953566cd77c72e6148885a901"
+      },
+      {
+        "file": "lib/city/south-profile.ts",
+        "bytes": 8614,
+        "sha256": "ae2faee2934d62e8d03ed2799479b1acf28ca00b1108cac4700254cdd04927b8"
+      },
+      {
+        "file": "lib/city/street-curb-extensions.json",
+        "bytes": 1317,
+        "sha256": "4e721370f8e9fa79c1d71be7996634566afa295ab69640164246d1cd776ffe90"
+      },
+      {
+        "file": "lib/city/street-furniture-placement.ts",
+        "bytes": 13806,
+        "sha256": "d54d6662c2a728411b055137536e27b94fd19aaa12dbe5c2089716ae4313ac27"
+      },
+      {
+        "file": "lib/city/street-layout.ts",
+        "bytes": 5074,
+        "sha256": "d99059f249075f4657c7a235a89e3cf83214d702c53ab40d7c8bddd7b86e9af5"
+      },
+      {
+        "file": "lib/city/street-meshes.ts",
+        "bytes": 2387,
+        "sha256": "ba9dbda647e36067d1ec60ade069fdad87e0b78e366c0848a7ab5f490dfba13b"
+      },
+      {
+        "file": "lib/city/surface-meshing.ts",
+        "bytes": 4386,
+        "sha256": "0ab0e7a06f84eb7411d5063de55286172b4bddbb9283089e541b994c71ec69a7"
+      },
+      {
+        "file": "lib/city/surface-reachability.ts",
+        "bytes": 8721,
+        "sha256": "8609f5670bfeca50b0c8054df75b70458cdb829ec94e8e5e7f8aca9d53298062"
+      },
+      {
+        "file": "lib/city/terrain-draped-path.ts",
+        "bytes": 5696,
+        "sha256": "c7c36b46a297d7d5a54f19af30576a461788637014477046f18e8f04e07b44c6"
+      },
+      {
+        "file": "lib/city/tesla-city-world.ts",
+        "bytes": 34761,
+        "sha256": "273a0ad23b201ef84ba60c0c7519c6a88d83f31b33d168bba1eec3dd725dd06b"
+      },
+      {
+        "file": "lib/city/tesla-math.ts",
+        "bytes": 5292,
+        "sha256": "6fdb3a9ec6b1829733fae3d6fdad583c3f9429b78459be0bbd6bcaa7c05f69be"
+      },
+      {
+        "file": "lib/city/tesla-roof-details-world.ts",
+        "bytes": 11274,
+        "sha256": "af37a6f6432b64b57eb112ba7ad0535893f9e07b1fc4b1d7f9237e623391336c"
+      },
+      {
+        "file": "lib/city/tesla-shape.ts",
+        "bytes": 1111,
+        "sha256": "664f52b90385f08d9a2b648edda9e06badb98777b115bb7cee49bf846a2e0a94"
+      },
+      {
+        "file": "lib/city/tesla-state.ts",
+        "bytes": 70266,
+        "sha256": "a4c2bbfcb359c86649bd2790bbcb4507f9206eba06225a6f357515277e394176"
+      },
+      {
+        "file": "lib/city/tesla-vortex.ts",
+        "bytes": 5342,
+        "sha256": "98167f71306bdf74565e14d7f0aa9c0aa9cc6cf79f5436cce0788785036d4f8a"
+      },
+      {
+        "file": "lib/city/tesla-world.ts",
+        "bytes": 76383,
+        "sha256": "c8e61ef242c1b5e65f0734a2c50d75ac125fd1fc9be5804192677ff36188da7e"
+      },
+      {
+        "file": "lib/city/touch-input.ts",
+        "bytes": 609,
+        "sha256": "f8cd660e1bb3d944faab2c6fcdad7f9aa59cc479a24ccca5bd2091c91303b4b1"
+      },
+      {
+        "file": "lib/city/traffic-stop-state.ts",
+        "bytes": 2097,
+        "sha256": "179661fc4da282933c89fdc79eeb2d58b1825c39b1adebd84e3a931a1062f240"
+      },
+      {
+        "file": "lib/city/traffic-stop.ts",
+        "bytes": 7536,
+        "sha256": "03cde478a39f3402bdcfbe9a59d1d62f1901983a191e734215e49f1304cad7a7"
+      },
+      {
+        "file": "lib/city/travel-camera.ts",
+        "bytes": 1360,
+        "sha256": "b37cab09e04a356de2dce1fc81e043fe6d4da43a651927ea48eaacada7e9a5d8"
+      },
+      {
+        "file": "lib/city/travel-surfaces.ts",
+        "bytes": 4511,
+        "sha256": "103d03484c129540db1a4f6101795fe5b8bd42cd3dc764f57ce4f7333a839a39"
+      },
+      {
+        "file": "lib/city/tree-road-clearance.ts",
+        "bytes": 8789,
+        "sha256": "7001a7431153894e291ddceff0ce080355a9c566349db18ff72daabc2d1a14d5"
+      },
+      {
+        "file": "lib/city/upper-walkway-profile.ts",
+        "bytes": 17545,
+        "sha256": "01f18b04edd7de6915a524fb91d23c138dcfdc1951c23ae71d9930de8c7b3920"
+      },
+      {
+        "file": "lib/city/wake.ts",
+        "bytes": 1612,
+        "sha256": "5690d75d6779abb5af036383833daac3b3a0079e760cf2f3d7ec5a965df95f02"
+      },
+      {
+        "file": "lib/city/walkway-attachments.ts",
+        "bytes": 3677,
+        "sha256": "463d4713964e056dfdf611146dcd411413d0c1d8bc47507ca48e79e2f2eeb1fc"
+      },
+      {
+        "file": "lib/city/walkway-ground-connectors.json",
+        "bytes": 12536,
+        "sha256": "f3ca7279ddfe16cd3227f6bdd383cbb2153b0b89fda211cf7fff0e65abc767bd"
+      },
+      {
+        "file": "lib/city/water-world.ts",
+        "bytes": 11777,
+        "sha256": "d816c253b44be7825eb5f1f2c6e714214da9cc228e5da30f70350fbde6023cc5"
+      },
+      {
+        "file": "lib/city/west-walk-supports.ts",
+        "bytes": 11124,
+        "sha256": "00842aa90d757a128cfd4473fb5fa19453a6f36760df9427e8e28d65850fc3f2"
+      },
+      {
+        "file": "public/data/beach-coast.json",
+        "bytes": 4966687,
+        "sha256": "47b787f94717fd489ddcdf0c91fc30a81eee65cce7d4fa6e2eea9763b6023459"
+      },
+      {
+        "file": "public/data/bridges.json",
+        "bytes": 62350,
+        "sha256": "52fcf8c310ecedff1782db2c1274af3f032905cdaf461b4a5c85ab0aa6d4faef"
+      },
+      {
+        "file": "public/data/buildings.geojson",
+        "bytes": 3840048,
+        "sha256": "57cf77f2f7afbceeb3ea4b7dcb87c33d7f56a6df57c33306792503f1dba538ec"
+      },
+      {
+        "file": "public/data/context-land.geojson",
+        "bytes": 22196,
+        "sha256": "0de1ecbd260375e6587b9247a75814eccd2aaa594d857e384a974f5223d57c1e"
+      },
+      {
+        "file": "public/data/context.geojson",
+        "bytes": 220187,
+        "sha256": "8490953cc264cd3090811fd5cba11cf23fb9d88434f58c99d0f100014fa86ec1"
+      },
+      {
+        "file": "public/data/land.geojson",
+        "bytes": 299940,
+        "sha256": "4329b72163668afeee2289160ef00dc9d61c2857d1917447eceaa243c0c30450"
+      },
+      {
+        "file": "public/data/parks.geojson",
+        "bytes": 87044,
+        "sha256": "3601c392311b2377a98cb072dd6143746561e25f4c1a5c6b9c6a0659d4bc75b3"
+      },
+      {
+        "file": "public/data/paths.geojson",
+        "bytes": 320138,
+        "sha256": "daf512c6eaee772df831462f3f0418f848d3737317b7219db51754ce0fae36b9"
+      },
+      {
+        "file": "public/data/roads.geojson",
+        "bytes": 773687,
+        "sha256": "77543c74f4e567a65db14c8d33f9d6250d0f40bdd5f99031c1267aa8dc3373fb"
+      },
+      {
+        "file": "public/data/terrain.json",
+        "bytes": 303256,
+        "sha256": "c52c4ae53c3f76ae5cdfdb32765b53d7c61fec4f7d9db03b02c7f7d722853908"
+      },
+      {
+        "file": "public/data/trees.json",
+        "bytes": 1070134,
+        "sha256": "2ba858b2afa255bef8ad7f6c7aade750151d0990ad492c68e2c2915a92e3267d"
+      },
+      {
+        "file": "public/materials/city/manifest.json",
+        "bytes": 3288,
+        "sha256": "0a2ba06267b2d172908e89a5ed3cc9b514f0ca398435c9c3cc31d03e9e5861f4"
+      }
+    ]
+  },
+  "shape": {
+    "halfExtents": [
+      1.14,
+      0.62,
+      2.34
+    ],
+    "clearance": 0.06,
+    "groundSupport": {
+      "wheelContacts": [
+        [
+          -0.896,
+          -0.6799999999999999,
+          1.39
+        ],
+        [
+          0.896,
+          -0.6799999999999999,
+          1.39
+        ],
+        [
+          -0.896,
+          -0.6799999999999999,
+          -1.39
+        ],
+        [
+          0.896,
+          -0.6799999999999999,
+          -1.39
+        ]
+      ],
+      "chassisClearance": 0.08,
+      "suspensionTravel": 0.05,
+      "bodySections": [
+        {
+          "minZ": -2.34,
+          "maxZ": -1.39,
+          "clearance": 0.08
+        },
+        {
+          "minZ": -1.39,
+          "maxZ": 1.39,
+          "clearance": 0.12
+        },
+        {
+          "minZ": 1.39,
+          "maxZ": 2.34,
+          "clearance": 0.15
+        }
+      ]
+    }
+  },
+  "inventory": {
+    "trees": 36041,
+    "buildingVolumes": 7794,
+    "pitchedRoofs": 676,
+    "lamps": 2526,
+    "protectedSurfaces": 6569,
+    "bridgeSolids": 0,
+    "waterEdges": 14048
+  },
+  "cases": [
+    {
+      "seed": {
+        "kind": "road",
+        "id": "Stanley Park Drive edge:1637",
+        "point": [
+          -978.702272288637,
+          -2943.45219520013
+        ],
+        "yaw": 2.6080556758997924,
+        "maxDistance": 25,
+        "source": {
+          "edgeId": 1637,
+          "names": [
+            "STANLEY PARK DRIVE"
+          ],
+          "sourceIds": [
+            "1700:0"
+          ],
+          "a": [
+            -998.7810016656201,
+            -2909.4595200001168
+          ],
+          "b": [
+            -898.3873547807046,
+            -3079.4228960001838
+          ]
+        }
+      },
+      "setup": "no complete verified asphalt pose",
+      "spawn": null,
+      "capturedFaces": 0
+    },
+    {
+      "seed": {
+        "kind": "road",
+        "id": "Stanley Park Drive edge:1279",
+        "point": [
+          -879.608384031657,
+          -1453.5787111998163
+        ],
+        "yaw": 0.9887633783623333,
+        "maxDistance": 25,
+        "source": {
+          "edgeId": 1279,
+          "names": [
+            "STANLEY PARK DRIVE"
+          ],
+          "sourceIds": [
+            "1625:0"
+          ],
+          "a": [
+            -907.2896121999411,
+            -1471.7951159997642
+          ],
+          "b": [
+            -768.8834713585206,
+            -1380.7130920000247
+          ]
+        }
+      },
+      "setup": "fresh actual floor owned",
+      "spawn": {
+        "pose": {
+          "position": [
+            -879.6110158498154,
+            16.488047681632576,
+            -1453.6849853972328
+          ],
+          "quaternion": [
+            0.021741787158754865,
+            0.47459156887937043,
+            0.011041378325143727,
+            0.8798683000338415
+          ]
+        },
+        "contact": {
+          "surfaceId": "ground:asphalt:39:face:2145",
+          "kind": "ground",
+          "point": [
+            -879.6118390375931,
+            15.80685873969003,
+            -1453.7182261513922
+          ],
+          "normal": [
+            0.0012070202018802107,
+            0.9988107653116489,
+            0.048740108737983776
+          ],
+          "adherable": true
+        },
+        "identity": {
+          "surfaceId": "ground",
+          "layer": 0,
+          "allowedModes": [
+            "walk",
+            "drive"
+          ]
+        }
+      },
+      "capturedFaces": 350,
+      "forward": {
+        "distance": 25.02095452798156,
+        "collisions": 0,
+        "transitions": 3,
+        "failures": 0,
+        "stuck": false,
+        "mode": "ground",
+        "collisionSource": null
+      },
+      "reverse": {
+        "distance": 1.3301481657510819,
+        "collisions": 0,
+        "mode": "ground",
+        "collisionSource": null
+      },
+      "vortex": {
+        "completed": false,
+        "landed": false,
+        "stuntCollisions": 1,
+        "finalMode": "air",
+        "collisionSource": "tree:32144:crown:side:2"
+      }
+    },
+    {
+      "seed": {
+        "kind": "road",
+        "id": "Stanley Park Drive edge:1713",
+        "point": [
+          -647.1403813535386,
+          -2621.650565599667
+        ],
+        "yaw": 0.4293424618702933,
+        "maxDistance": 25,
+        "source": {
+          "edgeId": 1713,
+          "names": [
+            "STANLEY PARK DRIVE"
+          ],
+          "sourceIds": [
+            "1718:0"
+          ],
+          "a": [
+            -660.8510195748459,
+            -2651.5978719995483
+          ],
+          "b": [
+            -592.2978284683097,
+            -2501.861340000143
+          ]
+        }
+      },
+      "setup": "fresh actual floor owned",
+      "spawn": {
+        "pose": {
+          "position": [
+            -647.3957467550828,
+            7.617736569949182,
+            -2621.5736904565674
+          ],
+          "quaternion": [
+            -0.004691114451388249,
+            0.21216670606438423,
+            -0.05984592487467998,
+            0.975387998469782
+          ]
+        },
+        "contact": {
+          "surfaceId": "ground:asphalt:42:face:2624",
+          "kind": "ground",
+          "point": [
+            -647.4740099359448,
+            6.940651800253604,
+            -2621.5501301261866
+          ],
+          "normal": [
+            0.11475539715832993,
+            0.9927929174421964,
+            -0.0345459389747394
+          ],
+          "adherable": true
+        },
+        "identity": {
+          "surfaceId": "ground",
+          "layer": 0,
+          "allowedModes": [
+            "walk",
+            "drive"
+          ]
+        }
+      },
+      "capturedFaces": 491,
+      "forward": {
+        "distance": 25.021546522480136,
+        "collisions": 0,
+        "transitions": 3,
+        "failures": 0,
+        "stuck": false,
+        "mode": "ground",
+        "collisionSource": null
+      },
+      "reverse": {
+        "distance": 1.3304481464312636,
+        "collisions": 0,
+        "mode": "ground",
+        "collisionSource": null
+      },
+      "vortex": {
+        "completed": false,
+        "landed": false,
+        "stuntCollisions": 1,
+        "finalMode": "air",
+        "collisionSource": "tree:10500:trunk:side:0"
+      }
+    },
+    {
+      "seed": {
+        "kind": "road",
+        "id": "Stanley Park Drive edge:2027",
+        "point": [
+          -908.6009887820238,
+          -2583.681539999853
+        ],
+        "yaw": 2.4111485695694945,
+        "maxDistance": 25,
+        "source": {
+          "edgeId": 2027,
+          "names": [
+            "STANLEY PARK DRIVE"
+          ],
+          "sourceIds": [
+            "1777:0"
+          ],
+          "a": [
+            -929.9591453672364,
+            -2559.836795999783
+          ],
+          "b": [
+            -823.1683624411737,
+            -2679.060516000134
+          ]
+        }
+      },
+      "setup": "no complete verified asphalt pose",
+      "spawn": null,
+      "capturedFaces": 0
+    },
+    {
+      "seed": {
+        "kind": "road",
+        "id": "Stanley Park Drive edge:1555",
+        "point": [
+          -1788.1004544931634,
+          -2520.113367199716
+        ],
+        "yaw": 2.1866570695731604,
+        "maxDistance": 25,
+        "source": {
+          "edgeId": 1555,
+          "names": [
+            "STANLEY PARK DRIVE"
+          ],
+          "sourceIds": [
+            "1682:0"
+          ],
+          "a": [
+            -1814.143551116781,
+            -2501.6832279996433
+          ],
+          "b": [
+            -1683.9280679986932,
+            -2593.833924000007
+          ]
+        }
+      },
+      "setup": "no complete verified asphalt pose",
+      "spawn": null,
+      "capturedFaces": 0
+    },
+    {
+      "seed": {
+        "kind": "road",
+        "id": "Stanley Park Drive edge:1652",
+        "point": [
+          -316.09403713761924,
+          -2120.781810399848
+        ],
+        "yaw": 0.489811293779659,
+        "maxDistance": 25,
+        "source": {
+          "edgeId": 1652,
+          "names": [
+            "STANLEY PARK DRIVE"
+          ],
+          "sourceIds": [
+            "1705:0"
+          ],
+          "a": [
+            -331.060866658655,
+            -2148.854487999811
+          ],
+          "b": [
+            -256.226719053476,
+            -2008.4910999999956
+          ]
+        }
+      },
+      "setup": "no complete verified asphalt pose",
+      "spawn": null,
+      "capturedFaces": 0
+    },
+    {
+      "seed": {
+        "kind": "road",
+        "id": "Stanley Park Drive edge:1263",
+        "point": [
+          -1496.6161488771916,
+          -1103.9159119998058
+        ],
+        "yaw": 1.6042635862461296,
+        "maxDistance": 25,
+        "source": {
+          "edgeId": 1263,
+          "names": [
+            "STANLEY PARK DRIVE"
+          ],
+          "sourceIds": [
+            "1622:0"
+          ],
+          "a": [
+            -1526.5410944539108,
+            -1102.9140319998041
+          ],
+          "b": [
+            -1376.9163665703152,
+            -1107.9234319998122
+          ]
+        }
+      },
+      "setup": "no complete verified asphalt pose",
+      "spawn": null,
+      "capturedFaces": 0
+    },
+    {
+      "seed": {
+        "kind": "road",
+        "id": "Stanley Park Drive edge:2138",
+        "point": [
+          -1771.377861640353,
+          -1220.8842888000609
+        ],
+        "yaw": 0.9152263115124724,
+        "maxDistance": 25,
+        "source": {
+          "edgeId": 2138,
+          "names": [
+            "STANLEY PARK DRIVE"
+          ],
+          "sourceIds": [
+            "1794:0"
+          ],
+          "a": [
+            -1792.8100826836412,
+            -1237.366328000148
+          ],
+          "b": [
+            -1685.6489774672007,
+            -1154.9561319997124
+          ]
+        }
+      },
+      "setup": "no complete verified asphalt pose",
+      "spawn": null,
+      "capturedFaces": 0
+    },
+    {
+      "seed": {
+        "kind": "path",
+        "id": "Trail 128478875 Reservoir Trail",
+        "point": [
+          -835.2960544000654,
+          -2425.1930296001283
+        ],
+        "yaw": -1.5815425787991864,
+        "maxDistance": 15,
+        "source": {
+          "id": 128478875,
+          "name": "Reservoir Trail",
+          "surface": "gravel",
+          "a": [
+            -777.4952799220124,
+            -2424.5718640002256
+          ],
+          "b": [
+            -970.164528182189,
+            -2426.642415999902
+          ]
+        }
+      },
+      "setup": "actual obstacle at clear-air seed",
+      "spawn": null,
+      "capturedFaces": 0
+    },
+    {
+      "seed": {
+        "kind": "turf",
+        "id": "Turf beside 128478875",
+        "point": [
+          -835.3927688066178,
+          -2416.1935492638218
+        ],
+        "yaw": -1.5815425787991864,
+        "maxDistance": 12,
+        "source": {
+          "id": 128478875,
+          "name": "Reservoir Trail",
+          "surface": "gravel",
+          "a": [
+            -777.4952799220124,
+            -2424.5718640002256
+          ],
+          "b": [
+            -970.164528182189,
+            -2426.642415999902
+          ]
+        }
+      },
+      "setup": "actual obstacle at clear-air seed",
+      "spawn": null,
+      "capturedFaces": 0
+    },
+    {
+      "seed": {
+        "kind": "path",
+        "id": "Trail 190670675 Stanley Park Seawall Bike Path",
+        "point": [
+          377.2749101711636,
+          -1595.2078075999482
+        ],
+        "yaw": -2.093918646673578,
+        "maxDistance": 15,
+        "source": {
+          "id": 190670675,
+          "name": "Stanley Park Seawall Bike Path",
+          "surface": "asphalt",
+          "a": [
+            419.4371921499032,
+            -1570.892179999833
+          ],
+          "b": [
+            278.89625222077126,
+            -1651.944272000217
+          ]
+        }
+      },
+      "setup": "fresh actual floor owned",
+      "spawn": null,
+      "capturedFaces": 381,
+      "forward": {
+        "distance": 15.003149807803883,
+        "collisions": 0,
+        "transitions": 2,
+        "failures": 0,
+        "stuck": false,
+        "mode": "ground",
+        "collisionSource": "ground:asphalt:43:face:1182"
+      },
+      "reverse": {
+        "distance": 1.32964243170255,
+        "collisions": 0,
+        "mode": "ground",
+        "collisionSource": "ground:asphalt:43:face:1182"
+      },
+      "vortex": {
+        "completed": true,
+        "landed": true,
+        "stuntCollisions": 0,
+        "finalMode": "ground",
+        "collisionSource": "ground:asphalt:43:face:1152"
+      }
+    },
+    {
+      "seed": {
+        "kind": "turf",
+        "id": "Turf beside 190670675",
+        "point": [
+          372.7786242866084,
+          -1587.4114357999151
+        ],
+        "yaw": -2.093918646673578,
+        "maxDistance": 12,
+        "source": {
+          "id": 190670675,
+          "name": "Stanley Park Seawall Bike Path",
+          "surface": "asphalt",
+          "a": [
+            419.4371921499032,
+            -1570.892179999833
+          ],
+          "b": [
+            278.89625222077126,
+            -1651.944272000217
+          ]
+        }
+      },
+      "setup": "fresh actual floor owned",
+      "spawn": null,
+      "capturedFaces": 90,
+      "forward": {
+        "distance": 10.590110714194163,
+        "collisions": 48,
+        "transitions": 0,
+        "failures": 0,
+        "stuck": true,
+        "mode": "ground",
+        "collisionSource": "tree:8608:trunk:side:1"
+      },
+      "reverse": {
+        "distance": 1.3309956140167076,
+        "collisions": 0,
+        "mode": "ground",
+        "collisionSource": "tree:8608:trunk:side:1"
+      },
+      "vortex": {
+        "completed": false,
+        "landed": false,
+        "stuntCollisions": 1,
+        "finalMode": "air",
+        "collisionSource": "tree:8608:crown:side:3"
+      }
+    },
+    {
+      "seed": {
+        "kind": "path",
+        "id": "Trail 363050020 Park pathway",
+        "point": [
+          -1853.4892053193691,
+          -1998.9387307998145
+        ],
+        "yaw": -3.040598896273699,
+        "maxDistance": 15,
+        "source": {
+          "id": 363050020,
+          "name": "Park pathway",
+          "surface": "asphalt",
+          "a": [
+            -1848.8449281206858,
+            -1953.1093999998184
+          ],
+          "b": [
+            -1864.3258521162968,
+            -2105.873835999805
+          ]
+        }
+      },
+      "setup": "natural descent has no complete floor ownership",
+      "spawn": null,
+      "capturedFaces": 0
+    },
+    {
+      "seed": {
+        "kind": "turf",
+        "id": "Turf beside 363050020",
+        "point": [
+          -1862.4433454935354,
+          -1998.0313313610975
+        ],
+        "yaw": -3.040598896273699,
+        "maxDistance": 12,
+        "source": {
+          "id": 363050020,
+          "name": "Park pathway",
+          "surface": "asphalt",
+          "a": [
+            -1848.8449281206858,
+            -1953.1093999998184
+          ],
+          "b": [
+            -1864.3258521162968,
+            -2105.873835999805
+          ]
+        }
+      },
+      "setup": "fresh actual floor owned",
+      "spawn": null,
+      "capturedFaces": 122,
+      "forward": {
+        "distance": 4.230792006892106,
+        "collisions": 32,
+        "transitions": 0,
+        "failures": 0,
+        "stuck": true,
+        "mode": "ground",
+        "collisionSource": "tree:21898:crown:side:3"
+      },
+      "reverse": {
+        "distance": 1.330993447731069,
+        "collisions": 0,
+        "mode": "ground",
+        "collisionSource": "tree:21898:crown:side:3"
+      },
+      "vortex": {
+        "completed": false,
+        "landed": false,
+        "stuntCollisions": 1,
+        "finalMode": "air",
+        "collisionSource": "tree:21898:crown:side:3"
+      }
+    },
+    {
+      "seed": {
+        "kind": "path",
+        "id": "Trail 1044497054 Park pathway",
+        "point": [
+          -1476.665943118749,
+          -1097.3936731999154
+        ],
+        "yaw": 1.602876263304064,
+        "maxDistance": 15,
+        "source": {
+          "id": 1044497054,
+          "name": "Park pathway",
+          "surface": "asphalt",
+          "a": [
+            -1521.102439635586,
+            -1095.9676640000987
+          ],
+          "b": [
+            -1372.980784579463,
+            -1100.7210279994877
+          ]
+        }
+      },
+      "setup": "natural descent has no complete floor ownership",
+      "spawn": null,
+      "capturedFaces": 0
+    },
+    {
+      "seed": {
+        "kind": "turf",
+        "id": "Turf beside 1044497054",
+        "point": [
+          -1476.9546130286114,
+          -1106.3890425465927
+        ],
+        "yaw": 1.602876263304064,
+        "maxDistance": 12,
+        "source": {
+          "id": 1044497054,
+          "name": "Park pathway",
+          "surface": "asphalt",
+          "a": [
+            -1521.102439635586,
+            -1095.9676640000987
+          ],
+          "b": [
+            -1372.980784579463,
+            -1100.7210279994877
+          ]
+        }
+      },
+      "setup": "natural descent has no complete floor ownership",
+      "spawn": null,
+      "capturedFaces": 0
+    }
+  ]
+}

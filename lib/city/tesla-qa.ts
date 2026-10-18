@@ -25,6 +25,20 @@ interface WallCandidate {
   distance: number;
 }
 const ROBSON = project([-123.12416073213134, 49.2841737758357]);
+const PARK_ENTRIES = [
+  {
+    id: 'stanley-park-drive',
+    name: 'Stanley Park Drive',
+    point: [-879.608384031657, -1453.5787111998163],
+    yaw: 0.9887633783623333,
+  },
+  {
+    id: 'stanley-seawall',
+    name: 'Stanley Seawall',
+    point: [377.2749101711636, -1595.2078075999482],
+    yaw: -2.093918646673578,
+  },
+] as const;
 const clone = <T>(value: T): T => JSON.parse(JSON.stringify(value));
 
 /** Bounded actual exterior faces, with normals checked against holes/footprints. */
@@ -135,6 +149,15 @@ export function installTeslaQA(
   let sequence = 0,
     caseName = 'manual',
     motion: AbortController | null = null;
+  let parkEntry: {
+    id: string;
+    name: string;
+    seed: readonly [number, number];
+    yaw: number;
+    result: string;
+    actualPosition?: number[];
+    spawnOffsetM?: number;
+  } | null = null;
   let lastRun: {
     kind: string;
     startedAt: string;
@@ -290,6 +313,81 @@ export function installTeslaQA(
       sample(started);
     }),
   );
+  for (const entry of PARK_ENTRIES)
+    button(`Tesla QA: enter ${entry.name}`, () =>
+      run(`${entry.id}-public-entry`, async (_signal, started) => {
+        parkEntry = {
+          id: entry.id,
+          name: entry.name,
+          seed: entry.point,
+          yaw: entry.yaw,
+          result: 'preparing public navigation entry',
+        };
+        lastRun!.target = parkEntry;
+        const t = e.tesla,
+          nav = e.navigation;
+        try {
+          if (!validFrame())
+            throw new Error('Park entry requires a live foreground frame');
+          if (!t || !nav)
+            throw new Error('Park entry needs Tesla and navigation');
+          clear();
+          t.deactivate();
+          e.flight?.clear();
+          nav.blur();
+          e.applySettings({
+            ...e.settings,
+            mode: 'orbit',
+            buildings: true,
+            labels: false,
+            autoRotate: false,
+          });
+          e.transition = null;
+          e.setClock({ hour: 14, running: false });
+          const [x, z] = entry.point,
+            y = (e.data.roadRelief?.(x, z) ?? e.elevation(x, z)) + 1.05;
+          if (
+            !Number.isFinite(y) ||
+            nav.startAt('drive', {
+              x,
+              z,
+              y,
+              yaw: entry.yaw,
+              surface: 'ground',
+              surfaceId: 'ground',
+              layer: 0,
+              name: `Tesla QA ${entry.name}`,
+              snappedDistance: 0,
+            }) === false
+          )
+            throw new Error('Park navigation entry was rejected');
+          // Public street entry owns all road/whole-body proofs and forbids the
+          // overview's Robson fallback. Never assign a Tesla pose or contact.
+          if (!t.enter() || !t.active || !t.state)
+            throw new Error('Park entry has no proved full-vehicle spawn');
+          parkEntry.actualPosition = [...t.state.position];
+          parkEntry.spawnOffsetM = Math.hypot(
+            t.state.position[0] - x,
+            t.state.position[2] - z,
+          );
+          if (
+            !Number.isFinite(parkEntry.spawnOffsetM) ||
+            parkEntry.spawnOffsetM > 50
+          )
+            throw new Error('Park entry selected a different spawn beyond 50m');
+          t.setView('chase');
+          t.clearInput();
+          caseName = entry.id;
+          parkEntry.result = 'public controller entry proved within 50m';
+          sample(started);
+          status.textContent = `Tesla QA ${entry.name}: actual spawn offset ${parkEntry.spawnOffsetM.toFixed(2)}m; native controls are live`;
+        } catch (error) {
+          parkEntry.result = String(error);
+          t?.deactivate();
+          throw error;
+        }
+      }),
+    );
   const approachWall = (automaticHold: boolean, roofTransfer = false) =>
     run(
       roofTransfer
@@ -719,6 +817,7 @@ export function installTeslaQA(
           world: t?.world?.stats() ?? null,
           shape: t?.shape ? clone(t.shape) : null,
           scenario: lastRun ? clone(lastRun) : null,
+          parkEntry: parkEntry ? clone(parkEntry) : null,
           controlledFixture: vault?.metadata() ?? null,
           settings: { ...e.settings },
           hour: e.clock.hour,

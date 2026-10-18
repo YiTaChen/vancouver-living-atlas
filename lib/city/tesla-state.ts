@@ -112,7 +112,8 @@ export interface TeslaWallToRoofPlan {
 }
 export interface TeslaWorld {
   sweep(query: TeslaSweepQuery): TeslaSweepHit | null;
-  /** Must prove the complete footprint against actual same-floor geometry. */
+  /** Prove the actual tyre support area for authored ordinary ground; other
+   * surfaces and legacy shapes require their complete body footprint. */
   support(query: TeslaSupportQuery): TeslaContact | null;
   /** Optional ordinary-ground driving fit; legacy planar worlds need not implement it. */
   fitGround?(query: TeslaGroundFitQuery): TeslaGroundFit | null;
@@ -293,7 +294,7 @@ function validShape(shape: TeslaShape) {
         ground.chassisClearance < shape.halfExtents[1] &&
         Number.isFinite(ground.suspensionTravel) &&
         ground.suspensionTravel >= 0 &&
-        ground.suspensionTravel <= 0.2 &&
+        ground.suspensionTravel <= 0.05 &&
         validSections))
   );
 }
@@ -583,8 +584,43 @@ function fitGroundPose(
       proof.surfaceId !== proposal.contact.surfaceId) ||
     !admissible(state, proof) ||
     querySweep(world, state, next, shape, priorContact.surfaceId, report)
-  )
-    return false;
+  ) {
+    // The preferred fitted pitch can have a blocked rotation even when the
+    // requested driving frame remains legal within the real tyre travel.
+    // Keep that frame only after proving this exact pose and its entire route;
+    // a historical fit flag cannot grant either support or body clearance.
+    if (requested !== state) return false;
+    const retained = querySupport(
+      world,
+      requested,
+      shape,
+      priorContact.surfaceId,
+      state.adhesionArmed,
+      report,
+    );
+    if (
+      !retained ||
+      retained.kind !== 'ground' ||
+      (retained.surfaceId !== priorContact.surfaceId &&
+        retained.surfaceId !== proposal.contact.surfaceId) ||
+      !admissible(state, retained) ||
+      querySweep(
+        world,
+        state,
+        requested,
+        shape,
+        priorContact.surfaceId,
+        report,
+      ) ||
+      querySweep(world, requested, requested, shape, retained.surfaceId, report)
+    )
+      return false;
+    state.position = [...requested.position];
+    state.quaternion = [...requested.quaternion];
+    setContact(state, retained, report);
+    remember(state);
+    return true;
+  }
   state.position = next.position;
   state.quaternion = next.quaternion;
   budget.translationM = Math.max(0, budget.translationM - distance * fraction);
@@ -1784,6 +1820,20 @@ function integrate(
       state.contact = proof;
       if (state.parked) {
         state.velocity = [0, 0, 0];
+        const blocked = querySweep(
+          world,
+          state,
+          state,
+          shape,
+          proof.surfaceId,
+          report,
+        );
+        if (blocked) {
+          state.parked = false;
+          state.wallHolding = state.surfaceHolding = false;
+          state.collisionSurfaceId = blocked.surfaceId;
+          report.collisions++;
+        }
         return;
       }
       if (

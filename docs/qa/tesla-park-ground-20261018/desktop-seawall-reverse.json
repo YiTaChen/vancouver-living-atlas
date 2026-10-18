@@ -1,0 +1,327 @@
+{
+  "revision": "9b7301183a6b88c4b559815d1a100f8f80bd2479",
+  "sourceFingerprint": "cc13ebf761dd598b30a3aae67f2e439f4740d7840fcd7be3a6a1310eff0bcf97",
+  "kind": "city-tesla-webgl-v1",
+  "id": "tesla-desktop-seawall-reverse-ground-chase-auto-20261018t061109752z-004",
+  "capturedAt": "2026-10-18T06:11:09.752Z",
+  "valid": true,
+  "localOptIn": true,
+  "case": "stanley-seawall",
+  "snapshot": {
+    "active": true,
+    "mode": "ground",
+    "transitioning": false,
+    "speedKph": 0,
+    "altitudeM": 2,
+    "parked": false,
+    "wallHolding": false,
+    "surfaceHolding": false,
+    "onRoof": false,
+    "vortexActive": false,
+    "vortexProgress": 0,
+    "vortexAvailable": true,
+    "adhesion": true,
+    "flightAssist": false,
+    "view": "chase",
+    "quality": "auto",
+    "effectiveQuality": "medium",
+    "warning": ""
+  },
+  "state": {
+    "position": [
+      365.24082640575165,
+      6.497774211875177,
+      -1603.8768039808567
+    ],
+    "quaternion": [
+      0.07443244223054168,
+      0.860718483715266,
+      -0.06422096519487135,
+      -0.49949891988264555
+    ],
+    "velocity": [
+      0,
+      0,
+      0
+    ],
+    "heading": -2.086418324984533,
+    "mode": "ground",
+    "contact": {
+      "surfaceId": "ground:asphalt:43:face:1126",
+      "kind": "ground",
+      "point": [
+        363.6673889160156,
+        5.8488922119140625,
+        -1604.3326416015625
+      ],
+      "normal": [
+        0.019891667299675505,
+        0.9905369174338451,
+        -0.13579741077316346
+      ],
+      "adherable": true
+    },
+    "flightAssist": false,
+    "adhesionArmed": true,
+    "parked": false,
+    "wallHolding": false,
+    "surfaceHolding": false,
+    "vortex": null,
+    "vortexPreparing": false,
+    "vortexPreparationLiftM": 0,
+    "vortexPreparationLiftTargetM": 0,
+    "timeS": 32.91599999999995,
+    "impact": 0,
+    "collisionSurfaceId": null,
+    "lastSafePose": {
+      "position": [
+        365.24082640575165,
+        6.497774211875177,
+        -1603.8768039808567
+      ],
+      "quaternion": [
+        0.07443244223054168,
+        0.860718483715266,
+        -0.06422096519487135,
+        -0.49949891988264555
+      ]
+    },
+    "detachRemainingS": 0,
+    "departureContact": null,
+    "groundDeparture": null,
+    "held": {
+      "jump": false,
+      "flightToggle": false,
+      "adhesionToggle": false,
+      "park": false,
+      "vortex": false
+    },
+    "attachment": null
+  },
+  "steps": {
+    "simulatedS": 0.017099999999991268,
+    "droppedS": 0,
+    "substeps": 0,
+    "collisions": 0,
+    "transitions": 0,
+    "environmentFailures": 0
+  },
+  "activeLOD": {
+    "quality": "medium",
+    "triangles": 27140,
+    "meshes": 35,
+    "materials": 13,
+    "cachedLevels": 1,
+    "disposed": false
+  },
+  "world": {
+    "sources": 89983,
+    "sourceCells": 16686,
+    "broadSources": 4,
+    "cachedTiles": 8,
+    "loadedTiles": 8,
+    "cachedFaces": 1864,
+    "queries": 31222,
+    "renderedRoofDetails": {
+      "maxCachedRecords": 4,
+      "cachedRecords": 0,
+      "builtRecords": 0,
+      "instanceSources": 0,
+      "cachedTiles": 0,
+      "cachedFaces": 0
+    }
+  },
+  "shape": {
+    "halfExtents": [
+      1.14,
+      0.62,
+      2.34
+    ],
+    "clearance": 0.06,
+    "groundSupport": {
+      "wheelContacts": [
+        [
+          -0.896,
+          -0.6799999999999999,
+          1.39
+        ],
+        [
+          0.896,
+          -0.6799999999999999,
+          1.39
+        ],
+        [
+          -0.896,
+          -0.6799999999999999,
+          -1.39
+        ],
+        [
+          0.896,
+          -0.6799999999999999,
+          -1.39
+        ]
+      ],
+      "chassisClearance": 0.08,
+      "suspensionTravel": 0.05,
+      "bodySections": [
+        {
+          "minZ": -2.34,
+          "maxZ": -1.39,
+          "clearance": 0.08
+        },
+        {
+          "minZ": -1.39,
+          "maxZ": 1.39,
+          "clearance": 0.12
+        },
+        {
+          "minZ": 1.39,
+          "maxZ": 2.34,
+          "clearance": 0.15
+        }
+      ]
+    }
+  },
+  "scenario": {
+    "kind": "stanley-seawall-public-entry",
+    "startedAt": "2026-10-18T06:10:36.782Z",
+    "result": "completed",
+    "trace": [
+      {
+        "elapsedMs": 27,
+        "simulatedS": 0,
+        "mode": "ground",
+        "position": [
+          371.41702690742983,
+          6.712529338659978,
+          -1600.364762891959
+        ],
+        "quaternion": [
+          0.08177469304298612,
+          0.8604865761832696,
+          -0.06387471965353278,
+          -0.4987943183069573
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": {
+          "surfaceId": "ground:asphalt:43:face:1176",
+          "kind": "ground",
+          "normal": [
+            0.07701135677673011,
+            0.9784658395338159,
+            -0.19150418218094314
+          ]
+        },
+        "attachment": null,
+        "step": {
+          "simulatedS": 0,
+          "droppedS": 0,
+          "substeps": 0,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      }
+    ],
+    "target": {
+      "id": "stanley-seawall",
+      "name": "Stanley Seawall",
+      "seed": [
+        377.2749101711636,
+        -1595.2078075999482
+      ],
+      "yaw": -2.093918646673578,
+      "result": "public controller entry proved within 50m",
+      "actualPosition": [
+        371.41702690742983,
+        6.712529338659978,
+        -1600.364762891959
+      ],
+      "spawnOffsetM": 7.804420812291534
+    }
+  },
+  "parkEntry": {
+    "id": "stanley-seawall",
+    "name": "Stanley Seawall",
+    "seed": [
+      377.2749101711636,
+      -1595.2078075999482
+    ],
+    "yaw": -2.093918646673578,
+    "result": "public controller entry proved within 50m",
+    "actualPosition": [
+      371.41702690742983,
+      6.712529338659978,
+      -1600.364762891959
+    ],
+    "spawnOffsetM": 7.804420812291534
+  },
+  "controlledFixture": null,
+  "settings": {
+    "trees": true,
+    "buildings": true,
+    "labels": true,
+    "traffic": true,
+    "trains": true,
+    "harbour": true,
+    "terrain": true,
+    "autoRotate": false,
+    "quality": "balanced",
+    "qualityMode": "auto",
+    "mode": "tesla"
+  },
+  "hour": 14,
+  "night": 0,
+  "compatible": false,
+  "fps": 59,
+  "viewport": [
+    1280,
+    720
+  ],
+  "render": [
+    1280,
+    720
+  ],
+  "pixelRatio": 1,
+  "camera": {
+    "position": [
+      371.5787061449453,
+      9.210543910078684,
+      -1600.2847276154819
+    ],
+    "quaternion": [
+      -0.13863441238838503,
+      0.49692718369419653,
+      0.08077955802348073,
+      0.8528297232232309
+    ],
+    "up": [
+      0,
+      1,
+      0
+    ],
+    "target": [
+      365.24082640575165,
+      6.777774211875177,
+      -1603.8768039808567
+    ],
+    "near": 0.18,
+    "far": 45000,
+    "fov": 56
+  },
+  "renderer": {
+    "calls": 296,
+    "triangles": 2056882,
+    "points": 0,
+    "lines": 0,
+    "geometries": 722,
+    "textures": 41
+  },
+  "workerErrors": {}
+}

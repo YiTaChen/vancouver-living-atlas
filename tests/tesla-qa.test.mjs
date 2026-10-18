@@ -476,6 +476,179 @@ test('Robson/view/model-tier controls call public APIs while keeping city qualit
   });
 });
 
+function parkFixture(behavior = 'valid', offset = 1.25) {
+  const setup = fixture(),
+    { e, t, events } = setup;
+  let placement,
+    state = t.state;
+  // The helper may read the actual controller's result, never replace or move
+  // it. Only this public-controller double may create its newly proved state.
+  const freezePose = (s) => {
+    Object.freeze(s.position);
+    Object.freeze(s.quaternion);
+    Object.freeze(s.contact);
+    return Object.freeze(s);
+  };
+  state = freezePose(state);
+  Object.defineProperty(t, 'state', {
+    get: () => state,
+    set() {
+      throw Error('QA assigned Tesla state');
+    },
+  });
+  e.transition = { source: 'previous overview fly-to' };
+  e.data.roadRelief = () => 12;
+  e.elevation = () => {
+    throw Error('road relief must own this entry height');
+  };
+  e.navigation.startAt = (mode, point) => {
+    assert.equal(
+      e.settings.mode,
+      'orbit',
+      'setup must not enter ordinary drive at the previous viewpoint',
+    );
+    assert.equal(
+      e.transition,
+      null,
+      'a pending viewpoint animation cannot move the new park camera',
+    );
+    events.push(['nav-start', mode, point]);
+    placement = point;
+    return behavior !== 'nav-rejected';
+  };
+  t.enter = () => {
+    events.push(['enter']);
+    if (behavior === 'enter-rejected') return false;
+    state = freezePose(
+      createTesla([placement.x + offset, 12.68, placement.z], placement.yaw, {
+        surfaceId: 'ground:asphalt:actual-park',
+        kind: 'ground',
+        point: [placement.x, 12, placement.z],
+        normal: [0, 1, 0],
+        adherable: true,
+      }),
+    );
+    t.active = true;
+    return true;
+  };
+  return setup;
+}
+
+test('park setup uses public street entry with source-derived seeds, records actual spawn and leaves native controls live', async () => {
+  for (const { name, seed, yaw, offset } of [
+    {
+      name: 'Stanley Park Drive',
+      seed: [-879.608384031657, -1453.5787111998163],
+      yaw: 0.9887633783623333,
+      offset: 1.25,
+    },
+    {
+      name: 'Stanley Seawall',
+      seed: [377.2749101711636, -1595.2078075999482],
+      yaw: -2.093918646673578,
+      offset: 50,
+    },
+  ])
+    await dom(async ({ replace }) => {
+      const { e, t, events, held } = parkFixture('valid', offset),
+        panel = new Element(),
+        lock = lease(),
+        uploads = [];
+      replace('fetch', async (_url, options) => {
+        uploads.push(JSON.parse(options.body));
+        return { ok: true };
+      });
+      installTeslaQA(e, panel, lock);
+      await click(panel, `Tesla QA: enter ${name}`);
+      const report = runReport(panel),
+        placed = events.find((event) => event[0] === 'nav-start');
+      assert.deepEqual(placed, [
+        'nav-start',
+        'drive',
+        {
+          x: seed[0],
+          z: seed[1],
+          y: 13.05,
+          yaw,
+          surface: 'ground',
+          surfaceId: 'ground',
+          layer: 0,
+          name: `Tesla QA ${name}`,
+          snappedDistance: 0,
+        },
+      ]);
+      assert(
+        events.findIndex((event) => event[0] === 'deactivate') <
+          events.indexOf(placed),
+      );
+      assert(
+        events.findIndex((event) => event[0] === 'flight-clear') <
+          events.indexOf(placed),
+      );
+      assert(
+        events.findIndex((event) => event[0] === 'nav-blur') <
+          events.indexOf(placed),
+      );
+      assert(
+        events.indexOf(placed) <
+          events.findIndex((event) => event[0] === 'enter'),
+      );
+      assert.equal(report.result, 'completed');
+      assert.deepEqual(report.target.seed, seed);
+      assert.equal(report.target.spawnOffsetM, offset);
+      assert.deepEqual(report.target.actualPosition, t.state.position);
+      assert.match(report.target.result, /public controller entry proved/);
+      assert.equal(t.active, true);
+      assert.equal(t.view, 'chase');
+      assert.equal(e.clock.hour, 14);
+      assert.equal(e.clock.running, false);
+      assert.equal(e.settings.labels, false);
+      assert.equal(e.settings.quality, 'high');
+      assert.equal(e.settings.qualityMode, 'auto');
+      assert.equal(held.size, 0);
+      assert.equal(
+        events.some((event) => event[0] === 'command' || event[0] === 'axes'),
+        false,
+      );
+      await click(panel, 'Tesla QA: save checkpoint');
+      assert.deepEqual(uploads[0].row.parkEntry, report.target);
+      assert.deepEqual(uploads[0].row.state, t.state);
+      assert.equal(lock.active, false);
+    });
+});
+
+test('park setup rejects navigation, real controller entry and distant-spawn failures without retaining input or accepting Robson fallback', async () => {
+  for (const [behavior, offset, error, enters] of [
+    ['nav-rejected', 0, /navigation entry was rejected/, 0],
+    ['enter-rejected', 0, /no proved full-vehicle spawn/, 1],
+    ['valid', 50.001, /different spawn beyond 50m/, 1],
+  ])
+    await dom(async () => {
+      const { e, t, events, held } = parkFixture(behavior, offset),
+        panel = new Element(),
+        lock = lease();
+      held.add('up');
+      installTeslaQA(e, panel, lock);
+      await click(panel, 'Tesla QA: enter Stanley Park Drive');
+      const report = runReport(panel);
+      assert.match(report.result, error);
+      assert.match(report.target.result, error);
+      assert.equal(
+        events.filter((event) => event[0] === 'enter').length,
+        enters,
+      );
+      assert.equal(
+        events.some((event) => event[0] === 'view'),
+        false,
+      );
+      assert.equal(t.active, false);
+      assert.equal(held.size, 0);
+      assert.equal(lock.active, false);
+      assert.equal(lock.starts, 1);
+      assert.equal(lock.ends, 1);
+    });
+});
+
 test('launch holds real public lift input for three foreground seconds and clears it on completion or hidden abort', async () => {
   await dom(async ({ frame, document }) => {
     const { e, t, events, held } = fixture(),
