@@ -3,7 +3,7 @@ import type { CityEngine } from './engine';
 import { inPolygon, project } from './geo';
 import type { TeslaStepReport } from './tesla-state';
 import { teslaFrame } from './tesla-math';
-import { TESLA_VORTEX_LIMITS } from './tesla-vortex';
+import { TESLA_VORTEX_LIMITS, type TeslaVortexMotion } from './tesla-vortex';
 import { installTeslaVortexVaultQA } from './tesla-vortex-vault-qa';
 
 interface Lease {
@@ -150,6 +150,8 @@ export function installTeslaQA(
       sawRoll: boolean;
       maximumProgress: number;
       uprightAtEnd: boolean;
+      completedDuration: boolean;
+      postCompletionGroundCollision: boolean;
     };
     trace: unknown[];
   } | null = null;
@@ -581,6 +583,7 @@ export function installTeslaQA(
       let lastSample = -Infinity,
         sawRoll = false,
         maximumProgress = 0;
+      let observedMotion: TeslaVortexMotion | null = null;
       while (performance.now() - launchedAt < 6_000) {
         await nextFrame(signal);
         if (!validFrame() || !t.active)
@@ -589,26 +592,38 @@ export function installTeslaQA(
           q = s.quaternion,
           upY = 1 - 2 * (q[0] * q[0] + q[2] * q[2]);
         sawRoll ||= upY < -0.5;
+        // Retain the actual motion: a final render frame can finish the stunt
+        // and begin an ordinary ground landing in its remaining substeps.
+        observedMotion ??= s.vortex;
+        const completedDuration =
+            observedMotion?.elapsedS === TESLA_VORTEX_LIMITS.durationS,
+          postCompletionGroundCollision =
+            completedDuration &&
+            !!step()?.collisions &&
+            ((s.mode === 'ground' && s.contact?.kind === 'ground') ||
+              s.attachment?.contact.kind === 'ground');
         maximumProgress = Math.max(
           maximumProgress,
-          s.vortex ? s.vortex.elapsedS / TESLA_VORTEX_LIMITS.durationS : 0,
+          (observedMotion?.elapsedS ?? 0) / TESLA_VORTEX_LIMITS.durationS,
         );
         lastRun!.vortexEvidence = {
           sawRoll,
           maximumProgress,
           uprightAtEnd: upY > 0.99,
+          completedDuration,
+          postCompletionGroundCollision,
         };
         if (performance.now() - lastSample >= 100) {
           sample(started);
           lastSample = performance.now();
         }
-        if (step()?.collisions)
+        if (step()?.collisions && !postCompletionGroundCollision)
           throw new Error(
             'Vortex met actual collision geometry; no clear stunt was claimed',
           );
         if (
           sawRoll &&
-          maximumProgress > 0.9 &&
+          completedDuration &&
           !s.vortex &&
           !s.vortexPreparing &&
           upY > 0.99

@@ -176,6 +176,9 @@ export interface TeslaState extends TeslaPose {
   vortex: TeslaVortexMotion | null;
   /** Release the existing support and align safely before the stunt clock starts. */
   vortexPreparing: boolean;
+  /** Swept, no-ignore rise used only after an upward floor blocks alignment. */
+  vortexPreparationLiftM: number;
+  vortexPreparationLiftTargetM: number;
   timeS: number;
   impact: number;
   collisionSurfaceId: string | null;
@@ -363,6 +366,8 @@ export function createTesla(
     surfaceHolding: false,
     vortex: null,
     vortexPreparing: false,
+    vortexPreparationLiftM: 0,
+    vortexPreparationLiftTargetM: 0,
     timeS: 0,
     impact: 0,
     collisionSurfaceId: null,
@@ -826,10 +831,20 @@ function requestAttachment(
     teslaSubtract(state.position, contact.point),
     normal,
   );
+  // Land just outside a graded model-backed ground floor's full-body plane.
+  // Coplanar Float32 neighbours can intersect a tangent endpoint by microns.
+  // The wheel/union proof and every whole/partial route sweep still apply.
+  const landingSeparation =
+    state.mode === 'air' &&
+    contact.kind === 'ground' &&
+    shape.groundSupport &&
+    Math.abs(normal[0]) + Math.abs(normal[2]) > EPS
+      ? 0.001
+      : 0;
   const target = {
     position: teslaAdd(
       state.position,
-      teslaScale(normal, contactHeight(shape) - distance),
+      teslaScale(normal, contactHeight(shape) + landingSeparation - distance),
     ),
     quaternion,
   };
@@ -1471,6 +1486,8 @@ function moveSwept(
 function cancelVortex(state: TeslaState) {
   state.vortex = null;
   state.vortexPreparing = false;
+  state.vortexPreparationLiftM = 0;
+  state.vortexPreparationLiftTargetM = 0;
   state.flightAssist = true;
 }
 
@@ -1493,11 +1510,28 @@ function advanceVortex(
   if (start.phase === 'done') {
     state.vortex = null;
     state.vortexPreparing = false;
+    state.vortexPreparationLiftM = 0;
+    state.vortexPreparationLiftTargetM = 0;
     state.flightAssist = motion.restoreFlightAssist;
     return;
   }
   const collisions = report.collisions;
   if (state.vortexPreparing) {
+    // This budget permits no collision exceptions. The tyre-model withdrawal
+    // keeps its separate 35cm origin bound; every rise here uses the full body.
+    const maxLiftM = 0.35;
+    if (
+      !Number.isFinite(state.vortexPreparationLiftM) ||
+      !Number.isFinite(state.vortexPreparationLiftTargetM) ||
+      state.vortexPreparationLiftM < 0 ||
+      state.vortexPreparationLiftM > maxLiftM + EPS ||
+      state.vortexPreparationLiftTargetM < state.vortexPreparationLiftM - EPS ||
+      state.vortexPreparationLiftTargetM > maxLiftM + EPS
+    ) {
+      report.environmentFailures++;
+      cancelVortex(state);
+      return;
+    }
     const wallClearance = wallDepartureDistance(state, shape);
     if (wallClearance > EPS) {
       state.velocity = teslaScale(
@@ -1553,18 +1587,61 @@ function advanceVortex(
         angle > EPS
           ? Math.min(1, (TESLA_LIMITS.attachmentRadiansPerS * h) / angle)
           : 1;
-      state.velocity = [0, 0, 0];
-      moveSwept(
-        state,
-        {
-          position: state.position,
-          quaternion: teslaSlerp(state.quaternion, start.quaternion, fraction),
-        },
+      const aligned = {
+        position: state.position,
+        quaternion: teslaSlerp(state.quaternion, start.quaternion, fraction),
+      };
+      const alignmentHit = querySweep(
         world,
+        state,
+        aligned,
         shape,
+        undefined,
         report,
-        false,
       );
+      if (alignmentHit?.surfaceId === 'invalid-tesla-world-query') {
+        cancelVortex(state);
+        return;
+      }
+      if (
+        state.vortexPreparationLiftTargetM <=
+          state.vortexPreparationLiftM + EPS &&
+        alignmentHit &&
+        (alignmentHit.kind === 'ground' || alignmentHit.kind === 'roof') &&
+        alignmentHit.adherable &&
+        alignmentHit.normal[1] > 0.92 &&
+        state.vortexPreparationLiftM < maxLiftM - EPS
+      )
+        // Consume the bounded vehicle clearance reserve once. The prior
+        // ground withdrawal ends at its first clear substep, so a smaller
+        // incremental margin would make the stunt depend on render timing.
+        state.vortexPreparationLiftTargetM = maxLiftM;
+      const remainingLiftM =
+        state.vortexPreparationLiftTargetM - state.vortexPreparationLiftM;
+      if (remainingLiftM > EPS) {
+        const liftM = Math.min(remainingLiftM, 10 * h);
+        const beforeY = state.position[1];
+        state.velocity = [0, liftM / h, 0];
+        moveSwept(
+          state,
+          {
+            position: teslaAdd(state.position, [0, liftM, 0]),
+            quaternion: state.quaternion,
+          },
+          world,
+          shape,
+          report,
+          false,
+        );
+        state.vortexPreparationLiftM += Math.max(
+          0,
+          state.position[1] - beforeY,
+        );
+        if (report.collisions > collisions) cancelVortex(state);
+        return;
+      }
+      state.velocity = [0, 0, 0];
+      moveSwept(state, aligned, world, shape, report, false);
       if (fraction >= 1 - EPS && report.collisions === collisions) {
         state.vortexPreparing = false;
         state.heading = motion.heading;
@@ -1601,6 +1678,8 @@ function advanceVortex(
   if (sample.phase === 'done') {
     state.vortex = null;
     state.vortexPreparing = false;
+    state.vortexPreparationLiftM = 0;
+    state.vortexPreparationLiftTargetM = 0;
     state.flightAssist = motion.restoreFlightAssist;
   }
 }
@@ -2129,10 +2208,18 @@ export function stepTesla(
         0,
         Math.cos(heading),
       ]);
-      const motion = createTeslaVortex(heading, speed, restore);
+      const grade =
+        (proof?.kind === 'ground' || proof?.kind === 'roof') &&
+        proof.normal[1] > 0.92
+          ? -teslaDot(proof.normal, [Math.sin(heading), 0, Math.cos(heading)]) /
+            proof.normal[1]
+          : 0;
+      const motion = createTeslaVortex(heading, speed, restore, grade);
       leaveSurface(state, true, 8, report, launchGroundOrigin);
       state.vortex = motion;
       state.vortexPreparing = true;
+      state.vortexPreparationLiftM = 0;
+      state.vortexPreparationLiftTargetM = 0;
     }
   }
   if (

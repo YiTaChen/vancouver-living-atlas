@@ -18,6 +18,8 @@ export const TESLA_VORTEX_LIMITS = Object.freeze({
   maxForwardSpeedMps: 64,
   initialLiftMps: 14,
   gravityMps2: 20,
+  /** A launch floor with normal.y > .92 has an absolute tangent grade < .426. */
+  maxGradeMPerM: 0.43,
 });
 
 export interface TeslaVortexMotion {
@@ -26,6 +28,8 @@ export interface TeslaVortexMotion {
   forwardSpeedMps: number;
   /** Restore the prior flight choice; a ground vault finishes in natural descent. */
   restoreFlightAssist: boolean;
+  /** Captured launch-floor tangent, never a continuing terrain/heightmap query. */
+  gradeMPerM: number;
 }
 
 interface VortexCandidate extends TeslaPose {
@@ -65,8 +69,13 @@ export function createTeslaVortex(
   heading: number,
   forwardSpeedMps = 0,
   restoreFlightAssist = false,
+  gradeMPerM = 0,
 ): TeslaVortexMotion {
-  if (!Number.isFinite(heading) || !Number.isFinite(forwardSpeedMps))
+  if (
+    !Number.isFinite(heading) ||
+    !Number.isFinite(forwardSpeedMps) ||
+    !Number.isFinite(gradeMPerM)
+  )
     throw new RangeError('Invalid Tesla vortex launch');
   return {
     elapsedS: 0,
@@ -79,6 +88,10 @@ export function createTeslaVortex(
       ),
     ),
     restoreFlightAssist,
+    gradeMPerM: Math.max(
+      -TESLA_VORTEX_LIMITS.maxGradeMPerM,
+      Math.min(TESLA_VORTEX_LIMITS.maxGradeMPerM, gradeMPerM),
+    ),
   };
 }
 
@@ -99,6 +112,8 @@ export function sampleTeslaVortex(
     elapsedS < 0 ||
     !Number.isFinite(motion.heading) ||
     !Number.isFinite(motion.forwardSpeedMps) ||
+    !Number.isFinite(motion.gradeMPerM) ||
+    Math.abs(motion.gradeMPerM) > TESLA_VORTEX_LIMITS.maxGradeMPerM ||
     motion.forwardSpeedMps < TESLA_VORTEX_LIMITS.minForwardSpeedMps ||
     motion.forwardSpeedMps > TESLA_VORTEX_LIMITS.maxForwardSpeedMps
   )
@@ -130,7 +145,9 @@ export function sampleTeslaVortex(
         : TESLA_UP,
     velocity: TeslaVec3 = [
       forward[0] * speed,
-      limits.initialLiftMps - limits.gravityMps2 * time,
+      limits.initialLiftMps -
+        limits.gravityMps2 * time +
+        motion.gradeMPerM * speed,
       forward[2] * speed,
     ],
     thrust =

@@ -1,0 +1,795 @@
+{
+  "revision": "6c0f505efc4db2def2e80e0603d40327cb9c70cd",
+  "sourceFingerprint": "8f72b75da2ebaadd94af4e8a639b234a13b9a6a1e91f45a3c46dc8110faca10d",
+  "kind": "city-tesla-webgl-v1",
+  "id": "tesla-desktop-default-grade-landed-ground-chase-auto-20261018t052850640z-001",
+  "capturedAt": "2026-10-18T05:28:50.640Z",
+  "valid": true,
+  "localOptIn": true,
+  "case": "vortex-jump",
+  "snapshot": {
+    "active": true,
+    "mode": "ground",
+    "transitioning": false,
+    "speedKph": 0,
+    "altitudeM": 2,
+    "parked": false,
+    "wallHolding": false,
+    "surfaceHolding": false,
+    "onRoof": false,
+    "vortexActive": false,
+    "vortexProgress": 0,
+    "vortexAvailable": true,
+    "adhesion": true,
+    "flightAssist": false,
+    "view": "chase",
+    "quality": "auto",
+    "effectiveQuality": "medium",
+    "warning": ""
+  },
+  "state": {
+    "position": [
+      -70.66155539921625,
+      33.34680877765811,
+      -221.6610809826105
+    ],
+    "quaternion": [
+      -0.052550082602802105,
+      0.38269232018027344,
+      -0.024403915148962996,
+      0.9220572248070507
+    ],
+    "velocity": [
+      0,
+      0,
+      0
+    ],
+    "heading": 0.79016677285585,
+    "mode": "ground",
+    "contact": {
+      "surfaceId": "ground:asphalt:10:face:2938",
+      "kind": "ground",
+      "point": [
+        -70.66336757622263,
+        32.669704862476806,
+        -221.58260412467467
+      ],
+      "normal": [
+        0.002658558602147113,
+        0.9933469147565025,
+        -0.11512966172927387
+      ],
+      "adherable": true
+    },
+    "flightAssist": false,
+    "adhesionArmed": true,
+    "parked": false,
+    "wallHolding": false,
+    "surfaceHolding": false,
+    "vortex": null,
+    "vortexPreparing": false,
+    "vortexPreparationLiftM": 0,
+    "vortexPreparationLiftTargetM": 0,
+    "timeS": 14.150699999999988,
+    "impact": 0,
+    "collisionSurfaceId": "ground:asphalt:10:face:3216",
+    "lastSafePose": {
+      "position": [
+        -70.66155539921625,
+        33.34680877765811,
+        -221.6610809826105
+      ],
+      "quaternion": [
+        -0.052550082602802105,
+        0.38269232018027344,
+        -0.024403915148962996,
+        0.9220572248070507
+      ]
+    },
+    "detachRemainingS": 0,
+    "departureContact": null,
+    "groundDeparture": null,
+    "held": {
+      "jump": false,
+      "flightToggle": false,
+      "adhesionToggle": false,
+      "park": false,
+      "vortex": false
+    },
+    "attachment": null
+  },
+  "steps": {
+    "simulatedS": 0.016199999999997088,
+    "droppedS": 0,
+    "substeps": 0,
+    "collisions": 0,
+    "transitions": 0,
+    "environmentFailures": 0
+  },
+  "activeLOD": {
+    "quality": "medium",
+    "triangles": 27140,
+    "meshes": 35,
+    "materials": 13,
+    "cachedLevels": 1,
+    "disposed": false
+  },
+  "world": {
+    "sources": 89983,
+    "sourceCells": 16686,
+    "broadSources": 4,
+    "cachedTiles": 10,
+    "loadedTiles": 10,
+    "cachedFaces": 1439,
+    "queries": 13027,
+    "renderedRoofDetails": {
+      "maxCachedRecords": 4,
+      "cachedRecords": 2,
+      "builtRecords": 2,
+      "instanceSources": 1300,
+      "cachedTiles": 5,
+      "cachedFaces": 588
+    }
+  },
+  "shape": {
+    "halfExtents": [
+      1.14,
+      0.62,
+      2.34
+    ],
+    "clearance": 0.06,
+    "groundSupport": {
+      "wheelContacts": [
+        [
+          -0.896,
+          -0.6799999999999999,
+          1.39
+        ],
+        [
+          0.896,
+          -0.6799999999999999,
+          1.39
+        ],
+        [
+          -0.896,
+          -0.6799999999999999,
+          -1.39
+        ],
+        [
+          0.896,
+          -0.6799999999999999,
+          -1.39
+        ]
+      ],
+      "chassisClearance": 0.08,
+      "suspensionTravel": 0.05,
+      "bodySections": [
+        {
+          "minZ": -2.34,
+          "maxZ": -1.39,
+          "clearance": 0.08
+        },
+        {
+          "minZ": -1.39,
+          "maxZ": 1.39,
+          "clearance": 0.12
+        },
+        {
+          "minZ": 1.39,
+          "maxZ": 2.34,
+          "clearance": 0.15
+        }
+      ]
+    }
+  },
+  "scenario": {
+    "kind": "public-vortex-jump",
+    "startedAt": "2026-10-18T05:28:40.506Z",
+    "result": "completed",
+    "trace": [
+      {
+        "elapsedMs": 93.5,
+        "simulatedS": 4.1169000000000056,
+        "mode": "air",
+        "position": [
+          -157.41511414209359,
+          24.88028691382914,
+          -307.4927885851381
+        ],
+        "quaternion": [
+          -0.02682083765659453,
+          0.3847186645536484,
+          -0.00678412700365337,
+          0.922619188740541
+        ],
+        "speedMps": 0,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": {
+          "elapsedS": 0,
+          "heading": 0.7890989694020802,
+          "forwardSpeedMps": 30,
+          "restoreFlightAssist": false,
+          "gradeMPerM": 0.06202663839175714
+        },
+        "vortexPreparing": true,
+        "contact": null,
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.0495,
+          "droppedS": 0,
+          "substeps": 6,
+          "collisions": 0,
+          "transitions": 1,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 195.19999998807907,
+        "simulatedS": 4.283900000000013,
+        "mode": "air",
+        "position": [
+          -156.27604246113088,
+          26.766197309644937,
+          -306.36211682268794
+        ],
+        "quaternion": [
+          0,
+          0.38439232569806764,
+          0,
+          0.9231698326659243
+        ],
+        "speedMps": 29.48056343621414,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": {
+          "elapsedS": 0.142,
+          "heading": 0.7890989694020802,
+          "forwardSpeedMps": 30,
+          "restoreFlightAssist": false,
+          "gradeMPerM": 0.06202663839175714
+        },
+        "vortexPreparing": false,
+        "contact": null,
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.016900000000001456,
+          "droppedS": 0,
+          "substeps": 3,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 315.0999999642372,
+        "simulatedS": 4.401600000000019,
+        "mode": "air",
+        "position": [
+          -153.80193068049468,
+          28.157424072197912,
+          -303.90625001969113
+        ],
+        "quaternion": [
+          0.004829260426389522,
+          0.38436198862440013,
+          0.011598117968754745,
+          0.9230969741061952
+        ],
+        "speedMps": 31.83992154738815,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": {
+          "elapsedS": 0.2597000000000007,
+          "heading": 0.7890989694020802,
+          "forwardSpeedMps": 30,
+          "restoreFlightAssist": false,
+          "gradeMPerM": 0.06202663839175714
+        },
+        "vortexPreparing": false,
+        "contact": null,
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.0345,
+          "droppedS": 0,
+          "substeps": 5,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 431.80000001192093,
+        "simulatedS": 4.518600000000023,
+        "mode": "air",
+        "position": [
+          -151.31081769956558,
+          29.26854957295299,
+          -301.4335073892813
+        ],
+        "quaternion": [
+          0.060030522672420324,
+          0.3796759096956842,
+          0.14417136832715086,
+          0.9118427257477617
+        ],
+        "speedMps": 31.134154623397585,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": {
+          "elapsedS": 0.37670000000000103,
+          "heading": 0.7890989694020802,
+          "forwardSpeedMps": 30,
+          "restoreFlightAssist": false,
+          "gradeMPerM": 0.06202663839175714
+        },
+        "vortexPreparing": false,
+        "contact": null,
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.018600000000002184,
+          "droppedS": 0,
+          "substeps": 3,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 543.3999999761581,
+        "simulatedS": 4.634100000000028,
+        "mode": "air",
+        "position": [
+          -148.85164206454584,
+          30.09689237498043,
+          -298.9924665874665
+        ],
+        "quaternion": [
+          0.1887008800732105,
+          0.3348872017786962,
+          0.4531905249792402,
+          0.8042766240625617
+        ],
+        "speedMps": 30.597416100588163,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": {
+          "elapsedS": 0.49220000000000136,
+          "heading": 0.7890989694020802,
+          "forwardSpeedMps": 30,
+          "restoreFlightAssist": false,
+          "gradeMPerM": 0.06202663839175714
+        },
+        "vortexPreparing": false,
+        "contact": null,
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.016900000000001456,
+          "droppedS": 0,
+          "substeps": 3,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 671.6999999880791,
+        "simulatedS": 4.750100000000031,
+        "mode": "air",
+        "position": [
+          -146.3818206475563,
+          30.66028107658374,
+          -296.54085850945324
+        ],
+        "quaternion": [
+          0.33561757131562886,
+          0.18739878836259363,
+          0.8060307046675007,
+          0.4500633767344803
+        ],
+        "speedMps": 30.22691390083347,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": {
+          "elapsedS": 0.6082000000000012,
+          "heading": 0.7890989694020802,
+          "forwardSpeedMps": 30,
+          "restoreFlightAssist": false,
+          "gradeMPerM": 0.06202663839175714
+        },
+        "vortexPreparing": false,
+        "contact": null,
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.03320000000000073,
+          "droppedS": 0,
+          "substeps": 4,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 788.5,
+        "simulatedS": 4.850300000000033,
+        "mode": "air",
+        "position": [
+          -144.24840594081198,
+          30.93029995158935,
+          -294.4231763593074
+        ],
+        "quaternion": [
+          0.383957509317635,
+          -0.018278158938130402,
+          0.9221255626887975,
+          -0.0438974552827287
+        ],
+        "speedMps": 30.047721527067154,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": {
+          "elapsedS": 0.7083999999999981,
+          "heading": 0.7890989694020802,
+          "forwardSpeedMps": 30,
+          "restoreFlightAssist": false,
+          "gradeMPerM": 0.06202663839175714
+        },
+        "vortexPreparing": false,
+        "contact": null,
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.016899999999997816,
+          "droppedS": 0,
+          "substeps": 3,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 920.5999999642372,
+        "simulatedS": 4.9841000000000415,
+        "mode": "air",
+        "position": [
+          -141.39959468569816,
+          30.977772078093867,
+          -291.59537324863345
+        ],
+        "quaternion": [
+          -0.2769852669144353,
+          0.2665269629285344,
+          -0.6652173454398678,
+          0.6401003228169521
+        ],
+        "speedMps": 30.016107074502422,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": {
+          "elapsedS": 0.8422000000000007,
+          "heading": 0.7890989694020802,
+          "forwardSpeedMps": 30,
+          "restoreFlightAssist": false,
+          "gradeMPerM": 0.06202663839175714
+        },
+        "vortexPreparing": false,
+        "contact": null,
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.016,
+          "droppedS": 0,
+          "substeps": 2,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 1026.8999999761581,
+        "simulatedS": 5.100200000000045,
+        "mode": "air",
+        "position": [
+          -138.9276441123147,
+          30.728830359612367,
+          -289.1416517153806
+        ],
+        "quaternion": [
+          -0.1247936919673654,
+          0.3635711684123531,
+          -0.29970882358813644,
+          0.8731650250713469
+        ],
+        "speedMps": 30.181523365252033,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": {
+          "elapsedS": 0.9582999999999989,
+          "heading": 0.7890989694020802,
+          "forwardSpeedMps": 30,
+          "restoreFlightAssist": false,
+          "gradeMPerM": 0.06202663839175714
+        },
+        "vortexPreparing": false,
+        "contact": null,
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.015599999999998546,
+          "droppedS": 0,
+          "substeps": 2,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 1128.5999999642372,
+        "simulatedS": 5.216600000000052,
+        "mode": "air",
+        "position": [
+          -136.44930606974935,
+          30.20861538087638,
+          -286.68158981640863
+        ],
+        "quaternion": [
+          -0.0263956278676899,
+          0.383484981303101,
+          -0.0633926479085526,
+          0.920990723153916
+        ],
+        "speedMps": 30.524301004227663,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": {
+          "elapsedS": 1.0747,
+          "heading": 0.7890989694020802,
+          "forwardSpeedMps": 30,
+          "restoreFlightAssist": false,
+          "gradeMPerM": 0.06202663839175714
+        },
+        "vortexPreparing": false,
+        "contact": null,
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.048,
+          "droppedS": 0,
+          "substeps": 6,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 1239.5,
+        "simulatedS": 5.316600000000055,
+        "mode": "air",
+        "position": [
+          -134.3201496757929,
+          29.54529529605166,
+          -284.56813457674207
+        ],
+        "quaternion": [
+          -0.0009339048481065309,
+          0.3843911912066977,
+          -0.0022428980099608053,
+          0.9231671080324232
+        ],
+        "speedMps": 30.955867863616472,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": {
+          "elapsedS": 1.1746999999999996,
+          "heading": 0.7890989694020802,
+          "forwardSpeedMps": 30,
+          "restoreFlightAssist": false,
+          "gradeMPerM": 0.06202663839175714
+        },
+        "vortexPreparing": false,
+        "contact": null,
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.016200000000000728,
+          "droppedS": 0,
+          "substeps": 2,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 1353.699999988079,
+        "simulatedS": 5.45000000000006,
+        "mode": "air",
+        "position": [
+          -131.479855046255,
+          28.3490707028955,
+          -281.748785287027
+        ],
+        "quaternion": [
+          0,
+          0.38439232569806764,
+          0,
+          0.9231698326659243
+        ],
+        "speedMps": 31.71931176611386,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": {
+          "elapsedS": 1.308099999999997,
+          "heading": 0.7890989694020802,
+          "forwardSpeedMps": 30,
+          "restoreFlightAssist": false,
+          "gradeMPerM": 0.06202663839175714
+        },
+        "vortexPreparing": false,
+        "contact": null,
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.0315,
+          "droppedS": 0,
+          "substeps": 4,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 1469.8999999761581,
+        "simulatedS": 5.549900000000065,
+        "mode": "air",
+        "position": [
+          -129.37312523639142,
+          27.231551305613912,
+          -279.6575912498693
+        ],
+        "quaternion": [
+          0,
+          0.38439232569806764,
+          0,
+          0.9231698326659243
+        ],
+        "speedMps": 32.31633314251401,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": null,
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.015400000000001456,
+          "droppedS": 0,
+          "substeps": 2,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      },
+      {
+        "elapsedMs": 1469.8999999761581,
+        "simulatedS": 5.549900000000065,
+        "mode": "air",
+        "position": [
+          -129.37312523639142,
+          27.231551305613912,
+          -279.6575912498693
+        ],
+        "quaternion": [
+          0,
+          0.38439232569806764,
+          0,
+          0.9231698326659243
+        ],
+        "speedMps": 32.31633314251401,
+        "parked": false,
+        "wallHolding": false,
+        "surfaceHolding": false,
+        "adhesionArmed": true,
+        "vortex": null,
+        "vortexPreparing": false,
+        "contact": null,
+        "attachment": null,
+        "step": {
+          "simulatedS": 0.015400000000001456,
+          "droppedS": 0,
+          "substeps": 2,
+          "collisions": 0,
+          "transitions": 0,
+          "environmentFailures": 0
+        }
+      }
+    ],
+    "vortexEvidence": {
+      "sawRoll": true,
+      "maximumProgress": 1,
+      "uprightAtEnd": true,
+      "completedDuration": true,
+      "postCompletionGroundCollision": false
+    }
+  },
+  "controlledFixture": null,
+  "settings": {
+    "trees": true,
+    "buildings": true,
+    "labels": true,
+    "traffic": true,
+    "trains": true,
+    "harbour": true,
+    "terrain": true,
+    "autoRotate": false,
+    "quality": "balanced",
+    "qualityMode": "auto",
+    "mode": "tesla"
+  },
+  "hour": 11.657033333331306,
+  "night": 0,
+  "compatible": false,
+  "fps": 51,
+  "viewport": [
+    1280,
+    720
+  ],
+  "render": [
+    1024,
+    576
+  ],
+  "pixelRatio": 0.8,
+  "camera": {
+    "position": [
+      -75.83735877928707,
+      36.05957847586161,
+      -226.7877554967586
+    ],
+    "quaternion": [
+      -0.06175558413703133,
+      -0.9110062206098046,
+      -0.14809147551643864,
+      0.3798984452685982
+    ],
+    "up": [
+      0,
+      1,
+      0
+    ],
+    "target": [
+      -70.66155539921625,
+      33.62680877765811,
+      -221.6610809826105
+    ],
+    "near": 0.18,
+    "far": 45000,
+    "fov": 56
+  },
+  "renderer": {
+    "calls": 443,
+    "triangles": 2217436,
+    "points": 0,
+    "lines": 0,
+    "geometries": 703,
+    "textures": 37
+  },
+  "workerErrors": {}
+}
