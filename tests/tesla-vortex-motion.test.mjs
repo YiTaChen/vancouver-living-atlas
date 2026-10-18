@@ -162,3 +162,40 @@ test('stunt requests bound momentum and reject nonfinite animation data without 
   assert.equal(sampleTeslaVortex(motion, 10).phase, 'done');
   assert.equal(sampleTeslaVortex(motion, 10).thrust, 0);
 });
+
+test('captured finite floor grade adds tangent momentum while preserving the relative-floor vault arc and roll timing', () => {
+  for (const grade of [-0.2, 0, 0.2]) {
+    const motion = createTeslaVortex(0.7, 40, false, grade);
+    let relativeHeight = 0;
+    const h = 1 / 120;
+    for (let i = 0; i < 168; i++) {
+      const time = (i + 0.5) * h;
+      const sample = sampleTeslaVortex(motion, time);
+      const forwardSpeed = Math.hypot(sample.velocity[0], sample.velocity[2]);
+      assert(
+        Math.abs(sample.velocity[1] - grade * forwardSpeed - (14 - 20 * time)) <
+          1e-12,
+      );
+      relativeHeight += (sample.velocity[1] - grade * forwardSpeed) * h;
+      assert.deepEqual(
+        sample.quaternion,
+        sampleTeslaVortex(createTeslaVortex(0.7, 40), time).quaternion,
+      );
+    }
+    assert(Math.abs(relativeHeight) < 1e-12);
+    assert.equal(sampleTeslaVortex(motion, 1.4).phase, 'done');
+  }
+  assert.equal(createTeslaVortex(0).gradeMPerM, 0);
+  for (const grade of [NaN, Infinity, -Infinity])
+    assert.throws(() => createTeslaVortex(0, 30, false, grade), RangeError);
+  for (const grade of [-100, 100])
+    assert.equal(
+      createTeslaVortex(0, 30, false, grade).gradeMPerM,
+      Math.sign(grade) * limits.maxGradeMPerM,
+    );
+  for (const grade of [NaN, Infinity, 0.431, -0.431])
+    assert.throws(
+      () => sampleTeslaVortex({ ...createTeslaVortex(0), gradeMPerM: grade }),
+      RangeError,
+    );
+});

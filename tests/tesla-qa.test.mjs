@@ -665,13 +665,26 @@ test('roof QA selects only a proved roof route, then credits public wall arrival
   });
 });
 
-test('Vortex QA uses the public command, observes a roll and upright completion, and never credits an actual blocked stunt', async () => {
-  for (const blocked of [false, true])
+test('Vortex QA proves the complete motion clock, rejects an aborted final step, and distinguishes a subsequent ground landing', async () => {
+  for (const variant of [
+    'clear',
+    'blocked',
+    'late-abort',
+    'landing',
+    'post-finish-obstacle',
+  ])
     await dom(async ({ frame }) => {
       const { e, t, events, held } = fixture(),
         panel = new Element(),
         lock = lease();
       let launchedAt = null;
+      const motion = {
+        elapsedS: 0,
+        heading: 0,
+        forwardSpeedMps: 30,
+        restoreFlightAssist: false,
+        gradeMPerM: 0,
+      };
       frame((now) => {
         if (
           !events.some(
@@ -681,28 +694,50 @@ test('Vortex QA uses the public command, observes a roll and upright completion,
           return;
         launchedAt ??= now;
         const elapsedS = (now - launchedAt) / 1000;
-        t.state.vortex =
-          elapsedS < 1.4
-            ? {
-                elapsedS,
-                heading: 0,
-                forwardSpeedMps: 30,
-                restoreFlightAssist: false,
-              }
-            : null;
+        const lateAbort = variant === 'late-abort' && elapsedS >= 1.35;
+        motion.elapsedS = Math.min(lateAbort ? 1.35 : 1.4, elapsedS);
+        t.state.vortex = elapsedS < 1.4 && !lateAbort ? motion : null;
         t.state.quaternion =
           elapsedS > 0.4 && elapsedS < 0.8 ? [0, 0, 1, 0] : [0, 0, 0, 1];
-        t.lastStep.collisions = blocked ? 1 : 0;
+        t.lastStep.collisions =
+          variant === 'blocked' ||
+          lateAbort ||
+          ((variant === 'landing' || variant === 'post-finish-obstacle') &&
+            elapsedS >= 1.4)
+            ? 1
+            : 0;
+        if (variant === 'landing' && elapsedS >= 1.4) {
+          t.state.mode = 'ground';
+          t.state.contact = { ...t.state.contact, kind: 'ground' };
+        }
+        if (variant === 'post-finish-obstacle' && elapsedS >= 1.4) {
+          t.state.mode = 'air';
+          t.state.contact = null;
+        }
       });
       installTeslaQA(e, panel, lock);
       await click(panel, 'Tesla QA: vortex jump');
       const report = runReport(panel);
-      if (blocked) assert.match(report.result, /actual collision geometry/);
-      else {
+      if (
+        variant === 'blocked' ||
+        variant === 'late-abort' ||
+        variant === 'post-finish-obstacle'
+      ) {
+        assert.match(report.result, /actual collision geometry/);
+        assert.equal(
+          report.vortexEvidence.completedDuration,
+          variant === 'post-finish-obstacle',
+        );
+      } else {
         assert.equal(report.result, 'completed');
         assert.equal(report.vortexEvidence.sawRoll, true);
-        assert.ok(report.vortexEvidence.maximumProgress > 0.9);
+        assert.equal(report.vortexEvidence.maximumProgress, 1);
         assert.equal(report.vortexEvidence.uprightAtEnd, true);
+        assert.equal(report.vortexEvidence.completedDuration, true);
+        assert.equal(
+          report.vortexEvidence.postCompletionGroundCollision,
+          variant === 'landing',
+        );
       }
       assert.equal(
         events.filter(
