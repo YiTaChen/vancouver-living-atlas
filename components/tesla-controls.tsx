@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   ArrowUp,
   ArrowDown,
+  Car,
   Camera,
   Gauge,
   Infinity as InfinityIcon,
@@ -133,11 +134,14 @@ export function TeslaControls({
     ? 'parked'
     : state.transitioning
       ? 'transition'
-      : state.mode === 'ground'
-        ? 'ground'
-        : state.mode === 'wall'
-          ? 'wall'
-          : 'air';
+      : state.mode === 'wall' && state.wallHolding
+        ? 'wallHolding'
+        : state.mode === 'ground'
+          ? 'ground'
+          : state.mode === 'wall'
+            ? 'wall'
+            : 'air';
+  const drivingMode = t(state.adhesion ? 'adhesion' : 'freeDrive');
   const quality = (
     <label className="tesla-quality">
       <span>{t('quality')}</span>
@@ -219,17 +223,23 @@ export function TeslaControls({
       <button
         type="button"
         data-tesla-action="grip"
+        data-tesla-driving-mode={state.adhesion ? 'wall-grip' : 'free-drive'}
+        aria-label={`${t('adhesion')} / ${t('freeDrive')}`}
+        aria-keyshortcuts="E"
         aria-pressed={state.adhesion}
+        title={`${t('drivingMode')}: ${drivingMode} · E`}
         onClick={() => controller.command('adhesionToggle')}
       >
-        <Magnet size={19} />
-        <span>{t('adhesion')}</span>
+        {state.adhesion ? <Magnet size={19} /> : <Car size={19} />}
+        <span>{drivingMode}</span>
         <kbd>E</kbd>
       </button>
       <button
         type="button"
         data-tesla-action="park"
         aria-pressed={state.parked}
+        aria-keyshortcuts="P"
+        title={`${t('park')} · P`}
         onClick={() => controller.command('park')}
       >
         <ParkingCircle size={19} />

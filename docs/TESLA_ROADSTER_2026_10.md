@@ -28,15 +28,21 @@ Unlimited sustained flight and wall parking throughout Vancouver are requested g
 | Descend | Q (Ctrl also accepted) | Hold downward thrust |
 | Boost | Shift | Hold boost |
 | Brake | B | Hold brake |
-| Arm / release wall grip | E | Grip toggle |
-| Park / release | P | Park toggle |
+| Wall Grip (default) / Free Drive | E | Wall Grip mode toggle |
+| Optional manual park / release | P | Manual park toggle |
 | Flight assist | F | Flight assist toggle |
 | Chase / cockpit | C | Camera button |
 | Look | Drag scene | Drag scene with another finger |
 | Chase distance / enter cockpit | Wheel / zoom | Pinch |
 | Recover to a verified road | R | Recovery in options |
 
-Grip starts armed. Approach a supported facade with it enabled; the vehicle checks a swept full-body transition rather than snapping its rear through the pavement. P can queue parking during that transition. Space or releasing grip detaches from a wall. Third-person camera retains world up; the cockpit uses the full body orientation. Collision checks keep the chase camera outside buildings.
+**Wall Grip** (壁面吸附) is the default mode. Drive into a supported facade to climb automatically; the vehicle checks a swept full-body transition rather than snapping its rear through the pavement. Release the throttle to decelerate, or hold B / the brake button to stop sooner. Once stopped on the wall, automatic hold keeps the car in place without pressing P. Fresh throttle or boost resumes wall driving. The hold revalidates support and body clearance; it does not preserve an attachment after its supporting geometry disappears.
+
+Brake takes priority over throttle and steering while held at zero wall speed. Release the brake and drive to leave automatic hold.
+
+**Free Drive** (自由行駛) disables automatic wall attachment. Press E or tap the mode toggle to switch. Switching it off while attached uses the collision-checked outward departure before levelling into flight. Space also detaches. P remains available for optional manual parking, including queueing it during an attachment, but is not required for wall stopping. Third-person camera retains world up; the cockpit uses the full body orientation. Collision checks keep the chase camera outside buildings.
+
+The selected wall mode survives safe-road recovery and leaving/re-entering Tesla during the same session. A newly created controller starts in Wall Grip. The HUD distinguishes **Auto hold** from optional **Manual park**; pressing the accelerator releases either without a separate unpark action.
 
 Desktop controls include a compact HUD and optional help. Touch controls support independent pointer capture so steering and thrust can be held together. Mobile options contain camera, recovery and car quality. Opening an obstructing panel suspends this player's physics and clears held inputs. Closing it requires a fresh key press; old OS repeat events cannot resume acceleration.
 
@@ -72,11 +78,13 @@ The existing city Auto controller receives actual Tesla speed and a ground/fligh
 
 ## Verification
 
-Local release validation: **1,270 / 1,270 tests passed**, TypeScript check passed, the architecture contract audit (`--skip-blender`) passed, and the normal Firebase production build plus QA-isolation gate passed. Strict lint on all new Tesla source, tests and tools passed. Repository-wide lint has 221 inherited diagnostics, exactly matching the parent baseline by file/rule/message; this integration adds zero. It is not the CI passing gate.
+Local release validation: **1,292 / 1,292 tests passed**, TypeScript check passed, the architecture contract audit (`--skip-blender`) passed, and the normal Firebase production build plus QA-isolation gate passed. Strict lint on all new Tesla source, tests and tools passed. Repository-wide lint has 219 inherited diagnostics, down from the parent's 221 after fixing two existing i18n test diagnostics; this integration adds zero diagnostics (compared by file/rule/message). It is not the CI passing gate.
 
 CPU regressions cover model bounds and driver visibility, simulation transitions, exact parked pose, curved/holed support, water/terrain, touch/keyboard source clearing, mode handoffs, delayed bus loading, camera orientation, Auto hysteresis and bounded LOD reuse.
 
 Local opt-in visual QA is installed only through `visual-qa.ts`; normal Firebase output rejects its marker strings and module payload. The helper drives public controller inputs after a verified actual-road spawn. It does not assign wall mode, contact or orientation to manufacture a successful climb. Captures include source fingerprint, actual state, camera frame, model/world stats and bounded trace.
+
+The current [automatic wall-mode acceptance record](qa/tesla-auto-wall-20261018/verification.json) has source fingerprint `d62054405755f52dfe83283a935ebd36e0c3c4f6aedfc850405b96d59af540c1`. At actual facade `building:2281:wall:0:7`, the public-input approach releases throttle and verifies 8.025 seconds of exact position/orientation with neither P nor braking. Native W then resumes driving, and B returns to automatic hold. [Chase](qa/tesla-auto-wall-20261018/auto-hold-chase.png) stays upright; [cockpit](qa/tesla-auto-wall-20261018/auto-hold-cockpit.png) follows the wall normal. At 320 × 568, native mode toggling safely detaches into Free Drive, and recovery plus Orbit → Tesla re-entry retain that choice. All eight controls remain inside the 320 × 568 and 844 × 390 viewports with 48 px height. Native desktop E toggles the mode again. No warning/error console entries were observed. These are functional checks, not GPU benchmarks. The earlier evidence below retains its original fingerprints and describes earlier source states.
 
 The [browser verification record](qa/tesla-roadster-20261017/browser-verification.json) links the final WebGL captures and travel frame records. The extended acceptance recordings have source fingerprint `591b0b2e3c7903e25c4c7af440379c593014bfd2934dde4be2a12cdbfda049b0`. Its `revision` field identifies the parent checkout; the separate fingerprint identifies the executed, then-uncommitted visual sources and data. It is not a claim that the parent commit contains this implementation.
 

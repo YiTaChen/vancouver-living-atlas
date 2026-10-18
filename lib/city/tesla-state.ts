@@ -144,6 +144,8 @@ export interface TeslaState extends TeslaPose {
   flightAssist: boolean;
   adhesionArmed: boolean;
   parked: boolean;
+  /** Automatic wall rest, released by driving/steering; distinct from P parking. */
+  wallHolding: boolean;
   timeS: number;
   impact: number;
   collisionSurfaceId: string | null;
@@ -317,6 +319,7 @@ export function createTesla(
     flightAssist: !proof,
     adhesionArmed: true,
     parked: false,
+    wallHolding: false,
     timeS: 0,
     impact: 0,
     collisionSurfaceId: null,
@@ -585,6 +588,7 @@ function leaveSurface(
   state.attachment = null;
   state.flightAssist = assisted;
   state.parked = false;
+  state.wallHolding = false;
   state.detachRemainingS = 0.4;
 }
 function setContact(
@@ -596,6 +600,7 @@ function setContact(
     report.transitions++;
   state.contact = contact;
   state.mode = contact.kind === 'wall' ? 'wall' : 'ground';
+  if (state.mode !== 'wall') state.wallHolding = false;
   state.flightAssist = false;
   state.attachment = null;
   state.departureContact = null;
@@ -947,6 +952,7 @@ function requestAttachment(
   state.mode = 'air';
   state.flightAssist = true;
   state.parked = false;
+  state.wallHolding = false;
   return true;
 }
 
@@ -1010,6 +1016,12 @@ function advanceAttachment(
   state.quaternion = next.quaternion;
   remember(state);
   if (input.brake) attachment.resumeSpeed = 0;
+  else if (
+    attachment.contact.kind === 'wall' &&
+    !input.throttle &&
+    !input.boost
+  )
+    attachment.resumeSpeed = toward(attachment.resumeSpeed, 0, 5 * h);
   if (fraction < 1 - EPS) return;
   attachment.index++;
   if (attachment.index < attachment.waypoints.length) return;
@@ -1185,6 +1197,7 @@ function integrate(
     radians: TESLA_LIMITS.attachmentRadiansPerS * h,
   };
   const fittedCurrent = fitGroundPose(state, world, shape, fitBudget, report);
+  state.wallHolding = false;
   if (state.contact) {
     const proof = querySupport(
       world,
@@ -1209,6 +1222,25 @@ function integrate(
       state.contact = proof;
       if (state.parked) {
         state.velocity = [0, 0, 0];
+        return;
+      }
+      if (
+        state.mode === 'wall' &&
+        state.adhesionArmed &&
+        state.velocity.every((value) => value === 0) &&
+        (input.brake || (!input.throttle && !input.steer && !input.boost)) &&
+        Math.abs(
+          teslaDot(teslaSubtract(state.position, proof.point), proof.normal) -
+            contactHeight(shape),
+        ) <= EPS &&
+        teslaDot(bodyUp(state), proof.normal) > 1 - 1e-10 &&
+        !querySweep(world, state, state, shape, proof.surfaceId, report)
+      ) {
+        // Revalidate the actual wall and the complete resting body every
+        // substep. No historical hold flag grants support after geometry or
+        // permissions change, and no surface correction can drift this pose.
+        state.velocity = [0, 0, 0];
+        state.wallHolding = true;
         return;
       }
     }
@@ -1521,6 +1553,7 @@ export function stepTesla(
   if (edge.jump && (state.mode !== 'air' || state.attachment))
     leaveSurface(state, true, 8, report, launchGroundOrigin);
   if (edge.park) {
+    state.wallHolding = false;
     if (state.attachment)
       state.attachment.parkOnArrival = !state.attachment.parkOnArrival;
     else if (state.contact) {

@@ -144,6 +144,8 @@ function fixture() {
         active: this.active,
         mode: this.state.mode,
         parked: this.state.parked,
+        wallHolding: this.state.wallHolding,
+        adhesion: this.state.adhesionArmed,
         quality: this.quality,
         effectiveQuality: this.effectiveQuality,
         view: this.view,
@@ -231,6 +233,119 @@ function fixture() {
   };
   return { e, t, events, held };
 }
+
+// This controller double exercises helper input sequencing and evidence. Actual
+// facade attachment/support physics has separate real-geometry regressions.
+function wallFixture(frame, behavior = 'hold') {
+  const setup = fixture(),
+    { e, t, events } = setup;
+  let placement,
+    axes = [0, 0],
+    wallEvent = -1,
+    releasedAt = null,
+    heldAt = null;
+  const surfaceId = 'building:0:wall:fixture';
+  e.data.flightBuildingVolumes = [
+    {
+      polygon: [
+        [
+          [0, 0],
+          [20, 0],
+          [20, 20],
+          [0, 20],
+        ],
+      ],
+      minY: 0,
+      maxY: 30,
+    },
+  ];
+  t.world.groundPoseNear = (position, _shape, heading) => ({
+    pose: {
+      position: [position[0], 0.682, position[2]],
+      quaternion: [0, Math.sin(heading / 2), 0, Math.cos(heading / 2)],
+    },
+    contact: {
+      surfaceId: 'ground:asphalt:fixture',
+      kind: 'ground',
+      point: [position[0], 0, position[2]],
+      normal: [0, 1, 0],
+      adherable: true,
+    },
+    identity: { surfaceId: 'ground', layer: 0, allowedModes: ['drive'] },
+  });
+  t.world.hasLaunchClearance = () => true;
+  t.world.sweep = ({ from, to }) => {
+    const dx = from.position[0] - to.position[0],
+      dz = from.position[2] - to.position[2],
+      length = Math.hypot(dx, dz);
+    return {
+      surfaceId,
+      kind: 'wall',
+      point: [...to.position],
+      normal: [dx / length, 0, dz / length],
+      adherable: true,
+      fraction: 0.8,
+    };
+  };
+  e.navigation.startAt = (_mode, point) => {
+    placement = point;
+    events.push(['nav-start', point]);
+    return true;
+  };
+  t.enter = () => {
+    t.active = true;
+    t.state = createTesla([placement.x, 0.682, placement.z], placement.yaw, {
+      surfaceId: 'ground:asphalt:fixture',
+      kind: 'ground',
+      point: [placement.x, 0, placement.z],
+      normal: [0, 1, 0],
+      adherable: true,
+    });
+    events.push(['enter']);
+    return true;
+  };
+  const setAxes = t.setAxes.bind(t),
+    command = t.command.bind(t);
+  t.setAxes = (x, y) => {
+    axes = [x, y];
+    setAxes(x, y);
+  };
+  t.command = (value) => {
+    command(value);
+    if (value === 'park') t.state.parked = true;
+  };
+  frame((now) => {
+    if (axes[1] > 0 && wallEvent < 0) {
+      t.state.mode = 'wall';
+      t.state.contact = {
+        surfaceId,
+        kind: 'wall',
+        point: [0, 2, 0],
+        normal: [0, 0, -1],
+        adherable: true,
+      };
+      t.state.velocity = [0, 1, 0];
+      events.push(['physical-wall-arrival']);
+      wallEvent = events.length - 1;
+    } else if (wallEvent >= 0 && axes[1] === 0) {
+      releasedAt ??= now;
+      if (behavior === 'manual-park') t.state.parked = true;
+      if (behavior !== 'never-hold' && now - releasedAt >= 200) {
+        t.state.velocity = [0, 0, 0];
+        t.state.wallHolding = true;
+        heldAt ??= now;
+        if (behavior === 'drift' && now - heldAt > 1000)
+          t.state.position[0] += 0.001;
+      }
+    }
+  });
+  return { ...setup, wallEvent: () => wallEvent };
+}
+
+const runReport = (panel) =>
+  JSON.parse(
+    panel.children.find((element) => element.tagName === 'TEXTAREA').value,
+  );
 
 test('Tesla QA requires both explicit instrumentation and a loopback origin', async () => {
   await dom(async ({ replace }) => {
@@ -390,6 +505,86 @@ test('a missing actual wall approach fails closed without mutating the real pose
     assert.match(
       panel.children[0].textContent,
       /No clear asphalt-to-building approach/,
+    );
+  });
+});
+
+test('automatic facade QA releases throttle without P or brake and verifies eight seconds of exact wall hold', async () => {
+  await dom(async ({ frame }) => {
+    const { e, t, events, held, wallEvent } = wallFixture(frame),
+      panel = new Element(),
+      lock = lease();
+    installTeslaQA(e, panel, lock);
+    await click(panel, 'Tesla QA: approach real wall + auto hold');
+    const report = runReport(panel);
+    assert.equal(report.result, 'completed');
+    assert.equal(report.kind, 'real-building-wall-auto-hold');
+    assert.ok(report.verifiedHoldMs >= 8000);
+    assert.deepEqual(report.inputs, {
+      throttleReleased: true,
+      brakeRequestedOnWall: false,
+      parkCommandRequested: false,
+    });
+    assert.equal(
+      events.some((event) => event[0] === 'command' && event[1] === 'park'),
+      false,
+    );
+    assert.equal(
+      events.some(
+        (event) => event[0] === 'button' && event[1] === 'brake' && event[2],
+      ),
+      false,
+    );
+    assert.ok(wallEvent() >= 0);
+    assert.equal(t.state.wallHolding, true);
+    assert.equal(t.state.parked, false);
+    assert.equal(report.trace.at(-1).wallHolding, true);
+    assert.equal(report.trace.at(-1).adhesionArmed, true);
+    assert.equal(held.size, 0);
+    assert.equal(lock.ends, 1);
+  });
+});
+
+test('automatic hold QA cannot credit manual parking, missing hold, or pose drift and always clears controls', async () => {
+  for (const [behavior, error] of [
+    ['manual-park', /Manual parking cannot qualify/],
+    ['never-hold', /did not settle/],
+    ['drift', /lost its exact stationary pose/],
+  ]) {
+    await dom(async ({ frame }) => {
+      const { e, events, held } = wallFixture(frame, behavior),
+        panel = new Element(),
+        lock = lease();
+      installTeslaQA(e, panel, lock);
+      await click(panel, 'Tesla QA: approach real wall + auto hold');
+      assert.match(runReport(panel).result, error);
+      assert.equal(
+        events.some((event) => event[0] === 'command' && event[1] === 'park'),
+        false,
+      );
+      assert.equal(held.size, 0);
+      assert.equal(lock.ends, 1);
+      assert.equal(lock.active, false);
+    });
+  }
+});
+
+test('historical facade QA keeps its explicit manual park workflow and does not claim automatic hold evidence', async () => {
+  await dom(async ({ frame }) => {
+    const { e, events } = wallFixture(frame),
+      panel = new Element();
+    installTeslaQA(e, panel, lease());
+    await click(panel, 'Tesla QA: approach real wall + park');
+    const report = runReport(panel);
+    assert.equal(report.result, 'completed');
+    assert.equal(report.kind, 'real-building-wall-approach');
+    assert.equal(report.inputs.parkCommandRequested, true);
+    assert.equal(report.inputs.brakeRequestedOnWall, true);
+    assert.equal(report.verifiedHoldMs, undefined);
+    assert.equal(
+      events.filter((event) => event[0] === 'command' && event[1] === 'park')
+        .length,
+      1,
     );
   });
 });

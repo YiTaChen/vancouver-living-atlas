@@ -74,6 +74,8 @@ export class TeslaController {
   onChange: (snapshot: TeslaSnapshot) => void = () => {};
   private readonly policy = new TeslaQualityPolicy();
   private inputEnabled = true;
+  /** Wall Grip is a session choice, preserved when the vehicle is recreated. */
+  private adhesionPreference = true;
   private readonly keys = new Set<string>();
   private readonly keyCodes = new Set<string>();
   private readonly buttons = new Set<TeslaButton>();
@@ -142,7 +144,8 @@ export class TeslaController {
           )
         : 0,
       parked: !!s?.parked,
-      adhesion: s?.adhesionArmed ?? true,
+      wallHolding: !!s?.wallHolding,
+      adhesion: s?.adhesionArmed ?? this.adhesionPreference,
       flightAssist: s?.flightAssist ?? true,
       view: this.view,
       quality: this.quality,
@@ -292,7 +295,10 @@ export class TeslaController {
     this.e.flight?.clear();
     this.e.travelReturn?.invalidate(true);
     nav?.setMode('orbit');
+    this.adhesionPreference =
+      this.state?.adhesionArmed ?? this.adhesionPreference;
     this.state = createTesla(spawn.pose.position, heading, spawn.contact);
+    this.state.adhesionArmed = this.adhesionPreference;
     this.state.quaternion = [...spawn.pose.quaternion];
     this.entryState = cloneState(this.state);
     this.clearInput();
@@ -384,7 +390,9 @@ export class TeslaController {
       this.notify();
       return;
     }
+    this.adhesionPreference = s.adhesionArmed;
     this.state = createTesla(spawn.pose.position, heading, spawn.contact);
+    this.state.adhesionArmed = this.adhesionPreference;
     this.state.quaternion = [...spawn.pose.quaternion];
     this.clearInput();
     this.snapCamera = true;
@@ -527,6 +535,7 @@ export class TeslaController {
     );
     if (dt > 0) this.pulses.clear();
     const s = this.state;
+    this.adhesionPreference = s.adhesionArmed;
     if (s.position[1] > 1800) {
       s.position = [s.position[0], 1800, s.position[2]];
       s.velocity = [s.velocity[0], Math.min(0, s.velocity[1]), s.velocity[2]];
