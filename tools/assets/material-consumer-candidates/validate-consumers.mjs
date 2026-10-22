@@ -9,6 +9,7 @@ import { makeRoadsterCandidate, makeInteriorsCandidate, bindCandidateMaps } from
 import { metricError } from './adapters/metre-uv.mjs';
 import { SURFACES, configureSharedMaps } from './adapters/shared-surfaces.mjs';
 import { assertProtectedSources } from './adapters/seating-source-compatibility.mjs';
+import { assertConsumerFixtureEqual } from './adapters/fixture-equality.mjs';
 const sha = v => createHash('sha256').update(v).digest('hex');
 const recordFixtures = process.argv.includes('--record-fixtures');
 const writeEvidence = recordFixtures || process.argv.includes('--write-evidence');
@@ -167,9 +168,10 @@ if(recordFixtures)write('qa/current-source-fixtures.json',fixtures);
 else {
  // Source bytes are checked separately above. Only the exact reviewed additive
  // seating diff can project to the unchanged baseline hash; all actual geometry,
- // anchors and current clearGround outputs below remain strict deep equality.
+ // anchors and current clearGround outputs below retain strict structure and
+ // hashes, with only finite numeric leaves allowing 1e-12 absolute V8 noise.
  const geometryFixture={...fixtures,sourceHashes:baselineFixtures.sourceHashes};
- assert.deepEqual(JSON.parse(JSON.stringify(geometryFixture)),baselineFixtures,'Source/geometry regression fixture drift. Review before re-recording.');
+ assertConsumerFixtureEqual(JSON.parse(JSON.stringify(geometryFixture)),baselineFixtures);
 }
 pass('Current-source regression fixtures checked',{recorded:recordFixtures,sourceAudit});
 const textures=JSON.parse(readFileSync(resolve(ROOT,'tools/assets/role-materials/exports/manifest.json'),'utf8')).roles.map(r=>({...r,maps:Object.fromEntries(Object.entries(r.maps).map(([channel,path])=>{const actual=resolve(ROOT,'tools/assets/role-materials/exports',path);return [channel,{path:'../role-materials/exports/'+path,sha256:sha(readFileSync(actual)),bytes:readFileSync(actual).length,colorSpace:channel==='basecolor'?'sRGB':'Non-Color',channel:channel==='orm'?'R=1,G=roughness,B=metallic':channel==='normal'?'OpenGL +Y tangent-space':'RGB'}];}))}));
