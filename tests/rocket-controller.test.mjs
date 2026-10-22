@@ -35,7 +35,9 @@ code = code.replace(
 const { RocketController } = await import(
   'data:text/javascript;base64,' + Buffer.from(code).toString('base64')
 );
-const { createRocket, crashRocket } = await import(cityModule('rocket-state'));
+const { createRocket, crashRocket, ROCKET_CONFIGS } = await import(
+  cityModule('rocket-state')
+);
 
 class TrackedTarget extends EventTarget {
   callbacks = new Map();
@@ -327,23 +329,36 @@ test('failed resource loads hold construction below Ready and retry unlocks a no
   t.after(() => {
     console.error = originalError;
   });
-  globalThis.__rocketEffectsLoad = async () => {
-    throw new Error('simulated offline chunk');
-  };
-  c.start('small', 0, 0, 0, { kind: 'ground' });
-  await tick();
-  for (let i = 0; i < 600; i++) c.update(1 / 60);
-  assert.equal(c.snapshot.phase, 'building');
-  assert(c.snapshot.buildProgress >= 0.98 && c.snapshot.buildProgress < 1);
-  assert.equal(c.snapshot.loadError, true);
-  c.launch();
-  assert.equal(c.snapshot.phase, 'building');
-  globalThis.__rocketEffectsLoad = async () => effectsModule;
-  await c.retryLoad();
-  for (let i = 0; i < 60; i++) c.update(1 / 60);
-  assert.equal(c.snapshot.phase, 'ready');
-  c.launch();
-  assert.equal(c.snapshot.phase, 'countdown');
+  for (const kind of ['small', 'large']) {
+    const config = ROCKET_CONFIGS[kind];
+    assert.equal(config.buildDuration, kind === 'small' ? 6 : 10);
+    assert.equal(config.countdownDuration, 5);
+    globalThis.__rocketEffectsLoad = async () => {
+      throw new Error('simulated offline chunk');
+    };
+    c.start(kind, 0, 0, 0, { kind: 'ground' });
+    await tick();
+    advance(c, config.buildDuration / 2);
+    assert.equal(c.snapshot.phase, 'building');
+    assert(c.snapshot.buildProgress > 0.49 && c.snapshot.buildProgress < 0.51);
+    advance(c, config.buildDuration);
+    assert.equal(c.snapshot.phase, 'building');
+    assert(c.snapshot.buildProgress >= 0.98 && c.snapshot.buildProgress < 1);
+    assert.equal(c.snapshot.loadError, true);
+    c.launch();
+    assert.equal(c.snapshot.phase, 'building');
+    globalThis.__rocketEffectsLoad = async () => effectsModule;
+    await c.retryLoad();
+    advance(c, config.buildDuration * 0.03 + 0.05);
+    assert.equal(c.snapshot.phase, 'ready');
+    c.launch();
+    assert.equal(c.snapshot.phase, 'countdown');
+    assert.equal(c.snapshot.countdown, 5);
+    advance(c, config.countdownDuration - 0.1);
+    assert.equal(c.snapshot.phase, 'countdown');
+    advance(c, 0.2);
+    assert.equal(c.snapshot.phase, 'ignition');
+  }
 });
 test('a multi-touch placement gesture and an out-and-back drag never place a rocket', (t) => {
   const { controller: c } = setup(t);

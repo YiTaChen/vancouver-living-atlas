@@ -1,6 +1,7 @@
 import { chromium } from 'playwright';
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
+import { ROCKET_CONFIGS } from '../lib/city/rocket-state.ts';
 
 const temp = '/private/tmp/rocket-accident-qa-' + Date.now() + '/';
 await fs.mkdir(temp, { recursive: true });
@@ -127,7 +128,11 @@ async function start(kind, point, support) {
     { timeout: 90000 },
   );
   assert(await page.evaluate(() => window.__atlas.rocket.loaded));
-  await advance(6, 'ready');
+  await advance(ROCKET_CONFIGS[kind].buildDuration + 0.2, 'ready');
+  assert.equal(
+    await page.evaluate(() => window.__atlas.rocket.state.phase),
+    'ready',
+  );
 }
 try {
   await page.goto('http://127.0.0.1:5173/?inspect&graphics=compatible', {

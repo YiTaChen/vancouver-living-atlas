@@ -37,23 +37,42 @@ function untilDone(state, input = {}, limit = 200) {
   return s;
 }
 test('construction, countdown and ignition are timed; a launch cannot skip construction', () => {
-  let s = createRocket('large', 0, 0, 0);
-  assert.equal(launchRocket(s).phase, 'building');
-  s = run(s, ROCKET_CONFIGS.large.buildDuration / 2);
-  assert(s.buildProgress > 0.49 && s.buildProgress < 0.51);
-  s = run(s, ROCKET_CONFIGS.large.buildDuration / 2 + 0.1);
-  assert.equal(s.phase, 'ready');
-  s = launchRocket(s);
-  assert.equal(s.phase, 'countdown');
-  s = run(s, ROCKET_CONFIGS.large.countdownDuration - 1);
-  assert.equal(s.phase, 'countdown');
-  assert(s.countdown > 0.9 && s.countdown < 1.1);
-  s = run(s, 1 + ROCKET_CONFIGS.large.ignitionDuration * 0.42);
-  assert.equal(s.phase, 'ignition');
-  assert(s.throttle > 0.35 && s.throttle < 0.5);
-  assert.equal(s.position.y, 0);
-  assert(sampleRocketEffects(s).groundExposure > 0.35);
-  assert.equal(s.events.filter((event) => event.type === 'ignition').length, 1);
+  assert.deepEqual(
+    Object.fromEntries(
+      ['small', 'large'].map((kind) => [
+        kind,
+        {
+          build: ROCKET_CONFIGS[kind].buildDuration,
+          countdown: ROCKET_CONFIGS[kind].countdownDuration,
+        },
+      ]),
+    ),
+    { small: { build: 6, countdown: 5 }, large: { build: 10, countdown: 5 } },
+  );
+  for (const kind of ['small', 'large']) {
+    const config = ROCKET_CONFIGS[kind];
+    let s = createRocket(kind, 0, 0, 0);
+    assert.equal(launchRocket(s).phase, 'building');
+    s = run(s, config.buildDuration / 2);
+    assert(s.buildProgress > 0.49 && s.buildProgress < 0.51);
+    s = run(s, config.buildDuration / 2 + 0.1);
+    assert.equal(s.phase, 'ready');
+    s = launchRocket(s);
+    assert.equal(s.phase, 'countdown');
+    assert.equal(s.countdown, 5);
+    s = run(s, config.countdownDuration - 1);
+    assert.equal(s.phase, 'countdown');
+    assert(s.countdown > 0.9 && s.countdown < 1.1);
+    s = run(s, 1 + config.ignitionDuration * 0.42);
+    assert.equal(s.phase, 'ignition');
+    assert(s.throttle > 0.35 && s.throttle < 0.5);
+    assert.equal(s.position.y, 0);
+    assert(sampleRocketEffects(s).groundExposure > 0.35);
+    assert.equal(
+      s.events.filter((event) => event.type === 'ignition').length,
+      1,
+    );
+  }
 });
 test('both vehicle sizes reach 100km by continuous staged ascent in about 65 seconds', () => {
   for (const kind of ['small', 'large']) {
@@ -149,9 +168,15 @@ test('small rockets turn more readily; sustained manual steering can invert and 
   assert(crash.events.some((event) => event.type === 'impact'));
 });
 test('manual steering mistakes are recoverable by switching to the physical autopilot', () => {
-  let s = run(launchRocket(prepared('small'), 'manual'), 10, {
-    stabilize: true,
-  });
+  let s = run(
+    launchRocket(prepared('small'), 'manual'),
+    ROCKET_CONFIGS.small.countdownDuration +
+      ROCKET_CONFIGS.small.ignitionDuration +
+      6.5,
+    {
+      stabilize: true,
+    },
+  );
   s = run(s, 0.5, { pitch: 0.65, stabilize: true });
   assert(s.attitude.pitch > 0.03);
   const next = stepRocket(s, { auto: true }, dt);
@@ -163,7 +188,12 @@ test('manual steering mistakes are recoverable by switching to the physical auto
   assert.equal(result.phase, 'space');
 });
 test('aborting cuts thrust and leaves a ballistic fall to an impact', () => {
-  let s = run(launchRocket(prepared('large')), 8);
+  let s = run(
+    launchRocket(prepared('large')),
+    ROCKET_CONFIGS.large.countdownDuration +
+      ROCKET_CONFIGS.large.ignitionDuration +
+      4,
+  );
   assert(s.altitude > 100);
   const fuel = s.fuel;
   s = stepRocket(s, { abort: true }, dt);
@@ -585,9 +615,18 @@ test('low-energy or dry collisions rupture without a fuel explosion; fueled hard
   );
 });
 
+function fireExposedLaunch(seed = 1) {
+  // Isolate external forest heating from the preparation clock: the caller
+  // begins its fire exposure at ignition rather than during the countdown.
+  return run(
+    launchRocket(prepared('small', { kind: 'platform', seed })),
+    ROCKET_CONFIGS.small.countdownDuration + dt * 2,
+  );
+}
 function burningLaunch(seed = 1) {
-  let s = launchRocket(prepared('small', { kind: 'platform', seed }));
-  while (s.fireIntensity === 0 && s.elapsed < 20)
+  let s = fireExposedLaunch(seed);
+  const limit = s.elapsed + 10;
+  while (s.fireIntensity === 0 && s.elapsed < limit)
     s = stepRocket(s, { fireExposure: 1 }, dt);
   return s;
 }
@@ -645,11 +684,7 @@ test('escaping a forest fire or shutting the engine down cools the same burning 
 });
 
 test('severely heated tanks can burst after leaving the fire while emergency shutdown arrests the internal fire', () => {
-  const hot = run(
-    launchRocket(prepared('small', { kind: 'platform', seed: 1 })),
-    5,
-    { fireExposure: 1 },
-  );
+  const hot = run(fireExposedLaunch(1), 5, { fireExposure: 1 });
   assert.equal(hot.phase, 'flight');
   assert(hot.heat > 0.95 && hot.fireIntensity > 0.8);
   assert(hot.fireElapsed > 2 && hot.wreckage === null);
@@ -667,8 +702,7 @@ test('severely heated tanks can burst after leaving the fire while emergency shu
 });
 
 test('forest fire susceptibility is seeded, deterministic and does not make every launch explode', () => {
-  const start = (seed) =>
-    launchRocket(prepared('small', { kind: 'platform', seed }));
+  const start = fireExposedLaunch;
   const vulnerable = start(1),
     resistant = start(0);
   const fire = { fireExposure: 1 };

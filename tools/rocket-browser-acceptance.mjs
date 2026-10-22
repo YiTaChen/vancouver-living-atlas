@@ -1,5 +1,6 @@
 import { chromium } from 'playwright';
 import fs from 'node:fs/promises';
+import { ROCKET_CONFIGS } from '../lib/city/rocket-state.ts';
 
 const evidence = new URL(
   '../docs/rocket-launch-game/evidence/',
@@ -102,7 +103,12 @@ async function advance(seconds, until) {
   );
 }
 async function launch() {
-  await advance(12, ['ready', 'sinking', 'crashed']);
+  const kind = await page.evaluate(() => window.__atlas.rocket.state.kind);
+  await advance(ROCKET_CONFIGS[kind].buildDuration + 0.2, [
+    'ready',
+    'sinking',
+    'crashed',
+  ]);
   await page.evaluate(() => window.__atlas.rocket.launch());
 }
 try {
@@ -393,7 +399,11 @@ try {
   });
   await page.getByRole('button', { name: 'Manual', exact: true }).click();
   await launch();
-  await advance(10);
+  await advance(
+    ROCKET_CONFIGS.small.countdownDuration +
+      ROCKET_CONFIGS.small.ignitionDuration +
+      6.5,
+  );
   const beforeManual = await snapshot();
   await page.keyboard.down('w');
   await page.keyboard.down('d');
