@@ -1,0 +1,258 @@
+{
+  "schemaVersion": 1,
+  "status": "pass",
+  "scope": "Actual GLB binary metrics, unit normals, nondegenerate triangles, role/COLOR_0 contract, exact canonical door samples and openings, wheels/anchors, ramp dimensions and farebox separation. Runtime ground/contact and animated interior sweep have a separate controller audit.",
+  "lods": [
+    {
+      "triangles": 8864,
+      "vertices": 12303,
+      "primitives": 21,
+      "bytes": 486460,
+      "boundsM": {
+        "min": [
+          -1.5199999809265137,
+          0.0,
+          -6.375
+        ],
+        "max": [
+          1.5199999809265137,
+          3.0820000171661377,
+          6.296000003814697
+        ],
+        "size": [
+          3.0399999618530273,
+          3.0820000171661377,
+          12.671000003814697
+        ]
+      },
+      "level": 0,
+      "sharedSurfaces": 4,
+      "paintColors": 14,
+      "unitNormals": true,
+      "degenerateTriangles": 0,
+      "publicBytesIdentical": true,
+      "doorSweptEnvelopeSamples": 84,
+      "doorClips": 4,
+      "doorKeySamplesUnchanged": true,
+      "openDoorRays": 70,
+      "rampLocalBoundsM": {
+        "min": [
+          0.0,
+          -0.017999999225139618,
+          -0.5799999833106995
+        ],
+        "max": [
+          1.1200000047683716,
+          0.0,
+          0.2800000011920929
+        ]
+      },
+      "rampTopNormal": "+Y",
+      "rampAngleToRoadRad": 3.397778630343628,
+      "rampDeployedTipY": -1.1102230246251565e-16,
+      "boardingCenterZ": 4.45,
+      "capsuleRadiusM": 0.3,
+      "capsuleSideMarginM": 0.13
+    },
+    {
+      "triangles": 4920,
+      "vertices": 6947,
+      "primitives": 21,
+      "bytes": 285112,
+      "boundsM": {
+        "min": [
+          -1.5199999809265137,
+          0.0,
+          -6.375
+        ],
+        "max": [
+          1.5199999809265137,
+          3.069999933242798,
+          6.259999752044678
+        ],
+        "size": [
+          3.0399999618530273,
+          3.069999933242798,
+          12.634999752044678
+        ]
+      },
+      "level": 1,
+      "sharedSurfaces": 4,
+      "paintColors": 12,
+      "unitNormals": true,
+      "degenerateTriangles": 0,
+      "publicBytesIdentical": true,
+      "doorSweptEnvelopeSamples": 84,
+      "doorClips": 4,
+      "doorKeySamplesUnchanged": true,
+      "openDoorRays": 70,
+      "rampLocalBoundsM": {
+        "min": [
+          0.0,
+          -0.017999999225139618,
+          -0.5799999833106995
+        ],
+        "max": [
+          1.1200000047683716,
+          0.0,
+          0.2800000011920929
+        ]
+      },
+      "rampTopNormal": "+Y",
+      "rampAngleToRoadRad": 3.397778630343628,
+      "rampDeployedTipY": -1.1102230246251565e-16,
+      "boardingCenterZ": 4.45,
+      "capsuleRadiusM": 0.3,
+      "capsuleSideMarginM": 0.13
+    },
+    {
+      "triangles": 302,
+      "vertices": 570,
+      "primitives": 8,
+      "bytes": 30704,
+      "boundsM": {
+        "min": [
+          -1.5199999809265137,
+          0.0,
+          -6.300000190734863
+        ],
+        "max": [
+          1.5199999809265137,
+          3.069999933242798,
+          6.11899995803833
+        ],
+        "size": [
+          3.0399999618530273,
+          3.069999933242798,
+          12.419000148773193
+        ]
+      },
+      "level": 2,
+      "sharedSurfaces": 4,
+      "paintColors": 3,
+      "unitNormals": true,
+      "degenerateTriangles": 0,
+      "publicBytesIdentical": true,
+      "boardingCapability": false
+    }
+  ],
+  "rampClearance": {
+    "sweepPreservesZBoundsM": [
+      4.02,
+      4.88
+    ],
+    "retainedInteriorActualBoundsM": {
+      "fare-reader-screen": {
+        "min": [
+          -0.38499999046325684,
+          1.2549999952316284,
+          4.9019999504089355
+        ],
+        "max": [
+          -0.19499999284744263,
+          1.3849999904632568,
+          4.914000034332275
+        ]
+      },
+      "fare-pedestal": {
+        "min": [
+          -0.4050000011920929,
+          0.36000001430511475,
+          4.920000076293945
+        ],
+        "max": [
+          -0.17499999701976776,
+          1.2000000476837158,
+          5.159999847412109
+        ]
+      },
+      "front-ramp-cassette": {
+        "min": [
+          -1.0800000429153442,
+          0.36000001430511475,
+          4.125
+        ],
+        "max": [
+          -0.46000000834465027,
+          0.36800000071525574,
+          5.074999809265137
+        ]
+      },
+      "fare-reader": {
+        "min": [
+          -0.4300000071525574,
+          1.1649999618530273,
+          4.920000076293945
+        ],
+        "max": [
+          -0.15000000596046448,
+          1.4149999618530273,
+          5.119999885559082
+        ]
+      },
+      "front-ramp-edge": {
+        "min": [
+          -1.0700000524520874,
+          0.3675000071525574,
+          4.125999927520752
+        ],
+        "max": [
+          -0.4699999988079071,
+          0.37049999833106995,
+          4.144000053405762
+        ]
+      },
+      "front-ramp-edge.001": {
+        "min": [
+          -1.0700000524520874,
+          0.3675000071525574,
+          5.055999755859375
+        ],
+        "max": [
+          -0.4699999988079071,
+          0.37049999833106995,
+          5.073999881744385
+        ]
+      }
+    },
+    "fareboxLongitudinalSeparationM": {
+      "fare-reader-screen": 0.021999950408935653,
+      "fare-pedestal": 0.04000007629394542,
+      "fare-reader": 0.04000007629394542
+    },
+    "pedestalMinimumM": 0.04000007629394542,
+    "allFareComponentsMinimumM": 0.021999950408935653,
+    "note": "40 mm to pedestal/reader body; screen projects 18 mm closer, leaving 22 mm. Fixed near-floor cassette/edge finish at Y=.36..3705 is stow contact, not an above-floor obstacle. Runtime audit must classify only this thin finish geometrically."
+  },
+  "filmReference": {
+    "source": "reference/film-bus-upright-reference.blend",
+    "sourceBytes": 341842,
+    "sourceSha256": "188d4ced34303a7c3548ec155951f398dae41b4b2e85a5de983714594854b626",
+    "evaluatedTriangles": 176242,
+    "evaluatedVertices": 99112,
+    "evaluatedMeshObjects": 416,
+    "descendants": 422,
+    "passengerSeats": 34,
+    "stuntThrusters": 0,
+    "externalFontsPacked": false,
+    "referenceOnly": true,
+    "note": "Isolated neutral film geometry; not part of the runtime hybrid payload."
+  },
+  "originalFilmModel": {
+    "sourceOrigin": "film workspace production/bus_model_v2.py",
+    "sourceSha256": "495d4f2a67a459375b1ebeceb5992948d24e5b120ef2c6cd2b3715e9e19c9601",
+    "evaluatedTriangles": 197610,
+    "evaluatedVertices": 113592,
+    "evaluatedMeshObjects": 432,
+    "descendants": 438,
+    "includesThrusterHardware": true,
+    "notRuntimePayload": true
+  },
+  "retainedAtlasInterior": {
+    "passengerSeats": 24,
+    "triangles": 278528,
+    "unchanged": true,
+    "glbSha256": "ac680d0a5f6f9543f21b8310bd33ff578f8ac255a447963d7b0903fb724a594e",
+    "comparison": "Atlas retained interior has substantially richer driver area, seating, handrails and walkable boarding contract; film reference has 34 simpler seats and is reference only."
+  }
+}

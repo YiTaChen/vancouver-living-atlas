@@ -136,13 +136,15 @@ export function createRoadSurfaces(e: CityEngine) {
       }
     }
   }
-  addStreetMeshes(
+  for (const mesh of addStreetMeshes(
     e,
     positions,
     material('sidewalk-concrete'),
     'Road-facing curb edges',
     uv,
-  );
+  ))
+    // Real curb risers obstruct the ramp without becoming walking floors.
+    mesh.userData.groundObstruction = true;
   e.data.pavementStats = {
     ...pavement.stats,
     curbSegments: pavement.curbs.length,

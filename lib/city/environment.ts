@@ -508,6 +508,7 @@ export function createStreetDetails(e: CityEngine): Traffic {
   const vehicleAssets = new TrafficVehicleAssets(routes, e.trafficGroup);
   const busAssets = new CityBusAssets(busRoutes, e.trafficGroup, {
     interiorVersion: 'v2',
+    exteriorVersion: 'hybrid',
   });
   const streetRoads: NightStreetRoad[] = [];
   for (const edge of e.data.roadGraph.edges) {

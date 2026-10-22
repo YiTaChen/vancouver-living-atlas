@@ -254,7 +254,7 @@ test('Firebase verifier invokes mandatory pedestrian isolation on supplied outpu
       await readFile('public/models/blender/adopted-manifest.json', 'utf8'),
     );
     const dependencyFiles = blenderManifest.files.filter((item) =>
-      /^(bus|bus-v2|metro|bus-closeup|street-furniture)\//.test(item.path),
+      /^(bus|bus-v2|bus-hybrid|metro|bus-closeup|street-furniture)\//.test(item.path),
     );
     for (const item of dependencyFiles)
       await f.put(

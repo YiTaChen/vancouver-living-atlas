@@ -6,6 +6,7 @@ import { pathToFileURL } from 'node:url';
 import { verifyLandmarkWorker } from './verify-landmark-worker.mjs';
 import { verifyCityLifeIsolation } from './verify-city-life-isolation.mjs';
 import { verifyBusAdoption } from './verify-bus-adoption.mjs';
+import { verifyBusHybridAdoption } from './verify-bus-hybrid-adoption.mjs';
 import { verifyStage2TransitAdoption } from './verify-stage2-transit-adoption.mjs';
 import { verifyStreetFurnitureAdoption } from './verify-street-furniture-adoption.mjs';
 
@@ -40,7 +41,7 @@ export async function verifyBlenderDeliveryIsolation(
     for (const item of manifest.files) {
       assert(
         typeof item.path === 'string' &&
-          /^(?:mature-trees|rooftop-equipment|traffic-cars|bus|bus-v2|metro|bus-closeup|street-furniture)\/(?:textures\/)?[a-z0-9][a-z0-9_.-]*\.(?:glb|png|json)$/.test(
+          /^(?:mature-trees|rooftop-equipment|traffic-cars|bus|bus-v2|bus-hybrid|metro|bus-closeup|street-furniture)\/(?:textures\/)?[a-z0-9][a-z0-9_.-]*\.(?:glb|png|json)$/.test(
             item.path,
           ),
         'Invalid adopted Blender payload path',
@@ -76,6 +77,7 @@ export async function verifyBlenderDeliveryIsolation(
     'rooftop-equipment',
     'traffic-car-templates',
     'boardable-bus',
+    'boardable-bus-hybrid',
     'boardable-metro',
     'transit-station-spaces',
     'landmark-entrance-details',
@@ -264,6 +266,10 @@ export async function verifyFirebaseBuild(
   );
   const cityLife = await verifyCityLifeIsolation(root, options.cityLifeSource);
   const busAdoption = await verifyBusAdoption(root, options.busSource);
+  const busHybrid = await verifyBusHybridAdoption(
+    root,
+    options.busHybridSource,
+  );
   const stage2Transit = await verifyStage2TransitAdoption(root);
   const streetFurniture = await verifyStreetFurnitureAdoption(
     root,
@@ -274,6 +280,7 @@ export async function verifyFirebaseBuild(
     blenderDelivery,
     cityLife,
     busAdoption,
+    busHybrid,
     stage2Transit,
     streetFurniture,
   };
@@ -290,6 +297,7 @@ if (
   console.log('Blender delivery isolation verified:', result.blenderDelivery);
   console.log('City-life runtime adoption verified:', result.cityLife);
   console.log('Bus runtime adoption verified:', result.busAdoption);
+  console.log('Hybrid bus runtime adoption verified:', result.busHybrid);
   console.log(
     'Stage 2 transit runtime adoption verified:',
     result.stage2Transit,

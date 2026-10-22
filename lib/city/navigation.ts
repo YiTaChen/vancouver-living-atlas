@@ -1070,6 +1070,14 @@ export class StreetNavigation {
     if (!this.groundSurface) {
       this.groundSurface = new GroundSurfaceIndex(
         walkableGroundMeshes(this.e.scene),
+        // Only explicit, static curb chunks from the source road group. Keep
+        // them out of placement raycasts and navigation height sampling.
+        (this.e.roads?.children ?? []).filter(
+          (object): object is THREE.Mesh =>
+            object instanceof THREE.Mesh &&
+            object.userData.groundObstruction === true &&
+            !object.userData.protectedSurface,
+        ),
       );
     }
     return (
