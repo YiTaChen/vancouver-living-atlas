@@ -5,6 +5,11 @@ import ts from 'typescript';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { cityModule } from './helpers/city-modules.mjs';
+import {
+  walkBusTo,
+  walkBusToSeat,
+  walkBusToRearDoor,
+} from './helpers/bus-passenger-controls.mjs';
 const { BusCabinVisit, findBusVisitPlacement } = await import(
   cityModule('bus-visit')
 );
@@ -50,7 +55,13 @@ function cityFixture() {
   globalThis.Element = class Element {};
   canvas.setPointerCapture = () => {};
   canvas.hasPointerCapture = () => false;
-  const calls = { placements: [], exclusions: [], loads: 0, disposals: 0 };
+  const calls = {
+    placements: [],
+    exclusions: [],
+    loads: 0,
+    disposals: 0,
+    poses: [],
+  };
   const city = {
     scene: new THREE.Scene(),
     camera: new THREE.PerspectiveCamera(58, 1.6, 0.08, 10000),
@@ -71,7 +82,11 @@ function cityFixture() {
     surfaceId: 'ground',
     surfaceLayer: 0,
     keys: new Set(),
-    walker: { group: new THREE.Group() },
+    walker: {
+      group: new THREE.Group(),
+      setSeated: (value, height) => calls.poses.push({ value, height }),
+      update() {},
+    },
     car: new THREE.Group(),
     clearGround: () => true,
     groundHeight: () => 7,
@@ -300,39 +315,71 @@ test('prepare coalesces actual LOD0 loading, parks at contact height, opens actu
   }
 });
 
-test('seat and standing camera eyes follow metadata; preview and pointer look preserve occupancy', async () => {
+test('boarding enters the physical aisle; nearby sitting uses metadata and look preserves the occupied seat', async () => {
   const f = await fixture();
   try {
     await f.visit.prepare();
     open(f.visit);
-    assert.equal(f.visit.board('seat-09'), true);
+    assert.equal(
+      f.visit.board('seat-09'),
+      true,
+      'legacy seat selection still enters the aisle',
+    );
     assert.equal(f.visit.aboard, true);
-    const localEye = f.owner.group.worldToLocal(f.city.camera.position.clone());
-    assert.ok(
-      localEye.distanceTo(new THREE.Vector3(-0.83, 1.47, 2.125)) < 1e-7,
-    );
-    assert.equal(f.city.camera.near, 0.05);
-    assert.equal(f.city.navigation.walker.group.visible, false);
-    assert.equal(f.visit.preview('main-aisle'), true);
-    const state = f.visit.snapshot();
-    assert.equal(state.passengerAnchor, 'seat-09');
-    assert.equal(state.previewAnchor, 'main-aisle');
-    assert.equal(state.viewAnchor, 'main-aisle');
-    const standing = manifest.vehicles[0].standingRegions.find(
-      (r) => r.regionId === 'main-aisle',
-    );
-    const standingEye = f.owner.group.worldToLocal(
+    assert.equal(f.visit.snapshot().passengerAnchor, 'main-aisle');
+    const spawn = f.visit.space.spawn();
+    const standingEye = f.owner.interiorRoot.worldToLocal(
       f.city.camera.position.clone(),
     );
     assert.ok(
       standingEye.distanceTo(
         new THREE.Vector3(
-          standing.feetPointM[0],
-          standing.feetPointM[1] + 1.62,
-          standing.feetPointM[2],
+          spawn[0],
+          spawn[1] + f.visit.space.standingEyeHeight(spawn),
+          spawn[2],
         ),
       ) < 1e-7,
     );
+    assert.equal(f.city.camera.near, 0.05);
+    assert.equal(f.city.navigation.walker.group.visible, false);
+    assert.equal(
+      f.visit.preview('seat-09'),
+      false,
+      'distant seat selection cannot teleport',
+    );
+    walkBusToSeat(f.visit, 'seat-09');
+    const candidate = f.visit
+      .interactionCandidates()
+      .find((row) => row.id === 'bus:seat:seat-09');
+    assert.ok(candidate && candidate.canInteract());
+    assert.equal(candidate.execute(), true);
+    const seat = f.visit.space.seats.find((row) => row.id === 'seat-09');
+    const localEye = f.owner.interiorRoot.worldToLocal(
+      f.city.camera.position.clone(),
+    );
+    assert.ok(
+      localEye.distanceTo(
+        new THREE.Vector3(
+          seat.position[0] + seat.eyeOffsetXZ[0],
+          seat.position[1] + seat.eyeHeight,
+          seat.position[2] + seat.eyeOffsetXZ[1],
+        ),
+      ) < 1e-7,
+    );
+    assert.equal(f.visit.snapshot().passengerAnchor, 'seat-09');
+    assert.equal(f.visit.snapshot().previewAnchor, null);
+    assert.equal(f.visit.snapshot().viewAnchor, 'seat-09');
+    assert.deepEqual(f.calls.poses.at(-1), {
+      value: true,
+      height: seat.seatHeight,
+    });
+    assert.equal(f.visit.snapshot().seated, true);
+    assert.equal(
+      f.visit.alight(),
+      false,
+      'a seated passenger must first stand and reach the rear door',
+    );
+    assert.equal(f.visit.close(), false);
     const before = f.city.camera.quaternion.clone();
     const event = (type, values) => {
       const e = new Event(type, { cancelable: true });
@@ -349,9 +396,19 @@ test('seat and standing camera eyes follow metadata; preview and pointer look pr
     assert.equal(f.visit.snapshot().passengerAnchor, 'seat-09');
     event('pointerup', { pointerId: 4 });
     assert.equal(f.visit.preview('seat-09'), true);
-    assert.equal(f.visit.snapshot().previewAnchor, null);
+    assert.equal(f.visit.preview('seat-01'), false);
     assert.equal(f.visit.preview('missing'), false);
-    assert.equal(f.visit.snapshot().passengerAnchor, 'seat-09');
+    const stand = f.visit.interactionCandidates()[0];
+    assert.equal(stand.action, 'stand');
+    assert.equal(stand.execute(), true);
+    assert.equal(f.visit.snapshot().passengerAnchor, 'main-aisle');
+    assert.equal(f.visit.snapshot().seated, false);
+    assert.equal(f.calls.poses.at(-1).value, false);
+    assert.equal(
+      stand.canInteract(),
+      false,
+      'a stale stand prompt cannot repeat',
+    );
   } finally {
     f.visit.dispose();
   }
@@ -473,6 +530,7 @@ test('a prepared bus cannot board a world-seated visitor or release a blocked se
     assert.equal(nav.walker.group.userData.seated, false);
     assert.equal(f.visit.snapshot().canBoard, true);
     assert.equal(f.visit.board('seat-09'), true);
+    walkBusToRearDoor(f.visit);
     assert.equal(f.visit.alight(), true);
     assert.equal(nav.walkSeat, null);
     assert.equal(f.visit.aboard, false);
@@ -504,14 +562,15 @@ test('invalid fresh rear ground retains rider/camera; successful alighting retur
   try {
     await f.visit.prepare();
     open(f.visit);
-    f.visit.board('seat-09');
+    f.visit.board();
+    walkBusToRearDoor(f.visit);
     const camera = f.city.camera.position.clone();
     f.city.navigation.clearGround = (x, z) =>
       Math.abs(z - doorPoint('rear')[2]) > 0.4;
     assert.equal(f.visit.snapshot().canAlight, false);
     assert.equal(f.visit.alight(), false);
     assert.equal(f.visit.close(), false);
-    assert.equal(f.visit.snapshot().passengerAnchor, 'seat-09');
+    assert.equal(f.visit.snapshot().passengerAnchor, 'main-aisle');
     assert.ok(f.city.camera.position.equals(camera));
     assert.equal(f.owner.group.parent, f.city.scene);
     f.city.navigation.clearGround = () => true;
@@ -564,7 +623,8 @@ test('failed navigation placement or fresh alight commit keeps the seat and rest
   try {
     await f.visit.prepare();
     open(f.visit);
-    f.visit.board('seat-09');
+    f.visit.board();
+    walkBusToRearDoor(f.visit);
     const source = f.city.navigation.position.clone(),
       eye = f.city.camera.position.clone();
     const originalStart = f.city.navigation.startAt;
@@ -573,17 +633,21 @@ test('failed navigation placement or fresh alight commit keeps the seat and rest
       return false;
     };
     assert.equal(f.visit.alight(), false);
-    assert.equal(f.visit.snapshot().passengerAnchor, 'seat-09');
+    assert.equal(f.visit.snapshot().passengerAnchor, 'main-aisle');
     assert.ok(f.city.navigation.position.equals(source));
     assert.ok(f.city.camera.position.equals(eye));
     f.city.navigation.startAt = originalStart;
     let proofCalls = 0;
     const originalAperture = f.visit.apertureClear;
-    f.visit.apertureClear = () => ++proofCalls === 1;
+    f.visit.apertureClear = () => ++proofCalls <= 2;
     assert.equal(f.visit.alight(), false);
-    assert.equal(f.visit.snapshot().passengerAnchor, 'seat-09');
+    assert.equal(f.visit.snapshot().passengerAnchor, 'main-aisle');
     assert.ok(f.city.navigation.position.equals(source));
     assert.ok(f.city.camera.position.equals(eye));
+    assert.ok(
+      proofCalls >= 3,
+      'reject the final commit after navigation already moved',
+    );
     assert.equal(f.visit.transfers.pendingFor('parked-city-bus'), 0);
     f.visit.apertureClear = originalAperture;
     assert.equal(f.visit.alight(), true);
@@ -623,6 +687,290 @@ test('invalid GLTF door contract fails closed and releases the owner before movi
     assert.equal(f.calls.disposals, 1);
     assert.equal(f.calls.placements.length, 0);
     assert.equal(f.city.scene.children.length, 0);
+  } finally {
+    f.visit.dispose();
+  }
+});
+
+test('a real bounded street ride keeps seated and standing passengers attached, freezes hidden intervals and alights only at its current rear door', async () => {
+  const f = await fixture();
+  try {
+    await f.visit.prepare();
+    open(f.visit);
+    assert.equal(f.visit.board(), true);
+    walkBusToSeat(f.visit, 'seat-09');
+    const sit = f.visit
+      .interactionCandidates()
+      .find((row) => row.id === 'bus:seat:seat-09');
+    assert.equal(sit.execute(), true);
+    const localEye = f.owner.interiorRoot.worldToLocal(
+      f.city.camera.position.clone(),
+    );
+    const localFoot = f.owner.interiorRoot.worldToLocal(
+      f.city.navigation.position.clone(),
+    );
+    const parked = f.owner.group.position.clone();
+    assert.equal(f.visit.snapshot().canRide, true);
+    assert.equal(f.visit.startRide(), true);
+    assert.equal(f.visit.startRide(), false, 'departure is single-flight');
+    assert.equal(f.visit.snapshot().ridePhase, 'closing');
+    assert.equal(f.visit.close(), false);
+    assert.equal(f.visit.alight(), false);
+    for (let i = 0; i < 65; i++) f.visit.update(0.05);
+    assert.equal(f.visit.snapshot().ridePhase, 'moving');
+    assert.ok(f.visit.speedMps > 0);
+    assert.ok(f.owner.group.position.z > parked.z + 1);
+    assert.equal(f.owner.group.position.x, parked.x);
+    assert.ok(
+      f.owner.interiorRoot
+        .worldToLocal(f.city.camera.position.clone())
+        .distanceTo(localEye) < 1e-7,
+    );
+    assert.ok(
+      f.owner.interiorRoot
+        .worldToLocal(f.city.navigation.position.clone())
+        .distanceTo(localFoot) < 1e-7,
+    );
+    assert.ok(
+      f.city.navigation.walker.group.position.equals(
+        f.city.navigation.position,
+      ),
+    );
+    assert.equal(f.visit.snapshot().passengerAnchor, 'seat-09');
+    assert.equal(f.visit.snapshot().canAlight, false);
+    const moving = f.owner.group.position.clone(),
+      progress = f.visit.snapshot().rideProgress;
+    f.doc.hidden = true;
+    f.doc.dispatchEvent(new Event('visibilitychange'));
+    f.visit.update(120);
+    assert.ok(f.owner.group.position.equals(moving));
+    assert.equal(f.visit.snapshot().rideProgress, progress);
+    f.doc.hidden = false;
+    f.doc.dispatchEvent(new Event('visibilitychange'));
+    f.visit.update(120);
+    assert.ok(
+      f.owner.group.position.equals(moving),
+      'resume never fast-forwards the ride',
+    );
+    f.visit.update(0.05);
+    assert.ok(f.owner.group.position.z > moving.z);
+    assert.equal(
+      f.visit.stand(),
+      true,
+      'standing is supported during real motion',
+    );
+    assert.equal(f.visit.snapshot().canWalkCabin, true);
+    const standLocal = f.owner.interiorRoot.worldToLocal(
+      f.city.navigation.position.clone(),
+    );
+    f.visit.setTouchAxes(0, 1);
+    f.visit.update(0.05);
+    f.visit.clearInput();
+    assert.ok(
+      f.owner.interiorRoot
+        .worldToLocal(f.city.navigation.position.clone())
+        .distanceTo(standLocal) > 0.04,
+    );
+    const nearby = f.visit
+      .interactionCandidates()
+      .find((row) => row.action === 'sit');
+    assert.ok(nearby);
+    assert.equal(nearby.execute(), true, 'a moving rider can sit again');
+    let maxZ = f.owner.group.position.z;
+    for (let i = 0; i < 450; i++) {
+      f.visit.update(0.05);
+      assert.ok(
+        f.owner.group.position.z >= maxZ - 1e-8,
+        'ride never reverses or loops',
+      );
+      assert.ok(f.owner.group.position.z <= parked.z + 60 + 1e-8);
+      maxZ = f.owner.group.position.z;
+    }
+    assert.equal(f.visit.snapshot().ridePhase, 'complete');
+    assert.equal(f.visit.snapshot().rideProgress, 1);
+    assert.equal(f.visit.speedMps, 0);
+    assert.equal(f.visit.snapshot().doorsOpen, true);
+    assert.equal(
+      f.visit.startRide(),
+      false,
+      'no invented looping transit service',
+    );
+    assert.equal(f.visit.stand(), true);
+    assert.equal(
+      f.visit.alight(),
+      false,
+      'arrival does not teleport an aisle rider to the rear exit',
+    );
+    walkBusToRearDoor(f.visit);
+    const rear = f.visit.freshOutside('rear');
+    assert.ok(
+      rear.z > parked.z + 50,
+      'exit proof uses the actual new bus pose',
+    );
+    assert.equal(f.visit.alight(), true);
+    assert.ok(
+      f.city.navigation.position.distanceTo(
+        new THREE.Vector3(rear.x, rear.y, rear.z),
+      ) < 1e-7,
+    );
+    assert.equal(f.visit.close(), true);
+  } finally {
+    f.visit.dispose();
+  }
+});
+
+test('fresh ride preflight fails closed on an unsafe corridor without moving the owner or occupant', async () => {
+  const f = await fixture();
+  try {
+    await f.visit.prepare();
+    open(f.visit);
+    assert.equal(f.visit.board(), true);
+    const source = f.owner.group.position.clone(),
+      passenger = f.city.navigation.position.clone();
+    f.city.navigation.clearGround = (_x, z, mode) => mode !== 'drive' || z < 9;
+    assert.equal(
+      f.visit.startRide(),
+      false,
+      'less than 6m of whole-footprint corridor is unavailable',
+    );
+    assert.equal(f.visit.snapshot().canRide, false);
+    assert.equal(f.visit.snapshot().ridePhase, 'parked');
+    assert.ok(f.owner.group.position.equals(source));
+    assert.ok(f.city.navigation.position.equals(passenger));
+    assert.equal(f.visit.snapshot().passengerAnchor, 'main-aisle');
+    f.city.navigation.clearGround = () => true;
+    f.city.data.travelSurfaces.lookup = (_x, z) =>
+      z > 9
+        ? [
+            {
+              surfaceId: 'protected-deck',
+              layer: 1,
+              y: 7,
+              allowedModes: ['drive'],
+            },
+          ]
+        : [];
+    assert.equal(
+      f.visit.startRide(),
+      false,
+      'future protected floors cannot be silently relabelled ground',
+    );
+    f.city.data.travelSurfaces.lookup = () => [];
+    assert.equal(
+      f.visit.startRide(),
+      true,
+      'a fresh successful preflight can recover without a reload',
+    );
+  } finally {
+    f.visit.dispose();
+  }
+});
+
+test('seat prompts recheck physical proximity and input clearing prevents stale movement after sitting or a modal', async () => {
+  const f = await fixture();
+  try {
+    await f.visit.prepare();
+    open(f.visit);
+    f.visit.board();
+    walkBusToSeat(f.visit, 'seat-09');
+    const stale = f.visit
+      .interactionCandidates()
+      .find((row) => row.id === 'bus:seat:seat-09');
+    assert.ok(stale.canInteract());
+    walkBusTo(f.visit, (point) => point[2] < -0.7);
+    assert.equal(stale.canInteract(), false);
+    assert.equal(stale.execute(), false);
+    walkBusToSeat(f.visit, 'seat-09');
+    const current = f.visit
+      .interactionCandidates()
+      .find((row) => row.id === 'bus:seat:seat-09');
+    const foot = f.city.navigation.position.clone();
+    f.visit.setTouchAxes(0, 1);
+    f.visit.setInputEnabled(false);
+    f.visit.update(0.05);
+    assert.ok(f.city.navigation.position.equals(foot));
+    assert.deepEqual(f.visit.interactionCandidates(), []);
+    assert.equal(current.execute(), false);
+    f.visit.setInputEnabled(true);
+    f.visit.update(0.05);
+    assert.ok(
+      f.city.navigation.position.equals(foot),
+      'cleared touch axis cannot relatch',
+    );
+    assert.equal(current.execute(), true);
+    const seated = f.city.navigation.position.clone();
+    f.visit.setTouchAxes(1, 1);
+    f.visit.update(0.05);
+    assert.ok(f.city.navigation.position.equals(seated));
+    assert.equal(f.visit.stand(), true);
+    const standing = f.city.navigation.position.clone();
+    f.visit.update(0.05);
+    assert.ok(
+      f.city.navigation.position.equals(standing),
+      'standing cannot inherit touch input pressed while seated',
+    );
+    const key = new Event('keydown', { cancelable: true });
+    Object.defineProperty(key, 'key', { value: 'f' });
+    f.win.dispatchEvent(key);
+    assert.equal(
+      key.defaultPrevented,
+      false,
+      'global localized F interaction retains ownership of F',
+    );
+  } finally {
+    f.visit.dispose();
+  }
+});
+
+test('closing during a late cabin preload cancels the owner without changing navigation or leaking listeners', async () => {
+  const f = await fixture();
+  try {
+    const source = f.city.navigation.position.clone(),
+      eye = f.city.camera.position.clone();
+    let resolve;
+    f.assets.loadBoardable = () =>
+      new Promise((done) => {
+        resolve = done;
+      });
+    const loading = f.visit.prepare();
+    assert.equal(f.visit.close(), true);
+    assert.equal(f.visit.snapshot().phase, 'idle');
+    resolve(f.owner);
+    assert.equal(await loading, false);
+    assert.equal(f.calls.disposals, 1);
+    assert.equal(f.calls.placements.length, 0);
+    assert.ok(f.city.navigation.position.equals(source));
+    assert.ok(f.city.camera.position.equals(eye));
+    assert.equal(f.city.scene.children.length, 0);
+    assert.equal(f.visit.aboard, false);
+  } finally {
+    f.visit.dispose();
+  }
+  assert.equal(f.win.count(), 0);
+  assert.equal(f.doc.count(), 0);
+});
+
+test('releasing a prepared visit does not reset the pose of an unrelated world bench seat', async () => {
+  const f = await fixture();
+  try {
+    await f.visit.prepare();
+    open(f.visit);
+    const bench = {
+      id: 'world-bench',
+      floor: [-5, 7, 4],
+      yaw: 0,
+      height: 0.46,
+    };
+    f.city.navigation.walkSeat = bench;
+    f.city.navigation.walker.setSeated(true, 0.46);
+    const poses = f.calls.poses.length;
+    assert.equal(f.visit.close(), true);
+    assert.equal(f.city.navigation.walkSeat, bench);
+    assert.equal(
+      f.calls.poses.length,
+      poses,
+      'a visit can reset only the body pose it owns',
+    );
   } finally {
     f.visit.dispose();
   }

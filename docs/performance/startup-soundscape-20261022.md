@@ -49,13 +49,13 @@ The baseline is `lib/city/context.ts` from parent revision `bb26294067dade837738
 
 The observed median difference is **57.03 ms (45.65%)** for this focused workload. Ranges overlap, there are only five samples per variant, and other local activity can affect wall time. These numbers are not a full-startup, FPS, GPU, battery, RAM or mobile-device claim.
 
-Every measured baseline/candidate run produced the same complete position/colour SHA-256:
+Every measured baseline/candidate run on the macOS/arm64 runtime above produced the same complete position/colour SHA-256:
 
 ```text
 2c04c1cc578ac3f55e52e3c7d95589c60bf168743959eef5b6cccb1c356dd99b
 ```
 
-The regression test also checks this original-output fingerprint and verifies the prepared regional mask preserves all original source rings and coordinates. This is exact array evidence for the regional terrain fixture, not an image comparison or validation of every city surface.
+That output fingerprint is historical evidence for that runtime/platform, not a portable expected value. The regression test pins the byte-for-byte original implementation by its source SHA-256 and runs it beside the candidate with the same runtime, Three and geographic helpers. It compares every position and colour strictly, including array order, and verifies unchanged source data and vertex counts. This preserves exact numerical/topology protection while allowing platform differences in transcendental math. The prepared regional mask must also preserve all original source rings and coordinates. This is exact array evidence for the regional terrain fixture, not an image comparison or validation of every city surface.
 
 ## Reproduce the focused benchmark
 

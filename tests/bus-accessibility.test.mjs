@@ -4,6 +4,10 @@ import { readFile } from 'node:fs/promises';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { cityModule } from './helpers/city-modules.mjs';
+import {
+  walkBusToRearDoor,
+  walkBusToSeat,
+} from './helpers/bus-passenger-controls.mjs';
 
 const { BusAccessibility, rampContainsPoint } = await import(
   cityModule('bus-accessibility')
@@ -446,7 +450,16 @@ async function visitFixture({ accessible = true, graded = false } = {}) {
     node.name = name;
     root.add(node);
   }
-  const interiorRoot = new THREE.Group();
+  const interiorBytes = await readFile(
+    'public/models/blender/bus-v2/city-bus-12m-interior-v2-runtime.lod0.glb',
+  );
+  const { scene: interiorRoot } = await new GLTFLoader().parseAsync(
+    interiorBytes.buffer.slice(
+      interiorBytes.byteOffset,
+      interiorBytes.byteOffset + interiorBytes.byteLength,
+    ),
+    '',
+  );
   root.add(interiorRoot);
   let disposed = false;
   const owner = {
@@ -458,8 +471,21 @@ async function visitFixture({ accessible = true, graded = false } = {}) {
     animations,
     mixer: new THREE.AnimationMixer(root),
     dispose() {
+      if (disposed) return;
       disposed = true;
       root.removeFromParent();
+      const geometries = new Set(),
+        materials = new Set();
+      interiorRoot.traverse((object) => {
+        if (!object.isMesh) return;
+        geometries.add(object.geometry);
+        for (const material of Array.isArray(object.material)
+          ? object.material
+          : [object.material])
+          materials.add(material);
+      });
+      geometries.forEach((geometry) => geometry.dispose());
+      materials.forEach((material) => material.dispose());
     },
   };
   globalThis.window = new EventTarget();
@@ -562,12 +588,14 @@ test('parked visit preserves 24 seats, normal boarding and rear exit; camera fol
     );
     assert.equal(
       f.visit.alight(),
-      true,
-      'ordinary rear exit remains valid while parked and deployed',
+      false,
+      'a deployed access ramp keeps the stop interlocked',
     );
-    assert.equal(f.city.navigation.surfaceId, 'ground');
     assert.equal(f.visit.stowRamp(), true);
     for (let i = 0; i < 70; i++) f.visit.update(0.05);
+    walkBusToRearDoor(f.visit);
+    assert.equal(f.visit.alight(), true);
+    assert.equal(f.city.navigation.surfaceId, 'ground');
     assert.equal(f.visit.close(), true);
     assert.equal(f.disposed, true);
   } finally {
@@ -596,6 +624,12 @@ test('an outside walker can step aside and deploy; no-rig visits keep their orig
     assert.equal(legacy.visit.snapshot().accessibility, null);
     assert.equal(legacy.visit.deployRamp(), false);
     assert.equal(legacy.visit.board('low-floor-aisle'), true);
+    assert.equal(
+      legacy.visit.close(),
+      false,
+      'a distant rear door cannot teleport the boarded rider',
+    );
+    walkBusToRearDoor(legacy.visit);
     assert.equal(legacy.visit.close(), true);
   } finally {
     legacy.visit.dispose();
@@ -612,6 +646,123 @@ test('an outside walker can step aside and deploy; no-rig visits keep their orig
     near(unmeasured.owner.group.position.y, 7, 1e-7);
   } finally {
     unmeasured.visit.dispose();
+  }
+});
+
+test('a seated and standing real-cabin rider follows kneeling, while every nonstowed ramp phase interlocks departure', async () => {
+  const f = await visitFixture();
+  const advanceRamp = (phase) => {
+    for (
+      let i = 0;
+      i < 200 && f.visit.snapshot().accessibility.phase !== phase;
+      i++
+    )
+      f.visit.update(0.05);
+    assert.equal(f.visit.snapshot().accessibility.phase, phase);
+  };
+  try {
+    assert.equal(f.visit.board(), true);
+    walkBusToSeat(f.visit, 'seat-01');
+    const sit = f.visit
+      .interactionCandidates()
+      .find((candidate) => candidate.id === 'bus:seat:seat-01');
+    assert.equal(sit?.execute(), true);
+    const eye = f.city.camera.position.clone(),
+      foot = f.city.navigation.position.clone();
+    const anchor = f.visit.snapshot().passengerAnchor;
+    assert.equal(f.visit.snapshot().canRide, true);
+    assert.equal(f.visit.deployRamp(), true);
+    for (const phase of ['kneeling', 'deploying', 'deployed']) {
+      advanceRamp(phase);
+      assert.equal(f.visit.snapshot().canRide, false);
+      assert.equal(f.visit.startRide(), false);
+      assert.equal(f.visit.snapshot().passengerAnchor, anchor);
+    }
+    near(f.city.camera.position.y, eye.y - 0.0762);
+    near(f.city.navigation.position.y, foot.y - 0.0762);
+    assert.equal(f.visit.stand(), true);
+    const standingFoot = f.city.navigation.position.clone();
+    assert.equal(f.visit.stowRamp(), true);
+    for (const phase of ['retracting', 'raising']) {
+      advanceRamp(phase);
+      assert.equal(f.visit.snapshot().canRide, false);
+      assert.equal(f.visit.startRide(), false);
+    }
+    advanceRamp('stowed');
+    near(f.city.navigation.position.y, standingFoot.y + 0.0762);
+    assert.equal(f.visit.snapshot().canRide, true);
+    assert.equal(f.visit.startRide(), true);
+  } finally {
+    f.visit.dispose();
+  }
+});
+
+test('a real-cabin ride recovers a rejected arrival reanchor in place, then rear exit and the next ramp cycle use the new stop', async () => {
+  const f = await visitFixture();
+  try {
+    assert.equal(f.visit.board(), true);
+    walkBusToSeat(f.visit, 'seat-24');
+    const sit = f.visit
+      .interactionCandidates()
+      .find((candidate) => candidate.id === 'bus:seat:seat-24');
+    assert.equal(sit?.execute(), true);
+    const start = f.owner.group.position.clone();
+    const localEye = f.owner.group.worldToLocal(f.city.camera.position.clone());
+    const rig = f.visit.accessibility,
+      reanchor = rig.reanchorStowed.bind(rig);
+    let attempts = 0;
+    rig.reanchorStowed = () => (++attempts === 1 ? false : reanchor());
+    assert.equal(f.visit.startRide(), true);
+    for (
+      let i = 0;
+      i < 1500 && f.visit.snapshot().ridePhase !== 'opening';
+      i++
+    ) {
+      f.visit.update(0.05);
+      assert.ok(
+        f.owner.group
+          .worldToLocal(f.city.camera.position.clone())
+          .distanceTo(localEye) < 1e-5,
+        'seated eye remains attached throughout real bus motion',
+      );
+    }
+    assert.equal(f.visit.snapshot().ridePhase, 'opening');
+    assert.equal(attempts, 1);
+    assert.equal(rig.aligned, false);
+    assert.ok(f.owner.group.position.distanceTo(start) >= 6);
+    const arrival = f.owner.group.position.clone();
+    assert.equal(f.visit.snapshot().canAlight, false);
+    f.visit.update(0.05);
+    assert.equal(attempts, 2);
+    assert.equal(rig.aligned, true);
+    assert.ok(
+      f.owner.group.position.equals(arrival),
+      'retry only validates the current stopped pose',
+    );
+    for (let i = 0; i < 100 && f.visit.snapshot().ridePhase !== 'complete'; i++)
+      f.visit.update(0.05);
+    assert.equal(f.visit.snapshot().ridePhase, 'complete');
+    assert.equal(f.visit.stand(), true);
+    walkBusToRearDoor(f.visit);
+    assert.equal(f.visit.snapshot().canAlight, true);
+    const parked = f.owner.group.matrixWorld.clone();
+    assert.equal(f.visit.deployRamp(), true);
+    for (let i = 0; i < 70; i++) f.visit.update(0.05);
+    assert.equal(f.visit.snapshot().accessibility.phase, 'deployed');
+    assert.equal(f.visit.startRide(), false);
+    assert.equal(f.visit.stowRamp(), true);
+    for (let i = 0; i < 70; i++) f.visit.update(0.05);
+    assert.equal(f.visit.snapshot().accessibility.phase, 'stowed');
+    matricesEqual(f.owner.group.matrixWorld, parked);
+    assert.equal(f.visit.snapshot().canAlight, true);
+    assert.equal(f.visit.alight(), true);
+    assert.ok(
+      f.city.navigation.position.distanceTo(start) > 5,
+      'exit uses the current stop rather than the initial parked location',
+    );
+    assert.equal(f.visit.close(), true);
+  } finally {
+    f.visit.dispose();
   }
 });
 

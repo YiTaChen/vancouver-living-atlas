@@ -478,6 +478,7 @@ export class CityEngine {
     this.flight?.clearInput();
     this.tesla?.clearInput();
     this.skyTrainTravel?.clearInput();
+    this.busVisit?.clearInput();
     this.interactions?.clear();
     this.travelReturn?.clearGesture();
     this.placement?.cancel();
@@ -889,29 +890,33 @@ export class CityEngine {
     );
   }
   updateAutoQuality(time: number, frameMs: number) {
-    const mode = this.skyTrainTravel?.active
-      ? this.skyTrainTravel.aboard
-        ? 'drive'
-        : 'walk'
-      : this.tesla?.active
-        ? this.tesla.sceneryMode
-        : this.flight?.attached
-          ? 'flight'
-          : this.settings.mode === 'tesla'
-            ? 'drive'
-            : this.settings.mode;
-    const speed = this.skyTrainTravel?.active
-      ? this.skyTrainTravel.speedMps
-      : this.tesla?.active
-        ? this.tesla.speedMps
-        : this.flight?.attached
-          ? Math.hypot(
-              this.flight.state?.speed ?? 0,
-              this.flight.state?.vy ?? 0,
-            )
-          : mode === 'drive' || mode === 'boat'
-            ? Math.abs(this.navigation?.speed ?? 0)
-            : undefined;
+    const mode = this.busVisit?.aboard
+      ? 'drive'
+      : this.skyTrainTravel?.active
+        ? this.skyTrainTravel.aboard
+          ? 'drive'
+          : 'walk'
+        : this.tesla?.active
+          ? this.tesla.sceneryMode
+          : this.flight?.attached
+            ? 'flight'
+            : this.settings.mode === 'tesla'
+              ? 'drive'
+              : this.settings.mode;
+    const speed = this.busVisit?.aboard
+      ? this.busVisit.speedMps
+      : this.skyTrainTravel?.active
+        ? this.skyTrainTravel.speedMps
+        : this.tesla?.active
+          ? this.tesla.speedMps
+          : this.flight?.attached
+            ? Math.hypot(
+                this.flight.state?.speed ?? 0,
+                this.flight.state?.vy ?? 0,
+              )
+            : mode === 'drive' || mode === 'boat'
+              ? Math.abs(this.navigation?.speed ?? 0)
+              : undefined;
     const altitude = Math.max(
       0,
       this.camera.position.y -
@@ -2040,13 +2045,15 @@ export class CityEngine {
           this.traffic?.busAssets.stats() ?? null,
         );
         this.stats.speed = Math.round(
-          (this.skyTrainTravel?.active
-            ? (this.stats.skyTrainTravel?.speedMps ?? 0)
-            : this.tesla?.active
-              ? this.tesla.speedMps
-              : this.flight?.attached
-                ? this.flight.state?.speed || 0
-                : this.navigation?.speed || 0) * 3.6,
+          (this.busVisit?.aboard
+            ? this.busVisit.speedMps
+            : this.skyTrainTravel?.active
+              ? (this.stats.skyTrainTravel?.speedMps ?? 0)
+              : this.tesla?.active
+                ? this.tesla.speedMps
+                : this.flight?.attached
+                  ? this.flight.state?.speed || 0
+                  : this.navigation?.speed || 0) * 3.6,
         );
         this.stats.clock = this.clock.snapshot();
         this.stats.heading = this.controls.getAzimuthalAngle();
