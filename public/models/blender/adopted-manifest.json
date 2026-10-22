@@ -380,6 +380,42 @@
       "sourcePath": "canonical projection of tools/assets/street-furniture-expansion/manifest.json",
       "sourceRevision": "6d9e05c0e0eafca6e1a2405f32da4570fdb37efd",
       "sourceManifestSha256": "a047b465f83a6d2604485895a1dfb66ec4d50c192838afed0d92fc2c82cdcacb"
+    },
+    {
+      "path": "bus-hybrid/city-bus-12m-exterior.lod0.glb",
+      "sha256": "a7b25624f99e0ff9072ddf785f5d768c8316e2cee1234e9d13b54df56ab51015",
+      "bytes": 486460,
+      "sourcePackage": "boardable-bus-hybrid",
+      "sourceRevision": "sha256:574974dd61c234a2e89bb6447c1a5049665159ece066b0808488141724bfbe45",
+      "sourceManifestSha256": "574974dd61c234a2e89bb6447c1a5049665159ece066b0808488141724bfbe45",
+      "sourcePath": "tools/assets/boardable-bus-hybrid/exports/city-bus-12m-exterior.lod0.glb"
+    },
+    {
+      "path": "bus-hybrid/city-bus-12m-exterior.lod1.glb",
+      "sha256": "3a6d450bb5766d358745a66fe1df5ba8c98e5e11a3c24ab2c6196feec3da3af6",
+      "bytes": 285112,
+      "sourcePackage": "boardable-bus-hybrid",
+      "sourceRevision": "sha256:574974dd61c234a2e89bb6447c1a5049665159ece066b0808488141724bfbe45",
+      "sourceManifestSha256": "574974dd61c234a2e89bb6447c1a5049665159ece066b0808488141724bfbe45",
+      "sourcePath": "tools/assets/boardable-bus-hybrid/exports/city-bus-12m-exterior.lod1.glb"
+    },
+    {
+      "path": "bus-hybrid/city-bus-12m-exterior.lod2.glb",
+      "sha256": "eb2bce40508845c158874117728e46f362b2c71c74c3ecdc76ecc397df551f69",
+      "bytes": 30704,
+      "sourcePackage": "boardable-bus-hybrid",
+      "sourceRevision": "sha256:574974dd61c234a2e89bb6447c1a5049665159ece066b0808488141724bfbe45",
+      "sourceManifestSha256": "574974dd61c234a2e89bb6447c1a5049665159ece066b0808488141724bfbe45",
+      "sourcePath": "tools/assets/boardable-bus-hybrid/exports/city-bus-12m-exterior.lod2.glb"
+    },
+    {
+      "path": "bus-hybrid/manifest.json",
+      "sha256": "574974dd61c234a2e89bb6447c1a5049665159ece066b0808488141724bfbe45",
+      "bytes": 12460,
+      "sourcePackage": "boardable-bus-hybrid",
+      "sourceRevision": "sha256:574974dd61c234a2e89bb6447c1a5049665159ece066b0808488141724bfbe45",
+      "sourceManifestSha256": "574974dd61c234a2e89bb6447c1a5049665159ece066b0808488141724bfbe45",
+      "sourcePath": "tools/assets/boardable-bus-hybrid/manifest.json"
     }
   ]
 }

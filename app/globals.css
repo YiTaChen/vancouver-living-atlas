@@ -2642,6 +2642,10 @@ a {
 .bus-visit-viewpoint {display:grid;gap:6px;font-size:12px;}
 .bus-visit-viewpoint select {width:100%;padding:9px;border:1px solid #617e75;border-radius:8px;background:#1d3530;color:#e8f1ed;}
 .bus-visit-primary {width:100%;padding:10px;margin-top:4px;border-radius:8px;background:#d0e6d9;color:#173a30;font-weight:600;}
+.bus-visit-accessibility {display:grid;gap:7px;margin:12px 0;padding:10px;border:1px solid #617e75;border-radius:8px;}
+.bus-visit-accessibility button {padding:9px;border:1px solid #91b3a6;border-radius:6px;color:#e8f1ed;font-size:13px;line-height:1.4;}
+.bus-visit-accessibility button:disabled {opacity:.5;cursor:wait;}
+.bus-visit-accessibility output {font-size:12px;line-height:1.5;color:#bacfc9;}
 .bus-visit-panel button:disabled,.bus-visit-launcher:disabled {opacity:.55;cursor:wait;}
 @media(max-width:900px) {
   .bus-visit-launcher {top:154px;right:64px;max-width:calc(100% - 76px);padding:8px 10px;font-size:12px;}

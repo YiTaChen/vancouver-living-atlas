@@ -43,6 +43,7 @@ export function addStreetMeshes(
       );
     }
   }
+  const meshes: THREE.Mesh[] = [];
   for (const [key, cell] of cells) {
     const mesh = new THREE.Mesh(
       e.geometry(
@@ -69,5 +70,7 @@ export function addStreetMeshes(
     mesh.castShadow = castShadow;
     mesh.geometry.computeBoundingSphere();
     e.roads.add(mesh);
+    meshes.push(mesh);
   }
+  return meshes;
 }

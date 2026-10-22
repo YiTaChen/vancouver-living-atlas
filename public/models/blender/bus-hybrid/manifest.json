@@ -1,0 +1,370 @@
+{
+  "schemaVersion": 1,
+  "contract": "boardable-bus-hybrid-exterior-v1",
+  "packageId": "boardable-bus-hybrid",
+  "version": "1.0.0",
+  "baseRevision": "9c95d913ba8b645d342b999bff23c5a18b825195",
+  "status": "validated_geometry_runtime_acceptance_separate",
+  "units": "m",
+  "coordinateSystem": {
+    "authoring": "Blender +Z up, -Y front",
+    "runtime": "glTF +Y up, +Z front, -X vehicle right",
+    "conversion": "Blender (x,y,z) -> glTF (x,z,-y), exporter applies once"
+  },
+  "baseVehicleContract": {
+    "packageId": "boardable-bus",
+    "file": "../boardable-bus/manifest.json",
+    "url": "/models/blender/bus/manifest.json",
+    "sha256": "6e7ae8d6f0457dc11d4d76729adb307d694edabc42da923e8ec842f078bea041",
+    "vehicleId": "city-bus-12m",
+    "mode": "reuse canonical contract; exterior asset override only"
+  },
+  "accessibility": {
+    "schemaVersion": 1,
+    "kneelDropM": 0.0762,
+    "ramp": {
+      "nodeId": "boarding-ramp",
+      "lengthM": 1.12,
+      "widthM": 0.86,
+      "hingeM": [
+        -1.25,
+        0.36,
+        4.6
+      ],
+      "rotationAxis": "+Z",
+      "stowedAngleRad": 0,
+      "centerOffsetM": [
+        0,
+        0,
+        -0.15
+      ],
+      "landingCenterM": [
+        -1.25,
+        0.36,
+        4.45
+      ],
+      "pathCenterZ": 4.45
+    },
+    "wheelNodeIds": [
+      "wheel-front-left",
+      "wheel-front-right",
+      "wheel-rear-left",
+      "wheel-rear-right"
+    ],
+    "representative": true,
+    "notFleetCertification": true,
+    "sourceUrl": "https://novabus.com/wp-content/uploads/2017/09/2014_Technical-Specifications-EN-LR.pdf",
+    "sourceNote": "December 2014 Nova typical specification: 14.6 in normal / 11.6 in kneeled stop height; representative 3 in body drop, not the exact fleet 7416 specification."
+  },
+  "assets": [
+    {
+      "id": "city-bus-12m-exterior",
+      "kind": "vehicle-exterior",
+      "variant": "TransLink silver navy yellow hybrid",
+      "source": "source/city-bus-12m-exterior.lod0.blend",
+      "sourceSha256": "a4dd32a099342bdcc0f3dac76842b4ea3ba711bde7fe33e3a83d3c46cf2810c6",
+      "lods": [
+        {
+          "level": 0,
+          "file": "city-bus-12m-exterior.lod0.glb",
+          "export": "exports/city-bus-12m-exterior.lod0.glb",
+          "url": "/models/blender/bus-hybrid/city-bus-12m-exterior.lod0.glb",
+          "source": "source/city-bus-12m-exterior.lod0.blend",
+          "sourceSha256": "a4dd32a099342bdcc0f3dac76842b4ea3ba711bde7fe33e3a83d3c46cf2810c6",
+          "sourceBytes": 246698,
+          "sha256": "a7b25624f99e0ff9072ddf785f5d768c8316e2cee1234e9d13b54df56ab51015",
+          "bytes": 486460,
+          "triangles": 8864,
+          "vertices": 12303,
+          "primitives": 21,
+          "boundsM": {
+            "min": [
+              -1.5199999809265137,
+              0.0,
+              -6.375
+            ],
+            "max": [
+              1.5199999809265137,
+              3.0820000171661377,
+              6.296000003814697
+            ],
+            "size": [
+              3.0399999618530273,
+              3.0820000171661377,
+              12.671000003814697
+            ]
+          },
+          "capabilities": {
+            "boarding": true,
+            "animatedDoors": true,
+            "ramp": true,
+            "independentWheels": true
+          }
+        },
+        {
+          "level": 1,
+          "file": "city-bus-12m-exterior.lod1.glb",
+          "export": "exports/city-bus-12m-exterior.lod1.glb",
+          "url": "/models/blender/bus-hybrid/city-bus-12m-exterior.lod1.glb",
+          "source": "source/city-bus-12m-exterior.lod1.blend",
+          "sourceSha256": "8005fa199ae5ee2b5ea66fd9030d72c8a215d343508565c78c58f885188053d3",
+          "sourceBytes": 179454,
+          "sha256": "3a6d450bb5766d358745a66fe1df5ba8c98e5e11a3c24ab2c6196feec3da3af6",
+          "bytes": 285112,
+          "triangles": 4920,
+          "vertices": 6947,
+          "primitives": 21,
+          "boundsM": {
+            "min": [
+              -1.5199999809265137,
+              0.0,
+              -6.375
+            ],
+            "max": [
+              1.5199999809265137,
+              3.069999933242798,
+              6.259999752044678
+            ],
+            "size": [
+              3.0399999618530273,
+              3.069999933242798,
+              12.634999752044678
+            ]
+          },
+          "capabilities": {
+            "boarding": true,
+            "animatedDoors": true,
+            "ramp": true,
+            "independentWheels": true
+          }
+        },
+        {
+          "level": 2,
+          "file": "city-bus-12m-exterior.lod2.glb",
+          "export": "exports/city-bus-12m-exterior.lod2.glb",
+          "url": "/models/blender/bus-hybrid/city-bus-12m-exterior.lod2.glb",
+          "source": "source/city-bus-12m-exterior.lod2.blend",
+          "sourceSha256": "2f5f11e818b5fb34815da841972924f776c61f751b2efec12e01e742297c510a",
+          "sourceBytes": 97898,
+          "sha256": "eb2bce40508845c158874117728e46f362b2c71c74c3ecdc76ecc397df551f69",
+          "bytes": 30704,
+          "triangles": 302,
+          "vertices": 570,
+          "primitives": 8,
+          "boundsM": {
+            "min": [
+              -1.5199999809265137,
+              0.0,
+              -6.300000190734863
+            ],
+            "max": [
+              1.5199999809265137,
+              3.069999933242798,
+              6.11899995803833
+            ],
+            "size": [
+              3.0399999618530273,
+              3.069999933242798,
+              12.419000148773193
+            ]
+          },
+          "capabilities": {
+            "boarding": false,
+            "animatedDoors": false,
+            "ramp": false,
+            "independentWheels": true
+          }
+        }
+      ],
+      "boundsM": {
+        "min": [
+          -1.5199999809265137,
+          0.0,
+          -6.375
+        ],
+        "max": [
+          1.5199999809265137,
+          3.0820000171661377,
+          6.296000003814697
+        ],
+        "size": [
+          3.0399999618530273,
+          3.0820000171661377,
+          12.671000003814697
+        ]
+      },
+      "bodyGeometry": "Canonical Atlas low-floor body, exact existing door openings/clip samples/axles/anchors; film-style detail fitted to that shell.",
+      "frontAxis": "+Z",
+      "pivot": {
+        "frameId": "vehicle",
+        "pointM": [
+          0,
+          0,
+          0
+        ],
+        "basis": "ground contact datum, axle midpoint"
+      },
+      "materialBindings": [
+        {
+          "material": "glass",
+          "semanticRole": "glass",
+          "sharedSurfaceId": "transit-glass",
+          "primitiveSelection": {
+            "materialName": "glass"
+          },
+          "maps": []
+        },
+        {
+          "material": "lights",
+          "semanticRole": "lights",
+          "sharedSurfaceId": "transit-lights",
+          "primitiveSelection": {
+            "materialName": "lights"
+          },
+          "maps": []
+        },
+        {
+          "material": "paint",
+          "semanticRole": "paint",
+          "sharedSurfaceId": "automotive-paint",
+          "primitiveSelection": {
+            "materialName": "paint"
+          },
+          "maps": []
+        },
+        {
+          "material": "rubber",
+          "semanticRole": "rubber",
+          "sharedSurfaceId": "rubber",
+          "primitiveSelection": {
+            "materialName": "rubber"
+          },
+          "maps": []
+        }
+      ],
+      "textureMode": "vertex-color",
+      "textureCost": {
+        "textures": 0,
+        "embeddedImageBytes": 0
+      },
+      "sharedMaterialSurfaces": 4,
+      "lodPolicy": {
+        "lod0": "Parked and boarding detail, under 10k triangles / 1 MB",
+        "lod1": "Near traffic and boarding, under 5k triangles / 1 MB",
+        "lod2": "Closed distant fallback; no boarding or ramp"
+      },
+      "intendedConsumer": "Atlas runtime exterior override; retain existing bus-closeup interior and base vehicle contract",
+      "taskId": "translink-hybrid-exterior",
+      "expectedDimensionsM": [
+        3.0399999618530273,
+        3.0820000171661377,
+        12.671000003814697
+      ],
+      "dimensionToleranceM": 0.02,
+      "dimensionBasis": "Measured actual hybrid GLB extents including mirrors, lights and folded bicycle rack. Canonical Atlas nominal 12.4 x 2.5 m body; representative low-floor layout, not a manufacturer dimensional certification.",
+      "offlineChecks": {
+        "status": "pass",
+        "evidence": [
+          "qa/geometry-validation.json",
+          "qa/source-reexport.json",
+          "qa/build.json",
+          "qa/original-film-metrics.json",
+          "qa/comparison.html"
+        ]
+      },
+      "runtimeChecks": {
+        "status": "cpu_evidence_separate_from_live_acceptance",
+        "evidenceBase": "repository-root",
+        "evidence": [
+          "tests/bus-hybrid-runtime.test.mjs",
+          "tests/bus-hybrid-adoption.test.mjs",
+          "tests/bus-accessibility.test.mjs"
+        ],
+        "note": "Actual exterior and retained-interior CPU load/door/ramp/terrain tests. Live runtime acceptance is recorded by the root integration task."
+      },
+      "attachmentDatum": {
+        "frameId": "vehicle",
+        "kind": "tyre-contact-plane",
+        "heightM": 0
+      },
+      "clearance": {
+        "frameId": "vehicle",
+        "floorHeightM": 0.36,
+        "ceilingUndersideM": 2.6,
+        "standingHeadroomM": 2.24,
+        "minimumMainAisleM": 0.9,
+        "doorWidthM": 0.9,
+        "doorWidthsM": {
+          "front": 1.2,
+          "rear": 0.9
+        },
+        "doorHeightM": 2.1
+      },
+      "collision": {
+        "frameId": "vehicle",
+        "kind": "JSON primitives",
+        "vehicleRef": "city-bus-12m",
+        "note": "Door proxies must animate with leaf transform; never use a solid body AABB for occupied state."
+      },
+      "anchors": [
+        "boarding-front",
+        "boarding-rear",
+        "axle-front",
+        "axle-rear"
+      ],
+      "placementCompatibility": {
+        "profileIds": [
+          "low-floor-bus-12m"
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "sourceRequirement": "Consumer-selected road service transform and surveyed stop/walk-surface alignment. No fixed world XYZ."
+      }
+    }
+  ],
+  "reference": {
+    "source": "reference/film-bus-upright-reference.blend",
+    "sourceBytes": 341842,
+    "sourceSha256": "188d4ced34303a7c3548ec155951f398dae41b4b2e85a5de983714594854b626",
+    "evaluatedTriangles": 176242,
+    "evaluatedVertices": 99112,
+    "evaluatedMeshObjects": 416,
+    "descendants": 422,
+    "passengerSeats": 34,
+    "stuntThrusters": 0,
+    "externalFontsPacked": false,
+    "referenceOnly": true,
+    "note": "Isolated neutral film geometry; not part of the runtime hybrid payload."
+  },
+  "originalFilmModel": {
+    "sourceOrigin": "film workspace production/bus_model_v2.py",
+    "sourceSha256": "495d4f2a67a459375b1ebeceb5992948d24e5b120ef2c6cd2b3715e9e19c9601",
+    "evaluatedTriangles": 197610,
+    "evaluatedVertices": 113592,
+    "evaluatedMeshObjects": 432,
+    "descendants": 438,
+    "includesThrusterHardware": true,
+    "notRuntimePayload": true
+  },
+  "provenance": {
+    "canonicalGeometry": "../boardable-bus/build.py and door_layout.py",
+    "canonicalContractSha256": "6e7ae8d6f0457dc11d4d76729adb307d694edabc42da923e8ec842f078bea041",
+    "filmDetailDonor": "reference/film_bus_reference.py",
+    "filmSourceOrigin": "production/bus_model_v2.py in the film workspace",
+    "retainedInteriorUrl": "/models/blender/bus-closeup/city-bus-12m-interior-v2-closeup.lod0.glb",
+    "retainedInteriorSha256": "ac680d0a5f6f9543f21b8310bd33ff578f8ac255a447963d7b0903fb724a594e",
+    "fonts": "Blender built-in Bfont converted to mesh; no proprietary font packed",
+    "sourceUrls": [
+      "https://novabus.com/wp-content/uploads/2017/09/2014_Technical-Specifications-EN-LR.pdf",
+      "https://www.translink.ca/-/media/translink/documents/about-translink/freedom-of-information/cmbc-operator-policy--procedures-manual.pdf",
+      "https://www.translink.ca/-/media/translink/documents/plans-and-projects/roads-bridges-and-goods-movement/design_guide_bus_stops_adjacent_to_cycling.pdf"
+    ]
+  },
+  "reexportCommand": "blender --background --python tools/assets/boardable-bus-hybrid/export.py",
+  "validationCommand": "python3 tools/assets/boardable-bus-hybrid/validate.py",
+  "qaReport": "qa/geometry-validation.json",
+  "textures": []
+}

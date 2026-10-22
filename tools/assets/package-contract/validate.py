@@ -39,6 +39,17 @@ def inside(root, relative):
     return p
 
 
+def export_path(root, lod):
+    relative=lod['file']
+    if 'export' in lod:
+        # A public basename and an authoring-relative export can coexist without
+        # duplicating the GLB at the package root. Keep this form unambiguous.
+        need(Path(relative).name==relative and relative not in ('','.','..'),'runtime basename required')
+        need(lod['export']==f'exports/{relative}','canonical authoring export path')
+        relative=lod['export']
+    return inside(root,relative)
+
+
 def matmul(a,b):
     return [sum(a[k*4+r]*b[c*4+k] for k in range(4)) for c in range(4) for r in range(4)]
 
@@ -156,7 +167,7 @@ def validate(root):
         need(digest(inside(root,a['source']))==a['sourceSha256'],'asset source hash')
         need(a['lods'] and len({l['level'] for l in a['lods']})==len(a['lods']),'unique nonempty LODs')
         for l in a['lods']:
-            path=inside(root,l['file']); need(digest(path)==l['sha256'],'GLB hash')
+            path=export_path(root,l); need(digest(path)==l['sha256'],'GLB hash')
             need(digest(inside(root,l['source']))==l['sourceSha256'],'LOD source hash')
             r=measure_glb(path)
             for k in ('triangles','vertices','primitives','bytes'): need(l[k]==r[k],f'{path.name}: {k} mismatch')
