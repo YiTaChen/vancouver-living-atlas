@@ -12,6 +12,7 @@ import { installAutoQualityQA } from './auto-quality-qa';
 import { installTeslaQA } from './tesla-qa';
 import { installVehicleImpactQA } from './vehicle-impact-qa';
 import { installStanleyDriveQA } from './stanley-drive-qa';
+import { installVehicleDriftQA } from './vehicle-drift-qa';
 import { installUpgradeEnduranceQA } from './upgrade-endurance-qa';
 
 const cases = [
@@ -287,6 +288,7 @@ export function installVisualQA(e: CityEngine) {
   installTeslaQA(e, panel, runLease);
   installVehicleImpactQA(e,panel);
   installStanleyDriveQA(e,panel);
+  installVehicleDriftQA(e,panel);
   installStreetFurnitureQA(e, panel, runLease);
   const button = (name: string, fn: () => void) => {
     const b = document.createElement('button');

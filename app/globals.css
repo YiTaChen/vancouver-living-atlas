@@ -2357,6 +2357,51 @@ a {
   font-size: 12px;
   touch-action: none;
 }
+.touch-drift {
+  position: absolute;
+  left: 136px;
+  bottom: 60px;
+  min-width: 76px;
+  min-height: 48px;
+  padding: 9px;
+  border: 1px solid #a9c79a;
+  border-radius: 14px;
+  color: #edf3d6;
+  font-size: 12px;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.touch-drift kbd { display: none; }
+.drive-drift-hold {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 44px;
+  margin: 10px 0;
+  padding: 9px 12px;
+  border: 1px solid #92b38b;
+  border-radius: 10px;
+  color: #e9efd7;
+  font-size: 12px;
+  background: #18383d;
+  touch-action: none;
+}
+.drive-drift-hold kbd { font: 12px ui-monospace, monospace; }
+.touch-drift[aria-pressed='true'],
+.drive-drift-hold[aria-pressed='true'] {
+  background: #dce7a2;
+  color: #17373b;
+  border-color: #eef6bf;
+}
+.touch-drift:focus-visible,
+.drive-drift-hold:focus-visible {
+  outline: 2px solid #dce7a2;
+  outline-offset: 3px;
+}
+.drive-drift-hold:disabled { opacity: 0.5; }
 .atlas.touch-ui.placement-mode .explore-panel,
 .atlas.touch-ui.placement-mode .map-inset,
 .atlas.touch-ui.placement-mode .view-caption {
@@ -2741,6 +2786,11 @@ a {
 .tesla-secondary button:focus-visible {
   outline: 2px solid #dce7a2;
   outline-offset: 2px;
+}
+.tesla-actions button:disabled,
+.tesla-touch-controls button:disabled {
+  opacity: 0.45;
+  cursor: default;
 }
 .tesla-quality {
   display: flex;

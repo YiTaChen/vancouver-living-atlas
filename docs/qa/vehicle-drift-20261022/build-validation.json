@@ -1,0 +1,31 @@
+{
+  "runtime": "Node v24.22.1",
+  "status": "pass",
+  "checks": {
+    "typecheck": {
+      "status": "pass",
+      "localLog": "work/drift-check-final.log",
+      "logSha256": "455c89e2c267bce4737bf0328ef9383090bd75b3988edd7beb4f041fb9723dcf"
+    },
+    "productionFirebaseBuild": {
+      "status": "pass",
+      "localLog": "work/drift-production-build.log",
+      "logSha256": "315566bc753a108fc7c286b1a8a0e05093dbb6274be4a84b464f86dd997324a6"
+    },
+    "architectureDetails": {
+      "status": "pass",
+      "localLog": "work/drift-architecture-validation.log",
+      "logSha256": "592c7d1a0cbf5ad153d34fa65e0db96eb0fd8bcdca6c47eeda648b5435b854c3"
+    },
+    "newDriftFilesStrictLint": {
+      "status": "pass",
+      "localLog": "work/drift-new-files-lint.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "lintScope": "New drift modules/tests are strict-lint clean. Exact-base changed-file comparison found 55 inherited diagnostics versus 59 on the base revision, zero added diagnostics; repository-wide lint is not clean.",
+  "qaExclusion": "Firebase build verifier includes and passed rejection of both drift recorder markers and the vehicle-drift-qa module from production output.",
+  "nativeSummary": "native-input-summary.json",
+  "automatedSummary": "automated-tests.json",
+  "lintComparison": "lint-comparison.json"
+}

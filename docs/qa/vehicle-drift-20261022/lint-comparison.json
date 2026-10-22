@@ -1,0 +1,743 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-22T12:38:48.990196+00:00",
+  "baseCommit": "5d801579738fd43121cdf03669f22c43423508e1",
+  "workingBranch": "codex/all-vehicle-drift-20261022",
+  "tool": "Version: 1.76.0",
+  "nodeVersion": "v24.22.1",
+  "result": "no_new_diagnostics",
+  "method": {
+    "baseline": "Exact git blobs at baseCommit copied to ignored work/drift-lint-baseline; node_modules symlinked to the same installed dependencies; same .oxlintrc.json and tsconfig.json. No checkout or product/test edits.",
+    "command": [
+      "node_modules/.bin/oxlint",
+      "--deny-warnings",
+      "--format",
+      "json",
+      "<scope>"
+    ],
+    "scopePolicy": "Current uses all requested files; baseline uses the subset existing in baseCommit. Newly added files are absent from base and contribute zero current diagnostics.",
+    "matching": "For each current diagnostic, difflib equal source blocks map its primary line to a baseline diagnostic with identical file, rule, message, severity and column. Matches consume a diagnostic occurrence to preserve duplicate counts.",
+    "configurationSha256": {
+      ".oxlintrc.json": "1a7aa1c7d83b05939e4e697eed9316224caea8958c4ad12837f8be740c13a47d",
+      "tsconfig.json": "1795dc3c8add169c9b676b9769e5a4b3a0069f2cfb96a5982b40dd2c6202173c"
+    },
+    "baselineConfigurationMatchesCurrent": true
+  },
+  "scope": {
+    "all": [
+      "lib/city/navigation.ts",
+      "lib/city/engine.ts",
+      "lib/city/tesla-state.ts",
+      "lib/city/tesla-controller.ts",
+      "lib/city/tesla-snapshot.ts",
+      "lib/city/vehicle-drift.ts",
+      "lib/city/vehicle-drift-effects.ts",
+      "lib/city/vehicle-drift-qa.ts",
+      "lib/city/visual-qa.ts",
+      "app/page.tsx",
+      "components/travel-joystick.tsx",
+      "components/tesla-controls.tsx",
+      "tests/vehicle-drift-effects.test.mjs",
+      "tests/vehicle-drift-navigation.test.mjs",
+      "tests/vehicle-drift-ui.test.mjs",
+      "tests/vehicle-drift.test.mjs",
+      "tests/tesla-drift.test.mjs",
+      "tests/tesla-controller.test.mjs",
+      "tests/tesla-controls.test.mjs",
+      "tests/placement.test.mjs",
+      "tests/roadster.test.mjs",
+      "tests/upgrade-qa-lease.test.mjs",
+      "tools/verify-firebase-build.mjs"
+    ],
+    "baseline_existing": [
+      "lib/city/navigation.ts",
+      "lib/city/engine.ts",
+      "lib/city/tesla-state.ts",
+      "lib/city/tesla-controller.ts",
+      "lib/city/tesla-snapshot.ts",
+      "lib/city/visual-qa.ts",
+      "app/page.tsx",
+      "components/travel-joystick.tsx",
+      "components/tesla-controls.tsx",
+      "tests/tesla-controller.test.mjs",
+      "tests/tesla-controls.test.mjs",
+      "tests/placement.test.mjs",
+      "tests/roadster.test.mjs",
+      "tests/upgrade-qa-lease.test.mjs"
+    ],
+    "new": [
+      "lib/city/vehicle-drift.ts",
+      "lib/city/vehicle-drift-effects.ts",
+      "lib/city/vehicle-drift-qa.ts",
+      "tests/vehicle-drift-effects.test.mjs",
+      "tests/vehicle-drift-navigation.test.mjs",
+      "tests/vehicle-drift-ui.test.mjs",
+      "tests/vehicle-drift.test.mjs",
+      "tests/tesla-drift.test.mjs",
+      "tools/verify-firebase-build.mjs"
+    ]
+  },
+  "baseline": {
+    "files": 14,
+    "diagnostics": 59,
+    "errors": 59,
+    "warnings": 0,
+    "exitCode": 1,
+    "byFile": {
+      "app/page.tsx": 41,
+      "components/travel-joystick.tsx": 4,
+      "lib/city/engine.ts": 3,
+      "lib/city/navigation.ts": 1,
+      "lib/city/visual-qa.ts": 1,
+      "tests/placement.test.mjs": 9
+    },
+    "byRule": {
+      "eslint(no-unused-vars)": 4,
+      "jsx-a11y(no-noninteractive-element-interactions)": 1,
+      "jsx-a11y(no-noninteractive-tabindex)": 1,
+      "jsx-a11y(prefer-tag-over-role)": 9,
+      "next(no-html-link-for-pages)": 1,
+      "react(react-compiler)": 30,
+      "react-hooks(exhaustive-deps)": 1,
+      "typescript(no-explicit-any)": 5,
+      "typescript(no-implied-eval)": 1,
+      "typescript(unbound-method)": 6
+    },
+    "stderrEmpty": true
+  },
+  "current": {
+    "files": 23,
+    "diagnostics": 55,
+    "errors": 55,
+    "warnings": 0,
+    "exitCode": 1,
+    "byFile": {
+      "app/page.tsx": 41,
+      "lib/city/engine.ts": 3,
+      "lib/city/navigation.ts": 1,
+      "lib/city/visual-qa.ts": 1,
+      "tests/placement.test.mjs": 9
+    },
+    "byRule": {
+      "eslint(no-unused-vars)": 4,
+      "jsx-a11y(prefer-tag-over-role)": 8,
+      "next(no-html-link-for-pages)": 1,
+      "react(react-compiler)": 30,
+      "typescript(no-explicit-any)": 5,
+      "typescript(no-implied-eval)": 1,
+      "typescript(unbound-method)": 6
+    },
+    "stderrEmpty": true,
+    "agreesWithOriginalScopedLog": true,
+    "newFilesStrictLintDiagnostics": 0
+  },
+  "comparison": {
+    "unchangedSourceLineMatches": 55,
+    "newFindings": [],
+    "removedFindings": [
+      {
+        "file": "components/travel-joystick.tsx",
+        "rule": "jsx-a11y(no-noninteractive-element-interactions)",
+        "message": "Non-interactive elements should not be assigned mouse or keyboard event listeners.",
+        "severity": "error",
+        "count": 1
+      },
+      {
+        "file": "components/travel-joystick.tsx",
+        "rule": "jsx-a11y(no-noninteractive-tabindex)",
+        "message": "`tabIndex` should only be declared on interactive elements.",
+        "severity": "error",
+        "count": 1
+      },
+      {
+        "file": "components/travel-joystick.tsx",
+        "rule": "jsx-a11y(prefer-tag-over-role)",
+        "message": "Prefer `address, details, fieldset, hgroup, optgroup` over `role` attribute `group`.",
+        "severity": "error",
+        "count": 1
+      },
+      {
+        "file": "components/travel-joystick.tsx",
+        "rule": "react-hooks(exhaustive-deps)",
+        "message": "React Hook useEffect has a missing dependency: 'reset'",
+        "severity": "error",
+        "count": 1
+      }
+    ],
+    "matches": [
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "EffectSetState: Calling setState synchronously within an effect can trigger cascading renders",
+        "severity": "error",
+        "baselineLine": 206,
+        "currentLine": 209,
+        "column": 7,
+        "source": "      setLocale(resolveLocale(localStorage.getItem(LOCALE_STORAGE_KEY)));"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "EffectSetState: Calling setState synchronously within an effect can trigger cascading renders",
+        "severity": "error",
+        "baselineLine": 232,
+        "currentLine": 235,
+        "column": 5,
+        "source": "    setMobilePanel(null);"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "EffectSetState: Calling setState synchronously within an effect can trigger cascading renders",
+        "severity": "error",
+        "baselineLine": 276,
+        "currentLine": 287,
+        "column": 5,
+        "source": "    setReady(false);"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "EffectSetState: Calling setState synchronously within an effect can trigger cascading renders",
+        "severity": "error",
+        "baselineLine": 427,
+        "currentLine": 438,
+        "column": 5,
+        "source": "    setSettings((s) => ({ ...s, autoRotate: true }));"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Immutability: This value cannot be modified",
+        "severity": "error",
+        "baselineLine": 399,
+        "currentLine": 410,
+        "column": 5,
+        "source": "    placement.onPreview = setPlacementPreview;"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "baselineLine": 187,
+        "currentLine": 190,
+        "column": 3,
+        "source": "  localeRef.current = locale;"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "baselineLine": 266,
+        "currentLine": 277,
+        "column": 3,
+        "source": "  settingsRef.current = settings;"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "baselineLine": 807,
+        "currentLine": 818,
+        "column": 15,
+        "source": "        city={engine.current}"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "baselineLine": 849,
+        "currentLine": 860,
+        "column": 21,
+        "source": "        compatible={engine.current?.compatibleGraphics ?? false}"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "baselineLine": 849,
+        "currentLine": 860,
+        "column": 21,
+        "source": "        compatible={engine.current?.compatibleGraphics ?? false}"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "baselineLine": 850,
+        "currentLine": 861,
+        "column": 21,
+        "source": "        pixelRatio={engine.current?.renderer.getPixelRatio() ?? 1}"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "baselineLine": 850,
+        "currentLine": 861,
+        "column": 21,
+        "source": "        pixelRatio={engine.current?.renderer.getPixelRatio() ?? 1}"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "baselineLine": 850,
+        "currentLine": 861,
+        "column": 21,
+        "source": "        pixelRatio={engine.current?.renderer.getPixelRatio() ?? 1}"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "baselineLine": 850,
+        "currentLine": 861,
+        "column": 21,
+        "source": "        pixelRatio={engine.current?.renderer.getPixelRatio() ?? 1}"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "baselineLine": 850,
+        "currentLine": 861,
+        "column": 21,
+        "source": "        pixelRatio={engine.current?.renderer.getPixelRatio() ?? 1}"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "baselineLine": 849,
+        "currentLine": 860,
+        "column": 21,
+        "source": "        compatible={engine.current?.compatibleGraphics ?? false}"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "baselineLine": 854,
+        "currentLine": 865,
+        "column": 15,
+        "source": "        city={engine.current}"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "baselineLine": 874,
+        "currentLine": 885,
+        "column": 21,
+        "source": "        controller={engine.current?.flight || null}"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "baselineLine": 874,
+        "currentLine": 885,
+        "column": 21,
+        "source": "        controller={engine.current?.flight || null}"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "baselineLine": 874,
+        "currentLine": 885,
+        "column": 21,
+        "source": "        controller={engine.current?.flight || null}"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "baselineLine": 908,
+        "currentLine": 919,
+        "column": 36,
+        "source": "      <VehicleConditionPanel city={engine.current} locale={locale}"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "baselineLine": 1514,
+        "currentLine": 1532,
+        "column": 20,
+        "source": "              ? `${tourIndex.current + 1} / ${VIEWS.length}`"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "baselineLine": 1980,
+        "currentLine": 1998,
+        "column": 12,
+        "source": "          {engine.current?.compatibleGraphics && ("
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "baselineLine": 1980,
+        "currentLine": 1998,
+        "column": 12,
+        "source": "          {engine.current?.compatibleGraphics && ("
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "baselineLine": 1980,
+        "currentLine": 1998,
+        "column": 12,
+        "source": "          {engine.current?.compatibleGraphics && ("
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "baselineLine": 743,
+        "currentLine": 754,
+        "column": 7,
+        "source": "      engine.current?.navigation?.hold(direction, true);"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "baselineLine": 743,
+        "currentLine": 754,
+        "column": 7,
+        "source": "      engine.current?.navigation?.hold(direction, true);"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "baselineLine": 743,
+        "currentLine": 754,
+        "column": 7,
+        "source": "      engine.current?.navigation?.hold(direction, true);"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "baselineLine": 743,
+        "currentLine": 754,
+        "column": 7,
+        "source": "      engine.current?.navigation?.hold(direction, true);"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "baselineLine": 743,
+        "currentLine": 754,
+        "column": 7,
+        "source": "      engine.current?.navigation?.hold(direction, true);"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "typescript(no-explicit-any)",
+        "message": "Unexpected `any`. Specify a different type.",
+        "severity": "error",
+        "baselineLine": 474,
+        "currentLine": 485,
+        "column": 62,
+        "source": "    const context = (document as Document & { modelContext?: any })"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "typescript(no-explicit-any)",
+        "message": "Unexpected `any`. Specify a different type.",
+        "severity": "error",
+        "baselineLine": 478,
+        "currentLine": 489,
+        "column": 29,
+        "source": "    const register = (tool: any) => {"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "jsx-a11y(prefer-tag-over-role)",
+        "message": "Prefer `output` over `role` attribute `status`.",
+        "severity": "error",
+        "baselineLine": 799,
+        "currentLine": 810,
+        "column": 14,
+        "source": "        <div role=\"status\" className=\"traffic-stop-caption glass\">"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "jsx-a11y(prefer-tag-over-role)",
+        "message": "Prefer `address, details, fieldset, hgroup, optgroup` over `role` attribute `group`.",
+        "severity": "error",
+        "baselineLine": 1050,
+        "currentLine": 1065,
+        "column": 21,
+        "source": "                    role=\"group\""
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "jsx-a11y(prefer-tag-over-role)",
+        "message": "Prefer `address, details, fieldset, hgroup, optgroup` over `role` attribute `group`.",
+        "severity": "error",
+        "baselineLine": 1071,
+        "currentLine": 1086,
+        "column": 23,
+        "source": "                      role=\"group\""
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "jsx-a11y(prefer-tag-over-role)",
+        "message": "Prefer `address, details, fieldset, hgroup, optgroup` over `role` attribute `group`.",
+        "severity": "error",
+        "baselineLine": 1131,
+        "currentLine": 1149,
+        "column": 17,
+        "source": "                role=\"group\""
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "jsx-a11y(prefer-tag-over-role)",
+        "message": "Prefer `address, details, fieldset, hgroup, optgroup` over `role` attribute `group`.",
+        "severity": "error",
+        "baselineLine": 1152,
+        "currentLine": 1170,
+        "column": 17,
+        "source": "                role=\"group\""
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "next(no-html-link-for-pages)",
+        "message": "Do not use `<a>` elements to navigate between Next.js pages.",
+        "severity": "error",
+        "baselineLine": 1203,
+        "currentLine": 1221,
+        "column": 9,
+        "source": "        <a className=\"brand\" href=\"/\" aria-label=\"Vancouver Living Atlas\">"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "jsx-a11y(prefer-tag-over-role)",
+        "message": "Prefer `output` over `role` attribute `status`.",
+        "severity": "error",
+        "baselineLine": 1395,
+        "currentLine": 1413,
+        "column": 18,
+        "source": "              <b role=\"status\" aria-live=\"polite\">"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "jsx-a11y(prefer-tag-over-role)",
+        "message": "Prefer `output` over `role` attribute `status`.",
+        "severity": "error",
+        "baselineLine": 2266,
+        "currentLine": 2296,
+        "column": 38,
+        "source": "        <div className=\"toast glass\" role=\"status\">"
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "jsx-a11y(prefer-tag-over-role)",
+        "message": "Prefer `progress` over `role` attribute `progressbar`.",
+        "severity": "error",
+        "baselineLine": 2341,
+        "currentLine": 2371,
+        "column": 21,
+        "source": "                    role=\"progressbar\""
+      },
+      {
+        "file": "lib/city/engine.ts",
+        "rule": "eslint(no-unused-vars)",
+        "message": "Identifier 'lines' is imported but never used.",
+        "severity": "error",
+        "baselineLine": 95,
+        "currentLine": 96,
+        "column": 37,
+        "source": "import { project, unproject, rings, lines, inPolygon, hash } from './geo';"
+      },
+      {
+        "file": "lib/city/engine.ts",
+        "rule": "eslint(no-unused-vars)",
+        "message": "Type 'FeatureCollection' is imported but never used.",
+        "severity": "error",
+        "baselineLine": 99,
+        "currentLine": 100,
+        "column": 8,
+        "source": "  type FeatureCollection,"
+      },
+      {
+        "file": "lib/city/engine.ts",
+        "rule": "typescript(no-explicit-any)",
+        "message": "Unexpected `any`. Specify a different type.",
+        "severity": "error",
+        "baselineLine": 223,
+        "currentLine": 225,
+        "column": 24,
+        "source": "  data: Record<string, any> = {};"
+      },
+      {
+        "file": "lib/city/navigation.ts",
+        "rule": "typescript(no-explicit-any)",
+        "message": "Unexpected `any`. Specify a different type.",
+        "severity": "error",
+        "baselineLine": 937,
+        "currentLine": 990,
+        "column": 56,
+        "source": "    const s = this.e.data.bridges?.mainSpines.find((s: any) => s.kind === kind);"
+      },
+      {
+        "file": "lib/city/visual-qa.ts",
+        "rule": "typescript(no-explicit-any)",
+        "message": "Unexpected `any`. Specify a different type.",
+        "severity": "error",
+        "baselineLine": 395,
+        "currentLine": 397,
+        "column": 13,
+        "source": "        (s: any) => s.sourceId === id,"
+      },
+      {
+        "file": "tests/placement.test.mjs",
+        "rule": "eslint(no-unused-vars)",
+        "message": "Parameter 'z' is declared but never used. Unused parameters should start with a '_'.",
+        "severity": "error",
+        "baselineLine": 40,
+        "currentLine": 40,
+        "column": 18,
+        "source": "  elevation: (x, z) => 40 + x * 0.2,"
+      },
+      {
+        "file": "tests/placement.test.mjs",
+        "rule": "eslint(no-unused-vars)",
+        "message": "Parameter 'z' is declared but never used. Unused parameters should start with a '_'.",
+        "severity": "error",
+        "baselineLine": 91,
+        "currentLine": 91,
+        "column": 26,
+        "source": "      world({ clear: (x, z) => x < 7 }),"
+      },
+      {
+        "file": "tests/placement.test.mjs",
+        "rule": "typescript(no-implied-eval)",
+        "message": "Implied eval. Do not use the Function constructor to create functions.",
+        "severity": "error",
+        "baselineLine": 914,
+        "currentLine": 916,
+        "column": 24,
+        "source": "      const handlers = new Function("
+      },
+      {
+        "file": "tests/placement.test.mjs",
+        "rule": "typescript(unbound-method)",
+        "message": "Avoid referencing unbound methods which may cause unintentional scoping of `this`.",
+        "severity": "error",
+        "baselineLine": 1197,
+        "currentLine": 1199,
+        "column": 28,
+        "source": "    const { nav, e, saved, close } = returnFixture(mode, surface);"
+      },
+      {
+        "file": "tests/placement.test.mjs",
+        "rule": "typescript(unbound-method)",
+        "message": "Avoid referencing unbound methods which may cause unintentional scoping of `this`.",
+        "severity": "error",
+        "baselineLine": 1267,
+        "currentLine": 1269,
+        "column": 28,
+        "source": "    const { nav, e, saved, close } = returnFixture();"
+      },
+      {
+        "file": "tests/placement.test.mjs",
+        "rule": "typescript(unbound-method)",
+        "message": "Avoid referencing unbound methods which may cause unintentional scoping of `this`.",
+        "severity": "error",
+        "baselineLine": 1292,
+        "currentLine": 1294,
+        "column": 28,
+        "source": "    const { nav, e, saved, close } = returnFixture();"
+      },
+      {
+        "file": "tests/placement.test.mjs",
+        "rule": "typescript(unbound-method)",
+        "message": "Avoid referencing unbound methods which may cause unintentional scoping of `this`.",
+        "severity": "error",
+        "baselineLine": 1396,
+        "currentLine": 1398,
+        "column": 19,
+        "source": "  const { nav, e, close } = returnFixture();"
+      },
+      {
+        "file": "tests/placement.test.mjs",
+        "rule": "typescript(unbound-method)",
+        "message": "Avoid referencing unbound methods which may cause unintentional scoping of `this`.",
+        "severity": "error",
+        "baselineLine": 1450,
+        "currentLine": 1452,
+        "column": 26,
+        "source": "  const { nav, e, saved, close } = returnFixture();"
+      },
+      {
+        "file": "tests/placement.test.mjs",
+        "rule": "typescript(unbound-method)",
+        "message": "Avoid referencing unbound methods which may cause unintentional scoping of `this`.",
+        "severity": "error",
+        "baselineLine": 1487,
+        "currentLine": 1489,
+        "column": 19,
+        "source": "  const { nav, e, close } = returnFixture();"
+      }
+    ]
+  },
+  "evidence": {
+    "originalScopedLog": {
+      "path": "work/drift-final-lint.log",
+      "sha256": "d26cbac33cbe5333677d6f62ba3e0875c64743c6604c72dbdeb4a4d64ef43c52"
+    },
+    "newFilesStrictLog": {
+      "path": "work/drift-new-files-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "baselineJson": {
+      "path": "work/drift-lint-baseline.json",
+      "sha256": "fec130d60f679681a579d02864b5401d6002620a1e2a410503962c380ace7e17"
+    },
+    "currentJson": {
+      "path": "work/drift-lint-current.json",
+      "sha256": "bdf6678f26e7ae6fb30edd886b092f8987b378b3007acb828a3c0798be9b6dbb"
+    }
+  },
+  "limitations": [
+    "This is the requested scoped lint comparison, not a repository-wide lint pass.",
+    "The scoped command still exits 1 because 55 inherited errors remain, including app/page.tsx React compiler/a11y/type errors, existing navigation/visual-qa explicit any, engine unused imports/explicit any, and placement test unused parameters/Function/unbound methods.",
+    "All 55 current diagnostics are inherited; no suppressions or product/test source changes were made for this audit."
+  ]
+}

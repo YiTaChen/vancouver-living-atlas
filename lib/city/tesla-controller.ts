@@ -26,8 +26,9 @@ import { EMPTY_TESLA, type TeslaSnapshot } from './tesla-snapshot';
 import { teslaDot, teslaRotate } from './tesla-math';
 import { canStartTeslaVortex, sampleTeslaVortex } from './tesla-vortex';
 import { VehicleCondition } from './vehicle-condition';
+import { vehicleDriftIntensity } from './vehicle-drift';
 
-export type TeslaButton = 'up' | 'down' | 'boost' | 'brake';
+export type TeslaButton = 'up' | 'down' | 'boost' | 'brake' | 'drift';
 export type TeslaCommand =
   | 'jump'
   | 'flightToggle'
@@ -53,6 +54,7 @@ const AXIS_KEYS: Record<string, string> = {
   KeyP: 'p',
   KeyF: 'f',
   KeyR: 'r',
+  KeyX: 'drift',
   KeyB: 'b',
   KeyQ: 'down',
   KeyV: 'vortex',
@@ -140,8 +142,45 @@ export class TeslaController {
       ? { x: s.position[0], z: s.position[2], yaw: s.heading, following: true }
       : null;
   }
+  /** Rear/all tyre contacts are chassis-local; FX transforms these with this
+   * exact accepted pose and rechecks the physical road before drawing a mark. */
+  get driftContact() {
+    const s = this.state;
+    if (
+      !this.active ||
+      !this.inputEnabled ||
+      !s ||
+      s.mode !== 'ground' ||
+      s.contact?.kind !== 'ground' ||
+      s.contact.normal[1] <= 0.92 ||
+      s.parked ||
+      s.attachment ||
+      s.vortex ||
+      s.groundDeparture
+    )
+      return null;
+    const signedSpeed =
+      Math.sign(teslaDot(s.velocity, teslaRotate(s.quaternion, [0, 0, 1]))) *
+      Math.hypot(...s.velocity);
+    const intensity = vehicleDriftIntensity(s.drift, signedSpeed, 'tesla');
+    return intensity > 0
+      ? {
+          intensity,
+          slipAngle: s.drift.slipAngle,
+          speedMps: signedSpeed,
+          position: s.position,
+          quaternion: s.quaternion,
+          normal: s.contact.normal,
+          surfaceId: s.contact.surfaceId,
+          kind: 'ground' as const,
+          identity: this.world?.identity(s.contact) ?? null,
+          wheelContacts: this.shape.groundSupport?.wheelContacts,
+        }
+      : null;
+  }
   get snapshot(): TeslaSnapshot {
     const s = this.state;
+    const drift = this.driftContact;
     const vortex =
       this.active && s?.vortex ? sampleTeslaVortex(s.vortex) : null;
     return {
@@ -149,6 +188,8 @@ export class TeslaController {
       active: this.active,
       mode: s?.mode ?? 'ground',
       transitioning: !!s?.attachment,
+      drifting: (drift?.intensity ?? 0) > 0.03,
+      driftIntensity: drift?.intensity ?? 0,
       speedKph: Math.round(this.speedMps * 3.6),
       altitudeM: s
         ? Math.round(
@@ -523,6 +564,7 @@ export class TeslaController {
         : 0,
       boost: this.inputEnabled && (pressed('shift') || button('boost')),
       brake: !this.inputEnabled || pressed('b') || button('brake'),
+      drift: this.inputEnabled && (pressed('drift') || button('drift')),
       jump: this.pulses.has('jump'),
       flightToggle: this.pulses.has('flightToggle'),
       adhesionToggle: this.pulses.has('adhesionToggle'),

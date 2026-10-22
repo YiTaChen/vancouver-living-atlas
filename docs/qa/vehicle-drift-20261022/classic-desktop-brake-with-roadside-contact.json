@@ -1,0 +1,4569 @@
+{
+  "revision": "5d801579738fd43121cdf03669f22c43423508e1",
+  "sourceFingerprint": "ff844894a6e9b3bf45ecfb3803a37baa950b5cf7a9ab42b5c2e8000397735fae",
+  "kind": "vehicle-drift-native-v1",
+  "entry": {
+    "mode": "drive",
+    "model": "classic",
+    "position": [
+      -328.70856976818595,
+      10.854496847910067,
+      -2144.44237973515
+    ],
+    "initialDamage": 0,
+    "broken": 0
+  },
+  "samples": [
+    {
+      "t": 184942.09999999776,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0,
+      "speedKph": 0,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 184959.8999999985,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0,
+      "speedKph": 0,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 184999.30000000075,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0,
+      "speedKph": 0,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 185057,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0,
+      "speedKph": 0,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 185102.30000000075,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0,
+      "speedKph": 0,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 185157.19999999925,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0,
+      "speedKph": 0,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 185197.59999999776,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0,
+      "speedKph": 0,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 185258.59999999776,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0,
+      "speedKph": 0,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 185298.09999999776,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0,
+      "speedKph": 0,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 185358.09999999776,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0,
+      "speedKph": 0,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 185397.8999999985,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0,
+      "speedKph": 0,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 185457.5,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0,
+      "speedKph": 0,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 185519.5,
+      "position": [
+        -328.70856976818595,
+        10.854496847910067,
+        -2144.44237973515
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0,
+      "speedKph": 0,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 185556.5,
+      "position": [
+        -328.70164900964016,
+        10.856280366375511,
+        -2144.4293987478854
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.489811293776021,
+      "observedSlip": -3.637978807091713e-12,
+      "observedSpeedKph": 1.4313055135288486,
+      "speedKph": 1.402560000000335,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 185616.30000000075,
+      "position": [
+        -328.6856411588412,
+        10.860405679706792,
+        -2144.399373468723
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.48981129377972144,
+      "observedSlip": 6.245004513516506e-14,
+      "observedSpeedKph": 2.0483879598359915,
+      "speedKph": 2.8800000000000003,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 185655.59999999776,
+      "position": [
+        -328.6699169762288,
+        10.864457890148362,
+        -2144.36988025452
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.48981129377830895,
+      "observedSlip": -1.3500311979441904e-12,
+      "observedSpeedKph": 3.0616525193151163,
+      "speedKph": 3.8419199999998326,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 185713.8999999985,
+      "position": [
+        -328.6250805038427,
+        10.876012501668894,
+        -2144.285782294278
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.4898112937809824,
+      "observedSlip": 1.3234413565044179e-12,
+      "observedSpeedKph": 5.884956432160036,
+      "speedKph": 5.760000000000001,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 185750.59999999776,
+      "position": [
+        -328.59837952538385,
+        10.882893494238012,
+        -2144.235700347475
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.4898112937782754,
+      "observedSlip": -1.38355993328787e-12,
+      "observedSpeedKph": 5.56725972764966,
+      "speedKph": 6.672960000000336,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 185811.30000000075,
+      "position": [
+        -328.5278919516871,
+        10.901058539072032,
+        -2144.1034896525907
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.48981129378045113,
+      "observedSlip": 7.921441280700492e-13,
+      "observedSpeedKph": 8.885957693122888,
+      "speedKph": 8.61408000000017,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 185853.59999999776,
+      "position": [
+        -328.48766902978304,
+        10.911424212642812,
+        -2144.0280451426397
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.48981129378182886,
+      "observedSlip": 2.169875390478637e-12,
+      "observedSpeedKph": 7.276350638787126,
+      "speedKph": 9.564480000000172,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 185910,
+      "position": [
+        -328.3908774700691,
+        10.936367942857256,
+        -2143.8464971236403
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.48981129377996724,
+      "observedSlip": 3.082534227871747e-13,
+      "observedSpeedKph": 13.13223829733528,
+      "speedKph": 11.520000000000005,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 185950,
+      "position": [
+        -328.3374322308886,
+        10.950141082078355,
+        -2143.7462520472427
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.4898112937794716,
+      "observedSlip": -1.8740564655672642e-13,
+      "observedSpeedKph": 10.22420160000322,
+      "speedKph": 12.481919999999837,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 186009.59999999776,
+      "position": [
+        -328.2210781798617,
+        10.980126176509685,
+        -2143.5280114534457
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.4898112937795993,
+      "observedSlip": -5.967448757360216e-14,
+      "observedSpeedKph": 14.938796779086088,
+      "speedKph": 14.345280000000173,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 186048.30000000075,
+      "position": [
+        -328.15448879493505,
+        10.997286636137183,
+        -2143.403112433784
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.4898112937802989,
+      "observedSlip": 6.399325513939402e-13,
+      "observedSpeedKph": 13.166623254785428,
+      "speedKph": 15.318719999999836,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 186105.30000000075,
+      "position": [
+        -328.00972020184724,
+        11.034594318131303,
+        -2143.131575831149
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.4898112937790994,
+      "observedSlip": -5.596079155623102e-13,
+      "observedSpeedKph": 19.434790736867,
+      "speedKph": 17.236800000000002,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 186165.09999999776,
+      "position": [
+        -327.8868040328677,
+        11.066270507326829,
+        -2142.901026937762
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.4898112937793223,
+      "observedSlip": -3.366751322175787e-13,
+      "observedSpeedKph": 15.728532442262528,
+      "speedKph": 18.722880000000167,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 186202.80000000075,
+      "position": [
+        -327.80614057336976,
+        11.087057935257805,
+        -2142.7497297448995
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.48981129377995647,
+      "observedSlip": 2.974842594483107e-13,
+      "observedSpeedKph": 16.372532624688493,
+      "speedKph": 19.638719999999832,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 186260.80000000075,
+      "position": [
+        -327.6197520574823,
+        11.135091305823549,
+        -2142.4001283341604
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.4898112937796074,
+      "observedSlip": -5.156985949383852e-14,
+      "observedSpeedKph": 24.59073600000278,
+      "speedKph": 21.59711999999983,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 186301.3999999985,
+      "position": [
+        -327.5223355771671,
+        11.160196081597432,
+        -2142.2174081768308
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.4898112937799463,
+      "observedSlip": 2.873257187729905e-13,
+      "observedSpeedKph": 18.360595863081905,
+      "speedKph": 22.559040000000504,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 186365.30000000075,
+      "position": [
+        -327.3142425119632,
+        11.213822836794805,
+        -2141.827096419618
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.48981129377964117,
+      "observedSlip": -1.7819079545233762e-14,
+      "observedSpeedKph": 24.919373520251117,
+      "speedKph": 24.48,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 186407.69999999925,
+      "position": [
+        -327.15047902739303,
+        11.256025609331715,
+        -2141.519931866262
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.4898112937797228,
+      "observedSlip": 6.38378239159465e-14,
+      "observedSpeedKph": 29.555042265180777,
+      "speedKph": 25.891199999999998,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 186463.80000000075,
+      "position": [
+        -326.97139106249807,
+        11.302177586778964,
+        -2141.1840238041395
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.4898112937796033,
+      "observedSlip": -5.56776846849516e-14,
+      "observedSpeedKph": 24.427774972615946,
+      "speedKph": 27.359999999999996,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 186500.59999999776,
+      "position": [
+        -326.84882069997985,
+        11.333764659701274,
+        -2140.9541235259644
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.48981129377948385,
+      "observedSlip": -1.7513768213461844e-13,
+      "observedSpeedKph": 25.486959132491897,
+      "speedKph": 28.321919999999825,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 186557,
+      "position": [
+        -326.59530606147047,
+        11.399096810222327,
+        -2140.478616358348
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.4898112937797065,
+      "observedSlip": 4.75175454539567e-14,
+      "observedSpeedKph": 34.39571233905742,
+      "speedKph": 30.208319999999826,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 186615.09999999776,
+      "position": [
+        -326.38702413505376,
+        11.452772236018154,
+        -2140.087950361787
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.4898112937797687,
+      "observedSlip": 1.0969003483296547e-13,
+      "observedSpeedKph": 27.43189590466536,
+      "speedKph": 31.67999999999999,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 186655.3999999985,
+      "position": [
+        -326.24603058328927,
+        11.489107068596407,
+        -2139.823494451683
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.48981129377971505,
+      "observedSlip": 5.6066262743570405e-14,
+      "observedSpeedKph": 26.77161528487159,
+      "speedKph": 32.63904000000049,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 186712.30000000075,
+      "position": [
+        -325.95562511728554,
+        11.563946193187554,
+        -2139.2787926490114
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.4898112937797994,
+      "observedSlip": 1.4038770146385104e-13,
+      "observedSpeedKph": 39.054662634657085,
+      "speedKph": 34.525440000000486,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 186750.59999999776,
+      "position": [
+        -325.7961339684198,
+        11.605047960745193,
+        -2138.97964154317
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.48981129377973004,
+      "observedSlip": 7.105427357601002e-14,
+      "observedSpeedKph": 31.86531258731497,
+      "speedKph": 35.52191999999982,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 186810.09999999776,
+      "position": [
+        -325.4755509420633,
+        11.68766401264495,
+        -2138.3783369094613
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.4898112937794793,
+      "observedSlip": -1.7968959653558159e-13,
+      "observedSpeedKph": 41.229107092453546,
+      "speedKph": 37.43999999999999,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 186848.5,
+      "position": [
+        -325.3089832185057,
+        11.730589453366681,
+        -2138.065912558304
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.489811293779491,
+      "observedSlip": -1.6797674362578618e-13,
+      "observedSpeedKph": 33.192502498071754,
+      "speedKph": 38.401919999999826,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 186906.30000000075,
+      "position": [
+        -324.97280047426983,
+        11.817225640445105,
+        -2137.4353481638645
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.48981129377953775,
+      "observedSlip": -1.212363542890671e-13,
+      "observedSpeedKph": 44.50696193716533,
+      "speedKph": 40.26816000000032,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 186963.59999999776,
+      "position": [
+        -324.6934720684153,
+        11.889210144233171,
+        -2136.9114231554954
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.4898112937795399,
+      "observedSlip": -1.1907141939104804e-13,
+      "observedSpeedKph": 37.30275015899947,
+      "speedKph": 41.759999999999984,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 187003.09999999776,
+      "position": [
+        -324.50861288423727,
+        11.936849397401865,
+        -2136.564690250472
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.48981129377970134,
+      "observedSlip": 4.235500838944972e-14,
+      "observedSpeedKph": 35.811648000021464,
+      "speedKph": 42.71904000000049,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 187064.8999999985,
+      "position": [
+        -324.13543803201225,
+        12.003004059794781,
+        -2135.864741253244
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.4898112937796598,
+      "observedSlip": 8.326672684688674e-16,
+      "observedSpeedKph": 46.20662679555508,
+      "speedKph": 44.58816000000032,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 187099.69999999925,
+      "position": [
+        -323.9358559533256,
+        12.026900183022963,
+        -2135.4903932096704
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.48981129377965604,
+      "observedSlip": -2.942091015256665e-15,
+      "observedSpeedKph": 43.88566344732072,
+      "speedKph": 45.558719999999816,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 187159.09999999776,
+      "position": [
+        -323.5285159646959,
+        12.007511587512864,
+        -2134.726362046069
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.48981129377940563,
+      "observedSlip": -2.533528942194607e-13,
+      "observedSpeedKph": 52.474821819519455,
+      "speedKph": 47.473919999999815,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 187197.80000000075,
+      "position": [
+        -323.30855177918596,
+        11.997047467570113,
+        -2134.3137841079906
+      ],
+      "bodyYaw": 0.489811293779659,
+      "travelYaw": 0.4898112937796129,
+      "observedSlip": -4.6074255521943996e-14,
+      "observedSpeedKph": 43.49320185715019,
+      "speedKph": 48.47904000000049,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "KeyW"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 187259,
+      "position": [
+        -322.8875569925894,
+        11.972945923027572,
+        -2133.5449700230456
+      ],
+      "bodyYaw": 0.5187588455293348,
+      "travelYaw": 0.5009909220031367,
+      "observedSlip": -0.01776792352619816,
+      "observedSpeedKph": 51.56081864432949,
+      "speedKph": 48.37687287387648,
+      "slipAngle": -0.005869283413848617,
+      "active": true,
+      "intensity": 0.0029670631032776614,
+      "physicalKeys": [
+        "KeyX",
+        "KeyA"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 187298,
+      "position": [
+        -322.6658996802599,
+        11.95588919759586,
+        -2133.1625104156874
+      ],
+      "bodyYaw": 0.5499471910352057,
+      "travelYaw": 0.5252525743214039,
+      "observedSlip": -0.024694616713801798,
+      "observedSpeedKph": 40.804522760432825,
+      "speedKph": 47.978613693348855,
+      "slipAngle": -0.021093503902994935,
+      "active": true,
+      "intensity": 0.01907963577287756,
+      "physicalKeys": [
+        "KeyX",
+        "KeyA"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 187352.09999999776,
+      "position": [
+        -322.3239784832862,
+        11.925672765187423,
+        -2132.592507612805
+      ],
+      "bodyYaw": 0.5984609022419315,
+      "travelYaw": 0.5403156698091537,
+      "observedSlip": -0.058145232432777805,
+      "observedSpeedKph": 44.23078309255037,
+      "speedKph": 47.36958384614707,
+      "slipAngle": -0.0530314732452189,
+      "active": true,
+      "intensity": 0.07021418006983639,
+      "physicalKeys": [
+        "KeyX",
+        "KeyA"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 187412.30000000075,
+      "position": [
+        -321.86362080191907,
+        11.878920146792698,
+        -2131.8560966397636
+      ],
+      "bodyYaw": 0.6640425563051084,
+      "travelYaw": 0.5586977625822039,
+      "observedSlip": -0.1053447937229045,
+      "observedSpeedKph": 51.93474479416293,
+      "speedKph": 46.542316021289146,
+      "slipAngle": -0.09895450404521594,
+      "active": true,
+      "intensity": 0.16310031713683404,
+      "physicalKeys": [
+        "KeyX",
+        "KeyA"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 187448.8999999985,
+      "position": [
+        -321.6224553972448,
+        11.85192625322375,
+        -2131.483107597099
+      ],
+      "bodyYaw": 0.6982772350811796,
+      "travelYaw": 0.5739637455801052,
+      "observedSlip": -0.12431348950107435,
+      "observedSpeedKph": 43.68825338028406,
+      "speedKph": 46.10376486194318,
+      "slipAngle": -0.12118880078464912,
+      "active": true,
+      "intensity": 0.2117784859095463,
+      "physicalKeys": [
+        "KeyX",
+        "KeyA"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 187508.30000000075,
+      "position": [
+        -321.1467649125231,
+        11.791871257346633,
+        -2130.7822194959217
+      ],
+      "bodyYaw": 0.7646418650663568,
+      "travelYaw": 0.5962849540535041,
+      "observedSlip": -0.16835691101285266,
+      "observedSpeedKph": 51.33750358979008,
+      "speedKph": 45.23715858153534,
+      "slipAngle": -0.15829732248222678,
+      "active": true,
+      "intensity": 0.29377214816597963,
+      "physicalKeys": [
+        "KeyX",
+        "KeyA"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 0,
+        "drawCalls": 0,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 187563.09999999776,
+      "position": [
+        -320.78313266332844,
+        11.739917906406115,
+        -2130.2773482195385
+      ],
+      "bodyYaw": 0.8140827675030365,
+      "travelYaw": 0.6241860011939224,
+      "observedSlip": -0.18989676630911412,
+      "observedSpeedKph": 40.873955174387724,
+      "speedKph": 44.5793883902814,
+      "slipAngle": -0.18041760651602215,
+      "active": true,
+      "intensity": 0.3408005274605329,
+      "physicalKeys": [
+        "KeyX",
+        "KeyA"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 1,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 187602,
+      "position": [
+        -320.54402749906956,
+        11.702534267228707,
+        -2129.9618444049315
+      ],
+      "bodyYaw": 0.8458179003893678,
+      "travelYaw": 0.6485074122741376,
+      "observedSlip": -0.19731048811523022,
+      "observedSpeedKph": 36.635886886705926,
+      "speedKph": 44.15281358882874,
+      "slipAngle": -0.1922065174175298,
+      "active": true,
+      "intensity": 0.36445833124780885,
+      "physicalKeys": [
+        "KeyX",
+        "KeyA"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 0,
+        "smoke": 1,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 187654.5,
+      "position": [
+        -320.162592371841,
+        11.637424096162741,
+        -2129.486518008903
+      ],
+      "bodyYaw": 0.8950747419653466,
+      "travelYaw": 0.6762451675681366,
+      "observedSlip": -0.21882957439721007,
+      "observedSpeedKph": 41.790780439161836,
+      "speedKph": 43.48583657911384,
+      "slipAngle": -0.2070994111032745,
+      "active": true,
+      "intensity": 0.39188817496290107,
+      "physicalKeys": [
+        "KeyX",
+        "KeyA"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 1,
+        "smoke": 2,
+        "drawCalls": 2,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 187705.30000000075,
+      "position": [
+        -319.6455174543521,
+        11.5380516942672,
+        -2128.898959895278
+      ],
+      "bodyYaw": 0.9590517747355667,
+      "travelYaw": 0.7216776571785245,
+      "observedSlip": -0.23737411755704216,
+      "observedSpeedKph": 55.465648746397974,
+      "speedKph": 42.61419157192906,
+      "slipAngle": -0.22105224023886116,
+      "active": true,
+      "intensity": 0.4130824755307424,
+      "physicalKeys": [
+        "KeyX",
+        "KeyA"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 1,
+        "smoke": 2,
+        "drawCalls": 2,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 187759.09999999776,
+      "position": [
+        -319.22824160275644,
+        11.44997173686158,
+        -2128.4651292136837
+      ],
+      "bodyYaw": 1.0087150187408827,
+      "travelYaw": 0.7659496665931279,
+      "observedSlip": -0.24276535214775471,
+      "observedSpeedKph": 40.27831475157198,
+      "speedKph": 41.93670425240671,
+      "slipAngle": -0.22848373006219572,
+      "active": true,
+      "intensity": 0.4207222564349223,
+      "physicalKeys": [
+        "KeyX",
+        "KeyA"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 2,
+        "smoke": 3,
+        "drawCalls": 2,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 187810,
+      "position": [
+        -318.8163666509524,
+        11.35620683182155,
+        -2128.071807928084
+      ],
+      "bodyYaw": 1.0560952702443507,
+      "travelYaw": 0.8084365019798061,
+      "observedSlip": -0.24765876826454455,
+      "observedSpeedKph": 40.2797458588076,
+      "speedKph": 41.29145592519655,
+      "slipAngle": -0.23332575466735356,
+      "active": true,
+      "intensity": 0.4224841549272001,
+      "physicalKeys": [
+        "KeyX",
+        "KeyA"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 2,
+        "smoke": 3,
+        "drawCalls": 2,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 187847.80000000075,
+      "position": [
+        -318.52348867094844,
+        11.2856005976978,
+        -2127.8122235336405
+      ],
+      "bodyYaw": 1.0888801204325302,
+      "travelYaw": 0.8455893547932183,
+      "observedSlip": -0.24329076563931196,
+      "observedSpeedKph": 37.2722494697278,
+      "speedKph": 40.84631284225347,
+      "slipAngle": -0.23561350460646752,
+      "active": true,
+      "intensity": 0.4212154682931039,
+      "physicalKeys": [
+        "KeyX",
+        "KeyA"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 2,
+        "smoke": 3,
+        "drawCalls": 2,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 187922.69999999925,
+      "position": [
+        -317.94098763348063,
+        11.135217270491525,
+        -2127.346837753264
+      ],
+      "bodyYaw": 1.1352852013212256,
+      "travelYaw": 0.8966995438602223,
+      "observedSlip": -0.23858565746100324,
+      "observedSpeedKph": 35.83568035664163,
+      "speedKph": 40.00161393775376,
+      "slipAngle": -0.19928961913427776,
+      "active": false,
+      "intensity": 0.3120719414532585,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 3,
+        "smoke": 4,
+        "drawCalls": 2,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 187953.80000000075,
+      "position": [
+        -317.6351083042463,
+        11.048611914495728,
+        -2127.141500398027
+      ],
+      "bodyYaw": 1.1352852013212256,
+      "travelYaw": 0.9795916212790678,
+      "observedSlip": -0.15569358004215772,
+      "observedSpeedKph": 42.645477979698526,
+      "speedKph": 39.618280266620545,
+      "slipAngle": -0.14270208553968622,
+      "active": false,
+      "intensity": 0.18041925964292935,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 3,
+        "smoke": 4,
+        "drawCalls": 2,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 188000.8999999985,
+      "position": [
+        -317.1670902300236,
+        10.909365732922575,
+        -2126.861745945983
+      ],
+      "bodyYaw": 1.1352852013212256,
+      "travelYaw": 1.032038157109615,
+      "observedSlip": -0.10324704421161046,
+      "observedSpeedKph": 41.67557337887523,
+      "speedKph": 39.08858185237699,
+      "slipAngle": -0.08655319008475452,
+      "active": false,
+      "intensity": 0.07953934257052259,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 5,
+        "drawCalls": 2,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 188049.5,
+      "position": [
+        -316.6942756323244,
+        10.7637113723493,
+        -2126.604591489259
+      ],
+      "bodyYaw": 1.1352852013212256,
+      "travelYaw": 1.0726638244253863,
+      "observedSlip": -0.06262137689583924,
+      "observedSpeedKph": 39.86823691752718,
+      "speedKph": 38.58799829656094,
+      "slipAngle": -0.052497163482339126,
+      "active": false,
+      "intensity": 0.03509038439734886,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 5,
+        "drawCalls": 2,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 188128.5,
+      "position": [
+        -315.90752841859995,
+        10.515493062666486,
+        -2126.2066276989754
+      ],
+      "bodyYaw": 1.1352852013212256,
+      "travelYaw": 1.1024921136600039,
+      "observedSlip": -0.032793087661221694,
+      "observedSpeedKph": 40.17747996405632,
+      "speedKph": 37.786976979686095,
+      "slipAngle": -0.02282277952651462,
+      "active": false,
+      "intensity": 0.008980786938128737,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 5,
+        "drawCalls": 2,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 188216.8999999985,
+      "position": [
+        -315.439330605093,
+        10.572413733477738,
+        -2125.9792926576542
+      ],
+      "bodyYaw": 1.1352852013212256,
+      "travelYaw": 1.1187726458709906,
+      "observedSlip": -0.016512555450235,
+      "observedSpeedKph": 21.195665345082293,
+      "speedKph": 37.31838962065934,
+      "slipAngle": -0.0138427155226929,
+      "active": false,
+      "intensity": 0.003963339828649795,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 5,
+        "drawCalls": 2,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 188270.09999999776,
+      "position": [
+        -314.823187425632,
+        10.333162359856443,
+        -2125.6865215507555
+      ],
+      "bodyYaw": 1.1352852013212256,
+      "travelYaw": 1.12721147638769,
+      "observedSlip": -0.008073724933535642,
+      "observedSpeedKph": 46.16145462573148,
+      "speedKph": 36.703904287527585,
+      "slipAngle": -0.0071047184890011255,
+      "active": false,
+      "intensity": 0.0013307997275159953,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 5,
+        "drawCalls": 2,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 188302.19999999925,
+      "position": [
+        -314.3664762934274,
+        10.157955665813285,
+        -2125.471319606644
+      ],
+      "bodyYaw": 1.1352852013212256,
+      "travelYaw": 1.1304536238550753,
+      "observedSlip": -0.004831577466150261,
+      "observedSpeedKph": 56.62129200596733,
+      "speedKph": 36.250436314589855,
+      "slipAngle": -0.004309229592206396,
+      "active": false,
+      "intensity": 0.0005871997151483435,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 5,
+        "drawCalls": 2,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 188368.8999999985,
+      "position": [
+        -313.76461475680065,
+        9.929907928114675,
+        -2125.189147850799
+      ],
+      "bodyYaw": 1.1352852013212256,
+      "travelYaw": 1.1323928025281644,
+      "observedSlip": -0.0028923987930611354,
+      "observedSpeedKph": 35.877166064665346,
+      "speedKph": 35.65446825533686,
+      "slipAngle": -0.002211694887966072,
+      "active": false,
+      "intensity": 0.00019711184415512536,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 5,
+        "drawCalls": 2,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 188399.59999999776,
+      "position": [
+        -313.4676855246265,
+        9.818603031184988,
+        -2125.0503591202837
+      ],
+      "bodyYaw": 1.1352852013212256,
+      "travelYaw": 1.1335560701483716,
+      "observedSlip": -0.0017291311728540038,
+      "observedSpeedKph": 38.43487377426584,
+      "speedKph": 35.36065364372533,
+      "slipAngle": -0.0015852769742603313,
+      "active": false,
+      "intensity": 0.00011428810846412714,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 5,
+        "drawCalls": 2,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 188463.69999999925,
+      "position": [
+        -312.88096745484177,
+        9.601035638932435,
+        -2124.776594031042
+      ],
+      "bodyYaw": 1.1352852013212256,
+      "travelYaw": 1.1342205006907116,
+      "observedSlip": -0.001064700630514004,
+      "observedSpeedKph": 36.36198257015018,
+      "speedKph": 34.780304877960056,
+      "slipAngle": -0.0008144511234603482,
+      "active": false,
+      "intensity": 0.00003841617220435321,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 5,
+        "drawCalls": 2,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 188527.59999999776,
+      "position": [
+        -312.30287906133196,
+        9.38976383206926,
+        -2124.5072201911657
+      ],
+      "bodyYaw": 1.1352852013212256,
+      "travelYaw": 1.1347385700652721,
+      "observedSlip": -0.0005466312559534449,
+      "observedSpeedKph": 35.93061074101655,
+      "speedKph": 34.208651650168676,
+      "slipAngle": -0.0004180137882448374,
+      "active": false,
+      "intensity": 0.000012889269453106801,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 5,
+        "drawCalls": 2,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 188619.8999999985,
+      "position": [
+        -312.1596212828901,
+        9.337885125417019,
+        -2124.440499503833
+      ],
+      "bodyYaw": 1.1352852013212256,
+      "travelYaw": 1.1349314782161182,
+      "observedSlip": -0.00035372310510739524,
+      "observedSpeedKph": 6.163802144805701,
+      "speedKph": 34.06700227363368,
+      "slipAngle": -0.00035372310514632596,
+      "active": false,
+      "intensity": 0.000009805391504673156,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 5,
+        "drawCalls": 2,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0,
+      "police": false
+    },
+    {
+      "t": 188672.19999999925,
+      "position": [
+        -312.0346411500847,
+        9.314545363242855,
+        -2124.2135880950486
+      ],
+      "bodyYaw": -0.07067914635946564,
+      "travelYaw": 0.503448175110641,
+      "observedSlip": 0.5741273214701066,
+      "observedSpeedKph": 17.83161244261871,
+      "speedKph": 8.547753261222313,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 4,
+        "drawCalls": 2,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 188712.3999999985,
+      "position": [
+        -312.04266575907866,
+        9.332547907517467,
+        -2124.100014473286
+      ],
+      "bodyYaw": -0.07049682646955226,
+      "travelYaw": -0.07053834522194438,
+      "observedSlip": -0.0000415187523921251,
+      "observedSpeedKph": 10.196127805452093,
+      "speedKph": 8.445577589362038,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 2,
+        "drawCalls": 2,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 188779.30000000075,
+      "position": [
+        -312.0538077829414,
+        9.35757240851889,
+        -2123.94186529292
+      ],
+      "bodyYaw": -0.07023988558674979,
+      "travelYaw": -0.07033639883913854,
+      "observedSlip": -0.00009651325238875519,
+      "observedSpeedKph": 8.531364317650551,
+      "speedKph": 8.303466110636302,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 1,
+        "drawCalls": 2,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 188813.5,
+      "position": [
+        -312.0588866212182,
+        9.368992194235723,
+        -2123.869585319074
+      ],
+      "bodyYaw": -0.07012115124801542,
+      "travelYaw": -0.0701508873876591,
+      "observedSlip": -0.000029736139643674053,
+      "observedSpeedKph": 7.627177836314832,
+      "speedKph": 8.238527713144085,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 1,
+        "drawCalls": 2,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 188848.80000000075,
+      "position": [
+        -312.06446994801405,
+        9.381556698753508,
+        -2123.7899792481944
+      ],
+      "bodyYaw": -0.06998937524511888,
+      "travelYaw": -0.0700222798365409,
+      "observedSlip": -0.00003290459142202273,
+      "observedSpeedKph": 8.138409799599728,
+      "speedKph": 8.166991949630102,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 1,
+        "drawCalls": 2,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 188912.5,
+      "position": [
+        -312.0746135120499,
+        9.404413888702836,
+        -2123.644940122434
+      ],
+      "bodyYaw": -0.06974640618886026,
+      "travelYaw": -0.06982305261722391,
+      "observedSlip": -0.00007664642836364977,
+      "observedSpeedKph": 8.216895278249533,
+      "speedKph": 8.036553825014371,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 1,
+        "drawCalls": 2,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 188951.19999999925,
+      "position": [
+        -312.0800462104522,
+        9.416668908737718,
+        -2123.5670635641454
+      ],
+      "bodyYaw": -0.06961456935773984,
+      "travelYaw": -0.06964754738825289,
+      "observedSlip": -0.00003297803051305337,
+      "observedSpeedKph": 7.2619369174279935,
+      "speedKph": 7.966573875115309,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 1,
+        "drawCalls": 2,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 189013.59999999776,
+      "position": [
+        -312.09017303347525,
+        9.439545012376879,
+        -2123.421471782356
+      ],
+      "bodyYaw": -0.06936507121498899,
+      "travelYaw": -0.06944443357684749,
+      "observedSlip": -0.00007936236185850098,
+      "observedSpeedKph": 8.419820129760039,
+      "speedKph": 7.835636809652114,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 189057.19999999925,
+      "position": [
+        -312.09618538120105,
+        9.453147299638935,
+        -2123.33476389744
+      ],
+      "bodyYaw": -0.06918740763546145,
+      "travelYaw": -0.06922945358835542,
+      "observedSlip": -0.000042045952893962624,
+      "observedSpeedKph": 7.176557381846378,
+      "speedKph": 6.130982129750833,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 189098,
+      "position": [
+        -312.0997457379561,
+        9.461210189812753,
+        -2123.283317367508
+      ],
+      "bodyYaw": -0.06906218986863037,
+      "travelYaw": -0.0690948277412972,
+      "observedSlip": -0.000032637872666829715,
+      "observedSpeedKph": 4.55025705950577,
+      "speedKph": 5.145493291826587,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 189157.5,
+      "position": [
+        -312.10495089900235,
+        9.473017588167375,
+        -2123.2078992863585
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": -0.06890814174760525,
+      "observedSlip": -0.00008248190081085183,
+      "observedSpeedKph": 4.573965850142217,
+      "speedKph": 3.6761855752336414,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 189198.5,
+      "position": [
+        -312.10706638552773,
+        9.477818845710598,
+        -2123.1772109480025
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": -0.06882565984654727,
+      "observedSlip": 2.4712176749375203e-13,
+      "observedSpeedKph": 2.7009805157700635,
+      "speedKph": 3.0884144069586728,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 189257.8999999985,
+      "position": [
+        -312.1101342098001,
+        9.484779199921883,
+        -2123.132707507231
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": -0.06882565984745102,
+      "observedSlip": -6.56627530126741e-13,
+      "observedSpeedKph": 2.7035790898161842,
+      "speedKph": 2.222256673271508,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 189298.80000000075,
+      "position": [
+        -312.11138657309044,
+        9.487619807610894,
+        -2123.1145400795795
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": -0.06882565984896619,
+      "observedSlip": -2.1717905251961156e-12,
+      "observedSpeedKph": 1.602883895586606,
+      "speedKph": 1.8745501781217873,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 189358.19999999925,
+      "position": [
+        -312.1132887562121,
+        9.491933464475386,
+        -2123.086946030384
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": -0.06882565984510455,
+      "observedSlip": 1.6898427102063351e-12,
+      "observedSpeedKph": 1.676335427441501,
+      "speedKph": 1.3365497419610475,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 189399,
+      "position": [
+        -312.1140733970285,
+        9.493712520065865,
+        -2123.075563626113
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": -0.06882565984532198,
+      "observedSlip": 1.472419408621306e-12,
+      "observedSpeedKph": 1.0067132334404578,
+      "speedKph": 1.1183006091142071,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 189462.5,
+      "position": [
+        -312.11520430599023,
+        9.496276372759002,
+        -2123.0591580775776
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": -0.06882565984559574,
+      "observedSlip": 1.1986522885365503e-12,
+      "observedSpeedKph": 0.9322855757258872,
+      "speedKph": 0.7973456288293553,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 189502.09999999776,
+      "position": [
+        -312.1156514932694,
+        9.49729007652126,
+        -2123.05267094832
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.5911385741167318,
+      "speedKph": 0.6732721432442264,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 189564.19999999925,
+      "position": [
+        -312.1163350996795,
+        9.498839593145712,
+        -2123.042754201244
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.5762481853832205,
+      "speedKph": 0.4795540079970956,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 189607.8999999985,
+      "position": [
+        -312.11670095046634,
+        9.49966880383657,
+        -2123.037446981084
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.43824563696256585,
+      "speedKph": 0.3756076721649262,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 189650.5,
+      "position": [
+        -312.1169215038316,
+        9.500168675283671,
+        -2123.0342475202433
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.2710186228369137,
+      "speedKph": 0.31427359220742584,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 189712.19999999925,
+      "position": [
+        -312.11723827506535,
+        9.500886594339812,
+        -2123.029652273388
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.26875442072577604,
+      "speedKph": 0.22441801227791552,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 189751.69999999925,
+      "position": [
+        -312.1173657861269,
+        9.501175572909524,
+        -2123.0278025321795
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.16898408729720338,
+      "speedKph": 0.18901609954517026,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 189810.69999999925,
+      "position": [
+        -312.11755754459926,
+        9.501610145865346,
+        -2123.0250207849017
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.1701365391256761,
+      "speedKph": 0.13469958719042505,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 189849.30000000075,
+      "position": [
+        -312.11763207631424,
+        9.50177905079708,
+        -2123.023939589413
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.10107618795535327,
+      "speedKph": 0.11402845379347754,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 189909.5,
+      "position": [
+        -312.117745977705,
+        9.502037173015616,
+        -2123.0222872771074
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.09904386516714853,
+      "speedKph": 0.0817575305282158,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 189949.8999999985,
+      "position": [
+        -312.1177915601895,
+        9.502140470417245,
+        -2123.0216260340835
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.059062479118051285,
+      "speedKph": 0.06910555676784484,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 190013,
+      "position": [
+        -312.1178624071571,
+        9.502301020037557,
+        -2123.020598291441
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.058774230438168575,
+      "speedKph": 0.048922966998380266,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 190056,
+      "position": [
+        -312.1179011656857,
+        9.502388851956912,
+        -2123.02003604024
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.04718390384966814,
+      "speedKph": 0.03783511030394894,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 190113.19999999925,
+      "position": [
+        -312.1179311730207,
+        9.502456852143384,
+        -2123.019600738365
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.027461638321889498,
+      "speedKph": 0.029513942437911087,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 190155.69999999925,
+      "position": [
+        -312.11795403276085,
+        9.502508654733134,
+        -2123.0192691231864
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.028156418072268628,
+      "speedKph": 0.022999493415557813,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 190198.8999999985,
+      "position": [
+        -312.11796726257063,
+        9.502538634907708,
+        -2123.019077204744
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.016031158116512373,
+      "speedKph": 0.019322192899047377,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 190260.30000000075,
+      "position": [
+        -312.11798668152755,
+        9.502582640297716,
+        -2123.0187955033416
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.016555891518831002,
+      "speedKph": 0.013825746486907878,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 190303.30000000075,
+      "position": [
+        -312.1179945569901,
+        9.502600487235735,
+        -2123.0186812578213
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.009587439987457154,
+      "speedKph": 0.011638823609861262,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 190363.80000000075,
+      "position": [
+        -312.1180063455814,
+        9.502627201182916,
+        -2123.0185102464375
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.010200033094264718,
+      "speedKph": 0.008294239164826273,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 190404.09999999776,
+      "position": [
+        -312.11801114345775,
+        9.502638073764818,
+        -2123.0184406459693
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.006232166516466403,
+      "speedKph": 0.006961030236301373,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 190447.69999999925,
+      "position": [
+        -312.11801647260603,
+        9.502650149938765,
+        -2123.0183633385973
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.0063983258724764095,
+      "speedKph": 0.005441117389326051,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 190505.19999999925,
+      "position": [
+        -312.11802203102485,
+        9.502662745909904,
+        -2123.0182827053072
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.005060325695010771,
+      "speedKph": 0.0038696635743185317,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 190548.30000000075,
+      "position": [
+        -312.1180242579107,
+        9.502667792289694,
+        -2123.018250400953
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.0027046789846292417,
+      "speedKph": 0.0032509579531357006,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 190608.30000000075,
+      "position": [
+        -312.1180275159999,
+        9.502675175192985,
+        -2123.018203137431
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.0028425411806462324,
+      "speedKph": 0.0023285453755388665,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 190647.69999999925,
+      "position": [
+        -312.1180288560292,
+        9.502678211959418,
+        -2123.0181836982756
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.001780381636049685,
+      "speedKph": 0.0019562432140314808,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 190705.69999999925,
+      "position": [
+        -312.118030804919,
+        9.502682628486308,
+        -2123.0181554266746
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.0017589534372539665,
+      "speedKph": 0.00140617807022264,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 190748.19999999925,
+      "position": [
+        -312.118031618055,
+        9.50268447112639,
+        -2123.0181436309044
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.0010015423258067618,
+      "speedKph": 0.0011801502066583753,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 190805,
+      "position": [
+        -312.1180327996543,
+        9.502687148640113,
+        -2123.018126490015
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.0010889725846860029,
+      "speedKph": 0.0008465885786038599,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [
+        "Space"
+      ],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 190869.3999999985,
+      "position": [
+        -312.1180335519302,
+        9.50268885337459,
+        -2123.0181155771133
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.0006114857163095149,
+      "speedKph": 0.0007704139967375166,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 190908.69999999925,
+      "position": [
+        -312.118034270577,
+        9.50269048170594,
+        -2123.0181051520517
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.0009572337787348531,
+      "speedKph": 0.0007610346457603086,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 190947.80000000075,
+      "position": [
+        -312.11803476031764,
+        9.502691591680133,
+        -2123.018098047622
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.0006556686130720738,
+      "speedKph": 0.0007546514925203207,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 191019.59999999776,
+      "position": [
+        -312.11803571335133,
+        9.502693751125792,
+        -2123.018084222424
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.0006948304635448486,
+      "speedKph": 0.0007421928627934014,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 191051.8999999985,
+      "position": [
+        -312.1180361657581,
+        9.502694776543686,
+        -2123.0180776595785
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.0007331985475988013,
+      "speedKph": 0.0007362969651891779,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 191105.5,
+      "position": [
+        -312.1180368826038,
+        9.502696401109072,
+        -2123.0180672606452
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.0007000933204081405,
+      "speedKph": 0.0007269535689091393,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 191147.8999999985,
+      "position": [
+        -312.1180375771558,
+        9.502697974975666,
+        -2123.0180571851156
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.0008574996721962809,
+      "speedKph": 0.0007178892506529249,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 191216.3999999985,
+      "position": [
+        -312.11803846680834,
+        9.502699990911305,
+        -2123.018044279357
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.0006798684623616801,
+      "speedKph": 0.0007062831680577249,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 191249.59999999776,
+      "position": [
+        -312.11803892131286,
+        9.5027010207024,
+        -2123.0180376860803
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.0007166302869981273,
+      "speedKph": 0.0007003592410490765,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 191305.80000000075,
+      "position": [
+        -312.1180397878621,
+        9.50270298441821,
+        -2123.0180251154707
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0.0008071457417276201,
+      "speedKph": 0.0006890536854241186,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    },
+    {
+      "t": 191308.19999999925,
+      "position": [
+        -312.1180397878621,
+        9.50270298441821,
+        -2123.0180251154707
+      ],
+      "bodyYaw": -0.0688256598467944,
+      "travelYaw": null,
+      "observedSlip": null,
+      "observedSpeedKph": 0,
+      "speedKph": 0.0006890536854241186,
+      "slipAngle": 0,
+      "active": false,
+      "intensity": 0,
+      "physicalKeys": [],
+      "touchDrift": false,
+      "surface": "ground",
+      "effects": {
+        "capacity": {
+          "marks": 384,
+          "smoke": 96
+        },
+        "markBudget": 96,
+        "smokeBudget": 24,
+        "marks": 4,
+        "smoke": 0,
+        "drawCalls": 1,
+        "bufferBytes": 62208,
+        "disposed": false
+      },
+      "damage": 0.17610179671707038,
+      "police": false
+    }
+  ],
+  "quality": "balanced",
+  "qualityMode": "manual",
+  "viewport": [
+    1280,
+    720
+  ],
+  "effects": {
+    "capacity": {
+      "marks": 384,
+      "smoke": 96
+    },
+    "markBudget": 96,
+    "smokeBudget": 24,
+    "marks": 4,
+    "smoke": 0,
+    "drawCalls": 1,
+    "bufferBytes": 62208,
+    "disposed": false
+  },
+  "valid": true
+}

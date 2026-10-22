@@ -34,56 +34,114 @@ function TeslaHold({
   label,
   hotkey,
   children,
+  disabled = false,
+  active,
+  hint,
 }: {
   controller: TeslaController;
   code: TeslaButton;
   label: string;
   hotkey: string;
   children: React.ReactNode;
+  disabled?: boolean;
+  active?: boolean;
+  hint?: string;
 }) {
-  const pointer = useRef<number | null>(null);
-  const release = () => {
+  const pointer = useRef<number | null>(null),
+    keyboard = useRef(false);
+  const publish = () =>
+    controller.setButton(code, pointer.current !== null || keyboard.current);
+  const release = useCallback(() => {
     pointer.current = null;
+    keyboard.current = false;
     controller.setButton(code, false);
-  };
+  }, [controller, code]);
   const press = () => {
+    if (disabled) return;
     if (code === 'up') controller.command('jump');
     controller.setButton(code, true);
   };
-  useEffect(() => () => controller.setButton(code, false), [controller, code]);
+  useEffect(() => {
+    const hidden = () => {
+      if (document.hidden) release();
+    };
+    window.addEventListener('blur', release);
+    document.addEventListener('visibilitychange', hidden);
+    return () => {
+      release();
+      window.removeEventListener('blur', release);
+      document.removeEventListener('visibilitychange', hidden);
+    };
+  }, [release]);
+  useEffect(() => {
+    if (disabled) release();
+  }, [disabled, release]);
   return (
     <button
       type="button"
       data-tesla-hold={code}
-      title={`${label} · ${hotkey}`}
+      title={hint || `${label} · ${hotkey}`}
       aria-label={`${label} (${hotkey})`}
+      aria-keyshortcuts={hotkey}
+      aria-pressed={active}
+      disabled={disabled}
       onPointerDown={(event) => {
-        if (event.button !== 0 || pointer.current !== null) return;
+        if (disabled || event.button !== 0 || pointer.current !== null) return;
         event.preventDefault();
         event.stopPropagation();
         pointer.current = event.pointerId;
         event.currentTarget.setPointerCapture(event.pointerId);
         press();
       }}
-      onPointerUp={release}
-      onPointerCancel={release}
-      onLostPointerCapture={release}
+      onPointerUp={(event) => {
+        if (event.pointerId !== pointer.current) return;
+        event.preventDefault();
+        event.stopPropagation();
+        pointer.current = null;
+        publish();
+      }}
+      onPointerMove={(event) => {
+        if (event.pointerId !== pointer.current) return;
+        event.preventDefault();
+        event.stopPropagation();
+      }}
+      onPointerCancel={(event) => {
+        if (event.pointerId !== pointer.current) return;
+        event.stopPropagation();
+        pointer.current = null;
+        publish();
+      }}
+      onLostPointerCapture={(event) => {
+        if (event.pointerId !== pointer.current) return;
+        pointer.current = null;
+        publish();
+      }}
       onBlur={release}
       onKeyDown={(event) => {
+        if (disabled || event.ctrlKey || event.metaKey || event.altKey) return;
         if (event.key === ' ' || event.key === 'Enter') {
           event.preventDefault();
           event.stopPropagation();
-          if (!event.repeat) press();
+          if (!event.repeat) {
+            keyboard.current = true;
+            press();
+          }
         }
       }}
       onKeyUp={(event) => {
         if (event.key === ' ' || event.key === 'Enter') {
           event.preventDefault();
-          release();
+          keyboard.current = false;
+          publish();
         }
       }}
       onClick={(event) => {
-        if (event.detail === 0) {
+        if (
+          !disabled &&
+          event.detail === 0 &&
+          pointer.current === null &&
+          !keyboard.current
+        ) {
           if (code === 'up') controller.command('jump');
           controller.pulse(code);
         }
@@ -133,22 +191,24 @@ export function TeslaControls({
   if (!controller || !state.active) return null;
   const mode = state.parked
     ? 'parked'
-    : state.vortexActive
-      ? 'vortexActive'
-      : state.transitioning
-        ? 'transition'
-        : (state.surfaceHolding || state.wallHolding) &&
-            (state.mode === 'wall' || state.onRoof)
-          ? state.onRoof
-            ? 'roofHolding'
-            : 'wallHolding'
-          : state.onRoof
-            ? 'roof'
-            : state.mode === 'ground'
-              ? 'ground'
-              : state.mode === 'wall'
-                ? 'wall'
-                : 'air';
+    : state.drifting
+      ? 'drifting'
+      : state.vortexActive
+        ? 'vortexActive'
+        : state.transitioning
+          ? 'transition'
+          : (state.surfaceHolding || state.wallHolding) &&
+              (state.mode === 'wall' || state.onRoof)
+            ? state.onRoof
+              ? 'roofHolding'
+              : 'wallHolding'
+            : state.onRoof
+              ? 'roof'
+              : state.mode === 'ground'
+                ? 'ground'
+                : state.mode === 'wall'
+                  ? 'wall'
+                  : 'air';
   const drivingMode = t(state.adhesion ? 'adhesion' : 'freeDrive');
   const quality = (
     <label className="tesla-quality">
@@ -227,6 +287,24 @@ export function TeslaControls({
         hotkey="B"
       >
         <Hand size={19} />
+      </TeslaHold>
+      <TeslaHold
+        controller={controller}
+        code="drift"
+        label={t('drift')}
+        hotkey="X"
+        hint={t('driftHint')}
+        active={state.drifting}
+        disabled={
+          !enabled ||
+          state.mode !== 'ground' ||
+          state.onRoof ||
+          state.parked ||
+          state.transitioning ||
+          state.vortexActive
+        }
+      >
+        <Car size={19} />
       </TeslaHold>
       <button
         type="button"

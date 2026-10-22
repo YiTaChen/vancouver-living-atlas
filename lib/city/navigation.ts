@@ -1,5 +1,11 @@
 import * as THREE from 'three';
 import { drivingYawDelta } from './driving-steering';
+import {
+  createVehicleDrift,
+  resetVehicleDrift,
+  stepVehicleDrift,
+  vehicleDriftIntensity,
+} from './vehicle-drift';
 import { TrafficStop } from './traffic-stop';
 import { ROADSTER_ACCELERATION, ROADSTER_TOP_SPEED } from './traffic-stop-state';
 import { safeTouchAxis } from './touch-input';
@@ -45,6 +51,31 @@ export class StreetNavigation {
   touchX = 0;
   touchY = 0;
   touchBrake = false;
+  touchDrift = false;
+  driftInputEnabled = true;
+  private driftKeyBlocked = false;
+  readonly drift = createVehicleDrift();
+  setDriftHeld(held: boolean) {
+    this.touchDrift = held && this.driftInputEnabled && this.mode === 'drive';
+  }
+  setDriftInputEnabled(enabled: boolean) {
+    this.driftInputEnabled = enabled;
+    if (!enabled) this.clearDrift();
+  }
+  clearDrift() {
+    this.driftKeyBlocked = true;
+    this.touchDrift = false;
+    this.keys.delete('x');
+    resetVehicleDrift(this.drift);
+  }
+  get driftIntensity() {
+    return this.mode === 'drive' && this.driftInputEnabled
+      ? vehicleDriftIntensity(this.drift, this.speed, this.carModel)
+      : 0;
+  }
+  driftVisibility = () => {
+    if (typeof document !== 'undefined' && document.hidden) this.clearDrift();
+  };
   setTouchAxes(x: number, y: number) {
     this.touchX = safeTouchAxis(x);
     this.touchY = safeTouchAxis(y);
@@ -247,6 +278,8 @@ export class StreetNavigation {
     window.addEventListener('keydown', this.keyDown);
     window.addEventListener('keyup', this.keyUp);
     window.addEventListener('blur', this.blur);
+    if (typeof document !== 'undefined' && typeof document.addEventListener === 'function')
+      document.addEventListener('visibilitychange', this.driftVisibility);
     const canvas = e.renderer.domElement;
     canvas.addEventListener('wheel', this.wheel, {
       passive: false,
@@ -259,6 +292,7 @@ export class StreetNavigation {
   }
   setCarModel(model: 'classic' | 'roadster') {
     if (model !== 'classic' && model !== 'roadster') return;
+    this.clearDrift();
     this.carModel = model;
     this.classicCar.visible = model === 'classic';
     this.roadster.group.visible = model === 'roadster';
@@ -270,6 +304,7 @@ export class StreetNavigation {
     this.notifyCamera();
   }
   keyDown = (ev: KeyboardEvent) => {
+    const k = this.movementKey(ev);
     if (
       this.mode === 'orbit' ||
       ev.defaultPrevented ||
@@ -282,9 +317,21 @@ export class StreetNavigation {
         )) ||
       ev.target instanceof HTMLInputElement ||
       ev.target instanceof HTMLTextAreaElement
-    )
+    ) {
+      if (k === 'x') {
+        this.keys.delete('x');
+        this.driftKeyBlocked = true;
+      }
       return;
-    const k = this.movementKey(ev);
+    }
+    if (k === 'x') {
+      if (ev.isComposing || this.mode !== 'drive' || !this.driftInputEnabled) {
+        this.driftKeyBlocked = true;
+        return;
+      }
+      if (ev.repeat && this.driftKeyBlocked) return;
+      if (!ev.repeat) this.driftKeyBlocked = false;
+    }
     if (ev.target instanceof Element) {
       // Space activates a focused button; arrow keys belong to value selectors.
       // WASD remains available after using an ordinary HUD control.
@@ -311,6 +358,7 @@ export class StreetNavigation {
         'arrowright',
         'shift',
         ' ',
+        'x',
       ].includes(k)
     ) {
       ev.preventDefault();
@@ -330,13 +378,17 @@ export class StreetNavigation {
       ShiftLeft: 'shift',
       ShiftRight: 'shift',
       Space: ' ',
+      KeyX: 'x',
     };
     return codes[ev.code] || ev.key.toLowerCase();
   }
   keyUp = (ev: KeyboardEvent) => {
-    this.keys.delete(this.movementKey(ev));
+    const key = this.movementKey(ev);
+    this.keys.delete(key);
+    if (key === 'x') this.driftKeyBlocked = false;
   };
   blur = () => {
+    this.clearDrift();
     this.keys.clear();
     this.setTouchAxes(0, 0);
     this.touchBrake = false;
@@ -810,6 +862,7 @@ export class StreetNavigation {
   setMode(mode: 'orbit' | TravelMode, streetName?: string) {
     this.trafficStop?.cancel();
     if (mode === this.mode && !streetName) return;
+    this.clearDrift();
     this.e.travelReturn?.invalidate(true);
     this.returnBlend = null;
     this.driverMotion.reset();
@@ -936,6 +989,7 @@ export class StreetNavigation {
   startBridge(kind: string) {
     const s = this.e.data.bridges?.mainSpines.find((s: any) => s.kind === kind);
     if (!s || this.mode === 'orbit' || this.mode === 'boat') return;
+    this.clearDrift();
     const a = project(s.start),
       b = project(s.end);
     this.keys.clear();
@@ -983,6 +1037,7 @@ export class StreetNavigation {
   private moveDrive(dx:number,dz:number) {
     const total=Math.hypot(dx,dz), speed=Math.abs(this.speed);
     if(total<1e-9||speed<1e-9)return;
+    const driftedMove = (this.drift?.slipAngle ?? 0) !== 0;
     let remaining=total/speed, delta=new THREE.Vector3(dx,0,dz);
     const shape={halfExtents:[1,.65,2.4] as const,clearance:.02};
     const quaternion=(yaw=this.yaw)=>new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),yaw).toArray();
@@ -995,36 +1050,39 @@ export class StreetNavigation {
       if(!hit){
         const before=this.position.clone(), identity={surface:this.surface,surfaceId:this.surfaceId,layer:this.surfaceLayer};
         const targetYaw=this.yaw, angle=Math.atan2(Math.sin(targetYaw-sweptYaw),Math.cos(targetYaw-sweptYaw));
-        this.moveGround(delta.x,delta.z);
+        this.moveGround(delta.x,delta.z,driftedMove);
         const fraction=Math.min(1,Math.hypot(this.position.x-before.x,this.position.z-before.z)/delta.length());
         this.yaw=sweptYaw+angle*fraction;
         const accepted={position:[this.position.x,this.position.y+.7,this.position.z] as const,quaternion:quaternion()};
         if(this.e.vehicleImpacts!.sweep({from,to:accepted,shape})) {
-          this.position.copy(before);this.yaw=sweptYaw;this.speed=0;
+          this.position.copy(before);this.yaw=sweptYaw;this.speed=0;if(this.drift)resetVehicleDrift(this.drift);
           this.surface=identity.surface;this.surfaceId=identity.surfaceId;this.surfaceLayer=identity.layer;
         }
         return;
       }
-      if(/invalid.*query|invalid-tesla-world/.test(hit.surfaceId)){this.speed=0;return;}
+      if(/invalid.*query|invalid-tesla-world/.test(hit.surfaceId)){this.speed=0;if(this.drift)resetVehicleDrift(this.drift);return;}
       const id=this.e.vehicleImpacts!.obstacle(hit.surfaceId).id;
-      if(attempted.has(id)){this.speed=0;return;}attempted.add(id);
+      if(attempted.has(id)){this.speed=0;if(this.drift)resetVehicleDrift(this.drift);return;}attempted.add(id);
       const length=delta.length(), fraction=Math.max(0,hit.fraction-(length? .002/length:0));
       const requestedYaw=this.yaw;
       const angle=Math.atan2(Math.sin(requestedYaw-sweptYaw),Math.cos(requestedYaw-sweptYaw));
       const before=this.position.clone();
       const identity={surface:this.surface,surfaceId:this.surfaceId,layer:this.surfaceLayer};
-      this.moveGround(delta.x*fraction,delta.z*fraction);
+      this.moveGround(delta.x*fraction,delta.z*fraction,driftedMove);
       const travelled=Math.hypot(this.position.x-before.x,this.position.z-before.z);
       this.yaw=sweptYaw+angle*Math.min(fraction,length?travelled/length:0);
       const accepted={position:[this.position.x,this.position.y+.7,this.position.z] as const,quaternion:quaternion()};
       if(this.e.vehicleImpacts!.sweep({from,to:accepted,shape})) {
-        this.position.copy(before);this.yaw=sweptYaw;this.speed=0;
+        this.position.copy(before);this.yaw=sweptYaw;this.speed=0;if(this.drift)resetVehicleDrift(this.drift);
         this.surface=identity.surface;this.surfaceId=identity.surfaceId;this.surfaceLayer=identity.layer;return;
       }
       if(travelled+.004<length*fraction)return;
       const pose={position:[from.position[0]+delta.x*hit.fraction,from.position[1],from.position[2]+delta.z*hit.fraction] as const,quaternion:quaternion(sweptYaw+angle*hit.fraction)};
-      const velocity=[Math.sin(requestedYaw)*this.speed,0,Math.cos(requestedYaw)*this.speed] as const;
+      const velocity = driftedMove
+        ? [delta.x / length * Math.abs(this.speed), 0, delta.z / length * Math.abs(this.speed)] as const
+        : [Math.sin(requestedYaw)*this.speed,0,Math.cos(requestedYaw)*this.speed] as const;
       const response=this.condition.impact({hit,pose,velocity,shape});
+      if(this.drift)resetVehicleDrift(this.drift);
       const out=new THREE.Vector3(...response.velocity);
       const sign=out.dot(new THREE.Vector3(Math.sin(this.yaw),0,Math.cos(this.yaw)))<0?-1:1;
       this.speed=out.length()*sign;
@@ -1040,7 +1098,7 @@ export class StreetNavigation {
       delta=out.multiplyScalar(remaining);
     }
   }
-  private moveGround(dx:number,dz:number) {
+  private moveGround(dx:number,dz:number,driftedMove=false) {
     if (this.mode === 'boat') return;
     if (Math.hypot(dx, dz) < 1e-9) return;
     const steps = Math.max(1, Math.ceil(Math.hypot(dx, dz) / ((this.e.interiors?.height(this.position.x,this.position.z) !== undefined || this.e.interiors?.height(this.position.x+dx,this.position.z+dz) !== undefined) ? 0.3 : 1.5)));
@@ -1057,7 +1115,7 @@ export class StreetNavigation {
       ) {
         const hit = this.protectedStep(x, z);
         if (!hit) {
-          this.impactBuilding(x,z);
+          this.impactBuilding(x,z,driftedMove ? [dx,dz] : undefined);
           this.speed = 0;
           break;
         }
@@ -1076,13 +1134,13 @@ export class StreetNavigation {
         this.surfaceId = undefined;
         this.surfaceLayer = undefined;
       } else {
-        this.impactBuilding(x,z);
+        this.impactBuilding(x,z,driftedMove ? [dx,dz] : undefined);
         this.speed = 0;
         break;
       }
     }
   }
-  private impactBuilding(x:number,z:number) {
+  private impactBuilding(x:number,z:number,travel?:readonly [number,number]) {
     if(this.mode!=='drive'||!this.condition||Math.abs(this.speed)<.3)return;
     const polygon=this.collisions?.get(Math.floor(x/80)+','+Math.floor(z/80))?.find(p=>inPolygon([x,z],p));
     if(!polygon)return;
@@ -1099,7 +1157,9 @@ export class StreetNavigation {
       point:[point[0],this.position.y+.7,point[1]],normal:[normal[0],0,normal[1]],fraction:1,adherable:false},
       pose:{position:[this.position.x,this.position.y+.7,this.position.z],
         quaternion:new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),this.yaw).toArray()},
-      velocity:[Math.sin(this.yaw)*this.speed,0,Math.cos(this.yaw)*this.speed],
+      velocity:travel && Math.hypot(...travel)>1e-8
+        ? [travel[0]/Math.hypot(...travel)*Math.abs(this.speed),0,travel[1]/Math.hypot(...travel)*Math.abs(this.speed)]
+        : [Math.sin(this.yaw + (this.drift?.slipAngle ?? 0))*this.speed,0,Math.cos(this.yaw + (this.drift?.slipAngle ?? 0))*this.speed],
       shape:{halfExtents:[1,.65,2.4],clearance:.02}});
   }
   roadHeight(x: number, z: number) {
@@ -1170,11 +1230,27 @@ export class StreetNavigation {
       );
       if (!stopped && !forward) this.speed *= Math.pow(0.78, dt);
       if (!stopped && (pressed(' ') || this.touchBrake)) this.speed *= Math.pow(0.007, dt*(handling?.braking??1));
-      if (!stopped) this.yaw += drivingYawDelta(turn*(handling?.steering??1)+(Math.abs(this.speed)>1?(handling?.steeringBias??0):0), this.speed, dt);
+      const steering = turn*(handling?.steering??1)+(Math.abs(this.speed)>1?(handling?.steeringBias??0):0);
+      if (stopped) this.clearDrift();
+      const drift = dt > 0 ? stepVehicleDrift(this.drift, {
+        dt,
+        speed: this.speed,
+        steer: steering,
+        held: !stopped && this.driftInputEnabled && (pressed('x') || this.touchDrift),
+        grounded: !stopped,
+        brake: pressed(' ') || this.touchBrake,
+        normalYawDelta: stopped ? 0 : drivingYawDelta(steering, this.speed, dt),
+        profile: this.carModel,
+      }) : { speed: this.speed, yawDelta: 0, travelYawOffset: this.drift.slipAngle };
+      this.speed = drift.speed;
+      if (!stopped) this.yaw += drift.yawDelta;
+      const travelYaw = this.yaw + drift.travelYawOffset;
       this.move(
-        Math.sin(this.yaw) * this.speed * dt,
-        Math.cos(this.yaw) * this.speed * dt,
+        Math.sin(travelYaw) * this.speed * dt,
+        Math.cos(travelYaw) * this.speed * dt,
       );
+      if (Math.abs(this.speed) < Math.abs(drift.speed) * 0.9)
+        resetVehicleDrift(this.drift);
     } else {
       this.yaw += turn * dt * 1.45;
       const speed = pressed('shift') ? 12 : 4;
@@ -1447,12 +1523,15 @@ export class StreetNavigation {
   }
 
   destroy() {
+    this.clearDrift();
     this.condition?.dispose();
     this.walker.dispose?.();
     this.trafficStop?.destroy();
     window.removeEventListener('keydown', this.keyDown);
     window.removeEventListener('keyup', this.keyUp);
     window.removeEventListener('blur', this.blur);
+    if (typeof document !== 'undefined' && typeof document.removeEventListener === 'function')
+      document.removeEventListener('visibilitychange', this.driftVisibility);
     const c = this.e.renderer.domElement;
     c.removeEventListener('wheel', this.wheel, true);
     c.removeEventListener('pointerdown', this.pointerDown, true);
