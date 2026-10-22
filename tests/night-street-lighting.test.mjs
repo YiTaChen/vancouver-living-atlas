@@ -242,6 +242,63 @@ test('time updates retain texture content, object identities and shader versions
   }
 });
 
+test('a broken lamp extinguishes its warm pool in place without changing road fill, height, coverage or material hooks', () => {
+  const lighting = new NightStreetLighting(base), material = new THREE.MeshStandardMaterial();
+  lighting.wrapMaterial(material);
+  try {
+    const texture = lighting.texture, before = texture.image.data.slice(),
+      version = texture.version, materialVersion = material.version;
+    assert(lighting.sample(30, 50).warm > .9);
+    assert.equal(lighting.disableLamp(0), true);
+    assert.equal(lighting.sample(30, 50).warm, 0);
+    assert.equal(lighting.sample(30, 50).street, 1);
+    assert.equal(lighting.texture, texture);
+    assert.equal(lighting.uniforms.uAtlasNightField.value, texture);
+    assert.equal(texture.version, version + 1);
+    assert.equal(material.version, materialVersion);
+    for (let index = 0; index < before.length; index++)
+      if (index % 4 !== 1) assert.equal(texture.image.data[index], before[index]);
+    assert.equal(lighting.disableLamp(0), false);
+    assert.equal(texture.version, version + 1);
+    assert.equal(lighting.stats().disabledLamps, 1);
+    lighting.update(23, 1); lighting.update(12, 0); lighting.update(23, 1);
+    assert.equal(lighting.sample(30, 50).warm, 0);
+    assert.equal(lighting.stats().warmStateBytes, base.size ** 2 * 4 + 16);
+  } finally { lighting.dispose(); material.dispose(); }
+});
+
+test('removing overlapping saturated lamp pools preserves all surviving sources', () => {
+  const lamps = Array.from({ length: 20 }, () => base.lamps[0]),
+    lighting = new NightStreetLighting({ ...base, lamps }),
+    single = new NightStreetLighting(base);
+  try {
+    for (let index = 0; index < 19; index++) {
+      assert.equal(lighting.disableLamp(index), true);
+      assert(lighting.sample(30, 50).warm > .9);
+    }
+    assert(Math.abs(lighting.sample(30, 50).warm - single.sample(30, 50).warm) < 1 / 255);
+    assert.equal(lighting.disableLamp(19), true);
+    assert.equal(lighting.sample(30, 50).warm, 0);
+    assert.equal(lighting.sample(30, 50).street, 1);
+  } finally { lighting.dispose(); single.dispose(); }
+});
+
+test('lamp removal remains local and cannot introduce light across excluded park borders', () => {
+  const lighting = new NightStreetLighting({ ...base,
+    lamps: [base.lamps[0], { x: 85, y: 13.85, z: 50 }],
+    allowed: (x) => x < 40 || x > 70,
+  });
+  try {
+    const distant = lighting.sample(85, 50), excluded = lighting.sample(50, 50);
+    assert.equal(lighting.disableLamp(0), true);
+    assert.deepEqual(lighting.sample(85, 50), distant);
+    assert.deepEqual(lighting.sample(50, 50), excluded);
+    assert.equal(lighting.sample(30, 50).warm, 0);
+    for (const index of [-1, .5, 2, NaN, Infinity]) assert.equal(lighting.disableLamp(index), false);
+  } finally { lighting.dispose(); }
+  assert.equal(lighting.disableLamp(1), false);
+});
+
 test('material hooks retain the existing surface pipeline and apply full instance/batch transforms after deformation', () => {
   const lighting = new NightStreetLighting(base),
     material = new THREE.MeshPhysicalMaterial();

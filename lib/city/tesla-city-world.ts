@@ -17,6 +17,7 @@ import type {
   TeslaVec3,
   TeslaSweepQuery,
   TeslaGroundDepartureQuery,
+  TeslaWorld as TeslaWorldContract,
 } from './tesla-state';
 import type { TravelSurfaceIndex } from './travel-surfaces';
 import type { WaterSurface, WaterWorld } from './water-world';
@@ -230,7 +231,7 @@ export function teslaPrismSource(prism: TeslaPrism): TeslaGeometrySource {
     },
   };
 }
-function boxSource(
+export function boxSource(
   id: string,
   min: TeslaVec3,
   max: TeslaVec3,
@@ -586,6 +587,7 @@ function waterSource(
 }
 
 export class CityTeslaWorld extends TeslaWorld {
+  impact?: TeslaWorldContract['impact'];
   private readonly roofDetails: TeslaRenderedRoofDetailsWorld;
   private readonly identities = new Map<
     string,
@@ -711,7 +713,8 @@ export class CityTeslaWorld extends TeslaWorld {
           );
       });
     }
-    for (const [i, tree] of (e.detailedTrees?.trees ?? []).entries()) {
+    if(e.vehicleImpacts) sources.push(...e.vehicleImpacts.sources);
+    for (const [i, tree] of (e.vehicleImpacts ? [] : (e.detailedTrees?.trees ?? [])).entries()) {
       const base = tree.y ?? e.elevation(tree.x, tree.z),
         radius = Math.max(0.18, tree.h * TESLA_TREE_ENVELOPE.trunkRadius),
         crownRadius = tree.h * TESLA_TREE_ENVELOPE.crownRadius,
@@ -735,7 +738,7 @@ export class CityTeslaWorld extends TeslaWorld {
         ),
       );
     }
-    for (const [i, [x, z]] of (e.data.streetLampPoints ?? []).entries()) {
+    for (const [i, [x, z]] of (e.vehicleImpacts ? [] : (e.data.streetLampPoints ?? [])).entries()) {
       const base = e.elevation(x, z) + 1;
       sources.push(
         boxSource(
@@ -788,13 +791,15 @@ export class CityTeslaWorld extends TeslaWorld {
         });
   }
   override sweep(query: TeslaSweepQuery) {
-    const base = super.sweep(query);
+    const original=super.sweep(query), debris=this.e.vehicleImpacts?.sweepDebris(query);
+    const base=debris && (!original || debris.fraction<original.fraction)?debris:original;
     return base?.fraction === 0
       ? base
       : nearestTeslaRoofDetailHit(base, this.roofDetails.sweep(query));
   }
   override sweepGroundDeparture(query: TeslaGroundDepartureQuery) {
-    const base = super.sweepGroundDeparture(query);
+    const original=super.sweepGroundDeparture(query), debris=this.e.vehicleImpacts?.sweepDebris(query);
+    const base=debris && (!original || debris.fraction<original.fraction)?debris:original;
     return base?.fraction === 0
       ? base
       : nearestTeslaRoofDetailHit(base, this.roofDetails.sweep(query));

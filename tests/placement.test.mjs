@@ -384,6 +384,7 @@ const { StreetNavigation } = await import(
   compile('navigation', {
     './traffic-stop': cityModule('traffic-stop'),
     './traffic-stop-state': cityModule('traffic-stop-state'),
+    './vehicle-condition': cityModule('vehicle-condition'),
     three: import.meta.resolve('three'),
     './geo': geoUrl,
     './bridges': bridgeUrl,

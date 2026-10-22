@@ -49,6 +49,7 @@ import {
 import { FlightControls, flightText } from '@/components/flight-controls';
 import { EMPTY_FLIGHT, type FlightSnapshot } from '@/lib/city/flight-snapshot';
 import { TeslaControls, teslaText } from '@/components/tesla-controls';
+import { VehicleConditionPanel } from '@/components/vehicle-condition-panel';
 import { EMPTY_TESLA, type TeslaSnapshot } from '@/lib/city/tesla-snapshot';
 import type { TeslaController } from '@/lib/city/tesla-controller';
 import { TravelJoystick } from '@/components/travel-joystick';
@@ -904,6 +905,8 @@ function Home() {
         optionsOpen={mobilePanel === 'travel'}
         onCloseOptions={() => setMobilePanel(null)}
       />
+      <VehicleConditionPanel city={engine.current} locale={locale}
+        visible={ready&&!clean&&!about&&!panel&&!mobilePanel&&!discoveryModal&&!(touchUI&&mobileHudHidden)} />
       {touchUI && ready && (
         <button
           className="mobile-hud-toggle glass"

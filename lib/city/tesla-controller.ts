@@ -25,6 +25,7 @@ import {
 import { EMPTY_TESLA, type TeslaSnapshot } from './tesla-snapshot';
 import { teslaDot, teslaRotate } from './tesla-math';
 import { canStartTeslaVortex, sampleTeslaVortex } from './tesla-vortex';
+import { VehicleCondition } from './vehicle-condition';
 
 export type TeslaButton = 'up' | 'down' | 'boost' | 'brake';
 export type TeslaCommand =
@@ -70,6 +71,7 @@ export class TeslaController {
   world: CityTeslaWorld | null = null;
   model: TeslaRoadsterModel | null = null;
   readonly vehicle = new THREE.Group();
+  readonly condition: VehicleCondition;
   readonly shape: TeslaShape = createTeslaRoadsterShape();
   view: TeslaView = 'chase';
   quality: TeslaQualityPreference = 'auto';
@@ -109,6 +111,7 @@ export class TeslaController {
   };
 
   constructor(readonly e: CityEngine) {
+    this.condition = new VehicleCondition(e,this.vehicle,2000);
     this.vehicle.name = 'Tesla Roadster Rocket player';
     this.vehicle.visible = false;
     const canvas = e.renderer.domElement;
@@ -273,6 +276,7 @@ export class TeslaController {
     if (this.active) return true;
     if (!this.e.closeBusVisit()) return false;
     this.world ??= new CityTeslaWorld(this.e);
+    this.world.impact = query => this.condition.impact(query);
     const nav = this.e.navigation;
     const fromStreet = nav && (nav.mode === 'walk' || nav.mode === 'drive');
     const x = fromStreet ? nav.position.x : this.e.controls.target.x;
@@ -544,7 +548,16 @@ export class TeslaController {
       this.disposed
     )
       return;
+    this.condition.update(this.inputEnabled ? dt : 0);
     const input = this.input();
+    const handling = this.condition.performance;
+    if(this.state.mode==='ground') {
+      input.drivePower=handling.acceleration;
+      input.driveSpeedFactor=handling.topSpeed;
+      input.driveBrakeFactor=handling.braking;
+      input.steer = THREE.MathUtils.clamp((input.steer??0)*handling.steering +
+        (this.speedMps>1?handling.steeringBias:0),-1,1);
+    }
     // Panels suspend this personal vehicle, including gravity and a pending
     // wall transition. Closing a panel never resumes a held accelerator.
     this.lastStep = stepTesla(
@@ -573,6 +586,7 @@ export class TeslaController {
       this.model.setQuality(quality);
       this.e.prepareNightReceivers(this.vehicle);
       this.lastQuality = quality;
+      this.condition.refresh();
     }
     this.effectiveQuality = quality;
     this.vehicle.position.fromArray(s.position);
@@ -604,6 +618,10 @@ export class TeslaController {
           : Math.min(1, this.speedMps / 40),
     });
     this.updateCamera(elapsed);
+    const shake=this.e.impactFeedback?.shake??0;
+    if(shake>0) this.e.camera.position.add(new THREE.Vector3(
+      Math.sin(this.wheelSpin*11+performance.now()*.08)*shake*.035,
+      Math.sin(performance.now()*.091)*shake*.025,0));
     const canvas = this.e.renderer.domElement;
     canvas.dataset.travelMode = 'tesla';
     canvas.dataset.cameraView = this.view;
@@ -618,6 +636,7 @@ export class TeslaController {
         model: this.model.stats(),
         world: this.world.stats(),
         step: this.lastStep,
+        damage: this.condition.damage,
       });
       this.notify();
     }
@@ -790,6 +809,7 @@ export class TeslaController {
     window.removeEventListener('keyup', this.keyUp);
     window.removeEventListener('blur', this.clearInput);
     document.removeEventListener('visibilitychange', this.visibility);
+    this.condition.dispose();
     this.model?.dispose();
     this.world?.dispose();
     this.vehicle.removeFromParent();

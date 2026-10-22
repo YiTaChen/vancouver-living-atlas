@@ -1,4 +1,6 @@
 import { CityStreetFurniture } from './street-furniture-world';
+import { VehicleImpactWorld } from './vehicle-impact-world';
+import { ImpactFeedback } from './vehicle-impact-feedback';
 import { FlightController } from './flight-controller';
 import { TeslaController } from './tesla-controller';
 import { clearOrbitGesture } from './orbit-lifecycle';
@@ -193,6 +195,8 @@ export class CityEngine {
   harbour: Harbour | null = null;
   sailingWaves: ReturnType<typeof addSailingWaves> | null = null;
   navigation: StreetNavigation | null = null;
+  vehicleImpacts: VehicleImpactWorld | null = null;
+  impactFeedback: ImpactFeedback | null = null;
   busVisit: BusCabinVisit | null = null;
   busVisitDetail: BusVisitDetail = 'auto';
   flight: FlightController | null = null;
@@ -667,6 +671,8 @@ export class CityEngine {
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('controller.navigation');
     }
+    this.vehicleImpacts = new VehicleImpactWorld(this);
+    this.impactFeedback = new ImpactFeedback(this.scene);
     this.navigation = new StreetNavigation(this);
     this.busVisit = new BusCabinVisit(
       this,
@@ -1744,6 +1750,8 @@ export class CityEngine {
     this.busVisit?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
     this.flight?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
     this.tesla?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
+    this.vehicleImpacts?.update(this.lastTime ? (time-this.lastTime)/1000 : 0);
+    this.impactFeedback?.update(this.lastTime ? (time-this.lastTime)/1000 : 0,this.camera,this.settings.quality);
     this.updateAutoQuality(time, this.lastTime ? time - this.lastTime : 0);
     this.pedestrians?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
     this.travelReturn?.update();
@@ -2022,6 +2030,8 @@ export class CityEngine {
     this.facadeDetails?.dispose();
     this.architecturalDetails?.dispose();
     this.streetFurniture?.dispose();
+    this.vehicleImpacts?.dispose();
+    this.impactFeedback?.dispose();
     this.streetscapeKit?.dispose();
     this.scene.traverse((o) => {
       const m = o as THREE.Mesh;
