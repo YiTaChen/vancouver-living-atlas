@@ -37,6 +37,15 @@ export interface TeslaWorldOptions {
   sources: readonly TeslaGeometrySource[];
   validPosition?: (position: TeslaVec3) => boolean;
   maxCachedTiles?: number;
+  /** Explicit physical road groups with authored four-wheel suspension. Each
+   * group keeps its own layer/union; unrelated decks, roofs and walls stay strict. */
+  modelGroundGroups?: readonly string[];
+  /** Default-off, source-gate-validated physical peers for this exact tyre
+   * footprint. This never changes a contact's travel identity or layer. */
+  modelGroundConnections?: (
+    pose: TeslaPose,
+    shape: TeslaShape,
+  ) => readonly (readonly [string, string])[];
 }
 const CELL = 32;
 const HEIGHT_BAND = 128;
@@ -266,7 +275,7 @@ function connectedGroundFaces(start: TeslaFace, faces: readonly TeslaFace[]) {
     if (
       face.kind === 'ground' &&
       face.adherable &&
-      face.supportGroup === 'ground:0'
+      face.supportGroup === start.supportGroup
     )
       for (let edge = 0; edge < 3; edge++) {
         const key = faceGeometry(face).xyzKeys[edge],
@@ -838,10 +847,18 @@ export class TeslaWorld implements TeslaWorldContract {
   private readonly maximum: number;
   private readonly sourceCount: number;
   private positionAllowed: TeslaWorldOptions['validPosition'];
+  private readonly modelGroundGroups: ReadonlySet<string>;
+  private readonly groundConnections: TeslaWorldOptions['modelGroundConnections'];
   private disposed = false;
   constructor(options: TeslaWorldOptions) {
     this.sourceCount = options.sources.length;
+    this.groundConnections = options.modelGroundConnections;
     this.positionAllowed = options.validPosition;
+    this.modelGroundGroups = new Set(
+      (options.modelGroundGroups ?? []).filter(
+        (group) => typeof group === 'string' && group.length > 0,
+      ),
+    );
     const requested = options.maxCachedTiles ?? 48;
     this.maximum = Number.isSafeInteger(requested)
       ? Math.max(4, Math.min(128, requested))
@@ -872,6 +889,53 @@ export class TeslaWorld implements TeslaWorldContract {
           this.sources.set(key, values);
         }
     }
+  }
+  private modelConnections(pose: TeslaPose, shape: TeslaShape) {
+    if (!shape.groundSupport || !this.groundConnections) return [];
+    try {
+      const pairs = this.groundConnections(pose, shape);
+      if (!Array.isArray(pairs) || pairs.length > 4) return [];
+      if (
+        pairs.some(
+          (pair) =>
+            !Array.isArray(pair) ||
+            pair.length !== 2 ||
+            pair.some((group) => typeof group !== 'string' || !group) ||
+            !pair.some(
+              (group) =>
+                group === 'ground:0' || this.modelGroundGroups.has(group),
+            ),
+        )
+      )
+        return [];
+      return pairs;
+    } catch {
+      return [];
+    }
+  }
+  private modelPeers(
+    group: string,
+    pairs: readonly (readonly [string, string])[],
+  ) {
+    const peers = new Set([group]);
+    for (const [a, b] of pairs) {
+      if (a === group) peers.add(b);
+      if (b === group) peers.add(a);
+    }
+    return peers;
+  }
+  private modelGround(
+    face: TeslaFace,
+    shape: TeslaShape,
+    pairs: readonly (readonly [string, string])[] = [],
+  ) {
+    return (
+      face.kind === 'ground' &&
+      (face.supportGroup === 'ground:0' ||
+        (!!shape.groundSupport &&
+          (this.modelGroundGroups.has(face.supportGroup) ||
+            pairs.some((pair) => pair.includes(face.supportGroup)))))
+    );
   }
   private nearby(bounds: THREE.Box3) {
     const minX = Math.floor(bounds.min.x / CELL),
@@ -1237,8 +1301,7 @@ export class TeslaWorld implements TeslaWorldContract {
     const source = nearby.faces.find(
       (face) =>
         face.surfaceId === query.sourceSurfaceId &&
-        face.kind === 'ground' &&
-        face.supportGroup === 'ground:0' &&
+        this.modelGround(face, query.shape) &&
         face.adherable &&
         face.normal[1] > 0.92,
     );
@@ -1252,8 +1315,8 @@ export class TeslaWorld implements TeslaWorldContract {
         adhesion: false,
       },
       (face) =>
-        face.kind === 'ground' &&
-        (face as TeslaFace).supportGroup === 'ground:0',
+        this.modelGround(face as TeslaFace, query.shape) &&
+        (face as TeslaFace).supportGroup === source.supportGroup,
     );
     if (!proof || proof.surfaceId !== query.sourceSurfaceId)
       return this.invalid(query.from.position);
@@ -1301,13 +1364,29 @@ export class TeslaWorld implements TeslaWorldContract {
     if (!nearby) return this.invalid(query.from.position);
     if (nearby.solids.some((source) => source.inside?.(query.from.position)))
       return this.invalid(query.from.position);
+    const candidates = [
+      ...this.modelConnections(query.from, query.shape),
+      ...this.modelConnections(query.to, query.shape),
+    ];
+    const unique = candidates.filter(
+      (pair, i) =>
+        candidates.findIndex(
+          (other) =>
+            (pair[0] === other[0] && pair[1] === other[1]) ||
+            (pair[0] === other[1] && pair[1] === other[0]),
+        ) === i,
+    );
+    const connections = unique.length <= 4 ? unique : [];
     const currentGround = nearby.faces.find(
       (face) =>
         face.surfaceId === query.ignoreSurfaceId &&
-        face.kind === 'ground' &&
-        face.supportGroup === 'ground:0',
+        this.modelGround(face, query.shape, connections),
     );
     let suspensionProven: boolean | undefined;
+    let suspensionGroup: string | undefined = currentGround?.supportGroup;
+    let suspensionPeers: ReadonlySet<string> = suspensionGroup
+      ? this.modelPeers(suspensionGroup, connections)
+      : new Set();
     const ordinarySuspension = () => {
       if (suspensionProven !== undefined) return suspensionProven;
       // Strict departure has already proved its original source, complete tyre
@@ -1315,6 +1394,7 @@ export class TeslaWorld implements TeslaWorldContract {
       // airborne, so the private validated path retains only that bounded proof.
       if (provenDeparture) return (suspensionProven = true);
       let supportSource: TeslaContact | undefined = currentGround;
+      let supportGroup = currentGround?.supportGroup;
       if (
         !supportSource &&
         query.shape.groundSupport &&
@@ -1333,18 +1413,29 @@ export class TeslaWorld implements TeslaWorldContract {
             preferredSurfaceId: query.ignoreSurfaceId,
             adhesion: false,
           },
-          (face) =>
-            face.kind === 'ground' &&
-            (face as TeslaFace).supportGroup === 'ground:0',
+          (face) => {
+            if (face.surfaceId === query.ignoreSurfaceId)
+              supportGroup = (face as TeslaFace).supportGroup;
+            return this.modelGround(
+              face as TeslaFace,
+              query.shape,
+              connections,
+            );
+          },
         );
         if (proof?.surfaceId === query.ignoreSurfaceId) supportSource = proof;
       }
       if (!supportSource) return (suspensionProven = false);
+      suspensionGroup = supportGroup;
+      suspensionPeers = suspensionGroup
+        ? this.modelPeers(suspensionGroup, connections)
+        : new Set();
       const groundIds = new Set(
         nearby.faces
           .filter(
             (face) =>
-              face.kind === 'ground' && face.supportGroup === 'ground:0',
+              this.modelGround(face, query.shape, connections) &&
+              suspensionPeers.has(face.supportGroup),
           )
           .map((face) => face.surfaceId),
       );
@@ -1399,8 +1490,7 @@ export class TeslaWorld implements TeslaWorldContract {
           face.surfaceId === query.ignoreSurfaceId &&
           !(
             query.shape.groundSupport &&
-            face.kind === 'ground' &&
-            face.supportGroup === 'ground:0'
+            this.modelGround(face, query.shape, connections)
           )
         )
           continue;
@@ -1414,9 +1504,9 @@ export class TeslaWorld implements TeslaWorldContract {
         // at both endpoints; every other obstacle keeps the complete hull.
         if (
           time !== null &&
-          face.kind === 'ground' &&
-          face.supportGroup === 'ground:0' &&
-          ordinarySuspension()
+          this.modelGround(face, query.shape, connections) &&
+          ordinarySuspension() &&
+          suspensionPeers.has(face.supportGroup)
         ) {
           if (query.shape.groundSupport) {
             modelBodies ??= modelGroundBodies(frame, endAxes, query.shape);
@@ -1457,17 +1547,49 @@ export class TeslaWorld implements TeslaWorldContract {
         }
         if (time === null) continue;
         const fraction = (step + time) / steps;
-        if (first && first.fraction <= fraction) continue;
         const center = asVector(interpolated(a, b, time).position);
         const triangle = faceGeometry(face).triangle;
         const point = triangle.closestPointToPoint(center, new THREE.Vector3());
+        const hitNormal = asVector(face.normal);
+        if (
+          face.kind === 'obstacle' &&
+          hitNormal.dot(center.clone().sub(point)) < 0
+        )
+          hitNormal.negate();
+        let acceptedFraction = fraction;
+        if (first && first.fraction <= fraction + 1e-9) {
+          // Several box faces can meet the body at the same instant. Prefer
+          // the opposed normal of that same prop, rather than a tangent side
+          // selected by Float64 last bits; tangent faces consume no energy.
+          const root = (id: string) =>
+            id.match(/^(guardrail:\d+|debris:(?:tree|lamp):\d+)(?::|$)/)?.[1] ??
+            id.split(':side:')[0];
+          const travel = asVector(b.position).sub(asVector(a.position));
+          const tied =
+            face.kind === 'obstacle' &&
+            first.kind === 'obstacle' &&
+            Math.abs(first.fraction - fraction) <= 1e-9 &&
+            root(first.surfaceId) === root(face.surfaceId);
+          if (tied) {
+            acceptedFraction = Math.min(first.fraction, fraction);
+            first.fraction = acceptedFraction;
+          }
+          if (
+            face.kind !== 'obstacle' ||
+            first.kind !== 'obstacle' ||
+            Math.abs(first.fraction - fraction) > 1e-9 ||
+            root(first.surfaceId) !== root(face.surfaceId) ||
+            hitNormal.dot(travel) >= asVector(first.normal).dot(travel) - 1e-10
+          )
+            continue;
+        }
         first = {
           surfaceId: face.surfaceId,
           kind: face.kind,
           point: tuple(point),
-          normal: face.normal,
+          normal: tuple(hitNormal),
           adherable: face.adherable,
-          fraction,
+          fraction: acceptedFraction,
         };
       }
       if (first) break;
@@ -1501,21 +1623,32 @@ export class TeslaWorld implements TeslaWorldContract {
       .expandByScalar(radius + 0.01);
     const nearby = this.nearby(bounds);
     if (!nearby) return null;
-    let wheelsProven: boolean | undefined;
-    const wheelSupport = () => {
-      if (wheelsProven !== undefined) return wheelsProven;
+    const connections = this.modelConnections(query.pose, query.shape);
+    const peerCache = new Map<string, ReadonlySet<string>>();
+    const peersFor = (group: string) => {
+      let peers = peerCache.get(group);
+      if (!peers) {
+        peers = this.modelPeers(group, connections);
+        peerCache.set(group, peers);
+      }
+      return peers;
+    };
+    const wheelProofs = new Map<string, boolean>();
+    const wheelSupport = (group: string) => {
+      const proven = wheelProofs.get(group);
+      if (proven !== undefined) return proven;
       const ground = query.shape.groundSupport;
-      if (!ground) return (wheelsProven = true);
+      if (!ground) return true;
       const floors = nearby.faces.filter(
         (face) =>
           face.kind === 'ground' &&
-          face.supportGroup === 'ground:0' &&
+          peersFor(group).has(face.supportGroup) &&
           face.adherable &&
           face.normal[1] > 0.92 &&
           accepts?.(face) !== false,
       );
       const triangles = floors.map((face) => face.triangle);
-      return (wheelsProven = ground.wheelContacts.every((wheel) => {
+      const provenWheels = ground.wheelContacts.every((wheel) => {
         const p = center
             .clone()
             .addScaledVector(axes[0], wheel[0])
@@ -1536,7 +1669,9 @@ export class TeslaWorld implements TeslaWorldContract {
           Math.abs(height - p.y) * Math.abs(up.y) <=
             ground.suspensionTravel + GROUND_SEAM_EPS
         );
-      }));
+      });
+      wheelProofs.set(group, provenWheels);
+      return provenWheels;
     };
     const scratch = new THREE.Vector3(),
       closest = new THREE.Vector3(),
@@ -1567,12 +1702,11 @@ export class TeslaWorld implements TeslaWorldContract {
           // extension intersects the long OBB. Authored ground uses the actual
           // tyres/union below; finite-body clearance remains a separate sweep.
           // The physical claim must still be below the chassis, never a ceiling.
-          (face.kind === 'ground' &&
-          face.supportGroup === 'ground:0' &&
+          (this.modelGround(face, query.shape, connections) &&
           query.shape.groundSupport
             ? distance >= 0
             : gap >=
-              (face.kind === 'ground' && face.supportGroup === 'ground:0'
+              (this.modelGround(face, query.shape, connections)
                 ? -0.16
                 : -0.08)) && distance <= query.maxDistance + 1e-5,
       )
@@ -1586,13 +1720,12 @@ export class TeslaWorld implements TeslaWorldContract {
     for (const { face, distance } of candidates) {
       const geometry = faceGeometry(face),
         normal = geometry.normal;
-      const ordinaryGround =
-        face.kind === 'ground' && face.supportGroup === 'ground:0';
-      if (ordinaryGround && !wheelSupport()) continue;
-      // Ordinary roads and footways share a physical ground layer; the source
+      const modelGround = this.modelGround(face, query.shape, connections);
+      if (modelGround && !wheelSupport(face.supportGroup)) continue;
+      // Ordinary roads and explicit model-road groups prove one physical layer; the source
       // curb is .13m high. This bounded suspension range is never used to join
       // roof/wall planes or different protected floor identities.
-      const planeTolerance = ordinaryGround ? 0.15 : 0.012;
+      const planeTolerance = modelGround ? 0.15 : 0.012;
       const point = center
         .clone()
         .addScaledVector(
@@ -1603,18 +1736,25 @@ export class TeslaWorld implements TeslaWorldContract {
         point,
         new THREE.Vector3(),
       );
+      // At a mild convex crest both infinite-plane projections can fall just
+      // outside their finite triangles. Authored tyres have already proved the
+      // real height field; permit its nearby physical edge as a new candidate.
+      // The full footprint union below still rejects every exposed hole.
       if (
         face.kind === 'ground' &&
-        physicalPoint.distanceToSquared(point) > 1e-10 &&
+        physicalPoint.distanceToSquared(point) >
+          (modelGround && query.shape.groundSupport
+            ? planeTolerance ** 2
+            : 1e-10) &&
         (query.preferredSurfaceId !== face.surfaceId ||
           physicalPoint.distanceToSquared(point) > (radius + 0.01) ** 2)
       )
         continue;
       if (
-        ordinaryGround &&
+        modelGround &&
         candidates.some(({ face: other, distance: otherDistance }) => {
           if (
-            other.supportGroup !== 'ground:0' ||
+            !peersFor(face.supportGroup).has(other.supportGroup) ||
             otherDistance >= distance - 0.001
           )
             return false;
@@ -1625,12 +1765,12 @@ export class TeslaWorld implements TeslaWorldContract {
         })
       )
         continue;
-      // Ordinary model ground proves the authored tyre support rectangle,
+      // Authored model roads prove the actual tyre support rectangle,
       // separately from the larger body whose complete sweeps still apply.
       // Its plane follows the actual wheel frame; the claimed triangle point
-      // and normal remain physical source data. Roof/protected/legacy support
+      // and normal remain physical source data. Other protected floors, roofs and legacy support
       // keeps its original full-body footprint and plane.
-      const tyres = ordinaryGround
+      const tyres = modelGround
         ? query.shape.groundSupport?.wheelContacts
         : undefined;
       const tyreProjectionDeterminant =
@@ -1660,10 +1800,14 @@ export class TeslaWorld implements TeslaWorldContract {
         (other) =>
           other.adherable &&
           accepts?.(other) !== false &&
-          other.supportGroup === face.supportGroup &&
-          faceGeometry(other).rawNormal.dot(normal) > 0.97 &&
+          peersFor(face.supportGroup).has(other.supportGroup) &&
+          (modelGround
+            ? other.kind === 'ground' &&
+              other.normal[1] > 0.92 &&
+              faceGeometry(other).rawNormal.dot(up) > 0.96
+            : faceGeometry(other).rawNormal.dot(normal) > 0.97) &&
           Math.abs(
-            (ordinaryGround
+            (modelGround
               ? faceGeometry(other).triangle.closestPointToPoint(
                   footprintPoint,
                   closest,
@@ -1682,7 +1826,7 @@ export class TeslaWorld implements TeslaWorldContract {
               .closestPointToPoint(p, closest)
               .distanceToSquared(p);
           if (distanceSq <= planeTolerance ** 2) return true;
-          if (!ordinaryGround) return false;
+          if (!modelGround) return false;
           connectedGrades ??= connectedGroundFaces(face, nearby.faces);
           if (!connectedGrades.has(other.surfaceId)) return false;
           // A continuous grade can exceed the ordinary .15m curb-plane range
@@ -1727,7 +1871,7 @@ export class TeslaWorld implements TeslaWorldContract {
           const a = peer.triangle[i],
             b = peer.triangle[(i + 1) % 3],
             key = (
-              ordinaryGround
+              modelGround
                 ? faceGeometry(peer).xzKeys
                 : faceGeometry(peer).xyzKeys
             )[i];
@@ -1746,7 +1890,7 @@ export class TeslaWorld implements TeslaWorldContract {
           dy = p[1] - footprintPoint.y,
           dz = p[2] - footprintPoint.z;
         if (tyres) {
-          // Ordinary floors form a height field. Project its union in XZ onto
+          // Each model road group forms one height field. Project its union in XZ onto
           // the actual tyre parallelogram: a curb's vertical rise is not a
           // horizontal hole. Wheel heights and the complete body remain
           // independently proved; true XZ gaps retain their exact intervals.
@@ -1760,7 +1904,7 @@ export class TeslaWorld implements TeslaWorldContract {
           dx * axes[2].x + dy * axes[2].y + dz * axes[2].z,
         ];
       };
-      const projectedPeers = ordinaryGround
+      const projectedPeers = modelGround
         ? peers.map((peer) => peer.triangle.map(project))
         : [];
       if (
@@ -1769,7 +1913,7 @@ export class TeslaWorld implements TeslaWorldContract {
             b = project(edge.b);
           const clipped = rectangleInterval(a, b, halfX - 0.002, halfZ - 0.002);
           if (!clipped) return false;
-          if (!ordinaryGround) return edge.count === 1;
+          if (!modelGround) return edge.count === 1;
           // Road/footway triangles may end underneath an overlapping terrain
           // triangle. That edge is interior to the union, not a physical hole.
           // Prove continuous coverage along its entire outward side using
@@ -1813,7 +1957,7 @@ export class TeslaWorld implements TeslaWorldContract {
       return {
         surfaceId: face.surfaceId,
         kind: face.kind,
-        point: tuple(ordinaryGround ? physicalPoint : point),
+        point: tuple(modelGround ? physicalPoint : point),
         normal: face.normal,
         adherable: face.adherable,
       };
@@ -1852,10 +1996,18 @@ export class TeslaWorld implements TeslaWorldContract {
         .expandByScalar(radius + query.maxAdjustmentM),
     );
     if (!nearby) return null;
+    const connections = this.modelConnections(query.pose, query.shape);
+    const preferred = nearby.faces.find(
+      (face) => face.surfaceId === query.preferredSurfaceId,
+    );
+    if (!preferred || !this.modelGround(preferred, query.shape, connections))
+      return null;
+    const group = preferred.supportGroup;
+    const peerGroups = this.modelPeers(group, connections);
     const faces = nearby.faces.filter(
       (face) =>
         face.kind === 'ground' &&
-        face.supportGroup === 'ground:0' &&
+        peerGroups.has(face.supportGroup) &&
         face.adherable &&
         face.normal[1] > 0.92 &&
         accepts?.(face) !== false,
@@ -1899,7 +2051,7 @@ export class TeslaWorld implements TeslaWorldContract {
         bodies = modelGroundBodies(frame, frame.axes, query.shape);
       for (const face of nearby.faces) {
         if (face.enabled?.() === false) continue;
-        if (face.kind === 'ground' && face.supportGroup === 'ground:0') {
+        if (face.kind === 'ground' && peerGroups.has(face.supportGroup)) {
           if (
             bodies.some(
               (body) => triangleSweep(body.frame, body.shape, face, 0) !== null,
@@ -2042,7 +2194,7 @@ export class TeslaWorld implements TeslaWorldContract {
       if (
         blocked === 'inside' ||
         blocked.kind !== 'ground' ||
-        blocked.supportGroup !== 'ground:0' ||
+        !peerGroups.has(blocked.supportGroup) ||
         maximumHeave <= EPS
       )
         return null;
@@ -2055,7 +2207,7 @@ export class TeslaWorld implements TeslaWorldContract {
       for (const face of nearby.faces) {
         if (face.enabled?.() === false) continue;
         const targets =
-          face.kind === 'ground' && face.supportGroup === 'ground:0'
+          face.kind === 'ground' && peerGroups.has(face.supportGroup)
             ? bodies
             : [{ frame, shape: query.shape }];
         for (const body of targets) {
@@ -2117,7 +2269,7 @@ export class TeslaWorld implements TeslaWorldContract {
     for (const face of nearby.faces) {
       if (face.enabled?.() === false) continue;
       const targets =
-        face.kind === 'ground' && face.supportGroup === 'ground:0'
+        face.kind === 'ground' && peerGroups.has(face.supportGroup)
           ? bodies
           : [{ frame, shape: query.shape }];
       for (const body of targets) {

@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import ts from 'typescript';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { cityModule } from './helpers/city-modules.mjs';
@@ -382,6 +383,99 @@ test('boarding rejects remote, boat, protected floors and actual doorway blocker
     blocker.geometry.dispose();
     blocker.material.dispose();
     assert.equal(f.visit.board('seat-09'), true);
+  } finally {
+    f.visit.dispose();
+  }
+});
+
+test('a prepared bus cannot board a world-seated visitor or release a blocked seat; boarding resumes after a valid stand', async () => {
+  const source = await readFile(
+      new URL('../lib/city/navigation.ts', import.meta.url),
+      'utf8',
+    ),
+    ast = ts.createSourceFile(
+      'navigation.ts',
+      source,
+      ts.ScriptTarget.Latest,
+      true,
+    ),
+    navigation = ast.statements.find(
+      (node) =>
+        ts.isClassDeclaration(node) && node.name.text === 'StreetNavigation',
+    ),
+    leave = navigation.members.find(
+      (node) =>
+        ts.isMethodDeclaration(node) &&
+        node.name.getText(ast) === 'leaveWalkSeat',
+    );
+  assert(leave, 'exercise the real navigation stand-up interlock');
+  const { SeatNavigation } = await import(
+    'data:text/javascript;base64,' +
+      Buffer.from(
+        `export class SeatNavigation { ${leave.getText(ast)} }`,
+      ).toString('base64')
+  );
+  const f = await fixture();
+  try {
+    await f.visit.prepare();
+    open(f.visit);
+    assert.equal(f.visit.snapshot().canBoard, true);
+    const nav = f.city.navigation,
+      origin = nav.position.clone(),
+      eye = f.city.camera.position.clone(),
+      rotation = f.city.camera.quaternion.clone(),
+      visible = nav.walker.group.visible,
+      placements = f.calls.placements.length;
+    let exitClear = false,
+      standChecks = 0;
+    const seat = {
+      id: 'world-bench-by-prepared-bus',
+      floor: origin.toArray(),
+      yaw: nav.yaw,
+      height: 0.46,
+      stand() {
+        standChecks++;
+        return exitClear ? origin.clone() : null;
+      },
+    };
+    nav.walkSeat = seat;
+    nav.walker.group.userData.seated = true;
+    nav.walker.setSeated = (seated) => {
+      nav.walker.group.userData.seated = seated;
+    };
+    nav.update = () => {};
+    nav.leaveWalkSeat = SeatNavigation.prototype.leaveWalkSeat;
+    assert.equal(
+      nav.leaveWalkSeat(),
+      false,
+      'a blocked bench exit retains the seat',
+    );
+    assert.equal(f.visit.snapshot().canBoard, false);
+    assert.equal(f.visit.board('seat-09'), false);
+    f.visit.update(0.05);
+    assert.equal(f.visit.aboard, false);
+    assert.equal(f.visit.snapshot().passengerAnchor, null);
+    assert.equal(nav.walkSeat, seat);
+    assert.equal(nav.walker.group.userData.seated, true);
+    assert.equal(
+      standChecks,
+      1,
+      'boarding cannot bypass or implicitly retry the stand-up action',
+    );
+    assert.equal(nav.walker.group.visible, visible);
+    assert.deepEqual(nav.position, origin);
+    assert.deepEqual(f.city.camera.position, eye);
+    assert.ok(f.city.camera.quaternion.equals(rotation));
+    assert.equal(f.calls.placements.length, placements);
+    exitClear = true;
+    assert.equal(nav.leaveWalkSeat(), true);
+    assert.equal(nav.walkSeat, null);
+    assert.equal(nav.walker.group.userData.seated, false);
+    assert.equal(f.visit.snapshot().canBoard, true);
+    assert.equal(f.visit.board('seat-09'), true);
+    assert.equal(f.visit.alight(), true);
+    assert.equal(nav.walkSeat, null);
+    assert.equal(f.visit.aboard, false);
   } finally {
     f.visit.dispose();
   }

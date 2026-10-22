@@ -21,6 +21,12 @@ import {
 } from './tesla-math';
 import { createTeslaRoadsterShape } from './tesla-shape';
 import {
+  createVehicleDrift,
+  resetVehicleDrift,
+  stepVehicleDrift,
+  type VehicleDriftState,
+} from './vehicle-drift';
+import {
   canStartTeslaVortex,
   createTeslaVortex,
   sampleTeslaVortex,
@@ -116,6 +122,11 @@ export interface TeslaWallToRoofPlan {
 }
 export interface TeslaWorld {
   sweep(query: TeslaSweepQuery): TeslaSweepHit | null;
+  /** Actual committed collision only; speculative fits/clearance never damage
+   * a vehicle or mutate props. A pass requires the broken source to disappear
+   * from a fresh full sweep, never an ignored surface permission. */
+  impact?(query: {hit:TeslaSweepHit;pose:TeslaPose;velocity:TeslaVec3;shape:TeslaShape}):
+    {velocity:TeslaVec3;passThrough:boolean} | null;
   /** Prove the actual tyre support area for authored ordinary ground; other
    * surfaces and legacy shapes require their complete body footprint. */
   support(query: TeslaSupportQuery): TeslaContact | null;
@@ -131,6 +142,12 @@ export interface TeslaWorld {
 export const TESLA_DEFAULT_SHAPE: TeslaShape = createTeslaRoadsterShape();
 
 export interface TeslaInput {
+  /** Optional normalized game mechanical condition; legacy worlds default1. */
+  drivePower?: number;
+  driveSpeedFactor?: number;
+  driveBrakeFactor?: number;
+  /** Hold the rear-tyre slip control on a driveable ground surface. */
+  drift?: boolean;
   /** Forward/reverse; positive steer rotates +Z toward +X about vehicle up. */
   throttle: number;
   steer: number;
@@ -167,6 +184,7 @@ export interface TeslaAttachment {
 }
 export interface TeslaState extends TeslaPose {
   velocity: TeslaVec3;
+  drift: VehicleDriftState;
   /** Stable horizontal yaw, retained when vehicle forward becomes vertical. */
   heading: number;
   mode: 'ground' | 'air' | 'wall';
@@ -365,6 +383,7 @@ export function createTesla(
   return {
     ...pose,
     velocity: [0, 0, 0],
+    drift: createVehicleDrift(),
     heading: yaw,
     mode: proof ? (proof.kind === 'wall' ? 'wall' : 'ground') : 'air',
     contact: proof,
@@ -693,6 +712,7 @@ function leaveSurface(
     ? { ...groundOrigin, resumeVelocity: [...state.velocity], returning: false }
     : null;
   state.mode = 'air';
+  resetVehicleDrift(state.drift);
   state.contact = null;
   state.attachment = null;
   state.flightAssist = assisted;
@@ -710,6 +730,8 @@ function setContact(
     report.transitions++;
   state.contact = contact;
   state.mode = contact.kind === 'wall' ? 'wall' : 'ground';
+  if (contact.kind !== 'ground' || contact.normal[1] <= 0.92)
+    resetVehicleDrift(state.drift);
   if (state.mode !== 'wall') state.wallHolding = false;
   if (contact.kind !== 'wall' && contact.kind !== 'roof')
     state.surfaceHolding = false;
@@ -1494,6 +1516,42 @@ function moveSwept(
     remember(state);
     return;
   }
+  let impactVelocity: TeslaVec3 | null = null;
+  const initialClosing=-teslaDot(state.velocity,hit.normal);
+  state.impact=Math.max(state.impact,Math.min(1,Math.max(0,initialClosing)/35));
+  if (world.impact && hit.kind === 'obstacle') {
+    // A bounded sequence can break several thin props, but the destination is
+    // shortened by the lost speed and swept again against all remaining solids.
+    const attempted=new Set<string>();
+    for (let i=0;hit && i<4;i++) {
+      const id=hit.surfaceId.match(/^(tree:\d+|lamp:\d+)(?::|$)/)?.[1]??hit.surfaceId;
+      if(hit.kind!=='obstacle'||/invalid.*query|invalid-tesla-world/.test(hit.surfaceId)||attempted.has(id))break;
+      attempted.add(id);
+      const before = teslaLength(state.velocity);
+      let response: ReturnType<NonNullable<TeslaWorld['impact']>>;
+      const at = {position:teslaAdd(state.position,teslaScale(teslaSubtract(next.position,state.position),hit.fraction)),
+        quaternion:teslaSlerp(state.quaternion,next.quaternion,hit.fraction)};
+      try { response = world.impact({hit,pose:at,velocity:state.velocity,shape}); }
+      catch { response = null; }
+      if (!response) break;
+      if (!finiteVector(response.velocity,3) || teslaLength(response.velocity)>before+1e-6) {
+        report.environmentFailures++;state.velocity=[0,0,0];return;
+      }
+      state.velocity = [...response.velocity];
+      impactVelocity = state.velocity;
+      if (!response.passThrough) break;
+      report.collisions++;
+      state.collisionSurfaceId=hit.surfaceId;
+      const ratio = before>EPS ? Math.min(1,teslaLength(state.velocity)/before) : 0;
+      const fraction=hit.fraction+(1-hit.fraction)*ratio;
+      next={position:teslaAdd(state.position,teslaScale(teslaSubtract(next.position,state.position),fraction)),
+        quaternion:teslaSlerp(state.quaternion,next.quaternion,fraction)};
+      hit=querySweep(world,state,next,shape,ignoredSupport,report);
+      if (!hit) {state.position=next.position;state.quaternion=next.quaternion;remember(state);return;}
+      // If the budget ends, this last hit remains blocking below.
+      impactVelocity=null;
+    }
+  }
   if (
     allowAttachment &&
     state.mode === 'wall' &&
@@ -1520,7 +1578,7 @@ function moveSwept(
   );
   state.quaternion = teslaSlerp(state.quaternion, next.quaternion, fraction);
   const closing = -teslaDot(state.velocity, hit.normal);
-  state.impact = Math.max(state.impact, Math.min(1, closing / 35));
+  state.impact = Math.max(state.impact, Math.min(1, Math.max(closing,initialClosing) / 35));
   remember(state);
   if (
     allowAttachment &&
@@ -1528,12 +1586,31 @@ function moveSwept(
     requestAttachment(state, hit, world, shape, report)
   )
     return;
+  if(!impactVelocity && world.impact && hit.kind==='wall') {
+    try {
+      const response=world.impact({hit,pose:copyPose(state),velocity:state.velocity,shape});
+      if(response && finiteVector(response.velocity,3) && teslaLength(response.velocity)<=teslaLength(state.velocity)+EPS)
+        impactVelocity=response.velocity;
+    } catch { /* The proven wall remains blocking if feedback fails. */ }
+  }
   // Sliding only removes velocity into the obstacle. The next substep sweeps
   // the remaining tangent movement instead of teleporting through a corner.
   state.velocity =
-    closing > 0
+    impactVelocity ?? (closing > 0
       ? teslaAdd(state.velocity, teslaScale(hit.normal, closing))
-      : [0, 0, 0];
+      : [0, 0, 0]);
+  if (impactVelocity && state.mode === 'ground') {
+    const up=bodyUp(state), projected=teslaSubtract(state.velocity,teslaScale(up,teslaDot(state.velocity,up)));
+    // Redirect along the barrier; otherwise next frame's longitudinal drive
+    // would recreate the inward velocity and charge the same impact repeatedly.
+    if(teslaLength(projected)>.2) {
+      const sign=teslaDot(projected,bodyForward(state))>=0?1:-1;
+      const rotated={position:state.position,quaternion:teslaFrame(up,teslaScale(projected,sign)).quaternion};
+      if(!querySweep(world,state,rotated,shape,state.contact?.surfaceId,report) &&
+        querySupport(world,rotated,shape,state.contact?.surfaceId,state.adhesionArmed,report))
+        state.quaternion=rotated.quaternion;
+    }
+  }
   if (teslaLength(state.velocity) < 0.04) state.velocity = [0, 0, 0];
 }
 
@@ -1770,6 +1847,16 @@ function integrate(
   shape: TeslaShape,
   report: TeslaStepReport,
 ) {
+  if (
+    state.mode !== 'ground' ||
+    state.contact?.kind !== 'ground' ||
+    state.contact.normal[1] <= 0.92 ||
+    state.parked ||
+    state.attachment ||
+    state.vortex ||
+    state.groundDeparture
+  )
+    resetVehicleDrift(state.drift);
   state.timeS += h;
   state.detachRemainingS = Math.max(0, state.detachRemainingS - h);
   if (wallDepartureDistance(state, shape) > EPS)
@@ -1876,32 +1963,66 @@ function integrate(
   if (state.mode !== 'air' && state.contact) {
     const fittedSurfaceId = fittedCurrent ? state.contact.surfaceId : null;
     const up = fittedCurrent ? bodyUp(state) : state.contact.normal;
-    let speed = teslaDot(state.velocity, bodyForward(state));
-    speed += throttle * (input.boost ? 38 : 22) * h;
-    if (input.brake) speed = toward(speed, 0, 55 * h);
+    const roadGround =
+      state.mode === 'ground' &&
+      state.contact.kind === 'ground' &&
+      state.contact.normal[1] > 0.92;
+    const longitudinal = teslaDot(state.velocity, bodyForward(state));
+    // While tyres slide, speed is tangential magnitude, not its body-forward
+    // projection: repeatedly taking cos(slip) would erase momentum each tick.
+    let speed =
+      roadGround &&
+      longitudinal > 0 &&
+      (input.drift || state.drift.engagement > 0 || state.drift.slipAngle !== 0)
+        ? teslaLength(
+            teslaSubtract(
+              state.velocity,
+              teslaScale(up, teslaDot(state.velocity, up)),
+            ),
+          )
+        : longitudinal;
+    const power=state.mode==='ground'?(input.drivePower??1):1;
+    const speedFactor=state.mode==='ground'?(input.driveSpeedFactor??1):1;
+    speed += throttle * (input.boost ? 38 : 22) * h * power;
+    if (input.brake) speed = toward(speed, 0, 55 * h * (state.mode==='ground'?(input.driveBrakeFactor??1):1));
     else if (!throttle) speed = toward(speed, 0, 5 * h);
     speed = Math.max(
       -TESLA_LIMITS.reverseSpeedMps,
       Math.min(
-        input.boost
+        (input.boost
           ? TESLA_LIMITS.boostedGroundSpeedMps
-          : TESLA_LIMITS.groundSpeedMps,
+          : TESLA_LIMITS.groundSpeedMps) * speedFactor,
         speed,
       ),
     );
     if (Math.abs(speed) < 0.03 && !throttle) speed = 0;
-    const turn =
+    const normalTurn =
       input.steer *
       1.5 *
       Math.min(1, Math.abs(speed) / 4) *
       Math.sign(speed) *
       h;
+    const drift = stepVehicleDrift(state.drift, {
+      dt: h,
+      speed,
+      steer: input.steer,
+      held: input.drift === true,
+      grounded: roadGround,
+      brake: input.brake,
+      normalYawDelta: normalTurn,
+      profile: 'tesla',
+    });
+    speed = drift.speed;
+    const turn = drift.yawDelta;
     const forward = teslaRotate(
       teslaAxisRotation(up, turn),
       bodyForward(state),
     );
     const quaternion = teslaFrame(up, forward).quaternion;
-    state.velocity = teslaScale(forward, speed);
+    const travelForward = drift.travelYawOffset
+      ? teslaRotate(teslaAxisRotation(up, drift.travelYawOffset), forward)
+      : forward;
+    state.velocity = teslaScale(travelForward, speed);
     const requested = {
       position: teslaAdd(state.position, teslaScale(state.velocity, h)),
       quaternion,
@@ -1932,6 +2053,7 @@ function integrate(
     }
     // Fit the destination before moving: at motorway speed the front wheels
     // can cross a grade within one substep, outside a source-plane tyre skin.
+    const collisionsBeforeMove = report.collisions;
     const fittedDestination = fitGroundPose(
       state,
       world,
@@ -1940,10 +2062,26 @@ function integrate(
       report,
       requested,
     );
-    if (fittedDestination)
-      state.velocity = teslaScale(bodyForward(state), speed);
-    else moveSwept(state, requested, world, shape, report);
-    if (!state.contact || state.attachment) return;
+    if (fittedDestination) {
+      // Ground fitting can update pitch/roll; preserve the swept road-plane
+      // lateral direction rather than snapping velocity back to the bonnet.
+      const fittedForward = bodyForward(state);
+      state.velocity = teslaScale(
+        drift.travelYawOffset
+          ? teslaRotate(
+              teslaAxisRotation(bodyUp(state), drift.travelYawOffset),
+              fittedForward,
+            )
+          : fittedForward,
+        speed,
+      );
+    } else moveSwept(state, requested, world, shape, report);
+    if (report.collisions > collisionsBeforeMove)
+      resetVehicleDrift(state.drift);
+    if (!state.contact || state.attachment) {
+      resetVehicleDrift(state.drift);
+      return;
+    }
     const support = querySupport(
       world,
       state,
@@ -2121,6 +2259,7 @@ export function stepTesla(
     !Number.isFinite(state.heading)
   )
     throw new Error('Invalid Tesla simulation step');
+  state.drift ??= createVehicleDrift();
   const simulatedS = Math.min(TESLA_LIMITS.maxElapsedS, dtSeconds);
   const report: TeslaStepReport = {
     simulatedS,
@@ -2134,6 +2273,10 @@ export function stepTesla(
   const givenQuaternion = state.quaternion;
   state.quaternion = teslaNormalizeQuaternion(state.quaternion);
   const input: TeslaInput = {
+    drivePower:Number.isFinite(raw.drivePower)?Math.max(.55,Math.min(1,raw.drivePower!)):1,
+    driveSpeedFactor:Number.isFinite(raw.driveSpeedFactor)?Math.max(.65,Math.min(1,raw.driveSpeedFactor!)):1,
+    driveBrakeFactor:Number.isFinite(raw.driveBrakeFactor)?Math.max(.85,Math.min(1,raw.driveBrakeFactor!)):1,
+    drift: raw.drift === true,
     throttle: axis(raw.throttle),
     steer: axis(raw.steer),
     lift: axis(raw.lift),
@@ -2290,6 +2433,8 @@ export function stepTesla(
       state.vortexPreparationLiftTargetM = 0;
     }
   }
+  if (state.velocity.every((value) => value === 0))
+    resetVehicleDrift(state.drift);
   if (
     state.mode === 'ground' &&
     state.contact?.kind === 'ground' &&

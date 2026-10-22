@@ -1,8 +1,14 @@
 import * as THREE from 'three';
 import { prepareParkPaths } from './park-paths';
+import { conformStanleyNorthboundCrossing } from './stanley-northbound-crossing';
 import { createBuses, updateBuses, type BusRoute } from './city-buses';
 import { CityBusAssets } from './bus-assets';
 import { DetailedTrees, registerTree, type ForestTree } from './detailed-trees';
+import {
+  clearParkAsphaltTrees,
+  type TreeRoadSurface,
+  type TreeRoadPolygon,
+} from './park-tree-road-clearance';
 import { createCanopyGeometry } from './assets/tree-canopy';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import type { CityEngine } from './engine';
@@ -26,6 +32,9 @@ export interface Traffic {
   mesh: THREE.InstancedMesh;
   cabins: THREE.InstancedMesh;
   lamps: THREE.InstancedMesh;
+  lampPoles: THREE.InstancedMesh;
+  /** Stable streetLampPoints index; no restoration until a new city session. */
+  breakLamp: (index: number) => boolean;
   routes: {
     a: number[];
     b: number[];
@@ -43,6 +52,88 @@ export interface Traffic {
   downtownAt: (x: number, z: number) => boolean;
   nightReceiversReady: boolean;
 }
+/** Source lamp indices are independent of the filtered downtown light field.
+ * A broken off-field lamp still disappears; it must not switch off source zero
+ * or a neighboring urban pool. No update path restores these instance slots. */
+export function createStreetLampDamage(
+  e: Pick<CityEngine, 'disposed' | 'renderer'>,
+  poles: THREE.InstancedMesh,
+  caps: THREE.InstancedMesh,
+  lightSourceIndices: Int32Array,
+  lighting: NightStreetLighting,
+) {
+  const broken = new Set<number>(),
+    removed = new THREE.Matrix4().makeScale(0, 0, 0);
+  return (index: number) => {
+    if (
+      e.disposed ||
+      !Number.isInteger(index) ||
+      index < 0 ||
+      index >= lightSourceIndices.length ||
+      index >= poles.count ||
+      index >= caps.count ||
+      broken.has(index)
+    )
+      return false;
+    broken.add(index);
+    poles.setMatrixAt(index, removed);
+    caps.setMatrixAt(index, removed);
+    poles.instanceMatrix.needsUpdate = caps.instanceMatrix.needsUpdate = true;
+    if (lightSourceIndices[index] >= 0)
+      lighting.disableLamp(lightSourceIndices[index]);
+    e.renderer.shadowMap.needsUpdate = true;
+    return true;
+  };
+}
+/** Reconcile both tree sources with ordinary asphalt and height-aware Prospect
+ * decks before any LOD/collider registration. Raw municipal data is unchanged. */
+export function reconcileParkRoadTrees(e: CityEngine, trees: ForestTree[]) {
+  const scope = e.parkPolys
+    .filter((p) => p.name === 'Stanley Park')
+    .map((p) => p.poly as unknown as TreeRoadPolygon);
+  const surfaces: TreeRoadSurface[] = [];
+  e.roads.traverse((object) => {
+    if (
+      !(object instanceof THREE.Mesh) ||
+      !object.userData.asphaltSurface ||
+      (object.userData.protectedSurface && !object.userData.parkTreeClearance)
+    )
+      return;
+    const geometry = object.geometry,
+      position = geometry.getAttribute('position');
+    if (!position) return;
+    object.updateWorldMatrix(true, false);
+    const interleaved = position instanceof THREE.InterleavedBufferAttribute;
+    surfaces.push({
+      positions: interleaved ? position.data.array : position.array,
+      stride: interleaved ? position.data.stride : position.itemSize,
+      offset: interleaved ? position.offset : 0,
+      vertexCount: position.count,
+      indices: geometry.index?.array,
+      matrix: object.matrixWorld.elements,
+      start: geometry.drawRange.start,
+      count: geometry.drawRange.count,
+      asphaltSurface: true,
+      protectedSurface: !!object.userData.protectedSurface,
+      parkTreeClearance: !!object.userData.parkTreeClearance,
+    });
+  });
+  const result = clearParkAsphaltTrees(
+    trees,
+    surfaces,
+    scope,
+    e.data.trees.trees.length,
+    (x, z) => e.elevation(x, z),
+  );
+  // Keep the array and retained object identities stable for consumers and QA.
+  trees.length = 0;
+  for (const tree of result.retained) trees.push(tree);
+  e.data.stanleyTreeRoadClearance = {
+    ...result.stats,
+    excludedTrees: result.excluded,
+  };
+  return e.data.stanleyTreeRoadClearance;
+}
 export function createNature(e: CityEngine) {
   const woodPolys = e.data.context.features
     .filter((f: Feature) => f.properties.class === 'wood')
@@ -57,7 +148,7 @@ export function createNature(e: CityEngine) {
   e.data.waterPolys = waters;
   e.data.beachPolys = [
     ...e.data.beachCoast.fixtures.beaches.flatMap(
-      (b: any) => b.drySandPolygons || [],
+      (b: { drySandPolygons?: number[][][][] }) => b.drySandPolygons || [],
     ),
     ...e.data.beachCoast.beachOverlays.features.flatMap((f: Feature) =>
       rings(f).map((p) => p.map((r) => r.map(project))),
@@ -195,6 +286,11 @@ export function createNature(e: CityEngine) {
         original.dispose();
         drapedPaths++;
       }
+      const crossing = conformStanleyNorthboundCrossing(e, f, mesh.geometry);
+      if (crossing !== mesh.geometry) {
+        mesh.geometry.dispose();
+        mesh.geometry = crossing;
+      }
       pathGeos.push(mesh.geometry);
       const sourceId = Number(f.properties.sourceId ?? f.properties.id);
       if (groundSourceIds.has(sourceId))
@@ -272,6 +368,7 @@ export function createNature(e: CityEngine) {
   const conifer = createCanopyGeometry(true),
     leaf = createCanopyGeometry(false),
     lowLeaf = createCanopyGeometry(false, 'distant');
+  reconcileParkRoadTrees(e, trees);
   const mats = [
     new THREE.MeshStandardMaterial({
       color: 0xffffff,
@@ -452,7 +549,8 @@ export function createStreetDetails(e: CityEngine): Traffic {
   const downtownAt = createDowntownNightPolicy(excluded, (x, z) =>
     e.onLand(x, z),
   );
-  const lightSources = [];
+  const lightSources = [],
+    lampLightSourceIndices = new Int32Array(lampPoints.length).fill(-1);
   for (let i = 0; i < lampPoints.length; i++) {
     const [x, z, yaw] = lampPoints[i];
     dummy.position.set(x, e.elevation(x, z) + 1, z);
@@ -463,7 +561,8 @@ export function createStreetDetails(e: CityEngine): Traffic {
     dummy.position.set(head.x, head.y, head.z);
     dummy.updateMatrix();
     lightCaps.setMatrixAt(i, dummy.matrix);
-    if (downtownAt(head.x, head.z))
+    if (downtownAt(head.x, head.z)) {
+      lampLightSourceIndices[i] = lightSources.length;
       lightSources.push({
         ...head,
         groundY:
@@ -471,6 +570,7 @@ export function createStreetDetails(e: CityEngine): Traffic {
           (e.data.roadRelief?.(head.x, head.z) ?? e.elevation(head.x, head.z)) +
             1.05,
       });
+    }
   }
   e.roads.add(lamps, lightCaps);
   const body = new THREE.InstancedMesh(
@@ -562,10 +662,19 @@ export function createStreetDetails(e: CityEngine): Traffic {
       wrapNightStreetMaterials(vehicleAssets.group, streetLighting);
   });
   const nightLights = new TrafficNightLights(e.trafficGroup);
+  const breakLamp = createStreetLampDamage(
+    e,
+    lamps,
+    lightCaps,
+    lampLightSourceIndices,
+    streetLighting,
+  );
   return {
     mesh: body,
     cabins,
     lamps: lightCaps,
+    lampPoles: lamps,
+    breakLamp,
     routes,
     boats,
     buses,

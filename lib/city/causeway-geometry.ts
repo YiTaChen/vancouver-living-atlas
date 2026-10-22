@@ -46,6 +46,10 @@ export interface GeometryOptions {
   shoulderWidthM?: number;
   shoulderRiseM?: number;
   slabDepthM?: number;
+  /** Keep a new bridge's end caps at asphalt level across the motor lane;
+   * only the shoulder bands include the shoulder rise. Legacy output defaults
+   * to the original full-width cap. */
+  splitSlabEndCaps?: boolean;
   miterLimit?: number;
   seamGridM?: number;
   rails?: boolean;
@@ -57,6 +61,25 @@ export interface GeometryOptions {
     kind: 'road' | 'shoulder',
   ) => readonly ('walk' | 'drive')[];
   railAllowed?: (identity: Identity, x: number, z: number) => boolean;
+  /** Source-owned physical road openings. Rings must be convex and have no
+   * holes (actual asphalt triangle footprints are the canonical input).
+   * Only shoulder tops and inner curbs are clipped; asphalt/datum stay intact. */
+  shoulderOpenings?: (identity: Identity) => readonly GroundPolygon[];
+  /** Optional bounded shared-junction grade, applied identically to actual
+   * asphalt, shoulders, curbs and rails. Unspecified routes keep their datum. */
+  surfaceTop?: (
+    routeId: string,
+    x: number,
+    z: number,
+    defaultTop: number,
+  ) => number;
+  /** Source-owned at-grade road/path crossing top; other sources are unchanged. */
+  sourceTop?: (
+    sourceId: number,
+    x: number,
+    z: number,
+    defaultTop: number,
+  ) => number;
 }
 export interface GeometryResult {
   buffers: Record<BufferKind, number[]>;
@@ -320,12 +343,17 @@ export function buildCausewayGeometry(
       rule.endM ? 1 - smooth((g.at(-1)!.s1 - s) / rule.endM) : 0,
     );
   };
-  const topY = (v: V, routeId: string, offset = 0) => {
+  const topY = (v: V, routeId: string, offset = 0, sourceId?: number) => {
     const w = weights(routeId, v.s),
       delta = w
         ? options.groundRoadTop!(v.x, v.z) - options.groundRoadTop!(v.cx, v.cz)
         : 0;
-    const y = v.h + delta * w + offset;
+    const base = v.h + delta * w;
+    const road = options.surfaceTop?.(routeId, v.x, v.z, base) ?? base;
+    const y =
+      (sourceId === undefined
+        ? road
+        : (options.sourceTop?.(sourceId, v.x, v.z, road) ?? road)) + offset;
     if (!Number.isFinite(y)) throw new Error('Non-finite ground callback');
     return y;
   };
@@ -383,7 +411,10 @@ export function buildCausewayGeometry(
     const emit = (p: V[]) => {
       for (let j = 1; j < p.length - 1; j++) {
         const q = [p[0], p[j], p[j + 1]],
-          v = q.map((a) => [a.x, topY(a, routeId, offsetY), a.z] as XYZ);
+          v = q.map(
+            (a) =>
+              [a.x, topY(a, routeId, offsetY, ids[0].sourceId), a.z] as XYZ,
+          );
         tri(buffer, v[0], v[1], v[2], {
           identities: ids,
           role,
@@ -482,7 +513,7 @@ export function buildCausewayGeometry(
       crossSections.push(c);
       const cv = (v: V, add = 0): XYZ => [
         f32(v.x),
-        f32(topY(v, routeId, add)),
+        f32(topY(v, routeId, add, s.sourceId)),
         f32(v.z),
       ];
       sections.push({
@@ -516,7 +547,7 @@ export function buildCausewayGeometry(
         }
     });
   }
-  const planIndex = orderedBounds(plans, p => p.bounds, 24, eps);
+  const planIndex = orderedBounds(plans, (p) => p.bounds, 24, eps);
   // Fill only uncovered endpoint sectors; subtract existing asphalt plans so
   // the fan does not overlay/slant over already-rendered approach triangles.
   if (options.junctionFills !== false) {
@@ -564,16 +595,60 @@ export function buildCausewayGeometry(
     }
   }
   const otherRoads = (s: SurfaceSegment, bounds: number[]) =>
-    planIndex.query(bounds).filter(
-      (p) =>
-        p.identity.routeId !== s.routeId &&
-        p.identity.layer === s.layer &&
-        overlap(bounds, p.bounds),
-    );
+    planIndex
+      .query(bounds)
+      .filter(
+        (p) =>
+          p.identity.routeId !== s.routeId &&
+          p.identity.layer === s.layer &&
+          overlap(bounds, p.bounds),
+      );
   const unobstructed = (poly: V[], s: SurfaceSegment) => {
     let result = [poly];
     for (const p of otherRoads(s, box(poly)))
       result = result.flatMap((v) => subtractTriangle(v, p.p));
+    for (const opening of openings(s)) {
+      const ring = opening.outer.map(([x, z]) => ({ ...poly[0], x, z }));
+      if (!overlap(box(poly), box(ring))) continue;
+      for (let i = 1; i < ring.length - 1; i++)
+        result = result.flatMap((v) =>
+          subtractTriangle(v, [ring[0], ring[i], ring[i + 1]]),
+        );
+    }
+    return result;
+  };
+  const openingCache = new Map<string, readonly GroundPolygon[]>();
+  const openings = (s: SurfaceSegment) => {
+    const key = `${s.routeId}:${s.surfaceId}:${s.layer}:${s.sourceId}`;
+    let result = openingCache.get(key);
+    if (!result) {
+      result = options.shoulderOpenings?.(identity(s)) ?? [];
+      for (const { outer, holes } of result) {
+        if (outer.length < 3 || holes?.length)
+          throw new Error(
+            'Shoulder openings require convex rings without holes',
+          );
+        let direction = 0;
+        for (let i = 0; i < outer.length; i++) {
+          const a = outer[i],
+            b = outer[(i + 1) % outer.length],
+            c = outer[(i + 2) % outer.length],
+            turn = cross(
+              [b[0] - a[0], b[1] - a[1]],
+              [c[0] - b[0], c[1] - b[1]],
+            );
+          if (![...a, ...b, ...c].every(Number.isFinite))
+            throw new Error('Non-finite shoulder opening');
+          if (Math.abs(turn) < eps) continue;
+          if (direction && Math.sign(turn) !== direction)
+            throw new Error(
+              'Shoulder openings require convex rings without holes',
+            );
+          direction = Math.sign(turn);
+        }
+      }
+      openingCache.set(key, result);
+    }
     return result;
   };
   const covered = (p: V, s: SurfaceSegment) =>
@@ -603,21 +678,29 @@ export function buildCausewayGeometry(
         );
       const mid = mixV(a[inner], b[inner], 0.5);
       if (!covered(mid, s))
-        quad(
-          'curb',
-          [a[inner].x, topY(a[inner], s.routeId), a[inner].z],
-          [b[inner].x, topY(b[inner], s.routeId), b[inner].z],
-          [b[inner].x, topY(b[inner], s.routeId, rise), b[inner].z],
-          [a[inner].x, topY(a[inner], s.routeId, rise), a[inner].z],
-        );
+        for (const [t, u] of openIntervals(
+          xy(a[inner]),
+          xy(b[inner]),
+          openings(s),
+        )) {
+          const p = mixV(a[inner], b[inner], t),
+            q = mixV(a[inner], b[inner], u);
+          quad(
+            'curb',
+            [p.x, topY(p, s.routeId, 0, s.sourceId), p.z],
+            [q.x, topY(q, s.routeId, 0, s.sourceId), q.z],
+            [q.x, topY(q, s.routeId, rise, s.sourceId), q.z],
+            [p.x, topY(p, s.routeId, rise, s.sourceId), p.z],
+          );
+        }
       if (bridgeIds.has(s.sourceId)) {
         // Shoulder rises .13; bottom is ASPHALT-.75, never shoulder-.75.
         quad(
           'slab',
           [a[outer].x, a[outer].h - slabDepth, a[outer].z],
           [b[outer].x, b[outer].h - slabDepth, b[outer].z],
-          [b[outer].x, topY(b[outer], s.routeId, rise), b[outer].z],
-          [a[outer].x, topY(a[outer], s.routeId, rise), a[outer].z],
+          [b[outer].x, topY(b[outer], s.routeId, rise, s.sourceId), b[outer].z],
+          [a[outer].x, topY(a[outer], s.routeId, rise, s.sourceId), a[outer].z],
         );
       } else if (
         options.retainingRouteIds?.has(s.routeId) &&
@@ -628,8 +711,8 @@ export function buildCausewayGeometry(
         for (const [t, u] of intervals) {
           const p = mixV(a[outer], b[outer], t),
             q = mixV(a[outer], b[outer], u),
-            py = topY(p, s.routeId, rise),
-            qy = topY(q, s.routeId, rise),
+            py = topY(p, s.routeId, rise, s.sourceId),
+            qy = topY(q, s.routeId, rise, s.sourceId),
             gy = options.groundElevation(p.x, p.z),
             hy = options.groundElevation(q.x, q.z);
           if (Math.max(py - gy, qy - hy) > 0.2)
@@ -661,13 +744,29 @@ export function buildCausewayGeometry(
         ],
       ] as const)
         if (end) {
-          quad(
-            'slab',
-            [section[0].x, section[0].h - slabDepth, section[0].z],
-            [section[4].x, section[4].h - slabDepth, section[4].z],
-            [section[4].x, topY(section[4], s.routeId, rise), section[4].z],
-            [section[0].x, topY(section[0], s.routeId, rise), section[0].z],
-          );
+          const bands = options.splitSlabEndCaps
+            ? [
+                [0, 1, rise],
+                [1, 3, 0],
+                [3, 4, rise],
+              ]
+            : [[0, 4, rise]];
+          for (const [lo, hi, offset] of bands)
+            quad(
+              'slab',
+              [section[lo].x, section[lo].h - slabDepth, section[lo].z],
+              [section[hi].x, section[hi].h - slabDepth, section[hi].z],
+              [
+                section[hi].x,
+                topY(section[hi], s.routeId, offset, s.sourceId),
+                section[hi].z,
+              ],
+              [
+                section[lo].x,
+                topY(section[lo], s.routeId, offset, s.sourceId),
+                section[lo].z,
+              ],
+            );
         }
     }
   }

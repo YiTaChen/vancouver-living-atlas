@@ -83,6 +83,9 @@ export class NightStreetLighting {
   private readonly size: number;
   private readonly bounds: NightStreetBounds;
   private readonly bytes: Uint8Array;
+  private readonly warm: Float32Array;
+  private readonly lampXZ: Float64Array;
+  private readonly disabledLamps = new Set<number>();
   private readonly wrappers = new Map<Material, Wrapper>();
   private disposed = false;
   private readonly fieldStats: {
@@ -247,7 +250,9 @@ export class NightStreetLighting {
           pool = Math.max(0, 1 - distance / 22) ** 2;
         if (broad <= 0) return;
         street[index] = Math.max(street[index], broad * 0.28);
-        warm[index] = Math.min(1, warm[index] + pool);
+        // Retain the unclamped sum: subtracting a broken source from a clipped
+        // value would incorrectly switch off the other overlapping lamp pools.
+        warm[index] += pool;
         addGround(index, ground, broad);
       });
     }
@@ -271,6 +276,12 @@ export class NightStreetLighting {
       this.bytes[index * 4 + 3] = 255;
       activeTexels++;
     }
+    this.warm = warm;
+    this.lampXZ = new Float64Array(options.lamps.length * 2);
+    options.lamps.forEach((lamp, index) => {
+      this.lampXZ[index * 2] = lamp.x;
+      this.lampXZ[index * 2 + 1] = lamp.z;
+    });
     this.texture = new THREE.DataTexture(
       this.bytes,
       this.size,
@@ -317,6 +328,53 @@ export class NightStreetLighting {
       ? clamp(nightAmount)
       : 0;
     this.uniforms.uAtlasNightActivity.value = nightStreetActivity(hour);
+  }
+
+  /** Switch off one baked warm pool without rebuilding geometry/materials or
+   * rerunning geographic masks. Only its finite 22m neighborhood is touched;
+   * the aggregate street fill and immutable height/coverage datum are retained.
+   * CPU state is one fixed float field plus two coordinates per source, never
+   * a full field per lamp. The same texture and shader uniforms stay attached. */
+  disableLamp(index: number) {
+    if (
+      this.disposed ||
+      !Number.isInteger(index) ||
+      index < 0 ||
+      index >= this.lampXZ.length / 2 ||
+      this.disabledLamps.has(index)
+    )
+      return false;
+    this.disabledLamps.add(index);
+    const { minX, maxX, minZ, maxZ } = this.bounds,
+      x = this.lampXZ[index * 2],
+      z = this.lampXZ[index * 2 + 1],
+      stepX = (maxX - minX) / this.size,
+      stepZ = (maxZ - minZ) / this.size,
+      firstX = Math.max(0, Math.floor((x - 22 - minX) / stepX)),
+      lastX = Math.min(this.size - 1, Math.floor((x + 22 - minX) / stepX)),
+      firstZ = Math.max(0, Math.floor((z - 22 - minZ) / stepZ)),
+      lastZ = Math.min(this.size - 1, Math.floor((z + 22 - minZ) / stepZ));
+    let changed = false;
+    for (let j = firstZ; j <= lastZ; j++)
+      for (let i = firstX; i <= lastX; i++) {
+        const texel = j * this.size + i;
+        if (!this.bytes[texel * 4 + 3]) continue;
+        const distance = Math.hypot(
+            minX + (i + 0.5) * stepX - x,
+            minZ + (j + 0.5) * stepZ - z,
+          ),
+          pool = Math.max(0, 1 - distance / 22) ** 2;
+        if (pool === 0) continue;
+        this.warm[texel] = Math.max(0, this.warm[texel] - pool);
+        const next = Math.round(clamp(this.warm[texel]) * 255),
+          channel = texel * 4 + 1;
+        if (this.bytes[channel] !== next) {
+          this.bytes[channel] = next;
+          changed = true;
+        }
+      }
+    if (changed) this.texture.needsUpdate = true;
+    return true;
   }
 
   /** Matches the single linear-filtered field sample, including edge-normalized
@@ -481,6 +539,8 @@ export class NightStreetLighting {
       ...this.fieldStats,
       textures: this.disposed ? 0 : 1,
       wrappedMaterials: this.wrappers.size,
+      disabledLamps: this.disabledLamps.size,
+      warmStateBytes: this.warm.byteLength + this.lampXZ.byteLength,
       disposed: this.disposed,
       nightAmount: this.uniforms.uAtlasNightAmount.value,
       activity: this.uniforms.uAtlasNightActivity.value,

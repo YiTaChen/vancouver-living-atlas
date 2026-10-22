@@ -52,6 +52,9 @@ export class DetailedTrees {
   private selectionAt = -Infinity;
   private motionPolicy = '';
   private lods = new Map<ForestTree, number>();
+  private broken = new Set<ForestTree>();
+  private brokenRevision = -1;
+  private urgentBroken = false;
   private disposed = false;
   private wantedPools = 0;
   private leafCandidate: TreeLeafCandidate | null = null;
@@ -300,12 +303,52 @@ export class DetailedTrees {
     );
     this.materials = null;
   }
+  /** Session damage belongs to the impact world, rather than a particular LOD.
+   * Hide every far slot immediately and rebuild only the bounded near pools.
+   * The original matrices stay immutable for provenance; broken trees are never
+   * restored when the camera, quality, asset load or admission budget changes. */
+  syncBroken() {
+    if (!this.collectBroken()) return false;
+    this.update(true);
+    return true;
+  }
+  private collectBroken() {
+    const impacts = this.e.vehicleImpacts;
+    if (
+      this.disposed ||
+      this.e.disposed ||
+      !impacts ||
+      impacts.revision === this.brokenRevision
+    )
+      return false;
+    this.brokenRevision = impacts.revision;
+    const zero = new THREE.Matrix4().makeScale(0, 0, 0),
+      dirty = new Set<THREE.InstancedMesh>();
+    let changed = false;
+    this.trees.forEach((tree, index) => {
+      if (this.broken.has(tree) || !impacts.isBroken(`tree:${index}`)) return;
+      this.broken.add(tree);
+      for (const slot of tree.slots ?? []) {
+        slot.mesh.setMatrixAt(slot.index, zero);
+        dirty.add(slot.mesh);
+      }
+      changed = true;
+    });
+    for (const mesh of dirty) mesh.instanceMatrix.needsUpdate = true;
+    if (changed) {
+      this.urgentBroken = true;
+      this.refresh = true;
+      this.e.renderer.shadowMap.needsUpdate = true;
+    }
+    return changed;
+  }
   update(force = false) {
     const quality = this.e.settings.trees
       ? this.e.settings.quality
       : 'balanced';
     const camera = this.e.camera.position;
     if (this.disposed || this.e.disposed) return;
+    this.collectBroken();
     const motion = this.e.sceneryMotion,
       budget = this.e.detailWorkBudget;
     const policy = motion
@@ -321,6 +364,7 @@ export class DetailedTrees {
     const detailQuality = retainFlight ? 'high' : quality;
     const changed =
       force ||
+      this.urgentBroken ||
       quality !== this.quality ||
       policy !== this.motionPolicy ||
       (this.last.distanceToSquared(camera) >= 18 * 18 &&
@@ -372,6 +416,7 @@ export class DetailedTrees {
           .slice(0, limit)
           .sort((a, b) => a.d - b.d || a.ordinal - b.ordinal);
       }
+      this.selection = this.selection.filter(({ t }) => !this.broken.has(t));
       this.e.data.treeSelection = { ...this.spatial.stats };
     }
     this.wantedPools = this.selection.length
@@ -485,7 +530,7 @@ export class DetailedTrees {
           }
       }
       for (const t of this.hidden)
-        if (!next.has(t))
+        if (!next.has(t) && !this.broken.has(t))
           for (const slot of t.slots || []) {
             slot.mesh.setMatrixAt(slot.index, slot.matrix);
             dirty.add(slot.mesh);
@@ -504,8 +549,11 @@ export class DetailedTrees {
       this.e.renderer.shadowMap.needsUpdate = true;
       this.e.data.detailedTreeCount = next.size;
       this.e.data.matureTreeAssets = this.getGeometryCandidateState();
+      this.urgentBroken = false;
     };
-    if (budget) {
+    // A contact must not leave the old near/mature tree visible merely because
+    // ordinary scenery work was deferred this frame. Pool sizes remain bounded.
+    if (budget && !this.urgentBroken) {
       if (!budget.run(rebuild)) this.refresh = true;
     } else rebuild();
   }

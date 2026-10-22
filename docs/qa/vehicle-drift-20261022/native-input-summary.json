@@ -1,0 +1,324 @@
+{
+  "date": "2026-10-22",
+  "method": "Local production-style visual QA build; public mode/model buttons and native browser keyboard/pointer controls; loopback observer only. No injected speed, keys, pose, repair or prop removal by the recorder. Existing public repair UI was used before the classic desktop entry.",
+  "browser": "ChatGPT in-app browser, default 1280x720; explicit responsive viewports 390x844 and 844x390. Not physical-phone performance measurement.",
+  "notes": [
+    "Desktop keys used W, X+A/D, Space (Drive), B (Tesla). Pointer cases held the actual mobile Drift button with a steering keyboard key. Actual independent multipointer input/cancellation is covered by 22 component event tests.",
+    "Classic park experiment deliberately steered beyond the narrow road; after the slide capture, a roadside collision added damage during braking. This is preserved in the brake record and is not counted as collision-free acceptance.",
+    "Roadster desktop and classic mobile entries retain pre-existing damage; their ending damage did not increase. Tesla desktop/mobile entries and ending damage are zero.",
+    "One initial unarmed capture and exploratory coasting attempts were excluded. No failed or exploratory case is presented as a collision-free success.",
+    "No browser console errors were reported after the native runs."
+  ],
+  "cases": [
+    {
+      "case": "classic-desktop-slide",
+      "raw": "classic-desktop-slide.json",
+      "sha256": "9f763ef11cdbfbfb0e4ef649f89a4c8dbcb0b977b1a9fb7ae40aee10756aba9d",
+      "sourceFingerprint": "ff844894a6e9b3bf45ecfb3803a37baa950b5cf7a9ab42b5c2e8000397735fae",
+      "baseRevision": "5d801579738fd43121cdf03669f22c43423508e1",
+      "valid": true,
+      "viewport": [
+        1280,
+        720
+      ],
+      "entry": {
+        "mode": "drive",
+        "model": "classic",
+        "position": [
+          -328.70856976818595,
+          10.854496847910067,
+          -2144.44237973515
+        ],
+        "initialDamage": 0,
+        "broken": 0
+      },
+      "samples": 72,
+      "maxSpeedKph": 48.47904000000049,
+      "maxSlipDegrees": 13.49965941023677,
+      "maxObservedActiveSlipDegrees": 14.189802180966895,
+      "maxMarks": 4,
+      "maxSmoke": 5,
+      "touchDriftSamples": 0,
+      "lastSpeedKph": 34.208651650168676,
+      "lastSlip": -0.0004180137882448374,
+      "lastDamage": 0
+    },
+    {
+      "case": "classic-desktop-brake-with-roadside-contact",
+      "raw": "classic-desktop-brake-with-roadside-contact.json",
+      "sha256": "5d633f634bfe8478ddbd278f45ccc3cf8b1c3eff8180ecb25e88e79cc96670d9",
+      "sourceFingerprint": "ff844894a6e9b3bf45ecfb3803a37baa950b5cf7a9ab42b5c2e8000397735fae",
+      "baseRevision": "5d801579738fd43121cdf03669f22c43423508e1",
+      "valid": true,
+      "viewport": [
+        1280,
+        720
+      ],
+      "entry": {
+        "mode": "drive",
+        "model": "classic",
+        "position": [
+          -328.70856976818595,
+          10.854496847910067,
+          -2144.44237973515
+        ],
+        "initialDamage": 0,
+        "broken": 0
+      },
+      "samples": 128,
+      "maxSpeedKph": 48.47904000000049,
+      "maxSlipDegrees": 13.49965941023677,
+      "maxObservedActiveSlipDegrees": 14.189802180966895,
+      "maxMarks": 4,
+      "maxSmoke": 5,
+      "touchDriftSamples": 0,
+      "lastSpeedKph": 0.0006890536854241186,
+      "lastSlip": 0,
+      "lastDamage": 0.17610179671707038
+    },
+    {
+      "case": "tesla-desktop-slide",
+      "raw": "tesla-desktop-slide.json",
+      "sha256": "8febf04f74bb477dfcfd2b3b47716408aa3cc240a0a2338deb8663bee9390853",
+      "sourceFingerprint": "ff844894a6e9b3bf45ecfb3803a37baa950b5cf7a9ab42b5c2e8000397735fae",
+      "baseRevision": "5d801579738fd43121cdf03669f22c43423508e1",
+      "valid": true,
+      "viewport": [
+        1280,
+        720
+      ],
+      "entry": {
+        "mode": "tesla",
+        "model": "tesla",
+        "position": [
+          303.884406454204,
+          34.546545966207354,
+          228.25151998955639
+        ],
+        "initialDamage": 0,
+        "broken": 0
+      },
+      "samples": 43,
+      "maxSpeedKph": 64.73015999999943,
+      "maxSlipDegrees": 9.652011633765177,
+      "maxObservedActiveSlipDegrees": 12.934901651645694,
+      "maxMarks": 6,
+      "maxSmoke": 8,
+      "touchDriftSamples": 0,
+      "lastSpeedKph": 0,
+      "lastSlip": 0,
+      "lastDamage": 0
+    },
+    {
+      "case": "tesla-desktop-released",
+      "raw": "tesla-desktop-released.json",
+      "sha256": "648570c4f6f0a33f3e61dac40ab66d78b0c50cf3057ebfea41bb17494831e55e",
+      "sourceFingerprint": "ff844894a6e9b3bf45ecfb3803a37baa950b5cf7a9ab42b5c2e8000397735fae",
+      "baseRevision": "5d801579738fd43121cdf03669f22c43423508e1",
+      "valid": true,
+      "viewport": [
+        1280,
+        720
+      ],
+      "entry": {
+        "mode": "tesla",
+        "model": "tesla",
+        "position": [
+          303.884406454204,
+          34.546545966207354,
+          228.25151998955639
+        ],
+        "initialDamage": 0,
+        "broken": 0
+      },
+      "samples": 105,
+      "maxSpeedKph": 64.73015999999943,
+      "maxSlipDegrees": 9.652011633765177,
+      "maxObservedActiveSlipDegrees": 12.934901651645694,
+      "maxMarks": 6,
+      "maxSmoke": 8,
+      "touchDriftSamples": 0,
+      "lastSpeedKph": 0,
+      "lastSlip": 0,
+      "lastDamage": 0
+    },
+    {
+      "case": "tesla-mobile-pointer-hold",
+      "raw": "tesla-mobile-pointer-hold.json",
+      "sha256": "ba14cb79a207e308ca0298a8e7786ec02a4b4ee2ec3a7d6ce6961983101945c6",
+      "sourceFingerprint": "ff844894a6e9b3bf45ecfb3803a37baa950b5cf7a9ab42b5c2e8000397735fae",
+      "baseRevision": "5d801579738fd43121cdf03669f22c43423508e1",
+      "valid": true,
+      "viewport": [
+        390,
+        844
+      ],
+      "entry": {
+        "mode": "tesla",
+        "model": "tesla",
+        "position": [
+          273.82905898204956,
+          34.866637888950834,
+          204.51925886081168
+        ],
+        "initialDamage": 0,
+        "broken": 0
+      },
+      "samples": 66,
+      "maxSpeedKph": 54.296639999996174,
+      "maxSlipDegrees": 14.760958854994362,
+      "maxObservedActiveSlipDegrees": 26.7457657543554,
+      "maxMarks": 4,
+      "maxSmoke": 7,
+      "touchDriftSamples": 0,
+      "lastSpeedKph": 0,
+      "lastSlip": 0,
+      "lastDamage": 0
+    },
+    {
+      "case": "classic-mobile-pointer-hold",
+      "raw": "classic-mobile-pointer-hold.json",
+      "sha256": "aba8e637d3ae03dd5334f57c60e45ac65c7276c0c769cc625b8a3c8c3a402e6a",
+      "sourceFingerprint": "ff844894a6e9b3bf45ecfb3803a37baa950b5cf7a9ab42b5c2e8000397735fae",
+      "baseRevision": "5d801579738fd43121cdf03669f22c43423508e1",
+      "valid": true,
+      "viewport": [
+        390,
+        844
+      ],
+      "entry": {
+        "mode": "drive",
+        "model": "classic",
+        "position": [
+          303.92205172832195,
+          34.06083199646445,
+          228.33401800037095
+        ],
+        "initialDamage": 0.17610179671707038,
+        "broken": 0
+      },
+      "samples": 92,
+      "maxSpeedKph": 37.46700169156009,
+      "maxSlipDegrees": 9.652152726807474,
+      "maxObservedActiveSlipDegrees": 10.115266457404642,
+      "maxMarks": 8,
+      "maxSmoke": 10,
+      "touchDriftSamples": 11,
+      "lastSpeedKph": 0.0077409537133332745,
+      "lastSlip": 0,
+      "lastDamage": 0.17610179671707038
+    },
+    {
+      "case": "roadster-desktop-slide",
+      "raw": "roadster-desktop-slide.json",
+      "sha256": "50481800eebb43d7173bd194d32d18491e52a8a14b4b70fb0819858d3b276959",
+      "sourceFingerprint": "ff844894a6e9b3bf45ecfb3803a37baa950b5cf7a9ab42b5c2e8000397735fae",
+      "baseRevision": "5d801579738fd43121cdf03669f22c43423508e1",
+      "valid": true,
+      "viewport": [
+        1280,
+        720
+      ],
+      "entry": {
+        "mode": "drive",
+        "model": "roadster",
+        "position": [
+          303.92205172832195,
+          34.06083199646445,
+          228.33401800037095
+        ],
+        "initialDamage": 0.17610179671707038,
+        "broken": 0
+      },
+      "samples": 45,
+      "maxSpeedKph": 53.554022518302176,
+      "maxSlipDegrees": 17.004090839841837,
+      "maxObservedActiveSlipDegrees": 17.634229774218003,
+      "maxMarks": 10,
+      "maxSmoke": 12,
+      "touchDriftSamples": 0,
+      "lastSpeedKph": 40.82551699952467,
+      "lastSlip": 0.004927255571157605,
+      "lastDamage": 0.17610179671707038
+    },
+    {
+      "case": "roadster-desktop-released",
+      "raw": "roadster-desktop-released.json",
+      "sha256": "053a64ceae2510a4c282c865cd221f8133aa5ced55b1430fcbde166d64bd6c66",
+      "sourceFingerprint": "ff844894a6e9b3bf45ecfb3803a37baa950b5cf7a9ab42b5c2e8000397735fae",
+      "baseRevision": "5d801579738fd43121cdf03669f22c43423508e1",
+      "valid": true,
+      "viewport": [
+        1280,
+        720
+      ],
+      "entry": {
+        "mode": "drive",
+        "model": "roadster",
+        "position": [
+          303.92205172832195,
+          34.06083199646445,
+          228.33401800037095
+        ],
+        "initialDamage": 0.17610179671707038,
+        "broken": 0
+      },
+      "samples": 974,
+      "maxSpeedKph": 53.554022518302176,
+      "maxSlipDegrees": 17.004090839841837,
+      "maxObservedActiveSlipDegrees": 17.634229774218003,
+      "maxMarks": 10,
+      "maxSmoke": 12,
+      "touchDriftSamples": 0,
+      "lastSpeedKph": 6.008501555308177e-08,
+      "lastSlip": 0,
+      "lastDamage": 0.17610179671707038
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "classic-desktop-slide.png",
+      "sha256": "3885a4c4f21c6f3d4a5169d90297392fde66fc97c816702e8724b30413b9fafd"
+    },
+    {
+      "file": "classic-mobile-pointer-hold.png",
+      "sha256": "b246ea5a5cabb7ea267147df2089175c6ddecdf33dd5ccd4d48addfa32bc20f4"
+    },
+    {
+      "file": "desktop-roadster-controls.jpg",
+      "sha256": "e7ae849d4a491fa77f32daa9177f8d35bb8d8c09ee37b4155d5d4de0322ed5e6"
+    },
+    {
+      "file": "mobile-classic-landscape.jpg",
+      "sha256": "f538dd4aeba96f7d55a7d303b0da965ad630fa8fc0c84e5671a4611f4e8d6c3c"
+    },
+    {
+      "file": "mobile-classic-portrait.jpg",
+      "sha256": "f40781649c2bb14387c57319bcb5f0033e7b63949bbde8300c7d8a26ea0f730c"
+    },
+    {
+      "file": "mobile-tesla-landscape.jpg",
+      "sha256": "6df87da7aeeb076e544e118e57206988fd5ff15cda0fb021050119b279fabc37"
+    },
+    {
+      "file": "mobile-tesla-portrait.jpg",
+      "sha256": "36365c87a4bb0b2168ea29c6bbe3ffaedc0216431ddf533d7a3a209e1dd59d42"
+    },
+    {
+      "file": "roadster-desktop-released.png",
+      "sha256": "b91d12a1476f5c5dc7b4cd9c6e3c1726bbe063c119e43c70372067803dccfac5"
+    },
+    {
+      "file": "roadster-desktop-slide.png",
+      "sha256": "0c2909a7fabf48b4d24bf627d1aa96d462883d279fb73c6bab53d270d30216e0"
+    },
+    {
+      "file": "tesla-desktop-slide.png",
+      "sha256": "345de8c6746f309474ce218ab3ed0aca0a9e339c5a50b27bdf2f185322a7476c"
+    },
+    {
+      "file": "tesla-mobile-pointer-hold.png",
+      "sha256": "18910492db54a9086ef60905955355b0a15710785ca487804c83a18b18ead5f3"
+    }
+  ]
+}

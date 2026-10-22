@@ -25,8 +25,10 @@ import {
 import { EMPTY_TESLA, type TeslaSnapshot } from './tesla-snapshot';
 import { teslaDot, teslaRotate } from './tesla-math';
 import { canStartTeslaVortex, sampleTeslaVortex } from './tesla-vortex';
+import { VehicleCondition } from './vehicle-condition';
+import { vehicleDriftIntensity } from './vehicle-drift';
 
-export type TeslaButton = 'up' | 'down' | 'boost' | 'brake';
+export type TeslaButton = 'up' | 'down' | 'boost' | 'brake' | 'drift';
 export type TeslaCommand =
   | 'jump'
   | 'flightToggle'
@@ -52,6 +54,7 @@ const AXIS_KEYS: Record<string, string> = {
   KeyP: 'p',
   KeyF: 'f',
   KeyR: 'r',
+  KeyX: 'drift',
   KeyB: 'b',
   KeyQ: 'down',
   KeyV: 'vortex',
@@ -70,6 +73,7 @@ export class TeslaController {
   world: CityTeslaWorld | null = null;
   model: TeslaRoadsterModel | null = null;
   readonly vehicle = new THREE.Group();
+  readonly condition: VehicleCondition;
   readonly shape: TeslaShape = createTeslaRoadsterShape();
   view: TeslaView = 'chase';
   quality: TeslaQualityPreference = 'auto';
@@ -109,6 +113,7 @@ export class TeslaController {
   };
 
   constructor(readonly e: CityEngine) {
+    this.condition = new VehicleCondition(e,this.vehicle,2000);
     this.vehicle.name = 'Tesla Roadster Rocket player';
     this.vehicle.visible = false;
     const canvas = e.renderer.domElement;
@@ -137,8 +142,45 @@ export class TeslaController {
       ? { x: s.position[0], z: s.position[2], yaw: s.heading, following: true }
       : null;
   }
+  /** Rear/all tyre contacts are chassis-local; FX transforms these with this
+   * exact accepted pose and rechecks the physical road before drawing a mark. */
+  get driftContact() {
+    const s = this.state;
+    if (
+      !this.active ||
+      !this.inputEnabled ||
+      !s ||
+      s.mode !== 'ground' ||
+      s.contact?.kind !== 'ground' ||
+      s.contact.normal[1] <= 0.92 ||
+      s.parked ||
+      s.attachment ||
+      s.vortex ||
+      s.groundDeparture
+    )
+      return null;
+    const signedSpeed =
+      Math.sign(teslaDot(s.velocity, teslaRotate(s.quaternion, [0, 0, 1]))) *
+      Math.hypot(...s.velocity);
+    const intensity = vehicleDriftIntensity(s.drift, signedSpeed, 'tesla');
+    return intensity > 0
+      ? {
+          intensity,
+          slipAngle: s.drift.slipAngle,
+          speedMps: signedSpeed,
+          position: s.position,
+          quaternion: s.quaternion,
+          normal: s.contact.normal,
+          surfaceId: s.contact.surfaceId,
+          kind: 'ground' as const,
+          identity: this.world?.identity(s.contact) ?? null,
+          wheelContacts: this.shape.groundSupport?.wheelContacts,
+        }
+      : null;
+  }
   get snapshot(): TeslaSnapshot {
     const s = this.state;
+    const drift = this.driftContact;
     const vortex =
       this.active && s?.vortex ? sampleTeslaVortex(s.vortex) : null;
     return {
@@ -146,6 +188,8 @@ export class TeslaController {
       active: this.active,
       mode: s?.mode ?? 'ground',
       transitioning: !!s?.attachment,
+      drifting: (drift?.intensity ?? 0) > 0.03,
+      driftIntensity: drift?.intensity ?? 0,
       speedKph: Math.round(this.speedMps * 3.6),
       altitudeM: s
         ? Math.round(
@@ -273,6 +317,7 @@ export class TeslaController {
     if (this.active) return true;
     if (!this.e.closeBusVisit()) return false;
     this.world ??= new CityTeslaWorld(this.e);
+    this.world.impact = query => this.condition.impact(query);
     const nav = this.e.navigation;
     const fromStreet = nav && (nav.mode === 'walk' || nav.mode === 'drive');
     const x = fromStreet ? nav.position.x : this.e.controls.target.x;
@@ -519,6 +564,7 @@ export class TeslaController {
         : 0,
       boost: this.inputEnabled && (pressed('shift') || button('boost')),
       brake: !this.inputEnabled || pressed('b') || button('brake'),
+      drift: this.inputEnabled && (pressed('drift') || button('drift')),
       jump: this.pulses.has('jump'),
       flightToggle: this.pulses.has('flightToggle'),
       adhesionToggle: this.pulses.has('adhesionToggle'),
@@ -544,7 +590,16 @@ export class TeslaController {
       this.disposed
     )
       return;
+    this.condition.update(this.inputEnabled ? dt : 0);
     const input = this.input();
+    const handling = this.condition.performance;
+    if(this.state.mode==='ground') {
+      input.drivePower=handling.acceleration;
+      input.driveSpeedFactor=handling.topSpeed;
+      input.driveBrakeFactor=handling.braking;
+      input.steer = THREE.MathUtils.clamp((input.steer??0)*handling.steering +
+        (this.speedMps>1?handling.steeringBias:0),-1,1);
+    }
     // Panels suspend this personal vehicle, including gravity and a pending
     // wall transition. Closing a panel never resumes a held accelerator.
     this.lastStep = stepTesla(
@@ -573,6 +628,7 @@ export class TeslaController {
       this.model.setQuality(quality);
       this.e.prepareNightReceivers(this.vehicle);
       this.lastQuality = quality;
+      this.condition.refresh();
     }
     this.effectiveQuality = quality;
     this.vehicle.position.fromArray(s.position);
@@ -604,6 +660,10 @@ export class TeslaController {
           : Math.min(1, this.speedMps / 40),
     });
     this.updateCamera(elapsed);
+    const shake=this.e.impactFeedback?.shake??0;
+    if(shake>0) this.e.camera.position.add(new THREE.Vector3(
+      Math.sin(this.wheelSpin*11+performance.now()*.08)*shake*.035,
+      Math.sin(performance.now()*.091)*shake*.025,0));
     const canvas = this.e.renderer.domElement;
     canvas.dataset.travelMode = 'tesla';
     canvas.dataset.cameraView = this.view;
@@ -618,6 +678,7 @@ export class TeslaController {
         model: this.model.stats(),
         world: this.world.stats(),
         step: this.lastStep,
+        damage: this.condition.damage,
       });
       this.notify();
     }
@@ -790,6 +851,7 @@ export class TeslaController {
     window.removeEventListener('keyup', this.keyUp);
     window.removeEventListener('blur', this.clearInput);
     document.removeEventListener('visibilitychange', this.visibility);
+    this.condition.dispose();
     this.model?.dispose();
     this.world?.dispose();
     this.vehicle.removeFromParent();

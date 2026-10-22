@@ -1,0 +1,102 @@
+{
+  "revision": "9c95d913ba8b645d342b999bff23c5a18b825195",
+  "sourceFingerprint": "9c75e5dd821feceb11016476bf113c304074a7dee1e0852215a78ea637d07dce",
+  "kind": "vehicle-impact-webgl-v1",
+  "burst": false,
+  "entry": {
+    "mode": "drive",
+    "case": "bridge-barrier",
+    "x": -734.2452434240736,
+    "z": -3331.8448883949764,
+    "yaw": 2.8813406699427
+  },
+  "mode": "drive",
+  "viewport": [
+    1280,
+    720
+  ],
+  "quality": "high",
+  "qualityMode": "manual",
+  "valid": true,
+  "damage": {
+    "zones": {
+      "front": 0.028186987381122464,
+      "rear": 0,
+      "left": 0.20004420744666085,
+      "right": 0,
+      "roof": 0
+    },
+    "scratches": {
+      "front": 0.01907126376051771,
+      "rear": 0,
+      "left": 0.27752270126287093,
+      "right": 0,
+      "roof": 0
+    },
+    "overall": 0.20004420744666085,
+    "severity": 0.20004420744666085,
+    "revision": 5,
+    "lastHit": {
+      "zone": "left",
+      "localPoint": [
+        1,
+        -0.65,
+        2.1262813111412306
+      ],
+      "amount": 0.2000442074466609,
+      "scrape": 0.27752270126287093
+    },
+    "recentEventIds": [
+      "lamp:183:1",
+      "lamp:183:2",
+      "guardrail:8:3"
+    ]
+  },
+  "visuals": {
+    "marks": 3,
+    "capacity": 16,
+    "ownedMeshes": 2,
+    "maximumOwnedMeshes": 18,
+    "refinedVertices": 0,
+    "refinedTriangles": 0,
+    "maximumRefinedVertices": 6144,
+    "maximumRefinedTriangles": 2048,
+    "maximumRefinedMeshVertices": 1152,
+    "maximumRefinedMeshTriangles": 384,
+    "refinementHistoryEntries": 3,
+    "maximumRefinementHistoryEntries": 288,
+    "dentedVertices": 700,
+    "triangles": 142,
+    "maximumTriangles": 4096,
+    "draws": 1,
+    "textures": 0,
+    "rebuilds": 4,
+    "disposed": false
+  },
+  "broken": [
+    "tree:17263",
+    "lamp:183"
+  ],
+  "feedback": {
+    "capacity": 128,
+    "budget": 128,
+    "active": 0,
+    "drawCalls": 0,
+    "bufferBytes": 7680,
+    "audioEnabled": true,
+    "audioAllocated": true,
+    "voices": 0,
+    "disposed": false
+  },
+  "drive": {
+    "position": [
+      -730.7423988477198,
+      65.94999694824219,
+      -3344.9990679737116
+    ],
+    "speed": 0,
+    "yaw": 2.8813406699427
+  },
+  "calls": 179,
+  "triangles": 1498993
+}

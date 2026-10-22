@@ -4,6 +4,11 @@ import { rings, project } from './geo';
 import { replacedBuilding } from './replaced-buildings';
 import { FacadeDetails } from './facade-details';
 import { installArchitectureSurface } from './architecture-material';
+import {
+  createSkyTrainGuidewayUniforms,
+  SKYTRAIN_GUIDEWAY_UNIFORMS_GLSL,
+  SKYTRAIN_GUIDEWAY_CONDITION_GLSL,
+} from './skytrain-guideway-clearance';
 import { selectFlatRoofFinish } from './building-surface-palette';
 import {
   getCityMaterialLibrary,
@@ -281,6 +286,16 @@ export function createBuildingBodies(e: CityEngine) {
   });
   material.onBeforeCompile = (s) => {
     s.uniforms.uNight = e.uniforms.night;
+    s.uniforms.uSkyTrainReplacement = e.uniforms.skyTrainReplacement ?? {
+      value: new THREE.Vector4(-1, 0, 0, 0),
+    };
+    const guideway = createSkyTrainGuidewayUniforms();
+    s.uniforms.uSkyTrainGuidewayFrame =
+      e.uniforms.skyTrainGuidewayFrame ?? guideway.skyTrainGuidewayFrame;
+    s.uniforms.uSkyTrainGuidewayBounds =
+      e.uniforms.skyTrainGuidewayBounds ?? guideway.skyTrainGuidewayBounds;
+    s.uniforms.uSkyTrainGuidewayHeight =
+      e.uniforms.skyTrainGuidewayHeight ?? guideway.skyTrainGuidewayHeight;
     s.uniforms.uPattern = {
       value: facadeTemplates.map(
         (p) =>
@@ -308,12 +323,22 @@ export function createBuildingBodies(e: CityEngine) {
     );
     s.fragmentShader =
       `uniform float uNight;
+      uniform vec4 uSkyTrainReplacement;
+      ${SKYTRAIN_GUIDEWAY_UNIFORMS_GLSL}
       uniform vec4 uPattern[${facadeTemplates.length}]; uniform vec4 uPaneBounds[${facadeTemplates.length}]; uniform float uBrickWeights[${facadeTemplates.length}];
       varying vec4 vFacade; varying vec4 vLayout; varying float vTop; varying float vRoofFinish; varying vec2 vBaseWindow;\n` +
       s.fragmentShader;
     s.fragmentShader = s.fragmentShader.replace(
       '#include <color_fragment>',
       `#include <color_fragment>
+      // Replace only the duplicate source station shell while its passenger
+      // model is active. Seed and finite world radius jointly retain all
+      // neighboring buildings and the ordinary city view outside this service.
+      if(uSkyTrainReplacement.w>0.0 && abs(vFacade.w-uSkyTrainReplacement.x)<.1
+        && distance(vArchitectureWorld.xz,uSkyTrainReplacement.yz)<uSkyTrainReplacement.w) discard;
+      // Preserve the street and upper tower around the elevated guideway.
+      // This finite station-frame opening affects only its identified GIS body.
+      if(${SKYTRAIN_GUIDEWAY_CONDITION_GLSL}) discard;
       float facadePane=0.0, facadeLit=0.0, facadeNormal=0.0;
       vec3 architectureGlassReflection=vec3(0.0);
       int facadeStyle=int(clamp(floor(vFacade.z+.5),0.0,${facadeTemplates.length - 1}.0));
@@ -387,7 +412,8 @@ export function createBuildingBodies(e: CityEngine) {
     installArchitectureSurface(s, e.uniforms);
     installCityMaterialLibrary(s, materialLibrary);
   };
-  material.customProgramCacheKey = () => 'atlas-city-bodies-pbr-v2';
+  material.customProgramCacheKey = () =>
+    'atlas-city-bodies-pbr-v4-station-replacement-guideway';
   const geometry = e.geometry(positions, normals, colors, uv);
   geometry.setAttribute('aStyle', new THREE.Float32BufferAttribute(styles, 1));
   geometry.setAttribute(

@@ -1,0 +1,137 @@
+{
+  "dateUTC": "2026-10-22",
+  "parentCommit": "9c95d913ba8b645d342b999bff23c5a18b825195",
+  "sourceFingerprint": "9c75e5dd821feceb11016476bf113c304074a7dee1e0852215a78ea637d07dce",
+  "sourceSHA256": {
+    "lib/city/vehicle-impact.ts": "aff9582abcbea6d22d98a804a587bb3544c0e18c2a01cb4219aa31e57d72239a",
+    "lib/city/vehicle-impact-world.ts": "ac94e0a064dfe46fb42ab504c1c969e5b69b8b1661c4036d7fe9ea3085445d64",
+    "lib/city/vehicle-condition.ts": "d09b89aadac03874620a0a63f32211017128b43aa4ccf19b6d0a7e1b4549a425",
+    "lib/city/vehicle-damage-visuals.ts": "bac1323b18ba049fd803d271f307b06cafbe4e9e85dea9a6cae28c6cee526699",
+    "lib/city/vehicle-impact-feedback.ts": "1fffa7d27944dad594f99a2eccebdc14036d2dab0538ee17a71f7d924b49b8e6",
+    "lib/city/vehicle-impact-qa.ts": "72fb4cb928080b86f4ad93f4c5789daa07c660ae5f6c4ad3274407da27e3c546",
+    "lib/city/navigation.ts": "70a3b5477e42733e065ada0b9a7d70e1ace86f5658ff2fe5dd8f6fc6080b31f0",
+    "lib/city/tesla-state.ts": "dd5330f878d75c43d6a13ff4cf522ec29ace193b69b206f2a26cbf63ba9d6d05",
+    "lib/city/tesla-world.ts": "c2c15473945a9140848a136ef0d246a5d5a3d53ba4af6e9c1c6bd408c3ea8aac",
+    "components/vehicle-condition-panel.tsx": "bd5325322a4a0c31032ebbd94b1e176f819092b8f526fd4efdda2f8a13ffd5a7",
+    "components/vehicle-condition-panel.css": "c1dbe21c81e45847d7172403b37a283485e9798d3b189148432f9bebc17e4e30"
+  },
+  "checks": {
+    "fullSuite": {
+      "command": "node --test --test-concurrency=4 tests/*.test.mjs",
+      "tests": 1496,
+      "pass": 1496,
+      "fail": 0,
+      "durationMs": 217976.583468
+    },
+    "typecheck": "tsc --noEmit --incremental false: pass",
+    "scopedStrictLint": "pass",
+    "rendererAndUIFocusedTests": 19,
+    "independentPhysicsAndRendererReview": "pass",
+    "productionFirebaseBuild": "npm run build:firebase: pass, including QA isolation and static Hosting CSP preparation"
+  },
+  "native": {
+    "browser": "Chromium 155 via native Cua input",
+    "profile": "default browser graphics path, no explicit compatibility override; automatic renderer quality",
+    "viewports": [
+      [1280, 720],
+      [320, 568],
+      [844, 390]
+    ],
+    "portraitPanel": {
+      "bounds": [13, 284, 224, 218.5],
+      "clientWidth": 222,
+      "scrollWidth": 222,
+      "minimumActionSizePx": 44
+    },
+    "landscapePanel": {
+      "bounds": [314, 206, 216, 174],
+      "clientWidth": 199,
+      "scrollWidth": 199
+    },
+    "touchThrottleObservedKph": 67,
+    "touchBrakeObservedKph": 0,
+    "consoleWarningsAndErrors": [],
+    "physicalMobileDevice": false,
+    "performanceBenchmark": false
+  },
+  "artifacts": [
+    {
+      "sequence": 1,
+      "original": "impact-drive-1-1792659069627.json",
+      "artifact": "drive-tree-burst",
+      "pngSHA256": "b339076ee6ba79ea028d25eda5f97c3e8e5fd5caee467437593882f2f03a0c42"
+    },
+    {
+      "sequence": 2,
+      "original": "impact-drive-2-1792659083371.json",
+      "artifact": "drive-tree-stopped-audio",
+      "pngSHA256": "0cec36fb24a08b4882234e258cfca36e29922a93df519c9e0f6d106891566192"
+    },
+    {
+      "sequence": 3,
+      "original": "impact-drive-3-1792659086114.json",
+      "artifact": "drive-repaired",
+      "pngSHA256": "423e47ddab5402d0a88efef2d2cef0cd8472df78871c666722faecfd66f7f616"
+    },
+    {
+      "sequence": 4,
+      "original": "impact-drive-4-1792659092184.json",
+      "artifact": "drive-lamp-low-speed",
+      "pngSHA256": "86853290776266a67d55a2230f1b48bb66851b2934af8103271173608687677f"
+    },
+    {
+      "sequence": 5,
+      "original": "impact-drive-5-1792659147648.json",
+      "artifact": "drive-lamp-break",
+      "pngSHA256": "36a90b19e904e69aebea7af14bd3948d5ffe8ee9fa8940fc5d3694c82cd9c746"
+    },
+    {
+      "sequence": 6,
+      "original": "impact-drive-6-1792659163526.json",
+      "artifact": "drive-lamp-fallen",
+      "pngSHA256": "aa4c57fce3ab22343f69749056b235a31d8581e50e0c69e7e0d45d6b106beadf"
+    },
+    {
+      "sequence": 7,
+      "original": "impact-drive-7-1792659166481.json",
+      "artifact": "drive-guardrail-burst",
+      "pngSHA256": "ac57e01e6c1fe4f5d7965bd2312391b9505031eca18612640def58cbf7173407"
+    },
+    {
+      "sequence": 8,
+      "original": "impact-drive-8-1792659175432.json",
+      "artifact": "drive-guardrail-stopped",
+      "pngSHA256": "c8388f5f02f2b44e918423fe1bc7392f0372c0c6b9a436c812795e06fb266a34"
+    },
+    {
+      "sequence": 9,
+      "original": "impact-tesla-9-1792659182234.json",
+      "artifact": "tesla-tree-burst",
+      "pngSHA256": "ae9ec30957fe28c878a52f20f4348b2f43605e9a9dde41a07b38e1a556b51b56"
+    },
+    {
+      "sequence": 10,
+      "original": "impact-tesla-10-1792659197282.json",
+      "artifact": "tesla-high-front",
+      "pngSHA256": "31d74c0cda2eda8fb6186a44fc6611da5630f3e44b18e47732c0bbdff3e03a25"
+    },
+    {
+      "sequence": 11,
+      "original": "impact-tesla-11-1792659198328.json",
+      "artifact": "tesla-low-front",
+      "pngSHA256": "e0a1d7b35e694d299b82484e1a8b47c097f796b2b77aad3c896d1a2b31db9cea"
+    },
+    {
+      "sequence": 12,
+      "original": "impact-tesla-12-1792659222644.json",
+      "artifact": "mobile-portrait",
+      "pngSHA256": "033624379b567c73fef52cfee415f8d2fad38524f28f01ec852f1a78266f5558"
+    },
+    {
+      "sequence": 13,
+      "original": "impact-tesla-13-1792659259013.json",
+      "artifact": "mobile-landscape-repaired",
+      "pngSHA256": "e58e3127b4d33f9959378e2ef8124b89333141fc84b29134f2908d5e93d8efec"
+    }
+  ]
+}

@@ -70,6 +70,7 @@ const { Selection } = await import(
 );
 test('car switching keeps driving pose speed zoom and bookmark and reuses model resources', () => {
   const s = new Selection();
+  let driftResets = 0;
   Object.assign(s, {
     carModel: 'classic',
     classicCar: new THREE.Group(),
@@ -82,6 +83,7 @@ test('car switching keeps driving pose speed zoom and bookmark and reuses model 
     speed: 12,
     cameraDistances: { drive: 2 },
     bookmark: { id: 'retained' },
+    clearDrift() { driftResets++; },
     updateCockpit() {},
     notifyCamera() {},
   });
@@ -100,6 +102,7 @@ test('car switching keeps driving pose speed zoom and bookmark and reuses model 
     assert(s.classicCar.visible && !s.roadster.group.visible);
     assert.equal(s.cockpits.drive, s.classicCockpit);
   }
+  assert.equal(driftResets, 40, 'every model switch clears stale drift input');
   assert.deepEqual(
     [
       ...s.position.toArray(),

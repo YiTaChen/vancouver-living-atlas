@@ -1,0 +1,5822 @@
+{
+  "kind": "stanley-final-pre-Nature-tree-reconciliation-v2",
+  "stats": {
+    "complete": true,
+    "candidates": 35989,
+    "retained": 35535,
+    "excluded": 454,
+    "municipalExcluded": 246,
+    "generatedExcluded": 208,
+    "triangles": 55670,
+    "heightAwareTriangles": 2154,
+    "heightAwareTests": 0,
+    "prospectExcluded": 0,
+    "cells": 1272,
+    "cellReferences": 68984,
+    "queries": 19159,
+    "testedTriangles": 171068,
+    "excludedTrees": [
+      {
+        "candidateIndex": 5,
+        "source": "municipal",
+        "sourceIndex": 5,
+        "seed": 5,
+        "x": -1431.9128573499038,
+        "z": -816.977480000196,
+        "height": 10.7,
+        "trunkHalfExtent": 0.5245,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 17,
+        "source": "municipal",
+        "sourceIndex": 17,
+        "seed": 17,
+        "x": 224.516965259511,
+        "z": -1704.5318400001722,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 90,
+        "source": "municipal",
+        "sourceIndex": 90,
+        "seed": 90,
+        "x": -1458.4163154084888,
+        "z": -766.1042399997095,
+        "height": 13.7,
+        "trunkHalfExtent": 0.6295000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 102,
+        "source": "municipal",
+        "sourceIndex": 102,
+        "seed": 102,
+        "x": -315.9357425115118,
+        "z": -2126.8799200000817,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 157,
+        "source": "municipal",
+        "sourceIndex": 157,
+        "seed": 157,
+        "x": 299.67060660631876,
+        "z": -1644.307719999565,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 257,
+        "source": "municipal",
+        "sourceIndex": 257,
+        "seed": 257,
+        "x": -308.892357767184,
+        "z": -2116.3045199998887,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 645,
+        "source": "municipal",
+        "sourceIndex": 646,
+        "seed": 646,
+        "x": -267.86645693477845,
+        "z": -2038.1578800002371,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 647,
+        "source": "municipal",
+        "sourceIndex": 648,
+        "seed": 648,
+        "x": -302.5750951606701,
+        "z": -2091.2575199998482,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 719,
+        "source": "municipal",
+        "sourceIndex": 720,
+        "seed": 720,
+        "x": -258.3542569192004,
+        "z": -2008.992039999522,
+        "height": 19.8,
+        "trunkHalfExtent": 0.8430000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 739,
+        "source": "municipal",
+        "sourceIndex": 740,
+        "seed": 740,
+        "x": 784.0666852764,
+        "z": -1414.43192000016,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 935,
+        "source": "municipal",
+        "sourceIndex": 936,
+        "seed": 936,
+        "x": 155.75319873289533,
+        "z": -1792.1406799996635,
+        "height": 16.8,
+        "trunkHalfExtent": 0.7380000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 946,
+        "source": "municipal",
+        "sourceIndex": 947,
+        "seed": 947,
+        "x": 145.73271322053796,
+        "z": -1807.5028399996356,
+        "height": 10.7,
+        "trunkHalfExtent": 0.5245,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 1092,
+        "source": "municipal",
+        "sourceIndex": 1093,
+        "seed": 1093,
+        "x": -292.6998340756692,
+        "z": -2071.331239999535,
+        "height": 5,
+        "trunkHalfExtent": 0.32999999999999996,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 1254,
+        "source": "municipal",
+        "sourceIndex": 1255,
+        "seed": 1255,
+        "x": -363.71457923250045,
+        "z": -2194.7851199994884,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 1278,
+        "source": "municipal",
+        "sourceIndex": 1279,
+        "seed": 1279,
+        "x": -273.09453633302365,
+        "z": -2044.837079999984,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 1395,
+        "source": "municipal",
+        "sourceIndex": 1396,
+        "seed": 1396,
+        "x": -311.50639746579066,
+        "z": -2112.853599999901,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 1450,
+        "source": "municipal",
+        "sourceIndex": 1451,
+        "seed": 1451,
+        "x": -2076.5640920122796,
+        "z": -1713.7713999997827,
+        "height": 5,
+        "trunkHalfExtent": 0.32999999999999996,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 1474,
+        "source": "municipal",
+        "sourceIndex": 1475,
+        "seed": 1475,
+        "x": 302.21203409124723,
+        "z": -1642.526600000107,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 1483,
+        "source": "municipal",
+        "sourceIndex": 1484,
+        "seed": 1484,
+        "x": -166.4998063840985,
+        "z": -1895.6682800000945,
+        "height": 5,
+        "trunkHalfExtent": 0.32999999999999996,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 1547,
+        "source": "municipal",
+        "sourceIndex": 1550,
+        "seed": 1550,
+        "x": -372.2102082545199,
+        "z": -2211.8170799999907,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 1554,
+        "source": "municipal",
+        "sourceIndex": 1557,
+        "seed": 1557,
+        "x": -270.2626599923505,
+        "z": -2026.9145600001484,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 1567,
+        "source": "municipal",
+        "sourceIndex": 1570,
+        "seed": 1570,
+        "x": -382.7389792636566,
+        "z": -2217.383080000175,
+        "height": 19.8,
+        "trunkHalfExtent": 0.8430000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 1580,
+        "source": "municipal",
+        "sourceIndex": 1583,
+        "seed": 1583,
+        "x": 804.688554013636,
+        "z": -1492.6898799995308,
+        "height": 5,
+        "trunkHalfExtent": 0.32999999999999996,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 1602,
+        "source": "municipal",
+        "sourceIndex": 1605,
+        "seed": 1605,
+        "x": -1468.0737398524552,
+        "z": -929.7446400002377,
+        "height": 13.7,
+        "trunkHalfExtent": 0.6295000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 2268,
+        "source": "municipal",
+        "sourceIndex": 2271,
+        "seed": 2271,
+        "x": -314.8465593032431,
+        "z": -2116.08187999966,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 2275,
+        "source": "municipal",
+        "sourceIndex": 2278,
+        "seed": 2278,
+        "x": -575.0161215695581,
+        "z": -2386.478159999587,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 2336,
+        "source": "municipal",
+        "sourceIndex": 2339,
+        "seed": 2339,
+        "x": -272.15057755314325,
+        "z": -2032.8145199994901,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 2344,
+        "source": "municipal",
+        "sourceIndex": 2347,
+        "seed": 2347,
+        "x": -564.5599627730677,
+        "z": -2357.646279999611,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 2435,
+        "source": "municipal",
+        "sourceIndex": 2438,
+        "seed": 2438,
+        "x": -627.9504254740817,
+        "z": -2585.0730399996623,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 2444,
+        "source": "municipal",
+        "sourceIndex": 2447,
+        "seed": 2447,
+        "x": -449.2517671610885,
+        "z": -2273.7109999995455,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 2505,
+        "source": "municipal",
+        "sourceIndex": 2508,
+        "seed": 2508,
+        "x": -262.34792868182046,
+        "z": -2024.9107999996706,
+        "height": 19.8,
+        "trunkHalfExtent": 0.8430000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 2838,
+        "source": "municipal",
+        "sourceIndex": 2847,
+        "seed": 2847,
+        "x": -571.0950620206162,
+        "z": -2371.227320000125,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 2856,
+        "source": "municipal",
+        "sourceIndex": 2865,
+        "seed": 2865,
+        "x": -1456.8914589181509,
+        "z": -789.8153999999588,
+        "height": 13.7,
+        "trunkHalfExtent": 0.6295000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 3050,
+        "source": "municipal",
+        "sourceIndex": 3065,
+        "seed": 3065,
+        "x": -1138.0512278522879,
+        "z": -712.6706400001503,
+        "height": 10.7,
+        "trunkHalfExtent": 0.5245,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 3183,
+        "source": "municipal",
+        "sourceIndex": 3198,
+        "seed": 3198,
+        "x": -371.5566983293523,
+        "z": -2213.8208399996774,
+        "height": 7.6,
+        "trunkHalfExtent": 0.41600000000000004,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 3513,
+        "source": "municipal",
+        "sourceIndex": 3528,
+        "seed": 3528,
+        "x": 303.37382951319415,
+        "z": -1641.0794399998058,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 3629,
+        "source": "municipal",
+        "sourceIndex": 3644,
+        "seed": 3644,
+        "x": 157.35066743794334,
+        "z": -1788.4671200002376,
+        "height": 19.8,
+        "trunkHalfExtent": 0.8430000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 3631,
+        "source": "municipal",
+        "sourceIndex": 3646,
+        "seed": 3646,
+        "x": -254.50580958496866,
+        "z": -2002.4241599994937,
+        "height": 10.7,
+        "trunkHalfExtent": 0.5245,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 3722,
+        "source": "municipal",
+        "sourceIndex": 3737,
+        "seed": 3737,
+        "x": -376.63955330024106,
+        "z": -2216.381199999541,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 3735,
+        "source": "municipal",
+        "sourceIndex": 3750,
+        "seed": 3750,
+        "x": 765.1148974589221,
+        "z": -1377.8076400000832,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 3764,
+        "source": "municipal",
+        "sourceIndex": 3779,
+        "seed": 3779,
+        "x": -337.7194066696629,
+        "z": -2154.1533200000376,
+        "height": 16.8,
+        "trunkHalfExtent": 0.7380000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 3789,
+        "source": "municipal",
+        "sourceIndex": 3804,
+        "seed": 3804,
+        "x": -327.481084515239,
+        "z": -2173.1890400002267,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 3793,
+        "source": "municipal",
+        "sourceIndex": 3808,
+        "seed": 3808,
+        "x": -533.4819352403732,
+        "z": -2319.2408800000762,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 3899,
+        "source": "municipal",
+        "sourceIndex": 3914,
+        "seed": 3914,
+        "x": 220.52329349792282,
+        "z": -1709.7638799996182,
+        "height": 13.7,
+        "trunkHalfExtent": 0.6295000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 4041,
+        "source": "municipal",
+        "sourceIndex": 4056,
+        "seed": 4056,
+        "x": -216.60223394898097,
+        "z": -1349.9776399999505,
+        "height": 10.7,
+        "trunkHalfExtent": 0.5245,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 4101,
+        "source": "municipal",
+        "sourceIndex": 4116,
+        "seed": 4116,
+        "x": -361.68143724435134,
+        "z": -2205.2491999999625,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 4249,
+        "source": "municipal",
+        "sourceIndex": 4264,
+        "seed": 4264,
+        "x": -1474.4636146726473,
+        "z": -691.7424799999935,
+        "height": 19.8,
+        "trunkHalfExtent": 0.8430000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 4278,
+        "source": "municipal",
+        "sourceIndex": 4293,
+        "seed": 4293,
+        "x": -1469.8890451985378,
+        "z": -934.420079999507,
+        "height": 10.7,
+        "trunkHalfExtent": 0.5245,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 4534,
+        "source": "municipal",
+        "sourceIndex": 4549,
+        "seed": 4549,
+        "x": -350.57176852372527,
+        "z": -2179.5342800000262,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 4553,
+        "source": "municipal",
+        "sourceIndex": 4568,
+        "seed": 4568,
+        "x": -304.82607379088574,
+        "z": -2095.9329599999087,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 4755,
+        "source": "municipal",
+        "sourceIndex": 4770,
+        "seed": 4770,
+        "x": 802.292350956064,
+        "z": -1471.0937999994783,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 4766,
+        "source": "municipal",
+        "sourceIndex": 4781,
+        "seed": 4781,
+        "x": -257.3376859256418,
+        "z": -2001.9788799998269,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 4923,
+        "source": "municipal",
+        "sourceIndex": 4938,
+        "seed": 4938,
+        "x": -312.2325196046365,
+        "z": -2119.1988399997,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 4938,
+        "source": "municipal",
+        "sourceIndex": 4953,
+        "seed": 4953,
+        "x": 584.9639948682373,
+        "z": -1514.84255999976,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 5005,
+        "source": "municipal",
+        "sourceIndex": 5020,
+        "seed": 5020,
+        "x": 533.1188741709503,
+        "z": -1526.7537999997442,
+        "height": 13.7,
+        "trunkHalfExtent": 0.6295000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 5217,
+        "source": "municipal",
+        "sourceIndex": 5233,
+        "seed": 5233,
+        "x": -498.84590922919165,
+        "z": -2306.6617200001965,
+        "height": 10.7,
+        "trunkHalfExtent": 0.5245,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 5234,
+        "source": "municipal",
+        "sourceIndex": 5250,
+        "seed": 5250,
+        "x": -95.26722458623259,
+        "z": -1855.8157199994675,
+        "height": 13.7,
+        "trunkHalfExtent": 0.6295000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 5515,
+        "source": "municipal",
+        "sourceIndex": 5531,
+        "seed": 5531,
+        "x": 474.5934297987585,
+        "z": -1544.0083999996841,
+        "height": 16.8,
+        "trunkHalfExtent": 0.7380000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 5553,
+        "source": "municipal",
+        "sourceIndex": 5569,
+        "seed": 5569,
+        "x": -301.19546309768856,
+        "z": -2088.474519999756,
+        "height": 5,
+        "trunkHalfExtent": 0.32999999999999996,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 5724,
+        "source": "municipal",
+        "sourceIndex": 5740,
+        "seed": 5740,
+        "x": -1223.661027994554,
+        "z": -646.4352399996917,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 5763,
+        "source": "municipal",
+        "sourceIndex": 5779,
+        "seed": 5779,
+        "x": -216.23917287955805,
+        "z": -1351.9813999996372,
+        "height": 10.7,
+        "trunkHalfExtent": 0.5245,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 5945,
+        "source": "municipal",
+        "sourceIndex": 5961,
+        "seed": 5961,
+        "x": -285.29338826191844,
+        "z": -2058.752079999655,
+        "height": 13.7,
+        "trunkHalfExtent": 0.6295000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 6011,
+        "source": "municipal",
+        "sourceIndex": 6027,
+        "seed": 6027,
+        "x": -576.1053047778267,
+        "z": -2382.359319999704,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 6020,
+        "source": "municipal",
+        "sourceIndex": 6036,
+        "seed": 6036,
+        "x": -300.6145653872311,
+        "z": -2089.2537600001615,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 6221,
+        "source": "municipal",
+        "sourceIndex": 6237,
+        "seed": 6237,
+        "x": 800.5496578236596,
+        "z": -1480.444679999599,
+        "height": 5,
+        "trunkHalfExtent": 0.32999999999999996,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 6276,
+        "source": "municipal",
+        "sourceIndex": 6292,
+        "seed": 6292,
+        "x": -273.8206584718695,
+        "z": -2034.595639999739,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 6295,
+        "source": "municipal",
+        "sourceIndex": 6311,
+        "seed": 6311,
+        "x": -287.90742796052507,
+        "z": -2072.5557599996073,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 6319,
+        "source": "municipal",
+        "sourceIndex": 6335,
+        "seed": 6335,
+        "x": -1417.9713122875728,
+        "z": -794.2681999997901,
+        "height": 7.6,
+        "trunkHalfExtent": 0.41600000000000004,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 6440,
+        "source": "municipal",
+        "sourceIndex": 6456,
+        "seed": 6456,
+        "x": -445.911605323636,
+        "z": -2270.5940399995056,
+        "height": 10.7,
+        "trunkHalfExtent": 0.5245,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 6463,
+        "source": "municipal",
+        "sourceIndex": 6479,
+        "seed": 6479,
+        "x": -266.05115158869586,
+        "z": -2031.144719999751,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 6615,
+        "source": "municipal",
+        "sourceIndex": 6631,
+        "seed": 6631,
+        "x": -563.3255551374426,
+        "z": -1290.8667199996967,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 6622,
+        "source": "municipal",
+        "sourceIndex": 6638,
+        "seed": 6638,
+        "x": -361.02792731918373,
+        "z": -2200.9077199998496,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 7183,
+        "source": "municipal",
+        "sourceIndex": 7199,
+        "seed": 7199,
+        "x": 411.7112525945237,
+        "z": -1583.1930399996245,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 7227,
+        "source": "municipal",
+        "sourceIndex": 7243,
+        "seed": 7243,
+        "x": 279.77486000896045,
+        "z": -1655.6623600001635,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 7241,
+        "source": "municipal",
+        "sourceIndex": 7257,
+        "seed": 7257,
+        "x": -267.28555922432093,
+        "z": -2029.1409600000643,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 7583,
+        "source": "municipal",
+        "sourceIndex": 7599,
+        "seed": 7599,
+        "x": 301.19546309768856,
+        "z": -1641.0794399998058,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 7752,
+        "source": "municipal",
+        "sourceIndex": 7768,
+        "seed": 7768,
+        "x": -500.7338267889525,
+        "z": -2308.4428399996546,
+        "height": 19.8,
+        "trunkHalfExtent": 0.8430000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 7765,
+        "source": "municipal",
+        "sourceIndex": 7781,
+        "seed": 7781,
+        "x": -344.25450591721136,
+        "z": -2167.0664399998655,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 7865,
+        "source": "municipal",
+        "sourceIndex": 7881,
+        "seed": 7881,
+        "x": -249.7860156835028,
+        "z": -1997.0807999995377,
+        "height": 5,
+        "trunkHalfExtent": 0.32999999999999996,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 7909,
+        "source": "municipal",
+        "sourceIndex": 7925,
+        "seed": 7925,
+        "x": -573.4912650781882,
+        "z": -2365.995279999888,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 7928,
+        "source": "municipal",
+        "sourceIndex": 7944,
+        "seed": 7944,
+        "x": -296.8387302656456,
+        "z": -2082.797199999852,
+        "height": 5,
+        "trunkHalfExtent": 0.32999999999999996,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 8024,
+        "source": "municipal",
+        "sourceIndex": 8040,
+        "seed": 8040,
+        "x": 798.8795769049333,
+        "z": -1466.0843999994702,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 8033,
+        "source": "municipal",
+        "sourceIndex": 8049,
+        "seed": 8049,
+        "x": 0.3630610694229036,
+        "z": -1832.2158799997283,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 8060,
+        "source": "municipal",
+        "sourceIndex": 8076,
+        "seed": 8076,
+        "x": -61.066871857120255,
+        "z": -1846.4648400001379,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 8075,
+        "source": "municipal",
+        "sourceIndex": 8091,
+        "seed": 8091,
+        "x": -271.7149042700421,
+        "z": -2029.2522799997832,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 8079,
+        "source": "municipal",
+        "sourceIndex": 8095,
+        "seed": 8095,
+        "x": -353.9119303611777,
+        "z": -2182.8738799995044,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 8117,
+        "source": "municipal",
+        "sourceIndex": 8133,
+        "seed": 8133,
+        "x": -372.2828204681981,
+        "z": -2211.037839999585,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 8136,
+        "source": "municipal",
+        "sourceIndex": 8153,
+        "seed": 8153,
+        "x": -364.5133135850245,
+        "z": -2195.1190800002273,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 8149,
+        "source": "municipal",
+        "sourceIndex": 8166,
+        "seed": 8166,
+        "x": 766.8575905913266,
+        "z": -1379.1434799998747,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 8166,
+        "source": "municipal",
+        "sourceIndex": 8183,
+        "seed": 8183,
+        "x": -306.6413791369684,
+        "z": -2098.9386000002296,
+        "height": 16.8,
+        "trunkHalfExtent": 0.7380000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 8170,
+        "source": "municipal",
+        "sourceIndex": 8187,
+        "seed": 8187,
+        "x": 799.6056990427472,
+        "z": -1461.8542399998678,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 8303,
+        "source": "municipal",
+        "sourceIndex": 8320,
+        "seed": 8320,
+        "x": -555.99172153737,
+        "z": -2336.940759999683,
+        "height": 13.7,
+        "trunkHalfExtent": 0.6295000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 8340,
+        "source": "municipal",
+        "sourceIndex": 8357,
+        "seed": 8357,
+        "x": -366.69168000053,
+        "z": -2208.5888000002315,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 8554,
+        "source": "municipal",
+        "sourceIndex": 8571,
+        "seed": 8571,
+        "x": -295.3864859889859,
+        "z": -2079.568920000093,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 8555,
+        "source": "municipal",
+        "sourceIndex": 8572,
+        "seed": 8572,
+        "x": -1556.3701919080381,
+        "z": -1052.9758799999624,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 8556,
+        "source": "municipal",
+        "sourceIndex": 8573,
+        "seed": 8573,
+        "x": -47.12532679582104,
+        "z": -1178.8788000000604,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 8558,
+        "source": "municipal",
+        "sourceIndex": 8575,
+        "seed": 8575,
+        "x": -379.2535929988477,
+        "z": -2219.0528799999142,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 8562,
+        "source": "municipal",
+        "sourceIndex": 8579,
+        "seed": 8579,
+        "x": -596.1462758035734,
+        "z": -1211.7182000002015,
+        "height": 10.7,
+        "trunkHalfExtent": 0.5245,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 8595,
+        "source": "municipal",
+        "sourceIndex": 8612,
+        "seed": 8612,
+        "x": -290.2310188044189,
+        "z": -2069.9953999997438,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 8610,
+        "source": "municipal",
+        "sourceIndex": 8627,
+        "seed": 8627,
+        "x": -309.7637043333862,
+        "z": -2103.0574400001133,
+        "height": 13.7,
+        "trunkHalfExtent": 0.6295000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 8614,
+        "source": "municipal",
+        "sourceIndex": 8631,
+        "seed": 8631,
+        "x": 136.36573763231632,
+        "z": -1819.3027599999007,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 8696,
+        "source": "municipal",
+        "sourceIndex": 8713,
+        "seed": 8713,
+        "x": 781.2348089357268,
+        "z": -1406.082919999883,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 9185,
+        "source": "municipal",
+        "sourceIndex": 9202,
+        "seed": 9202,
+        "x": 770.1251402151008,
+        "z": -1382.9283599998103,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 9197,
+        "source": "municipal",
+        "sourceIndex": 9214,
+        "seed": 9214,
+        "x": 243.9770385748001,
+        "z": -1686.6093199995455,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 9385,
+        "source": "municipal",
+        "sourceIndex": 9402,
+        "seed": 9402,
+        "x": -567.6096757558073,
+        "z": -2357.2009999999445,
+        "height": 19.8,
+        "trunkHalfExtent": 0.8430000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 9391,
+        "source": "municipal",
+        "sourceIndex": 9408,
+        "seed": 9408,
+        "x": -1532.6259979754163,
+        "z": -1029.9326399996087,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 9417,
+        "source": "municipal",
+        "sourceIndex": 9434,
+        "seed": 9434,
+        "x": 779.1290547338996,
+        "z": -1399.4037200001358,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 9437,
+        "source": "municipal",
+        "sourceIndex": 9454,
+        "seed": 9454,
+        "x": 421.65912589423476,
+        "z": -1578.0723199998974,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 9805,
+        "source": "municipal",
+        "sourceIndex": 9822,
+        "seed": 9822,
+        "x": -253.12617752095525,
+        "z": -1995.8562799994656,
+        "height": 19.8,
+        "trunkHalfExtent": 0.8430000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 9821,
+        "source": "municipal",
+        "sourceIndex": 9838,
+        "seed": 9838,
+        "x": -366.76429221420824,
+        "z": -2198.0134000000385,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 9931,
+        "source": "municipal",
+        "sourceIndex": 9952,
+        "seed": 9952,
+        "x": -2094.3540844078107,
+        "z": -1706.31295999963,
+        "height": 13.7,
+        "trunkHalfExtent": 0.6295000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 9964,
+        "source": "municipal",
+        "sourceIndex": 9985,
+        "seed": 9985,
+        "x": 170.71131478878505,
+        "z": -1773.2162799999844,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 10023,
+        "source": "municipal",
+        "sourceIndex": 10044,
+        "seed": 10044,
+        "x": 7.2612213863943085,
+        "z": -1832.772479999905,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 10122,
+        "source": "municipal",
+        "sourceIndex": 10143,
+        "seed": 10143,
+        "x": -216.89268280472567,
+        "z": -1347.7512400000346,
+        "height": 10.7,
+        "trunkHalfExtent": 0.5245,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 10123,
+        "source": "municipal",
+        "sourceIndex": 10144,
+        "seed": 10144,
+        "x": -572.6925307256643,
+        "z": -2367.887719999856,
+        "height": 19.8,
+        "trunkHalfExtent": 0.8430000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 10133,
+        "source": "municipal",
+        "sourceIndex": 10154,
+        "seed": 10154,
+        "x": -277.0882080956437,
+        "z": -2043.9465199998597,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 10152,
+        "source": "municipal",
+        "sourceIndex": 10173,
+        "seed": 10173,
+        "x": 423.6196556676738,
+        "z": -1574.6213999999095,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 10178,
+        "source": "municipal",
+        "sourceIndex": 10199,
+        "seed": 10199,
+        "x": -253.70707523244465,
+        "z": -1996.5242000001522,
+        "height": 13.7,
+        "trunkHalfExtent": 0.6295000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 10200,
+        "source": "municipal",
+        "sourceIndex": 10221,
+        "seed": 10221,
+        "x": -414.1074556520957,
+        "z": -2242.6527199996535,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 10204,
+        "source": "municipal",
+        "sourceIndex": 10225,
+        "seed": 10225,
+        "x": -318.33194556908387,
+        "z": -2119.087519999981,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 10217,
+        "source": "municipal",
+        "sourceIndex": 10238,
+        "seed": 10238,
+        "x": -499.4994191533274,
+        "z": -2303.9900399998232,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 10317,
+        "source": "municipal",
+        "sourceIndex": 10338,
+        "seed": 10338,
+        "x": -379.761878495627,
+        "z": -2219.9434400000387,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 10341,
+        "source": "municipal",
+        "sourceIndex": 10362,
+        "seed": 10362,
+        "x": -295.822159272087,
+        "z": -2076.7859200000007,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 10500,
+        "source": "municipal",
+        "sourceIndex": 10521,
+        "seed": 10521,
+        "x": -628.8217720413159,
+        "z": -2583.9598400001,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 10501,
+        "source": "municipal",
+        "sourceIndex": 10522,
+        "seed": 10522,
+        "x": 3.7032229068753586,
+        "z": -1831.9932399994993,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 10512,
+        "source": "municipal",
+        "sourceIndex": 10533,
+        "seed": 10533,
+        "x": -348.24817767983143,
+        "z": -2181.426719999994,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 10515,
+        "source": "municipal",
+        "sourceIndex": 10536,
+        "seed": 10536,
+        "x": -253.34401416302174,
+        "z": -1998.0826800001723,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 10516,
+        "source": "municipal",
+        "sourceIndex": 10537,
+        "seed": 10537,
+        "x": -337.21112117288357,
+        "z": -2166.064560000022,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 10527,
+        "source": "municipal",
+        "sourceIndex": 10548,
+        "seed": 10548,
+        "x": -306.85921577903486,
+        "z": -2103.280079999551,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 10701,
+        "source": "municipal",
+        "sourceIndex": 10722,
+        "seed": 10722,
+        "x": 421.8043503215912,
+        "z": -1574.1761200002427,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 10703,
+        "source": "municipal",
+        "sourceIndex": 10724,
+        "seed": 10724,
+        "x": -1638.4219935718174,
+        "z": -1111.4188799995295,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 10713,
+        "source": "municipal",
+        "sourceIndex": 10734,
+        "seed": 10734,
+        "x": 782.1787677166392,
+        "z": -1407.1961200002363,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 10751,
+        "source": "municipal",
+        "sourceIndex": 10772,
+        "seed": 10772,
+        "x": -521.2830833114784,
+        "z": -1688.3904399997946,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 10830,
+        "source": "municipal",
+        "sourceIndex": 10851,
+        "seed": 10851,
+        "x": -1395.3889137768977,
+        "z": -544.4661200000718,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 10840,
+        "source": "municipal",
+        "sourceIndex": 10861,
+        "seed": 10861,
+        "x": -2161.810831085123,
+        "z": -1662.1189199996818,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 11133,
+        "source": "municipal",
+        "sourceIndex": 11154,
+        "seed": 11154,
+        "x": 225.8239851098462,
+        "z": -1701.192239999903,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 11135,
+        "source": "municipal",
+        "sourceIndex": 11156,
+        "seed": 11156,
+        "x": -299.9610554620635,
+        "z": -2086.136800000121,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 11174,
+        "source": "municipal",
+        "sourceIndex": 11195,
+        "seed": 11195,
+        "x": -299.74321881999697,
+        "z": -2092.9273199995873,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 11244,
+        "source": "municipal",
+        "sourceIndex": 11265,
+        "seed": 11265,
+        "x": 182.25665679251225,
+        "z": -1758.410720000189,
+        "height": 19.8,
+        "trunkHalfExtent": 0.8430000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 11422,
+        "source": "municipal",
+        "sourceIndex": 11443,
+        "seed": 11443,
+        "x": 798.734352476545,
+        "z": -1469.757959999687,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 11543,
+        "source": "municipal",
+        "sourceIndex": 11564,
+        "seed": 11564,
+        "x": -180.1509025906849,
+        "z": -1905.464439999882,
+        "height": 10.7,
+        "trunkHalfExtent": 0.5245,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 11763,
+        "source": "municipal",
+        "sourceIndex": 11784,
+        "seed": 11784,
+        "x": 770.4155890708455,
+        "z": -1383.596279999706,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 11768,
+        "source": "municipal",
+        "sourceIndex": 11789,
+        "seed": 11789,
+        "x": -278.17739130391243,
+        "z": -2056.0804000000726,
+        "height": 16.8,
+        "trunkHalfExtent": 0.7380000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 11775,
+        "source": "municipal",
+        "sourceIndex": 11796,
+        "seed": 11796,
+        "x": -293.3533440008368,
+        "z": -2083.1311599998,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 11779,
+        "source": "municipal",
+        "sourceIndex": 11800,
+        "seed": 11800,
+        "x": 223.50039426595237,
+        "z": -1703.19599999959,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 11782,
+        "source": "municipal",
+        "sourceIndex": 11803,
+        "seed": 11803,
+        "x": -498.26501151770225,
+        "z": -1662.2302400001918,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 11818,
+        "source": "municipal",
+        "sourceIndex": 11839,
+        "seed": 11839,
+        "x": -573.2734284371536,
+        "z": -2367.108480000242,
+        "height": 19.8,
+        "trunkHalfExtent": 0.8430000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 12024,
+        "source": "municipal",
+        "sourceIndex": 12045,
+        "seed": 12045,
+        "x": -310.48982647223204,
+        "z": -2102.389520000218,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 12164,
+        "source": "municipal",
+        "sourceIndex": 12185,
+        "seed": 12185,
+        "x": -1425.1599214602888,
+        "z": -807.2926400001277,
+        "height": 13.7,
+        "trunkHalfExtent": 0.6295000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 12438,
+        "source": "municipal",
+        "sourceIndex": 12460,
+        "seed": 12460,
+        "x": 574.6530605001351,
+        "z": -1517.6255599998524,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 12457,
+        "source": "municipal",
+        "sourceIndex": 12479,
+        "seed": 12479,
+        "x": -481.5642023294081,
+        "z": -1642.8605600000549,
+        "height": 16.8,
+        "trunkHalfExtent": 0.7380000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 12516,
+        "source": "municipal",
+        "sourceIndex": 12538,
+        "seed": 12538,
+        "x": 145.51487657847147,
+        "z": -1802.6047600001375,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 12523,
+        "source": "municipal",
+        "sourceIndex": 12545,
+        "seed": 12545,
+        "x": -448.3078083812081,
+        "z": -2272.2638400000355,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 12623,
+        "source": "municipal",
+        "sourceIndex": 12645,
+        "seed": 12645,
+        "x": -177.39163846368996,
+        "z": -1903.1267199994563,
+        "height": 7.6,
+        "trunkHalfExtent": 0.41600000000000004,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 12731,
+        "source": "municipal",
+        "sourceIndex": 12753,
+        "seed": 12753,
+        "x": -616.5503078987429,
+        "z": -2563.699599999839,
+        "height": 10.7,
+        "trunkHalfExtent": 0.5245,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 12742,
+        "source": "municipal",
+        "sourceIndex": 12764,
+        "seed": 12764,
+        "x": 799.0248013322897,
+        "z": -1458.7372799998275,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 12751,
+        "source": "municipal",
+        "sourceIndex": 12773,
+        "seed": 12773,
+        "x": -303.88211501100534,
+        "z": -2134.4496799999533,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 12764,
+        "source": "municipal",
+        "sourceIndex": 12786,
+        "seed": 12786,
+        "x": 4.719793901465865,
+        "z": -1831.5479599998325,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 12900,
+        "source": "municipal",
+        "sourceIndex": 12922,
+        "seed": 12922,
+        "x": -356.67119448817266,
+        "z": -2185.100280000211,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 12922,
+        "source": "municipal",
+        "sourceIndex": 12944,
+        "seed": 12944,
+        "x": 510.3912512329188,
+        "z": -1531.6518800000333,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 12930,
+        "source": "municipal",
+        "sourceIndex": 12952,
+        "seed": 12952,
+        "x": 780.5086867979129,
+        "z": -1398.1792000000635,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 12955,
+        "source": "municipal",
+        "sourceIndex": 12977,
+        "seed": 12977,
+        "x": 444.314136618588,
+        "z": -1560.0384799995518,
+        "height": 10.7,
+        "trunkHalfExtent": 0.5245,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 12965,
+        "source": "municipal",
+        "sourceIndex": 12987,
+        "seed": 12987,
+        "x": 493.10954433416714,
+        "z": -1534.5461999998447,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 13253,
+        "source": "municipal",
+        "sourceIndex": 13275,
+        "seed": 13275,
+        "x": -318.47716999644024,
+        "z": -2124.430879999937,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 13265,
+        "source": "municipal",
+        "sourceIndex": 13287,
+        "seed": 13287,
+        "x": -569.1345322471772,
+        "z": -2357.646279999611,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 13355,
+        "source": "municipal",
+        "sourceIndex": 13377,
+        "seed": 13377,
+        "x": -343.74622042043205,
+        "z": -2178.1984400002348,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 13562,
+        "source": "municipal",
+        "sourceIndex": 13587,
+        "seed": 13587,
+        "x": 802.8006364528433,
+        "z": -1488.1257599999803,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 13717,
+        "source": "municipal",
+        "sourceIndex": 13746,
+        "seed": 13746,
+        "x": 785.0832562709905,
+        "z": -1412.2055199994534,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 13719,
+        "source": "municipal",
+        "sourceIndex": 13748,
+        "seed": 13748,
+        "x": -526.5111627097236,
+        "z": -1692.1753199997304,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 13749,
+        "source": "municipal",
+        "sourceIndex": 13778,
+        "seed": 13778,
+        "x": 630.1287918906193,
+        "z": -1507.7180799995551,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 13754,
+        "source": "municipal",
+        "sourceIndex": 13783,
+        "seed": 13783,
+        "x": 799.0974135459679,
+        "z": -1478.8861999995788,
+        "height": 5,
+        "trunkHalfExtent": 0.32999999999999996,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 13769,
+        "source": "municipal",
+        "sourceIndex": 13798,
+        "seed": 13798,
+        "x": -541.9775642623927,
+        "z": -1212.6087599995349,
+        "height": 7.6,
+        "trunkHalfExtent": 0.41600000000000004,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 13990,
+        "source": "municipal",
+        "sourceIndex": 14019,
+        "seed": 14019,
+        "x": 804.3254929442131,
+        "z": -1490.9087600000728,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 14094,
+        "source": "municipal",
+        "sourceIndex": 14123,
+        "seed": 14123,
+        "x": -574.7982849274915,
+        "z": -2370.4480799997195,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 14271,
+        "source": "municipal",
+        "sourceIndex": 14300,
+        "seed": 14300,
+        "x": -1468.9450864186574,
+        "z": -930.6351999995712,
+        "height": 10.7,
+        "trunkHalfExtent": 0.5245,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 14396,
+        "source": "municipal",
+        "sourceIndex": 14425,
+        "seed": 14425,
+        "x": -1471.486513903586,
+        "z": -710.6668799996726,
+        "height": 10.7,
+        "trunkHalfExtent": 0.5245,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 14403,
+        "source": "municipal",
+        "sourceIndex": 14432,
+        "seed": 14432,
+        "x": 15.684238193703651,
+        "z": -1830.880039999937,
+        "height": 16.8,
+        "trunkHalfExtent": 0.7380000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 14445,
+        "source": "municipal",
+        "sourceIndex": 14474,
+        "seed": 14474,
+        "x": -309.0375821945404,
+        "z": -2108.1781599998403,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 14447,
+        "source": "municipal",
+        "sourceIndex": 14476,
+        "seed": 14476,
+        "x": 787.1163982591396,
+        "z": -1417.1035999997425,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 14454,
+        "source": "municipal",
+        "sourceIndex": 14483,
+        "seed": 14483,
+        "x": -1466.9845566441866,
+        "z": -727.9214799996125,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 14652,
+        "source": "municipal",
+        "sourceIndex": 14681,
+        "seed": 14681,
+        "x": 462.3219656561855,
+        "z": -1549.7970400000977,
+        "height": 13.7,
+        "trunkHalfExtent": 0.6295000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 14807,
+        "source": "municipal",
+        "sourceIndex": 14836,
+        "seed": 14836,
+        "x": 0.7261221388458072,
+        "z": -1833.7743599997484,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 14810,
+        "source": "municipal",
+        "sourceIndex": 14839,
+        "seed": 14839,
+        "x": -467.11437177132956,
+        "z": -2285.065640000144,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 14841,
+        "source": "municipal",
+        "sourceIndex": 14870,
+        "seed": 14870,
+        "x": 782.6144409997403,
+        "z": -1409.0885600002043,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 14970,
+        "source": "municipal",
+        "sourceIndex": 14999,
+        "seed": 14999,
+        "x": -312.01468296256996,
+        "z": -2117.306399999732,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 14977,
+        "source": "municipal",
+        "sourceIndex": 15006,
+        "seed": 15006,
+        "x": -515.3288817754193,
+        "z": -1682.0451999999952,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 14999,
+        "source": "municipal",
+        "sourceIndex": 15028,
+        "seed": 15028,
+        "x": -335.3958158268009,
+        "z": -2153.81936000009,
+        "height": 16.8,
+        "trunkHalfExtent": 0.7380000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 15014,
+        "source": "municipal",
+        "sourceIndex": 15043,
+        "seed": 15043,
+        "x": -304.0999516520399,
+        "z": -2100.274440000021,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 15039,
+        "source": "municipal",
+        "sourceIndex": 15068,
+        "seed": 15068,
+        "x": 771.4321600654359,
+        "z": -1382.4830800001437,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 15276,
+        "source": "municipal",
+        "sourceIndex": 15305,
+        "seed": 15305,
+        "x": -330.82124635269145,
+        "z": -2148.809960000082,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 15311,
+        "source": "municipal",
+        "sourceIndex": 15340,
+        "seed": 15340,
+        "x": -2068.1628588678354,
+        "z": -1720.4172039999307,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 15448,
+        "source": "municipal",
+        "sourceIndex": 15479,
+        "seed": 15479,
+        "x": 349.19213645971183,
+        "z": -1618.0362000002433,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 15450,
+        "source": "municipal",
+        "sourceIndex": 15481,
+        "seed": 15481,
+        "x": 196.92432399265726,
+        "z": -1737.0372799995744,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 15708,
+        "source": "municipal",
+        "sourceIndex": 15739,
+        "seed": 15739,
+        "x": 627.2243033362679,
+        "z": -1507.940719999784,
+        "height": 13.7,
+        "trunkHalfExtent": 0.6295000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 15737,
+        "source": "municipal",
+        "sourceIndex": 15768,
+        "seed": 15768,
+        "x": -1544.1713399791433,
+        "z": -1041.509919999645,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 15740,
+        "source": "municipal",
+        "sourceIndex": 15771,
+        "seed": 15771,
+        "x": -494.3439519697923,
+        "z": -2300.5391199998353,
+        "height": 19.8,
+        "trunkHalfExtent": 0.8430000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 15741,
+        "source": "municipal",
+        "sourceIndex": 15772,
+        "seed": 15772,
+        "x": -264.38107066996963,
+        "z": -2032.8145199994901,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 15891,
+        "source": "municipal",
+        "sourceIndex": 15922,
+        "seed": 15922,
+        "x": 784.7201952015677,
+        "z": -1415.7677599999513,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 15939,
+        "source": "municipal",
+        "sourceIndex": 15970,
+        "seed": 15970,
+        "x": 599.559049854704,
+        "z": -1510.2784400002097,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 15943,
+        "source": "municipal",
+        "sourceIndex": 15974,
+        "seed": 15974,
+        "x": -372.0649838261316,
+        "z": -2213.1529199997817,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 16238,
+        "source": "municipal",
+        "sourceIndex": 16269,
+        "seed": 16269,
+        "x": -333.43528605232996,
+        "z": -2146.1382799997086,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 16487,
+        "source": "municipal",
+        "sourceIndex": 16518,
+        "seed": 16518,
+        "x": -19.96835881206841,
+        "z": -1836.8913199997885,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 16542,
+        "source": "municipal",
+        "sourceIndex": 16573,
+        "seed": 16573,
+        "x": -173.83363998417101,
+        "z": -1900.343720000155,
+        "height": 10.7,
+        "trunkHalfExtent": 0.5245,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 16589,
+        "source": "municipal",
+        "sourceIndex": 16620,
+        "seed": 16620,
+        "x": -357.10686777127376,
+        "z": -2187.8832799995125,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 16671,
+        "source": "municipal",
+        "sourceIndex": 16702,
+        "seed": 16702,
+        "x": -493.03693211945705,
+        "z": -1656.7755599997258,
+        "height": 16.8,
+        "trunkHalfExtent": 0.7380000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 16682,
+        "source": "municipal",
+        "sourceIndex": 16713,
+        "seed": 16713,
+        "x": -504.07398862640497,
+        "z": -1669.8000000000634,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 16965,
+        "source": "municipal",
+        "sourceIndex": 16998,
+        "seed": 16998,
+        "x": -612.4114117077345,
+        "z": -2551.0091200002403,
+        "height": 10.7,
+        "trunkHalfExtent": 0.5245,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 17003,
+        "source": "municipal",
+        "sourceIndex": 17036,
+        "seed": 17036,
+        "x": -503.92876419904854,
+        "z": -2311.114520000028,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 17120,
+        "source": "municipal",
+        "sourceIndex": 17153,
+        "seed": 17153,
+        "x": 254.14274851554575,
+        "z": -1673.3622399997703,
+        "height": 5,
+        "trunkHalfExtent": 0.32999999999999996,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 17241,
+        "source": "municipal",
+        "sourceIndex": 17274,
+        "seed": 17274,
+        "x": -573.8543261476111,
+        "z": -1255.2443199994632,
+        "height": 7.6,
+        "trunkHalfExtent": 0.41600000000000004,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 17254,
+        "source": "municipal",
+        "sourceIndex": 17287,
+        "seed": 17287,
+        "x": -295.6769348436987,
+        "z": -2081.0160799996033,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 17264,
+        "source": "municipal",
+        "sourceIndex": 17297,
+        "seed": 17297,
+        "x": 297.2744035487467,
+        "z": -1646.6454399999907,
+        "height": 10.7,
+        "trunkHalfExtent": 0.5245,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 17413,
+        "source": "municipal",
+        "sourceIndex": 17446,
+        "seed": 17446,
+        "x": -626.7886300531668,
+        "z": -2584.2938000000477,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 17445,
+        "source": "municipal",
+        "sourceIndex": 17478,
+        "seed": 17478,
+        "x": -487.3731794381108,
+        "z": -1650.4303199999265,
+        "height": 16.8,
+        "trunkHalfExtent": 0.7380000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 17451,
+        "source": "municipal",
+        "sourceIndex": 17484,
+        "seed": 17484,
+        "x": 792.1992532289966,
+        "z": -1425.5639199997386,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 17697,
+        "source": "municipal",
+        "sourceIndex": 17730,
+        "seed": 17730,
+        "x": -311.1433363963678,
+        "z": -2109.7366399998605,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 17698,
+        "source": "municipal",
+        "sourceIndex": 17731,
+        "seed": 17731,
+        "x": 770.4882012845237,
+        "z": -1569.945959999849,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 17737,
+        "source": "municipal",
+        "sourceIndex": 17770,
+        "seed": 17770,
+        "x": -375.76820673300693,
+        "z": -2215.7132799996452,
+        "height": 19.8,
+        "trunkHalfExtent": 0.8430000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 17830,
+        "source": "municipal",
+        "sourceIndex": 17863,
+        "seed": 17863,
+        "x": -615.3159002631178,
+        "z": -1274.72532000011,
+        "height": 5,
+        "trunkHalfExtent": 0.32999999999999996,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 17949,
+        "source": "municipal",
+        "sourceIndex": 17982,
+        "seed": 17982,
+        "x": -382.81159147836667,
+        "z": -2217.7170400001232,
+        "height": 10.7,
+        "trunkHalfExtent": 0.5245,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 17964,
+        "source": "municipal",
+        "sourceIndex": 17997,
+        "seed": 17997,
+        "x": -300.0336676757417,
+        "z": -2088.363200000037,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 18203,
+        "source": "municipal",
+        "sourceIndex": 18236,
+        "seed": 18236,
+        "x": -565.8669826234029,
+        "z": -1268.1574400000818,
+        "height": 7.6,
+        "trunkHalfExtent": 0.41600000000000004,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 18211,
+        "source": "municipal",
+        "sourceIndex": 18244,
+        "seed": 18244,
+        "x": 133.17080022222027,
+        "z": -1822.0857599999931,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 18213,
+        "source": "municipal",
+        "sourceIndex": 18246,
+        "seed": 18246,
+        "x": -1057.7421193209132,
+        "z": -775.45511999983,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 18306,
+        "source": "municipal",
+        "sourceIndex": 18339,
+        "seed": 18339,
+        "x": -310.05415318913094,
+        "z": -2109.1800399996837,
+        "height": 19.8,
+        "trunkHalfExtent": 0.8430000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 18358,
+        "source": "municipal",
+        "sourceIndex": 18391,
+        "seed": 18391,
+        "x": -388.40273194500287,
+        "z": -2220.945319999882,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 18366,
+        "source": "municipal",
+        "sourceIndex": 18399,
+        "seed": 18399,
+        "x": -535.6603016569106,
+        "z": -1226.412439999487,
+        "height": 22.9,
+        "trunkHalfExtent": 0.9515,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 18673,
+        "source": "municipal",
+        "sourceIndex": 18707,
+        "seed": 18707,
+        "x": -281.22710428562016,
+        "z": -2049.0672399995865,
+        "height": 19.8,
+        "trunkHalfExtent": 0.8430000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 18678,
+        "source": "municipal",
+        "sourceIndex": 18712,
+        "seed": 18712,
+        "x": -183.78151328388205,
+        "z": -1908.804040000151,
+        "height": 7.6,
+        "trunkHalfExtent": 0.41600000000000004,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 19013,
+        "source": "municipal",
+        "sourceIndex": 19049,
+        "seed": 19049,
+        "x": -256.8294004278306,
+        "z": -2008.546759999855,
+        "height": 19.8,
+        "trunkHalfExtent": 0.8430000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 19034,
+        "source": "municipal",
+        "sourceIndex": 19070,
+        "seed": 19070,
+        "x": -369.45094412752496,
+        "z": -2202.911479999537,
+        "height": 25.9,
+        "trunkHalfExtent": 1.0565,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 19043,
+        "source": "municipal",
+        "sourceIndex": 19079,
+        "seed": 19079,
+        "x": -378.7453075020684,
+        "z": -2220.5000400002154,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 19143,
+        "source": "municipal",
+        "sourceIndex": 19179,
+        "seed": 19179,
+        "x": 801.5662288172182,
+        "z": -1491.4653599994585,
+        "height": 5,
+        "trunkHalfExtent": 0.32999999999999996,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 19172,
+        "source": "municipal",
+        "sourceIndex": 19208,
+        "seed": 19208,
+        "x": 606.4572101716755,
+        "z": -1508.6086399996796,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 19174,
+        "source": "municipal",
+        "sourceIndex": 19210,
+        "seed": 19210,
+        "x": -535.369852801166,
+        "z": -1229.0841199998604,
+        "height": 10.7,
+        "trunkHalfExtent": 0.5245,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 19367,
+        "source": "municipal",
+        "sourceIndex": 19403,
+        "seed": 19403,
+        "x": -270.04482335131587,
+        "z": -2034.3729999995103,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 19511,
+        "source": "municipal",
+        "sourceIndex": 19547,
+        "seed": 19547,
+        "x": 787.9877448253419,
+        "z": -1420.8884799996783,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 19563,
+        "source": "municipal",
+        "sourceIndex": 19599,
+        "seed": 19599,
+        "x": -387.0230998820213,
+        "z": -2223.7283199999747,
+        "height": 19.8,
+        "trunkHalfExtent": 0.8430000000000001,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 19569,
+        "source": "municipal",
+        "sourceIndex": 19605,
+        "seed": 19605,
+        "x": -170.20302929097386,
+        "z": -1898.117320000239,
+        "height": 10.7,
+        "trunkHalfExtent": 0.5245,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 19607,
+        "source": "municipal",
+        "sourceIndex": 19644,
+        "seed": 19644,
+        "x": -291.02975315694295,
+        "z": -2071.331239999535,
+        "height": 5,
+        "trunkHalfExtent": 0.32999999999999996,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 19738,
+        "source": "municipal",
+        "sourceIndex": 19775,
+        "seed": 19775,
+        "x": 567.7549001831637,
+        "z": -1518.5161199999768,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 20264,
+        "source": "municipal",
+        "sourceIndex": 20302,
+        "seed": 20302,
+        "x": 631.4358117399225,
+        "z": -1508.2746799997317,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 20271,
+        "source": "municipal",
+        "sourceIndex": 20309,
+        "seed": 20309,
+        "x": -264.8167439530707,
+        "z": -2029.0296399995543,
+        "height": 10.7,
+        "trunkHalfExtent": 0.5245,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 20295,
+        "source": "municipal",
+        "sourceIndex": 20333,
+        "seed": 20333,
+        "x": -364.73115022605907,
+        "z": -2203.913360000171,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 20440,
+        "source": "municipal",
+        "sourceIndex": 20478,
+        "seed": 20478,
+        "x": -384.62689682444926,
+        "z": -2221.390599999549,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 20463,
+        "source": "municipal",
+        "sourceIndex": 20501,
+        "seed": 20501,
+        "x": -327.84414558466193,
+        "z": -2138.679839999556,
+        "height": 26,
+        "trunkHalfExtent": 1.06,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 20516,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -25260.3,
+        "x": -2185.070039535436,
+        "z": -1603.5534619425598,
+        "height": 17.124112472436536,
+        "trunkHalfExtent": 0.7493439365352789,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 20517,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -24662.3,
+        "x": -2183.6478704465007,
+        "z": -1560.6021240001573,
+        "height": 17.026975000582752,
+        "trunkHalfExtent": 0.7459441250203964,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 20518,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -24512.8,
+        "x": -2184.867837039201,
+        "z": -1536.3119855763362,
+        "height": 16.128157933155308,
+        "trunkHalfExtent": 0.7144855276604358,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 20519,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -24363.3,
+        "x": -2185.4376578169176,
+        "z": -1523.0125391224865,
+        "height": 36.91712262588817,
+        "trunkHalfExtent": 1.442099291906086,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 20520,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -24213.8,
+        "x": -2184.3242229719704,
+        "z": -1517.5737106964007,
+        "height": 24.15161740831536,
+        "trunkHalfExtent": 0.9953066092910378,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 20521,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -23914.8,
+        "x": -2177.886149451806,
+        "z": -1489.6714888647548,
+        "height": 19.49349083888228,
+        "trunkHalfExtent": 0.8322721793608799,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 20531,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -23276.37,
+        "x": -2168.9247350991936,
+        "z": -1438.1619654048409,
+        "height": 20.41358766461053,
+        "trunkHalfExtent": 0.8644755682613687,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 20532,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -23126.87,
+        "x": -2169.18516338896,
+        "z": -1426.9942851720916,
+        "height": 28.602665203543438,
+        "trunkHalfExtent": 1.1510932821240203,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 20533,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -22977.37,
+        "x": -2169.4600873294985,
+        "z": -1408.0193833249796,
+        "height": 23.335947923955246,
+        "trunkHalfExtent": 0.9667581773384337,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 20653,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -26472.29,
+        "x": -2092.7126897686976,
+        "z": -1740.2713963428541,
+        "height": 18.061038376636134,
+        "trunkHalfExtent": 0.7821363431822648,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 20763,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -26351,
+        "x": -2051.1230464138935,
+        "z": -1732.193759708607,
+        "height": 17.845934511573432,
+        "trunkHalfExtent": 0.7746077079050702,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 20794,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -21567,
+        "x": -2053.3782602729916,
+        "z": -1318.3547535581902,
+        "height": 20.043527868081583,
+        "trunkHalfExtent": 0.8515234753828554,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 20818,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -26310.57,
+        "x": -2038.097965373774,
+        "z": -1734.1750175716588,
+        "height": 31.480562518489933,
+        "trunkHalfExtent": 1.2518196881471477,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 20849,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -21526.57,
+        "x": -2038.875765285091,
+        "z": -1324.172026276996,
+        "height": 28.900339947693283,
+        "trunkHalfExtent": 1.161511898169265,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 20916,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -21486.14,
+        "x": -2023.2284151682106,
+        "z": -1322.8373050783703,
+        "height": 23.4484468212504,
+        "trunkHalfExtent": 0.9706956387437641,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 20994,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -21595.21,
+        "x": -2016.9065354673658,
+        "z": -1329.0014234887785,
+        "height": 21.618813377906918,
+        "trunkHalfExtent": 0.9066584682267422,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 21046,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -26189.28,
+        "x": -1997.5853163399152,
+        "z": -1742.1568150137027,
+        "height": 27.81493061070381,
+        "trunkHalfExtent": 1.1235225713746335,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 21156,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -21514.35,
+        "x": -1989.6393406958523,
+        "z": -1336.0326618054532,
+        "height": 23.064590722373396,
+        "trunkHalfExtent": 0.9572606752830689,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 21494,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -21352.63,
+        "x": -1931.3533373495375,
+        "z": -1337.2243692549673,
+        "height": 16.27669881082693,
+        "trunkHalfExtent": 0.7196844583789426,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 21586,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -21312.2,
+        "x": -1920.7222744407482,
+        "z": -1336.8334267765167,
+        "height": 29.673324080160455,
+        "trunkHalfExtent": 1.188566342805616,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 21682,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -21122.27,
+        "x": -1902.7886834462115,
+        "z": -1323.4910033431952,
+        "height": 27.535436707220015,
+        "trunkHalfExtent": 1.1137402847527005,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 21795,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -32253.91,
+        "x": -1880.2894017605286,
+        "z": -2293.258488329797,
+        "height": 22.844827562039427,
+        "trunkHalfExtent": 0.9495689646713801,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 21796,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -32104.41,
+        "x": -1879.8196710155826,
+        "z": -2279.0889411244316,
+        "height": 32.47942113218596,
+        "trunkHalfExtent": 1.2867797396265086,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 21886,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -33409.479999999996,
+        "x": -1862.678577312472,
+        "z": -2394.540912081051,
+        "height": 27.580087443111097,
+        "trunkHalfExtent": 1.1153030605088885,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 21965,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -33817.55,
+        "x": -1850.1243870607577,
+        "z": -2437.92298888028,
+        "height": 29.173178130622546,
+        "trunkHalfExtent": 1.171061234571789,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 21982,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -27090.05,
+        "x": -1856.617626350644,
+        "z": -1855.907383632708,
+        "height": 33.07703171965113,
+        "trunkHalfExtent": 1.3076961101877895,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 22035,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -34076.12,
+        "x": -1843.5399991984013,
+        "z": -2466.0609467989125,
+        "height": 28.62808079268143,
+        "trunkHalfExtent": 1.15198282774385,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 22105,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -20322.12,
+        "x": -1836.5172773804516,
+        "z": -1272.61940741734,
+        "height": 29.259290515241446,
+        "trunkHalfExtent": 1.1740751680334507,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 22117,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -34334.69,
+        "x": -1830.4813857726258,
+        "z": -2487.4600520432577,
+        "height": 19.00535752747237,
+        "trunkHalfExtent": 0.8151875134615331,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 22218,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -34443.76,
+        "x": -1818.4508601358393,
+        "z": -2502.546872118197,
+        "height": 25.70889727532358,
+        "trunkHalfExtent": 1.0498114046363254,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 22219,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -34294.26,
+        "x": -1819.2688515224654,
+        "z": -2496.6769393626164,
+        "height": 33.13553784610849,
+        "trunkHalfExtent": 1.3097438246137971,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 22315,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -34552.83,
+        "x": -1801.2022527762674,
+        "z": -2512.4891182207066,
+        "height": 31.297851729868853,
+        "trunkHalfExtent": 1.2454248105454098,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 22316,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -34403.33,
+        "x": -1808.108870758413,
+        "z": -2507.664052462249,
+        "height": 17.81192740566621,
+        "trunkHalfExtent": 0.7734174591983175,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 22403,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -20051.33,
+        "x": -1806.836570493324,
+        "z": -1256.5408994518366,
+        "height": 16.452909856652695,
+        "trunkHalfExtent": 0.7258518449828444,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 22415,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -34512.4,
+        "x": -1790.982938861911,
+        "z": -2521.445671641355,
+        "height": 18.22681588765454,
+        "trunkHalfExtent": 0.787938556067909,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 22504,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -19861.4,
+        "x": -1795.6934719264827,
+        "z": -1241.1890073722898,
+        "height": 24.051082811613014,
+        "trunkHalfExtent": 0.9917878984064556,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 22614,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -19671.47,
+        "x": -1779.225929312328,
+        "z": -1231.6391371841164,
+        "height": 24.96196329996019,
+        "trunkHalfExtent": 1.0236687154986066,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 22734,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -19481.54,
+        "x": -1764.0759017442251,
+        "z": -1220.7073015146307,
+        "height": 22.628091701422818,
+        "trunkHalfExtent": 0.9419832095497988,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 22861,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -19291.61,
+        "x": -1746.5121775244224,
+        "z": -1202.6665697234275,
+        "height": 17.332346872346534,
+        "trunkHalfExtent": 0.7566321405321288,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 23152,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -35017.32,
+        "x": -1710.3075771625445,
+        "z": -2576.0409999505573,
+        "height": 33.72629832748498,
+        "trunkHalfExtent": 1.3304204414619745,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 23153,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -34867.82,
+        "x": -1714.4300027462887,
+        "z": -2574.815697128797,
+        "height": 17.16844357568334,
+        "trunkHalfExtent": 0.750895525148917,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 23260,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -18871.32,
+        "x": -1717.2929689662415,
+        "z": -1183.7367702051706,
+        "height": 27.731605553983172,
+        "trunkHalfExtent": 1.120606194389411,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 23284,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -34976.89,
+        "x": -1704.0527622290829,
+        "z": -2581.688661191176,
+        "height": 24.737948036093712,
+        "trunkHalfExtent": 1.01582818126328,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 23391,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -18830.89,
+        "x": -1704.5122144235647,
+        "z": -1172.6966672014678,
+        "height": 20.32117599393314,
+        "trunkHalfExtent": 0.8612411597876599,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 23416,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -35085.96,
+        "x": -1685.3121092810125,
+        "z": -2596.554679475892,
+        "height": 17.483983730526234,
+        "trunkHalfExtent": 0.7619394305684183,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 23957,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -35223.24,
+        "x": -1638.8291517643556,
+        "z": -2618.722088170576,
+        "height": 19.687951672662166,
+        "trunkHalfExtent": 0.8390783085431759,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 24232,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -35441.38,
+        "x": -1606.3639407563314,
+        "z": -2652.874429167976,
+        "height": 19.451800318454843,
+        "trunkHalfExtent": 0.8308130111459197,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 24370,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -35699.95,
+        "x": -1593.4147257158766,
+        "z": -2672.0856330552197,
+        "height": 16.493163030902906,
+        "trunkHalfExtent": 0.7272607060816018,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 24371,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -35550.45,
+        "x": -1600.5701423150567,
+        "z": -2659.7596185972943,
+        "height": 17.42573861463461,
+        "trunkHalfExtent": 0.7599008515122114,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 24508,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -36108.02,
+        "x": -1576.3560923614423,
+        "z": -2711.207546278165,
+        "height": 29.689574248099234,
+        "trunkHalfExtent": 1.1891350986834732,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 24510,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -35809.02,
+        "x": -1582.5308624231293,
+        "z": -2691.2071967052834,
+        "height": 29.855560515541583,
+        "trunkHalfExtent": 1.1949446180439554,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 24791,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -36176.66,
+        "x": -1561.833597342833,
+        "z": -2725.0453156496806,
+        "height": 36.39346237321297,
+        "trunkHalfExtent": 1.423771183062454,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 25050,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17448.73,
+        "x": -1548.7164907311671,
+        "z": -1100.6264134911762,
+        "height": 27.81612093782678,
+        "trunkHalfExtent": 1.1235642328239375,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 25068,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -36544.3,
+        "x": -1529.9933059191098,
+        "z": -2766.053794316307,
+        "height": 30.093198707589636,
+        "trunkHalfExtent": 1.2032619547656374,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 25717,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -36790.65,
+        "x": -1470.833241040511,
+        "z": -2798.5179517981123,
+        "height": 36.37387925364601,
+        "trunkHalfExtent": 1.4230857738776104,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 26095,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -13537.29,
+        "x": -1444.285712909128,
+        "z": -785.9006737784657,
+        "height": 32.54991268075355,
+        "trunkHalfExtent": 1.2892469438263743,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 26238,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -13496.86,
+        "x": -1430.3195544065966,
+        "z": -791.4773477446433,
+        "height": 22.039268012049433,
+        "trunkHalfExtent": 0.9213743804217303,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 26254,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -36927.93,
+        "x": -1418.7147195415382,
+        "z": -2831.029066766878,
+        "height": 31.678215692612866,
+        "trunkHalfExtent": 1.2587375492414503,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 26396,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -37037,
+        "x": -1394.274937564187,
+        "z": -2847.4390724182304,
+        "height": 33.205548149937385,
+        "trunkHalfExtent": 1.3121941852478085,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 26527,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -13416,
+        "x": -1403.0046756876109,
+        "z": -782.3595145019062,
+        "height": 22.39547441510149,
+        "trunkHalfExtent": 0.9338416045285522,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 26540,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -37146.07,
+        "x": -1384.35326493076,
+        "z": -2849.7536589468655,
+        "height": 23.396798511152156,
+        "trunkHalfExtent": 0.9688879478903255,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 26689,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -37105.64,
+        "x": -1371.672636658157,
+        "z": -2860.1980312184314,
+        "height": 29.553638489356672,
+        "trunkHalfExtent": 1.1843773471274834,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 26840,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -37214.71,
+        "x": -1362.436577525339,
+        "z": -2865.3016590321204,
+        "height": 33.42680828399534,
+        "trunkHalfExtent": 1.319938289939837,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 26841,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -37065.21,
+        "x": -1362.6258490641048,
+        "z": -2858.8463125930903,
+        "height": 17.783334524880047,
+        "trunkHalfExtent": 0.7724167083708017,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 26990,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -37174.28,
+        "x": -1349.7789810573158,
+        "z": -2866.421799085394,
+        "height": 29.8590752915552,
+        "trunkHalfExtent": 1.195067635204432,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 27124,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -16991.78,
+        "x": -1346.3627455259266,
+        "z": -1116.8862753802096,
+        "height": 33.96901575091579,
+        "trunkHalfExtent": 1.3389155512820525,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 27147,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -37283.35,
+        "x": -1335.2294465386803,
+        "z": -2877.6433145619812,
+        "height": 29.346664771568612,
+        "trunkHalfExtent": 1.1771332670049015,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 27279,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17250.35,
+        "x": -1335.0238795353798,
+        "z": -1137.364006695454,
+        "height": 25.026194131717602,
+        "trunkHalfExtent": 1.0259167946101162,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 27280,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17100.85,
+        "x": -1335.3925046291333,
+        "z": -1130.6448038770177,
+        "height": 29.377311696574907,
+        "trunkHalfExtent": 1.1782059093801218,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 27302,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -37242.92,
+        "x": -1317.3124864851416,
+        "z": -2879.5217085812474,
+        "height": 25.332426854663936,
+        "trunkHalfExtent": 1.0366349399132377,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 27434,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17209.92,
+        "x": -1322.0606158651062,
+        "z": -1139.1540244967327,
+        "height": 21.32338441353204,
+        "trunkHalfExtent": 0.8963184544736215,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 27603,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -37311.56,
+        "x": -1300.9606794358115,
+        "z": -2888.7522708246834,
+        "height": 27.881176991926623,
+        "trunkHalfExtent": 1.1258411947174318,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 27734,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17577.56,
+        "x": -1291.366156427568,
+        "z": -1175.5728260204778,
+        "height": 33.1619110868678,
+        "trunkHalfExtent": 1.3106668880403731,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 27735,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17428.06,
+        "x": -1292.0133832153151,
+        "z": -1166.4634371656284,
+        "height": 33.318419368501054,
+        "trunkHalfExtent": 1.316144677897537,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 28258,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17565.34,
+        "x": -1246.059414670348,
+        "z": -1189.6289594411646,
+        "height": 21.311251233011717,
+        "trunkHalfExtent": 0.8958937931554102,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 28387,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17524.91,
+        "x": -1230.3195790204336,
+        "z": -1194.060190984339,
+        "height": 25.28828684725704,
+        "trunkHalfExtent": 1.0350900396539964,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 28523,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17484.48,
+        "x": -1215.8371769847,
+        "z": -1193.3781801008008,
+        "height": 23.668298281343596,
+        "trunkHalfExtent": 0.9783904398470259,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 28926,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17512.69,
+        "x": -1178.5270352758744,
+        "z": -1201.8335290385257,
+        "height": 34.73952730211022,
+        "trunkHalfExtent": 1.3658834555738577,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 29065,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17322.76,
+        "x": -1161.5294051839228,
+        "z": -1194.0448098396078,
+        "height": 35.99141647603392,
+        "trunkHalfExtent": 1.4096995766611873,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 29195,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17431.83,
+        "x": -1157.2756013442413,
+        "z": -1199.6095477718336,
+        "height": 25.68190112243974,
+        "trunkHalfExtent": 1.0488665392853909,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 29196,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17282.33,
+        "x": -1158.8228031608014,
+        "z": -1196.5072880538355,
+        "height": 22.636683838769386,
+        "trunkHalfExtent": 0.9422839343569286,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 29324,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17241.9,
+        "x": -1144.276397494512,
+        "z": -1192.7461336983251,
+        "height": 26.956483414702234,
+        "trunkHalfExtent": 1.0934769195145781,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 29595,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17161.04,
+        "x": -1116.12821846937,
+        "z": -1189.2341684882267,
+        "height": 16.655506325343595,
+        "trunkHalfExtent": 0.7329427213870259,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 29719,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17120.61,
+        "x": -1100.6832639923086,
+        "z": -1185.2853301257128,
+        "height": 35.78471679757422,
+        "trunkHalfExtent": 1.4024650879150977,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 29956,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17039.75,
+        "x": -1071.9826908978139,
+        "z": -1194.6441550659947,
+        "height": 29.25681628401071,
+        "trunkHalfExtent": 1.173988569940375,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 30076,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -16999.32,
+        "x": -1058.3512357368018,
+        "z": -1193.5752351006959,
+        "height": 23.6296322772414,
+        "trunkHalfExtent": 0.977037129703449,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 30198,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17108.39,
+        "x": -1043.192302945179,
+        "z": -1204.9995046715921,
+        "height": 26.66973498560401,
+        "trunkHalfExtent": 1.0834407244961404,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 30199,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -16958.89,
+        "x": -1053.7160842302255,
+        "z": -1192.5282709952298,
+        "height": 25.534968242092873,
+        "trunkHalfExtent": 1.0437238884732507,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 30327,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17067.96,
+        "x": -1034.3634719240072,
+        "z": -1205.898322446068,
+        "height": 33.245105507327935,
+        "trunkHalfExtent": 1.3135786927564777,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 30461,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17177.03,
+        "x": -1019.4724805632359,
+        "z": -1216.6160129605269,
+        "height": 17.198569641106587,
+        "trunkHalfExtent": 0.7519499374387306,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 30462,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17027.53,
+        "x": -1027.236378786838,
+        "z": -1208.509527307484,
+        "height": 31.219042040538625,
+        "trunkHalfExtent": 1.2426664714188518,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 30597,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17286.1,
+        "x": -1006.93321559584,
+        "z": -1235.0768311735592,
+        "height": 35.16060012311209,
+        "trunkHalfExtent": 1.380621004308923,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 30734,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17395.17,
+        "x": -998.5971616874449,
+        "z": -1237.1261125463934,
+        "height": 30.497447221634502,
+        "trunkHalfExtent": 1.2174106527572075,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 30912,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -31965.31,
+        "x": -968.0421514203772,
+        "z": -2514.6655795452534,
+        "height": 17.939644503079762,
+        "trunkHalfExtent": 0.7778875576077917,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 31043,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -32223.88,
+        "x": -952.4740215102211,
+        "z": -2547.337993383786,
+        "height": 34.82628665182165,
+        "trunkHalfExtent": 1.3689200328137576,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 31044,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -32074.38,
+        "x": -954.52265177976,
+        "z": -2535.8604251515353,
+        "height": 17.82301932525297,
+        "trunkHalfExtent": 0.7738056763838541,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 31134,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17572.88,
+        "x": -955.3240756057057,
+        "z": -1265.972042192312,
+        "height": 25.86362088608439,
+        "trunkHalfExtent": 1.0552267310129537,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 31168,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -32631.95,
+        "x": -940.1179421239067,
+        "z": -2582.3393983536953,
+        "height": 35.221982984068745,
+        "trunkHalfExtent": 1.3827694044424061,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 31260,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17681.95,
+        "x": -939.9068372933107,
+        "z": -1278.9208285197237,
+        "height": 32.87468981525308,
+        "trunkHalfExtent": 1.3006141435338576,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 31261,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17532.45,
+        "x": -945.5945859140775,
+        "z": -1272.368739570491,
+        "height": 28.172220410768887,
+        "trunkHalfExtent": 1.136027714376911,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 31384,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17641.52,
+        "x": -930.5703244654724,
+        "z": -1276.5953738999815,
+        "height": 28.984709741671395,
+        "trunkHalfExtent": 1.1644648409584988,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 31412,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -32551.09,
+        "x": -913.6702549579204,
+        "z": -2577.6092754877172,
+        "height": 33.50346711052225,
+        "trunkHalfExtent": 1.3226213488682788,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 31413,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -32401.59,
+        "x": -918.9420197780273,
+        "z": -2569.1789615727103,
+        "height": 17.543482842302183,
+        "trunkHalfExtent": 0.7640218994805765,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 31505,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17601.09,
+        "x": -914.7328740653466,
+        "z": -1285.2425794830779,
+        "height": 36.193423540806634,
+        "trunkHalfExtent": 1.4167698239282323,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 31526,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -35201.66,
+        "x": -901.6736543408479,
+        "z": -2813.7886370530346,
+        "height": 21.900638573766628,
+        "trunkHalfExtent": 0.916522350081832,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 31529,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -34603.66,
+        "x": -910.3009239003004,
+        "z": -2759.283412980789,
+        "height": 27.028691416740912,
+        "trunkHalfExtent": 1.096004199585932,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 31536,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -32660.16,
+        "x": -901.7602254178928,
+        "z": -2597.2591892964447,
+        "height": 36.933252090799215,
+        "trunkHalfExtent": 1.4426638231779725,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 31537,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -32510.66,
+        "x": -906.9309828080877,
+        "z": -2579.5883240496914,
+        "height": 30.09851224045633,
+        "trunkHalfExtent": 1.2034479284159716,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 31629,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17560.66,
+        "x": -910.9933296767122,
+        "z": -1279.4702735303435,
+        "height": 21.480114097743353,
+        "trunkHalfExtent": 0.9018039934210175,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 31743,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17669.73,
+        "x": -892.8343815817207,
+        "z": -1289.5194344173942,
+        "height": 16.47270459313995,
+        "trunkHalfExtent": 0.7265446607598984,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 31777,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -32728.8,
+        "x": -883.4133791803579,
+        "z": -2612.6184140897894,
+        "height": 31.19452033915877,
+        "trunkHalfExtent": 1.241808211870557,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 31864,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17479.8,
+        "x": -880.0431456895021,
+        "z": -1285.3295424023527,
+        "height": 34.670048541317556,
+        "trunkHalfExtent": 1.3634516989461145,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 31878,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -35977.37,
+        "x": -869.6887843118602,
+        "z": -2889.077292590173,
+        "height": 34.1336597752379,
+        "trunkHalfExtent": 1.3446780921333266,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 31896,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -32987.37,
+        "x": -862.6205439006953,
+        "z": -2638.211829185322,
+        "height": 32.64273498901457,
+        "trunkHalfExtent": 1.29249572461551,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 31983,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17588.87,
+        "x": -863.525599513192,
+        "z": -1290.515603874992,
+        "height": 23.114791625099315,
+        "trunkHalfExtent": 0.9590177068784761,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 31998,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -35787.44,
+        "x": -859.3725680171119,
+        "z": -2886.8832589160115,
+        "height": 28.914794229865947,
+        "trunkHalfExtent": 1.1620177980453081,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 32014,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -33096.44,
+        "x": -848.7380951684318,
+        "z": -2649.6006572312326,
+        "height": 16.495383595913154,
+        "trunkHalfExtent": 0.7273384258569605,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 32102,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17548.44,
+        "x": -852.808367136895,
+        "z": -1295.2642354146228,
+        "height": 28.824500913839074,
+        "trunkHalfExtent": 1.1588575319843677,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 32117,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -35747.01,
+        "x": -846.8529556122812,
+        "z": -2883.790825506818,
+        "height": 32.598084358800406,
+        "trunkHalfExtent": 1.2909329525580142,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 32118,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -35597.51,
+        "x": -839.915830331789,
+        "z": -2863.0447777336685,
+        "height": 28.40326637590624,
+        "trunkHalfExtent": 1.1441143231567186,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 32216,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17657.51,
+        "x": -837.6461917919187,
+        "z": -1303.091885573689,
+        "height": 24.2189095112044,
+        "trunkHalfExtent": 0.9976618328921542,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 32231,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -35108.58,
+        "x": -828.1244099700853,
+        "z": -2833.553680255616,
+        "height": 36.71600043697981,
+        "trunkHalfExtent": 1.4350600152942934,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 32241,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -33314.58,
+        "x": -826.1922176310327,
+        "z": -2678.2837528768578,
+        "height": 36.741537023495766,
+        "trunkHalfExtent": 1.4359537958223518,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 32326,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17617.08,
+        "x": -824.9201169676962,
+        "z": -1309.289659145783,
+        "height": 31.02391973743761,
+        "trunkHalfExtent": 1.2358371908103163,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 32342,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -34619.65,
+        "x": -811.2727856623533,
+        "z": -2793.8929375234293,
+        "height": 34.216263011573574,
+        "trunkHalfExtent": 1.3475692054050752,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 32348,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -33423.65,
+        "x": -820.4549939673743,
+        "z": -2686.0537108078715,
+        "height": 36.43029897640008,
+        "trunkHalfExtent": 1.4250604641740028,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 32447,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -34429.72,
+        "x": -804.5207228684158,
+        "z": -2774.1929602271994,
+        "height": 33.18473132756753,
+        "trunkHalfExtent": 1.3114655964648636,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 32452,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -33383.22,
+        "x": -804.6122356464548,
+        "z": -2689.7365524853576,
+        "height": 18.069803482707357,
+        "trunkHalfExtent": 0.7824431218947576,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 32537,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17536.22,
+        "x": -798.9944682567439,
+        "z": -1311.400087597125,
+        "height": 35.967691818274034,
+        "trunkHalfExtent": 1.4088692136395913,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 32550,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -33492.29,
+        "x": -783.5982439322106,
+        "z": -2702.554692110338,
+        "height": 21.44476119504543,
+        "trunkHalfExtent": 0.9005666418265902,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 32635,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17645.29,
+        "x": -788.7722583572322,
+        "z": -1316.0012771517504,
+        "height": 24.17997823832775,
+        "trunkHalfExtent": 0.9962992383414713,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 32648,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -33900.36,
+        "x": -778.6353157247231,
+        "z": -2736.3218289916003,
+        "height": 17.82395839101082,
+        "trunkHalfExtent": 0.7738385436853787,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 32650,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -33451.86,
+        "x": -776.6401026995081,
+        "z": -2700.027761919505,
+        "height": 20.255624152552627,
+        "trunkHalfExtent": 0.8589468453393421,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 32734,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17604.86,
+        "x": -775.2869872523224,
+        "z": -1315.177153677936,
+        "height": 35.44362899346743,
+        "trunkHalfExtent": 1.39052701477136,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 32745,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -33411.43,
+        "x": -760.2098650701082,
+        "z": -2702.23900907216,
+        "height": 28.556448786417604,
+        "trunkHalfExtent": 1.1494757075246163,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 32830,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17564.43,
+        "x": -760.6586484925065,
+        "z": -1319.1562090270454,
+        "height": 29.00467045523692,
+        "trunkHalfExtent": 1.1651634659332921,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 32842,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -33670,
+        "x": -748.3255826638051,
+        "z": -2722.091335541627,
+        "height": 32.65197166544931,
+        "trunkHalfExtent": 1.2928190082907258,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 32925,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17524,
+        "x": -748.3871989969339,
+        "z": -1316.405103447847,
+        "height": 20.12703184979182,
+        "trunkHalfExtent": 0.8544461147427138,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 32931,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -33480.07,
+        "x": -735.9273950942879,
+        "z": -2717.442716615915,
+        "height": 24.29855288701947,
+        "trunkHalfExtent": 1.0004493510456813,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33008,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17483.57,
+        "x": -736.9077362448443,
+        "z": -1317.5485348683796,
+        "height": 21.69550902557239,
+        "trunkHalfExtent": 0.9093428158950339,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33082,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17443.14,
+        "x": -721.5185586617881,
+        "z": -1318.90264222704,
+        "height": 21.412825694329513,
+        "trunkHalfExtent": 0.899448899301533,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33083,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -32950.71,
+        "x": -706.8167714909941,
+        "z": -2667.849965422858,
+        "height": 35.70988712038525,
+        "trunkHalfExtent": 1.3998460492134837,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33084,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -32801.21,
+        "x": -708.7605155406345,
+        "z": -2659.317942141177,
+        "height": 32.99199832321756,
+        "trunkHalfExtent": 1.3047199413126145,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33157,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17402.71,
+        "x": -713.3406861005933,
+        "z": -1315.5831704463926,
+        "height": 16.28584091308585,
+        "trunkHalfExtent": 0.7200044319580048,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33164,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -32162.78,
+        "x": -699.1811595113832,
+        "z": -2609.0286312028766,
+        "height": 24.603395386420004,
+        "trunkHalfExtent": 1.0111188385247003,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33165,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -32013.28,
+        "x": -699.9635539079118,
+        "z": -2589.118943362533,
+        "height": 17.973451831443526,
+        "trunkHalfExtent": 0.7790708141005235,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33166,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -31863.78,
+        "x": -694.0482867514365,
+        "z": -2583.2328937941493,
+        "height": 32.74323817509139,
+        "trunkHalfExtent": 1.2960133361281987,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33167,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -31714.28,
+        "x": -697.2810888735112,
+        "z": -2565.0096239235136,
+        "height": 33.45694095182898,
+        "trunkHalfExtent": 1.3209929333140145,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33169,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -31415.28,
+        "x": -694.4161810884543,
+        "z": -2540.3104835312115,
+        "height": 36.35872730938354,
+        "trunkHalfExtent": 1.422555455828424,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33242,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -31225.35,
+        "x": -689.9379372800759,
+        "z": -2535.0480173771502,
+        "height": 16.608987304149196,
+        "trunkHalfExtent": 0.731314555645222,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33317,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -30138.42,
+        "x": -673.6804382338305,
+        "z": -2438.6630614282913,
+        "height": 33.865929052559295,
+        "trunkHalfExtent": 1.3353075168395754,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33318,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -29689.92,
+        "x": -668.7726610614045,
+        "z": -2400.536113072245,
+        "height": 32.27592156064475,
+        "trunkHalfExtent": 1.2796572546225662,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33394,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -28901.989999999998,
+        "x": -660.8202754895065,
+        "z": -2334.293051897097,
+        "height": 31.9844635479094,
+        "trunkHalfExtent": 1.269456224176829,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33469,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -28114.06,
+        "x": -648.5831128887075,
+        "z": -2270.702080188348,
+        "height": 34.6049985899117,
+        "trunkHalfExtent": 1.3611749506469095,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33535,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -27924.13,
+        "x": -632.6946426151553,
+        "z": -2261.2266643793846,
+        "height": 34.84680299811953,
+        "trunkHalfExtent": 1.3696381049341835,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33594,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -28033.2,
+        "x": -614.3947800510941,
+        "z": -2274.5494607734727,
+        "height": 26.101992054715083,
+        "trunkHalfExtent": 1.063569721915028,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33600,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -27136.2,
+        "x": -624.5456849992261,
+        "z": -2189.6325212323136,
+        "height": 29.36483731525368,
+        "trunkHalfExtent": 1.1777693060338787,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33601,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -26986.7,
+        "x": -624.5411385189364,
+        "z": -2183.6010743749503,
+        "height": 32.17983151403314,
+        "trunkHalfExtent": 1.2762941029911599,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33652,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -28142.27,
+        "x": -610.2732618487789,
+        "z": -2281.0845522587842,
+        "height": 31.054587605496636,
+        "trunkHalfExtent": 1.2369105661923823,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33665,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -26198.77,
+        "x": -601.4944319370552,
+        "z": -2112.5965773874195,
+        "height": 29.80636074960057,
+        "trunkHalfExtent": 1.19322262623602,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33666,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -26049.27,
+        "x": -601.0144149870684,
+        "z": -2103.824790007533,
+        "height": 34.9681264812607,
+        "trunkHalfExtent": 1.3738844268441244,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33733,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -25410.84,
+        "x": -588.6424459295376,
+        "z": -2049.793723643117,
+        "height": 18.11900513520959,
+        "trunkHalfExtent": 0.7841651797323358,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33778,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -28360.41,
+        "x": -580.4470989219844,
+        "z": -2304.8809077701007,
+        "height": 24.217319050709193,
+        "trunkHalfExtent": 0.9976061667748218,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33779,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -28210.91,
+        "x": -585.6239515146008,
+        "z": -2294.3026563554304,
+        "height": 21.972574754297966,
+        "trunkHalfExtent": 0.9190401164004289,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33799,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -25071.41,
+        "x": -582.5301072758157,
+        "z": -2025.2569142506982,
+        "height": 23.214943583119748,
+        "trunkHalfExtent": 0.9625230254091913,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33839,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -28319.98,
+        "x": -566.8063053109508,
+        "z": -2313.912667020457,
+        "height": 26.129605843689205,
+        "trunkHalfExtent": 1.0645362045291222,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33864,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -24582.48,
+        "x": -567.5439092637534,
+        "z": -1983.9254315543076,
+        "height": 18.550445603294065,
+        "trunkHalfExtent": 0.7992655961152924,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33865,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -24432.98,
+        "x": -565.1353145616013,
+        "z": -1970.1474913329002,
+        "height": 24.617136079571537,
+        "trunkHalfExtent": 1.0115997627850037,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33912,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -23645.05,
+        "x": -552.335159577633,
+        "z": -1911.6496086678599,
+        "height": 23.445846695176442,
+        "trunkHalfExtent": 0.9706046343311756,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 33961,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -23006.62,
+        "x": -547.9616879294917,
+        "z": -1851.6313824681301,
+        "height": 35.119067815641756,
+        "trunkHalfExtent": 1.3791673735474614,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 34040,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -19976.19,
+        "x": -530.0918009276211,
+        "z": -1592.10031995803,
+        "height": 24.051489190300344,
+        "trunkHalfExtent": 0.9918021216605122,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 34048,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -18780.19,
+        "x": -528.8150122654915,
+        "z": -1491.3361746446462,
+        "height": 26.467892196784305,
+        "trunkHalfExtent": 1.0763762268874508,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 34165,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -20044.83,
+        "x": -503.992133682259,
+        "z": -1607.6972328701813,
+        "height": 30.43092494474331,
+        "trunkHalfExtent": 1.2150823730660159,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 34221,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -20153.9,
+        "x": -493.0748635396303,
+        "z": -1617.1725077853553,
+        "height": 30.37112667045585,
+        "trunkHalfExtent": 1.2129894334659548,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 34222,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -20004.4,
+        "x": -489.76422143678064,
+        "z": -1610.3500859573833,
+        "height": 24.570804852868605,
+        "trunkHalfExtent": 1.0099781698504011,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 34232,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -18509.4,
+        "x": -487.11802331290164,
+        "z": -1475.5449421696467,
+        "height": 16.894385864696233,
+        "trunkHalfExtent": 0.7413035052643682,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 34539,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -26897.39,
+        "x": -393.1128859745222,
+        "z": -2230.0776419554895,
+        "height": 18.479839475850895,
+        "trunkHalfExtent": 0.7967943816547814,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 34633,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -26517.53,
+        "x": -370.45424693403766,
+        "z": -2210.016002213233,
+        "height": 33.97266668158227,
+        "trunkHalfExtent": 1.3390433338553793,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 34680,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -15903.03,
+        "x": -373.4458140338829,
+        "z": -1281.8387428957503,
+        "height": 34.09303950804315,
+        "trunkHalfExtent": 1.3432563827815103,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 34681,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -26327.6,
+        "x": -364.458724734548,
+        "z": -2195.6808783830784,
+        "height": 16.423938658249426,
+        "trunkHalfExtent": 0.7248378530387299,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 34682,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -26178.1,
+        "x": -354.1018836095245,
+        "z": -2179.418184866605,
+        "height": 36.98172299289581,
+        "trunkHalfExtent": 1.4443603047513534,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 34728,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -26137.67,
+        "x": -346.5397848529974,
+        "z": -2177.475681431184,
+        "height": 32.577672413109724,
+        "trunkHalfExtent": 1.2902185344588404,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 34769,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -25947.74,
+        "x": -339.28385980208986,
+        "z": -2165.3672857766796,
+        "height": 28.45095600660079,
+        "trunkHalfExtent": 1.1457834602310277,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 34770,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -25798.24,
+        "x": -331.7174610215434,
+        "z": -2151.4174565908543,
+        "height": 20.05092268919543,
+        "trunkHalfExtent": 0.8517822941218401,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 34810,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -25608.31,
+        "x": -323.695471467312,
+        "z": -2134.9538800647315,
+        "height": 31.38394611170952,
+        "trunkHalfExtent": 1.2484381139098333,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 34893,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -24929.45,
+        "x": -300.2980846554419,
+        "z": -2088.354290068033,
+        "height": 20.248068775101274,
+        "trunkHalfExtent": 0.8586824071285447,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 34894,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -24779.95,
+        "x": -289.31719238861115,
+        "z": -2078.8291889459797,
+        "height": 30.541080268732912,
+        "trunkHalfExtent": 1.218937809405652,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 34928,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -24440.52,
+        "x": -279.59048289913335,
+        "z": -2052.430541171925,
+        "height": 25.247179025878722,
+        "trunkHalfExtent": 1.0336512659057553,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 34960,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -24250.59,
+        "x": -271.61544148411485,
+        "z": -2034.4566236701212,
+        "height": 33.36303837259129,
+        "trunkHalfExtent": 1.3177063430406952,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 35035,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -16613.87,
+        "x": -219.10599650096265,
+        "z": -1391.0405690374319,
+        "height": 33.32301893165641,
+        "trunkHalfExtent": 1.3163056626079743,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 35045,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -16682.51,
+        "x": -196.97731915203622,
+        "z": -1400.043767804862,
+        "height": 29.10694897999565,
+        "trunkHalfExtent": 1.1687432142998477,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 35051,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -17090.58,
+        "x": -175.0973201187735,
+        "z": -1432.65853825878,
+        "height": 23.904997392459336,
+        "trunkHalfExtent": 0.9866749087360769,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 35052,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -16941.08,
+        "x": -177.42492136919464,
+        "z": -1429.718927809212,
+        "height": 28.798515049536945,
+        "trunkHalfExtent": 1.1579480267337932,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 35053,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -16791.58,
+        "x": -180.87112747305946,
+        "z": -1416.3672965401165,
+        "height": 19.982548789288558,
+        "trunkHalfExtent": 0.8493892076250996,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 35169,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -19987.5,
+        "x": -104.48190004324715,
+        "z": -1708.3762363535716,
+        "height": 33.800556085472635,
+        "trunkHalfExtent": 1.3330194629915422,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 35202,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -14904.5,
+        "x": -98.24899150461715,
+        "z": -1266.7206476772344,
+        "height": 18.357118978463404,
+        "trunkHalfExtent": 0.7924991642462192,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 35373,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -19037.85,
+        "x": -32.027725408552215,
+        "z": -1651.5218899441825,
+        "height": 28.825274704984622,
+        "trunkHalfExtent": 1.1588846146744618,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 35498,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -18767.06,
+        "x": -1.3782929369335761,
+        "z": -1628.5307989329158,
+        "height": 34.3089414422102,
+        "trunkHalfExtent": 1.350812950477357,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 35692,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -13821.34,
+        "x": 59.099917343235575,
+        "z": -1218.781855631969,
+        "height": 22.116211039619884,
+        "trunkHalfExtent": 0.924067386386696,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 35910,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -14762.54,
+        "x": 187.9781489543093,
+        "z": -1329.4219436395215,
+        "height": 26.723405616983655,
+        "trunkHalfExtent": 1.085319196594428,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 35935,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -18976.75,
+        "x": 219.41256313331542,
+        "z": -1712.0701348152943,
+        "height": 19.214147653510736,
+        "trunkHalfExtent": 0.8224951678728758,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 35936,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -18827.25,
+        "x": 227.47755233207135,
+        "z": -1702.5667178071453,
+        "height": 25.156345682800293,
+        "trunkHalfExtent": 1.0304720988980103,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 35960,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -18447.39,
+        "x": 256.93870853909175,
+        "z": -1666.3950307790947,
+        "height": 26.796467837655655,
+        "trunkHalfExtent": 1.087876374317948,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 35967,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -18406.96,
+        "x": 266.24250804059557,
+        "z": -1666.5771721775818,
+        "height": 22.296584664556576,
+        "trunkHalfExtent": 0.9303804632594803,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 35968,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -18257.46,
+        "x": 268.38925926170486,
+        "z": -1663.1869734090578,
+        "height": 32.72870165102722,
+        "trunkHalfExtent": 1.2955045577859527,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 35971,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -18217.03,
+        "x": 275.5729284713743,
+        "z": -1659.467542409082,
+        "height": 35.606583126296755,
+        "trunkHalfExtent": 1.3962304094203863,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 35973,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -14479.53,
+        "x": 281.9790341449261,
+        "z": -1337.3291277179305,
+        "height": 17.30109981505666,
+        "trunkHalfExtent": 0.7555384935269831,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      },
+      {
+        "candidateIndex": 35977,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -14358.24,
+        "x": 315.2288931619987,
+        "z": -1333.0316642367834,
+        "height": 22.867820221210422,
+        "trunkHalfExtent": 0.9503737077423648,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      }
+    ]
+  },
+  "filterMs": 946.0389910000013,
+  "totalMs": 32548.906804000002,
+  "rawUnchanged": true,
+  "retainedObjectsUnchanged": true,
+  "outsideScopeUnchanged": true,
+  "cases": [
+    {
+      "seed": -20322.12,
+      "tree": {
+        "x": -1836.5172773804516,
+        "z": -1272.61940741734,
+        "h": 29.259290515241446,
+        "conifer": false,
+        "seed": -20322.12
+      },
+      "removed": true,
+      "diagnostic": {
+        "candidateIndex": 22105,
+        "source": "generated",
+        "sourceIndex": null,
+        "seed": -20322.12,
+        "x": -1836.5172773804516,
+        "z": -1272.61940741734,
+        "height": 29.259290515241446,
+        "trunkHalfExtent": 1.1740751680334507,
+        "reason": "stanley-ordinary-asphalt-trunk-overlap"
+      }
+    },
+    {
+      "seed": -33864.61
+    }
+  ],
+  "newNorthboundRamp": {
+    "sourceIds": [
+      41998500,
+      877408904
+    ],
+    "sourceLengthM": 120.80897617192394,
+    "taggedTriangles": 339,
+    "actualOriginalTrunkOverlaps": 0,
+    "retainedTrunkOverlaps": 0,
+    "exclusions": []
+  },
+  "newNorthboundExit": {
+    "sourceIds": [
+      363693717,
+      156891517,
+      604336388,
+      1299818249,
+      116061634,
+      1299818248
+    ],
+    "pavedLengthM": 132.3865556800381,
+    "actualRenderedAsphaltTriangles": 396,
+    "retainedTrunkOverlaps": 0,
+    "exclusions": []
+  },
+  "newWest": {
+    "sourceIds": [
+      41998502,
+      877408900,
+      256879277
+    ],
+    "sourceLengthM": 294.75275637863774,
+    "verticalProfile": {
+      "kind": "source-chainage Hermite to the unchanged upper endpoint plane",
+      "startM": 154.75275637863774,
+      "endM": 274.75275637863774,
+      "maxCenterGrade": 0.1297927140076598
+    },
+    "taggedTriangles": 1007,
+    "actualOriginalTrunkOverlaps": 0,
+    "retainedTrunkOverlaps": 0,
+    "exclusions": []
+  },
+  "sourceHashes": [
+    {
+      "file": "lib/city/assets/cockpits.ts",
+      "bytes": 21892,
+      "sha256": "b8aed3f6379dfdc9a5a1115382e36af3b17e7183a29dd1e7458a10ac4d2465fc"
+    },
+    {
+      "file": "lib/city/assets/roadster.ts",
+      "bytes": 13761,
+      "sha256": "e3e25bba28d32df58cbd1b26c66fb5b7657eb04bd4ab9688156d770eb58436f0"
+    },
+    {
+      "file": "lib/city/assets/walker.ts",
+      "bytes": 17246,
+      "sha256": "b99690de4da8f38fb925685d4af2fce64fb6388d7402381d1dfee4efcc6d48e9"
+    },
+    {
+      "file": "lib/city/beach-ground.ts",
+      "bytes": 6009,
+      "sha256": "bc7184a1b222ce138e3b9bad11263676bd9166dd06773b5bc91ecc9b5e5c48d7"
+    },
+    {
+      "file": "lib/city/beach-surface.ts",
+      "bytes": 9450,
+      "sha256": "bd0f4c31733e1bef970a520f971532e6a53dc655629df54f5b92ffa3eb8d65c7"
+    },
+    {
+      "file": "lib/city/boat-controller.ts",
+      "bytes": 5330,
+      "sha256": "e64b57cee7ca233ede9fcdfc277d46aff3a98269d88b68052365e2ba0aff4d33"
+    },
+    {
+      "file": "lib/city/boat-physics.ts",
+      "bytes": 2590,
+      "sha256": "6ce2413d9e082e1d17f0d40e1bc67ef48056b3240adb99b1b6fe25a62b6f2954"
+    },
+    {
+      "file": "lib/city/bridges.ts",
+      "bytes": 6746,
+      "sha256": "6d78e7f5257551886e5bf467d3f36bee864f3a9171c89967883740d862860d66"
+    },
+    {
+      "file": "lib/city/building-roof.ts",
+      "bytes": 5644,
+      "sha256": "9ff6778b9bb72b7f4959ed45ffd177b9d142d5361cf5dd57d357b3470101b530"
+    },
+    {
+      "file": "lib/city/causeway-city-cuts.json",
+      "bytes": 7119,
+      "sha256": "3c8dc38a1e80a3c8266421b951104d1f3b45300e9757ac1b3ff5f4e9e6f89cc3"
+    },
+    {
+      "file": "lib/city/causeway-geometry.ts",
+      "bytes": 34004,
+      "sha256": "ad5013336cc26d0233e34eb94c2508c14a19d1a29e42dbeab374b0b371598624"
+    },
+    {
+      "file": "lib/city/causeway-meshes.ts",
+      "bytes": 19389,
+      "sha256": "9c1464ee86ccf970c49f1e0c1bc15ed5bde729ae72ff26ee6cf7c6328491e549"
+    },
+    {
+      "file": "lib/city/causeway-no-fill.json",
+      "bytes": 4730,
+      "sha256": "176ee3db09189bc3d820d2e4fbe90bcb0fde7fc091cc9841dc075d5eb9d8b6c1"
+    },
+    {
+      "file": "lib/city/causeway-profile.ts",
+      "bytes": 15997,
+      "sha256": "ed35fd3b9477254b685e3138114da71cf90405df683d0678c391224695759532"
+    },
+    {
+      "file": "lib/city/causeway-walkways.ts",
+      "bytes": 2728,
+      "sha256": "7cdb7b5e65f8acb358c12f762491a16b3050fa7a5ec594559bb0821ba62faa81"
+    },
+    {
+      "file": "lib/city/causeway.ts",
+      "bytes": 7390,
+      "sha256": "d19303c0b6597f7cbeb26877c9f06c8a3b1e19febe09fbe1af9659c4f2f5c74f"
+    },
+    {
+      "file": "lib/city/citizen.ts",
+      "bytes": 10748,
+      "sha256": "e16100c4a6ad929065425588351d832fbfdc51e8b104aae75a5af7e362a10d65"
+    },
+    {
+      "file": "lib/city/city-surface-material.ts",
+      "bytes": 4164,
+      "sha256": "07ea4d8c25926f703efa575e455efa7145bddda8dd8b1270d8e55149262f969e"
+    },
+    {
+      "file": "lib/city/driver-camera.ts",
+      "bytes": 1318,
+      "sha256": "911765020382258030d2dc8f386cfc7dc1f720aab5d88bbf4c04ef93beb903d0"
+    },
+    {
+      "file": "lib/city/driving-steering.ts",
+      "bytes": 345,
+      "sha256": "a58842cdcc28c64421ef53058bd3e6077f5ab7ebea55eb633ffe2616f01dfe8e"
+    },
+    {
+      "file": "lib/city/engine.ts",
+      "bytes": 74868,
+      "sha256": "5ff2b653f03e4f9375367262aecc4289ba1a2f7bb941c19ed4b008365811ac72"
+    },
+    {
+      "file": "lib/city/environment.ts",
+      "bytes": 28128,
+      "sha256": "492e2e9a02a91fdaf3fcb2448e3e774949ba5a4d0382e7ea51cf93dd983001c0"
+    },
+    {
+      "file": "lib/city/geo.ts",
+      "bytes": 2769,
+      "sha256": "60c01edb97732574f980770a2f0499f2eb9021a0d8075eb272ea18785570494e"
+    },
+    {
+      "file": "lib/city/ground-surface.ts",
+      "bytes": 10472,
+      "sha256": "7b50984a4f16b808ed21248cf49cf99e7c3d4f92baf6fadf72f62e873e9eea06"
+    },
+    {
+      "file": "lib/city/harbour-models.ts",
+      "bytes": 36176,
+      "sha256": "3d494df8a5b214327dcdfb4facb1fe79aca27d22a410bf39a8ce11d91e26a68d"
+    },
+    {
+      "file": "lib/city/heritage-paving-material.ts",
+      "bytes": 1753,
+      "sha256": "0808cbc463d1718b14c4f85b61debaece6338e7fe4b6830418df2398bb945ce7"
+    },
+    {
+      "file": "lib/city/heritage-paving.ts",
+      "bytes": 10298,
+      "sha256": "23ad05162e4aa83f37c63a4cc64f1c1af44e1b0905ce6b0b4ff53a476ae91cac"
+    },
+    {
+      "file": "lib/city/landmark-footprints.json",
+      "bytes": 5725,
+      "sha256": "cf44d69c0411de2488bc86fa5b21ed48eddadbad4a16fcd3a7a4b06ead01b74b"
+    },
+    {
+      "file": "lib/city/lions-railings.ts",
+      "bytes": 5041,
+      "sha256": "87a94bd5d8f824b874ad9e34456a9cf56abc08815ab8b64f7420584d9af77716"
+    },
+    {
+      "file": "lib/city/main-cross-section-data.json",
+      "bytes": 6809,
+      "sha256": "23be5e7cd2c839f02d804f3a10b9c288d9a4590b2124b88b707628bf1a4c1bd0"
+    },
+    {
+      "file": "lib/city/main-cross-section.ts",
+      "bytes": 4604,
+      "sha256": "5de0e94002db2fe4d1557adbc806e71d9c20004a8ebd7c24d2c30b3502450f5c"
+    },
+    {
+      "file": "lib/city/main-road-geometry.ts",
+      "bytes": 13327,
+      "sha256": "ae985d665a924bdfb0096eaa7c8000bb604531541163422960221ee2e7565e8f"
+    },
+    {
+      "file": "lib/city/material-library.ts",
+      "bytes": 10168,
+      "sha256": "009ea28f25e8d7e315f27ae4dc7965024d15cac92759c3456b0d0d3c035e3768"
+    },
+    {
+      "file": "lib/city/navigation.ts",
+      "bytes": 53623,
+      "sha256": "76f2f42c9a4e2e49fdd9ddcab6d55049ad4f16a54d9ca5a0fbc1a0792f0ead1c"
+    },
+    {
+      "file": "lib/city/north-walkways-source.json",
+      "bytes": 31469,
+      "sha256": "7cbfbe023ec94f43611d3b2fc8ca6587e92aae7dd69eb5eb3e3107ad08d22f18"
+    },
+    {
+      "file": "lib/city/numbered-blocks.ts",
+      "bytes": 6195,
+      "sha256": "354b46c50c9d794d4058caa9397273884cb6ef647482fe9d4aa37e8a95596b9c"
+    },
+    {
+      "file": "lib/city/ordered-bounds.ts",
+      "bytes": 2487,
+      "sha256": "e8a850330722f32435ccec33f4059743945bf90fa31ef36b3fa6d1b827a505c6"
+    },
+    {
+      "file": "lib/city/park-paths.ts",
+      "bytes": 1364,
+      "sha256": "b7f24b99b0faa939258bdb9e3e33650309ef8b84d8e44e6a396a56e5001e9311"
+    },
+    {
+      "file": "lib/city/park-tree-road-clearance.ts",
+      "bytes": 15248,
+      "sha256": "78762f921387a37067e6d99b890aa7f46423a88e8fb2c9454f929f5692ab90b5"
+    },
+    {
+      "file": "lib/city/pavement.ts",
+      "bytes": 17334,
+      "sha256": "bda53bbfd8ac68252ae85ff322a5258e10f83af8ec2ab3f513cf5227f55c1e10"
+    },
+    {
+      "file": "lib/city/placement-geometry.ts",
+      "bytes": 4670,
+      "sha256": "54a9cf85a9dc1a1cce8d7bd0ba46da5419550893d345b70fd273d1e6daaa682d"
+    },
+    {
+      "file": "lib/city/prospect-overpass.ts",
+      "bytes": 28634,
+      "sha256": "ff53fb0f5e9a47a6571173d695823b204ae3a179f50cb27da8ff3742855a3961"
+    },
+    {
+      "file": "lib/city/prospect-point-source.json",
+      "bytes": 15013,
+      "sha256": "8c865a7cc648a2f0c52a0204002b74fdca8dbd71deb7a9c00c519c9cc83eb6b3"
+    },
+    {
+      "file": "lib/city/region-rules.ts",
+      "bytes": 5085,
+      "sha256": "76ee3956e6f8c2c2f14f3e31f62ab83f1f7d5167fae8b8ba3b0ef465dde83617"
+    },
+    {
+      "file": "lib/city/road-graph.ts",
+      "bytes": 22003,
+      "sha256": "ee710ab807b3be51be0db017e8dc1c0bbe68fdaf9608e5c3115fd2e733205cfa"
+    },
+    {
+      "file": "lib/city/road-surfaces.ts",
+      "bytes": 4759,
+      "sha256": "ccd98e61dbcc321d47d5c1e6e0826431f4c5d04fa34c8b434d0984b24e831a4d"
+    },
+    {
+      "file": "lib/city/road-trim.ts",
+      "bytes": 1546,
+      "sha256": "5023111cf6fbcc3798f5e78fcdf7467becd6e7e32a986a8ce625272325cb6671"
+    },
+    {
+      "file": "lib/city/south-profile-data.json",
+      "bytes": 81546,
+      "sha256": "d83c5a70096d873cb87049ee1632ef2ce82a44d953566cd77c72e6148885a901"
+    },
+    {
+      "file": "lib/city/south-profile.ts",
+      "bytes": 8614,
+      "sha256": "ae2faee2934d62e8d03ed2799479b1acf28ca00b1108cac4700254cdd04927b8"
+    },
+    {
+      "file": "lib/city/stanley-drive-corrections-source.json",
+      "bytes": 12943,
+      "sha256": "a6090210da5476f413979da56233b53d39608c7aca29eb5157c050e7a946c196"
+    },
+    {
+      "file": "lib/city/stanley-drive-corrections.ts",
+      "bytes": 9421,
+      "sha256": "3d17676a4734871a446ad455da4bd3b709a7c842f3684d56d3c0a757c7623ce6"
+    },
+    {
+      "file": "lib/city/stanley-northbound-crossing-source.json",
+      "bytes": 4692,
+      "sha256": "abf2ae56f959408cb0bfdf068927812ebaa0dd70f8aee53423cbf97f1b520afd"
+    },
+    {
+      "file": "lib/city/stanley-northbound-crossing.ts",
+      "bytes": 9100,
+      "sha256": "e45280fb82ae9dcb9f4601f2adb491b913b86d537ad25cd2474c2961bcbea44a"
+    },
+    {
+      "file": "lib/city/stanley-northbound-exit-source.json",
+      "bytes": 6478,
+      "sha256": "2798e73473800c4a4fd33d59f758194680c7a6c89d02ead2985886d0cdb77ce5"
+    },
+    {
+      "file": "lib/city/stanley-northbound-exit.ts",
+      "bytes": 6692,
+      "sha256": "0e3a8524669d8fd5168ba6757ceaedaed164c526ca390ee2e106e241dbc11b41"
+    },
+    {
+      "file": "lib/city/stanley-northbound-ramp-source.json",
+      "bytes": 17810,
+      "sha256": "56737a3ff03cc8809bbb4f15198deb3045243697c0df222a1f9417d1b4d68875"
+    },
+    {
+      "file": "lib/city/stanley-northbound-ramp.ts",
+      "bytes": 15462,
+      "sha256": "64079ffc1c9f8c5e8efb602029fda45a9bbec9070dd6fbca666f54c2ca34776e"
+    },
+    {
+      "file": "lib/city/stanley-road-access-source.json",
+      "bytes": 45289,
+      "sha256": "ec6f5a4a4da76f31cb32380f8749d8349021fd2f35057ee0e9e161c388887c59"
+    },
+    {
+      "file": "lib/city/stanley-road-access.ts",
+      "bytes": 1824,
+      "sha256": "5d674f87e997759d9540133c0101be09999a0d2b6368a7d4df41d9d965eefd25"
+    },
+    {
+      "file": "lib/city/stanley-south-ramp-source.json",
+      "bytes": 4713,
+      "sha256": "59697e5c20e291c7523c502117b44112b739cfbf2c6b52d1d8ae425cd93e25ad"
+    },
+    {
+      "file": "lib/city/stanley-south-ramp.ts",
+      "bytes": 20983,
+      "sha256": "2e52fd3e6cea94f8db790aea6d49b3deebd270c64a7921de721a685237d6737b"
+    },
+    {
+      "file": "lib/city/stanley-west-ramp-source.json",
+      "bytes": 8243,
+      "sha256": "c193bc3bce9c093610102e43628ab9a5a98e0e3ffb59e8a05eb42ab825851c6e"
+    },
+    {
+      "file": "lib/city/stanley-west-ramp.ts",
+      "bytes": 15018,
+      "sha256": "bf0f63d672f2aad4b3dbe5d9d070ae0bc5a2eb80b981820c2efa574d7d8ca39f"
+    },
+    {
+      "file": "lib/city/street-curb-extensions.json",
+      "bytes": 1317,
+      "sha256": "4e721370f8e9fa79c1d71be7996634566afa295ab69640164246d1cd776ffe90"
+    },
+    {
+      "file": "lib/city/street-furniture-placement.ts",
+      "bytes": 13806,
+      "sha256": "d54d6662c2a728411b055137536e27b94fd19aaa12dbe5c2089716ae4313ac27"
+    },
+    {
+      "file": "lib/city/street-layout.ts",
+      "bytes": 5074,
+      "sha256": "d99059f249075f4657c7a235a89e3cf83214d702c53ab40d7c8bddd7b86e9af5"
+    },
+    {
+      "file": "lib/city/street-meshes.ts",
+      "bytes": 2387,
+      "sha256": "ba9dbda647e36067d1ec60ade069fdad87e0b78e366c0848a7ab5f490dfba13b"
+    },
+    {
+      "file": "lib/city/surface-meshing.ts",
+      "bytes": 4386,
+      "sha256": "0ab0e7a06f84eb7411d5063de55286172b4bddbb9283089e541b994c71ec69a7"
+    },
+    {
+      "file": "lib/city/surface-reachability.ts",
+      "bytes": 8721,
+      "sha256": "8609f5670bfeca50b0c8054df75b70458cdb829ec94e8e5e7f8aca9d53298062"
+    },
+    {
+      "file": "lib/city/terrain-draped-path.ts",
+      "bytes": 5696,
+      "sha256": "c7c36b46a297d7d5a54f19af30576a461788637014477046f18e8f04e07b44c6"
+    },
+    {
+      "file": "lib/city/tesla-city-world.ts",
+      "bytes": 71248,
+      "sha256": "cbdf0d471c77e759ff3c164300e9594fa0c16b92c3c0d9fd92716ca0a549abb2"
+    },
+    {
+      "file": "lib/city/tesla-roof-details-world.ts",
+      "bytes": 11274,
+      "sha256": "af37a6f6432b64b57eb112ba7ad0535893f9e07b1fc4b1d7f9237e623391336c"
+    },
+    {
+      "file": "lib/city/tesla-tyre-support.ts",
+      "bytes": 6197,
+      "sha256": "902ede5aae7b9b4940755d0eb8706a62545486c37f1b3d2785de4dbb7d22bb90"
+    },
+    {
+      "file": "lib/city/tesla-world.ts",
+      "bytes": 86692,
+      "sha256": "e87013709fac383fac004b3f704c47fcad4b93c5aa1dafff434197f2e26c5d82"
+    },
+    {
+      "file": "lib/city/touch-input.ts",
+      "bytes": 609,
+      "sha256": "f8cd660e1bb3d944faab2c6fcdad7f9aa59cc479a24ccca5bd2091c91303b4b1"
+    },
+    {
+      "file": "lib/city/traffic-stop-state.ts",
+      "bytes": 2097,
+      "sha256": "179661fc4da282933c89fdc79eeb2d58b1825c39b1adebd84e3a931a1062f240"
+    },
+    {
+      "file": "lib/city/traffic-stop.ts",
+      "bytes": 7717,
+      "sha256": "e9717caf7f082d1edca3e0d5d35580281e55a005df20a31c86b9e34fb2975602"
+    },
+    {
+      "file": "lib/city/travel-camera.ts",
+      "bytes": 1360,
+      "sha256": "b37cab09e04a356de2dce1fc81e043fe6d4da43a651927ea48eaacada7e9a5d8"
+    },
+    {
+      "file": "lib/city/travel-surfaces.ts",
+      "bytes": 4511,
+      "sha256": "103d03484c129540db1a4f6101795fe5b8bd42cd3dc764f57ce4f7333a839a39"
+    },
+    {
+      "file": "lib/city/tree-road-clearance.ts",
+      "bytes": 8789,
+      "sha256": "7001a7431153894e291ddceff0ce080355a9c566349db18ff72daabc2d1a14d5"
+    },
+    {
+      "file": "lib/city/upper-walkway-profile.ts",
+      "bytes": 17545,
+      "sha256": "01f18b04edd7de6915a524fb91d23c138dcfdc1951c23ae71d9930de8c7b3920"
+    },
+    {
+      "file": "lib/city/vehicle-condition.ts",
+      "bytes": 4928,
+      "sha256": "d09b89aadac03874620a0a63f32211017128b43aa4ccf19b6d0a7e1b4549a425"
+    },
+    {
+      "file": "lib/city/vehicle-damage-visuals.ts",
+      "bytes": 30929,
+      "sha256": "bac1323b18ba049fd803d271f307b06cafbe4e9e85dea9a6cae28c6cee526699"
+    },
+    {
+      "file": "lib/city/vehicle-impact-world.ts",
+      "bytes": 7912,
+      "sha256": "ac94e0a064dfe46fb42ab504c1c969e5b69b8b1661c4036d7fe9ea3085445d64"
+    },
+    {
+      "file": "lib/city/vehicle-impact.ts",
+      "bytes": 12076,
+      "sha256": "aff9582abcbea6d22d98a804a587bb3544c0e18c2a01cb4219aa31e57d72239a"
+    },
+    {
+      "file": "lib/city/wake.ts",
+      "bytes": 1612,
+      "sha256": "5690d75d6779abb5af036383833daac3b3a0079e760cf2f3d7ec5a965df95f02"
+    },
+    {
+      "file": "lib/city/walkway-attachments.ts",
+      "bytes": 3677,
+      "sha256": "463d4713964e056dfdf611146dcd411413d0c1d8bc47507ca48e79e2f2eeb1fc"
+    },
+    {
+      "file": "lib/city/walkway-ground-connectors.json",
+      "bytes": 12536,
+      "sha256": "f3ca7279ddfe16cd3227f6bdd383cbb2153b0b89fda211cf7fff0e65abc767bd"
+    },
+    {
+      "file": "lib/city/water-world.ts",
+      "bytes": 11777,
+      "sha256": "d816c253b44be7825eb5f1f2c6e714214da9cc228e5da30f70350fbde6023cc5"
+    },
+    {
+      "file": "lib/city/west-walk-supports.ts",
+      "bytes": 11124,
+      "sha256": "00842aa90d757a128cfd4473fb5fa19453a6f36760df9427e8e28d65850fc3f2"
+    },
+    {
+      "file": "public/data/beach-coast.json",
+      "bytes": 4966687,
+      "sha256": "47b787f94717fd489ddcdf0c91fc30a81eee65cce7d4fa6e2eea9763b6023459"
+    },
+    {
+      "file": "public/data/bridges.json",
+      "bytes": 62350,
+      "sha256": "52fcf8c310ecedff1782db2c1274af3f032905cdaf461b4a5c85ab0aa6d4faef"
+    },
+    {
+      "file": "public/data/buildings.geojson",
+      "bytes": 3840048,
+      "sha256": "57cf77f2f7afbceeb3ea4b7dcb87c33d7f56a6df57c33306792503f1dba538ec"
+    },
+    {
+      "file": "public/data/context.geojson",
+      "bytes": 220187,
+      "sha256": "8490953cc264cd3090811fd5cba11cf23fb9d88434f58c99d0f100014fa86ec1"
+    },
+    {
+      "file": "public/data/land.geojson",
+      "bytes": 299940,
+      "sha256": "4329b72163668afeee2289160ef00dc9d61c2857d1917447eceaa243c0c30450"
+    },
+    {
+      "file": "public/data/parks.geojson",
+      "bytes": 87044,
+      "sha256": "3601c392311b2377a98cb072dd6143746561e25f4c1a5c6b9c6a0659d4bc75b3"
+    },
+    {
+      "file": "public/data/paths.geojson",
+      "bytes": 320138,
+      "sha256": "daf512c6eaee772df831462f3f0418f848d3737317b7219db51754ce0fae36b9"
+    },
+    {
+      "file": "public/data/roads.geojson",
+      "bytes": 773687,
+      "sha256": "77543c74f4e567a65db14c8d33f9d6250d0f40bdd5f99031c1267aa8dc3373fb"
+    },
+    {
+      "file": "public/data/terrain.json",
+      "bytes": 303256,
+      "sha256": "c52c4ae53c3f76ae5cdfdb32765b53d7c61fec4f7d9db03b02c7f7d722853908"
+    },
+    {
+      "file": "public/data/trees.json",
+      "bytes": 1070134,
+      "sha256": "2ba858b2afa255bef8ad7f6c7aade750151d0990ad492c68e2c2915a92e3267d"
+    },
+    {
+      "file": "public/materials/city/manifest.json",
+      "bytes": 3288,
+      "sha256": "0a2ba06267b2d172908e89a5ed3cc9b514f0ca398435c9c3cc31d03e9e5861f4"
+    }
+  ],
+  "newProspect": {
+    "rampAudit": {
+      "actualRenderedAsphaltTriangles": 144,
+      "retainedTrunkOverlaps": 0,
+      "exclusions": []
+    },
+    "sourceIds": [
+      1585,
+      1599,
+      1778,
+      1812,
+      1819
+    ],
+    "tagMeshes": 1,
+    "deckTop": 70.67247683874268,
+    "actualTaggedOverlapCount": 0,
+    "taggedTriangles": 808,
+    "heightTests": 0,
+    "syntheticFutureMunicipalCase": {
+      "short": {
+        "x": -1059.817626953125,
+        "z": -2790.2872721354165,
+        "h": 5,
+        "seed": 20545
+      },
+      "tall": {
+        "x": -1059.817626953125,
+        "z": -2790.2872721354165,
+        "h": 17.127365177832175,
+        "seed": 20546
+      },
+      "baseY": 55.545112544335794,
+      "roadY": 70.67247772216797,
+      "shortRetained": true,
+      "tallExcluded": {
+        "candidateIndex": 1,
+        "source": "municipal",
+        "sourceIndex": 20546,
+        "seed": 20546,
+        "x": -1059.817626953125,
+        "z": -2790.2872721354165,
+        "height": 17.127365177832175,
+        "trunkHalfExtent": 0.7494577812241262,
+        "reason": "stanley-prospect-asphalt-trunk-overlap",
+        "groundY": 55.545112544335794,
+        "roadHeightRange": [
+          70.67247772216797,
+          70.67247772216797
+        ]
+      }
+    }
+  },
+  "retainedTreeRuntime": {
+    "correctedMainAndBranchReports": [
+      {
+        "route": "stanley-verified-retail-curve",
+        "sourceIds": [
+          1593,
+          1834
+        ],
+        "reverse": false,
+        "kmh": 50,
+        "lengthM": 210.5294985390363,
+        "moves": 524,
+        "damage": 0,
+        "retainedTreeColliders": 35535
+      },
+      {
+        "route": "stanley-verified-retail-curve",
+        "sourceIds": [
+          1593,
+          1834
+        ],
+        "reverse": false,
+        "kmh": 120,
+        "lengthM": 210.5294985390363,
+        "moves": 232,
+        "damage": 0,
+        "retainedTreeColliders": 35535
+      },
+      {
+        "route": "stanley-verified-retail-curve",
+        "sourceIds": [
+          1593,
+          1834
+        ],
+        "reverse": false,
+        "kmh": 205,
+        "lengthM": 210.5294985390363,
+        "moves": 204,
+        "damage": 0,
+        "retainedTreeColliders": 35535
+      },
+      {
+        "route": "stanley-verified-retail-curve",
+        "sourceIds": [
+          1593,
+          1834
+        ],
+        "reverse": true,
+        "kmh": 50,
+        "lengthM": 210.5294985390363,
+        "moves": 524,
+        "damage": 0,
+        "retainedTreeColliders": 35535
+      },
+      {
+        "route": "stanley-verified-retail-curve",
+        "sourceIds": [
+          1593,
+          1834
+        ],
+        "reverse": true,
+        "kmh": 120,
+        "lengthM": 210.5294985390363,
+        "moves": 232,
+        "damage": 0,
+        "retainedTreeColliders": 35535
+      },
+      {
+        "route": "stanley-verified-retail-curve",
+        "sourceIds": [
+          1593,
+          1834
+        ],
+        "reverse": true,
+        "kmh": 205,
+        "lengthM": 210.5294985390363,
+        "moves": 204,
+        "damage": 0,
+        "retainedTreeColliders": 35535
+      },
+      {
+        "route": "stanley-retained-parking-junction",
+        "sourceIds": [
+          1786,
+          1834
+        ],
+        "reverse": false,
+        "kmh": 50,
+        "lengthM": 98.2965729077087,
+        "moves": 241,
+        "damage": 0,
+        "retainedTreeColliders": 35535
+      },
+      {
+        "route": "stanley-retained-parking-junction",
+        "sourceIds": [
+          1786,
+          1834
+        ],
+        "reverse": false,
+        "kmh": 120,
+        "lengthM": 98.2965729077087,
+        "moves": 112,
+        "damage": 0,
+        "retainedTreeColliders": 35535
+      },
+      {
+        "route": "stanley-retained-parking-junction",
+        "sourceIds": [
+          1786,
+          1834
+        ],
+        "reverse": false,
+        "kmh": 205,
+        "lengthM": 98.2965729077087,
+        "moves": 90,
+        "damage": 0,
+        "retainedTreeColliders": 35535
+      },
+      {
+        "route": "stanley-retained-parking-junction",
+        "sourceIds": [
+          1786,
+          1834
+        ],
+        "reverse": true,
+        "kmh": 50,
+        "lengthM": 98.29657290770872,
+        "moves": 241,
+        "damage": 0,
+        "retainedTreeColliders": 35535
+      },
+      {
+        "route": "stanley-retained-parking-junction",
+        "sourceIds": [
+          1786,
+          1834
+        ],
+        "reverse": true,
+        "kmh": 120,
+        "lengthM": 98.29657290770872,
+        "moves": 112,
+        "damage": 0,
+        "retainedTreeColliders": 35535
+      },
+      {
+        "route": "stanley-retained-parking-junction",
+        "sourceIds": [
+          1786,
+          1834
+        ],
+        "reverse": true,
+        "kmh": 205,
+        "lengthM": 98.29657290770872,
+        "moves": 90,
+        "damage": 0,
+        "retainedTreeColliders": 35535
+      }
+    ],
+    "offRoadRetainedTreeNegative": {
+      "sourceId": "tree:1549",
+      "surfaceId": "tree:1549:trunk:side:2",
+      "targetSeed": 1574,
+      "position": [
+        -2104.9554676316575,
+        18.109048563812735,
+        -1706.31295999963
+      ],
+      "treeRadiusM": 0.9065000000000001,
+      "physicalCollision": true
+    },
+    "allCompleted": true
+  }
+}

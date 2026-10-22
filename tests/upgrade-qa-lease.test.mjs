@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { getEventListeners } from 'node:events';
 import * as THREE from 'three';
 import { cityModule } from './helpers/city-modules.mjs';
 const { installUpgradeQA } = await import(cityModule('upgrade-qa'));
@@ -64,18 +65,38 @@ async function withDOM(action) {
     hidden: false,
     createElement: (tag) => new Element(tag),
   });
+  const window = new EventTarget();
+  const intervals = new Set();
+  const setInterval = globalThis.setInterval;
+  const clearInterval = globalThis.clearInterval;
   replace('document', document);
+  replace('window', window);
+  replace('setInterval', (...args) => {
+    const timer = setInterval(...args);
+    intervals.add(timer);
+    return timer;
+  });
+  replace('clearInterval', (timer) => {
+    intervals.delete(timer);
+    clearInterval(timer);
+  });
   replace('innerWidth', 800);
   replace('innerHeight', 600);
   replace('navigator', { userAgent: 'test' });
   replace('fetch', async () => ({ ok: true }));
   try {
-    await action({ document, replace });
+    await action({ document, window, intervals, replace });
   } finally {
+    window.dispatchEvent(new Event('pagehide'));
+    const danglingIntervals = intervals.size;
+    for (const timer of intervals) clearInterval(timer);
     for (const [name, descriptor] of original) {
       if (descriptor) Object.defineProperty(globalThis, name, descriptor);
       else delete globalThis[name];
     }
+    assert.equal(danglingIntervals, 0, 'pagehide disposes QA observer intervals');
+    assert.equal(getEventListeners(window, 'keydown').length, 0);
+    assert.equal(getEventListeners(window, 'keyup').length, 0);
   }
 }
 const click = (parent, name) => {
@@ -292,7 +313,7 @@ test('integrated bus checkpoint saves live runtime/render data with a unique nam
 });
 
 test('the local QA panel can hide for native controls and reopen without invoking simulation APIs', async () => {
-  await withDOM(async ({ document }) => {
+  await withDOM(async ({ document, window, intervals }) => {
     let inputCalls = 0;
     const e = {
       data: {},
@@ -315,6 +336,9 @@ test('the local QA panel can hide for native controls and reopen without invokin
       },
     };
     installVisualQA(e);
+    assert.equal(intervals.size, 1, 'the native input observer owns one bounded sampler');
+    assert.equal(getEventListeners(window, 'keydown').length, 1);
+    assert.equal(getEventListeners(window, 'keyup').length, 1);
     const wrapper = document.body.children[0],
       panel = wrapper.children.find(
         (element) => element.id === 'visual-qa-panel',

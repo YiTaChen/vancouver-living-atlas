@@ -1,0 +1,114 @@
+{
+  "revision": "9c95d913ba8b645d342b999bff23c5a18b825195",
+  "sourceFingerprint": "9c75e5dd821feceb11016476bf113c304074a7dee1e0852215a78ea637d07dce",
+  "kind": "vehicle-impact-webgl-v1",
+  "burst": false,
+  "entry": {
+    "mode": "drive",
+    "obstacle": {
+      "id": "lamp:183",
+      "kind": "lamp",
+      "diameterM": 0.16,
+      "breakaway": true,
+      "position": [
+        -1979.2840530667397,
+        6.1407605710473785,
+        1483.562108476917
+      ],
+      "heightM": 8,
+      "radiusM": 0.13
+    },
+    "x": -1979.2840530667397,
+    "y": 5.573860292203842,
+    "z": 1471.562108476917,
+    "yaw": 0
+  },
+  "mode": "drive",
+  "viewport": [
+    1280,
+    720
+  ],
+  "quality": "high",
+  "qualityMode": "manual",
+  "valid": true,
+  "damage": {
+    "zones": {
+      "front": 0.028186987381122464,
+      "rear": 0,
+      "left": 0,
+      "right": 0,
+      "roof": 0
+    },
+    "scratches": {
+      "front": 0.01907126376051771,
+      "rear": 0,
+      "left": 0,
+      "right": 0,
+      "roof": 0
+    },
+    "overall": 0.028186987381122464,
+    "severity": 0.028186987381122464,
+    "revision": 4,
+    "lastHit": {
+      "zone": "front",
+      "localPoint": [
+        -0.1053236732352616,
+        0.0034230193801469966,
+        2.4
+      ],
+      "amount": 0.023783733821923177,
+      "scrape": 0.013912166872805016
+    },
+    "recentEventIds": [
+      "lamp:183:1",
+      "lamp:183:2"
+    ]
+  },
+  "visuals": {
+    "marks": 2,
+    "capacity": 16,
+    "ownedMeshes": 1,
+    "maximumOwnedMeshes": 18,
+    "refinedVertices": 0,
+    "refinedTriangles": 0,
+    "maximumRefinedVertices": 6144,
+    "maximumRefinedTriangles": 2048,
+    "maximumRefinedMeshVertices": 1152,
+    "maximumRefinedMeshTriangles": 384,
+    "refinementHistoryEntries": 2,
+    "maximumRefinementHistoryEntries": 288,
+    "dentedVertices": 243,
+    "triangles": 111,
+    "maximumTriangles": 4096,
+    "draws": 1,
+    "textures": 0,
+    "rebuilds": 3,
+    "disposed": false
+  },
+  "broken": [
+    "tree:17263",
+    "lamp:183"
+  ],
+  "feedback": {
+    "capacity": 128,
+    "budget": 128,
+    "active": 0,
+    "drawCalls": 0,
+    "bufferBytes": 7680,
+    "audioEnabled": true,
+    "audioAllocated": true,
+    "voices": 0,
+    "disposed": false
+  },
+  "drive": {
+    "position": [
+      -1979.2840530667397,
+      7.145025623557437,
+      1503.640447627411
+    ],
+    "speed": 0.025713188932909182,
+    "yaw": 0
+  },
+  "calls": 273,
+  "triangles": 2146792
+}

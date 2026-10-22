@@ -357,6 +357,79 @@ test('moving away cancels further pool growth and returns every replacement to i
   assert.equal(f.d.hidden.size, 0);
 });
 
+test('session-broken trees hide every far slot before assets load and never restore through quality changes', () => {
+  const f = setup(), broken = new Set(['tree:3']);
+  f.e.settings.quality = 'balanced';
+  f.e.vehicleImpacts = { revision: 1, isBroken: (id) => broken.has(id) };
+  const extra = new THREE.InstancedMesh(new THREE.BoxGeometry(), new THREE.MeshBasicMaterial(), 1),
+    original = new THREE.Matrix4().makeTranslation(1, 17, 2);
+  extra.setMatrixAt(0, original);
+  f.trees[3].slots.push({ mesh: extra, index: 0, matrix: original.clone() });
+  assert.equal(f.d.syncBroken(), true);
+  assert.equal(f.d.syncBroken(), false);
+  assert.equal(globalThis.__treeLoads.length, 0);
+  const zero = new THREE.Matrix4().makeScale(0, 0, 0), matrix = new THREE.Matrix4();
+  for (const slot of f.trees[3].slots) {
+    slot.mesh.getMatrixAt(slot.index, matrix);
+    assert.deepEqual(matrix.elements, zero.elements);
+  }
+  f.base.getMatrixAt(4, matrix);
+  assert.deepEqual(matrix.elements, f.trees[4].slots[0].matrix.elements);
+  for (const quality of ['high', 'balanced', 'ultra', 'balanced']) {
+    f.e.settings.quality = quality;
+    f.d.update(true);
+    f.base.getMatrixAt(3, matrix);
+    assert.deepEqual(matrix.elements, zero.elements);
+    assert(!f.d.selection.some(({ t }) => t === f.trees[3]));
+  }
+  f.d.dispose();
+  disposePoolScene(f);
+  extra.geometry.dispose(); extra.material.dispose(); extra.dispose();
+});
+
+test('breaking a selected tree removes its near instance immediately even when the scenery budget is exhausted', () => {
+  const f = populated(), broken = new Set(['tree:1']);
+  assert.equal(f.d.hidden.size, 30);
+  f.e.vehicleImpacts = { revision: 1, isBroken: (id) => broken.has(id) };
+  f.e.detailWorkBudget = { run: () => false };
+  assert.equal(f.d.syncBroken(), true);
+  assert.equal(f.d.pools.reduce((sum, p) => sum + p.count, 0), 29);
+  assert.equal(f.d.hidden.size, 29);
+  assert(!f.d.hidden.has(f.trees[1]));
+  f.e.camera.position.set(0, 10000, 0);
+  delete f.e.detailWorkBudget;
+  f.d.update();
+  f.e.settings.quality = 'balanced';
+  f.d.update();
+  const matrix = new THREE.Matrix4();
+  f.base.getMatrixAt(1, matrix);
+  assert.deepEqual(matrix.elements, new THREE.Matrix4().makeScale(0, 0, 0).elements);
+  f.base.getMatrixAt(2, matrix);
+  assert.deepEqual(matrix.elements, f.trees[2].slots[0].matrix.elements);
+  f.d.dispose(); disposePoolScene(f);
+});
+
+test('broken mature-tree candidates cannot revive after their asynchronous asset load completes', async () => {
+  const f = populated(), broken = new Set();
+  f.e.settings.quality = 'ultra';
+  f.e.vehicleImpacts = { revision: 0, isBroken: (id) => broken.has(id) };
+  f.d.update();
+  assert.equal(f.d.matureTrees.status, 'loading');
+  broken.add('tree:1'); f.e.vehicleImpacts.revision++;
+  f.d.update();
+  f.d.matureTrees.complete();
+  await new Promise(setImmediate);
+  globalThis.__matureAdds = [];
+  f.d.update();
+  assert(globalThis.__matureAdds.length > 0);
+  assert(!globalThis.__matureAdds.includes(f.trees[1]));
+  assert(!f.d.hidden.has(f.trees[1]));
+  const matrix = new THREE.Matrix4();
+  f.base.getMatrixAt(1, matrix);
+  assert.deepEqual(matrix.elements, new THREE.Matrix4().makeScale(0, 0, 0).elements);
+  f.d.dispose(); disposePoolScene(f);
+});
+
 test('failed or pending atlases release all three no-pool materials once; late loads never allocate and Engine owns textures', () => {
   for (const failure of ['leaf', 'bark', 'pending']) {
     const f = setup();

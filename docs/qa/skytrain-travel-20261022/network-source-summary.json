@@ -1,0 +1,199 @@
+{
+  "schema": 1,
+  "recordedDate": "2026-10-22",
+  "scope": "Regional source identities and broad reference topology; not a new survey, realtime feed or proof of runtime boarding clearance.",
+  "snapshot": {
+    "path": "tools/transit/city-life-sources/transit-source-snapshot.json",
+    "sha256": "4e40f326c64146cda8dd6ece93ebab29e4ab58271311116029e819e0c1585301",
+    "feed": {
+      "provider": "TransLink",
+      "url": "https://gtfs-static.translink.ca/gtfs/google_transit.zip",
+      "retrievedAtUtc": "2026-10-07T17:48:16Z",
+      "feedVersion": "26SEP_20261002",
+      "feedPublishedDate": null,
+      "feedVersionDateToken": "20261002",
+      "httpLastModified": "Fri, 02 Oct 2026 13:35:51 GMT",
+      "effectiveStartDate": "2026-09-07",
+      "effectiveEndDate": "2027-01-03",
+      "zipSha256": "67fe970456c4640e030f7c991012e720f0b0e7d7af58a7ca3457b4ecd0650682",
+      "zipBytes": 16145585,
+      "serviceSelectionDate": "2026-10-07",
+      "serviceTimezone": "America/Vancouver",
+      "dateSemantics": "Retrieved timestamp, HTTP modification time and feed-version token are not schedule effective dates; token is not independently authenticated publication date."
+    }
+  },
+  "stationLayouts": {
+    "path": "tools/assets/skytrain-stations-stage2/station-layout.json",
+    "sha256": "9a99a1b75e2a7ad6d3a72d7bff253e2c92a7ffa984aa4a9c8481adbbc47ac962",
+    "status": "offline_representative_supplement",
+    "rideReadyFlagIsHistorical": false
+  },
+  "cityStationPoints": {
+    "path": "tools/assets/skytrain-stations-stage2/references/city-rapid-transit-stations.json",
+    "sha256": "28b15d51fe2b34e6b21efb2510a296c158c71c38ec0c203bb0fd5918dcbe2b71",
+    "attribution": "City of Vancouver Open Government Licence, separate from TransLink route data"
+  },
+  "selectedTimingServices": [
+    {
+      "serviceId": "expo:eastbound:regional",
+      "lineId": "expo",
+      "directionId": "eastbound",
+      "sourceRouteId": "30053",
+      "sourceTripId": "15521997",
+      "sourceShapeId": "322353",
+      "pathId": "expo:eastbound:path",
+      "stops": [
+        {
+          "stationId": "waterfront",
+          "pathStationM": 0.0
+        },
+        {
+          "stationId": "burrard",
+          "pathStationM": 958.39849
+        },
+        {
+          "stationId": "granville",
+          "pathStationM": 1348.097375
+        },
+        {
+          "stationId": "stadium-chinatown",
+          "pathStationM": 1997.277173
+        },
+        {
+          "stationId": "main-street-science-world",
+          "pathStationM": 3045.967091
+        }
+      ]
+    },
+    {
+      "serviceId": "canada:southbound:regional",
+      "lineId": "canada",
+      "directionId": "southbound",
+      "sourceRouteId": "13686",
+      "sourceTripId": "15501510",
+      "sourceShapeId": "322336",
+      "pathId": "canada:southbound:path",
+      "stops": [
+        {
+          "stationId": "waterfront",
+          "pathStationM": 0.0
+        },
+        {
+          "stationId": "vancouver-city-centre",
+          "pathStationM": 419.627991
+        },
+        {
+          "stationId": "yaletown-roundhouse",
+          "pathStationM": 1578.753352
+        }
+      ]
+    }
+  ],
+  "stationReferences": [
+    {
+      "stationId": "waterfront",
+      "name": "Waterfront Station",
+      "mapUrl": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/waterfront_station.pdf",
+      "layoutKindInExistingOfflinePackage": "two-line-independent-perpendicular-platforms",
+      "cityAnchorLonLat": [
+        -123.11173815504947,
+        49.286075484422376
+      ],
+      "dimensionStatus": "representative engineering layout; no interior measured plan available",
+      "depthStatus": "unsurveyed local offsets; source-backed broad topology only"
+    },
+    {
+      "stationId": "burrard",
+      "name": "Burrard Station",
+      "mapUrl": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/burrard_station.pdf",
+      "layoutKindInExistingOfflinePackage": "stacked-underground",
+      "cityAnchorLonLat": [
+        -123.11997233644202,
+        49.28586014917365
+      ],
+      "dimensionStatus": "representative engineering layout; no interior measured plan available",
+      "depthStatus": "unsurveyed local offsets; source-backed broad topology only"
+    },
+    {
+      "stationId": "granville",
+      "name": "Granville Station",
+      "mapUrl": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/granville_vancouver_city_centre_station.pdf",
+      "layoutKindInExistingOfflinePackage": "deep-stacked-underground-multiflight",
+      "cityAnchorLonLat": [
+        -123.11640402719512,
+        49.28363768680059
+      ],
+      "dimensionStatus": "representative engineering layout; no interior measured plan available",
+      "depthStatus": "unsurveyed local offsets; source-backed broad topology only"
+    },
+    {
+      "stationId": "stadium-chinatown",
+      "name": "Stadium-Chinatown Station",
+      "mapUrl": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/stadium_chinatown_station.pdf",
+      "layoutKindInExistingOfflinePackage": "upper-beatty-lower-pacific",
+      "cityAnchorLonLat": [
+        -123.10956479630316,
+        49.279441691877636
+      ],
+      "dimensionStatus": "representative engineering layout; no interior measured plan available",
+      "depthStatus": "unsurveyed local offsets; source-backed broad topology only"
+    },
+    {
+      "stationId": "main-street-science-world",
+      "name": "Main Street-Science World Station",
+      "mapUrl": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/main_street_station.pdf",
+      "layoutKindInExistingOfflinePackage": "elevated-island-twin-stationhouses",
+      "cityAnchorLonLat": [
+        -123.10060690768856,
+        49.27317791187965
+      ],
+      "dimensionStatus": "representative engineering layout; no interior measured plan available",
+      "depthStatus": "unsurveyed local offsets; source-backed broad topology only"
+    },
+    {
+      "stationId": "vancouver-city-centre",
+      "name": "Vancouver City Centre Station",
+      "mapUrl": "https://www.translink.ca/-/media/translink/documents/schedules-and-maps/skytrain-accessible-entrance-maps/vancouver_city_centre_station_elevator_map.pdf",
+      "layoutKindInExistingOfflinePackage": "underground-island-mall-spur",
+      "cityAnchorLonLat": [
+        -123.11928408921445,
+        49.28173470745285
+      ],
+      "dimensionStatus": "representative engineering layout; no interior measured plan available",
+      "depthStatus": "unsurveyed local offsets; source-backed broad topology only"
+    },
+    {
+      "stationId": "yaletown-roundhouse",
+      "name": "Yaletown-Roundhouse Station",
+      "mapUrl": "https://infomaps.translink.ca/system_maps/skytrain_station_maps/yaletown_roundhouse_station.pdf",
+      "layoutKindInExistingOfflinePackage": "deep-underground-brick-pavilion",
+      "cityAnchorLonLat": [
+        -123.1218903777964,
+        49.2743622548375
+      ],
+      "dimensionStatus": "representative engineering layout; no interior measured plan available",
+      "depthStatus": "unsurveyed local offsets; source-backed broad topology only"
+    }
+  ],
+  "limits": [
+    "No web photos, videos or map artwork copied into runtime assets.",
+    "Public entrance maps establish area geography, not measured interior plans.",
+    "Model dimensions/depths/headings remain representative; GTFS platform projections do not determine a safe threshold.",
+    "Default timing uses selected away-from-Waterfront path intervals symmetrically; runtime curve timing can account for direction-specific adjustments."
+  ],
+  "focusedValidation": {
+    "runtime": "Node v24.22.1",
+    "tests": 20,
+    "passed": 20,
+    "failed": 0,
+    "skipped": 0,
+    "typecheck": "isolated strict TypeScript passed",
+    "lint": "strict oxlint passed",
+    "sourceSha256": "3d021d5e79a966cf5126fb076813fab2db8b4cf1d96dac598b45d2e945eaf03d",
+    "testSha256": "d19497b96105da7b58b392edcccf5dc9ef4f5493661aa127ee255ddecb167e27",
+    "testLog": {
+      "path": "work/skytrain-network-tests.log",
+      "sha256": "6b357370d2d2721683faa0f3c555d561007513f6bd7ee85f1ad5c3b4befb0ed3"
+    }
+  }
+}

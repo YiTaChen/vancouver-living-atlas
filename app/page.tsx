@@ -49,11 +49,16 @@ import {
 import { FlightControls, flightText } from '@/components/flight-controls';
 import { EMPTY_FLIGHT, type FlightSnapshot } from '@/lib/city/flight-snapshot';
 import { TeslaControls, teslaText } from '@/components/tesla-controls';
+import { VehicleConditionPanel } from '@/components/vehicle-condition-panel';
 import { EMPTY_TESLA, type TeslaSnapshot } from '@/lib/city/tesla-snapshot';
 import type { TeslaController } from '@/lib/city/tesla-controller';
-import { TravelJoystick } from '@/components/travel-joystick';
+import { DriftHoldButton, TravelJoystick } from '@/components/travel-joystick';
+import { CityInteractionOverlay } from '@/components/city-interaction-overlay';
+import type { CityInteractions } from '@/lib/city/city-interactions';
 import { BusVisitPanel } from '@/components/bus-visit-panel';
 import { SkyTrainCabinPanel } from '@/components/skytrain-cabin-panel';
+import { SkyTrainTravelPanel, skyTrainTravelText } from '@/components/skytrain-travel-panel';
+import { EMPTY_SKYTRAIN_TRAVEL } from '@/lib/city/skytrain-travel-types';
 import {
   DiscoveryPanel,
   type DiscoveryTarget,
@@ -173,6 +178,12 @@ function Home() {
   const touchBrake = useCallback((held: boolean) => {
     if (engine.current?.navigation) engine.current.navigation.touchBrake = held;
   }, []);
+  const touchDrift = useCallback((held: boolean) => {
+    engine.current?.navigation?.setDriftHeld(held);
+  }, []);
+  const skyTrainMove = useCallback((x: number, y: number) => {
+    engine.current?.skyTrainTravel?.setTouchAxes(x, y);
+  }, []);
   useEffect(() => {
     const query = matchMedia('(any-pointer: coarse), (max-width: 900px)');
     const update = () =>
@@ -250,6 +261,30 @@ function Home() {
     distance: 0,
     elevation: 0,
   });
+  const [interactionController, setInteractionController] = useState<CityInteractions | null>(null);
+  const interactionInput = ready && settings.mode === 'walk' && !clean &&
+    !placing && !flight.placing && !about && !panel && !discoveryModal &&
+    !stats.busVisit?.aboard && (!mobilePanel || mobilePanel === 'map') &&
+    !(touchUI && mobileHudHidden);
+  const driveDriftEnabled = ready && settings.mode === 'drive' && !placing &&
+    !about && !panel && !discoveryModal && !stats.busVisit?.aboard &&
+    (!mobilePanel || mobilePanel === 'map');
+  const skyTrainState = stats.skyTrainTravel ?? EMPTY_SKYTRAIN_TRAVEL;
+  const skyTrainActive = ['loading', 'station', 'riding'].includes(skyTrainState.phase);
+  const skyTrainInput = ready && !clean && !placing && !flight.placing &&
+    !about && !panel && !discoveryModal && settings.mode !== 'tesla' &&
+    settings.mode !== 'flight' && !stats.busVisit?.aboard &&
+    (!mobilePanel || mobilePanel === 'map') && !(touchUI && mobileHudHidden);
+  useEffect(() => {
+    const travel = engine.current?.skyTrainTravel;
+    travel?.setInputEnabled(skyTrainInput);
+    return () => travel?.setInputEnabled(false);
+  }, [skyTrainInput, ready]);
+  useEffect(() => {
+    const navigation = engine.current?.navigation;
+    navigation?.setDriftInputEnabled(driveDriftEnabled);
+    return () => navigation?.setDriftInputEnabled(false);
+  }, [driveDriftEnabled]);
   const clock = stats.clock || DEFAULT_CLOCK;
   const clockLabel = formatClock(clock.hour);
   const changeClock = (patch: Partial<ClockState>) =>
@@ -264,6 +299,7 @@ function Home() {
     settingsRef = useRef(settings);
   settingsRef.current = settings;
   const go = useCallback((id: string) => {
+    if (engine.current?.skyTrainTravel?.active) return;
     if (engine.current && !engine.current.closeBusVisit()) return;
     setLocalOrbit(false);
     setView(id);
@@ -319,6 +355,7 @@ function Home() {
   useEffect(() => {
     const city = engine.current;
     if (!ready || !city) return;
+    setInteractionController(city.interactions);
     if (city.flight) {
       city.flight.onChange = setFlight;
       setFlight(city.flight.snapshot);
@@ -441,6 +478,10 @@ function Home() {
   useEffect(() => {
     const key = (ev: KeyboardEvent) => {
       if (ev.key === 'Escape') {
+        if (engine.current?.skyTrainTravel?.active) {
+          setClean(false); setPanel(null); setMobilePanel(null);
+          return;
+        }
         if (
           ev.target instanceof Element &&
           ev.target.closest(
@@ -537,6 +578,7 @@ function Home() {
     return () => life.abort();
   }, [ready, go]);
   const change = (patch: Partial<Settings>) => {
+    if (patch.mode !== undefined && engine.current?.skyTrainTravel?.active) return;
     if (
       (patch.mode !== undefined || patch.traffic === false) &&
       engine.current &&
@@ -548,6 +590,9 @@ function Home() {
     setSettings((s) => ({ ...s, ...patch }));
   };
   const finishBusVisit = () => {
+    if (engine.current?.skyTrainTravel?.active) return false;
+    const nav = engine.current?.navigation;
+    if (nav?.walkSeat && !nav.leaveWalkSeat()) return false;
     if (engine.current && !engine.current.closeBusVisit()) {
       setNotice('busVisitExitBlocked');
       return false;
@@ -802,12 +847,16 @@ function Home() {
         </div>
       )}
       <div className="scene" ref={host} />
+      <CityInteractionOverlay
+        interactions={interactionController}
+        enabled={interactionInput} locale={locale} touch={touchUI}
+      />
       <BusVisitPanel
         city={engine.current}
         snapshot={stats.busVisit ?? null}
         locale={locale}
         visible={
-          ready &&
+          ready && !skyTrainActive &&
           settings.mode !== 'tesla' &&
           !clean &&
           !about &&
@@ -819,7 +868,29 @@ function Home() {
         }
         onPrepare={visitBus}
       />
+      <SkyTrainTravelPanel
+        locale={locale}
+        snapshot={skyTrainState}
+        visible={ready && !clean && !about && !placing && !flight.placing &&
+          settings.mode !== 'tesla' && settings.mode !== 'flight' && !panel &&
+          !discoveryModal && (!mobilePanel || mobilePanel === 'map') &&
+          !stats.busVisit?.aboard && !(touchUI && mobileHudHidden)}
+        touch={touchUI}
+        controlsEnabled={skyTrainInput}
+        onEnter={async (id) => {
+          setTour(false); setPanel(null); setPlacing(null); setMobilePanel(null);
+          await engine.current?.skyTrainTravel?.enter(id);
+        }}
+        onDestination={(id) => engine.current?.skyTrainTravel?.chooseDestination(id)}
+        onGoPlatform={() => { void engine.current?.skyTrainTravel?.goPlatform(); }}
+        onGoConcourse={() => { engine.current?.skyTrainTravel?.goConcourse(); }}
+        onBoard={() => { engine.current?.skyTrainTravel?.board(); }}
+        onAlight={() => { engine.current?.skyTrainTravel?.alight(); }}
+        onLeave={() => { engine.current?.skyTrainTravel?.leave(); }}
+        onMove={skyTrainMove}
+      />
       {ready &&
+        !skyTrainActive &&
         !clean &&
         !about &&
         settings.mode !== 'tesla' &&
@@ -853,7 +924,7 @@ function Home() {
         city={engine.current}
         locale={locale}
         visible={
-          ready &&
+          ready && !skyTrainActive &&
           !clean &&
           !about &&
           !placing &&
@@ -904,6 +975,8 @@ function Home() {
         optionsOpen={mobilePanel === 'travel'}
         onCloseOptions={() => setMobilePanel(null)}
       />
+      <VehicleConditionPanel city={engine.current} locale={locale}
+        visible={ready&&!clean&&!about&&!panel&&!mobilePanel&&!discoveryModal&&!(touchUI&&mobileHudHidden)} />
       {touchUI && ready && (
         <button
           className="mobile-hud-toggle glass"
@@ -1009,10 +1082,12 @@ function Home() {
           {settings.mode !== 'orbit' &&
             settings.mode !== 'flight' &&
             settings.mode !== 'tesla' &&
+            !skyTrainActive &&
             !stats.busVisit?.aboard &&
             !placing &&
             !about &&
             !panel &&
+            !discoveryModal &&
             (mobilePanel === null || mobilePanel === 'map') && (
               <TravelJoystick
                 mode={settings.mode as TravelMode}
@@ -1022,6 +1097,9 @@ function Home() {
                 )}
                 onMove={touchMove}
                 onBrake={touchBrake}
+                driftLabel={tr('drift')}
+                driftHint={tr('driftHelp')}
+                onDrift={driveDriftEnabled ? touchDrift : undefined}
               />
             )}
           {mobilePanel === 'travel' &&
@@ -1096,6 +1174,9 @@ function Home() {
                       ? 'touchWalkHint'
                       : 'touchVehicleHint',
                   )}
+                  {settings.mode === 'drive' && (
+                    <><br />{tr('touchDriftHint')}</>
+                  )}
                 </p>
               </section>
             )}
@@ -1103,7 +1184,7 @@ function Home() {
       )}
 
       {ready &&
-        !stats.busVisit?.aboard &&
+        !stats.busVisit?.aboard && !skyTrainActive &&
         settings.mode !== 'orbit' &&
         settings.mode !== 'flight' &&
         settings.mode !== 'tesla' && (
@@ -1311,7 +1392,7 @@ function Home() {
             >
               <RadioGroupItem
                 value={m.id}
-                disabled={!ready || teslaPreparing}
+                disabled={!ready || teslaPreparing || skyTrainActive}
                 className="mode-radio-dot"
               />
               <m.icon size={15} />
@@ -2087,7 +2168,7 @@ function Home() {
           )}
         </div>
       </section>
-      {!stats.busVisit?.aboard &&
+      {!stats.busVisit?.aboard && !skyTrainActive &&
         settings.mode !== 'orbit' &&
         settings.mode !== 'flight' &&
         settings.mode !== 'tesla' && (
@@ -2162,9 +2243,21 @@ function Home() {
                   ? tr('brakeHelp')
                   : tr('speedHelp')}{' '}
               · {tr('lookHelp')}
+              {settings.mode === 'drive' && (
+                <><br />{tr('driftHelp')}</>
+              )}
               <br />
               {tr('travelZoomHelp')}
             </p>
+            {settings.mode === 'drive' && (
+              <DriftHoldButton
+                label={tr('drift')}
+                hint={tr('driftHelp')}
+                onHeld={touchDrift}
+                className="drive-drift-hold"
+                disabled={touchUI || !driveDriftEnabled}
+              />
+            )}
             {settings.mode === 'boat' && (
               <button className="boat-neutral" {...helmControl('neutral')}>
                 {tr('boatNeutral')}
@@ -2211,7 +2304,9 @@ function Home() {
         <div>
           <MapPin size={15} />
           <b>
-            {settings.mode === 'orbit'
+            {skyTrainActive
+              ? skyTrainTravelText(locale, 'title')
+              : settings.mode === 'orbit'
               ? localOrbit
                 ? tr('localView')
                 : viewText(locale, current.id, 'name')
@@ -2234,7 +2329,7 @@ function Home() {
           <span>{tr('treeCount', { count: number(stats.trees) })}</span>
           <span>{stats.fps} FPS</span>
         </div>
-        <p>{settings.mode === 'orbit' ? tr('orbitHelp') : tr('escapeHelp')}</p>
+        {!skyTrainActive && <p>{settings.mode === 'orbit' ? tr('orbitHelp') : tr('escapeHelp')}</p>}
       </footer>
       <div className="attribution ui-chrome">
         <a

@@ -812,6 +812,7 @@ export class BusCabinVisit {
     const n = this.city.navigation;
     if (
       !n ||
+      n.walkSeat ||
       n.mode !== 'walk' ||
       n.surface !== 'ground' ||
       (n.surfaceId && n.surfaceId !== 'ground') ||

@@ -1,0 +1,390 @@
+{
+  "schemaVersion": 2,
+  "recordedDate": "2026-10-22",
+  "feature": "Regional SkyTrain passenger travel",
+  "sourceState": "Final product source frozen after articulated-car, terrain/portal, shader-prewarm and bounded Main guideway corrections. Local verification is separate from exact-commit CI and native rendering evidence.",
+  "runtime": "Node.js 24.22.1",
+  "coverage": {
+    "expo": [
+      "waterfront",
+      "burrard",
+      "granville",
+      "stadium-chinatown",
+      "main-street-science-world"
+    ],
+    "canada": [
+      "waterfront",
+      "vancouver-city-centre",
+      "yaletown-roundhouse"
+    ],
+    "transferStation": "waterfront",
+    "directions": "Both directions, with intermediate stops; regional endpoints are not represented as real network termini."
+  },
+  "localChecks": {
+    "focused": {
+      "status": "passed",
+      "command": "node --test tests/skytrain*.test.mjs",
+      "passed": 128,
+      "failed": 0,
+      "elapsedMs": 30841,
+      "newFeatureTests": 118,
+      "existingCabinTests": 10,
+      "groups": {
+        "network": 20,
+        "path": 17,
+        "stations": 21,
+        "train": 13,
+        "ui": 8,
+        "controller": 26,
+        "render": 7,
+        "buildingReplacement": 4,
+        "articulatedClearance": 2,
+        "existingCabin": 10
+      }
+    },
+    "typeScript": {
+      "status": "passed",
+      "command": "npm run check"
+    },
+    "newGuidewayAndControllerStrictLint": {
+      "status": "passed",
+      "files": [
+        "lib/city/skytrain-guideway-clearance.ts",
+        "lib/city/skytrain-travel.ts",
+        "tests/skytrain-building-replacement.test.mjs",
+        "tests/skytrain-travel.test.mjs"
+      ]
+    },
+    "materialAndController": {
+      "status": "passed",
+      "passed": 30,
+      "failed": 0,
+      "scope": "Actual shader hook, City source and all-car point sweep; actual passenger controller and lifecycle. No GPU/FPS claim."
+    },
+    "legacyLintEvidence": {
+      "file": "lint-comparison.json",
+      "scope": "Final frozen-source same-four-file comparison:47 inherited diagnostics and0 new; no repository-wide clean-lint claim."
+    },
+    "qaBuild": {
+      "status": "passed",
+      "scope": "Final frozen-source instrumented static QA build."
+    },
+    "productionBuild": {
+      "status": "passed",
+      "command": "npm run build:firebase",
+      "includes": [
+        "Static production export",
+        "Firebase artifact verification",
+        "CSP generation"
+      ],
+      "scope": "Final frozen source after articulated-car and finite Main guideway corrections; separate from hosting deployment."
+    },
+    "strictLint": {
+      "status": "passed",
+      "command": "oxlint --type-aware --deny-warnings lib/city/skytrain*.ts components/skytrain-travel-panel.tsx tests/skytrain*.test.mjs tests/helpers/city-elevation.mjs tests/helpers/skytrain-geometry.mjs tools/build-skytrain-routes.mjs tools/build-skytrain-runtime-stations.mjs"
+    },
+    "deterministicRoutes": {
+      "status": "passed",
+      "command": "node tools/build-skytrain-routes.mjs --check"
+    }
+  },
+  "completeSuiteExpectation": {
+    "baselineTests": 1673,
+    "newFeatureTests": 118,
+    "expectedTotal": 1791,
+    "ciResultClaimed": false,
+    "authority": "Exact release-commit GitHub workflow, main merge and hosting workflow provide their own statuses."
+  },
+  "finalIntegrationPolicies": {
+    "walkingAndInputs": "Seven station floor owners, continuous stairs, distance-gated access actions,E/WASD/arrows,drag look; mobile joystick+interaction. Blur,cancel,visibility,input disable and disposal clear held input; editable controls do not trigger walking.",
+    "boarding": "Actual loaded serviceLine,correct platform direction,exact stopped body pose and open-door aperture required; no alight,mode/minimap escape or teleport while moving.",
+    "transfer": "Waterfront only. Alight,walk to access/concourse,change platforms,load/prewarm actual other-line train,then board.",
+    "trackProfile": {
+      "levelStraightEndpointLeadsMetres": {
+        "expo": 75,
+        "canada": 65
+      },
+      "horizontal": "Broad C2 endpoint joins; retained GTFS source coordinates remain immutable. Two short nearly straight source edges use one quintic middle to avoid backtracking between representative pivots.",
+      "vertical": "C2 representative grade/depression constrained by actual city terrain while retaining exact station stop positions/quaternions; not a surveyed engineering alignment."
+    },
+    "articulatedTrain": {
+      "expoCarOffsetsMetres": [
+        26.85,
+        8.95,
+        -8.95,
+        -26.85
+      ],
+      "canadaCarOffsetsMetres": [
+        10.5,
+        -10.5
+      ],
+      "pose": "Each car samples its own physical arc distance; exact endpoint-tangent extrapolation. Occupied-car standing anchor/camera,interior and lights follow car0.",
+      "stationStop": "Reset all car frames to exact linear authored offsets before physical platform proof and opening doors.",
+      "sharedResources": "Expo single-car shell geometry is instanced4times per material;48metal/glass door pairs use identical articulated matrices. Canada reverse clone retains its original side mapping. Resources release exactly once."
+    },
+    "stationApproachPreparation": "After source owner hides and progress exceeds roughly15%,replace it with the single destination owner. Hold it hidden while asynchronous shader preparation runs,then show it before the uncovered approach. Only actual arrival updates station identity/stop pose; unfinished preparation holds closed. Reuse the exact prepared owner; guarded retry/disposal/generation prevents late reactivation.",
+    "shaderPreparation": "Synchronously make the relevant subtree visible,call compileAsync(city.scene,camera) so each world/cabin/station light is counted once and city materials warm the matching lighting variant,then restore visibility before awaiting. Entry/line change remains busy until complete.",
+    "tubeOverlap": {
+      "endpointCutMetres": 32,
+      "firstSampleStationAxisRangeMetres": [
+        32,
+        40.1
+      ],
+      "canadaStationBufferMetres": 47,
+      "scope": "Actual emitted TubeGeometry overlap plus separate all-car/portal triangle audits; finite CPU proof,not universal GPU visual clearance."
+    },
+    "mainStreet": {
+      "origin": "Midpoint of retained bidirectional GTFS platform endpoints",
+      "publicAccess": "East entrance/stairs integrated; source west branch preserved but outside public walker graph. This is not a real-station closure.",
+      "duplicateStationBody": {
+        "key": "osm-structure-303",
+        "seed": 783,
+        "worldRadiusMetres": 170,
+        "scope": "Separate bounded station-shell body-shader replacement."
+      },
+      "coarseGisGuideway": {
+        "structureKey": "133436",
+        "currentProfileSeed": 967,
+        "seedLookup": "Dynamic actual buildingProfiles entry for source133436",
+        "mainLocalXZ": {
+          "minX": -6.8,
+          "maxX": 6.7,
+          "minZ": -83.6,
+          "maxZ": -45.7
+        },
+        "worldYRangeMetres": [
+          11.640292026666614,
+          16.040292026666616
+        ],
+        "heightRelativeToRailMetres": [
+          -0.4,
+          4
+        ],
+        "scope": "Finite visual right-of-way through only the identified coarse GIS extrusion. Street,upper podium/tower,source303 and distant same-seed structures retained. Raw geometry,collision and source data untouched.",
+        "lifecycle": "Enable only while Main owner is active/preparing; clear on other station,street exit,error or disposal.",
+        "renderPassLimit": "Main display-material discard only; unchanged shadow/depth/SSAO-normal source geometry is not proven to have the same cut by CPU predicate tests."
+      }
+    },
+    "undergroundOcean": "Hide global water only during actual underground passenger render; restore original visibility in finally including render errors.",
+    "quality": "One active station owner. TrainLOD fixed on load/line change:Balanced/compatibleLOD1,High/UltraLOD0. CityAuto uses physical runtime train speed; manual quality retained."
+  },
+  "geometryEvidence": {
+    "path": "path-continuity.json",
+    "terrain": "terrain-clearance.json",
+    "articulatedTube": "articulated-tube-clearance.json",
+    "portals": "portal-clearance.json",
+    "mainFootprints": "station-footprint-audit.json",
+    "guideway": "guideway-clearance.json",
+    "guidewayFiniteSampleSummary": {
+      "checkedAnchors": 1523040,
+      "conflictingAnchors": 209146,
+      "unresolvedConflicts": 0,
+      "upperTowerPreservationPoints": 2581,
+      "streetPreservationPoints": 2581,
+      "otherSeedValuesPreserved": 4095,
+      "distantSameSeedStructure": "osm-structure-163"
+    }
+  },
+  "productSourceSha256": {
+    "lib/city/skytrain-network.ts": "3d021d5e79a966cf5126fb076813fab2db8b4cf1d96dac598b45d2e945eaf03d",
+    "lib/city/skytrain-stations.ts": "07ac6a9e44b5ea2e265e5b3252948aac9c58ebf478e3e9b920ea6fd1dd01815a",
+    "lib/city/skytrain-ride-path.ts": "a0e28ed0367979d6ba036e7c5f90ec5d085908e422ba850114210a1973138a0d",
+    "lib/city/skytrain-ride-train.ts": "b6de83b0acbe84867bed12f9edd3c97b60b0894a43245f64735e0cef3a69de9e",
+    "lib/city/skytrain-travel.ts": "0948545e047d46ee8c20185277e1eb27b305e62dffeb585dcbc5f9264b38bf2c",
+    "lib/city/skytrain-guideway-clearance.ts": "6fd293e484b60233eaaddd871b0f16d4d06b39dd40eb31666b6729ab77ec81e7",
+    "lib/city/building-bodies.ts": "cae3eb6f5cdb23bb0d8eb611ff5206ac30f72aefaeb6f466ebf4aeee91c685b1",
+    "lib/city/engine.ts": "7bf44a99eadb6efb4d0a9eb1abebda89600b7971241d152bce4ea4219d711363"
+  },
+  "limitations": [
+    "Representative original station interiors,depths,track joins and materials; not surveyed architecture,photogrammetry or engineering alignment.",
+    "Offline GTFS-derived regional route and gameplay timing; not live service or timetable.",
+    "Fixed standing cabin anchor; no free cabin walking,seat selection or intercar traversal.",
+    "Expo four-car MarkV-inspired service is not a complete real five-car MarkV reconstruction.",
+    "Finite CPU triangle/predicate tests do not establish GPU image quality,continuous collision proof,zero stutter or physical-phone performance."
+  ],
+  "historicalAcceptance": {
+    "scope": "All observations below precede final approach, articulation, terrain and Main guideway corrections. They do not establish current-source native rendering or performance.",
+    "nativeDesktopRoutes": [
+      {
+        "route": [
+          "waterfront",
+          "burrard"
+        ],
+        "flow": "Enter, walk, board, ride, alight, return to concourse and city street."
+      },
+      {
+        "route": [
+          "main-street-science-world",
+          "stadium-chinatown",
+          "granville",
+          "burrard",
+          "waterfront"
+        ],
+        "flow": "Full Expo continuation with intermediate stops; Waterfront arrival with doors open.",
+        "arrivalVerifiedUtcMinute": "2026-10-22T14:01Z"
+      },
+      {
+        "route": [
+          "waterfront",
+          "vancouver-city-centre"
+        ],
+        "flow": "Expo alighting at Waterfront, approximately 63m walking, access-button concourse/Canada platform change, approximately 32m walking, Canada boarding and City Centre alighting.",
+        "scope": "Button-assisted level changes; continuous portal/stair transfer has a separate current-controller CPU regression."
+      }
+    ],
+    "responsiveDesktopBrowser": {
+      "viewports": [
+        [
+          390,
+          844
+        ],
+        [
+          844,
+          390
+        ]
+      ],
+      "route": [
+        "vancouver-city-centre",
+        "yaletown-roundhouse"
+      ],
+      "input": "Native pointer joystick and visible buttons; scene drag after alighting.",
+      "flow": "Walk, board, full ride, alight, return to concourse and street.",
+      "physicalPhoneTest": false
+    },
+    "production3fcb71c": {
+      "revision": "3fcb71c",
+      "instrumented": false,
+      "route": [
+        "waterfront",
+        "vancouver-city-centre"
+      ],
+      "result": "passed",
+      "flow": "Public entry, walking, boarding, ride, alight, concourse and street exit.",
+      "screenshot": "production-waterfront-canada.jpg"
+    },
+    "performance": {
+      "file": "performance-before-approach-fix.json",
+      "sourceFingerprint": "29a152bbe611635c4fc33c3d60aa0d135273a593d29f9b2642586742da14bfb8",
+      "hardware": "Radeon Pro 560X Mac",
+      "viewport": [
+        1280,
+        720
+      ],
+      "quality": "Auto/Balanced",
+      "foregroundFrames": 2400,
+      "elapsedSeconds": 43.0608,
+      "frameIntervalMs": {
+        "median": 16.8,
+        "p95": 20.9,
+        "p99": 24,
+        "maximum": 1373
+      },
+      "maximumHitchCause": "Not established; retained in the statistics.",
+      "physicalPhoneTest": false
+    },
+    "screenshotSha256": {
+      "desktop-expo-moving.jpg": "00fa19f74f1a8fba4065aafd946216d32d9c0dadf07db4e7e1ff6fb818a3e7db",
+      "granville-escalators.jpg": "dd9f56dbb8d4e76fd54949ece01268f0b6e16c950c442443df9b142af7136022",
+      "mobile-canada-landscape.jpg": "3f5940073bfe19c5f192e3c7b10717f9dabfd6da466ec0cacfb6992c9359d21e",
+      "mobile-canada-portrait.jpg": "e5ffa976533ddca769f8f689411119641c13c907f294529fb93f599c12945064",
+      "mobile-city-centre-platform.jpg": "2dbe0c6b7b39ffad3c1902f04a37607f3c4949e906cf65ffe7f7865ff3203e32",
+      "production-waterfront-canada.jpg": "4f94fcf507a8cb3c126dd3cc041c48d35b5ed4b77afc160fe46a6c79e7bad08f",
+      "science-world-platform.jpg": "8a607ea78f69ee2673fa7192e55da349521cbe2067d188bd3af396a1c95c5afd",
+      "stadium-chinatown-platform.jpg": "4f0a1f0099e3ce4d0b493f0cf693cc1349430ae89f0558941b45153f9e33982c",
+      "waterfront-canada-platform.jpg": "785f37094f452a4e4fa5b330d3f452d5930df492a374ffc5e0f16eea7c1d727f"
+    },
+    "earlierFullRepository": {
+      "revision": "3fcb71c",
+      "passed": 1771,
+      "failed": 0,
+      "elapsedMs": 356654.504515
+    },
+    "testSynchronizationCorrection": {
+      "historicalCiPassed": 1770,
+      "historicalCiTotal": 1771,
+      "cause": "A fixed 30 setImmediate wait guessed whether asynchronous GLB file reading and parsing had finished.",
+      "fix": "Test-only explicit parsed Promise and controlled gate; unchanged late-owner and exact-once disposal assertions.",
+      "productDisposalDefectFound": false
+    }
+  },
+  "evidence": {
+    "usageAndScope": "../../SKYTRAIN_PASSENGER_TRAVEL_2026_10.md",
+    "officialReferences": "../../SKYTRAIN_STATION_REFERENCES_2026_10.md",
+    "sourceSummary": "network-source-summary.json",
+    "localLogs": [
+      "work/skytrain-guideway-tests.log",
+      "work/skytrain-guideway-tsc.log",
+      "work/skytrain-final-articulated-controller-tests.log",
+      "work/skytrain-final-articulated-tsc.log"
+    ],
+    "directory": "docs/qa/skytrain-travel-20261022/"
+  },
+  "finalNativeBrowserAcceptance": {
+    "sourceFingerprint": "0bf215e2c8b4db9a43870f8b5224664798d0869592b5301222cc47245ebd1f5e",
+    "parentCommitAtCapture": "3fcb71c71011f47e7732de04ae39beb42285d24e",
+    "sourceBinding": "The final source files match productSourceSha256; HEAD at capture is the earlier parent commit. No product source changed after capture.",
+    "desktop": {
+      "route": [
+        "main-street-science-world",
+        "stadium-chinatown"
+      ],
+      "completed": [
+        "Public station entry",
+        "Walk to platform and open doorway",
+        "Board",
+        "Complete geographic ride",
+        "Arrive fully stopped with doors open",
+        "Alight",
+        "Walk along destination platform",
+        "Return to concourse using distance-gated action",
+        "Exit to verified street ground"
+      ],
+      "observedUtc": "2026-10-22T14:57Z/15:02Z",
+      "observation": "Native screenshots during the finite Main guideway opening show a clear occupied cabin; observation covers sampled views, not every pixel or all quality levels."
+    },
+    "responsiveDesktopBrowser": {
+      "viewports": [
+        [
+          390,
+          844
+        ],
+        [
+          844,
+          390
+        ]
+      ],
+      "completed": [
+        "Moving Expo cabin and compact status in portrait/landscape",
+        "Arrival and alighting",
+        "Native pointer joystick turn and sustained walking on Stadium platform"
+      ],
+      "physicalPhoneTest": false,
+      "scope": "Responsive Mac browser input/layout validation; remaining return walk was completed with desktop keyboard after restoring1280x720."
+    },
+    "screenshots": {
+      "final-main-guideway-cabin.png": "6906d329656be3ab9f956f2492c413696eed9586973ff1849b586f1f8a5c0200",
+      "final-mobile-expo-portrait.png": "b0231c77788cfe39e12076008e4728d606dd135fdae8a32ab33393ee823b10f3",
+      "final-mobile-expo-landscape.png": "0d84785574fe4710684a5a4413bac0d3f8e9841ccd3617607e3f2bd4d90c0244",
+      "final-burrard-moving.png": "4e040ab0088d1d459251c11b3725bb5034e348862f6b8f13e64d351424814e6c"
+    },
+    "additionalMovingView": {
+      "route": [
+        "burrard",
+        "waterfront"
+      ],
+      "observed": "Standing cabin clear in sampled underground turn view. Arrival is separate from this moving screenshot."
+    }
+  },
+  "finalPerformanceEvidence": {
+    "file": "performance.json",
+    "frameIntervals": "performance-frame-intervals.json",
+    "sourceFingerprint": "0bf215e2c8b4db9a43870f8b5224664798d0869592b5301222cc47245ebd1f5e",
+    "frames": 2400,
+    "elapsedMs": 52874.5,
+    "medianMs": 20.6,
+    "p95Ms": 30.3,
+    "p99Ms": 42.5,
+    "maximumMs": 1214.2,
+    "scope": "One1280x720RadeonPro560XMac,Auto/Balanced,render1024x576; first foreground window after boarding Main→Stadium. No CPU build/test jobs ran during this window. Not physical-phone or whole-network performance acceptance. Largest hitch cause remains unattributed."
+  }
+}

@@ -1,0 +1,727 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-22T18:22:59.567511+00:00",
+  "baseCommit": "53bb3c619a160627cb9b4394e9876f36c6f2323a",
+  "workingBranch": "codex/proximity-seat-interactions-20261022",
+  "tool": "Version: 1.76.0",
+  "nodeVersion": "v24.22.1",
+  "result": "no_new_diagnostics",
+  "method": {
+    "baseline": "Exact application source blobs at baseCommit copied to ignored work/seat-lint-baseline-53bb3c6; node_modules symlinked to the same installed dependencies. No checkout or product/test edits.",
+    "command": [
+      "node_modules/.bin/oxlint",
+      "--deny-warnings",
+      "--format",
+      "json",
+      "app/page.tsx",
+      "components/skytrain-travel-panel.tsx",
+      "lib/city/assets/walker.ts",
+      "lib/city/beach-amenities.ts",
+      "lib/city/citizen.ts",
+      "lib/city/engine.ts",
+      "lib/city/interiors.ts",
+      "lib/city/navigation.ts",
+      "lib/city/skytrain-ride-train.ts",
+      "lib/city/skytrain-stations.ts",
+      "lib/city/skytrain-travel-types.ts",
+      "lib/city/skytrain-travel.ts",
+      "lib/city/street-furniture-qa.ts",
+      "lib/city/street-furniture.ts"
+    ],
+    "scopePolicy": "The same modified existing legacy files are linted in both runs. New interaction files are covered by a separate strict-lint check and are not included in this comparison.",
+    "matching": "For each current diagnostic, difflib equal source blocks (autojunk=false) map its primary line to a baseline diagnostic with identical file, rule, message, severity and column. Matches consume a diagnostic occurrence to preserve duplicate counts.",
+    "configurationSha256": {
+      ".oxlintrc.json": "1a7aa1c7d83b05939e4e697eed9316224caea8958c4ad12837f8be740c13a47d",
+      "tsconfig.json": "1795dc3c8add169c9b676b9769e5a4b3a0069f2cfb96a5982b40dd2c6202173c"
+    },
+    "originalBaseConfigurationSha256": {
+      ".oxlintrc.json": "1a7aa1c7d83b05939e4e697eed9316224caea8958c4ad12837f8be740c13a47d",
+      "tsconfig.json": "1795dc3c8add169c9b676b9769e5a4b3a0069f2cfb96a5982b40dd2c6202173c"
+    },
+    "baselineConfigurationMatchesCurrent": true,
+    "originalBaseConfigurationMatchesCurrent": true,
+    "sameInstalledNodeModules": true
+  },
+  "scope": {
+    "all": [
+      "app/page.tsx",
+      "components/skytrain-travel-panel.tsx",
+      "lib/city/assets/walker.ts",
+      "lib/city/beach-amenities.ts",
+      "lib/city/citizen.ts",
+      "lib/city/engine.ts",
+      "lib/city/interiors.ts",
+      "lib/city/navigation.ts",
+      "lib/city/skytrain-ride-train.ts",
+      "lib/city/skytrain-stations.ts",
+      "lib/city/skytrain-travel-types.ts",
+      "lib/city/skytrain-travel.ts",
+      "lib/city/street-furniture-qa.ts",
+      "lib/city/street-furniture.ts"
+    ],
+    "baseline_existing": [
+      "app/page.tsx",
+      "components/skytrain-travel-panel.tsx",
+      "lib/city/assets/walker.ts",
+      "lib/city/beach-amenities.ts",
+      "lib/city/citizen.ts",
+      "lib/city/engine.ts",
+      "lib/city/interiors.ts",
+      "lib/city/navigation.ts",
+      "lib/city/skytrain-ride-train.ts",
+      "lib/city/skytrain-stations.ts",
+      "lib/city/skytrain-travel-types.ts",
+      "lib/city/skytrain-travel.ts",
+      "lib/city/street-furniture-qa.ts",
+      "lib/city/street-furniture.ts"
+    ],
+    "new": []
+  },
+  "sourceHashes": {
+    "app/page.tsx": {
+      "baseline": "172bb30de950e91106c3f6568cac32773458d4e379ca5ad1954fd4d5fb15d009",
+      "current": "1bb660117c6c6741c715eb7cf0b445c30e3a1ac9432f5256632044b9e466b9f4"
+    },
+    "components/skytrain-travel-panel.tsx": {
+      "baseline": "633df0302d43698f69a814b5ed34f30c5d7a7be4993e303cde328b746b416026",
+      "current": "88b3a92b6a7fd3a8f969a0cfe23a7e49fa2169c017693a869f32fdaee720f942"
+    },
+    "lib/city/assets/walker.ts": {
+      "baseline": "b99690de4da8f38fb925685d4af2fce64fb6388d7402381d1dfee4efcc6d48e9",
+      "current": "ebf30b2d2462bf1fa428f79f4a6f1118ae42e8f98109eec3c4b9fc42cf5e5d5f"
+    },
+    "lib/city/beach-amenities.ts": {
+      "baseline": "abfe35e281488ccd1291f88507ee977ed5eea546a89919f210343bfde0db5728",
+      "current": "a081867d0418fd22d7685d252a9991863bc04fc245885b3132286c0dd4657a46"
+    },
+    "lib/city/citizen.ts": {
+      "baseline": "e16100c4a6ad929065425588351d832fbfdc51e8b104aae75a5af7e362a10d65",
+      "current": "60129e1344eef85e7126ef1a02e8796b22313469457c14b3f48a9ee4491db548"
+    },
+    "lib/city/engine.ts": {
+      "baseline": "7bf44a99eadb6efb4d0a9eb1abebda89600b7971241d152bce4ea4219d711363",
+      "current": "96127f3929c5fc46e26d19f771be8044bde6d18f288b05da38bdc8ad22c2e419"
+    },
+    "lib/city/interiors.ts": {
+      "baseline": "62f813f8798eaeaf79463b3200d2fea65bcf91da631e925bfbb55a166fdac93c",
+      "current": "d169aed61c7432ed7c45db1ca6ced6ba1388575767768a0f5f32bae4e2cedf1e"
+    },
+    "lib/city/navigation.ts": {
+      "baseline": "6f0f78bb67395e0892ab8fff84187161be17657403151415ca0dbe28e3bd2802",
+      "current": "b21a93908e995b0f638928c62808e43aaa6721db87cc6288fc6efd048e25ad60"
+    },
+    "lib/city/skytrain-ride-train.ts": {
+      "baseline": "b6de83b0acbe84867bed12f9edd3c97b60b0894a43245f64735e0cef3a69de9e",
+      "current": "1f02d99ce9326865efa43bfc54ad770e35644f1df28f53c61b97d0925fbd6e46"
+    },
+    "lib/city/skytrain-stations.ts": {
+      "baseline": "07ac6a9e44b5ea2e265e5b3252948aac9c58ebf478e3e9b920ea6fd1dd01815a",
+      "current": "4a10c7b626ab508dbe9e96340fe5ab588e682c42e37b0bc578d4a06de88b7b39"
+    },
+    "lib/city/skytrain-travel-types.ts": {
+      "baseline": "28f29d83f966e96d3af3c6f51e96f7e5a2ef3c1a346a590e092c362264e982a6",
+      "current": "bb2c5166c6c318e8e45aa55c12229ad913cbc1cb93f0137db0153513ee834e84"
+    },
+    "lib/city/skytrain-travel.ts": {
+      "baseline": "0948545e047d46ee8c20185277e1eb27b305e62dffeb585dcbc5f9264b38bf2c",
+      "current": "af059f9531034416062bc0263a84fa19f282c1dec7ce694c0413196a4bbd721b"
+    },
+    "lib/city/street-furniture-qa.ts": {
+      "baseline": "cd461a1ece659cdac1291bc2cad037da17f477a1e898c71d853d15e8caa5e234",
+      "current": "977005e3133732393bf803957d5d163d8d557b397ba095e6603c7db620ae5249"
+    },
+    "lib/city/street-furniture.ts": {
+      "baseline": "6ee80602d4331d83a33297cbc07b85144d3db2f4792403b7496c74482eabe2e8",
+      "current": "a1cdbfa8a117e34101fc4a7d36d82fdc0381cf2d0641ac5e91a10ff23c4c6c76"
+    }
+  },
+  "baseline": {
+    "files": 14,
+    "diagnostics": 51,
+    "errors": 51,
+    "warnings": 0,
+    "exitCode": 1,
+    "byFile": {
+      "app/page.tsx": 41,
+      "lib/city/beach-amenities.ts": 1,
+      "lib/city/engine.ts": 3,
+      "lib/city/interiors.ts": 1,
+      "lib/city/navigation.ts": 1,
+      "lib/city/street-furniture.ts": 4
+    },
+    "byRule": {
+      "eslint(no-unused-vars)": 2,
+      "jsx-a11y(prefer-tag-over-role)": 8,
+      "next(no-html-link-for-pages)": 1,
+      "react(react-compiler)": 30,
+      "typescript(TS2307)": 1,
+      "typescript(TS7006)": 3,
+      "typescript(no-explicit-any)": 6
+    },
+    "stderrEmpty": true
+  },
+  "current": {
+    "files": 14,
+    "diagnostics": 47,
+    "errors": 47,
+    "warnings": 0,
+    "exitCode": 1,
+    "byFile": {
+      "app/page.tsx": 41,
+      "lib/city/beach-amenities.ts": 1,
+      "lib/city/engine.ts": 3,
+      "lib/city/interiors.ts": 1,
+      "lib/city/navigation.ts": 1
+    },
+    "byRule": {
+      "eslint(no-unused-vars)": 2,
+      "jsx-a11y(prefer-tag-over-role)": 8,
+      "next(no-html-link-for-pages)": 1,
+      "react(react-compiler)": 30,
+      "typescript(no-explicit-any)": 6
+    },
+    "stderrEmpty": true
+  },
+  "comparison": {
+    "unchangedSourceLineMatches": 47,
+    "newFindings": [],
+    "removedFindings": [
+      {
+        "file": "lib/city/street-furniture.ts",
+        "rule": "typescript(TS2307)",
+        "message": "Cannot find module '../../public/models/blender/street-furniture/manifest.json' or its corresponding type declarations.",
+        "severity": "error",
+        "baselineLine": 4,
+        "column": 22,
+        "source": "import manifest from '../../public/models/blender/street-furniture/manifest.json';"
+      },
+      {
+        "file": "lib/city/street-furniture.ts",
+        "rule": "typescript(TS7006)",
+        "message": "Parameter 'asset' implicitly has an 'any' type.",
+        "severity": "error",
+        "baselineLine": 267,
+        "column": 46,
+        "source": "    this.requests = manifest.assets.flatMap((asset) =>"
+      },
+      {
+        "file": "lib/city/street-furniture.ts",
+        "rule": "typescript(TS7006)",
+        "message": "Parameter 'lod' implicitly has an 'any' type.",
+        "severity": "error",
+        "baselineLine": 268,
+        "column": 23,
+        "source": "      asset.lods.map((lod) => ({"
+      },
+      {
+        "file": "lib/city/street-furniture.ts",
+        "rule": "typescript(TS7006)",
+        "message": "Parameter 'asset' implicitly has an 'any' type.",
+        "severity": "error",
+        "baselineLine": 303,
+        "column": 41,
+        "source": "    const asset = manifest.assets.find((asset) => asset.id === request.kind)!;"
+      }
+    ],
+    "matches": [
+      {
+        "file": "lib/city/beach-amenities.ts",
+        "rule": "typescript(no-explicit-any)",
+        "message": "Unexpected `any`. Specify a different type.",
+        "severity": "error",
+        "currentLine": 286,
+        "column": 11,
+        "source": "      (f: any) =>",
+        "baselineLine": 284
+      },
+      {
+        "file": "lib/city/engine.ts",
+        "rule": "eslint(no-unused-vars)",
+        "message": "Identifier 'lines' is imported but never used.",
+        "severity": "error",
+        "currentLine": 99,
+        "column": 37,
+        "source": "import { project, unproject, rings, lines, inPolygon, hash } from './geo';",
+        "baselineLine": 98
+      },
+      {
+        "file": "lib/city/engine.ts",
+        "rule": "eslint(no-unused-vars)",
+        "message": "Type 'FeatureCollection' is imported but never used.",
+        "severity": "error",
+        "currentLine": 103,
+        "column": 8,
+        "source": "  type FeatureCollection,",
+        "baselineLine": 102
+      },
+      {
+        "file": "lib/city/engine.ts",
+        "rule": "typescript(no-explicit-any)",
+        "message": "Unexpected `any`. Specify a different type.",
+        "severity": "error",
+        "currentLine": 230,
+        "column": 24,
+        "source": "  data: Record<string, any> = {};",
+        "baselineLine": 228
+      },
+      {
+        "file": "lib/city/interiors.ts",
+        "rule": "typescript(no-explicit-any)",
+        "message": "Unexpected `any`. Specify a different type.",
+        "severity": "error",
+        "currentLine": 267,
+        "column": 19,
+        "source": "              (p: any) => p.kind === 'science',",
+        "baselineLine": 266
+      },
+      {
+        "file": "lib/city/navigation.ts",
+        "rule": "typescript(no-explicit-any)",
+        "message": "Unexpected `any`. Specify a different type.",
+        "severity": "error",
+        "currentLine": 1027,
+        "column": 56,
+        "source": "    const s = this.e.data.bridges?.mainSpines.find((s: any) => s.kind === kind);",
+        "baselineLine": 990
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "EffectSetState: Calling setState synchronously within an effect can trigger cascading renders",
+        "severity": "error",
+        "currentLine": 216,
+        "column": 7,
+        "source": "      setLocale(resolveLocale(localStorage.getItem(LOCALE_STORAGE_KEY)));",
+        "baselineLine": 214
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "EffectSetState: Calling setState synchronously within an effect can trigger cascading renders",
+        "severity": "error",
+        "currentLine": 242,
+        "column": 5,
+        "source": "    setMobilePanel(null);",
+        "baselineLine": 240
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "EffectSetState: Calling setState synchronously within an effect can trigger cascading renders",
+        "severity": "error",
+        "currentLine": 311,
+        "column": 5,
+        "source": "    setReady(false);",
+        "baselineLine": 302
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "EffectSetState: Calling setState synchronously within an effect can trigger cascading renders",
+        "severity": "error",
+        "currentLine": 463,
+        "column": 5,
+        "source": "    setSettings((s) => ({ ...s, autoRotate: true }));",
+        "baselineLine": 453
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Immutability: This value cannot be modified",
+        "severity": "error",
+        "currentLine": 435,
+        "column": 5,
+        "source": "    placement.onPreview = setPlacementPreview;",
+        "baselineLine": 425
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "currentLine": 197,
+        "column": 3,
+        "source": "  localeRef.current = locale;",
+        "baselineLine": 195
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "currentLine": 300,
+        "column": 3,
+        "source": "  settingsRef.current = settings;",
+        "baselineLine": 291
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "currentLine": 855,
+        "column": 15,
+        "source": "        city={engine.current}",
+        "baselineLine": 839
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "currentLine": 919,
+        "column": 21,
+        "source": "        compatible={engine.current?.compatibleGraphics ?? false}",
+        "baselineLine": 903
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "currentLine": 919,
+        "column": 21,
+        "source": "        compatible={engine.current?.compatibleGraphics ?? false}",
+        "baselineLine": 903
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "currentLine": 920,
+        "column": 21,
+        "source": "        pixelRatio={engine.current?.renderer.getPixelRatio() ?? 1}",
+        "baselineLine": 904
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "currentLine": 920,
+        "column": 21,
+        "source": "        pixelRatio={engine.current?.renderer.getPixelRatio() ?? 1}",
+        "baselineLine": 904
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "currentLine": 920,
+        "column": 21,
+        "source": "        pixelRatio={engine.current?.renderer.getPixelRatio() ?? 1}",
+        "baselineLine": 904
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "currentLine": 920,
+        "column": 21,
+        "source": "        pixelRatio={engine.current?.renderer.getPixelRatio() ?? 1}",
+        "baselineLine": 904
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "currentLine": 920,
+        "column": 21,
+        "source": "        pixelRatio={engine.current?.renderer.getPixelRatio() ?? 1}",
+        "baselineLine": 904
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "currentLine": 919,
+        "column": 21,
+        "source": "        compatible={engine.current?.compatibleGraphics ?? false}",
+        "baselineLine": 903
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "currentLine": 924,
+        "column": 15,
+        "source": "        city={engine.current}",
+        "baselineLine": 908
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "currentLine": 944,
+        "column": 21,
+        "source": "        controller={engine.current?.flight || null}",
+        "baselineLine": 928
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "currentLine": 944,
+        "column": 21,
+        "source": "        controller={engine.current?.flight || null}",
+        "baselineLine": 928
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "currentLine": 944,
+        "column": 21,
+        "source": "        controller={engine.current?.flight || null}",
+        "baselineLine": 928
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "currentLine": 978,
+        "column": 36,
+        "source": "      <VehicleConditionPanel city={engine.current} locale={locale}",
+        "baselineLine": 962
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "currentLine": 1592,
+        "column": 20,
+        "source": "              ? `${tourIndex.current + 1} / ${VIEWS.length}`",
+        "baselineLine": 1576
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "currentLine": 2058,
+        "column": 12,
+        "source": "          {engine.current?.compatibleGraphics && (",
+        "baselineLine": 2042
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "currentLine": 2058,
+        "column": 12,
+        "source": "          {engine.current?.compatibleGraphics && (",
+        "baselineLine": 2042
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "currentLine": 2058,
+        "column": 12,
+        "source": "          {engine.current?.compatibleGraphics && (",
+        "baselineLine": 2042
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "currentLine": 787,
+        "column": 7,
+        "source": "      engine.current?.navigation?.hold(direction, true);",
+        "baselineLine": 775
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "currentLine": 787,
+        "column": 7,
+        "source": "      engine.current?.navigation?.hold(direction, true);",
+        "baselineLine": 775
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "currentLine": 787,
+        "column": 7,
+        "source": "      engine.current?.navigation?.hold(direction, true);",
+        "baselineLine": 775
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "currentLine": 787,
+        "column": 7,
+        "source": "      engine.current?.navigation?.hold(direction, true);",
+        "baselineLine": 775
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "react(react-compiler)",
+        "message": "Refs: Cannot access refs during render",
+        "severity": "error",
+        "currentLine": 787,
+        "column": 7,
+        "source": "      engine.current?.navigation?.hold(direction, true);",
+        "baselineLine": 775
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "typescript(no-explicit-any)",
+        "message": "Unexpected `any`. Specify a different type.",
+        "severity": "error",
+        "currentLine": 514,
+        "column": 62,
+        "source": "    const context = (document as Document & { modelContext?: any })",
+        "baselineLine": 504
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "typescript(no-explicit-any)",
+        "message": "Unexpected `any`. Specify a different type.",
+        "severity": "error",
+        "currentLine": 518,
+        "column": 29,
+        "source": "    const register = (tool: any) => {",
+        "baselineLine": 508
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "jsx-a11y(prefer-tag-over-role)",
+        "message": "Prefer `output` over `role` attribute `status`.",
+        "severity": "error",
+        "currentLine": 843,
+        "column": 14,
+        "source": "        <div role=\"status\" className=\"traffic-stop-caption glass\">",
+        "baselineLine": 831
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "jsx-a11y(prefer-tag-over-role)",
+        "message": "Prefer `address, details, fieldset, hgroup, optgroup` over `role` attribute `group`.",
+        "severity": "error",
+        "currentLine": 1125,
+        "column": 21,
+        "source": "                    role=\"group\"",
+        "baselineLine": 1109
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "jsx-a11y(prefer-tag-over-role)",
+        "message": "Prefer `address, details, fieldset, hgroup, optgroup` over `role` attribute `group`.",
+        "severity": "error",
+        "currentLine": 1146,
+        "column": 23,
+        "source": "                      role=\"group\"",
+        "baselineLine": 1130
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "jsx-a11y(prefer-tag-over-role)",
+        "message": "Prefer `address, details, fieldset, hgroup, optgroup` over `role` attribute `group`.",
+        "severity": "error",
+        "currentLine": 1209,
+        "column": 17,
+        "source": "                role=\"group\"",
+        "baselineLine": 1193
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "jsx-a11y(prefer-tag-over-role)",
+        "message": "Prefer `address, details, fieldset, hgroup, optgroup` over `role` attribute `group`.",
+        "severity": "error",
+        "currentLine": 1230,
+        "column": 17,
+        "source": "                role=\"group\"",
+        "baselineLine": 1214
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "next(no-html-link-for-pages)",
+        "message": "Do not use `<a>` elements to navigate between Next.js pages.",
+        "severity": "error",
+        "currentLine": 1281,
+        "column": 9,
+        "source": "        <a className=\"brand\" href=\"/\" aria-label=\"Vancouver Living Atlas\">",
+        "baselineLine": 1265
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "jsx-a11y(prefer-tag-over-role)",
+        "message": "Prefer `output` over `role` attribute `status`.",
+        "severity": "error",
+        "currentLine": 1473,
+        "column": 18,
+        "source": "              <b role=\"status\" aria-live=\"polite\">",
+        "baselineLine": 1457
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "jsx-a11y(prefer-tag-over-role)",
+        "message": "Prefer `output` over `role` attribute `status`.",
+        "severity": "error",
+        "currentLine": 2358,
+        "column": 38,
+        "source": "        <div className=\"toast glass\" role=\"status\">",
+        "baselineLine": 2342
+      },
+      {
+        "file": "app/page.tsx",
+        "rule": "jsx-a11y(prefer-tag-over-role)",
+        "message": "Prefer `progress` over `role` attribute `progressbar`.",
+        "severity": "error",
+        "currentLine": 2433,
+        "column": 21,
+        "source": "                    role=\"progressbar\"",
+        "baselineLine": 2417
+      }
+    ]
+  },
+  "evidence": {
+    "baselineJson": {
+      "path": "work/seat-lint-baseline.json",
+      "sha256": "3b389ca4e2b40f1e7f17df261ec171749ac058ee503947a55f5841f22c6d5528"
+    },
+    "currentJson": {
+      "path": "work/seat-lint-current.json",
+      "sha256": "21bc609024a9b04629dac6c957a19287d8e009216bb77833a14b9ce80d5bedee"
+    },
+    "baselineStderr": {
+      "path": "work/seat-lint-baseline.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "currentStderr": {
+      "path": "work/seat-lint-current.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "comparisonScript": {
+      "path": "work/seat-lint-comparison.py",
+      "sha256": "2e2610829095c4cef411b636b82b364594fff457814c6c8780ebd210f1cc4a42"
+    }
+  },
+  "limitations": [
+    "This is the requested four-file scoped lint comparison, not a repository-wide lint pass.",
+    "Nonzero lint exit codes remain visible; inherited diagnostics are distinguished by exact unchanged-source matching rather than suppressed.",
+    "Matching covers primary source location, rule, message, severity and column; it does not assert that unchanged legacy diagnostics are harmless.",
+    "No product configuration, source or test file was edited for this audit."
+  ]
+}

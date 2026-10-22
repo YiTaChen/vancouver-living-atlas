@@ -1,0 +1,390 @@
+{
+  "schemaVersion": 1,
+  "status": "pass",
+  "runtime": "v24.22.1",
+  "routeReleaseIdentifier": "translink-gtfs-26SEP_20261002-regional-skytrain",
+  "scope": "Source-footprint CPU audit for the elevated Main Street regional station and its selected east passenger path. No source footprints, City towers, collision volumes or raw station metadata are removed.",
+  "method": {
+    "sourceContainment": "Exact point-in-polygon queries with holes against projected source geometry. Checks are deliberately horizontal: zero non303 footprint hits is stronger than relying on estimated building heights at the sampled points.",
+    "grid": "Both 70.7m ×2.7m train bounding footprints sampled at ≤0.25m longitudinal/≤0.45m lateral spacing, including all boundaries. Whole 74m×7m platform sampled at0.25m×0.5m. East stairs sampled at201 points with nine ±0.24m body offsets; entry/access/door use the same offsets.",
+    "seedScope": "All features in the complete buildings dataset are checked, not only centroid or radius candidates.",
+    "terrain": "Constant zero terrain for horizontal audit; actual browser elevation and rendering remain separate acceptance checks."
+  },
+  "sourceHashes": {
+    "public/models/skytrain-routes.json": "04941b1e7d3295c7e4ffacfe8ae63e4830aef2a055a8cf8a620b24d4143529d4",
+    "public/models/skytrain-stations/main-street-science-world.json": "6fb6337234c3cb388272a8a12363fecad596db6070bdb6c464b1aeaf769c37b7",
+    "public/data/buildings.geojson": "57cf77f2f7afbceeb3ea4b7dcb87c33d7f56a6df57c33306792503f1dba538ec",
+    "tools/transit/city-life-sources/transit-source-snapshot.json": "4e40f326c64146cda8dd6ece93ebab29e4ab58271311116029e819e0c1585301",
+    "lib/city/skytrain-ride-path.ts": "a0e28ed0367979d6ba036e7c5f90ec5d085908e422ba850114210a1973138a0d",
+    "lib/city/skytrain-stations.ts": "07ac6a9e44b5ea2e265e5b3252948aac9c58ebf478e3e9b920ea6fd1dd01815a",
+    "lib/city/facade-profile.ts": "86e6e4bae22d24bb7e944d6de44725baa765ab16d4c8556ef55932988a814d19"
+  },
+  "station": {
+    "selectionAnchor": [
+      -123.10060690768856,
+      49.27317791187965
+    ],
+    "runtimeOrigin": [
+      -123.100369,
+      49.2731495
+    ],
+    "deltaMetres": {
+      "east": 17.27500396083792,
+      "south": 3.162810442325508,
+      "total": 17.56215054431117
+    },
+    "endpointSources": [
+      {
+        "direction": "eastbound",
+        "sourceShapeId": "322353",
+        "sourceStopIds": [
+          "8042",
+          "8043"
+        ],
+        "coordinate": [
+          -123.100379,
+          49.273151
+        ]
+      },
+      {
+        "direction": "westbound",
+        "sourceShapeId": "322371",
+        "sourceStopIds": [
+          "8074",
+          "8075"
+        ],
+        "coordinate": [
+          -123.100359,
+          49.273148
+        ]
+      }
+    ],
+    "originDerivedFromBothEndpoints": true,
+    "localAuthoredFloorsAndPlatformsPreserved": true
+  },
+  "originalBlocker": {
+    "westEntry": {
+      "local": [
+        0,
+        0,
+        -63.7
+      ],
+      "worldXZ": [
+        1927.2748645688644,
+        1411.9058719288869
+      ],
+      "lonlat": [
+        -123.10145797955914,
+        49.27331669177211
+      ],
+      "footprintHits": [
+        {
+          "id": "166039-cut0",
+          "buildingId": 133436,
+          "structureId": null,
+          "minHeight": 0,
+          "height": 5
+        },
+        {
+          "id": "166039-cut1",
+          "buildingId": 133436,
+          "structureId": null,
+          "minHeight": 5,
+          "height": 12
+        },
+        {
+          "id": "166039-cut2",
+          "buildingId": 133436,
+          "structureId": null,
+          "minHeight": 12,
+          "height": 53.8
+        }
+      ]
+    },
+    "westPlatformAccess": {
+      "local": [
+        0,
+        8,
+        -36.2
+      ],
+      "worldXZ": [
+        1953.953841784758,
+        1418.575367765442
+      ],
+      "lonlat": [
+        -123.10109056234657,
+        49.273256778945694
+      ],
+      "footprintHits": [
+        {
+          "id": "166039-cut0",
+          "buildingId": 133436,
+          "structureId": null,
+          "minHeight": 0,
+          "height": 5
+        },
+        {
+          "id": "166039-cut1",
+          "buildingId": 133436,
+          "structureId": null,
+          "minHeight": 5,
+          "height": 12
+        },
+        {
+          "id": "166039-cut2",
+          "buildingId": 133436,
+          "structureId": null,
+          "minHeight": 12,
+          "height": 53.8
+        }
+      ]
+    },
+    "finding": "The old public west access lies in City buildingId133436 podium features166039-cut0/1/2. The rear platform/train overlaps the same podium. The station centre and first-car waiting area also overlap the separate source303 elevated station body."
+  },
+  "selectedEastOrigins": [
+    {
+      "direction": "westbound",
+      "entry": {
+        "local": [
+          0,
+          0,
+          59
+        ],
+        "worldXZ": [
+          2063.5866141438896,
+          1444.8267601583143
+        ],
+        "lonlat": [
+          -123.0995807230712,
+          49.27302095975424
+        ],
+        "footprintHits": [
+          {
+            "id": "osm-structure-303-0",
+            "buildingId": null,
+            "structureId": "osm-structure-303",
+            "minHeight": 5,
+            "height": 12
+          }
+        ]
+      },
+      "access": {
+        "local": [
+          0,
+          8,
+          36.2
+        ],
+        "worldXZ": [
+          2041.467316670349,
+          1439.2971417920069
+        ],
+        "lonlat": [
+          -123.09988534534199,
+          49.27307063293396
+        ],
+        "footprintHits": [
+          {
+            "id": "osm-structure-303-0",
+            "buildingId": null,
+            "structureId": "osm-structure-303",
+            "minHeight": 5,
+            "height": 12
+          }
+        ]
+      },
+      "door": {
+        "local": [
+          -2.5,
+          8,
+          26.85
+        ],
+        "worldXZ": [
+          2031.7901466136218,
+          1439.4548747726594
+        ],
+        "lonlat": [
+          -123.10001861727439,
+          49.27306921600096
+        ],
+        "footprintHits": [
+          {
+            "id": "osm-structure-303-0",
+            "buildingId": null,
+            "structureId": "osm-structure-303",
+            "minHeight": 5,
+            "height": 12
+          }
+        ]
+      }
+    },
+    {
+      "direction": "eastbound",
+      "entry": {
+        "local": [
+          0,
+          0,
+          59
+        ],
+        "worldXZ": [
+          2063.5866141438896,
+          1444.8267601583143
+        ],
+        "lonlat": [
+          -123.0995807230712,
+          49.27302095975424
+        ],
+        "footprintHits": [
+          {
+            "id": "osm-structure-303-0",
+            "buildingId": null,
+            "structureId": "osm-structure-303",
+            "minHeight": 5,
+            "height": 12
+          }
+        ]
+      },
+      "access": {
+        "local": [
+          0,
+          8,
+          36.2
+        ],
+        "worldXZ": [
+          2041.467316670349,
+          1439.2971417920069
+        ],
+        "lonlat": [
+          -123.09988534534199,
+          49.27307063293396
+        ],
+        "footprintHits": [
+          {
+            "id": "osm-structure-303-0",
+            "buildingId": null,
+            "structureId": "osm-structure-303",
+            "minHeight": 5,
+            "height": 12
+          }
+        ]
+      },
+      "door": {
+        "local": [
+          2.5,
+          8,
+          26.85
+        ],
+        "worldXZ": [
+          2033.0027822202683,
+          1434.604151642497
+        ],
+        "lonlat": [
+          -123.10000191711416,
+          49.27311279058891
+        ],
+        "footprintHits": [
+          {
+            "id": "osm-structure-303-0",
+            "buildingId": null,
+            "structureId": "osm-structure-303",
+            "minHeight": 5,
+            "height": 12
+          }
+        ]
+      }
+    }
+  ],
+  "clearanceChecks": [
+    {
+      "kind": "full-70.7m-train-westbound",
+      "samples": 1988,
+      "replacement303Samples": 1988,
+      "non303FootprintHits": []
+    },
+    {
+      "kind": "full-70.7m-train-eastbound",
+      "samples": 1988,
+      "replacement303Samples": 1704,
+      "non303FootprintHits": []
+    },
+    {
+      "kind": "complete-platform-footprint",
+      "samples": 4455,
+      "replacement303Samples": 4455,
+      "non303FootprintHits": []
+    },
+    {
+      "kind": "east-stair-passenger-body",
+      "samples": 1809,
+      "replacement303Samples": 1809,
+      "non303FootprintHits": []
+    },
+    {
+      "kind": "westbound-entry-passenger-body",
+      "samples": 9,
+      "replacement303Samples": 9,
+      "non303FootprintHits": []
+    },
+    {
+      "kind": "westbound-access-passenger-body",
+      "samples": 9,
+      "replacement303Samples": 9,
+      "non303FootprintHits": []
+    },
+    {
+      "kind": "westbound-door-passenger-body",
+      "samples": 9,
+      "replacement303Samples": 9,
+      "non303FootprintHits": []
+    },
+    {
+      "kind": "eastbound-entry-passenger-body",
+      "samples": 9,
+      "replacement303Samples": 9,
+      "non303FootprintHits": []
+    },
+    {
+      "kind": "eastbound-access-passenger-body",
+      "samples": 9,
+      "replacement303Samples": 9,
+      "non303FootprintHits": []
+    },
+    {
+      "kind": "eastbound-door-passenger-body",
+      "samples": 9,
+      "replacement303Samples": 9,
+      "non303FootprintHits": []
+    }
+  ],
+  "targetedReplacement": {
+    "structureKey": "osm-structure-303",
+    "seed": 783,
+    "sourceIds": [
+      "osm-363838370"
+    ],
+    "minHeight": 5,
+    "height": 12,
+    "matchingSeedFeaturesAcrossEntireDataset": [
+      {
+        "id": "osm-structure-303-0",
+        "buildingId": null,
+        "structureId": "osm-structure-303",
+        "minHeight": 5,
+        "height": 12
+      }
+    ],
+    "candidateWorldCentre": [
+      2006.3480812079724,
+      1430.5176599998872
+    ],
+    "candidateRadiusMetres": 160,
+    "neighboringCityBuildingIdsRetained": [
+      133436,
+      133457
+    ]
+  },
+  "limitations": [
+    "This is a finite footprint sample audit, not an analytic collision proof, architectural survey, FPS test or browser/GPU acceptance.",
+    "The original western circulation source remains recorded and is not claimed clear of the neighboring podium. This implementation excludes west-access connections from the walker graph and guides passengers to its integrated east entrance/access. This describes the game implementation, not a real-world closure of the west stationhouse.",
+    "A separate active-station renderer replacement for source303 is required; this report does not itself change or hide city geometry."
+  ]
+}

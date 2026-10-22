@@ -1,0 +1,103 @@
+{
+  "revision": "9c95d913ba8b645d342b999bff23c5a18b825195",
+  "sourceFingerprint": "9c75e5dd821feceb11016476bf113c304074a7dee1e0852215a78ea637d07dce",
+  "kind": "vehicle-impact-webgl-v1",
+  "burst": false,
+  "entry": {
+    "mode": "tesla",
+    "obstacle": {
+      "id": "tree:9639",
+      "kind": "tree",
+      "diameterM": 0.19,
+      "position": [
+        -1945.4119113352667,
+        4.31223333333574,
+        1459.4274639999833
+      ],
+      "heightM": 5,
+      "radiusM": 0.18
+    },
+    "x": -1957.4119113352667,
+    "y": 5.490892926014116,
+    "z": 1459.4274639999833,
+    "yaw": 1.5707963267948966
+  },
+  "mode": "tesla",
+  "viewport": [
+    844,
+    390
+  ],
+  "quality": "balanced",
+  "qualityMode": "auto",
+  "valid": true,
+  "damage": {
+    "zones": {
+      "front": 0,
+      "rear": 0,
+      "left": 0,
+      "right": 0,
+      "roof": 0
+    },
+    "scratches": {
+      "front": 0,
+      "rear": 0,
+      "left": 0,
+      "right": 0,
+      "roof": 0
+    },
+    "overall": 0,
+    "severity": 0,
+    "revision": 2,
+    "lastHit": null,
+    "recentEventIds": []
+  },
+  "visuals": {
+    "marks": 0,
+    "capacity": 16,
+    "ownedMeshes": 0,
+    "maximumOwnedMeshes": 18,
+    "refinedVertices": 0,
+    "refinedTriangles": 0,
+    "maximumRefinedVertices": 6144,
+    "maximumRefinedTriangles": 2048,
+    "maximumRefinedMeshVertices": 1152,
+    "maximumRefinedMeshTriangles": 384,
+    "refinementHistoryEntries": 0,
+    "maximumRefinementHistoryEntries": 288,
+    "dentedVertices": 0,
+    "triangles": 0,
+    "maximumTriangles": 4096,
+    "draws": 0,
+    "textures": 0,
+    "rebuilds": 4,
+    "disposed": false
+  },
+  "broken": [
+    "tree:17263",
+    "lamp:183",
+    "tree:9639"
+  ],
+  "feedback": {
+    "capacity": 128,
+    "budget": 64,
+    "active": 0,
+    "drawCalls": 0,
+    "bufferBytes": 7680,
+    "audioEnabled": false,
+    "audioAllocated": false,
+    "voices": 0,
+    "disposed": false
+  },
+  "tesla": "{\"active\":true,\"mode\":\"air\",\"transitioning\":false,\"speedKph\":0,\"altitudeM\":5,\"parked\":false,\"wallHolding\":false,\"surfaceHolding\":false,\"onRoof\":false,\"vortexActive\":false,\"vortexProgress\":0,\"vortexAvailable\":true,\"adhesion\":true,\"flightAssist\":true,\"view\":\"chase\",\"quality\":\"auto\",\"effectiveQuality\":\"medium\",\"warning\":\"\",\"position\":[-1877.8815300243925,8.319574102290925,1459.1500122645862],\"quaternion\":[-9.596177471901687e-137,0.707584016339548,4.339784750468022e-137,0.706629223724008],\"heading\":1.5721466075636312,\"contact\":null,\"model\":{\"quality\":\"medium\",\"triangles\":27300,\"meshes\":36,\"materials\":13,\"cachedLevels\":3,\"disposed\":false},\"world\":{\"sources\":53969,\"sourceCells\":16666,\"broadSources\":4,\"cachedTiles\":14,\"loadedTiles\":14,\"cachedFaces\":1941,\"queries\":27908,\"renderedRoofDetails\":{\"maxCachedRecords\":4,\"cachedRecords\":1,\"builtRecords\":1,\"instanceSources\":216,\"cachedTiles\":0,\"cachedFaces\":0}},\"step\":{\"simulatedS\":0.03310000000003493,\"droppedS\":0,\"substeps\":4,\"collisions\":0,\"transitions\":0,\"environmentFailures\":0},\"damage\":{\"zones\":{\"front\":0,\"rear\":0,\"left\":0,\"right\":0,\"roof\":0},\"scratches\":{\"front\":0,\"rear\":0,\"left\":0,\"right\":0,\"roof\":0},\"overall\":0,\"severity\":0,\"revision\":2,\"lastHit\":null,\"recentEventIds\":[]}}",
+  "drive": {
+    "position": [
+      -1957.4119113352667,
+      5.490892926014116,
+      1459.4274639999833
+    ],
+    "speed": 0,
+    "yaw": 1.5707963267948966
+  },
+  "calls": 146,
+  "triangles": 859069
+}

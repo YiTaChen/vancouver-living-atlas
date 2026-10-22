@@ -1,0 +1,205 @@
+{
+  "retrievedAt": "2026-10-22",
+  "source": "OpenStreetMap contributors",
+  "license": "ODbL-1.0",
+  "copyrightUrl": "https://www.openstreetmap.org/copyright",
+  "scope": "Ground asphalt continuation of the actual northbound Causeway exit. Preserve the existing protected road, explicit park-access-city gate and all source permissions.",
+  "route": {
+    "wayIds": [
+      363693717, 156891517, 604336388, 1299818249, 116061634, 1299818248
+    ],
+    "startPavingStationM": 130,
+    "widthM": 6,
+    "canonicalRouteId": "causeway-south-park-access",
+    "canonicalLastSourceId": 156891517
+  },
+  "model": "Width is a game estimate; elevations conform to the unchanged protected endpoint and existing ground relief, not surveyed civil-engineering dimensions.",
+  "ways": [
+    {
+      "id": 363693717,
+      "version": 11,
+      "timestamp": "2025-01-11T23:33:12Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/363693717/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/363693717",
+      "tags": {
+        "bicycle": "designated",
+        "cycleway:left": "no",
+        "cycleway:right": "lane",
+        "destination": "stanley park",
+        "foot": "no",
+        "highway": "trunk_link",
+        "horse": "no",
+        "lanes": "1",
+        "lit": "yes",
+        "maxspeed": "30",
+        "oneway": "yes",
+        "parking:both": "no",
+        "sidewalk": "no",
+        "surface": "asphalt",
+        "trolley_wire": "yes"
+      },
+      "nodeIds": [3678462254, 1309735214, 1309735545, 1309735407, 1309734864],
+      "coordinates": [
+        [-123.1366494, 49.2951104],
+        [-123.1366258, 49.2951712],
+        [-123.1365954, 49.295233],
+        [-123.1365661, 49.2952833],
+        [-123.1362011, 49.2959089]
+      ]
+    },
+    {
+      "id": 156891517,
+      "version": 16,
+      "timestamp": "2025-01-11T23:33:12Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/156891517/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/156891517",
+      "tags": {
+        "bicycle": "designated",
+        "cycleway:left": "no",
+        "cycleway:right": "lane",
+        "highway": "trunk_link",
+        "lanes": "1",
+        "maxspeed": "30",
+        "oneway": "yes",
+        "parking:both": "no",
+        "sidewalk": "no",
+        "surface": "asphalt",
+        "trolley_wire": "yes"
+      },
+      "nodeIds": [
+        1309734864, 6313319509, 6313319510, 1309735653, 1309735082, 6313319513,
+        6313319514, 1309735266
+      ],
+      "coordinates": [
+        [-123.1362011, 49.2959089],
+        [-123.1361507, 49.2959967],
+        [-123.1361233, 49.2960532],
+        [-123.1360983, 49.2961127],
+        [-123.1360827, 49.2961649],
+        [-123.1360701, 49.2962181],
+        [-123.136061, 49.2962745],
+        [-123.136055, 49.2963264]
+      ]
+    },
+    {
+      "id": 604336388,
+      "version": 9,
+      "timestamp": "2025-04-08T15:14:02Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/604336388/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/604336388",
+      "tags": {
+        "bicycle": "designated",
+        "cycleway:left": "no",
+        "cycleway:right": "lane",
+        "highway": "trunk_link",
+        "lanes": "1",
+        "maxspeed": "30",
+        "oneway": "yes",
+        "parking:both": "no",
+        "sidewalk:left": "no",
+        "sidewalk:right": "separate",
+        "surface": "asphalt",
+        "trolley_wire": "yes"
+      },
+      "nodeIds": [1309735266, 1309734926, 3678410852],
+      "coordinates": [
+        [-123.136055, 49.2963264],
+        [-123.1360507, 49.2963884],
+        [-123.136053, 49.2964582]
+      ]
+    },
+    {
+      "id": 1299818249,
+      "version": 5,
+      "timestamp": "2025-04-08T15:14:02Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/1299818249/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/1299818249",
+      "tags": {
+        "bicycle": "yes",
+        "cycleway": "no",
+        "cycleway:left": "no",
+        "foot": "no",
+        "highway": "trunk_link",
+        "lanes": "1",
+        "maxspeed": "30",
+        "oneway": "yes",
+        "parking:both": "no",
+        "sidewalk:left": "no",
+        "sidewalk:right": "separate",
+        "surface": "asphalt",
+        "trolley_wire": "yes"
+      },
+      "nodeIds": [3678410852, 6313319503, 1309735139, 6313319507],
+      "coordinates": [
+        [-123.136053, 49.2964582],
+        [-123.1360627, 49.2965391],
+        [-123.1360768, 49.2966021],
+        [-123.1361009, 49.2966822]
+      ]
+    },
+    {
+      "id": 116061634,
+      "version": 17,
+      "timestamp": "2025-04-08T15:14:03Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/116061634/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/116061634",
+      "tags": {
+        "bicycle": "yes",
+        "bus_bay": "right",
+        "cycleway:left": "no",
+        "foot": "no",
+        "highway": "trunk_link",
+        "lanes": "1",
+        "maxspeed": "30",
+        "oneway": "yes",
+        "parking:both": "no",
+        "sidewalk:left": "no",
+        "sidewalk:right": "separate",
+        "surface": "asphalt",
+        "trolley_wire": "yes"
+      },
+      "nodeIds": [6313319507, 1309735635, 1309735069, 6313319511],
+      "coordinates": [
+        [-123.1361009, 49.2966822],
+        [-123.1361791, 49.2969524],
+        [-123.1361915, 49.2970199],
+        [-123.1361996, 49.2970692]
+      ]
+    },
+    {
+      "id": 1299818248,
+      "version": 5,
+      "timestamp": "2025-04-08T15:14:03Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/1299818248/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/1299818248",
+      "tags": {
+        "bicycle": "yes",
+        "cycleway:left": "no",
+        "foot": "no",
+        "highway": "trunk_link",
+        "lanes": "1",
+        "maxspeed": "30",
+        "oneway": "yes",
+        "parking:both": "no",
+        "sidewalk:left": "no",
+        "sidewalk:right": "separate",
+        "surface": "asphalt",
+        "trolley_wire": "yes"
+      },
+      "nodeIds": [
+        6313319511, 3678410825, 6313319502, 1025452129, 1309735507, 1309734981,
+        6313319506, 3678410842
+      ],
+      "coordinates": [
+        [-123.1361996, 49.2970692],
+        [-123.1362021, 49.2971364],
+        [-123.1361943, 49.2971871],
+        [-123.13618, 49.2972349],
+        [-123.1361561, 49.2972733],
+        [-123.1361279, 49.2973001],
+        [-123.1360854, 49.2973313],
+        [-123.1360363, 49.297359]
+      ]
+    }
+  ]
+}

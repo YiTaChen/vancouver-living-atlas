@@ -1,5 +1,11 @@
 import * as THREE from 'three';
 import { drivingYawDelta } from './driving-steering';
+import {
+  createVehicleDrift,
+  resetVehicleDrift,
+  stepVehicleDrift,
+  vehicleDriftIntensity,
+} from './vehicle-drift';
 import { TrafficStop } from './traffic-stop';
 import { ROADSTER_ACCELERATION, ROADSTER_TOP_SPEED } from './traffic-stop-state';
 import { safeTouchAxis } from './touch-input';
@@ -8,6 +14,7 @@ import { trimRoad } from './road-trim';
 import {
   resolveSurfaceStep,
   sampleKnownSurface,
+  type SurfaceConnection,
   type SurfaceHit,
 } from './surface-reachability';
 import type { TravelSurfaceIndex } from './travel-surfaces';
@@ -29,6 +36,7 @@ import { GroundSurfaceIndex, walkableGroundMeshes } from './ground-surface';
 import { DriverCameraMotion, DRIVER_LEFT_OFFSET } from './driver-camera';
 import type { TravelBookmark } from './travel-return';
 import { makeRoadster } from './assets/roadster';
+import { VehicleCondition } from './vehicle-condition';
 import { makeCockpit } from './assets/cockpits';
 import {
   firstPerson,
@@ -37,12 +45,69 @@ import {
   type InteriorView,
   type TravelView,
 } from './travel-camera';
+export interface WalkSeatPose {
+  id: string;
+  floor: readonly [number, number, number];
+  yaw: number;
+  height: number;
+  stand(): THREE.Vector3 | null;
+}
 export class StreetNavigation {
+  walkSeat: WalkSeatPose | null = null;
+  sitOnSeat(seat: WalkSeatPose) {
+    if (this.mode !== 'walk' || this.walkSeat ||
+      ![...seat.floor, seat.yaw, seat.height].every(Number.isFinite)) return false;
+    this.blur();
+    this.walkSeat = seat;
+    this.position.set(...seat.floor);
+    // Keep the approach camera direction; only the seated body faces the chair.
+    this.speed = 0;
+    this.walker.setSeated?.(true, seat.height);
+    this.update(0);
+    return true;
+  }
+  leaveWalkSeat() {
+    const seat = this.walkSeat;
+    if (!seat) return true;
+    const exit = seat.stand();
+    if (!exit || !exit.toArray().every(Number.isFinite)) return false;
+    this.walkSeat = null;
+    this.walker.setSeated?.(false);
+    this.blur();
+    this.position.copy(exit);
+    this.update(0);
+    return true;
+  }
   mode: 'orbit' | TravelMode = 'orbit';
   keys = new Set<string>();
   touchX = 0;
   touchY = 0;
   touchBrake = false;
+  touchDrift = false;
+  driftInputEnabled = true;
+  private driftKeyBlocked = false;
+  readonly drift = createVehicleDrift();
+  setDriftHeld(held: boolean) {
+    this.touchDrift = held && this.driftInputEnabled && this.mode === 'drive';
+  }
+  setDriftInputEnabled(enabled: boolean) {
+    this.driftInputEnabled = enabled;
+    if (!enabled) this.clearDrift();
+  }
+  clearDrift() {
+    this.driftKeyBlocked = true;
+    this.touchDrift = false;
+    this.keys.delete('x');
+    resetVehicleDrift(this.drift);
+  }
+  get driftIntensity() {
+    return this.mode === 'drive' && this.driftInputEnabled
+      ? vehicleDriftIntensity(this.drift, this.speed, this.carModel)
+      : 0;
+  }
+  driftVisibility = () => {
+    if (typeof document !== 'undefined' && document.hidden) this.clearDrift();
+  };
   setTouchAxes(x: number, y: number) {
     this.touchX = safeTouchAxis(x);
     this.touchY = safeTouchAxis(y);
@@ -67,6 +132,7 @@ export class StreetNavigation {
   dragging = false;
   last = [0, 0];
   car = new THREE.Group();
+  condition: VehicleCondition;
   carModel: 'classic' | 'roadster' = 'roadster';
   classicCar = new THREE.Group();
   roadster = makeRoadster();
@@ -87,6 +153,7 @@ export class StreetNavigation {
   walker: {
     group: THREE.Group;
     update(distance: number, moving: boolean, dt?: number, speed?: number): void;
+    setSeated?(seated: boolean, seatHeight?: number): void;
     dispose?(): void;
   };
   walkingDistance = 0;
@@ -238,11 +305,14 @@ export class StreetNavigation {
     this.roadster.group.visible = true;
     this.cockpits.drive = this.roadsterCockpit;
     this.car.add(this.classicCar, this.roadster.group);
+    this.condition = new VehicleCondition(e,this.car,1550,.7);
     this.car.visible = false;
     e.scene.add(this.car);
     window.addEventListener('keydown', this.keyDown);
     window.addEventListener('keyup', this.keyUp);
     window.addEventListener('blur', this.blur);
+    if (typeof document !== 'undefined' && typeof document.addEventListener === 'function')
+      document.addEventListener('visibilitychange', this.driftVisibility);
     const canvas = e.renderer.domElement;
     canvas.addEventListener('wheel', this.wheel, {
       passive: false,
@@ -255,9 +325,11 @@ export class StreetNavigation {
   }
   setCarModel(model: 'classic' | 'roadster') {
     if (model !== 'classic' && model !== 'roadster') return;
+    this.clearDrift();
     this.carModel = model;
     this.classicCar.visible = model === 'classic';
     this.roadster.group.visible = model === 'roadster';
+    this.condition?.refresh();
     this.classicCockpit.visible = this.roadsterCockpit.visible = false;
     this.cockpits.drive =
       model === 'classic' ? this.classicCockpit : this.roadsterCockpit;
@@ -265,6 +337,7 @@ export class StreetNavigation {
     this.notifyCamera();
   }
   keyDown = (ev: KeyboardEvent) => {
+    const k = this.movementKey(ev);
     if (
       this.mode === 'orbit' ||
       ev.defaultPrevented ||
@@ -277,9 +350,21 @@ export class StreetNavigation {
         )) ||
       ev.target instanceof HTMLInputElement ||
       ev.target instanceof HTMLTextAreaElement
-    )
+    ) {
+      if (k === 'x') {
+        this.keys.delete('x');
+        this.driftKeyBlocked = true;
+      }
       return;
-    const k = this.movementKey(ev);
+    }
+    if (k === 'x') {
+      if (ev.isComposing || this.mode !== 'drive' || !this.driftInputEnabled) {
+        this.driftKeyBlocked = true;
+        return;
+      }
+      if (ev.repeat && this.driftKeyBlocked) return;
+      if (!ev.repeat) this.driftKeyBlocked = false;
+    }
     if (ev.target instanceof Element) {
       // Space activates a focused button; arrow keys belong to value selectors.
       // WASD remains available after using an ordinary HUD control.
@@ -306,6 +391,7 @@ export class StreetNavigation {
         'arrowright',
         'shift',
         ' ',
+        'x',
       ].includes(k)
     ) {
       ev.preventDefault();
@@ -325,13 +411,17 @@ export class StreetNavigation {
       ShiftLeft: 'shift',
       ShiftRight: 'shift',
       Space: ' ',
+      KeyX: 'x',
     };
     return codes[ev.code] || ev.key.toLowerCase();
   }
   keyUp = (ev: KeyboardEvent) => {
-    this.keys.delete(this.movementKey(ev));
+    const key = this.movementKey(ev);
+    this.keys.delete(key);
+    if (key === 'x') this.driftKeyBlocked = false;
   };
   blur = () => {
+    this.clearDrift();
     this.keys.clear();
     this.setTouchAxes(0, 0);
     this.touchBrake = false;
@@ -539,6 +629,51 @@ export class StreetNavigation {
           ? this.groundHeight(this.position.x, this.position.z)
           : this.roadHeight(this.position.x, this.position.z) - 0.2
         : this.position.y;
+    const connections = (
+      (this.e.data.causewayConnections as
+        | readonly SurfaceConnection[]
+        | undefined) || []
+    ).filter((c) => {
+      // A pedestrian entrance can cross an ordinary paved road in plan view.
+      // Its gate cannot select that floor for a car which is still completely
+      // supported by the original road. All other gates retain their priority.
+      if (
+        this.mode !== 'drive' ||
+        identity.surfaceId !== 'ground' ||
+        c.allowedModes.includes('drive') ||
+        !c.allowedModes.includes('walk') ||
+        c.geometry.kind !== 'gate'
+      )
+        return true;
+      const forward = c.from.surfaceId === 'ground' && c.from.layer === 0;
+      const reverse =
+        !forward &&
+        c.to.surfaceId === 'ground' &&
+        c.to.layer === 0 &&
+        c.twoWay !== false;
+      if (!forward && !reverse) return true;
+      const target = forward ? c.to : c.from;
+      if (target.surfaceId === 'ground') return true;
+      const g = c.geometry,
+        dx = g.b[0] - g.a[0],
+        dz = g.b[1] - g.a[1],
+        length = Math.hypot(dx, dz);
+      if (![...g.a, ...g.b, g.fromSide].every(Number.isFinite) || length < 1e-8)
+        return true;
+      const sign = g.fromSide * (reverse ? -1 : 1);
+      const d0 =
+        ((dx * (this.position.z - g.a[1]) - dz * (this.position.x - g.a[0])) /
+          length) *
+        sign;
+      const d1 = ((dx * (z - g.a[1]) - dz * (x - g.a[0])) / length) * sign;
+      if (d0 < -1e-8 || d1 > 1e-8 || d0 - d1 <= 1e-8) return true;
+      const t = THREE.MathUtils.clamp(d0 / (d0 - d1), 0, 1);
+      const xx = this.position.x + (x - this.position.x) * t,
+        zz = this.position.z + (z - this.position.z) * t;
+      const u = ((xx - g.a[0]) * dx + (zz - g.a[1]) * dz) / (length * length);
+      if (u < -1e-8 || u > 1 + 1e-8) return true;
+      return !this.pavedDriveContinuation(x, z, currentY, t);
+    });
     const result = resolveSurfaceStep({
       current: {
         ...identity,
@@ -549,14 +684,108 @@ export class StreetNavigation {
       to: [x, z],
       mode: this.mode,
       lookup,
-      connections: this.e.data.causewayConnections || [],
+      connections,
     });
     return result.ok ? result.hit : undefined;
   }
-  clearGround(x: number, z: number, mode: string = this.mode, pendingFurniture = false) {
+  /** Only a crossed walk-only ground gate asks for this bounded road proof.
+   * It grants no new floor identity, ground permission or collision exception. */
+  private pavedDriveContinuation(
+    x: number,
+    z: number,
+    currentY: number,
+    gateT: number,
+  ) {
+    const road = this.e.data.roadSurface;
+    if (
+      !road ||
+      typeof road.coversSegment !== 'function' ||
+      this.e.interiors?.height(this.position.x, this.position.z) !==
+        undefined ||
+      this.e.interiors?.height(x, z) !== undefined
+    )
+      return false;
+    const first = road.sample(this.position.x, this.position.z, currentY);
+    const last = road.sample(x, z, this.e.elevation(x, z) + 1.05);
+    if (
+      first === undefined ||
+      last === undefined ||
+      Math.abs(first - (this.position.y - 0.2)) > 0.08 ||
+      Math.abs(first - currentY) > 0.08
+    )
+      return false;
+    const distance = Math.hypot(x - this.position.x, z - this.position.z);
+    // moveGround already splits ordinary motion into <=1.5m permission legs.
+    // Distant placement/inspection queries must not create unbounded work or
+    // receive this local gate exception.
+    if (!Number.isFinite(distance) || distance > 1.500001) return false;
+    const fromYaw = this.car.rotation.y;
+    const angle = Math.atan2(
+      Math.sin(this.yaw - fromYaw),
+      Math.cos(this.yaw - fromYaw),
+    );
+    if (!Number.isFinite(angle)) return false;
+    const steps = Math.max(
+      1,
+      Math.ceil(distance / 0.3),
+      Math.ceil(Math.abs(angle) / 0.1),
+    );
+    const fractions = [
+      ...new Set([
+        gateT,
+        ...Array.from({ length: steps + 1 }, (_, i) => i / steps),
+      ]),
+    ].sort((a, b) => a - b);
+    let previous: { x: number; z: number; y: number }[] | undefined;
+    for (const t of fractions) {
+      const cx = this.position.x + (x - this.position.x) * t,
+        cz = this.position.z + (z - this.position.z) * t;
+      const height = road.sample(cx, cz, first + (last - first) * t);
+      if (
+        height === undefined ||
+        Math.abs(height - first - (last - first) * t) > 0.2
+      )
+        return false;
+      const yaw = fromYaw + angle * t,
+        sin = Math.sin(yaw),
+        cos = Math.cos(yaw);
+      const probes: { x: number; z: number; y: number }[] = [];
+      // Fifteen support tracks across the 4.8m x 2m car, rather than a claim
+      // about every point in its continuous footprint or arbitrary potholes.
+      for (const longitudinal of [-2.4, -1.2, 0, 1.2, 2.4])
+        for (const lateral of [-1, 0, 1]) {
+          const px = cx + sin * longitudinal + cos * lateral,
+            pz = cz + cos * longitudinal - sin * lateral;
+          // These are already offset body probes. Expanding each by the full
+          // vehicle radius again would turn a clear roadside object into a wall.
+          if (!this.clearGround(px, pz, 'drive', false, true)) return false;
+          const surfaceY = road.sample(px, pz, height);
+          if (surfaceY === undefined || Math.abs(surfaceY - height) > 1)
+            return false;
+          probes.push({ x: px, z: pz, y: surfaceY });
+        }
+      if (previous)
+        for (let i = 0; i < probes.length; i++) {
+          const a = previous[i],
+            b = probes[i];
+          if (
+            !road.coversSegment(
+              [a.x, a.z],
+              [b.x, b.z],
+              (a.y + b.y) / 2,
+              Math.min(4, Math.abs(a.y - b.y) / 2 + 0.2),
+            )
+          )
+            return false;
+        }
+      previous = probes;
+    }
+    return true;
+  }
+  clearGround(x: number, z: number, mode: string = this.mode, pendingFurniture = false, pointProbe = false) {
     const interior = this.e.interiors?.clear(x,z,mode);
     if(interior !== undefined) return interior;
-    if (this.e.streetFurniture?.blocked(x, z, mode === 'drive' ? 1.1 : 0.35, pendingFurniture))
+    if (this.e.streetFurniture?.blocked(x, z, pointProbe ? 0 : mode === 'drive' ? 1.1 : 0.35, pendingFurniture))
       return false;
     if (!this.e.onLand(x, z)) return false;
     if (this.e.data.waterPolys?.some((p: number[][][]) => inPolygon([x, z], p)))
@@ -568,6 +797,7 @@ export class StreetNavigation {
     );
   }
   startAt(mode: TravelMode, point: PlacementPoint) {
+    if (!this.leaveWalkSeat()) return false;
     this.trafficStop?.cancel();
     this.e.travelReturn?.invalidate(true);
     this.returnBlend = null;
@@ -639,6 +869,7 @@ export class StreetNavigation {
     return true;
   }
   switchStreetMode(mode: 'orbit' | TravelMode) {
+    if (!this.leaveWalkSeat()) return false;
     if(mode!==this.mode) this.trafficStop?.cancel();
     if(mode === 'drive' && this.e.interiors?.clear(this.position.x,this.position.z,'drive') === false) return false;
     if (!canSwitchStreetMode(this.mode, mode)) return false;
@@ -664,8 +895,10 @@ export class StreetNavigation {
     return true;
   }
   setMode(mode: 'orbit' | TravelMode, streetName?: string) {
+    if (!this.leaveWalkSeat()) return;
     this.trafficStop?.cancel();
     if (mode === this.mode && !streetName) return;
+    this.clearDrift();
     this.e.travelReturn?.invalidate(true);
     this.returnBlend = null;
     this.driverMotion.reset();
@@ -790,8 +1023,10 @@ export class StreetNavigation {
     } else this.keys.delete(key[direction]);
   }
   startBridge(kind: string) {
+    if (!this.leaveWalkSeat()) return;
     const s = this.e.data.bridges?.mainSpines.find((s: any) => s.kind === kind);
     if (!s || this.mode === 'orbit' || this.mode === 'boat') return;
+    this.clearDrift();
     const a = project(s.start),
       b = project(s.end);
     this.keys.clear();
@@ -812,6 +1047,7 @@ export class StreetNavigation {
     this.e.renderer.domElement.focus();
   }
   step(direction: string) {
+    if (this.walkSeat) return;
     if(this.trafficStop?.active) return;
     if (this.mode === 'orbit') return;
     this.e.renderer.domElement.focus({ preventScroll: true });
@@ -830,6 +1066,78 @@ export class StreetNavigation {
     this.update(0.016);
   }
   move(dx: number, dz: number) {
+    if (this.walkSeat) return;
+    if(this.mode==='drive' && this.e.vehicleImpacts) return this.moveDrive(dx,dz);
+    this.moveGround(dx,dz);
+  }
+  /** Continuous full-body prop/rail CCD, then the original surface permissions
+   * for every accepted leg. A broken pole never grants passage through water,
+   * a protected deck edge, a building or a second unbroken obstacle. */
+  private moveDrive(dx:number,dz:number) {
+    const total=Math.hypot(dx,dz), speed=Math.abs(this.speed);
+    if(total<1e-9||speed<1e-9)return;
+    const driftedMove = (this.drift?.slipAngle ?? 0) !== 0;
+    let remaining=total/speed, delta=new THREE.Vector3(dx,0,dz);
+    const shape={halfExtents:[1,.65,2.4] as const,clearance:.02};
+    const quaternion=(yaw=this.yaw)=>new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),yaw).toArray();
+    let sweptYaw=this.car.rotation.y;
+    const attempted=new Set<string>();
+    for(let i=0;i<4 && remaining>1e-5;i++) {
+      const from={position:[this.position.x,this.position.y+.7,this.position.z] as const,quaternion:quaternion(sweptYaw)};
+      const to={position:[from.position[0]+delta.x,from.position[1],from.position[2]+delta.z] as const,quaternion:quaternion()};
+      const hit=this.e.vehicleImpacts!.sweep({from,to,shape});
+      if(!hit){
+        const before=this.position.clone(), identity={surface:this.surface,surfaceId:this.surfaceId,layer:this.surfaceLayer};
+        const targetYaw=this.yaw, angle=Math.atan2(Math.sin(targetYaw-sweptYaw),Math.cos(targetYaw-sweptYaw));
+        this.moveGround(delta.x,delta.z,driftedMove);
+        const fraction=Math.min(1,Math.hypot(this.position.x-before.x,this.position.z-before.z)/delta.length());
+        this.yaw=sweptYaw+angle*fraction;
+        const accepted={position:[this.position.x,this.position.y+.7,this.position.z] as const,quaternion:quaternion()};
+        if(this.e.vehicleImpacts!.sweep({from,to:accepted,shape})) {
+          this.position.copy(before);this.yaw=sweptYaw;this.speed=0;if(this.drift)resetVehicleDrift(this.drift);
+          this.surface=identity.surface;this.surfaceId=identity.surfaceId;this.surfaceLayer=identity.layer;
+        }
+        return;
+      }
+      if(/invalid.*query|invalid-tesla-world/.test(hit.surfaceId)){this.speed=0;if(this.drift)resetVehicleDrift(this.drift);return;}
+      const id=this.e.vehicleImpacts!.obstacle(hit.surfaceId).id;
+      if(attempted.has(id)){this.speed=0;if(this.drift)resetVehicleDrift(this.drift);return;}attempted.add(id);
+      const length=delta.length(), fraction=Math.max(0,hit.fraction-(length? .002/length:0));
+      const requestedYaw=this.yaw;
+      const angle=Math.atan2(Math.sin(requestedYaw-sweptYaw),Math.cos(requestedYaw-sweptYaw));
+      const before=this.position.clone();
+      const identity={surface:this.surface,surfaceId:this.surfaceId,layer:this.surfaceLayer};
+      this.moveGround(delta.x*fraction,delta.z*fraction,driftedMove);
+      const travelled=Math.hypot(this.position.x-before.x,this.position.z-before.z);
+      this.yaw=sweptYaw+angle*Math.min(fraction,length?travelled/length:0);
+      const accepted={position:[this.position.x,this.position.y+.7,this.position.z] as const,quaternion:quaternion()};
+      if(this.e.vehicleImpacts!.sweep({from,to:accepted,shape})) {
+        this.position.copy(before);this.yaw=sweptYaw;this.speed=0;if(this.drift)resetVehicleDrift(this.drift);
+        this.surface=identity.surface;this.surfaceId=identity.surfaceId;this.surfaceLayer=identity.layer;return;
+      }
+      if(travelled+.004<length*fraction)return;
+      const pose={position:[from.position[0]+delta.x*hit.fraction,from.position[1],from.position[2]+delta.z*hit.fraction] as const,quaternion:quaternion(sweptYaw+angle*hit.fraction)};
+      const velocity = driftedMove
+        ? [delta.x / length * Math.abs(this.speed), 0, delta.z / length * Math.abs(this.speed)] as const
+        : [Math.sin(requestedYaw)*this.speed,0,Math.cos(requestedYaw)*this.speed] as const;
+      const response=this.condition.impact({hit,pose,velocity,shape});
+      if(this.drift)resetVehicleDrift(this.drift);
+      const out=new THREE.Vector3(...response.velocity);
+      const sign=out.dot(new THREE.Vector3(Math.sin(this.yaw),0,Math.cos(this.yaw)))<0?-1:1;
+      this.speed=out.length()*sign;
+      remaining*=1-hit.fraction;
+      if(out.length()<.04){this.speed=0;return;}
+      const newYaw=Math.atan2(out.x*sign,out.z*sign);
+      const rotated={position:[this.position.x,this.position.y+.7,this.position.z] as const,
+        quaternion:new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),newYaw).toArray()};
+      const current={position:rotated.position,quaternion:quaternion()};
+      if(!this.e.vehicleImpacts!.sweep({from:current,to:rotated,shape}))this.yaw=newYaw;
+      else if(!response.passThrough){this.speed=0;return;}
+      sweptYaw=this.yaw;
+      delta=out.multiplyScalar(remaining);
+    }
+  }
+  private moveGround(dx:number,dz:number,driftedMove=false) {
     if (this.mode === 'boat') return;
     if (Math.hypot(dx, dz) < 1e-9) return;
     const steps = Math.max(1, Math.ceil(Math.hypot(dx, dz) / ((this.e.interiors?.height(this.position.x,this.position.z) !== undefined || this.e.interiors?.height(this.position.x+dx,this.position.z+dz) !== undefined) ? 0.3 : 1.5)));
@@ -846,6 +1154,7 @@ export class StreetNavigation {
       ) {
         const hit = this.protectedStep(x, z);
         if (!hit) {
+          this.impactBuilding(x,z,driftedMove ? [dx,dz] : undefined);
           this.speed = 0;
           break;
         }
@@ -864,10 +1173,33 @@ export class StreetNavigation {
         this.surfaceId = undefined;
         this.surfaceLayer = undefined;
       } else {
+        this.impactBuilding(x,z,driftedMove ? [dx,dz] : undefined);
         this.speed = 0;
         break;
       }
     }
+  }
+  private impactBuilding(x:number,z:number,travel?:readonly [number,number]) {
+    if(this.mode!=='drive'||!this.condition||Math.abs(this.speed)<.3)return;
+    const polygon=this.collisions?.get(Math.floor(x/80)+','+Math.floor(z/80))?.find(p=>inPolygon([x,z],p));
+    if(!polygon)return;
+    let best=Infinity,point=[x,z],normal=[-Math.sin(this.yaw),-Math.cos(this.yaw)];
+    for(const ring of polygon)for(let i=0;i<ring.length;i++) {
+      const a=ring[i],b=ring[(i+1)%ring.length],dx=b[0]-a[0],dz=b[1]-a[1],d=dx*dx+dz*dz;
+      if(d<1e-9)continue;
+      const t=THREE.MathUtils.clamp(((x-a[0])*dx+(z-a[1])*dz)/d,0,1),xx=a[0]+dx*t,zz=a[1]+dz*t;
+      const gap=(x-xx)**2+(z-zz)**2;if(gap>=best)continue;
+      best=gap;point=[xx,zz];normal=[dz/Math.sqrt(d),-dx/Math.sqrt(d)];
+      if(inPolygon([xx+normal[0]*.03,zz+normal[1]*.03],polygon))normal=normal.map(n=>-n);
+    }
+    this.condition.impact({hit:{surfaceId:`drive-building:${polygon[0][0].join(',')}`,kind:'wall',
+      point:[point[0],this.position.y+.7,point[1]],normal:[normal[0],0,normal[1]],fraction:1,adherable:false},
+      pose:{position:[this.position.x,this.position.y+.7,this.position.z],
+        quaternion:new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),this.yaw).toArray()},
+      velocity:travel && Math.hypot(...travel)>1e-8
+        ? [travel[0]/Math.hypot(...travel)*Math.abs(this.speed),0,travel[1]/Math.hypot(...travel)*Math.abs(this.speed)]
+        : [Math.sin(this.yaw + (this.drift?.slipAngle ?? 0))*this.speed,0,Math.cos(this.yaw + (this.drift?.slipAngle ?? 0))*this.speed],
+      shape:{halfExtents:[1,.65,2.4],clearance:.02}});
   }
   roadHeight(x: number, z: number) {
     const interior=this.e.interiors?.height(x,z);
@@ -928,19 +1260,37 @@ export class StreetNavigation {
       return;
     }
     if (this.mode === 'drive') {
+      this.condition?.update(dt);
+      const handling=this.condition?.performance;
       this.speed = THREE.MathUtils.clamp(
-        stopped ? Math.max(0,this.speed-12*dt) : this.speed + (this.touchBrake ? 0 : forward) * dt * (this.carModel === 'roadster' ? ROADSTER_ACCELERATION : 8),
+        stopped ? Math.max(0,this.speed-12*dt) : this.speed + (this.touchBrake ? 0 : forward) * dt * (this.carModel === 'roadster' ? ROADSTER_ACCELERATION : 8)*(handling?.acceleration??1),
         -5,
-        this.carModel === 'roadster' ? ROADSTER_TOP_SPEED : 21,
+        (this.carModel === 'roadster' ? ROADSTER_TOP_SPEED : 21)*(handling?.topSpeed??1),
       );
       if (!stopped && !forward) this.speed *= Math.pow(0.78, dt);
-      if (!stopped && (pressed(' ') || this.touchBrake)) this.speed *= Math.pow(0.007, dt);
-      if (!stopped) this.yaw += drivingYawDelta(turn, this.speed, dt);
+      if (!stopped && (pressed(' ') || this.touchBrake)) this.speed *= Math.pow(0.007, dt*(handling?.braking??1));
+      const steering = turn*(handling?.steering??1)+(Math.abs(this.speed)>1?(handling?.steeringBias??0):0);
+      if (stopped) this.clearDrift();
+      const drift = dt > 0 ? stepVehicleDrift(this.drift, {
+        dt,
+        speed: this.speed,
+        steer: steering,
+        held: !stopped && this.driftInputEnabled && (pressed('x') || this.touchDrift),
+        grounded: !stopped,
+        brake: pressed(' ') || this.touchBrake,
+        normalYawDelta: stopped ? 0 : drivingYawDelta(steering, this.speed, dt),
+        profile: this.carModel,
+      }) : { speed: this.speed, yawDelta: 0, travelYawOffset: this.drift.slipAngle };
+      this.speed = drift.speed;
+      if (!stopped) this.yaw += drift.yawDelta;
+      const travelYaw = this.yaw + drift.travelYawOffset;
       this.move(
-        Math.sin(this.yaw) * this.speed * dt,
-        Math.cos(this.yaw) * this.speed * dt,
+        Math.sin(travelYaw) * this.speed * dt,
+        Math.cos(travelYaw) * this.speed * dt,
       );
-    } else {
+      if (Math.abs(this.speed) < Math.abs(drift.speed) * 0.9)
+        resetVehicleDrift(this.drift);
+    } else if (!this.walkSeat) {
       this.yaw += turn * dt * 1.45;
       const speed = pressed('shift') ? 12 : 4;
       this.move(
@@ -967,7 +1317,7 @@ export class StreetNavigation {
     this.walker.group.position.copy(this.position);
     if (this.mode === 'walk')
       this.walker.group.position.y = this.walkingHeight();
-    this.walker.group.rotation.y = this.yaw;
+    this.walker.group.rotation.set(0, this.walkSeat?.yaw ?? this.yaw, 0);
     if (this.mode === 'walk')
       this.walker.update(
         this.walkingDistance, walked > 0.0001, dt, dt > 0 ? walked / dt : 0,
@@ -978,7 +1328,9 @@ export class StreetNavigation {
       this.wheelDistance += walked * Math.sign(this.speed);
       this.roadster.update(this.wheelDistance, this.steering);
     }
-    const eyeHeight = this.mode === 'walk' ? 1.68 : this.driverEyeHeight;
+    const eyeHeight = this.mode === 'walk'
+      ? this.walkSeat ? this.walkSeat.height + 0.78 : 1.68
+      : this.driverEyeHeight;
     const eye = (
       this.mode === 'walk' ? this.walker.group.position : this.position
     )
@@ -1050,6 +1402,9 @@ export class StreetNavigation {
       this.e.camera.quaternion.premultiply(
         this.driverMotion.worldRotation(this.yaw, 1 - blend),
       );
+      const shake=this.e.impactFeedback?.shake??0;
+      if(shake>0)this.e.camera.position.add(new THREE.Vector3(
+        Math.sin(performance.now()*.081)*shake*.3,Math.sin(performance.now()*.097)*shake*.2,0));
     }
     this.e.controls.target.copy(this.position).addScaledVector(dir, 25);
     this.e.camera.near = 0.08;
@@ -1061,6 +1416,7 @@ export class StreetNavigation {
     this.snapCamera = false;
   }
   walkingHeight() {
+    if (this.walkSeat) return this.walkSeat.floor[1];
     if (this.surface === 'bridge') return this.position.y;
     return this.groundHeight(this.position.x, this.position.z) + 0.02;
   }
@@ -1217,11 +1573,15 @@ export class StreetNavigation {
   }
 
   destroy() {
+    this.clearDrift();
+    this.condition?.dispose();
     this.walker.dispose?.();
     this.trafficStop?.destroy();
     window.removeEventListener('keydown', this.keyDown);
     window.removeEventListener('keyup', this.keyUp);
     window.removeEventListener('blur', this.blur);
+    if (typeof document !== 'undefined' && typeof document.removeEventListener === 'function')
+      document.removeEventListener('visibilitychange', this.driftVisibility);
     const c = this.e.renderer.domElement;
     c.removeEventListener('wheel', this.wheel, true);
     c.removeEventListener('pointerdown', this.pointerDown, true);

@@ -164,10 +164,11 @@ function fixture({ bridge = false } = {}) {
     focus: () => {},
   });
   globalThis.window = listeners;
-  globalThis.document = {
+  globalThis.document = Object.assign(new EventTarget(), {
+    hidden: false,
     elementFromPoint: (x, y) =>
       x >= 100 && x <= 1100 && y >= 50 && y <= 850 ? canvas : null,
-  };
+  });
   globalThis.requestAnimationFrame = () => 1;
   globalThis.cancelAnimationFrame = () => {};
   const camera = new THREE.PerspectiveCamera(42, 1.25, 0.25, 45000);
@@ -384,6 +385,7 @@ const { StreetNavigation } = await import(
   compile('navigation', {
     './traffic-stop': cityModule('traffic-stop'),
     './traffic-stop-state': cityModule('traffic-stop-state'),
+    './vehicle-condition': cityModule('vehicle-condition'),
     three: import.meta.resolve('three'),
     './geo': geoUrl,
     './bridges': bridgeUrl,
@@ -400,6 +402,7 @@ const { StreetNavigation } = await import(
     './visible-obstacles': cityModule('visible-obstacles'),
     './driver-camera': cityModule('driver-camera'),
     './driving-steering': cityModule('driving-steering'),
+    './vehicle-drift': cityModule('vehicle-drift'),
     './assets/cockpits': cityModule('assets/cockpits'),
     './landmark-footprints.json': landmarkUrl,
   })

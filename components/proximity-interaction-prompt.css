@@ -1,0 +1,87 @@
+.proximity-interaction-anchor {
+  position: fixed;
+  /* World prompts stay below trip planners and modal controls. */
+  z-index: 36;
+  transform: translate(-50%, -50%);
+  width: max-content;
+  max-width: min(240px, calc(100vw - 32px));
+  pointer-events: auto;
+}
+.proximity-interaction-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-width: 108px;
+  min-height: 48px;
+  max-width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #d5e69ab3;
+  border-radius: 14px;
+  background: #102a30f2;
+  color: #edf5e7;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.3;
+  text-align: center;
+  box-shadow: 0 4px 16px #00131c52;
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.proximity-interaction-button::after {
+  content: '';
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  bottom: -5px;
+  left: calc(50% - 5px);
+  transform: rotate(45deg);
+  background: #102a30;
+  border-right: 1px solid #d5e69ab3;
+  border-bottom: 1px solid #d5e69ab3;
+  pointer-events: none;
+}
+.proximity-interaction-button:hover {
+  background: #24434a;
+  border-color: #dfebaa;
+}
+.proximity-interaction-button:active {
+  background: #365359;
+}
+.proximity-interaction-button:focus-visible {
+  outline: 3px solid #d6e897;
+  outline-offset: 4px;
+}
+.proximity-interaction-button svg {
+  flex: 0 0 auto;
+  color: #d6e897;
+}
+.proximity-interaction-button kbd {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  min-width: 24px;
+  min-height: 25px;
+  border: 1px solid #b7cbbe80;
+  border-radius: 5px;
+  color: #e4efcc;
+  font: inherit;
+  font-size: 12px;
+  line-height: 1;
+}
+@media (pointer: coarse) {
+  .proximity-interaction-button {
+    min-height: 52px;
+    padding-inline: 16px;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .proximity-interaction-button {
+    transition:
+      background 120ms ease,
+      border-color 120ms ease;
+  }
+}

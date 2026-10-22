@@ -1,0 +1,248 @@
+.vehicle-condition {
+  position: absolute;
+  z-index: 60;
+  right: 84px;
+  top: 288px;
+  color: #dce7dd;
+  border-radius: 13px;
+  font-size: 12px;
+  max-width: calc(100vw - 104px);
+}
+.vehicle-condition summary {
+  list-style: none;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 10px;
+  cursor: pointer;
+  user-select: none;
+}
+.vehicle-condition summary::-webkit-details-marker {
+  display: none;
+}
+.vehicle-condition summary span {
+  overflow-wrap: anywhere;
+}
+.vehicle-condition[open] .vehicle-condition-chevron {
+  transform: rotate(180deg);
+}
+.vehicle-condition:focus-within {
+  outline: 2px solid #dce7a2;
+  outline-offset: 3px;
+}
+.vehicle-condition-moderate > summary {
+  color: #ffd0a4;
+}
+.vehicle-condition-severe > summary {
+  color: #ffad94;
+}
+.vehicle-condition-card {
+  position: absolute;
+  top: calc(100% + 7px);
+  right: 0;
+  width: min(272px, calc(100vw - 96px));
+  max-height: calc(100dvh - 370px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  border-radius: 15px;
+  padding: 10px 12px;
+  box-shadow: 0 12px 40px #00131655;
+}
+.vehicle-condition-card header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.vehicle-condition-card button {
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid #ffffff20;
+  border-radius: 10px;
+  background: #23454b;
+  color: #e4ebdc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+}
+.vehicle-condition-card header button {
+  border: 0;
+  background: none;
+  flex-shrink: 0;
+}
+.vehicle-condition-card button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.vehicle-condition-card button:focus-visible {
+  outline: 2px solid #dce7a2;
+  outline-offset: 2px;
+}
+.vehicle-condition-card button[aria-pressed='true'] {
+  background: #dce7a2;
+  color: #153337;
+}
+.vehicle-condition-overview {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 2px 0 8px;
+}
+.vehicle-condition-silhouette {
+  width: 64px;
+  height: 106px;
+  flex-shrink: 0;
+}
+.vehicle-condition-card dl {
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+}
+.vehicle-condition-card dl > div {
+  display: grid;
+  grid-template-columns: minmax(45px, 1fr) minmax(76px, 1.5fr);
+  gap: 4px;
+  align-items: center;
+  margin: 5px 0;
+}
+.vehicle-condition-card dt {
+  color: #afc3c1;
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+.vehicle-condition-card dd {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+.vehicle-condition-card dd span {
+  width: 29px;
+  text-align: right;
+}
+.vehicle-condition-card meter {
+  width: 100%;
+  min-width: 22px;
+  height: 7px;
+  flex: 1;
+}
+.vehicle-condition-card meter::-webkit-meter-bar {
+  border: 0;
+  background: #ffffff12;
+}
+.vehicle-condition-card meter::-webkit-meter-optimum-value {
+  background: #c6d49b;
+}
+.vehicle-condition-card meter::-webkit-meter-suboptimum-value {
+  background: #e7bd86;
+}
+.vehicle-condition-card meter::-webkit-meter-even-less-good-value {
+  background: #ed997e;
+}
+.vehicle-condition-card meter::-moz-meter-bar {
+  background: #d4bb89;
+}
+.vehicle-condition-handling,
+.vehicle-condition-stop {
+  margin: 7px 0;
+  color: #f0c49c;
+  font-size: 11px;
+}
+.vehicle-condition-actions {
+  display: flex;
+  gap: 7px;
+}
+.vehicle-condition-actions button:first-child {
+  flex: 1;
+  padding: 6px 10px;
+  overflow-wrap: anywhere;
+}
+.vehicle-condition-actions button:last-child {
+  flex-shrink: 0;
+}
+.vehicle-condition-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.atlas.touch-ui .vehicle-condition {
+  left: 12px;
+  right: auto;
+  top: 232px;
+  max-width: calc(100vw - 88px);
+}
+.atlas.touch-ui .vehicle-condition-card {
+  right: auto;
+  left: 0;
+  max-height: max(110px, calc(100dvh - 300px));
+  overflow-x: hidden;
+  box-sizing: border-box;
+  padding: 8px 10px;
+}
+.atlas.touch-ui .vehicle-condition-card header,
+.atlas.touch-ui .vehicle-condition-card header strong,
+.atlas.touch-ui .vehicle-condition-card dd {
+  min-width: 0;
+}
+.atlas.touch-ui .vehicle-condition-card header strong {
+  overflow-wrap: anywhere;
+}
+.atlas.touch-ui .vehicle-condition-overview {
+  gap: 8px;
+  margin: 0 0 6px;
+}
+.atlas.touch-ui .vehicle-condition-silhouette {
+  width: 42px;
+  height: 78px;
+}
+.atlas.touch-ui .vehicle-condition-card dl > div {
+  grid-template-columns: minmax(28px, 0.8fr) minmax(60px, 1.2fr);
+  gap: 3px;
+  margin: 4px 0;
+}
+.atlas.touch-ui .vehicle-condition-card dd {
+  gap: 4px;
+}
+.atlas.touch-ui .vehicle-condition-card dd span {
+  flex: 0 0 29px;
+}
+.atlas.touch-ui .vehicle-condition-card meter {
+  width: 0;
+  min-width: 16px;
+  flex: 1 1 0;
+}
+.atlas.touch-ui .vehicle-condition-actions button:first-child span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.atlas.touch-ui.mobile-hud-hidden .vehicle-condition {
+  display: none;
+}
+@media (max-height: 540px) and (orientation: landscape) {
+  .atlas.touch-ui .vehicle-condition {
+    top: 154px;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 216px;
+  }
+  .atlas.touch-ui .vehicle-condition-card {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 216px;
+    max-height: calc(100dvh - 216px);
+  }
+  .atlas.touch-ui .vehicle-condition-card {
+    padding: 7px 9px;
+  }
+}
