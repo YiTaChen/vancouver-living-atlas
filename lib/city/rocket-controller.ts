@@ -320,7 +320,7 @@ export class RocketController {
         groundY: water.level - 20,
       };
     // Terrain slope is sampled over the full vehicle footprint. The assembly plate never strengthens it.
-    const radius = ROCKET_CONFIGS[this.kind].radius * 1.5;
+    const radius = ROCKET_CONFIGS[this.kind].footprintRadius * 1.5;
     const heights = [
       [radius, 0],
       [-radius, 0],
@@ -408,7 +408,7 @@ export class RocketController {
     this.ring.position.y += 0.35;
     this.ring.scale.setScalar(
       Math.max(1, (distance * 1.8) / rect.height) *
-        (this.kind === 'large' ? 2 : 1),
+        (ROCKET_CONFIGS[this.kind].footprintRadius / 3.35),
     );
     (this.ring.material as THREE.MeshBasicMaterial).color.set(
       support.kind === 'ground' ? 0x98e5e8 : 0xffaf70,
@@ -466,7 +466,7 @@ export class RocketController {
     this.model.group.position.set(x, y, z);
     this.model.build(this.state.phase === 'sinking' ? 1 : 0);
     this.e.scene.add(this.model.group);
-    this.scaffold = createRocketScaffold(kind === 'large');
+    this.scaffold = createRocketScaffold(kind);
     this.scaffold.position.set(x, y, z);
     this.e.scene.add(this.scaffold);
     this.active = true;
@@ -787,7 +787,32 @@ export class RocketController {
               ),
               config.radius * 0.75,
             ),
-          );
+          ) ||
+          this.model.collisionSegments.some((probe) => {
+            if (probe.booster && !s.boosterAttached) return false;
+            const rotation = new THREE.Quaternion().setFromUnitVectors(
+              new THREE.Vector3(0, 1, 0),
+              new THREE.Vector3(direction.x, direction.y, direction.z),
+            );
+            const previousRotation = new THREE.Quaternion().setFromUnitVectors(
+              new THREE.Vector3(0, 1, 0),
+              new THREE.Vector3(previousDir.x, previousDir.y, previousDir.z),
+            );
+            const point = (local: THREE.Vector3, previous = false) => {
+              const position = previous ? before.position : s.position;
+              return local
+                .clone()
+                .applyQuaternion(previous ? previousRotation : rotation)
+                .add(new THREE.Vector3(position.x, position.y, position.z));
+            };
+            const from = point(probe.from),
+              to = point(probe.to);
+            return (
+              this.world!.hit(from, to, probe.radius) ||
+              this.world!.hit(point(probe.from, true), from, probe.radius) ||
+              this.world!.hit(point(probe.to, true), to, probe.radius)
+            );
+          });
         const noseImpact =
           direction.y < 0 &&
           bodyTip.y <

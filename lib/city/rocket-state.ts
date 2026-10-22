@@ -10,7 +10,7 @@
  * a background-tab pause teleporting a rocket through the city.
  */
 
-export type RocketKind = 'small' | 'large';
+export type RocketKind = 'small' | 'large' | 'super-heavy';
 export type RocketMode = 'auto' | 'manual';
 export type RocketStage = 'boost' | 'separating' | 'upper' | 'coast';
 export type RocketFailureStage =
@@ -87,6 +87,9 @@ export interface RocketConfig {
   label: string;
   height: number;
   radius: number;
+  /** Physical closed fins/side boosters; aerodynamic reference stays radius. */
+  footprintRadius: number;
+  upperFootprintRadius: number;
   dryMass: number;
   fuelMass: number;
   maxThrust: number;
@@ -105,6 +108,8 @@ export interface RocketConfig {
   windTorque: number;
   blastRadius: number;
   heatRadius: number;
+  /** Local pressure/heat strength; does not inflate the configured radii. */
+  effectStrength: number;
   cameraDistance: number;
 }
 export const ROCKET_CONFIGS: Readonly<
@@ -114,6 +119,8 @@ export const ROCKET_CONFIGS: Readonly<
     label: 'Scout',
     height: 18,
     radius: 1.1,
+    footprintRadius: 2.22,
+    upperFootprintRadius: 1.15,
     dryMass: 7_000,
     fuelMass: 20_000,
     maxThrust: 1_600_000,
@@ -146,12 +153,15 @@ export const ROCKET_CONFIGS: Readonly<
     windTorque: 0.055,
     blastRadius: 35,
     heatRadius: 17,
+    effectStrength: 1,
     cameraDistance: 48,
   },
   large: {
     label: 'Atlas',
     height: 48,
     radius: 3.5,
+    footprintRadius: 9.8,
+    upperFootprintRadius: 4.9,
     dryMass: 100_000,
     fuelMass: 310_000,
     maxThrust: 21_000_000,
@@ -183,8 +193,96 @@ export const ROCKET_CONFIGS: Readonly<
     windTorque: 0.012,
     blastRadius: 100,
     heatRadius: 45,
+    effectStrength: 1,
     cameraDistance: 110,
   },
+  'super-heavy': {
+    label: 'Titan',
+    height: 110,
+    radius: 6.3,
+    footprintRadius: 11.5,
+    upperFootprintRadius: 10.1,
+    dryMass: 460_000,
+    fuelMass: 1_426_000,
+    maxThrust: 93_000_000,
+    fuelPerSecond: 46_000,
+    stages: {
+      boost: {
+        dryMass: 345_000,
+        fuelMass: 1_150_000,
+        maxThrust: 93_000_000,
+        fuelPerSecond: 46_000,
+      },
+      upper: {
+        dryMass: 115_000,
+        fuelMass: 276_000,
+        maxThrust: 13_100_000,
+        fuelPerSecond: 5_520,
+      },
+    },
+    separationDuration: 0.6,
+    upperIgnitionDuration: 0.4,
+    stageCutFraction: 0.46,
+    upperNozzleFraction: 0.418,
+    buildDuration: 16,
+    countdownDuration: 5,
+    ignitionDuration: 2,
+    dragCoefficient: 0.34,
+    angularAcceleration: 0.24,
+    angularDamping: 0.78,
+    windTorque: 0.006,
+    blastRadius: 220,
+    heatRadius: 105,
+    effectStrength: 1.8,
+    cameraDistance: 245,
+  },
+};
+
+/** Structural loads are independent from the pilot's fixed-step control clock. */
+const SUPPORT_LOADS: Readonly<
+  Record<
+    RocketKind,
+    {
+      minimumStrength: number;
+      roofOverload: number;
+      referenceThrust: number;
+      lakeFatigue: number;
+      lakeThrust: number;
+      lakeWobble: number;
+    }
+  >
+> = {
+  small: {
+    minimumStrength: 0.28,
+    roofOverload: 1.3,
+    referenceThrust: 470_000,
+    lakeFatigue: 0.009,
+    lakeThrust: 0.44,
+    lakeWobble: 0.5,
+  },
+  large: {
+    minimumStrength: 0.93,
+    roofOverload: 5,
+    referenceThrust: 6_800_000,
+    lakeFatigue: 0.018,
+    lakeThrust: 1.25,
+    lakeWobble: 0.9,
+  },
+  'super-heavy': {
+    minimumStrength: 0.995,
+    roofOverload: 6.5,
+    referenceThrust: 6_800_000,
+    lakeFatigue: 0.035,
+    lakeThrust: 1.6,
+    lakeWobble: 1.05,
+  },
+};
+const EXHAUST_RESPONSE: Readonly<
+  Record<RocketKind, { impulse: number; shake: number }>
+> = {
+  small: { impulse: 18, shake: 0.4 },
+  large: { impulse: 48, shake: 1 },
+  'super-heavy': { impulse: 48, shake: 1 },
 };
 export const SPACE_ALTITUDE = 100_000;
 export const ROCKET_FIXED_STEP = 1 / 60;
@@ -525,27 +623,24 @@ function sampleWind(s: RocketState, scale: number): RocketVector {
 function updateSupport(s: RocketState, dt: number) {
   if (s.supportCollapsed || s.position.y - s.origin.y > 12) return;
   const config = ROCKET_CONFIGS[s.kind];
+  const load = SUPPORT_LOADS[s.kind];
   const strength = s.support.strength ?? 1;
   const thrustExposure =
     s.throttle *
     Math.exp(-Math.max(0, s.position.y - s.origin.y) / config.heatRadius);
-  const minimumStrength = s.kind === 'large' ? 0.93 : 0.28;
-  const overload = Math.max(0, minimumStrength - strength);
+  const overload = Math.max(0, load.minimumStrength - strength);
   // Roof damage happens while the engine spools up: a small roof fails under a
   // large rocket before lift-off, but supports a small rocket long enough to go.
   let damage = isRoof(s.support.kind)
-    ? thrustExposure * (0.06 + overload * (s.kind === 'large' ? 5 : 1.3))
+    ? thrustExposure * (0.06 + overload * load.roofOverload)
     : thrustExposure * overload * 0.6;
   // Faster ascent uses more powerful engines, not a faster clock. Structural
   // exposure follows that actual thrust increase so an unsafe roof stays unsafe.
-  const thrustScale =
-    config.stages.boost.maxThrust / (s.kind === 'large' ? 6_800_000 : 470_000);
+  const thrustScale = config.stages.boost.maxThrust / load.referenceThrust;
   damage *= thrustScale;
   if (s.support.kind === 'lake') {
-    damage +=
-      (s.kind === 'large' ? 0.018 : 0.009) +
-      thrustExposure * (s.kind === 'large' ? 1.25 : 0.44) * thrustScale;
-    const wobble = (1 - s.supportIntegrity) * (s.kind === 'large' ? 0.9 : 0.5);
+    damage += load.lakeFatigue + thrustExposure * load.lakeThrust * thrustScale;
+    const wobble = (1 - s.supportIntegrity) * load.lakeWobble;
     s.attitude.pitch += Math.sin(s.elapsed * 0.8 + s.seed) * wobble * dt;
     s.attitude.roll += Math.cos(s.elapsed * 0.7 + s.seed) * wobble * dt;
   }
@@ -1098,6 +1193,7 @@ export function stepRocket(
 /** Sample every simulation step to accumulate irreversible city damage. */
 export function sampleRocketEffects(s: RocketState): RocketEnvironmentEffects {
   const config = ROCKET_CONFIGS[s.kind];
+  const response = EXHAUST_RESPONSE[s.kind];
   const direction = rocketDirection(s.attitude);
   const engine = hasEngine(s) ? s.throttle : 0;
   const nozzleOffset = s.boosterAttached
@@ -1124,7 +1220,7 @@ export function sampleRocketEffects(s: RocketState): RocketEnvironmentEffects {
     groundExposure,
     blastRadius: config.blastRadius * Math.sqrt(groundExposure),
     heatRadius: config.heatRadius * Math.sqrt(groundExposure),
-    debrisImpulse: groundExposure * (s.kind === 'large' ? 48 : 18),
-    shake: groundExposure * (s.kind === 'large' ? 1 : 0.4),
+    debrisImpulse: groundExposure * response.impulse * config.effectStrength,
+    shake: groundExposure * response.shake * config.effectStrength,
   };
 }

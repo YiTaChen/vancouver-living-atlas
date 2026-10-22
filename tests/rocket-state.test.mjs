@@ -15,6 +15,7 @@ const {
   ROCKET_SUPPORT_RELEASE_DELAY,
 } = await import(cityModule('rocket-state'));
 const dt = 1 / 60;
+const rocketKinds = Object.keys(ROCKET_CONFIGS);
 function run(state, seconds, input = {}) {
   let s = state;
   for (let frame = 0; frame < Math.ceil(seconds * 60); frame++)
@@ -39,7 +40,7 @@ function untilDone(state, input = {}, limit = 200) {
 test('construction, countdown and ignition are timed; a launch cannot skip construction', () => {
   assert.deepEqual(
     Object.fromEntries(
-      ['small', 'large'].map((kind) => [
+      rocketKinds.map((kind) => [
         kind,
         {
           build: ROCKET_CONFIGS[kind].buildDuration,
@@ -47,9 +48,13 @@ test('construction, countdown and ignition are timed; a launch cannot skip const
         },
       ]),
     ),
-    { small: { build: 6, countdown: 5 }, large: { build: 10, countdown: 5 } },
+    {
+      small: { build: 6, countdown: 5 },
+      large: { build: 10, countdown: 5 },
+      'super-heavy': { build: 16, countdown: 5 },
+    },
   );
-  for (const kind of ['small', 'large']) {
+  for (const kind of rocketKinds) {
     const config = ROCKET_CONFIGS[kind];
     let s = createRocket(kind, 0, 0, 0);
     assert.equal(launchRocket(s).phase, 'building');
@@ -74,8 +79,8 @@ test('construction, countdown and ignition are timed; a launch cannot skip const
     );
   }
 });
-test('both vehicle sizes reach 100km by continuous staged ascent in about 65 seconds', () => {
-  for (const kind of ['small', 'large']) {
+test('all three vehicle classes reach 100km by continuous staged ascent without changing the earlier flight pace', () => {
+  for (const kind of rocketKinds) {
     for (const seed of [0, 123, 2814]) {
       let s = launchRocket(prepared(kind, { kind: 'platform', seed }));
       let previous = s;
@@ -93,7 +98,8 @@ test('both vehicle sizes reach 100km by continuous staged ascent in about 65 sec
         `${kind}, seed ${seed}: ${s.failureReason}`,
       );
       assert(s.altitude >= SPACE_ALTITUDE && s.altitude < SPACE_ALTITUDE + 60);
-      assert(s.flightElapsed > 60 && s.flightElapsed < 70);
+      assert(s.flightElapsed > (kind === 'super-heavy' ? 65 : 60));
+      assert(s.flightElapsed < (kind === 'super-heavy' ? 80 : 70));
       assert(s.fuel > 0 && s.fuel < ROCKET_CONFIGS[kind].fuelMass);
       assert(
         Math.hypot(s.position.x - s.origin.x, s.position.z - s.origin.z) >
@@ -108,15 +114,186 @@ test('both vehicle sizes reach 100km by continuous staged ascent in about 65 sec
     }
   }
 });
+test('all three vehicle classes account for every stage dry mass and fuel reserve', () => {
+  for (const kind of rocketKinds) {
+    const config = ROCKET_CONFIGS[kind];
+    const s = createRocket(kind, 0, 0, 0, { kind: 'platform' });
+    assert.equal(
+      config.dryMass,
+      config.stages.boost.dryMass + config.stages.upper.dryMass,
+    );
+    assert.equal(
+      config.fuelMass,
+      config.stages.boost.fuelMass + config.stages.upper.fuelMass,
+    );
+    assert.equal(s.mass, config.dryMass + config.fuelMass);
+    assert.equal(s.mass, rocketMass(s));
+    const flight = run(
+      launchRocket(prepared(kind)),
+      config.countdownDuration + config.ignitionDuration + 2,
+    );
+    assert(flight.boosterFuel < s.boosterFuel);
+    assert.equal(flight.upperFuel, s.upperFuel);
+    assert.equal(flight.mass, rocketMass(flight));
+    assert(Math.abs(s.mass - flight.mass - (s.fuel - flight.fuel)) < 1e-6);
+  }
+  const titan = ROCKET_CONFIGS['super-heavy'],
+    atlas = ROCKET_CONFIGS.large;
+  assert.equal(
+    (titan.dryMass + titan.fuelMass) / (atlas.dryMass + atlas.fuelMass),
+    4.6,
+  );
+  const accelerationRatio =
+    titan.maxThrust /
+    (titan.dryMass + titan.fuelMass) /
+    (atlas.maxThrust / (atlas.dryMass + atlas.fuelMass));
+  assert(accelerationRatio > 0.9 && accelerationRatio < 1.1);
+  assert.equal(
+    titan.radius,
+    6.3,
+    'closed flaps do not inflate aerodynamic core radius',
+  );
+  assert.equal(titan.footprintRadius, 11.5);
+  assert.equal(titan.upperFootprintRadius, 10.1);
+});
+
+test('Titan requires a firm launch foundation and ordinary roofs or lake beds give way', () => {
+  for (const support of [
+    { kind: 'roof-small', groundY: 0, seed: 13 },
+    { kind: 'roof-large', groundY: 0, seed: 13 },
+    { kind: 'ground', strength: 0.8, groundY: 0, seed: 13 },
+    { kind: 'lake', groundY: 0, seed: 13 },
+  ]) {
+    const y = support.kind.startsWith('roof') ? 30 : 0;
+    const result = untilDone(launchRocket(prepared('super-heavy', support, y)));
+    assert.equal(
+      result.phase,
+      'crashed',
+      `${support.kind} must not carry Titan`,
+    );
+    assert(result.supportCollapsed);
+    const collapsed = result.events.find((e) => e.type === 'support-collapsed');
+    const impact = result.events.find((e) => e.type === 'impact');
+    assert(collapsed && impact && impact.time - collapsed.time > 1.5);
+    assert(result.maxAltitude < 20);
+  }
+  const grounded = untilDone(
+    launchRocket(
+      prepared('super-heavy', {
+        kind: 'ground',
+        strength: 1,
+        seed: 13,
+      }),
+    ),
+  );
+  assert.equal(grounded.phase, 'space');
+  assert.equal(grounded.supportIntegrity, 1);
+  assert(!grounded.supportCollapsed);
+  const lighter = untilDone(
+    launchRocket(
+      prepared('large', {
+        kind: 'ground',
+        strength: 0.8,
+        seed: 13,
+      }),
+    ),
+  );
+  assert.equal(
+    lighter.phase,
+    'space',
+    'the new foundation load does not change Atlas',
+  );
+});
+
+test('Titan retains responsive manual gimbal and throttle control and can return to the physical autopilot', () => {
+  const config = ROCKET_CONFIGS['super-heavy'];
+  let s = run(
+    launchRocket(
+      prepared('super-heavy', { kind: 'platform', seed: 13 }),
+      'manual',
+    ),
+    config.countdownDuration + config.ignitionDuration + 6.5,
+    { stabilize: true, windScale: 0 },
+  );
+  const before = structuredClone(s);
+  s = run(s, 1, {
+    pitch: 0.7,
+    roll: 0.3,
+    throttle: 0.75,
+    stabilize: true,
+    windScale: 0,
+  });
+  assert.equal(s.phase, 'flight');
+  assert(s.attitude.pitch > before.attitude.pitch + 0.04);
+  assert(s.attitude.roll > before.attitude.roll + 0.015);
+  assert.equal(s.throttle, 0.75);
+  const resumed = stepRocket(s, { auto: true }, dt);
+  assert(Math.abs(resumed.attitude.pitch - s.attitude.pitch) < 0.01);
+  assert.equal(untilDone(resumed).phase, 'space');
+});
+
+test('Titan exhaust affects a wider area and supplies stronger impulses without changing earlier vehicle samples', () => {
+  const effects = Object.fromEntries(
+    rocketKinds.map((kind) => {
+      const config = ROCKET_CONFIGS[kind];
+      const state = run(
+        launchRocket(prepared(kind)),
+        config.countdownDuration + config.ignitionDuration * 0.95,
+      );
+      assert.equal(state.phase, 'ignition');
+      const effect = sampleRocketEffects(state);
+      assert(
+        Math.abs(
+          effect.blastRadius / Math.sqrt(effect.groundExposure) -
+            config.blastRadius,
+        ) < 1e-8,
+      );
+      assert(
+        Math.abs(
+          effect.heatRadius / Math.sqrt(effect.groundExposure) -
+            config.heatRadius,
+        ) < 1e-8,
+      );
+      return [kind, effect];
+    }),
+  );
+  assert.equal(ROCKET_CONFIGS['super-heavy'].effectStrength, 1.8);
+  assert(effects['super-heavy'].blastRadius > 200);
+  assert(effects['super-heavy'].heatRadius > 95);
+  assert(effects['super-heavy'].blastRadius > effects.large.blastRadius * 2);
+  assert(effects['super-heavy'].heatRadius > effects.large.heatRadius * 2);
+  assert(
+    effects['super-heavy'].debrisImpulse > effects.large.debrisImpulse * 1.7,
+  );
+  assert(effects['super-heavy'].shake > effects.large.shake * 1.7);
+  for (const [kind, impulse, shake] of [
+    ['small', 18, 0.4],
+    ['large', 48, 1],
+  ]) {
+    assert.equal(ROCKET_CONFIGS[kind].effectStrength, 1);
+    assert(
+      Math.abs(
+        effects[kind].debrisImpulse / effects[kind].groundExposure - impulse,
+      ) < 1e-8,
+    );
+    assert(
+      Math.abs(effects[kind].shake / effects[kind].groundExposure - shake) <
+        1e-8,
+    );
+  }
+});
+
 test('sea and river placement sinks immediately; even auto cannot launch it', () => {
-  for (const kind of ['ocean', 'river']) {
-    const s = createRocket('large', 0, 2, 0, { kind });
-    assert.equal(s.phase, 'sinking');
-    const next = run(launchRocket(s), 5, { launch: true, auto: true });
-    assert.equal(next.phase, 'sinking');
-    assert(next.position.y < s.position.y - 8);
-    assert.equal(next.fuel, s.fuel);
-    assert.equal(sampleRocketEffects(next).engine, 0);
+  for (const rocketKind of rocketKinds) {
+    for (const kind of ['ocean', 'river']) {
+      const s = createRocket(rocketKind, 0, 2, 0, { kind });
+      assert.equal(s.phase, 'sinking');
+      const next = run(launchRocket(s), 5, { launch: true, auto: true });
+      assert.equal(next.phase, 'sinking');
+      assert(next.position.y < s.position.y - 8);
+      assert.equal(next.fuel, s.fuel);
+      assert.equal(sampleRocketEffects(next).engine, 0);
+    }
   }
 });
 test('a small roof supports Scout; Atlas exhaust collapses the same roof and auto does not rescue it', () => {
@@ -250,14 +427,20 @@ test('an external city collision preserves impact position and records the physi
 });
 
 test('a spent booster drops its actual dry mass once without moving the virtual launch base', () => {
-  for (const kind of ['small', 'large']) {
+  for (const kind of rocketKinds) {
+    const cfg = ROCKET_CONFIGS[kind];
     let s = launchRocket(prepared(kind));
+    const deadline =
+      s.elapsed +
+      cfg.countdownDuration +
+      cfg.ignitionDuration +
+      cfg.stages.boost.fuelMass / cfg.stages.boost.fuelPerSecond +
+      2;
     let previous;
-    while (s.boosterAttached && s.elapsed < 45) {
+    while (s.boosterAttached && s.elapsed < deadline) {
       previous = s;
       s = stepRocket(s, {}, dt);
     }
-    const cfg = ROCKET_CONFIGS[kind];
     assert.equal(s.stage, 'separating');
     assert.equal(s.boosterFuel, 0);
     assert.equal(

@@ -6,11 +6,14 @@ import {
   type RocketState,
 } from '../rocket-state';
 import { RocketWreckageVisual } from './rocket-wreckage';
+import { addRocketDesign } from './rocket-design';
 
 /** Original reusable meshes. Dimensions are authored gameplay dimensions, not a real vehicle blueprint. */
 export function createRocketModel(kind: RocketKind) {
   const large = kind === 'large',
-    { height: h, radius: r } = ROCKET_CONFIGS[kind];
+    titan = kind === 'super-heavy',
+    config = ROCKET_CONFIGS[kind],
+    { height: h, radius: r } = config;
   const group = new THREE.Group(),
     segments: THREE.Group[] = [];
   const booster = new THREE.Group(),
@@ -18,7 +21,8 @@ export function createRocketModel(kind: RocketKind) {
   booster.name = 'First stage — separable booster';
   upper.name = 'Second stage — observation vehicle';
   group.add(booster, upper);
-  group.name = `${kind} Atlas research rocket`;
+  group.name = `${kind} ${titan ? 'Titan' : 'Atlas'} research rocket`;
+  group.userData.rocketKind = kind;
   const white = new THREE.MeshStandardMaterial({
     color: 0xe8eced,
     metalness: 0.48,
@@ -40,6 +44,19 @@ export function createRocketModel(kind: RocketKind) {
     metalness: 0.72,
     roughness: 0.15,
   });
+  const steel = new THREE.MeshStandardMaterial({
+    color: 0xaabcc5,
+    metalness: 0.76,
+    roughness: 0.34,
+  });
+  const heatShield = new THREE.MeshStandardMaterial({
+    color: 0x34434a,
+    metalness: 0.12,
+    roughness: 0.88,
+    polygonOffset: true,
+    polygonOffsetFactor: -1,
+    polygonOffsetUnits: -2,
+  });
   function part(
     geometry: THREE.BufferGeometry,
     material: THREE.Material,
@@ -59,14 +76,14 @@ export function createRocketModel(kind: RocketKind) {
     (i < 3 ? booster : upper).add(g);
     part(
       new THREE.CylinderGeometry(r, r, h * 0.14, 32),
-      i === 2 ? black : white,
+      titan ? steel : large && i < 3 ? orange : i === 2 ? black : white,
       h * (0.11 + i * 0.14),
       g,
     );
     for (const y of [h * (0.04 + i * 0.14), h * (0.175 + i * 0.14)])
       part(
         new THREE.TorusGeometry(r * 1.005, r * 0.035, 6, 32),
-        orange,
+        titan ? black : orange,
         y,
         g,
       ).rotation.x = Math.PI / 2;
@@ -74,48 +91,81 @@ export function createRocketModel(kind: RocketKind) {
   const top = new THREE.Group();
   upper.add(top);
   segments.push(top);
-  part(
-    new THREE.CylinderGeometry(r * 0.72, r, h * 0.1, 32),
-    white,
-    h * 0.79,
-    top,
-  );
-  part(new THREE.ConeGeometry(r * 0.72, h * 0.16, 32), white, h * 0.92, top);
+  if (titan) {
+    const profile = [
+      [r, 0.74 * h],
+      [r, 0.82 * h],
+      [r * 0.86, 0.89 * h],
+      [r * 0.55, 0.95 * h],
+      [r * 0.16, 0.99 * h],
+      [0, h],
+    ].map(([x, y]) => new THREE.Vector2(x, y));
+    part(new THREE.LatheGeometry(profile, 40), steel, 0, top).name =
+      'Titan ogive nose';
+    part(
+      new THREE.LatheGeometry(
+        profile.map((p) => new THREE.Vector2(p.x * 1.009, p.y)),
+        32,
+        -Math.PI / 2,
+        Math.PI,
+      ),
+      heatShield,
+      0,
+      top,
+    ).name = 'Titan nose heat shield';
+  } else {
+    part(
+      new THREE.CylinderGeometry(r * (large ? 1.18 : 0.72), r, h * 0.1, 32),
+      white,
+      h * 0.79,
+      top,
+    );
+    part(
+      new THREE.ConeGeometry(r * (large ? 1.18 : 0.72), h * 0.16, 32),
+      white,
+      h * 0.92,
+      top,
+    );
+  }
   const window = part(
     new THREE.SphereGeometry(r * 0.28, 16, 10),
     glass,
     h * 0.83,
     top,
   );
-  window.position.z = r * 0.73;
+  window.position.z = r * (titan ? 1.015 : large ? 1.16 : 0.73);
   window.scale.z = 0.18;
-  for (let i = 0; i < (large ? 7 : 1); i++) {
-    const a = (i * Math.PI) / 3,
+  const engineCount = titan ? 19 : large ? 7 : 1;
+  for (let i = 0; i < engineCount; i++) {
+    const a = titan && i > 6 ? ((i - 7) * Math.PI) / 6 : (i * Math.PI) / 3,
       engine = part(
-        new THREE.CylinderGeometry(r * 0.19, r * 0.31, h * 0.042, 16, 1, true),
+        new THREE.CylinderGeometry(
+          r * (titan ? 0.09 : 0.19),
+          r * (titan ? 0.16 : 0.31),
+          h * 0.042,
+          16,
+          1,
+          true,
+        ),
         black,
         h * 0.025,
         segments[0],
       );
+    engine.name = `${config.label} main engine ${i + 1}`;
     if (i)
       engine.position.set(
-        Math.cos(a) * r * 0.59,
+        Math.cos(a) * r * (titan ? (i > 6 ? 0.71 : 0.36) : 0.59),
         h * 0.025,
-        Math.sin(a) * r * 0.59,
+        Math.sin(a) * r * (titan ? (i > 6 ? 0.71 : 0.36) : 0.59),
       );
   }
-  for (let i = 0; i < 4; i++) {
-    const fin = part(
-      new THREE.BoxGeometry(r * 1.12, h * 0.12, r * 0.09),
-      black,
-      h * 0.13,
-      segments[0],
-    );
-    const a = (i * Math.PI) / 2;
-    fin.position.x = Math.cos(a) * r;
-    fin.position.z = Math.sin(a) * r;
-    fin.rotation.y = -a;
-  }
+  const collisionSegments = addRocketDesign(kind, h, r, segments, {
+    white,
+    black,
+    orange,
+    steel,
+    heatShield,
+  });
   const upperEngine = new THREE.Group();
   upperEngine.name = 'Upper-stage vacuum engine';
   upper.add(upperEngine);
@@ -174,7 +224,26 @@ export function createRocketModel(kind: RocketKind) {
   );
   flame.add(core);
   core.position.y = -h * 0.11;
-  const light = new THREE.PointLight(0xffa345, 0, large ? 180 : 65, 1.5);
+  const sidePlumes: THREE.Mesh[] = [];
+  if (large)
+    for (const side of [-1, 1]) {
+      const plume = new THREE.Mesh(
+        new THREE.ConeGeometry(r * 0.5, h * 0.4, 16, 1, true),
+        flameMat,
+      );
+      plume.name = 'Atlas side booster exhaust';
+      plume.rotation.z = Math.PI;
+      plume.position.set(side * r * 2.05, -h * 0.18, 0);
+      plume.visible = false;
+      group.add(plume);
+      sidePlumes.push(plume);
+    }
+  const light = new THREE.PointLight(
+    0xffa345,
+    0,
+    config.blastRadius * 1.85,
+    1.5,
+  );
   light.position.y = 1;
   group.add(light);
   const wreckage = new RocketWreckageVisual(kind, group, segments, upperEngine);
@@ -230,8 +299,11 @@ export function createRocketModel(kind: RocketKind) {
     upper,
     height: h,
     radius: r,
+    collisionSegments,
     damage(state: RocketState, surface: (x: number, z: number) => number) {
       white.color.set(0xe8eced).lerp(scorch, state.fireDamage * 0.8);
+      steel.color.set(0xaabcc5).lerp(scorch, state.fireDamage * 0.8);
+      orange.color.set(0xe98236).lerp(scorch, state.fireDamage * 0.65);
       white.emissive.setRGB(
         state.fireIntensity * 0.16,
         state.fireIntensity * 0.018,
@@ -258,7 +330,7 @@ export function createRocketModel(kind: RocketKind) {
         const flashAge = state.elapsed - state.wreckage.explosionTime;
         light.intensity = Math.max(
           light.intensity,
-          Math.max(0, 1 - flashAge / 0.7) * (large ? 240 : 80),
+          Math.max(0, 1 - flashAge / 0.7) * (titan ? 480 : large ? 240 : 80),
         );
         blast.visible = flashAge >= 0 && flashAge < 1.15;
         blastMaterial.opacity = Math.max(0, (1 - flashAge / 1.15) * 0.72);
@@ -344,6 +416,10 @@ export function createRocketModel(kind: RocketKind) {
     },
     fire(power: number, time: number) {
       flame.visible = power > 0.01;
+      sidePlumes.forEach((plume, i) => {
+        plume.visible = power > 0.01 && !flame.userData.upper;
+        plume.scale.y = power * (1 + 0.06 * Math.sin(time * 37 + i));
+      });
       flame.scale.set(
         1 + 0.12 * Math.sin(time * 37),
         power *
@@ -351,15 +427,16 @@ export function createRocketModel(kind: RocketKind) {
           (1 + 0.08 * Math.sin(time * 53)),
         1,
       );
-      light.intensity = power * (large ? 180 : 65);
+      light.intensity = power * (titan ? 350 : large ? 180 : 65);
     },
   };
 }
 
-export function createRocketScaffold(large: boolean) {
+export function createRocketScaffold(kind: RocketKind) {
+  const config = ROCKET_CONFIGS[kind];
   const group = new THREE.Group(),
-    h = large ? 55 : 18,
-    r = large ? 7 : 2.8;
+    h = config.height * 1.06,
+    r = config.footprintRadius * 1.12;
   const steel = new THREE.MeshStandardMaterial({
     color: 0x68818a,
     metalness: 0.72,
@@ -371,7 +448,7 @@ export function createRocketScaffold(large: boolean) {
     pole.position.set(Math.cos(a) * r, h / 2, Math.sin(a) * r);
     group.add(pole);
   }
-  for (let y = 2; y < h; y += large ? 6 : 3) {
+  for (let y = 2; y < h; y += Math.max(3, h / 9)) {
     const ring = new THREE.Mesh(new THREE.TorusGeometry(r, 0.1, 5, 12), steel);
     ring.rotation.x = Math.PI / 2;
     ring.position.y = y;

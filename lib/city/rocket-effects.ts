@@ -4,6 +4,7 @@ import {
   sampleRocketEffects,
   rocketDirection,
   ROCKET_CONFIGS,
+  type RocketKind,
   type RocketState,
 } from './rocket-state';
 import { disposeRocketObject } from './assets/rocket';
@@ -46,7 +47,10 @@ type BurntTree = {
   z: number;
   h: number;
   heat: number;
+  pressure: number;
   fall: number;
+  bend: THREE.Matrix4;
+  fromBase: THREE.Matrix4;
   mesh: THREE.Mesh;
   charred: THREE.Group;
 };
@@ -64,6 +68,52 @@ const rand = (n: number) => {
   return v - Math.floor(v);
 };
 const unit = (n: number) => Math.max(0, Math.min(1, n));
+type EffectProfile = {
+  buildings: number;
+  trees: number;
+  flying: number;
+  fragments: number;
+  exhaustRate: number;
+  fireRate: number;
+  impactSpeed: number;
+  explosionCount: number;
+  treeFall: number;
+};
+const EFFECT_PROFILES: Readonly<Record<RocketKind, EffectProfile>> = {
+  small: {
+    buildings: 48,
+    trees: 28,
+    flying: 48,
+    fragments: 64,
+    exhaustRate: 65,
+    fireRate: 55,
+    impactSpeed: 65,
+    explosionCount: 75,
+    treeFall: 0.35,
+  },
+  large: {
+    buildings: 48,
+    trees: 28,
+    flying: 48,
+    fragments: 64,
+    exhaustRate: 130,
+    fireRate: 85,
+    impactSpeed: 90,
+    explosionCount: 125,
+    treeFall: 0.7,
+  },
+  'super-heavy': {
+    buildings: 96,
+    trees: 56,
+    flying: 96,
+    fragments: 96,
+    exhaustRate: 260,
+    fireRate: 150,
+    impactSpeed: 90,
+    explosionCount: 225,
+    treeFall: 0.7,
+  },
+};
 
 /** Shared settlement curve: initial sag, then a readable 2.6-second floor collapse. */
 export function rocketSupportCollapseProgress(elapsed: number) {
@@ -159,6 +209,8 @@ export class RocketEffects {
   private scanAt = 0;
   private eventId = 0;
   private restoredAfterFailure: boolean;
+  private readonly profile: EffectProfile;
+  private readonly strength: number;
   private shadowAt = -Infinity;
   private scorch: THREE.Mesh;
   private shock: THREE.Mesh;
@@ -168,6 +220,8 @@ export class RocketEffects {
   private lastState: RocketState;
   private fragmentTransform = new THREE.Object3D();
   private vehicleAnchor = new THREE.Vector3();
+  private treeInstance = new THREE.Matrix4();
+  private treeLocal = new THREE.Matrix4();
   constructor(
     private e: CityEngine,
     state: RocketState,
@@ -177,6 +231,8 @@ export class RocketEffects {
     // snapshot. Past impacts and fuel bursts must not play a second time.
     this.eventId = state.events.at(-1)?.id ?? 0;
     this.restoredAfterFailure = !!state.wreckage;
+    this.profile = EFFECT_PROFILES[state.kind];
+    this.strength = ROCKET_CONFIGS[state.kind].effectStrength;
     this.savedGround = new THREE.Vector3(
       state.origin.x,
       state.support.groundY ?? state.origin.y,
@@ -207,7 +263,7 @@ export class RocketEffects {
               b.center[1] - state.origin.z,
             ),
         )
-        .slice(0, 48)
+        .slice(0, this.profile.buildings)
         .map((part: BodyPart) => {
           const position = new Float32Array(
             (pos.array as Float32Array).subarray(
@@ -249,15 +305,23 @@ export class RocketEffects {
     this.rubble = new THREE.InstancedMesh(
       new THREE.BoxGeometry(1, 1, 1),
       new THREE.MeshStandardMaterial({ color: 0x6e655b, roughness: 1 }),
-      64,
+      this.profile.fragments,
     );
     this.rubble.count = 0;
     this.rubble.frustumCulled = false;
-    this.rubble.name = 'Rocket building debris (64 slot limit)';
+    this.rubble.name = `Rocket building debris (${this.profile.fragments} slot limit)`;
     this.rubble.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
     this.group.add(this.rubble);
     const n =
-      e.compatibleGraphics || e.settings.quality === 'balanced' ? 160 : 420;
+      state.kind === 'super-heavy'
+        ? e.compatibleGraphics
+          ? 240
+          : e.settings.quality === 'balanced'
+            ? 360
+            : 600
+        : e.compatibleGraphics || e.settings.quality === 'balanced'
+          ? 160
+          : 420;
     this.positions = new Float32Array(n * 3);
     this.alphas = new Float32Array(n);
     const geo = new THREE.BufferGeometry();
@@ -266,7 +330,11 @@ export class RocketEffects {
     const mat = new THREE.ShaderMaterial({
       transparent: true,
       depthWrite: false,
-      uniforms: { uScale: { value: e.container.clientHeight * 0.55 } },
+      uniforms: {
+        uScale: {
+          value: e.container.clientHeight * 0.55 * Math.sqrt(this.strength),
+        },
+      },
       vertexShader:
         'attribute float aLife; varying float vLife; uniform float uScale; void main(){vLife=aLife;vec4 p=modelViewMatrix*vec4(position,1.);gl_Position=projectionMatrix*p;gl_PointSize=clamp(uScale*(abs(aLife)>1.?4.:9.)/max(2.,-p.z),1.,110.);}',
       fragmentShader:
@@ -295,6 +363,7 @@ export class RocketEffects {
       }),
     );
     this.scorch.rotation.x = -Math.PI / 2;
+    this.scorch.name = 'Rocket ground scorch footprint';
     this.scorch.position.copy(this.savedGround);
     this.scorch.position.y += 0.35;
     this.group.add(this.scorch);
@@ -333,7 +402,7 @@ export class RocketEffects {
           Math.hypot(a.x - state.origin.x, a.z - state.origin.z) -
           Math.hypot(b.x - state.origin.x, b.z - state.origin.z),
       )
-      .slice(0, 28)) {
+      .slice(0, this.profile.trees)) {
       const mesh = new THREE.Mesh(fireGeometry, fireMaterial);
       mesh.position.set(t.x, t.y + 2, t.z);
       mesh.visible = false;
@@ -356,7 +425,10 @@ export class RocketEffects {
         z: t.z,
         h: t.h,
         heat: 0,
+        pressure: 0,
         fall: 0,
+        bend: new THREE.Matrix4(),
+        fromBase: new THREE.Matrix4().makeTranslation(-t.x, -t.y, -t.z),
         mesh,
         charred,
       });
@@ -453,7 +525,10 @@ export class RocketEffects {
     return p;
   }
   private emitBuildingFragments(d: DamagedPart, power: number, requested = 2) {
-    const count = Math.min(requested, 64 - this.fragments.length),
+    const count = Math.min(
+        requested,
+        this.profile.fragments - this.fragments.length,
+      ),
       height = d.part.maxY - d.part.minY;
     const dx = d.part.center[0] - this.lastState.origin.x,
       dz = d.part.center[1] - this.lastState.origin.z,
@@ -470,7 +545,7 @@ export class RocketEffects {
         ),
         v: new THREE.Vector3(
           (dx / distance) * speed,
-          4 + rand(k + 4) * 13,
+          (4 + rand(k + 4) * 13) * Math.sqrt(this.strength),
           (dz / distance) * speed,
         ),
         age: 0,
@@ -478,7 +553,7 @@ export class RocketEffects {
           0.3 + rand(k + 5) * 1.4,
           0.2 + rand(k + 6) * 0.8,
           0.4 + rand(k + 7),
-        ),
+        ).multiplyScalar(Math.sqrt(this.strength)),
         rotation: new THREE.Euler(),
         spin: new THREE.Vector3(
           rand(k + 8) * 4,
@@ -533,11 +608,11 @@ export class RocketEffects {
         y = exploded && wreckage ? center.y : event.position.y,
         z = exploded && wreckage ? center.z : event.position.z,
         severity = impact
-          ? unit(event.magnitude / (state.kind === 'large' ? 90 : 65))
+          ? unit(event.magnitude / this.profile.impactSpeed)
           : 0.4,
         count = exploded
-          ? Math.min(this.particles.length, state.kind === 'large' ? 125 : 75)
-          : Math.round(10 + severity * 38);
+          ? Math.min(this.particles.length, this.profile.explosionCount)
+          : Math.round((10 + severity * 38) * this.strength);
       for (let i = 0; i < count; i++) {
         const spark = !exploded && impact && severity > 0.28 && i % 9 === 0,
           hot = exploded ? i % 2 === 0 : spark,
@@ -545,13 +620,15 @@ export class RocketEffects {
             x,
             y + (impact ? 0.5 : 0),
             z,
-            exploded ? 1.7 : 0.25 + severity,
+            (exploded ? 1.7 : 0.25 + severity) * this.strength,
             hot,
             true,
             true,
           ),
           k = this.next,
-          speed = exploded ? 12 + rand(k + 2) * 24 : 2 + severity * 14;
+          speed =
+            (exploded ? 12 + rand(k + 2) * 24 : 2 + severity * 14) *
+            this.strength;
         particle.v.y = exploded
           ? (rand(k + 4) - 0.3) * speed
           : 1 + rand(k + 4) * speed * 0.5;
@@ -560,7 +637,8 @@ export class RocketEffects {
       }
       if (impact || exploded) {
         this.shockAge = 0;
-        this.shockPower = exploded ? 1 : 0.15 + severity * 0.55;
+        this.shockPower =
+          (exploded ? 1 : 0.15 + severity * 0.55) * this.strength;
         this.shock.position.set(x, y + 0.5, z);
       }
     }
@@ -568,7 +646,7 @@ export class RocketEffects {
     const intensity = unit(state.fireIntensity);
     if (intensity <= 0 || state.phase === 'sinking') return;
     const direction = rocketDirection(state.attitude);
-    this.vehicleSpawn += dt * (state.kind === 'large' ? 85 : 55) * intensity;
+    this.vehicleSpawn += dt * this.profile.fireRate * this.strength * intensity;
     while (this.vehicleSpawn >= 1) {
       this.vehicleSpawn--;
       const k = this.next + 1,
@@ -585,7 +663,7 @@ export class RocketEffects {
             direction.y * offset +
             (wreckage ? rand(k + 2) * config.radius : 0),
           center.z + direction.z * offset + Math.sin(angle) * radius,
-          0.12 + intensity * 0.2,
+          (0.12 + intensity * 0.2) * this.strength,
           this.next % 3 === 0,
           true,
           true,
@@ -604,7 +682,7 @@ export class RocketEffects {
       config = ROCKET_CONFIGS[s.kind];
     if (s.phase === 'ignition' && this.shockAge > 90) {
       this.shockAge = 0;
-      this.shockPower = 1;
+      this.shockPower = Math.sqrt(this.strength);
     }
     this.shockAge += dt;
     const shockScale =
@@ -616,10 +694,13 @@ export class RocketEffects {
     );
     if (f.groundExposure > 0.01) {
       (this.scorch.material as THREE.MeshBasicMaterial).opacity = Math.min(
-        0.72,
-        (this.scorch.material as THREE.MeshBasicMaterial).opacity + dt * 0.12,
+        Math.min(0.9, 0.72 * Math.sqrt(this.strength)),
+        (this.scorch.material as THREE.MeshBasicMaterial).opacity +
+          dt * 0.12 * this.strength,
       );
-      this.scorch.scale.setScalar(Math.max(1, config.heatRadius * 0.7));
+      this.scorch.scale.setScalar(
+        Math.max(1, config.heatRadius * 0.7 * Math.sqrt(this.strength)),
+      );
       for (const d of this.parts) {
         const distance = Math.hypot(
           d.part.center[0] - s.origin.x,
@@ -630,7 +711,8 @@ export class RocketEffects {
         const weakness = d.part.maxY - d.part.minY < 14 ? 1 : 0.17;
         const exposure = Math.min(
           1,
-          d.exposure + f.groundExposure * falloff * dt * weakness * 0.6,
+          d.exposure +
+            f.groundExposure * falloff * dt * weakness * 0.6 * this.strength,
         );
         if (exposure !== d.exposure) d.dirtyColor = true;
         d.exposure = exposure;
@@ -642,7 +724,8 @@ export class RocketEffects {
           t.heat +
             dt *
               f.groundExposure *
-              Math.max(0, 1 - distance / config.heatRadius),
+              Math.max(0, 1 - distance / config.heatRadius) *
+              this.strength,
         );
       }
     }
@@ -670,7 +753,7 @@ export class RocketEffects {
         d.fragmentsStage++;
         this.emitBuildingFragments(
           d,
-          f.groundExposure,
+          f.groundExposure * this.strength,
           d.fragmentsStage === 3 ? 3 : 2,
         );
         for (let i = 0; i < 3; i++)
@@ -698,15 +781,31 @@ export class RocketEffects {
         1 + t.heat,
       );
       t.charred.visible = t.heat > 0.3;
-      if (t.charred.visible) {
-        const distance = Math.hypot(t.x - s.origin.x, t.z - s.origin.z);
+      const distance = Math.hypot(t.x - s.origin.x, t.z - s.origin.z);
+      if (this.strength > 1) {
+        t.pressure = Math.max(
+          t.pressure,
+          f.groundExposure *
+            Math.max(0, 1 - distance / config.blastRadius) *
+            this.strength,
+        );
+      }
+      if (t.charred.visible || t.pressure > 0.01) {
+        const pressureFall =
+          this.strength > 1
+            ? f.groundExposure *
+              Math.max(0, 1 - distance / config.blastRadius) *
+              this.strength *
+              this.profile.treeFall
+            : 0;
         t.fall = Math.min(
           1.35,
           t.fall +
             dt *
-              f.groundExposure *
-              Math.max(0, 1 - distance / config.blastRadius) *
-              (s.kind === 'large' ? 0.7 : 0.35),
+              (pressureFall ||
+                f.groundExposure *
+                  Math.max(0, 1 - distance / config.blastRadius) *
+                  this.profile.treeFall),
         );
         const angle = Math.atan2(t.x - s.origin.x, t.z - s.origin.z);
         t.charred.rotation.set(
@@ -714,6 +813,8 @@ export class RocketEffects {
           0,
           -Math.sin(angle) * t.fall,
         );
+        t.charred.updateMatrix();
+        t.bend.copy(t.charred.matrix).multiply(t.fromBase);
       }
       if (t.mesh.visible && rand(this.next + this.time) > 0.55)
         this.emit(t.x, t.y + 3, t.z, 0.3, false, true);
@@ -722,16 +823,20 @@ export class RocketEffects {
     if (f.engine > 0.03 && s.altitude < 14000) {
       this.spawn +=
         dt *
-        (s.kind === 'large' ? 130 : 65) *
+        this.profile.exhaustRate *
+        this.strength *
         f.engine *
         Math.exp(-s.altitude / 1200);
       while (this.spawn > 1) {
         this.spawn--;
+        const angle = rand(this.next + 17) * Math.PI * 2,
+          radius =
+            this.strength > 1 ? rand(this.next + 27) * config.radius * 1.4 : 0;
         this.emit(
-          s.position.x,
+          s.position.x + Math.cos(angle) * radius,
           Math.max(this.savedGround.y + 1, s.position.y - 3),
-          s.position.z,
-          f.engine,
+          s.position.z + Math.sin(angle) * radius,
+          f.engine * this.strength,
           this.next % 4 === 0,
         );
       }
@@ -802,6 +907,21 @@ export class RocketEffects {
     mesh.instanceMatrix.addUpdateRange(index * 16, 16);
     mesh.instanceMatrix.needsUpdate = true;
   }
+  /** Bend the original healthy tree geometry, then let its LOD owner restore it after this draw. */
+  private bendTreeSlot(
+    tree: BurntTree,
+    mesh: THREE.InstancedMesh,
+    index: number,
+  ) {
+    mesh.updateWorldMatrix(true, false);
+    mesh.getMatrixAt(index, this.treeInstance);
+    this.treeLocal.copy(mesh.matrixWorld).invert();
+    this.treeInstance
+      .premultiply(mesh.matrixWorld)
+      .premultiply(tree.bend)
+      .premultiply(this.treeLocal);
+    this.overrideSlot(mesh, index, this.treeInstance);
+  }
   /** Called after city LOD/traffic updates, then restored after the draw. This never hijacks their instance ownership. */
   beforeRender() {
     if (this.restoreSlots.length) this.afterRender();
@@ -857,7 +977,7 @@ export class RocketEffects {
     if (
       f.groundExposure > 0.12 &&
       this.time - this.scanAt > 0.3 &&
-      this.flying.length < 48
+      this.flying.length < this.profile.flying
     ) {
       this.scanAt = this.time;
       const groups = [
@@ -874,7 +994,11 @@ export class RocketEffects {
           if (!(object instanceof THREE.InstancedMesh) || !object.visible)
             return;
           object.updateWorldMatrix(true, false);
-          for (let i = 0; i < object.count && this.flying.length < 48; i++) {
+          for (
+            let i = 0;
+            i < object.count && this.flying.length < this.profile.flying;
+            i++
+          ) {
             const key = object.uuid + ':' + i;
             if (this.launched.has(key)) continue;
             const matrix = new THREE.Matrix4();
@@ -923,40 +1047,47 @@ export class RocketEffects {
       m.premultiply(new THREE.Matrix4().copy(p.mesh.matrixWorld).invert());
       this.overrideSlot(p.mesh, p.index, m);
     }
-    const burnt = this.trees.filter((t) => t.charred.visible),
+    const affectedTrees = this.trees.filter(
+        (t) => t.charred.visible || t.pressure > 0.01,
+      ),
       hidden = new THREE.Matrix4().makeScale(0, 0, 0);
-    for (const t of burnt)
+    for (const t of affectedTrees)
       for (const slot of t.source.slots ?? [])
-        if (slot.index < slot.mesh.count)
-          this.overrideSlot(slot.mesh, slot.index, hidden);
+        if (slot.index < slot.mesh.count) {
+          if (t.charred.visible)
+            this.overrideSlot(slot.mesh, slot.index, hidden);
+          else this.bendTreeSlot(t, slot.mesh, slot.index);
+        }
     // Near-camera detailed-tree slots are recycled by their owner. Resolve the
     // current spatial match for this draw instead of retaining a stale LOD slot.
-    if (burnt.length)
+    if (affectedTrees.length)
       this.e.detailedTrees?.group.traverse((object) => {
         if (!(object instanceof THREE.InstancedMesh) || !object.visible) return;
         object.updateWorldMatrix(true, false);
         const matrix = new THREE.Matrix4(),
           point = new THREE.Vector3();
         for (let i = 0; i < object.count; i++) {
+          if (this.restoredKeys.has(object.uuid + ':' + i)) continue;
           object.getMatrixAt(i, matrix);
           if (Math.abs(matrix.determinant()) < 1e-9) continue;
           point.setFromMatrixPosition(matrix).applyMatrix4(object.matrixWorld);
-          if (
-            burnt.some(
-              (t) =>
-                Math.hypot(t.x - point.x, t.z - point.z) <
-                  Math.max(1.5, t.h * 0.17) &&
-                point.y >= t.y - 2 &&
-                point.y < t.y + t.h + 5,
-            )
-          )
-            this.overrideSlot(object, i, hidden);
+          const tree = affectedTrees.find(
+            (t) =>
+              Math.hypot(t.x - point.x, t.z - point.z) <
+                Math.max(1.5, t.h * 0.17) &&
+              point.y >= t.y - 2 &&
+              point.y < t.y + t.h + 5,
+          );
+          if (tree) {
+            if (tree.charred.visible) this.overrideSlot(object, i, hidden);
+            else this.bendTreeSlot(tree, object, i);
+          }
         }
       });
     if (
       (shadowChanged ||
         (f.groundExposure > 0.12 &&
-          (this.flying.length > 0 || burnt.length > 0))) &&
+          (this.flying.length > 0 || affectedTrees.length > 0))) &&
       this.time - this.shadowAt > 0.35
     ) {
       this.shadowAt = this.time;
@@ -1016,7 +1147,8 @@ export class RocketEffects {
     this.vehicleSpawn = 0;
     this.shockAge = 99;
     for (const t of this.trees) {
-      t.heat = t.fall = 0;
+      t.heat = t.pressure = t.fall = 0;
+      t.bend.identity();
       t.mesh.visible = t.charred.visible = false;
     }
     for (const p of this.particles) p.age = p.life;

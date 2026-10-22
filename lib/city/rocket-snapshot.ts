@@ -1,3 +1,5 @@
+import type { RocketKind } from './rocket-state';
+
 export type RocketView = 'first' | 'chase';
 export type RocketSpaceFocus = 'rocket' | 'earth' | 'sun' | 'moon';
 export interface RocketSnapshot {
@@ -5,7 +7,7 @@ export interface RocketSnapshot {
   exists: boolean;
   active: boolean;
   placing: boolean;
-  kind: 'small' | 'large';
+  kind: RocketKind;
   phase:
     | 'building'
     | 'ready'

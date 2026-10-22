@@ -7,12 +7,13 @@ const { RocketEffects } = await import(cityModule('rocket-effects'));
 const { createRocket, stepRocket, launchRocket } = await import(
   cityModule('rocket-state')
 );
-function fixture(count = 2) {
+function fixture(count = 2, kind = 'large', distances = null) {
   const vertices = [],
     colors = [],
     parts = [];
   for (let i = 0; i < count; i++) {
-    const x = i === count - 1 && count === 2 ? 300 : 5 + i * 2;
+    const x =
+      distances?.[i] ?? (i === count - 1 && count === 2 ? 300 : 5 + i * 2);
     parts.push({
       key: String(i),
       center: [x, 0],
@@ -69,10 +70,43 @@ function fixture(count = 2) {
     traffic: { vehicleAssets: { group: trafficGroup } },
     detailedTrees: { group: treeGroup, trees: [] },
   };
-  const state = createRocket('large', 0, 0, 0);
+  const state = createRocket(kind, 0, 0, 0);
   state.phase = 'ignition';
   state.throttle = 1;
   return { engine, state, mesh, trafficGroup, treeGroup };
+}
+function districtFixture(kind, buildings, trees, actors) {
+  const result = fixture(buildings.length, kind, buildings),
+    { engine, treeGroup, trafficGroup } = result;
+  const treeMesh = new THREE.InstancedMesh(
+    new THREE.ConeGeometry(2, 12, 6),
+    new THREE.MeshBasicMaterial({ color: 0x367243 }),
+    trees.length,
+  );
+  const actorMesh = new THREE.InstancedMesh(
+    new THREE.BoxGeometry(2, 2, 4),
+    new THREE.MeshBasicMaterial(),
+    actors.length,
+  );
+  treeGroup.add(treeMesh);
+  trafficGroup.add(actorMesh);
+  trees.forEach((x, i) => {
+    const matrix = new THREE.Matrix4().makeTranslation(x, 6, 0);
+    treeMesh.setMatrixAt(i, matrix);
+    engine.detailedTrees.trees.push({
+      x,
+      y: 0,
+      z: 0,
+      h: 12,
+      conifer: true,
+      seed: i,
+      slots: [{ mesh: treeMesh, index: i, matrix }],
+    });
+  });
+  actors.forEach((x, i) =>
+    actorMesh.setMatrixAt(i, new THREE.Matrix4().makeTranslation(x, 1, 0)),
+  );
+  return { ...result, treeMesh, actorMesh };
 }
 function heat(effects, state, seconds = 3) {
   for (let i = 0; i < seconds * 10; i++) effects.update(0.1, state);
@@ -606,4 +640,247 @@ test('vehicle fire persists while flying and emits around the actual tilted body
     ),
   );
   effects.dispose();
+});
+
+test('the three rockets at one site produce distinct local damage extents and Titan pressure reaches real actors and healthy trees at 150–195 metres', () => {
+  const buildings = [8, 70, 150, 195, 290],
+    trees = [8, 35, 85, 100, 150, 195, 290],
+    results = [];
+  for (const kind of ['small', 'large', 'super-heavy']) {
+    const { engine, state, mesh, treeMesh, actorMesh } = districtFixture(
+        kind,
+        buildings,
+        trees,
+        buildings,
+      ),
+      position = mesh.geometry.getAttribute('position'),
+      color = mesh.geometry.getAttribute('color'),
+      original = Array.from(position.array),
+      originalColor = Array.from(color.array),
+      actorOriginal = Array.from(actorMesh.instanceMatrix.array),
+      treeOriginal = Array.from(treeMesh.instanceMatrix.array),
+      effects = new RocketEffects(engine, state);
+    heat(effects, state, 3);
+    effects.beforeRender();
+    effects.afterRender();
+    effects.update(0.25, state);
+    effects.beforeRender();
+    const moved = [],
+      rotations = [],
+      current = new THREE.Matrix4();
+    for (let i = 0; i < buildings.length; i++) {
+      actorMesh.getMatrixAt(i, current);
+      if (Math.abs(current.elements[12] - buildings[i]) > 0.01) moved.push(i);
+    }
+    for (const i of [4, 5, 6]) {
+      treeMesh.getMatrixAt(i, current);
+      const q = new THREE.Quaternion();
+      current.decompose(new THREE.Vector3(), q, new THREE.Vector3());
+      rotations.push(q.angleTo(new THREE.Quaternion()));
+    }
+    const changedBuildings = buildings.map((_, i) =>
+      Array.from(position.array)
+        .slice(i * 18, (i + 1) * 18)
+        .some((value, j) => value !== original[i * 18 + j]),
+    );
+    results.push({
+      kind,
+      damaged: effects.damaged,
+      burning: effects.burning,
+      moved,
+      changedBuildings,
+      rotations,
+      scorch: effects.group.getObjectByName('Rocket ground scorch footprint')
+        .scale.x,
+      nearActorX: actorMesh.instanceMatrix.array[12],
+    });
+    assert.deepEqual(
+      Array.from(position.array).slice(4 * 18),
+      original.slice(4 * 18),
+      'the 290-metre building stays untouched',
+    );
+    effects.afterRender();
+    assert.deepEqual(Array.from(actorMesh.instanceMatrix.array), actorOriginal);
+    assert.deepEqual(Array.from(treeMesh.instanceMatrix.array), treeOriginal);
+    effects.reset();
+    assert.deepEqual(Array.from(position.array), original);
+    assert.deepEqual(Array.from(color.array), originalColor);
+    effects.dispose();
+  }
+  assert.deepEqual(
+    results.map((r) => r.damaged),
+    [1, 2, 4],
+  );
+  assert.deepEqual(
+    results.map((r) => r.burning),
+    [1, 2, 4],
+  );
+  assert.deepEqual(
+    results.map((r) => r.moved),
+    [[0], [0, 1], [0, 1, 2, 3]],
+  );
+  assert.deepEqual(results[2].changedBuildings, [
+    true,
+    true,
+    true,
+    true,
+    false,
+  ]);
+  assert(
+    results[2].nearActorX > results[1].nearActorX &&
+      results[1].nearActorX > results[0].nearActorX,
+    'Titan applies a stronger actual displacement, not only a wider particle effect',
+  );
+  assert(
+    results[2].scorch > results[1].scorch * 2 &&
+      results[1].scorch > results[0].scorch * 2,
+  );
+  assert(
+    results[0].rotations.every((angle) => angle === 0) &&
+      results[1].rotations.every((angle) => angle === 0),
+  );
+  assert(
+    results[2].rotations[0] > 0.3 &&
+      results[2].rotations[1] > 0.1 &&
+      results[2].rotations[2] === 0,
+    'healthy distant trees bend within the pressure footprint while the far forest is unchanged',
+  );
+  assert(
+    results[2].rotations.every((angle) => angle <= 1.351),
+    'a tree shared by source and detailed LOD lists bends once per draw',
+  );
+});
+
+test('Titan uses bounded larger effect pools while Scout and Atlas retain their existing budgets and all source resources restore exactly', () => {
+  for (const kind of ['small', 'large', 'super-heavy']) {
+    const titan = kind === 'super-heavy',
+      buildings = Array.from({ length: 120 }, (_, i) => 5 + i * 0.05),
+      trees = Array.from({ length: 80 }, (_, i) => 2 + i * 0.06),
+      actors = Array.from({ length: 140 }, (_, i) => 3 + i * 0.04),
+      { engine, state, mesh, treeMesh, actorMesh } = districtFixture(
+        kind,
+        buildings,
+        trees,
+        actors,
+      ),
+      original = Array.from(mesh.geometry.getAttribute('position').array),
+      originalColor = Array.from(mesh.geometry.getAttribute('color').array),
+      actorOriginal = Array.from(actorMesh.instanceMatrix.array),
+      treeOriginal = Array.from(treeMesh.instanceMatrix.array),
+      effects = new RocketEffects(engine, state),
+      fragmentLimit = titan ? 96 : 64,
+      rubble = effects.group.getObjectByName(
+        `Rocket building debris (${fragmentLimit} slot limit)`,
+      ),
+      points = effects.group.children.find(
+        (object) => object instanceof THREE.Points,
+      );
+    heat(effects, state, 12);
+    effects.beforeRender();
+    effects.afterRender();
+    effects.update(0.1, state);
+    assert.equal(effects.damaged, titan ? 96 : 48);
+    assert.equal(effects.burning, titan ? 56 : 28);
+    assert.equal(effects.debris, fragmentLimit + (titan ? 96 : 48));
+    assert.equal(rubble.count, fragmentLimit);
+    assert.equal(rubble.instanceMatrix.count, fragmentLimit);
+    assert.equal(
+      points.geometry.getAttribute('position').count,
+      titan ? 360 : 160,
+    );
+    heat(effects, state, 20);
+    effects.beforeRender();
+    effects.afterRender();
+    assert(effects.debris <= (titan ? 192 : 112));
+    assert.equal(rubble.count, fragmentLimit);
+    assert.deepEqual(Array.from(actorMesh.instanceMatrix.array), actorOriginal);
+    assert.deepEqual(Array.from(treeMesh.instanceMatrix.array), treeOriginal);
+    assert.equal(actorMesh.frustumCulled, true);
+    assert.equal(treeMesh.frustumCulled, true);
+    let sourceDisposals = 0;
+    for (const resource of [
+      mesh.geometry,
+      mesh.material,
+      actorMesh.geometry,
+      actorMesh.material,
+      treeMesh.geometry,
+      treeMesh.material,
+    ])
+      resource.addEventListener('dispose', () => sourceDisposals++);
+    effects.dispose();
+    assert.equal(sourceDisposals, 0);
+    assert.deepEqual(
+      Array.from(mesh.geometry.getAttribute('position').array),
+      original,
+    );
+    assert.deepEqual(
+      Array.from(mesh.geometry.getAttribute('color').array),
+      originalColor,
+    );
+  }
+});
+
+test('Titan impact, explosion and launch dust are stronger while every graphics mode stays within its fixed particle budget', () => {
+  const impacts = [],
+    explosions = [],
+    dust = [];
+  for (const kind of ['small', 'large', 'super-heavy']) {
+    const { engine, state } = fixture(0, kind);
+    state.phase = 'crashed';
+    state.throttle = 0;
+    const effects = new RocketEffects(engine, state);
+    state.events = [
+      {
+        id: 1,
+        type: 'impact',
+        time: 0,
+        position: { x: 0, y: 30, z: 0 },
+        magnitude: 45,
+      },
+    ];
+    effects.update(0.1, state);
+    impacts.push(visibleParticles(effects).length);
+    effects.reset();
+    state.events.push({
+      id: 2,
+      type: 'exploded',
+      time: 0,
+      position: { x: 0, y: 30, z: 0 },
+      magnitude: 1,
+    });
+    effects.update(0.1, state);
+    const burst = visibleParticles(effects);
+    explosions.push({
+      count: burst.length,
+      spread: Math.max(...burst.map((p) => Math.hypot(p.x, p.z))),
+    });
+    effects.dispose();
+    const launch = fixture(0, kind),
+      plume = new RocketEffects(launch.engine, launch.state);
+    heat(plume, launch.state, 1);
+    dust.push(visibleParticles(plume).length);
+    plume.dispose();
+    for (const [quality, compatible, expected] of [
+      ['balanced', false, kind === 'super-heavy' ? 360 : 160],
+      ['high', false, kind === 'super-heavy' ? 600 : 420],
+      ['high', true, kind === 'super-heavy' ? 240 : 160],
+    ]) {
+      const graphics = fixture(0, kind);
+      graphics.engine.settings.quality = quality;
+      graphics.engine.compatibleGraphics = compatible;
+      const limited = new RocketEffects(graphics.engine, graphics.state),
+        points = limited.group.children.find(
+          (object) => object instanceof THREE.Points,
+        );
+      assert.equal(points.geometry.getAttribute('position').count, expected);
+      limited.dispose();
+    }
+  }
+  assert(impacts[2] > impacts[0] && impacts[2] > impacts[1]);
+  assert(
+    explosions[0].count < explosions[1].count &&
+      explosions[1].count < explosions[2].count,
+  );
+  assert(explosions[2].spread > explosions[1].spread * 1.5);
+  assert(dust[0] < dust[1] && dust[1] < dust[2]);
 });

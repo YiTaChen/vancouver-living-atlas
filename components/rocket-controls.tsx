@@ -21,6 +21,7 @@ import {
 import { TravelJoystick } from './travel-joystick';
 import type { RocketController } from '@/lib/city/rocket-controller';
 import type { RocketSnapshot } from '@/lib/city/rocket-snapshot';
+import type { RocketKind } from '@/lib/city/rocket-state';
 import type { Locale } from '@/lib/i18n';
 import './rocket-controls.css';
 
@@ -32,9 +33,19 @@ const en = {
     'Build a rocket anywhere in the city, then pilot it to the edge of space.',
   small: 'Scout · Small rocket',
   large: 'Atlas · Heavy rocket',
+  'super-heavy': 'Titan · Super-heavy rocket',
   smallHint:
-    'Agile and light. Roof launches are possible, but wind can tip it.',
-  largeHint: 'More stable in flight. Needs a strong, open launch foundation.',
+    'Slim body with four tail fins. Agile and light, but vulnerable to wind.',
+  largeHint:
+    'Orange core with twin side boosters. Needs a strong, open foundation.',
+  superHeavyHint:
+    'Wide silver body, dark heat shield and broad fins. Needs the strongest foundation.',
+  smallMetrics: '18 m tall · blast 35 m · heat 17 m',
+  largeMetrics: '48 m tall · blast 100 m · heat 45 m',
+  superHeavyMetrics: '110 m tall · blast 220 m · heat 105 m',
+  smallTiming: 'Assembly 6 s · countdown 5 s',
+  largeTiming: 'Assembly 10 s · countdown 5 s',
+  superHeavyTiming: 'Assembly 16 s · countdown 5 s',
   placement: 'Click or tap the city to place your rocket.',
   placementHint:
     'Water and rooftops are allowed. Their physical risks still apply.',
@@ -94,6 +105,12 @@ const en = {
     'Heavy rocket: exhaust can destroy this roof, collapse its support, and tip the vehicle.',
   largeRoofRisk:
     'A broad roof offers more support, but exhaust can still weaken the building.',
+  superHeavyGroundRisk:
+    'Titan needs broad, solid ground. Its 220 m blast zone can damage a wide area.',
+  superHeavyPlatformRisk:
+    'Titan needs an exceptionally strong, broad platform. Keep the 220 m blast zone clear.',
+  superHeavyRoofRisk:
+    'Titan is too demanding for ordinary rooftops: its weight and exhaust can collapse the building.',
   seaRisk: 'No floating launch platform: the rocket will sink into the sea.',
   riverRisk:
     'No floating launch platform: the rocket will sink into the river.',
@@ -137,6 +154,10 @@ const en = {
   largeRoofShort: 'Roof support may weaken under exhaust.',
   waterShort: 'Water cannot support the rocket. It will sink.',
   lakeShort: 'Unstable lake bed: settling may tip the rocket.',
+  superHeavyGroundShort: 'Titan: broad, solid ground · 220 m blast zone.',
+  superHeavyPlatformShort:
+    'Titan: exceptionally strong platform · 220 m blast zone.',
+  superHeavyRoofShort: 'Titan: weight and exhaust can collapse this roof.',
   attitude: 'Flight attitude',
   pitch: 'Pitch',
   roll: 'Roll',
@@ -172,8 +193,16 @@ const zh: Record<RocketTextKey, string> = {
   chooseHint: '在城市任意地點搭建火箭，親自駕駛或自動飛向太空。',
   small: 'Scout · 小型火箭',
   large: 'Atlas · 大型火箭',
-  smallHint: '輕巧、轉向靈活。可從屋頂起飛，但容易受風偏移。',
-  largeHint: '飛行較穩定。需要寬廣且堅固的發射地基。',
+  'super-heavy': '泰坦 · 超大型火箭',
+  smallHint: '細長箭體與四片尾翼。輕巧、轉向靈活，但容易受風偏移。',
+  largeHint: '橙色主箭體與雙側助推器。需要寬廣、堅固的發射地基。',
+  superHeavyHint: '寬銀色箭體、黑色隔熱面與大翼片。需要最堅固的發射地基。',
+  smallMetrics: '高 18 m · 風壓 35 m · 熱影響 17 m',
+  largeMetrics: '高 48 m · 風壓 100 m · 熱影響 45 m',
+  superHeavyMetrics: '高 110 m · 風壓 220 m · 熱影響 105 m',
+  smallTiming: '搭建 6 秒 · 倒數 5 秒',
+  largeTiming: '搭建 10 秒 · 倒數 5 秒',
+  superHeavyTiming: '搭建 16 秒 · 倒數 5 秒',
   placement: '點選城市中的地點來放置火箭。',
   placementHint: '可以放在水面與屋頂，但仍會承受對應的物理風險。',
   cancel: '取消',
@@ -226,6 +255,12 @@ const zh: Record<RocketTextKey, string> = {
   smallRoofRisk: '小火箭可以在這裡發射，但噴流與風壓仍可能損壞屋頂。',
   heavyRoofRisk: '大型火箭的噴流可能摧毀屋頂，造成地基垮塌與火箭失衡。',
   largeRoofRisk: '寬廣屋頂有較強支撐，但噴流仍可能削弱建築結構。',
+  superHeavyGroundRisk:
+    '泰坦需要寬廣、堅實的地面，220 m 風壓影響區可能造成大範圍損壞。',
+  superHeavyPlatformRisk:
+    '泰坦需要特別堅固、寬廣的平台，請淨空 220 m 風壓影響區。',
+  superHeavyRoofRisk:
+    '一般屋頂難以承受泰坦的重量與噴流，可能導致整棟建築垮塌。',
   seaRisk: '沒有浮動發射平台，火箭會沉入海中。',
   riverRisk: '沒有浮動發射平台，火箭會沉入河中。',
   lakeRisk: '湖床地基不穩，可能不均勻下沉，導致火箭傾斜。',
@@ -263,6 +298,9 @@ const zh: Record<RocketTextKey, string> = {
   largeRoofShort: '噴流仍可能削弱屋頂結構。',
   waterShort: '水面無法支撐火箭，放置後會下沉。',
   lakeShort: '湖床不穩，不均勻下沉可能讓火箭傾斜。',
+  superHeavyGroundShort: '泰坦：寬廣堅實地面 · 220 m 風壓影響區。',
+  superHeavyPlatformShort: '泰坦：特別堅固平台 · 220 m 風壓影響區。',
+  superHeavyRoofShort: '泰坦：重量與噴流可能壓垮屋頂。',
   attitude: '飛行姿態',
   pitch: '俯仰',
   roll: '側傾',
@@ -290,6 +328,82 @@ const zh: Record<RocketTextKey, string> = {
   afterImpact: '撞擊／爆炸後',
 };
 
+const rocketChoices = [
+  {
+    kind: 'small',
+    hint: 'smallHint',
+    metrics: 'smallMetrics',
+    timing: 'smallTiming',
+  },
+  {
+    kind: 'large',
+    hint: 'largeHint',
+    metrics: 'largeMetrics',
+    timing: 'largeTiming',
+  },
+  {
+    kind: 'super-heavy',
+    hint: 'superHeavyHint',
+    metrics: 'superHeavyMetrics',
+    timing: 'superHeavyTiming',
+  },
+] as const satisfies readonly {
+  kind: RocketKind;
+  hint: RocketTextKey;
+  metrics: RocketTextKey;
+  timing: RocketTextKey;
+}[];
+
+function RocketSilhouette({ kind }: { kind: RocketKind }) {
+  return (
+    <svg
+      className="rocket-silhouette"
+      data-rocket-silhouette={kind}
+      viewBox="0 0 48 64"
+      width="42"
+      height="56"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      {kind === 'small' ? (
+        <>
+          <path
+            d="M24 4 30 17v31l-6 8-6-8V17Z"
+            fill="currentColor"
+            fillOpacity=".12"
+          />
+          <path d="m18 37-8 16 8-4m12-12 8 16-8-4M24 40v16m-4 3h8M18 20h12" />
+          <circle cx="24" cy="25" r="2" />
+        </>
+      ) : kind === 'large' ? (
+        <>
+          <path d="m24 3 6 13v35H18V16Z" fill="#df9965" fillOpacity=".75" />
+          <path
+            d="m11 18 5 10v25H6V28Zm26 0 5 10v25H32V28Z"
+            fill="currentColor"
+            fillOpacity=".22"
+          />
+          <path d="M18 23h12M18 44h12M6 46h10m16 0h10M9 57h4m7-2h8m7 2h4M16 33h2m12 0h2" />
+        </>
+      ) : (
+        <>
+          <path
+            d="M24 3c9 9 11 17 11 24v25H13V27c0-7 2-15 11-24Z"
+            fill="currentColor"
+            fillOpacity=".2"
+          />
+          <path d="M24 4c9 9 11 16 11 23v25H24Z" fill="#071b28" />
+          <path d="m13 36-9 20 11-5m20-15 9 20-11-5M7 22h6v6H7Zm28 0h6v6h-6M9 22v6m30-6v6M7 25h6m22 0h6M13 44h22" />
+          <path d="m18 53-1 5h6l-1-5m4 0-1 5h6l-1-5" />
+        </>
+      )}
+    </svg>
+  );
+}
+
 /** New rocket strings fall back to English for the app's other locales. */
 export function rocketText(locale: Locale, key: RocketTextKey): string {
   return locale === 'zh-Hant' || locale === 'zh-Hans' ? zh[key] : en[key];
@@ -310,6 +424,13 @@ function riskKey(state: RocketSnapshot): RocketTextKey {
   if (state.support === 'ocean') return 'seaRisk';
   if (state.support === 'river') return 'riverRisk';
   if (state.support === 'lake') return 'lakeRisk';
+  if (state.kind === 'super-heavy') {
+    if (state.support === 'roof-small' || state.support === 'roof-large')
+      return 'superHeavyRoofRisk';
+    return state.support === 'platform'
+      ? 'superHeavyPlatformRisk'
+      : 'superHeavyGroundRisk';
+  }
   if (state.support === 'roof-small')
     return state.kind === 'large' ? 'heavyRoofRisk' : 'smallRoofRisk';
   if (state.support === 'roof-large') return 'largeRoofRisk';
@@ -336,7 +457,7 @@ export function RocketControls({
   locale: Locale;
   touch: boolean;
   choosing?: boolean;
-  onChoose: (kind: 'small' | 'large') => void;
+  onChoose: (kind: RocketKind) => void;
   onCloseChoosing: () => void;
   controlsEnabled?: boolean;
   panelVisible?: boolean;
@@ -409,7 +530,12 @@ export function RocketControls({
       ? state.warning
       : state.support;
   const risk = riskKey({ ...state, support: previewSupport });
-  const solid = risk === 'groundRisk' || risk === 'platformRisk';
+  const solid = [
+    'groundRisk',
+    'platformRisk',
+    'superHeavyGroundRisk',
+    'superHeavyPlatformRisk',
+  ].includes(risk);
   const shortRisk: RocketTextKey =
     (
       {
@@ -421,6 +547,9 @@ export function RocketControls({
         seaRisk: 'waterShort',
         riverRisk: 'waterShort',
         lakeRisk: 'lakeShort',
+        superHeavyGroundRisk: 'superHeavyGroundShort',
+        superHeavyPlatformRisk: 'superHeavyPlatformShort',
+        superHeavyRoofRisk: 'superHeavyRoofShort',
       } as Partial<Record<RocketTextKey, RocketTextKey>>
     )[risk] || 'groundShort';
   const compactPreflight =
@@ -448,7 +577,7 @@ export function RocketControls({
           failed ||
           optionsOpen ||
           !touch)));
-  const choose = (kind: 'small' | 'large') => {
+  const choose = (kind: RocketKind) => {
     onChoose(kind);
   };
   const toggleSound = () => {
@@ -463,7 +592,7 @@ export function RocketControls({
     <>
       {choosing && (
         <section
-          className="rocket-placement glass ui-chrome"
+          className="rocket-placement rocket-chooser glass ui-chrome"
           aria-label={t('choose')}
         >
           <header>
@@ -471,28 +600,34 @@ export function RocketControls({
             <strong>{t('choose')}</strong>
             <button
               type="button"
+              className="rocket-chooser-cancel"
               onClick={onCloseChoosing}
-              aria-label={t('close')}
+              aria-label={t('cancel')}
             >
               <X size={18} />
+              {t('cancel')}
             </button>
           </header>
-          <p>{t('chooseHint')}</p>
-          <div className="rocket-kind-picker">
-            {(['small', 'large'] as const).map((kind) => (
-              <button
-                key={kind}
-                type="button"
-                onClick={() => choose(kind)}
-                data-rocket-kind={kind}
-              >
-                <Rocket size={kind === 'large' ? 24 : 18} />
-                <strong>{t(kind)}</strong>
-                <span>{t(kind === 'small' ? 'smallHint' : 'largeHint')}</span>
-              </button>
-            ))}
+          <div className="rocket-chooser-body">
+            <p>{t('chooseHint')}</p>
+            <div className="rocket-kind-picker">
+              {rocketChoices.map(({ kind, hint, metrics, timing }) => (
+                <button
+                  key={kind}
+                  type="button"
+                  onClick={() => choose(kind)}
+                  data-rocket-kind={kind}
+                >
+                  <RocketSilhouette kind={kind} />
+                  <strong>{t(kind)}</strong>
+                  <span>{t(hint)}</span>
+                  <span className="rocket-kind-metrics">{t(metrics)}</span>
+                  <small>{t(timing)}</small>
+                </button>
+              ))}
+            </div>
+            <small>{t('gameplay')}</small>
           </div>
-          <small>{t('gameplay')}</small>
         </section>
       )}
       {state.placing && !choosing && (

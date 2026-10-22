@@ -839,7 +839,7 @@ function Home() {
     setMobileHudHidden(false);
     setRocketChoosing(true);
   };
-  const beginRocket = (kind: 'small' | 'large') => {
+  const beginRocket = (kind: RocketSnapshot['kind']) => {
     if (!ready || !engine.current?.rocket) return;
     setRocketChoosing(false);
     setPlacing(null);

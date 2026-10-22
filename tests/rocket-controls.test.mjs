@@ -115,7 +115,7 @@ function setup(patch = {}, extra = {}) {
     locale: 'en',
     touch: false,
     onChoose: (...args) => calls.push(['choose', ...args]),
-    onCloseChoosing() {},
+    onCloseChoosing: () => calls.push(['closeChoosing']),
     ...extra,
   };
   const host = { slots: [], cursor: 0, pending: [], props, tree: null };
@@ -156,6 +156,88 @@ const button = (host, name) =>
       node.type === 'button' &&
       (node.props['aria-label'] === name || text(node).trim() === name),
   )[0];
+
+test('the chooser exposes three distinct rocket profiles with translated scale, influence and assembly timing', () => {
+  for (const locale of ['en', 'zh-Hant', 'fr']) {
+    const { host, calls } = setup({}, { locale, choosing: true, touch: true });
+    const cards = all(
+      host.tree,
+      (node) => node.type === 'button' && node.props['data-rocket-kind'],
+    );
+    assert.deepEqual(
+      cards.map((node) => node.props['data-rocket-kind']),
+      ['small', 'large', 'super-heavy'],
+    );
+    for (const [i, card] of cards.entries()) {
+      const label = text(card);
+      assert.match(
+        label,
+        [/18.*35.*17.*6.*5/, /48.*100.*45.*10.*5/, /110.*220.*105.*16.*5/][i],
+      );
+      card.props.onClick();
+      assert.deepEqual(calls.at(-1), [
+        'choose',
+        card.props['data-rocket-kind'],
+      ]);
+    }
+    assert.match(
+      text(cards[2]),
+      locale === 'zh-Hant'
+        ? /泰坦.*超大型.*銀色.*黑色/
+        : /Titan.*Super-heavy.*silver.*dark/,
+    );
+    button(host, locale === 'zh-Hant' ? '取消' : 'Cancel').props.onClick();
+    assert.deepEqual(calls.at(-1), ['closeChoosing']);
+    host.unmount();
+  }
+});
+
+test('Titan has a translated title and stronger foundation warnings across all supports without small-roof advice', () => {
+  for (const locale of ['en', 'zh-Hant']) {
+    for (const support of [
+      'ground',
+      'platform',
+      'roof-small',
+      'roof-large',
+      'ocean',
+      'river',
+      'lake',
+    ]) {
+      const { host, props } = setup(
+        { kind: 'super-heavy', phase: 'ready', support },
+        { locale, touch: false },
+      );
+      assert.match(
+        text(findClass(host, 'rocket-panel')),
+        locale === 'en' ? /Titan.*Super-heavy/ : /泰坦.*超大型/,
+      );
+      const full = text(host.tree);
+      assert.doesNotMatch(
+        full,
+        /A small rocket can launch|小火箭可以在這裡發射/,
+      );
+      if (support.startsWith('roof'))
+        assert.match(
+          full,
+          locale === 'en'
+            ? /weight and exhaust can collapse/
+            : /重量與噴流.*垮塌/,
+        );
+      if (['ground', 'platform'].includes(support)) assert.match(full, /220 m/);
+      if (support === 'ocean' || support === 'river')
+        assert.match(full, locale === 'en' ? /will sink/ : /沉入/);
+      if (support === 'lake')
+        assert.match(full, locale === 'en' ? /unstable/ : /不穩/);
+      host.render({ ...props, touch: true });
+      if (support.startsWith('roof'))
+        assert.match(
+          text(host.tree),
+          locale === 'en' ? /Titan: weight and exhaust/ : /泰坦：重量與噴流/,
+        );
+      host.unmount();
+    }
+  }
+});
 
 test('the flight readout follows the active stage and its fuel instead of whole-vehicle fuel', () => {
   for (const locale of ['en', 'zh-Hant']) {
@@ -599,6 +681,38 @@ function componentModule(name) {
   return url;
 }
 const { RocketControls } = await import(componentModule('rocket-controls'));
+test('the production chooser renders three different vehicle silhouettes and keeps cancel outside its scrolling body', () => {
+  const html = renderToStaticMarkup(
+    React.createElement(RocketControls, {
+      controller: {},
+      snapshot: EMPTY_ROCKET,
+      choosing: true,
+      locale: 'en',
+      touch: true,
+      onChoose() {},
+      onCloseChoosing() {},
+    }),
+  );
+  const icons = [
+    ...html.matchAll(
+      /<svg\b[^>]*data-rocket-silhouette="([^"]+)"[^>]*>([\s\S]*?)<\/svg>/g,
+    ),
+  ];
+  assert.deepEqual(
+    icons.map((match) => match[1]),
+    ['small', 'large', 'super-heavy'],
+  );
+  assert.equal(
+    new Set(icons.map((match) => match[2])).size,
+    3,
+    'vehicle shapes differ, not only their SVG size',
+  );
+  const header = html.match(/<header>([\s\S]*?)<\/header>/)[1];
+  assert.match(header, /rocket-chooser-cancel/);
+  assert.match(header, /Cancel/);
+  assert(html.indexOf('</header>') < html.indexOf('rocket-chooser-body'));
+});
+
 test('real React server rendering exposes a named observation region and pressed celestial target', () => {
   const html = renderToStaticMarkup(
     React.createElement(RocketControls, {

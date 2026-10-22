@@ -239,8 +239,13 @@ function setup(t) {
     canvas,
   };
 }
-function readyFlight(controller, altitude = 100, support = { kind: 'ground' }) {
-  const s = createRocket('small', 0, 0, 0, support);
+function readyFlight(
+  controller,
+  altitude = 100,
+  support = { kind: 'ground' },
+  kind = 'small',
+) {
+  const s = createRocket(kind, 0, 0, 0, support);
   s.phase = 'flight';
   s.buildProgress = 1;
   s.position.y = altitude;
@@ -329,9 +334,12 @@ test('failed resource loads hold construction below Ready and retry unlocks a no
   t.after(() => {
     console.error = originalError;
   });
-  for (const kind of ['small', 'large']) {
+  for (const kind of ['small', 'large', 'super-heavy']) {
     const config = ROCKET_CONFIGS[kind];
-    assert.equal(config.buildDuration, kind === 'small' ? 6 : 10);
+    assert.equal(
+      config.buildDuration,
+      { small: 6, large: 10, 'super-heavy': 16 }[kind],
+    );
     assert.equal(config.countdownDuration, 5);
     globalThis.__rocketEffectsLoad = async () => {
       throw new Error('simulated offline chunk');
@@ -687,7 +695,7 @@ test('a collapsing support collider follows the rendered roof without shortening
 
 test('a support-collapse exception never removes collision with a different nearby building', async (t) => {
   const { controller: c } = await roofLaunch(t, [
-    buildingVolume(6, 10, -4, 4, 45),
+    buildingVolume(13, 17, -4, 4, 45),
   ]);
   advanceUntil(
     c,
@@ -695,7 +703,7 @@ test('a support-collapse exception never removes collision with a different near
   );
   assert.equal(c.snapshot.phase, 'falling');
   const cells = [...new Set([...c.world.cells.values()].flat())];
-  const adjacent = cells.find((volume) => volume.bounds.min.x === 6);
+  const adjacent = cells.find((volume) => volume.bounds.min.x === 13);
   assert(adjacent);
   assert.equal(adjacent.bounds.max.y, 45);
   // The nose now crosses the separate building while its own roof is sagging.
@@ -859,4 +867,255 @@ test('repairing a wrecked rooftop restores its collision height and later accide
   assert.equal(c.snapshot.phase, 'crashed');
   assert.equal(c.snapshot.missionId, mission);
   assert.equal(c.snapshot.active, true);
+});
+
+test('Atlas side boosters hit a neighbouring building that is clear of the core body', async (t) => {
+  const { controller: c, engine: e } = setup(t);
+  e.data.flightBuildingVolumes = [buildingVolume(6, 8, -1, 1, 125)];
+  c.start('large', 0, 0, 0, { kind: 'platform' });
+  await tick();
+  readyFlight(c, 100, { kind: 'platform' }, 'large');
+  assert.equal(
+    c.world.hit(
+      new THREE.Vector3(0, 103.5, 0),
+      new THREE.Vector3(0, 144.5, 0),
+      3.5 * 0.75,
+    ),
+    false,
+    'the core cannot explain the collision',
+  );
+  const side = c.model.collisionSegments.find(
+    (probe) => probe.booster && probe.from.x > 0,
+  );
+  assert(
+    side &&
+      c.world.hit(
+        side.from.clone().add(new THREE.Vector3(0, 100, 0)),
+        side.to.clone().add(new THREE.Vector3(0, 100, 0)),
+        side.radius,
+      ),
+  );
+  c.update(1 / 60);
+  assert.equal(c.snapshot.phase, 'crashed');
+  assert.equal(c.state.wreckage.cause, 'impact');
+});
+
+test('a temporal side-booster sweep catches a thin bridge deck between two otherwise clear frames', async (t) => {
+  const { controller: c, engine: e } = setup(t);
+  e.data.flightBridgeVolumes = [
+    {
+      matrix: new THREE.Matrix4().toArray(),
+      min: [6, 132, -1],
+      max: [8, 132.12, 1],
+    },
+  ];
+  c.start('large', 0, 0, 0, { kind: 'platform' });
+  await tick();
+  readyFlight(c, 100, { kind: 'platform' }, 'large');
+  c.state.velocity.y = 2000;
+  const side = c.model.collisionSegments.find(
+    (probe) => probe.booster && probe.from.x > 0,
+  );
+  assert(side);
+  assert.equal(
+    c.world.hit(
+      side.from.clone().add(new THREE.Vector3(0, 100, 0)),
+      side.to.clone().add(new THREE.Vector3(0, 100, 0)),
+      side.radius,
+    ),
+    false,
+  );
+  assert.equal(
+    c.world.hit(
+      new THREE.Vector3(0, 103.5, 0),
+      new THREE.Vector3(0, 180, 0),
+      3.5 * 0.75,
+    ),
+    false,
+  );
+  c.update(1 / 60);
+  assert.equal(c.snapshot.phase, 'crashed');
+  assert(
+    c.state.wreckage.position.y + side.from.y - side.radius > 132.12,
+    'the current side booster already cleared the deck; its temporal sweep is necessary',
+  );
+});
+
+test('separation retires side-booster collision without removing the actual surviving upper body', async (t) => {
+  const { controller: c, engine: e } = setup(t);
+  e.data.flightBuildingVolumes = [buildingVolume(6, 8, -1, 1, 125)];
+  c.start('large', 0, 0, 0, { kind: 'platform' });
+  await tick();
+  readyFlight(c, 100, { kind: 'platform' }, 'large');
+  const side = c.model.collisionSegments.find(
+    (probe) => probe.booster && probe.from.x > 0,
+  );
+  assert(
+    c.world.hit(
+      side.from.clone().add(new THREE.Vector3(0, 100, 0)),
+      side.to.clone().add(new THREE.Vector3(0, 100, 0)),
+      side.radius,
+    ),
+  );
+  c.state.boosterAttached = false;
+  c.state.boosterFuel = 0;
+  c.state.stage = 'upper';
+  c.state.stageElapsed = 2;
+  c.state.separation = {
+    time: c.state.elapsed,
+    flightTime: c.state.flightElapsed,
+    position: { ...c.state.position },
+    velocity: { ...c.state.velocity },
+    attitude: { ...c.state.attitude },
+  };
+  c.update(1 / 60);
+  assert.equal(
+    c.snapshot.phase,
+    'flight',
+    'discarded side boosters cannot hit a ghost volume',
+  );
+  assert.equal(
+    c.model.upper.getObjectByName('Upper-stage vacuum engine').visible,
+    true,
+  );
+  c.world = { hit: () => true, surface: () => ({ height: 0 }) };
+  c.update(1 / 60);
+  assert.equal(
+    c.snapshot.phase,
+    'crashed',
+    'upper-stage collision is still active',
+  );
+});
+
+test('Titan screen placement sizes its ring, slope sampling and assembly scaffold from the physical footprint', async (t) => {
+  const { controller: c, engine: e } = setup(t),
+    config = ROCKET_CONFIGS['super-heavy'];
+  const ground = new THREE.Mesh(
+    new THREE.PlaneGeometry(800, 800).rotateX(-Math.PI / 2),
+    new THREE.MeshBasicMaterial(),
+  );
+  e.scene.add(ground);
+  ground.updateMatrixWorld(true);
+  t.after(() => {
+    ground.geometry.dispose();
+    ground.material.dispose();
+  });
+  e.placement = { groundMeshes: [ground], cancel() {} };
+  const samples = [];
+  e.elevation = (x, z) => {
+    samples.push([x, z]);
+    return 0;
+  };
+  c.beginPlacement('super-heavy');
+  e.camera.position.set(0, 100, 40);
+  e.camera.lookAt(0, 0, 0);
+  e.camera.updateMatrixWorld(true);
+  c.pick(400, 300, false);
+  assert.equal(c.ring.visible, true);
+  assert.equal(c.snapshot.kind, 'super-heavy');
+  assert(
+    c.ring.geometry.parameters.outerRadius * c.ring.scale.x >=
+      config.footprintRadius,
+  );
+  const x = c.ring.position.x,
+    z = c.ring.position.z,
+    span = config.footprintRadius * 1.5;
+  assert(
+    samples.some(
+      ([sx, sz]) => Math.abs(sx - x - span) < 1e-6 && Math.abs(sz - z) < 1e-6,
+    ),
+  );
+  assert(
+    samples.some(
+      ([sx, sz]) => Math.abs(sx - x) < 1e-6 && Math.abs(sz - z - span) < 1e-6,
+    ),
+  );
+  c.pick(400, 300, true);
+  await tick();
+  assert.equal(c.snapshot.phase, 'building');
+  assert.equal(c.snapshot.support, 'ground');
+  assert.equal(c.model.height, 110);
+  const box = new THREE.Box3().setFromObject(c.scaffold),
+    size = box.getSize(new THREE.Vector3());
+  assert(size.y > 110 && size.y < 120);
+  assert(
+    size.x > config.footprintRadius * 2 && size.x < config.footprintRadius * 3,
+  );
+  assert(
+    size.z > config.footprintRadius * 2 && size.z < config.footprintRadius * 3,
+  );
+  assert.equal(c.snapshot.loaded, true);
+});
+
+test('Titan completes a continuous controller mission from construction through two stages to 100km', async (t) => {
+  const { controller: c, engine: e } = setup(t);
+  c.start('super-heavy', 0, 0.45, 0, {
+    kind: 'platform',
+    groundY: 0,
+    seed: 13,
+  });
+  await tick();
+  const mission = c.snapshot.missionId;
+  advance(c, 8);
+  assert.equal(c.snapshot.phase, 'building');
+  assert(c.snapshot.buildProgress > 0.49 && c.snapshot.buildProgress < 0.51);
+  c.launch();
+  assert.equal(c.snapshot.phase, 'building', 'construction cannot be bypassed');
+  advanceUntil(c, () => c.snapshot.phase === 'ready');
+  c.launch();
+  advance(c, 4.9);
+  assert.equal(c.snapshot.phase, 'countdown');
+  assert(c.snapshot.countdown > 0 && c.snapshot.countdown < 0.2);
+  let previous = { ...c.state.position };
+  for (
+    let frame = 0;
+    frame < 100 * 60 && !['space', 'crashed'].includes(c.snapshot.phase);
+    frame++
+  ) {
+    c.update(1 / 60);
+    const current = c.state.position;
+    assert(
+      Math.hypot(
+        current.x - previous.x,
+        current.y - previous.y,
+        current.z - previous.z,
+      ) < 60,
+      'actual controller ascent cannot teleport',
+    );
+    previous = { ...current };
+  }
+  assert.equal(c.snapshot.phase, 'space');
+  assert(c.snapshot.altitude >= 100000 && c.snapshot.altitude < 100060);
+  assert(c.state.flightElapsed > 65 && c.state.flightElapsed < 80);
+  assert.equal(c.state.boosterAttached, false);
+  assert(c.state.separation && c.state.upperFuel > 0);
+  assert.equal(c.snapshot.stage, 'coast');
+  assert.deepEqual(
+    c.state.events
+      .filter((event) =>
+        [
+          'countdown',
+          'ignition',
+          'liftoff',
+          'booster-burnout',
+          'stage-separation',
+          'upper-ignition',
+          'mission-complete',
+        ].includes(event.type),
+      )
+      .map((event) => event.type),
+    [
+      'countdown',
+      'ignition',
+      'liftoff',
+      'booster-burnout',
+      'stage-separation',
+      'upper-ignition',
+      'mission-complete',
+    ],
+  );
+  assert.equal(c.snapshot.missionId, mission);
+  c.returnToCity();
+  assert.equal(e.controls.enabled, true);
+  assert.equal(e.settings.mode, 'orbit');
 });
