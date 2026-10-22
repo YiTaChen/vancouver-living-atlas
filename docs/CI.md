@@ -2,7 +2,7 @@
 
 `.github/workflows/validate.yml` runs on pull requests targeting main and pushes
 to main, with a manual trigger available once the workflow is on the default
-branch. It uses the standard `ubuntu-24.04` hosted runner and Node 24. Dependency
+branch. It uses the standard `ubuntu-24.04` hosted runner and the patched Node 24.22.1 release. Dependency
 versions remain fixed by `package-lock.json` and `npm ci`.
 
 The only reusable actions are official [checkout](https://github.com/actions/checkout)
@@ -15,7 +15,7 @@ work.
 
 Checks are TypeScript, the Node regression suite (including standard-library
 Python asset tests), a GLB contract audit, and the production Firebase build
-verifier. The hosted runner's Python is sufficient; no Python packages or
+verifier, followed by exact inline-script CSP generation. The hosted runner's Python is sufficient; no Python packages or
 Blender installation are requested.
 
 This is not a browser/GPU performance test, a Blender source/re-export audit, or

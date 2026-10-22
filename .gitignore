@@ -46,3 +46,6 @@ gha-creds-*.json
 # Blender authoring backups and Python caches; canonical .blend sources are tracked.
 *.blend1
 __pycache__/
+
+# Generated per-build CSP includes exact inline hydration script hashes.
+/firebase.generated.json

@@ -229,6 +229,7 @@ test('Firebase verifier invokes mandatory pedestrian isolation on supplied outpu
       f.output,
       'assets/client.js',
       [
+        'new Worker(new URL("/assets/landmark.worker-fixture.js", import.meta.url), {type:"module"});',
         'Français',
         'Español',
         'zh-Hant',

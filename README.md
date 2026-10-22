@@ -138,7 +138,7 @@ Source dates differ: core terrain/shoreline data date to 2002 and measured build
 
 ## Run locally
 
-Requires **Node.js 22.13+**, npm and a browser with **WebGL 2**. The app serves its own geographic assets; no map API key is required.
+Requires **Node.js 22.23.4+ (22.x) or 24.22.1+ (24.x)**, npm and a browser with **WebGL 2**. The app serves its own geographic assets; no map API key is required.
 
 ```sh
 git clone https://github.com/YiTaChen/vancouver-living-atlas.git
@@ -152,7 +152,7 @@ Open the URL printed in the terminal. All five exploration modes are available f
 ```sh
 npm run check           # TypeScript
 npm test                # Geometry, navigation, simulation and lifecycle checks
-npm run build:firebase  # Static production build plus asset/locale verification
+npm run build:firebase  # Static production build, asset/locale verification and generated CSP
 ```
 
 **Stack:** TypeScript, React, Three.js and vinext/Vite. The separate `npm run build` / `npm start` path builds and previews the Worker-based version.
@@ -168,12 +168,12 @@ npm run build:firebase  # Static production build plus asset/locale verification
 
 ### Firebase Hosting
 
-`npm run build:firebase` exports `dist/client` with geographic assets, textures and local fonts. Its verifier checks the English initial page, ten-language support, key assets and emitted landmark worker. Hosting is static; no Cloud Functions are required.
+`npm run build:firebase` exports `dist/client` with geographic assets, textures and local fonts. Its verifier checks the English initial page, ten-language support, key assets and emitted landmark worker. Hosting is static; no Cloud Functions are required. The build also generates `firebase.generated.json` with a Content Security Policy that allows only the exact inline hydration scripts in the verified HTML. Always deploy this generated configuration with its matching build; rebuild after changing code.
 
 For an authorized deployment to **your own** Firebase project, build first, authenticate with the Firebase CLI, then run:
 
 ```sh
-firebase deploy --only hosting --project YOUR_FIREBASE_PROJECT_ID
+firebase deploy --only hosting --config firebase.generated.json --project YOUR_FIREBASE_PROJECT_ID
 ```
 
 The checked-in `.firebaserc` names the owner's project; use an explicit project ID for your own permitted copy. Building locally does not deploy.

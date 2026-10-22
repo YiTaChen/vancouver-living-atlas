@@ -10,14 +10,32 @@ import { pathToFileURL } from 'node:url';
  */
 export async function verifyLandmarkWorker(root = path.resolve('dist/client')) {
   const files = await readdir(root, { recursive: true });
-  const workers = files.filter((name) =>
-    /\/landmark\.worker-[^/]+\.js$/.test(name),
-  );
+  const workers = [];
+  for (const name of files) {
+    const named = /\/landmark\.worker-[^/]+\.js$/.test(name);
+    // vinext 1.3/Vite 8.3 place workers in a dedicated directory with opaque
+    // names. Identify our protocol in that directory, then verify real wiring.
+    const opaque = /^_next\/static\/workers\/[^/]+\.js$/.test(name);
+    if (!named && !opaque) continue;
+    const code = await readFile(path.join(root, name), 'utf8');
+    if (named || code.includes('vancouver-landmarks-2026-09-06-v1')) workers.push(name);
+  }
   assert.equal(
     workers.length,
     1,
     'Expected exactly one emitted landmark worker',
   );
+  let wired = false;
+  for (const name of files) {
+    if (!name.endsWith('.js') || workers.includes(name)) continue;
+    const source = await readFile(path.join(root, name), 'utf8');
+    for (const match of source.matchAll(
+      /new\s+Worker\s*\(\s*new\s+URL\s*\(\s*(["'`])([^"'`]+)\1/g,
+    )) {
+      if (match[2] === `/${workers[0]}`) wired = true;
+    }
+  }
+  assert(wired, 'Emitted landmark worker must be referenced by the client Worker constructor');
   const replies = [];
   const context = createContext({
     performance,

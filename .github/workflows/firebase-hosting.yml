@@ -30,11 +30,12 @@ jobs:
         with:
           # Offline asset reference contracts verify their immutable source baseline.
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Set up Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
         with:
-          node-version: 24
+          node-version: '24.22.1'
           package-manager-cache: false
 
       - name: Install dependencies
@@ -49,7 +50,7 @@ jobs:
         run: npm run build:firebase
 
       - name: Install Firebase CLI
-        run: npm install --global firebase-tools@15.32.1
+        run: npm install --global firebase-tools@15.34.1
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3.0.0
@@ -64,5 +65,6 @@ jobs:
         run: >-
           firebase deploy
           --only hosting
+          --config firebase.generated.json
           --project vancouver-living-atlas-yita
           --non-interactive
