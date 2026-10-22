@@ -16,7 +16,10 @@ def check_source_reference_hashes(rows,base_revision,read_current=None,read_hist
    except subprocess.CalledProcessError as cause:raise RuntimeError('Recorded ground consumer unavailable: '+revision+':'+path+'. Fetch full repository history (git fetch --unshallow where needed); no current-source fallback.') from cause
  for row in rows:
   path=row['file'];c.need(isinstance(path,str) and not Path(path).is_absolute() and '..' not in Path(path).parts,'source dependency path')
-  data=read_historical(path,base_revision) if path.startswith('lib/city/') and path.endswith(('.ts','.js')) else read_current(path)
+  # This handoff also records the exact CPU consumer. Freeze only that named
+  # MJS at the manifest revision; unrelated tools and all GIS/JSON stay live.
+  immutable_consumer=(path.startswith('lib/city/') and path.endswith(('.ts','.js'))) or path=='tools/causeway-cpu.mjs'
+  data=read_historical(path,base_revision) if immutable_consumer else read_current(path)
   c.need(hashlib.sha256(data).hexdigest()==row['sha256'],'preserved source dependency hash changed: '+path)
   c.need('bytes' not in row or len(data)==row['bytes'],'preserved source dependency byte count changed: '+path)
 def uv_span(d,blob):

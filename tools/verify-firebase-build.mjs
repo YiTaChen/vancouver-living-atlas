@@ -176,8 +176,12 @@ export async function verifyFirebaseBuild(
     'Street furniture diagnostics must not ship in the public build',
   );
   assert(
-    !scripts.includes('Impact QA:')&&!files.some(name=>/(?:^|\/)vehicle-impact-qa[.-]/.test(name)),
-    'Vehicle impact diagnostics must not ship in the public build',
+    !scripts.includes('Impact QA:') &&
+      !scripts.includes('Stanley Drive QA:') &&
+      !files.some((name) =>
+        /(?:^|\/)(?:vehicle-impact-qa|stanley-drive-qa)[.-]/.test(name),
+      ),
+    'Vehicle impact and Stanley Drive diagnostics must not ship in the public build',
   );
   assert(
     !scripts.includes('Tesla QA: spawn Robson') &&

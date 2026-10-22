@@ -1,0 +1,310 @@
+{
+  "generatedAtUtc": "2026-10-22T11:35:56.969197+00:00",
+  "scope": "CPU geometry and floor-identity regression using public createTesla/stepTesla. Ordinary Drive and native browser acceptance are separate.",
+  "method": {
+    "fixedDtS": 0.016666666666666666,
+    "targetSpeedMps": 10,
+    "initialSourceStationM": 5,
+    "finishWithinEndpointM": 5,
+    "adhesionArmed": false,
+    "fourWheelSuspensionTravelM": 0.05,
+    "fullBodyCcd": true,
+    "sameOriginalSourcePointsAndPublicStarts": true,
+    "is205KmhHandlingOrMobileFrameRateBenchmark": false
+  },
+  "dedicatedSourceRouteRun": {
+    "command": "node --test tests/tesla-stanley-source-routes.test.mjs",
+    "tests": 14,
+    "pass": 14,
+    "fail": 0,
+    "routes": [
+      {
+        "id": "entire West legal motor source plus unchanged lower and upper approaches",
+        "lengthM": 329.75275637863757,
+        "forwardIdentity": {
+          "surfaceId": "lions:road",
+          "layer": 1
+        },
+        "reverseIdentity": {
+          "surfaceId": "park:prospect-overpass",
+          "layer": 2
+        },
+        "results": {
+          "forward": {
+            "passed": true,
+            "collisions": 0,
+            "airFrames": 0,
+            "drivePermissionAssertionsPassed": true
+          },
+          "reverse": {
+            "passed": true,
+            "collisions": 0,
+            "airFrames": 0,
+            "drivePermissionAssertionsPassed": true
+          }
+        }
+      },
+      {
+        "id": "entire East motor ramp with both original 15m source approaches and the real cycle crossing",
+        "lengthM": 96.89025514862091,
+        "forwardIdentity": {
+          "surfaceId": "lions:road",
+          "layer": 1
+        },
+        "reverseIdentity": {
+          "surfaceId": "park:prospect-overpass",
+          "layer": 2
+        },
+        "results": {
+          "forward": {
+            "passed": true,
+            "collisions": 0,
+            "airFrames": 0,
+            "drivePermissionAssertionsPassed": true
+          },
+          "reverse": {
+            "passed": true,
+            "collisions": 0,
+            "airFrames": 0,
+            "drivePermissionAssertionsPassed": true
+          }
+        }
+      },
+      {
+        "id": "entire South legal motor source with the unchanged 20m upper continuation",
+        "lengthM": 170.89828925068724,
+        "forwardIdentity": {
+          "surfaceId": "ground",
+          "layer": 0
+        },
+        "reverseIdentity": {
+          "surfaceId": "lions:road",
+          "layer": 1
+        },
+        "results": {
+          "forward": {
+            "passed": true,
+            "collisions": 0,
+            "airFrames": 0,
+            "drivePermissionAssertionsPassed": true
+          },
+          "reverse": {
+            "passed": true,
+            "collisions": 0,
+            "airFrames": 0,
+            "drivePermissionAssertionsPassed": true
+          }
+        }
+      },
+      {
+        "id": "entire Northbound1693 legal motor ramp with original ground and main-road approaches",
+        "lengthM": 160.80897617192417,
+        "forwardIdentity": {
+          "surfaceId": "ground",
+          "layer": 0
+        },
+        "reverseIdentity": {
+          "surfaceId": "lions:road",
+          "layer": 1
+        },
+        "results": {
+          "forward": {
+            "passed": true,
+            "collisions": 0,
+            "airFrames": 0,
+            "drivePermissionAssertionsPassed": true
+          },
+          "reverse": {
+            "passed": true,
+            "collisions": 0,
+            "airFrames": 0,
+            "drivePermissionAssertionsPassed": true
+          }
+        }
+      },
+      {
+        "id": "prospect:north-ground",
+        "lengthM": 18.000000000000018,
+        "forwardIdentity": {
+          "surfaceId": "ground",
+          "layer": 0
+        },
+        "reverseIdentity": {
+          "surfaceId": "park:prospect-overpass",
+          "layer": 2
+        },
+        "results": {
+          "forward": {
+            "passed": true,
+            "collisions": 0,
+            "airFrames": 0,
+            "drivePermissionAssertionsPassed": true
+          },
+          "reverse": {
+            "passed": true,
+            "collisions": 0,
+            "airFrames": 0,
+            "drivePermissionAssertionsPassed": true
+          }
+        }
+      },
+      {
+        "id": "prospect:south-ground",
+        "lengthM": 18.000000000000227,
+        "forwardIdentity": {
+          "surfaceId": "park:prospect-overpass",
+          "layer": 2
+        },
+        "reverseIdentity": {
+          "surfaceId": "ground",
+          "layer": 0
+        },
+        "results": {
+          "forward": {
+            "passed": true,
+            "collisions": 0,
+            "airFrames": 0,
+            "drivePermissionAssertionsPassed": true
+          },
+          "reverse": {
+            "passed": true,
+            "collisions": 0,
+            "airFrames": 0,
+            "drivePermissionAssertionsPassed": true
+          }
+        }
+      },
+      {
+        "id": "entire new Prospect upper source including both ordinary-ground seams and the actual slab",
+        "lengthM": 334.499301789207,
+        "forwardIdentity": {
+          "surfaceId": "ground",
+          "layer": 0
+        },
+        "reverseIdentity": {
+          "surfaceId": "ground",
+          "layer": 0
+        },
+        "results": {
+          "forward": {
+            "passed": true,
+            "collisions": 0,
+            "airFrames": 0,
+            "drivePermissionAssertionsPassed": true
+          },
+          "reverse": {
+            "passed": true,
+            "collisions": 0,
+            "airFrames": 0,
+            "drivePermissionAssertionsPassed": true
+          }
+        }
+      }
+    ],
+    "logSha256": "c4eace847be032ec710b38503f2bdd3daab3033fd09b32dc87e3ff3da619b93f"
+  },
+  "focusedCoreAndLegacyRun": {
+    "command": "node --test tests/tesla-protected-model-road.test.mjs tests/tesla-world.test.mjs tests/tesla-ground-support.test.mjs tests/tesla-ground-fit-state.test.mjs",
+    "tests": 77,
+    "pass": 77,
+    "fail": 0,
+    "logSha256": "645be214ba4dd5e80eac0e7ffd5e68e1b6e3154967cd627f380ec5ca0d26b395",
+    "typeScriptPassed": true,
+    "scopedLintPassed": true
+  },
+  "knownOriginalNbExitControls": {
+    "fullSourceLengthM": 262.3865556800381,
+    "newPavingOriginalStationRangeM": [
+      130,
+      262.3865556800381
+    ],
+    "originalStartPointsUnchanged": true,
+    "results": [
+      {
+        "direction": "forward",
+        "completed": false,
+        "progressM": 5.000000000000003,
+        "originalSourceStationM": 5.000000000000003,
+        "frames": 0,
+        "collisions": 1,
+        "airFrames": 0,
+        "failureSurface": "protected:1081:face:0",
+        "position": [
+          -626.8248617112885,
+          9.477868358184923,
+          -1019.016781636188
+        ],
+        "contact": {
+          "surfaceId": "protected:1081:face:2",
+          "kind": "ground",
+          "point": [
+            -626.8361374422011,
+            8.796324230319488,
+            -1018.9774540482567
+          ],
+          "normal": [
+            0.016514660674700414,
+            0.9982031403285326,
+            -0.057599970668874644
+          ],
+          "adherable": true
+        }
+      },
+      {
+        "direction": "reverse",
+        "completed": false,
+        "progressM": 131.02941256169572,
+        "originalSourceStationM": 131.35714311834238,
+        "frames": 746,
+        "collisions": 2,
+        "airFrames": 0,
+        "failureSurface": "protected:1173:face:0",
+        "position": [
+          -585.8947077417829,
+          6.635122389047505,
+          -1138.3055975377754
+        ],
+        "contact": {
+          "surfaceId": "protected:1175:face:2",
+          "kind": "ground",
+          "point": [
+            -585.8923119638173,
+            5.95001869220091,
+            -1138.315435545101
+          ],
+          "normal": [
+            -0.0034965748378074477,
+            0.9998908004500522,
+            0.014358312566520325
+          ],
+          "adherable": true
+        }
+      }
+    ],
+    "interpretation": [
+      "Forward retains the original protected approach obstruction at station5m, outside the new paving.",
+      "Reverse cleared the calibrated ordinary-road crossings and reached original station131.357143m. It still stops at the original156891517 protected-motor-floor endpoint overlap; the final approximately1.36m handoff is not claimed to pass.",
+      "No solver, floor group or permission changes hide these retained full-route failures."
+    ]
+  },
+  "sourceSnapshotSha256": {
+    "lib/city/tesla-world.ts": "e87013709fac383fac004b3f704c47fcad4b93c5aa1dafff434197f2e26c5d82",
+    "lib/city/tesla-city-world.ts": "cbdf0d471c77e759ff3c164300e9594fa0c16b92c3c0d9fd92716ca0a549abb2",
+    "lib/city/tesla-state.ts": "dd5330f878d75c43d6a13ff4cf522ec29ace193b69b206f2a26cbf63ba9d6d05",
+    "lib/city/tesla-shape.ts": "52afa45d33b586741fc20d314a33c87fc86c2fb1357893e055ea51ac0271c3cb",
+    "lib/city/navigation.ts": "76f2f42c9a4e2e49fdd9ddcab6d55049ad4f16a54d9ca5a0fbc1a0792f0ead1c",
+    "lib/city/ground-surface.ts": "7b50984a4f16b808ed21248cf49cf99e7c3d4f92baf6fadf72f62e873e9eea06",
+    "lib/city/causeway-geometry.ts": "ad5013336cc26d0233e34eb94c2508c14a19d1a29e42dbeab374b0b371598624",
+    "lib/city/causeway-meshes.ts": "9c1464ee86ccf970c49f1e0c1bc15ed5bde729ae72ff26ee6cf7c6328491e549",
+    "lib/city/prospect-overpass.ts": "ff53fb0f5e9a47a6571173d695823b204ae3a179f50cb27da8ff3742855a3961",
+    "lib/city/stanley-south-ramp.ts": "2e52fd3e6cea94f8db790aea6d49b3deebd270c64a7921de721a685237d6737b",
+    "lib/city/stanley-west-ramp.ts": "bf0f63d672f2aad4b3dbe5d9d070ae0bc5a2eb80b981820c2efa574d7d8ca39f",
+    "lib/city/stanley-northbound-ramp.ts": "64079ffc1c9f8c5e8efb602029fda45a9bbec9070dd6fbca666f54c2ca34776e",
+    "lib/city/stanley-northbound-exit.ts": "0e3a8524669d8fd5168ba6757ceaedaed164c526ca390ee2e106e241dbc11b41",
+    "lib/city/stanley-northbound-crossing.ts": "e45280fb82ae9dcb9f4601f2adb491b913b86d537ad25cd2474c2961bcbea44a",
+    "tests/tesla-stanley-source-routes.test.mjs": "2f5470475d4bcc8454d432feea8fd50509e794a10be7d6ad55ffda6639d16253",
+    "tests/helpers/tesla-source-route.mjs": "5c08cde691235f96401310283a96b89707cf16f42a5e6fe390485332eede79b9",
+    "tests/tesla-protected-model-road.test.mjs": "034c2aa33f9272a14de04dcda881ebee3e3c5f44dee2f4ff3863e6581370ca5e"
+  },
+  "snapshotScopeNote": "Hashes describe files at report creation. The dedicated14-route run preceded geographically separate NBExit crossing-only follow-up; Tesla core and route tests were unchanged. Root final full-suite/build evidence validates the complete final runtime snapshot."
+}

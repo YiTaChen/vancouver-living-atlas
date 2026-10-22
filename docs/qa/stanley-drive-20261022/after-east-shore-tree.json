@@ -1,0 +1,1251 @@
+{
+  "revision": "b051ea7214482760e9ed7084121dcefdc8435c2d",
+  "sourceFingerprint": "bafaa528807b90c1efc373b16b9b851ac3ac4fea2574a38af2aa875722de0268",
+  "kind": "stanley-drive-native-v1",
+  "entry": {
+    "edgeId": 1670,
+    "sourceIds": [
+      "1705:0"
+    ],
+    "a": [
+      -331.060866658655,
+      -2148.854487999811
+    ],
+    "b": [
+      -256.226719053476,
+      -2008.4910999999956
+    ],
+    "points": [
+      [
+        -331.060866658655,
+        -2148.854487999811
+      ],
+      [
+        -256.226719053476,
+        -2008.4910999999956
+      ]
+    ],
+    "x": -328.70856976818595,
+    "y": 10.854496847910067,
+    "z": -2144.44237973515,
+    "yaw": 0.489811293779659,
+    "reverse": false,
+    "width": 6,
+    "surfaceId": "ground",
+    "surfaceLayer": 0,
+    "initialDamage": 0,
+    "initialBrokenCount": 0
+  },
+  "viewport": [
+    1280,
+    720
+  ],
+  "quality": "balanced",
+  "qualityMode": "manual",
+  "carModel": "roadster",
+  "treeClearance": {
+    "complete": true,
+    "candidates": 35989,
+    "retained": 35535,
+    "excluded": 454,
+    "municipalExcluded": 246,
+    "generatedExcluded": 208,
+    "triangles": 55670,
+    "heightAwareTriangles": 2154
+  },
+  "valid": true,
+  "samples": [
+    {
+      "t": 36593.10000000149,
+      "position": [
+        -328.6897513930622,
+        10.859346449192948,
+        -2144.407082869033
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 2.8800000000000003,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 36653.39999999851,
+      "position": [
+        -328.6410800745566,
+        10.871889322162179,
+        -2144.3157920428193
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 6.744959999999916,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 36739,
+      "position": [
+        -328.53385041380244,
+        10.899523009817752,
+        -2144.1146656993096
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 11.629440000000082,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 36844.60000000149,
+      "position": [
+        -328.2982761226703,
+        10.960231831752525,
+        -2143.6728085166314
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 18.299520000000253,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 36934.39999999851,
+      "position": [
+        -328.0708504890608,
+        11.01884069873827,
+        -2143.2462354417316
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 23.040000000000006,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 37040,
+      "position": [
+        -327.6573730755682,
+        11.12539615752429,
+        -2142.4706925582154
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 29.784959999999923,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 37133.699999999255,
+      "position": [
+        -327.30316300542535,
+        11.216678088046114,
+        -2141.806315036723
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 34.56575999999992,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 37240.800000000745,
+      "position": [
+        -326.7127489813186,
+        11.368831108161599,
+        -2140.698899299412
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 41.316480000000176,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 37339.5,
+      "position": [
+        -326.1288718585419,
+        11.519299531978707,
+        -2139.6037445638904
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 47.059200000000004,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 37450.5,
+      "position": [
+        -325.4587184324294,
+        11.692001845203803,
+        -2138.346764851031
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 52.91135999999991,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 37544.699999999255,
+      "position": [
+        -324.7269056969419,
+        11.880594109813229,
+        -2136.9741332620883
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 58.63104000000007,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 37638.699999999255,
+      "position": [
+        -323.9183090228985,
+        12.026064300512608,
+        -2135.4574811410143
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 64.36799999999998,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 37737.699999999255,
+      "position": [
+        -323.04050672050846,
+        11.984295997435298,
+        -2133.8110228181695
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 70.07039999999998,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 37832.60000000149,
+      "position": [
+        -322.2443911455821,
+        11.946423066930812,
+        -2132.3177809905796
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 74.87999999999997,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 37940.10000000149,
+      "position": [
+        -321.04187996336316,
+        11.88921702314852,
+        -2130.0622793373177
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 81.6019200000002,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 38033.10000000149,
+      "position": [
+        -320.11994518400036,
+        11.8453586024265,
+        -2128.3330435099924
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 86.41152000000021,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 38144.199999999255,
+      "position": [
+        -318.7428162666236,
+        11.779845156913375,
+        -2125.7500184239666
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 93.12768000000013,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 38232.699999999255,
+      "position": [
+        -317.69638792444164,
+        11.715970932082243,
+        -2123.7872750493425
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 97.93152000000022,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 38339.60000000149,
+      "position": [
+        -316.1354287740021,
+        11.44778334526552,
+        -2120.8594470203393
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 104.68224000000004,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 38450.10000000149,
+      "position": [
+        -314.7336688617933,
+        11.206946005059581,
+        -2118.2302225721905
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 110.4019200000002,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 38541.699999999255,
+      "position": [
+        -313.24812111290174,
+        10.951704311169305,
+        -2115.443840663091
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 116.15039999999996,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 38634.60000000149,
+      "position": [
+        -311.94440869876274,
+        10.735972613531619,
+        -2112.998519946786
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 120.97728000000015,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 38743.699999999255,
+      "position": [
+        -310.03891468229295,
+        10.758751793552705,
+        -2109.4244617858485
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 127.69919999999998,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 38833.199999999255,
+      "position": [
+        -308.6191777268755,
+        10.77893460686626,
+        -2106.7615185238724
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 132.49152000000024,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 38938.300000000745,
+      "position": [
+        -306.539913329043,
+        10.808496591670206,
+        -2102.8615262774583
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 139.20768000000012,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 39046.300000000745,
+      "position": [
+        -304.6596044709158,
+        10.845632321039076,
+        -2099.3347069007577
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 145.0195200000002,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 39141.89999999851,
+      "position": [
+        -302.70069073298225,
+        10.930929097501108,
+        -2095.6604515259737
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 150.83135999999985,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 39235.300000000745,
+      "position": [
+        -301.0580809110856,
+        11.0024526652194,
+        -2092.5794746305114
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 155.54304000000002,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 39342.10000000149,
+      "position": [
+        -298.62746111534307,
+        10.789934196565667,
+        -2088.0204592560085
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 162.25919999999994,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 39435.39999999851,
+      "position": [
+        -296.8341675205062,
+        10.388189795618029,
+        -2084.6568508939845
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 167.04575999999983,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 39544.5,
+      "position": [
+        -294.19164950883595,
+        9.593679659629032,
+        -2079.700386594752
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 173.8540800000001,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 39635.39999999851,
+      "position": [
+        -292.2606893380461,
+        9.013109619755726,
+        -2076.078562596773
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 178.66944,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 39745.39999999851,
+      "position": [
+        -289.5021780988737,
+        8.787362985479424,
+        -2070.9045344858546
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 185.32799999999992,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 39835.699999999255,
+      "position": [
+        -287.4258934778317,
+        8.667765048692896,
+        -2067.0101312864094
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 190.18944,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 39945.199999999255,
+      "position": [
+        -284.49077622925944,
+        8.758912710795814,
+        -2061.504850417041
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 196.85375999999982,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 40035.39999999851,
+      "position": [
+        -282.3350064048226,
+        8.901973416838073,
+        -2057.4613600321145
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 201.61152000000018,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 40135.89999999851,
+      "position": [
+        -279.66243732991745,
+        9.061405337149468,
+        -2052.4485301673794
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 207.35424000000003,
+      "throttle": true,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 40247.10000000149,
+      "position": [
+        -276.67276366613015,
+        8.852452410326448,
+        -2046.8409200336073
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 161.34788507837246,
+      "throttle": false,
+      "brake": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 40336.60000000149,
+      "position": [
+        -275.29654848210333,
+        8.748020169387129,
+        -2044.259608800319
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 103.99407992323466,
+      "throttle": false,
+      "brake": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 40442.199999999255,
+      "position": [
+        -274.1822952327547,
+        8.669083007498825,
+        -2042.1696489868718
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 56.94139286633455,
+      "throttle": false,
+      "brake": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 40535.199999999255,
+      "position": [
+        -273.6936454034208,
+        8.634465880448005,
+        -2041.2531082392884
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 36.56701088328053,
+      "throttle": false,
+      "brake": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 40645.5,
+      "position": [
+        -273.301432827416,
+        8.606680926600388,
+        -2040.5174509525293
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 20.011638537278802,
+      "throttle": false,
+      "brake": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 40740.89999999851,
+      "position": [
+        -273.10831097137367,
+        8.592999871516076,
+        -2040.155220087631
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 11.860330496270226,
+      "throttle": false,
+      "brake": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 40832.800000000745,
+      "position": [
+        -273.0077899280993,
+        8.587558225714844,
+        -2039.9666768269567
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 7.672309184496906,
+      "throttle": false,
+      "brake": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 40941.5,
+      "position": [
+        -272.9249744203594,
+        8.5895199590308,
+        -2039.811343124131
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 4.1790999504937645,
+      "throttle": false,
+      "brake": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 41035.199999999255,
+      "position": [
+        -272.89003677135656,
+        8.590347561878373,
+        -2039.7458119870805
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 2.7246220949275215,
+      "throttle": false,
+      "brake": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 41144.89999999851,
+      "position": [
+        -272.8606754326837,
+        8.591043073115909,
+        -2039.6907401100802
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 1.4856465465610558,
+      "throttle": false,
+      "brake": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 41233.10000000149,
+      "position": [
+        -272.8480520490079,
+        8.591342095762649,
+        -2039.667062939197
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0.959546355984979,
+      "throttle": false,
+      "brake": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 41339.300000000745,
+      "position": [
+        -272.83771701489235,
+        8.591586911996968,
+        -2039.6476779331538
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0.5245737902716145,
+      "throttle": false,
+      "brake": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 41432.699999999255,
+      "position": [
+        -272.8332343450864,
+        8.591693097455991,
+        -2039.6392699704604
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0.3377531173276113,
+      "throttle": false,
+      "brake": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 41539.800000000745,
+      "position": [
+        -272.82960589332015,
+        8.591779048202536,
+        -2039.632464230041
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0.1849348824450132,
+      "throttle": false,
+      "brake": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 41633.89999999851,
+      "position": [
+        -272.8280299779914,
+        8.591816378476645,
+        -2039.6295083493123
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0.11925880576555443,
+      "throttle": false,
+      "brake": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 41740.89999999851,
+      "position": [
+        -272.8267382840401,
+        8.591846976116207,
+        -2039.6270855711416
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0.06479115389359738,
+      "throttle": false,
+      "brake": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 41833.39999999851,
+      "position": [
+        -272.826190012319,
+        8.591859963573832,
+        -2039.62605720002
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0.04195633853387832,
+      "throttle": false,
+      "brake": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 41941.800000000745,
+      "position": [
+        -272.82573970545275,
+        8.591870630440551,
+        -2039.6252125776195
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0.022984937712723443,
+      "throttle": false,
+      "brake": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 42034.60000000149,
+      "position": [
+        -272.82554526150307,
+        8.591875236427859,
+        -2039.6248478669568
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0.014884189737365196,
+      "throttle": false,
+      "brake": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 42143,
+      "position": [
+        -272.8253846294929,
+        8.591879041478073,
+        -2039.6245465759835
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0.008090525606847128,
+      "throttle": false,
+      "brake": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 42239,
+      "position": [
+        -272.82530688814774,
+        8.591880883014692,
+        -2039.6244007596822
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0.004815053578377799,
+      "throttle": false,
+      "brake": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 42346,
+      "position": [
+        -272.8252597405515,
+        8.591881999846672,
+        -2039.6243123268405
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0.0028507734395493765,
+      "throttle": false,
+      "brake": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 42440.199999999255,
+      "position": [
+        -272.82523234446506,
+        8.591882648805008,
+        -2039.6242609411079
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0.0016957460352415431,
+      "throttle": false,
+      "brake": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 42533.800000000745,
+      "position": [
+        -272.82521809074,
+        8.591882986447166,
+        -2039.6242342059716
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0.001102114311314388,
+      "throttle": false,
+      "brake": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 42643.10000000149,
+      "position": [
+        -272.82520615021633,
+        8.591883269294264,
+        -2039.6242118096134
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0.0005975122003688272,
+      "throttle": false,
+      "brake": true,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 42754,
+      "position": [
+        -272.8251997987376,
+        8.591883419748088,
+        -2039.624199896401
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0.0004560102391985734,
+      "throttle": false,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 42837,
+      "position": [
+        -272.82519403928563,
+        8.59188355617796,
+        -2039.6241890936296
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0.00044502978134511263,
+      "throttle": false,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    },
+    {
+      "t": 42971.5,
+      "position": [
+        -272.8251864016444,
+        8.591883737098401,
+        -2039.6241747680142
+      ],
+      "yaw": 0.489811293779659,
+      "speedKph": 0.00043047836815786463,
+      "throttle": false,
+      "brake": false,
+      "surface": "ground",
+      "groundAllowed": true,
+      "police": false,
+      "damage": 0,
+      "lastHit": null,
+      "ahead": null
+    }
+  ],
+  "broken": [],
+  "damage": {
+    "zones": {
+      "front": 0,
+      "rear": 0,
+      "left": 0,
+      "right": 0,
+      "roof": 0
+    },
+    "scratches": {
+      "front": 0,
+      "rear": 0,
+      "left": 0,
+      "right": 0,
+      "roof": 0
+    },
+    "overall": 0,
+    "severity": 0,
+    "revision": 0,
+    "lastHit": null,
+    "recentEventIds": []
+  }
+}

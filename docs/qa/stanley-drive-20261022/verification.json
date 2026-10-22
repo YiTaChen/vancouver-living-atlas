@@ -1,0 +1,283 @@
+{
+  "schema": 1,
+  "scope": "Local pre-merge acceptance, with immutable source and capture hashes. GitHub PR CI/deployment are separate release checks.",
+  "parentRevision": "b051ea7214482760e9ed7084121dcefdc8435c2d",
+  "visualSourceFingerprint": "bafaa528807b90c1efc373b16b9b851ac3ac4fea2574a38af2aa875722de0268",
+  "runtime": {
+    "node": "24.22.1",
+    "platform": "darwin-x64",
+    "officialDistributionSha256": "d132557e7ee2b85af08b0c8c34338e65c6430f2238d01f727728ef42dc83b035"
+  },
+  "fullSuite": {
+    "tests": 1625,
+    "passed": 1625,
+    "failed": 0,
+    "skipped": 0,
+    "durationMs": 371441.637144
+  },
+  "ordinaryDrive": {
+    "replayCases": 1224,
+    "completed": 1224,
+    "failed": 0,
+    "damaged": 0,
+    "skipped": 0,
+    "speedsKph": [
+      50,
+      120,
+      205
+    ],
+    "nativePartialRuns": 9,
+    "nativeDamage": 0,
+    "nativeMaxKph": 207.35424,
+    "notClaimed": [
+      "Complete human-driven park lap at205km/h",
+      "Mobile hardware performance",
+      "Complete-city Tesla terrain guarantee"
+    ]
+  },
+  "checks": [
+    {
+      "id": "supported-full-suite",
+      "status": "pass",
+      "command": "work/runtime-node24/node-v24.22.1-darwin-x64/bin/node --test --test-reporter=tap --test-concurrency=4 tests/*.test.mjs",
+      "localLog": "work/stanley-full-tests-node24.log",
+      "logSha256": "78ab376987628fe4f97dfdfa032266a8f33f7a6fce7cec87e8e0df55e2598151"
+    },
+    {
+      "id": "typecheck",
+      "status": "pass",
+      "command": "PATH=<official-node24-bin>:$PATH npm run check",
+      "localLog": "work/stanley-typecheck-node24.log",
+      "logSha256": "455c89e2c267bce4737bf0328ef9383090bd75b3988edd7beb4f041fb9723dcf"
+    },
+    {
+      "id": "scoped-lint",
+      "status": "pass",
+      "command": "npx oxlint --deny-warnings <new and focused changed modules/tests>",
+      "localLog": "work/stanley-scoped-lint-frozen.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "production-build",
+      "status": "pass",
+      "command": "PATH=<official-node24-bin>:$PATH npm run build:firebase",
+      "localLog": "work/stanley-production-build-node24.log",
+      "logSha256": "b3263d24d236f1244912a41e69602dd62cadf251573202bc7a4f35b152d03f6f"
+    },
+    {
+      "id": "architecture-contracts",
+      "status": "pass",
+      "command": "python3 tools/assets/architecture-details/validate_architecture_details.py --skip-blender",
+      "localLog": "work/stanley-architecture-final.log",
+      "logSha256": "592c7d1a0cbf5ad153d34fa65e0db96eb0fd8bcdca6c47eeda648b5435b854c3"
+    },
+    {
+      "id": "route-audit",
+      "status": "pass",
+      "command": "node tools/audit-stanley-drive.mjs --output docs/qa/stanley-drive-20261022/current-road-replays.json",
+      "localLog": "work/stanley-drive-current-supported.log",
+      "logSha256": "22a017a4171ca06a63d2c6f1bd5986caf3cf43eb651d8665c7ede54faf327e39"
+    },
+    {
+      "id": "frame-budget-negative",
+      "status": "pass",
+      "command": "node tools/audit-stanley-drive.mjs --speeds 1 --dt 0.000001 (expected nonzero; complete-route budget error)",
+      "localLog": "work/stanley-audit-budget-negative.log",
+      "logSha256": "5ae77872331f0064b8af589c8a17e0497308d33989c860b41f26c8a9d76a572e"
+    }
+  ],
+  "unsupportedRuntimeObservation": {
+    "node": "26.0.0",
+    "status": "inconsistent full-suite results; unresolved, not a release pass",
+    "frozenFullSuite": {
+      "tests": 1625,
+      "passed": 1621,
+      "failed": 4,
+      "logSha256": "02b5ef8eeeebed7d305f4749008ba5ce35d28ceb5be418a1535d8f9eb9d4c8b5"
+    },
+    "diagnosticFullSuite": {
+      "tests": 1625,
+      "passed": 1613,
+      "failed": 12,
+      "logSha256": "43079a625e2306d0de5413dd1b9c2918c0134943f8ffe205d23bc2f27341b328"
+    },
+    "sameThreeFileBatch": {
+      "passed": 28,
+      "failed": 0,
+      "logSha256": "1810a1abf990a1fafd023b77f5ed49bb210dca9a2951f4a5eb93c22109995eba"
+    },
+    "note": "No product permissions were weakened or tests skipped to address this. Repository engines and CI specify Node22/24; formal acceptance uses24.22.1. No V8/root-cause claim is made."
+  },
+  "artifacts": [
+    {
+      "file": "README.md",
+      "bytes": 6034,
+      "sha256": "15a790a92a78fb3460beb7a658b1f1e51e8aae0cb226a4e56b18835561286c46"
+    },
+    {
+      "file": "after-causeway-underpass.json",
+      "bytes": 24805,
+      "sha256": "1a02e3eeeb764a475194090cbb13f0f880bb82200e170a9dfefc168350096485"
+    },
+    {
+      "file": "after-causeway-underpass.png",
+      "bytes": 1069253,
+      "sha256": "ce95ee5790bba5f80f4b46ad7c13de645c6d47ee56b03ecf7486f0bbf37bd483"
+    },
+    {
+      "file": "after-east-off-ramp.json",
+      "bytes": 22820,
+      "sha256": "217a3ee4b12249a3a45e937b171232ab348ba60bf6e9bc0fac081a3e87abb86c"
+    },
+    {
+      "file": "after-east-off-ramp.png",
+      "bytes": 786041,
+      "sha256": "0b35a0992303983ff336f305f6b21d9e6a343ff3000390f716ed7a0efcd0061f"
+    },
+    {
+      "file": "after-east-shore-tree.json",
+      "bytes": 28252,
+      "sha256": "40924135b2ecd6a6d3bcd5c126d8b5df4ee799ca7ebb600299e793de913913bc"
+    },
+    {
+      "file": "after-east-shore-tree.png",
+      "bytes": 697428,
+      "sha256": "add1784c9efad52f2a619c17eddc88828e4164f66a6c83a5f284c83147f2f248"
+    },
+    {
+      "file": "after-north-entry-short.json",
+      "bytes": 17282,
+      "sha256": "9a83f5014d3ce14bc8c87bc0aced5d5f8f84f8cbb83d7f7385918abe55b786a0"
+    },
+    {
+      "file": "after-north-entry-short.png",
+      "bytes": 754908,
+      "sha256": "ffce18742a7aab78fd8062de10e187627ca7920adf9b1fdcf4af831752b885e8"
+    },
+    {
+      "file": "after-north-entry.json",
+      "bytes": 21224,
+      "sha256": "2e59a29056f0095d352148cd6324323d3812cfb6e0dfbaca56e53d224eb1353f"
+    },
+    {
+      "file": "after-north-entry.png",
+      "bytes": 500066,
+      "sha256": "ab7a2db3d506e6cc1daf5d079c50bda73ebb52190c595fe4b12fbed98dc55ab8"
+    },
+    {
+      "file": "after-northwest-straight.json",
+      "bytes": 22446,
+      "sha256": "1a5bb13a5cbd5c1736cc7dd1c21587c9dc57b78233a2cd1cd5af68a8fa8ce78e"
+    },
+    {
+      "file": "after-northwest-straight.png",
+      "bytes": 655532,
+      "sha256": "06b4ab14a917f02af540ca0d64c96aadd2b1fbf61df94d183cc54ccf850ea715"
+    },
+    {
+      "file": "after-prospect-bridge.json",
+      "bytes": 19481,
+      "sha256": "1a621a829d4a55753358c1bfddcae20dfa566c6ae78ad81ee25ae4eb1f58d269"
+    },
+    {
+      "file": "after-prospect-bridge.png",
+      "bytes": 895483,
+      "sha256": "64fddee628fe3f7efe63a717606797c4c3f4d3184d3ded1869491ae2d7b45a0b"
+    },
+    {
+      "file": "after-retail-curve.json",
+      "bytes": 20757,
+      "sha256": "122ed98822057fa6d4dac61a456e51f50f51bdbb4f52823da1f1fc21560e72b6"
+    },
+    {
+      "file": "after-retail-curve.png",
+      "bytes": 805501,
+      "sha256": "07a12e18faa6ff6d07e626135d27c7523da0497fd0b404c3e0c2163be81dc0cd"
+    },
+    {
+      "file": "after-south-ramp-rail.json",
+      "bytes": 17384,
+      "sha256": "f6e92e46e0ea464499fcbaf8c5bcf2322aa809c4ad50ef72b2a4892c380bc0c6"
+    },
+    {
+      "file": "after-south-ramp-rail.png",
+      "bytes": 955163,
+      "sha256": "545bff805c209b5e3d3744fc413c8d417b2ba97205acd9e4c0240ae98f8006ae"
+    },
+    {
+      "file": "before-east-shore-tree.json",
+      "bytes": 85414,
+      "sha256": "df07604c01684ac8067d6f0a8f285e40e9453e93b33bdcbd62bd73ec18945e3b"
+    },
+    {
+      "file": "before-east-shore-tree.png",
+      "bytes": 185797,
+      "sha256": "d9e164adba9eb45c6ca0fbadd837516a3656a088d2ea52d6f93143074685647f"
+    },
+    {
+      "file": "before-northwest-straight.json",
+      "bytes": 45592,
+      "sha256": "17093bdc69fec754b50323cf18a1f21342680402313a9aef75b513b0c34e9b37"
+    },
+    {
+      "file": "before-northwest-straight.png",
+      "bytes": 348064,
+      "sha256": "21bfae613a6456a785085dc6f0ddc30d6525151bea3c37f54d934b70b318092b"
+    },
+    {
+      "file": "before-ramp-rail.json",
+      "bytes": 43775,
+      "sha256": "8be5029fa960b8e612a2884b9eb014141393c55f328b3629b9d7e3e4c04cb5e4"
+    },
+    {
+      "file": "before-ramp-rail.png",
+      "bytes": 1134987,
+      "sha256": "a77c35850c11e21cb3105343e436ac40e1e4309ee04583f095bef6e879c93565"
+    },
+    {
+      "file": "current-road-replays.json",
+      "bytes": 969123,
+      "sha256": "0c0f6a73916a489ef8ce59e4197eee50e01cb54d6f56ddba61228ea89faee9c5"
+    },
+    {
+      "file": "native-summary.json",
+      "bytes": 3346,
+      "sha256": "c19e17b9f91aaa784ca227918e9f726ce7619ec6955a635e0eca2d0887d62442"
+    },
+    {
+      "file": "north-exit-floor-sweep.json",
+      "bytes": 730,
+      "sha256": "25d24d97d72a7ad530d99f5f78de78fa5d4fa3fea3ff58741957cf123dc610a4"
+    },
+    {
+      "file": "north-ramp-paving.json",
+      "bytes": 18250,
+      "sha256": "c14566c6e1404142a561b93dd859a70e728a15fe25dc56c915adb6857aad93b3"
+    },
+    {
+      "file": "south-ramp-paving.json",
+      "bytes": 17178,
+      "sha256": "ed4e7431fe2424fd81b33d19871c3b55399f35e2920eebb53ace2a0d3a491d39"
+    },
+    {
+      "file": "tesla-source-routes.json",
+      "bytes": 10679,
+      "sha256": "144b63702129a1f1f6a8a942db3ac515f491bfce4576557d322ceced8a3a20cb"
+    },
+    {
+      "file": "tree-clearance.json",
+      "bytes": 174780,
+      "sha256": "0d016a97f93440cd965d81487d051838045787a4a26e0cdb7cf98e85f609522e"
+    },
+    {
+      "file": "tree-collision-runtime.json",
+      "bytes": 3648,
+      "sha256": "29ee79d1ae04efc15063d937a78cf0a3cf900342a7404b9c7472dbcd0894f9e0"
+    },
+    {
+      "file": "west-ramp-paving.json",
+      "bytes": 17738,
+      "sha256": "874b69bf8fcd285a65558375be19ba1eb8d946a63b3e7b0675e103a30c6b2b60"
+    }
+  ]
+}

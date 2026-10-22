@@ -1,0 +1,1338 @@
+{
+  "retrievedAt": "2026-10-22",
+  "source": "OpenStreetMap contributors",
+  "license": "ODbL-1.0",
+  "copyrightUrl": "https://www.openstreetmap.org/copyright",
+  "scope": "Verified duplicate, pedestrian and pond ROW car copies in Stanley Park. Keep original public City data, authoritative protected Causeway, corrected legal motor ramps, walking paths and water.",
+  "decisions": [
+    {
+      "citySourceId": 1700,
+      "action": "exclude-car-row",
+      "reason": "Unlayered ordinary-ground ROW follows the bridge bicycle/footway corridor toward the sea. The explicit Lions Gate motor deck and separated walking/bicycle decks remain authoritative.",
+      "citySourceGeometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-123.1426071, 49.3112056],
+          [-123.1422475, 49.3116013],
+          [-123.141755, 49.312136],
+          [-123.1403724, 49.3136628]
+        ]
+      }
+    },
+    {
+      "citySourceId": 1605,
+      "action": "exclude-car-row",
+      "reason": "Approximate private ROW beside the mapped park pond, not the current Avison Way motor alignment.",
+      "citySourceGeometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-123.131126, 49.2984279],
+          [-123.1311353, 49.2982834]
+        ]
+      }
+    },
+    {
+      "citySourceId": 1782,
+      "action": "exclude-car-row",
+      "reason": "Approximate private ROW crosses the park pedestrian/pond area rather than the mapped motor-road alignment.",
+      "citySourceGeometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-123.131126, 49.2984279],
+          [-123.1308735, 49.2983822],
+          [-123.1306688, 49.2983207],
+          [-123.1304799, 49.2982386],
+          [-123.1303184, 49.2981539],
+          [-123.1299751, 49.2978995]
+        ]
+      }
+    },
+    {
+      "citySourceId": 1581,
+      "action": "retain-parking-prefix",
+      "lastRetainedVertex": 3,
+      "reason": "Retain the original prefix matching parking ways 43537896/368958751/271046240 within approximately 1–2m. Remove the tail that departs the current parking alignment and reaches the mapped pond.",
+      "citySourceGeometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-123.1331858, 49.2974274],
+          [-123.1330205, 49.2975334],
+          [-123.1329093, 49.2976148],
+          [-123.1319089, 49.2982431],
+          [-123.1316865, 49.2983526],
+          [-123.1314725, 49.2984144],
+          [-123.1313013, 49.2984286],
+          [-123.131126, 49.2984279]
+        ]
+      }
+    },
+    {
+      "citySourceId": 1580,
+      "action": "exclude-car-row",
+      "reason": "Unlayered offset copy of the already modelled protected Causeway motor road; retain its authoritative protected deck and permissions.",
+      "primaryMotorWayIds": [70954678, 1252160596],
+      "citySourceGeometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-123.1437466, 49.309781],
+          [-123.1435953, 49.3100405]
+        ]
+      }
+    },
+    {
+      "citySourceId": 1603,
+      "action": "exclude-car-row",
+      "reason": "Unlayered offset copy of the already modelled protected Causeway motor road; retain its authoritative protected deck and permissions.",
+      "primaryMotorWayIds": [325793279, 70954678],
+      "citySourceGeometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-123.1440152, 49.3093951],
+          [-123.1437466, 49.309781]
+        ]
+      }
+    },
+    {
+      "citySourceId": 1763,
+      "action": "exclude-car-row",
+      "reason": "Unlayered offset copy of the already modelled protected Causeway motor road; retain its authoritative protected deck and permissions.",
+      "primaryMotorWayIds": [70954663, 1252160596],
+      "citySourceGeometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-123.1435953, 49.3100405],
+          [-123.1432419, 49.310507],
+          [-123.1426071, 49.3112056]
+        ]
+      }
+    },
+    {
+      "citySourceId": 1618,
+      "action": "exclude-car-row",
+      "reason": "Unlayered offset copy of the already modelled protected Causeway motor road; retain its authoritative protected deck and permissions.",
+      "primaryMotorWayIds": [257712148],
+      "citySourceGeometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-123.1452311, 49.3062236],
+          [-123.1452993, 49.3057817],
+          [-123.1453073, 49.3052912],
+          [-123.1453251, 49.3048937],
+          [-123.1452953, 49.3044342],
+          [-123.1452276, 49.3040555],
+          [-123.1451507, 49.3037327],
+          [-123.1450167, 49.3033851],
+          [-123.1448541, 49.3030128],
+          [-123.1446822, 49.30269],
+          [-123.1444626, 49.302355],
+          [-123.1442599, 49.302077]
+        ]
+      }
+    },
+    {
+      "citySourceId": 1619,
+      "action": "exclude-car-row",
+      "reason": "Unlayered offset copy of the already modelled protected Causeway motor road; retain its authoritative protected deck and permissions.",
+      "primaryMotorWayIds": [257712148],
+      "citySourceGeometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-123.1442599, 49.302077],
+          [-123.1438145, 49.3015611],
+          [-123.1435191, 49.301251],
+          [-123.1431952, 49.3009471],
+          [-123.1427857, 49.300606],
+          [-123.1423574, 49.3003023],
+          [-123.1418243, 49.2999366],
+          [-123.1413771, 49.2996764],
+          [-123.1409396, 49.2994409],
+          [-123.140495, 49.2992213]
+        ]
+      }
+    },
+    {
+      "citySourceId": 1625,
+      "action": "exclude-car-row",
+      "reason": "Unlayered offset copy of the already modelled protected Causeway motor road; retain its authoritative protected deck and permissions.",
+      "primaryMotorWayIds": [257712148, 44032485, 44032488, 44032489],
+      "citySourceGeometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-123.1362064, 49.2967017],
+          [-123.1362968, 49.2968619],
+          [-123.1364471, 49.2970514],
+          [-123.1368007, 49.2974081],
+          [-123.1370962, 49.2976637],
+          [-123.1373674, 49.2978436],
+          [-123.1376577, 49.2980076],
+          [-123.1379142, 49.2981275],
+          [-123.1385889, 49.2984031],
+          [-123.140495, 49.2992213]
+        ]
+      }
+    },
+    {
+      "citySourceId": 1809,
+      "action": "exclude-car-row",
+      "reason": "Unlayered offset copy of the already modelled protected Causeway motor road; retain its authoritative protected deck and permissions.",
+      "primaryMotorWayIds": [257712148],
+      "citySourceGeometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-123.1452311, 49.3062236],
+          [-123.1451404, 49.3067319],
+          [-123.1449807, 49.3073345],
+          [-123.1447452, 49.307993],
+          [-123.1445091, 49.3085088],
+          [-123.1443202, 49.3088817],
+          [-123.1440152, 49.3093951]
+        ]
+      }
+    },
+    {
+      "citySourceId": 1660,
+      "action": "exclude-car-row",
+      "reason": "Offset ordinary-ground proxy of a source-owned Causeway motor exit. The actual southbound/northbound exit now has continuous asphalt and its original explicit floor gate; retain that corrected route.",
+      "primaryMotorWayIds": [604336387, 875696498, 1044497036],
+      "citySourceGeometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-123.1365199, 49.2962694],
+          [-123.13644, 49.2962006],
+          [-123.1363472, 49.2961838],
+          [-123.136272, 49.2961865]
+        ]
+      }
+    },
+    {
+      "citySourceId": 1719,
+      "action": "exclude-car-row",
+      "reason": "Offset ordinary-ground proxy of a source-owned Causeway motor exit. The actual southbound/northbound exit now has continuous asphalt and its original explicit floor gate; retain that corrected route.",
+      "primaryMotorWayIds": [363687651],
+      "citySourceGeometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-123.1364608, 49.2958885],
+          [-123.1363764, 49.296002],
+          [-123.136272, 49.2961865]
+        ]
+      }
+    },
+    {
+      "citySourceId": 1766,
+      "action": "exclude-car-row",
+      "reason": "Offset ordinary-ground proxy of a source-owned Causeway motor exit. The actual southbound/northbound exit now has continuous asphalt and its original explicit floor gate; retain that corrected route.",
+      "primaryMotorWayIds": [116061617, 363687651],
+      "citySourceGeometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-123.1364608, 49.2958885],
+          [-123.1364582, 49.2960915],
+          [-123.1364807, 49.2961642],
+          [-123.1365199, 49.2962694]
+        ]
+      }
+    },
+    {
+      "citySourceId": 1708,
+      "action": "exclude-car-row",
+      "reason": "Offset ordinary-ground proxy of a source-owned Causeway motor exit. The actual southbound/northbound exit now has continuous asphalt and its original explicit floor gate; retain that corrected route.",
+      "primaryMotorWayIds": [363693711, 116061634],
+      "citySourceGeometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-123.1362064, 49.2967017],
+          [-123.1362135, 49.2964858],
+          [-123.1362227, 49.2963278],
+          [-123.136272, 49.2961865]
+        ]
+      }
+    },
+    {
+      "citySourceId": 1591,
+      "action": "exclude-car-row",
+      "reason": "Offset ordinary-ground proxy of a source-owned Causeway motor exit. The actual southbound/northbound exit now has continuous asphalt and its original explicit floor gate; retain that corrected route.",
+      "primaryMotorWayIds": [116061634, 1299818249],
+      "citySourceGeometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-123.1362064, 49.2967017],
+          [-123.1361123, 49.2965544]
+        ]
+      }
+    },
+    {
+      "citySourceId": 1595,
+      "action": "exclude-car-row",
+      "reason": "Offset ordinary-ground proxy of a source-owned Causeway motor exit. The actual southbound/northbound exit now has continuous asphalt and its original explicit floor gate; retain that corrected route.",
+      "primaryMotorWayIds": [156891517, 604336388, 1299818249],
+      "citySourceGeometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-123.1360684, 49.2962613],
+          [-123.1359624, 49.2964388],
+          [-123.135848, 49.2966417]
+        ]
+      }
+    },
+    {
+      "citySourceId": 1608,
+      "action": "exclude-car-row",
+      "reason": "Offset ordinary-ground proxy of a source-owned Causeway motor exit. The actual southbound/northbound exit now has continuous asphalt and its original explicit floor gate; retain that corrected route.",
+      "primaryMotorWayIds": [1299818249, 604336388],
+      "citySourceGeometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-123.1361123, 49.2965544],
+          [-123.1360829, 49.2964386],
+          [-123.1360684, 49.2962613]
+        ]
+      }
+    }
+  ],
+  "ways": [
+    {
+      "sourceId": 4755915,
+      "version": 48,
+      "timestamp": "2026-04-19T16:20:11Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/4755915/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/4755915",
+      "tags": {
+        "bicycle": "no",
+        "bridge": "yes",
+        "bridge:structure": "suspension",
+        "foot": "no",
+        "hgv": "no",
+        "highway": "trunk",
+        "historic": "yes",
+        "horse": "no",
+        "lanes": "3",
+        "lanes:backward": "1",
+        "lanes:forward": "1",
+        "lanes:reversible": "1",
+        "layer": "1",
+        "lit": "yes",
+        "maxspeed": "60",
+        "maxweight": "13",
+        "name": "Lions Gate Bridge",
+        "name:en": "Lions Gate Bridge",
+        "name:etymology:wikidata": "Q7747518",
+        "name:fr": "Pont Lions Gate",
+        "name:ja": "ライオンズゲートブリッジ",
+        "name:zh": "獅門橋",
+        "note": "This is the bridge deck, where bicycles are prohibited. This is not the multi-use pathway.",
+        "old_ref": "BC 1A",
+        "oneway": "no",
+        "parking:both": "no",
+        "ref": "BC 99;BC 1A",
+        "sidewalk:both": "separate",
+        "surface": "asphalt",
+        "wikidata": "Q124352",
+        "wikipedia": "en:Lions Gate Bridge"
+      },
+      "nodeIds": [30350288, 255625148],
+      "coordinates": [
+        [-123.1419028, 49.3118075],
+        [-123.1308831, 49.323792]
+      ]
+    },
+    {
+      "sourceId": 70954672,
+      "version": 13,
+      "timestamp": "2026-01-01T06:20:15Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/70954672/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/70954672",
+      "tags": {
+        "bicycle": "designated",
+        "bridge": "yes",
+        "bridge:colour": "green",
+        "bridge:type": "suspension",
+        "foot": "designated",
+        "highway": "cycleway",
+        "layer": "1",
+        "lit": "yes",
+        "motor_vehicle": "no",
+        "name": "SB Lions Gate Bridge Bike Route",
+        "oneway": "yes",
+        "oneway:foot": "no",
+        "segregated": "no",
+        "smoothness": "good",
+        "surface": "paved",
+        "wikidata": "Q124352",
+        "wikipedia": "en:Lions Gate Bridge"
+      },
+      "nodeIds": [
+        3677491127, 845618527, 8612365287, 8612365291, 3677479546, 3677479550,
+        4890367275
+      ],
+      "coordinates": [
+        [-123.1309602, 49.323823],
+        [-123.1311694, 49.3236096],
+        [-123.1402421, 49.3137496],
+        [-123.1403161, 49.3136691],
+        [-123.1417395, 49.3121226],
+        [-123.1418177, 49.3120574],
+        [-123.1418524, 49.3120305]
+      ]
+    },
+    {
+      "sourceId": 1224865632,
+      "version": 1,
+      "timestamp": "2023-11-17T19:41:00Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/1224865632/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/1224865632",
+      "tags": {
+        "bicycle": "no",
+        "foot": "yes",
+        "highway": "footway",
+        "lit": "no",
+        "name": "Stanley Park Seawall",
+        "smoothness": "excellent",
+        "surface": "asphalt"
+      },
+      "nodeIds": [
+        1313444239, 1313444252, 1313444255, 7229016712, 1313444257, 1313444260,
+        4748464323, 3677447742, 1313444263, 1313444268, 630163117
+      ],
+      "coordinates": [
+        [-123.1394731, 49.3127801],
+        [-123.1396973, 49.3129744],
+        [-123.1398788, 49.3130722],
+        [-123.1399793, 49.3131113],
+        [-123.1401347, 49.3131584],
+        [-123.1403501, 49.3131856],
+        [-123.1404882, 49.3132189],
+        [-123.1407448, 49.3132807],
+        [-123.1409255, 49.3133642],
+        [-123.1411403, 49.3135611],
+        [-123.1412606, 49.3138773]
+      ]
+    },
+    {
+      "sourceId": 1044497059,
+      "version": 8,
+      "timestamp": "2025-04-08T15:14:04Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/1044497059/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/1044497059",
+      "tags": {
+        "bicycle": "yes",
+        "cycleway:left": "no",
+        "highway": "tertiary",
+        "lanes": "2",
+        "maxspeed": "30",
+        "motor_vehicle": "yes",
+        "name": "Stanley Park Drive",
+        "oneway": "yes",
+        "parking:both": "no",
+        "sidewalk:left": "no",
+        "sidewalk:right": "separate",
+        "surface": "asphalt"
+      },
+      "nodeIds": [
+        9611020059, 6802958336, 30353203, 6802958337, 30353204, 30353205,
+        549653308, 9611020060, 549653304
+      ],
+      "coordinates": [
+        [-123.134103, 49.2970994],
+        [-123.1339262, 49.2971399],
+        [-123.1337729, 49.2971817],
+        [-123.1336583, 49.2972207],
+        [-123.1335568, 49.2972643],
+        [-123.1332872, 49.2973772],
+        [-123.1331314, 49.2974241],
+        [-123.1330229, 49.2974469],
+        [-123.132913, 49.2974568]
+      ]
+    },
+    {
+      "sourceId": 43537896,
+      "version": 4,
+      "timestamp": "2015-09-03T16:10:02Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/43537896/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/43537896",
+      "tags": {
+        "highway": "service",
+        "oneway": "yes",
+        "service": "driveway"
+      },
+      "nodeIds": [549653308, 1352175046, 3727969446],
+      "coordinates": [
+        [-123.1331314, 49.2974241],
+        [-123.1329944, 49.2975404],
+        [-123.1328815, 49.2976174]
+      ]
+    },
+    {
+      "sourceId": 368958751,
+      "version": 3,
+      "timestamp": "2024-07-07T15:43:08Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/368958751/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/368958751",
+      "tags": {
+        "highway": "service",
+        "oneway": "yes",
+        "service": "parking_aisle"
+      },
+      "nodeIds": [3727969446, 549653307, 6802958325, 549653338, 2760015208],
+      "coordinates": [
+        [-123.1328815, 49.2976174],
+        [-123.1328565, 49.2976371],
+        [-123.1326929, 49.2977328],
+        [-123.1319084, 49.2982251],
+        [-123.131888, 49.2982306]
+      ]
+    },
+    {
+      "sourceId": 271046240,
+      "version": 4,
+      "timestamp": "2022-03-27T15:38:04Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/271046240/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/271046240",
+      "tags": {
+        "highway": "service",
+        "oneway": "yes",
+        "service": "driveway",
+        "source": "Bing"
+      },
+      "nodeIds": [
+        2760015208, 1352175122, 6802958374, 1352175121, 6802958376, 6802958375,
+        1352175117, 1352175115, 1352175112, 1352175104, 1352175100, 1352175090,
+        1352175086, 9025598960, 1352175073
+      ],
+      "coordinates": [
+        [-123.131888, 49.2982306],
+        [-123.13182, 49.2982443],
+        [-123.1317662, 49.2982426],
+        [-123.1317049, 49.2982249],
+        [-123.1316529, 49.298191],
+        [-123.1316348, 49.2981779],
+        [-123.1316109, 49.2981561],
+        [-123.1315917, 49.2981214],
+        [-123.131577, 49.2980855],
+        [-123.1315543, 49.2980234],
+        [-123.1314806, 49.2979469],
+        [-123.1313109, 49.2978245],
+        [-123.1312975, 49.2978148],
+        [-123.131227, 49.2977639],
+        [-123.1311632, 49.2977132]
+      ]
+    },
+    {
+      "sourceId": 1375876258,
+      "version": 2,
+      "timestamp": "2026-09-11T23:06:14Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/1375876258/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/1375876258",
+      "tags": {
+        "cycleway:left": "no",
+        "highway": "unclassified",
+        "lane_markings": "no",
+        "motor_vehicle": "yes",
+        "name": "Avison Way",
+        "oneway": "yes",
+        "surface": "asphalt"
+      },
+      "nodeIds": [
+        30353209, 2760015207, 629865999, 6802958382, 629866003, 6802958381,
+        6802958380, 629866020, 6802958379, 629866019, 6802958359, 629866030,
+        6802958360, 520786426, 4013663027, 520786428, 12509041091
+      ],
+      "coordinates": [
+        [-123.1308609, 49.2978498],
+        [-123.1309353, 49.2979273],
+        [-123.1309522, 49.2979734],
+        [-123.1309569, 49.2981114],
+        [-123.1309465, 49.298294],
+        [-123.1309368, 49.2983913],
+        [-123.1309153, 49.2984333],
+        [-123.1308884, 49.2984636],
+        [-123.1308121, 49.2985181],
+        [-123.1306999, 49.2985777],
+        [-123.130635, 49.2986231],
+        [-123.1305646, 49.2986826],
+        [-123.1305304, 49.2987293],
+        [-123.1305084, 49.2987725],
+        [-123.1304469, 49.2990559],
+        [-123.130417, 49.299171],
+        [-123.130361, 49.2992763]
+      ]
+    },
+    {
+      "sourceId": 1170395077,
+      "version": 1,
+      "timestamp": "2023-05-08T20:25:46Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/1170395077/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/1170395077",
+      "tags": {
+        "natural": "water",
+        "water": "pond"
+      },
+      "nodeIds": [
+        10879580473, 10879580474, 7300598803, 4934499655, 10879580475,
+        10879580476, 4934499656, 4934499657, 7300598804, 10879580477,
+        10879580478, 10879580479, 10879580480, 10879580481, 10879580482,
+        10879580473
+      ],
+      "coordinates": [
+        [-123.1313137, 49.2984617],
+        [-123.1312226, 49.2985746],
+        [-123.1311994, 49.2985891],
+        [-123.1311766, 49.2985857],
+        [-123.1311641, 49.2985708],
+        [-123.1311277, 49.2985647],
+        [-123.1310872, 49.2985437],
+        [-123.1310727, 49.2984936],
+        [-123.1310882, 49.2984414],
+        [-123.1311527, 49.2984055],
+        [-123.1312389, 49.2983736],
+        [-123.131294, 49.2983621],
+        [-123.1312794, 49.2983872],
+        [-123.1312805, 49.2984183],
+        [-123.131293, 49.298438],
+        [-123.1313137, 49.2984617]
+      ]
+    },
+    {
+      "sourceId": 44032485,
+      "version": 32,
+      "timestamp": "2026-04-02T03:00:21Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/44032485/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/44032485",
+      "tags": {
+        "cycleway:left": "lane",
+        "cycleway:right": "separate",
+        "foot": "no",
+        "hgv": "no",
+        "highway": "trunk",
+        "lanes": "3",
+        "lanes:backward": "1",
+        "lanes:forward": "1",
+        "lanes:reversible": "1",
+        "maxspeed": "50",
+        "name": "Stanley Park Causeway",
+        "old_ref": "BC 1A",
+        "parking:both": "no",
+        "ref": "BC 99",
+        "sidewalk:both": "separate",
+        "surface": "asphalt"
+      },
+      "nodeIds": [
+        30350269, 10916904764, 559821558, 10916904768, 10916902167, 10916904771,
+        30350270, 10916904770, 10916902135, 10916904769, 3678418165,
+        10916904772, 6304203443
+      ],
+      "coordinates": [
+        [-123.137287, 49.2977254],
+        [-123.1373284, 49.297754],
+        [-123.1373694, 49.2977806],
+        [-123.1374138, 49.2978089],
+        [-123.1374575, 49.2978356],
+        [-123.1375053, 49.2978642],
+        [-123.1375495, 49.2978902],
+        [-123.1375941, 49.2979151],
+        [-123.1376416, 49.2979404],
+        [-123.1376982, 49.2979698],
+        [-123.1377568, 49.2979995],
+        [-123.1377969, 49.2980188],
+        [-123.1378396, 49.2980391]
+      ]
+    },
+    {
+      "sourceId": 44032488,
+      "version": 30,
+      "timestamp": "2026-04-02T03:00:21Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/44032488/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/44032488",
+      "tags": {
+        "bicycle": "no",
+        "bridge": "yes",
+        "foot": "no",
+        "hgv": "no",
+        "highway": "trunk",
+        "horse": "no",
+        "lanes": "2",
+        "layer": "1",
+        "maxspeed": "50",
+        "name": "Stanley Park Causeway",
+        "old_ref": "BC 1A",
+        "oneway": "yes",
+        "parking:both": "no",
+        "ref": "BC 99",
+        "sidewalk:left": "no",
+        "sidewalk:right": "separate",
+        "surface": "asphalt"
+      },
+      "nodeIds": [
+        559821555, 10916902156, 6476821162, 10916883995, 10916902164, 559821553
+      ],
+      "coordinates": [
+        [-123.1365625, 49.2970952],
+        [-123.1366134, 49.2971617],
+        [-123.1366702, 49.2972348],
+        [-123.1367297, 49.2973033],
+        [-123.1367943, 49.2973735],
+        [-123.136847, 49.2974253]
+      ]
+    },
+    {
+      "sourceId": 44032489,
+      "version": 30,
+      "timestamp": "2026-04-02T03:00:21Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/44032489/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/44032489",
+      "tags": {
+        "bicycle": "no",
+        "foot": "no",
+        "hgv": "no",
+        "highway": "trunk",
+        "horse": "no",
+        "lanes": "2",
+        "maxspeed": "50",
+        "name": "Stanley Park Causeway",
+        "old_ref": "BC 1A",
+        "oneway": "yes",
+        "parking:both": "no",
+        "ref": "BC 99",
+        "sidewalk:left": "no",
+        "sidewalk:right": "separate",
+        "surface": "asphalt"
+      },
+      "nodeIds": [
+        559821553, 10916902145, 10916902148, 3678418167, 6308098646,
+        10916904766, 10916902118, 30350269
+      ],
+      "coordinates": [
+        [-123.136847, 49.2974253],
+        [-123.1368665, 49.2974439],
+        [-123.1369304, 49.2975024],
+        [-123.1370068, 49.2975658],
+        [-123.1370745, 49.2976189],
+        [-123.137116, 49.2976462],
+        [-123.1371549, 49.2976673],
+        [-123.137287, 49.2977254]
+      ]
+    },
+    {
+      "sourceId": 70954663,
+      "version": 29,
+      "timestamp": "2026-04-03T03:10:14Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/70954663/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/70954663",
+      "tags": {
+        "bicycle": "no",
+        "foot": "no",
+        "hgv": "no",
+        "highway": "trunk",
+        "horse": "no",
+        "lanes": "3",
+        "lanes:backward": "1",
+        "lanes:forward": "1",
+        "lanes:reversible": "1",
+        "maxheight": "default",
+        "maxspeed": "60",
+        "name": "Stanley Park Causeway",
+        "old_ref": "BC 1A",
+        "parking:both": "no",
+        "ref": "BC 99;BC 1A",
+        "sidewalk:both": "separate",
+        "surface": "asphalt"
+      },
+      "nodeIds": [
+        6308098676, 30350287, 6308098635, 6308098681, 630163071, 4690817126
+      ],
+      "coordinates": [
+        [-123.1432599, 49.3103154],
+        [-123.143098, 49.310508],
+        [-123.1429773, 49.3106473],
+        [-123.142852, 49.310784],
+        [-123.1427218, 49.3109262],
+        [-123.1424644, 49.3112075]
+      ]
+    },
+    {
+      "sourceId": 70954678,
+      "version": 26,
+      "timestamp": "2026-04-03T03:10:14Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/70954678/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/70954678",
+      "tags": {
+        "bicycle": "no",
+        "foot": "no",
+        "highway": "trunk",
+        "horse": "no",
+        "lanes": "3",
+        "lanes:backward": "1",
+        "lanes:forward": "1",
+        "lanes:reversible": "1",
+        "maxspeed": "60",
+        "name": "Stanley Park Causeway",
+        "old_ref": "BC 1A",
+        "parking:both": "no",
+        "ref": "BC 99;BC 1A",
+        "sidewalk:both": "separate"
+      },
+      "nodeIds": [520753181, 10916919689, 520753183],
+      "coordinates": [
+        [-123.1437529, 49.3096637],
+        [-123.1436736, 49.3097777],
+        [-123.1435543, 49.3099393]
+      ]
+    },
+    {
+      "sourceId": 116061617,
+      "version": 16,
+      "timestamp": "2025-06-03T19:47:30Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/116061617/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/116061617",
+      "tags": {
+        "bicycle": "designated",
+        "cycleway:left": "no",
+        "cycleway:right": "lane",
+        "foot": "no",
+        "highway": "trunk_link",
+        "horse": "no",
+        "maxspeed": "30",
+        "oneway": "yes",
+        "parking:both": "no",
+        "sidewalk": "no",
+        "surface": "asphalt",
+        "trolley_wire": "yes"
+      },
+      "nodeIds": [559821534, 6308099692, 6308098670, 559821535, 3678153480],
+      "coordinates": [
+        [-123.1364563, 49.2963268],
+        [-123.1364382, 49.2962536],
+        [-123.1364328, 49.2961843],
+        [-123.1364372, 49.2961041],
+        [-123.136475, 49.295873]
+      ]
+    },
+    {
+      "sourceId": 116061634,
+      "version": 17,
+      "timestamp": "2025-04-08T15:14:03Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/116061634/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/116061634",
+      "tags": {
+        "bicycle": "yes",
+        "bus_bay": "right",
+        "cycleway:left": "no",
+        "foot": "no",
+        "highway": "trunk_link",
+        "lanes": "1",
+        "maxspeed": "30",
+        "oneway": "yes",
+        "parking:both": "no",
+        "sidewalk:left": "no",
+        "sidewalk:right": "separate",
+        "surface": "asphalt",
+        "trolley_wire": "yes"
+      },
+      "nodeIds": [6313319507, 1309735635, 1309735069, 6313319511],
+      "coordinates": [
+        [-123.1361009, 49.2966822],
+        [-123.1361791, 49.2969524],
+        [-123.1361915, 49.2970199],
+        [-123.1361996, 49.2970692]
+      ]
+    },
+    {
+      "sourceId": 156891517,
+      "version": 16,
+      "timestamp": "2025-01-11T23:33:12Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/156891517/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/156891517",
+      "tags": {
+        "bicycle": "designated",
+        "cycleway:left": "no",
+        "cycleway:right": "lane",
+        "highway": "trunk_link",
+        "lanes": "1",
+        "maxspeed": "30",
+        "oneway": "yes",
+        "parking:both": "no",
+        "sidewalk": "no",
+        "surface": "asphalt",
+        "trolley_wire": "yes"
+      },
+      "nodeIds": [
+        1309734864, 6313319509, 6313319510, 1309735653, 1309735082, 6313319513,
+        6313319514, 1309735266
+      ],
+      "coordinates": [
+        [-123.1362011, 49.2959089],
+        [-123.1361507, 49.2959967],
+        [-123.1361233, 49.2960532],
+        [-123.1360983, 49.2961127],
+        [-123.1360827, 49.2961649],
+        [-123.1360701, 49.2962181],
+        [-123.136061, 49.2962745],
+        [-123.136055, 49.2963264]
+      ]
+    },
+    {
+      "sourceId": 257712148,
+      "version": 29,
+      "timestamp": "2026-04-02T03:00:21Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/257712148/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/257712148",
+      "tags": {
+        "bicycle": "no",
+        "foot": "no",
+        "hgv": "no",
+        "highway": "trunk",
+        "horse": "no",
+        "lanes": "3",
+        "lanes:backward": "1",
+        "lanes:forward": "1",
+        "lanes:reversible": "1",
+        "maxheight": "5.2",
+        "maxspeed": "60",
+        "name": "Stanley Park Causeway",
+        "old_ref": "BC 1A",
+        "oneway": "no",
+        "parking:both": "no",
+        "ref": "BC 99",
+        "sidewalk:both": "separate",
+        "surface": "asphalt"
+      },
+      "nodeIds": [
+        6304203443, 10916904762, 30350271, 10916904767, 10916902109,
+        10916904763, 6304203436, 10916902132, 6304203429, 30350272, 3678418163,
+        6304203423, 6304203477, 30350273, 6304203471, 6304203465, 6304203459,
+        6304203453, 6304203447, 30350274, 6304203440, 6304203433, 6304203427,
+        3678418164, 6304203421, 6304203475, 6304203469, 30350275, 6304203463,
+        6304203457, 6304203451, 6304203445, 30350276, 6304203438, 6304203431,
+        6304203425, 6308099691, 6304203419, 30350277, 6308098669, 6308098648,
+        6308099695, 6308098673, 6308098652, 30350278, 6308098632, 6308098677,
+        630162989, 6308098656, 10916919687, 30350279, 6308098636, 630162991,
+        6308098682, 30350280, 6308098660, 6308098639, 6308108297, 30350281,
+        6308108300, 6308099686, 6308108303, 30350282, 6308108306, 6308098664,
+        6308108299, 630162993, 6308108302, 6308098643, 6308099690, 30350283,
+        6308108305, 6308098668, 6308108298, 30350284, 6308108301, 6308098647,
+        6308099694, 6308108304, 6308098672, 10916862076, 10916919688, 30350285,
+        6308098651, 6304203467, 6304203473, 30353347
+      ],
+      "coordinates": [
+        [-123.1378396, 49.2980391],
+        [-123.1378923, 49.2980622],
+        [-123.1379481, 49.2980862],
+        [-123.1380008, 49.2981078],
+        [-123.1380536, 49.2981286],
+        [-123.1381092, 49.2981506],
+        [-123.138188, 49.2981812],
+        [-123.1382661, 49.2982097],
+        [-123.1383781, 49.2982492],
+        [-123.1389233, 49.2984377],
+        [-123.1391447, 49.2985168],
+        [-123.1393567, 49.2985958],
+        [-123.1395723, 49.2986795],
+        [-123.1397818, 49.2987633],
+        [-123.1399919, 49.2988522],
+        [-123.1401928, 49.2989417],
+        [-123.1403954, 49.2990337],
+        [-123.1405969, 49.2991302],
+        [-123.1407942, 49.2992275],
+        [-123.1409889, 49.2993288],
+        [-123.1411783, 49.2994322],
+        [-123.1413622, 49.299535],
+        [-123.1415532, 49.2996458],
+        [-123.1417384, 49.2997552],
+        [-123.1419108, 49.2998631],
+        [-123.1420887, 49.2999822],
+        [-123.1422588, 49.3001012],
+        [-123.142451, 49.3002379],
+        [-123.1426756, 49.3004055],
+        [-123.14286, 49.3005536],
+        [-123.1430663, 49.3007208],
+        [-123.1432157, 49.3008515],
+        [-123.143358, 49.300979],
+        [-123.1434983, 49.3011102],
+        [-123.1436376, 49.3012474],
+        [-123.14379, 49.301404],
+        [-123.1438959, 49.3015168],
+        [-123.144027, 49.3016605],
+        [-123.1441489, 49.3018008],
+        [-123.1442653, 49.3019432],
+        [-123.1443783, 49.3020877],
+        [-123.1444831, 49.3022337],
+        [-123.1445836, 49.3023827],
+        [-123.1446768, 49.3025343],
+        [-123.1447622, 49.3026859],
+        [-123.144845, 49.3028381],
+        [-123.14492, 49.3029928],
+        [-123.1449897, 49.3031485],
+        [-123.145051, 49.3033037],
+        [-123.1451078, 49.3034625],
+        [-123.145158, 49.3036231],
+        [-123.1452005, 49.3037797],
+        [-123.1452392, 49.3039412],
+        [-123.1452717, 49.3041022],
+        [-123.145296, 49.3042641],
+        [-123.1453147, 49.3044252],
+        [-123.1453264, 49.3045898],
+        [-123.1453307, 49.3047492],
+        [-123.1453344, 49.3049108],
+        [-123.1453332, 49.3050714],
+        [-123.1453284, 49.3052339],
+        [-123.1453192, 49.3053942],
+        [-123.1453063, 49.3055586],
+        [-123.1452924, 49.3057214],
+        [-123.1452723, 49.3058829],
+        [-123.1452481, 49.3060453],
+        [-123.1452245, 49.3061993],
+        [-123.145196, 49.3063628],
+        [-123.1451608, 49.3065227],
+        [-123.1451243, 49.3066869],
+        [-123.1450839, 49.3068465],
+        [-123.1450415, 49.3070033],
+        [-123.1449951, 49.307162],
+        [-123.1449441, 49.3073217],
+        [-123.1448897, 49.3074757],
+        [-123.1448339, 49.3076324],
+        [-123.1447736, 49.307792],
+        [-123.1447084, 49.3079479],
+        [-123.1446388, 49.3081065],
+        [-123.1445683, 49.3082624],
+        [-123.1444938, 49.3084167],
+        [-123.1444161, 49.3085696],
+        [-123.1443345, 49.3087242],
+        [-123.1442485, 49.3088752],
+        [-123.1441631, 49.309024],
+        [-123.1440726, 49.3091756],
+        [-123.143976, 49.3093291]
+      ]
+    },
+    {
+      "sourceId": 325793279,
+      "version": 17,
+      "timestamp": "2026-04-03T03:10:14Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/325793279/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/325793279",
+      "tags": {
+        "bicycle": "no",
+        "foot": "no",
+        "hgv": "no",
+        "highway": "trunk",
+        "horse": "no",
+        "lanes": "4",
+        "lanes:backward": "1",
+        "lanes:forward": "2",
+        "lanes:reversible": "1",
+        "maxspeed": "60",
+        "name": "Stanley Park Causeway",
+        "old_ref": "BC 1A",
+        "oneway": "no",
+        "parking:both": "no",
+        "ref": "BC 99;BC 1A",
+        "sidewalk:both": "separate",
+        "surface": "asphalt"
+      },
+      "nodeIds": [30353347, 520753181],
+      "coordinates": [
+        [-123.143976, 49.3093291],
+        [-123.1437529, 49.3096637]
+      ]
+    },
+    {
+      "sourceId": 363687651,
+      "version": 15,
+      "timestamp": "2026-04-02T03:00:21Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/363687651/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/363687651",
+      "tags": {
+        "bicycle": "no",
+        "cycleway:left": "no",
+        "foot": "no",
+        "hgv": "no",
+        "highway": "trunk",
+        "horse": "no",
+        "lanes": "2",
+        "maxspeed": "50",
+        "name": "Stanley Park Causeway",
+        "old_ref": "BC 1A",
+        "oneway": "yes",
+        "parking:both": "no",
+        "ref": "BC 99",
+        "sidewalk": "no",
+        "surface": "asphalt"
+      },
+      "nodeIds": [
+        3678420979, 10916902166, 6308098653, 10916884001, 30350266, 10916884004,
+        6308098633, 10916902161, 30350265, 10916902146, 6308098678, 10916883992,
+        3678153479, 3678153480
+      ],
+      "coordinates": [
+        [-123.1363777, 49.2964147],
+        [-123.1363687, 49.2963747],
+        [-123.1363615, 49.2963347],
+        [-123.1363563, 49.2962932],
+        [-123.1363539, 49.2962529],
+        [-123.1363537, 49.2962124],
+        [-123.1363561, 49.2961733],
+        [-123.1363604, 49.2961322],
+        [-123.1363678, 49.2960919],
+        [-123.1363791, 49.2960539],
+        [-123.1363937, 49.2960188],
+        [-123.1364106, 49.2959836],
+        [-123.1364317, 49.2959453],
+        [-123.136475, 49.295873]
+      ]
+    },
+    {
+      "sourceId": 363693711,
+      "version": 15,
+      "timestamp": "2026-04-02T03:00:21Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/363693711/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/363693711",
+      "tags": {
+        "bicycle": "no",
+        "cycleway:left": "no",
+        "foot": "no",
+        "hgv": "no",
+        "highway": "trunk",
+        "horse": "no",
+        "lanes": "2",
+        "maxspeed": "50",
+        "name": "Stanley Park Causeway",
+        "old_ref": "BC 1A",
+        "oneway": "yes",
+        "parking:both": "no",
+        "ref": "BC 99",
+        "sidewalk": "no",
+        "surface": "asphalt"
+      },
+      "nodeIds": [
+        559821528, 10916902119, 559821529, 10916902131, 6308098666, 10916902151,
+        6308098641, 10916902114, 10916902112, 10916883997, 559821530,
+        10916902124, 6308098658, 10916902143, 559821533, 10916902107,
+        6308098684, 10916902139, 6308098638, 10916902136, 559821546,
+        10916902147, 6308098662, 10916884000, 559821549, 559821550, 6308098654,
+        6308098675, 559821540, 6308098634, 10916902149, 10916902125, 559821541
+      ],
+      "coordinates": [
+        [-123.1367575, 49.295036],
+        [-123.1367517, 49.2950701],
+        [-123.1367435, 49.2951038],
+        [-123.1367336, 49.2951364],
+        [-123.1367215, 49.2951706],
+        [-123.1367043, 49.2952081],
+        [-123.136684, 49.2952464],
+        [-123.1366609, 49.2952875],
+        [-123.1363787, 49.2957689],
+        [-123.1363579, 49.2958055],
+        [-123.1363355, 49.2958468],
+        [-123.1363151, 49.2958847],
+        [-123.136295, 49.2959249],
+        [-123.1362781, 49.2959649],
+        [-123.1362654, 49.2960045],
+        [-123.1362554, 49.2960414],
+        [-123.1362464, 49.2960815],
+        [-123.1362396, 49.2961222],
+        [-123.1362345, 49.2961633],
+        [-123.1362316, 49.2962008],
+        [-123.1362313, 49.296241],
+        [-123.1362335, 49.2962799],
+        [-123.1362377, 49.2963213],
+        [-123.1362438, 49.2963615],
+        [-123.136252, 49.296401],
+        [-123.1362713, 49.2964795],
+        [-123.1362925, 49.2965563],
+        [-123.1363187, 49.2966343],
+        [-123.1363509, 49.2967166],
+        [-123.1363847, 49.2967917],
+        [-123.1364234, 49.2968687],
+        [-123.1364641, 49.2969402],
+        [-123.1365102, 49.2970156]
+      ]
+    },
+    {
+      "sourceId": 604336387,
+      "version": 7,
+      "timestamp": "2025-06-03T19:47:29Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/604336387/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/604336387",
+      "tags": {
+        "bicycle": "designated",
+        "cycleway": "no",
+        "foot": "no",
+        "highway": "trunk_link",
+        "lanes": "1",
+        "maxspeed": "30",
+        "oneway": "yes",
+        "parking:both": "no",
+        "sidewalk": "no",
+        "surface": "asphalt",
+        "trolley_wire": "yes"
+      },
+      "nodeIds": [559821544, 11123514865, 11123514866, 520825291, 559821534],
+      "coordinates": [
+        [-123.13658, 49.2965529],
+        [-123.1365377, 49.2964892],
+        [-123.1365027, 49.2964323],
+        [-123.1364763, 49.2963781],
+        [-123.1364563, 49.2963268]
+      ]
+    },
+    {
+      "sourceId": 604336388,
+      "version": 9,
+      "timestamp": "2025-04-08T15:14:02Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/604336388/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/604336388",
+      "tags": {
+        "bicycle": "designated",
+        "cycleway:left": "no",
+        "cycleway:right": "lane",
+        "highway": "trunk_link",
+        "lanes": "1",
+        "maxspeed": "30",
+        "oneway": "yes",
+        "parking:both": "no",
+        "sidewalk:left": "no",
+        "sidewalk:right": "separate",
+        "surface": "asphalt",
+        "trolley_wire": "yes"
+      },
+      "nodeIds": [1309735266, 1309734926, 3678410852],
+      "coordinates": [
+        [-123.136055, 49.2963264],
+        [-123.1360507, 49.2963884],
+        [-123.136053, 49.2964582]
+      ]
+    },
+    {
+      "sourceId": 875696498,
+      "version": 5,
+      "timestamp": "2025-04-08T15:14:06Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/875696498/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/875696498",
+      "tags": {
+        "bicycle": "yes",
+        "highway": "tertiary",
+        "lanes": "2",
+        "motor_vehicle": "yes",
+        "name": "North Lagoon Drive",
+        "oneway": "yes",
+        "sidewalk:both": "separate",
+        "surface": "asphalt",
+        "turn:lanes": "left|right"
+      },
+      "nodeIds": [
+        3678410830, 629865900, 3678410848, 9611020023, 481754634, 629865904,
+        520825286, 9611020024, 1309735190, 481754635
+      ],
+      "coordinates": [
+        [-123.1379092, 49.2977817],
+        [-123.1377867, 49.2977374],
+        [-123.1376277, 49.2976594],
+        [-123.1375037, 49.2975671],
+        [-123.1373892, 49.2974565],
+        [-123.1371758, 49.2972595],
+        [-123.1370923, 49.2972048],
+        [-123.1370367, 49.2971811],
+        [-123.1370114, 49.2971732],
+        [-123.1369458, 49.2971462]
+      ]
+    },
+    {
+      "sourceId": 1044497036,
+      "version": 5,
+      "timestamp": "2025-04-08T15:14:04Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/1044497036/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/1044497036",
+      "tags": {
+        "bicycle": "yes",
+        "cycleway:left": "no",
+        "highway": "tertiary",
+        "lanes": "1",
+        "maxspeed": "30",
+        "motor_vehicle": "yes",
+        "name": "Stanley Park Drive",
+        "oneway": "yes",
+        "sidewalk:left": "no",
+        "sidewalk:right": "separate",
+        "surface": "asphalt"
+      },
+      "nodeIds": [
+        520825297, 9611020057, 9611020058, 3678410849, 559821567, 559821565,
+        1309735774, 30353201, 3677398340, 549653028
+      ],
+      "coordinates": [
+        [-123.1359711, 49.2973771],
+        [-123.1358669, 49.2973368],
+        [-123.1357981, 49.2972883],
+        [-123.1357257, 49.2972157],
+        [-123.1356132, 49.2971091],
+        [-123.1355078, 49.2970202],
+        [-123.1354341, 49.2969629],
+        [-123.1352762, 49.296903],
+        [-123.1351653, 49.2968924],
+        [-123.1349923, 49.2969151]
+      ]
+    },
+    {
+      "sourceId": 1252160596,
+      "version": 4,
+      "timestamp": "2026-04-03T03:10:14Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/1252160596/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/1252160596",
+      "tags": {
+        "bicycle": "no",
+        "foot": "no",
+        "hgv": "no",
+        "highway": "trunk",
+        "horse": "no",
+        "lanes": "4",
+        "lanes:backward": "2",
+        "lanes:forward": "1",
+        "lanes:reversible": "1",
+        "maxheight": "default",
+        "maxspeed": "60",
+        "name": "Stanley Park Causeway",
+        "old_ref": "BC 1A",
+        "parking:both": "no",
+        "ref": "BC 99;BC 1A",
+        "sidewalk:both": "separate",
+        "surface": "asphalt",
+        "turn:lanes:backward": "none|right"
+      },
+      "nodeIds": [520753183, 10916919686, 6308098676],
+      "coordinates": [
+        [-123.1435543, 49.3099393],
+        [-123.1433393, 49.310218],
+        [-123.1432599, 49.3103154]
+      ]
+    },
+    {
+      "sourceId": 1299818249,
+      "version": 5,
+      "timestamp": "2025-04-08T15:14:02Z",
+      "apiUrl": "https://api.openstreetmap.org/api/0.6/way/1299818249/full.json",
+      "sourceUrl": "https://www.openstreetmap.org/way/1299818249",
+      "tags": {
+        "bicycle": "yes",
+        "cycleway": "no",
+        "cycleway:left": "no",
+        "foot": "no",
+        "highway": "trunk_link",
+        "lanes": "1",
+        "maxspeed": "30",
+        "oneway": "yes",
+        "parking:both": "no",
+        "sidewalk:left": "no",
+        "sidewalk:right": "separate",
+        "surface": "asphalt",
+        "trolley_wire": "yes"
+      },
+      "nodeIds": [3678410852, 6313319503, 1309735139, 6313319507],
+      "coordinates": [
+        [-123.136053, 49.2964582],
+        [-123.1360627, 49.2965391],
+        [-123.1360768, 49.2966021],
+        [-123.1361009, 49.2966822]
+      ]
+    }
+  ],
+  "verification": "Before removing the offset south access proxies, replayed the full 150.9m southbound ramp, 262.4m northbound exit and 427m Georgia-to-northbound route: actual collision/navigation pass with zero missing ground asphalt. Primary geometry and explicit floor gates stay authoritative."
+}

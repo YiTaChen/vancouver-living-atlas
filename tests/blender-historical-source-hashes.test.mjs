@@ -2,7 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 test('ground handoff hashes use immutable consumers and still reject changed live GIS/assets', () => {
-  const result = spawnSync('python3', ['-c', String.raw`
+  const result = spawnSync(
+    'python3',
+    [
+      '-c',
+      String.raw`
 import ast,hashlib,json,subprocess
 from pathlib import Path
 from types import SimpleNamespace
@@ -16,29 +20,37 @@ check=namespace['check_source_reference_hashes']; base=json.loads((file.parent/'
 check(json.loads((file.parent/'source-references.json').read_text())['files'],base)
 historical=b'original runtime';current=b'current GIS';seen=[]
 def blob(path,revision):
- assert path=='lib/city/engine.ts' and revision==base;seen.append('historical');return historical
+ assert path in ['lib/city/engine.ts','tools/causeway-cpu.mjs'] and revision==base;seen.append('historical:'+path);return historical
 def live(path):
- assert path in ['public/data/buildings.geojson','lib/city/landmark-footprints.json'];seen.append('current');return current
+ assert path in ['public/data/buildings.geojson','lib/city/landmark-footprints.json','tools/other-consumer.mjs'];seen.append('current:'+path);return current
 record=lambda path,data:{'file':path,'sha256':hashlib.sha256(data).hexdigest(),'bytes':len(data)}
-rows=[record('lib/city/engine.ts',historical),record('public/data/buildings.geojson',current),record('lib/city/landmark-footprints.json',current)]
-check(rows,base,live,blob);assert seen==['historical','current','current']
-for rows in [[record('lib/city/engine.ts',current)],[record('public/data/buildings.geojson',historical)],[record('lib/city/landmark-footprints.json',historical)]]:
+rows=[record('lib/city/engine.ts',historical),record('tools/causeway-cpu.mjs',historical),record('public/data/buildings.geojson',current),record('lib/city/landmark-footprints.json',current),record('tools/other-consumer.mjs',current)]
+check(rows,base,live,blob);assert seen==['historical:lib/city/engine.ts','historical:tools/causeway-cpu.mjs','current:public/data/buildings.geojson','current:lib/city/landmark-footprints.json','current:tools/other-consumer.mjs']
+for rows in [[record('lib/city/engine.ts',current)],[record('tools/causeway-cpu.mjs',current)],[record('public/data/buildings.geojson',historical)],[record('lib/city/landmark-footprints.json',historical)],[record('tools/other-consumer.mjs',historical)]]:
  try:check(rows,base,live,blob)
  except ValueError as error:assert 'hash changed' in str(error)
  else:raise AssertionError('corrupt provenance or live GIS accepted')
-try:check([record('lib/city/engine.ts',historical)],'0'*40)
-except RuntimeError as error:assert 'Fetch full repository history' in str(error)
-else:raise AssertionError('missing immutable baseline fell back to current runtime')
+for path in ['lib/city/engine.ts','tools/causeway-cpu.mjs']:
+ try:check([record(path,historical)],'0'*40)
+ except RuntimeError as error:assert 'Fetch full repository history' in str(error)
+ else:raise AssertionError('missing immutable baseline fell back to current runtime: '+path)
 try:check([record('../private',current)],base,live,blob)
 except ValueError as error:assert 'path' in str(error)
 else:raise AssertionError('source path traversal accepted')
 print('Historical consumer, false hash, current GIS drift and unavailable revision: pass')
-`], { encoding: 'utf8', maxBuffer: 1024 * 1024 });
+`,
+    ],
+    { encoding: 'utf8', maxBuffer: 1024 * 1024 },
+  );
   assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
 });
 
 test('facade and window Python provenance keeps JSON live even inside lib/city', () => {
-  const result = spawnSync('python3', ['-c', String.raw`
+  const result = spawnSync(
+    'python3',
+    [
+      '-c',
+      String.raw`
 import ast,hashlib,tempfile
 from pathlib import Path
 from types import SimpleNamespace
@@ -67,16 +79,31 @@ with tempfile.TemporaryDirectory() as directory:
   else:raise AssertionError('corrupt history or changed current JSON accepted')
  assert len(calls)==5
 print('Two Python guards: TS/JS immutable; JSON current; false hashes rejected')
-`], { encoding: 'utf8', maxBuffer: 1024 * 1024 });
+`,
+    ],
+    { encoding: 'utf8', maxBuffer: 1024 * 1024 },
+  );
   assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
 });
 
 test('window JavaScript provenance rejects changed lib/city JSON without reading a historical blob', async () => {
-  const { validateSourceFixtures } = await import('../tools/assets/source-fitted-window-variants/source_fixtures.mjs');
+  const { validateSourceFixtures } =
+    await import('../tools/assets/source-fitted-window-variants/source_fixtures.mjs');
   const base = '1'.repeat(40);
-  const saved = { fixtures: [], sourceFingerprints: { 'lib/city/landmark-footprints.json': 'current-json-hash' } };
-  assert.doesNotThrow(() => validateSourceFixtures(structuredClone(saved), saved, base));
+  const saved = {
+    fixtures: [],
+    sourceFingerprints: {
+      'lib/city/landmark-footprints.json': 'current-json-hash',
+    },
+  };
+  assert.doesNotThrow(() =>
+    validateSourceFixtures(structuredClone(saved), saved, base),
+  );
   const changed = structuredClone(saved);
-  changed.sourceFingerprints['lib/city/landmark-footprints.json'] = 'outdated-json-hash';
-  assert.throws(() => validateSourceFixtures(changed, saved, base), /protected asset drift/);
+  changed.sourceFingerprints['lib/city/landmark-footprints.json'] =
+    'outdated-json-hash';
+  assert.throws(
+    () => validateSourceFixtures(changed, saved, base),
+    /protected asset drift/,
+  );
 });

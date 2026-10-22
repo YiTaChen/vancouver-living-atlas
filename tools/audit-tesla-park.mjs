@@ -78,6 +78,7 @@ function prepareCollisionSources(e) {
     },
     '\nreturn trees;',
   );
+  load('lib/city/environment.ts').reconcileParkRoadTrees(e, trees);
   e.detailedTrees = {
     trees: trees.map((tree) => ({ ...tree, y: e.elevation(tree.x, tree.z) })),
   };

@@ -27,16 +27,86 @@ import {
   proposeWestWalkSupports,
 } from './west-walk-supports';
 import noFill from './causeway-no-fill.json';
+import {
+  registerProspectSlab,
+  type ProspectOverpass,
+} from './prospect-overpass';
+import {
+  prepareStanleySouthRamp,
+  addStanleySouthRampMeshes,
+} from './stanley-south-ramp';
+import type { StanleyWestRamp } from './stanley-west-ramp';
+import {
+  addStanleyNorthboundExit,
+  prepareStanleyNorthboundExit,
+} from './stanley-northbound-exit';
+import {
+  northboundWalkShoulderOpenings,
+  conformStanleyNorthboundWalk,
+} from './stanley-northbound-crossing';
+import type { StanleyNorthboundRamp } from './stanley-northbound-ramp';
 
 export function createCausewayMeshes(e: CityEngine) {
   const data = e.data.causeway as CausewayData;
-  const geometry = buildCausewayGeometry(data.segments, {
+  const westRamp = e.data.stanleyWestRamp as StanleyWestRamp;
+  const northboundRamp = e.data.stanleyNorthboundRamp as StanleyNorthboundRamp;
+  const southRamp = prepareStanleySouthRamp({
+    project,
+    segments: data.segments,
     groundRoadTop: (x, z) => e.data.roadRelief(x, z) + 1.05,
-    groundElevation: (x, z) => e.elevation(x, z),
-    retainingRouteIds: new Set(['causeway-north']),
-    allowedModes: (_id, kind) => (kind === 'road' ? ['drive'] : []),
   });
+  e.data.stanleySouthRamp = southRamp;
+  prepareStanleyNorthboundExit(e);
+  const geometry = buildCausewayGeometry(
+    [
+      ...data.segments,
+      ...(e.data.prospectOverpass as ProspectOverpass).rampSegments,
+    ],
+    {
+      groundRoadTop: (x, z) => e.data.roadRelief(x, z) + 1.05,
+      groundElevation: (x, z) => e.elevation(x, z),
+      retainingRouteIds: new Set(['causeway-north']),
+      surfaceTop: (e.data.prospectOverpass as ProspectOverpass).junctionHeight,
+      shoulderOpenings: (id) => [
+        ...southRamp.shoulderOpenings(id),
+        ...westRamp.shoulderOpenings(id),
+        ...northboundRamp.shoulderOpenings(id),
+        ...(
+          e.data.prospectOverpass as ProspectOverpass
+        ).junctionShoulderOpenings(id),
+      ],
+      railAllowed: (id, x, z) => {
+        if (
+          !southRamp.railAllowed(id, x, z) ||
+          !westRamp.railAllowed(id, x, z) ||
+          !northboundRamp.railAllowed(id, x, z)
+        )
+          return false;
+        if (id.routeId !== 'prospect:east-exit') return true;
+        const p = e.data.prospectOverpass as ProspectOverpass;
+        const join = p.rampSegments.at(-1)!.b;
+        if (Math.hypot(x - join[0], z - join[1]) > 20) return true;
+        return !p.segments.some((s) => {
+          const dx = s.b[0] - s.a[0],
+            dz = s.b[1] - s.a[1],
+            t = Math.max(
+              0,
+              Math.min(
+                1,
+                ((x - s.a[0]) * dx + (z - s.a[1]) * dz) / (dx * dx + dz * dz),
+              ),
+            );
+          return (
+            Math.hypot(x - s.a[0] - t * dx, z - s.a[1] - t * dz) <
+            s.width / 2 + 0.4
+          );
+        });
+      },
+      allowedModes: (_id, kind) => (kind === 'road' ? ['drive'] : []),
+    },
+  );
   addCausewayBuffers(e, geometry.buffers, 'Stanley Park Causeway');
+  addStanleySouthRampMeshes(e, southRamp);
   registerCausewayGeometry(e, geometry);
   addCausewayBuffers(e, data.main.buffers, 'Lions Gate Bridge');
   e.data.causewayTravelSurfaces.push(...data.main.surfaces);
@@ -100,22 +170,129 @@ export function createCausewayMeshes(e: CityEngine) {
   const allPaths = [...northern.paths, ...connectors.segments, ...chilco];
   const mainStart = data.main.segments[0].a,
     mainEnd = data.main.segments.at(-1)!.b;
+  const mainRoadLookup = createCausewayTriangleLookup(geometry);
+  const crossingTop = (x: number, z: number, fallback: number) => {
+    const hit = mainRoadLookup.heightAt(
+      x,
+      z,
+      { surfaceId: 'lions:road', layer: 1 },
+      'road',
+    );
+    if (hit) return hit.y;
+    const p = e.data.prospectOverpass as ProspectOverpass;
+    let best = Infinity,
+      top = fallback - 0.13;
+    for (const s of p.rampSegments) {
+      const dx = s.b[0] - s.a[0],
+        dz = s.b[1] - s.a[1],
+        t = Math.max(
+          0,
+          Math.min(
+            1,
+            ((x - s.a[0]) * dx + (z - s.a[1]) * dz) / (dx * dx + dz * dz),
+          ),
+        ),
+        gap = Math.hypot(x - s.a[0] - dx * t, z - s.a[1] - dz * t);
+      if (gap < best) {
+        best = gap;
+        top = s.h0 + (s.h1 - s.h0) * t;
+      }
+    }
+    return p.junctionHeight('prospect:east-exit', x, z, top);
+  };
   const paths = buildCausewayGeometry(allPaths, {
     shoulderWidthM: 0.25,
     shoulderRiseM: 0,
     rails: true,
     paint: false,
     junctionFills: false,
+    shoulderOpenings: (id) => northboundWalkShoulderOpenings(e, id),
+    sourceTop: (sourceId, x, z, base) =>
+      sourceId === 1252160599
+        ? crossingTop(x, z, base)
+        : northboundRamp.pathTop(
+            sourceId,
+            x,
+            z,
+            westRamp.pathTop(sourceId, x, z, base),
+          ),
     bridgeSourceIds: new Set([
       70954668, 70954672, 70954677, 70954679, 1349155154, 1349155147,
     ]),
     allowedModes: (id) =>
-      id.sourceId === 1296092759 ||
-      connectors.excludedGroundSourceIds.some((n) => n === id.sourceId)
-        ? ['walk']
-        : northern.allowedModes(id.sourceId),
-    railAllowed: (id) => !LIONS_WALK_SOURCES.has(id.sourceId),
+      [1252160599, 1074018477, 1252160597].includes(id.sourceId)
+        ? ['walk', 'drive']
+        : id.sourceId === 1296092759 ||
+            connectors.excludedGroundSourceIds.some((n) => n === id.sourceId)
+          ? ['walk']
+          : northern.allowedModes(id.sourceId),
+    railAllowed: (id, x, z) => {
+      if (LIONS_WALK_SOURCES.has(id.sourceId)) return false;
+      // The mapped northbound motor ramp crosses only this finite green
+      // cycleway, with its source top conformed to the actual motor floor.
+      if ([1252160597, 70954671, 877408903].includes(id.sourceId))
+        for (const s of northboundRamp.segments) {
+          const dx = s.b[0] - s.a[0],
+            dz = s.b[1] - s.a[1],
+            t = Math.max(
+              0,
+              Math.min(
+                1,
+                ((x - s.a[0]) * dx + (z - s.a[1]) * dz) / (dx * dx + dz * dz),
+              ),
+            );
+          if (
+            Math.hypot(x - s.a[0] - t * dx, z - s.a[1] - t * dz) <
+            s.width / 2 + 0.4
+          )
+            return false;
+        }
+      // Only the primary West green crossing and its two immediate source
+      // neighbours open inside the actual finite motor-road corridor.
+      if ([1074018477, 70954674, 877408899].includes(id.sourceId))
+        for (const s of westRamp.segments) {
+          if (s.s0 > 42) continue;
+          const dx = s.b[0] - s.a[0],
+            dz = s.b[1] - s.a[1],
+            t = Math.max(
+              0,
+              Math.min(
+                1,
+                ((x - s.a[0]) * dx + (z - s.a[1]) * dz) / (dx * dx + dz * dz),
+              ),
+            );
+          if (
+            Math.hypot(x - s.a[0] - t * dx, z - s.a[1] - t * dz) <
+            s.width / 2 + 0.4
+          )
+            return false;
+        }
+      // Primary OSM1252160599 explicitly maps the green at-grade cycle crossing
+      // at the east vehicle off-ramp. Open only that physical roadway corridor;
+      // adjacent cycle-path protection and every other Causeway rail remain.
+      if ([1252160599, 877408903, 877408901].includes(id.sourceId))
+        for (const s of (e.data.prospectOverpass as ProspectOverpass)
+          .rampSegments) {
+          const dx = s.b[0] - s.a[0],
+            dz = s.b[1] - s.a[1],
+            t = Math.max(
+              0,
+              Math.min(
+                1,
+                ((x - s.a[0]) * dx + (z - s.a[1]) * dz) / (dx * dx + dz * dz),
+              ),
+            );
+          if (
+            Math.hypot(x - s.a[0] - dx * t, z - s.a[1] - dz * t) <
+            s.width / 2 + 0.4
+          )
+            return false;
+        }
+      return true;
+    },
   });
+  northboundRamp.conformPathGeometry(paths);
+  conformStanleyNorthboundWalk(e, paths);
   addCausewayBuffers(e, paths.buffers, 'Separated Causeway paths', true);
   const railing = buildLionsRailings(paths, allPaths, mainStart, mainEnd);
   addStreetMeshes(
@@ -182,6 +359,7 @@ export function createCausewayMeshes(e: CityEngine) {
 
   e.data.causewayPathSegments = allPaths;
   const connections: SurfaceConnection[] = [];
+  connections.push(...southRamp.connections);
   const road = { surfaceId: 'lions:road', layer: 1 },
     ground = { surfaceId: 'ground', layer: 0 };
   const addGate = (
@@ -258,10 +436,52 @@ export function createCausewayMeshes(e: CityEngine) {
       });
   // Source 1277976050 is bus=designated, motorcar=no. Its visual node datum
   // stays intact; it does not become a car connection merely by touching XY.
+  const prospect = e.data.prospectOverpass as ProspectOverpass;
+  if (prospect) {
+    addCausewayBuffers(
+      e,
+      prospect.geometry.buffers,
+      'Prospect Point Park Drive',
+      false,
+      true,
+      true,
+    );
+    const start = e.data.bridgeSurfaces.length;
+    registerCausewayGeometry(e, prospect.geometry);
+    for (const surface of e.data.bridgeSurfaces.slice(start))
+      surface.name = 'Prospect Point Park Drive';
+    registerProspectSlab(e, prospect);
+    connections.push(...prospect.gates);
+  }
+  addCausewayBuffers(
+    e,
+    westRamp.geometry.buffers,
+    'Stanley Park legal West motor exit',
+    false,
+    true,
+  );
+  const westStart = e.data.bridgeSurfaces.length;
+  registerCausewayGeometry(e, westRamp.geometry);
+  for (const surface of e.data.bridgeSurfaces.slice(westStart))
+    surface.name = 'Stanley Park legal West motor exit';
+  connections.push(...westRamp.connections);
+  addCausewayBuffers(
+    e,
+    northboundRamp.geometry.buffers,
+    'Stanley Park legal northbound motor ramp',
+    false,
+    true,
+  );
+  const northboundStart = e.data.bridgeSurfaces.length;
+  registerCausewayGeometry(e, northboundRamp.geometry);
+  for (const surface of e.data.bridgeSurfaces.slice(northboundStart))
+    surface.name = 'Stanley Park legal northbound motor ramp';
+  connections.push(...northboundRamp.connections);
   e.data.causewayConnections = connections;
   e.data.travelSurfaces = new TravelSurfaceIndex(
     e.data.causewayTravelSurfaces || [],
   );
+  addStanleyNorthboundExit(e);
   e.data.causewayGeometryStats = { ...geometry.stats, main: data.main.stats };
 }
 
@@ -270,6 +490,8 @@ export function addCausewayBuffers(
   buffers: Partial<Record<BufferKind | 'platform', number[]>>,
   name: string,
   path = false,
+  parkTreeClearance = false,
+  exactSlab = false,
 ) {
   const colors: Record<string, number> = {
     shoulder: 0xafb1a5,
@@ -301,6 +523,7 @@ export function addCausewayBuffers(
             i % 3 === 0 ? [n / 3, positions[i + 2] / 3] : [],
           )
         : undefined;
+    const before = e.roads.children.length;
     addStreetMeshes(
       e,
       positions,
@@ -312,6 +535,14 @@ export function addCausewayBuffers(
       true,
       !kind.startsWith('paint'),
     );
+    if (parkTreeClearance && kind === 'asphalt')
+      for (const mesh of e.roads.children.slice(before))
+        mesh.userData.parkTreeClearance = true;
+    if (exactSlab && ['slab', 'asphalt', 'shoulder'].includes(kind))
+      for (const mesh of e.roads.children.slice(before)) {
+        mesh.userData.prospectBridgeCollision = true;
+        if (kind === 'slab') mesh.userData.prospectSlab = true;
+      }
   }
 }
 

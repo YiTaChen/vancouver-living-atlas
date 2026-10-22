@@ -1,0 +1,529 @@
+{
+  "kind": "south-legal-ramp-physical-paving-v1",
+  "sourceHashes": [
+    {
+      "file": "lib/city/assets/cockpits.ts",
+      "bytes": 21892,
+      "sha256": "b8aed3f6379dfdc9a5a1115382e36af3b17e7183a29dd1e7458a10ac4d2465fc"
+    },
+    {
+      "file": "lib/city/assets/roadster.ts",
+      "bytes": 13761,
+      "sha256": "e3e25bba28d32df58cbd1b26c66fb5b7657eb04bd4ab9688156d770eb58436f0"
+    },
+    {
+      "file": "lib/city/assets/walker.ts",
+      "bytes": 17246,
+      "sha256": "b99690de4da8f38fb925685d4af2fce64fb6388d7402381d1dfee4efcc6d48e9"
+    },
+    {
+      "file": "lib/city/beach-ground.ts",
+      "bytes": 6009,
+      "sha256": "bc7184a1b222ce138e3b9bad11263676bd9166dd06773b5bc91ecc9b5e5c48d7"
+    },
+    {
+      "file": "lib/city/beach-surface.ts",
+      "bytes": 9450,
+      "sha256": "bd0f4c31733e1bef970a520f971532e6a53dc655629df54f5b92ffa3eb8d65c7"
+    },
+    {
+      "file": "lib/city/boat-controller.ts",
+      "bytes": 5330,
+      "sha256": "e64b57cee7ca233ede9fcdfc277d46aff3a98269d88b68052365e2ba0aff4d33"
+    },
+    {
+      "file": "lib/city/boat-physics.ts",
+      "bytes": 2590,
+      "sha256": "6ce2413d9e082e1d17f0d40e1bc67ef48056b3240adb99b1b6fe25a62b6f2954"
+    },
+    {
+      "file": "lib/city/bridges.ts",
+      "bytes": 6746,
+      "sha256": "6d78e7f5257551886e5bf467d3f36bee864f3a9171c89967883740d862860d66"
+    },
+    {
+      "file": "lib/city/causeway-city-cuts.json",
+      "bytes": 7119,
+      "sha256": "3c8dc38a1e80a3c8266421b951104d1f3b45300e9757ac1b3ff5f4e9e6f89cc3"
+    },
+    {
+      "file": "lib/city/causeway-geometry.ts",
+      "bytes": 34004,
+      "sha256": "ad5013336cc26d0233e34eb94c2508c14a19d1a29e42dbeab374b0b371598624"
+    },
+    {
+      "file": "lib/city/causeway-meshes.ts",
+      "bytes": 19389,
+      "sha256": "9c1464ee86ccf970c49f1e0c1bc15ed5bde729ae72ff26ee6cf7c6328491e549"
+    },
+    {
+      "file": "lib/city/causeway-no-fill.json",
+      "bytes": 4730,
+      "sha256": "176ee3db09189bc3d820d2e4fbe90bcb0fde7fc091cc9841dc075d5eb9d8b6c1"
+    },
+    {
+      "file": "lib/city/causeway-profile.ts",
+      "bytes": 15997,
+      "sha256": "ed35fd3b9477254b685e3138114da71cf90405df683d0678c391224695759532"
+    },
+    {
+      "file": "lib/city/causeway-walkways.ts",
+      "bytes": 2728,
+      "sha256": "7cdb7b5e65f8acb358c12f762491a16b3050fa7a5ec594559bb0821ba62faa81"
+    },
+    {
+      "file": "lib/city/causeway.ts",
+      "bytes": 7390,
+      "sha256": "d19303c0b6597f7cbeb26877c9f06c8a3b1e19febe09fbe1af9659c4f2f5c74f"
+    },
+    {
+      "file": "lib/city/citizen.ts",
+      "bytes": 10748,
+      "sha256": "e16100c4a6ad929065425588351d832fbfdc51e8b104aae75a5af7e362a10d65"
+    },
+    {
+      "file": "lib/city/city-surface-material.ts",
+      "bytes": 4164,
+      "sha256": "07ea4d8c25926f703efa575e455efa7145bddda8dd8b1270d8e55149262f969e"
+    },
+    {
+      "file": "lib/city/driver-camera.ts",
+      "bytes": 1318,
+      "sha256": "911765020382258030d2dc8f386cfc7dc1f720aab5d88bbf4c04ef93beb903d0"
+    },
+    {
+      "file": "lib/city/driving-steering.ts",
+      "bytes": 345,
+      "sha256": "a58842cdcc28c64421ef53058bd3e6077f5ab7ebea55eb633ffe2616f01dfe8e"
+    },
+    {
+      "file": "lib/city/engine.ts",
+      "bytes": 74868,
+      "sha256": "5ff2b653f03e4f9375367262aecc4289ba1a2f7bb941c19ed4b008365811ac72"
+    },
+    {
+      "file": "lib/city/environment.ts",
+      "bytes": 28128,
+      "sha256": "492e2e9a02a91fdaf3fcb2448e3e774949ba5a4d0382e7ea51cf93dd983001c0"
+    },
+    {
+      "file": "lib/city/geo.ts",
+      "bytes": 2769,
+      "sha256": "60c01edb97732574f980770a2f0499f2eb9021a0d8075eb272ea18785570494e"
+    },
+    {
+      "file": "lib/city/ground-harmonization-scopes.ts",
+      "bytes": 1286,
+      "sha256": "982a4d35aa8dbd0701a40e940de27d37de00572422d8455452bb43905986f4fa"
+    },
+    {
+      "file": "lib/city/ground-surface.ts",
+      "bytes": 10472,
+      "sha256": "7b50984a4f16b808ed21248cf49cf99e7c3d4f92baf6fadf72f62e873e9eea06"
+    },
+    {
+      "file": "lib/city/ground-visibility-mesh.ts",
+      "bytes": 8203,
+      "sha256": "e5413a0f8830cf15ebb3b2993575df41e408c9ce7810cb372f09182350769e58"
+    },
+    {
+      "file": "lib/city/ground-visibility.ts",
+      "bytes": 16647,
+      "sha256": "4b8a2f55bd0337f67653ae42e2ab6b17871b18fe07fb7790b7ef4d07f679652e"
+    },
+    {
+      "file": "lib/city/harbour-models.ts",
+      "bytes": 36176,
+      "sha256": "3d494df8a5b214327dcdfb4facb1fe79aca27d22a410bf39a8ce11d91e26a68d"
+    },
+    {
+      "file": "lib/city/harmonize-ground.ts",
+      "bytes": 2958,
+      "sha256": "701b95c742111b032512c82d082348fafb8242783e1aa9d3a88d62e1b5d14f50"
+    },
+    {
+      "file": "lib/city/heritage-paving-material.ts",
+      "bytes": 1753,
+      "sha256": "0808cbc463d1718b14c4f85b61debaece6338e7fe4b6830418df2398bb945ce7"
+    },
+    {
+      "file": "lib/city/heritage-paving.ts",
+      "bytes": 10298,
+      "sha256": "23ad05162e4aa83f37c63a4cc64f1c1af44e1b0905ce6b0b4ff53a476ae91cac"
+    },
+    {
+      "file": "lib/city/landmark-footprints.json",
+      "bytes": 5725,
+      "sha256": "cf44d69c0411de2488bc86fa5b21ed48eddadbad4a16fcd3a7a4b06ead01b74b"
+    },
+    {
+      "file": "lib/city/lions-railings.ts",
+      "bytes": 5041,
+      "sha256": "87a94bd5d8f824b874ad9e34456a9cf56abc08815ab8b64f7420584d9af77716"
+    },
+    {
+      "file": "lib/city/main-cross-section-data.json",
+      "bytes": 6809,
+      "sha256": "23be5e7cd2c839f02d804f3a10b9c288d9a4590b2124b88b707628bf1a4c1bd0"
+    },
+    {
+      "file": "lib/city/main-cross-section.ts",
+      "bytes": 4604,
+      "sha256": "5de0e94002db2fe4d1557adbc806e71d9c20004a8ebd7c24d2c30b3502450f5c"
+    },
+    {
+      "file": "lib/city/main-road-geometry.ts",
+      "bytes": 13327,
+      "sha256": "ae985d665a924bdfb0096eaa7c8000bb604531541163422960221ee2e7565e8f"
+    },
+    {
+      "file": "lib/city/material-library.ts",
+      "bytes": 10168,
+      "sha256": "009ea28f25e8d7e315f27ae4dc7965024d15cac92759c3456b0d0d3c035e3768"
+    },
+    {
+      "file": "lib/city/navigation.ts",
+      "bytes": 53623,
+      "sha256": "76f2f42c9a4e2e49fdd9ddcab6d55049ad4f16a54d9ca5a0fbc1a0792f0ead1c"
+    },
+    {
+      "file": "lib/city/north-walkways-source.json",
+      "bytes": 31469,
+      "sha256": "7cbfbe023ec94f43611d3b2fc8ca6587e92aae7dd69eb5eb3e3107ad08d22f18"
+    },
+    {
+      "file": "lib/city/numbered-blocks.ts",
+      "bytes": 6195,
+      "sha256": "354b46c50c9d794d4058caa9397273884cb6ef647482fe9d4aa37e8a95596b9c"
+    },
+    {
+      "file": "lib/city/ordered-bounds.ts",
+      "bytes": 2487,
+      "sha256": "e8a850330722f32435ccec33f4059743945bf90fa31ef36b3fa6d1b827a505c6"
+    },
+    {
+      "file": "lib/city/park-paths.ts",
+      "bytes": 1364,
+      "sha256": "b7f24b99b0faa939258bdb9e3e33650309ef8b84d8e44e6a396a56e5001e9311"
+    },
+    {
+      "file": "lib/city/pavement.ts",
+      "bytes": 17334,
+      "sha256": "bda53bbfd8ac68252ae85ff322a5258e10f83af8ec2ab3f513cf5227f55c1e10"
+    },
+    {
+      "file": "lib/city/placement-geometry.ts",
+      "bytes": 4670,
+      "sha256": "54a9cf85a9dc1a1cce8d7bd0ba46da5419550893d345b70fd273d1e6daaa682d"
+    },
+    {
+      "file": "lib/city/prospect-overpass.ts",
+      "bytes": 28634,
+      "sha256": "ff53fb0f5e9a47a6571173d695823b204ae3a179f50cb27da8ff3742855a3961"
+    },
+    {
+      "file": "lib/city/prospect-point-source.json",
+      "bytes": 15013,
+      "sha256": "8c865a7cc648a2f0c52a0204002b74fdca8dbd71deb7a9c00c519c9cc83eb6b3"
+    },
+    {
+      "file": "lib/city/region-rules.ts",
+      "bytes": 5085,
+      "sha256": "76ee3956e6f8c2c2f14f3e31f62ab83f1f7d5167fae8b8ba3b0ef465dde83617"
+    },
+    {
+      "file": "lib/city/road-graph.ts",
+      "bytes": 22003,
+      "sha256": "ee710ab807b3be51be0db017e8dc1c0bbe68fdaf9608e5c3115fd2e733205cfa"
+    },
+    {
+      "file": "lib/city/road-lowering.ts",
+      "bytes": 15869,
+      "sha256": "a700aaaad984e77734cd1e5df69142ba7659d13dd7026b0983d239378a0b0b5d"
+    },
+    {
+      "file": "lib/city/road-surfaces.ts",
+      "bytes": 4759,
+      "sha256": "ccd98e61dbcc321d47d5c1e6e0826431f4c5d04fa34c8b434d0984b24e831a4d"
+    },
+    {
+      "file": "lib/city/road-trim.ts",
+      "bytes": 1546,
+      "sha256": "5023111cf6fbcc3798f5e78fcdf7467becd6e7e32a986a8ce625272325cb6671"
+    },
+    {
+      "file": "lib/city/shore-lowering.ts",
+      "bytes": 3604,
+      "sha256": "69ffc92652fc382a0fd5ced83afffd47eeda3ac1a64f26ab50ac8e6ba93a5853"
+    },
+    {
+      "file": "lib/city/south-profile-data.json",
+      "bytes": 81546,
+      "sha256": "d83c5a70096d873cb87049ee1632ef2ce82a44d953566cd77c72e6148885a901"
+    },
+    {
+      "file": "lib/city/south-profile.ts",
+      "bytes": 8614,
+      "sha256": "ae2faee2934d62e8d03ed2799479b1acf28ca00b1108cac4700254cdd04927b8"
+    },
+    {
+      "file": "lib/city/stanley-drive-corrections-source.json",
+      "bytes": 12943,
+      "sha256": "a6090210da5476f413979da56233b53d39608c7aca29eb5157c050e7a946c196"
+    },
+    {
+      "file": "lib/city/stanley-drive-corrections.ts",
+      "bytes": 9421,
+      "sha256": "3d17676a4734871a446ad455da4bd3b709a7c842f3684d56d3c0a757c7623ce6"
+    },
+    {
+      "file": "lib/city/stanley-northbound-crossing-source.json",
+      "bytes": 4692,
+      "sha256": "abf2ae56f959408cb0bfdf068927812ebaa0dd70f8aee53423cbf97f1b520afd"
+    },
+    {
+      "file": "lib/city/stanley-northbound-crossing.ts",
+      "bytes": 9100,
+      "sha256": "e45280fb82ae9dcb9f4601f2adb491b913b86d537ad25cd2474c2961bcbea44a"
+    },
+    {
+      "file": "lib/city/stanley-northbound-exit-source.json",
+      "bytes": 6478,
+      "sha256": "2798e73473800c4a4fd33d59f758194680c7a6c89d02ead2985886d0cdb77ce5"
+    },
+    {
+      "file": "lib/city/stanley-northbound-exit.ts",
+      "bytes": 6692,
+      "sha256": "0e3a8524669d8fd5168ba6757ceaedaed164c526ca390ee2e106e241dbc11b41"
+    },
+    {
+      "file": "lib/city/stanley-northbound-ramp-source.json",
+      "bytes": 17810,
+      "sha256": "56737a3ff03cc8809bbb4f15198deb3045243697c0df222a1f9417d1b4d68875"
+    },
+    {
+      "file": "lib/city/stanley-northbound-ramp.ts",
+      "bytes": 15462,
+      "sha256": "64079ffc1c9f8c5e8efb602029fda45a9bbec9070dd6fbca666f54c2ca34776e"
+    },
+    {
+      "file": "lib/city/stanley-road-access-source.json",
+      "bytes": 45289,
+      "sha256": "ec6f5a4a4da76f31cb32380f8749d8349021fd2f35057ee0e9e161c388887c59"
+    },
+    {
+      "file": "lib/city/stanley-road-access.ts",
+      "bytes": 1824,
+      "sha256": "5d674f87e997759d9540133c0101be09999a0d2b6368a7d4df41d9d965eefd25"
+    },
+    {
+      "file": "lib/city/stanley-south-ramp-source.json",
+      "bytes": 4713,
+      "sha256": "59697e5c20e291c7523c502117b44112b739cfbf2c6b52d1d8ae425cd93e25ad"
+    },
+    {
+      "file": "lib/city/stanley-south-ramp.ts",
+      "bytes": 20983,
+      "sha256": "2e52fd3e6cea94f8db790aea6d49b3deebd270c64a7921de721a685237d6737b"
+    },
+    {
+      "file": "lib/city/stanley-west-ramp-source.json",
+      "bytes": 8243,
+      "sha256": "c193bc3bce9c093610102e43628ab9a5a98e0e3ffb59e8a05eb42ab825851c6e"
+    },
+    {
+      "file": "lib/city/stanley-west-ramp.ts",
+      "bytes": 15018,
+      "sha256": "bf0f63d672f2aad4b3dbe5d9d070ae0bc5a2eb80b981820c2efa574d7d8ca39f"
+    },
+    {
+      "file": "lib/city/street-curb-extensions.json",
+      "bytes": 1317,
+      "sha256": "4e721370f8e9fa79c1d71be7996634566afa295ab69640164246d1cd776ffe90"
+    },
+    {
+      "file": "lib/city/street-layout.ts",
+      "bytes": 5074,
+      "sha256": "d99059f249075f4657c7a235a89e3cf83214d702c53ab40d7c8bddd7b86e9af5"
+    },
+    {
+      "file": "lib/city/street-meshes.ts",
+      "bytes": 2387,
+      "sha256": "ba9dbda647e36067d1ec60ade069fdad87e0b78e366c0848a7ab5f490dfba13b"
+    },
+    {
+      "file": "lib/city/surface-meshing.ts",
+      "bytes": 4386,
+      "sha256": "0ab0e7a06f84eb7411d5063de55286172b4bddbb9283089e541b994c71ec69a7"
+    },
+    {
+      "file": "lib/city/surface-reachability.ts",
+      "bytes": 8721,
+      "sha256": "8609f5670bfeca50b0c8054df75b70458cdb829ec94e8e5e7f8aca9d53298062"
+    },
+    {
+      "file": "lib/city/terrain-draped-path.ts",
+      "bytes": 5696,
+      "sha256": "c7c36b46a297d7d5a54f19af30576a461788637014477046f18e8f04e07b44c6"
+    },
+    {
+      "file": "lib/city/touch-input.ts",
+      "bytes": 609,
+      "sha256": "f8cd660e1bb3d944faab2c6fcdad7f9aa59cc479a24ccca5bd2091c91303b4b1"
+    },
+    {
+      "file": "lib/city/traffic-stop-state.ts",
+      "bytes": 2097,
+      "sha256": "179661fc4da282933c89fdc79eeb2d58b1825c39b1adebd84e3a931a1062f240"
+    },
+    {
+      "file": "lib/city/traffic-stop.ts",
+      "bytes": 7717,
+      "sha256": "e9717caf7f082d1edca3e0d5d35580281e55a005df20a31c86b9e34fb2975602"
+    },
+    {
+      "file": "lib/city/travel-camera.ts",
+      "bytes": 1360,
+      "sha256": "b37cab09e04a356de2dce1fc81e043fe6d4da43a651927ea48eaacada7e9a5d8"
+    },
+    {
+      "file": "lib/city/travel-surfaces.ts",
+      "bytes": 4511,
+      "sha256": "103d03484c129540db1a4f6101795fe5b8bd42cd3dc764f57ce4f7333a839a39"
+    },
+    {
+      "file": "lib/city/tree-road-clearance.ts",
+      "bytes": 8789,
+      "sha256": "7001a7431153894e291ddceff0ce080355a9c566349db18ff72daabc2d1a14d5"
+    },
+    {
+      "file": "lib/city/upper-walkway-profile.ts",
+      "bytes": 17545,
+      "sha256": "01f18b04edd7de6915a524fb91d23c138dcfdc1951c23ae71d9930de8c7b3920"
+    },
+    {
+      "file": "lib/city/vehicle-condition.ts",
+      "bytes": 4928,
+      "sha256": "d09b89aadac03874620a0a63f32211017128b43aa4ccf19b6d0a7e1b4549a425"
+    },
+    {
+      "file": "lib/city/vehicle-damage-visuals.ts",
+      "bytes": 30929,
+      "sha256": "bac1323b18ba049fd803d271f307b06cafbe4e9e85dea9a6cae28c6cee526699"
+    },
+    {
+      "file": "lib/city/vehicle-impact.ts",
+      "bytes": 12076,
+      "sha256": "aff9582abcbea6d22d98a804a587bb3544c0e18c2a01cb4219aa31e57d72239a"
+    },
+    {
+      "file": "lib/city/wake.ts",
+      "bytes": 1612,
+      "sha256": "5690d75d6779abb5af036383833daac3b3a0079e760cf2f3d7ec5a965df95f02"
+    },
+    {
+      "file": "lib/city/walkway-attachments.ts",
+      "bytes": 3677,
+      "sha256": "463d4713964e056dfdf611146dcd411413d0c1d8bc47507ca48e79e2f2eeb1fc"
+    },
+    {
+      "file": "lib/city/walkway-ground-connectors.json",
+      "bytes": 12536,
+      "sha256": "f3ca7279ddfe16cd3227f6bdd383cbb2153b0b89fda211cf7fff0e65abc767bd"
+    },
+    {
+      "file": "lib/city/water-world.ts",
+      "bytes": 11777,
+      "sha256": "d816c253b44be7825eb5f1f2c6e714214da9cc228e5da30f70350fbde6023cc5"
+    },
+    {
+      "file": "lib/city/west-walk-supports.ts",
+      "bytes": 11124,
+      "sha256": "00842aa90d757a128cfd4473fb5fa19453a6f36760df9427e8e28d65850fc3f2"
+    },
+    {
+      "file": "public/data/beach-coast.json",
+      "bytes": 4966687,
+      "sha256": "47b787f94717fd489ddcdf0c91fc30a81eee65cce7d4fa6e2eea9763b6023459"
+    },
+    {
+      "file": "public/data/bridges.json",
+      "bytes": 62350,
+      "sha256": "52fcf8c310ecedff1782db2c1274af3f032905cdaf461b4a5c85ab0aa6d4faef"
+    },
+    {
+      "file": "public/data/buildings.geojson",
+      "bytes": 3840048,
+      "sha256": "57cf77f2f7afbceeb3ea4b7dcb87c33d7f56a6df57c33306792503f1dba538ec"
+    },
+    {
+      "file": "public/data/context.geojson",
+      "bytes": 220187,
+      "sha256": "8490953cc264cd3090811fd5cba11cf23fb9d88434f58c99d0f100014fa86ec1"
+    },
+    {
+      "file": "public/data/land.geojson",
+      "bytes": 299940,
+      "sha256": "4329b72163668afeee2289160ef00dc9d61c2857d1917447eceaa243c0c30450"
+    },
+    {
+      "file": "public/data/parks.geojson",
+      "bytes": 87044,
+      "sha256": "3601c392311b2377a98cb072dd6143746561e25f4c1a5c6b9c6a0659d4bc75b3"
+    },
+    {
+      "file": "public/data/paths.geojson",
+      "bytes": 320138,
+      "sha256": "daf512c6eaee772df831462f3f0418f848d3737317b7219db51754ce0fae36b9"
+    },
+    {
+      "file": "public/data/roads.geojson",
+      "bytes": 773687,
+      "sha256": "77543c74f4e567a65db14c8d33f9d6250d0f40bdd5f99031c1267aa8dc3373fb"
+    },
+    {
+      "file": "public/data/terrain.json",
+      "bytes": 303256,
+      "sha256": "c52c4ae53c3f76ae5cdfdb32765b53d7c61fec4f7d9db03b02c7f7d722853908"
+    },
+    {
+      "file": "public/data/trees.json",
+      "bytes": 1070134,
+      "sha256": "2ba858b2afa255bef8ad7f6c7aade750151d0990ad492c68e2c2915a92e3267d"
+    },
+    {
+      "file": "public/materials/city/manifest.json",
+      "bytes": 3288,
+      "sha256": "0a2ba06267b2d172908e89a5ed3cc9b514f0ca398435c9c3cc31d03e9e5861f4"
+    }
+  ],
+  "sourceWayIds": [
+    42000574,
+    116061627,
+    604336387,
+    116061617
+  ],
+  "lengthM": 150.89828925068724,
+  "rampAsphaltTriangles": 841,
+  "rampSections": 109,
+  "rampTopTriangles": 1287,
+  "terminalOpeningStrips": 36,
+  "staticCaps": {
+    "rampAsphaltTriangles": 8192,
+    "mainCandidatesPerRampFace": 512
+  },
+  "shoulderNumericalOverlapM": 0.002,
+  "perFrameCost": "none",
+  "preparationMs": 600.1822820000016,
+  "overlapSamples": 2544,
+  "maxDifferenceM": 0.000001148054369792817,
+  "allRampTrianglesPositive": 841,
+  "defaultEmptyOpeningExactlyUnchanged": true,
+  "mainAsphaltExactlyUnchanged": true,
+  "mainSlabAndRetainingExactlyUnchanged": true,
+  "allUnrelatedShouldersExactlyUnchanged": true,
+  "oldShoulderTriangles": 4529,
+  "newShoulderTriangles": 4565,
+  "oldCurbTriangles": 2912,
+  "newCurbTriangles": 2878
+}
