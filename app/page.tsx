@@ -51,7 +51,11 @@ import { RocketControls, rocketText } from '@/components/rocket-controls';
 import { EMPTY_ROCKET, type RocketSnapshot } from '@/lib/city/rocket-snapshot';
 import type { RocketController } from '@/lib/city/rocket-controller';
 import { EMPTY_FLIGHT, type FlightSnapshot } from '@/lib/city/flight-snapshot';
-import { TeslaControls, teslaText } from '@/components/tesla-controls';
+import {
+  TeslaControls,
+  teslaText,
+  FlyingCarIcon,
+} from '@/components/tesla-controls';
 import { VehicleConditionPanel } from '@/components/vehicle-condition-panel';
 import { EMPTY_TESLA, type TeslaSnapshot } from '@/lib/city/tesla-snapshot';
 import type { TeslaController } from '@/lib/city/tesla-controller';
@@ -969,7 +973,7 @@ function Home() {
     >
       {teslaPreparing && (
         <output className="tesla-preparing glass ui-chrome">
-          <Rocket size={19} /> {teslaText(locale, 'preparing')}
+          <FlyingCarIcon size={19} /> {teslaText(locale, 'preparing')}
         </output>
       )}
       {stats.trafficStop && settings.mode === 'drive' && (
@@ -1593,7 +1597,7 @@ function Home() {
             { id: 'drive', name: tr('drive'), icon: Car },
             { id: 'boat', name: tr('boat'), icon: Ship },
             { id: 'flight', name: flightText(locale, 'fly'), icon: Plane },
-            { id: 'tesla', name: 'Tesla', icon: Rocket },
+            { id: 'tesla', name: 'Tesla', icon: FlyingCarIcon },
           ].map((m) => (
             <label
               className={`mode-pill ${(flight.placing ? 'flight' : placing || settings.mode) === m.id ? 'active' : ''} ${m.id !== 'orbit' && m.id !== 'tesla' && (placing || !canSwitchStreetMode(settings.mode, m.id)) ? 'figure-handle' : ''}`}
@@ -2345,7 +2349,7 @@ function Home() {
           <span className="mini-location-title">
             {settings.mode !== 'orbit' &&
               (settings.mode === 'tesla' ? (
-                <Rocket size={15} />
+                <FlyingCarIcon size={15} />
               ) : settings.mode === 'rocket' ? (
                 <Rocket size={14} />
               ) : settings.mode === 'flight' ? (
