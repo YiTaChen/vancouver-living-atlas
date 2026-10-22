@@ -6,6 +6,7 @@ import { VehicleDriftEffects } from './vehicle-drift-effects';
 import { SkyTrainTravel } from './skytrain-travel';
 import { FlightController } from './flight-controller';
 import { TeslaController } from './tesla-controller';
+import { RocketController } from './rocket-controller';
 import { clearOrbitGesture } from './orbit-lifecycle';
 import { paintStartupProgress } from './startup-progress';
 import { GraphicsUnavailableError } from './startup-error';
@@ -208,6 +209,8 @@ export class CityEngine {
   busVisitDetail: BusVisitDetail = 'auto';
   flight: FlightController | null = null;
   tesla: TeslaController | null = null;
+  rocket: RocketController | null = null;
+  onRocketMode: (mode: 'orbit' | 'rocket') => void = () => {};
   onTeslaMode: (mode: 'orbit' | 'tesla') => void = () => {};
   onFlightMode: (mode: 'orbit' | 'flight') => void = () => {};
   placement: MapPlacement | null = null;
@@ -451,6 +454,7 @@ export class CityEngine {
     this.navigation?.blur();
     this.flight?.clearInput();
     this.tesla?.clearInput();
+    this.rocket?.clearInput();
     this.skyTrainTravel?.clearInput();
     this.interactions?.clear();
     this.travelReturn?.clearGesture();
@@ -704,6 +708,7 @@ export class CityEngine {
     this.placement = new MapPlacement(this);
     this.flight = new FlightController(this);
     this.tesla = new TeslaController(this);
+    this.rocket = new RocketController(this);
     this.skyTrainTravel = new SkyTrainTravel(this);
     this.skyTrainTravel.onChange = () => this.publishSkyTrainTravel();
     this.interactions = new CityInteractions(this);
@@ -855,9 +860,11 @@ export class CityEngine {
         ? this.tesla.sceneryMode
         : this.flight?.attached
           ? 'flight'
-          : this.settings.mode === 'tesla'
-            ? 'drive'
-            : this.settings.mode;
+          : this.settings.mode === 'rocket'
+            ? 'flight'
+            : this.settings.mode === 'tesla'
+              ? 'drive'
+              : this.settings.mode;
     const speed = this.skyTrainTravel?.active
       ? this.skyTrainTravel.speedMps
       : this.tesla?.active
@@ -921,9 +928,11 @@ export class CityEngine {
     const coverage = shadowCoverage({
       mode: this.tesla?.active
         ? this.tesla.sceneryMode
-        : this.settings.mode === 'tesla'
-          ? 'drive'
-          : this.settings.mode,
+        : this.settings.mode === 'rocket'
+          ? 'flight'
+          : this.settings.mode === 'tesla'
+            ? 'drive'
+            : this.settings.mode,
       quality: this.settings.quality,
       distance: this.camera.position.distanceTo(this.controls.target),
       focus: this.controls.target.toArray(),
@@ -1004,6 +1013,8 @@ export class CityEngine {
     this.architecturalDetails?.update(true);
   }
   renderScene() {
+    // High altitude uses a compact floating-origin scene and skips city LOD work.
+    if (this.rocket?.renderSpace()) return;
     this.detailedTrees?.update();
     this.facadeDetails?.update();
     this.architecturalDetails?.update();
@@ -1049,9 +1060,11 @@ export class CityEngine {
       waterVisible = water?.visible;
     if (water && this.skyTrainTravel?.underground) water.visible = false;
     try {
+      this.rocket?.beforeRender();
       if (this.composer) this.composer.render();
       else this.renderer.render(this.scene, this.camera);
     } finally {
+      this.rocket?.afterRender();
       if (water) water.visible = waterVisible!;
     }
     const preparationBudget =
@@ -1387,6 +1400,7 @@ export class CityEngine {
     createRoadSurfaces(this);
   }
   flyTo(id: string, animate = true) {
+    this.rocket?.returnToCity();
     if (this.navigation?.walkSeat && !this.navigation.leaveWalkSeat()) return;
     if (this.skyTrainTravel?.active) return;
     if (!this.closeBusVisit()) return;
@@ -1438,6 +1452,10 @@ export class CityEngine {
     finishLocalMapTransition(this);
   }
   leaveTravelAtLocation(remember = false) {
+    if (this.rocket?.active) {
+      this.rocket.returnToCity();
+      return;
+    }
     if (this.navigation?.walkSeat && !this.navigation.leaveWalkSeat()) return;
     if (this.skyTrainTravel?.active) return;
     if (!this.closeBusVisit()) return;
@@ -1453,6 +1471,10 @@ export class CityEngine {
     this.onLocalOrbit();
   }
   zoom(f: number) {
+    if (this.rocket?.active) {
+      this.rocket.zoom(f);
+      return;
+    }
     if (this.skyTrainTravel?.active) return;
     if (this.busVisit?.aboard) return;
     if (this.tesla?.active) {
@@ -1554,7 +1576,8 @@ export class CityEngine {
     };
   }
   async visitBusInterior() {
-    if (this.navigation?.walkSeat && !this.navigation.leaveWalkSeat()) return false;
+    if (this.navigation?.walkSeat && !this.navigation.leaveWalkSeat())
+      return false;
     if (this.skyTrainTravel?.active) return false;
     if (!this.busVisit || this.disposed) return false;
     if (!this.closeBusVisit()) return false;
@@ -1605,9 +1628,13 @@ export class CityEngine {
     return closed;
   }
   applySettings(settings: Settings) {
-    if (this.navigation?.walkSeat &&
-      (settings.mode !== this.settings.mode || (this.settings.buildings && !settings.buildings)) &&
-      !this.navigation.leaveWalkSeat()) return;
+    if (
+      this.navigation?.walkSeat &&
+      (settings.mode !== this.settings.mode ||
+        (this.settings.buildings && !settings.buildings)) &&
+      !this.navigation.leaveWalkSeat()
+    )
+      return;
     if (this.skyTrainTravel?.active && settings.mode !== 'walk') return;
     if (
       this.busVisit &&
@@ -1627,6 +1654,7 @@ export class CityEngine {
       this.autoTimingNeedsAnchor = true;
     }
     if (modeChanged) {
+      if (settings.mode !== 'rocket') this.rocket?.returnToCity();
       if (settings.mode !== 'tesla') this.tesla?.deactivate();
       if (
         settings.mode === 'walk' ||
@@ -1636,7 +1664,11 @@ export class CityEngine {
         this.flight?.clear();
       if (settings.mode === 'orbit' && this.flight?.attached)
         this.flight.detach();
-      if (settings.mode !== 'flight' && settings.mode !== 'tesla')
+      if (
+        settings.mode !== 'flight' &&
+        settings.mode !== 'tesla' &&
+        settings.mode !== 'rocket'
+      )
         this.navigation?.setMode(settings.mode);
     }
     this.settings = {
@@ -1800,6 +1832,7 @@ export class CityEngine {
     } else if (
       this.settings.mode !== 'flight' &&
       this.settings.mode !== 'tesla' &&
+      this.settings.mode !== 'rocket' &&
       !this.busVisit?.aboard &&
       !this.skyTrainTravel?.active
     )
@@ -1807,6 +1840,7 @@ export class CityEngine {
     this.busVisit?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
     this.flight?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
     this.tesla?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
+    this.rocket?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
     this.skyTrainTravel?.update(
       this.lastTime ? (time - this.lastTime) / 1000 : 0,
     );
@@ -1897,17 +1931,22 @@ export class CityEngine {
       this.renderer.domElement.dataset.busVisit = JSON.stringify(
         this.stats.busVisit ?? null,
       );
+      this.renderer.domElement.dataset.rocket = JSON.stringify(
+        this.rocket?.snapshot ?? null,
+      );
       this.renderer.domElement.dataset.busAssets = JSON.stringify(
         this.traffic?.busAssets.stats() ?? null,
       );
       this.stats.speed = Math.round(
-        (this.skyTrainTravel?.active
-          ? (this.stats.skyTrainTravel?.speedMps ?? 0)
-          : this.tesla?.active
-            ? this.tesla.speedMps
-            : this.flight?.attached
-              ? this.flight.state?.speed || 0
-              : this.navigation?.speed || 0) * 3.6,
+        (this.rocket?.active
+          ? (this.rocket.state?.speed ?? 0)
+          : this.skyTrainTravel?.active
+            ? (this.stats.skyTrainTravel?.speedMps ?? 0)
+            : this.tesla?.active
+              ? this.tesla.speedMps
+              : this.flight?.attached
+                ? this.flight.state?.speed || 0
+                : this.navigation?.speed || 0) * 3.6,
       );
       this.stats.clock = this.clock.snapshot();
       this.stats.heading = this.controls.getAzimuthalAngle();
@@ -1922,11 +1961,13 @@ export class CityEngine {
       this.stats.elevation = Math.round(
         this.settings.mode === 'orbit'
           ? this.elevation(this.controls.target.x, this.controls.target.z)
-          : this.tesla?.active
-            ? (this.tesla.state?.position[1] ?? 0)
-            : this.flight?.attached
-              ? this.flight.state!.y
-              : this.navigation?.position.y || 0,
+          : this.rocket?.active
+            ? (this.rocket.state?.position.y ?? 0)
+            : this.tesla?.active
+              ? (this.tesla.state?.position[1] ?? 0)
+              : this.flight?.attached
+                ? this.flight.state!.y
+                : this.navigation?.position.y || 0,
       );
       this.onStats({ ...this.stats });
       this.fpsAt = time;
@@ -2091,6 +2132,7 @@ export class CityEngine {
     this.pedestrians = null;
     this.flight?.destroy();
     this.tesla?.destroy();
+    this.rocket?.destroy();
     this.interactions?.dispose();
     this.interactions = null;
     this.busVisit?.dispose();
