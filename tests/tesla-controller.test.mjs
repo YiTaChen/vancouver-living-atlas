@@ -16,6 +16,7 @@ const { FlightController } = await import(cityModule('flight-controller'));
 const { MapPlacement } = await import(cityModule('placement'));
 const { createFlight } = await import(cityModule('flight-state'));
 const { createTesla } = await import(cityModule('tesla-state'));
+const { createTeslaRoadsterShape } = await import(cityModule('tesla-shape'));
 const { TESLA_ROADSTER_DIMENSIONS } = await import(
   cityModule('assets/tesla-roadster-contract')
 );
@@ -495,10 +496,8 @@ test('the actual default overview enters a verified road with twenty metres of c
     geometries = [],
     material = new THREE.MeshBasicMaterial();
   assert.deepEqual(overview, saved.provenance.center);
-  const adaptedShape = structuredClone(saved.shape);
-  adaptedShape.groundSupport.wheelRadius = 0.35;
-  adaptedShape.groundSupport.bodySections[0].clearance = 0.085;
-  assert.deepEqual(c.shape, adaptedShape);
+  // Keep the captured city canopy unchanged; fit the current authored car.
+  assert.deepEqual(c.shape, createTeslaRoadsterShape());
   e.roads = new THREE.Group();
   e.terrain = new THREE.Group();
   for (const source of saved.groundMeshes) {
@@ -554,8 +553,19 @@ test('the actual default overview enters a verified road with twenty metres of c
     48,
   );
   assert.ok(original, 'the old first road remains physically driveable');
-  original.pose.position.forEach((value, i) =>
-    close(value, saved.bad.pose.position[i]),
+  const capturedTyrePlane = new THREE.Vector3(
+    0,
+    -saved.shape.halfExtents[1] - saved.shape.clearance,
+    0,
+  )
+    .applyQuaternion(new THREE.Quaternion(...saved.bad.pose.quaternion))
+    .add(new THREE.Vector3(...saved.bad.pose.position));
+  const currentTyrePlane = new THREE.Vector3(0, -HEIGHT, 0)
+    .applyQuaternion(new THREE.Quaternion(...original.pose.quaternion))
+    .add(new THREE.Vector3(...original.pose.position));
+  assert.ok(
+    currentTyrePlane.distanceTo(capturedTyrePlane) < 0.002,
+    'the refitted wheelbase remains on the same captured road within 2mm',
   );
   assert.equal(c.world.hasLaunchClearance(original, c.shape), false);
   const start = {
@@ -575,12 +585,19 @@ test('the actual default overview enters a verified road with twenty metres of c
     /^tree:\d+:crown/,
     'the old entry is blocked by real extracted canopy geometry',
   );
-  assert.equal(c.enter(), true);
-  c.state.position.forEach((value, i) =>
-    close(value, saved.open.pose.position[i]),
+  const open = c.world.groundPoseNear(
+    saved.provenance.input,
+    c.shape,
+    saved.provenance.heading,
+    48,
+    { surfaceId: 'ground', layer: 0 },
+    (candidate) => c.world.hasLaunchClearance(candidate, c.shape),
   );
+  assert(open, 'the captured road area still offers a real open candidate');
+  assert.equal(c.enter(), true);
+  c.state.position.forEach((value, i) => close(value, open.pose.position[i]));
   c.state.quaternion.forEach((value, i) =>
-    close(value, saved.open.pose.quaternion[i]),
+    close(value, open.pose.quaternion[i]),
   );
   close(c.state.heading, saved.provenance.heading);
   assert.deepEqual(c.world.identity(c.state.contact), {
@@ -1378,6 +1395,22 @@ test('camera and manual mesh changes preserve vehicle state and reuse cached mod
     tick(0);
   }
   assert.equal(model.stats().cachedLevels, 3);
+  model.update({ doorsOpen: 1, roofLift: 0.5 });
+  tick(0);
+  for (const level of model.group.children.filter((part) => part.isGroup)) {
+    if (!level.visible) continue;
+    assert.ok(
+      level
+        .getObjectByName('butterfly-door-left')
+        .quaternion.angleTo(new THREE.Quaternion()) < 1e-12,
+      'driving closes inspection doors before using the closed hull',
+    );
+    assert.equal(
+      level.getObjectByName('removable-roof').position.y,
+      0,
+      'driving seats the removable canopy before collision queries',
+    );
+  }
   const groups = [...model.group.children],
     geometries = new Set();
   model.group.traverse((object) => {
@@ -1441,7 +1474,6 @@ test('destroy removes every installed listener and disposes each cached geometry
   assert.equal(c.enter(), false);
 });
 
-
 test('X drift and the mobile held control release independently and clear on blur, panels and mode exit', (t) => {
   const { c, win, doc, calls } = setup(t);
   const inactive = key('KeyX');
@@ -1452,7 +1484,11 @@ test('X drift and the mobile held control release independently and clear on blu
   c.keyDown(start);
   assert.equal(start.defaultPrevented, true);
   assert.equal(c.input().drift, true);
-  assert.equal(c.input().brake, false, 'drift never aliases the existing B brake');
+  assert.equal(
+    c.input().brake,
+    false,
+    'drift never aliases the existing B brake',
+  );
   c.setButton('drift', true);
   c.keyUp(key('KeyX'));
   assert.equal(c.input().drift, true);
@@ -1462,7 +1498,11 @@ test('X drift and the mobile held control release independently and clear on blu
   win.dispatchEvent(new Event('blur'));
   assert.equal(c.input().drift, false);
   c.keyDown(key('KeyX', { repeat: true }));
-  assert.equal(c.input().drift, false, 'OS repeat after blur cannot re-arm drift');
+  assert.equal(
+    c.input().drift,
+    false,
+    'OS repeat after blur cannot re-arm drift',
+  );
   c.keyDown(key('KeyX'));
   c.setButton('drift', true);
   c.setInputEnabled(false);
@@ -1471,7 +1511,11 @@ test('X drift and the mobile held control release independently and clear on blu
   c.setInputEnabled(true);
   assert.equal(c.input().drift, false);
   c.keyDown(key('KeyX', { repeat: true }));
-  assert.equal(c.input().drift, false, 'held X across a modal still requires a fresh physical press');
+  assert.equal(
+    c.input().drift,
+    false,
+    'held X across a modal still requires a fresh physical press',
+  );
   c.keyUp(key('KeyX'));
   c.keyDown(key('KeyX'));
   assert.equal(c.input().drift, true);
@@ -1488,14 +1532,25 @@ test('X drift and the mobile held control release independently and clear on blu
   const focusReturn = key('KeyX', { repeat: true });
   c.keyDown(focusReturn);
   assert.equal(focusReturn.defaultPrevented, false);
-  assert.equal(c.input().drift, false, 'typing X then focusing the canvas cannot start drift from OS repeat');
+  assert.equal(
+    c.input().drift,
+    false,
+    'typing X then focusing the canvas cannot start drift from OS repeat',
+  );
   c.keyUp(key('KeyX'));
   c.keyDown(key('KeyX'));
-  assert.equal(c.input().drift, true, 'releasing and pressing X again explicitly arms drift');
+  assert.equal(
+    c.input().drift,
+    true,
+    'releasing and pressing X again explicitly arms drift',
+  );
   c.keyUp(key('KeyX'));
   const spawns = calls.spawn.length;
   c.keyDown(key('KeyR'));
-  assert(calls.spawn.length > spawns, 'R retains its established safe-road recovery');
+  assert(
+    calls.spawn.length > spawns,
+    'R retains its established safe-road recovery',
+  );
   c.setButton('drift', true);
   c.deactivate();
   assert.equal(c.input().drift, false);
@@ -1517,7 +1572,11 @@ test('Tesla drift telemetry exposes accepted ground tyre contacts and clears for
   assert.equal(contact.identity.surfaceId, 'ground');
   assert.equal(c.snapshot.drifting, true);
   assert.equal(c.snapshot.driftIntensity, contact.intensity);
-  assert.deepEqual(c.state, pose, 'reading HUD/FX telemetry cannot change simulation');
+  assert.deepEqual(
+    c.state,
+    pose,
+    'reading HUD/FX telemetry cannot change simulation',
+  );
   c.setInputEnabled(false);
   assert.equal(c.driftContact, null);
   c.setInputEnabled(true);

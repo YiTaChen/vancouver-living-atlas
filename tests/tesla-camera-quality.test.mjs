@@ -100,13 +100,16 @@ test('cockpit eye and its full orientation follow the actual vehicle frame witho
       frame.target.clone().sub(frame.position).normalize(),
       new THREE.Vector3(0, 0, 1).applyQuaternion(body),
     );
+    // The donor has an outward-facing removable glass canopy. Inspect its
+    // actual inside surface without changing the production culling policy.
+    const glass = level.getObjectByName('removable-roof:glass').material;
+    glass.side = THREE.DoubleSide;
     const roofRay = new THREE.Raycaster(localEye, new THREE.Vector3(0, 1, 0));
-    const roof = roofRay
-      .intersectObject(level, true)
-      .find((hit) => !hit.object.material.transparent);
+    const roof = roofRay.intersectObject(level, true)[0];
+    glass.side = THREE.FrontSide;
     assert.ok(
-      roof && roof.distance > frame.near,
-      'the eye lies below the real opaque roof',
+      roof && roof.distance > frame.near && roof.distance < 0.25,
+      'the eye and near plane lie beneath the actual closed glass canopy',
     );
     const viewRay = new THREE.Raycaster(localEye, new THREE.Vector3(0, 0, 1));
     const blockers = viewRay

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import * as THREE from 'three';
 import { cityModule } from './helpers/city-modules.mjs';
+import { historicalTeslaCaptureAdapter } from './helpers/tesla-historical-capture.mjs';
 
 const {
   createTesla,
@@ -55,6 +56,7 @@ function actualDefault(pose = captured) {
       new URL('./fixtures/tesla-default-entry-canopy.json', import.meta.url),
     ),
   );
+  pose = historicalTeslaCaptureAdapter(saved.shape, shape)(pose);
   const roads = new THREE.Group();
   const geometries = [];
   for (const source of saved.groundMeshes) {

@@ -598,11 +598,15 @@ test('a disabled, excluded, nonadherable, roof or protected top cannot supply or
 });
 
 test('a physically high curb and an actual overhead obstruction still stop the complete vehicle', () => {
+  // Clear the current complete hull on the approach, then intersect it after
+  // the real 13 cm rise. A fixed 1.45 m ceiling now clears the lower Roadster.
+  const ceilingY = 2 * height + 0.08;
+  assert(ceilingY > 2 * height && ceilingY < 2 * height + 0.13);
   for (const variant of ['high-curb', 'ceiling']) {
     const faces = steppedFaces(variant === 'high-curb' ? 0.45 : 0.13);
     if (variant === 'ceiling')
       faces.push(
-        ...rectangle('physical-ceiling', -40, 40, -1, 4, 1.45, {
+        ...rectangle('physical-ceiling', -40, 40, -1, 4, ceilingY, {
           kind: 'obstacle',
           group: 'ceiling',
           adherable: false,

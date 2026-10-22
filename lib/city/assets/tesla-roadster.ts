@@ -17,26 +17,16 @@ export * from './tesla-roadster-contract';
 
 export const TESLA_ROADSTER_PROVENANCE = Object.freeze({
   model:
-    'Original source-authored interpretation of the October 15, 2026 Tesla Roadster Rocket',
+    'Original Blender-authored October 2026 Tesla Roadster Rocket, derived into three batched city LODs',
   author: 'Vancouver Living Atlas by YiTaChen',
   source: 'https://github.com/YiTaChen/vancouver-living-atlas',
   license: 'Vancouver Living Atlas Noncommercial Research and Attribution 1.0',
-  referenceDate: '2026-10-17',
-  references: [
-    'https://www.tesla.com/en_GB/roadster',
-    'https://www.youtube.com/watch?v=7p5LxFdc-Qg',
-    'https://www.youtube.com/watch?v=y7oKy09ALfM&t=444s',
-    'https://www.youtube.com/watch?v=6D5MlPZQFOw&t=204s',
-    'https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Roadster-03-Carousel-Slide-1-Desktop.jpg',
-    'https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Roadster-03-Carousel-Slide-2-Desktop.jpg',
-    'https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Roadster-03-Carousel-Slide-3-Desktop.jpg',
-    'https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Roadster-03-Carousel-Slide-4-Desktop.jpg',
-    'https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Roadster-04-World-Desktop.jpg',
-  ],
+  referenceDate: '2026-10-22',
+  references: ['https://www.tesla.com/roadster?redirect=no'],
   limitations: [
     'Not Tesla CAD; dimensions, unseen surfaces and mechanical packaging are modelling estimates.',
-    'Single driver seat follows the Rocket trim description; the second side is a neutral closed cover.',
-    'Four rear fans and 4 rear + 4 down + 2 front yaw nozzles follow the reveal/walkthrough; exact placement, ducts and blades remain illustrative.',
+    'Single driver seat follows Rocket. Passenger-side vessel packaging is an explicit artist inference from the public two-seat cabin.',
+    'Four rear fan cells and eight observed donor nozzles are separate systems. Two illustrative front yaw ports preserve the existing ten-port gameplay effect.',
     'No Tesla image, texture or third-party model is distributed by this source.',
   ],
 });
@@ -78,8 +68,8 @@ function createMaterials(): TeslaMaterials {
       transparent: true,
       opacity: 0.97,
       // Near-opaque outward glazing reads as a closed smoked-copper canopy.
-      // Backface culling keeps the driver's outward view clear; the cabin has
-      // its own opaque headliner. No second glazing layer or extra pass.
+      // Backface culling keeps the driver's outward view clear. The removable
+      // glass roof shares this single outward layer, without a second pass.
       side: THREE.FrontSide,
       depthWrite: false,
       forceSinglePass: true,
@@ -105,6 +95,15 @@ function createMaterials(): TeslaMaterials {
   for (const [role, material] of Object.entries(materials)) {
     material.name = `Tesla 2026:${role}`;
     material.userData.semantic_role = role;
+    if (
+      role !== 'glass' &&
+      (material instanceof THREE.MeshStandardMaterial ||
+        material instanceof THREE.MeshBasicMaterial)
+    ) {
+      // Donor colors are absolute linear vertex RGB, shared across each role.
+      material.color.set(0xffffff);
+      material.vertexColors = true;
+    }
   }
   return materials;
 }
@@ -159,7 +158,9 @@ export function createTeslaRoadster(
     vortexThrust = 0,
     wing = 0,
     brake = 0,
-    night = false;
+    night = false,
+    doorsOpen = 0,
+    roofLift = 0;
   group.name = 'Tesla Roadster Rocket 2026';
   group.userData.provenance = TESLA_ROADSTER_PROVENANCE;
   group.userData.modelConvention =
@@ -178,9 +179,15 @@ export function createTeslaRoadster(
     for (const wheel of current.wheelSteers) wheel.rotation.y = steering;
     for (const wheel of current.wheelRolls) wheel.rotation.x = spin;
     for (let i = 0; i < current.fans.length; i++)
-      current.fans[i].rotation.y = fanSpin * (i % 2 === 0 ? 1 : -1);
+      current.fans[i].rotation.z = fanSpin * (i % 2 === 0 ? 1 : -1);
     current.wing.rotation.x = -wing * 0.28;
-    current.wing.position.y = 0.74 + wing * 0.23;
+    current.wing.position.y = current.wingNeutralY + wing * 0.24;
+    for (const door of current.doors)
+      door.object.quaternion.setFromAxisAngle(
+        door.axis,
+        doorsOpen * Math.PI * 0.4,
+      );
+    current.roof.position.y = current.roofNeutralY + roofLift;
   }
 
   function setQuality(next: TeslaModelQuality) {
@@ -221,6 +228,12 @@ export function createTeslaRoadster(
         state.fanSpinRad === undefined ? fanSpin : angle(state.fanSpinRad);
       wing =
         state.wingDeploy === undefined ? wing : normalized(state.wingDeploy);
+      doorsOpen =
+        state.doorsOpen === undefined ? doorsOpen : normalized(state.doorsOpen);
+      roofLift =
+        state.roofLift === undefined
+          ? roofLift
+          : THREE.MathUtils.clamp(finite(state.roofLift), 0, 1.5);
       applyPose();
       const nextThrust =
         state.thrust === undefined ? thrust : normalized(state.thrust);

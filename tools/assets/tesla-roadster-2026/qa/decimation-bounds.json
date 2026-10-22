@@ -1,0 +1,1538 @@
+{
+  "high": {
+    "body:carbon": {
+      "sourceLocalMin": [
+        -0.994750440120697,
+        0.0945468619465828,
+        -2.3299999237060547
+      ],
+      "sourceLocalMax": [
+        0.9900000095367432,
+        1.0806173086166382,
+        2.325000047683716
+      ],
+      "clampedVertices": 2,
+      "maximumCorrectionM": 2.384185791015625e-06,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "body:white": {
+      "sourceLocalMin": [
+        -0.7378946542739868,
+        0.2236081063747406,
+        -0.8629926443099976
+      ],
+      "sourceLocalMax": [
+        0.7378946542739868,
+        1.068147897720337,
+        0.9184615612030029
+      ],
+      "clampedVertices": 3,
+      "maximumCorrectionM": 9.60230827331543e-05,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "body:titanium": {
+      "sourceLocalMin": [
+        -0.958359956741333,
+        0.10249999165534973,
+        -2.325000047683716
+      ],
+      "sourceLocalMax": [
+        0.958359956741333,
+        1.0451064109802246,
+        1.5191971063613892
+      ],
+      "clampedVertices": 23,
+      "maximumCorrectionM": 0.0018702149685616738,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "body:tail": {
+      "sourceLocalMin": [
+        -0.9929223656654358,
+        0.3359999656677246,
+        -2.3297998905181885
+      ],
+      "sourceLocalMax": [
+        0.9929223656654358,
+        0.7320161461830139,
+        0.9659553170204163
+      ],
+      "clampedVertices": 2,
+      "maximumCorrectionM": 2.2649765014648438e-05,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "body:display": {
+      "sourceLocalMin": [
+        -0.16699999570846558,
+        0.6104785799980164,
+        0.021474193781614304
+      ],
+      "sourceLocalMax": [
+        0.16699999570846558,
+        1.002500057220459,
+        0.4981229305267334
+      ],
+      "clampedVertices": 0,
+      "maximumCorrectionM": 0.0,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "steer-by-wire-yoke:white": {
+      "sourceLocalMin": [
+        -0.18000000715255737,
+        -0.12700003385543823,
+        -0.07164999842643738
+      ],
+      "sourceLocalMax": [
+        0.1799997091293335,
+        0.12700003385543823,
+        0.2349148392677307
+      ],
+      "clampedVertices": 3,
+      "maximumCorrectionM": 0.00015117227957717533,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "active-rear-wing:paint": {
+      "sourceLocalMin": [
+        -0.953000009059906,
+        -0.24949997663497925,
+        -0.1169288158416748
+      ],
+      "sourceLocalMax": [
+        0.9610000252723694,
+        0.017304837703704834,
+        0.11125826835632324
+      ],
+      "clampedVertices": 4,
+      "maximumCorrectionM": 0.00011808425164559683,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "body:paint": {
+      "sourceLocalMin": [
+        -1.0054999589920044,
+        0.2254999876022339,
+        -2.299999952316284
+      ],
+      "sourceLocalMax": [
+        1.0054999589920044,
+        1.084665060043335,
+        2.311000108718872
+      ],
+      "clampedVertices": 23,
+      "maximumCorrectionM": 7.672607754012591e-05,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "body:glass": {
+      "sourceLocalMin": [
+        -0.734000027179718,
+        0.6765000224113464,
+        -1.7200000286102295
+      ],
+      "sourceLocalMax": [
+        0.734000027179718,
+        1.0734999179840088,
+        0.949999988079071
+      ],
+      "clampedVertices": 9,
+      "maximumCorrectionM": 2.4139881134033203e-05,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "body:headlight": {
+      "sourceLocalMin": [
+        -0.8763999938964844,
+        0.4307011365890503,
+        1.9109998941421509
+      ],
+      "sourceLocalMax": [
+        0.8763999938964844,
+        0.6221991181373596,
+        2.3157999515533447
+      ],
+      "clampedVertices": 4,
+      "maximumCorrectionM": 0.0012447237840004992,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "butterfly-door-left:glass": {
+      "sourceLocalMin": [
+        -0.21999990940093994,
+        0.11000001430511475,
+        -1.7149999141693115
+      ],
+      "sourceLocalMax": [
+        0.008857011795043945,
+        0.49398982524871826,
+        0.0
+      ],
+      "clampedVertices": 8,
+      "maximumCorrectionM": 3.509223461151123e-05,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "butterfly-door-left:paint": {
+      "sourceLocalMin": [
+        -0.2259998321533203,
+        -0.30943432450294495,
+        -1.722000002861023
+      ],
+      "sourceLocalMax": [
+        0.11841678619384766,
+        0.49969613552093506,
+        0.00700002908706665
+      ],
+      "clampedVertices": 4,
+      "maximumCorrectionM": 0.0005269646610883064,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "butterfly-door-left:accent": {
+      "sourceLocalMin": [
+        -0.12142610549926758,
+        -0.3093767762184143,
+        -1.540623664855957
+      ],
+      "sourceLocalMax": [
+        -0.11159992218017578,
+        -0.0544281005859375,
+        -0.21052074432373047
+      ],
+      "clampedVertices": 2,
+      "maximumCorrectionM": 0.0005669444922793411,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "butterfly-door-right:glass": {
+      "sourceLocalMin": [
+        -0.008857011795043945,
+        0.11000001430511475,
+        -1.7149999141693115
+      ],
+      "sourceLocalMax": [
+        0.21999990940093994,
+        0.49398982524871826,
+        0.0
+      ],
+      "clampedVertices": 8,
+      "maximumCorrectionM": 3.509223461151123e-05,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "butterfly-door-right:paint": {
+      "sourceLocalMin": [
+        -0.11841678619384766,
+        -0.30943432450294495,
+        -1.722000002861023
+      ],
+      "sourceLocalMax": [
+        0.2259998321533203,
+        0.49969613552093506,
+        0.00700002908706665
+      ],
+      "clampedVertices": 4,
+      "maximumCorrectionM": 0.0005270242556218403,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "butterfly-door-right:accent": {
+      "sourceLocalMin": [
+        0.11159992218017578,
+        -0.3093767762184143,
+        -1.540623664855957
+      ],
+      "sourceLocalMax": [
+        0.12142610549926758,
+        -0.0544281005859375,
+        -0.21052074432373047
+      ],
+      "clampedVertices": 2,
+      "maximumCorrectionM": 0.00036853551382619776,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-suction-fan-0:titanium": {
+      "sourceLocalMin": [
+        -0.09099894762039185,
+        -0.09074008464813232,
+        -0.009999990463256836
+      ],
+      "sourceLocalMax": [
+        0.08844345808029175,
+        0.09099207818508148,
+        0.01399993896484375
+      ],
+      "clampedVertices": 14,
+      "maximumCorrectionM": 0.00036203488337631514,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-suction-fan-1:titanium": {
+      "sourceLocalMin": [
+        -0.09099896252155304,
+        -0.09074008464813232,
+        -0.009999990463256836
+      ],
+      "sourceLocalMax": [
+        0.08844345062971115,
+        0.09099207818508148,
+        0.01399993896484375
+      ],
+      "clampedVertices": 14,
+      "maximumCorrectionM": 0.00036203488337631514,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-suction-fan-2:titanium": {
+      "sourceLocalMin": [
+        -0.09099894762039185,
+        -0.09074008464813232,
+        -0.009999990463256836
+      ],
+      "sourceLocalMax": [
+        0.08844347298145294,
+        0.09099207818508148,
+        0.01399993896484375
+      ],
+      "clampedVertices": 14,
+      "maximumCorrectionM": 0.0003620311543484983,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-suction-fan-3:titanium": {
+      "sourceLocalMin": [
+        -0.09099894762039185,
+        -0.09074008464813232,
+        -0.009999990463256836
+      ],
+      "sourceLocalMax": [
+        0.08844345808029175,
+        0.09099207818508148,
+        0.01399993896484375
+      ],
+      "clampedVertices": 14,
+      "maximumCorrectionM": 0.000362033018867208,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "removable-roof:glass": {
+      "sourceLocalMin": [
+        -0.6150000095367432,
+        1.065500020980835,
+        -0.9100000262260437
+      ],
+      "sourceLocalMax": [
+        0.6150000095367432,
+        1.1024999618530273,
+        -0.05000000074505806
+      ],
+      "clampedVertices": 3,
+      "maximumCorrectionM": 5.2094459533691406e-05,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "removable-roof:carbon": {
+      "sourceLocalMin": [
+        -0.6240000128746033,
+        1.0175000429153442,
+        -0.9160000085830688
+      ],
+      "sourceLocalMax": [
+        0.6240000128746033,
+        1.1045000553131104,
+        -0.04399999976158142
+      ],
+      "clampedVertices": 6,
+      "maximumCorrectionM": 0.0003718137741088867,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "front-left-steer:titanium": {
+      "sourceLocalMin": [
+        -0.0004999637603759766,
+        -0.04249998927116394,
+        -0.23000001907348633
+      ],
+      "sourceLocalMax": [
+        0.09450000524520874,
+        0.11250001192092896,
+        -0.13999998569488525
+      ],
+      "clampedVertices": 0,
+      "maximumCorrectionM": 0.0,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "front-left-steer-roll:titanium": {
+      "sourceLocalMin": [
+        -0.11527997255325317,
+        -0.28200000524520874,
+        -0.28199994564056396
+      ],
+      "sourceLocalMax": [
+        0.15700000524520874,
+        0.28199994564056396,
+        0.28199994564056396
+      ],
+      "clampedVertices": 9,
+      "maximumCorrectionM": 0.002125918884421998,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "front-left-steer-roll:rubber": {
+      "sourceLocalMin": [
+        -0.1355850100517273,
+        -0.35049968957901,
+        -0.3504997491836548
+      ],
+      "sourceLocalMax": [
+        0.13600003719329834,
+        0.3504997491836548,
+        0.35049962997436523
+      ],
+      "clampedVertices": 15,
+      "maximumCorrectionM": 0.10607314010743182,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "front-right-steer:titanium": {
+      "sourceLocalMin": [
+        -0.09450000524520874,
+        -0.04249998927116394,
+        -0.23000001907348633
+      ],
+      "sourceLocalMax": [
+        0.0004999637603759766,
+        0.11250001192092896,
+        -0.13999998569488525
+      ],
+      "clampedVertices": 0,
+      "maximumCorrectionM": 0.0,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "front-right-steer-roll:titanium": {
+      "sourceLocalMin": [
+        -0.15700000524520874,
+        -0.28200000524520874,
+        -0.28199994564056396
+      ],
+      "sourceLocalMax": [
+        0.125760018825531,
+        0.28199994564056396,
+        0.28199994564056396
+      ],
+      "clampedVertices": 6,
+      "maximumCorrectionM": 0.002125918884421998,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "front-right-steer-roll:rubber": {
+      "sourceLocalMin": [
+        -0.13600003719329834,
+        -0.35049968957901,
+        -0.3504997491836548
+      ],
+      "sourceLocalMax": [
+        0.1355850100517273,
+        0.3504997491836548,
+        0.35049962997436523
+      ],
+      "clampedVertices": 15,
+      "maximumCorrectionM": 0.10607314010743182,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-left-steer:titanium": {
+      "sourceLocalMin": [
+        -0.0004999637603759766,
+        -0.04249998927116394,
+        -0.23000001907348633
+      ],
+      "sourceLocalMax": [
+        0.09450000524520874,
+        0.11250001192092896,
+        -0.13999998569488525
+      ],
+      "clampedVertices": 0,
+      "maximumCorrectionM": 0.0,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-left-steer-roll:titanium": {
+      "sourceLocalMin": [
+        -0.12496000528335571,
+        -0.28200000524520874,
+        -0.28199994564056396
+      ],
+      "sourceLocalMax": [
+        0.16800004243850708,
+        0.28199994564056396,
+        0.28199994564056396
+      ],
+      "clampedVertices": 16,
+      "maximumCorrectionM": 0.0038585066496105904,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-left-steer-roll:rubber": {
+      "sourceLocalMin": [
+        -0.1469699740409851,
+        -0.35049968957901,
+        -0.35049962997436523
+      ],
+      "sourceLocalMax": [
+        0.1470000147819519,
+        0.3504997491836548,
+        0.3504997491836548
+      ],
+      "clampedVertices": 18,
+      "maximumCorrectionM": 0.024904432162432783,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-right-steer:titanium": {
+      "sourceLocalMin": [
+        -0.09450000524520874,
+        -0.04249998927116394,
+        -0.23000001907348633
+      ],
+      "sourceLocalMax": [
+        0.0004999637603759766,
+        0.11250001192092896,
+        -0.13999998569488525
+      ],
+      "clampedVertices": 0,
+      "maximumCorrectionM": 0.0,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-right-steer-roll:titanium": {
+      "sourceLocalMin": [
+        -0.16800004243850708,
+        -0.28200000524520874,
+        -0.28199994564056396
+      ],
+      "sourceLocalMax": [
+        0.13631999492645264,
+        0.28199994564056396,
+        0.28199994564056396
+      ],
+      "clampedVertices": 5,
+      "maximumCorrectionM": 0.0038585066496105904,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-right-steer-roll:rubber": {
+      "sourceLocalMin": [
+        -0.1470000147819519,
+        -0.35049968957901,
+        -0.35049962997436523
+      ],
+      "sourceLocalMax": [
+        0.1469699740409851,
+        0.3504997491836548,
+        0.3504997491836548
+      ],
+      "clampedVertices": 18,
+      "maximumCorrectionM": 0.024884365291030976,
+      "maximumQuantizationEscapeM": 5e-05
+    }
+  },
+  "medium": {
+    "body:carbon": {
+      "sourceLocalMin": [
+        -0.994750440120697,
+        0.0945468619465828,
+        -2.3299999237060547
+      ],
+      "sourceLocalMax": [
+        0.9900000095367432,
+        1.0806173086166382,
+        2.325000047683716
+      ],
+      "clampedVertices": 3,
+      "maximumCorrectionM": 0.0001537799835205078,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "body:white": {
+      "sourceLocalMin": [
+        -0.7378946542739868,
+        0.2236081063747406,
+        -0.8629926443099976
+      ],
+      "sourceLocalMax": [
+        0.7378946542739868,
+        1.068147897720337,
+        0.9184615612030029
+      ],
+      "clampedVertices": 3,
+      "maximumCorrectionM": 0.0003362894058227539,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "body:titanium": {
+      "sourceLocalMin": [
+        -0.958359956741333,
+        0.10249999165534973,
+        -2.325000047683716
+      ],
+      "sourceLocalMax": [
+        0.958359956741333,
+        1.0451064109802246,
+        1.5191971063613892
+      ],
+      "clampedVertices": 11,
+      "maximumCorrectionM": 0.005889832973178627,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "body:tail": {
+      "sourceLocalMin": [
+        -0.9929223656654358,
+        0.3359999656677246,
+        -2.3297998905181885
+      ],
+      "sourceLocalMax": [
+        0.9929223656654358,
+        0.7320161461830139,
+        0.9659553170204163
+      ],
+      "clampedVertices": 1,
+      "maximumCorrectionM": 6.914138793945312e-05,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "body:display": {
+      "sourceLocalMin": [
+        -0.16699999570846558,
+        0.6104785799980164,
+        0.021474193781614304
+      ],
+      "sourceLocalMax": [
+        0.16699999570846558,
+        1.002500057220459,
+        0.4981229305267334
+      ],
+      "clampedVertices": 0,
+      "maximumCorrectionM": 0.0,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "steer-by-wire-yoke:white": {
+      "sourceLocalMin": [
+        -0.18000000715255737,
+        -0.12700003385543823,
+        -0.07164999842643738
+      ],
+      "sourceLocalMax": [
+        0.1799997091293335,
+        0.12700003385543823,
+        0.2349148392677307
+      ],
+      "clampedVertices": 1,
+      "maximumCorrectionM": 0.00015117227957717533,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "active-rear-wing:paint": {
+      "sourceLocalMin": [
+        -0.953000009059906,
+        -0.24949997663497925,
+        -0.1169288158416748
+      ],
+      "sourceLocalMax": [
+        0.9610000252723694,
+        0.017304837703704834,
+        0.11125826835632324
+      ],
+      "clampedVertices": 2,
+      "maximumCorrectionM": 0.0005371645191654886,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "body:paint": {
+      "sourceLocalMin": [
+        -1.0054999589920044,
+        0.2254999876022339,
+        -2.299999952316284
+      ],
+      "sourceLocalMax": [
+        1.0054999589920044,
+        1.084665060043335,
+        2.311000108718872
+      ],
+      "clampedVertices": 19,
+      "maximumCorrectionM": 0.00014784931836169562,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "body:glass": {
+      "sourceLocalMin": [
+        -0.734000027179718,
+        0.6765000224113464,
+        -1.7200000286102295
+      ],
+      "sourceLocalMax": [
+        0.734000027179718,
+        1.0734999179840088,
+        0.949999988079071
+      ],
+      "clampedVertices": 9,
+      "maximumCorrectionM": 6.74128532409668e-05,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "body:headlight": {
+      "sourceLocalMin": [
+        -0.8763999938964844,
+        0.4307011365890503,
+        1.9109998941421509
+      ],
+      "sourceLocalMax": [
+        0.8763999938964844,
+        0.6221991181373596,
+        2.3157999515533447
+      ],
+      "clampedVertices": 7,
+      "maximumCorrectionM": 0.001352071741064102,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "butterfly-door-left:glass": {
+      "sourceLocalMin": [
+        -0.21999990940093994,
+        0.11000001430511475,
+        -1.7149999141693115
+      ],
+      "sourceLocalMax": [
+        0.008857011795043945,
+        0.49398982524871826,
+        0.0
+      ],
+      "clampedVertices": 7,
+      "maximumCorrectionM": 8.696317672729492e-05,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "butterfly-door-left:paint": {
+      "sourceLocalMin": [
+        -0.2259998321533203,
+        -0.30943432450294495,
+        -1.722000002861023
+      ],
+      "sourceLocalMax": [
+        0.11841678619384766,
+        0.49969613552093506,
+        0.00700002908706665
+      ],
+      "clampedVertices": 3,
+      "maximumCorrectionM": 0.0007809400467486112,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "butterfly-door-left:accent": {
+      "sourceLocalMin": [
+        -0.12142610549926758,
+        -0.3093767762184143,
+        -1.540623664855957
+      ],
+      "sourceLocalMax": [
+        -0.11159992218017578,
+        -0.0544281005859375,
+        -0.21052074432373047
+      ],
+      "clampedVertices": 2,
+      "maximumCorrectionM": 0.0008148588286385559,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "butterfly-door-right:glass": {
+      "sourceLocalMin": [
+        -0.008857011795043945,
+        0.11000001430511475,
+        -1.7149999141693115
+      ],
+      "sourceLocalMax": [
+        0.21999990940093994,
+        0.49398982524871826,
+        0.0
+      ],
+      "clampedVertices": 7,
+      "maximumCorrectionM": 8.696317672729492e-05,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "butterfly-door-right:paint": {
+      "sourceLocalMin": [
+        -0.11841678619384766,
+        -0.30943432450294495,
+        -1.722000002861023
+      ],
+      "sourceLocalMax": [
+        0.2259998321533203,
+        0.49969613552093506,
+        0.00700002908706665
+      ],
+      "clampedVertices": 4,
+      "maximumCorrectionM": 0.0008094906960554706,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "butterfly-door-right:accent": {
+      "sourceLocalMin": [
+        0.11159992218017578,
+        -0.3093767762184143,
+        -1.540623664855957
+      ],
+      "sourceLocalMax": [
+        0.12142610549926758,
+        -0.0544281005859375,
+        -0.21052074432373047
+      ],
+      "clampedVertices": 3,
+      "maximumCorrectionM": 0.00036853551382619776,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-suction-fan-0:titanium": {
+      "sourceLocalMin": [
+        -0.09099894762039185,
+        -0.09074008464813232,
+        -0.009999990463256836
+      ],
+      "sourceLocalMax": [
+        0.08844345808029175,
+        0.09099207818508148,
+        0.01399993896484375
+      ],
+      "clampedVertices": 5,
+      "maximumCorrectionM": 0.0003331527066426723,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-suction-fan-1:titanium": {
+      "sourceLocalMin": [
+        -0.09099896252155304,
+        -0.09074008464813232,
+        -0.009999990463256836
+      ],
+      "sourceLocalMax": [
+        0.08844345062971115,
+        0.09099207818508148,
+        0.01399993896484375
+      ],
+      "clampedVertices": 5,
+      "maximumCorrectionM": 0.00033314526314363657,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-suction-fan-2:titanium": {
+      "sourceLocalMin": [
+        -0.09099894762039185,
+        -0.09074008464813232,
+        -0.009999990463256836
+      ],
+      "sourceLocalMax": [
+        0.08844347298145294,
+        0.09099207818508148,
+        0.01399993896484375
+      ],
+      "clampedVertices": 5,
+      "maximumCorrectionM": 0.0003331527066426723,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-suction-fan-3:titanium": {
+      "sourceLocalMin": [
+        -0.09099894762039185,
+        -0.09074008464813232,
+        -0.009999990463256836
+      ],
+      "sourceLocalMax": [
+        0.08844345808029175,
+        0.09099207818508148,
+        0.01399993896484375
+      ],
+      "clampedVertices": 5,
+      "maximumCorrectionM": 0.0003331527066426723,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "removable-roof:glass": {
+      "sourceLocalMin": [
+        -0.6150000095367432,
+        1.065500020980835,
+        -0.9100000262260437
+      ],
+      "sourceLocalMax": [
+        0.6150000095367432,
+        1.1024999618530273,
+        -0.05000000074505806
+      ],
+      "clampedVertices": 9,
+      "maximumCorrectionM": 1.9311904907226562e-05,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "removable-roof:carbon": {
+      "sourceLocalMin": [
+        -0.6240000128746033,
+        1.0175000429153442,
+        -0.9160000085830688
+      ],
+      "sourceLocalMax": [
+        0.6240000128746033,
+        1.1045000553131104,
+        -0.04399999976158142
+      ],
+      "clampedVertices": 7,
+      "maximumCorrectionM": 0.001145601247773582,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "front-left-steer:titanium": {
+      "sourceLocalMin": [
+        -0.0004999637603759766,
+        -0.04249998927116394,
+        -0.23000001907348633
+      ],
+      "sourceLocalMax": [
+        0.09450000524520874,
+        0.11250001192092896,
+        -0.13999998569488525
+      ],
+      "clampedVertices": 2,
+      "maximumCorrectionM": 0.009445538229385658,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "front-left-steer-roll:titanium": {
+      "sourceLocalMin": [
+        -0.11527997255325317,
+        -0.28200000524520874,
+        -0.28199994564056396
+      ],
+      "sourceLocalMax": [
+        0.15700000524520874,
+        0.28199994564056396,
+        0.28199994564056396
+      ],
+      "clampedVertices": 5,
+      "maximumCorrectionM": 0.05869634507546839,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "front-left-steer-roll:rubber": {
+      "sourceLocalMin": [
+        -0.1355850100517273,
+        -0.35049968957901,
+        -0.3504997491836548
+      ],
+      "sourceLocalMax": [
+        0.13600003719329834,
+        0.3504997491836548,
+        0.35049962997436523
+      ],
+      "clampedVertices": 15,
+      "maximumCorrectionM": 0.10607314010743182,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "front-right-steer:titanium": {
+      "sourceLocalMin": [
+        -0.09450000524520874,
+        -0.04249998927116394,
+        -0.23000001907348633
+      ],
+      "sourceLocalMax": [
+        0.0004999637603759766,
+        0.11250001192092896,
+        -0.13999998569488525
+      ],
+      "clampedVertices": 2,
+      "maximumCorrectionM": 0.00944553553331322,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "front-right-steer-roll:titanium": {
+      "sourceLocalMin": [
+        -0.15700000524520874,
+        -0.28200000524520874,
+        -0.28199994564056396
+      ],
+      "sourceLocalMax": [
+        0.125760018825531,
+        0.28199994564056396,
+        0.28199994564056396
+      ],
+      "clampedVertices": 6,
+      "maximumCorrectionM": 0.05366197218109448,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "front-right-steer-roll:rubber": {
+      "sourceLocalMin": [
+        -0.13600003719329834,
+        -0.35049968957901,
+        -0.3504997491836548
+      ],
+      "sourceLocalMax": [
+        0.1355850100517273,
+        0.3504997491836548,
+        0.35049962997436523
+      ],
+      "clampedVertices": 15,
+      "maximumCorrectionM": 0.10607314010743182,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-left-steer:titanium": {
+      "sourceLocalMin": [
+        -0.0004999637603759766,
+        -0.04249998927116394,
+        -0.23000001907348633
+      ],
+      "sourceLocalMax": [
+        0.09450000524520874,
+        0.11250001192092896,
+        -0.13999998569488525
+      ],
+      "clampedVertices": 2,
+      "maximumCorrectionM": 0.009445538229385658,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-left-steer-roll:titanium": {
+      "sourceLocalMin": [
+        -0.12496000528335571,
+        -0.28200000524520874,
+        -0.28199994564056396
+      ],
+      "sourceLocalMax": [
+        0.16800004243850708,
+        0.28199994564056396,
+        0.28199994564056396
+      ],
+      "clampedVertices": 6,
+      "maximumCorrectionM": 0.0573573414378473,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-left-steer-roll:rubber": {
+      "sourceLocalMin": [
+        -0.1469699740409851,
+        -0.35049968957901,
+        -0.35049962997436523
+      ],
+      "sourceLocalMax": [
+        0.1470000147819519,
+        0.3504997491836548,
+        0.3504997491836548
+      ],
+      "clampedVertices": 18,
+      "maximumCorrectionM": 0.024904432162432783,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-right-steer:titanium": {
+      "sourceLocalMin": [
+        -0.09450000524520874,
+        -0.04249998927116394,
+        -0.23000001907348633
+      ],
+      "sourceLocalMax": [
+        0.0004999637603759766,
+        0.11250001192092896,
+        -0.13999998569488525
+      ],
+      "clampedVertices": 2,
+      "maximumCorrectionM": 0.00944553553331322,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-right-steer-roll:titanium": {
+      "sourceLocalMin": [
+        -0.16800004243850708,
+        -0.28200000524520874,
+        -0.28199994564056396
+      ],
+      "sourceLocalMax": [
+        0.13631999492645264,
+        0.28199994564056396,
+        0.28199994564056396
+      ],
+      "clampedVertices": 5,
+      "maximumCorrectionM": 0.05604344672298829,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-right-steer-roll:rubber": {
+      "sourceLocalMin": [
+        -0.1470000147819519,
+        -0.35049968957901,
+        -0.35049962997436523
+      ],
+      "sourceLocalMax": [
+        0.1469699740409851,
+        0.3504997491836548,
+        0.3504997491836548
+      ],
+      "clampedVertices": 18,
+      "maximumCorrectionM": 0.024884365291030976,
+      "maximumQuantizationEscapeM": 5e-05
+    }
+  },
+  "low": {
+    "body:carbon": {
+      "sourceLocalMin": [
+        -0.994750440120697,
+        0.0945468619465828,
+        -2.3299999237060547
+      ],
+      "sourceLocalMax": [
+        0.9900000095367432,
+        1.0806173086166382,
+        2.325000047683716
+      ],
+      "clampedVertices": 2,
+      "maximumCorrectionM": 0.035980404181190036,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "body:white": {
+      "sourceLocalMin": [
+        -0.7378946542739868,
+        0.2236081063747406,
+        -0.8629926443099976
+      ],
+      "sourceLocalMax": [
+        0.7378946542739868,
+        1.068147897720337,
+        0.9184615612030029
+      ],
+      "clampedVertices": 3,
+      "maximumCorrectionM": 0.0019384026371616378,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "body:titanium": {
+      "sourceLocalMin": [
+        -0.958359956741333,
+        0.10249999165534973,
+        -2.325000047683716
+      ],
+      "sourceLocalMax": [
+        0.958359956741333,
+        1.0451064109802246,
+        1.5191971063613892
+      ],
+      "clampedVertices": 22,
+      "maximumCorrectionM": 0.08794021531981522,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "body:tail": {
+      "sourceLocalMin": [
+        -0.9929223656654358,
+        0.3359999656677246,
+        -2.3297998905181885
+      ],
+      "sourceLocalMax": [
+        0.9929223656654358,
+        0.7320161461830139,
+        0.9659553170204163
+      ],
+      "clampedVertices": 2,
+      "maximumCorrectionM": 0.0005486607519198474,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "body:display": {
+      "sourceLocalMin": [
+        -0.16699999570846558,
+        0.6104785799980164,
+        0.021474193781614304
+      ],
+      "sourceLocalMax": [
+        0.16699999570846558,
+        1.002500057220459,
+        0.4981229305267334
+      ],
+      "clampedVertices": 1,
+      "maximumCorrectionM": 0.055903301273995426,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "steer-by-wire-yoke:white": {
+      "sourceLocalMin": [
+        -0.18000000715255737,
+        -0.12700003385543823,
+        -0.07164999842643738
+      ],
+      "sourceLocalMax": [
+        0.1799997091293335,
+        0.12700003385543823,
+        0.2349148392677307
+      ],
+      "clampedVertices": 0,
+      "maximumCorrectionM": 0.0,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "active-rear-wing:paint": {
+      "sourceLocalMin": [
+        -0.953000009059906,
+        -0.24949997663497925,
+        -0.1169288158416748
+      ],
+      "sourceLocalMax": [
+        0.9610000252723694,
+        0.017304837703704834,
+        0.11125826835632324
+      ],
+      "clampedVertices": 2,
+      "maximumCorrectionM": 0.0017938957185403565,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "body:paint": {
+      "sourceLocalMin": [
+        -1.0054999589920044,
+        0.2254999876022339,
+        -2.299999952316284
+      ],
+      "sourceLocalMax": [
+        1.0054999589920044,
+        1.084665060043335,
+        2.311000108718872
+      ],
+      "clampedVertices": 8,
+      "maximumCorrectionM": 0.0009424835404623495,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "body:glass": {
+      "sourceLocalMin": [
+        -0.734000027179718,
+        0.6765000224113464,
+        -1.7200000286102295
+      ],
+      "sourceLocalMax": [
+        0.734000027179718,
+        1.0734999179840088,
+        0.949999988079071
+      ],
+      "clampedVertices": 5,
+      "maximumCorrectionM": 0.0001342296600341797,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "body:headlight": {
+      "sourceLocalMin": [
+        -0.8763999938964844,
+        0.4307011365890503,
+        1.9109998941421509
+      ],
+      "sourceLocalMax": [
+        0.8763999938964844,
+        0.6221991181373596,
+        2.3157999515533447
+      ],
+      "clampedVertices": 0,
+      "maximumCorrectionM": 0.0,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "butterfly-door-left:glass": {
+      "sourceLocalMin": [
+        -0.21999990940093994,
+        0.11000001430511475,
+        -1.7149999141693115
+      ],
+      "sourceLocalMax": [
+        0.008857011795043945,
+        0.49398982524871826,
+        0.0
+      ],
+      "clampedVertices": 5,
+      "maximumCorrectionM": 1.5974044799804688e-05,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "butterfly-door-left:paint": {
+      "sourceLocalMin": [
+        -0.2259998321533203,
+        -0.30943432450294495,
+        -1.722000002861023
+      ],
+      "sourceLocalMax": [
+        0.11841678619384766,
+        0.49969613552093506,
+        0.00700002908706665
+      ],
+      "clampedVertices": 4,
+      "maximumCorrectionM": 0.0013016462271461797,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "butterfly-door-left:accent": {
+      "sourceLocalMin": [
+        -0.12142610549926758,
+        -0.3093767762184143,
+        -1.540623664855957
+      ],
+      "sourceLocalMax": [
+        -0.11159992218017578,
+        -0.0544281005859375,
+        -0.21052074432373047
+      ],
+      "clampedVertices": 0,
+      "maximumCorrectionM": 0.0,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "butterfly-door-right:glass": {
+      "sourceLocalMin": [
+        -0.008857011795043945,
+        0.11000001430511475,
+        -1.7149999141693115
+      ],
+      "sourceLocalMax": [
+        0.21999990940093994,
+        0.49398982524871826,
+        0.0
+      ],
+      "clampedVertices": 5,
+      "maximumCorrectionM": 1.5974044799804688e-05,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "butterfly-door-right:paint": {
+      "sourceLocalMin": [
+        -0.11841678619384766,
+        -0.30943432450294495,
+        -1.722000002861023
+      ],
+      "sourceLocalMax": [
+        0.2259998321533203,
+        0.49969613552093506,
+        0.00700002908706665
+      ],
+      "clampedVertices": 4,
+      "maximumCorrectionM": 0.0012862682121566756,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "butterfly-door-right:accent": {
+      "sourceLocalMin": [
+        0.11159992218017578,
+        -0.3093767762184143,
+        -1.540623664855957
+      ],
+      "sourceLocalMax": [
+        0.12142610549926758,
+        -0.0544281005859375,
+        -0.21052074432373047
+      ],
+      "clampedVertices": 2,
+      "maximumCorrectionM": 0.007249440988266391,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-suction-fan-0:titanium": {
+      "sourceLocalMin": [
+        -0.09099894762039185,
+        -0.09074008464813232,
+        -0.009999990463256836
+      ],
+      "sourceLocalMax": [
+        0.08844345808029175,
+        0.09099207818508148,
+        0.01399993896484375
+      ],
+      "clampedVertices": 3,
+      "maximumCorrectionM": 0.0018009263916993563,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-suction-fan-1:titanium": {
+      "sourceLocalMin": [
+        -0.09099896252155304,
+        -0.09074008464813232,
+        -0.009999990463256836
+      ],
+      "sourceLocalMax": [
+        0.08844345062971115,
+        0.09099207818508148,
+        0.01399993896484375
+      ],
+      "clampedVertices": 3,
+      "maximumCorrectionM": 0.0007139891297399506,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-suction-fan-2:titanium": {
+      "sourceLocalMin": [
+        -0.09099894762039185,
+        -0.09074008464813232,
+        -0.009999990463256836
+      ],
+      "sourceLocalMax": [
+        0.08844347298145294,
+        0.09099207818508148,
+        0.01399993896484375
+      ],
+      "clampedVertices": 3,
+      "maximumCorrectionM": 0.0007139891297399506,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-suction-fan-3:titanium": {
+      "sourceLocalMin": [
+        -0.09099894762039185,
+        -0.09074008464813232,
+        -0.009999990463256836
+      ],
+      "sourceLocalMax": [
+        0.08844345808029175,
+        0.09099207818508148,
+        0.01399993896484375
+      ],
+      "clampedVertices": 3,
+      "maximumCorrectionM": 0.0018009263916993563,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "removable-roof:glass": {
+      "sourceLocalMin": [
+        -0.6150000095367432,
+        1.065500020980835,
+        -0.9100000262260437
+      ],
+      "sourceLocalMax": [
+        0.6150000095367432,
+        1.1024999618530273,
+        -0.05000000074505806
+      ],
+      "clampedVertices": 10,
+      "maximumCorrectionM": 0.0003103017807006836,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "removable-roof:carbon": {
+      "sourceLocalMin": [
+        -0.6240000128746033,
+        1.0175000429153442,
+        -0.9160000085830688
+      ],
+      "sourceLocalMax": [
+        0.6240000128746033,
+        1.1045000553131104,
+        -0.04399999976158142
+      ],
+      "clampedVertices": 5,
+      "maximumCorrectionM": 0.0020316838903381798,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "front-left-steer:titanium": {
+      "sourceLocalMin": [
+        -0.0004999637603759766,
+        -0.04249998927116394,
+        -0.23000001907348633
+      ],
+      "sourceLocalMax": [
+        0.09450000524520874,
+        0.11250001192092896,
+        -0.13999998569488525
+      ],
+      "clampedVertices": 3,
+      "maximumCorrectionM": 0.03426812515300499,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "front-left-steer-roll:titanium": {
+      "sourceLocalMin": [
+        -0.11527997255325317,
+        -0.28200000524520874,
+        -0.28199994564056396
+      ],
+      "sourceLocalMax": [
+        0.15700000524520874,
+        0.28199994564056396,
+        0.28199994564056396
+      ],
+      "clampedVertices": 5,
+      "maximumCorrectionM": 0.05869634507546839,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "front-left-steer-roll:rubber": {
+      "sourceLocalMin": [
+        -0.1355850100517273,
+        -0.35049968957901,
+        -0.3504997491836548
+      ],
+      "sourceLocalMax": [
+        0.13600003719329834,
+        0.3504997491836548,
+        0.35049962997436523
+      ],
+      "clampedVertices": 16,
+      "maximumCorrectionM": 0.10607314010743182,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "front-right-steer:titanium": {
+      "sourceLocalMin": [
+        -0.09450000524520874,
+        -0.04249998927116394,
+        -0.23000001907348633
+      ],
+      "sourceLocalMax": [
+        0.0004999637603759766,
+        0.11250001192092896,
+        -0.13999998569488525
+      ],
+      "clampedVertices": 3,
+      "maximumCorrectionM": 0.03426812515300499,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "front-right-steer-roll:titanium": {
+      "sourceLocalMin": [
+        -0.15700000524520874,
+        -0.28200000524520874,
+        -0.28199994564056396
+      ],
+      "sourceLocalMax": [
+        0.125760018825531,
+        0.28199994564056396,
+        0.28199994564056396
+      ],
+      "clampedVertices": 6,
+      "maximumCorrectionM": 0.05366197218109448,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "front-right-steer-roll:rubber": {
+      "sourceLocalMin": [
+        -0.13600003719329834,
+        -0.35049968957901,
+        -0.3504997491836548
+      ],
+      "sourceLocalMax": [
+        0.1355850100517273,
+        0.3504997491836548,
+        0.35049962997436523
+      ],
+      "clampedVertices": 16,
+      "maximumCorrectionM": 0.10607314010743182,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-left-steer:titanium": {
+      "sourceLocalMin": [
+        -0.0004999637603759766,
+        -0.04249998927116394,
+        -0.23000001907348633
+      ],
+      "sourceLocalMax": [
+        0.09450000524520874,
+        0.11250001192092896,
+        -0.13999998569488525
+      ],
+      "clampedVertices": 3,
+      "maximumCorrectionM": 0.03426812515300499,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-left-steer-roll:titanium": {
+      "sourceLocalMin": [
+        -0.12496000528335571,
+        -0.28200000524520874,
+        -0.28199994564056396
+      ],
+      "sourceLocalMax": [
+        0.16800004243850708,
+        0.28199994564056396,
+        0.28199994564056396
+      ],
+      "clampedVertices": 7,
+      "maximumCorrectionM": 0.0573573414378473,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-left-steer-roll:rubber": {
+      "sourceLocalMin": [
+        -0.1469699740409851,
+        -0.35049968957901,
+        -0.35049962997436523
+      ],
+      "sourceLocalMax": [
+        0.1470000147819519,
+        0.3504997491836548,
+        0.3504997491836548
+      ],
+      "clampedVertices": 21,
+      "maximumCorrectionM": 0.024904432162432783,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-right-steer:titanium": {
+      "sourceLocalMin": [
+        -0.09450000524520874,
+        -0.04249998927116394,
+        -0.23000001907348633
+      ],
+      "sourceLocalMax": [
+        0.0004999637603759766,
+        0.11250001192092896,
+        -0.13999998569488525
+      ],
+      "clampedVertices": 3,
+      "maximumCorrectionM": 0.03426812515300499,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-right-steer-roll:titanium": {
+      "sourceLocalMin": [
+        -0.16800004243850708,
+        -0.28200000524520874,
+        -0.28199994564056396
+      ],
+      "sourceLocalMax": [
+        0.13631999492645264,
+        0.28199994564056396,
+        0.28199994564056396
+      ],
+      "clampedVertices": 6,
+      "maximumCorrectionM": 0.05604344672298829,
+      "maximumQuantizationEscapeM": 5e-05
+    },
+    "rear-right-steer-roll:rubber": {
+      "sourceLocalMin": [
+        -0.1470000147819519,
+        -0.35049968957901,
+        -0.35049962997436523
+      ],
+      "sourceLocalMax": [
+        0.1469699740409851,
+        0.3504997491836548,
+        0.3504997491836548
+      ],
+      "clampedVertices": 21,
+      "maximumCorrectionM": 0.024884365291030976,
+      "maximumQuantizationEscapeM": 5e-05
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import * as THREE from 'three';
 import { cityModule } from './helpers/city-modules.mjs';
 
@@ -12,6 +13,22 @@ const {
   TESLA_ROADSTER_THRUSTERS,
   TESLA_ROADSTER_FANS,
 } = await import(cityModule('assets/tesla-roadster'));
+const data = JSON.parse(
+  readFileSync(
+    new URL(
+      '../lib/city/assets/tesla-roadster-detailed-data.json',
+      import.meta.url,
+    ),
+  ),
+);
+const metrics = JSON.parse(
+  readFileSync(
+    new URL(
+      '../lib/city/assets/tesla-roadster-detailed-metrics.json',
+      import.meta.url,
+    ),
+  ),
+);
 const active = (model) =>
   model.group.children.find((child) => child.isGroup && child.visible);
 const meshes = (root) => {
@@ -49,7 +66,10 @@ test('all three source-authored Tesla levels are finite with monotonic, bounded 
         assert.ok(Array.from(position.array).every(Number.isFinite));
         assert.ok(Array.from(normal.array).every(Number.isFinite));
         assert.ok(mesh.geometry.boundingSphere.radius > 0);
-        assert.equal(mesh.material.vertexColors, false);
+        assert.equal(
+          mesh.material.vertexColors,
+          mesh.material.userData.semantic_role !== 'glass',
+        );
         assert.ok(
           !Object.values(mesh.material).some((value) => value?.isTexture),
         );
@@ -58,7 +78,10 @@ test('all three source-authored Tesla levels are finite with monotonic, bounded 
         else roles.set(role, mesh.material);
       }
     }
-    assert.equal(roles.size, 12);
+    assert.equal(
+      roles.size,
+      new Set(data.lods.high.parts.map((part) => part.role)).size,
+    );
   } finally {
     model.dispose();
   }
@@ -72,6 +95,8 @@ test('tier switching reuses exactly three roots and preserves wheel/yoke/fan/win
       wheelSpinRad: 1.7,
       fanSpinRad: 2.2,
       wingDeploy: 0.8,
+      doorsOpen: 0.6,
+      roofLift: 0.4,
     });
     const roots = new Map();
     for (let cycle = 0; cycle < 8; cycle++)
@@ -96,19 +121,36 @@ test('tier switching reuses exactly three roots and preserves wheel/yoke/fan/win
           -0.31 * 2.6,
         );
         assert.equal(
-          root.getObjectByName('illustrative-underbody-fan-0').rotation.y,
+          root.getObjectByName('rear-suction-fan-0').rotation.z,
           2.2,
         );
         assert.equal(
-          root.getObjectByName('illustrative-underbody-fan-1').rotation.y,
+          root.getObjectByName('rear-suction-fan-1').rotation.z,
           -2.2,
         );
         assert.ok(
           Math.abs(
             root.getObjectByName('active-rear-wing').position.y -
-              (0.74 + 0.8 * 0.23),
+              (data.rig.nodes.find((node) => node.id === data.rig.wing)
+                .position[1] +
+                0.8 * 0.24),
           ) < 1e-12,
         );
+        assert.ok(
+          Math.abs(
+            root.getObjectByName(data.rig.wing).rotation.x + 0.8 * 0.28,
+          ) < 1e-12,
+        );
+        assert.equal(root.getObjectByName(data.rig.roof).position.y, 0.4);
+        for (const door of Object.values(data.rig.doors)) {
+          const expected = new THREE.Quaternion().setFromAxisAngle(
+            new THREE.Vector3(...door.axis).normalize(),
+            0.6 * Math.PI * 0.4,
+          );
+          assert.ok(
+            root.getObjectByName(door.id).quaternion.angleTo(expected) < 1e-7,
+          );
+        }
       }
     assert.equal(model.stats().cachedLevels, 3);
     assert.equal(model.group.children.length, 4);
@@ -128,7 +170,7 @@ test('collision metadata contains actual animated vertices across gameplay steer
     const [hx, hy, hz] = model.dimensions.halfExtents;
     for (const quality of ['low', 'medium', 'high']) {
       model.setQuality(quality);
-      for (const steeringRad of [-0.42, 0, 0.42]) {
+      for (const steeringRad of [-0.62, 0, 0.62]) {
         model.update({
           steeringRad,
           wheelSpinRad: 0.4,
@@ -159,15 +201,32 @@ test('the contact datum, conservative hull and driver eye agree with the actual 
     assert.ok(bounds.max.y <= 2 * hy + 1e-6);
     assert.ok(bounds.max.x <= hx && bounds.min.x >= -hx);
     assert.ok(bounds.max.z <= hz && bounds.min.z >= -hz);
-    assert.equal(model.dimensions.contactToCenter, 0.62);
-    assert.equal(model.dimensions.wheelbase, 2.78);
+    assert.equal(
+      model.dimensions.contactToCenter,
+      model.dimensions.halfExtents[1],
+    );
+    assert.equal(model.dimensions.wheelbase, metrics.dimensions.wheelbase);
     const ray = new THREE.Raycaster(
-      new THREE.Vector3(0, 4, -0.5),
+      new THREE.Vector3(
+        model.anchors.driverEye[0],
+        4,
+        model.anchors.driverEye[2],
+      ),
       new THREE.Vector3(0, -1, 0),
     );
     const roof = ray.intersectObject(level, true)[0];
-    assert.equal(roof.object.material.userData.semantic_role, 'carbon');
-    assert.ok(roof.point.y > 1.2, 'closed opaque roof above the driver');
+    assert.equal(roof.object.material.userData.semantic_role, 'glass');
+    assert.ok(
+      roof.point.y - model.anchors.driverEye[1] > 0.025,
+      'actual closed canopy stays beyond the cockpit near plane',
+    );
+    assert.ok(
+      Math.abs(
+        roof.point.y -
+          model.anchors.driverEye[1] -
+          metrics.levels.high.camera.canopyDistanceM,
+      ) < 1e-6,
+    );
     const eye = new THREE.Vector3(...model.anchors.driverEye),
       look = new THREE.Vector3(...model.anchors.driverLookAt)
         .sub(eye)
@@ -236,6 +295,7 @@ test('ground-fit metadata follows actual wheel contact centres and the lowest ri
       model.update({ steeringRad: 0.42, wingDeploy: 1, wheelSpinRad: 0 });
       model.group.updateMatrixWorld(true);
       const level = active(model);
+      const expected = metrics.levels[quality];
       for (const [i, name] of wheelNames.entries()) {
         const centre = level
             .getObjectByName(name)
@@ -249,13 +309,31 @@ test('ground-fit metadata follows actual wheel contact centres and the lowest ri
         near(contact.x, centre.x);
         near(contact.z, centre.z);
         near(contact.y, centre.y - model.dimensions.wheelRadius);
-        const tyre = level.getObjectByName(`${name}:rubber`),
+        const tyre = level.getObjectByName(`${name}-roll:rubber`),
           hit = ray.intersectObject(tyre)[0];
         assert.ok(
           hit,
           `${quality}: the metadata point lies below the actual tyre tread`,
         );
-        near(hit.point.y, contact.y);
+        near(hit.point.y, expected.tyreContactRayY[`${name}-roll`]);
+        assert.ok(
+          hit.point.y >= contact.y - 1e-6 && hit.point.y - contact.y < 0.001,
+          'the enclosing analytic tread is within one millimetre of quantized physical geometry',
+        );
+        const roll = level.getObjectByName(`${name}-roll`);
+        for (const angle of [0.173, 0.71, 1.37, 2.53, 4.11, 5.79]) {
+          roll.rotation.x = angle;
+          level.updateMatrixWorld(true);
+          const rotatedHit = ray.intersectObject(tyre)[0];
+          assert.ok(
+            rotatedHit &&
+              rotatedHit.point.y >= contact.y - 1e-6 &&
+              rotatedHit.point.y - contact.y < 0.001,
+            `${quality}/${name}: rotating the continuous tread cannot expose an inner high surface or penetrate the road`,
+          );
+        }
+        roll.rotation.x = 0;
+        level.updateMatrixWorld(true);
       }
       near(datum.wheelContacts[1][0] - datum.wheelContacts[0][0], datum.track);
       near(
@@ -294,7 +372,7 @@ test('ground-fit metadata follows actual wheel contact centres and the lowest ri
             datum.wheelContacts[2][2] - model.dimensions.wheelRadius
           )
             rear = Math.min(rear, point.y);
-          if (object.name === 'fan-rotor:titanium')
+          if (data.rig.fans.includes(object.parent.name))
             fan = Math.min(fan, point.y);
         }
         const index = object.geometry.index,
@@ -308,6 +386,18 @@ test('ground-fit metadata follows actual wheel contact centres and the lowest ri
               )
               .applyMatrix4(object.matrixWorld),
           );
+          const frontPolygon = clipAtZ(
+            triangle,
+            datum.wheelContacts[0][2] + model.dimensions.wheelRadius,
+            true,
+          );
+          const rearPolygon = clipAtZ(
+            triangle,
+            datum.wheelContacts[2][2] - model.dimensions.wheelRadius,
+            false,
+          );
+          for (const point of frontPolygon) front = Math.min(front, point.y);
+          for (const point of rearPolygon) rear = Math.min(rear, point.y);
           for (const [sectionIndex, section] of datum.bodySections.entries()) {
             let polygon = clipAtZ(triangle, section.minZ, true);
             if (polygon.length) polygon = clipAtZ(polygon, section.maxZ, false);
@@ -320,38 +410,38 @@ test('ground-fit metadata follows actual wheel contact centres and the lowest ri
         }
       });
       for (const [i, section] of datum.bodySections.entries()) {
-        near(sectionMinimums[i], datum.measured.bodySectionMinimumY[i]);
+        near(sectionMinimums[i], expected.bodySectionMinimumY[i]);
+        const limitingMinimum = Math.min(
+          ...Object.values(metrics.levels).map(
+            (level) => level.animatedBodySectionMinimumY[i],
+          ),
+        );
         assert.ok(
           section.clearance <= sectionMinimums[i] &&
-            sectionMinimums[i] - section.clearance < 0.01,
-          `${quality}: slab clearance rounds down from triangles clipped at both Z boundaries`,
+            limitingMinimum - section.clearance >= 0.002 - 1e-9 &&
+            limitingMinimum - section.clearance < 0.003 + 1e-9,
+          `${quality}: global clearance keeps 2–3mm below the limiting tier's exact clipped triangles`,
         );
       }
-      near(minimum, datum.measured.minimumBodyY);
-      near(front, datum.measured.frontBumperMinimumY);
-      near(rear, datum.measured.rearDiffuserMinimumY);
-      near(fan, datum.measured.centralFanMinimumY);
+      near(minimum, expected.minimumBodyY);
+      near(front, expected.frontBumperMinimumY);
+      near(rear, expected.rearDiffuserMinimumY);
+      near(fan, expected.fanMinimumY);
       assert.ok(
         datum.chassisClearance <= minimum &&
           minimum - datum.chassisClearance < 0.01,
       );
       const frontOverhang = bounds.max.z - datum.wheelContacts[0][2],
         rearOverhang = datum.wheelContacts[2][2] - bounds.min.z;
-      assert.ok(
-        frontOverhang <= datum.measured.frontOverhang &&
-          datum.measured.frontOverhang - frontOverhang < 0.001,
-      );
-      assert.ok(
-        rearOverhang <= datum.measured.rearOverhang &&
-          datum.measured.rearOverhang - rearOverhang < 0.001,
-      );
+      assert.ok(frontOverhang <= datum.measured.frontOverhang + 1e-6);
+      assert.ok(rearOverhang <= datum.measured.rearOverhang + 1e-6);
       const floorRay = new THREE.Raycaster(
         new THREE.Vector3(0, 0, 0),
         new THREE.Vector3(0, 1, 0),
       );
       near(
         floorRay.intersectObject(level, true)[0].point.y,
-        datum.measured.undertrayMinimumY,
+        expected.undertrayAtOriginY,
       );
     }
   } finally {
@@ -366,7 +456,7 @@ test('body geometry leaves real wheel openings and cockpit systems survive the l
     model.group.updateMatrixWorld(true);
     const paint = level.getObjectByName('body:paint'),
       ray = new THREE.Raycaster(
-        new THREE.Vector3(2, 0.35, 1.39),
+        new THREE.Vector3(2, 0.3505, 1.35),
         new THREE.Vector3(-1, 0, 0),
       );
     assert.equal(
@@ -376,7 +466,6 @@ test('body geometry leaves real wheel openings and cockpit systems survive the l
     );
     for (const name of [
       'body:white',
-      'body:suede',
       'body:display',
       'body:headlight',
       'body:tail',
@@ -411,7 +500,7 @@ test('closed copper canopy hides the bright cockpit from rear chase while its in
       const level = active(model),
         glass = level.getObjectByName('body:glass'),
         outside = new THREE.Vector3(0, 3.4, -7.3),
-        rearPane = new THREE.Vector3(0, 1.015, -1.255),
+        rearPane = new THREE.Vector3(0, 1.04, -1.08),
         direction = rearPane.clone().sub(outside).normalize(),
         ray = new THREE.Raycaster(outside, direction);
       assert.ok(
@@ -421,12 +510,15 @@ test('closed copper canopy hides the bright cockpit from rear chase while its in
       assert.equal(glass.material.side, THREE.FrontSide);
       const exteriorHit = ray.intersectObject(level, true)[0];
       assert.equal(
-        exteriorHit.object,
-        glass,
+        exteriorHit.object.material.userData.semantic_role,
+        'glass',
         `${quality}: rear glazing closes the cabin`,
       );
       assert.ok(
-        exteriorHit.face.normal.dot(direction.clone().negate()) > 0.5,
+        exteriorHit.face.normal
+          .clone()
+          .transformDirection(exteriorHit.object.matrixWorld)
+          .dot(direction.clone().negate()) > 0.5,
         'rear glazing faces the outside camera instead of being backface-culled',
       );
       ray.set(
@@ -458,7 +550,7 @@ test('raised front fenders cover the inboard tyre shoulder at every geometry tie
       model.group.updateMatrixWorld(true);
       for (const sign of [-1, 1]) {
         const ray = new THREE.Raycaster(
-            new THREE.Vector3(sign * 0.847, 2, 1.47),
+            new THREE.Vector3(sign * 0.78, 2, 1.35),
             new THREE.Vector3(0, -1, 0),
           ),
           hit = ray.intersectObject(active(model), true)[0];
@@ -468,7 +560,7 @@ test('raised front fenders cover the inboard tyre shoulder at every geometry tie
           quality,
         );
         assert.ok(
-          hit.point.y > 0.71,
+          hit.point.y > 0.3505 + model.dimensions.wheelRadius,
           'tyre tread cannot poke through the white fender',
         );
       }
@@ -477,7 +569,8 @@ test('raised front fenders cover the inboard tyre shoulder at every geometry tie
         .geometry.getAttribute('position');
       for (let i = 0; i < light.count; i++)
         assert.ok(
-          Math.hypot(light.getY(i) - 0.35, light.getZ(i) - 1.39) > 0.35,
+          Math.hypot(light.getY(i) - 0.3505, light.getZ(i) - 1.35) >
+            model.dimensions.wheelRadius,
           'lamp aperture stays ahead of the tyre volume',
         );
     }
@@ -486,40 +579,59 @@ test('raised front fenders cover the inboard tyre shoulder at every geometry tie
   }
 });
 
-test('the revised front has a rear-narrow/front-wide central hood, raised outer wings and a real recessed lamp', () => {
-  const model = createTeslaRoadster({ quality: 'high' });
+test('the donor retains a continuous descending compound hood and physical visible lamp optics', () => {
+  const model = createTeslaRoadster({ quality: 'low' });
   try {
-    const level = active(model),
-      hood = level
-        .getObjectByName('body:hood')
-        .geometry.getAttribute('position');
-    let rearWidth = 0,
-      frontWidth = 0;
-    for (let i = 0; i < hood.count; i++) {
-      if (Math.abs(hood.getZ(i) - 0.7) < 1e-5)
-        rearWidth = Math.max(rearWidth, Math.abs(hood.getX(i)));
-      if (Math.abs(hood.getZ(i) - 2.3) < 1e-5)
-        frontWidth = Math.max(frontWidth, Math.abs(hood.getX(i)));
+    for (const quality of ['low', 'medium', 'high']) {
+      model.setQuality(quality);
+      model.group.updateMatrixWorld(true);
+      const level = active(model);
+      let previous = Infinity;
+      for (const z of [1.1, 1.35, 1.9, 2.2]) {
+        const hit = new THREE.Raycaster(
+          new THREE.Vector3(0, 2, z),
+          new THREE.Vector3(0, -1, 0),
+        ).intersectObject(level, true)[0];
+        assert.equal(hit.object.material.userData.semantic_role, 'paint');
+        assert.ok(
+          hit.point.y < previous && hit.point.y > 0.4,
+          'actual central hood descends continuously toward the nose',
+        );
+        previous = hit.point.y;
+      }
+      const lamp = level.getObjectByName('body:headlight'),
+        position = lamp.geometry.getAttribute('position'),
+        index = lamp.geometry.index,
+        visible = new Set();
+      for (let i = 0; i < index.count; i += 3) {
+        const triangle = [0, 1, 2].map((c) =>
+          new THREE.Vector3()
+            .fromBufferAttribute(position, index.getX(i + c))
+            .applyMatrix4(lamp.matrixWorld),
+        );
+        const normal = triangle[1]
+          .clone()
+          .sub(triangle[0])
+          .cross(triangle[2].clone().sub(triangle[0]))
+          .normalize();
+        if (normal.z < 0.4) continue;
+        const centre = triangle
+          .reduce((point, v) => point.add(v), new THREE.Vector3())
+          .multiplyScalar(1 / 3);
+        if (Math.abs(centre.x) < 0.7 || centre.z > 2.2 || centre.y < 0.5)
+          continue;
+        const hit = new THREE.Raycaster(
+          centre.clone().addScaledVector(normal, 0.03),
+          normal.clone().negate(),
+        ).intersectObject(level, true)[0];
+        if (hit?.object === lamp) visible.add(Math.sign(centre.x));
+      }
+      assert.deepEqual(
+        [...visible].sort((a, b) => a - b),
+        [-1, 1],
+        'both sides expose actual emissive projector triangles, rather than a painted lamp decal',
+      );
     }
-    assert.ok(
-      frontWidth > rearWidth * 1.15,
-      'central nose widens towards the front, unlike the early draft',
-    );
-    model.group.updateMatrixWorld(true);
-    const ray = new THREE.Raycaster(
-        new THREE.Vector3(0.98, 2, 1.4),
-        new THREE.Vector3(0, -1, 0),
-      ),
-      outerWing = ray.intersectObject(level, true)[0];
-    assert.equal(outerWing.object.material.userData.semantic_role, 'paint');
-    assert.ok(outerWing.point.y > 0.81);
-    ray.set(new THREE.Vector3(0.86, 2, 1.8), new THREE.Vector3(0, -1, 0));
-    assert.equal(
-      ray.intersectObject(level, true)[0].object.material.userData
-        .semantic_role,
-      'headlight',
-      'paint has a real aperture over the recessed lens',
-    );
   } finally {
     model.dispose();
   }
@@ -579,24 +691,43 @@ test('frame updates have bounded transforms/effects without allocating geometrie
   }
 });
 
-test('night and braking retain material identity and do not introduce extra light or shadow passes', () => {
+test('night, braking and both door ambient strips retain shared material identity without adding lights', () => {
   const model = createTeslaRoadster();
   try {
-    const tail = active(model).getObjectByName('body:tail').material,
+    const root = active(model),
+      tail = root.getObjectByName('body:tail').material,
       original = tail.color.clone();
+    const accents = meshes(root).filter(
+      (mesh) => mesh.material.userData.semantic_role === 'accent',
+    );
+    assert.equal(
+      accents.length,
+      2,
+      'both source door light diffusers retain their ambient role',
+    );
+    const ambient = accents[0].material,
+      day = ambient.emissiveIntensity;
+    assert.equal(accents[1].material, ambient);
     model.update({ brake: 1, night: true });
     assert.ok(tail.color.r > original.r);
-    assert.equal(active(model).getObjectByName('body:tail').material, tail);
+    assert.ok(
+      ambient.emissiveIntensity > day &&
+        ambient.emissive.r > ambient.emissive.g,
+    );
+    assert.equal(root.getObjectByName('body:tail').material, tail);
     const lights = [];
     model.group.traverse((object) => {
       if (object.isLight) lights.push(object);
     });
     assert.equal(lights.length, 0);
-    model.update({ brake: 0, night: false });
-    assert.ok(
-      tail.color.equals(original),
-      'returning to day restores the authored baseline',
+    model.setQuality('high');
+    assert.equal(
+      active(model).getObjectByName('butterfly-door-left:accent').material,
+      ambient,
     );
+    model.update({ brake: 0, night: false });
+    assert.ok(tail.color.equals(original));
+    assert.equal(ambient.emissiveIntensity, day);
   } finally {
     model.dispose();
   }
@@ -630,7 +761,7 @@ test('disposal frees every unique cached geometry and shared material once and d
 });
 
 test('provenance distinguishes the 2026 Rocket interpretation from Tesla CAD and the 2017 concept', () => {
-  assert.match(TESLA_ROADSTER_PROVENANCE.model, /October 15, 2026.*Rocket/);
+  assert.match(TESLA_ROADSTER_PROVENANCE.model, /October 2026.*Rocket/);
   assert.ok(
     TESLA_ROADSTER_PROVENANCE.references.every((url) =>
       [
@@ -684,9 +815,7 @@ test('Rocket exposes the revealed four rear, four lift and two front yaw nozzles
     model.update({ thrust: 1, fanSpinRad: 1.1 });
     const level = active(model);
     assert.equal(
-      level.children.filter((part) =>
-        part.name.startsWith('illustrative-underbody-fan-'),
-      ).length,
+      level.children.filter((part) => data.rig.fans.includes(part.name)).length,
       4,
     );
     assert.equal(

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import * as THREE from 'three';
 import { cityModule } from './helpers/city-modules.mjs';
+import { historicalTeslaShape } from './helpers/tesla-historical-shape.mjs';
 const { TeslaWorld, triangleFace, fixedFacesSource } = await import(
   cityModule('tesla-world')
 );
@@ -504,7 +505,8 @@ test('wheel fitting never invents a roof, protected layer, narrow-hole floor or 
 });
 
 test('model ground body preserves measured rear clearance and front curb clearance independently of wheel suspension travel', () => {
-  const modelShape = createTeslaRoadsterShape();
+  const modelShape = createTeslaRoadsterShape(),
+    rideHeight = modelShape.halfExtents[1] + modelShape.clearance;
   for (const [height, z, shouldBlock] of [
     [0.07, -2.25, false],
     [0.1, -2.25, true],
@@ -547,7 +549,7 @@ test('model ground body preserves measured rear clearance and front curb clearan
         ]),
       ],
     });
-    const p = pose(0, 0.68, 0);
+    const p = pose(0, rideHeight, 0);
     try {
       assert(
         world.support({
@@ -575,13 +577,20 @@ test('model ground body preserves measured rear clearance and front curb clearan
 });
 
 test('minimum ground heave uses only available wheel travel and measured body clearance, retaining ceiling and over-travel collisions', () => {
-  const modelShape = createTeslaRoadsterShape();
+  const modelShape = createTeslaRoadsterShape(),
+    rideHeight = modelShape.halfExtents[1] + modelShape.clearance,
+    rearClearance = modelShape.groundSupport.bodySections[0].clearance,
+    ceilingHeight = 2 * rideHeight + 0.01;
   for (const [height, ceiling, expectedHeave] of [
     [0, false, 0],
-    [0.1, false, 0.015],
-    [0.12, false, 0.035],
-    [0.14, false, null],
-    [0.1, true, null],
+    [rearClearance + 0.015, false, 0.015],
+    [rearClearance + 0.035, false, 0.035],
+    [
+      rearClearance + modelShape.groundSupport.suspensionTravel + 0.005,
+      false,
+      null,
+    ],
+    [rearClearance + 0.015, true, null],
   ]) {
     const floor = ground(),
       floorFaces = floor.load(
@@ -626,9 +635,9 @@ test('minimum ground heave uses only available wheel travel and measured body cl
           'ceiling:0',
           'obstacle',
           [
-            [-10, 1.37, -10],
-            [10, 1.37, -10],
-            [10, 1.37, 10],
+            [-10, ceilingHeight, -10],
+            [10, ceilingHeight, -10],
+            [10, ceilingHeight, 10],
           ],
           false,
           'ceiling',
@@ -638,9 +647,9 @@ test('minimum ground heave uses only available wheel travel and measured body cl
           'ceiling:1',
           'obstacle',
           [
-            [-10, 1.37, -10],
-            [10, 1.37, 10],
-            [-10, 1.37, 10],
+            [-10, ceilingHeight, -10],
+            [10, ceilingHeight, 10],
+            [-10, ceilingHeight, 10],
           ],
           false,
           'ceiling',
@@ -650,7 +659,7 @@ test('minimum ground heave uses only available wheel travel and measured body cl
       sources: [floor, fixedFacesSource('extras', extras)],
     });
     try {
-      const initial = pose(0, 0.68, 0),
+      const initial = pose(0, rideHeight, 0),
         result = world.fitGround({
           pose: initial,
           shape: modelShape,
@@ -667,7 +676,7 @@ test('minimum ground heave uses only available wheel travel and measured body cl
       }
       assert(result);
       assert(
-        Math.abs(result.pose.position[1] - 0.68 - expectedHeave) < 1e-5,
+        Math.abs(result.pose.position[1] - rideHeight - expectedHeave) < 1e-5,
         'choose the smallest feasible source-derived heave rather than always raising the body',
       );
       assert(
@@ -705,6 +714,7 @@ test('minimum ground heave uses only available wheel travel and measured body cl
 
 test('strict ground withdrawal preserves fresh wheel and source proof while checking every ordinary body and every other obstacle', () => {
   const modelShape = createTeslaRoadsterShape(),
+    rideHeight = modelShape.halfExtents[1] + modelShape.clearance,
     floor = ground(),
     floorFaces = floor.load(
       new THREE.Box3(
@@ -733,8 +743,8 @@ test('strict ground withdrawal preserves fresh wheel and source proof while chec
     sources: [floor, fixedFacesSource('ridge', [ridge])],
     validPosition: (p) => p[1] <= 2,
   });
-  const origin = pose(0, 0.68, 0),
-    to = pose(0, 0.88, 0),
+  const origin = pose(0, rideHeight, 0),
+    to = pose(0, rideHeight + 0.2, 0),
     sourceSurfaceId = floorFaces[0].surfaceId;
   const query = {
     origin,
@@ -767,21 +777,21 @@ test('strict ground withdrawal preserves fresh wheel and source proof while chec
     assert.equal(
       world.sweepGroundDeparture({
         ...query,
-        from: pose(0, 0.8, 0),
-        to: pose(0, 1.03, 0),
+        from: pose(0, rideHeight + 0.12, 0),
+        to: pose(0, rideHeight + 0.35, 0),
       }),
       null,
       'later strictly vertical segments retain the same fresh origin',
     );
-    const rotated = pose(0, 0.88, 0, [0.01, 1, 0]);
+    const rotated = pose(0, rideHeight + 0.2, 0, [0.01, 1, 0]);
     for (const patch of [
-      { to: pose(0.001, 0.88, 0) },
-      { from: pose(0, 0.78, 0.001) },
+      { to: pose(0.001, rideHeight + 0.2, 0) },
+      { from: pose(0, rideHeight + 0.1, 0.001) },
       { to: rotated },
-      { to: pose(0, 1.031, 0) },
-      { from: pose(0, 0.78, 0), to: pose(0, 0.77, 0) },
-      { from: pose(0, 0.679, 0) },
-      { origin: pose(0, 0.88, 0) },
+      { to: pose(0, rideHeight + 0.351, 0) },
+      { from: pose(0, rideHeight + 0.1, 0), to: pose(0, rideHeight + 0.09, 0) },
+      { from: pose(0, rideHeight - 0.001, 0) },
+      { origin: pose(0, rideHeight + 0.2, 0) },
       { sourceSurfaceId: 'missing' },
       { to: pose(0, NaN, 0) },
       { shape: { ...modelShape, groundSupport: undefined } },
@@ -825,9 +835,9 @@ test('strict ground withdrawal preserves fresh wheel and source proof while chec
       'launch-blocker',
       kind,
       [
-        [-8, 1.46, -8],
-        [8, 1.46, -8],
-        [0, 1.46, 8],
+        [-8, 2 * rideHeight + 0.1, -8],
+        [8, 2 * rideHeight + 0.1, -8],
+        [0, 2 * rideHeight + 0.1, 8],
       ],
       false,
       kind === 'ground' ? 'protected:bridge:1' : 'launch-blocker',
@@ -855,6 +865,7 @@ test('strict ground withdrawal preserves fresh wheel and source proof while chec
 
 test('ordinary departure never ignores material on its exact source and never accepts a body-intersecting origin', () => {
   const modelShape = createTeslaRoadsterShape(),
+    rideHeight = modelShape.halfExtents[1] + modelShape.clearance,
     floor = ground(),
     floorFaces = floor.load(
       new THREE.Box3(
@@ -879,7 +890,7 @@ test('ordinary departure never ignores material on its exact source and never ac
     world = new TeslaWorld({
       sources: [floor, fixedFacesSource('same-source-ridge', [ridge])],
     }),
-    origin = pose(0, 0.68, 0);
+    origin = pose(0, rideHeight, 0);
   try {
     assert(
       world.support({
@@ -892,7 +903,7 @@ test('ordinary departure never ignores material on its exact source and never ac
     );
     const query = {
       from: origin,
-      to: pose(0, 0.88, 0),
+      to: pose(0, rideHeight + 0.2, 0),
       origin,
       sourceSurfaceId,
       shape: modelShape,
@@ -916,7 +927,7 @@ test('ordinary departure never ignores material on its exact source and never ac
 test('cached XZ bounds preserve point/lateral seam tolerance and circular longitudinal contact while permissions remain live', () => {
   for (const circular of [false, true]) {
     const modelShape = createTeslaRoadsterShape(),
-      p = pose(0, 0.68, 0),
+      p = pose(0, modelShape.halfExtents[1] + modelShape.clearance, 0),
       wheel = modelShape.groundSupport.wheelContacts[0];
     if (!circular) delete modelShape.groundSupport.wheelRadius;
     for (const axis of [0, 2])
@@ -1017,7 +1028,8 @@ test('a real preferred ground contact just outside collision bounds is re-proved
     ),
     sourceSurfaceId = 'ground:asphalt:9:face:3535',
     source = faces.find((face) => face.surfaceId === sourceSurfaceId),
-    modelShape = createTeslaRoadsterShape(),
+    // This unchanged Robson pose/face capture predates the Blender-derived model.
+    modelShape = structuredClone(historicalTeslaShape),
     p = {
       position: [693.6292041051609, 29.428374834901845, 614.7494793311361],
       quaternion: [
@@ -1184,7 +1196,11 @@ test('an offset front body section cannot skip a thin plane struck only during t
       .cross(corner.clone().sub(offset))
       .cross(normal)
       .normalize(),
-    center = new THREE.Vector3(0, 0.68, 0),
+    center = new THREE.Vector3(
+      0,
+      modelShape.halfExtents[1] + modelShape.clearance,
+      0,
+    ),
     distance = corner.length() + modelShape.clearance - 0.00003,
     point = center.clone().addScaledVector(normal, -distance),
     u = rotationAxis.clone().multiplyScalar(10),
@@ -1267,7 +1283,8 @@ test('an offset front body section cannot skip a thin plane struck only during t
 
 test('wheel support retains the actual upper ordinary floor instead of borrowing it for a preferred lower source contact', () => {
   const floors = [ground(), ground(0.2)],
-    modelShape = createTeslaRoadsterShape();
+    modelShape = createTeslaRoadsterShape(),
+    rideHeight = modelShape.halfExtents[1] + modelShape.clearance;
   for (const floor of floors)
     for (const face of floor.load(
       new THREE.Box3(
@@ -1279,7 +1296,7 @@ test('wheel support retains the actual upper ordinary floor instead of borrowing
   const world = new TeslaWorld({ sources: floors });
   try {
     const preferredSurfaceId = 'floor:-40:-40:0:0',
-      p = pose(0, 0.88, 0),
+      p = pose(0, rideHeight + 0.2, 0),
       supported = world.support({
         pose: p,
         shape: modelShape,
@@ -1290,7 +1307,7 @@ test('wheel support retains the actual upper ordinary floor instead of borrowing
     assert(supported && supported.surfaceId.startsWith('floor:-40:-40:0.2:'));
     assert.equal(
       world.support({
-        pose: pose(0, 0.68, 0),
+        pose: pose(0, rideHeight, 0),
         shape: modelShape,
         maxDistance: 1.1,
         preferredSurfaceId,

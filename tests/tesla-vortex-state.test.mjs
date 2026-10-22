@@ -73,6 +73,32 @@ const finite = (s) =>
     [...s.position, ...s.velocity, ...s.quaternion].every(Number.isFinite),
   );
 
+function currentSlopedLaunch(world, saved, lowerM = 0) {
+  const fitted = world.fitGround({
+    pose: saved.initial,
+    shape,
+    preferredSurfaceId: saved.initial.contact.surfaceId,
+    maxAdjustmentM: 0.35,
+  });
+  assert(fitted, 'the unchanged captured road must fit all four current tyres');
+  const position = fitted.pose.position.map(
+    (v, i) => v - (i === 1 ? lowerM : 0),
+  );
+  const state = createTesla(position, saved.initial.heading, fitted.contact);
+  state.quaternion = [...fitted.pose.quaternion];
+  assert(
+    world.support({
+      pose: state,
+      shape,
+      preferredSurfaceId: fitted.contact.surfaceId,
+      maxDistance: height + 0.35,
+      adhesion: false,
+    }),
+    'the retargeted launch still has live physical tyre support',
+  );
+  return state;
+}
+
 test('V performs one fully swept barrel roll over five physical car envelopes and naturally lands without P', () => {
   const cars = [8, 13.5, 19, 24.5, 30].map((z, i) =>
     box(`physical-car:${i}`, 0, z, 1.1, 2.1, 0.05, 1.9),
@@ -259,12 +285,7 @@ test('the actual sloped Robson launch obeys strict departure before its roll clo
   const world = new TeslaWorld({
     sources: [fixedFacesSource('actual-graded-launch', faces)],
   });
-  const state = createTesla(
-    saved.initial.position,
-    saved.initial.heading,
-    saved.initial.contact,
-  );
-  state.quaternion = [...saved.initial.quaternion];
+  const state = currentSlopedLaunch(world, saved);
   let strictCalls = 0,
     sawRoll = false;
   const departure = world.sweepGroundDeparture.bind(world);
@@ -313,12 +334,12 @@ test('a physical ceiling in the first strict withdrawal cancels V and freshly re
       f.normal,
     ),
   );
-  const state = createTesla(
-    saved.initial.position,
-    saved.initial.heading,
-    saved.initial.contact,
-  );
-  state.quaternion = [...saved.initial.quaternion];
+  const floorWorld = new TeslaWorld({
+    sources: [fixedFacesSource('actual-launch-floor', faces)],
+  });
+  const state = currentSlopedLaunch(floorWorld, saved);
+  floorWorld.dispose();
+  const origin = [...state.position];
   const { up, forward } = teslaVehicleFrame(state);
   const rightY =
     2 *
@@ -359,11 +380,7 @@ test('a physical ceiling in the first strict withdrawal cancels V and freshly re
     assert.equal(state.vortexPreparing, false);
     assert.equal(state.groundDeparture, null);
     assert.equal(state.mode, 'ground');
-    assert(
-      Math.hypot(
-        ...state.position.map((v, i) => v - saved.initial.position[i]),
-      ) < 0.03,
-    );
+    assert(Math.hypot(...state.position.map((v, i) => v - origin[i])) < 0.03);
   } finally {
     world.dispose();
   }
@@ -393,12 +410,7 @@ test('B or P during strict V preparation returns safely; a removed floor cancels
     const world = new TeslaWorld({
       sources: [fixedFacesSource('actual-launch-floor', faces)],
     });
-    const state = createTesla(
-      saved.initial.position.map((v, i) => v - (i === 1 ? 0.02 : 0)),
-      saved.initial.heading,
-      saved.initial.contact,
-    );
-    state.quaternion = [...saved.initial.quaternion];
+    const state = currentSlopedLaunch(world, saved, 0.02);
     try {
       stepTesla(state, { vortex: true }, 0.001, world, shape);
       assert(state.vortexPreparing && state.groundDeparture);

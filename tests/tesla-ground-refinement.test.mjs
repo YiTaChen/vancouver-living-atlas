@@ -5,7 +5,7 @@ import { cityModule } from './helpers/city-modules.mjs';
 const { TeslaWorld, triangleFace, fixedFacesSource } = await import(
   cityModule('tesla-world')
 );
-const { TESLA_DEFAULT_SHAPE: shape } = await import(cityModule('tesla-state'));
+import { historicalTeslaShape as shape } from './helpers/tesla-historical-shape.mjs';
 function profileFaces() {
   const knots = [
     [-100, 0],

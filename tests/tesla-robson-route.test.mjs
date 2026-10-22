@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { cityModule } from './helpers/city-modules.mjs';
+import { historicalTeslaCaptureAdapter } from './helpers/tesla-historical-capture.mjs';
 
 const { TeslaWorld, triangleFace, fixedFacesSource } = await import(
   cityModule('tesla-world')
@@ -12,7 +13,7 @@ const fixture = JSON.parse(
   readFileSync(new URL('./fixtures/tesla-robson-route.json', import.meta.url)),
 );
 const shape = createTeslaRoadsterShape(fixture.shape.clearance);
-assert.deepEqual(shape.halfExtents, fixture.shape.halfExtents);
+const adaptInitial = historicalTeslaCaptureAdapter(fixture.shape, shape);
 const actualWorld = () =>
   new TeslaWorld({
     sources: [
@@ -39,7 +40,7 @@ const forwardDistance = (state, initial) =>
 test('real GPU-reported Robson ground seam advances through overlapping physical asphalt triangles without fallback attachments', () => {
   for (const dt of [1 / 43, 1 / 60]) {
     const world = actualWorld(),
-      state = structuredClone(fixture.capturedSeamState),
+      state = adaptInitial(fixture.capturedSeamState),
       initial = structuredClone(state);
     let collisions = 0;
     try {
@@ -75,7 +76,7 @@ test('real GPU-reported Robson ground seam advances through overlapping physical
 
 test('same real QA Robson spawn sustains ten seconds of throttle across the complete natural road route', () => {
   const world = actualWorld(),
-    state = structuredClone(fixture.initial),
+    state = adaptInitial(fixture.initial),
     initial = structuredClone(state);
   let collisions = 0;
   try {
@@ -102,7 +103,7 @@ test('same real QA Robson spawn sustains ten seconds of throttle across the comp
 
 test('public launch and held ascent leave naturally driven road grades at several positions and speeds', () => {
   const world = actualWorld(),
-    state = structuredClone(fixture.initial),
+    state = adaptInitial(fixture.initial),
     checkpoints = new Set([0, 120, 240, 330, 420]),
     launches = [];
   try {
@@ -141,7 +142,7 @@ test('public launch and held ascent leave naturally driven road grades at severa
 
 test('actual nearly collinear asphalt sliver at the next Robson seam cannot become a phantom vertical obstacle', () => {
   const world = actualWorld(),
-    state = structuredClone(fixture.capturedSecondSeamState),
+    state = adaptInitial(fixture.capturedSecondSeamState),
     initial = structuredClone(state);
   let collisions = 0;
   try {
@@ -165,7 +166,7 @@ test('actual nearly collinear asphalt sliver at the next Robson seam cannot beco
 
 test('actual shared-edge Robson grade fits the authored wheels and body without fallback attachments', () => {
   const world = actualWorld(),
-    state = structuredClone(fixture.capturedThirdSeamState),
+    state = adaptInitial(fixture.capturedThirdSeamState),
     initial = structuredClone(state);
   let collisions = 0;
   try {

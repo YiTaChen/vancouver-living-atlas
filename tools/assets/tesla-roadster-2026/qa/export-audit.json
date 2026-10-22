@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "passed": true,
+  "levels": {
+    "high": {
+      "triangles": 54201,
+      "primitives": 34,
+      "degenerateTriangles": 0,
+      "colorPrimitives": 34,
+      "sourceBatchBoundsVerified": true,
+      "sourceBoundsToleranceM": 5.1e-05,
+      "emissiveRedAccentPrimitives": 2,
+      "materials": 10,
+      "boundsM": {
+        "min": [
+          -1.0060999691486359,
+          9.998679161071777e-05,
+          -2.3299999237060547
+        ],
+        "max": [
+          1.0060999691486359,
+          1.1045000553131104,
+          2.325000047683716
+        ],
+        "size": [
+          2.0121999382972717,
+          1.1044000685214996,
+          4.6549999713897705
+        ]
+      },
+      "sourceSha256": "c1ded783b6030a8a626607fda59004973f07147471c3b3c48aa54a1a48abb2e8",
+      "sha256": "57eb146a6b585c8b8f1c6342b1a01107576ba67cec34cc48d1bad5246510f925",
+      "bytes": 1974080
+    },
+    "medium": {
+      "triangles": 28484,
+      "primitives": 34,
+      "degenerateTriangles": 0,
+      "colorPrimitives": 34,
+      "sourceBatchBoundsVerified": true,
+      "sourceBoundsToleranceM": 5.1e-05,
+      "emissiveRedAccentPrimitives": 2,
+      "materials": 10,
+      "boundsM": {
+        "min": [
+          -1.005999967455864,
+          9.998679161071777e-05,
+          -2.3299999237060547
+        ],
+        "max": [
+          1.005999967455864,
+          1.1045000553131104,
+          2.325000047683716
+        ],
+        "size": [
+          2.011999934911728,
+          1.1044000685214996,
+          4.6549999713897705
+        ]
+      },
+      "sourceSha256": "fb9cff08b308bfca182d195de1246d43a2315073c80e77de28caf3034e98fcd2",
+      "sha256": "54eda5d9a4ce5f7d1b96ef0ae6e6a8df1a81a49ecb7493a6f7a20da2ae5ffed3",
+      "bytes": 1235172
+    },
+    "low": {
+      "triangles": 10753,
+      "primitives": 34,
+      "degenerateTriangles": 0,
+      "colorPrimitives": 34,
+      "sourceBatchBoundsVerified": true,
+      "sourceBoundsToleranceM": 5.1e-05,
+      "emissiveRedAccentPrimitives": 2,
+      "materials": 10,
+      "boundsM": {
+        "min": [
+          -1.005999967455864,
+          9.998679161071777e-05,
+          -2.3299999237060547
+        ],
+        "max": [
+          1.005999967455864,
+          1.1045000553131104,
+          2.322000026702881
+        ],
+        "size": [
+          2.011999934911728,
+          1.1044000685214996,
+          4.6519999504089355
+        ]
+      },
+      "sourceSha256": "50a273624cb6290134b60a24c370170f66aa3a737503201dc92de0c5be90914d",
+      "sha256": "b86b9448f05be7d4dfd955ab2a1a0aa8394961625a5ca2db443174f148f51f24",
+      "bytes": 578060
+    }
+  },
+  "referenceFiles": [
+    {
+      "file": "source/reference/Tesla_Roadster_2026_Rocket_Detailed.blend",
+      "bytes": 4274531,
+      "sha256": "b597855e6fe66d9aad451554f83686bfb742695e24161166395bd6ef4d8709c5"
+    },
+    {
+      "file": "source/reference/Tesla_Roadster_2026_Thrust_Detailed.blend",
+      "bytes": 4274707,
+      "sha256": "6c00e2a64b316d6b59cf962eecb3fe0c1a06a4bc322a036e0a9d4a9e827cd784"
+    },
+    {
+      "file": "source/reference/build_roadster_2026.py",
+      "bytes": 18162,
+      "sha256": "bf9fdc709ebe7431d34be97f638c735d7c3dc443efea23824bd23ba2d292a5f2"
+    },
+    {
+      "file": "source/reference/roadster_2026_export_cleanup.py",
+      "bytes": 7603,
+      "sha256": "6d1b50155b3dac55a3b34924668f9cd8dc27e514827d34fac4b501f99eaaaf7d"
+    },
+    {
+      "file": "source/reference/roadster_2026_exterior.py",
+      "bytes": 37959,
+      "sha256": "1bdd544b2ad88f9ee39e17985ddd114e36462e9fb4e72a3cacae6d76b57313f7"
+    },
+    {
+      "file": "source/reference/roadster_2026_interior.py",
+      "bytes": 38357,
+      "sha256": "f210217f9f42fc14a7acee3e3d92208ea122855b80e8c714b091b157a04e526b"
+    }
+  ]
+}
