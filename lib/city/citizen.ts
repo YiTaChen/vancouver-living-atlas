@@ -3,8 +3,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { makeWalker } from './assets/walker';
 
 // Content revision avoids reusing a cached 2048 atlas at the stable asset path.
-const CITIZEN_URL =
-  '/models/citizen/vancouver-citizen.glb?v=14d66fabe097';
+const CITIZEN_URL = '/models/citizen/vancouver-citizen.glb?v=14d66fabe097';
 export type CitizenQAVariant = 'baseline-2048' | 'candidate-1024';
 const DEFAULT_CITIZEN_VARIANT: CitizenQAVariant = 'candidate-1024';
 const QA_ASSET_URLS = {
@@ -44,6 +43,174 @@ type CitizenOptions = {
   load?: (url: string) => Promise<CitizenAsset>;
 };
 
+/** A seat poses the existing skeleton; the public actor stays at floor level. */
+function makeSeatedRig(model: THREE.Group) {
+  const bones: THREE.Bone[] = [];
+  model.traverse((object) => {
+    if (object instanceof THREE.Bone) bones.push(object);
+  });
+  const byName = new Map(bones.map((bone) => [bone.name, bone]));
+  const required = [
+    'hips',
+    ...['L', 'R'].flatMap((side) => [
+      `thigh${side}`,
+      `shin${side}`,
+      `foot${side}`,
+      `upperArm${side}`,
+      `foreArm${side}`,
+      `hand${side}`,
+    ]),
+  ];
+  if (required.some((name) => !byName.has(name))) return undefined;
+  const bind = bones.map((bone) => ({
+    bone,
+    position: bone.position.clone(),
+    quaternion: bone.quaternion.clone(),
+    scale: bone.scale.clone(),
+  }));
+  model.updateWorldMatrix(true, true);
+  const modelRotation = model.getWorldQuaternion(new THREE.Quaternion());
+  const inverseRotation = modelRotation.clone().invert();
+  const rest = new Map(
+    bones.map((bone) => [
+      bone.name,
+      {
+        position: model.worldToLocal(
+          bone.getWorldPosition(new THREE.Vector3()),
+        ),
+        quaternion: inverseRotation
+          .clone()
+          .multiply(bone.getWorldQuaternion(new THREE.Quaternion())),
+      },
+    ]),
+  );
+  let cachedHeight: number | undefined;
+  let cached: typeof bind | undefined;
+
+  function restore() {
+    for (const pose of bind) {
+      pose.bone.position.copy(pose.position);
+      pose.bone.quaternion.copy(pose.quaternion);
+      pose.bone.scale.copy(pose.scale);
+    }
+  }
+
+  function apply(height: number) {
+    if (height !== cachedHeight || !cached) {
+      restore();
+      model.updateWorldMatrix(true, true);
+      const worldRotation = model.getWorldQuaternion(new THREE.Quaternion());
+      const point = (name: string) =>
+        model.worldToLocal(
+          byName.get(name)!.getWorldPosition(new THREE.Vector3()),
+        );
+      const orient = (name: string, quaternion: THREE.Quaternion) => {
+        const bone = byName.get(name)!;
+        const parentRotation = bone.parent!.getWorldQuaternion(
+          new THREE.Quaternion(),
+        );
+        bone.quaternion
+          .copy(parentRotation.invert())
+          .multiply(worldRotation)
+          .multiply(quaternion);
+        bone.updateWorldMatrix(false, true);
+      };
+      const aim = (name: string, child: string, direction: THREE.Vector3) => {
+        const original = rest
+          .get(child)!
+          .position.clone()
+          .sub(rest.get(name)!.position)
+          .normalize();
+        orient(
+          name,
+          new THREE.Quaternion()
+            .setFromUnitVectors(original, direction.clone().normalize())
+            .multiply(rest.get(name)!.quaternion),
+        );
+      };
+      const hips = byName.get('hips')!;
+      const hipPoint = rest.get('hips')!.position.clone();
+      // The original pelvis extends 9 cm below its joint, onto the cushion.
+      hipPoint.y = height + 0.09;
+      hips.position.copy(
+        hips.parent!.worldToLocal(model.localToWorld(hipPoint)),
+      );
+      hips.updateWorldMatrix(false, true);
+      for (const side of ['L', 'R']) {
+        const thigh = `thigh${side}`,
+          shin = `shin${side}`,
+          foot = `foot${side}`;
+        const hip = point(thigh);
+        const thighLength = rest
+          .get(thigh)!
+          .position.distanceTo(rest.get(shin)!.position);
+        const shinLength = rest
+          .get(shin)!
+          .position.distanceTo(rest.get(foot)!.position);
+        const ankleY = rest.get(foot)!.position.y;
+        const kneeY = Math.min(hip.y - 0.035, ankleY + shinLength * 0.98);
+        const knee = new THREE.Vector3(
+          hip.x,
+          kneeY,
+          hip.z +
+            Math.sqrt(Math.max(0, thighLength ** 2 - (hip.y - kneeY) ** 2)),
+        );
+        const ankle = new THREE.Vector3(
+          hip.x,
+          ankleY,
+          knee.z +
+            Math.sqrt(Math.max(0, shinLength ** 2 - (kneeY - ankleY) ** 2)),
+        );
+        aim(thigh, shin, knee.clone().sub(hip));
+        aim(shin, foot, ankle.clone().sub(knee));
+        // Bind foot orientation preserves the soles and +Z-facing toes.
+        orient(foot, rest.get(foot)!.quaternion);
+        const upper = `upperArm${side}`,
+          fore = `foreArm${side}`;
+        const armLength = rest
+          .get(upper)!
+          .position.distanceTo(rest.get(fore)!.position);
+        const foreLength = rest
+          .get(fore)!
+          .position.distanceTo(rest.get(`hand${side}`)!.position);
+        const sign = side === 'L' ? 1 : -1;
+        aim(
+          upper,
+          fore,
+          new THREE.Vector3(
+            sign * 0.015,
+            -Math.sqrt(armLength ** 2 - 0.12 ** 2 - 0.015 ** 2),
+            0.12,
+          ),
+        );
+        aim(
+          fore,
+          `hand${side}`,
+          new THREE.Vector3(
+            -sign * 0.04,
+            -0.075,
+            Math.sqrt(foreLength ** 2 - 0.04 ** 2 - 0.075 ** 2),
+          ),
+        );
+      }
+      cached = bind.map(({ bone }) => ({
+        bone,
+        position: bone.position.clone(),
+        quaternion: bone.quaternion.clone(),
+        scale: bone.scale.clone(),
+      }));
+      cachedHeight = height;
+    }
+    for (const pose of cached) {
+      pose.bone.position.copy(pose.position);
+      pose.bone.quaternion.copy(pose.quaternion);
+      pose.bone.scale.copy(pose.scale);
+    }
+    model.updateWorldMatrix(true, true);
+  }
+  return { apply, restore };
+}
+
 /** Dispose a privately owned scene, including the procedural loading fallback. */
 function disposeModel(root: THREE.Object3D) {
   const geometries = new Set<THREE.BufferGeometry>();
@@ -77,6 +244,42 @@ function disposeModel(root: THREE.Object3D) {
   for (const bitmap of bitmaps) bitmap.close();
 }
 
+async function loadCitizenAsset(url: string): Promise<CitizenAsset> {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error('Citizen GLB request failed');
+  const bytes = await response.arrayBuffer();
+  let imageFailed = false;
+  const manager = new THREE.LoadingManager();
+  manager.onError = (resource) => {
+    imageFailed = true;
+    // Successful embedded images are revoked by GLTFLoader. Its image error
+    // branch leaves that private object URL for the owner to release.
+    if (resource.startsWith('blob:')) URL.revokeObjectURL(resource);
+  };
+  const loader = new GLTFLoader(manager);
+  loader.register((parser) => ({
+    name: 'atlas-citizen-image-decoder',
+    beforeRoot() {
+      // ImageBitmapLoader fetches embedded blob URLs through connect-src.
+      // Image elements use the existing img-src policy and retain glTF's
+      // original PBR maps, color spaces, samplers and embedded image bytes.
+      parser.textureLoader = new THREE.TextureLoader(parser.options.manager)
+        .setCrossOrigin(parser.options.crossOrigin)
+        .setRequestHeader(parser.options.requestHeader);
+      return null;
+    },
+  }));
+  const asset = await loader.parseAsync(
+    bytes,
+    url.slice(0, url.lastIndexOf('/') + 1),
+  );
+  if (imageFailed) {
+    disposeModel(asset.scene);
+    throw new Error('Citizen texture decode failed');
+  }
+  return asset;
+}
+
 /**
  * One privately owned animated citizen per navigator. The public root never
  * changes, so camera following, ground contact and contact shadows survive the
@@ -90,6 +293,7 @@ export function makeCitizen(options: CitizenOptions = {}) {
     assetVariant: 'procedural',
     forward: '+Z',
     groundY: 0,
+    seated: false,
   };
   let fallback: ReturnType<typeof makeWalker> | null = makeWalker();
   group.add(fallback.group);
@@ -112,6 +316,9 @@ export function makeCitizen(options: CitizenOptions = {}) {
   let movementWeight = 0;
   let runWeight = 0;
   let idleTime = 0;
+  let seated = false;
+  let seatHeight = 0.46;
+  let seatedRig: ReturnType<typeof makeSeatedRig>;
 
   function loadAsset(variant: CitizenQAVariant): Promise<boolean> {
     if (disposed) return Promise.resolve(false);
@@ -130,10 +337,11 @@ export function makeCitizen(options: CitizenOptions = {}) {
       try {
         // Each navigator owns its decoded image, skeleton and geometry. During
         // QA swaps the current actor remains visible until its replacement is valid.
-        const url = process.env.VANCOUVER_VISUAL_QA === '1'
-          ? QA_ASSET_URLS[variant]
-          : CITIZEN_URL;
-        asset = await (options.load?.(url) ?? new GLTFLoader().loadAsync(url));
+        const url =
+          process.env.VANCOUVER_VISUAL_QA === '1'
+            ? QA_ASSET_URLS[variant]
+            : CITIZEN_URL;
+        asset = await (options.load?.(url) ?? loadCitizenAsset(url));
         if (disposed || ticket !== generation) {
           disposeModel(asset.scene);
           return false;
@@ -144,6 +352,7 @@ export function makeCitizen(options: CitizenOptions = {}) {
         if (!clips.has('idle') || !clips.has('walk') || !clips.has('run'))
           throw new Error('Citizen is missing its idle, walk or run clip');
         const nextModel = asset.scene;
+        const nextSeatedRig = makeSeatedRig(nextModel);
         nextModel.name = 'Original rigged citizen — 38k PBR';
         nextModel.traverse((object) => {
           if (!(object instanceof THREE.Mesh)) return;
@@ -159,6 +368,7 @@ export function makeCitizen(options: CitizenOptions = {}) {
           action.paused = true;
         // Validate the first sampled pose before replacing any live mixer state.
         samplePose(nextMixer, nextIdle, nextWalk, nextRun, lastDistance);
+        if (seated) nextSeatedRig?.apply(seatHeight);
         const previousModel = model;
         const previousMixer = mixer;
         model = nextModel;
@@ -166,6 +376,7 @@ export function makeCitizen(options: CitizenOptions = {}) {
         idle = nextIdle;
         walk = nextWalk;
         run = nextRun;
+        seatedRig = nextSeatedRig;
         // Current distance, blend weights and idle phase were retained above.
         group.add(model);
         if (previousModel) {
@@ -218,6 +429,7 @@ export function makeCitizen(options: CitizenOptions = {}) {
     speed: number,
   ) {
     if (!mixer || !idle || !walk || !run) return;
+    if (seated) return;
     const blend = 1 - Math.exp(-dt * 14);
     movementWeight += (Number(moving) - movementWeight) * blend;
     runWeight += (Number(speed > 2.4) - runWeight) * blend;
@@ -288,8 +500,35 @@ export function makeCitizen(options: CitizenOptions = {}) {
     fallback = null;
     mixer = undefined;
     idle = walk = run = undefined;
+    seatedRig = undefined;
     group.userData.assetState = 'disposed';
   }
 
-  return { group, update, dispose };
+  function setSeated(value: boolean, height = 0.46) {
+    if (disposed) return;
+    const nextHeight = Number.isFinite(height)
+      ? THREE.MathUtils.clamp(height, 0.25, 0.75)
+      : 0.46;
+    if (seated === value && (!value || seatHeight === nextHeight)) return;
+    seated = value;
+    seatHeight = nextHeight;
+    movementWeight = runWeight = 0;
+    group.userData.seated = seated;
+    group.userData.seatHeightMetres = seatHeight;
+    fallback?.setSeated(seated, seatHeight);
+    if (seated) seatedRig?.apply(seatHeight);
+    else if (mixer && idle && walk && run) {
+      // Reactivation resets PropertyMixer's cached pose after manual bone edits.
+      mixer.stopAllAction();
+      seatedRig?.restore();
+      for (const action of [idle, walk, run]) {
+        action.reset().play();
+        action.paused = true;
+      }
+      samplePose(mixer, idle, walk, run, lastDistance);
+      model?.updateWorldMatrix(true, true);
+    }
+  }
+
+  return { group, update, setSeated, dispose };
 }

@@ -1,3 +1,4 @@
+import { CityInteractions } from './city-interactions';
 import { CityStreetFurniture } from './street-furniture-world';
 import { VehicleImpactWorld } from './vehicle-impact-world';
 import { ImpactFeedback } from './vehicle-impact-feedback';
@@ -203,6 +204,7 @@ export class CityEngine {
   driftEffects: VehicleDriftEffects | null = null;
   busVisit: BusCabinVisit | null = null;
   skyTrainTravel: SkyTrainTravel | null = null;
+  interactions: CityInteractions | null = null;
   busVisitDetail: BusVisitDetail = 'auto';
   flight: FlightController | null = null;
   tesla: TeslaController | null = null;
@@ -450,6 +452,7 @@ export class CityEngine {
     this.flight?.clearInput();
     this.tesla?.clearInput();
     this.skyTrainTravel?.clearInput();
+    this.interactions?.clear();
     this.travelReturn?.clearGesture();
     this.placement?.cancel();
   }
@@ -703,6 +706,7 @@ export class CityEngine {
     this.tesla = new TeslaController(this);
     this.skyTrainTravel = new SkyTrainTravel(this);
     this.skyTrainTravel.onChange = () => this.publishSkyTrainTravel();
+    this.interactions = new CityInteractions(this);
     if (!(await advance(92))) return;
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('render.composer-setup');
@@ -1383,6 +1387,7 @@ export class CityEngine {
     createRoadSurfaces(this);
   }
   flyTo(id: string, animate = true) {
+    if (this.navigation?.walkSeat && !this.navigation.leaveWalkSeat()) return;
     if (this.skyTrainTravel?.active) return;
     if (!this.closeBusVisit()) return;
     if (this.tesla?.active) this.tesla.deactivate();
@@ -1392,6 +1397,7 @@ export class CityEngine {
     this.fly(v, animate);
   }
   fly(v: Viewpoint, animate = true) {
+    if (this.navigation?.walkSeat && !this.navigation.leaveWalkSeat()) return;
     if (this.skyTrainTravel?.active) return;
     this.travelReturn?.invalidate(true);
     this.completeLocalMapTransition();
@@ -1432,6 +1438,7 @@ export class CityEngine {
     finishLocalMapTransition(this);
   }
   leaveTravelAtLocation(remember = false) {
+    if (this.navigation?.walkSeat && !this.navigation.leaveWalkSeat()) return;
     if (this.skyTrainTravel?.active) return;
     if (!this.closeBusVisit()) return;
     if (this.tesla?.active) {
@@ -1471,6 +1478,7 @@ export class CityEngine {
     this.travelReturn?.update();
   }
   focusTrain(kind: TrainKind) {
+    if (this.navigation?.walkSeat && !this.navigation.leaveWalkSeat()) return;
     if (this.skyTrainTravel?.active) return;
     if (!this.closeBusVisit()) return;
     this.tesla?.deactivate();
@@ -1516,6 +1524,7 @@ export class CityEngine {
     };
   }
   focusHarbour(kind: HarbourKind) {
+    if (this.navigation?.walkSeat && !this.navigation.leaveWalkSeat()) return;
     if (this.skyTrainTravel?.active) return;
     if (!this.closeBusVisit()) return;
     this.tesla?.deactivate();
@@ -1545,6 +1554,7 @@ export class CityEngine {
     };
   }
   async visitBusInterior() {
+    if (this.navigation?.walkSeat && !this.navigation.leaveWalkSeat()) return false;
     if (this.skyTrainTravel?.active) return false;
     if (!this.busVisit || this.disposed) return false;
     if (!this.closeBusVisit()) return false;
@@ -1595,6 +1605,9 @@ export class CityEngine {
     return closed;
   }
   applySettings(settings: Settings) {
+    if (this.navigation?.walkSeat &&
+      (settings.mode !== this.settings.mode || (this.settings.buildings && !settings.buildings)) &&
+      !this.navigation.leaveWalkSeat()) return;
     if (this.skyTrainTravel?.active && settings.mode !== 'walk') return;
     if (
       this.busVisit &&
@@ -1797,6 +1810,7 @@ export class CityEngine {
     this.skyTrainTravel?.update(
       this.lastTime ? (time - this.lastTime) / 1000 : 0,
     );
+    this.interactions?.update(time);
     if (this.skyTrainTravel?.active && this.railway)
       for (const train of this.railway.trains)
         if (train.kind === 'skytrain')
@@ -2077,6 +2091,8 @@ export class CityEngine {
     this.pedestrians = null;
     this.flight?.destroy();
     this.tesla?.destroy();
+    this.interactions?.dispose();
+    this.interactions = null;
     this.busVisit?.dispose();
     this.skyTrainTravel?.dispose();
     this.skyTrainTravel = null;

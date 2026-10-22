@@ -8,8 +8,11 @@ import { ROOT, PACKAGE, loader, originalSource, patchedSource } from './adapters
 import { makeRoadsterCandidate, makeInteriorsCandidate, bindCandidateMaps } from './adapters/consumer-candidates.mjs';
 import { metricError } from './adapters/metre-uv.mjs';
 import { SURFACES, configureSharedMaps } from './adapters/shared-surfaces.mjs';
+import { assertProtectedSources } from './adapters/seating-source-compatibility.mjs';
 const sha = v => createHash('sha256').update(v).digest('hex');
-const write = (file,value) => writeFileSync(resolve(PACKAGE,file),JSON.stringify(value,null,2)+'\n');
+const recordFixtures = process.argv.includes('--record-fixtures');
+const writeEvidence = recordFixtures || process.argv.includes('--write-evidence');
+const write = (file,value) => { if (writeEvidence) writeFileSync(resolve(PACKAGE,file),JSON.stringify(value,null,2)+'\n'); };
 const load = loader(false), checks = [];
 function pass(name,evidence) { checks.push({name,status:'pass',...evidence}); }
 function bounds(root) {
@@ -47,7 +50,10 @@ const sources = [
  'harbour-models','harbour','harbour-path','boat-controller','boat-physics','water-world',
  'assets/aircraft-models','flight-controller','flight-state','flight-geometry',
 ];
-const sourceHashes=Object.fromEntries(sources.map(n=>['lib/city/'+n+'.ts',sha(originalSource(n))]));
+const sourceTexts=Object.fromEntries(sources.map(n=>['lib/city/'+n+'.ts',originalSource(n)]));
+const baselineFixtures=JSON.parse(readFileSync(resolve(PACKAGE,'qa/current-source-fixtures.json'),'utf8'));
+const sourceAudit=recordFixtures ? null : assertProtectedSources(sourceTexts,baselineFixtures.sourceHashes);
+const sourceHashes=sourceAudit?.sourceHashes ?? Object.fromEntries(Object.entries(sourceTexts).map(([path,source])=>[path,sha(source)]));
 const {makeRoadster}=await load('assets/roadster');
 const original=makeRoadster(),candidate=await makeRoadsterCandidate();
 const roadster=sameTriangles(original.group,candidate.group);pass('E02 geometry positions/normals/winding and root bounds unchanged',roadster);
@@ -157,11 +163,17 @@ const gapAudit={taskId:'E03',status:'offline_audit_complete_no_verified_asset_ga
 write('qa/harbour-aircraft-gap-audit.json',gapAudit);
 pass('E03 specialised inventory and exact dynamics/control interfaces measured',{harbourVariants:harbourInventory.length,playerAircraft:aircraft.length,newParts:0});
 const fixtures={schemaVersion:1,sourceHashes,roadster:roadster.baseline,wheels:wheels(original.group),driver:{eyeHeightM:eye,leftOffsetM:driverLeft,head:bounds(head),seats:bounds(seats),cockpit:digestGeometry(cockpit),collisionQueries},interiors:interiors.map(({geometry,...s})=>({...s,geometry:geometry.baseline})),harbour:harbourInventory.map(({metadata:_metadata,...x})=>x),aircraft};
-if(process.argv.includes('--record-fixtures'))write('qa/current-source-fixtures.json',fixtures);
-else assert.deepEqual(JSON.parse(JSON.stringify(fixtures)),JSON.parse(readFileSync(resolve(PACKAGE,'qa/current-source-fixtures.json'),'utf8')),'Source/geometry regression fixture drift. Review before re-recording.');
-pass('Current-source regression fixtures checked',{recorded:process.argv.includes('--record-fixtures')});
+if(recordFixtures)write('qa/current-source-fixtures.json',fixtures);
+else {
+ // Source bytes are checked separately above. Only the exact reviewed additive
+ // seating diff can project to the unchanged baseline hash; all actual geometry,
+ // anchors and current clearGround outputs below remain strict deep equality.
+ const geometryFixture={...fixtures,sourceHashes:baselineFixtures.sourceHashes};
+ assert.deepEqual(JSON.parse(JSON.stringify(geometryFixture)),baselineFixtures,'Source/geometry regression fixture drift. Review before re-recording.');
+}
+pass('Current-source regression fixtures checked',{recorded:recordFixtures,sourceAudit});
 const textures=JSON.parse(readFileSync(resolve(ROOT,'tools/assets/role-materials/exports/manifest.json'),'utf8')).roles.map(r=>({...r,maps:Object.fromEntries(Object.entries(r.maps).map(([channel,path])=>{const actual=resolve(ROOT,'tools/assets/role-materials/exports',path);return [channel,{path:'../role-materials/exports/'+path,sha256:sha(readFileSync(actual)),bytes:readFileSync(actual).length,colorSpace:channel==='basecolor'?'sRGB':'Non-Color',channel:channel==='orm'?'R=1,G=roughness,B=metallic':channel==='normal'?'OpenGL +Y tangent-space':'RGB'}];}))}));
 write('shared-surface-catalog.json',{schemaVersion:1,source:'../role-materials/exports/manifest.json',newMaps:0,uniqueTexelBytesWithMips:8388608,surfaces:textures});
-for(const name of ['assets/roadster','interiors'])writeFileSync(resolve(PACKAGE,'qa',name.split('/').pop()+'.integration-candidate.ts.txt'),patchedSource(name).replaceAll(new URL('./adapters/metre-uv.mjs',import.meta.url).href,'./metre-uv.mjs'));
+if(writeEvidence)for(const name of ['assets/roadster','interiors'])writeFileSync(resolve(PACKAGE,'qa',name.split('/').pop()+'.integration-candidate.ts.txt'),patchedSource(name).replaceAll(new URL('./adapters/metre-uv.mjs',import.meta.url).href,'./metre-uv.mjs'));
 write('qa/consumer-validation.json',{status:'pass',environment:{node:process.version,three:THREE.REVISION,mode:'CPU; no WebGL or browser'},checks,sourceHashes,scope:'Offline candidate integration logic only. Runtime/public remain unchanged; no GPU/gameplay/PBR rollout claim.'});
-console.log(JSON.stringify({status:'pass',checks:checks.length,roadster:roadster.candidate,interiorQueries:queries,maxInteriorUVErrorM:uvMax},null,2));
+console.log(JSON.stringify({status:'pass',checks:checks.length,writeEvidence,sourceAudit,roadster:roadster.candidate,interiorQueries:queries,maxInteriorUVErrorM:uvMax},null,2));

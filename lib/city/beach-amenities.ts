@@ -4,6 +4,7 @@ import type { CityEngine } from './engine';
 import { GroundSurfaceIndex } from './ground-surface';
 import { project, rings, inPolygon } from './geo';
 import layout from './beach-layout.json';
+import type { WorldSeat } from './world-seats';
 
 /** Original static geometry; reference/placement provenance in beach-amenities.md.
  * Two spatial batches, no animation, textures, network requests or per-prop draws.
@@ -24,6 +25,7 @@ export function createBeachAmenities(e: CityEngine) {
   };
   for (const beach of ['english', 'kitsilano']) {
     const geos: THREE.BufferGeometry[] = [];
+    const seats: Omit<WorldSeat, 'visible'>[] = [];
     const add = (g: THREE.BufferGeometry, color: number) => {
       const flat = g.index ? g.toNonIndexed() : g;
       if (flat !== g) g.dispose();
@@ -392,6 +394,10 @@ export function createBeachAmenities(e: CityEngine) {
           0.009,
           4,
         );
+      seats.push({ id: `beach-log:${beach}:${i}`, floor: [x, floor(x, z), z],
+        // Central taper segment, top of the actual authored nine-sided trunk.
+        height: r * (0.67 + 0.8625), yaw: theta + Math.PI / 2,
+      });
       report.logs++;
     }
     if (!geos.length) continue;
@@ -416,6 +422,10 @@ export function createBeachAmenities(e: CityEngine) {
     lod.addLevel(mesh, 0);
     lod.addLevel(new THREE.Group(), 1400, 0.12);
     e.scene.add(lod);
+    const worldSeats = (e.data.walkSeats ??= []) as WorldSeat[];
+    for (const seat of seats) worldSeats.push({ ...seat,
+      visible: () => mesh.visible && lod.visible,
+    });
     report.triangles += geometry.getAttribute('position').count / 3;
     report.batches++;
   }

@@ -13,6 +13,12 @@ const catalogs = JSON.parse(
     'utf8',
   ),
 );
+const interactions = JSON.parse(
+  fs.readFileSync(
+    new URL('../lib/i18n/interactions.json', import.meta.url),
+    'utf8',
+  ),
+);
 
 // Run the actual component and its actual joystick handlers, substituting only
 // React scheduling and browser events. Network plans use the production module.
@@ -89,6 +95,7 @@ function setup() {
       if (id === '@/lib/city/skytrain-network') return network;
       if (id === '@/lib/city/touch-input') return touch;
       if (id === '@/lib/i18n/skytrain-travel.json') return catalogs;
+      if (id === '@/lib/i18n/interactions.json') return interactions;
       if (id === './travel-joystick') return load('travel-joystick');
       if (id.endsWith('.css')) return {};
       if (id === 'lucide-react')
@@ -473,6 +480,124 @@ test('visibility, blur, lost capture and disabling the panel clear mobile walkin
   );
   stickHost.unmount();
   host.unmount();
+});
+
+test('standing passengers can walk aboard on mobile and sitting releases the captured movement', () => {
+  const h = setup();
+  const aboard = state({
+    phase: 'riding',
+    stationId: 'waterfront',
+    nextStationId: 'burrard',
+    lineId: 'expo',
+    speedMps: 15,
+    canWalkCabin: true,
+    seated: false,
+  });
+  const { host, calls, props } = panel(h, aboard, { touch: true });
+  const joystick = () =>
+    all(
+      host.tree,
+      (node) => typeof node.type === 'function' && node.props.mode === 'walk',
+    )[0];
+  assert.ok(joystick(), 'walking is available inside a moving train');
+  assert.equal(joystick().props.label, interactions.en.walkCabin);
+  const stickHost = h.mount(joystick().type, joystick().props);
+  const stick = all(
+    stickHost.tree,
+    (node) => node.props.className === 'travel-joystick',
+  )[0];
+  stick.props.onPointerDown(event(12));
+  assert.ok(calls.at(-1)[2] > 0.9);
+  host.render({ ...props, snapshot: { ...aboard, seated: true } });
+  assert.equal(joystick(), undefined);
+  assert.deepEqual(calls.at(-1), ['move', 0, 0]);
+  stickHost.unmount();
+  host.render(props);
+  assert.ok(joystick(), 'standing again restores the mobile aisle control');
+  const resumed = h.mount(joystick().type, joystick().props);
+  const resumedStick = all(
+    resumed.tree,
+    (node) => node.props.className === 'travel-joystick',
+  )[0];
+  resumedStick.props.onPointerMove(event(12));
+  assert.deepEqual(
+    calls.at(-1),
+    ['move', 0, 0],
+    'old pointer cannot resume walking',
+  );
+  resumed.unmount();
+  host.unmount();
+});
+
+test('cabin movement is hidden while seated, busy, disabled or unavailable without changing station walking', () => {
+  const h = setup();
+  const base = state({
+    phase: 'riding',
+    stationId: 'granville',
+    canWalkCabin: true,
+  });
+  const { host, calls, props } = panel(h, base, { touch: true });
+  const sticks = () =>
+    all(
+      host.tree,
+      (node) => typeof node.type === 'function' && node.props.mode === 'walk',
+    );
+  for (const patch of [
+    { snapshot: { ...base, seated: true } },
+    { snapshot: { ...base, busy: true } },
+    { snapshot: { ...base, canWalkCabin: false } },
+    { controlsEnabled: false },
+    { visible: false },
+  ]) {
+    host.render(props);
+    assert.equal(sticks().length, 1);
+    host.render({ ...props, ...patch });
+    assert.equal(sticks().length, 0);
+    assert.deepEqual(calls.at(-1), ['move', 0, 0]);
+  }
+  host.render({
+    ...props,
+    snapshot: { ...base, phase: 'station', canWalkCabin: false },
+  });
+  assert.equal(
+    sticks().length,
+    1,
+    'station walking does not depend on cabin availability',
+  );
+  host.render({
+    ...props,
+    snapshot: { ...base, phase: 'station', seated: true },
+  });
+  assert.equal(sticks().length, 0, 'station benches also suspend walking');
+  host.unmount();
+});
+
+test('onboard movement and stand-up guidance use the active language without desktop keys on mobile', () => {
+  for (const locale of Object.keys(interactions)) {
+    const h = setup();
+    const aboard = state({ phase: 'riding', canWalkCabin: true });
+    const { host, props } = panel(h, aboard, { locale });
+    assert.ok(text(host.tree).includes(interactions[locale].cabinHint));
+    assert.ok(!text(host.tree).includes(catalogs[locale].desktopHint));
+    host.render({ ...props, snapshot: { ...aboard, seated: true } });
+    const standShortcut = interactions[locale].shortcut.replace(
+      '{action}',
+      interactions[locale].stand,
+    );
+    assert.ok(text(host.tree).includes(standShortcut));
+    host.render({
+      ...props,
+      touch: true,
+      snapshot: { ...aboard, seated: true },
+    });
+    const hint = all(
+      host.tree,
+      (node) => node.type === 'p' && text(node) === interactions[locale].stand,
+    );
+    assert.equal(hint.length, 1);
+    assert.ok(!text(host.tree).includes(standShortcut));
+    host.unmount();
+  }
 });
 
 test('all ten locales provide complete trip labels and explain desktop interaction and mobile movement', () => {

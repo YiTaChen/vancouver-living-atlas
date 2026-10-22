@@ -6,8 +6,12 @@ import { runInNewContext } from 'node:vm';
 import * as THREE from 'three';
 import { cityModule } from './helpers/city-modules.mjs';
 import { cityElevation } from './helpers/city-elevation.mjs';
+import { actualTrain } from './helpers/skytrain-geometry.mjs';
 
 const { SkyTrainTravel } = await import(cityModule('skytrain-travel'));
+const { CityInteractions, projectInteractionAnchor } = await import(
+  cityModule('city-interactions')
+);
 const { createSkyTrainGuidewayUniforms } = await import(
   cityModule('skytrain-guideway-clearance')
 );
@@ -1536,4 +1540,295 @@ test('an incomplete duplicate geographic route inventory is rejected before a pa
       },
     },
   );
+});
+
+test('entering from the city orbit projection keeps nearby real cabin geometry and the shared seat prompt in front of the near plane', async () => {
+  await harness(async ({ create, city }) => {
+    const travel = create(),
+      original = travel.train,
+      train = await actualTrain('expo');
+    original.dispose();
+    travel.train = train;
+    city.skyTrainTravel = travel;
+    city.scene.add(train.group);
+    const load = train.load.bind(train);
+    train.load = async (line, ...args) =>
+      train.ready && train.serviceLine === line ? true : load(line, ...args);
+    city.camera.near = 2;
+    city.camera.fov = 42;
+    city.camera.aspect = 1280 / 720;
+    city.camera.updateProjectionMatrix();
+    let projections = 0;
+    const updateProjection = city.camera.updateProjectionMatrix.bind(
+      city.camera,
+    );
+    city.camera.updateProjectionMatrix = () => {
+      projections++;
+      updateProjection();
+    };
+    const interactions = new CityInteractions(city);
+    interactions.setInputEnabled(true);
+    try {
+      assert(await travel.enter('main-street-science-world'));
+      assert.equal(city.camera.near, 0.05);
+      assert.equal(city.camera.fov, 65);
+      assert.equal(projections, 1);
+      travel.journey = new SkyTrainJourney(
+        'main-street-science-world',
+        'waterfront',
+        { ...FAST, boardingSeconds: 30 },
+      );
+      await toBoardingDoor(travel);
+      assert(travel.board());
+      travel.yaw = Math.PI;
+      travel.setTouchAxes(0, 1);
+      await tick(travel, 7);
+      travel.yaw = -Math.PI / 2;
+      await tick(travel, 3);
+      travel.yaw = Math.PI;
+      await tick(travel, 4);
+      travel.setTouchAxes(0, 0);
+      const seat = train.passengerSpace.seats.find(
+        (candidate) => candidate.id === 'seat-long-left-5',
+      );
+      assert(train.passengerSpace.canSit(seat, travel.cabinFoot));
+      travel.yaw = Math.atan2(
+        seat.position[0] - travel.cabinFoot[0],
+        seat.position[2] - travel.cabinFoot[2],
+      );
+      await tick(travel);
+      const candidate = travel
+        .interactionCandidates()
+        .find((row) => row.id.endsWith(':' + seat.id));
+      assert(candidate);
+      assert(projectInteractionAnchor(city.camera, candidate.anchor));
+      const orbitProjection = city.camera.clone();
+      orbitProjection.near = 2;
+      orbitProjection.updateProjectionMatrix();
+      assert.equal(
+        projectInteractionAnchor(orbitProjection, candidate.anchor),
+        null,
+        'the inherited orbit near plane would hide this actually reachable seat',
+      );
+      const cushion = train.passengerPointToWorld([
+        seat.position[0],
+        seat.position[1] + seat.seatHeight,
+        seat.position[2],
+      ]);
+      city.camera.updateWorldMatrix(true, false);
+      const cameraSpace = new THREE.Vector3(...cushion).applyMatrix4(
+        city.camera.matrixWorldInverse,
+      );
+      assert(
+        -cameraSpace.z > city.camera.near && -cameraSpace.z < 2,
+        'the actual nearby cushion now remains in front of the near plane',
+      );
+      interactions.update(performance.now(), true);
+      assert.equal(interactions.controller.snapshot()?.id, candidate.id);
+      assert(interactions.interact());
+      assert(travel.passengerSeated);
+      assert.equal(
+        projections,
+        1,
+        'walking and sitting reuse the same projection',
+      );
+      assert(travel.stand());
+    } finally {
+      interactions.dispose();
+    }
+  });
+});
+
+test('real cabin walking exposes nearby seats; sit/stand stays attached, ignores held desktop/mobile input and requires walking back to an open door before alighting', async () => {
+  await harness(async ({ create, city, win }) => {
+    const travel = create(),
+      original = travel.train,
+      train = await actualTrain('expo');
+    original.dispose();
+    travel.train = train;
+    city.scene.add(train.group);
+    const load = train.load.bind(train);
+    train.load = async (line, ...args) =>
+      train.ready && train.serviceLine === line ? true : load(line, ...args);
+    const poses = [];
+    city.navigation.walker.setSeated = (seated, height) =>
+      poses.push([seated, height]);
+    assert(await travel.enter('waterfront'));
+    assert(travel.chooseDestination('burrard'));
+    travel.journey = new SkyTrainJourney('waterfront', 'burrard', {
+      ...FAST,
+      boardingSeconds: 4,
+      segmentSeconds: () => 4,
+      dwellSeconds: 30,
+    });
+    await toBoardingDoor(travel);
+    assert(travel.board());
+    assert.equal(travel.snapshot().canWalkCabin, true);
+    assert.equal(travel.passengerSeated, false);
+    assert.deepEqual(
+      travel.interactionCandidates(),
+      [],
+      'boarding is not a teleporting seat picker',
+    );
+    const before = [...travel.cabinFoot];
+    travel.setTouchAxes(0, 1);
+    await tick(travel, 5);
+    travel.setTouchAxes(0, 0);
+    assert(
+      Math.hypot(
+        travel.cabinFoot[0] - before[0],
+        travel.cabinFoot[2] - before[2],
+      ) > 0.6,
+    );
+    // The active Waterfront side boards at x<0. Cross the clear aisle behind
+    // the central pole, then approach a real longitudinal cushion farther in.
+    travel.yaw = Math.PI / 2;
+    travel.setTouchAxes(0, 1);
+    await tick(travel, 5);
+    travel.yaw = Math.PI;
+    travel.setTouchAxes(0, 1);
+    await tick(travel, 8);
+    travel.setTouchAxes(0, 0);
+    const seat = travel
+      .interactionCandidates()
+      .find((row) => row.action === 'sit');
+    assert(seat);
+    const cushion = train.passengerSpace.seats.find((value) =>
+      seat.id.endsWith(':' + value.id),
+    );
+    const raised = train.passengerPointToWorld([
+      cushion.position[0],
+      cushion.position[1] + cushion.seatHeight + 0.85,
+      cushion.position[2],
+    ]);
+    assert(
+      new THREE.Vector3(...seat.anchor).distanceTo(
+        new THREE.Vector3(...raised),
+      ) < 1e-7,
+      'standing first-person prompt is raised above the cushion',
+    );
+    assert(seat.execute());
+    assert.equal(travel.snapshot().seated, true);
+    assert.equal(travel.snapshot().canWalkCabin, false);
+    assert(poses.at(-1)[0]);
+    travel.setInputEnabled(false);
+    assert.deepEqual(travel.interactionCandidates(), []);
+    assert.equal(travel.stand(), false, 'modal input lock retains the seat');
+    travel.setInputEnabled(true);
+
+    const seatedLocal = [...train.passenger.position.toArray()];
+    win.dispatchEvent(key('KeyW'));
+    travel.setTouchAxes(1, 1);
+    await tick(travel, 3);
+    assert.deepEqual(train.passenger.position.toArray(), seatedLocal);
+    assert.equal(travel.alight(), false);
+    assert.equal(travel.leave(), false);
+    assert.equal(await travel.goPlatform(), false);
+    await until(travel, (s) => s.speedMps > 0);
+    for (let i = 0; i < 5; i++) {
+      await tick(travel);
+      const eye = new THREE.Vector3(),
+        q = new THREE.Quaternion();
+      train.passengerWorldPose(eye, q);
+      assert(city.camera.position.distanceTo(eye) < 1e-7);
+      assert.deepEqual(train.passenger.position.toArray(), seatedLocal);
+    }
+    await until(
+      travel,
+      (s) => s.stationId === 'burrard' && !s.busy && s.doorsOpen,
+    );
+    assert.equal(
+      travel.snapshot().canAlight,
+      false,
+      'seated passenger cannot alight through a distant door',
+    );
+    const stand = travel.interactionCandidates()[0];
+    assert.equal(stand.action, 'stand');
+    assert(stand.execute());
+    assert.equal(travel.snapshot().seated, false);
+    assert.equal(poses.at(-1)[0], false);
+    const standing = [...travel.cabinFoot];
+    await tick(travel, 2);
+    assert.deepEqual(
+      travel.cabinFoot,
+      standing,
+      'held controls were cleared during stand',
+    );
+    assert.equal(
+      travel.snapshot().canAlight,
+      false,
+      'standing farther down the cabin is not a doorway',
+    );
+    travel.yaw = 0;
+    travel.setTouchAxes(0, 1);
+    await tick(travel, 8);
+    travel.setTouchAxes(0, 0);
+    assert.equal(
+      travel.snapshot().canAlight,
+      false,
+      'the opposite cabin side is not the opened door',
+    );
+    travel.yaw = -Math.PI / 2;
+    travel.setTouchAxes(0, 1);
+    await tick(travel, 5);
+    travel.setTouchAxes(0, 0);
+    assert.equal(travel.snapshot().canAlight, true);
+    assert(travel.alight());
+    assert.equal(travel.passengerSeated, false);
+    assert.equal(
+      travel.interactionCandidates().some((row) => row.id.includes(':cabin:')),
+      false,
+    );
+    travel.dispose();
+    assert.equal(travel.interactionOrigin, null);
+    assert.deepEqual(travel.interactionCandidates(), []);
+  });
+});
+
+test('station bench proximity uses the current station floor and restores a verified aisle stand without moving while seated', async () => {
+  await harness(async ({ create, city }) => {
+    const travel = create(),
+      poses = [];
+    city.navigation.walker.setSeated = (...pose) => poses.push(pose);
+    assert(await travel.enter('burrard'));
+    assert(await travel.goPlatform());
+    const target = travel.owner
+      .benchSeats()
+      .find((seat) => seat.stand.surfaceId === travel.foot.surfaceId);
+    assert(target);
+    await walkTo(travel, target.stand.position, 0.4);
+    const candidate = travel
+      .interactionCandidates()
+      .find((row) => row.id.endsWith(target.id));
+    assert(candidate);
+    const raised = travel.owner.toWorld([
+      target.position[0],
+      target.position[1] + target.seatHeight + 0.85,
+      target.position[2],
+    ]);
+    assert(
+      new THREE.Vector3(...candidate.anchor).distanceTo(
+        new THREE.Vector3(...raised),
+      ) < 1e-7,
+    );
+    assert(candidate.execute());
+    assert.equal(travel.snapshot().seated, true);
+    assert.equal(
+      city.navigation.walker.group.visible,
+      true,
+      'station bench camera shows the actual seated avatar',
+    );
+    const feet = travel.interactionOrigin;
+    travel.setTouchAxes(1, 1);
+    await tick(travel, 5);
+    assert.deepEqual(travel.interactionOrigin, feet);
+    assert.equal(travel.goConcourse(), false);
+    assert.equal(travel.leave(), false);
+    assert(travel.stand());
+    assert(travel.owner.isClearFoot(travel.foot));
+    assert.equal(travel.foot.surfaceId, target.stand.surfaceId);
+    assert.equal(poses.at(-1)[0], false);
+    travel.dispose();
+    assert.equal(poses.at(-1)[0], false);
+  });
 });

@@ -45,7 +45,39 @@ import {
   type InteriorView,
   type TravelView,
 } from './travel-camera';
+export interface WalkSeatPose {
+  id: string;
+  floor: readonly [number, number, number];
+  yaw: number;
+  height: number;
+  stand(): THREE.Vector3 | null;
+}
 export class StreetNavigation {
+  walkSeat: WalkSeatPose | null = null;
+  sitOnSeat(seat: WalkSeatPose) {
+    if (this.mode !== 'walk' || this.walkSeat ||
+      ![...seat.floor, seat.yaw, seat.height].every(Number.isFinite)) return false;
+    this.blur();
+    this.walkSeat = seat;
+    this.position.set(...seat.floor);
+    // Keep the approach camera direction; only the seated body faces the chair.
+    this.speed = 0;
+    this.walker.setSeated?.(true, seat.height);
+    this.update(0);
+    return true;
+  }
+  leaveWalkSeat() {
+    const seat = this.walkSeat;
+    if (!seat) return true;
+    const exit = seat.stand();
+    if (!exit || !exit.toArray().every(Number.isFinite)) return false;
+    this.walkSeat = null;
+    this.walker.setSeated?.(false);
+    this.blur();
+    this.position.copy(exit);
+    this.update(0);
+    return true;
+  }
   mode: 'orbit' | TravelMode = 'orbit';
   keys = new Set<string>();
   touchX = 0;
@@ -121,6 +153,7 @@ export class StreetNavigation {
   walker: {
     group: THREE.Group;
     update(distance: number, moving: boolean, dt?: number, speed?: number): void;
+    setSeated?(seated: boolean, seatHeight?: number): void;
     dispose?(): void;
   };
   walkingDistance = 0;
@@ -764,6 +797,7 @@ export class StreetNavigation {
     );
   }
   startAt(mode: TravelMode, point: PlacementPoint) {
+    if (!this.leaveWalkSeat()) return false;
     this.trafficStop?.cancel();
     this.e.travelReturn?.invalidate(true);
     this.returnBlend = null;
@@ -835,6 +869,7 @@ export class StreetNavigation {
     return true;
   }
   switchStreetMode(mode: 'orbit' | TravelMode) {
+    if (!this.leaveWalkSeat()) return false;
     if(mode!==this.mode) this.trafficStop?.cancel();
     if(mode === 'drive' && this.e.interiors?.clear(this.position.x,this.position.z,'drive') === false) return false;
     if (!canSwitchStreetMode(this.mode, mode)) return false;
@@ -860,6 +895,7 @@ export class StreetNavigation {
     return true;
   }
   setMode(mode: 'orbit' | TravelMode, streetName?: string) {
+    if (!this.leaveWalkSeat()) return;
     this.trafficStop?.cancel();
     if (mode === this.mode && !streetName) return;
     this.clearDrift();
@@ -987,6 +1023,7 @@ export class StreetNavigation {
     } else this.keys.delete(key[direction]);
   }
   startBridge(kind: string) {
+    if (!this.leaveWalkSeat()) return;
     const s = this.e.data.bridges?.mainSpines.find((s: any) => s.kind === kind);
     if (!s || this.mode === 'orbit' || this.mode === 'boat') return;
     this.clearDrift();
@@ -1010,6 +1047,7 @@ export class StreetNavigation {
     this.e.renderer.domElement.focus();
   }
   step(direction: string) {
+    if (this.walkSeat) return;
     if(this.trafficStop?.active) return;
     if (this.mode === 'orbit') return;
     this.e.renderer.domElement.focus({ preventScroll: true });
@@ -1028,6 +1066,7 @@ export class StreetNavigation {
     this.update(0.016);
   }
   move(dx: number, dz: number) {
+    if (this.walkSeat) return;
     if(this.mode==='drive' && this.e.vehicleImpacts) return this.moveDrive(dx,dz);
     this.moveGround(dx,dz);
   }
@@ -1251,7 +1290,7 @@ export class StreetNavigation {
       );
       if (Math.abs(this.speed) < Math.abs(drift.speed) * 0.9)
         resetVehicleDrift(this.drift);
-    } else {
+    } else if (!this.walkSeat) {
       this.yaw += turn * dt * 1.45;
       const speed = pressed('shift') ? 12 : 4;
       this.move(
@@ -1278,7 +1317,7 @@ export class StreetNavigation {
     this.walker.group.position.copy(this.position);
     if (this.mode === 'walk')
       this.walker.group.position.y = this.walkingHeight();
-    this.walker.group.rotation.y = this.yaw;
+    this.walker.group.rotation.set(0, this.walkSeat?.yaw ?? this.yaw, 0);
     if (this.mode === 'walk')
       this.walker.update(
         this.walkingDistance, walked > 0.0001, dt, dt > 0 ? walked / dt : 0,
@@ -1289,7 +1328,9 @@ export class StreetNavigation {
       this.wheelDistance += walked * Math.sign(this.speed);
       this.roadster.update(this.wheelDistance, this.steering);
     }
-    const eyeHeight = this.mode === 'walk' ? 1.68 : this.driverEyeHeight;
+    const eyeHeight = this.mode === 'walk'
+      ? this.walkSeat ? this.walkSeat.height + 0.78 : 1.68
+      : this.driverEyeHeight;
     const eye = (
       this.mode === 'walk' ? this.walker.group.position : this.position
     )
@@ -1375,6 +1416,7 @@ export class StreetNavigation {
     this.snapCamera = false;
   }
   walkingHeight() {
+    if (this.walkSeat) return this.walkSeat.floor[1];
     if (this.surface === 'bridge') return this.position.y;
     return this.groundHeight(this.position.x, this.position.z) + 0.02;
   }

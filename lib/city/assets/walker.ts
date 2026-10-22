@@ -5,6 +5,7 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 export function makeWalker(): {
   group: THREE.Group;
   update: (distance: number, moving: boolean) => void;
+  setSeated: (seated: boolean, seatHeight?: number) => void;
 } {
   const group = new THREE.Group();
   group.name = 'Walker — original Vancouver pedestrian';
@@ -518,8 +519,12 @@ export function makeWalker(): {
   batch(body);
 
   let strength = 0,
+    seated = false,
+    seatHeight = 0.46,
+    lastDistance = 0,
     lastTime: number | undefined;
   function update(distance: number, moving: boolean) {
+    lastDistance = Number.isFinite(distance) ? distance : lastDistance;
     const now =
       typeof performance !== 'undefined' ? performance.now() : Date.now();
     const dt =
@@ -527,14 +532,17 @@ export function makeWalker(): {
         ? 1 / 60
         : Math.max(0, Math.min(0.1, (now - lastTime) / 1000));
     lastTime = now;
-    strength += (Number(moving) - strength) * (1 - Math.exp(-dt * 13));
+    strength +=
+      (Number(moving && !seated) - strength) * (1 - Math.exp(-dt * 13));
+    if (seated) strength = 0;
     if (!moving && strength < 0.0001) strength = 0;
     const phase =
       (((Number.isFinite(distance) ? distance : 0) % 1.35) / 1.35) *
       Math.PI *
       2;
-    const hipY =
-      0.91 - strength * 0.03 + Math.cos(phase * 2) * 0.006 * strength;
+    const hipY = seated
+      ? seatHeight + 0.085
+      : 0.91 - strength * 0.03 + Math.cos(phase * 2) * 0.006 * strength;
     body.position.y = hipY;
     body.rotation.set(
       0,
@@ -544,8 +552,14 @@ export function makeWalker(): {
     head.rotation.y = -Math.sin(phase) * 0.025 * strength;
     for (const arm of arms) {
       const s = Math.sin(phase + (arm.side < 0 ? 0 : Math.PI));
-      arm.upper.rotation.set(s * 0.46 * strength, 0, -arm.side * 0.075);
-      arm.fore.rotation.x = -0.11 - Math.max(0, -s) * 0.25 * strength;
+      arm.upper.rotation.set(
+        seated ? -0.35 : s * 0.46 * strength,
+        0,
+        -arm.side * 0.075,
+      );
+      arm.fore.rotation.x = seated
+        ? -0.9
+        : -0.11 - Math.max(0, -s) * 0.25 * strength;
     }
     for (const leg of legs) {
       const p = phase + (leg.side < 0 ? 0 : Math.PI),
@@ -559,7 +573,19 @@ export function makeWalker(): {
       let low = Infinity;
       for (const corner of leg.footMin)
         low = Math.min(low, tmp.copy(corner).applyEuler(foot.rotation).y);
-      foot.position.set(leg.side * 0.105, -low + lift, s * 0.23 * strength);
+      let ankleZ = s * 0.23 * strength;
+      if (seated) {
+        // Solve a bent seated leg while retaining both original segment
+        // lengths and the shoe's existing sole datum on the floor.
+        const kneeY = Math.min(hipY - 0.035, -low + shinLength * 0.98);
+        const thighZ = Math.sqrt(
+          Math.max(0, thighLength * thighLength - (hipY - kneeY) ** 2),
+        );
+        ankleZ =
+          thighZ +
+          Math.sqrt(Math.max(0, shinLength * shinLength - (kneeY + low) ** 2));
+      }
+      foot.position.set(leg.side * 0.105, -low + lift, ankleZ);
       const hip = new THREE.Vector3(leg.side * 0.105, hipY, 0),
         ankle = foot.position;
       const direction = ankle.clone().sub(hip),
@@ -614,6 +640,19 @@ export function makeWalker(): {
     triangles,
     drawCalls,
     strideMetres: 1.35,
+    seated: false,
   };
-  return { group, update };
+  function setSeated(value: boolean, height = 0.46) {
+    const nextHeight = Number.isFinite(height)
+      ? THREE.MathUtils.clamp(height, 0.25, 0.75)
+      : 0.46;
+    if (seated === value && (!value || seatHeight === nextHeight)) return;
+    seated = value;
+    seatHeight = nextHeight;
+    strength = 0;
+    group.userData.seated = seated;
+    group.userData.seatHeightMetres = seatHeight;
+    update(lastDistance, false);
+  }
+  return { group, update, setSeated };
 }

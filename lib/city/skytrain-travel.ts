@@ -17,6 +17,7 @@ import {
   type RuntimeStationData,
   type SkyTrainStationOwner,
   type StationPoint,
+  type StationSeat,
 } from './skytrain-stations';
 import { SkyTrainRideTrain } from './skytrain-ride-train';
 import {
@@ -28,6 +29,8 @@ import {
 import type { SkyTrainTravelSnapshot } from './skytrain-travel-types';
 import { safeTouchAxis } from './touch-input';
 import { setMainSkyTrainGuideway } from './skytrain-guideway-clearance';
+import type { InteractionCandidate } from './proximity-interactions';
+import type { CabinPoint, PassengerSeat } from './skytrain-passenger-space';
 
 export const EMPTY_SKYTRAIN_TRAVEL: SkyTrainTravelSnapshot = {
   phase: 'idle',
@@ -72,6 +75,11 @@ export class SkyTrainTravel {
   private direction: SkyTrainDirection = 'eastbound';
   private level: 'concourse' | 'platform' = 'concourse';
   private foot: StationPoint | null = null;
+  private cabinFoot: CabinPoint | null = null;
+  private cabinSeat: PassengerSeat | null = null;
+  private cabinStand: CabinPoint | null = null;
+  private stationSeat: StationSeat | null = null;
+  private avatarSeated = false;
   private journey: SkyTrainJourney | null = null;
   private routeData: SkyTrainRouteData | null = null;
   private readonly paths = new Map<string, SkyTrainRidePath>();
@@ -134,6 +142,187 @@ export class SkyTrainTravel {
   get aboard() {
     return this.journey?.snapshot().aboard ?? false;
   }
+  get passengerSeated() {
+    return Boolean(this.cabinSeat || this.stationSeat);
+  }
+  /** Feet datum used by the common proximity registry, independent of camera. */
+  get interactionOrigin(): [number, number, number] | null {
+    if (!this.active || this.busy) return null;
+    if (this.aboard && this.cabinFoot)
+      return this.train.passengerPointToWorld(
+        this.cabinSeat?.position ?? this.cabinFoot,
+      );
+    if (this.owner && this.foot)
+      return this.owner.toWorld(this.stationSeat?.position ?? this.foot);
+    return null;
+  }
+  interactionCandidates(): readonly InteractionCandidate[] {
+    if (!this.active || this.disposed || this.busy || !this.inputEnabled)
+      return [];
+    if (this.passengerSeated) {
+      const origin = this.interactionOrigin;
+      if (!origin) return [];
+      return [
+        {
+          id: 'skytrain:stand',
+          kind: 'seat',
+          action: 'stand',
+          anchor: [origin[0], origin[1] + 0.95, origin[2]],
+          proximityPoint: origin,
+          range: 1.5,
+          priority: 100,
+          canInteract: () =>
+            this.active &&
+            this.inputEnabled &&
+            !this.busy &&
+            this.passengerSeated,
+          execute: () => this.stand(),
+        },
+      ];
+    }
+    if (this.aboard && this.cabinFoot && this.train.passengerSpace) {
+      const space = this.train.passengerSpace;
+      return space.seats
+        .filter((seat) => space.canSit(seat, this.cabinFoot!))
+        .map((seat) => {
+          const anchor = this.train.passengerPointToWorld([
+            seat.position[0],
+            seat.position[1] + seat.seatHeight + 0.85,
+            seat.position[2],
+          ]);
+          return {
+            id: `skytrain:cabin:${seat.id}`,
+            kind: 'seat' as const,
+            action: 'sit',
+            anchor,
+            proximityPoint: this.train.passengerPointToWorld(seat.position),
+            range: 1.45,
+            canInteract: () =>
+              this.aboard &&
+              !this.passengerSeated &&
+              this.inputEnabled &&
+              !this.busy &&
+              this.train.passengerSpace === space &&
+              Boolean(this.cabinFoot && space.canSit(seat, this.cabinFoot)),
+            execute: () => this.sitCabin(seat),
+          };
+        });
+    }
+    const owner = this.owner,
+      foot = this.foot;
+    if (!owner || !foot || this.phase !== 'station') return [];
+    return owner
+      .benchSeats()
+      .filter((seat) => owner.canApproachSeat(seat, foot))
+      .map((seat) => {
+        const position = owner.toWorld(seat.position);
+        return {
+          id: `skytrain:station:${owner.data.id}:${seat.id}`,
+          kind: 'seat' as const,
+          action: 'sit',
+          anchor: [
+            position[0],
+            position[1] + seat.seatHeight + 0.85,
+            position[2],
+          ] as [number, number, number],
+          proximityPoint: owner.toWorld(seat.stand),
+          range: 1.1,
+          canInteract: () =>
+            this.owner === owner &&
+            this.phase === 'station' &&
+            !this.passengerSeated &&
+            this.inputEnabled &&
+            !this.busy &&
+            Boolean(
+              this.foot &&
+              owner.canApproachSeat(seat, this.foot) &&
+              owner.isClearFoot(seat.stand),
+            ),
+          execute: () => this.sitStation(owner, seat),
+        };
+      });
+  }
+  private sitCabin(seat: PassengerSeat) {
+    const space = this.train.passengerSpace;
+    if (
+      !this.aboard ||
+      this.passengerSeated ||
+      !this.inputEnabled ||
+      this.busy ||
+      !space ||
+      !this.cabinFoot ||
+      !space.seats.includes(seat) ||
+      !space.canSit(seat, this.cabinFoot)
+    )
+      return false;
+    this.cabinStand = [...this.cabinFoot];
+    this.cabinSeat = seat;
+    this.yaw = seat.yaw;
+    this.lookYaw = 0;
+    this.clearInput();
+    this.updateCamera();
+    this.publish();
+    return true;
+  }
+  private sitStation(owner: SkyTrainStationOwner, seat: StationSeat) {
+    if (
+      this.owner !== owner ||
+      this.phase !== 'station' ||
+      this.passengerSeated ||
+      !this.inputEnabled ||
+      this.busy ||
+      !this.foot ||
+      !owner.canApproachSeat(seat, this.foot) ||
+      !owner.isClearFoot(seat.stand)
+    )
+      return false;
+    this.stationSeat = seat;
+    this.yaw = seat.yaw;
+    this.lookYaw = 0;
+    this.clearInput();
+    this.updateCamera();
+    this.publish();
+    return true;
+  }
+  stand() {
+    if (
+      !this.passengerSeated ||
+      !this.active ||
+      this.busy ||
+      !this.inputEnabled
+    )
+      return false;
+    if (this.cabinSeat) {
+      if (
+        !this.cabinStand ||
+        !this.train.passengerSpace?.clear(this.cabinStand)
+      )
+        return false;
+      this.cabinFoot = [...this.cabinStand];
+      this.cabinSeat = null;
+      this.cabinStand = null;
+    } else if (this.stationSeat) {
+      if (!this.owner?.isClearFoot(this.stationSeat.stand)) return false;
+      this.foot = {
+        ...this.stationSeat.stand,
+        position: [...this.stationSeat.stand.position],
+      };
+      this.stationSeat = null;
+    }
+    this.clearInput();
+    this.lookYaw = 0;
+    this.updateCamera();
+    this.publish();
+    return true;
+  }
+  private resetSeat() {
+    this.cabinSeat = null;
+    this.cabinStand = null;
+    this.stationSeat = null;
+    this.cabinFoot = null;
+    this.city.navigation?.walker.setSeated?.(false);
+    this.avatarSeated = false;
+  }
   get speedMps() {
     const j = this.journey?.snapshot();
     if (!j || j.phase !== 'riding') return 0;
@@ -161,7 +350,13 @@ export class SkyTrainTravel {
     let canChangeLevel = false,
       canExit = false,
       nearDoor = false;
-    if (owner && foot && this.phase === 'station' && !this.busy) {
+    if (
+      owner &&
+      foot &&
+      this.phase === 'station' &&
+      !this.busy &&
+      !this.passengerSeated
+    ) {
       const access = owner.accessPoint(
         this.level === 'concourse' ? 'entry' : 'platform',
         this.line,
@@ -195,6 +390,8 @@ export class SkyTrainTravel {
     );
     const canAlight = Boolean(
       j?.canAlight &&
+      !this.passengerSeated &&
+      this.nearCabinDoor() &&
       owner &&
       this.station === j.currentStation &&
       this.trainAtPlatform() &&
@@ -220,6 +417,9 @@ export class SkyTrainTravel {
       travelProgress: j?.progress ?? 0,
       error: this.error,
       busy: this.busy,
+      seated: this.passengerSeated,
+      canWalkCabin:
+        this.aboard && !this.passengerSeated && !this.busy && this.inputEnabled,
       transferAt: j?.itinerary.transferStation ?? null,
       availableLines: this.station ? skyTrainStation(this.station).lines : [],
       hint: this.busy
@@ -270,6 +470,11 @@ export class SkyTrainTravel {
         this.city.data.buildingProfiles?.get('133436')?.seed,
       );
   }
+  private nearCabinDoor() {
+    if (!this.cabinFoot || !this.owner) return false;
+    const door = this.owner.passengerDoor(this.line, this.direction);
+    return distance(this.cabinFoot, door) < 1.5;
+  }
   private trainAtPlatform() {
     if (
       !this.owner ||
@@ -316,11 +521,14 @@ export class SkyTrainTravel {
       this.disposed ||
       this.active ||
       !SKYTRAIN_STATIONS.some((s) => s.id === id) ||
+      (this.city.navigation?.walkSeat &&
+        !this.city.navigation.leaveWalkSeat()) ||
       !this.city.closeBusVisit()
     )
       return false;
     const generation = ++this.generation;
     this.arrivalPreparation = null;
+    this.resetSeat();
     this.phase = 'loading';
     this.busy = true;
     this.error = null;
@@ -543,6 +751,10 @@ export class SkyTrainTravel {
   board() {
     if (!this.snapshot().canBoard || !this.journey?.board()) return false;
     this.phase = 'riding';
+    this.cabinFoot = this.train.passengerSpace?.doorSpawn(
+      this.owner!.trainStop(this.line, this.direction).doorSide,
+    ) ?? [0, this.train.floorAboveRail, 0];
+    this.yaw = this.train.facingYaw;
     this.lookYaw = 0;
     this.clearInput();
     this.updateCamera();
@@ -555,6 +767,7 @@ export class SkyTrainTravel {
     this.foot = this.owner!.boardingPoint(this.line, this.direction);
     if (!this.journey.alight()) return false;
     this.station = station;
+    this.resetSeat();
     this.phase = 'station';
     this.level = 'platform';
     this.yaw = this.foot.yaw;
@@ -604,6 +817,7 @@ export class SkyTrainTravel {
     if (!this.snapshot().canExit || this.aboard) return false;
     const point = this.exitPoint();
     if (!point) return false;
+    this.resetSeat();
     this.phase = 'idle';
     this.arrivalPreparation = null;
     this.updateBuildingReplacement();
@@ -709,6 +923,7 @@ export class SkyTrainTravel {
     }
     if (
       this.phase === 'station' &&
+      !this.passengerSeated &&
       this.owner &&
       this.foot &&
       this.inputEnabled
@@ -752,6 +967,29 @@ export class SkyTrainTravel {
           j?.doorsOpen && this.train.doorsClear && this.trainAtPlatform(),
         ),
       );
+    }
+    if (
+      this.aboard &&
+      this.cabinFoot &&
+      !this.passengerSeated &&
+      this.inputEnabled
+    ) {
+      const left = Number(this.keys.has('KeyA') || this.keys.has('ArrowLeft'));
+      const right = Number(
+        this.keys.has('KeyD') || this.keys.has('ArrowRight'),
+      );
+      this.yaw += (left - right - this.axes.x) * 1.65 * dt;
+      const forward =
+        Number(this.keys.has('KeyW') || this.keys.has('ArrowUp')) -
+        Number(this.keys.has('KeyS') || this.keys.has('ArrowDown')) +
+        this.axes.y;
+      const amount = THREE.MathUtils.clamp(forward, -1, 1) * 1.8 * dt;
+      this.cabinFoot =
+        this.train.passengerSpace?.walk(
+          this.cabinFoot,
+          Math.sin(this.yaw) * amount,
+          Math.cos(this.yaw) * amount,
+        ) ?? this.cabinFoot;
     }
     this.updateCamera();
   }
@@ -850,37 +1088,89 @@ export class SkyTrainTravel {
   }
   private updateCamera() {
     if (!this.active || !this.owner) return;
+    // Entry suspends street navigation in orbit mode, whose 2 m near plane
+    // would cut away nearby cabin geometry and reject close seat prompts.
+    // Street navigation resumes ownership (including its projection) on exit.
+    if (this.city.camera.near !== 0.05 || this.city.camera.fov !== 65) {
+      this.city.camera.near = 0.05;
+      this.city.camera.fov = 65;
+      this.city.camera.updateProjectionMatrix();
+    }
     let eye: THREE.Vector3, yaw: number;
+    const footWorld = new THREE.Vector3();
+    const avatarQuaternion = new THREE.Quaternion();
+    let seatHeight = 0.46;
     if (this.aboard) {
+      const local = this.cabinSeat?.position ?? this.cabinFoot;
+      if (local)
+        this.train.setPassengerLocal(
+          local,
+          this.cabinSeat?.eyeHeight ?? 1.65,
+          this.cabinSeat?.eyeOffsetXZ,
+        );
       this.train.passengerWorldPose(
         this.passengerEye,
         this.passengerQuaternion,
       );
       eye = this.passengerEye;
+      footWorld.fromArray(
+        this.train.passengerPointToWorld(
+          local ?? [0, this.train.floorAboveRail, 0],
+        ),
+      );
+      avatarQuaternion
+        .copy(this.passengerQuaternion)
+        .multiply(new THREE.Quaternion().setFromAxisAngle(UP, this.yaw));
       yaw =
         this.passengerEuler.setFromQuaternion(this.passengerQuaternion, 'YXZ')
           .y +
-        this.train.facingYaw +
+        this.yaw +
         this.lookYaw;
+      seatHeight = this.cabinSeat?.seatHeight ?? 0.46;
     } else if (this.foot) {
-      eye = new THREE.Vector3(...this.owner.toWorld(this.foot)).addScaledVector(
-        UP,
-        1.65,
+      footWorld.fromArray(
+        this.owner.toWorld(this.stationSeat?.position ?? this.foot),
       );
-      yaw = this.owner.yaw + this.yaw + this.lookYaw;
+      avatarQuaternion
+        .copy(this.owner.group.quaternion)
+        .multiply(new THREE.Quaternion().setFromAxisAngle(UP, this.yaw));
+      if (this.stationSeat) {
+        // A verified aisle-side camera shows the seated person and bench without
+        // moving the person or using another station floor as an orbit target.
+        eye = new THREE.Vector3(
+          ...this.owner.toWorld(this.stationSeat.stand),
+        ).addScaledVector(UP, 1.25);
+        yaw = this.owner.yaw + this.yaw + Math.PI + this.lookYaw;
+        seatHeight = this.stationSeat.seatHeight;
+      } else {
+        eye = footWorld.clone().addScaledVector(UP, 1.65);
+        yaw = this.owner.yaw + this.yaw + this.lookYaw;
+      }
     } else return;
+    const pitch = this.stationSeat ? -0.32 + this.pitch : this.pitch;
     const direction = new THREE.Vector3(
-      Math.sin(yaw) * Math.cos(this.pitch),
-      Math.sin(this.pitch),
-      Math.cos(yaw) * Math.cos(this.pitch),
+      Math.sin(yaw) * Math.cos(pitch),
+      Math.sin(pitch),
+      Math.cos(yaw) * Math.cos(pitch),
     );
     this.city.camera.position.copy(eye);
     this.city.camera.lookAt(eye.clone().add(direction));
     this.city.controls.target.copy(eye).addScaledVector(direction, 0.8);
     this.city.controls.enabled = false;
-    if (this.city.navigation) {
-      this.city.navigation.position.copy(eye).addScaledVector(UP, -1.65);
-      this.city.navigation.walker.group.visible = false;
+    const navigation = this.city.navigation;
+    if (navigation) {
+      navigation.position.copy(footWorld);
+      const walker = navigation.walker;
+      if (this.avatarSeated !== this.passengerSeated) {
+        walker.setSeated?.(this.passengerSeated, seatHeight);
+        this.avatarSeated = this.passengerSeated;
+      }
+      walker.group.position.copy(footWorld);
+      walker.group.quaternion.copy(avatarQuaternion);
+      // The occupied cabin uses its original first-person eye. Keep its body
+      // attached in a seated pose, with ordinary first-person self hiding.
+      walker.group.visible = Boolean(this.stationSeat);
+      if (this.passengerSeated) walker.update?.(0, false);
     }
   }
   private buildTunnel(path: SkyTrainRidePath) {
@@ -1003,8 +1293,10 @@ export class SkyTrainTravel {
     if (this.drag?.id === event.pointerId) this.drag = null;
   };
   dispose() {
+    this.resetSeat();
     if (this.disposed) return;
     this.disposed = true;
+    this.resetSeat();
     this.phase = 'idle';
     this.arrivalPreparation = null;
     this.updateBuildingReplacement();

@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "scope": "Pre-release automated checks. Native browser and release CI results are recorded in the pull request.",
+  "generatedAtUtc": "2026-10-22T18:26:04.313481+00:00",
+  "baseCommit": "53bb3c619a160627cb9b4394e9876f36c6f2323a",
+  "node": "24.22.1",
+  "featureSuite": {
+    "tests": 89,
+    "passed": 89,
+    "failed": 0,
+    "logSha256": "fddb2034288261b87182a61cb0cf32fd15de3695f6d26891067894d1ef4fcf72",
+    "sourceNote": "The final front/back seat approach restriction was subsequently rechecked with all six real-geometry tests and both full interaction controller tests."
+  },
+  "finalApproachRestriction": {
+    "realGeometryTestsPassed": 6,
+    "controllerTestsPassed": 2,
+    "logSha256": "6e04cb4aa45c0eeb8cfd3b73f21c4553932dddc0ef77099a2b978d18bb490c0c"
+  },
+  "localFullRun": {
+    "tests": 1829,
+    "passed": 1828,
+    "failed": 1,
+    "failure": "Unchanged close-up bus GLB audit exceeded its original 230000ms subprocess watchdog under shared-host CPU contention.",
+    "logSha256": "a815c96448c4cc92d96af1da8effc8134f0f22008cbf36d4b47217a638d70dfd",
+    "identicalIsolatedRetry": {
+      "passed": 1,
+      "failed": 0,
+      "testDurationMs": 183619,
+      "guardsAndAssetsUnmodified": true,
+      "logSha256": "6980d01c4692233441ca4b66cfd2dcdc3b7176fb7b92317614f5a851efce011b"
+    }
+  },
+  "legacyLint": {
+    "baseline": 51,
+    "current": 47,
+    "new": 0,
+    "details": "lint-comparison.json"
+  },
+  "sourceSha256": {
+    "app/page.tsx": "1bb660117c6c6741c715eb7cf0b445c30e3a1ac9432f5256632044b9e466b9f4",
+    "components/city-interaction-overlay.tsx": "90084479b259f825a18ea9d2dce7a115a51d88d0582e551c78c89390555ddb4b",
+    "components/proximity-interaction-prompt.css": "69a427599dd37b828e7e6fbc47c00141981e20f9025dfbda02abd72cb8393463",
+    "components/proximity-interaction-prompt.tsx": "0e08ed4454c6947fbde07c8bbc9a9a9b69abfb82fc318bbb25587115ef9f81be",
+    "components/skytrain-travel-panel.tsx": "88b3a92b6a7fd3a8f969a0cfe23a7e49fa2169c017693a869f32fdaee720f942",
+    "lib/city/assets/walker.ts": "ebf30b2d2462bf1fa428f79f4a6f1118ae42e8f98109eec3c4b9fc42cf5e5d5f",
+    "lib/city/beach-amenities.ts": "a081867d0418fd22d7685d252a9991863bc04fc245885b3132286c0dd4657a46",
+    "lib/city/citizen.ts": "60129e1344eef85e7126ef1a02e8796b22313469457c14b3f48a9ee4491db548",
+    "lib/city/city-interactions.ts": "70210b0e814603aa6e6404a77b8d52e0b6a6bc0f7397ccc0b7e4c86ff7a765c3",
+    "lib/city/engine.ts": "96127f3929c5fc46e26d19f771be8044bde6d18f288b05da38bdc8ad22c2e419",
+    "lib/city/interiors.ts": "d169aed61c7432ed7c45db1ca6ced6ba1388575767768a0f5f32bae4e2cedf1e",
+    "lib/city/navigation.ts": "b21a93908e995b0f638928c62808e43aaa6721db87cc6288fc6efd048e25ad60",
+    "lib/city/proximity-interactions.ts": "5449521242bd620325e9cc7095a60e986816edf13fdd0ffa5fe5a06da81310e9",
+    "lib/city/skytrain-passenger-space.ts": "3c444152ca75f10eec0aaccd0c2afb0ab597c272a1802cae3c9e5743213d3474",
+    "lib/city/skytrain-ride-train.ts": "1f02d99ce9326865efa43bfc54ad770e35644f1df28f53c61b97d0925fbd6e46",
+    "lib/city/skytrain-stations.ts": "4a10c7b626ab508dbe9e96340fe5ab588e682c42e37b0bc578d4a06de88b7b39",
+    "lib/city/skytrain-travel-types.ts": "bb2c5166c6c318e8e45aa55c12229ad913cbc1cb93f0137db0153513ee834e84",
+    "lib/city/skytrain-travel.ts": "af059f9531034416062bc0263a84fa19f282c1dec7ce694c0413196a4bbd721b",
+    "lib/city/street-furniture-qa.ts": "977005e3133732393bf803957d5d163d8d557b397ba095e6603c7db620ae5249",
+    "lib/city/street-furniture.ts": "a1cdbfa8a117e34101fc4a7d36d82fdc0381cf2d0641ac5e91a10ff23c4c6c76",
+    "lib/city/world-seats.ts": "e1504d774d73404468f317c794e16b313c83070fbe44cb6a423e8e6bec8a30a2",
+    "lib/i18n/interactions.json": "7eb4880602310d4d210c6b1f1e9fc1dcd91a0ae5acecb859c2b51bf631837648",
+    "tests/citizen-seat.test.mjs": "aac0f28e20cd0692abdf9bc292042f6483f695d47c8c29a1cbe35888d0996a5e",
+    "tests/city-interactions.test.mjs": "9ecc06bfa719dda91d1ddf6c5ca230e7a28066b63d7dbfc59a7e80c8b4340dc7",
+    "tests/proximity-interaction-prompt.test.mjs": "1d80aeaac9f2702238b27dda24d8b12cecdf28e0dbb458336cdea0cecf1333b0",
+    "tests/proximity-interactions.test.mjs": "4bada813a243f9f12947cd2eb9772d2383cb5e0ccbc546d336d7f19834b8b3f4",
+    "tests/skytrain-passenger-space.test.mjs": "4f6fa5956ca00fbe0905e357e329d166b7a86af6071f726b4882195bb51e08db",
+    "tests/skytrain-travel-ui.test.mjs": "4dae14318ad4bb498b1885dd839077f613ff81d4730ac511e9a04e205a81ed0e",
+    "tests/skytrain-travel.test.mjs": "1890feb73c94389c60746831bbac41cd38f1114c5c698e95f94e635d995b06e7",
+    "tests/street-furniture.test.mjs": "5cc7f3f97f0e98690f6a68fd92f6f5ca56780e494cc7e27f29484ad494ebe8fe",
+    "tests/world-seats.test.mjs": "ff1381c6dfb45ac47f3022e4a1b3ba855bf7c0f66c806a0385302ac40dd0dff0",
+    "tools/assets/material-consumer-candidates/adapters/seating-source-compatibility.mjs": "ca0bb1519d4343d7005fb34d1cdb76c285ae6e914edab42aee57eecbe4632c39",
+    "tools/assets/material-consumer-candidates/test-consumers.mjs": "2aa923e10e3d77f3e8f73ac81b061455ea7e30ac9386b68e7671d76fc263d2c9",
+    "tools/assets/material-consumer-candidates/validate-consumers.mjs": "f6e221cdb6b0d57d8a3fbdd88092cf63c4c52b21581f8bd9ad3bb4330da224e2",
+    "tools/assets/material-consumer-candidates/validate-furniture.mjs": "7e2de6b48cec1bc8e1ca527fdc3917cf343d59a29bae489eb91bd647accd78ec"
+  },
+  "closeCameraFollowUp": {
+    "reason": "Native browser validation found that entering SkyTrain inherited the orbit near plane (2m), which clipped the close cabin geometry and shared seat prompt.",
+    "testsPassed": 3,
+    "testsFailed": 0,
+    "testDurationMs": 8474.039978,
+    "logSha256": "6e61d53ff42f65f5b54d112cdb255ddf982a0069e4287cb22b2f7a288cd1c8c8",
+    "sourceSha256": {
+      "lib/city/skytrain-travel.ts": "abd59f8245ebcfeaf33885fa96f11ce14226bbd5b7bf86b9816b00260b0d3c65",
+      "tests/skytrain-travel.test.mjs": "37b5a243ac4007c4476f54d8e4c3bb5718c40d37c92bc8f1ec36b145e8f5fd93"
+    },
+    "typecheckPassed": true,
+    "strictLintPassed": true,
+    "initialHeadFullCi": {
+      "commit": "0f00cede1911906ab919b56df4f44fbb060ed42a",
+      "testsPassed": 1833,
+      "testsFailed": 0,
+      "run": "https://github.com/YiTaChen/vancouver-living-atlas/actions/runs/39831397600"
+    },
+    "note": "The sourceSha256 map above is the earlier pre-release capture. These two hashes describe the follow-up. Final exact-head CI and native verification are recorded in the PR."
+  },
+  "citizenTextureFollowUp": {
+    "reason": "Final production-CSP native validation found the citizen GLTF default ImageBitmapLoader attempted blocked blob fetches. The private default loader now uses image decoding under the existing img-src policy; no CSP or asset bytes changed.",
+    "testsPassed": 19,
+    "testsFailed": 0,
+    "logSha256": "88307f3fb491fff09310d00f08ee5b4742599178ab29043726520b34a937981d",
+    "sourceSha256": {
+      "lib/city/citizen.ts": "8cd76842676fc6a303565a891ede69f068d9d03cc43696f24bfbd0d2c0f2ee0e",
+      "tests/citizen-texture-decoding.test.mjs": "61579b99525b56c4a3f0a8f5ecff726ea7c1644e25c28cf0d0c1739a2ab0ce18"
+    },
+    "priorCameraHeadFullCi": {
+      "commit": "61ba0541a455a5944d4023d22a24d6b758204b81",
+      "testsPassed": 1834,
+      "testsFailed": 0,
+      "run": "https://github.com/YiTaChen/vancouver-living-atlas/actions/runs/39833353844"
+    },
+    "note": "Final exact-head CI and native production verification are recorded in the PR."
+  }
+}

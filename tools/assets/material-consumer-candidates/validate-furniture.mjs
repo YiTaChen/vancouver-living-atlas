@@ -12,6 +12,8 @@ for(const level of [0,1]){const b=Object.fromEntries(manifest.assets.map(a=>[a.i
 const bad=structuredClone(plan);bad.placements[0].translationM[0]+=.1;
 assert.throws(()=>checkFurnitureFit(bad,Object.fromEntries(manifest.assets.map(a=>[a.id,a.boundsM]))),/escapes/);
 const sites=i.sites.map(s=>({...s,obstacles:s.obstacles.map(o=>({...o}))}));sites[1].obstacles.find(o=>o.w===.65).w=.66;assert.throws(()=>furnitureReplacementPlan(sites),/drift/);
-writeFileSync(PACKAGE+'/qa/furniture-replacement-plan.json',JSON.stringify(plan,null,2)+'\n');
-writeFileSync(PACKAGE+'/qa/furniture-fit.json',JSON.stringify({status:'pass',results,negativeTests:['escaped collision footprint rejected','changed source obstacle rejected'],runtimeIntegration:'not_run; no visual replacement or collision edits applied'},null,2)+'\n');
+if(process.argv.includes('--write-evidence')){
+ writeFileSync(PACKAGE+'/qa/furniture-replacement-plan.json',JSON.stringify(plan,null,2)+'\n');
+ writeFileSync(PACKAGE+'/qa/furniture-fit.json',JSON.stringify({status:'pass',results,negativeTests:['escaped collision footprint rejected','changed source obstacle rejected'],runtimeIntegration:'not_run; no visual replacement or collision edits applied'},null,2)+'\n');
+}
 console.log('Furniture fit passes 58 source-selected placements × 2 LODs; no collision expansion.');
