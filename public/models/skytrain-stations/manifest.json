@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "source": "tools/assets/skytrain-stations-stage2/station-layout.json",
+  "sourceSha256": "9a99a1b75e2a7ad6d3a72d7bff253e2c92a7ffa984aa4a9c8481adbbc47ac962",
+  "sourceLicense": "Vancouver Living Atlas Noncommercial Research and Attribution 1.0",
+  "files": [
+    {
+      "id": "waterfront",
+      "file": "waterfront.json",
+      "bytes": 93345,
+      "sha256": "9547d43082a57211a00305a700c6694f67f599bf3a6554d2a8b5c5ca608bf746"
+    },
+    {
+      "id": "burrard",
+      "file": "burrard.json",
+      "bytes": 93587,
+      "sha256": "ab50104b558d2faacbcbe073db33517449ed9ebc3238d163ee9f29f0af30a9fb"
+    },
+    {
+      "id": "granville",
+      "file": "granville.json",
+      "bytes": 152625,
+      "sha256": "d2da8dfd508ed5a0d1594e0c1f3e1108282bc5e209a706ff04d2a9443b57af7b"
+    },
+    {
+      "id": "stadium-chinatown",
+      "file": "stadium-chinatown.json",
+      "bytes": 46072,
+      "sha256": "d52147b9bbe8670471c2905f6124ad7e684dec2553bb0389cee2f03ab707a9b7"
+    },
+    {
+      "id": "main-street-science-world",
+      "file": "main-street-science-world.json",
+      "bytes": 60418,
+      "sha256": "6fb6337234c3cb388272a8a12363fecad596db6070bdb6c464b1aeaf769c37b7"
+    },
+    {
+      "id": "vancouver-city-centre",
+      "file": "vancouver-city-centre.json",
+      "bytes": 38471,
+      "sha256": "27bcc231a14048742cf1a64561e8354dd1995d1a2057c9c0fead9264166ce103"
+    },
+    {
+      "id": "yaletown-roundhouse",
+      "file": "yaletown-roundhouse.json",
+      "bytes": 55737,
+      "sha256": "d9ede81de2e90a631bf79a226197efe853eb386b2e5f1d3c8adf7700bafe5806"
+    }
+  ]
+}

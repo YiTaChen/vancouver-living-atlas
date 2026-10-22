@@ -1,0 +1,286 @@
+{
+  "schemaVersion": 1,
+  "recordedDate": "2026-10-22",
+  "feature": "Regional SkyTrain passenger travel",
+  "sourceState": "Frozen implementation before the release commit; deployment and exact-commit CI outcomes are separate records.",
+  "runtime": "Node.js 24.22.1",
+  "coverage": {
+    "expo": [
+      "waterfront",
+      "burrard",
+      "granville",
+      "stadium-chinatown",
+      "main-street-science-world"
+    ],
+    "canada": [
+      "waterfront",
+      "vancouver-city-centre",
+      "yaletown-roundhouse"
+    ],
+    "transferStation": "waterfront",
+    "directions": "Both directions, with intermediate stops; regional endpoints are not represented as real network termini."
+  },
+  "localChecks": {
+    "newFeatureTests": {
+      "status": "passed",
+      "passed": 98,
+      "failed": 0,
+      "groups": {
+        "network": 20,
+        "path": 12,
+        "stations": 21,
+        "train": 10,
+        "ui": 8,
+        "controller": 18,
+        "render": 7,
+        "buildingReplacement": 2
+      }
+    },
+    "focusedIncludingExistingCabin": {
+      "status": "passed",
+      "passed": 108,
+      "failed": 0,
+      "scope": "Rerun after both the loaded-service-line fix and two Waterfront runtime support adaptations."
+    },
+    "affectedFinalImplementation": {
+      "status": "passed",
+      "passed": 160,
+      "failed": 0,
+      "scope": "Earlier 160-test affected scope, before the final logical provenance-ID, loaded-service-line and Waterfront support adjustments."
+    },
+    "afterProvenanceIdAdjustment": {
+      "status": "passed",
+      "passed": 29,
+      "failed": 0,
+      "scope": "Path and actual passenger-controller regressions rerun after the source metadata change."
+    },
+    "earlierFullRepository": {
+      "status": "passed_earlier_revision",
+      "passed": 1754,
+      "failed": 0,
+      "scope": "Before the final 17 new tests; not an exact-final-commit full-suite result."
+    },
+    "typeScript": {
+      "command": "npm run check",
+      "status": "passed"
+    },
+    "newSourceAndTestsStrictLint": {
+      "status": "passed"
+    },
+    "changedLegacyLint": {
+      "status": "no_new_diagnostics",
+      "baselineErrors": 47,
+      "currentErrors": 47,
+      "newDiagnostics": 0,
+      "evidence": "lint-comparison.json"
+    },
+    "productionBuild": {
+      "command": "npm run build:firebase",
+      "status": "passed",
+      "includes": [
+        "Static production export",
+        "Firebase artifact verification",
+        "CSP generation"
+      ],
+      "provenance": "Runtime route metadata uses the logical TransLink release identifier and source SHA-256; protected source/handoff exclusions remain enforced.",
+      "scope": "Final production build passed after both the loaded-service-line fix and Waterfront support adaptations."
+    }
+  },
+  "exactCommitCiExpectation": {
+    "status": "expected_count_only_not_a_pass_result",
+    "baselineTests": 1673,
+    "newTests": 98,
+    "expectedTotal": 1771,
+    "authority": "The GitHub workflow associated with the actual release commit supplies its own result."
+  },
+  "nativeBrowserAcceptance": {
+    "origin": "Main integration agent's actual native-browser observations, separate from CPU test fixtures.",
+    "desktop": [
+      {
+        "route": [
+          "waterfront",
+          "burrard"
+        ],
+        "completed": [
+          "Enter station",
+          "Walk to platform and doorway",
+          "Board",
+          "Ride",
+          "Alight",
+          "Return to concourse",
+          "Exit to city street"
+        ],
+        "revisionScope": "Earlier native acceptance; these station geometries were unaffected by the final Main Street correction and logical provenance-ID adjustment."
+      },
+      {
+        "route": [
+          "main-street-science-world",
+          "stadium-chinatown",
+          "granville",
+          "burrard",
+          "waterfront"
+        ],
+        "completed": [
+          "Board final integrated Main Street service",
+          "Continue automatically through intermediate stops",
+          "Arrive at Waterfront with doors open"
+        ],
+        "revisionScope": "QA snapshot with final Main Street layout; the three explicitly listed release deltas were applied afterward.",
+        "arrivalVerifiedUtcMinute": "2026-10-22T14:01Z"
+      }
+    ],
+    "responsiveDesktopBrowser": {
+      "viewports": [
+        {
+          "width": 390,
+          "height": 844
+        },
+        {
+          "width": 844,
+          "height": 390
+        }
+      ],
+      "route": [
+        "vancouver-city-centre",
+        "yaletown-roundhouse"
+      ],
+      "input": "Native pointer-operated walking joystick and visible interaction buttons",
+      "completed": [
+        "Station walking",
+        "Board",
+        "Full ride",
+        "Alight",
+        "Return to concourse",
+        "Exit to city street"
+      ],
+      "revisionScope": "Native QA snapshot; the three listed release deltas are separate and the City Centre/Yaletown geometry was unaffected.",
+      "physicalPhoneTest": false,
+      "additionalCompleted": [
+        "Native pointer joystick and scene drag after City Centre alighting"
+      ]
+    },
+    "waterfrontInterchange": {
+      "evidenceKind": "native_browser_button_assisted_interchange_plus_final_actual_controller_walking_regression",
+      "nativeInterchangeClaim": true,
+      "completed": [
+        "Alight from Expo at Waterfront",
+        "Walk approximately63m",
+        "Return to concourse using the access action",
+        "Choose Vancouver City Centre",
+        "Use Canada Line platform access action",
+        "Walk approximately32m to the train",
+        "Board Canada Line",
+        "Arrive at City Centre and alight"
+      ],
+      "scope": "Native QA used the access buttons for level changes; the final continuous portal/stair path is covered separately by actual-controller CPU regression."
+    },
+    "screenshots": [
+      "desktop-expo-moving.jpg",
+      "science-world-platform.jpg",
+      "granville-escalators.jpg",
+      "stadium-chinatown-platform.jpg",
+      "waterfront-canada-platform.jpg",
+      "mobile-canada-portrait.jpg",
+      "mobile-canada-landscape.jpg",
+      "mobile-city-centre-platform.jpg"
+    ],
+    "additionalEvidenceDirectory": "docs/qa/skytrain-travel-20261022/",
+    "limits": [
+      "No physical-phone FPS, battery or universal zero-stutter claim.",
+      "Specific observed routes and views do not establish complete visual acceptance of every entrance or fitting in all seven stations."
+    ],
+    "qaSnapshotToReleaseDeltas": [
+      "Route provenance path replaced with logical source ID; geometry and source SHA retained.",
+      "Platform handoff now checks the actual loaded train serviceLine/ready state before reloading and preparing a service.",
+      "Exactly two Waterfront portal support visual/collision instances become 0.22m square columns; raw station metadata, positions, heights and unrelated supports are retained."
+    ]
+  },
+  "finalIntegrationPolicies": {
+    "mainStreet": {
+      "origin": "Midpoint of retained eastbound/westbound GTFS platform endpoints",
+      "publicAccess": "Integrated east entrance and stairs",
+      "westBranch": "Preserved in source metadata but excluded from the public walker graph; this does not represent a real stationhouse closure.",
+      "duplicateSourceBody": {
+        "key": "osm-structure-303",
+        "seed": 783,
+        "worldRadiusMetres": 170,
+        "scope": "Active Main Street body-shader replacement only; neighboring source bodies and collision data remain intact."
+      }
+    },
+    "undergroundOcean": "Hide the global water plane only while rendering an active below-terrain passenger view; restore the prior true/false visibility in finally, including failed renders.",
+    "trainPreparation": "Precompile only the loaded train subtree with the actual city camera and lighting scene while entry or line change remains busy.",
+    "doors": "Stationary train body/frame, correct platform side and open-door clearance are required; static cabin wall/glass apertures are adapted on loaded instances.",
+    "quality": "One active station owner; train LOD selected on load or line change; city Auto uses actual train motion and manual quality remains available.",
+    "navigation": "Active passengers cannot exit a moving train through city mode switches, direct fly calls or minimap navigation.",
+    "waterfrontContinuousTransfer": "Exactly two obstructing runtime portal supports are0.22m square visual/collision instances; full public joystick walking to the other line, return to concourse, actual model loading/precompile and successful boarding are regression-tested."
+  },
+  "limitations": [
+    "Original authored representative station geometry and interpolated track depths, not surveyed architecture or photogrammetry.",
+    "Offline GTFS-derived route alignment and gameplay timing, not live service or a timetable guarantee.",
+    "A fixed standing passenger anchor inside the moving cabin; no free cabin walking, seat selection or intercar traversal.",
+    "Main Street source west circulation is not integrated; public access uses the clear east route.",
+    "CPU shader-hook and geometry tests are not GPU performance measurements."
+  ],
+  "evidence": {
+    "usageAndScope": "../../SKYTRAIN_PASSENGER_TRAVEL_2026_10.md",
+    "officialReferences": "../../SKYTRAIN_STATION_REFERENCES_2026_10.md",
+    "sourceSummary": "network-source-summary.json",
+    "pathContinuity": "path-continuity.json",
+    "mainStreetSourceFootprints": "station-footprint-audit.json",
+    "legacyLintComparison": "lint-comparison.json",
+    "localOnlyLogs": [
+      "work/skytrain-focused-after-line-and-portal-fix.log",
+      "work/skytrain-physical-line-fix-typecheck.log",
+      "work/skytrain-focused-release.log",
+      "work/skytrain-affected-final.log",
+      "work/skytrain-full-tests-final.log",
+      "work/skytrain-production-build.log",
+      "work/skytrain-typecheck-final.log"
+    ],
+    "nativePerformance": "performance.json"
+  },
+  "performance": {
+    "evidence": "performance.json",
+    "exactReleaseBenchmark": false,
+    "scope": "One Radeon Pro560X Mac desktop browser at1280x720, Auto/Balanced; first completed2400 foreground-frame window,43.0608 seconds.",
+    "frameTimeMs": {
+      "median": 16.8,
+      "p95": 20.9,
+      "p99": 24,
+      "maximum": 1373
+    },
+    "largestHitchCause": "Not established by the saved telemetry; retained in all reported statistics.",
+    "physicalPhoneTest": false
+  },
+  "finalProductionSmoke": {
+    "kind": "native browser UI against uninstrumented production output",
+    "origin": "http://127.0.0.1:3101/",
+    "viewport": [
+      1280,
+      720
+    ],
+    "result": "pass",
+    "flow": [
+      "Ride SkyTrain public launcher",
+      "Waterfront → Vancouver City Centre selection",
+      "Start at this entrance",
+      "Waterfront Canada concourse loaded",
+      "Go to platform",
+      "Canada train and platform rendered"
+    ],
+    "qaPanelPresent": false,
+    "screenshot": "production-waterfront-canada.jpg",
+    "longRouteBenchmark": false
+  },
+  "screenshotSha256": {
+    "desktop-expo-moving.jpg": "00fa19f74f1a8fba4065aafd946216d32d9c0dadf07db4e7e1ff6fb818a3e7db",
+    "granville-escalators.jpg": "dd9f56dbb8d4e76fd54949ece01268f0b6e16c950c442443df9b142af7136022",
+    "mobile-canada-landscape.jpg": "3f5940073bfe19c5f192e3c7b10717f9dabfd6da466ec0cacfb6992c9359d21e",
+    "mobile-canada-portrait.jpg": "e5ffa976533ddca769f8f689411119641c13c907f294529fb93f599c12945064",
+    "mobile-city-centre-platform.jpg": "2dbe0c6b7b39ffad3c1902f04a37607f3c4949e906cf65ffe7f7865ff3203e32",
+    "production-waterfront-canada.jpg": "4f94fcf507a8cb3c126dd3cc041c48d35b5ed4b77afc160fe46a6c79e7bad08f",
+    "science-world-platform.jpg": "8a607ea78f69ee2673fa7192e55da349521cbe2067d188bd3af396a1c95c5afd",
+    "stadium-chinatown-platform.jpg": "4f0a1f0099e3ce4d0b493f0cf693cc1349430ae89f0558941b45153f9e33982c",
+    "waterfront-canada-platform.jpg": "785f37094f452a4e4fa5b330d3f452d5930df492a374ffc5e0f16eea7c1d727f"
+  }
+}

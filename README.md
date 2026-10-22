@@ -14,7 +14,9 @@ Vancouver Living Atlas is an interactive 3D Vancouver that runs in your browser.
 
 **AI development backlog (繁體中文):** [City-scale to street-scale requirements, asset dimensions/budgets, offline Blender handoff and future bus/SkyTrain interiors and boarding](docs/AI_AGENT_DEVELOPMENT_BACKLOG.md). Asset agents without WebGL can complete offline production; runtime integration and browser acceptance remain separate.
 
-**October Blender delivery (繁體中文):** [Independent verification, adopted city consumers, rejected candidates, performance costs and next steps](docs/BLENDER_INTEGRATION_REPORT_2026_10.md). Nearby roof equipment, general traffic cars and a limited Ultra-only broadleaf-tree cohort use the new models. Bus/SkyTrain interiors and boarding remain staged work.
+**October Blender delivery (繁體中文):** [Independent verification, adopted city consumers, rejected candidates, performance costs and next steps](docs/BLENDER_INTEGRATION_REPORT_2026_10.md). Nearby roof equipment, general traffic cars and a limited Ultra-only broadleaf-tree cohort use the new models. Historical staging decisions remain in that report; current SkyTrain passenger travel is documented below.
+
+**Ride SkyTrain:** choose the **Ride SkyTrain** launcher, a starting station entrance and a destination. Walk to the platform and the blue boarding marker, then press **E** or **Board**. The regional Expo and Canada Line services stop at seven stations, with a physical transfer at Waterfront. Desktop WASD and mobile joystick controls are supported. [Passenger controls, station scope and verification](docs/SKYTRAIN_PASSENGER_TRAVEL_2026_10.md) · [Official references and geographic source limits](docs/SKYTRAIN_STATION_REFERENCES_2026_10.md).
 
 <a id="explore-vancouver-in-30-seconds"></a>
 
