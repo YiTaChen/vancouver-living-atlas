@@ -62,8 +62,8 @@
   "type": "module",
   "license": "SEE LICENSE IN LICENSE",
   "overrides": {
-    "@vercel/og": {
-      "fflate": "^0.8.3"
+    "satori": {
+      "fflate": "0.7.5"
     }
   }
 }
