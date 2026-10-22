@@ -13,11 +13,8 @@ function exact(source, before, after, label) {
   return source.replace(before, after);
 }
 
-/** Reviewed in-memory subtraction of additive seating and character selection.
- * This is an audit projection, never a runtime transform. Every remaining byte
- * must still hash to the unchanged historical source fixture. Matching only
- * these snippets cannot hide a changed drive branch, collider or chair mesh. */
-export function projectBeforeSeating(path, source) {
+/** Remove only the reviewed character delta; seated-source baselines keep seats. */
+export function projectBeforeCharacter(path, source) {
   const reviewed = [];
   const remove = (before, after, label) => {
     source = exact(source, before, after, label);
@@ -66,6 +63,23 @@ export function projectBeforeSeating(path, source) {
         'character selection setter and shadow policy',
       );
     }
+  }
+  return { source, reviewed };
+}
+
+/** Reviewed in-memory subtraction of additive seating and character selection.
+ * This is an audit projection, never a runtime transform. Every remaining byte
+ * must still hash to the unchanged source fixture. Matching only these snippets
+ * cannot hide a changed drive branch, collider or chair mesh. */
+export function projectBeforeSeating(path, source) {
+  const character = projectBeforeCharacter(path, source);
+  source = character.source;
+  const reviewed = [...character.reviewed];
+  const remove = (before, after, label) => {
+    source = exact(source, before, after, label);
+    reviewed.push(label);
+  };
+  if (path === 'lib/city/navigation.ts') {
     remove(
       `export interface WalkSeatPose {
   id: string;
@@ -194,8 +208,15 @@ export function assertProtectedSources(sources, baselineHashes) {
       baselineHash = baselineHashes[path];
     sourceHashes[path] = actualHash;
     if (actualHash === baselineHash) continue;
-    const projected = projectBeforeSeating(path, source);
-    const projectedHash = sha(projected.source);
+    // A newer fixture may already include seating. Accept character-only
+    // subtraction only when every remaining byte equals that exact baseline;
+    // otherwise retain the original pre-seating compatibility gate.
+    let projected = projectBeforeCharacter(path, source);
+    let projectedHash = sha(projected.source);
+    if (projectedHash !== baselineHash) {
+      projected = projectBeforeSeating(path, source);
+      projectedHash = sha(projected.source);
+    }
     assert.equal(
       projectedHash,
       baselineHash,

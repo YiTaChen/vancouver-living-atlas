@@ -64,6 +64,8 @@ node tools/assets/material-consumer-candidates/validate-furniture.mjs --write-ev
 
 同日新增男／女性玩家角色切換後，navigation 的相容投影另精確扣除四處已審閱差異：`CitizenCharacter` type import、預設男性的 character field、walker 的 `setCharacter` API，以及只更新角色外觀／投射陰影政策的 setter。每段必須在原有相鄰程式碼的指定位置完整出現一次；只要有角色選擇標記，就要求四段全部吻合。仍接受舊的僅座位來源與原始基準來源，不更新歷史 hash 或 QA 檔。新增反例會拒絕更動 setter、強制改變模式、缺少 API、重複／移動 field；原有駕駛、步行、碰撞、鏡頭及其餘 14 檔的 hash 防護保持生效。此投影不評估角色模型外觀，外觀與動畫由角色專屬測試及瀏覽器檢查負責。
 
+同步主分支的 curb obstruction 更新後，上游 navigation fixture 已改為包含座位與靜態 curb filter 的完整來源 hash（`816d0aa…`）。驗證因此分兩階段：先僅扣除角色切換，若剩餘每個 byte 等於目前 fixture 就接受；否則才套用原有座位投影。角色變更沒有重設或再改任何 fixture。雙基準測試同時驗證目前含座位的來源與原始 `6f0f78b…` 座位前基準，並拒絕變造 curb filter、駕駛或角色 setter；不以移除上游 curb 程式來配合舊 hash。
+
 ## UV 與 shared-map 契約
 
 `metre-uv.mjs` 不改 positions、normals 或 transform；原本刪除 UV 的 merge 位置改為產生／保留公尺 UV。每 UV 單位等於 1 m。水平 floor 使用共同 XZ 投影，使相鄰平面 phase 一致；坡面與曲面使用逐 triangle 的等距 chart，三條 UV 邊長均等於實體邊長。這是有測試的最小候選，**不宣稱曲面 UV 無接縫**：per-triangle charts 可能有法線方向或 grain seams，不應用於方向性長木紋、大標誌或 decals。家具來源另外使用一致的 box-axis metre charts。

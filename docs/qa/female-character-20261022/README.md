@@ -38,14 +38,18 @@ These are browser viewport checks, not a physical-phone performance result.
 - Scoped character implementation lint passed; no new page lint diagnostics.
 - Production `npm run build:firebase` passed after the final runtime/UI changes,
   including asset, locale, worker, adoption and generated CSP verification.
-- The full regression run passed **1,840 of 1,841** tests. Its sole failure was
+- On the initial feature base `a7cf21c`, the full regression run passed
+  **1,840 of 1,841** tests. Its sole failure was
   the material-consumer audit's historical navigation hash, which correctly
   rejected the newly added selector API. The audit now subtracts only the exact
   reviewed character additions before applying its unchanged historical hashes;
   negative tests continue rejecting altered selectors and unrelated navigation.
   The affected package-contract test passed after that update, along with all
-  **12/12** audit unit/negative tests, **11** consumer checks and **58 × 2 LOD**
+  **13/13** audit unit/negative tests, **11** consumer checks and **58 × 2 LOD**
   furniture placements. All 30 historical audit QA files remained byte-identical.
+- After synchronizing main `6c4b6ce` (TransLink hybrid bus and detailed Roadster),
+  TypeScript, the **30/30** focused tests and the production Firebase build were
+  rerun and passed again.
 
 Character regressions cover the actual skin, exact male geometry/normal
 restoration, protected skin colors, loading-time selection, failure fallback,

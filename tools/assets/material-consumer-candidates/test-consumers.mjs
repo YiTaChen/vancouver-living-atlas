@@ -7,7 +7,7 @@ import {configureSharedMaps,bindSurface,SURFACES} from './adapters/shared-surfac
 import {roadsterPatch,interiorPatch} from './adapters/source-patches.mjs';
 import {originalSource} from './adapters/harness.mjs';
 import {readFileSync} from 'node:fs';
-import {assertProtectedSources,projectBeforeSeating} from './adapters/seating-source-compatibility.mjs';
+import {assertProtectedSources,projectBeforeCharacter,projectBeforeSeating} from './adapters/seating-source-compatibility.mjs';
 
 test('Exact metre triangle charts retain transformed box attributes',()=>{
  const original=new THREE.BoxGeometry(2,3,4).rotateY(.54).translate(2,1,9).toNonIndexed();
@@ -68,7 +68,7 @@ function protectedSources() {
   return { baseline, sources };
 }
 
-test('Reviewed additive seating and character selection project to unchanged 53bb3c6 source hashes while all other bytes stay exact', () => {
+test('Reviewed additive seating and character selection project to their unchanged source fixtures while all other bytes stay exact', () => {
   const { baseline, sources } = protectedSources();
   const audit = assertProtectedSources(sources, baseline);
   assert.equal(audit.reviewedBase, '53bb3c6');
@@ -80,10 +80,12 @@ test('Reviewed additive seating and character selection project to unchanged 53b
     assert.equal(row.projectedHash, baseline[row.path]);
     assert.notEqual(row.actualHash, row.baselineHash);
     assert(row.reviewed.length > 0);
-    sources[row.path] = projectBeforeSeating(row.path, sources[row.path]).source;
+    sources[row.path] = (row.reviewed.every(label => label.startsWith('character selection'))
+      ? projectBeforeCharacter(row.path, sources[row.path])
+      : projectBeforeSeating(row.path, sources[row.path])).source;
   }
   assert.deepEqual(assertProtectedSources(sources, baseline).compatibility, [],
-    'original pre-seating source remains directly acceptable');
+    'exact fixture sources remain directly acceptable');
 });
 
 test('The prior seating-only navigation remains acceptable without requiring character-selection additions', () => {
@@ -110,8 +112,43 @@ test('The prior seating-only navigation remains acceptable without requiring cha
   assert(!source.includes('CitizenCharacter'));
   const audit = assertProtectedSources({ ...sources, [path]: source }, baseline);
   const navigation = audit.compatibility.find(row => row.path === path);
-  assert.equal(navigation.projectedHash, baseline[path]);
-  assert(navigation.reviewed.every(label => !label.startsWith('character selection')));
+  if (navigation) {
+    assert.equal(navigation.projectedHash, baseline[path]);
+    assert(navigation.reviewed.every(label => !label.startsWith('character selection')));
+  } else {
+    assert.equal(audit.sourceHashes[path], baseline[path], 'a seated-source fixture needs no projection');
+  }
+});
+
+test('Both seated-source fixtures and the original pre-seating navigation fixture retain exact protection', () => {
+  const { baseline, sources } = protectedSources();
+  const path = 'lib/city/navigation.ts';
+  const current = assertProtectedSources(sources, baseline).compatibility.find(row => row.path === path);
+  assert(current.reviewed.every(label => label.startsWith('character selection')),
+    'the current seated-source fixture must preserve all seating and curb code');
+  const curbDelta = `        // Only explicit, static curb chunks from the source road group. Keep
+        // them out of placement raycasts and navigation height sampling.
+        (this.e.roads?.children ?? []).filter(
+          (object): object is THREE.Mesh =>
+            object instanceof THREE.Mesh &&
+            object.userData.groundObstruction === true &&
+            !object.userData.protectedSurface,
+        ),
+`;
+  assert.equal(sources[path].split(curbDelta).length - 1, 1, 'upstream curb-only fixture delta exists');
+  const legacySources = { ...sources, [path]: sources[path].replace(curbDelta, '') };
+  const legacyHashes = { ...baseline, [path]: '6f0f78bb67395e0892ab8fff84187161be17657403151415ca0dbe28e3bd2802' };
+  for (const source of [legacySources[path], projectBeforeCharacter(path, legacySources[path]).source]) {
+    const audit = assertProtectedSources({ ...legacySources, [path]: source }, legacyHashes);
+    const navigation = audit.compatibility.find(row => row.path === path);
+    assert.equal(navigation.projectedHash, legacyHashes[path]);
+    assert(navigation.reviewed.includes('walk-seat contract'), 'legacy fixtures still require exact seating subtraction');
+    assert.throws(() => assertProtectedSources({ ...legacySources, [path]: source.replace('ROADSTER_TOP_SPEED : 21', 'ROADSTER_TOP_SPEED : 22') }, legacyHashes),
+      /Protected pre-seating source drift|Reviewed seating anchor changed/);
+  }
+  const original = projectBeforeSeating(path, legacySources[path]).source;
+  const audit = assertProtectedSources({ ...legacySources, [path]: original }, legacyHashes);
+  assert(!audit.compatibility.some(row => row.path === path), 'the original pre-seating fixture remains directly acceptable');
 });
 
 test('Character compatibility rejects mutated, incomplete, duplicated or relocated selection additions', () => {
@@ -142,6 +179,7 @@ test('Seating compatibility rejects changes to driving, walking, collision, came
     ['lib/city/navigation.ts', 'if (!this.e.onLand(x, z)) return false;', 'if (!this.e.onLand(x, z)) return true;'],
     ['lib/city/navigation.ts', "carModel === 'roadster' ? 1.2 : 1.45", "carModel === 'roadster' ? 1.3 : 1.45"],
     ['lib/city/navigation.ts', 'this.walkSeat.height + 0.78', 'this.walkSeat.height + 0.8'],
+    ['lib/city/navigation.ts', 'object.userData.groundObstruction === true', 'object.userData.groundObstruction === false'],
     ['lib/city/interiors.ts', 'parts.box([w, 0.55, 0.12]', 'parts.box([w, 0.56, 0.12]'],
     ['lib/city/interiors.ts', 'yaw: site.yaw, height: 0.48', 'yaw: site.yaw, height: 0.6'],
   ]) {
