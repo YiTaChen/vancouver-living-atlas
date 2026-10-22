@@ -1088,6 +1088,14 @@ export class SkyTrainTravel {
   }
   private updateCamera() {
     if (!this.active || !this.owner) return;
+    // Entry suspends street navigation in orbit mode, whose 2 m near plane
+    // would cut away nearby cabin geometry and reject close seat prompts.
+    // Street navigation resumes ownership (including its projection) on exit.
+    if (this.city.camera.near !== 0.05 || this.city.camera.fov !== 65) {
+      this.city.camera.near = 0.05;
+      this.city.camera.fov = 65;
+      this.city.camera.updateProjectionMatrix();
+    }
     let eye: THREE.Vector3, yaw: number;
     const footWorld = new THREE.Vector3();
     const avatarQuaternion = new THREE.Quaternion();

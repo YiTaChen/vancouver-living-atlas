@@ -9,6 +9,9 @@ import { cityElevation } from './helpers/city-elevation.mjs';
 import { actualTrain } from './helpers/skytrain-geometry.mjs';
 
 const { SkyTrainTravel } = await import(cityModule('skytrain-travel'));
+const { CityInteractions, projectInteractionAnchor } = await import(
+  cityModule('city-interactions')
+);
 const { createSkyTrainGuidewayUniforms } = await import(
   cityModule('skytrain-guideway-clearance')
 );
@@ -1537,6 +1540,103 @@ test('an incomplete duplicate geographic route inventory is rejected before a pa
       },
     },
   );
+});
+
+test('entering from the city orbit projection keeps nearby real cabin geometry and the shared seat prompt in front of the near plane', async () => {
+  await harness(async ({ create, city }) => {
+    const travel = create(),
+      original = travel.train,
+      train = await actualTrain('expo');
+    original.dispose();
+    travel.train = train;
+    city.skyTrainTravel = travel;
+    city.scene.add(train.group);
+    const load = train.load.bind(train);
+    train.load = async (line, ...args) =>
+      train.ready && train.serviceLine === line ? true : load(line, ...args);
+    city.camera.near = 2;
+    city.camera.fov = 42;
+    city.camera.aspect = 1280 / 720;
+    city.camera.updateProjectionMatrix();
+    let projections = 0;
+    const updateProjection = city.camera.updateProjectionMatrix.bind(
+      city.camera,
+    );
+    city.camera.updateProjectionMatrix = () => {
+      projections++;
+      updateProjection();
+    };
+    const interactions = new CityInteractions(city);
+    interactions.setInputEnabled(true);
+    try {
+      assert(await travel.enter('main-street-science-world'));
+      assert.equal(city.camera.near, 0.05);
+      assert.equal(city.camera.fov, 65);
+      assert.equal(projections, 1);
+      travel.journey = new SkyTrainJourney(
+        'main-street-science-world',
+        'waterfront',
+        { ...FAST, boardingSeconds: 30 },
+      );
+      await toBoardingDoor(travel);
+      assert(travel.board());
+      travel.yaw = Math.PI;
+      travel.setTouchAxes(0, 1);
+      await tick(travel, 7);
+      travel.yaw = -Math.PI / 2;
+      await tick(travel, 3);
+      travel.yaw = Math.PI;
+      await tick(travel, 4);
+      travel.setTouchAxes(0, 0);
+      const seat = train.passengerSpace.seats.find(
+        (candidate) => candidate.id === 'seat-long-left-5',
+      );
+      assert(train.passengerSpace.canSit(seat, travel.cabinFoot));
+      travel.yaw = Math.atan2(
+        seat.position[0] - travel.cabinFoot[0],
+        seat.position[2] - travel.cabinFoot[2],
+      );
+      await tick(travel);
+      const candidate = travel
+        .interactionCandidates()
+        .find((row) => row.id.endsWith(':' + seat.id));
+      assert(candidate);
+      assert(projectInteractionAnchor(city.camera, candidate.anchor));
+      const orbitProjection = city.camera.clone();
+      orbitProjection.near = 2;
+      orbitProjection.updateProjectionMatrix();
+      assert.equal(
+        projectInteractionAnchor(orbitProjection, candidate.anchor),
+        null,
+        'the inherited orbit near plane would hide this actually reachable seat',
+      );
+      const cushion = train.passengerPointToWorld([
+        seat.position[0],
+        seat.position[1] + seat.seatHeight,
+        seat.position[2],
+      ]);
+      city.camera.updateWorldMatrix(true, false);
+      const cameraSpace = new THREE.Vector3(...cushion).applyMatrix4(
+        city.camera.matrixWorldInverse,
+      );
+      assert(
+        -cameraSpace.z > city.camera.near && -cameraSpace.z < 2,
+        'the actual nearby cushion now remains in front of the near plane',
+      );
+      interactions.update(performance.now(), true);
+      assert.equal(interactions.controller.snapshot()?.id, candidate.id);
+      assert(interactions.interact());
+      assert(travel.passengerSeated);
+      assert.equal(
+        projections,
+        1,
+        'walking and sitting reuse the same projection',
+      );
+      assert(travel.stand());
+    } finally {
+      interactions.dispose();
+    }
+  });
 });
 
 test('real cabin walking exposes nearby seats; sit/stand stays attached, ignores held desktop/mobile input and requires walking back to an open door before alighting', async () => {

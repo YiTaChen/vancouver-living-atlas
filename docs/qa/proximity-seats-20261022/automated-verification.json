@@ -72,5 +72,25 @@
     "tools/assets/material-consumer-candidates/test-consumers.mjs": "2aa923e10e3d77f3e8f73ac81b061455ea7e30ac9386b68e7671d76fc263d2c9",
     "tools/assets/material-consumer-candidates/validate-consumers.mjs": "f6e221cdb6b0d57d8a3fbdd88092cf63c4c52b21581f8bd9ad3bb4330da224e2",
     "tools/assets/material-consumer-candidates/validate-furniture.mjs": "7e2de6b48cec1bc8e1ca527fdc3917cf343d59a29bae489eb91bd647accd78ec"
+  },
+  "closeCameraFollowUp": {
+    "reason": "Native browser validation found that entering SkyTrain inherited the orbit near plane (2m), which clipped the close cabin geometry and shared seat prompt.",
+    "testsPassed": 3,
+    "testsFailed": 0,
+    "testDurationMs": 8474.039978,
+    "logSha256": "6e61d53ff42f65f5b54d112cdb255ddf982a0069e4287cb22b2f7a288cd1c8c8",
+    "sourceSha256": {
+      "lib/city/skytrain-travel.ts": "abd59f8245ebcfeaf33885fa96f11ce14226bbd5b7bf86b9816b00260b0d3c65",
+      "tests/skytrain-travel.test.mjs": "37b5a243ac4007c4476f54d8e4c3bb5718c40d37c92bc8f1ec36b145e8f5fd93"
+    },
+    "typecheckPassed": true,
+    "strictLintPassed": true,
+    "initialHeadFullCi": {
+      "commit": "0f00cede1911906ab919b56df4f44fbb060ed42a",
+      "testsPassed": 1833,
+      "testsFailed": 0,
+      "run": "https://github.com/YiTaChen/vancouver-living-atlas/actions/runs/39831397600"
+    },
+    "note": "The sourceSha256 map above is the earlier pre-release capture. These two hashes describe the follow-up. Final exact-head CI and native verification are recorded in the PR."
   }
 }
