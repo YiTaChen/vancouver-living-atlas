@@ -640,6 +640,9 @@ export class TeslaController {
     this.fanSpin =
       (this.fanSpin + elapsed * (s.mode === 'wall' ? 80 : 45)) % (Math.PI * 2);
     this.model.update({
+      // Inspection poses exceed the closed driving hull.
+      doorsOpen: 0,
+      roofLift: 0,
       steeringRad: (input.steer ?? 0) * 0.42,
       wheelSpinRad: this.wheelSpin,
       fanSpinRad: this.fanSpin,

@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { cityModule } from './helpers/city-modules.mjs';
+import { historicalTeslaCaptureAdapter } from './helpers/tesla-historical-capture.mjs';
 
 const { TeslaWorld, triangleFace, fixedFacesSource } = await import(
   cityModule('tesla-world')
@@ -12,16 +13,7 @@ const fixture = JSON.parse(
   readFileSync(new URL('./fixtures/tesla-stanley-park.json', import.meta.url)),
 );
 const shape = createTeslaRoadsterShape();
-const adaptedShape = structuredClone(fixture.shape);
-// Preserve the historical capture; current metadata adds circular tread and
-// refines the rear bound against the unchanged, separately measured mesh.
-adaptedShape.groundSupport.wheelRadius = 0.35;
-adaptedShape.groundSupport.bodySections[0].clearance = 0.085;
-assert.deepEqual(
-  shape,
-  adaptedShape,
-  'only explicitly reviewed tread and rear-envelope metadata evolve from the frozen capture',
-);
+const adaptInitial = historicalTeslaCaptureAdapter(fixture.shape, shape);
 function actualWorld(item) {
   return new TeslaWorld({
     sources: [
@@ -44,7 +36,7 @@ function actualWorld(item) {
 }
 const distance = (a, b) => Math.hypot(a[0] - b[0], a[2] - b[2]);
 function freshInitial(item, world) {
-  const state = structuredClone(item.initial);
+  const state = adaptInitial(item.initial);
   const proof = world.support({
     pose: state,
     shape,

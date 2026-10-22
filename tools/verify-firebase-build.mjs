@@ -87,6 +87,7 @@ export async function verifyBlenderDeliveryIsolation(
     'source-fitted-window-variants',
     'citizen-character-variants',
     'roadster-driver-fit',
+    'tesla-roadster-2026',
   ];
   for (const name of packages) {
     let exports;
@@ -183,7 +184,9 @@ export async function verifyFirebaseBuild(
       !scripts.includes('Vehicle drift QA ready') &&
       !scripts.includes('Drift QA: record native input') &&
       !files.some((name) =>
-        /(?:^|\/)(?:vehicle-impact-qa|stanley-drive-qa|vehicle-drift-qa)[.-]/.test(name),
+        /(?:^|\/)(?:vehicle-impact-qa|stanley-drive-qa|vehicle-drift-qa)[.-]/.test(
+          name,
+        ),
       ),
     'Vehicle impact and Stanley Drive diagnostics must not ship in the public build',
   );
