@@ -2061,12 +2061,33 @@ a {
   margin: 8px 0;
 }
 
+.character-options {
+  min-width: 0;
+  margin: 12px 0 0;
+  padding: 0;
+  border: 0;
+}
+.character-options legend {
+  margin-bottom: 6px;
+  padding: 0;
+  color: #a5c0bd;
+  font-size: 11px;
+}
+.character-options-buttons {
+  display: flex;
+  gap: 5px;
+}
+.atlas:not(.touch-ui)[data-travel-mode='walk'] .street-controls {
+  max-height: calc(100dvh - 230px);
+  overflow-y: auto;
+}
 .car-options {
   display: flex;
   gap: 5px;
   margin-top: 10px;
 }
-.car-options button {
+.car-options button,
+.character-options button {
   flex: 1;
   min-height: 36px;
   padding: 8px 5px;
@@ -2074,7 +2095,8 @@ a {
   border-radius: 6px;
   font-size: 12px;
 }
-.car-options button[aria-pressed='true'] {
+.car-options button[aria-pressed='true'],
+.character-options button[aria-pressed='true'] {
   background: #dce7a2;
   border-color: #dce7a2;
   color: #142d36;
@@ -2102,7 +2124,8 @@ a {
 }
 
 @media (max-width: 640px) {
-  .car-options button {
+  .car-options button,
+  .character-options button {
     min-height: 44px;
   }
 }
@@ -2293,6 +2316,7 @@ a {
   margin: 10px 0 0;
 }
 .mobile-travel-sheet .car-options button,
+.mobile-travel-sheet .character-options button,
 .mobile-travel-sheet .interior-options button {
   min-height: 44px;
 }

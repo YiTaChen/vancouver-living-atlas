@@ -108,6 +108,7 @@ import {
   type MessageKey,
 } from '@/lib/i18n';
 import type { CityEngine } from '@/lib/city/engine';
+import type { CitizenCharacter } from '@/lib/city/citizen';
 import { startupErrorMessageKey } from '@/lib/city/startup-error';
 import type { TravelView } from '@/lib/city/travel-camera';
 import {
@@ -152,6 +153,34 @@ function LocalQARouter() {
 export default function Page() {
   if (process.env.VANCOUVER_VISUAL_QA === '1') return <LocalQARouter />;
   return <Home />;
+}
+
+function CharacterOptions({
+  character,
+  onChange,
+  tr,
+}: {
+  character: CitizenCharacter;
+  onChange: (character: CitizenCharacter) => void;
+  tr: (key: MessageKey) => string;
+}) {
+  return (
+    <fieldset className="character-options">
+      <legend>{tr('characterModel')}</legend>
+      <div className="character-options-buttons">
+        {(['male', 'female'] as const).map((choice) => (
+          <button
+            key={choice}
+            type="button"
+            aria-pressed={character === choice}
+            onClick={() => onChange(choice)}
+          >
+            {tr(choice === 'male' ? 'maleCharacter' : 'femaleCharacter')}
+          </button>
+        ))}
+      </div>
+    </fieldset>
+  );
 }
 
 function Home() {
@@ -242,6 +271,11 @@ function Home() {
     setMobilePanel(null);
   }, [settings.mode, touchUI]);
   const [carModel, setCarModel] = useState<'classic' | 'roadster'>('roadster');
+  const [character, setCharacter] = useState<CitizenCharacter>('male');
+  const chooseCharacter = (next: CitizenCharacter) => {
+    engine.current?.navigation?.setCharacter(next);
+    setCharacter(next);
+  };
   const [returnMode, setReturnMode] = useState<TravelMode | null>(null);
   const [localOrbit, setLocalOrbit] = useState(false);
   const [travelView, setTravelView] = useState<TravelView>({
@@ -1119,6 +1153,13 @@ function Home() {
                     <X size={18} />
                   </button>
                 </div>
+                {settings.mode === 'walk' && (
+                  <CharacterOptions
+                    character={character}
+                    onChange={chooseCharacter}
+                    tr={tr}
+                  />
+                )}
                 {settings.mode === 'drive' && (
                   <div
                     className="car-options"
@@ -2190,6 +2231,13 @@ function Home() {
                 </b>
               )}
             </div>
+            {settings.mode === 'walk' && (
+              <CharacterOptions
+                character={character}
+                onChange={chooseCharacter}
+                tr={tr}
+              />
+            )}
             <button
               className="choose-start"
               onClick={() => beginPlacement(settings.mode as TravelMode)}

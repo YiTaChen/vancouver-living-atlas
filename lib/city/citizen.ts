@@ -1,6 +1,13 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { makeWalker } from './assets/walker';
+import {
+  prepareCitizenAppearanceDisposal,
+  setCitizenAppearance,
+  type CitizenCharacter,
+} from './citizen-character';
+
+export type { CitizenCharacter } from './citizen-character';
 
 // Content revision avoids reusing a cached 2048 atlas at the stable asset path.
 const CITIZEN_URL = '/models/citizen/vancouver-citizen.glb?v=14d66fabe097';
@@ -39,6 +46,7 @@ type CitizenAsset = {
   animations: THREE.AnimationClip[];
 };
 type CitizenOptions = {
+  character?: CitizenCharacter;
   /** Override only for local tests or an explicitly chosen original asset. */
   load?: (url: string) => Promise<CitizenAsset>;
 };
@@ -213,6 +221,7 @@ function makeSeatedRig(model: THREE.Group) {
 
 /** Dispose a privately owned scene, including the procedural loading fallback. */
 function disposeModel(root: THREE.Object3D) {
+  prepareCitizenAppearanceDisposal(root);
   const geometries = new Set<THREE.BufferGeometry>();
   const materials = new Set<THREE.Material>();
   const textures = new Set<THREE.Texture>();
@@ -286,6 +295,8 @@ async function loadCitizenAsset(url: string): Promise<CitizenAsset> {
  * asynchronous swap. Officers continue to use makeWalker() and its palette.
  */
 export function makeCitizen(options: CitizenOptions = {}) {
+  let character: CitizenCharacter =
+    options.character === 'female' ? 'female' : 'male';
   const group = new THREE.Group();
   group.name = 'Vancouver citizen';
   group.userData = {
@@ -294,8 +305,9 @@ export function makeCitizen(options: CitizenOptions = {}) {
     forward: '+Z',
     groundY: 0,
     seated: false,
+    character,
   };
-  let fallback: ReturnType<typeof makeWalker> | null = makeWalker();
+  let fallback: ReturnType<typeof makeWalker> | null = makeWalker(character);
   group.add(fallback.group);
   fallback.group.traverse((object) => {
     if (object instanceof THREE.Mesh) object.castShadow = false;
@@ -352,8 +364,9 @@ export function makeCitizen(options: CitizenOptions = {}) {
         if (!clips.has('idle') || !clips.has('walk') || !clips.has('run'))
           throw new Error('Citizen is missing its idle, walk or run clip');
         const nextModel = asset.scene;
+        setCitizenAppearance(nextModel, character);
         const nextSeatedRig = makeSeatedRig(nextModel);
-        nextModel.name = 'Original rigged citizen — 38k PBR';
+        nextModel.name = `Original rigged ${character} citizen — 38k PBR`;
         nextModel.traverse((object) => {
           if (!(object instanceof THREE.Mesh)) return;
           object.castShadow = false;
@@ -530,5 +543,26 @@ export function makeCitizen(options: CitizenOptions = {}) {
     }
   }
 
-  return { group, update, setSeated, dispose };
+  function setCharacter(value: CitizenCharacter) {
+    if (
+      disposed ||
+      (value !== 'male' && value !== 'female') ||
+      character === value
+    )
+      return;
+    character = value;
+    fallback?.setCharacter(character);
+    // Walker replacement keeps the fallback root; preserve its no-shadow policy.
+    fallback?.group.traverse((object) => {
+      if (object instanceof THREE.Mesh) object.castShadow = false;
+    });
+    if (model) {
+      setCitizenAppearance(model, character);
+      model.name = `Original rigged ${character} citizen — 38k PBR`;
+      model.updateWorldMatrix(true, true);
+    }
+    group.userData.character = character;
+  }
+
+  return { group, update, setSeated, setCharacter, dispose };
 }
