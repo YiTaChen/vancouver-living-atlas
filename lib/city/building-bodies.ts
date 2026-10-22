@@ -149,7 +149,7 @@ export function createBuildingBodies(e: CityEngine) {
     start: number;
     count: number;
   }[] = [];
-  for (const { key, polygon, h, min } of prepared) {
+  for (const { key, polygon, h, min, center } of prepared) {
     const start = positions.length / 3;
     // Normalize the projected copy before choosing facade edges and roof phase.
     // Source feature coordinates remain untouched.
@@ -288,7 +288,7 @@ export function createBuildingBodies(e: CityEngine) {
     }
     rocketParts.push({
       key,
-      center: firstByKey.get(key)!.center,
+      center,
       minY: ground + min,
       maxY: ground + h,
       start,
