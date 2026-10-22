@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import type { CityEngine } from './engine';
-import { project, hash, rings, inPolygon } from './geo';
+import { project, hash, inPolygon } from './geo';
+import { projectStartupPolygons } from './startup-data-polygons';
 export function makeContext(e: CityEngine) {
   const d = e.data.contextTerrain;
   if (!d) return;
@@ -43,19 +44,24 @@ export function makeContext(e: CityEngine) {
     )
       .concat([core[1], core[3]])
       .sort((a, c) => a - c);
-  const mask = e.data['context-land'].features.flatMap((f: any) =>
-    rings(f).map((p) => p.map((r) => r.map(project))),
-  );
+  const mask = projectStartupPolygons(e.data['context-land']);
   const pos: number[] = [],
     col: number[] = [];
+  // Keep the same linear colour arithmetic while avoiding two short-lived
+  // Color objects for every emitted vertex (six vertices per retained cell).
+  const color = new THREE.Color(),
+    baseColor = new THREE.Color(),
+    highColor = new THREE.Color(0x89968c);
   for (let i = 0; i < xs.length - 1; i++)
     for (let j = 0; j < zs.length - 1; j++) {
       const lon = (xs[i] + xs[i + 1]) / 2,
         lat = (zs[j] + zs[j + 1]) / 2;
       if (lon > core[0] && lon < core[2] && lat > core[1] && lat < core[3])
         continue;
-      if (!mask.some((p: number[][][]) => inPolygon(project([lon, lat]), p)))
-        continue;
+      const center = project([lon, lat]);
+      if (!mask.some((p) => inPolygon(center, p))) continue;
+      baseColor.setHex(lat > 49.32 ? 0x416753 : 0x8f9b86);
+      const shade = 0.95 + hash(i * 421 + j) * 0.06;
       const verts = [
         [xs[i], zs[j]],
         [xs[i + 1], zs[j]],
@@ -77,9 +83,10 @@ export function makeContext(e: CityEngine) {
         )
           y = e.onLand(x, z) ? e.elevation(x, z) : 0;
         pos.push(x, Math.max(0, y) - 0.5, z);
-        const color = new THREE.Color(lat > 49.32 ? 0x416753 : 0x8f9b86)
-          .lerp(new THREE.Color(0x89968c), Math.max(0, y - 750) / 1500)
-          .multiplyScalar(0.95 + hash(i * 421 + j) * 0.06);
+        color
+          .copy(baseColor)
+          .lerp(highColor, Math.max(0, y - 750) / 1500)
+          .multiplyScalar(shade);
         col.push(color.r, color.g, color.b);
       }
     }

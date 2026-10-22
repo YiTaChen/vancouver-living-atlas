@@ -145,6 +145,17 @@ export class SkyTrainTravel {
   get passengerSeated() {
     return Boolean(this.cabinSeat || this.stationSeat);
   }
+  /** Carriage-local displacement prevents rail motion from becoming footsteps. */
+  get soundscapeFootsteps() {
+    const position = this.aboard ? this.cabinFoot : this.interactionOrigin;
+    if (!this.active || !position) return undefined;
+    return {
+      position: [...position] as [number, number, number],
+      space: `skytrain:${this.line}:${this.aboard ? 'cabin' : `${this.station}:${this.level}`}`,
+      surface: this.aboard ? 'metal' as const : 'pavement' as const,
+      active: this.inputEnabled && !this.busy && !this.passengerSeated,
+    };
+  }
   /** Feet datum used by the common proximity registry, independent of camera. */
   get interactionOrigin(): [number, number, number] | null {
     if (!this.active || this.busy) return null;

@@ -50,6 +50,7 @@ import { FlightControls, flightText } from '@/components/flight-controls';
 import { EMPTY_FLIGHT, type FlightSnapshot } from '@/lib/city/flight-snapshot';
 import { TeslaControls, teslaText } from '@/components/tesla-controls';
 import { VehicleConditionPanel } from '@/components/vehicle-condition-panel';
+import { CitySoundControls } from '@/components/city-sound-controls';
 import { EMPTY_TESLA, type TeslaSnapshot } from '@/lib/city/tesla-snapshot';
 import type { TeslaController } from '@/lib/city/tesla-controller';
 import { DriftHoldButton, TravelJoystick } from '@/components/travel-joystick';
@@ -1953,6 +1954,7 @@ function Home() {
               <X size={17} />
             </button>
           </div>
+          <CitySoundControls soundscape={ready ? engine.current?.soundscape ?? null : null} locale={locale} />
           {[
             { key: 'buildings', label: tr('buildingsLayer') },
             { key: 'trees', label: tr('treesLayer') },

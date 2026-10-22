@@ -342,7 +342,9 @@ export async function measureReleaseWindow(e: CityEngine, options: Options) {
       workerJobs,
       landmarkErrors: { ...e.data.landmarkWorkerErrors },
       rawGaps: gaps,
-      note: 'RAF gaps measure responsiveness. Async attachmentUpdateMs excludes worker creation; worker factory/decode timings exclude queue, packing, transfer and GPU time. Load states are frame samples. First submitted marks a render callback, not pixel/occlusion verification. No GPU timer query.',
+      runtimeWindow: { startMs: start, endMs: start + elapsedMs },
+      runtimePerformance: e.runtimePerformance?.snapshot() ?? null,
+      note: 'RAF gaps measure responsiveness. Async attachmentUpdateMs excludes worker creation; worker factory/decode timings exclude queue, packing, transfer and GPU time. Load states are frame samples. First submitted marks a render callback, not pixel/occlusion verification. Optional runtimePerformance records inclusive CPU spans and, only if requested and supported, asynchronous GPU render-region queries. Its bounded rings can cover a different time window; runtimeWindow identifies this release measurement.',
     };
   } finally {
     cancelAnimationFrame(raf);

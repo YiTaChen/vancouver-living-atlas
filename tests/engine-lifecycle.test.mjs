@@ -31,6 +31,9 @@ const names = new Set([
   'cabinDisplayActive',
   'suspendedAt',
   'renderReady',
+  'runtimePerformance',
+  'soundscape',
+  'soundscapeWorld',
   'loadAbort',
   'pageHide',
   'pageShow',
@@ -82,6 +85,11 @@ const code = ts.transpileModule(
   import { GraphicsUnavailableError } from ${JSON.stringify(cityModule('startup-error'))};
   import { clearOrbitGesture } from ${JSON.stringify(cityModule('orbit-lifecycle'))};
   import { CityClock } from ${JSON.stringify(cityModule('clock'))};
+  import { createStartupDataLoader } from ${JSON.stringify(cityModule('startup-data'))};
+  import { projectStartupPolygons } from ${JSON.stringify(cityModule('startup-data-polygons'))};
+  import { CitySoundscape } from ${JSON.stringify(cityModule('city-soundscape'))};
+  import { CitySoundscapeWorld } from ${JSON.stringify(cityModule('city-soundscape-world'))};
+  import { createRuntimePerformanceDiagnostics, runtimePerformanceFlags } from ${JSON.stringify(cityModule('runtime-performance'))};
   import { installAtmosphereSky, applyAtmosphereSky, sampleAtmosphere } from ${JSON.stringify(cityModule('atmosphere'))};
   const isMobileGraphics = () => true;
   const supportsHDRTarget = () => false;
@@ -433,7 +441,11 @@ test('a cabin display pauses city owners and closes with one fresh frame without
     assert.equal(e.raf, 0);
     assert.deepEqual(f.cancelled, [99]);
     assert.equal(clears, 4);
-    assert.equal(e.transition, null, 'a paused city cannot retain a camera flight');
+    assert.equal(
+      e.transition,
+      null,
+      'a paused city cannot retain a camera flight',
+    );
     assert.deepEqual(hidden, [true]);
     assert.equal(qualityResets, 1);
     assert.equal(sceneryResets, 1);
@@ -447,7 +459,11 @@ test('a cabin display pauses city owners and closes with one fresh frame without
     assert.equal(e.clock.tick(f.now), false);
     f.document.dispatchEvent(new Event('visibilitychange'));
     assert.equal(e.clock.hour, hour);
-    assert.equal(hidden.at(-1), true, 'a visible document keeps the cabin pause');
+    assert.equal(
+      hidden.at(-1),
+      true,
+      'a visible document keeps the cabin pause',
+    );
     e.setCabinDisplayActive(false);
     assert.equal(e.cabinDisplayActive, false);
     assert.equal(e.clock.hour, hour);
@@ -461,7 +477,11 @@ test('a cabin display pauses city owners and closes with one fresh frame without
     assert.equal(f.scheduled.length, 1);
     assert.equal(f.scheduled[0], e.animate);
     e.setCabinDisplayActive(false);
-    assert.equal(f.scheduled.length, 1, 'repeated closure cannot add a frame loop');
+    assert.equal(
+      f.scheduled.length,
+      1,
+      'repeated closure cannot add a frame loop',
+    );
     f.now += 1000;
     assert.equal(e.clock.tick(f.now), true);
     assert(Math.abs(e.clock.hour - hour - 300 / 3600) < 1e-10);
@@ -552,7 +572,11 @@ test('idle startup and disposed engines cannot schedule a frame when cabin state
     assert.equal(e.renderReady, false);
     e.setCabinDisplayActive(true);
     e.setCabinDisplayActive(false);
-    assert.equal(f.scheduled.length, 0, 'unfinished startup cannot begin rendering');
+    assert.equal(
+      f.scheduled.length,
+      0,
+      'unfinished startup cannot begin rendering',
+    );
     e.renderReady = true;
     e.setCabinDisplayActive(true);
     e.destroy();
@@ -562,7 +586,11 @@ test('idle startup and disposed engines cannot schedule a frame when cabin state
     e.resumePage();
     f.window.dispatchEvent(pageEvent('pageshow', true));
     assert.equal(e.disposed, true);
-    assert.equal(e.cabinDisplayActive, true, 'disposed state cannot acquire a new owner');
+    assert.equal(
+      e.cabinDisplayActive,
+      true,
+      'disposed state cannot acquire a new owner',
+    );
     assert.equal(f.scheduled.length, 0);
     assert.equal(f.cancelled.length, cancellations);
     assert.equal(f.rendererDisposals, 1);
