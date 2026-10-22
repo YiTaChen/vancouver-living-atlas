@@ -1,7 +1,8 @@
 import * as THREE from 'three';
-import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import type { CityEngine } from './engine';
-import { project, rings, lines } from './geo';
+import { project } from './geo';
+import { addDocks, hullPolygon } from './harbour-docks';
+export { hullPolygon } from './harbour-docks';
 import { makeWake } from './wake';
 import { waveHeight } from './water-world';
 import {
@@ -39,83 +40,6 @@ export interface Harbour {
     wake: THREE.Mesh;
   }[];
   elapsed: number;
-}
-export function hullPolygon(
-  x: number,
-  z: number,
-  yaw: number,
-  length: number,
-  width: number,
-) {
-  const fx = Math.sin(yaw),
-    fz = Math.cos(yaw),
-    rx = Math.cos(yaw),
-    rz = -Math.sin(yaw);
-  const r = [
-    [-1, -1],
-    [-1, 1],
-    [1, 1],
-    [1, -1],
-    [-1, -1],
-  ].map(([a, b]) => [
-    x + (fx * a * length) / 2 + (rx * b * width) / 2,
-    z + (fz * a * length) / 2 + (rz * b * width) / 2,
-  ]);
-  return [r];
-}
-function addDocks(e: CityEngine) {
-  const geometries: THREE.BufferGeometry[] = [];
-  for (const f of e.data['harbour-piers'].features) {
-    for (const poly of f.geometry.type.endsWith('Polygon') ? rings(f) : []) {
-      const p = poly.map((r) => r.map(project));
-      e.waterWorld.addObstacle(p);
-      const shape = new THREE.Shape(
-        p[0].map((v) => new THREE.Vector2(v[0], v[1])),
-      );
-      shape.holes = p
-        .slice(1)
-        .map(
-          (r) => new THREE.Path(r.map((v) => new THREE.Vector2(v[0], v[1]))),
-        );
-      const g = new THREE.ExtrudeGeometry(shape, {
-        depth: 1.4,
-        bevelEnabled: false,
-      });
-      g.rotateX(Math.PI / 2);
-      g.translate(0, 1.6, 0);
-      g.deleteAttribute('uv');
-      geometries.push(g);
-    }
-    for (const line of f.geometry.type.endsWith('LineString') ? lines(f) : []) {
-      const p = line.map(project);
-      for (let i = 1; i < p.length; i++) {
-        const a = p[i - 1],
-          b = p[i],
-          length = Math.hypot(b[0] - a[0], b[1] - a[1]);
-        if (length < 0.1) continue;
-        const x = (a[0] + b[0]) / 2,
-          z = (a[1] + b[1]) / 2,
-          yaw = Math.atan2(b[0] - a[0], b[1] - a[1]);
-        e.waterWorld.addObstacle(hullPolygon(x, z, yaw, length, 1.4));
-        const g = new THREE.BoxGeometry(1.4, 1.4, length).toNonIndexed();
-        g.rotateY(yaw);
-        g.translate(x, 0.9, z);
-        g.deleteAttribute('uv');
-        geometries.push(g);
-      }
-    }
-  }
-  if (geometries.length) {
-    const g = mergeGeometries(geometries)!;
-    geometries.forEach((g) => g.dispose());
-    const docks = new THREE.Mesh(
-      g,
-      new THREE.MeshStandardMaterial({ color: 0x87948c, roughness: 0.91 }),
-    );
-    docks.receiveShadow = true;
-    e.scene.add(docks);
-    e.data.harbourDockMesh = docks;
-  }
 }
 function rotor(model: THREE.Group, time: number) {
   const main = model.userData.rotor as THREE.Object3D | undefined,

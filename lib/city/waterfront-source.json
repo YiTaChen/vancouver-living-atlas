@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "retrieved": "2026-10-22",
+  "attribution": "© OpenStreetMap contributors, ODbL 1.0",
+  "cauldron": {
+    "source": "https://api.openstreetmap.org/api/0.6/node/648735254.json",
+    "sourceVersion": 7,
+    "coordinate": [-123.1176596, 49.2893606],
+    "heightM": 10
+  },
+  "pool": {
+    "source": "https://www.openstreetmap.org/way/1070091596",
+    "tags": { "natural": "water", "water": "reflecting_pool" },
+    "ring": [
+      [-123.1177237, 49.2894564],
+      [-123.1175106, 49.2893984],
+      [-123.1175992, 49.28926],
+      [-123.1178123, 49.289318],
+      [-123.1177237, 49.2894564]
+    ]
+  },
+  "references": [
+    "https://www.vancouverconventioncentre.com/about-us/our-story/olympic-legacy",
+    "https://glotmansimpson.com/project/olympic-cauldron-at-vancouver-convention-centre/",
+    "https://www.vancouverconventioncentre.com/fullpdf/outdoor-plaza-guidelines"
+  ],
+  "limitations": "Mapped position and reflecting-pool outline; rim section, surface finishes and sculpture orientation are photograph-based approximations. Existing rendered ground determines height, not a surveyed plaza elevation."
+}

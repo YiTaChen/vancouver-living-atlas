@@ -7,7 +7,8 @@ import {configureSharedMaps,bindSurface,SURFACES} from './adapters/shared-surfac
 import {roadsterPatch,interiorPatch} from './adapters/source-patches.mjs';
 import {originalSource} from './adapters/harness.mjs';
 import {readFileSync} from 'node:fs';
-import {assertProtectedSources,projectBeforeCharacter,projectBeforeSeating} from './adapters/seating-source-compatibility.mjs';
+import {assertProtectedSources,projectBeforeCharacter,projectBeforeSeating,projectBeforeHarbourDockExtraction} from './adapters/seating-source-compatibility.mjs';
+import {assertPortableGeometryFixture} from './adapters/geometry-fixture-compatibility.mjs';
 
 test('Exact metre triangle charts retain transformed box attributes',()=>{
  const original=new THREE.BoxGeometry(2,3,4).rotateY(.54).translate(2,1,9).toNonIndexed();
@@ -68,24 +69,96 @@ function protectedSources() {
   return { baseline, sources };
 }
 
-test('Reviewed additive seating and character selection project to their unchanged source fixtures while all other bytes stay exact', () => {
+test('One documented sub-picometre footprint rounding is portable while observable geometry, hashes, metadata, topology and non-finite values stay strict', () => {
+  const baseline = JSON.parse(readFileSync(new URL('./qa/current-source-fixtures.json', import.meta.url), 'utf8'));
+  const actual = structuredClone(baseline);
+  actual.interiors[0].polys[0][36][1] = -12.13106480597334;
+  actual.wheels[0].steering[0] = -0; // Preserve the prior JSON fixture semantics.
+  assert.equal(assertPortableGeometryFixture(actual, baseline).rounding.length, 1);
+  assert.equal(actual.interiors[0].polys[0][36][1], -12.13106480597334, 'comparison never mutates input');
+  for (const change of [
+    fixture => { fixture.interiors[0].polys[0][36][1] += 1e-11; },
+    fixture => { fixture.interiors[0].polys[0][36][1] += 1e-6; },
+    fixture => { fixture.interiors[0].polys[0][35][1] += 1e-13; },
+    fixture => { fixture.interiors[0].origin[0] += 1e-11; },
+    fixture => { fixture.interiors[0].polys[0].reverse(); },
+    fixture => { fixture.interiors[0].polys[0].pop(); },
+    fixture => { fixture.interiors[0].id = 'unreviewed'; },
+    fixture => { fixture.roadster.hash += 'changed'; },
+    fixture => { fixture.sourceHashes['lib/city/harbour.ts'] += 'changed'; },
+    fixture => { fixture.interiors[0].polys[0][36][1] = NaN; },
+    fixture => { fixture.interiors[0].origin[0] = Infinity; },
+    fixture => { fixture.interiors[0].polys[0][36][1] = null; },
+  ]) {
+    const changed = structuredClone(actual);
+    change(changed);
+    assert.throws(() => assertPortableGeometryFixture(changed, baseline),
+      /Source\/geometry regression fixture drift|Non-finite geometry fixture number/);
+  }
+});
+
+test('Reviewed seating, character selection and dock extraction project to unchanged source fixtures while all other bytes stay exact', () => {
   const { baseline, sources } = protectedSources();
   const audit = assertProtectedSources(sources, baseline);
   assert.equal(audit.reviewedBase, '53bb3c6');
   assert.deepEqual(audit.compatibility.map(row => row.path).sort(), [
-    'lib/city/interiors.ts', 'lib/city/navigation.ts',
+    'lib/city/harbour.ts', 'lib/city/interiors.ts', 'lib/city/navigation.ts',
   ]);
   assert.equal(Object.keys(audit.sourceHashes).length, 16);
   for (const row of audit.compatibility) {
     assert.equal(row.projectedHash, baseline[row.path]);
     assert.notEqual(row.actualHash, row.baselineHash);
     assert(row.reviewed.length > 0);
-    sources[row.path] = (row.reviewed.every(label => label.startsWith('character selection'))
+    sources[row.path] = (row.path === 'lib/city/harbour.ts'
+      ? projectBeforeHarbourDockExtraction(row.path, sources[row.path])
+      : row.reviewed.every(label => label.startsWith('character selection'))
       ? projectBeforeCharacter(row.path, sources[row.path])
       : projectBeforeSeating(row.path, sources[row.path])).source;
   }
   assert.deepEqual(assertProtectedSources(sources, baseline).compatibility, [],
     'exact fixture sources remain directly acceptable');
+});
+
+test('Dock source relocation keeps the original baseline and independently guards its extracted dependency without claiming material adoption', () => {
+  const { baseline, sources } = protectedSources();
+  const path = 'lib/city/harbour.ts';
+  assert.equal(baseline[path], 'b5c18dd4208a88be3a206a8e1b3a78df6e734b90be97e38adea895698428c1ab');
+  const row = assertProtectedSources(sources, baseline).compatibility.find(row => row.path === path);
+  assert.equal(row.projectedHash, baseline[path]);
+  assert.equal(row.reviewed.length, 3);
+  assert.match(row.scope, /outside this material-consumer candidate audit/);
+  assert.deepEqual(Object.keys(row.relatedSourceHashes), ['lib/city/harbour-docks.ts']);
+  const original = projectBeforeHarbourDockExtraction(path, sources[path]).source;
+  assert(!assertProtectedSources({ ...sources, [path]: original }, baseline).compatibility.some(row => row.path === path));
+});
+
+test('Dock extraction compatibility rejects altered imports, exports, controller callsites and any extracted module drift', () => {
+  const { baseline, sources } = protectedSources();
+  const path = 'lib/city/harbour.ts', source = sources[path];
+  for (const [before, after] of [
+    ["import { addDocks, hullPolygon } from './harbour-docks';", "import { addDocks, hullPolygon } from './harbour-docks-unreviewed';"],
+    ["export { hullPolygon } from './harbour-docks';", ''],
+    ["export { hullPolygon } from './harbour-docks';", "export { hullPolygon } from './harbour-docks';\nexport { hullPolygon } from './harbour-docks';"],
+    ['  addDocks(e);', '  addDocks(e);\n  addDocks(e);'],
+    ['function rotor(model: THREE.Group, time: number)', 'function rotor(model: THREE.Group, time: number = 1)'],
+  ]) {
+    assert(source.includes(before), `negative dock fixture anchor exists: ${before}`);
+    assert.throws(() => assertProtectedSources({ ...sources, [path]: source.replace(before, after) }, baseline),
+      /Reviewed seating anchor changed|Protected harbour source drift/);
+  }
+  const dependencyPath = 'lib/city/harbour-docks.ts', dependency = originalSource('harbour-docks');
+  for (const [before, after] of [
+    ['e.waterWorld.addObstacle(p);', ''],
+    ['roughness: 0.91', 'roughness: 0.1'],
+    ['const fx = Math.sin(yaw)', 'const fx = Math.cos(yaw)'],
+    ['  width: 1.4,', '  width: 1.5,'],
+    ['export function addDocks(', '// changed\nexport function addDocks('],
+  ]) {
+    assert(dependency.includes(before), `negative extracted dock fixture anchor exists: ${before}`);
+    assert.throws(() => assertProtectedSources(sources, baseline, {
+      [dependencyPath]: dependency.replace(before, after),
+    }), /Reviewed harbour dock dependency drift/);
+  }
 });
 
 test('The prior seating-only navigation remains acceptable without requiring character-selection additions', () => {
@@ -191,5 +264,5 @@ test('Seating compatibility rejects changes to driving, walking, collision, came
   }
   const other = 'lib/city/driver-camera.ts';
   assert.throws(() => assertProtectedSources({ ...sources, [other]: sources[other] + '\n// changed\n' }, baseline),
-    /No reviewed seating projection/, 'the fourteen other sources remain exact-hash guarded');
+    /No reviewed seating projection/, 'the thirteen other sources remain exact-hash guarded');
 });
