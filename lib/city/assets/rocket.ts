@@ -1,5 +1,10 @@
 import * as THREE from 'three';
-import { ROCKET_CONFIGS, type RocketKind } from '../rocket-state';
+import {
+  ROCKET_CONFIGS,
+  rocketDirection,
+  type RocketKind,
+  type RocketState,
+} from '../rocket-state';
 
 /** Original reusable meshes. Dimensions are authored gameplay dimensions, not a real vehicle blueprint. */
 export function createRocketModel(kind: RocketKind) {
@@ -7,6 +12,11 @@ export function createRocketModel(kind: RocketKind) {
     { height: h, radius: r } = ROCKET_CONFIGS[kind];
   const group = new THREE.Group(),
     segments: THREE.Group[] = [];
+  const booster = new THREE.Group(),
+    upper = new THREE.Group();
+  booster.name = 'First stage — separable booster';
+  upper.name = 'Second stage — observation vehicle';
+  group.add(booster, upper);
   group.name = `${kind} Atlas research rocket`;
   const white = new THREE.MeshStandardMaterial({
     color: 0xe8eced,
@@ -45,7 +55,7 @@ export function createRocketModel(kind: RocketKind) {
   for (let i = 0; i < 5; i++) {
     const g = new THREE.Group();
     segments.push(g);
-    group.add(g);
+    (i < 3 ? booster : upper).add(g);
     part(
       new THREE.CylinderGeometry(r, r, h * 0.14, 32),
       i === 2 ? black : white,
@@ -61,7 +71,7 @@ export function createRocketModel(kind: RocketKind) {
       ).rotation.x = Math.PI / 2;
   }
   const top = new THREE.Group();
-  group.add(top);
+  upper.add(top);
   segments.push(top);
   part(
     new THREE.CylinderGeometry(r * 0.72, r, h * 0.1, 32),
@@ -105,6 +115,37 @@ export function createRocketModel(kind: RocketKind) {
     fin.position.z = Math.sin(a) * r;
     fin.rotation.y = -a;
   }
+  const upperEngine = new THREE.Group();
+  upperEngine.name = 'Upper-stage vacuum engine';
+  upper.add(upperEngine);
+  part(
+    new THREE.CylinderGeometry(r * 0.28, r * 0.65, h * 0.055, 24, 1, true),
+    black,
+    h * 0.445,
+    upperEngine,
+  );
+  part(
+    new THREE.SphereGeometry(r * 0.94, 24, 12, 0, Math.PI * 2, 0, Math.PI / 2),
+    black,
+    h * 0.462,
+    upperEngine,
+  ).scale.y = 0.3;
+  upperEngine.visible = false;
+  const separationMaterial = new THREE.MeshBasicMaterial({
+    color: 0xc5eaff,
+    transparent: true,
+    opacity: 0,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+  });
+  const separationFlash = new THREE.Mesh(
+    new THREE.TorusGeometry(r * 1.04, r * 0.12, 6, 32),
+    separationMaterial,
+  );
+  separationFlash.rotation.x = Math.PI / 2;
+  separationFlash.position.y = h * 0.46;
+  separationFlash.visible = false;
+  group.add(separationFlash);
   const flameMat = new THREE.MeshBasicMaterial({
     color: 0xffc865,
     transparent: true,
@@ -130,10 +171,8 @@ export function createRocketModel(kind: RocketKind) {
       depthWrite: false,
     }),
   );
-  core.rotation.z = Math.PI;
-  core.position.y = -h * 0.17;
   flame.add(core);
-  core.position.y = h * 0.06;
+  core.position.y = -h * 0.11;
   const light = new THREE.PointLight(0xffa345, 0, large ? 180 : 65, 1.5);
   light.position.y = 1;
   group.add(light);
@@ -142,6 +181,8 @@ export function createRocketModel(kind: RocketKind) {
     segments,
     flame,
     light,
+    booster,
+    upper,
     height: h,
     radius: r,
     build(progress: number) {
@@ -151,11 +192,70 @@ export function createRocketModel(kind: RocketKind) {
         g.scale.y = Math.max(0.001, t);
       });
     },
+    /** The detached booster preserves separation momentum and tumbles about its own centre. */
+    stage(state: RocketState) {
+      const separation = state.separation;
+      upperEngine.visible = !state.boosterAttached;
+      const nozzle = state.boosterAttached ? 0 : h * 0.418;
+      flame.position.y = nozzle - h * (state.boosterAttached ? 0.3 : 0.16);
+      flame.userData.upper = !state.boosterAttached;
+      light.position.y = nozzle + 1;
+      if (!separation) return;
+      const t = Math.max(0, state.elapsed - separation.time);
+      separationFlash.visible = t < 0.65;
+      separationFlash.scale.setScalar(1 + t * 6);
+      separationMaterial.opacity = Math.max(0, 0.8 * (1 - t / 0.65));
+      booster.visible = t < 22;
+      const d = rocketDirection(separation.attitude);
+      const initialQ = new THREE.Quaternion().setFromUnitVectors(
+        new THREE.Vector3(0, 1, 0),
+        new THREE.Vector3(d.x, d.y, d.z),
+      );
+      const detachedQ = initialQ
+        .clone()
+        .multiply(
+          new THREE.Quaternion().setFromEuler(
+            new THREE.Euler(t * 0.16, t * 0.05, t * 0.23),
+          ),
+        );
+      const center = new THREE.Vector3(0, h * 0.23, 0);
+      const position = new THREE.Vector3(
+        separation.position.x,
+        separation.position.y,
+        separation.position.z,
+      )
+        .add(center.clone().applyQuaternion(initialQ))
+        .addScaledVector(
+          new THREE.Vector3(
+            separation.velocity.x,
+            separation.velocity.y,
+            separation.velocity.z,
+          ),
+          t,
+        )
+        .addScaledVector(new THREE.Vector3(d.x, d.y, d.z), -7 * t);
+      position.y -= 4.8 * t * t;
+      position.sub(center.applyQuaternion(detachedQ));
+      const inverse = group.quaternion.clone().invert();
+      booster.position
+        .copy(position)
+        .sub(
+          new THREE.Vector3(
+            state.position.x,
+            state.position.y,
+            state.position.z,
+          ),
+        )
+        .applyQuaternion(inverse);
+      booster.quaternion.copy(inverse).multiply(detachedQ);
+    },
     fire(power: number, time: number) {
       flame.visible = power > 0.01;
       flame.scale.set(
         1 + 0.12 * Math.sin(time * 37),
-        power * (1 + 0.14 * Math.sin(time * 53)),
+        power *
+          (flame.userData.upper ? 0.53 : 1) *
+          (1 + 0.08 * Math.sin(time * 53)),
         1,
       );
       light.intensity = power * (large ? 180 : 65);

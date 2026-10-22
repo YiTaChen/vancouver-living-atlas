@@ -12,6 +12,20 @@
 
 export type RocketKind = 'small' | 'large';
 export type RocketMode = 'auto' | 'manual';
+export type RocketStage = 'boost' | 'separating' | 'upper' | 'coast';
+export interface RocketStageConfig {
+  dryMass: number;
+  fuelMass: number;
+  maxThrust: number;
+  fuelPerSecond: number;
+}
+export interface RocketSeparation {
+  time: number;
+  flightTime: number;
+  position: RocketVector;
+  velocity: RocketVector;
+  attitude: RocketAttitude;
+}
 export type RocketPhase =
   | 'building'
   | 'ready'
@@ -56,6 +70,11 @@ export interface RocketConfig {
   fuelMass: number;
   maxThrust: number;
   fuelPerSecond: number;
+  stages: Readonly<Record<'boost' | 'upper', Readonly<RocketStageConfig>>>;
+  separationDuration: number;
+  upperIgnitionDuration: number;
+  stageCutFraction: number;
+  upperNozzleFraction: number;
   buildDuration: number;
   countdownDuration: number;
   ignitionDuration: number;
@@ -76,11 +95,29 @@ export const ROCKET_CONFIGS: Readonly<
     radius: 1.1,
     dryMass: 7_000,
     fuelMass: 20_000,
-    maxThrust: 470_000,
-    fuelPerSecond: 20_000 / 155,
-    buildDuration: 6,
-    countdownDuration: 5,
-    ignitionDuration: 1.6,
+    maxThrust: 1_600_000,
+    fuelPerSecond: 16_000 / 24,
+    stages: {
+      boost: {
+        dryMass: 5_000,
+        fuelMass: 16_000,
+        maxThrust: 1_600_000,
+        fuelPerSecond: 16_000 / 24,
+      },
+      upper: {
+        dryMass: 2_000,
+        fuelMass: 4_000,
+        maxThrust: 220_000,
+        fuelPerSecond: 80,
+      },
+    },
+    separationDuration: 0.6,
+    upperIgnitionDuration: 0.4,
+    stageCutFraction: 0.46,
+    upperNozzleFraction: 0.418,
+    buildDuration: 3,
+    countdownDuration: 2.5,
+    ignitionDuration: 0.8,
     dragCoefficient: 0.42,
     angularAcceleration: 1.35,
     angularDamping: 0.32,
@@ -95,11 +132,29 @@ export const ROCKET_CONFIGS: Readonly<
     radius: 3.5,
     dryMass: 100_000,
     fuelMass: 310_000,
-    maxThrust: 6_800_000,
-    fuelPerSecond: 2_000,
-    buildDuration: 10,
-    countdownDuration: 5,
-    ignitionDuration: 2.4,
+    maxThrust: 21_000_000,
+    fuelPerSecond: 10_000,
+    stages: {
+      boost: {
+        dryMass: 75_000,
+        fuelMass: 250_000,
+        maxThrust: 21_000_000,
+        fuelPerSecond: 10_000,
+      },
+      upper: {
+        dryMass: 25_000,
+        fuelMass: 60_000,
+        maxThrust: 3_000_000,
+        fuelPerSecond: 1_200,
+      },
+    },
+    separationDuration: 0.6,
+    upperIgnitionDuration: 0.4,
+    stageCutFraction: 0.46,
+    upperNozzleFraction: 0.418,
+    buildDuration: 5,
+    countdownDuration: 2.5,
+    ignitionDuration: 1.2,
     dragCoefficient: 0.38,
     angularAcceleration: 0.46,
     angularDamping: 0.62,
@@ -128,6 +183,10 @@ export type RocketEventType =
   | 'ignition'
   | 'liftoff'
   | 'support-collapsed'
+  | 'booster-burnout'
+  | 'stage-separation'
+  | 'upper-ignition'
+  | 'upper-burnout'
   | 'fuel-empty'
   | 'mission-complete'
   | 'impact'
@@ -138,7 +197,7 @@ export interface RocketEvent {
   type: RocketEventType;
   time: number;
   position: RocketVector;
-  /** Impact speed for impact events; 0 otherwise. */
+  /** Impact speed, or detached dry mass for stage-separation; 0 otherwise. */
   magnitude: number;
 }
 export interface RocketState {
@@ -146,6 +205,15 @@ export interface RocketState {
   mode: RocketMode;
   stabilize: boolean;
   phase: RocketPhase;
+  stage: RocketStage;
+  stageElapsed: number;
+  boosterFuel: number;
+  upperFuel: number;
+  boosterAttached: boolean;
+  mass: number;
+  stageThrust: number;
+  /** Immutable launch-world snapshot; position remains a continuous virtual base. */
+  separation: RocketSeparation | null;
   position: RocketVector;
   velocity: RocketVector;
   origin: RocketVector;
@@ -215,7 +283,18 @@ const wrapAngle = (a: number) => Math.atan2(Math.sin(a), Math.cos(a));
 const isRoof = (kind: RocketSupportKind) =>
   kind === 'roof-small' || kind === 'roof-large';
 const hasEngine = (s: RocketState) =>
-  (s.phase === 'ignition' || s.phase === 'flight') && s.fuel > 0;
+  (s.phase === 'ignition' || s.phase === 'flight') &&
+  ((s.stage === 'boost' && s.boosterFuel > 0) ||
+    (s.stage === 'upper' && s.upperFuel > 0));
+
+export function rocketMass(s: RocketState): number {
+  const stages = ROCKET_CONFIGS[s.kind].stages;
+  return (
+    stages.upper.dryMass +
+    s.upperFuel +
+    (s.boosterAttached ? stages.boost.dryMass + s.boosterFuel : 0)
+  );
+}
 
 export function rocketDirection(attitude: RocketAttitude): RocketVector {
   return {
@@ -240,6 +319,11 @@ function setPhase(s: RocketState, phase: RocketPhase, event?: RocketEventType) {
   s.phaseElapsed = 0;
   if (event) addEvent(s, event);
 }
+function setStage(s: RocketState, stage: RocketStage, event?: RocketEventType) {
+  s.stage = stage;
+  s.stageElapsed = 0;
+  if (event) addEvent(s, event);
+}
 function cloneState(s: RocketState): RocketState {
   return {
     ...s,
@@ -252,6 +336,14 @@ function cloneState(s: RocketState): RocketState {
     acceleration: { ...s.acceleration },
     wind: { ...s.wind },
     events: [...s.events],
+    separation: s.separation
+      ? {
+          ...s.separation,
+          position: { ...s.separation.position },
+          velocity: { ...s.separation.velocity },
+          attitude: { ...s.separation.attitude },
+        }
+      : null,
   };
 }
 export function createRocket(
@@ -278,6 +370,14 @@ export function createRocket(
     mode: 'auto',
     stabilize: false,
     phase: 'building',
+    stage: 'boost',
+    stageElapsed: 0,
+    boosterFuel: config.stages.boost.fuelMass,
+    upperFuel: config.stages.upper.fuelMass,
+    boosterAttached: true,
+    mass: config.dryMass + config.fuelMass,
+    stageThrust: 0,
+    separation: null,
     position,
     velocity: { x: 0, y: 0, z: 0 },
     origin: { ...position },
@@ -373,10 +473,15 @@ function updateSupport(s: RocketState, dt: number) {
   let damage = isRoof(s.support.kind)
     ? thrustExposure * (0.06 + overload * (s.kind === 'large' ? 5 : 1.3))
     : thrustExposure * overload * 0.6;
+  // Faster ascent uses more powerful engines, not a faster clock. Structural
+  // exposure follows that actual thrust increase so an unsafe roof stays unsafe.
+  const thrustScale =
+    config.stages.boost.maxThrust / (s.kind === 'large' ? 6_800_000 : 470_000);
+  damage *= thrustScale;
   if (s.support.kind === 'lake') {
     damage +=
       (s.kind === 'large' ? 0.018 : 0.009) +
-      thrustExposure * (s.kind === 'large' ? 1.25 : 0.44);
+      thrustExposure * (s.kind === 'large' ? 1.25 : 0.44) * thrustScale;
     const wobble = (1 - s.supportIntegrity) * (s.kind === 'large' ? 0.9 : 0.5);
     s.attitude.pitch += Math.sin(s.elapsed * 0.8 + s.seed) * wobble * dt;
     s.attitude.roll += Math.cos(s.elapsed * 0.7 + s.seed) * wobble * dt;
@@ -448,7 +553,7 @@ function updateAttitude(
       rollCommand = clamp(rollCommand - s.angularVelocity.roll * 2.5, -1, 1);
     }
   }
-  const engineAuthority = s.throttle * (s.fuel > 0 ? 1 : 0);
+  const engineAuthority = hasEngine(s) ? s.throttle : 0;
   const damp = config.angularDamping * (0.25 + densityRatio * 0.75);
   const gust = config.windTorque * densityRatio;
   s.angularVelocity.pitch +=
@@ -474,6 +579,7 @@ function crash(
   if (grounded) s.position.y = s.support.groundY ?? s.origin.y;
   s.velocity = { x: 0, y: 0, z: 0 };
   s.throttle = 0;
+  s.stageThrust = 0;
   s.targetThrottle = 0;
   s.integrity = 0;
   s.failureReason = reason;
@@ -497,7 +603,27 @@ function substep(s: RocketState, input: RocketInput, dt: number) {
   const config = ROCKET_CONFIGS[s.kind];
   s.elapsed += dt;
   s.phaseElapsed += dt;
-  if (s.phase === 'space' || s.phase === 'crashed') return;
+  if (s.phase === 'crashed') return;
+  if (s.phase === 'space') {
+    // Success cuts the engine without deleting momentum. Gravity transitions
+    // gently into a continuing observation coast; returning to Earth is outside
+    // this mission. The first seconds retain the real post-cutoff trajectory.
+    s.stageElapsed += dt;
+    const gravity = 9.80665 * (6_371_000 / (6_371_000 + s.altitude)) ** 2;
+    s.acceleration = {
+      x: 0,
+      y: -gravity * Math.exp(-s.phaseElapsed / 12),
+      z: 0,
+    };
+    s.velocity.y += s.acceleration.y * dt;
+    s.position.x += s.velocity.x * dt;
+    s.position.y += s.velocity.y * dt;
+    s.position.z += s.velocity.z * dt;
+    s.altitude = Math.max(0, s.position.y - s.origin.y);
+    s.maxAltitude = Math.max(s.maxAltitude, s.altitude);
+    s.speed = length(s.velocity);
+    return;
+  }
   if (s.phase === 'sinking') {
     s.velocity.y = -Math.min(4.5, 0.4 + s.phaseElapsed * 0.8);
     s.position.y = Math.max(
@@ -515,6 +641,8 @@ function substep(s: RocketState, input: RocketInput, dt: number) {
   if (input.abort && s.phase !== 'aborted') {
     s.targetThrottle = 0;
     s.throttle = 0;
+    s.stageThrust = 0;
+    setStage(s, 'coast');
     s.failureReason = 'Flight aborted: engines shut down.';
     setPhase(s, 'aborted', 'abort');
   }
@@ -551,19 +679,79 @@ function substep(s: RocketState, input: RocketInput, dt: number) {
     s.targetThrottle = 1;
   }
   if (s.phase === 'aborted') s.targetThrottle = 0;
+  s.stageElapsed += dt;
+  if (
+    s.stage === 'separating' &&
+    s.phase !== 'aborted' &&
+    s.stageElapsed >= config.separationDuration
+  ) {
+    setStage(s, 'upper', 'upper-ignition');
+  }
   if (s.phase === 'ignition') {
     // Hold-down bolts restrain a safe pad during the spool-up sequence.
     s.throttle =
       clamp(s.phaseElapsed / config.ignitionDuration, 0, 1) * s.targetThrottle;
+  } else if (s.stage === 'separating' || s.stage === 'coast') {
+    s.throttle = 0;
+  } else if (
+    s.stage === 'upper' &&
+    s.stageElapsed < config.upperIgnitionDuration
+  ) {
+    s.throttle =
+      clamp(s.stageElapsed / config.upperIgnitionDuration, 0, 1) *
+      s.targetThrottle;
   } else {
     s.throttle += clamp(s.targetThrottle - s.throttle, -dt * 1.8, dt * 0.9);
   }
-  if (s.fuel <= 0) s.throttle = 0;
-  const fuelUsed = Math.min(s.fuel, config.fuelPerSecond * s.throttle * dt);
   const previousFuel = s.fuel;
-  s.fuel -= fuelUsed;
+  let justSeparated = false;
+  const activeConfig =
+    s.stage === 'boost'
+      ? config.stages.boost
+      : s.stage === 'upper'
+        ? config.stages.upper
+        : null;
+  if (activeConfig && s.phase !== 'aborted') {
+    const remaining = s.stage === 'boost' ? s.boosterFuel : s.upperFuel;
+    const used = Math.min(
+      remaining,
+      activeConfig.fuelPerSecond * s.throttle * dt,
+    );
+    if (s.stage === 'boost') s.boosterFuel = Math.max(0, s.boosterFuel - used);
+    else s.upperFuel = Math.max(0, s.upperFuel - used);
+    if (s.stage === 'boost' && s.boosterFuel < 1e-7) {
+      s.boosterFuel = 0;
+      addEvent(s, 'booster-burnout');
+      s.separation = {
+        time: s.elapsed,
+        flightTime: s.flightElapsed,
+        position: { ...s.position },
+        velocity: { ...s.velocity },
+        attitude: { ...s.attitude },
+      };
+      s.boosterAttached = false;
+      justSeparated = true;
+      setStage(s, 'separating');
+      s.throttle = 0;
+      addEvent(s, 'stage-separation', config.stages.boost.dryMass);
+    } else if (s.stage === 'upper' && s.upperFuel < 1e-7) {
+      s.upperFuel = 0;
+      setStage(s, 'coast', 'upper-burnout');
+      s.throttle = 0;
+    }
+  }
+  s.fuel = s.boosterFuel + s.upperFuel;
+  if (s.fuel <= 0) s.throttle = 0;
   if (previousFuel > 0 && s.fuel <= 0) addEvent(s, 'fuel-empty');
-  const mass = config.dryMass + s.fuel;
+  s.mass = rocketMass(s);
+  const mass = s.mass;
+  s.stageThrust = hasEngine(s)
+    ? (s.stage === 'boost'
+        ? config.stages.boost.maxThrust
+        : config.stages.upper.maxThrust) *
+      s.throttle *
+      (1 + (1 - densityRatio) * 0.08)
+    : 0;
   updateSupport(s, dt);
   if (s.phase === 'ignition') {
     if (s.phaseElapsed < config.ignitionDuration) return;
@@ -593,14 +781,16 @@ function substep(s: RocketState, input: RocketInput, dt: number) {
   );
   const area =
     Math.PI * config.radius ** 2 +
-    sideFraction * config.height * config.radius * 2;
+    sideFraction *
+      config.height *
+      (s.boosterAttached ? 1 : 1 - config.stageCutFraction) *
+      config.radius *
+      2;
   const dragFactor =
     airspeed > 0
       ? (0.5 * density * config.dragCoefficient * area * airspeed) / mass
       : 0;
-  const thrust = hasEngine(s)
-    ? (config.maxThrust * s.throttle * (1 + (1 - densityRatio) * 0.08)) / mass
-    : 0;
+  const thrust = s.stageThrust / mass;
   const gravity =
     9.80665 * (6_371_000 / (6_371_000 + Math.max(0, s.altitude))) ** 2;
   s.acceleration = {
@@ -614,6 +804,21 @@ function substep(s: RocketState, input: RocketInput, dt: number) {
   s.position.x += s.velocity.x * dt;
   s.position.y += s.velocity.y * dt;
   s.position.z += s.velocity.z * dt;
+  if (justSeparated && s.separation) {
+    // Time, pose and momentum describe the same instant. Capturing the prior
+    // frame's position here would visibly snap a fast booster backwards.
+    s.separation.position = { ...s.position };
+    s.separation.velocity = { ...s.velocity };
+    s.separation.attitude = { ...s.attitude };
+    s.separation.flightTime = s.flightElapsed;
+    for (const event of s.events.slice(-2)) {
+      if (
+        event.time === s.elapsed &&
+        (event.type === 'booster-burnout' || event.type === 'stage-separation')
+      )
+        event.position = { ...s.position };
+    }
+  }
   s.altitude = Math.max(0, s.position.y - s.origin.y);
   s.maxAltitude = Math.max(s.maxAltitude, s.altitude);
   s.speed = length(s.velocity);
@@ -622,7 +827,7 @@ function substep(s: RocketState, input: RocketInput, dt: number) {
   s.integrity = clamp(
     s.integrity -
       (Math.max(0, s.dynamicPressure - 85_000) / 800_000) *
-        sideFraction ** 2 *
+        Math.max(0, sideFraction - 0.2) ** 2 *
         dt,
     0,
     1,
@@ -632,19 +837,38 @@ function substep(s: RocketState, input: RocketInput, dt: number) {
     return;
   }
   const groundY = s.support.groundY ?? s.origin.y;
-  if (s.position.y <= groundY && (s.velocity.y < 0 || s.supportCollapsed)) {
+  const remainingBottom = config.height * config.upperNozzleFraction;
+  const groundContactY = s.boosterAttached
+    ? s.position.y
+    : Math.min(
+        s.position.y + direction.y * remainingBottom,
+        s.position.y + direction.y * config.height,
+      );
+  if (
+    groundContactY <= groundY &&
+    (s.velocity.y < 0 || s.supportCollapsed || !s.boosterAttached)
+  ) {
+    if (!s.boosterAttached) {
+      // The reference base remains below the upper stage after separation.
+      // Resolve its actual lowest surviving end instead of a ghost booster.
+      s.position.y += groundY - groundContactY;
+      s.altitude = Math.max(0, s.position.y - s.origin.y);
+    }
     crash(
       s,
       s.speed,
       s.supportCollapsed
         ? 'The falling rocket struck the ground after the platform collapsed.'
         : 'The rocket struck the ground.',
+      s.boosterAttached,
     );
     return;
   }
   if (s.altitude >= SPACE_ALTITUDE && s.phase !== 'aborted') {
     s.throttle = 0;
     s.targetThrottle = 0;
+    s.stageThrust = 0;
+    setStage(s, 'coast');
     setPhase(s, 'space', 'mission-complete');
   }
 }
@@ -669,9 +893,17 @@ export function sampleRocketEffects(s: RocketState): RocketEnvironmentEffects {
   const config = ROCKET_CONFIGS[s.kind];
   const direction = rocketDirection(s.attitude);
   const engine = hasEngine(s) ? s.throttle : 0;
+  const nozzleOffset = s.boosterAttached
+    ? 0
+    : config.height * config.upperNozzleFraction;
+  const nozzle = {
+    x: s.position.x + direction.x * nozzleOffset,
+    y: s.position.y + direction.y * nozzleOffset,
+    z: s.position.z + direction.z * nozzleOffset,
+  };
   const nozzleHeight = Math.max(
     0,
-    s.position.y - (s.support.groundY ?? s.origin.y),
+    nozzle.y - (s.support.groundY ?? s.origin.y),
   );
   const downwardFraction = Math.max(0, direction.y);
   const groundExposure =
@@ -679,7 +911,7 @@ export function sampleRocketEffects(s: RocketState): RocketEnvironmentEffects {
     downwardFraction *
     Math.exp(-nozzleHeight / (config.heatRadius * 1.8));
   return {
-    nozzle: { ...s.position },
+    nozzle,
     direction: { x: -direction.x, y: -direction.y, z: -direction.z },
     engine,
     groundExposure,

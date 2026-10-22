@@ -16,6 +16,7 @@ import {
   Navigation,
   Volume2,
   VolumeX,
+  ChevronDown,
 } from 'lucide-react';
 import { TravelJoystick } from './travel-joystick';
 import type { RocketController } from '@/lib/city/rocket-controller';
@@ -44,7 +45,7 @@ const en = {
     'The crew is assembling your rocket while flight and space systems load.',
   loading: 'Preparing flight and space systems…',
   ready: 'Ready for launch',
-  launch: 'Begin 5-second countdown',
+  launch: 'Begin countdown',
   launchShort: 'Launch',
   countdown: 'Launch countdown',
   ignition: 'Ignition',
@@ -111,7 +112,6 @@ const en = {
   complete: 'Mission complete',
   completeHint:
     'You crossed 100 km above Earth. Take in the Sun, Moon, and planets from your rocket.',
-  staySpace: 'Observe space',
   mission: 'Target · 100 km',
   peak: 'Altitude reached',
   damage: 'Buildings damaged',
@@ -140,6 +140,20 @@ const en = {
   pitch: 'Pitch',
   roll: 'Roll',
   climb: 'Climb',
+  stageBoost: 'Stage 1 · Booster',
+  stageSeparating: 'Stage separation',
+  stageUpper: 'Stage 2 · Upper stage',
+  stageCoast: 'Coasting',
+  stageFuel: 'Stage fuel',
+  separationHint: 'Booster released · upper stage preparing',
+  spaceObservation: 'Space observation',
+  observationHint: 'Choose a destination to find it. Drag to look around.',
+  focus: 'Look toward',
+  focusRocket: 'Rocket',
+  focusEarth: 'Earth',
+  focusSun: 'Sun',
+  focusMoon: 'Moon',
+  missionDetails: 'Mission details',
 } as const;
 
 type RocketTextKey = keyof typeof en;
@@ -160,7 +174,7 @@ const zh: Record<RocketTextKey, string> = {
   buildingHint: '工作團隊正在組裝火箭，同時載入飛行與太空系統。',
   loading: '正在準備飛行與太空系統…',
   ready: '準備發射',
-  launch: '開始 5 秒倒數',
+  launch: '開始倒數',
   launchShort: '發射',
   countdown: '發射倒數',
   ignition: '點火',
@@ -217,7 +231,6 @@ const zh: Record<RocketTextKey, string> = {
   gameplay: '這是風格化飛行模擬，時間、距離與噴流效果會依遊戲體驗縮放。',
   complete: '任務完成',
   completeHint: '你已穿越地球上方 100 公里，現在可以觀察太陽、月球與其他行星。',
-  staySpace: '留在太空觀察',
   mission: '目標 · 100 公里',
   peak: '抵達高度',
   damage: '受損建築',
@@ -245,6 +258,20 @@ const zh: Record<RocketTextKey, string> = {
   pitch: '俯仰',
   roll: '側傾',
   climb: '爬升',
+  stageBoost: '第一級 · 助推器',
+  stageSeparating: '級間分離',
+  stageUpper: '第二級 · 上面級',
+  stageCoast: '慣性滑行',
+  stageFuel: '本級燃料',
+  separationHint: '助推器已釋放 · 上面級準備中',
+  spaceObservation: '太空觀察',
+  observationHint: '選擇天體即可找到它，也可以拖曳視角自由觀察。',
+  focus: '觀察焦點',
+  focusRocket: '火箭',
+  focusEarth: '地球',
+  focusSun: '太陽',
+  focusMoon: '月球',
+  missionDetails: '任務詳細資料',
 };
 
 /** New rocket strings fall back to English for the app's other locales. */
@@ -304,7 +331,10 @@ export function RocketControls({
 }) {
   const [help, setHelp] = useState(false);
   const [muted, setMuted] = useState(false);
-  const [spaceDismissed, setSpaceDismissed] = useState(false);
+  const [missionDetails, setMissionDetails] = useState({
+    missionId: -1,
+    open: false,
+  });
   const t = (key: RocketTextKey) => rocketText(locale, key);
   const manualFlight = state.active && state.phase === 'flight' && !state.auto;
   const canInput = controlsEnabled && !hidden && !choosing;
@@ -319,6 +349,16 @@ export function RocketControls({
   }, [controller, canInput, state.active, state.placing]);
   if (!controller || hidden) return null;
   const preflight = ['building', 'ready', 'countdown'].includes(state.phase);
+  const stageLabel: RocketTextKey = (
+    {
+      boost: 'stageBoost',
+      separating: 'stageSeparating',
+      upper: 'stageUpper',
+      coast: 'stageCoast',
+    } as const
+  )[state.stage || 'boost'];
+  const detailsOpen =
+    missionDetails.missionId === state.missionId && missionDetails.open;
   const failed = ['crashed', 'sinking', 'aborted'].includes(state.phase);
   const previewSupport =
     state.placing &&
@@ -363,6 +403,7 @@ export function RocketControls({
     !minimal &&
     panelVisible &&
     state.active &&
+    state.phase !== 'space' &&
     !state.placing &&
     !choosing &&
     (state.phase === 'building' ||
@@ -371,7 +412,6 @@ export function RocketControls({
       optionsOpen ||
       !touch);
   const choose = (kind: 'small' | 'large') => {
-    setSpaceDismissed(false);
     onChoose(kind);
   };
   const toggleSound = () => {
@@ -380,7 +420,6 @@ export function RocketControls({
     controller.setMuted(next);
   };
   const rebuild = () => {
-    setSpaceDismissed(false);
     controller.retry();
   };
   return (
@@ -441,7 +480,7 @@ export function RocketControls({
           )}
         </section>
       )}
-      {showPanel && !(state.phase === 'space' && !spaceDismissed) && (
+      {showPanel && (
         <section
           className={`rocket-panel glass ui-chrome ${touch && optionsOpen ? 'mobile-travel-sheet' : ''} ${compactPreflight ? 'rocket-preflight-compact' : ''}`}
           aria-label={t('rocket')}
@@ -697,8 +736,8 @@ export function RocketControls({
       {state.active && !state.placing && !choosing && (
         <>
           {!showPanel &&
-            (panelVisible || minimal) &&
-            !(state.phase === 'space' && !spaceDismissed) && (
+            state.phase !== 'space' &&
+            (panelVisible || minimal) && (
               <section
                 className="rocket-compact-controls glass ui-chrome"
                 aria-label={t('guidance')}
@@ -751,7 +790,34 @@ export function RocketControls({
                 )}
               </section>
             )}
-          {!minimal && (
+          {['ignition', 'flight'].includes(state.phase) && !minimal && (
+            <section
+              className={`rocket-stage-status glass ${manualFlight ? 'rocket-stage-manual' : ''} ${state.stage === 'separating' ? 'separating' : ''}`}
+              aria-label={t('stageFuel')}
+            >
+              <header>
+                <output aria-live="polite">{t(stageLabel)}</output>
+                {state.stage !== 'separating' && state.stage !== 'coast' && (
+                  <span>
+                    {Math.round(
+                      Math.max(0, Math.min(1, state.stageFuel)) * 100,
+                    )}
+                    %
+                  </span>
+                )}
+              </header>
+              {state.stage === 'separating' ? (
+                <small>{t('separationHint')}</small>
+              ) : (
+                <progress
+                  aria-label={t('stageFuel')}
+                  value={state.stageFuel}
+                  max={1}
+                />
+              )}
+            </section>
+          )}
+          {!minimal && state.phase !== 'space' && (
             <section
               className={`rocket-telemetry glass ${manualFlight ? 'rocket-manual-telemetry' : ''}`}
               aria-label={t('title')}
@@ -888,53 +954,107 @@ export function RocketControls({
                 {t(state.tilt > 35 ? 'unstable' : 'lowFuel')}
               </output>
             )}
-          {state.phase === 'space' && !spaceDismissed && (
-            <dialog
-              open
-              className="rocket-complete glass ui-chrome"
-              aria-labelledby="rocket-mission-title"
+          {state.phase === 'space' && (panelVisible || minimal) && (
+            <section
+              className="rocket-space-panel glass ui-chrome"
+              aria-label={t('spaceObservation')}
             >
               <header>
-                <CircleCheck size={21} />
-                <span className="rocket-kicker">{t('title')}</span>
+                <CircleCheck size={19} />
+                <div>
+                  <strong>{t('complete')}</strong>
+                  <small>
+                    {altitude} {altitudeUnit} · {t('spaceObservation')}
+                  </small>
+                </div>
+                <button
+                  type="button"
+                  className="rocket-space-details-toggle"
+                  aria-label={t('missionDetails')}
+                  aria-expanded={detailsOpen}
+                  onClick={() =>
+                    setMissionDetails({
+                      missionId: state.missionId,
+                      open: !detailsOpen,
+                    })
+                  }
+                >
+                  <ChevronDown size={17} />
+                </button>
               </header>
-              <h2 id="rocket-mission-title">{t('complete')}</h2>
-              <p>{t('completeHint')}</p>
-              <small>{t('returnHint')}</small>
-              <div className="rocket-complete-stats">
-                <div>
-                  <strong>
-                    {altitude} {altitudeUnit}
-                  </strong>
-                  <span>{t('peak')}</span>
-                </div>
-                <div>
-                  <strong>{state.damaged}</strong>
-                  <span>{t('damage')}</span>
-                </div>
-                <div>
-                  <strong>{state.burning}</strong>
-                  <span>{t('burning')}</span>
-                </div>
-                <div>
-                  <strong>{state.debris}</strong>
-                  <span>{t('debris')}</span>
-                </div>
-              </div>
-              <div className="rocket-complete-actions">
-                <button type="button" onClick={() => setSpaceDismissed(true)}>
-                  {t('staySpace')}
+              <p>{t('observationHint')}</p>
+              <fieldset className="rocket-space-focus" aria-label={t('focus')}>
+                {(['earth', 'sun', 'moon', 'rocket'] as const).map((focus) => (
+                  <button
+                    type="button"
+                    key={focus}
+                    data-rocket-focus={focus}
+                    aria-pressed={state.spaceFocus === focus}
+                    onClick={() => controller.setSpaceFocus(focus)}
+                  >
+                    {t(
+                      (
+                        {
+                          earth: 'focusEarth',
+                          sun: 'focusSun',
+                          moon: 'focusMoon',
+                          rocket: 'focusRocket',
+                        } as const
+                      )[focus],
+                    )}
+                  </button>
+                ))}
+              </fieldset>
+              <div className="rocket-space-actions">
+                <button
+                  type="button"
+                  data-rocket-space-view
+                  aria-label={`${t('view')} · ${t(state.view)}`}
+                  onClick={() =>
+                    controller.setView(
+                      state.view === 'first' ? 'chase' : 'first',
+                    )
+                  }
+                >
+                  <Camera size={14} />
+                  {t(state.view)}
                 </button>
                 <button type="button" onClick={() => controller.returnToCity()}>
-                  <Map size={15} />
-                  {t('city')}
-                </button>
-                <button type="button" onClick={() => choose(state.kind)}>
-                  <Rocket size={15} />
-                  {t('newRocket')}
+                  <Map size={14} />
+                  {t('cityShort')}
                 </button>
               </div>
-            </dialog>
+              {detailsOpen && (
+                <div className="rocket-mission-details">
+                  <div className="rocket-mission-stats">
+                    <div>
+                      <strong>
+                        {altitude} {altitudeUnit}
+                      </strong>
+                      <span>{t('peak')}</span>
+                    </div>
+                    <div>
+                      <strong>{state.damaged}</strong>
+                      <span>{t('damage')}</span>
+                    </div>
+                    <div>
+                      <strong>{state.burning}</strong>
+                      <span>{t('burning')}</span>
+                    </div>
+                    <div>
+                      <strong>{state.debris}</strong>
+                      <span>{t('debris')}</span>
+                    </div>
+                  </div>
+                  <p>{t('completeHint')}</p>
+                  <small>{t('returnHint')}</small>
+                  <button type="button" onClick={() => choose(state.kind)}>
+                    <Rocket size={14} />
+                    {t('newRocket')}
+                  </button>
+                </div>
+              )}
+            </section>
           )}
         </>
       )}

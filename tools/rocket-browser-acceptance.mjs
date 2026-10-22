@@ -202,6 +202,12 @@ try {
   log('largeSmallRoof', roofFailure.snapshot);
   await screenshot('integrated-large-roof-failure.png');
   await page.evaluate(() => window.__atlas.rocket.returnToCity());
+  // A real next placement click happens after React publishes the returned
+  // orbit mode. Match that boundary before the next imperative screen pick.
+  await page.evaluate(async () => {
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+  });
 
   if (!resume) {
     // Use a real visible ocean point for screen-space water placement.
@@ -346,6 +352,27 @@ try {
   report.scenarios.cityDamage = city;
   log('cityDamage', city.snapshot);
   await screenshot('integrated-city-blast-effects.png');
+  report.scenarios.largeStaging = await page.evaluate(async () => {
+    const r = window.__atlas.rocket;
+    for (
+      let i = 0;
+      i < 50 * 60 && r.state.boosterAttached && r.state.phase === 'flight';
+      i++
+    ) {
+      r.update(1 / 60);
+      if (i % 120 === 119)
+        await new Promise((resolve) => requestAnimationFrame(resolve));
+    }
+    return { snapshot: r.snapshot, state: r.state };
+  });
+  await advance(0.3);
+  await screenshot('integrated-stage-separation.png');
+  report.scenarios.largeSuccess = await advance(90, ['space', 'crashed']);
+  log('largeSuccess', report.scenarios.largeSuccess.snapshot);
+  await page
+    .getByRole('region', { name: 'Space observation', exact: true })
+    .waitFor();
+  await screenshot('integrated-upper-stage-space.png');
   const returnState = await page.evaluate(() => {
     const e = window.__atlas;
     e.rocket.returnToCity();
@@ -407,11 +434,30 @@ try {
   log('smallManualRecovery', success.snapshot);
   if (success.snapshot.phase === 'space') {
     await page
-      .getByRole('dialog', { name: 'Mission complete', exact: true })
+      .getByRole('region', { name: 'Space observation', exact: true })
       .waitFor();
-    await page
-      .getByRole('button', { name: 'Observe space', exact: true })
-      .click();
+    report.scenarios.celestialFocus = {};
+    for (const body of ['sun', 'moon']) {
+      await page.locator(`[data-rocket-focus="${body}"]`).click();
+      await advance(3);
+      report.scenarios.celestialFocus[body] = await page.evaluate((body) => {
+        const r = window.__atlas.rocket,
+          camera = r.space.camera;
+        camera.updateMatrixWorld();
+        const focus = r.space.getCelestialFocus(body);
+        const screen = focus.target.clone().project(camera);
+        return {
+          focus: r.snapshot.spaceFocus,
+          vehicleVisible: r.model.group.visible,
+          fov: camera.fov,
+          screen: screen.toArray(),
+          angularDiameter: focus.angularDiameterDegrees,
+        };
+      }, body);
+      await screenshot(`integrated-${body}-observation.png`);
+    }
+    await page.locator('[data-rocket-focus="rocket"]').click();
+    await advance(2);
     await page.evaluate(() => window.__atlas.rocket.setView('first'));
     await page.mouse.move(790, 220);
     await page.mouse.down();
@@ -477,6 +523,24 @@ try {
       camera.after.altitude >= camera.before.altitude,
     smallManualToAutoReachesSpace:
       success.snapshot.phase === 'space' && success.snapshot.altitude >= 100000,
+    bothRocketsReachSpaceInHalfTheTime:
+      report.scenarios.largeSuccess.snapshot.phase === 'space' &&
+      report.scenarios.largeSuccess.state.flightElapsed > 55 &&
+      report.scenarios.largeSuccess.state.flightElapsed < 75 &&
+      success.state.flightElapsed > 55 &&
+      success.state.flightElapsed < 75,
+    boosterSeparatesAfterBurnout:
+      report.scenarios.largeStaging.state.stage === 'separating' &&
+      !report.scenarios.largeStaging.state.boosterAttached &&
+      report.scenarios.largeStaging.state.boosterFuel === 0 &&
+      success.state.events.some((event) => event.type === 'upper-ignition'),
+    sunAndMoonCanBeFound: ['sun', 'moon'].every(
+      (body) =>
+        report.scenarios.celestialFocus?.[body]?.focus === body &&
+        !report.scenarios.celestialFocus[body].vehicleVisible &&
+        Math.abs(report.scenarios.celestialFocus[body].screen[0]) < 0.02 &&
+        Math.abs(report.scenarios.celestialFocus[body].screen[1]) < 0.02,
+    ),
     firstPersonCanLookDownToEarth:
       report.scenarios.firstPersonEarthLook?.direction[1] < -0.5 &&
       report.scenarios.firstPersonEarthLook?.cabinParentIsSpaceCamera,
@@ -497,7 +561,11 @@ try {
   await browser.close();
   // Copy evidence only after closing the browser, so the development watcher
   // cannot reload the engine while it is being tested.
-  if (!report.failure && report.pageErrors.length === 0) {
+  if (
+    !report.failure &&
+    report.pageErrors.length === 0 &&
+    Object.values(report.checks ?? {}).every(Boolean)
+  ) {
     await fs.mkdir(evidence, { recursive: true });
     for (const path of report.screenshots) {
       const name = path.split('/').at(-1);

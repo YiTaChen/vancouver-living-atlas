@@ -146,6 +146,15 @@ function setup(t) {
       resources.space.push(this);
     }
     update() {}
+    getCelestialFocus(body) {
+      return {
+        target: new THREE.Vector3(body === 'sun' ? 400 : -400, 100, -500),
+        fovDegrees: body === 'sun' ? 18 : 12,
+      };
+    }
+    getHorizonTarget() {
+      return new THREE.Vector3(0, -0.2, -1);
+    }
     dispose() {
       this.disposed++;
     }
@@ -444,4 +453,129 @@ test('manual keys keep working after a HUD button while native button activation
     },
   });
   assert(!c.keys.has('KeyW'));
+});
+
+test('chase framing stays fixed relative to a fast rocket across uneven render frames', async (t) => {
+  const { controller: c, engine: e } = setup(t);
+  c.start('small', 0, 0, 0, { kind: 'ground' });
+  await tick();
+  readyFlight(c, 2000);
+  c.state.velocity.y = 1500;
+  c.world = null;
+  const distances = [];
+  for (const dt of Array.from({ length: 20 }, () => [
+    1 / 144,
+    1 / 30,
+    1 / 60,
+    1 / 90,
+  ]).flat()) {
+    c.update(dt);
+    const anchor = new THREE.Vector3(0, c.chaseAnchorHeight, 0)
+      .applyQuaternion(c.model.group.quaternion)
+      .add(
+        new THREE.Vector3(
+          c.state.position.x,
+          c.state.position.y,
+          c.state.position.z,
+        ),
+      );
+    distances.push(e.camera.position.distanceTo(anchor));
+    e.camera.updateMatrixWorld();
+    const screen = anchor.clone().project(e.camera);
+    assert(
+      Math.abs(screen.x) < 1e-8 && Math.abs(screen.y) < 1e-8,
+      'vehicle anchor stays centered',
+    );
+  }
+  assert(
+    Math.max(...distances) - Math.min(...distances) < 1e-8,
+    'speed and frame delta cannot change chase distance',
+  );
+  assert(
+    c.state.position.y > 3500,
+    'the framing test actually follows a moving vehicle',
+  );
+});
+
+test('staging reframes the surviving upper vehicle smoothly rather than jumping the camera', async (t) => {
+  const { controller: c, engine: e } = setup(t);
+  c.start('small', 0, 0, 0, { kind: 'ground' });
+  await tick();
+  readyFlight(c, 5000);
+  c.world = null;
+  c.update(1 / 60);
+  const before = c.chaseAnchorHeight;
+  c.state.boosterAttached = false;
+  c.state.stage = 'separating';
+  c.update(1 / 60);
+  assert(c.chaseAnchorHeight > before && c.chaseAnchorHeight - before < 0.6);
+  assert(Number.isFinite(e.camera.position.y));
+});
+
+test('space focus finds the Moon smoothly and a drag releases the guided view without restarting the mission', async (t) => {
+  const { controller: c, resources } = setup(t);
+  c.start('small', 0, 0, 0, { kind: 'ground' });
+  await tick();
+  readyFlight(c, 100000);
+  c.state.phase = 'space';
+  c.state.stage = 'coast';
+  c.state.boosterAttached = false;
+  c.update(1 / 60);
+  c.setSpaceFocus('moon');
+  const first = resources.space[0].camera.quaternion.clone();
+  c.update(1 / 60);
+  const camera = resources.space[0].camera;
+  assert(first.angleTo(camera.quaternion) < 0.2, 'focus does not snap');
+  for (let i = 0; i < 180; i++) c.update(1 / 60);
+  const expected = resources.space[0]
+    .getCelestialFocus('moon')
+    .target.sub(camera.position)
+    .normalize();
+  assert(camera.getWorldDirection(new THREE.Vector3()).dot(expected) > 0.99999);
+  assert(
+    Math.abs(camera.fov - 12) < 0.01,
+    'camera zoom reveals a physically small lunar disc',
+  );
+  assert.equal(c.snapshot.spaceFocus, 'moon');
+  assert.equal(
+    c.model.group.visible,
+    false,
+    'the nearby vehicle cannot block the telescopic Moon view',
+  );
+  const mission = c.snapshot.missionId;
+  c.down(pointer(1, 200, 100));
+  c.move(pointer(1, 240, 120));
+  c.up(pointer(1, 240, 120));
+  assert.equal(c.snapshot.spaceFocus, 'rocket');
+  assert.equal(c.snapshot.phase, 'space');
+  assert.equal(c.snapshot.missionId, mission);
+  c.update(1 / 60);
+  assert.equal(
+    c.model.group.visible,
+    true,
+    'free chase restores the same vehicle',
+  );
+});
+
+test('upper-stage collision probes exclude the discarded booster volume', async (t) => {
+  const { controller: c } = setup(t);
+  c.start('small', 0, 0, 0, { kind: 'ground' });
+  await tick();
+  readyFlight(c, 100);
+  c.state.stage = 'upper';
+  c.state.stageElapsed = 2;
+  c.state.boosterAttached = false;
+  c.state.boosterFuel = 0;
+  c.world = {
+    hit(a, b) {
+      return Math.min(a.y, b.y) < 105 && Math.max(a.y, b.y) > 105;
+    },
+    surface: () => ({ height: 0 }),
+  };
+  c.update(1 / 60);
+  assert.equal(
+    c.snapshot.phase,
+    'flight',
+    'a deck below the actual upper-stage nozzle cannot hit a ghost booster',
+  );
 });

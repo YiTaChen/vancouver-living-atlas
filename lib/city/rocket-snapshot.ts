@@ -1,5 +1,7 @@
 export type RocketView = 'first' | 'chase';
+export type RocketSpaceFocus = 'rocket' | 'earth' | 'sun' | 'moon';
 export interface RocketSnapshot {
+  missionId: number;
   exists: boolean;
   active: boolean;
   placing: boolean;
@@ -21,6 +23,9 @@ export interface RocketSnapshot {
   altitude: number;
   speed: number;
   fuel: number;
+  stage: 'boost' | 'separating' | 'upper' | 'coast';
+  stageFuel: number;
+  spaceFocus: RocketSpaceFocus;
   throttle: number;
   tilt: number;
   pitch: number;
@@ -38,6 +43,7 @@ export interface RocketSnapshot {
   debris: number;
 }
 export const EMPTY_ROCKET: RocketSnapshot = {
+  missionId: 0,
   exists: false,
   active: false,
   placing: false,
@@ -50,6 +56,9 @@ export const EMPTY_ROCKET: RocketSnapshot = {
   altitude: 0,
   speed: 0,
   fuel: 1,
+  stage: 'boost',
+  stageFuel: 1,
+  spaceFocus: 'rocket',
   throttle: 0,
   tilt: 0,
   pitch: 0,

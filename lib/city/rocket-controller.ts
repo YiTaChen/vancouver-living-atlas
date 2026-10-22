@@ -20,6 +20,7 @@ import {
   EMPTY_ROCKET,
   type RocketSnapshot,
   type RocketView,
+  type RocketSpaceFocus,
 } from './rocket-snapshot';
 import {
   createRocketModel,
@@ -64,6 +65,14 @@ export class RocketController {
   private lookYaw = 0.6;
   private lookPitch = 0.26;
   private zoomScale = 1;
+  private missionId = 0;
+  private spaceFocus: RocketSpaceFocus = 'rocket';
+  private chaseOffset = new THREE.Vector3();
+  private chaseAnchorHeight = 0;
+  private chaseInitialized = false;
+  private focusOrientation = new THREE.Quaternion();
+  private focusFov = 55;
+  private focusTransition = false;
   private preview = '';
   private ring: THREE.Mesh;
   private cabin = new THREE.Group();
@@ -125,6 +134,7 @@ export class RocketController {
     const s = this.state;
     return {
       ...EMPTY_ROCKET,
+      missionId: this.missionId,
       exists: !!s,
       active: this.active,
       placing: this.placing,
@@ -137,6 +147,13 @@ export class RocketController {
       altitude: s?.altitude ?? 0,
       speed: s?.speed ?? 0,
       fuel: s ? s.fuel / ROCKET_CONFIGS[s.kind].fuelMass : 1,
+      stage: s?.stage ?? 'boost',
+      stageFuel: s
+        ? s.boosterAttached
+          ? s.boosterFuel / ROCKET_CONFIGS[s.kind].stages.boost.fuelMass
+          : s.upperFuel / ROCKET_CONFIGS[s.kind].stages.upper.fuelMass
+        : 1,
+      spaceFocus: this.spaceFocus,
       throttle: this.auto ? (s?.throttle ?? 0) : this.throttle,
       tilt: s
         ? (Math.acos(
@@ -207,6 +224,16 @@ export class RocketController {
     this.view = view;
     this.lookYaw = view === 'first' ? 0 : 0.6;
     this.lookPitch = view === 'first' ? 0 : 0.26;
+    this.notify();
+  }
+  setSpaceFocus(focus: RocketSpaceFocus) {
+    if (!this.active || !this.wasSpace || !this.space) return;
+    if (!['rocket', 'earth', 'sun', 'moon'].includes(focus)) return;
+    if (this.spaceFocus === focus) return;
+    this.focusOrientation.copy(this.space.camera.quaternion);
+    this.focusFov = this.space.camera.fov;
+    this.focusTransition = true;
+    this.spaceFocus = focus;
     this.notify();
   }
   zoom(factor: number) {
@@ -393,6 +420,11 @@ export class RocketController {
     this.clearMission();
     this.kind = kind;
     this.placing = false;
+    this.missionId++;
+    this.spaceFocus = 'rocket';
+    this.focusTransition = false;
+    this.focusFov = 55;
+    this.chaseInitialized = false;
     this.ring.visible = false;
     this.e.tesla?.deactivate();
     this.e.flight?.clear();
@@ -647,11 +679,17 @@ export class RocketController {
         this.world
       ) {
         const direction = rocketDirection(s.attitude),
-          previousDir = rocketDirection(before.attitude);
+          previousDir = rocketDirection(before.attitude),
+          lower = s.boosterAttached
+            ? 0
+            : config.height * config.upperNozzleFraction,
+          previousLower = before.boosterAttached
+            ? 0
+            : config.height * config.upperNozzleFraction;
         const bodyBase = new THREE.Vector3(
-          s.position.x + direction.x * config.radius,
-          s.position.y + direction.y * config.radius,
-          s.position.z + direction.z * config.radius,
+          s.position.x + direction.x * (lower + config.radius),
+          s.position.y + direction.y * (lower + config.radius),
+          s.position.z + direction.z * (lower + config.radius),
         );
         const bodyTip = new THREE.Vector3(
           s.position.x + direction.x * (config.height - config.radius),
@@ -665,14 +703,23 @@ export class RocketController {
           [0.18, 0.5, 0.9].some((t) =>
             this.world!.hit(
               new THREE.Vector3(
-                before.position.x + previousDir.x * config.height * t,
-                before.position.y + previousDir.y * config.height * t,
-                before.position.z + previousDir.z * config.height * t,
+                before.position.x +
+                  previousDir.x *
+                    (previousLower + (config.height - previousLower) * t),
+                before.position.y +
+                  previousDir.y *
+                    (previousLower + (config.height - previousLower) * t),
+                before.position.z +
+                  previousDir.z *
+                    (previousLower + (config.height - previousLower) * t),
               ),
               new THREE.Vector3(
-                s.position.x + direction.x * config.height * t,
-                s.position.y + direction.y * config.height * t,
-                s.position.z + direction.z * config.height * t,
+                s.position.x +
+                  direction.x * (lower + (config.height - lower) * t),
+                s.position.y +
+                  direction.y * (lower + (config.height - lower) * t),
+                s.position.z +
+                  direction.z * (lower + (config.height - lower) * t),
               ),
               config.radius * 0.75,
             ),
@@ -682,12 +729,12 @@ export class RocketController {
           bodyTip.y <
             this.world.surface(bodyTip.x, bodyTip.z).height +
               config.radius * 0.5;
+        const lowest = bodyBase.y < bodyTip.y ? bodyBase : bodyTip;
         if (
           collided ||
           noseImpact ||
           (s.altitude > 3 &&
-            s.position.y <
-              this.world.surface(s.position.x, s.position.z).height)
+            lowest.y < this.world.surface(lowest.x, lowest.z).height)
         )
           this.state = crashRocket(s, 'collision');
       }
@@ -700,9 +747,13 @@ export class RocketController {
       );
     this.model.group.quaternion.copy(q);
     this.model.build(s.phase === 'sinking' ? 1 : s.buildProgress);
+    this.model.stage(s);
     this.model.fire(sampleRocketEffects(s).engine, this.clock);
     this.model.group.visible =
-      s.phase !== 'crashed' && !(this.view === 'first' && this.active);
+      s.phase !== 'crashed' &&
+      !(this.view === 'first' && this.active) &&
+      this.spaceFocus !== 'sun' &&
+      this.spaceFocus !== 'moon';
     if (!this.wasSpace)
       this.model.group.position.set(s.position.x, s.position.y, s.position.z);
     if (this.scaffold) {
@@ -748,25 +799,48 @@ export class RocketController {
       camera.near = 0.04;
       camera.fov = 68;
     } else {
-      const distance = config.cameraDistance * this.zoomScale,
+      const centerHeight = config.height * (s.boosterAttached ? 0.45 : 0.72),
+        distance =
+          config.cameraDistance *
+          this.zoomScale *
+          (s.boosterAttached ? 1 : 0.64),
         offset = new THREE.Vector3(
           Math.sin(this.lookYaw) * Math.cos(this.lookPitch) * distance,
-          Math.sin(this.lookPitch) * distance + config.height * 0.4,
+          Math.sin(this.lookPitch) * distance,
           Math.cos(this.lookYaw) * Math.cos(this.lookPitch) * distance,
         );
+      // Follow translation in the rocket frame. Smoothing an absolute world
+      // position trails a fast vehicle by velocity / damping; variable render
+      // deltas then turn the changing lag into violent screen-space bobbing.
+      // Only the player's orbit offset and the staging composition are damped.
+      if (!this.chaseInitialized) {
+        this.chaseOffset.copy(offset);
+        this.chaseAnchorHeight = centerHeight;
+        this.chaseInitialized = true;
+      } else {
+        const blend = 1 - Math.exp(-dt * 6);
+        this.chaseOffset.lerp(offset, blend);
+        this.chaseAnchorHeight +=
+          (centerHeight - this.chaseAnchorHeight) * blend;
+      }
       const target = p
         .clone()
-        .add(new THREE.Vector3(0, config.height * 0.45, 0));
-      const wanted = p.clone().add(offset);
-      wanted.y = Math.max(wanted.y, this.e.elevation(wanted.x, wanted.z) + 3);
-      camera.position.lerp(wanted, 1 - Math.exp(-dt * 7));
+        .add(
+          new THREE.Vector3(0, this.chaseAnchorHeight, 0).applyQuaternion(q),
+        );
+      camera.position.copy(target).add(this.chaseOffset);
+      if (s.altitude < 200)
+        camera.position.y = Math.max(
+          camera.position.y,
+          this.e.elevation(camera.position.x, camera.position.z) + 3,
+        );
       camera.up.set(0, 1, 0);
       camera.lookAt(target);
       camera.near = 0.2;
       camera.fov = 55;
     }
     const shake =
-      sampleRocketEffects(s).shake * (this.e.compatibleGraphics ? 0.1 : 0.22);
+      this.view === 'first' ? sampleRocketEffects(s).shake * 0.035 : 0;
     camera.position.x += Math.sin(this.clock * 39) * shake;
     camera.position.y += Math.sin(this.clock * 47) * shake;
     camera.far = 120000;
@@ -795,6 +869,33 @@ export class RocketController {
         .sub(p)
         .multiplyScalar(1e-5);
       this.space.camera.quaternion.copy(camera.quaternion);
+      let fov = camera.fov;
+      if (this.spaceFocus !== 'rocket') {
+        const focus =
+          this.spaceFocus === 'earth'
+            ? null
+            : this.space.getCelestialFocus(this.spaceFocus);
+        const target = focus?.target ?? this.space.getHorizonTarget();
+        const desired = new THREE.Quaternion().setFromRotationMatrix(
+          new THREE.Matrix4().lookAt(
+            this.space.camera.position,
+            target,
+            new THREE.Vector3(0, 1, 0),
+          ),
+        );
+        this.focusOrientation.slerp(desired, 1 - Math.exp(-dt * 4));
+        this.space.camera.quaternion.copy(this.focusOrientation);
+        fov = focus?.fovDegrees ?? 55;
+      } else if (this.focusTransition) {
+        this.focusOrientation.slerp(camera.quaternion, 1 - Math.exp(-dt * 5));
+        this.space.camera.quaternion.copy(this.focusOrientation);
+        if (this.focusOrientation.angleTo(camera.quaternion) < 0.001)
+          this.focusTransition = false;
+      }
+      this.focusFov += (fov - this.focusFov) * (1 - Math.exp(-dt * 4));
+      this.space.camera.fov = this.focusFov;
+      this.space.camera.near = this.view === 'first' ? 0.0000004 : 0.00001;
+      this.space.camera.updateProjectionMatrix();
       this.space.scene.add(this.space.camera);
       this.space.camera.updateMatrixWorld();
       this.space.camera.add(this.cabin);
@@ -854,6 +955,7 @@ export class RocketController {
       if (previous > 4 && next > 4) this.zoomDistance(previous / next);
       return;
     }
+    if (this.spaceFocus !== 'rocket') this.setSpaceFocus('rocket');
     this.lookYaw -= (ev.clientX - p.x) * 0.005;
     this.lookPitch = THREE.MathUtils.clamp(
       this.lookPitch + (ev.clientY - p.y) * 0.004,

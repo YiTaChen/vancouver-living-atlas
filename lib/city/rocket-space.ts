@@ -1,4 +1,8 @@
 import * as THREE from 'three';
+import {
+  rocketPlanetFragmentShader,
+  rocketPlanetVertexShader,
+} from './rocket-space-shaders';
 
 /** All environment distances use 1 unit = 100 km. Nearby vehicles must use this scale too. */
 export const ROCKET_SPACE_METERS_TO_UNITS = 1 / 100_000;
@@ -6,6 +10,14 @@ export const ROCKET_SPACE_METERS_TO_UNITS = 1 / 100_000;
 const EARTH_RADIUS = 6_371_000 * ROCKET_SPACE_METERS_TO_UNITS;
 const FAR_SKY = 900;
 const radians = THREE.MathUtils.degToRad;
+
+export type RocketCelestialBody = 'sun' | 'moon';
+export interface RocketCelestialFocus {
+  target: THREE.Vector3;
+  direction: THREE.Vector3;
+  fovDegrees: number;
+  angularDiameterDegrees: number;
+}
 
 const noiseGLSL = /* glsl */ `
   float hash31(vec3 p) {
@@ -336,24 +348,25 @@ export class RocketSpace {
   private readonly earth = new THREE.Group();
   private readonly landMask = createLandMask();
   private readonly sunDirection = new THREE.Vector3(
-    0.78,
-    0.24,
-    -0.58,
+    -0.43,
+    0.02,
+    -0.9,
   ).normalize();
   private readonly moonDirection = new THREE.Vector3(
-    -0.58,
-    0.23,
-    -0.78,
+    0.75,
+    0.16,
+    -0.64,
   ).normalize();
   private readonly sun = new THREE.Group();
   private readonly moon: THREE.Mesh<THREE.SphereGeometry, THREE.ShaderMaterial>;
   private readonly skyMaterial: THREE.ShaderMaterial;
   private readonly starMaterial: THREE.ShaderMaterial;
-  private readonly atmosphereMaterial: THREE.ShaderMaterial;
-  private readonly cloudsMaterial: THREE.ShaderMaterial;
+  private readonly planetMaterial: THREE.ShaderMaterial;
   private readonly direction = new THREE.Vector3();
   private readonly target = new THREE.Vector3();
   private readonly ownedRoots: THREE.Object3D[] = [];
+  private readonly sunEye = new THREE.Vector3();
+  private altitudeMeters = 15_000;
   private disposed = false;
 
   constructor() {
@@ -437,146 +450,54 @@ export class RocketSpace {
     stars.frustumCulled = false;
     this.scene.add(stars);
 
-    const earthMaterial = new THREE.ShaderMaterial({
+    this.planetMaterial = new THREE.ShaderMaterial({
       uniforms: {
         uLand: { value: this.landMask },
         uSun: { value: this.sunDirection },
+        uCameraWorld: { value: new THREE.Matrix4() },
+        uInverseProjection: { value: new THREE.Matrix4() },
+        uEye: { value: new THREE.Vector3() },
+        uEarthCenter: { value: this.earth.position },
+        uWorldToEarth: { value: new THREE.Matrix3() },
+        uRadius: { value: EARTH_RADIUS },
+        uTime: { value: 0 },
       },
-      vertexShader: sphereVertex,
-      fragmentShader: /* glsl */ `
-        varying vec3 vLocal;
-        varying vec3 vNormal;
-        varying vec3 vWorld;
-        uniform sampler2D uLand;
-        uniform vec3 uSun;
-        ${noiseGLSL}
-        void main() {
-          vec3 p = normalize(vLocal);
-          vec3 normal = normalize(vNormal);
-          float latitude = asin(clamp(p.y, -1.0, 1.0));
-          vec2 uv = vec2(atan(p.z, p.x) / 6.2831853 + 0.5, latitude / 3.1415927 + 0.5);
-          float terrain = fbm(p * 20.0);
-          float fine = noise3(p * 450.0);
-          float land = texture2D(uLand, uv + (terrain - 0.5) * 0.002).r;
-          float shoreline = 1.0 - abs(land * 2.0 - 1.0);
-          vec3 water = mix(vec3(0.008, 0.035, 0.10), vec3(0.014, 0.095, 0.18), terrain);
-          water += shoreline * vec3(0.01, 0.08, 0.08);
-          vec3 vegetation = mix(vec3(0.035, 0.075, 0.025), vec3(0.13, 0.19, 0.065), terrain);
-          float dry = smoothstep(0.20, 0.39, abs(p.y)) * (1.0 - smoothstep(0.42, 0.62, abs(p.y)));
-          dry *= smoothstep(0.40, 0.68, terrain);
-          vec3 ground = mix(vegetation, vec3(0.40, 0.29, 0.14), dry);
-          ground *= 0.88 + fine * 0.19;
-          float ice = smoothstep(0.84, 0.96, abs(p.y) + (terrain - 0.5) * 0.13);
-          ground = mix(ground, vec3(0.72, 0.82, 0.87), ice);
-          vec3 albedo = mix(water, ground, smoothstep(0.30, 0.70, land));
-          albedo = mix(albedo, vec3(0.67, 0.78, 0.84), ice * 0.85);
-          float day = dot(normal, uSun);
-          float daylight = smoothstep(-0.11, 0.16, day);
-          vec3 color = albedo * (0.016 + max(day, 0.0) * 1.35);
-          // Small coastal/city-like lights only on the dark hemisphere.
-          float lights = smoothstep(0.84, 0.96, fine) * smoothstep(0.25, 0.8, terrain);
-          color += vec3(0.90, 0.44, 0.10) * lights * land * (1.0 - daylight) * 0.25;
-          vec3 view = normalize(cameraPosition - vWorld);
-          vec3 halfVector = normalize(uSun + view);
-          float glint = pow(max(dot(normal, halfVector), 0.0), 180.0);
-          color += vec3(0.65, 0.67, 0.55) * glint * (1.0 - land) * daylight;
-          float limb = pow(1.0 - max(dot(normal, view), 0.0), 4.0);
-          color += vec3(0.025, 0.075, 0.15) * limb * daylight;
-          gl_FragColor = vec4(color, 1.0);
-          #include <tonemapping_fragment>
-          #include <colorspace_fragment>
-        }
-      `,
-      // All celestial layers use the transparent queue in explicit back-to-front
-      // order. They keep the local rocket's depth, but never write astronomical
-      // depth values that would erase kilometre-scale shell separation.
+      vertexShader: rocketPlanetVertexShader,
+      fragmentShader: rocketPlanetFragmentShader(noiseGLSL),
       transparent: true,
+      depthTest: true,
       depthWrite: false,
     });
     const planet = new THREE.Mesh(
-      new THREE.SphereGeometry(EARTH_RADIUS, 192, 128),
-      earthMaterial,
+      new THREE.PlaneGeometry(2, 2),
+      this.planetMaterial,
     );
-    planet.name = 'Procedural Earth';
+    planet.name = 'Analytic Earth, cloud deck and atmospheric limb';
+    planet.userData = {
+      celestialBody: 'earth',
+      renderTechnique: 'analytic-ray-sphere',
+      radiusMeters: 6_371_000,
+      atmosphereHeightMeters: 18_000,
+      antialiasing: 'screen-space-derivatives',
+    };
+    planet.frustumCulled = false;
     planet.renderOrder = -10;
-    this.earth.add(planet);
-
-    this.cloudsMaterial = new THREE.ShaderMaterial({
-      uniforms: { uSun: { value: this.sunDirection }, uTime: { value: 0 } },
-      vertexShader: sphereVertex,
-      fragmentShader: /* glsl */ `
-        varying vec3 vLocal;
-        varying vec3 vNormal;
-        varying vec3 vWorld;
-        uniform vec3 uSun;
-        uniform float uTime;
-        ${noiseGLSL}
-        void main() {
-          vec3 p = normalize(vLocal);
-          p.xz += vec2(sin(p.y * 12.0), cos(p.y * 9.0)) * 0.027;
-          p.x += uTime * 0.00003;
-          float billows = fbm(p * 33.0 + fbm(p * 12.0) * 2.4);
-          float coverage = smoothstep(0.50, 0.68, billows);
-          coverage *= smoothstep(0.13, 0.4, abs(p.y)) * 0.45 + 0.55;
-          if (coverage < 0.015) discard;
-          float light = max(dot(normalize(vNormal), uSun), 0.0);
-          vec3 color = mix(vec3(0.035, 0.055, 0.09), vec3(0.90, 0.94, 1.0), light);
-          gl_FragColor = vec4(color, coverage * 0.84);
-          #include <tonemapping_fragment>
-          #include <colorspace_fragment>
-        }
-      `,
-      transparent: true,
-      depthWrite: false,
-      // Earth did not write depth, so no shell z-fighting; local opaque vehicles
-      // did write depth, and remain correctly in front of the cloud backdrop.
-      depthTest: true,
-    });
-    const clouds = new THREE.Mesh(
-      new THREE.SphereGeometry(EARTH_RADIUS + 0.035, 160, 96),
-      this.cloudsMaterial,
-    );
-    clouds.name = 'Procedural cloud deck';
-    clouds.renderOrder = -8;
-    this.earth.add(clouds);
-
-    this.atmosphereMaterial = new THREE.ShaderMaterial({
-      uniforms: { uSun: { value: this.sunDirection }, uStrength: { value: 1 } },
-      vertexShader: sphereVertex,
-      fragmentShader: /* glsl */ `
-        varying vec3 vNormal;
-        varying vec3 vWorld;
-        uniform vec3 uSun;
-        uniform float uStrength;
-        void main() {
-          vec3 normal = normalize(vNormal);
-          vec3 view = normalize(cameraPosition - vWorld);
-          float facing = abs(dot(normal, view));
-          float rim = pow(1.0 - facing, 6.0) * smoothstep(0.0, 0.08, facing);
-          float sun = dot(normal, uSun);
-          float day = smoothstep(-0.3, 0.25, sun);
-          float twilight = exp(-abs(sun) * 12.0);
-          vec3 blue = mix(vec3(0.008, 0.025, 0.09), vec3(0.10, 0.38, 0.90), day);
-          vec3 color = mix(blue, vec3(0.74, 0.20, 0.055), twilight * 0.6);
-          float alpha = rim * (0.22 + day * 0.48) * uStrength;
-          gl_FragColor = vec4(color, alpha);
-          #include <colorspace_fragment>
-        }
-      `,
-      transparent: true,
-      side: THREE.BackSide,
-      depthWrite: false,
-      depthTest: true,
-      blending: THREE.AdditiveBlending,
-      toneMapped: false,
-    });
-    const atmosphere = new THREE.Mesh(
-      new THREE.SphereGeometry(EARTH_RADIUS + 0.18, 192, 128),
-      this.atmosphereMaterial,
-    );
-    atmosphere.name = 'Thin atmospheric limb';
-    atmosphere.renderOrder = -6;
-    this.earth.add(atmosphere);
+    // The controller owns the final camera pose, and can overwrite it after
+    // update(). Read the actual render camera here, immediately before drawing.
+    planet.onBeforeRender = (_renderer, _scene, renderCamera) => {
+      renderCamera.getWorldPosition(this.planetMaterial.uniforms.uEye.value);
+      this.planetMaterial.uniforms.uCameraWorld.value.copy(
+        renderCamera.matrixWorld,
+      );
+      this.planetMaterial.uniforms.uInverseProjection.value.copy(
+        renderCamera.projectionMatrixInverse,
+      );
+      this.earth.updateMatrixWorld(true);
+      this.planetMaterial.uniforms.uWorldToEarth.value
+        .setFromMatrix4(this.earth.matrixWorld)
+        .invert();
+    };
+    this.scene.add(planet);
 
     // Align the geographical latitude/longitude of Vancouver with local up.
     const latitude = radians(49.2827);
@@ -611,15 +532,32 @@ export class RocketSpace {
         varying vec3 vNormal;
         uniform vec3 uSun;
         ${noiseGLSL}
+        float craters(vec3 p) {
+          float relief = 0.0;
+          for (int i = 0; i < 18; i++) {
+            float index = float(i);
+            vec3 center = normalize(vec3(
+              hash31(vec3(index, 3.1, 7.2)),
+              hash31(vec3(index, 9.7, 2.4)),
+              hash31(vec3(index, 5.3, 1.9))) * 2.0 - 1.0);
+            float radius = 0.045 + hash31(vec3(index, 7.1, 3.9)) * 0.09;
+            float distanceToCenter = length(p - center) / radius;
+            float bowl = 1.0 - smoothstep(0.20, 0.94, distanceToCenter);
+            float rim = exp(-pow((distanceToCenter - 0.96) * 9.0, 2.0));
+            relief += rim * 0.16 - bowl * 0.12;
+          }
+          return relief;
+        }
         void main() {
           vec3 p = normalize(vLocal);
           float mares = smoothstep(0.33, 0.62, fbm(p * 5.2));
           float detail = noise3(p * 150.0);
-          float crater = pow(abs(sin(p.x * 89.0 + sin(p.z * 67.0)) * sin(p.y * 91.0)), 15.0);
-          vec3 albedo = mix(vec3(0.18, 0.19, 0.205), vec3(0.46, 0.45, 0.42), mares);
-          albedo *= 0.86 + detail * 0.22 - crater * 0.13;
+          vec3 albedo = mix(vec3(0.20, 0.21, 0.225), vec3(0.52, 0.51, 0.48), mares);
+          albedo *= 0.86 + detail * 0.22 + craters(p);
           float light = max(dot(normalize(vNormal), uSun), 0.0);
-          gl_FragColor = vec4(albedo * (0.018 + light * 1.8), 1.0);
+          // A modest Earthshine floor keeps the dark lunar disc legible in the
+          // observation view; direct illumination still follows the same Sun.
+          gl_FragColor = vec4(albedo * (0.065 + light * 1.9), 1.0);
           #include <tonemapping_fragment>
           #include <colorspace_fragment>
         }
@@ -634,6 +572,13 @@ export class RocketSpace {
       moonMaterial,
     );
     this.moon.name = 'Moon — approximately 0.52 degree apparent diameter';
+    this.moon.userData = {
+      celestialBody: 'moon',
+      angularDiameterDegrees: 0.518,
+      radiusUnits: moonRadius,
+      focusFovDegrees: 12,
+      surface: 'procedural-craters-and-maria',
+    };
     this.moon.position.copy(this.moonDirection).multiplyScalar(moonDistance);
     this.moon.renderOrder = -20;
     this.scene.add(this.moon);
@@ -641,9 +586,33 @@ export class RocketSpace {
     const sunlight = new THREE.DirectionalLight(0xfff3dc, 3.0);
     sunlight.name = 'Sunlight — shares the planetary shader direction';
     sunlight.position.copy(this.sunDirection).multiplyScalar(10);
-    const earthshine = new THREE.HemisphereLight(0xb8d9ff, 0x090d18, 0.65);
-    earthshine.name = 'Soft Earth and cabin fill';
-    this.scene.add(sunlight, sunlight.target, earthshine);
+    const earthshine = new THREE.HemisphereLight(0xdce8f3, 0x547496, 1.15);
+    earthshine.name = 'Soft Earth bounce';
+    const ambient = new THREE.AmbientLight(0xe6ecf4, 0.38);
+    ambient.name = 'Space vehicle readability fill';
+    const cameraFill = new THREE.DirectionalLight(0xeaf1ff, 0.85);
+    cameraFill.name = 'Soft camera-side vehicle fill';
+    // Standard-material vehicles need a little reflected light in this
+    // environment without an HDR map. Keep a gentle shape-defining fill on the
+    // actual render camera's upper right; the Sun and planetary shaders retain
+    // their common physical direction. Scene callbacks run before opaque
+    // vehicle rendering, unlike the transparent planet's draw callback.
+    this.scene.onBeforeRender = (_renderer, _scene, renderCamera) => {
+      cameraFill.position
+        .set(0.6, 0.8, 1)
+        .applyMatrix4(renderCamera.matrixWorld);
+      renderCamera.getWorldPosition(cameraFill.target.position);
+      cameraFill.updateMatrixWorld();
+      cameraFill.target.updateMatrixWorld();
+    };
+    this.scene.add(
+      sunlight,
+      sunlight.target,
+      earthshine,
+      ambient,
+      cameraFill,
+      cameraFill.target,
+    );
 
     this.ownedRoots.push(...this.scene.children);
     this.update(15_000, 0, 1, false);
@@ -667,6 +636,7 @@ export class RocketSpace {
       Number.isFinite(elapsedSeconds) ? elapsedSeconds : 0,
     );
     const altitudeKm = altitude / 1000;
+    this.altitudeMeters = altitude;
     const air = 1 - THREE.MathUtils.smoothstep(altitudeKm, 15, 90);
     this.earth.position.set(
       0,
@@ -677,11 +647,7 @@ export class RocketSpace {
     // Exposure adaptation: stars emerge gradually; they are subdued beside the bright Earth.
     this.starMaterial.uniforms.uOpacity.value =
       THREE.MathUtils.smoothstep(altitudeKm, 28, 105) * 0.86;
-    // While the observer is inside this shell the sky shader supplies scattering;
-    // reveal the geometric limb only after the camera has climbed outside it.
-    this.atmosphereMaterial.uniforms.uStrength.value =
-      THREE.MathUtils.smoothstep(altitudeKm, 24, 70);
-    this.cloudsMaterial.uniforms.uTime.value = time;
+    this.planetMaterial.uniforms.uTime.value = time;
 
     const nextAspect = Number.isFinite(aspect) && aspect > 0 ? aspect : 1;
     const nextFov = firstPerson ? 65 : 58;
@@ -714,9 +680,45 @@ export class RocketSpace {
     this.sun.lookAt(this.camera.position);
   }
 
+  /** Camera-only observation hint; does not rotate or move the simulated rocket. */
+  getCelestialFocus(body: RocketCelestialBody): RocketCelestialFocus {
+    const object = body === 'sun' ? this.sun : this.moon;
+    const target = object.position.clone();
+    return {
+      target,
+      direction: target
+        .clone()
+        .sub(this.camera.getWorldPosition(new THREE.Vector3()))
+        .normalize(),
+      fovDegrees: body === 'sun' ? 18 : 12,
+      angularDiameterDegrees: body === 'sun' ? 0.533 : 0.518,
+    };
+  }
+
+  /** A target just below the analytic horizon, suitable for a 55–58 degree Earth view. */
+  getHorizonTarget(target = new THREE.Vector3()): THREE.Vector3 {
+    const eye = this.camera.getWorldPosition(new THREE.Vector3());
+    const height =
+      Math.max(1, this.altitudeMeters) * ROCKET_SPACE_METERS_TO_UNITS;
+    const radius = EARTH_RADIUS + height;
+    const depression = Math.acos(
+      THREE.MathUtils.clamp(EARTH_RADIUS / radius, 0, 1),
+    );
+    const pitch = -depression - radians(4);
+    const distance = Math.max(
+      2,
+      Math.sqrt(radius * radius - EARTH_RADIUS * EARTH_RADIUS),
+    );
+    return target
+      .set(0, Math.sin(pitch), -Math.cos(pitch))
+      .multiplyScalar(distance)
+      .add(eye);
+  }
+
   dispose(): void {
     if (this.disposed) return;
     this.disposed = true;
+    this.scene.onBeforeRender = () => {};
     const geometries = new Set<THREE.BufferGeometry>();
     const materials = new Set<THREE.Material>();
     for (const root of this.ownedRoots) {
@@ -793,6 +795,13 @@ export class RocketSpace {
     const angularRadius = radians(0.533 / 2);
     const radius = Math.tan(angularRadius) * distance;
     this.sun.name = 'Sun — approximately 0.53 degree apparent diameter';
+    this.sun.userData = {
+      celestialBody: 'sun',
+      angularDiameterDegrees: 0.533,
+      radiusUnits: radius,
+      focusFovDegrees: 18,
+      haloAngularDiameterDegrees: 3.2,
+    };
     this.sun.position.copy(this.sunDirection).multiplyScalar(distance);
     const material = new THREE.ShaderMaterial({
       vertexShader: /* glsl */ `
@@ -806,10 +815,14 @@ export class RocketSpace {
         varying vec2 vUv;
         void main() {
           float r = length(vUv - 0.5) * 2.0;
-          float disk = 1.0 - smoothstep(0.158, 0.17, r);
-          float halo = exp(-r * 12.0) * 0.35 + exp(-r * 4.0) * 0.035;
-          vec3 color = vec3(1.0, 0.91, 0.70) * disk + vec3(1.0, 0.60, 0.23) * halo;
-          gl_FragColor = vec4(color, max(disk, halo));
+          float aa = max(fwidth(r), 0.0005);
+          float disk = 1.0 - smoothstep(1.0 / 6.0 - aa, 1.0 / 6.0 + aa, r);
+          float halo = (exp(-r * 8.0) * 0.55 + exp(-r * 3.4) * 0.065)
+            * (1.0 - smoothstep(0.88, 1.0, r));
+          vec3 color = mix(vec3(1.0, 0.65, 0.30), vec3(1.0, 0.96, 0.83), disk);
+          // Additive blending already multiplies by alpha; keep halo radiance
+          // out of RGB so the glow is not accidentally attenuated a second time.
+          gl_FragColor = vec4(color, min(1.0, disk + halo));
           #include <colorspace_fragment>
         }
       `,
@@ -824,6 +837,11 @@ export class RocketSpace {
       material,
     );
     sprite.renderOrder = -30;
+    sprite.onBeforeRender = (_renderer, _scene, renderCamera) => {
+      renderCamera.getWorldPosition(this.sunEye);
+      this.sun.lookAt(this.sunEye);
+      this.sun.updateMatrixWorld(true);
+    };
     this.sun.add(sprite);
   }
 }
