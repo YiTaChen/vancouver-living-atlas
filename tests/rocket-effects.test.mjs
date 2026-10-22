@@ -4,7 +4,9 @@ import * as THREE from 'three';
 import { cityModule } from './helpers/city-modules.mjs';
 
 const { RocketEffects } = await import(cityModule('rocket-effects'));
-const { createRocket } = await import(cityModule('rocket-state'));
+const { createRocket, stepRocket, launchRocket } = await import(
+  cityModule('rocket-state')
+);
 function fixture(count = 2) {
   const vertices = [],
     colors = [],
@@ -74,6 +76,23 @@ function fixture(count = 2) {
 }
 function heat(effects, state, seconds = 3) {
   for (let i = 0; i < seconds * 10; i++) effects.update(0.1, state);
+}
+function visibleParticles(effects) {
+  const points = effects.group.children.find(
+      (object) => object instanceof THREE.Points,
+    ),
+    position = points.geometry.getAttribute('position'),
+    life = points.geometry.getAttribute('aLife'),
+    active = [];
+  for (let i = 0; i < life.count; i++)
+    if (life.getX(i) !== 0)
+      active.push({
+        x: position.getX(i),
+        y: position.getY(i),
+        z: position.getZ(i),
+        hot: life.getX(i) > 1,
+      });
+  return active;
 }
 test('local building damage uploads only changed vertex ranges, preserves distant buildings and resets exactly', () => {
   const { engine, state, mesh } = fixture();
@@ -242,6 +261,349 @@ test('a dense forest prioritizes nearby hot trees before applying the visual bud
   assert(
     effects.burning >= 1,
     'the tree next to the nozzle burns even if distant source records occur first',
+  );
+  effects.dispose();
+});
+
+test('a failed roof visibly sags before a 2.6-second floor collapse and its collider follows the rendered roof', () => {
+  const { engine, mesh } = fixture();
+  const state = createRocket('large', 5, 10, 0, {
+    kind: 'roof-small',
+    groundY: 0,
+  });
+  state.phase = 'falling';
+  state.supportCollapsed = true;
+  const effects = new RocketEffects(engine, state),
+    position = mesh.geometry.getAttribute('position'),
+    original = Array.from(position.array),
+    rubble = effects.group.getObjectByName(
+      'Rocket building debris (64 slot limit)',
+    ),
+    heights = [],
+    counts = [];
+  for (const elapsed of [0, 1.3, 2.6]) {
+    state.supportCollapseElapsed = elapsed;
+    // Physics may ask before the next visual tick and must get this frame's top.
+    const collision = effects.supportCollisionHeight(5, 0, state);
+    effects.update(1 / 60, state);
+    effects.beforeRender();
+    effects.afterRender();
+    heights.push(position.getY(2));
+    counts.push(rubble.count);
+    assert(Math.abs(position.getY(2) - collision) < 1e-6);
+  }
+  assert(
+    heights[0] > 9 && heights[0] < 10,
+    'first failure frame sags without flattening the house',
+  );
+  assert(
+    heights[1] > 4 && heights[1] < 6,
+    'floors are visibly settling midway through the collapse',
+  );
+  assert(Math.abs(heights[2] - 0.75) < 1e-6);
+  assert.deepEqual(
+    counts,
+    [2, 4, 7],
+    'rubble falls in a chain instead of appearing all at once',
+  );
+  assert.equal(effects.supportCollisionHeight(200, 0, state), null);
+  assert.deepEqual(Array.from(position.array).slice(18), original.slice(18));
+  effects.reset();
+  assert.deepEqual(Array.from(position.array), original);
+  effects.dispose();
+});
+
+test('a low house finishes its real state-driven collapse after the falling rocket has already impacted', () => {
+  const { engine, mesh } = fixture(),
+    position = mesh.geometry.getAttribute('position');
+  engine.data.rocketBuildingParts[0].maxY = 2;
+  position.setY(2, 2);
+  position.setY(5, 2);
+  const original = Array.from(position.array);
+  let state = createRocket('large', 5, 2.45, 0, {
+    kind: 'roof-small',
+    groundY: 0,
+    seed: 13,
+  });
+  while (state.phase === 'building') state = stepRocket(state, {}, 1 / 60);
+  const effects = new RocketEffects(engine, state);
+  state = launchRocket(state, 'auto');
+  while (state.phase !== 'crashed' && state.elapsed < 60) {
+    state = stepRocket(state, {}, 1 / 60);
+    effects.update(1 / 60, state);
+  }
+  assert.equal(state.phase, 'crashed');
+  assert(
+    state.supportCollapsed && state.supportCollapseElapsed < 2.6,
+    'this real low-roof impact must precede completion of the collapse',
+  );
+  effects.beforeRender();
+  effects.afterRender();
+  assert(position.getY(2) > 0.15);
+  for (let i = 0; i < 300; i++) {
+    state = stepRocket(state, {}, 1 / 60);
+    effects.update(1 / 60, state);
+  }
+  effects.beforeRender();
+  effects.afterRender();
+  assert(state.supportCollapseElapsed >= 2.6);
+  assert(
+    Math.abs(position.getY(2) - 0.15) < 1e-6,
+    'impact must not freeze a partially collapsed house',
+  );
+  assert(
+    Math.abs(effects.supportCollisionHeight(5, 0, state) - position.getY(2)) <
+      1e-6,
+  );
+  effects.reset();
+  assert.deepEqual(Array.from(position.array), original);
+  effects.dispose();
+});
+
+test('forest heat follows the nearby vehicle body in three dimensions and cannot ignite a distant or high vehicle', () => {
+  const { engine, state } = fixture();
+  engine.detailedTrees.trees.push({
+    x: 3,
+    y: 0,
+    z: 0,
+    h: 12,
+    conifer: true,
+    seed: 1,
+    slots: [],
+  });
+  const effects = new RocketEffects(engine, state);
+  assert.equal(effects.sampleVehicleHeat(state), 0);
+  heat(effects, state, 3);
+  const burning = effects.burning;
+  assert(effects.sampleVehicleHeat(state) > 0.8);
+  const far = structuredClone(state);
+  far.position.x = 200;
+  assert.equal(effects.sampleVehicleHeat(far), 0);
+  const high = structuredClone(state);
+  high.position.y = 200;
+  assert.equal(effects.sampleVehicleHeat(high), 0);
+  const tilted = structuredClone(state);
+  tilted.position = { x: 35, y: 6, z: 0 };
+  tilted.attitude.roll = -Math.PI / 2;
+  assert(
+    effects.sampleVehicleHeat(tilted) > 0.95,
+    'a horizontal fuel tank beside the tree is exposed even when its nozzle is far away',
+  );
+  assert.equal(
+    effects.burning,
+    burning,
+    'sampling does not mutate the fire simulation',
+  );
+  effects.reset();
+  assert.equal(effects.sampleVehicleHeat(state), 0);
+  effects.dispose();
+});
+
+test('impact effects scale with speed and never substitute a fuel explosion for a crash', () => {
+  function sample(speed, withEvent = true) {
+    const { engine, state } = fixture();
+    state.phase = 'crashed';
+    state.throttle = 0;
+    const effects = new RocketEffects(engine, state);
+    if (withEvent)
+      state.events = [
+        {
+          id: 1,
+          type: 'impact',
+          time: 0,
+          position: { x: 80, y: 120, z: 40 },
+          magnitude: speed,
+        },
+      ];
+    effects.update(0, state);
+    const particles = visibleParticles(effects);
+    effects.dispose();
+    return particles;
+  }
+  assert.equal(
+    sample(100, false).length,
+    0,
+    'a crashed phase alone does not create an explosion',
+  );
+  const gentle = sample(8),
+    hard = sample(90);
+  assert(gentle.length < hard.length);
+  assert.equal(gentle.filter((p) => p.hot).length, 0);
+  assert(
+    hard.filter((p) => p.hot).length <= 6,
+    'hard impact emits a few sparks, not a fireball',
+  );
+  assert(hard.every((p) => p.x === 80 && p.y === 120.5 && p.z === 40));
+});
+
+test('an explicit delayed explosion uses the moving wreckage anchor once, including an airborne burnup', () => {
+  const { engine, state } = fixture();
+  state.phase = 'crashed';
+  state.throttle = 0;
+  state.elapsed = 2;
+  state.wreckage = {
+    time: 0,
+    position: { x: 100, y: 1200, z: 300 },
+    velocity: { x: 10, y: 20, z: 0 },
+    attitude: { pitch: 0, roll: 0 },
+    angularVelocity: { pitch: 0, roll: 0 },
+    cause: 'fire',
+    exploded: true,
+    explosionDelay: 0.8,
+    explosionTime: 2,
+  };
+  const effects = new RocketEffects(engine, state),
+    anchor = new THREE.Vector3(140, 1170, 310);
+  state.events = [
+    {
+      id: 1,
+      type: 'exploded',
+      time: 2,
+      position: { x: 100, y: 1200, z: 300 },
+      magnitude: 1,
+    },
+  ];
+  effects.update(0, state, anchor);
+  const first = visibleParticles(effects);
+  assert(first.filter((p) => p.hot).length > 50);
+  assert(first.every((p) => p.x === 140 && p.y === 1170 && p.z === 310));
+  effects.update(0, state, anchor);
+  assert.deepEqual(
+    visibleParticles(effects),
+    first,
+    'a persistent event log must not replay the burst',
+  );
+  effects.dispose();
+  const fallback = new RocketEffects(engine, { ...state, events: [] });
+  fallback.update(0, state);
+  assert(
+    visibleParticles(fallback).every(
+      (p) => p.x === 120 && Math.abs(p.y - 1220.38) < 0.001,
+    ),
+  );
+  fallback.dispose();
+});
+
+test('a recreated effects consumer skips historical impact and explosion bursts while preserving sustained onboard fire', () => {
+  const { engine, state } = fixture();
+  state.phase = 'crashed';
+  state.throttle = 0;
+  state.elapsed = 12;
+  state.wreckage = {
+    time: 1,
+    position: { x: 20, y: 0, z: 30 },
+    velocity: { x: 0, y: 0, z: 0 },
+    attitude: { pitch: 0, roll: 0 },
+    angularVelocity: { pitch: 0, roll: 0 },
+    cause: 'impact',
+    exploded: true,
+    explosionDelay: 0.8,
+    explosionTime: 2,
+  };
+  state.events = [
+    {
+      id: 1,
+      type: 'impact',
+      time: 1,
+      position: { x: 20, y: 0, z: 30 },
+      magnitude: 80,
+    },
+    {
+      id: 2,
+      type: 'exploded',
+      time: 2,
+      position: { x: 20, y: 0, z: 30 },
+      magnitude: 1,
+    },
+  ];
+  const effects = new RocketEffects(engine, state);
+  effects.update(0, state);
+  assert.equal(
+    visibleParticles(effects).length,
+    0,
+    'repair/reload must not replay a ten-second-old fireball or impact smoke',
+  );
+  state.fireIntensity = 0.6;
+  effects.update(0.2, state, new THREE.Vector3(20, 2, 30));
+  const fire = visibleParticles(effects);
+  assert(
+    fire.length >= 8 && fire.length < 20,
+    'current onboard fire continues without the historical explosion burst',
+  );
+  assert(
+    fire.some((particle) => particle.hot) &&
+      fire.some((particle) => !particle.hot),
+  );
+  effects.dispose();
+});
+
+test('repairing the city after a real roof impact preserves the repaired mesh instead of collapsing it again', () => {
+  const { engine, mesh } = fixture(),
+    position = mesh.geometry.getAttribute('position'),
+    color = mesh.geometry.getAttribute('color');
+  engine.data.rocketBuildingParts[0].maxY = 2;
+  position.setY(2, 2);
+  position.setY(5, 2);
+  const original = Array.from(position.array),
+    originalColor = Array.from(color.array);
+  let state = createRocket('large', 5, 2.45, 0, {
+    kind: 'roof-small',
+    groundY: 0,
+    seed: 13,
+  });
+  while (state.phase === 'building') state = stepRocket(state, {}, 1 / 60);
+  const effects = new RocketEffects(engine, state);
+  state = launchRocket(state, 'auto');
+  while (state.phase !== 'crashed' && state.elapsed < 60) {
+    state = stepRocket(state, {}, 1 / 60);
+    effects.update(1 / 60, state);
+  }
+  assert(state.wreckage && state.supportCollapsed);
+  effects.beforeRender();
+  effects.afterRender();
+  assert.notDeepEqual(Array.from(position.array), original);
+  effects.dispose();
+  const repaired = new RocketEffects(engine, state);
+  state.fireIntensity = 0.7;
+  repaired.update(0.2, state, new THREE.Vector3(5, 2, 0));
+  repaired.beforeRender();
+  repaired.afterRender();
+  assert.deepEqual(Array.from(position.array), original);
+  assert.deepEqual(Array.from(color.array), originalColor);
+  assert.equal(repaired.damaged, 0);
+  assert.equal(repaired.debris, 0);
+  assert.equal(
+    repaired.supportCollisionHeight(5, 0, state),
+    null,
+    'a repaired city has no stale collapsed-roof collider override',
+  );
+  assert(
+    visibleParticles(repaired).length > 0,
+    'repair does not suppress the still-burning wreckage',
+  );
+  assert(
+    state.supportCollapsed,
+    'repair must preserve the historical failure snapshot',
+  );
+  repaired.dispose();
+});
+
+test('vehicle fire persists while flying and emits around the actual tilted body rather than the launch point', () => {
+  const { engine, state } = fixture();
+  state.phase = 'aborted';
+  state.throttle = 0;
+  state.fireIntensity = 0.8;
+  state.position = { x: 100, y: 200, z: 300 };
+  state.attitude.roll = Math.PI / 2;
+  const effects = new RocketEffects(engine, state);
+  effects.update(0.2, state);
+  const particles = visibleParticles(effects);
+  assert(particles.length >= 10);
+  assert(particles.some((p) => p.hot) && particles.some((p) => !p.hot));
+  assert(
+    particles.every(
+      (p) => p.x > 100 && Math.abs(p.y - 200) < 8 && Math.abs(p.z - 300) < 5,
+    ),
   );
   effects.dispose();
 });

@@ -52,6 +52,7 @@ const en = {
   flight: 'Ascent',
   space: 'Space reached',
   sinking: 'Foundation lost · sinking',
+  falling: 'Uncontrolled descent',
   crashed: 'Rocket lost',
   aborted: 'Launch aborted',
   abort: 'Abort launch',
@@ -154,6 +155,13 @@ const en = {
   focusSun: 'Sun',
   focusMoon: 'Moon',
   missionDetails: 'Mission details',
+  accidentObservation: 'Accident sequence',
+  impact: 'Impact',
+  fireFailure: 'Vehicle fire / explosion',
+  aerodynamicFailure: 'Aerodynamic loss of control',
+  vehicleFire: 'Rocket on fire',
+  vehicleHeat: 'Vehicle heat',
+  afterImpact: 'After impact / explosion',
 } as const;
 
 type RocketTextKey = keyof typeof en;
@@ -181,6 +189,7 @@ const zh: Record<RocketTextKey, string> = {
   flight: '升空中',
   space: '抵達太空',
   sinking: '失去地基支撐 · 下沉中',
+  falling: '失控下墜',
   crashed: '火箭墜毀',
   aborted: '發射已中止',
   abort: '中止發射',
@@ -272,6 +281,13 @@ const zh: Record<RocketTextKey, string> = {
   focusSun: '太陽',
   focusMoon: '月球',
   missionDetails: '任務詳細資料',
+  accidentObservation: '事故過程',
+  impact: '撞擊',
+  fireFailure: '箭體起火／爆炸',
+  aerodynamicFailure: '氣動失控',
+  vehicleFire: '箭體起火',
+  vehicleHeat: '箭體溫度',
+  afterImpact: '撞擊／爆炸後',
 };
 
 /** New rocket strings fall back to English for the app's other locales. */
@@ -359,7 +375,26 @@ export function RocketControls({
   )[state.stage || 'boost'];
   const detailsOpen =
     missionDetails.missionId === state.missionId && missionDetails.open;
-  const failed = ['crashed', 'sinking', 'aborted'].includes(state.phase);
+  const failureAge = Math.max(0, state.failureAge ?? 0);
+  const wreckage = state.failureStage === 'wreckage';
+  const failed =
+    wreckage || ['crashed', 'sinking', 'aborted'].includes(state.phase);
+  const observingAccident =
+    state.phase === 'falling' ||
+    state.failureStage === 'support-collapse' ||
+    state.failureStage === 'freefall' ||
+    (wreckage && failureAge < 5);
+  const recoveryReady = wreckage && failureAge >= 5;
+  const failureCause: RocketTextKey =
+    state.failureCause === 'fire'
+      ? 'fireFailure'
+      : state.failureCause === 'aerodynamic'
+        ? 'aerodynamicFailure'
+        : 'impact';
+  const foundationFailure =
+    state.failureStage === 'support-collapse' ||
+    (state.supportIntegrity <= 0 &&
+      ['roof-small', 'roof-large', 'lake'].includes(state.support));
   const previewSupport =
     state.placing &&
     [
@@ -400,17 +435,19 @@ export function RocketControls({
       : Math.round(state.altitude).toLocaleString(locale);
   const altitudeUnit = state.altitude >= 1000 ? 'km' : 'm';
   const showPanel =
-    !minimal &&
-    panelVisible &&
+    !observingAccident &&
     state.active &&
     state.phase !== 'space' &&
     !state.placing &&
     !choosing &&
-    (state.phase === 'building' ||
-      state.phase === 'ready' ||
-      failed ||
-      optionsOpen ||
-      !touch);
+    (recoveryReady ||
+      (!minimal &&
+        panelVisible &&
+        (state.phase === 'building' ||
+          state.phase === 'ready' ||
+          failed ||
+          optionsOpen ||
+          !touch)));
   const choose = (kind: 'small' | 'large') => {
     onChoose(kind);
   };
@@ -482,7 +519,7 @@ export function RocketControls({
       )}
       {showPanel && (
         <section
-          className={`rocket-panel glass ui-chrome ${touch && optionsOpen ? 'mobile-travel-sheet' : ''} ${compactPreflight ? 'rocket-preflight-compact' : ''}`}
+          className={`rocket-panel glass ui-chrome ${recoveryReady ? 'rocket-failure-panel' : ''} ${touch && optionsOpen ? 'mobile-travel-sheet' : ''} ${compactPreflight ? 'rocket-preflight-compact' : ''}`}
           aria-label={t('rocket')}
         >
           <header>
@@ -571,7 +608,7 @@ export function RocketControls({
           {failed && (
             <div className="rocket-risk">
               <AlertTriangle size={16} />
-              <span>{t(risk)}</span>
+              <span>{t(wreckage ? failureCause : risk)}</span>
             </div>
           )}
           {state.phase === 'ready' && (
@@ -736,6 +773,7 @@ export function RocketControls({
       {state.active && !state.placing && !choosing && (
         <>
           {!showPanel &&
+            !observingAccident &&
             state.phase !== 'space' &&
             (panelVisible || minimal) && (
               <section
@@ -790,34 +828,36 @@ export function RocketControls({
                 )}
               </section>
             )}
-          {['ignition', 'flight'].includes(state.phase) && !minimal && (
-            <section
-              className={`rocket-stage-status glass ${manualFlight ? 'rocket-stage-manual' : ''} ${state.stage === 'separating' ? 'separating' : ''}`}
-              aria-label={t('stageFuel')}
-            >
-              <header>
-                <output aria-live="polite">{t(stageLabel)}</output>
-                {state.stage !== 'separating' && state.stage !== 'coast' && (
-                  <span>
-                    {Math.round(
-                      Math.max(0, Math.min(1, state.stageFuel)) * 100,
-                    )}
-                    %
-                  </span>
+          {['ignition', 'flight'].includes(state.phase) &&
+            !minimal &&
+            !observingAccident && (
+              <section
+                className={`rocket-stage-status glass ${manualFlight ? 'rocket-stage-manual' : ''} ${state.stage === 'separating' ? 'separating' : ''}`}
+                aria-label={t('stageFuel')}
+              >
+                <header>
+                  <output aria-live="polite">{t(stageLabel)}</output>
+                  {state.stage !== 'separating' && state.stage !== 'coast' && (
+                    <span>
+                      {Math.round(
+                        Math.max(0, Math.min(1, state.stageFuel)) * 100,
+                      )}
+                      %
+                    </span>
+                  )}
+                </header>
+                {state.stage === 'separating' ? (
+                  <small>{t('separationHint')}</small>
+                ) : (
+                  <progress
+                    aria-label={t('stageFuel')}
+                    value={state.stageFuel}
+                    max={1}
+                  />
                 )}
-              </header>
-              {state.stage === 'separating' ? (
-                <small>{t('separationHint')}</small>
-              ) : (
-                <progress
-                  aria-label={t('stageFuel')}
-                  value={state.stageFuel}
-                  max={1}
-                />
-              )}
-            </section>
-          )}
-          {!minimal && state.phase !== 'space' && (
+              </section>
+            )}
+          {!minimal && !observingAccident && state.phase !== 'space' && (
             <section
               className={`rocket-telemetry glass ${manualFlight ? 'rocket-manual-telemetry' : ''}`}
               aria-label={t('title')}
@@ -875,7 +915,7 @@ export function RocketControls({
               </div>
             </section>
           )}
-          {manualFlight && canInput && (
+          {manualFlight && canInput && !observingAccident && (
             <section className="rocket-attitude" aria-label={t('attitude')}>
               <div className="rocket-attitude-reticle" aria-hidden="true">
                 <span
@@ -901,19 +941,20 @@ export function RocketControls({
               </div>
             </section>
           )}
-          {state.phase === 'countdown' && (
+          {state.phase === 'countdown' && !observingAccident && (
             <output className="rocket-countdown" aria-live="assertive">
               <strong>{Math.max(1, Math.ceil(state.countdown))}</strong>
               <span>{t('countdown')}</span>
             </output>
           )}
-          {state.phase === 'ignition' && (
+          {state.phase === 'ignition' && !observingAccident && (
             <output className="rocket-countdown">
               <Flame size={50} />
               <span>{t('ignition')}</span>
             </output>
           )}
           {canInput &&
+            !observingAccident &&
             !state.auto &&
             ['ready', 'countdown', 'ignition', 'flight'].includes(
               state.phase,
@@ -939,7 +980,7 @@ export function RocketControls({
                 {!touch && <kbd>R / F</kbd>}
               </section>
             )}
-          {touch && manualFlight && canInput && (
+          {touch && manualFlight && canInput && !observingAccident && (
             <TravelJoystick
               mode="walk"
               label={t('touchHint')}
@@ -948,10 +989,59 @@ export function RocketControls({
               onBrake={noop}
             />
           )}
+          {observingAccident && (
+            <section
+              className="rocket-accident-observation"
+              aria-label={t('accidentObservation')}
+            >
+              <output>
+                <strong>
+                  {t(
+                    state.failureStage === 'support-collapse'
+                      ? 'supportLost'
+                      : wreckage || state.failureCause
+                        ? failureCause
+                        : 'falling',
+                  )}
+                </strong>
+              </output>
+              <div className="rocket-accident-timeline">
+                {foundationFailure && (
+                  <>
+                    <span>{t('supportLost')}</span>
+                    <span aria-hidden="true">→</span>
+                  </>
+                )}
+                <span
+                  className={state.failureStage === 'freefall' ? 'current' : ''}
+                >
+                  {t(
+                    state.failureCause === 'fire'
+                      ? 'vehicleFire'
+                      : state.failureCause === 'aerodynamic'
+                        ? 'aerodynamicFailure'
+                        : 'falling',
+                  )}
+                </span>
+                <span aria-hidden="true">→</span>
+                <span className={wreckage ? 'current' : ''}>
+                  {t(state.failureCause === 'fire' ? 'fireFailure' : 'impact')}
+                </span>
+              </div>
+              {wreckage && (
+                <small>
+                  {t('afterImpact')} · {failureAge.toFixed(1)} s
+                </small>
+              )}
+            </section>
+          )}
           {state.phase === 'flight' &&
-            (state.fuel < 0.15 || state.tilt > 35) && (
+            !observingAccident &&
+            (state.vehicleFire > 0 || state.fuel < 0.15 || state.tilt > 35) && (
               <output className="rocket-alert glass">
-                {t(state.tilt > 35 ? 'unstable' : 'lowFuel')}
+                {state.vehicleFire > 0
+                  ? `${t('vehicleFire')} · ${t('vehicleHeat')} ${Math.round(state.vehicleHeat * 100)}%`
+                  : t(state.tilt > 35 ? 'unstable' : 'lowFuel')}
               </output>
             )}
           {state.phase === 'space' && (panelVisible || minimal) && (

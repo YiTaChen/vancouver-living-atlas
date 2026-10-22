@@ -5,6 +5,7 @@ import {
   type RocketKind,
   type RocketState,
 } from '../rocket-state';
+import { RocketWreckageVisual } from './rocket-wreckage';
 
 /** Original reusable meshes. Dimensions are authored gameplay dimensions, not a real vehicle blueprint. */
 export function createRocketModel(kind: RocketKind) {
@@ -176,6 +177,50 @@ export function createRocketModel(kind: RocketKind) {
   const light = new THREE.PointLight(0xffa345, 0, large ? 180 : 65, 1.5);
   light.position.y = 1;
   group.add(light);
+  const wreckage = new RocketWreckageVisual(kind, group, segments, upperEngine);
+  // Attached to real shell sections, so onboard fire survives breakup and the
+  // floating-origin space handoff without rendering ground trees through Earth.
+  const fireMaterial = new THREE.MeshBasicMaterial({
+    color: 0xffa127,
+    transparent: true,
+    opacity: 0,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
+    side: THREE.DoubleSide,
+  });
+  const bodyFlames = segments.map((segment, i) => {
+    const mesh = new THREE.Mesh(
+      new THREE.ConeGeometry(r * 0.7, h * 0.16, 7),
+      fireMaterial,
+    );
+    mesh.name = 'Attached onboard fire';
+    const angle = i * 2.399;
+    mesh.position.set(
+      Math.sin(angle) * r,
+      h * (i < 5 ? 0.14 + i * 0.14 : 0.85),
+      Math.cos(angle) * r,
+    );
+    mesh.rotation.z = 0.2 * Math.sin(angle);
+    mesh.visible = false;
+    segment.add(mesh);
+    return mesh;
+  });
+  const blastMaterial = new THREE.MeshBasicMaterial({
+    color: 0xffba56,
+    transparent: true,
+    opacity: 0,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
+  });
+  const blast = new THREE.Mesh(
+    new THREE.SphereGeometry(1, 20, 12),
+    blastMaterial,
+  );
+  blast.name = 'Rocket propellant explosion flash';
+  blast.visible = false;
+  group.add(blast);
+  const scorch = new THREE.Color(0x55483e);
+  const inverse = new THREE.Quaternion();
   return {
     group,
     segments,
@@ -185,6 +230,54 @@ export function createRocketModel(kind: RocketKind) {
     upper,
     height: h,
     radius: r,
+    damage(state: RocketState, surface: (x: number, z: number) => number) {
+      white.color.set(0xe8eced).lerp(scorch, state.fireDamage * 0.8);
+      white.emissive.setRGB(
+        state.fireIntensity * 0.16,
+        state.fireIntensity * 0.018,
+        0,
+      );
+      const center = wreckage.update(state, surface);
+      fireMaterial.opacity = state.fireIntensity * 0.85;
+      bodyFlames.forEach((mesh, i) => {
+        mesh.visible =
+          state.fireIntensity > 0.025 && (state.boosterAttached || i >= 3);
+        mesh.scale.set(
+          0.7 + 0.2 * Math.sin(state.elapsed * 19 + i),
+          0.65 +
+            state.fireIntensity * 0.7 +
+            0.25 * Math.sin(state.elapsed * 27 + i),
+          0.8,
+        );
+      });
+      blast.visible = false;
+      if (
+        state.wreckage?.explosionTime !== null &&
+        state.wreckage?.explosionTime !== undefined
+      ) {
+        const flashAge = state.elapsed - state.wreckage.explosionTime;
+        light.intensity = Math.max(
+          light.intensity,
+          Math.max(0, 1 - flashAge / 0.7) * (large ? 240 : 80),
+        );
+        blast.visible = flashAge >= 0 && flashAge < 1.15;
+        blastMaterial.opacity = Math.max(0, (1 - flashAge / 1.15) * 0.72);
+        blastMaterial.color.set(flashAge < 0.12 ? 0xffefc4 : 0xff862f);
+        blast.scale.setScalar(r * (2.5 + Math.max(0, flashAge) * 8));
+        if (center)
+          blast.position
+            .copy(center)
+            .sub(
+              new THREE.Vector3(
+                state.position.x,
+                state.position.y,
+                state.position.z,
+              ),
+            )
+            .applyQuaternion(inverse.copy(group.quaternion).invert());
+      }
+      return center;
+    },
     build(progress: number) {
       segments.forEach((g, i) => {
         const t = THREE.MathUtils.clamp(progress * segments.length - i, 0, 1);

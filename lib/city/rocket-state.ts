@@ -13,6 +13,26 @@
 export type RocketKind = 'small' | 'large';
 export type RocketMode = 'auto' | 'manual';
 export type RocketStage = 'boost' | 'separating' | 'upper' | 'coast';
+export type RocketFailureStage =
+  | 'none'
+  | 'support-collapse'
+  | 'freefall'
+  | 'wreckage';
+export type RocketDestructionCause = 'impact' | 'fire' | 'aerodynamic';
+export interface RocketWreckage {
+  /** Actual destruction pose and incoming momentum, never zeroed by settling. */
+  time: number;
+  position: RocketVector;
+  velocity: RocketVector;
+  attitude: RocketAttitude;
+  angularVelocity: RocketAttitude;
+  cause: RocketDestructionCause;
+  exploded: boolean;
+  /** Delay from impact to an eligible fuel explosion; null means no explosion. */
+  explosionDelay: number | null;
+  /** Actual explosion timestamp; null until the event has happened. */
+  explosionTime: number | null;
+}
 export interface RocketStageConfig {
   dryMass: number;
   fuelMass: number;
@@ -34,6 +54,7 @@ export type RocketPhase =
   | 'flight'
   | 'space'
   | 'sinking'
+  | 'falling'
   | 'crashed'
   | 'aborted';
 export type RocketSupportKind =
@@ -166,6 +187,8 @@ export const ROCKET_CONFIGS: Readonly<
 };
 export const SPACE_ALTITUDE = 100_000;
 export const ROCKET_FIXED_STEP = 1 / 60;
+/** The structure visibly sags before its remaining supports let go. */
+export const ROCKET_SUPPORT_RELEASE_DELAY = 1.5;
 export const ROCKET_SUPPORT_STRENGTH: Readonly<
   Record<RocketSupportKind, number>
 > = {
@@ -183,6 +206,11 @@ export type RocketEventType =
   | 'ignition'
   | 'liftoff'
   | 'support-collapsed'
+  | 'support-lost'
+  | 'vehicle-ignited'
+  | 'vehicle-extinguished'
+  | 'ruptured'
+  | 'exploded'
   | 'booster-burnout'
   | 'stage-separation'
   | 'upper-ignition'
@@ -197,7 +225,7 @@ export interface RocketEvent {
   type: RocketEventType;
   time: number;
   position: RocketVector;
-  /** Impact speed, or detached dry mass for stage-separation; 0 otherwise. */
+  /** Speed for impact/rupture, separated mass, or normalized thermal severity. */
   magnitude: number;
 }
 export interface RocketState {
@@ -222,6 +250,17 @@ export interface RocketState {
   support: RocketSupport;
   supportIntegrity: number;
   supportCollapsed: boolean;
+  failureStage: RocketFailureStage;
+  /** Seconds since structural collapse began, including the initial sag. */
+  supportCollapseElapsed: number;
+  /** External heating and onboard fire are distinct from exhaust effects. */
+  heat: number;
+  fireIntensity: number;
+  fireElapsed: number;
+  fireDamage: number;
+  /** Seeded material/propellant vulnerability, 0..1. */
+  fireSusceptibility: number;
+  wreckage: RocketWreckage | null;
   fuel: number;
   throttle: number;
   targetThrottle: number;
@@ -256,6 +295,8 @@ export interface RocketInput {
   stabilize?: boolean;
   /** Multiplier for deterministic gusts, defaults to 1 (0 disables wind). */
   windScale?: number;
+  /** Nearby vegetation/vehicle fire heat reaching the body, 0..1. */
+  fireExposure?: number;
   launch?: boolean;
   /** Engine shutdown. Vehicle continues falling until it hits the ground. */
   abort?: boolean;
@@ -282,6 +323,10 @@ const length = (v: RocketVector) => Math.hypot(v.x, v.y, v.z);
 const wrapAngle = (a: number) => Math.atan2(Math.sin(a), Math.cos(a));
 const isRoof = (kind: RocketSupportKind) =>
   kind === 'roof-small' || kind === 'roof-large';
+const seeded = (seed: number, salt: number) => {
+  const value = Math.sin(seed * 12.9898 + salt * 78.233) * 43_758.5453;
+  return value - Math.floor(value);
+};
 const hasEngine = (s: RocketState) =>
   (s.phase === 'ignition' || s.phase === 'flight') &&
   ((s.stage === 'boost' && s.boosterFuel > 0) ||
@@ -336,6 +381,15 @@ function cloneState(s: RocketState): RocketState {
     acceleration: { ...s.acceleration },
     wind: { ...s.wind },
     events: [...s.events],
+    wreckage: s.wreckage
+      ? {
+          ...s.wreckage,
+          position: { ...s.wreckage.position },
+          velocity: { ...s.wreckage.velocity },
+          attitude: { ...s.wreckage.attitude },
+          angularVelocity: { ...s.wreckage.angularVelocity },
+        }
+      : null,
     separation: s.separation
       ? {
           ...s.separation,
@@ -394,6 +448,14 @@ export function createRocket(
     },
     supportIntegrity: 1,
     supportCollapsed: false,
+    failureStage: 'none',
+    supportCollapseElapsed: 0,
+    heat: 0,
+    fireIntensity: 0,
+    fireElapsed: 0,
+    fireDamage: 0,
+    fireSusceptibility: seeded(seed, 1),
+    wreckage: null,
     fuel: config.fuelMass,
     throttle: 0,
     targetThrottle: 1,
@@ -493,25 +555,19 @@ function updateSupport(s: RocketState, dt: number) {
     s.support.kind === 'lake'
       ? 'The lake bed gave way.'
       : 'The launch structure collapsed under the exhaust.';
-  // A real impulse, not an immediate crash or teleport. Recovery remains
-  // physically possible if a pilot acts before the falling vehicle impacts.
-  const sign = Math.sin(s.seed + 0.5) < 0 ? -1 : 1;
-  s.angularVelocity.roll +=
-    sign * (s.kind === 'large' ? 1.1 + overload * 3 : 1.1);
-  s.angularVelocity.pitch += 0.65;
-  s.velocity.y = -2;
-  s.velocity.x += sign * 2.5;
+  // The failing roof first sags, then releases the vehicle into real freefall.
+  // Engine shutdown prevents the enormous booster thrust from concealing the
+  // structural failure by launching out of the collapsing building.
+  s.failureStage = 'support-collapse';
+  s.supportCollapseElapsed = 0;
+  s.throttle = 0;
+  s.stageThrust = 0;
+  s.targetThrottle = 0;
+  s.velocity.y = Math.min(0, s.velocity.y);
+  s.acceleration = { x: 0, y: 0, z: 0 };
+  setStage(s, 'coast');
   addEvent(s, 'support-collapsed');
-  if (s.phase === 'ignition') setPhase(s, 'flight', 'liftoff');
-  else if (
-    s.phase === 'building' ||
-    s.phase === 'ready' ||
-    s.phase === 'countdown'
-  ) {
-    s.throttle = 0;
-    s.targetThrottle = 0;
-    setPhase(s, 'aborted');
-  }
+  setPhase(s, 'falling');
 }
 
 function updateAttitude(
@@ -575,16 +631,143 @@ function crash(
   impactSpeed: number,
   reason: string,
   grounded = true,
+  cause: RocketDestructionCause = 'impact',
 ) {
   if (grounded) s.position.y = s.support.groundY ?? s.origin.y;
+  const fuelFraction = s.fuel / ROCKET_CONFIGS[s.kind].fuelMass;
+  const explosionChance = clamp(
+    0.25 + fuelFraction * 0.55 + Math.min(impactSpeed / 100, 1) * 0.15,
+    0,
+    0.95,
+  );
+  const delayedExplosion =
+    cause !== 'fire' &&
+    fuelFraction > 0.08 &&
+    impactSpeed > 6 &&
+    seeded(s.seed, 2) < explosionChance;
+  const immediateExplosion = cause === 'fire' && fuelFraction > 0.02;
+  s.wreckage = {
+    time: s.elapsed,
+    position: { ...s.position },
+    velocity: { ...s.velocity },
+    attitude: { ...s.attitude },
+    angularVelocity: { ...s.angularVelocity },
+    cause,
+    exploded: immediateExplosion,
+    explosionDelay: delayedExplosion ? 0.65 + seeded(s.seed, 3) * 0.25 : null,
+    explosionTime: immediateExplosion ? s.elapsed : null,
+  };
   s.velocity = { x: 0, y: 0, z: 0 };
   s.throttle = 0;
   s.stageThrust = 0;
   s.targetThrottle = 0;
   s.integrity = 0;
+  s.failureStage = 'wreckage';
   s.failureReason = reason;
   setPhase(s, 'crashed');
-  addEvent(s, 'impact', impactSpeed);
+  if (cause === 'impact') addEvent(s, 'impact', impactSpeed);
+  addEvent(s, 'ruptured', impactSpeed);
+  if (immediateExplosion) addEvent(s, 'exploded', fuelFraction);
+}
+
+/** Heat reaches the rocket only through the caller's external exposure sample. */
+function updateThermal(s: RocketState, input: RocketInput, dt: number) {
+  const exposure = clamp(finite(input.fireExposure, 0), 0, 1);
+  const vulnerability = s.fireSusceptibility;
+  const airflow = Math.min(s.speed / 120, 1.5);
+  const engine = hasEngine(s) ? s.throttle : 0;
+  const cooling =
+    (1 - exposure) * (0.055 + airflow * 0.045 + (engine > 0.1 ? 0 : 0.025));
+  const incoming = exposure * (0.11 + vulnerability * 0.17);
+  // An already burning tank is aggravated by a running engine; nearby exhaust
+  // alone cannot ignite an intact rocket because it is not external exposure.
+  const combustion =
+    s.fireIntensity *
+    (0.025 +
+      vulnerability * 0.045 +
+      engine * 0.04 +
+      // A badly heated propellant system can keep burning internally after it
+      // leaves the trees. Fresh surface fire remains below this runaway band.
+      Math.max(0, s.heat - 0.82) * engine * vulnerability * 1.6);
+  s.heat = clamp(s.heat + (incoming + combustion - cooling) * dt, 0, 1);
+  const ignitionThreshold = 0.6 + (1 - vulnerability) * 0.3;
+  if (
+    s.fireIntensity === 0 &&
+    vulnerability > 0.2 &&
+    s.heat >= ignitionThreshold
+  ) {
+    s.fireIntensity = 0.12;
+    s.fireElapsed = 0;
+    addEvent(s, 'vehicle-ignited', vulnerability);
+  }
+  if (s.fireIntensity <= 0) return;
+  s.fireElapsed += dt;
+  const targetFire = clamp((s.heat - 0.28) / 0.65, 0, 1);
+  s.fireIntensity += clamp(targetFire - s.fireIntensity, -dt * 0.3, dt * 0.35);
+  if (s.heat < 0.3 && s.fireIntensity < 0.03) {
+    s.fireIntensity = 0;
+    addEvent(s, 'vehicle-extinguished');
+    return;
+  }
+  const damage =
+    s.fireIntensity *
+    (0.012 + vulnerability * 0.018) *
+    (0.65 + engine * 0.65) *
+    dt;
+  s.fireDamage = clamp(s.fireDamage + damage, 0, 1);
+  s.integrity = clamp(s.integrity - damage, 0, 1);
+  // A visible onboard fire precedes a possible pressure/tank failure. Leaving
+  // the forest, cutting power and airflow cooling can arrest it before this.
+  if (
+    (s.heat >= 0.985 &&
+      s.fireElapsed >= 3 + (1 - vulnerability) * 3 &&
+      s.fuel / ROCKET_CONFIGS[s.kind].fuelMass > 0.08) ||
+    s.integrity <= 0
+  )
+    crash(s, s.speed, 'Fire ruptured the propellant tanks.', false, 'fire');
+}
+
+function updateWreckage(s: RocketState, dt: number) {
+  const wreckage = s.wreckage;
+  if (!wreckage) return;
+  // The building can keep settling after the vehicle hits a low roof/floor.
+  // Its structural clock is independent from the immutable impact snapshot.
+  if (s.supportCollapsed) s.supportCollapseElapsed += dt;
+  s.fireIntensity = Math.max(0, s.fireIntensity - dt * 0.015);
+  s.heat = Math.max(0, s.heat - dt * 0.01);
+  if (
+    !wreckage.exploded &&
+    wreckage.explosionDelay !== null &&
+    s.elapsed - wreckage.time >= wreckage.explosionDelay
+  ) {
+    wreckage.exploded = true;
+    wreckage.explosionTime = s.elapsed;
+    s.fireIntensity = Math.max(s.fireIntensity, 0.8);
+    addEvent(s, 'exploded', s.fuel / ROCKET_CONFIGS[s.kind].fuelMass);
+  }
+}
+
+/** Returns true while the collapsing structure is still carrying the rocket. */
+function updateCollapse(s: RocketState, dt: number): boolean {
+  s.supportCollapseElapsed += dt;
+  if (s.supportCollapseElapsed < ROCKET_SUPPORT_RELEASE_DELAY) {
+    // Remaining columns slowly yield; this is supported sag, not slowed time.
+    s.velocity.y = -0.3;
+    s.position.y += s.velocity.y * dt;
+    s.attitude.roll += (Math.sin(s.seed + 0.5) < 0 ? -1 : 1) * dt * 0.045;
+    s.attitude.pitch += dt * 0.025;
+    s.speed = length(s.velocity);
+    return true;
+  }
+  if (s.failureStage !== 'freefall') {
+    s.failureStage = 'freefall';
+    const sign = Math.sin(s.seed + 0.5) < 0 ? -1 : 1;
+    s.angularVelocity.roll += sign * 0.36;
+    s.angularVelocity.pitch += 0.2;
+    s.velocity.x += sign * 0.8;
+    addEvent(s, 'support-lost');
+  }
+  return false;
 }
 
 /** External swept city/body collision, preserving the actual impact location. */
@@ -603,7 +786,10 @@ function substep(s: RocketState, input: RocketInput, dt: number) {
   const config = ROCKET_CONFIGS[s.kind];
   s.elapsed += dt;
   s.phaseElapsed += dt;
-  if (s.phase === 'crashed') return;
+  if (s.phase === 'crashed') {
+    updateWreckage(s, dt);
+    return;
+  }
   if (s.phase === 'space') {
     // Success cuts the engine without deleting momentum. Gravity transitions
     // gently into a continuing observation coast; returning to Earth is outside
@@ -635,10 +821,13 @@ function substep(s: RocketState, input: RocketInput, dt: number) {
     s.speed = Math.abs(s.velocity.y);
     return;
   }
+  updateThermal(s, input, dt);
+  if (s.wreckage) return;
+  if (s.phase === 'falling' && updateCollapse(s, dt)) return;
   if (input.mode) s.mode = input.mode;
   if (input.auto !== undefined) s.mode = input.auto ? 'auto' : 'manual';
   if (input.stabilize !== undefined) s.stabilize = input.stabilize;
-  if (input.abort && s.phase !== 'aborted') {
+  if (input.abort && s.phase !== 'aborted' && s.phase !== 'falling') {
     s.targetThrottle = 0;
     s.throttle = 0;
     s.stageThrust = 0;
@@ -678,7 +867,7 @@ function substep(s: RocketState, input: RocketInput, dt: number) {
   } else if (s.mode === 'auto') {
     s.targetThrottle = 1;
   }
-  if (s.phase === 'aborted') s.targetThrottle = 0;
+  if (s.phase === 'aborted' || s.phase === 'falling') s.targetThrottle = 0;
   s.stageElapsed += dt;
   if (
     s.stage === 'separating' &&
@@ -753,6 +942,7 @@ function substep(s: RocketState, input: RocketInput, dt: number) {
       (1 + (1 - densityRatio) * 0.08)
     : 0;
   updateSupport(s, dt);
+  if (s.phase === 'falling' && s.failureStage === 'support-collapse') return;
   if (s.phase === 'ignition') {
     if (s.phaseElapsed < config.ignitionDuration) return;
     setPhase(s, 'flight', 'liftoff');
@@ -833,10 +1023,22 @@ function substep(s: RocketState, input: RocketInput, dt: number) {
     1,
   );
   if (s.integrity <= 0) {
-    crash(s, s.speed, 'Aerodynamic loads destroyed the vehicle.', false);
+    crash(
+      s,
+      s.speed,
+      'Aerodynamic loads destroyed the vehicle.',
+      false,
+      'aerodynamic',
+    );
     return;
   }
-  const groundY = s.support.groundY ?? s.origin.y;
+  // A lake bed yields below the placement surface rather than treating the
+  // vanished support plane as a solid impact surface on the very next frame.
+  const groundY =
+    (s.support.groundY ?? s.origin.y) -
+    (s.supportCollapsed && s.support.kind === 'lake'
+      ? Math.min(3, config.height * 0.16)
+      : 0);
   const remainingBottom = config.height * config.upperNozzleFraction;
   const groundContactY = s.boosterAttached
     ? s.position.y
@@ -860,11 +1062,15 @@ function substep(s: RocketState, input: RocketInput, dt: number) {
       s.supportCollapsed
         ? 'The falling rocket struck the ground after the platform collapsed.'
         : 'The rocket struck the ground.',
-      s.boosterAttached,
+      s.boosterAttached && s.support.kind !== 'lake',
     );
     return;
   }
-  if (s.altitude >= SPACE_ALTITUDE && s.phase !== 'aborted') {
+  if (
+    s.altitude >= SPACE_ALTITUDE &&
+    s.phase !== 'aborted' &&
+    s.phase !== 'falling'
+  ) {
     s.throttle = 0;
     s.targetThrottle = 0;
     s.stageThrust = 0;

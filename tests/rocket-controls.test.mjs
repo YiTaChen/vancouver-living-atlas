@@ -344,6 +344,227 @@ test('minimal mobile space UI retains observation controls and hiding a panel re
   host.unmount();
 });
 
+test('support collapse and freefall show only a small accident sequence before any impact', () => {
+  for (const [phase, failureStage] of [
+    ['ignition', 'support-collapse'],
+    ['falling', 'freefall'],
+  ]) {
+    for (const touch of [false, true]) {
+      const { host, calls } = setup(
+        {
+          phase,
+          failureStage,
+          failureAge: 100,
+          failureCause: 'impact',
+          support: 'roof-small',
+          supportIntegrity: 0,
+          damaged: 1,
+          burning: 2,
+          debris: 5,
+        },
+        { touch, optionsOpen: true },
+      );
+      assert(findClass(host, 'rocket-accident-observation'));
+      assert.match(
+        text(host.tree),
+        /Foundation collapsing.*Uncontrolled descent.*Impact/,
+      );
+      assert.equal(all(host.tree, (node) => node.type === 'button').length, 0);
+      for (const name of [
+        'rocket-panel',
+        'rocket-compact-controls',
+        'rocket-telemetry',
+        'rocket-countdown',
+        'rocket-stage-status',
+      ])
+        assert.equal(
+          findClass(host, name),
+          undefined,
+          `${name} must not cover the accident`,
+        );
+      assert.deepEqual(
+        calls.at(-1),
+        ['setInputEnabled', true],
+        'Escape and camera input stay enabled',
+      );
+      host.unmount();
+    }
+  }
+});
+
+test('recovery actions appear at five seconds after impact even with mobile HUD hidden or options open', () => {
+  for (const locale of ['en', 'zh-Hant']) {
+    for (const extra of [
+      { touch: false },
+      { touch: true },
+      { touch: true, minimal: true, panelVisible: false },
+      { touch: true, optionsOpen: true },
+    ]) {
+      const { host, props, calls } = setup(
+        {
+          phase: 'crashed',
+          failureStage: 'wreckage',
+          failureAge: 0,
+          failureCause: 'fire',
+          warning: 'raw vehicle-destroyed English reason',
+          damaged: 1,
+          burning: 2,
+          debris: 5,
+        },
+        { ...extra, locale },
+      );
+      for (const failureAge of [0, 4.999]) {
+        host.render({ ...props, snapshot: { ...props.snapshot, failureAge } });
+        assert(findClass(host, 'rocket-accident-observation'));
+        assert.equal(
+          all(host.tree, (node) => node.type === 'button').length,
+          0,
+        );
+        assert.equal(findClass(host, 'rocket-telemetry'), undefined);
+        assert.doesNotMatch(text(host.tree), /raw vehicle-destroyed/);
+      }
+      host.render({ ...props, snapshot: { ...props.snapshot, failureAge: 5 } });
+      assert(findClass(host, 'rocket-failure-panel'));
+      assert.equal(findClass(host, 'rocket-accident-observation'), undefined);
+      assert.equal(findClass(host, 'rocket-compact-controls'), undefined);
+      assert.match(
+        text(host.tree),
+        locale === 'en' ? /Vehicle fire \/ explosion/ : /箭體起火／爆炸/,
+      );
+      button(
+        host,
+        locale === 'en' ? 'Rebuild at this site' : '在此重新搭建',
+      ).props.onClick();
+      assert.deepEqual(calls.at(-1), ['retry']);
+      button(
+        host,
+        locale === 'en' ? 'Back to Vancouver' : '返回溫哥華',
+      ).props.onClick();
+      assert.deepEqual(calls.at(-1), ['returnToCity']);
+      button(
+        host,
+        locale === 'en' ? 'Restore city' : '修復城市',
+      ).props.onClick();
+      assert.deepEqual(calls.at(-1), ['resetDamage']);
+      button(host, locale === 'en' ? 'New rocket' : '新火箭').props.onClick();
+      assert.deepEqual(calls.at(-1), ['choose', 'small']);
+      host.unmount();
+    }
+  }
+});
+
+test('a subsequent explosion resets the recovery delay without a wall-clock timeout', () => {
+  const { host, props } = setup({
+    phase: 'crashed',
+    failureStage: 'wreckage',
+    failureAge: 5.2,
+    failureCause: 'impact',
+  });
+  assert(findClass(host, 'rocket-failure-panel'));
+  host.render({
+    ...props,
+    snapshot: { ...props.snapshot, failureCause: 'fire', failureAge: 0 },
+  });
+  assert.equal(findClass(host, 'rocket-failure-panel'), undefined);
+  assert.equal(all(host.tree, (node) => node.type === 'button').length, 0);
+  host.render({
+    ...props,
+    snapshot: { ...props.snapshot, failureCause: 'fire', failureAge: 5 },
+  });
+  assert(findClass(host, 'rocket-failure-panel'));
+  host.render({
+    ...props,
+    snapshot: {
+      ...props.snapshot,
+      missionId: 8,
+      phase: 'falling',
+      failureStage: 'freefall',
+      failureAge: 0,
+    },
+  });
+  assert.equal(findClass(host, 'rocket-failure-panel'), undefined);
+  assert(findClass(host, 'rocket-accident-observation'));
+  host.unmount();
+});
+
+test('aerodynamic failure is localized while the vehicle is still falling', () => {
+  const { host } = setup(
+    {
+      phase: 'falling',
+      failureStage: 'freefall',
+      failureCause: 'aerodynamic',
+      warning: 'raw high-dynamic-pressure',
+    },
+    { locale: 'zh-Hant' },
+  );
+  assert.match(
+    text(findClass(host, 'rocket-accident-observation')),
+    /氣動失控.*撞擊/,
+  );
+  assert.doesNotMatch(text(host.tree), /aerodynamic|high-dynamic-pressure/);
+  host.unmount();
+});
+
+test('an airborne vehicle fire warns about heat while guidance and abort controls remain available', () => {
+  for (const locale of ['en', 'zh-Hant']) {
+    for (const touch of [false, true]) {
+      const { host, calls } = setup(
+        { vehicleFire: 0.4, vehicleHeat: 0.72 },
+        { locale, touch },
+      );
+      assert.match(
+        text(findClass(host, 'rocket-alert')),
+        locale === 'en'
+          ? /Rocket on fire.*Vehicle heat 72%/
+          : /箭體起火.*箭體溫度 72%/,
+      );
+      assert.equal(findClass(host, 'rocket-accident-observation'), undefined);
+      assert(button(host, locale === 'en' ? 'Autopilot' : '自動駕駛'));
+      button(
+        host,
+        locale === 'en' ? 'Abort launch' : '中止發射',
+      ).props.onClick();
+      assert.deepEqual(calls.at(-1), ['abort']);
+      host.unmount();
+    }
+  }
+});
+
+test('an airborne fire accident shows burning before explosion without inventing a prior fall', () => {
+  for (const locale of ['en', 'zh-Hant']) {
+    const { host } = setup(
+      {
+        phase: 'crashed',
+        failureStage: 'wreckage',
+        failureCause: 'fire',
+        failureAge: 0.4,
+      },
+      { locale },
+    );
+    const timeline = text(findClass(host, 'rocket-accident-timeline'));
+    assert.match(
+      timeline,
+      locale === 'en'
+        ? /Rocket on fire.*Vehicle fire \/ explosion/
+        : /箭體起火.*箭體起火／爆炸/,
+    );
+    assert.doesNotMatch(timeline, /Uncontrolled descent|失控下墜/);
+    assert.equal(all(host.tree, (node) => node.type === 'button').length, 0);
+    host.unmount();
+  }
+});
+
+test('engine aborts and sinking keep their immediate recovery controls without an accident timer', () => {
+  for (const phase of ['aborted', 'sinking']) {
+    const { host } = setup({ phase, failureStage: 'none', failureAge: 0 });
+    assert(findClass(host, 'rocket-panel'));
+    assert.equal(findClass(host, 'rocket-accident-observation'), undefined);
+    assert(button(host, 'Rebuild at this site'));
+    assert(button(host, 'Back to Vancouver'));
+    host.unmount();
+  }
+});
+
 const dataModule = (code) =>
   `data:text/javascript;base64,${Buffer.from(code).toString('base64')}`;
 const components = new Map();

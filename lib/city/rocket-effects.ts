@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import type { CityEngine } from './engine';
 import {
   sampleRocketEffects,
+  rocketDirection,
   ROCKET_CONFIGS,
   type RocketState,
 } from './rocket-state';
@@ -22,9 +23,11 @@ type DamagedPart = {
   color: Float32Array;
   exposure: number;
   collapse: number;
+  collapseElapsed: number;
+  bounds: { minX: number; maxX: number; minZ: number; maxZ: number };
   dirtyPosition: boolean;
   dirtyColor: boolean;
-  fragmentsEmitted: boolean;
+  fragmentsStage: number;
 };
 type FlyingSlot = {
   mesh: THREE.InstancedMesh;
@@ -60,6 +63,63 @@ const rand = (n: number) => {
   const v = Math.sin(n * 127.1 + 311.7) * 43758.5453;
   return v - Math.floor(v);
 };
+const unit = (n: number) => Math.max(0, Math.min(1, n));
+
+/** Shared settlement curve: initial sag, then a readable 2.6-second floor collapse. */
+export function rocketSupportCollapseProgress(elapsed: number) {
+  const t = unit(Math.max(0, elapsed) / 2.6);
+  return 0.035 + 0.965 * t * t * (3 - 2 * t);
+}
+
+function buildingTop(part: BodyPart, collapse: number) {
+  return part.minY + (part.maxY - part.minY) * (1 - collapse * 0.925);
+}
+
+function supportsRocket(damage: DamagedPart, state: RocketState) {
+  const b = damage.bounds;
+  return (
+    state.supportCollapsed &&
+    (state.support.kind === 'roof-small' ||
+      state.support.kind === 'roof-large') &&
+    state.origin.x >= b.minX &&
+    state.origin.x <= b.maxX &&
+    state.origin.z >= b.minZ &&
+    state.origin.z <= b.maxZ
+  );
+}
+
+// Closest distance between the vehicle axis and a tree's vertical flame capsule.
+// Finite segments keep a burning forest below a high vehicle from heating it.
+function flameDistance(
+  ax: number,
+  ay: number,
+  az: number,
+  bx: number,
+  by: number,
+  bz: number,
+  x: number,
+  bottom: number,
+  z: number,
+  top: number,
+) {
+  const ux = bx - ax,
+    uy = by - ay,
+    uz = bz - az,
+    vy = top - bottom,
+    wx = ax - x,
+    wy = ay - bottom,
+    wz = az - z,
+    a = ux * ux + uy * uy + uz * uz,
+    b = uy * vy,
+    c = vy * vy,
+    d = ux * wx + uy * wy + uz * wz,
+    e = vy * wy,
+    denominator = a * c - b * b;
+  let s = denominator > 1e-8 ? unit((b * e - c * d) / denominator) : 0;
+  const t = c > 1e-8 ? unit((b * s + e) / c) : 0;
+  s = a > 1e-8 ? unit((b * t - d) / a) : 0;
+  return Math.hypot(wx + s * ux, wy + s * uy - t * vy, wz + s * uz);
+}
 
 /** Local, bounded visual response. Shared city assets and source geography stay owned by the city. */
 export class RocketEffects {
@@ -93,22 +153,30 @@ export class RocketEffects {
     soot: boolean;
   }[];
   private spawn = 0;
+  private vehicleSpawn = 0;
   private next = 0;
   private time = 0;
   private scanAt = 0;
-  private crashed = false;
+  private eventId = 0;
+  private restoredAfterFailure: boolean;
   private shadowAt = -Infinity;
   private scorch: THREE.Mesh;
   private shock: THREE.Mesh;
   private shockAge = 99;
+  private shockPower = 1;
   private savedGround: THREE.Vector3;
   private lastState: RocketState;
   private fragmentTransform = new THREE.Object3D();
+  private vehicleAnchor = new THREE.Vector3();
   constructor(
     private e: CityEngine,
     state: RocketState,
   ) {
     this.lastState = state;
+    // A recreated consumer (city repair/resource retry) starts at the current
+    // snapshot. Past impacts and fuel bursts must not play a second time.
+    this.eventId = state.events.at(-1)?.id ?? 0;
+    this.restoredAfterFailure = !!state.wreckage;
     this.savedGround = new THREE.Vector3(
       state.origin.x,
       state.support.groundY ?? state.origin.y,
@@ -140,26 +208,43 @@ export class RocketEffects {
             ),
         )
         .slice(0, 48)
-        .map((part: BodyPart) => ({
-          part,
-          position: new Float32Array(
+        .map((part: BodyPart) => {
+          const position = new Float32Array(
             (pos.array as Float32Array).subarray(
               part.start * 3,
               (part.start + part.count) * 3,
             ),
-          ),
-          color: new Float32Array(
-            (color.array as Float32Array).subarray(
-              part.start * 3,
-              (part.start + part.count) * 3,
+          );
+          const bounds = {
+            minX: Infinity,
+            maxX: -Infinity,
+            minZ: Infinity,
+            maxZ: -Infinity,
+          };
+          for (let i = 0; i < position.length; i += 3) {
+            bounds.minX = Math.min(bounds.minX, position[i]);
+            bounds.maxX = Math.max(bounds.maxX, position[i]);
+            bounds.minZ = Math.min(bounds.minZ, position[i + 2]);
+            bounds.maxZ = Math.max(bounds.maxZ, position[i + 2]);
+          }
+          return {
+            part,
+            position,
+            bounds,
+            color: new Float32Array(
+              (color.array as Float32Array).subarray(
+                part.start * 3,
+                (part.start + part.count) * 3,
+              ),
             ),
-          ),
-          exposure: 0,
-          collapse: 0,
-          dirtyPosition: false,
-          dirtyColor: false,
-          fragmentsEmitted: false,
-        }));
+            exposure: 0,
+            collapse: 0,
+            collapseElapsed: -1,
+            dirtyPosition: false,
+            dirtyColor: false,
+            fragmentsStage: 0,
+          };
+        });
     }
     this.rubble = new THREE.InstancedMesh(
       new THREE.BoxGeometry(1, 1, 1),
@@ -288,6 +373,60 @@ export class RocketEffects {
     this.group.name = 'Rocket local heat / pressure / pooled particles';
     e.scene.add(this.group);
   }
+  /** Local forest feedback; the number of fires elsewhere never heats this vehicle. */
+  sampleVehicleHeat(state: RocketState): number {
+    const config = ROCKET_CONFIGS[state.kind],
+      direction = rocketDirection(state.attitude),
+      lower = config.height * (state.boosterAttached ? 0.08 : 0.46),
+      upper = config.height * 0.94;
+    let unheated = 1;
+    for (const tree of this.trees) {
+      if (tree.heat <= 0.13) continue;
+      const distance = flameDistance(
+        state.position.x + direction.x * lower,
+        state.position.y + direction.y * lower,
+        state.position.z + direction.z * lower,
+        state.position.x + direction.x * upper,
+        state.position.y + direction.y * upper,
+        state.position.z + direction.z * upper,
+        tree.x,
+        tree.y + 0.5,
+        tree.z,
+        tree.y + tree.h * 1.1,
+      );
+      const radius = 10 + tree.h * 0.35,
+        falloff = unit(1 - Math.max(0, distance - config.radius) / radius),
+        intensity = unit((tree.heat - 0.13) / 0.4);
+      unheated *= 1 - intensity * falloff * falloff;
+    }
+    return unit(1 - unheated);
+  }
+  /** Deformed local roof height for a swept support collision; null outside damaged parts. */
+  supportCollisionHeight(
+    x: number,
+    z: number,
+    state: RocketState = this.lastState,
+  ): number | null {
+    let height: number | null = null;
+    for (const damage of this.parts) {
+      const b = damage.bounds;
+      if (x < b.minX || x > b.maxX || z < b.minZ || z > b.maxZ) continue;
+      const supporting =
+        !this.restoredAfterFailure && supportsRocket(damage, state);
+      const collapse = supporting
+        ? Math.max(
+            damage.collapse,
+            rocketSupportCollapseProgress(state.supportCollapseElapsed),
+          )
+        : damage.collapse;
+      if (!supporting && collapse <= 0) continue;
+      height = Math.max(
+        height ?? -Infinity,
+        buildingTop(damage.part, collapse),
+      );
+    }
+    return height;
+  }
   private emit(
     x: number,
     y: number,
@@ -295,6 +434,7 @@ export class RocketEffects {
     power: number,
     hot: boolean,
     soot = false,
+    rise = false,
   ) {
     const p = this.particles[this.next++ % this.particles.length],
       k = this.next;
@@ -307,12 +447,13 @@ export class RocketEffects {
       speed = (3 + rand(k + 3) * 15) * power;
     p.v.set(
       Math.cos(a) * speed,
-      hot ? -5 - rand(k) * 12 : 4 + rand(k) * 8,
+      hot && !rise ? -5 - rand(k) * 12 : 4 + rand(k) * 8,
       Math.sin(a) * speed,
     );
+    return p;
   }
-  private emitBuildingFragments(d: DamagedPart, power: number) {
-    const count = Math.min(5, 64 - this.fragments.length),
+  private emitBuildingFragments(d: DamagedPart, power: number, requested = 2) {
+    const count = Math.min(requested, 64 - this.fragments.length),
       height = d.part.maxY - d.part.minY;
     const dx = d.part.center[0] - this.lastState.origin.x,
       dz = d.part.center[1] - this.lastState.origin.z,
@@ -323,7 +464,8 @@ export class RocketEffects {
       this.fragments.push({
         p: new THREE.Vector3(
           d.part.center[0] + (rand(k + 1) - 0.5) * 8,
-          d.part.minY + height * (0.2 + rand(k + 2) * 0.75),
+          d.part.minY +
+            height * (1 - d.collapse * 0.925) * (0.2 + rand(k + 2) * 0.75),
           d.part.center[1] + (rand(k + 3) - 0.5) * 8,
         ),
         v: new THREE.Vector3(
@@ -357,18 +499,120 @@ export class RocketEffects {
     this.rubble.count = this.fragments.length;
     if (this.rubble.instanceColor) this.rubble.instanceColor.needsUpdate = true;
   }
-  update(dt: number, s: RocketState) {
+  private updateVehicleEffects(
+    dt: number,
+    state: RocketState,
+    anchor?: THREE.Vector3 | null,
+  ) {
+    const config = ROCKET_CONFIGS[state.kind],
+      wreckage = state.wreckage,
+      center = this.vehicleAnchor;
+    if (anchor && wreckage) center.copy(anchor);
+    else if (wreckage) {
+      const t = Math.max(0, state.elapsed - wreckage.time);
+      center.set(
+        wreckage.position.x + wreckage.velocity.x * t,
+        Math.max(
+          state.support.groundY ?? this.savedGround.y,
+          wreckage.position.y + wreckage.velocity.y * t - 4.905 * t * t,
+        ),
+        wreckage.position.z + wreckage.velocity.z * t,
+      );
+    } else center.set(state.position.x, state.position.y, state.position.z);
+
+    for (const event of state.events) {
+      if (event.id <= this.eventId) continue;
+      this.eventId = event.id;
+      const exploded = event.type === 'exploded',
+        impact = event.type === 'impact',
+        rupture = event.type === 'ruptured';
+      if (!exploded && !impact && !rupture) continue;
+      // The event stores the true collision/burnup position; after breakup the
+      // model can supply the moving fragment centroid for a delayed fuel burst.
+      const x = exploded && wreckage ? center.x : event.position.x,
+        y = exploded && wreckage ? center.y : event.position.y,
+        z = exploded && wreckage ? center.z : event.position.z,
+        severity = impact
+          ? unit(event.magnitude / (state.kind === 'large' ? 90 : 65))
+          : 0.4,
+        count = exploded
+          ? Math.min(this.particles.length, state.kind === 'large' ? 125 : 75)
+          : Math.round(10 + severity * 38);
+      for (let i = 0; i < count; i++) {
+        const spark = !exploded && impact && severity > 0.28 && i % 9 === 0,
+          hot = exploded ? i % 2 === 0 : spark,
+          particle = this.emit(
+            x,
+            y + (impact ? 0.5 : 0),
+            z,
+            exploded ? 1.7 : 0.25 + severity,
+            hot,
+            true,
+            true,
+          ),
+          k = this.next,
+          speed = exploded ? 12 + rand(k + 2) * 24 : 2 + severity * 14;
+        particle.v.y = exploded
+          ? (rand(k + 4) - 0.3) * speed
+          : 1 + rand(k + 4) * speed * 0.5;
+        if (spark) particle.life = 0.12 + rand(k + 3) * 0.25;
+        if (exploded && hot) particle.life = 0.55 + rand(k + 3) * 0.9;
+      }
+      if (impact || exploded) {
+        this.shockAge = 0;
+        this.shockPower = exploded ? 1 : 0.15 + severity * 0.55;
+        this.shock.position.set(x, y + 0.5, z);
+      }
+    }
+
+    const intensity = unit(state.fireIntensity);
+    if (intensity <= 0 || state.phase === 'sinking') return;
+    const direction = rocketDirection(state.attitude);
+    this.vehicleSpawn += dt * (state.kind === 'large' ? 85 : 55) * intensity;
+    while (this.vehicleSpawn >= 1) {
+      this.vehicleSpawn--;
+      const k = this.next + 1,
+        offset = wreckage
+          ? 0
+          : config.height *
+            ((state.boosterAttached ? 0.1 : 0.47) +
+              rand(k) * (state.boosterAttached ? 0.75 : 0.4)),
+        angle = rand(k + 7) * Math.PI * 2,
+        radius = config.radius * (0.65 + rand(k + 3) * 0.35),
+        particle = this.emit(
+          center.x + direction.x * offset + Math.cos(angle) * radius,
+          center.y +
+            direction.y * offset +
+            (wreckage ? rand(k + 2) * config.radius : 0),
+          center.z + direction.z * offset + Math.sin(angle) * radius,
+          0.12 + intensity * 0.2,
+          this.next % 3 === 0,
+          true,
+          true,
+        );
+      if (!wreckage) {
+        particle.v.x += state.velocity.x * 0.18;
+        particle.v.y += state.velocity.y * 0.18;
+        particle.v.z += state.velocity.z * 0.18;
+      }
+    }
+  }
+  update(dt: number, s: RocketState, vehicleAnchor?: THREE.Vector3 | null) {
     this.lastState = s;
     this.time += dt;
     const f = sampleRocketEffects(s),
       config = ROCKET_CONFIGS[s.kind];
-    if (s.phase === 'ignition' && this.shockAge > 90) this.shockAge = 0;
+    if (s.phase === 'ignition' && this.shockAge > 90) {
+      this.shockAge = 0;
+      this.shockPower = 1;
+    }
     this.shockAge += dt;
-    const shockScale = this.shockAge * config.blastRadius * 1.5;
+    const shockScale =
+      this.shockAge * config.blastRadius * 1.5 * this.shockPower;
     this.shock.scale.setScalar(Math.max(0.01, shockScale));
     (this.shock.material as THREE.MeshBasicMaterial).opacity = Math.max(
       0,
-      0.45 * (1 - this.shockAge / 1.5),
+      0.45 * this.shockPower * (1 - this.shockAge / 1.5),
     );
     if (f.groundExposure > 0.01) {
       (this.scorch.material as THREE.MeshBasicMaterial).opacity = Math.min(
@@ -403,35 +647,54 @@ export class RocketEffects {
       }
     }
     for (const d of this.parts) {
-      if (
-        s.supportCollapsed &&
-        Math.hypot(
-          d.part.center[0] - s.origin.x,
-          d.part.center[1] - s.origin.z,
-        ) < 18 &&
-        d.exposure < 1
-      ) {
+      const supporting = !this.restoredAfterFailure && supportsRocket(d, s);
+      if (supporting && d.exposure < 1) {
         d.exposure = 1;
         d.dirtyColor = true;
       }
-      const target = Math.max(0, (d.exposure - 0.22) / 0.78),
-        difference = target - d.collapse;
-      if (Math.abs(difference) > 0.0001) {
-        d.collapse += difference * Math.min(1, dt * 2);
+      const target = Math.max(0, (d.exposure - 0.22) / 0.78);
+      if (target > 0) {
+        d.collapseElapsed = supporting
+          ? s.supportCollapseElapsed
+          : Math.max(0, d.collapseElapsed) + dt;
+      }
+      const collapse =
+        target * rocketSupportCollapseProgress(Math.max(0, d.collapseElapsed));
+      if (collapse > d.collapse + 0.00001) {
+        d.collapse = collapse;
         d.dirtyPosition = true;
       }
-      if (d.exposure > 0.2 && !d.fragmentsEmitted) {
-        d.fragmentsEmitted = true;
-        this.emitBuildingFragments(d, f.groundExposure);
+      const stage =
+        d.collapse > 0.65 ? 3 : d.collapse > 0.25 ? 2 : d.collapse > 0 ? 1 : 0;
+      while (d.fragmentsStage < stage) {
+        d.fragmentsStage++;
+        this.emitBuildingFragments(
+          d,
+          f.groundExposure,
+          d.fragmentsStage === 3 ? 3 : 2,
+        );
+        for (let i = 0; i < 3; i++)
+          this.emit(
+            d.part.center[0],
+            buildingTop(d.part, d.collapse),
+            d.part.center[1],
+            0.25,
+            false,
+          );
       }
     }
     this.damaged = this.parts.filter((d) => d.exposure > 0.12).length;
     this.burning = this.trees.filter((t) => t.heat > 0.13).length;
     for (const t of this.trees) {
+      // Once lit, the local fuel continues burning after the exhaust moves away.
+      if (t.heat > 0.13) t.heat = Math.min(1, t.heat + dt * 0.035);
       t.mesh.visible = t.heat > 0.13;
+      t.mesh.position.y = t.y + t.h * 0.4;
       t.mesh.scale.set(
         1 + t.heat * 1.3,
-        1 + Math.sin(this.time * 15 + t.x) * 0.22,
+        (t.h / 5) *
+          (0.65 + t.heat * 0.35) *
+          (1 + Math.sin(this.time * 15 + t.x) * 0.12),
         1 + t.heat,
       );
       t.charred.visible = t.heat > 0.3;
@@ -455,20 +718,7 @@ export class RocketEffects {
       if (t.mesh.visible && rand(this.next + this.time) > 0.55)
         this.emit(t.x, t.y + 3, t.z, 0.3, false, true);
     }
-    if (s.phase === 'crashed' && !this.crashed) {
-      this.crashed = true;
-      this.shockAge = 0;
-      this.shock.position.set(s.position.x, s.position.y + 0.5, s.position.z);
-      for (let i = 0; i < Math.min(100, this.particles.length); i++)
-        this.emit(
-          s.position.x,
-          s.position.y + 3,
-          s.position.z,
-          2,
-          i % 3 === 0,
-          true,
-        );
-    }
+    this.updateVehicleEffects(dt, s, vehicleAnchor);
     if (f.engine > 0.03 && s.altitude < 14000) {
       this.spawn +=
         dt *
@@ -571,12 +821,17 @@ export class RocketEffects {
             const j = i * 3,
               originalY = d.position[j + 1],
               lift = Math.max(0, originalY - d.part.minY);
-            const shift = d.collapse * lift * 0.16;
+            const shift = d.collapse * lift * 0.16,
+              height = d.part.maxY - d.part.minY,
+              settled = Math.max(
+                lift * 0.075,
+                lift - height * d.collapse * 0.925,
+              );
             if (d.dirtyPosition)
               pos.setXYZ(
                 d.part.start + i,
                 d.position[j] + shift,
-                d.part.minY + lift * (1 - d.collapse * 0.93),
+                d.part.minY + settled,
                 d.position[j + 2] + shift * 0.5,
               );
             if (d.dirtyColor)
@@ -747,15 +1002,18 @@ export class RocketEffects {
           col.addUpdateRange(d.part.start * 3, d.part.count * 3);
           pos.needsUpdate = col.needsUpdate = true;
           d.exposure = d.collapse = 0;
-          d.dirtyPosition = d.dirtyColor = d.fragmentsEmitted = false;
+          d.collapseElapsed = -1;
+          d.dirtyPosition = d.dirtyColor = false;
+          d.fragmentsStage = 0;
         }
     }
     this.fragments.length = 0;
     this.rubble.count = 0;
     this.flying.length = 0;
     this.launched.clear();
-    this.crashed = false;
+    this.eventId = this.lastState.events.at(-1)?.id ?? 0;
     this.spawn = 0;
+    this.vehicleSpawn = 0;
     this.shockAge = 99;
     for (const t of this.trees) {
       t.heat = t.fall = 0;

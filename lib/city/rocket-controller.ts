@@ -44,6 +44,9 @@ export class RocketController {
   private audio: RocketAudio | null = null;
   private space: RocketSpace | null = null;
   private world: FlightWorld | null = null;
+  private supportVolumes: { bounds: THREE.Box3; originalTop: number }[] = [];
+  private damageFocus: THREE.Vector3 | null = null;
+  private accidentFramed = false;
   private loaded = false;
   private loadError = false;
   private generation = 0;
@@ -172,6 +175,13 @@ export class RocketController {
         ? this.preview || 'ground'
         : (s?.support.kind ?? 'ground'),
       supportIntegrity: s?.supportIntegrity ?? 1,
+      failureStage: s?.failureStage ?? 'none',
+      failureAge: s?.wreckage
+        ? Math.max(0, s.elapsed - (s.wreckage.explosionTime ?? s.wreckage.time))
+        : 0,
+      failureCause: s?.wreckage?.cause ?? '',
+      vehicleFire: s?.fireIntensity ?? 0,
+      vehicleHeat: s?.heat ?? 0,
       warning: this.placing ? this.preview : (s?.failureReason ?? ''),
       view: this.view,
       damaged: this.effects?.damaged ?? 0,
@@ -510,6 +520,25 @@ export class RocketController {
       this.audio = new fx.RocketAudio();
       this.space = new sky.RocketSpace();
       this.world = new FlightWorld(this.e);
+      this.supportVolumes = [];
+      if (this.state.support.kind.startsWith('roof')) {
+        const origin = this.state.origin;
+        const seen = new Set();
+        for (const cell of this.world.cells.values())
+          for (const volume of cell) {
+            if (seen.has(volume)) continue;
+            seen.add(volume);
+            if (
+              volume.polygon &&
+              Math.abs(volume.bounds.max.y - (origin.y - 0.45)) < 4 &&
+              inPolygon([origin.x, origin.z], volume.polygon)
+            )
+              this.supportVolumes.push({
+                bounds: volume.bounds,
+                originalTop: volume.bounds.max.y,
+              });
+          }
+      }
       this.loaded = true;
       this.notify();
     } catch (error) {
@@ -543,6 +572,11 @@ export class RocketController {
   resetDamage() {
     this.effects?.dispose();
     this.effects = null;
+    if (this.state?.wreckage) {
+      for (const volume of this.supportVolumes)
+        volume.bounds.max.y = volume.originalTop;
+      this.supportVolumes = [];
+    }
     const generation = this.generation,
       state = this.state;
     if (state && this.loaded)
@@ -557,6 +591,7 @@ export class RocketController {
           this.notify();
         }
       });
+    this.notify();
   }
   returnToCity() {
     if (!this.active && !this.placing) return;
@@ -585,6 +620,9 @@ export class RocketController {
     this.space?.dispose();
     this.space = null;
     this.world = null;
+    this.supportVolumes = [];
+    this.damageFocus = null;
+    this.accidentFramed = false;
     this.loaded = this.loadError = false;
     this.accumulator = 0;
     this.requestAbort = false;
@@ -619,6 +657,9 @@ export class RocketController {
     this.scaffold = null;
     this.state = null;
     this.world = null;
+    this.supportVolumes = [];
+    this.damageFocus = null;
+    this.accidentFramed = false;
     this.loaded = this.loadError = this.wasSpace = false;
     this.accumulator = 0;
     this.requestAbort = false;
@@ -668,13 +709,36 @@ export class RocketController {
         before.buildProgress >= 0.98
       )
         continue;
+      input.fireExposure = this.effects?.sampleVehicleHeat?.(before) ?? 0;
       this.state = stepRocket(before, input, 1 / 60);
       this.requestAbort = false;
       input.abort = false;
       const s = this.state,
         config = ROCKET_CONFIGS[s.kind];
+      // This mission owns these collider boxes. Follow the same settling roof
+      // as the rendered building; nearby buildings keep their full collision.
+      if (s.supportCollapsed)
+        for (const volume of this.supportVolumes) {
+          const top = this.effects?.supportCollisionHeight?.(
+            s.origin.x,
+            s.origin.z,
+            s,
+          );
+          const t = THREE.MathUtils.clamp(s.supportCollapseElapsed / 2.6, 0, 1);
+          const progress = 0.035 + 0.965 * t * t * (3 - 2 * t);
+          volume.bounds.max.y = THREE.MathUtils.clamp(
+            top ??
+              volume.bounds.min.y +
+                (volume.originalTop - volume.bounds.min.y) *
+                  (1 - 0.925 * progress),
+            volume.bounds.min.y + 0.1,
+            volume.originalTop,
+          );
+        }
       if (
-        (s.phase === 'flight' || s.phase === 'aborted') &&
+        (s.phase === 'flight' ||
+          s.phase === 'aborted' ||
+          s.phase === 'falling') &&
         s.position.y < 1500 &&
         this.world
       ) {
@@ -749,8 +813,19 @@ export class RocketController {
     this.model.build(s.phase === 'sinking' ? 1 : s.buildProgress);
     this.model.stage(s);
     this.model.fire(sampleRocketEffects(s).engine, this.clock);
+    this.damageFocus = this.model.damage(s, (x, z) =>
+      Math.max(
+        this.world?.surface(x, z).height ?? this.e.elevation(x, z),
+        this.effects?.supportCollisionHeight?.(x, z, s) ?? -Infinity,
+      ),
+    );
+    if ((s.phase === 'falling' || s.wreckage) && !this.accidentFramed) {
+      this.accidentFramed = true;
+      this.setView('chase');
+      this.lookPitch = Math.max(this.lookPitch, 0.65);
+      this.setSpaceFocus('rocket');
+    }
     this.model.group.visible =
-      s.phase !== 'crashed' &&
       !(this.view === 'first' && this.active) &&
       this.spaceFocus !== 'sun' &&
       this.spaceFocus !== 'moon';
@@ -762,7 +837,7 @@ export class RocketController {
       );
       if (s.phase === 'sinking') this.scaffold.position.y = s.position.y;
     }
-    this.effects?.update(dt, s);
+    this.effects?.update(dt, s, this.damageFocus);
     this.audio?.update(
       sampleRocketEffects(s).engine * Math.max(0.06, 1 - s.altitude / 45000),
       this.muted || !this.inputEnabled,
@@ -803,12 +878,56 @@ export class RocketController {
         distance =
           config.cameraDistance *
           this.zoomScale *
-          (s.boosterAttached ? 1 : 0.64),
+          (s.boosterAttached ? 1 : 0.64) *
+          (s.wreckage
+            ? 1 + Math.min(0.35, (s.elapsed - s.wreckage.time) * 0.09)
+            : 1),
         offset = new THREE.Vector3(
           Math.sin(this.lookYaw) * Math.cos(this.lookPitch) * distance,
           Math.sin(this.lookPitch) * distance,
           Math.cos(this.lookYaw) * Math.cos(this.lookPitch) * distance,
         );
+      const focus =
+        this.damageFocus?.clone() ??
+        p.clone().add(new THREE.Vector3(0, centerHeight, 0).applyQuaternion(q));
+      // In a city a clear orbit at liftoff can end behind a tower as the
+      // vehicle falls. Choose a nearby open viewing ray, retaining the same
+      // damped offset so the observation camera never snaps between buildings.
+      if (
+        this.accidentFramed &&
+        this.world &&
+        s.altitude < 1500 &&
+        this.world.hit(focus, focus.clone().add(offset), 0.5)
+      ) {
+        let best: THREE.Vector3 | null = null;
+        let cost = Infinity;
+        let yaw = this.lookYaw,
+          pitch = this.lookPitch;
+        for (const elevation of [this.lookPitch, 0.85, 1.05, 1.25])
+          for (const angle of [0, -0.6, 0.6, -1.2, 1.2, Math.PI]) {
+            const candidate = new THREE.Vector3(
+              Math.sin(this.lookYaw + angle) * Math.cos(elevation) * distance,
+              Math.sin(elevation) * distance,
+              Math.cos(this.lookYaw + angle) * Math.cos(elevation) * distance,
+            );
+            const score =
+              Math.abs(angle) + Math.abs(elevation - this.lookPitch) * 2;
+            if (
+              score >= cost ||
+              this.world.hit(focus, focus.clone().add(candidate), 0.5)
+            )
+              continue;
+            best = candidate;
+            cost = score;
+            yaw = this.lookYaw + angle;
+            pitch = elevation;
+          }
+        if (best) {
+          offset.copy(best);
+          this.lookYaw = yaw;
+          this.lookPitch = pitch;
+        }
+      }
       // Follow translation in the rocket frame. Smoothing an absolute world
       // position trails a fast vehicle by velocity / damping; variable render
       // deltas then turn the changing lag into violent screen-space bobbing.
@@ -823,11 +942,13 @@ export class RocketController {
         this.chaseAnchorHeight +=
           (centerHeight - this.chaseAnchorHeight) * blend;
       }
-      const target = p
-        .clone()
-        .add(
-          new THREE.Vector3(0, this.chaseAnchorHeight, 0).applyQuaternion(q),
-        );
+      const target =
+        this.damageFocus?.clone() ??
+        p
+          .clone()
+          .add(
+            new THREE.Vector3(0, this.chaseAnchorHeight, 0).applyQuaternion(q),
+          );
       camera.position.copy(target).add(this.chaseOffset);
       if (s.altitude < 200)
         camera.position.y = Math.max(
@@ -845,7 +966,8 @@ export class RocketController {
     camera.position.y += Math.sin(this.clock * 47) * shake;
     camera.far = 120000;
     camera.updateProjectionMatrix();
-    this.e.controls.target.copy(p).y += config.height * 0.4;
+    if (this.damageFocus) this.e.controls.target.copy(this.damageFocus);
+    else this.e.controls.target.copy(p).y += config.height * 0.4;
     this.cabin.visible = this.view === 'first';
     if (s.altitude >= 15000 && this.space) {
       if (!this.wasSpace) {

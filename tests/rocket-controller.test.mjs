@@ -35,7 +35,7 @@ code = code.replace(
 const { RocketController } = await import(
   'data:text/javascript;base64,' + Buffer.from(code).toString('base64')
 );
-const { createRocket } = await import(cityModule('rocket-state'));
+const { createRocket, crashRocket } = await import(cityModule('rocket-state'));
 
 class TrackedTarget extends EventTarget {
   callbacks = new Map();
@@ -109,6 +109,10 @@ function setup(t) {
     disposed = 0;
     before = 0;
     after = 0;
+    heatExposure = 0;
+    heatSamples = [];
+    heightSamples = [];
+    collisionHeight = () => null;
     constructor(engine) {
       this.engine = engine;
       this.group = new THREE.Group();
@@ -116,6 +120,18 @@ function setup(t) {
       resources.effects.push(this);
     }
     update() {}
+    sampleVehicleHeat(state) {
+      this.heatSamples.push({
+        elapsed: state.elapsed,
+        heat: state.heat,
+        phase: state.phase,
+      });
+      return this.heatExposure;
+    }
+    supportCollisionHeight(x, z, state) {
+      this.heightSamples.push({ x, z, elapsed: state.supportCollapseElapsed });
+      return this.collisionHeight(x, z, state);
+    }
     beforeRender() {
       this.before++;
     }
@@ -221,8 +237,8 @@ function setup(t) {
     canvas,
   };
 }
-function readyFlight(controller, altitude = 100) {
-  const s = createRocket('small', 0, 0, 0, { kind: 'ground' });
+function readyFlight(controller, altitude = 100, support = { kind: 'ground' }) {
+  const s = createRocket('small', 0, 0, 0, support);
   s.phase = 'flight';
   s.buildProgress = 1;
   s.position.y = altitude;
@@ -578,4 +594,254 @@ test('upper-stage collision probes exclude the discarded booster volume', async 
     'flight',
     'a deck below the actual upper-stage nozzle cannot hit a ghost booster',
   );
+});
+
+const buildingVolume = (minX, maxX, minZ, maxZ, maxY) => ({
+  polygon: [
+    [
+      [minX, minZ],
+      [maxX, minZ],
+      [maxX, maxZ],
+      [minX, maxZ],
+      [minX, minZ],
+    ],
+  ],
+  minY: 0,
+  maxY,
+});
+function advance(controller, seconds) {
+  for (let i = 0; i < Math.ceil(seconds * 60); i++) controller.update(1 / 60);
+}
+function advanceUntil(controller, predicate, limitSeconds = 20) {
+  for (let i = 0; i < limitSeconds * 60 && !predicate(); i++)
+    controller.update(1 / 60);
+  assert(
+    predicate(),
+    `controller condition timed out in ${controller.snapshot.phase}`,
+  );
+}
+async function roofLaunch(t, extraVolumes = []) {
+  const fixture = setup(t),
+    { controller: c, engine: e, resources } = fixture;
+  e.data.flightBuildingVolumes = [
+    buildingVolume(-4, 4, -4, 4, 8),
+    ...extraVolumes,
+  ];
+  c.start('large', 0, 8.45, 0, {
+    kind: 'roof-small',
+    groundY: 0,
+    seed: 13,
+  });
+  await tick();
+  resources.effects[0].collisionHeight = (x, z, state) =>
+    Math.abs(x) <= 4 && Math.abs(z) <= 4
+      ? Math.max(0.2, 8 - state.supportCollapseElapsed * 3.2)
+      : null;
+  advanceUntil(c, () => c.snapshot.phase === 'ready');
+  c.launch();
+  return fixture;
+}
+
+test('a collapsing support collider follows the rendered roof without shortening the readable fall or changing city metadata', async (t) => {
+  const { controller: c, engine: e, resources } = await roofLaunch(t);
+  const metadata = structuredClone(e.data.flightBuildingVolumes);
+  advanceUntil(c, () => c.snapshot.phase === 'falling');
+  const collapseAt = c.state.elapsed;
+  assert.equal(c.snapshot.failureStage, 'support-collapse');
+  assert.equal(c.snapshot.failureAge, 0);
+  advance(c, 1.4);
+  assert.equal(c.snapshot.phase, 'falling');
+  assert.equal(c.snapshot.failureStage, 'support-collapse');
+  const support = c.supportVolumes[0];
+  assert(support);
+  const displayedTop = resources.effects[0].collisionHeight(0, 0, c.state);
+  assert(Math.abs(support.bounds.max.y - displayedTop) < 1e-8);
+  assert(support.bounds.max.y < 4);
+  assert(
+    resources.effects[0].heightSamples.some((sample) => sample.elapsed > 1),
+  );
+  advance(c, 0.25);
+  assert.equal(c.snapshot.phase, 'falling');
+  assert.equal(c.snapshot.failureStage, 'freefall');
+  advanceUntil(c, () => c.snapshot.phase === 'crashed');
+  assert(c.state.elapsed - collapseAt > 2.4);
+  assert(c.state.wreckage.velocity.y < -8);
+  assert.equal(c.snapshot.failureCause, 'impact');
+  assert.deepEqual(e.data.flightBuildingVolumes, metadata);
+});
+
+test('a support-collapse exception never removes collision with a different nearby building', async (t) => {
+  const { controller: c } = await roofLaunch(t, [
+    buildingVolume(6, 10, -4, 4, 45),
+  ]);
+  advanceUntil(
+    c,
+    () => c.snapshot.phase === 'falling' || c.snapshot.phase === 'crashed',
+  );
+  assert.equal(c.snapshot.phase, 'falling');
+  const cells = [...new Set([...c.world.cells.values()].flat())];
+  const adjacent = cells.find((volume) => volume.bounds.min.x === 6);
+  assert(adjacent);
+  assert.equal(adjacent.bounds.max.y, 45);
+  // The nose now crosses the separate building while its own roof is sagging.
+  c.state.attitude.roll = 0.26;
+  c.update(1 / 60);
+  assert.equal(c.snapshot.phase, 'crashed');
+  assert.equal(c.snapshot.failureCause, 'impact');
+  assert(c.state.supportCollapseElapsed < 1.5);
+  assert.equal(
+    adjacent.bounds.max.y,
+    45,
+    'only the supporting roof is deformed',
+  );
+});
+
+test('falling automatically leaves the cabin for chase view while preserving the current mission', async (t) => {
+  const { controller: c } = await roofLaunch(t);
+  c.setView('first');
+  const mission = c.snapshot.missionId;
+  advanceUntil(c, () => c.snapshot.phase === 'falling');
+  assert.equal(c.snapshot.view, 'chase');
+  assert.equal(c.cabin.visible, false);
+  assert.equal(c.model.group.visible, true);
+  assert.equal(c.snapshot.active, true);
+  assert.equal(c.snapshot.missionId, mission);
+  assert.equal(c.snapshot.failureStage, 'support-collapse');
+  assert.equal(c.state.wreckage, null);
+});
+
+test('each physics step samples nearby fire and exposes body heat and fire independently from burning-tree counts', async (t) => {
+  const { controller: c, resources } = setup(t);
+  c.start('small', 0, 0, 0, { kind: 'platform', seed: 1 });
+  await tick();
+  readyFlight(c, 100, { kind: 'platform', seed: 1 });
+  c.world = null;
+  const effects = resources.effects[0];
+  effects.heatExposure = 1;
+  c.update(0.1);
+  assert(
+    effects.heatSamples.length >= 5,
+    'large render deltas still sample each fixed step',
+  );
+  assert(effects.heatSamples.at(-1).heat > effects.heatSamples[0].heat);
+  assert(c.snapshot.vehicleHeat > 0);
+  assert.equal(c.snapshot.vehicleHeat, c.state.heat);
+  assert.equal(c.snapshot.vehicleFire, 0);
+  assert.equal(c.snapshot.burning, 2, 'city fire count is a separate readout');
+  advanceUntil(c, () => c.state.fireIntensity > 0);
+  assert.equal(c.snapshot.vehicleFire, c.state.fireIntensity);
+  assert(c.snapshot.vehicleFire > 0);
+  assert.equal(c.snapshot.phase, 'flight');
+  assert.equal(c.snapshot.failureStage, 'none');
+  effects.heatExposure = 0;
+  advance(c, 12);
+  assert.equal(c.snapshot.phase, 'flight');
+  assert.equal(c.snapshot.vehicleFire, 0);
+  assert.equal(c.snapshot.vehicleHeat, 0);
+  assert.equal(c.snapshot.burning, 2);
+});
+
+test('the snapshot recovery clock starts at impact and restarts at the actual delayed explosion', async (t) => {
+  const { controller: c } = setup(t);
+  c.start('small', 0, 0, 0, { kind: 'platform', seed: 13 });
+  await tick();
+  readyFlight(c, 100, { kind: 'platform', seed: 13 });
+  c.state.velocity = { x: 0, y: -20, z: 0 };
+  c.state = crashRocket(c.state, 'Struck a building.');
+  const impactAt = c.state.wreckage.time;
+  assert.equal(c.snapshot.failureAge, 0);
+  assert.equal(c.snapshot.failureStage, 'wreckage');
+  assert.equal(c.snapshot.failureCause, 'impact');
+  advance(c, 0.5);
+  assert(c.snapshot.failureAge > 0.45);
+  assert.equal(c.state.wreckage.explosionTime, null);
+  advanceUntil(c, () => c.state.wreckage.explosionTime !== null);
+  assert(c.state.wreckage.explosionTime > impactAt + 0.6);
+  assert(
+    c.snapshot.failureAge < 0.02,
+    'five-second recovery starts from the final explosion',
+  );
+  advance(c, 1);
+  assert(c.snapshot.failureAge > 0.95 && c.snapshot.failureAge < 1.05);
+  assert.equal(c.snapshot.active, true);
+  assert.equal(
+    c.model.group.visible,
+    true,
+    'accident pieces continue to render',
+  );
+});
+
+test('the accident chase camera smoothly finds a clear view past an actual neighbouring building', async (t) => {
+  const { controller: c, engine: e } = await roofLaunch(t, [
+    buildingVolume(20, 70, 25, 60, 80),
+  ]);
+  const originalFocus = new THREE.Vector3(0, 8.45 + 48 * 0.45, 0);
+  assert(
+    c.world.hit(originalFocus, e.camera.position, 0.5),
+    'the authored neighbour really blocks the ordinary launch view',
+  );
+  const mission = c.snapshot.missionId;
+  const previous = e.camera.position.clone();
+  while (c.snapshot.phase !== 'falling' && c.state.elapsed < 20) {
+    previous.copy(e.camera.position);
+    c.update(1 / 60);
+  }
+  assert.equal(c.snapshot.phase, 'falling');
+  assert(
+    e.camera.position.distanceTo(previous) < 30,
+    'choosing an unobstructed angle still damps the camera transition',
+  );
+  advance(c, 1.2);
+  const focus =
+    c.damageFocus?.clone() ??
+    new THREE.Vector3(0, c.chaseAnchorHeight, 0)
+      .applyQuaternion(c.model.group.quaternion)
+      .add(
+        new THREE.Vector3(
+          c.state.position.x,
+          c.state.position.y,
+          c.state.position.z,
+        ),
+      );
+  assert.equal(c.world.hit(focus, e.camera.position, 0.5), false);
+  assert(
+    e.camera
+      .getWorldDirection(new THREE.Vector3())
+      .dot(focus.clone().sub(e.camera.position).normalize()) > 0.99999,
+    'the clear camera continues looking at the accident',
+  );
+  assert.equal(c.snapshot.view, 'chase');
+  assert.equal(c.snapshot.missionId, mission);
+  assert.equal(c.snapshot.active, true);
+});
+
+test('repairing a wrecked rooftop restores its collision height and later accident steps cannot collapse it again', async (t) => {
+  const { controller: c, resources } = await roofLaunch(t);
+  const mission = c.snapshot.missionId;
+  const roof = c.supportVolumes[0].bounds;
+  advanceUntil(c, () => c.snapshot.phase === 'crashed');
+  advance(c, 1.2);
+  assert(roof.max.y < 1, 'the failed support was actually collapsed');
+  const wreckage = structuredClone(c.state.wreckage);
+  const effects = resources.effects[0];
+  c.resetDamage();
+  assert.equal(
+    roof.max.y,
+    8,
+    'repair restores the mission-owned roof collider',
+  );
+  assert.equal(
+    c.supportVolumes.length,
+    0,
+    'the old collapse no longer owns a repaired collider',
+  );
+  await tick();
+  assert.equal(effects.disposed, 1);
+  assert.equal(resources.effects.length, 2);
+  advance(c, 5);
+  assert.equal(roof.max.y, 8);
+  assert.deepEqual(c.state.wreckage, wreckage);
+  assert.equal(c.snapshot.phase, 'crashed');
+  assert.equal(c.snapshot.missionId, mission);
+  assert.equal(c.snapshot.active, true);
 });

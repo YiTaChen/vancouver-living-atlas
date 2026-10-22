@@ -24,6 +24,59 @@
   scrollbar-width: thin;
 }
 
+.rocket-failure-panel {
+  animation: rocket-failure-reveal 680ms ease-out both;
+}
+@keyframes rocket-failure-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rocket-accident-observation {
+  position: absolute;
+  z-index: 32;
+  left: 24px;
+  bottom: max(96px, calc(env(safe-area-inset-bottom, 0px) + 90px));
+  max-width: min(340px, calc(100vw - 100px));
+  padding: 10px 12px;
+  border: 1px solid rgba(175, 210, 225, 0.12);
+  border-radius: 10px;
+  background: rgba(7, 20, 30, 0.58);
+  box-shadow: 0 3px 16px #0002;
+  color: #ffe0bc;
+  text-shadow:
+    0 1px 5px #04101d,
+    0 0 12px #04101d;
+  pointer-events: none;
+}
+.rocket-accident-observation strong {
+  font-size: 12px;
+  font-weight: 500;
+}
+.rocket-accident-timeline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 7px;
+  color: #b8c4cc;
+  font-size: 10px;
+}
+.rocket-accident-timeline .current {
+  color: #ffe0bc;
+}
+.rocket-accident-observation > small {
+  display: block;
+  margin-top: 6px;
+  font-size: 10px;
+  color: #c3cbd0;
+  font-variant-numeric: tabular-nums;
+}
+
 .rocket-panel header,
 .rocket-space-panel header,
 .rocket-placement header,
@@ -280,7 +333,9 @@
   display: flex !important;
 }
 .atlas.touch-ui.mobile-hud-hidden
-  .rocket-space-panel.ui-chrome:not(.mode-switch):not(.touch-drive-controls) {
+  .rocket-space-panel.ui-chrome:not(.mode-switch):not(.touch-drive-controls),
+.atlas.touch-ui.mobile-hud-hidden
+  .rocket-failure-panel.ui-chrome:not(.mode-switch):not(.touch-drive-controls) {
   display: block !important;
 }
 .rocket-compact-controls button {
@@ -984,6 +1039,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .rocket-failure-panel {
+    animation: none;
+  }
   .rocket-build-progress > span,
   .rocket-mission-meter > span {
     transition: none;

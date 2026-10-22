@@ -12,6 +12,7 @@ export interface RocketSnapshot {
     | 'countdown'
     | 'ignition'
     | 'flight'
+    | 'falling'
     | 'space'
     | 'sinking'
     | 'crashed'
@@ -36,6 +37,11 @@ export interface RocketSnapshot {
   stabilize: boolean;
   support: string;
   supportIntegrity: number;
+  failureStage: 'none' | 'support-collapse' | 'freefall' | 'wreckage';
+  failureAge: number;
+  failureCause: 'impact' | 'fire' | 'aerodynamic' | '';
+  vehicleFire: number;
+  vehicleHeat: number;
   warning: string;
   view: RocketView;
   damaged: number;
@@ -69,6 +75,11 @@ export const EMPTY_ROCKET: RocketSnapshot = {
   stabilize: true,
   support: 'ground',
   supportIntegrity: 1,
+  failureStage: 'none',
+  failureAge: 0,
+  failureCause: '',
+  vehicleFire: 0,
+  vehicleHeat: 0,
   warning: '',
   view: 'chase',
   damaged: 0,

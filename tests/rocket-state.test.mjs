@@ -12,6 +12,7 @@ const {
   ROCKET_CONFIGS,
   rocketMass,
   SPACE_ALTITUDE,
+  ROCKET_SUPPORT_RELEASE_DELAY,
 } = await import(cityModule('rocket-state'));
 const dt = 1 / 60;
 function run(state, seconds, input = {}) {
@@ -413,4 +414,275 @@ test('a detached upper stage lands on its real nozzle or inverted nose without a
     Math.abs(nose.position.y - h) < 1e-9,
     'an inverted surviving nose is the actual contact point',
   );
+});
+
+test('a collapsing roof visibly sags, loses support, and freely falls before the impact', () => {
+  let s = launchRocket(
+    prepared('large', { kind: 'roof-small', groundY: 0, seed: 13 }, 8),
+  );
+  while (!s.supportCollapsed && s.elapsed < 20) s = stepRocket(s, {}, dt);
+  const collapse = structuredClone(s);
+  assert.equal(s.phase, 'falling');
+  assert.equal(s.failureStage, 'support-collapse');
+  assert.equal(s.supportCollapseElapsed, 0);
+  assert.equal(s.wreckage, null);
+  assert.equal(s.throttle, 0);
+  assert.equal(sampleRocketEffects(s).engine, 0);
+  s = run(s, ROCKET_SUPPORT_RELEASE_DELAY - 0.1);
+  assert.equal(s.failureStage, 'support-collapse');
+  assert(s.position.y > 7.4 && s.position.y < 8);
+  assert(!s.events.some((e) => e.type === 'impact'));
+  s = run(s, 0.2);
+  assert.equal(s.failureStage, 'freefall');
+  assert.equal(s.phase, 'falling');
+  assert(s.velocity.y < -0.9);
+  assert.equal(s.events.filter((e) => e.type === 'support-lost').length, 1);
+  const result = untilDone(s);
+  assert.equal(result.phase, 'crashed');
+  assert.equal(result.failureStage, 'wreckage');
+  assert(result.elapsed - collapse.elapsed > 2.4);
+  assert(result.elapsed - collapse.elapsed < 3.1);
+  assert(result.wreckage.velocity.y < -10);
+  assert.equal(
+    result.fuel,
+    collapse.fuel,
+    'failed supports shut the engine down',
+  );
+  assert.deepEqual(
+    result.events
+      .filter((e) =>
+        ['support-collapsed', 'support-lost', 'impact', 'ruptured'].includes(
+          e.type,
+        ),
+      )
+      .map((e) => e.type),
+    ['support-collapsed', 'support-lost', 'impact', 'ruptured'],
+  );
+});
+
+test('unstable lake support has a readable collapse and sinks below the vanished bed before impact', () => {
+  let s = launchRocket(prepared('large', { kind: 'lake', seed: 7 }));
+  while (!s.supportCollapsed && s.elapsed < 20) s = stepRocket(s, {}, dt);
+  const collapseTime = s.elapsed;
+  s = untilDone(s);
+  assert.equal(s.phase, 'crashed');
+  assert(s.elapsed - collapseTime > 2);
+  assert(s.position.y < s.origin.y - 2);
+  assert(s.wreckage.velocity.y < -5);
+  assert(s.events.some((e) => e.type === 'support-lost'));
+});
+
+test('a low roof keeps collapsing after an early vehicle impact without moving its wreckage snapshot', () => {
+  const impact = untilDone(
+    launchRocket(
+      prepared(
+        'large',
+        {
+          kind: 'roof-small',
+          groundY: 0,
+          seed: 13,
+        },
+        2.45,
+      ),
+    ),
+  );
+  assert.equal(impact.phase, 'crashed');
+  assert(
+    impact.supportCollapseElapsed > 2 && impact.supportCollapseElapsed < 2.6,
+  );
+  const pose = structuredClone({
+    time: impact.wreckage.time,
+    position: impact.wreckage.position,
+    velocity: impact.wreckage.velocity,
+    attitude: impact.wreckage.attitude,
+    angularVelocity: impact.wreckage.angularVelocity,
+  });
+  const settled = run(impact, 5);
+  assert(settled.supportCollapseElapsed >= 2.6);
+  assert(
+    Math.abs(
+      settled.supportCollapseElapsed - impact.supportCollapseElapsed - 5,
+    ) < 1e-8,
+  );
+  assert.deepEqual(
+    {
+      time: settled.wreckage.time,
+      position: settled.wreckage.position,
+      velocity: settled.wreckage.velocity,
+      attitude: settled.wreckage.attitude,
+      angularVelocity: settled.wreckage.angularVelocity,
+    },
+    pose,
+  );
+  assert(
+    impact.supportCollapseElapsed < 2.6,
+    'previous snapshots remain unchanged',
+  );
+});
+
+test('impact preserves incoming wreckage momentum and a seeded fuel explosion follows the rupture later', () => {
+  const airborne = run(
+    launchRocket(prepared('large', { kind: 'platform', seed: 13 })),
+    10,
+  );
+  const frozen = structuredClone(airborne);
+  const impact = crashRocket(airborne, 'A falling vehicle struck a building.');
+  assert.deepEqual(impact.wreckage.position, airborne.position);
+  assert.deepEqual(impact.wreckage.velocity, airborne.velocity);
+  assert.deepEqual(impact.wreckage.attitude, airborne.attitude);
+  assert.deepEqual(impact.wreckage.angularVelocity, airborne.angularVelocity);
+  assert.equal(impact.wreckage.cause, 'impact');
+  assert.equal(impact.wreckage.exploded, false);
+  assert.equal(impact.wreckage.explosionTime, null);
+  assert(impact.wreckage.explosionDelay >= 0.65);
+  assert.equal(impact.events.at(-1).type, 'ruptured');
+  const waiting = run(impact, 0.5);
+  assert.equal(waiting.wreckage.explosionTime, null);
+  const exploded = run(waiting, 0.5);
+  assert.equal(exploded.wreckage.exploded, true);
+  assert(exploded.wreckage.explosionTime - impact.wreckage.time >= 0.65);
+  assert(exploded.wreckage.explosionTime - impact.wreckage.time < 0.95);
+  assert.equal(exploded.events.at(-1).type, 'exploded');
+  assert.equal(
+    run(exploded, 5).events.filter((e) => e.type === 'exploded').length,
+    1,
+  );
+  assert.deepEqual(exploded.wreckage.velocity, airborne.velocity);
+  assert.deepEqual(impact.wreckage.position, airborne.position);
+  assert.equal(
+    impact.wreckage.exploded,
+    false,
+    'terminal stepping is immutable',
+  );
+  assert.deepEqual(airborne, frozen);
+});
+
+test('low-energy or dry collisions rupture without a fuel explosion; fueled hard impacts vary by seed', () => {
+  for (const dry of [false, true]) {
+    let s = prepared('small', { kind: 'platform', seed: 13 });
+    s = {
+      ...s,
+      velocity: { x: dry ? 40 : 0, y: dry ? -20 : -2, z: 0 },
+      ...(dry ? { fuel: 0, boosterFuel: 0, upperFuel: 0 } : {}),
+    };
+    const result = run(crashRocket(s), 3);
+    assert.equal(result.wreckage.explosionDelay, null);
+    assert.equal(result.wreckage.exploded, false);
+    assert(!result.events.some((e) => e.type === 'exploded'));
+    assert(result.events.some((e) => e.type === 'ruptured'));
+  }
+  let explosions = 0;
+  for (let seed = 0; seed < 30; seed++) {
+    const s = {
+      ...createRocket('large', 0, 20, 0, { kind: 'platform', seed }),
+      velocity: { x: 0, y: -20, z: 0 },
+    };
+    if (run(crashRocket(s), 2).wreckage.exploded) explosions++;
+  }
+  assert(
+    explosions > 0 && explosions < 30,
+    `seeded outcomes: ${explosions}/30`,
+  );
+});
+
+function burningLaunch(seed = 1) {
+  let s = launchRocket(prepared('small', { kind: 'platform', seed }));
+  while (s.fireIntensity === 0 && s.elapsed < 20)
+    s = stepRocket(s, { fireExposure: 1 }, dt);
+  return s;
+}
+
+test('nearby fire first ignites the vehicle visibly, then may burst its fueled tanks during flight', () => {
+  const burning = burningLaunch();
+  assert(burning.fireIntensity > 0);
+  assert(burning.heat > 0.6);
+  assert.equal(burning.wreckage, null);
+  assert(!burning.events.some((e) => e.type === 'exploded'));
+  const result = untilDone(burning, { fireExposure: 1 }, 20);
+  assert.equal(result.phase, 'crashed');
+  assert.equal(result.wreckage.cause, 'fire');
+  assert.equal(result.wreckage.exploded, true);
+  assert.equal(result.wreckage.explosionTime, result.wreckage.time);
+  assert(
+    result.wreckage.position.y > 100,
+    'failure happens after actual ascent',
+  );
+  assert(result.wreckage.velocity.y > 10, 'airburst retains ascent momentum');
+  assert(result.fireDamage > 0);
+  const ignited = result.events.find((e) => e.type === 'vehicle-ignited');
+  const exploded = result.events.find((e) => e.type === 'exploded');
+  assert(exploded.time - ignited.time >= 3);
+  assert(
+    !result.events.some((e) => e.type === 'impact'),
+    'airburst is not an impact',
+  );
+  assert.equal(sampleRocketEffects(result).engine, 0);
+});
+
+test('escaping a forest fire or shutting the engine down cools the same burning snapshot before tank failure', () => {
+  const burning = burningLaunch();
+  const original = structuredClone(burning);
+  const escaped = run(burning, 15);
+  const shutdown = run(burning, 15, { abort: true });
+  assert.equal(escaped.phase, 'flight');
+  assert.equal(escaped.fireIntensity, 0);
+  assert.equal(escaped.heat, 0);
+  assert.equal(shutdown.phase, 'aborted');
+  assert.equal(shutdown.fireIntensity, 0);
+  assert.equal(shutdown.fuel, burning.fuel);
+  assert(shutdown.fireDamage < escaped.fireDamage);
+  for (const s of [escaped, shutdown]) {
+    assert(s.fireDamage > 0);
+    assert(s.events.some((e) => e.type === 'vehicle-extinguished'));
+    assert(!s.events.some((e) => e.type === 'exploded'));
+  }
+  assert.equal(
+    untilDone(escaped).phase,
+    'space',
+    'a scorched but intact rocket can escape',
+  );
+  assert.deepEqual(burning, original);
+});
+
+test('severely heated tanks can burst after leaving the fire while emergency shutdown arrests the internal fire', () => {
+  const hot = run(
+    launchRocket(prepared('small', { kind: 'platform', seed: 1 })),
+    5,
+    { fireExposure: 1 },
+  );
+  assert.equal(hot.phase, 'flight');
+  assert(hot.heat > 0.95 && hot.fireIntensity > 0.8);
+  assert(hot.fireElapsed > 2 && hot.wreckage === null);
+  const departed = untilDone(hot, { fireExposure: 0 });
+  assert.equal(departed.wreckage.cause, 'fire');
+  assert(departed.wreckage.explosionTime > hot.elapsed + 1);
+  assert(departed.wreckage.position.y > hot.position.y + 100);
+  const shutdown = run(hot, 15, { abort: true, fireExposure: 0 });
+  assert.equal(shutdown.phase, 'aborted');
+  assert.equal(shutdown.wreckage, null, 'a ballistic vehicle is still intact');
+  assert.equal(shutdown.fireIntensity, 0);
+  assert(shutdown.heat < 0.1);
+  assert(shutdown.events.some((e) => e.type === 'vehicle-extinguished'));
+  assert(!shutdown.events.some((e) => e.type === 'exploded'));
+});
+
+test('forest fire susceptibility is seeded, deterministic and does not make every launch explode', () => {
+  const start = (seed) =>
+    launchRocket(prepared('small', { kind: 'platform', seed }));
+  const vulnerable = start(1),
+    resistant = start(0);
+  const fire = { fireExposure: 1 };
+  const damaged = run(vulnerable, 10, fire);
+  assert.deepEqual(damaged, run(vulnerable, 10, fire));
+  assert.equal(damaged.phase, 'crashed');
+  const safe = run(resistant, 10, fire);
+  assert.equal(safe.phase, 'flight');
+  assert.equal(safe.fireIntensity, 0);
+  assert(!safe.events.some((e) => e.type === 'exploded'));
+  let warm = run(start(1), 1, { fireExposure: 0.4 });
+  assert(warm.heat > 0 && warm.heat < 0.3);
+  warm = run(warm, 5, { fireExposure: Number.NaN });
+  assert.equal(warm.heat, 0);
+  assert.equal(warm.fireDamage, 0);
+  assert.equal(warm.fireIntensity, 0);
 });
