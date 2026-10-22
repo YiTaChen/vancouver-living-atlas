@@ -104,6 +104,13 @@ Portrait, landscape and tablet layouts have been checked in the browser. The com
 
 ## Time, sky and languages
 
+**City sounds:** open **Layers → City sounds** to enable original procedural
+footsteps, coastal waves, birds, harbour ambience and nearby SkyTrain sound.
+Sound is off by default and starts only after your click or tap. Volume is
+independent of vehicle impact sound; entering interiors fades outdoor ambience,
+and background tabs suspend the soundscape. These are illustrative synthesized
+sounds, not live audio or recordings. [Controls, limits and validation](docs/CITY_SOUNDSCAPE_2026_10.md).
+
 The **Time** button controls the scene clock. Time flows at **300× by default**: a full day takes 4 minutes 48 seconds. Adjust the speed, set a time directly, freeze it, or hide the toolbar's numeric time. Movement and traffic retain their normal speed; the clock pauses while the tab is hidden.
 
 Under **Time → Sky effects**, toggle the sun, moon, stars, aurora and meteors; adjust star density, aurora strength/density and meteor frequency. There are eight lunar phases plus an eclipse preview. The first simulated night after a page load starts with a half moon and aurora; later nights have a one-in-three aurora chance. These cycles are illustrative, not astronomical predictions or live forecasts. [Sky implementation and visual checks](docs/visual-quality/sky-effects-final/README.md).
@@ -132,6 +139,14 @@ Startup now shows a **stage-estimated percentage plus an animated activity bar**
 The recorded startup experiment measured median page-to-interactive times of **18.13 → 15.75 s on desktop** and **15.68 → 15.07 s in a phone-sized compatible profile**, across three local runs per version/profile. These are dated measurements, not a benchmark of every later feature: ranges overlap, and the phone profile used desktop Chrome rather than iPhone hardware. First-use pauses remain possible; the results do not establish universal FPS, memory or battery savings. [Measurements](docs/performance/progressive-startup.md) · [Accepted and rejected experiments](docs/performance/experiment-decisions.md) · [Rendering budgets](docs/visual-quality/README.md).
 
 ## Built from geography, with original models
+
+**Local performance investigation:** an explicitly instrumented QA build can
+separate data header wait, body read/decode and JSON parsing, and export bounded
+runtime frame/subsystem timing with optional browser trace and GPU query evidence.
+Normal production builds exclude the runtime recorder. The regional terrain
+initialization now reuses colour objects while preserving exact geometry and
+colour output. [Reproduction and measurement limits](docs/performance/startup-soundscape-20261022.md)
+· [Long-frame diagnostics](docs/performance/runtime-diagnostics.md).
 
 - About **7,800 building polygon parts**, derived from City of Vancouver geometry and reconciled OpenStreetMap heights. Parts are not a count of unique buildings.
 - A **257 × 273 terrain grid**, roughly 20 m spacing, interpolated from public contours; Stanley Park reaches about 76 m.

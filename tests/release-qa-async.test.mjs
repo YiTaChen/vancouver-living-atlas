@@ -80,6 +80,7 @@ test('async QA measures attachment separately, samples medium-to-ready and only 
   };
   const e = {
     data: {},
+    runtimePerformance: { snapshot: () => ({ kind: 'opt-in-runtime-performance', frames: [] }) },
     landmarkDetails: [detail],
     landmarkWorker: null,
     disposed: false,
@@ -157,6 +158,9 @@ test('async QA measures attachment separately, samples medium-to-ready and only 
   assert.equal(previousMetrics, 1);
   assert.equal(result.renderCPU.maxMs, 2);
   assert.equal(result.valid, true);
+  assert.equal(result.runtimePerformance.kind, 'opt-in-runtime-performance');
+  assert.equal(result.runtimeWindow.startMs, 0);
+  assert.equal(result.runtimeWindow.endMs, 1050);
   assert.equal(client.onMetrics, originalMetric);
   assert.equal(detail.update, originalUpdate);
   assert.equal(e.renderScene, originalRender);

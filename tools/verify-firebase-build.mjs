@@ -208,6 +208,17 @@ export async function verifyFirebaseBuild(
     'CPU profiling controls must not ship in the public build',
   );
   assert(
+    !scripts.includes('opt-in-runtime-performance') &&
+      !scripts.includes('atlas.runtime.') &&
+      !scripts.includes('runtimePerfTrace') &&
+      !scripts.includes('runtimePerfGpu') &&
+      !scripts.includes('Save runtime timing') &&
+      !files.some((name) =>
+        /(?:^|\/)(?:runtime-performance|runtime-gpu-timing)(?:[.-][^/]+)?\.js$/.test(name),
+      ),
+    'Runtime performance diagnostics must not ship in the public build',
+  );
+  assert(
     !scripts.includes('residential-perennial-qa-v1') &&
       !scripts.includes('qaPerennial') &&
       !scripts.includes('residentialPerennialQA'),

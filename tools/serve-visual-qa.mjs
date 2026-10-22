@@ -4,7 +4,9 @@ import { readFile, writeFile, mkdir, stat } from 'node:fs/promises';
 import { resolve, extname, sep } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
+import { parseVisualQaPort, allowsVisualQaOrigin } from './visual-qa-server-policy.mjs';
 const root = resolve('dist/client');
+const port = parseVisualQaPort(process.env.VISUAL_QA_PORT);
 const label = process.argv[2] || 'baseline';
 if (!/^[a-z0-9-]+$/.test(label)) throw new Error('Use a simple result label');
 const output = resolve('work/visual-qa', label);
@@ -47,6 +49,7 @@ const visualFiles = [
         'package-lock.json',
         'vite.config.ts',
         'tools/serve-visual-qa.mjs',
+        'tools/visual-qa-server-policy.mjs',
         'tools/assets/offline-handoff/manifest.json',
         'tools/assets/role-materials/exports/*.glb',
         'tools/assets/architecture-expansion/assets/*.glb',
@@ -85,7 +88,7 @@ const mime = {
 };
 createServer(async (req, res) => {
   try {
-    const url = new URL(req.url, 'http://localhost:3100');
+    const url = new URL(req.url, `http://localhost:${port}`);
     // Offline study assets are available only on this local QA server. Keep
     // unaccepted models out of public/ and out of the production deployment.
     if (req.method === 'GET' && url.pathname.startsWith('/__offline-assets/')) {
@@ -104,10 +107,7 @@ createServer(async (req, res) => {
       return res.end(body);
     }
     if (req.method === 'POST' && url.pathname === '/__visual-qa') {
-      if (
-        req.headers.origin &&
-        !/^http:\/\/(localhost|127\.0\.0\.1):3100$/.test(req.headers.origin)
-      ) {
+      if (!allowsVisualQaOrigin(req.headers.origin, port)) {
         res.writeHead(403);
         return res.end();
       }
@@ -158,6 +158,6 @@ createServer(async (req, res) => {
     res.writeHead(404);
     res.end('Not found');
   }
-}).listen(3100, '127.0.0.1', () =>
-  console.log('Visual QA: http://localhost:3100/ → ' + output),
+}).listen(port, '127.0.0.1', () =>
+  console.log(`Visual QA: http://localhost:${port}/ → ` + output),
 );

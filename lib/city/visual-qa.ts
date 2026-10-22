@@ -681,6 +681,7 @@ export function installVisualQA(e: CityEngine) {
       id: 'startup',
       valid: measurement.valid,
       measurement,
+      runtimePerformance: e.runtimePerformance?.snapshot() ?? null,
       viewport: [innerWidth, innerHeight],
       render: [e.renderer.domElement.width, e.renderer.domElement.height],
     };
@@ -698,6 +699,31 @@ export function installVisualQA(e: CityEngine) {
       .catch((error) => {
         status.textContent = String(error);
       });
+  });
+  button('Save runtime timing', () => {
+    const runtimePerformance = e.runtimePerformance?.snapshot();
+    if (!runtimePerformance) {
+      status.textContent = 'Reload this local QA build with ?runtimePerf=1 to record runtime timing';
+      return;
+    }
+    const row = {
+      kind: 'runtime-timing-v1',
+      id: 'runtime',
+      runtimePerformance,
+      citySoundscape: e.soundscape?.snapshot ?? null,
+      viewport: [innerWidth, innerHeight],
+      render: [e.renderer.domElement.width, e.renderer.domElement.height],
+      graphics: e.settings.quality,
+      mode: e.settings.mode,
+    };
+    output.value = JSON.stringify(row, null, 2);
+    void fetch('/__visual-qa', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: 'runtime-timing', row }),
+    }).then((response) => {
+      status.textContent = response.ok ? 'Saved runtime timing' : `Save failed ${response.status}`;
+    }).catch((error) => { status.textContent = String(error); });
   });
   installReleaseQAControls(e, {
     button,

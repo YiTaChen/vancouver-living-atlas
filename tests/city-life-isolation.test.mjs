@@ -314,14 +314,24 @@ test('Firebase verifier invokes mandatory pedestrian isolation on supplied outpu
       'Controlled five-car vault QA fixture',
       'controlled-five-car-vault-qa-v1',
       'qa-vault-car:',
+      'opt-in-runtime-performance',
+      'atlas.runtime.',
+      'runtimePerfTrace',
+      'runtimePerfGpu',
+      'Save runtime timing',
     ]) {
       await f.put(f.output, 'assets/auto-qa.js', JSON.stringify(marker));
       await assert.rejects(
         verifyFirebaseBuild(f.output, options),
-        /(?:Auto quality|Street furniture|Tesla) diagnostics/,
+        /(?:Auto quality|Street furniture|Tesla|Runtime performance) diagnostics/,
       );
     }
     await f.put(f.output, 'assets/auto-qa.js', '');
+    for (const name of ['assets/runtime-performance.js', 'assets/runtime-performance-deadbeef.js', 'assets/runtime-gpu-timing-deadbeef.js']) {
+      await f.put(f.output, name, 'export const instrumented = true;');
+      await assert.rejects(verifyFirebaseBuild(f.output, options), /Runtime performance diagnostics/);
+      await rm(path.join(f.output, name));
+    }
     for (const name of [
       'assets/tesla-vortex-vault-qa.js',
       'assets/tesla-vortex-vault-qa-deadbeef.js',

@@ -38,6 +38,14 @@ import { CityPedestrians } from './city-life/city-pedestrians';
 import { installPedestrianOverrideMaterial } from './city-life/pedestrian-renderer';
 import type { LandmarkWorkerClient } from './landmark-worker-client';
 import { createStartupQA } from './startup-qa';
+import { createStartupDataLoader } from './startup-data';
+import {
+  createRuntimePerformanceDiagnostics,
+  runtimePerformanceFlags,
+  type RuntimePerformanceDiagnostics,
+} from './runtime-performance';
+import { CitySoundscape } from './city-soundscape';
+import { CitySoundscapeWorld } from './city-soundscape-world';
 import { BeachGround, type BeachCoastData } from './beach-ground';
 import { enterLocalMap, finishLocalMapTransition } from './local-map-camera';
 import { createRoadSurfaces } from './road-surfaces';
@@ -108,6 +116,9 @@ import {
 } from './types';
 
 export class CityEngine {
+  runtimePerformance: RuntimePerformanceDiagnostics | null = null;
+  soundscape: CitySoundscape | null = null;
+  private soundscapeWorld: CitySoundscapeWorld | null = null;
   startupQA =
     process.env.VANCOUVER_VISUAL_QA === '1' ? createStartupQA() : null;
   clock = new CityClock();
@@ -118,6 +129,12 @@ export class CityEngine {
   visibilityChange = () => {
     if (this.disposed) return;
     if (document.hidden) this.clearHeldInput();
+    this.runtimePerformance?.setVisible(
+      !document.hidden && !this.pageSuspended && !this.cabinDisplayActive,
+    );
+    this.soundscape?.setPageActive(
+      !document.hidden && !this.pageSuspended && !this.cabinDisplayActive,
+    );
     this.pedestrians?.setHidden(
       document.hidden || this.pageSuspended || this.cabinDisplayActive,
     );
@@ -309,6 +326,15 @@ export class CityEngine {
       } catch (cause) {
         throw new GraphicsUnavailableError(cause);
       }
+      if (process.env.VANCOUVER_VISUAL_QA === '1') {
+        const flags = runtimePerformanceFlags(location.search);
+        this.runtimePerformance = createRuntimePerformanceDiagnostics({
+          ...flags,
+          gpuContext: flags.gpu
+            ? (this.renderer.getContext() as WebGL2RenderingContext)
+            : null,
+        });
+      }
       this.compatibleGraphics =
         isMobileGraphics(navigator.userAgent, navigator.maxTouchPoints) ||
         new URLSearchParams(location.search).get('graphics') === 'compatible' ||
@@ -459,6 +485,8 @@ export class CityEngine {
   private suspendPage() {
     if (this.disposed || this.pageSuspended) return;
     this.pageSuspended = true;
+    this.runtimePerformance?.setVisible(false);
+    this.soundscape?.setPageActive(false);
     this.suspendedAt = performance.now();
     this.clock.setVisible(false, this.suspendedAt);
     this.pedestrians?.setHidden(true);
@@ -475,6 +503,12 @@ export class CityEngine {
     if (this.transition)
       this.transition.start += Math.max(0, now - this.suspendedAt);
     this.pageSuspended = false;
+    this.runtimePerformance?.setVisible(
+      !document.hidden && !this.cabinDisplayActive,
+    );
+    this.soundscape?.setPageActive(
+      !document.hidden && !this.cabinDisplayActive,
+    );
     this.clearHeldInput();
     this.clock.resetTimebase(now);
     this.clock.setVisible(!document.hidden && !this.cabinDisplayActive, now);
@@ -490,6 +524,12 @@ export class CityEngine {
   setCabinDisplayActive(active: boolean) {
     if (this.disposed || active === this.cabinDisplayActive) return;
     this.cabinDisplayActive = active;
+    this.runtimePerformance?.setVisible(
+      !active && !document.hidden && !this.pageSuspended,
+    );
+    this.soundscape?.setPageActive(
+      !active && !document.hidden && !this.pageSuspended,
+    );
     this.clearHeldInput();
     const now = performance.now();
     this.autoQuality?.resetTiming();
@@ -540,14 +580,14 @@ export class CityEngine {
       'shoreline',
       'context-land',
     ];
+    const dataLoader = createStartupDataLoader({ probe: this.startupQA });
     await Promise.all([
       ...names.map(async (n) => {
-        const res = await fetch(`/data/${n}.geojson`, {
+        this.data[n] = await dataLoader.json(`/data/${n}.geojson`, {
           signal: this.loadAbort.signal,
+          label: n,
+          errorMessage: (status) => `Could not load ${n} data (${status})`,
         });
-        if (!res.ok)
-          throw new Error(`Could not load ${n} data (${res.status})`);
-        this.data[n] = await res.json();
         fileDone();
       }),
       ...[
@@ -561,16 +601,13 @@ export class CityEngine {
         ['harbour-piers', 'harbour-piers', true],
         ['beach-coast', 'beachCoast', true],
       ].map(async ([name, key, required]) => {
-        const res = await fetch(`/data/${name}.json`, {
+        const data = await dataLoader.json(`/data/${name}.json`, {
           signal: this.loadAbort.signal,
+          required: Boolean(required),
+          label: String(name),
+          errorMessage: (status) => `Could not load ${name} (${status})`,
         });
-        if (!res.ok) {
-          if (required)
-            throw new Error(`Could not load ${name} (${res.status})`);
-          fileDone();
-          return;
-        }
-        this.data[String(key)] = await res.json();
+        if (data !== undefined) this.data[String(key)] = data;
         fileDone();
       }),
     ]);
@@ -707,6 +744,11 @@ export class CityEngine {
     this.skyTrainTravel = new SkyTrainTravel(this);
     this.skyTrainTravel.onChange = () => this.publishSkyTrainTravel();
     this.interactions = new CityInteractions(this);
+    this.soundscape = new CitySoundscape();
+    this.soundscapeWorld = new CitySoundscapeWorld(this);
+    this.soundscape.setPageActive(
+      !document.hidden && !this.pageSuspended && !this.cabinDisplayActive,
+    );
     if (!(await advance(92))) return;
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('render.composer-setup');
@@ -722,7 +764,6 @@ export class CityEngine {
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
       this.startupQA?.phase('render.quality-and-initial-lighting');
     }
-    this.resizeQuality();
     this.applySettings(this.settings);
     if (!(await advance(95))) return;
     if (process.env.VANCOUVER_VISUAL_QA === '1') {
@@ -786,6 +827,7 @@ export class CityEngine {
     }
 
     this.renderReady = true;
+    this.installRuntimePerformance();
     this.fpsAt = performance.now();
     this.clock.setVisible(
       !document.hidden && !this.pageSuspended && !this.cabinDisplayActive,
@@ -1003,14 +1045,69 @@ export class CityEngine {
     // detail instead of permanently adding equipment for every city building.
     this.architecturalDetails?.update(true);
   }
+  private installRuntimePerformance() {
+    const diagnostics = this.runtimePerformance;
+    if (!diagnostics) return;
+    // Wrappers are installed once in an explicit QA build. The normal city
+    // retains its original methods and creates no diagnostic frame records.
+    for (const key of [
+      'tickClock',
+      'renderScene',
+      'updateShadowFrustum',
+      'updateLabels',
+      'updateAutoQuality',
+    ] as const)
+      diagnostics.wrap(this, key, key);
+    const systems = [
+      ['controls', this.controls],
+      ['navigation', this.navigation],
+      ['bus', this.busVisit],
+      ['flight', this.flight],
+      ['tesla', this.tesla],
+      ['skytrain', this.skyTrainTravel],
+      ['interactions', this.interactions],
+      ['impacts', this.vehicleImpacts],
+      ['impact-feedback', this.impactFeedback],
+      ['drift', this.driftEffects],
+      ['pedestrians', this.pedestrians],
+      ['travel-return', this.travelReturn],
+      ['waves', this.sailingWaves],
+      ['trees', this.detailedTrees],
+      ['facades', this.facadeDetails],
+      ['architecture', this.architecturalDetails],
+      ['streetscape', this.streetscapeKit],
+      ['street-furniture', this.streetFurniture],
+      ['interiors', this.interiors],
+      ['soundscape', this.soundscapeWorld],
+    ] as const;
+    for (const [label, system] of systems)
+      if (system) diagnostics.wrap(system, 'update', label);
+    if (this.composer)
+      diagnostics.wrap(this.composer, 'render', 'render-submit');
+    else diagnostics.wrap(this.renderer, 'render', 'render-submit');
+    if (this.landmarkWarmup)
+      diagnostics.wrap(this.landmarkWarmup, 'tick', 'landmark-warmup');
+    diagnostics.wrap(this.sceneryPreparation, 'pump', 'scenery-preparation');
+    diagnostics.setVisible(
+      !document.hidden && !this.pageSuspended && !this.cabinDisplayActive,
+    );
+  }
   renderScene() {
+    this.runtimePerformance?.setRenderContext({
+      mode: this.skyTrainTravel?.active ? 'skytrain' : this.settings.mode,
+      quality: this.settings.quality,
+    });
     this.detailedTrees?.update();
     this.facadeDetails?.update();
     this.architecturalDetails?.update();
     this.streetscapeKit?.update();
     this.streetFurniture?.update();
     this.landmarkWorker?.beginFrame();
-    this.landmarkDetails.forEach((l) => l.update());
+    if (this.runtimePerformance)
+      this.runtimePerformance.measure('landmark-detail', () =>
+        this.landmarkDetails.forEach((l) => l.update()),
+      );
+    else this.landmarkDetails.forEach((l) => l.update());
     this.interiors?.update();
     this.updateShadowFrustum();
     this.renderer.info.reset();
@@ -1048,10 +1145,12 @@ export class CityEngine {
     const water = this.water,
       waterVisible = water?.visible;
     if (water && this.skyTrainTravel?.underground) water.visible = false;
+    this.runtimePerformance?.beginGpu();
     try {
       if (this.composer) this.composer.render();
       else this.renderer.render(this.scene, this.camera);
     } finally {
+      this.runtimePerformance?.endGpu();
       if (water) water.visible = waterVisible!;
     }
     const preparationBudget =
@@ -1554,7 +1653,8 @@ export class CityEngine {
     };
   }
   async visitBusInterior() {
-    if (this.navigation?.walkSeat && !this.navigation.leaveWalkSeat()) return false;
+    if (this.navigation?.walkSeat && !this.navigation.leaveWalkSeat())
+      return false;
     if (this.skyTrainTravel?.active) return false;
     if (!this.busVisit || this.disposed) return false;
     if (!this.closeBusVisit()) return false;
@@ -1605,9 +1705,13 @@ export class CityEngine {
     return closed;
   }
   applySettings(settings: Settings) {
-    if (this.navigation?.walkSeat &&
-      (settings.mode !== this.settings.mode || (this.settings.buildings && !settings.buildings)) &&
-      !this.navigation.leaveWalkSeat()) return;
+    if (
+      this.navigation?.walkSeat &&
+      (settings.mode !== this.settings.mode ||
+        (this.settings.buildings && !settings.buildings)) &&
+      !this.navigation.leaveWalkSeat()
+    )
+      return;
     if (this.skyTrainTravel?.active && settings.mode !== 'walk') return;
     if (
       this.busVisit &&
@@ -1748,189 +1852,227 @@ export class CityEngine {
     )
       return;
     this.raf = requestAnimationFrame(this.animate);
-    this.uniforms.time.value = time / 1000;
-    this.tickClock(time);
-    if (this.transition) {
-      const t = THREE.MathUtils.clamp(
-          (performance.now() - this.transition.start) /
-            this.transition.duration,
-          0,
-          1,
-        ),
-        u = t * t * (3 - 2 * t);
-      this.camera.position.lerpVectors(
-        this.transition.from,
-        this.transition.to,
-        u,
-      );
-      this.controls.target.lerpVectors(
-        this.transition.fromTarget,
-        this.transition.toTarget,
-        u,
-      );
-      if (this.transition.fromQuaternion && this.transition.toQuaternion)
-        this.camera.quaternion.slerpQuaternions(
-          this.transition.fromQuaternion,
-          this.transition.toQuaternion,
+    this.runtimePerformance?.beginFrame(time, {
+      visible:
+        !document.hidden && !this.pageSuspended && !this.cabinDisplayActive,
+      mode: this.skyTrainTravel?.active ? 'skytrain' : this.settings.mode,
+      quality: this.settings.quality,
+    });
+    try {
+      this.uniforms.time.value = time / 1000;
+      this.tickClock(time);
+      if (this.transition) {
+        const t = THREE.MathUtils.clamp(
+            (performance.now() - this.transition.start) /
+              this.transition.duration,
+            0,
+            1,
+          ),
+          u = t * t * (3 - 2 * t);
+        this.camera.position.lerpVectors(
+          this.transition.from,
+          this.transition.to,
           u,
         );
-      else this.camera.lookAt(this.controls.target);
-      if (t === 1) {
-        if (this.transition.localMap) this.controls.enabled = true;
-        this.transition = null;
-        this.renderer.shadowMap.needsUpdate = true;
+        this.controls.target.lerpVectors(
+          this.transition.fromTarget,
+          this.transition.toTarget,
+          u,
+        );
+        if (this.transition.fromQuaternion && this.transition.toQuaternion)
+          this.camera.quaternion.slerpQuaternions(
+            this.transition.fromQuaternion,
+            this.transition.toQuaternion,
+            u,
+          );
+        else this.camera.lookAt(this.controls.target);
+        if (t === 1) {
+          if (this.transition.localMap) this.controls.enabled = true;
+          this.transition = null;
+          this.renderer.shadowMap.needsUpdate = true;
+        }
       }
-    }
-    if (this.traffic && this.settings.traffic)
-      updateTraffic(this, this.traffic, time / 1000);
-    if (this.railway && this.settings.trains)
-      updateRailway(
-        this,
-        this.railway,
+      if (this.traffic && this.settings.traffic) {
+        if (this.runtimePerformance)
+          this.runtimePerformance.measure('traffic', () =>
+            updateTraffic(this, this.traffic!, time / 1000),
+          );
+        else updateTraffic(this, this.traffic, time / 1000);
+      }
+      if (this.railway && this.settings.trains) {
+        if (this.runtimePerformance)
+          this.runtimePerformance.measure('railway', () =>
+            updateRailway(
+              this,
+              this.railway!,
+              this.lastTime ? (time - this.lastTime) / 1000 : 0,
+            ),
+          );
+        else
+          updateRailway(
+            this,
+            this.railway,
+            this.lastTime ? (time - this.lastTime) / 1000 : 0,
+          );
+      }
+      if (this.harbour) {
+        if (this.runtimePerformance)
+          this.runtimePerformance.measure('harbour', () =>
+            updateHarbour(
+              this,
+              this.harbour!,
+              this.lastTime ? (time - this.lastTime) / 1000 : 0,
+            ),
+          );
+        else
+          updateHarbour(
+            this,
+            this.harbour,
+            this.lastTime ? (time - this.lastTime) / 1000 : 0,
+          );
+      }
+      if (this.settings.mode === 'orbit') {
+        if (!this.transition) this.controls.update();
+      } else if (
+        this.settings.mode !== 'flight' &&
+        this.settings.mode !== 'tesla' &&
+        !this.busVisit?.aboard &&
+        !this.skyTrainTravel?.active
+      )
+        this.navigation?.update((time - this.lastTime) / 1000);
+      this.busVisit?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
+      this.flight?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
+      this.tesla?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
+      this.skyTrainTravel?.update(
         this.lastTime ? (time - this.lastTime) / 1000 : 0,
       );
-    if (this.harbour)
-      updateHarbour(
-        this,
-        this.harbour,
+      this.soundscapeWorld?.update(time);
+      this.interactions?.update(time);
+      if (this.skyTrainTravel?.active && this.railway)
+        for (const train of this.railway.trains)
+          if (train.kind === 'skytrain')
+            for (const car of train.cars) car.group.visible = false;
+      this.vehicleImpacts?.update(
         this.lastTime ? (time - this.lastTime) / 1000 : 0,
       );
-    if (this.settings.mode === 'orbit') {
-      if (!this.transition) this.controls.update();
-    } else if (
-      this.settings.mode !== 'flight' &&
-      this.settings.mode !== 'tesla' &&
-      !this.busVisit?.aboard &&
-      !this.skyTrainTravel?.active
-    )
-      this.navigation?.update((time - this.lastTime) / 1000);
-    this.busVisit?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
-    this.flight?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
-    this.tesla?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
-    this.skyTrainTravel?.update(
-      this.lastTime ? (time - this.lastTime) / 1000 : 0,
-    );
-    this.interactions?.update(time);
-    if (this.skyTrainTravel?.active && this.railway)
-      for (const train of this.railway.trains)
-        if (train.kind === 'skytrain')
-          for (const car of train.cars) car.group.visible = false;
-    this.vehicleImpacts?.update(
-      this.lastTime ? (time - this.lastTime) / 1000 : 0,
-    );
-    this.impactFeedback?.update(
-      this.lastTime ? (time - this.lastTime) / 1000 : 0,
-      this.camera,
-      this.settings.quality,
-    );
-    this.driftEffects?.update(
-      this.lastTime ? (time - this.lastTime) / 1000 : 0,
-    );
-    this.updateAutoQuality(time, this.lastTime ? time - this.lastTime : 0);
-    this.pedestrians?.update(this.lastTime ? (time - this.lastTime) / 1000 : 0);
-    this.travelReturn?.update();
-    this.sailingWaves?.update();
-    this.discoveryMarker?.update(
-      time,
-      !!this.discoveryTarget && this.settings.mode === 'walk',
-    );
-    this.minimap?.draw(time);
-    if (
-      this.settings.mode === 'orbit' &&
-      !this.transition?.localMap &&
-      this.onLand(this.camera.position.x, this.camera.position.z)
-    )
-      this.camera.position.y = Math.max(
-        this.camera.position.y,
-        this.elevation(this.camera.position.x, this.camera.position.z) + 4,
+      this.impactFeedback?.update(
+        this.lastTime ? (time - this.lastTime) / 1000 : 0,
+        this.camera,
+        this.settings.quality,
       );
-    this.updateLabels();
-    // LOD changes alter shadow casters even when the sun does not move.
-    if (this.camera.position.distanceTo(this.lastShadowCamera) > 120) {
-      this.renderer.shadowMap.needsUpdate = true;
-      this.lastShadowCamera.copy(this.camera.position);
-    }
-    this.lastTime = time;
-    this.skyEffects.update(
-      this.clock.hour,
-      this.clock.calendarDay,
-      time,
-      this.camera,
-    );
-    this.renderScene();
-    this.frames++;
-    if (time - this.fpsAt > 800) {
-      this.renderer.domElement.dataset.triangles = String(
-        this.renderer.info.render.triangles,
+      this.driftEffects?.update(
+        this.lastTime ? (time - this.lastTime) / 1000 : 0,
       );
-      this.renderer.domElement.dataset.drawCalls = String(
-        this.renderer.info.render.calls,
+      this.updateAutoQuality(time, this.lastTime ? time - this.lastTime : 0);
+      this.pedestrians?.update(
+        this.lastTime ? (time - this.lastTime) / 1000 : 0,
       );
-      this.renderer.domElement.dataset.geometries = String(
-        this.renderer.info.memory.geometries,
+      this.travelReturn?.update();
+      this.sailingWaves?.update();
+      this.discoveryMarker?.update(
+        time,
+        !!this.discoveryTarget && this.settings.mode === 'walk',
       );
-      this.renderer.domElement.dataset.pedestrians = JSON.stringify(
-        this.pedestrians?.stats() ?? null,
+      this.minimap?.draw(time);
+      if (
+        this.settings.mode === 'orbit' &&
+        !this.transition?.localMap &&
+        this.onLand(this.camera.position.x, this.camera.position.z)
+      )
+        this.camera.position.y = Math.max(
+          this.camera.position.y,
+          this.elevation(this.camera.position.x, this.camera.position.z) + 4,
+        );
+      this.updateLabels();
+      // LOD changes alter shadow casters even when the sun does not move.
+      if (this.camera.position.distanceTo(this.lastShadowCamera) > 120) {
+        this.renderer.shadowMap.needsUpdate = true;
+        this.lastShadowCamera.copy(this.camera.position);
+      }
+      this.lastTime = time;
+      this.skyEffects.update(
+        this.clock.hour,
+        this.clock.calendarDay,
+        time,
+        this.camera,
       );
-      const adaptive =
-        this.settings.qualityMode === 'auto'
-          ? this.autoQuality.snapshot()
-          : null;
-      this.renderer.domElement.dataset.quality = this.settings.quality;
-      this.renderer.domElement.dataset.qualityMode =
-        this.settings.qualityMode ?? 'manual';
-      this.renderer.domElement.dataset.autoQuality = JSON.stringify(adaptive);
-      this.renderer.domElement.dataset.sceneryMotion = JSON.stringify(
-        this.sceneryMotion,
-      );
-      this.renderer.domElement.dataset.detailWork = JSON.stringify(
-        this.detailWorkBudget?.stats ?? null,
-      );
-      this.stats.effectiveQuality = this.settings.quality;
-      this.stats.autoQuality = adaptive ?? undefined;
-      this.stats.renderWidth = this.renderer.domElement.width;
-      this.stats.renderHeight = this.renderer.domElement.height;
-      this.stats.fps = Math.round((this.frames * 1000) / (time - this.fpsAt));
-      this.stats.trafficStop = this.navigation?.trafficStop?.caption || '';
-      this.stats.busVisit = this.busVisit?.snapshot();
-      this.stats.skyTrainTravel = this.skyTrainTravel?.snapshot();
-      this.renderer.domElement.dataset.busVisit = JSON.stringify(
-        this.stats.busVisit ?? null,
-      );
-      this.renderer.domElement.dataset.busAssets = JSON.stringify(
-        this.traffic?.busAssets.stats() ?? null,
-      );
-      this.stats.speed = Math.round(
-        (this.skyTrainTravel?.active
-          ? (this.stats.skyTrainTravel?.speedMps ?? 0)
-          : this.tesla?.active
-            ? this.tesla.speedMps
-            : this.flight?.attached
-              ? this.flight.state?.speed || 0
-              : this.navigation?.speed || 0) * 3.6,
-      );
-      this.stats.clock = this.clock.snapshot();
-      this.stats.heading = this.controls.getAzimuthalAngle();
-      const location =
-        this.tesla?.pose ||
-        this.flight?.pose ||
-        minimapPose(this.navigation, this.controls.target);
-      [this.stats.lon, this.stats.lat] = unproject(location.x, location.z);
-      this.stats.distance = Math.round(
-        this.camera.position.distanceTo(this.controls.target),
-      );
-      this.stats.elevation = Math.round(
-        this.settings.mode === 'orbit'
-          ? this.elevation(this.controls.target.x, this.controls.target.z)
-          : this.tesla?.active
-            ? (this.tesla.state?.position[1] ?? 0)
-            : this.flight?.attached
-              ? this.flight.state!.y
-              : this.navigation?.position.y || 0,
-      );
-      this.onStats({ ...this.stats });
-      this.fpsAt = time;
-      this.frames = 0;
+      this.renderScene();
+      this.frames++;
+      if (time - this.fpsAt > 800) {
+        this.renderer.domElement.dataset.triangles = String(
+          this.renderer.info.render.triangles,
+        );
+        this.renderer.domElement.dataset.drawCalls = String(
+          this.renderer.info.render.calls,
+        );
+        this.renderer.domElement.dataset.geometries = String(
+          this.renderer.info.memory.geometries,
+        );
+        this.renderer.domElement.dataset.pedestrians = JSON.stringify(
+          this.pedestrians?.stats() ?? null,
+        );
+        const adaptive =
+          this.settings.qualityMode === 'auto'
+            ? this.autoQuality.snapshot()
+            : null;
+        this.renderer.domElement.dataset.quality = this.settings.quality;
+        this.renderer.domElement.dataset.qualityMode =
+          this.settings.qualityMode ?? 'manual';
+        this.renderer.domElement.dataset.autoQuality = JSON.stringify(adaptive);
+        this.renderer.domElement.dataset.sceneryMotion = JSON.stringify(
+          this.sceneryMotion,
+        );
+        this.renderer.domElement.dataset.detailWork = JSON.stringify(
+          this.detailWorkBudget?.stats ?? null,
+        );
+        this.stats.effectiveQuality = this.settings.quality;
+        this.stats.autoQuality = adaptive ?? undefined;
+        this.stats.renderWidth = this.renderer.domElement.width;
+        this.stats.renderHeight = this.renderer.domElement.height;
+        this.stats.fps = Math.round((this.frames * 1000) / (time - this.fpsAt));
+        this.stats.trafficStop = this.navigation?.trafficStop?.caption || '';
+        this.stats.busVisit = this.busVisit?.snapshot();
+        this.stats.skyTrainTravel = this.skyTrainTravel?.snapshot();
+        this.renderer.domElement.dataset.busVisit = JSON.stringify(
+          this.stats.busVisit ?? null,
+        );
+        this.renderer.domElement.dataset.busAssets = JSON.stringify(
+          this.traffic?.busAssets.stats() ?? null,
+        );
+        this.stats.speed = Math.round(
+          (this.skyTrainTravel?.active
+            ? (this.stats.skyTrainTravel?.speedMps ?? 0)
+            : this.tesla?.active
+              ? this.tesla.speedMps
+              : this.flight?.attached
+                ? this.flight.state?.speed || 0
+                : this.navigation?.speed || 0) * 3.6,
+        );
+        this.stats.clock = this.clock.snapshot();
+        this.stats.heading = this.controls.getAzimuthalAngle();
+        const location =
+          this.tesla?.pose ||
+          this.flight?.pose ||
+          minimapPose(this.navigation, this.controls.target);
+        [this.stats.lon, this.stats.lat] = unproject(location.x, location.z);
+        this.stats.distance = Math.round(
+          this.camera.position.distanceTo(this.controls.target),
+        );
+        this.stats.elevation = Math.round(
+          this.settings.mode === 'orbit'
+            ? this.elevation(this.controls.target.x, this.controls.target.z)
+            : this.tesla?.active
+              ? (this.tesla.state?.position[1] ?? 0)
+              : this.flight?.attached
+                ? this.flight.state!.y
+                : this.navigation?.position.y || 0,
+        );
+        this.onStats({ ...this.stats });
+        this.fpsAt = time;
+        this.frames = 0;
+      }
+    } finally {
+      this.runtimePerformance?.endFrame();
     }
   };
 
@@ -2075,6 +2217,9 @@ export class CityEngine {
     window.removeEventListener('pagehide', this.pageHide);
     window.removeEventListener('pageshow', this.pageShow);
     this.disposed = true;
+    this.runtimePerformance?.dispose();
+    this.soundscape?.dispose();
+    this.soundscapeWorld = null;
     this.loadAbort.abort();
     if (process.env.NODE_ENV === 'development') {
       const inspectWindow = window as Window & { __atlas?: CityEngine };
