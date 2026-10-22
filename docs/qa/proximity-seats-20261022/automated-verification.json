@@ -92,5 +92,22 @@
       "run": "https://github.com/YiTaChen/vancouver-living-atlas/actions/runs/39831397600"
     },
     "note": "The sourceSha256 map above is the earlier pre-release capture. These two hashes describe the follow-up. Final exact-head CI and native verification are recorded in the PR."
+  },
+  "citizenTextureFollowUp": {
+    "reason": "Final production-CSP native validation found the citizen GLTF default ImageBitmapLoader attempted blocked blob fetches. The private default loader now uses image decoding under the existing img-src policy; no CSP or asset bytes changed.",
+    "testsPassed": 19,
+    "testsFailed": 0,
+    "logSha256": "88307f3fb491fff09310d00f08ee5b4742599178ab29043726520b34a937981d",
+    "sourceSha256": {
+      "lib/city/citizen.ts": "8cd76842676fc6a303565a891ede69f068d9d03cc43696f24bfbd0d2c0f2ee0e",
+      "tests/citizen-texture-decoding.test.mjs": "61579b99525b56c4a3f0a8f5ecff726ea7c1644e25c28cf0d0c1739a2ab0ce18"
+    },
+    "priorCameraHeadFullCi": {
+      "commit": "61ba0541a455a5944d4023d22a24d6b758204b81",
+      "testsPassed": 1834,
+      "testsFailed": 0,
+      "run": "https://github.com/YiTaChen/vancouver-living-atlas/actions/runs/39833353844"
+    },
+    "note": "Final exact-head CI and native production verification are recorded in the PR."
   }
 }

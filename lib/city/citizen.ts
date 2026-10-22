@@ -244,6 +244,42 @@ function disposeModel(root: THREE.Object3D) {
   for (const bitmap of bitmaps) bitmap.close();
 }
 
+async function loadCitizenAsset(url: string): Promise<CitizenAsset> {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error('Citizen GLB request failed');
+  const bytes = await response.arrayBuffer();
+  let imageFailed = false;
+  const manager = new THREE.LoadingManager();
+  manager.onError = (resource) => {
+    imageFailed = true;
+    // Successful embedded images are revoked by GLTFLoader. Its image error
+    // branch leaves that private object URL for the owner to release.
+    if (resource.startsWith('blob:')) URL.revokeObjectURL(resource);
+  };
+  const loader = new GLTFLoader(manager);
+  loader.register((parser) => ({
+    name: 'atlas-citizen-image-decoder',
+    beforeRoot() {
+      // ImageBitmapLoader fetches embedded blob URLs through connect-src.
+      // Image elements use the existing img-src policy and retain glTF's
+      // original PBR maps, color spaces, samplers and embedded image bytes.
+      parser.textureLoader = new THREE.TextureLoader(parser.options.manager)
+        .setCrossOrigin(parser.options.crossOrigin)
+        .setRequestHeader(parser.options.requestHeader);
+      return null;
+    },
+  }));
+  const asset = await loader.parseAsync(
+    bytes,
+    url.slice(0, url.lastIndexOf('/') + 1),
+  );
+  if (imageFailed) {
+    disposeModel(asset.scene);
+    throw new Error('Citizen texture decode failed');
+  }
+  return asset;
+}
+
 /**
  * One privately owned animated citizen per navigator. The public root never
  * changes, so camera following, ground contact and contact shadows survive the
@@ -305,7 +341,7 @@ export function makeCitizen(options: CitizenOptions = {}) {
           process.env.VANCOUVER_VISUAL_QA === '1'
             ? QA_ASSET_URLS[variant]
             : CITIZEN_URL;
-        asset = await (options.load?.(url) ?? new GLTFLoader().loadAsync(url));
+        asset = await (options.load?.(url) ?? loadCitizenAsset(url));
         if (disposed || ticket !== generation) {
           disposeModel(asset.scene);
           return false;
