@@ -151,6 +151,72 @@ const routes = [
     reverseIdentity: ground,
   },
 ];
+test('actual West bumper cap retains its source-owned body proof after the rear tyres leave the seam', () => {
+  // Captured from the public reverse replay at 312.88m. Both tyre rectangles
+  // are already on the original Causeway source, while a small West cap still
+  // enters the rotating rear corner between the main source's edge/grid probes.
+  const from = {
+      position: [-1127.6760848605536, 58.57506869558065, -2667.637505653286],
+      quaternion: [
+        -0.0032958815591042504, 0.9486301251758107, 0.023225411800188576,
+        0.31551640689572064,
+      ],
+    },
+    to = {
+      position: [-1127.6253106770255, 58.57902099373743, -2667.7062519840606],
+      quaternion: [
+        -0.003368152201982952, 0.9496075415004542, 0.023215041229432694,
+        0.3125623690352424,
+      ],
+    },
+    source = 'protected:1515:face:2';
+  for (const pose of [from, to]) {
+    const proof = world.support({
+      pose,
+      shape,
+      maxDistance: 1.03,
+      preferredSurfaceId: source,
+      adhesion: false,
+    });
+    assert.equal(
+      proof?.surfaceId,
+      source,
+      'all four current tyres still require actual main-road support',
+    );
+    assert.equal(world.identity(proof)?.surfaceId, 'lions:road');
+  }
+  assert.equal(
+    world.sweep({ from, to, shape, ignoreSurfaceId: source }),
+    null,
+    'the complete rotating measured body clears the actual shared paving cap',
+  );
+  const fit = world.fitGround({
+    pose: to,
+    from,
+    shape,
+    preferredSurfaceId: source,
+    maxAdjustmentM: 0.35,
+  });
+  assert.ok(
+    fit,
+    'route-aware fit must retain the same source-owned corner proof',
+  );
+  assert.ok(
+    Math.hypot(
+      ...fit.pose.position.map((value, axis) => value - to.position[axis]),
+    ) < 0.01,
+    'the proof uses the requested road pose, not a lateral reroute or artificial lift',
+  );
+  assert.ok(
+    world.sweep({
+      from,
+      to,
+      shape: { halfExtents: shape.halfExtents, clearance: shape.clearance },
+      ignoreSurfaceId: source,
+    }),
+    'a hull without actual tyre/body metadata cannot inherit the ground-body permission',
+  );
+});
 for (const route of routes)
   for (const reverse of [false, true]) {
     test(`actual public TeslaState: ${route.id}, ${reverse ? 'reverse' : 'forward'}`, () => {

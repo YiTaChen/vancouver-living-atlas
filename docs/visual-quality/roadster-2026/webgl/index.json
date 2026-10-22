@@ -1,0 +1,64 @@
+{
+  "payloadSha256": "0348b2fd5f3cc55f42dcb78933f95a5516fcdf7d29c31552229ca0d4af2c4536",
+  "captures": [
+    {
+      "case": "night-cockpit",
+      "file": "webgl/night-cockpit.json",
+      "sha256": "7ba1ddba1695c926037c8f1330808f1663491352868a14a8f718843947c727e7",
+      "activeLOD": {
+        "quality": "medium",
+        "triangles": 28516,
+        "meshes": 35,
+        "materials": 13,
+        "cachedLevels": 3,
+        "disposed": false
+      },
+      "valid": true
+    },
+    {
+      "case": "low",
+      "file": "webgl/low.json",
+      "sha256": "ba7890ff2e3c4f46da4d60c2169f6120aadc0dfbfef7113848a2d5a7385bbad2",
+      "activeLOD": {
+        "quality": "low",
+        "triangles": 10777,
+        "meshes": 35,
+        "materials": 13,
+        "cachedLevels": 3,
+        "disposed": false
+      },
+      "valid": true
+    },
+    {
+      "case": "roof",
+      "file": "webgl/roof.json",
+      "sha256": "80a783e23e665c4d0466c6d61d5137520abfa8215e6acd17186f202c57d27ae5",
+      "activeLOD": {
+        "quality": "high",
+        "triangles": 54249,
+        "meshes": 35,
+        "materials": 13,
+        "cachedLevels": 3,
+        "disposed": false
+      },
+      "valid": true,
+      "scenario": "completed"
+    },
+    {
+      "case": "vortex",
+      "file": "webgl/vortex.json",
+      "sha256": "80b80077cc8973cfd25830c5af017fa34430710e505783d552ae22ece387b0ed",
+      "activeLOD": {
+        "quality": "high",
+        "triangles": 54249,
+        "meshes": 35,
+        "materials": 13,
+        "cachedLevels": 3,
+        "disposed": false
+      },
+      "valid": true,
+      "scenario": "completed"
+    }
+  ],
+  "fpsIsNotABenchmark": true
+}

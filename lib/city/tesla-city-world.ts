@@ -1625,7 +1625,13 @@ export class CityTeslaWorld extends TeslaWorld {
         center: west.rampEntry.center,
         radiusM: west.rampEntry.radiusM,
         maxSeamStepM: west.rampEntry.maxSeamStepM,
-        edges: roadOverlapEdges(floorIndices.get(westEntryGroup)!.surfaces),
+        // The ramp cap can remain under a bumper corner after the rear tyres
+        // leave its finite seam. Probe both real source edge sets so the
+        // unchanged shared-top proof can still identify that small overlap.
+        edges: roadOverlapEdges([
+          ...floorIndices.get(westEntryGroup)!.surfaces,
+          ...floorIndices.get(upperGroup)!.surfaces,
+        ]),
         floor: (group, x, z) => floorIndices.get(group)?.lookup(x, z)[0]?.y,
       });
     if (northbound?.rampEntry?.rampRouteId === 'stanley:northbound-motor-ramp')
