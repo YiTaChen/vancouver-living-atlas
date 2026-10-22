@@ -1,0 +1,1341 @@
+{
+  "method": "Accelerated integration tests call the real RocketController.update(1/60) repeatedly; physical phases, fuel, collisions and 100 km ascent are not bypassed. Rendering uses hardware WebGL in Google Chrome Metal. Production source is not modified.",
+  "startedAt": "2026-10-22T20:25:15.768Z",
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "pageErrors": [],
+  "console": [
+    "debug: [vite] connecting...",
+    "debug: [vite] connected.",
+    "info: %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "scenarios": {
+    "roofPick": {
+      "candidate": {
+        "x": -25.930729222733845,
+        "z": -6.210264499705076,
+        "top": 49.026367576970046,
+        "ground": 42.995106604657366,
+        "area": 100.81856365022361,
+        "height": 6.539999999999999
+      },
+      "screen": {
+        "sx": 719.9999999999999,
+        "sy": 500.0000000000001
+      },
+      "picked": {
+        "exists": true,
+        "active": true,
+        "placing": false,
+        "kind": "large",
+        "phase": "building",
+        "buildProgress": 0,
+        "loaded": false,
+        "loadError": false,
+        "countdown": 5,
+        "altitude": 0,
+        "speed": 0,
+        "fuel": 1,
+        "throttle": 0,
+        "tilt": 0,
+        "pitch": 0,
+        "roll": 0,
+        "verticalSpeed": 0,
+        "wind": 0,
+        "auto": true,
+        "stabilize": true,
+        "support": "roof-small",
+        "supportIntegrity": 1,
+        "warning": "",
+        "view": "chase",
+        "damaged": 0,
+        "burning": 0,
+        "debris": 0
+      },
+      "origin": {
+        "x": -25.930729320101342,
+        "y": 49.4763671875,
+        "z": -6.210264666620759
+      }
+    },
+    "largeSmallRoof": {
+      "frames": 371,
+      "snapshot": {
+        "exists": true,
+        "active": true,
+        "placing": false,
+        "kind": "large",
+        "phase": "crashed",
+        "buildProgress": 1,
+        "loaded": true,
+        "loadError": false,
+        "countdown": 0,
+        "altitude": 0,
+        "speed": 3.2763310422727434,
+        "fuel": 0.997514964157706,
+        "throttle": 0,
+        "tilt": 10.464679434953089,
+        "pitch": 2.3784391334704713,
+        "roll": -10.193741403890092,
+        "verticalSpeed": 0,
+        "wind": 8.75897760117735,
+        "auto": true,
+        "stabilize": true,
+        "support": "roof-small",
+        "supportIntegrity": 0,
+        "warning": "collision",
+        "view": "chase",
+        "damaged": 1,
+        "burning": 0,
+        "debris": 5
+      },
+      "state": {
+        "kind": "large",
+        "mode": "auto",
+        "stabilize": true,
+        "phase": "crashed",
+        "position": {
+          "x": -26.099653374573705,
+          "y": 49.34135963124839,
+          "z": -6.209737132923778
+        },
+        "velocity": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "origin": {
+          "x": -25.930729320101342,
+          "y": 49.4763671875,
+          "z": -6.210264666620759
+        },
+        "attitude": {
+          "pitch": 0.04151159393734059,
+          "roll": -0.17791435059475122
+        },
+        "angularVelocity": {
+          "pitch": 0.6062767816315542,
+          "roll": -2.6203870749264278
+        },
+        "support": {
+          "kind": "roof-small",
+          "groundY": 42.99510660754209,
+          "strength": 0.38
+        },
+        "supportIntegrity": 0,
+        "supportCollapsed": true,
+        "fuel": 309229.6388888889,
+        "throttle": 0,
+        "targetThrottle": 0,
+        "integrity": 0,
+        "elapsed": 16.40000000000035,
+        "phaseElapsed": 0,
+        "flightElapsed": 0.06666666666666667,
+        "buildProgress": 1,
+        "countdown": 0,
+        "altitude": 0,
+        "maxAltitude": 0,
+        "speed": 3.2763310422727434,
+        "acceleration": {
+          "x": -1.697498559784129,
+          "y": -0.21547669085256466,
+          "z": 0.39770857844018354
+        },
+        "dynamicPressure": 79.31309900929375,
+        "wind": {
+          "x": 8.294140629366801,
+          "y": 0,
+          "z": -2.815478616188267
+        },
+        "seed": 6311.405328017105,
+        "events": [
+          {
+            "id": 1,
+            "type": "ready",
+            "time": 10.000000000000076,
+            "position": {
+              "x": -25.930729320101342,
+              "y": 49.4763671875,
+              "z": -6.210264666620759
+            },
+            "magnitude": 0
+          },
+          {
+            "id": 2,
+            "type": "countdown",
+            "time": 10.033333333333411,
+            "position": {
+              "x": -25.930729320101342,
+              "y": 49.4763671875,
+              "z": -6.210264666620759
+            },
+            "magnitude": 0
+          },
+          {
+            "id": 3,
+            "type": "ignition",
+            "time": 15.050000000000328,
+            "position": {
+              "x": -25.930729320101342,
+              "y": 49.4763671875,
+              "z": -6.210264666620759
+            },
+            "magnitude": 0
+          },
+          {
+            "id": 4,
+            "type": "support-collapsed",
+            "time": 16.350000000000353,
+            "position": {
+              "x": -25.930729320101342,
+              "y": 49.4763671875,
+              "z": -6.210264666620759
+            },
+            "magnitude": 0
+          },
+          {
+            "id": 5,
+            "type": "liftoff",
+            "time": 16.350000000000353,
+            "position": {
+              "x": -25.930729320101342,
+              "y": 49.4763671875,
+              "z": -6.210264666620759
+            },
+            "magnitude": 0
+          },
+          {
+            "id": 6,
+            "type": "impact",
+            "time": 16.40000000000035,
+            "position": {
+              "x": -26.099653374573705,
+              "y": 49.34135963124839,
+              "z": -6.209737132923778
+            },
+            "magnitude": 3.2763310422727434
+          }
+        ],
+        "nextEventId": 7,
+        "failureReason": "collision"
+      }
+    },
+    "seaPick": {
+      "point": [
+        -1800,
+        0.1,
+        300
+      ],
+      "snapshot": {
+        "exists": true,
+        "active": true,
+        "placing": false,
+        "kind": "small",
+        "phase": "sinking",
+        "buildProgress": 0,
+        "loaded": false,
+        "loadError": false,
+        "countdown": 5,
+        "altitude": 0,
+        "speed": 0,
+        "fuel": 1,
+        "throttle": 0,
+        "tilt": 0,
+        "pitch": 0,
+        "roll": 0,
+        "verticalSpeed": 0,
+        "wind": 0,
+        "auto": true,
+        "stabilize": true,
+        "support": "ocean",
+        "supportIntegrity": 1,
+        "warning": "Water cannot support a launch vehicle.",
+        "view": "chase",
+        "damaged": 0,
+        "burning": 0,
+        "debris": 0
+      },
+      "origin": {
+        "x": -1800.0000000000002,
+        "y": 0.5499999999999943,
+        "z": 300
+      }
+    },
+    "seaSinking": {
+      "frames": 300,
+      "snapshot": {
+        "exists": true,
+        "active": true,
+        "placing": false,
+        "kind": "small",
+        "phase": "sinking",
+        "buildProgress": 0,
+        "loaded": true,
+        "loadError": false,
+        "countdown": 5,
+        "altitude": 0,
+        "speed": 4.5,
+        "fuel": 1,
+        "throttle": 0,
+        "tilt": 11.691670309822927,
+        "pitch": 5.113648321542584,
+        "roll": 10.528099485528852,
+        "verticalSpeed": -4.5,
+        "wind": 0,
+        "auto": true,
+        "stabilize": true,
+        "support": "ocean",
+        "supportIntegrity": 1,
+        "warning": "Water cannot support a launch vehicle.",
+        "view": "chase",
+        "damaged": 0,
+        "burning": 0,
+        "debris": 0
+      },
+      "state": {
+        "kind": "small",
+        "mode": "auto",
+        "stabilize": false,
+        "phase": "sinking",
+        "position": {
+          "x": -1800.0000000000002,
+          "y": -12.602888888888868,
+          "z": 300
+        },
+        "velocity": {
+          "x": 0,
+          "y": -4.5,
+          "z": 0
+        },
+        "origin": {
+          "x": -1800.0000000000002,
+          "y": 0.5499999999999943,
+          "z": 300
+        },
+        "attitude": {
+          "pitch": 0.08924999999999977,
+          "roll": 0.18374999999999955
+        },
+        "angularVelocity": {
+          "pitch": 0,
+          "roll": 0
+        },
+        "support": {
+          "kind": "ocean",
+          "groundY": -19.9,
+          "strength": 0
+        },
+        "supportIntegrity": 1,
+        "supportCollapsed": false,
+        "fuel": 20000,
+        "throttle": 0,
+        "targetThrottle": 1,
+        "integrity": 1,
+        "elapsed": 5.249999999999987,
+        "phaseElapsed": 5.249999999999987,
+        "flightElapsed": 0,
+        "buildProgress": 0,
+        "countdown": 5,
+        "altitude": 0,
+        "maxAltitude": 0,
+        "speed": 4.5,
+        "acceleration": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "dynamicPressure": 0,
+        "wind": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "seed": 504.2268780681832,
+        "events": [
+          {
+            "id": 1,
+            "type": "sinking",
+            "time": 0,
+            "position": {
+              "x": -1800.0000000000002,
+              "y": 0.5499999999999943,
+              "z": 300
+            },
+            "magnitude": 0
+          }
+        ],
+        "nextEventId": 2,
+        "failureReason": "Water cannot support a launch vehicle."
+      }
+    },
+    "riverSinking": {
+      "frames": 300,
+      "snapshot": {
+        "exists": true,
+        "active": true,
+        "placing": false,
+        "kind": "small",
+        "phase": "sinking",
+        "buildProgress": 0,
+        "loaded": true,
+        "loadError": false,
+        "countdown": 5,
+        "altitude": 0,
+        "speed": 4.5,
+        "fuel": 1,
+        "throttle": 0,
+        "tilt": 11.580558691593522,
+        "pitch": 5.064946908956465,
+        "roll": 10.427831871380958,
+        "verticalSpeed": -4.5,
+        "wind": 0,
+        "auto": true,
+        "stabilize": true,
+        "support": "river",
+        "supportIntegrity": 1,
+        "warning": "Water cannot support a launch vehicle.",
+        "view": "chase",
+        "damaged": 0,
+        "burning": 0,
+        "debris": 0
+      },
+      "state": {
+        "kind": "small",
+        "mode": "auto",
+        "stabilize": false,
+        "phase": "sinking",
+        "position": {
+          "x": -1800,
+          "y": -12.82788888888887,
+          "z": 300
+        },
+        "velocity": {
+          "x": 0,
+          "y": -4.5,
+          "z": 0
+        },
+        "origin": {
+          "x": -1800,
+          "y": 0.1,
+          "z": 300
+        },
+        "attitude": {
+          "pitch": 0.08839999999999978,
+          "roll": 0.18199999999999955
+        },
+        "angularVelocity": {
+          "pitch": 0,
+          "roll": 0
+        },
+        "support": {
+          "kind": "river",
+          "groundY": -19.9,
+          "strength": 0
+        },
+        "supportIntegrity": 1,
+        "supportCollapsed": false,
+        "fuel": 20000,
+        "throttle": 0,
+        "targetThrottle": 1,
+        "integrity": 1,
+        "elapsed": 5.199999999999987,
+        "phaseElapsed": 5.199999999999987,
+        "flightElapsed": 0,
+        "buildProgress": 0,
+        "countdown": 5,
+        "altitude": 0,
+        "maxAltitude": 0,
+        "speed": 4.5,
+        "acceleration": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "dynamicPressure": 0,
+        "wind": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "seed": 504.2268780681477,
+        "events": [
+          {
+            "id": 1,
+            "type": "sinking",
+            "time": 0,
+            "position": {
+              "x": -1800,
+              "y": 0.1,
+              "z": 300
+            },
+            "magnitude": 0
+          }
+        ],
+        "nextEventId": 2,
+        "failureReason": "Water cannot support a launch vehicle."
+      }
+    },
+    "lakeUnstable": {
+      "lake": {
+        "name": "Water",
+        "position": [
+          -1191.6603245718393,
+          6.65,
+          930.8071702070591
+        ],
+        "level": 6.2
+      },
+      "result": {
+        "frames": 413,
+        "snapshot": {
+          "exists": true,
+          "active": true,
+          "placing": false,
+          "kind": "large",
+          "phase": "crashed",
+          "buildProgress": 1,
+          "loaded": true,
+          "loadError": false,
+          "countdown": 0,
+          "altitude": 0,
+          "speed": 9.120062568166102,
+          "fuel": 0.9944097371565143,
+          "throttle": 0,
+          "tilt": 90.0520238358936,
+          "pitch": 24.088193032619593,
+          "roll": 90.05698630114966,
+          "verticalSpeed": 0,
+          "wind": 6.240596948775996,
+          "auto": true,
+          "stabilize": true,
+          "support": "lake",
+          "supportIntegrity": 0,
+          "warning": "collision",
+          "view": "chase",
+          "damaged": 0,
+          "burning": 2,
+          "debris": 0
+        },
+        "state": {
+          "kind": "large",
+          "mode": "auto",
+          "stabilize": true,
+          "phase": "crashed",
+          "position": {
+            "x": -1189.1194136883712,
+            "y": 5.313357087027989,
+            "z": 931.3512910101797
+          },
+          "velocity": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "origin": {
+            "x": -1191.6603245718393,
+            "y": 6.65,
+            "z": 930.8071702070591
+          },
+          "attitude": {
+            "pitch": 0.4204182792751697,
+            "roll": 1.5717909253784912
+          },
+          "angularVelocity": {
+            "pitch": 0.2813253051472023,
+            "roll": 2.1161226539890006
+          },
+          "support": {
+            "kind": "lake",
+            "groundY": -13.8,
+            "seed": 7,
+            "strength": 0.22
+          },
+          "supportIntegrity": 0,
+          "supportCollapsed": true,
+          "fuel": 308267.0185185194,
+          "throttle": 0,
+          "targetThrottle": 0,
+          "integrity": 0,
+          "elapsed": 16.966666666666985,
+          "phaseElapsed": 0,
+          "flightElapsed": 0.55,
+          "buildProgress": 1,
+          "countdown": 0,
+          "altitude": 0,
+          "maxAltitude": 0,
+          "speed": 9.120062568166102,
+          "acceleration": {
+            "x": 15.204140860892853,
+            "y": -9.81882144360695,
+            "z": 6.796284219837189
+          },
+          "dynamicPressure": 11.652191373316528,
+          "wind": {
+            "x": 6.233067784328603,
+            "y": 0,
+            "z": 0.306457620295504
+          },
+          "seed": 7,
+          "events": [
+            {
+              "id": 1,
+              "type": "ready",
+              "time": 10.000000000000076,
+              "position": {
+                "x": -1191.6603245718393,
+                "y": 6.65,
+                "z": 930.8071702070591
+              },
+              "magnitude": 0
+            },
+            {
+              "id": 2,
+              "type": "countdown",
+              "time": 10.000000000000076,
+              "position": {
+                "x": -1191.6603245718393,
+                "y": 6.65,
+                "z": 930.8071702070591
+              },
+              "magnitude": 0
+            },
+            {
+              "id": 3,
+              "type": "ignition",
+              "time": 15.016666666666993,
+              "position": {
+                "x": -1191.6603245718393,
+                "y": 6.65,
+                "z": 930.8071702070591
+              },
+              "magnitude": 0
+            },
+            {
+              "id": 4,
+              "type": "support-collapsed",
+              "time": 16.43333333333368,
+              "position": {
+                "x": -1191.6603245718393,
+                "y": 6.65,
+                "z": 930.8071702070591
+              },
+              "magnitude": 0
+            },
+            {
+              "id": 5,
+              "type": "liftoff",
+              "time": 16.43333333333368,
+              "position": {
+                "x": -1191.6603245718393,
+                "y": 6.65,
+                "z": 930.8071702070591
+              },
+              "magnitude": 0
+            },
+            {
+              "id": 6,
+              "type": "impact",
+              "time": 16.966666666666985,
+              "position": {
+                "x": -1189.1194136883712,
+                "y": 5.313357087027989,
+                "z": 931.3512910101797
+              },
+              "magnitude": 9.120062568166102
+            }
+          ],
+          "nextEventId": 7,
+          "failureReason": "collision"
+        }
+      }
+    },
+    "cityBlastSite": {
+      "position": [
+        30.22392704612703,
+        40.463156980415455,
+        -6.006784376020391
+      ],
+      "groundY": 40.01315698041545,
+      "score": 10.554549636755839,
+      "nearby": 6,
+      "buildingDistance": 0.46210449074120796,
+      "treeDistance": 20
+    },
+    "cityDamage": {
+      "frames": 600,
+      "snapshot": {
+        "exists": true,
+        "active": true,
+        "placing": false,
+        "kind": "large",
+        "phase": "flight",
+        "buildProgress": 1,
+        "loaded": true,
+        "loadError": false,
+        "countdown": 0,
+        "altitude": 27.34969914926905,
+        "speed": 19.5131905977412,
+        "fuel": 0.9741397849462472,
+        "throttle": 1,
+        "tilt": 0.5808562130623921,
+        "pitch": 0.25309980488781836,
+        "roll": 0.5228156529410889,
+        "verticalSpeed": 19.50971334231548,
+        "wind": 7.685864004174234,
+        "auto": true,
+        "stabilize": true,
+        "support": "platform",
+        "supportIntegrity": 1,
+        "warning": "",
+        "view": "chase",
+        "damaged": 22,
+        "burning": 16,
+        "debris": 67
+      },
+      "state": {
+        "kind": "large",
+        "mode": "auto",
+        "stabilize": true,
+        "phase": "flight",
+        "position": {
+          "x": 30.60424009384528,
+          "y": 67.8128561296845,
+          "z": -5.898895753510327
+        },
+        "velocity": {
+          "x": 0.34708540703705093,
+          "y": 19.50971334231548,
+          "z": 0.12338689020682499
+        },
+        "origin": {
+          "x": 30.22392704612703,
+          "y": 40.463156980415455,
+          "z": -6.006784376020391
+        },
+        "attitude": {
+          "pitch": 0.004417424931447668,
+          "roll": 0.009124854524785977
+        },
+        "angularVelocity": {
+          "pitch": 0.0008108053126189653,
+          "roll": -0.0005095241891874353
+        },
+        "support": {
+          "kind": "platform",
+          "groundY": 40.01315698041545,
+          "strength": 1
+        },
+        "supportIntegrity": 1,
+        "supportCollapsed": false,
+        "fuel": 301983.33333333663,
+        "throttle": 1,
+        "targetThrottle": 1,
+        "integrity": 1,
+        "elapsed": 20.233333333333466,
+        "phaseElapsed": 2.7833333333333283,
+        "flightElapsed": 2.799999999999995,
+        "buildProgress": 1,
+        "countdown": 0,
+        "altitude": 27.34969914926905,
+        "maxAltitude": 27.34969914926905,
+        "speed": 19.5131905977412,
+        "acceleration": {
+          "x": 0.16650882301157177,
+          "y": 7.075765441629606,
+          "z": 0.08188258209048199
+        },
+        "dynamicPressure": 262.37140114460976,
+        "wind": {
+          "x": 6.657152356232611,
+          "y": 0,
+          "z": 3.8412013741234365
+        },
+        "seed": 2759.1561875849256,
+        "events": [
+          {
+            "id": 1,
+            "type": "ready",
+            "time": 10.000000000000076,
+            "position": {
+              "x": 30.22392704612703,
+              "y": 40.463156980415455,
+              "z": -6.006784376020391
+            },
+            "magnitude": 0
+          },
+          {
+            "id": 2,
+            "type": "countdown",
+            "time": 10.016666666666744,
+            "position": {
+              "x": 30.22392704612703,
+              "y": 40.463156980415455,
+              "z": -6.006784376020391
+            },
+            "magnitude": 0
+          },
+          {
+            "id": 3,
+            "type": "ignition",
+            "time": 15.03333333333366,
+            "position": {
+              "x": 30.22392704612703,
+              "y": 40.463156980415455,
+              "z": -6.006784376020391
+            },
+            "magnitude": 0
+          },
+          {
+            "id": 4,
+            "type": "liftoff",
+            "time": 17.45000000000029,
+            "position": {
+              "x": 30.22392704612703,
+              "y": 40.463156980415455,
+              "z": -6.006784376020391
+            },
+            "magnitude": 0
+          }
+        ],
+        "nextEventId": 5,
+        "failureReason": null
+      }
+    },
+    "returnRestoration": {
+      "mode": "orbit",
+      "controls": true,
+      "snapshot": {
+        "exists": true,
+        "active": false,
+        "placing": false,
+        "kind": "large",
+        "phase": "flight",
+        "buildProgress": 1,
+        "loaded": false,
+        "loadError": false,
+        "countdown": 0,
+        "altitude": 33.539146882291696,
+        "speed": 21.64045071659335,
+        "fuel": 0.9722043010752806,
+        "throttle": 1,
+        "tilt": 0.5707126500548498,
+        "pitch": 0.25923295030741694,
+        "roll": 0.5084417079755752,
+        "verticalSpeed": 21.636316025294473,
+        "wind": 7.110126592213224,
+        "auto": true,
+        "stabilize": true,
+        "support": "platform",
+        "supportIntegrity": 1,
+        "warning": "",
+        "view": "chase",
+        "damaged": 0,
+        "burning": 0,
+        "debris": 0
+      }
+    },
+    "smallManualRecovery": {
+      "before": {
+        "snapshot": {
+          "exists": true,
+          "active": true,
+          "placing": false,
+          "kind": "small",
+          "phase": "flight",
+          "buildProgress": 1,
+          "loaded": true,
+          "loadError": false,
+          "countdown": 0,
+          "altitude": 51.87396194129652,
+          "speed": 28.418997615317135,
+          "fuel": 0.9712365591397666,
+          "throttle": 1,
+          "tilt": 1.3013857473313757,
+          "pitch": -0.9358782661159484,
+          "roll": 0.9043281863740469,
+          "verticalSpeed": 28.41191997081483,
+          "wind": 7.667962263718113,
+          "auto": false,
+          "stabilize": true,
+          "support": "platform",
+          "supportIntegrity": 1,
+          "warning": "",
+          "view": "chase",
+          "damaged": 2,
+          "burning": 0,
+          "debris": 10
+        },
+        "state": {
+          "kind": "small",
+          "mode": "manual",
+          "stabilize": true,
+          "phase": "flight",
+          "position": {
+            "x": 30.589118283957177,
+            "y": 92.33711892171198,
+            "z": -6.659770151140848
+          },
+          "velocity": {
+            "x": 0.3708780695190185,
+            "y": 28.41191997081483,
+            "z": -0.5144691331500847
+          },
+          "origin": {
+            "x": 30.22392704612703,
+            "y": 40.463156980415455,
+            "z": -6.006784376020391
+          },
+          "attitude": {
+            "pitch": -0.016334157141578983,
+            "roll": 0.015783504370816038
+          },
+          "angularVelocity": {
+            "pitch": -0.008833960663728487,
+            "roll": 0.0070612699747344045
+          },
+          "support": {
+            "kind": "platform",
+            "groundY": 40.01315698041545,
+            "strength": 1
+          },
+          "supportIntegrity": 1,
+          "supportCollapsed": false,
+          "fuel": 19424.73118279533,
+          "throttle": 1,
+          "targetThrottle": 1,
+          "integrity": 1,
+          "elapsed": 16.333333333333687,
+          "phaseElapsed": 3.6333333333333253,
+          "flightElapsed": 3.649999999999992,
+          "buildProgress": 1,
+          "countdown": 0,
+          "altitude": 51.87396194129652,
+          "maxAltitude": 51.87396194129652,
+          "speed": 28.418997615317135,
+          "acceleration": {
+            "x": 0.29681908129112244,
+            "y": 7.870391212426538,
+            "z": -0.31393534826241726
+          },
+          "dynamicPressure": 517.1066080630816,
+          "wind": {
+            "x": 4.353961084762603,
+            "y": 0,
+            "z": -6.311946462873229
+          },
+          "seed": 2759.1561875849256,
+          "events": [
+            {
+              "id": 1,
+              "type": "ready",
+              "time": 6.016666666666651,
+              "position": {
+                "x": 30.22392704612703,
+                "y": 40.463156980415455,
+                "z": -6.006784376020391
+              },
+              "magnitude": 0
+            },
+            {
+              "id": 2,
+              "type": "countdown",
+              "time": 6.06666666666665,
+              "position": {
+                "x": 30.22392704612703,
+                "y": 40.463156980415455,
+                "z": -6.006784376020391
+              },
+              "magnitude": 0
+            },
+            {
+              "id": 3,
+              "type": "ignition",
+              "time": 11.083333333333464,
+              "position": {
+                "x": 30.22392704612703,
+                "y": 40.463156980415455,
+                "z": -6.006784376020391
+              },
+              "magnitude": 0
+            },
+            {
+              "id": 4,
+              "type": "liftoff",
+              "time": 12.70000000000021,
+              "position": {
+                "x": 30.22392704612703,
+                "y": 40.463156980415455,
+                "z": -6.006784376020391
+              },
+              "magnitude": 0
+            }
+          ],
+          "nextEventId": 5,
+          "failureReason": null
+        }
+      },
+      "afterInput": {
+        "frames": 30,
+        "snapshot": {
+          "exists": true,
+          "active": true,
+          "placing": false,
+          "kind": "small",
+          "phase": "flight",
+          "buildProgress": 1,
+          "loaded": true,
+          "loadError": false,
+          "countdown": 0,
+          "altitude": 68.17920122388614,
+          "speed": 32.60028065959045,
+          "fuel": 0.9677956989247101,
+          "throttle": 1,
+          "tilt": 9.321852075975915,
+          "pitch": 5.3317073997603535,
+          "roll": 7.6576355449925435,
+          "verticalSpeed": 32.58432485579786,
+          "wind": 7.335444545234031,
+          "auto": false,
+          "stabilize": true,
+          "support": "platform",
+          "supportIntegrity": 1,
+          "warning": "",
+          "view": "chase",
+          "damaged": 2,
+          "burning": 0,
+          "debris": 10
+        },
+        "state": {
+          "kind": "small",
+          "mode": "manual",
+          "stabilize": true,
+          "phase": "flight",
+          "position": {
+            "x": 30.90286198947027,
+            "y": 108.6423582043016,
+            "z": -6.915547377013194
+          },
+          "velocity": {
+            "x": 0.9841608131199494,
+            "y": 32.58432485579786,
+            "z": -0.26739534367678164
+          },
+          "origin": {
+            "x": 30.22392704612703,
+            "y": 40.463156980415455,
+            "z": -6.006784376020391
+          },
+          "attitude": {
+            "pitch": 0.0930558488787637,
+            "roll": 0.13365095317787026
+          },
+          "angularVelocity": {
+            "pitch": 0.3092143560732144,
+            "roll": 0.32475019149925466
+          },
+          "support": {
+            "kind": "platform",
+            "groundY": 40.01315698041545,
+            "strength": 1
+          },
+          "supportIntegrity": 1,
+          "supportCollapsed": false,
+          "fuel": 19355.9139784942,
+          "throttle": 1,
+          "targetThrottle": 1,
+          "integrity": 1,
+          "elapsed": 16.86666666666699,
+          "phaseElapsed": 4.166666666666657,
+          "flightElapsed": 4.183333333333324,
+          "buildProgress": 1,
+          "countdown": 0,
+          "altitude": 68.17920122388614,
+          "maxAltitude": 68.17920122388614,
+          "speed": 32.60028065959045,
+          "acceleration": {
+            "x": 2.38772480871649,
+            "y": 7.65230511133421,
+            "z": 1.6362068962764096
+          },
+          "dynamicPressure": 665.4906284502473,
+          "wind": {
+            "x": 5.328352365760166,
+            "y": 0,
+            "z": -5.041567984516499
+          },
+          "seed": 2759.1561875849256,
+          "events": [
+            {
+              "id": 1,
+              "type": "ready",
+              "time": 6.016666666666651,
+              "position": {
+                "x": 30.22392704612703,
+                "y": 40.463156980415455,
+                "z": -6.006784376020391
+              },
+              "magnitude": 0
+            },
+            {
+              "id": 2,
+              "type": "countdown",
+              "time": 6.06666666666665,
+              "position": {
+                "x": 30.22392704612703,
+                "y": 40.463156980415455,
+                "z": -6.006784376020391
+              },
+              "magnitude": 0
+            },
+            {
+              "id": 3,
+              "type": "ignition",
+              "time": 11.083333333333464,
+              "position": {
+                "x": 30.22392704612703,
+                "y": 40.463156980415455,
+                "z": -6.006784376020391
+              },
+              "magnitude": 0
+            },
+            {
+              "id": 4,
+              "type": "liftoff",
+              "time": 12.70000000000021,
+              "position": {
+                "x": 30.22392704612703,
+                "y": 40.463156980415455,
+                "z": -6.006784376020391
+              },
+              "magnitude": 0
+            }
+          ],
+          "nextEventId": 5,
+          "failureReason": null
+        }
+      },
+      "camera": {
+        "before": {
+          "fuel": 19355.9139784942,
+          "phase": "flight",
+          "altitude": 68.17920122388614
+        },
+        "first": "first",
+        "after": {
+          "fuel": 19351.61290322538,
+          "phase": "flight",
+          "altitude": 69.27169823767855,
+          "view": "chase"
+        }
+      },
+      "result": {
+        "frames": 7329,
+        "snapshot": {
+          "exists": true,
+          "active": true,
+          "placing": false,
+          "kind": "small",
+          "phase": "space",
+          "buildProgress": 1,
+          "loaded": true,
+          "loadError": false,
+          "countdown": 0,
+          "altitude": 100036.93684773106,
+          "speed": 2225.6506478894,
+          "fuel": 0.1710215053762481,
+          "throttle": 0,
+          "tilt": 2.0283132487150106,
+          "pitch": 1.7728867570699212,
+          "roll": 0.9855136621119557,
+          "verticalSpeed": 2220.412212438163,
+          "wind": 0.6679191039215779,
+          "auto": true,
+          "stabilize": true,
+          "support": "platform",
+          "supportIntegrity": 1,
+          "warning": "",
+          "view": "chase",
+          "damaged": 2,
+          "burning": 0,
+          "debris": 10
+        },
+        "state": {
+          "kind": "small",
+          "mode": "auto",
+          "stabilize": true,
+          "phase": "space",
+          "position": {
+            "x": -400.69742072407155,
+            "y": 100077.40000471148,
+            "z": 7034.918703192059
+          },
+          "velocity": {
+            "x": -27.725892515310278,
+            "y": 2220.412212438163,
+            "z": 150.07227655432018
+          },
+          "origin": {
+            "x": 30.22392704612703,
+            "y": 40.463156980415455,
+            "z": -6.006784376020391
+          },
+          "attitude": {
+            "pitch": 0.030942711175874982,
+            "roll": 0.01720045822724052
+          },
+          "angularVelocity": {
+            "pitch": -0.00023743208304393952,
+            "roll": 0.0014320842095259208
+          },
+          "support": {
+            "kind": "platform",
+            "groundY": 40.01315698041545,
+            "strength": 1
+          },
+          "supportIntegrity": 1,
+          "supportCollapsed": false,
+          "fuel": 3420.4301075249623,
+          "throttle": 0,
+          "targetThrottle": 0,
+          "integrity": 1,
+          "elapsed": 140.3666666666705,
+          "phaseElapsed": 0,
+          "flightElapsed": 127.68333333332737,
+          "buildProgress": 1,
+          "countdown": 0,
+          "altitude": 100036.93684773106,
+          "maxAltitude": 100036.93684773106,
+          "speed": 2225.6506478894,
+          "acceleration": {
+            "x": 0.8374944432583623,
+            "y": 39.17017569671067,
+            "z": 1.506675380466858
+          },
+          "dynamicPressure": 23.57408219381512,
+          "wind": {
+            "x": 0.5471838469343273,
+            "y": 0,
+            "z": -0.38302188845750607
+          },
+          "seed": 2759.1561875849256,
+          "events": [
+            {
+              "id": 1,
+              "type": "ready",
+              "time": 6.016666666666651,
+              "position": {
+                "x": 30.22392704612703,
+                "y": 40.463156980415455,
+                "z": -6.006784376020391
+              },
+              "magnitude": 0
+            },
+            {
+              "id": 2,
+              "type": "countdown",
+              "time": 6.06666666666665,
+              "position": {
+                "x": 30.22392704612703,
+                "y": 40.463156980415455,
+                "z": -6.006784376020391
+              },
+              "magnitude": 0
+            },
+            {
+              "id": 3,
+              "type": "ignition",
+              "time": 11.083333333333464,
+              "position": {
+                "x": 30.22392704612703,
+                "y": 40.463156980415455,
+                "z": -6.006784376020391
+              },
+              "magnitude": 0
+            },
+            {
+              "id": 4,
+              "type": "liftoff",
+              "time": 12.70000000000021,
+              "position": {
+                "x": 30.22392704612703,
+                "y": 40.463156980415455,
+                "z": -6.006784376020391
+              },
+              "magnitude": 0
+            },
+            {
+              "id": 5,
+              "type": "mission-complete",
+              "time": 140.3666666666705,
+              "position": {
+                "x": -400.69742072407155,
+                "y": 100077.40000471148,
+                "z": 7034.918703192059
+              },
+              "magnitude": 0
+            }
+          ],
+          "nextEventId": 6,
+          "failureReason": null
+        }
+      }
+    },
+    "firstPersonEarthLook": {
+      "view": "first",
+      "phase": "space",
+      "lookPitch": 2.8,
+      "direction": [
+        -0.016287211148670905,
+        -0.9519957874080667,
+        0.30567752208871013
+      ],
+      "cabinParentIsSpaceCamera": true,
+      "cabinScale": 0.00001,
+      "cameraNear": 0.000001
+    },
+    "finalReturn": {
+      "mode": "orbit",
+      "controlsEnabled": true,
+      "active": false,
+      "effectsRemoved": true
+    }
+  },
+  "screenshots": [
+    "docs/rocket-launch-game/evidence/integrated-large-roof-failure.png",
+    "docs/rocket-launch-game/evidence/integrated-city-blast-effects.png",
+    "docs/rocket-launch-game/evidence/integrated-first-person-earth-look.png"
+  ],
+  "startup": {
+    "buildings": 7794,
+    "trees": 35535,
+    "ready": true,
+    "renderer": "WebKit WebGL",
+    "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+  },
+  "checks": {
+    "actualRoofClassification": true,
+    "roofAltitudeMatchesMeasuredBuilding": true,
+    "largeRoofSupportCollapsed": true,
+    "largeRoofCrash": true,
+    "actualSeaClassification": true,
+    "seaSinks": true,
+    "riverSinks": true,
+    "lakeUnstable": true,
+    "nearbyBuildingsDamaged": true,
+    "nearbyTreesBurning": true,
+    "nearbyObjectsBecomeDebris": true,
+    "manualSteers": true,
+    "cameraDoesNotResetMission": true,
+    "smallManualToAutoReachesSpace": true,
+    "firstPersonCanLookDownToEarth": true,
+    "finalCityRestored": true,
+    "noUncaughtErrors": true,
+    "largeRoofActuallyDamaged": true
+  },
+  "completedAt": "2026-10-22T20:25:30.926Z",
+  "evidenceNote": "The immediate post-loop third-person screenshot was discarded because React had not published the final phase yet. The retained first-person Earth screenshot was captured after the real Mission complete dialog appeared and Observe space was clicked."
+}
