@@ -1,0 +1,100 @@
+{
+  "revision": "9c95d913ba8b645d342b999bff23c5a18b825195",
+  "sourceFingerprint": "9c75e5dd821feceb11016476bf113c304074a7dee1e0852215a78ea637d07dce",
+  "kind": "vehicle-impact-webgl-v1",
+  "burst": false,
+  "entry": {
+    "mode": "drive",
+    "obstacle": {
+      "id": "tree:17263",
+      "kind": "tree",
+      "diameterM": 0.19,
+      "position": [
+        -1991.9708628635722,
+        4.749123199990027,
+        1477.2163999998397
+      ],
+      "heightM": 5,
+      "radiusM": 0.18
+    },
+    "x": -1991.9708628635722,
+    "y": 5.259005807003392,
+    "z": 1465.2163999998397,
+    "yaw": 0
+  },
+  "mode": "drive",
+  "viewport": [
+    1280,
+    720
+  ],
+  "quality": "balanced",
+  "qualityMode": "auto",
+  "valid": true,
+  "damage": {
+    "zones": {
+      "front": 0,
+      "rear": 0,
+      "left": 0,
+      "right": 0,
+      "roof": 0
+    },
+    "scratches": {
+      "front": 0,
+      "rear": 0,
+      "left": 0,
+      "right": 0,
+      "roof": 0
+    },
+    "overall": 0,
+    "severity": 0,
+    "revision": 2,
+    "lastHit": null,
+    "recentEventIds": []
+  },
+  "visuals": {
+    "marks": 0,
+    "capacity": 16,
+    "ownedMeshes": 0,
+    "maximumOwnedMeshes": 18,
+    "refinedVertices": 0,
+    "refinedTriangles": 0,
+    "maximumRefinedVertices": 6144,
+    "maximumRefinedTriangles": 2048,
+    "maximumRefinedMeshVertices": 1152,
+    "maximumRefinedMeshTriangles": 384,
+    "refinementHistoryEntries": 0,
+    "maximumRefinementHistoryEntries": 288,
+    "dentedVertices": 0,
+    "triangles": 0,
+    "maximumTriangles": 4096,
+    "draws": 0,
+    "textures": 0,
+    "rebuilds": 1,
+    "disposed": false
+  },
+  "broken": [
+    "tree:17263"
+  ],
+  "feedback": {
+    "capacity": 128,
+    "budget": 64,
+    "active": 0,
+    "drawCalls": 0,
+    "bufferBytes": 7680,
+    "audioEnabled": true,
+    "audioAllocated": true,
+    "voices": 0,
+    "disposed": false
+  },
+  "drive": {
+    "position": [
+      -1991.9708628635722,
+      6.215469838204239,
+      1480.2627054300274
+    ],
+    "speed": 0.0000821370973229419,
+    "yaw": 0
+  },
+  "calls": 119,
+  "triangles": 852627
+}

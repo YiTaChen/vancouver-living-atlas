@@ -26,6 +26,9 @@ export interface Traffic {
   mesh: THREE.InstancedMesh;
   cabins: THREE.InstancedMesh;
   lamps: THREE.InstancedMesh;
+  lampPoles: THREE.InstancedMesh;
+  /** Stable streetLampPoints index; no restoration until a new city session. */
+  breakLamp: (index: number) => boolean;
   routes: {
     a: number[];
     b: number[];
@@ -42,6 +45,39 @@ export interface Traffic {
   nightLights: TrafficNightLights;
   downtownAt: (x: number, z: number) => boolean;
   nightReceiversReady: boolean;
+}
+/** Source lamp indices are independent of the filtered downtown light field.
+ * A broken off-field lamp still disappears; it must not switch off source zero
+ * or a neighboring urban pool. No update path restores these instance slots. */
+export function createStreetLampDamage(
+  e: Pick<CityEngine, 'disposed' | 'renderer'>,
+  poles: THREE.InstancedMesh,
+  caps: THREE.InstancedMesh,
+  lightSourceIndices: Int32Array,
+  lighting: NightStreetLighting,
+) {
+  const broken = new Set<number>(),
+    removed = new THREE.Matrix4().makeScale(0, 0, 0);
+  return (index: number) => {
+    if (
+      e.disposed ||
+      !Number.isInteger(index) ||
+      index < 0 ||
+      index >= lightSourceIndices.length ||
+      index >= poles.count ||
+      index >= caps.count ||
+      broken.has(index)
+    )
+      return false;
+    broken.add(index);
+    poles.setMatrixAt(index, removed);
+    caps.setMatrixAt(index, removed);
+    poles.instanceMatrix.needsUpdate = caps.instanceMatrix.needsUpdate = true;
+    if (lightSourceIndices[index] >= 0)
+      lighting.disableLamp(lightSourceIndices[index]);
+    e.renderer.shadowMap.needsUpdate = true;
+    return true;
+  };
 }
 export function createNature(e: CityEngine) {
   const woodPolys = e.data.context.features
@@ -452,7 +488,8 @@ export function createStreetDetails(e: CityEngine): Traffic {
   const downtownAt = createDowntownNightPolicy(excluded, (x, z) =>
     e.onLand(x, z),
   );
-  const lightSources = [];
+  const lightSources = [],
+    lampLightSourceIndices = new Int32Array(lampPoints.length).fill(-1);
   for (let i = 0; i < lampPoints.length; i++) {
     const [x, z, yaw] = lampPoints[i];
     dummy.position.set(x, e.elevation(x, z) + 1, z);
@@ -463,7 +500,8 @@ export function createStreetDetails(e: CityEngine): Traffic {
     dummy.position.set(head.x, head.y, head.z);
     dummy.updateMatrix();
     lightCaps.setMatrixAt(i, dummy.matrix);
-    if (downtownAt(head.x, head.z))
+    if (downtownAt(head.x, head.z)) {
+      lampLightSourceIndices[i] = lightSources.length;
       lightSources.push({
         ...head,
         groundY:
@@ -471,6 +509,7 @@ export function createStreetDetails(e: CityEngine): Traffic {
           (e.data.roadRelief?.(head.x, head.z) ?? e.elevation(head.x, head.z)) +
             1.05,
       });
+    }
   }
   e.roads.add(lamps, lightCaps);
   const body = new THREE.InstancedMesh(
@@ -561,10 +600,19 @@ export function createStreetDetails(e: CityEngine): Traffic {
       wrapNightStreetMaterials(vehicleAssets.group, streetLighting);
   });
   const nightLights = new TrafficNightLights(e.trafficGroup);
+  const breakLamp = createStreetLampDamage(
+    e,
+    lamps,
+    lightCaps,
+    lampLightSourceIndices,
+    streetLighting,
+  );
   return {
     mesh: body,
     cabins,
     lamps: lightCaps,
+    lampPoles: lamps,
+    breakLamp,
     routes,
     boats,
     buses,

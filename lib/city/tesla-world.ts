@@ -1457,17 +1457,32 @@ export class TeslaWorld implements TeslaWorldContract {
         }
         if (time === null) continue;
         const fraction = (step + time) / steps;
-        if (first && first.fraction <= fraction) continue;
         const center = asVector(interpolated(a, b, time).position);
         const triangle = faceGeometry(face).triangle;
         const point = triangle.closestPointToPoint(center, new THREE.Vector3());
+        const hitNormal=asVector(face.normal);
+        if(face.kind==='obstacle'&&hitNormal.dot(center.clone().sub(point))<0)hitNormal.negate();
+        let acceptedFraction=fraction;
+        if (first && first.fraction <= fraction + 1e-9) {
+          // Several box faces can meet the body at the same instant. Prefer
+          // the opposed normal of that same prop, rather than a tangent side
+          // selected by Float64 last bits; tangent faces consume no energy.
+          const root=(id:string)=>id.match(/^(guardrail:\d+|debris:(?:tree|lamp):\d+)(?::|$)/)?.[1]??id.split(':side:')[0];
+          const travel=asVector(b.position).sub(asVector(a.position));
+          const tied=face.kind==='obstacle'&&first.kind==='obstacle'&&
+            Math.abs(first.fraction-fraction)<=1e-9&&root(first.surfaceId)===root(face.surfaceId);
+          if(tied){acceptedFraction=Math.min(first.fraction,fraction);first.fraction=acceptedFraction;}
+          if(face.kind!=='obstacle'||first.kind!=='obstacle'||
+            Math.abs(first.fraction-fraction)>1e-9||root(first.surfaceId)!==root(face.surfaceId)||
+            hitNormal.dot(travel)>=asVector(first.normal).dot(travel)-1e-10)continue;
+        }
         first = {
           surfaceId: face.surfaceId,
           kind: face.kind,
           point: tuple(point),
-          normal: face.normal,
+          normal: tuple(hitNormal),
           adherable: face.adherable,
-          fraction,
+          fraction:acceptedFraction,
         };
       }
       if (first) break;

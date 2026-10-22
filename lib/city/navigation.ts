@@ -29,6 +29,7 @@ import { GroundSurfaceIndex, walkableGroundMeshes } from './ground-surface';
 import { DriverCameraMotion, DRIVER_LEFT_OFFSET } from './driver-camera';
 import type { TravelBookmark } from './travel-return';
 import { makeRoadster } from './assets/roadster';
+import { VehicleCondition } from './vehicle-condition';
 import { makeCockpit } from './assets/cockpits';
 import {
   firstPerson,
@@ -67,6 +68,7 @@ export class StreetNavigation {
   dragging = false;
   last = [0, 0];
   car = new THREE.Group();
+  condition: VehicleCondition;
   carModel: 'classic' | 'roadster' = 'roadster';
   classicCar = new THREE.Group();
   roadster = makeRoadster();
@@ -238,6 +240,7 @@ export class StreetNavigation {
     this.roadster.group.visible = true;
     this.cockpits.drive = this.roadsterCockpit;
     this.car.add(this.classicCar, this.roadster.group);
+    this.condition = new VehicleCondition(e,this.car,1550,.7);
     this.car.visible = false;
     e.scene.add(this.car);
     window.addEventListener('keydown', this.keyDown);
@@ -258,6 +261,7 @@ export class StreetNavigation {
     this.carModel = model;
     this.classicCar.visible = model === 'classic';
     this.roadster.group.visible = model === 'roadster';
+    this.condition?.refresh();
     this.classicCockpit.visible = this.roadsterCockpit.visible = false;
     this.cockpits.drive =
       model === 'classic' ? this.classicCockpit : this.roadsterCockpit;
@@ -830,6 +834,73 @@ export class StreetNavigation {
     this.update(0.016);
   }
   move(dx: number, dz: number) {
+    if(this.mode==='drive' && this.e.vehicleImpacts) return this.moveDrive(dx,dz);
+    this.moveGround(dx,dz);
+  }
+  /** Continuous full-body prop/rail CCD, then the original surface permissions
+   * for every accepted leg. A broken pole never grants passage through water,
+   * a protected deck edge, a building or a second unbroken obstacle. */
+  private moveDrive(dx:number,dz:number) {
+    const total=Math.hypot(dx,dz), speed=Math.abs(this.speed);
+    if(total<1e-9||speed<1e-9)return;
+    let remaining=total/speed, delta=new THREE.Vector3(dx,0,dz);
+    const shape={halfExtents:[1,.65,2.4] as const,clearance:.02};
+    const quaternion=(yaw=this.yaw)=>new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),yaw).toArray();
+    let sweptYaw=this.car.rotation.y;
+    const attempted=new Set<string>();
+    for(let i=0;i<4 && remaining>1e-5;i++) {
+      const from={position:[this.position.x,this.position.y+.7,this.position.z] as const,quaternion:quaternion(sweptYaw)};
+      const to={position:[from.position[0]+delta.x,from.position[1],from.position[2]+delta.z] as const,quaternion:quaternion()};
+      const hit=this.e.vehicleImpacts!.sweep({from,to,shape});
+      if(!hit){
+        const before=this.position.clone(), identity={surface:this.surface,surfaceId:this.surfaceId,layer:this.surfaceLayer};
+        const targetYaw=this.yaw, angle=Math.atan2(Math.sin(targetYaw-sweptYaw),Math.cos(targetYaw-sweptYaw));
+        this.moveGround(delta.x,delta.z);
+        const fraction=Math.min(1,Math.hypot(this.position.x-before.x,this.position.z-before.z)/delta.length());
+        this.yaw=sweptYaw+angle*fraction;
+        const accepted={position:[this.position.x,this.position.y+.7,this.position.z] as const,quaternion:quaternion()};
+        if(this.e.vehicleImpacts!.sweep({from,to:accepted,shape})) {
+          this.position.copy(before);this.yaw=sweptYaw;this.speed=0;
+          this.surface=identity.surface;this.surfaceId=identity.surfaceId;this.surfaceLayer=identity.layer;
+        }
+        return;
+      }
+      if(/invalid.*query|invalid-tesla-world/.test(hit.surfaceId)){this.speed=0;return;}
+      const id=this.e.vehicleImpacts!.obstacle(hit.surfaceId).id;
+      if(attempted.has(id)){this.speed=0;return;}attempted.add(id);
+      const length=delta.length(), fraction=Math.max(0,hit.fraction-(length? .002/length:0));
+      const requestedYaw=this.yaw;
+      const angle=Math.atan2(Math.sin(requestedYaw-sweptYaw),Math.cos(requestedYaw-sweptYaw));
+      const before=this.position.clone();
+      const identity={surface:this.surface,surfaceId:this.surfaceId,layer:this.surfaceLayer};
+      this.moveGround(delta.x*fraction,delta.z*fraction);
+      const travelled=Math.hypot(this.position.x-before.x,this.position.z-before.z);
+      this.yaw=sweptYaw+angle*Math.min(fraction,length?travelled/length:0);
+      const accepted={position:[this.position.x,this.position.y+.7,this.position.z] as const,quaternion:quaternion()};
+      if(this.e.vehicleImpacts!.sweep({from,to:accepted,shape})) {
+        this.position.copy(before);this.yaw=sweptYaw;this.speed=0;
+        this.surface=identity.surface;this.surfaceId=identity.surfaceId;this.surfaceLayer=identity.layer;return;
+      }
+      if(travelled+.004<length*fraction)return;
+      const pose={position:[from.position[0]+delta.x*hit.fraction,from.position[1],from.position[2]+delta.z*hit.fraction] as const,quaternion:quaternion(sweptYaw+angle*hit.fraction)};
+      const velocity=[Math.sin(requestedYaw)*this.speed,0,Math.cos(requestedYaw)*this.speed] as const;
+      const response=this.condition.impact({hit,pose,velocity,shape});
+      const out=new THREE.Vector3(...response.velocity);
+      const sign=out.dot(new THREE.Vector3(Math.sin(this.yaw),0,Math.cos(this.yaw)))<0?-1:1;
+      this.speed=out.length()*sign;
+      remaining*=1-hit.fraction;
+      if(out.length()<.04){this.speed=0;return;}
+      const newYaw=Math.atan2(out.x*sign,out.z*sign);
+      const rotated={position:[this.position.x,this.position.y+.7,this.position.z] as const,
+        quaternion:new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),newYaw).toArray()};
+      const current={position:rotated.position,quaternion:quaternion()};
+      if(!this.e.vehicleImpacts!.sweep({from:current,to:rotated,shape}))this.yaw=newYaw;
+      else if(!response.passThrough){this.speed=0;return;}
+      sweptYaw=this.yaw;
+      delta=out.multiplyScalar(remaining);
+    }
+  }
+  private moveGround(dx:number,dz:number) {
     if (this.mode === 'boat') return;
     if (Math.hypot(dx, dz) < 1e-9) return;
     const steps = Math.max(1, Math.ceil(Math.hypot(dx, dz) / ((this.e.interiors?.height(this.position.x,this.position.z) !== undefined || this.e.interiors?.height(this.position.x+dx,this.position.z+dz) !== undefined) ? 0.3 : 1.5)));
@@ -846,6 +917,7 @@ export class StreetNavigation {
       ) {
         const hit = this.protectedStep(x, z);
         if (!hit) {
+          this.impactBuilding(x,z);
           this.speed = 0;
           break;
         }
@@ -864,10 +936,31 @@ export class StreetNavigation {
         this.surfaceId = undefined;
         this.surfaceLayer = undefined;
       } else {
+        this.impactBuilding(x,z);
         this.speed = 0;
         break;
       }
     }
+  }
+  private impactBuilding(x:number,z:number) {
+    if(this.mode!=='drive'||!this.condition||Math.abs(this.speed)<.3)return;
+    const polygon=this.collisions?.get(Math.floor(x/80)+','+Math.floor(z/80))?.find(p=>inPolygon([x,z],p));
+    if(!polygon)return;
+    let best=Infinity,point=[x,z],normal=[-Math.sin(this.yaw),-Math.cos(this.yaw)];
+    for(const ring of polygon)for(let i=0;i<ring.length;i++) {
+      const a=ring[i],b=ring[(i+1)%ring.length],dx=b[0]-a[0],dz=b[1]-a[1],d=dx*dx+dz*dz;
+      if(d<1e-9)continue;
+      const t=THREE.MathUtils.clamp(((x-a[0])*dx+(z-a[1])*dz)/d,0,1),xx=a[0]+dx*t,zz=a[1]+dz*t;
+      const gap=(x-xx)**2+(z-zz)**2;if(gap>=best)continue;
+      best=gap;point=[xx,zz];normal=[dz/Math.sqrt(d),-dx/Math.sqrt(d)];
+      if(inPolygon([xx+normal[0]*.03,zz+normal[1]*.03],polygon))normal=normal.map(n=>-n);
+    }
+    this.condition.impact({hit:{surfaceId:`drive-building:${polygon[0][0].join(',')}`,kind:'wall',
+      point:[point[0],this.position.y+.7,point[1]],normal:[normal[0],0,normal[1]],fraction:1,adherable:false},
+      pose:{position:[this.position.x,this.position.y+.7,this.position.z],
+        quaternion:new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),this.yaw).toArray()},
+      velocity:[Math.sin(this.yaw)*this.speed,0,Math.cos(this.yaw)*this.speed],
+      shape:{halfExtents:[1,.65,2.4],clearance:.02}});
   }
   roadHeight(x: number, z: number) {
     const interior=this.e.interiors?.height(x,z);
@@ -928,14 +1021,16 @@ export class StreetNavigation {
       return;
     }
     if (this.mode === 'drive') {
+      this.condition?.update(dt);
+      const handling=this.condition?.performance;
       this.speed = THREE.MathUtils.clamp(
-        stopped ? Math.max(0,this.speed-12*dt) : this.speed + (this.touchBrake ? 0 : forward) * dt * (this.carModel === 'roadster' ? ROADSTER_ACCELERATION : 8),
+        stopped ? Math.max(0,this.speed-12*dt) : this.speed + (this.touchBrake ? 0 : forward) * dt * (this.carModel === 'roadster' ? ROADSTER_ACCELERATION : 8)*(handling?.acceleration??1),
         -5,
-        this.carModel === 'roadster' ? ROADSTER_TOP_SPEED : 21,
+        (this.carModel === 'roadster' ? ROADSTER_TOP_SPEED : 21)*(handling?.topSpeed??1),
       );
       if (!stopped && !forward) this.speed *= Math.pow(0.78, dt);
-      if (!stopped && (pressed(' ') || this.touchBrake)) this.speed *= Math.pow(0.007, dt);
-      if (!stopped) this.yaw += drivingYawDelta(turn, this.speed, dt);
+      if (!stopped && (pressed(' ') || this.touchBrake)) this.speed *= Math.pow(0.007, dt*(handling?.braking??1));
+      if (!stopped) this.yaw += drivingYawDelta(turn*(handling?.steering??1)+(Math.abs(this.speed)>1?(handling?.steeringBias??0):0), this.speed, dt);
       this.move(
         Math.sin(this.yaw) * this.speed * dt,
         Math.cos(this.yaw) * this.speed * dt,
@@ -1050,6 +1145,9 @@ export class StreetNavigation {
       this.e.camera.quaternion.premultiply(
         this.driverMotion.worldRotation(this.yaw, 1 - blend),
       );
+      const shake=this.e.impactFeedback?.shake??0;
+      if(shake>0)this.e.camera.position.add(new THREE.Vector3(
+        Math.sin(performance.now()*.081)*shake*.3,Math.sin(performance.now()*.097)*shake*.2,0));
     }
     this.e.controls.target.copy(this.position).addScaledVector(dir, 25);
     this.e.camera.near = 0.08;
@@ -1209,6 +1307,7 @@ export class StreetNavigation {
   }
 
   destroy() {
+    this.condition?.dispose();
     this.walker.dispose?.();
     this.trafficStop?.destroy();
     window.removeEventListener('keydown', this.keyDown);

@@ -176,6 +176,10 @@ export async function verifyFirebaseBuild(
     'Street furniture diagnostics must not ship in the public build',
   );
   assert(
+    !scripts.includes('Impact QA:')&&!files.some(name=>/(?:^|\/)vehicle-impact-qa[.-]/.test(name)),
+    'Vehicle impact diagnostics must not ship in the public build',
+  );
+  assert(
     !scripts.includes('Tesla QA: spawn Robson') &&
       !scripts.includes('Tesla QA ready') &&
       !scripts.includes('city-tesla-webgl-v1') &&

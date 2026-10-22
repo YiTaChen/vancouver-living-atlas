@@ -116,6 +116,11 @@ export interface TeslaWallToRoofPlan {
 }
 export interface TeslaWorld {
   sweep(query: TeslaSweepQuery): TeslaSweepHit | null;
+  /** Actual committed collision only; speculative fits/clearance never damage
+   * a vehicle or mutate props. A pass requires the broken source to disappear
+   * from a fresh full sweep, never an ignored surface permission. */
+  impact?(query: {hit:TeslaSweepHit;pose:TeslaPose;velocity:TeslaVec3;shape:TeslaShape}):
+    {velocity:TeslaVec3;passThrough:boolean} | null;
   /** Prove the actual tyre support area for authored ordinary ground; other
    * surfaces and legacy shapes require their complete body footprint. */
   support(query: TeslaSupportQuery): TeslaContact | null;
@@ -131,6 +136,10 @@ export interface TeslaWorld {
 export const TESLA_DEFAULT_SHAPE: TeslaShape = createTeslaRoadsterShape();
 
 export interface TeslaInput {
+  /** Optional normalized game mechanical condition; legacy worlds default1. */
+  drivePower?: number;
+  driveSpeedFactor?: number;
+  driveBrakeFactor?: number;
   /** Forward/reverse; positive steer rotates +Z toward +X about vehicle up. */
   throttle: number;
   steer: number;
@@ -1494,6 +1503,42 @@ function moveSwept(
     remember(state);
     return;
   }
+  let impactVelocity: TeslaVec3 | null = null;
+  const initialClosing=-teslaDot(state.velocity,hit.normal);
+  state.impact=Math.max(state.impact,Math.min(1,Math.max(0,initialClosing)/35));
+  if (world.impact && hit.kind === 'obstacle') {
+    // A bounded sequence can break several thin props, but the destination is
+    // shortened by the lost speed and swept again against all remaining solids.
+    const attempted=new Set<string>();
+    for (let i=0;hit && i<4;i++) {
+      const id=hit.surfaceId.match(/^(tree:\d+|lamp:\d+)(?::|$)/)?.[1]??hit.surfaceId;
+      if(hit.kind!=='obstacle'||/invalid.*query|invalid-tesla-world/.test(hit.surfaceId)||attempted.has(id))break;
+      attempted.add(id);
+      const before = teslaLength(state.velocity);
+      let response: ReturnType<NonNullable<TeslaWorld['impact']>>;
+      const at = {position:teslaAdd(state.position,teslaScale(teslaSubtract(next.position,state.position),hit.fraction)),
+        quaternion:teslaSlerp(state.quaternion,next.quaternion,hit.fraction)};
+      try { response = world.impact({hit,pose:at,velocity:state.velocity,shape}); }
+      catch { response = null; }
+      if (!response) break;
+      if (!finiteVector(response.velocity,3) || teslaLength(response.velocity)>before+1e-6) {
+        report.environmentFailures++;state.velocity=[0,0,0];return;
+      }
+      state.velocity = [...response.velocity];
+      impactVelocity = state.velocity;
+      if (!response.passThrough) break;
+      report.collisions++;
+      state.collisionSurfaceId=hit.surfaceId;
+      const ratio = before>EPS ? Math.min(1,teslaLength(state.velocity)/before) : 0;
+      const fraction=hit.fraction+(1-hit.fraction)*ratio;
+      next={position:teslaAdd(state.position,teslaScale(teslaSubtract(next.position,state.position),fraction)),
+        quaternion:teslaSlerp(state.quaternion,next.quaternion,fraction)};
+      hit=querySweep(world,state,next,shape,ignoredSupport,report);
+      if (!hit) {state.position=next.position;state.quaternion=next.quaternion;remember(state);return;}
+      // If the budget ends, this last hit remains blocking below.
+      impactVelocity=null;
+    }
+  }
   if (
     allowAttachment &&
     state.mode === 'wall' &&
@@ -1520,7 +1565,7 @@ function moveSwept(
   );
   state.quaternion = teslaSlerp(state.quaternion, next.quaternion, fraction);
   const closing = -teslaDot(state.velocity, hit.normal);
-  state.impact = Math.max(state.impact, Math.min(1, closing / 35));
+  state.impact = Math.max(state.impact, Math.min(1, Math.max(closing,initialClosing) / 35));
   remember(state);
   if (
     allowAttachment &&
@@ -1528,12 +1573,31 @@ function moveSwept(
     requestAttachment(state, hit, world, shape, report)
   )
     return;
+  if(!impactVelocity && world.impact && hit.kind==='wall') {
+    try {
+      const response=world.impact({hit,pose:copyPose(state),velocity:state.velocity,shape});
+      if(response && finiteVector(response.velocity,3) && teslaLength(response.velocity)<=teslaLength(state.velocity)+EPS)
+        impactVelocity=response.velocity;
+    } catch { /* The proven wall remains blocking if feedback fails. */ }
+  }
   // Sliding only removes velocity into the obstacle. The next substep sweeps
   // the remaining tangent movement instead of teleporting through a corner.
   state.velocity =
-    closing > 0
+    impactVelocity ?? (closing > 0
       ? teslaAdd(state.velocity, teslaScale(hit.normal, closing))
-      : [0, 0, 0];
+      : [0, 0, 0]);
+  if (impactVelocity && state.mode === 'ground') {
+    const up=bodyUp(state), projected=teslaSubtract(state.velocity,teslaScale(up,teslaDot(state.velocity,up)));
+    // Redirect along the barrier; otherwise next frame's longitudinal drive
+    // would recreate the inward velocity and charge the same impact repeatedly.
+    if(teslaLength(projected)>.2) {
+      const sign=teslaDot(projected,bodyForward(state))>=0?1:-1;
+      const rotated={position:state.position,quaternion:teslaFrame(up,teslaScale(projected,sign)).quaternion};
+      if(!querySweep(world,state,rotated,shape,state.contact?.surfaceId,report) &&
+        querySupport(world,rotated,shape,state.contact?.surfaceId,state.adhesionArmed,report))
+        state.quaternion=rotated.quaternion;
+    }
+  }
   if (teslaLength(state.velocity) < 0.04) state.velocity = [0, 0, 0];
 }
 
@@ -1877,15 +1941,17 @@ function integrate(
     const fittedSurfaceId = fittedCurrent ? state.contact.surfaceId : null;
     const up = fittedCurrent ? bodyUp(state) : state.contact.normal;
     let speed = teslaDot(state.velocity, bodyForward(state));
-    speed += throttle * (input.boost ? 38 : 22) * h;
-    if (input.brake) speed = toward(speed, 0, 55 * h);
+    const power=state.mode==='ground'?(input.drivePower??1):1;
+    const speedFactor=state.mode==='ground'?(input.driveSpeedFactor??1):1;
+    speed += throttle * (input.boost ? 38 : 22) * h * power;
+    if (input.brake) speed = toward(speed, 0, 55 * h * (state.mode==='ground'?(input.driveBrakeFactor??1):1));
     else if (!throttle) speed = toward(speed, 0, 5 * h);
     speed = Math.max(
       -TESLA_LIMITS.reverseSpeedMps,
       Math.min(
-        input.boost
+        (input.boost
           ? TESLA_LIMITS.boostedGroundSpeedMps
-          : TESLA_LIMITS.groundSpeedMps,
+          : TESLA_LIMITS.groundSpeedMps) * speedFactor,
         speed,
       ),
     );
@@ -2134,6 +2200,9 @@ export function stepTesla(
   const givenQuaternion = state.quaternion;
   state.quaternion = teslaNormalizeQuaternion(state.quaternion);
   const input: TeslaInput = {
+    drivePower:Number.isFinite(raw.drivePower)?Math.max(.55,Math.min(1,raw.drivePower!)):1,
+    driveSpeedFactor:Number.isFinite(raw.driveSpeedFactor)?Math.max(.65,Math.min(1,raw.driveSpeedFactor!)):1,
+    driveBrakeFactor:Number.isFinite(raw.driveBrakeFactor)?Math.max(.85,Math.min(1,raw.driveBrakeFactor!)):1,
     throttle: axis(raw.throttle),
     steer: axis(raw.steer),
     lift: axis(raw.lift),
