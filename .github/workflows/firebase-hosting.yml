@@ -50,7 +50,10 @@ jobs:
         run: npm run build:firebase
 
       - name: Install Firebase CLI
-        run: npm install --global firebase-tools@15.34.1
+        # 15.34.1 adds an API enablement permission probe unavailable to this
+        # Hosting-only deployer. Preserve existing OIDC/IAM with the known
+        # compatible patch until that permission change is separately reviewed.
+        run: npm install --global firebase-tools@15.34.0
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3.0.0
