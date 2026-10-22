@@ -282,6 +282,16 @@ test('a true finite crest-body obstruction retains collision and permits a fresh
     quaternion: [0, 0.9983342655302342, 0.05769483744849384, 0],
   };
   const world = profileWorld(0.16);
+  // Refit the frozen XZ/heading to this car's actual wheelbase and datum.
+  const fitted = world.fitGround({
+    pose: blocked,
+    shape,
+    preferredSurfaceId: 'road:7',
+    maxAdjustmentM: 0.35,
+  });
+  assert(fitted, 'the current car needs a freshly proven ground frame');
+  blocked.position = [...fitted.pose.position];
+  blocked.quaternion = [...fitted.pose.quaternion];
   const proof = world.support({
     pose: blocked,
     shape,

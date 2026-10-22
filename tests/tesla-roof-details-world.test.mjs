@@ -256,7 +256,7 @@ test('city nearest sweep and roof planner see actual visible equipment while hid
         position: [
           0,
           10 - shape.halfExtents[2] - shape.clearance - 0.005,
-          -0.68,
+          -(shape.halfExtents[1] + shape.clearance),
         ],
         quaternion: teslaFrame([0, 0, -1], [0, 1, 0]).quaternion,
       },

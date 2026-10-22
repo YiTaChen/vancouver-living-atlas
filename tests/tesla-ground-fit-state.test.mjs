@@ -9,6 +9,7 @@ const {
   TESLA_ROADSTER_DIMENSIONS: dimensions,
 } = await import(cityModule('assets/tesla-roadster-contract'));
 const shape = createTeslaRoadsterShape();
+const rideHeight = shape.halfExtents[1] + shape.clearance;
 const floor = {
   surfaceId: 'actual-ground',
   kind: 'ground',
@@ -143,7 +144,7 @@ test('a fitted driving attitude remains separate from the actual contact normal 
 test('the desired high-speed endpoint is fitted and validated before any wheel pose is applied', () => {
   const state = grounded();
   state.velocity = [0, 0, 74];
-  const height = (z) => (z > 0.3 ? 0.78 : 0.68);
+  const height = (z) => (z > 0.3 ? rideHeight + 0.1 : rideHeight);
   const world = adapter(
     (query) => ({
       pose: {
@@ -168,21 +169,25 @@ test('the desired high-speed endpoint is fitted and validated before any wheel p
   assert.equal(state.mode, 'ground');
   assert.equal(state.attachment, null);
   assert(state.position[2] > 0.6);
-  assert(Math.abs(state.position[1] - 0.78) < 1e-8);
+  assert(Math.abs(state.position[1] - (rideHeight + 0.1)) < 1e-8);
 });
 
 test('current and destination fitting share one bounded correction budget per substep', () => {
   const state = grounded();
   const world = adapter((query) => ({
     pose: {
-      position: [query.pose.position[0], 1, query.pose.position[2]],
+      position: [
+        query.pose.position[0],
+        rideHeight + 0.32,
+        query.pose.position[2],
+      ],
       quaternion: [0, 0, 0, 1],
     },
     contact: floor,
   }));
   stepTesla(state, { steer: 1 }, 1 / 120, world, shape);
   assert(
-    Math.abs(state.position[1] - 0.78) < 1e-8,
+    Math.abs(state.position[1] - (rideHeight + 0.1)) < 1e-8,
     'two fit calls cannot double the 12m/s correction allowance',
   );
 });
@@ -193,14 +198,14 @@ test('a proposal cannot bypass an actual obstacle or an unproven intermediate po
       before = pose(state);
     const world = adapter(
       () => ({
-        pose: { position: [0, 1, 0], quaternion: [0, 0, 0, 1] },
+        pose: { position: [0, rideHeight + 0.32, 0], quaternion: [0, 0, 0, 1] },
         contact: floor,
       }),
       {
         support: (query) =>
           blockedBy === 'intermediate' &&
-          query.pose.position[1] > 0.69 &&
-          query.pose.position[1] < 0.99
+          query.pose.position[1] > rideHeight + 0.01 &&
+          query.pose.position[1] < rideHeight + 0.31
             ? null
             : structuredClone(floor),
         sweep: (query) =>
@@ -209,7 +214,7 @@ test('a proposal cannot bypass an actual obstacle or an unproven intermediate po
             ? {
                 surfaceId: 'physical-ceiling',
                 kind: 'obstacle',
-                point: [0, 0.75, 0],
+                point: [0, rideHeight + 0.07, 0],
                 normal: [0, -1, 0],
                 adherable: false,
                 fraction: 0,
@@ -231,15 +236,15 @@ test('malformed or non-ground fitted poses fail closed and cannot take vehicle o
     },
     { pose: { position: [0, 2, 0], quaternion: [0, 0, 0, 1] }, contact: floor },
     {
-      pose: { position: [0, 0.68, 0], quaternion: [0, 0, 0, 0] },
+      pose: { position: [0, rideHeight, 0], quaternion: [0, 0, 0, 0] },
       contact: floor,
     },
     {
-      pose: { position: [0, 0.68, 0], quaternion: [0, 1, 0, 0] },
+      pose: { position: [0, rideHeight, 0], quaternion: [0, 1, 0, 0] },
       contact: floor,
     },
     {
-      pose: { position: [0, 0.68, 0], quaternion: [0, 0, 0, 1] },
+      pose: { position: [0, rideHeight, 0], quaternion: [0, 0, 0, 1] },
       contact: { ...floor, kind: 'roof' },
     },
   ];
@@ -269,7 +274,7 @@ test('a modelled-ground departure holds XZ and orientation until the entire air 
     const world = adapter(() => null, {
       sweep: (query) =>
         query.ignoreSurfaceId !== floor.surfaceId &&
-        query.from.position[1] < 0.86
+        query.from.position[1] < rideHeight + 0.18
           ? { ...floor, fraction: 0 }
           : null,
       sweepGroundDeparture: (query) => {
@@ -299,7 +304,7 @@ test('a modelled-ground departure holds XZ and orientation until the entire air 
     assert.equal(report.collisions, 0);
     assert.equal(withdrawals.length, 2);
     assert.equal(state.mode, 'air');
-    assert(state.position[1] >= 0.86);
+    assert(state.position[1] >= rideHeight + 0.18);
     assert.equal(state.position[0], origin.position[0]);
     assert.equal(state.position[2], origin.position[2]);
     assert.deepEqual(state.quaternion, origin.quaternion);
@@ -384,13 +389,13 @@ test('explicit descent reverses a blocked launch only through a freshly re-prove
       calls.push(structuredClone(query));
       assert.deepEqual(query.origin, origin);
       assert(query.to.position[1] >= query.from.position[1]);
-      return query.to.position[1] > 0.83 ? ceiling : null;
+      return query.to.position[1] > rideHeight + 0.15 ? ceiling : null;
     },
   });
   stepTesla(state, { jump: true, lift: 1 }, 1 / 60, world, shape);
   assert.equal(state.mode, 'air');
   assert(state.groundDeparture);
-  assert(Math.abs(state.position[1] - 0.78) < 1e-9);
+  assert(Math.abs(state.position[1] - (rideHeight + 0.1)) < 1e-9);
   const blocked = pose(state);
   stepTesla(state, { lift: -1 }, 1 / 120, world, shape);
   assert.deepEqual(pose(state), origin);

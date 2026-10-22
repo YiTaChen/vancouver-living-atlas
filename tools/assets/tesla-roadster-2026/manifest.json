@@ -1,0 +1,579 @@
+{
+  "schemaVersion": 1,
+  "contract": "tesla-roadster-2026-quantized-v1",
+  "packageId": "tesla-roadster-2026",
+  "version": "1.0.0",
+  "units": "m",
+  "axes": "Atlas: +X left,+Y up,+Z front",
+  "textures": [],
+  "runtimeData": {
+    "file": "exports/tesla-roadster-detailed-data.json",
+    "generated": "lib/city/assets/tesla-roadster-detailed-data.json",
+    "bytes": 2194905,
+    "sha256": "0348b2fd5f3cc55f42dcb78933f95a5516fcdf7d29c31552229ca0d4af2c4536"
+  },
+  "referenceFiles": [
+    {
+      "file": "source/reference/Tesla_Roadster_2026_Rocket_Detailed.blend",
+      "bytes": 4274531,
+      "sha256": "b597855e6fe66d9aad451554f83686bfb742695e24161166395bd6ef4d8709c5"
+    },
+    {
+      "file": "source/reference/Tesla_Roadster_2026_Thrust_Detailed.blend",
+      "bytes": 4274707,
+      "sha256": "6c00e2a64b316d6b59cf962eecb3fe0c1a06a4bc322a036e0a9d4a9e827cd784"
+    },
+    {
+      "file": "source/reference/build_roadster_2026.py",
+      "bytes": 18162,
+      "sha256": "bf9fdc709ebe7431d34be97f638c735d7c3dc443efea23824bd23ba2d292a5f2"
+    },
+    {
+      "file": "source/reference/roadster_2026_export_cleanup.py",
+      "bytes": 7603,
+      "sha256": "6d1b50155b3dac55a3b34924668f9cd8dc27e514827d34fac4b501f99eaaaf7d"
+    },
+    {
+      "file": "source/reference/roadster_2026_exterior.py",
+      "bytes": 37959,
+      "sha256": "1bdd544b2ad88f9ee39e17985ddd114e36462e9fb4e72a3cacae6d76b57313f7"
+    },
+    {
+      "file": "source/reference/roadster_2026_interior.py",
+      "bytes": 38357,
+      "sha256": "f210217f9f42fc14a7acee3e3d92208ea122855b80e8c714b091b157a04e526b"
+    }
+  ],
+  "assets": [
+    {
+      "id": "tesla-roadster-2026-rocket",
+      "lods": [
+        {
+          "level": 0,
+          "quality": "high",
+          "file": "tesla-roadster-2026.lod0.glb",
+          "export": "exports/tesla-roadster-2026.lod0.glb",
+          "bytes": 1974080,
+          "sha256": "57eb146a6b585c8b8f1c6342b1a01107576ba67cec34cc48d1bad5246510f925",
+          "source": "source/tesla-roadster-2026.lod0.blend",
+          "sourceBytes": 1687036,
+          "sourceSha256": "c1ded783b6030a8a626607fda59004973f07147471c3b3c48aa54a1a48abb2e8",
+          "triangles": 54201,
+          "primitives": 34,
+          "boundsM": {
+            "min": [
+              -1.0060999691486359,
+              9.998679161071777e-05,
+              -2.3299999237060547
+            ],
+            "max": [
+              1.0060999691486359,
+              1.1045000553131104,
+              2.325000047683716
+            ],
+            "size": [
+              2.0121999382972717,
+              1.1044000685214996,
+              4.6549999713897705
+            ]
+          },
+          "materials": 10
+        },
+        {
+          "level": 1,
+          "quality": "medium",
+          "file": "tesla-roadster-2026.lod1.glb",
+          "export": "exports/tesla-roadster-2026.lod1.glb",
+          "bytes": 1235172,
+          "sha256": "54eda5d9a4ce5f7d1b96ef0ae6e6a8df1a81a49ecb7493a6f7a20da2ae5ffed3",
+          "source": "source/tesla-roadster-2026.lod1.blend",
+          "sourceBytes": 906237,
+          "sourceSha256": "fb9cff08b308bfca182d195de1246d43a2315073c80e77de28caf3034e98fcd2",
+          "triangles": 28484,
+          "primitives": 34,
+          "boundsM": {
+            "min": [
+              -1.005999967455864,
+              9.998679161071777e-05,
+              -2.3299999237060547
+            ],
+            "max": [
+              1.005999967455864,
+              1.1045000553131104,
+              2.325000047683716
+            ],
+            "size": [
+              2.011999934911728,
+              1.1044000685214996,
+              4.6549999713897705
+            ]
+          },
+          "materials": 10
+        },
+        {
+          "level": 2,
+          "quality": "low",
+          "file": "tesla-roadster-2026.lod2.glb",
+          "export": "exports/tesla-roadster-2026.lod2.glb",
+          "bytes": 578060,
+          "sha256": "b86b9448f05be7d4dfd955ab2a1a0aa8394961625a5ca2db443174f148f51f24",
+          "source": "source/tesla-roadster-2026.lod2.blend",
+          "sourceBytes": 374456,
+          "sourceSha256": "50a273624cb6290134b60a24c370170f66aa3a737503201dc92de0c5be90914d",
+          "triangles": 10753,
+          "primitives": 34,
+          "boundsM": {
+            "min": [
+              -1.005999967455864,
+              9.998679161071777e-05,
+              -2.3299999237060547
+            ],
+            "max": [
+              1.005999967455864,
+              1.1045000553131104,
+              2.322000026702881
+            ],
+            "size": [
+              2.011999934911728,
+              1.1044000685214996,
+              4.6519999504089355
+            ]
+          },
+          "materials": 10
+        }
+      ]
+    }
+  ],
+  "rig": {
+    "nodes": [
+      {
+        "id": "body",
+        "parent": null,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "front-left-steer",
+        "parent": null,
+        "position": [
+          0.84,
+          0.3505,
+          1.35
+        ]
+      },
+      {
+        "id": "front-left-steer-roll",
+        "parent": "front-left-steer",
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "front-right-steer",
+        "parent": null,
+        "position": [
+          -0.84,
+          0.3505,
+          1.35
+        ]
+      },
+      {
+        "id": "front-right-steer-roll",
+        "parent": "front-right-steer",
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "rear-left-steer",
+        "parent": null,
+        "position": [
+          0.84,
+          0.3505,
+          -1.35
+        ]
+      },
+      {
+        "id": "rear-left-steer-roll",
+        "parent": "rear-left-steer",
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "rear-right-steer",
+        "parent": null,
+        "position": [
+          -0.84,
+          0.3505,
+          -1.35
+        ]
+      },
+      {
+        "id": "rear-right-steer-roll",
+        "parent": "rear-right-steer",
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "steer-by-wire-yoke",
+        "parent": null,
+        "position": [
+          0.36,
+          0.6355,
+          0.353
+        ]
+      },
+      {
+        "id": "active-rear-wing",
+        "parent": null,
+        "position": [
+          0,
+          0.84,
+          -2.205
+        ]
+      },
+      {
+        "id": "butterfly-door-left",
+        "parent": null,
+        "position": [
+          0.83,
+          0.5805,
+          0.78
+        ]
+      },
+      {
+        "id": "butterfly-door-right",
+        "parent": null,
+        "position": [
+          -0.83,
+          0.5805,
+          0.78
+        ]
+      },
+      {
+        "id": "removable-roof",
+        "parent": null,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "rear-suction-fan-0",
+        "parent": null,
+        "position": [
+          -0.63,
+          0.2185,
+          -2.292
+        ]
+      },
+      {
+        "id": "rear-suction-fan-1",
+        "parent": null,
+        "position": [
+          -0.21,
+          0.2185,
+          -2.292
+        ]
+      },
+      {
+        "id": "rear-suction-fan-2",
+        "parent": null,
+        "position": [
+          0.21,
+          0.2185,
+          -2.292
+        ]
+      },
+      {
+        "id": "rear-suction-fan-3",
+        "parent": null,
+        "position": [
+          0.63,
+          0.2185,
+          -2.292
+        ]
+      }
+    ],
+    "wheelSteers": [
+      "front-left-steer",
+      "front-right-steer"
+    ],
+    "wheelRolls": [
+      "front-left-steer-roll",
+      "front-right-steer-roll",
+      "rear-left-steer-roll",
+      "rear-right-steer-roll"
+    ],
+    "fans": [
+      "rear-suction-fan-0",
+      "rear-suction-fan-1",
+      "rear-suction-fan-2",
+      "rear-suction-fan-3"
+    ],
+    "steering": "steer-by-wire-yoke",
+    "wing": "active-rear-wing",
+    "doors": {
+      "left": {
+        "id": "butterfly-door-left",
+        "axis": [
+          0.9403762258,
+          -0.340136064,
+          0
+        ]
+      },
+      "right": {
+        "id": "butterfly-door-right",
+        "axis": [
+          0.9403762258,
+          0.340136064,
+          0
+        ]
+      }
+    },
+    "roof": "removable-roof"
+  },
+  "anchors": {
+    "driverEye": [
+      0.36,
+      0.8805,
+      -0.68
+    ],
+    "seatPelvis": [
+      0.36,
+      0.3155,
+      -0.36
+    ],
+    "steeringWheel": [
+      0.36,
+      0.6355,
+      0.353
+    ],
+    "driverLookAt": [
+      0.36,
+      0.8805,
+      3
+    ],
+    "frontChase": [
+      0,
+      1.6,
+      5.8
+    ],
+    "rearChase": [
+      0,
+      1.8,
+      -6.2
+    ],
+    "chaseTarget": [
+      0,
+      0.65,
+      0.3
+    ]
+  },
+  "source": {
+    "name": "Original October 2026 Rocket hero reconstruction",
+    "hero": "source/reference/Tesla_Roadster_2026_Rocket_Detailed.blend",
+    "heroSha256": "b597855e6fe66d9aad451554f83686bfb742695e24161166395bd6ef4d8709c5",
+    "referenceUrl": "https://www.tesla.com/roadster?redirect=no",
+    "dimensionBasis": "Image-based representative dimensions; not Tesla CAD or factory dimensions.",
+    "sourceToAtlas": "(Blender Y, Blender Z + .0005, Blender X)",
+    "datumShiftM": 0.0005,
+    "wheelRadiusM": 0.3505,
+    "glazing": "One outward source layer; opaque tinted runtime approximation; no refraction.",
+    "yawPorts": "Two inferred front yaw ports remain owned by the runtime procedural adapter.",
+    "colorSpace": "Absolute linear RGB, Uint8 normalized; white-base role materials.",
+    "controlledTyres": {
+      "method": "Continuous closed donor-profile LOD rubber, never collapse-decimated",
+      "axis": "Atlas local X; radial plane YZ",
+      "profileRings": 10,
+      "segments": {
+        "low": 48,
+        "medium": 64,
+        "high": 80
+      },
+      "donorCarcassRadiusM": 0.35,
+      "donorTreadCrestRadiusM": 0.3505,
+      "quantizationInwardAllowanceM": 0.0001,
+      "widthHalfM": {
+        "front": 0.131,
+        "rear": 0.142
+      }
+    },
+    "portAnchors": [
+      {
+        "id": "roadster_nozzle_front_left",
+        "kind": "lift",
+        "position": [
+          0.9100000262260437,
+          0.1054999977350235,
+          0.8399999737739563
+        ],
+        "direction": [
+          6.181723222198343e-08,
+          -1.0,
+          -6.181723222198343e-08
+        ],
+        "radius": 0.040920000000000005,
+        "radiusBasis": "Authored outlet inner lip, not manufacturer nozzle dimensions."
+      },
+      {
+        "id": "roadster_nozzle_front_right",
+        "kind": "lift",
+        "position": [
+          -0.9100000262260437,
+          0.1054999977350235,
+          0.8399999737739563
+        ],
+        "direction": [
+          6.181723222198343e-08,
+          -1.0,
+          -6.181723222198343e-08
+        ],
+        "radius": 0.040920000000000005,
+        "radiusBasis": "Authored outlet inner lip, not manufacturer nozzle dimensions."
+      },
+      {
+        "id": "roadster_nozzle_rear_left",
+        "kind": "lift",
+        "position": [
+          0.9100000262260437,
+          0.1054999977350235,
+          -1.909999966621399
+        ],
+        "direction": [
+          6.181723222198343e-08,
+          -1.0,
+          -6.181723222198343e-08
+        ],
+        "radius": 0.040920000000000005,
+        "radiusBasis": "Authored outlet inner lip, not manufacturer nozzle dimensions."
+      },
+      {
+        "id": "roadster_nozzle_rear_right",
+        "kind": "lift",
+        "position": [
+          -0.9100000262260437,
+          0.1054999977350235,
+          -1.909999966621399
+        ],
+        "direction": [
+          6.181723222198343e-08,
+          -1.0,
+          -6.181723222198343e-08
+        ],
+        "radius": 0.040920000000000005,
+        "radiusBasis": "Authored outlet inner lip, not manufacturer nozzle dimensions."
+      },
+      {
+        "id": "roadster_nozzle_rear_0",
+        "kind": "rear",
+        "position": [
+          -0.6299999952316284,
+          0.40950000286102295,
+          -2.321000099182129
+        ],
+        "direction": [
+          0.0,
+          -1.3435884227419592e-07,
+          -1.0
+        ],
+        "radius": 0.056760000000000005,
+        "radiusBasis": "Authored outlet inner lip, not manufacturer nozzle dimensions."
+      },
+      {
+        "id": "roadster_nozzle_rear_1",
+        "kind": "rear",
+        "position": [
+          -0.20999999344348907,
+          0.40950000286102295,
+          -2.321000099182129
+        ],
+        "direction": [
+          0.0,
+          -1.3435884227419592e-07,
+          -1.0
+        ],
+        "radius": 0.056760000000000005,
+        "radiusBasis": "Authored outlet inner lip, not manufacturer nozzle dimensions."
+      },
+      {
+        "id": "roadster_nozzle_rear_2",
+        "kind": "rear",
+        "position": [
+          0.20999999344348907,
+          0.40950000286102295,
+          -2.321000099182129
+        ],
+        "direction": [
+          0.0,
+          -1.3435884227419592e-07,
+          -1.0
+        ],
+        "radius": 0.056760000000000005,
+        "radiusBasis": "Authored outlet inner lip, not manufacturer nozzle dimensions."
+      },
+      {
+        "id": "roadster_nozzle_rear_3",
+        "kind": "rear",
+        "position": [
+          0.6299999952316284,
+          0.40950000286102295,
+          -2.321000099182129
+        ],
+        "direction": [
+          0.0,
+          -1.3435884227419592e-07,
+          -1.0
+        ],
+        "radius": 0.056760000000000005,
+        "radiusBasis": "Authored outlet inner lip, not manufacturer nozzle dimensions."
+      }
+    ]
+  },
+  "authoringSource": {
+    "file": "build.py",
+    "bytes": 23135,
+    "sha256": "f1cf549adf519b0b8cb781de733513a0fe7a95b0ab5ddc4285fce7a7710407fa"
+  },
+  "auxiliarySources": [
+    {
+      "file": "emissive_export.py",
+      "bytes": 1462,
+      "sha256": "917cd4d384922d8fe2a5a010cfd28bd32545bdb21b91527e6f50454bdec2fcdd"
+    },
+    {
+      "file": "controlled_tires.py",
+      "bytes": 4232,
+      "sha256": "72d147563009b13a014825ee649e4d467b196980cc73848dd120cf3db474ea48"
+    },
+    {
+      "file": "reexport_data.py",
+      "bytes": 4539,
+      "sha256": "0943788c7348255ec6f452a3bc3ddbff0af4dc451fa67fe017d3d76637ba5abc"
+    }
+  ],
+  "offlineChecks": {
+    "status": "pass",
+    "evidence": [
+      "qa/extraction.json",
+      "qa/decimation-bounds.json",
+      "qa/tyre-repair.json",
+      "qa/export-audit.json"
+    ],
+    "independentAudit": "qa/geometry-audit.json"
+  }
+}

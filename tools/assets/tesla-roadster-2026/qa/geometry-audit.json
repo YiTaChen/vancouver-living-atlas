@@ -1,0 +1,760 @@
+{
+  "schemaVersion": 1,
+  "passed": true,
+  "payload": {
+    "file": "lib/city/assets/tesla-roadster-detailed-data.json",
+    "bytes": 2194905,
+    "sha256": "0348b2fd5f3cc55f42dcb78933f95a5516fcdf7d29c31552229ca0d4af2c4536"
+  },
+  "files": [
+    {
+      "file": "exports/tesla-roadster-detailed-data.json",
+      "bytes": 2194905,
+      "sha256": "0348b2fd5f3cc55f42dcb78933f95a5516fcdf7d29c31552229ca0d4af2c4536"
+    },
+    {
+      "file": "source/reference/Tesla_Roadster_2026_Rocket_Detailed.blend",
+      "bytes": 4274531,
+      "sha256": "b597855e6fe66d9aad451554f83686bfb742695e24161166395bd6ef4d8709c5"
+    },
+    {
+      "file": "source/reference/Tesla_Roadster_2026_Thrust_Detailed.blend",
+      "bytes": 4274707,
+      "sha256": "6c00e2a64b316d6b59cf962eecb3fe0c1a06a4bc322a036e0a9d4a9e827cd784"
+    },
+    {
+      "file": "source/reference/build_roadster_2026.py",
+      "bytes": 18162,
+      "sha256": "bf9fdc709ebe7431d34be97f638c735d7c3dc443efea23824bd23ba2d292a5f2"
+    },
+    {
+      "file": "source/reference/roadster_2026_export_cleanup.py",
+      "bytes": 7603,
+      "sha256": "6d1b50155b3dac55a3b34924668f9cd8dc27e514827d34fac4b501f99eaaaf7d"
+    },
+    {
+      "file": "source/reference/roadster_2026_exterior.py",
+      "bytes": 37959,
+      "sha256": "1bdd544b2ad88f9ee39e17985ddd114e36462e9fb4e72a3cacae6d76b57313f7"
+    },
+    {
+      "file": "source/reference/roadster_2026_interior.py",
+      "bytes": 38357,
+      "sha256": "f210217f9f42fc14a7acee3e3d92208ea122855b80e8c714b091b157a04e526b"
+    },
+    {
+      "file": "exports/tesla-roadster-2026.lod0.glb",
+      "bytes": 1974080,
+      "sha256": "57eb146a6b585c8b8f1c6342b1a01107576ba67cec34cc48d1bad5246510f925"
+    },
+    {
+      "file": "source/tesla-roadster-2026.lod0.blend",
+      "bytes": 1687036,
+      "sha256": "c1ded783b6030a8a626607fda59004973f07147471c3b3c48aa54a1a48abb2e8"
+    },
+    {
+      "file": "exports/tesla-roadster-2026.lod1.glb",
+      "bytes": 1235172,
+      "sha256": "54eda5d9a4ce5f7d1b96ef0ae6e6a8df1a81a49ecb7493a6f7a20da2ae5ffed3"
+    },
+    {
+      "file": "source/tesla-roadster-2026.lod1.blend",
+      "bytes": 906237,
+      "sha256": "fb9cff08b308bfca182d195de1246d43a2315073c80e77de28caf3034e98fcd2"
+    },
+    {
+      "file": "exports/tesla-roadster-2026.lod2.glb",
+      "bytes": 578060,
+      "sha256": "b86b9448f05be7d4dfd955ab2a1a0aa8394961625a5ca2db443174f148f51f24"
+    },
+    {
+      "file": "source/tesla-roadster-2026.lod2.blend",
+      "bytes": 374456,
+      "sha256": "50a273624cb6290134b60a24c370170f66aa3a737503201dc92de0c5be90914d"
+    },
+    {
+      "file": "build.py",
+      "bytes": 23135,
+      "sha256": "f1cf549adf519b0b8cb781de733513a0fe7a95b0ab5ddc4285fce7a7710407fa"
+    },
+    {
+      "file": "emissive_export.py",
+      "bytes": 1462,
+      "sha256": "917cd4d384922d8fe2a5a010cfd28bd32545bdb21b91527e6f50454bdec2fcdd"
+    },
+    {
+      "file": "controlled_tires.py",
+      "bytes": 4232,
+      "sha256": "72d147563009b13a014825ee649e4d467b196980cc73848dd120cf3db474ea48"
+    },
+    {
+      "file": "reexport_data.py",
+      "bytes": 4539,
+      "sha256": "0943788c7348255ec6f452a3bc3ddbff0af4dc451fa67fe017d3d76637ba5abc"
+    }
+  ],
+  "derivedGLBParity": {
+    "high": {
+      "triangles": 54201,
+      "parts": 34,
+      "positionsColorsOrientedTrianglesMatch": true,
+      "finiteUnitNormals": true,
+      "worldTransformAgreement": true
+    },
+    "medium": {
+      "triangles": 28484,
+      "parts": 34,
+      "positionsColorsOrientedTrianglesMatch": true,
+      "finiteUnitNormals": true,
+      "worldTransformAgreement": true
+    },
+    "low": {
+      "triangles": 10753,
+      "parts": 34,
+      "positionsColorsOrientedTrianglesMatch": true,
+      "finiteUnitNormals": true,
+      "worldTransformAgreement": true
+    }
+  },
+  "metrics": {
+    "schemaVersion": 1,
+    "axes": "Atlas: +X left,+Y up,+Z front",
+    "poseRange": {
+      "steeringRad": [
+        -0.62,
+        0.62
+      ],
+      "wheelSpinRad": "all angles",
+      "fanSpinRad": "all angles",
+      "wingDeploy": [
+        0,
+        1
+      ],
+      "wingPitchRad": [
+        0,
+        -0.28
+      ],
+      "wingLiftM": 0.24,
+      "doors": "closed during gameplay"
+    },
+    "dimensions": {
+      "length": 4.655,
+      "width": 2.0122,
+      "height": 1.1044,
+      "wheelbase": 2.7,
+      "wheelRadius": 0.3505,
+      "contactToCenter": 0.564,
+      "halfExtents": [
+        1.142,
+        0.564,
+        2.33
+      ]
+    },
+    "groundSupport": {
+      "wheelContacts": [
+        [
+          -0.84,
+          0,
+          1.35
+        ],
+        [
+          0.84,
+          0,
+          1.35
+        ],
+        [
+          -0.84,
+          0,
+          -1.35
+        ],
+        [
+          0.84,
+          0,
+          -1.35
+        ]
+      ],
+      "track": 1.68,
+      "wheelRadius": 0.3505,
+      "chassisClearance": 0.092,
+      "suspensionTravel": 0.05,
+      "bodySections": [
+        {
+          "minZ": -2.33,
+          "maxZ": -1.35,
+          "clearance": 0.092
+        },
+        {
+          "minZ": -1.35,
+          "maxZ": 1.35,
+          "clearance": 0.099
+        },
+        {
+          "minZ": 1.35,
+          "maxZ": 2.33,
+          "clearance": 0.141
+        }
+      ],
+      "measured": {
+        "minimumBodyY": 0.0945,
+        "bodySectionMinimumY": [
+          0.0945,
+          0.1012,
+          0.1436
+        ],
+        "frontOverhang": 0.975,
+        "rearOverhang": 0.98
+      }
+    },
+    "anchors": {
+      "driverEye": [
+        0.36,
+        0.8805,
+        -0.68
+      ],
+      "seatPelvis": [
+        0.36,
+        0.3155,
+        -0.36
+      ],
+      "steeringWheel": [
+        0.36,
+        0.6355,
+        0.353
+      ],
+      "driverLookAt": [
+        0.36,
+        0.8805,
+        3
+      ],
+      "frontChase": [
+        0,
+        1.6,
+        5.8
+      ],
+      "rearChase": [
+        0,
+        1.8,
+        -6.2
+      ],
+      "chaseTarget": [
+        0,
+        0.65,
+        0.3
+      ]
+    },
+    "levels": {
+      "low": {
+        "triangles": 10753,
+        "vertices": 14001,
+        "geometryDraws": 34,
+        "maxDrawsWithYawAndJets": 36,
+        "maxTrianglesWithYawAndJets": 10937,
+        "coloredVertices": 14001,
+        "degenerateTriangles": 0,
+        "boundsM": {
+          "min": [
+            -1.006,
+            0.00009999999999998899,
+            -2.33
+          ],
+          "max": [
+            1.006,
+            1.1045,
+            2.322
+          ]
+        },
+        "animatedBoundsM": {
+          "min": [
+            -1.1411472508142637,
+            0.00005787924394695665,
+            -2.33
+          ],
+          "max": [
+            1.1411472508142637,
+            1.1273846427679621,
+            2.322
+          ]
+        },
+        "wheelRadiiM": {
+          "front-left-steer-roll": 0.350442120756053,
+          "front-right-steer-roll": 0.350442120756053,
+          "rear-left-steer-roll": 0.350442120756053,
+          "rear-right-steer-roll": 0.350442120756053
+        },
+        "wheelBoundsM": {
+          "front-left-steer-roll": {
+            "min": [
+              0.7043999999999999,
+              0.00009999999999998899,
+              0.9996
+            ],
+            "max": [
+              0.995,
+              0.7009,
+              1.7004000000000001
+            ]
+          },
+          "front-right-steer-roll": {
+            "min": [
+              -0.995,
+              0.00009999999999998899,
+              0.9996
+            ],
+            "max": [
+              -0.7043999999999999,
+              0.7009,
+              1.7004000000000001
+            ]
+          },
+          "rear-left-steer-roll": {
+            "min": [
+              0.693,
+              0.00009999999999998899,
+              -1.7004000000000001
+            ],
+            "max": [
+              1.006,
+              0.7009,
+              -0.9996
+            ]
+          },
+          "rear-right-steer-roll": {
+            "min": [
+              -1.006,
+              0.00009999999999998899,
+              -1.7004000000000001
+            ],
+            "max": [
+              -0.693,
+              0.7009,
+              -0.9996
+            ]
+          }
+        },
+        "tyreContactRayY": {
+          "front-left-steer-roll": 0.00009999999999998899,
+          "front-right-steer-roll": 0.00009999999999998899,
+          "rear-left-steer-roll": 0.00009999999999998899,
+          "rear-right-steer-roll": 0.00009999999999998899
+        },
+        "minimumBodyY": 0.0984,
+        "fanMinimumY": 0.1349,
+        "fanAnimatedMinimumY": 0.12707374556507306,
+        "camera": {
+          "canopyDistanceM": 0.2093274488947289,
+          "opaqueRoofDistanceM": null,
+          "firstForwardOpaqueDistanceM": null,
+          "nearM": 0.025,
+          "neutralViewClear": true
+        },
+        "undertrayAtOriginY": 0.12114320259245953,
+        "bodySectionMinimumY": [
+          0.0984,
+          0.1012,
+          0.15510000000000002
+        ],
+        "animatedBodySectionMinimumY": [
+          0.0984,
+          0.1012,
+          0.15510000000000002
+        ],
+        "frontBumperMinimumY": 0.15510000000000002,
+        "rearDiffuserMinimumY": 0.0984
+      },
+      "medium": {
+        "triangles": 28484,
+        "vertices": 29458,
+        "geometryDraws": 34,
+        "maxDrawsWithYawAndJets": 36,
+        "maxTrianglesWithYawAndJets": 28676,
+        "coloredVertices": 29458,
+        "degenerateTriangles": 0,
+        "boundsM": {
+          "min": [
+            -1.006,
+            0.00009999999999998899,
+            -2.33
+          ],
+          "max": [
+            1.006,
+            1.1045,
+            2.325
+          ]
+        },
+        "animatedBoundsM": {
+          "min": [
+            -1.1411431806510666,
+            0.00005787924394695665,
+            -2.33
+          ],
+          "max": [
+            1.1411431806510666,
+            1.1271924316803,
+            2.325
+          ]
+        },
+        "wheelRadiiM": {
+          "front-left-steer-roll": 0.350442120756053,
+          "front-right-steer-roll": 0.350442120756053,
+          "rear-left-steer-roll": 0.350442120756053,
+          "rear-right-steer-roll": 0.350442120756053
+        },
+        "wheelBoundsM": {
+          "front-left-steer-roll": {
+            "min": [
+              0.7043999999999999,
+              0.00009999999999998899,
+              0.9996
+            ],
+            "max": [
+              0.995,
+              0.7009,
+              1.7004000000000001
+            ]
+          },
+          "front-right-steer-roll": {
+            "min": [
+              -0.995,
+              0.00009999999999998899,
+              0.9996
+            ],
+            "max": [
+              -0.7043999999999999,
+              0.7009,
+              1.7004000000000001
+            ]
+          },
+          "rear-left-steer-roll": {
+            "min": [
+              0.693,
+              0.00009999999999998899,
+              -1.7004000000000001
+            ],
+            "max": [
+              1.006,
+              0.7009,
+              -0.9996
+            ]
+          },
+          "rear-right-steer-roll": {
+            "min": [
+              -1.006,
+              0.00009999999999998899,
+              -1.7004000000000001
+            ],
+            "max": [
+              -0.693,
+              0.7009,
+              -0.9996
+            ]
+          }
+        },
+        "tyreContactRayY": {
+          "front-left-steer-roll": 0.00009999999999998899,
+          "front-right-steer-roll": 0.00009999999999998899,
+          "rear-left-steer-roll": 0.00009999999999998899,
+          "rear-right-steer-roll": 0.00009999999999998899
+        },
+        "minimumBodyY": 0.0945,
+        "fanMinimumY": 0.1279,
+        "fanAnimatedMinimumY": 0.12707374556507306,
+        "camera": {
+          "canopyDistanceM": 0.2096544302837689,
+          "opaqueRoofDistanceM": null,
+          "firstForwardOpaqueDistanceM": null,
+          "nearM": 0.025,
+          "neutralViewClear": true
+        },
+        "undertrayAtOriginY": 0.11390380658255893,
+        "bodySectionMinimumY": [
+          0.0945,
+          0.1029,
+          0.1436
+        ],
+        "animatedBodySectionMinimumY": [
+          0.0945,
+          0.1029,
+          0.1436
+        ],
+        "frontBumperMinimumY": 0.1436,
+        "rearDiffuserMinimumY": 0.0945
+      },
+      "high": {
+        "triangles": 54201,
+        "vertices": 45932,
+        "geometryDraws": 34,
+        "maxDrawsWithYawAndJets": 36,
+        "maxTrianglesWithYawAndJets": 54409,
+        "coloredVertices": 45932,
+        "degenerateTriangles": 0,
+        "boundsM": {
+          "min": [
+            -1.0061,
+            0.00009999999999998899,
+            -2.33
+          ],
+          "max": [
+            1.0061,
+            1.1045,
+            2.325
+          ]
+        },
+        "animatedBoundsM": {
+          "min": [
+            -1.1411424459862247,
+            0.00004632260454151549,
+            -2.33
+          ],
+          "max": [
+            1.1411424459862247,
+            1.1270963261364688,
+            2.325
+          ]
+        },
+        "wheelRadiiM": {
+          "front-left-steer-roll": 0.35045367739545846,
+          "front-right-steer-roll": 0.35045367739545846,
+          "rear-left-steer-roll": 0.35045367739545846,
+          "rear-right-steer-roll": 0.35045367739545846
+        },
+        "wheelBoundsM": {
+          "front-left-steer-roll": {
+            "min": [
+              0.7043999999999999,
+              0.00009999999999998899,
+              0.9996
+            ],
+            "max": [
+              0.9951,
+              0.7009,
+              1.7004000000000001
+            ]
+          },
+          "front-right-steer-roll": {
+            "min": [
+              -0.9951,
+              0.00009999999999998899,
+              0.9996
+            ],
+            "max": [
+              -0.7043999999999999,
+              0.7009,
+              1.7004000000000001
+            ]
+          },
+          "rear-left-steer-roll": {
+            "min": [
+              0.693,
+              0.00009999999999998899,
+              -1.7004000000000001
+            ],
+            "max": [
+              1.0061,
+              0.7009,
+              -0.9996
+            ]
+          },
+          "rear-right-steer-roll": {
+            "min": [
+              -1.0061,
+              0.00009999999999998899,
+              -1.7004000000000001
+            ],
+            "max": [
+              -0.693,
+              0.7009,
+              -0.9996
+            ]
+          }
+        },
+        "tyreContactRayY": {
+          "front-left-steer-roll": 0.00009999999999998899,
+          "front-right-steer-roll": 0.00009999999999998899,
+          "rear-left-steer-roll": 0.00009999999999998899,
+          "rear-right-steer-roll": 0.00009999999999998899
+        },
+        "minimumBodyY": 0.0945,
+        "fanMinimumY": 0.1279,
+        "fanAnimatedMinimumY": 0.12737936567384966,
+        "camera": {
+          "canopyDistanceM": 0.2096012584419414,
+          "opaqueRoofDistanceM": null,
+          "firstForwardOpaqueDistanceM": null,
+          "nearM": 0.025,
+          "neutralViewClear": true
+        },
+        "undertrayAtOriginY": 0.11230000000000001,
+        "bodySectionMinimumY": [
+          0.0945,
+          0.10250000000000001,
+          0.1436
+        ],
+        "animatedBodySectionMinimumY": [
+          0.0945,
+          0.10250000000000001,
+          0.1436
+        ],
+        "frontBumperMinimumY": 0.1436,
+        "rearDiffuserMinimumY": 0.0945
+      }
+    },
+    "thrusters": [
+      {
+        "id": "roadster_nozzle_front_left",
+        "kind": "lift",
+        "position": [
+          0.9100000262260437,
+          0.1054999977350235,
+          0.8399999737739563
+        ],
+        "direction": [
+          6.181723222198343e-8,
+          -1,
+          -6.181723222198343e-8
+        ],
+        "radius": 0.040920000000000005,
+        "radiusBasis": "Authored outlet inner lip, not manufacturer nozzle dimensions."
+      },
+      {
+        "id": "roadster_nozzle_front_right",
+        "kind": "lift",
+        "position": [
+          -0.9100000262260437,
+          0.1054999977350235,
+          0.8399999737739563
+        ],
+        "direction": [
+          6.181723222198343e-8,
+          -1,
+          -6.181723222198343e-8
+        ],
+        "radius": 0.040920000000000005,
+        "radiusBasis": "Authored outlet inner lip, not manufacturer nozzle dimensions."
+      },
+      {
+        "id": "roadster_nozzle_rear_left",
+        "kind": "lift",
+        "position": [
+          0.9100000262260437,
+          0.1054999977350235,
+          -1.909999966621399
+        ],
+        "direction": [
+          6.181723222198343e-8,
+          -1,
+          -6.181723222198343e-8
+        ],
+        "radius": 0.040920000000000005,
+        "radiusBasis": "Authored outlet inner lip, not manufacturer nozzle dimensions."
+      },
+      {
+        "id": "roadster_nozzle_rear_right",
+        "kind": "lift",
+        "position": [
+          -0.9100000262260437,
+          0.1054999977350235,
+          -1.909999966621399
+        ],
+        "direction": [
+          6.181723222198343e-8,
+          -1,
+          -6.181723222198343e-8
+        ],
+        "radius": 0.040920000000000005,
+        "radiusBasis": "Authored outlet inner lip, not manufacturer nozzle dimensions."
+      },
+      {
+        "id": "roadster_nozzle_rear_0",
+        "kind": "rear",
+        "position": [
+          -0.6299999952316284,
+          0.40950000286102295,
+          -2.321000099182129
+        ],
+        "direction": [
+          0,
+          -1.3435884227419592e-7,
+          -1
+        ],
+        "radius": 0.056760000000000005,
+        "radiusBasis": "Authored outlet inner lip, not manufacturer nozzle dimensions."
+      },
+      {
+        "id": "roadster_nozzle_rear_1",
+        "kind": "rear",
+        "position": [
+          -0.20999999344348907,
+          0.40950000286102295,
+          -2.321000099182129
+        ],
+        "direction": [
+          0,
+          -1.3435884227419592e-7,
+          -1
+        ],
+        "radius": 0.056760000000000005,
+        "radiusBasis": "Authored outlet inner lip, not manufacturer nozzle dimensions."
+      },
+      {
+        "id": "roadster_nozzle_rear_2",
+        "kind": "rear",
+        "position": [
+          0.20999999344348907,
+          0.40950000286102295,
+          -2.321000099182129
+        ],
+        "direction": [
+          0,
+          -1.3435884227419592e-7,
+          -1
+        ],
+        "radius": 0.056760000000000005,
+        "radiusBasis": "Authored outlet inner lip, not manufacturer nozzle dimensions."
+      },
+      {
+        "id": "roadster_nozzle_rear_3",
+        "kind": "rear",
+        "position": [
+          0.6299999952316284,
+          0.40950000286102295,
+          -2.321000099182129
+        ],
+        "direction": [
+          0,
+          -1.3435884227419592e-7,
+          -1
+        ],
+        "radius": 0.056760000000000005,
+        "radiusBasis": "Authored outlet inner lip, not manufacturer nozzle dimensions."
+      }
+    ],
+    "fans": [
+      [
+        -0.63,
+        0.2185,
+        -2.292
+      ],
+      [
+        -0.21,
+        0.2185,
+        -2.292
+      ],
+      [
+        0.21,
+        0.2185,
+        -2.292
+      ],
+      [
+        0.63,
+        0.2185,
+        -2.292
+      ]
+    ]
+  },
+  "limitations": [
+    "Representative artist dimensions; not Tesla engineering CAD.",
+    "Doors remain closed in the driving envelope.",
+    "Continuous analytic vertex extrema cover steering, wheel/fan rotation and linked wing pitch/lift; body triangles are exactly clipped at measured axle boundaries.",
+    "Blender files are provenance-hashed, not deserialized by this CPU audit."
+  ]
+}
