@@ -322,6 +322,49 @@ export class BusAccessibility {
   get stowed() {
     return this.phase === 'stowed';
   }
+  /** The service controller may establish a freshly validated stopped pose.
+   * Never call automatically on drift: a deployed/moving ramp stays pinned to
+   * its original ground proof, and this operation never moves rig geometry. */
+  reanchorStowed() {
+    if (this.disposed || !this.stowed || this.drop !== 0 || this.angle !== 0)
+      return false;
+    this.root.updateWorldMatrix(true, true);
+    const frame = this.root.matrixWorld
+        .clone()
+        .invert()
+        .multiply(this.rampPose.node.matrixWorld),
+      position = new THREE.Vector3(),
+      rotation = new THREE.Quaternion(),
+      scale = new THREE.Vector3();
+    frame.decompose(position, rotation, scale);
+    const nodes = [
+      this.root,
+      this.rampPose.node,
+      ...this.wheels.map((pose) => pose.node),
+    ];
+    if (
+      nodes.slice(1).some((node) => !node.parent) ||
+      nodes.some((node) => !node.matrixWorld.elements.every(Number.isFinite)) ||
+      position.distanceTo(new THREE.Vector3(...this.rig.hinge)) > 0.003 ||
+      rotation.angleTo(new THREE.Quaternion()) > 1e-5 ||
+      scale.distanceTo(new THREE.Vector3(1, 1, 1)) > 1e-5 ||
+      new THREE.Vector3(0, 1, 0)
+        .transformDirection(this.root.matrixWorld)
+        .distanceTo(new THREE.Vector3(0, 1, 0)) > 1e-5 ||
+      this.root
+        .getWorldScale(new THREE.Vector3())
+        .distanceTo(new THREE.Vector3(1, 1, 1)) > 1e-5
+    )
+      return false;
+    this.rootPose = capture(this.root);
+    this.rampPose = capture(this.rampPose.node);
+    this.wheels = this.wheels.map((pose) => capture(pose.node));
+    this.rampInRoot.copy(frame);
+    this.error = null;
+    this.landing = null;
+    this.elapsed = this.targetAngle = 0;
+    return true;
+  }
   /** Parking preference only: reuse endpoint/support validation without
    * animating the bus or inspecting a closed cabin's deployment sweep. */
   landingFits() {

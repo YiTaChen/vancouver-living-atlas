@@ -177,6 +177,55 @@ export class PassengerTransfers {
     const state = this.passengers.get(passengerId);
     return state ? structuredClone(state) : undefined;
   }
+  /** A cabin controller may move an already boarded rider between its own
+   * validated seat/aisle anchors. This never authorizes boarding, changing cars
+   * or leaving the vehicle; the controller still owns physical reachability. */
+  changeRideAnchor(passengerId: string, anchor: RideAnchor) {
+    const state = this.passengers.get(passengerId);
+    if (
+      !state ||
+      state.mode !== 'riding' ||
+      this.pending.has(passengerId) ||
+      !anchor ||
+      !['vehicleId', 'carId', 'anchorId', 'frameId'].every(
+        (field) =>
+          typeof anchor[field as keyof RideAnchor] === 'string' &&
+          !!anchor[field as keyof RideAnchor],
+      ) ||
+      !Array.isArray(anchor.translationM) ||
+      !Array.isArray(anchor.rotationQuaternionXYZW) ||
+      !validAnchor(anchor) ||
+      anchor.vehicleId !== state.anchor.vehicleId ||
+      anchor.carId !== state.anchor.carId ||
+      anchor.frameId !== state.anchor.frameId
+    )
+      return false;
+    const previous = key(state.anchor),
+      next = key(anchor);
+    if (
+      this.occupants.get(previous) !== passengerId ||
+      this.reservations.has(next) ||
+      (this.occupants.has(next) && this.occupants.get(next) !== passengerId)
+    )
+      return false;
+    // Reusing the same identity cannot silently change its authored transform
+    // or seat/standing meaning. A genuine new anchor gets a distinct identity.
+    if (previous === next)
+      return (
+        anchor.kind === state.anchor.kind &&
+        anchor.translationM.every(
+          (v, i) => v === state.anchor.translationM[i],
+        ) &&
+        anchor.rotationQuaternionXYZW.every(
+          (v, i) => v === state.anchor.rotationQuaternionXYZW[i],
+        )
+      );
+    const copy = structuredClone(anchor);
+    this.occupants.set(next, passengerId);
+    state.anchor = copy;
+    this.occupants.delete(previous);
+    return true;
+  }
   beginBoard(
     passengerId: string,
     anchor: RideAnchor,

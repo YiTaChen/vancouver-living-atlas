@@ -274,3 +274,20 @@ test('real walking displacement is moving even though navigation.speed is zero, 
   assert.equal(e.sceneryMotion.speedMps, 7);
   assert.equal(e.sceneryMotion.allowNewDetails, false);
 });
+
+test('bus passenger motion feeds drive scenery budgets and speed despite walking navigation', () => {
+  const { e } = fixture();
+  e.applySettings({ ...e.settings, mode: 'walk' });
+  e.busVisit = { aboard: true, speedMps: 6 };
+  e.updateAutoQuality(1000, 17);
+  assert.equal(e.sceneryMotion.mode, 'drive');
+  assert.equal(e.sceneryMotion.speedMps, 6);
+  assert.equal(e.sceneryMotion.moving, true);
+  assert.equal(e.navigation.speed, 0);
+  e.busVisit.speedMps = 0;
+  e.updateAutoQuality(1100, 17);
+  assert.equal(e.sceneryMotion.speedMps, 0);
+  e.busVisit.aboard = false;
+  e.updateAutoQuality(1200, 17);
+  assert.equal(e.sceneryMotion.mode, 'walk');
+});

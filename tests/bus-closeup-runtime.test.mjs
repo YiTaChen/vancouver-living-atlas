@@ -4,6 +4,10 @@ import { readFile } from 'node:fs/promises';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { cityModule } from './helpers/city-modules.mjs';
+import {
+  walkBusToSeat,
+  walkBusToRearDoor,
+} from './helpers/bus-passenger-controls.mjs';
 const { CityBusAssets } = await import(cityModule('bus-assets'));
 const { BusCabinVisit } = await import(cityModule('bus-visit'));
 const { busVisitProfile } = await import(cityModule('bus-visit-policy'));
@@ -330,7 +334,7 @@ test('actual reference visit freezes detail while aboard, preserves reservations
     );
     assert.equal(visit.snapshot().profile, 'reference-lod1');
     const prior = city.scene.children.find(
-      (object) => object.name === 'Parked city bus cabin visit',
+      (object) => object.name === 'Boardable city bus cabin',
     );
     assert.equal(
       await visit.prepare({
@@ -359,8 +363,21 @@ test('actual reference visit freezes detail while aboard, preserves reservations
     );
     assert.equal(visit.snapshot().profile, 'reference-lod0');
     assert.equal(f.calls.length, calls);
-    assert.equal(visit.preview('seat-24'), true);
+    assert.equal(
+      visit.preview('seat-24'),
+      false,
+      'distant reference seat selection cannot teleport the rider',
+    );
+    walkBusToSeat(visit, 'seat-24');
+    const sit = visit
+      .interactionCandidates()
+      .find((candidate) => candidate.id === 'bus:seat:seat-24');
+    assert.equal(sit?.execute(), true);
+    assert.equal(visit.snapshot().passengerAnchor, 'seat-24');
+    assert.equal(visit.alight(), false, 'a seated rider cannot alight');
+    assert.equal(visit.stand(), true);
     assert.equal(visit.snapshot().passengerAnchor, 'low-floor-aisle');
+    walkBusToRearDoor(visit);
     city.navigation.clearGround = () => false;
     assert.equal(visit.alight(), false);
     assert.equal(visit.snapshot().aboard, true);

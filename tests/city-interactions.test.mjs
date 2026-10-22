@@ -194,10 +194,10 @@ test('host-level modal/mode/page guards block both F and touch dispatch and can 
       ],
       [
         () => {
-          f.e.busVisit = { aboard: true };
+          f.e.contextLost = true;
         },
         () => {
-          f.e.busVisit = null;
+          f.e.contextLost = false;
         },
       ],
       [
@@ -275,8 +275,8 @@ test('touch and F revalidate player position, availability and the displayed ide
   }
 });
 
-test('both host providers choose a farther visible seat over a nearer seat behind the camera', () => {
-  for (const provider of ['world', 'skytrain']) {
+test('all host providers choose a farther visible seat over a nearer seat behind the camera', () => {
+  for (const provider of ['world', 'skytrain', 'bus']) {
     const f = fixture();
     try {
       const camera = f.e.camera;
@@ -295,9 +295,15 @@ test('both host providers choose a farther visible seat over a nearer seat behin
         }),
       ];
       if (provider === 'world') f.setRows(rows);
-      else
+      else if (provider === 'skytrain')
         f.e.skyTrainTravel = {
           active: true,
+          interactionOrigin: [0, 0, 0],
+          interactionCandidates: () => rows,
+        };
+      else
+        f.e.busVisit = {
+          aboard: true,
           interactionOrigin: [0, 0, 0],
           interactionCandidates: () => rows,
         };
@@ -493,6 +499,58 @@ test('active SkyTrain uses the passenger origin and publication throttles avoid 
       false,
       'train movement uses its latest passenger origin',
     );
+  } finally {
+    f.dispose();
+  }
+});
+
+test('moving bus uses its passenger origin for both F and delayed mobile dispatch', () => {
+  const f = fixture();
+  try {
+    f.e.navigation.position.set(99, 50, 99);
+    let x = 0,
+      seated = false;
+    f.e.busVisit = {
+      aboard: true,
+      get interactionOrigin() {
+        return [x, 0, 0];
+      },
+      interactionCandidates: () => [
+        f.candidate({
+          id: 'bus:seat-01',
+          action: seated ? 'stand' : 'sit',
+          anchor: [x, 1.1, 0],
+          proximityPoint: [x, 0, 0],
+          execute() {
+            seated = !seated;
+            f.actions.push(this.action);
+            return true;
+          },
+        }),
+      ],
+    };
+    f.host.update(performance.now(), true);
+    const rendered = f.views.at(-1).snapshot;
+    assert.equal(rendered.id, 'bus:seat-01');
+    x = 24;
+    f.e.camera.position.x += 24;
+    f.e.camera.lookAt(24, 1.1, 0);
+    assert.equal(
+      f.host.interact(rendered),
+      true,
+      'same moving seat remains usable',
+    );
+    assert.equal(f.views.at(-1).snapshot.action, 'stand');
+    assert.equal(
+      f.host.interact(rendered),
+      false,
+      'old sit prompt cannot stand',
+    );
+    assert.equal(f.key().defaultPrevented, true);
+    assert.deepEqual(f.actions, ['sit', 'stand']);
+    f.e.busVisit.aboard = false;
+    f.e.busVisit.interactionCandidates = () => [];
+    assert.equal(f.key().defaultPrevented, false);
   } finally {
     f.dispose();
   }

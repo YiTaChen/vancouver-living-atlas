@@ -1,0 +1,152 @@
+{
+  "date": "2026-10-22",
+  "integrationBase": "bb26294",
+  "sourceSha256": {
+    "lib/city/bus-passenger-space.ts": "8116d7d57892c31ccf68d7310216c06dd277301a3cca895b2a6eca794c20ddef",
+    "lib/city/bus-visit.ts": "a0d590f2ef79574b01499fae44d527bf313fc34b43231453544a1ee2e1dd130e",
+    "lib/city/bus-accessibility.ts": "62b20a4cb0cf81b98c604c32724bcd62f1a1521743676496aea77da21ddabfd1",
+    "lib/city/city-interactions.ts": "b810671e4d0f92f61011abccd304b877f36ab4c1c3bde7bec9931707a44b4aea",
+    "lib/city/city-life/passenger-transfers.ts": "af5fcca015d09daec2accb3e1f2b81fd177c775c028570699438adf815a463c3",
+    "lib/city/engine.ts": "3e500899ecde36353aa54121ee1d376503e42ee8fa8a4f8e0d9e098f97009629",
+    "components/bus-visit-panel.tsx": "8f437ae889e4dc54bf77b3d5f1d82da85db9a08aac49395807691d0112c6115e",
+    "app/page.tsx": "a0d15c6a4dad9b9c823057048fae0ada3e8c29f23819c796cc83369306e596ee",
+    "app/globals.css": "a1121c2b8c33b8dd2a38290219ad3233938dd438a142d9e63e3b393a3c7c3adb",
+    "lib/i18n/bus-passenger.json": "caf88d3ab9708837ae4f5d2f67672cc44ceb5fd1cc8f3df056c06887c62257af"
+  },
+  "targetedTests": {
+    "passed": 107,
+    "failed": 0,
+    "skipped": 0,
+    "command": "node --test --test-concurrency=2 tests/bus-visit.test.mjs tests/bus-passenger-space.test.mjs tests/bus-passenger-ui.test.mjs tests/bus-accessibility.test.mjs tests/bus-accessibility-reanchor.test.mjs tests/passenger-anchor-switch.test.mjs tests/city-interactions.test.mjs tests/auto-quality-engine.test.mjs tests/bus-engine-integration.test.mjs tests/bus-cabin-csp.test.mjs tests/bus-v2-runtime.test.mjs tests/bus-closeup-runtime.test.mjs tests/proximity-interaction-prompt.test.mjs tests/proximity-interactions.test.mjs"
+  },
+  "typecheck": "PASS",
+  "focusedTypeAwareLint": "PASS",
+  "productionBuild": "PASS",
+  "collisionOptimization": {
+    "method": "Exact triangle BVH; CPU benchmark of all24 seats over562 moving aisle positions; observational, not a whole-frame/GPU/device guarantee",
+    "independentBruteForceParityQueries": 9000,
+    "profiles": [
+      {
+        "node": "v24.22.1",
+        "date": "2026-10-22T20:22:48.454Z",
+        "sourceSHA256": "8116d7d57892c31ccf68d7310216c06dd277301a3cca895b2a6eca794c20ddef"
+      },
+      {
+        "profile": "budget",
+        "buildMs": 154.70805700000005,
+        "movingCanSitAll24Ms": {
+          "n": 562,
+          "median": 0.0999979999999141,
+          "p95": 0.3688089999998283,
+          "max": 1.7390540000001238
+        },
+        "idleCanSitAll24Ms": {
+          "n": 180,
+          "median": 0.0047790000000986765,
+          "p95": 0.0060829999999896245,
+          "max": 0.0746560000000045
+        },
+        "worst": {
+          "ms": 1.7390540000001238,
+          "position": [
+            0,
+            0.6800000071525574,
+            -5.173333333333331
+          ]
+        }
+      },
+      {
+        "profile": "reference-lod1",
+        "buildMs": 602.792477,
+        "movingCanSitAll24Ms": {
+          "n": 562,
+          "median": 0.13979599999993297,
+          "p95": 0.4278180000001157,
+          "max": 1.3426230000000032
+        },
+        "idleCanSitAll24Ms": {
+          "n": 180,
+          "median": 0.005249999999932697,
+          "p95": 0.006081999999878462,
+          "max": 0.01961499999993066
+        },
+        "worst": {
+          "ms": 1.3426230000000032,
+          "position": [
+            0,
+            0.6800000071525574,
+            -4.826666666666668
+          ]
+        }
+      },
+      {
+        "profile": "reference-lod0",
+        "buildMs": 1337.203817,
+        "movingCanSitAll24Ms": {
+          "n": 562,
+          "median": 0.10730300000022908,
+          "p95": 0.35398599999962244,
+          "max": 1.5221980000001167
+        },
+        "idleCanSitAll24Ms": {
+          "n": 180,
+          "median": 0.0030490000003737805,
+          "p95": 0.014765999999781343,
+          "max": 0.05323799999996481
+        },
+        "worst": {
+          "ms": 1.5221980000001167,
+          "position": [
+            0,
+            0.6800000071525574,
+            -3.8933333333333424
+          ]
+        }
+      }
+    ]
+  },
+  "boundaries": [
+    "Short street ride is bounded to6–60m of an existing validated road edge, not a scheduled TransLink bus network",
+    "Phone-sized browser validation is not physical phone hardware validation",
+    "Full repository CI, merge and deployment status are reported by the linked PR and Actions runs"
+  ],
+  "nativeBrowser": {
+    "build": "npm run build:firebase; VANCOUVER_VISUAL_QA unset",
+    "CSP": "Same production policy served on localhost; no policy changes",
+    "desktopViewport": [
+      1280,
+      800
+    ],
+    "mobileViewports": [
+      [
+        390,
+        844
+      ],
+      [
+        844,
+        390
+      ]
+    ],
+    "profile": "reference-lod1",
+    "fallback": false,
+    "checks": [
+      "Public prepare and front-door board into aisle",
+      "W movement through actual rear steps; visible nearby Sit down (F)",
+      "Native F sit; Stand up (F) replaces prompt",
+      "Seated moving short ride; doors closed, alight unavailable, same seat remains occupied",
+      "Mobile tap Stand up while moving; cabin joystick returns",
+      "Mobile joystick turn and tap Sit down/Stand up",
+      "English to Traditional Chinese switch while seated",
+      "Landscape48px stand button center actually hit-tests to the button; native tap succeeds",
+      "Mobile joystick walk to open rear door and safe alight after arrival"
+    ],
+    "consoleErrors": [],
+    "screenshots": {
+      "desktop-approach.png": "b5819969f7c3dc00de029c6a62efa37271fa443c59f9c1d43b86f609865d9810",
+      "desktop-seated.png": "fa15e895444febdaeb6a4bfeb3df65585486d93d78a7b2a3b007893968dd31ef",
+      "mobile-landscape.png": "1baf7e0fa96f50b6bf11580a13f93a8b0bd13adcea62271c41e9a91a82401991",
+      "mobile-riding-seated.png": "34f471d43fb22b6d140d168c6ce860dfcf3e82b0925180a21613c4478c5d60da",
+      "mobile-seated-zh.png": "52948fabc5c1d643d138cc64023e1eccb5cdd749ac219565019aec1381c3efef"
+    }
+  }
+}

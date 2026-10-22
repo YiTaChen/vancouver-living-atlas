@@ -4,6 +4,10 @@ import { readFile } from 'node:fs/promises';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { cityModule } from './helpers/city-modules.mjs';
+import {
+  walkBusToSeat,
+  walkBusToRearDoor,
+} from './helpers/bus-passenger-controls.mjs';
 import { loadBusV2Projection } from '../tools/project-bus-v2-runtime.mjs';
 const { CityBusAssets } = await import(cityModule('bus-assets'));
 const { BusCabinVisit } = await import(cityModule('bus-visit'));
@@ -326,7 +330,7 @@ function cityFixture() {
   return city;
 }
 
-test('production v2 cabin opens original doors, boards the low floor, previews inward/rear cameras and alights to valid ground', async () => {
+test('production v2 cabin opens original doors, walks to all 24 real seats and alights only while standing near the rear door', async () => {
   const f = fixture(),
     city = cityFixture(),
     visit = new BusCabinVisit(city, f.assets, [route()]);
@@ -341,25 +345,35 @@ test('production v2 cabin opens original doors, boards the low floor, previews i
     const selected = busVisitSelectedAnchor(ready, 'main-aisle');
     assert.equal(selected, 'low-floor-aisle');
     assert.equal(visit.board(selected), true);
-    const aisleCamera = manifest.vehicles[0].cameraAnchors.find(
-        (camera) => camera.cameraId === 'camera-aisle',
-      ),
-      busOwner = city.scene.children.find(
-        (object) => object.name === 'Parked city bus cabin visit',
-      );
-    assert.ok(
-      city.camera.position.distanceTo(
-        new THREE.Vector3(...aisleCamera.eyePointM).applyMatrix4(
-          busOwner.matrixWorld,
-        ),
-      ) < 1e-5,
+    const busOwner = city.scene.children.find(
+      (object) => object.name === 'Boardable city bus cabin',
     );
+    const foot = busOwner.worldToLocal(city.navigation.position.clone());
+    const eye = busOwner.worldToLocal(city.camera.position.clone());
+    assert.ok(Math.hypot(eye.x - foot.x, eye.z - foot.z) < 1e-5);
+    assert.ok(eye.y - foot.y >= 1.6 && eye.y - foot.y <= 1.65 + 1e-5);
     const passenger = visit.snapshot().passengerAnchor;
+    assert.equal(
+      visit.preview('seat-24'),
+      false,
+      'a distant seat selection cannot teleport the passenger',
+    );
+    assert.equal(
+      visit.alight(),
+      false,
+      'boarding at the front does not authorize a distant rear exit',
+    );
     for (const seat of manifest.vehicles[0].seats) {
-      assert.equal(visit.preview(seat.seatId), true);
-      assert.equal(visit.snapshot().passengerAnchor, passenger);
+      walkBusToSeat(visit, seat.seatId);
+      const sit = visit
+        .interactionCandidates()
+        .find((candidate) => candidate.id === `bus:seat:${seat.seatId}`);
+      assert.ok(sit?.canInteract());
+      assert.equal(sit.execute(), true);
+      assert.equal(visit.snapshot().passengerAnchor, seat.seatId);
+      assert.equal(visit.snapshot().seated, true);
       const owner = city.scene.children.find(
-        (object) => object.name === 'Parked city bus cabin visit',
+        (object) => object.name === 'Boardable city bus cabin',
       );
       const expected = new THREE.Vector3(...seat.cameraEyePointM).applyMatrix4(
         owner.matrixWorld,
@@ -373,7 +387,20 @@ test('production v2 cabin opens original doors, boards the low floor, previews i
           .getWorldDirection(new THREE.Vector3())
           .distanceTo(expectedDirection) < 1e-5,
       );
+      assert.equal(
+        visit.alight(),
+        false,
+        'a seated rider must stand before alighting',
+      );
+      const stand = visit
+        .interactionCandidates()
+        .find((candidate) => candidate.action === 'stand');
+      assert.equal(stand?.execute(), true);
+      assert.equal(visit.snapshot().passengerAnchor, passenger);
+      assert.equal(visit.snapshot().seated, false);
     }
+    walkBusToRearDoor(visit);
+    assert.equal(visit.snapshot().canAlight, true);
     assert.equal(visit.alight(), true);
     assert.equal(city.navigation.mode, 'walk');
     assert.equal(city.navigation.surfaceId, 'ground');
