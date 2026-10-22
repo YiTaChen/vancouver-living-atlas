@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-22T15:31:31.956475+00:00",
+  "baseRelease": "4caf386f5994fe1445e13cc53997dba002e146d7",
+  "problem": "Three embedded MarkV PNG texture loads failed in the live production browser despite successful GLB geometry parsing.",
+  "change": "Use TextureLoader for the cabin GLTF parser image dependency path, preserving normal GLTF PBR/sampler/color-space/flipY setup. Reject and dispose a parsed scene after an image failure; revoke failed object URLs.",
+  "sourceSha256": {
+    "lib/city/skytrain-cabin-assets.ts": "e3fd092c3682c8624e575f0074edf1fbbf55ebc9077c9531f62e6bd8d2705fa9",
+    "tests/skytrain-cabin-csp.test.mjs": "6d1ec3a2aeb2dc25794848fbf78159c367a56787a1494f7b2217ef5233837dd6"
+  },
+  "unchangedModels": [
+    {
+      "file": "public/models/blender/metro/mark-v-a-car-interior.lod0.glb",
+      "sha256": "280aa59559444ac15d6c2d712c61e87b846076632d8127f116e20424a086c984"
+    },
+    {
+      "file": "public/models/blender/metro/mark-v-a-car-interior.lod1.glb",
+      "sha256": "25b45a2fd670a818b8ef10bc3dd92fbc427b941231063d8f9927706ddafe9e8d"
+    },
+    {
+      "file": "public/models/blender/metro/canada-line-shared-interior.lod0.glb",
+      "sha256": "aeb8e0a8ea43ec894c62d0dc721f67f2232a401e3ede57f180a8d05b177b770b"
+    },
+    {
+      "file": "public/models/blender/metro/canada-line-shared-interior.lod1.glb",
+      "sha256": "7abbc2da2a83a7d5a7459d5be763cd1c7196a62eafe3584646d25ac3472dd724"
+    },
+    {
+      "file": "public/models/blender/metro/canada-line-endcar-exterior.lod0.glb",
+      "sha256": "6d6443eb4ef23b0b0a8b08caf00e4b426b83c0485afed6a3baddfaed3a5624dc"
+    },
+    {
+      "file": "public/models/blender/metro/canada-line-endcar-exterior.lod1.glb",
+      "sha256": "49f9ce83161e76361aa5b40ececdac6b7ea1b37c98af015a5590004b6614631a"
+    }
+  ],
+  "security": {
+    "cspConfigurationChanged": false,
+    "productionPolicy": "connect-src self; img-src self data blob; existing restrictions retained",
+    "exactTestHeader": "default-src 'self'; script-src 'self' 'sha256-/tFtHoi6VYnyjGafAQBrM1PmXivMPDeRDmik6bmAoDo=' 'sha256-9RQnAw5z79YzzLzjz06wCj8oESn9d76ZphnSKrmOQ/A=' 'sha256-BF1b6T5+IAITCLshkOrRlqWPzM/OdhGqwoOMUmkSZk4=' 'sha256-FJY5DnIGfgYoqFcJMcKSCUI/xhRtS+hi2Es40s7DboI=' 'sha256-LW26oJUcG9pZpVUikLKaij696V/Hlz/1xcsJzNvTyi8=' 'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo=' 'sha256-WD79qyAvx56Nz8bGyeF7SrSLSWlydEYu/UOqkEuioSc=' 'sha256-XT3CoGyszS82mPeNz7S+biqGnA/xfz8FNnxGWJcMH9U=' 'sha256-bNUWpWTrtXtWgsOtwSBTw5DBitMj3QPTFKzNovf0q6I='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests",
+    "policyGeneratorSha256": "afee14dabbe08fc801c5d1c7ccd057123d705af548194228e50138d1f92fc9b2"
+  },
+  "checks": {
+    "newDefaultLoaderTests": {
+      "passed": 2,
+      "failed": 0,
+      "method": "Real default loader and GLTF parsing; only browser image decode substituted, exact embedded PNG bytes and PBR maps checked; fetch(blob) rejected."
+    },
+    "affectedCabinAndTrain": {
+      "passed": 25,
+      "failed": 0
+    },
+    "independentCabinReview": {
+      "passed": 12,
+      "failed": 0
+    },
+    "typeScript": "passed",
+    "strictLint": "passed",
+    "productionFirebaseBuild": "passed"
+  },
+  "nativeBrowser": {
+    "origin": "http://localhost:3101/",
+    "serving": "Final production dist/client with exact generated production CSP header; no QA entry",
+    "completed": [
+      "Enter Main Street–Science World using public controls",
+      "Finish actual Expo cabin load",
+      "Walk to open door",
+      "Board",
+      "Observe moving cabin"
+    ],
+    "consoleErrors": [],
+    "failureBehavior": "Ready state is reachable only after embedded image dependencies succeed; the default loader rejects image failures.",
+    "screenshot": "native-csp-expo-cabin.png",
+    "screenshotSha256": "1230a5630c7d3e8be79fac4771f19c03016e0e794076ff3425b714d6da50ca8f"
+  },
+  "scopeOfPriorEvidence": "The seven-station geometry, original GLBs, controller, paths, UI and shaders are byte-identical to release4caf386. Prior detailed geometry receipts retain their original source-file hashes. The performance capture at visual fingerprint0bf215e2 belongs to the prior source revision; no new exact-source performance benchmark is claimed for this decoder-only patch.",
+  "fullSuiteExpectation": 1793,
+  "fullSuiteCiClaimed": false,
+  "reference": "https://www.w3.org/TR/CSP/#directive-connect-src"
+}

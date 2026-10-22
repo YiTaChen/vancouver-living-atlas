@@ -198,7 +198,35 @@ async function defaultLoad(
   if (signal.aborted)
     throw new DOMException('Cancelled cabin load', 'AbortError');
   // Parsing embedded textures is not abortable; the session disposes late results.
-  return new GLTFLoader().parseAsync(bytes, BASE);
+  let imageFailed = false;
+  const manager = new THREE.LoadingManager();
+  manager.onError = (resource) => {
+    imageFailed = true;
+    // GLTFLoader revokes successful embedded images itself, but its image
+    // error branch leaves the generated URL alive.
+    if (resource.startsWith('blob:')) URL.revokeObjectURL(resource);
+  };
+  const loader = new GLTFLoader(manager);
+  loader.register((parser) => ({
+    name: 'atlas-cabin-image-decoder',
+    beforeRoot() {
+      // Embedded GLB PNGs become object URLs. ImageBitmapLoader fetches those
+      // URLs through connect-src; TextureLoader decodes them as images under
+      // the existing img-src policy, preserving glTF's PBR/sampler handling.
+      parser.textureLoader = new THREE.TextureLoader(parser.options.manager)
+        .setCrossOrigin(parser.options.crossOrigin)
+        .setRequestHeader(parser.options.requestHeader);
+      return null;
+    },
+  }));
+  const gltf = await loader.parseAsync(bytes, BASE);
+  // GLTFLoader turns failed image dependencies into null maps. Do not accept
+  // an apparently loaded cabin with its authored surfaces silently missing.
+  if (imageFailed) {
+    disposeCabinScene(gltf.scene);
+    throw new Error('Cabin texture decode failed');
+  }
+  return gltf;
 }
 
 /** A display session owns one selected cabin only. Closing or changing its
