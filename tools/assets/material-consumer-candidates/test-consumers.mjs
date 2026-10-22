@@ -68,7 +68,7 @@ function protectedSources() {
   return { baseline, sources };
 }
 
-test('Reviewed additive seating projects to the unchanged 53bb3c6 source hashes while all other source bytes stay exact', () => {
+test('Reviewed additive seating and character selection project to unchanged 53bb3c6 source hashes while all other bytes stay exact', () => {
   const { baseline, sources } = protectedSources();
   const audit = assertProtectedSources(sources, baseline);
   assert.equal(audit.reviewedBase, '53bb3c6');
@@ -84,6 +84,54 @@ test('Reviewed additive seating projects to the unchanged 53bb3c6 source hashes 
   }
   assert.deepEqual(assertProtectedSources(sources, baseline).compatibility, [],
     'original pre-seating source remains directly acceptable');
+});
+
+test('The prior seating-only navigation remains acceptable without requiring character-selection additions', () => {
+  const { baseline, sources } = protectedSources();
+  const path = 'lib/city/navigation.ts';
+  let source = sources[path];
+  for (const [before, after] of [
+    ["import { makeCitizen, type CitizenCharacter } from './citizen';", "import { makeCitizen } from './citizen';"],
+    ["  character: CitizenCharacter = 'male';\n", ''],
+    ['    setCharacter(character: CitizenCharacter): void;\n', ''],
+    [`  setCharacter(character: CitizenCharacter) {
+    if (character !== 'male' && character !== 'female') return;
+    this.walker.setCharacter(character);
+    this.character = character;
+    this.walker.group.traverse((object) => {
+      if (object instanceof THREE.Mesh) object.castShadow = false;
+    });
+  }
+`, ''],
+  ]) {
+    assert(source.includes(before), 'reviewed character fixture anchor exists');
+    source = source.replace(before, after);
+  }
+  assert(!source.includes('CitizenCharacter'));
+  const audit = assertProtectedSources({ ...sources, [path]: source }, baseline);
+  const navigation = audit.compatibility.find(row => row.path === path);
+  assert.equal(navigation.projectedHash, baseline[path]);
+  assert(navigation.reviewed.every(label => !label.startsWith('character selection')));
+});
+
+test('Character compatibility rejects mutated, incomplete, duplicated or relocated selection additions', () => {
+  const { baseline, sources } = protectedSources();
+  const path = 'lib/city/navigation.ts';
+  const source = sources[path];
+  const field = "  character: CitizenCharacter = 'male';\n";
+  for (const [before, after] of [
+    ['    this.walker.setCharacter(character);', "    this.walker.setCharacter('male');"],
+    ['    this.character = character;', "    this.character = character;\n    this.mode = 'walk';"],
+    ['    this.character = character;\n    this.walker.group.traverse((object) => {\n      if (object instanceof THREE.Mesh) object.castShadow = false;', '    this.character = character;\n    this.walker.group.traverse((object) => {\n      if (object instanceof THREE.Mesh) object.castShadow = true;'],
+    ['    setCharacter(character: CitizenCharacter): void;\n', ''],
+    [field, field + field],
+    [field + '  classicCar = new THREE.Group();', '  classicCar = new THREE.Group();\n' + field.trimEnd()],
+  ]) {
+    assert(source.includes(before), `negative character fixture anchor exists: ${before}`);
+    assert.throws(() => assertProtectedSources({ ...sources, [path]: source.replace(before, after) }, baseline),
+      /Protected pre-seating source drift|Reviewed seating anchor changed/,
+      `unreviewed character mutation rejected: ${before}`);
+  }
 });
 
 test('Seating compatibility rejects changes to driving, walking, collision, camera, bench geometry or the reviewed seat implementation', () => {

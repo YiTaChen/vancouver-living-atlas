@@ -31,7 +31,7 @@ import {
 } from './placement-geometry';
 import { BoatController } from './boat-controller';
 import { makeWalker } from './assets/walker';
-import { makeCitizen } from './citizen';
+import { makeCitizen, type CitizenCharacter } from './citizen';
 import { GroundSurfaceIndex, walkableGroundMeshes } from './ground-surface';
 import { DriverCameraMotion, DRIVER_LEFT_OFFSET } from './driver-camera';
 import type { TravelBookmark } from './travel-return';
@@ -134,6 +134,7 @@ export class StreetNavigation {
   car = new THREE.Group();
   condition: VehicleCondition;
   carModel: 'classic' | 'roadster' = 'roadster';
+  character: CitizenCharacter = 'male';
   classicCar = new THREE.Group();
   roadster = makeRoadster();
   wheelDistance = 0;
@@ -153,6 +154,7 @@ export class StreetNavigation {
   walker: {
     group: THREE.Group;
     update(distance: number, moving: boolean, dt?: number, speed?: number): void;
+    setCharacter(character: CitizenCharacter): void;
     setSeated?(seated: boolean, seatHeight?: number): void;
     dispose?(): void;
   };
@@ -335,6 +337,14 @@ export class StreetNavigation {
       model === 'classic' ? this.classicCockpit : this.roadsterCockpit;
     this.updateCockpit(0, 0);
     this.notifyCamera();
+  }
+  setCharacter(character: CitizenCharacter) {
+    if (character !== 'male' && character !== 'female') return;
+    this.walker.setCharacter(character);
+    this.character = character;
+    this.walker.group.traverse((object) => {
+      if (object instanceof THREE.Mesh) object.castShadow = false;
+    });
   }
   keyDown = (ev: KeyboardEvent) => {
     const k = this.movementKey(ev);

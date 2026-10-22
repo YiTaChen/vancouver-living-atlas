@@ -13,7 +13,7 @@ function exact(source, before, after, label) {
   return source.replace(before, after);
 }
 
-/** Reviewed in-memory subtraction of the additive seating diff from 53bb3c6.
+/** Reviewed in-memory subtraction of additive seating and character selection.
  * This is an audit projection, never a runtime transform. Every remaining byte
  * must still hash to the unchanged historical source fixture. Matching only
  * these snippets cannot hide a changed drive branch, collider or chair mesh. */
@@ -24,6 +24,48 @@ export function projectBeforeSeating(path, source) {
     reviewed.push(label);
   };
   if (path === 'lib/city/navigation.ts') {
+    // The prior seating-only source remains valid. If any character-selection
+    // marker is present, require the complete reviewed delta at its exact sites.
+    if (source.includes('CitizenCharacter') || source.includes('setCharacter(')) {
+      remove(
+        "import { makeCitizen, type CitizenCharacter } from './citizen';",
+        "import { makeCitizen } from './citizen';",
+        'character selection type import',
+      );
+      remove(
+        `  carModel: 'classic' | 'roadster' = 'roadster';
+  character: CitizenCharacter = 'male';
+  classicCar = new THREE.Group();`,
+        `  carModel: 'classic' | 'roadster' = 'roadster';
+  classicCar = new THREE.Group();`,
+        'character selection default',
+      );
+      remove(
+        `    update(distance: number, moving: boolean, dt?: number, speed?: number): void;
+    setCharacter(character: CitizenCharacter): void;
+    setSeated?(seated: boolean, seatHeight?: number): void;`,
+        `    update(distance: number, moving: boolean, dt?: number, speed?: number): void;
+    setSeated?(seated: boolean, seatHeight?: number): void;`,
+        'character selection walker API',
+      );
+      remove(
+        `    this.notifyCamera();
+  }
+  setCharacter(character: CitizenCharacter) {
+    if (character !== 'male' && character !== 'female') return;
+    this.walker.setCharacter(character);
+    this.character = character;
+    this.walker.group.traverse((object) => {
+      if (object instanceof THREE.Mesh) object.castShadow = false;
+    });
+  }
+  keyDown = (ev: KeyboardEvent) => {`,
+        `    this.notifyCamera();
+  }
+  keyDown = (ev: KeyboardEvent) => {`,
+        'character selection setter and shadow policy',
+      );
+    }
     remove(
       `export interface WalkSeatPose {
   id: string;

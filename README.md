@@ -86,6 +86,8 @@ This is assisted sightseeing flight with approximate physics. [Development plan,
 
 **Change your view.** Scroll, pinch or use **+ / −** while travelling. Walk zooms between first person and an animated character; Drive and Boat zoom into their interiors, with an unobstructed first-person option. Vehicle and cabin selectors are in the camera panel, or **Travel options** on mobile.
 
+**Choose your character.** In Walk, select **Male** or **Female** in the walking controls, or **Travel options** on mobile. Switching keeps your location, view and current walking or seated pose; the selection stays with you when changing travel modes.
+
 **Look around and return.** Zoom beyond a ground/water travel view to a local aerial map. Rotate, then zoom back in to resume the same mode and position. Panning to another coordinate cancels that return. Walk ↔ Drive switches in place; boat/land transitions require a suitable new start. Aircraft use the separate persistent **Return to aircraft** action described above.
 
 **Find yourself.** The local minimap follows your actual position with a heading arrow, nearby roads, shores, building footprints and a distance scale. Its zoom is independent of the 3D camera. Capture exports the rendered view as a PNG.

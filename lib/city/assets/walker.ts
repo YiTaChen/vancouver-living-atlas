@@ -2,17 +2,20 @@ import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 
 /** Original procedural pedestrian. Metres; +Z forward; ground contact at y=0. */
-export function makeWalker(): {
+function makeWalkerModel(character: 'male' | 'female'): {
   group: THREE.Group;
   update: (distance: number, moving: boolean) => void;
   setSeated: (seated: boolean, seatHeight?: number) => void;
+  movementStrength: () => number;
+  restoreMotion: (distance: number, moving: boolean, strength: number) => void;
 } {
   const group = new THREE.Group();
   group.name = 'Walker — original Vancouver pedestrian';
+  const female = character === 'female';
   const material = (color: number, roughness = 0.86) =>
     new THREE.MeshStandardMaterial({ color, roughness, metalness: 0 });
-  const jacket = material(0x2c6c70),
-    seam = material(0x205156),
+  const jacket = material(female ? 0x80506f : 0x2c6c70),
+    seam = material(female ? 0x58384e : 0x205156),
     pants = material(0x2b3949);
   const skin = material(0xbd8e73),
     hair = material(0x29241f),
@@ -185,10 +188,10 @@ export function makeWalker(): {
     body,
     loft([
       [0.008, 0.148, 0.098],
-      [0.09, 0.164, 0.108],
-      [0.25, 0.181, 0.118],
-      [0.415, 0.223, 0.107],
-      [0.48, 0.19, 0.085],
+      [0.09, female ? 0.15 : 0.164, 0.108],
+      [0.25, female ? 0.164 : 0.181, 0.118],
+      [0.415, female ? 0.21 : 0.223, 0.107],
+      [0.48, female ? 0.18 : 0.19, 0.085],
     ]),
     jacket,
   );
@@ -275,6 +278,7 @@ export function makeWalker(): {
 
   const head = new THREE.Group();
   head.name = 'Face and hair';
+  if (female) head.scale.x = 0.93;
   head.position.y = 0.66;
   body.add(head);
   mesh(
@@ -359,12 +363,25 @@ export function makeWalker(): {
     0.075,
   );
   fringe.rotation.z = -0.22;
+  if (female) {
+    // Original tied hair keeps the alternate character legible at chase distance.
+    const tail = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(0, 0.07, -0.09),
+      new THREE.Vector3(0.008, 0.015, -0.15),
+      new THREE.Vector3(0.023, -0.1, -0.18),
+      new THREE.Vector3(0.04, -0.22, -0.16),
+    ]);
+    mesh(head, new THREE.TubeGeometry(tail, 18, 0.034, 8, false), hair);
+    ellipsoid(head, hair, 0.044, 0.05, 0.046, 0, 0.06, -0.1);
+    ellipsoid(head, hair, 0.034, 0.038, 0.034, 0.04, -0.22, -0.16);
+    ellipsoid(head, seam, 0.037, 0.013, 0.037, 0.008, 0.015, -0.15);
+  }
 
   const arms: { upper: THREE.Group; fore: THREE.Group; side: number }[] = [];
   for (const side of [-1, 1]) {
     const upper = new THREE.Group();
     upper.name = side < 0 ? 'Left shoulder' : 'Right shoulder';
-    upper.position.set(side * 0.224, 0.414, 0);
+    upper.position.set(side * (female ? 0.211 : 0.224), 0.414, 0);
     body.add(upper);
     mesh(
       upper,
@@ -523,7 +540,7 @@ export function makeWalker(): {
     seatHeight = 0.46,
     lastDistance = 0,
     lastTime: number | undefined;
-  function update(distance: number, moving: boolean) {
+  function update(distance: number, moving: boolean, blendMotion = true) {
     lastDistance = Number.isFinite(distance) ? distance : lastDistance;
     const now =
       typeof performance !== 'undefined' ? performance.now() : Date.now();
@@ -532,8 +549,9 @@ export function makeWalker(): {
         ? 1 / 60
         : Math.max(0, Math.min(0.1, (now - lastTime) / 1000));
     lastTime = now;
-    strength +=
-      (Number(moving && !seated) - strength) * (1 - Math.exp(-dt * 13));
+    if (blendMotion)
+      strength +=
+        (Number(moving && !seated) - strength) * (1 - Math.exp(-dt * 13));
     if (seated) strength = 0;
     if (!moving && strength < 0.0001) strength = 0;
     const phase =
@@ -620,7 +638,7 @@ export function makeWalker(): {
         ankle.clone().sub(knee).normalize(),
       );
     }
-    group.updateMatrixWorld(true);
+    group.updateWorldMatrix(true, true);
   }
   update(0, false);
   let triangles = 0,
@@ -641,6 +659,7 @@ export function makeWalker(): {
     drawCalls,
     strideMetres: 1.35,
     seated: false,
+    character,
   };
   function setSeated(value: boolean, height = 0.46) {
     const nextHeight = Number.isFinite(height)
@@ -654,5 +673,73 @@ export function makeWalker(): {
     group.userData.seatHeightMetres = seatHeight;
     update(lastDistance, false);
   }
-  return { group, update, setSeated };
+  return {
+    group,
+    update,
+    setSeated,
+    movementStrength: () => strength,
+    restoreMotion(distance: number, moving: boolean, previousStrength: number) {
+      strength = previousStrength;
+      update(distance, moving, false);
+    },
+  };
+}
+
+/** Stable actor root also used by the compatible renderer and loading fallback. */
+export function makeWalker(character: 'male' | 'female' = 'male') {
+  const group = new THREE.Group();
+  group.name = 'Walker — original Vancouver pedestrian';
+  let selected = character;
+  let model = makeWalkerModel(selected);
+  let distance = 0;
+  let moving = false;
+  let seated = false;
+  let seatHeight = 0.46;
+  group.add(model.group);
+  Object.assign(group.userData, model.group.userData);
+
+  function update(nextDistance: number, nextMoving: boolean) {
+    distance = Number.isFinite(nextDistance) ? nextDistance : distance;
+    moving = nextMoving;
+    model.update(distance, moving);
+  }
+
+  function setSeated(value: boolean, height = 0.46) {
+    seated = value;
+    seatHeight = Number.isFinite(height)
+      ? THREE.MathUtils.clamp(height, 0.25, 0.75)
+      : 0.46;
+    model.setSeated(seated, seatHeight);
+    group.userData.seated = seated;
+    group.userData.seatHeightMetres = seatHeight;
+  }
+
+  function setCharacter(value: 'male' | 'female') {
+    if ((value !== 'male' && value !== 'female') || selected === value) return;
+    const next = makeWalkerModel(value);
+    next.setSeated(seated, seatHeight);
+    next.restoreMotion(distance, moving, model.movementStrength());
+    const geometries = new Set<THREE.BufferGeometry>();
+    const materials = new Set<THREE.Material>();
+    model.group.traverse((object) => {
+      if (!(object instanceof THREE.Mesh)) return;
+      geometries.add(object.geometry);
+      for (const material of Array.isArray(object.material)
+        ? object.material
+        : [object.material])
+        materials.add(material);
+    });
+    group.remove(model.group);
+    for (const geometry of geometries) geometry.dispose();
+    for (const material of materials) material.dispose();
+    model = next;
+    selected = value;
+    group.add(model.group);
+    model.group.updateWorldMatrix(true, true);
+    Object.assign(group.userData, model.group.userData);
+    group.userData.seated = seated;
+    group.userData.seatHeightMetres = seatHeight;
+  }
+
+  return { group, update, setSeated, setCharacter };
 }
