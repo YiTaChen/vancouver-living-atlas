@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { cityModule } from './helpers/city-modules.mjs';
+import { cityElevation } from './helpers/city-elevation.mjs';
 const { SkyTrainCabinAssets } = await import(
   cityModule('skytrain-cabin-assets')
 );
@@ -15,7 +16,50 @@ const manifest = JSON.parse(
   await readFile('public/models/blender/metro/manifest.json', 'utf8'),
 );
 const close = (a, b, e = 1e-5) => assert(Math.abs(a - b) < e, `${a} != ${b}`);
-const tick = () => new Promise((resolve) => setImmediate(resolve));
+const { SkyTrainRidePath, adaptSkyTrainStationFrame } = await import(
+  cityModule('skytrain-ride-path')
+);
+const { trainStopFor, stationWorldPose } = await import(
+  cityModule('skytrain-stations')
+);
+const routes = JSON.parse(
+  await readFile('public/models/skytrain-routes.json', 'utf8'),
+);
+const pathCache = new Map();
+async function ridePath(from, to) {
+  const key = `${from}:${to}`;
+  if (pathCache.has(key)) return pathCache.get(key);
+  const segment = routes.segments.find((s) => s.from === from && s.to === to);
+  const pose = async (id) => {
+    const raw = JSON.parse(
+      await readFile(`public/models/skytrain-stations/${id}.json`, 'utf8'),
+    );
+    const data = adaptSkyTrainStationFrame(raw, routes),
+      stop = trainStopFor(data, segment.lineId, segment.direction);
+    const world = stationWorldPose(
+      data,
+      cityElevation,
+      stop.position,
+      stop.quaternion,
+    );
+    return {
+      position: new THREE.Vector3(...world.position),
+      quaternion: new THREE.Quaternion(...world.quaternion),
+      motionSign: stop.motionSign,
+    };
+  };
+  const path = new SkyTrainRidePath(
+    routes,
+    segment.lineId,
+    from,
+    to,
+    await pose(from),
+    await pose(to),
+    cityElevation,
+  );
+  pathCache.set(key, path);
+  return path;
+}
 async function actualGLB(url) {
   const bytes = await readFile('public' + url),
     loader = new GLTFLoader(),
@@ -242,13 +286,7 @@ test('Expo metal frames and transparent window leaves animate together while clo
   const frame = train.group.getObjectByName(
       'Animated platform-side train doors',
     ),
-    glass = train.group.children.find(
-      (mesh) =>
-        mesh instanceof THREE.InstancedMesh &&
-        mesh !== frame &&
-        !Array.isArray(mesh.material) &&
-        mesh.material.transparent,
-    );
+    glass = train.group.getObjectByName('Animated train-door glazing');
   assert(frame instanceof THREE.InstancedMesh);
   assert(glass instanceof THREE.InstancedMesh);
   assert.equal(frame.count, 48);
@@ -342,28 +380,223 @@ test('changing line/quality releases the previous actual cabin buffers before cr
 });
 
 test('disposing while actual GLB parsing finishes never reattaches a late cabin and releases its buffers', async () => {
-  let resolveGate;
-  const gate = new Promise((resolve) => (resolveGate = resolve)),
-    loaded = [];
+  const gate = Promise.withResolvers(),
+    parsed = Promise.withResolvers();
   const assets = new SkyTrainCabinAssets({
       fetchManifest: async () => manifest,
       load: async (url) => {
-        const model = await actualGLB(url);
-        loaded.push(model);
-        await gate;
-        return model;
+        try {
+          const model = await actualGLB(url);
+          parsed.resolve(model);
+          await gate.promise;
+          return model;
+        } catch (error) {
+          parsed.reject(error);
+          throw error;
+        }
       },
     }),
     train = new SkyTrainRideTrain(assets);
   const load = train.load('expo', 'high', false);
-  for (let i = 0; i < 30 && !loaded.length; i++) await tick();
-  assert(loaded.length > 0);
-  const counts = disposalCounts(loaded[0].scene);
+  // Synchronize on the actual parser rather than a machine-dependent number
+  // of event-loop turns, and still keep the loaded scene behind the gate.
+  const model = await Promise.race([
+    parsed.promise,
+    load.then(() => assert.fail('load ended before the actual GLB parsed')),
+  ]);
+  const counts = disposalCounts(model.scene);
   train.dispose();
-  resolveGate();
+  gate.resolve();
   assert.equal(await load, false);
   assert(!train.ready);
   assert([...counts.values()].every((n) => n === 1));
+});
+
+test('actual loaded cars follow individual physical arc frames in both directions and return to exact linear station offsets', async () => {
+  let articulated = false;
+  for (const [line, pairs, offsets] of [
+    [
+      'expo',
+      [
+        ['waterfront', 'burrard'],
+        ['burrard', 'waterfront'],
+      ],
+      [26.85, 8.95, -8.95, -26.85],
+    ],
+    [
+      'canada',
+      [
+        ['waterfront', 'vancouver-city-centre'],
+        ['vancouver-city-centre', 'waterfront'],
+      ],
+      [10.5, -10.5],
+    ],
+  ]) {
+    const { train } = fixture();
+    assert(await train.load(line, 'balanced', false));
+    const geometries = new Set(),
+      materials = new Set();
+    train.group.traverse((o) => {
+      if (o instanceof THREE.Mesh) {
+        geometries.add(o.geometry);
+        for (const m of Array.isArray(o.material) ? o.material : [o.material])
+          materials.add(m);
+      }
+    });
+    for (const [from, to] of pairs) {
+      const path = await ridePath(from, to);
+      for (const u of [0, 0.02, 0.2, 0.4, 0.6, 0.8, 0.98, 1]) {
+        train.setPathPose(path, u);
+        const reference = path.sample(u);
+        assert(train.group.position.distanceTo(reference.position) < 1e-6);
+        assert(train.group.quaternion.angleTo(reference.quaternion) < 1e-6);
+        for (let i = 0; i < offsets.length; i++) {
+          const expected = path.sampleDistance(
+            u * path.length + offsets[i] * path.start.motionSign,
+          );
+          const car = train.carFrames[i];
+          assert(
+            car
+              .getWorldPosition(new THREE.Vector3())
+              .distanceTo(expected.position) < 1e-6,
+          );
+          assert(
+            car
+              .getWorldQuaternion(new THREE.Quaternion())
+              .angleTo(expected.quaternion) < 1e-6,
+          );
+          if (u === 0 || u === 1) {
+            assert(
+              car.position.distanceTo(new THREE.Vector3(0, 0, offsets[i])) <
+                0.015,
+            );
+            assert(car.quaternion.angleTo(new THREE.Quaternion()) < 1e-6);
+          }
+        }
+        if (
+          train.carFrames[0].quaternion.angleTo(train.carFrames[1].quaternion) >
+          0.001
+        )
+          articulated = true;
+        train.group.traverse((o) => {
+          if (o instanceof THREE.Mesh) {
+            assert(geometries.has(o.geometry));
+            for (const m of Array.isArray(o.material)
+              ? o.material
+              : [o.material])
+              assert(materials.has(m));
+          }
+        });
+      }
+    }
+    train.resetCarFrames();
+    assert(train.stationAligned);
+    train.carFrames.forEach((car, i) =>
+      assert(
+        car.position.distanceTo(new THREE.Vector3(0, 0, offsets[i])) < 1e-9,
+      ),
+    );
+    train.dispose();
+  }
+  assert(
+    articulated,
+    'neighboring actual cars turn independently instead of remaining one rigid consist',
+  );
+});
+
+test('Expo shared single-car shells and all48 paired door instances inherit the articulated car matrices and release once', async () => {
+  const { train } = fixture();
+  await train.load('expo', 'high', false);
+  const path = await ridePath('waterfront', 'burrard');
+  train.setPathPose(path, 0.4);
+  const shells = train.group.children.filter(
+    (o) => o.name === 'Original service exterior — Mark V inspired',
+  );
+  assert(shells.length > 0 && shells.length <= 8);
+  const instance = new THREE.Matrix4(),
+    local = new THREE.Matrix4(),
+    frame = new THREE.Matrix4(),
+    glass = new THREE.Matrix4();
+  for (const mesh of shells) {
+    assert(mesh instanceof THREE.InstancedMesh);
+    assert.equal(mesh.count, 4);
+    mesh.geometry.computeBoundingBox();
+    assert(
+      mesh.geometry.boundingBox.max.z < 9 &&
+        mesh.geometry.boundingBox.min.z > -9,
+    );
+    train.carFrames.forEach((car, i) => {
+      mesh.getMatrixAt(i, instance);
+      instance.elements.forEach((n, k) =>
+        close(n, car.matrix.elements[k], 2e-5),
+      );
+    });
+  }
+  const metal = train.group.getObjectByName(
+      'Animated platform-side train doors',
+    ),
+    glazing = train.group.getObjectByName('Animated train-door glazing');
+  frames(train, true, 'left');
+  for (let i = 0; i < 48; i++) {
+    metal.getMatrixAt(i, frame);
+    glazing.getMatrixAt(i, glass);
+    assert.deepEqual(frame.elements, glass.elements);
+    local
+      .copy(train.carFrames[Math.floor(i / 12)].matrix)
+      .invert()
+      .multiply(frame);
+    close(Math.abs(local.elements[12]), 1.285, 2e-5);
+    close(local.elements[13], 1.94, 2e-5);
+  }
+  const meshDisposals = shells.map(() => 0),
+    buffers = disposalCounts(train.group);
+  shells.forEach((mesh, i) =>
+    mesh.addEventListener('dispose', () => meshDisposals[i]++),
+  );
+  train.resetCarFrames();
+  frames(train, true, 'left');
+  train.group.position.set(0, 0, 0);
+  train.group.quaternion.identity();
+  train.group.updateMatrixWorld(true);
+  assert.equal(
+    opaqueDoorHits(train, 'left', 1, false).length,
+    0,
+    'station reset preserves the actual open aperture',
+  );
+  train.dispose();
+  train.dispose();
+  assert(meshDisposals.every((n) => n === 1));
+  assert([...buffers.values()].every((n) => n === 1));
+});
+
+test('the standing eye, passenger anchor and cabin lamps attach to occupied car0 rather than the rigid train root', async () => {
+  for (const line of ['expo', 'canada']) {
+    const { train } = fixture();
+    await train.load(line, 'high', false);
+    const path = await ridePath(
+      'waterfront',
+      line === 'expo' ? 'burrard' : 'vancouver-city-centre',
+    );
+    train.setPathPose(path, 0.4);
+    const position = new THREE.Vector3(),
+      quaternion = new THREE.Quaternion();
+    train.passengerWorldPose(position, quaternion);
+    const car = train.carFrames[0];
+    const localEye = train.eye.clone();
+    localEye.z -= train.carOffset;
+    assert(position.distanceTo(localEye.applyMatrix4(car.matrixWorld)) < 1e-6);
+    assert(
+      quaternion.angleTo(car.getWorldQuaternion(new THREE.Quaternion())) < 1e-6,
+    );
+    assert.equal(train.passenger.parent, car);
+    const lamps = [];
+    train.group.traverse((o) => {
+      if (o instanceof THREE.PointLight) lamps.push(o);
+    });
+    assert.equal(lamps.length, 2);
+    assert(lamps.every((lamp) => lamp.parent === car));
+    train.dispose();
+  }
 });
 
 test('instance-only door cropping retains actual authored materials and finite matched vertex attributes while retiring only unused buffers', async () => {

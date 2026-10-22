@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-22T14:07:13.301718+00:00",
+  "scope": "One foreground desktop-browser capture on one Mac; this is not mobile, cross-device, High/Ultra-quality or sustained whole-route performance acceptance.",
+  "capture": {
+    "path": "work/visual-qa/skytrain-travel-final-20261022/auto-walk-auto-balanced-cruise.json",
+    "sha256": "706c107238862c56155d8ea04bd8caae7cc1a3edf867bafcaaf063272ce50e00",
+    "capabilitiesPath": "work/visual-qa/skytrain-travel-final-20261022/capabilities.json",
+    "capabilitiesSha256": "96b4140bf38f840987474ce1079b0ba4249319a4bd38edaa17afccf90aa0b282",
+    "sourceFingerprint": "29a152bbe611635c4fc33c3d60aa0d135273a593d29f9b2642586742da14bfb8",
+    "parentRevision": "8ea9f360804a28020875dd0bb6d9c1b9484fe7cb",
+    "name": "walk-auto-balanced-cruise",
+    "foregroundValid": true,
+    "frameCount": 2400,
+    "sampleElapsedMs": 43060.8,
+    "sumRecordedFrameMs": 43060.8,
+    "recorderWindow": "The recorder stops at2400 foreground frames or60 seconds. This file retains the first completed2400-frame window (43.0608 seconds), not the last2400 frames of the entire trip.",
+    "journeyContext": "Native Expo Line SkyTrain ride, according to the operator record. settings.mode remains walk while the train controller owns the passenger; the frame mode label alone does not identify walking versus riding.",
+    "frameModeMix": {
+      "walk": 2400
+    },
+    "firstCameraPosition": [
+      878.7131872287034,
+      8.367634454577559,
+      294.2308389756528
+    ],
+    "lastCameraPosition": [
+      634.6781387788683,
+      14.849468714802015,
+      60.77848921021554
+    ]
+  },
+  "device": {
+    "rendererGPU": "ANGLE (AMD, ANGLE Metal Renderer: AMD Radeon Pro 560X, Unspecified Version)",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "viewport": [
+      1280,
+      720
+    ],
+    "renderSizeAtSave": [
+      1280,
+      720
+    ],
+    "pixelRatioAtSave": 1
+  },
+  "method": {
+    "frameTime": "Adjacent performance.now timestamps after foreground renderScene calls; render transitions and hidden/suspended intervals are excluded by the recorder. These are wall-clock frame intervals, not isolated GPU execution times.",
+    "median": "Arithmetic median of the2400 sorted frame intervals.",
+    "percentiles": "Nearest-rank: sorted[ceil(p*N)-1], with no outlier removal.",
+    "speed": "The recorded speedMps is sceneryMotion camera-motion telemetry, not the pure train journey speed or a verified real-service speed limit.",
+    "separation": "Statistics use the saved per-frame array. The top-level auto snapshot and its rolling window/counters were saved later and are not substituted for these quantiles."
+  },
+  "frameTimeMs": {
+    "median": 16.8,
+    "p95": 20.9,
+    "p99": 24,
+    "maximum": 1373,
+    "over33_333Ms": 5,
+    "over50Ms": 2,
+    "over100Ms": 1
+  },
+  "largestHitch": {
+    "frameIndexZeroBased": 512,
+    "elapsedMs": 10169.2,
+    "frameMs": 1373,
+    "recordedSpeedMps": 0,
+    "detailWorkMs": 0,
+    "cause": "Not established by the saved telemetry. The1373ms interval is retained; smooth percentile values do not erase this visible hitch."
+  },
+  "maximumRecordedScenerySpeed": {
+    "metresPerSecond": 23.435,
+    "kilometresPerHour": 84.366
+  },
+  "capturedQualityMix": {
+    "qualityModeAtSave": "auto",
+    "frameQualityCounts": {
+      "balanced": 2400
+    },
+    "resolutionScaleCounts": {
+      "0.8": 2382,
+      "1": 18
+    },
+    "interpretation": "Every captured frame uses Balanced.2382/2400 frames use automatic scale0.8;18 use scale1.0. A separate High screenshot is not a High performance benchmark."
+  },
+  "captureToRelease": {
+    "sameFinalBytesBenchmarked": false,
+    "deltasReportedByReleaseOperator": [
+      "The shipped route provenance source path was replaced by logical release ID translink-gtfs-26SEP_20261002-regional-skytrain. Full source SHA and all route geometry remain identical.",
+      "The subsequent goPlatform guard compares the actually loaded train serviceLine and ready state before deciding to load a new line. It fixes continuous walking across lines; that cross-line loading case is not represented by this recorded Expo segment.",
+      "Two Waterfront concourse portal posts have narrower runtime visual geometry and matching collider widths to keep the public transfer corridors open. Raw authored station sources remain unchanged. The recorded train window did not traverse these Waterfront concourse portals, so that local clearance change is outside this capture."
+    ],
+    "releaseSourceHashes": {
+      "lib/city/skytrain-travel.ts": "ce9928a592b9ef2ed1fda3ebf15c133ac3970f94a7a90030c49a8cf92f04d45e",
+      "lib/city/skytrain-ride-path.ts": "fbf46a69035599e9e9d06b6265b5503b0ee9aecb679229fc4992fdf95f577598",
+      "public/models/skytrain-routes.json": "04941b1e7d3295c7e4ffacfe8ae63e4830aef2a055a8cf8a620b24d4143529d4",
+      "lib/city/skytrain-stations.ts": "07ac6a9e44b5ea2e265e5b3252948aac9c58ebf478e3e9b920ea6fd1dd01815a"
+    },
+    "qualification": "These narrow deltas are identified separately rather than presenting the visual-source fingerprint as an exact final-release benchmark. Final release validation is a separate build/test gate.",
+    "rawAuthoringSourcesUnchanged": true,
+    "runtimePortalGeometryChanged": true
+  },
+  "limitations": [
+    "One AMD Radeon Pro560X Mac desktop browser at1280x720 cannot establish mobile or other-device performance.",
+    "The sample includes an isolated1.373-second foreground hitch; its cause needs a timing trace to attribute.",
+    "The bounded43-second capture is not the complete regional trip, all stations, both lines, night settings or every quality level.",
+    "Frame intervals include browser scheduling and capture-time activity; they are not GPU timer-query measurements."
+  ]
+}

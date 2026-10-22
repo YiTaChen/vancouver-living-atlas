@@ -1,0 +1,243 @@
+{
+  "schemaVersion": 1,
+  "status": "pass",
+  "predicateMethod": "Evaluates the exact exported production GLSL condition, with abs mapped to Math.abs, using actual production uniform setter. CPU double arithmetic and finite source samples; browser/GPU acceptance remains separate.",
+  "preservationChecks": {
+    "upperTowerPoints": 2581,
+    "streetPoints": 2581,
+    "unrelatedSeedValues": 4095,
+    "distantSameSeedStructureKeys": [
+      "osm-structure-163"
+    ],
+    "distantSameSeedPolygonVertices": 12,
+    "inactivePredicateRejects": true,
+    "unresolvedConflictingAnchors": 0
+  },
+  "scope": "Both directed Mainroutes/all4cars; actualpath own-arc positions; denseupperbody anchor grid overfirst/last250mroot; exactCitysourceextrusions plussharedfoundation. Numericalfiniteintersectionaudit.",
+  "mainWorldOrigin": [
+    2006.3480812079724,
+    4.990292026666615,
+    1430.5176599998872
+  ],
+  "mainWorldQuaternion": [
+    0,
+    0.6154156638690332,
+    0,
+    0.7882027408380645
+  ],
+  "mainWorldYaw": 1.3258264290790316,
+  "railWorldY": 12.040292026666615,
+  "railMainLocalY": 7.05,
+  "identifiedSourceBuildingId": 133436,
+  "seed": 967,
+  "marginXZMetres": 0.3,
+  "conflictBoundsMainLocal": {
+    "min": [
+      -6.4466225490660705,
+      8.148804439207595,
+      -83.24605450928262
+    ],
+    "max": [
+      6.37319519744468,
+      10.662742281606278,
+      -46.01666666667092
+    ]
+  },
+  "proposedMainLocalBox": {
+    "xMin": -6.8,
+    "xMax": 6.7,
+    "zMin": -83.6,
+    "zMax": -45.7,
+    "yMin": 6.6499999999999995,
+    "yMax": 11.05
+  },
+  "proposedWorldYRange": [
+    11.640292026666614,
+    16.040292026666616
+  ],
+  "totalCheckedAnchors": 1523040,
+  "totalConflictingAnchors": 209146,
+  "rows": [
+    {
+      "from": "stadium-chinatown",
+      "to": "main-street-science-world",
+      "rootSpacingAtMost": 0.5,
+      "rootDistanceFromMainRange": [
+        0,
+        250
+      ],
+      "checkedAnchors": 761520,
+      "conflictingAnchors": 105990,
+      "conflictBoundsMainLocal": {
+        "min": [
+          3.550695952801206,
+          8.148804439207595,
+          -83.24605450928262
+        ],
+        "max": [
+          6.37319519744468,
+          10.662742281606278,
+          -46.01666666667092
+        ]
+      },
+      "features": [
+        {
+          "id": "166039-cut1",
+          "minHeight": 5,
+          "height": 12,
+          "foundation": 4.775484956009013,
+          "firstRootDistanceMetres": 981.09046043087,
+          "firstDistanceFromMainMetres": 118.5,
+          "firstCarOffset": 26.85,
+          "firstWorld": [
+            1926.6759658584963,
+            13.15304891027727,
+            1406.2450668117315
+          ],
+          "firstMainLocal": [
+            4.22527705543996,
+            8.162756883610655,
+            -83.18023670405555
+          ],
+          "samples": 37115
+        },
+        {
+          "id": 163974,
+          "minHeight": 0,
+          "height": 62.88,
+          "foundation": 4.775484956009013,
+          "firstRootDistanceMetres": 986.59046043087,
+          "firstDistanceFromMainMetres": 113,
+          "firstCarOffset": 26.85,
+          "firstWorld": [
+            1931.860822227425,
+            13.147252942692333,
+            1408.2109576980106
+          ],
+          "firstMainLocal": [
+            3.575546866412033,
+            8.156960916025717,
+            -77.6733943034923
+          ],
+          "samples": 68875
+        }
+      ]
+    },
+    {
+      "from": "main-street-science-world",
+      "to": "stadium-chinatown",
+      "rootSpacingAtMost": 0.5,
+      "rootDistanceFromMainRange": [
+        0,
+        250
+      ],
+      "checkedAnchors": 761520,
+      "conflictingAnchors": 103156,
+      "conflictBoundsMainLocal": {
+        "min": [
+          -6.4466225490660705,
+          8.148926386829284,
+          -82.96131653473375
+        ],
+        "max": [
+          -3.6290457168454964,
+          10.662441604732827,
+          -48.98333333333328
+        ]
+      },
+      "features": [
+        {
+          "id": "166039-cut1",
+          "minHeight": 5,
+          "height": 12,
+          "foundation": 4.775484956009013,
+          "firstRootDistanceMetres": 14,
+          "firstDistanceFromMainMetres": 14,
+          "firstCarOffset": -26.85,
+          "firstWorld": [
+            1956.9313966928278,
+            13.140292026666614,
+            1424.7093649375925
+          ],
+          "firstMainLocal": [
+            -6.349999999998616,
+            8.149999999999999,
+            -49.35000000000033
+          ],
+          "samples": 86852
+        },
+        {
+          "id": 163974,
+          "minHeight": 0,
+          "height": 62.88,
+          "foundation": 4.775484956009013,
+          "firstRootDistanceMetres": 19.5,
+          "firstDistanceFromMainMetres": 19.5,
+          "firstCarOffset": -26.85,
+          "firstWorld": [
+            1952.2504244772376,
+            13.140292026666614,
+            1420.7560752799957
+          ],
+          "firstMainLocal": [
+            -3.650000000000645,
+            8.149999999999999,
+            -54.85000000000028
+          ],
+          "samples": 16304
+        }
+      ]
+    }
+  ],
+  "sourceHashes": {
+    "lib/city/skytrain-guideway-clearance.ts": "6fd293e484b60233eaaddd871b0f16d4d06b39dd40eb31666b6729ab77ec81e7",
+    "lib/city/building-bodies.ts": "cae3eb6f5cdb23bb0d8eb611ff5206ac30f72aefaeb6f466ebf4aeee91c685b1",
+    "lib/city/skytrain-travel.ts": "0948545e047d46ee8c20185277e1eb27b305e62dffeb585dcbc5f9264b38bf2c",
+    "lib/city/skytrain-ride-path.ts": "a0e28ed0367979d6ba036e7c5f90ec5d085908e422ba850114210a1973138a0d",
+    "lib/city/skytrain-ride-train.ts": "b6de83b0acbe84867bed12f9edd3c97b60b0894a43245f64735e0cef3a69de9e",
+    "lib/city/skytrain-stations.ts": "07ac6a9e44b5ea2e265e5b3252948aac9c58ebf478e3e9b920ea6fd1dd01815a",
+    "lib/city/facade-profile.ts": "86e6e4bae22d24bb7e944d6de44725baa765ab16d4c8556ef55932988a814d19",
+    "lib/city/engine.ts": "7bf44a99eadb6efb4d0a9eb1abebda89600b7971241d152bce4ea4219d711363",
+    "public/data/buildings.geojson": "57cf77f2f7afbceeb3ea4b7dcb87c33d7f56a6df57c33306792503f1dba538ec",
+    "public/data/terrain.json": "c52c4ae53c3f76ae5cdfdb32765b53d7c61fec4f7d9db03b02c7f7d722853908",
+    "public/data/beach-coast.json": "47b787f94717fd489ddcdf0c91fc30a81eee65cce7d4fa6e2eea9763b6023459",
+    "public/models/skytrain-routes.json": "04941b1e7d3295c7e4ffacfe8ae63e4830aef2a055a8cf8a620b24d4143529d4",
+    "public/models/skytrain-stations/main-street-science-world.json": "6fb6337234c3cb388272a8a12363fecad596db6070bdb6c464b1aeaf769c37b7"
+  },
+  "bodyAnchorGrid": {
+    "carCenterOffsetsMetres": [
+      26.85,
+      8.95,
+      -8.95,
+      -26.85
+    ],
+    "xMetres": [
+      -1.35,
+      -0.675,
+      0,
+      0.675,
+      1.35
+    ],
+    "zMetresRange": [
+      -8.5,
+      8.5
+    ],
+    "zIntervals": 18,
+    "yAboveRailMetres": [
+      1.1,
+      1.65,
+      2.6,
+      3.6
+    ],
+    "rootSpacingMetresAtMost": 0.5,
+    "rootDistanceFromMainMetresRange": [
+      0,
+      250
+    ]
+  },
+  "limitations": [
+    "Finite CPU anchor and source-prism audit with the exact exported production shader predicate; browser/GPU acceptance is separate.",
+    "Point-in-polygon containment includes holes and uses source building minHeight/height plus the actual shared foundation rule.",
+    "The correction is a conditional rendering aperture; source footprints, upper tower geometry and navigation/collision data are preserved."
+  ]
+}

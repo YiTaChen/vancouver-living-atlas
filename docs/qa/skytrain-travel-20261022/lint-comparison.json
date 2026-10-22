@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-22T13:53:40.553112+00:00",
+  "generatedAt": "2026-10-22T14:55:41.675273+00:00",
   "baseCommit": "8ea9f360804a28020875dd0bb6d9c1b9484fe7cb",
   "workingBranch": "codex/skytrain-station-travel-20261022",
   "tool": "Version: 1.76.0",
@@ -54,7 +54,7 @@
     },
     "lib/city/engine.ts": {
       "baseline": "5f6c7d0168b4c25d51da117dad1c15a19ccc7b3442c0f38cb7793ed4103796c7",
-      "current": "22f7a10a77328e749f106249d4f71b6e0aa02f89a8c1036d3a3c06c902953b07"
+      "current": "7bf44a99eadb6efb4d0a9eb1abebda89600b7971241d152bce4ea4219d711363"
     },
     "lib/city/types.ts": {
       "baseline": "aa4e3ef6bb183a1fe1cfc290b19365538eec4c2ec743372055d9d5857cc9d956",
@@ -62,7 +62,7 @@
     },
     "lib/city/building-bodies.ts": {
       "baseline": "dca28bd9340ec34ea531b4397dd1c69fa6946836e37224f12f3f04dbcc2efac1",
-      "current": "3a3c849126db11971a23a036a8529c7659dff9ac28c115bcfc2e052616c508d6"
+      "current": "cae3eb6f5cdb23bb0d8eb611ff5206ac30f72aefaeb6f466ebf4aeee91c685b1"
     }
   },
   "baseline": {
@@ -145,7 +145,7 @@
         "rule": "eslint(no-unused-vars)",
         "message": "Identifier 'lines' is imported but never used.",
         "severity": "error",
-        "currentLine": 97,
+        "currentLine": 98,
         "column": 37,
         "source": "import { project, unproject, rings, lines, inPolygon, hash } from './geo';",
         "baselineLine": 96
@@ -155,7 +155,7 @@
         "rule": "eslint(no-unused-vars)",
         "message": "Type 'FeatureCollection' is imported but never used.",
         "severity": "error",
-        "currentLine": 101,
+        "currentLine": 102,
         "column": 8,
         "source": "  type FeatureCollection,",
         "baselineLine": 100
@@ -165,7 +165,7 @@
         "rule": "typescript(no-explicit-any)",
         "message": "Unexpected `any`. Specify a different type.",
         "severity": "error",
-        "currentLine": 227,
+        "currentLine": 228,
         "column": 24,
         "source": "  data: Record<string, any> = {};",
         "baselineLine": 225
@@ -585,11 +585,11 @@
   "evidence": {
     "baselineJson": {
       "path": "work/skytrain-lint-baseline.json",
-      "sha256": "4089edbcdf636fe1511868e7b51364455eab9fb16f65dde37aa2a32a93fde289"
+      "sha256": "60d88518d7a7601ae5e4d6d7a1874a9e2dfe27a0b19db030c915aba036602181"
     },
     "currentJson": {
       "path": "work/skytrain-lint-current.json",
-      "sha256": "afcbcb097e7894b259578583d0af341e6cb84494edc80704fddbb1e9885c8103"
+      "sha256": "c77bb449f63a542aaa9e13c55e25e17909f521fabc289f257788886358fce858"
     },
     "baselineStderr": {
       "path": "work/skytrain-lint-baseline.stderr.log",

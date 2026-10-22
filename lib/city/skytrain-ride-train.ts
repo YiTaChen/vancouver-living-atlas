@@ -4,6 +4,10 @@ import { SkyTrainCabinAssets, type CabinOwner } from './skytrain-cabin-assets';
 import type { LineId } from './skytrain-network';
 import type { VisualQuality } from './quality';
 import { openSkyTrainDoorApertures } from './skytrain-door-aperture';
+import type { SkyTrainRidePath } from './skytrain-ride-path';
+
+const EXPO_OFFSETS = [26.85, 8.95, -8.95, -26.85] as const;
+const CANADA_OFFSETS = [10.5, -10.5] as const;
 
 /** The exhibit assets remain immutable. This adapter supplies a separate moving
  * consist, selected central door and passenger frame for the regional service. */
@@ -21,6 +25,19 @@ export class SkyTrainRideTrain {
   }[] = [];
   private expoDoors: THREE.InstancedMesh | null = null;
   private expoDoorGlass: THREE.InstancedMesh | null = null;
+  private shellInstances: THREE.InstancedMesh[] = [];
+  private cars: THREE.Group[] = [];
+  private staticFrames = true;
+  private readonly inverseRoot = new THREE.Matrix4();
+  private readonly carMatrix = new THREE.Matrix4();
+  private readonly doorMatrix = new THREE.Matrix4();
+  private readonly instanceMatrix = new THREE.Matrix4();
+  private readonly unitScale = new THREE.Vector3(1, 1, 1);
+  private readonly eyeOffset = new THREE.Vector3();
+  private readonly pose = {
+    position: new THREE.Vector3(),
+    quaternion: new THREE.Quaternion(),
+  };
   private line: LineId = 'expo';
   private generation = 0;
   private disposed = false;
@@ -33,6 +50,15 @@ export class SkyTrainRideTrain {
   }
   get serviceLine() {
     return this.line;
+  }
+  get carFrames(): readonly THREE.Group[] {
+    return this.cars;
+  }
+  get stationAligned() {
+    return this.staticFrames;
+  }
+  private get offsets(): readonly number[] {
+    return this.line === 'expo' ? EXPO_OFFSETS : CANADA_OFFSETS;
   }
   get carOffset() {
     return this.line === 'expo' ? 26.85 : 10.5;
@@ -58,17 +84,18 @@ export class SkyTrainRideTrain {
     this.owner = owner;
     // Mark V's authored cabin has a feet=0 datum. Canada's loaded floor top is
     // 1.10m above rail; its older display eye is corrected below for this ride.
-    owner.group.position.set(0, line === 'expo' ? 0.95 : 0, this.carOffset);
-    this.group.add(owner.group);
+    this.ensureCarFrames();
+    owner.group.position.set(0, line === 'expo' ? 0.95 : 0, 0);
+    this.cars[0].add(owner.group);
     if (line === 'expo') {
       openSkyTrainDoorApertures(owner.group);
       this.buildExpoShell();
     } else {
       const second = owner.group.clone(true);
-      second.position.z = -10.5;
+      second.position.z = 0;
       second.rotation.y = Math.PI;
       second.name = 'Canada Line second car — shared original geometry';
-      this.group.add(second);
+      this.cars[1].add(second);
       for (const car of [owner.group, second])
         car.traverse((node) => {
           const match = /^door-(left|right)-\d-([ab])$/.exec(node.name);
@@ -89,18 +116,106 @@ export class SkyTrainRideTrain {
     const view = owner.descriptor.viewpoints.find((v) => v.id === 'standing')!;
     this.facingYaw = Math.atan2(view.facingXZ[0], view.facingXZ[1]);
     this.eye.fromArray(view.positionM).add(owner.group.position);
+    this.eye.z += this.carOffset;
     this.eye.y = this.floorAboveRail + 1.65;
-    this.passenger.position.copy(this.eye).add(new THREE.Vector3(0, -1.65, 0));
+    this.syncPassengerAnchor();
     // Local, shadow-free cabin lamps preserve the authored PBR materials. Their
     // small range does not raise the city's night-time ambient illumination.
     for (const z of [-4, 4]) {
       const light = new THREE.PointLight(0xe8f5ff, 28, 17, 1.5);
-      light.position.set(0, this.floorAboveRail + 2.1, this.carOffset + z);
-      this.group.add(light);
+      light.position.set(0, this.floorAboveRail + 2.1, z);
+      this.cars[0].add(light);
     }
     this.doorAmount = 0;
-    this.animateDoors();
+    this.resetCarFrames();
     return true;
+  }
+  private ensureCarFrames() {
+    if (this.cars.length === this.offsets.length) return;
+    for (const car of this.cars) car.removeFromParent();
+    this.cars = this.offsets.map((offset, index) => {
+      const car = new THREE.Group();
+      car.name = `SkyTrain ${this.line} car ${index}`;
+      car.position.z = offset;
+      car.updateMatrix();
+      car.matrixAutoUpdate = false;
+      this.group.add(car);
+      return car;
+    });
+    this.cars[0].add(this.passenger);
+    this.syncPassengerAnchor();
+  }
+  private syncPassengerAnchor() {
+    this.passenger.position.copy(this.eye);
+    this.passenger.position.y -= 1.65;
+    this.passenger.position.z -= this.carOffset;
+  }
+  /** Reestablish the exact authored straight consist for a station stop. */
+  resetCarFrames() {
+    this.ensureCarFrames();
+    this.syncPassengerAnchor();
+    for (let i = 0; i < this.cars.length; i++) {
+      const car = this.cars[i];
+      car.position.set(0, 0, this.offsets[i]);
+      car.quaternion.identity();
+      car.scale.set(1, 1, 1);
+      car.updateMatrix();
+    }
+    this.staticFrames = true;
+    this.updateInstances();
+    this.group.updateMatrixWorld(true);
+  }
+  /** Each car follows its own physical arc position; the root remains the
+   * train stop/reference pose used by the controller's physical proofs. */
+  setPathPose(path: SkyTrainRidePath, progress: number) {
+    this.ensureCarFrames();
+    const u = THREE.MathUtils.clamp(
+      Number.isFinite(progress) ? progress : 0,
+      0,
+      1,
+    );
+    const distance = u * path.length;
+    path.sampleDistance(distance, this.pose);
+    this.group.position.copy(this.pose.position);
+    this.group.quaternion.copy(this.pose.quaternion);
+    this.group.updateWorldMatrix(true, false);
+    this.inverseRoot.copy(this.group.matrixWorld).invert();
+    for (let i = 0; i < this.cars.length; i++) {
+      path.sampleDistance(
+        distance + this.offsets[i] * path.start.motionSign,
+        this.pose,
+      );
+      this.carMatrix.compose(
+        this.pose.position,
+        this.pose.quaternion,
+        this.unitScale,
+      );
+      const car = this.cars[i];
+      car.matrix.multiplyMatrices(this.inverseRoot, this.carMatrix);
+      car.matrix.decompose(car.position, car.quaternion, car.scale);
+    }
+    this.staticFrames = u === 0 || u === 1;
+    this.updateInstances();
+    this.group.updateMatrixWorld(true);
+  }
+  /** Occupied car's standing anchor and orientation, independent of the
+   * reference root's rigid offset while other cars negotiate a curve. */
+  passengerWorldPose(position: THREE.Vector3, quaternion: THREE.Quaternion) {
+    this.ensureCarFrames();
+    this.group.updateWorldMatrix(true, true);
+    this.passenger.getWorldPosition(position);
+    this.cars[0].getWorldQuaternion(quaternion);
+    this.eyeOffset.set(0, 1.65, 0).applyQuaternion(quaternion);
+    position.add(this.eyeOffset);
+  }
+  private updateInstances() {
+    for (const mesh of this.shellInstances) {
+      for (let i = 0; i < this.cars.length; i++)
+        mesh.setMatrixAt(i, this.cars[i].matrix);
+      mesh.instanceMatrix.needsUpdate = true;
+      mesh.computeBoundingSphere();
+    }
+    this.animateDoors();
   }
   private buildExpoShell() {
     const batches = new Map<number, THREE.BufferGeometry[]>();
@@ -117,7 +232,8 @@ export class SkyTrainRideTrain {
       parts.push(new THREE.BoxGeometry(w, h, d).translate(x, y + 0.95, z));
       batches.set(color, parts);
     };
-    for (const offset of [26.85, 8.95, -8.95, -26.85]) {
+    {
+      const offset = 0;
       add(0x263842, 2.4, 0.45, 16.8, 0, -0.35, offset);
       add(0xd8e2e6, 2.65, 0.15, 17, 0, 2.48, offset);
       for (const side of [-1, 1]) {
@@ -153,9 +269,11 @@ export class SkyTrainRideTrain {
         material.depthWrite = false;
       }
       this.resources.push(geometry, material);
-      const mesh = new THREE.Mesh(geometry, material);
+      const mesh = new THREE.InstancedMesh(geometry, material, 4);
+      mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
       mesh.name = 'Original service exterior — Mark V inspired';
       this.group.add(mesh);
+      this.shellInstances.push(mesh);
     }
     const frame = [
       new THREE.BoxGeometry(0.045, 0.7, 0.69).translate(0, -0.64, 0),
@@ -174,6 +292,7 @@ export class SkyTrainRideTrain {
     this.resources.push(geometry, material);
     this.expoDoors = new THREE.InstancedMesh(geometry, material, 48);
     this.expoDoors.name = 'Animated platform-side train doors';
+    this.expoDoors.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
     this.group.add(this.expoDoors);
     const glass = new THREE.BoxGeometry(0.015, 1.15, 0.58).translate(
       0,
@@ -190,6 +309,7 @@ export class SkyTrainRideTrain {
     this.resources.push(glass, glassMaterial);
     this.expoDoorGlass = new THREE.InstancedMesh(glass, glassMaterial, 48);
     this.expoDoorGlass.name = 'Animated train-door glazing';
+    this.expoDoorGlass.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
     this.group.add(this.expoDoorGlass);
   }
   setDoors(open: boolean, side: 'left' | 'right', dt: number) {
@@ -215,9 +335,8 @@ export class SkyTrainRideTrain {
         door.z +
         door.sign * (door.side === this.side ? this.doorAmount * 0.78 : 0);
     if (!this.expoDoors) return;
-    const matrix = new THREE.Matrix4();
     let index = 0;
-    for (const offset of [26.85, 8.95, -8.95, -26.85])
+    for (const car of this.cars)
       for (const sign of [1, -1])
         for (const z of [-4.9, 0, 4.9])
           for (const leaf of [-1, 1]) {
@@ -225,13 +344,14 @@ export class SkyTrainRideTrain {
               (sign === 1 ? 'left' : 'right') === this.side
                 ? this.doorAmount * 0.78
                 : 0;
-            matrix.makeTranslation(
+            this.doorMatrix.makeTranslation(
               sign * 1.285,
               1.94,
-              offset + z + leaf * (0.35 + opening),
+              z + leaf * (0.35 + opening),
             );
-            this.expoDoors.setMatrixAt(index, matrix);
-            this.expoDoorGlass?.setMatrixAt(index++, matrix);
+            this.instanceMatrix.multiplyMatrices(car.matrix, this.doorMatrix);
+            this.expoDoors.setMatrixAt(index, this.instanceMatrix);
+            this.expoDoorGlass?.setMatrixAt(index++, this.instanceMatrix);
           }
     this.expoDoors.instanceMatrix.needsUpdate = true;
     this.expoDoors.computeBoundingSphere();
@@ -244,9 +364,13 @@ export class SkyTrainRideTrain {
     // Clones share the asset owner's immutable buffers. Only that owner releases
     // those resources; procedural exterior buffers are independently owned.
     this.group.clear();
+    this.passenger.removeFromParent();
+    this.cars = [];
     this.owner = null;
     this.resources.forEach((resource) => resource.dispose());
     this.resources = [];
+    this.shellInstances.forEach((mesh) => mesh.dispose());
+    this.shellInstances = [];
     this.doors = [];
     this.expoDoors?.dispose();
     this.expoDoors = null;

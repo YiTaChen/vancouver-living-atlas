@@ -4,6 +4,7 @@ import {
   SkyTrainJourney,
   SKYTRAIN_STATIONS,
   skyTrainStation,
+  skyTrainSegmentLength,
   type LineId,
   type StationId,
   type SkyTrainDirection,
@@ -26,6 +27,7 @@ import {
 } from './skytrain-ride-path';
 import type { SkyTrainTravelSnapshot } from './skytrain-travel-types';
 import { safeTouchAxis } from './touch-input';
+import { setMainSkyTrainGuideway } from './skytrain-guideway-clearance';
 
 export const EMPTY_SKYTRAIN_TRAVEL: SkyTrainTravelSnapshot = {
   phase: 'idle',
@@ -84,10 +86,19 @@ export class SkyTrainTravel {
   private yaw = 0;
   private pitch = -0.03;
   private lookYaw = 0;
+  private readonly passengerEye = new THREE.Vector3();
+  private readonly passengerQuaternion = new THREE.Quaternion();
+  private readonly passengerEuler = new THREE.Euler(0, 0, 0, 'YXZ');
   private drag: { id: number; x: number; y: number } | null = null;
   private walkDistance = 0;
   private tube: THREE.Group | null = null;
   private pathKey = '';
+  private arrivalPreparation: {
+    id: StationId;
+    generation: number;
+    ready: boolean;
+    promise: Promise<SkyTrainStationOwner | null>;
+  } | null = null;
   private readonly life = new AbortController();
   onChange = () => {};
   constructor(private readonly city: CityEngine) {
@@ -124,7 +135,16 @@ export class SkyTrainTravel {
     return this.journey?.snapshot().aboard ?? false;
   }
   get speedMps() {
-    return this.journey?.snapshot().speedMps ?? 0;
+    const j = this.journey?.snapshot();
+    if (!j || j.phase !== 'riding') return 0;
+    const path = this.paths.get(
+      keyFor(j.lineId, j.segmentFromStation, j.segmentToStation),
+    );
+    if (!path) return 0;
+    return (
+      (j.speedMps * path.length) /
+      skyTrainSegmentLength(j.segmentFromStation, j.segmentToStation, j.lineId)
+    );
   }
   get underground() {
     if (!this.active) return false;
@@ -196,7 +216,7 @@ export class SkyTrainTravel {
       canExit,
       canLeave: canExit,
       canChangeLevel,
-      speedMps: j?.speedMps ?? 0,
+      speedMps: this.speedMps,
       travelProgress: j?.progress ?? 0,
       error: this.error,
       busy: this.busy,
@@ -225,17 +245,38 @@ export class SkyTrainTravel {
   }
   private updateBuildingReplacement() {
     const uniform = this.city.uniforms?.skyTrainReplacement;
-    if (!uniform) return;
-    const seed =
-      this.active && this.owner?.data.id === 'main-street-science-world'
-        ? this.city.data.buildingProfiles?.get('osm-structure-303')?.seed
-        : undefined;
-    if (Number.isFinite(seed) && this.owner)
+    const main =
+      this.active &&
+      !this.error &&
+      this.owner?.data.id === 'main-street-science-world';
+    const seed = main
+      ? this.city.data.buildingProfiles?.get('osm-structure-303')?.seed
+      : undefined;
+    if (uniform && Number.isFinite(seed) && this.owner)
       uniform.value.set(seed, this.owner.origin[0], this.owner.origin[2], 170);
-    else uniform.value.set(-1, 0, 0, 0);
+    else uniform?.value.set(-1, 0, 0, 0);
+    if (this.city.uniforms)
+      setMainSkyTrainGuideway(
+        this.city.uniforms,
+        main && this.owner
+          ? {
+              origin: this.owner.origin,
+              yaw: this.owner.yaw,
+              railY: this.owner.toWorld(
+                this.owner.trainStop('expo', 'westbound').position,
+              )[1],
+            }
+          : null,
+        this.city.data.buildingProfiles?.get('133436')?.seed,
+      );
   }
   private trainAtPlatform() {
-    if (!this.owner || this.train.serviceLine !== this.line) return false;
+    if (
+      !this.owner ||
+      this.train.serviceLine !== this.line ||
+      !this.train.stationAligned
+    )
+      return false;
     const stop = this.owner.trainStop(this.line, this.direction);
     const expected = stationWorldPose(
       this.owner.data,
@@ -279,6 +320,7 @@ export class SkyTrainTravel {
     )
       return false;
     const generation = ++this.generation;
+    this.arrivalPreparation = null;
     this.phase = 'loading';
     this.busy = true;
     this.error = null;
@@ -333,13 +375,7 @@ export class SkyTrainTravel {
       this.train.group.visible = true;
       this.level = 'concourse';
       this.updateCamera();
-      // Compile this consist with the city's actual lighting while the loading
-      // state is visible, rather than compiling a newly visible cabin on board.
-      await this.city.renderer.compileAsync?.(
-        this.train.group,
-        this.city.camera,
-        this.city.scene,
-      );
+      await this.precompile(this.train.group);
       if (this.disposed || generation !== this.generation) return false;
       this.phase = 'station';
       this.busy = false;
@@ -408,6 +444,7 @@ export class SkyTrainTravel {
           segment.to,
           pose(a),
           pose(b),
+          (x, z) => this.city.elevation(x, z),
         ),
       );
     }
@@ -459,12 +496,7 @@ export class SkyTrainTravel {
       )
         throw new Error('Train unavailable');
       if (this.disposed) return false;
-      if (needsTrain)
-        await this.city.renderer.compileAsync?.(
-          this.train.group,
-          this.city.camera,
-          this.city.scene,
-        );
+      if (needsTrain) await this.precompile(this.train.group);
       if (this.disposed) return false;
       this.line = j.lineId;
       this.direction = j.directionName;
@@ -489,6 +521,7 @@ export class SkyTrainTravel {
       return true;
     } catch {
       this.error = 'unavailable';
+      this.updateBuildingReplacement();
       return false;
     } finally {
       this.busy = false;
@@ -572,6 +605,7 @@ export class SkyTrainTravel {
     const point = this.exitPoint();
     if (!point) return false;
     this.phase = 'idle';
+    this.arrivalPreparation = null;
     this.updateBuildingReplacement();
     this.busy = false;
     this.station = null;
@@ -613,7 +647,7 @@ export class SkyTrainTravel {
       );
     this.train.group.position.fromArray(world.position);
     this.train.group.quaternion.fromArray(world.quaternion);
-    this.train.group.updateMatrixWorld(true);
+    this.train.resetCarFrames();
   }
   update(dt: number) {
     if (
@@ -653,11 +687,16 @@ export class SkyTrainTravel {
           this.pathKey = key;
           this.buildTunnel(path);
         }
-        const pose = path.sample(j.progress);
-        this.train.group.position.copy(pose.position);
-        this.train.group.quaternion.copy(pose.quaternion);
-        this.train.group.updateMatrixWorld(true);
-        if (this.owner) this.owner.group.visible = j.progress < 0.08;
+        this.train.setPathPose(path, j.progress);
+        if (this.owner)
+          this.owner.group.visible =
+            this.owner.data.id === j.segmentToStation
+              ? Boolean(
+                  this.arrivalPreparation?.id === j.segmentToStation &&
+                  this.arrivalPreparation.ready,
+                )
+              : j.progress < 0.08;
+        if (j.progress > 0.15) void this.prepareArrival(j.segmentToStation);
       } else if (
         j.phase === 'arrived' &&
         j.aboard &&
@@ -716,24 +755,94 @@ export class SkyTrainTravel {
     }
     this.updateCamera();
   }
+  private prepareArrival(id: StationId) {
+    const generation = this.generation;
+    if (
+      this.arrivalPreparation?.id === id &&
+      this.arrivalPreparation.generation === generation
+    )
+      return this.arrivalPreparation.promise;
+    const preparation = {
+      id,
+      generation,
+      ready: false,
+      promise: Promise.resolve<SkyTrainStationOwner | null>(null),
+    };
+    this.arrivalPreparation = preparation;
+    const current = () =>
+      !this.disposed &&
+      generation === this.generation &&
+      this.arrivalPreparation === preparation &&
+      this.aboard &&
+      this.journey?.snapshot().segmentToStation === id;
+    preparation.promise = (async () => {
+      try {
+        // The source is already behind the passenger and hidden. The station
+        // owner swaps exactly one GPU interior, ahead of the untubed approach.
+        const owner = await this.stations.load(
+          id,
+          this.line,
+          this.city.settings.quality,
+        );
+        if (!current()) return null;
+        this.owner = owner;
+        owner.group.visible = false;
+        this.updateBuildingReplacement();
+        await this.precompile(owner.group);
+        if (!current()) return null;
+        preparation.ready = true;
+        owner.group.visible = true;
+        return owner;
+      } catch {
+        // Keep the moving passenger attached to the train. Arrival can retry
+        // this exact station; failed preparation never opens an early exit.
+        return null;
+      }
+    })();
+    return preparation.promise;
+  }
+  private async precompile(subtree: THREE.Object3D) {
+    const visible = subtree.visible;
+    let pending: Promise<unknown> | undefined;
+    subtree.visible = true;
+    try {
+      // Three gathers lights synchronously. Compile the whole scene so each
+      // visible light is counted once and city materials get the new cabin /
+      // station lighting variant too. Restore visibility before any frame can
+      // expose a destination whose asynchronous shader work is still pending.
+      pending = this.city.renderer.compileAsync?.(
+        this.city.scene,
+        this.city.camera,
+      );
+    } finally {
+      subtree.visible = visible;
+    }
+    await pending;
+  }
   private async arrive(id: StationId) {
     const generation = this.generation;
     this.clearInput();
     try {
-      const owner = await this.stations.load(
-        id,
-        this.line,
-        this.city.settings.quality,
-      );
+      let owner = await this.prepareArrival(id);
       if (this.disposed || generation !== this.generation) return;
+      if (!owner) {
+        this.arrivalPreparation = null;
+        owner = await this.prepareArrival(id);
+      }
+      if (this.disposed || generation !== this.generation) return;
+      if (!owner || owner.data.id !== id)
+        throw new Error('Station unavailable');
       this.owner = owner;
+      this.arrivalPreparation = null;
       this.station = id;
+      owner.group.visible = true;
       this.placeAtStation();
       this.clearTube();
       this.pathKey = '';
       this.updateCamera();
     } catch {
       this.error = 'unavailable';
+      this.updateBuildingReplacement();
     } finally {
       this.busy = false;
       this.publish();
@@ -743,9 +852,13 @@ export class SkyTrainTravel {
     if (!this.active || !this.owner) return;
     let eye: THREE.Vector3, yaw: number;
     if (this.aboard) {
-      eye = this.train.eye.clone().applyMatrix4(this.train.group.matrixWorld);
+      this.train.passengerWorldPose(
+        this.passengerEye,
+        this.passengerQuaternion,
+      );
+      eye = this.passengerEye;
       yaw =
-        new THREE.Euler().setFromQuaternion(this.train.group.quaternion, 'YXZ')
+        this.passengerEuler.setFromQuaternion(this.passengerQuaternion, 'YXZ')
           .y +
         this.train.facingYaw +
         this.lookYaw;
@@ -796,8 +909,12 @@ export class SkyTrainTravel {
     const count = Math.ceil(path.length / 8);
     for (let i = 0; i <= count; i++) {
       const p = path.curve.getPointAt(i / count),
+        distanceAlong = (i / count) * path.length,
         underground = p.y + 3.6 < this.city.elevation(p.x, p.z);
-      if (underground && i * 8 > 45 && (count - i) * 8 > 45)
+      // Canada platforms plus their authored rail buffers cover 47 m. Start
+      // within 40 m at this sampling interval, leaving an overlap at both
+      // portals instead of exposing a narrow strip of the outside world.
+      if (underground && distanceAlong > 32 && path.length - distanceAlong > 32)
         run.push(p.clone().add(new THREE.Vector3(0, 1.4, 0)));
       else flush();
     }
@@ -889,6 +1006,7 @@ export class SkyTrainTravel {
     if (this.disposed) return;
     this.disposed = true;
     this.phase = 'idle';
+    this.arrivalPreparation = null;
     this.updateBuildingReplacement();
     ++this.generation;
     this.life.abort();

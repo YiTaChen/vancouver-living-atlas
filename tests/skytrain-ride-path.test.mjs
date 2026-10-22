@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import * as THREE from 'three';
 import { cityModule } from './helpers/city-modules.mjs';
+import { cityElevation } from './helpers/city-elevation.mjs';
 import {
   buildSkyTrainRoutes,
   serializeSkyTrainRoutes,
@@ -27,7 +28,7 @@ const routes = JSON.parse(routeBytes);
 const label = (s) => `${s.lineId}:${s.from}:${s.to}`;
 const near = (a, b, epsilon = 1e-6) =>
   assert(Math.abs(a - b) < epsilon, `${a} != ${b}`);
-const pose = (segment, stationId) => {
+const pose = (segment, stationId, heightAt = () => 32) => {
   const raw = validateRuntimeStation(
     JSON.parse(
       readFileSync(`public/models/skytrain-stations/${stationId}.json`),
@@ -38,7 +39,7 @@ const pose = (segment, stationId) => {
   const stop = trainStopFor(data, segment.lineId, segment.direction);
   const world = stationWorldPose(
     data,
-    () => 32,
+    heightAt,
     stop.position,
     stop.quaternion,
   );
@@ -59,6 +60,23 @@ const actualPath = (segment) =>
   );
 const finitePose = (p) =>
   [...p.position.toArray(), ...p.quaternion.toArray()].every(Number.isFinite);
+const terrainPaths = new Map();
+const terrainPath = (s) => {
+  if (!terrainPaths.has(label(s)))
+    terrainPaths.set(
+      label(s),
+      new SkyTrainRidePath(
+        routes,
+        s.lineId,
+        s.from,
+        s.to,
+        pose(s, s.from, cityElevation),
+        pose(s, s.to, cityElevation),
+        cityElevation,
+      ),
+    );
+  return terrainPaths.get(label(s));
+};
 
 test('public route JSON exactly reproduces the retained GTFS snapshot and its declared provenance', () => {
   assert.equal(routes.schema, 1);
@@ -335,6 +353,180 @@ test('actual station-to-GTFS joins cannot snap the train orientation over a frac
       last = p;
     }
   }
+});
+
+test('actual terrain profiles keep every underground rigid consist, passenger camera and tube crown below the city surface', () => {
+  const before = JSON.stringify(routes);
+  for (const s of routes.segments) {
+    const path = terrainPath(s),
+      underground = ![s.from, s.to].includes('main-street-science-world');
+    if (!underground) {
+      assert.equal(path.terrainProfile, null, 'Main Street remains elevated');
+      continue;
+    }
+    assert(path.terrainProfile, label(s));
+    assert(path.terrainProfile.maximumPitchDegrees < 6, label(s));
+    const half = s.lineId === 'expo' ? 35.35 : 20.3,
+      count = Math.ceil(path.length / 0.75),
+      anchor = new THREE.Vector3();
+    let last = path.sample(0);
+    for (let i = 0; i <= count; i++) {
+      const p = path.sample(i / count);
+      assert(finitePose(p), label(s));
+      assert(
+        p.quaternion.angleTo(last.quaternion) <
+          p.position.distanceTo(last.position) * 0.12 + 0.001,
+        `${label(s)} orientation discontinuity at ${i}`,
+      );
+      for (let z = -half; z <= half + 0.01; z += (2 * half) / 36)
+        for (const x of [-1.4, 0, 1.4]) {
+          anchor.set(x, 4.9, z).applyQuaternion(p.quaternion).add(p.position);
+          assert(
+            cityElevation(anchor.x, anchor.z) - anchor.y > 0.19,
+            `${label(s)}: rigid tube-crown envelope exposed at ${i},${x},${z}`,
+          );
+        }
+      const occupied = path.sampleDistance(
+        (i / count) * path.length +
+          (s.lineId === 'expo' ? 26.85 : 10.5) * path.start.motionSign,
+      );
+      anchor
+        .set(0, s.lineId === 'expo' ? 2.6 : 2.75, 0)
+        .applyQuaternion(occupied.quaternion)
+        .add(occupied.position);
+      assert(cityElevation(anchor.x, anchor.z) - anchor.y > 1.4, label(s));
+      last = p;
+    }
+    assert(path.sample(0).position.distanceTo(path.start.position) < 1e-6);
+    assert(path.sample(1).position.distanceTo(path.end.position) < 1e-6);
+    assert(path.sample(0).quaternion.angleTo(path.start.quaternion) < 1e-6);
+    assert(path.sample(1).quaternion.angleTo(path.end.quaternion) < 1e-6);
+  }
+  for (const [from, to] of [
+    ['waterfront', 'burrard'],
+    ['burrard', 'waterfront'],
+  ]) {
+    const s = routes.segments.find((v) => v.from === from && v.to === to);
+    assert(
+      terrainPath(s).terrainProfile.depressionM >= 5,
+      `${from} terrain regression must actually lower the old exposed rail`,
+    );
+  }
+  assert.equal(
+    JSON.stringify(routes),
+    before,
+    'protected GTFS coordinates never change',
+  );
+});
+
+test('station approaches stay straight and level until each articulated car clears the portal buffer', () => {
+  for (const s of routes.segments) {
+    const path = terrainPath(s),
+      lead = s.lineId === 'expo' ? 75 : 65;
+    for (const end of [false, true]) {
+      const stop = end ? path.end : path.start,
+        direction = new THREE.Vector3(0, 0, stop.motionSign)
+          .applyQuaternion(stop.quaternion)
+          .multiplyScalar(end ? -1 : 1);
+      for (let distance = 0; distance < lead - 1; distance += 0.75) {
+        const p = path.sample(
+            end ? 1 - distance / path.length : distance / path.length,
+          ),
+          expected = stop.position.clone().addScaledVector(direction, distance);
+        assert(
+          p.position.distanceTo(expected) < 0.015,
+          `${label(s)} endpoint lead bends at ${distance}m`,
+        );
+        assert(Math.abs(p.position.y - stop.position.y) < 1e-6, label(s));
+        assert(p.quaternion.angleTo(stop.quaternion) < 1e-6, label(s));
+      }
+    }
+  }
+});
+
+test('per-car physical arc sampling reuses poses and preserves every stationary car at both exact platform frames', () => {
+  const target = {
+    position: new THREE.Vector3(),
+    quaternion: new THREE.Quaternion(),
+  };
+  for (const s of routes.segments) {
+    const path = terrainPath(s),
+      offsets =
+        s.lineId === 'expo' ? [26.85, 8.95, -8.95, -26.85] : [10.5, -10.5];
+    for (const [distance, stop] of [
+      [0, path.start],
+      [path.length, path.end],
+    ])
+      for (const offset of offsets) {
+        const result = path.sampleDistance(
+            distance + offset * stop.motionSign,
+            target,
+          ),
+          expected = new THREE.Vector3(0, 0, offset)
+            .applyQuaternion(stop.quaternion)
+            .add(stop.position);
+        assert.equal(result, target);
+        assert(result.position.distanceTo(expected) < 0.001, label(s));
+        assert(result.quaternion.angleTo(stop.quaternion) < 1e-6, label(s));
+      }
+    assert.equal(path.sample(0.5, target), target);
+    assert(target.position.distanceTo(path.curve.getPointAt(0.5)) < 1e-9);
+    for (const invalid of [NaN, Infinity, -Infinity])
+      assert.throws(() => path.sampleDistance(invalid, target), /arc distance/);
+  }
+});
+
+test('actual emitted eight-metre tunnel mesh never breaks the underground terrain surface', () => {
+  for (const s of routes.segments) {
+    if ([s.from, s.to].includes('main-street-science-world')) continue;
+    const path = terrainPath(s),
+      count = Math.ceil(path.length / 8),
+      points = [];
+    for (let i = 0; i <= count; i++) {
+      const distance = (i / count) * path.length,
+        p = path.curve.getPointAt(i / count);
+      if (distance > 32 && path.length - distance > 32) {
+        assert(
+          p.y + 3.6 < cityElevation(p.x, p.z),
+          'tunnel predicate has no interior hole',
+        );
+        points.push(p.clone().add(new THREE.Vector3(0, 1.4, 0)));
+      }
+    }
+    const geometry = new THREE.TubeGeometry(
+        new THREE.CatmullRomCurve3(points),
+        Math.max(8, points.length * 2),
+        3.5,
+        8,
+        false,
+      ),
+      positions = geometry.getAttribute('position');
+    for (let i = 0; i < positions.count; i++)
+      assert(
+        cityElevation(positions.getX(i), positions.getZ(i)) -
+          positions.getY(i) >
+          0.19,
+        `${label(s)} tunnel mesh vertex ${i} reaches the surface`,
+      );
+    geometry.dispose();
+  }
+});
+
+test('invalid or impossible terrain fails without changing a fixed station or the source alignment', () => {
+  const s = routes.segments[0],
+    a = pose(s, s.from, cityElevation),
+    b = pose(s, s.to, cityElevation),
+    before = JSON.stringify([a, b, routes]);
+  assert.throws(
+    () => new SkyTrainRidePath(routes, s.lineId, s.from, s.to, a, b, () => NaN),
+    /terrain height/,
+  );
+  assert.throws(
+    () =>
+      new SkyTrainRidePath(routes, s.lineId, s.from, s.to, a, b, () => -100),
+    /preserve station stops/,
+  );
+  assert.equal(JSON.stringify([a, b, routes]), before);
 });
 
 test('pose progress clamps invalid values to a stable finite endpoint and never mutates returned poses', () => {

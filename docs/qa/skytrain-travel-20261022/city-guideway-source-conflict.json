@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "status": "confirmed-source-conflict",
+  "scope": "Why a bounded rendered guideway clearance is needed near Main Street: the retained raw GTFS alignments themselves cross coarse City building extrusions. This is a source-conflict diagnosis, not proof of the final rendering correction.",
+  "method": {
+    "sourceGeometry": "Unmodified raw GTFS directed polylines, sampled every0.5m in their first/last250m near Main Street; no runtime Hermite, Catmull or station-lead interpolation is used for XZ.",
+    "vertical": "Rail height linearly interpolates the actual terrain-derived station stop elevations; passenger eye is2.6m above rail.",
+    "buildingExtrusions": "Exact projected source polygons including holes, shared structure foundation at the first structure polygon-centre City elevation minus0.4m, and source minHeight/height, matching createBuildingBodies before any runtime render carve.",
+    "finding": "Both raw directed GTFS lines intersect source City buildingId133436, feature166039-cut1 and163974, at passenger eye height. The same features intersect the runtime occupied carriage; this overlap is not introduced by the new straight station lead or quintic joins.",
+    "interpretation": "The source records provide coarse historic building massing and representative transit geometry. A local guideway opening can reconcile those records; this does not establish the architectural dimensions of a real-world tunnel or station."
+  },
+  "sourceHashes": {
+    "public/data/buildings.geojson": "57cf77f2f7afbceeb3ea4b7dcb87c33d7f56a6df57c33306792503f1dba538ec",
+    "public/models/skytrain-routes.json": "04941b1e7d3295c7e4ffacfe8ae63e4830aef2a055a8cf8a620b24d4143529d4",
+    "public/data/terrain.json": "c52c4ae53c3f76ae5cdfdb32765b53d7c61fec4f7d9db03b02c7f7d722853908",
+    "public/data/beach-coast.json": "47b787f94717fd489ddcdf0c91fc30a81eee65cce7d4fa6e2eea9763b6023459",
+    "tools/transit/city-life-sources/transit-source-snapshot.json": "4e40f326c64146cda8dd6ece93ebab29e4ab58271311116029e819e0c1585301",
+    "public/models/skytrain-stations/main-street-science-world.json": "6fb6337234c3cb388272a8a12363fecad596db6070bdb6c464b1aeaf769c37b7"
+  },
+  "sharedStructureFoundationMetres": 4.775484956009013,
+  "identifiedSourceFeatures": [
+    "163974",
+    "166039-cut1"
+  ],
+  "sourceBuildingId": 133436,
+  "rows": [
+    {
+      "line": "expo",
+      "from": "stadium-chinatown",
+      "to": "main-street-science-world",
+      "sourceShapeId": "322353",
+      "sourceStopIds": [
+        "8042",
+        "8043"
+      ],
+      "method": "Unmodified retained GTFS polyline interpolated every0.5m; railY linearly interpolates the actual runtime station stop railY, plus2.6m eye height. First/last250m nearMain. Exact source polygon containment with holes and createBuildingBodies shared foundation/minHeight/height rules.",
+      "actualStartRailY": -1.3358556099940015,
+      "actualEndRailY": 12.040292026666615,
+      "rawPolylineLength": 1049.8265440493235,
+      "hits": [
+        {
+          "properties": {
+            "id": "166039-cut1",
+            "buildingId": 133436,
+            "height": 12,
+            "base": 3.67,
+            "roof": "Pitched",
+            "area": 2333.7,
+            "source": "cov-2009",
+            "minHeight": 5,
+            "name": null,
+            "reconciliation": "City solid clipped against elevated OSM part"
+          },
+          "foundation": 4.775484956009013,
+          "firstRawSourceDistance": 967.5,
+          "remainingRawSourceDistance": 82.3265440493235,
+          "passengerEye": [
+            1926.1298785683796,
+            13.591345404139552,
+            1408.9818855948952
+          ]
+        },
+        {
+          "properties": {
+            "id": 163974,
+            "buildingId": 133436,
+            "height": 62.88,
+            "base": 3.73,
+            "roof": "Pitched",
+            "area": 2333.7,
+            "source": "cov-2009",
+            "minHeight": 0,
+            "name": null
+          },
+          "foundation": 4.775484956009013,
+          "firstRawSourceDistance": 973,
+          "remainingRawSourceDistance": 76.8265440493235,
+          "passengerEye": [
+            1931.4336810948937,
+            13.661422515847805,
+            1410.4377972542147
+          ]
+        }
+      ]
+    },
+    {
+      "line": "expo",
+      "from": "main-street-science-world",
+      "to": "stadium-chinatown",
+      "sourceShapeId": "322371",
+      "sourceStopIds": [
+        "8074",
+        "8075"
+      ],
+      "method": "Unmodified retained GTFS polyline interpolated every0.5m; railY linearly interpolates the actual runtime station stop railY, plus2.6m eye height. First/last250m nearMain. Exact source polygon containment with holes and createBuildingBodies shared foundation/minHeight/height rules.",
+      "actualStartRailY": 12.040292026666615,
+      "actualEndRailY": -1.3358556099940015,
+      "rawPolylineLength": 1053.11714237663,
+      "hits": [
+        {
+          "properties": {
+            "id": "166039-cut1",
+            "buildingId": 133436,
+            "height": 12,
+            "base": 3.67,
+            "roof": "Pitched",
+            "area": 2333.7,
+            "source": "cov-2009",
+            "minHeight": 5,
+            "name": null,
+            "reconciliation": "City solid clipped against elevated OSM part"
+          },
+          "foundation": 4.775484956009013,
+          "firstRawSourceDistance": 50,
+          "remainingRawSourceDistance": 1003.11714237663,
+          "passengerEye": [
+            1958.666709532221,
+            14.005217964227848,
+            1418.1922516694192
+          ]
+        },
+        {
+          "properties": {
+            "id": 163974,
+            "buildingId": 133436,
+            "height": 62.88,
+            "base": 3.73,
+            "roof": "Pitched",
+            "area": 2333.7,
+            "source": "cov-2009",
+            "minHeight": 0,
+            "name": null
+          },
+          "foundation": 4.775484956009013,
+          "firstRawSourceDistance": 56,
+          "remainingRawSourceDistance": 997.11714237663,
+          "passengerEye": [
+            1952.9072481147277,
+            13.929009076735197,
+            1416.5104062007729
+          ]
+        }
+      ]
+    }
+  ]
+}

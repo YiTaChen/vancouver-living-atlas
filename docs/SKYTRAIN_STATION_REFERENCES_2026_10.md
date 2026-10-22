@@ -149,3 +149,28 @@ terminal holds, timing validation, immutable metadata and invalid/large deltas.
 The two owned files also pass strict oxlint and isolated strict TypeScript
 checking. City geometry, UI, actual boarding proofs and browser acceptance are
 separate integration checks owned by the city adapter.
+
+## Runtime track and terrain joins
+
+The retained GTFS horizontal shapes describe the service alignment; they do not
+provide surveyed tunnel elevations or exact station-model pivots. Runtime paths
+keep the long segments' original GTFS interior bends and use wide quintic joins
+to the representative station platforms. The two short, nearly straight source
+edges use one continuous middle join because the City station selection points
+and GTFS stop anchors differ longitudinally. Raw source coordinates, station
+floor geometry and platform stop poses remain unchanged.
+
+Each carriage follows its own arc position and orientation. Its station approach
+stays straight and level for 75 m on Expo and 65 m on Canada Line, covering the
+station rail buffer and that carriage's half length. Sampling beyond a route
+endpoint continues along the exact platform tangent, preserving stopped train
+door positions in either direction.
+
+All downtown underground segments query the actual City terrain sampler,
+including its beach patch. A smooth grade and optional flat-ended depression
+maintain clearance for the train and the actual tunnel mesh. Stadium–Main Street
+remains an elevated/mixed segment. These depths are representative game geometry,
+not an engineering survey. The CPU geometry evidence and source hashes are in
+[terrain-clearance.json](qa/skytrain-travel-20261022/terrain-clearance.json),
+[path-continuity.json](qa/skytrain-travel-20261022/path-continuity.json) and the
+separate articulated tube/station portal receipts.

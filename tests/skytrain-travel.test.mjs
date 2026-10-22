@@ -2,10 +2,15 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { getEventListeners } from 'node:events';
+import { runInNewContext } from 'node:vm';
 import * as THREE from 'three';
 import { cityModule } from './helpers/city-modules.mjs';
+import { cityElevation } from './helpers/city-elevation.mjs';
 
 const { SkyTrainTravel } = await import(cityModule('skytrain-travel'));
+const { createSkyTrainGuidewayUniforms } = await import(
+  cityModule('skytrain-guideway-clearance')
+);
 const { SkyTrainJourney, SKYTRAIN_STATIONS } = await import(
   cityModule('skytrain-network')
 );
@@ -80,7 +85,7 @@ async function harness(action, options = {}) {
     compatibleGraphics: false,
     pageSuspended: false,
     transition: null,
-    elevation: () => 42,
+    elevation: cityElevation,
     closeBusVisit: () => true,
     tesla: { deactivate: () => calls.push(['tesla-deactivate']) },
     flight: { clear: () => calls.push(['flight-clear']) },
@@ -101,7 +106,7 @@ async function harness(action, options = {}) {
         calls.push(['ground', x, z, mode, exact]);
         return true;
       },
-      groundHeight: () => 42,
+      groundHeight: cityElevation,
       startAt(mode, point) {
         this.mode = mode;
         this.position.set(point.x, point.y, point.z);
@@ -290,7 +295,7 @@ test('all seven actual station interiors enter, walk on owned floors and return 
       assert.equal(returned[1], 'walk');
       assert.equal(returned[2].surfaceId, 'ground');
       assert.equal(returned[2].layer, 0);
-      close(returned[2].y, 42);
+      close(returned[2].y, cityElevation(returned[2].x, returned[2].z));
       assert.equal(city.navigation.walker.group.visible, true);
       assert.equal(travel.train.group.visible, false);
       assert.equal(travel.snapshot().phase, 'idle');
@@ -446,6 +451,62 @@ test('physical boarding and alighting require the loaded train on the selected s
   });
 });
 
+test('the controller camera follows the occupied articulated car and reports physical curve speed before restoring the exact stopped consist', async () => {
+  await harness(async ({ create, city }) => {
+    const travel = create();
+    travel.chooseDestination('burrard');
+    assert.equal(await travel.enter('waterfront'), true);
+    close(travel.speedMps, 0);
+    travel.journey = new SkyTrainJourney('waterfront', 'burrard', {
+      ...FAST,
+      segmentSeconds: () => 4,
+    });
+    await toBoardingDoor(travel);
+    assert.equal(travel.board(), true);
+    await until(travel, () => travel.journey.snapshot().phase === 'riding');
+    close(travel.journey.snapshot().linearProgress, 0);
+    await tick(travel, 20);
+    const j = travel.journey.snapshot(),
+      path = travel.paths.get('expo:waterfront:burrard');
+    close(j.linearProgress, 0.5);
+    close(travel.speedMps, (path.length / j.segmentSeconds) * 1.875);
+    close(travel.snapshot().speedMps, travel.speedMps);
+    assert.equal(travel.train.stationAligned, false);
+    const eye = new THREE.Vector3(),
+      orientation = new THREE.Quaternion();
+    travel.train.passengerWorldPose(eye, orientation);
+    assert(city.camera.position.distanceTo(eye) < 1e-6);
+    const yaw =
+      new THREE.Euler().setFromQuaternion(orientation, 'YXZ').y +
+      travel.train.facingYaw;
+    const facing = new THREE.Vector3(
+      Math.sin(yaw) * Math.cos(-0.03),
+      Math.sin(-0.03),
+      Math.cos(yaw) * Math.cos(-0.03),
+    );
+    assert(
+      city.camera.getWorldDirection(new THREE.Vector3()).distanceTo(facing) <
+        1e-6,
+    );
+    assert.equal(travel.alight(), false);
+    await until(travel, (s) => s.canAlight && s.stationId === 'burrard');
+    close(travel.speedMps, 0);
+    assert.equal(travel.train.stationAligned, true);
+    for (let i = 0; i < travel.train.carFrames.length; i++) {
+      assert(
+        travel.train.carFrames[i].position.distanceTo(
+          new THREE.Vector3(0, 0, [26.85, 8.95, -8.95, -26.85][i]),
+        ) < 1e-9,
+      );
+      assert(
+        travel.train.carFrames[i].quaternion.angleTo(new THREE.Quaternion()) <
+          1e-9,
+      );
+    }
+    assert.equal(travel.alight(), true);
+  });
+});
+
 test('passenger travels through all actual Expo stops, cannot leave while moving, and alights on the destination floor', async () => {
   await harness(async ({ create, city }) => {
     const travel = create();
@@ -543,6 +604,308 @@ test('Waterfront transfer requires alighting, walking through access and changin
   });
 });
 
+test('the actual Canada Line travel tube overlaps both station buffers without entering the platform envelope', async () => {
+  await harness(async ({ create }) => {
+    const travel = create();
+    travel.chooseDestination('vancouver-city-centre');
+    assert.equal(await travel.enter('waterfront'), true);
+    fastJourney(travel);
+    await toBoardingDoor(travel);
+    assert.equal(travel.board(), true);
+    await until(
+      travel,
+      () =>
+        travel.journey.snapshot().phase === 'riding' && Boolean(travel.tube),
+    );
+    const path = travel.paths.get('canada:waterfront:vancouver-city-centre');
+    const tubes = travel.tube.children.filter(
+      (mesh) => mesh.geometry instanceof THREE.TubeGeometry,
+    );
+    assert.equal(
+      tubes.length,
+      1,
+      'the actual terrain-constrained underground route has a continuous travel tube',
+    );
+    const tube = tubes[0].geometry.parameters.path;
+    const start = tube.getPoint(0).sub(new THREE.Vector3(0, 1.4, 0));
+    const end = tube.getPoint(1).sub(new THREE.Vector3(0, 1.4, 0));
+    const sourceAxis = new THREE.Vector3(
+      0,
+      0,
+      path.start.motionSign,
+    ).applyQuaternion(path.start.quaternion);
+    const destinationAxis = new THREE.Vector3(
+      0,
+      0,
+      path.end.motionSign,
+    ).applyQuaternion(path.end.quaternion);
+    const sourceDistance = start
+      .clone()
+      .sub(path.start.position)
+      .dot(sourceAxis);
+    const destinationDistance = path.end.position
+      .clone()
+      .sub(end)
+      .dot(destinationAxis);
+    for (const [name, distance] of [
+      ['source', sourceDistance],
+      ['destination', destinationDistance],
+    ]) {
+      assert(
+        distance >= 32 && distance <= 40.1,
+        `${name} first tube centre is ${distance}m along the actual station axis`,
+      );
+      assert(
+        distance > 22,
+        `${name} travel tube starts outside the Canada platform half-length`,
+      );
+      assert(
+        distance < 47,
+        `${name} travel tube overlaps the authored47m station buffer`,
+      );
+    }
+    assert(
+      [...tubes[0].geometry.attributes.position.array].every(Number.isFinite),
+    );
+  });
+});
+
+test('the single destination station is visible and compiled before the untubed approach and is reused only after arrival', async () => {
+  for (const [from, destination] of [
+    ['waterfront', 'burrard'],
+    ['stadium-chinatown', 'main-street-science-world'],
+  ])
+    await harness(async ({ create, city }) => {
+      city.uniforms = {
+        skyTrainReplacement: { value: new THREE.Vector4(-1, 0, 0, 0) },
+        ...createSkyTrainGuidewayUniforms(),
+      };
+      city.data.buildingProfiles = new Map([
+        ['osm-structure-303', { seed: 783 }],
+        ['133436', { seed: 967 }],
+      ]);
+      const travel = create();
+      travel.chooseDestination(destination);
+      assert.equal(await travel.enter(from), true);
+      const source = travel.owner;
+      const load = travel.stations.load.bind(travel.stations),
+        loads = [];
+      travel.stations.load = (...args) => {
+        loads.push(args[0]);
+        return load(...args);
+      };
+      const compiled = [];
+      city.renderer.compileAsync = async (scene, camera, target) => {
+        compiled.push(scene);
+        assert.equal(camera, city.camera);
+        assert.equal(scene, city.scene);
+        assert.equal(target, undefined);
+        assert.equal(travel.owner.group.visible, true);
+      };
+      travel.journey = new SkyTrainJourney(from, destination, {
+        ...FAST,
+        segmentSeconds: () => 6,
+      });
+      await toBoardingDoor(travel);
+      assert.equal(travel.board(), true);
+      await until(
+        travel,
+        () =>
+          travel.owner.data.id === destination &&
+          travel.journey.snapshot().phase === 'riding',
+      );
+      const prepared = travel.owner;
+      const path = travel.paths.get(`expo:${from}:${destination}`);
+      assert.equal(prepared.group.visible, true);
+      assert.equal(travel.stations.active, prepared);
+      assert.equal(
+        source.group.parent,
+        null,
+        'the departed owner was released',
+      );
+      assert.equal(
+        city.scene.children.filter((o) =>
+          o.name.startsWith('skytrain-station-'),
+        ).length,
+        1,
+      );
+      assert(
+        travel.train.group.position.distanceTo(path.end.position) >
+          45 + travel.train.carOffset,
+      );
+      assert.equal(travel.snapshot().stationId, from);
+      assert.equal(travel.snapshot().busy, false);
+      assert.equal(travel.alight(), false);
+      assert.equal(travel.leave(), false);
+      if (destination === 'main-street-science-world') {
+        assert.equal(city.uniforms.skyTrainReplacement.value.w, 170);
+        assert.equal(city.uniforms.skyTrainGuidewayHeight.value.w, 1);
+        assert.equal(city.uniforms.skyTrainGuidewayHeight.value.x, 967);
+      }
+      await until(
+        travel,
+        () =>
+          travel.journey.snapshot().phase === 'riding' &&
+          travel.journey.snapshot().progress > 0.98,
+      );
+      assert.equal(
+        prepared.group.visible,
+        true,
+        'the destination remains visible inside the untubed final approach',
+      );
+      assert.equal(
+        travel.snapshot().stationId,
+        from,
+        'visible station geometry is not an early passenger arrival',
+      );
+      assert.equal(travel.alight(), false);
+      await until(travel, (s) => s.canAlight && s.stationId === destination);
+      assert.equal(travel.owner, prepared);
+      assert.deepEqual(loads, [destination]);
+      assert.deepEqual(compiled, [city.scene]);
+      assert(travel.train.group.position.distanceTo(path.end.position) < 1e-6);
+    });
+});
+
+test('a pending destination compile permits path movement but holds the arrived train with closed doors until its owner is ready', async () => {
+  await harness(async ({ create, city }) => {
+    const travel = create();
+    travel.chooseDestination('burrard');
+    assert.equal(await travel.enter('waterfront'), true);
+    let finish, reached;
+    const pending = new Promise((resolve) => {
+      finish = resolve;
+    });
+    const compiling = new Promise((resolve) => {
+      reached = resolve;
+    });
+    city.renderer.compileAsync = () => {
+      reached();
+      return pending;
+    };
+    travel.journey = new SkyTrainJourney('waterfront', 'burrard', {
+      ...FAST,
+      segmentSeconds: () => 3,
+    });
+    await toBoardingDoor(travel);
+    assert.equal(travel.board(), true);
+    await until(travel, () => travel.owner.data.id === 'burrard');
+    await compiling;
+    const prepared = travel.owner,
+      before = travel.train.group.position.clone();
+    assert.equal(prepared.group.visible, false);
+    assert.equal(travel.snapshot().busy, false);
+    await tick(travel, 3);
+    assert(travel.train.group.position.distanceTo(before) > 1);
+    assert.equal(prepared.group.visible, false);
+    assert.equal(travel.alight(), false);
+    await until(
+      travel,
+      (s) => s.busy && travel.journey.snapshot().phase === 'arrived',
+    );
+    const held = travel.train.group.position.clone(),
+      journey = travel.journey.snapshot();
+    await tick(travel, 5);
+    assert(travel.train.group.position.distanceTo(held) < 1e-9);
+    assert.deepEqual(travel.journey.snapshot(), journey);
+    assert.equal(travel.snapshot().stationId, 'waterfront');
+    assert.equal(travel.snapshot().doorsOpen, false);
+    assert.equal(prepared.group.visible, false);
+    assert.equal(travel.alight(), false);
+    assert.equal(travel.leave(), false);
+    finish();
+    await until(travel, (s) => s.canAlight && s.stationId === 'burrard');
+    assert.equal(travel.owner, prepared);
+    assert.equal(prepared.group.visible, true);
+  });
+});
+
+test('disposing an approaching station during its pending compile cannot republish or reactivate the late owner', async () => {
+  await harness(async ({ create, city, win, doc, canvas }) => {
+    city.uniforms = {
+      skyTrainReplacement: { value: new THREE.Vector4(-1, 0, 0, 0) },
+      ...createSkyTrainGuidewayUniforms(),
+    };
+    city.data.buildingProfiles = new Map([
+      ['osm-structure-303', { seed: 783 }],
+      ['133436', { seed: 967 }],
+    ]);
+    const travel = create();
+    travel.chooseDestination('main-street-science-world');
+    assert.equal(await travel.enter('stadium-chinatown'), true);
+    let finish;
+    city.renderer.compileAsync = () =>
+      new Promise((resolve) => {
+        finish = resolve;
+      });
+    fastJourney(travel);
+    await toBoardingDoor(travel);
+    assert.equal(travel.board(), true);
+    await until(travel, () => Boolean(finish));
+    const prepared = travel.owner;
+    assert.equal(prepared.data.id, 'main-street-science-world');
+    assert.equal(city.uniforms.skyTrainGuidewayHeight.value.w, 1);
+    let changes = 0;
+    travel.onChange = () => changes++;
+    travel.dispose();
+    const before = changes;
+    finish();
+    await Promise.resolve();
+    await Promise.resolve();
+    await tick(travel, 5);
+    assert.equal(changes, before);
+    assert.equal(travel.snapshot().phase, 'idle');
+    assert.equal(travel.snapshot().canAlight, false);
+    assert.deepEqual(
+      city.uniforms.skyTrainGuidewayHeight.value.toArray(),
+      [-1, 0, 0, 0],
+    );
+    assert.deepEqual(
+      city.uniforms.skyTrainReplacement.value.toArray(),
+      [-1, 0, 0, 0],
+    );
+    assert.equal(travel.stations.active, null);
+    assert.equal(prepared.group.parent, null);
+    assert.equal(travel.train.group.parent, null);
+    assert.equal(
+      city.scene.children.filter((o) => o.name.startsWith('skytrain-station-'))
+        .length,
+      0,
+    );
+    assert.equal(getEventListeners(win, 'keydown').length, 0);
+    assert.equal(getEventListeners(doc, 'visibilitychange').length, 0);
+    assert.equal(getEventListeners(canvas, 'pointerdown').length, 0);
+  });
+});
+
+test('failed approach preparation is retried at the exact arrived station without opening an early exit', async () => {
+  await harness(async ({ create, city }) => {
+    const travel = create();
+    travel.chooseDestination('burrard');
+    assert.equal(await travel.enter('waterfront'), true);
+    let attempts = 0;
+    city.renderer.compileAsync = async () => {
+      attempts++;
+      assert.equal(travel.alight(), false);
+      if (attempts === 1)
+        throw new Error('recorded approach compilation failure');
+    };
+    fastJourney(travel);
+    await toBoardingDoor(travel);
+    assert.equal(travel.board(), true);
+    await until(travel, (s) => s.canAlight && s.stationId === 'burrard');
+    assert.equal(attempts, 2);
+    assert.equal(travel.owner.data.id, 'burrard');
+    assert.equal(travel.stations.active, travel.owner);
+    assert.equal(
+      city.scene.children.filter((o) => o.name.startsWith('skytrain-station-'))
+        .length,
+      1,
+    );
+    assert.equal(travel.alight(), true);
+  });
+});
+
 test('walking continuously to the other Waterfront line cannot bypass loading its actual train before boarding', async () => {
   await harness(async ({ create, city }) => {
     const travel = create();
@@ -576,10 +939,10 @@ test('walking continuously to the other Waterfront line cannot bypass loading it
     assert.equal(travel.train.serviceLine, 'expo');
     assert.equal(travel.goConcourse(), true);
     let compiled = 0;
-    city.renderer.compileAsync = async (group, camera, scene) => {
-      assert.equal(group, travel.train.group);
-      assert.equal(camera, city.camera);
+    city.renderer.compileAsync = async (scene, camera, target) => {
       assert.equal(scene, city.scene);
+      assert.equal(camera, city.camera);
+      assert.equal(target, undefined);
       assert.equal(travel.snapshot().busy, true);
       compiled++;
     };
@@ -653,7 +1016,7 @@ test('street exit fails closed when city pavement is obstructed, under a protect
     city.interiors.height = () => undefined;
     city.navigation.groundHeight = () => NaN;
     assert.equal(travel.leave(), false);
-    city.navigation.groundHeight = () => 42;
+    city.navigation.groundHeight = cityElevation;
     assert.equal(travel.leave(), true);
   });
 });
@@ -775,7 +1138,75 @@ test('canvas look restores keyboard focus after a destination dropdown without s
   });
 });
 
-test('entry waits for the loaded train subtree precompile before exposing station input or boarding', async () => {
+test('full-scene prewarm uses the actual Three light collector with each world, cabin and real station light exactly once', async () => {
+  await harness(async ({ create, city }) => {
+    const source = fs.readFileSync(
+      'node_modules/three/src/renderers/WebGLRenderer.js',
+      'utf8',
+    );
+    const begin = source.indexOf(
+      'this.compile = function ( scene, camera, targetScene = null ) {',
+    );
+    const last = source.indexOf('currentRenderState.setupLights();', begin);
+    assert(begin >= 0 && last > begin);
+    const prefix = source.slice(
+      begin,
+      last + 'currentRenderState.setupLights();'.length,
+    );
+    const state = {
+      lights: [],
+      init() {
+        this.lights = [];
+      },
+      pushLight(light) {
+        this.lights.push(light);
+      },
+      pushShadow() {},
+      setupLights() {},
+    };
+    // Run the installed renderer's actual light-gathering branch without a GL
+    // context. Geometry, owners, visibility, light objects and camera are real.
+    const collect = runInNewContext(
+      `let currentRenderState; ${prefix}
+       return currentRenderState.lights;
+       }; this.compile;`,
+      { renderStates: { get: () => state }, renderStateStack: [] },
+    );
+    const travel = create(),
+      worldLight = new THREE.PointLight(),
+      cabinLight = new THREE.PointLight();
+    city.scene.add(worldLight);
+    travel.train.group.add(cabinLight);
+    let calls = 0;
+    city.renderer.compileAsync = async (...args) => {
+      calls++;
+      assert.equal(args.length, 2);
+      assert.equal(args[0], city.scene);
+      assert.equal(args[1], city.camera);
+      const lights = collect(...args),
+        stationLights = [];
+      travel.owner.group.traverseVisible((object) => {
+        if (object instanceof THREE.PointLight) stationLights.push(object);
+      });
+      assert(stationLights.length > 0);
+      assert.equal(new Set(lights).size, lights.length);
+      assert(lights.includes(worldLight));
+      assert(lights.includes(cabinLight));
+      assert(stationLights.every((light) => lights.includes(light)));
+      assert.equal(lights.length, stationLights.length + 2);
+      const duplicated = collect(travel.owner.group, city.camera, city.scene);
+      assert(
+        duplicated.length > new Set(duplicated).size,
+        'the same real collector detects the former attached-subtree duplication',
+      );
+    };
+    assert.equal(await travel.enter('waterfront'), true);
+    assert.equal(calls, 1);
+    assert.equal(travel.train.group.visible, true);
+  });
+});
+
+test('entry waits for full-scene precompile with loaded train lights before exposing station input or boarding', async () => {
   await harness(async ({ create, city, canvas, win }) => {
     const travel = create();
     let completeCompile, compileReached;
@@ -795,14 +1226,14 @@ test('entry waits for the loaded train subtree precompile before exposing statio
     await reached;
     assert.equal(
       compiled[0],
-      travel.train.group,
-      'only the loaded consist is prepared',
+      city.scene,
+      'the loaded consist and city materials use one complete lighting context',
     );
     assert.equal(compiled[1], city.camera);
     assert.equal(
-      compiled[2],
-      city.scene,
-      'the city lighting is the compile target',
+      compiled.length,
+      2,
+      'one scene prevents duplicate light collection',
     );
     assert.equal(travel.snapshot().phase, 'loading');
     assert.equal(travel.snapshot().busy, true);
@@ -891,12 +1322,31 @@ test('disposing a pending entry precompile cannot restore the passenger or publi
   });
 });
 
-test('the bounded source station replacement enables only at Main Street and clears on another station, street exit and disposal', async () => {
+test('the independent bounded station replacement and guideway opening enable only at Main Street and clear on another station, street exit and disposal', async () => {
   await harness(async ({ create, city }) => {
     const uniform = { value: new THREE.Vector4(-1, 0, 0, 0) };
-    city.uniforms = { skyTrainReplacement: uniform };
+    city.uniforms = {
+      skyTrainReplacement: uniform,
+      ...createSkyTrainGuidewayUniforms(),
+    };
     const profile = Object.freeze({ seed: 783 });
-    city.data.buildingProfiles = new Map([['osm-structure-303', profile]]);
+    const guidewayProfile = Object.freeze({ seed: 967 });
+    city.data.buildingProfiles = new Map([
+      ['osm-structure-303', profile],
+      ['133436', guidewayProfile],
+    ]);
+    const guideway = city.uniforms.skyTrainGuidewayHeight.value;
+    const assertNeutral = () => {
+      assert.deepEqual(guideway.toArray(), [-1, 0, 0, 0]);
+      assert.deepEqual(
+        city.uniforms.skyTrainGuidewayFrame.value.toArray(),
+        [0, 0, 0, 0],
+      );
+      assert.deepEqual(
+        city.uniforms.skyTrainGuidewayBounds.value.toArray(),
+        [0, 0, 0, 0],
+      );
+    };
     const travel = create();
     assert.equal(travel.chooseDestination('stadium-chinatown'), true);
     assert.equal(await travel.enter('main-street-science-world'), true);
@@ -906,6 +1356,8 @@ test('the bounded source station replacement enables only at Main Street and cle
       travel.owner.origin[2],
       170,
     ]);
+    assert.equal(guideway.x, 967);
+    assert.equal(guideway.w, 1);
     fastJourney(travel);
     await toBoardingDoor(travel);
     assert.equal(travel.board(), true);
@@ -914,6 +1366,7 @@ test('the bounded source station replacement enables only at Main Street and cle
       (s) => s.stationId === 'stadium-chinatown' && s.canAlight,
     );
     assert.deepEqual(uniform.value.toArray(), [-1, 0, 0, 0]);
+    assertNeutral();
     assert.equal(travel.alight(), true);
     await walkTo(
       travel,
@@ -923,41 +1376,96 @@ test('the bounded source station replacement enables only at Main Street and cle
     assert.equal(travel.goConcourse(), true);
     assert.equal(travel.leave(), true);
     assert.deepEqual(uniform.value.toArray(), [-1, 0, 0, 0]);
+    assertNeutral();
     for (const station of SKYTRAIN_STATIONS.filter(
       (s) => s.id !== 'main-street-science-world',
     )) {
       assert.equal(await travel.enter(station.id), true);
       assert.deepEqual(uniform.value.toArray(), [-1, 0, 0, 0]);
+      assertNeutral();
       assert.equal(travel.leave(), true);
     }
     assert.equal(await travel.enter('main-street-science-world'), true);
     assert.equal(uniform.value.w, 170);
+    assert.equal(guideway.w, 1);
     assert.equal(travel.leave(), true);
     assert.deepEqual(uniform.value.toArray(), [-1, 0, 0, 0]);
+    assertNeutral();
     assert.equal(await travel.enter('main-street-science-world'), true);
     assert.equal(uniform.value.w, 170);
+    assert.equal(guideway.w, 1);
     travel.dispose();
     assert.deepEqual(uniform.value.toArray(), [-1, 0, 0, 0]);
+    assertNeutral();
     assert.equal(city.data.buildingProfiles.get('osm-structure-303'), profile);
     assert.deepEqual(profile, { seed: 783 });
+    assert.equal(city.data.buildingProfiles.get('133436'), guidewayProfile);
+    assert.deepEqual(guidewayProfile, { seed: 967 });
   });
 });
 
 test('failed Main Street entry clears the replacement uniform after it was enabled during train preparation', async () => {
   await harness(async ({ create, city }) => {
     const uniform = { value: new THREE.Vector4(-1, 0, 0, 0) };
-    city.uniforms = { skyTrainReplacement: uniform };
+    city.uniforms = {
+      skyTrainReplacement: uniform,
+      ...createSkyTrainGuidewayUniforms(),
+    };
     city.data.buildingProfiles = new Map([
       ['osm-structure-303', { seed: 783 }],
+      ['133436', { seed: 967 }],
     ]);
     city.renderer.compileAsync = async () => {
       assert.equal(uniform.value.w, 170);
+      assert.equal(city.uniforms.skyTrainGuidewayHeight.value.w, 1);
       throw new Error('recorded train preparation failure');
     };
     const travel = create();
     assert.equal(await travel.enter('main-street-science-world'), false);
     assert.equal(travel.snapshot().phase, 'error');
     assert.deepEqual(uniform.value.toArray(), [-1, 0, 0, 0]);
+    assert.deepEqual(
+      city.uniforms.skyTrainGuidewayHeight.value.toArray(),
+      [-1, 0, 0, 0],
+    );
+  });
+});
+
+test('a failed prepared Main arrival clears both independent visual corrections and keeps the passenger inside closed doors', async () => {
+  await harness(async ({ create, city }) => {
+    city.uniforms = {
+      skyTrainReplacement: { value: new THREE.Vector4(-1, 0, 0, 0) },
+      ...createSkyTrainGuidewayUniforms(),
+    };
+    city.data.buildingProfiles = new Map([
+      ['osm-structure-303', { seed: 783 }],
+      ['133436', { seed: 967 }],
+    ]);
+    const travel = create();
+    travel.chooseDestination('main-street-science-world');
+    assert.equal(await travel.enter('stadium-chinatown'), true);
+    let attempts = 0;
+    city.renderer.compileAsync = async () => {
+      attempts++;
+      assert.equal(city.uniforms.skyTrainGuidewayHeight.value.w, 1);
+      throw new Error('recorded Main approach shader failure');
+    };
+    fastJourney(travel);
+    await toBoardingDoor(travel);
+    assert.equal(travel.board(), true);
+    await until(travel, (s) => Boolean(s.error) && !s.busy);
+    assert.equal(attempts, 2, 'arrival retries the prepared owner once');
+    assert.deepEqual(
+      city.uniforms.skyTrainReplacement.value.toArray(),
+      [-1, 0, 0, 0],
+    );
+    assert.deepEqual(
+      city.uniforms.skyTrainGuidewayHeight.value.toArray(),
+      [-1, 0, 0, 0],
+    );
+    assert.equal(travel.snapshot().doorsOpen, false);
+    assert.equal(travel.alight(), false);
+    assert.equal(travel.leave(), false);
   });
 });
 
